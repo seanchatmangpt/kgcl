@@ -1,0 +1,526 @@
+@prefix : <http://kgcl.dev/ontology/core#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix shapes: <http://kgcl.dev/ontology/shapes#> .
+
+<http://kgcl.dev/ontology/shapes#>
+    a owl:Ontology ;
+    rdfs:label "KGC OS Graph Agent SHACL Shapes"@en ;
+    rdfs:comment "SHACL validation shapes for the KGC ontology, ensuring data quality and consistency."@en ;
+    owl:versionInfo "1.0.0" ;
+    owl:imports <http://kgcl.dev/ontology/core#> .
+
+# ==============================================================================
+# CAPABILITY SHAPES
+# ==============================================================================
+
+shapes:CapabilityShape
+    a sh:NodeShape ;
+    sh:targetClass :Capability ;
+    sh:property [
+        sh:path :pyobjcSymbol ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[A-Za-z][A-Za-z0-9_]*(\\.[A-Za-z][A-Za-z0-9_]*)+$" ;
+        sh:message "PyObjC symbol must be a valid dot-separated identifier (e.g., 'Cocoa.NSWorkspace.activeApplication')"@en ;
+    ] ;
+    sh:property [
+        sh:path :sourceFramework ;
+        sh:minCount 1 ;
+        sh:class :Framework ;
+        sh:message "Capability must reference at least one source framework"@en ;
+    ] ;
+    sh:property [
+        sh:path :capabilityType ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class :CapabilityType ;
+        sh:message "Capability must have exactly one capability type"@en ;
+    ] ;
+    sh:property [
+        sh:path :requiresPermission ;
+        sh:datatype xsd:string ;
+        sh:in ("Accessibility" "ScreenRecording" "Calendar" "Contacts" "Reminders" "Photos" "Camera" "Microphone" "FullDiskAccess" "Automation") ;
+        sh:message "Permission must be a valid macOS permission type"@en ;
+    ] ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Capability must have a label"@en ;
+    ] ;
+    sh:property [
+        sh:path :description ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:minLength 10 ;
+        sh:message "Capability must have a description of at least 10 characters"@en ;
+    ] .
+
+shapes:FrameworkShape
+    a sh:NodeShape ;
+    sh:targetClass :Framework ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path :version ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] .
+
+shapes:ServiceLevelObjectiveShape
+    a sh:NodeShape ;
+    sh:targetClass :ServiceLevelObjective ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path :description ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+    ] .
+
+# ==============================================================================
+# FEATURE TEMPLATE SHAPES
+# ==============================================================================
+
+shapes:FeatureTemplateShape
+    a sh:NodeShape ;
+    sh:targetClass :FeatureTemplate ;
+    sh:property [
+        sh:path :hasInputType ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "FeatureTemplate must specify at least one input type"@en ;
+    ] ;
+    sh:property [
+        sh:path :hasOutputType ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "FeatureTemplate must specify exactly one output type"@en ;
+    ] ;
+    sh:property [
+        sh:path :sourceCapability ;
+        sh:minCount 1 ;
+        sh:class :Capability ;
+        sh:message "FeatureTemplate must reference at least one source capability"@en ;
+    ] ;
+    sh:property [
+        sh:path :aggregationFunction ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class :AggregationFunction ;
+        sh:message "FeatureTemplate must specify exactly one aggregation function"@en ;
+    ] ;
+    sh:property [
+        sh:path :windowDuration ;
+        sh:datatype xsd:duration ;
+        sh:message "Window duration must be a valid ISO 8601 duration"@en ;
+    ] ;
+    sh:property [
+        sh:path :featureCategory ;
+        sh:minCount 1 ;
+        sh:class :FeatureCategory ;
+        sh:message "FeatureTemplate must have at least one feature category"@en ;
+    ] ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path :description ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:minLength 20 ;
+        sh:message "FeatureTemplate description must be at least 20 characters"@en ;
+    ] ;
+    sh:property [
+        sh:path :version ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^\\d+\\.\\d+\\.\\d+$" ;
+        sh:message "Version must follow semantic versioning (e.g., 1.0.0)"@en ;
+    ] .
+
+shapes:AggregationFunctionShape
+    a sh:NodeShape ;
+    sh:targetClass :AggregationFunction ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in ("sum" "count" "average" "min" "max" "stddev" "median" "first" "last" "distinct_count") ;
+        sh:message "Aggregation function must be a recognized type"@en ;
+    ] .
+
+shapes:FeatureCategoryShape
+    a sh:NodeShape ;
+    sh:targetClass :FeatureCategory ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+    ] .
+
+shapes:FeatureParameterShape
+    a sh:NodeShape ;
+    sh:targetClass :FeatureParameter ;
+    sh:property [
+        sh:path :parameterName ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[a-z][a-zA-Z0-9_]*$" ;
+        sh:message "Parameter name must be camelCase identifier"@en ;
+    ] ;
+    sh:property [
+        sh:path :parameterType ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in ("string" "integer" "float" "boolean" "duration" "dateTime") ;
+    ] .
+
+# ==============================================================================
+# FEATURE INSTANCE SHAPES
+# ==============================================================================
+
+shapes:FeatureInstanceShape
+    a sh:NodeShape ;
+    sh:targetClass :FeatureInstance ;
+    sh:property [
+        sh:path :instanceOf ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class :FeatureTemplate ;
+        sh:message "FeatureInstance must reference exactly one FeatureTemplate"@en ;
+    ] ;
+    sh:property [
+        sh:path :hasValue ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "FeatureInstance must have exactly one value"@en ;
+    ] ;
+    sh:property [
+        sh:path :observationWindow ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class :ObservationWindow ;
+        sh:message "FeatureInstance must reference exactly one observation window"@en ;
+    ] ;
+    sh:property [
+        sh:path :computedFrom ;
+        sh:minCount 1 ;
+        sh:class :Observation ;
+        sh:message "FeatureInstance must be computed from at least one observation"@en ;
+    ] ;
+    sh:property [
+        sh:path :confidence ;
+        sh:datatype xsd:float ;
+        sh:minInclusive 0.0 ;
+        sh:maxInclusive 1.0 ;
+        sh:message "Confidence must be between 0.0 and 1.0"@en ;
+    ] ;
+    sh:property [
+        sh:path :timestamp ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:dateTime ;
+        sh:message "FeatureInstance must have a timestamp"@en ;
+    ] .
+
+# ==============================================================================
+# OBSERVATION & TEMPORAL SHAPES
+# ==============================================================================
+
+shapes:ObservationWindowShape
+    a sh:NodeShape ;
+    sh:targetClass :ObservationWindow ;
+    sh:property [
+        sh:path :startTime ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:dateTime ;
+        sh:message "ObservationWindow must have exactly one start time"@en ;
+    ] ;
+    sh:property [
+        sh:path :endTime ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:dateTime ;
+        sh:message "ObservationWindow must have exactly one end time"@en ;
+    ] ;
+    sh:property [
+        sh:path :duration ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:duration ;
+    ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "End time must be after start time"@en ;
+        sh:prefixes : ;
+        sh:select """
+            SELECT $this
+            WHERE {
+                $this :startTime ?start ;
+                      :endTime ?end .
+                FILTER (?end <= ?start)
+            }
+        """ ;
+    ] .
+
+shapes:ObservationShape
+    a sh:NodeShape ;
+    sh:targetClass :Observation ;
+    sh:property [
+        sh:path :timestamp ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:dateTime ;
+        sh:message "Observation must have exactly one timestamp"@en ;
+    ] .
+
+# ==============================================================================
+# EVENT SHAPES
+# ==============================================================================
+
+shapes:EventShape
+    a sh:NodeShape ;
+    sh:targetClass :Event ;
+    sh:property [
+        sh:path :timestamp ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:dateTime ;
+        sh:message "Event must have exactly one timestamp"@en ;
+    ] ;
+    sh:property [
+        sh:path :eventType ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in ("StateTransition" "Anomaly" "Threshold" "Pattern" "UserAction" "SystemEvent") ;
+        sh:message "Event type must be a recognized category"@en ;
+    ] ;
+    sh:property [
+        sh:path :severity ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in ("info" "warning" "critical") ;
+    ] ;
+    sh:property [
+        sh:path :detectedBy ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class :EventPattern ;
+        sh:message "Event must reference the pattern that detected it"@en ;
+    ] ;
+    sh:property [
+        sh:path :triggeredBy ;
+        sh:minCount 1 ;
+        sh:class :FeatureInstance ;
+        sh:message "Event must be triggered by at least one feature instance"@en ;
+    ] .
+
+shapes:EventPatternShape
+    a sh:NodeShape ;
+    sh:targetClass :EventPattern ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path :description ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+    ] .
+
+# ==============================================================================
+# APPLICATION & DOMAIN SHAPES
+# ==============================================================================
+
+shapes:AppShape
+    a sh:NodeShape ;
+    sh:targetClass :App ;
+    sh:property [
+        sh:path :appBundleId ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[a-z][a-z0-9-]*(\\.[a-z][a-z0-9-]*)+$" ;
+        sh:message "Bundle ID must be a valid reverse-DNS identifier (e.g., com.microsoft.VSCode)"@en ;
+    ] ;
+    sh:property [
+        sh:path :appName ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:minLength 1 ;
+    ] ;
+    sh:property [
+        sh:path :appCategory ;
+        sh:minCount 1 ;
+        sh:class :AppCategory ;
+        sh:message "App must have at least one category"@en ;
+    ] .
+
+shapes:AppCategoryShape
+    a sh:NodeShape ;
+    sh:targetClass :AppCategory ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in ("IDE" "Browser" "Communication" "Productivity" "Entertainment" "Utilities" "Development" "Design" "Other") ;
+    ] .
+
+shapes:DomainShape
+    a sh:NodeShape ;
+    sh:targetClass :Domain ;
+    sh:property [
+        sh:path :domainName ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^([a-z0-9]+(-[a-z0-9]+)*\\.)+[a-z]{2,}$" ;
+        sh:message "Domain name must be a valid FQDN (e.g., github.com)"@en ;
+    ] ;
+    sh:property [
+        sh:path :domainCategory ;
+        sh:minCount 1 ;
+        sh:class :DomainCategory ;
+    ] .
+
+shapes:DomainCategoryShape
+    a sh:NodeShape ;
+    sh:targetClass :DomainCategory ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in ("Development" "Documentation" "Social" "News" "Research" "Entertainment" "Productivity" "Shopping" "Other") ;
+    ] .
+
+# ==============================================================================
+# CUSTOM VALIDATION RULES
+# ==============================================================================
+
+# Temporal consistency: feature instance timestamp must fall within observation window
+shapes:FeatureInstanceTemporalConsistency
+    a sh:NodeShape ;
+    sh:targetClass :FeatureInstance ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Feature instance timestamp must fall within its observation window"@en ;
+        sh:prefixes : ;
+        sh:select """
+            SELECT $this
+            WHERE {
+                $this :timestamp ?ts ;
+                      :observationWindow ?window .
+                ?window :startTime ?start ;
+                        :endTime ?end .
+                FILTER (?ts < ?start || ?ts > ?end)
+            }
+        """ ;
+    ] .
+
+# Observations must fall within their window
+shapes:ObservationWithinWindow
+    a sh:NodeShape ;
+    sh:targetClass :Observation ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Observation timestamp must fall within its observation window (if specified)"@en ;
+        sh:prefixes : ;
+        sh:select """
+            SELECT $this
+            WHERE {
+                $this :timestamp ?ts ;
+                      :observationWindow ?window .
+                ?window :startTime ?start ;
+                        :endTime ?end .
+                FILTER (?ts < ?start || ?ts > ?end)
+            }
+        """ ;
+    ] .
+
+# Feature instance output type must match template
+shapes:FeatureInstanceValueTypeConsistency
+    a sh:NodeShape ;
+    sh:targetClass :FeatureInstance ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Feature instance value type should match template output type"@en ;
+        sh:prefixes : ;
+        sh:select """
+            SELECT $this
+            WHERE {
+                $this :instanceOf ?template ;
+                      :hasValue ?value .
+                ?template :hasOutputType ?expectedType .
+                # This is a simplified check - full implementation would validate datatype
+                FILTER (!BOUND(?value))
+            }
+        """ ;
+    ] .
+
+# Events must occur after or during their triggering features
+shapes:EventTemporalConsistency
+    a sh:NodeShape ;
+    sh:targetClass :Event ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Event timestamp must be at or after the timestamp of triggering feature instances"@en ;
+        sh:prefixes : ;
+        sh:select """
+            SELECT $this
+            WHERE {
+                $this :timestamp ?eventTime ;
+                      :triggeredBy ?feature .
+                ?feature :timestamp ?featureTime .
+                FILTER (?eventTime < ?featureTime)
+            }
+        """ ;
+    ] .
+
+# Capability must not be deprecated without a replacement
+shapes:CapabilityDeprecation
+    a sh:NodeShape ;
+    sh:targetClass :Capability ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Deprecated capabilities should specify a replacement via rdfs:seeAlso"@en ;
+        sh:severity sh:Warning ;
+        sh:prefixes : ;
+        sh:select """
+            SELECT $this
+            WHERE {
+                $this :deprecated true .
+                FILTER NOT EXISTS { $this rdfs:seeAlso ?replacement }
+            }
+        """ ;
+    ] .
+
+# Feature template versioning consistency
+shapes:FeatureTemplateVersioning
+    a sh:NodeShape ;
+    sh:targetClass :FeatureTemplate ;
+    sh:property [
+        sh:path :version ;
+        sh:pattern "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$" ;
+        sh:message "Version must follow semantic versioning specification"@en ;
+    ] .

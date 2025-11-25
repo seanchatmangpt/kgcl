@@ -1,0 +1,106 @@
+@prefix ns1: <http://kgcl.example.org/> .
+
+<http://kgcl.example.org/event/evt_000001> a ns1:AppEvent ;
+    ns1:appName "com.jetbrains.pycharm" ;
+    ns1:timestamp "2025-11-24T08:00:00" .
+
+<http://kgcl.example.org/event/evt_000002> a ns1:BrowserVisit ;
+    ns1:domain "github.com" ;
+    ns1:timestamp "2025-11-24T10:49:14.607044" .
+
+<http://kgcl.example.org/event/evt_000003> a ns1:BrowserVisit ;
+    ns1:domain "aws.amazon.com" ;
+    ns1:timestamp "2025-11-24T11:00:00.200000" .
+
+<http://kgcl.example.org/event/evt_000004> a ns1:BrowserVisit ;
+    ns1:domain "sphinx-doc.org" ;
+    ns1:timestamp "2025-11-24T11:03:58.654494" .
+
+<http://kgcl.example.org/event/evt_000005> a ns1:BrowserVisit ;
+    ns1:domain "aws.amazon.com" ;
+    ns1:timestamp "2025-11-24T11:07:47.989875" .
+
+<http://kgcl.example.org/event/evt_000006> a ns1:BrowserVisit ;
+    ns1:domain "github.com" ;
+    ns1:timestamp "2025-11-24T11:09:11.928538" .
+
+<http://kgcl.example.org/event/evt_000007> a ns1:BrowserVisit ;
+    ns1:domain "github.com" ;
+    ns1:timestamp "2025-11-24T11:10:32.033649" .
+
+<http://kgcl.example.org/event/evt_000008> a ns1:BrowserVisit ;
+    ns1:domain "github.com" ;
+    ns1:timestamp "2025-11-24T11:13:01.115348" .
+
+<http://kgcl.example.org/event/evt_000009> a ns1:BrowserVisit ;
+    ns1:domain "aws.amazon.com" ;
+    ns1:timestamp "2025-11-24T11:14:24.251194" .
+
+<http://kgcl.example.org/event/evt_000010> a ns1:BrowserVisit ;
+    ns1:domain "stackoverflow.com" ;
+    ns1:timestamp "2025-11-24T11:17:50.775576" .
+
+<http://kgcl.example.org/event/evt_000011> a ns1:BrowserVisit ;
+    ns1:domain "stackoverflow.com" ;
+    ns1:timestamp "2025-11-24T11:20:24.174964" .
+
+<http://kgcl.example.org/event/evt_000012> a ns1:BrowserVisit ;
+    ns1:domain "readthedocs.io" ;
+    ns1:timestamp "2025-11-24T11:23:50.461511" .
+
+<http://kgcl.example.org/event/evt_000013> a ns1:BrowserVisit ;
+    ns1:domain "stackoverflow.com" ;
+    ns1:timestamp "2025-11-24T11:27:18.443807" .
+
+<http://kgcl.example.org/event/evt_000014> a ns1:BrowserVisit ;
+    ns1:domain "confluence.atlassian.com" ;
+    ns1:timestamp "2025-11-24T11:31:00.602490" .
+
+<http://kgcl.example.org/event/evt_000015> a ns1:AppEvent ;
+    ns1:appName "com.apple.mail" ;
+    ns1:timestamp "2025-11-24T11:35:43.854196" .
+
+<http://kgcl.example.org/event/evt_000016> a ns1:CalendarBlock ;
+    ns1:timestamp "2025-11-24T13:00:01.500000" ;
+    ns1:title "Daily Standup" .
+
+<http://kgcl.example.org/event/evt_000017> a ns1:AppEvent ;
+    ns1:appName "us.zoom.xos" ;
+    ns1:timestamp "2025-11-24T13:00:01.600000" .
+
+<http://kgcl.example.org/event/evt_000018> a ns1:CalendarBlock ;
+    ns1:timestamp "2025-11-24T13:30:01.700000" ;
+    ns1:title "Project Sync" .
+
+<http://kgcl.example.org/event/evt_000019> a ns1:AppEvent ;
+    ns1:appName "com.microsoft.teams" ;
+    ns1:timestamp "2025-11-24T13:30:01.800000" .
+
+<http://kgcl.example.org/event/evt_000020> a ns1:AppEvent ;
+    ns1:appName "com.jetbrains.pycharm" ;
+    ns1:timestamp "2025-11-24T14:30:01.900000" .
+
+<http://kgcl.example.org/event/evt_000021> a ns1:AppEvent ;
+    ns1:appName "com.apple.mail" ;
+    ns1:timestamp "2025-11-24T15:03:20.156567" .
+
+<http://kgcl.example.org/event/evt_000022> a ns1:AppEvent ;
+    ns1:appName "com.jetbrains.pycharm" ;
+    ns1:timestamp "2025-11-24T15:09:07.947876" .
+
+<http://kgcl.example.org/event/evt_000023> a ns1:AppEvent ;
+    ns1:appName "com.apple.mail" ;
+    ns1:timestamp "2025-11-24T16:05:23.894745" .
+
+<http://kgcl.example.org/event/evt_000024> a ns1:AppEvent ;
+    ns1:appName "com.apple.mail" ;
+    ns1:timestamp "2025-11-24T17:00:02.300000" .
+
+<http://kgcl.example.org/event/evt_000025> a ns1:BrowserVisit ;
+    ns1:domain "mkdocs.org" ;
+    ns1:timestamp "2025-11-24T17:10:02.400000" .
+
+<http://kgcl.example.org/event/evt_000026> a ns1:AppEvent ;
+    ns1:appName "com.apple.Notes" ;
+    ns1:timestamp "2025-11-24T17:30:02.500000" .
+

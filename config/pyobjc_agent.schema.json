@@ -1,0 +1,140 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PyObjC Agent Configuration",
+  "description": "Configuration schema for PyObjC capability monitoring agent",
+  "type": "object",
+  "properties": {
+    "data_dir": {
+      "type": "string",
+      "description": "Directory for output data files",
+      "default": "/Users/sac/dev/kgcl/data"
+    },
+    "enable_otel": {
+      "type": "boolean",
+      "description": "Enable OpenTelemetry instrumentation",
+      "default": true
+    },
+    "otlp_endpoint": {
+      "type": "string",
+      "description": "OTLP exporter endpoint",
+      "default": "http://localhost:4317",
+      "pattern": "^https?://.+"
+    },
+    "environment": {
+      "type": "string",
+      "description": "Deployment environment",
+      "enum": ["development", "staging", "production"],
+      "default": "development"
+    },
+    "collectors": {
+      "type": "object",
+      "description": "Collector configurations",
+      "properties": {
+        "frontmost_app": {
+          "$ref": "#/definitions/collector_config"
+        },
+        "browser_history": {
+          "$ref": "#/definitions/collector_config"
+        },
+        "calendar": {
+          "$ref": "#/definitions/collector_config"
+        }
+      }
+    },
+    "aggregation": {
+      "type": "object",
+      "properties": {
+        "window_size_hours": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 168,
+          "default": 1.0
+        },
+        "auto_aggregate": {
+          "type": "boolean",
+          "default": false
+        },
+        "aggregate_interval_hours": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 168,
+          "default": 24.0
+        }
+      }
+    },
+    "logging": {
+      "type": "object",
+      "properties": {
+        "level": {
+          "type": "string",
+          "enum": ["DEBUG", "INFO", "WARNING", "ERROR"],
+          "default": "INFO"
+        },
+        "file": {
+          "type": "string",
+          "description": "Log file path"
+        },
+        "max_size_mb": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000,
+          "default": 100
+        },
+        "backup_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "default": 5
+        }
+      }
+    }
+  },
+  "definitions": {
+    "collector_config": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true
+        },
+        "interval": {
+          "type": "number",
+          "description": "Collection interval in seconds",
+          "minimum": 0.1,
+          "maximum": 86400
+        },
+        "batch_size": {
+          "type": "integer",
+          "description": "Number of events per batch",
+          "minimum": 1,
+          "maximum": 10000,
+          "default": 100
+        },
+        "batch_timeout_seconds": {
+          "type": "number",
+          "description": "Max seconds before flushing batch",
+          "minimum": 1,
+          "maximum": 3600,
+          "default": 300
+        },
+        "buffer_size": {
+          "type": "integer",
+          "description": "Max events in memory buffer",
+          "minimum": 100,
+          "maximum": 100000,
+          "default": 10000
+        },
+        "retry_on_error": {
+          "type": "boolean",
+          "default": true
+        },
+        "max_retries": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10,
+          "default": 3
+        }
+      }
+    }
+  }
+}

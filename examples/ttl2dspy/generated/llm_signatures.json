@@ -1,0 +1,10 @@
+{
+  "output_path": "/Users/sac/dev/kgcl/examples/ttl2dspy/generated/llm_signatures.py",
+  "shapes_count": 5,
+  "signatures_count": 5,
+  "file_size": 2767,
+  "write_time": 0.0002040863037109375,
+  "lines_count": 78,
+  "timestamp": "2025-11-24T21:52:26.844583",
+  "ttl_source": "/Users/sac/dev/kgcl/examples/ttl2dspy/example_ontology.ttl"
+}

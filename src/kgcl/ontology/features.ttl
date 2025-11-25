@@ -1,0 +1,412 @@
+@prefix : <http://kgcl.dev/ontology/core#> .
+@prefix ft: <http://kgcl.dev/ontology/features#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<http://kgcl.dev/ontology/features#>
+    a owl:Ontology ;
+    rdfs:label "KGC Feature Template Catalog"@en ;
+    rdfs:comment "Catalog of feature templates for behavioral analysis in the KGC OS Graph Agent system."@en ;
+    owl:versionInfo "1.0.0" ;
+    owl:imports <http://kgcl.dev/ontology/core#> .
+
+# ==============================================================================
+# AGGREGATION FUNCTIONS
+# ==============================================================================
+
+ft:SumFunction
+    a :AggregationFunction ;
+    rdfs:label "sum"@en ;
+    rdfs:comment "Sums all observation values within the window."@en .
+
+ft:CountFunction
+    a :AggregationFunction ;
+    rdfs:label "count"@en ;
+    rdfs:comment "Counts the number of observations within the window."@en .
+
+ft:AverageFunction
+    a :AggregationFunction ;
+    rdfs:label "average"@en ;
+    rdfs:comment "Computes the arithmetic mean of observation values."@en .
+
+ft:MaxFunction
+    a :AggregationFunction ;
+    rdfs:label "max"@en ;
+    rdfs:comment "Returns the maximum observation value."@en .
+
+ft:MinFunction
+    a :AggregationFunction ;
+    rdfs:label "min"@en ;
+    rdfs:comment "Returns the minimum observation value."@en .
+
+ft:DistinctCountFunction
+    a :AggregationFunction ;
+    rdfs:label "distinct_count"@en ;
+    rdfs:comment "Counts the number of distinct values."@en .
+
+# ==============================================================================
+# FEATURE CATEGORIES
+# ==============================================================================
+
+ft:AttentionCategory
+    a :FeatureCategory ;
+    rdfs:label "Attention"@en ;
+    rdfs:comment "Features measuring user attention and focus patterns."@en .
+
+ft:ProductivityCategory
+    a :FeatureCategory ;
+    rdfs:label "Productivity"@en ;
+    rdfs:comment "Features measuring productivity and work patterns."@en .
+
+ft:CommunicationCategory
+    a :FeatureCategory ;
+    rdfs:label "Communication"@en ;
+    rdfs:comment "Features measuring communication and collaboration patterns."@en .
+
+ft:ContextSwitchingCategory
+    a :FeatureCategory ;
+    rdfs:label "Context Switching"@en ;
+    rdfs:comment "Features measuring context switches and interruptions."@en .
+
+ft:BrowserActivityCategory
+    a :FeatureCategory ;
+    rdfs:label "Browser Activity"@en ;
+    rdfs:comment "Features measuring web browsing patterns."@en .
+
+ft:CalendarCategory
+    a :FeatureCategory ;
+    rdfs:label "Calendar"@en ;
+    rdfs:comment "Features derived from calendar and meeting data."@en .
+
+# ==============================================================================
+# FEATURE TEMPLATE: timeInApp
+# ==============================================================================
+
+ft:TimeInAppTemplate
+    a :FeatureTemplate ;
+    rdfs:label "Time in Application"@en ;
+    :description "Measures the total time (in minutes) a user spends in a specific application during an observation window. Computed by summing the durations of all app-focused observations."@en ;
+    :version "1.0.0"@en ;
+
+    # Input/Output types
+    :hasInputType "AppWindowObservation"@en ;
+    :hasOutputType "xsd:float"@en ;
+
+    # Source capability (example - would link to actual capability instance)
+    # :sourceCapability <http://kgcl.dev/capability/NSWorkspace_activeApplication> ;
+
+    # Aggregation
+    :aggregationFunction ft:SumFunction ;
+    :windowDuration "PT1H"^^xsd:duration ;
+
+    # Categorization
+    :featureCategory ft:AttentionCategory ;
+    :featureCategory ft:ProductivityCategory ;
+
+    # Parameters
+    :hasParameter ft:TimeInAppTemplate_AppBundleIdParam ;
+
+    skos:example """
+    # Example usage:
+    # Input: 12 observations of VS Code being active (5 min, 3 min, 2 min, ...)
+    # Output: 45.3 minutes total in VS Code during 14:00-15:00 window
+    """@en ;
+
+    :createdAt "2025-11-24T00:00:00Z"^^xsd:dateTime .
+
+ft:TimeInAppTemplate_AppBundleIdParam
+    a :FeatureParameter ;
+    :parameterName "appBundleId"@en ;
+    :parameterType "string"@en ;
+    rdfs:label "Application Bundle ID"@en ;
+    :description "The macOS bundle identifier of the application to measure (e.g., 'com.microsoft.VSCode')."@en .
+
+# ==============================================================================
+# FEATURE TEMPLATE: switchCount
+# ==============================================================================
+
+ft:SwitchCountTemplate
+    a :FeatureTemplate ;
+    rdfs:label "Application Switch Count"@en ;
+    :description "Counts the number of times the user switches between different applications during an observation window. Each transition from app A to app B increments the count."@en ;
+    :version "1.0.0"@en ;
+
+    :hasInputType "AppSwitchObservation"@en ;
+    :hasOutputType "xsd:integer"@en ;
+
+    :aggregationFunction ft:CountFunction ;
+    :windowDuration "PT1H"^^xsd:duration ;
+
+    :featureCategory ft:ContextSwitchingCategory ;
+    :featureCategory ft:AttentionCategory ;
+
+    skos:example """
+    # Example usage:
+    # Input: Observations of app switches (VS Code -> Slack -> VS Code -> Safari -> VS Code)
+    # Output: 4 switches during the hour
+    """@en ;
+
+    :createdAt "2025-11-24T00:00:00Z"^^xsd:dateTime .
+
+# ==============================================================================
+# FEATURE TEMPLATE: domainVisitCount
+# ==============================================================================
+
+ft:DomainVisitCountTemplate
+    a :FeatureTemplate ;
+    rdfs:label "Domain Visit Count"@en ;
+    :description "Counts the number of times a user visits a specific web domain during an observation window. Each new navigation to the domain (not including reloads) increments the count."@en ;
+    :version "1.0.0"@en ;
+
+    :hasInputType "BrowserURLObservation"@en ;
+    :hasOutputType "xsd:integer"@en ;
+
+    :aggregationFunction ft:CountFunction ;
+    :windowDuration "PT1H"^^xsd:duration ;
+
+    :featureCategory ft:BrowserActivityCategory ;
+    :featureCategory ft:AttentionCategory ;
+
+    :hasParameter ft:DomainVisitCountTemplate_DomainParam ;
+
+    skos:example """
+    # Example usage:
+    # Input: URL observations for github.com (5 distinct visits to different repos)
+    # Output: 5 visits to github.com during the window
+    """@en ;
+
+    :createdAt "2025-11-24T00:00:00Z"^^xsd:dateTime .
+
+ft:DomainVisitCountTemplate_DomainParam
+    a :FeatureParameter ;
+    :parameterName "domainName"@en ;
+    :parameterType "string"@en ;
+    rdfs:label "Domain Name"@en ;
+    :description "The domain to track (e.g., 'github.com', 'stackoverflow.com')."@en .
+
+# ==============================================================================
+# FEATURE TEMPLATE: calendarBusyHours
+# ==============================================================================
+
+ft:CalendarBusyHoursTemplate
+    a :FeatureTemplate ;
+    rdfs:label "Calendar Busy Hours"@en ;
+    :description "Aggregates the total time (in hours) the user is scheduled in calendar events during an observation window. Includes meetings, appointments, and blocked time."@en ;
+    :version "1.0.0"@en ;
+
+    :hasInputType "CalendarEventObservation"@en ;
+    :hasOutputType "xsd:float"@en ;
+
+    :aggregationFunction ft:SumFunction ;
+    :windowDuration "PT1H"^^xsd:duration ;
+
+    :featureCategory ft:CalendarCategory ;
+    :featureCategory ft:ProductivityCategory ;
+
+    :hasParameter ft:CalendarBusyHoursTemplate_IncludeTravelParam ;
+
+    skos:example """
+    # Example usage:
+    # Input: 3 calendar events (30 min standup, 60 min design review, 15 min 1:1)
+    # Output: 1.75 hours of scheduled time during the window
+    """@en ;
+
+    :createdAt "2025-11-24T00:00:00Z"^^xsd:dateTime .
+
+ft:CalendarBusyHoursTemplate_IncludeTravelParam
+    a :FeatureParameter ;
+    :parameterName "includeTravelTime"@en ;
+    :parameterType "boolean"@en ;
+    rdfs:label "Include Travel Time"@en ;
+    :description "Whether to include travel time blocks in the busy hours calculation."@en ;
+    :defaultValue "false"^^xsd:boolean .
+
+# ==============================================================================
+# FEATURE TEMPLATE: deepWorkSession
+# ==============================================================================
+
+ft:DeepWorkSessionTemplate
+    a :FeatureTemplate ;
+    rdfs:label "Deep Work Session"@en ;
+    :description "Detects periods of sustained focus in productivity applications (IDE, design tools) with minimal interruptions. Returns duration of the longest uninterrupted session in minutes."@en ;
+    :version "1.0.0"@en ;
+
+    :hasInputType "AppWindowObservation"@en ;
+    :hasOutputType "xsd:float"@en ;
+
+    :aggregationFunction ft:MaxFunction ;
+    :windowDuration "PT4H"^^xsd:duration ;
+
+    :featureCategory ft:AttentionCategory ;
+    :featureCategory ft:ProductivityCategory ;
+
+    :hasParameter ft:DeepWorkSessionTemplate_MinDurationParam ;
+    :hasParameter ft:DeepWorkSessionTemplate_AllowedAppsParam ;
+
+    skos:example """
+    # Example usage:
+    # Input: Continuous focus in VS Code for 72 minutes, then 5 min Slack, then 45 min more VS Code
+    # Output: 72.0 minutes (longest uninterrupted session)
+    """@en ;
+
+    :createdAt "2025-11-24T00:00:00Z"^^xsd:dateTime .
+
+ft:DeepWorkSessionTemplate_MinDurationParam
+    a :FeatureParameter ;
+    :parameterName "minDuration"@en ;
+    :parameterType "duration"@en ;
+    rdfs:label "Minimum Duration"@en ;
+    :description "Minimum duration to qualify as a deep work session."@en ;
+    :defaultValue "PT30M"^^xsd:duration .
+
+ft:DeepWorkSessionTemplate_AllowedAppsParam
+    a :FeatureParameter ;
+    :parameterName "allowedApps"@en ;
+    :parameterType "string"@en ;
+    rdfs:label "Allowed Applications"@en ;
+    :description "Comma-separated list of bundle IDs considered productivity apps."@en .
+
+# ==============================================================================
+# FEATURE TEMPLATE: communicationBurstiness
+# ==============================================================================
+
+ft:CommunicationBurstinessTemplate
+    a :FeatureTemplate ;
+    rdfs:label "Communication Burstiness"@en ;
+    :description "Measures the burstiness of communication app usage (Slack, Email, Teams) by computing the standard deviation of time gaps between app activations. High values indicate bursty/reactive patterns."@en ;
+    :version "1.0.0"@en ;
+
+    :hasInputType "AppSwitchObservation"@en ;
+    :hasOutputType "xsd:float"@en ;
+
+    # Note: Would need StdDevFunction defined
+    # :aggregationFunction ft:StdDevFunction ;
+    :windowDuration "PT2H"^^xsd:duration ;
+
+    :featureCategory ft:CommunicationCategory ;
+    :featureCategory ft:AttentionCategory ;
+
+    skos:example """
+    # Example usage:
+    # Input: Slack activations at irregular intervals (2 min, 15 min, 3 min, 45 min, 1 min)
+    # Output: High stddev indicates bursty, reactive communication pattern
+    """@en ;
+
+    :createdAt "2025-11-24T00:00:00Z"^^xsd:dateTime .
+
+# ==============================================================================
+# FEATURE TEMPLATE: uniqueDomainsVisited
+# ==============================================================================
+
+ft:UniqueDomainsVisitedTemplate
+    a :FeatureTemplate ;
+    rdfs:label "Unique Domains Visited"@en ;
+    :description "Counts the number of distinct domains visited during an observation window. Useful for measuring research breadth or web activity diversity."@en ;
+    :version "1.0.0"@en ;
+
+    :hasInputType "BrowserURLObservation"@en ;
+    :hasOutputType "xsd:integer"@en ;
+
+    :aggregationFunction ft:DistinctCountFunction ;
+    :windowDuration "PT1H"^^xsd:duration ;
+
+    :featureCategory ft:BrowserActivityCategory ;
+
+    skos:example """
+    # Example usage:
+    # Input: URL observations (github.com, stackoverflow.com, github.com, reddit.com)
+    # Output: 3 unique domains
+    """@en ;
+
+    :createdAt "2025-11-24T00:00:00Z"^^xsd:dateTime .
+
+# ==============================================================================
+# FEATURE TEMPLATE: meetingFragmentation
+# ==============================================================================
+
+ft:MeetingFragmentationTemplate
+    a :FeatureTemplate ;
+    rdfs:label "Meeting Fragmentation"@en ;
+    :description "Measures calendar fragmentation by counting the number of separate calendar events during a window. High fragmentation indicates heavily interrupted schedules."@en ;
+    :version "1.0.0"@en ;
+
+    :hasInputType "CalendarEventObservation"@en ;
+    :hasOutputType "xsd:integer"@en ;
+
+    :aggregationFunction ft:CountFunction ;
+    :windowDuration "PT8H"^^xsd:duration ;
+
+    :featureCategory ft:CalendarCategory ;
+    :featureCategory ft:ProductivityCategory ;
+
+    skos:example """
+    # Example usage:
+    # Input: 7 separate calendar events in an 8-hour workday
+    # Output: 7 meetings (high fragmentation)
+    """@en ;
+
+    :createdAt "2025-11-24T00:00:00Z"^^xsd:dateTime .
+
+# ==============================================================================
+# FEATURE TEMPLATE: keyboardActivityRate
+# ==============================================================================
+
+ft:KeyboardActivityRateTemplate
+    a :FeatureTemplate ;
+    rdfs:label "Keyboard Activity Rate"@en ;
+    :description "Measures keyboard activity intensity by counting keystrokes per minute during the observation window. Useful for detecting active typing vs passive reading."@en ;
+    :version "1.0.0"@en ;
+
+    :hasInputType "KeyboardObservation"@en ;
+    :hasOutputType "xsd:float"@en ;
+
+    :aggregationFunction ft:AverageFunction ;
+    :windowDuration "PT15M"^^xsd:duration ;
+
+    :featureCategory ft:ProductivityCategory ;
+
+    skos:example """
+    # Example usage:
+    # Input: 450 keystrokes over 15 minutes
+    # Output: 30.0 keystrokes per minute average
+    """@en ;
+
+    :createdAt "2025-11-24T00:00:00Z"^^xsd:dateTime .
+
+# ==============================================================================
+# FEATURE TEMPLATE: codeCommitFrequency
+# ==============================================================================
+
+ft:CodeCommitFrequencyTemplate
+    a :FeatureTemplate ;
+    rdfs:label "Code Commit Frequency"@en ;
+    :description "Tracks the frequency of code commits by monitoring IDE/terminal git activity. Counts commit events during the observation window."@en ;
+    :version "1.0.0"@en ;
+
+    :hasInputType "ProcessObservation"@en ;
+    :hasOutputType "xsd:integer"@en ;
+
+    :aggregationFunction ft:CountFunction ;
+    :windowDuration "PT1H"^^xsd:duration ;
+
+    :featureCategory ft:ProductivityCategory ;
+
+    :hasParameter ft:CodeCommitFrequencyTemplate_MonitoredReposParam ;
+
+    skos:example """
+    # Example usage:
+    # Input: Observations of 'git commit' process executions
+    # Output: 5 commits during the hour
+    """@en ;
+
+    :createdAt "2025-11-24T00:00:00Z"^^xsd:dateTime .
+
+ft:CodeCommitFrequencyTemplate_MonitoredReposParam
+    a :FeatureParameter ;
+    :parameterName "monitoredRepos"@en ;
+    :parameterType "string"@en ;
+    rdfs:label "Monitored Repositories"@en ;
+    :description "Comma-separated list of repository paths to monitor for commits."@en .

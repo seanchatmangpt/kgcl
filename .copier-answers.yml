@@ -1,0 +1,12 @@
+_commit: v1.6.0
+_src_path: https://github.com/superlinear-ai/substrate
+author_email: your.email@example.com
+author_name: Your Name
+project_description: Knowledge Geometry Calculus for Life
+project_name: kgcl
+project_type: package
+project_url: https://github.com/user/kgcl
+python_version: '3.12'
+typing: optional
+with_conventional_commits: true
+with_typer_cli: false

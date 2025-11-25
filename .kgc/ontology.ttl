@@ -1,0 +1,248 @@
+@prefix kgc: <urn:kgc:> .
+@prefix apple: <urn:kgc:apple:> .
+@prefix schema: <http://schema.org/> .
+@prefix ical: <http://www.w3.org/2002/12/cal/ical4j.rdf#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# ============================================================================
+# Domain Entities (Standard: schema.org + iCalendar vocabulary)
+# ============================================================================
+
+# Calendar Events: Use schema:Event (standard)
+# Maps to: iCalendar VEVENT, EventKit EKEvent
+#
+# Properties:
+#   schema:name          (SUMMARY)
+#   schema:startDate     (DTSTART, as dateTime)
+#   schema:endDate       (DTEND, as dateTime)
+#   schema:attendee      (ATTENDEE)
+#   schema:location      (LOCATION)
+#   schema:description   (DESCRIPTION)
+#   schema:identifier    (UID in iCalendar)
+
+# Reminder/Task: Use schema:Action (standard)
+# Maps to: iCalendar VTODO, EventKit EKReminder
+#
+# Properties:
+#   schema:name          (SUMMARY)
+#   schema:dueDate       (DUE, as dateTime)
+#   schema:actionStatus  (STATUS: Completed, Failed, PotentialActionStatus)
+#   schema:identifier    (UID)
+
+# Mail Message: Use schema:Message (standard)
+# Maps to RFC 5322 email
+#
+# Properties:
+#   schema:name          (Subject)
+#   schema:author        (From, as Person)
+#   schema:recipient     (To/Cc, as Person)
+#   schema:dateSent      (Date)
+#   schema:dateReceived  (implicit from headers)
+
+# File Artifact: Use schema:CreativeWork (standard)
+# Maps to: File system metadata, Spotlight attributes
+#
+# Properties:
+#   schema:name          (filename)
+#   schema:url           (file path or URL)
+#   schema:dateModified  (mtime)
+#   schema:dateCreated   (btime, if available)
+
+# Focus Session: Use schema:Event (standard)
+# Custom subclass for deep work blocks
+apple:FocusSession a rdfs:Class ;
+    rdfs:label "Focus Session" ;
+    rdfs:comment "A continuous uninterrupted work block for deep focus" ;
+    rdfs:subClassOf schema:Event .
+
+# Daily/Weekly Review: Use schema:Action (standard)
+apple:DailyReview a rdfs:Class ;
+    rdfs:label "Daily Review" ;
+    rdfs:comment "A daily planning and review workflow" ;
+    rdfs:subClassOf schema:Action .
+
+apple:WeeklyReview a rdfs:Class ;
+    rdfs:label "Weekly Review" ;
+    rdfs:comment "A weekly retrospective and planning workflow" ;
+    rdfs:subClassOf schema:Action .
+
+# ============================================================================
+# Custom Properties (minimal, Apple-specific only)
+# ============================================================================
+
+# Source system identifier (not in schema.org, needed for idempotency)
+apple:sourceApp a rdf:Property ;
+    rdfs:label "Source App" ;
+    rdfs:comment "Which macOS/iOS app this data came from (Calendar, Reminders, Mail, Finder)" ;
+    rdfs:domain schema:Thing ;
+    rdfs:range xsd:string .
+
+# Source system unique identifier (for cache key)
+apple:sourceIdentifier a rdf:Property ;
+    rdfs:label "Source Identifier" ;
+    rdfs:comment "Unique ID from source system (EKEventIdentifier, Message-ID, file inode, etc.)" ;
+    rdfs:domain schema:Thing ;
+    rdfs:range xsd:string .
+
+# Collections/Groupings (not fully expressed in schema.org)
+apple:calendar a rdf:Property ;
+    rdfs:label "Calendar" ;
+    rdfs:comment "Which calendar an event belongs to (iCloud, local, shared)" ;
+    rdfs:domain schema:Event ;
+    rdfs:range xsd:string .
+
+apple:list a rdf:Property ;
+    rdfs:label "Reminder List" ;
+    rdfs:comment "Which reminder list a task belongs to (Inbox, Work, Personal)" ;
+    rdfs:domain schema:Action ;
+    rdfs:range xsd:string .
+
+# Cross-document relationships (link from one entity to another)
+apple:relatedFile a rdf:Property ;
+    rdfs:label "Related File" ;
+    rdfs:comment "File artifact associated with this event/task/mail" ;
+    rdfs:domain schema:Thing ;
+    rdfs:range schema:CreativeWork .
+
+apple:relatedAction a rdf:Property ;
+    rdfs:label "Related Task" ;
+    rdfs:comment "Task/reminder associated with this event/mail/file" ;
+    rdfs:domain schema:Thing ;
+    rdfs:range schema:Action .
+
+apple:relatedEvent a rdf:Property ;
+    rdfs:label "Related Event" ;
+    rdfs:comment "Event associated with this task/mail/file" ;
+    rdfs:domain schema:Thing ;
+    rdfs:range schema:Event .
+
+# Task blocking relationships (directed dependency)
+apple:dependsOn a rdf:Property ;
+    rdfs:label "Depends On" ;
+    rdfs:comment "This task is blocked by another task" ;
+    rdfs:domain schema:Action ;
+    rdfs:range schema:Action .
+
+# Tags/categories (simple text, reusable)
+schema:keywords a rdf:Property ;
+    rdfs:label "Tags" ;
+    rdfs:comment "Categorical tags or labels (Finder tags, task labels, email flags)" ;
+    rdfs:domain schema:Thing ;
+    rdfs:range xsd:string .
+
+# ============================================================================
+# Workflows (using schema:Action pattern)
+# ============================================================================
+
+apple:DailyReviewWorkflow a kgc:Workflow ;
+    rdfs:label "Daily Review Workflow" ;
+    rdfs:comment "Standard morning/evening review process" ;
+    kgc:step [
+        rdfs:label "Review Today's Calendar" ;
+        rdfs:comment "Scan calendar (schema:Event) for meetings and commitments"
+    ] ;
+    kgc:step [
+        rdfs:label "Review Today's Reminders" ;
+        rdfs:comment "Check tasks (schema:Action) due today"
+    ] ;
+    kgc:step [
+        rdfs:label "Plan Tomorrow" ;
+        rdfs:comment "Preview and plan for tomorrow"
+    ] .
+
+apple:WeeklyReviewWorkflow a kgc:Workflow ;
+    rdfs:label "Weekly Review Workflow" ;
+    rdfs:comment "Weekly retrospective and next-week planning" ;
+    kgc:step [
+        rdfs:label "Summarize Week" ;
+        rdfs:comment "Review completed events and tasks"
+    ] ;
+    kgc:step [
+        rdfs:label "Identify Patterns" ;
+        rdfs:comment "Analyze meeting load, focus time, interruptions"
+    ] ;
+    kgc:step [
+        rdfs:label "Plan Next Week" ;
+        rdfs:comment "Create calendar and task structure for next 7 days"
+    ] .
+
+# Lean Value Stream
+apple:ValueStream a kgc:ValueStream ;
+    rdfs:label "Personal Productivity Value Stream" ;
+    rdfs:comment "End-to-end flow from macOS/iOS data to actionable projections" ;
+    kgc:step [
+        rdfs:label "Data Ingest" ;
+        rdfs:comment "Collect calendar, reminders, mail, files via PyObjC"
+    ] ;
+    kgc:step [
+        rdfs:label "Ontology Alignment" ;
+        rdfs:comment "Map to O/Q/Σ planes"
+    ] ;
+    kgc:step [
+        rdfs:label "Validation" ;
+        rdfs:comment "SHACL validation and invariant checks"
+    ] ;
+    kgc:step [
+        rdfs:label "Projection" ;
+        rdfs:comment "Generate agenda, CLI, docs, diagrams"
+    ] ;
+    kgc:step [
+        rdfs:label "Review & Decommission" ;
+        rdfs:comment "Identify waste and remove stale items"
+    ] .
+
+# ============================================================================
+# Configuration for ingest behavior
+# ============================================================================
+
+apple:IngestionConfig a kgc:IngestionConfig ;
+    rdfs:label "Apple Data Ingest Configuration" ;
+    apple:includeCalendars "true"^^xsd:boolean ;
+    apple:includeReminders "true"^^xsd:boolean ;
+    apple:includeMail "true"^^xsd:boolean ;
+    apple:includeFiles "true"^^xsd:boolean ;
+    apple:maxEvents "2000"^^xsd:integer ;
+    apple:maxReminders "1000"^^xsd:integer ;
+    apple:maxMailMessages "500"^^xsd:integer ;
+    apple:cacheExpiry "3600"^^xsd:integer ;
+    apple:validationLevel "strict"^^xsd:string .
+
+# ============================================================================
+# Mapping: Apple Data → Standard RDF Properties
+# ============================================================================
+# This documents how PyObjC imports map to schema.org + custom properties.
+#
+# Calendar (EventKit EKEvent → schema:Event):
+#   EKEvent.title                    → schema:name
+#   EKEvent.startDate                → schema:startDate (xsd:dateTime)
+#   EKEvent.endDate                  → schema:endDate (xsd:dateTime)
+#   EKEvent.eventIdentifier          → apple:sourceIdentifier
+#   EKEvent.calendar.title           → apple:calendar
+#   EKEvent.attendees                → schema:attendee (schema:Person)
+#   "Calendar"                       → apple:sourceApp
+#
+# Reminder (EventKit EKReminder → schema:Action):
+#   EKReminder.title                 → schema:name
+#   EKReminder.dueDate               → schema:dueDate (xsd:dateTime)
+#   EKReminder.completed             → schema:actionStatus (Completed|PotentialActionStatus)
+#   EKReminder.calendarItemIdentifier → apple:sourceIdentifier
+#   EKReminder.calendar.title        → apple:list
+#   "Reminders"                      → apple:sourceApp
+#
+# Mail (RFC 5322 Message → schema:Message):
+#   Message.subject                  → schema:name
+#   Message.senders                  → schema:author (schema:Person)
+#   Message.recipients               → schema:recipient (schema:Person)
+#   Message.dateReceived             → schema:dateReceived (xsd:dateTime)
+#   Message.messageID                → apple:sourceIdentifier
+#   "Mail"                           → apple:sourceApp
+#
+# File (Finder/Spotlight → schema:CreativeWork):
+#   file.name                        → schema:name
+#   file.path                        → schema:url (xsd:anyURI)
+#   file.contentModificationDate     → schema:dateModified (xsd:dateTime)
+#   file.contentCreationDate         → schema:dateCreated (xsd:dateTime)
+#   Finder tags (xattr)              → schema:keywords
+#   Source folder / system           → apple:sourceApp

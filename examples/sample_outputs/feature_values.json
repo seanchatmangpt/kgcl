@@ -1,0 +1,122 @@
+[
+  {
+    "feature_id": "app_usage_time_com.jetbrains.pycharm",
+    "value": 15324.588958591652,
+    "aggregation_type": "sum",
+    "sample_count": 3,
+    "window_start": "2025-11-24T00:00:00",
+    "window_end": "2025-11-24T23:59:59.999999"
+  },
+  {
+    "feature_id": "app_usage_time_com.apple.mail",
+    "value": 1423.7260886215677,
+    "aggregation_type": "sum",
+    "sample_count": 4,
+    "window_start": "2025-11-24T00:00:00",
+    "window_end": "2025-11-24T23:59:59.999999"
+  },
+  {
+    "feature_id": "app_usage_time_us.zoom.xos",
+    "value": 900.0,
+    "aggregation_type": "sum",
+    "sample_count": 1,
+    "window_start": "2025-11-24T00:00:00",
+    "window_end": "2025-11-24T23:59:59.999999"
+  },
+  {
+    "feature_id": "app_usage_time_com.microsoft.teams",
+    "value": 2700.0,
+    "aggregation_type": "sum",
+    "sample_count": 1,
+    "window_start": "2025-11-24T00:00:00",
+    "window_end": "2025-11-24T23:59:59.999999"
+  },
+  {
+    "feature_id": "app_usage_time_com.apple.Notes",
+    "value": 323.1606610581773,
+    "aggregation_type": "sum",
+    "sample_count": 1,
+    "window_start": "2025-11-24T00:00:00",
+    "window_end": "2025-11-24T23:59:59.999999"
+  },
+  {
+    "feature_id": "browser_domain_visits_github.com",
+    "value": 4,
+    "aggregation_type": "count",
+    "sample_count": 4,
+    "window_start": "2025-11-24T00:00:00",
+    "window_end": "2025-11-24T23:59:59.999999"
+  },
+  {
+    "feature_id": "browser_domain_visits_aws.amazon.com",
+    "value": 3,
+    "aggregation_type": "count",
+    "sample_count": 3,
+    "window_start": "2025-11-24T00:00:00",
+    "window_end": "2025-11-24T23:59:59.999999"
+  },
+  {
+    "feature_id": "browser_domain_visits_sphinx-doc.org",
+    "value": 1,
+    "aggregation_type": "count",
+    "sample_count": 1,
+    "window_start": "2025-11-24T00:00:00",
+    "window_end": "2025-11-24T23:59:59.999999"
+  },
+  {
+    "feature_id": "browser_domain_visits_stackoverflow.com",
+    "value": 3,
+    "aggregation_type": "count",
+    "sample_count": 3,
+    "window_start": "2025-11-24T00:00:00",
+    "window_end": "2025-11-24T23:59:59.999999"
+  },
+  {
+    "feature_id": "browser_domain_visits_readthedocs.io",
+    "value": 1,
+    "aggregation_type": "count",
+    "sample_count": 1,
+    "window_start": "2025-11-24T00:00:00",
+    "window_end": "2025-11-24T23:59:59.999999"
+  },
+  {
+    "feature_id": "browser_domain_visits_confluence.atlassian.com",
+    "value": 1,
+    "aggregation_type": "count",
+    "sample_count": 1,
+    "window_start": "2025-11-24T00:00:00",
+    "window_end": "2025-11-24T23:59:59.999999"
+  },
+  {
+    "feature_id": "browser_domain_visits_mkdocs.org",
+    "value": 1,
+    "aggregation_type": "count",
+    "sample_count": 1,
+    "window_start": "2025-11-24T00:00:00",
+    "window_end": "2025-11-24T23:59:59.999999"
+  },
+  {
+    "feature_id": "meeting_count",
+    "value": 2,
+    "aggregation_type": "count",
+    "sample_count": 2,
+    "window_start": "2025-11-24T00:00:00",
+    "window_end": "2025-11-24T23:59:59.999999"
+  },
+  {
+    "feature_id": "meeting_total_duration",
+    "value": 3596.8,
+    "aggregation_type": "sum",
+    "sample_count": 2,
+    "window_start": "2025-11-24T00:00:00",
+    "window_end": "2025-11-24T23:59:59.999999"
+  },
+  {
+    "feature_id": "context_switches",
+    "value": 8,
+    "aggregation_type": "count",
+    "sample_count": 10,
+    "window_start": "2025-11-24T00:00:00",
+    "window_end": "2025-11-24T23:59:59.999999"
+  }
+]

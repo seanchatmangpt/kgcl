@@ -1,0 +1,108 @@
+"""UNRDF Knowledge Engine - Universal Named Resource Description Framework.
+
+A production-grade RDF triple store with SPARQL querying, transaction support,
+provenance tracking, SHACL validation, hook-driven workflows, and external
+capability execution.
+
+Features
+--------
+- RDF triple store with SPARQL 1.1 support
+- ACID transactions with rollback capability
+- Full provenance tracking (who/when/why)
+- SHACL validation
+- Lifecycle hooks for ingestion, validation, and query execution
+- Persistent hook registry with hot reload
+- Feature materialization through hooks
+- OpenTelemetry instrumentation
+- Hook performance tracking with receipts
+
+Examples
+--------
+Basic usage with hooks::
+
+    from kgcl.unrdf_engine import (
+        UnrdfEngine,
+        PersistentHookRegistry,
+        KnowledgeHook,
+        HookPhase,
+        IngestionPipeline,
+    )
+
+    # Create engine with hook support
+    registry = PersistentHookRegistry(storage_path=Path("hooks.json"))
+    engine = UnrdfEngine(file_path=Path("graph.ttl"), hook_registry=registry)
+
+    # Define a validation hook
+    class ValidationHook(KnowledgeHook):
+        def __init__(self):
+            super().__init__(
+                name="validator",
+                phases=[HookPhase.PRE_TRANSACTION]
+            )
+
+        def execute(self, context):
+            # Validate data before commit
+            if not self.is_valid(context.delta):
+                context.metadata["should_rollback"] = True
+                context.metadata["rollback_reason"] = "Invalid data"
+
+    # Register hook
+    registry.register(ValidationHook())
+
+    # Use ingestion pipeline
+    pipeline = IngestionPipeline(engine)
+    result = pipeline.ingest_json(
+        data={"type": "Person", "name": "Alice"},
+        agent="api_service"
+    )
+
+    # Check hook receipts
+    for receipt in result.hook_results:
+        print(f"Hook {receipt.hook_id}: {receipt.success}")
+
+"""
+
+from kgcl.unrdf_engine.engine import UnrdfEngine, Transaction, ProvenanceRecord
+from kgcl.unrdf_engine.hooks import (
+    KnowledgeHook,
+    HookRegistry,
+    HookExecutor,
+    HookPhase,
+    HookContext,
+    Receipt,
+    TriggerCondition,
+    ValidationFailureHook,
+    FeatureTemplateHook,
+)
+from kgcl.unrdf_engine.hook_registry import PersistentHookRegistry, HookMetadata
+from kgcl.unrdf_engine.validation import ShaclValidator, ValidationResult
+from kgcl.unrdf_engine.externals import ExternalCapabilityBridge
+from kgcl.unrdf_engine.ingestion import IngestionPipeline, IngestionResult
+
+__all__ = [
+    # Core engine
+    "UnrdfEngine",
+    "Transaction",
+    "ProvenanceRecord",
+    # Hooks
+    "KnowledgeHook",
+    "HookRegistry",
+    "HookExecutor",
+    "HookPhase",
+    "HookContext",
+    "Receipt",
+    "TriggerCondition",
+    "ValidationFailureHook",
+    "FeatureTemplateHook",
+    # Hook registry
+    "PersistentHookRegistry",
+    "HookMetadata",
+    # Validation
+    "ShaclValidator",
+    "ValidationResult",
+    # External capabilities
+    "ExternalCapabilityBridge",
+    # Ingestion
+    "IngestionPipeline",
+    "IngestionResult",
+]

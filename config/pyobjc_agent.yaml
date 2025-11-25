@@ -1,0 +1,60 @@
+# PyObjC Agent Configuration
+#
+# This file configures the PyObjC capability monitoring agent.
+# Environment variables can override these settings:
+# - PYOBJC_DATA_DIR
+# - PYOBJC_OTLP_ENDPOINT
+# - PYOBJC_ENVIRONMENT
+
+# Data output directory
+data_dir: /Users/sac/dev/kgcl/data
+
+# OpenTelemetry configuration
+enable_otel: true
+otlp_endpoint: http://localhost:4317
+environment: development
+
+# Collector configurations
+collectors:
+  # Frontmost application tracker
+  frontmost_app:
+    enabled: true
+    interval: 1.0  # seconds
+    batch_size: 50
+    batch_timeout_seconds: 60.0
+    buffer_size: 10000
+    retry_on_error: true
+    max_retries: 3
+
+  # Browser history tracker
+  browser_history:
+    enabled: true
+    interval: 300.0  # 5 minutes
+    batch_size: 10
+    batch_timeout_seconds: 600.0
+    buffer_size: 1000
+    retry_on_error: true
+    max_retries: 3
+
+  # Calendar events tracker
+  calendar:
+    enabled: true
+    interval: 300.0  # 5 minutes
+    batch_size: 10
+    batch_timeout_seconds: 600.0
+    buffer_size: 1000
+    retry_on_error: true
+    max_retries: 3
+
+# Aggregation settings
+aggregation:
+  window_size_hours: 1.0
+  auto_aggregate: false
+  aggregate_interval_hours: 24.0
+
+# Logging
+logging:
+  level: INFO  # DEBUG, INFO, WARNING, ERROR
+  file: /Users/sac/dev/kgcl/logs/pyobjc_agent.log
+  max_size_mb: 100
+  backup_count: 5

@@ -1,0 +1,477 @@
+@prefix : <http://kgcl.dev/ontology/core#> .
+@prefix cap: <http://kgcl.dev/ontology/capabilities#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<http://kgcl.dev/ontology/capabilities#>
+    a owl:Ontology ;
+    rdfs:label "KGC Capability Registry"@en ;
+    rdfs:comment "Registry of macOS system capabilities discovered through PyObjC framework introspection, including SLOs and framework attribution."@en ;
+    owl:versionInfo "1.0.0" ;
+    owl:imports <http://kgcl.dev/ontology/core#> .
+
+# ==============================================================================
+# FRAMEWORKS
+# ==============================================================================
+
+cap:CocoaFramework
+    a :Framework ;
+    rdfs:label "Cocoa"@en ;
+    :description "Primary macOS application framework providing UI and system integration APIs."@en ;
+    :version "10.15+"@en ;
+    :createdAt "2025-11-24T00:00:00Z"^^xsd:dateTime .
+
+cap:ApplicationServicesFramework
+    a :Framework ;
+    rdfs:label "ApplicationServices"@en ;
+    :description "Framework providing accessibility, window management, and display services."@en ;
+    :version "10.15+"@en ;
+    :createdAt "2025-11-24T00:00:00Z"^^xsd:dateTime .
+
+cap:CoreFoundationFramework
+    a :Framework ;
+    rdfs:label "CoreFoundation"@en ;
+    :description "Low-level framework providing fundamental data types and system services."@en ;
+    :version "10.15+"@en ;
+    :createdAt "2025-11-24T00:00:00Z"^^xsd:dateTime .
+
+cap:EventKitFramework
+    a :Framework ;
+    rdfs:label "EventKit"@en ;
+    :description "Framework for accessing calendar and reminder data."@en ;
+    :version "10.15+"@en ;
+    :createdAt "2025-11-24T00:00:00Z"^^xsd:dateTime .
+
+cap:CoreGraphicsFramework
+    a :Framework ;
+    rdfs:label "CoreGraphics"@en ;
+    :description "Framework for 2D rendering and display management."@en ;
+    :version "10.15+"@en ;
+    :createdAt "2025-11-24T00:00:00Z"^^xsd:dateTime .
+
+# ==============================================================================
+# CAPABILITY TYPES
+# ==============================================================================
+
+cap:UICapabilityType
+    a :CapabilityType ;
+    rdfs:label "UI Capability"@en ;
+    :description "Capabilities related to user interface monitoring and interaction."@en .
+
+cap:SystemCapabilityType
+    a :CapabilityType ;
+    rdfs:label "System Capability"@en ;
+    :description "Capabilities related to system-level monitoring and information."@en .
+
+cap:DataCapabilityType
+    a :CapabilityType ;
+    rdfs:label "Data Capability"@en ;
+    :description "Capabilities related to accessing user data (calendar, contacts, etc.)."@en .
+
+cap:InputCapabilityType
+    a :CapabilityType ;
+    rdfs:label "Input Capability"@en ;
+    :description "Capabilities related to monitoring user input (keyboard, mouse)."@en .
+
+cap:ProcessCapabilityType
+    a :CapabilityType ;
+    rdfs:label "Process Capability"@en ;
+    :description "Capabilities related to monitoring running processes and applications."@en .
+
+# ==============================================================================
+# SERVICE LEVEL OBJECTIVES
+# ==============================================================================
+
+cap:RealtimeSLO
+    a :ServiceLevelObjective ;
+    rdfs:label "Realtime SLO"@en ;
+    :description "Capability must respond within 100ms for realtime monitoring use cases."@en ;
+    skos:notation "latency_p99 < 100ms" .
+
+cap:LowLatencySLO
+    a :ServiceLevelObjective ;
+    rdfs:label "Low Latency SLO"@en ;
+    :description "Capability must respond within 500ms for interactive use cases."@en ;
+    skos:notation "latency_p99 < 500ms" .
+
+cap:HighThroughputSLO
+    a :ServiceLevelObjective ;
+    rdfs:label "High Throughput SLO"@en ;
+    :description "Capability must support at least 100 requests per second."@en ;
+    skos:notation "throughput >= 100 rps" .
+
+cap:HighAvailabilitySLO
+    a :ServiceLevelObjective ;
+    rdfs:label "High Availability SLO"@en ;
+    :description "Capability must be available 99.9% of the time."@en ;
+    skos:notation "availability >= 99.9%" .
+
+cap:AccuracySLO
+    a :ServiceLevelObjective ;
+    rdfs:label "Accuracy SLO"@en ;
+    :description "Capability must provide accurate data with < 1% error rate."@en ;
+    skos:notation "error_rate < 1%" .
+
+# ==============================================================================
+# CAPABILITY: Active Application Monitoring
+# ==============================================================================
+
+cap:ActiveApplicationCapability
+    a :Capability ;
+    rdfs:label "Active Application Monitoring"@en ;
+    :description "Capability to detect and monitor the currently active (focused) application using NSWorkspace. Returns bundle ID, name, and activation timestamp."@en ;
+
+    # PyObjC binding
+    :pyobjcSymbol "Cocoa.NSWorkspace.sharedWorkspace.activeApplication"@en ;
+    :sourceFramework cap:CocoaFramework ;
+    :capabilityType cap:UICapabilityType ;
+    :capabilityType cap:ProcessCapabilityType ;
+
+    # Permissions
+    :requiresPermission "Accessibility" ;
+
+    # SLOs
+    :hasSLO cap:RealtimeSLO ;
+    :hasSLO cap:HighAvailabilitySLO ;
+
+    :version "1.0.0"@en ;
+    :createdAt "2025-11-24T00:00:00Z"^^xsd:dateTime ;
+    :deprecated false ;
+
+    skos:example """
+    # Returns dictionary with keys:
+    # - NSApplicationBundleIdentifier: 'com.microsoft.VSCode'
+    # - NSApplicationName: 'Visual Studio Code'
+    # - NSApplicationPath: '/Applications/Visual Studio Code.app'
+    """@en .
+
+# ==============================================================================
+# CAPABILITY: Window Title Monitoring
+# ==============================================================================
+
+cap:WindowTitleCapability
+    a :Capability ;
+    rdfs:label "Window Title Monitoring"@en ;
+    :description "Capability to read the title of the frontmost window using Accessibility APIs. Useful for detecting active files, documents, or web pages."@en ;
+
+    :pyobjcSymbol "ApplicationServices.AXUIElementCopyAttributeValue"@en ;
+    :sourceFramework cap:ApplicationServicesFramework ;
+    :capabilityType cap:UICapabilityType ;
+
+    :requiresPermission "Accessibility" ;
+
+    :hasSLO cap:LowLatencySLO ;
+    :hasSLO cap:AccuracySLO ;
+
+    :version "1.0.0"@en ;
+    :createdAt "2025-11-24T00:00:00Z"^^xsd:dateTime ;
+    :deprecated false ;
+
+    skos:example """
+    # Example output: 'index.html - Visual Studio Code'
+    # Can parse to extract filename and app context
+    """@en .
+
+# ==============================================================================
+# CAPABILITY: Browser URL Monitoring
+# ==============================================================================
+
+cap:BrowserURLCapability
+    a :Capability ;
+    rdfs:label "Browser URL Monitoring"@en ;
+    :description "Capability to read the active URL from supported browsers (Safari, Chrome) using AppleScript/Accessibility. Returns full URL of the frontmost tab."@en ;
+
+    :pyobjcSymbol "ScriptingBridge.SBApplication"@en ;
+    :sourceFramework cap:CocoaFramework ;
+    :capabilityType cap:UICapabilityType ;
+
+    :requiresPermission "Accessibility" ;
+    :requiresPermission "Automation" ;
+
+    :hasSLO cap:LowLatencySLO ;
+    :hasSLO cap:AccuracySLO ;
+
+    :version "1.0.0"@en ;
+    :createdAt "2025-11-24T00:00:00Z"^^xsd:dateTime ;
+    :deprecated false ;
+
+    skos:note "Browser-specific implementation required; not all browsers support programmatic URL access."@en ;
+
+    skos:example """
+    # Example output: 'https://github.com/username/repo/pull/123'
+    # Parse to extract domain, path, and context
+    """@en .
+
+# ==============================================================================
+# CAPABILITY: Calendar Event Access
+# ==============================================================================
+
+cap:CalendarEventCapability
+    a :Capability ;
+    rdfs:label "Calendar Event Access"@en ;
+    :description "Capability to read calendar events from the macOS Calendar app using EventKit. Returns event details including title, start/end times, attendees, and location."@en ;
+
+    :pyobjcSymbol "EventKit.EKEventStore"@en ;
+    :sourceFramework cap:EventKitFramework ;
+    :capabilityType cap:DataCapabilityType ;
+
+    :requiresPermission "Calendar" ;
+
+    :hasSLO cap:LowLatencySLO ;
+    :hasSLO cap:HighAvailabilitySLO ;
+
+    :version "1.0.0"@en ;
+    :createdAt "2025-11-24T00:00:00Z"^^xsd:dateTime ;
+    :deprecated false ;
+
+    skos:example """
+    # Returns EKEvent objects with properties:
+    # - title: 'Weekly Standup'
+    # - startDate: 2025-11-24T10:00:00Z
+    # - endDate: 2025-11-24T10:30:00Z
+    # - attendees: [EKParticipant, ...]
+    """@en .
+
+# ==============================================================================
+# CAPABILITY: Keyboard Monitoring
+# ==============================================================================
+
+cap:KeyboardMonitoringCapability
+    a :Capability ;
+    rdfs:label "Keyboard Monitoring"@en ;
+    :description "Capability to monitor keyboard events (keystrokes, modifiers) using Quartz Event Services. Can count keystrokes and detect modifier key states."@en ;
+
+    :pyobjcSymbol "Quartz.CGEventTapCreate"@en ;
+    :sourceFramework cap:CoreGraphicsFramework ;
+    :capabilityType cap:InputCapabilityType ;
+
+    :requiresPermission "Accessibility" ;
+
+    :hasSLO cap:RealtimeSLO ;
+    :hasSLO cap:HighThroughputSLO ;
+
+    :version "1.0.0"@en ;
+    :createdAt "2025-11-24T00:00:00Z"^^xsd:dateTime ;
+    :deprecated false ;
+
+    skos:note "Privacy-sensitive; should aggregate counts rather than capture actual keystrokes."@en ;
+
+    skos:example """
+    # Can detect:
+    # - Keystroke events (not content)
+    # - Modifier keys (Cmd, Shift, Option, Control)
+    # - Typing rate/patterns
+    """@en .
+
+# ==============================================================================
+# CAPABILITY: Mouse Activity Monitoring
+# ==============================================================================
+
+cap:MouseActivityCapability
+    a :Capability ;
+    rdfs:label "Mouse Activity Monitoring"@en ;
+    :description "Capability to monitor mouse events (clicks, movement, scrolling) using Quartz Event Services. Useful for detecting user activity and engagement."@en ;
+
+    :pyobjcSymbol "Quartz.CGEventTapCreate"@en ;
+    :sourceFramework cap:CoreGraphicsFramework ;
+    :capabilityType cap:InputCapabilityType ;
+
+    :requiresPermission "Accessibility" ;
+
+    :hasSLO cap:RealtimeSLO ;
+    :hasSLO cap:HighThroughputSLO ;
+
+    :version "1.0.0"@en ;
+    :createdAt "2025-11-24T00:00:00Z"^^xsd:dateTime ;
+    :deprecated false ;
+
+    skos:example """
+    # Can detect:
+    # - Click events (left, right, middle)
+    # - Mouse movement distance
+    # - Scroll events
+    """@en .
+
+# ==============================================================================
+# CAPABILITY: Running Applications List
+# ==============================================================================
+
+cap:RunningApplicationsCapability
+    a :Capability ;
+    rdfs:label "Running Applications List"@en ;
+    :description "Capability to enumerate all running applications using NSWorkspace. Returns list of bundle IDs, names, and PIDs for all active apps."@en ;
+
+    :pyobjcSymbol "Cocoa.NSWorkspace.sharedWorkspace.runningApplications"@en ;
+    :sourceFramework cap:CocoaFramework ;
+    :capabilityType cap:SystemCapabilityType ;
+    :capabilityType cap:ProcessCapabilityType ;
+
+    # No special permissions required for basic process listing
+
+    :hasSLO cap:LowLatencySLO ;
+    :hasSLO cap:AccuracySLO ;
+
+    :version "1.0.0"@en ;
+    :createdAt "2025-11-24T00:00:00Z"^^xsd:dateTime ;
+    :deprecated false ;
+
+    skos:example """
+    # Returns array of NSRunningApplication objects:
+    # - bundleIdentifier: 'com.apple.Safari'
+    # - localizedName: 'Safari'
+    # - processIdentifier: 12345
+    # - isActive: true/false
+    """@en .
+
+# ==============================================================================
+# CAPABILITY: Screen Content Access
+# ==============================================================================
+
+cap:ScreenContentCapability
+    a :Capability ;
+    rdfs:label "Screen Content Access"@en ;
+    :description "Capability to capture screen content using Screen Recording APIs. Can take screenshots or read screen regions for OCR/analysis."@en ;
+
+    :pyobjcSymbol "Quartz.CGWindowListCreateImage"@en ;
+    :sourceFramework cap:CoreGraphicsFramework ;
+    :capabilityType cap:UICapabilityType ;
+
+    :requiresPermission "ScreenRecording" ;
+
+    :hasSLO cap:LowLatencySLO ;
+
+    :version "1.0.0"@en ;
+    :createdAt "2025-11-24T00:00:00Z"^^xsd:dateTime ;
+    :deprecated false ;
+
+    skos:note "Privacy-sensitive; use sparingly and with explicit user consent."@en ;
+
+    skos:example """
+    # Can capture:
+    # - Full screen images
+    # - Specific window content
+    # - Bounded screen regions
+    """@en .
+
+# ==============================================================================
+# CAPABILITY: Process Execution Monitoring
+# ==============================================================================
+
+cap:ProcessExecutionCapability
+    a :Capability ;
+    rdfs:label "Process Execution Monitoring"@en ;
+    :description "Capability to monitor process execution events using Endpoint Security framework. Detects process launches, terminations, and can track specific executables (e.g., git, npm)."@en ;
+
+    :pyobjcSymbol "EndpointSecurity.es_new_client"@en ;
+    # Note: ES framework may require custom PyObjC bindings
+    :capabilityType cap:ProcessCapabilityType ;
+    :capabilityType cap:SystemCapabilityType ;
+
+    :requiresPermission "FullDiskAccess" ;
+
+    :hasSLO cap:RealtimeSLO ;
+    :hasSLO cap:HighThroughputSLO ;
+
+    :version "1.0.0"@en ;
+    :createdAt "2025-11-24T00:00:00Z"^^xsd:dateTime ;
+    :deprecated false ;
+
+    skos:note "Requires System Extension with Endpoint Security entitlements."@en ;
+
+    skos:example """
+    # Can detect:
+    # - Process launches: 'git commit -m \"message\"'
+    # - Process terminations
+    # - Parent-child process relationships
+    """@en .
+
+# ==============================================================================
+# CAPABILITY: Notification Monitoring
+# ==============================================================================
+
+cap:NotificationMonitoringCapability
+    a :Capability ;
+    rdfs:label "Notification Monitoring"@en ;
+    :description "Capability to observe system and application notifications using NSDistributedNotificationCenter. Can track notification frequency and sources."@en ;
+
+    :pyobjcSymbol "Cocoa.NSDistributedNotificationCenter"@en ;
+    :sourceFramework cap:CocoaFramework ;
+    :capabilityType cap:UICapabilityType ;
+    :capabilityType cap:SystemCapabilityType ;
+
+    # No special permissions required for observation
+
+    :hasSLO cap:RealtimeSLO ;
+    :hasSLO cap:HighThroughputSLO ;
+
+    :version "1.0.0"@en ;
+    :createdAt "2025-11-24T00:00:00Z"^^xsd:dateTime ;
+    :deprecated false ;
+
+    skos:example """
+    # Can observe:
+    # - Application notifications (Slack message, email arrival)
+    # - System notifications (network change, sleep/wake)
+    # - Notification frequency patterns
+    """@en .
+
+# ==============================================================================
+# CAPABILITY: Idle Time Detection
+# ==============================================================================
+
+cap:IdleTimeCapability
+    a :Capability ;
+    rdfs:label "Idle Time Detection"@en ;
+    :description "Capability to detect user idle time (time since last keyboard/mouse input) using Quartz. Useful for detecting breaks and away-from-keyboard periods."@en ;
+
+    :pyobjcSymbol "Quartz.CGEventSourceSecondsSinceLastEventType"@en ;
+    :sourceFramework cap:CoreGraphicsFramework ;
+    :capabilityType cap:SystemCapabilityType ;
+
+    # No special permissions required
+
+    :hasSLO cap:RealtimeSLO ;
+    :hasSLO cap:AccuracySLO ;
+
+    :version "1.0.0"@en ;
+    :createdAt "2025-11-24T00:00:00Z"^^xsd:dateTime ;
+    :deprecated false ;
+
+    skos:example """
+    # Returns seconds since last user input:
+    # - 0.5 seconds (actively typing)
+    # - 300 seconds (5 min idle, possibly reading)
+    # - 1800 seconds (30 min idle, likely away)
+    """@en .
+
+# ==============================================================================
+# CAPABILITY: Network Activity Monitoring
+# ==============================================================================
+
+cap:NetworkActivityCapability
+    a :Capability ;
+    rdfs:label "Network Activity Monitoring"@en ;
+    :description "Capability to monitor network activity and connections using Network Extension framework. Can track bandwidth usage per application and detect network state changes."@en ;
+
+    :capabilityType cap:SystemCapabilityType ;
+
+    :requiresPermission "FullDiskAccess" ;
+
+    :hasSLO cap:RealtimeSLO ;
+    :hasSLO cap:HighThroughputSLO ;
+
+    :version "1.0.0"@en ;
+    :createdAt "2025-11-24T00:00:00Z"^^xsd:dateTime ;
+    :deprecated false ;
+
+    skos:note "Requires Network Extension entitlements and System Extension."@en ;
+
+    skos:example """
+    # Can track:
+    # - Bytes sent/received per application
+    # - Active network connections
+    # - Network state (WiFi, Ethernet, offline)
+    """@en .

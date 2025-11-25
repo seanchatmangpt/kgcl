@@ -1,0 +1,465 @@
+@prefix : <http://kgcl.dev/ontology/core#> .
+@prefix ex: <http://kgcl.dev/ontology/examples#> .
+@prefix ft: <http://kgcl.dev/ontology/features#> .
+@prefix cap: <http://kgcl.dev/ontology/capabilities#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://kgcl.dev/ontology/examples#>
+    a owl:Ontology ;
+    rdfs:label "KGC Ontology Examples"@en ;
+    rdfs:comment "Complete instance data examples demonstrating usage patterns for the KGC ontology."@en ;
+    owl:versionInfo "1.0.0" ;
+    owl:imports <http://kgcl.dev/ontology/core#> ,
+                <http://kgcl.dev/ontology/features#> ,
+                <http://kgcl.dev/ontology/capabilities#> .
+
+# ==============================================================================
+# EXAMPLE 1: Application Monitoring Feature Instance
+# ==============================================================================
+
+# Application entity
+ex:VSCodeApp
+    a :App ;
+    :appBundleId "com.microsoft.VSCode" ;
+    :appName "Visual Studio Code" ;
+    :appCategory ex:IDECategory ;
+    rdfs:label "Visual Studio Code"@en .
+
+ex:IDECategory
+    a :AppCategory ;
+    rdfs:label "IDE"@en .
+
+# Observation window (1 hour: 14:00-15:00)
+ex:Window_20251124_1400
+    a :ObservationWindow ;
+    :startTime "2025-11-24T14:00:00Z"^^xsd:dateTime ;
+    :endTime "2025-11-24T15:00:00Z"^^xsd:dateTime ;
+    :duration "PT1H"^^xsd:duration ;
+    rdfs:label "Observation Window 2025-11-24 14:00-15:00"@en .
+
+# Raw observations within the window
+ex:Obs_001
+    a :Observation ;
+    rdfs:label "VS Code active at 14:05" ;
+    :timestamp "2025-11-24T14:05:00Z"^^xsd:dateTime ;
+    :duration "PT5M"^^xsd:duration ;
+    ex:appBundleId "com.microsoft.VSCode" ;
+    ex:windowTitle "index.html - Visual Studio Code" .
+
+ex:Obs_002
+    a :Observation ;
+    rdfs:label "VS Code active at 14:10" ;
+    :timestamp "2025-11-24T14:10:00Z"^^xsd:dateTime ;
+    :duration "PT12M"^^xsd:duration ;
+    ex:appBundleId "com.microsoft.VSCode" ;
+    ex:windowTitle "styles.css - Visual Studio Code" .
+
+ex:Obs_003
+    a :Observation ;
+    rdfs:label "VS Code active at 14:25" ;
+    :timestamp "2025-11-24T14:25:00Z"^^xsd:dateTime ;
+    :duration "PT28M"^^xsd:duration ;
+    ex:appBundleId "com.microsoft.VSCode" ;
+    ex:windowTitle "app.js - Visual Studio Code" .
+
+# Feature instance computed from observations
+ex:FeatureInstance_TimeInVSCode_001
+    a :FeatureInstance ;
+    rdfs:label "Time in VS Code (14:00-15:00)" ;
+    :instanceOf ft:TimeInAppTemplate ;
+    :hasValue 45.0 ;  # 5 + 12 + 28 = 45 minutes
+    :observationWindow ex:Window_20251124_1400 ;
+    :computedFrom ex:Obs_001, ex:Obs_002, ex:Obs_003 ;
+    :confidence 0.98 ;
+    :timestamp "2025-11-24T15:00:01Z"^^xsd:dateTime ;
+    ex:parameterBinding [
+        :parameterName "appBundleId" ;
+        :parameterValue "com.microsoft.VSCode" ;
+    ] .
+
+# ==============================================================================
+# EXAMPLE 2: Application Switching Pattern
+# ==============================================================================
+
+# Multiple applications
+ex:SlackApp
+    a :App ;
+    :appBundleId "com.tinyspeck.slackmacgap" ;
+    :appName "Slack" ;
+    :appCategory ex:CommunicationCategory .
+
+ex:SafariApp
+    a :App ;
+    :appBundleId "com.apple.Safari" ;
+    :appName "Safari" ;
+    :appCategory ex:BrowserCategory .
+
+ex:CommunicationCategory
+    a :AppCategory ;
+    rdfs:label "Communication" .
+
+ex:BrowserCategory
+    a :AppCategory ;
+    rdfs:label "Browser" .
+
+# Observation window
+ex:Window_20251124_1500
+    a :ObservationWindow ;
+    :startTime "2025-11-24T15:00:00Z"^^xsd:dateTime ;
+    :endTime "2025-11-24T16:00:00Z"^^xsd:dateTime ;
+    :duration "PT1H"^^xsd:duration .
+
+# App switch observations
+ex:Switch_001
+    a :Observation ;
+    rdfs:label "Switch from VS Code to Slack" ;
+    :timestamp "2025-11-24T15:10:00Z"^^xsd:dateTime ;
+    ex:fromApp "com.microsoft.VSCode" ;
+    ex:toApp "com.tinyspeck.slackmacgap" .
+
+ex:Switch_002
+    a :Observation ;
+    rdfs:label "Switch from Slack to Safari" ;
+    :timestamp "2025-11-24T15:15:00Z"^^xsd:dateTime ;
+    ex:fromApp "com.tinyspeck.slackmacgap" ;
+    ex:toApp "com.apple.Safari" .
+
+ex:Switch_003
+    a :Observation ;
+    rdfs:label "Switch from Safari to VS Code" ;
+    :timestamp "2025-11-24T15:20:00Z"^^xsd:dateTime ;
+    ex:fromApp "com.apple.Safari" ;
+    ex:toApp "com.microsoft.VSCode" .
+
+ex:Switch_004
+    a :Observation ;
+    rdfs:label "Switch from VS Code to Slack" ;
+    :timestamp "2025-11-24T15:35:00Z"^^xsd:dateTime ;
+    ex:fromApp "com.microsoft.VSCode" ;
+    ex:toApp "com.tinyspeck.slackmacgap" .
+
+# Feature instance for switch count
+ex:FeatureInstance_SwitchCount_001
+    a :FeatureInstance ;
+    rdfs:label "App Switch Count (15:00-16:00)" ;
+    :instanceOf ft:SwitchCountTemplate ;
+    :hasValue 4 ;  # 4 switches
+    :observationWindow ex:Window_20251124_1500 ;
+    :computedFrom ex:Switch_001, ex:Switch_002, ex:Switch_003, ex:Switch_004 ;
+    :confidence 1.0 ;
+    :timestamp "2025-11-24T16:00:01Z"^^xsd:dateTime .
+
+# ==============================================================================
+# EXAMPLE 3: Browser Domain Visits
+# ==============================================================================
+
+# Domain entities
+ex:GitHubDomain
+    a :Domain ;
+    :domainName "github.com" ;
+    :domainCategory ex:DevelopmentDomainCategory .
+
+ex:StackOverflowDomain
+    a :Domain ;
+    :domainName "stackoverflow.com" ;
+    :domainCategory ex:DevelopmentDomainCategory .
+
+ex:DevelopmentDomainCategory
+    a :DomainCategory ;
+    rdfs:label "Development" .
+
+# Observation window
+ex:Window_20251124_1600
+    a :ObservationWindow ;
+    :startTime "2025-11-24T16:00:00Z"^^xsd:dateTime ;
+    :endTime "2025-11-24T17:00:00Z"^^xsd:dateTime ;
+    :duration "PT1H"^^xsd:duration .
+
+# URL observations
+ex:URLObs_001
+    a :Observation ;
+    rdfs:label "GitHub visit 1" ;
+    :timestamp "2025-11-24T16:05:00Z"^^xsd:dateTime ;
+    ex:url "https://github.com/user/repo1" ;
+    ex:domain "github.com" ;
+    ex:browserApp "com.apple.Safari" .
+
+ex:URLObs_002
+    a :Observation ;
+    rdfs:label "GitHub visit 2" ;
+    :timestamp "2025-11-24T16:18:00Z"^^xsd:dateTime ;
+    ex:url "https://github.com/user/repo2/pull/42" ;
+    ex:domain "github.com" ;
+    ex:browserApp "com.apple.Safari" .
+
+ex:URLObs_003
+    a :Observation ;
+    rdfs:label "StackOverflow visit" ;
+    :timestamp "2025-11-24T16:25:00Z"^^xsd:dateTime ;
+    ex:url "https://stackoverflow.com/questions/12345" ;
+    ex:domain "stackoverflow.com" ;
+    ex:browserApp "com.apple.Safari" .
+
+ex:URLObs_004
+    a :Observation ;
+    rdfs:label "GitHub visit 3" ;
+    :timestamp "2025-11-24T16:40:00Z"^^xsd:dateTime ;
+    ex:url "https://github.com/org/project/issues/99" ;
+    ex:domain "github.com" ;
+    ex:browserApp "com.apple.Safari" .
+
+# Feature instance for GitHub visits
+ex:FeatureInstance_GitHubVisits_001
+    a :FeatureInstance ;
+    rdfs:label "GitHub Visit Count (16:00-17:00)" ;
+    :instanceOf ft:DomainVisitCountTemplate ;
+    :hasValue 3 ;  # 3 visits to github.com
+    :observationWindow ex:Window_20251124_1600 ;
+    :computedFrom ex:URLObs_001, ex:URLObs_002, ex:URLObs_004 ;
+    :confidence 0.95 ;
+    :timestamp "2025-11-24T17:00:01Z"^^xsd:dateTime ;
+    ex:parameterBinding [
+        :parameterName "domainName" ;
+        :parameterValue "github.com" ;
+    ] .
+
+# Feature instance for unique domains
+ex:FeatureInstance_UniqueDomains_001
+    a :FeatureInstance ;
+    rdfs:label "Unique Domains Visited (16:00-17:00)" ;
+    :instanceOf ft:UniqueDomainsVisitedTemplate ;
+    :hasValue 2 ;  # github.com and stackoverflow.com
+    :observationWindow ex:Window_20251124_1600 ;
+    :computedFrom ex:URLObs_001, ex:URLObs_002, ex:URLObs_003, ex:URLObs_004 ;
+    :confidence 0.95 ;
+    :timestamp "2025-11-24T17:00:01Z"^^xsd:dateTime .
+
+# ==============================================================================
+# EXAMPLE 4: Calendar Events and Busy Time
+# ==============================================================================
+
+# Observation window (full workday)
+ex:Window_20251124_Workday
+    a :ObservationWindow ;
+    :startTime "2025-11-24T09:00:00Z"^^xsd:dateTime ;
+    :endTime "2025-11-24T17:00:00Z"^^xsd:dateTime ;
+    :duration "PT8H"^^xsd:duration ;
+    rdfs:label "Workday 2025-11-24" .
+
+# Calendar event observations
+ex:CalEvent_001
+    a :Observation ;
+    rdfs:label "Daily Standup" ;
+    :timestamp "2025-11-24T09:00:00Z"^^xsd:dateTime ;
+    :startTime "2025-11-24T09:00:00Z"^^xsd:dateTime ;
+    :endTime "2025-11-24T09:30:00Z"^^xsd:dateTime ;
+    :duration "PT30M"^^xsd:duration ;
+    ex:eventTitle "Daily Standup" ;
+    ex:eventType "Meeting" .
+
+ex:CalEvent_002
+    a :Observation ;
+    rdfs:label "Design Review" ;
+    :timestamp "2025-11-24T11:00:00Z"^^xsd:dateTime ;
+    :startTime "2025-11-24T11:00:00Z"^^xsd:dateTime ;
+    :endTime "2025-11-24T12:00:00Z"^^xsd:dateTime ;
+    :duration "PT1H"^^xsd:duration ;
+    ex:eventTitle "Design Review - New Feature" ;
+    ex:eventType "Meeting" .
+
+ex:CalEvent_003
+    a :Observation ;
+    rdfs:label "1:1 with Manager" ;
+    :timestamp "2025-11-24T14:00:00Z"^^xsd:dateTime ;
+    :startTime "2025-11-24T14:00:00Z"^^xsd:dateTime ;
+    :endTime "2025-11-24T14:30:00Z"^^xsd:dateTime ;
+    :duration "PT30M"^^xsd:duration ;
+    ex:eventTitle "1:1 - Weekly Sync" ;
+    ex:eventType "Meeting" .
+
+# Feature instance for busy hours
+ex:FeatureInstance_CalendarBusy_001
+    a :FeatureInstance ;
+    rdfs:label "Calendar Busy Hours (Workday)" ;
+    :instanceOf ft:CalendarBusyHoursTemplate ;
+    :hasValue 2.0 ;  # 0.5 + 1.0 + 0.5 = 2.0 hours
+    :observationWindow ex:Window_20251124_Workday ;
+    :computedFrom ex:CalEvent_001, ex:CalEvent_002, ex:CalEvent_003 ;
+    :confidence 1.0 ;
+    :timestamp "2025-11-24T17:00:01Z"^^xsd:dateTime .
+
+# Feature instance for meeting fragmentation
+ex:FeatureInstance_MeetingFragmentation_001
+    a :FeatureInstance ;
+    rdfs:label "Meeting Fragmentation (Workday)" ;
+    :instanceOf ft:MeetingFragmentationTemplate ;
+    :hasValue 3 ;  # 3 separate meetings
+    :observationWindow ex:Window_20251124_Workday ;
+    :computedFrom ex:CalEvent_001, ex:CalEvent_002, ex:CalEvent_003 ;
+    :confidence 1.0 ;
+    :timestamp "2025-11-24T17:00:01Z"^^xsd:dateTime .
+
+# ==============================================================================
+# EXAMPLE 5: Deep Work Session Detection
+# ==============================================================================
+
+# Extended observation window for deep work (4 hours)
+ex:Window_20251124_DeepWork
+    a :ObservationWindow ;
+    :startTime "2025-11-24T09:00:00Z"^^xsd:dateTime ;
+    :endTime "2025-11-24T13:00:00Z"^^xsd:dateTime ;
+    :duration "PT4H"^^xsd:duration ;
+    rdfs:label "Deep Work Window 09:00-13:00" .
+
+# Continuous focus observations
+ex:DeepWorkObs_001
+    a :Observation ;
+    rdfs:label "VS Code focus session 1" ;
+    :timestamp "2025-11-24T09:30:00Z"^^xsd:dateTime ;
+    :duration "PT72M"^^xsd:duration ;  # 72 minutes uninterrupted
+    ex:appBundleId "com.microsoft.VSCode" ;
+    ex:interruptionCount 0 .
+
+ex:DeepWorkObs_002
+    a :Observation ;
+    rdfs:label "Brief Slack check" ;
+    :timestamp "2025-11-24T10:42:00Z"^^xsd:dateTime ;
+    :duration "PT5M"^^xsd:duration ;
+    ex:appBundleId "com.tinyspeck.slackmacgap" .
+
+ex:DeepWorkObs_003
+    a :Observation ;
+    rdfs:label "VS Code focus session 2" ;
+    :timestamp "2025-11-24T10:47:00Z"^^xsd:dateTime ;
+    :duration "PT45M"^^xsd:duration ;
+    ex:appBundleId "com.microsoft.VSCode" ;
+    ex:interruptionCount 0 .
+
+# Feature instance for deep work session
+ex:FeatureInstance_DeepWork_001
+    a :FeatureInstance ;
+    rdfs:label "Deep Work Session (09:00-13:00)" ;
+    :instanceOf ft:DeepWorkSessionTemplate ;
+    :hasValue 72.0 ;  # Longest uninterrupted session = 72 minutes
+    :observationWindow ex:Window_20251124_DeepWork ;
+    :computedFrom ex:DeepWorkObs_001, ex:DeepWorkObs_002, ex:DeepWorkObs_003 ;
+    :confidence 0.92 ;
+    :timestamp "2025-11-24T13:00:01Z"^^xsd:dateTime ;
+    ex:parameterBinding [
+        :parameterName "minDuration" ;
+        :parameterValue "PT30M"^^xsd:duration ;
+    ] .
+
+# ==============================================================================
+# EXAMPLE 6: Event Detection from Feature Pattern
+# ==============================================================================
+
+# Event pattern definition
+ex:DeepWorkStatePattern
+    a :EventPattern ;
+    rdfs:label "Deep Work State Entry Pattern" ;
+    :description "Detects entry into deep work state when sustained focus exceeds 60 minutes with minimal interruptions." ;
+    ex:minDeepWorkDuration 60.0 ;  # minutes
+    ex:maxInterruptionDuration 5.0 ;  # minutes
+    ex:requiredAppCategories "IDE" .
+
+# Detected event
+ex:Event_DeepWorkEntry_001
+    a :Event ;
+    rdfs:label "Deep Work State Entered" ;
+    :eventType "StateTransition" ;
+    :severity "info" ;
+    :timestamp "2025-11-24T10:42:00Z"^^xsd:dateTime ;
+    :detectedBy ex:DeepWorkStatePattern ;
+    :triggeredBy ex:FeatureInstance_DeepWork_001 ;
+    ex:detectionConfidence 0.92 ;
+    ex:stateFrom "Regular Work" ;
+    ex:stateTo "Deep Work" .
+
+# ==============================================================================
+# EXAMPLE 7: Keyboard Activity Rate
+# ==============================================================================
+
+ex:Window_20251124_1530
+    a :ObservationWindow ;
+    :startTime "2025-11-24T15:30:00Z"^^xsd:dateTime ;
+    :endTime "2025-11-24T15:45:00Z"^^xsd:dateTime ;
+    :duration "PT15M"^^xsd:duration ;
+    rdfs:label "15-minute window 15:30-15:45" .
+
+# Keyboard observations (aggregated per minute)
+ex:KeyboardObs_001
+    a :Observation ;
+    rdfs:label "Keyboard activity summary" ;
+    :timestamp "2025-11-24T15:45:00Z"^^xsd:dateTime ;
+    ex:totalKeystrokes 450 ;
+    ex:windowDuration "PT15M"^^xsd:duration .
+
+# Feature instance for keyboard activity rate
+ex:FeatureInstance_KeyboardRate_001
+    a :FeatureInstance ;
+    rdfs:label "Keyboard Activity Rate (15:30-15:45)" ;
+    :instanceOf ft:KeyboardActivityRateTemplate ;
+    :hasValue 30.0 ;  # 450 keystrokes / 15 minutes = 30 per minute
+    :observationWindow ex:Window_20251124_1530 ;
+    :computedFrom ex:KeyboardObs_001 ;
+    :confidence 0.99 ;
+    :timestamp "2025-11-24T15:45:01Z"^^xsd:dateTime .
+
+# ==============================================================================
+# EXAMPLE 8: Complete Feature Chain with Multiple Relationships
+# ==============================================================================
+
+# This example shows the full chain from capability -> observations -> features -> event
+
+# 1. Capability (already defined in capabilities.ttl)
+# cap:ActiveApplicationCapability
+
+# 2. Feature Template (already defined in features.ttl)
+# ft:TimeInAppTemplate
+
+# 3. Observation Window
+ex:CompleteChainWindow
+    a :ObservationWindow ;
+    :startTime "2025-11-24T18:00:00Z"^^xsd:dateTime ;
+    :endTime "2025-11-24T19:00:00Z"^^xsd:dateTime ;
+    :duration "PT1H"^^xsd:duration .
+
+# 4. Observations collected via capability
+ex:ChainObs_001
+    a :Observation ;
+    :timestamp "2025-11-24T18:00:00Z"^^xsd:dateTime ;
+    ex:collectedVia cap:ActiveApplicationCapability ;
+    ex:appBundleId "com.microsoft.VSCode" ;
+    :duration "PT60M"^^xsd:duration .
+
+# 5. Feature Instance computed from observations
+ex:ChainFeature_001
+    a :FeatureInstance ;
+    :instanceOf ft:TimeInAppTemplate ;
+    :hasValue 60.0 ;
+    :observationWindow ex:CompleteChainWindow ;
+    :computedFrom ex:ChainObs_001 ;
+    :timestamp "2025-11-24T19:00:01Z"^^xsd:dateTime .
+
+# 6. Event Pattern
+ex:HighProductivityPattern
+    a :EventPattern ;
+    rdfs:label "High Productivity Pattern" ;
+    ex:minContinuousFocusTime 60.0 .
+
+# 7. Event detected from feature
+ex:ChainEvent_001
+    a :Event ;
+    rdfs:label "High Productivity Hour" ;
+    :eventType "Pattern" ;
+    :severity "info" ;
+    :timestamp "2025-11-24T19:00:01Z"^^xsd:dateTime ;
+    :detectedBy ex:HighProductivityPattern ;
+    :triggeredBy ex:ChainFeature_001 .
+
+# This demonstrates the complete flow:
+# Capability -> Observation -> FeatureInstance -> Event

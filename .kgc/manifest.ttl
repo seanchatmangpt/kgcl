@@ -1,0 +1,101 @@
+@prefix kgc: <urn:kgc:> .
+@prefix schema: <http://schema.org/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:project:kgcl:osx-personal-fabric>
+    a kgc:KgcModule ;
+    schema:name "macOS/iOS Personal Fabric - KGCL" ;
+    schema:description "KGC-driven personal information and productivity system using RDF, PyObjC for macOS/iOS data, and Lean Six Sigma principles" ;
+    schema:version "1.0"^^xsd:string ;
+
+    # RDF Components
+    kgc:ownsOntology <ontology.ttl> ;
+    kgc:ownsTypes <types.ttl> ;
+    kgc:ownsInvariants <invariants.shacl.ttl> ;
+    kgc:ownsHooks <hooks.ttl> ;
+    kgc:ownsIngest <apple.ingest.ttl> ;
+
+    # Projection Configuration
+    kgc:hasProjectionConfig <projections/> ;
+    kgc:hasProjection [
+        kgc:name "KGCT CLI" ;
+        kgc:template "projections/cli.py.j2" ;
+        kgc:outputPath "personal_kgct_cli.py"
+    ] ;
+    kgc:hasProjection [
+        kgc:name "Agenda Documentation" ;
+        kgc:template "projections/agenda.md.j2" ;
+        kgc:outputPath "docs/agenda.md"
+    ] ;
+    kgc:hasProjection [
+        kgc:name "Architecture Diagrams" ;
+        kgc:template "projections/diagrams.njk" ;
+        kgc:outputPath "docs/diagrams.html"
+    ] ;
+
+    # Planes
+    kgc:participatesInPlane kgc:OntologyPlane ;
+    kgc:participatesInPlane kgc:TypePlane ;
+    kgc:participatesInPlane kgc:InvariantPlane ;
+    kgc:participatesInPlane kgc:HookPlane ;
+    kgc:participatesInPlane kgc:ProjectionPlane ;
+
+    # Capabilities
+    kgc:hasCapability kgc:AppleIngest ;
+    kgc:hasCapability kgc:CLIGeneration ;
+    kgc:hasCapability kgc:DocGeneration ;
+    kgc:hasCapability kgc:DiagramGeneration ;
+    kgc:hasCapability kgc:SHACLValidation ;
+
+    # Responsibility boundary
+    kgc:responsibleFor "Calendar events, reminders, mail metadata, file artifacts"^^xsd:string ;
+    kgc:integratesWith "iCloud, EventKit, Reminders.app, Mail.app, Finder"^^xsd:string ;
+
+    # Lean metrics
+    kgc:metricLeadTime "minutes to hours"^^xsd:string ;
+    kgc:metricReworkRate "trending down"^^xsd:string ;
+    kgc:metricArtifactDrift "zero target"^^xsd:string ;
+    kgc:metricHandsOnTime "decreasing"^^xsd:string .
+
+# Planes
+kgc:OntologyPlane a kgc:Plane ;
+    rdfs:label "Ontology Plane" ;
+    rdfs:comment "Domain concepts, entities, and workflows" .
+
+kgc:TypePlane a kgc:Plane ;
+    rdfs:label "Type Plane" ;
+    rdfs:comment "Shapes, constraints, type definitions via SHACL" .
+
+kgc:InvariantPlane a kgc:Plane ;
+    rdfs:label "Invariant Plane" ;
+    rdfs:comment "Quality constraints and data integrity rules" .
+
+kgc:HookPlane a kgc:Plane ;
+    rdfs:label "Hook Plane" ;
+    rdfs:comment "Knowledge hooks: automations triggered by change" .
+
+kgc:ProjectionPlane a kgc:Plane ;
+    rdfs:label "Projection Plane" ;
+    rdfs:comment "Generated artifacts: CLI, docs, diagrams" .
+
+# Capabilities
+kgc:AppleIngest a kgc:Capability ;
+    rdfs:label "Apple Ingest" ;
+    rdfs:comment "Ingest macOS/iOS data via PyObjC" .
+
+kgc:CLIGeneration a kgc:Capability ;
+    rdfs:label "CLI Generation" ;
+    rdfs:comment "Generate Typer KGCT console from RDF" .
+
+kgc:DocGeneration a kgc:Capability ;
+    rdfs:label "Doc Generation" ;
+    rdfs:comment "Generate documentation artifacts from RDF" .
+
+kgc:DiagramGeneration a kgc:Capability ;
+    rdfs:label "Diagram Generation" ;
+    rdfs:comment "Generate diagrams and visualizations from RDF" .
+
+kgc:SHACLValidation a kgc:Capability ;
+    rdfs:label "SHACL Validation" ;
+    rdfs:comment "Validate data against SHACL invariants" .

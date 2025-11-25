@@ -1,0 +1,398 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix apple: <urn:kgc:apple:> .
+@prefix schema: <http://schema.org/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# ============================================================================
+# Calendar Event Shape (schema:Event)
+# ============================================================================
+# SHACL validation for calendar events ingested from EventKit
+# Uses standard schema.org properties (name, startDate, endDate, attendee, location)
+
+schema:EventShape a sh:NodeShape ;
+    sh:targetClass schema:Event ;
+    sh:name "Calendar Event" ;
+    sh:description "Valid calendar event with required fields" ;
+
+    # Required: Title/Name (schema.org standard)
+    sh:property [
+        sh:path schema:name ;
+        sh:name "Event Title" ;
+        sh:description "Event must have a non-empty title" ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:minLength 1 ;
+    ] ;
+
+    # Required: Start Date (schema.org standard)
+    sh:property [
+        sh:path schema:startDate ;
+        sh:name "Start Time" ;
+        sh:description "Event must have a start date/time" ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:dateTime ;
+    ] ;
+
+    # Required: End Date (schema.org standard)
+    sh:property [
+        sh:path schema:endDate ;
+        sh:name "End Time" ;
+        sh:description "Event must have an end date/time" ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:dateTime ;
+    ] ;
+
+    # Optional: Attendee (schema.org standard)
+    sh:property [
+        sh:path schema:attendee ;
+        sh:name "Attendees" ;
+        sh:description "People invited to the event" ;
+        sh:node schema:PersonShape ;
+    ] ;
+
+    # Optional: Location (schema.org standard)
+    sh:property [
+        sh:path schema:location ;
+        sh:name "Location" ;
+        sh:description "Physical or virtual location" ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    # Optional: Description (schema.org standard)
+    sh:property [
+        sh:path schema:description ;
+        sh:name "Description" ;
+        sh:description "Event details and notes" ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    # Optional: Calendar grouping (apple:calendar)
+    sh:property [
+        sh:path apple:calendar ;
+        sh:name "Calendar" ;
+        sh:description "Which calendar this belongs to" ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    # Optional: Keywords/Tags (schema.org standard)
+    sh:property [
+        sh:path schema:keywords ;
+        sh:name "Tags" ;
+        sh:description "Categories and tags for the event" ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    # Optional: Related files and tasks (apple custom)
+    sh:property [
+        sh:path apple:relatedFile ;
+        sh:name "Linked Files" ;
+        sh:description "Associated file artifacts" ;
+    ] ;
+
+    sh:property [
+        sh:path apple:relatedAction ;
+        sh:name "Linked Tasks" ;
+        sh:description "Associated tasks/reminders" ;
+    ] .
+
+# ============================================================================
+# Reminder/Task Shape (schema:Action)
+# ============================================================================
+# SHACL validation for tasks ingested from Reminders.app via EventKit
+# Uses standard schema.org properties (name, dueDate, actionStatus)
+
+schema:ActionShape a sh:NodeShape ;
+    sh:targetClass schema:Action ;
+    sh:name "Reminder/Task" ;
+    sh:description "Valid task/reminder with required fields" ;
+
+    # Required: Title/Name (schema.org standard)
+    sh:property [
+        sh:path schema:name ;
+        sh:name "Task Title" ;
+        sh:description "Task must have a non-empty title" ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:minLength 1 ;
+    ] ;
+
+    # Required: Action Status (schema.org standard)
+    # Valid values: https://schema.org/ActionStatusType
+    sh:property [
+        sh:path schema:actionStatus ;
+        sh:name "Status" ;
+        sh:description "Task must have a valid action status" ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in (
+            "http://schema.org/CompletedActionStatus"
+            "http://schema.org/FailedActionStatus"
+            "http://schema.org/PotentialActionStatus"
+        ) ;
+    ] ;
+
+    # Optional: Due Date (schema.org standard)
+    sh:property [
+        sh:path schema:dueDate ;
+        sh:name "Due Date" ;
+        sh:description "When task is due (for overdue detection)" ;
+        sh:datatype xsd:dateTime ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # Optional: Target collection (apple:list)
+    sh:property [
+        sh:path apple:list ;
+        sh:name "List" ;
+        sh:description "Which reminder list (Inbox, Work, Personal)" ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    # Optional: Keywords/Tags (schema.org standard)
+    sh:property [
+        sh:path schema:keywords ;
+        sh:name "Tags" ;
+        sh:description "Categories and labels for the task" ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    # Optional: Related documents (apple custom)
+    sh:property [
+        sh:path apple:relatedFile ;
+        sh:name "Linked Files" ;
+        sh:description "Associated file artifacts" ;
+    ] ;
+
+    sh:property [
+        sh:path apple:relatedEvent ;
+        sh:name "Linked Event" ;
+        sh:description "Associated calendar event" ;
+    ] ;
+
+    sh:property [
+        sh:path apple:relatedAction ;
+        sh:name "Linked Message" ;
+        sh:description "Associated email" ;
+    ] ;
+
+    # Optional: Task dependency (apple custom)
+    sh:property [
+        sh:path apple:dependsOn ;
+        sh:name "Depends On" ;
+        sh:description "Other tasks that must be done first" ;
+    ] .
+
+# ============================================================================
+# Mail Message Shape (schema:Message)
+# ============================================================================
+# SHACL validation for email metadata from Mail.app
+# Uses standard schema.org properties (name, author, recipient, dateReceived)
+
+schema:MessageShape a sh:NodeShape ;
+    sh:targetClass schema:Message ;
+    sh:name "Mail Message" ;
+    sh:description "Valid email metadata" ;
+
+    # Required: Subject (schema.org standard: name)
+    sh:property [
+        sh:path schema:name ;
+        sh:name "Subject" ;
+        sh:description "Email must have a subject" ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    # Required: From (schema.org standard: author as Person)
+    sh:property [
+        sh:path schema:author ;
+        sh:name "From" ;
+        sh:description "Email must have a sender" ;
+        sh:minCount 1 ;
+        sh:node schema:PersonShape ;
+    ] ;
+
+    # Required: Date Received (schema.org standard)
+    sh:property [
+        sh:path schema:dateReceived ;
+        sh:name "Date Received" ;
+        sh:description "Email must have a date" ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:dateTime ;
+    ] ;
+
+    # Optional: To Recipients (schema.org standard)
+    sh:property [
+        sh:path schema:recipient ;
+        sh:name "To" ;
+        sh:description "Recipients of the email" ;
+    ] ;
+
+    # Optional: Keywords/Flags (schema.org standard)
+    sh:property [
+        sh:path schema:keywords ;
+        sh:name "Flags/Labels" ;
+        sh:description "Message flags or labels" ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    # Optional: Related items (apple custom)
+    sh:property [
+        sh:path apple:relatedAction ;
+        sh:name "Linked Task" ;
+        sh:description "Associated reminder/task from email" ;
+    ] ;
+
+    sh:property [
+        sh:path apple:relatedEvent ;
+        sh:name "Linked Event" ;
+        sh:description "Associated calendar event" ;
+    ] .
+
+# ============================================================================
+# File Artifact Shape (schema:CreativeWork)
+# ============================================================================
+# SHACL validation for file metadata from Finder/Spotlight
+# Uses standard schema.org properties (name, url, dateModified, dateCreated, fileFormat)
+
+schema:CreativeWorkShape a sh:NodeShape ;
+    sh:targetClass schema:CreativeWork ;
+    sh:name "File Artifact" ;
+    sh:description "Valid file metadata" ;
+
+    # Required: Name (schema.org standard)
+    sh:property [
+        sh:path schema:name ;
+        sh:name "File Name" ;
+        sh:description "File must have a name" ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    # Required: Path/URL (schema.org standard)
+    sh:property [
+        sh:path schema:url ;
+        sh:name "File Path" ;
+        sh:description "File must have a path or URL" ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    # Optional: Modified Date (schema.org standard)
+    sh:property [
+        sh:path schema:dateModified ;
+        sh:name "Modified Date" ;
+        sh:description "When file was last modified" ;
+        sh:datatype xsd:dateTime ;
+    ] ;
+
+    # Optional: Created Date (schema.org standard)
+    sh:property [
+        sh:path schema:dateCreated ;
+        sh:name "Created Date" ;
+        sh:description "When file was created" ;
+        sh:datatype xsd:dateTime ;
+    ] ;
+
+    # Optional: File Format/Type (schema.org standard)
+    sh:property [
+        sh:path schema:fileFormat ;
+        sh:name "File Type" ;
+        sh:description "MIME type or file extension" ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    # Optional: Keywords/Tags (schema.org standard)
+    sh:property [
+        sh:path schema:keywords ;
+        sh:name "Tags" ;
+        sh:description "Finder tags or categories" ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    # Optional: Related items (apple custom)
+    sh:property [
+        sh:path apple:relatedAction ;
+        sh:name "Linked Tasks" ;
+        sh:description "Associated tasks/reminders" ;
+    ] ;
+
+    sh:property [
+        sh:path apple:relatedEvent ;
+        sh:name "Linked Events" ;
+        sh:description "Associated calendar events" ;
+    ] ;
+
+    sh:property [
+        sh:path apple:relatedAction ;
+        sh:name "Linked Messages" ;
+        sh:description "Associated emails" ;
+    ] .
+
+# ============================================================================
+# Focus Session Shape (apple:FocusSession extends schema:Event)
+# ============================================================================
+# SHACL validation for deep work blocks
+# Extends schema:Event with status and task linkages
+
+apple:FocusSessionShape a sh:NodeShape ;
+    sh:targetClass apple:FocusSession ;
+    sh:name "Focus Session" ;
+    sh:description "Valid deep work block with required context" ;
+
+    # Inherits from Event: schema:name, schema:startDate, schema:endDate
+    # (via sh:node to Event shape)
+
+    # Required: Start Date
+    sh:property [
+        sh:path schema:startDate ;
+        sh:name "Start Time" ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:dateTime ;
+    ] ;
+
+    # Required: End Date
+    sh:property [
+        sh:path schema:endDate ;
+        sh:name "End Time" ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:dateTime ;
+    ] ;
+
+    # Required: Action Status (determines if focus session was completed)
+    sh:property [
+        sh:path schema:actionStatus ;
+        sh:name "Status" ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in (
+            "http://schema.org/CompletedActionStatus"
+            "http://schema.org/FailedActionStatus"
+            "http://schema.org/PotentialActionStatus"
+        ) ;
+    ] ;
+
+    # Optional: Associated Task or Event
+    sh:property [
+        sh:path apple:relatedAction ;
+        sh:name "Linked Task" ;
+        sh:description "Task driving this focus session" ;
+    ] ;
+
+    sh:property [
+        sh:path apple:relatedEvent ;
+        sh:name "Linked Event" ;
+        sh:description "Event or context for this focus session" ;
+    ] .

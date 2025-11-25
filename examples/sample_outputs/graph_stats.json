@@ -1,0 +1,18 @@
+{
+  "triple_count": 78,
+  "provenance_count": 78,
+  "namespace_count": 30,
+  "transaction_count": 1,
+  "file_backed": false,
+  "total_events": 26,
+  "total_features": 15,
+  "pipeline_metrics": {
+    "data_generation_seconds": 0.00038695335388183594,
+    "unrdf_ingestion_seconds": 0.002929210662841797,
+    "feature_materialization_seconds": 0.00014591217041015625,
+    "shacl_generation_seconds": 2.288818359375e-05,
+    "dspy_signature_generation_seconds": 2.384185791015625e-05,
+    "daily_brief_generation_seconds": 8.916854858398438e-05,
+    "weekly_retro_generation_seconds": 2.384185791015625e-05
+  }
+}

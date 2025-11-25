@@ -1,0 +1,437 @@
+@prefix apple: <urn:kgc:apple:> .
+@prefix kgc: <urn:kgc:> .
+@prefix schema: <http://schema.org/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# ============================================================================
+# Apple Ecosystem Ingest Specification
+# ============================================================================
+# This module defines how to ingest macOS/iOS data via PyObjC:
+# - Calendar events (EventKit)
+# - Reminders (EventKit + Reminders.app)
+# - Mail metadata (Mail.app message store)
+# - Files (Finder / NSFileManager / Spotlight)
+# ============================================================================
+
+apple:IngestSpecification a kgc:IngestModule ;
+    rdfs:label "Apple Ecosystem Ingest" ;
+    rdfs:comment "Local macOS/iOS data collection via PyObjC; no cloud SaaS calls in ingest" ;
+
+    # Core data sources
+    kgc:hasDataSource apple:CalendarDataSource ;
+    kgc:hasDataSource apple:ReminderDataSource ;
+    kgc:hasDataSource apple:MailDataSource ;
+    kgc:hasDataSource apple:FileDataSource ;
+
+    # Validation
+    kgc:hasValidation apple:IngestionValidation ;
+
+    # Output
+    kgc:outputFormat "RDF/Turtle (N3-compatible)" ;
+    kgc:outputPath "data/apple-ingest.ttl" ;
+
+    # Configuration
+    kgc:usesConfig apple:IngestionConfig .
+
+# ============================================================================
+# Data Source 1: Calendar Events via EventKit
+# ============================================================================
+
+apple:CalendarDataSource a kgc:DataSource ;
+    rdfs:label "Calendar Data Source" ;
+    rdfs:comment "Ingest events from Apple Calendar via EventKit (macOS) and synced iCloud calendars" ;
+
+    # Framework & Method
+    kgc:framework "PyObjC / EventKit" ;
+    kgc:frameworkClass "EKEventStore" ;
+    kgc:bridgeMethod "requestAccessToEntityType_completion_" ;
+
+    # Implementation hints
+    kgc:pythonModule "personal_kgcl.ingest.apple_calendar" ;
+    kgc:pythonFunction "ingest_calendar_events" ;
+
+    # Mapping: EventKit → RDF
+    kgc:mapping [
+        kgc:source "EKEvent.title" ;
+        kgc:target "apple:CalendarEvent / schema:name"
+    ] ;
+    kgc:mapping [
+        kgc:source "EKEvent.startDate" ;
+        kgc:target "apple:CalendarEvent / apple:hasStartTime"
+    ] ;
+    kgc:mapping [
+        kgc:source "EKEvent.endDate" ;
+        kgc:target "apple:CalendarEvent / apple:hasEndTime"
+    ] ;
+    kgc:mapping [
+        kgc:source "EKEvent.eventIdentifier" ;
+        kgc:target "apple:CalendarEvent / apple:hasIdentifier"
+    ] ;
+    kgc:mapping [
+        kgc:source "EKEvent.calendar.title" ;
+        kgc:target "apple:CalendarEvent / apple:isInCalendar"
+    ] ;
+    kgc:mapping [
+        kgc:source "EKEvent.attendees[].title, .emailAddress" ;
+        kgc:target "apple:CalendarEvent / apple:hasAttendee (schema:Person)"
+    ] ;
+    kgc:mapping [
+        kgc:source "Calendar app name" ;
+        kgc:target "apple:CalendarEvent / apple:hasSourceApp = \"Calendar\""
+    ] ;
+
+    # Filters
+    kgc:filter [
+        rdfs:label "Date Range Filter" ;
+        rdfs:comment "Include events from past 90 days + next 180 days (configurable)" ;
+        kgc:param "pastDays" ;
+        kgc:param "futureDays"
+    ] ;
+    kgc:filter [
+        rdfs:label "Calendar Filter" ;
+        rdfs:comment "Optionally exclude specific calendars (e.g., Holidays, Birthdays)" ;
+        kgc:param "excludeCalendars"
+    ] ;
+
+    # Incremental/Cache Strategy
+    kgc:supportsIncremental "true"^^xsd:boolean ;
+    kgc:cacheKey "event-identifier" ;
+    kgc:receiptHash "SHA256 of {id, start, end, title, attendees}" .
+
+# ============================================================================
+# Data Source 2: Reminders via EventKit / Reminders.app
+# ============================================================================
+
+apple:ReminderDataSource a kgc:DataSource ;
+    rdfs:label "Reminders Data Source" ;
+    rdfs:comment "Ingest tasks/reminders from Reminders.app and synced iCloud lists via EventKit" ;
+
+    # Framework & Method
+    kgc:framework "PyObjC / EventKit" ;
+    kgc:frameworkClass "EKEventStore + EKReminder" ;
+    kgc:bridgeMethod "requestAccessToEntityType_completion_" ;
+
+    # Implementation hints
+    kgc:pythonModule "personal_kgcl.ingest.apple_reminders" ;
+    kgc:pythonFunction "ingest_reminders" ;
+
+    # Mapping: EKReminder → RDF
+    kgc:mapping [
+        kgc:source "EKReminder.title" ;
+        kgc:target "apple:Reminder / schema:name"
+    ] ;
+    kgc:mapping [
+        kgc:source "EKReminder.dueDate / EKReminder.dueDateComponents" ;
+        kgc:target "apple:Reminder / apple:hasDueTime"
+    ] ;
+    kgc:mapping [
+        kgc:source "EKReminder.completed (bool)" ;
+        kgc:target "apple:Reminder / apple:hasStatus = ('complete' | 'incomplete')"
+    ] ;
+    kgc:mapping [
+        kgc:source "EKReminder.calendar.title" ;
+        kgc:target "apple:Reminder / apple:isInList"
+    ] ;
+    kgc:mapping [
+        kgc:source "EKReminder.calendarItemIdentifier" ;
+        kgc:target "apple:Reminder / apple:hasIdentifier"
+    ] ;
+    kgc:mapping [
+        kgc:source "Reminders app name" ;
+        kgc:target "apple:Reminder / apple:hasSourceApp = \"Reminders\""
+    ] ;
+
+    # Filters
+    kgc:filter [
+        rdfs:label "Status Filter" ;
+        rdfs:comment "Include completed and incomplete; optionally exclude 'old' completed items" ;
+        kgc:param "includeCompleted" ;
+        kgc:param "completedAgeThresholdDays"
+    ] ;
+    kgc:filter [
+        rdfs:label "List Filter" ;
+        rdfs:comment "Optionally include/exclude specific reminder lists" ;
+        kgc:param "includeOnlyLists" ;
+        kgc:param "excludeLists"
+    ] ;
+
+    # Incremental/Cache Strategy
+    kgc:supportsIncremental "true"^^xsd:boolean ;
+    kgc:cacheKey "reminder-identifier" ;
+    kgc:receiptHash "SHA256 of {id, title, dueDate, status}" .
+
+# ============================================================================
+# Data Source 3: Mail Metadata via Mail.app / MailKit
+# ============================================================================
+
+apple:MailDataSource a kgc:DataSource ;
+    rdfs:label "Mail Data Source" ;
+    rdfs:comment "Extract metadata from Mail.app (subject, from, to, date, flags); no body text ingested" ;
+
+    # Framework & Method
+    kgc:framework "PyObjC / AppKit (Mail.app scripting bridge)" ;
+    kgc:frameworkNote "Mail.app scripting bridge via osascript or direct Cocoa access" ;
+
+    # Implementation hints
+    kgc:pythonModule "personal_kgcl.ingest.apple_mail" ;
+    kgc:pythonFunction "ingest_mail_metadata" ;
+
+    # Mapping: Mail.Message → RDF
+    kgc:mapping [
+        kgc:source "Message.subject" ;
+        kgc:target "apple:MailMessage / schema:name"
+    ] ;
+    kgc:mapping [
+        kgc:source "Message.senders" ;
+        kgc:target "apple:MailMessage / schema:author (schema:Person)"
+    ] ;
+    kgc:mapping [
+        kgc:source "Message.recipients" ;
+        kgc:target "apple:MailMessage / schema:recipient"
+    ] ;
+    kgc:mapping [
+        kgc:source "Message.dateReceived" ;
+        kgc:target "apple:MailMessage / schema:dateReceived"
+    ] ;
+    kgc:mapping [
+        kgc:source "Message.flagged, Message.marked" ;
+        kgc:target "apple:MailMessage / apple:hasTag"
+    ] ;
+    kgc:mapping [
+        kgc:source "Message.messageID" ;
+        kgc:target "apple:MailMessage / apple:hasIdentifier"
+    ] ;
+    kgc:mapping [
+        kgc:source "Mail.app" ;
+        kgc:target "apple:MailMessage / apple:hasSourceApp = \"Mail\""
+    ] ;
+
+    # Filters
+    kgc:filter [
+        rdfs:label "Date Range Filter" ;
+        rdfs:comment "Include mail from past 30-90 days (configurable)" ;
+        kgc:param "pastDays"
+    ] ;
+    kgc:filter [
+        rdfs:label "Flag/Label Filter" ;
+        rdfs:comment "Optionally include only flagged, starred, or labeled messages" ;
+        kgc:param "flaggedOnly" ;
+        kgc:param "includedLabels"
+    ] ;
+
+    # Incremental/Cache Strategy
+    kgc:supportsIncremental "true"^^xsd:boolean ;
+    kgc:cacheKey "message-id" ;
+    kgc:receiptHash "SHA256 of {messageID, subject, from, dateReceived}" .
+
+# ============================================================================
+# Data Source 4: File Artifacts via Finder / NSFileManager / Spotlight
+# ============================================================================
+
+apple:FileDataSource a kgc:DataSource ;
+    rdfs:label "File Data Source" ;
+    rdfs:comment "Index files (notes, documents, attachments) via Finder tags, Spotlight metadata, or designated folders" ;
+
+    # Framework & Method
+    kgc:framework "PyObjC / AppKit (NSFileManager, NSMetadataQuery)" ;
+    kgc:bridgeMethod "NSMetadataQuery (Spotlight) or NSFileManager enumeration" ;
+
+    # Implementation hints
+    kgc:pythonModule "personal_kgcl.ingest.apple_files" ;
+    kgc:pythonFunction "ingest_file_artifacts" ;
+
+    # Mapping: File Metadata → RDF
+    kgc:mapping [
+        kgc:source "file.name" ;
+        kgc:target "apple:FileArtifact / schema:name"
+    ] ;
+    kgc:mapping [
+        kgc:source "file.path (absolute POSIX path)" ;
+        kgc:target "apple:FileArtifact / schema:url"
+    ] ;
+    kgc:mapping [
+        kgc:source "file.contentModificationDate" ;
+        kgc:target "apple:FileArtifact / schema:dateModified"
+    ] ;
+    kgc:mapping [
+        kgc:source "file.contentCreationDate" ;
+        kgc:target "apple:FileArtifact / schema:dateCreated"
+    ] ;
+    kgc:mapping [
+        kgc:source "Finder tags (xattr: com.apple.metadata:_kMDItemUserTags)" ;
+        kgc:target "apple:FileArtifact / apple:hasTag"
+    ] ;
+    kgc:mapping [
+        kgc:source "file extension / UTType" ;
+        kgc:target "apple:FileArtifact / schema:fileFormat"
+    ] ;
+    kgc:mapping [
+        kgc:source "file system source (Desktop, Documents, iCloud Drive, etc.)" ;
+        kgc:target "apple:FileArtifact / apple:hasSourceApp = (folder name)"
+    ] ;
+
+    # Discovery Strategies
+    kgc:discoveryStrategy [
+        rdfs:label "Spotlight Metadata Query" ;
+        rdfs:comment "Query Spotlight index for files modified in last N days" ;
+        kgc:method "NSMetadataQuery" ;
+        kgc:filter "kMDItemContentModificationDate >= NOW() - PAST_N_DAYS"
+    ] ;
+    kgc:discoveryStrategy [
+        rdfs:label "Designated Folders Scan" ;
+        rdfs:comment "Enumerate specific folders (Desktop, Documents, Downloads, Notes, etc.)" ;
+        kgc:method "NSFileManager enumeration" ;
+        kgc:folders "/Users/[user]/Desktop, /Users/[user]/Documents, ~/Library/Mobile Documents/com~apple~Notes/Documents"
+    ] ;
+    kgc:discoveryStrategy [
+        rdfs:label "Finder Tag Scan" ;
+        rdfs:comment "Index only files with specific Finder tags (e.g., 'project', 'focus')" ;
+        kgc:method "xattr query" ;
+        kgc:tags "project, focus, review, archive"
+    ] ;
+
+    # Filters
+    kgc:filter [
+        rdfs:label "File Type Filter" ;
+        rdfs:comment "Include specific file extensions (markdown, txt, pdf, docx, rtfd, notes)" ;
+        kgc:param "includedExtensions"
+    ] ;
+    kgc:filter [
+        rdfs:label "Folder Exclusion" ;
+        rdfs:comment "Exclude system, cache, and app folders" ;
+        kgc:param "excludeFolders" ;
+        kgc:default "/Library, /System, .Trash, node_modules, .git"
+    ] ;
+
+    # Incremental/Cache Strategy
+    kgc:supportsIncremental "true"^^xsd:boolean ;
+    kgc:cacheKey "file-path" ;
+    kgc:receiptHash "SHA256 of {path, dateModified, size}" .
+
+# ============================================================================
+# Validation Configuration
+# ============================================================================
+
+apple:IngestionValidation a kgc:Validation ;
+    rdfs:label "Ingest Validation Rules" ;
+    rdfs:comment "Quality checks applied to ingested data before storing in RDF" ;
+
+    # Pre-Validation
+    kgc:preValidation apple:DuplicateDetection ;
+    kgc:preValidation apple:TimeRangeValidation ;
+    kgc:preValidation apple:IdentifierValidation ;
+
+    # SHACL Validation
+    kgc:shacl <types.ttl> ;
+
+    # Post-Validation
+    kgc:postValidation apple:ReceiptGeneration ;
+    kgc:postValidation apple:CacheUpdate .
+
+apple:DuplicateDetection a kgc:ValidationRule ;
+    rdfs:label "Duplicate Detection" ;
+    rdfs:comment "Skip items that were already ingested (by identifier)" ;
+    kgc:method "check-cache-before-import" .
+
+apple:TimeRangeValidation a kgc:ValidationRule ;
+    rdfs:label "Time Range Validation" ;
+    rdfs:comment "Ensure start < end for events; skip malformed dates" ;
+    kgc:method "validate-dateTime-ordering" .
+
+apple:IdentifierValidation a kgc:ValidationRule ;
+    rdfs:label "Identifier Validation" ;
+    rdfs:comment "Ensure each imported item has a valid, unique identifier" ;
+    kgc:method "validate-and-generate-uris" .
+
+apple:ReceiptGeneration a kgc:ValidationRule ;
+    rdfs:label "Receipt Generation" ;
+    rdfs:comment "Generate SHA256 hash of each ingested item for idempotency" ;
+    kgc:method "compute-receipt-hash" .
+
+apple:CacheUpdate a kgc:ValidationRule ;
+    rdfs:label "Cache Update" ;
+    rdfs:comment "Update ingest cache with new items and timestamps" ;
+    kgc:method "update-ingest-cache" .
+
+# ============================================================================
+# Configuration
+# ============================================================================
+
+apple:IngestionConfig a kgc:IngestionConfig ;
+    rdfs:label "Apple Data Ingest Configuration" ;
+
+    # What to include
+    apple:includeCalendars "true"^^xsd:boolean ;
+    apple:includeCalendarDateRange [
+        kgc:pastDays "90"^^xsd:integer ;
+        kgc:futureDays "180"^^xsd:integer
+    ] ;
+
+    apple:includeReminders "true"^^xsd:boolean ;
+    apple:reminderIncludeCompleted "true"^^xsd:boolean ;
+    apple:reminderCompletedAgeThreshold "30"^^xsd:integer ;
+
+    apple:includeMail "true"^^xsd:boolean ;
+    apple:mailDateRange [
+        kgc:pastDays "60"^^xsd:integer
+    ] ;
+    apple:mailFlaggedOnly "false"^^xsd:boolean ;
+
+    apple:includeFiles "true"^^xsd:boolean ;
+    apple:fileDiscoveryStrategies ("spotlight" "designated-folders" "finder-tags") ;
+    apple:fileModificationThreshold "90"^^xsd:integer ;
+
+    # Limits
+    apple:maxEvents "2000"^^xsd:integer ;
+    apple:maxReminders "1000"^^xsd:integer ;
+    apple:maxMailMessages "500"^^xsd:integer ;
+    apple:maxFiles "5000"^^xsd:integer ;
+
+    # Behavior
+    apple:cacheExpiry "3600"^^xsd:integer ;
+    apple:validationLevel "strict"^^xsd:string ;
+    apple:loggingLevel "info"^^xsd:string ;
+    apple:dryRun "false"^^xsd:boolean ;
+
+    # Output
+    apple:outputPath "data/apple-ingest.ttl" ;
+    apple:backupOnChange "true"^^xsd:boolean ;
+    apple:backupPath "data/backups/" ;
+
+    # PyObjC-specific
+    apple:pyobjcAutoreleasePool "true"^^xsd:boolean ;
+    apple:requestUserPermissions "true"^^xsd:boolean .
+
+# ============================================================================
+# Implementation Notes
+# ============================================================================
+
+apple:ImplementationNotes a rdfs:Resource ;
+    rdfs:comment """
+    1. Privacy & Permissions:
+       - Request explicit user permission for Calendar, Reminders, Mail access
+       - Run in autorelease pool to manage Cocoa memory
+       - No data is sent to external services; all processing is local
+
+    2. Incremental Ingest:
+       - Use cache (by identifier) to avoid re-importing unchanged data
+       - Compute receipt (SHA256) to detect changes in existing items
+       - Support both full refresh and delta updates
+
+    3. Error Handling:
+       - Graceful degradation: if one data source fails, ingest continues
+       - Log all validation failures and skipped items
+       - Generate clear reports of what was imported and what failed
+
+    4. Performance:
+       - Spotlight queries are fast for recent files (< 1 second)
+       - EventKit queries typically < 200ms for 2000 events
+       - Mail.app scripting is slower; consider limiting date range
+
+    5. Future Extensions:
+       - iOS device data via iCloud sync (already available in synced calendars/reminders)
+       - Contact relationships (who is in your calendar events)
+       - Photo/media metadata indexing
+       - Time tracking integrations (if available via Automator/scriptable apps)
+    """ .

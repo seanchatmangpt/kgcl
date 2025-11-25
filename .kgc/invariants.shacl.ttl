@@ -1,0 +1,235 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix apple: <urn:kgc:apple:> .
+@prefix schema: <http://schema.org/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix kgc: <urn:kgc:> .
+
+# INVARIANT 1: Every Calendar Event has a non-empty title, start, and end time
+apple:EventTitleNotEmptyInvariant a sh:SPARQLAskValidationRule ;
+    sh:name "Event Title Not Empty" ;
+    sh:description "Calendar events must have non-empty titles (defect source: untitled meetings)" ;
+    sh:message "Event {?event} has empty or missing title" ;
+    sh:ask """
+    PREFIX apple: <urn:kgc:apple:>
+    PREFIX schema: <http://schema.org/>
+
+    ASK {
+        ?event a apple:CalendarEvent .
+        MINUS {
+            ?event schema:name ?name .
+            FILTER(STRLEN(?name) > 0)
+        }
+    }
+    """ .
+
+apple:EventTimeRangeValidInvariant a sh:SPARQLAskValidationRule ;
+    sh:name "Event Time Range Valid" ;
+    sh:description "Calendar events must have start < end (defect source: overlapping/invalid events)" ;
+    sh:message "Event {?event} has invalid time range (start >= end)" ;
+    sh:ask """
+    PREFIX apple: <urn:kgc:apple:>
+
+    ASK {
+        ?event a apple:CalendarEvent .
+        ?event apple:hasStartTime ?start .
+        ?event apple:hasEndTime ?end .
+        FILTER(?start >= ?end)
+    }
+    """ .
+
+# INVARIANT 2: Every Reminder due today must have a due date in current day window
+apple:ReminderDueTodayValidInvariant a sh:SPARQLAskValidationRule ;
+    sh:name "Today Reminders Have Valid Due Dates" ;
+    sh:description "Reminders marked as 'today' must have due date matching today (defect source: lost tasks, missed commitments)" ;
+    sh:message "Reminder {?reminder} tagged 'today' has invalid or missing due date" ;
+    sh:ask """
+    PREFIX apple: <urn:kgc:apple:>
+    PREFIX schema: <http://schema.org/>
+
+    ASK {
+        ?reminder a apple:Reminder .
+        ?reminder apple:hasTag \"today\" .
+        MINUS {
+            ?reminder apple:hasDueTime ?due .
+            FILTER(
+                DATATYPE(?due) = xsd:dateTime &&
+                YEAR(?due) = YEAR(NOW()) &&
+                MONTH(?due) = MONTH(NOW()) &&
+                DAY(?due) = DAY(NOW())
+            )
+        }
+    }
+    """ .
+
+# INVARIANT 3: Every Reminder has a status field
+apple:ReminderStatusRequiredInvariant a sh:SPARQLAskValidationRule ;
+    sh:name "Reminder Has Status" ;
+    sh:description "All reminders must have explicit status (defect source: ambiguous task state)" ;
+    sh:message "Reminder {?reminder} missing status field" ;
+    sh:ask """
+    PREFIX apple: <urn:kgc:apple:>
+
+    ASK {
+        ?reminder a apple:Reminder .
+        MINUS {
+            ?reminder apple:hasStatus ?status .
+        }
+    }
+    """ .
+
+# INVARIANT 4: No circular task dependencies
+apple:NoCircularDependenciesInvariant a sh:SPARQLAskValidationRule ;
+    sh:name "No Circular Task Dependencies" ;
+    sh:description "Tasks must not form cycles in 'blocked by' relationships (defect source: deadlock, analysis paralysis)" ;
+    sh:message "Circular dependency detected involving task {?task}" ;
+    sh:ask """
+    PREFIX apple: <urn:kgc:apple:>
+
+    ASK {
+        ?task a apple:Reminder .
+        ?task apple:isBlocked+ ?task .
+    }
+    """ .
+
+# INVARIANT 5: Focus Sessions must be associated with a work item
+apple:FocusSessionHasWorkItemInvariant a sh:SPARQLAskValidationRule ;
+    sh:name "Focus Session Has Associated Work" ;
+    sh:description "Deep work blocks must link to calendar event or reminder (defect source: untracked work, context loss)" ;
+    sh:message "Focus session {?session} not linked to any event or task" ;
+    sh:ask """
+    PREFIX apple: <urn:kgc:apple:>
+
+    ASK {
+        ?session a apple:FocusSession .
+        MINUS {
+            { ?session apple:linksToReminder ?work . }
+            UNION
+            { ?session apple:linksToCalendarEvent ?work . }
+        }
+    }
+    """ .
+
+# INVARIANT 6: No overbooking in calendar (overlapping events)
+apple:NoOverbookingInvariant a sh:SPARQLAskValidationRule ;
+    sh:name "No Overlapping Calendar Events" ;
+    sh:description "Calendar events must not overlap on the same day (defect source: missed meetings, double-booked time)" ;
+    sh:message "Overlapping events detected: {?event1} and {?event2}" ;
+    sh:ask """
+    PREFIX apple: <urn:kgc:apple:>
+
+    ASK {
+        ?event1 a apple:CalendarEvent .
+        ?event2 a apple:CalendarEvent .
+        FILTER(?event1 < ?event2)
+        ?event1 apple:hasStartTime ?s1 .
+        ?event1 apple:hasEndTime ?e1 .
+        ?event2 apple:hasStartTime ?s2 .
+        ?event2 apple:hasEndTime ?e2 .
+        FILTER(
+            (?s1 < ?e2 && ?e1 > ?s2)
+        )
+    }
+    """ .
+
+# INVARIANT 7: Mail messages must have valid sender and date
+apple:MailMetadataValidInvariant a sh:SPARQLAskValidationRule ;
+    sh:name "Mail Metadata Valid" ;
+    sh:description "Emails must have sender and date (defect source: orphaned mail, lost context)" ;
+    sh:message "Mail message {?msg} has missing sender or date" ;
+    sh:ask """
+    PREFIX apple: <urn:kgc:apple:>
+    PREFIX schema: <http://schema.org/>
+
+    ASK {
+        ?msg a apple:MailMessage .
+        MINUS {
+            ?msg schema:author ?author .
+            ?msg schema:dateReceived ?date .
+        }
+    }
+    """ .
+
+# INVARIANT 8: All data has traceable source
+apple:DataHasSourceInvariant a sh:SPARQLAskValidationRule ;
+    sh:name "All Data Traceable to Source" ;
+    sh:description "Every entity must link back to source system (defect source: orphaned data, unclear origin)" ;
+    sh:message "Entity {?entity} lacks source app attribution" ;
+    sh:ask """
+    PREFIX apple: <urn:kgc:apple:>
+
+    ASK {
+        { ?entity a apple:CalendarEvent . }
+        UNION
+        { ?entity a apple:Reminder . }
+        UNION
+        { ?entity a apple:MailMessage . }
+        UNION
+        { ?entity a apple:FileArtifact . }
+        MINUS {
+            ?entity apple:hasSourceApp ?source .
+        }
+    }
+    """ .
+
+# INVARIANT 9: File artifacts must have valid paths
+apple:FilePathValidInvariant a sh:SPARQLAskValidationRule ;
+    sh:name "File Paths Are Valid" ;
+    sh:description "Files must have non-empty, absolute paths (defect source: broken links, lost files)" ;
+    sh:message "File {?file} has invalid or missing path" ;
+    sh:ask """
+    PREFIX apple: <urn:kgc:apple:>
+    PREFIX schema: <http://schema.org/>
+
+    ASK {
+        ?file a apple:FileArtifact .
+        ?file schema:url ?path .
+        FILTER(STRLEN(?path) = 0 || !STRSTARTS(?path, \"/\"))
+    }
+    """ .
+
+# INVARIANT 10: Deprecated/Legacy items must be marked for decommissioning
+apple:LegacyItemsMarkedInvariant a sh:SPARQLAskValidationRule ;
+    sh:name "Legacy Items Flagged for Decommissioning" ;
+    sh:description "Stale calendars, lists, and tags must be explicitly marked 'deprecated' (defect source: accumulation of waste)" ;
+    sh:message "Potential legacy item {?item} not flagged for decommissioning review" ;
+    sh:ask """
+    PREFIX apple: <urn:kgc:apple:>
+    PREFIX schema: <http://schema.org/>
+
+    ASK {
+        ?item a apple:Reminder .
+        ?item apple:hasStatus \"incomplete\" .
+        FILTER(STR(schema:dateModified(?item)) < DATE(NOW() - PT90D))
+        MINUS {
+            ?item apple:hasTag \"legacy\" .
+            UNION
+            ?item apple:hasTag \"deprecated\" .
+        }
+    }
+    """ .
+
+# Summary of Invariants by Defect Type
+apple:InvariantSummary a kgc:Documentation ;
+    rdfs:label "Quality Invariant Map" ;
+    rdfs:comment "Links between observed defects and preventive invariants" ;
+    kgc:defect "Untitled meetings causing context loss" ;
+        kgc:preventedBy apple:EventTitleNotEmptyInvariant ;
+    kgc:defect "Double-booked time, missed meetings" ;
+        kgc:preventedBy apple:NoOverbookingInvariant ;
+    kgc:defect "Tasks marked today with no due date" ;
+        kgc:preventedBy apple:ReminderDueTodayValidInvariant ;
+    kgc:defect "Ambiguous task state, unclear next steps" ;
+        kgc:preventedBy apple:ReminderStatusRequiredInvariant ;
+    kgc:defect "Blocked tasks forming deadlock" ;
+        kgc:preventedBy apple:NoCircularDependenciesInvariant ;
+    kgc:defect "Deep work sessions with no context" ;
+        kgc:preventedBy apple:FocusSessionHasWorkItemInvariant ;
+    kgc:defect "Orphaned emails, lost context" ;
+        kgc:preventedBy apple:MailMetadataValidInvariant ;
+    kgc:defect "Unexplained data, unclear provenance" ;
+        kgc:preventedBy apple:DataHasSourceInvariant ;
+    kgc:defect "Broken file links" ;
+        kgc:preventedBy apple:FilePathValidInvariant ;
+    kgc:defect "Accumulation of stale tasks and lists" ;
+        kgc:preventedBy apple:LegacyItemsMarkedInvariant .

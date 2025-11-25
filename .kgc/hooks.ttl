@@ -1,0 +1,229 @@
+@prefix kgc: <urn:kgc:> .
+@prefix apple: <urn:kgc:apple:> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# HOOK 1: Apple Data Ingest → Regenerate Agenda & CLI
+apple:IngestHook a kgc:Hook ;
+    rdfs:label "Apple Data Ingest Hook" ;
+    rdfs:comment "When new Calendar/Reminder/Mail data is ingested, regenerate projections (agenda, CLI help)" ;
+    kgc:triggeredBy apple:DataIngested ;
+    kgc:effect [
+        rdfs:label "Regenerate Daily Agenda" ;
+        rdfs:comment "Update docs/agenda.md from current calendar + reminders" ;
+        kgc:command "kgct generate-agenda --day today --day this-week" ;
+        kgc:target "docs/agenda.md"
+    ] ;
+    kgc:effect [
+        rdfs:label "Regenerate CLI Help" ;
+        rdfs:comment "Update KGCT to include today's context in help text" ;
+        kgc:command "kgct generate-cli" ;
+        kgc:target "personal_kgct_cli.py"
+    ] ;
+    kgc:wasteRemoved "Manual copy/paste of agenda into notes; manual CLI updates"^^xsd:string .
+
+# HOOK 2: Ontology Change → Regenerate All Artifacts
+apple:OntologyChangeHook a kgc:Hook ;
+    rdfs:label "Ontology Change Hook" ;
+    rdfs:comment "When ontology.ttl is modified, regenerate CLI, docs, diagrams" ;
+    kgc:triggeredBy apple:OntologyModified ;
+    kgc:effect [
+        rdfs:label "Regenerate KGCT CLI" ;
+        rdfs:comment "Rebuild Typer CLI from new ontology" ;
+        kgc:command "kgct generate-cli" ;
+        kgc:target "personal_kgct_cli.py"
+    ] ;
+    kgc:effect [
+        rdfs:label "Regenerate Architecture Diagrams" ;
+        rdfs:comment "Update entity/workflow diagrams" ;
+        kgc:command "kgct generate-diagrams" ;
+        kgc:target "docs/diagrams.html"
+    ] ;
+    kgc:effect [
+        rdfs:label "Regenerate Context Documentation" ;
+        rdfs:comment "Update .kgc/context.md" ;
+        kgc:command "kgct generate-docs" ;
+        kgc:target ".kgc/context.md"
+    ] ;
+    kgc:wasteRemoved "Manual synchronization of CLI, docs, diagrams with ontology changes"^^xsd:string .
+
+# HOOK 3: Invariant Validation Failure → Generate Report
+apple:ValidationFailureHook a kgc:Hook ;
+    rdfs:label "Validation Failure Hook" ;
+    rdfs:comment "When SHACL or ASK validation fails, generate quality report and notify" ;
+    kgc:triggeredBy apple:ValidationFailed ;
+    kgc:effect [
+        rdfs:label "Generate Quality Report" ;
+        rdfs:comment "Create report of failed invariants with remediation steps" ;
+        kgc:command "kgct generate-quality-report" ;
+        kgc:target "docs/quality-report.md"
+    ] ;
+    kgc:effect [
+        rdfs:label "Flag for Human Review" ;
+        rdfs:comment "Emit notification requiring data correction" ;
+        kgc:command "kgct notify-violations" ;
+        kgc:target "stdout + logs/violations.log"
+    ] ;
+    kgc:wasteRemoved "Silent data quality issues; rework from stale/invalid data"^^xsd:string .
+
+# HOOK 4: Stale Item Detection → Mark for Decommissioning
+apple:StaleItemHook a kgc:Hook ;
+    rdfs:label "Stale Item Detection Hook" ;
+    rdfs:comment "Detect tasks 90+ days old (incomplete), calendars/lists with no recent activity, and mark for review" ;
+    kgc:triggeredBy apple:WeeklyReviewTriggered ;
+    kgc:effect [
+        rdfs:label "Identify Stale Tasks" ;
+        rdfs:comment "Query tasks incomplete for 90+ days" ;
+        kgc:command "kgct find-legacy --threshold-days 90" ;
+        kgc:target "docs/stale-items.md"
+    ] ;
+    kgc:effect [
+        rdfs:label "Identify Unused Calendars/Lists" ;
+        rdfs:comment "List calendars and reminder lists with no new items in 60 days" ;
+        kgc:command "kgct find-unused-lists --threshold-days 60" ;
+        kgc:target "docs/unused-lists.md"
+    ] ;
+    kgc:effect [
+        rdfs:label "Tag Items for Review" ;
+        rdfs:comment "Add 'legacy' or 'deprecated' tag for decommissioning decision" ;
+        kgc:command "kgct mark-for-review" ;
+        kgc:target "apple:data (in-place update)"
+    ] ;
+    kgc:wasteRemoved "Accumulation of stale tasks; forgotten lists; cognitive load from irrelevant items"^^xsd:string .
+
+# HOOK 5: Time Conflicts Detected → Generate Conflict Report
+apple:ConflictDetectionHook a kgc:Hook ;
+    rdfs:label "Calendar Conflict Detection Hook" ;
+    rdfs:comment "Detect overlapping events, overbooked time, and focus blocks with no context" ;
+    kgc:triggeredBy apple:CalendarDataUpdated ;
+    kgc:effect [
+        rdfs:label "Generate Conflict Report" ;
+        rdfs:comment "List all overlapping calendar events and time collisions" ;
+        kgc:command "kgct detect-conflicts --day today --day this-week" ;
+        kgc:target "docs/calendar-conflicts.md"
+    ] ;
+    kgc:effect [
+        rdfs:label "Suggest Resolutions" ;
+        rdfs:comment "Propose moves, cancellations, or rescheduling" ;
+        kgc:command "kgct suggest-resolutions" ;
+        kgc:target "docs/suggested-resolutions.md"
+    ] ;
+    kgc:wasteRemoved "Missed meetings from double-booking; last-minute scrambling"^^xsd:string .
+
+# HOOK 6: Daily Review Trigger → Generate Daily Briefing
+apple:DailyReviewHook a kgc:Hook ;
+    rdfs:label "Daily Review Hook" ;
+    rdfs:comment "Every morning, generate today's briefing (agenda, reminders, emails, focus blocks, blockers)" ;
+    kgc:triggeredBy [
+        rdfs:label "Morning Trigger" ;
+        rdfs:comment "6:00 AM local time" ;
+        kgc:cronSchedule "0 6 * * *"
+    ] ;
+    kgc:effect [
+        rdfs:label "Generate Daily Briefing" ;
+        rdfs:comment "Comprehensive agenda, priorities, and context" ;
+        kgc:command "kgct generate-daily-briefing --format markdown" ;
+        kgc:target "docs/briefings/daily-{DATE}.md"
+    ] ;
+    kgc:effect [
+        rdfs:label "Generate Priority Matrix" ;
+        rdfs:comment "Urgency/Importance matrix from calendar + reminders" ;
+        kgc:command "kgct generate-priority-matrix" ;
+        kgc:target "docs/briefings/priorities-{DATE}.md"
+    ] ;
+    kgc:wasteRemoved "Context switching; forgotten tasks; unclear daily priorities"^^xsd:string .
+
+# HOOK 7: Weekly Review Trigger → Generate Weekly Retrospective
+apple:WeeklyReviewHook a kgc:Hook ;
+    rdfs:label "Weekly Review Hook" ;
+    rdfs:comment "Every Friday, generate weekly retrospective and plan next week" ;
+    kgc:triggeredBy [
+        rdfs:label "Friday Trigger" ;
+        rdfs:comment "Friday 5:00 PM local time" ;
+        kgc:cronSchedule "0 17 * * 5"
+    ] ;
+    kgc:effect [
+        rdfs:label "Generate Weekly Summary" ;
+        rdfs:comment "Completed tasks, accomplished goals, pattern analysis" ;
+        kgc:command "kgct generate-weekly-summary --week current" ;
+        kgc:target "docs/reviews/weekly-{WEEK}.md"
+    ] ;
+    kgc:effect [
+        rdfs:label "Identify Improvement Opportunities" ;
+        rdfs:comment "Meetings vs deep work ratio, interruption analysis, workflow bottlenecks" ;
+        kgc:command "kgct analyze-week-patterns --metrics time-usage,interruptions,context-switches" ;
+        kgc:target "docs/reviews/patterns-{WEEK}.md"
+    ] ;
+    kgc:effect [
+        rdfs:label "Plan Next Week" ;
+        rdfs:comment "Key commitments, focus areas, risks" ;
+        kgc:command "kgct plan-next-week" ;
+        kgc:target "docs/plans/next-week-{WEEK}.md"
+    ] ;
+    kgc:wasteRemoved "Lost learnings from week; failure to identify patterns; no structured improvement"^^xsd:string .
+
+# HOOK 8: Lens Projection → Update Specialized Views
+apple:LensProjectionHook a kgc:Hook ;
+    rdfs:label "Specialized Lens Projection Hook" ;
+    rdfs:comment "Generate specialized views: focus time analysis, meeting load, commitment map, context map" ;
+    kgc:triggeredBy apple:DataIngested ;
+    kgc:effect [
+        rdfs:label "Generate Focus Time Lens" ;
+        rdfs:comment "Calendar analysis: % uninterrupted deep work vs meetings" ;
+        kgc:command "kgct generate-lens --lens focus-time --period week" ;
+        kgc:target "docs/lenses/focus-time-{WEEK}.md"
+    ] ;
+    kgc:effect [
+        rdfs:label "Generate Commitment Map" ;
+        rdfs:comment "Who owes what, by date (people, promises, deadlines)" ;
+        kgc:command "kgct generate-lens --lens commitments --period week" ;
+        kgc:target "docs/lenses/commitments-{WEEK}.md"
+    ] ;
+    kgc:effect [
+        rdfs:label "Generate Context Map" ;
+        rdfs:comment "Files, notes, mail, links associated with this week's events/tasks" ;
+        kgc:command "kgct generate-lens --lens context-map --period week" ;
+        kgc:target "docs/lenses/context-{WEEK}.md"
+    ] ;
+    kgc:wasteRemoved "Manual data aggregation; tab surfing to find context; scattered information"^^xsd:string .
+
+# Hook Event Types
+apple:DataIngested a kgc:HookEvent ;
+    rdfs:label "Data Ingested" ;
+    rdfs:comment "Apple ecosystem data successfully imported" .
+
+apple:OntologyModified a kgc:HookEvent ;
+    rdfs:label "Ontology Modified" ;
+    rdfs:comment "ontology.ttl or types.ttl changed" .
+
+apple:ValidationFailed a kgc:HookEvent ;
+    rdfs:label "Validation Failed" ;
+    rdfs:comment "SHACL or ASK validation returned violations" .
+
+apple:WeeklyReviewTriggered a kgc:HookEvent ;
+    rdfs:label "Weekly Review Triggered" ;
+    rdfs:comment "Scheduled weekly review workflow started" .
+
+apple:CalendarDataUpdated a kgc:HookEvent ;
+    rdfs:label "Calendar Data Updated" ;
+    rdfs:comment "New calendar events or changes detected" .
+
+# Hook Summary: Waste Removed by Type
+apple:HookWasteMap a kgc:Documentation ;
+    rdfs:label "Hook-to-Waste-Removal Mapping" ;
+    kgc:waste "Manual copy/paste of agenda" ;
+        kgc:removedBy apple:IngestHook ;
+    kgc:waste "Manual CLI/docs/diagram synchronization" ;
+        kgc:removedBy apple:OntologyChangeHook ;
+    kgc:waste "Silent data quality issues" ;
+        kgc:removedBy apple:ValidationFailureHook ;
+    kgc:waste "Accumulation of stale tasks and lists" ;
+        kgc:removedBy apple:StaleItemHook ;
+    kgc:waste "Missed meetings from double-booking" ;
+        kgc:removedBy apple:ConflictDetectionHook ;
+    kgc:waste "Forgotten tasks and unclear priorities" ;
+        kgc:removedBy apple:DailyReviewHook ;
+    kgc:waste "Lost learnings; no pattern identification" ;
+        kgc:removedBy apple:WeeklyReviewHook ;
+    kgc:waste "Manual data aggregation and context gathering" ;
+        kgc:removedBy apple:LensProjectionHook .

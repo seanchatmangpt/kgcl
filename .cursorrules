@@ -1,0 +1,392 @@
+# KGCL Cursor Rules - Strictest Production Standards
+# Based on clap-noun-verb Rust patterns, adapted for Python + UNRDF porting
+
+## Core Principles
+1. **Chicago School TDD**: Tests drive all development. No mocking domain objects.
+2. **Type Safety**: Full type hints everywhere. `uv run mypy src/` must pass with `strict = true`.
+3. **Production-Grade**: Code ready for immediate production use without refactoring.
+4. **UNRDF Alignment**: Port UNRDF JavaScript patterns to Python idiomatically.
+5. **No Tech Debt**: Clean code first time. No "TODO: refactor later".
+
+## File Organization
+```
+kgcl/
+├── pyproject.toml              # Strictest build settings (ALL lint rules enabled)
+├── Makefile.toml               # Cargo-make equivalent: `cargo-make verify` = full checks
+├── .githooks/
+│   └── pre-commit              # Block commits that violate standards
+├── .cursor/
+│   ├── commands/               # Slash command definitions
+│   └── rules.md                # This file
+├── src/kgcl/                   # Source code (all typed)
+│   ├── hooks/                  # Knowledge Hooks system
+│   ├── unrdf_engine/           # UNRDF integration
+│   ├── ontology/               # RDF/SHACL definitions
+│   └── cli/                    # Command-line interface
+├── tests/                      # Test suite (Chicago School TDD)
+│   ├── hooks/                  # Hook behavior tests
+│   ├── integration/            # End-to-end UNRDF porting tests
+│   └── ...
+└── docs/                       # Documentation
+    ├── UNRDF_PORTING_GUIDE.md
+    └── UNRDF_PORTING_VALIDATION.md
+```
+
+## Type Hints - Mandatory
+Every function MUST have complete type hints:
+```python
+# ✅ CORRECT
+def process_hook(hook: Hook, context: HookContext) -> Receipt:
+    """Process a hook with full context.
+
+    Parameters
+    ----------
+    hook : Hook
+        The hook to process
+    context : HookContext
+        Execution context with metadata
+
+    Returns
+    -------
+    Receipt
+        Immutable execution receipt
+    """
+    ...
+
+# ❌ WRONG
+def process_hook(hook, context):  # Missing types!
+    ...
+```
+
+### Type Annotations Rules
+- All function parameters: `param: Type`
+- All return types: `-> ReturnType`
+- All class attributes: `attribute: Type`
+- Generics: `List[T]`, `Dict[K, V]`, `Optional[X]`
+- Union types: `Union[A, B]` or `A | B` (Python 3.10+)
+- Callbacks: `Callable[[Arg], ReturnType]`
+
+### Dataclass Immutability
+Use frozen dataclasses for value objects:
+```python
+from dataclasses import dataclass
+
+@dataclass(frozen=True)
+class Receipt:
+    """Immutable hook execution receipt."""
+    execution_id: str
+    hook_id: str
+    result: bool
+```
+
+## Testing - Chicago School TDD
+### Test-First Development
+1. Write tests FIRST (before implementation)
+2. Tests specify behavior, not implementation
+3. No mocking of domain objects (Hook, Receipt, Condition, etc.)
+4. Real I/O, real SPARQL evaluation, real metrics
+
+### Test Markers
+```python
+@pytest.mark.integration      # Integration tests
+@pytest.mark.security         # Security tests
+@pytest.mark.performance      # Performance tests
+@pytest.mark.slow            # Long-running tests (deselect with -m "not slow")
+```
+
+### Test Organization
+```
+tests/
+├── hooks/
+│   ├── test_core.py          # Hook, HookReceipt, HookRegistry
+│   ├── test_conditions.py    # All condition types
+│   ├── test_lifecycle.py     # HookExecutionPipeline
+│   ├── test_security.py      # ErrorSanitizer, SandboxRestrictions
+│   ├── test_performance.py   # PerformanceOptimizer, QueryCache
+│   ├── test_policy_packs.py  # PolicyPackManager
+│   ├── test_file_resolver.py # FileResolver
+│   └── test_unrdf_integration.py  # Hook-UNRDF interaction
+├── integration/
+│   └── test_unrdf_porting.py # All 8 UNRDF patterns validated
+└── ...
+```
+
+### Test Naming
+```python
+# ✅ CORRECT - Describes behavior
+def test_hook_execution_with_error_sanitization():
+    """Errors are sanitized before storage in receipt."""
+
+def test_cache_hit_reduces_latency():
+    """Query cache hit should reduce latency."""
+
+# ❌ WRONG - Too vague
+def test_hook():
+def test_error():
+```
+
+## Code Style - NumPy Docstrings
+Every public class/function needs NumPy-style docstrings:
+```python
+def execute_hook(hook: Hook, event: Dict[str, Any]) -> Receipt:
+    """Execute a single hook against an event.
+
+    Parameters
+    ----------
+    hook : Hook
+        Hook definition with condition and handler
+    event : Dict[str, Any]
+        Event triggering hook execution
+
+    Returns
+    -------
+    Receipt
+        Immutable record of execution with result and metadata
+
+    Raises
+    ------
+    ValueError
+        If hook definition is invalid
+    TimeoutError
+        If execution exceeds timeout limit
+
+    Examples
+    --------
+    >>> hook = Hook(name="test", condition=ThresholdCondition(5), handler=lambda e: True)
+    >>> result = execute_hook(hook, {"count": 10})
+    >>> assert result.success
+    """
+```
+
+## Linting & Formatting - Strictest
+### Run Before Commit
+```bash
+cargo-make format        # Format code
+cargo-make lint          # Fix linting issues
+cargo-make type-check    # Type check
+cargo-make test          # Run all tests
+```
+
+Or via `git hooks` (automatic on commit):
+```bash
+.githooks/pre-commit     # Blocks commits violating standards
+```
+
+### Ruff Configuration
+From `pyproject.toml`:
+```toml
+[tool.ruff.lint]
+select = ["ALL"]  # Enable ALL rules
+ignore = ["CPY", "FIX", "T20", "ARG001", "COM812", "D203", "D213", "E501", "PD008", "PD009", "PGH003", "RET504", "S101", "TD003"]
+```
+
+### Mypy Configuration (Strictest)
+From `pyproject.toml`:
+```toml
+[tool.mypy]
+strict = true                      # All strictest checks enabled
+disallow_any_unimported = true     # No `Any` imports
+disallow_incomplete_defs = true    # All types complete
+disallow_untyped_defs = true       # All functions typed
+disallow_untyped_calls = true      # All calls typed
+check_untyped_defs = true          # Check untyped functions
+no_implicit_optional = true        # No implicit Optional
+```
+
+## UNRDF Porting Rules
+### 8 Critical Patterns to Port
+1. **Hook Executor** - Timeout, execution ID, error sanitization, phases
+2. **Condition Evaluator** - 8 condition types, file resolution
+3. **Error Sanitizer** - Remove sensitive info from errors
+4. **Sandbox Restrictions** - Resource/access limits
+5. **Performance Optimizer** - Latency tracking, SLO monitoring
+6. **Query Cache** - SPARQL result caching with TTL/LRU
+7. **Policy Pack Manager** - Bundle, version, activate hooks
+8. **Lockchain Writer** - Cryptographic provenance, chain anchoring
+
+### Pattern Requirements
+- Port JavaScript → Python idiomatically (not mechanical translation)
+- Use Python dataclasses instead of TypeScript interfaces
+- Use `frozen=True` for immutable value objects
+- Full type hints (Python 3.12+)
+- Chicago School TDD (test-first, real objects)
+- SLO targets: p99 < 100ms for all operations
+
+### Integration Points
+Each pattern must integrate with:
+- Hook lifecycle (phases: PRE, EVALUATE, RUN, POST)
+- Error handling (sanitization at boundaries)
+- Performance tracking (metrics in receipts)
+- RDF/SPARQL engine (UnrdfEngine)
+
+## Build & CI Requirements
+
+### Pre-Commit Hook (.githooks/pre-commit)
+Blocks commits if:
+- Missing type hints on functions
+- Hardcoded secrets detected
+- No tests for new features
+- Debug print statements found
+- Public APIs lack docstrings
+- Relative imports used
+- Integration tests lack markers
+
+### Cargo-Make Tasks
+```bash
+# Development
+cargo-make format           # Format code (Ruff)
+cargo-make lint             # Lint & fix (Ruff)
+cargo-make type-check       # Type check (Mypy)
+cargo-make test             # Run tests (Pytest)
+
+# Verification
+cargo-make verify           # All checks + tests
+cargo-make ci               # CI pipeline: format-check, lint, types, tests, docs
+
+# Release
+cargo-make release-check    # All checks (no fixes)
+cargo-make prod-build       # Strict production build
+
+# UNRDF-Specific
+cargo-make unrdf-validate   # Type-check + UNRDF tests
+cargo-make unrdf-full       # All UNRDF porting tests
+```
+
+### Pytest Configuration (Strictest)
+From `pyproject.toml`:
+```toml
+[tool.pytest.ini_options]
+addopts = "--color=yes --doctest-modules --exitfirst --failed-first --verbosity=2 --strict-markers"
+xfail_strict = true         # xfail must actually fail
+asyncio_mode = "auto"       # Async test support
+```
+
+## Git Hooks Setup
+```bash
+# Install hooks (one-time setup)
+cargo-make pre-commit-setup
+
+# Manually run pre-commit checks
+cargo-make pre-commit-run
+
+# Push to remote (hooks verify code quality)
+git push
+```
+
+## Imports - Absolute Only
+```python
+# ✅ CORRECT
+from kgcl.hooks.core import Hook, HookReceipt
+from kgcl.hooks.conditions import SparqlAskCondition
+from kgcl.unrdf_engine.engine import UnrdfEngine
+
+# ❌ WRONG - Relative imports banned
+from ..hooks.core import Hook
+from . import utils
+from .conditions import SparqlAskCondition
+```
+
+## Logging, Not Print
+```python
+import logging
+
+logger = logging.getLogger(__name__)
+
+# ✅ CORRECT
+logger.info("Hook executed", extra={"hook_id": hook.name, "duration_ms": duration})
+logger.error("Failed to load file", exc_info=True)
+
+# ❌ WRONG
+print("Hook executed")
+print(f"Duration: {duration}ms")
+```
+
+## Secrets Management
+```python
+# ✅ CORRECT
+import os
+api_key = os.getenv("API_KEY")  # From environment
+config = {"key": api_key}  # Set in CI/deployment
+
+# ❌ WRONG
+config = {"key": "sk-abc123xyz"}  # Hardcoded!
+password = "admin123"  # Secret in code!
+```
+
+## Performance Targets (from UNRDF)
+| Operation | p50 | p99 | Target |
+|-----------|-----|-----|--------|
+| Hook registration | 0.1ms | 1.0ms | <5ms |
+| Condition eval | 0.2ms | 2.0ms | <10ms |
+| Hook execution | 1.0ms | 10.0ms | <100ms |
+| Receipt write | 5.0ms | 5.0ms | <10ms |
+| Full pipeline | 2.0ms | 50.0ms | <500ms |
+
+## Error Handling
+```python
+# ✅ CORRECT - Sanitized error
+from kgcl.hooks.security import ErrorSanitizer
+
+try:
+    result = evaluate_condition(condition)
+except Exception as e:
+    sanitizer = ErrorSanitizer()
+    sanitized = sanitizer.sanitize(e)
+    logger.error(sanitized.message, extra={"code": sanitized.code})
+    raise
+
+# ❌ WRONG - Raw error leaks details
+except Exception as e:
+    logger.error(str(e))  # Exposes stack trace, file paths!
+    raise
+```
+
+## File Organization Rules
+- Max file size: 500 lines (unless justified for cohesion)
+- Max function size: 40 lines
+- Max class complexity: 7 methods per class
+- Separate concerns: hooks, ontology, observability, CLI
+- Related tests in parallel directories
+
+## Documentation
+- README.md - Project overview
+- docs/UNRDF_PORTING_GUIDE.md - All 8 patterns
+- docs/UNRDF_PORTING_VALIDATION.md - Test results
+- pyproject.toml docstrings - Tool configuration
+- NumPy docstrings - All public APIs
+- Comments - Only for "why", not "what"
+
+## Version Management
+- Semantic versioning: MAJOR.MINOR.PATCH
+- Commit: `bump: v$current_version → v$new_version`
+- Tags: `v$version`
+- Changelog: Updated on every bump (via commitizen)
+
+## Cursor Commands Available
+See `.cursor/commands/` for:
+- `80-20-fill-gaps.md` - Apply 80/20 principle
+- `eliminate-muda.md` - Remove waste
+- `verify-tests.md` - Validate test coverage
+- `expert-testing-patterns.md` - TDD patterns
+- And more...
+
+## Final Checklist Before Commit
+- [ ] All functions have type hints
+- [ ] All tests pass: `cargo-make test`
+- [ ] Lint passes: `cargo-make lint-check`
+- [ ] Types pass: `cargo-make type-check`
+- [ ] Format correct: `cargo-make format-check`
+- [ ] Pre-commit hook passes: `.githooks/pre-commit`
+- [ ] NumPy docstrings on public APIs
+- [ ] No hardcoded secrets
+- [ ] No debug print statements
+- [ ] New features have tests
+- [ ] Integration tests marked with `@pytest.mark.integration`
+
+## Success Metrics
+✅ All tests pass: `127 passed` (UNRDF porting)
+✅ Type safety: `mypy` with `strict = true`
+✅ Code quality: All Ruff rules enabled
+✅ Performance: SLO targets met
+✅ Documentation: Complete with examples
+✅ Production-ready: No technical debt

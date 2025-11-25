@@ -1,0 +1,485 @@
+@prefix : <http://kgcl.dev/ontology/core#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<http://kgcl.dev/ontology/core#>
+    a owl:Ontology ;
+    dcterms:title "KGC OS Graph Agent Core Ontology"@en ;
+    dcterms:description "Core ontology for the Knowledge Graph Comprehension OS Graph Agent system, modeling capabilities, features, observations, and events from macOS system interactions."@en ;
+    dcterms:created "2025-11-24"^^xsd:date ;
+    dcterms:creator "KGC OS Graph Agent Team" ;
+    owl:versionInfo "1.0.0" ;
+    rdfs:comment "This ontology provides the foundational vocabulary for representing system capabilities discovered via PyObjC, feature templates for behavioral analysis, feature instances with temporal observations, and the resulting event streams."@en .
+
+# ==============================================================================
+# TOP-LEVEL CLASSES
+# ==============================================================================
+
+:Entity
+    a owl:Class ;
+    rdfs:label "Entity"@en ;
+    rdfs:comment "Abstract top-level class for all entities in the KGC system."@en .
+
+:TemporalEntity
+    a owl:Class ;
+    rdfs:subClassOf :Entity ;
+    rdfs:label "Temporal Entity"@en ;
+    rdfs:comment "Entities that have temporal extent, including observations, windows, and events."@en .
+
+:StructuralEntity
+    a owl:Class ;
+    rdfs:subClassOf :Entity ;
+    rdfs:label "Structural Entity"@en ;
+    rdfs:comment "Entities that define structure and templates, including capabilities, features, and domains."@en .
+
+# ==============================================================================
+# CAPABILITY CLASSES
+# ==============================================================================
+
+:Capability
+    a owl:Class ;
+    rdfs:subClassOf :StructuralEntity ;
+    rdfs:label "Capability"@en ;
+    rdfs:comment "A system capability discovered through PyObjC framework introspection. Capabilities represent atomic operations that can be performed by the OS or applications."@en ;
+    skos:example "Reading screen content, accessing calendar events, monitoring keyboard input" .
+
+:CapabilityType
+    a owl:Class ;
+    rdfs:subClassOf :StructuralEntity ;
+    rdfs:label "Capability Type"@en ;
+    rdfs:comment "Classification of capabilities by functional domain (UI, System, Data, etc.)"@en .
+
+:Framework
+    a owl:Class ;
+    rdfs:subClassOf :StructuralEntity ;
+    rdfs:label "Framework"@en ;
+    rdfs:comment "A macOS framework that provides capabilities (e.g., Cocoa, ApplicationServices, CoreFoundation)."@en .
+
+:Plugin
+    a owl:Class ;
+    rdfs:subClassOf :StructuralEntity ;
+    rdfs:label "Plugin"@en ;
+    rdfs:comment "An extension or plugin that provides additional capabilities beyond standard frameworks."@en .
+
+# ==============================================================================
+# FEATURE CLASSES
+# ==============================================================================
+
+:FeatureTemplate
+    a owl:Class ;
+    rdfs:subClassOf :StructuralEntity ;
+    rdfs:label "Feature Template"@en ;
+    rdfs:comment "A reusable template defining how to compute a behavioral feature from raw observations. Templates specify input types, output types, aggregation logic, and temporal parameters."@en ;
+    skos:example "timeInApp template computes minutes spent in an application per observation window" .
+
+:FeatureInstance
+    a owl:Class ;
+    rdfs:subClassOf :TemporalEntity ;
+    rdfs:label "Feature Instance"@en ;
+    rdfs:comment "A concrete realization of a FeatureTemplate, bound to specific parameters and computed over a specific observation window."@en ;
+    skos:example "User spent 45.3 minutes in VS Code during window 2025-11-24T14:00:00/15:00:00" .
+
+:FeatureCategory
+    a owl:Class ;
+    rdfs:subClassOf :StructuralEntity ;
+    rdfs:label "Feature Category"@en ;
+    rdfs:comment "Categorization of features by analysis domain (attention, productivity, communication, etc.)"@en .
+
+:AggregationFunction
+    a owl:Class ;
+    rdfs:subClassOf :StructuralEntity ;
+    rdfs:label "Aggregation Function"@en ;
+    rdfs:comment "Mathematical or statistical function used to aggregate observations into feature values (sum, count, average, max, etc.)"@en .
+
+# ==============================================================================
+# OBSERVATION & TEMPORAL CLASSES
+# ==============================================================================
+
+:ObservationWindow
+    a owl:Class ;
+    rdfs:subClassOf :TemporalEntity ;
+    rdfs:label "Observation Window"@en ;
+    rdfs:comment "A time interval over which observations are collected and features are computed. Windows may be fixed (hourly) or sliding."@en ;
+    skos:example "2025-11-24T14:00:00/15:00:00 for hourly aggregation" .
+
+:Observation
+    a owl:Class ;
+    rdfs:subClassOf :TemporalEntity ;
+    rdfs:label "Observation"@en ;
+    rdfs:comment "A raw data point collected from system monitoring, representing a single measurement or state snapshot."@en ;
+    skos:example "Window title changed to 'index.html - VS Code' at 2025-11-24T14:23:45" .
+
+:Event
+    a owl:Class ;
+    rdfs:subClassOf :TemporalEntity ;
+    rdfs:label "Event"@en ;
+    rdfs:comment "A significant occurrence detected through feature analysis or pattern matching, potentially triggering actions."@en ;
+    skos:example "User entered 'deep work' state (45+ min in IDE, no communication app switches)" .
+
+:EventPattern
+    a owl:Class ;
+    rdfs:subClassOf :StructuralEntity ;
+    rdfs:label "Event Pattern"@en ;
+    rdfs:comment "A pattern definition used to detect events from feature streams."@en .
+
+# ==============================================================================
+# APPLICATION & DOMAIN CLASSES
+# ==============================================================================
+
+:App
+    a owl:Class ;
+    rdfs:subClassOf :StructuralEntity ;
+    rdfs:label "Application"@en ;
+    rdfs:comment "A macOS application that can be monitored for user interaction."@en ;
+    skos:example "Visual Studio Code, Safari, Slack" .
+
+:AppCategory
+    a owl:Class ;
+    rdfs:subClassOf :StructuralEntity ;
+    rdfs:label "Application Category"@en ;
+    rdfs:comment "Functional categorization of applications (IDE, Browser, Communication, etc.)"@en .
+
+:Domain
+    a owl:Class ;
+    rdfs:subClassOf :StructuralEntity ;
+    rdfs:label "Domain"@en ;
+    rdfs:comment "A web domain or URL pattern that can be monitored in browser activity."@en ;
+    skos:example "github.com, stackoverflow.com" .
+
+:DomainCategory
+    a owl:Class ;
+    rdfs:subClassOf :StructuralEntity ;
+    rdfs:label "Domain Category"@en ;
+    rdfs:comment "Categorization of domains by purpose (development, documentation, social, etc.)"@en .
+
+# ==============================================================================
+# SERVICE LEVEL & QUALITY CLASSES
+# ==============================================================================
+
+:ServiceLevelObjective
+    a owl:Class ;
+    rdfs:subClassOf :StructuralEntity ;
+    rdfs:label "Service Level Objective"@en ;
+    rdfs:comment "Performance or quality objective for capability execution (latency, accuracy, reliability)."@en .
+
+:QualityMetric
+    a owl:Class ;
+    rdfs:subClassOf :TemporalEntity ;
+    rdfs:label "Quality Metric"@en ;
+    rdfs:comment "Measured quality attribute for a capability, feature, or observation."@en .
+
+# ==============================================================================
+# CORE PROPERTIES - CAPABILITY
+# ==============================================================================
+
+:sourceFramework
+    a owl:ObjectProperty ;
+    rdfs:label "source framework"@en ;
+    rdfs:comment "Links a capability to the macOS framework that provides it."@en ;
+    rdfs:domain :Capability ;
+    rdfs:range :Framework .
+
+:sourcePlugin
+    a owl:ObjectProperty ;
+    rdfs:label "source plugin"@en ;
+    rdfs:comment "Links a capability to the plugin that provides it."@en ;
+    rdfs:domain :Capability ;
+    rdfs:range :Plugin .
+
+:pyobjcSymbol
+    a owl:DatatypeProperty ;
+    rdfs:label "PyObjC symbol"@en ;
+    rdfs:comment "The fully-qualified PyObjC symbol name for this capability (e.g., 'Cocoa.NSWorkspace.activeApplication')."@en ;
+    rdfs:domain :Capability ;
+    rdfs:range xsd:string .
+
+:capabilityType
+    a owl:ObjectProperty ;
+    rdfs:label "capability type"@en ;
+    rdfs:comment "Classifies the capability by functional domain."@en ;
+    rdfs:domain :Capability ;
+    rdfs:range :CapabilityType .
+
+:requiresPermission
+    a owl:DatatypeProperty ;
+    rdfs:label "requires permission"@en ;
+    rdfs:comment "macOS permission required to use this capability (e.g., 'Accessibility', 'ScreenRecording')."@en ;
+    rdfs:domain :Capability ;
+    rdfs:range xsd:string .
+
+:hasSLO
+    a owl:ObjectProperty ;
+    rdfs:label "has SLO"@en ;
+    rdfs:comment "Links a capability to its service level objectives."@en ;
+    rdfs:domain :Capability ;
+    rdfs:range :ServiceLevelObjective .
+
+# ==============================================================================
+# CORE PROPERTIES - FEATURE TEMPLATE
+# ==============================================================================
+
+:hasInputType
+    a owl:DatatypeProperty ;
+    rdfs:label "has input type"@en ;
+    rdfs:comment "Specifies the type of observations consumed by this feature template."@en ;
+    rdfs:domain :FeatureTemplate ;
+    rdfs:range xsd:string ;
+    skos:example "AppWindowObservation, KeyboardObservation, BrowserURLObservation" .
+
+:hasOutputType
+    a owl:DatatypeProperty ;
+    rdfs:label "has output type"@en ;
+    rdfs:comment "Specifies the data type of the computed feature value."@en ;
+    rdfs:domain :FeatureTemplate ;
+    rdfs:range xsd:string ;
+    skos:example "xsd:float, xsd:integer, xsd:duration" .
+
+:sourceCapability
+    a owl:ObjectProperty ;
+    rdfs:label "source capability"@en ;
+    rdfs:comment "Links a feature template to the capability(ies) required to collect input observations."@en ;
+    rdfs:domain :FeatureTemplate ;
+    rdfs:range :Capability .
+
+:aggregationFunction
+    a owl:ObjectProperty ;
+    rdfs:label "aggregation function"@en ;
+    rdfs:comment "The function used to aggregate observations into feature values."@en ;
+    rdfs:domain :FeatureTemplate ;
+    rdfs:range :AggregationFunction .
+
+:windowDuration
+    a owl:DatatypeProperty ;
+    rdfs:label "window duration"@en ;
+    rdfs:comment "Default temporal window duration for this feature (ISO 8601 duration)."@en ;
+    rdfs:domain :FeatureTemplate ;
+    rdfs:range xsd:duration ;
+    skos:example "PT1H for 1 hour, PT15M for 15 minutes" .
+
+:featureCategory
+    a owl:ObjectProperty ;
+    rdfs:label "feature category"@en ;
+    rdfs:comment "Categorizes the feature by analysis domain."@en ;
+    rdfs:domain :FeatureTemplate ;
+    rdfs:range :FeatureCategory .
+
+:hasParameter
+    a owl:ObjectProperty ;
+    rdfs:label "has parameter"@en ;
+    rdfs:comment "Links a feature template to configurable parameters."@en ;
+    rdfs:domain :FeatureTemplate ;
+    rdfs:range :FeatureParameter .
+
+# ==============================================================================
+# CORE PROPERTIES - FEATURE INSTANCE
+# ==============================================================================
+
+:instanceOf
+    a owl:ObjectProperty ;
+    rdfs:label "instance of"@en ;
+    rdfs:comment "Links a feature instance to its template."@en ;
+    rdfs:domain :FeatureInstance ;
+    rdfs:range :FeatureTemplate .
+
+:hasValue
+    a owl:DatatypeProperty ;
+    rdfs:label "has value"@en ;
+    rdfs:comment "The computed value of this feature instance."@en ;
+    rdfs:domain :FeatureInstance .
+
+:observationWindow
+    a owl:ObjectProperty ;
+    rdfs:label "observation window"@en ;
+    rdfs:comment "The temporal window over which this feature was computed."@en ;
+    rdfs:domain :FeatureInstance ;
+    rdfs:range :ObservationWindow .
+
+:computedFrom
+    a owl:ObjectProperty ;
+    rdfs:label "computed from"@en ;
+    rdfs:comment "Links a feature instance to the observations used in its computation."@en ;
+    rdfs:domain :FeatureInstance ;
+    rdfs:range :Observation .
+
+:parameterValue
+    a owl:DatatypeProperty ;
+    rdfs:label "parameter value"@en ;
+    rdfs:comment "Value of a template parameter for this specific instance."@en ;
+    rdfs:domain :FeatureInstance .
+
+:confidence
+    a owl:DatatypeProperty ;
+    rdfs:label "confidence"@en ;
+    rdfs:comment "Confidence score for this feature value (0.0-1.0)."@en ;
+    rdfs:domain :FeatureInstance ;
+    rdfs:range xsd:float .
+
+# ==============================================================================
+# CORE PROPERTIES - TEMPORAL
+# ==============================================================================
+
+:startTime
+    a owl:DatatypeProperty ;
+    rdfs:label "start time"@en ;
+    rdfs:comment "Start timestamp of a temporal entity (ISO 8601)."@en ;
+    rdfs:domain :TemporalEntity ;
+    rdfs:range xsd:dateTime .
+
+:endTime
+    a owl:DatatypeProperty ;
+    rdfs:label "end time"@en ;
+    rdfs:comment "End timestamp of a temporal entity (ISO 8601)."@en ;
+    rdfs:domain :TemporalEntity ;
+    rdfs:range xsd:dateTime .
+
+:duration
+    a owl:DatatypeProperty ;
+    rdfs:label "duration"@en ;
+    rdfs:comment "Duration of a temporal entity (ISO 8601 duration)."@en ;
+    rdfs:domain :TemporalEntity ;
+    rdfs:range xsd:duration .
+
+:timestamp
+    a owl:DatatypeProperty ;
+    rdfs:label "timestamp"@en ;
+    rdfs:comment "Point-in-time timestamp for an observation or event."@en ;
+    rdfs:domain :TemporalEntity ;
+    rdfs:range xsd:dateTime .
+
+# ==============================================================================
+# CORE PROPERTIES - EVENT
+# ==============================================================================
+
+:detectedBy
+    a owl:ObjectProperty ;
+    rdfs:label "detected by"@en ;
+    rdfs:comment "Links an event to the pattern that detected it."@en ;
+    rdfs:domain :Event ;
+    rdfs:range :EventPattern .
+
+:triggeredBy
+    a owl:ObjectProperty ;
+    rdfs:label "triggered by"@en ;
+    rdfs:comment "Links an event to the feature instance(s) that triggered it."@en ;
+    rdfs:domain :Event ;
+    rdfs:range :FeatureInstance .
+
+:eventType
+    a owl:DatatypeProperty ;
+    rdfs:label "event type"@en ;
+    rdfs:comment "Type classification of the event."@en ;
+    rdfs:domain :Event ;
+    rdfs:range xsd:string ;
+    skos:example "StateTransition, Anomaly, Threshold, Pattern" .
+
+:severity
+    a owl:DatatypeProperty ;
+    rdfs:label "severity"@en ;
+    rdfs:comment "Severity level of the event (info, warning, critical)."@en ;
+    rdfs:domain :Event ;
+    rdfs:range xsd:string .
+
+# ==============================================================================
+# CORE PROPERTIES - APPLICATION & DOMAIN
+# ==============================================================================
+
+:appBundleId
+    a owl:DatatypeProperty ;
+    rdfs:label "app bundle ID"@en ;
+    rdfs:comment "macOS bundle identifier for the application."@en ;
+    rdfs:domain :App ;
+    rdfs:range xsd:string ;
+    skos:example "com.microsoft.VSCode" .
+
+:appName
+    a owl:DatatypeProperty ;
+    rdfs:label "app name"@en ;
+    rdfs:comment "Human-readable application name."@en ;
+    rdfs:domain :App ;
+    rdfs:range xsd:string .
+
+:appCategory
+    a owl:ObjectProperty ;
+    rdfs:label "app category"@en ;
+    rdfs:comment "Categorizes the application by functional domain."@en ;
+    rdfs:domain :App ;
+    rdfs:range :AppCategory .
+
+:domainName
+    a owl:DatatypeProperty ;
+    rdfs:label "domain name"@en ;
+    rdfs:comment "Fully-qualified domain name or URL pattern."@en ;
+    rdfs:domain :Domain ;
+    rdfs:range xsd:string .
+
+:domainCategory
+    a owl:ObjectProperty ;
+    rdfs:label "domain category"@en ;
+    rdfs:comment "Categorizes the domain by purpose."@en ;
+    rdfs:domain :Domain ;
+    rdfs:range :DomainCategory .
+
+# ==============================================================================
+# UTILITY CLASSES
+# ==============================================================================
+
+:FeatureParameter
+    a owl:Class ;
+    rdfs:subClassOf :StructuralEntity ;
+    rdfs:label "Feature Parameter"@en ;
+    rdfs:comment "A configurable parameter for a feature template."@en .
+
+:parameterName
+    a owl:DatatypeProperty ;
+    rdfs:label "parameter name"@en ;
+    rdfs:domain :FeatureParameter ;
+    rdfs:range xsd:string .
+
+:parameterType
+    a owl:DatatypeProperty ;
+    rdfs:label "parameter type"@en ;
+    rdfs:domain :FeatureParameter ;
+    rdfs:range xsd:string .
+
+:defaultValue
+    a owl:DatatypeProperty ;
+    rdfs:label "default value"@en ;
+    rdfs:domain :FeatureParameter .
+
+# ==============================================================================
+# METADATA PROPERTIES
+# ==============================================================================
+
+:version
+    a owl:DatatypeProperty ;
+    rdfs:label "version"@en ;
+    rdfs:comment "Version identifier for versioned entities."@en ;
+    rdfs:range xsd:string .
+
+:createdAt
+    a owl:DatatypeProperty ;
+    rdfs:label "created at"@en ;
+    rdfs:comment "Creation timestamp."@en ;
+    rdfs:range xsd:dateTime .
+
+:updatedAt
+    a owl:DatatypeProperty ;
+    rdfs:label "updated at"@en ;
+    rdfs:comment "Last modification timestamp."@en ;
+    rdfs:range xsd:dateTime .
+
+:description
+    a owl:DatatypeProperty ;
+    rdfs:label "description"@en ;
+    rdfs:comment "Human-readable description."@en ;
+    rdfs:range xsd:string .
+
+:deprecated
+    a owl:DatatypeProperty ;
+    rdfs:label "deprecated"@en ;
+    rdfs:comment "Indicates if an entity is deprecated."@en ;
+    rdfs:range xsd:boolean .

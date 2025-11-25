@@ -1,0 +1,132 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix kgcl: <http://kgcl.io/ontology/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+# Text Summarization Feature
+kgcl:TextSummarizationShape a sh:NodeShape ;
+    sh:targetClass kgcl:TextSummarization ;
+    rdfs:comment "Generate a concise summary of input text" ;
+    sh:property [
+        sh:path kgcl:text ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        rdfs:comment "Long text to summarize"
+    ] ;
+    sh:property [
+        sh:path kgcl:max_length ;
+        sh:datatype xsd:integer ;
+        sh:minCount 1 ;
+        sh:defaultValue "100" ;
+        rdfs:comment "Maximum summary length in words"
+    ] ;
+    sh:property [
+        sh:path kgcl:summary ;
+        sh:datatype xsd:string ;
+        rdfs:comment "Generated summary"
+    ] .
+
+# Question Answering Feature
+kgcl:QuestionAnsweringShape a sh:NodeShape ;
+    sh:targetClass kgcl:QuestionAnswering ;
+    rdfs:comment "Answer questions based on provided context" ;
+    sh:property [
+        sh:path kgcl:question ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        rdfs:comment "Question to answer"
+    ] ;
+    sh:property [
+        sh:path kgcl:context ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        rdfs:comment "Context for answering the question"
+    ] ;
+    sh:property [
+        sh:path kgcl:answer ;
+        sh:datatype xsd:string ;
+        rdfs:comment "Generated answer"
+    ] ;
+    sh:property [
+        sh:path kgcl:confidence ;
+        sh:datatype xsd:float ;
+        rdfs:comment "Answer confidence score"
+    ] .
+
+# Sentiment Analysis Feature
+kgcl:SentimentAnalysisShape a sh:NodeShape ;
+    sh:targetClass kgcl:SentimentAnalysis ;
+    rdfs:comment "Analyze sentiment of text" ;
+    sh:property [
+        sh:path kgcl:text ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        rdfs:comment "Text to analyze"
+    ] ;
+    sh:property [
+        sh:path kgcl:sentiment ;
+        sh:datatype xsd:string ;
+        rdfs:comment "Predicted sentiment (positive, negative, neutral)"
+    ] ;
+    sh:property [
+        sh:path kgcl:score ;
+        sh:datatype xsd:float ;
+        rdfs:comment "Sentiment score (-1 to 1)"
+    ] .
+
+# Text Translation Feature
+kgcl:TextTranslationShape a sh:NodeShape ;
+    sh:targetClass kgcl:TextTranslation ;
+    rdfs:comment "Translate text between languages" ;
+    sh:property [
+        sh:path kgcl:text ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        rdfs:comment "Text to translate"
+    ] ;
+    sh:property [
+        sh:path kgcl:source_language ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        rdfs:comment "Source language code (e.g., 'en', 'es')"
+    ] ;
+    sh:property [
+        sh:path kgcl:target_language ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        rdfs:comment "Target language code"
+    ] ;
+    sh:property [
+        sh:path kgcl:translation ;
+        sh:datatype xsd:string ;
+        rdfs:comment "Translated text"
+    ] .
+
+# Code Generation Feature
+kgcl:CodeGenerationShape a sh:NodeShape ;
+    sh:targetClass kgcl:CodeGeneration ;
+    rdfs:comment "Generate code from natural language description" ;
+    sh:property [
+        sh:path kgcl:description ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        rdfs:comment "Natural language description of code to generate"
+    ] ;
+    sh:property [
+        sh:path kgcl:language ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:defaultValue "python" ;
+        rdfs:comment "Programming language (e.g., 'python', 'javascript')"
+    ] ;
+    sh:property [
+        sh:path kgcl:code ;
+        sh:datatype xsd:string ;
+        rdfs:comment "Generated code"
+    ] ;
+    sh:property [
+        sh:path kgcl:explanation ;
+        sh:datatype xsd:string ;
+        rdfs:comment "Explanation of generated code"
+    ] .

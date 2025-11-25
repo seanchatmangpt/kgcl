@@ -1,0 +1,27 @@
+site_name: kgcl
+site_description: Knowledge Geometry Calculus for Life
+site_url: https://user.github.io/kgcl
+repo_url: https://github.com/user/kgcl
+repo_name: user/kgcl
+
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - Reference: reference.md
+
+watch:
+  - src
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: numpy
+
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences

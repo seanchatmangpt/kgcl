@@ -72,29 +72,29 @@ This project uses SPARC (Specification, Pseudocode, Architecture, Refinement, Co
 
 All build/test/lint workflows run via `poe <task>` where tasks are defined in `pyproject.toml` → `[tool.poe.tasks]`.
 
-### Core Poe Commands
+### Core Poe Commands (via `uv run poe` with Timeouts)
 ```bash
-# Development
-poe format           # Format code (Ruff)
-poe lint             # Lint & fix (Ruff)
-poe type-check       # Type check (Mypy, strict mode)
-poe test             # Run tests (Pytest)
+# Development (with timeouts to prevent hanging)
+timeout 5s uv run poe format            # Format code (Ruff) - 5s max
+timeout 8s uv run poe lint              # Lint & fix (Ruff) - 8s max
+timeout 15s uv run poe type-check       # Type check (Mypy, strict mode) - 15s max
+timeout 30s uv run poe test             # Run tests (Pytest) - 30s max
 
 # Verification
-poe verify           # All checks + tests
-poe ci               # CI pipeline: format-check, lint, types, tests, docs
+timeout 60s uv run poe verify           # All checks + tests - 60s max
+timeout 60s uv run poe ci               # CI pipeline - 60s max
 
 # Release
-poe release-check    # All checks (no fixes)
-poe prod-build       # Strict production build
+timeout 30s uv run poe release-check    # All checks (no fixes) - 30s max
+timeout 60s uv run poe prod-build       # Strict production build - 60s max
 
 # UNRDF-Specific
-poe unrdf-validate   # Type-check + UNRDF tests
-poe unrdf-full       # All UNRDF porting tests
+timeout 30s uv run poe unrdf-validate   # Type-check + UNRDF tests - 30s max
+timeout 60s uv run poe unrdf-full       # All UNRDF porting tests - 60s max
 
 # Git Hooks
-poe pre-commit-setup # Install hooks (one-time setup)
-poe pre-commit-run   # Manually run pre-commit checks
+timeout 3s uv run poe pre-commit-setup  # Install hooks - 3s max
+timeout 15s uv run poe pre-commit-run   # Run pre-commit checks - 15s max
 ```
 
 **NEVER run ad-hoc shell commands when an equivalent `poe <task>` exists.**
@@ -316,12 +316,12 @@ password = "admin123"  # Secret in code!
 
 ## Linting & Formatting - Strictest
 
-### Run Before Commit
+### Run Before Commit (with Timeouts)
 ```bash
-poe format        # Format code
-poe lint          # Fix linting issues
-poe type-check    # Type check
-poe test          # Run all tests
+timeout 5s uv run poe format         # Format code (5s max)
+timeout 8s uv run poe lint           # Fix linting issues (8s max)
+timeout 15s uv run poe type-check    # Type check (15s max)
+timeout 30s uv run poe test          # Run all tests (30s max)
 ```
 
 Or via `git hooks` (automatic on commit):
@@ -439,7 +439,7 @@ Blocks commits if:
 
 ## Critical Non-Negotiables (Adopted from clap-noun-verb)
 - **Never trust text, only test results.** Every claim must be backed by a passing test run.
-- **Build System Enforcement.** Always use the Poe tasks defined in `pyproject.toml` (`poe format`, `poe lint`, `poe verify`, etc.) for format, lint, type, and test workflows. Ad-hoc scripts are banned.
+- **Build System Enforcement.** Always use the Poe tasks via `poe <task>` defined in `pyproject.toml` (`poe format`, `poe lint`, `poe verify`, etc.) for format, lint, type, and test workflows. Ad-hoc scripts are banned.
 - **Git Hooks.** Never bypass hooks (`--no-verify` prohibited). Fix issues instead of skipping the gate.
 - **Timeout SLAs.** All CLI/test invocations must be wrapped with sane timeouts (e.g., quick checks 5s, compilation 10s, unit tests 1s, integration 30s, long ops 60s). Timeouts expose hung workflows early.
 
@@ -476,11 +476,11 @@ These are NOT optional - they are mandatory on EVERY delivery:
 - ✓ No suppression comments (except with justification tracked in commits)
 
 ### Completion Workflow (Mandatory)
-1. **Run tests immediately:** `poe test` (with timeout) before claiming progress. If failures occur, stop and analyze.
+1. **Run tests immediately:** `timeout 30s uv run poe test` before claiming progress. If failures occur, stop and analyze.
 2. **Create rich TODOs:** For each failure capture test name, error, file, hypothesized root cause, fix plan, and status. Batch at least 10 related TODO entries per failure set.
 3. **Systematic fix cycle:** Investigate → implement fix → run targeted test → update TODO status.
-4. **Re-run full suite:** `poe test` again (with timeout) to confirm everything passes.
-5. **Verify gates:** Ensure lint, type-check, docs, and hooks all pass before concluding work.
+4. **Re-run full suite:** `timeout 30s uv run poe test` again to confirm everything passes.
+5. **Verify gates:** Ensure `timeout 8s uv run poe lint`, `timeout 15s uv run poe type-check`, docs, and hooks all pass before concluding work.
 
 ### Completion Checklist (MANDATORY)
 

@@ -3,7 +3,7 @@
 import pytest
 from src.core import (
     assert_success, assert_error, assert_eq_with_msg, assert_in_range,
-    assert_that, AssertionError as ChicagoAssertionError, AssertionBuilder,
+    assert_that, ChicagoAssertionError,
     test, async_test, TestFixture, FixtureMetadata, Builder,
     StateManager, FailFastValidator, Poka, PokaYokeError
 )

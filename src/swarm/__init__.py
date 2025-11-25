@@ -6,13 +6,15 @@ Inspired by Chicago TDD tools' swarm coordination patterns.
 
 from .coordinator import TestCoordinator
 from .member import SwarmMember
-from .task import TestTask, TaskResult
-from .composition import TestComposition
+from .task import TestTask, TaskResult, TaskStatus
+from .composition import TestComposition, CompositionStrategy
 
 __all__ = [
     "TestCoordinator",
     "SwarmMember",
     "TestTask",
     "TaskResult",
+    "TaskStatus",
     "TestComposition",
+    "CompositionStrategy",
 ]

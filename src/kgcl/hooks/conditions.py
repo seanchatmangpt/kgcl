@@ -11,8 +11,6 @@ from datetime import datetime, timedelta
 from enum import Enum
 from typing import Any, Dict, List, Optional
 import asyncio
-import hashlib
-import json
 
 from kgcl.hooks.query_cache import QueryCache
 

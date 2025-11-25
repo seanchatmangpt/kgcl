@@ -1,0 +1,110 @@
+"""KGC projection generators package.
+
+Provides generator classes for producing artifacts from RDF knowledge graphs.
+Each generator queries RDF data, transforms to domain objects, and renders
+artifacts using Jinja2 templates.
+
+Available Generators:
+    - ProjectionGenerator: Abstract base class for all generators
+    - AgendaGenerator: Daily/weekly calendar agendas
+    - QualityReportGenerator: SHACL validation quality reports
+    - ConflictReportGenerator: Scheduling and resource conflict reports
+    - StaleItemsGenerator: Outdated items and cleanup recommendations
+
+Example:
+    >>> from rdflib import Graph
+    >>> from kgcl.generators import AgendaGenerator
+    >>>
+    >>> graph = Graph()
+    >>> graph.parse("knowledge_base.ttl")
+    >>>
+    >>> generator = AgendaGenerator(graph)
+    >>> agenda = generator.generate()
+    >>> print(agenda)
+
+Version: 1.0.0
+Author: KGC Development Team
+"""
+
+from .base import ProjectionGenerator
+from .agenda import AgendaGenerator, CalendarEvent, Reminder, FocusBlock
+from .quality import QualityReportGenerator, Violation, QualityCategory
+from .conflict import ConflictReportGenerator, TimeConflict, ResourceConflict
+from .stale import StaleItemsGenerator, StaleItem, CompletedItem
+
+__version__ = "1.0.0"
+
+__all__ = [
+    # Base generator
+    "ProjectionGenerator",
+
+    # Agenda generator
+    "AgendaGenerator",
+    "CalendarEvent",
+    "Reminder",
+    "FocusBlock",
+
+    # Quality generator
+    "QualityReportGenerator",
+    "Violation",
+    "QualityCategory",
+
+    # Conflict generator
+    "ConflictReportGenerator",
+    "TimeConflict",
+    "ResourceConflict",
+
+    # Stale items generator
+    "StaleItemsGenerator",
+    "StaleItem",
+    "CompletedItem",
+]
+
+
+def get_available_generators() -> dict[str, type[ProjectionGenerator]]:
+    """Get dictionary of available generator classes.
+
+    Returns:
+        Dictionary mapping generator names to classes
+    """
+    return {
+        "agenda": AgendaGenerator,
+        "quality": QualityReportGenerator,
+        "conflict": ConflictReportGenerator,
+        "stale": StaleItemsGenerator,
+    }
+
+
+def create_generator(
+    name: str,
+    graph,
+    **kwargs
+) -> ProjectionGenerator:
+    """Factory function for creating generator instances.
+
+    Args:
+        name: Generator name (agenda, quality, conflict, stale)
+        graph: RDF graph instance
+        **kwargs: Additional arguments for specific generators
+
+    Returns:
+        Initialized generator instance
+
+    Raises:
+        ValueError: If generator name is not recognized
+
+    Example:
+        >>> graph = Graph()
+        >>> generator = create_generator("agenda", graph, start_date=datetime.now())
+        >>> report = generator.generate()
+    """
+    generators = get_available_generators()
+
+    if name not in generators:
+        available = ", ".join(generators.keys())
+        raise ValueError(
+            f"Unknown generator: {name}. Available: {available}"
+        )
+
+    generator_class = generators[name]
+    return generator_class(graph, **kwargs)

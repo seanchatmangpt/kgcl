@@ -496,17 +496,50 @@ def full_ingest_data(
 
 
 @pytest.fixture
-def invalid_ingest_data(
-    calendar_event_invalid_times,
-    calendar_event_no_title,
-    reminder_task_no_status,
-    mail_message_no_sender,
-    file_invalid_path,
-):
+def invalid_ingest_data():
     """Ingest data with intentional validation failures (for quality testing)."""
     return {
-        "bad_calendar_events": [calendar_event_invalid_times, calendar_event_no_title],
-        "bad_reminders": [reminder_task_no_status],
-        "bad_mail_messages": [mail_message_no_sender],
-        "bad_files": [file_invalid_path],
+        "bad_calendar_events": [
+            MockEKEvent(
+                event_id="ek-event-bad-001",
+                title="Invalid Event",
+                start_date=datetime(2025, 11, 24, 15, 0, 0, tzinfo=timezone.utc),
+                end_date=datetime(2025, 11, 24, 14, 0, 0, tzinfo=timezone.utc),
+                calendar_title="Work",
+            ),
+            MockEKEvent(
+                event_id="ek-event-bad-002",
+                title="",
+                start_date=datetime(2025, 11, 24, 10, 0, 0, tzinfo=timezone.utc),
+                end_date=datetime(2025, 11, 24, 11, 0, 0, tzinfo=timezone.utc),
+                calendar_title="Work",
+            ),
+        ],
+        "bad_reminders": [
+            MockEKReminder(
+                reminder_id="reminder-bad-001",
+                title="No Status Task",
+                completed=False,
+                list_title="Work",
+            ),
+        ],
+        "bad_mail_messages": [
+            MockMailMessage(
+                message_id="<msg-bad-001@mail.example.com>",
+                subject="No Sender Message",
+                sender_email="",
+                sender_name="",
+                recipient_emails=["user@company.com"],
+                date_received=datetime(2025, 11, 24, 10, 0, 0, tzinfo=timezone.utc),
+            ),
+        ],
+        "bad_files": [
+            MockFileMetadata(
+                file_path="relative/path/file.txt",
+                file_name="file.txt",
+                created_date=datetime(2025, 11, 24, 10, 0, 0, tzinfo=timezone.utc),
+                modified_date=datetime(2025, 11, 24, 10, 0, 0, tzinfo=timezone.utc),
+                file_type="text/plain",
+            ),
+        ],
     }

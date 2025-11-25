@@ -10,10 +10,10 @@ Executes the 5-step workflow:
 Each step triggers appropriate hooks and tracks execution state.
 """
 
-from datetime import datetime, timezone
+import uuid
+from datetime import UTC, datetime, timezone
 from pathlib import Path
 from typing import Any, Protocol
-import uuid
 
 from .state import WorkflowState, WorkflowStep
 
@@ -117,16 +117,18 @@ class StandardWorkLoop:
         Args:
             workflow_id: Optional workflow identifier (generates UUID if None)
 
-        Returns:
+        Returns
+        -------
             WorkflowState with execution results
 
-        Raises:
+        Raises
+        ------
             Exception: If critical step fails (captured in state)
         """
         workflow_id = workflow_id or str(uuid.uuid4())
         state = WorkflowState(
             workflow_id=workflow_id,
-            started_at=datetime.now(timezone.utc),
+            started_at=datetime.now(UTC),
             current_step=WorkflowStep.DISCOVER,
         )
 
@@ -156,8 +158,8 @@ class StandardWorkLoop:
                 state.complete_step(
                     step=state.current_step,
                     success=False,
-                    started_at=datetime.now(timezone.utc),
-                    errors=[f"Unexpected error: {str(e)}"],
+                    started_at=datetime.now(UTC),
+                    errors=[f"Unexpected error: {e!s}"],
                 )
 
         # Persist final state
@@ -167,7 +169,7 @@ class StandardWorkLoop:
     def _execute_discover(self, state: WorkflowState) -> None:
         """Step 1: Discover - Fetch data from Apple ingest."""
         step = WorkflowStep.DISCOVER
-        started_at = datetime.now(timezone.utc)
+        started_at = datetime.now(UTC)
         state.start_step(step)
 
         try:
@@ -180,7 +182,7 @@ class StandardWorkLoop:
                 {
                     "workflow_id": state.workflow_id,
                     "data": ingested_data,
-                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                    "timestamp": datetime.now(UTC).isoformat(),
                 },
             )
 
@@ -189,24 +191,18 @@ class StandardWorkLoop:
                 step=step,
                 success=True,
                 started_at=started_at,
-                data={
-                    "ingested": ingested_data,
-                    "record_count": ingested_data.get("count", 0),
-                },
+                data={"ingested": ingested_data, "record_count": ingested_data.get("count", 0)},
             )
 
         except Exception as e:
             state.complete_step(
-                step=step,
-                success=False,
-                started_at=started_at,
-                errors=[f"Ingest failed: {str(e)}"],
+                step=step, success=False, started_at=started_at, errors=[f"Ingest failed: {e!s}"]
             )
 
     def _execute_align(self, state: WorkflowState) -> None:
         """Step 2: Align - Check ontology drift, update if needed."""
         step = WorkflowStep.ALIGN
-        started_at = datetime.now(timezone.utc)
+        started_at = datetime.now(UTC)
         state.start_step(step)
 
         try:
@@ -223,7 +219,7 @@ class StandardWorkLoop:
                     {
                         "workflow_id": state.workflow_id,
                         "changes": changes,
-                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                        "timestamp": datetime.now(UTC).isoformat(),
                     },
                 )
 
@@ -245,13 +241,13 @@ class StandardWorkLoop:
                 step=step,
                 success=False,
                 started_at=started_at,
-                errors=[f"Ontology alignment failed: {str(e)}"],
+                errors=[f"Ontology alignment failed: {e!s}"],
             )
 
     def _execute_regenerate(self, state: WorkflowState) -> None:
         """Step 3: Regenerate - Run ALL generators."""
         step = WorkflowStep.REGENERATE
-        started_at = datetime.now(timezone.utc)
+        started_at = datetime.now(UTC)
         state.start_step(step)
 
         try:
@@ -287,13 +283,13 @@ class StandardWorkLoop:
                 step=step,
                 success=False,
                 started_at=started_at,
-                errors=[f"Regeneration failed: {str(e)}"],
+                errors=[f"Regeneration failed: {e!s}"],
             )
 
     def _execute_review(self, state: WorkflowState) -> None:
         """Step 4: Review - Validate artifacts against SHACL."""
         step = WorkflowStep.REVIEW
-        started_at = datetime.now(timezone.utc)
+        started_at = datetime.now(UTC)
         state.start_step(step)
 
         try:
@@ -316,7 +312,7 @@ class StandardWorkLoop:
                         "workflow_id": state.workflow_id,
                         "violations": violations,
                         "artifact_count": validation_result.get("artifact_count", 0),
-                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                        "timestamp": datetime.now(UTC).isoformat(),
                     },
                 )
 
@@ -340,13 +336,13 @@ class StandardWorkLoop:
                 step=step,
                 success=False,
                 started_at=started_at,
-                errors=[f"Validation failed: {str(e)}"],
+                errors=[f"Validation failed: {e!s}"],
             )
 
     def _execute_remove(self, state: WorkflowState) -> None:
         """Step 5: Remove - Detect waste, identify cleanup opportunities."""
         step = WorkflowStep.REMOVE
-        started_at = datetime.now(timezone.utc)
+        started_at = datetime.now(UTC)
         state.start_step(step)
 
         try:
@@ -376,9 +372,7 @@ class StandardWorkLoop:
                     "cleanup_opportunities": cleanup_opportunities,
                     "waste_count": len(waste_items),
                 },
-                warnings=[f"Found {len(waste_items)} waste items"]
-                if waste_items
-                else [],
+                warnings=[f"Found {len(waste_items)} waste items"] if waste_items else [],
             )
 
         except Exception as e:
@@ -386,7 +380,7 @@ class StandardWorkLoop:
                 step=step,
                 success=False,
                 started_at=started_at,
-                errors=[f"Waste detection failed: {str(e)}"],
+                errors=[f"Waste detection failed: {e!s}"],
             )
 
     def _save_state(self, state: WorkflowState) -> None:
@@ -400,7 +394,8 @@ class StandardWorkLoop:
         Args:
             workflow_id: Workflow identifier
 
-        Returns:
+        Returns
+        -------
             WorkflowState if found, None otherwise
         """
         state_file = self.state_dir / f"{workflow_id}.json"
@@ -411,7 +406,8 @@ class StandardWorkLoop:
     def list_workflows(self) -> list[str]:
         """List all workflow IDs with saved state.
 
-        Returns:
+        Returns
+        -------
             List of workflow IDs
         """
         return [f.stem for f in self.state_dir.glob("*.json")]
@@ -422,10 +418,12 @@ class StandardWorkLoop:
         Args:
             workflow_id: Workflow identifier to resume
 
-        Returns:
+        Returns
+        -------
             WorkflowState with execution results
 
-        Raises:
+        Raises
+        ------
             ValueError: If workflow not found or already complete
         """
         state = self.load_state(workflow_id)

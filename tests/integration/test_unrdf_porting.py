@@ -12,9 +12,11 @@ All tests use real execution through the full pipeline.
 """
 
 import json
-from datetime import datetime
+import time
+from collections.abc import Callable
+from datetime import UTC, datetime
 from pathlib import Path
-from tempfile import TemporaryDirectory
+from tempfile import TemporaryDirectory, gettempdir
 from typing import Any
 
 import pytest
@@ -39,7 +41,37 @@ from kgcl.unrdf_engine.hook_registry import (
     PolicyPackManager,
     PolicyPackManifest,
 )
-from kgcl.unrdf_engine.hooks import HookContext, HookPhase, KnowledgeHook
+from kgcl.unrdf_engine.hooks import HookPhase, KnowledgeHook
+
+CHAIN_ENTRY_COUNT = 5
+SUCCESSFUL_HANDLER_COUNT = 2
+BATCH_RECEIPT_COUNT = 5
+P50_LOWER_BOUND = 40.0
+P50_UPPER_BOUND = 60.0
+P99_LOWER_BOUND = 95.0
+P99_UPPER_BOUND = 99.0
+SANDBOX_ALLOWED_PATH = Path(gettempdir()) / "allowed"
+SANDBOX_ALLOWED_PATH_STR = str(SANDBOX_ALLOWED_PATH)
+SANDBOX_ALLOWED_FILE = f"{SANDBOX_ALLOWED_PATH_STR}/file.txt"
+SANDBOX_PATH_TRAVERSAL = f"{SANDBOX_ALLOWED_PATH_STR}/../../../etc/passwd"
+SANDBOX_BASE_PATH_STR = str(Path(gettempdir()))
+SANDBOX_TEST_ROOT_STR = str(Path(gettempdir()) / "sandbox-test")
+SANDBOX_MEMORY_LIMIT_MB = 128
+SANDBOX_INVALID_MEMORY_LIMIT = -1
+EXPECTED_TRIPLE_COUNT = 10
+ARRAY_TRIPLE_THRESHOLD = 3
+QUERY_BATCH_COUNT = 3
+CACHE_STATS_COUNT = 2
+CACHE_MIN_DURATION_MS = 1.0
+CACHE_MAX_DURATION_MS = 50.0
+CACHE_MEAN_DURATION_MS = 25.5
+SLO_TOTAL_COUNT = 2
+SLO_COMPLIANT_COUNT = 1
+SLO_COMPLIANCE_RATE = 0.5
+MERKLE_ROOT_LENGTH = 64
+MERKLE_GRAPH_VERSION = 5
+HANDLER_EXPECTED_VALUE = 20
+TOTAL_RECEIPT_COUNT = 5
 
 
 # Test implementation of KnowledgeHook for testing
@@ -59,12 +91,13 @@ class TestSecurityIntegration:
     """Integration tests for security capabilities."""
 
     @pytest.mark.asyncio
-    async def test_hook_execution_with_error_sanitization(self):
+    async def test_hook_execution_with_error_sanitization(self) -> None:
         """Errors are sanitized in hook execution."""
 
         # Create hook with failing handler
         def failing_handler(context: dict[str, Any]) -> dict[str, Any]:
-            raise ValueError("Secret path /etc/passwd exposed in line 42")
+            message = "Secret path /etc/passwd exposed in line 42"
+            raise ValueError(message)
 
         hook = Hook(
             name="failing_hook",
@@ -92,10 +125,10 @@ class TestSecurityIntegration:
         )
 
     @pytest.mark.asyncio
-    async def test_sandbox_restrictions_enforced(self):
+    async def test_sandbox_restrictions_enforced(self) -> None:
         """Sandbox restrictions prevent unauthorized path access."""
         sandbox = SandboxRestrictions(
-            allowed_paths=["/tmp/allowed"],
+            allowed_paths=[SANDBOX_ALLOWED_PATH_STR],
             no_network=True,
             no_process_spawn=True,
             memory_limit_mb=256,
@@ -103,24 +136,22 @@ class TestSecurityIntegration:
         )
 
         # Test allowed path
-        assert sandbox.validate_path("/tmp/allowed/file.txt") is True
+        assert sandbox.validate_path(SANDBOX_ALLOWED_FILE) is True
 
         # Test disallowed path
         assert sandbox.validate_path("/etc/passwd") is False
 
         # Test path traversal attempt
-        assert sandbox.validate_path("/tmp/allowed/../../../etc/passwd") is False
+        assert sandbox.validate_path(SANDBOX_PATH_TRAVERSAL) is False
 
         # Validate configuration
         assert sandbox.validate_restrictions() is True
 
     @pytest.mark.asyncio
-    async def test_execution_id_generation_unique(self):
+    async def test_execution_id_generation_unique(self) -> None:
         """Each execution generates unique execution ID."""
-        from kgcl.hooks.lifecycle import HookContext as LifecycleHookContext
-
-        context1 = LifecycleHookContext(actor="user1")
-        context2 = LifecycleHookContext(actor="user2")
+        context1 = HookContext(actor="user1")
+        context2 = HookContext(actor="user2")
 
         # Verify execution IDs are unique
         assert context1.execution_id != context2.execution_id
@@ -133,12 +164,13 @@ class TestSecurityIntegration:
         assert context2.actor == "user2"
 
     @pytest.mark.asyncio
-    async def test_sanitized_error_in_receipt(self):
+    async def test_sanitized_error_in_receipt(self) -> None:
         """Receipt contains sanitized error with error code."""
 
         def error_with_stack_trace(context: dict[str, Any]) -> dict[str, Any]:
             # Simulate error with file path and line numbers
-            raise RuntimeError('File "/app/handlers/processor.py", line 123, in process_data')
+            message = 'File "/app/handlers/processor.py", line 123, in process_data'
+            raise RuntimeError(message)
 
         hook = Hook(
             name="error_hook",
@@ -162,34 +194,40 @@ class TestSecurityIntegration:
         assert "line 123" not in receipt.error
 
     @pytest.mark.asyncio
-    async def test_path_traversal_prevented(self):
+    async def test_path_traversal_prevented(self) -> None:
         """Path traversal attacks are prevented by sandbox."""
-        sandbox = SandboxRestrictions(allowed_paths=["/var/data"])
+        sandbox = SandboxRestrictions(allowed_paths=[SANDBOX_TEST_ROOT_STR])
 
         # Various path traversal attempts
         attacks = [
-            "/var/data/../etc/passwd",
-            "/var/data/../../root/.ssh",
-            "/var/data/./../../etc/shadow",
+            f"{SANDBOX_TEST_ROOT_STR}/../etc/passwd",
+            f"{SANDBOX_TEST_ROOT_STR}/../../root/.ssh",
+            f"{SANDBOX_TEST_ROOT_STR}/./../../etc/shadow",
         ]
 
         for attack_path in attacks:
             assert sandbox.validate_path(attack_path) is False
 
     @pytest.mark.asyncio
-    async def test_memory_limit_respected(self):
+    async def test_memory_limit_respected(self) -> None:
         """Sandbox respects memory limit configuration."""
-        sandbox = SandboxRestrictions(allowed_paths=["/tmp"], memory_limit_mb=128)
+        with TemporaryDirectory() as tmpdir:
+            sandbox = SandboxRestrictions(
+                allowed_paths=[tmpdir], memory_limit_mb=SANDBOX_MEMORY_LIMIT_MB
+            )
 
-        assert sandbox.memory_limit_mb == 128
-        assert sandbox.validate_restrictions() is True
+            assert sandbox.memory_limit_mb == SANDBOX_MEMORY_LIMIT_MB
+            assert sandbox.validate_restrictions() is True
 
-        # Invalid memory limit
-        invalid_sandbox = SandboxRestrictions(allowed_paths=["/tmp"], memory_limit_mb=-1)
-        assert invalid_sandbox.validate_restrictions() is False
+            # Invalid memory limit
+            invalid_path = (Path(tmpdir) / "temp").as_posix()
+            invalid_sandbox = SandboxRestrictions(
+                allowed_paths=[invalid_path], memory_limit_mb=SANDBOX_INVALID_MEMORY_LIMIT
+            )
+            assert invalid_sandbox.validate_restrictions() is False
 
     @pytest.mark.asyncio
-    async def test_error_sanitizer_removes_sensitive_patterns(self):
+    async def test_error_sanitizer_removes_sensitive_patterns(self) -> None:
         """ErrorSanitizer removes multiple sensitive patterns."""
         sanitizer = ErrorSanitizer()
 
@@ -204,7 +242,7 @@ class TestSecurityIntegration:
         assert sanitized.is_user_safe is True
 
     @pytest.mark.asyncio
-    async def test_execution_context_propagation(self):
+    async def test_execution_context_propagation(self) -> None:
         """Execution context propagates through pipeline."""
 
         def context_checker(context: dict[str, Any]) -> dict[str, Any]:
@@ -229,7 +267,8 @@ class TestSecurityIntegration:
         # Verify actor propagated
         assert receipt.actor == "test_actor"
 
-        # Verify handler received context (though not directly testable without adding to handler result)
+        # Verify handler received context (though not directly testable without
+        # augmenting handler result)
         assert receipt.handler_result is not None
 
 
@@ -242,7 +281,7 @@ class TestPerformanceIntegration:
     """Integration tests for performance capabilities."""
 
     @pytest.mark.asyncio
-    async def test_condition_evaluation_cached(self):
+    async def test_condition_evaluation_cached(self) -> None:
         """SPARQL condition results are cached."""
         query = "ASK { ?s a <Person> }"
 
@@ -269,7 +308,7 @@ class TestPerformanceIntegration:
         SparqlAskCondition.clear_cache()
 
     @pytest.mark.asyncio
-    async def test_cache_hit_reduces_latency(self):
+    async def test_cache_hit_reduces_latency(self) -> None:
         """Cache hits have lower latency than cache misses."""
         optimizer = PerformanceOptimizer()
 
@@ -283,13 +322,13 @@ class TestPerformanceIntegration:
 
         stats = optimizer.get_stats("sparql_ask")
         assert stats is not None
-        assert stats["count"] == 2
-        assert stats["min"] == 1.0
-        assert stats["max"] == 50.0
-        assert stats["mean"] == 25.5
+        assert stats["count"] == CACHE_STATS_COUNT
+        assert stats["min"] == CACHE_MIN_DURATION_MS
+        assert stats["max"] == CACHE_MAX_DURATION_MS
+        assert stats["mean"] == CACHE_MEAN_DURATION_MS
 
     @pytest.mark.asyncio
-    async def test_query_cache_invalidation(self):
+    async def test_query_cache_invalidation(self) -> None:
         """Query cache can be invalidated."""
         cache = QueryCache(max_size=100, ttl_seconds=60)
 
@@ -305,7 +344,7 @@ class TestPerformanceIntegration:
         assert cache.get(query) is None
 
     @pytest.mark.asyncio
-    async def test_slo_violation_detection(self):
+    async def test_slo_violation_detection(self) -> None:
         """SLO violations are detected."""
         optimizer = PerformanceOptimizer()
 
@@ -326,12 +365,12 @@ class TestPerformanceIntegration:
         # Check SLO status
         slo_status = optimizer.get_slo_status("hook_execute", target_ms=100.0)
         assert slo_status is not None
-        assert slo_status["total_count"] == 2
-        assert slo_status["compliant_count"] == 1
-        assert slo_status["compliance_rate"] == 0.5
+        assert slo_status["total_count"] == SLO_TOTAL_COUNT
+        assert slo_status["compliant_count"] == SLO_COMPLIANT_COUNT
+        assert slo_status["compliance_rate"] == SLO_COMPLIANCE_RATE
 
     @pytest.mark.asyncio
-    async def test_performance_metrics_in_receipt(self):
+    async def test_performance_metrics_in_receipt(self) -> None:
         """Hook execution includes performance metrics."""
 
         def simple_handler(context: dict[str, Any]) -> dict[str, Any]:
@@ -358,7 +397,7 @@ class TestPerformanceIntegration:
         assert stats["count"] == 1
 
     @pytest.mark.asyncio
-    async def test_percentile_calculations_accurate(self):
+    async def test_percentile_calculations_accurate(self) -> None:
         """Percentile calculations are accurate."""
         optimizer = PerformanceOptimizer(sample_size=100)
 
@@ -377,13 +416,13 @@ class TestPerformanceIntegration:
         assert p999 is not None
 
         # p50 should be around 50
-        assert 40 <= p50 <= 60
+        assert P50_LOWER_BOUND <= p50 <= P50_UPPER_BOUND
 
         # p99 should be around 99
-        assert 95 <= p99 <= 99
+        assert P99_LOWER_BOUND <= p99 <= P99_UPPER_BOUND
 
     @pytest.mark.asyncio
-    async def test_batch_execution_performance_tracking(self):
+    async def test_batch_execution_performance_tracking(self) -> None:
         """Batch execution tracks performance metrics."""
 
         def handler(context: dict[str, Any]) -> dict[str, Any]:
@@ -399,13 +438,13 @@ class TestPerformanceIntegration:
                 handler=handler,
                 priority=i * 10,
             )
-            for i in range(5)
+            for i in range(BATCH_RECEIPT_COUNT)
         ]
 
         pipeline = HookExecutionPipeline(enable_performance_tracking=True)
         receipts = await pipeline.execute_batch(hooks, {"value": 10})
 
-        assert len(receipts) == 5
+        assert len(receipts) == BATCH_RECEIPT_COUNT
 
         # Verify batch metrics recorded
         batch_stats = pipeline.get_performance_stats("hook_batch_execute")
@@ -413,7 +452,7 @@ class TestPerformanceIntegration:
         assert batch_stats["count"] == 1
 
     @pytest.mark.asyncio
-    async def test_cache_lru_eviction(self):
+    async def test_cache_lru_eviction(self) -> None:
         """Cache evicts LRU entries when full."""
         cache = QueryCache(max_size=3, ttl_seconds=60)
 
@@ -446,7 +485,7 @@ class TestPolicyPacksIntegration:
     """Integration tests for policy pack management."""
 
     @pytest.mark.asyncio
-    async def test_policy_pack_loading(self):
+    async def test_policy_pack_loading(self) -> None:
         """Policy packs can be loaded from disk."""
         with TemporaryDirectory() as tmpdir:
             pack_dir = Path(tmpdir) / "test_pack"
@@ -462,8 +501,7 @@ class TestPolicyPacksIntegration:
             )
 
             manifest_file = pack_dir / "manifest.json"
-            with open(manifest_file, "w") as f:
-                json.dump(manifest.to_dict(), f)
+            manifest_file.write_text(json.dumps(manifest.to_dict()))
 
             # Create registry with a hook
             registry = PersistentHookRegistry()
@@ -482,7 +520,7 @@ class TestPolicyPacksIntegration:
             assert pack.is_active is True
 
     @pytest.mark.asyncio
-    async def test_activate_deactivate_pack(self):
+    async def test_activate_deactivate_pack(self) -> None:
         """Policy packs can be activated and deactivated."""
         with TemporaryDirectory() as tmpdir:
             pack_dir = Path(tmpdir) / "toggle_pack"
@@ -492,8 +530,7 @@ class TestPolicyPacksIntegration:
                 name="toggle_pack", version="1.0.0", description="Test toggle", hooks=["hook1"]
             )
 
-            with open(pack_dir / "manifest.json", "w") as f:
-                json.dump(manifest.to_dict(), f)
+            (pack_dir / "manifest.json").write_text(json.dumps(manifest.to_dict()))
 
             registry = PersistentHookRegistry()
             hook = TestKnowledgeHook(name="hook1", phases=[HookPhase.PRE_INGESTION])
@@ -517,7 +554,7 @@ class TestPolicyPacksIntegration:
             assert "toggle_pack" in manager.active_packs
 
     @pytest.mark.asyncio
-    async def test_policy_pack_hooks_executed(self):
+    async def test_policy_pack_hooks_executed(self) -> None:
         """Hooks from active policy packs are executed."""
         with TemporaryDirectory() as tmpdir:
             pack_dir = Path(tmpdir) / "exec_pack"
@@ -530,8 +567,7 @@ class TestPolicyPacksIntegration:
                 hooks=["validation_hook"],
             )
 
-            with open(pack_dir / "manifest.json", "w") as f:
-                json.dump(manifest.to_dict(), f)
+            (pack_dir / "manifest.json").write_text(json.dumps(manifest.to_dict()))
 
             registry = PersistentHookRegistry()
             hook = TestKnowledgeHook(
@@ -546,9 +582,10 @@ class TestPolicyPacksIntegration:
             active_hooks = manager.get_active_hooks()
             assert len(active_hooks) == 1
             assert active_hooks[0].name == "validation_hook"
+            assert pack.is_active is True
 
     @pytest.mark.asyncio
-    async def test_slo_validation_from_pack(self):
+    async def test_slo_validation_from_pack(self) -> None:
         """SLOs from policy packs are validated."""
         manifest = PolicyPackManifest(
             name="slo_pack",
@@ -573,7 +610,7 @@ class TestPolicyPacksIntegration:
         assert bad_validation["error_rate"] is False
 
     @pytest.mark.asyncio
-    async def test_policy_pack_dependency_validation(self):
+    async def test_policy_pack_dependency_validation(self) -> None:
         """Policy pack dependencies are validated."""
         with TemporaryDirectory() as tmpdir:
             # Create base pack
@@ -582,8 +619,8 @@ class TestPolicyPacksIntegration:
             base_manifest = PolicyPackManifest(
                 name="base_pack", version="1.0.0", description="Base pack", hooks=["hook1"]
             )
-            with open(base_dir / "manifest.json", "w") as f:
-                json.dump(base_manifest.to_dict(), f)
+            base_manifest_path = base_dir / "manifest.json"
+            base_manifest_path.write_text(json.dumps(base_manifest.to_dict()))
 
             # Create dependent pack
             dep_dir = Path(tmpdir) / "dep_pack"
@@ -595,8 +632,8 @@ class TestPolicyPacksIntegration:
                 hooks=["hook2"],
                 dependencies={"base_pack": "1.0.0"},
             )
-            with open(dep_dir / "manifest.json", "w") as f:
-                json.dump(dep_manifest.to_dict(), f)
+            dep_manifest_path = dep_dir / "manifest.json"
+            dep_manifest_path.write_text(json.dumps(dep_manifest.to_dict()))
 
             registry = PersistentHookRegistry()
             for name in ["hook1", "hook2"]:
@@ -621,7 +658,7 @@ class TestFileResolutionIntegration:
     """Integration tests for file resolution with SHA256 verification."""
 
     @pytest.mark.asyncio
-    async def test_load_condition_from_file(self):
+    async def test_load_condition_from_file(self) -> None:
         """SPARQL condition can be loaded from file."""
         with TemporaryDirectory() as tmpdir:
             query_file = Path(tmpdir) / "query.sparql"
@@ -634,7 +671,7 @@ class TestFileResolutionIntegration:
             assert loaded == query_content
 
     @pytest.mark.asyncio
-    async def test_sha256_verification_enforced(self):
+    async def test_sha256_verification_enforced(self) -> None:
         """SHA256 verification prevents tampering."""
         with TemporaryDirectory() as tmpdir:
             query_file = Path(tmpdir) / "secure.sparql"
@@ -658,7 +695,7 @@ class TestFileResolutionIntegration:
             assert "Integrity check failed" in str(exc_info.value)
 
     @pytest.mark.asyncio
-    async def test_file_not_found_error_handling(self):
+    async def test_file_not_found_error_handling(self) -> None:
         """File not found errors are handled gracefully."""
         with TemporaryDirectory() as tmpdir:
             resolver = FileResolver(allowed_paths=[tmpdir])
@@ -672,7 +709,7 @@ class TestFileResolutionIntegration:
             assert "File not found" in str(exc_info.value)
 
     @pytest.mark.asyncio
-    async def test_condition_with_file_reference(self):
+    async def test_condition_with_file_reference(self) -> None:
         """Condition can load query from file with hash verification."""
         with TemporaryDirectory() as tmpdir:
             query_file = Path(tmpdir) / "condition.sparql"
@@ -701,7 +738,7 @@ class TestLockchainIntegration:
     """Integration tests for receipt chain and Merkle anchoring."""
 
     @pytest.mark.asyncio
-    async def test_receipt_chain_creation(self):
+    async def test_receipt_chain_creation(self) -> None:
         """Receipts can be chained together."""
         store = ReceiptStore()
 
@@ -710,7 +747,7 @@ class TestLockchainIntegration:
         for i in range(3):
             receipt = Receipt(
                 hook_id=f"hook_{i}",
-                timestamp=datetime.utcnow(),
+                timestamp=datetime.now(tz=UTC),
                 condition_result=ConditionResult(triggered=True, metadata={}),
                 handler_result={"step": i},
                 duration_ms=10.0,
@@ -725,11 +762,11 @@ class TestLockchainIntegration:
             assert retrieved.receipt_id == receipt.receipt_id
 
     @pytest.mark.asyncio
-    async def test_chain_integrity_verification(self):
+    async def test_chain_integrity_verification(self) -> None:
         """Receipt chain integrity can be verified."""
         receipt1 = Receipt(
             hook_id="hook1",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(tz=UTC),
             condition_result=ConditionResult(triggered=True, metadata={}),
             handler_result={"data": "value1"},
             duration_ms=15.0,
@@ -737,7 +774,7 @@ class TestLockchainIntegration:
 
         receipt2 = Receipt(
             hook_id="hook2",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(tz=UTC),
             condition_result=ConditionResult(triggered=True, metadata={}),
             handler_result={"data": "value2"},
             duration_ms=20.0,
@@ -755,7 +792,7 @@ class TestLockchainIntegration:
         assert hash1 != hash2
 
     @pytest.mark.asyncio
-    async def test_chain_traversal_backward(self):
+    async def test_chain_traversal_backward(self) -> None:
         """Receipt chain can be traversed backward."""
         store = ReceiptStore()
 
@@ -763,7 +800,7 @@ class TestLockchainIntegration:
         for i in range(5):
             receipt = Receipt(
                 hook_id="chain_hook",
-                timestamp=datetime.utcnow(),
+                timestamp=datetime.now(tz=UTC),
                 condition_result=ConditionResult(triggered=True, metadata={}),
                 handler_result={"sequence": i},
                 duration_ms=5.0,
@@ -772,14 +809,14 @@ class TestLockchainIntegration:
 
         # Query by hook_id
         chain = await store.query(hook_id="chain_hook")
-        assert len(chain) == 5
+        assert len(chain) == CHAIN_ENTRY_COUNT
 
         # Verify sequence
         sequences = [r.handler_result.get("sequence") for r in chain]
         assert set(sequences) == {0, 1, 2, 3, 4}
 
     @pytest.mark.asyncio
-    async def test_merkle_anchor_creation(self):
+    async def test_merkle_anchor_creation(self) -> None:
         """Merkle anchors link receipts to graph state."""
         tree = MerkleTree()
 
@@ -790,12 +827,12 @@ class TestLockchainIntegration:
 
         # Compute root
         root = tree.compute_root()
-        assert len(root) == 64  # SHA256 hex digest
+        assert len(root) == MERKLE_ROOT_LENGTH  # SHA256 hex digest
 
         # Create anchor
-        anchor = tree.create_anchor(graph_version=5)
+        anchor = tree.create_anchor(graph_version=MERKLE_GRAPH_VERSION)
         assert anchor.root_hash == root
-        assert anchor.graph_version == 5
+        assert anchor.graph_version == MERKLE_GRAPH_VERSION
         assert isinstance(anchor.timestamp, datetime)
 
 
@@ -808,12 +845,12 @@ class TestEndToEndWorkflows:
     """Integration tests for complete workflows."""
 
     @pytest.mark.asyncio
-    async def test_complete_hook_execution_pipeline(self):
+    async def test_complete_hook_execution_pipeline(self) -> None:
         """Complete hook execution with security, performance, and receipts."""
         execution_log = []
 
         def logging_handler(context: dict[str, Any]) -> dict[str, Any]:
-            execution_log.append({"context": context, "timestamp": datetime.utcnow()})
+            execution_log.append({"context": context, "timestamp": datetime.now(tz=UTC)})
             return {"processed": True, "value": context.get("value", 0) * 2}
 
         hook = Hook(
@@ -835,7 +872,7 @@ class TestEndToEndWorkflows:
         assert receipt.error is None
         assert receipt.handler_result is not None
         assert receipt.handler_result["processed"] is True
-        assert receipt.handler_result["value"] == 20
+        assert receipt.handler_result["value"] == HANDLER_EXPECTED_VALUE
 
         # Verify performance tracking
         assert receipt.duration_ms > 0
@@ -846,11 +883,11 @@ class TestEndToEndWorkflows:
         assert len(execution_log) == 1
 
     @pytest.mark.asyncio
-    async def test_multi_hook_execution_chain(self):
+    async def test_multi_hook_execution_chain(self) -> None:
         """Multiple hooks execute in priority order with chained receipts."""
         results = []
 
-        def create_handler(step: int):
+        def create_handler(step: int) -> Callable[[dict[str, Any]], dict[str, Any]]:
             def handler(context: dict[str, Any]) -> dict[str, Any]:
                 results.append(step)
                 return {"step": step, "input": context.get("value")}
@@ -877,18 +914,16 @@ class TestEndToEndWorkflows:
         assert results == [0, 1, 2, 3, 4]
 
         # Verify all receipts
-        assert len(receipts) == 5
+        assert len(receipts) == TOTAL_RECEIPT_COUNT
         for i, receipt in enumerate(receipts):
             assert receipt.error is None
             assert receipt.handler_result["step"] == i
 
     @pytest.mark.asyncio
-    async def test_performance_monitoring_end_to_end(self):
+    async def test_performance_monitoring_end_to_end(self) -> None:
         """End-to-end workflow with performance monitoring and SLO tracking."""
 
         def variable_latency_handler(context: dict[str, Any]) -> dict[str, Any]:
-            import time
-
             delay = context.get("delay_ms", 0) / 1000.0
             time.sleep(delay)
             return {"completed": True}
@@ -922,15 +957,16 @@ class TestEndToEndWorkflows:
             assert batch_stats["count"] > 0
 
     @pytest.mark.asyncio
-    async def test_error_recovery_with_sanitization(self):
+    async def test_error_recovery_with_sanitization(self) -> None:
         """Errors are caught, sanitized, and execution continues."""
         results = []
 
         def failing_handler(context: dict[str, Any]) -> dict[str, Any]:
             if context.get("fail"):
-                raise ValueError(
+                error_message = (
                     "Critical error in /app/process.py line 456: database connection failed"
                 )
+                raise ValueError(error_message)
             results.append("success")
             return {"status": "ok"}
 
@@ -970,7 +1006,7 @@ class TestEndToEndWorkflows:
         ]
 
         receipts = []
-        for hook, ctx in zip(hooks, contexts):
+        for hook, ctx in zip(hooks, contexts, strict=True):
             receipt = await pipeline.execute(hook, ctx)
             receipts.append(receipt)
 
@@ -989,4 +1025,4 @@ class TestEndToEndWorkflows:
         assert receipts[2].handler_result["status"] == "ok"
 
         # Verify handlers executed
-        assert len(results) == 2  # Two successes
+        assert len(results) == SUCCESSFUL_HANDLER_COUNT

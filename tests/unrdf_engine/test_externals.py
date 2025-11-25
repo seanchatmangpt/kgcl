@@ -9,6 +9,10 @@ from rdflib import Graph
 
 from kgcl.unrdf_engine.externals import CapabilityType, ExecutionReceipt, ExternalCapabilityBridge
 
+DEFAULT_WORKING_DIR = Path(tempfile.gettempdir())
+TIMEOUT_EXIT_CODE = 124
+MIN_EXPECTED_DURATION_MS = 100
+
 
 class TestExecutionReceipt:
     """Test ExecutionReceipt class."""
@@ -76,7 +80,7 @@ class TestExternalCapabilityBridge:
 
     def test_initialization_with_working_dir(self) -> None:
         """Test bridge initialization with custom working directory."""
-        working_dir = Path("/tmp")
+        working_dir = DEFAULT_WORKING_DIR
         bridge = ExternalCapabilityBridge(working_dir=working_dir)
 
         assert bridge.working_dir == working_dir
@@ -166,7 +170,7 @@ time.sleep(10)
             bridge = ExternalCapabilityBridge()
             receipt = bridge.execute_python(script=script_path, input_data={}, timeout=0.5)
 
-            assert receipt.exit_code == 124  # Timeout exit code
+            assert receipt.exit_code == TIMEOUT_EXIT_CODE  # Timeout exit code
             assert "timed out" in receipt.error
 
         finally:
@@ -270,7 +274,7 @@ print(json.dumps({"result": "ok"}))
             receipt = bridge.execute_python(script=script_path, input_data={}, timeout=5.0)
 
             # Should have taken at least 100ms
-            assert receipt.duration_ms >= 100
+            assert receipt.duration_ms >= MIN_EXPECTED_DURATION_MS
 
         finally:
             script_path.unlink()

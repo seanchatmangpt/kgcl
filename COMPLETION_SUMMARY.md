@@ -115,24 +115,23 @@ The complete KGCL (Knowledge Geometry Calculus for Life) system has been success
 
 ## Phase 2: Build System Setup (Complete ✓)
 
-### Cargo-Make Equivalent for Python
+### UV Script Automation for Python
 
-**Files Created**:
-- ✅ `Makefile.toml` - 300+ lines of build automation
+**Files Updated**:
+- ✅ `pyproject.toml` - Strictest tool configurations + `[tool.uv.scripts]`
 - ✅ `.githooks/pre-commit` - Automatic quality gates
-- ✅ `pyproject.toml` - Strictest tool configurations
 
 ### Key Build Commands
 
 ```bash
-cargo-make              # Default: format-check, lint, tests
-cargo-make format       # Format code with Ruff
-cargo-make lint         # Lint & fix with ALL rules enabled
-cargo-make type-check   # Type check with mypy (strict)
-cargo-make test         # Run all tests
-cargo-make verify       # All checks + tests (with fixes)
-cargo-make ci           # Full CI pipeline (no fixes)
-cargo-make prod-build   # Strict production build
+uv run verify           # Default: format + lint + types + tests
+uv run format           # Format code with Ruff
+uv run lint             # Lint & fix with ALL rules enabled
+uv run type-check       # Type check with mypy (strict)
+uv run test             # Run all tests
+uv run verify-strict    # All checks + coverage + docs
+uv run ci               # Full CI pipeline
+uv run prod-build       # Strict production build
 ```
 
 ### Strictest Settings
@@ -275,7 +274,6 @@ docs/
 ```
 kgcl/
 ├── pyproject.toml               # ALL tool configurations
-├── Makefile.toml                # Build automation
 ├── uv.lock                      # Locked dependencies
 ├── .cursorrules                 # Production standards
 ├── .cursor/commands/            # Custom commands
@@ -297,7 +295,7 @@ kgcl/
 - [x] Performance SLOs met
 - [x] Complete documentation
 - [x] Git hooks enforce code quality
-- [x] Build system fully automated (cargo-make)
+- [x] Build system fully automated (uv scripts)
 - [x] Pre-commit hooks installed
 - [x] Cursor IDE configuration
 - [x] Zero technical debt
@@ -331,27 +329,27 @@ kgcl/
 ```bash
 cd /Users/sac/dev/kgcl
 uv sync                          # Install dependencies
-cargo-make pre-commit-setup      # Install git hooks
+uv run pre-commit-setup          # Install git hooks
 ```
 
 ### Development Workflow
 ```bash
-cargo-make format               # Format code
-cargo-make lint                 # Fix linting issues
-cargo-make type-check           # Type check
-cargo-make test                 # Run tests
+uv run format                   # Format code
+uv run lint                     # Fix linting issues
+uv run type-check               # Type check
+uv run test                     # Run tests
 git commit -m "..."             # Pre-commit hook runs
 ```
 
 ### Pre-Deployment
 ```bash
-cargo-make prod-build            # Strict production build
+uv run prod-build               # Strict production build
 # All checks must pass before deployment
 ```
 
 ### Validate UNRDF Porting
 ```bash
-cargo-make unrdf-full            # All UNRDF porting tests
+uv run unrdf-full               # All UNRDF porting tests
 # 127 tests should pass
 ```
 
@@ -363,7 +361,7 @@ cargo-make unrdf-full            # All UNRDF porting tests
 - **Validation Report**: `docs/UNRDF_PORTING_VALIDATION.md`
 - **Build System**: `docs/BUILD_SYSTEM_SUMMARY.md`
 - **Production Standards**: `.cursorrules`
-- **Build Tasks**: `Makefile.toml`
+- **Build Scripts**: `pyproject.toml [tool.uv.scripts]`
 - **Tool Configuration**: `pyproject.toml`
 - **Git Hooks**: `.githooks/pre-commit`
 - **CLAUDE.md**: Updated with Python/uv guidance
@@ -375,7 +373,7 @@ cargo-make unrdf-full            # All UNRDF porting tests
 KGCL is now a **production-ready knowledge engine** with:
 
 ✅ Complete UNRDF port (8 patterns, 127 tests)
-✅ Strictest build automation (cargo-make + Ruff + Mypy)
+✅ Strictest build automation (uv scripts + Ruff + Mypy)
 ✅ Automatic quality gates (git hooks)
 ✅ Chicago School TDD (real objects, no mocks)
 ✅ Full type safety (mypy strict mode)

@@ -8,6 +8,7 @@ and stores receipts as RDF nodes in UNRDF graph.
 import json
 import logging
 import time
+import uuid
 from dataclasses import asdict, dataclass, field
 from datetime import datetime
 from pathlib import Path
@@ -121,7 +122,7 @@ class ReceiptGenerator:
         -------
             Generated receipt
         """
-        receipt_id = f"{signature_name}_{int(time.time() * 1000)}"
+        receipt_id = f"{signature_name}_{uuid.uuid4().hex}"
         timestamp = time.time()
 
         receipt = Receipt(

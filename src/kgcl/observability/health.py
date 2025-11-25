@@ -4,11 +4,19 @@ Provides health check endpoints and diagnostic commands for monitoring
 system health and connectivity.
 """
 
+from __future__ import annotations
+
+import hashlib
 import logging
+import os
 import time
 from dataclasses import dataclass
+from datetime import UTC, datetime, timezone
 from enum import Enum
+from pathlib import Path
 from typing import Any
+
+from rdflib import Graph
 
 logger = logging.getLogger(__name__)
 
@@ -257,13 +265,60 @@ def check_graph_integrity() -> tuple[bool, str, dict[str, Any]]:
         (is_healthy, message, details)
 
     """
-    # TODO: Implement actual graph integrity check
-    # This would check:
-    # - Graph is accessible
-    # - No corruption
-    # - Triple counts are reasonable
-    # - Key namespaces are present
-    return (True, "Graph integrity check passed", {"triples": 0})
+    graph_path, search_paths = _resolve_graph_file()
+    search_paths_str = [str(path) for path in search_paths]
+    if graph_path is None:
+        details = {"error": "graph_file_not_configured", "search_paths": search_paths_str}
+        return (False, "Graph file not configured", details)
+
+    if not graph_path.exists():
+        details = {
+            "error": "graph_file_not_found",
+            "graph_file": str(graph_path),
+            "search_paths": search_paths_str,
+        }
+        return (False, "Configured graph file not found", details)
+
+    try:
+        graph = Graph()
+        parse_kwargs = {}
+        if graph_format := _infer_graph_format(graph_path):
+            parse_kwargs["format"] = graph_format
+        graph.parse(graph_path, **parse_kwargs)
+    except Exception as exc:  # noqa: BLE001 - propagate exact failure
+        details = {
+            "error": str(exc),
+            "graph_file": str(graph_path),
+            "search_paths": search_paths_str,
+        }
+        return (False, "Failed to parse graph file", details)
+
+    triple_count = len(graph)
+    details = _build_graph_metrics(graph, graph_path, search_paths_str)
+
+    if triple_count == 0:
+        return (False, "Graph contains no triples", details)
+
+    try:
+        graph.query("ASK { ?s ?p ?o }")
+    except Exception as exc:  # noqa: BLE001
+        details["error"] = str(exc)
+        return (False, "Graph query execution failed", details)
+
+    warnings: list[str] = []
+    namespaces = details.get("namespaces", {})
+    if "sh" not in namespaces:
+        warnings.append("SHACL namespace not declared")
+    if not any("unrdf" in uri for uri in namespaces.values()):
+        warnings.append("UNRDF namespace not declared")
+
+    if warnings:
+        details["warnings"] = warnings
+        message = f"Graph integrity check passed with warnings ({triple_count} triples)"
+    else:
+        message = f"Graph integrity check passed ({triple_count} triples)"
+
+    return (True, message, details)
 
 
 def check_observability() -> tuple[bool, str, dict[str, Any]]:
@@ -296,3 +351,77 @@ def check_observability() -> tuple[bool, str, dict[str, Any]]:
 register_health_check("ollama", check_ollama_connectivity)
 register_health_check("graph", check_graph_integrity)
 register_health_check("observability", check_observability)
+
+
+GRAPH_PATH_ENV = "KGCL_GRAPH_FILE"
+
+
+def _resolve_graph_file() -> tuple[Path | None, list[Path]]:
+    """Resolve graph file path from env/configured search locations."""
+    search_paths: list[Path] = []
+
+    env_path = os.getenv(GRAPH_PATH_ENV)
+    if env_path:
+        path = Path(env_path).expanduser()
+        search_paths.append(path)
+        return path, search_paths
+
+    try:
+        repo_root = Path(__file__).resolve().parents[3]
+    except IndexError:
+        repo_root = Path(__file__).resolve().parent
+
+    candidates = [
+        Path.cwd() / "graph.ttl",
+        Path.home() / ".config" / "kgcl" / "graph.ttl",
+        repo_root / "examples" / "sample_outputs" / "knowledge_graph.ttl",
+    ]
+    search_paths.extend(candidates)
+
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate, search_paths
+
+    return None, search_paths
+
+
+def _infer_graph_format(graph_path: Path) -> str | None:
+    """Infer RDF serialization format from file extension."""
+    suffix = graph_path.suffix.lower()
+    return {
+        ".ttl": "turtle",
+        ".n3": "n3",
+        ".nt": "nt",
+        ".nq": "nquads",
+        ".trig": "trig",
+        ".xml": "xml",
+        ".rdf": "xml",
+    }.get(suffix)
+
+
+def _compute_file_hash(graph_path: Path) -> str:
+    """Compute SHA256 hash of the graph file for reproducibility."""
+    hasher = hashlib.sha256()
+    with graph_path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(8192), b""):
+            hasher.update(chunk)
+    return hasher.hexdigest()
+
+
+def _build_graph_metrics(graph: Graph, graph_path: Path, search_paths: list[str]) -> dict[str, Any]:
+    """Build diagnostic metrics for the loaded RDF graph."""
+    stat_result = graph_path.stat()
+    namespaces = {prefix: str(uri) for prefix, uri in graph.namespace_manager.namespaces()}
+    return {
+        "graph_file": str(graph_path),
+        "search_paths": search_paths,
+        "triples": len(graph),
+        "unique_subjects": len(set(graph.subjects())),
+        "unique_predicates": len(set(graph.predicates())),
+        "unique_objects": len(set(graph.objects())),
+        "namespace_count": len(namespaces),
+        "namespaces": namespaces,
+        "size_bytes": stat_result.st_size,
+        "last_modified": datetime.fromtimestamp(stat_result.st_mtime, tz=UTC).isoformat(),
+        "sha256": _compute_file_hash(graph_path),
+    }

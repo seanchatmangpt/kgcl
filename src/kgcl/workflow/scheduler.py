@@ -8,13 +8,13 @@ Supports:
 - Workflow history tracking
 """
 
+import json
+from collections.abc import Callable
 from dataclasses import dataclass, field
-from datetime import datetime, time, timedelta, timezone
+from datetime import UTC, datetime, time, timedelta, timezone
 from enum import Enum
 from pathlib import Path
 from threading import Event, Thread
-from typing import Callable
-import json
 
 from .orchestrator import StandardWorkLoop
 from .state import WorkflowState
@@ -78,9 +78,7 @@ class WorkflowExecution:
         return {
             "workflow_id": self.workflow_id,
             "started_at": self.started_at.isoformat(),
-            "completed_at": self.completed_at.isoformat()
-            if self.completed_at
-            else None,
+            "completed_at": self.completed_at.isoformat() if self.completed_at else None,
             "success": self.success,
             "triggered_by": self.triggered_by,
             "error": self.error,
@@ -151,18 +149,19 @@ class WorkflowScheduler:
     def trigger_manual(self) -> WorkflowState:
         """Manually trigger workflow execution.
 
-        Returns:
+        Returns
+        -------
             WorkflowState from execution
         """
         execution = WorkflowExecution(
-            workflow_id=f"manual-{datetime.now(timezone.utc).isoformat()}",
-            started_at=datetime.now(timezone.utc),
+            workflow_id=f"manual-{datetime.now(UTC).isoformat()}",
+            started_at=datetime.now(UTC),
             triggered_by="manual",
         )
 
         try:
             state = self.orchestrator.execute(workflow_id=execution.workflow_id)
-            execution.completed_at = datetime.now(timezone.utc)
+            execution.completed_at = datetime.now(UTC)
             execution.success = not state.failed
 
             if state.failed:
@@ -173,7 +172,7 @@ class WorkflowScheduler:
             return state
 
         except Exception as e:
-            execution.completed_at = datetime.now(timezone.utc)
+            execution.completed_at = datetime.now(UTC)
             execution.error = str(e)
             self._executions.append(execution)
             self._save_history()
@@ -185,23 +184,23 @@ class WorkflowScheduler:
         Args:
             limit: Maximum number of executions to return
 
-        Returns:
+        Returns
+        -------
             List of WorkflowExecution records, newest first
         """
-        return sorted(
-            self._executions, key=lambda e: e.started_at, reverse=True
-        )[:limit]
+        return sorted(self._executions, key=lambda e: e.started_at, reverse=True)[:limit]
 
     def get_next_execution_time(self) -> datetime | None:
         """Calculate next scheduled execution time.
 
-        Returns:
+        Returns
+        -------
             Next execution datetime, or None if not scheduled
         """
         if not self.config.enabled:
             return None
 
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
 
         if self.config.schedule_type == ScheduleType.ONCE:
             # Already executed
@@ -263,11 +262,8 @@ class WorkflowScheduler:
                 return None
 
             if self._last_execution:
-                return self._last_execution + timedelta(
-                    hours=self.config.interval_hours
-                )
-            else:
-                return now
+                return self._last_execution + timedelta(hours=self.config.interval_hours)
+            return now
 
         return None
 
@@ -283,7 +279,7 @@ class WorkflowScheduler:
                 self._stop_event.wait(timeout=60)
                 continue
 
-            now = datetime.now(timezone.utc)
+            now = datetime.now(UTC)
             if now >= next_execution:
                 # Execute workflow
                 self._execute_scheduled()
@@ -294,23 +290,23 @@ class WorkflowScheduler:
     def _execute_scheduled(self) -> None:
         """Execute scheduled workflow."""
         execution = WorkflowExecution(
-            workflow_id=f"scheduled-{datetime.now(timezone.utc).isoformat()}",
-            started_at=datetime.now(timezone.utc),
+            workflow_id=f"scheduled-{datetime.now(UTC).isoformat()}",
+            started_at=datetime.now(UTC),
             triggered_by="scheduler",
         )
 
         try:
             state = self.orchestrator.execute(workflow_id=execution.workflow_id)
-            execution.completed_at = datetime.now(timezone.utc)
+            execution.completed_at = datetime.now(UTC)
             execution.success = not state.failed
 
             if state.failed:
                 execution.error = "; ".join(state.all_errors)
 
-            self._last_execution = datetime.now(timezone.utc)
+            self._last_execution = datetime.now(UTC)
 
         except Exception as e:
-            execution.completed_at = datetime.now(timezone.utc)
+            execution.completed_at = datetime.now(UTC)
             execution.error = str(e)
 
         finally:
@@ -321,9 +317,7 @@ class WorkflowScheduler:
         """Persist execution history to disk."""
         history_file = self.history_dir / "executions.json"
         data = {
-            "last_execution": self._last_execution.isoformat()
-            if self._last_execution
-            else None,
+            "last_execution": self._last_execution.isoformat() if self._last_execution else None,
             "executions": [e.to_dict() for e in self._executions],
         }
         with history_file.open("w") as f:
@@ -342,9 +336,7 @@ class WorkflowScheduler:
         if last_exec:
             self._last_execution = datetime.fromisoformat(last_exec)
 
-        self._executions = [
-            WorkflowExecution.from_dict(e) for e in data.get("executions", [])
-        ]
+        self._executions = [WorkflowExecution.from_dict(e) for e in data.get("executions", [])]
 
     @property
     def is_running(self) -> bool:
@@ -355,16 +347,15 @@ class WorkflowScheduler:
     def status(self) -> dict:
         """Get scheduler status.
 
-        Returns:
+        Returns
+        -------
             Dictionary with scheduler state
         """
         return {
             "enabled": self.config.enabled,
             "running": self.is_running,
             "schedule_type": self.config.schedule_type.value,
-            "last_execution": self._last_execution.isoformat()
-            if self._last_execution
-            else None,
+            "last_execution": self._last_execution.isoformat() if self._last_execution else None,
             "next_execution": self.get_next_execution_time().isoformat()
             if self.get_next_execution_time()
             else None,

@@ -12,6 +12,7 @@ import pytest
 from kgcl.hooks.conditions import Condition, ConditionResult
 from kgcl.hooks.core import Hook, HookExecutor, HookState
 from kgcl.hooks.lifecycle import HookChain, HookContext, HookExecutionPipeline, HookLifecycleEvent
+from kgcl.hooks.value_objects import LifecycleEventType
 
 
 class SimpleCondition(Condition):
@@ -271,9 +272,15 @@ class TestHookLifecycleEvents:
 
         # Should have received lifecycle events
         assert len(events) > 0
-        event_types = [e.event_type for e in events]
-        assert "pre_condition" in event_types or "pre_execute" in event_types
-        assert "post_condition" in event_types or "post_execute" in event_types
+        event_types = {e.event_type for e in events}
+        assert (
+            LifecycleEventType.PRE_CONDITION in event_types
+            or LifecycleEventType.PRE_EXECUTE in event_types
+        )
+        assert (
+            LifecycleEventType.POST_CONDITION in event_types
+            or LifecycleEventType.POST_EXECUTE in event_types
+        )
 
 
 class TestHookExecutionPipeline:

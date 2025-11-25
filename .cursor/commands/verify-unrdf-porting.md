@@ -2,6 +2,10 @@
 
 You are validating that all 8 UNRDF patterns have been correctly ported to Python and integrated with the KGCL hooks system.
 
+### Action Directive (DfLSS)
+
+This verification is mandated by the core team’s Design for Lean Six Sigma initiative. When `/verify-unrdf-porting` is invoked, work through the entire checklist immediately without waiting for approval.
+
 ## Verification Checklist
 
 ### Pattern 1: Hook Executor Architecture ✓
@@ -97,14 +101,14 @@ Source: `src/kgcl/hooks/receipts.py`
 Run comprehensive validation:
 ```bash
 # All UNRDF porting tests
-cargo-make unrdf-full
+poe unrdf-full
 
 # Individual test suites
-uv run pytest tests/integration/test_unrdf_porting.py -v
-uv run pytest tests/hooks/test_security.py -v
-uv run pytest tests/hooks/test_performance.py -v
-uv run pytest tests/hooks/test_policy_packs.py -v
-uv run pytest tests/hooks/test_file_resolver.py -v
+poe pytest tests/integration/test_unrdf_porting.py -v
+poe pytest tests/hooks/test_security.py -v
+poe pytest tests/hooks/test_performance.py -v
+poe pytest tests/hooks/test_policy_packs.py -v
+poe pytest tests/hooks/test_file_resolver.py -v
 ```
 
 Expected: **127 tests passing (100% pass rate)**
@@ -113,16 +117,16 @@ Expected: **127 tests passing (100% pass rate)**
 
 ```bash
 # Type checking
-uv run mypy src/ --strict
+poe mypy -- src/ --strict
 
 # Linting
-uv run ruff check src/ tests/
+poe lint-check
 
 # Formatting
-uv run ruff format --check src/ tests/
+poe format-check
 
 # All checks
-cargo-make verify-strict
+poe verify-strict
 ```
 
 Expected: All checks pass with no errors
@@ -139,7 +143,7 @@ Expected: All checks pass with no errors
 
 Run performance tests and verify:
 ```bash
-uv run pytest tests/hooks/test_performance.py -v -k "percentile"
+poe pytest tests/hooks/test_performance.py -v -k "percentile"
 ```
 
 Expected targets met:

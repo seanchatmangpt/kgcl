@@ -8,7 +8,7 @@ configuration, and fallback handling.
 import logging
 import os
 from dataclasses import dataclass
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import requests
 
@@ -17,8 +17,14 @@ try:
 
     DSPY_AVAILABLE = True
 except ImportError:
+    dspy = None  # type: ignore[assignment]
     DSPY_AVAILABLE = False
     logging.warning("DSPy not available. Install with: pip install dspy-ai")
+
+if TYPE_CHECKING:
+    from dspy.clients.lm import LM as DSPyLM
+else:
+    DSPyLM = Any
 
 logger = logging.getLogger(__name__)
 
@@ -74,7 +80,7 @@ class OllamaLM:
             raise RuntimeError("DSPy is not installed. Install with: pip install dspy-ai")
 
         self.config = config or OllamaConfig.from_env()
-        self._lm = None
+        self._lm: DSPyLM | None = None
         self._initialized = False
 
         logger.info(f"Initializing Ollama LM with config: {self.config.to_dict()}")
@@ -106,11 +112,12 @@ class OllamaLM:
 
         # Configure DSPy LM
         try:
-            self._lm = dspy.OllamaLocal(
-                model=self.config.model,
-                base_url=self.config.base_url,
+            self._lm = dspy.LM(
+                model=f"ollama/{self.config.model}",
                 temperature=self.config.temperature,
                 max_tokens=self.config.max_tokens,
+                base_url=self.config.base_url,
+                api_base=self.config.base_url,
                 timeout=self.config.timeout,
             )
             dspy.settings.configure(lm=self._lm)

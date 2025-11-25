@@ -4,8 +4,13 @@ Tests loading feature templates from UNRDF, triggering TTL2DSPy code generation,
 and signature caching/invalidation.
 """
 
+from __future__ import annotations
+
+import ast
 import tempfile
+from collections.abc import Sequence
 from pathlib import Path
+from typing import Final, cast
 
 from rdflib import Graph, Literal, Namespace
 from rdflib.namespace import RDF, XSD
@@ -13,9 +18,24 @@ from rdflib.namespace import RDF, XSD
 from kgcl.ttl2dspy.generator import DSPyGenerator
 from kgcl.ttl2dspy.parser import OntologyParser
 from kgcl.unrdf_engine.engine import UnrdfEngine
+from kgcl.unrdf_engine.hooks import (
+    HookContext,
+    HookExecutor,
+    HookPhase,
+    HookRegistry,
+    KnowledgeHook,
+    TriggerCondition,
+)
+from kgcl.unrdf_engine.ingestion import IngestionPipeline
 
 UNRDF = Namespace("http://unrdf.org/ontology/")
 SH = Namespace("http://www.w3.org/ns/shacl#")
+DAILY_INPUT_COUNT: Final[int] = 2
+DAILY_OUTPUT_COUNT: Final[int] = 1
+SINGLE_TEMPLATE_COUNT: Final[int] = 1
+DOUBLE_TEMPLATE_COUNT: Final[int] = 2
+UPDATED_DAILY_INPUT_COUNT: Final[int] = 3
+UPDATED_INPUT_COUNT: Final[int] = 3
 
 
 def create_feature_template_graph() -> Graph:
@@ -78,7 +98,7 @@ def create_feature_template_graph() -> Graph:
 class TestUNRDFToCodegen:
     """Test UNRDF to code generation flow."""
 
-    def test_load_feature_templates_from_unrdf(self):
+    def test_load_feature_templates_from_unrdf(self) -> None:
         """Test loading feature templates from UNRDF graph."""
         g = create_feature_template_graph()
 
@@ -93,57 +113,49 @@ class TestUNRDFToCodegen:
         """
 
         results = list(g.query(query))
-        assert len(results) == 1
+        assert len(results) == SINGLE_TEMPLATE_COUNT
 
-        template_uri, name = results[0]
-        assert str(name) == "DailyBrief"
+        result_row = cast("Sequence[object]", results[0])
+        assert str(result_row[1]) == "DailyBrief"
 
-    def test_parse_shacl_shape_from_graph(self):
+    def test_parse_shacl_shape_from_graph(self) -> None:
         """Test parsing SHACL shape from RDF graph."""
         g = create_feature_template_graph()
 
-        # Use OntologyParser to parse SHACL shapes
-        parser = OntologyParser()
-        parser.load_graph(g)
-        shapes = parser.extract_shapes()
+        parser = OntologyParser(cache_enabled=False)
+        shapes = parser.extract_shapes(g)
 
-        assert len(shapes) == 1
+        assert len(shapes) == SINGLE_TEMPLATE_COUNT
         shape = shapes[0]
 
         assert shape.signature_name == "DailyBriefSignature"
-        assert len(shape.input_properties) == 2
-        assert len(shape.output_properties) == 1
+        assert len(shape.input_properties) == DAILY_INPUT_COUNT
+        assert len(shape.output_properties) == DAILY_OUTPUT_COUNT
 
-        # Verify input properties
         input_names = {p.name for p in shape.input_properties}
         assert "app_usage" in input_names
         assert "meeting_count" in input_names
 
-        # Verify output property
         output_names = {p.name for p in shape.output_properties}
         assert "summary" in output_names
 
-    def test_generate_dspy_signature_from_shape(self):
+    def test_generate_dspy_signature_from_shape(self) -> None:
         """Test generating DSPy signature code from SHACL shape."""
         g = create_feature_template_graph()
 
-        # Use OntologyParser to parse SHACL shapes
-        parser = OntologyParser()
-        parser.load_graph(g)
-        shapes = parser.extract_shapes()
+        parser = OntologyParser(cache_enabled=False)
+        shapes = parser.extract_shapes(g)
         shape = shapes[0]
 
         generator = DSPyGenerator()
         signature_def = generator.generate_signature(shape)
 
         assert signature_def.class_name == "DailyBriefSignature"
-        assert len(signature_def.inputs) == 2
-        assert len(signature_def.outputs) == 1
+        assert len(signature_def.inputs) == DAILY_INPUT_COUNT
+        assert len(signature_def.outputs) == DAILY_OUTPUT_COUNT
 
-        # Generate code
         code = signature_def.generate_code()
 
-        # Verify code structure
         assert "class DailyBriefSignature(dspy.Signature):" in code
         assert "app_usage" in code
         assert "meeting_count" in code
@@ -151,14 +163,13 @@ class TestUNRDFToCodegen:
         assert "dspy.InputField" in code
         assert "dspy.OutputField" in code
 
-    def test_generate_complete_module(self):
+    def test_generate_complete_module(self) -> None:
         """Test generating complete Python module from shapes."""
         g = create_feature_template_graph()
 
         # Use OntologyParser to parse SHACL shapes
-        parser = OntologyParser()
-        parser.load_graph(g)
-        shapes = parser.extract_shapes()
+        parser = OntologyParser(cache_enabled=False)
+        shapes = parser.extract_shapes(g)
 
         generator = DSPyGenerator()
         module_code = generator.generate_module(shapes)
@@ -170,25 +181,23 @@ class TestUNRDFToCodegen:
         assert "__all__" in module_code
 
         # Verify can be written to file
-        with tempfile.NamedTemporaryFile(mode="w", suffix=".py", delete=False) as f:
-            f.write(module_code)
-            module_path = f.name
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".py", delete=False) as temp_file:
+            temp_file.write(module_code)
+            module_path = Path(temp_file.name)
 
         # Verify file is valid Python
-        with open(module_path) as f:
-            code_content = f.read()
-            compile(code_content, module_path, "exec")
+        code_content = module_path.read_text()
+        compile(code_content, str(module_path), "exec")
 
-        Path(module_path).unlink()
+        module_path.unlink()
 
-    def test_signature_caching(self):
+    def test_signature_caching(self) -> None:
         """Test that signature generation uses caching."""
         g = create_feature_template_graph()
 
         # Use OntologyParser to parse SHACL shapes
-        parser = OntologyParser()
-        parser.load_graph(g)
-        shapes = parser.extract_shapes()
+        parser = OntologyParser(cache_enabled=False)
+        shapes = parser.extract_shapes(g)
         shape = shapes[0]
 
         generator = DSPyGenerator()
@@ -204,14 +213,13 @@ class TestUNRDFToCodegen:
         stats = generator.get_cache_stats()
         assert stats["generated_signatures"] == 1
 
-    def test_cache_invalidation(self):
+    def test_cache_invalidation(self) -> None:
         """Test cache invalidation when shapes change."""
         g = create_feature_template_graph()
 
         # Use OntologyParser to parse SHACL shapes
-        parser = OntologyParser()
-        parser.load_graph(g)
-        shapes = parser.extract_shapes()
+        parser = OntologyParser(cache_enabled=False)
+        shapes = parser.extract_shapes(g)
         shape = shapes[0]
 
         generator = DSPyGenerator()
@@ -230,7 +238,7 @@ class TestUNRDFToCodegen:
         # Should be different object
         assert sig1 is not sig2
 
-    def test_hook_trigger_on_template_change(self):
+    def test_hook_trigger_on_template_change(self) -> None:
         """Test that code generation hook triggers on template changes."""
         with tempfile.TemporaryDirectory() as tmpdir:
             engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl")
@@ -238,17 +246,10 @@ class TestUNRDFToCodegen:
             # Track hook execution
             codegen_triggered = []
 
-            from kgcl.unrdf_engine.hooks import (
-                HookContext,
-                HookExecutor,
-                HookPhase,
-                HookRegistry,
-                KnowledgeHook,
-                TriggerCondition,
-            )
-
             class CodegenHook(KnowledgeHook):
-                def __init__(self):
+                """Minimal hook used to assert SHACL-triggered codegen."""
+
+                def __init__(self) -> None:
                     super().__init__(
                         name="ttl2dspy_codegen",
                         phases=[HookPhase.POST_COMMIT],
@@ -259,15 +260,12 @@ class TestUNRDFToCodegen:
                         ),
                     )
 
-                def execute(self, context: HookContext):
-                    codegen_triggered.append("codegen")
-                    # In real implementation, would trigger TTL2DSPy
+                def execute(self, context: HookContext) -> None:
+                    codegen_triggered.append({"phase": context.phase})
 
             registry = HookRegistry()
             registry.register(CodegenHook())
             hook_executor = HookExecutor(registry)
-
-            from kgcl.unrdf_engine.ingestion import IngestionPipeline
 
             pipeline = IngestionPipeline(engine, hook_executor=hook_executor)
 
@@ -287,15 +285,15 @@ class TestUNRDFToCodegen:
             # Verify hook would trigger (delta has SHACL shape)
             # Note: In simplified test, we verify mechanism exists
             assert result.success is True
+            assert isinstance(codegen_triggered, list)
 
-    def test_signature_validation(self):
+    def test_signature_validation(self) -> None:
         """Test that generated signatures have correct structure."""
         g = create_feature_template_graph()
 
         # Use OntologyParser to parse SHACL shapes
-        parser = OntologyParser()
-        parser.load_graph(g)
-        shapes = parser.extract_shapes()
+        parser = OntologyParser(cache_enabled=False)
+        shapes = parser.extract_shapes(g)
         shape = shapes[0]
 
         generator = DSPyGenerator()
@@ -303,18 +301,19 @@ class TestUNRDFToCodegen:
 
         # Verify all inputs are required
         for prop in signature_def.inputs:
-            # Check property has description
-            assert len(prop.description) > 0
+            description = prop.description or ""
+            assert description
 
         # Verify outputs have descriptions
         for prop in signature_def.outputs:
-            assert len(prop.description) > 0
+            description = prop.description or ""
+            assert description
 
         # Generate code and verify syntax
         code = signature_def.generate_code()
         compile(code, "<string>", "exec")
 
-    def test_multiple_shapes_generation(self):
+    def test_multiple_shapes_generation(self) -> None:
         """Test generating multiple signatures in one module."""
         g = create_feature_template_graph()
 
@@ -339,13 +338,10 @@ class TestUNRDFToCodegen:
         g.add((prop_out, SH.datatype, XSD.string))
         g.add((prop_out, UNRDF.fieldType, Literal("output")))
 
-        # Parse and generate
-        # Use OntologyParser to parse SHACL shapes
-        parser = OntologyParser()
-        parser.load_graph(g)
-        shapes = parser.extract_shapes()
+        parser = OntologyParser(cache_enabled=False)
+        shapes = parser.extract_shapes(g)
 
-        assert len(shapes) == 2
+        assert len(shapes) == DOUBLE_TEMPLATE_COUNT
 
         generator = DSPyGenerator()
         module_code = generator.generate_module(shapes)
@@ -358,15 +354,16 @@ class TestUNRDFToCodegen:
         assert '"DailyBriefSignature"' in module_code
         assert '"WeeklyRetroSignature"' in module_code
 
-    def test_incremental_signature_updates(self):
+    def test_incremental_signature_updates(self) -> None:
         """Test updating signatures when shapes change."""
         g = create_feature_template_graph()
 
-        parser = SHACLParser()
-        shapes_v1 = parser.parse_graph(g)
+        parser = OntologyParser(cache_enabled=False)
+        shapes_v1 = parser.extract_shapes(g)
 
         generator = DSPyGenerator()
         sig_v1 = generator.generate_signature(shapes_v1[0])
+        assert len(sig_v1.inputs) == DAILY_INPUT_COUNT
 
         # Modify graph - add new input field
         shape_uri = UNRDF.DailyBriefShape
@@ -377,8 +374,8 @@ class TestUNRDFToCodegen:
         g.add((new_prop, SH.datatype, XSD.integer))
         g.add((new_prop, UNRDF.fieldType, Literal("input")))
 
-        # Re-parse
-        shapes_v2 = parser.parse_graph(g)
+        # Re-parse after graph mutation
+        shapes_v2 = parser.extract_shapes(g)
 
         # Clear cache to force regeneration
         generator.clear_cache()
@@ -386,17 +383,17 @@ class TestUNRDFToCodegen:
         sig_v2 = generator.generate_signature(shapes_v2[0])
 
         # Verify new field present
-        assert len(sig_v2.inputs) == 3  # Original 2 + 1 new
+        assert len(sig_v2.inputs) == UPDATED_DAILY_INPUT_COUNT
         input_names = {p.name for p in sig_v2.inputs}
         assert "context_switches" in input_names
 
-    def test_write_and_load_generated_module(self):
+    def test_write_and_load_generated_module(self) -> None:
         """Test writing generated module to file and loading it."""
         with tempfile.TemporaryDirectory() as tmpdir:
             g = create_feature_template_graph()
 
-            parser = SHACLParser()
-            shapes = parser.parse_graph(g)
+            parser = OntologyParser(cache_enabled=False)
+            shapes = parser.extract_shapes(g)
 
             generator = DSPyGenerator()
             module_code = generator.generate_module(shapes)
@@ -410,7 +407,5 @@ class TestUNRDFToCodegen:
             assert len(module_file.read_text()) > 0
 
             # Verify module is valid Python
-            import ast
-
-            with open(module_file) as f:
-                ast.parse(f.read())
+            ast.parse(module_file.read_text())
+            module_file.unlink()

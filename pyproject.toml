@@ -76,6 +76,9 @@ dev = [
   "ruff (>=0.9.2)",
 ]
 
+[tool.uv]
+package = true
+
 [tool.commitizen]  # https://commitizen-tools.github.io/commitizen/config/
 bump_message = "bump: v$current_version → v$new_version"
 tag_format = "v$version"
@@ -224,39 +227,342 @@ type = "simple"
 
 [tool.poe.tasks]
 
-  [tool.poe.tasks.docs]
-  help = "Build or serve the documentation"
-  shell = """
-    if [ $serve ]
-    then {
-      mkdocs serve
-    } else {
-      mkdocs build
-    } fi
-    """
+  [tool.poe.tasks.sync]
+  help = "Sync dependencies (install all packages)"
+  cmd = "uv sync"
 
-    [[tool.poe.tasks.docs.args]]
-    help = "Serve the documentation locally with live reload"
-    type = "boolean"
-    name = "serve"
-    options = ["--serve"]
+  [tool.poe.tasks.sync-prod]
+  help = "Sync production dependencies only"
+  cmd = "uv sync --no-dev"
+
+  [tool.poe.tasks.format]
+  help = "Format code with Ruff"
+  cmd = "ruff format src tests"
+
+  [tool.poe.tasks.format-check]
+  help = "Check code formatting"
+  cmd = "ruff format --check src tests"
 
   [tool.poe.tasks.lint]
-  help = "Lint this package"
-  cmd = """
-    pre-commit run
-      --all-files
-      --color always
-    """
+  help = "Run Ruff linter with fixes"
+  cmd = "ruff check src tests --fix"
+
+  [tool.poe.tasks.lint-check]
+  help = "Check linting without fixing"
+  cmd = "ruff check src tests"
+
+  [tool.poe.tasks.type-check]
+  help = "Type check with mypy"
+  cmd = "mypy src tests"
+
+  [tool.poe.tasks.mypy]
+  help = "Run mypy with custom arguments"
+  cmd = "mypy"
+
+  [tool.poe.tasks.all-checks]
+  help = "Run all linting/type checks"
+
+    [[tool.poe.tasks.all-checks.sequence]]
+    ref = "format-check"
+
+    [[tool.poe.tasks.all-checks.sequence]]
+    ref = "lint-check"
+
+    [[tool.poe.tasks.all-checks.sequence]]
+    ref = "type-check"
 
   [tool.poe.tasks.test]
-  help = "Test this package"
+  help = "Run all tests"
+  cmd = "pytest tests -v --tb=short"
 
-    [[tool.poe.tasks.test.sequence]]
-    cmd = "coverage run"
+  [tool.poe.tasks.pytest]
+  help = "Run pytest with custom arguments"
+  cmd = "pytest"
 
-    [[tool.poe.tasks.test.sequence]]
-    cmd = "coverage report"
+  [tool.poe.tasks.test-fast]
+  help = "Run tests (exit on first failure, quiet)"
+  cmd = "pytest tests -x -q"
 
-    [[tool.poe.tasks.test.sequence]]
-    cmd = "coverage xml"
+  [tool.poe.tasks.test-coverage]
+  help = "Run tests with coverage report"
+  cmd = "pytest tests --cov=src --cov-report=html --cov-report=term"
+
+  [tool.poe.tasks.test-hooks]
+  help = "Run only hooks tests"
+  cmd = "pytest tests/hooks -v"
+
+  [tool.poe.tasks.test-unrdf]
+  help = "Run only UNRDF porting tests"
+  cmd = "pytest tests/integration/test_unrdf_porting.py -v"
+
+  [tool.poe.tasks.test-integration]
+  help = "Run integration tests only"
+  cmd = "pytest tests/integration -v -m integration"
+
+  [tool.poe.tasks.test-all-features]
+  help = "Run all tests with all features"
+  cmd = "pytest tests -v --tb=long -k \"not slow\""
+
+  [tool.poe.tasks.test-timeout]
+  help = "Run tests with 10-minute timeout"
+  shell = "timeout 10m pytest tests -x -q --tb=short"
+
+  [tool.poe.tasks.test-watch]
+  help = "Watch tests (requires pytest-watch)"
+  cmd = "pytest-watch tests -- -x"
+
+  [tool.poe.tasks.build]
+  help = "Build distribution packages"
+  cmd = "uv build"
+
+  [tool.poe.tasks.build-check]
+  help = "Check dependencies and build can work"
+  cmd = "uv sync"
+
+  [tool.poe.tasks.docs-build]
+  help = "Build documentation"
+  cmd = "mkdocs build"
+
+  [tool.poe.tasks.docs-serve]
+  help = "Serve documentation locally"
+  cmd = "mkdocs serve"
+
+  [tool.poe.tasks.verify]
+  help = "Verify code quality: format, lint, type-check, and tests"
+
+    [[tool.poe.tasks.verify.sequence]]
+    ref = "format-check"
+
+    [[tool.poe.tasks.verify.sequence]]
+    ref = "lint-check"
+
+    [[tool.poe.tasks.verify.sequence]]
+    ref = "type-check"
+
+    [[tool.poe.tasks.verify.sequence]]
+    ref = "test-timeout"
+
+  [tool.poe.tasks.verify-strict]
+  help = "Strict verification: all checks, coverage, doc build"
+
+    [[tool.poe.tasks.verify-strict.sequence]]
+    ref = "format-check"
+
+    [[tool.poe.tasks.verify-strict.sequence]]
+    ref = "lint-check"
+
+    [[tool.poe.tasks.verify-strict.sequence]]
+    ref = "type-check"
+
+    [[tool.poe.tasks.verify-strict.sequence]]
+    ref = "test-coverage"
+
+    [[tool.poe.tasks.verify-strict.sequence]]
+    ref = "docs-build"
+
+  [tool.poe.tasks.ci]
+  help = "Run all CI checks (format, lint, types, tests, docs)"
+
+    [[tool.poe.tasks.ci.sequence]]
+    ref = "format-check"
+
+    [[tool.poe.tasks.ci.sequence]]
+    ref = "lint-check"
+
+    [[tool.poe.tasks.ci.sequence]]
+    ref = "type-check"
+
+    [[tool.poe.tasks.ci.sequence]]
+    ref = "test-timeout"
+
+    [[tool.poe.tasks.ci.sequence]]
+    ref = "docs-build"
+
+  [tool.poe.tasks.pre-commit-setup]
+  help = "Install git hooks"
+  shell = """
+set -euo pipefail
+echo "Setting up git hooks..."
+mkdir -p .githooks
+if [ -f scripts/git_hooks/pre_commit.sh ]; then
+  chmod +x scripts/git_hooks/pre_commit.sh
+fi
+chmod +x .githooks/pre-commit
+git config core.hooksPath .githooks
+echo "Git hooks installed to .githooks"
+echo "Pre-commit hook is now active!"
+"""
+
+  [tool.poe.tasks.pre-commit-run]
+  help = "Run pre-commit checks manually"
+  shell = """
+set -euo pipefail
+echo "Running pre-commit checks manually..."
+if [ -f .githooks/pre-commit ]; then
+  ./.githooks/pre-commit
+else
+  echo "Pre-commit hook not found at .githooks/pre-commit"
+  exit 1
+fi
+"""
+
+  [tool.poe.tasks.release-check]
+  help = "Run all checks before release"
+
+    [[tool.poe.tasks.release-check.sequence]]
+    ref = "format-check"
+
+    [[tool.poe.tasks.release-check.sequence]]
+    ref = "lint-check"
+
+    [[tool.poe.tasks.release-check.sequence]]
+    ref = "type-check"
+
+    [[tool.poe.tasks.release-check.sequence]]
+    ref = "test-coverage"
+
+    [[tool.poe.tasks.release-check.sequence]]
+    ref = "docs-build"
+
+  [tool.poe.tasks.release-notes]
+  help = "Show commits since last release"
+  shell = "echo \"Generating release notes from git log...\"; git log --oneline --no-decorate $(git describe --tags --abbrev=0)..HEAD || git log --oneline -20"
+
+  [tool.poe.tasks.version-check]
+  help = "Show current project version"
+  shell = "VERSION=$(grep '^version = ' pyproject.toml | head -1 | cut -d'\"' -f2); echo \"Current version: $VERSION\""
+
+  [tool.poe.tasks.clean]
+  help = "Clean build artifacts"
+  shell = """
+echo "Cleaning build artifacts..."
+find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
+find . -type d -name .pytest_cache -exec rm -rf {} + 2>/dev/null || true
+find . -type d -name .mypy_cache -exec rm -rf {} + 2>/dev/null || true
+find . -type d -name *.egg-info -exec rm -rf {} + 2>/dev/null || true
+rm -rf build/ dist/ reports/
+echo "Clean complete"
+"""
+
+  [tool.poe.tasks.audit]
+  help = "Run security audit"
+  cmd = "pip-audit"
+
+  [tool.poe.tasks.update]
+  help = "Update dependency lock file"
+  cmd = "uv lock --upgrade"
+
+  [tool.poe.tasks.install-deps]
+  help = "Install dependencies"
+  ref = "sync"
+
+  [tool.poe.tasks.shell]
+  help = "Open Python shell"
+  cmd = "python3"
+
+  [tool.poe.tasks.info]
+  help = "Display project information"
+  shell = """
+echo ""
+echo "KGCL Project Information"
+echo "======================="
+echo ""
+echo "Available Tasks:"
+echo "  poe format"
+echo "  poe lint"
+echo "  poe type-check"
+echo "  poe test"
+echo "  poe verify"
+echo ""
+echo "Python & UV Information:"
+uv --version
+python3 --version
+echo ""
+echo "Project Configuration:"
+echo "  Python: $(grep "requires-python" pyproject.toml | cut -d'"' -f2)"
+echo "  Version: $(grep '^version = ' pyproject.toml | head -1 | cut -d'\"' -f2)"
+"""
+
+  [tool.poe.tasks.help]
+  help = "Show KGCL build system help"
+  shell = """
+echo ""
+echo "KGCL Build System - Poe Tasks"
+echo "=============================="
+echo ""
+echo "Common Tasks:"
+echo "  poe format             # Format code"
+echo "  poe lint               # Lint & fix"
+echo "  poe type-check         # Type checking"
+echo "  poe test               # Run tests"
+echo "  poe test-coverage      # Tests with coverage"
+echo ""
+echo "Quality Gates:"
+echo "  poe verify             # Format + lint + types + tests"
+echo "  poe verify-strict      # All checks + coverage + docs"
+echo "  poe ci                 # CI pipeline"
+echo ""
+echo "Maintenance:"
+echo "  poe clean              # Clean artifacts"
+echo "  poe audit              # Security audit"
+echo "  poe update             # Update dependencies"
+echo ""
+echo "Documentation:"
+echo "  poe docs-build         # Build docs"
+echo "  poe docs-serve         # Serve docs"
+echo ""
+"""
+
+  [tool.poe.tasks.notification]
+  help = "Display failure notification"
+  shell = """
+echo ""
+echo "❌ Task failed - check output above"
+echo ""
+echo "Quick fixes:"
+echo "  1. Format:    poe format"
+echo "  2. Lint:      poe lint"
+echo "  3. Types:     poe type-check"
+echo "  4. Tests:     poe test"
+echo ""
+"""
+
+  [tool.poe.tasks.prod-build]
+  help = "Strict production build"
+
+    [[tool.poe.tasks.prod-build.sequence]]
+    ref = "format-check"
+
+    [[tool.poe.tasks.prod-build.sequence]]
+    ref = "lint-check"
+
+    [[tool.poe.tasks.prod-build.sequence]]
+    ref = "type-check"
+
+    [[tool.poe.tasks.prod-build.sequence]]
+    ref = "test-coverage"
+
+    [[tool.poe.tasks.prod-build.sequence]]
+    ref = "docs-build"
+
+  [tool.poe.tasks.tdd]
+  help = "Run TDD-focused test suite"
+  cmd = "pytest tests -v --tb=short --strict-markers"
+
+  [tool.poe.tasks.tdd-watch]
+  help = "Watch tests in TDD mode"
+  cmd = "pytest-watch tests -- --strict-markers -v --tb=short"
+
+  [tool.poe.tasks.unrdf-validate]
+  help = "Type-check + UNRDF tests"
+
+    [[tool.poe.tasks.unrdf-validate.sequence]]
+    ref = "type-check"
+
+    [[tool.poe.tasks.unrdf-validate.sequence]]
+    ref = "test-unrdf"
+
+  [tool.poe.tasks.unrdf-full]
+  help = "Run comprehensive UNRDF validation"
+  shell = "echo \"Running comprehensive UNRDF validation...\" && pytest tests/integration/test_unrdf_porting.py tests/hooks/test_security.py tests/hooks/test_performance.py tests/hooks/test_policy_packs.py tests/hooks/test_file_resolver.py -v --tb=short"
+

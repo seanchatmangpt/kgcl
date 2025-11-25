@@ -18,9 +18,9 @@ class TestDSPyIntegration:
     """Test DSPy integration with materialized features."""
 
     @patch("dspy.Predict")
-    @patch("dspy.OllamaLocal")
+    @patch("dspy.LM")
     @patch("requests.get")
-    def test_invoke_with_materialized_features(self, mock_get, mock_ollama, mock_predict):
+    def test_invoke_with_materialized_features(self, mock_get, mock_lm_cls, mock_predict):
         """Test invoking DSPy with real feature data."""
         # Mock Ollama
         mock_response = Mock()
@@ -29,7 +29,7 @@ class TestDSPyIntegration:
         mock_get.return_value = mock_response
 
         mock_lm = Mock()
-        mock_ollama.return_value = mock_lm
+        mock_lm_cls.return_value = mock_lm
 
         # Mock prediction
         mock_pred = Mock()
@@ -66,9 +66,9 @@ class TestFeatureSignature(dspy.Signature):
             assert len(result["receipt"]["source_features"]) == 2
 
     @patch("dspy.Predict")
-    @patch("dspy.OllamaLocal")
+    @patch("dspy.LM")
     @patch("requests.get")
-    def test_receipt_generation(self, mock_get, mock_ollama, mock_predict):
+    def test_receipt_generation(self, mock_get, mock_lm_cls, mock_predict):
         """Test receipt generation and RDF storage."""
         # Setup mocks
         mock_response = Mock()
@@ -77,7 +77,7 @@ class TestFeatureSignature(dspy.Signature):
         mock_get.return_value = mock_response
 
         mock_lm = Mock()
-        mock_ollama.return_value = mock_lm
+        mock_lm_cls.return_value = mock_lm
 
         mock_pred = Mock()
         mock_pred.output = "Result"
@@ -118,12 +118,13 @@ class ReceiptTestSig(dspy.Signature):
             assert retrieved["receipt_id"] == receipt_id
 
     @patch("dspy.Predict")
-    @patch("dspy.OllamaLocal")
+    @patch("dspy.LM")
     @patch("requests.get")
-    def test_error_handling_missing_ollama(self, mock_get, mock_ollama, mock_predict):
+    def test_error_handling_missing_ollama(self, mock_get, mock_lm_cls, mock_predict):
         """Test error handling when Ollama unavailable."""
         # Mock Ollama not available
         mock_get.side_effect = ConnectionError("Connection refused")
+        mock_lm_cls.return_value = Mock()
 
         with tempfile.TemporaryDirectory() as tmpdir:
             sig_code = "import dspy\nclass TestSig(dspy.Signature): pass"
@@ -137,9 +138,9 @@ class ReceiptTestSig(dspy.Signature):
                 bridge.invoke(module_path=str(sig_file), signature_name="TestSig", inputs={})
 
     @patch("dspy.Predict")
-    @patch("dspy.OllamaLocal")
+    @patch("dspy.LM")
     @patch("requests.get")
-    def test_invalid_inputs(self, mock_get, mock_ollama, mock_predict):
+    def test_invalid_inputs(self, mock_get, mock_lm_cls, mock_predict):
         """Test handling of invalid inputs."""
         mock_response = Mock()
         mock_response.status_code = 200
@@ -147,7 +148,7 @@ class ReceiptTestSig(dspy.Signature):
         mock_get.return_value = mock_response
 
         mock_lm = Mock()
-        mock_ollama.return_value = mock_lm
+        mock_lm_cls.return_value = mock_lm
 
         # Mock prediction to fail
         mock_predict.side_effect = ValueError("Invalid input")
@@ -176,9 +177,9 @@ class TestSig(dspy.Signature):
             assert result["result"]["error"] is not None
 
     @patch("dspy.Predict")
-    @patch("dspy.OllamaLocal")
+    @patch("dspy.LM")
     @patch("requests.get")
-    def test_output_format_validation(self, mock_get, mock_ollama, mock_predict):
+    def test_output_format_validation(self, mock_get, mock_lm_cls, mock_predict):
         """Test that outputs are correctly formatted."""
         mock_response = Mock()
         mock_response.status_code = 200
@@ -186,7 +187,7 @@ class TestSig(dspy.Signature):
         mock_get.return_value = mock_response
 
         mock_lm = Mock()
-        mock_ollama.return_value = mock_lm
+        mock_lm_cls.return_value = mock_lm
 
         # Mock with multiple output fields
         mock_pred = Mock()

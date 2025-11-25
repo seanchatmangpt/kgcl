@@ -11,22 +11,22 @@ Chicago TDD Pattern:
     - Validation before registration
 """
 
+import logging
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
 from typing import Dict, List, Optional, Set
-import logging
 
 from rdflib import Graph
 
-from kgcl.hooks.loader import HookLoader, HookDefinition
-
+from kgcl.hooks.loader import HookDefinition, HookLoader
 
 logger = logging.getLogger(__name__)
 
 
 class HookStatus(Enum):
     """Hook lifecycle status."""
+
     ACTIVE = "active"
     INACTIVE = "inactive"
     DISABLED = "disabled"
@@ -37,18 +37,20 @@ class HookStatus(Enum):
 class RegisteredHook:
     """Hook with registration metadata.
 
-    Attributes:
+    Attributes
+    ----------
         definition: Parsed hook definition
         status: Current lifecycle status
         activation_count: Number of times hook has been activated
         last_execution: Timestamp of last execution
         error_message: Most recent error (if status=ERROR)
     """
+
     definition: HookDefinition
     status: HookStatus = HookStatus.ACTIVE
     activation_count: int = 0
-    last_execution: Optional[str] = None
-    error_message: Optional[str] = None
+    last_execution: str | None = None
+    error_message: str | None = None
 
 
 class HookRegistry:
@@ -72,11 +74,7 @@ class HookRegistry:
         >>> active = registry.get_active_hooks()
     """
 
-    def __init__(
-        self,
-        graph: Graph,
-        hooks_file: Path
-    ) -> None:
+    def __init__(self, graph: Graph, hooks_file: Path) -> None:
         """Initialize registry with RDF graph and hooks file.
 
         Args:
@@ -90,13 +88,13 @@ class HookRegistry:
         self.loader = HookLoader(hooks_file)
 
         # Registry: hook_name -> RegisteredHook
-        self._registry: Dict[str, RegisteredHook] = {}
+        self._registry: dict[str, RegisteredHook] = {}
 
         # Index by trigger event
-        self._trigger_index: Dict[str, Set[str]] = {}
+        self._trigger_index: dict[str, set[str]] = {}
 
         # Index by effect generator
-        self._effect_index: Dict[str, Set[str]] = {}
+        self._effect_index: dict[str, set[str]] = {}
 
         # Load and index hooks
         self._load_and_index()
@@ -137,7 +135,8 @@ class HookRegistry:
         Args:
             hook: Hook definition to register
 
-        Raises:
+        Raises
+        ------
             ValueError: If hook with same name already exists
         """
         if hook.name in self._registry:
@@ -192,37 +191,36 @@ class HookRegistry:
 
         logger.info(f"Unregistered hook: {hook_name}")
 
-    def get_hook(self, hook_name: str) -> Optional[RegisteredHook]:
+    def get_hook(self, hook_name: str) -> RegisteredHook | None:
         """Get registered hook by name.
 
         Args:
             hook_name: Hook name
 
-        Returns:
+        Returns
+        -------
             RegisteredHook or None
         """
         return self._registry.get(hook_name)
 
-    def get_hooks_by_trigger(self, trigger_event: str) -> List[RegisteredHook]:
+    def get_hooks_by_trigger(self, trigger_event: str) -> list[RegisteredHook]:
         """Get all hooks triggered by specific event.
 
         Args:
             trigger_event: Event URI (e.g., "urn:kgc:apple:DataIngested")
 
-        Returns:
+        Returns
+        -------
             List of matching active hooks
         """
         # Normalize trigger event (handle with/without urn: prefix)
         if not trigger_event.startswith("urn:"):
             # Try both with and without namespace
-            candidates = [
-                f"urn:kgc:apple:{trigger_event}",
-                trigger_event
-            ]
+            candidates = [f"urn:kgc:apple:{trigger_event}", trigger_event]
         else:
             candidates = [trigger_event]
 
-        hooks: List[RegisteredHook] = []
+        hooks: list[RegisteredHook] = []
 
         for candidate in candidates:
             hook_names = self._trigger_index.get(candidate, set())
@@ -233,37 +231,38 @@ class HookRegistry:
 
         return hooks
 
-    def get_hooks_by_generator(self, generator_name: str) -> List[RegisteredHook]:
+    def get_hooks_by_generator(self, generator_name: str) -> list[RegisteredHook]:
         """Get all hooks using specific generator.
 
         Args:
             generator_name: Generator class name (e.g., "AgendaGenerator")
 
-        Returns:
+        Returns
+        -------
             List of matching hooks
         """
         hook_names = self._effect_index.get(generator_name, set())
         return [self._registry[name] for name in hook_names]
 
-    def get_active_hooks(self) -> List[RegisteredHook]:
+    def get_active_hooks(self) -> list[RegisteredHook]:
         """Get all active hooks.
 
-        Returns:
+        Returns
+        -------
             List of hooks with status=ACTIVE
         """
-        return [
-            h for h in self._registry.values()
-            if h.status == HookStatus.ACTIVE
-        ]
+        return [h for h in self._registry.values() if h.status == HookStatus.ACTIVE]
 
-    def get_timed_hooks(self) -> List[RegisteredHook]:
+    def get_timed_hooks(self) -> list[RegisteredHook]:
         """Get all hooks with cron schedules.
 
-        Returns:
+        Returns
+        -------
             List of active timed hooks
         """
         return [
-            h for h in self._registry.values()
+            h
+            for h in self._registry.values()
             if h.definition.cron_schedule and h.status == HookStatus.ACTIVE
         ]
 
@@ -335,7 +334,8 @@ class HookRegistry:
         Args:
             hook: Hook to validate
 
-        Raises:
+        Raises
+        ------
             ValueError: If hook is invalid
         """
         # Check has trigger
@@ -349,9 +349,7 @@ class HookRegistry:
         # Validate each effect
         for effect in hook.effects:
             if not effect.command:
-                raise ValueError(
-                    f"Effect {effect.label} in hook {hook.name} has no command"
-                )
+                raise ValueError(f"Effect {effect.label} in hook {hook.name} has no command")
 
     def reload(self) -> None:
         """Reload hooks from file and rebuild indexes."""
@@ -370,18 +368,25 @@ class HookRegistry:
 
         logger.info(f"Reloaded {len(self._registry)} hooks")
 
-    def get_statistics(self) -> Dict[str, int]:
+    def get_statistics(self) -> dict[str, int]:
         """Get registry statistics.
 
-        Returns:
+        Returns
+        -------
             Dictionary with counts
         """
         return {
             "total_hooks": len(self._registry),
-            "active_hooks": len([h for h in self._registry.values() if h.status == HookStatus.ACTIVE]),
-            "inactive_hooks": len([h for h in self._registry.values() if h.status == HookStatus.INACTIVE]),
-            "error_hooks": len([h for h in self._registry.values() if h.status == HookStatus.ERROR]),
+            "active_hooks": len(
+                [h for h in self._registry.values() if h.status == HookStatus.ACTIVE]
+            ),
+            "inactive_hooks": len(
+                [h for h in self._registry.values() if h.status == HookStatus.INACTIVE]
+            ),
+            "error_hooks": len(
+                [h for h in self._registry.values() if h.status == HookStatus.ERROR]
+            ),
             "timed_hooks": len(self.get_timed_hooks()),
             "trigger_types": len(self._trigger_index),
-            "generator_types": len(self._effect_index)
+            "generator_types": len(self._effect_index),
         }

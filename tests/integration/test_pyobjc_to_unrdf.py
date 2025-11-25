@@ -5,7 +5,7 @@ provenance tracking and hook execution.
 """
 
 import tempfile
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 from rdflib import Namespace, URIRef
@@ -20,8 +20,10 @@ from kgcl.unrdf_engine.hooks import (
     TriggerCondition,
 )
 from kgcl.unrdf_engine.ingestion import IngestionPipeline
+from kgcl.unrdf_engine.validation import ShaclValidator
 
 UNRDF = Namespace("http://unrdf.org/ontology/")
+EXPECTED_EVENT_TYPE_COUNT = 3
 
 
 def create_pyobjc_format_events() -> list[dict]:
@@ -32,7 +34,7 @@ def create_pyobjc_format_events() -> list[dict]:
     list[dict]
         Events as JSON dictionaries
     """
-    base_time = datetime(2024, 11, 24, 10, 0, 0)
+    base_time = datetime(2024, 11, 24, 10, 0, 0, tzinfo=UTC)
 
     return [
         # App event from PyObjC AppKit plugin
@@ -83,7 +85,7 @@ def create_pyobjc_format_events() -> list[dict]:
 class TestPyObjCToUNRDF:
     """Test PyObjC event ingestion into UNRDF."""
 
-    def test_ingest_pyobjc_app_event(self):
+    def test_ingest_pyobjc_app_event(self) -> None:
         """Test ingesting PyObjC app event format."""
         with tempfile.TemporaryDirectory() as tmpdir:
             engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl")
@@ -114,7 +116,7 @@ class TestPyObjCToUNRDF:
             assert len(sources) > 0
             assert str(sources[0][0]) == "PyObjC.AppKit"
 
-    def test_ingest_batch_pyobjc_events(self):
+    def test_ingest_batch_pyobjc_events(self) -> None:
         """Test batch ingestion of mixed PyObjC events."""
         with tempfile.TemporaryDirectory() as tmpdir:
             engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl")
@@ -142,9 +144,9 @@ class TestPyObjCToUNRDF:
             }
             """
             types = list(engine.query(type_query))
-            assert len(types) >= 3  # app_event, browser_visit, calendar_block
+            assert len(types) >= EXPECTED_EVENT_TYPE_COUNT
 
-    def test_validate_rdf_structure(self):
+    def test_validate_rdf_structure(self) -> None:
         """Test that ingested events have correct RDF structure."""
         with tempfile.TemporaryDirectory() as tmpdir:
             engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl")
@@ -172,11 +174,12 @@ class TestPyObjCToUNRDF:
             prop_dict = {str(p): str(o) for p, o in props}
 
             # Should have URL, domain, title
-            assert any("url" in str(p).lower() for p, _ in props)
-            assert any("domain" in str(p).lower() for p, _ in props)
-            assert any("title" in str(p).lower() for p, _ in props)
+            keys_lower = [key.lower() for key in prop_dict]
+            assert any("url" in key for key in keys_lower)
+            assert any("domain" in key for key in keys_lower)
+            assert any("title" in key for key in keys_lower)
 
-    def test_provenance_tracking(self):
+    def test_provenance_tracking(self) -> None:
         """Test provenance tracking for PyObjC events."""
         with tempfile.TemporaryDirectory() as tmpdir:
             engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl")
@@ -195,13 +198,13 @@ class TestPyObjCToUNRDF:
             assert len(all_provenance) > 0
 
             # Verify agent and reason recorded
-            for triple, prov in all_provenance.items():
+            for _triple, prov in all_provenance.items():
                 assert prov.agent == "pyobjc_appkit_plugin"
                 assert prov.reason == "Automatic app monitoring"
                 assert prov.timestamp is not None
                 assert prov.source is None  # Source in event data, not provenance
 
-    def test_hook_execution_on_ingestion(self):
+    def test_hook_execution_on_ingestion(self) -> None:
         """Test that hooks execute during PyObjC event ingestion."""
         with tempfile.TemporaryDirectory() as tmpdir:
             engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl")
@@ -214,17 +217,17 @@ class TestPyObjCToUNRDF:
             post_commit_called = []
 
             class TestPreIngestionHook(KnowledgeHook):
-                def __init__(self):
+                def __init__(self) -> None:
                     super().__init__(name="test_pre_ingestion", phases=[HookPhase.PRE_INGESTION])
 
-                def execute(self, context: HookContext):
+                def execute(self, context: HookContext) -> None:
                     pre_ingestion_called.append(context.transaction_id)
 
             class TestPostCommitHook(KnowledgeHook):
-                def __init__(self):
+                def __init__(self) -> None:
                     super().__init__(name="test_post_commit", phases=[HookPhase.POST_COMMIT])
 
-                def execute(self, context: HookContext):
+                def execute(self, context: HookContext) -> None:
                     post_commit_called.append(context.transaction_id)
 
             registry.register(TestPreIngestionHook())
@@ -248,7 +251,7 @@ class TestPyObjCToUNRDF:
             assert result.hook_results is not None
             assert len(result.hook_results) >= 2
 
-    def test_conditional_hook_trigger(self):
+    def test_conditional_hook_trigger(self) -> None:
         """Test hook with trigger condition on PyObjC events."""
         with tempfile.TemporaryDirectory() as tmpdir:
             engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl")
@@ -257,7 +260,7 @@ class TestPyObjCToUNRDF:
             triggered = []
 
             class BrowserVisitHook(KnowledgeHook):
-                def __init__(self):
+                def __init__(self) -> None:
                     super().__init__(
                         name="browser_visit_processor",
                         phases=[HookPhase.POST_COMMIT],
@@ -268,7 +271,7 @@ class TestPyObjCToUNRDF:
                         ),
                     )
 
-                def execute(self, context: HookContext):
+                def execute(self, _context: HookContext) -> None:
                     triggered.append("browser_visit")
 
             registry.register(BrowserVisitHook())
@@ -288,7 +291,7 @@ class TestPyObjCToUNRDF:
             assert len(triggered) == 1
             assert triggered[0] == "browser_visit"
 
-    def test_hook_execution_order(self):
+    def test_hook_execution_order(self) -> None:
         """Test that hooks execute in priority order."""
         with tempfile.TemporaryDirectory() as tmpdir:
             engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl")
@@ -297,21 +300,21 @@ class TestPyObjCToUNRDF:
             execution_order = []
 
             class HighPriorityHook(KnowledgeHook):
-                def __init__(self):
+                def __init__(self) -> None:
                     super().__init__(
                         name="high_priority", phases=[HookPhase.POST_COMMIT], priority=100
                     )
 
-                def execute(self, context: HookContext):
+                def execute(self, _context: HookContext) -> None:
                     execution_order.append("high")
 
             class LowPriorityHook(KnowledgeHook):
-                def __init__(self):
+                def __init__(self) -> None:
                     super().__init__(
                         name="low_priority", phases=[HookPhase.POST_COMMIT], priority=10
                     )
 
-                def execute(self, context: HookContext):
+                def execute(self, _context: HookContext) -> None:
                     execution_order.append("low")
 
             # Register in reverse priority order
@@ -329,7 +332,7 @@ class TestPyObjCToUNRDF:
             # Verify execution order (high priority first)
             assert execution_order == ["high", "low"]
 
-    def test_hook_rollback_on_failure(self):
+    def test_hook_rollback_on_failure(self) -> None:
         """Test transaction rollback when hook signals failure."""
         with tempfile.TemporaryDirectory() as tmpdir:
             engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl")
@@ -337,27 +340,21 @@ class TestPyObjCToUNRDF:
             registry = HookRegistry()
 
             class FailingValidationHook(KnowledgeHook):
-                def __init__(self):
+                def __init__(self) -> None:
                     super().__init__(
                         name="failing_validation", phases=[HookPhase.POST_VALIDATION], priority=1000
                     )
 
-                def execute(self, context: HookContext):
+                def execute(self, context: HookContext) -> None:
                     # Signal rollback
                     context.metadata["should_rollback"] = True
                     context.metadata["rollback_reason"] = "Validation failed: test"
 
             registry.register(FailingValidationHook())
             hook_executor = HookExecutor(registry)
-            pipeline = IngestionPipeline(
-                engine, hook_executor=hook_executor, validate_on_ingest=False
-            )
 
             # Manually trigger POST_VALIDATION phase
             event = create_pyobjc_format_events()[0]
-
-            # Create a scenario where validation runs
-            from kgcl.unrdf_engine.validation import ShaclValidator
 
             validator = ShaclValidator()
             pipeline_with_validation = IngestionPipeline(
@@ -371,7 +368,7 @@ class TestPyObjCToUNRDF:
             # So this test verifies the mechanism exists
             assert result.triples_added >= 0  # May be 0 if rolled back
 
-    def test_incremental_ingestion(self):
+    def test_incremental_ingestion(self) -> None:
         """Test incremental ingestion of PyObjC events over time."""
         with tempfile.TemporaryDirectory() as tmpdir:
             engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl")

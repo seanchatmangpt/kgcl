@@ -19,9 +19,9 @@ Generate daily briefs from recent events using DSPy and Ollama.
 - Custom Ollama model selection
 
 **Integration Points**:
-- Event ingestion from UNRDF
-- Feature materialization pipeline
-- DSPy DailyBriefSignature (placeholder for future implementation)
+- Event ingestion from BatchCollector JSONL logs (with synthetic fallback when no data)
+- Feature materialization via `FeatureMaterializer` → `DailyBriefInput`
+- DSPy `DailyBriefSignature` / rule-based fallback with receipt-ready metadata
 
 ### 2. kgc-weekly-retro
 **Location**: `/Users/sac/dev/kgcl/src/kgcl/cli/weekly_retro.py`

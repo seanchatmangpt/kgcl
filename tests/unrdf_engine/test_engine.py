@@ -11,6 +11,9 @@ from rdflib import Literal, URIRef
 
 from kgcl.unrdf_engine.engine import ProvenanceRecord, Transaction, UnrdfEngine
 
+MATCHED_TRIPLE_COUNT = 2
+PROVENANCE_RECORD_COUNT = 2
+
 
 class TestProvenanceRecord:
     """Test ProvenanceRecord class."""
@@ -239,7 +242,7 @@ class TestUnrdfEngine:
 
         # Match by predicate
         triples = list(engine.triples(predicate=predicate))
-        assert len(triples) == 2
+        assert len(triples) == MATCHED_TRIPLE_COUNT
 
         # Match by subject
         triples = list(engine.triples(subject=subject1))
@@ -358,5 +361,5 @@ class TestUnrdfEngine:
 
         all_prov = engine.get_all_provenance()
 
-        assert len(all_prov) == 2
+        assert len(all_prov) == PROVENANCE_RECORD_COUNT
         assert all(isinstance(p, ProvenanceRecord) for p in all_prov.values())

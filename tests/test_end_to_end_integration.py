@@ -10,27 +10,30 @@ Chicago TDD Pattern:
     - Integration tests with minimal test doubles
 """
 
-import pytest
-from datetime import datetime
+from datetime import UTC, datetime
 from pathlib import Path
-from rdflib import Graph, Namespace, Literal, URIRef
-from rdflib.namespace import RDF, RDFS
+from typing import Any
 
-from kgcl.generators.agenda import AgendaGenerator, CalendarEvent
-from kgcl.generators.quality import QualityReportGenerator, Violation
-from kgcl.generators.conflict import ConflictReportGenerator
-from kgcl.generators.stale import StaleItemsGenerator
-from kgcl.hooks.orchestrator import HookOrchestrator, ExecutionContext
+import pytest
+from rdflib import Graph, Literal, Namespace, URIRef
+from rdflib.namespace import RDF
+
+from kgcl.generators.agenda import AgendaGenerator
 from kgcl.hooks.handlers import HookHandlers, register_all_handlers
-
+from kgcl.hooks.loader import HookDefinition, HookEffect
+from kgcl.hooks.orchestrator import ExecutionContext, HookOrchestrator
+from kgcl.hooks.value_objects import HookName
+from kgcl.integration import KGCIntegration
+from kgcl.workflow.state import WorkflowState, WorkflowStep
 
 # Define test namespaces
 KGC = Namespace("http://example.org/kgc/")
 ICAL = Namespace("http://www.w3.org/2002/12/cal/ical#")
+MIN_GENERATOR_RUNS: int = 3
 
 
 @pytest.fixture
-def test_graph():
+def test_graph() -> Graph:
     """Create RDF graph with test calendar data."""
     g = Graph()
     g.bind("kgc", KGC)
@@ -40,14 +43,14 @@ def test_graph():
     event = URIRef("http://example.org/event/1")
     g.add((event, RDF.type, ICAL.Vevent))
     g.add((event, ICAL.summary, Literal("Team Meeting")))
-    g.add((event, ICAL.dtstart, Literal(datetime(2025, 11, 24, 10, 0))))
-    g.add((event, ICAL.dtend, Literal(datetime(2025, 11, 24, 11, 0))))
+    g.add((event, ICAL.dtstart, Literal(datetime(2025, 11, 24, 10, 0, tzinfo=UTC))))
+    g.add((event, ICAL.dtend, Literal(datetime(2025, 11, 24, 11, 0, tzinfo=UTC))))
 
     return g
 
 
 @pytest.fixture
-def test_hooks_file(tmp_path):
+def test_hooks_file(tmp_path: Path) -> Path:
     """Create test hooks.ttl file."""
     hooks_ttl = """
     @prefix kgc: <http://example.org/kgc/> .
@@ -74,7 +77,7 @@ def test_hooks_file(tmp_path):
 class TestGeneratorHandlers:
     """Test individual generator handlers."""
 
-    def test_agenda_handler_produces_artifact(self, test_graph):
+    def test_agenda_handler_produces_artifact(self, test_graph: Graph) -> None:
         """Test that agenda handler produces valid artifact."""
         ctx = ExecutionContext(
             event_type="urn:kgc:apple:DataIngested",
@@ -82,20 +85,26 @@ class TestGeneratorHandlers:
             hook=None,
             effect=None,
             graph=test_graph,
-            timestamp=datetime.now(),
-            actor="system"
+            timestamp=datetime.now(tz=UTC),
+            actor="system",
         )
 
         result = HookHandlers.generate_agenda(ctx)
 
         assert result["artifact_type"] == "agenda"
         assert result["artifact_name"] is not None
-        assert "daily-" in result["artifact_name"].lower() or "agenda" in result["artifact_name"].lower()
+        assert (
+            "daily-" in result["artifact_name"].lower()
+            or "agenda" in result["artifact_name"].lower()
+        )
         assert result["artifact_content"] is not None
         assert len(result["artifact_content"]) > 0
-        assert "Summary" in result["artifact_content"] or "summary" in result["artifact_content"].lower()
+        assert (
+            "Summary" in result["artifact_content"]
+            or "summary" in result["artifact_content"].lower()
+        )
 
-    def test_quality_report_handler_produces_artifact(self, test_graph):
+    def test_quality_report_handler_produces_artifact(self, test_graph: Graph) -> None:
         """Test that quality report handler produces valid artifact."""
         ctx = ExecutionContext(
             event_type="urn:kgc:ValidationFailed",
@@ -103,8 +112,8 @@ class TestGeneratorHandlers:
             hook=None,
             effect=None,
             graph=test_graph,
-            timestamp=datetime.now(),
-            actor="validator"
+            timestamp=datetime.now(tz=UTC),
+            actor="validator",
         )
 
         result = HookHandlers.generate_quality_report(ctx)
@@ -113,7 +122,7 @@ class TestGeneratorHandlers:
         assert result["artifact_name"] is not None
         assert "quality" in result["artifact_name"].lower()
 
-    def test_conflict_report_handler_produces_artifact(self, test_graph):
+    def test_conflict_report_handler_produces_artifact(self, test_graph: Graph) -> None:
         """Test that conflict report handler produces valid artifact."""
         ctx = ExecutionContext(
             event_type="urn:kgc:ConflictDetected",
@@ -121,8 +130,8 @@ class TestGeneratorHandlers:
             hook=None,
             effect=None,
             graph=test_graph,
-            timestamp=datetime.now(),
-            actor="system"
+            timestamp=datetime.now(tz=UTC),
+            actor="system",
         )
 
         result = HookHandlers.generate_conflict_report(ctx)
@@ -131,7 +140,7 @@ class TestGeneratorHandlers:
         assert result["artifact_name"] is not None
         assert "conflict" in result["artifact_name"].lower()
 
-    def test_stale_items_handler_produces_artifact(self, test_graph):
+    def test_stale_items_handler_produces_artifact(self, test_graph: Graph) -> None:
         """Test that stale items handler produces valid artifact."""
         ctx = ExecutionContext(
             event_type="urn:kgc:StaleItemFound",
@@ -139,8 +148,8 @@ class TestGeneratorHandlers:
             hook=None,
             effect=None,
             graph=test_graph,
-            timestamp=datetime.now(),
-            actor="system"
+            timestamp=datetime.now(tz=UTC),
+            actor="system",
         )
 
         result = HookHandlers.generate_stale_items_report(ctx)
@@ -149,7 +158,7 @@ class TestGeneratorHandlers:
         assert result["artifact_name"] is not None
         assert "stale" in result["artifact_name"].lower()
 
-    def test_all_reports_handler_runs_multiple_generators(self, test_graph):
+    def test_all_reports_handler_runs_multiple_generators(self, test_graph: Graph) -> None:
         """Test that all_reports handler runs all generators."""
         ctx = ExecutionContext(
             event_type="urn:kgc:OntologyChanged",
@@ -157,38 +166,86 @@ class TestGeneratorHandlers:
             hook=None,
             effect=None,
             graph=test_graph,
-            timestamp=datetime.now(),
-            actor="system"
+            timestamp=datetime.now(tz=UTC),
+            actor="system",
         )
 
         result = HookHandlers.generate_all_reports(ctx)
 
         assert result["artifact_type"] == "all_reports"
         assert "artifacts" in result
-        # Should have attempted to run at least 3 generators
-        assert len(result["artifacts"]) >= 3
+        # Should have attempted to run at least the configured number of generators
+        assert len(result["artifacts"]) >= MIN_GENERATOR_RUNS
 
 
 class TestHookHandlerIntegration:
     """Test hooks and handlers working together."""
 
-    def test_hook_orchestrator_executes_handlers(self, test_graph, test_hooks_file):
+    def test_hook_orchestrator_executes_handlers(
+        self, test_graph: Graph, test_hooks_file: Path
+    ) -> None:
         """Test that hook orchestrator can execute handlers."""
         # Initialize orchestrator
         orchestrator = HookOrchestrator(
-            graph=test_graph,
-            hooks_file=test_hooks_file,
-            continue_on_error=True
+            graph=test_graph, hooks_file=test_hooks_file, continue_on_error=True
         )
 
         # Register handlers
         register_all_handlers(orchestrator)
 
-        # Verify handlers registered
-        assert len(orchestrator._handlers) > 0
-        assert "IngestHook" in orchestrator._handlers
+        # Verify handlers registered through public API
+        registered_hooks = orchestrator.get_registered_hooks()
+        assert registered_hooks
+        assert "IngestHook" in registered_hooks
 
-    def test_handler_error_handling(self, test_graph):
+    def test_hook_orchestrator_sanitizes_handler_errors(
+        self, test_graph: Graph, test_hooks_file: Path
+    ) -> None:
+        """Handlers that raise should yield sanitized receipts."""
+        orchestrator = HookOrchestrator(
+            graph=test_graph, hooks_file=test_hooks_file, continue_on_error=True
+        )
+
+        ingest_hook = HookDefinition(
+            uri=URIRef("urn:kgc:IngestHook"),
+            name=HookName.new("IngestHook"),
+            label="Ingest Hook",
+            description="Test hook",
+            trigger_event=URIRef("urn:kgc:apple:DataIngested"),
+            trigger_label="Data Ingested",
+            cron_schedule=None,
+            effects=[
+                HookEffect(
+                    label="Failing Effect",
+                    description="Raises error",
+                    command="kgct failing",
+                    target="out.txt",
+                )
+            ],
+            waste_removed="",
+        )
+        orchestrator.hooks = [ingest_hook]
+        orchestrator.loader.get_hooks_by_trigger = (
+            lambda event: [ingest_hook] if event == "urn:kgc:apple:DataIngested" else []
+        )
+
+        def failing_handler(ctx: ExecutionContext) -> dict[str, Any]:
+            raise RuntimeError("boom /tmp/secret_path.py line 42")
+
+        orchestrator.register_handler("IngestHook", failing_handler)
+
+        result = orchestrator.trigger_event("urn:kgc:apple:DataIngested", {})
+
+        assert result.errors
+        assert not result.success
+        assert "[RUNTIME]" in result.errors[0]
+        assert "/tmp/secret_path.py" not in result.errors[0]
+        assert result.receipts
+        receipt = result.receipts[0]
+        assert receipt.metadata.get("sanitized") is True
+        assert receipt.metadata.get("error_code") == "RUNTIME"
+
+    def test_handler_error_handling(self, test_graph: Graph) -> None:
         """Test that handlers handle errors gracefully."""
         # Create execution context with missing template directory
         ctx = ExecutionContext(
@@ -197,8 +254,8 @@ class TestHookHandlerIntegration:
             hook=None,
             effect=None,
             graph=test_graph,
-            timestamp=datetime.now(),
-            actor="system"
+            timestamp=datetime.now(tz=UTC),
+            actor="system",
         )
 
         # This may fail due to missing templates, but should return error result
@@ -213,11 +270,9 @@ class TestHookHandlerIntegration:
 class TestWorkflowWithGenerators:
     """Test that workflow can trigger generators through hooks."""
 
-    def test_workflow_state_tracks_generator_artifacts(self):
+    def test_workflow_state_tracks_generator_artifacts(self) -> None:
         """Test that workflow state can track generator artifacts."""
-        from kgcl.workflow.state import WorkflowState, WorkflowStep
-
-        state = WorkflowState(workflow_id="test-1", started_at=datetime.now())
+        state = WorkflowState(workflow_id="test-1", started_at=datetime.now(tz=UTC))
 
         # Simulate completing a REGENERATE step with generated artifacts
         artifacts_data = {
@@ -225,7 +280,7 @@ class TestWorkflowWithGenerators:
                 "agenda": {
                     "artifact_type": "agenda",
                     "artifact_name": "agenda_20251124.md",
-                    "artifact_content": "# Agenda\n..."
+                    "artifact_content": "# Agenda\n...",
                 }
             }
         }
@@ -233,8 +288,8 @@ class TestWorkflowWithGenerators:
         state.complete_step(
             step=WorkflowStep.REGENERATE,
             success=True,
-            started_at=datetime.now(),
-            data=artifacts_data
+            started_at=datetime.now(tz=UTC),
+            data=artifacts_data,
         )
 
         # Verify step was recorded
@@ -247,7 +302,7 @@ class TestWorkflowWithGenerators:
 class TestEndToEndFlow:
     """Integration tests for complete data flow."""
 
-    def test_generator_produces_valid_markdown(self, test_graph):
+    def test_generator_produces_valid_markdown(self, test_graph: Graph) -> None:
         """Test that generators produce valid markdown artifacts."""
         gen = AgendaGenerator(graph=test_graph)
 
@@ -261,7 +316,7 @@ class TestEndToEndFlow:
             # Template might not exist yet, that's ok
             pytest.skip("Templates not yet created")
 
-    def test_handler_result_has_all_fields(self, test_graph):
+    def test_handler_result_has_all_fields(self, test_graph: Graph) -> None:
         """Test that handler results have required fields."""
         ctx = ExecutionContext(
             event_type="urn:kgc:apple:DataIngested",
@@ -269,8 +324,8 @@ class TestEndToEndFlow:
             hook=None,
             effect=None,
             graph=test_graph,
-            timestamp=datetime.now(),
-            actor="system"
+            timestamp=datetime.now(tz=UTC),
+            actor="system",
         )
 
         result = HookHandlers.generate_agenda(ctx)
@@ -286,18 +341,16 @@ class TestEndToEndFlow:
 class TestIntegrationSetup:
     """Smoke tests for integration module initialization."""
 
-    def test_handlers_module_imports(self):
+    def test_handlers_module_imports(self) -> None:
         """Test that handlers module can be imported."""
-        from kgcl.hooks.handlers import HookHandlers, register_all_handlers
         assert HookHandlers is not None
         assert register_all_handlers is not None
 
-    def test_integration_module_imports(self):
+    def test_integration_module_imports(self) -> None:
         """Test that integration module can be imported."""
-        from kgcl.integration import KGCIntegration
         assert KGCIntegration is not None
 
-    def test_handler_functions_callable(self):
+    def test_handler_functions_callable(self) -> None:
         """Test that handler functions are callable."""
         assert callable(HookHandlers.generate_agenda)
         assert callable(HookHandlers.generate_quality_report)

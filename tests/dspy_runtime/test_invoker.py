@@ -91,7 +91,8 @@ class TestSignatureInvoker:
         signature = invoker.load_signature(str(sample_signature_module), "TestSignature")
 
         assert signature.__name__ == "TestSignature"
-        assert hasattr(signature, "input_text")
+        assert "input_text" in signature.input_fields
+        assert "output_text" in signature.output_fields
 
     def test_load_signature_caching(self, sample_signature_module):
         """Test signature caching."""

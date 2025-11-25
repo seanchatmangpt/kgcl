@@ -6,7 +6,7 @@ from collections.abc import Iterator
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from opentelemetry import trace
 from rdflib import Graph, Literal, Namespace, URIRef
@@ -21,6 +21,10 @@ HookExecutor = None
 HookContext = None
 HookPhase = None
 Receipt = None
+
+if TYPE_CHECKING:  # pragma: no cover - import for type checking only
+    from kgcl.unrdf_engine.hook_registry import PersistentHookRegistry
+    from kgcl.unrdf_engine.hooks import HookExecutor as HookExecutorType
 
 # UNRDF namespaces
 UNRDF = Namespace("http://unrdf.org/ontology/")
@@ -310,10 +314,16 @@ class UnrdfEngine:
         # Execute POST_TRANSACTION hooks
         if self._hook_executor:
             context.phase = HookPhase.POST_TRANSACTION
+            pre_receipt_count = len(context.receipts)
             self._hook_executor.execute_phase(HookPhase.POST_TRANSACTION, context)
+            transaction.hook_receipts.extend(context.receipts[pre_receipt_count:])
 
-            # Store receipts in transaction
-            transaction.hook_receipts.extend(context.receipts)
+            # Execute POST_COMMIT hooks for long-running observability/pipeline triggers
+            context.phase = HookPhase.POST_COMMIT
+            context.metadata.setdefault("transaction", transaction)
+            post_commit_start = len(context.receipts)
+            self._hook_executor.execute_phase(HookPhase.POST_COMMIT, context)
+            transaction.hook_receipts.extend(context.receipts[post_commit_start:])
 
     @tracer.start_as_current_span("unrdf.rollback")
     def rollback(self, transaction: Transaction) -> None:
@@ -336,6 +346,14 @@ class UnrdfEngine:
         transaction.rolled_back = True
 
     @tracer.start_as_current_span("unrdf.query")
+    def get_hook_registry(self) -> PersistentHookRegistry | None:
+        """Return the configured hook registry if available."""
+        return self._hook_registry
+
+    def get_hook_executor(self) -> HookExecutorType | None:
+        """Return the active hook executor if hooks are enabled."""
+        return self._hook_executor
+
     def query(self, sparql: str, **kwargs: Any) -> Result:
         """Execute a SPARQL query against the graph.
 

@@ -5,7 +5,7 @@ from __future__ import annotations
 from rdflib import Literal, URIRef
 from rdflib.namespace import RDF
 
-from kgcl.unrdf_engine.engine import UnrdfEngine
+from kgcl.unrdf_engine.engine import UNRDF, UnrdfEngine
 from kgcl.unrdf_engine.hooks import (
     HookContext,
     HookExecutor,
@@ -15,6 +15,10 @@ from kgcl.unrdf_engine.hooks import (
 )
 from kgcl.unrdf_engine.ingestion import IngestionPipeline, IngestionResult
 from kgcl.unrdf_engine.validation import ShaclValidator
+
+EXPECTED_TRIPLES_ADDED = 10
+BATCH_RESULT_COUNT = 3
+ARRAY_TRIPLE_THRESHOLD = 3
 
 
 class TestIngestionResult:

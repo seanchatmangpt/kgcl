@@ -11,17 +11,17 @@ Chicago TDD Pattern:
     - Return validated Hook domain objects
 """
 
+import logging
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
-import logging
 
-from rdflib import Graph, Namespace, URIRef, Literal
+from rdflib import Graph, Literal, Namespace, URIRef
 from rdflib.namespace import RDF, RDFS
 
 from kgcl.hooks.conditions import Condition, ConditionResult
-
+from kgcl.hooks.value_objects import HookName
 
 logger = logging.getLogger(__name__)
 
@@ -34,18 +34,20 @@ APPLE = Namespace("urn:kgc:apple:")
 class HookEffect:
     """Single effect (command) that a hook triggers.
 
-    Attributes:
+    Attributes
+    ----------
         label: Human-readable name
         description: Explanation of what this effect does
         command: CLI command to execute (e.g., "kgct generate-agenda")
         target: Output file path or destination
         generator: Name of ProjectionGenerator class to invoke
     """
+
     label: str
     description: str
     command: str
     target: str
-    generator: Optional[str] = None  # Mapped from command
+    generator: str | None = None  # Mapped from command
 
 
 @dataclass
@@ -54,7 +56,8 @@ class HookDefinition:
 
     Represents a complete hook with its trigger conditions and effects.
 
-    Attributes:
+    Attributes
+    ----------
         uri: RDF URI of the hook
         name: Hook identifier (e.g., "IngestHook")
         label: Human-readable label
@@ -65,22 +68,21 @@ class HookDefinition:
         effects: List of commands/generators to execute
         waste_removed: Description of manual work eliminated
     """
+
     uri: URIRef
-    name: str
+    name: HookName
     label: str
     description: str
-    trigger_event: Optional[URIRef]
-    trigger_label: Optional[str]
-    cron_schedule: Optional[str]
-    effects: List[HookEffect]
+    trigger_event: URIRef | None
+    trigger_label: str | None
+    cron_schedule: str | None
+    effects: list[HookEffect]
     waste_removed: str = ""
 
     def __post_init__(self) -> None:
         """Validate hook definition after initialization."""
         if not self.trigger_event and not self.cron_schedule:
-            raise ValueError(
-                f"Hook {self.name} must have either trigger_event or cron_schedule"
-            )
+            raise ValueError(f"Hook {self.name} must have either trigger_event or cron_schedule")
         if not self.effects:
             raise ValueError(f"Hook {self.name} must have at least one effect")
 
@@ -120,7 +122,8 @@ class HookLoader:
         Args:
             hooks_file: Path to RDF file containing hook definitions
 
-        Raises:
+        Raises
+        ------
             FileNotFoundError: If hooks file doesn't exist
         """
         if not hooks_file.exists():
@@ -132,16 +135,18 @@ class HookLoader:
 
         logger.info(f"Loaded hooks graph from {hooks_file} ({len(self.graph)} triples)")
 
-    def load_hooks(self) -> List[HookDefinition]:
+    def load_hooks(self) -> list[HookDefinition]:
         """Load all hook definitions from RDF graph.
 
-        Returns:
+        Returns
+        -------
             List of parsed HookDefinition objects
 
-        Raises:
+        Raises
+        ------
             ValueError: If hook definitions are malformed
         """
-        hooks: List[HookDefinition] = []
+        hooks: list[HookDefinition] = []
 
         # Query for all hooks (anything with rdf:type kgc:Hook)
         hook_query = """
@@ -181,14 +186,17 @@ class HookLoader:
             label: Human-readable label
             comment: Description
 
-        Returns:
+        Returns
+        -------
             Parsed HookDefinition
 
-        Raises:
+        Raises
+        ------
             ValueError: If hook is malformed
         """
         # Extract hook name from URI (e.g., apple:IngestHook -> IngestHook)
         name = str(hook_uri).split(":")[-1]
+        hook_name = HookName.new(name)
 
         # Get trigger event
         trigger_event = self._get_trigger_event(hook_uri)
@@ -205,23 +213,24 @@ class HookLoader:
 
         return HookDefinition(
             uri=hook_uri,
-            name=name,
+            name=hook_name,
             label=label,
             description=comment,
             trigger_event=trigger_event,
             trigger_label=trigger_label,
             cron_schedule=cron_schedule,
             effects=effects,
-            waste_removed=waste_removed
+            waste_removed=waste_removed,
         )
 
-    def _get_trigger_event(self, hook_uri: URIRef) -> Optional[URIRef]:
+    def _get_trigger_event(self, hook_uri: URIRef) -> URIRef | None:
         """Extract trigger event URI from hook.
 
         Args:
             hook_uri: Hook URI
 
-        Returns:
+        Returns
+        -------
             Event URI or None
         """
         # Direct triggeredBy predicate
@@ -234,26 +243,28 @@ class HookLoader:
 
         return None
 
-    def _get_trigger_label(self, event_uri: URIRef) -> Optional[str]:
+    def _get_trigger_label(self, event_uri: URIRef) -> str | None:
         """Get human-readable label for trigger event.
 
         Args:
             event_uri: Event URI
 
-        Returns:
+        Returns
+        -------
             Event label or None
         """
         for label in self.graph.objects(event_uri, RDFS.label):
             return str(label)
         return None
 
-    def _get_cron_schedule(self, hook_uri: URIRef) -> Optional[str]:
+    def _get_cron_schedule(self, hook_uri: URIRef) -> str | None:
         """Extract cron schedule from hook (for timed hooks).
 
         Args:
             hook_uri: Hook URI
 
-        Returns:
+        Returns
+        -------
             Cron expression string or None
         """
         # Check for triggeredBy blank node with cronSchedule
@@ -263,16 +274,17 @@ class HookLoader:
 
         return None
 
-    def _parse_effects(self, hook_uri: URIRef) -> List[HookEffect]:
+    def _parse_effects(self, hook_uri: URIRef) -> list[HookEffect]:
         """Parse all effects from hook.
 
         Args:
             hook_uri: Hook URI
 
-        Returns:
+        Returns
+        -------
             List of HookEffect objects
         """
-        effects: List[HookEffect] = []
+        effects: list[HookEffect] = []
 
         for effect_node in self.graph.objects(hook_uri, KGC.effect):
             try:
@@ -289,10 +301,12 @@ class HookLoader:
         Args:
             effect_node: RDF blank node or URI representing effect
 
-        Returns:
+        Returns
+        -------
             HookEffect object
 
-        Raises:
+        Raises
+        ------
             ValueError: If effect is malformed
         """
         label = None
@@ -311,9 +325,7 @@ class HookLoader:
                 target = str(obj)
 
         if not all([label, description, command, target]):
-            raise ValueError(
-                f"Effect missing required fields: label={label}, command={command}"
-            )
+            raise ValueError(f"Effect missing required fields: label={label}, command={command}")
 
         # Map command to generator
         generator = self._map_command_to_generator(command)
@@ -323,16 +335,17 @@ class HookLoader:
             description=description,
             command=command,
             target=target,
-            generator=generator
+            generator=generator,
         )
 
-    def _map_command_to_generator(self, command: str) -> Optional[str]:
+    def _map_command_to_generator(self, command: str) -> str | None:
         """Map CLI command to generator class name.
 
         Args:
             command: CLI command string
 
-        Returns:
+        Returns
+        -------
             Generator class name or None
         """
         # Extract base command (ignore flags)
@@ -346,45 +359,50 @@ class HookLoader:
         Args:
             hook_uri: Hook URI
 
-        Returns:
+        Returns
+        -------
             Waste removed description or empty string
         """
         for waste in self.graph.objects(hook_uri, KGC.wasteRemoved):
             return str(waste)
         return ""
 
-    def get_hook_by_name(self, name: str) -> Optional[HookDefinition]:
+    def get_hook_by_name(self, name: str | HookName) -> HookDefinition | None:
         """Find hook by name.
 
         Args:
             name: Hook name (e.g., "IngestHook")
 
-        Returns:
+        Returns
+        -------
             HookDefinition or None if not found
         """
+        target = HookName.ensure(name)
         hooks = self.load_hooks()
         for hook in hooks:
-            if hook.name == name:
+            if hook.name == target:
                 return hook
         return None
 
-    def get_hooks_by_trigger(self, event_uri: str) -> List[HookDefinition]:
+    def get_hooks_by_trigger(self, event_uri: str) -> list[HookDefinition]:
         """Find all hooks triggered by specific event.
 
         Args:
             event_uri: Event URI string (e.g., "urn:kgc:apple:DataIngested")
 
-        Returns:
+        Returns
+        -------
             List of matching hooks
         """
         hooks = self.load_hooks()
         event = URIRef(event_uri)
         return [h for h in hooks if h.trigger_event == event]
 
-    def get_timed_hooks(self) -> List[HookDefinition]:
+    def get_timed_hooks(self) -> list[HookDefinition]:
         """Get all hooks with cron schedules.
 
-        Returns:
+        Returns
+        -------
             List of hooks with cron_schedule defined
         """
         hooks = self.load_hooks()

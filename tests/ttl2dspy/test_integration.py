@@ -1,6 +1,10 @@
 """Integration tests for ttl2dspy."""
 
+import importlib.util
+import json
+import sys
 from pathlib import Path
+from typing import Final
 
 import pytest
 from rdflib import Graph, Literal, Namespace
@@ -10,67 +14,70 @@ from kgcl.ttl2dspy.hooks import TTL2DSpyHook
 from kgcl.ttl2dspy.ultra import CacheConfig, UltraOptimizer
 from kgcl.ttl2dspy.writer import ModuleWriter
 
+TEXT_ANALYSIS_SHAPE_COUNT: Final[int] = 2
+BATCH_FILE_COUNT: Final[int] = 3
+
 
 @pytest.fixture
-def text_analysis_ttl(tmp_path):
+def text_analysis_ttl(tmp_path: Path) -> Path:
     """Create a realistic text analysis SHACL ontology."""
     g = Graph()
-    KGCL = Namespace("http://kgcl.io/ontology/")
+    kgcl_ns = Namespace("http://kgcl.io/ontology/")
 
-    # Text Classification Shape
-    classify_shape = KGCL.TextClassificationShape
+    # Text classification shape definition.
+    classify_shape = kgcl_ns.TextClassificationShape
     g.add((classify_shape, RDF.type, SH.NodeShape))
-    g.add((classify_shape, SH.targetClass, KGCL.TextClassification))
+    g.add((classify_shape, SH.targetClass, kgcl_ns.TextClassification))
     g.add((classify_shape, RDFS.comment, Literal("Classify text into predefined categories")))
 
-    # Input: text
-    prop1 = KGCL.TextClassificationShape_text
+    # Input text property.
+    prop1 = kgcl_ns.TextClassificationShape_text
     g.add((classify_shape, SH.property, prop1))
-    g.add((prop1, SH.path, KGCL.text))
+    g.add((prop1, SH.path, kgcl_ns.text))
     g.add((prop1, SH.datatype, XSD.string))
     g.add((prop1, SH.minCount, Literal(1)))
     g.add((prop1, RDFS.comment, Literal("Input text to classify")))
 
-    # Input: categories (list)
-    prop2 = KGCL.TextClassificationShape_categories
+    # Input categories property.
+    prop2 = kgcl_ns.TextClassificationShape_categories
     g.add((classify_shape, SH.property, prop2))
-    g.add((prop2, SH.path, KGCL.categories))
+    g.add((prop2, SH.path, kgcl_ns.categories))
     g.add((prop2, SH.datatype, XSD.string))
     g.add((prop2, SH.minCount, Literal(1)))
     g.add((prop2, RDFS.comment, Literal("Possible categories (comma-separated)")))
 
-    # Output: category
-    prop3 = KGCL.TextClassificationShape_category
+    # Output category property.
+    prop3 = kgcl_ns.TextClassificationShape_category
     g.add((classify_shape, SH.property, prop3))
-    g.add((prop3, SH.path, KGCL.category))
+    g.add((prop3, SH.path, kgcl_ns.category))
     g.add((prop3, SH.datatype, XSD.string))
     g.add((prop3, RDFS.comment, Literal("Predicted category")))
 
-    # Output: confidence
-    prop4 = KGCL.TextClassificationShape_confidence
+    # Output confidence property.
+    prop4 = kgcl_ns.TextClassificationShape_confidence
     g.add((classify_shape, SH.property, prop4))
-    g.add((prop4, SH.path, KGCL.confidence))
+    g.add((prop4, SH.path, kgcl_ns.confidence))
     g.add((prop4, SH.datatype, XSD.float))
     g.add((prop4, RDFS.comment, Literal("Confidence score (0-1)")))
 
-    # Entity Extraction Shape
-    extract_shape = KGCL.EntityExtractionShape
+    # Entity extraction shape definition.
+    extract_shape = kgcl_ns.EntityExtractionShape
     g.add((extract_shape, RDF.type, SH.NodeShape))
-    g.add((extract_shape, SH.targetClass, KGCL.EntityExtraction))
+    g.add((extract_shape, SH.targetClass, kgcl_ns.EntityExtraction))
     g.add((extract_shape, RDFS.comment, Literal("Extract named entities from text")))
 
-    # Input: text
-    prop5 = KGCL.EntityExtractionShape_text
+    # Input text for extraction.
+    prop5 = kgcl_ns.EntityExtractionShape_text
     g.add((extract_shape, SH.property, prop5))
-    g.add((prop5, SH.path, KGCL.text))
+    g.add((prop5, SH.path, kgcl_ns.text))
     g.add((prop5, SH.datatype, XSD.string))
     g.add((prop5, SH.minCount, Literal(1)))
     g.add((prop5, RDFS.comment, Literal("Input text for entity extraction")))
 
-    # Output: entities (list)
-    prop6 = KGCL.EntityExtractionShape_entities
+    # Output entities property.
+    prop6 = kgcl_ns.EntityExtractionShape_entities
     g.add((extract_shape, SH.property, prop6))
-    g.add((prop6, SH.path, KGCL.entities))
+    g.add((prop6, SH.path, kgcl_ns.entities))
     g.add((prop6, SH.datatype, XSD.string))
     g.add((prop6, RDFS.comment, Literal("Extracted entities as JSON")))
 
@@ -83,14 +90,14 @@ def text_analysis_ttl(tmp_path):
 class TestEndToEnd:
     """End-to-end integration tests."""
 
-    def test_parse_and_generate(self, text_analysis_ttl, tmp_path):
+    def test_parse_and_generate(self, text_analysis_ttl: Path, tmp_path: Path) -> None:
         """Test complete workflow: parse -> generate -> write."""
         optimizer = UltraOptimizer()
         writer = ModuleWriter()
 
         # Parse
         shapes = optimizer.parse_with_cache(text_analysis_ttl)
-        assert len(shapes) == 2
+        assert len(shapes) == TEXT_ANALYSIS_SHAPE_COUNT
 
         # Generate
         code = optimizer.generate_with_cache(shapes)
@@ -107,7 +114,7 @@ class TestEndToEnd:
             format_code=False,
         )
 
-        assert result.signatures_count == 2
+        assert result.signatures_count == TEXT_ANALYSIS_SHAPE_COUNT
         assert output_path.exists()
 
         # Verify the generated file is valid Python
@@ -116,7 +123,7 @@ class TestEndToEnd:
         assert "text: str = dspy.InputField" in content
         assert "category: Optional[str] = dspy.OutputField" in content
 
-    def test_caching_workflow(self, text_analysis_ttl, tmp_path):
+    def test_caching_workflow(self, text_analysis_ttl: Path, tmp_path: Path) -> None:
         """Test that caching works across the workflow."""
         config = CacheConfig(
             memory_cache_enabled=True, disk_cache_enabled=True, disk_cache_dir=tmp_path / "cache"
@@ -144,22 +151,22 @@ class TestEndToEnd:
 
         assert len(shapes3) == len(shapes1)
 
-    def test_multiple_files(self, tmp_path):
+    def test_multiple_files(self, tmp_path: Path) -> None:
         """Test processing multiple TTL files."""
-        files = []
+        files: list[str | Path] = []
 
         # Create multiple ontology files
-        for i in range(3):
+        for i in range(BATCH_FILE_COUNT):
             g = Graph()
-            NS = Namespace(f"http://example.org/{i}/")
+            shape_ns = Namespace(f"http://example.org/{i}/")
 
-            shape = NS.TestShape
+            shape = shape_ns.TestShape
             g.add((shape, RDF.type, SH.NodeShape))
             g.add((shape, RDFS.comment, Literal(f"Test shape {i}")))
 
-            prop = NS.TestShape_prop
+            prop = shape_ns.TestShape_prop
             g.add((shape, SH.property, prop))
-            g.add((prop, SH.path, NS.prop))
+            g.add((prop, SH.path, shape_ns.prop))
             g.add((prop, SH.datatype, XSD.string))
             g.add((prop, SH.minCount, Literal(1)))
 
@@ -171,14 +178,12 @@ class TestEndToEnd:
         optimizer = UltraOptimizer()
         results = optimizer.batch_parse(files)
 
-        assert len(results) == 3
+        assert len(results) == BATCH_FILE_COUNT
         for shapes in results.values():
             assert len(shapes) == 1
 
-    def test_generated_module_is_importable(self, text_analysis_ttl, tmp_path):
+    def test_generated_module_is_importable(self, text_analysis_ttl: Path, tmp_path: Path) -> None:
         """Test that generated module can be imported."""
-        import sys
-
         optimizer = UltraOptimizer()
         writer = ModuleWriter()
 
@@ -193,11 +198,12 @@ class TestEndToEnd:
 
         try:
             # This will fail if the generated code has syntax errors
-            import importlib.util
-
             spec = importlib.util.spec_from_file_location("test_signatures", output_path)
+            assert spec is not None, "Failed to create module spec"
+            loader = spec.loader
+            assert loader is not None, "Spec loader missing"
             module = importlib.util.module_from_spec(spec)
-            spec.loader.exec_module(module)
+            loader.exec_module(module)
 
             # Verify classes exist
             assert hasattr(module, "TextClassificationSignature")
@@ -210,28 +216,24 @@ class TestEndToEnd:
 class TestHooks:
     """Tests for UNRDF hooks integration."""
 
-    def test_hook_parse_action(self, text_analysis_ttl):
+    def test_hook_parse_action(self, text_analysis_ttl: Path) -> None:
         """Test hook with parse action."""
         hook = TTL2DSpyHook()
 
         request = {"action": "parse", "ttl_path": str(text_analysis_ttl)}
 
-        import json
-
         receipt = hook.process_stdin(json.dumps(request))
 
         assert receipt["success"] is True
         assert receipt["action"] == "parse"
-        assert receipt["shapes_count"] == 2
-        assert len(receipt["shapes"]) == 2
+        assert receipt["shapes_count"] == TEXT_ANALYSIS_SHAPE_COUNT
+        assert len(receipt["shapes"]) == TEXT_ANALYSIS_SHAPE_COUNT
 
-    def test_hook_validate_action(self, text_analysis_ttl):
+    def test_hook_validate_action(self, text_analysis_ttl: Path) -> None:
         """Test hook with validate action."""
         hook = TTL2DSpyHook()
 
         request = {"action": "validate", "ttl_path": str(text_analysis_ttl)}
-
-        import json
 
         receipt = hook.process_stdin(json.dumps(request))
 
@@ -239,19 +241,17 @@ class TestHooks:
         assert receipt["action"] == "validate"
         assert receipt["valid"] is True
 
-    def test_hook_list_action(self, text_analysis_ttl):
+    def test_hook_list_action(self, text_analysis_ttl: Path) -> None:
         """Test hook with list action."""
         hook = TTL2DSpyHook()
 
         request = {"action": "list", "ttl_path": str(text_analysis_ttl)}
 
-        import json
-
         receipt = hook.process_stdin(json.dumps(request))
 
         assert receipt["success"] is True
         assert receipt["action"] == "list"
-        assert len(receipt["shapes"]) == 2
+        assert len(receipt["shapes"]) == TEXT_ANALYSIS_SHAPE_COUNT
 
         # Verify shape details
         for shape in receipt["shapes"]:
@@ -259,7 +259,7 @@ class TestHooks:
             assert "inputs" in shape
             assert "outputs" in shape
 
-    def test_hook_generate_action(self, text_analysis_ttl, tmp_path):
+    def test_hook_generate_action(self, text_analysis_ttl: Path, tmp_path: Path) -> None:
         """Test hook with generate action."""
         hook = TTL2DSpyHook()
 
@@ -270,17 +270,15 @@ class TestHooks:
             "module_name": "test_signatures",
         }
 
-        import json
-
         receipt = hook.process_stdin(json.dumps(request))
 
         assert receipt["success"] is True
         assert receipt["action"] == "generate"
-        assert receipt["signatures_count"] == 2
+        assert receipt["signatures_count"] == TEXT_ANALYSIS_SHAPE_COUNT
         assert Path(receipt["output_path"]).exists()
         assert Path(receipt["receipt_path"]).exists()
 
-    def test_hook_with_inline_ttl(self, tmp_path):
+    def test_hook_with_inline_ttl(self, tmp_path: Path) -> None:
         """Test hook with inline TTL content."""
         hook = TTL2DSpyHook()
 
@@ -312,14 +310,12 @@ ex:TestShape a sh:NodeShape ;
             "module_name": "inline_signatures",
         }
 
-        import json
-
         receipt = hook.process_stdin(json.dumps(request))
 
         assert receipt["success"] is True
         assert receipt["signatures_count"] == 1
 
-    def test_hook_error_handling(self):
+    def test_hook_error_handling(self) -> None:
         """Test hook error handling."""
         hook = TTL2DSpyHook()
 
@@ -328,8 +324,6 @@ ex:TestShape a sh:NodeShape ;
             "action": "generate"
             # Missing required fields
         }
-
-        import json
 
         receipt = hook.process_stdin(json.dumps(request))
 

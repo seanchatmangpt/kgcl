@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """
 Hook Core Domain Model.
 
@@ -15,6 +17,7 @@ from enum import Enum
 from typing import Any
 
 from kgcl.hooks.conditions import Condition, ConditionResult
+from kgcl.hooks.value_objects import HookName, LifecycleEventType
 
 
 class HookValidationError(Exception):
@@ -31,7 +34,7 @@ class HookState(Enum):
     FAILED = "failed"
 
 
-@dataclass
+@dataclass(frozen=True)
 class HookReceipt:
     """
     Immutable receipt of hook execution.
@@ -69,7 +72,7 @@ class HookReceipt:
         Whether data was truncated due to size
     """
 
-    hook_id: str
+    hook_id: HookName
     timestamp: datetime
     condition_result: ConditionResult
     handler_result: dict[str, Any] | None
@@ -81,18 +84,14 @@ class HookReceipt:
     input_context: dict[str, Any] | None = None
     metadata: dict[str, Any] = field(default_factory=dict)
     receipt_id: str = field(default_factory=lambda: str(uuid.uuid4()))
-    truncated: bool = False
+    truncated: bool = field(default=False, init=False)
     max_size_bytes: int | None = None
     merkle_anchor: Any | None = None
 
-    def __setattr__(self, name: str, value: Any) -> None:
-        """Make receipt immutable after initialization."""
-        if hasattr(self, "_initialized"):
-            raise AttributeError("Receipt is immutable")
-        super().__setattr__(name, value)
-
     def __post_init__(self) -> None:
-        """Mark receipt as initialized (immutable)."""
+        """Finalize validated fields and enforce truncation rules."""
+        object.__setattr__(self, "hook_id", HookName.ensure(self.hook_id))
+
         # Truncate oversized data if needed
         if self.max_size_bytes and self.handler_result:
             import json
@@ -100,12 +99,9 @@ class HookReceipt:
             result_size = len(json.dumps(self.handler_result))
             if result_size > self.max_size_bytes:
                 object.__setattr__(self, "truncated", True)
-                # Truncate to summary
                 object.__setattr__(
                     self, "handler_result", {"_truncated": True, "_size": result_size}
                 )
-
-        object.__setattr__(self, "_initialized", True)
 
 
 @dataclass
@@ -137,7 +133,7 @@ class Hook:
         Additional metadata
     """
 
-    name: str
+    name: HookName
     description: str
     condition: Condition
     handler: Callable[[dict[str, Any]], dict[str, Any]]
@@ -154,8 +150,10 @@ class Hook:
 
     def __post_init__(self) -> None:
         """Validate hook structure."""
-        if not self.name or not self.name.strip():
-            raise HookValidationError("Hook name is required")
+        try:
+            object.__setattr__(self, "name", HookName.ensure(str(self.name)))
+        except ValueError as exc:
+            raise HookValidationError(str(exc)) from exc
 
         if self.condition is None:
             raise HookValidationError("Hook condition is required")
@@ -190,7 +188,7 @@ class HookRegistry:
 
     def __init__(self) -> None:
         """Initialize empty registry."""
-        self._hooks: dict[str, Hook] = {}
+        self._hooks: dict[HookName, Hook] = {}
 
     def register(self, hook: Hook) -> None:
         """
@@ -220,7 +218,7 @@ class HookRegistry:
         name : str
             Name of hook to unregister
         """
-        self._hooks.pop(name, None)
+        self._hooks.pop(HookName.ensure(name), None)
 
     def get(self, name: str) -> Hook | None:
         """
@@ -236,7 +234,7 @@ class HookRegistry:
         Optional[Hook]
             Hook if found, None otherwise
         """
-        return self._hooks.get(name)
+        return self._hooks.get(HookName.ensure(name))
 
     def get_all(self) -> list[Hook]:
         """
@@ -274,7 +272,7 @@ class HookManager:
         self.hooks: dict[str, Hook] = {}
         self.execution_history: list[HookReceipt] = []
         self.failed_hooks: dict[str, list[str]] = {}
-        self._hook_ids: dict[str, str] = {}  # hook_name -> hook_id
+        self._hook_ids: dict[HookName, str] = {}  # hook_name -> hook_id
 
     def register_hook(self, hook: Hook) -> str:
         """
@@ -352,7 +350,7 @@ class HookManager:
         Optional[Hook]
             Hook if found, None otherwise
         """
-        hook_id = self._hook_ids.get(name)
+        hook_id = self._hook_ids.get(HookName.ensure(name))
         if hook_id:
             return self.hooks.get(hook_id)
         return None
@@ -452,7 +450,7 @@ class HookExecutor:
         """
         self._event_handlers.append(handler)
 
-    def _emit_event(self, event_type: str, hook: Hook, **kwargs: Any) -> None:
+    def _emit_event(self, event_type: LifecycleEventType, hook: Hook, **kwargs: Any) -> None:
         """Emit lifecycle event."""
         from kgcl.hooks.lifecycle import HookLifecycleEvent
 
@@ -492,7 +490,7 @@ class HookExecutor:
         try:
             # Transition to ACTIVE
             hook._transition_state(HookState.ACTIVE)
-            self._emit_event("pre_condition", hook)
+            self._emit_event(LifecycleEventType.PRE_CONDITION, hook)
 
             # Evaluate condition with timeout
             try:
@@ -509,12 +507,12 @@ class HookExecutor:
                 hook._transition_state(HookState.FAILED)
                 condition_result = ConditionResult(triggered=False, metadata={"error": str(e)})
 
-            self._emit_event("post_condition", hook, result=condition_result)
+            self._emit_event(LifecycleEventType.POST_CONDITION, hook, result=condition_result)
 
             # Execute handler if condition triggered
             if condition_result and condition_result.triggered and not error:
                 hook._transition_state(HookState.EXECUTED)
-                self._emit_event("pre_execute", hook)
+                self._emit_event(LifecycleEventType.PRE_EXECUTE, hook)
 
                 try:
                     # Execute handler (sync or async)
@@ -534,7 +532,7 @@ class HookExecutor:
                     stack_trace = traceback.format_exc()
                     hook._transition_state(HookState.FAILED)
 
-                self._emit_event("post_execute", hook, result=handler_result)
+                self._emit_event(LifecycleEventType.POST_EXECUTE, hook, result=handler_result)
             elif condition_result and not condition_result.triggered:
                 # Condition not triggered, mark as completed
                 hook._transition_state(HookState.COMPLETED)

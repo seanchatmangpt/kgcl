@@ -9,7 +9,7 @@ import re
 from dataclasses import dataclass
 
 
-@dataclass
+@dataclass(frozen=True)
 class SanitizedError:
     """
     Result of error sanitization.
@@ -27,6 +27,11 @@ class SanitizedError:
     message: str
     code: str
     is_user_safe: bool = True
+
+    @classmethod
+    def from_exception(cls, error: Exception) -> "SanitizedError":
+        """Factory helper to sanitize exceptions with the default sanitizer."""
+        return ErrorSanitizer().sanitize(error)
 
 
 class ErrorSanitizer:

@@ -14,26 +14,27 @@ from src.swarm import (
 class TestSwarmMember:
     """Test swarm member functionality."""
 
-    def test_member_creation(self):
+    def test_member_creation(self) -> None:
         """Test creating a swarm member."""
         member = SwarmMember("test-worker")
         assert member.name() == "test-worker"
 
-    def test_register_handler(self):
+    def test_register_handler(self) -> None:
         """Test registering task handler."""
         member = SwarmMember("worker")
 
-        def handler(task):
+        def handler(task: TestTask) -> TaskResult:
             return TaskResult(task_name=task.name, status=TaskStatus.SUCCESS, output="done")
 
         member.register_handler("unit_test", handler)
-        assert "unit_test" in [h for h in dir(member)]
+        task = TestTask("handler_test", task_type="unit_test")
+        assert member.execute_task(task).is_success()
 
-    def test_execute_task(self):
+    def test_execute_task(self) -> None:
         """Test executing a task."""
         member = SwarmMember("worker")
 
-        def handler(task):
+        def handler(task: TestTask) -> TaskResult:
             return TaskResult(task_name=task.name, status=TaskStatus.SUCCESS)
 
         member.register_handler("test", handler)
@@ -45,29 +46,29 @@ class TestSwarmMember:
         assert result.task_name == "my_test"
 
 
-class TestCoordinator:
+class TestCoordinatorSuite:
     """Test test coordinator."""
 
-    def test_coordinator_creation(self):
+    def test_coordinator_creation(self) -> None:
         """Test creating coordinator."""
         coordinator = TestCoordinator(max_workers=4)
         assert coordinator.member_count() == 0
 
-    def test_register_member(self):
+    def test_register_member(self) -> None:
         """Test registering members."""
         coordinator = TestCoordinator()
         member = SwarmMember("worker-1")
         coordinator.register_member(member)
         assert coordinator.member_count() == 1
 
-    def test_execute_task(self):
+    def test_execute_task(self) -> None:
         """Test executing task across members."""
         coordinator = TestCoordinator()
 
         # Create member with handler
         member = SwarmMember("worker")
 
-        def handler(task):
+        def handler(task: TestTask) -> TaskResult:
             return TaskResult(task_name=task.name, status=TaskStatus.SUCCESS)
 
         member.register_handler("test", handler)
@@ -81,12 +82,12 @@ class TestCoordinator:
         assert "worker" in results
         assert results["worker"].is_success()
 
-    def test_metrics(self):
+    def test_metrics(self) -> None:
         """Test coordination metrics."""
         coordinator = TestCoordinator()
         member = SwarmMember("worker")
 
-        def handler(task):
+        def handler(task: TestTask) -> TaskResult:
             return TaskResult(task_name=task.name, status=TaskStatus.SUCCESS)
 
         member.register_handler("test", handler)
@@ -100,32 +101,32 @@ class TestCoordinator:
         assert metrics.completed_tasks == 1
 
 
-class TestTask:
+class TestTaskSuite:
     """Test task functionality."""
 
-    def test_task_creation(self):
+    def test_task_creation(self) -> None:
         """Test creating task."""
         task = TestTask("my_test", task_type="unit_test")
         assert task.name == "my_test"
         assert task.task_type == "unit_test"
 
-    def test_task_with_payload(self):
+    def test_task_with_payload(self) -> None:
         """Test task with payload."""
         task = TestTask("test")
         task.with_payload("key", "value")
         assert task.get_payload("key") == "value"
 
-    def test_task_result(self):
+    def test_task_result(self) -> None:
         """Test task result."""
         result = TaskResult(task_name="test", status=TaskStatus.SUCCESS, output="done")
         assert result.is_success()
         assert result.output == "done"
 
 
-class TestComposition:
+class TestCompositionFlow:
     """Test test composition."""
 
-    def test_sequential_execution(self):
+    def test_sequential_execution(self) -> None:
         """Test sequential test composition."""
         results = []
 
@@ -140,7 +141,7 @@ class TestComposition:
         composition.execute()
         assert results == [1, 2, 3]
 
-    def test_composition_with_hooks(self):
+    def test_composition_with_hooks(self) -> None:
         """Test composition with before/after hooks."""
         state = {"setup": False, "teardown": False}
 

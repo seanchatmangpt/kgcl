@@ -9,11 +9,11 @@ Calculates:
 - Trends (metrics over time)
 """
 
+import json
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
-import json
 
 from .state import WorkflowState, WorkflowStep
 
@@ -36,9 +36,7 @@ class StepMetrics:
             self.failure_count += 1
 
         # Recalculate average
-        self.average_duration_seconds = (
-            self.total_duration_seconds / self.execution_count
-        )
+        self.average_duration_seconds = self.total_duration_seconds / self.execution_count
 
     def to_dict(self) -> dict[str, Any]:
         """Convert to JSON-serializable dict."""
@@ -49,9 +47,7 @@ class StepMetrics:
             "failure_count": self.failure_count,
             "average_duration_seconds": self.average_duration_seconds,
             "failure_rate": (
-                self.failure_count / self.execution_count
-                if self.execution_count > 0
-                else 0.0
+                self.failure_count / self.execution_count if self.execution_count > 0 else 0.0
             ),
         }
 
@@ -80,9 +76,7 @@ class WorkflowMetrics:
     def __post_init__(self) -> None:
         """Initialize step metrics for all steps."""
         if not self.step_metrics:
-            self.step_metrics = {
-                step: StepMetrics(step=step) for step in WorkflowStep.all_steps()
-            }
+            self.step_metrics = {step: StepMetrics(step=step) for step in WorkflowStep.all_steps()}
 
     def record_workflow(self, state: WorkflowState) -> None:
         """Record metrics from completed workflow.
@@ -100,18 +94,14 @@ class WorkflowMetrics:
         # Record step metrics
         for result in state.completed_steps:
             step_metric = self.step_metrics[result.step]
-            step_metric.update(
-                duration=result.duration_seconds, failed=not result.success
-            )
+            step_metric.update(duration=result.duration_seconds, failed=not result.success)
 
         # Calculate lead time (Discover → Review)
         discover_result = state.get_step_result(WorkflowStep.DISCOVER)
         review_result = state.get_step_result(WorkflowStep.REVIEW)
 
         if discover_result and review_result:
-            lead_time = (
-                review_result.completed_at - discover_result.started_at
-            ).total_seconds()
+            lead_time = (review_result.completed_at - discover_result.started_at).total_seconds()
             self.total_lead_time_seconds += lead_time
 
     def record_manual_intervention(self, duration_seconds: float) -> None:
@@ -141,7 +131,8 @@ class WorkflowMetrics:
     def rework_rate(self) -> float:
         """Calculate rework rate (step failures requiring re-execution).
 
-        Returns:
+        Returns
+        -------
             Ratio of failed step executions to total executions
         """
         total_executions = sum(m.execution_count for m in self.step_metrics.values())
@@ -155,13 +146,12 @@ class WorkflowMetrics:
     def bottleneck_step(self) -> WorkflowStep | None:
         """Identify bottleneck step (slowest average duration).
 
-        Returns:
+        Returns
+        -------
             WorkflowStep that takes longest on average
         """
         slowest = max(
-            self.step_metrics.values(),
-            key=lambda m: m.average_duration_seconds,
-            default=None,
+            self.step_metrics.values(), key=lambda m: m.average_duration_seconds, default=None
         )
         return slowest.step if slowest else None
 
@@ -169,7 +159,8 @@ class WorkflowMetrics:
     def hands_on_ratio(self) -> float:
         """Calculate ratio of manual intervention time to total workflow time.
 
-        Returns:
+        Returns
+        -------
             Ratio of manual time to total lead time
         """
         if self.total_lead_time_seconds == 0:
@@ -182,7 +173,8 @@ class WorkflowMetrics:
         Args:
             step: Workflow step
 
-        Returns:
+        Returns
+        -------
             StepMetrics for the step
         """
         return self.step_metrics[step]
@@ -193,7 +185,8 @@ class WorkflowMetrics:
         Args:
             limit: Maximum number of steps to return
 
-        Returns:
+        Returns
+        -------
             List of (step, failure_rate) tuples, highest first
         """
         failure_rates = [
@@ -224,12 +217,10 @@ class WorkflowMetrics:
             "manual_time_seconds": self.manual_time_seconds,
             "hands_on_ratio": self.hands_on_ratio,
             "step_metrics": {
-                step.value: metrics.to_dict()
-                for step, metrics in self.step_metrics.items()
+                step.value: metrics.to_dict() for step, metrics in self.step_metrics.items()
             },
             "top_failures": [
-                {"step": step.value, "failure_rate": rate}
-                for step, rate in self.get_top_failures()
+                {"step": step.value, "failure_rate": rate} for step, rate in self.get_top_failures()
             ],
         }
 
@@ -323,9 +314,7 @@ class MetricsTrendAnalyzer:
         self.trends.extend(
             [
                 TrendPoint(timestamp, "success_rate", metrics.success_rate),
-                TrendPoint(
-                    timestamp, "average_lead_time", metrics.average_lead_time_seconds
-                ),
+                TrendPoint(timestamp, "average_lead_time", metrics.average_lead_time_seconds),
                 TrendPoint(timestamp, "rework_rate", metrics.rework_rate),
                 TrendPoint(timestamp, "hands_on_ratio", metrics.hands_on_ratio),
             ]
@@ -333,16 +322,15 @@ class MetricsTrendAnalyzer:
 
         self._save_trends()
 
-    def get_trend(
-        self, metric_name: str, days: int = 30
-    ) -> list[tuple[datetime, float]]:
+    def get_trend(self, metric_name: str, days: int = 30) -> list[tuple[datetime, float]]:
         """Get trend for specific metric.
 
         Args:
             metric_name: Name of metric to analyze
             days: Number of days to include
 
-        Returns:
+        Returns
+        -------
             List of (timestamp, value) tuples
         """
         cutoff = datetime.utcnow() - timedelta(days=days)
@@ -352,16 +340,15 @@ class MetricsTrendAnalyzer:
             if p.metric_name == metric_name and p.timestamp >= cutoff
         ]
 
-    def detect_degradation(
-        self, metric_name: str, threshold: float = 0.2
-    ) -> bool:
+    def detect_degradation(self, metric_name: str, threshold: float = 0.2) -> bool:
         """Detect if metric is degrading over time.
 
         Args:
             metric_name: Metric to check
             threshold: Degradation threshold (0.2 = 20% worse)
 
-        Returns:
+        Returns
+        -------
             True if metric degraded by more than threshold
         """
         trend = self.get_trend(metric_name, days=7)  # Last week

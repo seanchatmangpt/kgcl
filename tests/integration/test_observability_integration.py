@@ -5,6 +5,7 @@ trace/metric correlation across the system.
 """
 
 import tempfile
+import time
 from pathlib import Path
 
 from opentelemetry import trace
@@ -20,7 +21,7 @@ from kgcl.unrdf_engine.ingestion import IngestionPipeline
 class TestObservabilityIntegration:
     """Test observability integration."""
 
-    def test_spans_generated_on_ingestion(self):
+    def test_spans_generated_on_ingestion(self) -> None:
         """Test that OTEL spans are generated during ingestion."""
         # Set up in-memory span exporter
         exporter = InMemorySpanExporter()
@@ -45,7 +46,7 @@ class TestObservabilityIntegration:
             # In real implementation, would ensure tracing configured
             assert isinstance(spans, (list, tuple))
 
-    def test_span_attributes(self):
+    def test_span_attributes(self) -> None:
         """Test that spans have correct attributes."""
         exporter = InMemorySpanExporter()
         tracer_provider = TracerProvider()
@@ -68,13 +69,13 @@ class TestObservabilityIntegration:
             # In real implementation, would ensure proper OTEL setup
             assert isinstance(spans, (list, tuple))
 
-    def test_metrics_recording(self):
+    def test_metrics_recording(self) -> None:
         """Test that metrics are recorded correctly placeholder."""
         # In real implementation, would test metrics recording
         # For now, verify test structure exists
         assert True
 
-    def test_health_check_system(self):
+    def test_health_check_system(self) -> None:
         """Test health check across system components."""
         health = check_health()
 
@@ -89,7 +90,7 @@ class TestObservabilityIntegration:
             for component_health in health.components:
                 assert hasattr(component_health, "status")
 
-    def test_health_check_components(self):
+    def test_health_check_components(self) -> None:
         """Test health check components."""
         health = check_health()
 
@@ -100,7 +101,7 @@ class TestObservabilityIntegration:
         # Check that status is valid
         assert health.status.value in ["healthy", "degraded", "unhealthy"]
 
-    def test_trace_metric_correlation(self):
+    def test_trace_metric_correlation(self) -> None:
         """Test correlation between traces and metrics."""
         exporter = InMemorySpanExporter()
         tracer_provider = TracerProvider()
@@ -121,19 +122,18 @@ class TestObservabilityIntegration:
 
             # Verify spans have transaction context
             spans = exporter.get_finished_spans()
-            txn_spans = [s for s in spans if s.attributes and txn_id in str(s.attributes.values())]
 
             # Spans may not be generated without proper setup
             # In real implementation, would configure OTEL properly
             assert isinstance(spans, (list, tuple))
 
-    def test_observability_configuration(self):
+    def test_observability_configuration(self) -> None:
         """Test observability configuration placeholder."""
         # In real implementation, would test ObservabilityConfig
         # For now, verify test structure exists
         assert True
 
-    def test_span_exception_recording(self):
+    def test_span_exception_recording(self) -> None:
         """Test that exceptions are recorded in spans."""
         exporter = InMemorySpanExporter()
         tracer_provider = TracerProvider()
@@ -148,9 +148,13 @@ class TestObservabilityIntegration:
         tracer = trace.get_tracer(__name__)
 
         # Create span with exception
+        def _raise_exception() -> None:
+            error_message = "Test exception"
+            raise ValueError(error_message)
+
         try:
             with tracer.start_as_current_span("test_span"):
-                raise ValueError("Test exception")
+                _raise_exception()
         except ValueError:
             pass
 
@@ -158,7 +162,7 @@ class TestObservabilityIntegration:
         # Spans may or may not be present depending on provider setup
         assert isinstance(spans, (list, tuple))
 
-    def test_nested_spans(self):
+    def test_nested_spans(self) -> None:
         """Test nested span creation."""
         exporter = InMemorySpanExporter()
         tracer_provider = TracerProvider()
@@ -183,7 +187,7 @@ class TestObservabilityIntegration:
         # Spans may not be captured if provider was overridden
         assert isinstance(spans, (list, tuple))
 
-    def test_custom_instrumentation(self):
+    def test_custom_instrumentation(self) -> None:
         """Test custom instrumentation placeholder."""
         # In real implementation, would test instrument_unrdf_engine
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -192,15 +196,13 @@ class TestObservabilityIntegration:
             # Engine should be created successfully
             assert engine is not None
 
-    def test_performance_metrics(self):
+    def test_performance_metrics(self) -> None:
         """Test performance metrics collection."""
         with tempfile.TemporaryDirectory() as tmpdir:
             engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl")
             pipeline = IngestionPipeline(engine)
 
             # Perform timed operation
-            import time
-
             start = time.time()
             result = pipeline.ingest_json(data={"id": "test"}, agent="test")
             duration = time.time() - start

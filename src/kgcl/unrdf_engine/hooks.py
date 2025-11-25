@@ -156,7 +156,7 @@ class TriggerCondition:
 
         # Execute SPARQL query to count matches
         query = f"""
-        SELECT (COUNT(?s) as ?count) WHERE {{
+        SELECT (COUNT(*) as ?count) WHERE {{
             {self.pattern}
         }}
         """

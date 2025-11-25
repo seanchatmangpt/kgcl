@@ -3,11 +3,28 @@
 Execute SPARQL queries against the UNRDF knowledge graph.
 """
 
+from __future__ import annotations
+
+import json
+from enum import Enum
 from pathlib import Path
+from typing import Any
+from urllib.error import HTTPError, URLError
+from urllib.parse import urlencode, urlsplit
+from urllib.request import Request, urlopen
 
 import click
+from rdflib import Graph
+from rdflib.util import guess_format
 
-from kgcl.cli.utils import OutputFormat, format_output, print_error, print_info, print_success
+from kgcl.cli.utils import (
+    OutputFormat,
+    console,
+    format_output,
+    print_error,
+    print_info,
+    print_success,
+)
 
 # Template queries for common use cases
 TEMPLATE_QUERIES = {
@@ -94,7 +111,7 @@ TEMPLATE_QUERIES = {
 )
 @click.option("--show-templates", is_flag=True, help="Show available query templates and exit")
 @click.option("--verbose", "-v", is_flag=True, help="Verbose output")
-def query(
+def query(  # noqa: PLR0913
     query: str | None,
     file: Path | None,
     template: str | None,
@@ -102,8 +119,8 @@ def query(
     output_format: str,
     limit: int | None,
     endpoint: str,
-    show_templates: bool,
-    verbose: bool,
+    show_templates: bool,  # noqa: FBT001
+    verbose: bool,  # noqa: FBT001
 ) -> None:
     """Execute SPARQL queries against the knowledge graph.
 
@@ -140,18 +157,20 @@ def query(
         if limit and "LIMIT" not in sparql_query.upper():
             sparql_query += f"\nLIMIT {limit}"
 
-        if verbose:
+        verbosity = Verbosity.VERBOSE if verbose else Verbosity.QUIET
+
+        if verbosity.is_verbose:
             print_info(f"Executing query against {endpoint}")
             print_info(f"Query:\n{sparql_query}")
 
         # Execute query
-        results = _execute_query(sparql_query, endpoint, verbose)
+        results = _execute_query(sparql_query, endpoint, verbosity)
 
         if not results:
             print_info("Query returned no results")
             return
 
-        if verbose:
+        if verbosity.is_verbose:
             print_info(f"Retrieved {len(results)} results")
 
         # Format and output
@@ -160,14 +179,12 @@ def query(
 
         print_success(f"Query executed successfully ({len(results)} results)")
 
-    except Exception as e:
-        print_error(f"Query failed: {e}")
+    except (HTTPError, URLError, ValueError, RuntimeError) as exc:
+        print_error(f"Query failed: {exc}")
 
 
 def _show_templates() -> None:
     """Display available query templates."""
-    from kgcl.cli.utils import console
-
     console.print("\n[bold]Available Query Templates:[/bold]\n")
 
     for name, query in TEMPLATE_QUERIES.items():
@@ -205,7 +222,22 @@ def _get_query(query: str | None, file: Path | None, template: str | None) -> st
     return None
 
 
-def _execute_query(sparql_query: str, endpoint: str, verbose: bool) -> list[dict]:
+_HTTP_TIMEOUT_SECONDS = 5.0
+
+
+class Verbosity(Enum):
+    """Verbosity settings for CLI output."""
+
+    QUIET = "quiet"
+    VERBOSE = "verbose"
+
+    @property
+    def is_verbose(self) -> bool:
+        """Whether verbose output should be emitted."""
+        return self is Verbosity.VERBOSE
+
+
+def _execute_query(sparql_query: str, endpoint: str, verbosity: Verbosity) -> list[dict[str, str]]:
     """Execute SPARQL query against endpoint.
 
     Parameters
@@ -219,21 +251,99 @@ def _execute_query(sparql_query: str, endpoint: str, verbose: bool) -> list[dict
 
     Returns
     -------
-    list[dict]
+    list[dict[str, str]]
         Query results
 
+    Raises
+    ------
+    requests.RequestException
+        If the HTTP endpoint rejects the query
+    ValueError
+        If the endpoint points to a missing dataset file
     """
-    # TODO: Implement actual SPARQL query execution
-    # This would use a library like SPARQLWrapper or rdflib
-    if verbose:
-        print_info("Connecting to SPARQL endpoint...")
+    dataset_path = _resolve_local_dataset(endpoint)
 
-    # Placeholder: return mock results
-    return [
-        {"feature": "test_pass_rate", "type": "template", "category": "testing"},
-        {"feature": "commit_frequency", "type": "template", "category": "productivity"},
-        {"feature": "code_complexity", "type": "template", "category": "quality"},
-    ]
+    if dataset_path:
+        if verbosity.is_verbose:
+            print_info(f"Executing SPARQL locally via {dataset_path}")
+        return _execute_query_local(sparql_query, dataset_path)
+
+    if verbosity.is_verbose:
+        print_info(f"Connecting to SPARQL endpoint at {endpoint}")
+
+    return _execute_query_http(sparql_query, endpoint)
+
+
+def _resolve_local_dataset(endpoint: str) -> Path | None:
+    """Resolve endpoint string to a local dataset path when applicable."""
+    candidate = Path(endpoint[7:]) if endpoint.startswith("file://") else Path(endpoint)
+
+    if candidate.exists():
+        return candidate
+
+    return None
+
+
+def _execute_query_local(sparql_query: str, dataset_path: Path) -> list[dict[str, str]]:
+    """Run query against a local RDF dataset."""
+    if not dataset_path.exists():
+        msg = f"Dataset not found: {dataset_path}"
+        raise ValueError(msg)
+
+    rdf_format = (
+        guess_format(dataset_path.suffix[1:]) or guess_format(dataset_path.name) or "turtle"
+    )
+
+    graph = Graph()
+    graph.parse(dataset_path, format=rdf_format)
+    results = graph.query(sparql_query)
+
+    normalized: list[dict[str, str]] = []
+    for binding in results.bindings:
+        row: dict[str, str] = {}
+        for var, value in binding.items():
+            key = str(var)
+            key = key.removeprefix("?")
+            row[key] = str(value)
+        if row:
+            normalized.append(row)
+
+    return normalized
+
+
+def _execute_query_http(sparql_query: str, endpoint: str) -> list[dict[str, str]]:
+    """Run query against a remote SPARQL endpoint via HTTP."""
+    parsed = urlsplit(endpoint)
+    if parsed.scheme not in {"http", "https"}:
+        msg = f"Unsupported SPARQL endpoint scheme: {parsed.scheme or 'unknown'}"
+        raise ValueError(msg)
+
+    encoded_data = urlencode({"query": sparql_query}).encode("utf-8")
+    request = Request(  # noqa: S310  # Safe due to explicit scheme validation above
+        endpoint,
+        data=encoded_data,
+        headers={
+            "Accept": "application/sparql-results+json",
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        method="POST",
+    )
+
+    with urlopen(request, timeout=_HTTP_TIMEOUT_SECONDS) as response:  # noqa: S310
+        payload: dict[str, Any] = json.loads(response.read().decode("utf-8"))
+    bindings = payload.get("results", {}).get("bindings", [])
+
+    results: list[dict[str, str]] = []
+    for binding in bindings:
+        row: dict[str, str] = {}
+        for var, value in binding.items():
+            string_value = value.get("value")
+            if string_value is not None:
+                row[var] = string_value
+        if row:
+            results.append(row)
+
+    return results
 
 
 if __name__ == "__main__":

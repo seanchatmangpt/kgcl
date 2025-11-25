@@ -291,9 +291,9 @@ class TestFullPipeline:
 
     @pytest.mark.skipif(not DSPY_AVAILABLE, reason="DSPy not available")
     @patch("dspy.Predict")
-    @patch("dspy.OllamaLocal")
+    @patch("dspy.LM")
     @patch("requests.get")
-    def test_pipeline_with_dspy_integration(self, mock_get, mock_ollama, mock_predict):
+    def test_pipeline_with_dspy_integration(self, mock_get, mock_lm_cls, mock_predict):
         """Test complete pipeline including DSPy signature generation and invocation."""
         # Mock Ollama availability
         mock_response = Mock()
@@ -303,7 +303,7 @@ class TestFullPipeline:
 
         # Mock LM and prediction
         mock_lm = Mock()
-        mock_ollama.return_value = mock_lm
+        mock_lm_cls.return_value = mock_lm
 
         mock_prediction = Mock()
         mock_prediction.summary = "Daily productivity summary: 3 hours coding, 2 meetings"
@@ -322,12 +322,14 @@ class TestFullPipeline:
             )
             shape.input_properties = [
                 PropertyShape(
+                    path=UNRDF.app_usage,
                     name="app_usage",
                     description="Application usage statistics",
                     datatype=XSD.string,
                     is_required=True,
                 ),
                 PropertyShape(
+                    path=UNRDF.meeting_count,
                     name="meeting_count",
                     description="Number of meetings",
                     datatype=XSD.integer,
@@ -336,12 +338,14 @@ class TestFullPipeline:
             ]
             shape.output_properties = [
                 PropertyShape(
+                    path=UNRDF.summary,
                     name="summary",
                     description="Brief summary of the day",
                     datatype=XSD.string,
                     is_required=True,
                 ),
                 PropertyShape(
+                    path=UNRDF.key_insights,
                     name="key_insights",
                     description="Key insights from the day",
                     datatype=XSD.string,

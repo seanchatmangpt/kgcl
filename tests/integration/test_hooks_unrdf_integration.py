@@ -24,7 +24,7 @@ FOAF = Namespace("http://xmlns.com/foaf/0.1/")
 class TestHookUnrdfIntegration:
     """Test hook integration with UNRDF engine."""
 
-    def test_hook_triggers_on_ingestion_with_delta(self):
+    def test_hook_triggers_on_ingestion_with_delta(self) -> None:
         """Test hook triggers on ingestion with access to graph delta."""
         with tempfile.TemporaryDirectory() as tmpdir:
             registry = PersistentHookRegistry()
@@ -57,7 +57,7 @@ class TestHookUnrdfIntegration:
             assert result.success is True
             assert len(delta_captured) >= 2  # At least type and name triples
 
-    def test_hook_examines_data_before_commit(self):
+    def test_hook_examines_data_before_commit(self) -> None:
         """Test hook can examine ingested data before commitment."""
         with tempfile.TemporaryDirectory() as tmpdir:
             registry = PersistentHookRegistry()
@@ -87,7 +87,7 @@ class TestHookUnrdfIntegration:
             assert result.success is True
             assert examined_data["found_person"] is True
 
-    def test_hook_modifies_ingested_data(self):
+    def test_hook_modifies_ingested_data(self) -> None:
         """Test hook can modify data before transaction."""
         with tempfile.TemporaryDirectory() as tmpdir:
             registry = PersistentHookRegistry()
@@ -123,7 +123,7 @@ class TestHookUnrdfIntegration:
             # Note: Hook adds to delta but delta isn't directly committed in this flow
             # This test validates hook can modify delta graph structure
 
-    def test_hook_rejects_ingestion_with_reason(self):
+    def test_hook_rejects_ingestion_with_reason(self) -> None:
         """Test hook can reject ingestion using POST_VALIDATION with loaded shapes."""
         with tempfile.TemporaryDirectory() as tmpdir:
             registry = PersistentHookRegistry()
@@ -173,7 +173,7 @@ class TestHookUnrdfIntegration:
             assert result.success is False
             assert "Forbidden content detected" in str(result.error)
 
-    def test_multiple_hooks_execute_in_priority_order(self):
+    def test_multiple_hooks_execute_in_priority_order(self) -> None:
         """Test multiple hooks execute in priority order."""
         with tempfile.TemporaryDirectory() as tmpdir:
             registry = PersistentHookRegistry()
@@ -200,7 +200,7 @@ class TestHookUnrdfIntegration:
             assert result.success is True
             assert execution_order == ["high", "medium", "low"]
 
-    def test_hook_failure_causes_transaction_rollback(self):
+    def test_hook_failure_causes_transaction_rollback(self) -> None:
         """Test hook failure can cause transaction rollback."""
         with tempfile.TemporaryDirectory() as tmpdir:
             registry = PersistentHookRegistry()
@@ -218,13 +218,14 @@ class TestHookUnrdfIntegration:
             pipeline = IngestionPipeline(engine)
 
             # Should fail and rollback
-            with pytest.raises(ValueError, match="Test rollback"):
-                pipeline.ingest_json(data={"id": "test"}, agent="test")
+            result = pipeline.ingest_json(data={"id": "test"}, agent="test")
+            assert result.success is False
+            assert "Test rollback" in (result.error or "")
 
             # Verify nothing was committed
             assert len(engine.graph) == 0
 
-    def test_receipts_stored_in_transaction_provenance(self):
+    def test_receipts_stored_in_transaction_provenance(self) -> None:
         """Test receipts are stored in transaction metadata."""
         with tempfile.TemporaryDirectory() as tmpdir:
             registry = PersistentHookRegistry()
@@ -248,7 +249,7 @@ class TestHookUnrdfIntegration:
             assert len(txn.hook_receipts) > 0
             assert any(r.hook_id == "receipt_hook" for r in txn.hook_receipts)
 
-    def test_feature_materialization_hook(self):
+    def test_feature_materialization_hook(self) -> None:
         """Test feature materialization through hooks."""
         with tempfile.TemporaryDirectory() as tmpdir:
             registry = PersistentHookRegistry()
@@ -285,7 +286,7 @@ class TestHookUnrdfIntegration:
             assert result.success is True
             assert len(materialized_features) > 0
 
-    def test_sparql_query_hooks(self):
+    def test_sparql_query_hooks(self) -> None:
         """Test hooks on SPARQL query execution."""
         with tempfile.TemporaryDirectory() as tmpdir:
             registry = PersistentHookRegistry()
@@ -315,7 +316,7 @@ class TestHookUnrdfIntegration:
             assert len(query_intercepted) > 0
             assert "SELECT" in query_intercepted[0]
 
-    def test_cross_hook_communication(self):
+    def test_cross_hook_communication(self) -> None:
         """Test hooks can communicate through receipts."""
         with tempfile.TemporaryDirectory() as tmpdir:
             registry = PersistentHookRegistry()
@@ -345,7 +346,7 @@ class TestHookUnrdfIntegration:
 
             assert result.success is True
 
-    def test_hook_performance_tracking(self):
+    def test_hook_performance_tracking(self) -> None:
         """Test hook execution performance is tracked."""
         with tempfile.TemporaryDirectory() as tmpdir:
             registry = PersistentHookRegistry()
@@ -353,7 +354,7 @@ class TestHookUnrdfIntegration:
 
             class SlowHook(KnowledgeHook):
                 def __init__(self):
-                    super().__init__(name="slow_hook", phases=[HookPhase.POST_COMMIT])
+                    super().__init__(name="slow_hook", phases=[HookPhase.POST_TRANSACTION])
 
                 def execute(self, context: HookContext):
                     import time
@@ -371,7 +372,7 @@ class TestHookUnrdfIntegration:
             receipt = txn.hook_receipts[0]
             assert receipt.duration_ms >= 10.0  # Should be at least 10ms
 
-    def test_hook_registry_persistence(self):
+    def test_hook_registry_persistence(self) -> None:
         """Test hook registry can persist and reload."""
         with tempfile.TemporaryDirectory() as tmpdir:
             storage_path = Path(tmpdir) / "hooks.json"
@@ -394,7 +395,7 @@ class TestHookUnrdfIntegration:
             assert metadata is not None
             assert metadata.description == "Test hook for persistence"
 
-    def test_hook_export_to_rdf(self):
+    def test_hook_export_to_rdf(self) -> None:
         """Test hook registry can export to RDF."""
         with tempfile.TemporaryDirectory() as tmpdir:
             registry = PersistentHookRegistry()
@@ -417,7 +418,7 @@ class TestHookUnrdfIntegration:
             assert output_path.exists()
             assert len(rdf_graph) > 0
 
-    def test_engine_hook_statistics(self):
+    def test_engine_hook_statistics(self) -> None:
         """Test engine provides hook statistics."""
         with tempfile.TemporaryDirectory() as tmpdir:
             registry = PersistentHookRegistry()
@@ -437,7 +438,7 @@ class TestHookUnrdfIntegration:
             assert stats["has_executor"] is True
             assert stats["total_hooks"] == 1
 
-    def test_hook_can_access_full_graph(self):
+    def test_hook_can_access_full_graph(self) -> None:
         """Test hook can access and query the full graph."""
         with tempfile.TemporaryDirectory() as tmpdir:
             registry = PersistentHookRegistry()
@@ -473,7 +474,7 @@ class TestHookUnrdfIntegration:
 class TestHookErrorHandling:
     """Test hook error handling and recovery."""
 
-    def test_hook_error_does_not_prevent_commit(self):
+    def test_hook_error_does_not_prevent_commit(self) -> None:
         """Test hook error in POST_COMMIT doesn't prevent commit."""
         with tempfile.TemporaryDirectory() as tmpdir:
             registry = PersistentHookRegistry()
@@ -502,7 +503,7 @@ class TestHookErrorHandling:
             assert receipt.success is False
             assert receipt.error is not None
 
-    def test_pre_transaction_hook_error_prevents_commit(self):
+    def test_pre_transaction_hook_error_prevents_commit(self) -> None:
         """Test PRE_TRANSACTION hook error prevents commit."""
         with tempfile.TemporaryDirectory() as tmpdir:
             registry = PersistentHookRegistry()

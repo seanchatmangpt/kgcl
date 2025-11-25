@@ -2,6 +2,7 @@
 
 import hashlib
 import logging
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -13,27 +14,44 @@ logger = logging.getLogger(__name__)
 # Common namespaces
 KGCL = Namespace("http://kgcl.io/ontology/")
 DSPY = Namespace("http://dspy.ai/ontology/")
+UNRDF = Namespace("http://unrdf.org/ontology/")
+
+DESCRIPTION_PREDICATES: tuple[URIRef, ...] = (
+    RDFS.comment,
+    SH.description,
+    RDFS.label,
+    KGCL.description,
+    DSPY.description,
+    UNRDF.description,
+)
 
 
 @dataclass
 class PropertyShape:
     """Represents a SHACL property shape (input/output field)."""
 
-    path: URIRef
-    name: str
+    path: URIRef | None = None
+    name: str = ""
     datatype: URIRef | None = None
     node_kind: URIRef | None = None
     min_count: int = 0
     max_count: int | None = None
     description: str | None = None
+    field_role: str | None = None
     default_value: str | None = None
     pattern: str | None = None
     in_values: list[str] = field(default_factory=list)
+    is_required: bool | None = None
 
-    @property
-    def is_required(self) -> bool:
-        """Check if this property is required."""
-        return self.min_count > 0
+    def __post_init__(self) -> None:
+        """Normalize derived field metadata."""
+        if not self.name and self.path is not None:
+            self.name = str(self.path).split("/")[-1].split("#")[-1]
+
+        if self.is_required is None:
+            self.is_required = self.min_count > 0
+        else:
+            self.min_count = 1 if self.is_required else 0
 
     @property
     def is_list(self) -> bool:
@@ -75,7 +93,7 @@ class SHACLShape:
     """Represents a SHACL node shape (feature template)."""
 
     uri: URIRef
-    name: str
+    name: str | None = None
     target_class: URIRef | None = None
     description: str | None = None
     properties: list[PropertyShape] = field(default_factory=list)
@@ -84,19 +102,28 @@ class SHACLShape:
     # Categorization
     input_properties: list[PropertyShape] = field(default_factory=list)
     output_properties: list[PropertyShape] = field(default_factory=list)
+    signature_name: str | None = None
 
-    @property
-    def signature_name(self) -> str:
-        """Generate DSPy signature class name."""
-        # Convert URI to PascalCase
+    def __post_init__(self) -> None:
+        """Ensure signature name is populated."""
         local_name = str(self.uri).split("/")[-1].split("#")[-1]
-        # Remove 'Shape' suffix if present
-        local_name = local_name.removesuffix("Shape")
-        return f"{local_name}Signature"
+        if not self.name:
+            self.name = local_name
+        if not self.signature_name:
+            local_name = str(self.uri).split("/")[-1].split("#")[-1]
+            local_name = local_name.removesuffix("Shape")
+            self.signature_name = f"{local_name}Signature"
 
     def categorize_properties(self):
         """Categorize properties into inputs and outputs based on SHACL annotations."""
         for prop in self.properties:
+            role = (prop.field_role or "").lower()
+            if role == "input":
+                self.input_properties.append(prop)
+                continue
+            if role == "output":
+                self.output_properties.append(prop)
+                continue
             # Check for explicit input/output markers
             # Heuristic: properties with sh:defaultValue are likely inputs
             # Properties without default and with descriptions are likely outputs
@@ -214,7 +241,7 @@ class OntologyParser:
         """
         # Extract basic info
         name = str(shape_uri).split("/")[-1].split("#")[-1]
-        description = self._get_literal(graph, shape_uri, RDFS.comment)
+        description = self._get_description(graph, shape_uri) or self._humanize_identifier(name)
         target_class = graph.value(shape_uri, SH.targetClass)
         closed = self._get_boolean(graph, shape_uri, SH.closed)
 
@@ -266,7 +293,8 @@ class OntologyParser:
         node_kind = graph.value(prop_uri, SH.nodeKind)
         min_count = self._get_integer(graph, prop_uri, SH.minCount, default=0)
         max_count = self._get_integer(graph, prop_uri, SH.maxCount)
-        description = self._get_literal(graph, prop_uri, RDFS.comment)
+        description = self._get_description(graph, prop_uri) or self._humanize_identifier(name)
+        field_role = self._get_literal(graph, prop_uri, UNRDF.fieldType)
         default_value = self._get_literal(graph, prop_uri, SH.defaultValue)
         pattern = self._get_literal(graph, prop_uri, SH.pattern)
 
@@ -284,6 +312,7 @@ class OntologyParser:
             min_count=min_count,
             max_count=max_count,
             description=description,
+            field_role=field_role,
             default_value=default_value,
             pattern=pattern,
             in_values=in_values,
@@ -293,6 +322,14 @@ class OntologyParser:
         """Get a literal value from the graph."""
         value = graph.value(subject, predicate)
         return str(value) if value else None
+
+    def _get_description(self, graph: Graph, subject: URIRef) -> str | None:
+        """Get a human-readable description from standard predicates."""
+        for predicate in DESCRIPTION_PREDICATES:
+            text = self._get_literal(graph, subject, predicate)
+            if text:
+                return text
+        return None
 
     def _get_integer(
         self, graph: Graph, subject: URIRef, predicate: URIRef, default: int | None = None
@@ -324,6 +361,16 @@ class OntologyParser:
         # Use sorted triples for consistent hashing
         triples = sorted(str(t) for t in graph)
         return hashlib.sha256("".join(triples).encode()).hexdigest()
+
+    def _humanize_identifier(self, identifier: str) -> str:
+        """Convert an RDF local name into a readable description."""
+        if not identifier:
+            return "Field"
+
+        words = identifier.replace("-", " ").replace("_", " ")
+        words = re.sub(r"(?<!^)(?=[A-Z])", " ", words)
+        humanized = " ".join(words.split())
+        return humanized.capitalize()
 
     def clear_cache(self):
         """Clear all caches."""

@@ -41,12 +41,12 @@ class TestEndToEndWorkflow:
     """Test complete end-to-end workflows."""
 
     @patch("dspy.Predict")
-    @patch("dspy.OllamaLocal")
-    def test_simple_invocation_workflow(self, mock_ollama, mock_predict, test_signature_module):
+    @patch("dspy.LM")
+    def test_simple_invocation_workflow(self, mock_lm_cls, mock_predict, test_signature_module):
         """Test simple invocation from module to receipt."""
         # Mock LM
         mock_lm = Mock()
-        mock_ollama.return_value = mock_lm
+        mock_lm_cls.return_value = mock_lm
 
         # Mock prediction
         mock_prediction = Mock()
@@ -90,11 +90,11 @@ class TestEndToEndWorkflow:
             assert retrieved is not None
 
     @patch("dspy.Predict")
-    @patch("dspy.OllamaLocal")
-    def test_multi_signature_workflow(self, mock_ollama, mock_predict, test_signature_module):
+    @patch("dspy.LM")
+    def test_multi_signature_workflow(self, mock_lm_cls, mock_predict, test_signature_module):
         """Test invoking multiple signatures."""
         mock_lm = Mock()
-        mock_ollama.return_value = mock_lm
+        mock_lm_cls.return_value = mock_lm
 
         # Mock predictions for both signatures
         mock_pred1 = Mock()
@@ -142,11 +142,11 @@ class TestEndToEndWorkflow:
             assert len(receipts) == 2
 
     @patch("dspy.Predict")
-    @patch("dspy.OllamaLocal")
-    def test_batch_invocation_workflow(self, mock_ollama, mock_predict, test_signature_module):
+    @patch("dspy.LM")
+    def test_batch_invocation_workflow(self, mock_lm_cls, mock_predict, test_signature_module):
         """Test batch invocation workflow."""
         mock_lm = Mock()
-        mock_ollama.return_value = mock_lm
+        mock_lm_cls.return_value = mock_lm
 
         mock_prediction = Mock()
         mock_prediction.summary = "Summary"
@@ -183,13 +183,13 @@ class TestEndToEndWorkflow:
             assert len(receipts) == 5
 
     @patch("dspy.Predict")
-    @patch("dspy.OllamaLocal")
+    @patch("dspy.LM")
     def test_receipt_persistence_workflow(
-        self, mock_ollama, mock_predict, test_signature_module, tmp_path
+        self, mock_lm_cls, mock_predict, test_signature_module, tmp_path
     ):
         """Test receipt persistence and loading."""
         mock_lm = Mock()
-        mock_ollama.return_value = mock_lm
+        mock_lm_cls.return_value = mock_lm
 
         mock_prediction = Mock()
         mock_prediction.summary = "Summary"
@@ -228,11 +228,11 @@ class TestEndToEndWorkflow:
             assert retrieved["receipt_id"] == receipt_id
 
     @patch("dspy.Predict")
-    @patch("dspy.OllamaLocal")
-    def test_error_handling_workflow(self, mock_ollama, mock_predict, test_signature_module):
+    @patch("dspy.LM")
+    def test_error_handling_workflow(self, mock_lm_cls, mock_predict, test_signature_module):
         """Test error handling in workflow."""
         mock_lm = Mock()
-        mock_ollama.return_value = mock_lm
+        mock_lm_cls.return_value = mock_lm
 
         # Mock prediction to fail
         mock_predict.side_effect = RuntimeError("Prediction failed")
@@ -262,11 +262,11 @@ class TestEndToEndWorkflow:
             assert result["receipt"]["error"] is not None
 
     @patch("dspy.Predict")
-    @patch("dspy.OllamaLocal")
-    def test_statistics_workflow(self, mock_ollama, mock_predict, test_signature_module):
+    @patch("dspy.LM")
+    def test_statistics_workflow(self, mock_lm_cls, mock_predict, test_signature_module):
         """Test statistics collection workflow."""
         mock_lm = Mock()
-        mock_ollama.return_value = mock_lm
+        mock_lm_cls.return_value = mock_lm
 
         # Mock mix of success and failure
         mock_success = Mock()

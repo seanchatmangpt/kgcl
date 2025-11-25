@@ -2,6 +2,10 @@
 
 You are performing comprehensive build verification with strictest possible settings to ensure production-ready code quality.
 
+### Action Directive (DfLSS)
+
+This command is an executable order from the core team’s Design for Lean Six Sigma initiative. When `/strict-build-verification` runs, execute every phase immediately—do not pause for additional authorization.
+
 ## Build System Overview
 
 KGCL uses a strict Python build system equivalent to Rust's Cargo with custom Makefile.toml:
@@ -10,11 +14,11 @@ KGCL uses a strict Python build system equivalent to Rust's Cargo with custom Ma
 # Python dependency manager (like cargo)
 uv sync                          # Install dependencies
 
-# Build automation (like cargo-make)
-cargo-make                       # Run all checks (default)
-cargo-make verify                # Format + lint + type check + tests
-cargo-make ci                    # Full CI pipeline
-cargo-make prod-build            # Strict production build
+# Build automation (Poe tasks)
+poe                       # Run all checks (default)
+poe verify                # Format + lint + type check + tests
+poe ci                    # Full CI pipeline
+poe prod-build            # Strict production build
 ```
 
 ## Phase 1: Dependency Management
@@ -24,10 +28,10 @@ cargo-make prod-build            # Strict production build
 uv sync
 
 # Check for security vulnerabilities
-cargo-make audit
+poe audit
 
 # Update lock file
-cargo-make update
+poe update
 ```
 
 Verify:
@@ -39,10 +43,10 @@ Verify:
 
 ```bash
 # Format code with Ruff (strictest: 2-space indent, 100-char lines)
-cargo-make format
+poe format
 
 # Check formatting without modifying
-cargo-make format-check
+poe format-check
 ```
 
 Strictest settings in `pyproject.toml`:
@@ -57,10 +61,10 @@ Expected result: All files reformatted or already compliant
 
 ```bash
 # Run linter with ALL rules enabled
-cargo-make lint
+poe lint
 
 # Check without fixing
-cargo-make lint-check
+poe lint-check
 ```
 
 Strictest settings in `pyproject.toml`:
@@ -89,10 +93,10 @@ Expected: Zero linting errors
 
 ```bash
 # Type check with mypy (strictest mode)
-cargo-make type-check
+poe type-check
 
 # Or directly:
-uv run mypy src/ tests/
+poe mypy -- src/ tests/
 ```
 
 Strictest settings in `pyproject.toml`:
@@ -113,16 +117,16 @@ Expected: Zero type errors
 
 ```bash
 # Run all tests
-cargo-make test
+poe test
 
 # Run with coverage report
-cargo-make test-coverage
+poe test-coverage
 
 # Run only UNRDF porting tests
-cargo-make unrdf-full
+poe unrdf-full
 
 # Run with timeout (prevent hangs)
-cargo-make test-timeout
+poe test-timeout
 ```
 
 Strictest pytest settings:
@@ -143,10 +147,10 @@ Expected:
 
 ```bash
 # Build documentation
-cargo-make docs
+poe docs-build
 
 # Serve locally to verify
-cargo-make docs-serve
+poe docs-serve
 ```
 
 Expected:
@@ -158,10 +162,10 @@ Expected:
 
 ```bash
 # Install git hooks (one-time)
-cargo-make pre-commit-setup
+poe pre-commit-setup
 
 # Manually run pre-commit checks
-cargo-make pre-commit-run
+poe pre-commit-run
 
 # Check will automatically run on git commit
 git add .
@@ -181,13 +185,13 @@ Pre-commit hook verifies:
 
 ```bash
 # Run all checks (no fixes - for CI/CD)
-cargo-make verify
+poe verify
 
 # Run with strict production settings
-cargo-make verify-strict
+poe verify-strict
 
 # Production build
-cargo-make prod-build
+poe prod-build
 ```
 
 Full pipeline:
@@ -229,39 +233,39 @@ Expected: All phases pass with green checkmarks
 
 ### Type Errors
 ```bash
-uv run mypy src/ --show-error-codes
+poe mypy -- src/ --show-error-codes
 # Check specific file
-uv run mypy src/kgcl/hooks/core.py
+poe mypy -- src/kgcl/hooks/core.py
 ```
 
 ### Lint Errors
 ```bash
 # See all violations
-cargo-make lint-check
+poe lint-check
 
 # Fix automatically
-cargo-make lint
+poe lint
 ```
 
 ### Test Failures
 ```bash
 # Run specific test
-uv run pytest tests/hooks/test_security.py::TestErrorSanitizer::test_sanitize_removes_file_paths -v
+poe pytest tests/hooks/test_security.py::TestErrorSanitizer::test_sanitize_removes_file_paths -v
 
 # Run with full traceback
-uv run pytest tests/ --tb=long
+poe pytest tests/ --tb=long
 
 # Run with coverage
-cargo-make test-coverage
+poe test-coverage
 ```
 
 ### Format Issues
 ```bash
 # See format violations
-cargo-make format-check
+poe format-check
 
 # Fix automatically
-cargo-make format
+poe format
 ```
 
 ## Pre-Deployment Checklist
@@ -274,22 +278,22 @@ git status
 git diff
 
 # 2. Run full verification
-cargo-make verify-strict
+poe verify-strict
 
 # 3. Check pre-commit
-cargo-make pre-commit-run
+poe pre-commit-run
 
 # 4. Build distribution
 uv build
 
 # 5. Final smoke test
-uv run pytest tests/ -x --tb=short
+poe pytest tests/ -x --tb=short
 
 # 6. Check version
-cargo-make version-check
+poe version-check
 
 # 7. Generate release notes
-cargo-make release-notes
+poe release-notes
 
 # 8. Tag release
 git tag -a v$(grep version pyproject.toml | head -1 | cut -d'"' -f2) -m "Release"
@@ -317,17 +321,17 @@ The build system is CI/CD ready:
 
 ```bash
 # Local development
-cargo-make             # Run defaults (format-check, lint, test)
+poe             # Run defaults (format-check, lint, test)
 
 # Pre-commit
 .githooks/pre-commit   # Automatic on git commit
 
 # CI Pipeline
-cargo-make ci          # All checks for CI/CD
+poe ci          # All checks for CI/CD
 
 # Release
-cargo-make release-check   # Pre-release verification
-cargo-make prod-build      # Production build
+poe release-check   # Pre-release verification
+poe prod-build      # Production build
 ```
 
 Use these commands in CI/CD workflows to ensure code quality before deployment.

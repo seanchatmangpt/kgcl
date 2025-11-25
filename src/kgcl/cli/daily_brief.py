@@ -3,12 +3,21 @@
 Generate a daily brief from yesterday and today's events.
 """
 
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 import click
 
+from kgcl.cli.daily_brief_pipeline import (
+    DailyBriefEventBatch,
+    DailyBriefFeatureBuilder,
+    DailyBriefFeatureSet,
+    DailyBriefResult,
+    EventLogLoader,
+    generate_daily_brief,
+)
 from kgcl.cli.utils import OutputFormat, format_output, print_error, print_info, print_success
+from kgcl.hooks.security import ErrorSanitizer
 
 
 @click.command()
@@ -35,6 +44,7 @@ def daily_brief(
     date: datetime | None,
     lookback: int,
     output: Path | None,
+    *,
     clipboard: bool,
     output_format: str,
     model: str,
@@ -61,156 +71,91 @@ def daily_brief(
     """
     try:
         # Determine date range
-        target_date = date or datetime.now()
+        target_date = date or datetime.now(UTC).replace(tzinfo=None)
         start_date = target_date - timedelta(days=lookback)
 
         if verbose:
             print_info(f"Generating brief for {start_date.date()} to {target_date.date()}")
             print_info(f"Using model: {model}")
 
-        # TODO: Implement actual ingestion and feature materialization
-        # This is a placeholder structure
-        events_data = _ingest_events(start_date, target_date, verbose)
+        events_data = _ingest_events(start_date, target_date, verbose=verbose)
 
         if verbose:
-            print_info(f"Ingested {len(events_data)} events")
+            print_info(
+                f"Ingested {events_data.event_count} events (synthetic={events_data.synthetic})"
+            )
 
-        # TODO: Materialize features
-        features = _materialize_features(events_data, verbose)
+        features = _materialize_features(events_data, verbose=verbose)
 
         if verbose:
-            print_info(f"Materialized {len(features)} features")
+            print_info(
+                f"Prepared feature vector with {features.input_data.context_switches} context switches "
+                f"and {features.input_data.meeting_count} meetings"
+            )
 
-        # TODO: Invoke DSPy DailyBriefSignature
-        brief_content = _generate_brief(features, model, verbose)
+        brief_result = _generate_brief(features, model, verbose=verbose)
 
         # Format and output
         fmt = OutputFormat(output_format)
-        format_output(brief_content, fmt, output, clipboard)
+        payload = _select_payload_for_format(brief_result, fmt)
+        format_output(payload, fmt, output, clipboard)
 
         print_success("Daily brief generated successfully")
 
-    except Exception as e:
-        print_error(f"Failed to generate daily brief: {e}")
+    except (RuntimeError, ValueError) as exc:
+        sanitized = ErrorSanitizer().sanitize(exc)
+        print_error(f"Failed to generate daily brief: {sanitized.message}")
 
 
-def _ingest_events(start_date: datetime, end_date: datetime, verbose: bool) -> list[dict]:
-    """Ingest events from the specified date range.
-
-    Parameters
-    ----------
-    start_date : datetime
-        Start date for event ingestion
-    end_date : datetime
-        End date for event ingestion
-    verbose : bool
-        Enable verbose output
-
-    Returns
-    -------
-    list[dict]
-        List of ingested events
-
-    """
-    # TODO: Implement actual event ingestion from UNRDF
-    # This is a placeholder
+def _ingest_events(
+    start_date: datetime, end_date: datetime, *, verbose: bool
+) -> DailyBriefEventBatch:
+    """Load events for the requested time window."""
+    loader = EventLogLoader()
+    batch = loader.load(start_date, end_date)
     if verbose:
-        print_info("Ingesting events from knowledge graph...")
-
-    # Placeholder: return mock events
-    return [
-        {
-            "timestamp": start_date.isoformat(),
-            "type": "code_change",
-            "file": "src/main.py",
-            "lines_changed": 42,
-        },
-        {
-            "timestamp": end_date.isoformat(),
-            "type": "test_run",
-            "tests_passed": 156,
-            "tests_failed": 2,
-        },
-    ]
+        source_summary = ", ".join(path.name for path in batch.source_files) or "no log files"
+        print_info(
+            f"Loaded {batch.event_count} events spanning {batch.duration_days:.2f} days from {source_summary}"
+        )
+    return batch
 
 
-def _materialize_features(events: list[dict], verbose: bool) -> dict:
-    """Materialize features from events.
-
-    Parameters
-    ----------
-    events : list[dict]
-        List of events to process
-    verbose : bool
-        Enable verbose output
-
-    Returns
-    -------
-    dict
-        Materialized features
-
-    """
-    # TODO: Implement actual feature materialization
+def _materialize_features(batch: DailyBriefEventBatch, *, verbose: bool) -> DailyBriefFeatureSet:
+    """Materialize DailyBriefInput features from events."""
+    builder = DailyBriefFeatureBuilder()
+    feature_set = builder.build(batch)
     if verbose:
-        print_info("Materializing features...")
-
-    # Placeholder: compute basic statistics
-    return {
-        "total_events": len(events),
-        "event_types": {e["type"] for e in events},
-        "time_range": {
-            "start": min(e["timestamp"] for e in events),
-            "end": max(e["timestamp"] for e in events),
-        },
-    }
+        top_app = (
+            feature_set.metadata["top_apps"][0]["name"]
+            if feature_set.metadata["top_apps"]
+            else "N/A"
+        )
+        print_info(
+            f"Materialized features with focus time {feature_set.input_data.focus_time}h; top app={top_app}"
+        )
+    return feature_set
 
 
-def _generate_brief(features: dict, model: str, verbose: bool) -> str:
-    """Generate brief using DSPy and Ollama.
-
-    Parameters
-    ----------
-    features : dict
-        Materialized features
-    model : str
-        Ollama model name
-    verbose : bool
-        Enable verbose output
-
-    Returns
-    -------
-    str
-        Generated brief in markdown format
-
-    """
-    # TODO: Implement actual DSPy DailyBriefSignature integration
+def _generate_brief(
+    feature_set: DailyBriefFeatureSet, model: str, *, verbose: bool
+) -> DailyBriefResult:
+    """Generate structured brief content via DSPy module."""
+    result = generate_daily_brief(feature_set, model)
     if verbose:
-        print_info(f"Generating brief with {model}...")
+        print_info(
+            f"Generated brief summary via model '{model}' (llm_enabled={result.metadata['llm_enabled']})"
+        )
+    return result
 
-    # Placeholder: generate simple markdown
-    brief = f"""# Daily Brief
 
-## Summary
-Generated from {features["total_events"]} events
-
-## Event Types
-{", ".join(features["event_types"])}
-
-## Timeline
-- Start: {features["time_range"]["start"]}
-- End: {features["time_range"]["end"]}
-
-## Key Insights
-- Total events processed: {features["total_events"]}
-- Event diversity: {len(features["event_types"])} different types
-
-## Next Steps
-- Review detailed event logs
-- Follow up on failed tests
-- Continue monitoring
-"""
-
-    return brief
+def _select_payload_for_format(result: DailyBriefResult, fmt: OutputFormat) -> object:
+    """Select output payload type based on requested format."""
+    if fmt == OutputFormat.MARKDOWN:
+        return result.to_markdown()
+    if fmt in {OutputFormat.TABLE, OutputFormat.CSV, OutputFormat.TSV}:
+        return result.to_rows()
+    return result.to_dict()
 
 
 if __name__ == "__main__":

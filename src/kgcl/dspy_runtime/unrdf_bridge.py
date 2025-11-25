@@ -101,6 +101,10 @@ class UNRDFBridge:
                 module_path=module_path, signature_name=signature_name, inputs=inputs, **kwargs
             )
 
+            # Prepare metrics to avoid duplicate kwargs (e.g., latency_seconds)
+            metrics = dict(result.metrics)
+            latency_seconds = metrics.pop("latency_seconds", None)
+
             # Generate receipt
             receipt = self.receipt_generator.generate_receipt(
                 signature_name=signature_name,
@@ -109,11 +113,11 @@ class UNRDFBridge:
                 outputs=result.outputs,
                 success=result.success,
                 model=self.ollama_config.model,
-                latency_seconds=result.metrics.get("latency_seconds"),
+                latency_seconds=latency_seconds,
                 error=result.error,
                 source_features=source_features,
                 source_signatures=source_signatures,
-                **result.metrics,
+                **metrics,
             )
 
             # Store receipt in RDF graph

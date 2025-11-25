@@ -38,43 +38,66 @@
 ### 📁 File Organization Rules
 
 **NEVER save to root folder. Use these directories:**
-- `/src` - Source code files
-- `/tests` - Test files
-- `/docs` - Documentation and markdown files
-- `/config` - Configuration files
-- `/scripts` - Utility scripts
-- `/examples` - Example code
+```
+kgcl/
+├── src/kgcl/              # Source code (all typed)
+│   ├── hooks/             # Knowledge Hooks system
+│   ├── unrdf_engine/      # UNRDF integration
+│   ├── ontology/          # RDF/SHACL definitions
+│   ├── cli/               # Command-line interface
+│   └── ...
+├── tests/                 # Test suite (Chicago School TDD)
+│   ├── hooks/             # Hook behavior tests
+│   ├── unrdf_engine/      # UNRDF tests
+│   ├── integration/       # End-to-end UNRDF porting tests
+│   └── ...
+├── docs/                  # Documentation
+├── config/                # Configuration files
+├── scripts/               # Utility scripts
+└── examples/              # Example code
+```
 
 ## Project Overview
 
-This project uses SPARC (Specification, Pseudocode, Architecture, Refinement, Completion) methodology with Claude-Flow orchestration for systematic Test-Driven Development.
+This project uses SPARC (Specification, Pseudocode, Architecture, Refinement, Completion) methodology with Claude-Flow orchestration for systematic **Chicago School Test-Driven Development** (tests drive implementation, no mocking domain objects).
 
-## SPARC Commands
+### Core Principles (Adopted from .cursorrules)
+1. **Chicago School TDD**: Tests drive all development. No mocking domain objects.
+2. **Type Safety**: Full type hints everywhere. `poe type-check` must pass with `strict = true`.
+3. **Production-Grade**: Code ready for immediate production use without refactoring.
+4. **UNRDF Alignment**: Port UNRDF JavaScript patterns to Python idiomatically.
+5. **No Tech Debt**: Clean code first time. No "TODO: refactor later".
 
-### Core Commands
-- `npx claude-flow sparc modes` - List available modes
-- `npx claude-flow sparc run <mode> "<task>"` - Execute specific mode
-- `npx claude-flow sparc tdd "<feature>"` - Run complete TDD workflow
-- `npx claude-flow sparc info <mode>` - Get mode details
+## Build & Test Automation (using `poe` - Poetry)
 
-### Batchtools Commands
-- `npx claude-flow sparc batch <modes> "<task>"` - Parallel execution
-- `npx claude-flow sparc pipeline "<task>"` - Full pipeline processing
-- `npx claude-flow sparc concurrent <mode> "<tasks-file>"` - Multi-task processing
+All build/test/lint workflows run via `poe <task>` where tasks are defined in `pyproject.toml` → `[tool.poe.tasks]`.
 
-### Build Commands
-- `npm run build` - Build project
-- `npm run test` - Run tests
-- `npm run lint` - Linting
-- `npm run typecheck` - Type checking
+### Core Poe Commands
+```bash
+# Development
+poe format           # Format code (Ruff)
+poe lint             # Lint & fix (Ruff)
+poe type-check       # Type check (Mypy, strict mode)
+poe test             # Run tests (Pytest)
 
-## SPARC Workflow Phases
+# Verification
+poe verify           # All checks + tests
+poe ci               # CI pipeline: format-check, lint, types, tests, docs
 
-1. **Specification** - Requirements analysis (`sparc run spec-pseudocode`)
-2. **Pseudocode** - Algorithm design (`sparc run spec-pseudocode`)
-3. **Architecture** - System design (`sparc run architect`)
-4. **Refinement** - TDD implementation (`sparc tdd`)
-5. **Completion** - Integration (`sparc run integration`)
+# Release
+poe release-check    # All checks (no fixes)
+poe prod-build       # Strict production build
+
+# UNRDF-Specific
+poe unrdf-validate   # Type-check + UNRDF tests
+poe unrdf-full       # All UNRDF porting tests
+
+# Git Hooks
+poe pre-commit-setup # Install hooks (one-time setup)
+poe pre-commit-run   # Manually run pre-commit checks
+```
+
+**NEVER run ad-hoc shell commands when an equivalent `poe <task>` exists.**
 
 ## Code Style & Best Practices - Lean Six Sigma Standards
 
@@ -85,8 +108,403 @@ This project uses SPARC (Specification, Pseudocode, Architecture, Refinement, Co
 - **Type Coverage**: 100% type hints on ALL functions - NO EXCEPTIONS
 - **Test Coverage**: 80%+ minimum coverage - NON-NEGOTIABLE
 - **Clean Architecture**: Separate concerns - NO MIXING ALLOWED
-- **Documentation**: ALWAYS keep updated with docstrings on ALL public APIs
-- **Code Quality**: ALL 400+ Ruff rules enforced - NO SUPPRESSION except with justification
+- **Documentation**: ALWAYS keep updated with NumPy-style docstrings on ALL public APIs
+- **Code Quality**: ALL Ruff rules enforced - NO SUPPRESSION except with justification
+
+## Type Hints - Mandatory
+
+Every function MUST have complete type hints:
+
+```python
+# ✅ CORRECT
+def process_hook(hook: Hook, context: HookContext) -> Receipt:
+    """Process a hook with full context.
+
+    Parameters
+    ----------
+    hook : Hook
+        The hook to process
+    context : HookContext
+        Execution context with metadata
+
+    Returns
+    -------
+    Receipt
+        Immutable execution receipt
+    """
+    ...
+
+# ❌ WRONG
+def process_hook(hook, context):  # Missing types!
+    ...
+```
+
+### Type Annotations Rules
+- All function parameters: `param: Type`
+- All return types: `-> ReturnType`
+- All class attributes: `attribute: Type`
+- Generics: `List[T]`, `Dict[K, V]`, `Optional[X]`
+- Union types: `Union[A, B]` or `A | B` (Python 3.10+)
+- Callbacks: `Callable[[Arg], ReturnType]`
+
+### Dataclass Immutability
+Use frozen dataclasses for value objects:
+
+```python
+from dataclasses import dataclass
+
+@dataclass(frozen=True)
+class Receipt:
+    """Immutable hook execution receipt."""
+    execution_id: str
+    hook_id: str
+    result: bool
+```
+
+### Mypy Configuration (Strictest)
+From `pyproject.toml`:
+```toml
+[tool.mypy]
+strict = true                      # All strictest checks enabled
+disallow_any_unimported = true     # No `Any` imports
+disallow_incomplete_defs = true    # All types complete
+disallow_untyped_defs = true       # All functions typed
+disallow_untyped_calls = true      # All calls typed
+check_untyped_defs = true          # Check untyped functions
+no_implicit_optional = true        # No implicit Optional
+```
+
+## Testing - Chicago School TDD
+
+### Test-First Development
+1. Write tests FIRST (before implementation)
+2. Tests specify behavior, not implementation
+3. No mocking of domain objects (Hook, Receipt, Condition, etc.)
+4. Real I/O, real SPARQL evaluation, real metrics
+
+### Test Markers
+```python
+@pytest.mark.integration      # Integration tests
+@pytest.mark.security         # Security tests
+@pytest.mark.performance      # Performance tests
+@pytest.mark.slow            # Long-running tests (deselect with -m "not slow")
+```
+
+### Test Organization
+```
+tests/
+├── hooks/
+│   ├── test_core.py          # Hook, HookReceipt, HookRegistry
+│   ├── test_conditions.py    # All condition types
+│   ├── test_lifecycle.py     # HookExecutionPipeline
+│   ├── test_security.py      # ErrorSanitizer, SandboxRestrictions
+│   ├── test_performance.py   # PerformanceOptimizer, QueryCache
+│   ├── test_policy_packs.py  # PolicyPackManager
+│   ├── test_file_resolver.py # FileResolver
+│   └── test_unrdf_integration.py  # Hook-UNRDF interaction
+├── integration/
+│   └── test_unrdf_porting.py # All 8 UNRDF patterns validated
+└── ...
+```
+
+### Test Naming
+```python
+# ✅ CORRECT - Describes behavior
+def test_hook_execution_with_error_sanitization():
+    """Errors are sanitized before storage in receipt."""
+
+def test_cache_hit_reduces_latency():
+    """Query cache hit should reduce latency."""
+
+# ❌ WRONG - Too vague
+def test_hook():
+def test_error():
+```
+
+### Test Verification (Chicago School AAA)
+- Apply Chicago School AAA structure (Arrange → Act → Assert) with real collaborators
+- No mocking of domain objects—use real Hook, Receipt, Condition instances
+- Tests MUST verify observable behavior/state, not merely `assert result.is_ok()`
+- Keep total test suite runtime under **1 second**; optimize or parallelize if needed
+
+### Pytest Configuration (Strictest)
+From `pyproject.toml`:
+```toml
+[tool.pytest.ini_options]
+addopts = "--color=yes --doctest-modules --exitfirst --failed-first --verbosity=2 --strict-markers"
+xfail_strict = true         # xfail must actually fail
+asyncio_mode = "auto"       # Async test support
+```
+
+## Code Style - NumPy Docstrings
+
+Every public class/function needs NumPy-style docstrings:
+
+```python
+def execute_hook(hook: Hook, event: Dict[str, Any]) -> Receipt:
+    """Execute a single hook against an event.
+
+    Parameters
+    ----------
+    hook : Hook
+        Hook definition with condition and handler
+    event : Dict[str, Any]
+        Event triggering hook execution
+
+    Returns
+    -------
+    Receipt
+        Immutable record of execution with result and metadata
+
+    Raises
+    ------
+    ValueError
+        If hook definition is invalid
+    TimeoutError
+        If execution exceeds timeout limit
+
+    Examples
+    --------
+    >>> hook = Hook(name="test", condition=ThresholdCondition(5), handler=lambda e: True)
+    >>> result = execute_hook(hook, {"count": 10})
+    >>> assert result.success
+    """
+```
+
+## Imports - Absolute Only
+
+```python
+# ✅ CORRECT
+from kgcl.hooks.core import Hook, HookReceipt
+from kgcl.hooks.conditions import SparqlAskCondition
+from kgcl.unrdf_engine.engine import UnrdfEngine
+
+# ❌ WRONG - Relative imports banned
+from ..hooks.core import Hook
+from . import utils
+from .conditions import SparqlAskCondition
+```
+
+## Logging, Not Print
+
+```python
+import logging
+
+logger = logging.getLogger(__name__)
+
+# ✅ CORRECT
+logger.info("Hook executed", extra={"hook_id": hook.name, "duration_ms": duration})
+logger.error("Failed to load file", exc_info=True)
+
+# ❌ WRONG
+print("Hook executed")
+print(f"Duration: {duration}ms")
+```
+
+## Secrets Management
+
+```python
+# ✅ CORRECT
+import os
+api_key = os.getenv("API_KEY")  # From environment
+config = {"key": api_key}  # Set in CI/deployment
+
+# ❌ WRONG
+config = {"key": "sk-abc123xyz"}  # Hardcoded!
+password = "admin123"  # Secret in code!
+```
+
+## Linting & Formatting - Strictest
+
+### Run Before Commit
+```bash
+poe format        # Format code
+poe lint          # Fix linting issues
+poe type-check    # Type check
+poe test          # Run all tests
+```
+
+Or via `git hooks` (automatic on commit):
+```bash
+.githooks/pre-commit     # Blocks commits violating standards
+```
+
+### Ruff Configuration
+From `pyproject.toml`:
+```toml
+[tool.ruff.lint]
+select = ["ALL"]  # Enable ALL rules
+ignore = ["CPY", "FIX", "T20", "ARG001", "COM812", "D203", "D213", "E501", "PD008", "PD009", "PGH003", "RET504", "S101", "TD003"]
+```
+
+## UNRDF Porting Rules
+
+### 8 Critical Patterns to Port
+1. **Hook Executor** - Timeout, execution ID, error sanitization, phases
+2. **Condition Evaluator** - 8 condition types, file resolution
+3. **Error Sanitizer** - Remove sensitive info from errors
+4. **Sandbox Restrictions** - Resource/access limits
+5. **Performance Optimizer** - Latency tracking, SLO monitoring
+6. **Query Cache** - SPARQL result caching with TTL/LRU
+7. **Policy Pack Manager** - Bundle, version, activate hooks
+8. **Lockchain Writer** - Cryptographic provenance, chain anchoring
+
+### Pattern Requirements
+- Port JavaScript → Python idiomatically (not mechanical translation)
+- Use Python dataclasses instead of TypeScript interfaces
+- Use `frozen=True` for immutable value objects
+- Full type hints (Python 3.12+)
+- Chicago School TDD (test-first, real objects)
+- SLO targets: p99 < 100ms for all operations
+
+### Integration Points
+Each pattern must integrate with:
+- Hook lifecycle (phases: PRE, EVALUATE, RUN, POST)
+- Error handling (sanitization at boundaries)
+- Performance tracking (metrics in receipts)
+- RDF/SPARQL engine (UnrdfEngine)
+
+## Performance Targets (from UNRDF)
+| Operation | p50 | p99 | Target |
+|-----------|-----|-----|--------|
+| Hook registration | 0.1ms | 1.0ms | <5ms |
+| Condition eval | 0.2ms | 2.0ms | <10ms |
+| Hook execution | 1.0ms | 10.0ms | <100ms |
+| Receipt write | 5.0ms | 5.0ms | <10ms |
+| Full pipeline | 2.0ms | 50.0ms | <500ms |
+
+## Error Handling
+
+```python
+# ✅ CORRECT - Sanitized error
+from kgcl.hooks.security import ErrorSanitizer
+
+try:
+    result = evaluate_condition(condition)
+except Exception as e:
+    sanitizer = ErrorSanitizer()
+    sanitized = sanitizer.sanitize(e)
+    logger.error(sanitized.message, extra={"code": sanitized.code})
+    raise
+
+# ❌ WRONG - Raw error leaks details
+except Exception as e:
+    logger.error(str(e))  # Exposes stack trace, file paths!
+    raise
+```
+
+## Git Hooks Setup
+
+```bash
+# Install hooks (one-time setup)
+poe pre-commit-setup
+
+# Manually run pre-commit checks
+poe pre-commit-run
+
+# Push to remote (hooks verify code quality)
+git push
+```
+
+### Pre-Commit Hook (.githooks/pre-commit)
+Blocks commits if:
+- Missing type hints on functions
+- Hardcoded secrets detected
+- No tests for new features
+- Debug print statements found
+- Public APIs lack docstrings
+- Relative imports used
+- Integration tests lack markers
+
+## File Organization & Complexity Limits
+- Max file size: 500 lines (unless justified for cohesion)
+- Max function size: 40 lines
+- Max class complexity: 7 methods per class
+- Separate concerns: hooks, ontology, observability, CLI
+- Related tests in parallel directories
+
+## Documentation
+- README.md - Project overview
+- docs/UNRDF_PORTING_GUIDE.md - All 8 patterns
+- docs/UNRDF_PORTING_VALIDATION.md - Test results
+- pyproject.toml docstrings - Tool configuration
+- NumPy docstrings - All public APIs
+- Comments - Only for "why", not "what"
+
+## Version Management
+- Semantic versioning: MAJOR.MINOR.PATCH
+- Commit: `bump: v$current_version → v$new_version`
+- Tags: `v$version`
+- Changelog: Updated on every bump (via commitizen)
+
+## Critical Non-Negotiables (Adopted from clap-noun-verb)
+- **Never trust text, only test results.** Every claim must be backed by a passing test run.
+- **Build System Enforcement.** Always use the Poe tasks defined in `pyproject.toml` (`poe format`, `poe lint`, `poe verify`, etc.) for format, lint, type, and test workflows. Ad-hoc scripts are banned.
+- **Git Hooks.** Never bypass hooks (`--no-verify` prohibited). Fix issues instead of skipping the gate.
+- **Timeout SLAs.** All CLI/test invocations must be wrapped with sane timeouts (e.g., quick checks 5s, compilation 10s, unit tests 1s, integration 30s, long ops 60s). Timeouts expose hung workflows early.
+
+## Behavior Verification Reinforcement
+- Tests MUST verify observable behavior/state, not merely `assert result.is_ok()`.
+- Apply Chicago School AAA structure (Arrange → Act → Assert) with real collaborators—no mocking of domain objects.
+- Keep total test suite runtime under **1 second**; optimize or parallelize if needed.
+
+## Prohibited Patterns (Extended)
+- No placeholders, TODOs, stubs, or speculative scaffolding.
+- No `print`/`logging` trickery to "fake" behavior; rely on structured errors and receipts.
+- No `.unwrap()`, `.expect()`, or silent exception swallowing anywhere.
+- No runtime checks when invariants can be enforced via types/dataclasses.
+- Never rebase shared branches; prefer merge or fast-forward.
+
+## Work Completion Protocol - Lean Six Sigma Quality
+
+### The Golden Rule: ZERO DEFECTS BEFORE DELIVERY
+
+**DO NOT STOP or compromise on quality.** Complete the full scope with zero defects before responding.
+- **NO partial deliveries** - Everything must be complete and working
+- **NO shortcuts** - Cannot skip tests, reduce coverage, or lower standards
+- **NO exceptions** - All quality gates must pass
+
+### MANDATORY QUALITY GATES (Zero Tolerance)
+
+These are NOT optional - they are mandatory on EVERY delivery:
+- ✓ 100% type coverage (NO untyped code)
+- ✓ 80%+ test coverage (MINIMUM, not maximum)
+- ✓ ALL tests passing (0 failures, 0 flakes)
+- ✓ Comprehensive docstrings (ALL public APIs)
+- ✓ Security scanning passed (Bandit clean)
+- ✓ Code quality passed (ALL Ruff rules)
+- ✓ No suppression comments (except with justification tracked in commits)
+
+### Completion Workflow (Mandatory)
+1. **Run tests immediately:** `poe test` (with timeout) before claiming progress. If failures occur, stop and analyze.
+2. **Create rich TODOs:** For each failure capture test name, error, file, hypothesized root cause, fix plan, and status. Batch at least 10 related TODO entries per failure set.
+3. **Systematic fix cycle:** Investigate → implement fix → run targeted test → update TODO status.
+4. **Re-run full suite:** `poe test` again (with timeout) to confirm everything passes.
+5. **Verify gates:** Ensure lint, type-check, docs, and hooks all pass before concluding work.
+
+### Completion Checklist (MANDATORY)
+
+Before responding "done", verify ALL items:
+- [x] ALL parts of the request completed (not partial)
+- [x] Production-ready code/tests delivered
+- [x] ALL tests passing (0 failures)
+- [x] Test coverage >= 80% (verified)
+- [x] 100% type hints (verified)
+- [x] All docstrings present (verified)
+- [x] Security scan passed (Bandit clean)
+- [x] Code quality passed (Ruff clean)
+- [x] Can run immediately (NO "TODO" blockers)
+- [x] Ready for production deployment
+
+## TODO Discipline
+- TODO lists contain **≥10 items**; partial lists are forbidden.
+- All TODO items must be fully resolved before moving to subsequent tasks.
+- Update TODO tracking immediately after each fix; no stale entries.
+
+## Workflow Guardrails
+- Always surface the build/verify button in planning updates so others can rerun checks quickly.
+- Document second- and third-idea options (80/20 thinking) when proposing solutions; default to the sweet-spot "second idea" unless higher leverage is justified.
+- Treat performance budgets (p99 targets above) as blocking requirements—profiling data must accompany any exception request.
 
 ## 🚀 Available Agents (54 Total)
 

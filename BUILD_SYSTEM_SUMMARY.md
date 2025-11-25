@@ -2,7 +2,7 @@
 
 ## Overview
 
-KGCL now has a comprehensive build and quality system equivalent to Rust's Cargo, but with even stricter settings for Python projects. This matches the reference project at `~/clap-noun-verb` which uses Cargo, Makefile.toml, and git hooks for production-grade code quality.
+KGCL now has a comprehensive build and quality system powered entirely by `pyproject.toml` + UV scripts. The workflow mirrors the rigor of the `~/clap-noun-verb` reference while aligning with Python core-team best practices: single source of truth, explicit commands, and zero auxiliary task runners.
 
 ## Key Components
 
@@ -11,17 +11,17 @@ KGCL now has a comprehensive build and quality system equivalent to Rust's Cargo
 - **Lock File**: `uv.lock` - Pinned dependency versions
 - **Command**: `uv sync` - Install all dependencies
 
-### 2. Build Automation (`cargo-make`)
-- **Config File**: `Makefile.toml` - Equivalent to Cargo.toml build config
-- **Default Task**: `cargo-make` - Format check + lint + tests
-- **Key Tasks**:
-  - `cargo-make format` - Format code (Ruff)
-  - `cargo-make lint` - Lint & fix (Ruff, ALL rules enabled)
-  - `cargo-make type-check` - Type check (Mypy, strict mode)
-  - `cargo-make test` - Run tests (Pytest with markers)
-  - `cargo-make verify` - All checks + tests
-  - `cargo-make ci` - Full CI pipeline
-  - `cargo-make prod-build` - Strict production build
+### 2. Build Automation (`uv run <script>`)
+- **Config Location**: `pyproject.toml [tool.uv.scripts]`
+- **Default Flow**: `uv run verify` → format + lint + type-check + tests
+- **Key Scripts**:
+  - `uv run format` - Format code (Ruff)
+  - `uv run lint` - Lint & fix (Ruff, ALL rules enabled)
+  - `uv run type-check` - Type check (Mypy, strict mode)
+  - `uv run test` - Run tests (Pytest with markers)
+  - `uv run verify` - All checks + tests
+  - `uv run ci` - Full CI pipeline (docs + tests)
+  - `uv run prod-build` - Strict production build
 
 ### 3. Code Quality Tools
 
@@ -71,9 +71,8 @@ Strictest settings for:
 
 ```
 /Users/sac/dev/kgcl/
-├── pyproject.toml                           # All tool configurations
+├── pyproject.toml                           # Tool configs + UV scripts
 ├── uv.lock                                  # Locked dependencies
-├── Makefile.toml                            # Build automation (cargo-make)
 ├── .githooks/
 │   └── pre-commit                           # Automatic quality gates
 ├── .cursorrules                             # IDE rules & standards
@@ -100,53 +99,53 @@ Strictest settings for:
 ```bash
 # Start development
 uv sync                           # Install dependencies
-cargo-make pre-commit-setup       # Install git hooks
+uv run pre-commit-setup           # Install git hooks
 
 # Format code
-cargo-make format
+uv run format
 
 # Check/fix linting
-cargo-make lint                   # Lint & fix
-cargo-make lint-check             # Check only (no fixes)
+uv run lint                       # Lint & fix
+uv run lint-check                 # Check only (no fixes)
 
 # Type check
-cargo-make type-check
+uv run type-check
 
 # Run tests
-cargo-make test                   # All tests
-cargo-make test-coverage          # With coverage
-cargo-make test-unrdf             # UNRDF porting tests only
-cargo-make test-fast              # Fast mode (exit on first failure)
+uv run test                       # All tests
+uv run test-coverage              # With coverage
+uv run test-unrdf                 # UNRDF porting tests only
+uv run test-fast                  # Fast mode (exit on first failure)
 ```
 
 ### Verification
 ```bash
 # All checks (with fixes)
-cargo-make verify
+uv run verify
 
 # All checks (strict, no fixes)
-cargo-make verify-strict
+uv run verify-strict
 
 # Full CI pipeline
-cargo-make ci
+uv run ci
 
 # Production build
-cargo-make prod-build
+uv run prod-build
 ```
 
 ### Maintenance
 ```bash
 # Clean artifacts
-cargo-make clean
+uv run clean
 
 # Security audit
-cargo-make audit
+uv run audit
 
 # Update dependencies
-cargo-make update
+uv run update
 
 # View project info
-cargo-make info
+uv run info
 ```
 
 ## Strictest Settings Summary
@@ -201,10 +200,10 @@ git commit -m "Add hook feature"
 ```
 
 ### CI/CD Pipeline
-Use `cargo-make ci` in GitHub Actions:
+Use `uv run ci` in GitHub Actions:
 ```yaml
 - name: Run CI checks
-  run: cargo-make ci
+  run: uv run ci
 ```
 
 ### IDE Integration (Cursor)
@@ -289,28 +288,28 @@ This build system is based on best practices from:
 1. **Initial Setup**
    ```bash
    uv sync
-   cargo-make pre-commit-setup
+   uv run pre-commit-setup
    ```
 
 2. **Development Workflow**
    ```bash
-   cargo-make format       # Format code
-   cargo-make lint         # Fix linting issues
-   cargo-make type-check   # Verify types
-   cargo-make test         # Run tests
-   git commit -m "..."     # Pre-commit hook runs
+   uv run format          # Format code
+   uv run lint            # Fix linting issues
+   uv run type-check      # Verify types
+   uv run test            # Run tests
+   git commit -m "..."    # Pre-commit hook runs
    ```
 
 3. **Pre-Deployment**
    ```bash
-   cargo-make prod-build   # Strict production build
+   uv run prod-build      # Strict production build
    # All checks must pass before deployment
    ```
 
 ## Resources
 
 - **Build Config**: `pyproject.toml`
-- **Build Tasks**: `Makefile.toml`
+- **Build Scripts**: `pyproject.toml [tool.uv.scripts]`
 - **Code Rules**: `.cursorrules`
 - **Git Hooks**: `.githooks/pre-commit`
 - **Documentation**:
@@ -326,7 +325,7 @@ KGCL now has a **production-grade build system** with:
 - ✅ Comprehensive testing (Chicago School TDD)
 - ✅ Performance monitoring (SLO targets met)
 - ✅ Full documentation (guides, examples, validation)
-- ✅ CI/CD ready (cargo-make commands)
+- ✅ CI/CD ready (uv scripts)
 - ✅ IDE integration (Cursor rules)
 
 **Status**: Production-ready, fully validated, ready for deployment

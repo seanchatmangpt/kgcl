@@ -14,6 +14,7 @@ from typing import Any
 
 from kgcl.hooks.performance import PerformanceMetrics, PerformanceOptimizer
 from kgcl.hooks.security import ErrorSanitizer
+from kgcl.hooks.value_objects import ExecutionId, LifecycleEventType
 
 
 @dataclass
@@ -27,7 +28,7 @@ class HookContext:
         Actor triggering the execution
     request_id : str
         Unique request identifier
-    execution_id : str
+    execution_id : ExecutionId
         Unique execution identifier for this specific execution
     metadata : Dict[str, Any]
         Additional context metadata
@@ -35,7 +36,7 @@ class HookContext:
 
     actor: str
     request_id: str = field(default_factory=lambda: str(uuid.uuid4()))
-    execution_id: str = field(default_factory=lambda: str(uuid.uuid4()))
+    execution_id: ExecutionId = field(default_factory=ExecutionId.new)
     metadata: dict[str, Any] = field(default_factory=dict)
     timestamp: datetime = field(default_factory=datetime.utcnow)
 
@@ -47,7 +48,7 @@ class HookLifecycleEvent:
 
     Parameters
     ----------
-    event_type : str
+    event_type : LifecycleEventType
         Type of event (pre_condition, post_condition, pre_execute, post_execute)
     hook_id : str
         Hook identifier
@@ -57,7 +58,7 @@ class HookLifecycleEvent:
         Event metadata
     """
 
-    event_type: str
+    event_type: LifecycleEventType
     hook_id: str
     timestamp: datetime
     metadata: dict[str, Any] = field(default_factory=dict)

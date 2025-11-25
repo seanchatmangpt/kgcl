@@ -8,13 +8,12 @@ Tracks execution state across the 5 workflow steps:
 5. Remove - Detect waste, identify cleanup
 """
 
+import json
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from enum import Enum
 from pathlib import Path
 from typing import Any
-
-import json
 
 
 class WorkflowStep(Enum):
@@ -124,7 +123,7 @@ class WorkflowState:
             step=step,
             success=success,
             started_at=started_at,
-            completed_at=datetime.now(timezone.utc),
+            completed_at=datetime.now(UTC),
             data=data or {},
             errors=errors or [],
             warnings=warnings or [],
@@ -164,7 +163,7 @@ class WorkflowState:
         if not self.completed_steps:
             return 0.0
 
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         delta = now - self.started_at
         return delta.total_seconds()
 
@@ -187,7 +186,8 @@ class WorkflowState:
     def validate(self) -> list[str]:
         """Validate state consistency.
 
-        Returns:
+        Returns
+        -------
             List of validation errors (empty if valid)
         """
         errors = []
@@ -235,9 +235,7 @@ class WorkflowState:
             workflow_id=data["workflow_id"],
             started_at=datetime.fromisoformat(data["started_at"]),
             current_step=WorkflowStep(current_step_value) if current_step_value else None,
-            completed_steps=[
-                StepResult.from_dict(r) for r in data.get("completed_steps", [])
-            ],
+            completed_steps=[StepResult.from_dict(r) for r in data.get("completed_steps", [])],
             is_complete=data.get("is_complete", False),
             failed=data.get("failed", False),
         )

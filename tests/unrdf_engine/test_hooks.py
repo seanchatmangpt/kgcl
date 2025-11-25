@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import pytest
-from rdflib import Graph, URIRef
+from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import RDF
 
 from kgcl.unrdf_engine.hooks import (
@@ -64,6 +64,27 @@ class TestTriggerCondition:
 
         assert trigger.matches(context)
 
+    def test_matches_with_custom_variables(self) -> None:
+        """TriggerCondition matches even when pattern variables omit ?s."""
+        delta = Graph()
+        delta.add(
+            (
+                URIRef("http://example.org/person1"),
+                URIRef("http://unrdf.org/ontology/age"),
+                Literal(30),
+            )
+        )
+
+        trigger = TriggerCondition(
+            pattern="?person <http://unrdf.org/ontology/age> ?age", check_delta=True, min_matches=1
+        )
+
+        context = HookContext(
+            phase=HookPhase.POST_COMMIT, graph=Graph(), delta=delta, transaction_id="txn-1"
+        )
+
+        assert trigger.matches(context)
+
     def test_no_matches(self) -> None:
         """Test condition when no matches."""
         delta = Graph()
@@ -89,7 +110,7 @@ class SimpleHook(KnowledgeHook):
         super().__init__(name="simple_hook", phases=[HookPhase.POST_COMMIT])
         self.executed = False
 
-    def execute(self, context: HookContext) -> None:
+    def execute(self, _context: HookContext) -> None:
         """Execute hook."""
         self.executed = True
 
@@ -106,7 +127,7 @@ class ConditionalHook(KnowledgeHook):
         )
         self.executed = False
 
-    def execute(self, context: HookContext) -> None:
+    def execute(self, _context: HookContext) -> None:
         """Execute hook."""
         self.executed = True
 
@@ -224,7 +245,7 @@ class TestHookRegistry:
             def __init__(self) -> None:
                 super().__init__(name="pre_hook", phases=[HookPhase.PRE_INGESTION])
 
-            def execute(self, context: HookContext) -> None:
+            def execute(self, _context: HookContext) -> None:
                 pass
 
         hook2 = PreIngestionHook()
@@ -248,7 +269,7 @@ class TestHookRegistry:
             def __init__(self) -> None:
                 super().__init__(name="high_priority", phases=[HookPhase.POST_COMMIT], priority=100)
 
-            def execute(self, context: HookContext) -> None:
+            def execute(self, _context: HookContext) -> None:
                 pass
 
         class LowPriorityHook(KnowledgeHook):

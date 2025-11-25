@@ -4,67 +4,86 @@ Tests end-to-end CLI commands with real data flow, output formats,
 and correctness validation.
 """
 
+from __future__ import annotations
+
+import json
 import tempfile
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
+from rdflib import Graph, Literal, Namespace
+from rdflib.namespace import RDF
+
 from kgcl.cli.config import DEFAULT_CONFIG
-from kgcl.cli.daily_brief import _generate_brief, _ingest_events, _materialize_features
+from kgcl.cli.daily_brief import (
+    _generate_brief,
+    _ingest_events,
+    _materialize_features,
+    _select_payload_for_format,
+)
+from kgcl.cli.daily_brief_pipeline import (
+    DailyBriefEventBatch,
+    DailyBriefFeatureSet,
+    DailyBriefResult,
+)
+from kgcl.cli.utils import OutputFormat, format_output, print_error
+from kgcl.observability.health import check_health
+from kgcl.signatures.daily_brief import DailyBriefInput
 
 
 class TestCLIIntegration:
     """Test CLI integration with real data flow."""
 
-    def test_daily_brief_data_flow(self):
+    def test_daily_brief_data_flow(self) -> None:
         """Test daily brief command with mocked but realistic flow."""
-        from datetime import datetime, timedelta
-
-        start_date = datetime(2024, 11, 24, 9, 0, 0)
+        start_date = datetime(2024, 11, 24, 9, 0, 0, tzinfo=UTC)
         end_date = start_date + timedelta(days=1)
 
         # Ingest events (placeholder)
         events = _ingest_events(start_date, end_date, verbose=False)
-        assert len(events) >= 0  # May be mock data
+        assert isinstance(events, DailyBriefEventBatch)
+        assert events.event_count > 0
 
         # Materialize features
         features = _materialize_features(events, verbose=False)
-        assert isinstance(features, dict)
-        assert "total_events" in features
+        assert isinstance(features, DailyBriefFeatureSet)
+        assert isinstance(features.input_data, DailyBriefInput)
 
         # Generate brief
         brief = _generate_brief(features, model="llama3.1", verbose=False)
-        assert isinstance(brief, str)
-        assert len(brief) > 0
-        assert "# Daily Brief" in brief
+        assert isinstance(brief, DailyBriefResult)
+        markdown = brief.to_markdown()
+        assert markdown.startswith("# Daily Brief")
+        payload = brief.to_dict()
+        assert "brief" in payload
+        assert "metadata" in payload
+        table_payload = _select_payload_for_format(brief, OutputFormat.TABLE)
+        assert isinstance(table_payload, list)
 
-    def test_feature_list_output_formats(self):
+    def test_feature_list_output_formats(self) -> None:
         """Test feature list command output formats."""
         with tempfile.TemporaryDirectory() as tmpdir:
             config_file = Path(tmpdir) / "config.json"
 
             # Create default config
-            config = DEFAULT_CONFIG.copy()
             config_file.write_text('{"features": []}')
 
             # Test would list features (currently returns empty)
             # In real implementation, would query UNRDF
             assert config_file.exists()
 
-    def test_query_sparql_execution(self):
+    def test_query_sparql_execution(self) -> None:
         """Test SPARQL query execution."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            # Create test RDF graph
-            from rdflib import Graph, Literal, Namespace
-            from rdflib.namespace import RDF
-
-            UNRDF = Namespace("http://unrdf.org/ontology/")
+            unrdf_ns = Namespace("http://unrdf.org/ontology/")
 
             g = Graph()
-            g.bind("unrdf", UNRDF)
+            g.bind("unrdf", unrdf_ns)
 
             # Add test data
-            entity = UNRDF.TestEntity
-            g.add((entity, RDF.type, UNRDF.Event))
-            g.add((entity, UNRDF.name, Literal("Test Event")))
+            entity = unrdf_ns.TestEntity
+            g.add((entity, RDF.type, unrdf_ns.Event))
+            g.add((entity, unrdf_ns.name, Literal("Test Event")))
 
             graph_file = Path(tmpdir) / "graph.ttl"
             g.serialize(destination=graph_file, format="turtle")
@@ -80,16 +99,13 @@ class TestCLIIntegration:
             results = list(g.query(query))
             assert len(results) == 1
 
-    def test_config_cli_operations(self):
+    def test_config_cli_operations(self) -> None:
         """Test configuration CLI operations."""
         with tempfile.TemporaryDirectory() as tmpdir:
             config_file = Path(tmpdir) / "config.json"
 
             # Create config
-            config = DEFAULT_CONFIG.copy()
-            import json
-
-            config_file.write_text(json.dumps(config))
+            config_file.write_text(json.dumps(DEFAULT_CONFIG))
 
             # Verify config file created
             assert config_file.exists()
@@ -99,21 +115,18 @@ class TestCLIIntegration:
             assert loaded is not None
             assert "settings" in loaded or "capabilities" in loaded
 
-    def test_weekly_retro_aggregation(self):
+    def test_weekly_retro_aggregation(self) -> None:
         """Test weekly retrospective aggregation placeholder."""
-        from datetime import datetime, timedelta
-
-        end_date = datetime(2024, 11, 24)
+        end_date = datetime(2024, 11, 24, tzinfo=UTC)
         start_date = end_date - timedelta(days=7)
 
         # Test date range logic
         diff = (end_date - start_date).days
-        assert diff == 7
+        week_length_days = 7
+        assert diff == week_length_days
 
-    def test_cli_output_formats(self):
+    def test_cli_output_formats(self) -> None:
         """Test CLI output format handling."""
-        from kgcl.cli.utils import OutputFormat, format_output
-
         test_content = "# Test\nContent"
 
         # Test markdown output
@@ -126,17 +139,13 @@ class TestCLIIntegration:
         assert output_path.read_text() == test_content
         output_path.unlink()
 
-    def test_cli_error_handling(self):
+    def test_cli_error_handling(self) -> None:
         """Test CLI error handling."""
-        from kgcl.cli.utils import print_error
-
         # print_error with exit_code=0 should not exit
         print_error("Test error message", exit_code=0)
 
-    def test_health_check_cli(self):
+    def test_health_check_cli(self) -> None:
         """Test health check CLI command."""
-        from kgcl.observability.health import check_health
-
         health = check_health()
 
         # Returns a SystemHealth dataclass, not a dict
@@ -144,15 +153,11 @@ class TestCLIIntegration:
         assert hasattr(health, "status")
         assert hasattr(health, "timestamp")
 
-    def test_cli_verbose_mode(self):
+    def test_cli_verbose_mode(self) -> None:
         """Test CLI verbose output."""
-        from datetime import datetime, timedelta
-
-        start_date = datetime(2024, 11, 24)
+        start_date = datetime(2024, 11, 24, tzinfo=UTC)
         end_date = start_date + timedelta(days=1)
 
         # Test verbose ingestion
         events = _ingest_events(start_date, end_date, verbose=True)
-
-        # Should not raise exception
-        assert isinstance(events, list)
+        assert isinstance(events, DailyBriefEventBatch)

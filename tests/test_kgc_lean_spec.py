@@ -1,5 +1,4 @@
-"""
-KGC Lean Context Specification Validation Tests
+"""KGC Lean Context Specification Validation Tests.
 
 Validates the macOS/iOS PyObjC KGC spec against Chicago TDD principles.
 Tests focus on behavior verification using real collaborators (no mocking domain objects).
@@ -7,19 +6,20 @@ Tests focus on behavior verification using real collaborators (no mocking domain
 Specification source: KGC Lean Context Specification (Python/KGCT/macOS+iOS via PyObjC)
 """
 
-# Import from chicago_tdd_tools (as if installed)
-# For now, using relative imports from src/
-import sys
-from dataclasses import dataclass
+import time
+from dataclasses import dataclass, field
 from enum import Enum
-from pathlib import Path
-from typing import Any
+from typing import Any, Final
 
 import pytest
+from src.core import assert_that
 
-sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
-
-from core import assert_that
+VALUE_STREAM_STEP_COUNT: Final[int] = 5
+PULL_ARTIFACT_COUNT: Final[int] = 2
+STANDARD_WORK_DISCOVERY_TARGET: Final[int] = 2
+LEAD_TIME_TARGET_SECONDS: Final[float] = 60.0
+AAA_DISCOVERY_TARGET: Final[int] = 1
+WASTE_STORY_TARGET: Final[int] = 1
 
 # ============================================================================
 # Domain Models (No Mocking - Real Collaborators)
@@ -66,11 +66,7 @@ class KGCManifest:
     owns_invariants: bool = True
     owns_hooks: bool = True
     has_projection_config: bool = True
-    planes: list[KGCPlane] | None = None
-
-    def __post_init__(self) -> None:
-        if self.planes is None:
-            self.planes = []
+    planes: list[KGCPlane] = field(default_factory=list)
 
 
 @dataclass
@@ -104,11 +100,7 @@ class KGCContext:
     apple_entities: list[AppleEntity]
     has_apple_ingest: bool = False
     has_generator: bool = False
-    projections: list[str] | None = None
-
-    def __post_init__(self) -> None:
-        if self.projections is None:
-            self.projections = []
+    projections: list[str] = field(default_factory=list)
 
 
 # ============================================================================
@@ -246,14 +238,17 @@ def test_lean_value_waste_elimination(minimal_kgc_context: KGCContext) -> None:
     assert_that(context.hooks, lambda h: len(h) > 0)
     assert_that(technician.regenerated_artifacts, lambda a: len(a) > 0)
 
-    # Behavior: Hook exists with explicit waste story
     hook = context.hooks[0]
-    assert_that(hook.waste_removed, lambda w: len(w) > 0)
-
-    # Behavior: Projection is actionable
-    assert_that(context.projections, lambda p: "agenda" in p)
-
-    print("✓ Lean VALUE: Artifacts directly reduce waste")
+    assert_that(
+        hook.waste_removed,
+        lambda waste_story: len(waste_story) > 0,
+        "Hook must describe the waste eliminated",
+    )
+    assert_that(
+        context.projections,
+        lambda projections: "agenda" in projections,
+        "Projections must include actionable agenda outputs",
+    )
 
 
 def test_invariants_are_waste_reducing(minimal_kgc_context: KGCContext) -> None:
@@ -267,11 +262,8 @@ def test_invariants_are_waste_reducing(minimal_kgc_context: KGCContext) -> None:
     context = minimal_kgc_context
 
     for inv in context.invariants:
-        # Behavior: Every invariant has traceable requirement
         assert inv.is_waste_reducing, f"{inv.name} is not waste-reducing"
         assert len(inv.traced_to) > 0, f"{inv.name} has no traceability"
-
-    print("✓ Lean VALUE: All invariants reduce waste or prevent failures")
 
 
 # ============================================================================
@@ -299,9 +291,7 @@ def test_value_stream_mapping() -> None:
     completeness = [step for step in flow if step]
 
     # Assert: All steps present (none are None)
-    assert len(completeness) == 5, "All value stream steps must be present"
-
-    print("✓ Lean VALUE_STREAM: Complete flow from data to runtime")
+    assert len(completeness) == VALUE_STREAM_STEP_COUNT, "All value stream steps must be present"
 
 
 def test_value_stream_eliminates_handoffs() -> None:
@@ -329,9 +319,9 @@ def test_value_stream_eliminates_handoffs() -> None:
     technician.regenerate(["cli", "docs"])
 
     # Assert: Artifacts exist without manual handoff
-    assert_that(technician.regenerated_artifacts, lambda a: len(a) == 2)
-
-    print("✓ Lean VALUE_STREAM: No manual handoffs between spec and code")
+    assert_that(
+        technician.regenerated_artifacts, lambda artifacts: len(artifacts) == PULL_ARTIFACT_COUNT
+    )
 
 
 # ============================================================================
@@ -365,8 +355,6 @@ def test_no_manual_batching_between_steps() -> None:
     # Assert: Single-piece processed
     assert len(technician.discovered_items) == 1
     assert len(technician.regenerated_artifacts) >= 0
-
-    print("✓ Lean FLOW: Single-piece flow, no batching")
 
 
 # ============================================================================
@@ -402,8 +390,6 @@ def test_artifacts_pulled_not_pushed() -> None:
     assert "cli" in technician.regenerated_artifacts
     assert "docs" not in technician.regenerated_artifacts
 
-    print("✓ Lean PULL: On-demand generation (pull-based)")
-
 
 # ============================================================================
 # Test: Lean Principle 5 - PERFECTION
@@ -428,8 +414,6 @@ def test_drift_detection_is_defect(minimal_kgc_context: KGCContext) -> None:
     # Assert: Invariant enforces O consistency
     assert len(calendar_invariant) > 0, "Invariant must exist to prevent drift"
     assert calendar_invariant[0].is_waste_reducing
-
-    print("✓ Lean PERFECTION: Drift detection through invariants")
 
 
 # ============================================================================
@@ -469,8 +453,6 @@ def test_kgc_minimal_structure(minimal_kgc_context: KGCContext) -> None:
     assert len(context.invariants) > 0
     assert len(context.projections) > 0
 
-    print("✓ KGC Structure: All required planes present")
-
 
 # ============================================================================
 # Test: Apple Ingest Invariants
@@ -495,8 +477,6 @@ def test_apple_entity_invariants(minimal_kgc_context: KGCContext) -> None:
         assert inv.traced_to, f"Invariant {inv.name} must be traceable"
         assert inv.is_waste_reducing, f"Invariant {inv.name} must be waste-reducing"
 
-    print("✓ Apple Ingest: All entities have waste-reducing invariants")
-
 
 # ============================================================================
 # Test: Standard Work Loop
@@ -520,7 +500,7 @@ def test_technician_standard_work_loop(
 
     # Step 1: Discover
     technician.discover(["untitled_event", "lost_reminder"])
-    assert len(technician.discovered_items) == 2
+    assert len(technician.discovered_items) == STANDARD_WORK_DISCOVERY_TARGET
 
     # Step 2: Align ontology
     technician.align_ontology("NewEntity")
@@ -528,7 +508,7 @@ def test_technician_standard_work_loop(
 
     # Step 3: Regenerate
     technician.regenerate(["cli", "agenda"])
-    assert len(technician.regenerated_artifacts) == 2
+    assert len(technician.regenerated_artifacts) == PULL_ARTIFACT_COUNT
 
     # Step 4: Review
     review_result = technician.review()
@@ -537,9 +517,7 @@ def test_technician_standard_work_loop(
 
     # Step 5: Remove waste
     technician.remove_waste("Eliminated manual calendar sync")
-    assert len(technician.waste_removed_stories) == 1
-
-    print("✓ Standard Work: Full 5-step loop completed")
+    assert len(technician.waste_removed_stories) == WASTE_STORY_TARGET
 
 
 # ============================================================================
@@ -556,7 +534,6 @@ def test_lead_time_for_change_metric(kgc_technician: KGCTechnician) -> None:
     Target: < 60 minutes (for local macOS/iOS dev)
     """
     technician = kgc_technician
-    import time
 
     # Arrange: Measure time for full loop
     start = time.time()
@@ -564,14 +541,15 @@ def test_lead_time_for_change_metric(kgc_technician: KGCTechnician) -> None:
     # Act: Complete full loop
     technician.align_ontology("NewEntity")
     technician.regenerate(["cli"])
-    review = technician.review()
+    review_result = technician.review()
 
     lead_time_seconds = time.time() - start
 
     # Assert: Lead time acceptable (in test, should be < 1 second)
-    assert lead_time_seconds < 60.0, f"Lead time {lead_time_seconds}s exceeds 60s target"
-
-    print(f"✓ Metrics: Lead time {lead_time_seconds:.3f}s (target: < 60s)")
+    assert lead_time_seconds < LEAD_TIME_TARGET_SECONDS, (
+        f"Lead time {lead_time_seconds}s exceeds {LEAD_TIME_TARGET_SECONDS}s target"
+    )
+    assert "projected_artifacts" in review_result
 
 
 def test_rework_rate_metric(kgc_technician: KGCTechnician) -> None:
@@ -603,8 +581,6 @@ def test_rework_rate_metric(kgc_technician: KGCTechnician) -> None:
     assert rework_rates[0] > rework_rates[1]
     assert rework_rates[1] > rework_rates[2]
 
-    print(f"✓ Metrics: Rework rate trending down {rework_rates}")
-
 
 # ============================================================================
 # Test: Chicago TDD Principles (Validate Meta-Level)
@@ -627,8 +603,6 @@ def test_chicago_tdd_no_mocking_domain_objects(minimal_kgc_context: KGCContext) 
     assert isinstance(technician, KGCTechnician)
     assert isinstance(context.manifest, KGCManifest)
 
-    print("✓ Chicago TDD: Real collaborators, no mocking of domain objects")
-
 
 def test_chicago_tdd_behavior_verification(kgc_technician: KGCTechnician) -> None:
     """
@@ -639,21 +613,11 @@ def test_chicago_tdd_behavior_verification(kgc_technician: KGCTechnician) -> Non
     """
     technician = kgc_technician
 
-    # Arrange: Define expected behavior
-    # Behavior: "Technician discovers items and regenerates artifacts"
-
-    # Act: Call public methods (behavior-level)
     technician.discover(["item1", "item2"])
     technician.regenerate(["cli"])
 
-    # Assert: Behavior outcome (not implementation)
-    assert len(technician.discovered_items) == 2  # Behavior outcome
-    assert "cli" in technician.regenerated_artifacts  # Behavior outcome
-
-    # Don't check:
-    # assert technician._internal_state == ...  # Implementation detail
-
-    print("✓ Chicago TDD: Behavior verification, not implementation details")
+    assert len(technician.discovered_items) == STANDARD_WORK_DISCOVERY_TARGET
+    assert "cli" in technician.regenerated_artifacts
 
 
 def test_aaa_pattern_arrange_act_assert(minimal_kgc_context: KGCContext) -> None:
@@ -676,9 +640,7 @@ def test_aaa_pattern_arrange_act_assert(minimal_kgc_context: KGCContext) -> None
     result = technician.review()
 
     # ===== ASSERT =====
-    assert len(technician.discovered_items) == 1
+    assert len(technician.discovered_items) == AAA_DISCOVERY_TARGET
     assert "Event" in technician.context.ontology_entities
     assert "agenda" in technician.regenerated_artifacts
     assert "projected_artifacts" in result
-
-    print("✓ Chicago TDD: AAA pattern (Arrange-Act-Assert)")

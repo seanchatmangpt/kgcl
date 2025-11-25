@@ -19,19 +19,18 @@ Chicago TDD Pattern:
     - Easy to test
 """
 
+import logging
 from datetime import datetime
 from pathlib import Path
 from typing import Any
-import logging
 
 from rdflib import Graph
 
-from kgcl.hooks.orchestrator import HookOrchestrator
 from kgcl.hooks.handlers import register_all_handlers
+from kgcl.hooks.orchestrator import HookOrchestrator
 from kgcl.hooks.scheduler import HookScheduler
 from kgcl.workflow.orchestrator import StandardWorkLoop
-from kgcl.workflow.scheduler import WorkflowScheduler, ScheduleConfig
-
+from kgcl.workflow.scheduler import ScheduleConfig, WorkflowScheduler
 
 logger = logging.getLogger(__name__)
 
@@ -91,11 +90,11 @@ class KGCIntegration:
         # 1️⃣ Initialize hook orchestrator
         try:
             self.hook_orchestrator = HookOrchestrator(
-                graph=graph,
-                hooks_file=hooks_file,
-                continue_on_error=True
+                graph=graph, hooks_file=hooks_file, continue_on_error=True
             )
-            logger.info(f"✅ Hook Orchestrator initialized with {len(self.hook_orchestrator.hooks)} hooks")
+            logger.info(
+                f"✅ Hook Orchestrator initialized with {len(self.hook_orchestrator.hooks)} hooks"
+            )
         except Exception as e:
             logger.error(f"❌ Failed to initialize hook orchestrator: {e}")
             raise
@@ -172,7 +171,8 @@ class KGCIntegration:
         4. Review (validate artifacts)
         5. Remove (identify waste)
 
-        Returns:
+        Returns
+        -------
             WorkflowState with execution results
         """
         logger.info("🔄 Starting workflow iteration...")
@@ -210,11 +210,7 @@ class KGCIntegration:
         try:
             if workflow_schedule is None:
                 # Default: daily at 6am
-                workflow_schedule = ScheduleConfig(
-                    frequency="daily",
-                    hour=6,
-                    minute=0,
-                )
+                workflow_schedule = ScheduleConfig(frequency="daily", hour=6, minute=0)
 
             self.workflow_scheduler.start(workflow_schedule)
             logger.info(f"✅ Workflow Scheduler started: {workflow_schedule}")
@@ -244,7 +240,8 @@ class KGCIntegration:
     def get_status(self) -> dict[str, Any]:
         """Get current system status.
 
-        Returns:
+        Returns
+        -------
             Dictionary with status of hooks, workflow, schedulers
         """
         return {
@@ -265,6 +262,4 @@ class KGCIntegration:
         )
 
 
-__all__ = [
-    "KGCIntegration",
-]
+__all__ = ["KGCIntegration"]

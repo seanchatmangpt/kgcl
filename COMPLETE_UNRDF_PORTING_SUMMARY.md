@@ -327,23 +327,22 @@ Tests Per Second: 49.4
 ### Automation Commands
 ```bash
 # Development
-cargo-make format               # Format code
-cargo-make lint                 # Lint & fix
-cargo-make type-check           # Type check
-cargo-make test                 # Run tests
+uv run format                   # Format code
+uv run lint                     # Lint & fix
+uv run type-check               # Type check
+uv run test                     # Run tests
 
 # Verification
-cargo-make verify               # All checks + tests
-cargo-make ci                   # Full CI pipeline
-cargo-make prod-build           # Production build
+uv run verify                   # All checks + tests
+uv run ci                       # Full CI pipeline
+uv run prod-build               # Production build
 
 # Pre-commit
 .githooks/pre-commit            # Automatic quality gates
 ```
 
 ### Configuration Files
-- ✅ `pyproject.toml` - All tool configurations
-- ✅ `Makefile.toml` - Build automation
+- ✅ `pyproject.toml` - Tool configurations + UV scripts
 - ✅ `.githooks/pre-commit` - Quality gates
 - ✅ `.cursorrules` - Production standards
 
@@ -457,7 +456,7 @@ cargo-make prod-build           # Production build
 - ✅ Strict type safety (mypy strict)
 - ✅ Automated code quality (pre-commit hooks)
 - ✅ Comprehensive testing (382 tests)
-- ✅ Build automation (cargo-make)
+- ✅ Build automation (uv scripts)
 - ✅ IDE integration (Cursor)
 - ✅ Complete documentation
 

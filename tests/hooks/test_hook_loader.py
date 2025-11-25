@@ -11,11 +11,11 @@ from pathlib import Path
 from unittest.mock import Mock, patch
 
 import pytest
-from rdflib import Graph, Namespace, URIRef, Literal
+from rdflib import Graph, Literal, Namespace, URIRef
 from rdflib.namespace import RDF, RDFS
 
-from kgcl.hooks.loader import HookLoader, HookDefinition, HookEffect
-
+from kgcl.hooks.loader import HookDefinition, HookEffect, HookLoader
+from kgcl.hooks.value_objects import HookName
 
 # Define namespaces (same as loader)
 KGC = Namespace("urn:kgc:")
@@ -87,6 +87,7 @@ apple:DataIngested a kgc:HookEvent ;
         assert ingest_hook.label == "Apple Data Ingest Hook"
         assert "projections" in ingest_hook.description
         assert ingest_hook.waste_removed == "Manual copy/paste"
+        assert isinstance(ingest_hook.name, HookName)
 
     def test_parse_hook_extracts_trigger_event(self, loader: HookLoader) -> None:
         """Test hook parsing extracts trigger event URI."""
@@ -124,10 +125,7 @@ apple:DataIngested a kgc:HookEvent ;
         assert hook is not None
         assert hook.name == "IngestHook"
 
-    def test_get_hook_by_name_returns_none_for_missing(
-        self,
-        loader: HookLoader
-    ) -> None:
+    def test_get_hook_by_name_returns_none_for_missing(self, loader: HookLoader) -> None:
         """Test get_hook_by_name returns None for missing hooks."""
         hook = loader.get_hook_by_name("NonexistentHook")
 
@@ -227,7 +225,7 @@ class TestHookDefinition:
                 trigger_event=None,
                 trigger_label=None,
                 cron_schedule=None,
-                effects=[]
+                effects=[],
             )
 
     def test_hook_definition_requires_effects(self) -> None:
@@ -241,16 +239,13 @@ class TestHookDefinition:
                 trigger_event=URIRef("urn:test:event"),
                 trigger_label="Event",
                 cron_schedule=None,
-                effects=[]  # No effects
+                effects=[],  # No effects
             )
 
     def test_hook_definition_valid_with_event_trigger(self) -> None:
         """Test HookDefinition accepts event trigger."""
         effect = HookEffect(
-            label="Test Effect",
-            description="Test",
-            command="test-cmd",
-            target="output.txt"
+            label="Test Effect", description="Test", command="test-cmd", target="output.txt"
         )
 
         hook = HookDefinition(
@@ -261,7 +256,7 @@ class TestHookDefinition:
             trigger_event=URIRef("urn:test:event"),
             trigger_label="Event",
             cron_schedule=None,
-            effects=[effect]
+            effects=[effect],
         )
 
         assert hook.trigger_event is not None
@@ -270,10 +265,7 @@ class TestHookDefinition:
     def test_hook_definition_valid_with_cron_trigger(self) -> None:
         """Test HookDefinition accepts cron trigger."""
         effect = HookEffect(
-            label="Test Effect",
-            description="Test",
-            command="test-cmd",
-            target="output.txt"
+            label="Test Effect", description="Test", command="test-cmd", target="output.txt"
         )
 
         hook = HookDefinition(
@@ -284,7 +276,7 @@ class TestHookDefinition:
             trigger_event=None,
             trigger_label=None,
             cron_schedule="0 6 * * *",
-            effects=[effect]
+            effects=[effect],
         )
 
         assert hook.trigger_event is None
@@ -301,7 +293,7 @@ class TestHookEffect:
             description="Test description",
             command="kgct test",
             target="output.txt",
-            generator="TestGenerator"
+            generator="TestGenerator",
         )
 
         assert effect.label == "Test Effect"

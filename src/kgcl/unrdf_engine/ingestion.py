@@ -114,8 +114,21 @@ class IngestionPipeline:
         """
         self.engine = engine
         self.validator = validator
-        self.hook_executor = hook_executor
         self.validate_on_ingest = validate_on_ingest
+
+        # Prefer explicitly provided executor, otherwise reuse the engine's executor
+        if hook_executor is not None:
+            self.hook_executor = hook_executor
+        else:
+            engine_executor = getattr(self.engine, "get_hook_executor", None)
+            self.hook_executor = engine_executor() if callable(engine_executor) else None
+
+        # If the engine has a registry but no executor yet, initialize one
+        if self.hook_executor is None:
+            registry_getter = getattr(self.engine, "get_hook_registry", None)
+            registry = registry_getter() if callable(registry_getter) else None
+            if registry is not None:
+                self.hook_executor = HookExecutor(registry)
 
     @tracer.start_as_current_span("ingestion.ingest_json")
     def ingest_json(
@@ -238,19 +251,21 @@ class IngestionPipeline:
                         error="SHACL validation failed",
                     )
 
-            # Commit transaction
+            # Commit transaction (executes post-transaction and post-commit hooks internally)
             self.engine.commit(txn)
 
-            # POST_COMMIT hooks
-            hook_results = []
-            if self.hook_executor:
-                context = HookContext(
-                    phase=HookPhase.POST_COMMIT,
-                    graph=self.engine.graph,
-                    delta=delta,
-                    transaction_id=txn.transaction_id,
+            hook_results: list[dict[str, Any]] = []
+            for receipt in getattr(txn, "hook_receipts", []):
+                hook_results.append(
+                    {
+                        "hook": receipt.hook_id,
+                        "phase": receipt.phase.value,
+                        "success": receipt.success,
+                        "duration_ms": receipt.duration_ms,
+                        "error": receipt.error,
+                        "metadata": receipt.metadata,
+                    }
                 )
-                hook_results = self.hook_executor.execute_phase(HookPhase.POST_COMMIT, context)
 
             return IngestionResult(
                 success=True,
@@ -289,15 +304,15 @@ class IngestionPipeline:
 
         """
         # Generate entity URI
-        entity_id = data.get("id", data.get("_id", self._generate_id()))
+        entity_id = data.get("id") or data.get("_id") or data.get("event_id") or self._generate_id()
         subject = URIRef(f"{base_uri}{entity_id}")
 
-        # Add type if specified
-        if "type" in data:
-            type_uri = (
-                URIRef(data["type"]) if data["type"].startswith("http") else UNRDF[data["type"]]
-            )
+        # Add type if specified (both URI type and literal classification)
+        type_value = data.get("type")
+        if isinstance(type_value, str) and type_value:
+            type_uri = URIRef(type_value) if type_value.startswith("http") else UNRDF[type_value]
             graph.add((subject, RDF.type, type_uri))
+            graph.add((subject, UNRDF.type, Literal(type_value)))
 
         # Convert properties to RDF
         for key, value in data.items():
@@ -452,6 +467,7 @@ class IngestionPipeline:
 
         # Query for target entities
         target_query = f"""
+        PREFIX unrdf: <{UNRDF}>
         SELECT ?target WHERE {{
             {target_pattern}
         }}

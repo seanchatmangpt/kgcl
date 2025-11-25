@@ -1,6 +1,6 @@
 """Fixture-based test example."""
 
-from src.core import fixture_test, TestFixture
+from src.core import TestFixture, fixture_test
 
 
 class UserFixture(TestFixture):
@@ -49,9 +49,6 @@ def test_metadata(fixture):
 
 
 if __name__ == "__main__":
-    import asyncio
-    from src.core.decorators import TestMetadata
-
     # Manual execution
     test_user_exists()
     test_user_email_update()

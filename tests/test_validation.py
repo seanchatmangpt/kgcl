@@ -2,9 +2,13 @@
 
 import pytest
 from src.validation import (
-    Property, PropertyTest, PropertyGenerator,
-    Invariant, InvariantValidator,
-    Guard, ValidatedValue
+    Guard,
+    Invariant,
+    InvariantValidator,
+    Property,
+    PropertyGenerator,
+    PropertyTest,
+    ValidatedValue,
 )
 
 
@@ -13,35 +17,31 @@ class TestProperty:
 
     def test_property_builder(self):
         """Test property builder."""
-        test = (Property()
+        test = (
+            Property()
             .name("test_add")
             .predicate(lambda a, b: a + b == b + a)
             .example(1, 2)
             .example(3, 4)
-            .build())
-        
+            .build()
+        )
+
         assert test.name == "test_add"
         assert len(test.examples) == 2
 
     def test_property_test_run(self):
         """Test running property test."""
         test = PropertyTest(
-            "commutative",
-            lambda a, b: a + b == b + a,
-            examples=[(1, 2), (3, 4), (5, 6)]
+            "commutative", lambda a, b: a + b == b + a, examples=[(1, 2), (3, 4), (5, 6)]
         )
-        
+
         assert test.run() is True
         assert test.failure_count() == 0
 
     def test_property_test_failure(self):
         """Test property test with failures."""
-        test = PropertyTest(
-            "always_true",
-            lambda x: False,
-            examples=[(1,), (2,), (3,)]
-        )
-        
+        test = PropertyTest("always_true", lambda x: False, examples=[(1,), (2,), (3,)])
+
         assert test.run() is False
         assert test.failure_count() == 3
 
@@ -75,10 +75,7 @@ class TestInvariant:
 
     def test_invariant_validation(self):
         """Test invariant validation."""
-        inv = Invariant(
-            "positive",
-            lambda x: x > 0
-        )
+        inv = Invariant("positive", lambda x: x > 0)
         assert inv.validate(42) is True
         assert inv.validate(-1) is False
 
@@ -87,7 +84,7 @@ class TestInvariant:
         validator = InvariantValidator()
         validator.add("positive", lambda x: x > 0)
         validator.add("under_100", lambda x: x < 100)
-        
+
         assert validator.validate_all(50) is True
         assert validator.validate_all(150) is False
         assert validator.failure_count() == 1
@@ -125,32 +122,20 @@ class TestValidatedValue:
 
     def test_valid_value(self):
         """Test valid value."""
-        val = ValidatedValue(
-            42,
-            [("positive", lambda x: x > 0)]
-        )
+        val = ValidatedValue(42, [("positive", lambda x: x > 0)])
         assert val.is_valid() is True
         assert val.get() == 42
 
     def test_invalid_value(self):
         """Test invalid value."""
-        val = ValidatedValue(
-            -1,
-            [("positive", lambda x: x > 0)]
-        )
+        val = ValidatedValue(-1, [("positive", lambda x: x > 0)])
         assert val.is_valid() is False
         with pytest.raises(ValueError):
             val.get()
 
     def test_multiple_validators(self):
         """Test multiple validators."""
-        val = ValidatedValue(
-            50,
-            [
-                ("positive", lambda x: x > 0),
-                ("under_100", lambda x: x < 100),
-            ]
-        )
+        val = ValidatedValue(50, [("positive", lambda x: x > 0), ("under_100", lambda x: x < 100)])
         assert val.is_valid() is True
 
     def test_get_or(self):

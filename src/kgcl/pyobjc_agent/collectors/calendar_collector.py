@@ -8,9 +8,8 @@ Periodically queries calendar events to track:
 - Calendar-based context
 """
 
-from typing import Optional, Dict, Any, Set
 import logging
-from datetime import datetime
+from typing import Any
 
 from ..plugins import get_registry
 from .base import BaseCollector, CollectorConfig
@@ -38,7 +37,7 @@ class CalendarCollector(BaseCollector):
         """
         super().__init__(config)
         self._plugin = None
-        self._seen_event_ids: Set[str] = set()
+        self._seen_event_ids: set[str] = set()
         self._last_availability_status = None
 
     def validate_configuration(self) -> bool:
@@ -65,11 +64,12 @@ class CalendarCollector(BaseCollector):
         logger.info("Calendar collector validated successfully")
         return True
 
-    def collect_event(self) -> Optional[Dict[str, Any]]:
+    def collect_event(self) -> dict[str, Any] | None:
         """
         Collect calendar event data.
 
-        Returns:
+        Returns
+        -------
             Event data with calendar information or None
         """
         try:
@@ -78,11 +78,7 @@ class CalendarCollector(BaseCollector):
 
             if upcoming_data.error:
                 logger.warning(f"Error collecting upcoming events: {upcoming_data.error}")
-                return {
-                    "error": upcoming_data.error,
-                    "upcoming_count": 0,
-                    "events_today": 0
-                }
+                return {"error": upcoming_data.error, "upcoming_count": 0, "events_today": 0}
 
             upcoming = upcoming_data.data
 
@@ -93,8 +89,8 @@ class CalendarCollector(BaseCollector):
             # Detect availability changes
             current_status = availability.get("is_busy", False)
             status_changed = (
-                self._last_availability_status is not None and
-                current_status != self._last_availability_status
+                self._last_availability_status is not None
+                and current_status != self._last_availability_status
             )
             self._last_availability_status = current_status
 
@@ -112,10 +108,7 @@ class CalendarCollector(BaseCollector):
                 next_event_id = self._make_event_id(next_event)
 
             # Check for new events
-            new_event_started = (
-                current_event_id and
-                current_event_id not in self._seen_event_ids
-            )
+            new_event_started = current_event_id and current_event_id not in self._seen_event_ids
 
             if current_event_id:
                 self._seen_event_ids.add(current_event_id)
@@ -137,7 +130,7 @@ class CalendarCollector(BaseCollector):
                 "new_event_started": new_event_started,
                 "current_event": current_event,
                 "next_event": next_event,
-                "next_free_slot": availability.get("next_free_slot")
+                "next_free_slot": availability.get("next_free_slot"),
             }
 
             return event
@@ -146,14 +139,15 @@ class CalendarCollector(BaseCollector):
             logger.error(f"Error in calendar collection: {e}")
             raise
 
-    def _make_event_id(self, event: Dict[str, Any]) -> str:
+    def _make_event_id(self, event: dict[str, Any]) -> str:
         """
         Create unique ID for an event.
 
         Args:
             event: Event dictionary
 
-        Returns:
+        Returns
+        -------
             Unique event identifier
         """
         return f"{event.get('title', '')}:{event.get('start_date', '')}"
@@ -161,8 +155,8 @@ class CalendarCollector(BaseCollector):
 
 def create_calendar_collector(
     interval_seconds: float = 300.0,  # 5 minutes
-    output_path: Optional[str] = None,
-    **kwargs
+    output_path: str | None = None,
+    **kwargs,
 ) -> CalendarCollector:
     """
     Factory function to create calendar collector.
@@ -172,7 +166,8 @@ def create_calendar_collector(
         output_path: Path to JSONL output file
         **kwargs: Additional collector config parameters
 
-    Returns:
+    Returns
+    -------
         Configured CalendarCollector instance
     """
     config = CollectorConfig(
@@ -181,7 +176,7 @@ def create_calendar_collector(
         output_path=output_path or "/Users/sac/dev/kgcl/data/calendar_events.jsonl",
         batch_size=kwargs.get("batch_size", 10),
         batch_timeout_seconds=kwargs.get("batch_timeout_seconds", 600.0),
-        **{k: v for k, v in kwargs.items() if k not in ["batch_size", "batch_timeout_seconds"]}
+        **{k: v for k, v in kwargs.items() if k not in ["batch_size", "batch_timeout_seconds"]},
     )
 
     return CalendarCollector(config)

@@ -6,15 +6,12 @@ following Chicago School TDD (no mocking domain objects).
 """
 
 import pytest
-import asyncio
-from pathlib import Path
-from datetime import datetime
-from kgcl.hooks.security import ErrorSanitizer, SanitizedError
-from kgcl.hooks.sandbox import SandboxRestrictions
-from kgcl.hooks.lifecycle import HookExecutionPipeline, HookContext
-from kgcl.hooks.core import Hook
-from kgcl.hooks.conditions import Condition, ConditionResult
 
+from kgcl.hooks.conditions import Condition, ConditionResult
+from kgcl.hooks.core import Hook
+from kgcl.hooks.lifecycle import HookContext, HookExecutionPipeline
+from kgcl.hooks.sandbox import SandboxRestrictions
+from kgcl.hooks.security import ErrorSanitizer
 
 # ============================================================================
 # ErrorSanitizer Tests
@@ -123,8 +120,7 @@ def test_multiple_sensitive_patterns():
     sanitizer = ErrorSanitizer()
 
     error = Exception(
-        'File "/usr/lib/hooks.py", line 42, in execute_hook: '
-        "variable_name = invalid_value"
+        'File "/usr/lib/hooks.py", line 42, in execute_hook: variable_name = invalid_value'
     )
     result = sanitizer.sanitize(error)
 
@@ -185,10 +181,7 @@ def test_validate_path_normalization():
 def test_validate_restrictions_valid():
     """Test that valid configuration passes validation."""
     sandbox = SandboxRestrictions(
-        allowed_paths=["/tmp"],
-        memory_limit_mb=512,
-        timeout_ms=30000,
-        max_open_files=100,
+        allowed_paths=["/tmp"], memory_limit_mb=512, timeout_ms=30000, max_open_files=100
     )
 
     assert sandbox.validate_restrictions()
@@ -266,9 +259,7 @@ def test_process_spawn_restrictions():
     sandbox = SandboxRestrictions(allowed_paths=["/tmp"], no_process_spawn=True)
     assert sandbox.no_process_spawn
 
-    sandbox_with_spawn = SandboxRestrictions(
-        allowed_paths=["/tmp"], no_process_spawn=False
-    )
+    sandbox_with_spawn = SandboxRestrictions(allowed_paths=["/tmp"], no_process_spawn=False)
     assert not sandbox_with_spawn.no_process_spawn
 
 
@@ -284,7 +275,7 @@ async def test_error_sanitization_on_execute():
 
     # Create a hook that raises an error with sensitive info
     def failing_handler(context):
-        raise ValueError('Error in /usr/local/lib/python3.12/hooks.py line 42')
+        raise ValueError("Error in /usr/local/lib/python3.12/hooks.py line 42")
 
     class AlwaysTrueCondition(Condition):
         async def evaluate(self, context):

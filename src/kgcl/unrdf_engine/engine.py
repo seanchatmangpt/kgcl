@@ -2,10 +2,9 @@
 
 from __future__ import annotations
 
-import json
 from collections.abc import Iterator
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -85,7 +84,7 @@ class UnrdfEngine:
     ...         URIRef("http://example.org/person1"),
     ...         URIRef("http://xmlns.com/foaf/0.1/name"),
     ...         Literal("Alice"),
-    ...         txn
+    ...         txn,
     ...     )
     >>> results = engine.query("SELECT ?name WHERE { ?s foaf:name ?name }")
 
@@ -186,11 +185,7 @@ class UnrdfEngine:
         if reason:
             span.set_attribute("transaction.reason", reason)
 
-        provenance = ProvenanceRecord(
-            agent=agent,
-            timestamp=datetime.now(timezone.utc),
-            reason=reason,
-        )
+        provenance = ProvenanceRecord(agent=agent, timestamp=datetime.now(UTC), reason=reason)
 
         txn = Transaction(transaction_id=transaction_id, provenance=provenance)
         self._transactions[transaction_id] = txn
@@ -198,11 +193,7 @@ class UnrdfEngine:
 
     @tracer.start_as_current_span("unrdf.add_triple")
     def add_triple(
-        self,
-        subject: URIRef,
-        predicate: URIRef,
-        obj: URIRef | Literal,
-        transaction: Transaction,
+        self, subject: URIRef, predicate: URIRef, obj: URIRef | Literal, transaction: Transaction
     ) -> None:
         """Add a triple to the graph within a transaction.
 
@@ -232,11 +223,7 @@ class UnrdfEngine:
 
     @tracer.start_as_current_span("unrdf.remove_triple")
     def remove_triple(
-        self,
-        subject: URIRef,
-        predicate: URIRef,
-        obj: URIRef | Literal,
-        transaction: Transaction,
+        self, subject: URIRef, predicate: URIRef, obj: URIRef | Literal, transaction: Transaction
     ) -> None:
         """Remove a triple from the graph within a transaction.
 
@@ -282,7 +269,8 @@ class UnrdfEngine:
         if self._hook_executor:
             global HookContext, HookPhase
             if HookContext is None:
-                from kgcl.unrdf_engine.hooks import HookContext as HC, HookPhase as HP
+                from kgcl.unrdf_engine.hooks import HookContext as HC
+                from kgcl.unrdf_engine.hooks import HookPhase as HP
 
                 HookContext = HC
                 HookPhase = HP
@@ -371,7 +359,8 @@ class UnrdfEngine:
         if self._hook_executor:
             global HookContext, HookPhase
             if HookContext is None:
-                from kgcl.unrdf_engine.hooks import HookContext as HC, HookPhase as HP
+                from kgcl.unrdf_engine.hooks import HookContext as HC
+                from kgcl.unrdf_engine.hooks import HookPhase as HP
 
                 HookContext = HC
                 HookPhase = HP
@@ -527,7 +516,8 @@ class UnrdfEngine:
 
         global HookContext, HookPhase
         if HookContext is None:
-            from kgcl.unrdf_engine.hooks import HookContext as HC, HookPhase as HP
+            from kgcl.unrdf_engine.hooks import HookContext as HC
+            from kgcl.unrdf_engine.hooks import HookPhase as HP
 
             HookContext = HC
             HookPhase = HP
@@ -540,10 +530,7 @@ class UnrdfEngine:
             raise ValueError(msg) from e
 
         context = HookContext(
-            phase=phase_enum,
-            graph=self.graph,
-            delta=delta,
-            transaction_id="manual",
+            phase=phase_enum, graph=self.graph, delta=delta, transaction_id="manual"
         )
 
         self._hook_executor.execute_phase(phase_enum, context)
@@ -580,7 +567,11 @@ class UnrdfEngine:
         if not self._hook_registry:
             return {"hooks_enabled": False}
 
-        stats = self._hook_registry.get_statistics() if hasattr(self._hook_registry, "get_statistics") else {}
+        stats = (
+            self._hook_registry.get_statistics()
+            if hasattr(self._hook_registry, "get_statistics")
+            else {}
+        )
         stats["hooks_enabled"] = True
         stats["has_executor"] = self._hook_executor is not None
 

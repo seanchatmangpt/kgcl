@@ -3,17 +3,19 @@
 Represents a single member of a test swarm.
 """
 
-from typing import Any, Optional, Dict, Callable
+import uuid
+from collections.abc import Callable
 from dataclasses import dataclass
 from datetime import datetime
-import uuid
+from typing import Any
 
-from .task import TestTask, TaskResult, TaskStatus
+from .task import TaskResult, TaskStatus, TestTask
 
 
 @dataclass
 class MemberMetadata:
     """Metadata about a swarm member"""
+
     member_id: str
     name: str
     created_at: datetime
@@ -35,12 +37,10 @@ class SwarmMember:
     def __init__(self, name: str) -> None:
         self._name = name
         self._metadata = MemberMetadata(
-            member_id=str(uuid.uuid4())[:8],
-            name=name,
-            created_at=datetime.now()
+            member_id=str(uuid.uuid4())[:8], name=name, created_at=datetime.now()
         )
-        self._task_handlers: Dict[str, Callable[[TestTask], TaskResult]] = {}
-        self._state: Dict[str, Any] = {}
+        self._task_handlers: dict[str, Callable[[TestTask], TaskResult]] = {}
+        self._state: dict[str, Any] = {}
 
     def name(self) -> str:
         """Get member name"""
@@ -50,11 +50,7 @@ class SwarmMember:
         """Get member metadata"""
         return self._metadata
 
-    def register_handler(
-        self,
-        task_type: str,
-        handler: Callable[[TestTask], TaskResult]
-    ) -> None:
+    def register_handler(self, task_type: str, handler: Callable[[TestTask], TaskResult]) -> None:
         """Register handler for task type
 
         Args:
@@ -69,17 +65,19 @@ class SwarmMember:
         Args:
             task: Task to execute
 
-        Returns:
+        Returns
+        -------
             TaskResult with execution outcome
 
-        Raises:
+        Raises
+        ------
             ValueError: If no handler registered for task type
         """
         if task.task_type not in self._task_handlers:
             return TaskResult(
                 task_name=task.name,
                 status=TaskStatus.FAILED,
-                error=f"No handler registered for task type: {task.task_type}"
+                error=f"No handler registered for task type: {task.task_type}",
             )
 
         try:
@@ -90,10 +88,7 @@ class SwarmMember:
         except Exception as e:
             self._metadata.tasks_failed += 1
             return TaskResult(
-                task_name=task.name,
-                status=TaskStatus.FAILED,
-                error=str(e),
-                exception=e
+                task_name=task.name, status=TaskStatus.FAILED, error=str(e), exception=e
             )
 
     def set_state(self, key: str, value: Any) -> None:

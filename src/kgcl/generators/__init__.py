@@ -26,34 +26,30 @@ Version: 1.0.0
 Author: KGC Development Team
 """
 
+from .agenda import AgendaGenerator, CalendarEvent, FocusBlock, Reminder
 from .base import ProjectionGenerator
-from .agenda import AgendaGenerator, CalendarEvent, Reminder, FocusBlock
-from .quality import QualityReportGenerator, Violation, QualityCategory
-from .conflict import ConflictReportGenerator, TimeConflict, ResourceConflict
-from .stale import StaleItemsGenerator, StaleItem, CompletedItem
+from .conflict import ConflictReportGenerator, ResourceConflict, TimeConflict
+from .quality import QualityCategory, QualityReportGenerator, Violation
+from .stale import CompletedItem, StaleItem, StaleItemsGenerator
 
 __version__ = "1.0.0"
 
 __all__ = [
     # Base generator
     "ProjectionGenerator",
-
     # Agenda generator
     "AgendaGenerator",
     "CalendarEvent",
     "Reminder",
     "FocusBlock",
-
     # Quality generator
     "QualityReportGenerator",
     "Violation",
     "QualityCategory",
-
     # Conflict generator
     "ConflictReportGenerator",
     "TimeConflict",
     "ResourceConflict",
-
     # Stale items generator
     "StaleItemsGenerator",
     "StaleItem",
@@ -64,7 +60,8 @@ __all__ = [
 def get_available_generators() -> dict[str, type[ProjectionGenerator]]:
     """Get dictionary of available generator classes.
 
-    Returns:
+    Returns
+    -------
         Dictionary mapping generator names to classes
     """
     return {
@@ -75,11 +72,7 @@ def get_available_generators() -> dict[str, type[ProjectionGenerator]]:
     }
 
 
-def create_generator(
-    name: str,
-    graph,
-    **kwargs
-) -> ProjectionGenerator:
+def create_generator(name: str, graph, **kwargs) -> ProjectionGenerator:
     """Factory function for creating generator instances.
 
     Args:
@@ -87,10 +80,12 @@ def create_generator(
         graph: RDF graph instance
         **kwargs: Additional arguments for specific generators
 
-    Returns:
+    Returns
+    -------
         Initialized generator instance
 
-    Raises:
+    Raises
+    ------
         ValueError: If generator name is not recognized
 
     Example:
@@ -102,9 +97,7 @@ def create_generator(
 
     if name not in generators:
         available = ", ".join(generators.keys())
-        raise ValueError(
-            f"Unknown generator: {name}. Available: {available}"
-        )
+        raise ValueError(f"Unknown generator: {name}. Available: {available}")
 
     generator_class = generators[name]
     return generator_class(graph, **kwargs)

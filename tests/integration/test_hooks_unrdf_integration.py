@@ -5,22 +5,17 @@ feature materialization, and cross-hook communication.
 """
 
 import tempfile
+from datetime import UTC
 from pathlib import Path
 
 import pytest
-from rdflib import Graph, Literal, Namespace, URIRef
+from rdflib import Literal, Namespace, URIRef
 from rdflib.namespace import RDF
 
 from kgcl.unrdf_engine.engine import UnrdfEngine
 from kgcl.unrdf_engine.hook_registry import PersistentHookRegistry
-from kgcl.unrdf_engine.hooks import (
-    HookContext,
-    HookPhase,
-    KnowledgeHook,
-    TriggerCondition,
-)
+from kgcl.unrdf_engine.hooks import HookContext, HookPhase, KnowledgeHook, TriggerCondition
 from kgcl.unrdf_engine.ingestion import IngestionPipeline
-from kgcl.unrdf_engine.validation import ShaclValidator
 
 UNRDF = Namespace("http://unrdf.org/ontology/")
 FOAF = Namespace("http://xmlns.com/foaf/0.1/")
@@ -39,10 +34,7 @@ class TestHookUnrdfIntegration:
 
             class DeltaCapture(KnowledgeHook):
                 def __init__(self):
-                    super().__init__(
-                        name="delta_capture",
-                        phases=[HookPhase.ON_CHANGE],
-                    )
+                    super().__init__(name="delta_capture", phases=[HookPhase.ON_CHANGE])
 
                 def execute(self, context: HookContext):
                     # Capture delta triples
@@ -53,13 +45,13 @@ class TestHookUnrdfIntegration:
 
             # Create pipeline with hook executor
             from kgcl.unrdf_engine.hooks import HookExecutor
+
             hook_executor = HookExecutor(registry)
             pipeline = IngestionPipeline(engine, hook_executor=hook_executor)
 
             # Ingest data
             result = pipeline.ingest_json(
-                data={"id": "person1", "type": "Person", "name": "Alice"},
-                agent="test_agent",
+                data={"id": "person1", "type": "Person", "name": "Alice"}, agent="test_agent"
             )
 
             assert result.success is True
@@ -75,10 +67,7 @@ class TestHookUnrdfIntegration:
 
             class DataExaminer(KnowledgeHook):
                 def __init__(self):
-                    super().__init__(
-                        name="data_examiner",
-                        phases=[HookPhase.PRE_TRANSACTION],
-                    )
+                    super().__init__(name="data_examiner", phases=[HookPhase.PRE_TRANSACTION])
 
                 def execute(self, context: HookContext):
                     # Check if Person type exists in delta
@@ -89,12 +78,11 @@ class TestHookUnrdfIntegration:
             registry.register(DataExaminer())
 
             from kgcl.unrdf_engine.hooks import HookExecutor
+
             hook_executor = HookExecutor(registry)
             pipeline = IngestionPipeline(engine, hook_executor=hook_executor)
 
-            result = pipeline.ingest_json(
-                data={"id": "person1", "type": "Person"}, agent="test"
-            )
+            result = pipeline.ingest_json(data={"id": "person1", "type": "Person"}, agent="test")
 
             assert result.success is True
             assert examined_data["found_person"] is True
@@ -107,32 +95,23 @@ class TestHookUnrdfIntegration:
 
             class DataModifier(KnowledgeHook):
                 def __init__(self):
-                    super().__init__(
-                        name="data_modifier",
-                        phases=[HookPhase.PRE_TRANSACTION],
-                    )
+                    super().__init__(name="data_modifier", phases=[HookPhase.PRE_TRANSACTION])
 
                 def execute(self, context: HookContext):
                     # Add a timestamp triple to delta
-                    from datetime import datetime, timezone
+                    from datetime import datetime
 
                     for s, p, o in context.delta:
                         if str(p) == str(RDF.type):
                             context.delta.add(
-                                (
-                                    s,
-                                    UNRDF.processedAt,
-                                    Literal(datetime.now(timezone.utc).isoformat()),
-                                )
+                                (s, UNRDF.processedAt, Literal(datetime.now(UTC).isoformat()))
                             )
                             break
 
             registry.register(DataModifier())
             pipeline = IngestionPipeline(engine)
 
-            result = pipeline.ingest_json(
-                data={"id": "person1", "type": "Person"}, agent="test"
-            )
+            result = pipeline.ingest_json(data={"id": "person1", "type": "Person"}, agent="test")
 
             assert result.success is True
 
@@ -152,10 +131,7 @@ class TestHookUnrdfIntegration:
 
             class RejectionHook(KnowledgeHook):
                 def __init__(self):
-                    super().__init__(
-                        name="rejection_hook",
-                        phases=[HookPhase.POST_VALIDATION],
-                    )
+                    super().__init__(name="rejection_hook", phases=[HookPhase.POST_VALIDATION])
 
                 def execute(self, context: HookContext):
                     # Reject if data contains "forbidden"
@@ -186,14 +162,11 @@ class TestHookUnrdfIntegration:
             """
             validator.load_shapes_from_string(shapes_ttl)
 
-            pipeline = IngestionPipeline(
-                engine, validator=validator, hook_executor=hook_executor
-            )
+            pipeline = IngestionPipeline(engine, validator=validator, hook_executor=hook_executor)
 
             # Try to ingest forbidden data
             result = pipeline.ingest_json(
-                data={"id": "test", "type": "TestEntity", "name": "Forbidden User"},
-                agent="test",
+                data={"id": "test", "type": "TestEntity", "name": "Forbidden User"}, agent="test"
             )
 
             # Should fail with rollback
@@ -235,10 +208,7 @@ class TestHookUnrdfIntegration:
 
             class FailureHook(KnowledgeHook):
                 def __init__(self):
-                    super().__init__(
-                        name="failure_hook",
-                        phases=[HookPhase.PRE_TRANSACTION],
-                    )
+                    super().__init__(name="failure_hook", phases=[HookPhase.PRE_TRANSACTION])
 
                 def execute(self, context: HookContext):
                     context.metadata["should_rollback"] = True
@@ -271,12 +241,7 @@ class TestHookUnrdfIntegration:
 
             # Create transaction manually
             txn = engine.transaction("test_agent", "test reason")
-            engine.add_triple(
-                URIRef("http://example.org/test"),
-                RDF.type,
-                UNRDF.TestEntity,
-                txn,
-            )
+            engine.add_triple(URIRef("http://example.org/test"), RDF.type, UNRDF.TestEntity, txn)
             engine.commit(txn)
 
             # Check receipts
@@ -340,10 +305,7 @@ class TestHookUnrdfIntegration:
             # Add some data
             txn = engine.transaction("test", "setup")
             engine.add_triple(
-                URIRef("http://example.org/person1"),
-                FOAF.name,
-                Literal("Alice"),
-                txn,
+                URIRef("http://example.org/person1"), FOAF.name, Literal("Alice"), txn
             )
             engine.commit(txn)
 
@@ -401,9 +363,7 @@ class TestHookUnrdfIntegration:
             registry.register(SlowHook())
 
             txn = engine.transaction("test", "performance test")
-            engine.add_triple(
-                URIRef("http://example.org/test"), RDF.type, UNRDF.Test, txn
-            )
+            engine.add_triple(URIRef("http://example.org/test"), RDF.type, UNRDF.Test, txn)
             engine.commit(txn)
 
             # Check receipts have duration
@@ -442,9 +402,7 @@ class TestHookUnrdfIntegration:
             class ExportHook(KnowledgeHook):
                 def __init__(self):
                     super().__init__(
-                        name="export_hook",
-                        phases=[HookPhase.POST_COMMIT],
-                        priority=100,
+                        name="export_hook", phases=[HookPhase.POST_COMMIT], priority=100
                     )
 
                 def execute(self, context: HookContext):

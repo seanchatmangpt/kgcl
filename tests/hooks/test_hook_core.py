@@ -5,33 +5,34 @@ These tests define the BEHAVIOR of the hooks system and drive the implementation
 No mocking of core domain objects - real object collaboration testing.
 """
 
-import pytest
-from datetime import datetime, timedelta
-from typing import Any, Dict
 import asyncio
+from datetime import datetime
+from typing import Any
 
+import pytest
+
+from kgcl.hooks.conditions import Condition, ConditionResult
 from kgcl.hooks.core import (
     Hook,
-    HookState,
+    HookExecutor,
     HookReceipt,
     HookRegistry,
-    HookExecutor,
+    HookState,
     HookValidationError,
 )
-from kgcl.hooks.conditions import Condition, ConditionResult
 
 
 class AlwaysTrueCondition(Condition):
     """Test condition that always evaluates to true."""
 
-    async def evaluate(self, context: Dict[str, Any]) -> ConditionResult:
+    async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
         return ConditionResult(triggered=True, metadata={"test": "always_true"})
 
 
 class AlwaysFalseCondition(Condition):
     """Test condition that always evaluates to false."""
 
-    async def evaluate(self, context: Dict[str, Any]) -> ConditionResult:
+    async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
         return ConditionResult(triggered=False, metadata={"test": "always_false"})
 
 
@@ -42,17 +43,17 @@ class SlowCondition(Condition):
         super().__init__()
         self.delay = delay
 
-    async def evaluate(self, context: Dict[str, Any]) -> ConditionResult:
+    async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
         await asyncio.sleep(self.delay)
         return ConditionResult(triggered=True, metadata={"delay": self.delay})
 
 
-def simple_handler(context: Dict[str, Any]) -> Dict[str, Any]:
+def simple_handler(context: dict[str, Any]) -> dict[str, Any]:
     """Simple test handler that returns context."""
     return {"processed": True, "input": context}
 
 
-def failing_handler(context: Dict[str, Any]) -> Dict[str, Any]:
+def failing_handler(context: dict[str, Any]) -> dict[str, Any]:
     """Handler that always raises an error."""
     raise ValueError("Handler failed intentionally")
 
@@ -79,29 +80,16 @@ class TestHookCreation:
         # Missing name
         with pytest.raises(HookValidationError, match="name"):
             Hook(
-                name="",
-                description="Test",
-                condition=AlwaysTrueCondition(),
-                handler=simple_handler,
+                name="", description="Test", condition=AlwaysTrueCondition(), handler=simple_handler
             )
 
         # Missing condition
         with pytest.raises(HookValidationError, match="condition"):
-            Hook(
-                name="test",
-                description="Test",
-                condition=None,
-                handler=simple_handler,
-            )
+            Hook(name="test", description="Test", condition=None, handler=simple_handler)
 
         # Missing handler
         with pytest.raises(HookValidationError, match="handler"):
-            Hook(
-                name="test",
-                description="Test",
-                condition=AlwaysTrueCondition(),
-                handler=None,
-            )
+            Hook(name="test", description="Test", condition=AlwaysTrueCondition(), handler=None)
 
 
 class TestHookLifecycle:
@@ -197,10 +185,7 @@ class TestHookPriority:
     def test_hook_priority_defaults_to_50(self):
         """Hook priority defaults to 50 if not specified."""
         hook = Hook(
-            name="test",
-            description="Test",
-            condition=AlwaysTrueCondition(),
-            handler=simple_handler,
+            name="test", description="Test", condition=AlwaysTrueCondition(), handler=simple_handler
         )
 
         assert hook.priority == 50
@@ -232,10 +217,7 @@ class TestHookEnableDisable:
     def test_hook_can_be_disabled_without_deletion(self):
         """Hook can be enabled/disabled without deletion."""
         hook = Hook(
-            name="test",
-            description="Test",
-            condition=AlwaysTrueCondition(),
-            handler=simple_handler,
+            name="test", description="Test", condition=AlwaysTrueCondition(), handler=simple_handler
         )
 
         assert hook.enabled is True  # Default enabled
@@ -308,10 +290,7 @@ class TestHookExecution:
     async def test_hook_execution_produces_receipt(self):
         """Hook execution produces receipt with timestamp, result, error."""
         hook = Hook(
-            name="test",
-            description="Test",
-            condition=AlwaysTrueCondition(),
-            handler=simple_handler,
+            name="test", description="Test", condition=AlwaysTrueCondition(), handler=simple_handler
         )
 
         executor = HookExecutor()

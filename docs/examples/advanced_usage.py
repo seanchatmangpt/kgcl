@@ -2,7 +2,7 @@
 
 import asyncio
 import tempfile
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 from kgcl.ingestion import AppEvent, BrowserVisit, IngestionService
@@ -24,9 +24,7 @@ def example_1_custom_configuration():
         # Create custom config
         config = IngestionConfig(
             collector=CollectorConfig(
-                output_directory=Path(tmpdir),
-                batch_size=50,
-                flush_interval_seconds=30,
+                output_directory=Path(tmpdir), batch_size=50, flush_interval_seconds=30
             ),
             filter=FilterConfig(
                 excluded_apps=["com.apple.Spotlight", "com.test.app"],
@@ -66,7 +64,7 @@ def example_2_async_ingestion():
         service.start()
 
         # Create events
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         events = [
             AppEvent(
                 event_id=f"evt_{i:03d}",
@@ -96,15 +94,12 @@ def example_3_incremental_features():
     print("-" * 50)
 
     config = IngestionConfig(
-        feature=FeatureConfig(
-            enabled_features=["app_usage_time"],
-            incremental_updates=True,
-        )
+        feature=FeatureConfig(enabled_features=["app_usage_time"], incremental_updates=True)
     )
 
     service = IngestionService(config)
 
-    now = datetime.now(timezone.utc).replace(tzinfo=None)
+    now = datetime.now(UTC).replace(tzinfo=None)
     window_start = now.replace(minute=0, second=0, microsecond=0)
     window_end = window_start + timedelta(hours=1)
 
@@ -120,11 +115,7 @@ def example_3_incremental_features():
     ]
 
     # Materialize initial features
-    initial_features = service.materializer.materialize(
-        initial_events,
-        window_start,
-        window_end,
-    )
+    initial_features = service.materializer.materialize(initial_events, window_start, window_end)
 
     print(f"Initial features: {len(initial_features)}")
     for feature in initial_features:
@@ -142,10 +133,7 @@ def example_3_incremental_features():
     ]
 
     # Incremental update
-    updated_features = service.materializer.materialize_incremental(
-        new_events,
-        initial_features,
-    )
+    updated_features = service.materializer.materialize_incremental(new_events, initial_features)
 
     print(f"\nUpdated features: {len(updated_features)}")
     for feature in updated_features:
@@ -163,10 +151,7 @@ def example_4_error_recovery():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         config = IngestionConfig(
-            collector=CollectorConfig(
-                output_directory=Path(tmpdir),
-                enable_recovery=True,
-            )
+            collector=CollectorConfig(output_directory=Path(tmpdir), enable_recovery=True)
         )
 
         service = IngestionService(config)
@@ -176,17 +161,19 @@ def example_4_error_recovery():
         with corrupted_file.open("w") as f:
             # Valid event
             f.write(
-                json.dumps({
-                    "type": "event",
-                    "batch_id": "batch_001",
-                    "event_type": "AppEvent",
-                    "data": {
-                        "event_id": "evt_001",
-                        "timestamp": "2024-11-24T10:00:00",
-                        "app_name": "com.apple.Safari",
-                        "schema_version": "1.0.0",
-                    },
-                })
+                json.dumps(
+                    {
+                        "type": "event",
+                        "batch_id": "batch_001",
+                        "event_type": "AppEvent",
+                        "data": {
+                            "event_id": "evt_001",
+                            "timestamp": "2024-11-24T10:00:00",
+                            "app_name": "com.apple.Safari",
+                            "schema_version": "1.0.0",
+                        },
+                    }
+                )
                 + "\n"
             )
 
@@ -195,17 +182,19 @@ def example_4_error_recovery():
 
             # Another valid event
             f.write(
-                json.dumps({
-                    "type": "event",
-                    "batch_id": "batch_001",
-                    "event_type": "AppEvent",
-                    "data": {
-                        "event_id": "evt_002",
-                        "timestamp": "2024-11-24T10:05:00",
-                        "app_name": "com.apple.Mail",
-                        "schema_version": "1.0.0",
-                    },
-                })
+                json.dumps(
+                    {
+                        "type": "event",
+                        "batch_id": "batch_001",
+                        "event_type": "AppEvent",
+                        "data": {
+                            "event_id": "evt_002",
+                            "timestamp": "2024-11-24T10:05:00",
+                            "app_name": "com.apple.Mail",
+                            "schema_version": "1.0.0",
+                        },
+                    }
+                )
                 + "\n"
             )
 
@@ -226,10 +215,7 @@ def example_5_advanced_filtering():
 
     config = IngestionConfig(
         filter=FilterConfig(
-            excluded_apps=[
-                "com.apple.Spotlight",
-                "com.apple.systemuiserver",
-            ],
+            excluded_apps=["com.apple.Spotlight", "com.apple.systemuiserver"],
             excluded_domains=["localhost", "127.0.0.1"],
             min_duration_seconds=5.0,
             privacy_mode=True,
@@ -239,7 +225,7 @@ def example_5_advanced_filtering():
     service = IngestionService(config)
     service.start()
 
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     test_events = [
         # Should be filtered (excluded app)
         AppEvent(
@@ -250,17 +236,11 @@ def example_5_advanced_filtering():
         ),
         # Should be filtered (too short)
         AppEvent(
-            event_id="filtered_2",
-            timestamp=now,
-            app_name="com.apple.Safari",
-            duration_seconds=2.0,
+            event_id="filtered_2", timestamp=now, app_name="com.apple.Safari", duration_seconds=2.0
         ),
         # Should pass
         AppEvent(
-            event_id="pass_1",
-            timestamp=now,
-            app_name="com.apple.Safari",
-            duration_seconds=10.0,
+            event_id="pass_1", timestamp=now, app_name="com.apple.Safari", duration_seconds=10.0
         ),
         # Should be filtered (excluded domain)
         BrowserVisit(
@@ -326,7 +306,7 @@ def example_6_custom_features():
         )
 
     # Generate test events
-    now = datetime.now(timezone.utc).replace(tzinfo=None)
+    now = datetime.now(UTC).replace(tzinfo=None)
     window_start = now.replace(minute=0, second=0, microsecond=0)
     window_end = window_start + timedelta(hours=1)
 
@@ -366,13 +346,10 @@ def example_7_rdf_export():
     service = IngestionService(config)
 
     # Create events
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     events = [
         AppEvent(
-            event_id="evt_001",
-            timestamp=now,
-            app_name="com.apple.Safari",
-            duration_seconds=120.0,
+            event_id="evt_001", timestamp=now, app_name="com.apple.Safari", duration_seconds=120.0
         ),
         BrowserVisit(
             event_id="evt_002",

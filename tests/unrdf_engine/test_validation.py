@@ -25,9 +25,7 @@ class TestValidationResult:
     def test_to_dict(self) -> None:
         """Test converting to dictionary."""
         result = ValidationResult(
-            conforms=False,
-            violations=[{"message": "test error"}],
-            report_text="Validation failed",
+            conforms=False, violations=[{"message": "test error"}], report_text="Validation failed"
         )
 
         result_dict = result.to_dict()

@@ -7,7 +7,7 @@ Pydantic models for representing various event types:
 - Feature instances and materialized features
 """
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import Enum
 from typing import Any, Literal
 
@@ -61,19 +61,23 @@ class AppEvent(BaseModel):
 
         # Convert to UTC if timezone-aware
         if dt.tzinfo is not None:
-            return dt.astimezone(timezone.utc).replace(tzinfo=None)
+            return dt.astimezone(UTC).replace(tzinfo=None)
         return dt
 
-    model_config = {"json_schema_extra": {"example": {
-        "event_id": "evt_app_001",
-        "timestamp": "2024-11-24T10:30:00",
-        "app_name": "com.apple.Safari",
-        "app_display_name": "Safari",
-        "window_title": "KGCL Documentation",
-        "duration_seconds": 120.5,
-        "process_id": 1234,
-        "schema_version": "1.0.0",
-    }}}
+    model_config = {
+        "json_schema_extra": {
+            "example": {
+                "event_id": "evt_app_001",
+                "timestamp": "2024-11-24T10:30:00",
+                "app_name": "com.apple.Safari",
+                "app_display_name": "Safari",
+                "window_title": "KGCL Documentation",
+                "duration_seconds": 120.5,
+                "process_id": 1234,
+                "schema_version": "1.0.0",
+            }
+        }
+    }
 
 
 class BrowserVisit(BaseModel):
@@ -106,21 +110,25 @@ class BrowserVisit(BaseModel):
             raise TypeError(msg)
 
         if dt.tzinfo is not None:
-            return dt.astimezone(timezone.utc).replace(tzinfo=None)
+            return dt.astimezone(UTC).replace(tzinfo=None)
         return dt
 
-    model_config = {"json_schema_extra": {"example": {
-        "event_id": "evt_browser_001",
-        "timestamp": "2024-11-24T10:30:00",
-        "url": "https://github.com/user/kgcl",
-        "domain": "github.com",
-        "title": "GitHub - user/kgcl",
-        "browser_name": "Safari",
-        "duration_seconds": 45.2,
-        "referrer": "https://google.com/search",
-        "tab_id": "tab_001",
-        "schema_version": "1.0.0",
-    }}}
+    model_config = {
+        "json_schema_extra": {
+            "example": {
+                "event_id": "evt_browser_001",
+                "timestamp": "2024-11-24T10:30:00",
+                "url": "https://github.com/user/kgcl",
+                "domain": "github.com",
+                "title": "GitHub - user/kgcl",
+                "browser_name": "Safari",
+                "duration_seconds": 45.2,
+                "referrer": "https://google.com/search",
+                "tab_id": "tab_001",
+                "schema_version": "1.0.0",
+            }
+        }
+    }
 
 
 class CalendarBlock(BaseModel):
@@ -154,22 +162,26 @@ class CalendarBlock(BaseModel):
             raise TypeError(msg)
 
         if dt.tzinfo is not None:
-            return dt.astimezone(timezone.utc).replace(tzinfo=None)
+            return dt.astimezone(UTC).replace(tzinfo=None)
         return dt
 
-    model_config = {"json_schema_extra": {"example": {
-        "event_id": "evt_cal_001",
-        "timestamp": "2024-11-24T14:00:00",
-        "end_time": "2024-11-24T15:00:00",
-        "title": "Team Standup",
-        "description": "Daily sync meeting",
-        "location": "Zoom",
-        "attendees": ["team@example.com"],
-        "organizer": "manager@example.com",
-        "calendar_name": "Work",
-        "is_all_day": False,
-        "schema_version": "1.0.0",
-    }}}
+    model_config = {
+        "json_schema_extra": {
+            "example": {
+                "event_id": "evt_cal_001",
+                "timestamp": "2024-11-24T14:00:00",
+                "end_time": "2024-11-24T15:00:00",
+                "title": "Team Standup",
+                "description": "Daily sync meeting",
+                "location": "Zoom",
+                "attendees": ["team@example.com"],
+                "organizer": "manager@example.com",
+                "calendar_name": "Work",
+                "is_all_day": False,
+                "schema_version": "1.0.0",
+            }
+        }
+    }
 
 
 class FeatureInstance(BaseModel):
@@ -182,12 +194,10 @@ class FeatureInstance(BaseModel):
     timestamp: datetime = Field(..., description="Observation time (UTC)")
     value: float | int | str | bool = Field(..., description="Feature value")
     source_events: list[str] = Field(
-        default_factory=list,
-        description="Source event IDs used in computation",
+        default_factory=list, description="Source event IDs used in computation"
     )
     metadata: dict[str, Any] = Field(
-        default_factory=dict,
-        description="Additional feature metadata",
+        default_factory=dict, description="Additional feature metadata"
     )
 
     @field_validator("timestamp", mode="before")
@@ -203,7 +213,7 @@ class FeatureInstance(BaseModel):
             raise TypeError(msg)
 
         if dt.tzinfo is not None:
-            return dt.astimezone(timezone.utc).replace(tzinfo=None)
+            return dt.astimezone(UTC).replace(tzinfo=None)
         return dt
 
 
@@ -217,15 +227,11 @@ class MaterializedFeature(BaseModel):
     window_start: datetime = Field(..., description="Aggregation window start (UTC)")
     window_end: datetime = Field(..., description="Aggregation window end (UTC)")
     aggregation_type: Literal["sum", "avg", "count", "min", "max", "distinct"] = Field(
-        ...,
-        description="Aggregation method",
+        ..., description="Aggregation method"
     )
     value: float | int | str | bool = Field(..., description="Aggregated value")
     sample_count: int = Field(..., ge=0, description="Number of samples in aggregation")
-    metadata: dict[str, Any] = Field(
-        default_factory=dict,
-        description="Additional metadata",
-    )
+    metadata: dict[str, Any] = Field(default_factory=dict, description="Additional metadata")
 
 
 class EventBatch(BaseModel):
@@ -236,17 +242,13 @@ class EventBatch(BaseModel):
 
     batch_id: str = Field(..., description="Unique batch identifier")
     created_at: datetime = Field(
-        default_factory=lambda: datetime.now(timezone.utc).replace(tzinfo=None),
+        default_factory=lambda: datetime.now(UTC).replace(tzinfo=None),
         description="Batch creation time (UTC)",
     )
     events: list[AppEvent | BrowserVisit | CalendarBlock] = Field(
-        ...,
-        description="Events in batch",
+        ..., description="Events in batch"
     )
-    metadata: dict[str, Any] = Field(
-        default_factory=dict,
-        description="Batch metadata",
-    )
+    metadata: dict[str, Any] = Field(default_factory=dict, description="Batch metadata")
 
     def event_count(self) -> int:
         """Get total number of events in batch."""

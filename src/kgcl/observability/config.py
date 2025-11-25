@@ -141,9 +141,7 @@ class ObservabilityConfig:
 
         return cls(
             service_name=os.getenv("OTEL_SERVICE_NAME", "kgcl"),
-            environment=Environment(
-                os.getenv("KGCL_ENVIRONMENT", Environment.LOCAL.value).lower()
-            ),
+            environment=Environment(os.getenv("KGCL_ENVIRONMENT", Environment.LOCAL.value).lower()),
             enable_tracing=os.getenv("OTEL_TRACES_ENABLED", "true").lower() == "true",
             enable_metrics=os.getenv("OTEL_METRICS_ENABLED", "true").lower() == "true",
             enable_logging=os.getenv("OTEL_LOGS_ENABLED", "true").lower() == "true",

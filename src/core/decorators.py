@@ -4,10 +4,11 @@ Provides decorators for test functions following AAA (Arrange-Act-Assert) patter
 Supports synchronous, asynchronous, and fixture-based tests.
 """
 
-import functools
 import asyncio
-import inspect
-from typing import Callable, Any, Optional, TypeVar, Type
+import functools
+from collections.abc import Callable
+from typing import Any, TypeVar
+
 from .fixture import TestFixture
 
 F = TypeVar("F", bound=Callable[..., Any])
@@ -28,6 +29,7 @@ def test(func: F) -> F:
             # Assert
             assert result == 8
     """
+
     @functools.wraps(func)
     def wrapper(*args: Any, **kwargs: Any) -> Any:
         try:
@@ -56,6 +58,7 @@ def async_test(func: F) -> F:
             # Assert
             assert result == 8
     """
+
     @functools.wraps(func)
     def wrapper(*args: Any, **kwargs: Any) -> Any:
         if asyncio.iscoroutinefunction(func):
@@ -78,7 +81,7 @@ def async_test(func: F) -> F:
     return wrapper
 
 
-def fixture_test(fixture_class: Type[TestFixture]) -> Callable[[F], F]:
+def fixture_test(fixture_class: type[TestFixture]) -> Callable[[F], F]:
     """Decorator factory for fixture-based tests
 
     Creates a test that receives a fixture instance as an argument.
@@ -98,6 +101,7 @@ def fixture_test(fixture_class: Type[TestFixture]) -> Callable[[F], F]:
         def test_counter(fixture):
             assert fixture.get_counter() == 0
     """
+
     def decorator(func: F) -> F:
         @functools.wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:

@@ -10,10 +10,10 @@ from kgcl.observability.metrics import KGCLMetrics
 from kgcl.observability.tracing import configure_tracing, get_tracer
 
 __all__ = [
+    "KGCLMetrics",
     "ObservabilityConfig",
     "configure_logging",
     "configure_tracing",
     "get_logger",
     "get_tracer",
-    "KGCLMetrics",
 ]

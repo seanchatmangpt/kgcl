@@ -1,12 +1,14 @@
 """Tests for resilience module (Circuit Breaker)."""
 
-import pytest
 import time
+
+import pytest
+
 from kgcl.hooks.resilience import (
     CircuitBreaker,
     CircuitBreakerConfig,
+    CircuitBreakerError,
     CircuitState,
-    CircuitBreakerError
 )
 
 
@@ -27,7 +29,7 @@ class TestCircuitBreakerConfig:
             failure_threshold=3,
             success_threshold_for_recovery=1,
             timeout_seconds=30.0,
-            name="test_breaker"
+            name="test_breaker",
         )
         assert config.failure_threshold == 3
         assert config.success_threshold_for_recovery == 1
@@ -131,7 +133,7 @@ class TestCircuitBreaker:
         """Test transition to HALF_OPEN after timeout."""
         config = CircuitBreakerConfig(
             failure_threshold=1,
-            timeout_seconds=0.1  # Short timeout for testing
+            timeout_seconds=0.1,  # Short timeout for testing
         )
         breaker = CircuitBreaker(config)
 
@@ -159,15 +161,13 @@ class TestCircuitBreaker:
     def test_recovery_from_half_open(self):
         """Test recovery from HALF_OPEN to CLOSED."""
         config = CircuitBreakerConfig(
-            failure_threshold=1,
-            success_threshold_for_recovery=2,
-            timeout_seconds=0.1
+            failure_threshold=1, success_threshold_for_recovery=2, timeout_seconds=0.1
         )
         breaker = CircuitBreaker(config)
 
         # Open the circuit
         with pytest.raises(ZeroDivisionError):
-            breaker.call(lambda: 1/0)
+            breaker.call(lambda: 1 / 0)
 
         assert breaker.get_state() == CircuitState.OPEN
 
@@ -184,22 +184,19 @@ class TestCircuitBreaker:
 
     def test_half_open_failure_reopens_circuit(self):
         """Test that failure in HALF_OPEN reopens circuit."""
-        config = CircuitBreakerConfig(
-            failure_threshold=1,
-            timeout_seconds=0.1
-        )
+        config = CircuitBreakerConfig(failure_threshold=1, timeout_seconds=0.1)
         breaker = CircuitBreaker(config)
 
         # Open the circuit
         with pytest.raises(ZeroDivisionError):
-            breaker.call(lambda: 1/0)
+            breaker.call(lambda: 1 / 0)
 
         # Wait for timeout
         time.sleep(0.15)
 
         # Fail in HALF_OPEN
         with pytest.raises(ZeroDivisionError):
-            breaker.call(lambda: 1/0)
+            breaker.call(lambda: 1 / 0)
 
         # Should be OPEN again
         assert breaker.get_state() == CircuitState.OPEN
@@ -211,7 +208,7 @@ class TestCircuitBreaker:
 
         # Open the circuit
         with pytest.raises(ZeroDivisionError):
-            breaker.call(lambda: 1/0)
+            breaker.call(lambda: 1 / 0)
 
         assert breaker.get_state() == CircuitState.OPEN
 
@@ -223,18 +220,15 @@ class TestCircuitBreaker:
 
     def test_get_stats(self):
         """Test getting circuit breaker statistics."""
-        config = CircuitBreakerConfig(
-            name="test_breaker",
-            failure_threshold=5
-        )
+        config = CircuitBreakerConfig(name="test_breaker", failure_threshold=5)
         breaker = CircuitBreaker(config)
 
         stats = breaker.get_stats()
-        assert stats['state'] == CircuitState.CLOSED.value
-        assert stats['failure_count'] == 0
-        assert stats['success_count'] == 0
-        assert stats['config']['name'] == "test_breaker"
-        assert stats['config']['failure_threshold'] == 5
+        assert stats["state"] == CircuitState.CLOSED.value
+        assert stats["failure_count"] == 0
+        assert stats["success_count"] == 0
+        assert stats["config"]["name"] == "test_breaker"
+        assert stats["config"]["failure_threshold"] == 5
 
     def test_decorator_usage(self):
         """Test using circuit breaker as decorator."""
@@ -276,7 +270,7 @@ class TestCircuitBreaker:
         # Fail twice
         for _ in range(2):
             with pytest.raises(ZeroDivisionError):
-                breaker.call(lambda: 1/0)
+                breaker.call(lambda: 1 / 0)
 
         assert breaker.failure_count == 2
 

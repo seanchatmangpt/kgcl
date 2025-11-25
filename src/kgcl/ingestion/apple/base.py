@@ -1,11 +1,12 @@
 """Base class for Apple data ingest engines."""
 
+import hashlib
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import Any, List, Optional
-import hashlib
-from datetime import datetime, timezone
-from rdflib import Graph, Namespace, Literal, URIRef, RDF
+from datetime import UTC, datetime
+from typing import Any
+
+from rdflib import RDF, Graph, Literal, Namespace, URIRef
 
 
 @dataclass
@@ -16,7 +17,7 @@ class IngestResult:
     graph: Graph
     receipt_hash: str
     items_processed: int
-    errors: List[str]
+    errors: list[str]
     metadata: dict
 
 
@@ -43,18 +44,19 @@ class BaseIngestEngine(ABC):
         Args:
             source_object: Object from Apple framework (EKEvent, EKReminder, etc.)
 
-        Returns:
+        Returns
+        -------
             IngestResult with RDF graph and metadata
         """
-        pass
 
-    def ingest_batch(self, objects: List[Any]) -> IngestResult:
+    def ingest_batch(self, objects: list[Any]) -> IngestResult:
         """Ingest multiple objects to RDF.
 
         Args:
             objects: List of objects from Apple framework
 
-        Returns:
+        Returns
+        -------
             IngestResult with consolidated RDF graph
         """
         self.graph = Graph()
@@ -93,7 +95,8 @@ class BaseIngestEngine(ABC):
     def _generate_receipt(self) -> str:
         """Generate SHA256 receipt hash for idempotency.
 
-        Returns:
+        Returns
+        -------
             SHA256 hex digest of serialized RDF
         """
         serialized = self.graph.serialize(format="ttl")
@@ -106,18 +109,13 @@ class BaseIngestEngine(ABC):
             identifier: Unique identifier
             prefix: URI prefix (e.g., 'event', 'task', 'message')
 
-        Returns:
+        Returns
+        -------
             URIRef for the entity
         """
         return URIRef(f"urn:kgc:{prefix}:{identifier}")
 
-    def _add_literal(
-        self,
-        subject: URIRef,
-        predicate,
-        value: Any,
-        datatype: Optional[str] = None,
-    ):
+    def _add_literal(self, subject: URIRef, predicate, value: Any, datatype: str | None = None):
         """Add a literal triple to the graph.
 
         Args:
@@ -147,4 +145,4 @@ class BaseIngestEngine(ABC):
 
     def _get_timestamp(self) -> str:
         """Get current timestamp in ISO 8601 format."""
-        return datetime.now(tz=timezone.utc).isoformat()
+        return datetime.now(tz=UTC).isoformat()

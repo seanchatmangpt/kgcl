@@ -5,18 +5,19 @@ This module defines the abstract base class for capability plugins that
 discover and monitor specific macOS features through PyObjC frameworks.
 """
 
-from abc import ABC, abstractmethod
-from typing import Dict, List, Optional, Any, Set
-from dataclasses import dataclass, field
-from enum import Enum
 import logging
+from abc import ABC, abstractmethod
+from dataclasses import dataclass, field
 from datetime import datetime
+from enum import Enum
+from typing import Any
 
 logger = logging.getLogger(__name__)
 
 
 class PluginStatus(str, Enum):
     """Status of a capability plugin."""
+
     UNINITIALIZED = "uninitialized"
     INITIALIZING = "initializing"
     READY = "ready"
@@ -26,6 +27,7 @@ class PluginStatus(str, Enum):
 
 class EntitlementLevel(str, Enum):
     """Required entitlement levels for capabilities."""
+
     NONE = "none"
     BASIC = "basic"
     SCREEN_RECORDING = "screen_recording"
@@ -43,7 +45,8 @@ class CapabilityDescriptor:
     """
     Describes a capability that can be discovered by a plugin.
 
-    Attributes:
+    Attributes
+    ----------
         name: Unique capability identifier
         description: Human-readable description
         framework: PyObjC framework providing this capability
@@ -53,14 +56,15 @@ class CapabilityDescriptor:
         is_continuous: Whether capability provides continuous data stream
         tags: Classification tags for capability
     """
+
     name: str
     description: str
     framework: str
     required_entitlement: EntitlementLevel = EntitlementLevel.NONE
-    data_schema: Optional[Dict[str, Any]] = None
+    data_schema: dict[str, Any] | None = None
     refresh_interval: float = 60.0
     is_continuous: bool = False
-    tags: Set[str] = field(default_factory=set)
+    tags: set[str] = field(default_factory=set)
 
 
 @dataclass
@@ -68,27 +72,29 @@ class CapabilityData:
     """
     Data returned by a capability query.
 
-    Attributes:
+    Attributes
+    ----------
         capability_name: Name of the capability
         timestamp: When data was collected
         data: The actual capability data
         metadata: Additional metadata about collection
         error: Error message if collection failed
     """
+
     capability_name: str
     timestamp: datetime
-    data: Dict[str, Any]
-    metadata: Dict[str, Any] = field(default_factory=dict)
-    error: Optional[str] = None
+    data: dict[str, Any]
+    metadata: dict[str, Any] = field(default_factory=dict)
+    error: str | None = None
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary for serialization."""
         return {
             "capability": self.capability_name,
             "timestamp": self.timestamp.isoformat(),
             "data": self.data,
             "metadata": self.metadata,
-            "error": self.error
+            "error": self.error,
         }
 
 
@@ -104,7 +110,7 @@ class BaseCapabilityPlugin(ABC):
     - Handles errors gracefully
     """
 
-    def __init__(self, plugin_id: str, config: Optional[Dict[str, Any]] = None):
+    def __init__(self, plugin_id: str, config: dict[str, Any] | None = None):
         """
         Initialize the plugin.
 
@@ -115,8 +121,8 @@ class BaseCapabilityPlugin(ABC):
         self.plugin_id = plugin_id
         self.config = config or {}
         self.status = PluginStatus.UNINITIALIZED
-        self._error_message: Optional[str] = None
-        self._capabilities_cache: Optional[List[CapabilityDescriptor]] = None
+        self._error_message: str | None = None
+        self._capabilities_cache: list[CapabilityDescriptor] | None = None
 
         logger.debug(f"Initialized plugin: {plugin_id}")
 
@@ -124,48 +130,44 @@ class BaseCapabilityPlugin(ABC):
     @abstractmethod
     def plugin_name(self) -> str:
         """Human-readable plugin name."""
-        pass
 
     @property
     @abstractmethod
     def plugin_version(self) -> str:
         """Plugin version string."""
-        pass
 
     @property
     @abstractmethod
-    def required_frameworks(self) -> List[str]:
+    def required_frameworks(self) -> list[str]:
         """List of PyObjC frameworks required by this plugin."""
-        pass
 
     @abstractmethod
-    def discover_capabilities(self) -> List[CapabilityDescriptor]:
+    def discover_capabilities(self) -> list[CapabilityDescriptor]:
         """
         Discover available capabilities provided by this plugin.
 
-        Returns:
+        Returns
+        -------
             List of capability descriptors
 
-        Raises:
+        Raises
+        ------
             RuntimeError: If plugin is not initialized
         """
-        pass
 
     @abstractmethod
-    def check_entitlements(self) -> Dict[str, bool]:
+    def check_entitlements(self) -> dict[str, bool]:
         """
         Check if required entitlements are available.
 
-        Returns:
+        Returns
+        -------
             Dictionary mapping entitlement names to availability status
         """
-        pass
 
     @abstractmethod
     def collect_capability_data(
-        self,
-        capability_name: str,
-        parameters: Optional[Dict[str, Any]] = None
+        self, capability_name: str, parameters: dict[str, Any] | None = None
     ) -> CapabilityData:
         """
         Collect data for a specific capability.
@@ -174,20 +176,22 @@ class BaseCapabilityPlugin(ABC):
             capability_name: Name of capability to query
             parameters: Optional parameters for data collection
 
-        Returns:
+        Returns
+        -------
             Collected capability data
 
-        Raises:
+        Raises
+        ------
             ValueError: If capability_name is not supported
             RuntimeError: If collection fails
         """
-        pass
 
     def initialize(self) -> bool:
         """
         Initialize the plugin and verify requirements.
 
-        Returns:
+        Returns
+        -------
             True if initialization successful, False otherwise
         """
         if self.status == PluginStatus.READY:
@@ -208,15 +212,12 @@ class BaseCapabilityPlugin(ABC):
             entitlements = self.check_entitlements()
             missing = [k for k, v in entitlements.items() if not v]
             if missing:
-                logger.warning(
-                    f"Plugin {self.plugin_id} missing entitlements: {missing}"
-                )
+                logger.warning(f"Plugin {self.plugin_id} missing entitlements: {missing}")
 
             # Discover capabilities
             self._capabilities_cache = self.discover_capabilities()
             logger.info(
-                f"Plugin {self.plugin_id} discovered "
-                f"{len(self._capabilities_cache)} capabilities"
+                f"Plugin {self.plugin_id} discovered {len(self._capabilities_cache)} capabilities"
             )
 
             self.status = PluginStatus.READY
@@ -232,7 +233,8 @@ class BaseCapabilityPlugin(ABC):
         """
         Verify all required frameworks are available.
 
-        Returns:
+        Returns
+        -------
             True if all frameworks available, False otherwise
         """
         for framework in self.required_frameworks:
@@ -247,34 +249,35 @@ class BaseCapabilityPlugin(ABC):
 
         return True
 
-    def get_capabilities(self) -> List[CapabilityDescriptor]:
+    def get_capabilities(self) -> list[CapabilityDescriptor]:
         """
         Get list of available capabilities.
 
-        Returns:
+        Returns
+        -------
             List of capability descriptors
 
-        Raises:
+        Raises
+        ------
             RuntimeError: If plugin not initialized
         """
         if self.status != PluginStatus.READY:
-            raise RuntimeError(
-                f"Plugin {self.plugin_id} not ready. Status: {self.status}"
-            )
+            raise RuntimeError(f"Plugin {self.plugin_id} not ready. Status: {self.status}")
 
         if self._capabilities_cache is None:
             self._capabilities_cache = self.discover_capabilities()
 
         return self._capabilities_cache
 
-    def get_capability_by_name(self, name: str) -> Optional[CapabilityDescriptor]:
+    def get_capability_by_name(self, name: str) -> CapabilityDescriptor | None:
         """
         Get a specific capability descriptor by name.
 
         Args:
             name: Capability name
 
-        Returns:
+        Returns
+        -------
             Capability descriptor or None if not found
         """
         capabilities = self.get_capabilities()
@@ -284,22 +287,20 @@ class BaseCapabilityPlugin(ABC):
         return None
 
     def collect_all_capabilities(
-        self,
-        parameters: Optional[Dict[str, Any]] = None
-    ) -> List[CapabilityData]:
+        self, parameters: dict[str, Any] | None = None
+    ) -> list[CapabilityData]:
         """
         Collect data for all available capabilities.
 
         Args:
             parameters: Optional parameters for collection
 
-        Returns:
+        Returns
+        -------
             List of collected capability data
         """
         if self.status != PluginStatus.READY:
-            logger.warning(
-                f"Cannot collect from plugin {self.plugin_id}. Status: {self.status}"
-            )
+            logger.warning(f"Cannot collect from plugin {self.plugin_id}. Status: {self.status}")
             return []
 
         results = []
@@ -310,24 +311,25 @@ class BaseCapabilityPlugin(ABC):
                 data = self.collect_capability_data(capability.name, parameters)
                 results.append(data)
             except Exception as e:
-                logger.error(
-                    f"Failed to collect {capability.name} from {self.plugin_id}: {e}"
-                )
+                logger.error(f"Failed to collect {capability.name} from {self.plugin_id}: {e}")
                 # Add error result
-                results.append(CapabilityData(
-                    capability_name=capability.name,
-                    timestamp=datetime.utcnow(),
-                    data={},
-                    error=str(e)
-                ))
+                results.append(
+                    CapabilityData(
+                        capability_name=capability.name,
+                        timestamp=datetime.utcnow(),
+                        data={},
+                        error=str(e),
+                    )
+                )
 
         return results
 
-    def get_status(self) -> Dict[str, Any]:
+    def get_status(self) -> dict[str, Any]:
         """
         Get current plugin status information.
 
-        Returns:
+        Returns
+        -------
             Status dictionary
         """
         return {
@@ -337,11 +339,9 @@ class BaseCapabilityPlugin(ABC):
             "status": self.status.value,
             "error": self._error_message,
             "capabilities_count": (
-                len(self._capabilities_cache)
-                if self._capabilities_cache
-                else 0
+                len(self._capabilities_cache) if self._capabilities_cache else 0
             ),
-            "required_frameworks": self.required_frameworks
+            "required_frameworks": self.required_frameworks,
         }
 
     def shutdown(self) -> None:
@@ -354,8 +354,4 @@ class BaseCapabilityPlugin(ABC):
         self.status = PluginStatus.DISABLED
 
     def __repr__(self) -> str:
-        return (
-            f"<{self.__class__.__name__} "
-            f"id={self.plugin_id} "
-            f"status={self.status.value}>"
-        )
+        return f"<{self.__class__.__name__} id={self.plugin_id} status={self.status.value}>"

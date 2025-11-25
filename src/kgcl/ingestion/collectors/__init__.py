@@ -6,4 +6,4 @@ Extends PyObjC collectors with production-ready batch processing.
 from kgcl.ingestion.collectors.base import BaseCollector, CollectorState
 from kgcl.ingestion.collectors.batch import BatchCollector
 
-__all__ = ["BaseCollector", "CollectorState", "BatchCollector"]
+__all__ = ["BaseCollector", "BatchCollector", "CollectorState"]

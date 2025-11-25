@@ -11,7 +11,6 @@ from __future__ import annotations
 
 import random
 from datetime import datetime, timedelta
-from typing import Any
 from uuid import uuid4
 
 from kgcl.ingestion.models import AppEvent, BrowserVisit, CalendarBlock
@@ -50,12 +49,7 @@ class ActivityGenerator:
         "aws.amazon.com",
     ]
 
-    COMMUNICATION_DOMAINS = [
-        "gmail.com",
-        "mail.google.com",
-        "outlook.com",
-        "calendar.google.com",
-    ]
+    COMMUNICATION_DOMAINS = ["gmail.com", "mail.google.com", "outlook.com", "calendar.google.com"]
 
     DOCUMENTATION_DOMAINS = [
         "readthedocs.io",
@@ -79,9 +73,7 @@ class ActivityGenerator:
         self.event_counter = 0
 
     def generate_day(
-        self,
-        day_offset: int = 0,
-        include_weekend_pattern: bool = False,
+        self, day_offset: int = 0, include_weekend_pattern: bool = False
     ) -> list[AppEvent | BrowserVisit | CalendarBlock]:
         """Generate a full day of activity.
 
@@ -114,9 +106,7 @@ class ActivityGenerator:
         # Sort by timestamp
         return sorted(events, key=lambda e: e.timestamp)
 
-    def generate_week(
-        self, start_offset: int = 0
-    ) -> list[AppEvent | BrowserVisit | CalendarBlock]:
+    def generate_week(self, start_offset: int = 0) -> list[AppEvent | BrowserVisit | CalendarBlock]:
         """Generate a full week of activity (7 days).
 
         Parameters
@@ -134,10 +124,7 @@ class ActivityGenerator:
         for day in range(7):
             is_weekend = (start_offset + day) % 7 in (5, 6)  # Saturday, Sunday
             events.extend(
-                self.generate_day(
-                    day_offset=start_offset + day,
-                    include_weekend_pattern=is_weekend,
-                )
+                self.generate_day(day_offset=start_offset + day, include_weekend_pattern=is_weekend)
             )
 
         return events
@@ -198,9 +185,7 @@ class ActivityGenerator:
 
         # Multiple short browser visits
         for _ in range(random.randint(8, 15)):
-            domain = random.choice(
-                self.TECH_DOMAINS + self.DOCUMENTATION_DOMAINS
-            )
+            domain = random.choice(self.TECH_DOMAINS + self.DOCUMENTATION_DOMAINS)
             duration = random.uniform(60, 300)  # 1-5 minutes
 
             events.append(
@@ -453,8 +438,7 @@ class ActivityGenerator:
 
 
 def generate_sample_data(
-    days: int = 7,
-    start_date: datetime | None = None,
+    days: int = 7, start_date: datetime | None = None
 ) -> list[AppEvent | BrowserVisit | CalendarBlock]:
     """Generate sample activity data for specified number of days.
 
@@ -474,15 +458,14 @@ def generate_sample_data(
 
     if days == 1:
         return generator.generate_day()
-    else:
-        return generator.generate_week(start_offset=0)
+    return generator.generate_week(start_offset=0)
 
 
 if __name__ == "__main__":
     # Demo: Generate and print sample data
     events = generate_sample_data(days=1)
     print(f"Generated {len(events)} events")
-    print(f"\nEvent breakdown:")
+    print("\nEvent breakdown:")
     app_count = sum(1 for e in events if isinstance(e, AppEvent))
     browser_count = sum(1 for e in events if isinstance(e, BrowserVisit))
     cal_count = sum(1 for e in events if isinstance(e, CalendarBlock))

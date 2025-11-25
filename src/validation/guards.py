@@ -4,7 +4,8 @@ Provides wrapper types that enforce validation at runtime.
 Similar to Rust's type-level validation compiled away in Python.
 """
 
-from typing import TypeVar, Generic, Any, Callable, Optional
+from collections.abc import Callable
+from typing import Any, Generic, TypeVar
 
 T = TypeVar("T")
 
@@ -39,10 +40,12 @@ class Guard(Generic[T]):
             value: Value to wrap
             validator: Predicate that must return True
 
-        Returns:
+        Returns
+        -------
             Guard wrapping the value
 
-        Raises:
+        Raises
+        ------
             ValueError: If validation fails
         """
         return Guard(value, validator)
@@ -75,13 +78,11 @@ class ValidatedValue(Generic[T]):
     """
 
     def __init__(
-        self,
-        value: T,
-        validators: Optional[list[tuple[str, Callable[[T], bool]]]] = None
+        self, value: T, validators: list[tuple[str, Callable[[T], bool]]] | None = None
     ) -> None:
         self._value = value
         self._validators = validators or []
-        self._validation_cache: Optional[bool] = None
+        self._validation_cache: bool | None = None
         self._failures: list[str] = []
 
     def add_validator(self, name: str, validator: Callable[[T], bool]) -> "ValidatedValue[T]":
@@ -109,10 +110,12 @@ class ValidatedValue(Generic[T]):
     def get(self) -> T:
         """Get value if valid
 
-        Returns:
+        Returns
+        -------
             The value
 
-        Raises:
+        Raises
+        ------
             ValueError: If value is not valid
         """
         if not self.is_valid():

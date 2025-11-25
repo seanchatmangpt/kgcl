@@ -4,14 +4,13 @@ Detects overlapping calendar events, resource conflicts, and suggests
 resolutions for optimal scheduling.
 """
 
-from datetime import datetime, timedelta
-from typing import Any, Dict, List, Optional, Set
 from dataclasses import dataclass, field
+from datetime import datetime, timedelta
+from typing import Any
+
 from rdflib import Graph, Namespace
-from rdflib.namespace import RDF, RDFS
 
 from .base import ProjectionGenerator
-
 
 # Define namespaces
 KGC = Namespace("http://example.org/kgc/")
@@ -46,8 +45,8 @@ class ResourceConflict:
 
     resource_uri: str
     resource_name: str
-    events: List[str] = field(default_factory=list)
-    conflict_time: Optional[datetime] = None
+    events: list[str] = field(default_factory=list)
+    conflict_time: datetime | None = None
 
     def event_count(self) -> int:
         """Count number of conflicting events."""
@@ -84,14 +83,13 @@ class ConflictReportGenerator(ProjectionGenerator):
         """
         super().__init__(graph)
         self.lookahead_days = lookahead_days
-        self.start_date = datetime.now().replace(
-            hour=0, minute=0, second=0, microsecond=0
-        )
+        self.start_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
 
-    def gather_data(self) -> Dict[str, Any]:
+    def gather_data(self) -> dict[str, Any]:
         """Gather conflicts from RDF graph.
 
-        Returns:
+        Returns
+        -------
             Dictionary with time conflicts, resource conflicts, and resolutions
         """
         events = self._query_events()
@@ -102,7 +100,7 @@ class ConflictReportGenerator(ProjectionGenerator):
         return {
             "date_range": {
                 "start": self.start_date,
-                "end": self.start_date + timedelta(days=self.lookahead_days)
+                "end": self.start_date + timedelta(days=self.lookahead_days),
             },
             "total_conflicts": len(time_conflicts) + len(resource_conflicts),
             "time_conflicts": time_conflicts,
@@ -110,7 +108,7 @@ class ConflictReportGenerator(ProjectionGenerator):
             "resolutions": resolutions,
         }
 
-    def _query_events(self) -> List[Dict[str, Any]]:
+    def _query_events(self) -> list[dict[str, Any]]:
         """Query RDF graph for calendar events."""
         events = []
 
@@ -140,18 +138,20 @@ class ConflictReportGenerator(ProjectionGenerator):
             if start_dt < self.start_date or start_dt > end_range:
                 continue
 
-            events.append({
-                "uri": str(row.event),
-                "title": str(row.title),
-                "start": start_dt,
-                "end": end_dt,
-                "location": str(row.location) if row.location else "",
-                "attendees": self._parse_attendees(row.attendees) if row.attendees else []
-            })
+            events.append(
+                {
+                    "uri": str(row.event),
+                    "title": str(row.title),
+                    "start": start_dt,
+                    "end": end_dt,
+                    "location": str(row.location) if row.location else "",
+                    "attendees": self._parse_attendees(row.attendees) if row.attendees else [],
+                }
+            )
 
         return events
 
-    def _detect_time_conflicts(self, events: List[Dict[str, Any]]) -> List[TimeConflict]:
+    def _detect_time_conflicts(self, events: list[dict[str, Any]]) -> list[TimeConflict]:
         """Detect overlapping time conflicts in events."""
         conflicts = []
 
@@ -173,14 +173,14 @@ class ConflictReportGenerator(ProjectionGenerator):
                         event2_uri=event2["uri"],
                         event2_title=event2["title"],
                         event2_start=event2["start"],
-                        event2_end=event2["end"]
+                        event2_end=event2["end"],
                     )
                     conflict.overlap_minutes = conflict.calculate_overlap()
                     conflicts.append(conflict)
 
         return conflicts
 
-    def _detect_resource_conflicts(self) -> List[ResourceConflict]:
+    def _detect_resource_conflicts(self) -> list[ResourceConflict]:
         """Detect resource allocation conflicts."""
         conflicts = []
 
@@ -201,7 +201,7 @@ class ConflictReportGenerator(ProjectionGenerator):
         results = self.graph.query(query)
 
         # Group events by resource
-        resource_events: Dict[str, List[Dict[str, Any]]] = {}
+        resource_events: dict[str, list[dict[str, Any]]] = {}
         end_range = self.start_date + timedelta(days=self.lookahead_days)
 
         for row in results:
@@ -213,12 +213,14 @@ class ConflictReportGenerator(ProjectionGenerator):
             if resource_uri not in resource_events:
                 resource_events[resource_uri] = []
 
-            resource_events[resource_uri].append({
-                "uri": str(row.event),
-                "start": start_dt,
-                "end": self._parse_datetime(row.end) if row.end else start_dt,
-                "resource_name": str(row.resourceName)
-            })
+            resource_events[resource_uri].append(
+                {
+                    "uri": str(row.event),
+                    "start": start_dt,
+                    "end": self._parse_datetime(row.end) if row.end else start_dt,
+                    "resource_name": str(row.resourceName),
+                }
+            )
 
         # Check for overlapping usage
         for resource_uri, events in resource_events.items():
@@ -230,47 +232,48 @@ class ConflictReportGenerator(ProjectionGenerator):
                     event2 = sorted_events[j]
 
                     if self._events_overlap(event1, event2):
-                        conflicts.append(ResourceConflict(
-                            resource_uri=resource_uri,
-                            resource_name=event1["resource_name"],
-                            events=[event1["uri"], event2["uri"]],
-                            conflict_time=max(event1["start"], event2["start"])
-                        ))
+                        conflicts.append(
+                            ResourceConflict(
+                                resource_uri=resource_uri,
+                                resource_name=event1["resource_name"],
+                                events=[event1["uri"], event2["uri"]],
+                                conflict_time=max(event1["start"], event2["start"]),
+                            )
+                        )
 
         return conflicts
 
     def _generate_resolutions(
-        self,
-        time_conflicts: List[TimeConflict],
-        resource_conflicts: List[ResourceConflict]
-    ) -> List[ConflictResolution]:
+        self, time_conflicts: list[TimeConflict], resource_conflicts: list[ResourceConflict]
+    ) -> list[ConflictResolution]:
         """Generate suggested resolutions for conflicts."""
         resolutions = []
 
         for conflict in time_conflicts:
-            resolutions.append(ConflictResolution(
-                conflict_type="time",
-                suggestion=f"Reschedule '{conflict.event2_title}' to avoid overlap with '{conflict.event1_title}'",
-                priority=1 if conflict.overlap_minutes > 30 else 3,
-                estimated_impact="high" if conflict.overlap_minutes > 60 else "medium"
-            ))
+            resolutions.append(
+                ConflictResolution(
+                    conflict_type="time",
+                    suggestion=f"Reschedule '{conflict.event2_title}' to avoid overlap with '{conflict.event1_title}'",
+                    priority=1 if conflict.overlap_minutes > 30 else 3,
+                    estimated_impact="high" if conflict.overlap_minutes > 60 else "medium",
+                )
+            )
 
         for conflict in resource_conflicts:
-            resolutions.append(ConflictResolution(
-                conflict_type="resource",
-                suggestion=f"Find alternative resource for {conflict.resource_name} or reschedule one event",
-                priority=2,
-                estimated_impact="medium"
-            ))
+            resolutions.append(
+                ConflictResolution(
+                    conflict_type="resource",
+                    suggestion=f"Find alternative resource for {conflict.resource_name} or reschedule one event",
+                    priority=2,
+                    estimated_impact="medium",
+                )
+            )
 
         return sorted(resolutions, key=lambda r: r.priority)
 
-    def _events_overlap(self, event1: Dict[str, Any], event2: Dict[str, Any]) -> bool:
+    def _events_overlap(self, event1: dict[str, Any], event2: dict[str, Any]) -> bool:
         """Check if two events overlap in time."""
-        return (
-            event1["start"] < event2["end"] and
-            event2["start"] < event1["end"]
-        )
+        return event1["start"] < event2["end"] and event2["start"] < event1["end"]
 
     def _parse_datetime(self, value: Any) -> datetime:
         """Parse datetime from RDF literal."""
@@ -278,7 +281,7 @@ class ConflictReportGenerator(ProjectionGenerator):
             return value
         return datetime.fromisoformat(str(value))
 
-    def _parse_attendees(self, attendees: Any) -> List[str]:
+    def _parse_attendees(self, attendees: Any) -> list[str]:
         """Parse attendees from RDF."""
         if isinstance(attendees, str):
             return [attendees]
@@ -290,7 +293,8 @@ class ConflictReportGenerator(ProjectionGenerator):
         Args:
             template_name: Template file name
 
-        Returns:
+        Returns
+        -------
             Rendered markdown conflict report
         """
         data = self.gather_data()

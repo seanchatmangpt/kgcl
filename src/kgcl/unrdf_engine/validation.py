@@ -114,10 +114,7 @@ class ShaclValidator:
 
     @tracer.start_as_current_span("shacl.validate")
     def validate(
-        self,
-        data_graph: Graph,
-        inference: str | None = None,
-        abort_on_first: bool = False,
+        self, data_graph: Graph, inference: str | None = None, abort_on_first: bool = False
     ) -> ValidationResult:
         """Validate an RDF graph against loaded SHACL shapes.
 

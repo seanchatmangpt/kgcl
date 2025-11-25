@@ -2,9 +2,8 @@
 
 import logging
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional
 
-from .parser import SHACLShape, PropertyShape
+from .parser import PropertyShape, SHACLShape
 
 logger = logging.getLogger(__name__)
 
@@ -14,15 +13,16 @@ class SignatureDefinition:
     """Represents a generated DSPy Signature class."""
 
     class_name: str
-    docstring: Optional[str] = None
-    inputs: List[PropertyShape] = field(default_factory=list)
-    outputs: List[PropertyShape] = field(default_factory=list)
-    base_classes: List[str] = field(default_factory=lambda: ["dspy.Signature"])
+    docstring: str | None = None
+    inputs: list[PropertyShape] = field(default_factory=list)
+    outputs: list[PropertyShape] = field(default_factory=list)
+    base_classes: list[str] = field(default_factory=lambda: ["dspy.Signature"])
 
     def generate_code(self) -> str:
         """Generate Python code for this signature.
 
-        Returns:
+        Returns
+        -------
             Python code as string
         """
         lines = []
@@ -71,7 +71,8 @@ class SignatureDefinition:
             prop: PropertyShape to generate
             is_input: Whether this is an input field
 
-        Returns:
+        Returns
+        -------
             Field definition string
         """
         # Get Python type
@@ -103,15 +104,14 @@ class SignatureDefinition:
 
         return f"{prop.name}: {python_type} = {field_call}"
 
-    def get_imports(self) -> List[str]:
+    def get_imports(self) -> list[str]:
         """Get required imports for this signature.
 
-        Returns:
+        Returns
+        -------
             List of import statements
         """
-        imports = [
-            "import dspy",
-        ]
+        imports = ["import dspy"]
 
         # Check if we need typing imports
         needs_typing = False
@@ -143,7 +143,7 @@ class DSPyGenerator:
 
     def __init__(self):
         """Initialize generator."""
-        self._generated: Dict[str, SignatureDefinition] = {}
+        self._generated: dict[str, SignatureDefinition] = {}
 
     def generate_signature(self, shape: SHACLShape) -> SignatureDefinition:
         """Generate a DSPy signature from a SHACL shape.
@@ -151,7 +151,8 @@ class DSPyGenerator:
         Args:
             shape: SHACLShape to convert
 
-        Returns:
+        Returns
+        -------
             SignatureDefinition
         """
         class_name = shape.signature_name
@@ -176,13 +177,14 @@ class DSPyGenerator:
 
         return signature
 
-    def generate_module(self, shapes: List[SHACLShape]) -> str:
+    def generate_module(self, shapes: list[SHACLShape]) -> str:
         """Generate a complete Python module with all signatures.
 
         Args:
             shapes: List of SHACL shapes to convert
 
-        Returns:
+        Returns
+        -------
             Complete Python module code
         """
         logger.info(f"Generating module with {len(shapes)} signatures")
@@ -231,8 +233,6 @@ class DSPyGenerator:
         self._generated.clear()
         logger.info("Cleared generator cache")
 
-    def get_cache_stats(self) -> Dict[str, int]:
+    def get_cache_stats(self) -> dict[str, int]:
         """Get cache statistics."""
-        return {
-            "generated_signatures": len(self._generated),
-        }
+        return {"generated_signatures": len(self._generated)}

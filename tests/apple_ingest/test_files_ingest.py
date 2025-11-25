@@ -10,16 +10,6 @@ Chicago School principles:
 - No mocking of domain objects (only external dependencies like Spotlight)
 """
 
-import pytest
-from datetime import datetime, timezone
-from rdflib import Graph, Namespace
-
-from tests.apple_ingest.fixtures import (
-    file_markdown_note,
-    file_document,
-    file_invalid_path,
-    file_metadata_batch,
-)
 
 # TODO: Import when available
 # from kgcl.ingest.apple_files import FilesIngestEngine
@@ -49,7 +39,7 @@ class TestFileMetadataMapping:
         # urls = list(rdf_graph.objects(predicate=schema_ns.url))
         # assert any("/Q4_Review.md" in str(u) for u in urls)
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_file_creation_date_is_preserved(self, file_markdown_note):
         """
@@ -66,7 +56,7 @@ class TestFileMetadataMapping:
         # assert len(created_dates) == 1
         # assert "2025-11-20" in str(created_dates[0])
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_file_modification_date_is_preserved(self, file_markdown_note):
         """
@@ -83,7 +73,7 @@ class TestFileMetadataMapping:
         # assert len(mod_dates) == 1
         # assert "2025-11-24" in str(mod_dates[0])
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_file_format_is_preserved(self, file_document):
         """
@@ -100,7 +90,7 @@ class TestFileMetadataMapping:
         # assert len(formats) == 1
         # assert "docx" in str(formats[0]).lower()
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_file_size_is_tracked(self, file_document):
         """
@@ -116,7 +106,7 @@ class TestFileMetadataMapping:
         # sizes = list(rdf_graph.objects(predicate=schema_ns.contentSize))
         # assert len(sizes) >= 1
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_file_tags_are_preserved(self, file_markdown_note):
         """
@@ -133,7 +123,7 @@ class TestFileMetadataMapping:
         # assert len(keywords) >= 1
         # assert any("project" in str(k).lower() for k in keywords)
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_file_path_is_tracked(self, file_markdown_note):
         """
@@ -150,7 +140,7 @@ class TestFileMetadataMapping:
         # assert len(source_ids) == 1
         # assert "/Q4_Review.md" in str(source_ids[0])
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_file_source_is_tracked(self, file_markdown_note):
         """
@@ -167,7 +157,7 @@ class TestFileMetadataMapping:
         # assert len(source_apps) == 1
         # assert str(source_apps[0]) == "Finder"
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
 
 class TestFileMetadataValidation:
@@ -188,7 +178,7 @@ class TestFileMetadataValidation:
         # assert report.conforms is False
         # assert any("path" in str(v).lower() for v in report.violations)
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_valid_file_passes_validation(self, file_markdown_note):
         """
@@ -204,7 +194,7 @@ class TestFileMetadataValidation:
         # report = validator.validate(rdf_graph)
         # assert report.conforms is True
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_file_has_required_properties(self, file_markdown_note):
         """
@@ -225,7 +215,7 @@ class TestFileMetadataValidation:
         # assert len(mod_dates) >= 1
         # assert len(urls) >= 1
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
 
 class TestFileMetadataBatch:
@@ -245,7 +235,7 @@ class TestFileMetadataBatch:
         # works = list(rdf_graph.subjects(predicate=RDF.type, object=schema_ns.CreativeWork))
         # assert len(works) == 2
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_batch_preserves_file_formats(self, file_metadata_batch):
         """
@@ -263,7 +253,7 @@ class TestFileMetadataBatch:
         # assert any("md" in f or "markdown" in f for f in format_strs)
         # assert any("docx" in f or "word" in f for f in format_strs)
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
 
 class TestFileIngestIdempotency:
@@ -284,7 +274,7 @@ class TestFileIngestIdempotency:
         # triples2 = sorted([(str(s), str(p), str(o)) for s, p, o in graph2])
         # assert triples1 == triples2
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_re_ingest_modified_file_updates_graph(self, file_markdown_note):
         """
@@ -305,7 +295,7 @@ class TestFileIngestIdempotency:
         # new_dates = list(graph2.objects(predicate=schema_ns.dateModified))
         # assert old_dates != new_dates
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
 
 class TestFileIngestPerformance:
@@ -329,7 +319,7 @@ class TestFileIngestPerformance:
         # assert elapsed < 10.0
         # assert len(list(rdf_graph.subjects())) == 5000
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
 
 class TestFileIngestIntegration:
@@ -342,7 +332,7 @@ class TestFileIngestIntegration:
         THEN: File has apple:relatedEvent → Event
         """
         # TODO: Implement (requires multi-source ingest)
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_file_can_be_linked_to_task(self):
         """
@@ -351,7 +341,7 @@ class TestFileIngestIntegration:
         THEN: File has apple:relatedAction → Task
         """
         # TODO: Implement
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_file_can_be_linked_to_email(self):
         """
@@ -360,4 +350,4 @@ class TestFileIngestIntegration:
         THEN: File can be linked back to originating email
         """
         # TODO: Implement
-        pass  # TODO: Implement
+        # TODO: Implement

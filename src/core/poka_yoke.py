@@ -4,16 +4,16 @@ Prevents common testing mistakes through compile-time and runtime validation.
 Translates Rust's type system guarantees to Python runtime checks.
 """
 
-from typing import TypeVar, Generic, Any, Callable, Optional
-from functools import wraps
 import inspect
+from collections.abc import Callable
+from functools import wraps
+from typing import Any, TypeVar
 
 T = TypeVar("T")
 
 
 class PokaYokeError(Exception):
     """Poka-Yoke validation error"""
-    pass
 
 
 class Poka:
@@ -43,10 +43,12 @@ class Poka:
             value: Value that might be None, False, or error-like
             msg: Message to include in error
 
-        Returns:
+        Returns
+        -------
             The unwrapped value
 
-        Raises:
+        Raises
+        ------
             PokaYokeError: If value is None/False/Error
 
         Example:
@@ -74,10 +76,12 @@ class Poka:
             value: Value to unwrap
             msg: Custom error message
 
-        Returns:
+        Returns
+        -------
             The unwrapped value
 
-        Raises:
+        Raises
+        ------
             PokaYokeError: If value is None/False/Error
         """
         return Poka.unwrap(value, msg)
@@ -90,7 +94,8 @@ class Poka:
             value: Value to unwrap
             default: Default value if unwrap fails
 
-        Returns:
+        Returns
+        -------
             The unwrapped value or default
         """
         try:
@@ -106,7 +111,8 @@ class Poka:
             value: Value to unwrap
             fn: Function that computes default
 
-        Returns:
+        Returns
+        -------
             The unwrapped value or result of fn()
         """
         try:
@@ -122,24 +128,27 @@ class Poka:
             condition: Condition that should be True
             msg: Error message if False
 
-        Raises:
+        Raises
+        ------
             PokaYokeError: If condition is False
         """
         if not condition:
             raise PokaYokeError(f"Validation failed: {msg}")
 
     @staticmethod
-    def not_none(value: Optional[T], msg: str = "value is None") -> T:
+    def not_none(value: T | None, msg: str = "value is None") -> T:
         """Assert value is not None
 
         Args:
             value: Value to check
             msg: Error message
 
-        Returns:
+        Returns
+        -------
             The value (type-narrowed in static checkers)
 
-        Raises:
+        Raises
+        ------
             PokaYokeError: If value is None
         """
         if value is None:
@@ -159,6 +168,7 @@ class Poka:
                 # Will warn if you try unsafe operations here
                 pass
         """
+
         @wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> T:
             # Check function source for dangerous patterns

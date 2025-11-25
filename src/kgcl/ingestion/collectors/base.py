@@ -2,7 +2,7 @@
 
 from abc import ABC, abstractmethod
 from collections.abc import Callable
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import Enum
 from pathlib import Path
 from typing import Any
@@ -26,12 +26,7 @@ class BaseCollector(ABC):
     Defines the interface that all collectors must implement.
     """
 
-    def __init__(
-        self,
-        output_path: Path,
-        flush_interval: int = 60,
-        batch_size: int = 100,
-    ) -> None:
+    def __init__(self, output_path: Path, flush_interval: int = 60, batch_size: int = 100) -> None:
         """Initialize collector.
 
         Parameters
@@ -49,7 +44,7 @@ class BaseCollector(ABC):
         self.state = CollectorState.INITIALIZED
         self._event_count = 0
         self._error_count = 0
-        self._last_flush = datetime.now(timezone.utc).replace(tzinfo=None)
+        self._last_flush = datetime.now(UTC).replace(tzinfo=None)
 
         # Ensure output directory exists
         self.output_path.mkdir(parents=True, exist_ok=True)
@@ -112,10 +107,7 @@ class BaseCollector(ABC):
             "output_path": str(self.output_path),
         }
 
-    def register_error_handler(
-        self,
-        handler: Callable[[Exception, Any], None],
-    ) -> None:
+    def register_error_handler(self, handler: Callable[[Exception, Any], None]) -> None:
         """Register error handling callback.
 
         Parameters

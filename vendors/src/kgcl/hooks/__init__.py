@@ -1,15 +1,5 @@
 """KGCL hooks system with cryptographic receipts and lockchain."""
 
-from .receipts import (
-    ChainAnchor,
-    Receipt,
-    ReceiptStore,
-    MerkleTree,
-)
+from .receipts import ChainAnchor, MerkleTree, Receipt, ReceiptStore
 
-__all__ = [
-    "ChainAnchor",
-    "Receipt",
-    "ReceiptStore",
-    "MerkleTree",
-]
+__all__ = ["ChainAnchor", "MerkleTree", "Receipt", "ReceiptStore"]

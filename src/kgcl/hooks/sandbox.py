@@ -6,7 +6,6 @@ Provides configuration for isolated hook execution environments.
 """
 
 from dataclasses import dataclass, field
-from typing import List
 from pathlib import Path
 
 
@@ -40,7 +39,7 @@ class SandboxRestrictions:
         Maximum number of open file handles
     """
 
-    allowed_paths: List[str] = field(default_factory=list)
+    allowed_paths: list[str] = field(default_factory=list)
     no_network: bool = True
     no_process_spawn: bool = True
     memory_limit_mb: int = 512

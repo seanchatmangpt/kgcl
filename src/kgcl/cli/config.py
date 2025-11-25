@@ -19,7 +19,6 @@ from kgcl.cli.utils import (
     save_config,
 )
 
-
 DEFAULT_CONFIG = {
     "exclusions": {
         "files": [".git", "__pycache__", "node_modules", ".venv", "*.pyc"],
@@ -47,7 +46,8 @@ def config() -> None:
 
     Configure exclusion lists, toggle capabilities, and adjust settings.
 
-    Examples:
+    Examples
+    --------
         # Show current configuration
         $ kgc-config show
 
@@ -144,9 +144,7 @@ def exclude_add(file_pattern: str | None, dir_pattern: str | None, pattern: str 
 @click.option("--file", "file_pattern", type=str, help="File pattern to remove")
 @click.option("--directory", "dir_pattern", type=str, help="Directory pattern to remove")
 @click.option("--pattern", type=str, help="General pattern to remove")
-def exclude_remove(
-    file_pattern: str | None, dir_pattern: str | None, pattern: str | None
-) -> None:
+def exclude_remove(file_pattern: str | None, dir_pattern: str | None, pattern: str | None) -> None:
     """Remove exclusion pattern."""
     try:
         cfg = load_config() or DEFAULT_CONFIG.copy()
@@ -255,7 +253,8 @@ def capability_list() -> None:
 def set_value(key: str, value: str) -> None:
     """Set a configuration value.
 
-    Examples:
+    Examples
+    --------
         $ kgc-config set default_model llama3.3
         $ kgc-config set event_retention_days 30
     """

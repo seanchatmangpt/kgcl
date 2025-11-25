@@ -1,7 +1,8 @@
 """Calendar event ingest engine using EventKit via PyObjC."""
 
 from typing import Any
-from rdflib import URIRef, RDF
+
+from rdflib import RDF
 
 from kgcl.ingestion.apple.base import BaseIngestEngine, IngestResult
 
@@ -17,7 +18,8 @@ class CalendarIngestEngine(BaseIngestEngine):
         Args:
             source_object: MockEKEvent or actual EKEvent from EventKit
 
-        Returns:
+        Returns
+        -------
             IngestResult with schema:Event RDF triple
         """
         errors = []
@@ -82,16 +84,10 @@ class CalendarIngestEngine(BaseIngestEngine):
                     attendee_email = attendee.get("email")
                     if attendee_email:
                         attendee_uri = self._create_uri(attendee_email, "person")
-                        self.graph.add(
-                            (attendee_uri, RDF.type, self.schema_ns.Person)
-                        )
+                        self.graph.add((attendee_uri, RDF.type, self.schema_ns.Person))
                         if attendee_name:
-                            self._add_literal(
-                                attendee_uri, self.schema_ns.name, attendee_name
-                            )
-                        self._add_literal(
-                            attendee_uri, self.schema_ns.email, attendee_email
-                        )
+                            self._add_literal(attendee_uri, self.schema_ns.name, attendee_name)
+                        self._add_literal(attendee_uri, self.schema_ns.email, attendee_email)
                         self._add_uri(event_uri, self.schema_ns.attendee, attendee_uri)
 
             # Add Apple-specific properties
@@ -116,7 +112,7 @@ class CalendarIngestEngine(BaseIngestEngine):
             )
 
         except Exception as e:
-            errors.append(f"Calendar ingest error: {str(e)}")
+            errors.append(f"Calendar ingest error: {e!s}")
             return IngestResult(
                 success=False,
                 graph=self.graph,

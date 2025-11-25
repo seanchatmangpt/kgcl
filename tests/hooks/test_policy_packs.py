@@ -5,18 +5,17 @@ Real file I/O and validation.
 """
 
 import json
-from datetime import datetime, timezone
-from pathlib import Path
+from datetime import UTC, datetime
 
 import pytest
 
 from kgcl.unrdf_engine.hook_registry import (
-    PolicyPack,
-    PolicyPackManifest,
-    PolicyPackManager,
     PersistentHookRegistry,
+    PolicyPack,
+    PolicyPackManager,
+    PolicyPackManifest,
 )
-from kgcl.unrdf_engine.hooks import HookPhase, KnowledgeHook, HookContext
+from kgcl.unrdf_engine.hooks import HookContext, HookPhase, KnowledgeHook
 
 
 class TestPolicyPackManifest:
@@ -35,17 +34,13 @@ class TestPolicyPackManifest:
 
     def test_manifest_validation_fails_missing_name(self):
         """Manifest validation fails with empty name."""
-        manifest = PolicyPackManifest(
-            name="", version="1.0.0", description="Test", hooks=["hook1"]
-        )
+        manifest = PolicyPackManifest(name="", version="1.0.0", description="Test", hooks=["hook1"])
 
         assert manifest.validate() is False
 
     def test_manifest_validation_fails_missing_version(self):
         """Manifest validation fails with empty version."""
-        manifest = PolicyPackManifest(
-            name="test", version="", description="Test", hooks=["hook1"]
-        )
+        manifest = PolicyPackManifest(name="test", version="", description="Test", hooks=["hook1"])
 
         assert manifest.validate() is False
 
@@ -59,9 +54,7 @@ class TestPolicyPackManifest:
 
     def test_manifest_validation_fails_no_hooks(self):
         """Manifest validation fails with no hooks."""
-        manifest = PolicyPackManifest(
-            name="test", version="1.0.0", description="Test", hooks=[]
-        )
+        manifest = PolicyPackManifest(name="test", version="1.0.0", description="Test", hooks=[])
 
         assert manifest.validate() is False
 
@@ -98,11 +91,7 @@ class TestPolicyPack:
     def test_get_slo_target_exists(self):
         """Get SLO target returns value when defined."""
         manifest = PolicyPackManifest(
-            name="test",
-            version="1.0.0",
-            description="Test",
-            hooks=["h1"],
-            slos={"latency": 100.0},
+            name="test", version="1.0.0", description="Test", hooks=["h1"], slos={"latency": 100.0}
         )
         pack = PolicyPack(manifest=manifest, hooks={})
 
@@ -136,11 +125,7 @@ class TestPolicyPack:
     def test_validate_slos_non_compliant(self):
         """Validate SLOs returns False for non-compliant metrics."""
         manifest = PolicyPackManifest(
-            name="test",
-            version="1.0.0",
-            description="Test",
-            hooks=["h1"],
-            slos={"latency": 100.0},
+            name="test", version="1.0.0", description="Test", hooks=["h1"], slos={"latency": 100.0}
         )
         pack = PolicyPack(manifest=manifest, hooks={})
 
@@ -151,11 +136,7 @@ class TestPolicyPack:
     def test_validate_slos_undefined_metrics_pass(self):
         """Validate SLOs treats undefined metrics as compliant."""
         manifest = PolicyPackManifest(
-            name="test",
-            version="1.0.0",
-            description="Test",
-            hooks=["h1"],
-            slos={"latency": 100.0},
+            name="test", version="1.0.0", description="Test", hooks=["h1"], slos={"latency": 100.0}
         )
         pack = PolicyPack(manifest=manifest, hooks={})
 
@@ -214,7 +195,7 @@ class TestPolicyPackManager:
             "dependencies": {},
             "slos": {"latency": 100.0},
             "author": "Test Author",
-            "created": datetime.now(timezone.utc).isoformat(),
+            "created": datetime.now(UTC).isoformat(),
         }
 
         with open(pack_path / "manifest.json", "w") as f:
@@ -341,9 +322,7 @@ class TestPolicyPackManager:
         assert result["dep-pack"] is True
         assert result["main-pack"] is True
 
-    def test_validate_dependencies_fails_missing_dependency(
-        self, tmp_path, hook_registry
-    ):
+    def test_validate_dependencies_fails_missing_dependency(self, tmp_path, hook_registry):
         """Validate dependencies fails when dependency missing."""
         manager = PolicyPackManager(base_path=tmp_path, hook_registry=hook_registry)
 

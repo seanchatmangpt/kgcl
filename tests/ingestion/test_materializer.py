@@ -1,6 +1,6 @@
 """Tests for feature materializer."""
 
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 import pytest
 
@@ -25,7 +25,7 @@ class TestFeatureMaterializer:
         config = FeatureConfig(enabled_features=["app_usage_time"])
         materializer = FeatureMaterializer(config)
 
-        now = datetime.now(timezone.utc).replace(tzinfo=None)
+        now = datetime.now(UTC).replace(tzinfo=None)
         window_start = now.replace(minute=0, second=0, microsecond=0)
         window_end = window_start + timedelta(hours=1)
 
@@ -53,9 +53,7 @@ class TestFeatureMaterializer:
         features = materializer.materialize(events, window_start, window_end)
 
         # Should have features for both apps
-        safari_features = [
-            f for f in features if "Safari" in f.feature_id
-        ]
+        safari_features = [f for f in features if "Safari" in f.feature_id]
         assert len(safari_features) > 0
         assert safari_features[0].value == 500.0  # 300 + 200
 
@@ -64,7 +62,7 @@ class TestFeatureMaterializer:
         config = FeatureConfig(enabled_features=["browser_domain_visits"])
         materializer = FeatureMaterializer(config)
 
-        now = datetime.now(timezone.utc).replace(tzinfo=None)
+        now = datetime.now(UTC).replace(tzinfo=None)
         window_start = now.replace(minute=0, second=0, microsecond=0)
         window_end = window_start + timedelta(hours=1)
 
@@ -95,9 +93,7 @@ class TestFeatureMaterializer:
         features = materializer.materialize(events, window_start, window_end)
 
         # Should have features for both domains
-        github_features = [
-            f for f in features if "github.com" in f.feature_id
-        ]
+        github_features = [f for f in features if "github.com" in f.feature_id]
         assert len(github_features) > 0
         assert github_features[0].value == 2
         assert github_features[0].metadata["unique_urls"] == 2
@@ -107,7 +103,7 @@ class TestFeatureMaterializer:
         config = FeatureConfig(enabled_features=["meeting_count"])
         materializer = FeatureMaterializer(config)
 
-        now = datetime.now(timezone.utc).replace(tzinfo=None)
+        now = datetime.now(UTC).replace(tzinfo=None)
         window_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
         window_end = window_start + timedelta(days=1)
 
@@ -129,16 +125,12 @@ class TestFeatureMaterializer:
         features = materializer.materialize(events, window_start, window_end)
 
         # Should have meeting count feature
-        count_features = [
-            f for f in features if f.feature_id == "meeting_count"
-        ]
+        count_features = [f for f in features if f.feature_id == "meeting_count"]
         assert len(count_features) > 0
         assert count_features[0].value == 2
 
         # Should also have total duration feature
-        duration_features = [
-            f for f in features if "duration" in f.feature_id
-        ]
+        duration_features = [f for f in features if "duration" in f.feature_id]
         assert len(duration_features) > 0
 
     def test_context_switches_feature(self):
@@ -146,7 +138,7 @@ class TestFeatureMaterializer:
         config = FeatureConfig(enabled_features=["context_switches"])
         materializer = FeatureMaterializer(config)
 
-        now = datetime.now(timezone.utc).replace(tzinfo=None)
+        now = datetime.now(UTC).replace(tzinfo=None)
         window_start = now.replace(minute=0, second=0, microsecond=0)
         window_end = window_start + timedelta(hours=1)
 
@@ -176,9 +168,7 @@ class TestFeatureMaterializer:
         features = materializer.materialize(events, window_start, window_end)
 
         # Should have context switches feature
-        switch_features = [
-            f for f in features if f.feature_id == "context_switches"
-        ]
+        switch_features = [f for f in features if f.feature_id == "context_switches"]
         assert len(switch_features) > 0
         assert switch_features[0].value == 3  # 3 switches between 4 events
 
@@ -187,7 +177,7 @@ class TestFeatureMaterializer:
         config = FeatureConfig(enabled_features=["app_usage_time"])
         materializer = FeatureMaterializer(config)
 
-        now = datetime.now(timezone.utc).replace(tzinfo=None)
+        now = datetime.now(UTC).replace(tzinfo=None)
         window_start = now.replace(minute=0, second=0, microsecond=0)
         window_end = window_start + timedelta(hours=1)
 
@@ -218,9 +208,7 @@ class TestFeatureMaterializer:
         features = materializer.materialize(events, window_start, window_end)
 
         # Should only count event inside window
-        safari_features = [
-            f for f in features if "Safari" in f.feature_id
-        ]
+        safari_features = [f for f in features if "Safari" in f.feature_id]
         assert len(safari_features) > 0
         assert safari_features[0].value == 100.0
 
@@ -264,7 +252,7 @@ class TestFeatureMaterializer:
         config = FeatureConfig()
         materializer = FeatureMaterializer(config)
 
-        now = datetime.now(timezone.utc).replace(tzinfo=None)
+        now = datetime.now(UTC).replace(tzinfo=None)
         window_start = now.replace(minute=0, second=0, microsecond=0)
         window_end = window_start + timedelta(hours=1)
 
@@ -304,13 +292,10 @@ class TestFeatureMaterializer:
 
     def test_incremental_updates(self):
         """Test incremental feature updates."""
-        config = FeatureConfig(
-            enabled_features=["app_usage_time"],
-            incremental_updates=True,
-        )
+        config = FeatureConfig(enabled_features=["app_usage_time"], incremental_updates=True)
         materializer = FeatureMaterializer(config)
 
-        now = datetime.now(timezone.utc).replace(tzinfo=None)
+        now = datetime.now(UTC).replace(tzinfo=None)
         window_start = now.replace(minute=0, second=0, microsecond=0)
         window_end = window_start + timedelta(hours=1)
 
@@ -324,11 +309,7 @@ class TestFeatureMaterializer:
             )
         ]
 
-        existing_features = materializer.materialize(
-            initial_events,
-            window_start,
-            window_end,
-        )
+        existing_features = materializer.materialize(initial_events, window_start, window_end)
 
         # New events
         new_events = [
@@ -341,10 +322,7 @@ class TestFeatureMaterializer:
         ]
 
         # Update incrementally
-        updated_features = materializer.materialize_incremental(
-            new_events,
-            existing_features,
-        )
+        updated_features = materializer.materialize_incremental(new_events, existing_features)
 
         assert len(updated_features) > 0
 

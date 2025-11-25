@@ -3,19 +3,20 @@
 Provides state machine test models and runners.
 """
 
-from typing import Any, Callable, Dict, List, Set, Optional, Tuple
-from enum import Enum
+from collections.abc import Callable
 from dataclasses import dataclass
+from typing import Any
 
 
 @dataclass
 class Transition:
     """State transition"""
+
     from_state: str
     to_state: str
     action: str
-    precondition: Optional[Callable[[Any], bool]] = None
-    postcondition: Optional[Callable[[Any], bool]] = None
+    precondition: Callable[[Any], bool] | None = None
+    postcondition: Callable[[Any], bool] | None = None
 
 
 class StateMachine:
@@ -26,16 +27,16 @@ class StateMachine:
 
     def __init__(self, initial_state: str) -> None:
         self._current_state = initial_state
-        self._transitions: Dict[str, List[Transition]] = {}
-        self._history: List[str] = [initial_state]
+        self._transitions: dict[str, list[Transition]] = {}
+        self._history: list[str] = [initial_state]
 
     def add_transition(
         self,
         from_state: str,
         to_state: str,
         action: str,
-        precondition: Optional[Callable[[Any], bool]] = None,
-        postcondition: Optional[Callable[[Any], bool]] = None,
+        precondition: Callable[[Any], bool] | None = None,
+        postcondition: Callable[[Any], bool] | None = None,
     ) -> None:
         """Add state transition"""
         if from_state not in self._transitions:
@@ -54,13 +55,13 @@ class StateMachine:
         """Get current state"""
         return self._current_state
 
-    def valid_actions(self) -> List[str]:
+    def valid_actions(self) -> list[str]:
         """Get valid actions from current state"""
         if self._current_state not in self._transitions:
             return []
         return [t.action for t in self._transitions[self._current_state]]
 
-    def can_transition(self, action: str, context: Optional[Any] = None) -> bool:
+    def can_transition(self, action: str, context: Any | None = None) -> bool:
         """Check if transition is valid"""
         if self._current_state not in self._transitions:
             return False
@@ -73,10 +74,11 @@ class StateMachine:
 
         return False
 
-    def perform_action(self, action: str, context: Optional[Any] = None) -> bool:
+    def perform_action(self, action: str, context: Any | None = None) -> bool:
         """Perform action and transition state
 
-        Returns:
+        Returns
+        -------
             True if transition succeeded
         """
         if self._current_state not in self._transitions:
@@ -99,7 +101,7 @@ class StateMachine:
 
         return False
 
-    def history(self) -> List[str]:
+    def history(self) -> list[str]:
         """Get state history"""
         return self._history.copy()
 
@@ -120,23 +122,25 @@ class StateMachineTest:
             expected_path=["pending", "confirmed", "shipped", "delivered"]
         )
     """
+
     name: str
     initial_state: str
-    expected_path: Optional[List[str]] = None
-    machine: Optional[StateMachine] = None
+    expected_path: list[str] | None = None
+    machine: StateMachine | None = None
     passed: bool = False
 
     def __post_init__(self) -> None:
         if self.machine is None:
             self.machine = StateMachine(self.initial_state)
 
-    def run(self, actions: List[Tuple[str, Optional[Any]]]) -> bool:
+    def run(self, actions: list[tuple[str, Any | None]]) -> bool:
         """Run test with sequence of actions
 
         Args:
             actions: List of (action, context) tuples
 
-        Returns:
+        Returns
+        -------
             True if test passed
         """
         if self.machine is None:

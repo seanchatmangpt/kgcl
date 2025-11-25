@@ -1,11 +1,10 @@
 """Tests for ontology parser."""
 
 import pytest
-from pathlib import Path
-from rdflib import Graph, Namespace, URIRef, Literal
+from rdflib import Graph, Literal, Namespace, URIRef
 from rdflib.namespace import RDF, RDFS, SH, XSD
 
-from kgcl.ttl2dspy.parser import OntologyParser, SHACLShape, PropertyShape
+from kgcl.ttl2dspy.parser import OntologyParser, PropertyShape, SHACLShape
 
 
 @pytest.fixture
@@ -50,63 +49,38 @@ class TestPropertyShape:
 
     def test_is_required(self):
         """Test required property detection."""
-        prop = PropertyShape(
-            path=URIRef("http://example.org/name"),
-            name="name",
-            min_count=1,
-        )
+        prop = PropertyShape(path=URIRef("http://example.org/name"), name="name", min_count=1)
         assert prop.is_required is True
 
-        prop2 = PropertyShape(
-            path=URIRef("http://example.org/age"),
-            name="age",
-            min_count=0,
-        )
+        prop2 = PropertyShape(path=URIRef("http://example.org/age"), name="age", min_count=0)
         assert prop2.is_required is False
 
     def test_is_list(self):
         """Test list property detection."""
-        prop = PropertyShape(
-            path=URIRef("http://example.org/tags"),
-            name="tags",
-            max_count=None,
-        )
+        prop = PropertyShape(path=URIRef("http://example.org/tags"), name="tags", max_count=None)
         assert prop.is_list is True
 
-        prop2 = PropertyShape(
-            path=URIRef("http://example.org/name"),
-            name="name",
-            max_count=1,
-        )
+        prop2 = PropertyShape(path=URIRef("http://example.org/name"), name="name", max_count=1)
         assert prop2.is_list is False
 
     def test_get_python_type_string(self):
         """Test Python type generation for strings."""
         prop = PropertyShape(
-            path=URIRef("http://example.org/name"),
-            name="name",
-            datatype=XSD.string,
-            min_count=1,
+            path=URIRef("http://example.org/name"), name="name", datatype=XSD.string, min_count=1
         )
         assert prop.get_python_type() == "str"
 
     def test_get_python_type_integer(self):
         """Test Python type generation for integers."""
         prop = PropertyShape(
-            path=URIRef("http://example.org/age"),
-            name="age",
-            datatype=XSD.integer,
-            min_count=0,
+            path=URIRef("http://example.org/age"), name="age", datatype=XSD.integer, min_count=0
         )
         assert prop.get_python_type() == "Optional[int]"
 
     def test_get_python_type_list(self):
         """Test Python type generation for lists."""
         prop = PropertyShape(
-            path=URIRef("http://example.org/tags"),
-            name="tags",
-            datatype=XSD.string,
-            max_count=None,
+            path=URIRef("http://example.org/tags"), name="tags", datatype=XSD.string, max_count=None
         )
         assert prop.get_python_type() == "Optional[List[str]]"
 
@@ -126,16 +100,10 @@ class TestSHACLShape:
 
     def test_signature_name(self):
         """Test signature name generation."""
-        shape = SHACLShape(
-            uri=URIRef("http://example.org/PersonShape"),
-            name="PersonShape",
-        )
+        shape = SHACLShape(uri=URIRef("http://example.org/PersonShape"), name="PersonShape")
         assert shape.signature_name == "PersonSignature"
 
-        shape2 = SHACLShape(
-            uri=URIRef("http://example.org/TextAnalysis"),
-            name="TextAnalysis",
-        )
+        shape2 = SHACLShape(uri=URIRef("http://example.org/TextAnalysis"), name="TextAnalysis")
         assert shape2.signature_name == "TextAnalysisSignature"
 
     def test_categorize_properties(self):
@@ -144,20 +112,9 @@ class TestSHACLShape:
             uri=URIRef("http://example.org/PersonShape"),
             name="PersonShape",
             properties=[
-                PropertyShape(
-                    path=URIRef("http://example.org/name"),
-                    name="name",
-                    min_count=1,
-                ),
-                PropertyShape(
-                    path=URIRef("http://example.org/age"),
-                    name="age",
-                    default_value="0",
-                ),
-                PropertyShape(
-                    path=URIRef("http://example.org/description"),
-                    name="description",
-                ),
+                PropertyShape(path=URIRef("http://example.org/name"), name="name", min_count=1),
+                PropertyShape(path=URIRef("http://example.org/age"), name="age", default_value="0"),
+                PropertyShape(path=URIRef("http://example.org/description"), name="description"),
             ],
         )
 

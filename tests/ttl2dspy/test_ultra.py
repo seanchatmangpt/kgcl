@@ -1,13 +1,11 @@
 """Tests for ultra-optimized caching system."""
 
 import pytest
-import time
-from pathlib import Path
-from rdflib import Graph, Namespace, URIRef, Literal
+from rdflib import Graph, Literal, Namespace, URIRef
 from rdflib.namespace import RDF, RDFS, SH, XSD
 
-from kgcl.ttl2dspy.ultra import UltraOptimizer, CacheConfig, ShapeIndex
-from kgcl.ttl2dspy.parser import SHACLShape, PropertyShape
+from kgcl.ttl2dspy.parser import PropertyShape, SHACLShape
+from kgcl.ttl2dspy.ultra import CacheConfig, ShapeIndex, UltraOptimizer
 
 
 @pytest.fixture
@@ -49,9 +47,7 @@ class TestCacheConfig:
     def test_custom_config(self, tmp_path):
         """Test custom configuration."""
         config = CacheConfig(
-            memory_cache_enabled=False,
-            disk_cache_dir=tmp_path / "cache",
-            max_disk_cache_age=3600,
+            memory_cache_enabled=False, disk_cache_dir=tmp_path / "cache", max_disk_cache_age=3600
         )
 
         assert config.memory_cache_enabled is False
@@ -66,10 +62,7 @@ class TestShapeIndex:
         """Test adding and finding shapes by name."""
         index = ShapeIndex()
 
-        shape = SHACLShape(
-            uri=URIRef("http://example.org/TestShape"),
-            name="TestShape",
-        )
+        shape = SHACLShape(uri=URIRef("http://example.org/TestShape"), name="TestShape")
 
         index.add(shape)
 
@@ -80,10 +73,7 @@ class TestShapeIndex:
         """Test finding shapes by URI."""
         index = ShapeIndex()
 
-        shape = SHACLShape(
-            uri=URIRef("http://example.org/TestShape"),
-            name="TestShape",
-        )
+        shape = SHACLShape(uri=URIRef("http://example.org/TestShape"), name="TestShape")
 
         index.add(shape)
 
@@ -118,10 +108,7 @@ class TestShapeIndex:
         """Test clearing the index."""
         index = ShapeIndex()
 
-        shape = SHACLShape(
-            uri=URIRef("http://example.org/TestShape"),
-            name="TestShape",
-        )
+        shape = SHACLShape(uri=URIRef("http://example.org/TestShape"), name="TestShape")
 
         index.add(shape)
         assert len(index._by_name) == 1
@@ -161,9 +148,7 @@ class TestUltraOptimizer:
     def test_disk_cache(self, sample_ttl_file, tmp_path):
         """Test disk caching."""
         config = CacheConfig(
-            memory_cache_enabled=False,
-            disk_cache_enabled=True,
-            disk_cache_dir=tmp_path / "cache",
+            memory_cache_enabled=False, disk_cache_enabled=True, disk_cache_dir=tmp_path / "cache"
         )
         optimizer = UltraOptimizer(config)
 
@@ -195,9 +180,9 @@ class TestUltraOptimizer:
                         name="prop",
                         datatype=XSD.string,
                         min_count=1,
-                    ),
+                    )
                 ],
-            ),
+            )
         ]
         shapes[0].categorize_properties()
 
@@ -248,12 +233,7 @@ class TestUltraOptimizer:
         # Add some data
         optimizer._memory_cache["test"] = "value"
         optimizer.parser._graph_cache["test"] = Graph()
-        optimizer.shape_index.add(
-            SHACLShape(
-                uri=URIRef("http://example.org/Test"),
-                name="Test",
-            )
-        )
+        optimizer.shape_index.add(SHACLShape(uri=URIRef("http://example.org/Test"), name="Test"))
 
         # Create a disk cache file
         cache_file = config.disk_cache_dir / "test.pkl"

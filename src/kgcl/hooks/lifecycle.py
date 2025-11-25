@@ -4,14 +4,16 @@ Hook Lifecycle & Execution Management.
 Manages hook execution pipeline, context propagation, and lifecycle events.
 """
 
+import asyncio
+import time
+import uuid
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Any, Callable, Dict, List, Optional
-import asyncio
-import uuid
-import time
-from kgcl.hooks.security import ErrorSanitizer, SanitizedError
-from kgcl.hooks.performance import PerformanceOptimizer, PerformanceMetrics
+from typing import Any
+
+from kgcl.hooks.performance import PerformanceMetrics, PerformanceOptimizer
+from kgcl.hooks.security import ErrorSanitizer
 
 
 @dataclass
@@ -34,7 +36,7 @@ class HookContext:
     actor: str
     request_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     execution_id: str = field(default_factory=lambda: str(uuid.uuid4()))
-    metadata: Dict[str, Any] = field(default_factory=dict)
+    metadata: dict[str, Any] = field(default_factory=dict)
     timestamp: datetime = field(default_factory=datetime.utcnow)
 
 
@@ -58,7 +60,7 @@ class HookLifecycleEvent:
     event_type: str
     hook_id: str
     timestamp: datetime
-    metadata: Dict[str, Any] = field(default_factory=dict)
+    metadata: dict[str, Any] = field(default_factory=dict)
 
 
 class HookChain:
@@ -68,7 +70,7 @@ class HookChain:
     Each hook's output becomes the next hook's input.
     """
 
-    def __init__(self, hooks: List[Any]) -> None:
+    def __init__(self, hooks: list[Any]) -> None:
         """
         Initialize hook chain.
 
@@ -79,7 +81,7 @@ class HookChain:
         """
         self.hooks = hooks
 
-    async def execute(self, context: Dict[str, Any]) -> List[Any]:
+    async def execute(self, context: dict[str, Any]) -> list[Any]:
         """
         Execute hook chain.
 
@@ -129,17 +131,17 @@ class HookExecutionPipeline:
             Whether to track performance metrics
         """
         self.stop_on_error = stop_on_error
-        self._event_handlers: List[Callable[..., Any]] = []
+        self._event_handlers: list[Callable[..., Any]] = []
         self._error_sanitizer = ErrorSanitizer()
-        self._performance_optimizer = PerformanceOptimizer() if enable_performance_tracking else None
+        self._performance_optimizer = (
+            PerformanceOptimizer() if enable_performance_tracking else None
+        )
 
     def on_event(self, handler: Callable[..., Any]) -> None:
         """Register event handler."""
         self._event_handlers.append(handler)
 
-    async def execute(
-        self, hook: Any, context: Dict[str, Any]
-    ) -> Any:
+    async def execute(self, hook: Any, context: dict[str, Any]) -> Any:
         """
         Execute a single hook with error sanitization and performance tracking.
 
@@ -188,7 +190,7 @@ class HookExecutionPipeline:
                     pass
 
                 exc = ReceiptException(receipt.error)
-                if hasattr(hook, 'error_code'):
+                if hasattr(hook, "error_code"):
                     exc.error_code = hook.error_code
 
                 sanitized = self._error_sanitizer.sanitize(exc)
@@ -200,7 +202,7 @@ class HookExecutionPipeline:
                 if self._performance_optimizer:
                     stats = self._performance_optimizer.get_stats(f"hook_execute_{hook.name}")
                     if stats:
-                        perf_metadata['performance_stats'] = stats
+                        perf_metadata["performance_stats"] = stats
 
                 receipt = HookReceipt(
                     hook_id=receipt.hook_id,
@@ -214,11 +216,11 @@ class HookExecutionPipeline:
                     input_context=receipt.input_context,
                     metadata={
                         **receipt.metadata,
-                        'error_code': sanitized.code,
-                        'sanitized': True,
-                        **perf_metadata
+                        "error_code": sanitized.code,
+                        "sanitized": True,
+                        **perf_metadata,
                     },
-                    receipt_id=receipt.receipt_id
+                    receipt_id=receipt.receipt_id,
                 )
 
             return receipt
@@ -229,9 +231,7 @@ class HookExecutionPipeline:
                 latency_ms = (end_time - start_time) * 1000
 
                 metric = PerformanceMetrics(
-                    operation=f"hook_execute_{hook.name}",
-                    latency_ms=latency_ms,
-                    success=False,
+                    operation=f"hook_execute_{hook.name}", latency_ms=latency_ms, success=False
                 )
                 self._performance_optimizer.record_metric(metric)
 
@@ -239,25 +239,26 @@ class HookExecutionPipeline:
             sanitized = self._error_sanitizer.sanitize(e)
 
             # Create a failed receipt with sanitized error
-            from kgcl.hooks.core import HookReceipt
-            from kgcl.hooks.conditions import ConditionResult
             from datetime import datetime
+
+            from kgcl.hooks.conditions import ConditionResult
+            from kgcl.hooks.core import HookReceipt
 
             return HookReceipt(
                 hook_id=hook.name,
                 timestamp=datetime.utcnow(),
-                actor=getattr(hook, 'actor', None),
-                condition_result=ConditionResult(triggered=False, metadata={'error': sanitized.code}),
+                actor=getattr(hook, "actor", None),
+                condition_result=ConditionResult(
+                    triggered=False, metadata={"error": sanitized.code}
+                ),
                 handler_result=None,
                 duration_ms=0.0,
                 error=sanitized.message,
                 stack_trace=None,
-                metadata={'error_code': sanitized.code, 'sanitized': True}
+                metadata={"error_code": sanitized.code, "sanitized": True},
             )
 
-    async def execute_batch(
-        self, hooks: List[Any], context: Dict[str, Any]
-    ) -> List[Any]:
+    async def execute_batch(self, hooks: list[Any], context: dict[str, Any]) -> list[Any]:
         """
         Execute multiple hooks in priority order with performance tracking.
 
@@ -302,7 +303,7 @@ class HookExecutionPipeline:
 
         return receipts
 
-    def get_performance_stats(self, operation: Optional[str] = None) -> Optional[Dict]:
+    def get_performance_stats(self, operation: str | None = None) -> dict | None:
         """Get performance statistics.
 
         Parameters
@@ -323,10 +324,7 @@ class HookExecutionPipeline:
 
         # Return stats for all operations
         all_ops = self._performance_optimizer.get_all_operations()
-        return {
-            op: self._performance_optimizer.get_stats(op)
-            for op in all_ops
-        }
+        return {op: self._performance_optimizer.get_stats(op) for op in all_ops}
 
 
 class HookStateManager:
@@ -338,10 +336,10 @@ class HookStateManager:
 
     def __init__(self) -> None:
         """Initialize state manager."""
-        self._state_history: Dict[str, List[Dict[str, Any]]] = {}
+        self._state_history: dict[str, list[dict[str, Any]]] = {}
 
     def record_transition(
-        self, hook_id: str, from_state: str, to_state: str, metadata: Dict[str, Any]
+        self, hook_id: str, from_state: str, to_state: str, metadata: dict[str, Any]
     ) -> None:
         """
         Record state transition.
@@ -369,7 +367,7 @@ class HookStateManager:
             }
         )
 
-    def get_history(self, hook_id: str) -> List[Dict[str, Any]]:
+    def get_history(self, hook_id: str) -> list[dict[str, Any]]:
         """
         Get state history for a hook.
 
@@ -407,9 +405,7 @@ class HookErrorRecovery:
         self.max_retries = max_retries
         self.retry_delay = retry_delay
 
-    async def execute_with_retry(
-        self, hook: Any, context: Dict[str, Any]
-    ) -> Any:
+    async def execute_with_retry(self, hook: Any, context: dict[str, Any]) -> Any:
         """
         Execute hook with retry on failure.
 

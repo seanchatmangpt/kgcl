@@ -4,36 +4,38 @@ Implements the circuit breaker pattern to prevent cascading failures
 in distributed systems by failing fast when a service is unhealthy.
 """
 
-from enum import Enum
-from dataclasses import dataclass
-from typing import Callable, TypeVar, Optional
-import time
 import logging
+import time
+from collections.abc import Callable
+from dataclasses import dataclass
+from enum import Enum
 from functools import wraps
+from typing import TypeVar
 
 
 class CircuitState(Enum):
     """Circuit breaker states."""
-    CLOSED = "closed"      # Normal operation - requests pass through
-    OPEN = "open"          # Fail fast - requests immediately fail
+
+    CLOSED = "closed"  # Normal operation - requests pass through
+    OPEN = "open"  # Fail fast - requests immediately fail
     HALF_OPEN = "half_open"  # Testing recovery - limited requests allowed
 
 
 @dataclass
 class CircuitBreakerConfig:
     """Circuit breaker configuration."""
+
     failure_threshold: int = 5  # Failures before opening circuit
     success_threshold_for_recovery: int = 2  # Successes needed to close from half-open
     timeout_seconds: float = 60.0  # Time before attempting recovery
     name: str = "circuit_breaker"
 
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 class CircuitBreakerError(Exception):
     """Raised when circuit breaker is open."""
-    pass
 
 
 class CircuitBreaker:
@@ -66,10 +68,12 @@ class CircuitBreaker:
             *args: Positional arguments for func
             **kwargs: Keyword arguments for func
 
-        Returns:
+        Returns
+        -------
             Result from func
 
-        Raises:
+        Raises
+        ------
             CircuitBreakerError: If circuit is open
             Exception: Any exception from func
         """
@@ -80,16 +84,14 @@ class CircuitBreaker:
                 self.state = CircuitState.HALF_OPEN
                 self.success_count = 0
             else:
-                raise CircuitBreakerError(
-                    f"Circuit breaker '{self.config.name}' is OPEN"
-                )
+                raise CircuitBreakerError(f"Circuit breaker '{self.config.name}' is OPEN")
 
         # Attempt the call
         try:
             result = func(*args, **kwargs)
             self._on_success()
             return result
-        except Exception as e:
+        except Exception:
             self._on_failure()
             raise
 
@@ -143,20 +145,21 @@ class CircuitBreaker:
     def get_stats(self) -> dict:
         """Get circuit breaker statistics.
 
-        Returns:
+        Returns
+        -------
             Dictionary with current stats
         """
         return {
-            'state': self.state.value,
-            'failure_count': self.failure_count,
-            'success_count': self.success_count,
-            'last_failure_time': self.last_failure_time,
-            'config': {
-                'name': self.config.name,
-                'failure_threshold': self.config.failure_threshold,
-                'success_threshold': self.config.success_threshold_for_recovery,
-                'timeout_seconds': self.config.timeout_seconds,
-            }
+            "state": self.state.value,
+            "failure_count": self.failure_count,
+            "success_count": self.success_count,
+            "last_failure_time": self.last_failure_time,
+            "config": {
+                "name": self.config.name,
+                "failure_threshold": self.config.failure_threshold,
+                "success_threshold": self.config.success_threshold_for_recovery,
+                "timeout_seconds": self.config.timeout_seconds,
+            },
         }
 
     def __call__(self, func: Callable[..., T]) -> Callable[..., T]:
@@ -169,7 +172,9 @@ class CircuitBreaker:
             def my_function():
                 # ...
         """
+
         @wraps(func)
         def wrapper(*args, **kwargs) -> T:
             return self.call(func, *args, **kwargs)
+
         return wrapper

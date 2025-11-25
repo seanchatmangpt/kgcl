@@ -3,14 +3,15 @@
 Combines multiple tests into composed test scenarios.
 """
 
-from typing import List, Callable, Any, Optional
+from collections.abc import Callable
 from dataclasses import dataclass, field
-from datetime import datetime
 from enum import Enum
+from typing import Any
 
 
 class CompositionStrategy(Enum):
     """Strategy for composing tests"""
+
     SEQUENTIAL = "sequential"
     PARALLEL = "parallel"
     PIPELINE = "pipeline"
@@ -19,12 +20,13 @@ class CompositionStrategy(Enum):
 @dataclass
 class ComposedTest:
     """A test composed from multiple sub-tests"""
+
     name: str
     strategy: CompositionStrategy = CompositionStrategy.SEQUENTIAL
-    tests: List[Callable[[], Any]] = field(default_factory=list)
-    before_hooks: List[Callable[[], None]] = field(default_factory=list)
-    after_hooks: List[Callable[[], None]] = field(default_factory=list)
-    results: List[Any] = field(default_factory=list)
+    tests: list[Callable[[], Any]] = field(default_factory=list)
+    before_hooks: list[Callable[[], None]] = field(default_factory=list)
+    after_hooks: list[Callable[[], None]] = field(default_factory=list)
+    results: list[Any] = field(default_factory=list)
 
     def add_test(self, test: Callable[[], Any]) -> "ComposedTest":
         """Add test to composition"""
@@ -41,10 +43,11 @@ class ComposedTest:
         self.after_hooks.append(hook)
         return self
 
-    def execute(self) -> List[Any]:
+    def execute(self) -> list[Any]:
         """Execute composed tests
 
-        Returns:
+        Returns
+        -------
             List of results from all tests
         """
         self.results = []
@@ -144,7 +147,7 @@ class TestComposition:
         """Build and return composed test"""
         return self._composed
 
-    def execute(self) -> List[Any]:
+    def execute(self) -> list[Any]:
         """Execute composed tests"""
         return self._composed.execute()
 

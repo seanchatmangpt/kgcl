@@ -1,9 +1,8 @@
 """Tests for RDF converters."""
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
-import pytest
-from rdflib import RDF, XSD, Graph, Literal, Namespace
+from rdflib import RDF, XSD, Graph, Namespace
 
 from kgcl.ingestion.config import RDFConfig
 from kgcl.ingestion.converters import RDFConverter
@@ -89,7 +88,7 @@ class TestRDFConverter:
 
         event = AppEvent(
             event_id="test_001",
-            timestamp=datetime(2024, 11, 24, 10, 30, 0, tzinfo=timezone.utc),
+            timestamp=datetime(2024, 11, 24, 10, 30, 0, tzinfo=UTC),
             app_name="com.apple.Safari",
         )
 

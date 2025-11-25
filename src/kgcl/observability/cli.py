@@ -18,16 +18,10 @@ from kgcl.observability.tracing import configure_tracing
 @click.group()
 def cli() -> None:
     """KGCL observability and diagnostics commands."""
-    pass
 
 
 @cli.command()
-@click.option(
-    "--format",
-    type=click.Choice(["json", "text"]),
-    default="text",
-    help="Output format",
-)
+@click.option("--format", type=click.Choice(["json", "text"]), default="text", help="Output format")
 def health(format: str) -> None:
     """Check system health and connectivity.
 
@@ -47,11 +41,7 @@ def health(format: str) -> None:
         click.echo(json.dumps(system_health.to_dict(), indent=2))
     else:
         # Text format
-        status_color = {
-            "healthy": "green",
-            "degraded": "yellow",
-            "unhealthy": "red",
-        }
+        status_color = {"healthy": "green", "degraded": "yellow", "unhealthy": "red"}
 
         click.echo("\n🏥 KGCL System Health Check")
         click.echo("=" * 50)
@@ -62,11 +52,7 @@ def health(format: str) -> None:
         click.echo()
 
         for component in system_health.components:
-            status_symbol = {
-                "healthy": "✅",
-                "degraded": "⚠️",
-                "unhealthy": "❌",
-            }
+            status_symbol = {"healthy": "✅", "degraded": "⚠️", "unhealthy": "❌"}
 
             click.echo(f"{status_symbol[component.status.value]} {component.name}")
             click.echo(f"   Status: {component.status.value}")
@@ -95,9 +81,15 @@ def config() -> None:
     click.echo(f"Environment: {config.environment.value}")
     click.echo()
     click.echo("Features:")
-    click.echo(f"  Tracing: {click.style('enabled' if config.enable_tracing else 'disabled', fg='green' if config.enable_tracing else 'red')}")
-    click.echo(f"  Metrics: {click.style('enabled' if config.enable_metrics else 'disabled', fg='green' if config.enable_metrics else 'red')}")
-    click.echo(f"  Logging: {click.style('enabled' if config.enable_logging else 'disabled', fg='green' if config.enable_logging else 'red')}")
+    click.echo(
+        f"  Tracing: {click.style('enabled' if config.enable_tracing else 'disabled', fg='green' if config.enable_tracing else 'red')}"
+    )
+    click.echo(
+        f"  Metrics: {click.style('enabled' if config.enable_metrics else 'disabled', fg='green' if config.enable_metrics else 'red')}"
+    )
+    click.echo(
+        f"  Logging: {click.style('enabled' if config.enable_logging else 'disabled', fg='green' if config.enable_logging else 'red')}"
+    )
     click.echo()
     click.echo("Configuration:")
     click.echo(f"  Trace Exporter: {config.trace_exporter.value}")
@@ -110,12 +102,7 @@ def config() -> None:
 
 
 @cli.command()
-@click.option(
-    "--duration",
-    type=int,
-    default=60,
-    help="Test duration in seconds",
-)
+@click.option("--duration", type=int, default=60, help="Test duration in seconds")
 def test_tracing(duration: int) -> None:
     """Test OpenTelemetry tracing configuration.
 

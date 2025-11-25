@@ -4,21 +4,20 @@ Tests for remaining hook modules: QueryOptimizer, TransactionManager, HookManage
 Chicago School TDD: No mocking of domain objects, real implementations.
 """
 
-import pytest
-import time
 from datetime import datetime
 
+import pytest
+
+from kgcl.hooks.conditions import ConditionResult
+from kgcl.hooks.core import Hook, HookManager, HookReceipt, HookValidationError
+from kgcl.hooks.observability import HealthCheck, Observability
 from kgcl.hooks.query_optimizer import QueryOptimizer, QueryPlan
 from kgcl.hooks.transaction import (
     Transaction,
+    TransactionError,
     TransactionManager,
     TransactionState,
-    TransactionError,
-    IsolationViolation,
 )
-from kgcl.hooks.core import Hook, HookManager, HookReceipt, HookValidationError
-from kgcl.hooks.conditions import SparqlAskCondition, ConditionResult
-from kgcl.hooks.observability import Observability, HealthCheck
 
 
 # Helper for tests
@@ -522,16 +521,10 @@ class TestHookManager:
         """Should return all hooks."""
         manager = HookManager()
         hook1 = Hook(
-            name="hook1",
-            description="Test 1",
-            condition=SimpleCondition(),
-            handler=lambda ctx: {},
+            name="hook1", description="Test 1", condition=SimpleCondition(), handler=lambda ctx: {}
         )
         hook2 = Hook(
-            name="hook2",
-            description="Test 2",
-            condition=SimpleCondition(),
-            handler=lambda ctx: {},
+            name="hook2", description="Test 2", condition=SimpleCondition(), handler=lambda ctx: {}
         )
 
         manager.register_hook(hook1)

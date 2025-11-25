@@ -293,7 +293,7 @@ def example_error_handling(tracer: Any, metrics: KGCLMetrics, logger: Any) -> No
             # Simulate error
             raise ValueError("Simulated error for demonstration")
 
-    except ValueError as e:
+    except ValueError:
         duration_ms = (time.perf_counter() - start) * 1000
         logger.exception("Operation failed")
 

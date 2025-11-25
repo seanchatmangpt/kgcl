@@ -4,22 +4,22 @@ This module provides tools to parse RDF/TTL files with SHACL shapes and
 automatically generate DSPy Signature classes for LLM-based workflows.
 """
 
-from .parser import OntologyParser, SHACLShape, PropertyShape
-from .generator import DSPyGenerator, SignatureDefinition
-from .ultra import UltraOptimizer, CacheConfig
-from .writer import ModuleWriter, WriteResult
 from .cli import main
+from .generator import DSPyGenerator, SignatureDefinition
+from .parser import OntologyParser, PropertyShape, SHACLShape
+from .ultra import CacheConfig, UltraOptimizer
+from .writer import ModuleWriter, WriteResult
 
 __version__ = "1.0.0"
 __all__ = [
-    "OntologyParser",
-    "SHACLShape",
-    "PropertyShape",
+    "CacheConfig",
     "DSPyGenerator",
+    "ModuleWriter",
+    "OntologyParser",
+    "PropertyShape",
+    "SHACLShape",
     "SignatureDefinition",
     "UltraOptimizer",
-    "CacheConfig",
-    "ModuleWriter",
     "WriteResult",
     "main",
 ]

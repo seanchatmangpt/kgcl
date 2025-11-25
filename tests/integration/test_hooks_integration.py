@@ -6,8 +6,7 @@ Tests hook triggers, execution order, error handling, and rollback behavior.
 import tempfile
 from pathlib import Path
 
-import pytest
-from rdflib import Literal, Namespace
+from rdflib import Namespace
 
 from kgcl.unrdf_engine.engine import UnrdfEngine
 from kgcl.unrdf_engine.hooks import (
@@ -35,22 +34,16 @@ class TestHooksIntegration:
 
             class PhaseTracker(KnowledgeHook):
                 def __init__(self, phase_name, phase):
-                    super().__init__(
-                        name=f"tracker_{phase_name}", phases=[phase]
-                    )
+                    super().__init__(name=f"tracker_{phase_name}", phases=[phase])
                     self.phase_name = phase_name
 
                 def execute(self, context: HookContext):
                     execution_log.append(self.phase_name)
 
             # Register hooks for different phases
-            registry.register(
-                PhaseTracker("pre_ingestion", HookPhase.PRE_INGESTION)
-            )
+            registry.register(PhaseTracker("pre_ingestion", HookPhase.PRE_INGESTION))
             registry.register(PhaseTracker("on_change", HookPhase.ON_CHANGE))
-            registry.register(
-                PhaseTracker("post_commit", HookPhase.POST_COMMIT)
-            )
+            registry.register(PhaseTracker("post_commit", HookPhase.POST_COMMIT))
 
             hook_executor = HookExecutor(registry)
             pipeline = IngestionPipeline(engine, hook_executor=hook_executor)
@@ -73,9 +66,7 @@ class TestHooksIntegration:
 
             class PriorityHook(KnowledgeHook):
                 def __init__(self, name, priority):
-                    super().__init__(
-                        name=name, phases=[HookPhase.POST_COMMIT], priority=priority
-                    )
+                    super().__init__(name=name, phases=[HookPhase.POST_COMMIT], priority=priority)
                     self.hook_name = name
 
                 def execute(self, context: HookContext):
@@ -145,18 +136,14 @@ class TestHooksIntegration:
 
             class FailingHook(KnowledgeHook):
                 def __init__(self):
-                    super().__init__(
-                        name="failing", phases=[HookPhase.POST_COMMIT]
-                    )
+                    super().__init__(name="failing", phases=[HookPhase.POST_COMMIT])
 
                 def execute(self, context: HookContext):
                     raise RuntimeError("Hook failed intentionally")
 
             class SuccessHook(KnowledgeHook):
                 def __init__(self):
-                    super().__init__(
-                        name="success", phases=[HookPhase.POST_COMMIT], priority=50
-                    )
+                    super().__init__(name="success", phases=[HookPhase.POST_COMMIT], priority=50)
 
                 def execute(self, context: HookContext):
                     pass  # Does nothing
@@ -173,9 +160,7 @@ class TestHooksIntegration:
             assert result.success is True  # Transaction still commits
             # Hook results should show failure
             assert len(result.hook_results) >= 2
-            failing_result = next(
-                (r for r in result.hook_results if r["hook"] == "failing"), None
-            )
+            failing_result = next((r for r in result.hook_results if r["hook"] == "failing"), None)
             assert failing_result is not None
             assert failing_result["success"] is False
 
@@ -187,9 +172,7 @@ class TestHooksIntegration:
 
             class RollbackHook(KnowledgeHook):
                 def __init__(self):
-                    super().__init__(
-                        name="rollback", phases=[HookPhase.POST_VALIDATION]
-                    )
+                    super().__init__(name="rollback", phases=[HookPhase.POST_VALIDATION])
 
                 def execute(self, context: HookContext):
                     # Signal rollback
@@ -202,9 +185,7 @@ class TestHooksIntegration:
             from kgcl.unrdf_engine.validation import ShaclValidator
 
             validator = ShaclValidator()
-            pipeline = IngestionPipeline(
-                engine, validator=validator, hook_executor=hook_executor
-            )
+            pipeline = IngestionPipeline(engine, validator=validator, hook_executor=hook_executor)
 
             # Ingest data (validation won't run without shapes, but hook mechanism tested)
             result = pipeline.ingest_json(data={"id": "test"}, agent="test")
@@ -220,18 +201,14 @@ class TestHooksIntegration:
 
             class Hook1(KnowledgeHook):
                 def __init__(self):
-                    super().__init__(
-                        name="hook1", phases=[HookPhase.ON_CHANGE], priority=100
-                    )
+                    super().__init__(name="hook1", phases=[HookPhase.ON_CHANGE], priority=100)
 
                 def execute(self, context: HookContext):
                     context.metadata["hook1_ran"] = True
 
             class Hook2(KnowledgeHook):
                 def __init__(self):
-                    super().__init__(
-                        name="hook2", phases=[HookPhase.ON_CHANGE], priority=50
-                    )
+                    super().__init__(name="hook2", phases=[HookPhase.ON_CHANGE], priority=50)
 
                 def execute(self, context: HookContext):
                     # Should see metadata from Hook1
@@ -256,9 +233,7 @@ class TestHooksIntegration:
 
             class TrackedHook(KnowledgeHook):
                 def __init__(self):
-                    super().__init__(
-                        name="tracked", phases=[HookPhase.POST_COMMIT]
-                    )
+                    super().__init__(name="tracked", phases=[HookPhase.POST_COMMIT])
 
                 def execute(self, context: HookContext):
                     pass
@@ -273,7 +248,5 @@ class TestHooksIntegration:
 
             # Check history
             history = hook_executor.get_execution_history()
-            tracked_executions = [
-                h for h in history if h["hook"] == "tracked"
-            ]
+            tracked_executions = [h for h in history if h["hook"] == "tracked"]
             assert len(tracked_executions) == 3

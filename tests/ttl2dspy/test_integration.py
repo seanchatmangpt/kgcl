@@ -1,14 +1,14 @@
 """Integration tests for ttl2dspy."""
 
-import pytest
-import tempfile
 from pathlib import Path
-from rdflib import Graph, Namespace, URIRef, Literal
+
+import pytest
+from rdflib import Graph, Literal, Namespace
 from rdflib.namespace import RDF, RDFS, SH, XSD
 
-from kgcl.ttl2dspy.ultra import UltraOptimizer, CacheConfig
-from kgcl.ttl2dspy.writer import ModuleWriter
 from kgcl.ttl2dspy.hooks import TTL2DSpyHook
+from kgcl.ttl2dspy.ultra import CacheConfig, UltraOptimizer
+from kgcl.ttl2dspy.writer import ModuleWriter
 
 
 @pytest.fixture
@@ -119,9 +119,7 @@ class TestEndToEnd:
     def test_caching_workflow(self, text_analysis_ttl, tmp_path):
         """Test that caching works across the workflow."""
         config = CacheConfig(
-            memory_cache_enabled=True,
-            disk_cache_enabled=True,
-            disk_cache_dir=tmp_path / "cache",
+            memory_cache_enabled=True, disk_cache_enabled=True, disk_cache_dir=tmp_path / "cache"
         )
 
         # First run
@@ -188,11 +186,7 @@ class TestEndToEnd:
         code = optimizer.generate_with_cache(shapes)
 
         output_path = tmp_path / "test_signatures.py"
-        writer.write_module(
-            code=code,
-            output_path=output_path,
-            format_code=False,
-        )
+        writer.write_module(code=code, output_path=output_path, format_code=False)
 
         # Add to path and import
         sys.path.insert(0, str(tmp_path))
@@ -200,6 +194,7 @@ class TestEndToEnd:
         try:
             # This will fail if the generated code has syntax errors
             import importlib.util
+
             spec = importlib.util.spec_from_file_location("test_signatures", output_path)
             module = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(module)
@@ -219,12 +214,10 @@ class TestHooks:
         """Test hook with parse action."""
         hook = TTL2DSpyHook()
 
-        request = {
-            "action": "parse",
-            "ttl_path": str(text_analysis_ttl),
-        }
+        request = {"action": "parse", "ttl_path": str(text_analysis_ttl)}
 
         import json
+
         receipt = hook.process_stdin(json.dumps(request))
 
         assert receipt["success"] is True
@@ -236,12 +229,10 @@ class TestHooks:
         """Test hook with validate action."""
         hook = TTL2DSpyHook()
 
-        request = {
-            "action": "validate",
-            "ttl_path": str(text_analysis_ttl),
-        }
+        request = {"action": "validate", "ttl_path": str(text_analysis_ttl)}
 
         import json
+
         receipt = hook.process_stdin(json.dumps(request))
 
         assert receipt["success"] is True
@@ -252,12 +243,10 @@ class TestHooks:
         """Test hook with list action."""
         hook = TTL2DSpyHook()
 
-        request = {
-            "action": "list",
-            "ttl_path": str(text_analysis_ttl),
-        }
+        request = {"action": "list", "ttl_path": str(text_analysis_ttl)}
 
         import json
+
         receipt = hook.process_stdin(json.dumps(request))
 
         assert receipt["success"] is True
@@ -282,6 +271,7 @@ class TestHooks:
         }
 
         import json
+
         receipt = hook.process_stdin(json.dumps(request))
 
         assert receipt["success"] is True
@@ -323,6 +313,7 @@ ex:TestShape a sh:NodeShape ;
         }
 
         import json
+
         receipt = hook.process_stdin(json.dumps(request))
 
         assert receipt["success"] is True
@@ -334,11 +325,12 @@ ex:TestShape a sh:NodeShape ;
 
         # Invalid request
         request = {
-            "action": "generate",
+            "action": "generate"
             # Missing required fields
         }
 
         import json
+
         receipt = hook.process_stdin(json.dumps(request))
 
         assert receipt["success"] is False

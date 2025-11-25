@@ -2,16 +2,14 @@
 Unit tests for UNRDF bridge.
 """
 
-import pytest
-from unittest.mock import Mock, patch, MagicMock
-from pathlib import Path
-import tempfile
+from unittest.mock import Mock, patch
 
+import pytest
 from rdflib import Graph
 
-from kgcl.dspy_runtime.unrdf_bridge import UNRDFBridge
-from kgcl.dspy_runtime.ollama_config import OllamaConfig, DSPY_AVAILABLE
 from kgcl.dspy_runtime.invoker import InvocationResult
+from kgcl.dspy_runtime.ollama_config import DSPY_AVAILABLE, OllamaConfig
+from kgcl.dspy_runtime.unrdf_bridge import UNRDFBridge
 
 
 @pytest.fixture
@@ -81,7 +79,7 @@ class TestUNRDFBridge:
             success=True,
             inputs={"question": "test"},
             outputs={"answer": "result"},
-            metrics={"latency_seconds": 1.0}
+            metrics={"latency_seconds": 1.0},
         )
 
         mock_invoker = Mock()
@@ -93,7 +91,7 @@ class TestUNRDFBridge:
         result = bridge.invoke(
             module_path=str(sample_signature_module),
             signature_name="BridgeTestSignature",
-            inputs={"question": "What is 2+2?"}
+            inputs={"question": "What is 2+2?"},
         )
 
         assert result["result"]["success"] is True
@@ -112,7 +110,7 @@ class TestUNRDFBridge:
             success=True,
             inputs={"question": "test"},
             outputs={"answer": "result"},
-            metrics={"latency_seconds": 1.0}
+            metrics={"latency_seconds": 1.0},
         )
 
         mock_invoker = Mock()
@@ -125,7 +123,7 @@ class TestUNRDFBridge:
             signature_name="BridgeTestSignature",
             inputs={"question": "test"},
             source_features=["http://example.com/feature1"],
-            source_signatures=["http://example.com/sig1"]
+            source_signatures=["http://example.com/sig1"],
         )
 
         assert result["result"]["success"] is True
@@ -148,14 +146,14 @@ class TestUNRDFBridge:
             success=True,
             inputs={"question": "q1"},
             outputs={"answer": "a1"},
-            metrics={"latency_seconds": 1.0}
+            metrics={"latency_seconds": 1.0},
         )
 
         mock_result2 = InvocationResult(
             success=True,
             inputs={"question": "q2"},
             outputs={"answer": "a2"},
-            metrics={"latency_seconds": 1.5}
+            metrics={"latency_seconds": 1.5},
         )
 
         mock_invoker = Mock()
@@ -168,13 +166,13 @@ class TestUNRDFBridge:
             {
                 "module_path": str(sample_signature_module),
                 "signature_name": "BridgeTestSignature",
-                "inputs": {"question": "q1"}
+                "inputs": {"question": "q1"},
             },
             {
                 "module_path": str(sample_signature_module),
                 "signature_name": "BridgeTestSignature",
-                "inputs": {"question": "q2"}
-            }
+                "inputs": {"question": "q2"},
+            },
         ]
 
         results = bridge.batch_invoke(invocations)
@@ -186,22 +184,21 @@ class TestUNRDFBridge:
     @pytest.mark.skipif(not DSPY_AVAILABLE, reason="DSPy not available")
     @patch("kgcl.dspy_runtime.unrdf_bridge.OllamaLM")
     @patch("kgcl.dspy_runtime.unrdf_bridge.SignatureInvoker")
-    def test_batch_invoke_with_error(self, mock_invoker_class, mock_lm_class, sample_signature_module):
+    def test_batch_invoke_with_error(
+        self, mock_invoker_class, mock_lm_class, sample_signature_module
+    ):
         """Test batch invocation with one failure."""
         mock_lm = Mock()
         mock_lm_class.return_value = mock_lm
 
         mock_result_success = InvocationResult(
-            success=True,
-            inputs={"question": "q1"},
-            outputs={"answer": "a1"},
-            metrics={}
+            success=True, inputs={"question": "q1"}, outputs={"answer": "a1"}, metrics={}
         )
 
         mock_invoker = Mock()
         mock_invoker.invoke_from_module.side_effect = [
             mock_result_success,
-            RuntimeError("Invocation failed")
+            RuntimeError("Invocation failed"),
         ]
         mock_invoker_class.return_value = mock_invoker
 
@@ -210,13 +207,13 @@ class TestUNRDFBridge:
             {
                 "module_path": str(sample_signature_module),
                 "signature_name": "BridgeTestSignature",
-                "inputs": {"question": "q1"}
+                "inputs": {"question": "q1"},
             },
             {
                 "module_path": str(sample_signature_module),
                 "signature_name": "BridgeTestSignature",
-                "inputs": {"question": "q2"}
-            }
+                "inputs": {"question": "q2"},
+            },
         ]
 
         results = bridge.batch_invoke(invocations)
@@ -237,7 +234,7 @@ class TestUNRDFBridge:
             success=True,
             inputs={"question": "test"},
             outputs={"answer": "result"},
-            metrics={"latency_seconds": 1.0}
+            metrics={"latency_seconds": 1.0},
         )
 
         mock_invoker = Mock()
@@ -250,7 +247,7 @@ class TestUNRDFBridge:
         result = bridge.invoke(
             module_path=str(sample_signature_module),
             signature_name="BridgeTestSignature",
-            inputs={"question": "test"}
+            inputs={"question": "test"},
         )
 
         receipt_id = result["receipt"]["receipt_id"]
@@ -277,10 +274,7 @@ class TestUNRDFBridge:
         mock_lm_class.return_value = mock_lm
 
         mock_result = InvocationResult(
-            success=True,
-            inputs={"question": "test"},
-            outputs={"answer": "result"},
-            metrics={}
+            success=True, inputs={"question": "test"}, outputs={"answer": "result"}, metrics={}
         )
 
         mock_invoker = Mock()
@@ -294,7 +288,7 @@ class TestUNRDFBridge:
             bridge.invoke(
                 module_path=str(sample_signature_module),
                 signature_name="BridgeTestSignature",
-                inputs={"question": f"q{i}"}
+                inputs={"question": f"q{i}"},
             )
 
         # List receipts
@@ -327,10 +321,7 @@ class TestUNRDFBridge:
     @patch("kgcl.dspy_runtime.ollama_config.health_check")
     def test_health_check(self, mock_health_check):
         """Test bridge health check."""
-        mock_health_check.return_value = {
-            "status": "healthy",
-            "ollama_available": True
-        }
+        mock_health_check.return_value = {"status": "healthy", "ollama_available": True}
 
         bridge = UNRDFBridge()
         health = bridge.health_check()
@@ -348,18 +339,11 @@ class TestUNRDFBridge:
 
         # Create mix of successful and failed results
         mock_success = InvocationResult(
-            success=True,
-            inputs={},
-            outputs={},
-            metrics={"latency_seconds": 1.0}
+            success=True, inputs={}, outputs={}, metrics={"latency_seconds": 1.0}
         )
 
         mock_failure = InvocationResult(
-            success=False,
-            inputs={},
-            outputs={},
-            error="Failed",
-            metrics={"latency_seconds": 2.0}
+            success=False, inputs={}, outputs={}, error="Failed", metrics={"latency_seconds": 2.0}
         )
 
         mock_invoker = Mock()
@@ -373,7 +357,7 @@ class TestUNRDFBridge:
             bridge.invoke(
                 module_path=str(sample_signature_module),
                 signature_name="BridgeTestSignature",
-                inputs={"question": f"q{i}"}
+                inputs={"question": f"q{i}"},
             )
 
         stats = bridge.get_stats()

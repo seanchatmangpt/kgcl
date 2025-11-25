@@ -8,13 +8,7 @@ from pathlib import Path
 
 import click
 
-from kgcl.cli.utils import (
-    OutputFormat,
-    format_output,
-    print_error,
-    print_info,
-    print_success,
-)
+from kgcl.cli.utils import OutputFormat, format_output, print_error, print_info, print_success
 
 
 @click.command()
@@ -24,24 +18,9 @@ from kgcl.cli.utils import (
     default=None,
     help="End date for the retrospective (defaults to today)",
 )
-@click.option(
-    "--days",
-    type=int,
-    default=7,
-    help="Number of days to include (default: 7)",
-)
-@click.option(
-    "--output",
-    "-o",
-    type=click.Path(path_type=Path),
-    help="Output file path",
-)
-@click.option(
-    "--clipboard",
-    "-c",
-    is_flag=True,
-    help="Copy result to clipboard",
-)
+@click.option("--days", type=int, default=7, help="Number of days to include (default: 7)")
+@click.option("--output", "-o", type=click.Path(path_type=Path), help="Output file path")
+@click.option("--clipboard", "-c", is_flag=True, help="Copy result to clipboard")
 @click.option(
     "--format",
     "-f",
@@ -50,23 +29,9 @@ from kgcl.cli.utils import (
     default=OutputFormat.MARKDOWN.value,
     help="Output format",
 )
-@click.option(
-    "--model",
-    type=str,
-    default="llama3.2",
-    help="Ollama model to use for generation",
-)
-@click.option(
-    "--include-metrics",
-    is_flag=True,
-    help="Include detailed metrics in output",
-)
-@click.option(
-    "--verbose",
-    "-v",
-    is_flag=True,
-    help="Verbose output",
-)
+@click.option("--model", type=str, default="llama3.2", help="Ollama model to use for generation")
+@click.option("--include-metrics", is_flag=True, help="Include detailed metrics in output")
+@click.option("--verbose", "-v", is_flag=True, help="Verbose output")
 def weekly_retro(
     end_date: datetime | None,
     days: int,
@@ -82,7 +47,8 @@ def weekly_retro(
     Analyzes the last N days of activity, produces narrative insights,
     and includes optional metrics.
 
-    Examples:
+    Examples
+    --------
         # Generate retrospective for last 7 days
         $ kgc-weekly-retro
 
@@ -130,11 +96,7 @@ def weekly_retro(
         print_error(f"Failed to generate retrospective: {e}")
 
 
-def _aggregate_features(
-    start_date: datetime,
-    end_date: datetime,
-    verbose: bool,
-) -> dict:
+def _aggregate_features(start_date: datetime, end_date: datetime, verbose: bool) -> dict:
     """Aggregate features from the specified date range.
 
     Parameters
@@ -164,22 +126,9 @@ def _aggregate_features(
             "lines_added": 1247,
             "lines_removed": 389,
         },
-        "testing": {
-            "test_runs": 156,
-            "total_tests": 892,
-            "pass_rate": 98.7,
-            "new_tests": 12,
-        },
-        "productivity": {
-            "active_days": 5,
-            "avg_commits_per_day": 8.4,
-            "peak_activity_hour": 14,
-        },
-        "quality": {
-            "code_review_comments": 23,
-            "bugs_fixed": 7,
-            "bugs_introduced": 2,
-        },
+        "testing": {"test_runs": 156, "total_tests": 892, "pass_rate": 98.7, "new_tests": 12},
+        "productivity": {"active_days": 5, "avg_commits_per_day": 8.4, "peak_activity_hour": 14},
+        "quality": {"code_review_comments": 23, "bugs_fixed": 7, "bugs_introduced": 2},
     }
 
 
@@ -216,12 +165,7 @@ def _compute_metrics(features: dict, verbose: bool) -> dict:
     }
 
 
-def _generate_retrospective(
-    features: dict,
-    metrics: dict | None,
-    model: str,
-    verbose: bool,
-) -> str:
+def _generate_retrospective(features: dict, metrics: dict | None, model: str, verbose: bool) -> str:
     """Generate retrospective using DSPy and Ollama.
 
     Parameters
@@ -252,32 +196,32 @@ def _generate_retrospective(
 Analysis of activity from the past 7 days
 
 ## Code Changes
-- **Total commits**: {features['code_changes']['total_commits']}
-- **Files modified**: {features['code_changes']['files_modified']}
-- **Net lines changed**: {features['code_changes']['lines_added'] - features['code_changes']['lines_removed']}
+- **Total commits**: {features["code_changes"]["total_commits"]}
+- **Files modified**: {features["code_changes"]["files_modified"]}
+- **Net lines changed**: {features["code_changes"]["lines_added"] - features["code_changes"]["lines_removed"]}
 
 ## Testing
-- **Test runs**: {features['testing']['test_runs']}
-- **Pass rate**: {features['testing']['pass_rate']}%
-- **New tests added**: {features['testing']['new_tests']}
+- **Test runs**: {features["testing"]["test_runs"]}
+- **Pass rate**: {features["testing"]["pass_rate"]}%
+- **New tests added**: {features["testing"]["new_tests"]}
 
 ## Productivity
-- **Active days**: {features['productivity']['active_days']}/7
-- **Avg commits/day**: {features['productivity']['avg_commits_per_day']}
-- **Peak activity**: {features['productivity']['peak_activity_hour']}:00
+- **Active days**: {features["productivity"]["active_days"]}/7
+- **Avg commits/day**: {features["productivity"]["avg_commits_per_day"]}
+- **Peak activity**: {features["productivity"]["peak_activity_hour"]}:00
 
 ## Quality
-- **Bugs fixed**: {features['quality']['bugs_fixed']}
-- **Bugs introduced**: {features['quality']['bugs_introduced']}
-- **Code reviews**: {features['quality']['code_review_comments']} comments
+- **Bugs fixed**: {features["quality"]["bugs_fixed"]}
+- **Bugs introduced**: {features["quality"]["bugs_introduced"]}
+- **Code reviews**: {features["quality"]["code_review_comments"]} comments
 """
 
     if metrics:
         retro += f"""
 ## Metrics
-- **Velocity**: {metrics['velocity']['commits_per_day']:.1f} commits/day
-- **Quality score**: {metrics['quality_score']:.2%}
-- **Activity consistency**: {metrics['activity_consistency']:.2%}
+- **Velocity**: {metrics["velocity"]["commits_per_day"]:.1f} commits/day
+- **Quality score**: {metrics["quality_score"]:.2%}
+- **Activity consistency**: {metrics["activity_consistency"]:.2%}
 """
 
     retro += """

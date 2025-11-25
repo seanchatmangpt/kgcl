@@ -3,24 +3,24 @@
 Orchestrates multiple test members and coordinates their execution.
 """
 
-from typing import List, Dict, Optional, Any, Callable
-from dataclasses import dataclass, field
-from datetime import datetime
 import uuid
+from dataclasses import dataclass
+from datetime import datetime
 
 from .member import SwarmMember
-from .task import TestTask, TaskResult, TaskStatus
+from .task import TaskResult, TaskStatus, TestTask
 
 
 @dataclass
 class CoordinationMetrics:
     """Metrics about coordination"""
+
     total_tasks: int = 0
     completed_tasks: int = 0
     failed_tasks: int = 0
     avg_duration: float = 0.0
-    start_time: Optional[datetime] = None
-    end_time: Optional[datetime] = None
+    start_time: datetime | None = None
+    end_time: datetime | None = None
 
     def success_rate(self) -> float:
         """Calculate success rate"""
@@ -44,10 +44,10 @@ class TestCoordinator:
     """
 
     def __init__(self, max_workers: int = 4) -> None:
-        self._members: Dict[str, SwarmMember] = {}
+        self._members: dict[str, SwarmMember] = {}
         self._max_workers = max_workers
-        self._current_task: Optional[TestTask] = None
-        self._task_history: List[tuple[TestTask, TaskResult]] = []
+        self._current_task: TestTask | None = None
+        self._task_history: list[tuple[TestTask, TaskResult]] = []
         self._metrics = CoordinationMetrics()
         self._id = str(uuid.uuid4())[:8]
 
@@ -66,17 +66,18 @@ class TestCoordinator:
         """Get number of registered members"""
         return len(self._members)
 
-    def members(self) -> List[SwarmMember]:
+    def members(self) -> list[SwarmMember]:
         """Get all registered members"""
         return list(self._members.values())
 
-    def execute(self, task: TestTask) -> Dict[str, TaskResult]:
+    def execute(self, task: TestTask) -> dict[str, TaskResult]:
         """Execute task across all members
 
         Args:
             task: The task to execute
 
-        Returns:
+        Returns
+        -------
             Dictionary mapping member names to TaskResults
         """
         self._current_task = task
@@ -84,7 +85,7 @@ class TestCoordinator:
         if self._metrics.start_time is None:
             self._metrics.start_time = datetime.now()
 
-        results: Dict[str, TaskResult] = {}
+        results: dict[str, TaskResult] = {}
 
         for member in self._members.values():
             try:
@@ -98,11 +99,7 @@ class TestCoordinator:
 
                 self._task_history.append((task, result))
             except Exception as e:
-                result = TaskResult(
-                    task_name=task.name,
-                    status=TaskStatus.FAILED,
-                    error=str(e)
-                )
+                result = TaskResult(task_name=task.name, status=TaskStatus.FAILED, error=str(e))
                 results[member.name()] = result
                 self._metrics.failed_tasks += 1
 
@@ -118,7 +115,7 @@ class TestCoordinator:
         """Get coordination metrics"""
         return self._metrics
 
-    def task_history(self) -> List[tuple[TestTask, TaskResult]]:
+    def task_history(self) -> list[tuple[TestTask, TaskResult]]:
         """Get task execution history"""
         return self._task_history.copy()
 

@@ -5,22 +5,11 @@ Tests end-to-end workflows including signature loading, invocation,
 receipt generation, and RDF storage.
 """
 
-import pytest
 from unittest.mock import Mock, patch
-from pathlib import Path
-import tempfile
-import json
 
-from rdflib import Graph
+import pytest
 
-from kgcl.dspy_runtime import (
-    configure_ollama,
-    SignatureInvoker,
-    ReceiptGenerator,
-    UNRDFBridge,
-    OllamaConfig,
-    DSPY_AVAILABLE
-)
+from kgcl.dspy_runtime import DSPY_AVAILABLE, ReceiptGenerator, SignatureInvoker, UNRDFBridge
 
 
 @pytest.fixture
@@ -82,7 +71,7 @@ class TestEndToEndWorkflow:
             result = bridge.invoke(
                 module_path=str(test_signature_module),
                 signature_name="SimpleSignature",
-                inputs={"text": "This is a long text that needs summarizing."}
+                inputs={"text": "This is a long text that needs summarizing."},
             )
 
             # Verify result
@@ -131,14 +120,14 @@ class TestEndToEndWorkflow:
             result1 = bridge.invoke(
                 module_path=str(test_signature_module),
                 signature_name="IntegrationTestSignature",
-                inputs={"context": "Context", "question": "Question?"}
+                inputs={"context": "Context", "question": "Question?"},
             )
 
             # Invoke second signature
             result2 = bridge.invoke(
                 module_path=str(test_signature_module),
                 signature_name="SimpleSignature",
-                inputs={"text": "Text to summarize"}
+                inputs={"text": "Text to summarize"},
             )
 
             # Verify both succeeded
@@ -179,7 +168,7 @@ class TestEndToEndWorkflow:
                 {
                     "module_path": str(test_signature_module),
                     "signature_name": "SimpleSignature",
-                    "inputs": {"text": f"Text {i}"}
+                    "inputs": {"text": f"Text {i}"},
                 }
                 for i in range(5)
             ]
@@ -195,7 +184,9 @@ class TestEndToEndWorkflow:
 
     @patch("dspy.Predict")
     @patch("dspy.OllamaLocal")
-    def test_receipt_persistence_workflow(self, mock_ollama, mock_predict, test_signature_module, tmp_path):
+    def test_receipt_persistence_workflow(
+        self, mock_ollama, mock_predict, test_signature_module, tmp_path
+    ):
         """Test receipt persistence and loading."""
         mock_lm = Mock()
         mock_ollama.return_value = mock_lm
@@ -218,7 +209,7 @@ class TestEndToEndWorkflow:
             result = bridge1.invoke(
                 module_path=str(test_signature_module),
                 signature_name="SimpleSignature",
-                inputs={"text": "Test text"}
+                inputs={"text": "Test text"},
             )
 
             receipt_id = result["receipt"]["receipt_id"]
@@ -258,7 +249,7 @@ class TestEndToEndWorkflow:
             result = bridge.invoke(
                 module_path=str(test_signature_module),
                 signature_name="SimpleSignature",
-                inputs={"text": "Test"}
+                inputs={"text": "Test"},
             )
 
             # Verify error captured
@@ -286,7 +277,7 @@ class TestEndToEndWorkflow:
             mock_success,
             mock_success,
             RuntimeError("Failed"),
-            mock_success
+            mock_success,
         ]
         mock_predict.return_value = mock_predictor
 
@@ -303,7 +294,7 @@ class TestEndToEndWorkflow:
                 bridge.invoke(
                     module_path=str(test_signature_module),
                     signature_name="SimpleSignature",
-                    inputs={"text": f"Test {i}"}
+                    inputs={"text": f"Test {i}"},
                 )
 
             # Get statistics
@@ -336,9 +327,7 @@ class TestComponentIntegration:
 
             # Invoke
             result = invoker.invoke_from_module(
-                str(test_signature_module),
-                "SimpleSignature",
-                {"text": "Test"}
+                str(test_signature_module), "SimpleSignature", {"text": "Test"}
             )
 
             # Create receipt from result
@@ -349,7 +338,7 @@ class TestComponentIntegration:
                 inputs=result.inputs,
                 outputs=result.outputs,
                 success=result.success,
-                latency_seconds=result.metrics.get("latency_seconds")
+                latency_seconds=result.metrics.get("latency_seconds"),
             )
 
             # Store and retrieve

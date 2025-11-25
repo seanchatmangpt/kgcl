@@ -3,8 +3,9 @@
 Provides invariant validation that must hold throughout test execution.
 """
 
-from typing import Callable, List, Any, Optional, Dict
+from collections.abc import Callable
 from dataclasses import dataclass
+from typing import Any
 
 
 @dataclass
@@ -17,13 +18,15 @@ class Invariant:
             lambda obj: len(obj) >= 0
         )
     """
+
     name: str
     predicate: Callable[[Any], bool]
 
     def validate(self, obj: Any) -> bool:
         """Validate object against invariant
 
-        Returns:
+        Returns
+        -------
             True if invariant holds, False otherwise
         """
         try:
@@ -50,8 +53,8 @@ class InvariantValidator:
     """
 
     def __init__(self) -> None:
-        self._invariants: Dict[str, Invariant] = {}
-        self._violations: List[tuple[str, Any]] = []
+        self._invariants: dict[str, Invariant] = {}
+        self._violations: list[tuple[str, Any]] = []
 
     def add(self, name: str, predicate: Callable[[Any], bool]) -> None:
         """Add an invariant"""
@@ -64,7 +67,8 @@ class InvariantValidator:
     def validate(self, name: str, obj: Any) -> bool:
         """Validate single invariant
 
-        Returns:
+        Returns
+        -------
             True if invariant holds
         """
         if name not in self._invariants:
@@ -81,7 +85,8 @@ class InvariantValidator:
     def validate_all(self, obj: Any) -> bool:
         """Validate all invariants against object
 
-        Returns:
+        Returns
+        -------
             True if all invariants hold
         """
         all_valid = True
@@ -96,7 +101,7 @@ class InvariantValidator:
         """Get number of violations"""
         return len(self._violations)
 
-    def violations(self) -> List[tuple[str, Any]]:
+    def violations(self) -> list[tuple[str, Any]]:
         """Get all violations"""
         return self._violations.copy()
 
@@ -111,7 +116,8 @@ class InvariantValidator:
     def assert_no_violations(self) -> None:
         """Assert no violations occurred
 
-        Raises:
+        Raises
+        ------
             AssertionError: If there are violations
         """
         if self._violations:

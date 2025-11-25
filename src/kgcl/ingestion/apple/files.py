@@ -1,8 +1,9 @@
 """File metadata ingest engine using Spotlight/Finder via PyObjC."""
 
-from typing import Any
 from pathlib import Path
-from rdflib import URIRef, RDF
+from typing import Any
+
+from rdflib import RDF
 
 from kgcl.ingestion.apple.base import BaseIngestEngine, IngestResult
 
@@ -18,7 +19,8 @@ class FilesIngestEngine(BaseIngestEngine):
         Args:
             source_object: MockFileMetadata or actual file metadata
 
-        Returns:
+        Returns
+        -------
             IngestResult with schema:CreativeWork RDF triple
         """
         errors = []
@@ -53,7 +55,7 @@ class FilesIngestEngine(BaseIngestEngine):
                         metadata={},
                     )
             except Exception as e:
-                errors.append(f"Invalid file path: {str(e)}")
+                errors.append(f"Invalid file path: {e!s}")
                 return IngestResult(
                     success=False,
                     graph=self.graph,
@@ -79,15 +81,15 @@ class FilesIngestEngine(BaseIngestEngine):
             self._add_literal(file_uri, self.schema_ns.url, f"file://{file_path}")
 
             # Add creation date
-            created_date = getattr(
-                source_object, "contentCreationDate", None
-            ) or getattr(source_object, "created_date", None)
+            created_date = getattr(source_object, "contentCreationDate", None) or getattr(
+                source_object, "created_date", None
+            )
             self._add_literal(file_uri, self.schema_ns.dateCreated, created_date)
 
             # Add modification date
-            modified_date = getattr(
-                source_object, "contentModificationDate", None
-            ) or getattr(source_object, "modified_date", None)
+            modified_date = getattr(source_object, "contentModificationDate", None) or getattr(
+                source_object, "modified_date", None
+            )
             self._add_literal(file_uri, self.schema_ns.dateModified, modified_date)
 
             # Add file size
@@ -103,9 +105,11 @@ class FilesIngestEngine(BaseIngestEngine):
             self._add_literal(file_uri, self.schema_ns.fileFormat, file_format)
 
             # Add Finder tags as keywords
-            tags = getattr(source_object, "tags", None) or getattr(
-                source_object, "finder_tags", None
-            ) or []
+            tags = (
+                getattr(source_object, "tags", None)
+                or getattr(source_object, "finder_tags", None)
+                or []
+            )
             for tag in tags:
                 self._add_literal(file_uri, self.schema_ns.keywords, tag)
 
@@ -122,15 +126,11 @@ class FilesIngestEngine(BaseIngestEngine):
                 receipt_hash=receipt_hash,
                 items_processed=1,
                 errors=errors,
-                metadata={
-                    "file_path": file_path,
-                    "file_name": file_name,
-                    "file_size": file_size,
-                },
+                metadata={"file_path": file_path, "file_name": file_name, "file_size": file_size},
             )
 
         except Exception as e:
-            errors.append(f"Files ingest error: {str(e)}")
+            errors.append(f"Files ingest error: {e!s}")
             return IngestResult(
                 success=False,
                 graph=self.graph,

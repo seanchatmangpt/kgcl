@@ -7,23 +7,23 @@ comprehensive error handling and metrics collection.
 
 import importlib
 import importlib.util
+import json
 import logging
 import time
-from pathlib import Path
-from typing import Any, Dict, Optional, Type, TYPE_CHECKING
 from dataclasses import dataclass, field
-import json
+from pathlib import Path
+from typing import TYPE_CHECKING, Any
 
 try:
     import dspy
+
     DSPY_AVAILABLE = True
 except ImportError:
     DSPY_AVAILABLE = False
     if TYPE_CHECKING:
         import dspy
 
-from opentelemetry import trace
-from opentelemetry import metrics
+from opentelemetry import metrics, trace
 
 logger = logging.getLogger(__name__)
 tracer = trace.get_tracer(__name__)
@@ -31,19 +31,13 @@ meter = metrics.get_meter(__name__)
 
 # Metrics
 prediction_counter = meter.create_counter(
-    "dspy.predictions.total",
-    description="Total number of predictions made",
-    unit="1"
+    "dspy.predictions.total", description="Total number of predictions made", unit="1"
 )
 prediction_latency = meter.create_histogram(
-    "dspy.predictions.latency",
-    description="Prediction latency in seconds",
-    unit="s"
+    "dspy.predictions.latency", description="Prediction latency in seconds", unit="s"
 )
 prediction_errors = meter.create_counter(
-    "dspy.predictions.errors",
-    description="Total number of prediction errors",
-    unit="1"
+    "dspy.predictions.errors", description="Total number of prediction errors", unit="1"
 )
 
 
@@ -52,12 +46,12 @@ class InvocationResult:
     """Result of a signature invocation."""
 
     success: bool
-    inputs: Dict[str, Any]
-    outputs: Dict[str, Any] = field(default_factory=dict)
-    error: Optional[str] = None
-    metrics: Dict[str, Any] = field(default_factory=dict)
+    inputs: dict[str, Any]
+    outputs: dict[str, Any] = field(default_factory=dict)
+    error: str | None = None
+    metrics: dict[str, Any] = field(default_factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary."""
         return {
             "success": self.success,
@@ -83,18 +77,12 @@ class SignatureInvoker:
             lm: DSPy language model. If None, uses configured LM.
         """
         if not DSPY_AVAILABLE:
-            raise RuntimeError(
-                "DSPy is not installed. Install with: pip install dspy-ai"
-            )
+            raise RuntimeError("DSPy is not installed. Install with: pip install dspy-ai")
 
         self._lm = lm
-        self._signature_cache: Dict[str, Type[dspy.Signature]] = {}
+        self._signature_cache: dict[str, type[dspy.Signature]] = {}
 
-    def load_signature(
-        self,
-        module_path: str,
-        signature_name: str
-    ) -> Type["dspy.Signature"]:
+    def load_signature(self, module_path: str, signature_name: str) -> type["dspy.Signature"]:
         """
         Load DSPy signature from Python module.
 
@@ -102,10 +90,12 @@ class SignatureInvoker:
             module_path: Path to Python module file
             signature_name: Name of signature class
 
-        Returns:
+        Returns
+        -------
             DSPy signature class
 
-        Raises:
+        Raises
+        ------
             FileNotFoundError: If module file not found
             ImportError: If module cannot be imported
             AttributeError: If signature not found in module
@@ -124,8 +114,7 @@ class SignatureInvoker:
 
         try:
             spec = importlib.util.spec_from_file_location(
-                f"dynamic_signature_{id(self)}",
-                module_file
+                f"dynamic_signature_{id(self)}", module_file
             )
             if spec is None or spec.loader is None:
                 raise ImportError(f"Failed to load module spec: {module_path}")
@@ -143,9 +132,7 @@ class SignatureInvoker:
 
             # Validate it's a DSPy signature
             if not issubclass(signature_class, dspy.Signature):
-                raise TypeError(
-                    f"{signature_name} is not a DSPy Signature subclass"
-                )
+                raise TypeError(f"{signature_name} is not a DSPy Signature subclass")
 
             # Cache and return
             self._signature_cache[cache_key] = signature_class
@@ -157,10 +144,7 @@ class SignatureInvoker:
             raise
 
     def invoke(
-        self,
-        signature: Type["dspy.Signature"],
-        inputs: Dict[str, Any],
-        **kwargs
+        self, signature: type["dspy.Signature"], inputs: dict[str, Any], **kwargs
     ) -> InvocationResult:
         """
         Invoke DSPy signature with inputs.
@@ -170,7 +154,8 @@ class SignatureInvoker:
             inputs: Input field values
             **kwargs: Additional arguments for Predict
 
-        Returns:
+        Returns
+        -------
             InvocationResult with outputs and metrics
         """
         start_time = time.time()
@@ -215,10 +200,7 @@ class SignatureInvoker:
                 )
 
                 return InvocationResult(
-                    success=True,
-                    inputs=inputs,
-                    outputs=outputs,
-                    metrics=metrics_data,
+                    success=True, inputs=inputs, outputs=outputs, metrics=metrics_data
                 )
 
             except Exception as e:
@@ -227,7 +209,9 @@ class SignatureInvoker:
 
                 # Record error metrics
                 prediction_counter.add(1, {"signature": signature.__name__, "status": "error"})
-                prediction_errors.add(1, {"signature": signature.__name__, "error_type": type(e).__name__})
+                prediction_errors.add(
+                    1, {"signature": signature.__name__, "error_type": type(e).__name__}
+                )
 
                 span.set_attribute("success", False)
                 span.set_attribute("error", error_msg)
@@ -248,11 +232,7 @@ class SignatureInvoker:
                 )
 
     def invoke_from_module(
-        self,
-        module_path: str,
-        signature_name: str,
-        inputs: Dict[str, Any],
-        **kwargs
+        self, module_path: str, signature_name: str, inputs: dict[str, Any], **kwargs
     ) -> InvocationResult:
         """
         Load signature from module and invoke with inputs.
@@ -263,7 +243,8 @@ class SignatureInvoker:
             inputs: Input field values
             **kwargs: Additional arguments for Predict
 
-        Returns:
+        Returns
+        -------
             InvocationResult with outputs and metrics
         """
         with tracer.start_as_current_span("dspy.invoke_from_module") as span:
@@ -279,17 +260,12 @@ class SignatureInvoker:
                     success=False,
                     inputs=inputs,
                     error=str(e),
-                    metrics={
-                        "error_type": type(e).__name__,
-                        "timestamp": time.time(),
-                    },
+                    metrics={"error_type": type(e).__name__, "timestamp": time.time()},
                 )
 
     def validate_inputs(
-        self,
-        signature: Type["dspy.Signature"],
-        inputs: Dict[str, Any]
-    ) -> tuple[bool, Optional[str]]:
+        self, signature: type["dspy.Signature"], inputs: dict[str, Any]
+    ) -> tuple[bool, str | None]:
         """
         Validate inputs against signature fields.
 
@@ -297,7 +273,8 @@ class SignatureInvoker:
             signature: DSPy signature class
             inputs: Input field values
 
-        Returns:
+        Returns
+        -------
             Tuple of (is_valid, error_message)
         """
         required_fields = set(signature.input_fields.keys())

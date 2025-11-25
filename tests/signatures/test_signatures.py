@@ -5,17 +5,15 @@ rule-based logic works correctly and produces expected outputs.
 """
 
 import pytest
-from datetime import datetime
 
 from kgcl.signatures import (
+    ContextClassifierModule,
     DailyBriefModule,
-    WeeklyRetroModule,
     FeatureAnalyzerModule,
     PatternDetectorModule,
-    ContextClassifierModule,
-    WellbeingModule,
     SignatureConfig,
-    configure_signatures,
+    WeeklyRetroModule,
+    WellbeingModule,
     create_all_modules,
     health_check,
 )
@@ -61,6 +59,7 @@ class TestDailyBriefModule:
 
         # High focus, low context switches should score high
         from kgcl.signatures.daily_brief import DailyBriefInput
+
         high_score_input = DailyBriefInput(
             time_in_app=8.0,
             domain_visits=10,
@@ -69,7 +68,7 @@ class TestDailyBriefModule:
             focus_time=5.0,
             screen_time=8.0,
             meeting_count=1,
-            break_intervals=6
+            break_intervals=6,
         )
         output = module.generate(high_score_input)
         assert output.productivity_score >= 80
@@ -323,7 +322,10 @@ class TestWellbeingModule:
 
         assert "assessment" in output.work_life_balance
         assert output.work_life_balance["assessment"] in [
-            "excellent", "good", "needs_attention", "poor"
+            "excellent",
+            "good",
+            "needs_attention",
+            "poor",
         ]
 
     def test_focus_quality_assessment(self, wellbeing_input_healthy):
@@ -428,16 +430,12 @@ class TestIntegration:
         modules = create_all_modules(config)
 
         # Generate daily brief
-        brief_output = modules["daily_brief"].generate(
-            complete_daily_data["brief_input"]
-        )
+        brief_output = modules["daily_brief"].generate(complete_daily_data["brief_input"])
         assert brief_output.summary
         assert brief_output.productivity_score >= 0
 
         # Analyze wellbeing
-        wellbeing_output = modules["wellbeing"].analyze(
-            complete_daily_data["wellbeing_input"]
-        )
+        wellbeing_output = modules["wellbeing"].analyze(complete_daily_data["wellbeing_input"])
         assert wellbeing_output.wellbeing_score >= 0
 
         # Classify activities

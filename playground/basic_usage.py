@@ -5,27 +5,21 @@ This demonstrates the Chicago TDD Tools framework in action.
 
 # Import from the built package (not src/)
 from chicago_tdd_tools.core import (
-    test,
-    async_test,
-    fixture_test,
+    AssertionBuilder,
     TestFixture,
     assert_eq_with_msg,
     assert_that,
-    AssertionBuilder,
+    fixture_test,
+    test,
 )
-from chicago_tdd_tools.swarm import (
-    TestCoordinator,
-    SwarmMember,
-    TestTask,
-    TaskStatus,
-)
-from chicago_tdd_tools.validation import Property, PropertyTest
+from chicago_tdd_tools.swarm import SwarmMember, TaskStatus, TestCoordinator, TestTask
 from chicago_tdd_tools.testing import StateMachine
-
+from chicago_tdd_tools.validation import Property
 
 # ============================================================================
 # Example 1: Simple assertions
 # ============================================================================
+
 
 @test
 def example_basic_assertions():
@@ -48,17 +42,20 @@ def example_basic_assertions():
 # Example 2: Fluent assertion builder
 # ============================================================================
 
+
 @test
 def example_assertion_builder():
     """Demonstrate fluent assertion builder pattern."""
     print("\n=== Example 2: Assertion Builder ===")
 
     value = 42
-    result = (AssertionBuilder(value)
+    result = (
+        AssertionBuilder(value)
         .assert_equal(42)
         .assert_that(lambda v: v > 0)
         .assert_that(lambda v: v < 100)
-        .get())
+        .get()
+    )
 
     assert result == 42
     print("✓ Assertion builder passed")
@@ -67,6 +64,7 @@ def example_assertion_builder():
 # ============================================================================
 # Example 3: Test fixtures
 # ============================================================================
+
 
 class CounterFixture(TestFixture):
     """Simple counter fixture for testing."""
@@ -107,19 +105,22 @@ def example_fixture(fixture):
 # Example 4: Property-based testing
 # ============================================================================
 
+
 def example_property_testing():
     """Demonstrate property-based testing."""
     print("\n=== Example 4: Property-Based Testing ===")
 
     # Test: Addition is commutative
-    test = (Property()
+    test = (
+        Property()
         .name("addition_commutative")
         .predicate(lambda a, b: a + b == b + a)
         .example(1, 2)
         .example(5, 3)
         .example(-1, 1)
         .example(0, 0)
-        .build())
+        .build()
+    )
 
     if test.run():
         print(f"✓ Property test passed ({len(test.examples)} examples)")
@@ -130,6 +131,7 @@ def example_property_testing():
 # ============================================================================
 # Example 5: State machines
 # ============================================================================
+
 
 def example_state_machine():
     """Demonstrate state machine testing."""
@@ -161,6 +163,7 @@ def example_state_machine():
 # Example 6: Swarm coordination
 # ============================================================================
 
+
 def example_swarm_coordination():
     """Demonstrate test swarm orchestration."""
     print("\n=== Example 6: Swarm Coordination ===")
@@ -170,15 +173,14 @@ def example_swarm_coordination():
 
     # Create test members
     for i in range(2):
-        member = SwarmMember(f"worker-{i+1}")
+        member = SwarmMember(f"worker-{i + 1}")
 
         # Register task handler
         def handler(task):
             from chicago_tdd_tools.swarm import TaskResult
+
             return TaskResult(
-                task_name=task.name,
-                status=TaskStatus.SUCCESS,
-                output=f"Executed {task.name}"
+                task_name=task.name, status=TaskStatus.SUCCESS, output=f"Executed {task.name}"
             )
 
         member.register_handler("unit_test", handler)
@@ -196,6 +198,7 @@ def example_swarm_coordination():
 # ============================================================================
 # Main execution
 # ============================================================================
+
 
 def main():
     """Run all playground examples."""
@@ -222,6 +225,7 @@ def main():
     except Exception as e:
         print(f"\n✗ Error during execution: {e}")
         import traceback
+
         traceback.print_exc()
         return 1
 

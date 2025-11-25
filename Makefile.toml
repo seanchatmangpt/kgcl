@@ -148,6 +148,9 @@ dependencies = [
 script = '''
 echo "Setting up git hooks..."
 mkdir -p .githooks
+if [ -f "scripts/git_hooks/pre_commit.sh" ]; then
+  chmod +x scripts/git_hooks/pre_commit.sh
+fi
 chmod +x .githooks/pre-commit
 git config core.hooksPath .githooks
 echo "Git hooks installed to .githooks"

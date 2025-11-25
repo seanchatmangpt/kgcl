@@ -2,10 +2,17 @@
 
 import pytest
 from src.core import (
-    assert_success, assert_error, assert_eq_with_msg, assert_in_range,
-    assert_that, ChicagoAssertionError,
-    test, async_test, TestFixture, FixtureMetadata, Builder,
-    StateManager, FailFastValidator, Poka, PokaYokeError
+    ChicagoAssertionError,
+    FailFastValidator,
+    Poka,
+    PokaYokeError,
+    StateManager,
+    TestFixture,
+    assert_eq_with_msg,
+    assert_error,
+    assert_in_range,
+    assert_success,
+    assert_that,
 )
 
 
@@ -43,11 +50,9 @@ class TestAssertions:
 
     def test_assertion_builder(self):
         """Test assertion builder pattern."""
-        result = (AssertionBuilder(42)
-            .assert_equal(42)
-            .assert_that(lambda v: v > 0)
-            .assert_true()
-            .get())
+        result = (
+            AssertionBuilder(42).assert_equal(42).assert_that(lambda v: v > 0).assert_true().get()
+        )
         assert result == 42
 
 
@@ -56,9 +61,11 @@ class TestFixtures:
 
     def test_fixture_basic(self):
         """Test basic fixture lifecycle."""
+
         class TestFixture1(TestFixture):
             def setup(self):
                 self.value = 42
+
             def cleanup(self):
                 del self.value
 
@@ -89,14 +96,14 @@ class TestStateManager:
     def test_state_transitions(self):
         """Test state transitions."""
         from enum import Enum
-        
+
         class State(Enum):
             START = "start"
             END = "end"
-        
+
         sm = StateManager(State.START)
         assert sm.current_state() == State.START
-        
+
         sm.transition_to(State.END)
         assert sm.current_state() == State.END
         assert len(sm.history()) == 2
@@ -104,16 +111,16 @@ class TestStateManager:
     def test_state_history(self):
         """Test state history."""
         from enum import Enum
-        
+
         class State(Enum):
             A = "a"
             B = "b"
             C = "c"
-        
+
         sm = StateManager(State.A)
         sm.transition_to(State.B)
         sm.transition_to(State.C)
-        
+
         assert sm.history() == [State.A, State.B, State.C]
 
 
@@ -123,7 +130,7 @@ class TestFailFastValidator:
     def test_fail_fast_validator(self):
         """Test fail-fast behavior."""
         validator = FailFastValidator(fail_fast=False)
-        
+
         assert validator.check_that("positive", lambda: True)
         assert not validator.check_that("negative", lambda: False)
         assert validator.failure_count() == 1

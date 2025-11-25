@@ -8,12 +8,12 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from collections.abc import Callable
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import Enum
 from typing import Any
 
 from opentelemetry import trace
-from rdflib import Graph, URIRef
+from rdflib import Graph
 
 tracer = trace.get_tracer(__name__)
 
@@ -182,9 +182,7 @@ class KnowledgeHook(ABC):
     ...         super().__init__(
     ...             name="feature_template_processor",
     ...             phases=[HookPhase.POST_COMMIT],
-    ...             trigger=TriggerCondition(
-    ...                 pattern="?s rdf:type unrdf:FeatureTemplate"
-    ...             )
+    ...             trigger=TriggerCondition(pattern="?s rdf:type unrdf:FeatureTemplate"),
     ...         )
     ...
     ...     def execute(self, context):
@@ -449,7 +447,7 @@ class HookExecutor:
         span.set_attribute("hook.priority", hook.priority)
 
         start_time = time.perf_counter()
-        timestamp = datetime.now(timezone.utc)
+        timestamp = datetime.now(UTC)
 
         result = {
             "hook": hook.name,

@@ -4,14 +4,14 @@ Queries RDF graph for calendar events and reminders, sorts by date/priority,
 and formats as markdown agenda with focus time blocks.
 """
 
-from datetime import datetime, timedelta
-from typing import Any, Dict, List, Optional
 from dataclasses import dataclass, field
-from rdflib import Graph, Namespace, URIRef, Literal
-from rdflib.namespace import RDF, RDFS, XSD
+from datetime import datetime, timedelta
+from typing import Any
+
+from rdflib import Graph, Literal, Namespace
+from rdflib.namespace import RDFS
 
 from .base import ProjectionGenerator
-
 
 # Define namespaces
 KGC = Namespace("http://example.org/kgc/")
@@ -25,7 +25,7 @@ class CalendarEvent:
     uri: str
     title: str
     start: datetime
-    end: Optional[datetime] = None
+    end: datetime | None = None
     description: str = ""
     location: str = ""
     priority: int = 3  # 1=high, 3=normal, 5=low
@@ -42,10 +42,9 @@ class CalendarEvent:
         """Format event time range for display."""
         if self.is_multi_day and self.end:
             return f"{self.start.strftime('%b %d')} - {self.end.strftime('%b %d')}"
-        elif self.end:
+        if self.end:
             return f"{self.start.strftime('%H:%M')} - {self.end.strftime('%H:%M')}"
-        else:
-            return self.start.strftime('%H:%M')
+        return self.start.strftime("%H:%M")
 
 
 @dataclass
@@ -57,7 +56,7 @@ class Reminder:
     due_date: datetime
     priority: int = 3
     completed: bool = False
-    tags: List[str] = field(default_factory=list)
+    tags: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -85,7 +84,7 @@ class AgendaGenerator(ProjectionGenerator):
     Sorts by date/priority and formats as markdown agenda.
     """
 
-    def __init__(self, graph: Graph, start_date: Optional[datetime] = None) -> None:
+    def __init__(self, graph: Graph, start_date: datetime | None = None) -> None:
         """Initialize agenda generator.
 
         Args:
@@ -97,10 +96,11 @@ class AgendaGenerator(ProjectionGenerator):
             hour=0, minute=0, second=0, microsecond=0
         )
 
-    def gather_data(self) -> Dict[str, Any]:
+    def gather_data(self) -> dict[str, Any]:
         """Gather calendar events and reminders from RDF graph.
 
-        Returns:
+        Returns
+        -------
             Dictionary with events, reminders, and focus blocks
         """
         events = self._query_events()
@@ -116,7 +116,7 @@ class AgendaGenerator(ProjectionGenerator):
             "total_focus_hours": sum(f.duration_hours() for f in focus_blocks),
         }
 
-    def _query_events(self) -> List[CalendarEvent]:
+    def _query_events(self) -> list[CalendarEvent]:
         """Query RDF graph for calendar events."""
         events = []
 
@@ -153,20 +153,22 @@ class AgendaGenerator(ProjectionGenerator):
             if end_dt:
                 is_multi_day = (end_dt - start_dt).days > 0
 
-            events.append(CalendarEvent(
-                uri=str(row.event),
-                title=str(row.title),
-                start=start_dt,
-                end=end_dt,
-                description=str(row.desc) if row.desc else "",
-                location=str(row.location) if row.location else "",
-                priority=int(row.priority) if row.priority else 3,
-                is_multi_day=is_multi_day
-            ))
+            events.append(
+                CalendarEvent(
+                    uri=str(row.event),
+                    title=str(row.title),
+                    start=start_dt,
+                    end=end_dt,
+                    description=str(row.desc) if row.desc else "",
+                    location=str(row.location) if row.location else "",
+                    priority=int(row.priority) if row.priority else 3,
+                    is_multi_day=is_multi_day,
+                )
+            )
 
         return events
 
-    def _query_reminders(self) -> List[Reminder]:
+    def _query_reminders(self) -> list[Reminder]:
         """Query RDF graph for reminders and tasks."""
         reminders = []
 
@@ -194,23 +196,26 @@ class AgendaGenerator(ProjectionGenerator):
             if due_dt < self.start_date or due_dt > end_range:
                 continue
 
-            reminders.append(Reminder(
-                uri=str(row.reminder),
-                title=str(row.title),
-                due_date=due_dt,
-                priority=int(row.priority) if row.priority else 3,
-                completed=bool(row.completed) if row.completed else False
-            ))
+            reminders.append(
+                Reminder(
+                    uri=str(row.reminder),
+                    title=str(row.title),
+                    due_date=due_dt,
+                    priority=int(row.priority) if row.priority else 3,
+                    completed=bool(row.completed) if row.completed else False,
+                )
+            )
 
         return reminders
 
-    def _find_focus_blocks(self, events: List[CalendarEvent]) -> List[FocusBlock]:
+    def _find_focus_blocks(self, events: list[CalendarEvent]) -> list[FocusBlock]:
         """Identify focus time blocks between events.
 
         Args:
             events: List of calendar events
 
-        Returns:
+        Returns
+        -------
             List of focus blocks (gaps >= 2 hours between events)
         """
         focus_blocks = []
@@ -227,11 +232,9 @@ class AgendaGenerator(ProjectionGenerator):
 
             # Identify focus blocks (gaps >= 2 hours during work hours)
             if gap_hours >= 2.0 and self._is_work_hours(current_end):
-                focus_blocks.append(FocusBlock(
-                    start=current_end,
-                    end=next_start,
-                    purpose="Deep Work"
-                ))
+                focus_blocks.append(
+                    FocusBlock(start=current_end, end=next_start, purpose="Deep Work")
+                )
 
         return focus_blocks
 
@@ -246,8 +249,8 @@ class AgendaGenerator(ProjectionGenerator):
     def _is_work_hours(self, dt: datetime) -> bool:
         """Check if datetime falls within work hours (8am-6pm weekdays)."""
         return (
-            dt.weekday() < 5 and  # Monday-Friday
-            8 <= dt.hour < 18  # 8am-6pm
+            dt.weekday() < 5  # Monday-Friday
+            and 8 <= dt.hour < 18  # 8am-6pm
         )
 
     def generate(self, template_name: str = "default.md") -> str:
@@ -256,7 +259,8 @@ class AgendaGenerator(ProjectionGenerator):
         Args:
             template_name: Template file name
 
-        Returns:
+        Returns
+        -------
             Rendered markdown agenda
         """
         data = self.gather_data()

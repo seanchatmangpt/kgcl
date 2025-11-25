@@ -5,18 +5,12 @@ Tests define receipt behaviors including cryptographic verification,
 RDF serialization, and queryability.
 """
 
-import pytest
 from datetime import datetime, timedelta
-from typing import Any, Dict
-import hashlib
-import json
 
-from kgcl.hooks.receipts import (
-    Receipt,
-    ReceiptStore,
-    MerkleAnchor,
-)
+import pytest
+
 from kgcl.hooks.conditions import ConditionResult
+from kgcl.hooks.receipts import MerkleAnchor, Receipt, ReceiptStore
 
 
 class TestReceiptCapture:
@@ -188,9 +182,7 @@ class TestMerkleAnchor:
     def test_receipt_contains_merkle_anchor_to_graph_state(self):
         """Receipt contains merkle anchor to graph state."""
         merkle_anchor = MerkleAnchor(
-            root_hash="abc123",
-            graph_version=42,
-            timestamp=datetime.utcnow(),
+            root_hash="abc123", graph_version=42, timestamp=datetime.utcnow()
         )
 
         receipt = Receipt(
@@ -389,10 +381,7 @@ class TestReceiptStore:
         await store.save(receipt_new)
 
         # Query by timestamp range
-        results = await store.query(
-            timestamp_from=now - timedelta(minutes=5),
-            timestamp_to=future,
-        )
+        results = await store.query(timestamp_from=now - timedelta(minutes=5), timestamp_to=future)
 
         assert len(results) == 1
         assert results[0].hook_id == "new"

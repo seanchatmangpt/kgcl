@@ -3,7 +3,8 @@
 Provides fluent builder interfaces for constructing complex test objects.
 """
 
-from typing import TypeVar, Generic, Callable, Any, Optional, List, Dict
+from collections.abc import Callable
+from typing import Any, Generic, TypeVar
 
 T = TypeVar("T")
 
@@ -41,9 +42,9 @@ class Builder(Generic[T]):
     """
 
     def __init__(self) -> None:
-        self._mutations: List[Callable[[Any], None]] = []
-        self._validators: List[Callable[[Any], bool]] = []
-        self._transformers: List[Callable[[Any], Any]] = []
+        self._mutations: list[Callable[[Any], None]] = []
+        self._validators: list[Callable[[Any], bool]] = []
+        self._transformers: list[Callable[[Any], Any]] = []
 
     def add_mutation(self, mutation: Callable[[Any], None]) -> "Builder[T]":
         """Add a mutation function"""
@@ -88,14 +89,14 @@ class SimpleBuilder(Builder[T]):
     def __init__(self, factory: Callable[..., T], **kwargs: Any) -> None:
         super().__init__()
         self._factory = factory
-        self._attributes: Dict[str, Any] = kwargs
+        self._attributes: dict[str, Any] = kwargs
 
     def with_attr(self, key: str, value: Any) -> "SimpleBuilder[T]":
         """Set an attribute"""
         self._attributes[key] = value
         return self
 
-    def with_attrs(self, attrs: Dict[str, Any]) -> "SimpleBuilder[T]":
+    def with_attrs(self, attrs: dict[str, Any]) -> "SimpleBuilder[T]":
         """Set multiple attributes"""
         self._attributes.update(attrs)
         return self

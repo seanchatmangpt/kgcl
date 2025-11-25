@@ -3,10 +3,10 @@
 Provides snapshot comparison for regression testing.
 """
 
-from typing import Any, Dict, Optional
-from dataclasses import dataclass
 import json
+from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 
 @dataclass
@@ -20,9 +20,10 @@ class SnapshotTest:
         )
         test.matches_snapshot("snapshots/api_response.json")
     """
+
     name: str
     actual: Any
-    expected: Optional[Any] = None
+    expected: Any | None = None
     matched: bool = False
 
     def matches_snapshot(self, snapshot_path: str, update: bool = False) -> bool:
@@ -32,7 +33,8 @@ class SnapshotTest:
             snapshot_path: Path to snapshot file
             update: If True, update snapshot if different
 
-        Returns:
+        Returns
+        -------
             True if snapshot matches
         """
         path = Path(snapshot_path)
@@ -61,21 +63,14 @@ class SnapshotTest:
         if isinstance(actual, dict) and isinstance(expected, dict):
             if set(actual.keys()) != set(expected.keys()):
                 return False
-            return all(
-                self._compare(actual[k], expected[k])
-                for k in actual.keys()
-            )
-        elif isinstance(actual, list) and isinstance(expected, list):
+            return all(self._compare(actual[k], expected[k]) for k in actual.keys())
+        if isinstance(actual, list) and isinstance(expected, list):
             if len(actual) != len(expected):
                 return False
-            return all(
-                self._compare(a, e)
-                for a, e in zip(actual, expected)
-            )
-        else:
-            return actual == expected
+            return all(self._compare(a, e) for a, e in zip(actual, expected))
+        return actual == expected
 
-    def diff(self) -> Optional[str]:
+    def diff(self) -> str | None:
         """Get diff between actual and expected"""
         if self.expected is None:
             return f"No snapshot file exists for {self.name}"

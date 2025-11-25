@@ -2,7 +2,7 @@
 
 import tempfile
 import time
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 import pytest
@@ -20,17 +20,14 @@ class TestPerformance:
         """Test batch ingestion throughput."""
         with tempfile.TemporaryDirectory() as tmpdir:
             config = IngestionConfig(
-                collector=CollectorConfig(
-                    output_directory=Path(tmpdir),
-                    batch_size=1000,
-                )
+                collector=CollectorConfig(output_directory=Path(tmpdir), batch_size=1000)
             )
 
             service = IngestionService(config)
             service.start()
 
             # Generate large batch
-            now = datetime.now(timezone.utc)
+            now = datetime.now(UTC)
             events = [
                 AppEvent(
                     event_id=f"app_{i:06d}",
@@ -62,18 +59,14 @@ class TestPerformance:
             config = IngestionConfig(
                 collector=CollectorConfig(output_directory=Path(tmpdir)),
                 feature=FeatureConfig(
-                    enabled_features=[
-                        "app_usage_time",
-                        "browser_domain_visits",
-                        "context_switches",
-                    ]
+                    enabled_features=["app_usage_time", "browser_domain_visits", "context_switches"]
                 ),
             )
 
             service = IngestionService(config)
 
             # Generate large event set
-            now = datetime.now(timezone.utc).replace(tzinfo=None)
+            now = datetime.now(UTC).replace(tzinfo=None)
             window_start = now.replace(minute=0, second=0, microsecond=0)
             window_end = window_start + timedelta(hours=1)
 
@@ -101,11 +94,7 @@ class TestPerformance:
 
             # Measure materialization time
             start_time = time.perf_counter()
-            features = service.materializer.materialize(
-                events,
-                window_start,
-                window_end,
-            )
+            features = service.materializer.materialize(events, window_start, window_end)
             end_time = time.perf_counter()
 
             elapsed = end_time - start_time
@@ -119,17 +108,14 @@ class TestPerformance:
         """Test flush operation latency."""
         with tempfile.TemporaryDirectory() as tmpdir:
             config = IngestionConfig(
-                collector=CollectorConfig(
-                    output_directory=Path(tmpdir),
-                    batch_size=100,
-                )
+                collector=CollectorConfig(output_directory=Path(tmpdir), batch_size=100)
             )
 
             service = IngestionService(config)
             service.start()
 
             # Add events
-            now = datetime.now(timezone.utc)
+            now = datetime.now(UTC)
             for i in range(50):
                 event = AppEvent(
                     event_id=f"app_{i:03d}",
@@ -157,7 +143,7 @@ class TestPerformance:
         service = IngestionService(config)
 
         # Generate events
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         events = [
             AppEvent(
                 event_id=f"app_{i:05d}",
@@ -186,14 +172,13 @@ class TestPerformance:
             config = IngestionConfig(
                 collector=CollectorConfig(output_directory=Path(tmpdir)),
                 feature=FeatureConfig(
-                    enabled_features=["app_usage_time"],
-                    incremental_updates=True,
+                    enabled_features=["app_usage_time"], incremental_updates=True
                 ),
             )
 
             service = IngestionService(config)
 
-            now = datetime.now(timezone.utc).replace(tzinfo=None)
+            now = datetime.now(UTC).replace(tzinfo=None)
             window_start = now.replace(minute=0, second=0, microsecond=0)
             window_end = window_start + timedelta(hours=1)
 
@@ -209,9 +194,7 @@ class TestPerformance:
             ]
 
             initial_features = service.materializer.materialize(
-                initial_events,
-                window_start,
-                window_end,
+                initial_events, window_start, window_end
             )
 
             # New events
@@ -228,8 +211,7 @@ class TestPerformance:
             # Measure incremental update time
             start_time = time.perf_counter()
             updated_features = service.materializer.materialize_incremental(
-                new_events,
-                initial_features,
+                new_events, initial_features
             )
             end_time = time.perf_counter()
 
@@ -243,17 +225,14 @@ class TestPerformance:
         """Test concurrent event ingestion."""
         with tempfile.TemporaryDirectory() as tmpdir:
             config = IngestionConfig(
-                collector=CollectorConfig(
-                    output_directory=Path(tmpdir),
-                    batch_size=100,
-                )
+                collector=CollectorConfig(output_directory=Path(tmpdir), batch_size=100)
             )
 
             service = IngestionService(config)
             service.start()
 
             # Simulate concurrent ingestion
-            now = datetime.now(timezone.utc)
+            now = datetime.now(UTC)
             batches = [
                 [
                     AppEvent(
@@ -287,17 +266,14 @@ class TestPerformance:
 
         with tempfile.TemporaryDirectory() as tmpdir:
             config = IngestionConfig(
-                collector=CollectorConfig(
-                    output_directory=Path(tmpdir),
-                    batch_size=1000,
-                )
+                collector=CollectorConfig(output_directory=Path(tmpdir), batch_size=1000)
             )
 
             service = IngestionService(config)
             service.start()
 
             # Generate large batch
-            now = datetime.now(timezone.utc)
+            now = datetime.now(UTC)
             events = [
                 AppEvent(
                     event_id=f"app_{i:06d}",

@@ -6,15 +6,6 @@ mapped to schema:Message RDF, and validated against SHACL invariants.
 Note: Only metadata is ingested, not message bodies (privacy).
 """
 
-import pytest
-from datetime import datetime, timezone
-
-from tests.apple_ingest.fixtures import (
-    mail_message_simple,
-    mail_message_flagged,
-    mail_message_no_sender,
-    mail_message_batch,
-)
 
 # TODO: Import when available
 # from kgcl.ingest.apple_mail import MailIngestEngine
@@ -41,7 +32,7 @@ class TestMailMessageMapping:
         # subjects = list(rdf_graph.objects(predicate=schema_ns.name))
         # assert any("Q4 Review" in str(s) for s in subjects)
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_message_sender_is_preserved(self, mail_message_simple):
         """
@@ -57,7 +48,7 @@ class TestMailMessageMapping:
         # authors = list(rdf_graph.objects(predicate=schema_ns.author))
         # assert len(authors) >= 1
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_message_recipients_are_preserved(self, mail_message_flagged):
         """
@@ -73,7 +64,7 @@ class TestMailMessageMapping:
         # recipients = list(rdf_graph.objects(predicate=schema_ns.recipient))
         # assert len(recipients) == 2
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_message_date_is_preserved(self, mail_message_simple):
         """
@@ -89,7 +80,7 @@ class TestMailMessageMapping:
         # dates = list(rdf_graph.objects(predicate=schema_ns.dateReceived))
         # assert len(dates) >= 1
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_message_flagged_status_is_tracked(self, mail_message_flagged):
         """
@@ -105,7 +96,7 @@ class TestMailMessageMapping:
         # keywords = list(rdf_graph.objects(predicate=schema_ns.keywords))
         # assert any("flagged" in str(k).lower() for k in keywords)
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_message_source_id_is_tracked(self, mail_message_simple):
         """
@@ -121,7 +112,7 @@ class TestMailMessageMapping:
         # source_ids = list(rdf_graph.objects(predicate=apple_ns.sourceIdentifier))
         # assert len(source_ids) == 1
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
 
 class TestMailMessageValidation:
@@ -142,7 +133,7 @@ class TestMailMessageValidation:
         # assert report.conforms is False
         # assert any("sender" in str(v).lower() for v in report.violations)
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_valid_message_passes_validation(self, mail_message_simple):
         """
@@ -158,7 +149,7 @@ class TestMailMessageValidation:
         # report = validator.validate(rdf_graph)
         # assert report.conforms is True
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
 
 class TestMailMessageBatch:
@@ -178,7 +169,7 @@ class TestMailMessageBatch:
         # messages = list(rdf_graph.subjects(predicate=RDF.type, object=schema_ns.Message))
         # assert len(messages) == 2
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
 
 class TestMailIngestIntegration:
@@ -191,7 +182,7 @@ class TestMailIngestIntegration:
         THEN: Task has apple:relatedAction → Message
         """
         # TODO: Implement
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_mail_message_can_be_linked_to_calendar_event(self):
         """
@@ -200,4 +191,4 @@ class TestMailIngestIntegration:
         THEN: Calendar event has apple:relatedAction → Message
         """
         # TODO: Implement
-        pass  # TODO: Implement
+        # TODO: Implement

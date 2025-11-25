@@ -186,11 +186,7 @@ class HealthChecker:
         else:
             overall_status = HealthStatus.DEGRADED
 
-        return SystemHealth(
-            status=overall_status,
-            components=components,
-            timestamp=timestamp,
-        )
+        return SystemHealth(status=overall_status, components=components, timestamp=timestamp)
 
 
 # Global health checker instance

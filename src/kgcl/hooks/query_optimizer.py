@@ -5,10 +5,9 @@ This module provides query analysis, optimization, and index suggestions
 for improving SPARQL query performance.
 """
 
-from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Set
-import re
 import hashlib
+import re
+from dataclasses import dataclass, field
 
 
 @dataclass
@@ -39,11 +38,11 @@ class QueryPlan:
     query: str
     estimated_selectivity: float
     estimated_cost: float
-    execution_path: List[str]
+    execution_path: list[str]
     uses_index: bool = False
     parallelizable: bool = False
-    optimized_query: Optional[str] = None
-    index_hints: List[str] = field(default_factory=list)
+    optimized_query: str | None = None
+    index_hints: list[str] = field(default_factory=list)
 
 
 class QueryOptimizer:
@@ -56,9 +55,9 @@ class QueryOptimizer:
 
     def __init__(self) -> None:
         """Initialize optimizer."""
-        self.query_stats: Dict[str, Dict] = {}
-        self.index_hints: Dict[str, str] = {}
-        self._known_indexes: Set[str] = set()
+        self.query_stats: dict[str, dict] = {}
+        self.index_hints: dict[str, str] = {}
+        self._known_indexes: set[str] = set()
 
     def analyze_query(self, query: str) -> QueryPlan:
         """
@@ -167,7 +166,7 @@ class QueryOptimizer:
 
         return optimized
 
-    def suggest_indexes(self, query: str) -> List[str]:
+    def suggest_indexes(self, query: str) -> list[str]:
         """
         Suggest index creation for query optimization.
 
@@ -228,7 +227,7 @@ class QueryOptimizer:
                 prev_avg * (stats["executions"] - 1) + execution_time_ms
             ) / stats["executions"]
 
-    def get_stats(self, query: str) -> Optional[Dict]:
+    def get_stats(self, query: str) -> dict | None:
         """
         Get statistics for a query.
 
@@ -253,9 +252,7 @@ class QueryOptimizer:
         """Create hash of query for identification."""
         return hashlib.md5(query.encode()).hexdigest()
 
-    def _estimate_selectivity(
-        self, query: str, triple_count: int, has_filter: bool
-    ) -> float:
+    def _estimate_selectivity(self, query: str, triple_count: int, has_filter: bool) -> float:
         """
         Estimate query selectivity (0.0 = very selective, 1.0 = returns all).
         """
@@ -274,13 +271,8 @@ class QueryOptimizer:
         return max(0.0, min(1.0, selectivity))
 
     def _build_execution_path(
-        self,
-        query: str,
-        triple_count: int,
-        has_union: bool,
-        has_optional: bool,
-        has_filter: bool,
-    ) -> List[str]:
+        self, query: str, triple_count: int, has_union: bool, has_optional: bool, has_filter: bool
+    ) -> list[str]:
         """Build step-by-step execution plan."""
         path = []
 

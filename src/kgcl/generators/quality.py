@@ -4,14 +4,14 @@ Converts SHACL validation violations to actionable quality reports,
 categorized by severity with recommendations for fixes.
 """
 
-from typing import Any, Dict, List, Optional
-from dataclasses import dataclass, field
 from collections import defaultdict
+from dataclasses import dataclass, field
+from typing import Any
+
 from rdflib import Graph, Namespace, URIRef
-from rdflib.namespace import RDF, RDFS, SH
+from rdflib.namespace import RDFS, SH
 
 from .base import ProjectionGenerator
-
 
 # Define namespaces
 KGC = Namespace("http://example.org/kgc/")
@@ -22,11 +22,11 @@ class Violation:
     """Domain object for SHACL validation violations."""
 
     focus_node: str
-    result_path: Optional[str]
+    result_path: str | None
     message: str
     severity: str  # "high", "medium", "low"
     source_constraint: str
-    value: Optional[str] = None
+    value: str | None = None
 
     def severity_priority(self) -> int:
         """Get numeric priority for severity (1=high, 2=medium, 3=low)."""
@@ -39,10 +39,10 @@ class QualityCategory:
 
     name: str
     description: str
-    violations: List[Violation] = field(default_factory=list)
+    violations: list[Violation] = field(default_factory=list)
     recommendation: str = ""
 
-    def count_by_severity(self) -> Dict[str, int]:
+    def count_by_severity(self) -> dict[str, int]:
         """Count violations by severity level."""
         counts = {"high": 0, "medium": 0, "low": 0}
         for v in self.violations:
@@ -71,7 +71,7 @@ class QualityReportGenerator(ProjectionGenerator):
     - Trend tracking
     """
 
-    def __init__(self, graph: Graph, validation_graph: Optional[Graph] = None) -> None:
+    def __init__(self, graph: Graph, validation_graph: Graph | None = None) -> None:
         """Initialize quality report generator.
 
         Args:
@@ -81,10 +81,11 @@ class QualityReportGenerator(ProjectionGenerator):
         super().__init__(graph)
         self.validation_graph = validation_graph or graph
 
-    def gather_data(self) -> Dict[str, Any]:
+    def gather_data(self) -> dict[str, Any]:
         """Gather SHACL violations and categorize by type.
 
-        Returns:
+        Returns
+        -------
             Dictionary with violations, categories, and recommendations
         """
         violations = self._query_violations()
@@ -99,7 +100,7 @@ class QualityReportGenerator(ProjectionGenerator):
             "ontology_link": self._get_ontology_link(),
         }
 
-    def _query_violations(self) -> List[Violation]:
+    def _query_violations(self) -> list[Violation]:
         """Query validation graph for SHACL violations."""
         violations = []
 
@@ -125,18 +126,20 @@ class QualityReportGenerator(ProjectionGenerator):
         for row in results:
             severity = self._map_severity(row.severity)
 
-            violations.append(Violation(
-                focus_node=self._format_uri(row.focusNode),
-                result_path=self._format_uri(row.path) if row.path else None,
-                message=str(row.message),
-                severity=severity,
-                source_constraint=self._format_uri(row.constraint),
-                value=str(row.value) if row.value else None
-            ))
+            violations.append(
+                Violation(
+                    focus_node=self._format_uri(row.focusNode),
+                    result_path=self._format_uri(row.path) if row.path else None,
+                    message=str(row.message),
+                    severity=severity,
+                    source_constraint=self._format_uri(row.constraint),
+                    value=str(row.value) if row.value else None,
+                )
+            )
 
         return violations
 
-    def _categorize_violations(self, violations: List[Violation]) -> List[QualityCategory]:
+    def _categorize_violations(self, violations: list[Violation]) -> list[QualityCategory]:
         """Categorize violations by constraint type."""
         categories_map = defaultdict(list)
 
@@ -150,7 +153,7 @@ class QualityReportGenerator(ProjectionGenerator):
                 name=name,
                 description=self._get_category_description(name),
                 violations=sorted(category_violations, key=lambda v: v.severity_priority()),
-                recommendation=self._get_recommendation(name)
+                recommendation=self._get_recommendation(name),
             )
             categories.append(category)
 
@@ -158,11 +161,7 @@ class QualityReportGenerator(ProjectionGenerator):
 
     def _map_severity(self, severity_uri: URIRef) -> str:
         """Map SHACL severity URI to readable severity level."""
-        severity_map = {
-            str(SH.Violation): "high",
-            str(SH.Warning): "medium",
-            str(SH.Info): "low",
-        }
+        severity_map = {str(SH.Violation): "high", str(SH.Warning): "medium", str(SH.Info): "low"}
         return severity_map.get(str(severity_uri), "medium")
 
     def _get_category_name(self, constraint: str) -> str:
@@ -170,18 +169,17 @@ class QualityReportGenerator(ProjectionGenerator):
         # Map constraint types to readable categories
         if "MinCount" in constraint:
             return "Missing Required Properties"
-        elif "MaxCount" in constraint:
+        if "MaxCount" in constraint:
             return "Too Many Values"
-        elif "Datatype" in constraint:
+        if "Datatype" in constraint:
             return "Invalid Data Types"
-        elif "Pattern" in constraint:
+        if "Pattern" in constraint:
             return "Format Violations"
-        elif "Class" in constraint:
+        if "Class" in constraint:
             return "Type Mismatches"
-        elif "NodeKind" in constraint:
+        if "NodeKind" in constraint:
             return "Node Kind Violations"
-        else:
-            return "Other Violations"
+        return "Other Violations"
 
     def _get_category_description(self, category: str) -> str:
         """Get description for category."""
@@ -192,7 +190,7 @@ class QualityReportGenerator(ProjectionGenerator):
             "Format Violations": "Values don't match required patterns",
             "Type Mismatches": "Nodes don't match expected types",
             "Node Kind Violations": "Nodes are not the correct kind (IRI, literal, blank)",
-            "Other Violations": "Miscellaneous validation failures"
+            "Other Violations": "Miscellaneous validation failures",
         }
         return descriptions.get(category, "")
 
@@ -205,18 +203,18 @@ class QualityReportGenerator(ProjectionGenerator):
             "Format Violations": "Update values to match required patterns",
             "Type Mismatches": "Add correct rdf:type or update class definitions",
             "Node Kind Violations": "Ensure nodes are IRIs, literals, or blank nodes as required",
-            "Other Violations": "Review SHACL shapes and update data accordingly"
+            "Other Violations": "Review SHACL shapes and update data accordingly",
         }
         return recommendations.get(category, "Review validation report for details")
 
-    def _count_by_severity(self, violations: List[Violation]) -> Dict[str, int]:
+    def _count_by_severity(self, violations: list[Violation]) -> dict[str, int]:
         """Count violations by severity level."""
         counts = {"high": 0, "medium": 0, "low": 0}
         for v in violations:
             counts[v.severity] = counts.get(v.severity, 0) + 1
         return counts
 
-    def _query_trends(self) -> List[QualityTrend]:
+    def _query_trends(self) -> list[QualityTrend]:
         """Query historical validation results for trends."""
         # Placeholder - would query historical data if stored
         return []
@@ -230,7 +228,7 @@ class QualityReportGenerator(ProjectionGenerator):
         uri_str = str(uri)
         if "#" in uri_str:
             return uri_str.split("#")[-1]
-        elif "/" in uri_str:
+        if "/" in uri_str:
             return uri_str.split("/")[-1]
         return uri_str
 
@@ -240,7 +238,8 @@ class QualityReportGenerator(ProjectionGenerator):
         Args:
             template_name: Template file name
 
-        Returns:
+        Returns
+        -------
             Rendered markdown quality report
         """
         data = self.gather_data()

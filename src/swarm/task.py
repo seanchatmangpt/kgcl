@@ -3,15 +3,16 @@
 Represents units of work that can be executed by swarm members.
 """
 
-from typing import Any, Optional, Dict
-from dataclasses import dataclass, field
-from enum import Enum
-from datetime import datetime
 import uuid
+from dataclasses import dataclass, field
+from datetime import datetime
+from enum import Enum
+from typing import Any
 
 
 class TaskStatus(Enum):
     """Status of a task"""
+
     PENDING = "pending"
     RUNNING = "running"
     SUCCESS = "success"
@@ -30,9 +31,10 @@ class TestTask:
             payload={"endpoint": "/users"}
         )
     """
+
     name: str
     task_type: str = "generic"
-    payload: Optional[Dict[str, Any]] = None
+    payload: dict[str, Any] | None = None
     priority: int = 0
     task_id: str = field(default_factory=lambda: str(uuid.uuid4())[:8])
     created_at: datetime = field(default_factory=datetime.now)
@@ -60,13 +62,14 @@ class TestTask:
 @dataclass
 class TaskResult:
     """Result of task execution"""
+
     task_name: str
     status: TaskStatus
-    output: Optional[Any] = None
-    error: Optional[str] = None
-    exception: Optional[Exception] = None
+    output: Any | None = None
+    error: str | None = None
+    exception: Exception | None = None
     start_time: datetime = field(default_factory=datetime.now)
-    end_time: Optional[datetime] = None
+    end_time: datetime | None = None
     duration_ms: float = 0.0
 
     def is_success(self) -> bool:

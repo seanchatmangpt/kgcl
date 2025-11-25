@@ -5,9 +5,9 @@ Periodically reads browser history databases to track
 web browsing activity.
 """
 
-from typing import Optional, Dict, Any, Set
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime
+from typing import Any
 
 from ..plugins import get_registry
 from .base import BaseCollector, CollectorConfig
@@ -35,8 +35,8 @@ class BrowserHistoryCollector(BaseCollector):
         """
         super().__init__(config)
         self._plugin = None
-        self._seen_urls: Set[str] = set()
-        self._last_collection_time: Optional[datetime] = None
+        self._seen_urls: set[str] = set()
+        self._last_collection_time: datetime | None = None
 
     def validate_configuration(self) -> bool:
         """Validate collector configuration."""
@@ -54,19 +54,19 @@ class BrowserHistoryCollector(BaseCollector):
 
         if not has_access:
             logger.warning(
-                "No browser history access available. "
-                "May require Full Disk Access permission."
+                "No browser history access available. May require Full Disk Access permission."
             )
             # Continue anyway - will just collect empty data
 
         logger.info("Browser history collector validated successfully")
         return True
 
-    def collect_event(self) -> Optional[Dict[str, Any]]:
+    def collect_event(self) -> dict[str, Any] | None:
         """
         Collect recent browser history entries.
 
-        Returns:
+        Returns
+        -------
             Event data with new browser visits or None
         """
         try:
@@ -83,8 +83,7 @@ class BrowserHistoryCollector(BaseCollector):
 
             # Collect recent browsing activity
             capability_data = self._plugin.collect_capability_data(
-                "recent_browsing_activity",
-                parameters={"hours_back": hours_back}
+                "recent_browsing_activity", parameters={"hours_back": hours_back}
             )
 
             if capability_data.error:
@@ -117,7 +116,7 @@ class BrowserHistoryCollector(BaseCollector):
                 "top_domains": activity_data.get("top_domains", []),
                 "unique_domains": activity_data.get("unique_domains", 0),
                 "time_window_hours": hours_back,
-                "browsers": activity_data.get("browsers", {})
+                "browsers": activity_data.get("browsers", {}),
             }
 
             return event
@@ -134,13 +133,13 @@ class BrowserHistoryCollector(BaseCollector):
             capability_name: Browser capability name
             hours_back: Hours to look back
 
-        Returns:
+        Returns
+        -------
             List of new visit dictionaries
         """
         try:
             capability_data = self._plugin.collect_capability_data(
-                capability_name,
-                parameters={"hours_back": hours_back, "limit": 200}
+                capability_name, parameters={"hours_back": hours_back, "limit": 200}
             )
 
             if capability_data.error:
@@ -159,12 +158,14 @@ class BrowserHistoryCollector(BaseCollector):
 
                 if visit_key not in self._seen_urls:
                     self._seen_urls.add(visit_key)
-                    new_visits.append({
-                        "browser": capability_name.replace("_history", ""),
-                        "url": url,
-                        "title": visit.get("title", ""),
-                        "visit_time": visit_time
-                    })
+                    new_visits.append(
+                        {
+                            "browser": capability_name.replace("_history", ""),
+                            "url": url,
+                            "title": visit.get("title", ""),
+                            "visit_time": visit_time,
+                        }
+                    )
 
             # Cleanup seen URLs set if too large
             if len(self._seen_urls) > 10000:
@@ -180,8 +181,8 @@ class BrowserHistoryCollector(BaseCollector):
 
 def create_browser_history_collector(
     interval_seconds: float = 300.0,  # 5 minutes
-    output_path: Optional[str] = None,
-    **kwargs
+    output_path: str | None = None,
+    **kwargs,
 ) -> BrowserHistoryCollector:
     """
     Factory function to create browser history collector.
@@ -191,7 +192,8 @@ def create_browser_history_collector(
         output_path: Path to JSONL output file
         **kwargs: Additional collector config parameters
 
-    Returns:
+    Returns
+    -------
         Configured BrowserHistoryCollector instance
     """
     config = CollectorConfig(
@@ -200,7 +202,7 @@ def create_browser_history_collector(
         output_path=output_path or "/Users/sac/dev/kgcl/data/browser_history.jsonl",
         batch_size=kwargs.get("batch_size", 10),
         batch_timeout_seconds=kwargs.get("batch_timeout_seconds", 600.0),
-        **{k: v for k, v in kwargs.items() if k not in ["batch_size", "batch_timeout_seconds"]}
+        **{k: v for k, v in kwargs.items() if k not in ["batch_size", "batch_timeout_seconds"]},
     )
 
     return BrowserHistoryCollector(config)

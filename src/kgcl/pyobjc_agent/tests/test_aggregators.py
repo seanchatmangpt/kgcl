@@ -2,19 +2,19 @@
 Unit tests for feature aggregators.
 """
 
-import unittest
-from datetime import datetime, timedelta
 import json
 import tempfile
+import unittest
+from datetime import datetime, timedelta
 from pathlib import Path
 
 from ..aggregators import (
-    TimeWindow,
     AggregatedFeature,
-    FrontmostAppAggregator,
     BrowserHistoryAggregator,
     CalendarAggregator,
-    aggregate_jsonl_file
+    FrontmostAppAggregator,
+    TimeWindow,
+    aggregate_jsonl_file,
 )
 
 
@@ -66,8 +66,7 @@ class TestAggregatedFeature(unittest.TestCase):
     def test_creation(self):
         """Test feature creation."""
         window = TimeWindow(
-            start_time=datetime(2024, 1, 1, 12, 0, 0),
-            end_time=datetime(2024, 1, 1, 13, 0, 0)
+            start_time=datetime(2024, 1, 1, 12, 0, 0), end_time=datetime(2024, 1, 1, 13, 0, 0)
         )
 
         feature = AggregatedFeature(
@@ -75,7 +74,7 @@ class TestAggregatedFeature(unittest.TestCase):
             time_window=window,
             value=42,
             unit="count",
-            metadata={"source": "test"}
+            metadata={"source": "test"},
         )
 
         self.assertEqual(feature.feature_name, "test_feature")
@@ -85,15 +84,10 @@ class TestAggregatedFeature(unittest.TestCase):
     def test_to_dict(self):
         """Test conversion to dictionary."""
         window = TimeWindow(
-            start_time=datetime(2024, 1, 1, 12, 0, 0),
-            end_time=datetime(2024, 1, 1, 13, 0, 0)
+            start_time=datetime(2024, 1, 1, 12, 0, 0), end_time=datetime(2024, 1, 1, 13, 0, 0)
         )
 
-        feature = AggregatedFeature(
-            feature_name="test",
-            time_window=window,
-            value=100
-        )
+        feature = AggregatedFeature(feature_name="test", time_window=window, value=100)
 
         result = feature.to_dict()
 
@@ -125,8 +119,8 @@ class TestFrontmostAppAggregator(unittest.TestCase):
                 "data": {
                     "app_name": "Safari" if i % 2 == 0 else "Chrome",
                     "bundle_id": f"com.test.app{i % 2}",
-                    "is_switch": i > 0
-                }
+                    "is_switch": i > 0,
+                },
             }
             for i in range(10)
         ]
@@ -147,18 +141,15 @@ class TestFrontmostAppAggregator(unittest.TestCase):
         base_time = datetime(2024, 1, 1, 12, 0, 0)
 
         events = [
-            {
-                "timestamp": base_time.isoformat(),
-                "data": {"app_name": "Safari"}
-            },
+            {"timestamp": base_time.isoformat(), "data": {"app_name": "Safari"}},
             {
                 "timestamp": (base_time + timedelta(minutes=5)).isoformat(),
-                "data": {"app_name": "Chrome"}
+                "data": {"app_name": "Chrome"},
             },
             {
                 "timestamp": (base_time + timedelta(minutes=10)).isoformat(),
-                "data": {"app_name": "Safari"}
-            }
+                "data": {"app_name": "Safari"},
+            },
         ]
 
         app_times = self.aggregator._calculate_app_times(events)
@@ -189,9 +180,9 @@ class TestBrowserHistoryAggregator(unittest.TestCase):
                     "browsers": {"safari": 6, "chrome": 4},
                     "top_domains": [
                         {"domain": "google.com", "count": 5},
-                        {"domain": "github.com", "count": 3}
-                    ]
-                }
+                        {"domain": "github.com", "count": 3},
+                    ],
+                },
             }
         ]
 
@@ -223,8 +214,8 @@ class TestCalendarAggregator(unittest.TestCase):
                     "upcoming_count": 3,
                     "events_today": 5,
                     "is_busy": i % 2 == 0,
-                    "new_event_started": i == 5
-                }
+                    "new_event_started": i == 5,
+                },
             }
             for i in range(10)
         ]
@@ -244,11 +235,7 @@ class TestAggregateJsonlFile(unittest.TestCase):
 
     def setUp(self):
         """Set up test fixtures."""
-        self.temp_file = tempfile.NamedTemporaryFile(
-            mode='w',
-            delete=False,
-            suffix='.jsonl'
-        )
+        self.temp_file = tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".jsonl")
         self.temp_path = self.temp_file.name
 
         # Write test data
@@ -257,14 +244,10 @@ class TestAggregateJsonlFile(unittest.TestCase):
             event = {
                 "collector_name": "frontmost_app",
                 "timestamp": (base_time + timedelta(minutes=i)).isoformat(),
-                "data": {
-                    "app_name": "TestApp",
-                    "bundle_id": "com.test.app",
-                    "is_switch": i > 0
-                },
-                "sequence_number": i
+                "data": {"app_name": "TestApp", "bundle_id": "com.test.app", "is_switch": i > 0},
+                "sequence_number": i,
             }
-            self.temp_file.write(json.dumps(event) + '\n')
+            self.temp_file.write(json.dumps(event) + "\n")
 
         self.temp_file.close()
 
@@ -279,37 +262,26 @@ class TestAggregateJsonlFile(unittest.TestCase):
         """Test aggregating from JSONL file."""
         aggregator = FrontmostAppAggregator()
 
-        features = aggregate_jsonl_file(
-            self.temp_path,
-            aggregator
-        )
+        features = aggregate_jsonl_file(self.temp_path, aggregator)
 
         self.assertGreater(len(features), 0)
 
     def test_aggregate_file_with_output(self):
         """Test aggregating with output file."""
-        output_file = tempfile.NamedTemporaryFile(
-            mode='w',
-            delete=False,
-            suffix='.json'
-        )
+        output_file = tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".json")
         output_path = output_file.name
         output_file.close()
 
         try:
             aggregator = FrontmostAppAggregator()
 
-            features = aggregate_jsonl_file(
-                self.temp_path,
-                aggregator,
-                output_path=output_path
-            )
+            features = aggregate_jsonl_file(self.temp_path, aggregator, output_path=output_path)
 
             # Verify output file created
             self.assertTrue(Path(output_path).exists())
 
             # Verify content
-            with open(output_path, 'r') as f:
+            with open(output_path) as f:
                 data = json.load(f)
 
             self.assertIn("features", data)
@@ -322,5 +294,5 @@ class TestAggregateJsonlFile(unittest.TestCase):
                 pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

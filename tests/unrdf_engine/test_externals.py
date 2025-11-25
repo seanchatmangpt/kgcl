@@ -2,18 +2,12 @@
 
 from __future__ import annotations
 
-import json
 import tempfile
 from pathlib import Path
 
-import pytest
 from rdflib import Graph
 
-from kgcl.unrdf_engine.externals import (
-    CapabilityType,
-    ExecutionReceipt,
-    ExternalCapabilityBridge,
-)
+from kgcl.unrdf_engine.externals import CapabilityType, ExecutionReceipt, ExternalCapabilityBridge
 
 
 class TestExecutionReceipt:
@@ -129,9 +123,7 @@ sys.exit(1)
 
         try:
             bridge = ExternalCapabilityBridge()
-            receipt = bridge.execute_python(
-                script=script_path, input_data={}, timeout=5.0
-            )
+            receipt = bridge.execute_python(script=script_path, input_data={}, timeout=5.0)
 
             assert receipt.exit_code == 1
             assert receipt.error is not None
@@ -151,9 +143,7 @@ print("not valid json")
 
         try:
             bridge = ExternalCapabilityBridge()
-            receipt = bridge.execute_python(
-                script=script_path, input_data={}, timeout=5.0
-            )
+            receipt = bridge.execute_python(script=script_path, input_data={}, timeout=5.0)
 
             assert receipt.exit_code == 1
             assert "Failed to parse JSON" in receipt.error
@@ -174,9 +164,7 @@ time.sleep(10)
 
         try:
             bridge = ExternalCapabilityBridge()
-            receipt = bridge.execute_python(
-                script=script_path, input_data={}, timeout=0.5
-            )
+            receipt = bridge.execute_python(script=script_path, input_data={}, timeout=0.5)
 
             assert receipt.exit_code == 124  # Timeout exit code
             assert "timed out" in receipt.error
@@ -279,9 +267,7 @@ print(json.dumps({"result": "ok"}))
 
         try:
             bridge = ExternalCapabilityBridge()
-            receipt = bridge.execute_python(
-                script=script_path, input_data={}, timeout=5.0
-            )
+            receipt = bridge.execute_python(script=script_path, input_data={}, timeout=5.0)
 
             # Should have taken at least 100ms
             assert receipt.duration_ms >= 100

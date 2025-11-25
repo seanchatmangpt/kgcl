@@ -4,26 +4,26 @@ Provides assertion utilities following Chicago TDD principles.
 Uses callable predicates for flexible, composable assertions.
 """
 
-from typing import Any, Callable, TypeVar, Generic, Optional
-import sys
+from collections.abc import Callable
 from dataclasses import dataclass
+from typing import Any, Generic, TypeVar
 
 T = TypeVar("T")
 
 
 class AssertionError(Exception):
     """Chicago TDD Assertion Error - raised when assertions fail"""
-    pass
 
 
-def assert_success(result: Any, msg: Optional[str] = None) -> None:
+def assert_success(result: Any, msg: str | None = None) -> None:
     """Assert that a result is successful (truthy or Result-like with is_ok method)
 
     Args:
         result: The result to check
         msg: Optional custom message
 
-    Raises:
+    Raises
+    ------
         AssertionError: If result is not successful
     """
     is_ok = False
@@ -40,14 +40,15 @@ def assert_success(result: Any, msg: Optional[str] = None) -> None:
         raise AssertionError(error_msg)
 
 
-def assert_error(result: Any, msg: Optional[str] = None) -> None:
+def assert_error(result: Any, msg: str | None = None) -> None:
     """Assert that a result is an error
 
     Args:
         result: The result to check
         msg: Optional custom message
 
-    Raises:
+    Raises
+    ------
         AssertionError: If result is not an error
     """
     is_err = False
@@ -71,13 +72,12 @@ def assert_eq_with_msg(actual: T, expected: T, msg: str) -> None:
         expected: The expected value
         msg: Custom message to display on failure
 
-    Raises:
+    Raises
+    ------
         AssertionError: If values are not equal
     """
     if actual != expected:
-        raise AssertionError(
-            f"{msg}: expected {expected!r}, got {actual!r}"
-        )
+        raise AssertionError(f"{msg}: expected {expected!r}, got {actual!r}")
 
 
 def assert_in_range(value: float, min_val: float, max_val: float, msg: str) -> None:
@@ -89,16 +89,15 @@ def assert_in_range(value: float, min_val: float, max_val: float, msg: str) -> N
         max_val: Maximum bound (inclusive)
         msg: Custom message to display on failure
 
-    Raises:
+    Raises
+    ------
         AssertionError: If value is not in range
     """
     if not (min_val <= value <= max_val):
-        raise AssertionError(
-            f"{msg}: value {value!r} not in range [{min_val}, {max_val}]"
-        )
+        raise AssertionError(f"{msg}: value {value!r} not in range [{min_val}, {max_val}]")
 
 
-def assert_that(value: T, predicate: Callable[[T], bool], msg: Optional[str] = None) -> None:
+def assert_that(value: T, predicate: Callable[[T], bool], msg: str | None = None) -> None:
     """Assert that a value satisfies a predicate
 
     Args:
@@ -106,7 +105,8 @@ def assert_that(value: T, predicate: Callable[[T], bool], msg: Optional[str] = N
         predicate: A callable that returns True if the value is valid
         msg: Optional custom message
 
-    Raises:
+    Raises
+    ------
         AssertionError: If predicate returns False
 
     Example:
@@ -125,40 +125,45 @@ class AssertionBuilder(Generic[T]):
     Allows chaining multiple assertions together for cleaner test code.
 
     Example:
-        >>> (AssertionBuilder(42)
+        >>> (
+        ...     AssertionBuilder(42)
         ...     .assert_greater_than(0)
         ...     .assert_less_than(100)
-        ...     .assert_that(lambda v: v % 2 == 0))
+        ...     .assert_that(lambda v: v % 2 == 0)
+        ... )
     """
+
     value: T
 
-    def assert_that(self, predicate: Callable[[T], bool], msg: Optional[str] = None) -> "AssertionBuilder[T]":
+    def assert_that(
+        self, predicate: Callable[[T], bool], msg: str | None = None
+    ) -> "AssertionBuilder[T]":
         """Chain assertion using a predicate"""
         assert_that(self.value, predicate, msg)
         return self
 
-    def assert_equal(self, expected: T, msg: Optional[str] = None) -> "AssertionBuilder[T]":
+    def assert_equal(self, expected: T, msg: str | None = None) -> "AssertionBuilder[T]":
         """Chain equality assertion"""
         if self.value != expected:
             error_msg = msg or f"Expected {expected!r}, got {self.value!r}"
             raise AssertionError(error_msg)
         return self
 
-    def assert_not_equal(self, unexpected: T, msg: Optional[str] = None) -> "AssertionBuilder[T]":
+    def assert_not_equal(self, unexpected: T, msg: str | None = None) -> "AssertionBuilder[T]":
         """Chain inequality assertion"""
         if self.value == unexpected:
             error_msg = msg or f"Expected not equal to {unexpected!r}"
             raise AssertionError(error_msg)
         return self
 
-    def assert_true(self, msg: Optional[str] = None) -> "AssertionBuilder[T]":
+    def assert_true(self, msg: str | None = None) -> "AssertionBuilder[T]":
         """Assert value is truthy"""
         if not self.value:
             error_msg = msg or f"Expected truthy value, got {self.value!r}"
             raise AssertionError(error_msg)
         return self
 
-    def assert_false(self, msg: Optional[str] = None) -> "AssertionBuilder[T]":
+    def assert_false(self, msg: str | None = None) -> "AssertionBuilder[T]":
         """Assert value is falsy"""
         if self.value:
             error_msg = msg or f"Expected falsy value, got {self.value!r}"

@@ -8,14 +8,12 @@ from __future__ import annotations
 import json
 import sys
 from pathlib import Path
-from typing import Any
 
 import click
 from opentelemetry import trace
 from rdflib import URIRef
 
 from kgcl.unrdf_engine.engine import UnrdfEngine
-from kgcl.unrdf_engine.hooks import HookExecutor, HookRegistry
 from kgcl.unrdf_engine.ingestion import IngestionPipeline
 from kgcl.unrdf_engine.validation import ShaclValidator
 
@@ -24,9 +22,7 @@ tracer = trace.get_tracer(__name__)
 
 @click.group()
 @click.option(
-    "--graph-file",
-    type=click.Path(path_type=Path),
-    help="Path to RDF graph file (Turtle format)",
+    "--graph-file", type=click.Path(path_type=Path), help="Path to RDF graph file (Turtle format)"
 )
 @click.pass_context
 def cli(ctx: click.Context, graph_file: Path | None) -> None:
@@ -78,9 +74,7 @@ def ingest(
 
         # Initialize pipeline
         pipeline = IngestionPipeline(
-            engine=engine,
-            validator=validator,
-            validate_on_ingest=validate,
+            engine=engine, validator=validator, validate_on_ingest=validate
         )
 
         # Ingest data
@@ -130,20 +124,19 @@ def query(ctx: click.Context, sparql_query: str, output_format: str) -> None:
             for row in results:
                 output.append({str(var): str(row[var]) for var in results.vars})
             click.echo(json.dumps(output, indent=2))
-        else:
-            # Table format
-            if results.vars:
-                # Header
-                header = "\t".join(str(var) for var in results.vars)
-                click.echo(header)
-                click.echo("-" * len(header))
+        # Table format
+        elif results.vars:
+            # Header
+            header = "\t".join(str(var) for var in results.vars)
+            click.echo(header)
+            click.echo("-" * len(header))
 
-                # Rows
-                for row in results:
-                    values = "\t".join(str(row[var]) for var in results.vars)
-                    click.echo(values)
-            else:
-                click.echo("No results")
+            # Rows
+            for row in results:
+                values = "\t".join(str(row[var]) for var in results.vars)
+                click.echo(values)
+        else:
+            click.echo("No results")
 
 
 @cli.command()
@@ -203,7 +196,9 @@ def provenance(ctx: click.Context, subject: str, output_format: str) -> None:
 
 @cli.command()
 @click.argument("output_file", type=click.Path(path_type=Path))
-@click.option("--format", "output_format", type=click.Choice(["turtle", "xml", "json-ld"]), default="turtle")
+@click.option(
+    "--format", "output_format", type=click.Choice(["turtle", "xml", "json-ld"]), default="turtle"
+)
 @click.pass_context
 def export(ctx: click.Context, output_file: Path, output_format: str) -> None:
     """Export graph to file.

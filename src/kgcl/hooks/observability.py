@@ -5,11 +5,11 @@ This module provides health checking, metrics collection, and system
 monitoring for the hook execution framework.
 """
 
-from dataclasses import dataclass, field
-from datetime import datetime
-from typing import Any, Dict, List, Optional
 import logging
 import statistics
+from dataclasses import dataclass, field
+from datetime import datetime
+from typing import Any
 
 
 @dataclass
@@ -32,9 +32,9 @@ class HealthCheck:
     """
 
     is_healthy: bool
-    metrics: Dict[str, float]
-    warnings: List[str] = field(default_factory=list)
-    errors: List[str] = field(default_factory=list)
+    metrics: dict[str, float]
+    warnings: list[str] = field(default_factory=list)
+    errors: list[str] = field(default_factory=list)
     timestamp: datetime = field(default_factory=datetime.utcnow)
 
 
@@ -55,10 +55,10 @@ class Observability:
             Maximum number of metric values to retain
         """
         self.logger = logging.getLogger("kgcl.hooks")
-        self.metrics: Dict[str, List[float]] = {}
+        self.metrics: dict[str, list[float]] = {}
         self.max_history = max_history
-        self.thresholds: Dict[str, Dict[str, float]] = {}
-        self._health_checks: List[HealthCheck] = []
+        self.thresholds: dict[str, dict[str, float]] = {}
+        self._health_checks: list[HealthCheck] = []
 
     def record_metric(self, name: str, value: float) -> None:
         """
@@ -83,7 +83,7 @@ class Observability:
         self.logger.debug(f"Recorded metric {name}={value}")
 
     def set_threshold(
-        self, name: str, warning: Optional[float] = None, error: Optional[float] = None
+        self, name: str, warning: float | None = None, error: float | None = None
     ) -> None:
         """
         Set thresholds for metric.
@@ -126,9 +126,7 @@ class Observability:
             if name in self.thresholds:
                 thresholds = self.thresholds[name]
                 if "error" in thresholds and current > thresholds["error"]:
-                    errors.append(
-                        f"{name} is {current:.2f} (threshold: {thresholds['error']:.2f})"
-                    )
+                    errors.append(f"{name} is {current:.2f} (threshold: {thresholds['error']:.2f})")
                 elif "warning" in thresholds and current > thresholds["warning"]:
                     warnings.append(
                         f"{name} is {current:.2f} (threshold: {thresholds['warning']:.2f})"
@@ -154,7 +152,7 @@ class Observability:
 
         return health
 
-    def get_metric_stats(self, name: str) -> Optional[Dict[str, float]]:
+    def get_metric_stats(self, name: str) -> dict[str, float] | None:
         """
         Get statistics for a specific metric.
 
@@ -182,7 +180,7 @@ class Observability:
             "count": len(values),
         }
 
-    def get_all_metrics(self) -> Dict[str, List[float]]:
+    def get_all_metrics(self) -> dict[str, list[float]]:
         """
         Get all recorded metrics.
 
@@ -198,7 +196,7 @@ class Observability:
         self.metrics.clear()
         self._health_checks.clear()
 
-    def get_health_history(self) -> List[HealthCheck]:
+    def get_health_history(self) -> list[HealthCheck]:
         """
         Get historical health checks.
 
@@ -209,7 +207,7 @@ class Observability:
         """
         return self._health_checks.copy()
 
-    def _compute_stats(self) -> Dict[str, float]:
+    def _compute_stats(self) -> dict[str, float]:
         """
         Compute current statistics for all metrics.
 
@@ -229,7 +227,7 @@ class Observability:
                     stats[f"{name}_stddev"] = statistics.stdev(values)
         return stats
 
-    def detect_anomalies(self, window: int = 10, threshold: float = 2.0) -> List[str]:
+    def detect_anomalies(self, window: int = 10, threshold: float = 2.0) -> list[str]:
         """
         Detect anomalies in recent metrics.
 
@@ -261,15 +259,11 @@ class Observability:
 
             # Check if current value is threshold * stddev away from mean
             if abs(current - mean) > threshold * stddev:
-                anomalies.append(
-                    f"{name}: {current:.2f} (mean: {mean:.2f}, stddev: {stddev:.2f})"
-                )
+                anomalies.append(f"{name}: {current:.2f} (mean: {mean:.2f}, stddev: {stddev:.2f})")
 
         return anomalies
 
-    def record_hook_execution(
-        self, hook_id: str, duration_ms: float, success: bool
-    ) -> None:
+    def record_hook_execution(self, hook_id: str, duration_ms: float, success: bool) -> None:
         """
         Record hook execution metrics.
 
@@ -290,7 +284,7 @@ class Observability:
         else:
             self.record_metric("hooks.total_failures", 1.0)
 
-    def get_hook_stats(self, hook_id: str) -> Dict[str, Any]:
+    def get_hook_stats(self, hook_id: str) -> dict[str, Any]:
         """
         Get statistics for a specific hook.
 
@@ -309,14 +303,14 @@ class Observability:
 
         stats = {}
 
-        if duration_key in self.metrics and self.metrics[duration_key]:
+        if self.metrics.get(duration_key):
             durations = self.metrics[duration_key]
             stats["executions"] = len(durations)
             stats["avg_duration_ms"] = statistics.mean(durations)
             stats["min_duration_ms"] = min(durations)
             stats["max_duration_ms"] = max(durations)
 
-        if success_key in self.metrics and self.metrics[success_key]:
+        if self.metrics.get(success_key):
             successes = self.metrics[success_key]
             stats["success_rate"] = statistics.mean(successes)
             stats["total_successes"] = sum(successes)

@@ -7,16 +7,16 @@ Includes PolicyPackManager for UNRDF policy pack management.
 from __future__ import annotations
 
 import json
-from dataclasses import asdict, dataclass, field
-from datetime import datetime, timezone
+from dataclasses import dataclass, field
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
 from opentelemetry import trace
-from rdflib import Graph, Literal, Namespace, URIRef
+from rdflib import Graph, Literal, Namespace
 from rdflib.namespace import RDF, RDFS
 
-from kgcl.unrdf_engine.hooks import HookPhase, KnowledgeHook, TriggerCondition
+from kgcl.unrdf_engine.hooks import HookPhase, KnowledgeHook
 
 tracer = trace.get_tracer(__name__)
 
@@ -89,7 +89,7 @@ class PolicyPackManifest:
     dependencies: dict[str, str] = field(default_factory=dict)
     slos: dict[str, float] = field(default_factory=dict)
     author: str = ""
-    created: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    created: datetime = field(default_factory=lambda: datetime.now(UTC))
 
     def validate(self) -> bool:
         """Verify manifest is valid.
@@ -102,10 +102,7 @@ class PolicyPackManifest:
         Examples
         --------
         >>> manifest = PolicyPackManifest(
-        ...     name="my-pack",
-        ...     version="1.0.0",
-        ...     description="Test pack",
-        ...     hooks=["hook1"]
+        ...     name="my-pack", version="1.0.0", description="Test pack", hooks=["hook1"]
         ... )
         >>> manifest.validate()
         True
@@ -165,9 +162,7 @@ class PolicyPackManifest:
             dependencies=data.get("dependencies", {}),
             slos=data.get("slos", {}),
             author=data.get("author", ""),
-            created=datetime.fromisoformat(
-                data.get("created", datetime.now(timezone.utc).isoformat())
-            ),
+            created=datetime.fromisoformat(data.get("created", datetime.now(UTC).isoformat())),
         )
 
 
@@ -191,7 +186,7 @@ class PolicyPack:
     manifest: PolicyPackManifest
     hooks: dict[str, KnowledgeHook]
     is_active: bool = True
-    loaded_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    loaded_at: datetime = field(default_factory=lambda: datetime.now(UTC))
 
     def get_slo_target(self, metric: str) -> float | None:
         """Get SLO target for metric.
@@ -230,9 +225,9 @@ class PolicyPack:
         ...         version="1.0.0",
         ...         description="Test",
         ...         hooks=["h1"],
-        ...         slos={"latency": 100.0}
+        ...         slos={"latency": 100.0},
         ...     ),
-        ...     hooks={}
+        ...     hooks={},
         ... )
         >>> pack.validate_slos({"latency": 50.0, "throughput": 1000.0})
         {'latency': True, 'throughput': True}
@@ -261,18 +256,13 @@ class PolicyPackManager:
 
     Examples
     --------
-    >>> manager = PolicyPackManager(
-    ...     base_path=Path("/packs"),
-    ...     hook_registry=registry
-    ... )
+    >>> manager = PolicyPackManager(base_path=Path("/packs"), hook_registry=registry)
     >>> pack = manager.load_pack(Path("/packs/my-pack"))
     >>> manager.activate_pack("my-pack")
 
     """
 
-    def __init__(
-        self, base_path: Path, hook_registry: PersistentHookRegistry
-    ) -> None:
+    def __init__(self, base_path: Path, hook_registry: PersistentHookRegistry) -> None:
         """Initialize manager.
 
         Parameters
@@ -516,10 +506,7 @@ class PersistentHookRegistry:
     """
 
     def __init__(
-        self,
-        storage_path: Path | None = None,
-        auto_save: bool = False,
-        auto_load: bool = True,
+        self, storage_path: Path | None = None, auto_save: bool = False, auto_load: bool = True
     ) -> None:
         """Initialize persistent hook registry.
 
@@ -545,12 +532,7 @@ class PersistentHookRegistry:
             self.load()
 
     @tracer.start_as_current_span("hook_registry.register")
-    def register(
-        self,
-        hook: KnowledgeHook,
-        description: str = "",
-        version: int = 1,
-    ) -> str:
+    def register(self, hook: KnowledgeHook, description: str = "", version: int = 1) -> str:
         """Register a hook with metadata.
 
         Parameters
@@ -577,12 +559,12 @@ class PersistentHookRegistry:
             self._hooks[hook.name] = hook
             metadata = self._metadata[hook.name]
             metadata.version = version
-            metadata.updated_at = datetime.now(timezone.utc)
+            metadata.updated_at = datetime.now(UTC)
             metadata.description = description or metadata.description
         else:
             # New hook
             self._hooks[hook.name] = hook
-            now = datetime.now(timezone.utc)
+            now = datetime.now(UTC)
             self._metadata[hook.name] = HookMetadata(
                 hook_id=hook.name,
                 version=version,
@@ -596,9 +578,7 @@ class PersistentHookRegistry:
             for phase in hook.phases:
                 self._hooks_by_phase[phase].append(hook)
                 # Sort by priority (descending)
-                self._hooks_by_phase[phase].sort(
-                    key=lambda h: h.priority, reverse=True
-                )
+                self._hooks_by_phase[phase].sort(key=lambda h: h.priority, reverse=True)
 
         if self.auto_save:
             self.save()
@@ -706,7 +686,7 @@ class PersistentHookRegistry:
 
         self._hooks[hook_id].enabled = True
         self._metadata[hook_id].enabled = True
-        self._metadata[hook_id].updated_at = datetime.now(timezone.utc)
+        self._metadata[hook_id].updated_at = datetime.now(UTC)
 
         if self.auto_save:
             self.save()
@@ -726,7 +706,7 @@ class PersistentHookRegistry:
 
         self._hooks[hook_id].enabled = False
         self._metadata[hook_id].enabled = False
-        self._metadata[hook_id].updated_at = datetime.now(timezone.utc)
+        self._metadata[hook_id].updated_at = datetime.now(UTC)
 
         if self.auto_save:
             self.save()
@@ -746,10 +726,7 @@ class PersistentHookRegistry:
         self.storage_path.parent.mkdir(parents=True, exist_ok=True)
 
         # Serialize hooks and metadata
-        data: dict[str, Any] = {
-            "version": "1.0",
-            "hooks": {},
-        }
+        data: dict[str, Any] = {"version": "1.0", "hooks": {}}
 
         for hook_id, hook in self._hooks.items():
             metadata = self._metadata[hook_id]
@@ -833,12 +810,8 @@ class PersistentHookRegistry:
 
             # Add metadata
             graph.add((hook_uri, HOOK.version, Literal(metadata.version)))
-            graph.add(
-                (hook_uri, HOOK.createdAt, Literal(metadata.created_at.isoformat()))
-            )
-            graph.add(
-                (hook_uri, HOOK.updatedAt, Literal(metadata.updated_at.isoformat()))
-            )
+            graph.add((hook_uri, HOOK.createdAt, Literal(metadata.created_at.isoformat())))
+            graph.add((hook_uri, HOOK.updatedAt, Literal(metadata.updated_at.isoformat())))
 
             if metadata.description:
                 graph.add((hook_uri, RDFS.comment, Literal(metadata.description)))
@@ -853,16 +826,8 @@ class PersistentHookRegistry:
                 graph.add((hook_uri, HOOK.trigger, trigger_uri))
                 graph.add((trigger_uri, RDF.type, HOOK.TriggerCondition))
                 graph.add((trigger_uri, HOOK.pattern, Literal(hook.trigger.pattern)))
-                graph.add(
-                    (trigger_uri, HOOK.checkDelta, Literal(hook.trigger.check_delta))
-                )
-                graph.add(
-                    (
-                        trigger_uri,
-                        HOOK.minMatches,
-                        Literal(hook.trigger.min_matches),
-                    )
-                )
+                graph.add((trigger_uri, HOOK.checkDelta, Literal(hook.trigger.check_delta)))
+                graph.add((trigger_uri, HOOK.minMatches, Literal(hook.trigger.min_matches)))
 
         span.set_attribute("rdf.triples", len(graph))
 
@@ -902,9 +867,7 @@ class PersistentHookRegistry:
         """
         enabled_count = sum(1 for h in self._hooks.values() if h.enabled)
         phase_counts = {
-            phase.value: len(hooks)
-            for phase, hooks in self._hooks_by_phase.items()
-            if hooks
+            phase.value: len(hooks) for phase, hooks in self._hooks_by_phase.items() if hooks
         }
 
         return {

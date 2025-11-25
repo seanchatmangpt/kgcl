@@ -25,52 +25,48 @@ Usage:
 __version__ = "1.0.0"
 
 from .agent import PyObjCAgent, create_default_agent
-from .crawler import PyObjCFrameworkCrawler, FrameworkName
-from .plugins import (
-    BaseCapabilityPlugin,
-    CapabilityDescriptor,
-    CapabilityData,
-    load_builtin_plugins,
-    get_registry
+from .aggregators import (
+    BrowserHistoryAggregator,
+    CalendarAggregator,
+    FeatureAggregator,
+    FrontmostAppAggregator,
+    aggregate_jsonl_file,
 )
 from .collectors import (
     BaseCollector,
     CollectorConfig,
-    create_frontmost_app_collector,
     create_browser_history_collector,
-    create_calendar_collector
+    create_calendar_collector,
+    create_frontmost_app_collector,
 )
-from .aggregators import (
-    FeatureAggregator,
-    FrontmostAppAggregator,
-    BrowserHistoryAggregator,
-    CalendarAggregator,
-    aggregate_jsonl_file
+from .crawler import FrameworkName, PyObjCFrameworkCrawler
+from .plugins import (
+    BaseCapabilityPlugin,
+    CapabilityData,
+    CapabilityDescriptor,
+    get_registry,
+    load_builtin_plugins,
 )
 
 __all__ = [
     # Agent
     "PyObjCAgent",
     "create_default_agent",
-
     # Crawler
     "PyObjCFrameworkCrawler",
     "FrameworkName",
-
     # Plugins
     "BaseCapabilityPlugin",
     "CapabilityDescriptor",
     "CapabilityData",
     "load_builtin_plugins",
     "get_registry",
-
     # Collectors
     "BaseCollector",
     "CollectorConfig",
     "create_frontmost_app_collector",
     "create_browser_history_collector",
     "create_calendar_collector",
-
     # Aggregators
     "FeatureAggregator",
     "FrontmostAppAggregator",

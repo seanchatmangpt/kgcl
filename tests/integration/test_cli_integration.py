@@ -6,13 +6,9 @@ and correctness validation.
 
 import tempfile
 from pathlib import Path
-from unittest.mock import Mock, patch
-
-import pytest
 
 from kgcl.cli.config import DEFAULT_CONFIG
 from kgcl.cli.daily_brief import _generate_brief, _ingest_events, _materialize_features
-from kgcl.cli.utils import load_config, save_config
 
 
 class TestCLIIntegration:
@@ -57,7 +53,7 @@ class TestCLIIntegration:
         """Test SPARQL query execution."""
         with tempfile.TemporaryDirectory() as tmpdir:
             # Create test RDF graph
-            from rdflib import Graph, Literal, Namespace, URIRef
+            from rdflib import Graph, Literal, Namespace
             from rdflib.namespace import RDF
 
             UNRDF = Namespace("http://unrdf.org/ontology/")
@@ -92,6 +88,7 @@ class TestCLIIntegration:
             # Create config
             config = DEFAULT_CONFIG.copy()
             import json
+
             config_file.write_text(json.dumps(config))
 
             # Verify config file created
@@ -120,17 +117,10 @@ class TestCLIIntegration:
         test_content = "# Test\nContent"
 
         # Test markdown output
-        with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".md", delete=False
-        ) as f:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".md", delete=False) as f:
             output_path = Path(f.name)
 
-        format_output(
-            test_content,
-            OutputFormat.MARKDOWN,
-            output_file=output_path,
-            clipboard=False,
-        )
+        format_output(test_content, OutputFormat.MARKDOWN, output_file=output_path, clipboard=False)
 
         assert output_path.exists()
         assert output_path.read_text() == test_content
@@ -157,8 +147,6 @@ class TestCLIIntegration:
     def test_cli_verbose_mode(self):
         """Test CLI verbose output."""
         from datetime import datetime, timedelta
-
-        from kgcl.cli.utils import print_info
 
         start_date = datetime(2024, 11, 24)
         end_date = start_date + timedelta(days=1)

@@ -13,10 +13,10 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from hashlib import sha256
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any
 
 # Type alias for Merkle proof: List of (sibling_hash, is_left) tuples
-MerkleProof = List[Tuple[str, bool]]
+MerkleProof = list[tuple[str, bool]]
 
 
 @dataclass(frozen=True)
@@ -28,11 +28,13 @@ class ChainAnchor:
     - Chronological ordering: Height establishes sequence
     - Provenance tracking: Navigate back to genesis
 
-    Attributes:
+    Attributes
+    ----------
         previous_receipt_hash: SHA256 of previous receipt (empty for genesis)
         chain_height: Position in chain (0 = genesis)
         timestamp: When link was created
     """
+
     previous_receipt_hash: str
     chain_height: int
     timestamp: datetime
@@ -40,7 +42,8 @@ class ChainAnchor:
     def is_genesis(self) -> bool:
         """Check if this is the genesis (first) anchor.
 
-        Returns:
+        Returns
+        -------
             True if this is the first receipt in chain (height=0)
         """
         return self.chain_height == 0
@@ -54,7 +57,8 @@ class Receipt:
     Each receipt contains a cryptographic hash of its content and an anchor
     to the previous receipt.
 
-    Attributes:
+    Attributes
+    ----------
         execution_id: Unique identifier for this execution
         hook_id: Identifier of the hook that was executed
         condition_result: Whether the hook's condition was met
@@ -63,13 +67,14 @@ class Receipt:
         metadata: Additional execution context
         chain_anchor: Link to previous receipt (None for unanchored receipts)
     """
+
     execution_id: str
     hook_id: str
     condition_result: bool
     effect_result: bool
     timestamp: datetime
-    metadata: Dict[str, Any] = field(default_factory=dict)
-    chain_anchor: Optional[ChainAnchor] = None
+    metadata: dict[str, Any] = field(default_factory=dict)
+    chain_anchor: ChainAnchor | None = None
 
     def get_content_hash(self) -> str:
         """Get SHA256 hash of receipt content (for chain linking).
@@ -77,17 +82,21 @@ class Receipt:
         Hash includes all receipt data except chain_anchor. This ensures
         the hash represents intrinsic content, not chain position.
 
-        Returns:
+        Returns
+        -------
             Hex-encoded SHA256 hash of receipt content
         """
-        content = json.dumps({
-            'execution_id': self.execution_id,
-            'hook_id': self.hook_id,
-            'condition_result': self.condition_result,
-            'effect_result': self.effect_result,
-            'timestamp': self.timestamp.isoformat(),
-            'metadata': self.metadata,
-        }, sort_keys=True)
+        content = json.dumps(
+            {
+                "execution_id": self.execution_id,
+                "hook_id": self.hook_id,
+                "condition_result": self.condition_result,
+                "effect_result": self.effect_result,
+                "timestamp": self.timestamp.isoformat(),
+                "metadata": self.metadata,
+            },
+            sort_keys=True,
+        )
         return sha256(content.encode()).hexdigest()
 
 
@@ -98,7 +107,8 @@ class ReceiptStore:
     hash serves as its address. Each receipt links to the previous receipt,
     forming a tamper-evident chain.
 
-    Attributes:
+    Attributes
+    ----------
         storage_dir: Directory for receipt storage
     """
 
@@ -111,11 +121,7 @@ class ReceiptStore:
         self.storage_dir = Path(storage_dir)
         self.storage_dir.mkdir(parents=True, exist_ok=True)
 
-    def store_receipt(
-        self,
-        receipt: Receipt,
-        previous_receipt: Optional[Receipt] = None
-    ) -> str:
+    def store_receipt(self, receipt: Receipt, previous_receipt: Receipt | None = None) -> str:
         """Store receipt with chain anchoring.
 
         If a previous receipt is provided, creates a chain anchor linking
@@ -125,7 +131,8 @@ class ReceiptStore:
             receipt: Receipt to store
             previous_receipt: Previous receipt in chain (for anchoring)
 
-        Returns:
+        Returns
+        -------
             Content hash (address) of stored receipt
         """
         # Create chain anchor
@@ -138,14 +145,12 @@ class ReceiptStore:
                     if previous_receipt.chain_anchor
                     else 1
                 ),
-                timestamp=datetime.utcnow()
+                timestamp=datetime.utcnow(),
             )
         else:
             # Genesis receipt
             chain_anchor = ChainAnchor(
-                previous_receipt_hash="",
-                chain_height=0,
-                timestamp=datetime.utcnow()
+                previous_receipt_hash="", chain_height=0, timestamp=datetime.utcnow()
             )
 
         # Update receipt with chain anchor
@@ -156,7 +161,7 @@ class ReceiptStore:
             effect_result=receipt.effect_result,
             timestamp=receipt.timestamp,
             metadata=receipt.metadata,
-            chain_anchor=chain_anchor
+            chain_anchor=chain_anchor,
         )
 
         # Content address = receipt hash
@@ -164,68 +169,69 @@ class ReceiptStore:
 
         # Store in file system (key = content hash)
         receipt_file = self.storage_dir / f"{content_hash}.json"
-        with open(receipt_file, 'w') as f:
-            json.dump({
-                'receipt': {
-                    'execution_id': receipt_with_anchor.execution_id,
-                    'hook_id': receipt_with_anchor.hook_id,
-                    'condition_result': receipt_with_anchor.condition_result,
-                    'effect_result': receipt_with_anchor.effect_result,
-                    'timestamp': receipt_with_anchor.timestamp.isoformat(),
-                    'metadata': receipt_with_anchor.metadata,
-                    'chain_anchor': {
-                        'previous_receipt_hash': chain_anchor.previous_receipt_hash,
-                        'chain_height': chain_anchor.chain_height,
-                        'timestamp': chain_anchor.timestamp.isoformat(),
+        with open(receipt_file, "w") as f:
+            json.dump(
+                {
+                    "receipt": {
+                        "execution_id": receipt_with_anchor.execution_id,
+                        "hook_id": receipt_with_anchor.hook_id,
+                        "condition_result": receipt_with_anchor.condition_result,
+                        "effect_result": receipt_with_anchor.effect_result,
+                        "timestamp": receipt_with_anchor.timestamp.isoformat(),
+                        "metadata": receipt_with_anchor.metadata,
+                        "chain_anchor": {
+                            "previous_receipt_hash": chain_anchor.previous_receipt_hash,
+                            "chain_height": chain_anchor.chain_height,
+                            "timestamp": chain_anchor.timestamp.isoformat(),
+                        },
                     },
+                    "content_hash": content_hash,
                 },
-                'content_hash': content_hash,
-            }, f, indent=2)
+                f,
+                indent=2,
+            )
 
         return content_hash
 
-    def load_receipt(self, content_hash: str) -> Optional[Receipt]:
+    def load_receipt(self, content_hash: str) -> Receipt | None:
         """Load receipt by content hash.
 
         Args:
             content_hash: Hash of receipt to load
 
-        Returns:
+        Returns
+        -------
             Receipt if found, None otherwise
         """
         receipt_file = self.storage_dir / f"{content_hash}.json"
         if not receipt_file.exists():
             return None
 
-        with open(receipt_file, 'r') as f:
+        with open(receipt_file) as f:
             data = json.load(f)
 
-        receipt_data = data['receipt']
-        anchor_data = receipt_data.get('chain_anchor')
+        receipt_data = data["receipt"]
+        anchor_data = receipt_data.get("chain_anchor")
 
         chain_anchor = None
         if anchor_data:
             chain_anchor = ChainAnchor(
-                previous_receipt_hash=anchor_data['previous_receipt_hash'],
-                chain_height=anchor_data['chain_height'],
-                timestamp=datetime.fromisoformat(anchor_data['timestamp'])
+                previous_receipt_hash=anchor_data["previous_receipt_hash"],
+                chain_height=anchor_data["chain_height"],
+                timestamp=datetime.fromisoformat(anchor_data["timestamp"]),
             )
 
         return Receipt(
-            execution_id=receipt_data['execution_id'],
-            hook_id=receipt_data['hook_id'],
-            condition_result=receipt_data['condition_result'],
-            effect_result=receipt_data['effect_result'],
-            timestamp=datetime.fromisoformat(receipt_data['timestamp']),
-            metadata=receipt_data['metadata'],
-            chain_anchor=chain_anchor
+            execution_id=receipt_data["execution_id"],
+            hook_id=receipt_data["hook_id"],
+            condition_result=receipt_data["condition_result"],
+            effect_result=receipt_data["effect_result"],
+            timestamp=datetime.fromisoformat(receipt_data["timestamp"]),
+            metadata=receipt_data["metadata"],
+            chain_anchor=chain_anchor,
         )
 
-    def get_receipt_chain(
-        self,
-        receipt_hash: str,
-        depth: int = 100
-    ) -> List[Receipt]:
+    def get_receipt_chain(self, receipt_hash: str, depth: int = 100) -> list[Receipt]:
         """Traverse receipt chain backwards.
 
         Starting from the given receipt, walks backwards through the chain
@@ -235,10 +241,11 @@ class ReceiptStore:
             receipt_hash: Hash of receipt to start from
             depth: Maximum chain depth to traverse
 
-        Returns:
+        Returns
+        -------
             List of receipts in chain (most recent first)
         """
-        chain: List[Receipt] = []
+        chain: list[Receipt] = []
         current_hash = receipt_hash
 
         for _ in range(depth):
@@ -268,7 +275,8 @@ class ReceiptStore:
         Args:
             receipt_hash: Hash of receipt to verify
 
-        Returns:
+        Returns
+        -------
             True if entire chain is valid
         """
         receipt = self.load_receipt(receipt_hash)
@@ -310,15 +318,16 @@ class MerkleTree:
     - Proofs verify membership without full tree
     - Batch operations efficiently update tree
 
-    Attributes:
+    Attributes
+    ----------
         leaves: List of leaf hashes
         root: Current root hash (None if empty)
     """
 
     def __init__(self):
         """Initialize empty Merkle tree."""
-        self.leaves: List[str] = []
-        self.root: Optional[str] = None
+        self.leaves: list[str] = []
+        self.root: str | None = None
 
     def _hash_pair(self, left: str, right: str) -> str:
         """Hash a pair of nodes.
@@ -327,26 +336,28 @@ class MerkleTree:
             left: Left node hash
             right: Right node hash
 
-        Returns:
+        Returns
+        -------
             Combined hash
         """
         combined = left + right
         return sha256(combined.encode()).hexdigest()
 
-    def _compute_root(self, hashes: List[str]) -> str:
+    def _compute_root(self, hashes: list[str]) -> str:
         """Compute root hash from list of hashes.
 
         Args:
             hashes: List of hashes (must be non-empty)
 
-        Returns:
+        Returns
+        -------
             Root hash
         """
         if len(hashes) == 1:
             return hashes[0]
 
         # Build next level
-        next_level: List[str] = []
+        next_level: list[str] = []
         for i in range(0, len(hashes), 2):
             left = hashes[i]
             right = hashes[i + 1] if i + 1 < len(hashes) else left
@@ -360,7 +371,8 @@ class MerkleTree:
         Args:
             item: Item to add (will be hashed)
 
-        Returns:
+        Returns
+        -------
             Root hash after addition
         """
         item_hash = sha256(item.encode()).hexdigest()
@@ -368,7 +380,7 @@ class MerkleTree:
         self.root = self._compute_root(self.leaves) if self.leaves else None
         return self.root or ""
 
-    def add_batch(self, items: List[str]) -> str:
+    def add_batch(self, items: list[str]) -> str:
         """Add multiple items to tree.
 
         More efficient than calling add() multiple times as it
@@ -377,7 +389,8 @@ class MerkleTree:
         Args:
             items: List of items to add
 
-        Returns:
+        Returns
+        -------
             Root hash after additions
         """
         for item in items:
@@ -387,15 +400,16 @@ class MerkleTree:
         self.root = self._compute_root(self.leaves) if self.leaves else None
         return self.root or ""
 
-    def get_root(self) -> Optional[str]:
+    def get_root(self) -> str | None:
         """Get current root hash.
 
-        Returns:
+        Returns
+        -------
             Root hash, or None if tree is empty
         """
         return self.root
 
-    def get_proof(self, item: str) -> Optional[MerkleProof]:
+    def get_proof(self, item: str) -> MerkleProof | None:
         """Get Merkle proof for item (list of (hash, is_left) tuples to root).
 
         A Merkle proof is a list of sibling hashes with position information
@@ -405,7 +419,8 @@ class MerkleTree:
         Args:
             item: Item to get proof for
 
-        Returns:
+        Returns
+        -------
             List of (hash, is_left) tuples forming proof path, or None if
             item not found. is_left=True means sibling is on left side.
         """
@@ -435,7 +450,7 @@ class MerkleTree:
                 proof.append((current_level[sibling_index], True))
 
             # Build next level
-            next_level: List[str] = []
+            next_level: list[str] = []
             for i in range(0, len(current_level), 2):
                 left = current_level[i]
                 right = current_level[i + 1] if i + 1 < len(current_level) else left
@@ -457,7 +472,8 @@ class MerkleTree:
             proof: Proof from get_proof() - list of (hash, is_left) tuples
             root: Expected tree root
 
-        Returns:
+        Returns
+        -------
             True if proof is valid
         """
         item_hash = sha256(item.encode()).hexdigest()

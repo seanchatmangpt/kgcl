@@ -16,48 +16,33 @@ import logging
 import os
 from typing import Optional
 
-# Import all signature modules
-from kgcl.signatures.daily_brief import (
-    DailyBriefInput,
-    DailyBriefOutput,
-    DailyBriefModule,
-)
-
-from kgcl.signatures.weekly_retro import (
-    WeeklyRetroInput,
-    WeeklyRetroOutput,
-    WeeklyRetroModule,
-)
-
-from kgcl.signatures.feature_analyzer import (
-    FeatureAnalyzerInput,
-    FeatureAnalyzerOutput,
-    FeatureAnalyzerModule,
-)
-
-from kgcl.signatures.pattern_detector import (
-    PatternDetectorInput,
-    PatternDetectorOutput,
-    DetectedPattern,
-    PatternDetectorModule,
-)
-
 from kgcl.signatures.context_classifier import (
     ContextClassifierInput,
+    ContextClassifierModule,
     ContextClassifierOutput,
     ContextLabel,
-    ContextClassifierModule,
 )
 
-from kgcl.signatures.wellbeing import (
-    WellbeingInput,
-    WellbeingOutput,
-    WellbeingModule,
+# Import all signature modules
+from kgcl.signatures.daily_brief import DailyBriefInput, DailyBriefModule, DailyBriefOutput
+from kgcl.signatures.feature_analyzer import (
+    FeatureAnalyzerInput,
+    FeatureAnalyzerModule,
+    FeatureAnalyzerOutput,
 )
+from kgcl.signatures.pattern_detector import (
+    DetectedPattern,
+    PatternDetectorInput,
+    PatternDetectorModule,
+    PatternDetectorOutput,
+)
+from kgcl.signatures.weekly_retro import WeeklyRetroInput, WeeklyRetroModule, WeeklyRetroOutput
+from kgcl.signatures.wellbeing import WellbeingInput, WellbeingModule, WellbeingOutput
 
 # Check DSPy availability
 try:
     import dspy
+
     DSPY_AVAILABLE = True
 except ImportError:
     DSPY_AVAILABLE = False
@@ -105,7 +90,8 @@ __all__ = [
 class SignatureConfig:
     """Configuration for signature modules.
 
-    Attributes:
+    Attributes
+    ----------
         use_llm: Enable LLM-powered reasoning (requires DSPy and Ollama)
         temperature: LLM temperature for generation (0.0-1.0)
         model: Ollama model name (default: llama3.1)
@@ -121,7 +107,7 @@ class SignatureConfig:
         model: str = "llama3.1",
         base_url: str = "http://localhost:11434",
         fallback_on_error: bool = True,
-        enable_telemetry: bool = True
+        enable_telemetry: bool = True,
     ):
         """Initialize signature configuration.
 
@@ -156,7 +142,8 @@ class SignatureConfig:
             KGCL_FALLBACK_ON_ERROR: Auto-fallback (default: true)
             KGCL_ENABLE_TELEMETRY: Enable telemetry (default: true)
 
-        Returns:
+        Returns
+        -------
             SignatureConfig loaded from environment
         """
         return cls(
@@ -171,7 +158,8 @@ class SignatureConfig:
     def to_dict(self) -> dict:
         """Convert configuration to dictionary.
 
-        Returns:
+        Returns
+        -------
             Dictionary representation of config
         """
         return {
@@ -185,13 +173,14 @@ class SignatureConfig:
         }
 
 
-def configure_signatures(config: Optional[SignatureConfig] = None) -> SignatureConfig:
+def configure_signatures(config: SignatureConfig | None = None) -> SignatureConfig:
     """Configure signature modules globally.
 
     Args:
         config: Signature configuration. If None, loads from environment.
 
-    Returns:
+    Returns
+    -------
         Active configuration
 
     Example:
@@ -205,12 +194,10 @@ def configure_signatures(config: Optional[SignatureConfig] = None) -> SignatureC
     if config.use_llm and DSPY_AVAILABLE:
         try:
             # Configure DSPy with Ollama
-            from kgcl.dspy_runtime import configure_ollama, OllamaConfig
+            from kgcl.dspy_runtime import OllamaConfig, configure_ollama
 
             ollama_config = OllamaConfig(
-                model=config.model,
-                base_url=config.base_url,
-                temperature=config.temperature
+                model=config.model, base_url=config.base_url, temperature=config.temperature
             )
 
             configure_ollama(ollama_config)
@@ -224,15 +211,14 @@ def configure_signatures(config: Optional[SignatureConfig] = None) -> SignatureC
     return config
 
 
-def create_all_modules(
-    config: Optional[SignatureConfig] = None
-) -> dict[str, object]:
+def create_all_modules(config: SignatureConfig | None = None) -> dict[str, object]:
     """Create all signature modules with configuration.
 
     Args:
         config: Signature configuration. If None, loads from environment.
 
-    Returns:
+    Returns
+    -------
         Dictionary mapping module names to instances
 
     Example:
@@ -245,30 +231,19 @@ def create_all_modules(
         config = configure_signatures()
 
     modules = {
-        "daily_brief": DailyBriefModule(
-            use_llm=config.use_llm,
-            temperature=config.temperature
-        ),
-        "weekly_retro": WeeklyRetroModule(
-            use_llm=config.use_llm,
-            temperature=config.temperature
-        ),
+        "daily_brief": DailyBriefModule(use_llm=config.use_llm, temperature=config.temperature),
+        "weekly_retro": WeeklyRetroModule(use_llm=config.use_llm, temperature=config.temperature),
         "feature_analyzer": FeatureAnalyzerModule(
-            use_llm=config.use_llm,
-            temperature=config.temperature
+            use_llm=config.use_llm, temperature=config.temperature
         ),
         "pattern_detector": PatternDetectorModule(
-            use_llm=config.use_llm,
-            temperature=config.temperature
+            use_llm=config.use_llm, temperature=config.temperature
         ),
         "context_classifier": ContextClassifierModule(
             use_llm=config.use_llm,
-            temperature=0.3  # Lower temperature for consistent classification
+            temperature=0.3,  # Lower temperature for consistent classification
         ),
-        "wellbeing": WellbeingModule(
-            use_llm=config.use_llm,
-            temperature=config.temperature
-        ),
+        "wellbeing": WellbeingModule(use_llm=config.use_llm, temperature=config.temperature),
     }
 
     logger.info(f"Created {len(modules)} signature modules (LLM mode: {config.use_llm})")
@@ -278,7 +253,8 @@ def create_all_modules(
 def health_check() -> dict[str, object]:
     """Perform health check on signature modules.
 
-    Returns:
+    Returns
+    -------
         Health check results with status and module availability
 
     Example:
@@ -318,6 +294,7 @@ def health_check() -> dict[str, object]:
         if DSPY_AVAILABLE:
             try:
                 from kgcl.dspy_runtime import health_check as dspy_health_check
+
                 dspy_status = dspy_health_check()
                 result["ollama_status"] = dspy_status
                 if dspy_status.get("status") == "healthy":
@@ -342,9 +319,7 @@ def health_check() -> dict[str, object]:
 
 # Utility functions for prompt construction
 def build_prompt_context(
-    feature_names: list[str],
-    time_window: str,
-    additional_context: str = ""
+    feature_names: list[str], time_window: str, additional_context: str = ""
 ) -> str:
     """Build context string for DSPy prompts.
 
@@ -353,13 +328,11 @@ def build_prompt_context(
         time_window: Time window (hourly, daily, weekly)
         additional_context: Additional context to include
 
-    Returns:
+    Returns
+    -------
         Formatted context string
     """
-    context_parts = [
-        f"Time window: {time_window}",
-        f"Features: {', '.join(feature_names)}",
-    ]
+    context_parts = [f"Time window: {time_window}", f"Features: {', '.join(feature_names)}"]
 
     if additional_context:
         context_parts.append(additional_context)
@@ -367,14 +340,15 @@ def build_prompt_context(
     return " | ".join(context_parts)
 
 
-def validate_module_inputs(module_name: str, input_data: object) -> tuple[bool, Optional[str]]:
+def validate_module_inputs(module_name: str, input_data: object) -> tuple[bool, str | None]:
     """Validate inputs for a signature module.
 
     Args:
         module_name: Name of the module
         input_data: Input data to validate
 
-    Returns:
+    Returns
+    -------
         Tuple of (is_valid, error_message)
     """
     try:

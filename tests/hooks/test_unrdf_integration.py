@@ -5,19 +5,13 @@ Tests define how hooks interact with UNRDF store with real graph operations.
 Real object collaboration - hooks modify actual graphs.
 """
 
-import pytest
-from typing import Any, Dict
 from datetime import datetime
+from typing import Any
 
-from kgcl.hooks.core import Hook, HookRegistry, HookExecutor
-from kgcl.hooks.conditions import (
-    Condition,
-    ConditionResult,
-    SparqlAskCondition,
-    SparqlSelectCondition,
-    DeltaCondition,
-    DeltaType,
-)
+import pytest
+
+from kgcl.hooks.conditions import Condition, ConditionResult
+from kgcl.hooks.core import Hook, HookExecutor
 from kgcl.hooks.lifecycle import HookExecutionPipeline
 
 
@@ -29,7 +23,7 @@ class GraphQueryCondition(Condition):
         self.query = query
         self.expected_count = expected_count
 
-    async def evaluate(self, context: Dict[str, Any]) -> ConditionResult:
+    async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
         graph = context.get("graph")
         if graph is None:
             return ConditionResult(triggered=False, metadata={"error": "no_graph"})
@@ -39,15 +33,14 @@ class GraphQueryCondition(Condition):
         triggered = count >= self.expected_count
 
         return ConditionResult(
-            triggered=triggered,
-            metadata={"count": count, "expected": self.expected_count},
+            triggered=triggered, metadata={"count": count, "expected": self.expected_count}
         )
 
 
 class GraphDeltaCondition(Condition):
     """Test condition that detects graph changes."""
 
-    async def evaluate(self, context: Dict[str, Any]) -> ConditionResult:
+    async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
         before_count = context.get("before_triple_count", 0)
         after_count = context.get("after_triple_count", 0)
         delta = after_count - before_count
@@ -58,7 +51,7 @@ class GraphDeltaCondition(Condition):
         )
 
 
-def add_triple_handler(context: Dict[str, Any]) -> Dict[str, Any]:
+def add_triple_handler(context: dict[str, Any]) -> dict[str, Any]:
     """Handler that adds triples to graph."""
     graph = context.get("graph")
     if graph:
@@ -68,7 +61,7 @@ def add_triple_handler(context: Dict[str, Any]) -> Dict[str, Any]:
     return {"added": False}
 
 
-def modify_graph_handler(context: Dict[str, Any]) -> Dict[str, Any]:
+def modify_graph_handler(context: dict[str, Any]) -> dict[str, Any]:
     """Handler that modifies graph."""
     graph = context.get("graph")
     if graph:
@@ -123,9 +116,7 @@ class TestHookGraphQuery:
         graph.add_triple("http://ex.org/s1", "http://ex.org/p", "http://ex.org/o1")
         graph.add_triple("http://ex.org/s2", "http://ex.org/p", "http://ex.org/o2")
 
-        condition = GraphQueryCondition(
-            query="SELECT * WHERE { ?s ?p ?o }", expected_count=2
-        )
+        condition = GraphQueryCondition(query="SELECT * WHERE { ?s ?p ?o }", expected_count=2)
 
         hook = Hook(
             name="query_test",
@@ -179,7 +170,7 @@ class TestTransactionalModifications:
         graph = MockGraph()
         graph.add_triple("http://ex.org/s1", "http://ex.org/p", "http://ex.org/o1")
 
-        def transactional_handler(context: Dict[str, Any]) -> Dict[str, Any]:
+        def transactional_handler(context: dict[str, Any]) -> dict[str, Any]:
             graph = context.get("graph")
             # Start transaction
             version_before = graph.version
@@ -255,7 +246,7 @@ class TestMultipleHooksExecution:
         execution_order = []
 
         def make_handler(name: str):
-            def handler(ctx: Dict[str, Any]) -> Dict[str, Any]:
+            def handler(ctx: dict[str, Any]) -> dict[str, Any]:
                 execution_order.append(name)
                 return {"handler": name}
 
@@ -301,11 +292,11 @@ class TestHookFailurePrevention:
         graph = MockGraph()
         executed = []
 
-        def success_handler(ctx: Dict[str, Any]) -> Dict[str, Any]:
+        def success_handler(ctx: dict[str, Any]) -> dict[str, Any]:
             executed.append("success")
             return {"success": True}
 
-        def failing_handler(ctx: Dict[str, Any]) -> Dict[str, Any]:
+        def failing_handler(ctx: dict[str, Any]) -> dict[str, Any]:
             executed.append("failing")
             raise RuntimeError("Handler failed")
 
@@ -350,7 +341,7 @@ class TestHookSuccessProvenance:
         """Hook success recorded in graph provenance."""
         graph = MockGraph()
 
-        def provenance_handler(ctx: Dict[str, Any]) -> Dict[str, Any]:
+        def provenance_handler(ctx: dict[str, Any]) -> dict[str, Any]:
             graph = ctx.get("graph")
             hook_id = ctx.get("hook_id", "unknown")
 
@@ -377,9 +368,7 @@ class TestHookSuccessProvenance:
 
         assert receipt.handler_result["provenance_recorded"] is True
         # Check that provenance triple was added
-        provenance_triples = [
-            t for t in graph.triples if "executedAt" in str(t[1])
-        ]
+        provenance_triples = [t for t in graph.triples if "executedAt" in str(t[1])]
         assert len(provenance_triples) == 1
 
 
@@ -393,16 +382,12 @@ class TestGraphStateConsistency:
 
         state_snapshots = []
 
-        def snapshot_handler(ctx: Dict[str, Any]) -> Dict[str, Any]:
+        def snapshot_handler(ctx: dict[str, Any]) -> dict[str, Any]:
             graph = ctx.get("graph")
-            state_snapshots.append(
-                {"count": len(graph.triples), "hash": graph.get_state_hash()}
-            )
+            state_snapshots.append({"count": len(graph.triples), "hash": graph.get_state_hash()})
             # Add a triple
             graph.add_triple(
-                f"http://ex.org/s{len(state_snapshots)}",
-                "http://ex.org/p",
-                "http://ex.org/o",
+                f"http://ex.org/s{len(state_snapshots)}", "http://ex.org/p", "http://ex.org/o"
             )
             return {"snapshot": len(state_snapshots)}
 
@@ -438,7 +423,7 @@ class TestConcurrentHookExecution:
         graph = MockGraph()
         graph.lock = False
 
-        async def locking_handler(ctx: Dict[str, Any]) -> Dict[str, Any]:
+        async def locking_handler(ctx: dict[str, Any]) -> dict[str, Any]:
             import asyncio
 
             graph = ctx.get("graph")

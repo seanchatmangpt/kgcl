@@ -57,12 +57,12 @@ from pathlib import Path
 
 __version__ = "1.0.0"
 __all__ = [
-    "ONTOLOGY_DIR",
-    "CORE_TTL",
-    "SHAPES_TTL",
-    "FEATURES_TTL",
     "CAPABILITIES_TTL",
+    "CORE_TTL",
     "EXAMPLES_TTL",
+    "FEATURES_TTL",
+    "ONTOLOGY_DIR",
+    "SHAPES_TTL",
     "load_ontology",
 ]
 
@@ -84,10 +84,12 @@ def load_ontology(include_examples: bool = False) -> "Graph":
     Args:
         include_examples: If True, include example instance data
 
-    Returns:
+    Returns
+    -------
         rdflib.Graph containing the ontology
 
-    Raises:
+    Raises
+    ------
         ImportError: If rdflib is not installed
         FileNotFoundError: If ontology files are missing
 
@@ -101,8 +103,7 @@ def load_ontology(include_examples: bool = False) -> "Graph":
         from rdflib import Graph
     except ImportError:
         raise ImportError(
-            "rdflib is required to load the ontology. "
-            "Install with: pip install rdflib"
+            "rdflib is required to load the ontology. Install with: pip install rdflib"
         )
 
     g = Graph()
@@ -129,10 +130,12 @@ def validate_instance_data(data_graph: "Graph", shapes_graph: "Graph" = None) ->
         data_graph: rdflib.Graph containing instance data to validate
         shapes_graph: Optional Graph containing SHACL shapes (loads shapes.ttl if not provided)
 
-    Returns:
+    Returns
+    -------
         Tuple of (conforms: bool, results_graph: Graph, results_text: str)
 
-    Raises:
+    Raises
+    ------
         ImportError: If pyshacl is not installed
 
     Example:
@@ -150,20 +153,17 @@ def validate_instance_data(data_graph: "Graph", shapes_graph: "Graph" = None) ->
         from pyshacl import validate
     except ImportError:
         raise ImportError(
-            "pyshacl is required for SHACL validation. "
-            "Install with: pip install pyshacl"
+            "pyshacl is required for SHACL validation. Install with: pip install pyshacl"
         )
 
     if shapes_graph is None:
         from rdflib import Graph
+
         shapes_graph = Graph()
         shapes_graph.parse(SHAPES_TTL, format="turtle")
 
     conforms, results_graph, results_text = validate(
-        data_graph,
-        shacl_graph=shapes_graph,
-        inference="rdfs",
-        abort_on_first=False,
+        data_graph, shacl_graph=shapes_graph, inference="rdfs", abort_on_first=False
     )
 
     return conforms, results_graph, results_text
@@ -173,7 +173,8 @@ def get_ontology_statistics() -> dict:
     """
     Get statistics about the ontology.
 
-    Returns:
+    Returns
+    -------
         Dictionary containing counts of classes, properties, shapes, etc.
 
     Example:
@@ -183,7 +184,7 @@ def get_ontology_statistics() -> dict:
         Classes: 22
     """
     try:
-        from rdflib import Graph, Namespace, RDF, OWL
+        from rdflib import OWL, RDF, Graph, Namespace
         from rdflib.namespace import RDFS
     except ImportError:
         raise ImportError("rdflib is required. Install with: pip install rdflib")
@@ -203,9 +204,7 @@ def get_ontology_statistics() -> dict:
         "capabilities": len(list(g.subjects(RDF.type, CORE.Capability))),
     }
 
-    stats["total_properties"] = (
-        stats["object_properties"] + stats["datatype_properties"]
-    )
+    stats["total_properties"] = stats["object_properties"] + stats["datatype_properties"]
 
     return stats
 

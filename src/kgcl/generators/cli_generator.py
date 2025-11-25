@@ -12,16 +12,15 @@ Typical usage:
         --output personal_kgct_cli.py
 """
 
-import sys
-from pathlib import Path
-from typing import Dict, List, Any, Optional
-from datetime import datetime
-import json
 import hashlib
+import sys
+from datetime import datetime
+from pathlib import Path
+from typing import Any
 
 try:
     import rdflib
-    from rdflib import Graph, Namespace, RDF, RDFS
+    from rdflib import RDF, RDFS, Graph, Namespace
 except ImportError:
     print("Error: rdflib not installed. Install with: pip install rdflib", file=sys.stderr)
     sys.exit(1)
@@ -36,12 +35,7 @@ except ImportError:
 class CLIGenerator:
     """Generate KGCT Typer CLI from RDF definitions."""
 
-    def __init__(
-        self,
-        ontology_path: Path,
-        template_path: Path,
-        output_path: Optional[Path] = None,
-    ):
+    def __init__(self, ontology_path: Path, template_path: Path, output_path: Path | None = None):
         """Initialize generator."""
         self.ontology_path = Path(ontology_path)
         self.template_path = Path(template_path)
@@ -65,7 +59,7 @@ class CLIGenerator:
             lstrip_blocks=True,
         )
 
-    def query_commands(self) -> List[Dict[str, Any]]:
+    def query_commands(self) -> list[dict[str, Any]]:
         """Query RDF for all CLI commands."""
         query = """
         PREFIX cli: <urn:kgc:cli:>
@@ -95,20 +89,22 @@ class CLIGenerator:
             args = self._query_args(cmd_uri)
             options = self._query_options(cmd_uri)
 
-            commands.append({
-                "uri": cmd_uri,
-                "name": name,
-                "help": help_text,
-                "handler_module": handler_module,
-                "handler_function": handler_function,
-                "args": args,
-                "options": options,
-                "extended_help": self._get_extended_help(cmd_uri),
-            })
+            commands.append(
+                {
+                    "uri": cmd_uri,
+                    "name": name,
+                    "help": help_text,
+                    "handler_module": handler_module,
+                    "handler_function": handler_function,
+                    "args": args,
+                    "options": options,
+                    "extended_help": self._get_extended_help(cmd_uri),
+                }
+            )
 
         return commands
 
-    def _query_args(self, cmd_uri: str) -> List[Dict[str, Any]]:
+    def _query_args(self, cmd_uri: str) -> list[dict[str, Any]]:
         """Query positional arguments for a command."""
         query = f"""
         PREFIX cli: <urn:kgc:cli:>
@@ -128,16 +124,18 @@ class CLIGenerator:
         args = []
 
         for row in results:
-            args.append({
-                "name": str(row.arg_name),
-                "help": str(row.arg_help),
-                "python_type": str(row.arg_type) if row.arg_type else "str",
-                "required": str(row.required).lower() == "true" if row.required else True,
-            })
+            args.append(
+                {
+                    "name": str(row.arg_name),
+                    "help": str(row.arg_help),
+                    "python_type": str(row.arg_type) if row.arg_type else "str",
+                    "required": str(row.required).lower() == "true" if row.required else True,
+                }
+            )
 
         return args
 
-    def _query_options(self, cmd_uri: str) -> List[Dict[str, Any]]:
+    def _query_options(self, cmd_uri: str) -> list[dict[str, Any]]:
         """Query optional flags for a command."""
         query = f"""
         PREFIX cli: <urn:kgc:cli:>
@@ -158,17 +156,19 @@ class CLIGenerator:
         options = []
 
         for row in results:
-            options.append({
-                "name": str(row.opt_name),
-                "help": str(row.opt_help),
-                "python_type": str(row.opt_type) if row.opt_type else "str",
-                "default": str(row.opt_default) if row.opt_default else None,
-                "required": str(row.required).lower() == "true" if row.required else False,
-            })
+            options.append(
+                {
+                    "name": str(row.opt_name),
+                    "help": str(row.opt_help),
+                    "python_type": str(row.opt_type) if row.opt_type else "str",
+                    "default": str(row.opt_default) if row.opt_default else None,
+                    "required": str(row.required).lower() == "true" if row.required else False,
+                }
+            )
 
         return options
 
-    def _get_extended_help(self, cmd_uri: str) -> Optional[str]:
+    def _get_extended_help(self, cmd_uri: str) -> str | None:
         """Get extended help text for a command, if available."""
         query = f"""
         PREFIX cli: <urn:kgc:cli:>
@@ -184,7 +184,7 @@ class CLIGenerator:
             return str(row.ext_help)
         return None
 
-    def get_root_command(self) -> Dict[str, str]:
+    def get_root_command(self) -> dict[str, str]:
         """Get root command metadata (from ProjectRoot)."""
         query = """
         PREFIX cli: <urn:kgc:cli:>
@@ -202,16 +202,10 @@ class CLIGenerator:
         results = self.graph.query(query)
 
         for row in results:
-            return {
-                "name": str(row.name),
-                "help": str(row.help),
-            }
+            return {"name": str(row.name), "help": str(row.help)}
 
         # Fallback
-        return {
-            "name": "kgct",
-            "help": "KGC Technician Console",
-        }
+        return {"name": "kgct", "help": "KGC Technician Console"}
 
     def generate(self) -> str:
         """Generate CLI code and return as string."""
@@ -250,38 +244,29 @@ def main():
     """CLI entry point."""
     import argparse
 
-    parser = argparse.ArgumentParser(
-        description="Generate KGCT Typer CLI from RDF ontology"
-    )
+    parser = argparse.ArgumentParser(description="Generate KGCT Typer CLI from RDF ontology")
     parser.add_argument(
         "--ontology",
         type=Path,
         default=Path(".kgc/ontology.ttl"),
-        help="Path to ontology.ttl (default: .kgc/ontology.ttl)"
+        help="Path to ontology.ttl (default: .kgc/ontology.ttl)",
     )
     parser.add_argument(
         "--template",
         type=Path,
         default=Path(".kgc/projections/cli.py.j2"),
-        help="Path to CLI template (default: .kgc/projections/cli.py.j2)"
+        help="Path to CLI template (default: .kgc/projections/cli.py.j2)",
     )
     parser.add_argument(
         "--output",
         type=Path,
         default=Path("personal_kgct_cli.py"),
-        help="Output path (default: personal_kgct_cli.py)"
+        help="Output path (default: personal_kgct_cli.py)",
     )
     parser.add_argument(
-        "--check-receipt",
-        action="store_true",
-        help="Verify receipt hash instead of generating"
+        "--check-receipt", action="store_true", help="Verify receipt hash instead of generating"
     )
-    parser.add_argument(
-        "--verbose",
-        "-v",
-        action="store_true",
-        help="Verbose output"
-    )
+    parser.add_argument("--verbose", "-v", action="store_true", help="Verbose output")
 
     args = parser.parse_args()
 
@@ -314,6 +299,7 @@ def main():
         print(f"Error: {e}", file=sys.stderr)
         if args.verbose:
             import traceback
+
             traceback.print_exc()
         sys.exit(1)
 

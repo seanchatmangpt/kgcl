@@ -18,37 +18,12 @@ from kgcl.cli.utils import (
 
 
 @click.command()
-@click.option(
-    "--category",
-    type=str,
-    help="Filter by category",
-)
-@click.option(
-    "--source",
-    type=str,
-    help="Filter by source",
-)
-@click.option(
-    "--search",
-    type=str,
-    help="Search term for feature name",
-)
-@click.option(
-    "--templates-only",
-    is_flag=True,
-    help="Show only feature templates",
-)
-@click.option(
-    "--instances-only",
-    is_flag=True,
-    help="Show only feature instances",
-)
-@click.option(
-    "--output",
-    "-o",
-    type=click.Path(path_type=Path),
-    help="Output file path",
-)
+@click.option("--category", type=str, help="Filter by category")
+@click.option("--source", type=str, help="Filter by source")
+@click.option("--search", type=str, help="Search term for feature name")
+@click.option("--templates-only", is_flag=True, help="Show only feature templates")
+@click.option("--instances-only", is_flag=True, help="Show only feature instances")
+@click.option("--output", "-o", type=click.Path(path_type=Path), help="Output file path")
 @click.option(
     "--format",
     "-f",
@@ -63,12 +38,7 @@ from kgcl.cli.utils import (
     default="name",
     help="Sort by field",
 )
-@click.option(
-    "--verbose",
-    "-v",
-    is_flag=True,
-    help="Verbose output with full details",
-)
+@click.option("--verbose", "-v", is_flag=True, help="Verbose output with full details")
 def feature_list(
     category: str | None,
     source: str | None,
@@ -84,7 +54,8 @@ def feature_list(
 
     Query UNRDF for feature templates and instances with filtering and sorting.
 
-    Examples:
+    Examples
+    --------
         # List all features
         $ kgc-feature-list
 

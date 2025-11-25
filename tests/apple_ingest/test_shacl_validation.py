@@ -10,24 +10,6 @@ Chicago School principles:
 - Verify defect detection accuracy
 """
 
-import pytest
-from datetime import datetime, timezone
-from rdflib import Graph, Namespace, RDF, Literal
-
-from tests.apple_ingest.fixtures import (
-    calendar_event_simple,
-    calendar_event_invalid_times,
-    calendar_event_no_title,
-    reminder_task_simple,
-    reminder_task_no_status,
-    reminder_task_today,
-    mail_message_simple,
-    mail_message_no_sender,
-    file_markdown_note,
-    file_invalid_path,
-    full_ingest_data,
-    invalid_ingest_data,
-)
 
 # TODO: Import when available
 # from kgcl.validation.shacl import SHACLValidator
@@ -50,7 +32,7 @@ class TestEventTitleNotEmptyInvariant:
         # )
         # assert report.conforms is True
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_event_without_title_fails(self, calendar_event_no_title):
         """
@@ -67,7 +49,7 @@ class TestEventTitleNotEmptyInvariant:
         # assert report.conforms is False
         # assert any("title" in str(v).lower() for v in report.violations)
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_violation_message_indicates_defect_prevention(self, calendar_event_no_title):
         """
@@ -86,7 +68,7 @@ class TestEventTitleNotEmptyInvariant:
         # violation_text = str(report.violations[0])
         # assert "title" in violation_text.lower() or "empty" in violation_text.lower()
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
 
 class TestEventTimeRangeValidInvariant:
@@ -106,7 +88,7 @@ class TestEventTimeRangeValidInvariant:
         # )
         # assert report.conforms is True
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_event_with_start_after_end_fails(self, calendar_event_invalid_times):
         """
@@ -124,7 +106,7 @@ class TestEventTimeRangeValidInvariant:
         # assert any("time" in str(v).lower() or "range" in str(v).lower()
         #            for v in report.violations)
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_event_with_same_start_and_end_fails(self, calendar_event_simple):
         """
@@ -133,7 +115,7 @@ class TestEventTimeRangeValidInvariant:
         THEN: May fail (depending on invariant strictness)
         """
         # TODO: Implement (optional: zero-duration events might be allowed)
-        pass  # TODO: Implement
+        # TODO: Implement
 
 
 class TestReminderStatusRequiredInvariant:
@@ -153,7 +135,7 @@ class TestReminderStatusRequiredInvariant:
         # )
         # assert report.conforms is True
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_reminder_without_status_fails(self, reminder_task_no_status):
         """
@@ -170,7 +152,7 @@ class TestReminderStatusRequiredInvariant:
         # assert report.conforms is False
         # assert any("status" in str(v).lower() for v in report.violations)
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_violation_indicates_ambiguous_state_defect(self, reminder_task_no_status):
         """
@@ -186,7 +168,7 @@ class TestReminderStatusRequiredInvariant:
         # )
         # assert len(report.violations) > 0
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
 
 class TestReminderDueTodayValidInvariant:
@@ -206,7 +188,7 @@ class TestReminderDueTodayValidInvariant:
         # )
         # assert report.conforms is True
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_task_due_today_with_wrong_date_fails(self, reminder_task_simple):
         """
@@ -227,7 +209,7 @@ class TestReminderDueTodayValidInvariant:
         # )
         # assert report.conforms is False
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
 
 class TestMailMetadataValidInvariant:
@@ -247,7 +229,7 @@ class TestMailMetadataValidInvariant:
         # )
         # assert report.conforms is True
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_mail_without_sender_fails(self, mail_message_no_sender):
         """
@@ -264,7 +246,7 @@ class TestMailMetadataValidInvariant:
         # assert report.conforms is False
         # assert any("sender" in str(v).lower() for v in report.violations)
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_violation_indicates_orphaned_data_defect(self, mail_message_no_sender):
         """
@@ -280,7 +262,7 @@ class TestMailMetadataValidInvariant:
         # )
         # assert len(report.violations) > 0
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
 
 class TestFilePathValidInvariant:
@@ -300,7 +282,7 @@ class TestFilePathValidInvariant:
         # )
         # assert report.conforms is True
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_file_with_relative_path_fails(self, file_invalid_path):
         """
@@ -317,7 +299,7 @@ class TestFilePathValidInvariant:
         # assert report.conforms is False
         # assert any("path" in str(v).lower() for v in report.violations)
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_violation_indicates_broken_reference_defect(self, file_invalid_path):
         """
@@ -333,7 +315,7 @@ class TestFilePathValidInvariant:
         # )
         # assert len(report.violations) > 0
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
 
 class TestDataHasSourceInvariant:
@@ -353,7 +335,7 @@ class TestDataHasSourceInvariant:
         # )
         # assert report.conforms is True
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_data_without_source_fails(self):
         """
@@ -362,7 +344,7 @@ class TestDataHasSourceInvariant:
         THEN: Validation fails
         """
         # TODO: Implement
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_violation_indicates_unclear_origin_defect(self):
         """
@@ -371,7 +353,7 @@ class TestDataHasSourceInvariant:
         THEN: Violation explains defect (unclear origin)
         """
         # TODO: Implement
-        pass  # TODO: Implement
+        # TODO: Implement
 
 
 class TestNoCircularDependenciesInvariant:
@@ -395,7 +377,7 @@ class TestNoCircularDependenciesInvariant:
         # )
         # assert report.conforms is True
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_circular_dependencies_fail(self):
         """
@@ -416,7 +398,7 @@ class TestNoCircularDependenciesInvariant:
         # assert any("circular" in str(v).lower() or "cycle" in str(v).lower()
         #            for v in report.violations)
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_violation_indicates_deadlock_defect(self):
         """
@@ -425,7 +407,7 @@ class TestNoCircularDependenciesInvariant:
         THEN: Violation explains defect (deadlock)
         """
         # TODO: Implement
-        pass  # TODO: Implement
+        # TODO: Implement
 
 
 class TestMultipleInvariantValidation:
@@ -443,7 +425,7 @@ class TestMultipleInvariantValidation:
         # assert report.conforms is True
         # assert len(report.violations) == 0
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_invalid_data_fails_appropriate_invariants(self, invalid_ingest_data):
         """
@@ -463,7 +445,7 @@ class TestMultipleInvariantValidation:
         # # - MailMetadataValidInvariant (mail_message_no_sender)
         # # - FilePathValidInvariant (file_invalid_path)
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_violation_report_groups_by_invariant(self, invalid_ingest_data):
         """
@@ -485,7 +467,7 @@ class TestMultipleInvariantValidation:
         # assert "EventTitleNotEmptyInvariant" in violations_by_invariant
         # assert "EventTimeRangeValidInvariant" in violations_by_invariant
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
 
 class TestInvariantPerformance:
@@ -510,7 +492,7 @@ class TestInvariantPerformance:
         #
         # assert elapsed < 0.1  # 100ms
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_batch_validation_is_efficient(self):
         """
@@ -519,7 +501,7 @@ class TestInvariantPerformance:
         THEN: Completes in < 5 seconds
         """
         # TODO: Implement with large dataset
-        pass  # TODO: Implement
+        # TODO: Implement
 
 
 class TestInvariantRecovery:
@@ -542,7 +524,7 @@ class TestInvariantRecovery:
         # assert violation.suggested_fix is not None
         # assert "title" in violation.suggested_fix.lower()
 
-        pass  # TODO: Implement
+        # TODO: Implement
 
     def test_violation_explains_defect_prevented(self, calendar_event_invalid_times):
         """
@@ -561,4 +543,4 @@ class TestInvariantRecovery:
         # assert violation.defect_description is not None
         # assert "malformed" in violation.defect_description.lower()
 
-        pass  # TODO: Implement
+        # TODO: Implement

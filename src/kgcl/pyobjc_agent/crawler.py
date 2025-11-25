@@ -8,18 +8,19 @@ This module provides functionality to:
 - Generate capability JSON-LD from discovered APIs
 """
 
-import logging
-from typing import Dict, List, Optional, Set, Any, Type
-from dataclasses import dataclass, field, asdict
-from enum import Enum
 import json
+import logging
+from dataclasses import asdict, dataclass, field
 from datetime import datetime
+from enum import Enum
+from typing import Any
 
 logger = logging.getLogger(__name__)
 
 
 class FrameworkName(str, Enum):
     """Supported PyObjC frameworks for capability discovery."""
+
     APPKIT = "AppKit"
     FOUNDATION = "Foundation"
     EVENTKIT = "EventKit"
@@ -33,32 +34,35 @@ class FrameworkName(str, Enum):
 @dataclass
 class CapabilityMethod:
     """Represents a discoverable method in a PyObjC class."""
+
     selector: str
     return_type: str
-    argument_types: List[str] = field(default_factory=list)
+    argument_types: list[str] = field(default_factory=list)
     is_property: bool = False
     is_observable: bool = False
-    requires_entitlement: Optional[str] = None
+    requires_entitlement: str | None = None
     description: str = ""
 
 
 @dataclass
 class CapabilityClass:
     """Represents a PyObjC class with discoverable capabilities."""
+
     name: str
     framework: str
-    protocols: List[str] = field(default_factory=list)
-    methods: List[CapabilityMethod] = field(default_factory=list)
-    parent_class: Optional[str] = None
+    protocols: list[str] = field(default_factory=list)
+    methods: list[CapabilityMethod] = field(default_factory=list)
+    parent_class: str | None = None
 
 
 @dataclass
 class FrameworkCapabilities:
     """Aggregated capabilities from a PyObjC framework."""
+
     framework_name: str
-    version: Optional[str] = None
-    classes: List[CapabilityClass] = field(default_factory=list)
-    protocols: List[str] = field(default_factory=list)
+    version: str | None = None
+    classes: list[CapabilityClass] = field(default_factory=list)
+    protocols: list[str] = field(default_factory=list)
     discovered_at: str = field(default_factory=lambda: datetime.utcnow().isoformat())
 
 
@@ -75,14 +79,34 @@ class PyObjCFrameworkCrawler:
 
     # Method prefixes that typically indicate queryable state
     OBSERVABLE_PREFIXES = {
-        "get", "is", "has", "can", "should", "count", "current",
-        "active", "visible", "enabled", "available", "frontmost"
+        "get",
+        "is",
+        "has",
+        "can",
+        "should",
+        "count",
+        "current",
+        "active",
+        "visible",
+        "enabled",
+        "available",
+        "frontmost",
     }
 
     # Method patterns for read-only state access
     READONLY_PATTERNS = {
-        "description", "identifier", "name", "title", "url", "date",
-        "location", "status", "state", "value", "path", "bundle"
+        "description",
+        "identifier",
+        "name",
+        "title",
+        "url",
+        "date",
+        "location",
+        "status",
+        "state",
+        "value",
+        "path",
+        "bundle",
     }
 
     def __init__(self, safe_mode: bool = True):
@@ -93,8 +117,8 @@ class PyObjCFrameworkCrawler:
             safe_mode: If True, only enumerate read-only methods
         """
         self.safe_mode = safe_mode
-        self.loaded_frameworks: Dict[str, Any] = {}
-        self._capability_cache: Dict[str, FrameworkCapabilities] = {}
+        self.loaded_frameworks: dict[str, Any] = {}
+        self._capability_cache: dict[str, FrameworkCapabilities] = {}
 
     def load_framework(self, framework_name: FrameworkName) -> bool:
         """
@@ -103,7 +127,8 @@ class PyObjCFrameworkCrawler:
         Args:
             framework_name: Name of the framework to load
 
-        Returns:
+        Returns
+        -------
             True if framework loaded successfully, False otherwise
         """
         if framework_name.value in self.loaded_frameworks:
@@ -119,21 +144,24 @@ class PyObjCFrameworkCrawler:
 
         except ImportError as e:
             logger.warning(f"Failed to load framework {framework_name.value}: {e}")
-            logger.info(f"Framework may not be available or requires installation: pip install pyobjc-framework-{framework_name.value}")
+            logger.info(
+                f"Framework may not be available or requires installation: pip install pyobjc-framework-{framework_name.value}"
+            )
             return False
 
         except Exception as e:
             logger.error(f"Unexpected error loading framework {framework_name.value}: {e}")
             return False
 
-    def enumerate_classes(self, framework_name: FrameworkName) -> List[str]:
+    def enumerate_classes(self, framework_name: FrameworkName) -> list[str]:
         """
         Enumerate all classes in a loaded framework.
 
         Args:
             framework_name: Framework to enumerate
 
-        Returns:
+        Returns
+        -------
             List of class names
         """
         if framework_name.value not in self.loaded_frameworks:
@@ -165,7 +193,8 @@ class PyObjCFrameworkCrawler:
         Args:
             selector: ObjC selector string
 
-        Returns:
+        Returns
+        -------
             True if method appears to be state-queryable
         """
         selector_lower = selector.lower()
@@ -187,10 +216,8 @@ class PyObjCFrameworkCrawler:
         return False
 
     def enumerate_methods(
-        self,
-        framework_name: FrameworkName,
-        class_name: str
-    ) -> List[CapabilityMethod]:
+        self, framework_name: FrameworkName, class_name: str
+    ) -> list[CapabilityMethod]:
         """
         Enumerate methods for a specific class.
 
@@ -198,7 +225,8 @@ class PyObjCFrameworkCrawler:
             framework_name: Framework containing the class
             class_name: Name of the class to examine
 
-        Returns:
+        Returns
+        -------
             List of discoverable capability methods
         """
         if framework_name.value not in self.loaded_frameworks:
@@ -234,7 +262,7 @@ class PyObjCFrameworkCrawler:
                             selector=attr_name,
                             return_type="unknown",  # Would need objc introspection
                             is_property=is_property,
-                            is_observable=self._is_observable_method(attr_name)
+                            is_observable=self._is_observable_method(attr_name),
                         )
                         methods.append(method)
 
@@ -256,7 +284,8 @@ class PyObjCFrameworkCrawler:
         Args:
             framework_name: Framework to crawl
 
-        Returns:
+        Returns
+        -------
             Complete framework capabilities structure
         """
         # Check cache
@@ -279,9 +308,7 @@ class PyObjCFrameworkCrawler:
 
             if methods:  # Only include classes with discoverable methods
                 capability_class = CapabilityClass(
-                    name=class_name,
-                    framework=framework_name.value,
-                    methods=methods
+                    name=class_name, framework=framework_name.value, methods=methods
                 )
                 capabilities.classes.append(capability_class)
 
@@ -296,14 +323,15 @@ class PyObjCFrameworkCrawler:
 
         return capabilities
 
-    def generate_jsonld(self, capabilities: FrameworkCapabilities) -> Dict[str, Any]:
+    def generate_jsonld(self, capabilities: FrameworkCapabilities) -> dict[str, Any]:
         """
         Generate JSON-LD representation of framework capabilities.
 
         Args:
             capabilities: Framework capabilities to serialize
 
-        Returns:
+        Returns
+        -------
             JSON-LD dictionary
         """
         context = {
@@ -314,8 +342,8 @@ class PyObjCFrameworkCrawler:
             "selector": "macos:selector",
             "discoveredAt": {
                 "@id": "macos:discoveredAt",
-                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
-            }
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+            },
         }
 
         capabilities_list = []
@@ -341,16 +369,17 @@ class PyObjCFrameworkCrawler:
             "name": capabilities.framework_name,
             "discoveredAt": capabilities.discovered_at,
             "capabilityCount": len(capabilities_list),
-            "capabilities": capabilities_list
+            "capabilities": capabilities_list,
         }
 
         return jsonld
 
-    def crawl_all_frameworks(self) -> Dict[str, FrameworkCapabilities]:
+    def crawl_all_frameworks(self) -> dict[str, FrameworkCapabilities]:
         """
         Crawl all supported frameworks.
 
-        Returns:
+        Returns
+        -------
             Dictionary mapping framework names to their capabilities
         """
         all_capabilities = {}
@@ -364,9 +393,9 @@ class PyObjCFrameworkCrawler:
 
     def export_capabilities(
         self,
-        capabilities: Dict[str, FrameworkCapabilities],
+        capabilities: dict[str, FrameworkCapabilities],
         output_path: str,
-        format: str = "jsonld"
+        format: str = "jsonld",
     ) -> None:
         """
         Export discovered capabilities to file.
@@ -381,19 +410,13 @@ class PyObjCFrameworkCrawler:
                 # Generate JSON-LD for each framework
                 output = {
                     "@context": "https://kgcl.dev/ontology/macos",
-                    "@graph": [
-                        self.generate_jsonld(cap)
-                        for cap in capabilities.values()
-                    ]
+                    "@graph": [self.generate_jsonld(cap) for cap in capabilities.values()],
                 }
             else:
                 # Plain JSON export
-                output = {
-                    name: asdict(cap)
-                    for name, cap in capabilities.items()
-                }
+                output = {name: asdict(cap) for name, cap in capabilities.items()}
 
-            with open(output_path, 'w') as f:
+            with open(output_path, "w") as f:
                 json.dump(output, f, indent=2)
 
             logger.info(f"Exported capabilities to {output_path}")
@@ -414,23 +437,20 @@ def main():
 
     # Export to JSON-LD
     crawler.export_capabilities(
-        all_capabilities,
-        "/Users/sac/dev/kgcl/capabilities.jsonld",
-        format="jsonld"
+        all_capabilities, "/Users/sac/dev/kgcl/capabilities.jsonld", format="jsonld"
     )
 
     # Print summary
     total_classes = sum(len(cap.classes) for cap in all_capabilities.values())
     total_methods = sum(
-        sum(len(cls.methods) for cls in cap.classes)
-        for cap in all_capabilities.values()
+        sum(len(cls.methods) for cls in cap.classes) for cap in all_capabilities.values()
     )
 
-    print(f"\n=== Capability Discovery Summary ===")
+    print("\n=== Capability Discovery Summary ===")
     print(f"Frameworks crawled: {len(all_capabilities)}")
     print(f"Total classes: {total_classes}")
     print(f"Total methods: {total_methods}")
-    print(f"\nOutput: /Users/sac/dev/kgcl/capabilities.jsonld")
+    print("\nOutput: /Users/sac/dev/kgcl/capabilities.jsonld")
 
 
 if __name__ == "__main__":

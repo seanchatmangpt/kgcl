@@ -1,12 +1,10 @@
 """Tests for monitoring module (Andon signals)."""
 
-import pytest
 from datetime import datetime
-from kgcl.hooks.monitoring import (
-    AndonBoard,
-    AndonSignal,
-    SignalSeverity
-)
+
+import pytest
+
+from kgcl.hooks.monitoring import AndonBoard, AndonSignal, SignalSeverity
 
 
 class TestAndonSignal:
@@ -15,9 +13,7 @@ class TestAndonSignal:
     def test_create_basic_signal(self):
         """Test creating basic signal."""
         signal = AndonSignal(
-            severity=SignalSeverity.WARNING,
-            message="Test warning",
-            source="test_module"
+            severity=SignalSeverity.WARNING, message="Test warning", source="test_module"
         )
         assert signal.severity == SignalSeverity.WARNING
         assert signal.message == "Test warning"
@@ -31,7 +27,7 @@ class TestAndonSignal:
             severity=SignalSeverity.CRITICAL,
             message="Critical error",
             source="database",
-            auto_stop=True
+            auto_stop=True,
         )
         assert signal.auto_stop is True
 
@@ -39,10 +35,7 @@ class TestAndonSignal:
         """Test creating signal with metadata."""
         metadata = {"error_code": 500, "retries": 3}
         signal = AndonSignal(
-            severity=SignalSeverity.ERROR,
-            message="Request failed",
-            source="api",
-            metadata=metadata
+            severity=SignalSeverity.ERROR, message="Request failed", source="api", metadata=metadata
         )
         assert signal.metadata == metadata
 
@@ -52,26 +45,18 @@ class TestAndonSignal:
             AndonSignal(
                 severity="invalid",  # type: ignore
                 message="Test",
-                source="test"
+                source="test",
             )
 
     def test_empty_message_raises_error(self):
         """Test that empty message raises ValueError."""
         with pytest.raises(ValueError, match="message cannot be empty"):
-            AndonSignal(
-                severity=SignalSeverity.INFO,
-                message="",
-                source="test"
-            )
+            AndonSignal(severity=SignalSeverity.INFO, message="", source="test")
 
     def test_empty_source_raises_error(self):
         """Test that empty source raises ValueError."""
         with pytest.raises(ValueError, match="source cannot be empty"):
-            AndonSignal(
-                severity=SignalSeverity.INFO,
-                message="Test",
-                source=""
-            )
+            AndonSignal(severity=SignalSeverity.INFO, message="Test", source="")
 
 
 class TestAndonBoard:
@@ -86,11 +71,7 @@ class TestAndonBoard:
     def test_raise_signal(self):
         """Test raising a signal."""
         board = AndonBoard()
-        signal = AndonSignal(
-            severity=SignalSeverity.INFO,
-            message="Test info",
-            source="test"
-        )
+        signal = AndonSignal(severity=SignalSeverity.INFO, message="Test info", source="test")
         board.raise_signal(signal)
         assert len(board.signals) == 1
         assert board.signals[0] == signal
@@ -99,11 +80,7 @@ class TestAndonBoard:
         """Test raising multiple signals."""
         board = AndonBoard()
         for i in range(5):
-            signal = AndonSignal(
-                severity=SignalSeverity.INFO,
-                message=f"Test {i}",
-                source="test"
-            )
+            signal = AndonSignal(severity=SignalSeverity.INFO, message=f"Test {i}", source="test")
             board.raise_signal(signal)
         assert len(board.signals) == 5
 
@@ -111,11 +88,7 @@ class TestAndonBoard:
         """Test that signals are limited to max_signals."""
         board = AndonBoard(max_signals=10)
         for i in range(15):
-            signal = AndonSignal(
-                severity=SignalSeverity.INFO,
-                message=f"Test {i}",
-                source="test"
-            )
+            signal = AndonSignal(severity=SignalSeverity.INFO, message=f"Test {i}", source="test")
             board.raise_signal(signal)
         assert len(board.signals) == 10
         # Should keep most recent signals
@@ -129,7 +102,7 @@ class TestAndonBoard:
             severity=SignalSeverity.CRITICAL,
             message="Critical failure",
             source="system",
-            auto_stop=True
+            auto_stop=True,
         )
         board.raise_signal(signal)
         assert board.is_stopped()
@@ -141,7 +114,7 @@ class TestAndonBoard:
             severity=SignalSeverity.CRITICAL,
             message="Critical failure",
             source="system",
-            auto_stop=True
+            auto_stop=True,
         )
         board.raise_signal(signal)
         assert board.is_stopped()
@@ -157,11 +130,7 @@ class TestAndonBoard:
             handler_called.append(signal)
 
         board.register_handler(SignalSeverity.WARNING, test_handler)
-        signal = AndonSignal(
-            severity=SignalSeverity.WARNING,
-            message="Test warning",
-            source="test"
-        )
+        signal = AndonSignal(severity=SignalSeverity.WARNING, message="Test warning", source="test")
         board.raise_signal(signal)
         assert len(handler_called) == 1
         assert handler_called[0] == signal
@@ -180,11 +149,7 @@ class TestAndonBoard:
         board.register_handler(SignalSeverity.ERROR, handler1)
         board.register_handler(SignalSeverity.ERROR, handler2)
 
-        signal = AndonSignal(
-            severity=SignalSeverity.ERROR,
-            message="Test error",
-            source="test"
-        )
+        signal = AndonSignal(severity=SignalSeverity.ERROR, message="Test error", source="test")
         board.raise_signal(signal)
         assert len(calls) == 2
         assert "handler1" in calls
@@ -202,11 +167,7 @@ class TestAndonBoard:
         removed = board.unregister_handler(SignalSeverity.INFO, test_handler)
         assert removed is True
 
-        signal = AndonSignal(
-            severity=SignalSeverity.INFO,
-            message="Test",
-            source="test"
-        )
+        signal = AndonSignal(severity=SignalSeverity.INFO, message="Test", source="test")
         board.raise_signal(signal)
         assert len(calls) == 0
 
@@ -214,11 +175,7 @@ class TestAndonBoard:
         """Test getting all active signals."""
         board = AndonBoard()
         for i in range(3):
-            signal = AndonSignal(
-                severity=SignalSeverity.INFO,
-                message=f"Test {i}",
-                source="test"
-            )
+            signal = AndonSignal(severity=SignalSeverity.INFO, message=f"Test {i}", source="test")
             board.raise_signal(signal)
         signals = board.get_active_signals()
         assert len(signals) == 3

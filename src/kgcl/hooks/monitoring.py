@@ -4,15 +4,16 @@ Manufacturing-inspired visual signal board for production problems.
 Implements the Andon system concept for detecting and responding to issues.
 """
 
-from enum import Enum
+import logging
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Callable, Dict, List, Optional
-import logging
+from enum import Enum
 
 
 class SignalSeverity(Enum):
     """Andon signal severity levels."""
+
     INFO = "info"
     WARNING = "warning"
     ERROR = "error"
@@ -22,12 +23,13 @@ class SignalSeverity(Enum):
 @dataclass
 class AndonSignal:
     """Production problem signal (manufacturing quality control concept)."""
+
     severity: SignalSeverity
     message: str
     source: str
     timestamp: datetime = field(default_factory=datetime.now)
     auto_stop: bool = False  # Should stop operations
-    metadata: Optional[Dict] = None
+    metadata: dict | None = None
 
     def __post_init__(self):
         """Validate signal data."""
@@ -52,8 +54,8 @@ class AndonBoard:
         Args:
             max_signals: Maximum number of signals to retain in history
         """
-        self.signals: List[AndonSignal] = []
-        self.handlers: Dict[SignalSeverity, List[Callable]] = {
+        self.signals: list[AndonSignal] = []
+        self.handlers: dict[SignalSeverity, list[Callable]] = {
             severity: [] for severity in SignalSeverity
         }
         self.max_signals = max_signals
@@ -71,7 +73,7 @@ class AndonBoard:
 
         # Trim history if needed
         if len(self.signals) > self.max_signals:
-            self.signals = self.signals[-self.max_signals:]
+            self.signals = self.signals[-self.max_signals :]
 
         # Trigger all registered handlers for this severity
         if signal.severity in self.handlers:
@@ -98,9 +100,7 @@ class AndonBoard:
             self._logger.critical(f"SYSTEM STOPPED: {signal.message}")
 
     def register_handler(
-        self,
-        severity: SignalSeverity,
-        handler: Callable[[AndonSignal], None]
+        self, severity: SignalSeverity, handler: Callable[[AndonSignal], None]
     ) -> None:
         """Register handler for severity level.
 
@@ -113,9 +113,7 @@ class AndonBoard:
         self.handlers[severity].append(handler)
 
     def unregister_handler(
-        self,
-        severity: SignalSeverity,
-        handler: Callable[[AndonSignal], None]
+        self, severity: SignalSeverity, handler: Callable[[AndonSignal], None]
     ) -> bool:
         """Unregister a handler.
 
@@ -123,7 +121,8 @@ class AndonBoard:
             severity: Severity level
             handler: Handler to remove
 
-        Returns:
+        Returns
+        -------
             True if handler was found and removed
         """
         if severity in self.handlers and handler in self.handlers[severity]:
@@ -132,17 +131,16 @@ class AndonBoard:
         return False
 
     def get_active_signals(
-        self,
-        severity: Optional[SignalSeverity] = None,
-        source: Optional[str] = None
-    ) -> List[AndonSignal]:
+        self, severity: SignalSeverity | None = None, source: str | None = None
+    ) -> list[AndonSignal]:
         """Get active signals with optional filtering.
 
         Args:
             severity: Filter by severity level
             source: Filter by source
 
-        Returns:
+        Returns
+        -------
             List of matching signals
         """
         signals = self.signals
@@ -155,23 +153,23 @@ class AndonBoard:
 
         return signals
 
-    def clear_signals(self, severity: Optional[SignalSeverity] = None) -> int:
+    def clear_signals(self, severity: SignalSeverity | None = None) -> int:
         """Clear signals.
 
         Args:
             severity: If provided, only clear signals of this severity
 
-        Returns:
+        Returns
+        -------
             Number of signals cleared
         """
         if severity is None:
             count = len(self.signals)
             self.signals = []
             return count
-        else:
-            before = len(self.signals)
-            self.signals = [s for s in self.signals if s.severity != severity]
-            return before - len(self.signals)
+        before = len(self.signals)
+        self.signals = [s for s in self.signals if s.severity != severity]
+        return before - len(self.signals)
 
     def is_stopped(self) -> bool:
         """Check if system has been stopped by auto_stop signal."""
@@ -181,13 +179,14 @@ class AndonBoard:
         """Reset the stopped state (use with caution)."""
         self._stopped = False
 
-    def get_signal_count_by_severity(self) -> Dict[SignalSeverity, int]:
+    def get_signal_count_by_severity(self) -> dict[SignalSeverity, int]:
         """Get count of signals by severity level.
 
-        Returns:
+        Returns
+        -------
             Dictionary mapping severity to count
         """
-        counts = {severity: 0 for severity in SignalSeverity}
+        counts = dict.fromkeys(SignalSeverity, 0)
         for signal in self.signals:
             counts[signal.severity] += 1
         return counts

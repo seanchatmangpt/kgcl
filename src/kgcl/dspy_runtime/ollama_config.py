@@ -5,14 +5,16 @@ Provides DSPy language model setup with Ollama backend, environment-based
 configuration, and fallback handling.
 """
 
-import os
 import logging
-from typing import Optional, Dict, Any
+import os
 from dataclasses import dataclass
+from typing import Any
+
 import requests
 
 try:
     import dspy
+
     DSPY_AVAILABLE = True
 except ImportError:
     DSPY_AVAILABLE = False
@@ -42,7 +44,7 @@ class OllamaConfig:
             timeout=int(os.getenv("OLLAMA_TIMEOUT", str(cls.timeout))),
         )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary."""
         return {
             "model": self.model,
@@ -56,21 +58,20 @@ class OllamaConfig:
 class OllamaLM:
     """Ollama language model wrapper for DSPy."""
 
-    def __init__(self, config: Optional[OllamaConfig] = None):
+    def __init__(self, config: OllamaConfig | None = None):
         """
         Initialize Ollama LM.
 
         Args:
             config: Ollama configuration. If None, loads from environment.
 
-        Raises:
+        Raises
+        ------
             RuntimeError: If DSPy is not available
             ConnectionError: If Ollama is not accessible
         """
         if not DSPY_AVAILABLE:
-            raise RuntimeError(
-                "DSPy is not installed. Install with: pip install dspy-ai"
-            )
+            raise RuntimeError("DSPy is not installed. Install with: pip install dspy-ai")
 
         self.config = config or OllamaConfig.from_env()
         self._lm = None
@@ -82,7 +83,8 @@ class OllamaLM:
         """
         Initialize DSPy LM connection.
 
-        Raises:
+        Raises
+        ------
             ConnectionError: If Ollama is not accessible
         """
         if self._initialized:
@@ -121,10 +123,7 @@ class OllamaLM:
     def is_available(self) -> bool:
         """Check if Ollama service is available."""
         try:
-            response = requests.get(
-                f"{self.config.base_url}/api/tags",
-                timeout=5
-            )
+            response = requests.get(f"{self.config.base_url}/api/tags", timeout=5)
             return response.status_code == 200
         except Exception as e:
             logger.debug(f"Ollama availability check failed: {e}")
@@ -133,10 +132,7 @@ class OllamaLM:
     def is_model_available(self) -> bool:
         """Check if configured model is available."""
         try:
-            response = requests.get(
-                f"{self.config.base_url}/api/tags",
-                timeout=5
-            )
+            response = requests.get(f"{self.config.base_url}/api/tags", timeout=5)
             if response.status_code != 200:
                 return False
 
@@ -147,41 +143,42 @@ class OllamaLM:
             logger.debug(f"Model availability check failed: {e}")
             return False
 
-    def list_models(self) -> list[Dict[str, Any]]:
+    def list_models(self) -> list[dict[str, Any]]:
         """
         List available Ollama models.
 
-        Returns:
+        Returns
+        -------
             List of model information dictionaries
 
-        Raises:
+        Raises
+        ------
             ConnectionError: If Ollama is not accessible
         """
         if not self.is_available():
             raise ConnectionError(f"Ollama is not accessible at {self.config.base_url}")
 
         try:
-            response = requests.get(
-                f"{self.config.base_url}/api/tags",
-                timeout=5
-            )
+            response = requests.get(f"{self.config.base_url}/api/tags", timeout=5)
             response.raise_for_status()
             return response.json().get("models", [])
         except Exception as e:
             logger.error(f"Failed to list models: {e}")
             raise
 
-    def get_model_info(self, model_name: Optional[str] = None) -> Dict[str, Any]:
+    def get_model_info(self, model_name: str | None = None) -> dict[str, Any]:
         """
         Get information about a model.
 
         Args:
             model_name: Model name. If None, uses configured model.
 
-        Returns:
+        Returns
+        -------
             Model information dictionary
 
-        Raises:
+        Raises
+        ------
             ConnectionError: If Ollama is not accessible
             ValueError: If model not found
         """
@@ -189,9 +186,7 @@ class OllamaLM:
 
         try:
             response = requests.post(
-                f"{self.config.base_url}/api/show",
-                json={"name": model},
-                timeout=5
+                f"{self.config.base_url}/api/show", json={"name": model}, timeout=5
             )
             response.raise_for_status()
             return response.json()
@@ -211,17 +206,19 @@ class OllamaLM:
         return self._lm
 
 
-def configure_ollama(config: Optional[OllamaConfig] = None) -> OllamaLM:
+def configure_ollama(config: OllamaConfig | None = None) -> OllamaLM:
     """
     Configure Ollama LM for DSPy.
 
     Args:
         config: Ollama configuration. If None, loads from environment.
 
-    Returns:
+    Returns
+    -------
         Configured OllamaLM instance
 
-    Raises:
+    Raises
+    ------
         RuntimeError: If DSPy is not available
         ConnectionError: If Ollama is not accessible
     """
@@ -230,11 +227,12 @@ def configure_ollama(config: Optional[OllamaConfig] = None) -> OllamaLM:
     return lm
 
 
-def health_check() -> Dict[str, Any]:
+def health_check() -> dict[str, Any]:
     """
     Perform health check for Ollama service.
 
-    Returns:
+    Returns
+    -------
         Health check results with status and details
     """
     config = OllamaConfig.from_env()

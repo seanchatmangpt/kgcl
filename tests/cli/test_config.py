@@ -1,6 +1,5 @@
 """Tests for config CLI command."""
 
-import json
 from pathlib import Path
 
 import pytest

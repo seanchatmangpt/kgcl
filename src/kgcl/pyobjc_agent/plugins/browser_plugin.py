@@ -8,19 +8,14 @@ This plugin provides capabilities for:
 - Browser session reconstruction
 """
 
-from typing import Dict, List, Optional, Any
-from datetime import datetime, timedelta
 import logging
-import sqlite3
 import os
+import sqlite3
+from datetime import datetime, timedelta
 from pathlib import Path
+from typing import Any
 
-from .base import (
-    BaseCapabilityPlugin,
-    CapabilityDescriptor,
-    CapabilityData,
-    EntitlementLevel
-)
+from .base import BaseCapabilityPlugin, CapabilityData, CapabilityDescriptor, EntitlementLevel
 
 logger = logging.getLogger(__name__)
 
@@ -49,11 +44,11 @@ class BrowserPlugin(BaseCapabilityPlugin):
         return "1.0.0"
 
     @property
-    def required_frameworks(self) -> List[str]:
+    def required_frameworks(self) -> list[str]:
         # No PyObjC frameworks required - uses SQLite directly
         return []
 
-    def discover_capabilities(self) -> List[CapabilityDescriptor]:
+    def discover_capabilities(self) -> list[CapabilityDescriptor]:
         """Discover browser history capabilities."""
         capabilities = [
             CapabilityDescriptor(
@@ -74,12 +69,12 @@ class BrowserPlugin(BaseCapabilityPlugin):
                                     "url": {"type": "string"},
                                     "title": {"type": "string"},
                                     "visit_time": {"type": "string", "format": "date-time"},
-                                    "visit_count": {"type": "integer"}
-                                }
-                            }
+                                    "visit_count": {"type": "integer"},
+                                },
+                            },
                         }
-                    }
-                }
+                    },
+                },
             ),
             CapabilityDescriptor(
                 name="chrome_history",
@@ -99,12 +94,12 @@ class BrowserPlugin(BaseCapabilityPlugin):
                                     "url": {"type": "string"},
                                     "title": {"type": "string"},
                                     "visit_time": {"type": "string", "format": "date-time"},
-                                    "visit_count": {"type": "integer"}
-                                }
-                            }
+                                    "visit_count": {"type": "integer"},
+                                },
+                            },
                         }
-                    }
-                }
+                    },
+                },
             ),
             CapabilityDescriptor(
                 name="recent_browsing_activity",
@@ -122,22 +117,22 @@ class BrowserPlugin(BaseCapabilityPlugin):
                             "type": "object",
                             "properties": {
                                 "safari": {"type": "integer"},
-                                "chrome": {"type": "integer"}
-                            }
+                                "chrome": {"type": "integer"},
+                            },
                         },
-                        "top_domains": {"type": "array"}
-                    }
-                }
-            )
+                        "top_domains": {"type": "array"},
+                    },
+                },
+            ),
         ]
 
         return capabilities
 
-    def check_entitlements(self) -> Dict[str, bool]:
+    def check_entitlements(self) -> dict[str, bool]:
         """Check if browser history databases are accessible."""
         entitlements = {
             "safari_access": self._check_safari_access(),
-            "chrome_access": self._check_chrome_access()
+            "chrome_access": self._check_chrome_access(),
         }
 
         return entitlements
@@ -169,9 +164,7 @@ class BrowserPlugin(BaseCapabilityPlugin):
         return accessible
 
     def collect_capability_data(
-        self,
-        capability_name: str,
-        parameters: Optional[Dict[str, Any]] = None
+        self, capability_name: str, parameters: dict[str, Any] | None = None
     ) -> CapabilityData:
         """Collect browser history data."""
         timestamp = datetime.utcnow()
@@ -191,35 +184,30 @@ class BrowserPlugin(BaseCapabilityPlugin):
                 capability_name=capability_name,
                 timestamp=timestamp,
                 data=data,
-                metadata={"plugin": self.plugin_id}
+                metadata={"plugin": self.plugin_id},
             )
 
         except Exception as e:
             logger.error(f"Error collecting {capability_name}: {e}")
             return CapabilityData(
-                capability_name=capability_name,
-                timestamp=timestamp,
-                data={},
-                error=str(e)
+                capability_name=capability_name, timestamp=timestamp, data={}, error=str(e)
             )
 
-    def _get_safari_history(self, params: Dict[str, Any]) -> Dict[str, Any]:
+    def _get_safari_history(self, params: dict[str, Any]) -> dict[str, Any]:
         """
         Read Safari browsing history.
 
         Args:
             params: Query parameters (limit, hours_back, etc.)
 
-        Returns:
+        Returns
+        -------
             Dictionary with Safari history data
         """
         safari_path = Path(self.SAFARI_HISTORY_PATH).expanduser()
 
         if not safari_path.exists():
-            return {
-                "error": "Safari history database not found",
-                "visits": []
-            }
+            return {"error": "Safari history database not found", "visits": []}
 
         limit = params.get("limit", 100)
         hours_back = params.get("hours_back", 24)
@@ -227,7 +215,9 @@ class BrowserPlugin(BaseCapabilityPlugin):
         try:
             # Safari uses WebKit timestamp (seconds since 2001-01-01)
             webkit_epoch = datetime(2001, 1, 1)
-            time_threshold = (datetime.utcnow() - timedelta(hours=hours_back) - webkit_epoch).total_seconds()
+            time_threshold = (
+                datetime.utcnow() - timedelta(hours=hours_back) - webkit_epoch
+            ).total_seconds()
 
             # Connect to Safari history database (read-only)
             conn = sqlite3.connect(f"file:{safari_path}?mode=ro", uri=True)
@@ -257,45 +247,42 @@ class BrowserPlugin(BaseCapabilityPlugin):
                 # Convert WebKit timestamp to datetime
                 visit_datetime = webkit_epoch + timedelta(seconds=visit_time)
 
-                visits.append({
-                    "url": url,
-                    "title": title or "",
-                    "visit_time": visit_datetime.isoformat(),
-                    "visit_count": visit_count or 1
-                })
+                visits.append(
+                    {
+                        "url": url,
+                        "title": title or "",
+                        "visit_time": visit_datetime.isoformat(),
+                        "visit_count": visit_count or 1,
+                    }
+                )
 
             conn.close()
 
             return {
                 "count": len(visits),
                 "visits": visits,
-                "query_params": {
-                    "limit": limit,
-                    "hours_back": hours_back
-                }
+                "query_params": {"limit": limit, "hours_back": hours_back},
             }
 
         except sqlite3.Error as e:
             logger.error(f"Safari database error: {e}")
             raise RuntimeError(f"Failed to read Safari history: {e}")
 
-    def _get_chrome_history(self, params: Dict[str, Any]) -> Dict[str, Any]:
+    def _get_chrome_history(self, params: dict[str, Any]) -> dict[str, Any]:
         """
         Read Chrome browsing history.
 
         Args:
             params: Query parameters (limit, hours_back, etc.)
 
-        Returns:
+        Returns
+        -------
             Dictionary with Chrome history data
         """
         chrome_path = Path(self.CHROME_HISTORY_PATH).expanduser()
 
         if not chrome_path.exists():
-            return {
-                "error": "Chrome history database not found",
-                "visits": []
-            }
+            return {"error": "Chrome history database not found", "visits": []}
 
         limit = params.get("limit", 100)
         hours_back = params.get("hours_back", 24)
@@ -336,36 +323,36 @@ class BrowserPlugin(BaseCapabilityPlugin):
                 # Convert Chrome timestamp (microseconds since 1601) to datetime
                 visit_datetime = chrome_epoch + timedelta(microseconds=visit_time)
 
-                visits.append({
-                    "url": url,
-                    "title": title or "",
-                    "visit_time": visit_datetime.isoformat(),
-                    "visit_count": visit_count or 1
-                })
+                visits.append(
+                    {
+                        "url": url,
+                        "title": title or "",
+                        "visit_time": visit_datetime.isoformat(),
+                        "visit_count": visit_count or 1,
+                    }
+                )
 
             conn.close()
 
             return {
                 "count": len(visits),
                 "visits": visits,
-                "query_params": {
-                    "limit": limit,
-                    "hours_back": hours_back
-                }
+                "query_params": {"limit": limit, "hours_back": hours_back},
             }
 
         except sqlite3.Error as e:
             logger.error(f"Chrome database error: {e}")
             raise RuntimeError(f"Failed to read Chrome history: {e}")
 
-    def _get_recent_activity(self, params: Dict[str, Any]) -> Dict[str, Any]:
+    def _get_recent_activity(self, params: dict[str, Any]) -> dict[str, Any]:
         """
         Get aggregated recent browsing activity from all browsers.
 
         Args:
             params: Query parameters
 
-        Returns:
+        Returns
+        -------
             Aggregated browsing statistics
         """
         hours_back = params.get("hours_back", 24)
@@ -386,6 +373,7 @@ class BrowserPlugin(BaseCapabilityPlugin):
             url = visit.get("url", "")
             try:
                 from urllib.parse import urlparse
+
                 domain = urlparse(url).netloc
                 if domain:
                     domains[domain] = domains.get(domain, 0) + 1
@@ -396,16 +384,13 @@ class BrowserPlugin(BaseCapabilityPlugin):
         top_domains = sorted(
             [{"domain": d, "count": c} for d, c in domains.items()],
             key=lambda x: x["count"],
-            reverse=True
+            reverse=True,
         )[:10]
 
         return {
             "time_window_hours": hours_back,
             "total_visits": total_visits,
-            "browsers": {
-                "safari": len(safari_visits),
-                "chrome": len(chrome_visits)
-            },
+            "browsers": {"safari": len(safari_visits), "chrome": len(chrome_visits)},
             "top_domains": top_domains,
-            "unique_domains": len(domains)
+            "unique_domains": len(domains),
         }

@@ -2,17 +2,16 @@
 Unit tests for PyObjC framework crawler.
 """
 
-import unittest
-from unittest.mock import Mock, patch, MagicMock
 import json
-from datetime import datetime
+import unittest
+from unittest.mock import MagicMock, patch
 
 from ..crawler import (
-    PyObjCFrameworkCrawler,
-    FrameworkName,
-    CapabilityMethod,
     CapabilityClass,
-    FrameworkCapabilities
+    CapabilityMethod,
+    FrameworkCapabilities,
+    FrameworkName,
+    PyObjCFrameworkCrawler,
 )
 
 
@@ -48,7 +47,7 @@ class TestPyObjCFrameworkCrawler(unittest.TestCase):
         self.assertFalse(self.crawler._is_observable_method("doSomething"))
         self.assertFalse(self.crawler._is_observable_method("execute:withOptions:"))
 
-    @patch('builtins.__import__')
+    @patch("builtins.__import__")
     def test_load_framework_success(self, mock_import):
         """Test successful framework loading."""
         mock_framework = MagicMock()
@@ -60,7 +59,7 @@ class TestPyObjCFrameworkCrawler(unittest.TestCase):
         self.assertIn("Foundation", self.crawler.loaded_frameworks)
         mock_import.assert_called_once_with("Foundation")
 
-    @patch('builtins.__import__')
+    @patch("builtins.__import__")
     def test_load_framework_failure(self, mock_import):
         """Test framework loading failure."""
         mock_import.side_effect = ImportError("Framework not found")
@@ -75,14 +74,14 @@ class TestPyObjCFrameworkCrawler(unittest.TestCase):
         classes = self.crawler.enumerate_classes(FrameworkName.APPKIT)
         self.assertEqual(classes, [])
 
-    @patch('builtins.__import__')
+    @patch("builtins.__import__")
     def test_enumerate_classes_success(self, mock_import):
         """Test successful class enumeration."""
         # Mock framework with classes
-        mock_class1 = type('MockClass1', (), {})
-        mock_class2 = type('MockClass2', (), {})
+        mock_class1 = type("MockClass1", (), {})
+        mock_class2 = type("MockClass2", (), {})
         mock_framework = MagicMock()
-        mock_framework.__dir__ = lambda self: ['MockClass1', 'MockClass2', 'not_a_class']
+        mock_framework.__dir__ = lambda self: ["MockClass1", "MockClass2", "not_a_class"]
         mock_framework.MockClass1 = mock_class1
         mock_framework.MockClass2 = mock_class2
         mock_framework.not_a_class = "string"
@@ -92,30 +91,20 @@ class TestPyObjCFrameworkCrawler(unittest.TestCase):
         self.crawler.load_framework(FrameworkName.FOUNDATION)
         classes = self.crawler.enumerate_classes(FrameworkName.FOUNDATION)
 
-        self.assertIn('MockClass1', classes)
-        self.assertIn('MockClass2', classes)
-        self.assertNotIn('not_a_class', classes)
+        self.assertIn("MockClass1", classes)
+        self.assertIn("MockClass2", classes)
+        self.assertNotIn("not_a_class", classes)
 
     def test_generate_jsonld(self):
         """Test JSON-LD generation."""
         # Create test capabilities
         method = CapabilityMethod(
-            selector="isActive",
-            return_type="bool",
-            is_property=True,
-            is_observable=True
+            selector="isActive", return_type="bool", is_property=True, is_observable=True
         )
 
-        cls = CapabilityClass(
-            name="TestClass",
-            framework="TestFramework",
-            methods=[method]
-        )
+        cls = CapabilityClass(name="TestClass", framework="TestFramework", methods=[method])
 
-        capabilities = FrameworkCapabilities(
-            framework_name="TestFramework",
-            classes=[cls]
-        )
+        capabilities = FrameworkCapabilities(framework_name="TestFramework", classes=[cls])
 
         # Generate JSON-LD
         jsonld = self.crawler.generate_jsonld(capabilities)
@@ -137,19 +126,16 @@ class TestPyObjCFrameworkCrawler(unittest.TestCase):
 
     def test_export_capabilities(self):
         """Test capabilities export."""
-        import tempfile
         import os
+        import tempfile
 
         # Create test capabilities
         capabilities = {
-            "TestFramework": FrameworkCapabilities(
-                framework_name="TestFramework",
-                classes=[]
-            )
+            "TestFramework": FrameworkCapabilities(framework_name="TestFramework", classes=[])
         }
 
         # Export to temp file
-        with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.jsonld') as f:
+        with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".jsonld") as f:
             temp_path = f.name
 
         try:
@@ -159,7 +145,7 @@ class TestPyObjCFrameworkCrawler(unittest.TestCase):
             self.assertTrue(os.path.exists(temp_path))
 
             # Verify content
-            with open(temp_path, 'r') as f:
+            with open(temp_path) as f:
                 data = json.load(f)
 
             self.assertIn("@context", data)
@@ -180,7 +166,7 @@ class TestCapabilityDataStructures(unittest.TestCase):
             argument_types=["NSObject"],
             is_property=False,
             is_observable=True,
-            description="Get a value"
+            description="Get a value",
         )
 
         self.assertEqual(method.selector, "getValue")
@@ -197,7 +183,7 @@ class TestCapabilityDataStructures(unittest.TestCase):
             name="TestClass",
             framework="Foundation",
             methods=[method1, method2],
-            protocols=["NSObject"]
+            protocols=["NSObject"],
         )
 
         self.assertEqual(cls.name, "TestClass")
@@ -207,10 +193,7 @@ class TestCapabilityDataStructures(unittest.TestCase):
 
     def test_framework_capabilities_creation(self):
         """Test FrameworkCapabilities creation."""
-        capabilities = FrameworkCapabilities(
-            framework_name="AppKit",
-            version="1.0"
-        )
+        capabilities = FrameworkCapabilities(framework_name="AppKit", version="1.0")
 
         self.assertEqual(capabilities.framework_name, "AppKit")
         self.assertEqual(capabilities.version, "1.0")
@@ -218,5 +201,5 @@ class TestCapabilityDataStructures(unittest.TestCase):
         self.assertIsNotNone(capabilities.discovered_at)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

@@ -2,12 +2,17 @@
 
 from __future__ import annotations
 
-import pytest
-from rdflib import Graph, Literal, URIRef
+from rdflib import Literal, URIRef
 from rdflib.namespace import RDF
 
 from kgcl.unrdf_engine.engine import UnrdfEngine
-from kgcl.unrdf_engine.hooks import HookExecutor, HookPhase, HookRegistry, KnowledgeHook, HookContext
+from kgcl.unrdf_engine.hooks import (
+    HookContext,
+    HookExecutor,
+    HookPhase,
+    HookRegistry,
+    KnowledgeHook,
+)
 from kgcl.unrdf_engine.ingestion import IngestionPipeline, IngestionResult
 from kgcl.unrdf_engine.validation import ShaclValidator
 
@@ -26,10 +31,7 @@ class TestIngestionResult:
     def test_to_dict(self) -> None:
         """Test converting to dictionary."""
         result = IngestionResult(
-            success=False,
-            triples_added=0,
-            transaction_id="txn-1",
-            error="Validation failed",
+            success=False, triples_added=0, transaction_id="txn-1", error="Validation failed"
         )
 
         result_dict = result.to_dict()
@@ -69,10 +71,7 @@ class TestIngestionPipeline:
         engine = UnrdfEngine()
         pipeline = IngestionPipeline(engine=engine, validate_on_ingest=False)
 
-        data = [
-            {"type": "Person", "name": "Alice"},
-            {"type": "Person", "name": "Bob"},
-        ]
+        data = [{"type": "Person", "name": "Alice"}, {"type": "Person", "name": "Bob"}]
 
         result = pipeline.ingest_json(data=data, agent="test_agent")
 
@@ -117,9 +116,7 @@ class TestIngestionPipeline:
 
         data = {"id": "item1", "type": "Item"}
 
-        result = pipeline.ingest_json(
-            data=data, agent="test_agent", base_uri="http://example.org/"
-        )
+        result = pipeline.ingest_json(data=data, agent="test_agent", base_uri="http://example.org/")
 
         assert result.success
 
@@ -141,9 +138,7 @@ class TestIngestionPipeline:
         """
         validator.load_shapes_from_string(shapes_ttl)
 
-        pipeline = IngestionPipeline(
-            engine=engine, validator=validator, validate_on_ingest=True
-        )
+        pipeline = IngestionPipeline(engine=engine, validator=validator, validate_on_ingest=True)
 
         data = {"type": "Person", "name": "Alice"}
 
@@ -171,9 +166,7 @@ class TestIngestionPipeline:
         """
         validator.load_shapes_from_string(shapes_ttl)
 
-        pipeline = IngestionPipeline(
-            engine=engine, validator=validator, validate_on_ingest=True
-        )
+        pipeline = IngestionPipeline(engine=engine, validator=validator, validate_on_ingest=True)
 
         # Data missing required name
         data = {"type": "Person"}
@@ -220,9 +213,7 @@ class TestIngestionPipeline:
 
         items = [{"type": "Item", "value": i} for i in range(250)]
 
-        results = pipeline.ingest_batch(
-            items=items, agent="test_agent", batch_size=100
-        )
+        results = pipeline.ingest_batch(items=items, agent="test_agent", batch_size=100)
 
         # Should have 3 batches (100, 100, 50)
         assert len(results) == 3
@@ -248,9 +239,7 @@ class TestIngestionPipeline:
 
         data = {"type": "Person", "name": "Alice"}
 
-        result = pipeline.ingest_json(
-            data=data, agent="test_agent", reason="Initial data load"
-        )
+        result = pipeline.ingest_json(data=data, agent="test_agent", reason="Initial data load")
 
         assert result.success
 
@@ -296,18 +285,8 @@ class TestIngestionPipeline:
 
         from kgcl.unrdf_engine.engine import UNRDF
 
-        engine.add_triple(
-            template_uri,
-            RDF.type,
-            UNRDF.FeatureTemplate,
-            txn,
-        )
-        engine.add_triple(
-            template_uri,
-            UNRDF.property,
-            UNRDF.testProperty,
-            txn,
-        )
+        engine.add_triple(template_uri, RDF.type, UNRDF.FeatureTemplate, txn)
+        engine.add_triple(template_uri, UNRDF.property, UNRDF.testProperty, txn)
         engine.commit(txn)
 
         # Add target entity
@@ -345,9 +324,7 @@ class TestIngestionPipeline:
         """
         validator.load_shapes_from_string(shapes_ttl)
 
-        pipeline = IngestionPipeline(
-            engine=engine, validator=validator, validate_on_ingest=True
-        )
+        pipeline = IngestionPipeline(engine=engine, validator=validator, validate_on_ingest=True)
 
         # Data with only 1 name (needs 2)
         data = {"type": "Person", "name": "Alice"}

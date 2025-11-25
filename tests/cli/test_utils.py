@@ -42,10 +42,7 @@ def test_export_json(tmp_path: Path):
 def test_export_csv(tmp_path: Path):
     """Test CSV export."""
     output_file = tmp_path / "test.csv"
-    data = [
-        {"name": "Alice", "age": 30},
-        {"name": "Bob", "age": 25},
-    ]
+    data = [{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]
 
     export_csv(data, output_file)
 
@@ -67,10 +64,7 @@ def test_export_csv_empty(tmp_path: Path):
 def test_export_tsv(tmp_path: Path):
     """Test TSV export."""
     output_file = tmp_path / "test.tsv"
-    data = [
-        {"name": "Alice", "age": 30},
-        {"name": "Bob", "age": 25},
-    ]
+    data = [{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]
 
     export_tsv(data, output_file)
 

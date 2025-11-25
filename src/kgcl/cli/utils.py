@@ -13,10 +13,10 @@ from typing import Any
 
 import click
 from rich.console import Console
-from rich.table import Table
 from rich.markdown import Markdown
 from rich.panel import Panel
 from rich.syntax import Syntax
+from rich.table import Table
 
 
 class OutputFormat(str, Enum):
@@ -120,9 +120,7 @@ def print_json(data: Any, indent: int = 2) -> None:
 
 
 def print_table(
-    data: Sequence[dict[str, Any]],
-    columns: list[str] | None = None,
-    title: str | None = None,
+    data: Sequence[dict[str, Any]], columns: list[str] | None = None, title: str | None = None
 ) -> None:
     """Print data as a formatted table.
 
@@ -280,10 +278,7 @@ def copy_to_clipboard(text: str) -> bool:
 
 
 def format_output(
-    data: Any,
-    format_type: OutputFormat,
-    output_file: Path | None = None,
-    clipboard: bool = False,
+    data: Any, format_type: OutputFormat, output_file: Path | None = None, clipboard: bool = False
 ) -> None:
     """Format and output data according to specified format.
 

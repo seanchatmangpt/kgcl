@@ -35,14 +35,14 @@ from typing import Any
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from rdflib import Literal, URIRef
+from sample_data import generate_sample_data
+from visualize import ActivityVisualizer
 
-from kgcl.ingestion.config import FeatureConfig, IngestionConfig
+from kgcl.ingestion.config import FeatureConfig
 from kgcl.ingestion.materializer import FeatureMaterializer
 from kgcl.ingestion.models import AppEvent, BrowserVisit, CalendarBlock, MaterializedFeature
 from kgcl.observability.tracing import configure_tracing, get_tracer, traced_operation
 from kgcl.unrdf_engine.engine import UnrdfEngine
-from sample_data import generate_sample_data
-from visualize import ActivityVisualizer, print_all_visualizations
 
 # Configure tracing
 tracer = get_tracer(__name__)
@@ -51,12 +51,7 @@ tracer = get_tracer(__name__)
 class PipelineRunner:
     """Execute the complete KGC OS Graph Agent pipeline."""
 
-    def __init__(
-        self,
-        output_dir: Path,
-        use_ollama: bool = False,
-        verbose: bool = False,
-    ) -> None:
+    def __init__(self, output_dir: Path, use_ollama: bool = False, verbose: bool = False) -> None:
         """Initialize pipeline runner.
 
         Parameters
@@ -142,9 +137,7 @@ class PipelineRunner:
                 "metrics": self.metrics,
             }
 
-    def _generate_data(
-        self, days: int
-    ) -> list[AppEvent | BrowserVisit | CalendarBlock]:
+    def _generate_data(self, days: int) -> list[AppEvent | BrowserVisit | CalendarBlock]:
         """Generate synthetic activity data."""
         start_time = time.time()
 
@@ -178,11 +171,7 @@ class PipelineRunner:
 
         engine = UnrdfEngine()
 
-        with traced_operation(
-            tracer,
-            "pipeline.ingest_unrdf",
-            {"event_count": len(events)},
-        ):
+        with traced_operation(tracer, "pipeline.ingest_unrdf", {"event_count": len(events)}):
             # Create transaction for batch ingestion
             txn = engine.transaction(agent="pipeline_demo", reason="Initial data load")
 
@@ -266,17 +255,13 @@ class PipelineRunner:
         materializer = FeatureMaterializer(config)
 
         with traced_operation(
-            tracer,
-            "pipeline.materialize_features",
-            {"event_count": len(events)},
+            tracer, "pipeline.materialize_features", {"event_count": len(events)}
         ):
             # Determine time window from events
             if events:
                 min_time = min(e.timestamp for e in events)
                 max_time = max(
-                    e.timestamp if not isinstance(e, CalendarBlock)
-                    else e.end_time
-                    for e in events
+                    e.timestamp if not isinstance(e, CalendarBlock) else e.end_time for e in events
                 )
                 window_start = min_time.replace(hour=0, minute=0, second=0, microsecond=0)
                 window_end = max_time.replace(hour=23, minute=59, second=59, microsecond=999999)
@@ -285,9 +270,7 @@ class PipelineRunner:
                 window_end = window_start + timedelta(days=1)
 
             features = materializer.materialize(
-                events=events,
-                window_start=window_start,
-                window_end=window_end,
+                events=events, window_start=window_start, window_end=window_end
             )
 
         elapsed = time.time() - start_time
@@ -305,19 +288,13 @@ class PipelineRunner:
 
         return features
 
-    def _generate_shacl_shapes(
-        self, features: list[MaterializedFeature]
-    ) -> list[str]:
+    def _generate_shacl_shapes(self, features: list[MaterializedFeature]) -> list[str]:
         """Generate SHACL shapes for features."""
         start_time = time.time()
 
         shapes = []
 
-        with traced_operation(
-            tracer,
-            "pipeline.generate_shacl",
-            {"feature_count": len(features)},
-        ):
+        with traced_operation(tracer, "pipeline.generate_shacl", {"feature_count": len(features)}):
             # Generate a SHACL shape for DailyBriefSignature
             daily_brief_shape = """
 @prefix sh: <http://www.w3.org/ns/shacl#> .
@@ -389,9 +366,7 @@ kgcl:WeeklyRetroShape
         signatures = {}
 
         with traced_operation(
-            tracer,
-            "pipeline.generate_dspy_signatures",
-            {"shape_count": len(shapes)},
+            tracer, "pipeline.generate_dspy_signatures", {"shape_count": len(shapes)}
         ):
             # Mock DSPy signature generation (in real implementation, use TTL2DSPy)
             daily_brief_sig = '''
@@ -445,9 +420,7 @@ class WeeklyRetroSignature(dspy.Signature):
         start_time = time.time()
 
         with traced_operation(
-            tracer,
-            "pipeline.generate_daily_brief",
-            {"feature_count": len(features)},
+            tracer, "pipeline.generate_daily_brief", {"feature_count": len(features)}
         ):
             # Mock daily brief generation (would use DSPy + Ollama in real implementation)
             app_events = [e for e in events if isinstance(e, AppEvent)]
@@ -455,15 +428,15 @@ class WeeklyRetroSignature(dspy.Signature):
             calendar_events = [e for e in events if isinstance(e, CalendarBlock)]
 
             # Calculate basic metrics
-            total_app_time = sum(
-                e.duration_seconds for e in app_events if e.duration_seconds
-            )
+            total_app_time = sum(e.duration_seconds for e in app_events if e.duration_seconds)
 
             app_durations = {}
             for event in app_events:
                 if event.duration_seconds:
                     app_name = event.app_display_name or event.app_name
-                    app_durations[app_name] = app_durations.get(app_name, 0) + event.duration_seconds
+                    app_durations[app_name] = (
+                        app_durations.get(app_name, 0) + event.duration_seconds
+                    )
 
             top_apps = sorted(app_durations.items(), key=lambda x: x[1], reverse=True)[:3]
 
@@ -481,11 +454,9 @@ class WeeklyRetroSignature(dspy.Signature):
                     switches += 1
                 prev_app = event.app_name
 
-            meeting_time = sum(
-                (e.end_time - e.timestamp).total_seconds() for e in calendar_events
-            )
+            meeting_time = sum((e.end_time - e.timestamp).total_seconds() for e in calendar_events)
 
-            brief = f"""# Daily Brief - {events[0].timestamp.date() if events else 'N/A'}
+            brief = f"""# Daily Brief - {events[0].timestamp.date() if events else "N/A"}
 
 ## Activity Summary
 
@@ -565,9 +536,7 @@ Based on today's patterns, consider:
         start_time = time.time()
 
         with traced_operation(
-            tracer,
-            "pipeline.generate_weekly_retro",
-            {"feature_count": len(features)},
+            tracer, "pipeline.generate_weekly_retro", {"feature_count": len(features)}
         ):
             # Mock weekly retro (would use DSPy + Ollama)
             retro = f"""# Weekly Retrospective
@@ -695,11 +664,11 @@ Primary tools used throughout the week demonstrate a developer-focused workflow 
 
         if self.verbose:
             print(f"  ✓ Exported results to {self.output_dir} in {elapsed:.3f}s")
-            print(f"    - daily_brief.md")
-            print(f"    - weekly_retro.md")
-            print(f"    - feature_values.json")
-            print(f"    - graph_stats.json")
-            print(f"    - knowledge_graph.ttl")
+            print("    - daily_brief.md")
+            print("    - weekly_retro.md")
+            print("    - feature_values.json")
+            print("    - graph_stats.json")
+            print("    - knowledge_graph.ttl")
 
     def _visualize_results(
         self,
@@ -753,10 +722,7 @@ def main() -> int:
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument(
-        "--days",
-        type=int,
-        default=1,
-        help="Number of days to generate (default: 1)",
+        "--days", type=int, default=1, help="Number of days to generate (default: 1)"
     )
     parser.add_argument(
         "--output-dir",
@@ -765,16 +731,9 @@ def main() -> int:
         help="Output directory (default: ./sample_outputs)",
     )
     parser.add_argument(
-        "--use-ollama",
-        action="store_true",
-        help="Try to use Ollama for real LLM generation",
+        "--use-ollama", action="store_true", help="Try to use Ollama for real LLM generation"
     )
-    parser.add_argument(
-        "--verbose",
-        "-v",
-        action="store_true",
-        help="Enable verbose output",
-    )
+    parser.add_argument("--verbose", "-v", action="store_true", help="Enable verbose output")
 
     args = parser.parse_args()
 
@@ -791,9 +750,7 @@ def main() -> int:
 
     # Run pipeline
     runner = PipelineRunner(
-        output_dir=args.output_dir,
-        use_ollama=args.use_ollama,
-        verbose=args.verbose,
+        output_dir=args.output_dir, use_ollama=args.use_ollama, verbose=args.verbose
     )
 
     try:
@@ -802,7 +759,7 @@ def main() -> int:
         elapsed = time.time() - start_time
 
         print(f"\n✅ Pipeline completed successfully in {elapsed:.2f}s")
-        print(f"\n📊 Results:")
+        print("\n📊 Results:")
         print(f"   - Events processed: {results['events_count']}")
         print(f"   - Features computed: {results['features_count']}")
         print(f"   - RDF triples: {results['graph_triples']}")
@@ -814,6 +771,7 @@ def main() -> int:
         print(f"\n❌ Pipeline failed: {e}", file=sys.stderr)
         if args.verbose:
             import traceback
+
             traceback.print_exc()
         return 1
 

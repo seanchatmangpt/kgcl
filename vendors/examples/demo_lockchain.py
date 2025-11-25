@@ -11,12 +11,7 @@ import tempfile
 from datetime import datetime
 from pathlib import Path
 
-from src.kgcl.hooks.receipts import (
-    ChainAnchor,
-    Receipt,
-    ReceiptStore,
-    MerkleTree,
-)
+from src.kgcl.hooks.receipts import MerkleTree, Receipt, ReceiptStore
 
 
 def demo_chain_anchoring():
@@ -39,15 +34,17 @@ def demo_chain_anchoring():
                 condition_result=True,
                 effect_result=True,
                 timestamp=datetime.utcnow(),
-                metadata={"step": i, "action": f"action-{i}"}
+                metadata={"step": i, "action": f"action-{i}"},
             )
 
             content_hash = store.store_receipt(receipt, prev_receipt)
             loaded = store.load_receipt(content_hash)
 
             if loaded and loaded.chain_anchor:
-                print(f"  Receipt {i}: height={loaded.chain_anchor.chain_height}, "
-                      f"hash={content_hash[:16]}...")
+                print(
+                    f"  Receipt {i}: height={loaded.chain_anchor.chain_height}, "
+                    f"hash={content_hash[:16]}..."
+                )
 
             prev_receipt = loaded
 
@@ -58,8 +55,7 @@ def demo_chain_anchoring():
         print("\nTraversing chain backwards:")
         chain = store.get_receipt_chain(content_hash)
         for i, receipt in enumerate(chain):
-            print(f"  [{i}] exec_id={receipt.execution_id}, "
-                  f"step={receipt.metadata['step']}")
+            print(f"  [{i}] exec_id={receipt.execution_id}, step={receipt.metadata['step']}")
 
 
 def demo_content_addressing():
@@ -74,7 +70,7 @@ def demo_content_addressing():
         condition_result=True,
         effect_result=True,
         timestamp=datetime(2024, 1, 1, 12, 0, 0),
-        metadata={"key": "value"}
+        metadata={"key": "value"},
     )
 
     receipt2 = Receipt(
@@ -83,7 +79,7 @@ def demo_content_addressing():
         condition_result=True,
         effect_result=True,
         timestamp=datetime(2024, 1, 1, 12, 0, 0),
-        metadata={"key": "value"}
+        metadata={"key": "value"},
     )
 
     hash1 = receipt1.get_content_hash()
@@ -150,7 +146,7 @@ def demo_full_workflow():
                 condition_result=True,
                 effect_result=True,
                 timestamp=datetime.utcnow(),
-                metadata={"step": i}
+                metadata={"step": i},
             )
 
             # Store with chain linking

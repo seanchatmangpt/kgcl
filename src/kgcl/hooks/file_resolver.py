@@ -12,16 +12,13 @@ Features:
 
 from __future__ import annotations
 
+import urllib.request
 from hashlib import sha256
 from pathlib import Path
-from typing import Optional
-import urllib.request
 
 
 class FileResolverError(Exception):
     """Raised when file resolution fails."""
-
-    pass
 
 
 class FileResolver:
@@ -37,14 +34,11 @@ class FileResolver:
     --------
     >>> resolver = FileResolver(allowed_paths=["/path/to/queries"])
     >>> content = resolver.load_file("file:///path/to/query.sparql")
-    >>> verified = resolver.load_file(
-    ...     "file:///path/to/query.sparql",
-    ...     expected_sha256="abc123..."
-    ... )
+    >>> verified = resolver.load_file("file:///path/to/query.sparql", expected_sha256="abc123...")
 
     """
 
-    def __init__(self, allowed_paths: Optional[list[str]] = None) -> None:
+    def __init__(self, allowed_paths: list[str] | None = None) -> None:
         """Initialize resolver.
 
         Parameters
@@ -55,7 +49,7 @@ class FileResolver:
         """
         self.allowed_paths = allowed_paths or []
 
-    def load_file(self, uri: str, expected_sha256: Optional[str] = None) -> str:
+    def load_file(self, uri: str, expected_sha256: str | None = None) -> str:
         """Load file and optionally verify integrity.
 
         Parameters
@@ -80,22 +74,18 @@ class FileResolver:
         >>> resolver = FileResolver()
         >>> content = resolver.load_file("file:///tmp/query.sparql")
         >>> # With integrity check
-        >>> content = resolver.load_file(
-        ...     "file:///tmp/query.sparql",
-        ...     expected_sha256="abc123..."
-        ... )
+        >>> content = resolver.load_file("file:///tmp/query.sparql", expected_sha256="abc123...")
 
         """
         if uri.startswith("file://"):
             path = uri[7:]  # Remove 'file://' prefix
             return self._load_local_file(path, expected_sha256)
-        elif uri.startswith("http://") or uri.startswith("https://"):
+        if uri.startswith("http://") or uri.startswith("https://"):
             return self._load_remote_file(uri, expected_sha256)
-        else:
-            msg = f"Unsupported URI scheme: {uri}"
-            raise FileResolverError(msg)
+        msg = f"Unsupported URI scheme: {uri}"
+        raise FileResolverError(msg)
 
-    def _load_local_file(self, path: str, expected_sha256: Optional[str]) -> str:
+    def _load_local_file(self, path: str, expected_sha256: str | None) -> str:
         """Load local file with integrity check.
 
         Parameters
@@ -122,8 +112,7 @@ class FileResolver:
         if self.allowed_paths:
             normalized = str(path_obj.resolve())
             allowed = any(
-                normalized.startswith(str(Path(ap).resolve()))
-                for ap in self.allowed_paths
+                normalized.startswith(str(Path(ap).resolve())) for ap in self.allowed_paths
             )
             if not allowed:
                 msg = f"Path not allowed: {path}"
@@ -149,7 +138,7 @@ class FileResolver:
 
         return content
 
-    def _load_remote_file(self, uri: str, expected_sha256: Optional[str]) -> str:
+    def _load_remote_file(self, uri: str, expected_sha256: str | None) -> str:
         """Load remote file with integrity check.
 
         Parameters

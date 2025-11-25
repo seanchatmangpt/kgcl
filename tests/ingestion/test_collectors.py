@@ -2,15 +2,13 @@
 
 import json
 import tempfile
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
-import pytest
-
-from kgcl.ingestion.collectors.base import BaseCollector, CollectorState
+from kgcl.ingestion.collectors.base import CollectorState
 from kgcl.ingestion.collectors.batch import BatchCollector
 from kgcl.ingestion.config import CollectorConfig
-from kgcl.ingestion.models import AppEvent, BrowserVisit
+from kgcl.ingestion.models import AppEvent
 
 
 class TestCollectorState:
@@ -39,16 +37,11 @@ class TestBatchCollector:
     def test_add_single_event(self):
         """Test adding single event."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = CollectorConfig(
-                output_directory=Path(tmpdir),
-                batch_size=10,
-            )
+            config = CollectorConfig(output_directory=Path(tmpdir), batch_size=10)
             collector = BatchCollector(config)
 
             event = AppEvent(
-                event_id="test_001",
-                timestamp=datetime.now(timezone.utc),
-                app_name="com.apple.Safari",
+                event_id="test_001", timestamp=datetime.now(UTC), app_name="com.apple.Safari"
             )
 
             collector.add_event(event)
@@ -59,16 +52,13 @@ class TestBatchCollector:
     def test_add_multiple_events(self):
         """Test adding multiple events."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = CollectorConfig(
-                output_directory=Path(tmpdir),
-                batch_size=10,
-            )
+            config = CollectorConfig(output_directory=Path(tmpdir), batch_size=10)
             collector = BatchCollector(config)
 
             events = [
                 AppEvent(
                     event_id=f"test_{i:03d}",
-                    timestamp=datetime.now(timezone.utc),
+                    timestamp=datetime.now(UTC),
                     app_name="com.apple.Safari",
                 )
                 for i in range(5)
@@ -82,10 +72,7 @@ class TestBatchCollector:
     def test_auto_flush_on_batch_size(self):
         """Test automatic flush when batch size reached."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = CollectorConfig(
-                output_directory=Path(tmpdir),
-                batch_size=3,
-            )
+            config = CollectorConfig(output_directory=Path(tmpdir), batch_size=3)
             collector = BatchCollector(config)
             collector.start()
 
@@ -93,7 +80,7 @@ class TestBatchCollector:
             for i in range(3):
                 event = AppEvent(
                     event_id=f"test_{i:03d}",
-                    timestamp=datetime.now(timezone.utc),
+                    timestamp=datetime.now(UTC),
                     app_name="com.apple.Safari",
                 )
                 collector.add_event(event)
@@ -104,10 +91,7 @@ class TestBatchCollector:
     def test_manual_flush(self):
         """Test manual flush."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = CollectorConfig(
-                output_directory=Path(tmpdir),
-                batch_size=100,
-            )
+            config = CollectorConfig(output_directory=Path(tmpdir), batch_size=100)
             collector = BatchCollector(config)
             collector.start()
 
@@ -115,7 +99,7 @@ class TestBatchCollector:
             events = [
                 AppEvent(
                     event_id=f"test_{i:03d}",
-                    timestamp=datetime.now(timezone.utc),
+                    timestamp=datetime.now(UTC),
                     app_name="com.apple.Safari",
                 )
                 for i in range(5)
@@ -131,17 +115,12 @@ class TestBatchCollector:
     def test_flush_writes_jsonl(self):
         """Test that flush writes JSONL file."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = CollectorConfig(
-                output_directory=Path(tmpdir),
-                batch_size=100,
-            )
+            config = CollectorConfig(output_directory=Path(tmpdir), batch_size=100)
             collector = BatchCollector(config)
             collector.start()
 
             event = AppEvent(
-                event_id="test_001",
-                timestamp=datetime.now(timezone.utc),
-                app_name="com.apple.Safari",
+                event_id="test_001", timestamp=datetime.now(UTC), app_name="com.apple.Safari"
             )
             collector.add_event(event)
             collector.flush()
@@ -158,10 +137,7 @@ class TestBatchCollector:
     def test_recovery_from_corrupted_file(self):
         """Test recovery from corrupted JSONL file."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = CollectorConfig(
-                output_directory=Path(tmpdir),
-                enable_recovery=True,
-            )
+            config = CollectorConfig(output_directory=Path(tmpdir), enable_recovery=True)
             collector = BatchCollector(config)
 
             # Create corrupted JSONL file
@@ -219,9 +195,7 @@ class TestBatchCollector:
 
             # Add event
             event = AppEvent(
-                event_id="test_001",
-                timestamp=datetime.now(timezone.utc),
-                app_name="com.apple.Safari",
+                event_id="test_001", timestamp=datetime.now(UTC), app_name="com.apple.Safari"
             )
             collector.add_event(event)
 
@@ -258,7 +232,7 @@ class TestBatchCollector:
             collector.register_error_handler(error_handler)
 
             # Trigger error with invalid source function
-            collector.source_fn = lambda: 1 / 0  # noqa: RUF015
+            collector.source_fn = lambda: 1 / 0
 
             result = collector.collect()
 

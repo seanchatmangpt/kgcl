@@ -12,7 +12,7 @@ from opentelemetry import trace
 from rdflib import Graph, Literal, Namespace, URIRef
 from rdflib.namespace import RDF, XSD
 
-from kgcl.unrdf_engine.engine import Transaction, UnrdfEngine
+from kgcl.unrdf_engine.engine import UnrdfEngine
 from kgcl.unrdf_engine.hooks import HookContext, HookExecutor, HookPhase
 from kgcl.unrdf_engine.validation import ShaclValidator
 
@@ -86,8 +86,7 @@ class IngestionPipeline:
     >>> pipeline = IngestionPipeline(engine, validator, hook_executor)
     >>>
     >>> result = pipeline.ingest_json(
-    ...     data={"type": "Event", "name": "user_login", "userId": "123"},
-    ...     agent="ingestion_service"
+    ...     data={"type": "Event", "name": "user_login", "userId": "123"}, agent="ingestion_service"
     ... )
 
     """
@@ -226,9 +225,7 @@ class IngestionPipeline:
                             triples_added=0,
                             transaction_id=txn.transaction_id,
                             validation_result=validation_result,
-                            error=context.metadata.get(
-                                "rollback_reason", "Validation failed"
-                            ),
+                            error=context.metadata.get("rollback_reason", "Validation failed"),
                         )
 
                 if not validation.conforms:
@@ -270,15 +267,10 @@ class IngestionPipeline:
 
             span.record_exception(e)
             return IngestionResult(
-                success=False,
-                triples_added=0,
-                transaction_id=txn.transaction_id,
-                error=str(e),
+                success=False, triples_added=0, transaction_id=txn.transaction_id, error=str(e)
             )
 
-    def _json_to_rdf(
-        self, data: dict[str, Any], graph: Graph, base_uri: str
-    ) -> URIRef:
+    def _json_to_rdf(self, data: dict[str, Any], graph: Graph, base_uri: str) -> URIRef:
         """Convert JSON object to RDF triples.
 
         Parameters
@@ -303,9 +295,7 @@ class IngestionPipeline:
         # Add type if specified
         if "type" in data:
             type_uri = (
-                URIRef(data["type"])
-                if data["type"].startswith("http")
-                else UNRDF[data["type"]]
+                URIRef(data["type"]) if data["type"].startswith("http") else UNRDF[data["type"]]
             )
             graph.add((subject, RDF.type, type_uri))
 
@@ -418,10 +408,7 @@ class IngestionPipeline:
 
     @tracer.start_as_current_span("ingestion.materialize_features")
     def materialize_features(
-        self,
-        template_uri: URIRef,
-        target_pattern: str,
-        agent: str,
+        self, template_uri: URIRef, target_pattern: str, agent: str
     ) -> IngestionResult:
         """Materialize features from a template.
 
@@ -487,9 +474,7 @@ class IngestionPipeline:
 
                 # This is a simplified version - real implementation would
                 # execute the transform logic
-                self.engine.add_triple(
-                    target, property_uri, Literal("materialized"), txn
-                )
+                self.engine.add_triple(target, property_uri, Literal("materialized"), txn)
 
         self.engine.commit(txn)
 

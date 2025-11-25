@@ -1,10 +1,8 @@
 """Tests for adaptive_monitor module."""
 
 import pytest
-from kgcl.hooks.adaptive_monitor import (
-    AdaptiveMonitor,
-    MetricThreshold
-)
+
+from kgcl.hooks.adaptive_monitor import AdaptiveMonitor, MetricThreshold
 
 
 class TestMetricThreshold:
@@ -17,7 +15,7 @@ class TestMetricThreshold:
             baseline=100.0,
             variance=10.0,
             current_threshold=120.0,
-            sample_count=50
+            sample_count=50,
         )
         assert threshold.metric_name == "response_time"
         assert threshold.baseline == 100.0
@@ -40,11 +38,7 @@ class TestAdaptiveMonitor:
 
     def test_custom_initialization(self):
         """Test custom initialization."""
-        monitor = AdaptiveMonitor(
-            window_size=50,
-            stddev_multiplier=3.0,
-            min_samples=5
-        )
+        monitor = AdaptiveMonitor(window_size=50, stddev_multiplier=3.0, min_samples=5)
         assert monitor.window_size == 50
         assert monitor.stddev_multiplier == 3.0
         assert monitor.min_samples == 5
@@ -180,12 +174,12 @@ class TestAdaptiveMonitor:
 
         stats = monitor.get_metric_stats("test")
         assert stats is not None
-        assert stats['name'] == "test"
-        assert stats['sample_count'] == 5
-        assert abs(stats['baseline'] - 100.0) < 0.1
-        assert stats['current_value'] == 110.0
-        assert stats['min'] == 90.0
-        assert stats['max'] == 110.0
+        assert stats["name"] == "test"
+        assert stats["sample_count"] == 5
+        assert abs(stats["baseline"] - 100.0) < 0.1
+        assert stats["current_value"] == 110.0
+        assert stats["min"] == 90.0
+        assert stats["max"] == 110.0
 
     def test_get_metric_stats_nonexistent(self):
         """Test getting stats for nonexistent metric."""

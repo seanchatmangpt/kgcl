@@ -3,9 +3,10 @@
 Provides generators and property tests for example-driven testing.
 """
 
-from typing import TypeVar, Generic, Callable, List, Any, Optional, Union
-from dataclasses import dataclass
 import random
+from collections.abc import Callable
+from dataclasses import dataclass
+from typing import Any, Generic, TypeVar
 
 T = TypeVar("T")
 P = TypeVar("P")
@@ -29,7 +30,7 @@ class PropertyGenerator(Generic[T]):
         """Generate a single value"""
         return self._generator_fn()
 
-    def take(self, n: int) -> List[T]:
+    def take(self, n: int) -> list[T]:
         """Generate n values"""
         return [self.generate() for _ in range(n)]
 
@@ -44,11 +45,11 @@ class PropertyGenerator(Generic[T]):
         return PropertyGenerator(lambda: random.uniform(min, max))
 
     @staticmethod
-    def strings(length: int = 10, chars: str = "abcdefghijklmnopqrstuvwxyz") -> "PropertyGenerator[str]":
+    def strings(
+        length: int = 10, chars: str = "abcdefghijklmnopqrstuvwxyz"
+    ) -> "PropertyGenerator[str]":
         """Generate random strings"""
-        return PropertyGenerator(
-            lambda: "".join(random.choice(chars) for _ in range(length))
-        )
+        return PropertyGenerator(lambda: "".join(random.choice(chars) for _ in range(length)))
 
     @staticmethod
     def booleans() -> "PropertyGenerator[bool]":
@@ -56,20 +57,20 @@ class PropertyGenerator(Generic[T]):
         return PropertyGenerator(lambda: random.choice([True, False]))
 
     @staticmethod
-    def one_of(values: List[T]) -> "PropertyGenerator[T]":
+    def one_of(values: list[T]) -> "PropertyGenerator[T]":
         """Generate from a list of values"""
         return PropertyGenerator(lambda: random.choice(values))
 
     @staticmethod
     def lists(
-        element_generator: "PropertyGenerator[T]",
-        min_length: int = 0,
-        max_length: int = 10
-    ) -> "PropertyGenerator[List[T]]":
+        element_generator: "PropertyGenerator[T]", min_length: int = 0, max_length: int = 10
+    ) -> "PropertyGenerator[list[T]]":
         """Generate lists of values"""
-        def gen() -> List[T]:
+
+        def gen() -> list[T]:
             length = random.randint(min_length, max_length)
             return element_generator.take(length)
+
         return PropertyGenerator(gen)
 
 
@@ -88,11 +89,12 @@ class PropertyTest:
             ]
         )
     """
+
     name: str
     predicate: Callable[..., bool]
-    examples: List[tuple] = None
-    generator: Optional[PropertyGenerator[Any]] = None
-    failed_examples: List[tuple] = None
+    examples: list[tuple] = None
+    generator: PropertyGenerator[Any] | None = None
+    failed_examples: list[tuple] = None
 
     def __post_init__(self) -> None:
         if self.examples is None:
@@ -107,7 +109,8 @@ class PropertyTest:
     def run(self) -> bool:
         """Run property test against all examples
 
-        Returns:
+        Returns
+        -------
             True if all examples pass, False if any fail
         """
         self.failed_examples = []
@@ -116,7 +119,7 @@ class PropertyTest:
             try:
                 if not self.predicate(*example):
                     self.failed_examples.append(example)
-            except Exception as e:
+            except Exception:
                 self.failed_examples.append(example)
 
         return len(self.failed_examples) == 0
@@ -127,10 +130,12 @@ class PropertyTest:
         Args:
             count: Number of examples to generate
 
-        Returns:
+        Returns
+        -------
             True if all examples pass, False if any fail
 
-        Raises:
+        Raises
+        ------
             ValueError: If no generator configured
         """
         if self.generator is None:
@@ -144,10 +149,9 @@ class PropertyTest:
                 if isinstance(example, tuple):
                     if not self.predicate(*example):
                         self.failed_examples.append(example)
-                else:
-                    if not self.predicate(example):
-                        self.failed_examples.append((example,))
-            except Exception as e:
+                elif not self.predicate(example):
+                    self.failed_examples.append((example,))
+            except Exception:
                 if isinstance(example, tuple):
                     self.failed_examples.append(example)
                 else:
@@ -181,8 +185,8 @@ class Property:
 
     def __init__(self) -> None:
         self._name = "property_test"
-        self._predicate: Optional[Callable[..., bool]] = None
-        self._examples: List[tuple] = []
+        self._predicate: Callable[..., bool] | None = None
+        self._examples: list[tuple] = []
 
     def name(self, name: str) -> "Property":
         """Set property name"""
@@ -199,7 +203,7 @@ class Property:
         self._examples.append(args)
         return self
 
-    def examples(self, examples: List[tuple]) -> "Property":
+    def examples(self, examples: list[tuple]) -> "Property":
         """Set all examples"""
         self._examples = examples
         return self
@@ -209,7 +213,5 @@ class Property:
         if self._predicate is None:
             raise ValueError("Predicate not set")
         return PropertyTest(
-            name=self._name,
-            predicate=self._predicate,
-            examples=self._examples.copy()
+            name=self._name, predicate=self._predicate, examples=self._examples.copy()
         )

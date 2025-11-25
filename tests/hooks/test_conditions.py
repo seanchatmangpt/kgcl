@@ -5,25 +5,26 @@ These tests define condition evaluation behaviors without mocking domain objects
 Real condition evaluation with actual SPARQL/SHACL where possible.
 """
 
-import pytest
-from datetime import datetime, timedelta
-from typing import Any, Dict
 import asyncio
+from datetime import datetime, timedelta
+from typing import Any
+
+import pytest
 
 from kgcl.hooks.conditions import (
-    Condition,
-    ConditionResult,
-    SparqlAskCondition,
-    SparqlSelectCondition,
-    ShaclCondition,
-    DeltaCondition,
-    DeltaType,
-    ThresholdCondition,
-    ThresholdOperator,
-    WindowCondition,
-    WindowAggregation,
     CompositeCondition,
     CompositeOperator,
+    Condition,
+    ConditionResult,
+    DeltaCondition,
+    DeltaType,
+    ShaclCondition,
+    SparqlAskCondition,
+    SparqlSelectCondition,
+    ThresholdCondition,
+    ThresholdOperator,
+    WindowAggregation,
+    WindowCondition,
 )
 
 
@@ -40,7 +41,7 @@ class TestConditionBase:
         """Conditions return ConditionResult with (triggered: bool, metadata: dict)."""
 
         class SimpleCondition(Condition):
-            async def evaluate(self, context: Dict[str, Any]) -> ConditionResult:
+            async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
                 return ConditionResult(triggered=True, metadata={"test": "value"})
 
         condition = SimpleCondition()
@@ -148,7 +149,7 @@ class TestShaclCondition:
                 @prefix ex: <http://example.org/> .
                 ex:person1 a ex:Person ;
                     ex:name "Alice" .
-            """,
+            """
         }
 
         result = await condition.evaluate(valid_context)
@@ -179,7 +180,7 @@ class TestShaclCondition:
             "data_graph": """
                 @prefix ex: <http://example.org/> .
                 ex:person1 a ex:Person .
-            """,
+            """
         }
 
         result = await condition.evaluate(invalid_context)
@@ -195,14 +196,10 @@ class TestDeltaCondition:
     async def test_delta_condition_detects_any_changes(self):
         """DeltaCondition detects graph changes (any/increase/decrease)."""
         condition = DeltaCondition(
-            delta_type=DeltaType.ANY,
-            query="SELECT (COUNT(*) as ?count) WHERE { ?s ?p ?o }",
+            delta_type=DeltaType.ANY, query="SELECT (COUNT(*) as ?count) WHERE { ?s ?p ?o }"
         )
 
-        context = {
-            "previous_count": 100,
-            "current_count": 110,
-        }
+        context = {"previous_count": 100, "current_count": 110}
 
         result = await condition.evaluate(context)
 
@@ -213,14 +210,10 @@ class TestDeltaCondition:
     async def test_delta_condition_detects_increase(self):
         """DeltaCondition detects increase in values."""
         condition = DeltaCondition(
-            delta_type=DeltaType.INCREASE,
-            query="SELECT (COUNT(*) as ?count) WHERE { ?s ?p ?o }",
+            delta_type=DeltaType.INCREASE, query="SELECT (COUNT(*) as ?count) WHERE { ?s ?p ?o }"
         )
 
-        context = {
-            "previous_count": 100,
-            "current_count": 110,
-        }
+        context = {"previous_count": 100, "current_count": 110}
 
         result = await condition.evaluate(context)
 
@@ -231,14 +224,10 @@ class TestDeltaCondition:
     async def test_delta_condition_detects_decrease(self):
         """DeltaCondition detects decrease in values."""
         condition = DeltaCondition(
-            delta_type=DeltaType.DECREASE,
-            query="SELECT (COUNT(*) as ?count) WHERE { ?s ?p ?o }",
+            delta_type=DeltaType.DECREASE, query="SELECT (COUNT(*) as ?count) WHERE { ?s ?p ?o }"
         )
 
-        context = {
-            "previous_count": 110,
-            "current_count": 100,
-        }
+        context = {"previous_count": 110, "current_count": 100}
 
         result = await condition.evaluate(context)
 
@@ -253,9 +242,7 @@ class TestThresholdCondition:
     async def test_threshold_condition_greater_than(self):
         """ThresholdCondition (numeric var op value: e.g., 'count > 5')."""
         condition = ThresholdCondition(
-            variable="count",
-            operator=ThresholdOperator.GREATER_THAN,
-            value=5,
+            variable="count", operator=ThresholdOperator.GREATER_THAN, value=5
         )
 
         context = {"count": 10}
@@ -268,9 +255,7 @@ class TestThresholdCondition:
     async def test_threshold_condition_less_than(self):
         """ThresholdCondition evaluates less than."""
         condition = ThresholdCondition(
-            variable="count",
-            operator=ThresholdOperator.LESS_THAN,
-            value=100,
+            variable="count", operator=ThresholdOperator.LESS_THAN, value=100
         )
 
         context = {"count": 50}
@@ -282,9 +267,7 @@ class TestThresholdCondition:
     async def test_threshold_condition_equals(self):
         """ThresholdCondition evaluates equality."""
         condition = ThresholdCondition(
-            variable="status_code",
-            operator=ThresholdOperator.EQUALS,
-            value=200,
+            variable="status_code", operator=ThresholdOperator.EQUALS, value=200
         )
 
         context = {"status_code": 200}
@@ -296,9 +279,7 @@ class TestThresholdCondition:
     async def test_threshold_condition_not_equals(self):
         """ThresholdCondition evaluates inequality."""
         condition = ThresholdCondition(
-            variable="status_code",
-            operator=ThresholdOperator.NOT_EQUALS,
-            value=500,
+            variable="status_code", operator=ThresholdOperator.NOT_EQUALS, value=500
         )
 
         context = {"status_code": 200}
@@ -403,7 +384,7 @@ class TestConditionTimeout:
         """Conditions support timeout."""
 
         class SlowCondition(Condition):
-            async def evaluate(self, context: Dict[str, Any]) -> ConditionResult:
+            async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
                 await asyncio.sleep(2.0)
                 return ConditionResult(triggered=True, metadata={})
 
@@ -426,7 +407,7 @@ class TestConditionCaching:
                 super().__init__(cache_ttl=2.0)
                 self.call_count = 0
 
-            async def evaluate(self, context: Dict[str, Any]) -> ConditionResult:
+            async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
                 self.call_count += 1
                 return ConditionResult(triggered=True, metadata={"count": self.call_count})
 
@@ -456,25 +437,23 @@ class TestCompositeConditions:
         """Complex conditions: AND composition."""
 
         class TrueCondition(Condition):
-            async def evaluate(self, context: Dict[str, Any]) -> ConditionResult:
+            async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
                 return ConditionResult(triggered=True, metadata={})
 
         class FalseCondition(Condition):
-            async def evaluate(self, context: Dict[str, Any]) -> ConditionResult:
+            async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
                 return ConditionResult(triggered=False, metadata={})
 
         # True AND True = True
         and_true = CompositeCondition(
-            operator=CompositeOperator.AND,
-            conditions=[TrueCondition(), TrueCondition()],
+            operator=CompositeOperator.AND, conditions=[TrueCondition(), TrueCondition()]
         )
         result = await and_true.evaluate({})
         assert result.triggered is True
 
         # True AND False = False
         and_false = CompositeCondition(
-            operator=CompositeOperator.AND,
-            conditions=[TrueCondition(), FalseCondition()],
+            operator=CompositeOperator.AND, conditions=[TrueCondition(), FalseCondition()]
         )
         result = await and_false.evaluate({})
         assert result.triggered is False
@@ -484,25 +463,23 @@ class TestCompositeConditions:
         """Complex conditions: OR composition."""
 
         class TrueCondition(Condition):
-            async def evaluate(self, context: Dict[str, Any]) -> ConditionResult:
+            async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
                 return ConditionResult(triggered=True, metadata={})
 
         class FalseCondition(Condition):
-            async def evaluate(self, context: Dict[str, Any]) -> ConditionResult:
+            async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
                 return ConditionResult(triggered=False, metadata={})
 
         # False OR False = False
         or_false = CompositeCondition(
-            operator=CompositeOperator.OR,
-            conditions=[FalseCondition(), FalseCondition()],
+            operator=CompositeOperator.OR, conditions=[FalseCondition(), FalseCondition()]
         )
         result = await or_false.evaluate({})
         assert result.triggered is False
 
         # True OR False = True
         or_true = CompositeCondition(
-            operator=CompositeOperator.OR,
-            conditions=[TrueCondition(), FalseCondition()],
+            operator=CompositeOperator.OR, conditions=[TrueCondition(), FalseCondition()]
         )
         result = await or_true.evaluate({})
         assert result.triggered is True
@@ -512,25 +489,21 @@ class TestCompositeConditions:
         """Complex conditions: NOT composition."""
 
         class TrueCondition(Condition):
-            async def evaluate(self, context: Dict[str, Any]) -> ConditionResult:
+            async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
                 return ConditionResult(triggered=True, metadata={})
 
         class FalseCondition(Condition):
-            async def evaluate(self, context: Dict[str, Any]) -> ConditionResult:
+            async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
                 return ConditionResult(triggered=False, metadata={})
 
         # NOT True = False
-        not_true = CompositeCondition(
-            operator=CompositeOperator.NOT,
-            conditions=[TrueCondition()],
-        )
+        not_true = CompositeCondition(operator=CompositeOperator.NOT, conditions=[TrueCondition()])
         result = await not_true.evaluate({})
         assert result.triggered is False
 
         # NOT False = True
         not_false = CompositeCondition(
-            operator=CompositeOperator.NOT,
-            conditions=[FalseCondition()],
+            operator=CompositeOperator.NOT, conditions=[FalseCondition()]
         )
         result = await not_false.evaluate({})
         assert result.triggered is True
@@ -540,11 +513,11 @@ class TestCompositeConditions:
         """Composite conditions can be nested: (A AND B) OR (C AND D)."""
 
         class TrueCondition(Condition):
-            async def evaluate(self, context: Dict[str, Any]) -> ConditionResult:
+            async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
                 return ConditionResult(triggered=True, metadata={})
 
         class FalseCondition(Condition):
-            async def evaluate(self, context: Dict[str, Any]) -> ConditionResult:
+            async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
                 return ConditionResult(triggered=False, metadata={})
 
         # (False AND True) OR (True AND True) = False OR True = True
@@ -552,12 +525,10 @@ class TestCompositeConditions:
             operator=CompositeOperator.OR,
             conditions=[
                 CompositeCondition(
-                    operator=CompositeOperator.AND,
-                    conditions=[FalseCondition(), TrueCondition()],
+                    operator=CompositeOperator.AND, conditions=[FalseCondition(), TrueCondition()]
                 ),
                 CompositeCondition(
-                    operator=CompositeOperator.AND,
-                    conditions=[TrueCondition(), TrueCondition()],
+                    operator=CompositeOperator.AND, conditions=[TrueCondition(), TrueCondition()]
                 ),
             ],
         )

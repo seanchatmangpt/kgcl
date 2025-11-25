@@ -8,27 +8,26 @@ This module provides a daemonizable agent that:
 - Handles graceful shutdown
 """
 
-from typing import Dict, List, Optional, Any
 import logging
 import signal
 import sys
 import time
-from datetime import datetime
 from pathlib import Path
+from typing import Any
 
 from opentelemetry import trace
-from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import BatchSpanProcessor
 from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
 from opentelemetry.sdk.resources import Resource
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
 
-from .plugins import load_builtin_plugins, get_registry
 from .collectors import (
     BaseCollector,
-    create_frontmost_app_collector,
     create_browser_history_collector,
-    create_calendar_collector
+    create_calendar_collector,
+    create_frontmost_app_collector,
 )
+from .plugins import get_registry, load_builtin_plugins
 
 logger = logging.getLogger(__name__)
 
@@ -40,7 +39,7 @@ class PyObjCAgent:
     Manages collectors, plugins, and provides daemon functionality.
     """
 
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
+    def __init__(self, config: dict[str, Any] | None = None):
         """
         Initialize the agent.
 
@@ -48,9 +47,9 @@ class PyObjCAgent:
             config: Agent configuration dictionary
         """
         self.config = config or {}
-        self._collectors: Dict[str, BaseCollector] = {}
+        self._collectors: dict[str, BaseCollector] = {}
         self._running = False
-        self._tracer: Optional[trace.Tracer] = None
+        self._tracer: trace.Tracer | None = None
 
         # Setup OpenTelemetry if enabled
         if self.config.get("enable_otel", True):
@@ -62,11 +61,13 @@ class PyObjCAgent:
         """Setup OpenTelemetry instrumentation."""
         try:
             # Create resource
-            resource = Resource.create({
-                "service.name": "pyobjc-agent",
-                "service.version": "1.0.0",
-                "deployment.environment": self.config.get("environment", "development")
-            })
+            resource = Resource.create(
+                {
+                    "service.name": "pyobjc-agent",
+                    "service.version": "1.0.0",
+                    "deployment.environment": self.config.get("environment", "development"),
+                }
+            )
 
             # Create tracer provider
             provider = TracerProvider(resource=resource)
@@ -89,14 +90,15 @@ class PyObjCAgent:
             logger.info("Continuing without telemetry")
             self._tracer = None
 
-    def _get_span(self, name: str) -> Optional[trace.Span]:
+    def _get_span(self, name: str) -> trace.Span | None:
         """
         Get a new span for tracing.
 
         Args:
             name: Span name
 
-        Returns:
+        Returns
+        -------
             Span instance or None if telemetry disabled
         """
         if self._tracer:
@@ -129,7 +131,7 @@ class PyObjCAgent:
             logger.info("Creating frontmost app collector")
             collector = create_frontmost_app_collector(
                 interval_seconds=collectors_config.get("frontmost_app", {}).get("interval", 1.0),
-                output_path=f"{data_dir}/frontmost_app.jsonl"
+                output_path=f"{data_dir}/frontmost_app.jsonl",
             )
             self._collectors["frontmost_app"] = collector
 
@@ -137,8 +139,10 @@ class PyObjCAgent:
         if collectors_config.get("browser_history", {}).get("enabled", True):
             logger.info("Creating browser history collector")
             collector = create_browser_history_collector(
-                interval_seconds=collectors_config.get("browser_history", {}).get("interval", 300.0),
-                output_path=f"{data_dir}/browser_history.jsonl"
+                interval_seconds=collectors_config.get("browser_history", {}).get(
+                    "interval", 300.0
+                ),
+                output_path=f"{data_dir}/browser_history.jsonl",
             )
             self._collectors["browser_history"] = collector
 
@@ -147,7 +151,7 @@ class PyObjCAgent:
             logger.info("Creating calendar collector")
             collector = create_calendar_collector(
                 interval_seconds=collectors_config.get("calendar", {}).get("interval", 300.0),
-                output_path=f"{data_dir}/calendar_events.jsonl"
+                output_path=f"{data_dir}/calendar_events.jsonl",
             )
             self._collectors["calendar"] = collector
 
@@ -234,11 +238,12 @@ class PyObjCAgent:
                     f"status={stats.get('status', 'unknown')}"
                 )
 
-    def get_status(self) -> Dict[str, Any]:
+    def get_status(self) -> dict[str, Any]:
         """
         Get agent status.
 
-        Returns:
+        Returns
+        -------
             Status dictionary
         """
         collector_stats = {}
@@ -255,18 +260,19 @@ class PyObjCAgent:
             "collectors": collector_stats,
             "plugins_loaded": plugin_ids,
             "telemetry_enabled": self._tracer is not None,
-            "config": self.config
+            "config": self.config,
         }
 
 
-def create_default_agent(data_dir: Optional[str] = None) -> PyObjCAgent:
+def create_default_agent(data_dir: str | None = None) -> PyObjCAgent:
     """
     Create agent with default configuration.
 
     Args:
         data_dir: Directory for output data
 
-    Returns:
+    Returns
+    -------
         Configured PyObjCAgent instance
     """
     config = {
@@ -277,17 +283,17 @@ def create_default_agent(data_dir: Optional[str] = None) -> PyObjCAgent:
         "collectors": {
             "frontmost_app": {
                 "enabled": True,
-                "interval": 1.0  # 1 second
+                "interval": 1.0,  # 1 second
             },
             "browser_history": {
                 "enabled": True,
-                "interval": 300.0  # 5 minutes
+                "interval": 300.0,  # 5 minutes
             },
             "calendar": {
                 "enabled": True,
-                "interval": 300.0  # 5 minutes
-            }
-        }
+                "interval": 300.0,  # 5 minutes
+            },
+        },
     }
 
     return PyObjCAgent(config)
@@ -298,15 +304,15 @@ def main():
     # Setup logging
     logging.basicConfig(
         level=logging.INFO,
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
         handlers=[
             logging.StreamHandler(sys.stdout),
-            logging.FileHandler('/Users/sac/dev/kgcl/logs/pyobjc_agent.log')
-        ]
+            logging.FileHandler("/Users/sac/dev/kgcl/logs/pyobjc_agent.log"),
+        ],
     )
 
     # Create log directory
-    Path('/Users/sac/dev/kgcl/logs').mkdir(parents=True, exist_ok=True)
+    Path("/Users/sac/dev/kgcl/logs").mkdir(parents=True, exist_ok=True)
 
     # Create and run agent
     agent = create_default_agent()

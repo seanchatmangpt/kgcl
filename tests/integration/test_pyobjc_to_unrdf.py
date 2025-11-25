@@ -8,11 +8,8 @@ import tempfile
 from datetime import datetime, timedelta
 from pathlib import Path
 
-import pytest
-from rdflib import Literal, Namespace, URIRef
-from rdflib.namespace import RDF
+from rdflib import Namespace, URIRef
 
-from kgcl.ingestion.models import AppEvent, BrowserVisit, CalendarBlock
 from kgcl.unrdf_engine.engine import UnrdfEngine
 from kgcl.unrdf_engine.hooks import (
     HookContext,
@@ -96,9 +93,7 @@ class TestPyObjCToUNRDF:
             app_event = events[0]
 
             result = pipeline.ingest_json(
-                data=app_event,
-                agent="pyobjc_agent",
-                reason="App event from PyObjC AppKit plugin",
+                data=app_event, agent="pyobjc_agent", reason="App event from PyObjC AppKit plugin"
             )
 
             assert result.success is True
@@ -158,15 +153,11 @@ class TestPyObjCToUNRDF:
             events = create_pyobjc_format_events()
             browser_event = events[1]  # Browser visit event
 
-            result = pipeline.ingest_json(
-                data=browser_event, agent="pyobjc_agent"
-            )
+            result = pipeline.ingest_json(data=browser_event, agent="pyobjc_agent")
 
             assert result.success is True
 
-            event_uri = URIRef(
-                f"http://unrdf.org/data/{browser_event['event_id']}"
-            )
+            event_uri = URIRef(f"http://unrdf.org/data/{browser_event['event_id']}")
 
             # Check essential properties exist
             props_query = f"""
@@ -194,9 +185,7 @@ class TestPyObjCToUNRDF:
             event = create_pyobjc_format_events()[0]
 
             result = pipeline.ingest_json(
-                data=event,
-                agent="pyobjc_appkit_plugin",
-                reason="Automatic app monitoring",
+                data=event, agent="pyobjc_appkit_plugin", reason="Automatic app monitoring"
             )
 
             assert result.success is True
@@ -226,19 +215,14 @@ class TestPyObjCToUNRDF:
 
             class TestPreIngestionHook(KnowledgeHook):
                 def __init__(self):
-                    super().__init__(
-                        name="test_pre_ingestion",
-                        phases=[HookPhase.PRE_INGESTION],
-                    )
+                    super().__init__(name="test_pre_ingestion", phases=[HookPhase.PRE_INGESTION])
 
                 def execute(self, context: HookContext):
                     pre_ingestion_called.append(context.transaction_id)
 
             class TestPostCommitHook(KnowledgeHook):
                 def __init__(self):
-                    super().__init__(
-                        name="test_post_commit", phases=[HookPhase.POST_COMMIT]
-                    )
+                    super().__init__(name="test_post_commit", phases=[HookPhase.POST_COMMIT])
 
                 def execute(self, context: HookContext):
                     post_commit_called.append(context.transaction_id)
@@ -315,9 +299,7 @@ class TestPyObjCToUNRDF:
             class HighPriorityHook(KnowledgeHook):
                 def __init__(self):
                     super().__init__(
-                        name="high_priority",
-                        phases=[HookPhase.POST_COMMIT],
-                        priority=100,
+                        name="high_priority", phases=[HookPhase.POST_COMMIT], priority=100
                     )
 
                 def execute(self, context: HookContext):
@@ -326,9 +308,7 @@ class TestPyObjCToUNRDF:
             class LowPriorityHook(KnowledgeHook):
                 def __init__(self):
                     super().__init__(
-                        name="low_priority",
-                        phases=[HookPhase.POST_COMMIT],
-                        priority=10,
+                        name="low_priority", phases=[HookPhase.POST_COMMIT], priority=10
                     )
 
                 def execute(self, context: HookContext):
@@ -359,9 +339,7 @@ class TestPyObjCToUNRDF:
             class FailingValidationHook(KnowledgeHook):
                 def __init__(self):
                     super().__init__(
-                        name="failing_validation",
-                        phases=[HookPhase.POST_VALIDATION],
-                        priority=1000,
+                        name="failing_validation", phases=[HookPhase.POST_VALIDATION], priority=1000
                     )
 
                 def execute(self, context: HookContext):
@@ -419,7 +397,7 @@ class TestPyObjCToUNRDF:
                     query = f"""
                     PREFIX unrdf: <http://unrdf.org/ontology/>
                     SELECT ?event WHERE {{
-                        ?event unrdf:source "{event['source']}" .
+                        ?event unrdf:source "{event["source"]}" .
                     }}
                     """
                     results = list(engine.query(query))

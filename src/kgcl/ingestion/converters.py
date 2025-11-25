@@ -3,7 +3,7 @@
 Converts JSON events to RDF triples with automatic namespace assignment.
 """
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 from urllib.parse import quote
 
@@ -45,9 +45,7 @@ class RDFConverter:
         self.schema_ns = Namespace(f"{config.base_namespace}schema/")
 
     def convert_event(
-        self,
-        event: AppEvent | BrowserVisit | CalendarBlock,
-        graph: Graph | None = None,
+        self, event: AppEvent | BrowserVisit | CalendarBlock, graph: Graph | None = None
     ) -> Graph:
         """Convert event to RDF graph.
 
@@ -70,13 +68,12 @@ class RDFConverter:
         # Route to specific converter
         if isinstance(event, AppEvent):
             return self._convert_app_event(event, graph)
-        elif isinstance(event, BrowserVisit):
+        if isinstance(event, BrowserVisit):
             return self._convert_browser_visit(event, graph)
-        elif isinstance(event, CalendarBlock):
+        if isinstance(event, CalendarBlock):
             return self._convert_calendar_block(event, graph)
-        else:
-            msg = f"Unsupported event type: {type(event)}"
-            raise TypeError(msg)
+        msg = f"Unsupported event type: {type(event)}"
+        raise TypeError(msg)
 
     def _convert_app_event(self, event: AppEvent, graph: Graph) -> Graph:
         """Convert AppEvent to RDF.
@@ -112,20 +109,12 @@ class RDFConverter:
 
         if event.duration_seconds is not None:
             self._add_property(
-                graph,
-                event_uri,
-                "durationSeconds",
-                event.duration_seconds,
-                datatype=XSD.double,
+                graph, event_uri, "durationSeconds", event.duration_seconds, datatype=XSD.double
             )
 
         if event.process_id is not None:
             self._add_property(
-                graph,
-                event_uri,
-                "processId",
-                event.process_id,
-                datatype=XSD.integer,
+                graph, event_uri, "processId", event.process_id, datatype=XSD.integer
             )
 
         if self.config.include_schema_version:
@@ -166,11 +155,7 @@ class RDFConverter:
 
         if event.duration_seconds is not None:
             self._add_property(
-                graph,
-                event_uri,
-                "durationSeconds",
-                event.duration_seconds,
-                datatype=XSD.double,
+                graph, event_uri, "durationSeconds", event.duration_seconds, datatype=XSD.double
             )
 
         if event.referrer:
@@ -223,13 +208,7 @@ class RDFConverter:
         if event.calendar_name:
             self._add_property(graph, event_uri, "calendarName", event.calendar_name)
 
-        self._add_property(
-            graph,
-            event_uri,
-            "isAllDay",
-            event.is_all_day,
-            datatype=XSD.boolean,
-        )
+        self._add_property(graph, event_uri, "isAllDay", event.is_all_day, datatype=XSD.boolean)
 
         # Add attendees as list
         for attendee in event.attendees:
@@ -309,11 +288,7 @@ class RDFConverter:
         graph.add((subject, pred_uri, obj))
 
     def _add_timestamp(
-        self,
-        graph: Graph,
-        subject: URIRef,
-        predicate: str,
-        timestamp: datetime,
+        self, graph: Graph, subject: URIRef, predicate: str, timestamp: datetime
     ) -> None:
         """Add timestamp property.
 
@@ -331,7 +306,7 @@ class RDFConverter:
         # Normalize to UTC if enabled
         if self.config.normalize_timestamps:
             if timestamp.tzinfo is not None:
-                timestamp = timestamp.astimezone(timezone.utc).replace(tzinfo=None)
+                timestamp = timestamp.astimezone(UTC).replace(tzinfo=None)
 
         # Format as ISO8601
         iso_str = timestamp.isoformat() + "Z"
@@ -373,10 +348,7 @@ class RDFConverter:
         graph.bind("feature", self.feature_ns)
         graph.bind("schema", self.schema_ns)
 
-    def convert_batch(
-        self,
-        events: list[AppEvent | BrowserVisit | CalendarBlock],
-    ) -> Graph:
+    def convert_batch(self, events: list[AppEvent | BrowserVisit | CalendarBlock]) -> Graph:
         """Convert multiple events to single graph.
 
         Parameters

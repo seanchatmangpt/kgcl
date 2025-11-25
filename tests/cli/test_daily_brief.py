@@ -1,7 +1,5 @@
 """Tests for daily brief CLI command."""
 
-from datetime import datetime
-
 from click.testing import CliRunner
 
 from kgcl.cli.daily_brief import daily_brief

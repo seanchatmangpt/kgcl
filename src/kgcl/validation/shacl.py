@@ -1,9 +1,10 @@
 """SHACL validation for KGCL RDF data."""
 
-from typing import List, Optional, Dict, Any
 from dataclasses import dataclass
-from rdflib import Graph, Namespace, RDF
 from pathlib import Path
+from typing import Any
+
+from rdflib import RDF, Graph, Namespace
 
 
 @dataclass
@@ -14,8 +15,8 @@ class SHACLViolation:
     severity: str
     shape_name: str
     message: str
-    defect_description: Optional[str] = None
-    suggested_fix: Optional[str] = None
+    defect_description: str | None = None
+    suggested_fix: str | None = None
 
 
 @dataclass
@@ -23,14 +24,14 @@ class SHACLReport:
     """SHACL validation report."""
 
     conforms: bool
-    violations: List[SHACLViolation]
+    violations: list[SHACLViolation]
     total_violations: int
 
 
 class SHACLValidator:
     """Validates RDF graphs against SHACL shapes and invariants."""
 
-    def __init__(self, shapes_path: Optional[str] = None):
+    def __init__(self, shapes_path: str | None = None):
         """Initialize SHACL validator.
 
         Args:
@@ -44,7 +45,8 @@ class SHACLValidator:
     def _load_shapes(self) -> Graph:
         """Load SHACL shapes from file.
 
-        Returns:
+        Returns
+        -------
             Graph with SHACL shape definitions
         """
         shapes_graph = Graph()
@@ -58,7 +60,8 @@ class SHACLValidator:
         Args:
             data_graph: RDF graph to validate
 
-        Returns:
+        Returns
+        -------
             SHACLReport with violations
         """
         violations = []
@@ -81,12 +84,10 @@ class SHACLValidator:
         conforms = len(violations) == 0
 
         return SHACLReport(
-            conforms=conforms,
-            violations=violations,
-            total_violations=len(violations),
+            conforms=conforms, violations=violations, total_violations=len(violations)
         )
 
-    def _validate_events(self, graph: Graph) -> List[SHACLViolation]:
+    def _validate_events(self, graph: Graph) -> list[SHACLViolation]:
         """Validate schema:Event instances.
 
         Checks:
@@ -96,7 +97,8 @@ class SHACLValidator:
         Args:
             graph: Data graph
 
-        Returns:
+        Returns
+        -------
             List of violations
         """
         violations = []
@@ -141,7 +143,7 @@ class SHACLValidator:
 
         return violations
 
-    def _validate_actions(self, graph: Graph) -> List[SHACLViolation]:
+    def _validate_actions(self, graph: Graph) -> list[SHACLViolation]:
         """Validate schema:Action instances.
 
         Checks:
@@ -151,7 +153,8 @@ class SHACLValidator:
         Args:
             graph: Data graph
 
-        Returns:
+        Returns
+        -------
             List of violations
         """
         violations = []
@@ -174,7 +177,7 @@ class SHACLValidator:
 
         return violations
 
-    def _validate_messages(self, graph: Graph) -> List[SHACLViolation]:
+    def _validate_messages(self, graph: Graph) -> list[SHACLViolation]:
         """Validate schema:Message instances.
 
         Checks:
@@ -183,7 +186,8 @@ class SHACLValidator:
         Args:
             graph: Data graph
 
-        Returns:
+        Returns
+        -------
             List of violations
         """
         violations = []
@@ -206,7 +210,7 @@ class SHACLValidator:
 
         return violations
 
-    def _validate_works(self, graph: Graph) -> List[SHACLViolation]:
+    def _validate_works(self, graph: Graph) -> list[SHACLViolation]:
         """Validate schema:CreativeWork instances.
 
         Checks:
@@ -215,7 +219,8 @@ class SHACLValidator:
         Args:
             graph: Data graph
 
-        Returns:
+        Returns
+        -------
             List of violations
         """
         violations = []
@@ -241,7 +246,7 @@ class SHACLValidator:
 
         return violations
 
-    def _validate_cross_constraints(self, graph: Graph) -> List[SHACLViolation]:
+    def _validate_cross_constraints(self, graph: Graph) -> list[SHACLViolation]:
         """Validate cross-document constraints.
 
         Checks:
@@ -251,7 +256,8 @@ class SHACLValidator:
         Args:
             graph: Data graph
 
-        Returns:
+        Returns
+        -------
             List of violations
         """
         violations = []
@@ -263,9 +269,7 @@ class SHACLValidator:
                 sources = list(graph.objects(subject, self.apple_ns.sourceApp))
                 if not sources:
                     # Only check if it's a domain object (has RDF type)
-                    has_type = any(
-                        graph.objects(subject, RDF.type)
-                    )
+                    has_type = any(graph.objects(subject, RDF.type))
                     if has_type:
                         violations.append(
                             SHACLViolation(
@@ -283,13 +287,14 @@ class SHACLValidator:
 
         return violations
 
-    def _check_circular_dependencies(self, graph: Graph) -> List[SHACLViolation]:
+    def _check_circular_dependencies(self, graph: Graph) -> list[SHACLViolation]:
         """Check for circular task dependencies.
 
         Args:
             graph: Data graph
 
-        Returns:
+        Returns
+        -------
             List of violations
         """
         violations = []
@@ -320,11 +325,7 @@ class SHACLValidator:
         return violations
 
     def _has_cycle(
-        self,
-        node: str,
-        graph: Dict[str, List[str]],
-        visited: set,
-        rec_stack: set,
+        self, node: str, graph: dict[str, list[str]], visited: set, rec_stack: set
     ) -> bool:
         """Check if DFS path has a cycle.
 
@@ -334,7 +335,8 @@ class SHACLValidator:
             visited: Set of visited nodes
             rec_stack: Current recursion stack
 
-        Returns:
+        Returns
+        -------
             True if cycle detected
         """
         visited.add(node)
@@ -354,8 +356,8 @@ class SHACLValidator:
         self,
         data_object: Any,
         invariant: str,
-        graph: Optional[Graph] = None,
-        tags: Optional[List[str]] = None,
+        graph: Graph | None = None,
+        tags: list[str] | None = None,
     ) -> SHACLReport:
         """Validate single invariant on object.
 
@@ -365,30 +367,24 @@ class SHACLValidator:
             graph: Optional RDF graph (if already converted)
             tags: Optional tags for context
 
-        Returns:
+        Returns
+        -------
             SHACLReport with results
         """
         # For now, return empty report
         # Full implementation would require object-to-RDF conversion
-        return SHACLReport(
-            conforms=True,
-            violations=[],
-            total_violations=0,
-        )
+        return SHACLReport(conforms=True, violations=[], total_violations=0)
 
-    def validate_all_invariants(self, data: Dict[str, List[Any]]) -> SHACLReport:
+    def validate_all_invariants(self, data: dict[str, list[Any]]) -> SHACLReport:
         """Validate all invariants on multiple objects.
 
         Args:
             data: Dict of data source lists
 
-        Returns:
+        Returns
+        -------
             SHACLReport with all violations
         """
         # For now, return empty report
         # Full implementation would ingest all data and validate
-        return SHACLReport(
-            conforms=True,
-            violations=[],
-            total_violations=0,
-        )
+        return SHACLReport(conforms=True, violations=[], total_violations=0)

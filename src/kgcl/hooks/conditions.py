@@ -5,12 +5,12 @@ Implements various condition types for hook triggering including SPARQL,
 SHACL, delta detection, thresholds, and composite conditions.
 """
 
+import asyncio
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from enum import Enum
-from typing import Any, Dict, List, Optional
-import asyncio
+from typing import Any
 
 from kgcl.hooks.query_cache import QueryCache
 
@@ -29,7 +29,7 @@ class ConditionResult:
     """
 
     triggered: bool
-    metadata: Dict[str, Any] = field(default_factory=dict)
+    metadata: dict[str, Any] = field(default_factory=dict)
 
 
 class Condition(ABC):
@@ -39,7 +39,7 @@ class Condition(ABC):
     All conditions must implement evaluate() method that returns ConditionResult.
     """
 
-    def __init__(self, timeout: Optional[float] = None, cache_ttl: Optional[float] = None):
+    def __init__(self, timeout: float | None = None, cache_ttl: float | None = None):
         """
         Initialize condition.
 
@@ -52,11 +52,11 @@ class Condition(ABC):
         """
         self.timeout = timeout
         self.cache_ttl = cache_ttl
-        self._cache: Optional[ConditionResult] = None
-        self._cache_timestamp: Optional[datetime] = None
+        self._cache: ConditionResult | None = None
+        self._cache_timestamp: datetime | None = None
 
     @abstractmethod
-    async def evaluate(self, context: Dict[str, Any]) -> ConditionResult:
+    async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
         """
         Evaluate the condition.
 
@@ -70,9 +70,8 @@ class Condition(ABC):
         ConditionResult
             Evaluation result
         """
-        pass
 
-    async def evaluate_with_timeout(self, context: Dict[str, Any]) -> ConditionResult:
+    async def evaluate_with_timeout(self, context: dict[str, Any]) -> ConditionResult:
         """
         Evaluate with timeout.
 
@@ -95,7 +94,7 @@ class Condition(ABC):
             return await asyncio.wait_for(self.evaluate(context), timeout=self.timeout)
         return await self.evaluate(context)
 
-    async def evaluate_with_cache(self, context: Dict[str, Any]) -> ConditionResult:
+    async def evaluate_with_cache(self, context: dict[str, Any]) -> ConditionResult:
         """
         Evaluate with caching.
 
@@ -112,11 +111,7 @@ class Condition(ABC):
         now = datetime.utcnow()
 
         # Check cache validity
-        if (
-            self.cache_ttl
-            and self._cache is not None
-            and self._cache_timestamp is not None
-        ):
+        if self.cache_ttl and self._cache is not None and self._cache_timestamp is not None:
             age = (now - self._cache_timestamp).total_seconds()
             if age < self.cache_ttl:
                 return self._cache
@@ -151,14 +146,14 @@ class SparqlAskCondition(Condition):
     """
 
     # Shared cache instance across all SparqlAskCondition instances
-    _cache: Optional[QueryCache] = None
+    _cache: QueryCache | None = None
 
     def __init__(
         self,
-        query: Optional[str] = None,
-        ref: Optional[Dict[str, str]] = None,
+        query: str | None = None,
+        ref: dict[str, str] | None = None,
         use_cache: bool = True,
-        bindings: Optional[Dict[str, Any]] = None,
+        bindings: dict[str, Any] | None = None,
         **kwargs: Any,
     ) -> None:
         """
@@ -207,8 +202,6 @@ class SparqlAskCondition(Condition):
             return self.query
 
         if self.ref and resolver:
-            from kgcl.hooks.file_resolver import FileResolver
-
             uri = self.ref.get("uri")
             sha256_hash = self.ref.get("sha256")
             if not uri:
@@ -217,7 +210,7 @@ class SparqlAskCondition(Condition):
 
         raise ValueError("No query or ref provided for condition")
 
-    async def evaluate(self, context: Dict[str, Any]) -> ConditionResult:
+    async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
         """Evaluate SPARQL ASK query with caching."""
         # Check cache first
         if self.use_cache and SparqlAskCondition._cache is not None:
@@ -225,11 +218,7 @@ class SparqlAskCondition(Condition):
             if cached_result is not None:
                 return ConditionResult(
                     triggered=cached_result,
-                    metadata={
-                        "query": self.query,
-                        "type": "sparql_ask",
-                        "cache_hit": True,
-                    },
+                    metadata={"query": self.query, "type": "sparql_ask", "cache_hit": True},
                 )
 
         # In real implementation, would execute against SPARQL endpoint
@@ -246,7 +235,7 @@ class SparqlAskCondition(Condition):
         )
 
     @classmethod
-    def get_cache_stats(cls) -> Optional[Dict[str, Any]]:
+    def get_cache_stats(cls) -> dict[str, Any] | None:
         """Get cache statistics.
 
         Returns
@@ -274,7 +263,7 @@ class SparqlSelectCondition(Condition):
     """
 
     # Shared cache instance across all SparqlSelectCondition instances
-    _cache: Optional[QueryCache] = None
+    _cache: QueryCache | None = None
 
     def __init__(self, query: str, use_cache: bool = True, **kwargs: Any) -> None:
         """
@@ -295,7 +284,7 @@ class SparqlSelectCondition(Condition):
         if use_cache and SparqlSelectCondition._cache is None:
             SparqlSelectCondition._cache = QueryCache(max_size=1000, ttl_seconds=3600)
 
-    async def evaluate(self, context: Dict[str, Any]) -> ConditionResult:
+    async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
         """Evaluate SPARQL SELECT query with caching."""
         # Check cache first
         if self.use_cache and SparqlSelectCondition._cache is not None:
@@ -331,7 +320,7 @@ class SparqlSelectCondition(Condition):
         )
 
     @classmethod
-    def get_cache_stats(cls) -> Optional[Dict[str, Any]]:
+    def get_cache_stats(cls) -> dict[str, Any] | None:
         """Get cache statistics.
 
         Returns
@@ -369,7 +358,7 @@ class ShaclCondition(Condition):
         super().__init__(**kwargs)
         self.shapes = shapes
 
-    async def evaluate(self, context: Dict[str, Any]) -> ConditionResult:
+    async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
         """Evaluate SHACL validation."""
         # In real implementation, would use pyshacl
         # For now, simulate validation
@@ -381,11 +370,7 @@ class ShaclCondition(Condition):
 
         return ConditionResult(
             triggered=conforms,
-            metadata={
-                "conforms": conforms,
-                "violations": violations,
-                "type": "shacl",
-            },
+            metadata={"conforms": conforms, "violations": violations, "type": "shacl"},
         )
 
 
@@ -419,7 +404,7 @@ class DeltaCondition(Condition):
         self.delta_type = delta_type
         self.query = query
 
-    async def evaluate(self, context: Dict[str, Any]) -> ConditionResult:
+    async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
         """Evaluate delta condition."""
         previous = context.get("previous_count", 0)
         current = context.get("current_count", 0)
@@ -435,12 +420,7 @@ class DeltaCondition(Condition):
 
         return ConditionResult(
             triggered=triggered,
-            metadata={
-                "delta": delta,
-                "previous": previous,
-                "current": current,
-                "type": "delta",
-            },
+            metadata={"delta": delta, "previous": previous, "current": current, "type": "delta"},
         )
 
 
@@ -482,14 +462,13 @@ class ThresholdCondition(Condition):
         self.operator = operator
         self.value = value
 
-    async def evaluate(self, context: Dict[str, Any]) -> ConditionResult:
+    async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
         """Evaluate threshold condition."""
         actual_value = context.get(self.variable)
 
         if actual_value is None:
             return ConditionResult(
-                triggered=False,
-                metadata={"error": f"Variable '{self.variable}' not found"},
+                triggered=False, metadata={"error": f"Variable '{self.variable}' not found"}
             )
 
         triggered = False
@@ -567,7 +546,7 @@ class WindowCondition(Condition):
         self.threshold = threshold
         self.operator = operator
 
-    async def evaluate(self, context: Dict[str, Any]) -> ConditionResult:
+    async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
         """Evaluate window condition."""
         time_series = context.get("time_series", [])
         now = datetime.utcnow()
@@ -577,8 +556,7 @@ class WindowCondition(Condition):
         windowed_values = [
             point[self.variable]
             for point in time_series
-            if point.get("timestamp", now) >= window_start
-            and self.variable in point
+            if point.get("timestamp", now) >= window_start and self.variable in point
         ]
 
         # Aggregate
@@ -642,7 +620,7 @@ class CompositeCondition(Condition):
     """
 
     def __init__(
-        self, operator: CompositeOperator, conditions: List[Condition], **kwargs: Any
+        self, operator: CompositeOperator, conditions: list[Condition], **kwargs: Any
     ) -> None:
         """
         Initialize composite condition.
@@ -658,12 +636,10 @@ class CompositeCondition(Condition):
         self.operator = operator
         self.conditions = conditions
 
-    async def evaluate(self, context: Dict[str, Any]) -> ConditionResult:
+    async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
         """Evaluate composite condition."""
         # Evaluate all child conditions
-        results = await asyncio.gather(
-            *[cond.evaluate(context) for cond in self.conditions]
-        )
+        results = await asyncio.gather(*[cond.evaluate(context) for cond in self.conditions])
 
         triggered = False
         if self.operator == CompositeOperator.AND:

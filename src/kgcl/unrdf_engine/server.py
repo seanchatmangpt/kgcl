@@ -9,7 +9,7 @@ import logging
 from pathlib import Path
 from typing import Any
 
-from flask import Flask, jsonify, request
+from flask import Flask, request
 from opentelemetry import trace
 from opentelemetry.instrumentation.flask import FlaskInstrumentor
 from rdflib import URIRef
@@ -24,9 +24,7 @@ logger = logging.getLogger(__name__)
 
 
 def create_app(
-    graph_file: Path | None = None,
-    shapes_file: Path | None = None,
-    enable_hooks: bool = True,
+    graph_file: Path | None = None, shapes_file: Path | None = None, enable_hooks: bool = True
 ) -> Flask:
     """Create Flask application for UNRDF engine.
 
@@ -63,9 +61,7 @@ def create_app(
         hook_executor = HookExecutor(registry)
 
     # Initialize pipeline
-    pipeline = IngestionPipeline(
-        engine=engine, validator=validator, hook_executor=hook_executor
-    )
+    pipeline = IngestionPipeline(engine=engine, validator=validator, hook_executor=hook_executor)
 
     # Store in app context
     app.config["engine"] = engine

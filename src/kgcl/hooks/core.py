@@ -5,21 +5,20 @@ This module implements the core hook abstractions including Hook, HookState,
 HookReceipt, HookRegistry, and HookExecutor following Chicago School TDD principles.
 """
 
-from dataclasses import dataclass, field
-from datetime import datetime
-from enum import Enum
-from typing import Any, Callable, Dict, List, Optional
 import asyncio
 import traceback
 import uuid
+from collections.abc import Callable
+from dataclasses import dataclass, field
+from datetime import datetime
+from enum import Enum
+from typing import Any
 
 from kgcl.hooks.conditions import Condition, ConditionResult
 
 
 class HookValidationError(Exception):
     """Raised when hook validation fails."""
-
-    pass
 
 
 class HookState(Enum):
@@ -73,18 +72,18 @@ class HookReceipt:
     hook_id: str
     timestamp: datetime
     condition_result: ConditionResult
-    handler_result: Optional[Dict[str, Any]]
+    handler_result: dict[str, Any] | None
     duration_ms: float
-    actor: Optional[str] = None
-    error: Optional[str] = None
-    stack_trace: Optional[str] = None
-    memory_delta_bytes: Optional[int] = None
-    input_context: Optional[Dict[str, Any]] = None
-    metadata: Dict[str, Any] = field(default_factory=dict)
+    actor: str | None = None
+    error: str | None = None
+    stack_trace: str | None = None
+    memory_delta_bytes: int | None = None
+    input_context: dict[str, Any] | None = None
+    metadata: dict[str, Any] = field(default_factory=dict)
     receipt_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     truncated: bool = False
-    max_size_bytes: Optional[int] = None
-    merkle_anchor: Optional[Any] = None
+    max_size_bytes: int | None = None
+    merkle_anchor: Any | None = None
 
     def __setattr__(self, name: str, value: Any) -> None:
         """Make receipt immutable after initialization."""
@@ -103,9 +102,7 @@ class HookReceipt:
                 object.__setattr__(self, "truncated", True)
                 # Truncate to summary
                 object.__setattr__(
-                    self,
-                    "handler_result",
-                    {"_truncated": True, "_size": result_size},
+                    self, "handler_result", {"_truncated": True, "_size": result_size}
                 )
 
         object.__setattr__(self, "_initialized", True)
@@ -143,17 +140,17 @@ class Hook:
     name: str
     description: str
     condition: Condition
-    handler: Callable[[Dict[str, Any]], Dict[str, Any]]
+    handler: Callable[[dict[str, Any]], dict[str, Any]]
     priority: int = 50
     timeout: float = 30.0
     enabled: bool = True
-    actor: Optional[str] = None
-    metadata: Dict[str, Any] = field(default_factory=dict)
+    actor: str | None = None
+    metadata: dict[str, Any] = field(default_factory=dict)
 
     # Lifecycle tracking
     state: HookState = field(default=HookState.PENDING, init=False)
     created_at: datetime = field(default_factory=datetime.utcnow, init=False)
-    executed_at: Optional[datetime] = field(default=None, init=False)
+    executed_at: datetime | None = field(default=None, init=False)
 
     def __post_init__(self) -> None:
         """Validate hook structure."""
@@ -193,7 +190,7 @@ class HookRegistry:
 
     def __init__(self) -> None:
         """Initialize empty registry."""
-        self._hooks: Dict[str, Hook] = {}
+        self._hooks: dict[str, Hook] = {}
 
     def register(self, hook: Hook) -> None:
         """
@@ -225,7 +222,7 @@ class HookRegistry:
         """
         self._hooks.pop(name, None)
 
-    def get(self, name: str) -> Optional[Hook]:
+    def get(self, name: str) -> Hook | None:
         """
         Get hook by name.
 
@@ -241,7 +238,7 @@ class HookRegistry:
         """
         return self._hooks.get(name)
 
-    def get_all(self) -> List[Hook]:
+    def get_all(self) -> list[Hook]:
         """
         Get all registered hooks.
 
@@ -252,7 +249,7 @@ class HookRegistry:
         """
         return list(self._hooks.values())
 
-    def get_all_sorted(self) -> List[Hook]:
+    def get_all_sorted(self) -> list[Hook]:
         """
         Get all hooks sorted by priority (high to low).
 
@@ -274,10 +271,10 @@ class HookManager:
 
     def __init__(self) -> None:
         """Initialize hook manager."""
-        self.hooks: Dict[str, Hook] = {}
-        self.execution_history: List[HookReceipt] = []
-        self.failed_hooks: Dict[str, List[str]] = {}
-        self._hook_ids: Dict[str, str] = {}  # hook_name -> hook_id
+        self.hooks: dict[str, Hook] = {}
+        self.execution_history: list[HookReceipt] = []
+        self.failed_hooks: dict[str, list[str]] = {}
+        self._hook_ids: dict[str, str] = {}  # hook_name -> hook_id
 
     def register_hook(self, hook: Hook) -> str:
         """
@@ -325,7 +322,7 @@ class HookManager:
             if hook_id in self.failed_hooks:
                 del self.failed_hooks[hook_id]
 
-    def get_hook(self, hook_id: str) -> Optional[Hook]:
+    def get_hook(self, hook_id: str) -> Hook | None:
         """
         Get hook by ID.
 
@@ -341,7 +338,7 @@ class HookManager:
         """
         return self.hooks.get(hook_id)
 
-    def get_hook_by_name(self, name: str) -> Optional[Hook]:
+    def get_hook_by_name(self, name: str) -> Hook | None:
         """
         Get hook by name.
 
@@ -378,7 +375,7 @@ class HookManager:
                 self.failed_hooks[hook_id] = []
             self.failed_hooks[hook_id].append(receipt.error)
 
-    def get_hook_stats(self, hook_id: str) -> Dict[str, Any]:
+    def get_hook_stats(self, hook_id: str) -> dict[str, Any]:
         """
         Get execution statistics for hook.
 
@@ -400,12 +397,7 @@ class HookManager:
         executions = [r for r in self.execution_history if r.hook_id == hook_id]
 
         if not executions:
-            return {
-                "total_executions": 0,
-                "successes": 0,
-                "failures": 0,
-                "success_rate": 0.0,
-            }
+            return {"total_executions": 0, "successes": 0, "failures": 0, "success_rate": 0.0}
 
         successes = sum(1 for r in executions if not r.error)
         failures = sum(1 for r in executions if r.error)
@@ -419,7 +411,7 @@ class HookManager:
             "recent_errors": self.failed_hooks.get(hook_id, [])[-5:],  # Last 5 errors
         }
 
-    def get_all_hooks(self) -> List[Hook]:
+    def get_all_hooks(self) -> list[Hook]:
         """
         Get all registered hooks.
 
@@ -447,7 +439,7 @@ class HookExecutor:
 
     def __init__(self) -> None:
         """Initialize executor."""
-        self._event_handlers: List[Callable[..., Any]] = []
+        self._event_handlers: list[Callable[..., Any]] = []
 
     def on_event(self, handler: Callable[..., Any]) -> None:
         """
@@ -465,10 +457,7 @@ class HookExecutor:
         from kgcl.hooks.lifecycle import HookLifecycleEvent
 
         event = HookLifecycleEvent(
-            event_type=event_type,
-            hook_id=hook.name,
-            timestamp=datetime.utcnow(),
-            metadata=kwargs,
+            event_type=event_type, hook_id=hook.name, timestamp=datetime.utcnow(), metadata=kwargs
         )
 
         for handler in self._event_handlers:
@@ -478,9 +467,7 @@ class HookExecutor:
                 # Don't let event handler errors break execution
                 pass
 
-    async def execute(
-        self, hook: Hook, context: Dict[str, Any]
-    ) -> HookReceipt:
+    async def execute(self, hook: Hook, context: dict[str, Any]) -> HookReceipt:
         """
         Execute a hook and return receipt.
 
@@ -497,10 +484,10 @@ class HookExecutor:
             Execution receipt
         """
         start_time = datetime.utcnow()
-        condition_result: Optional[ConditionResult] = None
-        handler_result: Optional[Dict[str, Any]] = None
-        error: Optional[str] = None
-        stack_trace: Optional[str] = None
+        condition_result: ConditionResult | None = None
+        handler_result: dict[str, Any] | None = None
+        error: str | None = None
+        stack_trace: str | None = None
 
         try:
             # Transition to ACTIVE
@@ -512,19 +499,15 @@ class HookExecutor:
                 condition_result = await asyncio.wait_for(
                     hook.condition.evaluate(context), timeout=hook.timeout
                 )
-            except asyncio.TimeoutError:
+            except TimeoutError:
                 error = f"Condition evaluation exceeded timeout of {hook.timeout}s"
                 hook._transition_state(HookState.FAILED)
-                condition_result = ConditionResult(
-                    triggered=False, metadata={"error": "timeout"}
-                )
+                condition_result = ConditionResult(triggered=False, metadata={"error": "timeout"})
             except Exception as e:
-                error = f"Condition evaluation failed: {str(e)}"
+                error = f"Condition evaluation failed: {e!s}"
                 stack_trace = traceback.format_exc()
                 hook._transition_state(HookState.FAILED)
-                condition_result = ConditionResult(
-                    triggered=False, metadata={"error": str(e)}
-                )
+                condition_result = ConditionResult(triggered=False, metadata={"error": str(e)})
 
             self._emit_event("post_condition", hook, result=condition_result)
 
@@ -543,11 +526,11 @@ class HookExecutor:
                         handler_result = hook.handler(context)
 
                     hook._transition_state(HookState.COMPLETED)
-                except asyncio.TimeoutError:
+                except TimeoutError:
                     error = f"Handler execution exceeded timeout of {hook.timeout}s"
                     hook._transition_state(HookState.FAILED)
                 except Exception as e:
-                    error = f"Handler execution failed: {str(e)}"
+                    error = f"Handler execution failed: {e!s}"
                     stack_trace = traceback.format_exc()
                     hook._transition_state(HookState.FAILED)
 
@@ -557,7 +540,7 @@ class HookExecutor:
                 hook._transition_state(HookState.COMPLETED)
 
         except Exception as e:
-            error = f"Unexpected error: {str(e)}"
+            error = f"Unexpected error: {e!s}"
             stack_trace = traceback.format_exc()
             hook._transition_state(HookState.FAILED)
 
@@ -570,8 +553,7 @@ class HookExecutor:
             hook_id=hook.name,
             timestamp=start_time,
             actor=hook.actor,
-            condition_result=condition_result
-            or ConditionResult(triggered=False, metadata={}),
+            condition_result=condition_result or ConditionResult(triggered=False, metadata={}),
             handler_result=handler_result,
             duration_ms=duration_ms,
             error=error,

@@ -54,10 +54,7 @@ def traced_capability_crawler(func: Any) -> Any:
     def wrapper(*args: Any, **kwargs: Any) -> Any:
         with tracer.start_as_current_span(
             f"capability_crawler.{func.__name__}",
-            attributes={
-                "subsystem": "pyobjc_agent",
-                "operation": "capability_discovery",
-            },
+            attributes={"subsystem": "pyobjc_agent", "operation": "capability_discovery"},
         ) as span:
             start_time = time.perf_counter()
 
@@ -113,9 +110,7 @@ def traced_collector(collector_type: str) -> Any:
                     duration_ms = (time.perf_counter() - start_time) * 1000
 
                     # Record collection metrics
-                    if isinstance(result, dict):
-                        span.set_attribute("items_collected", len(result))
-                    elif isinstance(result, list):
+                    if isinstance(result, dict) or isinstance(result, list):
                         span.set_attribute("items_collected", len(result))
 
                     span.set_status(Status(StatusCode.OK))

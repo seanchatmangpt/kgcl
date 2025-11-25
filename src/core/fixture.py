@@ -4,20 +4,18 @@ Provides reusable test fixtures with state management and test isolation.
 Supports sync and async setup/cleanup with metadata tracking.
 """
 
-from typing import Any, Dict, Optional, List
+import uuid
 from dataclasses import dataclass, field
 from datetime import datetime
-import uuid
+from typing import Any
 
 
 class FixtureError(Exception):
     """Fixture operation error"""
-    pass
 
 
 class FixtureResult(Exception):
     """Result type wrapper for fixture operations (Optional[T] in Python)"""
-    pass
 
 
 @dataclass
@@ -26,15 +24,16 @@ class FixtureMetadata:
 
     Tracks creation time and state snapshots for debugging and introspection.
     """
+
     created_at: datetime = field(default_factory=datetime.now)
-    snapshots: List[Dict[str, Any]] = field(default_factory=list)
+    snapshots: list[dict[str, Any]] = field(default_factory=list)
     fixture_id: str = field(default_factory=lambda: str(uuid.uuid4()))
 
-    def capture_snapshot(self, state: Dict[str, Any]) -> None:
+    def capture_snapshot(self, state: dict[str, Any]) -> None:
         """Capture current state snapshot"""
         self.snapshots.append(state.copy())
 
-    def get_snapshot(self, index: int = -1) -> Optional[Dict[str, Any]]:
+    def get_snapshot(self, index: int = -1) -> dict[str, Any] | None:
         """Get snapshot by index (default: most recent)"""
         if not self.snapshots:
             return None
@@ -79,7 +78,7 @@ class TestFixture:
 
     def __init__(self) -> None:
         self._metadata = FixtureMetadata()
-        self._state: Dict[str, Any] = {}
+        self._state: dict[str, Any] = {}
         self._initialized = False
 
     def setup(self) -> None:
@@ -88,7 +87,6 @@ class TestFixture:
 
     def cleanup(self) -> None:
         """Cleanup fixture resources (override in subclasses)"""
-        pass
 
     def set_state(self, key: str, value: Any) -> None:
         """Store state value"""
@@ -136,11 +134,9 @@ class AsyncTestFixture(TestFixture):
 
     async def async_setup(self) -> None:
         """Async setup (override in subclasses)"""
-        pass
 
     async def async_cleanup(self) -> None:
         """Async cleanup (override in subclasses)"""
-        pass
 
     async def __aenter__(self) -> "AsyncTestFixture":
         """Async context manager support"""

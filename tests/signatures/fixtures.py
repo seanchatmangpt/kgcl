@@ -5,14 +5,15 @@ consistent and reproducible testing.
 """
 
 from datetime import datetime
+
 import pytest
 
 from kgcl.signatures import (
+    ContextClassifierInput,
     DailyBriefInput,
-    WeeklyRetroInput,
     FeatureAnalyzerInput,
     PatternDetectorInput,
-    ContextClassifierInput,
+    WeeklyRetroInput,
     WellbeingInput,
 )
 
@@ -31,7 +32,7 @@ def daily_brief_input_standard():
         top_apps={"VSCode": 2.5, "Safari": 1.8, "Slack": 0.9},
         top_domains={"github.com": 12, "stackoverflow.com": 8},
         meeting_count=6,
-        break_intervals=3
+        break_intervals=3,
     )
 
 
@@ -48,7 +49,7 @@ def daily_brief_input_high_focus():
         top_apps={"VSCode": 5.0, "Terminal": 1.5, "Safari": 1.0},
         top_domains={"github.com": 8, "docs.python.org": 4},
         meeting_count=2,
-        break_intervals=5
+        break_intervals=5,
     )
 
 
@@ -65,7 +66,7 @@ def daily_brief_input_meeting_heavy():
         top_apps={"Zoom": 3.5, "Slack": 2.0, "Safari": 1.5},
         top_domains={"zoom.us": 15, "notion.so": 10},
         meeting_count=10,
-        break_intervals=2
+        break_intervals=2,
     )
 
 
@@ -85,13 +86,13 @@ def weekly_retro_input_standard():
             "Tuesday: Meeting-heavy with 5 calls (4.2h)",
             "Wednesday: Balanced work with good focus (2.8h)",
             "Thursday: Code reviews and documentation",
-            "Friday: Sprint planning and retrospective (3.5h meetings)"
+            "Friday: Sprint planning and retrospective (3.5h meetings)",
         ],
         daily_productivity_scores=[75, 65, 80, 70, 68],
         top_apps_weekly={"VSCode": 12.5, "Safari": 8.2, "Slack": 6.5},
         top_domains_weekly={"github.com": 85, "stackoverflow.com": 42},
         total_breaks=15,
-        goals=["Complete feature X", "Review 10 PRs", "Reduce meeting time"]
+        goals=["Complete feature X", "Review 10 PRs", "Reduce meeting time"],
     )
 
 
@@ -110,13 +111,13 @@ def weekly_retro_input_excellent():
             "Tuesday: Continued strong focus (4.2h)",
             "Wednesday: Maintained momentum (4.8h focus)",
             "Thursday: Productive code completion (4.5h)",
-            "Friday: Wrapped up sprint with reviews (4.5h)"
+            "Friday: Wrapped up sprint with reviews (4.5h)",
         ],
         daily_productivity_scores=[85, 88, 90, 87, 85],
         top_apps_weekly={"VSCode": 18.0, "Terminal": 4.5, "Safari": 6.0},
         top_domains_weekly={"github.com": 120, "docs.python.org": 35},
         total_breaks=20,
-        goals=["Complete feature X", "Review 10 PRs"]
+        goals=["Complete feature X", "Review 10 PRs"],
     )
 
 
@@ -128,7 +129,7 @@ def feature_analyzer_input_stable():
         feature_name="focus_time",
         feature_values=[2.2, 2.5, 2.3, 2.4, 2.1, 2.6, 2.3],
         window="daily",
-        context="Daily deep focus time in hours"
+        context="Daily deep focus time in hours",
     )
 
 
@@ -139,7 +140,7 @@ def feature_analyzer_input_trending():
         feature_name="meeting_hours",
         feature_values=[2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0],
         window="daily",
-        context="Daily meeting time trending upward"
+        context="Daily meeting time trending upward",
     )
 
 
@@ -150,7 +151,7 @@ def feature_analyzer_input_outliers():
         feature_name="context_switches",
         feature_values=[12, 14, 13, 35, 15, 14, 13],
         window="daily",
-        context="Context switches with one unusual spike"
+        context="Context switches with one unusual spike",
     )
 
 
@@ -163,10 +164,10 @@ def pattern_detector_input_standard():
             "focus_time": [2.5, 1.8, 3.2, 2.1, 1.5],
             "meeting_hours": [1.5, 4.2, 1.0, 2.5, 3.8],
             "context_switches": [12, 18, 10, 14, 20],
-            "safari_usage": [1.2, 2.5, 0.8, 1.5, 2.2]
+            "safari_usage": [1.2, 2.5, 0.8, 1.5, 2.2],
         },
         time_window="daily",
-        context="Weekly work pattern analysis"
+        context="Weekly work pattern analysis",
     )
 
 
@@ -180,7 +181,7 @@ def pattern_detector_input_correlated():
             "slack_usage": [0.5, 0.8, 0.4, 0.6, 0.5],  # Low and stable
         },
         time_window="daily",
-        context="Focused development week"
+        context="Focused development week",
     )
 
 
@@ -194,7 +195,7 @@ def context_classifier_input_coding():
         calendar_event="",
         time_of_day=10,
         window_title="main.py - kgcl - Visual Studio Code",
-        duration_seconds=1800
+        duration_seconds=1800,
     )
 
 
@@ -207,7 +208,7 @@ def context_classifier_input_research():
         calendar_event="",
         time_of_day=14,
         window_title="Python Documentation - Built-in Functions",
-        duration_seconds=600
+        duration_seconds=600,
     )
 
 
@@ -220,7 +221,7 @@ def context_classifier_input_meeting():
         calendar_event="Team Standup",
         time_of_day=9,
         window_title="Zoom Meeting - Team Standup",
-        duration_seconds=1800
+        duration_seconds=1800,
     )
 
 
@@ -233,7 +234,7 @@ def context_classifier_input_communication():
         calendar_event="",
         time_of_day=15,
         window_title="Slack - engineering channel",
-        duration_seconds=300
+        duration_seconds=300,
     )
 
 
@@ -250,7 +251,7 @@ def wellbeing_input_healthy():
         work_hours=8.0,
         after_hours_time=0,
         weekend_work_time=0,
-        physical_activity=1.0
+        physical_activity=1.0,
     )
 
 
@@ -266,7 +267,7 @@ def wellbeing_input_at_risk():
         work_hours=10.5,
         after_hours_time=2.5,
         weekend_work_time=3.0,
-        physical_activity=0
+        physical_activity=0,
     )
 
 
@@ -282,7 +283,7 @@ def wellbeing_input_moderate():
         work_hours=9.2,
         after_hours_time=1.5,
         weekend_work_time=0,
-        physical_activity=0.5
+        physical_activity=0.5,
     )
 
 
@@ -301,7 +302,7 @@ def complete_daily_data():
             top_apps={"VSCode": 2.5, "Safari": 1.8, "Slack": 0.9},
             top_domains={"github.com": 12, "stackoverflow.com": 8},
             meeting_count=6,
-            break_intervals=3
+            break_intervals=3,
         ),
         "wellbeing_input": WellbeingInput(
             screen_time=8.5,
@@ -312,7 +313,7 @@ def complete_daily_data():
             work_hours=9.2,
             after_hours_time=1.5,
             weekend_work_time=0,
-            physical_activity=0.5
+            physical_activity=0.5,
         ),
         "activities": [
             ContextClassifierInput(
@@ -321,7 +322,7 @@ def complete_daily_data():
                 calendar_event="",
                 time_of_day=10,
                 window_title="main.py",
-                duration_seconds=1800
+                duration_seconds=1800,
             ),
             ContextClassifierInput(
                 app_name="us.zoom.xos",
@@ -329,9 +330,9 @@ def complete_daily_data():
                 calendar_event="Team Standup",
                 time_of_day=9,
                 window_title="Zoom Meeting",
-                duration_seconds=1800
+                duration_seconds=1800,
             ),
-        ]
+        ],
     }
 
 
@@ -349,7 +350,7 @@ def edge_case_minimal_data():
         top_apps={},
         top_domains={},
         meeting_count=0,
-        break_intervals=0
+        break_intervals=0,
     )
 
 
@@ -366,5 +367,5 @@ def edge_case_maximum_load():
         top_apps={"Zoom": 4.0, "Slack": 3.5, "Email": 3.0, "Safari": 2.5},
         top_domains={"zoom.us": 50, "slack.com": 40, "gmail.com": 30},
         meeting_count=15,
-        break_intervals=1
+        break_intervals=1,
     )

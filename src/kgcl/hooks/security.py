@@ -5,9 +5,8 @@ Ported from UNRDF security/error-sanitizer.mjs.
 Provides error sanitization to prevent information disclosure.
 """
 
-from dataclasses import dataclass
-from typing import Optional
 import re
+from dataclasses import dataclass
 
 
 @dataclass

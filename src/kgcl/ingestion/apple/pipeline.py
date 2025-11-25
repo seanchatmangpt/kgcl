@@ -1,13 +1,14 @@
 """Apple ingest pipeline coordinating all 4 data sources."""
 
-from typing import Dict, List, Any, Optional
 from dataclasses import dataclass
+from typing import Any
+
 from rdflib import Graph
 
 from kgcl.ingestion.apple.calendar import CalendarIngestEngine
-from kgcl.ingestion.apple.reminders import RemindersIngestEngine
-from kgcl.ingestion.apple.mail import MailIngestEngine
 from kgcl.ingestion.apple.files import FilesIngestEngine
+from kgcl.ingestion.apple.mail import MailIngestEngine
+from kgcl.ingestion.apple.reminders import RemindersIngestEngine
 
 
 @dataclass
@@ -31,9 +32,9 @@ class PipelineResult:
     graph: Graph
     receipt_hash: str
     metrics: PipelineMetrics
-    validation_report: Optional[dict]
-    errors: List[str]
-    error_report: Optional[dict]
+    validation_report: dict | None
+    errors: list[str]
+    error_report: dict | None
 
 
 class AppleIngestPipeline:
@@ -47,7 +48,7 @@ class AppleIngestPipeline:
         self.files_engine = FilesIngestEngine()
         self.graph = Graph()
 
-    def ingest_all(self, ingest_data: Dict[str, List[Any]]) -> PipelineResult:
+    def ingest_all(self, ingest_data: dict[str, list[Any]]) -> PipelineResult:
         """Ingest all data sources together.
 
         Args:
@@ -57,7 +58,8 @@ class AppleIngestPipeline:
                 - mail_messages: List of Mail messages
                 - files: List of file metadata objects
 
-        Returns:
+        Returns
+        -------
             PipelineResult with consolidated graph and metrics
         """
         import time
@@ -70,28 +72,24 @@ class AppleIngestPipeline:
             # Ingest calendar events
             if "calendar_events" in ingest_data:
                 try:
-                    result = self.calendar_engine.ingest_batch(
-                        ingest_data["calendar_events"]
-                    )
+                    result = self.calendar_engine.ingest_batch(ingest_data["calendar_events"])
                     self._merge_graph(result.graph)
                     metrics.event_count = result.items_processed
                     if not result.success:
                         errors.extend(result.errors)
                 except Exception as e:
-                    errors.append(f"Calendar ingest failed: {str(e)}")
+                    errors.append(f"Calendar ingest failed: {e!s}")
 
             # Ingest reminders
             if "reminders" in ingest_data:
                 try:
-                    result = self.reminders_engine.ingest_batch(
-                        ingest_data["reminders"]
-                    )
+                    result = self.reminders_engine.ingest_batch(ingest_data["reminders"])
                     self._merge_graph(result.graph)
                     metrics.action_count = result.items_processed
                     if not result.success:
                         errors.extend(result.errors)
                 except Exception as e:
-                    errors.append(f"Reminders ingest failed: {str(e)}")
+                    errors.append(f"Reminders ingest failed: {e!s}")
 
             # Ingest mail messages
             if "mail_messages" in ingest_data:
@@ -102,7 +100,7 @@ class AppleIngestPipeline:
                     if not result.success:
                         errors.extend(result.errors)
                 except Exception as e:
-                    errors.append(f"Mail ingest failed: {str(e)}")
+                    errors.append(f"Mail ingest failed: {e!s}")
 
             # Ingest files
             if "files" in ingest_data:
@@ -113,7 +111,7 @@ class AppleIngestPipeline:
                     if not result.success:
                         errors.extend(result.errors)
                 except Exception as e:
-                    errors.append(f"Files ingest failed: {str(e)}")
+                    errors.append(f"Files ingest failed: {e!s}")
 
             # Calculate totals
             metrics.total_count = (
@@ -142,7 +140,7 @@ class AppleIngestPipeline:
             )
 
         except Exception as e:
-            errors.append(f"Pipeline error: {str(e)}")
+            errors.append(f"Pipeline error: {e!s}")
             elapsed = time.perf_counter() - start_time
             metrics.duration_ms = elapsed * 1000
 
@@ -168,7 +166,8 @@ class AppleIngestPipeline:
     def _generate_receipt(self) -> str:
         """Generate SHA256 receipt for idempotency.
 
-        Returns:
+        Returns
+        -------
             SHA256 hex digest
         """
         import hashlib

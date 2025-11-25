@@ -25,12 +25,12 @@ Example:
 __version__ = "0.1.0"
 __author__ = "KGCL Team"
 __all__ = [
-    "pyobjc_agent",
-    "unrdf_engine",
-    "ttl2dspy",
+    "cli",
     "dspy_runtime",
     "ingestion",
-    "cli",
-    "signatures",
     "observability",
+    "pyobjc_agent",
+    "signatures",
+    "ttl2dspy",
+    "unrdf_engine",
 ]

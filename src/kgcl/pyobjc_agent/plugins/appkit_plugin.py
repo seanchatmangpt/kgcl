@@ -8,16 +8,11 @@ This plugin provides capabilities for:
 - Application state tracking
 """
 
-from typing import Dict, List, Optional, Any
-from datetime import datetime
 import logging
+from datetime import datetime
+from typing import Any
 
-from .base import (
-    BaseCapabilityPlugin,
-    CapabilityDescriptor,
-    CapabilityData,
-    EntitlementLevel
-)
+from .base import BaseCapabilityPlugin, CapabilityData, CapabilityDescriptor, EntitlementLevel
 
 logger = logging.getLogger(__name__)
 
@@ -41,10 +36,10 @@ class AppKitPlugin(BaseCapabilityPlugin):
         return "1.0.0"
 
     @property
-    def required_frameworks(self) -> List[str]:
+    def required_frameworks(self) -> list[str]:
         return ["AppKit", "Foundation"]
 
-    def discover_capabilities(self) -> List[CapabilityDescriptor]:
+    def discover_capabilities(self) -> list[CapabilityDescriptor]:
         """Discover AppKit-based capabilities."""
         capabilities = [
             CapabilityDescriptor(
@@ -62,9 +57,9 @@ class AppKitPlugin(BaseCapabilityPlugin):
                         "app_name": {"type": "string"},
                         "process_id": {"type": "integer"},
                         "is_active": {"type": "boolean"},
-                        "launch_date": {"type": "string", "format": "date-time"}
-                    }
-                }
+                        "launch_date": {"type": "string", "format": "date-time"},
+                    },
+                },
             ),
             CapabilityDescriptor(
                 name="running_applications",
@@ -82,10 +77,10 @@ class AppKitPlugin(BaseCapabilityPlugin):
                             "app_name": {"type": "string"},
                             "process_id": {"type": "integer"},
                             "is_hidden": {"type": "boolean"},
-                            "is_active": {"type": "boolean"}
-                        }
-                    }
-                }
+                            "is_active": {"type": "boolean"},
+                        },
+                    },
+                },
             ),
             CapabilityDescriptor(
                 name="workspace_notifications",
@@ -100,9 +95,9 @@ class AppKitPlugin(BaseCapabilityPlugin):
                     "properties": {
                         "notification_type": {"type": "string"},
                         "application": {"type": "object"},
-                        "timestamp": {"type": "string", "format": "date-time"}
-                    }
-                }
+                        "timestamp": {"type": "string", "format": "date-time"},
+                    },
+                },
             ),
             CapabilityDescriptor(
                 name="active_display_count",
@@ -115,9 +110,9 @@ class AppKitPlugin(BaseCapabilityPlugin):
                     "type": "object",
                     "properties": {
                         "display_count": {"type": "integer"},
-                        "main_display": {"type": "object"}
-                    }
-                }
+                        "main_display": {"type": "object"},
+                    },
+                },
             ),
             CapabilityDescriptor(
                 name="window_list",
@@ -134,20 +129,20 @@ class AppKitPlugin(BaseCapabilityPlugin):
                             "window_id": {"type": "integer"},
                             "owner_name": {"type": "string"},
                             "window_name": {"type": "string"},
-                            "bounds": {"type": "object"}
-                        }
-                    }
-                }
-            )
+                            "bounds": {"type": "object"},
+                        },
+                    },
+                },
+            ),
         ]
 
         return capabilities
 
-    def check_entitlements(self) -> Dict[str, bool]:
+    def check_entitlements(self) -> dict[str, bool]:
         """Check for required entitlements."""
         entitlements = {
             "basic_appkit": True,  # Always available if AppKit loads
-            "accessibility": self._check_accessibility_access()
+            "accessibility": self._check_accessibility_access(),
         }
 
         return entitlements
@@ -156,7 +151,8 @@ class AppKitPlugin(BaseCapabilityPlugin):
         """
         Check if accessibility access is granted.
 
-        Returns:
+        Returns
+        -------
             True if accessibility access is available
         """
         try:
@@ -168,8 +164,7 @@ class AppKitPlugin(BaseCapabilityPlugin):
 
             if not trusted:
                 logger.warning(
-                    "Accessibility access not granted. "
-                    "Window enumeration will be limited."
+                    "Accessibility access not granted. Window enumeration will be limited."
                 )
 
             return trusted
@@ -179,9 +174,7 @@ class AppKitPlugin(BaseCapabilityPlugin):
             return False
 
     def collect_capability_data(
-        self,
-        capability_name: str,
-        parameters: Optional[Dict[str, Any]] = None
+        self, capability_name: str, parameters: dict[str, Any] | None = None
     ) -> CapabilityData:
         """Collect data for a specific AppKit capability."""
         timestamp = datetime.utcnow()
@@ -202,23 +195,21 @@ class AppKitPlugin(BaseCapabilityPlugin):
                 capability_name=capability_name,
                 timestamp=timestamp,
                 data=data,
-                metadata={"plugin": self.plugin_id}
+                metadata={"plugin": self.plugin_id},
             )
 
         except Exception as e:
             logger.error(f"Error collecting {capability_name}: {e}")
             return CapabilityData(
-                capability_name=capability_name,
-                timestamp=timestamp,
-                data={},
-                error=str(e)
+                capability_name=capability_name, timestamp=timestamp, data={}, error=str(e)
             )
 
-    def _get_frontmost_application(self) -> Dict[str, Any]:
+    def _get_frontmost_application(self) -> dict[str, Any]:
         """
         Get the frontmost (active) application.
 
-        Returns:
+        Returns
+        -------
             Dictionary with application details
         """
         try:
@@ -247,18 +238,19 @@ class AppKitPlugin(BaseCapabilityPlugin):
                 "app_name": app_name,
                 "process_id": process_id,
                 "is_active": is_active,
-                "launch_date": launch_date_str
+                "launch_date": launch_date_str,
             }
 
         except Exception as e:
             logger.error(f"Error getting frontmost application: {e}")
             raise
 
-    def _get_running_applications(self) -> Dict[str, Any]:
+    def _get_running_applications(self) -> dict[str, Any]:
         """
         Get all running applications.
 
-        Returns:
+        Returns
+        -------
             Dictionary with list of running apps
         """
         try:
@@ -275,28 +267,28 @@ class AppKitPlugin(BaseCapabilityPlugin):
                     app_name = app.localizedName()
 
                     if bundle_id and app_name:
-                        apps_list.append({
-                            "bundle_id": bundle_id,
-                            "app_name": app_name,
-                            "process_id": app.processIdentifier(),
-                            "is_hidden": app.isHidden(),
-                            "is_active": app.isActive()
-                        })
+                        apps_list.append(
+                            {
+                                "bundle_id": bundle_id,
+                                "app_name": app_name,
+                                "process_id": app.processIdentifier(),
+                                "is_hidden": app.isHidden(),
+                                "is_active": app.isActive(),
+                            }
+                        )
 
-            return {
-                "count": len(apps_list),
-                "applications": apps_list
-            }
+            return {"count": len(apps_list), "applications": apps_list}
 
         except Exception as e:
             logger.error(f"Error getting running applications: {e}")
             raise
 
-    def _get_display_info(self) -> Dict[str, Any]:
+    def _get_display_info(self) -> dict[str, Any]:
         """
         Get display/screen information.
 
-        Returns:
+        Returns
+        -------
             Dictionary with display details
         """
         try:
@@ -305,10 +297,7 @@ class AppKitPlugin(BaseCapabilityPlugin):
             screens = NSScreen.screens()
             main_screen = NSScreen.mainScreen()
 
-            display_info = {
-                "display_count": len(screens),
-                "displays": []
-            }
+            display_info = {"display_count": len(screens), "displays": []}
 
             for idx, screen in enumerate(screens):
                 frame = screen.frame()
@@ -321,18 +310,18 @@ class AppKitPlugin(BaseCapabilityPlugin):
                         "x": frame.origin.x,
                         "y": frame.origin.y,
                         "width": frame.size.width,
-                        "height": frame.size.height
+                        "height": frame.size.height,
                     },
                     "visible_frame": {
                         "x": visible_frame.origin.x,
                         "y": visible_frame.origin.y,
                         "width": visible_frame.size.width,
-                        "height": visible_frame.size.height
-                    }
+                        "height": visible_frame.size.height,
+                    },
                 }
 
                 # Add scale factor if available
-                if hasattr(screen, 'backingScaleFactor'):
+                if hasattr(screen, "backingScaleFactor"):
                     display_data["scale_factor"] = screen.backingScaleFactor()
 
                 display_info["displays"].append(display_data)
@@ -343,11 +332,12 @@ class AppKitPlugin(BaseCapabilityPlugin):
             logger.error(f"Error getting display info: {e}")
             raise
 
-    def _get_window_list(self) -> Dict[str, Any]:
+    def _get_window_list(self) -> dict[str, Any]:
         """
         Get list of visible windows (requires accessibility).
 
-        Returns:
+        Returns
+        -------
             Dictionary with window information
         """
         try:
@@ -355,16 +345,12 @@ class AppKitPlugin(BaseCapabilityPlugin):
 
             # Check accessibility access
             if not self._check_accessibility_access():
-                return {
-                    "error": "Accessibility access required",
-                    "windows": []
-                }
+                return {"error": "Accessibility access required", "windows": []}
 
             # Get window list
             window_list = Quartz.CGWindowListCopyWindowInfo(
-                Quartz.kCGWindowListOptionOnScreenOnly |
-                Quartz.kCGWindowListExcludeDesktopElements,
-                Quartz.kCGNullWindowID
+                Quartz.kCGWindowListOptionOnScreenOnly | Quartz.kCGWindowListExcludeDesktopElements,
+                Quartz.kCGNullWindowID,
             )
 
             windows = []
@@ -375,7 +361,7 @@ class AppKitPlugin(BaseCapabilityPlugin):
                     "owner_name": window.get("kCGWindowOwnerName", ""),
                     "window_name": window.get("kCGWindowName", ""),
                     "owner_pid": window.get("kCGWindowOwnerPID", 0),
-                    "layer": window.get("kCGWindowLayer", 0)
+                    "layer": window.get("kCGWindowLayer", 0),
                 }
 
                 # Get bounds if available
@@ -385,22 +371,16 @@ class AppKitPlugin(BaseCapabilityPlugin):
                         "x": bounds.get("X", 0),
                         "y": bounds.get("Y", 0),
                         "width": bounds.get("Width", 0),
-                        "height": bounds.get("Height", 0)
+                        "height": bounds.get("Height", 0),
                     }
 
                 windows.append(window_data)
 
-            return {
-                "count": len(windows),
-                "windows": windows
-            }
+            return {"count": len(windows), "windows": windows}
 
         except ImportError:
             logger.warning("Quartz framework not available for window enumeration")
-            return {
-                "error": "Quartz framework required",
-                "windows": []
-            }
+            return {"error": "Quartz framework required", "windows": []}
         except Exception as e:
             logger.error(f"Error getting window list: {e}")
             raise

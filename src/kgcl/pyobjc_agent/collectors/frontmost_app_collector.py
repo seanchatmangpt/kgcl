@@ -5,8 +5,8 @@ Samples the currently active application at regular intervals
 to build a timeline of application usage.
 """
 
-from typing import Optional, Dict, Any
 import logging
+from typing import Any
 
 from ..plugins import get_registry
 from .base import BaseCollector, CollectorConfig
@@ -63,11 +63,12 @@ class FrontmostAppCollector(BaseCollector):
             logger.error(f"Error validating frontmost app collector: {e}")
             return False
 
-    def collect_event(self) -> Optional[Dict[str, Any]]:
+    def collect_event(self) -> dict[str, Any] | None:
         """
         Collect current frontmost application.
 
-        Returns:
+        Returns
+        -------
             Event data with frontmost app info or None
         """
         try:
@@ -89,22 +90,21 @@ class FrontmostAppCollector(BaseCollector):
 
             # Detect app switch
             is_switch = (
-                self._last_app_bundle_id is not None and
-                bundle_id != self._last_app_bundle_id
+                self._last_app_bundle_id is not None and bundle_id != self._last_app_bundle_id
             )
 
             # Calculate session duration if switching
             session_duration = None
             if is_switch and self._session_start:
                 from datetime import datetime
+
                 current_time = datetime.utcnow()
-                session_duration = (
-                    current_time - self._session_start
-                ).total_seconds()
+                session_duration = (current_time - self._session_start).total_seconds()
 
             # Update tracking
             if is_switch:
                 from datetime import datetime
+
                 self._session_start = datetime.utcnow()
 
             self._last_app_bundle_id = bundle_id
@@ -118,7 +118,7 @@ class FrontmostAppCollector(BaseCollector):
                 "is_active": app_data.get("is_active", True),
                 "is_switch": is_switch,
                 "session_duration_seconds": session_duration,
-                "launch_date": app_data.get("launch_date")
+                "launch_date": app_data.get("launch_date"),
             }
 
             return event
@@ -129,9 +129,7 @@ class FrontmostAppCollector(BaseCollector):
 
 
 def create_frontmost_app_collector(
-    interval_seconds: float = 1.0,
-    output_path: Optional[str] = None,
-    **kwargs
+    interval_seconds: float = 1.0, output_path: str | None = None, **kwargs
 ) -> FrontmostAppCollector:
     """
     Factory function to create frontmost app collector.
@@ -141,7 +139,8 @@ def create_frontmost_app_collector(
         output_path: Path to JSONL output file
         **kwargs: Additional collector config parameters
 
-    Returns:
+    Returns
+    -------
         Configured FrontmostAppCollector instance
     """
     config = CollectorConfig(
@@ -150,7 +149,7 @@ def create_frontmost_app_collector(
         output_path=output_path or "/Users/sac/dev/kgcl/data/frontmost_app.jsonl",
         batch_size=kwargs.get("batch_size", 50),
         batch_timeout_seconds=kwargs.get("batch_timeout_seconds", 60.0),
-        **{k: v for k, v in kwargs.items() if k not in ["batch_size", "batch_timeout_seconds"]}
+        **{k: v for k, v in kwargs.items() if k not in ["batch_size", "batch_timeout_seconds"]},
     )
 
     return FrontmostAppCollector(config)

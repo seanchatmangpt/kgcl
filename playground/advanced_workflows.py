@@ -3,31 +3,28 @@ Advanced workflows playground - Demonstrates complex test scenarios.
 Uses the installed chicago-tdd-tools package, not source.
 """
 
+import tempfile
+from enum import Enum
+
 from chicago_tdd_tools.core import (
-    test,
-    TestFixture,
-    fixture_test,
-    StateManager,
     FailFastValidator,
     Poka,
     PokaYokeError,
-)
-from chicago_tdd_tools.validation import (
-    InvariantValidator,
-    Guard,
-    ValidatedValue,
+    StateManager,
+    TestFixture,
+    fixture_test,
 )
 from chicago_tdd_tools.testing import PropertyBasedTest, SnapshotTest
-from enum import Enum
-import tempfile
-
+from chicago_tdd_tools.validation import Guard, InvariantValidator, ValidatedValue
 
 # ============================================================================
 # Example 1: State management with validators
 # ============================================================================
 
+
 class OrderState(Enum):
     """Order workflow states."""
+
     PENDING = "pending"
     CONFIRMED = "confirmed"
     SHIPPED = "shipped"
@@ -61,6 +58,7 @@ def example_state_management():
 # Example 2: Fail-fast validation
 # ============================================================================
 
+
 def example_fail_fast():
     """Demonstrate fail-fast validation."""
     print("\n=== Example 2: Fail-Fast Validation ===")
@@ -75,12 +73,13 @@ def example_fail_fast():
 
     # Assert all passed
     validator.assert_all_pass()
-    print(f"✓ Fail-fast validation passed (all checks succeeded)")
+    print("✓ Fail-fast validation passed (all checks succeeded)")
 
 
 # ============================================================================
 # Example 3: Poka-Yoke error prevention
 # ============================================================================
+
 
 def example_poka_yoke():
     """Demonstrate Poka-Yoke error prevention."""
@@ -112,6 +111,7 @@ def example_poka_yoke():
 # Example 4: Invariant validation
 # ============================================================================
 
+
 def example_invariant_validation():
     """Demonstrate invariant validation."""
     print("\n=== Example 4: Invariant Validation ===")
@@ -141,6 +141,7 @@ def example_invariant_validation():
 # Example 5: Guard types
 # ============================================================================
 
+
 def example_guard_types():
     """Demonstrate guard types for validated values."""
     print("\n=== Example 5: Guard Types ===")
@@ -157,13 +158,7 @@ def example_guard_types():
         pass
 
     # ValidatedValue with multiple validators
-    val = ValidatedValue(
-        50,
-        [
-            ("positive", lambda x: x > 0),
-            ("under_100", lambda x: x < 100),
-        ]
-    )
+    val = ValidatedValue(50, [("positive", lambda x: x > 0), ("under_100", lambda x: x < 100)])
     assert val.is_valid()
     assert val.get() == 50
 
@@ -174,13 +169,14 @@ def example_guard_types():
 # Example 6: Property-based testing with statistics
 # ============================================================================
 
+
 def example_property_statistics():
     """Demonstrate property-based testing with statistics."""
     print("\n=== Example 6: Property Statistics ===")
 
     test = PropertyBasedTest(
         "multiplication_property",
-        lambda a, b: a * b == b * a  # Commutative property
+        lambda a, b: a * b == b * a,  # Commutative property
     )
 
     # Add examples
@@ -199,6 +195,7 @@ def example_property_statistics():
 # Example 7: Snapshot testing
 # ============================================================================
 
+
 def example_snapshot_testing():
     """Demonstrate snapshot testing for regression detection."""
     print("\n=== Example 7: Snapshot Testing ===")
@@ -207,11 +204,7 @@ def example_snapshot_testing():
         snapshot_file = f"{tmpdir}/snapshot.json"
 
         # Create initial snapshot
-        api_response = {
-            "status": 200,
-            "data": [1, 2, 3],
-            "timestamp": "2024-01-01T00:00:00Z"
-        }
+        api_response = {"status": 200, "data": [1, 2, 3], "timestamp": "2024-01-01T00:00:00Z"}
 
         test = SnapshotTest("api_response", api_response)
         test.matches_snapshot(snapshot_file, update=True)
@@ -231,6 +224,7 @@ def example_snapshot_testing():
 # ============================================================================
 # Example 8: Complex fixture with state
 # ============================================================================
+
 
 class DatabaseFixture(TestFixture):
     """Simulated database fixture."""
@@ -284,6 +278,7 @@ def example_complex_fixture(fixture):
 # Main execution
 # ============================================================================
 
+
 def main():
     """Run all advanced workflow examples."""
     print("=" * 70)
@@ -308,6 +303,7 @@ def main():
     except Exception as e:
         print(f"\n✗ Error during execution: {e}")
         import traceback
+
         traceback.print_exc()
         return 1
 

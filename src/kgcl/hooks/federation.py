@@ -6,457 +6,442 @@ for federated knowledge graph deployments.
 Ported from UNRDF federation/federation-coordinator.mjs.
 """
 
-from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Set
-from enum import Enum
-from datetime import datetime
 import asyncio
 import logging
-
+from dataclasses import dataclass, field
+from datetime import datetime
+from enum import Enum
+from typing import Any
 
 logger = logging.getLogger(__name__)
 
 
 class NodeStatus(Enum):
-  """Status of a federation node."""
+    """Status of a federation node."""
 
-  HEALTHY = "healthy"
-  DEGRADED = "degraded"
-  FAILED = "failed"
-  UNKNOWN = "unknown"
+    HEALTHY = "healthy"
+    DEGRADED = "degraded"
+    FAILED = "failed"
+    UNKNOWN = "unknown"
 
 
 class ConsistencyLevel(Enum):
-  """Consistency level for operations."""
+    """Consistency level for operations."""
 
-  ONE = "one"  # Single node confirmation
-  QUORUM = "quorum"  # Majority confirmation
-  ALL = "all"  # All nodes confirmation
+    ONE = "one"  # Single node confirmation
+    QUORUM = "quorum"  # Majority confirmation
+    ALL = "all"  # All nodes confirmation
 
 
 @dataclass
 class Node:
-  """Node in federated knowledge graph.
+    """Node in federated knowledge graph.
 
-  Parameters
-  ----------
-  node_id : str
-      Unique node identifier
-  address : str
-      Network address (host:port)
-  is_healthy : bool
-      Health status
-  last_heartbeat : float
-      Last heartbeat timestamp
-  metadata : Dict[str, Any]
-      Node metadata
-  """
+    Parameters
+    ----------
+    node_id : str
+        Unique node identifier
+    address : str
+        Network address (host:port)
+    is_healthy : bool
+        Health status
+    last_heartbeat : float
+        Last heartbeat timestamp
+    metadata : Dict[str, Any]
+        Node metadata
+    """
 
-  node_id: str
-  address: str
-  is_healthy: bool = True
-  last_heartbeat: float = 0.0
-  metadata: Dict[str, Any] = field(default_factory=dict)
-  status: NodeStatus = NodeStatus.HEALTHY
+    node_id: str
+    address: str
+    is_healthy: bool = True
+    last_heartbeat: float = 0.0
+    metadata: dict[str, Any] = field(default_factory=dict)
+    status: NodeStatus = NodeStatus.HEALTHY
 
-  def update_heartbeat(self, timestamp: float) -> None:
-    """Update last heartbeat timestamp."""
-    self.last_heartbeat = timestamp
-    if not self.is_healthy:
-      self.is_healthy = True
-      self.status = NodeStatus.HEALTHY
+    def update_heartbeat(self, timestamp: float) -> None:
+        """Update last heartbeat timestamp."""
+        self.last_heartbeat = timestamp
+        if not self.is_healthy:
+            self.is_healthy = True
+            self.status = NodeStatus.HEALTHY
 
 
 @dataclass
 class ReplicationConfig:
-  """Configuration for data replication.
+    """Configuration for data replication.
 
-  Parameters
-  ----------
-  replication_factor : int
-      Number of replicas to maintain
-  consistency_level : ConsistencyLevel
-      Required consistency level
-  sync_interval_ms : int
-      Synchronization interval
-  """
+    Parameters
+    ----------
+    replication_factor : int
+        Number of replicas to maintain
+    consistency_level : ConsistencyLevel
+        Required consistency level
+    sync_interval_ms : int
+        Synchronization interval
+    """
 
-  replication_factor: int = 3
-  consistency_level: ConsistencyLevel = ConsistencyLevel.QUORUM
-  sync_interval_ms: int = 1000
-  timeout_ms: int = 5000
-  max_retries: int = 3
+    replication_factor: int = 3
+    consistency_level: ConsistencyLevel = ConsistencyLevel.QUORUM
+    sync_interval_ms: int = 1000
+    timeout_ms: int = 5000
+    max_retries: int = 3
 
 
 @dataclass
 class ReplicationResult:
-  """Result of replication operation."""
+    """Result of replication operation."""
 
-  success: bool
-  nodes_confirmed: List[str]
-  nodes_failed: List[str]
-  consistency_achieved: bool
-  timestamp: float
+    success: bool
+    nodes_confirmed: list[str]
+    nodes_failed: list[str]
+    consistency_achieved: bool
+    timestamp: float
 
 
 class FederationCoordinator:
-  """Coordinate knowledge graph across multiple nodes.
+    """Coordinate knowledge graph across multiple nodes.
 
-  Implements:
-  - Node registration and health monitoring
-  - Data replication with configurable consistency
-  - Quorum-based consensus writes
-  - Failure detection and recovery
-  """
-
-  def __init__(self, local_node_id: str) -> None:
-    """Initialize federation coordinator.
-
-    Parameters
-    ----------
-    local_node_id : str
-        ID of the local node
+    Implements:
+    - Node registration and health monitoring
+    - Data replication with configurable consistency
+    - Quorum-based consensus writes
+    - Failure detection and recovery
     """
-    self.local_node_id = local_node_id
-    self.nodes: Dict[str, Node] = {}
-    self.replication_config = ReplicationConfig()
-    self._pending_writes: Dict[str, Set[str]] = {}  # write_id -> confirmed nodes
 
-  def register_node(self, node: Node) -> None:
-    """Register new node in federation.
+    def __init__(self, local_node_id: str) -> None:
+        """Initialize federation coordinator.
 
-    Parameters
-    ----------
-    node : Node
-        Node to register
-    """
-    self.nodes[node.node_id] = node
-    logger.info(f"Registered node {node.node_id} at {node.address}")
+        Parameters
+        ----------
+        local_node_id : str
+            ID of the local node
+        """
+        self.local_node_id = local_node_id
+        self.nodes: dict[str, Node] = {}
+        self.replication_config = ReplicationConfig()
+        self._pending_writes: dict[str, set[str]] = {}  # write_id -> confirmed nodes
 
-  def unregister_node(self, node_id: str) -> bool:
-    """Unregister node from federation.
+    def register_node(self, node: Node) -> None:
+        """Register new node in federation.
 
-    Parameters
-    ----------
-    node_id : str
-        Node ID to unregister
+        Parameters
+        ----------
+        node : Node
+            Node to register
+        """
+        self.nodes[node.node_id] = node
+        logger.info(f"Registered node {node.node_id} at {node.address}")
 
-    Returns
-    -------
-    bool
-        True if node was removed
-    """
-    if node_id in self.nodes:
-      del self.nodes[node_id]
-      logger.info(f"Unregistered node {node_id}")
-      return True
-    return False
+    def unregister_node(self, node_id: str) -> bool:
+        """Unregister node from federation.
 
-  def get_healthy_nodes(self) -> List[Node]:
-    """Get all healthy nodes.
+        Parameters
+        ----------
+        node_id : str
+            Node ID to unregister
 
-    Returns
-    -------
-    List[Node]
-        List of healthy nodes
-    """
-    return [n for n in self.nodes.values() if n.is_healthy]
+        Returns
+        -------
+        bool
+            True if node was removed
+        """
+        if node_id in self.nodes:
+            del self.nodes[node_id]
+            logger.info(f"Unregistered node {node_id}")
+            return True
+        return False
 
-  def mark_node_unhealthy(self, node_id: str) -> None:
-    """Mark node as unhealthy.
+    def get_healthy_nodes(self) -> list[Node]:
+        """Get all healthy nodes.
 
-    Parameters
-    ----------
-    node_id : str
-        Node ID to mark unhealthy
-    """
-    if node_id in self.nodes:
-      self.nodes[node_id].is_healthy = False
-      self.nodes[node_id].status = NodeStatus.FAILED
-      logger.warning(f"Marked node {node_id} as unhealthy")
+        Returns
+        -------
+        List[Node]
+            List of healthy nodes
+        """
+        return [n for n in self.nodes.values() if n.is_healthy]
 
-  def check_heartbeat(
-    self, node_id: str, max_age_ms: float = 5000
-  ) -> bool:
-    """Check if node heartbeat is recent.
+    def mark_node_unhealthy(self, node_id: str) -> None:
+        """Mark node as unhealthy.
 
-    Parameters
-    ----------
-    node_id : str
-        Node ID to check
-    max_age_ms : float
-        Maximum age of heartbeat in milliseconds
+        Parameters
+        ----------
+        node_id : str
+            Node ID to mark unhealthy
+        """
+        if node_id in self.nodes:
+            self.nodes[node_id].is_healthy = False
+            self.nodes[node_id].status = NodeStatus.FAILED
+            logger.warning(f"Marked node {node_id} as unhealthy")
 
-    Returns
-    -------
-    bool
-        True if heartbeat is recent
-    """
-    if node_id not in self.nodes:
-      return False
+    def check_heartbeat(self, node_id: str, max_age_ms: float = 5000) -> bool:
+        """Check if node heartbeat is recent.
 
-    node = self.nodes[node_id]
-    now = datetime.utcnow().timestamp()
-    age_ms = (now - node.last_heartbeat) * 1000
+        Parameters
+        ----------
+        node_id : str
+            Node ID to check
+        max_age_ms : float
+            Maximum age of heartbeat in milliseconds
 
-    if age_ms > max_age_ms:
-      self.mark_node_unhealthy(node_id)
-      return False
+        Returns
+        -------
+        bool
+            True if heartbeat is recent
+        """
+        if node_id not in self.nodes:
+            return False
 
-    return True
+        node = self.nodes[node_id]
+        now = datetime.utcnow().timestamp()
+        age_ms = (now - node.last_heartbeat) * 1000
 
-  async def replicate_change(
-    self, triple: tuple, write_id: Optional[str] = None
-  ) -> ReplicationResult:
-    """Replicate change to other nodes.
+        if age_ms > max_age_ms:
+            self.mark_node_unhealthy(node_id)
+            return False
 
-    Parameters
-    ----------
-    triple : tuple
-        Triple to replicate (subject, predicate, object)
-    write_id : Optional[str]
-        Unique write identifier
+        return True
 
-    Returns
-    -------
-    ReplicationResult
-        Result of replication operation
-    """
-    if write_id is None:
-      write_id = f"write_{datetime.utcnow().timestamp()}"
+    async def replicate_change(
+        self, triple: tuple, write_id: str | None = None
+    ) -> ReplicationResult:
+        """Replicate change to other nodes.
 
-    healthy_nodes = self.get_healthy_nodes()
-    target_count = min(
-      self.replication_config.replication_factor, len(healthy_nodes)
-    )
+        Parameters
+        ----------
+        triple : tuple
+            Triple to replicate (subject, predicate, object)
+        write_id : Optional[str]
+            Unique write identifier
 
-    # Select nodes for replication
-    target_nodes = healthy_nodes[:target_count]
+        Returns
+        -------
+        ReplicationResult
+            Result of replication operation
+        """
+        if write_id is None:
+            write_id = f"write_{datetime.utcnow().timestamp()}"
 
-    # Track confirmations
-    self._pending_writes[write_id] = set()
+        healthy_nodes = self.get_healthy_nodes()
+        target_count = min(self.replication_config.replication_factor, len(healthy_nodes))
 
-    # Simulate replication to nodes (in real implementation, would use network calls)
-    confirmed: List[str] = []
-    failed: List[str] = []
+        # Select nodes for replication
+        target_nodes = healthy_nodes[:target_count]
 
-    for node in target_nodes:
-      try:
-        # Simulate async replication
-        success = await self._replicate_to_node(node, triple)
-        if success:
-          confirmed.append(node.node_id)
-          self._pending_writes[write_id].add(node.node_id)
-        else:
-          failed.append(node.node_id)
-      except Exception as e:
-        logger.error(f"Replication to {node.node_id} failed: {e}")
-        failed.append(node.node_id)
+        # Track confirmations
+        self._pending_writes[write_id] = set()
 
-    # Check consistency
-    consistency_achieved = self._check_consistency(
-      len(confirmed), len(target_nodes)
-    )
+        # Simulate replication to nodes (in real implementation, would use network calls)
+        confirmed: list[str] = []
+        failed: list[str] = []
 
-    result = ReplicationResult(
-      success=consistency_achieved,
-      nodes_confirmed=confirmed,
-      nodes_failed=failed,
-      consistency_achieved=consistency_achieved,
-      timestamp=datetime.utcnow().timestamp(),
-    )
+        for node in target_nodes:
+            try:
+                # Simulate async replication
+                success = await self._replicate_to_node(node, triple)
+                if success:
+                    confirmed.append(node.node_id)
+                    self._pending_writes[write_id].add(node.node_id)
+                else:
+                    failed.append(node.node_id)
+            except Exception as e:
+                logger.error(f"Replication to {node.node_id} failed: {e}")
+                failed.append(node.node_id)
 
-    # Clean up pending write
-    if write_id in self._pending_writes:
-      del self._pending_writes[write_id]
+        # Check consistency
+        consistency_achieved = self._check_consistency(len(confirmed), len(target_nodes))
 
-    return result
+        result = ReplicationResult(
+            success=consistency_achieved,
+            nodes_confirmed=confirmed,
+            nodes_failed=failed,
+            consistency_achieved=consistency_achieved,
+            timestamp=datetime.utcnow().timestamp(),
+        )
 
-  async def _replicate_to_node(
-    self, node: Node, triple: tuple
-  ) -> bool:
-    """Replicate triple to specific node.
+        # Clean up pending write
+        if write_id in self._pending_writes:
+            del self._pending_writes[write_id]
 
-    Parameters
-    ----------
-    node : Node
-        Target node
-    triple : tuple
-        Triple to replicate
+        return result
 
-    Returns
-    -------
-    bool
-        True if replication succeeded
-    """
-    # Simulate network delay
-    await asyncio.sleep(0.001)
+    async def _replicate_to_node(self, node: Node, triple: tuple) -> bool:
+        """Replicate triple to specific node.
 
-    # Simulate 95% success rate
-    import random
+        Parameters
+        ----------
+        node : Node
+            Target node
+        triple : tuple
+            Triple to replicate
 
-    return random.random() < 0.95
+        Returns
+        -------
+        bool
+            True if replication succeeded
+        """
+        # Simulate network delay
+        await asyncio.sleep(0.001)
 
-  def _check_consistency(
-    self, confirmed_count: int, target_count: int
-  ) -> bool:
-    """Check if consistency level is achieved.
+        # Simulate 95% success rate
+        import random
 
-    Parameters
-    ----------
-    confirmed_count : int
-        Number of nodes that confirmed
-    target_count : int
-        Total number of target nodes
+        return random.random() < 0.95
 
-    Returns
-    -------
-    bool
-        True if consistency level achieved
-    """
-    level = self.replication_config.consistency_level
+    def _check_consistency(self, confirmed_count: int, target_count: int) -> bool:
+        """Check if consistency level is achieved.
 
-    if level == ConsistencyLevel.ONE:
-      return confirmed_count >= 1
-    elif level == ConsistencyLevel.QUORUM:
-      return confirmed_count >= (target_count // 2 + 1)
-    elif level == ConsistencyLevel.ALL:
-      return confirmed_count == target_count
+        Parameters
+        ----------
+        confirmed_count : int
+            Number of nodes that confirmed
+        target_count : int
+            Total number of target nodes
 
-    return False
+        Returns
+        -------
+        bool
+            True if consistency level achieved
+        """
+        level = self.replication_config.consistency_level
 
-  async def consensus_write(
-    self, triple: tuple
-  ) -> ReplicationResult:
-    """Write with quorum consensus.
+        if level == ConsistencyLevel.ONE:
+            return confirmed_count >= 1
+        if level == ConsistencyLevel.QUORUM:
+            return confirmed_count >= (target_count // 2 + 1)
+        if level == ConsistencyLevel.ALL:
+            return confirmed_count == target_count
 
-    Parameters
-    ----------
-    triple : tuple
-        Triple to write
+        return False
 
-    Returns
-    -------
-    ReplicationResult
-        Result of consensus write
-    """
-    # Set consistency level to quorum
-    original_level = self.replication_config.consistency_level
-    self.replication_config.consistency_level = ConsistencyLevel.QUORUM
+    async def consensus_write(self, triple: tuple) -> ReplicationResult:
+        """Write with quorum consensus.
 
-    try:
-      result = await self.replicate_change(triple)
-      return result
-    finally:
-      self.replication_config.consistency_level = original_level
+        Parameters
+        ----------
+        triple : tuple
+            Triple to write
 
-  def get_cluster_stats(self) -> Dict[str, Any]:
-    """Get cluster statistics.
+        Returns
+        -------
+        ReplicationResult
+            Result of consensus write
+        """
+        # Set consistency level to quorum
+        original_level = self.replication_config.consistency_level
+        self.replication_config.consistency_level = ConsistencyLevel.QUORUM
 
-    Returns
-    -------
-    Dict[str, Any]
-        Cluster statistics
-    """
-    healthy_nodes = self.get_healthy_nodes()
-    return {
-      "total_nodes": len(self.nodes),
-      "healthy_nodes": len(healthy_nodes),
-      "failed_nodes": len(self.nodes) - len(healthy_nodes),
-      "replication_factor": self.replication_config.replication_factor,
-      "consistency_level": self.replication_config.consistency_level.value,
-      "pending_writes": len(self._pending_writes),
-    }
+        try:
+            result = await self.replicate_change(triple)
+            return result
+        finally:
+            self.replication_config.consistency_level = original_level
 
-  def select_read_node(self) -> Optional[Node]:
-    """Select node for read operation.
+    def get_cluster_stats(self) -> dict[str, Any]:
+        """Get cluster statistics.
 
-    Uses simple load balancing (round-robin over healthy nodes).
+        Returns
+        -------
+        Dict[str, Any]
+            Cluster statistics
+        """
+        healthy_nodes = self.get_healthy_nodes()
+        return {
+            "total_nodes": len(self.nodes),
+            "healthy_nodes": len(healthy_nodes),
+            "failed_nodes": len(self.nodes) - len(healthy_nodes),
+            "replication_factor": self.replication_config.replication_factor,
+            "consistency_level": self.replication_config.consistency_level.value,
+            "pending_writes": len(self._pending_writes),
+        }
 
-    Returns
-    -------
-    Optional[Node]
-        Selected node or None if no healthy nodes
-    """
-    healthy = self.get_healthy_nodes()
-    if not healthy:
-      return None
+    def select_read_node(self) -> Node | None:
+        """Select node for read operation.
 
-    # Simple round-robin (in real implementation, would track position)
-    return healthy[0]
+        Uses simple load balancing (round-robin over healthy nodes).
 
-  def get_quorum_size(self) -> int:
-    """Calculate quorum size.
+        Returns
+        -------
+        Optional[Node]
+            Selected node or None if no healthy nodes
+        """
+        healthy = self.get_healthy_nodes()
+        if not healthy:
+            return None
 
-    Returns
-    -------
-    int
-        Number of nodes needed for quorum
-    """
-    total = len(self.nodes)
-    return total // 2 + 1
+        # Simple round-robin (in real implementation, would track position)
+        return healthy[0]
 
-  def has_quorum(self) -> bool:
-    """Check if cluster has quorum.
+    def get_quorum_size(self) -> int:
+        """Calculate quorum size.
 
-    Returns
-    -------
-    bool
-        True if quorum is available
-    """
-    healthy_count = len(self.get_healthy_nodes())
-    return healthy_count >= self.get_quorum_size()
+        Returns
+        -------
+        int
+            Number of nodes needed for quorum
+        """
+        total = len(self.nodes)
+        return total // 2 + 1
+
+    def has_quorum(self) -> bool:
+        """Check if cluster has quorum.
+
+        Returns
+        -------
+        bool
+            True if quorum is available
+        """
+        healthy_count = len(self.get_healthy_nodes())
+        return healthy_count >= self.get_quorum_size()
 
 
 class GossipProtocol:
-  """Gossip-based information dissemination.
+    """Gossip-based information dissemination.
 
-  Implements epidemic protocol for spreading updates across federation.
-  """
-
-  def __init__(self, coordinator: FederationCoordinator) -> None:
-    """Initialize gossip protocol.
-
-    Parameters
-    ----------
-    coordinator : FederationCoordinator
-        Federation coordinator
+    Implements epidemic protocol for spreading updates across federation.
     """
-    self.coordinator = coordinator
-    self.gossip_fanout = 3  # Number of nodes to gossip to
-    self.gossip_interval_ms = 100
 
-  async def gossip_update(
-    self, update: Dict[str, Any]
-  ) -> List[str]:
-    """Gossip update to random nodes.
+    def __init__(self, coordinator: FederationCoordinator) -> None:
+        """Initialize gossip protocol.
 
-    Parameters
-    ----------
-    update : Dict[str, Any]
-        Update to disseminate
+        Parameters
+        ----------
+        coordinator : FederationCoordinator
+            Federation coordinator
+        """
+        self.coordinator = coordinator
+        self.gossip_fanout = 3  # Number of nodes to gossip to
+        self.gossip_interval_ms = 100
 
-    Returns
-    -------
-    List[str]
-        List of node IDs that received update
-    """
-    import random
+    async def gossip_update(self, update: dict[str, Any]) -> list[str]:
+        """Gossip update to random nodes.
 
-    healthy_nodes = self.coordinator.get_healthy_nodes()
+        Parameters
+        ----------
+        update : Dict[str, Any]
+            Update to disseminate
 
-    # Select random subset of nodes
-    fanout = min(self.gossip_fanout, len(healthy_nodes))
-    targets = random.sample(healthy_nodes, fanout)
+        Returns
+        -------
+        List[str]
+            List of node IDs that received update
+        """
+        import random
 
-    notified: List[str] = []
+        healthy_nodes = self.coordinator.get_healthy_nodes()
 
-    for node in targets:
-      try:
-        # Simulate gossip (in real implementation, would send update)
-        await asyncio.sleep(0.001)
-        notified.append(node.node_id)
-      except Exception as e:
-        logger.error(f"Gossip to {node.node_id} failed: {e}")
+        # Select random subset of nodes
+        fanout = min(self.gossip_fanout, len(healthy_nodes))
+        targets = random.sample(healthy_nodes, fanout)
 
-    return notified
+        notified: list[str] = []
+
+        for node in targets:
+            try:
+                # Simulate gossip (in real implementation, would send update)
+                await asyncio.sleep(0.001)
+                notified.append(node.node_id)
+            except Exception as e:
+                logger.error(f"Gossip to {node.node_id} failed: {e}")
+
+        return notified

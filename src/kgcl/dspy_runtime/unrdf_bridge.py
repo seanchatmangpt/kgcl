@@ -6,16 +6,14 @@ and generate receipts integrated with the knowledge graph.
 """
 
 import logging
-import json
-from typing import Any, Dict, Optional
-from pathlib import Path
+from typing import Any
 
+from opentelemetry import trace
 from rdflib import Graph
 
-from .ollama_config import OllamaLM, OllamaConfig
-from .invoker import SignatureInvoker, InvocationResult
-from .receipts import ReceiptGenerator, Receipt
-from opentelemetry import trace
+from .invoker import SignatureInvoker
+from .ollama_config import OllamaConfig, OllamaLM
+from .receipts import ReceiptGenerator
 
 logger = logging.getLogger(__name__)
 tracer = trace.get_tracer(__name__)
@@ -24,11 +22,7 @@ tracer = trace.get_tracer(__name__)
 class UNRDFBridge:
     """Bridge between UNRDF and DSPy runtime."""
 
-    def __init__(
-        self,
-        ollama_config: Optional[OllamaConfig] = None,
-        rdf_graph: Optional[Graph] = None,
-    ):
+    def __init__(self, ollama_config: OllamaConfig | None = None, rdf_graph: Graph | None = None):
         """
         Initialize UNRDF bridge.
 
@@ -37,8 +31,8 @@ class UNRDFBridge:
             rdf_graph: RDF graph for receipts. If None, creates new graph.
         """
         self.ollama_config = ollama_config or OllamaConfig.from_env()
-        self.ollama_lm: Optional[OllamaLM] = None
-        self.invoker: Optional[SignatureInvoker] = None
+        self.ollama_lm: OllamaLM | None = None
+        self.invoker: SignatureInvoker | None = None
         self.receipt_generator = ReceiptGenerator(rdf_graph)
         self._initialized = False
 
@@ -46,7 +40,8 @@ class UNRDFBridge:
         """
         Initialize bridge components.
 
-        Raises:
+        Raises
+        ------
             RuntimeError: If DSPy or Ollama not available
         """
         if self._initialized:
@@ -70,11 +65,11 @@ class UNRDFBridge:
         self,
         module_path: str,
         signature_name: str,
-        inputs: Dict[str, Any],
-        source_features: Optional[list[str]] = None,
-        source_signatures: Optional[list[str]] = None,
-        **kwargs
-    ) -> Dict[str, Any]:
+        inputs: dict[str, Any],
+        source_features: list[str] | None = None,
+        source_signatures: list[str] | None = None,
+        **kwargs,
+    ) -> dict[str, Any]:
         """
         Invoke DSPy signature and generate receipt.
 
@@ -88,7 +83,8 @@ class UNRDFBridge:
             source_signatures: URIs of source signature definitions
             **kwargs: Additional arguments for prediction
 
-        Returns:
+        Returns
+        -------
             Dictionary with invocation result and receipt
         """
         with tracer.start_as_current_span("unrdf.bridge.invoke") as span:
@@ -102,10 +98,7 @@ class UNRDFBridge:
 
             # Invoke signature
             result = self.invoker.invoke_from_module(
-                module_path=module_path,
-                signature_name=signature_name,
-                inputs=inputs,
-                **kwargs
+                module_path=module_path, signature_name=signature_name, inputs=inputs, **kwargs
             )
 
             # Generate receipt
@@ -120,7 +113,7 @@ class UNRDFBridge:
                 error=result.error,
                 source_features=source_features,
                 source_signatures=source_signatures,
-                **result.metrics
+                **result.metrics,
             )
 
             # Store receipt in RDF graph
@@ -135,10 +128,7 @@ class UNRDFBridge:
                 "receipt_uri": str(receipt_uri),
             }
 
-    def batch_invoke(
-        self,
-        invocations: list[Dict[str, Any]]
-    ) -> list[Dict[str, Any]]:
+    def batch_invoke(self, invocations: list[dict[str, Any]]) -> list[dict[str, Any]]:
         """
         Invoke multiple signatures in batch.
 
@@ -150,7 +140,8 @@ class UNRDFBridge:
                 - source_features: (optional) Source feature URIs
                 - source_signatures: (optional) Source signature URIs
 
-        Returns:
+        Returns
+        -------
             List of invocation results with receipts
         """
         with tracer.start_as_current_span("unrdf.bridge.batch_invoke") as span:
@@ -170,28 +161,31 @@ class UNRDFBridge:
                     results.append(result)
                 except Exception as e:
                     logger.error(f"Batch invocation {i} failed: {e}", exc_info=True)
-                    results.append({
-                        "result": {
-                            "success": False,
-                            "error": str(e),
-                            "inputs": inv_payload.get("inputs", {}),
-                        },
-                        "receipt": None,
-                        "receipt_uri": None,
-                    })
+                    results.append(
+                        {
+                            "result": {
+                                "success": False,
+                                "error": str(e),
+                                "inputs": inv_payload.get("inputs", {}),
+                            },
+                            "receipt": None,
+                            "receipt_uri": None,
+                        }
+                    )
 
             span.set_attribute("success_count", sum(1 for r in results if r["result"]["success"]))
 
             return results
 
-    def get_receipt(self, receipt_id: str) -> Optional[Dict[str, Any]]:
+    def get_receipt(self, receipt_id: str) -> dict[str, Any] | None:
         """
         Retrieve receipt by ID.
 
         Args:
             receipt_id: Receipt ID
 
-        Returns:
+        Returns
+        -------
             Receipt dictionary if found, None otherwise
         """
         receipt = self.receipt_generator.get_receipt(receipt_id)
@@ -199,10 +193,10 @@ class UNRDFBridge:
 
     def list_receipts(
         self,
-        signature_name: Optional[str] = None,
-        success: Optional[bool] = None,
-        limit: Optional[int] = 100
-    ) -> list[Dict[str, Any]]:
+        signature_name: str | None = None,
+        success: bool | None = None,
+        limit: int | None = 100,
+    ) -> list[dict[str, Any]]:
         """
         List receipts with optional filters.
 
@@ -211,21 +205,16 @@ class UNRDFBridge:
             success: Filter by success status
             limit: Maximum number of receipts
 
-        Returns:
+        Returns
+        -------
             List of receipt dictionaries
         """
         receipts = self.receipt_generator.list_receipts(
-            signature_name=signature_name,
-            success=success,
-            limit=limit
+            signature_name=signature_name, success=success, limit=limit
         )
         return [r.to_dict() for r in receipts]
 
-    def export_receipts(
-        self,
-        output_path: str,
-        format: str = "turtle"
-    ) -> None:
+    def export_receipts(self, output_path: str, format: str = "turtle") -> None:
         """
         Export receipt graph to file.
 
@@ -236,11 +225,7 @@ class UNRDFBridge:
         self.receipt_generator.export_graph(output_path, format)
         logger.info(f"Exported receipts to {output_path}")
 
-    def import_receipts(
-        self,
-        input_path: str,
-        format: str = "turtle"
-    ) -> None:
+    def import_receipts(self, input_path: str, format: str = "turtle") -> None:
         """
         Import receipt graph from file.
 
@@ -251,11 +236,12 @@ class UNRDFBridge:
         self.receipt_generator.import_graph(input_path, format)
         logger.info(f"Imported receipts from {input_path}")
 
-    def health_check(self) -> Dict[str, Any]:
+    def health_check(self) -> dict[str, Any]:
         """
         Perform health check of bridge components.
 
-        Returns:
+        Returns
+        -------
             Health check results
         """
         from .ollama_config import health_check as ollama_health_check
@@ -266,11 +252,12 @@ class UNRDFBridge:
 
         return health
 
-    def get_stats(self) -> Dict[str, Any]:
+    def get_stats(self) -> dict[str, Any]:
         """
         Get bridge statistics.
 
-        Returns:
+        Returns
+        -------
             Statistics dictionary
         """
         receipts = self.receipt_generator.list_receipts()
@@ -280,14 +267,12 @@ class UNRDFBridge:
         failed = total - successful
 
         if total > 0:
-            avg_latency = sum(
-                r.latency_seconds for r in receipts if r.latency_seconds
-            ) / total
+            avg_latency = sum(r.latency_seconds for r in receipts if r.latency_seconds) / total
         else:
             avg_latency = 0
 
         # Count by signature
-        signature_counts: Dict[str, int] = {}
+        signature_counts: dict[str, int] = {}
         for receipt in receipts:
             sig = receipt.signature_name
             signature_counts[sig] = signature_counts.get(sig, 0) + 1

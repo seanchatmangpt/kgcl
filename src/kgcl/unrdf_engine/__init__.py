@@ -32,13 +32,11 @@ Basic usage with hooks::
     registry = PersistentHookRegistry(storage_path=Path("hooks.json"))
     engine = UnrdfEngine(file_path=Path("graph.ttl"), hook_registry=registry)
 
+
     # Define a validation hook
     class ValidationHook(KnowledgeHook):
         def __init__(self):
-            super().__init__(
-                name="validator",
-                phases=[HookPhase.PRE_TRANSACTION]
-            )
+            super().__init__(name="validator", phases=[HookPhase.PRE_TRANSACTION])
 
         def execute(self, context):
             # Validate data before commit
@@ -46,15 +44,13 @@ Basic usage with hooks::
                 context.metadata["should_rollback"] = True
                 context.metadata["rollback_reason"] = "Invalid data"
 
+
     # Register hook
     registry.register(ValidationHook())
 
     # Use ingestion pipeline
     pipeline = IngestionPipeline(engine)
-    result = pipeline.ingest_json(
-        data={"type": "Person", "name": "Alice"},
-        agent="api_service"
-    )
+    result = pipeline.ingest_json(data={"type": "Person", "name": "Alice"}, agent="api_service")
 
     # Check hook receipts
     for receipt in result.hook_results:
@@ -62,22 +58,22 @@ Basic usage with hooks::
 
 """
 
-from kgcl.unrdf_engine.engine import UnrdfEngine, Transaction, ProvenanceRecord
+from kgcl.unrdf_engine.engine import ProvenanceRecord, Transaction, UnrdfEngine
+from kgcl.unrdf_engine.externals import ExternalCapabilityBridge
+from kgcl.unrdf_engine.hook_registry import HookMetadata, PersistentHookRegistry
 from kgcl.unrdf_engine.hooks import (
-    KnowledgeHook,
-    HookRegistry,
+    FeatureTemplateHook,
+    HookContext,
     HookExecutor,
     HookPhase,
-    HookContext,
+    HookRegistry,
+    KnowledgeHook,
     Receipt,
     TriggerCondition,
     ValidationFailureHook,
-    FeatureTemplateHook,
 )
-from kgcl.unrdf_engine.hook_registry import PersistentHookRegistry, HookMetadata
-from kgcl.unrdf_engine.validation import ShaclValidator, ValidationResult
-from kgcl.unrdf_engine.externals import ExternalCapabilityBridge
 from kgcl.unrdf_engine.ingestion import IngestionPipeline, IngestionResult
+from kgcl.unrdf_engine.validation import ShaclValidator, ValidationResult
 
 __all__ = [
     # Core engine

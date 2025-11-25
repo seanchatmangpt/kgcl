@@ -9,15 +9,15 @@ This package provides collectors that:
 """
 
 from .base import BaseCollector, CollectorConfig, CollectorStatus
-from .frontmost_app_collector import FrontmostAppCollector
 from .browser_history_collector import BrowserHistoryCollector
 from .calendar_collector import CalendarCollector
+from .frontmost_app_collector import FrontmostAppCollector
 
 __all__ = [
     "BaseCollector",
+    "BrowserHistoryCollector",
+    "CalendarCollector",
     "CollectorConfig",
     "CollectorStatus",
     "FrontmostAppCollector",
-    "BrowserHistoryCollector",
-    "CalendarCollector"
 ]

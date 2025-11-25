@@ -3,10 +3,9 @@
 import json
 import logging
 import time
-from dataclasses import dataclass, asdict
+from dataclasses import asdict, dataclass
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional, Union
 
 logger = logging.getLogger(__name__)
 
@@ -22,9 +21,9 @@ class WriteResult:
     write_time: float
     lines_count: int
     timestamp: str
-    ttl_source: Optional[str] = None
+    ttl_source: str | None = None
 
-    def to_dict(self) -> Dict:
+    def to_dict(self) -> dict:
         """Convert to dictionary."""
         return {
             **asdict(self),
@@ -47,14 +46,14 @@ class ModuleWriter:
             track_commits: Enable git commit tracking
         """
         self.track_commits = track_commits
-        self._write_history: List[WriteResult] = []
+        self._write_history: list[WriteResult] = []
 
     def write_module(
         self,
         code: str,
-        output_path: Union[str, Path],
+        output_path: str | Path,
         shapes_count: int = 0,
-        ttl_source: Optional[Union[str, Path]] = None,
+        ttl_source: str | Path | None = None,
         format_code: bool = True,
     ) -> WriteResult:
         """Write generated code to a Python file.
@@ -66,7 +65,8 @@ class ModuleWriter:
             ttl_source: Source TTL file path
             format_code: Apply code formatting
 
-        Returns:
+        Returns
+        -------
             WriteResult with metrics
         """
         output_path = Path(output_path)
@@ -111,11 +111,8 @@ class ModuleWriter:
         return result
 
     def write_batch(
-        self,
-        modules: Dict[str, str],
-        output_dir: Union[str, Path],
-        format_code: bool = True,
-    ) -> List[WriteResult]:
+        self, modules: dict[str, str], output_dir: str | Path, format_code: bool = True
+    ) -> list[WriteResult]:
         """Write multiple modules in batch.
 
         Args:
@@ -123,7 +120,8 @@ class ModuleWriter:
             output_dir: Output directory
             format_code: Apply code formatting
 
-        Returns:
+        Returns
+        -------
             List of WriteResults
         """
         output_dir = Path(output_dir)
@@ -132,11 +130,7 @@ class ModuleWriter:
         results = []
         for module_name, code in modules.items():
             output_path = output_dir / f"{module_name}.py"
-            result = self.write_module(
-                code=code,
-                output_path=output_path,
-                format_code=format_code,
-            )
+            result = self.write_module(code=code, output_path=output_path, format_code=format_code)
             results.append(result)
 
         # Write __init__.py to make it a package
@@ -147,18 +141,15 @@ class ModuleWriter:
 
         return results
 
-    def write_receipt(
-        self,
-        result: WriteResult,
-        receipt_path: Optional[Union[str, Path]] = None,
-    ) -> Path:
+    def write_receipt(self, result: WriteResult, receipt_path: str | Path | None = None) -> Path:
         """Write a JSON receipt for a module write.
 
         Args:
             result: WriteResult to serialize
             receipt_path: Path to write receipt (default: beside module)
 
-        Returns:
+        Returns
+        -------
             Path to receipt file
         """
         if receipt_path is None:
@@ -177,12 +168,14 @@ class ModuleWriter:
         Args:
             code: Python code to format
 
-        Returns:
+        Returns
+        -------
             Formatted code
         """
         # Try to use black if available
         try:
             import black
+
             mode = black.Mode(line_length=88)
             code = black.format_str(code, mode=mode)
             logger.debug("Formatted code with black")
@@ -193,13 +186,14 @@ class ModuleWriter:
 
         return code
 
-    def _generate_init(self, module_names: List[str]) -> str:
+    def _generate_init(self, module_names: list[str]) -> str:
         """Generate __init__.py for a package.
 
         Args:
             module_names: List of module names
 
-        Returns:
+        Returns
+        -------
             __init__.py content
         """
         lines = [
@@ -213,11 +207,11 @@ class ModuleWriter:
 
         return "\n".join(lines) + "\n"
 
-    def get_history(self) -> List[WriteResult]:
+    def get_history(self) -> list[WriteResult]:
         """Get write history."""
         return self._write_history
 
-    def export_metrics(self, output_path: Union[str, Path]):
+    def export_metrics(self, output_path: str | Path):
         """Export all metrics to JSON.
 
         Args:

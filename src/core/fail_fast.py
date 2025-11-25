@@ -3,14 +3,16 @@
 Provides early failure detection for test scenarios.
 """
 
-from typing import Callable, Any, Optional, List
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from datetime import datetime
+from typing import Any
 
 
 @dataclass
 class ValidationFailure:
     """Represents a validation failure"""
+
     check_name: str
     reason: str
     timestamp: datetime = field(default_factory=datetime.now)
@@ -36,13 +38,10 @@ class FailFastValidator:
 
     def __init__(self, fail_fast: bool = False) -> None:
         self._fail_fast = fail_fast
-        self._failures: List[ValidationFailure] = []
+        self._failures: list[ValidationFailure] = []
 
     def check_that(
-        self,
-        check_name: str,
-        condition: Callable[[], bool],
-        context: Optional[dict] = None
+        self, check_name: str, condition: Callable[[], bool], context: dict | None = None
     ) -> bool:
         """Check a condition
 
@@ -51,17 +50,17 @@ class FailFastValidator:
             condition: Callable that returns True if check passes
             context: Optional context data
 
-        Returns:
+        Returns
+        -------
             True if check passed, False otherwise
 
-        Raises:
+        Raises
+        ------
             AssertionError: If fail_fast=True and check fails
         """
         if not condition():
             failure = ValidationFailure(
-                check_name=check_name,
-                reason=f"Check '{check_name}' failed",
-                context=context or {}
+                check_name=check_name, reason=f"Check '{check_name}' failed", context=context or {}
             )
             self._failures.append(failure)
 
@@ -73,9 +72,7 @@ class FailFastValidator:
     def check_equal(self, check_name: str, actual: Any, expected: Any) -> bool:
         """Check equality"""
         return self.check_that(
-            check_name,
-            lambda: actual == expected,
-            context={"actual": actual, "expected": expected}
+            check_name, lambda: actual == expected, context={"actual": actual, "expected": expected}
         )
 
     def check_true(self, check_name: str, value: bool) -> bool:
@@ -94,14 +91,15 @@ class FailFastValidator:
         """Get count of failures"""
         return len(self._failures)
 
-    def failures(self) -> List[ValidationFailure]:
+    def failures(self) -> list[ValidationFailure]:
         """Get all failures"""
         return self._failures.copy()
 
     def assert_all_pass(self) -> None:
         """Assert that all checks passed
 
-        Raises:
+        Raises
+        ------
             AssertionError: If any checks failed
         """
         if self._failures:

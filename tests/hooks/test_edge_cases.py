@@ -1,6 +1,7 @@
 """Tests for edge_cases module."""
 
 import pytest
+
 from kgcl.hooks.edge_cases import EdgeCaseHandler
 
 
@@ -12,10 +13,10 @@ class TestEdgeCaseHandler:
         handler = EdgeCaseHandler()
         assert len(handler.handlers) > 0
         # Check default handlers are registered
-        assert 'empty_result' in handler.handlers
-        assert 'null_value' in handler.handlers
-        assert 'timeout' in handler.handlers
-        assert 'memory_pressure' in handler.handlers
+        assert "empty_result" in handler.handlers
+        assert "null_value" in handler.handlers
+        assert "timeout" in handler.handlers
+        assert "memory_pressure" in handler.handlers
 
     def test_register_custom_handler(self):
         """Test registering custom handler."""
@@ -79,10 +80,9 @@ class TestEdgeCaseHandler:
     def test_handle_empty_result_with_default(self):
         """Test handling empty result with default value."""
         handler = EdgeCaseHandler()
-        result = handler.handle_case("empty_result", {
-            "query": "SELECT * FROM users",
-            "default": []
-        })
+        result = handler.handle_case(
+            "empty_result", {"query": "SELECT * FROM users", "default": []}
+        )
         assert result == []
 
     def test_handle_null_value(self):
@@ -94,95 +94,78 @@ class TestEdgeCaseHandler:
     def test_handle_null_value_with_default(self):
         """Test handling null value with default."""
         handler = EdgeCaseHandler()
-        result = handler.handle_case("null_value", {
-            "field": "email",
-            "default": "unknown@example.com"
-        })
+        result = handler.handle_case(
+            "null_value", {"field": "email", "default": "unknown@example.com"}
+        )
         assert result == "unknown@example.com"
 
     def test_handle_timeout(self):
         """Test handling timeout."""
         handler = EdgeCaseHandler()
-        result = handler.handle_case("timeout", {
-            "operation": "database_query",
-            "timeout_seconds": 30
-        })
+        result = handler.handle_case(
+            "timeout", {"operation": "database_query", "timeout_seconds": 30}
+        )
         assert result is None
 
     def test_handle_memory_pressure(self):
         """Test handling memory pressure."""
         handler = EdgeCaseHandler()
-        result = handler.handle_case("memory_pressure", {
-            "threshold": "80%",
-            "current_usage": "85%"
-        })
+        result = handler.handle_case(
+            "memory_pressure", {"threshold": "80%", "current_usage": "85%"}
+        )
         assert result is None
 
     def test_handle_rate_limit(self):
         """Test handling rate limit."""
         handler = EdgeCaseHandler()
-        result = handler.handle_case("rate_limit", {
-            "limit": 100,
-            "window": 60,
-            "retry_after": 30
-        })
+        result = handler.handle_case("rate_limit", {"limit": 100, "window": 60, "retry_after": 30})
         assert isinstance(result, dict)
-        assert result['should_retry'] is True
-        assert result['retry_after_seconds'] == 30
-        assert result['limit'] == 100
-        assert result['window'] == 60
+        assert result["should_retry"] is True
+        assert result["retry_after_seconds"] == 30
+        assert result["limit"] == 100
+        assert result["window"] == 60
 
     def test_handle_rate_limit_default_retry(self):
         """Test handling rate limit with default retry."""
         handler = EdgeCaseHandler()
-        result = handler.handle_case("rate_limit", {
-            "limit": 100,
-            "window": 60
-        })
-        assert result['retry_after_seconds'] == 60  # Default
+        result = handler.handle_case("rate_limit", {"limit": 100, "window": 60})
+        assert result["retry_after_seconds"] == 60  # Default
 
     def test_handle_invalid_input(self):
         """Test handling invalid input."""
         handler = EdgeCaseHandler()
-        result = handler.handle_case("invalid_input", {
-            "input": "abc",
-            "expected": "integer",
-            "reason": "not a number"
-        })
+        result = handler.handle_case(
+            "invalid_input", {"input": "abc", "expected": "integer", "reason": "not a number"}
+        )
         assert result is None
 
     def test_handle_connection_error(self):
         """Test handling connection error."""
         handler = EdgeCaseHandler()
-        result = handler.handle_case("connection_error", {
-            "host": "database.example.com",
-            "port": 5432,
-            "error": "Connection refused"
-        })
+        result = handler.handle_case(
+            "connection_error",
+            {"host": "database.example.com", "port": 5432, "error": "Connection refused"},
+        )
         assert isinstance(result, dict)
-        assert result['should_retry'] is True
-        assert result['host'] == "database.example.com"
-        assert result['port'] == 5432
+        assert result["should_retry"] is True
+        assert result["host"] == "database.example.com"
+        assert result["port"] == 5432
 
     def test_handle_connection_error_custom_retry(self):
         """Test handling connection error with custom retry."""
         handler = EdgeCaseHandler()
-        result = handler.handle_case("connection_error", {
-            "host": "api.example.com",
-            "port": 443,
-            "error": "Timeout",
-            "retry_after": 10
-        })
-        assert result['retry_after_seconds'] == 10
+        result = handler.handle_case(
+            "connection_error",
+            {"host": "api.example.com", "port": 443, "error": "Timeout", "retry_after": 10},
+        )
+        assert result["retry_after_seconds"] == 10
 
     def test_handle_resource_exhausted(self):
         """Test handling resource exhaustion."""
         handler = EdgeCaseHandler()
-        result = handler.handle_case("resource_exhausted", {
-            "resource": "file_descriptors",
-            "limit": 1024,
-            "requested": 1050
-        })
+        result = handler.handle_case(
+            "resource_exhausted", {"resource": "file_descriptors", "limit": 1024, "requested": 1050}
+        )
         assert result is None
 
     def test_handle_case_without_context(self):
@@ -207,15 +190,14 @@ class TestEdgeCaseHandler:
         handler = EdgeCaseHandler()
 
         def complex_handler(context):
-            metrics = context.get('metrics', {})
-            threshold = context.get('threshold', 100)
+            metrics = context.get("metrics", {})
+            threshold = context.get("threshold", 100)
             return sum(metrics.values()) > threshold
 
         handler.register_handler("check_metrics", complex_handler)
-        result = handler.handle_case("check_metrics", {
-            "metrics": {"cpu": 50, "memory": 60},
-            "threshold": 100
-        })
+        result = handler.handle_case(
+            "check_metrics", {"metrics": {"cpu": 50, "memory": 60}, "threshold": 100}
+        )
         assert result is True
 
     def test_multiple_handlers_registered(self):
@@ -225,7 +207,7 @@ class TestEdgeCaseHandler:
         handlers_to_add = {
             "case1": lambda ctx: "result1",
             "case2": lambda ctx: "result2",
-            "case3": lambda ctx: "result3"
+            "case3": lambda ctx: "result3",
         }
 
         for case, func in handlers_to_add.items():

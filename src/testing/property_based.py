@@ -3,9 +3,9 @@
 Advanced property-based testing with shrinking and statistics.
 """
 
-from typing import Callable, List, Any, Dict, Optional
+from collections.abc import Callable
 from dataclasses import dataclass
-import statistics
+from typing import Any
 
 
 @dataclass
@@ -23,10 +23,11 @@ class PropertyBasedTest:
         # Run the test
         result = test.run()
     """
+
     name: str
     property_fn: Callable[..., bool]
-    examples: List[tuple] = None
-    results: Dict[str, Any] = None
+    examples: list[tuple] = None
+    results: dict[str, Any] = None
 
     def __post_init__(self) -> None:
         if self.examples is None:
@@ -41,7 +42,8 @@ class PropertyBasedTest:
     def run(self) -> bool:
         """Run property test
 
-        Returns:
+        Returns
+        -------
             True if all examples pass
         """
         passed = 0

@@ -5,22 +5,23 @@ Provides foundation for sampling capabilities at intervals,
 batching events, and outputting JSONL streams.
 """
 
-from abc import ABC, abstractmethod
-from typing import Dict, List, Optional, Any, TextIO
-from dataclasses import dataclass, field, asdict
-from enum import Enum
-from datetime import datetime
 import json
 import logging
 import threading
 import time
+from abc import ABC, abstractmethod
+from dataclasses import asdict, dataclass, field
+from datetime import datetime
+from enum import Enum
 from pathlib import Path
+from typing import Any, TextIO
 
 logger = logging.getLogger(__name__)
 
 
 class CollectorStatus(str, Enum):
     """Status of a collector."""
+
     STOPPED = "stopped"
     STARTING = "starting"
     RUNNING = "running"
@@ -34,7 +35,8 @@ class CollectorConfig:
     """
     Configuration for a collector.
 
-    Attributes:
+    Attributes
+    ----------
         name: Collector name
         interval_seconds: Sampling interval
         batch_size: Number of events to batch before flush
@@ -45,11 +47,12 @@ class CollectorConfig:
         retry_on_error: Whether to retry on collection errors
         max_retries: Maximum retry attempts
     """
+
     name: str
     interval_seconds: float = 60.0
     batch_size: int = 100
     batch_timeout_seconds: float = 300.0  # 5 minutes
-    output_path: Optional[str] = None
+    output_path: str | None = None
     buffer_size: int = 10000
     enable_compression: bool = False
     retry_on_error: bool = True
@@ -61,22 +64,24 @@ class CollectedEvent:
     """
     A collected event from a capability.
 
-    Attributes:
+    Attributes
+    ----------
         collector_name: Name of collector
         timestamp: Collection timestamp
         data: Event data payload
         metadata: Additional metadata
         sequence_number: Event sequence number
     """
+
     collector_name: str
     timestamp: str
-    data: Dict[str, Any]
-    metadata: Dict[str, Any] = field(default_factory=dict)
+    data: dict[str, Any]
+    metadata: dict[str, Any] = field(default_factory=dict)
     sequence_number: int = 0
 
     def to_jsonl(self) -> str:
         """Convert event to JSONL format."""
-        return json.dumps(asdict(self), separators=(',', ':'))
+        return json.dumps(asdict(self), separators=(",", ":"))
 
 
 class BaseCollector(ABC):
@@ -96,18 +101,18 @@ class BaseCollector(ABC):
         """
         self.config = config
         self.status = CollectorStatus.STOPPED
-        self._thread: Optional[threading.Thread] = None
+        self._thread: threading.Thread | None = None
         self._stop_event = threading.Event()
         self._pause_event = threading.Event()
 
         # Event batching
-        self._event_buffer: List[CollectedEvent] = []
+        self._event_buffer: list[CollectedEvent] = []
         self._buffer_lock = threading.Lock()
         self._last_flush_time = time.time()
         self._sequence_number = 0
 
         # Output file
-        self._output_file: Optional[TextIO] = None
+        self._output_file: TextIO | None = None
 
         # Statistics
         self._stats = {
@@ -116,36 +121,38 @@ class BaseCollector(ABC):
             "batches_flushed": 0,
             "errors": 0,
             "started_at": None,
-            "last_collection_at": None
+            "last_collection_at": None,
         }
 
         logger.debug(f"Initialized collector: {config.name}")
 
     @abstractmethod
-    def collect_event(self) -> Optional[Dict[str, Any]]:
+    def collect_event(self) -> dict[str, Any] | None:
         """
         Collect a single event.
 
-        Returns:
+        Returns
+        -------
             Event data dictionary or None if nothing to collect
 
-        Raises:
+        Raises
+        ------
             Exception: If collection fails
         """
-        pass
 
     @abstractmethod
     def validate_configuration(self) -> bool:
         """
         Validate collector configuration and requirements.
 
-        Returns:
+        Returns
+        -------
             True if configuration is valid
 
-        Raises:
+        Raises
+        ------
             ValueError: If configuration is invalid
         """
-        pass
 
     def start(self) -> None:
         """Start the collector in a background thread."""
@@ -232,7 +239,7 @@ class BaseCollector(ABC):
                         collector_name=self.config.name,
                         timestamp=datetime.utcnow().isoformat(),
                         data=event_data,
-                        sequence_number=self._get_next_sequence()
+                        sequence_number=self._get_next_sequence(),
                     )
 
                     # Add to buffer
@@ -256,9 +263,7 @@ class BaseCollector(ABC):
 
                 # Handle retries
                 if not self.config.retry_on_error or consecutive_errors >= self.config.max_retries:
-                    logger.error(
-                        f"Max errors reached for {self.config.name}. Stopping collector."
-                    )
+                    logger.error(f"Max errors reached for {self.config.name}. Stopping collector.")
                     self.status = CollectorStatus.ERROR
                     break
 
@@ -293,8 +298,8 @@ class BaseCollector(ABC):
         """Check if buffer should be flushed."""
         with self._buffer_lock:
             should_flush = (
-                len(self._event_buffer) >= self.config.batch_size or
-                (time.time() - self._last_flush_time) >= self.config.batch_timeout_seconds
+                len(self._event_buffer) >= self.config.batch_size
+                or (time.time() - self._last_flush_time) >= self.config.batch_timeout_seconds
             )
 
             if should_flush:
@@ -323,9 +328,7 @@ class BaseCollector(ABC):
                 self._stats["events_written"] += written_count
                 self._stats["batches_flushed"] += 1
 
-                logger.debug(
-                    f"Flushed {written_count} events from {self.config.name}"
-                )
+                logger.debug(f"Flushed {written_count} events from {self.config.name}")
 
                 # Clear buffer
                 self._event_buffer.clear()
@@ -345,7 +348,7 @@ class BaseCollector(ABC):
         if self._output_file:
             try:
                 jsonl_line = event.to_jsonl()
-                self._output_file.write(jsonl_line + '\n')
+                self._output_file.write(jsonl_line + "\n")
                 self._output_file.flush()  # Ensure written
             except Exception as e:
                 logger.error(f"Error writing event: {e}")
@@ -362,7 +365,7 @@ class BaseCollector(ABC):
             output_path.parent.mkdir(parents=True, exist_ok=True)
 
             # Open in append mode
-            self._output_file = open(output_path, 'a', encoding='utf-8')
+            self._output_file = open(output_path, "a", encoding="utf-8")
             logger.info(f"Opened output file: {output_path}")
 
         except Exception as e:
@@ -380,11 +383,12 @@ class BaseCollector(ABC):
             finally:
                 self._output_file = None
 
-    def get_stats(self) -> Dict[str, Any]:
+    def get_stats(self) -> dict[str, Any]:
         """
         Get collector statistics.
 
-        Returns:
+        Returns
+        -------
             Statistics dictionary
         """
         with self._buffer_lock:
@@ -392,7 +396,7 @@ class BaseCollector(ABC):
                 **self._stats,
                 "status": self.status.value,
                 "buffer_size": len(self._event_buffer),
-                "config": asdict(self.config)
+                "config": asdict(self.config),
             }
 
     def __repr__(self) -> str:

@@ -7,11 +7,10 @@ TTL2DSPy capabilities via stdin/stdout with JSON receipts.
 import json
 import logging
 import sys
-from io import StringIO
 from pathlib import Path
-from typing import Dict, Any, Optional
+from typing import Any
 
-from .ultra import UltraOptimizer, CacheConfig
+from .ultra import CacheConfig, UltraOptimizer
 from .writer import ModuleWriter
 
 logger = logging.getLogger(__name__)
@@ -20,7 +19,7 @@ logger = logging.getLogger(__name__)
 class TTL2DSpyHook:
     """UNRDF hook for TTL2DSPy capability."""
 
-    def __init__(self, config: Optional[CacheConfig] = None):
+    def __init__(self, config: CacheConfig | None = None):
         """Initialize hook.
 
         Args:
@@ -30,13 +29,14 @@ class TTL2DSpyHook:
         self.optimizer = UltraOptimizer(self.config)
         self.writer = ModuleWriter()
 
-    def process_stdin(self, input_data: str) -> Dict[str, Any]:
+    def process_stdin(self, input_data: str) -> dict[str, Any]:
         """Process TTL input from stdin.
 
         Args:
             input_data: TTL/RDF content or JSON request
 
-        Returns:
+        Returns
+        -------
             JSON receipt with results
         """
         try:
@@ -50,13 +50,9 @@ class TTL2DSpyHook:
 
         except Exception as e:
             logger.error(f"Hook processing failed: {e}", exc_info=True)
-            return {
-                "success": False,
-                "error": str(e),
-                "error_type": type(e).__name__,
-            }
+            return {"success": False, "error": str(e), "error_type": type(e).__name__}
 
-    def _process_json_request(self, request: Dict[str, Any]) -> Dict[str, Any]:
+    def _process_json_request(self, request: dict[str, Any]) -> dict[str, Any]:
         """Process JSON request.
 
         Expected format:
@@ -72,7 +68,8 @@ class TTL2DSpyHook:
         Args:
             request: JSON request object
 
-        Returns:
+        Returns
+        -------
             JSON receipt
         """
         action = request.get("action", "generate")
@@ -81,41 +78,32 @@ class TTL2DSpyHook:
         if "ttl_content" in request:
             # Save to temp file
             import tempfile
+
             with tempfile.NamedTemporaryFile(mode="w", suffix=".ttl", delete=False) as f:
                 f.write(request["ttl_content"])
                 ttl_path = Path(f.name)
         elif "ttl_path" in request:
             ttl_path = Path(request["ttl_path"])
         else:
-            return {
-                "success": False,
-                "error": "Either 'ttl_content' or 'ttl_path' required",
-            }
+            return {"success": False, "error": "Either 'ttl_content' or 'ttl_path' required"}
 
         # Route to appropriate handler
         if action == "parse":
             return self._handle_parse(ttl_path)
-        elif action == "validate":
+        if action == "validate":
             return self._handle_validate(ttl_path)
-        elif action == "list":
+        if action == "list":
             return self._handle_list(ttl_path)
-        elif action == "generate":
+        if action == "generate":
             output_dir = request.get("output_dir")
             if not output_dir:
-                return {
-                    "success": False,
-                    "error": "'output_dir' required for generate action",
-                }
+                return {"success": False, "error": "'output_dir' required for generate action"}
             module_name = request.get("module_name", "signatures")
             format_code = request.get("format_code", True)
             return self._handle_generate(ttl_path, output_dir, module_name, format_code)
-        else:
-            return {
-                "success": False,
-                "error": f"Unknown action: {action}",
-            }
+        return {"success": False, "error": f"Unknown action: {action}"}
 
-    def _process_ttl_content(self, ttl_content: str) -> Dict[str, Any]:
+    def _process_ttl_content(self, ttl_content: str) -> dict[str, Any]:
         """Process raw TTL content.
 
         Default action: parse and return shape info.
@@ -123,7 +111,8 @@ class TTL2DSpyHook:
         Args:
             ttl_content: Raw TTL content
 
-        Returns:
+        Returns
+        -------
             JSON receipt
         """
         import tempfile
@@ -135,7 +124,7 @@ class TTL2DSpyHook:
 
         return self._handle_parse(ttl_path)
 
-    def _handle_parse(self, ttl_path: Path) -> Dict[str, Any]:
+    def _handle_parse(self, ttl_path: Path) -> dict[str, Any]:
         """Handle parse action."""
         shapes = self.optimizer.parse_with_cache(ttl_path)
 
@@ -158,7 +147,7 @@ class TTL2DSpyHook:
             "stats": self.optimizer.get_detailed_stats(),
         }
 
-    def _handle_validate(self, ttl_path: Path) -> Dict[str, Any]:
+    def _handle_validate(self, ttl_path: Path) -> dict[str, Any]:
         """Handle validate action."""
         shapes = self.optimizer.parse_with_cache(ttl_path)
 
@@ -186,7 +175,7 @@ class TTL2DSpyHook:
             "valid": len(errors) == 0,
         }
 
-    def _handle_list(self, ttl_path: Path) -> Dict[str, Any]:
+    def _handle_list(self, ttl_path: Path) -> dict[str, Any]:
         """Handle list action."""
         shapes = self.optimizer.parse_with_cache(ttl_path)
 
@@ -225,12 +214,8 @@ class TTL2DSpyHook:
         }
 
     def _handle_generate(
-        self,
-        ttl_path: Path,
-        output_dir: str,
-        module_name: str,
-        format_code: bool,
-    ) -> Dict[str, Any]:
+        self, ttl_path: Path, output_dir: str, module_name: str, format_code: bool
+    ) -> dict[str, Any]:
         """Handle generate action."""
         # Parse shapes
         shapes = self.optimizer.parse_with_cache(ttl_path)
@@ -296,11 +281,7 @@ def main_hook():
 
     except Exception as e:
         # Write error receipt
-        receipt = {
-            "success": False,
-            "error": str(e),
-            "error_type": type(e).__name__,
-        }
+        receipt = {"success": False, "error": str(e), "error_type": type(e).__name__}
         sys.stdout.write(json.dumps(receipt, indent=2))
         sys.stdout.write("\n")
         sys.exit(1)

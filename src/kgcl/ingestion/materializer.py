@@ -8,13 +8,7 @@ from datetime import datetime, timedelta
 from typing import Any
 
 from kgcl.ingestion.config import FeatureConfig
-from kgcl.ingestion.models import (
-    AppEvent,
-    BrowserVisit,
-    CalendarBlock,
-    FeatureInstance,
-    MaterializedFeature,
-)
+from kgcl.ingestion.models import AppEvent, BrowserVisit, CalendarBlock, MaterializedFeature
 
 
 class FeatureMaterializer:
@@ -71,9 +65,7 @@ class FeatureMaterializer:
                 )
             elif feature_id == "browser_domain_visits":
                 features.extend(
-                    self._compute_browser_domain_visits(
-                        windowed_events, window_start, window_end
-                    )
+                    self._compute_browser_domain_visits(windowed_events, window_start, window_end)
                 )
             elif feature_id == "meeting_count":
                 features.extend(
@@ -108,11 +100,7 @@ class FeatureMaterializer:
         if not self.config.incremental_updates:
             # Fall back to full recomputation
             all_events = new_events  # In production, would load existing events
-            return self.materialize(
-                all_events,
-                datetime.min,
-                datetime.max,
-            )
+            return self.materialize(all_events, datetime.min, datetime.max)
 
         # Group existing features by (feature_id, window)
         feature_map: dict[tuple[str, datetime, datetime], MaterializedFeature] = {}
@@ -228,10 +216,7 @@ class FeatureMaterializer:
                     aggregation_type="count",
                     value=count,
                     sample_count=count,
-                    metadata={
-                        "domain": domain,
-                        "unique_urls": len(unique_urls[domain]),
-                    },
+                    metadata={"domain": domain, "unique_urls": len(unique_urls[domain])},
                 )
             )
 
@@ -318,8 +303,7 @@ class FeatureMaterializer:
             Context switch features
         """
         app_events = sorted(
-            [e for e in events if isinstance(e, AppEvent)],
-            key=lambda e: e.timestamp,
+            [e for e in events if isinstance(e, AppEvent)], key=lambda e: e.timestamp
         )
 
         switch_count = 0
@@ -364,15 +348,10 @@ class FeatureMaterializer:
         list[AppEvent | BrowserVisit | CalendarBlock]
             Filtered events
         """
-        return [
-            e
-            for e in events
-            if window_start <= e.timestamp < window_end
-        ]
+        return [e for e in events if window_start <= e.timestamp < window_end]
 
     def _get_affected_windows(
-        self,
-        events: list[AppEvent | BrowserVisit | CalendarBlock],
+        self, events: list[AppEvent | BrowserVisit | CalendarBlock]
     ) -> list[tuple[datetime, datetime]]:
         """Determine time windows affected by events.
 
@@ -419,13 +398,12 @@ class FeatureMaterializer:
 
         if unit == "h":
             return timedelta(hours=value)
-        elif unit == "d":
+        if unit == "d":
             return timedelta(days=value)
-        elif unit == "w":
+        if unit == "w":
             return timedelta(weeks=value)
-        else:
-            msg = f"Invalid window specification: {spec}"
-            raise ValueError(msg)
+        msg = f"Invalid window specification: {spec}"
+        raise ValueError(msg)
 
     def _align_to_window(self, timestamp: datetime, duration: timedelta) -> datetime:
         """Align timestamp to window boundary.
@@ -445,20 +423,17 @@ class FeatureMaterializer:
         # Align to hour/day boundaries
         if duration == timedelta(hours=1):
             return timestamp.replace(minute=0, second=0, microsecond=0)
-        elif duration == timedelta(days=1):
+        if duration == timedelta(days=1):
             return timestamp.replace(hour=0, minute=0, second=0, microsecond=0)
-        else:
-            # Generic alignment
-            epoch = datetime(1970, 1, 1)
-            seconds_since_epoch = (timestamp - epoch).total_seconds()
-            window_seconds = duration.total_seconds()
-            aligned_seconds = (seconds_since_epoch // window_seconds) * window_seconds
-            return epoch + timedelta(seconds=aligned_seconds)
+        # Generic alignment
+        epoch = datetime(1970, 1, 1)
+        seconds_since_epoch = (timestamp - epoch).total_seconds()
+        window_seconds = duration.total_seconds()
+        aligned_seconds = (seconds_since_epoch // window_seconds) * window_seconds
+        return epoch + timedelta(seconds=aligned_seconds)
 
     def _merge_features(
-        self,
-        existing: MaterializedFeature,
-        new: MaterializedFeature,
+        self, existing: MaterializedFeature, new: MaterializedFeature
     ) -> MaterializedFeature:
         """Merge existing and new feature values.
 
@@ -483,8 +458,7 @@ class FeatureMaterializer:
             # Weighted average
             total_samples = existing.sample_count + new.sample_count
             merged_value = (
-                float(existing.value) * existing.sample_count
-                + float(new.value) * new.sample_count
+                float(existing.value) * existing.sample_count + float(new.value) * new.sample_count
             ) / total_samples
         else:
             # Default: use new value
@@ -509,9 +483,7 @@ class FeatureMaterializer:
             Cache statistics
         """
         total_requests = self._cache_hits + self._cache_misses
-        hit_rate = (
-            self._cache_hits / total_requests if total_requests > 0 else 0.0
-        )
+        hit_rate = self._cache_hits / total_requests if total_requests > 0 else 0.0
 
         return {
             "cache_size": len(self._cache),

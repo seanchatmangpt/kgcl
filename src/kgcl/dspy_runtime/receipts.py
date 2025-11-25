@@ -5,15 +5,15 @@ Captures invocation metadata, links to source signatures and features,
 and stores receipts as RDF nodes in UNRDF graph.
 """
 
+import json
 import logging
 import time
-from dataclasses import dataclass, field, asdict
-from typing import Any, Dict, Optional
+from dataclasses import asdict, dataclass, field
 from datetime import datetime
-import json
 from pathlib import Path
+from typing import Any
 
-from rdflib import Graph, Namespace, Literal, URIRef
+from rdflib import Graph, Literal, Namespace, URIRef
 from rdflib.namespace import RDF, RDFS, XSD
 
 logger = logging.getLogger(__name__)
@@ -32,24 +32,24 @@ class Receipt:
     timestamp: float
     signature_name: str
     module_path: str
-    inputs: Dict[str, Any]
-    outputs: Dict[str, Any]
+    inputs: dict[str, Any]
+    outputs: dict[str, Any]
     success: bool
 
     # Metadata
-    model: Optional[str] = None
-    latency_seconds: Optional[float] = None
-    token_count: Optional[int] = None
-    error: Optional[str] = None
+    model: str | None = None
+    latency_seconds: float | None = None
+    token_count: int | None = None
+    error: str | None = None
 
     # Links
     source_features: list[str] = field(default_factory=list)
     source_signatures: list[str] = field(default_factory=list)
 
     # Additional metrics
-    metrics: Dict[str, Any] = field(default_factory=dict)
+    metrics: dict[str, Any] = field(default_factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary."""
         return asdict(self)
 
@@ -71,7 +71,7 @@ class Receipt:
 class ReceiptGenerator:
     """Generates and stores receipts for DSPy invocations."""
 
-    def __init__(self, graph: Optional[Graph] = None):
+    def __init__(self, graph: Graph | None = None):
         """
         Initialize receipt generator.
 
@@ -91,15 +91,15 @@ class ReceiptGenerator:
         self,
         signature_name: str,
         module_path: str,
-        inputs: Dict[str, Any],
-        outputs: Dict[str, Any],
+        inputs: dict[str, Any],
+        outputs: dict[str, Any],
         success: bool,
-        model: Optional[str] = None,
-        latency_seconds: Optional[float] = None,
-        error: Optional[str] = None,
-        source_features: Optional[list[str]] = None,
-        source_signatures: Optional[list[str]] = None,
-        **metrics
+        model: str | None = None,
+        latency_seconds: float | None = None,
+        error: str | None = None,
+        source_features: list[str] | None = None,
+        source_signatures: list[str] | None = None,
+        **metrics,
     ) -> Receipt:
         """
         Generate receipt for invocation.
@@ -117,7 +117,8 @@ class ReceiptGenerator:
             source_signatures: Source signature URIs
             **metrics: Additional metrics
 
-        Returns:
+        Returns
+        -------
             Generated receipt
         """
         receipt_id = f"{signature_name}_{int(time.time() * 1000)}"
@@ -149,7 +150,8 @@ class ReceiptGenerator:
         Args:
             receipt: Receipt to store
 
-        Returns:
+        Returns
+        -------
             URI of stored receipt
         """
         uri = receipt.uri
@@ -160,17 +162,23 @@ class ReceiptGenerator:
         self.graph.add((uri, DSPY.signatureName, Literal(receipt.signature_name)))
         self.graph.add((uri, DSPY.modulePath, Literal(receipt.module_path)))
         self.graph.add((uri, DSPY.success, Literal(receipt.success, datatype=XSD.boolean)))
-        self.graph.add((uri, PROV.generatedAtTime, Literal(receipt.datetime, datatype=XSD.dateTime)))
+        self.graph.add(
+            (uri, PROV.generatedAtTime, Literal(receipt.datetime, datatype=XSD.dateTime))
+        )
 
         # Model and metrics
         if receipt.model:
             self.graph.add((uri, DSPY.model, Literal(receipt.model)))
 
         if receipt.latency_seconds is not None:
-            self.graph.add((uri, DSPY.latencySeconds, Literal(receipt.latency_seconds, datatype=XSD.float)))
+            self.graph.add(
+                (uri, DSPY.latencySeconds, Literal(receipt.latency_seconds, datatype=XSD.float))
+            )
 
         if receipt.token_count is not None:
-            self.graph.add((uri, DSPY.tokenCount, Literal(receipt.token_count, datatype=XSD.integer)))
+            self.graph.add(
+                (uri, DSPY.tokenCount, Literal(receipt.token_count, datatype=XSD.integer))
+            )
 
         if receipt.error:
             self.graph.add((uri, DSPY.error, Literal(receipt.error)))
@@ -195,14 +203,15 @@ class ReceiptGenerator:
         logger.info(f"Stored receipt in RDF graph: {uri}")
         return uri
 
-    def get_receipt(self, receipt_id: str) -> Optional[Receipt]:
+    def get_receipt(self, receipt_id: str) -> Receipt | None:
         """
         Retrieve receipt from graph.
 
         Args:
             receipt_id: Receipt ID
 
-        Returns:
+        Returns
+        -------
             Receipt if found, None otherwise
         """
         uri = DSPY[f"receipt/{receipt_id}"]
@@ -257,9 +266,9 @@ class ReceiptGenerator:
 
     def list_receipts(
         self,
-        signature_name: Optional[str] = None,
-        success: Optional[bool] = None,
-        limit: Optional[int] = None
+        signature_name: str | None = None,
+        success: bool | None = None,
+        limit: int | None = None,
     ) -> list[Receipt]:
         """
         List receipts from graph.
@@ -269,7 +278,8 @@ class ReceiptGenerator:
             success: Filter by success status
             limit: Maximum number of receipts to return
 
-        Returns:
+        Returns
+        -------
             List of receipts
         """
         receipts = []

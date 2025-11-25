@@ -4,14 +4,15 @@ Classifies activities into meaningful contexts (work focus, admin, learning, etc
 based on app names, domains, calendar events, and time of day.
 """
 
-from typing import Literal
-from pydantic import BaseModel, Field
 import asyncio
 import logging
-from datetime import datetime
+from typing import Literal
+
+from pydantic import BaseModel, Field
 
 try:
     import dspy
+
     DSPY_AVAILABLE = True
 except ImportError:
     DSPY_AVAILABLE = False
@@ -24,24 +25,25 @@ tracer = trace.get_tracer(__name__)
 
 # Context type enumeration
 ContextLabel = Literal[
-    "work_focus",           # Deep coding/writing work
-    "communication",        # Email, Slack, messaging
-    "meetings",            # Calendar events, calls
-    "research",            # Documentation, web browsing
-    "admin",               # Administrative tasks
-    "learning",            # Courses, tutorials, reading
-    "debugging",           # Troubleshooting, testing
-    "code_review",         # PR reviews, code analysis
-    "planning",            # Design, architecture, planning
-    "break",               # Breaks, personal time
-    "other"               # Unclassified
+    "work_focus",  # Deep coding/writing work
+    "communication",  # Email, Slack, messaging
+    "meetings",  # Calendar events, calls
+    "research",  # Documentation, web browsing
+    "admin",  # Administrative tasks
+    "learning",  # Courses, tutorials, reading
+    "debugging",  # Troubleshooting, testing
+    "code_review",  # PR reviews, code analysis
+    "planning",  # Design, architecture, planning
+    "break",  # Breaks, personal time
+    "other",  # Unclassified
 ]
 
 
 class ContextClassifierInput(BaseModel):
     """Input for context classification.
 
-    Attributes:
+    Attributes
+    ----------
         app_name: Application bundle name (e.g., com.apple.Safari)
         domain_names: List of visited domains (if applicable)
         calendar_event: Calendar event title (if in meeting)
@@ -51,29 +53,11 @@ class ContextClassifierInput(BaseModel):
     """
 
     app_name: str = Field(..., description="Application bundle or display name")
-    domain_names: list[str] = Field(
-        default_factory=list,
-        description="Visited domain names"
-    )
-    calendar_event: str = Field(
-        default="",
-        description="Calendar event title if in meeting"
-    )
-    time_of_day: int = Field(
-        ...,
-        ge=0,
-        le=23,
-        description="Hour of day (0-23)"
-    )
-    window_title: str = Field(
-        default="",
-        description="Active window title"
-    )
-    duration_seconds: float = Field(
-        default=0,
-        ge=0,
-        description="Activity duration in seconds"
-    )
+    domain_names: list[str] = Field(default_factory=list, description="Visited domain names")
+    calendar_event: str = Field(default="", description="Calendar event title if in meeting")
+    time_of_day: int = Field(..., ge=0, le=23, description="Hour of day (0-23)")
+    window_title: str = Field(default="", description="Active window title")
+    duration_seconds: float = Field(default=0, ge=0, description="Activity duration in seconds")
 
     model_config = {
         "json_schema_extra": {
@@ -83,7 +67,7 @@ class ContextClassifierInput(BaseModel):
                 "calendar_event": "",
                 "time_of_day": 10,
                 "window_title": "Python Documentation - Built-in Functions",
-                "duration_seconds": 180.5
+                "duration_seconds": 180.5,
             }
         }
     }
@@ -92,7 +76,8 @@ class ContextClassifierInput(BaseModel):
 class ContextClassifierOutput(BaseModel):
     """Output context classification result.
 
-    Attributes:
+    Attributes
+    ----------
         context_label: Primary context classification
         confidence: Confidence score (0-100)
         reasoning: Explanation for classification
@@ -102,20 +87,13 @@ class ContextClassifierOutput(BaseModel):
 
     context_label: ContextLabel = Field(..., description="Primary context classification")
     confidence: int = Field(
-        default=0,
-        ge=0,
-        le=100,
-        description="Classification confidence (0-100)"
+        default=0, ge=0, le=100, description="Classification confidence (0-100)"
     )
     reasoning: str = Field(..., description="Classification reasoning")
     secondary_contexts: dict[str, int] = Field(
-        default_factory=dict,
-        description="Alternative contexts with confidence scores"
+        default_factory=dict, description="Alternative contexts with confidence scores"
     )
-    suggested_tags: list[str] = Field(
-        default_factory=list,
-        description="Suggested activity tags"
-    )
+    suggested_tags: list[str] = Field(default_factory=list, description="Suggested activity tags")
 
     model_config = {
         "json_schema_extra": {
@@ -123,17 +101,15 @@ class ContextClassifierOutput(BaseModel):
                 "context_label": "research",
                 "confidence": 85,
                 "reasoning": "Safari browsing technical documentation (GitHub, StackOverflow) during work hours",
-                "secondary_contexts": {
-                    "learning": 60,
-                    "work_focus": 40
-                },
-                "suggested_tags": ["programming", "documentation", "web_research"]
+                "secondary_contexts": {"learning": 60, "work_focus": 40},
+                "suggested_tags": ["programming", "documentation", "web_research"],
             }
         }
     }
 
 
 if DSPY_AVAILABLE:
+
     class ContextClassifierSignature(dspy.Signature):
         """Classify activity into meaningful work context.
 
@@ -152,15 +128,9 @@ if DSPY_AVAILABLE:
         context_label: str = dspy.OutputField(
             desc="Primary context: work_focus, communication, meetings, research, admin, learning, debugging, code_review, planning, break, or other"
         )
-        confidence: int = dspy.OutputField(
-            desc="Confidence score 0-100"
-        )
-        reasoning: str = dspy.OutputField(
-            desc="1-2 sentence explanation for classification"
-        )
-        suggested_tags: str = dspy.OutputField(
-            desc="Comma-separated activity tags"
-        )
+        confidence: int = dspy.OutputField(desc="Confidence score 0-100")
+        reasoning: str = dspy.OutputField(desc="1-2 sentence explanation for classification")
+        suggested_tags: str = dspy.OutputField(desc="Comma-separated activity tags")
 
 
 class ContextClassifierModule:
@@ -188,7 +158,8 @@ class ContextClassifierModule:
         Args:
             input_data: Activity data to classify
 
-        Returns:
+        Returns
+        -------
             ContextClassifierOutput with classification
         """
         app_lower = input_data.app_name.lower()
@@ -203,7 +174,7 @@ class ContextClassifierModule:
                 confidence=95,
                 reasoning=f"Active calendar event: {input_data.calendar_event}",
                 secondary_contexts={"communication": 70},
-                suggested_tags=["meeting", "collaboration"]
+                suggested_tags=["meeting", "collaboration"],
             )
 
         # Priority 2: IDE and code editors (work focus)
@@ -214,7 +185,7 @@ class ContextClassifierModule:
                 confidence=90,
                 reasoning=f"Using code editor/IDE: {input_data.app_name}",
                 secondary_contexts={"debugging": 40},
-                suggested_tags=["coding", "development"]
+                suggested_tags=["coding", "development"],
             )
 
         # Priority 3: Communication apps
@@ -227,19 +198,23 @@ class ContextClassifierModule:
                     confidence=85,
                     reasoning=f"Video call/meeting app: {input_data.app_name}",
                     secondary_contexts={"communication": 70},
-                    suggested_tags=["meeting", "video_call"]
+                    suggested_tags=["meeting", "video_call"],
                 )
-            else:
-                return ContextClassifierOutput(
-                    context_label="communication",
-                    confidence=85,
-                    reasoning=f"Communication app: {input_data.app_name}",
-                    secondary_contexts={"admin": 30},
-                    suggested_tags=["messaging", "email"]
-                )
+            return ContextClassifierOutput(
+                context_label="communication",
+                confidence=85,
+                reasoning=f"Communication app: {input_data.app_name}",
+                secondary_contexts={"admin": 30},
+                suggested_tags=["messaging", "email"],
+            )
 
         # Priority 4: Browser - classify by domains
-        if "safari" in app_lower or "chrome" in app_lower or "firefox" in app_lower or "browser" in app_lower:
+        if (
+            "safari" in app_lower
+            or "chrome" in app_lower
+            or "firefox" in app_lower
+            or "browser" in app_lower
+        ):
             return self._classify_browser_activity(input_data, domains_lower, window_lower)
 
         # Priority 5: Terminal (work focus or debugging)
@@ -250,14 +225,14 @@ class ContextClassifierModule:
                     confidence=75,
                     reasoning="Terminal with testing/debugging activity",
                     secondary_contexts={"work_focus": 60},
-                    suggested_tags=["terminal", "debugging"]
+                    suggested_tags=["terminal", "debugging"],
                 )
             return ContextClassifierOutput(
                 context_label="work_focus",
                 confidence=80,
                 reasoning="Terminal usage for development work",
                 secondary_contexts={"admin": 40},
-                suggested_tags=["terminal", "development"]
+                suggested_tags=["terminal", "development"],
             )
 
         # Priority 6: Time-based heuristics
@@ -268,7 +243,7 @@ class ContextClassifierModule:
                     confidence=60,
                     reasoning=f"Activity outside typical work hours ({input_data.time_of_day}:00)",
                     secondary_contexts={"other": 50},
-                    suggested_tags=["after_hours"]
+                    suggested_tags=["after_hours"],
                 )
 
         # Default: other
@@ -277,14 +252,11 @@ class ContextClassifierModule:
             confidence=40,
             reasoning=f"Could not confidently classify: {input_data.app_name}",
             secondary_contexts={},
-            suggested_tags=[]
+            suggested_tags=[],
         )
 
     def _classify_browser_activity(
-        self,
-        input_data: ContextClassifierInput,
-        domains_lower: list[str],
-        window_lower: str
+        self, input_data: ContextClassifierInput, domains_lower: list[str], window_lower: str
     ) -> ContextClassifierOutput:
         """Classify browser activity based on domains and window title.
 
@@ -293,13 +265,20 @@ class ContextClassifierModule:
             domains_lower: Lowercased domain names
             window_lower: Lowercased window title
 
-        Returns:
+        Returns
+        -------
             ContextClassifierOutput for browser activity
         """
         # Code-related domains (research/documentation)
         code_domains = [
-            "github.com", "stackoverflow.com", "docs.python.org", "developer.mozilla.org",
-            "npmjs.com", "pypi.org", "readthedocs.io", "gitlab.com"
+            "github.com",
+            "stackoverflow.com",
+            "docs.python.org",
+            "developer.mozilla.org",
+            "npmjs.com",
+            "pypi.org",
+            "readthedocs.io",
+            "gitlab.com",
         ]
         if any(domain in d for domain in code_domains for d in domains_lower):
             return ContextClassifierOutput(
@@ -307,13 +286,18 @@ class ContextClassifierModule:
                 confidence=85,
                 reasoning=f"Browsing technical documentation/code repositories: {domains_lower[:3]}",
                 secondary_contexts={"learning": 60},
-                suggested_tags=["documentation", "web_research", "programming"]
+                suggested_tags=["documentation", "web_research", "programming"],
             )
 
         # Learning platforms
         learning_domains = [
-            "coursera.org", "udemy.com", "pluralsight.com", "egghead.io",
-            "youtube.com", "medium.com", "dev.to"
+            "coursera.org",
+            "udemy.com",
+            "pluralsight.com",
+            "egghead.io",
+            "youtube.com",
+            "medium.com",
+            "dev.to",
         ]
         if any(domain in d for domain in learning_domains for d in domains_lower):
             return ContextClassifierOutput(
@@ -321,13 +305,17 @@ class ContextClassifierModule:
                 confidence=80,
                 reasoning=f"Accessing learning/educational content: {domains_lower[:3]}",
                 secondary_contexts={"research": 60},
-                suggested_tags=["learning", "education"]
+                suggested_tags=["learning", "education"],
             )
 
         # Admin/productivity domains
         admin_domains = [
-            "google.com/calendar", "notion.so", "trello.com", "asana.com",
-            "jira.atlassian.com", "linear.app"
+            "google.com/calendar",
+            "notion.so",
+            "trello.com",
+            "asana.com",
+            "jira.atlassian.com",
+            "linear.app",
         ]
         if any(domain in d for domain in admin_domains for d in domains_lower):
             return ContextClassifierOutput(
@@ -335,7 +323,7 @@ class ContextClassifierModule:
                 confidence=75,
                 reasoning=f"Using productivity/admin tools: {domains_lower[:3]}",
                 secondary_contexts={"planning": 60},
-                suggested_tags=["productivity", "admin"]
+                suggested_tags=["productivity", "admin"],
             )
 
         # Code review domains
@@ -345,7 +333,7 @@ class ContextClassifierModule:
                 confidence=85,
                 reasoning="Reviewing pull requests/merge requests",
                 secondary_contexts={"work_focus": 70},
-                suggested_tags=["code_review", "collaboration"]
+                suggested_tags=["code_review", "collaboration"],
             )
 
         # Default browser usage
@@ -354,7 +342,7 @@ class ContextClassifierModule:
             confidence=50,
             reasoning=f"General web browsing: {domains_lower[:3] if domains_lower else 'unknown domains'}",
             secondary_contexts={"other": 50},
-            suggested_tags=["web_browsing"]
+            suggested_tags=["web_browsing"],
         )
 
     def classify(self, input_data: ContextClassifierInput) -> ContextClassifierOutput:
@@ -363,7 +351,8 @@ class ContextClassifierModule:
         Args:
             input_data: Activity data to classify
 
-        Returns:
+        Returns
+        -------
             ContextClassifierOutput with classification
         """
         with tracer.start_as_current_span("context_classifier.classify") as span:
@@ -375,8 +364,7 @@ class ContextClassifierModule:
             try:
                 if self.use_llm:
                     return self._llm_classify(input_data)
-                else:
-                    return self._fallback_classify(input_data)
+                return self._fallback_classify(input_data)
             except Exception as e:
                 logger.warning(f"LLM classification failed, using fallback: {e}")
                 span.set_attribute("fallback_used", True)
@@ -388,7 +376,8 @@ class ContextClassifierModule:
         Args:
             input_data: Activity data
 
-        Returns:
+        Returns
+        -------
             ContextClassifierOutput with LLM classification
         """
         # Prepare inputs
@@ -402,13 +391,22 @@ class ContextClassifierModule:
             domains=domains_str,
             calendar_event=calendar_str,
             time_of_day=input_data.time_of_day,
-            window_title=window_str
+            window_title=window_str,
         )
 
         # Validate context label
         valid_contexts: list[ContextLabel] = [
-            "work_focus", "communication", "meetings", "research", "admin",
-            "learning", "debugging", "code_review", "planning", "break", "other"
+            "work_focus",
+            "communication",
+            "meetings",
+            "research",
+            "admin",
+            "learning",
+            "debugging",
+            "code_review",
+            "planning",
+            "break",
+            "other",
         ]
 
         context_label: ContextLabel = "other"
@@ -423,7 +421,7 @@ class ContextClassifierModule:
             confidence=int(result.confidence),
             reasoning=result.reasoning,
             secondary_contexts={},  # LLM doesn't provide secondary contexts
-            suggested_tags=suggested_tags[:5]
+            suggested_tags=suggested_tags[:5],
         )
 
     async def classify_async(self, input_data: ContextClassifierInput) -> ContextClassifierOutput:
@@ -432,7 +430,8 @@ class ContextClassifierModule:
         Args:
             input_data: Activity data
 
-        Returns:
+        Returns
+        -------
             ContextClassifierOutput with classification
         """
         return await asyncio.to_thread(self.classify, input_data)
@@ -447,7 +446,7 @@ if __name__ == "__main__":
             calendar_event="",
             time_of_day=10,
             window_title="main.py - kgcl - Visual Studio Code",
-            duration_seconds=1800
+            duration_seconds=1800,
         ),
         ContextClassifierInput(
             app_name="com.apple.Safari",
@@ -455,7 +454,7 @@ if __name__ == "__main__":
             calendar_event="",
             time_of_day=14,
             window_title="Python Documentation - Built-in Functions",
-            duration_seconds=300
+            duration_seconds=300,
         ),
         ContextClassifierInput(
             app_name="us.zoom.xos",
@@ -463,8 +462,8 @@ if __name__ == "__main__":
             calendar_event="Team Standup",
             time_of_day=9,
             window_title="Zoom Meeting",
-            duration_seconds=1800
-        )
+            duration_seconds=1800,
+        ),
     ]
 
     module = ContextClassifierModule(use_llm=False)

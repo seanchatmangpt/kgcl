@@ -6,15 +6,11 @@ trace/metric correlation across the system.
 
 import tempfile
 from pathlib import Path
-from unittest.mock import Mock, patch
 
-import pytest
 from opentelemetry import trace
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import SimpleSpanProcessor
-from opentelemetry.sdk.trace.export.in_memory_span_exporter import (
-    InMemorySpanExporter,
-)
+from opentelemetry.sdk.trace.export.in_memory_span_exporter import InMemorySpanExporter
 
 from kgcl.observability.health import check_health
 from kgcl.unrdf_engine.engine import UnrdfEngine
@@ -61,10 +57,7 @@ class TestObservabilityIntegration:
             pipeline = IngestionPipeline(engine)
 
             result = pipeline.ingest_json(
-                data=[
-                    {"id": "test_001", "type": "Event1"},
-                    {"id": "test_002", "type": "Event2"},
-                ],
+                data=[{"id": "test_001", "type": "Event1"}, {"id": "test_002", "type": "Event2"}],
                 agent="test_agent",
             )
 
@@ -119,9 +112,7 @@ class TestObservabilityIntegration:
             pipeline = IngestionPipeline(engine)
 
             # Perform operation
-            result = pipeline.ingest_json(
-                data={"id": "test"}, agent="test"
-            )
+            result = pipeline.ingest_json(data={"id": "test"}, agent="test")
 
             assert result.success is True
 
@@ -130,11 +121,7 @@ class TestObservabilityIntegration:
 
             # Verify spans have transaction context
             spans = exporter.get_finished_spans()
-            txn_spans = [
-                s
-                for s in spans
-                if s.attributes and txn_id in str(s.attributes.values())
-            ]
+            txn_spans = [s for s in spans if s.attributes and txn_id in str(s.attributes.values())]
 
             # Spans may not be generated without proper setup
             # In real implementation, would configure OTEL properly
@@ -153,7 +140,7 @@ class TestObservabilityIntegration:
         tracer_provider.add_span_processor(SimpleSpanProcessor(exporter))
         # Don't override if already set (other tests may have set it)
         current_provider = trace.get_tracer_provider()
-        if not hasattr(current_provider, 'add_span_processor'):
+        if not hasattr(current_provider, "add_span_processor"):
             trace.set_tracer_provider(tracer_provider)
         else:
             tracer_provider = current_provider
@@ -178,7 +165,7 @@ class TestObservabilityIntegration:
         tracer_provider.add_span_processor(SimpleSpanProcessor(exporter))
         # Don't override if already set
         current_provider = trace.get_tracer_provider()
-        if not hasattr(current_provider, 'add_span_processor'):
+        if not hasattr(current_provider, "add_span_processor"):
             trace.set_tracer_provider(tracer_provider)
         else:
             tracer_provider = current_provider

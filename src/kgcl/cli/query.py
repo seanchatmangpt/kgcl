@@ -7,14 +7,7 @@ from pathlib import Path
 
 import click
 
-from kgcl.cli.utils import (
-    OutputFormat,
-    format_output,
-    print_error,
-    print_info,
-    print_success,
-)
-
+from kgcl.cli.utils import OutputFormat, format_output, print_error, print_info, print_success
 
 # Template queries for common use cases
 TEMPLATE_QUERIES = {
@@ -76,16 +69,9 @@ TEMPLATE_QUERIES = {
 
 
 @click.command()
+@click.option("--query", "-q", type=str, help="SPARQL query to execute")
 @click.option(
-    "--query",
-    "-q",
-    type=str,
-    help="SPARQL query to execute",
-)
-@click.option(
-    "--file",
-    type=click.Path(exists=True, path_type=Path),
-    help="File containing SPARQL query",
+    "--file", type=click.Path(exists=True, path_type=Path), help="File containing SPARQL query"
 )
 @click.option(
     "--template",
@@ -93,12 +79,7 @@ TEMPLATE_QUERIES = {
     type=click.Choice(list(TEMPLATE_QUERIES.keys())),
     help="Use a predefined query template",
 )
-@click.option(
-    "--output",
-    "-o",
-    type=click.Path(path_type=Path),
-    help="Output file path",
-)
+@click.option("--output", "-o", type=click.Path(path_type=Path), help="Output file path")
 @click.option(
     "--format",
     "-f",
@@ -107,28 +88,12 @@ TEMPLATE_QUERIES = {
     default=OutputFormat.TABLE.value,
     help="Output format",
 )
+@click.option("--limit", type=int, help="Limit number of results")
 @click.option(
-    "--limit",
-    type=int,
-    help="Limit number of results",
+    "--endpoint", type=str, default="http://localhost:3030/kgcl/sparql", help="SPARQL endpoint URL"
 )
-@click.option(
-    "--endpoint",
-    type=str,
-    default="http://localhost:3030/kgcl/sparql",
-    help="SPARQL endpoint URL",
-)
-@click.option(
-    "--show-templates",
-    is_flag=True,
-    help="Show available query templates and exit",
-)
-@click.option(
-    "--verbose",
-    "-v",
-    is_flag=True,
-    help="Verbose output",
-)
+@click.option("--show-templates", is_flag=True, help="Show available query templates and exit")
+@click.option("--verbose", "-v", is_flag=True, help="Verbose output")
 def query(
     query: str | None,
     file: Path | None,
@@ -142,7 +107,8 @@ def query(
 ) -> None:
     """Execute SPARQL queries against the knowledge graph.
 
-    Examples:
+    Examples
+    --------
         # Show available templates
         $ kgc-query --show-templates
 
@@ -167,10 +133,7 @@ def query(
         sparql_query = _get_query(query, file, template)
 
         if not sparql_query:
-            print_error(
-                "No query specified. Use --query, --file, or --template",
-                exit_code=1,
-            )
+            print_error("No query specified. Use --query, --file, or --template", exit_code=1)
             return
 
         # Apply limit if specified
@@ -267,21 +230,9 @@ def _execute_query(sparql_query: str, endpoint: str, verbose: bool) -> list[dict
 
     # Placeholder: return mock results
     return [
-        {
-            "feature": "test_pass_rate",
-            "type": "template",
-            "category": "testing",
-        },
-        {
-            "feature": "commit_frequency",
-            "type": "template",
-            "category": "productivity",
-        },
-        {
-            "feature": "code_complexity",
-            "type": "template",
-            "category": "quality",
-        },
+        {"feature": "test_pass_rate", "type": "template", "category": "testing"},
+        {"feature": "commit_frequency", "type": "template", "category": "productivity"},
+        {"feature": "code_complexity", "type": "template", "category": "quality"},
     ]
 
 

@@ -5,10 +5,9 @@ Tracks latencies, memory usage, percentile analysis, and SLO compliance.
 Ported from UNRDF performance-optimizer.mjs.
 """
 
-from dataclasses import dataclass, field
-from typing import Dict, List, Optional
-from datetime import datetime
 import statistics
+from dataclasses import dataclass, field
+from datetime import datetime
 
 
 @dataclass
@@ -54,9 +53,9 @@ class PerformanceOptimizer:
         sample_size : int
             Number of samples to keep for trend analysis
         """
-        self.samples: Dict[str, List[float]] = {}
+        self.samples: dict[str, list[float]] = {}
         self.sample_size = sample_size
-        self.metrics: Dict[str, List[PerformanceMetrics]] = {}
+        self.metrics: dict[str, list[PerformanceMetrics]] = {}
 
     def record_metric(self, metric: PerformanceMetrics) -> None:
         """Record a performance metric.
@@ -95,7 +94,7 @@ class PerformanceOptimizer:
         metric = PerformanceMetrics(operation=operation, latency_ms=latency_ms)
         self.record_metric(metric)
 
-    def get_percentile(self, operation: str, percentile: float = 0.99) -> Optional[float]:
+    def get_percentile(self, operation: str, percentile: float = 0.99) -> float | None:
         """Get percentile latency for operation.
 
         Parameters
@@ -120,7 +119,7 @@ class PerformanceOptimizer:
         idx = min(max(0, idx), len(sorted_samples) - 1)
         return sorted_samples[idx]
 
-    def get_stats(self, operation: str) -> Optional[Dict]:
+    def get_stats(self, operation: str) -> dict | None:
         """Get comprehensive statistics for operation.
 
         Parameters
@@ -150,7 +149,7 @@ class PerformanceOptimizer:
             "stdev": statistics.stdev(samples) if len(samples) > 1 else 0.0,
         }
 
-    def get_slo_status(self, operation: str, target_ms: float) -> Optional[Dict]:
+    def get_slo_status(self, operation: str, target_ms: float) -> dict | None:
         """Get SLO compliance status.
 
         Parameters
@@ -178,11 +177,9 @@ class PerformanceOptimizer:
             "compliant_count": compliant,
             "total_count": total,
             "compliance_rate": compliant / total if total > 0 else 0.0,
-            "success_rate": sum(1 for m in metrics if m.success) / total
-            if total > 0
-            else 0.0,
+            "success_rate": sum(1 for m in metrics if m.success) / total if total > 0 else 0.0,
         }
 
-    def get_all_operations(self) -> List[str]:
+    def get_all_operations(self) -> list[str]:
         """Get all tracked operations."""
         return list(set(self.samples.keys()) | set(self.metrics.keys()))

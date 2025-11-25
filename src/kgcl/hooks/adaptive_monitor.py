@@ -4,15 +4,15 @@ Automatically learns baseline behavior and adapts thresholds based on
 observed metrics using statistical analysis.
 """
 
-from dataclasses import dataclass
-from typing import Dict, List, Optional
-import statistics
 import logging
+import statistics
+from dataclasses import dataclass
 
 
 @dataclass
 class MetricThreshold:
     """Adaptive threshold for metric."""
+
     metric_name: str
     baseline: float
     variance: float
@@ -31,10 +31,7 @@ class AdaptiveMonitor:
     """
 
     def __init__(
-        self,
-        window_size: int = 100,
-        stddev_multiplier: float = 2.0,
-        min_samples: int = 10
+        self, window_size: int = 100, stddev_multiplier: float = 2.0, min_samples: int = 10
     ):
         """Initialize adaptive monitor.
 
@@ -43,8 +40,8 @@ class AdaptiveMonitor:
             stddev_multiplier: Number of standard deviations for threshold
             min_samples: Minimum samples before calculating thresholds
         """
-        self.metrics: Dict[str, List[float]] = {}
-        self.thresholds: Dict[str, MetricThreshold] = {}
+        self.metrics: dict[str, list[float]] = {}
+        self.thresholds: dict[str, MetricThreshold] = {}
         self.window_size = window_size
         self.stddev_multiplier = stddev_multiplier
         self.min_samples = min_samples
@@ -69,7 +66,7 @@ class AdaptiveMonitor:
 
         # Trim to window size
         if len(self.metrics[name]) > self.window_size:
-            self.metrics[name] = self.metrics[name][-self.window_size:]
+            self.metrics[name] = self.metrics[name][-self.window_size :]
 
         # Recalculate threshold
         self._recalculate_threshold(name)
@@ -111,7 +108,7 @@ class AdaptiveMonitor:
             baseline=mean,
             variance=stdev,
             current_threshold=threshold,
-            sample_count=len(values)
+            sample_count=len(values),
         )
 
         self._logger.debug(
@@ -126,7 +123,8 @@ class AdaptiveMonitor:
             name: Metric name
             value: Value to check
 
-        Returns:
+        Returns
+        -------
             True if value exceeds threshold
         """
         if name not in self.thresholds:
@@ -135,32 +133,35 @@ class AdaptiveMonitor:
 
         return value > self.thresholds[name].current_threshold
 
-    def get_threshold(self, name: str) -> Optional[MetricThreshold]:
+    def get_threshold(self, name: str) -> MetricThreshold | None:
         """Get current threshold for metric.
 
         Args:
             name: Metric name
 
-        Returns:
+        Returns
+        -------
             MetricThreshold if available, None otherwise
         """
         return self.thresholds.get(name)
 
-    def get_all_thresholds(self) -> Dict[str, MetricThreshold]:
+    def get_all_thresholds(self) -> dict[str, MetricThreshold]:
         """Get all current thresholds.
 
-        Returns:
+        Returns
+        -------
             Dictionary mapping metric names to thresholds
         """
         return self.thresholds.copy()
 
-    def get_metric_stats(self, name: str) -> Optional[Dict]:
+    def get_metric_stats(self, name: str) -> dict | None:
         """Get statistics for a metric.
 
         Args:
             name: Metric name
 
-        Returns:
+        Returns
+        -------
             Dictionary with statistics or None if metric not found
         """
         if name not in self.metrics or name not in self.thresholds:
@@ -170,14 +171,14 @@ class AdaptiveMonitor:
         threshold = self.thresholds[name]
 
         return {
-            'name': name,
-            'sample_count': len(values),
-            'baseline': threshold.baseline,
-            'variance': threshold.variance,
-            'threshold': threshold.current_threshold,
-            'current_value': values[-1] if values else None,
-            'min': min(values) if values else None,
-            'max': max(values) if values else None,
+            "name": name,
+            "sample_count": len(values),
+            "baseline": threshold.baseline,
+            "variance": threshold.variance,
+            "threshold": threshold.current_threshold,
+            "current_value": values[-1] if values else None,
+            "min": min(values) if values else None,
+            "max": max(values) if values else None,
         }
 
     def reset_metric(self, name: str) -> bool:
@@ -186,7 +187,8 @@ class AdaptiveMonitor:
         Args:
             name: Metric name
 
-        Returns:
+        Returns
+        -------
             True if metric was found and reset
         """
         if name in self.metrics:
@@ -209,7 +211,8 @@ class AdaptiveMonitor:
             name: Metric name
             value: Metric value
 
-        Returns:
+        Returns
+        -------
             True if value was anomalous
         """
         is_anom = self.is_anomaly(name, value)

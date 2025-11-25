@@ -5,14 +5,12 @@ import json
 import logging
 import pickle
 import time
-from dataclasses import dataclass, asdict
+from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Union
+from typing import Any
 
-from rdflib import Graph
-
+from .generator import DSPyGenerator
 from .parser import OntologyParser, SHACLShape
-from .generator import DSPyGenerator, SignatureDefinition
 
 logger = logging.getLogger(__name__)
 
@@ -27,12 +25,12 @@ class CacheConfig:
 
     # Disk cache
     disk_cache_enabled: bool = True
-    disk_cache_dir: Optional[Path] = None
+    disk_cache_dir: Path | None = None
     max_disk_cache_age: int = 86400  # 24 hours in seconds
 
     # Redis cache (optional)
     redis_enabled: bool = False
-    redis_url: Optional[str] = None
+    redis_url: str | None = None
     redis_prefix: str = "ttl2dspy:"
     redis_ttl: int = 3600  # 1 hour
 
@@ -78,7 +76,7 @@ class CacheStats:
         total = self.disk_hits + self.disk_misses
         return self.disk_hits / total if total > 0 else 0.0
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary."""
         return {
             **asdict(self),
@@ -92,9 +90,9 @@ class ShapeIndex:
 
     def __init__(self):
         """Initialize index."""
-        self._by_name: Dict[str, SHACLShape] = {}
-        self._by_uri: Dict[str, SHACLShape] = {}
-        self._by_target_class: Dict[str, List[SHACLShape]] = {}
+        self._by_name: dict[str, SHACLShape] = {}
+        self._by_uri: dict[str, SHACLShape] = {}
+        self._by_target_class: dict[str, list[SHACLShape]] = {}
 
     def add(self, shape: SHACLShape):
         """Add a shape to the index."""
@@ -107,15 +105,15 @@ class ShapeIndex:
                 self._by_target_class[target_key] = []
             self._by_target_class[target_key].append(shape)
 
-    def find_by_name(self, name: str) -> Optional[SHACLShape]:
+    def find_by_name(self, name: str) -> SHACLShape | None:
         """Find shape by name."""
         return self._by_name.get(name)
 
-    def find_by_uri(self, uri: str) -> Optional[SHACLShape]:
+    def find_by_uri(self, uri: str) -> SHACLShape | None:
         """Find shape by URI."""
         return self._by_uri.get(uri)
 
-    def find_by_target_class(self, target_class: str) -> List[SHACLShape]:
+    def find_by_target_class(self, target_class: str) -> list[SHACLShape]:
         """Find shapes by target class."""
         return self._by_target_class.get(target_class, [])
 
@@ -129,7 +127,7 @@ class ShapeIndex:
 class UltraOptimizer:
     """Ultra-optimized caching and performance system."""
 
-    def __init__(self, config: Optional[CacheConfig] = None):
+    def __init__(self, config: CacheConfig | None = None):
         """Initialize optimizer.
 
         Args:
@@ -146,7 +144,7 @@ class UltraOptimizer:
         self.shape_index = ShapeIndex()
 
         # Caches
-        self._memory_cache: Dict[str, Any] = {}
+        self._memory_cache: dict[str, Any] = {}
         self._redis_client = None
 
         # Initialize Redis if enabled
@@ -157,9 +155,8 @@ class UltraOptimizer:
         """Initialize Redis connection."""
         try:
             import redis
-            self._redis_client = redis.from_url(
-                self.config.redis_url or "redis://localhost:6379"
-            )
+
+            self._redis_client = redis.from_url(self.config.redis_url or "redis://localhost:6379")
             self._redis_client.ping()
             logger.info("Redis cache initialized")
         except ImportError:
@@ -169,13 +166,14 @@ class UltraOptimizer:
             logger.warning(f"Failed to connect to Redis: {e}")
             self.config.redis_enabled = False
 
-    def parse_with_cache(self, ttl_path: Union[str, Path]) -> List[SHACLShape]:
+    def parse_with_cache(self, ttl_path: str | Path) -> list[SHACLShape]:
         """Parse TTL file with multi-level caching.
 
         Args:
             ttl_path: Path to TTL file
 
-        Returns:
+        Returns
+        -------
             List of SHACL shapes
         """
         ttl_path = Path(ttl_path)
@@ -242,13 +240,14 @@ class UltraOptimizer:
 
         return shapes
 
-    def generate_with_cache(self, shapes: List[SHACLShape]) -> str:
+    def generate_with_cache(self, shapes: list[SHACLShape]) -> str:
         """Generate code with caching.
 
         Args:
             shapes: List of SHACL shapes
 
-        Returns:
+        Returns
+        -------
             Generated Python code
         """
         start_time = time.time()
@@ -292,13 +291,14 @@ class UltraOptimizer:
 
         return code
 
-    def batch_parse(self, ttl_paths: List[Union[str, Path]]) -> Dict[str, List[SHACLShape]]:
+    def batch_parse(self, ttl_paths: list[str | Path]) -> dict[str, list[SHACLShape]]:
         """Parse multiple TTL files in batch.
 
         Args:
             ttl_paths: List of TTL file paths
 
-        Returns:
+        Returns
+        -------
             Dictionary mapping file path to shapes
         """
         results = {}
@@ -318,7 +318,7 @@ class UltraOptimizer:
         stat = path.stat()
         return f"parse:{path}:{stat.st_mtime}:{stat.st_size}"
 
-    def _get_shapes_cache_key(self, shapes: List[SHACLShape]) -> str:
+    def _get_shapes_cache_key(self, shapes: list[SHACLShape]) -> str:
         """Generate cache key for shapes."""
         # Use shape URIs and properties
         shape_data = [
@@ -329,7 +329,7 @@ class UltraOptimizer:
         hash_val = hashlib.sha256(data_str.encode()).hexdigest()
         return f"generate:{hash_val}"
 
-    def _disk_get(self, key: str) -> Optional[Any]:
+    def _disk_get(self, key: str) -> Any | None:
         """Get from disk cache."""
         if not self.config.disk_cache_dir:
             return None
@@ -366,7 +366,7 @@ class UltraOptimizer:
         except Exception as e:
             logger.warning(f"Failed to save disk cache: {e}")
 
-    def _redis_get(self, key: str) -> Optional[Any]:
+    def _redis_get(self, key: str) -> Any | None:
         """Get from Redis cache."""
         if not self._redis_client:
             return None
@@ -425,7 +425,7 @@ class UltraOptimizer:
         """Get cache statistics."""
         return self.stats
 
-    def get_detailed_stats(self) -> Dict[str, Any]:
+    def get_detailed_stats(self) -> dict[str, Any]:
         """Get detailed statistics."""
         return {
             "cache": self.stats.to_dict(),

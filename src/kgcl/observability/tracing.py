@@ -9,15 +9,16 @@ from contextlib import contextmanager
 from typing import Any
 
 from opentelemetry import trace
-from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter as OTLPGrpcExporter
-from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter as OTLPHttpExporter
+from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import (
+    OTLPSpanExporter as OTLPGrpcExporter,
+)
+from opentelemetry.exporter.otlp.proto.http.trace_exporter import (
+    OTLPSpanExporter as OTLPHttpExporter,
+)
 from opentelemetry.sdk.resources import Resource
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor, ConsoleSpanExporter, SpanExporter
-from opentelemetry.sdk.trace.sampling import (
-    ParentBasedTraceIdRatio,
-    TraceIdRatioBased,
-)
+from opentelemetry.sdk.trace.sampling import ParentBasedTraceIdRatio, TraceIdRatioBased
 from opentelemetry.trace import Status, StatusCode, Tracer
 
 from kgcl.observability.config import ExporterType, ObservabilityConfig
@@ -123,8 +124,7 @@ def _create_exporters(config: ObservabilityConfig) -> list[SpanExporter]:
             raise ValueError(msg)
         exporters.append(
             OTLPHttpExporter(
-                endpoint=f"{config.otlp_endpoint}/v1/traces",
-                insecure=config.otlp_insecure,
+                endpoint=f"{config.otlp_endpoint}/v1/traces", insecure=config.otlp_insecure
             )
         )
     elif config.trace_exporter == ExporterType.OTLP_GRPC:
@@ -132,10 +132,7 @@ def _create_exporters(config: ObservabilityConfig) -> list[SpanExporter]:
             msg = "OTLP endpoint required for OTLP gRPC exporter"
             raise ValueError(msg)
         exporters.append(
-            OTLPGrpcExporter(
-                endpoint=config.otlp_endpoint,
-                insecure=config.otlp_insecure,
-            )
+            OTLPGrpcExporter(endpoint=config.otlp_endpoint, insecure=config.otlp_insecure)
         )
     elif config.trace_exporter == ExporterType.JAEGER:
         try:
@@ -143,9 +140,7 @@ def _create_exporters(config: ObservabilityConfig) -> list[SpanExporter]:
 
             exporters.append(JaegerExporter())
         except ImportError:
-            logger.warning(
-                "Jaeger exporter not available, install opentelemetry-exporter-jaeger"
-            )
+            logger.warning("Jaeger exporter not available, install opentelemetry-exporter-jaeger")
     elif config.trace_exporter == ExporterType.ZIPKIN:
         try:
             from opentelemetry.exporter.zipkin.json import ZipkinExporter

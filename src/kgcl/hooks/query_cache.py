@@ -6,9 +6,9 @@ Ported from UNRDF query-cache.mjs.
 """
 
 from dataclasses import dataclass
-from typing import Any, Dict, List, Optional
 from datetime import datetime
 from hashlib import sha256
+from typing import Any
 
 
 @dataclass
@@ -51,12 +51,12 @@ class QueryCache:
         ttl_seconds : int
             Default TTL in seconds
         """
-        self.cache: Dict[str, CacheEntry] = {}
+        self.cache: dict[str, CacheEntry] = {}
         self.max_size = max_size
         self.ttl = ttl_seconds
         self.hits = 0
         self.misses = 0
-        self.access_order: List[str] = []  # For LRU tracking
+        self.access_order: list[str] = []  # For LRU tracking
 
     def _compute_hash(self, query: str) -> str:
         """Compute SHA256 hash of query.
@@ -73,7 +73,7 @@ class QueryCache:
         """
         return sha256(query.encode()).hexdigest()
 
-    def get(self, query: str) -> Optional[Any]:
+    def get(self, query: str) -> Any | None:
         """Get cached result if fresh.
 
         Parameters
@@ -110,7 +110,7 @@ class QueryCache:
         self.hits += 1
         return entry.result
 
-    def set(self, query: str, result: Any, ttl_seconds: Optional[int] = None) -> None:
+    def set(self, query: str, result: Any, ttl_seconds: int | None = None) -> None:
         """Cache a query result.
 
         Parameters
@@ -133,10 +133,7 @@ class QueryCache:
 
         # Store entry
         self.cache[query_hash] = CacheEntry(
-            result=result,
-            timestamp=datetime.utcnow(),
-            ttl_seconds=ttl,
-            query_hash=query_hash,
+            result=result, timestamp=datetime.utcnow(), ttl_seconds=ttl, query_hash=query_hash
         )
 
         # Update access order
@@ -177,7 +174,7 @@ class QueryCache:
         total = self.hits + self.misses
         return self.hits / total if total > 0 else 0.0
 
-    def get_stats(self) -> Dict[str, Any]:
+    def get_stats(self) -> dict[str, Any]:
         """Get comprehensive cache statistics.
 
         Returns

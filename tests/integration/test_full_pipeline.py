@@ -5,19 +5,19 @@ Tests the full flow: PyObjC events → UNRDF ingestion → Feature materializati
 """
 
 import tempfile
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 from pathlib import Path
 from unittest.mock import Mock, patch
 
 import pytest
-from rdflib import Graph, Literal, Namespace, URIRef
+from rdflib import Literal, Namespace, URIRef
 from rdflib.namespace import RDF, XSD
 
 from kgcl.dspy_runtime import DSPY_AVAILABLE, UNRDFBridge
-from kgcl.ingestion.config import CollectorConfig, FeatureConfig, IngestionConfig
+from kgcl.ingestion.config import FeatureConfig
 from kgcl.ingestion.materializer import FeatureMaterializer
 from kgcl.ingestion.models import AppEvent, BrowserVisit, CalendarBlock
-from kgcl.ttl2dspy.generator import DSPyGenerator, SignatureDefinition
+from kgcl.ttl2dspy.generator import DSPyGenerator
 from kgcl.ttl2dspy.parser import PropertyShape, SHACLShape
 from kgcl.unrdf_engine.engine import UnrdfEngine
 from kgcl.unrdf_engine.ingestion import IngestionPipeline
@@ -37,122 +37,130 @@ def create_sample_daily_events() -> tuple[list, datetime, datetime]:
     events = []
 
     # Morning: Deep work session (9 AM - 12 PM)
-    events.extend([
-        AppEvent(
-            event_id="app_morning_001",
-            timestamp=start,
-            app_name="com.microsoft.VSCode",
-            app_display_name="VS Code",
-            window_title="kgcl - test_full_pipeline.py",
-            duration_seconds=3600.0,  # 1 hour
-        ),
-        BrowserVisit(
-            event_id="browser_morning_001",
-            timestamp=start + timedelta(hours=1),
-            url="https://docs.python.org/3/library/unittest.html",
-            domain="docs.python.org",
-            title="unittest — Unit testing framework",
-            browser_name="Safari",
-            duration_seconds=900.0,  # 15 min
-        ),
-        AppEvent(
-            event_id="app_morning_002",
-            timestamp=start + timedelta(hours=1, minutes=15),
-            app_name="com.microsoft.VSCode",
-            duration_seconds=5100.0,  # 85 min
-        ),
-    ])
+    events.extend(
+        [
+            AppEvent(
+                event_id="app_morning_001",
+                timestamp=start,
+                app_name="com.microsoft.VSCode",
+                app_display_name="VS Code",
+                window_title="kgcl - test_full_pipeline.py",
+                duration_seconds=3600.0,  # 1 hour
+            ),
+            BrowserVisit(
+                event_id="browser_morning_001",
+                timestamp=start + timedelta(hours=1),
+                url="https://docs.python.org/3/library/unittest.html",
+                domain="docs.python.org",
+                title="unittest — Unit testing framework",
+                browser_name="Safari",
+                duration_seconds=900.0,  # 15 min
+            ),
+            AppEvent(
+                event_id="app_morning_002",
+                timestamp=start + timedelta(hours=1, minutes=15),
+                app_name="com.microsoft.VSCode",
+                duration_seconds=5100.0,  # 85 min
+            ),
+        ]
+    )
 
     # Lunch + breaks (12 PM - 1 PM)
-    events.extend([
-        AppEvent(
-            event_id="app_lunch_001",
-            timestamp=start + timedelta(hours=3),
-            app_name="com.apple.Safari",
-            window_title="News",
-            duration_seconds=1800.0,  # 30 min
-        ),
-        CalendarBlock(
-            event_id="cal_lunch_001",
-            timestamp=start + timedelta(hours=3),
-            end_time=start + timedelta(hours=4),
-            title="Lunch Break",
-            is_all_day=False,
-        ),
-    ])
+    events.extend(
+        [
+            AppEvent(
+                event_id="app_lunch_001",
+                timestamp=start + timedelta(hours=3),
+                app_name="com.apple.Safari",
+                window_title="News",
+                duration_seconds=1800.0,  # 30 min
+            ),
+            CalendarBlock(
+                event_id="cal_lunch_001",
+                timestamp=start + timedelta(hours=3),
+                end_time=start + timedelta(hours=4),
+                title="Lunch Break",
+                is_all_day=False,
+            ),
+        ]
+    )
 
     # Afternoon: Meetings + email (1 PM - 5 PM)
-    events.extend([
-        CalendarBlock(
-            event_id="cal_afternoon_001",
-            timestamp=start + timedelta(hours=4),
-            end_time=start + timedelta(hours=5),
-            title="Team Standup",
-            attendees=["team@example.com"],
-            organizer="manager@example.com",
-            location="Zoom",
-        ),
-        AppEvent(
-            event_id="app_afternoon_001",
-            timestamp=start + timedelta(hours=5),
-            app_name="com.apple.Mail",
-            app_display_name="Mail",
-            duration_seconds=1800.0,  # 30 min
-        ),
-        BrowserVisit(
-            event_id="browser_afternoon_001",
-            timestamp=start + timedelta(hours=5, minutes=30),
-            url="https://github.com/user/kgcl/pulls",
-            domain="github.com",
-            title="Pull Requests · user/kgcl",
-            browser_name="Safari",
-            duration_seconds=600.0,  # 10 min
-        ),
-        CalendarBlock(
-            event_id="cal_afternoon_002",
-            timestamp=start + timedelta(hours=6),
-            end_time=start + timedelta(hours=7),
-            title="Code Review Session",
-            attendees=["peer@example.com"],
-        ),
-        AppEvent(
-            event_id="app_afternoon_002",
-            timestamp=start + timedelta(hours=7),
-            app_name="com.microsoft.VSCode",
-            duration_seconds=3600.0,  # 1 hour
-        ),
-    ])
+    events.extend(
+        [
+            CalendarBlock(
+                event_id="cal_afternoon_001",
+                timestamp=start + timedelta(hours=4),
+                end_time=start + timedelta(hours=5),
+                title="Team Standup",
+                attendees=["team@example.com"],
+                organizer="manager@example.com",
+                location="Zoom",
+            ),
+            AppEvent(
+                event_id="app_afternoon_001",
+                timestamp=start + timedelta(hours=5),
+                app_name="com.apple.Mail",
+                app_display_name="Mail",
+                duration_seconds=1800.0,  # 30 min
+            ),
+            BrowserVisit(
+                event_id="browser_afternoon_001",
+                timestamp=start + timedelta(hours=5, minutes=30),
+                url="https://github.com/user/kgcl/pulls",
+                domain="github.com",
+                title="Pull Requests · user/kgcl",
+                browser_name="Safari",
+                duration_seconds=600.0,  # 10 min
+            ),
+            CalendarBlock(
+                event_id="cal_afternoon_002",
+                timestamp=start + timedelta(hours=6),
+                end_time=start + timedelta(hours=7),
+                title="Code Review Session",
+                attendees=["peer@example.com"],
+            ),
+            AppEvent(
+                event_id="app_afternoon_002",
+                timestamp=start + timedelta(hours=7),
+                app_name="com.microsoft.VSCode",
+                duration_seconds=3600.0,  # 1 hour
+            ),
+        ]
+    )
 
     # Evening: Context switches (5 PM - 6 PM)
-    events.extend([
-        AppEvent(
-            event_id="app_evening_001",
-            timestamp=start + timedelta(hours=8),
-            app_name="com.apple.Safari",
-            duration_seconds=300.0,  # 5 min
-        ),
-        AppEvent(
-            event_id="app_evening_002",
-            timestamp=start + timedelta(hours=8, minutes=5),
-            app_name="com.apple.Mail",
-            duration_seconds=300.0,
-        ),
-        AppEvent(
-            event_id="app_evening_003",
-            timestamp=start + timedelta(hours=8, minutes=10),
-            app_name="com.slack.Slack",
-            duration_seconds=600.0,  # 10 min
-        ),
-        BrowserVisit(
-            event_id="browser_evening_001",
-            timestamp=start + timedelta(hours=8, minutes=20),
-            url="https://stackoverflow.com/questions/12345/pytest-fixtures",
-            domain="stackoverflow.com",
-            title="Pytest fixtures explained",
-            browser_name="Safari",
-            duration_seconds=480.0,  # 8 min
-        ),
-    ])
+    events.extend(
+        [
+            AppEvent(
+                event_id="app_evening_001",
+                timestamp=start + timedelta(hours=8),
+                app_name="com.apple.Safari",
+                duration_seconds=300.0,  # 5 min
+            ),
+            AppEvent(
+                event_id="app_evening_002",
+                timestamp=start + timedelta(hours=8, minutes=5),
+                app_name="com.apple.Mail",
+                duration_seconds=300.0,
+            ),
+            AppEvent(
+                event_id="app_evening_003",
+                timestamp=start + timedelta(hours=8, minutes=10),
+                app_name="com.slack.Slack",
+                duration_seconds=600.0,  # 10 min
+            ),
+            BrowserVisit(
+                event_id="browser_evening_001",
+                timestamp=start + timedelta(hours=8, minutes=20),
+                url="https://stackoverflow.com/questions/12345/pytest-fixtures",
+                domain="stackoverflow.com",
+                title="Pytest fixtures explained",
+                browser_name="Safari",
+                duration_seconds=480.0,  # 8 min
+            ),
+        ]
+    )
 
     end = start + timedelta(hours=9)
     return events, start, end
@@ -176,8 +184,11 @@ class TestFullPipeline:
                     "id": e.event_id,
                     "type": type(e).__name__,
                     "timestamp": e.timestamp.isoformat(),
-                    **{k: v for k, v in e.model_dump().items()
-                       if k not in ["event_id", "schema_version"]},
+                    **{
+                        k: v
+                        for k, v in e.model_dump().items()
+                        if k not in ["event_id", "schema_version"]
+                    },
                 }
                 for e in events
             ]
@@ -227,15 +238,11 @@ class TestFullPipeline:
             assert "context_switches" in feature_ids
 
             # Verify feature values are correct
-            vscode_feature = next(
-                (f for f in features if "VSCode" in f.feature_id), None
-            )
+            vscode_feature = next((f for f in features if "VSCode" in f.feature_id), None)
             assert vscode_feature is not None
             assert vscode_feature.value > 7200  # More than 2 hours
 
-            meeting_feature = next(
-                (f for f in features if f.feature_id == "meeting_count"), None
-            )
+            meeting_feature = next((f for f in features if f.feature_id == "meeting_count"), None)
             assert meeting_feature is not None
             assert meeting_feature.value == 3  # 3 meetings
 
@@ -249,14 +256,9 @@ class TestFullPipeline:
             txn = engine.transaction(agent="test", reason="Add template")
             template_uri = UNRDF["AppUsageTemplate"]
             engine.add_triple(template_uri, RDF.type, UNRDF.FeatureTemplate, txn)
+            engine.add_triple(template_uri, UNRDF.property, UNRDF.appUsageTime, txn)
             engine.add_triple(
-                template_uri, UNRDF.property, UNRDF.appUsageTime, txn
-            )
-            engine.add_triple(
-                template_uri,
-                UNRDF.targetPattern,
-                Literal("?s unrdf:type 'AppEvent'"),
-                txn,
+                template_uri, UNRDF.targetPattern, Literal("?s unrdf:type 'AppEvent'"), txn
             )
             engine.commit(txn)
 
@@ -291,9 +293,7 @@ class TestFullPipeline:
     @patch("dspy.Predict")
     @patch("dspy.OllamaLocal")
     @patch("requests.get")
-    def test_pipeline_with_dspy_integration(
-        self, mock_get, mock_ollama, mock_predict
-    ):
+    def test_pipeline_with_dspy_integration(self, mock_get, mock_ollama, mock_predict):
         """Test complete pipeline including DSPy signature generation and invocation."""
         # Mock Ollama availability
         mock_response = Mock()
@@ -360,9 +360,7 @@ class TestFullPipeline:
 
             # Step 3: Ingest and materialize features
             events, start_time, end_time = create_sample_daily_events()
-            config = FeatureConfig(
-                enabled_features=["app_usage_time", "meeting_count"]
-            )
+            config = FeatureConfig(enabled_features=["app_usage_time", "meeting_count"])
             materializer = FeatureMaterializer(config)
             features = materializer.materialize(events, start_time, end_time)
 
@@ -370,9 +368,7 @@ class TestFullPipeline:
             bridge = UNRDFBridge()
 
             # Prepare inputs from materialized features
-            meeting_feature = next(
-                (f for f in features if f.feature_id == "meeting_count"), None
-            )
+            meeting_feature = next((f for f in features if f.feature_id == "meeting_count"), None)
             app_usage = "VSCode: 3h, Mail: 0.5h, Safari: 1h"
 
             result = bridge.invoke(
@@ -380,9 +376,7 @@ class TestFullPipeline:
                 signature_name="DailyBriefSignature",
                 inputs={
                     "app_usage": app_usage,
-                    "meeting_count": int(meeting_feature.value)
-                    if meeting_feature
-                    else 0,
+                    "meeting_count": int(meeting_feature.value) if meeting_feature else 0,
                 },
                 source_features=[f.feature_id for f in features],
             )
@@ -441,9 +435,7 @@ class TestFullPipeline:
             assert len(props) >= 4  # At least id, type, timestamp, app_name
 
             # 4. Verify provenance tracking
-            provenance = engine.get_provenance(
-                entity_uri, UNRDF.type, Literal("AppEvent")
-            )
+            provenance = engine.get_provenance(entity_uri, UNRDF.type, Literal("AppEvent"))
             assert provenance is not None
             assert provenance.agent == "test"
 
@@ -461,14 +453,10 @@ class TestFullPipeline:
         hourly_start = start_time.replace(minute=0, second=0, microsecond=0)
         hourly_end = hourly_start + timedelta(hours=1)
 
-        hourly_features = materializer.materialize(
-            events, hourly_start, hourly_end
-        )
+        hourly_features = materializer.materialize(events, hourly_start, hourly_end)
 
         # Verify only events in first hour are included
-        first_hour_events = [
-            e for e in events if hourly_start <= e.timestamp < hourly_end
-        ]
+        first_hour_events = [e for e in events if hourly_start <= e.timestamp < hourly_end]
         assert len(first_hour_events) > 0
 
         # Check feature values match expectations

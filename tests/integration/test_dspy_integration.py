@@ -20,9 +20,7 @@ class TestDSPyIntegration:
     @patch("dspy.Predict")
     @patch("dspy.OllamaLocal")
     @patch("requests.get")
-    def test_invoke_with_materialized_features(
-        self, mock_get, mock_ollama, mock_predict
-    ):
+    def test_invoke_with_materialized_features(self, mock_get, mock_ollama, mock_predict):
         """Test invoking DSPy with real feature data."""
         # Mock Ollama
         mock_response = Mock()
@@ -88,12 +86,12 @@ class TestFeatureSignature(dspy.Signature):
         mock_predict.return_value = mock_predictor
 
         with tempfile.TemporaryDirectory() as tmpdir:
-            sig_code = '''
+            sig_code = """
 import dspy
 class ReceiptTestSig(dspy.Signature):
     input_text = dspy.InputField()
     output = dspy.OutputField()
-'''
+"""
             sig_file = Path(tmpdir) / "receipt_sig.py"
             sig_file.write_text(sig_code)
 
@@ -122,15 +120,13 @@ class ReceiptTestSig(dspy.Signature):
     @patch("dspy.Predict")
     @patch("dspy.OllamaLocal")
     @patch("requests.get")
-    def test_error_handling_missing_ollama(
-        self, mock_get, mock_ollama, mock_predict
-    ):
+    def test_error_handling_missing_ollama(self, mock_get, mock_ollama, mock_predict):
         """Test error handling when Ollama unavailable."""
         # Mock Ollama not available
         mock_get.side_effect = ConnectionError("Connection refused")
 
         with tempfile.TemporaryDirectory() as tmpdir:
-            sig_code = 'import dspy\nclass TestSig(dspy.Signature): pass'
+            sig_code = "import dspy\nclass TestSig(dspy.Signature): pass"
             sig_file = Path(tmpdir) / "sig.py"
             sig_file.write_text(sig_code)
 
@@ -138,11 +134,7 @@ class ReceiptTestSig(dspy.Signature):
 
             # Should handle gracefully
             with pytest.raises(Exception):
-                bridge.invoke(
-                    module_path=str(sig_file),
-                    signature_name="TestSig",
-                    inputs={},
-                )
+                bridge.invoke(module_path=str(sig_file), signature_name="TestSig", inputs={})
 
     @patch("dspy.Predict")
     @patch("dspy.OllamaLocal")
@@ -161,12 +153,12 @@ class ReceiptTestSig(dspy.Signature):
         mock_predict.side_effect = ValueError("Invalid input")
 
         with tempfile.TemporaryDirectory() as tmpdir:
-            sig_code = '''
+            sig_code = """
 import dspy
 class TestSig(dspy.Signature):
     required_field = dspy.InputField()
     output = dspy.OutputField()
-'''
+"""
             sig_file = Path(tmpdir) / "sig.py"
             sig_file.write_text(sig_code)
 
@@ -205,22 +197,20 @@ class TestSig(dspy.Signature):
         mock_predict.return_value = mock_predictor
 
         with tempfile.TemporaryDirectory() as tmpdir:
-            sig_code = '''
+            sig_code = """
 import dspy
 class MultiOutputSig(dspy.Signature):
     input = dspy.InputField()
     field1 = dspy.OutputField()
     field2 = dspy.OutputField()
-'''
+"""
             sig_file = Path(tmpdir) / "sig.py"
             sig_file.write_text(sig_code)
 
             bridge = UNRDFBridge()
 
             result = bridge.invoke(
-                module_path=str(sig_file),
-                signature_name="MultiOutputSig",
-                inputs={"input": "test"},
+                module_path=str(sig_file), signature_name="MultiOutputSig", inputs={"input": "test"}
             )
 
             # Verify outputs

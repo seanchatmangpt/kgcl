@@ -1,12 +1,12 @@
 """Example usage of TTL2DSPy."""
 
 from pathlib import Path
-from kgcl.ttl2dspy import UltraOptimizer, ModuleWriter, CacheConfig
+
+from kgcl.ttl2dspy import CacheConfig, ModuleWriter, UltraOptimizer
 
 
 def main():
     """Demonstrate TTL2DSPy usage."""
-
     # Path to example ontology
     ontology_path = Path(__file__).parent / "example_ontology.ttl"
     output_dir = Path(__file__).parent / "generated"
@@ -18,9 +18,7 @@ def main():
 
     # Configure caching
     config = CacheConfig(
-        memory_cache_enabled=True,
-        disk_cache_enabled=True,
-        max_disk_cache_age=3600,
+        memory_cache_enabled=True, disk_cache_enabled=True, max_disk_cache_age=3600
     )
 
     # Create optimizer
@@ -43,7 +41,9 @@ def main():
         print(f"      Inputs: {len(shape.input_properties)}")
         print(f"      Outputs: {len(shape.output_properties)}")
         if shape.description:
-            desc = shape.description[:60] + "..." if len(shape.description) > 60 else shape.description
+            desc = (
+                shape.description[:60] + "..." if len(shape.description) > 60 else shape.description
+            )
             print(f"      Description: {desc}")
     print()
 
@@ -102,7 +102,7 @@ def main():
     print()
     print("Next steps:")
     print("  1. Import the generated signatures:")
-    print(f"     from examples.ttl2dspy.generated.llm_signatures import *")
+    print("     from examples.ttl2dspy.generated.llm_signatures import *")
     print()
     print("  2. Use with DSPy:")
     print("     import dspy")

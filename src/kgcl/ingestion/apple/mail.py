@@ -1,7 +1,8 @@
 """Mail message ingest engine for Mail.app metadata."""
 
 from typing import Any
-from rdflib import URIRef, RDF
+
+from rdflib import RDF
 
 from kgcl.ingestion.apple.base import BaseIngestEngine, IngestResult
 
@@ -20,7 +21,8 @@ class MailIngestEngine(BaseIngestEngine):
         Args:
             source_object: MockMailMessage or actual Mail message
 
-        Returns:
+        Returns
+        -------
             IngestResult with schema:Message RDF triple
         """
         errors = []
@@ -61,16 +63,10 @@ class MailIngestEngine(BaseIngestEngine):
                     sender_name = sender.get("name")
                     if sender_email:
                         sender_uri = self._create_uri(sender_email, "person")
-                        self.graph.add(
-                            (sender_uri, RDF.type, self.schema_ns.Person)
-                        )
+                        self.graph.add((sender_uri, RDF.type, self.schema_ns.Person))
                         if sender_name:
-                            self._add_literal(
-                                sender_uri, self.schema_ns.name, sender_name
-                            )
-                        self._add_literal(
-                            sender_uri, self.schema_ns.email, sender_email
-                        )
+                            self._add_literal(sender_uri, self.schema_ns.name, sender_name)
+                        self._add_literal(sender_uri, self.schema_ns.email, sender_email)
                         self._add_uri(message_uri, self.schema_ns.author, sender_uri)
 
             # Add recipients as schema:recipient (schema:Person)
@@ -81,16 +77,10 @@ class MailIngestEngine(BaseIngestEngine):
                     recipient_name = recipient.get("name")
                     if recipient_email:
                         recipient_uri = self._create_uri(recipient_email, "person")
-                        self.graph.add(
-                            (recipient_uri, RDF.type, self.schema_ns.Person)
-                        )
+                        self.graph.add((recipient_uri, RDF.type, self.schema_ns.Person))
                         if recipient_name:
-                            self._add_literal(
-                                recipient_uri, self.schema_ns.name, recipient_name
-                            )
-                        self._add_literal(
-                            recipient_uri, self.schema_ns.email, recipient_email
-                        )
+                            self._add_literal(recipient_uri, self.schema_ns.name, recipient_name)
+                        self._add_literal(recipient_uri, self.schema_ns.email, recipient_email)
                         self._add_uri(message_uri, self.schema_ns.recipient, recipient_uri)
 
             # Add date received
@@ -104,9 +94,7 @@ class MailIngestEngine(BaseIngestEngine):
                 source_object, "is_flagged", None
             )
             if is_flagged:
-                self._add_literal(
-                    message_uri, self.schema_ns.keywords, "flagged"
-                )
+                self._add_literal(message_uri, self.schema_ns.keywords, "flagged")
 
             # Add Apple-specific properties
             self._add_literal(message_uri, self.apple_ns.sourceApp, "Mail")
@@ -129,7 +117,7 @@ class MailIngestEngine(BaseIngestEngine):
             )
 
         except Exception as e:
-            errors.append(f"Mail ingest error: {str(e)}")
+            errors.append(f"Mail ingest error: {e!s}")
             return IngestResult(
                 success=False,
                 graph=self.graph,

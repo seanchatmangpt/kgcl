@@ -9,14 +9,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 import pytest
-
-from src.kgcl.hooks.receipts import (
-    ChainAnchor,
-    Receipt,
-    ReceiptStore,
-    MerkleTree,
-)
-
+from src.kgcl.hooks.receipts import ChainAnchor, MerkleTree, Receipt, ReceiptStore
 
 # ============================================================================
 # ChainAnchor Tests (3)
@@ -26,11 +19,7 @@ from src.kgcl.hooks.receipts import (
 def test_anchor_creation():
     """Create anchor with correct values."""
     now = datetime.utcnow()
-    anchor = ChainAnchor(
-        previous_receipt_hash="abc123",
-        chain_height=5,
-        timestamp=now
-    )
+    anchor = ChainAnchor(previous_receipt_hash="abc123", chain_height=5, timestamp=now)
 
     assert anchor.previous_receipt_hash == "abc123"
     assert anchor.chain_height == 5
@@ -41,11 +30,7 @@ def test_anchor_creation():
 def test_genesis_anchor():
     """Genesis anchor (height=0)."""
     now = datetime.utcnow()
-    anchor = ChainAnchor(
-        previous_receipt_hash="",
-        chain_height=0,
-        timestamp=now
-    )
+    anchor = ChainAnchor(previous_receipt_hash="", chain_height=0, timestamp=now)
 
     assert anchor.previous_receipt_hash == ""
     assert anchor.chain_height == 0
@@ -57,9 +42,7 @@ def test_chain_height_increment():
     anchors = []
     for i in range(5):
         anchor = ChainAnchor(
-            previous_receipt_hash=f"hash{i}",
-            chain_height=i,
-            timestamp=datetime.utcnow()
+            previous_receipt_hash=f"hash{i}", chain_height=i, timestamp=datetime.utcnow()
         )
         anchors.append(anchor)
 
@@ -87,7 +70,7 @@ def test_store_receipt_with_chain():
             condition_result=True,
             effect_result=True,
             timestamp=datetime.utcnow(),
-            metadata={"key": "value"}
+            metadata={"key": "value"},
         )
 
         content_hash = store.store_receipt(receipt)
@@ -115,7 +98,7 @@ def test_content_address_consistency():
             condition_result=True,
             effect_result=True,
             timestamp=datetime(2024, 1, 1, 12, 0, 0),
-            metadata={"key": "value"}
+            metadata={"key": "value"},
         )
 
         receipt2 = Receipt(
@@ -124,7 +107,7 @@ def test_content_address_consistency():
             condition_result=True,
             effect_result=True,
             timestamp=datetime(2024, 1, 1, 12, 0, 0),
-            metadata={"key": "value"}
+            metadata={"key": "value"},
         )
 
         hash1 = receipt1.get_content_hash()
@@ -145,7 +128,7 @@ def test_chain_linking():
             condition_result=True,
             effect_result=True,
             timestamp=datetime.utcnow(),
-            metadata={}
+            metadata={},
         )
         hash1 = store.store_receipt(receipt1)
 
@@ -156,7 +139,7 @@ def test_chain_linking():
             condition_result=True,
             effect_result=True,
             timestamp=datetime.utcnow(),
-            metadata={}
+            metadata={},
         )
         loaded1 = store.load_receipt(hash1)
         hash2 = store.store_receipt(receipt2, loaded1)
@@ -185,7 +168,7 @@ def test_get_receipt_chain():
                 condition_result=True,
                 effect_result=True,
                 timestamp=datetime.utcnow(),
-                metadata={"index": i}
+                metadata={"index": i},
             )
             content_hash = store.store_receipt(receipt, prev_receipt)
             hashes.append(content_hash)
@@ -216,7 +199,7 @@ def test_verify_chain_integrity_valid():
                 condition_result=True,
                 effect_result=True,
                 timestamp=datetime.utcnow(),
-                metadata={}
+                metadata={},
             )
             last_hash = store.store_receipt(receipt, prev_receipt)
             prev_receipt = store.load_receipt(last_hash)
@@ -237,7 +220,7 @@ def test_verify_chain_integrity_invalid():
             condition_result=True,
             effect_result=True,
             timestamp=datetime.utcnow(),
-            metadata={}
+            metadata={},
         )
         hash1 = store.store_receipt(receipt1)
 
@@ -248,19 +231,20 @@ def test_verify_chain_integrity_invalid():
             condition_result=True,
             effect_result=True,
             timestamp=datetime.utcnow(),
-            metadata={}
+            metadata={},
         )
         hash2 = store.store_receipt(receipt2, loaded1)
 
         # Tamper with first receipt file
         receipt_file = store.storage_dir / f"{hash1}.json"
         import json
-        with open(receipt_file, 'r') as f:
+
+        with open(receipt_file) as f:
             data = json.load(f)
 
-        data['receipt']['execution_id'] = "TAMPERED"
+        data["receipt"]["execution_id"] = "TAMPERED"
 
-        with open(receipt_file, 'w') as f:
+        with open(receipt_file, "w") as f:
             json.dump(data, f)
 
         # Verification should fail
@@ -282,7 +266,7 @@ def test_genesis_receipt():
             condition_result=True,
             effect_result=True,
             timestamp=datetime.utcnow(),
-            metadata={}
+            metadata={},
         )
 
         content_hash = store.store_receipt(receipt)
@@ -311,7 +295,7 @@ def test_chain_depth_limit():
                 condition_result=True,
                 effect_result=True,
                 timestamp=datetime.utcnow(),
-                metadata={"index": i}
+                metadata={"index": i},
             )
             last_hash = store.store_receipt(receipt, prev_receipt)
             prev_receipt = store.load_receipt(last_hash)
@@ -353,11 +337,7 @@ def test_chain_with_metadata():
                 condition_result=True,
                 effect_result=True,
                 timestamp=datetime.utcnow(),
-                metadata={
-                    "index": i,
-                    "data": f"value{i}",
-                    "nested": {"key": i}
-                }
+                metadata={"index": i, "data": f"value{i}", "nested": {"key": i}},
             )
             content_hash = store.store_receipt(receipt, prev_receipt)
             hashes.append(content_hash)
@@ -455,7 +435,7 @@ def test_full_lockchain_workflow():
                 condition_result=True,
                 effect_result=True,
                 timestamp=datetime.utcnow() + timedelta(seconds=i),
-                metadata={"step": i}
+                metadata={"step": i},
             )
 
             # Store with chain linking
@@ -497,7 +477,7 @@ def test_receipt_immutability():
         condition_result=True,
         effect_result=True,
         timestamp=datetime.utcnow(),
-        metadata={}
+        metadata={},
     )
 
     # Cannot modify frozen dataclass
@@ -508,9 +488,7 @@ def test_receipt_immutability():
 def test_chain_anchor_immutability():
     """Chain anchors are immutable."""
     anchor = ChainAnchor(
-        previous_receipt_hash="abc123",
-        chain_height=5,
-        timestamp=datetime.utcnow()
+        previous_receipt_hash="abc123", chain_height=5, timestamp=datetime.utcnow()
     )
 
     # Cannot modify frozen dataclass

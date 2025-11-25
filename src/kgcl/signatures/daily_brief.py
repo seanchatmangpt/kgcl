@@ -4,13 +4,15 @@ Generates concise daily summaries from activity metrics, highlighting key patter
 insights, and recommendations for productivity and wellbeing.
 """
 
-from typing import Any
-from pydantic import BaseModel, Field
 import asyncio
 import logging
+from typing import Any
+
+from pydantic import BaseModel, Field
 
 try:
     import dspy
+
     DSPY_AVAILABLE = True
 except ImportError:
     DSPY_AVAILABLE = False
@@ -25,7 +27,8 @@ tracer = trace.get_tracer(__name__)
 class DailyBriefInput(BaseModel):
     """Input features for daily brief generation.
 
-    Attributes:
+    Attributes
+    ----------
         time_in_app: Total time spent in various applications (hours)
         domain_visits: Number of unique domains visited
         calendar_busy_hours: Hours spent in calendar events/meetings
@@ -45,12 +48,10 @@ class DailyBriefInput(BaseModel):
     focus_time: float = Field(..., ge=0, description="Deep focus time in hours")
     screen_time: float = Field(..., ge=0, description="Total screen time in hours")
     top_apps: dict[str, float] = Field(
-        default_factory=dict,
-        description="App names to usage hours mapping"
+        default_factory=dict, description="App names to usage hours mapping"
     )
     top_domains: dict[str, int] = Field(
-        default_factory=dict,
-        description="Domain names to visit counts mapping"
+        default_factory=dict, description="Domain names to visit counts mapping"
     )
     meeting_count: int = Field(..., ge=0, description="Number of meetings")
     break_intervals: int = Field(..., ge=0, description="Number of breaks")
@@ -64,18 +65,10 @@ class DailyBriefInput(BaseModel):
                 "context_switches": 14,
                 "focus_time": 2.1,
                 "screen_time": 8.5,
-                "top_apps": {
-                    "VSCode": 2.5,
-                    "Safari": 1.8,
-                    "Slack": 0.9
-                },
-                "top_domains": {
-                    "github.com": 12,
-                    "stackoverflow.com": 8,
-                    "docs.python.org": 5
-                },
+                "top_apps": {"VSCode": 2.5, "Safari": 1.8, "Slack": 0.9},
+                "top_domains": {"github.com": 12, "stackoverflow.com": 8, "docs.python.org": 5},
                 "meeting_count": 6,
-                "break_intervals": 3
+                "break_intervals": 3,
             }
         }
     }
@@ -84,7 +77,8 @@ class DailyBriefInput(BaseModel):
 class DailyBriefOutput(BaseModel):
     """Output summary and insights from daily brief.
 
-    Attributes:
+    Attributes
+    ----------
         summary: Concise overview of the day's activities (1-2 sentences)
         highlights: Key notable activities or achievements
         patterns: Observed behavioral patterns (e.g., peak focus times)
@@ -95,26 +89,17 @@ class DailyBriefOutput(BaseModel):
 
     summary: str = Field(..., description="Brief summary of the day")
     highlights: list[str] = Field(
-        default_factory=list,
-        description="Key achievements or notable activities"
+        default_factory=list, description="Key achievements or notable activities"
     )
-    patterns: list[str] = Field(
-        default_factory=list,
-        description="Observed behavioral patterns"
-    )
+    patterns: list[str] = Field(default_factory=list, description="Observed behavioral patterns")
     recommendations: list[str] = Field(
-        default_factory=list,
-        description="Actionable improvement suggestions"
+        default_factory=list, description="Actionable improvement suggestions"
     )
     productivity_score: int = Field(
-        default=0,
-        ge=0,
-        le=100,
-        description="Productivity estimate (0-100)"
+        default=0, ge=0, le=100, description="Productivity estimate (0-100)"
     )
     wellbeing_indicators: dict[str, Any] = Field(
-        default_factory=dict,
-        description="Health and balance indicators"
+        default_factory=dict, description="Health and balance indicators"
     )
 
     model_config = {
@@ -124,24 +109,24 @@ class DailyBriefOutput(BaseModel):
                 "highlights": [
                     "2.1 hours of deep focus time",
                     "Visited 28 unique domains for research",
-                    "Balanced code and meetings effectively"
+                    "Balanced code and meetings effectively",
                 ],
                 "patterns": [
                     "Morning deep work (9-11am)",
                     "Afternoon meeting cluster (2-5pm)",
-                    "High context switching during coding"
+                    "High context switching during coding",
                 ],
                 "recommendations": [
                     "Schedule fewer meetings to preserve focus time",
                     "Batch similar tasks to reduce context switches",
-                    "Take more frequent breaks (only 3 today)"
+                    "Take more frequent breaks (only 3 today)",
                 ],
                 "productivity_score": 75,
                 "wellbeing_indicators": {
                     "focus_quality": "good",
                     "meeting_load": "high",
-                    "break_frequency": "low"
-                }
+                    "break_frequency": "low",
+                },
             }
         }
     }
@@ -149,6 +134,7 @@ class DailyBriefOutput(BaseModel):
 
 # DSPy Signature (only available if dspy-ai is installed)
 if DSPY_AVAILABLE:
+
     class DailyBriefSignature(dspy.Signature):
         """Generate a concise daily activity brief from usage metrics.
 
@@ -158,27 +144,13 @@ if DSPY_AVAILABLE:
         """
 
         # Input fields
-        time_in_app: float = dspy.InputField(
-            desc="Total time spent in applications (hours)"
-        )
-        domain_visits: int = dspy.InputField(
-            desc="Number of unique domains visited"
-        )
-        calendar_busy_hours: float = dspy.InputField(
-            desc="Hours spent in calendar events/meetings"
-        )
-        context_switches: int = dspy.InputField(
-            desc="Number of application/context switches"
-        )
-        focus_time: float = dspy.InputField(
-            desc="Continuous uninterrupted work time (hours)"
-        )
-        screen_time: float = dspy.InputField(
-            desc="Total screen time (hours)"
-        )
-        meeting_count: int = dspy.InputField(
-            desc="Number of meetings attended"
-        )
+        time_in_app: float = dspy.InputField(desc="Total time spent in applications (hours)")
+        domain_visits: int = dspy.InputField(desc="Number of unique domains visited")
+        calendar_busy_hours: float = dspy.InputField(desc="Hours spent in calendar events/meetings")
+        context_switches: int = dspy.InputField(desc="Number of application/context switches")
+        focus_time: float = dspy.InputField(desc="Continuous uninterrupted work time (hours)")
+        screen_time: float = dspy.InputField(desc="Total screen time (hours)")
+        meeting_count: int = dspy.InputField(desc="Number of meetings attended")
 
         # Output fields
         summary: str = dspy.OutputField(
@@ -223,7 +195,8 @@ class DailyBriefModule:
         Args:
             input_data: Daily activity metrics
 
-        Returns:
+        Returns
+        -------
             DailyBriefOutput with structured insights
         """
         # Calculate productivity score
@@ -269,10 +242,22 @@ class DailyBriefModule:
 
         # Wellbeing indicators
         wellbeing = {
-            "focus_quality": "excellent" if input_data.focus_time > 3 else "good" if input_data.focus_time > 2 else "needs improvement",
-            "meeting_load": "high" if input_data.calendar_busy_hours > 4 else "moderate" if input_data.calendar_busy_hours > 2 else "low",
+            "focus_quality": "excellent"
+            if input_data.focus_time > 3
+            else "good"
+            if input_data.focus_time > 2
+            else "needs improvement",
+            "meeting_load": "high"
+            if input_data.calendar_busy_hours > 4
+            else "moderate"
+            if input_data.calendar_busy_hours > 2
+            else "low",
             "break_frequency": "good" if input_data.break_intervals >= 3 else "low",
-            "context_switching": "high" if input_data.context_switches > 20 else "moderate" if input_data.context_switches > 10 else "low"
+            "context_switching": "high"
+            if input_data.context_switches > 20
+            else "moderate"
+            if input_data.context_switches > 10
+            else "low",
         }
 
         return DailyBriefOutput(
@@ -281,7 +266,7 @@ class DailyBriefModule:
             patterns=patterns,
             recommendations=recommendations,
             productivity_score=productivity_score,
-            wellbeing_indicators=wellbeing
+            wellbeing_indicators=wellbeing,
         )
 
     def _calculate_productivity_score(self, input_data: DailyBriefInput) -> int:
@@ -290,7 +275,8 @@ class DailyBriefModule:
         Args:
             input_data: Daily activity metrics
 
-        Returns:
+        Returns
+        -------
             Productivity score (0-100)
         """
         score = 50  # Base score
@@ -301,7 +287,9 @@ class DailyBriefModule:
 
         # Negative factors
         score -= min(20, int(input_data.context_switches / 2))  # -1 per 2 switches, max -20
-        score -= min(15, int(max(0, input_data.calendar_busy_hours - 3) * 3))  # Penalty for >3h meetings
+        score -= min(
+            15, int(max(0, input_data.calendar_busy_hours - 3) * 3)
+        )  # Penalty for >3h meetings
 
         return max(0, min(100, score))
 
@@ -311,7 +299,8 @@ class DailyBriefModule:
         Args:
             input_data: Daily activity metrics
 
-        Returns:
+        Returns
+        -------
             DailyBriefOutput with summary and insights
         """
         with tracer.start_as_current_span("daily_brief.generate") as span:
@@ -322,8 +311,7 @@ class DailyBriefModule:
             try:
                 if self.use_llm:
                     return self._llm_generate(input_data)
-                else:
-                    return self._fallback_generate(input_data)
+                return self._fallback_generate(input_data)
             except Exception as e:
                 logger.warning(f"LLM generation failed, using fallback: {e}")
                 span.set_attribute("fallback_used", True)
@@ -335,7 +323,8 @@ class DailyBriefModule:
         Args:
             input_data: Daily activity metrics
 
-        Returns:
+        Returns
+        -------
             DailyBriefOutput with LLM-generated insights
         """
         # Invoke DSPy predictor
@@ -346,7 +335,7 @@ class DailyBriefModule:
             context_switches=input_data.context_switches,
             focus_time=input_data.focus_time,
             screen_time=input_data.screen_time,
-            meeting_count=input_data.meeting_count
+            meeting_count=input_data.meeting_count,
         )
 
         # Parse LLM output into structured format
@@ -356,9 +345,13 @@ class DailyBriefModule:
 
         # Calculate wellbeing indicators
         wellbeing = {
-            "focus_quality": "excellent" if input_data.focus_time > 3 else "good" if input_data.focus_time > 2 else "needs improvement",
+            "focus_quality": "excellent"
+            if input_data.focus_time > 3
+            else "good"
+            if input_data.focus_time > 2
+            else "needs improvement",
             "meeting_load": "high" if input_data.calendar_busy_hours > 4 else "moderate",
-            "break_frequency": "good" if input_data.break_intervals >= 3 else "low"
+            "break_frequency": "good" if input_data.break_intervals >= 3 else "low",
         }
 
         return DailyBriefOutput(
@@ -367,7 +360,7 @@ class DailyBriefModule:
             patterns=patterns[:5],
             recommendations=recommendations[:5],
             productivity_score=int(result.productivity_score),
-            wellbeing_indicators=wellbeing
+            wellbeing_indicators=wellbeing,
         )
 
     async def generate_async(self, input_data: DailyBriefInput) -> DailyBriefOutput:
@@ -376,7 +369,8 @@ class DailyBriefModule:
         Args:
             input_data: Daily activity metrics
 
-        Returns:
+        Returns
+        -------
             DailyBriefOutput with summary and insights
         """
         return await asyncio.to_thread(self.generate, input_data)
@@ -395,7 +389,7 @@ if __name__ == "__main__":
         top_apps={"VSCode": 2.5, "Safari": 1.8, "Slack": 0.9},
         top_domains={"github.com": 12, "stackoverflow.com": 8},
         meeting_count=6,
-        break_intervals=3
+        break_intervals=3,
     )
 
     # Generate brief (will use fallback if DSPy not available)

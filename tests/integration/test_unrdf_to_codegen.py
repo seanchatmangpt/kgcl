@@ -7,12 +7,11 @@ and signature caching/invalidation.
 import tempfile
 from pathlib import Path
 
-import pytest
-from rdflib import Graph, Literal, Namespace, URIRef
+from rdflib import Graph, Literal, Namespace
 from rdflib.namespace import RDF, XSD
 
 from kgcl.ttl2dspy.generator import DSPyGenerator
-from kgcl.ttl2dspy.parser import PropertyShape, SHACLShape, OntologyParser
+from kgcl.ttl2dspy.parser import OntologyParser
 from kgcl.unrdf_engine.engine import UnrdfEngine
 
 UNRDF = Namespace("http://unrdf.org/ontology/")
@@ -36,25 +35,13 @@ def create_feature_template_graph() -> Graph:
     brief_template = UNRDF.DailyBriefTemplate
     g.add((brief_template, RDF.type, UNRDF.FeatureTemplate))
     g.add((brief_template, UNRDF.name, Literal("DailyBrief")))
-    g.add(
-        (
-            brief_template,
-            UNRDF.description,
-            Literal("Generate daily productivity brief"),
-        )
-    )
+    g.add((brief_template, UNRDF.description, Literal("Generate daily productivity brief")))
 
     # SHACL shape for the signature
     shape_uri = UNRDF.DailyBriefShape
     g.add((shape_uri, RDF.type, SH.NodeShape))
     g.add((shape_uri, UNRDF.signatureName, Literal("DailyBriefSignature")))
-    g.add(
-        (
-            shape_uri,
-            UNRDF.description,
-            Literal("Signature for generating daily brief"),
-        )
-    )
+    g.add((shape_uri, UNRDF.description, Literal("Signature for generating daily brief")))
 
     # Input property: app_usage
     prop1 = UNRDF.prop_app_usage
@@ -183,9 +170,7 @@ class TestUNRDFToCodegen:
         assert "__all__" in module_code
 
         # Verify can be written to file
-        with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".py", delete=False
-        ) as f:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".py", delete=False) as f:
             f.write(module_code)
             module_path = f.name
 
@@ -295,11 +280,7 @@ class TestUNRDFToCodegen:
 
             # Ingest shape
             result = pipeline.ingest_json(
-                data={
-                    "id": "shape_001",
-                    "type": "SHACLShape",
-                    "triples": shape_triples,
-                },
+                data={"id": "shape_001", "type": "SHACLShape", "triples": shape_triples},
                 agent="test",
             )
 

@@ -52,11 +52,7 @@ def traced_lm_call(model: str) -> Any:
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             with tracer.start_as_current_span(
                 f"lm.{model}.{func.__name__}",
-                attributes={
-                    "subsystem": "dspy_runtime",
-                    "model": model,
-                    "operation": "lm_call",
-                },
+                attributes={"subsystem": "dspy_runtime", "model": model, "operation": "lm_call"},
             ) as span:
                 start_time = time.perf_counter()
 
@@ -75,9 +71,7 @@ def traced_lm_call(model: str) -> Any:
 
                     # Record metrics
                     if len(args) > 0 and hasattr(args[0], "metrics"):
-                        args[0].metrics.record_lm_call(
-                            model, tokens, duration_ms, success=True
-                        )
+                        args[0].metrics.record_lm_call(model, tokens, duration_ms, success=True)
 
                     span.set_status(Status(StatusCode.OK))
                     return result

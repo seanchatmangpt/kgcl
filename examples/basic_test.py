@@ -1,6 +1,6 @@
 """Basic test example using Chicago TDD principles."""
 
-from src.core import test, assert_eq_with_msg, assert_that, AssertionBuilder
+from src.core import AssertionBuilder, assert_eq_with_msg, assert_that, test
 
 
 @test
@@ -28,12 +28,14 @@ def test_with_predicate():
 def test_assertion_builder():
     """Test using fluent assertion builder."""
     value = 42
-    result = (AssertionBuilder(value)
+    result = (
+        AssertionBuilder(value)
         .assert_that(lambda v: v > 0)
         .assert_that(lambda v: v < 100)
         .assert_equal(42)
-        .get())
-    
+        .get()
+    )
+
     assert result == 42
 
 

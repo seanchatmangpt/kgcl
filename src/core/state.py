@@ -3,10 +3,11 @@
 Provides state machines and state tracking for complex test scenarios.
 """
 
-from typing import TypeVar, Generic, Callable, Any, Dict, Optional, Set
-from enum import Enum
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from datetime import datetime
+from enum import Enum
+from typing import Any, Generic, TypeVar
 
 S = TypeVar("S", bound="State")
 T = TypeVar("T")
@@ -14,16 +15,16 @@ T = TypeVar("T")
 
 class State(Enum):
     """Base state enumeration"""
-    pass
 
 
 @dataclass
 class StateTransition(Generic[S]):
     """Represents a transition between states"""
+
     from_state: S
     to_state: S
     timestamp: datetime = field(default_factory=datetime.now)
-    context: Dict[str, Any] = field(default_factory=dict)
+    context: dict[str, Any] = field(default_factory=dict)
 
 
 class StateManager(Generic[S]):
@@ -55,14 +56,14 @@ class StateManager(Generic[S]):
         self._current: S = initial_state
         self._history: list[S] = [initial_state]
         self._transitions: list[StateTransition[S]] = []
-        self._validators: Dict[S, Callable[[S], bool]] = {}
+        self._validators: dict[S, Callable[[S], bool]] = {}
         self._listeners: list[Callable[[S, S], None]] = []
 
     def current_state(self) -> S:
         """Get current state"""
         return self._current
 
-    def transition_to(self, next_state: S, context: Optional[Dict[str, Any]] = None) -> bool:
+    def transition_to(self, next_state: S, context: dict[str, Any] | None = None) -> bool:
         """Transition to next state
 
         Returns True if transition succeeded, False otherwise.
@@ -74,9 +75,7 @@ class StateManager(Generic[S]):
 
         # Record transition
         transition = StateTransition(
-            from_state=self._current,
-            to_state=next_state,
-            context=context or {}
+            from_state=self._current, to_state=next_state, context=context or {}
         )
         self._transitions.append(transition)
 

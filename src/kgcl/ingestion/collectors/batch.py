@@ -3,7 +3,7 @@
 import json
 import uuid
 from collections.abc import Callable
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -93,10 +93,7 @@ class BatchCollector(BaseCollector):
         if len(self._buffer) >= self.batch_size:
             self.flush()
 
-    def add_events(
-        self,
-        events: list[AppEvent | BrowserVisit | CalendarBlock],
-    ) -> None:
+    def add_events(self, events: list[AppEvent | BrowserVisit | CalendarBlock]) -> None:
         """Add multiple events to buffer.
 
         Parameters
@@ -128,7 +125,7 @@ class BatchCollector(BaseCollector):
                 batch_id=self._current_batch_id or self._generate_batch_id(),
                 events=self._buffer.copy(),
                 metadata={
-                    "flush_time": datetime.now(timezone.utc).replace(tzinfo=None).isoformat(),
+                    "flush_time": datetime.now(UTC).replace(tzinfo=None).isoformat(),
                     "collector_state": self.state.value,
                 },
             )
@@ -140,7 +137,7 @@ class BatchCollector(BaseCollector):
             # Clear buffer
             flushed_count = len(self._buffer)
             self._buffer.clear()
-            self._last_flush = datetime.now(timezone.utc).replace(tzinfo=None)
+            self._last_flush = datetime.now(UTC).replace(tzinfo=None)
             self._current_batch_id = None
 
             return flushed_count
@@ -189,7 +186,7 @@ class BatchCollector(BaseCollector):
         Path
             Output file path with date-based naming
         """
-        now = datetime.now(timezone.utc).replace(tzinfo=None)
+        now = datetime.now(UTC).replace(tzinfo=None)
         filename = f"events_{now.strftime('%Y%m%d')}.jsonl"
         return self.output_path / filename
 
@@ -255,10 +252,7 @@ class BatchCollector(BaseCollector):
                         corrupted += 1
                         if self.config.enable_recovery:
                             # Log error and continue
-                            self._handle_error(
-                                e,
-                                {"line_num": line_num, "file": str(file_path)},
-                            )
+                            self._handle_error(e, {"line_num": line_num, "file": str(file_path)})
                         else:
                             raise
 
@@ -287,10 +281,12 @@ class BatchCollector(BaseCollector):
             Enhanced statistics
         """
         stats = super().get_stats()
-        stats.update({
-            "buffer_size": len(self._buffer),
-            "current_batch_id": self._current_batch_id,
-            "batch_size": self.batch_size,
-            "flush_interval": self.flush_interval,
-        })
+        stats.update(
+            {
+                "buffer_size": len(self._buffer),
+                "current_batch_id": self._current_batch_id,
+                "batch_size": self.batch_size,
+                "flush_interval": self.flush_interval,
+            }
+        )
         return stats

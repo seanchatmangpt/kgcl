@@ -5,19 +5,13 @@ Tests drive the design of hook execution pipeline and state management.
 Real object collaboration without mocking core domain.
 """
 
-import pytest
-from datetime import datetime
-from typing import Any, Dict, List
-import asyncio
+from typing import Any
 
-from kgcl.hooks.core import Hook, HookState, HookExecutor
+import pytest
+
 from kgcl.hooks.conditions import Condition, ConditionResult
-from kgcl.hooks.lifecycle import (
-    HookContext,
-    HookExecutionPipeline,
-    HookLifecycleEvent,
-    HookChain,
-)
+from kgcl.hooks.core import Hook, HookExecutor, HookState
+from kgcl.hooks.lifecycle import HookChain, HookContext, HookExecutionPipeline, HookLifecycleEvent
 
 
 class SimpleCondition(Condition):
@@ -27,21 +21,21 @@ class SimpleCondition(Condition):
         super().__init__()
         self.should_trigger = should_trigger
 
-    async def evaluate(self, context: Dict[str, Any]) -> ConditionResult:
+    async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
         return ConditionResult(triggered=self.should_trigger, metadata={"simple": True})
 
 
-def simple_handler(context: Dict[str, Any]) -> Dict[str, Any]:
+def simple_handler(context: dict[str, Any]) -> dict[str, Any]:
     """Simple handler that processes context."""
     return {"processed": True, "input_count": len(context)}
 
 
-def transforming_handler(context: Dict[str, Any]) -> Dict[str, Any]:
+def transforming_handler(context: dict[str, Any]) -> dict[str, Any]:
     """Handler that transforms input."""
     return {"transformed": True, "value": context.get("value", 0) * 2}
 
 
-def failing_handler(context: Dict[str, Any]) -> Dict[str, Any]:
+def failing_handler(context: dict[str, Any]) -> dict[str, Any]:
     """Handler that fails."""
     raise RuntimeError("Handler error")
 
@@ -53,10 +47,7 @@ class TestHookStateTransitions:
     async def test_hook_transitions_from_pending_to_active(self):
         """Hook lifecycle: PENDING → ACTIVE on condition evaluation."""
         hook = Hook(
-            name="test",
-            description="Test",
-            condition=SimpleCondition(),
-            handler=simple_handler,
+            name="test", description="Test", condition=SimpleCondition(), handler=simple_handler
         )
 
         assert hook.state == HookState.PENDING
@@ -145,10 +136,7 @@ class TestHookFinalStates:
     async def test_hook_reaches_completed_state_on_success(self):
         """Hook reaches COMPLETED state on successful execution."""
         hook = Hook(
-            name="test",
-            description="Test",
-            condition=SimpleCondition(),
-            handler=simple_handler,
+            name="test", description="Test", condition=SimpleCondition(), handler=simple_handler
         )
 
         executor = HookExecutor()
@@ -179,10 +167,7 @@ class TestHookAuditability:
     async def test_hook_lifecycle_is_auditable(self):
         """Hook lifecycle is auditable (all state changes logged)."""
         hook = Hook(
-            name="test",
-            description="Test",
-            condition=SimpleCondition(),
-            handler=simple_handler,
+            name="test", description="Test", condition=SimpleCondition(), handler=simple_handler
         )
 
         executor = HookExecutor()
@@ -202,10 +187,10 @@ class TestHookChaining:
     async def test_multiple_handlers_can_be_chained(self):
         """Multiple handlers can be chained (hook1 output → hook2 input)."""
 
-        def first_handler(context: Dict[str, Any]) -> Dict[str, Any]:
+        def first_handler(context: dict[str, Any]) -> dict[str, Any]:
             return {"step": 1, "value": 10}
 
-        def second_handler(context: Dict[str, Any]) -> Dict[str, Any]:
+        def second_handler(context: dict[str, Any]) -> dict[str, Any]:
             return {"step": 2, "value": context.get("value", 0) + 5}
 
         hook1 = Hook(
@@ -239,7 +224,7 @@ class TestHookContext:
     async def test_hook_context_carries_metadata_through_execution(self):
         """Hook context carries metadata through execution."""
 
-        def context_aware_handler(context: Dict[str, Any]) -> Dict[str, Any]:
+        def context_aware_handler(context: dict[str, Any]) -> dict[str, Any]:
             hook_context = context.get("hook_context")
             return {
                 "actor": hook_context.actor if hook_context else None,
@@ -254,15 +239,11 @@ class TestHookContext:
         )
 
         hook_context = HookContext(
-            actor="test_user",
-            request_id="req-123",
-            metadata={"source": "test"},
+            actor="test_user", request_id="req-123", metadata={"source": "test"}
         )
 
         executor = HookExecutor()
-        receipt = await executor.execute(
-            hook, context={"hook_context": hook_context}
-        )
+        receipt = await executor.execute(hook, context={"hook_context": hook_context})
 
         assert receipt.handler_result["actor"] == "test_user"
         assert receipt.handler_result["request_id"] == "req-123"
@@ -274,16 +255,13 @@ class TestHookLifecycleEvents:
     @pytest.mark.asyncio
     async def test_lifecycle_events_are_emitted(self):
         """Event system for lifecycle phases (pre/post)."""
-        events: List[HookLifecycleEvent] = []
+        events: list[HookLifecycleEvent] = []
 
         def event_handler(event: HookLifecycleEvent):
             events.append(event)
 
         hook = Hook(
-            name="test",
-            description="Test",
-            condition=SimpleCondition(),
-            handler=simple_handler,
+            name="test", description="Test", condition=SimpleCondition(), handler=simple_handler
         )
 
         executor = HookExecutor()
@@ -305,10 +283,7 @@ class TestHookExecutionPipeline:
     async def test_execution_pipeline_manages_hook_flow(self):
         """HookExecutionPipeline manages complete hook execution flow."""
         hook = Hook(
-            name="test",
-            description="Test",
-            condition=SimpleCondition(),
-            handler=simple_handler,
+            name="test", description="Test", condition=SimpleCondition(), handler=simple_handler
         )
 
         pipeline = HookExecutionPipeline()

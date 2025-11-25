@@ -8,7 +8,6 @@ import logging.config
 import sys
 import uuid
 from contextvars import ContextVar
-from typing import Any
 
 from kgcl.observability.config import ObservabilityConfig
 

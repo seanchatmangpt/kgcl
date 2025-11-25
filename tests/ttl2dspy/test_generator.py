@@ -4,8 +4,8 @@ import pytest
 from rdflib import URIRef
 from rdflib.namespace import XSD
 
-from kgcl.ttl2dspy.parser import SHACLShape, PropertyShape
 from kgcl.ttl2dspy.generator import DSPyGenerator, SignatureDefinition
+from kgcl.ttl2dspy.parser import PropertyShape, SHACLShape
 
 
 @pytest.fixture
@@ -56,14 +56,14 @@ class TestSignatureDefinition:
                     name="input_text",
                     datatype=XSD.string,
                     min_count=1,
-                ),
+                )
             ],
             outputs=[
                 PropertyShape(
                     path=URIRef("http://example.org/output"),
                     name="output_text",
                     datatype=XSD.string,
-                ),
+                )
             ],
         )
 
@@ -85,7 +85,7 @@ class TestSignatureDefinition:
                     datatype=XSD.string,
                     min_count=1,
                     description="User query to process",
-                ),
+                )
             ],
             outputs=[
                 PropertyShape(
@@ -93,7 +93,7 @@ class TestSignatureDefinition:
                     name="answer",
                     datatype=XSD.string,
                     description="Generated answer",
-                ),
+                )
             ],
         )
 
@@ -112,7 +112,7 @@ class TestSignatureDefinition:
                     name="text",
                     datatype=XSD.string,
                     min_count=1,
-                ),
+                )
             ],
         )
 
@@ -131,14 +131,12 @@ class TestSignatureDefinition:
                     name="tags",
                     datatype=XSD.string,
                     max_count=None,
-                ),
+                )
             ],
             outputs=[
                 PropertyShape(
-                    path=URIRef("http://example.org/output"),
-                    name="result",
-                    datatype=XSD.string,
-                ),
+                    path=URIRef("http://example.org/output"), name="result", datatype=XSD.string
+                )
             ],
         )
 
@@ -205,9 +203,7 @@ class TestDSPyGenerator:
                     min_count=1,
                 ),
                 PropertyShape(
-                    path=URIRef("http://example.org/output1"),
-                    name="output1",
-                    datatype=XSD.string,
+                    path=URIRef("http://example.org/output1"), name="output1", datatype=XSD.string
                 ),
             ],
         )
@@ -224,9 +220,7 @@ class TestDSPyGenerator:
                     min_count=1,
                 ),
                 PropertyShape(
-                    path=URIRef("http://example.org/output2"),
-                    name="output2",
-                    datatype=XSD.boolean,
+                    path=URIRef("http://example.org/output2"), name="output2", datatype=XSD.boolean
                 ),
             ],
         )
@@ -244,10 +238,7 @@ class TestDSPyGenerator:
         """Test cache clearing."""
         generator = DSPyGenerator()
 
-        shape = SHACLShape(
-            uri=URIRef("http://example.org/Test"),
-            name="Test",
-        )
+        shape = SHACLShape(uri=URIRef("http://example.org/Test"), name="Test")
         generator.generate_signature(shape)
 
         assert len(generator._generated) == 1

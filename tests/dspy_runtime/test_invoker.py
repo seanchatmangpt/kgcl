@@ -2,17 +2,12 @@
 Unit tests for DSPy signature invoker.
 """
 
-import pytest
-from unittest.mock import Mock, patch, MagicMock
-from pathlib import Path
-import tempfile
 import json
+from unittest.mock import Mock, patch
 
-from kgcl.dspy_runtime.invoker import (
-    SignatureInvoker,
-    InvocationResult,
-    DSPY_AVAILABLE
-)
+import pytest
+
+from kgcl.dspy_runtime.invoker import DSPY_AVAILABLE, InvocationResult, SignatureInvoker
 
 
 @pytest.fixture
@@ -41,7 +36,7 @@ class TestInvocationResult:
             success=True,
             inputs={"input": "test"},
             outputs={"output": "result"},
-            metrics={"latency_seconds": 1.5}
+            metrics={"latency_seconds": 1.5},
         )
 
         assert result.success is True
@@ -52,9 +47,7 @@ class TestInvocationResult:
     def test_error_result(self):
         """Test error invocation result."""
         result = InvocationResult(
-            success=False,
-            inputs={"input": "test"},
-            error="Something went wrong"
+            success=False, inputs={"input": "test"}, error="Something went wrong"
         )
 
         assert result.success is False
@@ -63,11 +56,7 @@ class TestInvocationResult:
 
     def test_to_dict(self):
         """Test conversion to dictionary."""
-        result = InvocationResult(
-            success=True,
-            inputs={"a": 1},
-            outputs={"b": 2}
-        )
+        result = InvocationResult(success=True, inputs={"a": 1}, outputs={"b": 2})
 
         result_dict = result.to_dict()
         assert result_dict["success"] is True
@@ -77,9 +66,7 @@ class TestInvocationResult:
     def test_to_json(self):
         """Test conversion to JSON."""
         result = InvocationResult(
-            success=True,
-            inputs={"test": "value"},
-            outputs={"result": "data"}
+            success=True, inputs={"test": "value"}, outputs={"result": "data"}
         )
 
         json_str = result.to_json()
@@ -101,10 +88,7 @@ class TestSignatureInvoker:
         """Test loading signature from module."""
         invoker = SignatureInvoker()
 
-        signature = invoker.load_signature(
-            str(sample_signature_module),
-            "TestSignature"
-        )
+        signature = invoker.load_signature(str(sample_signature_module), "TestSignature")
 
         assert signature.__name__ == "TestSignature"
         assert hasattr(signature, "input_text")
@@ -139,10 +123,7 @@ class TestSignatureInvoker:
         invoker = SignatureInvoker()
         signature = invoker.load_signature(str(sample_signature_module), "TestSignature")
 
-        is_valid, error = invoker.validate_inputs(
-            signature,
-            {"input_text": "test"}
-        )
+        is_valid, error = invoker.validate_inputs(signature, {"input_text": "test"})
 
         assert is_valid is True
         assert error is None
@@ -163,8 +144,7 @@ class TestSignatureInvoker:
         signature = invoker.load_signature(str(sample_signature_module), "TestSignature")
 
         is_valid, error = invoker.validate_inputs(
-            signature,
-            {"input_text": "test", "extra_field": "value"}
+            signature, {"input_text": "test", "extra_field": "value"}
         )
 
         # Should still be valid, extra fields ignored
@@ -184,10 +164,7 @@ class TestSignatureInvoker:
         invoker = SignatureInvoker()
         signature = invoker.load_signature(str(sample_signature_module), "TestSignature")
 
-        result = invoker.invoke(
-            signature,
-            {"input_text": "test input"}
-        )
+        result = invoker.invoke(signature, {"input_text": "test input"})
 
         assert result.success is True
         assert result.inputs["input_text"] == "test input"
@@ -220,9 +197,7 @@ class TestSignatureInvoker:
         invoker = SignatureInvoker()
 
         result = invoker.invoke_from_module(
-            str(sample_signature_module),
-            "TestSignature",
-            {"input_text": "test"}
+            str(sample_signature_module), "TestSignature", {"input_text": "test"}
         )
 
         assert result.success is True
@@ -232,9 +207,7 @@ class TestSignatureInvoker:
         invoker = SignatureInvoker()
 
         result = invoker.invoke_from_module(
-            "/nonexistent/module.py",
-            "TestSignature",
-            {"input_text": "test"}
+            "/nonexistent/module.py", "TestSignature", {"input_text": "test"}
         )
 
         assert result.success is False

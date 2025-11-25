@@ -114,10 +114,7 @@ def traced_graph_operation(operation: str) -> Any:
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             with tracer.start_as_current_span(
                 f"graph.{operation}.{func.__name__}",
-                attributes={
-                    "subsystem": "unrdf_engine",
-                    "operation": operation,
-                },
+                attributes={"subsystem": "unrdf_engine", "operation": operation},
             ) as span:
                 start_time = time.perf_counter()
 
@@ -127,9 +124,7 @@ def traced_graph_operation(operation: str) -> Any:
 
                     # Record metrics
                     if len(args) > 0 and hasattr(args[0], "metrics"):
-                        args[0].metrics.record_graph_operation(
-                            operation, duration_ms, success=True
-                        )
+                        args[0].metrics.record_graph_operation(operation, duration_ms, success=True)
 
                     span.set_status(Status(StatusCode.OK))
                     return result
@@ -171,10 +166,7 @@ def traced_hook(hook_name: str) -> Any:
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             with tracer.start_as_current_span(
                 f"hook.{hook_name}",
-                attributes={
-                    "subsystem": "unrdf_engine",
-                    "hook_name": hook_name,
-                },
+                attributes={"subsystem": "unrdf_engine", "hook_name": hook_name},
             ) as span:
                 try:
                     result = func(*args, **kwargs)
@@ -218,7 +210,6 @@ class InstrumentedUnRDFEngine:
 
         """
         # Implementation would go here
-        pass
 
     @traced_graph_operation("query")
     def query_graph(self, sparql: str) -> list[dict[str, Any]]:
@@ -249,7 +240,6 @@ class InstrumentedUnRDFEngine:
 
         """
         # Implementation would go here
-        pass
 
     @traced_hook("pre_ingestion")
     def pre_ingestion_hook(self, event: dict[str, Any]) -> dict[str, Any]:
@@ -280,4 +270,3 @@ class InstrumentedUnRDFEngine:
 
         """
         # Implementation would go here
-        pass

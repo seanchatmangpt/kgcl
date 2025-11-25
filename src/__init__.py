@@ -21,30 +21,30 @@ __version__ = "1.4.0"
 __author__ = "Chicago TDD Tools Contributors"
 __license__ = "MIT"
 __all__ = [
-    "core",
-    "swarm",
-    "validation",
-    "testing",
-    "assert_success",
-    "assert_error",
-    "assert_eq_with_msg",
-    "assert_in_range",
-    "assert_that",
-    "test",
-    "async_test",
-    "fixture_test",
     "TestFixture",
+    "assert_eq_with_msg",
+    "assert_error",
+    "assert_in_range",
+    "assert_success",
+    "assert_that",
+    "async_test",
+    "core",
+    "fixture_test",
+    "swarm",
+    "test",
+    "testing",
+    "validation",
 ]
 
-from . import core, swarm, validation, testing
+from . import core, swarm, testing, validation
 from .core import (
-    assert_success,
-    assert_error,
+    TestFixture,
     assert_eq_with_msg,
+    assert_error,
     assert_in_range,
+    assert_success,
     assert_that,
-    test,
     async_test,
     fixture_test,
-    TestFixture,
+    test,
 )

@@ -8,13 +8,7 @@ from pathlib import Path
 
 import click
 
-from kgcl.cli.utils import (
-    OutputFormat,
-    format_output,
-    print_error,
-    print_info,
-    print_success,
-)
+from kgcl.cli.utils import OutputFormat, format_output, print_error, print_info, print_success
 
 
 @click.command()
@@ -24,24 +18,9 @@ from kgcl.cli.utils import (
     default=None,
     help="Target date for the brief (defaults to today)",
 )
-@click.option(
-    "--lookback",
-    type=int,
-    default=1,
-    help="Number of days to look back (default: 1)",
-)
-@click.option(
-    "--output",
-    "-o",
-    type=click.Path(path_type=Path),
-    help="Output file path",
-)
-@click.option(
-    "--clipboard",
-    "-c",
-    is_flag=True,
-    help="Copy result to clipboard",
-)
+@click.option("--lookback", type=int, default=1, help="Number of days to look back (default: 1)")
+@click.option("--output", "-o", type=click.Path(path_type=Path), help="Output file path")
+@click.option("--clipboard", "-c", is_flag=True, help="Copy result to clipboard")
 @click.option(
     "--format",
     "-f",
@@ -50,18 +29,8 @@ from kgcl.cli.utils import (
     default=OutputFormat.MARKDOWN.value,
     help="Output format",
 )
-@click.option(
-    "--model",
-    type=str,
-    default="llama3.2",
-    help="Ollama model to use for generation",
-)
-@click.option(
-    "--verbose",
-    "-v",
-    is_flag=True,
-    help="Verbose output",
-)
+@click.option("--model", type=str, default="llama3.2", help="Ollama model to use for generation")
+@click.option("--verbose", "-v", is_flag=True, help="Verbose output")
 def daily_brief(
     date: datetime | None,
     lookback: int,
@@ -76,7 +45,8 @@ def daily_brief(
     Ingests events from the specified date range, materializes features,
     and generates a structured brief using DSPy and Ollama.
 
-    Examples:
+    Examples
+    --------
         # Generate today's brief
         $ kgc-daily-brief
 
@@ -124,11 +94,7 @@ def daily_brief(
         print_error(f"Failed to generate daily brief: {e}")
 
 
-def _ingest_events(
-    start_date: datetime,
-    end_date: datetime,
-    verbose: bool,
-) -> list[dict]:
+def _ingest_events(start_date: datetime, end_date: datetime, verbose: bool) -> list[dict]:
     """Ingest events from the specified date range.
 
     Parameters
@@ -225,18 +191,18 @@ def _generate_brief(features: dict, model: str, verbose: bool) -> str:
     brief = f"""# Daily Brief
 
 ## Summary
-Generated from {features['total_events']} events
+Generated from {features["total_events"]} events
 
 ## Event Types
-{', '.join(features['event_types'])}
+{", ".join(features["event_types"])}
 
 ## Timeline
-- Start: {features['time_range']['start']}
-- End: {features['time_range']['end']}
+- Start: {features["time_range"]["start"]}
+- End: {features["time_range"]["end"]}
 
 ## Key Insights
-- Total events processed: {features['total_events']}
-- Event diversity: {len(features['event_types'])} different types
+- Total events processed: {features["total_events"]}
+- Event diversity: {len(features["event_types"])} different types
 
 ## Next Steps
 - Review detailed event logs

@@ -2,20 +2,14 @@
 Unit tests for collectors.
 """
 
-import unittest
-from unittest.mock import Mock, patch, MagicMock, mock_open
-import tempfile
 import json
+import tempfile
 import time
+import unittest
 from datetime import datetime
 from pathlib import Path
 
-from ..collectors.base import (
-    BaseCollector,
-    CollectorConfig,
-    CollectorStatus,
-    CollectedEvent
-)
+from ..collectors.base import BaseCollector, CollectedEvent, CollectorConfig, CollectorStatus
 
 
 class MockCollector(BaseCollector):
@@ -40,11 +34,7 @@ class TestBaseCollector(unittest.TestCase):
 
     def setUp(self):
         """Set up test fixtures."""
-        self.temp_file = tempfile.NamedTemporaryFile(
-            mode='w',
-            delete=False,
-            suffix='.jsonl'
-        )
+        self.temp_file = tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".jsonl")
         self.temp_path = self.temp_file.name
         self.temp_file.close()
 
@@ -53,7 +43,7 @@ class TestBaseCollector(unittest.TestCase):
             interval_seconds=0.1,
             batch_size=5,
             batch_timeout_seconds=1.0,
-            output_path=self.temp_path
+            output_path=self.temp_path,
         )
 
         self.collector = MockCollector(self.config)
@@ -118,14 +108,14 @@ class TestBaseCollector(unittest.TestCase):
             collector_name="test",
             timestamp=datetime.utcnow().isoformat(),
             data={"test": 1},
-            sequence_number=1
+            sequence_number=1,
         )
 
         event2 = CollectedEvent(
             collector_name="test",
             timestamp=datetime.utcnow().isoformat(),
             data={"test": 2},
-            sequence_number=2
+            sequence_number=2,
         )
 
         self.collector._add_to_buffer(event1)
@@ -143,7 +133,7 @@ class TestBaseCollector(unittest.TestCase):
                 collector_name="test",
                 timestamp=datetime.utcnow().isoformat(),
                 data={"value": i},
-                sequence_number=i
+                sequence_number=i,
             )
             self.collector._event_buffer.append(event)
 
@@ -156,7 +146,7 @@ class TestBaseCollector(unittest.TestCase):
         # Verify events written
         self.collector._close_output_file()
 
-        with open(self.temp_path, 'r') as f:
+        with open(self.temp_path) as f:
             lines = f.readlines()
 
         self.assertEqual(len(lines), 5)
@@ -183,7 +173,7 @@ class TestBaseCollector(unittest.TestCase):
             timestamp="2024-01-01T00:00:00",
             data={"key": "value"},
             metadata={"source": "test"},
-            sequence_number=1
+            sequence_number=1,
         )
 
         jsonl = event.to_jsonl()
@@ -217,7 +207,7 @@ class TestCollectorConfig(unittest.TestCase):
             interval_seconds=30.0,
             batch_size=50,
             output_path="/tmp/test.jsonl",
-            retry_on_error=False
+            retry_on_error=False,
         )
 
         self.assertEqual(config.interval_seconds, 30.0)
@@ -231,11 +221,7 @@ class TestCollectorIntegration(unittest.TestCase):
 
     def setUp(self):
         """Set up test fixtures."""
-        self.temp_file = tempfile.NamedTemporaryFile(
-            mode='w',
-            delete=False,
-            suffix='.jsonl'
-        )
+        self.temp_file = tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".jsonl")
         self.temp_path = self.temp_file.name
         self.temp_file.close()
 
@@ -253,7 +239,7 @@ class TestCollectorIntegration(unittest.TestCase):
             interval_seconds=0.1,
             batch_size=3,
             batch_timeout_seconds=0.5,
-            output_path=self.temp_path
+            output_path=self.temp_path,
         )
 
         collector = MockCollector(config)
@@ -268,7 +254,7 @@ class TestCollectorIntegration(unittest.TestCase):
         collector.stop()
 
         # Verify events were written
-        with open(self.temp_path, 'r') as f:
+        with open(self.temp_path) as f:
             lines = f.readlines()
 
         # Should have collected multiple events
@@ -282,6 +268,7 @@ class TestCollectorIntegration(unittest.TestCase):
 
     def test_error_handling(self):
         """Test error handling in collection."""
+
         class FailingCollector(BaseCollector):
             def __init__(self, config):
                 super().__init__(config)
@@ -302,7 +289,7 @@ class TestCollectorIntegration(unittest.TestCase):
             batch_size=10,
             output_path=self.temp_path,
             retry_on_error=True,
-            max_retries=5
+            max_retries=5,
         )
 
         collector = FailingCollector(config)
@@ -317,5 +304,5 @@ class TestCollectorIntegration(unittest.TestCase):
         self.assertNotEqual(collector.status, CollectorStatus.ERROR)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

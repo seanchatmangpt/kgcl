@@ -2,21 +2,14 @@
 Unit tests for receipt generation.
 """
 
-import pytest
 import time
 from datetime import datetime
-from pathlib import Path
-import tempfile
 
-from rdflib import Graph, Namespace
+import pytest
+from rdflib import Graph
 from rdflib.namespace import RDF
 
-from kgcl.dspy_runtime.receipts import (
-    Receipt,
-    ReceiptGenerator,
-    DSPY,
-    PROV
-)
+from kgcl.dspy_runtime.receipts import DSPY, Receipt, ReceiptGenerator
 
 
 class TestReceipt:
@@ -32,7 +25,7 @@ class TestReceipt:
             inputs={"input": "value"},
             outputs={"output": "result"},
             success=True,
-            latency_seconds=1.5
+            latency_seconds=1.5,
         )
 
         assert receipt.success is True
@@ -49,7 +42,7 @@ class TestReceipt:
             inputs={"input": "value"},
             outputs={},
             success=False,
-            error="Something went wrong"
+            error="Something went wrong",
         )
 
         assert receipt.success is False
@@ -64,7 +57,7 @@ class TestReceipt:
             module_path="/path",
             inputs={},
             outputs={},
-            success=True
+            success=True,
         )
 
         receipt_dict = receipt.to_dict()
@@ -82,7 +75,7 @@ class TestReceipt:
             module_path="/path",
             inputs={},
             outputs={},
-            success=True
+            success=True,
         )
 
         dt = receipt.datetime
@@ -98,7 +91,7 @@ class TestReceipt:
             module_path="/path",
             inputs={},
             outputs={},
-            success=True
+            success=True,
         )
 
         uri = receipt.uri
@@ -132,7 +125,7 @@ class TestReceiptGenerator:
             outputs={"output": "result"},
             success=True,
             model="llama3.1",
-            latency_seconds=2.5
+            latency_seconds=2.5,
         )
 
         assert receipt.signature_name == "TestSignature"
@@ -151,7 +144,7 @@ class TestReceiptGenerator:
             outputs={},
             success=True,
             source_features=["http://example.com/feature1", "http://example.com/feature2"],
-            source_signatures=["http://example.com/sig1"]
+            source_signatures=["http://example.com/sig1"],
         )
 
         assert len(receipt.source_features) == 2
@@ -170,7 +163,7 @@ class TestReceiptGenerator:
             outputs={"output": "result"},
             success=True,
             model="llama3.1",
-            latency_seconds=1.0
+            latency_seconds=1.0,
         )
 
         uri = generator.store_receipt(receipt)
@@ -191,7 +184,7 @@ class TestReceiptGenerator:
             inputs={},
             outputs={},
             success=False,
-            error="Test error message"
+            error="Test error message",
         )
 
         uri = generator.store_receipt(receipt)
@@ -213,7 +206,7 @@ class TestReceiptGenerator:
             module_path="/path/to/module.py",
             inputs={"input": "value"},
             outputs={"output": "result"},
-            success=True
+            success=True,
         )
         generator.store_receipt(original)
 
@@ -252,7 +245,7 @@ class TestReceiptGenerator:
                 module_path="/path",
                 inputs={},
                 outputs={},
-                success=True
+                success=True,
             )
             generator.store_receipt(receipt)
 
@@ -272,7 +265,7 @@ class TestReceiptGenerator:
                 module_path="/path",
                 inputs={},
                 outputs={},
-                success=True
+                success=True,
             )
             generator.store_receipt(receipt)
 
@@ -292,7 +285,7 @@ class TestReceiptGenerator:
                 module_path="/path",
                 inputs={},
                 outputs={},
-                success=i % 2 == 0
+                success=i % 2 == 0,
             )
             generator.store_receipt(receipt)
 
@@ -315,7 +308,7 @@ class TestReceiptGenerator:
                 module_path="/path",
                 inputs={},
                 outputs={},
-                success=True
+                success=True,
             )
             generator.store_receipt(receipt)
 
@@ -334,7 +327,7 @@ class TestReceiptGenerator:
             module_path="/path",
             inputs={},
             outputs={},
-            success=True
+            success=True,
         )
         generator.store_receipt(receipt)
 
@@ -356,7 +349,7 @@ class TestReceiptGenerator:
             module_path="/path",
             inputs={},
             outputs={},
-            success=True
+            success=True,
         )
         generator1.store_receipt(receipt)
 

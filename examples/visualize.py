@@ -30,9 +30,7 @@ class ActivityVisualizer:
         self.width = width
 
     def visualize_timeline(
-        self,
-        events: list[AppEvent | BrowserVisit | CalendarBlock],
-        date: datetime | None = None,
+        self, events: list[AppEvent | BrowserVisit | CalendarBlock], date: datetime | None = None
     ) -> str:
         """Generate ASCII timeline of a day's activity.
 
@@ -60,8 +58,7 @@ class ActivityVisualizer:
 
         # Filter events for this day
         day_events = [
-            e for e in events
-            if start_of_day <= e.timestamp < end_of_day + timedelta(days=1)
+            e for e in events if start_of_day <= e.timestamp < end_of_day + timedelta(days=1)
         ]
 
         if not day_events:
@@ -77,7 +74,7 @@ class ActivityVisualizer:
         hours_line = "Hour: "
         for hour in range(24):
             hours_line += f"{hour:2d} "
-        lines.append(hours_line[:self.width])
+        lines.append(hours_line[: self.width])
         lines.append("-" * min(len(hours_line), self.width))
 
         # Group events by hour
@@ -99,7 +96,7 @@ class ActivityVisualizer:
             else:
                 activity_line += " █ "
 
-        lines.append(activity_line[:self.width])
+        lines.append(activity_line[: self.width])
         lines.append("")
 
         # Event details by type
@@ -122,11 +119,7 @@ class ActivityVisualizer:
         lines.append("")
         return "\n".join(lines)
 
-    def visualize_features(
-        self,
-        features: list[MaterializedFeature],
-        top_n: int = 10,
-    ) -> str:
+    def visualize_features(self, features: list[MaterializedFeature], top_n: int = 10) -> str:
         """Generate ASCII chart of feature values.
 
         Parameters
@@ -150,20 +143,15 @@ class ActivityVisualizer:
         lines.append(f"{'=' * self.width}\n")
 
         # Sort by value (numeric features only)
-        numeric_features = [
-            f for f in features
-            if isinstance(f.value, (int, float))
-        ]
+        numeric_features = [f for f in features if isinstance(f.value, (int, float))]
 
         if not numeric_features:
             lines.append("No numeric features to display")
             return "\n".join(lines)
 
-        sorted_features = sorted(
-            numeric_features,
-            key=lambda f: float(f.value),
-            reverse=True,
-        )[:top_n]
+        sorted_features = sorted(numeric_features, key=lambda f: float(f.value), reverse=True)[
+            :top_n
+        ]
 
         # Find max value for scaling
         max_value = max(float(f.value) for f in sorted_features)
@@ -181,11 +169,11 @@ class ActivityVisualizer:
             # Truncate feature ID if too long
             feature_id = feature.feature_id
             if len(feature_id) > label_width:
-                feature_id = feature_id[:label_width-3] + "..."
+                feature_id = feature_id[: label_width - 3] + "..."
 
             # Format value
             if value >= 1000:
-                value_str = f"{value/1000:.1f}k"
+                value_str = f"{value / 1000:.1f}k"
             elif value >= 1:
                 value_str = f"{value:.1f}"
             else:
@@ -198,10 +186,7 @@ class ActivityVisualizer:
         lines.append("")
         return "\n".join(lines)
 
-    def visualize_patterns(
-        self,
-        events: list[AppEvent | BrowserVisit | CalendarBlock],
-    ) -> str:
+    def visualize_patterns(self, events: list[AppEvent | BrowserVisit | CalendarBlock]) -> str:
         """Highlight interesting patterns in activity.
 
         Parameters
@@ -225,7 +210,9 @@ class ActivityVisualizer:
             app_durations: dict[str, float] = defaultdict(float)
             for event in app_events:
                 if event.duration_seconds:
-                    app_durations[event.app_display_name or event.app_name] += event.duration_seconds
+                    app_durations[event.app_display_name or event.app_name] += (
+                        event.duration_seconds
+                    )
 
             if app_durations:
                 top_app = max(app_durations.keys(), key=lambda a: app_durations[a])
@@ -258,7 +245,9 @@ class ActivityVisualizer:
 
             lines.append(f"Context Switches: {switches}")
             if switches > 0:
-                avg_time = (app_events[-1].timestamp - app_events[0].timestamp).total_seconds() / switches
+                avg_time = (
+                    app_events[-1].timestamp - app_events[0].timestamp
+                ).total_seconds() / switches
                 lines.append(f"  Avg Time Between Switches: {self._format_duration(avg_time)}")
             lines.append("")
 
@@ -266,20 +255,16 @@ class ActivityVisualizer:
         calendar_events = [e for e in events if isinstance(e, CalendarBlock)]
         if calendar_events:
             total_meeting_time = sum(
-                (e.end_time - e.timestamp).total_seconds()
-                for e in calendar_events
+                (e.end_time - e.timestamp).total_seconds() for e in calendar_events
             )
-            lines.append(f"Meeting Load:")
+            lines.append("Meeting Load:")
             lines.append(f"  Total Meetings: {len(calendar_events)}")
             lines.append(f"  Total Time: {self._format_duration(total_meeting_time)}")
             lines.append("")
 
         return "\n".join(lines)
 
-    def generate_summary_table(
-        self,
-        stats: dict[str, Any],
-    ) -> str:
+    def generate_summary_table(self, stats: dict[str, Any]) -> str:
         """Generate summary statistics table.
 
         Parameters
@@ -305,7 +290,7 @@ class ActivityVisualizer:
             # Format value
             if isinstance(value, float):
                 if value >= 1000:
-                    display_value = f"{value/1000:.2f}k"
+                    display_value = f"{value / 1000:.2f}k"
                 else:
                     display_value = f"{value:.2f}"
             elif isinstance(value, int):
@@ -336,12 +321,11 @@ class ActivityVisualizer:
         """
         if seconds < 60:
             return f"{seconds:.0f}s"
-        elif seconds < 3600:
+        if seconds < 3600:
             minutes = seconds / 60
             return f"{minutes:.1f}m"
-        else:
-            hours = seconds / 3600
-            return f"{hours:.1f}h"
+        hours = seconds / 3600
+        return f"{hours:.1f}h"
 
 
 def print_all_visualizations(
@@ -371,6 +355,7 @@ def print_all_visualizations(
 if __name__ == "__main__":
     # Demo visualization
     from datetime import datetime
+
     from kgcl.ingestion.models import AppEvent
 
     # Create sample events

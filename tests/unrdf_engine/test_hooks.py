@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import pytest
-from rdflib import Graph, Literal, URIRef
+from rdflib import Graph, URIRef
 from rdflib.namespace import RDF
 
 from kgcl.unrdf_engine.hooks import (
@@ -59,10 +59,7 @@ class TestTriggerCondition:
         )
 
         context = HookContext(
-            phase=HookPhase.POST_COMMIT,
-            graph=Graph(),
-            delta=delta,
-            transaction_id="txn-1",
+            phase=HookPhase.POST_COMMIT, graph=Graph(), delta=delta, transaction_id="txn-1"
         )
 
         assert trigger.matches(context)
@@ -151,10 +148,7 @@ class TestKnowledgeHook:
         hook = SimpleHook()
 
         context = HookContext(
-            phase=HookPhase.PRE_INGESTION,
-            graph=Graph(),
-            delta=Graph(),
-            transaction_id="txn-1",
+            phase=HookPhase.PRE_INGESTION, graph=Graph(), delta=Graph(), transaction_id="txn-1"
         )
 
         assert not hook.should_execute(context)
@@ -252,18 +246,14 @@ class TestHookRegistry:
 
         class HighPriorityHook(KnowledgeHook):
             def __init__(self) -> None:
-                super().__init__(
-                    name="high_priority", phases=[HookPhase.POST_COMMIT], priority=100
-                )
+                super().__init__(name="high_priority", phases=[HookPhase.POST_COMMIT], priority=100)
 
             def execute(self, context: HookContext) -> None:
                 pass
 
         class LowPriorityHook(KnowledgeHook):
             def __init__(self) -> None:
-                super().__init__(
-                    name="low_priority", phases=[HookPhase.POST_COMMIT], priority=10
-                )
+                super().__init__(name="low_priority", phases=[HookPhase.POST_COMMIT], priority=10)
 
             def execute(self, context: HookContext) -> None:
                 pass
@@ -372,9 +362,7 @@ class TestHookExecutor:
 
         class ErrorHook(KnowledgeHook):
             def __init__(self) -> None:
-                super().__init__(
-                    name="error_hook", phases=[HookPhase.POST_COMMIT], priority=100
-                )
+                super().__init__(name="error_hook", phases=[HookPhase.POST_COMMIT], priority=100)
 
             def execute(self, context: HookContext) -> None:
                 msg = "Hook error"

@@ -8,7 +8,7 @@ from __future__ import annotations
 import json
 import subprocess
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import Enum
 from pathlib import Path
 from typing import Any
@@ -60,7 +60,7 @@ class ExecutionReceipt:
     input_data: dict[str, Any]
     output_data: dict[str, Any] = field(default_factory=dict)
     exit_code: int = 0
-    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    timestamp: datetime = field(default_factory=lambda: datetime.now(UTC))
     duration_ms: float = 0.0
     error: str | None = None
     stdout: str = ""
@@ -131,9 +131,7 @@ class ExternalCapabilityBridge:
     --------
     >>> bridge = ExternalCapabilityBridge()
     >>> receipt = bridge.execute_python(
-    ...     script=Path("process_data.py"),
-    ...     input_data={"features": [...]},
-    ...     timeout=30.0
+    ...     script=Path("process_data.py"), input_data={"features": [...]}, timeout=30.0
     ... )
     >>> if receipt.exit_code == 0:
     ...     result = receipt.output_data
@@ -236,10 +234,7 @@ class ExternalCapabilityBridge:
 
     @tracer.start_as_current_span("externals.execute_shell")
     def execute_shell(
-        self,
-        command: list[str],
-        input_data: dict[str, Any],
-        timeout: float = 30.0,
+        self, command: list[str], input_data: dict[str, Any], timeout: float = 30.0
     ) -> ExecutionReceipt:
         """Execute a shell command with JSON input/output.
 
@@ -305,9 +300,7 @@ class ExternalCapabilityBridge:
 
         start_time = time.time()
         receipt = ExecutionReceipt(
-            capability_id=capability_id,
-            capability_type=capability_type,
-            input_data=input_data,
+            capability_id=capability_id, capability_type=capability_type, input_data=input_data
         )
 
         try:

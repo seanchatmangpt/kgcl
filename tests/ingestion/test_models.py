@@ -1,6 +1,6 @@
 """Tests for ingestion models."""
 
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 import pytest
 from pydantic import ValidationError
@@ -24,7 +24,7 @@ class TestAppEvent:
         """Test creating valid app event."""
         event = AppEvent(
             event_id="test_001",
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             app_name="com.apple.Safari",
             app_display_name="Safari",
             window_title="Test Page",
@@ -39,21 +39,15 @@ class TestAppEvent:
 
     def test_timestamp_normalization_utc(self):
         """Test timestamp normalization to UTC."""
-        tz_timestamp = datetime.now(timezone.utc)
-        event = AppEvent(
-            event_id="test_001",
-            timestamp=tz_timestamp,
-            app_name="com.apple.Safari",
-        )
+        tz_timestamp = datetime.now(UTC)
+        event = AppEvent(event_id="test_001", timestamp=tz_timestamp, app_name="com.apple.Safari")
 
         assert event.timestamp.tzinfo is None
 
     def test_timestamp_from_iso_string(self):
         """Test timestamp parsing from ISO string."""
         event = AppEvent(
-            event_id="test_001",
-            timestamp="2024-11-24T10:30:00Z",
-            app_name="com.apple.Safari",
+            event_id="test_001", timestamp="2024-11-24T10:30:00Z", app_name="com.apple.Safari"
         )
 
         assert event.timestamp.year == 2024
@@ -65,7 +59,7 @@ class TestAppEvent:
         with pytest.raises(ValidationError):
             AppEvent(
                 event_id="test_001",
-                timestamp=datetime.now(timezone.utc),
+                timestamp=datetime.now(UTC),
                 app_name="com.apple.Safari",
                 duration_seconds=-10.0,
             )
@@ -73,9 +67,7 @@ class TestAppEvent:
     def test_optional_fields(self):
         """Test that optional fields can be None."""
         event = AppEvent(
-            event_id="test_001",
-            timestamp=datetime.now(timezone.utc),
-            app_name="com.apple.Safari",
+            event_id="test_001", timestamp=datetime.now(UTC), app_name="com.apple.Safari"
         )
 
         assert event.app_display_name is None
@@ -90,7 +82,7 @@ class TestBrowserVisit:
         """Test creating valid browser visit."""
         event = BrowserVisit(
             event_id="test_001",
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             url="https://github.com/user/kgcl",
             domain="github.com",
             title="GitHub - user/kgcl",
@@ -106,7 +98,7 @@ class TestBrowserVisit:
         """Test browser visit with referrer."""
         event = BrowserVisit(
             event_id="test_001",
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             url="https://github.com/user/kgcl",
             domain="github.com",
             browser_name="Safari",
@@ -121,7 +113,7 @@ class TestCalendarBlock:
 
     def test_create_valid_calendar_block(self):
         """Test creating valid calendar event."""
-        start = datetime.now(timezone.utc)
+        start = datetime.now(UTC)
         end = start + timedelta(hours=1)
 
         event = CalendarBlock(
@@ -157,7 +149,7 @@ class TestFeatureInstance:
         """Test creating feature with numeric value."""
         feature = FeatureInstance(
             feature_id="app_usage_time",
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             value=120.5,
             source_events=["evt_001", "evt_002"],
         )
@@ -168,9 +160,7 @@ class TestFeatureInstance:
     def test_create_string_feature(self):
         """Test creating feature with string value."""
         feature = FeatureInstance(
-            feature_id="most_used_app",
-            timestamp=datetime.now(timezone.utc),
-            value="com.apple.Safari",
+            feature_id="most_used_app", timestamp=datetime.now(UTC), value="com.apple.Safari"
         )
 
         assert isinstance(feature.value, str)
@@ -179,7 +169,7 @@ class TestFeatureInstance:
         """Test feature with metadata."""
         feature = FeatureInstance(
             feature_id="context_switches",
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             value=15,
             metadata={"app_count": 5, "period": "1h"},
         )
@@ -192,7 +182,7 @@ class TestMaterializedFeature:
 
     def test_create_sum_aggregation(self):
         """Test creating sum aggregation feature."""
-        start = datetime.now(timezone.utc)
+        start = datetime.now(UTC)
         end = start + timedelta(hours=1)
 
         feature = MaterializedFeature(
@@ -209,7 +199,7 @@ class TestMaterializedFeature:
 
     def test_create_count_aggregation(self):
         """Test creating count aggregation feature."""
-        start = datetime.now(timezone.utc)
+        start = datetime.now(UTC)
         end = start + timedelta(days=1)
 
         feature = MaterializedFeature(
@@ -229,28 +219,17 @@ class TestEventBatch:
 
     def test_create_empty_batch(self):
         """Test creating empty event batch."""
-        batch = EventBatch(
-            batch_id="batch_001",
-            events=[],
-        )
+        batch = EventBatch(batch_id="batch_001", events=[])
 
         assert batch.event_count() == 0
         assert batch.events_by_type() == {}
 
     def test_create_mixed_batch(self):
         """Test creating batch with mixed event types."""
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         events = [
-            AppEvent(
-                event_id="app_001",
-                timestamp=now,
-                app_name="com.apple.Safari",
-            ),
-            AppEvent(
-                event_id="app_002",
-                timestamp=now,
-                app_name="com.apple.Mail",
-            ),
+            AppEvent(event_id="app_001", timestamp=now, app_name="com.apple.Safari"),
+            AppEvent(event_id="app_002", timestamp=now, app_name="com.apple.Mail"),
             BrowserVisit(
                 event_id="browser_001",
                 timestamp=now,
@@ -260,10 +239,7 @@ class TestEventBatch:
             ),
         ]
 
-        batch = EventBatch(
-            batch_id="batch_001",
-            events=events,
-        )
+        batch = EventBatch(batch_id="batch_001", events=events)
 
         assert batch.event_count() == 3
         counts = batch.events_by_type()
@@ -273,9 +249,7 @@ class TestEventBatch:
     def test_batch_metadata(self):
         """Test batch with custom metadata."""
         batch = EventBatch(
-            batch_id="batch_001",
-            events=[],
-            metadata={"source": "test", "version": "1.0"},
+            batch_id="batch_001", events=[], metadata={"source": "test", "version": "1.0"}
         )
 
         assert batch.metadata["source"] == "test"

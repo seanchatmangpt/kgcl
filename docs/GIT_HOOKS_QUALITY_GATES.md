@@ -10,6 +10,14 @@
 
 KGCL uses **strict pre-commit hooks** to enforce production-quality code standards. These are **hard stops** that prevent commits from being made if they violate quality policies.
 
+### Implementation Layout
+
+- `scripts/git_hooks/pre_commit.sh` — single source of truth for all 11 quality gates
+- `.githooks/pre-commit` — lightweight wrapper installed via `git config core.hooksPath .githooks`
+- `vendors/unrdf/scripts/hooks/pre-commit` — vendored wrapper that delegates to the same script
+
+All environments call the same script, so the checks, messaging, and enforcement level stay consistent across the repository.
+
 ## Critical Quality Gates (Hard Stops)
 
 ### 🛑 Check 1: TODO/FIXME/WIP - HARD ERROR

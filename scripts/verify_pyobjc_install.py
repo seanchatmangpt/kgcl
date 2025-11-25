@@ -73,7 +73,7 @@ def main():
         "yaml",
         "opentelemetry.trace",
         "opentelemetry.sdk.trace",
-        "opentelemetry.exporter.otlp.proto.grpc.trace_exporter"
+        "opentelemetry.exporter.otlp.proto.grpc.trace_exporter",
     ]
     for dep in deps:
         if not check_module(dep):
@@ -81,11 +81,7 @@ def main():
 
     # Check directories
     print("\n4. Directories:")
-    dirs = [
-        "/Users/sac/dev/kgcl/data",
-        "/Users/sac/dev/kgcl/logs",
-        "/Users/sac/dev/kgcl/config"
-    ]
+    dirs = ["/Users/sac/dev/kgcl/data", "/Users/sac/dev/kgcl/logs", "/Users/sac/dev/kgcl/config"]
     for d in dirs:
         check_directory(d)
 
@@ -93,6 +89,7 @@ def main():
     print("\n5. PyObjC Agent Module:")
     try:
         from kgcl.pyobjc_agent import PyObjCAgent
+
         print("✓ kgcl.pyobjc_agent imports successfully")
     except ImportError as e:
         print(f"✗ kgcl.pyobjc_agent import failed: {e}")
@@ -104,7 +101,7 @@ def main():
     if config_path.exists():
         print(f"✓ Configuration file exists: {config_path}")
     else:
-        print(f"✗ Configuration file missing (run: python -m kgcl.pyobjc_agent config --generate)")
+        print("✗ Configuration file missing (run: python -m kgcl.pyobjc_agent config --generate)")
         all_ok = False
 
     # Summary
@@ -116,14 +113,13 @@ def main():
         print("  2. Run: python -m kgcl.pyobjc_agent status")
         print("  3. Run: python -m kgcl.pyobjc_agent run")
         return 0
-    else:
-        print("✗ Some components are missing. Install them and run again.")
-        print("\nQuick install:")
-        print("  pip install pyobjc-framework-Cocoa pyobjc-framework-EventKit")
-        print("  pip install opentelemetry-api opentelemetry-sdk")
-        print("  pip install opentelemetry-exporter-otlp-proto-grpc")
-        print("  pip install pyyaml")
-        return 1
+    print("✗ Some components are missing. Install them and run again.")
+    print("\nQuick install:")
+    print("  pip install pyobjc-framework-Cocoa pyobjc-framework-EventKit")
+    print("  pip install opentelemetry-api opentelemetry-sdk")
+    print("  pip install opentelemetry-exporter-otlp-proto-grpc")
+    print("  pip install pyyaml")
+    return 1
 
 
 if __name__ == "__main__":

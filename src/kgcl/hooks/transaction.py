@@ -5,11 +5,11 @@ This module provides transaction management with support for ACID properties,
 ensuring atomic, consistent, isolated, and durable hook execution.
 """
 
+import uuid
 from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, Tuple
-import uuid
+from typing import Any
 
 
 class TransactionState(Enum):
@@ -25,13 +25,9 @@ class TransactionState(Enum):
 class TransactionError(Exception):
     """Raised when transaction operation fails."""
 
-    pass
-
 
 class IsolationViolation(TransactionError):
     """Raised when transaction isolation is violated."""
-
-    pass
 
 
 @dataclass
@@ -61,11 +57,11 @@ class Transaction:
 
     tx_id: str
     state: TransactionState = TransactionState.PENDING
-    added_triples: List[Tuple[str, str, str]] = field(default_factory=list)
-    removed_triples: List[Tuple[str, str, str]] = field(default_factory=list)
+    added_triples: list[tuple[str, str, str]] = field(default_factory=list)
+    removed_triples: list[tuple[str, str, str]] = field(default_factory=list)
     started_at: datetime = field(default_factory=datetime.utcnow)
-    completed_at: Optional[datetime] = None
-    metadata: Dict[str, Any] = field(default_factory=dict)
+    completed_at: datetime | None = None
+    metadata: dict[str, Any] = field(default_factory=dict)
     isolation_level: str = "READ_COMMITTED"
 
     def begin(self) -> None:
@@ -78,9 +74,7 @@ class Transaction:
             If transaction is not in PENDING state
         """
         if self.state != TransactionState.PENDING:
-            raise TransactionError(
-                f"Cannot begin transaction in state {self.state.value}"
-            )
+            raise TransactionError(f"Cannot begin transaction in state {self.state.value}")
         self.state = TransactionState.EXECUTING
 
     def commit(self) -> None:
@@ -93,9 +87,7 @@ class Transaction:
             If transaction is not in EXECUTING state
         """
         if self.state != TransactionState.EXECUTING:
-            raise TransactionError(
-                f"Cannot commit transaction in state {self.state.value}"
-            )
+            raise TransactionError(f"Cannot commit transaction in state {self.state.value}")
         self.state = TransactionState.COMMITTED
         self.completed_at = datetime.utcnow()
 
@@ -153,7 +145,7 @@ class Transaction:
         """
         self.removed_triples.append((subject, predicate, obj))
 
-    def get_changes(self) -> Dict[str, List[Tuple[str, str, str]]]:
+    def get_changes(self) -> dict[str, list[tuple[str, str, str]]]:
         """
         Get all changes in transaction.
 
@@ -181,14 +173,14 @@ class TransactionManager:
         max_concurrent : int
             Maximum number of concurrent transactions
         """
-        self.transactions: Dict[str, Transaction] = {}
+        self.transactions: dict[str, Transaction] = {}
         self.max_concurrent = max_concurrent
-        self.committed_transactions: List[Transaction] = []
-        self.rolled_back_transactions: List[Transaction] = []
-        self._locks: Dict[str, str] = {}  # resource_id -> tx_id
+        self.committed_transactions: list[Transaction] = []
+        self.rolled_back_transactions: list[Transaction] = []
+        self._locks: dict[str, str] = {}  # resource_id -> tx_id
 
     def begin_transaction(
-        self, tx_id: Optional[str] = None, isolation_level: str = "READ_COMMITTED"
+        self, tx_id: str | None = None, isolation_level: str = "READ_COMMITTED"
     ) -> Transaction:
         """
         Start new transaction.
@@ -211,9 +203,7 @@ class TransactionManager:
             If too many concurrent transactions or tx_id already exists
         """
         if len(self.transactions) >= self.max_concurrent:
-            raise TransactionError(
-                f"Too many concurrent transactions (max: {self.max_concurrent})"
-            )
+            raise TransactionError(f"Too many concurrent transactions (max: {self.max_concurrent})")
 
         if tx_id is None:
             tx_id = str(uuid.uuid4())
@@ -285,7 +275,7 @@ class TransactionManager:
         # Release locks
         self._release_locks(tx_id)
 
-    def get_transaction(self, tx_id: str) -> Optional[Transaction]:
+    def get_transaction(self, tx_id: str) -> Transaction | None:
         """
         Get transaction by ID.
 
@@ -301,7 +291,7 @@ class TransactionManager:
         """
         return self.transactions.get(tx_id)
 
-    def get_active_transactions(self) -> List[Transaction]:
+    def get_active_transactions(self) -> list[Transaction]:
         """
         Get all active transactions.
 
@@ -312,7 +302,7 @@ class TransactionManager:
         """
         return list(self.transactions.values())
 
-    def get_stats(self) -> Dict[str, Any]:
+    def get_stats(self) -> dict[str, Any]:
         """
         Get transaction statistics.
 

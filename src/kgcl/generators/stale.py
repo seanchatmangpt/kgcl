@@ -4,14 +4,14 @@ Finds items not updated in 30+ days, completed items not archived,
 and suggests decommissioning with cleanup savings estimates.
 """
 
-from datetime import datetime, timedelta
-from typing import Any, Dict, List, Optional
 from dataclasses import dataclass
-from rdflib import Graph, Namespace, Literal
-from rdflib.namespace import RDF, RDFS, XSD, DCTERMS
+from datetime import datetime, timedelta
+from typing import Any
+
+from rdflib import Graph, Literal, Namespace
+from rdflib.namespace import DCTERMS, RDF, RDFS
 
 from .base import ProjectionGenerator
-
 
 # Define namespaces
 KGC = Namespace("http://example.org/kgc/")
@@ -26,17 +26,16 @@ class StaleItem:
     item_type: str
     last_modified: datetime
     days_stale: int
-    status: Optional[str] = None
+    status: str | None = None
     size_estimate: int = 0  # Size in triples
 
     def staleness_level(self) -> str:
         """Get staleness level (stale, very_stale, ancient)."""
         if self.days_stale > 180:
             return "ancient"
-        elif self.days_stale > 90:
+        if self.days_stale > 90:
             return "very_stale"
-        else:
-            return "stale"
+        return "stale"
 
 
 @dataclass
@@ -86,10 +85,11 @@ class StaleItemsGenerator(ProjectionGenerator):
         self.stale_threshold = stale_threshold
         self.cutoff_date = datetime.now() - timedelta(days=stale_threshold)
 
-    def gather_data(self) -> Dict[str, Any]:
+    def gather_data(self) -> dict[str, Any]:
         """Gather stale items from RDF graph.
 
-        Returns:
+        Returns
+        -------
             Dictionary with stale items, completed items, and cleanup estimates
         """
         stale_items = self._query_stale_items()
@@ -99,12 +99,14 @@ class StaleItemsGenerator(ProjectionGenerator):
         return {
             "cutoff_date": self.cutoff_date,
             "stale_items": sorted(stale_items, key=lambda i: i.days_stale, reverse=True),
-            "completed_items": sorted(completed_items, key=lambda i: i.days_unarchived, reverse=True),
+            "completed_items": sorted(
+                completed_items, key=lambda i: i.days_unarchived, reverse=True
+            ),
             "cleanup_estimate": cleanup_estimate,
             "total_items": len(stale_items) + len(completed_items),
         }
 
-    def _query_stale_items(self) -> List[StaleItem]:
+    def _query_stale_items(self) -> list[StaleItem]:
         """Query RDF graph for stale items."""
         stale_items = []
 
@@ -142,19 +144,21 @@ class StaleItemsGenerator(ProjectionGenerator):
             # Estimate size (count related triples)
             size_estimate = self._estimate_item_size(row.item)
 
-            stale_items.append(StaleItem(
-                uri=str(row.item),
-                label=str(row.label),
-                item_type=self._format_type(row.type),
-                last_modified=last_modified,
-                days_stale=days_stale,
-                status=str(row.status) if row.status else None,
-                size_estimate=size_estimate
-            ))
+            stale_items.append(
+                StaleItem(
+                    uri=str(row.item),
+                    label=str(row.label),
+                    item_type=self._format_type(row.type),
+                    last_modified=last_modified,
+                    days_stale=days_stale,
+                    status=str(row.status) if row.status else None,
+                    size_estimate=size_estimate,
+                )
+            )
 
         return stale_items
 
-    def _query_completed_items(self) -> List[CompletedItem]:
+    def _query_completed_items(self) -> list[CompletedItem]:
         """Query RDF graph for completed but unarchived items."""
         completed_items = []
 
@@ -182,13 +186,15 @@ class StaleItemsGenerator(ProjectionGenerator):
             if days_unarchived < 7:
                 continue
 
-            completed_items.append(CompletedItem(
-                uri=str(row.item),
-                label=str(row.label),
-                item_type=self._format_type(row.type),
-                completed_date=completed_date,
-                days_unarchived=days_unarchived
-            ))
+            completed_items.append(
+                CompletedItem(
+                    uri=str(row.item),
+                    label=str(row.label),
+                    item_type=self._format_type(row.type),
+                    completed_date=completed_date,
+                    days_unarchived=days_unarchived,
+                )
+            )
 
         return completed_items
 
@@ -198,7 +204,8 @@ class StaleItemsGenerator(ProjectionGenerator):
         Args:
             item_uri: URI of item to measure
 
-        Returns:
+        Returns
+        -------
             Estimated number of triples related to item
         """
         # Count triples where item is subject or object
@@ -218,9 +225,7 @@ class StaleItemsGenerator(ProjectionGenerator):
         return 0
 
     def _calculate_cleanup_estimate(
-        self,
-        stale_items: List[StaleItem],
-        completed_items: List[CompletedItem]
+        self, stale_items: list[StaleItem], completed_items: list[CompletedItem]
     ) -> CleanupEstimate:
         """Calculate estimated savings from cleanup.
 
@@ -228,7 +233,8 @@ class StaleItemsGenerator(ProjectionGenerator):
             stale_items: List of stale items
             completed_items: List of completed items
 
-        Returns:
+        Returns
+        -------
             Cleanup estimate with savings projections
         """
         total_triples = sum(item.size_estimate for item in stale_items)
@@ -249,7 +255,7 @@ class StaleItemsGenerator(ProjectionGenerator):
             total_completed_items=len(completed_items),
             estimated_triples_saved=total_triples,
             storage_reduction_mb=storage_mb,
-            query_performance_gain=perf_gain
+            query_performance_gain=perf_gain,
         )
 
     def _parse_datetime(self, value: Any) -> datetime:
@@ -265,7 +271,7 @@ class StaleItemsGenerator(ProjectionGenerator):
         uri_str = str(type_uri)
         if "#" in uri_str:
             return uri_str.split("#")[-1]
-        elif "/" in uri_str:
+        if "/" in uri_str:
             return uri_str.split("/")[-1]
         return uri_str
 
@@ -275,7 +281,8 @@ class StaleItemsGenerator(ProjectionGenerator):
         Args:
             template_name: Template file name
 
-        Returns:
+        Returns
+        -------
             Rendered markdown stale items report
         """
         data = self.gather_data()

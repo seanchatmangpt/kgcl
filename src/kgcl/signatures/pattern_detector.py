@@ -4,14 +4,15 @@ Identifies correlations and patterns across multiple features simultaneously,
 detecting behavioral insights and multi-dimensional relationships.
 """
 
-from typing import Any
-from pydantic import BaseModel, Field
 import asyncio
 import logging
 import statistics
 
+from pydantic import BaseModel, Field
+
 try:
     import dspy
+
     DSPY_AVAILABLE = True
 except ImportError:
     DSPY_AVAILABLE = False
@@ -25,7 +26,8 @@ tracer = trace.get_tracer(__name__)
 class PatternDetectorInput(BaseModel):
     """Input for multi-feature pattern detection.
 
-    Attributes:
+    Attributes
+    ----------
         multiple_features: Dictionary mapping feature names to value lists
         time_window: Time window for pattern analysis (hourly, daily, weekly)
         timestamps: Optional timestamps for alignment
@@ -33,21 +35,13 @@ class PatternDetectorInput(BaseModel):
     """
 
     multiple_features: dict[str, list[float]] = Field(
-        ...,
-        description="Feature names mapped to time series values"
+        ..., description="Feature names mapped to time series values"
     )
-    time_window: str = Field(
-        default="daily",
-        description="Time window: hourly, daily, weekly"
-    )
+    time_window: str = Field(default="daily", description="Time window: hourly, daily, weekly")
     timestamps: list[str] = Field(
-        default_factory=list,
-        description="ISO timestamps for alignment (optional)"
+        default_factory=list, description="ISO timestamps for alignment (optional)"
     )
-    context: str = Field(
-        default="",
-        description="Context about the feature set"
-    )
+    context: str = Field(default="", description="Context about the feature set")
 
     model_config = {
         "json_schema_extra": {
@@ -56,11 +50,11 @@ class PatternDetectorInput(BaseModel):
                     "focus_time": [2.5, 1.8, 3.2, 2.1, 1.5],
                     "meeting_hours": [1.5, 4.2, 1.0, 2.5, 3.8],
                     "context_switches": [12, 18, 10, 14, 20],
-                    "safari_usage": [1.2, 2.5, 0.8, 1.5, 2.2]
+                    "safari_usage": [1.2, 2.5, 0.8, 1.5, 2.2],
                 },
                 "time_window": "daily",
                 "timestamps": ["2024-11-20", "2024-11-21", "2024-11-22"],
-                "context": "Weekly work pattern analysis"
+                "context": "Weekly work pattern analysis",
             }
         }
     }
@@ -69,7 +63,8 @@ class PatternDetectorInput(BaseModel):
 class DetectedPattern(BaseModel):
     """Individual detected pattern.
 
-    Attributes:
+    Attributes
+    ----------
         pattern_name: Name/description of the pattern
         evidence: Supporting evidence for the pattern
         frequency: How often the pattern occurs
@@ -81,23 +76,18 @@ class DetectedPattern(BaseModel):
     pattern_name: str = Field(..., description="Pattern name or description")
     evidence: str = Field(..., description="Evidence supporting the pattern")
     frequency: str = Field(..., description="Pattern frequency (e.g., 'daily', '3/5 days')")
-    confidence: int = Field(
-        default=0,
-        ge=0,
-        le=100,
-        description="Confidence in pattern (0-100)"
-    )
+    confidence: int = Field(default=0, ge=0, le=100, description="Confidence in pattern (0-100)")
     recommendation: str = Field(..., description="Actionable recommendation")
     involved_features: list[str] = Field(
-        default_factory=list,
-        description="Features involved in pattern"
+        default_factory=list, description="Features involved in pattern"
     )
 
 
 class PatternDetectorOutput(BaseModel):
     """Output detected patterns and correlations.
 
-    Attributes:
+    Attributes
+    ----------
         detected_patterns: List of identified patterns
         correlations: Statistical correlations between features
         insights: High-level insights from pattern analysis
@@ -106,25 +96,16 @@ class PatternDetectorOutput(BaseModel):
     """
 
     detected_patterns: list[DetectedPattern] = Field(
-        default_factory=list,
-        description="Identified patterns"
+        default_factory=list, description="Identified patterns"
     )
     correlations: dict[str, float] = Field(
-        default_factory=dict,
-        description="Feature pair correlations (-1 to 1)"
+        default_factory=dict, description="Feature pair correlations (-1 to 1)"
     )
-    insights: list[str] = Field(
-        default_factory=list,
-        description="High-level insights"
-    )
+    insights: list[str] = Field(default_factory=list, description="High-level insights")
     behavioral_clusters: dict[str, list[str]] = Field(
-        default_factory=dict,
-        description="Clustered behavioral patterns"
+        default_factory=dict, description="Clustered behavioral patterns"
     )
-    anomalies: list[str] = Field(
-        default_factory=list,
-        description="Anomalous feature combinations"
-    )
+    anomalies: list[str] = Field(default_factory=list, description="Anomalous feature combinations")
 
     model_config = {
         "json_schema_extra": {
@@ -136,30 +117,33 @@ class PatternDetectorOutput(BaseModel):
                         "frequency": "4/5 days",
                         "confidence": 85,
                         "recommendation": "Protect morning time blocks from meetings",
-                        "involved_features": ["focus_time", "context_switches"]
+                        "involved_features": ["focus_time", "context_switches"],
                     }
                 ],
                 "correlations": {
                     "focus_time_vs_meeting_hours": -0.75,
-                    "meeting_hours_vs_context_switches": 0.68
+                    "meeting_hours_vs_context_switches": 0.68,
                 },
                 "insights": [
                     "High meeting load consistently reduces focus time",
-                    "Browser usage spikes during meeting days (research/documentation)"
+                    "Browser usage spikes during meeting days (research/documentation)",
                 ],
                 "behavioral_clusters": {
                     "deep_work_days": ["low meetings", "high focus", "low context switches"],
-                    "collaborative_days": ["high meetings", "high browser usage", "high context switches"]
+                    "collaborative_days": [
+                        "high meetings",
+                        "high browser usage",
+                        "high context switches",
+                    ],
                 },
-                "anomalies": [
-                    "Day 3: High focus time despite high meeting load (unusual)"
-                ]
+                "anomalies": ["Day 3: High focus time despite high meeting load (unusual)"],
             }
         }
     }
 
 
 if DSPY_AVAILABLE:
+
     class PatternDetectorSignature(dspy.Signature):
         """Detect patterns and correlations across multiple activity features.
 
@@ -171,15 +155,11 @@ if DSPY_AVAILABLE:
         features_summary: str = dspy.InputField(
             desc="Summary of all features with names and value ranges"
         )
-        correlation_matrix: str = dspy.InputField(
-            desc="Key correlations between feature pairs"
-        )
+        correlation_matrix: str = dspy.InputField(desc="Key correlations between feature pairs")
         time_window: str = dspy.InputField(
             desc="Time window for analysis: hourly, daily, or weekly"
         )
-        context: str = dspy.InputField(
-            desc="Context about what these features represent"
-        )
+        context: str = dspy.InputField(desc="Context about what these features represent")
 
         # Output fields
         patterns: str = dspy.OutputField(
@@ -222,7 +202,8 @@ class PatternDetectorModule:
             x: First feature values
             y: Second feature values
 
-        Returns:
+        Returns
+        -------
             Correlation coefficient (-1 to 1)
         """
         if len(x) != len(y) or len(x) < 2:
@@ -242,16 +223,14 @@ class PatternDetectorModule:
 
         return numerator / denominator
 
-    def _detect_correlations(
-        self,
-        features: dict[str, list[float]]
-    ) -> dict[str, float]:
+    def _detect_correlations(self, features: dict[str, list[float]]) -> dict[str, float]:
         """Detect correlations between all feature pairs.
 
         Args:
             features: Dictionary of feature names to values
 
-        Returns:
+        Returns
+        -------
             Dictionary of feature pair correlations
         """
         correlations = {}
@@ -263,10 +242,7 @@ class PatternDetectorModule:
                 feat2 = feature_names[j]
 
                 if len(features[feat1]) == len(features[feat2]):
-                    corr = self._calculate_correlation(
-                        features[feat1],
-                        features[feat2]
-                    )
+                    corr = self._calculate_correlation(features[feat1], features[feat2])
                     correlations[f"{feat1}_vs_{feat2}"] = round(corr, 2)
 
         return correlations
@@ -277,7 +253,8 @@ class PatternDetectorModule:
         Args:
             input_data: Multi-feature data
 
-        Returns:
+        Returns
+        -------
             PatternDetectorOutput with detected patterns
         """
         features = input_data.multiple_features
@@ -301,7 +278,7 @@ class PatternDetectorModule:
                     frequency="Consistent across time window",
                     confidence=int(abs(corr) * 100),
                     recommendation=f"When increasing {feat1}, expect {feat2} to decrease",
-                    involved_features=[feat1, feat2]
+                    involved_features=[feat1, feat2],
                 )
                 detected_patterns.append(pattern)
                 insights.append(f"{feat1} and {feat2} show inverse relationship ({corr:.2f})")
@@ -316,24 +293,23 @@ class PatternDetectorModule:
                     frequency="Consistent across time window",
                     confidence=int(corr * 100),
                     recommendation=f"{feat1} and {feat2} often occur together",
-                    involved_features=[feat1, feat2]
+                    involved_features=[feat1, feat2],
                 )
                 detected_patterns.append(pattern)
                 insights.append(f"{feat1} and {feat2} tend to occur together ({corr:.2f})")
 
         # Identify behavioral clusters based on feature means
-        feature_means = {
-            name: statistics.mean(values)
-            for name, values in features.items()
-        }
+        feature_means = {name: statistics.mean(values) for name, values in features.items()}
 
         # Simple clustering: high/low for each feature
         high_features = [
-            name for name, mean in feature_means.items()
+            name
+            for name, mean in feature_means.items()
             if mean > statistics.mean(list(feature_means.values()))
         ]
         low_features = [
-            name for name, mean in feature_means.items()
+            name
+            for name, mean in feature_means.items()
             if mean <= statistics.mean(list(feature_means.values()))
         ]
 
@@ -350,10 +326,13 @@ class PatternDetectorModule:
 
             for i in range(min(len(first_feat_values), len(second_feat_values))):
                 # Check if both features are simultaneously high
-                if (first_feat_values[i] > statistics.mean(first_feat_values) + statistics.stdev(first_feat_values) and
-                    second_feat_values[i] > statistics.mean(second_feat_values) + statistics.stdev(second_feat_values)):
+                if first_feat_values[i] > statistics.mean(first_feat_values) + statistics.stdev(
+                    first_feat_values
+                ) and second_feat_values[i] > statistics.mean(
+                    second_feat_values
+                ) + statistics.stdev(second_feat_values):
                     anomalies.append(
-                        f"Day {i+1}: Unusually high {first_feat_name} and {second_feat_name} simultaneously"
+                        f"Day {i + 1}: Unusually high {first_feat_name} and {second_feat_name} simultaneously"
                     )
 
         # Add domain-specific pattern detection
@@ -369,7 +348,7 @@ class PatternDetectorModule:
                     frequency="Consistent pattern",
                     confidence=80,
                     recommendation="Maintain this balance for sustained productivity",
-                    involved_features=["focus_time", meeting_key]
+                    involved_features=["focus_time", meeting_key],
                 )
                 detected_patterns.append(pattern)
 
@@ -378,7 +357,7 @@ class PatternDetectorModule:
             correlations=correlations,
             insights=insights,
             behavioral_clusters=behavioral_clusters,
-            anomalies=anomalies
+            anomalies=anomalies,
         )
 
     def detect(self, input_data: PatternDetectorInput) -> PatternDetectorOutput:
@@ -387,7 +366,8 @@ class PatternDetectorModule:
         Args:
             input_data: Multi-feature data
 
-        Returns:
+        Returns
+        -------
             PatternDetectorOutput with detected patterns
         """
         with tracer.start_as_current_span("pattern_detector.detect") as span:
@@ -398,8 +378,7 @@ class PatternDetectorModule:
             try:
                 if self.use_llm:
                     return self._llm_detect(input_data)
-                else:
-                    return self._fallback_generate(input_data)
+                return self._fallback_generate(input_data)
             except Exception as e:
                 logger.warning(f"LLM pattern detection failed, using fallback: {e}")
                 span.set_attribute("fallback_used", True)
@@ -411,7 +390,8 @@ class PatternDetectorModule:
         Args:
             input_data: Multi-feature data
 
-        Returns:
+        Returns
+        -------
             PatternDetectorOutput with LLM-generated patterns
         """
         # Calculate correlations for context
@@ -437,7 +417,7 @@ class PatternDetectorModule:
             features_summary=features_summary,
             correlation_matrix=correlation_matrix,
             time_window=input_data.time_window,
-            context=context
+            context=context,
         )
 
         # Parse patterns from LLM output
@@ -453,7 +433,7 @@ class PatternDetectorModule:
                     frequency="Detected in analysis",
                     confidence=75,  # Default confidence for LLM patterns
                     recommendation="Review and validate this pattern",
-                    involved_features=list(input_data.multiple_features.keys())
+                    involved_features=list(input_data.multiple_features.keys()),
                 )
                 detected_patterns.append(pattern)
 
@@ -466,9 +446,7 @@ class PatternDetectorModule:
         for line in cluster_lines:
             if ":" in line:
                 cluster_name, features = line.split(":", 1)
-                behavioral_clusters[cluster_name.strip()] = [
-                    f.strip() for f in features.split(",")
-                ]
+                behavioral_clusters[cluster_name.strip()] = [f.strip() for f in features.split(",")]
 
         # Use fallback for anomalies
         fallback_result = self._fallback_generate(input_data)
@@ -478,7 +456,7 @@ class PatternDetectorModule:
             correlations=correlations,
             insights=insights[:7],
             behavioral_clusters=behavioral_clusters,
-            anomalies=fallback_result.anomalies
+            anomalies=fallback_result.anomalies,
         )
 
     async def detect_async(self, input_data: PatternDetectorInput) -> PatternDetectorOutput:
@@ -487,7 +465,8 @@ class PatternDetectorModule:
         Args:
             input_data: Multi-feature data
 
-        Returns:
+        Returns
+        -------
             PatternDetectorOutput with patterns
         """
         return await asyncio.to_thread(self.detect, input_data)
@@ -500,10 +479,10 @@ if __name__ == "__main__":
             "focus_time": [2.5, 1.8, 3.2, 2.1, 1.5],
             "meeting_hours": [1.5, 4.2, 1.0, 2.5, 3.8],
             "context_switches": [12, 18, 10, 14, 20],
-            "safari_usage": [1.2, 2.5, 0.8, 1.5, 2.2]
+            "safari_usage": [1.2, 2.5, 0.8, 1.5, 2.2],
         },
         time_window="daily",
-        context="Weekly work pattern analysis"
+        context="Weekly work pattern analysis",
     )
 
     module = PatternDetectorModule(use_llm=False)

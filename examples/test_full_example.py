@@ -28,11 +28,7 @@ class TestFullPipeline:
         """Verify pipeline runs to completion without errors."""
         with TemporaryDirectory() as tmpdir:
             output_dir = Path(tmpdir)
-            runner = PipelineRunner(
-                output_dir=output_dir,
-                use_ollama=False,
-                verbose=False,
-            )
+            runner = PipelineRunner(output_dir=output_dir, use_ollama=False, verbose=False)
 
             # Run pipeline with minimal data for speed
             results = runner.run(days=1)
@@ -52,11 +48,7 @@ class TestFullPipeline:
         """Verify all expected output files are created."""
         with TemporaryDirectory() as tmpdir:
             output_dir = Path(tmpdir)
-            runner = PipelineRunner(
-                output_dir=output_dir,
-                use_ollama=False,
-                verbose=False,
-            )
+            runner = PipelineRunner(output_dir=output_dir, use_ollama=False, verbose=False)
 
             runner.run(days=1)
 
@@ -71,11 +63,7 @@ class TestFullPipeline:
         """Verify daily brief has expected structure."""
         with TemporaryDirectory() as tmpdir:
             output_dir = Path(tmpdir)
-            runner = PipelineRunner(
-                output_dir=output_dir,
-                use_ollama=False,
-                verbose=False,
-            )
+            runner = PipelineRunner(output_dir=output_dir, use_ollama=False, verbose=False)
 
             runner.run(days=1)
 
@@ -96,11 +84,7 @@ class TestFullPipeline:
         """Verify weekly retro has expected structure."""
         with TemporaryDirectory() as tmpdir:
             output_dir = Path(tmpdir)
-            runner = PipelineRunner(
-                output_dir=output_dir,
-                use_ollama=False,
-                verbose=False,
-            )
+            runner = PipelineRunner(output_dir=output_dir, use_ollama=False, verbose=False)
 
             runner.run(days=1)
 
@@ -120,11 +104,7 @@ class TestFullPipeline:
         """Verify feature values JSON is well-formed."""
         with TemporaryDirectory() as tmpdir:
             output_dir = Path(tmpdir)
-            runner = PipelineRunner(
-                output_dir=output_dir,
-                use_ollama=False,
-                verbose=False,
-            )
+            runner = PipelineRunner(output_dir=output_dir, use_ollama=False, verbose=False)
 
             runner.run(days=1)
 
@@ -148,11 +128,7 @@ class TestFullPipeline:
         """Verify graph statistics JSON is well-formed."""
         with TemporaryDirectory() as tmpdir:
             output_dir = Path(tmpdir)
-            runner = PipelineRunner(
-                output_dir=output_dir,
-                use_ollama=False,
-                verbose=False,
-            )
+            runner = PipelineRunner(output_dir=output_dir, use_ollama=False, verbose=False)
 
             runner.run(days=1)
 
@@ -175,11 +151,7 @@ class TestFullPipeline:
         """Verify knowledge graph Turtle file is valid."""
         with TemporaryDirectory() as tmpdir:
             output_dir = Path(tmpdir)
-            runner = PipelineRunner(
-                output_dir=output_dir,
-                use_ollama=False,
-                verbose=False,
-            )
+            runner = PipelineRunner(output_dir=output_dir, use_ollama=False, verbose=False)
 
             runner.run(days=1)
 
@@ -197,11 +169,7 @@ class TestFullPipeline:
         """Verify pipeline metrics are captured."""
         with TemporaryDirectory() as tmpdir:
             output_dir = Path(tmpdir)
-            runner = PipelineRunner(
-                output_dir=output_dir,
-                use_ollama=False,
-                verbose=False,
-            )
+            runner = PipelineRunner(output_dir=output_dir, use_ollama=False, verbose=False)
 
             results = runner.run(days=1)
             metrics = results["metrics"]
@@ -226,13 +194,10 @@ class TestFullPipeline:
         """Verify pipeline completes within reasonable time."""
         with TemporaryDirectory() as tmpdir:
             output_dir = Path(tmpdir)
-            runner = PipelineRunner(
-                output_dir=output_dir,
-                use_ollama=False,
-                verbose=False,
-            )
+            runner = PipelineRunner(output_dir=output_dir, use_ollama=False, verbose=False)
 
             import time
+
             start = time.time()
             runner.run(days=1)
             elapsed = time.time() - start

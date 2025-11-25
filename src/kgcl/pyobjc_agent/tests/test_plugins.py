@@ -3,17 +3,17 @@ Unit tests for plugin system.
 """
 
 import unittest
-from unittest.mock import Mock, patch, MagicMock
 from datetime import datetime
+from unittest.mock import MagicMock, patch
 
+from ..plugins import PluginRegistry
 from ..plugins.base import (
     BaseCapabilityPlugin,
-    CapabilityDescriptor,
     CapabilityData,
+    CapabilityDescriptor,
+    EntitlementLevel,
     PluginStatus,
-    EntitlementLevel
 )
-from ..plugins import PluginRegistry, get_registry
 
 
 class MockPlugin(BaseCapabilityPlugin):
@@ -37,7 +37,7 @@ class MockPlugin(BaseCapabilityPlugin):
                 name="test_capability",
                 description="Test capability",
                 framework="Foundation",
-                required_entitlement=EntitlementLevel.NONE
+                required_entitlement=EntitlementLevel.NONE,
             )
         ]
 
@@ -46,9 +46,7 @@ class MockPlugin(BaseCapabilityPlugin):
 
     def collect_capability_data(self, capability_name: str, parameters=None):
         return CapabilityData(
-            capability_name=capability_name,
-            timestamp=datetime.utcnow(),
-            data={"test": "data"}
+            capability_name=capability_name, timestamp=datetime.utcnow(), data={"test": "data"}
         )
 
 
@@ -65,7 +63,7 @@ class TestBaseCapabilityPlugin(unittest.TestCase):
         self.assertEqual(self.plugin.status, PluginStatus.UNINITIALIZED)
         self.assertIsNone(self.plugin._error_message)
 
-    @patch('builtins.__import__')
+    @patch("builtins.__import__")
     def test_initialize_success(self, mock_import):
         """Test successful plugin initialization."""
         mock_import.return_value = MagicMock()
@@ -76,7 +74,7 @@ class TestBaseCapabilityPlugin(unittest.TestCase):
         self.assertEqual(self.plugin.status, PluginStatus.READY)
         self.assertIsNotNone(self.plugin._capabilities_cache)
 
-    @patch('builtins.__import__')
+    @patch("builtins.__import__")
     def test_initialize_framework_missing(self, mock_import):
         """Test initialization with missing framework."""
         mock_import.side_effect = ImportError("Framework not found")
@@ -87,7 +85,7 @@ class TestBaseCapabilityPlugin(unittest.TestCase):
         self.assertEqual(self.plugin.status, PluginStatus.ERROR)
         self.assertIsNotNone(self.plugin._error_message)
 
-    @patch('builtins.__import__')
+    @patch("builtins.__import__")
     def test_get_capabilities(self, mock_import):
         """Test getting capabilities."""
         mock_import.return_value = MagicMock()
@@ -99,7 +97,7 @@ class TestBaseCapabilityPlugin(unittest.TestCase):
         self.assertEqual(len(capabilities), 1)
         self.assertEqual(capabilities[0].name, "test_capability")
 
-    @patch('builtins.__import__')
+    @patch("builtins.__import__")
     def test_get_capability_by_name(self, mock_import):
         """Test getting specific capability."""
         mock_import.return_value = MagicMock()
@@ -114,7 +112,7 @@ class TestBaseCapabilityPlugin(unittest.TestCase):
         capability = self.plugin.get_capability_by_name("nonexistent")
         self.assertIsNone(capability)
 
-    @patch('builtins.__import__')
+    @patch("builtins.__import__")
     def test_collect_capability_data(self, mock_import):
         """Test collecting capability data."""
         mock_import.return_value = MagicMock()
@@ -126,7 +124,7 @@ class TestBaseCapabilityPlugin(unittest.TestCase):
         self.assertEqual(data.capability_name, "test_capability")
         self.assertIsNotNone(data.data)
 
-    @patch('builtins.__import__')
+    @patch("builtins.__import__")
     def test_collect_all_capabilities(self, mock_import):
         """Test collecting all capabilities."""
         mock_import.return_value = MagicMock()
@@ -166,7 +164,7 @@ class TestCapabilityDescriptor(unittest.TestCase):
             required_entitlement=EntitlementLevel.BASIC,
             refresh_interval=30.0,
             is_continuous=True,
-            tags={"test", "example"}
+            tags={"test", "example"},
         )
 
         self.assertEqual(descriptor.name, "test_cap")
@@ -188,7 +186,7 @@ class TestCapabilityData(unittest.TestCase):
             timestamp=timestamp,
             data={"key": "value"},
             metadata={"source": "test"},
-            error=None
+            error=None,
         )
 
         self.assertEqual(data.capability_name, "test")
@@ -199,11 +197,7 @@ class TestCapabilityData(unittest.TestCase):
     def test_to_dict(self):
         """Test conversion to dictionary."""
         timestamp = datetime.utcnow()
-        data = CapabilityData(
-            capability_name="test",
-            timestamp=timestamp,
-            data={"key": "value"}
-        )
+        data = CapabilityData(capability_name="test", timestamp=timestamp, data={"key": "value"})
 
         dict_data = data.to_dict()
 
@@ -246,7 +240,7 @@ class TestPluginRegistry(unittest.TestCase):
 
         self.assertNotIn("mock", self.registry._plugins)
 
-    @patch('builtins.__import__')
+    @patch("builtins.__import__")
     def test_get_plugin(self, mock_import):
         """Test getting plugin instance."""
         mock_import.return_value = MagicMock()
@@ -274,7 +268,7 @@ class TestPluginRegistry(unittest.TestCase):
         self.assertIn("mock1", plugins)
         self.assertIn("mock2", plugins)
 
-    @patch('builtins.__import__')
+    @patch("builtins.__import__")
     def test_shutdown_all(self, mock_import):
         """Test shutting down all plugins."""
         mock_import.return_value = MagicMock()
@@ -288,5 +282,5 @@ class TestPluginRegistry(unittest.TestCase):
         self.assertEqual(len(self.registry._instances), 0)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

@@ -4,14 +4,16 @@ Aggregates daily summaries and metrics into comprehensive weekly retrospectives
 with narrative insights, trend analysis, and goal progress tracking.
 """
 
-from datetime import datetime
-from typing import Any
-from pydantic import BaseModel, Field
 import asyncio
 import logging
+from datetime import datetime
+from typing import Any
+
+from pydantic import BaseModel, Field
 
 try:
     import dspy
+
     DSPY_AVAILABLE = True
 except ImportError:
     DSPY_AVAILABLE = False
@@ -25,7 +27,8 @@ tracer = trace.get_tracer(__name__)
 class WeeklyRetroInput(BaseModel):
     """Input data for weekly retrospective generation.
 
-    Attributes:
+    Attributes
+    ----------
         week_start: Start date of the week
         week_end: End date of the week
         total_screen_time: Total screen time for the week (hours)
@@ -46,27 +49,18 @@ class WeeklyRetroInput(BaseModel):
     total_focus_time: float = Field(..., ge=0, description="Total focus hours")
     total_meeting_hours: float = Field(..., ge=0, description="Total meeting hours")
     avg_context_switches: float = Field(..., ge=0, description="Avg context switches/day")
-    daily_summaries: list[str] = Field(
-        default_factory=list,
-        description="Daily summary texts"
-    )
+    daily_summaries: list[str] = Field(default_factory=list, description="Daily summary texts")
     daily_productivity_scores: list[int] = Field(
-        default_factory=list,
-        description="Daily productivity scores (0-100)"
+        default_factory=list, description="Daily productivity scores (0-100)"
     )
     top_apps_weekly: dict[str, float] = Field(
-        default_factory=dict,
-        description="App names to weekly usage hours"
+        default_factory=dict, description="App names to weekly usage hours"
     )
     top_domains_weekly: dict[str, int] = Field(
-        default_factory=dict,
-        description="Domain names to weekly visit counts"
+        default_factory=dict, description="Domain names to weekly visit counts"
     )
     total_breaks: int = Field(..., ge=0, description="Total breaks taken")
-    goals: list[str] = Field(
-        default_factory=list,
-        description="User-defined weekly goals"
-    )
+    goals: list[str] = Field(default_factory=list, description="User-defined weekly goals")
 
     model_config = {
         "json_schema_extra": {
@@ -80,25 +74,17 @@ class WeeklyRetroInput(BaseModel):
                 "daily_summaries": [
                     "Monday: Heavy coding day with 3.2h focus time",
                     "Tuesday: Meeting-heavy day with 5 calls",
-                    "Wednesday: Balanced work with good focus"
+                    "Wednesday: Balanced work with good focus",
                 ],
                 "daily_productivity_scores": [75, 65, 80, 70, 72, 68, 55],
-                "top_apps_weekly": {
-                    "VSCode": 15.2,
-                    "Safari": 8.5,
-                    "Slack": 6.3
-                },
+                "top_apps_weekly": {"VSCode": 15.2, "Safari": 8.5, "Slack": 6.3},
                 "top_domains_weekly": {
                     "github.com": 85,
                     "stackoverflow.com": 42,
-                    "docs.python.org": 28
+                    "docs.python.org": 28,
                 },
                 "total_breaks": 18,
-                "goals": [
-                    "Complete feature X",
-                    "Review 10 PRs",
-                    "Reduce meeting time"
-                ]
+                "goals": ["Complete feature X", "Review 10 PRs", "Reduce meeting time"],
             }
         }
     }
@@ -107,7 +93,8 @@ class WeeklyRetroInput(BaseModel):
 class WeeklyRetroOutput(BaseModel):
     """Output weekly retrospective with narrative and insights.
 
-    Attributes:
+    Attributes
+    ----------
         narrative: Comprehensive weekly narrative (3-5 paragraphs)
         metrics_summary: Key metrics aggregated from the week
         patterns: Multi-day patterns and trends observed
@@ -119,36 +106,19 @@ class WeeklyRetroOutput(BaseModel):
     """
 
     narrative: str = Field(..., description="Weekly narrative overview")
-    metrics_summary: dict[str, Any] = Field(
-        default_factory=dict,
-        description="Aggregated metrics"
-    )
-    patterns: list[str] = Field(
-        default_factory=list,
-        description="Multi-day behavioral patterns"
-    )
+    metrics_summary: dict[str, Any] = Field(default_factory=dict, description="Aggregated metrics")
+    patterns: list[str] = Field(default_factory=list, description="Multi-day behavioral patterns")
     progress_on_goals: dict[str, str] = Field(
-        default_factory=dict,
-        description="Goal completion assessments"
+        default_factory=dict, description="Goal completion assessments"
     )
     recommendations: list[str] = Field(
-        default_factory=list,
-        description="Strategic recommendations"
+        default_factory=list, description="Strategic recommendations"
     )
     weekly_productivity_score: int = Field(
-        default=0,
-        ge=0,
-        le=100,
-        description="Overall weekly productivity (0-100)"
+        default=0, ge=0, le=100, description="Overall weekly productivity (0-100)"
     )
-    trends: dict[str, str] = Field(
-        default_factory=dict,
-        description="Trend analysis by category"
-    )
-    achievements: list[str] = Field(
-        default_factory=list,
-        description="Notable achievements"
-    )
+    trends: dict[str, str] = Field(default_factory=dict, description="Trend analysis by category")
+    achievements: list[str] = Field(default_factory=list, description="Notable achievements")
 
     model_config = {
         "json_schema_extra": {
@@ -158,40 +128,41 @@ class WeeklyRetroOutput(BaseModel):
                     "total_screen_time": 45.2,
                     "avg_daily_focus": 2.64,
                     "meeting_load": "moderate",
-                    "productivity_trend": "stable"
+                    "productivity_trend": "stable",
                 },
                 "patterns": [
                     "Monday-Wednesday: High focus periods",
                     "Thursday-Friday: Meeting clusters",
-                    "Consistent morning deep work"
+                    "Consistent morning deep work",
                 ],
                 "progress_on_goals": {
                     "Complete feature X": "Completed on Wednesday",
                     "Review 10 PRs": "Completed 8/10",
-                    "Reduce meeting time": "No progress - meetings increased"
+                    "Reduce meeting time": "No progress - meetings increased",
                 },
                 "recommendations": [
                     "Maintain Monday-Wednesday focus pattern",
                     "Schedule meetings in afternoon blocks",
-                    "Increase break frequency (only 18 breaks total)"
+                    "Increase break frequency (only 18 breaks total)",
                 ],
                 "weekly_productivity_score": 72,
                 "trends": {
                     "focus_time": "stable",
                     "meeting_load": "increasing",
-                    "context_switches": "stable"
+                    "context_switches": "stable",
                 },
                 "achievements": [
                     "Completed major feature ahead of schedule",
                     "Maintained consistent morning deep work",
-                    "Reduced context switches by 15%"
-                ]
+                    "Reduced context switches by 15%",
+                ],
             }
         }
     }
 
 
 if DSPY_AVAILABLE:
+
     class WeeklyRetroSignature(dspy.Signature):
         """Generate comprehensive weekly retrospective from daily summaries and metrics.
 
@@ -201,24 +172,14 @@ if DSPY_AVAILABLE:
         """
 
         # Input fields
-        total_focus_time: float = dspy.InputField(
-            desc="Total deep focus time for the week (hours)"
-        )
-        total_meeting_hours: float = dspy.InputField(
-            desc="Total time spent in meetings (hours)"
-        )
-        avg_context_switches: float = dspy.InputField(
-            desc="Average context switches per day"
-        )
-        daily_summaries: str = dspy.InputField(
-            desc="Daily summary texts joined with newlines"
-        )
+        total_focus_time: float = dspy.InputField(desc="Total deep focus time for the week (hours)")
+        total_meeting_hours: float = dspy.InputField(desc="Total time spent in meetings (hours)")
+        avg_context_switches: float = dspy.InputField(desc="Average context switches per day")
+        daily_summaries: str = dspy.InputField(desc="Daily summary texts joined with newlines")
         daily_productivity_scores: str = dspy.InputField(
             desc="Comma-separated daily productivity scores"
         )
-        goals: str = dspy.InputField(
-            desc="User-defined weekly goals (comma-separated)"
-        )
+        goals: str = dspy.InputField(desc="User-defined weekly goals (comma-separated)")
 
         # Output fields
         narrative: str = dspy.OutputField(
@@ -263,7 +224,8 @@ class WeeklyRetroModule:
         Args:
             input_data: Weekly aggregated metrics and summaries
 
-        Returns:
+        Returns
+        -------
             WeeklyRetroOutput with structured insights
         """
         # Calculate weekly productivity score
@@ -298,13 +260,17 @@ class WeeklyRetroModule:
         progress_on_goals = {}
         for goal in input_data.goals:
             # Simple heuristic: check if keywords appear in daily summaries
-            mentions = sum(1 for summary in input_data.daily_summaries if goal.lower() in summary.lower())
+            mentions = sum(
+                1 for summary in input_data.daily_summaries if goal.lower() in summary.lower()
+            )
             if mentions >= 3:
                 progress_on_goals[goal] = "Strong progress - mentioned in multiple daily summaries"
             elif mentions >= 1:
                 progress_on_goals[goal] = "Some progress - mentioned in summaries"
             else:
-                progress_on_goals[goal] = "Limited progress - not clearly reflected in daily activities"
+                progress_on_goals[goal] = (
+                    "Limited progress - not clearly reflected in daily activities"
+                )
 
         # Generate recommendations
         recommendations = self._generate_recommendations(input_data)
@@ -315,7 +281,9 @@ class WeeklyRetroModule:
         # Identify achievements
         achievements = []
         if input_data.total_focus_time > 15:
-            achievements.append(f"Maintained strong focus time ({input_data.total_focus_time:.1f}h)")
+            achievements.append(
+                f"Maintained strong focus time ({input_data.total_focus_time:.1f}h)"
+            )
         if avg_daily_focus > 2.5:
             achievements.append("Exceeded 2.5h daily focus time average")
         if input_data.avg_context_switches < 15:
@@ -330,7 +298,7 @@ class WeeklyRetroModule:
             "avg_daily_meetings": avg_daily_meetings,
             "avg_context_switches": input_data.avg_context_switches,
             "total_breaks": input_data.total_breaks,
-            "productivity_trend": trends.get("overall", "stable")
+            "productivity_trend": trends.get("overall", "stable"),
         }
 
         return WeeklyRetroOutput(
@@ -341,7 +309,7 @@ class WeeklyRetroModule:
             recommendations=recommendations,
             weekly_productivity_score=weekly_score,
             trends=trends,
-            achievements=achievements
+            achievements=achievements,
         )
 
     def _calculate_weekly_score(self, input_data: WeeklyRetroInput) -> int:
@@ -350,14 +318,17 @@ class WeeklyRetroModule:
         Args:
             input_data: Weekly metrics
 
-        Returns:
+        Returns
+        -------
             Productivity score (0-100)
         """
         if not input_data.daily_productivity_scores:
             return 50
 
         # Average of daily scores with adjustments
-        avg_score = sum(input_data.daily_productivity_scores) / len(input_data.daily_productivity_scores)
+        avg_score = sum(input_data.daily_productivity_scores) / len(
+            input_data.daily_productivity_scores
+        )
 
         # Bonus for consistent high performance
         consistency_bonus = 0
@@ -374,7 +345,8 @@ class WeeklyRetroModule:
         Args:
             input_data: Weekly metrics
 
-        Returns:
+        Returns
+        -------
             List of detected patterns
         """
         patterns = []
@@ -416,7 +388,8 @@ class WeeklyRetroModule:
         Args:
             input_data: Weekly metrics
 
-        Returns:
+        Returns
+        -------
             List of actionable recommendations
         """
         recommendations = []
@@ -429,7 +402,9 @@ class WeeklyRetroModule:
         # Meeting recommendations
         avg_daily_meetings = input_data.total_meeting_hours / 7
         if avg_daily_meetings > 3:
-            recommendations.append("Audit meetings - consider declining or delegating low-value calls")
+            recommendations.append(
+                "Audit meetings - consider declining or delegating low-value calls"
+            )
 
         # Context switching
         if input_data.avg_context_switches > 15:
@@ -455,7 +430,8 @@ class WeeklyRetroModule:
         Args:
             input_data: Weekly metrics
 
-        Returns:
+        Returns
+        -------
             Dictionary of trend assessments
         """
         trends = {}
@@ -463,7 +439,9 @@ class WeeklyRetroModule:
         # Productivity trend
         if len(input_data.daily_productivity_scores) >= 3:
             first_half = sum(input_data.daily_productivity_scores[:3]) / 3
-            second_half = sum(input_data.daily_productivity_scores[3:]) / max(1, len(input_data.daily_productivity_scores[3:]))
+            second_half = sum(input_data.daily_productivity_scores[3:]) / max(
+                1, len(input_data.daily_productivity_scores[3:])
+            )
 
             if second_half > first_half + 5:
                 trends["overall"] = "improving"
@@ -474,14 +452,28 @@ class WeeklyRetroModule:
 
         # Focus time trend (simplified - would need historical data for real trend)
         avg_daily_focus = input_data.total_focus_time / 7
-        trends["focus_time"] = "excellent" if avg_daily_focus > 3 else "good" if avg_daily_focus > 2 else "needs improvement"
+        trends["focus_time"] = (
+            "excellent"
+            if avg_daily_focus > 3
+            else "good"
+            if avg_daily_focus > 2
+            else "needs improvement"
+        )
 
         # Meeting load trend
         avg_daily_meetings = input_data.total_meeting_hours / 7
-        trends["meeting_load"] = "high" if avg_daily_meetings > 3 else "moderate" if avg_daily_meetings > 1.5 else "low"
+        trends["meeting_load"] = (
+            "high" if avg_daily_meetings > 3 else "moderate" if avg_daily_meetings > 1.5 else "low"
+        )
 
         # Context switching
-        trends["context_switches"] = "high" if input_data.avg_context_switches > 20 else "moderate" if input_data.avg_context_switches > 10 else "low"
+        trends["context_switches"] = (
+            "high"
+            if input_data.avg_context_switches > 20
+            else "moderate"
+            if input_data.avg_context_switches > 10
+            else "low"
+        )
 
         return trends
 
@@ -491,7 +483,8 @@ class WeeklyRetroModule:
         Args:
             input_data: Weekly metrics and daily summaries
 
-        Returns:
+        Returns
+        -------
             WeeklyRetroOutput with comprehensive retrospective
         """
         with tracer.start_as_current_span("weekly_retro.generate") as span:
@@ -502,8 +495,7 @@ class WeeklyRetroModule:
             try:
                 if self.use_llm:
                     return self._llm_generate(input_data)
-                else:
-                    return self._fallback_generate(input_data)
+                return self._fallback_generate(input_data)
             except Exception as e:
                 logger.warning(f"LLM generation failed, using fallback: {e}")
                 span.set_attribute("fallback_used", True)
@@ -515,7 +507,8 @@ class WeeklyRetroModule:
         Args:
             input_data: Weekly metrics and summaries
 
-        Returns:
+        Returns
+        -------
             WeeklyRetroOutput with LLM-generated insights
         """
         # Prepare inputs for DSPy
@@ -530,7 +523,7 @@ class WeeklyRetroModule:
             avg_context_switches=input_data.avg_context_switches,
             daily_summaries=daily_summaries_str,
             daily_productivity_scores=scores_str,
-            goals=goals_str
+            goals=goals_str,
         )
 
         # Parse outputs
@@ -566,7 +559,7 @@ class WeeklyRetroModule:
             recommendations=recommendations[:7],
             weekly_productivity_score=int(result.weekly_productivity_score),
             trends=trends,
-            achievements=achievements
+            achievements=achievements,
         )
 
     async def generate_async(self, input_data: WeeklyRetroInput) -> WeeklyRetroOutput:
@@ -575,7 +568,8 @@ class WeeklyRetroModule:
         Args:
             input_data: Weekly metrics and summaries
 
-        Returns:
+        Returns
+        -------
             WeeklyRetroOutput with retrospective
         """
         return await asyncio.to_thread(self.generate, input_data)
@@ -597,13 +591,13 @@ if __name__ == "__main__":
             "Tuesday: Meeting-heavy with 5 calls",
             "Wednesday: Balanced work with good focus",
             "Thursday: Code reviews and documentation",
-            "Friday: Sprint planning and retrospective"
+            "Friday: Sprint planning and retrospective",
         ],
         daily_productivity_scores=[75, 65, 80, 70, 72],
         top_apps_weekly={"VSCode": 15.2, "Safari": 8.5, "Slack": 6.3},
         top_domains_weekly={"github.com": 85, "stackoverflow.com": 42},
         total_breaks=18,
-        goals=["Complete feature X", "Review 10 PRs", "Reduce meeting time"]
+        goals=["Complete feature X", "Review 10 PRs", "Reduce meeting time"],
     )
 
     module = WeeklyRetroModule(use_llm=False)

@@ -7,35 +7,28 @@ Tests focus on behavior verification using real collaborators (no mocking domain
 Specification source: KGC Lean Context Specification (Python/KGCT/macOS+iOS via PyObjC)
 """
 
-import pytest
-from enum import Enum
-from dataclasses import dataclass
-from typing import List, Dict, Any, Optional
-
 # Import from chicago_tdd_tools (as if installed)
 # For now, using relative imports from src/
 import sys
+from dataclasses import dataclass
+from enum import Enum
 from pathlib import Path
+from typing import Any
+
+import pytest
+
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from core import (
-    TestFixture,
-    StateManager,
-    FailFastValidator,
-    Poka,
-    assert_that,
-    assert_eq_with_msg,
-)
-from validation import InvariantValidator, Property
-from testing import StateMachine
-
+from core import assert_that
 
 # ============================================================================
 # Domain Models (No Mocking - Real Collaborators)
 # ============================================================================
 
+
 class LeanPrinciple(Enum):
     """Core Lean principles from spec."""
+
     VALUE = "value"
     VALUE_STREAM = "value_stream"
     FLOW = "flow"
@@ -45,6 +38,7 @@ class LeanPrinciple(Enum):
 
 class KGCPlane(Enum):
     """KGC planes from the spec."""
+
     ONTOLOGY = "ontology"
     TYPE = "type"
     INVARIANT = "invariant"
@@ -54,6 +48,7 @@ class KGCPlane(Enum):
 
 class AppleEntity(Enum):
     """Apple ecosystem entities from spec."""
+
     CALENDAR_EVENT = "calendar_event"
     REMINDER = "reminder"
     MAIL_MESSAGE = "mail_message"
@@ -63,6 +58,7 @@ class AppleEntity(Enum):
 @dataclass
 class KGCManifest:
     """Represents .kgc/manifest.ttl."""
+
     project_uri: str
     project_name: str
     owns_ontology: bool = True
@@ -70,7 +66,7 @@ class KGCManifest:
     owns_invariants: bool = True
     owns_hooks: bool = True
     has_projection_config: bool = True
-    planes: List[KGCPlane] | None = None
+    planes: list[KGCPlane] | None = None
 
     def __post_init__(self) -> None:
         if self.planes is None:
@@ -80,6 +76,7 @@ class KGCManifest:
 @dataclass
 class Invariant:
     """Represents a SHACL invariant with traceable requirement."""
+
     name: str
     description: str
     traced_to: str  # Regulatory/contractual requirement or historical failure
@@ -89,6 +86,7 @@ class Invariant:
 @dataclass
 class Hook:
     """Represents a knowledge hook (conditions/effects)."""
+
     name: str
     triggered_by: str  # What condition triggers this
     effect: str  # What it does
@@ -98,14 +96,15 @@ class Hook:
 @dataclass
 class KGCContext:
     """Complete KGC context for a project."""
+
     manifest: KGCManifest
-    ontology_entities: List[str]
-    invariants: List[Invariant]
-    hooks: List[Hook]
-    apple_entities: List[AppleEntity]
+    ontology_entities: list[str]
+    invariants: list[Invariant]
+    hooks: list[Hook]
+    apple_entities: list[AppleEntity]
     has_apple_ingest: bool = False
     has_generator: bool = False
-    projections: List[str] | None = None
+    projections: list[str] | None = None
 
     def __post_init__(self) -> None:
         if self.projections is None:
@@ -116,17 +115,18 @@ class KGCContext:
 # KGC Technician (Real actor, no mocks)
 # ============================================================================
 
+
 class KGCTechnician:
     """Implements standard work loop from spec Section 7."""
 
     def __init__(self, context: KGCContext) -> None:
         self.context = context
-        self.discovered_items: List[str] = []
+        self.discovered_items: list[str] = []
         self.rework_count = 0
-        self.regenerated_artifacts: List[str] = []
-        self.waste_removed_stories: List[str] = []
+        self.regenerated_artifacts: list[str] = []
+        self.waste_removed_stories: list[str] = []
 
-    def discover(self, items: List[str]) -> None:
+    def discover(self, items: list[str]) -> None:
         """Step 1: Ingest data via KGCT (scan-apple, scan-files)."""
         self.discovered_items.extend(items)
 
@@ -135,13 +135,13 @@ class KGCTechnician:
         if new_entity:
             self.context.ontology_entities.append(new_entity)
 
-    def regenerate(self, artifact_types: List[str]) -> None:
+    def regenerate(self, artifact_types: list[str]) -> None:
         """Step 3: Run KGCT generators."""
         for artifact in artifact_types:
             if artifact in ["cli", "docs", "diagrams", "agenda"]:
                 self.regenerated_artifacts.append(artifact)
 
-    def review(self) -> Dict[str, Any]:
+    def review(self) -> dict[str, Any]:
         """Step 4: Inspect projections (not raw data)."""
         return {
             "projected_artifacts": self.regenerated_artifacts,
@@ -152,9 +152,9 @@ class KGCTechnician:
         """Step 5: Eliminate repeated manual steps."""
         self.waste_removed_stories.append(waste_story)
 
-    def _identify_waste(self) -> List[str]:
+    def _identify_waste(self) -> list[str]:
         """Use projections to detect waste patterns."""
-        waste: List[str] = []
+        waste: list[str] = []
         if not self.context.hooks:
             waste.append("manual_copy_paste_between_apps")
         if not self.context.has_generator:
@@ -166,18 +166,14 @@ class KGCTechnician:
 # Pytest Fixtures
 # ============================================================================
 
+
 @pytest.fixture
 def minimal_kgc_context() -> KGCContext:
     """Minimal KGC context as defined in spec Section 2.1."""
     manifest = KGCManifest(
         project_uri="urn:project:kgc:osx-personal-fabric",
         project_name="macOS/iOS Personal Fabric",
-        planes=[
-            KGCPlane.ONTOLOGY,
-            KGCPlane.TYPE,
-            KGCPlane.INVARIANT,
-            KGCPlane.PROJECTION,
-        ]
+        planes=[KGCPlane.ONTOLOGY, KGCPlane.TYPE, KGCPlane.INVARIANT, KGCPlane.PROJECTION],
     )
 
     context = KGCContext(
@@ -203,7 +199,7 @@ def minimal_kgc_context() -> KGCContext:
                 triggered_by="CalendarEvent.title is empty",
                 effect="Populate with attendee names or description",
                 waste_removed="Manual fix of untitled meetings in calendar app",
-            ),
+            )
         ],
         apple_entities=[
             AppleEntity.CALENDAR_EVENT,
@@ -227,6 +223,7 @@ def kgc_technician(minimal_kgc_context: KGCContext) -> KGCTechnician:
 # ============================================================================
 # Test: Lean Principle 1 - VALUE
 # ============================================================================
+
 
 def test_lean_value_waste_elimination(minimal_kgc_context: KGCContext) -> None:
     """
@@ -281,6 +278,7 @@ def test_invariants_are_waste_reducing(minimal_kgc_context: KGCContext) -> None:
 # Test: Lean Principle 2 - VALUE STREAM
 # ============================================================================
 
+
 def test_value_stream_mapping() -> None:
     """
     Chicago TDD: Behavioral assertion of value stream flow.
@@ -315,9 +313,7 @@ def test_value_stream_eliminates_handoffs() -> None:
     """
     # Arrange: Technician with generator capability
     manifest = KGCManifest(
-        project_uri="urn:test:kgc",
-        project_name="Test",
-        has_projection_config=True,
+        project_uri="urn:test:kgc", project_name="Test", has_projection_config=True
     )
     context = KGCContext(
         manifest=manifest,
@@ -342,6 +338,7 @@ def test_value_stream_eliminates_handoffs() -> None:
 # Test: Lean Principle 3 - FLOW
 # ============================================================================
 
+
 def test_no_manual_batching_between_steps() -> None:
     """
     Chicago TDD: Single-piece flow validation.
@@ -350,10 +347,7 @@ def test_no_manual_batching_between_steps() -> None:
     Per spec 1.3: "Single-piece flow, not batch processing."
     """
     # Arrange: Context with minimal batch size
-    manifest = KGCManifest(
-        project_uri="urn:test:kgc",
-        project_name="Test",
-    )
+    manifest = KGCManifest(project_uri="urn:test:kgc", project_name="Test")
     context = KGCContext(
         manifest=manifest,
         ontology_entities=["Event"],  # Single entity
@@ -379,6 +373,7 @@ def test_no_manual_batching_between_steps() -> None:
 # Test: Lean Principle 4 - PULL
 # ============================================================================
 
+
 def test_artifacts_pulled_not_pushed() -> None:
     """
     Chicago TDD: On-demand generation (pull) vs batch generation (push).
@@ -388,9 +383,7 @@ def test_artifacts_pulled_not_pushed() -> None:
     """
     # Arrange: Generator that can selectively produce artifacts
     manifest = KGCManifest(
-        project_uri="urn:test:kgc",
-        project_name="Test",
-        has_projection_config=True,
+        project_uri="urn:test:kgc", project_name="Test", has_projection_config=True
     )
     context = KGCContext(
         manifest=manifest,
@@ -415,6 +408,7 @@ def test_artifacts_pulled_not_pushed() -> None:
 # ============================================================================
 # Test: Lean Principle 5 - PERFECTION
 # ============================================================================
+
 
 def test_drift_detection_is_defect(minimal_kgc_context: KGCContext) -> None:
     """
@@ -442,6 +436,7 @@ def test_drift_detection_is_defect(minimal_kgc_context: KGCContext) -> None:
 # Test: KGC Structure Validation
 # ============================================================================
 
+
 def test_kgc_minimal_structure(minimal_kgc_context: KGCContext) -> None:
     """
     Chicago TDD: KGC context contains all required planes.
@@ -465,12 +460,7 @@ def test_kgc_minimal_structure(minimal_kgc_context: KGCContext) -> None:
     assert context.manifest.has_projection_config
 
     # Assert: All planes present
-    expected_planes = [
-        KGCPlane.ONTOLOGY,
-        KGCPlane.TYPE,
-        KGCPlane.INVARIANT,
-        KGCPlane.PROJECTION,
-    ]
+    expected_planes = [KGCPlane.ONTOLOGY, KGCPlane.TYPE, KGCPlane.INVARIANT, KGCPlane.PROJECTION]
     for plane in expected_planes:
         assert plane in context.manifest.planes
 
@@ -485,6 +475,7 @@ def test_kgc_minimal_structure(minimal_kgc_context: KGCContext) -> None:
 # ============================================================================
 # Test: Apple Ingest Invariants
 # ============================================================================
+
 
 def test_apple_entity_invariants(minimal_kgc_context: KGCContext) -> None:
     """
@@ -511,9 +502,9 @@ def test_apple_entity_invariants(minimal_kgc_context: KGCContext) -> None:
 # Test: Standard Work Loop
 # ============================================================================
 
+
 def test_technician_standard_work_loop(
-    minimal_kgc_context: KGCContext,
-    kgc_technician: KGCTechnician,
+    minimal_kgc_context: KGCContext, kgc_technician: KGCTechnician
 ) -> None:
     """
     Chicago TDD: 5-step standard work loop from spec Section 7.
@@ -554,6 +545,7 @@ def test_technician_standard_work_loop(
 # ============================================================================
 # Test: Metrics (Spec Section 8)
 # ============================================================================
+
 
 def test_lead_time_for_change_metric(kgc_technician: KGCTechnician) -> None:
     """
@@ -617,6 +609,7 @@ def test_rework_rate_metric(kgc_technician: KGCTechnician) -> None:
 # ============================================================================
 # Test: Chicago TDD Principles (Validate Meta-Level)
 # ============================================================================
+
 
 def test_chicago_tdd_no_mocking_domain_objects(minimal_kgc_context: KGCContext) -> None:
     """

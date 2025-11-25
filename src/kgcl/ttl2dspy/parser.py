@@ -4,9 +4,8 @@ import hashlib
 import logging
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, List, Optional, Set, Union
 
-from rdflib import Graph, Namespace, URIRef, Literal
+from rdflib import Graph, Literal, Namespace, URIRef
 from rdflib.namespace import RDF, RDFS, SH, XSD
 
 logger = logging.getLogger(__name__)
@@ -22,14 +21,14 @@ class PropertyShape:
 
     path: URIRef
     name: str
-    datatype: Optional[URIRef] = None
-    node_kind: Optional[URIRef] = None
+    datatype: URIRef | None = None
+    node_kind: URIRef | None = None
     min_count: int = 0
-    max_count: Optional[int] = None
-    description: Optional[str] = None
-    default_value: Optional[str] = None
-    pattern: Optional[str] = None
-    in_values: List[str] = field(default_factory=list)
+    max_count: int | None = None
+    description: str | None = None
+    default_value: str | None = None
+    pattern: str | None = None
+    in_values: list[str] = field(default_factory=list)
 
     @property
     def is_required(self) -> bool:
@@ -77,14 +76,14 @@ class SHACLShape:
 
     uri: URIRef
     name: str
-    target_class: Optional[URIRef] = None
-    description: Optional[str] = None
-    properties: List[PropertyShape] = field(default_factory=list)
+    target_class: URIRef | None = None
+    description: str | None = None
+    properties: list[PropertyShape] = field(default_factory=list)
     closed: bool = False
 
     # Categorization
-    input_properties: List[PropertyShape] = field(default_factory=list)
-    output_properties: List[PropertyShape] = field(default_factory=list)
+    input_properties: list[PropertyShape] = field(default_factory=list)
+    output_properties: list[PropertyShape] = field(default_factory=list)
 
     @property
     def signature_name(self) -> str:
@@ -92,8 +91,7 @@ class SHACLShape:
         # Convert URI to PascalCase
         local_name = str(self.uri).split("/")[-1].split("#")[-1]
         # Remove 'Shape' suffix if present
-        if local_name.endswith("Shape"):
-            local_name = local_name[:-5]
+        local_name = local_name.removesuffix("Shape")
         return f"{local_name}Signature"
 
     def categorize_properties(self):
@@ -126,16 +124,17 @@ class OntologyParser:
             cache_enabled: Enable in-memory caching of parsed graphs
         """
         self.cache_enabled = cache_enabled
-        self._graph_cache: Dict[str, Graph] = {}
-        self._shape_cache: Dict[str, List[SHACLShape]] = {}
+        self._graph_cache: dict[str, Graph] = {}
+        self._shape_cache: dict[str, list[SHACLShape]] = {}
 
-    def parse_file(self, ttl_path: Union[str, Path]) -> Graph:
+    def parse_file(self, ttl_path: str | Path) -> Graph:
         """Load and parse a TTL/RDF file.
 
         Args:
             ttl_path: Path to TTL file
 
-        Returns:
+        Returns
+        -------
             RDFLib Graph object
         """
         ttl_path = Path(ttl_path)
@@ -170,13 +169,14 @@ class OntologyParser:
         logger.info(f"Loaded {len(graph)} triples from {ttl_path}")
         return graph
 
-    def extract_shapes(self, graph: Graph) -> List[SHACLShape]:
+    def extract_shapes(self, graph: Graph) -> list[SHACLShape]:
         """Extract all SHACL NodeShapes from a graph.
 
         Args:
             graph: RDFLib Graph containing SHACL shapes
 
-        Returns:
+        Returns
+        -------
             List of SHACLShape objects
         """
         # Check cache
@@ -201,14 +201,15 @@ class OntologyParser:
 
         return shapes
 
-    def _parse_node_shape(self, graph: Graph, shape_uri: URIRef) -> Optional[SHACLShape]:
+    def _parse_node_shape(self, graph: Graph, shape_uri: URIRef) -> SHACLShape | None:
         """Parse a single SHACL NodeShape.
 
         Args:
             graph: RDFLib Graph
             shape_uri: URI of the NodeShape
 
-        Returns:
+        Returns
+        -------
             SHACLShape object or None if invalid
         """
         # Extract basic info
@@ -242,14 +243,15 @@ class OntologyParser:
 
         return shape
 
-    def _parse_property_shape(self, graph: Graph, prop_uri: URIRef) -> Optional[PropertyShape]:
+    def _parse_property_shape(self, graph: Graph, prop_uri: URIRef) -> PropertyShape | None:
         """Parse a SHACL PropertyShape.
 
         Args:
             graph: RDFLib Graph
             prop_uri: URI of the PropertyShape
 
-        Returns:
+        Returns
+        -------
             PropertyShape object or None if invalid
         """
         # Get the path
@@ -287,12 +289,14 @@ class OntologyParser:
             in_values=in_values,
         )
 
-    def _get_literal(self, graph: Graph, subject: URIRef, predicate: URIRef) -> Optional[str]:
+    def _get_literal(self, graph: Graph, subject: URIRef, predicate: URIRef) -> str | None:
         """Get a literal value from the graph."""
         value = graph.value(subject, predicate)
         return str(value) if value else None
 
-    def _get_integer(self, graph: Graph, subject: URIRef, predicate: URIRef, default: Optional[int] = None) -> Optional[int]:
+    def _get_integer(
+        self, graph: Graph, subject: URIRef, predicate: URIRef, default: int | None = None
+    ) -> int | None:
         """Get an integer value from the graph."""
         value = graph.value(subject, predicate)
         if value is None:
@@ -327,7 +331,7 @@ class OntologyParser:
         self._shape_cache.clear()
         logger.info("Cleared parser caches")
 
-    def get_cache_stats(self) -> Dict[str, int]:
+    def get_cache_stats(self) -> dict[str, int]:
         """Get cache statistics."""
         return {
             "graph_cache_size": len(self._graph_cache),

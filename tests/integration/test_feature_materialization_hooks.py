@@ -5,20 +5,15 @@ and automatic feature propagation through the knowledge graph.
 """
 
 import tempfile
+from datetime import UTC
 from pathlib import Path
 
-import pytest
-from rdflib import Graph, Literal, Namespace, URIRef
-from rdflib.namespace import RDF, RDFS
+from rdflib import Literal, Namespace, URIRef
+from rdflib.namespace import RDF
 
 from kgcl.unrdf_engine.engine import UnrdfEngine
 from kgcl.unrdf_engine.hook_registry import PersistentHookRegistry
-from kgcl.unrdf_engine.hooks import (
-    HookContext,
-    HookPhase,
-    KnowledgeHook,
-    TriggerCondition,
-)
+from kgcl.unrdf_engine.hooks import HookContext, HookPhase, KnowledgeHook, TriggerCondition
 from kgcl.unrdf_engine.ingestion import IngestionPipeline
 
 UNRDF = Namespace("http://unrdf.org/ontology/")
@@ -64,11 +59,7 @@ class TestFeatureMaterializationHooks:
                                 entity = row[0]
                                 # Materialize feature for each entity
                                 context.graph.add(
-                                    (
-                                        entity,
-                                        FEATURE.hasFeature,
-                                        Literal(f"feature_from_{s}"),
-                                    )
+                                    (entity, FEATURE.hasFeature, Literal(f"feature_from_{s}"))
                                 )
                                 materialized_features.append(str(entity))
 
@@ -86,11 +77,7 @@ class TestFeatureMaterializationHooks:
 
             # Then add a feature template
             result = pipeline.ingest_json(
-                data={
-                    "id": "template1",
-                    "type": "FeatureTemplate",
-                    "name": "ActivityScore",
-                },
+                data={"id": "template1", "type": "FeatureTemplate", "name": "ActivityScore"},
                 agent="test",
             )
 
@@ -110,8 +97,7 @@ class TestFeatureMaterializationHooks:
                         name="age_group_computer",
                         phases=[HookPhase.POST_COMMIT],
                         trigger=TriggerCondition(
-                            pattern="?person <http://unrdf.org/ontology/age> ?age",
-                            check_delta=True,
+                            pattern="?person <http://unrdf.org/ontology/age> ?age", check_delta=True
                         ),
                     )
 
@@ -121,7 +107,9 @@ class TestFeatureMaterializationHooks:
                         if "age" in str(p):
                             try:
                                 age = int(o)
-                                age_group = "child" if age < 18 else "adult" if age < 65 else "senior"
+                                age_group = (
+                                    "child" if age < 18 else "adult" if age < 65 else "senior"
+                                )
                                 # Add computed feature to graph
                                 context.graph.add((s, UNRDF.ageGroup, Literal(age_group)))
                             except (ValueError, TypeError):
@@ -132,8 +120,7 @@ class TestFeatureMaterializationHooks:
 
             # Ingest person with age
             result = pipeline.ingest_json(
-                data={"id": "person1", "type": "Person", "name": "Alice", "age": 30},
-                agent="test",
+                data={"id": "person1", "type": "Person", "name": "Alice", "age": 30}, agent="test"
             )
 
             assert result.success is True
@@ -161,8 +148,7 @@ class TestFeatureMaterializationHooks:
                         phases=[HookPhase.POST_COMMIT],
                         priority=100,
                         trigger=TriggerCondition(
-                            pattern="?person a <http://unrdf.org/ontology/Person>",
-                            check_delta=True,
+                            pattern="?person a <http://unrdf.org/ontology/Person>", check_delta=True
                         ),
                     )
 
@@ -176,9 +162,7 @@ class TestFeatureMaterializationHooks:
             class SecondFeatureComputer(KnowledgeHook):
                 def __init__(self):
                     super().__init__(
-                        name="second_feature",
-                        phases=[HookPhase.POST_COMMIT],
-                        priority=50,
+                        name="second_feature", phases=[HookPhase.POST_COMMIT], priority=50
                     )
 
                 def execute(self, context: HookContext):
@@ -200,9 +184,7 @@ class TestFeatureMaterializationHooks:
             registry.register(SecondFeatureComputer())
 
             pipeline = IngestionPipeline(engine)
-            result = pipeline.ingest_json(
-                data={"id": "person1", "type": "Person"}, agent="test"
-            )
+            result = pipeline.ingest_json(data={"id": "person1", "type": "Person"}, agent="test")
 
             assert result.success is True
             # Both features should be computed in order
@@ -217,10 +199,7 @@ class TestFeatureMaterializationHooks:
 
             class FeatureAggregator(KnowledgeHook):
                 def __init__(self):
-                    super().__init__(
-                        name="feature_aggregator",
-                        phases=[HookPhase.POST_COMMIT],
-                    )
+                    super().__init__(name="feature_aggregator", phases=[HookPhase.POST_COMMIT])
 
                 def execute(self, context: HookContext):
                     # Count total people
@@ -297,14 +276,10 @@ class TestFeatureMaterializationHooks:
             pipeline = IngestionPipeline(engine)
 
             # Add adult
-            pipeline.ingest_json(
-                data={"id": "adult", "type": "Person", "age": 25}, agent="test"
-            )
+            pipeline.ingest_json(data={"id": "adult", "type": "Person", "age": 25}, agent="test")
 
             # Add child
-            pipeline.ingest_json(
-                data={"id": "child", "type": "Person", "age": 12}, agent="test"
-            )
+            pipeline.ingest_json(data={"id": "child", "type": "Person", "age": 12}, agent="test")
 
             # Check only adult has premium feature
             query = """
@@ -324,10 +299,7 @@ class TestFeatureMaterializationHooks:
 
             class FeatureInvalidator(KnowledgeHook):
                 def __init__(self):
-                    super().__init__(
-                        name="feature_invalidator",
-                        phases=[HookPhase.POST_COMMIT],
-                    )
+                    super().__init__(name="feature_invalidator", phases=[HookPhase.POST_COMMIT])
 
                 def execute(self, context: HookContext):
                     # When age changes, invalidate age-dependent features
@@ -343,9 +315,7 @@ class TestFeatureMaterializationHooks:
             pipeline = IngestionPipeline(engine)
 
             # First ingestion
-            pipeline.ingest_json(
-                data={"id": "person1", "type": "Person", "age": 30}, agent="test"
-            )
+            pipeline.ingest_json(data={"id": "person1", "type": "Person", "age": 30}, agent="test")
 
             # Manually add derived feature
             txn = engine.transaction("test", "add derived")
@@ -354,9 +324,7 @@ class TestFeatureMaterializationHooks:
             engine.commit(txn)
 
             # Update age (should trigger invalidation)
-            pipeline.ingest_json(
-                data={"id": "person1", "age": 70}, agent="test"
-            )
+            pipeline.ingest_json(data={"id": "person1", "age": 70}, agent="test")
 
             # Derived feature should be removed
             query = """
@@ -402,7 +370,6 @@ class TestFeatureMaterializationHooks:
                                 transform_sparql = str(transforms[0][0])
                                 # Execute transform (in real implementation)
                                 # For now, just demonstrate the pattern
-                                pass
 
             registry.register(SparqlTransformMaterializer())
             pipeline = IngestionPipeline(engine)
@@ -429,10 +396,7 @@ class TestFeatureMaterializationHooks:
 
             class DependencyTracker(KnowledgeHook):
                 def __init__(self):
-                    super().__init__(
-                        name="dependency_tracker",
-                        phases=[HookPhase.POST_COMMIT],
-                    )
+                    super().__init__(name="dependency_tracker", phases=[HookPhase.POST_COMMIT])
 
                 def execute(self, context: HookContext):
                     # Track which features depend on which source data
@@ -446,9 +410,7 @@ class TestFeatureMaterializationHooks:
             registry.register(DependencyTracker())
             pipeline = IngestionPipeline(engine)
 
-            result = pipeline.ingest_json(
-                data={"id": "person1", "type": "Person"}, agent="test"
-            )
+            result = pipeline.ingest_json(data={"id": "person1", "type": "Person"}, agent="test")
 
             assert result.success is True
             assert len(dependencies_tracked) > 0
@@ -463,10 +425,7 @@ class TestFeatureMaterializationHooks:
 
             class BatchMaterializer(KnowledgeHook):
                 def __init__(self):
-                    super().__init__(
-                        name="batch_materializer",
-                        phases=[HookPhase.POST_COMMIT],
-                    )
+                    super().__init__(name="batch_materializer", phases=[HookPhase.POST_COMMIT])
 
                 def execute(self, context: HookContext):
                     # Count entities in delta for batch processing
@@ -486,10 +445,7 @@ class TestFeatureMaterializationHooks:
 
             # Ingest batch
             result = pipeline.ingest_json(
-                data=[
-                    {"id": f"person{i}", "type": "Person"} for i in range(10)
-                ],
-                agent="test",
+                data=[{"id": f"person{i}", "type": "Person"} for i in range(10)], agent="test"
             )
 
             assert result.success is True
@@ -505,13 +461,10 @@ class TestFeatureMaterializationHooks:
 
             class FeatureVersionTracker(KnowledgeHook):
                 def __init__(self):
-                    super().__init__(
-                        name="version_tracker",
-                        phases=[HookPhase.POST_COMMIT],
-                    )
+                    super().__init__(name="version_tracker", phases=[HookPhase.POST_COMMIT])
 
                 def execute(self, context: HookContext):
-                    from datetime import datetime, timezone
+                    from datetime import datetime
 
                     # Add version metadata to features
                     for s, p, o in context.delta:
@@ -521,7 +474,7 @@ class TestFeatureMaterializationHooks:
                                 (
                                     version_uri,
                                     UNRDF.timestamp,
-                                    Literal(datetime.now(timezone.utc).isoformat()),
+                                    Literal(datetime.now(UTC).isoformat()),
                                 )
                             )
                             context.graph.add((version_uri, UNRDF.featureOf, s))
@@ -530,12 +483,7 @@ class TestFeatureMaterializationHooks:
             pipeline = IngestionPipeline(engine)
 
             result = pipeline.ingest_json(
-                data={
-                    "id": "person1",
-                    "type": "Person",
-                    "customFeature": "value",
-                },
-                agent="test",
+                data={"id": "person1", "type": "Person", "customFeature": "value"}, agent="test"
             )
 
             assert result.success is True

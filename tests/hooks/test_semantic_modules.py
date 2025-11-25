@@ -4,22 +4,13 @@ Tests for semantic AI modules.
 Covers embeddings, semantic analysis, and NLP query building.
 """
 
-import pytest
 import math
-from kgcl.hooks.embeddings import (
-    EmbeddingsManager,
-    Embedding
-)
-from kgcl.hooks.semantic_analysis import (
-    SemanticAnalyzer,
-    SemanticEntity,
-    EntityType,
-    RelationType
-)
-from kgcl.hooks.nlp_query_builder import (
-    NLPQueryBuilder,
-    NLPQuery
-)
+
+import pytest
+
+from kgcl.hooks.embeddings import EmbeddingsManager
+from kgcl.hooks.nlp_query_builder import NLPQuery, NLPQueryBuilder
+from kgcl.hooks.semantic_analysis import EntityType, RelationType, SemanticAnalyzer, SemanticEntity
 
 
 class TestEmbeddingsManager:
@@ -27,14 +18,14 @@ class TestEmbeddingsManager:
 
     def test_init(self):
         """Test embeddings manager initialization."""
-        manager = EmbeddingsManager(model='simple-hash', cache_size=100)
-        assert manager.model == 'simple-hash'
+        manager = EmbeddingsManager(model="simple-hash", cache_size=100)
+        assert manager.model == "simple-hash"
         assert manager.cache_size == 100
         assert len(manager.embeddings_cache) == 0
 
     def test_embed_text_hash(self):
         """Test hash-based embedding generation."""
-        manager = EmbeddingsManager(model='simple-hash')
+        manager = EmbeddingsManager(model="simple-hash")
         text = "knowledge graph semantic search"
 
         embedding = manager.embed_text(text)
@@ -54,12 +45,12 @@ class TestEmbeddingsManager:
 
         # First call - cache miss
         embedding1 = manager.embed_text(text)
-        assert manager._stats['cache_misses'] == 1
-        assert manager._stats['cache_hits'] == 0
+        assert manager._stats["cache_misses"] == 1
+        assert manager._stats["cache_hits"] == 0
 
         # Second call - cache hit
         embedding2 = manager.embed_text(text)
-        assert manager._stats['cache_hits'] == 1
+        assert manager._stats["cache_hits"] == 1
         assert embedding1 == embedding2
 
     def test_cosine_similarity(self):
@@ -109,7 +100,7 @@ class TestEmbeddingsManager:
             "semantic search algorithm",
             "knowledge graph query",
             "unrelated topic here",
-            "semantic analysis tools"
+            "semantic analysis tools",
         ]
 
         results = manager.find_similar(query, candidates, top_k=2)
@@ -130,11 +121,7 @@ class TestEmbeddingsManager:
         """Test batch embedding generation."""
         manager = EmbeddingsManager()
 
-        texts = [
-            "first text",
-            "second text",
-            "third text"
-        ]
+        texts = ["first text", "second text", "third text"]
 
         embeddings = manager.batch_embed(texts)
 
@@ -144,12 +131,12 @@ class TestEmbeddingsManager:
 
     def test_tfidf_embedding(self):
         """Test TF-IDF based embeddings."""
-        manager = EmbeddingsManager(model='tfidf')
+        manager = EmbeddingsManager(model="tfidf")
 
         texts = [
             "knowledge graph semantic search",
             "database query optimization",
-            "semantic web ontology"
+            "semantic web ontology",
         ]
 
         # Build vocabulary
@@ -182,10 +169,10 @@ class TestEmbeddingsManager:
 
         stats = manager.get_stats()
 
-        assert stats['cache_hits'] == 1
-        assert stats['cache_misses'] == 2
-        assert stats['embeddings_generated'] == 2
-        assert stats['cache_size'] == 2
+        assert stats["cache_hits"] == 1
+        assert stats["cache_misses"] == 2
+        assert stats["embeddings_generated"] == 2
+        assert stats["cache_size"] == 2
 
     def test_clear_cache(self):
         """Test cache clearing."""
@@ -197,7 +184,7 @@ class TestEmbeddingsManager:
 
         manager.clear_cache()
         assert len(manager.embeddings_cache) == 0
-        assert manager._stats['cache_hits'] == 0
+        assert manager._stats["cache_hits"] == 0
 
 
 class TestSemanticAnalyzer:
@@ -258,7 +245,7 @@ class TestSemanticAnalyzer:
 
         sentiment = analyzer.analyze_sentiment(text)
 
-        assert sentiment['positive'] > sentiment['negative']
+        assert sentiment["positive"] > sentiment["negative"]
 
     def test_analyze_sentiment_negative(self):
         """Test negative sentiment analysis."""
@@ -268,7 +255,7 @@ class TestSemanticAnalyzer:
 
         sentiment = analyzer.analyze_sentiment(text)
 
-        assert sentiment['negative'] > sentiment['positive']
+        assert sentiment["negative"] > sentiment["positive"]
 
     def test_analyze_sentiment_neutral(self):
         """Test neutral sentiment analysis."""
@@ -279,7 +266,7 @@ class TestSemanticAnalyzer:
         sentiment = analyzer.analyze_sentiment(text)
 
         # Should have some neutral score
-        assert 'neutral' in sentiment
+        assert "neutral" in sentiment
 
     def test_extract_keywords(self):
         """Test keyword extraction."""
@@ -304,14 +291,14 @@ class TestSemanticAnalyzer:
         text = "This function implements the API method for database queries."
         categories = analyzer.classify_text(text)
 
-        assert 'technical' in categories
-        assert categories['technical'] > 0
+        assert "technical" in categories
+        assert categories["technical"] > 0
 
         # Ontology text
         text2 = "The ontology defines classes and properties with relations."
         categories2 = analyzer.classify_text(text2)
 
-        assert categories2['ontology'] > 0
+        assert categories2["ontology"] > 0
 
     def test_entity_to_dict(self):
         """Test entity serialization."""
@@ -320,14 +307,14 @@ class TestSemanticAnalyzer:
             entity_type=EntityType.CONCEPT,
             confidence=0.9,
             start_pos=0,
-            end_pos=10
+            end_pos=10,
         )
 
         entity_dict = entity.to_dict()
 
-        assert entity_dict['text'] == "TestEntity"
-        assert entity_dict['type'] == 'concept'
-        assert entity_dict['confidence'] == 0.9
+        assert entity_dict["text"] == "TestEntity"
+        assert entity_dict["type"] == "concept"
+        assert entity_dict["confidence"] == 0.9
 
 
 class TestNLPQueryBuilder:
@@ -350,7 +337,7 @@ class TestNLPQueryBuilder:
 
         assert isinstance(result, NLPQuery)
         assert result.original_text == question.lower()
-        assert 'SELECT' in result.sparql_query
+        assert "SELECT" in result.sparql_query
         assert result.confidence > 0
 
     def test_parse_find_all_question(self):
@@ -361,8 +348,8 @@ class TestNLPQueryBuilder:
 
         result = builder.parse_question(question)
 
-        assert 'SELECT' in result.sparql_query
-        assert 'classes' in result.original_text
+        assert "SELECT" in result.sparql_query
+        assert "classes" in result.original_text
 
     def test_parse_count_question(self):
         """Test 'count' question parsing."""
@@ -372,8 +359,8 @@ class TestNLPQueryBuilder:
 
         result = builder.parse_question(question)
 
-        assert 'COUNT' in result.sparql_query.upper()
-        assert result.query_type == 'SELECT'
+        assert "COUNT" in result.sparql_query.upper()
+        assert result.query_type == "SELECT"
 
     def test_parse_show_properties(self):
         """Test 'show properties' question."""
@@ -383,7 +370,7 @@ class TestNLPQueryBuilder:
 
         result = builder.parse_question(question)
 
-        assert 'property' in result.sparql_query.lower()
+        assert "property" in result.sparql_query.lower()
         assert result.confidence > 0.8  # High confidence pattern
 
     def test_build_sparql_from_entities(self):
@@ -396,7 +383,7 @@ class TestNLPQueryBuilder:
         sparql = builder.build_sparql(entities, relations)
 
         assert isinstance(sparql, str)
-        assert 'SELECT' in sparql
+        assert "SELECT" in sparql
 
     def test_query_to_dict(self):
         """Test NLP query serialization."""
@@ -407,14 +394,14 @@ class TestNLPQueryBuilder:
             entities=["Entity1"],
             relations=["relation1"],
             query_type="SELECT",
-            variables=["?s", "?p", "?o"]
+            variables=["?s", "?p", "?o"],
         )
 
         query_dict = query.to_dict()
 
-        assert query_dict['original'] == "test question"
-        assert query_dict['confidence'] == 0.8
-        assert len(query_dict['variables']) == 3
+        assert query_dict["original"] == "test question"
+        assert query_dict["confidence"] == 0.8
+        assert len(query_dict["variables"]) == 3
 
     def test_add_custom_template(self):
         """Test adding custom query template."""
@@ -426,11 +413,11 @@ class TestNLPQueryBuilder:
             name="custom_pattern",
             patterns=[r"custom\s+query\s+(\w+)"],
             sparql_template="SELECT ?x WHERE { ?x :prop {entity} }",
-            confidence=0.7
+            confidence=0.7,
         )
 
         assert len(builder.templates) == initial_count + 1
-        assert 'custom_pattern' in builder.templates
+        assert "custom_pattern" in builder.templates
 
     def test_get_suggestions(self):
         """Test query suggestions."""
@@ -522,7 +509,7 @@ class TestIntegration:
 
         # Classify text
         categories = analyzer.classify_text(text)
-        assert categories['ontology'] > 0
+        assert categories["ontology"] > 0
 
         # Sentiment
         sentiment = analyzer.analyze_sentiment(text)

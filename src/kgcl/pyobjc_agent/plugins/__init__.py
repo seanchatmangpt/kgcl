@@ -7,14 +7,15 @@ This package provides:
 - Built-in plugins for common macOS features
 """
 
-from typing import Dict, List, Optional, Type
 import logging
+from typing import Dict, List, Optional, Type
+
 from .base import (
     BaseCapabilityPlugin,
-    CapabilityDescriptor,
     CapabilityData,
+    CapabilityDescriptor,
+    EntitlementLevel,
     PluginStatus,
-    EntitlementLevel
 )
 
 logger = logging.getLogger(__name__)
@@ -32,14 +33,12 @@ class PluginRegistry:
     """
 
     def __init__(self):
-        self._plugins: Dict[str, Type[BaseCapabilityPlugin]] = {}
-        self._instances: Dict[str, BaseCapabilityPlugin] = {}
+        self._plugins: dict[str, type[BaseCapabilityPlugin]] = {}
+        self._instances: dict[str, BaseCapabilityPlugin] = {}
         logger.debug("Initialized plugin registry")
 
     def register(
-        self,
-        plugin_class: Type[BaseCapabilityPlugin],
-        plugin_id: Optional[str] = None
+        self, plugin_class: type[BaseCapabilityPlugin], plugin_id: str | None = None
     ) -> None:
         """
         Register a plugin class.
@@ -48,7 +47,8 @@ class PluginRegistry:
             plugin_class: Plugin class to register
             plugin_id: Optional custom plugin ID
 
-        Raises:
+        Raises
+        ------
             ValueError: If plugin_id already registered
         """
         if plugin_id is None:
@@ -77,11 +77,8 @@ class PluginRegistry:
             logger.info(f"Unregistered plugin: {plugin_id}")
 
     def get_plugin(
-        self,
-        plugin_id: str,
-        config: Optional[Dict] = None,
-        auto_initialize: bool = True
-    ) -> Optional[BaseCapabilityPlugin]:
+        self, plugin_id: str, config: dict | None = None, auto_initialize: bool = True
+    ) -> BaseCapabilityPlugin | None:
         """
         Get or create a plugin instance.
 
@@ -90,7 +87,8 @@ class PluginRegistry:
             config: Optional plugin configuration
             auto_initialize: Whether to initialize plugin automatically
 
-        Returns:
+        Returns
+        -------
             Plugin instance or None if not found
         """
         # Return existing instance
@@ -113,29 +111,32 @@ class PluginRegistry:
         self._instances[plugin_id] = instance
         return instance
 
-    def list_plugins(self) -> List[str]:
+    def list_plugins(self) -> list[str]:
         """
         List all registered plugin IDs.
 
-        Returns:
+        Returns
+        -------
             List of plugin IDs
         """
         return list(self._plugins.keys())
 
-    def list_initialized_plugins(self) -> List[str]:
+    def list_initialized_plugins(self) -> list[str]:
         """
         List all initialized plugin instances.
 
-        Returns:
+        Returns
+        -------
             List of plugin IDs that are initialized
         """
         return list(self._instances.keys())
 
-    def get_all_capabilities(self) -> Dict[str, List[CapabilityDescriptor]]:
+    def get_all_capabilities(self) -> dict[str, list[CapabilityDescriptor]]:
         """
         Get capabilities from all initialized plugins.
 
-        Returns:
+        Returns
+        -------
             Dictionary mapping plugin IDs to their capabilities
         """
         capabilities = {}
@@ -149,17 +150,15 @@ class PluginRegistry:
 
         return capabilities
 
-    def collect_all_data(
-        self,
-        parameters: Optional[Dict] = None
-    ) -> Dict[str, List[CapabilityData]]:
+    def collect_all_data(self, parameters: dict | None = None) -> dict[str, list[CapabilityData]]:
         """
         Collect data from all initialized plugins.
 
         Args:
             parameters: Optional collection parameters
 
-        Returns:
+        Returns
+        -------
             Dictionary mapping plugin IDs to their collected data
         """
         results = {}
@@ -194,10 +193,7 @@ def get_registry() -> PluginRegistry:
     return _global_registry
 
 
-def register_plugin(
-    plugin_class: Type[BaseCapabilityPlugin],
-    plugin_id: Optional[str] = None
-) -> None:
+def register_plugin(plugin_class: type[BaseCapabilityPlugin], plugin_id: str | None = None) -> None:
     """
     Register a plugin with the global registry.
 
@@ -212,18 +208,21 @@ def load_builtin_plugins() -> None:
     """Load all built-in plugins."""
     try:
         from .appkit_plugin import AppKitPlugin
+
         register_plugin(AppKitPlugin, "appkit")
     except ImportError as e:
         logger.warning(f"Failed to load AppKit plugin: {e}")
 
     try:
         from .browser_plugin import BrowserPlugin
+
         register_plugin(BrowserPlugin, "browser")
     except ImportError as e:
         logger.warning(f"Failed to load Browser plugin: {e}")
 
     try:
         from .calendar_plugin import CalendarPlugin
+
         register_plugin(CalendarPlugin, "calendar")
     except ImportError as e:
         logger.warning(f"Failed to load Calendar plugin: {e}")
@@ -233,12 +232,12 @@ def load_builtin_plugins() -> None:
 
 __all__ = [
     "BaseCapabilityPlugin",
-    "CapabilityDescriptor",
     "CapabilityData",
-    "PluginStatus",
+    "CapabilityDescriptor",
     "EntitlementLevel",
     "PluginRegistry",
+    "PluginStatus",
     "get_registry",
+    "load_builtin_plugins",
     "register_plugin",
-    "load_builtin_plugins"
 ]

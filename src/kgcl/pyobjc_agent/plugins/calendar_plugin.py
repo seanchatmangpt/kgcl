@@ -8,16 +8,11 @@ This plugin provides capabilities for:
 - Meeting/appointment detection
 """
 
-from typing import Dict, List, Optional, Any
-from datetime import datetime, timedelta
 import logging
+from datetime import datetime, timedelta
+from typing import Any
 
-from .base import (
-    BaseCapabilityPlugin,
-    CapabilityDescriptor,
-    CapabilityData,
-    EntitlementLevel
-)
+from .base import BaseCapabilityPlugin, CapabilityData, CapabilityDescriptor, EntitlementLevel
 
 logger = logging.getLogger(__name__)
 
@@ -42,10 +37,10 @@ class CalendarPlugin(BaseCapabilityPlugin):
         return "1.0.0"
 
     @property
-    def required_frameworks(self) -> List[str]:
+    def required_frameworks(self) -> list[str]:
         return ["EventKit", "Foundation"]
 
-    def discover_capabilities(self) -> List[CapabilityDescriptor]:
+    def discover_capabilities(self) -> list[CapabilityDescriptor]:
         """Discover calendar-related capabilities."""
         capabilities = [
             CapabilityDescriptor(
@@ -68,12 +63,12 @@ class CalendarPlugin(BaseCapabilityPlugin):
                                     "end_date": {"type": "string", "format": "date-time"},
                                     "location": {"type": "string"},
                                     "is_all_day": {"type": "boolean"},
-                                    "calendar_name": {"type": "string"}
-                                }
-                            }
+                                    "calendar_name": {"type": "string"},
+                                },
+                            },
                         }
-                    }
-                }
+                    },
+                },
             ),
             CapabilityDescriptor(
                 name="upcoming_events",
@@ -87,9 +82,9 @@ class CalendarPlugin(BaseCapabilityPlugin):
                     "properties": {
                         "count": {"type": "integer"},
                         "next_event": {"type": "object"},
-                        "events_today": {"type": "integer"}
-                    }
-                }
+                        "events_today": {"type": "integer"},
+                    },
+                },
             ),
             CapabilityDescriptor(
                 name="calendar_list",
@@ -109,12 +104,12 @@ class CalendarPlugin(BaseCapabilityPlugin):
                                     "title": {"type": "string"},
                                     "type": {"type": "string"},
                                     "color": {"type": "string"},
-                                    "is_subscribed": {"type": "boolean"}
-                                }
-                            }
+                                    "is_subscribed": {"type": "boolean"},
+                                },
+                            },
                         }
-                    }
-                }
+                    },
+                },
             ),
             CapabilityDescriptor(
                 name="availability_status",
@@ -128,19 +123,17 @@ class CalendarPlugin(BaseCapabilityPlugin):
                     "properties": {
                         "is_busy": {"type": "boolean"},
                         "current_event": {"type": "object"},
-                        "next_free_slot": {"type": "string", "format": "date-time"}
-                    }
-                }
-            )
+                        "next_free_slot": {"type": "string", "format": "date-time"},
+                    },
+                },
+            ),
         ]
 
         return capabilities
 
-    def check_entitlements(self) -> Dict[str, bool]:
+    def check_entitlements(self) -> dict[str, bool]:
         """Check for calendar access entitlements."""
-        entitlements = {
-            "calendar_access": self._check_calendar_access()
-        }
+        entitlements = {"calendar_access": self._check_calendar_access()}
 
         return entitlements
 
@@ -148,7 +141,8 @@ class CalendarPlugin(BaseCapabilityPlugin):
         """
         Check if calendar access is granted.
 
-        Returns:
+        Returns
+        -------
             True if calendar access is available
         """
         try:
@@ -176,9 +170,7 @@ class CalendarPlugin(BaseCapabilityPlugin):
             return False
 
     def collect_capability_data(
-        self,
-        capability_name: str,
-        parameters: Optional[Dict[str, Any]] = None
+        self, capability_name: str, parameters: dict[str, Any] | None = None
     ) -> CapabilityData:
         """Collect calendar data."""
         timestamp = datetime.utcnow()
@@ -200,39 +192,38 @@ class CalendarPlugin(BaseCapabilityPlugin):
                 capability_name=capability_name,
                 timestamp=timestamp,
                 data=data,
-                metadata={"plugin": self.plugin_id}
+                metadata={"plugin": self.plugin_id},
             )
 
         except Exception as e:
             logger.error(f"Error collecting {capability_name}: {e}")
             return CapabilityData(
-                capability_name=capability_name,
-                timestamp=timestamp,
-                data={},
-                error=str(e)
+                capability_name=capability_name, timestamp=timestamp, data={}, error=str(e)
             )
 
     def _get_event_store(self):
         """Get or create EventKit event store."""
         try:
             from EventKit import EKEventStore
+
             return EKEventStore.alloc().init()
         except Exception as e:
             logger.error(f"Failed to create event store: {e}")
             raise
 
-    def _get_calendar_events(self, params: Dict[str, Any]) -> Dict[str, Any]:
+    def _get_calendar_events(self, params: dict[str, Any]) -> dict[str, Any]:
         """
         Query calendar events within a time range.
 
         Args:
             params: Query parameters (start_date, end_date, days_ahead, etc.)
 
-        Returns:
+        Returns
+        -------
             Dictionary with calendar events
         """
         try:
-            from Foundation import NSDate, NSCalendar
+            from Foundation import NSDate
 
             store = self._get_event_store()
 
@@ -259,10 +250,7 @@ class CalendarPlugin(BaseCapabilityPlugin):
             calendars = store.calendarsForEntityType_(0)  # EKEntityTypeEvent
 
             if not calendars:
-                return {
-                    "error": "No calendars available or access denied",
-                    "events": []
-                }
+                return {"error": "No calendars available or access denied", "events": []}
 
             # Create predicate for date range
             predicate = store.predicateForEventsWithStartDate_endDate_calendars_(
@@ -286,7 +274,7 @@ class CalendarPlugin(BaseCapabilityPlugin):
                     "location": str(event.location()) if event.location() else "",
                     "calendar_name": str(event.calendar().title()) if event.calendar() else "",
                     "has_attendees": bool(event.attendees() and len(event.attendees()) > 0),
-                    "status": event.status()  # 0=None, 1=Confirmed, 2=Tentative, 3=Cancelled
+                    "status": event.status(),  # 0=None, 1=Confirmed, 2=Tentative, 3=Cancelled
                 }
 
                 event_list.append(event_data)
@@ -296,22 +284,23 @@ class CalendarPlugin(BaseCapabilityPlugin):
                 "events": event_list,
                 "query_params": {
                     "start_date": start_date.isoformat(),
-                    "end_date": end_date.isoformat()
-                }
+                    "end_date": end_date.isoformat(),
+                },
             }
 
         except Exception as e:
             logger.error(f"Error fetching calendar events: {e}")
             raise
 
-    def _get_upcoming_events(self, params: Dict[str, Any]) -> Dict[str, Any]:
+    def _get_upcoming_events(self, params: dict[str, Any]) -> dict[str, Any]:
         """
         Get upcoming calendar events.
 
         Args:
             params: Query parameters
 
-        Returns:
+        Returns
+        -------
             Dictionary with upcoming events summary
         """
         # Get events for next 24 hours
@@ -321,10 +310,7 @@ class CalendarPlugin(BaseCapabilityPlugin):
 
         # Find next event
         now = datetime.utcnow()
-        future_events = [
-            e for e in events
-            if datetime.fromisoformat(e["start_date"]) > now
-        ]
+        future_events = [e for e in events if datetime.fromisoformat(e["start_date"]) > now]
 
         # Sort by start time
         future_events.sort(key=lambda e: e["start_date"])
@@ -335,23 +321,27 @@ class CalendarPlugin(BaseCapabilityPlugin):
         today_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
         today_end = today_start + timedelta(days=1)
 
-        events_today = len([
-            e for e in events
-            if today_start <= datetime.fromisoformat(e["start_date"]) < today_end
-        ])
+        events_today = len(
+            [
+                e
+                for e in events
+                if today_start <= datetime.fromisoformat(e["start_date"]) < today_end
+            ]
+        )
 
         return {
             "count": len(future_events),
             "next_event": next_event,
             "events_today": events_today,
-            "upcoming_24h": len(future_events)
+            "upcoming_24h": len(future_events),
         }
 
-    def _get_calendar_list(self) -> Dict[str, Any]:
+    def _get_calendar_list(self) -> dict[str, Any]:
         """
         Get list of available calendars.
 
-        Returns:
+        Returns
+        -------
             Dictionary with calendar metadata
         """
         try:
@@ -368,39 +358,34 @@ class CalendarPlugin(BaseCapabilityPlugin):
                 }
 
                 # Get color if available
-                if hasattr(calendar, 'color') and calendar.color():
+                if hasattr(calendar, "color") and calendar.color():
                     color = calendar.color()
                     # Convert CGColor to hex (simplified)
                     calendar_data["color"] = "N/A"  # Would need more complex conversion
 
                 calendar_list.append(calendar_data)
 
-            return {
-                "count": len(calendar_list),
-                "calendars": calendar_list
-            }
+            return {"count": len(calendar_list), "calendars": calendar_list}
 
         except Exception as e:
             logger.error(f"Error fetching calendar list: {e}")
             raise
 
-    def _get_availability_status(self, params: Dict[str, Any]) -> Dict[str, Any]:
+    def _get_availability_status(self, params: dict[str, Any]) -> dict[str, Any]:
         """
         Check current availability status.
 
         Args:
             params: Query parameters
 
-        Returns:
+        Returns
+        -------
             Dictionary with availability information
         """
         now = datetime.utcnow()
 
         # Get events for current time window
-        events_data = self._get_calendar_events({
-            "start_date": now.isoformat(),
-            "days_ahead": 1
-        })
+        events_data = self._get_calendar_events({"start_date": now.isoformat(), "days_ahead": 1})
 
         events = events_data.get("events", [])
 
@@ -426,5 +411,5 @@ class CalendarPlugin(BaseCapabilityPlugin):
             "is_busy": current_event is not None,
             "current_event": current_event,
             "next_free_slot": next_free_slot,
-            "checked_at": now.isoformat()
+            "checked_at": now.isoformat(),
         }

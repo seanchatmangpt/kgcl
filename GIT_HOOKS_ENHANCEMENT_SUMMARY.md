@@ -44,7 +44,14 @@ New Checks:
 ✓ Check 11: Ruff linting enforcement
 ```
 
-### 2. `docs/GIT_HOOKS_QUALITY_GATES.md` (NEW)
+### 2. `scripts/git_hooks/pre_commit.sh` (NEW)
+```
+Purpose: Single source of truth for pre-commit logic
+Benefit: Allows any wrapper hook to call the same quality gates
+Usage: .githooks/pre-commit and vendors/unrdf/scripts/hooks/pre-commit both exec this file
+```
+
+### 3. `docs/GIT_HOOKS_QUALITY_GATES.md` (NEW)
 ```
 Size:        416 lines
 Content:     Complete guide to all 11 pre-commit checks

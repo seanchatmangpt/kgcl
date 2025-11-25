@@ -1,6 +1,6 @@
 """Basic usage examples for KGCL Ingestion System."""
 
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 from kgcl.ingestion import AppEvent, BrowserVisit, CalendarBlock, IngestionService
 
@@ -17,7 +17,7 @@ def example_1_simple_ingestion():
     # Create and ingest an app event
     event = AppEvent(
         event_id="evt_001",
-        timestamp=datetime.now(timezone.utc),
+        timestamp=datetime.now(UTC),
         app_name="com.apple.Safari",
         app_display_name="Safari",
         duration_seconds=120.5,
@@ -43,7 +43,7 @@ def example_2_batch_ingestion():
     service.start()
 
     # Create multiple events
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     events = []
 
     # App events
@@ -88,7 +88,7 @@ def example_3_calendar_events():
     service.start()
 
     # Create calendar events
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     events = [
         CalendarBlock(
             event_id="cal_001",
@@ -138,11 +138,7 @@ def example_4_with_hooks():
     service.start()
 
     # Ingest events
-    event = AppEvent(
-        event_id="evt_001",
-        timestamp=datetime.now(timezone.utc),
-        app_name="com.apple.Safari",
-    )
+    event = AppEvent(event_id="evt_001", timestamp=datetime.now(UTC), app_name="com.apple.Safari")
 
     service.ingest_event(event)
 
@@ -160,7 +156,7 @@ def example_5_statistics():
     service.start()
 
     # Ingest some events
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     events = [
         AppEvent(
             event_id=f"evt_{i:03d}",
@@ -199,11 +195,7 @@ def example_6_feature_materialization():
     # Configure features
     config = IngestionConfig(
         feature=FeatureConfig(
-            enabled_features=[
-                "app_usage_time",
-                "browser_domain_visits",
-                "context_switches",
-            ]
+            enabled_features=["app_usage_time", "browser_domain_visits", "context_switches"]
         )
     )
 
@@ -211,7 +203,7 @@ def example_6_feature_materialization():
     service.start()
 
     # Create diverse events
-    now = datetime.now(timezone.utc).replace(tzinfo=None)
+    now = datetime.now(UTC).replace(tzinfo=None)
     window_start = now.replace(minute=0, second=0, microsecond=0)
     window_end = window_start + timedelta(hours=1)
 
@@ -260,10 +252,7 @@ def example_7_rdf_conversion():
 
     # Configure RDF
     config = IngestionConfig(
-        rdf=RDFConfig(
-            base_namespace="http://myapp.example.org/",
-            normalize_timestamps=True,
-        )
+        rdf=RDFConfig(base_namespace="http://myapp.example.org/", normalize_timestamps=True)
     )
 
     service = IngestionService(config)
@@ -271,7 +260,7 @@ def example_7_rdf_conversion():
     # Create event
     event = AppEvent(
         event_id="evt_001",
-        timestamp=datetime.now(timezone.utc),
+        timestamp=datetime.now(UTC),
         app_name="com.apple.Safari",
         app_display_name="Safari",
         duration_seconds=120.5,

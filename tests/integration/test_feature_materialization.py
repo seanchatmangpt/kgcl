@@ -22,32 +22,36 @@ def create_event_batch() -> list:
         Mixed event types
     """
     base = datetime(2024, 11, 24, 10, 0, 0)
-    return [
-        AppEvent(
-            event_id=f"app_{i:03d}",
-            timestamp=base + timedelta(minutes=i * 10),
-            app_name="com.microsoft.VSCode" if i % 2 == 0 else "com.apple.Safari",
-            duration_seconds=600.0,  # 10 min each
-        )
-        for i in range(12)  # 2 hours of events
-    ] + [
-        BrowserVisit(
-            event_id=f"browser_{i:03d}",
-            timestamp=base + timedelta(minutes=i * 15),
-            url=f"https://github.com/user/repo{i}",
-            domain="github.com",
-            browser_name="Safari",
-        )
-        for i in range(8)  # 2 hours of visits
-    ] + [
-        CalendarBlock(
-            event_id=f"cal_{i:03d}",
-            timestamp=base + timedelta(hours=i),
-            end_time=base + timedelta(hours=i + 1),
-            title=f"Meeting {i}",
-        )
-        for i in range(2)
-    ]
+    return (
+        [
+            AppEvent(
+                event_id=f"app_{i:03d}",
+                timestamp=base + timedelta(minutes=i * 10),
+                app_name="com.microsoft.VSCode" if i % 2 == 0 else "com.apple.Safari",
+                duration_seconds=600.0,  # 10 min each
+            )
+            for i in range(12)  # 2 hours of events
+        ]
+        + [
+            BrowserVisit(
+                event_id=f"browser_{i:03d}",
+                timestamp=base + timedelta(minutes=i * 15),
+                url=f"https://github.com/user/repo{i}",
+                domain="github.com",
+                browser_name="Safari",
+            )
+            for i in range(8)  # 2 hours of visits
+        ]
+        + [
+            CalendarBlock(
+                event_id=f"cal_{i:03d}",
+                timestamp=base + timedelta(hours=i),
+                end_time=base + timedelta(hours=i + 1),
+                title=f"Meeting {i}",
+            )
+            for i in range(2)
+        ]
+    )
 
 
 class TestFeatureMaterialization:
@@ -87,9 +91,7 @@ class TestFeatureMaterialization:
         features = materializer.materialize(events, window_start, window_end)
 
         # Should have feature for github.com
-        github_feature = next(
-            (f for f in features if "github.com" in f.feature_id), None
-        )
+        github_feature = next((f for f in features if "github.com" in f.feature_id), None)
         assert github_feature is not None
         assert github_feature.value == 8  # 8 visits
         assert github_feature.aggregation_type == "count"
@@ -106,16 +108,13 @@ class TestFeatureMaterialization:
         features = materializer.materialize(events, window_start, window_end)
 
         # Should have meeting_count feature
-        meeting_count = next(
-            (f for f in features if f.feature_id == "meeting_count"), None
-        )
+        meeting_count = next((f for f in features if f.feature_id == "meeting_count"), None)
         assert meeting_count is not None
         assert meeting_count.value == 2  # 2 meetings
 
         # Should also have total duration
         duration_feature = next(
-            (f for f in features if f.feature_id == "meeting_total_duration"),
-            None,
+            (f for f in features if f.feature_id == "meeting_total_duration"), None
         )
         assert duration_feature is not None
         assert duration_feature.value == pytest.approx(7200.0, rel=0.01)  # 2 hours
@@ -132,9 +131,7 @@ class TestFeatureMaterialization:
         features = materializer.materialize(events, window_start, window_end)
 
         # Should have context_switches feature
-        switches = next(
-            (f for f in features if f.feature_id == "context_switches"), None
-        )
+        switches = next((f for f in features if f.feature_id == "context_switches"), None)
         assert switches is not None
         # 12 app events alternating between 2 apps = 11 switches
         assert switches.value == 11
@@ -174,9 +171,7 @@ class TestFeatureMaterialization:
 
     def test_incremental_updates(self):
         """Test incremental feature materialization."""
-        config = FeatureConfig(
-            enabled_features=["app_usage_time"], incremental_updates=True
-        )
+        config = FeatureConfig(enabled_features=["app_usage_time"], incremental_updates=True)
         materializer = FeatureMaterializer(config)
 
         # Initial batch
@@ -184,15 +179,11 @@ class TestFeatureMaterialization:
         window_start = datetime(2024, 11, 24, 10, 0, 0)
         window_end = window_start + timedelta(hours=2)
 
-        initial_features = materializer.materialize(
-            initial_events, window_start, window_end
-        )
+        initial_features = materializer.materialize(initial_events, window_start, window_end)
 
         # New events arrive
         new_events = create_event_batch()[6:9]  # Next 3 events
-        updated_features = materializer.materialize_incremental(
-            new_events, initial_features
-        )
+        updated_features = materializer.materialize_incremental(new_events, initial_features)
 
         # Should have updated features
         assert len(updated_features) >= len(initial_features)

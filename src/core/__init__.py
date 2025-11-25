@@ -7,38 +7,38 @@ Provides assertion utilities, test fixtures, and decorators following Chicago TD
 - Zero-cost abstractions where possible
 """
 
+from .assertions import AssertionError as ChicagoAssertionError
 from .assertions import (
-    assert_success,
-    assert_error,
     assert_eq_with_msg,
+    assert_error,
     assert_in_range,
+    assert_success,
     assert_that,
-    AssertionError as ChicagoAssertionError,
 )
-from .decorators import test, async_test, fixture_test
-from .fixture import TestFixture, FixtureMetadata, FixtureError, FixtureResult
 from .builders import Builder
-from .state import StateManager
+from .decorators import async_test, fixture_test, test
 from .fail_fast import FailFastValidator
+from .fixture import FixtureError, FixtureMetadata, FixtureResult, TestFixture
 from .poka_yoke import Poka, PokaYokeError
+from .state import StateManager
 
 __all__ = [
-    "assert_success",
-    "assert_error",
-    "assert_eq_with_msg",
-    "assert_in_range",
-    "assert_that",
-    "test",
-    "async_test",
-    "fixture_test",
-    "TestFixture",
-    "FixtureMetadata",
-    "FixtureError",
-    "FixtureResult",
     "Builder",
-    "StateManager",
+    "ChicagoAssertionError",
     "FailFastValidator",
+    "FixtureError",
+    "FixtureMetadata",
+    "FixtureResult",
     "Poka",
     "PokaYokeError",
-    "ChicagoAssertionError",
+    "StateManager",
+    "TestFixture",
+    "assert_eq_with_msg",
+    "assert_error",
+    "assert_in_range",
+    "assert_success",
+    "assert_that",
+    "async_test",
+    "fixture_test",
+    "test",
 ]

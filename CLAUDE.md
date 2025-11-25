@@ -76,13 +76,17 @@ This project uses SPARC (Specification, Pseudocode, Architecture, Refinement, Co
 4. **Refinement** - TDD implementation (`sparc tdd`)
 5. **Completion** - Integration (`sparc run integration`)
 
-## Code Style & Best Practices
+## Code Style & Best Practices - Lean Six Sigma Standards
 
-- **Modular Design**: Files under 500 lines
-- **Environment Safety**: Never hardcode secrets
-- **Test-First**: Write tests before implementation
-- **Clean Architecture**: Separate concerns
-- **Documentation**: Keep updated
+**ZERO TOLERANCE QUALITY REQUIREMENTS:**
+- **Modular Design**: Files under 500 lines - STRICTLY ENFORCED
+- **Environment Safety**: NEVER hardcode secrets - Bandit scanning mandatory
+- **Test-First**: MANDATORY Chicago School TDD - tests drive all behavior
+- **Type Coverage**: 100% type hints on ALL functions - NO EXCEPTIONS
+- **Test Coverage**: 80%+ minimum coverage - NON-NEGOTIABLE
+- **Clean Architecture**: Separate concerns - NO MIXING ALLOWED
+- **Documentation**: ALWAYS keep updated with docstrings on ALL public APIs
+- **Code Quality**: ALL 400+ Ruff rules enforced - NO SUPPRESSION except with justification
 
 ## 🚀 Available Agents (54 Total)
 

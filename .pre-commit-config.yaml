@@ -1,24 +1,37 @@
 # https://pre-commit.com
+# CORE TEAM BEST PRACTICES - Maximum Strictness Configuration
 default_install_hook_types: [commit-msg, pre-commit]
 default_stages: [pre-commit, manual]
-fail_fast: true
+fail_fast: false
+minimum_pre_commit_version: '3.0.0'
+
 repos:
+  # Meta validation - hook configuration
   - repo: meta
     hooks:
       - id: check-useless-excludes
+
+  # Python security & code quality analysis (pygrep)
   - repo: https://github.com/pre-commit/pygrep-hooks
     rev: v1.10.0
     hooks:
       - id: python-check-mock-methods
+      - id: python-check-blanket-type-ignore
+        exclude: '(test_|vendors/)'
+      - id: python-check-blanket-noqa
+        exclude: '(test_|vendors/)'
       - id: python-use-type-annotations
       - id: rst-backticks
       - id: rst-directive-colons
       - id: rst-inline-touching-normal
       - id: text-unicode-replacement-char
+
+  # Core file & security checks
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
       - id: check-added-large-files
+        args: ['--maxkb=500']
       - id: check-ast
       - id: check-builtin-literals
       - id: check-case-conflict
@@ -32,6 +45,7 @@ repos:
       - id: check-vcs-permalinks
       - id: check-xml
       - id: check-yaml
+        args: ['--unsafe']
       - id: debug-statements
       - id: destroyed-symlinks
       - id: detect-private-key
@@ -39,35 +53,85 @@ repos:
         types: [python]
       - id: fix-byte-order-marker
       - id: mixed-line-ending
+        args: ['--fix=lf']
       - id: name-tests-test
         args: [--pytest-test-first]
+        exclude: (fixtures|conftest)\.py$
       - id: trailing-whitespace
         types: [python]
+
+  # Bandit - Security vulnerability scanner
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.5
+    hooks:
+      - id: bandit
+        args: ['-c', '.bandit', '--severity-level=medium']
+        exclude: ^(tests/|vendors/)
+
+  # Local hooks - Project-specific strict rules
   - repo: local
     hooks:
+      # Commit message validation with Commitizen
       - id: commitizen
-        name: commitizen
+        name: commitizen check
         entry: cz check
         args: [--commit-msg-file]
         require_serial: true
         language: system
         stages: [commit-msg]
+        description: Validate commit message format
+
+      # Code quality - Ruff linting with ALL rules
       - id: ruff-check
-        name: ruff check
+        name: ruff check (linting)
         entry: ruff check
-        args: ["--force-exclude", "--extend-fixable=ERA001,F401,F841,T201,T203", "--fix-only"]
+        args: ["--force-exclude", "--extend-fixable=ERA001,F401,F841"]
         require_serial: true
         language: system
         types_or: [python, pyi]
+        description: Check code quality with Ruff (400+ rules)
+
+      # Code formatting - Ruff formatter
       - id: ruff-format
-        name: ruff format
+        name: ruff format (formatting)
         entry: ruff format
         args: [--force-exclude]
         require_serial: true
         language: system
         types_or: [python, pyi]
+        description: Format code with Ruff (100-char line length)
+
+      # Type checking - Mypy strict mode
       - id: mypy
-        name: mypy
+        name: mypy (type checking)
         entry: mypy
+        require_serial: true
         language: system
         types: [python]
+        description: Type check with Mypy (strict mode enabled)
+
+      # Test coverage requirements
+      - id: pytest-coverage
+        name: pytest coverage check
+        entry: bash -c 'uv run pytest --cov=src --cov-fail-under=80 --cov-report=term-missing'
+        require_serial: true
+        language: system
+        stages: [manual]
+        pass_filenames: false
+        description: Ensure minimum 80% test coverage
+
+      # No hardcoded secrets or credentials
+      - id: check-secrets
+        name: check for secrets
+        entry: bash -c 'grep -r -E "password|token|api[_-]?key|secret" src/ tests/ --include="*.py" 2>/dev/null && exit 1 || exit 0'
+        language: system
+        types: [python]
+        description: Detect hardcoded secrets or credentials
+
+      # Import validation - absolute imports only
+      - id: check-absolute-imports
+        name: check absolute imports
+        entry: bash -c 'grep -r "^from \." src/ --include="*.py" 2>/dev/null && exit 1 || exit 0'
+        language: system
+        types: [python]
+        description: Enforce absolute imports only

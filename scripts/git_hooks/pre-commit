@@ -1,0 +1,114 @@
+#!/usr/bin/env bash
+
+# KGCL Pre-Commit Hook - FAST Checks Only
+# ----------------------------------------
+# Lightweight checks for quick commits (backup-friendly).
+# Heavy testing (full test suite, strict type checking) is in pre-push.
+#
+# This hook runs:
+#   1. Format check (no auto-fix)
+#   2. Basic lint check (staged files only)
+#   3. Hardcoded secrets scan
+#   4. Implementation lies detection (TODO/FIXME/WIP)
+#
+# Total time target: < 10 seconds
+
+set -euo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+cd "$REPO_ROOT"
+
+if ! command -v uv >/dev/null 2>&1; then
+  echo "ERROR: 'uv' is required. Install: https://github.com/astral-sh/uv"
+  exit 1
+fi
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+NC='\033[0m'
+
+FAILED=0
+
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "KGCL Pre-Commit (Fast Checks)"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+# Get staged Python files
+STAGED_PY_FILES="$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.py$' || true)"
+
+if [ -z "$STAGED_PY_FILES" ]; then
+  echo -e "${BLUE}⊘ No Python files staged. Skipping checks.${NC}"
+  exit 0
+fi
+
+FILE_COUNT=$(echo "$STAGED_PY_FILES" | wc -l | tr -d ' ')
+echo "Staged: $FILE_COUNT Python files"
+echo ""
+
+# ============================================================================
+# CHECK 1: Hardcoded Secrets (Critical)
+# ============================================================================
+echo -n "1. Secrets scan... "
+SECRET_PATTERN='(password|secret|api_key|token|credential|private_key|access_key).*=.*["\047][^"\047]{8,}'
+if git diff --cached --unified=0 | grep -E "$SECRET_PATTERN" -i | grep -v '.md\|test_\|# pragma: allowlist secret' >/dev/null 2>&1; then
+  echo -e "${RED}✗ FAILED${NC}"
+  echo "   Potential hardcoded secrets found. Use environment variables."
+  FAILED=1
+else
+  echo -e "${GREEN}✓${NC}"
+fi
+
+# ============================================================================
+# CHECK 2: Implementation Lies (Critical)
+# ============================================================================
+echo -n "2. Implementation lies... "
+TODO_MARKERS="$(git diff --cached -- '*.py' 2>/dev/null | grep '^+' | grep -iE '(TODO|FIXME|WIP|HACK|XXX)\s*:' | grep -v '^+++' || true)"
+if [ -n "$TODO_MARKERS" ]; then
+  echo -e "${RED}✗ FAILED${NC}"
+  echo "   Found TODO/FIXME/WIP markers. Complete all work before commit."
+  FAILED=1
+else
+  echo -e "${GREEN}✓${NC}"
+fi
+
+# ============================================================================
+# CHECK 3: Format Check (Fast)
+# ============================================================================
+echo -n "3. Format check... "
+if timeout 5s uv run ruff format --check $STAGED_PY_FILES >/dev/null 2>&1; then
+  echo -e "${GREEN}✓${NC}"
+else
+  echo -e "${RED}✗ FAILED${NC}"
+  echo "   Run: uv run ruff format src/ tests/"
+  FAILED=1
+fi
+
+# ============================================================================
+# CHECK 4: Basic Lint (Staged Files Only)
+# ============================================================================
+echo -n "4. Lint check... "
+LINT_OUTPUT="$(timeout 8s uv run ruff check --no-fix $STAGED_PY_FILES 2>&1 || true)"
+if echo "$LINT_OUTPUT" | grep -qE 'Found [1-9][0-9]* error'; then
+  echo -e "${RED}✗ FAILED${NC}"
+  echo "   Run: uv run ruff check --fix src/ tests/"
+  FAILED=1
+else
+  echo -e "${GREEN}✓${NC}"
+fi
+
+echo ""
+
+# ============================================================================
+# VERDICT
+# ============================================================================
+if [ "$FAILED" -eq 0 ]; then
+  echo -e "${GREEN}✓ Pre-commit passed${NC} (heavy tests run on push)"
+  exit 0
+else
+  echo -e "${RED}✗ Pre-commit failed${NC}"
+  echo ""
+  echo "Fix issues and re-stage files before committing."
+  echo "Heavy tests (mypy strict, full pytest) run on pre-push."
+  exit 1
+fi

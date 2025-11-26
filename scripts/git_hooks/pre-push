@@ -1,0 +1,182 @@
+#!/usr/bin/env bash
+
+# KGCL Pre-Push Hook - HEAVY Checks
+# ----------------------------------
+# Full validation before pushing to remote.
+# These checks prevent corrupting the project.
+#
+# This hook runs:
+#   1. Full test suite with PYTHONWARNINGS=error
+#   2. Mypy strict type checking
+#   3. Full lint check
+#   4. Implementation lies detector (comprehensive)
+#
+# Total time: 30-120 seconds depending on test suite size
+
+set -euo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+cd "$REPO_ROOT"
+
+if ! command -v uv >/dev/null 2>&1; then
+  echo "ERROR: 'uv' is required. Install: https://github.com/astral-sh/uv"
+  exit 1
+fi
+
+# KGC v3.0: Treat all Python warnings as errors
+export PYTHONWARNINGS="error"
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m'
+
+FAILED=0
+
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "KGCL Pre-Push (Heavy Checks) - KGC v3.0 Andon Cord Mode"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+echo "Environment: PYTHONWARNINGS=error (all warnings are errors)"
+echo "Mode: Full validation before push"
+echo ""
+
+# ============================================================================
+# STEP 1: Implementation Lies Detector (Comprehensive)
+# ============================================================================
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "STEP 1: Implementation Lies Detection"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+
+echo -n "1.1 Comprehensive lies scan... "
+if [ -f "$REPO_ROOT/scripts/detect_implementation_lies.py" ]; then
+  LIES_OUTPUT="$(timeout 30s uv run python "$REPO_ROOT/scripts/detect_implementation_lies.py" --warnings-as-errors 2>&1 || true)"
+  LIES_EXIT_CODE=$?
+
+  if [ $LIES_EXIT_CODE -ne 0 ]; then
+    echo -e "${RED}✗ FAILED${NC}"
+    echo "   Implementation lies detected in codebase."
+    echo ""
+    echo "$LIES_OUTPUT" | tail -40
+    echo ""
+    FAILED=1
+  else
+    echo -e "${GREEN}✓ PASSED${NC}"
+  fi
+else
+  echo -e "${BLUE}⊘ SKIPPED${NC} (detector not found)"
+fi
+
+echo ""
+
+# ============================================================================
+# STEP 2: Full Lint Check
+# ============================================================================
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "STEP 2: Full Lint Check"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+
+echo -n "2.1 Ruff lint (all files)... "
+LINT_OUTPUT="$(timeout 30s uv run ruff check --no-fix src/ tests/ 2>&1 || true)"
+if echo "$LINT_OUTPUT" | grep -qE 'Found [1-9][0-9]* error'; then
+  echo -e "${RED}✗ FAILED${NC}"
+  echo ""
+  echo "$LINT_OUTPUT" | head -30
+  echo ""
+  FAILED=1
+else
+  echo -e "${GREEN}✓ PASSED${NC}"
+fi
+
+echo ""
+
+# ============================================================================
+# STEP 3: Mypy Strict Type Checking
+# ============================================================================
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "STEP 3: Mypy Type Checking (Strict Mode)"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+
+echo -n "3.1 Mypy strict check... "
+MYPY_OUTPUT="$(timeout 60s uv run mypy src/ --strict 2>&1 || true)"
+if echo "$MYPY_OUTPUT" | grep -E '^src/.*error:' >/dev/null; then
+  ERROR_COUNT=$(echo "$MYPY_OUTPUT" | grep -cE '^src/.*error:' || echo "0")
+  echo -e "${RED}✗ FAILED${NC} ($ERROR_COUNT errors)"
+  echo ""
+  echo "$MYPY_OUTPUT" | grep -E '^src/.*error:' | head -20
+  echo ""
+  FAILED=1
+else
+  echo -e "${GREEN}✓ PASSED${NC}"
+fi
+
+echo ""
+
+# ============================================================================
+# STEP 4: Full Test Suite
+# ============================================================================
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "STEP 4: Full Test Suite (PYTHONWARNINGS=error)"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+
+echo -n "4.1 Running pytest... "
+TEST_OUTPUT="$(timeout 120s uv run pytest tests/ -W error --strict-markers -q 2>&1 || true)"
+TEST_EXIT_CODE=$?
+
+if [ $TEST_EXIT_CODE -ne 0 ]; then
+  echo -e "${RED}✗ FAILED${NC}"
+  echo ""
+  echo "$TEST_OUTPUT" | tail -40
+  echo ""
+  FAILED=1
+elif echo "$TEST_OUTPUT" | grep -qE '[0-9]+ failed'; then
+  echo -e "${RED}✗ FAILED${NC}"
+  echo ""
+  echo "$TEST_OUTPUT" | tail -20
+  echo ""
+  FAILED=1
+else
+  PASSED=$(echo "$TEST_OUTPUT" | grep -oE '[0-9]+ passed' | head -1 || echo "0 passed")
+  SKIPPED=$(echo "$TEST_OUTPUT" | grep -oE '[0-9]+ skipped' | head -1 || echo "0 skipped")
+  echo -e "${GREEN}✓ PASSED${NC} ($PASSED, $SKIPPED)"
+fi
+
+echo ""
+
+# ============================================================================
+# FINAL VERDICT
+# ============================================================================
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "FINAL VERDICT"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+
+if [ "$FAILED" -eq 0 ]; then
+  echo -e "${GREEN}╔════════════════════════════════════════════════════════════╗${NC}"
+  echo -e "${GREEN}║                                                            ║${NC}"
+  echo -e "${GREEN}║  ✓ ALL CHECKS PASSED - PUSH APPROVED                       ║${NC}"
+  echo -e "${GREEN}║                                                            ║${NC}"
+  echo -e "${GREEN}╚════════════════════════════════════════════════════════════╝${NC}"
+  echo ""
+  exit 0
+else
+  echo -e "${RED}╔════════════════════════════════════════════════════════════╗${NC}"
+  echo -e "${RED}║                                                            ║${NC}"
+  echo -e "${RED}║  ✗ ANDON CORD PULLED - PUSH BLOCKED                        ║${NC}"
+  echo -e "${RED}║                                                            ║${NC}"
+  echo -e "${RED}╚════════════════════════════════════════════════════════════╝${NC}"
+  echo ""
+  echo -e "${RED}CRITICAL: Push blocked to prevent corrupting the project.${NC}"
+  echo ""
+  echo "Fix issues before pushing:"
+  echo "  uv run ruff check --fix src/ tests/   # Fix lint"
+  echo "  uv run mypy src/ --strict             # Fix types"
+  echo "  uv run pytest tests/ -W error         # Fix tests"
+  echo ""
+  exit 1
+fi

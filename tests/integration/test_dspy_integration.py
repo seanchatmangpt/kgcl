@@ -20,9 +20,7 @@ class TestDSPyIntegration:
     @patch("dspy.Predict")
     @patch("dspy.LM")
     @patch("requests.get")
-    def test_invoke_with_materialized_features(
-        self, mock_get, mock_lm_cls, mock_predict
-    ):
+    def test_invoke_with_materialized_features(self, mock_get, mock_lm_cls, mock_predict):
         """Test invoking DSPy with real feature data."""
         # Mock Ollama
         mock_response = Mock()
@@ -100,9 +98,7 @@ class ReceiptTestSig(dspy.Signature):
             bridge = UNRDFBridge()
 
             result = bridge.invoke(
-                module_path=str(sig_file),
-                signature_name="ReceiptTestSig",
-                inputs={"input_text": "test"},
+                module_path=str(sig_file), signature_name="ReceiptTestSig", inputs={"input_text": "test"}
             )
 
             # Verify receipt structure
@@ -137,9 +133,7 @@ class ReceiptTestSig(dspy.Signature):
 
             # Should handle gracefully
             with pytest.raises(Exception):
-                bridge.invoke(
-                    module_path=str(sig_file), signature_name="TestSig", inputs={}
-                )
+                bridge.invoke(module_path=str(sig_file), signature_name="TestSig", inputs={})
 
     @patch("dspy.Predict")
     @patch("dspy.LM")
@@ -214,11 +208,7 @@ class MultiOutputSig(dspy.Signature):
 
             bridge = UNRDFBridge()
 
-            result = bridge.invoke(
-                module_path=str(sig_file),
-                signature_name="MultiOutputSig",
-                inputs={"input": "test"},
-            )
+            result = bridge.invoke(module_path=str(sig_file), signature_name="MultiOutputSig", inputs={"input": "test"})
 
             # Verify outputs
             assert result["result"]["success"] is True

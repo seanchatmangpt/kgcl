@@ -77,16 +77,12 @@ class SignatureInvoker:
             lm: DSPy language model. If None, uses configured LM.
         """
         if not DSPY_AVAILABLE:
-            raise RuntimeError(
-                "DSPy is not installed. Install with: pip install dspy-ai"
-            )
+            raise RuntimeError("DSPy is not installed. Install with: pip install dspy-ai")
 
         self._lm = lm
         self._signature_cache: dict[str, type[dspy.Signature]] = {}
 
-    def load_signature(
-        self, module_path: str, signature_name: str
-    ) -> type["dspy.Signature"]:
+    def load_signature(self, module_path: str, signature_name: str) -> type["dspy.Signature"]:
         """
         Load DSPy signature from Python module.
 
@@ -117,9 +113,7 @@ class SignatureInvoker:
             raise FileNotFoundError(f"Module not found: {module_path}")
 
         try:
-            spec = importlib.util.spec_from_file_location(
-                f"dynamic_signature_{id(self)}", module_file
-            )
+            spec = importlib.util.spec_from_file_location(f"dynamic_signature_{id(self)}", module_file)
             if spec is None or spec.loader is None:
                 raise ImportError(f"Failed to load module spec: {module_path}")
 
@@ -128,9 +122,7 @@ class SignatureInvoker:
 
             # Get signature class
             if not hasattr(module, signature_name):
-                raise AttributeError(
-                    f"Signature '{signature_name}' not found in module {module_path}"
-                )
+                raise AttributeError(f"Signature '{signature_name}' not found in module {module_path}")
 
             signature_class = getattr(module, signature_name)
 
@@ -147,9 +139,7 @@ class SignatureInvoker:
             logger.error(f"Failed to load signature: {e}")
             raise
 
-    def invoke(
-        self, signature: type["dspy.Signature"], inputs: dict[str, Any], **kwargs
-    ) -> InvocationResult:
+    def invoke(self, signature: type["dspy.Signature"], inputs: dict[str, Any], **kwargs) -> InvocationResult:
         """
         Invoke DSPy signature with inputs.
 
@@ -173,9 +163,7 @@ class SignatureInvoker:
                 predictor = dspy.Predict(signature, **kwargs)
 
                 # Execute prediction
-                logger.info(
-                    f"Invoking {signature.__name__} with inputs: {list(inputs.keys())}"
-                )
+                logger.info(f"Invoking {signature.__name__} with inputs: {list(inputs.keys())}")
                 prediction = predictor(**inputs)
 
                 # Extract outputs
@@ -186,50 +174,33 @@ class SignatureInvoker:
 
                 # Calculate metrics
                 latency = time.time() - start_time
-                metrics_data = {
-                    "latency_seconds": latency,
-                    "signature": signature.__name__,
-                    "timestamp": time.time(),
-                }
+                metrics_data = {"latency_seconds": latency, "signature": signature.__name__, "timestamp": time.time()}
 
                 # Record metrics
-                prediction_counter.add(
-                    1, {"signature": signature.__name__, "status": "success"}
-                )
+                prediction_counter.add(1, {"signature": signature.__name__, "status": "success"})
                 prediction_latency.record(latency, {"signature": signature.__name__})
 
                 span.set_attribute("success", True)
                 span.set_attribute("output_count", len(outputs))
                 span.set_attribute("latency_seconds", latency)
 
-                logger.info(
-                    f"Successfully invoked {signature.__name__} "
-                    f"in {latency:.3f}s with {len(outputs)} outputs"
-                )
+                logger.info(f"Successfully invoked {signature.__name__} in {latency:.3f}s with {len(outputs)} outputs")
 
-                return InvocationResult(
-                    success=True, inputs=inputs, outputs=outputs, metrics=metrics_data
-                )
+                return InvocationResult(success=True, inputs=inputs, outputs=outputs, metrics=metrics_data)
 
             except Exception as e:
                 latency = time.time() - start_time
                 error_msg = str(e)
 
                 # Record error metrics
-                prediction_counter.add(
-                    1, {"signature": signature.__name__, "status": "error"}
-                )
-                prediction_errors.add(
-                    1, {"signature": signature.__name__, "error_type": type(e).__name__}
-                )
+                prediction_counter.add(1, {"signature": signature.__name__, "status": "error"})
+                prediction_errors.add(1, {"signature": signature.__name__, "error_type": type(e).__name__})
 
                 span.set_attribute("success", False)
                 span.set_attribute("error", error_msg)
                 span.set_attribute("error_type", type(e).__name__)
 
-                logger.error(
-                    f"Prediction failed for {signature.__name__}: {e}", exc_info=True
-                )
+                logger.error(f"Prediction failed for {signature.__name__}: {e}", exc_info=True)
 
                 return InvocationResult(
                     success=False,
@@ -275,9 +246,7 @@ class SignatureInvoker:
                     metrics={"error_type": type(e).__name__, "timestamp": time.time()},
                 )
 
-    def validate_inputs(
-        self, signature: type["dspy.Signature"], inputs: dict[str, Any]
-    ) -> tuple[bool, str | None]:
+    def validate_inputs(self, signature: type["dspy.Signature"], inputs: dict[str, Any]) -> tuple[bool, str | None]:
         """
         Validate inputs against signature fields.
 

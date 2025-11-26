@@ -263,10 +263,7 @@ def calendar_event_with_attendees():
         calendar_title="Work",
         location="Zoom: https://zoom.us/my-meeting",
         notes="Quarterly planning session",
-        attendees=[
-            {"name": "Alice Smith", "email": "alice@work.com"},
-            {"name": "Bob Jones", "email": "bob@work.com"},
-        ],
+        attendees=[{"name": "Alice Smith", "email": "alice@work.com"}, {"name": "Bob Jones", "email": "bob@work.com"}],
     )
 
 
@@ -310,12 +307,7 @@ def calendar_event_no_title():
 @pytest.fixture
 def reminder_task_simple():
     """Simple task (incomplete, no due date)."""
-    return MockEKReminder(
-        reminder_id="ek-reminder-001",
-        title="Review Q4 metrics",
-        completed=False,
-        list_title="Work",
-    )
+    return MockEKReminder(reminder_id="ek-reminder-001", title="Review Q4 metrics", completed=False, list_title="Work")
 
 
 @pytest.fixture
@@ -348,11 +340,7 @@ def reminder_task_today():
     """Task marked as due today (should validate due date is today)."""
     today = datetime.now(tz=UTC).replace(hour=17, minute=0, second=0, microsecond=0)
     return MockEKReminder(
-        reminder_id="ek-reminder-today",
-        title="Daily standup",
-        completed=False,
-        due_date=today,
-        list_title="Work",
+        reminder_id="ek-reminder-today", title="Daily standup", completed=False, due_date=today, list_title="Work"
     )
 
 
@@ -453,21 +441,13 @@ def file_invalid_path():
 
 
 @pytest.fixture
-def calendar_event_batch(
-    calendar_event_simple, calendar_event_with_attendees, calendar_event_all_day
-):
+def calendar_event_batch(calendar_event_simple, calendar_event_with_attendees, calendar_event_all_day):
     """Batch of multiple calendar events."""
-    return [
-        calendar_event_simple,
-        calendar_event_with_attendees,
-        calendar_event_all_day,
-    ]
+    return [calendar_event_simple, calendar_event_with_attendees, calendar_event_all_day]
 
 
 @pytest.fixture
-def reminder_task_batch(
-    reminder_task_simple, reminder_task_with_due_date, reminder_task_completed
-):
+def reminder_task_batch(reminder_task_simple, reminder_task_with_due_date, reminder_task_completed):
     """Batch of multiple reminders."""
     return [reminder_task_simple, reminder_task_with_due_date, reminder_task_completed]
 
@@ -490,9 +470,7 @@ def file_metadata_batch(file_markdown_note, file_document):
 
 
 @pytest.fixture
-def full_ingest_data(
-    calendar_event_batch, reminder_task_batch, mail_message_batch, file_metadata_batch
-):
+def full_ingest_data(calendar_event_batch, reminder_task_batch, mail_message_batch, file_metadata_batch):
     """Complete ingest data: all 4 data sources."""
     return {
         "calendar_events": calendar_event_batch,
@@ -523,12 +501,7 @@ def invalid_ingest_data():
             ),
         ],
         "bad_reminders": [
-            MockEKReminder(
-                reminder_id="reminder-bad-001",
-                title="No Status Task",
-                completed=False,
-                list_title="Work",
-            )
+            MockEKReminder(reminder_id="reminder-bad-001", title="No Status Task", completed=False, list_title="Work")
         ],
         "bad_mail_messages": [
             MockMailMessage(

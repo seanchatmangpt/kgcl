@@ -143,9 +143,7 @@ class CalendarBlock(BaseModel):
     title: str = Field(..., description="Event title")
     description: str | None = Field(None, description="Event description")
     location: str | None = Field(None, description="Event location")
-    attendees: list[str] = Field(
-        default_factory=list, description="Attendee email addresses"
-    )
+    attendees: list[str] = Field(default_factory=list, description="Attendee email addresses")
     organizer: str | None = Field(None, description="Event organizer email")
     calendar_name: str | None = Field(None, description="Calendar source name")
     is_all_day: bool = Field(default=False, description="All-day event flag")
@@ -195,12 +193,8 @@ class FeatureInstance(BaseModel):
     feature_id: str = Field(..., description="Feature template identifier")
     timestamp: datetime = Field(..., description="Observation time (UTC)")
     value: float | int | str | bool = Field(..., description="Feature value")
-    source_events: list[str] = Field(
-        default_factory=list, description="Source event IDs used in computation"
-    )
-    metadata: dict[str, Any] = Field(
-        default_factory=dict, description="Additional feature metadata"
-    )
+    source_events: list[str] = Field(default_factory=list, description="Source event IDs used in computation")
+    metadata: dict[str, Any] = Field(default_factory=dict, description="Additional feature metadata")
 
     @field_validator("timestamp", mode="before")
     @classmethod
@@ -233,9 +227,7 @@ class MaterializedFeature(BaseModel):
     )
     value: float | int | str | bool = Field(..., description="Aggregated value")
     sample_count: int = Field(..., ge=0, description="Number of samples in aggregation")
-    metadata: dict[str, Any] = Field(
-        default_factory=dict, description="Additional metadata"
-    )
+    metadata: dict[str, Any] = Field(default_factory=dict, description="Additional metadata")
 
 
 class EventBatch(BaseModel):
@@ -246,12 +238,9 @@ class EventBatch(BaseModel):
 
     batch_id: str = Field(..., description="Unique batch identifier")
     created_at: datetime = Field(
-        default_factory=lambda: datetime.now(UTC).replace(tzinfo=None),
-        description="Batch creation time (UTC)",
+        default_factory=lambda: datetime.now(UTC).replace(tzinfo=None), description="Batch creation time (UTC)"
     )
-    events: list[AppEvent | BrowserVisit | CalendarBlock] = Field(
-        ..., description="Events in batch"
-    )
+    events: list[AppEvent | BrowserVisit | CalendarBlock] = Field(..., description="Events in batch")
     metadata: dict[str, Any] = Field(default_factory=dict, description="Batch metadata")
 
     def event_count(self) -> int:

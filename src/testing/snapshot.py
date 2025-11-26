@@ -78,9 +78,7 @@ class SnapshotTest:
         if self.matched:
             return None
 
-        return (
-            f"Snapshot mismatch:\n  Expected: {self.expected}\n  Actual: {self.actual}"
-        )
+        return f"Snapshot mismatch:\n  Expected: {self.expected}\n  Actual: {self.actual}"
 
     def __repr__(self) -> str:
         return f"SnapshotTest({self.name!r}, matched={self.matched})"

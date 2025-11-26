@@ -47,10 +47,7 @@ class ProjectionGenerator(ABC):
             raise FileNotFoundError(f"Template directory not found: {template_dir}")
 
         self.env = Environment(
-            loader=FileSystemLoader(str(template_dir)),
-            autoescape=True,
-            trim_blocks=True,
-            lstrip_blocks=True,
+            loader=FileSystemLoader(str(template_dir)), autoescape=True, trim_blocks=True, lstrip_blocks=True
         )
 
     @abstractmethod
@@ -106,13 +103,9 @@ class ProjectionGenerator(ABC):
             template = self.env.get_template(template_name)
             return template.render(**context)
         except TemplateNotFound as e:
-            raise TemplateNotFound(
-                f"Template '{template_name}' not found in {self.template_dir}"
-            ) from e
+            raise TemplateNotFound(f"Template '{template_name}' not found in {self.template_dir}") from e
         except Exception as e:
-            raise Exception(
-                f"Failed to render template '{template_name}': {e!s}"
-            ) from e
+            raise Exception(f"Failed to render template '{template_name}': {e!s}") from e
 
     def validate_data(self, data: dict[str, Any], required_keys: list[str]) -> None:
         """Validate that gathered data contains required keys.

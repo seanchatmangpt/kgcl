@@ -40,12 +40,7 @@ class FailFastValidator:
         self._fail_fast = fail_fast
         self._failures: list[ValidationFailure] = []
 
-    def check_that(
-        self,
-        check_name: str,
-        condition: Callable[[], bool],
-        context: dict | None = None,
-    ) -> bool:
+    def check_that(self, check_name: str, condition: Callable[[], bool], context: dict | None = None) -> bool:
         """Check a condition.
 
         Args:
@@ -63,9 +58,7 @@ class FailFastValidator:
         """
         if not condition():
             failure = ValidationFailure(
-                check_name=check_name,
-                reason=f"Check '{check_name}' failed",
-                context=context or {},
+                check_name=check_name, reason=f"Check '{check_name}' failed", context=context or {}
             )
             self._failures.append(failure)
 
@@ -76,11 +69,7 @@ class FailFastValidator:
 
     def check_equal(self, check_name: str, actual: Any, expected: Any) -> bool:
         """Check equality."""
-        return self.check_that(
-            check_name,
-            lambda: actual == expected,
-            context={"actual": actual, "expected": expected},
-        )
+        return self.check_that(check_name, lambda: actual == expected, context={"actual": actual, "expected": expected})
 
     def check_true(self, check_name: str, value: bool) -> bool:
         """Check boolean is True."""

@@ -101,12 +101,7 @@ class PolicyPackManifest:
 
         Examples
         --------
-        >>> manifest = PolicyPackManifest(
-        ...     name="my-pack",
-        ...     version="1.0.0",
-        ...     description="Test pack",
-        ...     hooks=["hook1"],
-        ... )
+        >>> manifest = PolicyPackManifest(name="my-pack", version="1.0.0", description="Test pack", hooks=["hook1"])
         >>> manifest.validate()
         True
 
@@ -165,9 +160,7 @@ class PolicyPackManifest:
             dependencies=data.get("dependencies", {}),
             slos=data.get("slos", {}),
             author=data.get("author", ""),
-            created=datetime.fromisoformat(
-                data.get("created", datetime.now(UTC).isoformat())
-            ),
+            created=datetime.fromisoformat(data.get("created", datetime.now(UTC).isoformat())),
         )
 
 
@@ -226,11 +219,7 @@ class PolicyPack:
         --------
         >>> pack = PolicyPack(
         ...     manifest=PolicyPackManifest(
-        ...         name="test",
-        ...         version="1.0.0",
-        ...         description="Test",
-        ...         hooks=["h1"],
-        ...         slos={"latency": 100.0},
+        ...         name="test", version="1.0.0", description="Test", hooks=["h1"], slos={"latency": 100.0}
         ...     ),
         ...     hooks={},
         ... )
@@ -409,9 +398,7 @@ class PolicyPackManager:
                     break
                 # Check version compatibility
                 dep_pack = self.all_packs[dep_name]
-                if not self._versions_compatible(
-                    dep_version, dep_pack.manifest.version
-                ):
+                if not self._versions_compatible(dep_version, dep_pack.manifest.version):
                     valid = False
                     break
             result[pack_name] = valid
@@ -512,12 +499,7 @@ class PersistentHookRegistry:
 
     """
 
-    def __init__(
-        self,
-        storage_path: Path | None = None,
-        auto_save: bool = False,
-        auto_load: bool = True,
-    ) -> None:
+    def __init__(self, storage_path: Path | None = None, auto_save: bool = False, auto_load: bool = True) -> None:
         """Initialize persistent hook registry.
 
         Parameters
@@ -534,17 +516,13 @@ class PersistentHookRegistry:
         self.auto_save = auto_save
         self._hooks: dict[str, KnowledgeHook] = {}
         self._metadata: dict[str, HookMetadata] = {}
-        self._hooks_by_phase: dict[HookPhase, list[KnowledgeHook]] = {
-            phase: [] for phase in HookPhase
-        }
+        self._hooks_by_phase: dict[HookPhase, list[KnowledgeHook]] = {phase: [] for phase in HookPhase}
 
         if auto_load and storage_path and storage_path.exists():
             self.load()
 
     @tracer.start_as_current_span("hook_registry.register")
-    def register(
-        self, hook: KnowledgeHook, description: str = "", version: int = 1
-    ) -> str:
+    def register(self, hook: KnowledgeHook, description: str = "", version: int = 1) -> str:
         """Register a hook with metadata.
 
         Parameters
@@ -822,12 +800,8 @@ class PersistentHookRegistry:
 
             # Add metadata
             graph.add((hook_uri, HOOK.version, Literal(metadata.version)))
-            graph.add(
-                (hook_uri, HOOK.createdAt, Literal(metadata.created_at.isoformat()))
-            )
-            graph.add(
-                (hook_uri, HOOK.updatedAt, Literal(metadata.updated_at.isoformat()))
-            )
+            graph.add((hook_uri, HOOK.createdAt, Literal(metadata.created_at.isoformat())))
+            graph.add((hook_uri, HOOK.updatedAt, Literal(metadata.updated_at.isoformat())))
 
             if metadata.description:
                 graph.add((hook_uri, RDFS.comment, Literal(metadata.description)))
@@ -842,12 +816,8 @@ class PersistentHookRegistry:
                 graph.add((hook_uri, HOOK.trigger, trigger_uri))
                 graph.add((trigger_uri, RDF.type, HOOK.TriggerCondition))
                 graph.add((trigger_uri, HOOK.pattern, Literal(hook.trigger.pattern)))
-                graph.add(
-                    (trigger_uri, HOOK.checkDelta, Literal(hook.trigger.check_delta))
-                )
-                graph.add(
-                    (trigger_uri, HOOK.minMatches, Literal(hook.trigger.min_matches))
-                )
+                graph.add((trigger_uri, HOOK.checkDelta, Literal(hook.trigger.check_delta)))
+                graph.add((trigger_uri, HOOK.minMatches, Literal(hook.trigger.min_matches)))
 
         span.set_attribute("rdf.triples", len(graph))
 
@@ -886,11 +856,7 @@ class PersistentHookRegistry:
 
         """
         enabled_count = sum(1 for h in self._hooks.values() if h.enabled)
-        phase_counts = {
-            phase.value: len(hooks)
-            for phase, hooks in self._hooks_by_phase.items()
-            if hooks
-        }
+        phase_counts = {phase.value: len(hooks) for phase, hooks in self._hooks_by_phase.items() if hooks}
 
         return {
             "total_hooks": len(self._hooks),

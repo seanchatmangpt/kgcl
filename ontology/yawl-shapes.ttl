@@ -8,19 +8,64 @@
 @prefix yawl-shapes: <http://bitflow.ai/ontology/yawl/shapes/v1#> .
 
 # =============================================================================
-# YAWL WORKFLOW PATTERN SHACL SHAPES
+# YAWL WORKFLOW PATTERN SHACL SHAPES - RDF-ONLY SEMANTIC SINGULARITY
 # =============================================================================
 #
-# This ontology defines the TOPOLOGICAL constraints for YAWL patterns.
-# Logic is expressed as SHAPE GEOMETRY, not procedural code.
+# THE SEMANTIC SINGULARITY PRINCIPLE: "VALIDATION IS EXECUTION"
+# --------------------------------------------------------------
 #
-# The Semantic Singularity Principle:
-#   "If the data doesn't fit the shape, the logic cannot execute."
-#   Validation IS Execution.
+# This ontology embodies an RDF-only architecture where business logic is
+# expressed as SHACL SHAPES (graph topology), NOT as procedural code.
+#
+# Core Tenets:
+# 1. Logic IS Topology: Business rules are graph geometry constraints
+# 2. The Engine Is Immutable: Python code contains NO business logic
+# 3. SHACL Shapes ARE the Business Logic: All validation = topology checking
+# 4. If Data Doesn't Fit the Shape, Execution Cannot Proceed
+# 5. The Chatman Equation: A = μ(O) — Action equals Operator applied to Observation
+#
+# Traditional Workflow Engines (Logic in Code):
+# ----------------------------------------------
+#   def validate_discriminator(quorum, total_branches):
+#       if quorum < 1:
+#           raise ValueError("Invalid quorum")  # Logic in Python!
+#       if quorum > total_branches:
+#           raise ValueError("Quorum exceeds branches")
+#
+# RDF-Only Architecture (Logic in Shapes):
+# -----------------------------------------
+#   yawl-shapes:DiscriminatorShape
+#       sh:property [
+#           sh:path yawl:quorum ;
+#           sh:minInclusive 1 ;  # Logic in RDF topology!
+#       ] ;
+#       sh:sparql [
+#           sh:select """
+#               SELECT $this WHERE {
+#                   $this yawl:quorum ?q ; yawl:totalBranches ?t .
+#                   FILTER (?q > ?t)  # Logic in SPARQL constraints!
+#               }
+#           """ ;
+#       ] .
+#
+# The Python engine is a UNIVERSAL TRAVERSER—it applies the same 5 verbs
+# (transmute, copy, filter, await, void) to ANY topology that conforms to
+# the shapes. To change behavior, you change the SHAPES, not the ENGINE.
+#
+# The Chatman Equation: A = μ(O)
+# -------------------------------
+# - Observation (O): RDF graph representing workflow topology
+# - Operator (μ): SHACL shapes defining valid graph geometry
+# - Action (A): Executable workflow when μ(O) validates
+#
+# SHACL validation is the application of μ to O. If μ(O) succeeds (conforms),
+# then A (execution) proceeds. If μ(O) fails (violations), then A is blocked.
 #
 # References:
+# -----------
 # - YAWL Foundation: http://www.yawlfoundation.org/
-# - SHACL: https://www.w3.org/TR/shacl/
+# - SHACL Specification: https://www.w3.org/TR/shacl/
+# - Chatman Equation: A = μ(O) — Action from Operator and Observation
 # =============================================================================
 
 <http://bitflow.ai/ontology/yawl/shapes/v1#>
@@ -321,6 +366,66 @@ yawl-shapes:ANDJoinMinFlows
         """ ;
     ] .
 
+# OR-join must have >= 2 incoming flows
+yawl-shapes:ORJoinMinFlows
+    a sh:NodeShape ;
+    sh:targetClass yawl:Task ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "OR-join must have at least 2 incoming flows to merge"@en ;
+        sh:select """
+            PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+            SELECT $this (COUNT(?incoming) AS ?inCount)
+            WHERE {
+                $this yawl:joinType yawl:OR .
+                ?incoming yawl:flowsInto ?flow .
+                ?flow yawl:nextElementRef $this .
+            }
+            GROUP BY $this
+            HAVING (COUNT(?incoming) < 2)
+        """ ;
+    ] .
+
+# XOR-join must have >= 2 incoming flows
+yawl-shapes:XORJoinMinFlows
+    a sh:NodeShape ;
+    sh:targetClass yawl:Task ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "XOR-join must have at least 2 incoming flows for exclusive choice"@en ;
+        sh:select """
+            PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+            SELECT $this (COUNT(?incoming) AS ?inCount)
+            WHERE {
+                $this yawl:joinType yawl:XOR .
+                ?incoming yawl:flowsInto ?flow .
+                ?flow yawl:nextElementRef $this .
+            }
+            GROUP BY $this
+            HAVING (COUNT(?incoming) < 2)
+        """ ;
+    ] .
+
+# Discriminator-join must have >= 2 incoming flows
+yawl-shapes:DiscriminatorJoinMinFlows
+    a sh:NodeShape ;
+    sh:targetClass yawl:Task ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Discriminator-join must have at least 2 incoming flows for N-of-M quorum"@en ;
+        sh:select """
+            PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+            SELECT $this (COUNT(?incoming) AS ?inCount)
+            WHERE {
+                $this yawl:joinType yawl:Discriminator .
+                ?incoming yawl:flowsInto ?flow .
+                ?flow yawl:nextElementRef $this .
+            }
+            GROUP BY $this
+            HAVING (COUNT(?incoming) < 2)
+        """ ;
+    ] .
+
 # =============================================================================
 # WORKFLOW INSTANCE CONSTRAINTS
 # =============================================================================
@@ -440,23 +545,48 @@ yawl-shapes:DeferredChoiceShape
     ] .
 
 # =============================================================================
-# SUMMARY: Logic as Topology
+# SUMMARY: LOGIC AS TOPOLOGY — THE SEMANTIC SINGULARITY
 # =============================================================================
 #
 # This shapes file encodes ALL validation logic as GRAPH GEOMETRY:
 #
-# 1. Property constraints (sh:minInclusive, sh:maxCount) = Field validation
-# 2. SPARQL constraints = Relational validation across nodes
-# 3. sh:in constraints = Enumeration validation
+# 1. Property constraints (sh:minInclusive, sh:maxCount, sh:minCount)
+#    → Field-level validation (cardinality, data types, ranges)
 #
-# The Engine (Python) does NOT contain business logic.
-# The Engine only:
-#   - Traverses the graph
-#   - Validates shapes (SHACL)
-#   - Applies verbs (Split, Join, Execute)
+# 2. SPARQL constraints (sh:sparql with SELECT queries)
+#    → Relational validation across nodes (cross-graph constraints)
 #
-# If the data fits the shape: Execution proceeds.
-# If the data violates the shape: Execution fails with SHACL validation report.
+# 3. Enumeration constraints (sh:in with value lists)
+#    → Closed-world validation (only allowed values)
 #
-# This is the Semantic Singularity: Logic IS Topology.
+# 4. Class constraints (sh:class with rdf:type checks)
+#    → Structural validation (node types and inheritance)
+#
+# The Python Engine's Role (MINIMAL):
+# ------------------------------------
+# The engine does NOT contain business logic. It only:
+#   - Traverses the RDF graph (SPARQL queries)
+#   - Validates topology against shapes (SHACL validation via pyshacl)
+#   - Applies immutable verbs (transmute, copy, filter, await, void)
+#   - Returns execution receipts (QuadDelta with provenance)
+#
+# Execution Flow:
+# ---------------
+# 1. RDF graph created/modified (workflow topology definition)
+# 2. SHACL validation applied (μ(O) — Operator on Observation)
+# 3. If conforms → Execution proceeds (Action A is valid)
+# 4. If violations → Execution halts (Action A is invalid)
+# 5. Engine applies verbs to conforming topology (immutable traversal)
+#
+# The Semantic Singularity:
+# -------------------------
+# Logic IS Topology. Validation IS Execution. Shapes ARE the Business Logic.
+#
+# To change workflow behavior, you change the SHAPES (RDF), not the ENGINE (Python).
+# The engine is a UNIVERSAL INTERPRETER of any topology that conforms to the shapes.
+#
+# This is the essence of the Chatman Equation: A = μ(O)
+# - O (Observation) = RDF workflow graph
+# - μ (Operator) = SHACL shapes validating topology
+# - A (Action) = Executable workflow (only if μ(O) succeeds)
 # =============================================================================

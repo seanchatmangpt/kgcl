@@ -10,7 +10,6 @@ This module verifies that all components work together correctly
 across module boundaries with proper error handling and performance.
 """
 
-import itertools
 import time
 from collections.abc import Callable
 from datetime import datetime, timedelta
@@ -20,14 +19,13 @@ if TYPE_CHECKING:
     from tests.combinatorial.conftest import SyncConditionEvaluator, SyncHookExecutor, SyncHookRegistry
 
 import pytest
-from rdflib import RDF, Graph, Literal, Namespace, URIRef
+from rdflib import RDF, Graph, Literal, Namespace
 
 from kgcl.hooks.conditions import (
     AlwaysTrueCondition,
     CompositeCondition,
     ShaclCondition,
     SparqlAskCondition,
-    SparqlSelectCondition,
     ThresholdCondition,
     WindowAggregation,
     WindowCondition,
@@ -106,12 +104,15 @@ class TestValidatorConditionIntegration:
         # Verify we can create context with invalid data
         assert "data_graph" in context_invalid
 
-    @pytest.mark.parametrize("invariant,data_valid", [
-        ("EventTitleNotEmpty", True),
-        ("EventTitleNotEmpty", False),
-        ("EventTimeRangeValid", True),
-        ("EventTimeRangeValid", False),
-    ])
+    @pytest.mark.parametrize(
+        "invariant,data_valid",
+        [
+            ("EventTitleNotEmpty", True),
+            ("EventTitleNotEmpty", False),
+            ("EventTimeRangeValid", True),
+            ("EventTimeRangeValid", False),
+        ],
+    )
     def test_validator_condition_combinations(
         self, validator: ShaclValidator, shapes_graph: Graph, invariant: str, data_valid: bool
     ) -> None:
@@ -148,8 +149,9 @@ class TestValidatorConditionIntegration:
 
     def test_validator_chain_with_threshold_condition(self, validator: ShaclValidator, shapes_graph: Graph) -> None:
         """Chain SHACL validation with threshold condition."""
-        from kgcl.hooks.conditions import CompositeOperator, ThresholdOperator
         import asyncio
+
+        from kgcl.hooks.conditions import CompositeOperator, ThresholdOperator
 
         data_graph = Graph()
         data_graph.bind("ex", EX)
@@ -169,21 +171,15 @@ class TestValidatorConditionIntegration:
 
         # Threshold condition (count events) - uses variable/operator/value API
         threshold_condition = ThresholdCondition(
-            variable="event_count",
-            operator=ThresholdOperator.GREATER_THAN,
-            value=3.0
+            variable="event_count", operator=ThresholdOperator.GREATER_THAN, value=3.0
         )
 
         # Composite: both must pass (uses CompositeOperator enum)
         composite = CompositeCondition(
-            operator=CompositeOperator.AND,
-            conditions=[shacl_condition, threshold_condition]
+            operator=CompositeOperator.AND, conditions=[shacl_condition, threshold_condition]
         )
 
-        context = {
-            "data_graph": data_ttl,
-            "event_count": len(list(data_graph.subjects(RDF.type, EX.Event)))
-        }
+        context = {"data_graph": data_ttl, "event_count": len(list(data_graph.subjects(RDF.type, EX.Event)))}
 
         # Both conditions should pass (async evaluate)
         result = asyncio.run(composite.evaluate(context))
@@ -191,8 +187,9 @@ class TestValidatorConditionIntegration:
 
     def test_validator_with_sparql_condition(self, validator: ShaclValidator, shapes_graph: Graph) -> None:
         """Combine SHACL validation with SPARQL query condition."""
-        from kgcl.hooks.conditions import CompositeOperator
         import asyncio
+
+        from kgcl.hooks.conditions import CompositeOperator
 
         data_graph = Graph()
         data_graph.bind("ex", EX)
@@ -219,10 +216,7 @@ class TestValidatorConditionIntegration:
         sparql_condition = SparqlAskCondition(query=sparql_query)
 
         # Composite condition (uses CompositeOperator enum)
-        composite = CompositeCondition(
-            operator=CompositeOperator.AND,
-            conditions=[shacl_condition, sparql_condition]
-        )
+        composite = CompositeCondition(operator=CompositeOperator.AND, conditions=[shacl_condition, sparql_condition])
 
         context = {"data_graph": data_ttl}
         result = asyncio.run(composite.evaluate(context))
@@ -265,35 +259,15 @@ class TestQueryOptimizerDarkMatterIntegration:
         assert hasattr(optimized_plan, "rewrite_rules_applied")
         assert isinstance(optimized_plan.rewrite_rules_applied, list)
 
-    @pytest.mark.parametrize(
-        "has_constants",
-        [True, False],
-    )
+    @pytest.mark.parametrize("has_constants", [True, False])
     def test_query_constant_detection(
-        self,
-        query_optimizer: QueryOptimizer,
-        dark_matter: DarkMatterOptimizer,
-        has_constants: bool,
+        self, query_optimizer: QueryOptimizer, dark_matter: DarkMatterOptimizer, has_constants: bool
     ) -> None:
         """Test detection and optimization of constant expressions."""
         if has_constants:
-            plan = {
-                "steps": [
-                    {
-                        "type": "filter",
-                        "expression": {"op": "+", "left": 1, "right": 1},
-                    },
-                ]
-            }
+            plan = {"steps": [{"type": "filter", "expression": {"op": "+", "left": 1, "right": 1}}]}
         else:
-            plan = {
-                "steps": [
-                    {
-                        "type": "filter",
-                        "expression": {"op": ">", "left": "?x", "right": 5},
-                    },
-                ]
-            }
+            plan = {"steps": [{"type": "filter", "expression": {"op": ">", "left": "?x", "right": 5}}]}
 
         # Apply dark matter optimization
         optimized_plan = dark_matter.optimize_query_plan(plan)
@@ -308,10 +282,7 @@ class TestQueryOptimizerDarkMatterIntegration:
         """Test optimizer chain with query caching."""
         plan = {
             "steps": [
-                {
-                    "type": "filter",
-                    "expression": {"op": ">", "left": 5, "right": 3},
-                },
+                {"type": "filter", "expression": {"op": ">", "left": 5, "right": 3}},
                 {"type": "scan", "pattern": "?event a <http://example.org/Event>"},
             ]
         }
@@ -340,15 +311,9 @@ class TestQueryOptimizerDarkMatterIntegration:
         """Verify optimizer preserves query semantics."""
         plan = {
             "steps": [
-                {
-                    "type": "filter",
-                    "expression": {"op": ">", "left": "?priority", "right": 5},
-                },
+                {"type": "filter", "expression": {"op": ">", "left": "?priority", "right": 5}},
                 {"type": "scan", "pattern": "?event a <http://example.org/Event>"},
-                {
-                    "type": "scan",
-                    "pattern": "?event <http://example.org/priority> ?priority",
-                },
+                {"type": "scan", "pattern": "?event <http://example.org/priority> ?priority"},
             ]
         }
 
@@ -367,19 +332,21 @@ class TestConditionHookIntegration:
     Uses sync wrappers from conftest for async hook execution.
     """
 
-    @pytest.mark.parametrize("condition_type,trigger_expected", [
-        ("always_true", True),
-        ("threshold_met", True),
-        ("threshold_not_met", False),
-        ("sparql_match", True),
-        ("sparql_no_match", False),
-    ])
+    @pytest.mark.parametrize(
+        "condition_type,trigger_expected",
+        [
+            ("always_true", True),
+            ("threshold_met", True),
+            ("threshold_not_met", False),
+            ("sparql_match", True),
+            ("sparql_no_match", False),
+        ],
+    )
     def test_condition_triggers_hook(
         self, sync_executor: "SyncHookExecutor", condition_type: str, trigger_expected: bool
     ) -> None:
         """Test various condition types trigger hooks correctly."""
         from kgcl.hooks.conditions import ThresholdOperator
-        from tests.combinatorial.conftest import SyncHookExecutor
 
         # Create condition based on type
         if condition_type == "always_true":
@@ -387,19 +354,11 @@ class TestConditionHookIntegration:
             context: dict[str, Any] = {}
 
         elif condition_type == "threshold_met":
-            condition = ThresholdCondition(
-                variable="value",
-                operator=ThresholdOperator.GREATER_THAN,
-                value=5.0
-            )
+            condition = ThresholdCondition(variable="value", operator=ThresholdOperator.GREATER_THAN, value=5.0)
             context = {"value": 10}
 
         elif condition_type == "threshold_not_met":
-            condition = ThresholdCondition(
-                variable="value",
-                operator=ThresholdOperator.GREATER_THAN,
-                value=5.0
-            )
+            condition = ThresholdCondition(variable="value", operator=ThresholdOperator.GREATER_THAN, value=5.0)
             context = {"value": 3}
 
         elif condition_type == "sparql_match":
@@ -407,9 +366,7 @@ class TestConditionHookIntegration:
             query = "ASK WHERE { ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/Event> }"
             condition = SparqlAskCondition(query=query)
             # SparqlAskCondition expects rdf_data as list of (s, p, o) string tuples
-            rdf_data = [
-                (str(EX.event1), str(RDF.type), str(EX.Event)),
-            ]
+            rdf_data = [(str(EX.event1), str(RDF.type), str(EX.Event))]
             context = {"rdf_data": rdf_data}
 
         elif condition_type == "sparql_no_match":
@@ -417,9 +374,7 @@ class TestConditionHookIntegration:
             query = "ASK WHERE { ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/Person> }"
             condition = SparqlAskCondition(query=query)
             # SparqlAskCondition expects rdf_data as list of (s, p, o) string tuples
-            rdf_data = [
-                (str(EX.event1), str(RDF.type), str(EX.Event)),
-            ]
+            rdf_data = [(str(EX.event1), str(RDF.type), str(EX.Event))]
             context = {"rdf_data": rdf_data}
 
         else:
@@ -436,7 +391,7 @@ class TestConditionHookIntegration:
             name=f"test_hook_{condition_type}",
             description=f"Test hook for {condition_type}",
             condition=condition,
-            handler=handler
+            handler=handler,
         )
 
         # Execute hook via sync executor wrapper
@@ -450,28 +405,18 @@ class TestConditionHookIntegration:
             assert receipt.condition_result.triggered is False
             assert len(executed) == 0
 
-    @pytest.mark.parametrize("num_conditions,combinator", [
-        (2, "AND"),
-        (2, "OR"),
-        (3, "AND"),
-        (3, "OR"),
-    ])
+    @pytest.mark.parametrize("num_conditions,combinator", [(2, "AND"), (2, "OR"), (3, "AND"), (3, "OR")])
     def test_composite_condition_hook_integration(
         self, sync_executor: "SyncHookExecutor", num_conditions: int, combinator: str
     ) -> None:
         """Test composite conditions with hooks."""
         from kgcl.hooks.conditions import CompositeOperator, ThresholdOperator
-        from tests.combinatorial.conftest import SyncHookExecutor
 
         conditions = []
 
         # Create multiple threshold conditions (variable, operator, value API)
         for i in range(num_conditions):
-            condition = ThresholdCondition(
-                variable=f"value_{i}",
-                operator=ThresholdOperator.GREATER_THAN,
-                value=5.0
-            )
+            condition = ThresholdCondition(variable=f"value_{i}", operator=ThresholdOperator.GREATER_THAN, value=5.0)
             conditions.append(condition)
 
         # CompositeCondition uses CompositeOperator enum
@@ -490,12 +435,7 @@ class TestConditionHookIntegration:
             executed.append(True)
             return True
 
-        hook = Hook(
-            name="composite_hook",
-            description="Test composite hook",
-            condition=composite,
-            handler=handler
-        )
+        hook = Hook(name="composite_hook", description="Test composite hook", condition=composite, handler=handler)
         receipt = sync_executor.execute(hook, context)
 
         # Verify based on combinator
@@ -511,24 +451,14 @@ class TestConditionHookIntegration:
     def test_hook_receipt_captures_condition_state(self, sync_executor: "SyncHookExecutor") -> None:
         """Hook receipt should capture condition evaluation state."""
         from kgcl.hooks.conditions import ThresholdOperator
-        from tests.combinatorial.conftest import SyncHookExecutor
 
-        condition = ThresholdCondition(
-            variable="value",
-            operator=ThresholdOperator.GREATER_THAN,
-            value=5.0
-        )
+        condition = ThresholdCondition(variable="value", operator=ThresholdOperator.GREATER_THAN, value=5.0)
         context = {"value": 10.0}
 
         def handler(ctx: dict[str, Any]) -> bool:
             return True
 
-        hook = Hook(
-            name="test_hook",
-            description="Test receipt capture",
-            condition=condition,
-            handler=handler
-        )
+        hook = Hook(name="test_hook", description="Test receipt capture", condition=condition, handler=handler)
         receipt = sync_executor.execute(hook, context)
 
         # Receipt should capture success and metadata
@@ -538,7 +468,6 @@ class TestConditionHookIntegration:
 
     def test_hook_chain_with_registry(self, sync_registry: "SyncHookRegistry") -> None:
         """Test hook registry with chained hooks."""
-        from tests.combinatorial.conftest import SyncHookRegistry
 
         # Register multiple hooks
         executed_order: list[int] = []
@@ -551,18 +480,8 @@ class TestConditionHookIntegration:
             executed_order.append(2)
             return True
 
-        hook1 = Hook(
-            name="hook1",
-            description="First hook",
-            condition=AlwaysTrueCondition(),
-            handler=handler1
-        )
-        hook2 = Hook(
-            name="hook2",
-            description="Second hook",
-            condition=AlwaysTrueCondition(),
-            handler=handler2
-        )
+        hook1 = Hook(name="hook1", description="First hook", condition=AlwaysTrueCondition(), handler=handler1)
+        hook2 = Hook(name="hook2", description="Second hook", condition=AlwaysTrueCondition(), handler=handler2)
 
         sync_registry.register(hook1)
         sync_registry.register(hook2)
@@ -605,7 +524,6 @@ class TestFullPipelineIntegration:
         6. Execute hook
         7. Produce receipt
         """
-        from tests.combinatorial.conftest import SyncHookExecutor
 
         # 1. Ingest data
         data_graph = Graph()
@@ -649,18 +567,10 @@ class TestFullPipelineIntegration:
         def handler(ctx: dict[str, Any]) -> bool:
             return True
 
-        hook = Hook(
-            name="pipeline_hook",
-            description="Full pipeline test hook",
-            condition=condition,
-            handler=handler
-        )
+        hook = Hook(name="pipeline_hook", description="Full pipeline test hook", condition=condition, handler=handler)
 
         # 7. Produce receipt - convert graph to rdf_data format
-        rdf_data = [
-            (str(s), str(p), str(o))
-            for s, p, o in data_graph
-        ]
+        rdf_data = [(str(s), str(p), str(o)) for s, p, o in data_graph]
         context = {"rdf_data": rdf_data, "optimized_plan": optimized_plan}
         receipt = sync_executor.execute(hook, context)
 
@@ -668,19 +578,25 @@ class TestFullPipelineIntegration:
         assert receipt.condition_result.triggered is True
         assert receipt.hook_id == "pipeline_hook"
 
-    @pytest.mark.parametrize("data_valid,condition_met,expected_triggered", [
-        (True, True, True),
-        (True, False, False),
-        (False, True, True),  # Condition is independent of data validity
-        (False, False, False),
-    ])
+    @pytest.mark.parametrize(
+        "data_valid,condition_met,expected_triggered",
+        [
+            (True, True, True),
+            (True, False, False),
+            (False, True, True),  # Condition is independent of data validity
+            (False, False, False),
+        ],
+    )
     def test_pipeline_outcome_matrix(
-        self, sync_executor: "SyncHookExecutor", pipeline_components: dict[str, Any],
-        data_valid: bool, condition_met: bool, expected_triggered: bool
+        self,
+        sync_executor: "SyncHookExecutor",
+        pipeline_components: dict[str, Any],
+        data_valid: bool,
+        condition_met: bool,
+        expected_triggered: bool,
     ) -> None:
         """Test all combinations of pipeline outcomes."""
         from kgcl.hooks.conditions import ThresholdOperator
-        from tests.combinatorial.conftest import SyncHookExecutor
 
         # Create data based on validity
         data_graph = Graph()
@@ -697,21 +613,14 @@ class TestFullPipelineIntegration:
         else:
             # Threshold condition that won't be met
             condition = ThresholdCondition(
-                variable="impossible_metric",
-                operator=ThresholdOperator.GREATER_THAN,
-                value=100.0
+                variable="impossible_metric", operator=ThresholdOperator.GREATER_THAN, value=100.0
             )
 
         # Execute hook
         def handler(ctx: dict[str, Any]) -> bool:
             return data_valid
 
-        hook = Hook(
-            name="matrix_hook",
-            description="Matrix test hook",
-            condition=condition,
-            handler=handler
-        )
+        hook = Hook(name="matrix_hook", description="Matrix test hook", condition=condition, handler=handler)
         context: dict[str, Any] = {"data_graph": data_graph, "impossible_metric": 0}
 
         receipt = sync_executor.execute(hook, context)
@@ -723,7 +632,6 @@ class TestFullPipelineIntegration:
         self, sync_executor: "SyncHookExecutor", pipeline_components: dict[str, Any]
     ) -> None:
         """Test pipeline error handling and recovery."""
-        from tests.combinatorial.conftest import SyncHookExecutor
 
         # Create hook that fails
         def failing_handler(ctx: dict[str, Any]) -> bool:
@@ -734,7 +642,7 @@ class TestFullPipelineIntegration:
             name="failing_hook",
             description="Hook with failing handler",
             condition=AlwaysTrueCondition(),
-            handler=failing_handler
+            handler=failing_handler,
         )
 
         context: dict[str, Any] = {}
@@ -753,21 +661,12 @@ class TestCrossModuleErrorHandling:
     Uses sync wrappers from conftest for async hook execution.
     """
 
-    @pytest.mark.parametrize("failing_module", [
-        "validator",
-        "optimizer",
-        "condition",
-        "hook",
-    ])
+    @pytest.mark.parametrize("failing_module", ["validator", "optimizer", "condition", "hook"])
     def test_error_propagation(
-        self,
-        sync_executor: "SyncHookExecutor",
-        sync_evaluator: "SyncConditionEvaluator",
-        failing_module: str
+        self, sync_executor: "SyncHookExecutor", sync_evaluator: "SyncConditionEvaluator", failing_module: str
     ) -> None:
         """Induce error in one module and verify handling."""
         from kgcl.hooks.conditions import ThresholdOperator
-        from tests.combinatorial.conftest import SyncConditionEvaluator, SyncHookExecutor
 
         if failing_module == "validator":
             # ShaclCondition accepts any shapes value at construction time
@@ -799,7 +698,7 @@ class TestCrossModuleErrorHandling:
             condition = ThresholdCondition(
                 variable="missing_key",  # Key not in context
                 operator=ThresholdOperator.GREATER_THAN,
-                value=5.0
+                value=5.0,
             )
             # Test evaluation with missing key - should handle gracefully
             result = sync_evaluator.evaluate(condition, {"other_key": 10})
@@ -816,7 +715,7 @@ class TestCrossModuleErrorHandling:
                 name="failing",
                 description="Failing hook test",
                 condition=AlwaysTrueCondition(),
-                handler=failing_handler
+                handler=failing_handler,
             )
             receipt = sync_executor.execute(hook, {})
 
@@ -826,7 +725,6 @@ class TestCrossModuleErrorHandling:
 
     def test_validation_error_to_condition(self, sync_evaluator: "SyncConditionEvaluator") -> None:
         """Validation errors should be handled by conditions."""
-        from tests.combinatorial.conftest import SyncConditionEvaluator
 
         # Create invalid data graph (wrong type)
         invalid_data = "not a graph"
@@ -848,7 +746,6 @@ class TestCrossModuleErrorHandling:
 
     def test_query_error_to_hook(self, sync_executor: "SyncHookExecutor") -> None:
         """Query errors should be handled in hook execution."""
-        from tests.combinatorial.conftest import SyncHookExecutor
 
         invalid_query = "INVALID SPARQL"
 
@@ -858,10 +755,7 @@ class TestCrossModuleErrorHandling:
             return True
 
         hook = Hook(
-            name="query_error_hook",
-            description="Hook with invalid query",
-            condition=condition,
-            handler=handler
+            name="query_error_hook", description="Hook with invalid query", condition=condition, handler=handler
         )
 
         context = {"data_graph": Graph()}
@@ -879,17 +773,23 @@ class TestPerformanceCombinations:
     Uses sync wrappers from conftest for async hook execution.
     """
 
-    @pytest.mark.parametrize("num_validations,num_queries,num_hooks", [
-        (10, 10, 10),
-        (50, 50, 50),  # Reduced from 100 for test speed
-        (100, 50, 10),  # Reduced from 1000 for test speed
-    ])
+    @pytest.mark.parametrize(
+        "num_validations,num_queries,num_hooks",
+        [
+            (10, 10, 10),
+            (50, 50, 50),  # Reduced from 100 for test speed
+            (100, 50, 10),  # Reduced from 1000 for test speed
+        ],
+    )
     def test_batch_processing_combinations(
-        self, sync_registry: "SyncHookRegistry", sync_evaluator: "SyncConditionEvaluator",
-        num_validations: int, num_queries: int, num_hooks: int
+        self,
+        sync_registry: "SyncHookRegistry",
+        sync_evaluator: "SyncConditionEvaluator",
+        num_validations: int,
+        num_queries: int,
+        num_hooks: int,
     ) -> None:
         """Measure time for combined operations."""
-        from tests.combinatorial.conftest import SyncConditionEvaluator, SyncHookRegistry
 
         optimizer = QueryOptimizer()
 
@@ -903,21 +803,16 @@ class TestPerformanceCombinations:
             data_graphs.append(g)
 
         # Create queries
-        queries = [
-            f"SELECT ?event WHERE {{ ?event a <http://example.org/Event{i}> }}"
-            for i in range(num_queries)
-        ]
+        queries = [f"SELECT ?event WHERE {{ ?event a <http://example.org/Event{i}> }}" for i in range(num_queries)]
 
         # Create hooks
         for i in range(num_hooks):
+
             def handler(ctx: dict[str, Any]) -> bool:
                 return True
 
             hook = Hook(
-                name=f"hook_{i}",
-                description=f"Batch hook {i}",
-                condition=AlwaysTrueCondition(),
-                handler=handler
+                name=f"hook_{i}", description=f"Batch hook {i}", condition=AlwaysTrueCondition(), handler=handler
             )
             sync_registry.register(hook)
 
@@ -925,13 +820,13 @@ class TestPerformanceCombinations:
         start = time.perf_counter()
 
         # Validations (use SHACL condition with shapes string)
-        for g in data_graphs[:min(num_validations, 50)]:  # Limit for performance
+        for g in data_graphs[: min(num_validations, 50)]:  # Limit for performance
             condition = ShaclCondition(shapes=shapes_ttl)
             context = {"data_graph": g.serialize(format="turtle")}
             sync_evaluator.evaluate(condition, context)
 
         # Query optimizations
-        for query in queries[:min(num_queries, 50)]:
+        for query in queries[: min(num_queries, 50)]:
             optimizer.optimize(query)
 
         # Hook executions
@@ -946,11 +841,11 @@ class TestPerformanceCombinations:
 
     def test_concurrent_condition_evaluation(self, sync_evaluator: "SyncConditionEvaluator") -> None:
         """Test multiple conditions evaluated concurrently."""
-        from kgcl.hooks.conditions import ThresholdOperator
-        from tests.combinatorial.conftest import SyncConditionEvaluator
-
         # Create time series data for WindowCondition (use UTC for timezone-aware)
         from datetime import UTC
+
+        from kgcl.hooks.conditions import ThresholdOperator
+
         now = datetime.now(UTC)
         time_series = [
             {"timestamp": now, "count": 10.0},
@@ -960,11 +855,7 @@ class TestPerformanceCombinations:
 
         conditions = [
             AlwaysTrueCondition(),
-            ThresholdCondition(
-                variable="value",
-                operator=ThresholdOperator.GREATER_THAN,
-                value=5.0
-            ),
+            ThresholdCondition(variable="value", operator=ThresholdOperator.GREATER_THAN, value=5.0),
             WindowCondition(
                 variable="count",
                 window_seconds=60.0,
@@ -993,18 +884,15 @@ class TestPerformanceCombinations:
 
     def test_hook_registry_bulk_operations(self, sync_registry: "SyncHookRegistry") -> None:
         """Test bulk hook registration and execution."""
-        from tests.combinatorial.conftest import SyncHookRegistry
 
         # Register 50 hooks (reduced from 100 for test speed)
         for i in range(50):
+
             def handler(ctx: dict[str, Any]) -> bool:
                 return True
 
             hook = Hook(
-                name=f"bulk_hook_{i}",
-                description=f"Bulk hook {i}",
-                condition=AlwaysTrueCondition(),
-                handler=handler
+                name=f"bulk_hook_{i}", description=f"Bulk hook {i}", condition=AlwaysTrueCondition(), handler=handler
             )
             sync_registry.register(hook)
 
@@ -1040,7 +928,6 @@ class TestComplexIntegrationScenarios:
         5. Generate receipts
         """
         from kgcl.hooks.conditions import ThresholdOperator
-        from tests.combinatorial.conftest import SyncHookRegistry
 
         # Setup
         optimizer = QueryOptimizer()
@@ -1072,17 +959,13 @@ class TestComplexIntegrationScenarios:
             return True
 
         # Condition: priority > 5
-        condition = ThresholdCondition(
-            variable="priority",
-            operator=ThresholdOperator.GREATER_THAN,
-            value=5.0
-        )
+        condition = ThresholdCondition(variable="priority", operator=ThresholdOperator.GREATER_THAN, value=5.0)
 
         hook = Hook(
             name="high_priority_hook",
             description="Process high priority events",
             condition=condition,
-            handler=high_priority_handler
+            handler=high_priority_handler,
         )
         sync_registry.register(hook)
 
@@ -1097,13 +980,11 @@ class TestComplexIntegrationScenarios:
         triggered_count = len([r for r in receipts if r.condition_result.triggered])
         assert triggered_count == 4  # events 6, 7, 8, 9
 
-    def test_multi_validator_multi_condition_pipeline(
-        self, sync_evaluator: "SyncConditionEvaluator"
-    ) -> None:
+    def test_multi_validator_multi_condition_pipeline(self, sync_evaluator: "SyncConditionEvaluator") -> None:
         """Test pipeline with multiple validators and conditions."""
         import asyncio
+
         from kgcl.hooks.conditions import CompositeOperator
-        from tests.combinatorial.conftest import SyncConditionEvaluator
 
         shapes_ttl1 = "@prefix sh: <http://www.w3.org/ns/shacl#> . <shape1> a sh:NodeShape ."
         shapes_ttl2 = "@prefix sh: <http://www.w3.org/ns/shacl#> . <shape2> a sh:NodeShape ."
@@ -1118,10 +999,7 @@ class TestComplexIntegrationScenarios:
         condition2 = ShaclCondition(shapes=shapes_ttl2)
 
         # Composite condition (uses CompositeOperator enum)
-        composite = CompositeCondition(
-            operator=CompositeOperator.AND,
-            conditions=[condition1, condition2]
-        )
+        composite = CompositeCondition(operator=CompositeOperator.AND, conditions=[condition1, condition2])
 
         context = {"data_graph": data_ttl}
         result = asyncio.run(composite.evaluate(context))
@@ -1131,7 +1009,6 @@ class TestComplexIntegrationScenarios:
 
     def test_streaming_pipeline_with_hooks(self, sync_registry: "SyncHookRegistry") -> None:
         """Test streaming data through pipeline with hooks."""
-        from tests.combinatorial.conftest import SyncHookRegistry
 
         # Create hooks for different event types
         event_counts = {"typeA": 0, "typeB": 0, "typeC": 0}
@@ -1142,6 +1019,7 @@ class TestComplexIntegrationScenarios:
                     event_counts[event_type] += 1
                     return True
                 return False
+
             return handler
 
         for event_type in ["typeA", "typeB", "typeC"]:
@@ -1149,18 +1027,12 @@ class TestComplexIntegrationScenarios:
                 name=f"hook_{event_type}",
                 description=f"Hook for {event_type}",
                 condition=AlwaysTrueCondition(),
-                handler=create_handler(event_type)
+                handler=create_handler(event_type),
             )
             sync_registry.register(hook)
 
         # Stream events
-        events = [
-            {"type": "typeA"},
-            {"type": "typeB"},
-            {"type": "typeA"},
-            {"type": "typeC"},
-            {"type": "typeB"},
-        ]
+        events = [{"type": "typeA"}, {"type": "typeB"}, {"type": "typeA"}, {"type": "typeC"}, {"type": "typeB"}]
 
         all_receipts = []
         for event in events:

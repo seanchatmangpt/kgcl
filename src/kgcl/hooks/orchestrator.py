@@ -12,20 +12,17 @@ Chicago TDD Pattern:
     - Continue on errors (resilient execution)
 """
 
-import asyncio
 import logging
-import traceback
-import uuid
 from collections.abc import Callable
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Set
+from typing import Any
 
-from rdflib import Graph, URIRef
+from rdflib import Graph
 
-from kgcl.hooks.conditions import Condition, ConditionResult
-from kgcl.hooks.core import HookReceipt, HookState
+from kgcl.hooks.conditions import ConditionResult
+from kgcl.hooks.core import HookReceipt
 from kgcl.hooks.loader import HookDefinition, HookEffect, HookLoader
 from kgcl.hooks.security import ErrorSanitizer
 from kgcl.hooks.value_objects import HookName
@@ -111,9 +108,7 @@ class HookOrchestrator:
         >>> print(f"Executed {len(result.receipts)} effects")
     """
 
-    def __init__(
-        self, graph: Graph, hooks_file: Path, continue_on_error: bool = True
-    ) -> None:
+    def __init__(self, graph: Graph, hooks_file: Path, continue_on_error: bool = True) -> None:
         """Initialize orchestrator with RDF graph and hooks file.
 
         Args:
@@ -136,25 +131,18 @@ class HookOrchestrator:
         self._execution_stack: set[HookName] = set()
         self._sanitizer = ErrorSanitizer()
 
-        logger.info(
-            f"Initialized orchestrator with {len(self.hooks)} hooks, "
-            f"continue_on_error={continue_on_error}"
-        )
+        logger.info(f"Initialized orchestrator with {len(self.hooks)} hooks, continue_on_error={continue_on_error}")
 
     @staticmethod
     def _coerce_hook_name(hook_name: str | HookName) -> HookName:
         """Normalize hook identifiers through HookName poka-yoke."""
         return HookName.ensure(hook_name)
 
-    def _append_error(
-        self, errors: list[str], hook_name: HookName, code: str, message: str
-    ) -> None:
+    def _append_error(self, errors: list[str], hook_name: HookName, code: str, message: str) -> None:
         """Record a formatted error entry."""
         errors.append(f"{hook_name} [{code}]: {message}")
 
-    def _append_exception(
-        self, errors: list[str], hook_name: HookName, error: Exception
-    ) -> None:
+    def _append_exception(self, errors: list[str], hook_name: HookName, error: Exception) -> None:
         """Sanitize and record an exception."""
         sanitized = self._sanitizer.sanitize(error)
         self._append_error(errors, hook_name, sanitized.code, sanitized.message)
@@ -164,9 +152,7 @@ class HookOrchestrator:
         """Compute elapsed milliseconds."""
         return (datetime.now() - start_time).total_seconds() * 1000
 
-    def register_handler(
-        self, hook_name: str | HookName, handler: EffectHandler
-    ) -> None:
+    def register_handler(self, hook_name: str | HookName, handler: EffectHandler) -> None:
         """Register effect handler for a hook.
 
         Multiple handlers can be registered for the same hook.
@@ -184,9 +170,7 @@ class HookOrchestrator:
         self._handlers[key].append(handler)
         logger.debug(f"Registered handler for {key}")
 
-    def unregister_handler(
-        self, hook_name: str | HookName, handler: EffectHandler | None = None
-    ) -> None:
+    def unregister_handler(self, hook_name: str | HookName, handler: EffectHandler | None = None) -> None:
         """Unregister effect handler(s) for a hook.
 
         Args:
@@ -210,10 +194,7 @@ class HookOrchestrator:
             logger.debug(f"Unregistered handler for {key}")
 
     def trigger_event(
-        self,
-        event_type: str,
-        event_data: dict[str, Any] | None = None,
-        actor: str | None = None,
+        self, event_type: str, event_data: dict[str, Any] | None = None, actor: str | None = None
     ) -> ExecutionResult:
         """Trigger hooks matching event type.
 
@@ -259,19 +240,10 @@ class HookOrchestrator:
                     break
 
         success = len(all_errors) == 0
-        return ExecutionResult(
-            success=success,
-            receipts=all_receipts,
-            errors=all_errors,
-            triggered_hooks=all_triggered,
-        )
+        return ExecutionResult(success=success, receipts=all_receipts, errors=all_errors, triggered_hooks=all_triggered)
 
     def execute_hook(
-        self,
-        hook: HookDefinition,
-        event_type: str,
-        event_data: dict[str, Any],
-        actor: str | None = None,
+        self, hook: HookDefinition, event_type: str, event_data: dict[str, Any], actor: str | None = None
     ) -> ExecutionResult:
         """Execute single hook with all its effects.
 
@@ -288,9 +260,7 @@ class HookOrchestrator:
         # Check for circular execution
         if hook.name in self._execution_stack:
             logger.warning(f"Circular hook execution detected: {hook.name}")
-            return ExecutionResult(
-                success=False, receipts=[], errors=[f"Circular execution: {hook.name}"]
-            )
+            return ExecutionResult(success=False, receipts=[], errors=[f"Circular execution: {hook.name}"])
 
         self._execution_stack.add(hook.name)
 
@@ -304,9 +274,7 @@ class HookOrchestrator:
             # Execute each effect
             for effect in hook.effects:
                 try:
-                    receipt = self._execute_effect(
-                        hook, effect, event_type, event_data, actor
-                    )
+                    receipt = self._execute_effect(hook, effect, event_type, event_data, actor)
                     receipts.append(receipt)
 
                     # Capture receipt-level errors
@@ -325,23 +293,13 @@ class HookOrchestrator:
                         break
 
             success = len(errors) == 0
-            return ExecutionResult(
-                success=success,
-                receipts=receipts,
-                errors=errors,
-                triggered_hooks=triggered_hooks,
-            )
+            return ExecutionResult(success=success, receipts=receipts, errors=errors, triggered_hooks=triggered_hooks)
 
         finally:
             self._execution_stack.discard(hook.name)
 
     def _execute_effect(
-        self,
-        hook: HookDefinition,
-        effect: HookEffect,
-        event_type: str,
-        event_data: dict[str, Any],
-        actor: str | None,
+        self, hook: HookDefinition, effect: HookEffect, event_type: str, event_data: dict[str, Any], actor: str | None
     ) -> HookReceipt:
         """Execute single effect and generate receipt.
 
@@ -378,9 +336,7 @@ class HookOrchestrator:
             return HookReceipt(
                 hook_id=hook.name,
                 timestamp=start_time,
-                condition_result=ConditionResult(
-                    triggered=True, metadata={"reason": "no_handlers_registered"}
-                ),
+                condition_result=ConditionResult(triggered=True, metadata={"reason": "no_handlers_registered"}),
                 handler_result=None,
                 duration_ms=duration,
                 actor=actor,
@@ -412,13 +368,7 @@ class HookOrchestrator:
         except Exception as e:
             duration = self._duration_ms(start_time)
             sanitized = self._sanitizer.sanitize(e)
-            logger.error(
-                "Effect %s failed for hook %s: %s",
-                effect.label,
-                hook.name,
-                sanitized.message,
-                exc_info=True,
-            )
+            logger.error("Effect %s failed for hook %s: %s", effect.label, hook.name, sanitized.message, exc_info=True)
 
             return HookReceipt(
                 hook_id=hook.name,
@@ -465,9 +415,7 @@ class HookOrchestrator:
                     triggered.append(hook.name)
 
                     # Execute chained hook
-                    self.execute_hook(
-                        hook, trigger_event, receipt.handler_result, actor=receipt.actor
-                    )
+                    self.execute_hook(hook, trigger_event, receipt.handler_result, actor=receipt.actor)
 
         return triggered
 

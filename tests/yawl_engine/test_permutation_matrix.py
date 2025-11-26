@@ -46,23 +46,9 @@ References
 from __future__ import annotations
 
 from itertools import product
-from typing import Any
 
 import pytest
 from rdflib import Graph, Literal, Namespace, URIRef
-
-from kgcl.yawl_engine.patterns.advanced_branching import (
-    Discriminator,
-    MultiChoice,
-    SynchronizingMerge,
-)
-from kgcl.yawl_engine.patterns.basic_control import (
-    ExclusiveChoice,
-    ParallelSplit,
-    Sequence,
-    SimpleMerge,
-    Synchronization,
-)
 
 # YAWL namespaces
 YAWL = Namespace("http://www.yawlfoundation.org/yawlschema#")
@@ -187,12 +173,7 @@ def build_split_join_graph(
     return g
 
 
-def build_nested_split_graph(
-    outer_split: str,
-    inner_split: str,
-    outer_join: str,
-    inner_join: str,
-) -> Graph:
+def build_nested_split_graph(outer_split: str, inner_split: str, outer_join: str, inner_join: str) -> Graph:
     """Build nested split-join pattern (split within split).
 
     Parameters
@@ -245,9 +226,7 @@ def build_nested_split_graph(
     return g
 
 
-def build_chained_split_graph(
-    split1: str, join1: str, split2: str, join2: str
-) -> Graph:
+def build_chained_split_graph(split1: str, join1: str, split2: str, join2: str) -> Graph:
     """Build chained split-join pattern (split→join→split→join).
 
     Parameters
@@ -308,11 +287,7 @@ def build_chained_split_graph(
 
 @pytest.mark.parametrize(
     "split,join,branches",
-    [
-        (s, j, b)
-        for s, j, b in product(SPLIT_TYPES, JOIN_TYPES, BRANCH_COUNTS)
-        if is_valid_combination(s, j)
-    ],
+    [(s, j, b) for s, j, b in product(SPLIT_TYPES, JOIN_TYPES, BRANCH_COUNTS) if is_valid_combination(s, j)],
 )
 def test_valid_split_join_permutation(split: str, join: str, branches: int) -> None:
     """Test all valid split-join combinations execute correctly.
@@ -592,9 +567,7 @@ def test_or_discriminator_first_wins(branches: int, quorum: int) -> None:
     """
     predicates = {f"branch{i}": f"condition{i}" for i in range(branches)}
 
-    graph = build_split_join_graph(
-        "OR", "Discriminator", branches, predicates=predicates, quorum=quorum
-    )
+    graph = build_split_join_graph("OR", "Discriminator", branches, predicates=predicates, quorum=quorum)
 
     # Verify OR split
     split_task = URIRef("urn:task:split")
@@ -620,9 +593,7 @@ def test_or_discriminator_first_wins(branches: int, quorum: int) -> None:
         ("XOR", "AND", "XOR", "AND"),  # Exclusive with inner parallel
     ],
 )
-def test_nested_split_patterns(
-    outer_split: str, inner_split: str, outer_join: str, inner_join: str
-) -> None:
+def test_nested_split_patterns(outer_split: str, inner_split: str, outer_join: str, inner_join: str) -> None:
     """Test nested split-join patterns (split within split).
 
     Parameters
@@ -667,9 +638,7 @@ def test_nested_split_patterns(
         ("AND", "Discriminator", "OR", "XOR"),  # Quorum then multi-choice
     ],
 )
-def test_chained_split_patterns(
-    split1: str, join1: str, split2: str, join2: str
-) -> None:
+def test_chained_split_patterns(split1: str, join1: str, split2: str, join2: str) -> None:
     """Test chained split-join patterns (split→join→split→join).
 
     Parameters
@@ -802,9 +771,7 @@ def test_permutation_matrix_coverage_summary() -> None:
 
     # Calculate total parametrized test cases
     valid_permutations = sum(
-        1
-        for s, j, b in product(SPLIT_TYPES, JOIN_TYPES, BRANCH_COUNTS)
-        if is_valid_combination(s, j)
+        1 for s, j, b in product(SPLIT_TYPES, JOIN_TYPES, BRANCH_COUNTS) if is_valid_combination(s, j)
     )
 
     # Should generate 100+ test cases

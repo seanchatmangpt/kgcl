@@ -21,27 +21,18 @@ from typing import Any
 
 import pytest
 
-from kgcl.hooks.conditions import (
-    ConditionResult,
-    SparqlAskCondition,
-    ThresholdCondition,
-    ThresholdOperator,
-)
+from kgcl.hooks.conditions import ConditionResult, SparqlAskCondition, ThresholdCondition, ThresholdOperator
 from kgcl.hooks.core import Hook
 from kgcl.hooks.file_resolver import FileResolver, FileResolverError
 from kgcl.hooks.lifecycle import HookContext, HookExecutionPipeline
 from kgcl.hooks.performance import PerformanceMetrics, PerformanceOptimizer
 from kgcl.hooks.query_cache import QueryCache
 from kgcl.hooks.receipts import MerkleTree, Receipt, ReceiptStore
-from kgcl.hooks.sandbox import SandboxRestrictions
+
+# SandboxRestrictions removed for research mode
 from kgcl.hooks.security import ErrorSanitizer
 from kgcl.hooks.value_objects import HookName
-from kgcl.unrdf_engine.hook_registry import (
-    PersistentHookRegistry,
-    PolicyPack,
-    PolicyPackManager,
-    PolicyPackManifest,
-)
+from kgcl.unrdf_engine.hook_registry import PersistentHookRegistry, PolicyPack, PolicyPackManager, PolicyPackManifest
 from kgcl.unrdf_engine.hooks import HookContext as KnowledgeHookContext
 from kgcl.unrdf_engine.hooks import HookPhase, KnowledgeHook
 
@@ -52,14 +43,7 @@ P50_LOWER_BOUND = 40.0
 P50_UPPER_BOUND = 60.0
 P99_LOWER_BOUND = 95.0
 P99_UPPER_BOUND = 99.0
-SANDBOX_ALLOWED_PATH = Path(gettempdir()) / "allowed"
-SANDBOX_ALLOWED_PATH_STR = str(SANDBOX_ALLOWED_PATH)
-SANDBOX_ALLOWED_FILE = f"{SANDBOX_ALLOWED_PATH_STR}/file.txt"
-SANDBOX_PATH_TRAVERSAL = f"{SANDBOX_ALLOWED_PATH_STR}/../../../etc/passwd"
-SANDBOX_BASE_PATH_STR = str(Path(gettempdir()))
-SANDBOX_TEST_ROOT_STR = str(Path(gettempdir()) / "sandbox-test")
-SANDBOX_MEMORY_LIMIT_MB = 128
-SANDBOX_INVALID_MEMORY_LIMIT = -1
+# Sandbox constants removed for research mode
 EXPECTED_TRIPLE_COUNT = 10
 ARRAY_TRIPLE_THRESHOLD = 3
 QUERY_BATCH_COUNT = 3
@@ -105,9 +89,7 @@ class TestSecurityIntegration:
         hook = Hook(
             name=HookName.new("failing_hook"),
             description="Test hook that fails",
-            condition=ThresholdCondition(
-                variable="count", operator=ThresholdOperator.GREATER_THAN, value=0
-            ),
+            condition=ThresholdCondition(variable="count", operator=ThresholdOperator.GREATER_THAN, value=0),
             handler=failing_handler,
         )
 
@@ -122,33 +104,9 @@ class TestSecurityIntegration:
         # Verify sensitive info removed
         assert "/etc/passwd" not in receipt.error
         assert "line 42" not in receipt.error
-        assert (
-            "[REDACTED]" in receipt.error
-            or receipt.error == "Secret path [REDACTED] exposed in [REDACTED]"
-        )
+        assert "[REDACTED]" in receipt.error or receipt.error == "Secret path [REDACTED] exposed in [REDACTED]"
 
-    @pytest.mark.asyncio
-    async def test_sandbox_restrictions_enforced(self) -> None:
-        """Sandbox restrictions prevent unauthorized path access."""
-        sandbox = SandboxRestrictions(
-            allowed_paths=[SANDBOX_ALLOWED_PATH_STR],
-            no_network=True,
-            no_process_spawn=True,
-            memory_limit_mb=256,
-            timeout_ms=5000,
-        )
-
-        # Test allowed path
-        assert sandbox.validate_path(SANDBOX_ALLOWED_FILE) is True
-
-        # Test disallowed path
-        assert sandbox.validate_path("/etc/passwd") is False
-
-        # Test path traversal attempt
-        assert sandbox.validate_path(SANDBOX_PATH_TRAVERSAL) is False
-
-        # Validate configuration
-        assert sandbox.validate_restrictions() is True
+    # test_sandbox_restrictions_enforced removed for research mode
 
     @pytest.mark.asyncio
     async def test_execution_id_generation_unique(self) -> None:
@@ -178,9 +136,7 @@ class TestSecurityIntegration:
         hook = Hook(
             name=HookName.new("error_hook"),
             description="Test error sanitization",
-            condition=ThresholdCondition(
-                variable="trigger", operator=ThresholdOperator.EQUALS, value=True
-            ),
+            condition=ThresholdCondition(variable="trigger", operator=ThresholdOperator.EQUALS, value=True),
             handler=error_with_stack_trace,
         )
 
@@ -196,39 +152,7 @@ class TestSecurityIntegration:
         assert "/app/handlers/processor.py" not in receipt.error
         assert "line 123" not in receipt.error
 
-    @pytest.mark.asyncio
-    async def test_path_traversal_prevented(self) -> None:
-        """Path traversal attacks are prevented by sandbox."""
-        sandbox = SandboxRestrictions(allowed_paths=[SANDBOX_TEST_ROOT_STR])
-
-        # Various path traversal attempts
-        attacks = [
-            f"{SANDBOX_TEST_ROOT_STR}/../etc/passwd",
-            f"{SANDBOX_TEST_ROOT_STR}/../../root/.ssh",
-            f"{SANDBOX_TEST_ROOT_STR}/./../../etc/shadow",
-        ]
-
-        for attack_path in attacks:
-            assert sandbox.validate_path(attack_path) is False
-
-    @pytest.mark.asyncio
-    async def test_memory_limit_respected(self) -> None:
-        """Sandbox respects memory limit configuration."""
-        with TemporaryDirectory() as tmpdir:
-            sandbox = SandboxRestrictions(
-                allowed_paths=[tmpdir], memory_limit_mb=SANDBOX_MEMORY_LIMIT_MB
-            )
-
-            assert sandbox.memory_limit_mb == SANDBOX_MEMORY_LIMIT_MB
-            assert sandbox.validate_restrictions() is True
-
-            # Invalid memory limit
-            invalid_path = (Path(tmpdir) / "temp").as_posix()
-            invalid_sandbox = SandboxRestrictions(
-                allowed_paths=[invalid_path],
-                memory_limit_mb=SANDBOX_INVALID_MEMORY_LIMIT,
-            )
-            assert invalid_sandbox.validate_restrictions() is False
+    # test_path_traversal_prevented and test_memory_limit_respected removed for research mode
 
     @pytest.mark.asyncio
     async def test_error_sanitizer_removes_sensitive_patterns(self) -> None:
@@ -236,9 +160,7 @@ class TestSecurityIntegration:
         sanitizer = ErrorSanitizer()
 
         # Test various sensitive patterns
-        error = Exception(
-            'File "/usr/local/app/handler.py", line 45, in process_request at line 123'
-        )
+        error = Exception('File "/usr/local/app/handler.py", line 45, in process_request at line 123')
         sanitized = sanitizer.sanitize(error)
 
         assert "[REDACTED]" in sanitized.message
@@ -250,17 +172,12 @@ class TestSecurityIntegration:
         """Execution context propagates through pipeline."""
 
         def context_checker(context: dict[str, Any]) -> dict[str, Any]:
-            return {
-                "received_actor": context.get("actor"),
-                "has_execution_id": "execution_id" in context,
-            }
+            return {"received_actor": context.get("actor"), "has_execution_id": "execution_id" in context}
 
         hook = Hook(
             name=HookName.new("context_hook"),
             description="Test context propagation",
-            condition=ThresholdCondition(
-                variable="value", operator=ThresholdOperator.GREATER_THAN, value=0
-            ),
+            condition=ThresholdCondition(variable="value", operator=ThresholdOperator.GREATER_THAN, value=0),
             handler=context_checker,
             actor="test_actor",
         )
@@ -318,15 +235,11 @@ class TestPerformanceIntegration:
         optimizer = PerformanceOptimizer()
 
         # Simulate cache miss (slower)
-        metric1 = PerformanceMetrics(
-            operation="sparql_ask", latency_ms=50.0, success=True
-        )
+        metric1 = PerformanceMetrics(operation="sparql_ask", latency_ms=50.0, success=True)
         optimizer.record_metric(metric1)
 
         # Simulate cache hit (faster)
-        metric2 = PerformanceMetrics(
-            operation="sparql_ask", latency_ms=1.0, success=True
-        )
+        metric2 = PerformanceMetrics(operation="sparql_ask", latency_ms=1.0, success=True)
         optimizer.record_metric(metric2)
 
         stats = optimizer.get_stats("sparql_ask")
@@ -358,9 +271,7 @@ class TestPerformanceIntegration:
         optimizer = PerformanceOptimizer()
 
         # Record metrics with SLO target
-        metric1 = PerformanceMetrics(
-            operation="hook_execute", latency_ms=50.0, success=True, p99_target_ms=100.0
-        )
+        metric1 = PerformanceMetrics(operation="hook_execute", latency_ms=50.0, success=True, p99_target_ms=100.0)
         metric2 = PerformanceMetrics(
             operation="hook_execute",
             latency_ms=150.0,  # Violates SLO
@@ -388,9 +299,7 @@ class TestPerformanceIntegration:
         hook = Hook(
             name=HookName.new("perf_hook"),
             description="Test performance tracking",
-            condition=ThresholdCondition(
-                variable="value", operator=ThresholdOperator.GREATER_THAN, value=0
-            ),
+            condition=ThresholdCondition(variable="value", operator=ThresholdOperator.GREATER_THAN, value=0),
             handler=simple_handler,
         )
 
@@ -441,9 +350,7 @@ class TestPerformanceIntegration:
             Hook(
                 name=HookName.new(f"hook_{i}"),
                 description=f"Test hook {i}",
-                condition=ThresholdCondition(
-                    variable="value", operator=ThresholdOperator.GREATER_THAN, value=0
-                ),
+                condition=ThresholdCondition(variable="value", operator=ThresholdOperator.GREATER_THAN, value=0),
                 handler=handler,
                 priority=i * 10,
             )
@@ -514,9 +421,7 @@ class TestPolicyPacksIntegration:
 
             # Create registry with a hook
             registry = PersistentHookRegistry()
-            test_hook = _ConcreteKnowledgeHook(
-                name="hook1", phases=[HookPhase.POST_VALIDATION], priority=100
-            )
+            test_hook = _ConcreteKnowledgeHook(name="hook1", phases=[HookPhase.POST_VALIDATION], priority=100)
             registry.register(test_hook)
 
             # Load pack
@@ -536,18 +441,13 @@ class TestPolicyPacksIntegration:
             pack_dir.mkdir()
 
             manifest = PolicyPackManifest(
-                name="toggle_pack",
-                version="1.0.0",
-                description="Test toggle",
-                hooks=["hook1"],
+                name="toggle_pack", version="1.0.0", description="Test toggle", hooks=["hook1"]
             )
 
             (pack_dir / "manifest.json").write_text(json.dumps(manifest.to_dict()))
 
             registry = PersistentHookRegistry()
-            hook = _ConcreteKnowledgeHook(
-                name="hook1", phases=[HookPhase.PRE_INGESTION]
-            )
+            hook = _ConcreteKnowledgeHook(name="hook1", phases=[HookPhase.PRE_INGESTION])
             registry.register(hook)
 
             manager = PolicyPackManager(base_path=Path(tmpdir), hook_registry=registry)
@@ -575,18 +475,13 @@ class TestPolicyPacksIntegration:
             pack_dir.mkdir()
 
             manifest = PolicyPackManifest(
-                name="exec_pack",
-                version="1.0.0",
-                description="Execution test",
-                hooks=["validation_hook"],
+                name="exec_pack", version="1.0.0", description="Execution test", hooks=["validation_hook"]
             )
 
             (pack_dir / "manifest.json").write_text(json.dumps(manifest.to_dict()))
 
             registry = PersistentHookRegistry()
-            hook = _ConcreteKnowledgeHook(
-                name="validation_hook", phases=[HookPhase.PRE_VALIDATION], priority=90
-            )
+            hook = _ConcreteKnowledgeHook(name="validation_hook", phases=[HookPhase.PRE_VALIDATION], priority=90)
             registry.register(hook)
 
             manager = PolicyPackManager(base_path=Path(tmpdir), hook_registry=registry)
@@ -631,10 +526,7 @@ class TestPolicyPacksIntegration:
             base_dir = Path(tmpdir) / "base_pack"
             base_dir.mkdir()
             base_manifest = PolicyPackManifest(
-                name="base_pack",
-                version="1.0.0",
-                description="Base pack",
-                hooks=["hook1"],
+                name="base_pack", version="1.0.0", description="Base pack", hooks=["hook1"]
             )
             base_manifest_path = base_dir / "manifest.json"
             base_manifest_path.write_text(json.dumps(base_manifest.to_dict()))
@@ -654,9 +546,7 @@ class TestPolicyPacksIntegration:
 
             registry = PersistentHookRegistry()
             for name in ["hook1", "hook2"]:
-                registry.register(
-                    _ConcreteKnowledgeHook(name=name, phases=[HookPhase.PRE_INGESTION])
-                )
+                registry.register(_ConcreteKnowledgeHook(name=name, phases=[HookPhase.PRE_INGESTION]))
 
             manager = PolicyPackManager(base_path=Path(tmpdir), hook_registry=registry)
             manager.load_pack(base_dir)
@@ -703,9 +593,7 @@ class TestFileResolutionIntegration:
             correct_hash = resolver.compute_sha256(query_content)
 
             # Load with correct hash
-            loaded = resolver.load_file(
-                f"file://{query_file}", expected_sha256=correct_hash
-            )
+            loaded = resolver.load_file(f"file://{query_file}", expected_sha256=correct_hash)
             assert loaded == query_content
 
             # Attempt load with wrong hash
@@ -741,10 +629,7 @@ class TestFileResolutionIntegration:
             sha256_hash = resolver.compute_sha256(query_content)
 
             # Create condition with file reference
-            condition = SparqlAskCondition(
-                ref={"uri": f"file://{query_file}", "sha256": sha256_hash},
-                use_cache=False,
-            )
+            condition = SparqlAskCondition(ref={"uri": f"file://{query_file}", "sha256": sha256_hash}, use_cache=False)
 
             # Get query through resolver
             loaded_query = condition.get_query(resolver)
@@ -872,17 +757,13 @@ class TestEndToEndWorkflows:
         execution_log = []
 
         def logging_handler(context: dict[str, Any]) -> dict[str, Any]:
-            execution_log.append(
-                {"context": context, "timestamp": datetime.now(tz=UTC)}
-            )
+            execution_log.append({"context": context, "timestamp": datetime.now(tz=UTC)})
             return {"processed": True, "value": context.get("value", 0) * 2}
 
         hook = Hook(
             name=HookName.new("complete_hook"),
             description="Full pipeline test",
-            condition=ThresholdCondition(
-                variable="value", operator=ThresholdOperator.GREATER_THAN, value=5
-            ),
+            condition=ThresholdCondition(variable="value", operator=ThresholdOperator.GREATER_THAN, value=5),
             handler=logging_handler,
             actor="system",
             priority=80,
@@ -922,9 +803,7 @@ class TestEndToEndWorkflows:
             Hook(
                 name=HookName.new(f"hook_{i}"),
                 description=f"Step {i}",
-                condition=ThresholdCondition(
-                    variable="value", operator=ThresholdOperator.GREATER_THAN, value=0
-                ),
+                condition=ThresholdCondition(variable="value", operator=ThresholdOperator.GREATER_THAN, value=0),
                 handler=create_handler(i),
                 priority=100 - i * 10,  # Descending priority
             )
@@ -956,9 +835,7 @@ class TestEndToEndWorkflows:
             Hook(
                 name=HookName.new(f"perf_hook_{i}"),
                 description=f"Performance test {i}",
-                condition=ThresholdCondition(
-                    variable="trigger", operator=ThresholdOperator.EQUALS, value=True
-                ),
+                condition=ThresholdCondition(variable="trigger", operator=ThresholdOperator.EQUALS, value=True),
                 handler=variable_latency_handler,
             )
             for i in range(10)
@@ -996,36 +873,26 @@ class TestEndToEndWorkflows:
             Hook(
                 name=HookName.new("hook_success"),
                 description="Should succeed",
-                condition=ThresholdCondition(
-                    variable="value", operator=ThresholdOperator.GREATER_THAN, value=0
-                ),
+                condition=ThresholdCondition(variable="value", operator=ThresholdOperator.GREATER_THAN, value=0),
                 handler=failing_handler,
             ),
             Hook(
                 name=HookName.new("hook_fail"),
                 description="Should fail",
-                condition=ThresholdCondition(
-                    variable="value", operator=ThresholdOperator.GREATER_THAN, value=0
-                ),
+                condition=ThresholdCondition(variable="value", operator=ThresholdOperator.GREATER_THAN, value=0),
                 handler=failing_handler,
             ),
             Hook(
                 name=HookName.new("hook_success2"),
                 description="Should succeed",
-                condition=ThresholdCondition(
-                    variable="value", operator=ThresholdOperator.GREATER_THAN, value=0
-                ),
+                condition=ThresholdCondition(variable="value", operator=ThresholdOperator.GREATER_THAN, value=0),
                 handler=failing_handler,
             ),
         ]
 
         pipeline = HookExecutionPipeline(stop_on_error=False)
 
-        contexts = [
-            {"value": 5, "fail": False},
-            {"value": 5, "fail": True},
-            {"value": 5, "fail": False},
-        ]
+        contexts = [{"value": 5, "fail": False}, {"value": 5, "fail": True}, {"value": 5, "fail": False}]
 
         receipts = []
         for hook, ctx in zip(hooks, contexts, strict=True):

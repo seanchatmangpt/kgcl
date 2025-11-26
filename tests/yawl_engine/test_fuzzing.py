@@ -39,14 +39,7 @@ from hypothesis import strategies as st
 from hypothesis.stateful import RuleBasedStateMachine, invariant, rule
 from rdflib import Graph, Literal, Namespace, URIRef
 
-from kgcl.yawl_engine.core import ExecutionResult
-from kgcl.yawl_engine.patterns.basic_control import (
-    ExclusiveChoice,
-    ParallelSplit,
-    Sequence,
-    SimpleMerge,
-    Synchronization,
-)
+from kgcl.yawl_engine.patterns.basic_control import ExclusiveChoice, ParallelSplit, Sequence, Synchronization
 from kgcl.yawl_engine.patterns.structural import ArbitraryCycles, ImplicitTermination
 
 # YAWL namespaces
@@ -406,10 +399,7 @@ def test_synchronization_never_crashes(graph: Graph, context: dict[str, Any]) ->
 
         # Property: Monotonicity - if all incoming completed, join should succeed
         incoming = list(graph.subjects(YAWL.flowsTo, join_task))
-        all_completed = all(
-            (task, YAWL.status, Literal("completed")) in graph
-            for task in incoming
-        )
+        all_completed = all((task, YAWL.status, Literal("completed")) in graph for task in incoming)
         if all_completed and len(incoming) >= 2:
             assert exec_result.success
 
@@ -634,13 +624,7 @@ def test_patterns_respect_timeout(graph: Graph, context: dict[str, Any]) -> None
 
     Uses signal.alarm to enforce 5-second timeout per pattern execution.
     """
-    patterns = [
-        Sequence(),
-        ParallelSplit(),
-        ExclusiveChoice(),
-        Synchronization(),
-        ArbitraryCycles(max_iterations=10),
-    ]
+    patterns = [Sequence(), ParallelSplit(), ExclusiveChoice(), Synchronization(), ArbitraryCycles(max_iterations=10)]
 
     tasks = list(graph.subjects(YAWL.flowsTo, None))
     assume(len(tasks) > 0)
@@ -715,13 +699,7 @@ def test_patterns_no_memory_leaks(graph: Graph, context: dict[str, Any]) -> None
 )
 @settings(max_examples=50, deadline=5000)
 def test_patterns_handle_all_data_types(
-    graph: Graph,
-    task: URIRef,
-    int_val: int,
-    float_val: float,
-    str_val: str,
-    bool_val: bool,
-    list_val: list[int],
+    graph: Graph, task: URIRef, int_val: int, float_val: float, str_val: str, bool_val: bool, list_val: list[int]
 ) -> None:
     """Property: Patterns handle all Python data types in context.
 

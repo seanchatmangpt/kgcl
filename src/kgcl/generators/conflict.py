@@ -5,7 +5,7 @@ resolutions for optimal scheduling.
 """
 
 from dataclasses import dataclass, field
-from datetime import UTC, datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from typing import Any
 
 from rdflib import Graph, Namespace
@@ -83,9 +83,7 @@ class ConflictReportGenerator(ProjectionGenerator):
         """
         super().__init__(graph)
         self.lookahead_days = lookahead_days
-        self.start_date = datetime.now(tz=UTC).replace(
-            hour=0, minute=0, second=0, microsecond=0
-        )
+        self.start_date = datetime.now(tz=UTC).replace(hour=0, minute=0, second=0, microsecond=0)
 
     def gather_data(self) -> dict[str, Any]:
         """Gather conflicts from RDF graph.
@@ -100,10 +98,7 @@ class ConflictReportGenerator(ProjectionGenerator):
         resolutions = self._generate_resolutions(time_conflicts, resource_conflicts)
 
         return {
-            "date_range": {
-                "start": self.start_date,
-                "end": self.start_date + timedelta(days=self.lookahead_days),
-            },
+            "date_range": {"start": self.start_date, "end": self.start_date + timedelta(days=self.lookahead_days)},
             "total_conflicts": len(time_conflicts) + len(resource_conflicts),
             "time_conflicts": time_conflicts,
             "resource_conflicts": resource_conflicts,
@@ -134,11 +129,7 @@ class ConflictReportGenerator(ProjectionGenerator):
 
         for row in results:
             start_dt = self._parse_datetime(row.start)
-            end_dt = (
-                self._parse_datetime(row.end)
-                if row.end
-                else start_dt + timedelta(hours=1)
-            )
+            end_dt = self._parse_datetime(row.end) if row.end else start_dt + timedelta(hours=1)
 
             # Filter events within date range
             if start_dt < self.start_date or start_dt > end_range:
@@ -151,17 +142,13 @@ class ConflictReportGenerator(ProjectionGenerator):
                     "start": start_dt,
                     "end": end_dt,
                     "location": str(row.location) if row.location else "",
-                    "attendees": self._parse_attendees(row.attendees)
-                    if row.attendees
-                    else [],
+                    "attendees": self._parse_attendees(row.attendees) if row.attendees else [],
                 }
             )
 
         return events
 
-    def _detect_time_conflicts(
-        self, events: list[dict[str, Any]]
-    ) -> list[TimeConflict]:
+    def _detect_time_conflicts(self, events: list[dict[str, Any]]) -> list[TimeConflict]:
         """Detect overlapping time conflicts in events."""
         conflicts = []
 
@@ -254,9 +241,7 @@ class ConflictReportGenerator(ProjectionGenerator):
         return conflicts
 
     def _generate_resolutions(
-        self,
-        time_conflicts: list[TimeConflict],
-        resource_conflicts: list[ResourceConflict],
+        self, time_conflicts: list[TimeConflict], resource_conflicts: list[ResourceConflict]
     ) -> list[ConflictResolution]:
         """Generate suggested resolutions for conflicts."""
         resolutions = []
@@ -267,9 +252,7 @@ class ConflictReportGenerator(ProjectionGenerator):
                     conflict_type="time",
                     suggestion=f"Reschedule '{conflict.event2_title}' to avoid overlap with '{conflict.event1_title}'",
                     priority=1 if conflict.overlap_minutes > 30 else 3,
-                    estimated_impact="high"
-                    if conflict.overlap_minutes > 60
-                    else "medium",
+                    estimated_impact="high" if conflict.overlap_minutes > 60 else "medium",
                 )
             )
 

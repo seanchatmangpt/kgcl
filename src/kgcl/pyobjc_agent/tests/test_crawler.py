@@ -6,13 +6,7 @@ import json
 import unittest
 from unittest.mock import MagicMock, patch
 
-from ..crawler import (
-    CapabilityClass,
-    CapabilityMethod,
-    FrameworkCapabilities,
-    FrameworkName,
-    PyObjCFrameworkCrawler,
-)
+from ..crawler import CapabilityClass, CapabilityMethod, FrameworkCapabilities, FrameworkName, PyObjCFrameworkCrawler
 
 
 class TestPyObjCFrameworkCrawler(unittest.TestCase):
@@ -81,11 +75,7 @@ class TestPyObjCFrameworkCrawler(unittest.TestCase):
         mock_class1 = type("MockClass1", (), {})
         mock_class2 = type("MockClass2", (), {})
         mock_framework = MagicMock()
-        mock_framework.__dir__ = lambda self: [
-            "MockClass1",
-            "MockClass2",
-            "not_a_class",
-        ]
+        mock_framework.__dir__ = lambda self: ["MockClass1", "MockClass2", "not_a_class"]
         mock_framework.MockClass1 = mock_class1
         mock_framework.MockClass2 = mock_class2
         mock_framework.not_a_class = "string"
@@ -102,20 +92,11 @@ class TestPyObjCFrameworkCrawler(unittest.TestCase):
     def test_generate_jsonld(self):
         """Test JSON-LD generation."""
         # Create test capabilities
-        method = CapabilityMethod(
-            selector="isActive",
-            return_type="bool",
-            is_property=True,
-            is_observable=True,
-        )
+        method = CapabilityMethod(selector="isActive", return_type="bool", is_property=True, is_observable=True)
 
-        cls = CapabilityClass(
-            name="TestClass", framework="TestFramework", methods=[method]
-        )
+        cls = CapabilityClass(name="TestClass", framework="TestFramework", methods=[method])
 
-        capabilities = FrameworkCapabilities(
-            framework_name="TestFramework", classes=[cls]
-        )
+        capabilities = FrameworkCapabilities(framework_name="TestFramework", classes=[cls])
 
         # Generate JSON-LD
         jsonld = self.crawler.generate_jsonld(capabilities)
@@ -141,11 +122,7 @@ class TestPyObjCFrameworkCrawler(unittest.TestCase):
         import tempfile
 
         # Create test capabilities
-        capabilities = {
-            "TestFramework": FrameworkCapabilities(
-                framework_name="TestFramework", classes=[]
-            )
-        }
+        capabilities = {"TestFramework": FrameworkCapabilities(framework_name="TestFramework", classes=[])}
 
         # Export to temp file
         with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".jsonld") as f:
@@ -193,10 +170,7 @@ class TestCapabilityDataStructures(unittest.TestCase):
         method2 = CapabilityMethod(selector="method2", return_type="int")
 
         cls = CapabilityClass(
-            name="TestClass",
-            framework="Foundation",
-            methods=[method1, method2],
-            protocols=["NSObject"],
+            name="TestClass", framework="Foundation", methods=[method1, method2], protocols=["NSObject"]
         )
 
         self.assertEqual(cls.name, "TestClass")

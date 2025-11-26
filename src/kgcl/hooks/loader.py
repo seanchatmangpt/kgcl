@@ -12,15 +12,12 @@ Chicago TDD Pattern:
 """
 
 import logging
-from dataclasses import dataclass, field
-from datetime import datetime
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, List, Optional
 
-from rdflib import Graph, Literal, Namespace, URIRef
-from rdflib.namespace import RDF, RDFS
+from rdflib import Graph, Namespace, URIRef
+from rdflib.namespace import RDFS
 
-from kgcl.hooks.conditions import Condition, ConditionResult
 from kgcl.hooks.value_objects import HookName
 
 logger = logging.getLogger(__name__)
@@ -82,9 +79,7 @@ class HookDefinition:
     def __post_init__(self) -> None:
         """Validate hook definition after initialization."""
         if not self.trigger_event and not self.cron_schedule:
-            raise ValueError(
-                f"Hook {self.name} must have either trigger_event or cron_schedule"
-            )
+            raise ValueError(f"Hook {self.name} must have either trigger_event or cron_schedule")
         if not self.effects:
             raise ValueError(f"Hook {self.name} must have at least one effect")
 
@@ -202,9 +197,7 @@ class HookLoader:
 
         # Get trigger event
         trigger_event = self._get_trigger_event(hook_uri)
-        trigger_label = (
-            self._get_trigger_label(trigger_event) if trigger_event else None
-        )
+        trigger_label = self._get_trigger_label(trigger_event) if trigger_event else None
 
         # Get cron schedule (if any)
         cron_schedule = self._get_cron_schedule(hook_uri)
@@ -329,20 +322,12 @@ class HookLoader:
                 target = str(obj)
 
         if not all([label, description, command, target]):
-            raise ValueError(
-                f"Effect missing required fields: label={label}, command={command}"
-            )
+            raise ValueError(f"Effect missing required fields: label={label}, command={command}")
 
         # Map command to generator
         generator = self._map_command_to_generator(command)
 
-        return HookEffect(
-            label=label,
-            description=description,
-            command=command,
-            target=target,
-            generator=generator,
-        )
+        return HookEffect(label=label, description=description, command=command, target=target, generator=generator)
 
     def _map_command_to_generator(self, command: str) -> str | None:
         """Map CLI command to generator class name.

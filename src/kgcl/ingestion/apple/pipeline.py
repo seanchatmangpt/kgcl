@@ -72,9 +72,7 @@ class AppleIngestPipeline:
             # Ingest calendar events
             if "calendar_events" in ingest_data:
                 try:
-                    result = self.calendar_engine.ingest_batch(
-                        ingest_data["calendar_events"]
-                    )
+                    result = self.calendar_engine.ingest_batch(ingest_data["calendar_events"])
                     self._merge_graph(result.graph)
                     metrics.event_count = result.items_processed
                     if not result.success:
@@ -85,9 +83,7 @@ class AppleIngestPipeline:
             # Ingest reminders
             if "reminders" in ingest_data:
                 try:
-                    result = self.reminders_engine.ingest_batch(
-                        ingest_data["reminders"]
-                    )
+                    result = self.reminders_engine.ingest_batch(ingest_data["reminders"])
                     self._merge_graph(result.graph)
                     metrics.action_count = result.items_processed
                     if not result.success:
@@ -119,10 +115,7 @@ class AppleIngestPipeline:
 
             # Calculate totals
             metrics.total_count = (
-                metrics.event_count
-                + metrics.action_count
-                + metrics.message_count
-                + metrics.work_count
+                metrics.event_count + metrics.action_count + metrics.message_count + metrics.work_count
             )
             metrics.error_count = len(errors)
 

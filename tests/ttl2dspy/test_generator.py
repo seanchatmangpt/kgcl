@@ -136,20 +136,9 @@ class TestSignatureDefinition:
         sig = SignatureDefinition(
             class_name="TestSignature",
             inputs=[
-                PropertyShape(
-                    path=URIRef("http://example.org/input"),
-                    name="tags",
-                    datatype=XSD.string,
-                    max_count=2,
-                )
+                PropertyShape(path=URIRef("http://example.org/input"), name="tags", datatype=XSD.string, max_count=2)
             ],
-            outputs=[
-                PropertyShape(
-                    path=URIRef("http://example.org/output"),
-                    name="result",
-                    datatype=XSD.string,
-                )
-            ],
+            outputs=[PropertyShape(path=URIRef("http://example.org/output"), name="result", datatype=XSD.string)],
         )
 
         imports = sig.get_imports()
@@ -209,16 +198,9 @@ class TestDSPyGenerator:
             name="Shape1",
             properties=[
                 PropertyShape(
-                    path=URIRef("http://example.org/input1"),
-                    name="input1",
-                    datatype=XSD.string,
-                    min_count=1,
+                    path=URIRef("http://example.org/input1"), name="input1", datatype=XSD.string, min_count=1
                 ),
-                PropertyShape(
-                    path=URIRef("http://example.org/output1"),
-                    name="output1",
-                    datatype=XSD.string,
-                ),
+                PropertyShape(path=URIRef("http://example.org/output1"), name="output1", datatype=XSD.string),
             ],
         )
         shape1.categorize_properties()
@@ -228,16 +210,9 @@ class TestDSPyGenerator:
             name="Shape2",
             properties=[
                 PropertyShape(
-                    path=URIRef("http://example.org/input2"),
-                    name="input2",
-                    datatype=XSD.integer,
-                    min_count=1,
+                    path=URIRef("http://example.org/input2"), name="input2", datatype=XSD.integer, min_count=1
                 ),
-                PropertyShape(
-                    path=URIRef("http://example.org/output2"),
-                    name="output2",
-                    datatype=XSD.boolean,
-                ),
+                PropertyShape(path=URIRef("http://example.org/output2"), name="output2", datatype=XSD.boolean),
             ],
         )
         shape2.categorize_properties()

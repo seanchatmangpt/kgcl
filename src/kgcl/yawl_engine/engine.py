@@ -12,9 +12,7 @@ Stratum 5: Simulation (Nuclear Protocol Demonstration)
 Examples
 --------
 >>> atman = Atman()
->>> ctx = TransactionContext(
-...     actor="operator1", roles=["role:General"], prev_hash="0" * 64
-... )
+>>> ctx = TransactionContext(actor="operator1", roles=["role:General"], prev_hash="0" * 64)
 >>> receipt = await atman.step("urn:task:InitiateLaunch", ctx)
 >>> assert receipt.committed
 """
@@ -154,8 +152,7 @@ class QuadDelta(BaseModel):
     Examples
     --------
     >>> delta = QuadDelta(
-    ...     additions=[("urn:task:1", "yawl:status", "completed")],
-    ...     data_updates={"launch_authorized": True},
+    ...     additions=[("urn:task:1", "yawl:status", "completed")], data_updates={"launch_authorized": True}
     ... )
     """
 
@@ -186,10 +183,7 @@ class TransactionContext(BaseModel):
     Examples
     --------
     >>> ctx = TransactionContext(
-    ...     actor="operator1",
-    ...     roles=["role:General"],
-    ...     prev_hash="0" * 64,
-    ...     data={"decision_code": "alpha"},
+    ...     actor="operator1", roles=["role:General"], prev_hash="0" * 64, data={"decision_code": "alpha"}
     ... )
     """
 
@@ -298,12 +292,8 @@ class Kernel:
         >>> from rdflib import Dataset, URIRef
         >>> store = Dataset()
         >>> # ... populate store with task constraints ...
-        >>> ctx = TransactionContext(
-        ...     actor="user1", roles=["role:General"], prev_hash="0" * 64
-        ... )
-        >>> result = Kernel._check_resources(
-        ...     store, URIRef("urn:task:InitiateLaunch"), ctx
-        ... )
+        >>> ctx = TransactionContext(actor="user1", roles=["role:General"], prev_hash="0" * 64)
+        >>> result = Kernel._check_resources(store, URIRef("urn:task:InitiateLaunch"), ctx)
         >>> assert isinstance(result, bool)
         """
         # Query: SELECT ?role WHERE { task yawl:resourceConstraint ?role }
@@ -314,29 +304,21 @@ class Kernel:
         }}
         """
         results = store.query(query)
-        required_roles = {
-            str(cast(ResultRow, r).role) for r in results if hasattr(r, "role")
-        }
+        required_roles = {str(cast(ResultRow, r).role) for r in results if hasattr(r, "role")}
 
         if not required_roles:
             return True  # No constraints
 
         # Normalize role URIs (extract role name from urn:org:role:General)
-        normalized_required = {
-            role.split(":")[-1] if ":" in role else role for role in required_roles
-        }
+        normalized_required = {role.split(":")[-1] if ":" in role else role for role in required_roles}
 
         # Normalize actor roles (extract from role:General)
-        normalized_actor = {
-            role.split(":")[-1] if ":" in role else role for role in ctx.roles
-        }
+        normalized_actor = {role.split(":")[-1] if ":" in role else role for role in ctx.roles}
 
         return bool(normalized_required & normalized_actor)
 
     @staticmethod
-    def _apply_data_mapping(
-        store: Dataset, task: URIRef, ctx: TransactionContext
-    ) -> dict[str, Any]:
+    def _apply_data_mapping(store: Dataset, task: URIRef, ctx: TransactionContext) -> dict[str, Any]:
         """Apply data perspective mappings (input → output variables).
 
         Parameters
@@ -356,10 +338,7 @@ class Kernel:
         Examples
         --------
         >>> ctx = TransactionContext(
-        ...     actor="user1",
-        ...     roles=["role:General"],
-        ...     prev_hash="0" * 64,
-        ...     data={"decision_code": "alpha"},
+        ...     actor="user1", roles=["role:General"], prev_hash="0" * 64, data={"decision_code": "alpha"}
         ... )
         >>> updated = Kernel._apply_data_mapping(store, task_uri, ctx)
         >>> assert "launch_authorized" in updated
@@ -463,10 +442,7 @@ class Kernel:
         updated_data = Kernel._apply_data_mapping(store, task, ctx)
 
         # Mark task completed and enable all outgoing edges
-        additions = [
-            (str(task), str(YAWL.status), "completed"),
-            (str(task), str(YAWL.splitType), "AND"),
-        ]
+        additions = [(str(task), str(YAWL.status), "completed"), (str(task), str(YAWL.splitType), "AND")]
 
         # Query for outgoing tasks
         query = f"""
@@ -557,17 +533,7 @@ class Kernel:
 
         # Verify all incoming tasks are completed
         all_completed = all(
-            bool(
-                list(
-                    store.triples(
-                        (
-                            URIRef(str(cast(ResultRow, row).incoming)),
-                            YAWL.status,
-                            Literal("completed"),
-                        )
-                    )
-                )
-            )
+            bool(list(store.triples((URIRef(str(cast(ResultRow, row).incoming)), YAWL.status, Literal("completed")))))
             for row in incoming
             if hasattr(row, "incoming")
         )
@@ -578,10 +544,7 @@ class Kernel:
 
         updated_data = Kernel._apply_data_mapping(store, task, ctx)
 
-        additions = [
-            (str(task), str(YAWL.status), "completed"),
-            (str(task), str(YAWL.joinType), "AND"),
-        ]
+        additions = [(str(task), str(YAWL.status), "completed"), (str(task), str(YAWL.joinType), "AND")]
 
         return QuadDelta(additions=additions, data_updates=updated_data)
 
@@ -612,10 +575,7 @@ class Kernel:
         updated_data = Kernel._apply_data_mapping(store, task, ctx)
         updated_data["aborted"] = True
 
-        additions = [
-            (str(task), str(YAWL.status), "cancelled"),
-            (str(task), str(YAWL.cancelledBy), ctx.actor),
-        ]
+        additions = [(str(task), str(YAWL.status), "cancelled"), (str(task), str(YAWL.cancelledBy), ctx.actor)]
 
         return QuadDelta(additions=additions, data_updates=updated_data)
 
@@ -637,9 +597,7 @@ class Atman:
     Examples
     --------
     >>> atman = Atman()
-    >>> ctx = TransactionContext(
-    ...     actor="operator1", roles=["role:General"], prev_hash="0" * 64
-    ... )
+    >>> ctx = TransactionContext(actor="operator1", roles=["role:General"], prev_hash="0" * 64)
     >>> receipt = await atman.step("urn:task:InitiateLaunch", ctx)
     >>> assert receipt.committed
     """
@@ -755,10 +713,7 @@ class Atman:
         --------
         >>> atman = Atman()
         >>> ctx = TransactionContext(
-        ...     actor="user1",
-        ...     roles=["role:General"],
-        ...     prev_hash="0" * 64,
-        ...     data={"decision_code": "alpha"},
+        ...     actor="user1", roles=["role:General"], prev_hash="0" * 64, data={"decision_code": "alpha"}
         ... )
         >>> receipt = await atman.step("urn:task:InitiateLaunch", ctx)
         >>> assert receipt.verb_executed == "filter"
@@ -772,12 +727,7 @@ class Atman:
 
             logger.info(
                 "Executing YAWL verb",
-                extra={
-                    "task": task_uri,
-                    "verb": verb_name,
-                    "actor": ctx.actor,
-                    "tx_id": ctx.tx_id,
-                },
+                extra={"task": task_uri, "verb": verb_name, "actor": ctx.actor, "tx_id": ctx.tx_id},
             )
 
             # Execute verb (synchronous kernel call)
@@ -796,9 +746,7 @@ class Atman:
             merkle_root = self._compute_merkle_root(delta)
 
             # Update provenance chain
-            self._tip_hash = hashlib.sha256(
-                (ctx.prev_hash + merkle_root).encode()
-            ).hexdigest()
+            self._tip_hash = hashlib.sha256((ctx.prev_hash + merkle_root).encode()).hexdigest()
 
             # Serialize state snapshot
             state_snapshot = self.store.serialize(format="turtle")
@@ -814,12 +762,7 @@ class Atman:
         except Exception as e:
             logger.exception("YAWL execution failed", extra={"task": task_uri})
             return Receipt(
-                tx_id=ctx.tx_id,
-                committed=False,
-                merkle_root="",
-                verb_executed="error",
-                state_snapshot="",
-                error=str(e),
+                tx_id=ctx.tx_id, committed=False, merkle_root="", verb_executed="error", state_snapshot="", error=str(e)
             )
 
 
@@ -849,10 +792,7 @@ async def run_nuclear_protocol() -> None:
 
     # Step 1: General initiates launch (XOR split)
     ctx1 = TransactionContext(
-        actor="General.Smith",
-        roles=["role:General"],
-        prev_hash="0" * 64,
-        data={"decision_code": "alpha"},
+        actor="General.Smith", roles=["role:General"], prev_hash="0" * 64, data={"decision_code": "alpha"}
     )
     receipt1 = await atman.step("urn:task:InitiateLaunch", ctx1)
     print(f"Step 1: {receipt1.verb_executed} - Committed: {receipt1.committed}")
@@ -860,10 +800,7 @@ async def run_nuclear_protocol() -> None:
 
     # Step 2: Operators enter codes (AND split - parallel)
     ctx2 = TransactionContext(
-        actor="Operator.Jones",
-        roles=["role:Operator"],
-        prev_hash=receipt1.merkle_root,
-        data=ctx1.data.copy(),
+        actor="Operator.Jones", roles=["role:Operator"], prev_hash=receipt1.merkle_root, data=ctx1.data.copy()
     )
     ctx2.data.update({"code1": "ALPHA-7-7", "code2": "BRAVO-2-2"})
     receipt2 = await atman.step("urn:task:CodesEntry", ctx2)
@@ -871,10 +808,7 @@ async def run_nuclear_protocol() -> None:
 
     # Step 3: Supervisor verifies codes (AND join)
     ctx3 = TransactionContext(
-        actor="Supervisor.Davis",
-        roles=["role:Supervisor"],
-        prev_hash=receipt2.merkle_root,
-        data=ctx2.data.copy(),
+        actor="Supervisor.Davis", roles=["role:Supervisor"], prev_hash=receipt2.merkle_root, data=ctx2.data.copy()
     )
     receipt3 = await atman.step("urn:task:VerifyCodes", ctx3)
     print(f"Step 3: {receipt3.verb_executed} - Committed: {receipt3.committed}")
@@ -882,10 +816,7 @@ async def run_nuclear_protocol() -> None:
 
     # Step 4: Technical officer arms warheads (SEQ)
     ctx4 = TransactionContext(
-        actor="TechOfficer.Lee",
-        roles=["role:TechnicalOfficer"],
-        prev_hash=receipt3.merkle_root,
-        data=ctx3.data.copy(),
+        actor="TechOfficer.Lee", roles=["role:TechnicalOfficer"], prev_hash=receipt3.merkle_root, data=ctx3.data.copy()
     )
     receipt4 = await atman.step("urn:task:ArmWarheads", ctx4)
     print(f"Step 4: {receipt4.verb_executed} - Committed: {receipt4.committed}")
@@ -893,20 +824,14 @@ async def run_nuclear_protocol() -> None:
 
     # Step 5: Final launch command (SEQ)
     ctx5 = TransactionContext(
-        actor="General.Smith",
-        roles=["role:General"],
-        prev_hash=receipt4.merkle_root,
-        data=ctx4.data.copy(),
+        actor="General.Smith", roles=["role:General"], prev_hash=receipt4.merkle_root, data=ctx4.data.copy()
     )
     receipt5 = await atman.step("urn:task:FinalLaunch", ctx5)
     print(f"Step 5: {receipt5.verb_executed} - Committed: {receipt5.committed}")
 
     # Step 6: Emergency abort (TIMER - optional)
     ctx6 = TransactionContext(
-        actor="General.Smith",
-        roles=["role:General"],
-        prev_hash=receipt5.merkle_root,
-        data=ctx5.data.copy(),
+        actor="General.Smith", roles=["role:General"], prev_hash=receipt5.merkle_root, data=ctx5.data.copy()
     )
     receipt6 = await atman.step("urn:task:EmergencyAbort", ctx6)
     print(f"Step 6: {receipt6.verb_executed} - Committed: {receipt6.committed}")

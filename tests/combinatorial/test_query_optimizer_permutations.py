@@ -10,7 +10,7 @@ This module provides exhaustive permutation testing to ensure the query
 optimizer produces consistent, optimal results regardless of input ordering.
 """
 
-# ruff: noqa: E501, PLR2004, F841
+# ruff: noqa: E501, F841
 # E501: Long query strings are necessary for test data
 # PLR2004: Magic numbers in tests represent expected values
 # F841: Some test variables are intentionally unused
@@ -32,14 +32,7 @@ class TestTriplePatternPermutations:
 
     # Test all permutations of 3 triples (6 permutations)
     @pytest.mark.parametrize(
-        "pattern_order",
-        list(
-            itertools.permutations([
-                "?s :name ?name",
-                "?s :age ?age",
-                "?s :email ?email",
-            ])
-        ),
+        "pattern_order", list(itertools.permutations(["?s :name ?name", "?s :age ?age", "?s :email ?email"]))
     )
     def test_triple_reordering_permutations_3_patterns(
         self, optimizer: QueryOptimizer, pattern_order: tuple[str, ...]
@@ -63,27 +56,15 @@ class TestTriplePatternPermutations:
         ("patterns", "expected_most_selective"),
         [
             # Literal object (0.1) should come first
-            (
-                ["?s ?p ?o", "?s :type :Person", '?s :name "Alice"'],
-                '"Alice"',
-            ),
+            (["?s ?p ?o", "?s :type :Person", '?s :name "Alice"'], '"Alice"'),
             # Type predicate (0.2) should come before all-vars (0.9)
-            (
-                ["?s :age ?age", "?s :type :Person", "?s ?p ?o"],
-                ":type",
-            ),
+            (["?s :age ?age", "?s :type :Person", "?s ?p ?o"], ":type"),
             # Literal should come before variable
-            (
-                ["?s ?p ?o", '?s :name "Bob"', "?s :age ?age"],
-                '"Bob"',
-            ),
+            (["?s ?p ?o", '?s :name "Bob"', "?s :age ?age"], '"Bob"'),
         ],
     )
     def test_selectivity_ordering(
-        self,
-        optimizer: QueryOptimizer,
-        patterns: list[str],
-        expected_most_selective: str,
+        self, optimizer: QueryOptimizer, patterns: list[str], expected_most_selective: str
     ) -> None:
         """Check that most selective patterns appear early in optimized query."""
         query = f"SELECT * WHERE {{ {' . '.join(patterns)} }}"
@@ -106,12 +87,14 @@ class TestTriplePatternPermutations:
     @pytest.mark.parametrize(
         "pattern_order",
         list(
-            itertools.permutations([
-                '?s :name "Alice"',  # Literal - 0.1
-                "?s rdf:type :Person",  # Type predicate - 0.2
-                "?s :age ?age",  # Bound predicate - 0.4
-                "?s ?p ?o",  # All vars - 0.9
-            ])
+            itertools.permutations(
+                [
+                    '?s :name "Alice"',  # Literal - 0.1
+                    "?s rdf:type :Person",  # Type predicate - 0.2
+                    "?s :age ?age",  # Bound predicate - 0.4
+                    "?s ?p ?o",  # All vars - 0.9
+                ]
+            )
         ),
     )
     def test_selectivity_based_reordering_permutations(
@@ -156,10 +139,7 @@ class TestFilterPositionPermutations:
     @pytest.mark.parametrize("filter_position", ["before", "middle", "after"])
     @pytest.mark.parametrize("num_triples", [1, 2, 3, 5])
     def test_filter_position_permutations(
-        self,
-        optimizer: QueryOptimizer,
-        filter_position: str,
-        num_triples: int,
+        self, optimizer: QueryOptimizer, filter_position: str, num_triples: int
     ) -> None:
         """Generate query with filter at different positions."""
         # Generate triple patterns
@@ -167,12 +147,7 @@ class TestFilterPositionPermutations:
 
         # Build query with filter at specified position
         if filter_position == "before":
-            query_parts = [
-                "SELECT * WHERE {",
-                "FILTER(?val0 > 10)",
-                " . ".join(triples),
-                "}",
-            ]
+            query_parts = ["SELECT * WHERE {", "FILTER(?val0 > 10)", " . ".join(triples), "}"]
         elif filter_position == "middle":
             mid = num_triples // 2
             query_parts = [
@@ -183,12 +158,7 @@ class TestFilterPositionPermutations:
                 "}",
             ]
         else:  # after
-            query_parts = [
-                "SELECT * WHERE {",
-                " . ".join(triples),
-                ". FILTER(?val0 > 10)",
-                "}",
-            ]
+            query_parts = ["SELECT * WHERE {", " . ".join(triples), ". FILTER(?val0 > 10)", "}"]
 
         query = " ".join(query_parts)
         plan = optimizer.analyze_query(query)
@@ -206,27 +176,15 @@ class TestFilterPositionPermutations:
         ("filter_var", "triple_patterns"),
         [
             # Filter on variable from first triple
-            (
-                "?name",
-                ["?s :name ?name", "?s :age ?age", "?s :email ?email"],
-            ),
+            ("?name", ["?s :name ?name", "?s :age ?age", "?s :email ?email"]),
             # Filter on variable from middle triple
-            (
-                "?age",
-                ["?s :name ?name", "?s :age ?age", "?s :email ?email"],
-            ),
+            ("?age", ["?s :name ?name", "?s :age ?age", "?s :email ?email"]),
             # Filter on variable from last triple
-            (
-                "?email",
-                ["?s :name ?name", "?s :age ?age", "?s :email ?email"],
-            ),
+            ("?email", ["?s :name ?name", "?s :age ?age", "?s :email ?email"]),
         ],
     )
     def test_filter_pushdown_to_producing_triple(
-        self,
-        optimizer: QueryOptimizer,
-        filter_var: str,
-        triple_patterns: list[str],
+        self, optimizer: QueryOptimizer, filter_var: str, triple_patterns: list[str]
     ) -> None:
         """Verify filter is pushed down to triple producing the variable."""
         # Create query with filter at end
@@ -242,9 +200,7 @@ class TestFilterPositionPermutations:
 
         # Filter should appear after the triple that produces the variable
         # (not at the end)
-        optimized_lines = [
-            line.strip() for line in optimized.split("\n") if line.strip()
-        ]
+        optimized_lines = [line.strip() for line in optimized.split("\n") if line.strip()]
 
         # Find filter position
         filter_line_idx = -1
@@ -258,11 +214,7 @@ class TestFilterPositionPermutations:
                 filter_line_idx = idx
             # Find triple that produces the variable
             var_name = filter_var.strip("?")
-            if (
-                var_name in line
-                and "SELECT" not in line
-                and "FILTER" not in line
-            ):
+            if var_name in line and "SELECT" not in line and "FILTER" not in line:
                 producing_triple_idx = idx
 
         # Filter should be present in optimized query
@@ -270,9 +222,7 @@ class TestFilterPositionPermutations:
         if filter_line_idx >= 0 and producing_triple_idx >= 0:
             # Filter should appear somewhere after the producing triple
             distance = abs(filter_line_idx - producing_triple_idx)
-            assert (
-                filter_line_idx >= producing_triple_idx or distance <= max_distance
-            )
+            assert filter_line_idx >= producing_triple_idx or distance <= max_distance
 
 
 class TestOptimizationCombinations:
@@ -283,10 +233,7 @@ class TestOptimizationCombinations:
         """Create fresh optimizer instance."""
         return QueryOptimizer()
 
-    def test_both_optimizations_applied(
-        self,
-        optimizer: QueryOptimizer,
-    ) -> None:
+    def test_both_optimizations_applied(self, optimizer: QueryOptimizer) -> None:
         """Test query with both filter pushdown and triple reordering."""
         # Query with unoptimal order and filter at end
         query = """
@@ -307,9 +254,7 @@ class TestOptimizationCombinations:
         # 1. Type predicate should come before all-vars
         # 2. Filter should be pushed down near :name triple
 
-        optimized_lines = [
-            line.strip() for line in optimized.split("\n") if line.strip()
-        ]
+        optimized_lines = [line.strip() for line in optimized.split("\n") if line.strip()]
 
         type_idx = -1
         all_vars_idx = -1
@@ -331,10 +276,7 @@ class TestOptimizationCombinations:
         if filter_idx >= 0:
             assert filter_idx < len(optimized_lines) - 1
 
-    def test_order_by_limit_optimization(
-        self,
-        optimizer: QueryOptimizer,
-    ) -> None:
+    def test_order_by_limit_optimization(self, optimizer: QueryOptimizer) -> None:
         """Test automatic LIMIT addition for ORDER BY queries."""
         query = """
         SELECT * WHERE {
@@ -351,10 +293,7 @@ class TestOptimizationCombinations:
         # Should automatically add LIMIT
         assert "LIMIT" in optimized
 
-    def test_no_limit_override(
-        self,
-        optimizer: QueryOptimizer,
-    ) -> None:
+    def test_no_limit_override(self, optimizer: QueryOptimizer) -> None:
         """Test that existing LIMIT is not overridden."""
         query = """
         SELECT * WHERE {
@@ -393,11 +332,7 @@ class TestQueryConstructCombinations:
             ["FILTER", "OPTIONAL", "UNION"],
         ],
     )
-    def test_construct_combinations(
-        self,
-        optimizer: QueryOptimizer,
-        constructs: list[str],
-    ) -> None:
+    def test_construct_combinations(self, optimizer: QueryOptimizer, constructs: list[str]) -> None:
         """Test various SPARQL construct combinations."""
         # Build query with specified constructs
         base = "?s :name ?name"
@@ -434,20 +369,9 @@ class TestQueryConstructCombinations:
             assert plan.parallelizable  # UNION queries are parallelizable
 
     @pytest.mark.parametrize(
-        ("has_order_by", "has_limit"),
-        [
-            (True, True),
-            (True, False),
-            (False, True),
-            (False, False),
-        ],
+        ("has_order_by", "has_limit"), [(True, True), (True, False), (False, True), (False, False)]
     )
-    def test_order_limit_combinations(
-        self,
-        optimizer: QueryOptimizer,
-        has_order_by: bool,
-        has_limit: bool,
-    ) -> None:
+    def test_order_limit_combinations(self, optimizer: QueryOptimizer, has_order_by: bool, has_limit: bool) -> None:
         """Test ORDER BY and LIMIT combinations."""
         query = "SELECT * WHERE { ?s :name ?name }"
 
@@ -484,15 +408,8 @@ class TestSelectivityPermutations:
         """Create fresh optimizer instance."""
         return QueryOptimizer()
 
-    @pytest.mark.parametrize(
-        "selectivities",
-        list(itertools.permutations([0.1, 0.2, 0.4, 0.5, 0.9])),
-    )
-    def test_selectivity_permutations(
-        self,
-        optimizer: QueryOptimizer,
-        selectivities: tuple[float, ...],
-    ) -> None:
+    @pytest.mark.parametrize("selectivities", list(itertools.permutations([0.1, 0.2, 0.4, 0.5, 0.9])))
+    def test_selectivity_permutations(self, optimizer: QueryOptimizer, selectivities: tuple[float, ...]) -> None:
         """Verify optimizer correctly orders by selectivity."""
         # Create patterns with known selectivities
         # 0.1=literal, 0.2=type, 0.4=predicate, 0.5=default, 0.9=vars
@@ -539,14 +456,13 @@ class TestSelectivityPermutations:
             assert literal_found
             assert all_vars_found or "?s ?p ?o" not in optimized
 
-    def test_filter_count_selectivity(
-        self,
-        optimizer: QueryOptimizer,
-    ) -> None:
+    def test_filter_count_selectivity(self, optimizer: QueryOptimizer) -> None:
         """Test that multiple filters increase selectivity."""
         query_no_filter = "SELECT * WHERE { ?s :name ?name . ?s :age ?age }"
         query_one_filter = "SELECT * WHERE { ?s :name ?name . ?s :age ?age . FILTER(?age > 18) }"
-        query_two_filters = "SELECT * WHERE { ?s :name ?name . ?s :age ?age . FILTER(?age > 18) . FILTER(?name = 'test') }"
+        query_two_filters = (
+            "SELECT * WHERE { ?s :name ?name . ?s :age ?age . FILTER(?age > 18) . FILTER(?name = 'test') }"
+        )
 
         plan_no_filter = optimizer.analyze_query(query_no_filter)
         plan_one_filter = optimizer.analyze_query(query_one_filter)
@@ -556,10 +472,7 @@ class TestSelectivityPermutations:
         assert plan_one_filter.estimated_selectivity < plan_no_filter.estimated_selectivity
         assert plan_two_filters.estimated_selectivity < plan_one_filter.estimated_selectivity
 
-    def test_triple_count_selectivity(
-        self,
-        optimizer: QueryOptimizer,
-    ) -> None:
+    def test_triple_count_selectivity(self, optimizer: QueryOptimizer) -> None:
         """Test that more triples increase selectivity."""
         query_one = "SELECT * WHERE { ?s :name ?name }"
         query_two = "SELECT * WHERE { ?s :name ?name . ?s :age ?age }"
@@ -590,10 +503,7 @@ class TestIndexSuggestions:
             # One predicate - one index
             ("SELECT * WHERE { ?s <http://ex.com/name> ?o }", 1),
             # Two predicates - two indexes
-            (
-                "SELECT * WHERE { ?s <http://ex.com/name> ?n . ?s <http://ex.com/age> ?a }",
-                2,
-            ),
+            ("SELECT * WHERE { ?s <http://ex.com/name> ?n . ?s <http://ex.com/age> ?a }", 2),
             # Bound subject - subject index
             ("SELECT * WHERE { <http://ex.com/p1> ?p ?o }", 1),
             # Bound object - object index
@@ -601,10 +511,7 @@ class TestIndexSuggestions:
         ],
     )
     def test_index_suggestion_permutations(
-        self,
-        optimizer: QueryOptimizer,
-        query: str,
-        expected_index_count: int,
+        self, optimizer: QueryOptimizer, query: str, expected_index_count: int
     ) -> None:
         """Test index suggestions for various query patterns."""
         suggestions = optimizer.suggest_indexes(query)
@@ -616,10 +523,7 @@ class TestIndexSuggestions:
         for suggestion in suggestions:
             assert "CREATE INDEX" in suggestion
 
-    def test_index_deduplication(
-        self,
-        optimizer: QueryOptimizer,
-    ) -> None:
+    def test_index_deduplication(self, optimizer: QueryOptimizer) -> None:
         """Test that duplicate index suggestions are not made."""
         query1 = "SELECT * WHERE { ?s <http://ex.com/name> ?o }"
         query2 = "SELECT * WHERE { ?s <http://ex.com/name> ?n }"
@@ -639,10 +543,7 @@ class TestExecutionTracking:
         """Create fresh optimizer instance."""
         return QueryOptimizer()
 
-    def test_execution_recording(
-        self,
-        optimizer: QueryOptimizer,
-    ) -> None:
+    def test_execution_recording(self, optimizer: QueryOptimizer) -> None:
         """Test recording execution times."""
         query = "SELECT * WHERE { ?s :name ?name }"
 
@@ -659,10 +560,7 @@ class TestExecutionTracking:
         assert stats["executions"] == 1
         assert stats["avg_time_ms"] == 50.0
 
-    def test_rolling_average(
-        self,
-        optimizer: QueryOptimizer,
-    ) -> None:
+    def test_rolling_average(self, optimizer: QueryOptimizer) -> None:
         """Test rolling average calculation."""
         query = "SELECT * WHERE { ?s :name ?name }"
 
@@ -680,10 +578,7 @@ class TestExecutionTracking:
         assert stats["executions"] == 3
         assert stats["avg_time_ms"] == 50.0  # (40 + 60 + 50) / 3
 
-    def test_query_normalization(
-        self,
-        optimizer: QueryOptimizer,
-    ) -> None:
+    def test_query_normalization(self, optimizer: QueryOptimizer) -> None:
         """Test that queries with different whitespace are treated as same."""
         query1 = "SELECT * WHERE { ?s :name ?name }"
         query2 = "SELECT  *  WHERE  {  ?s  :name  ?name  }"
@@ -732,12 +627,7 @@ class TestCostEstimation:
             (5, 50.0),  # 5 triples * 10ms
         ],
     )
-    def test_base_cost_estimation(
-        self,
-        optimizer: QueryOptimizer,
-        num_triples: int,
-        expected_min_cost: float,
-    ) -> None:
+    def test_base_cost_estimation(self, optimizer: QueryOptimizer, num_triples: int, expected_min_cost: float) -> None:
         """Test base cost estimation for triple count."""
         patterns = [f"?s :prop{i} ?val{i}" for i in range(num_triples)]
         query = f"SELECT * WHERE {{ {' . '.join(patterns)} }}"
@@ -747,10 +637,7 @@ class TestCostEstimation:
         # Should have at least base cost
         assert plan.estimated_cost >= expected_min_cost
 
-    def test_union_cost_multiplier(
-        self,
-        optimizer: QueryOptimizer,
-    ) -> None:
+    def test_union_cost_multiplier(self, optimizer: QueryOptimizer) -> None:
         """Test UNION increases cost by 2x."""
         query_no_union = "SELECT * WHERE { ?s :name ?name }"
         query_with_union = "SELECT * WHERE { { ?s :name ?name } UNION { ?s :altName ?name } }"
@@ -761,10 +648,7 @@ class TestCostEstimation:
         # UNION should approximately double cost
         assert plan_with_union.estimated_cost > plan_no_union.estimated_cost * 1.5
 
-    def test_optional_cost_multiplier(
-        self,
-        optimizer: QueryOptimizer,
-    ) -> None:
+    def test_optional_cost_multiplier(self, optimizer: QueryOptimizer) -> None:
         """Test OPTIONAL increases cost by 1.5x."""
         query_no_optional = "SELECT * WHERE { ?s :name ?name }"
         query_with_optional = "SELECT * WHERE { ?s :name ?name . OPTIONAL { ?s :email ?email } }"
@@ -775,10 +659,7 @@ class TestCostEstimation:
         # OPTIONAL should increase cost
         assert plan_with_optional.estimated_cost > plan_no_optional.estimated_cost
 
-    def test_order_by_without_limit_cost_multiplier(
-        self,
-        optimizer: QueryOptimizer,
-    ) -> None:
+    def test_order_by_without_limit_cost_multiplier(self, optimizer: QueryOptimizer) -> None:
         """Test ORDER BY without LIMIT increases cost by 3x."""
         query_no_order = "SELECT * WHERE { ?s :name ?name }"
         query_with_order = "SELECT * WHERE { ?s :name ?name } ORDER BY ?name"
@@ -798,10 +679,7 @@ class TestEdgeCases:
         """Create fresh optimizer instance."""
         return QueryOptimizer()
 
-    def test_empty_query(
-        self,
-        optimizer: QueryOptimizer,
-    ) -> None:
+    def test_empty_query(self, optimizer: QueryOptimizer) -> None:
         """Test handling of empty or minimal query."""
         query = "SELECT * WHERE { }"
 
@@ -811,10 +689,7 @@ class TestEdgeCases:
         assert plan.estimated_cost >= 0
         assert len(plan.execution_path) > 0
 
-    def test_complex_nested_query(
-        self,
-        optimizer: QueryOptimizer,
-    ) -> None:
+    def test_complex_nested_query(self, optimizer: QueryOptimizer) -> None:
         """Test handling of complex nested query."""
         query = """
         SELECT * WHERE {
@@ -838,10 +713,7 @@ class TestEdgeCases:
         assert not plan.parallelizable
         assert len(plan.execution_path) > 5  # Should have multiple steps
 
-    def test_multiple_filters_same_variable(
-        self,
-        optimizer: QueryOptimizer,
-    ) -> None:
+    def test_multiple_filters_same_variable(self, optimizer: QueryOptimizer) -> None:
         """Test multiple filters on same variable."""
         query = """
         SELECT * WHERE {
@@ -858,10 +730,7 @@ class TestEdgeCases:
         assert plan.optimized_query is not None
         assert plan.optimized_query.count("FILTER") == 2
 
-    def test_no_variables_query(
-        self,
-        optimizer: QueryOptimizer,
-    ) -> None:
+    def test_no_variables_query(self, optimizer: QueryOptimizer) -> None:
         """Test query with no variables (ASK query pattern)."""
         query = 'SELECT * WHERE { <http://ex.com/p1> :name "Alice" }'
 

@@ -6,7 +6,6 @@ Performs compile-time constant folding on Python AST to optimize expressions.
 
 import ast
 import operator
-from typing import Any
 
 
 class ConstantFolder(ast.NodeTransformer):
@@ -44,12 +43,7 @@ class ConstantFolder(ast.NodeTransformer):
     }
 
     # Operator mapping for unary operations
-    _unaryop_map = {
-        ast.UAdd: operator.pos,
-        ast.USub: operator.neg,
-        ast.Not: operator.not_,
-        ast.Invert: operator.inv,
-    }
+    _unaryop_map = {ast.UAdd: operator.pos, ast.USub: operator.neg, ast.Not: operator.not_, ast.Invert: operator.inv}
 
     # Operator mapping for comparison operations
     _cmpop_map = {
@@ -62,10 +56,7 @@ class ConstantFolder(ast.NodeTransformer):
     }
 
     # Operator mapping for boolean operations
-    _boolop_map = {
-        ast.And: lambda values: all(values),
-        ast.Or: lambda values: any(values),
-    }
+    _boolop_map = {ast.And: lambda values: all(values), ast.Or: lambda values: any(values)}
 
     def visit_BinOp(self, node: ast.BinOp) -> ast.AST:
         """Fold binary operations on constants.

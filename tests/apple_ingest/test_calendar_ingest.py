@@ -47,9 +47,7 @@ class TestCalendarEventMapping:
 
         # TODO: Implement
 
-    def test_event_with_attendees_preserves_attendee_list(
-        self, calendar_event_with_attendees
-    ):
+    def test_event_with_attendees_preserves_attendee_list(self, calendar_event_with_attendees):
         """
         GIVEN: A calendar event with multiple attendees
         WHEN: We ingest it to RDF
@@ -176,9 +174,7 @@ class TestCalendarEventValidation:
 
         # TODO: Implement
 
-    def test_event_with_invalid_time_range_fails_validation(
-        self, calendar_event_invalid_times
-    ):
+    def test_event_with_invalid_time_range_fails_validation(self, calendar_event_invalid_times):
         """
         GIVEN: A calendar event where start >= end
         WHEN: We validate against SHACL

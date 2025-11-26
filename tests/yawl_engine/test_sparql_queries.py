@@ -7,7 +7,7 @@ Tests verify observable behavior: correct pattern extraction, validation, and to
 from __future__ import annotations
 
 import pytest
-from rdflib import RDF, RDFS, XSD, Graph, Literal, Namespace, URIRef
+from rdflib import RDF, RDFS, XSD, Graph, Literal, URIRef
 
 from kgcl.yawl_engine.sparql_queries import (
     YAWL,
@@ -253,9 +253,7 @@ def test_extract_pattern_with_predicate_requirement(ontology_graph: Graph) -> No
     assert p6.requires_quorum is False
 
 
-def test_extract_permutation_matrix_includes_valid_combos(
-    permutation_graph: Graph,
-) -> None:
+def test_extract_permutation_matrix_includes_valid_combos(permutation_graph: Graph) -> None:
     """Valid split-join combinations are extracted."""
     entries = extract_permutation_matrix(permutation_graph)
     valid_entries = [e for e in entries if e.is_valid]
@@ -265,22 +263,16 @@ def test_extract_permutation_matrix_includes_valid_combos(
     assert any(e.split_type == "XOR" and e.join_type == "XOR" for e in valid_entries)
 
 
-def test_extract_permutation_matrix_parses_pattern_ids(
-    permutation_graph: Graph,
-) -> None:
+def test_extract_permutation_matrix_parses_pattern_ids(permutation_graph: Graph) -> None:
     """Pattern IDs are parsed from comma-separated string."""
     entries = extract_permutation_matrix(permutation_graph)
-    and_combo = next(
-        e for e in entries if e.split_type == "AND" and e.join_type == "AND"
-    )
+    and_combo = next(e for e in entries if e.split_type == "AND" and e.join_type == "AND")
 
     assert and_combo.generated_patterns == [2, 3]
     assert and_combo.description == "Parallel split and synchronization"
 
 
-def test_extract_permutation_matrix_includes_invalid_combos(
-    permutation_graph: Graph,
-) -> None:
+def test_extract_permutation_matrix_includes_invalid_combos(permutation_graph: Graph) -> None:
     """Invalid combinations are marked as such."""
     entries = extract_permutation_matrix(permutation_graph)
     invalid_entries = [e for e in entries if not e.is_valid]
@@ -446,9 +438,7 @@ def test_extract_workflow_patterns_from_workflow(workflow_graph: Graph) -> None:
     assert 4 in pattern_ids or 5 in pattern_ids
 
 
-def test_validate_pattern_requirements_split_type(
-    workflow_graph: Graph, ontology_graph: Graph
-) -> None:
+def test_validate_pattern_requirements_split_type(workflow_graph: Graph, ontology_graph: Graph) -> None:
     """Pattern split type requirement is validated."""
     task_uri = "http://example.org/task1"
     pattern = PatternDefinition(
@@ -468,9 +458,7 @@ def test_validate_pattern_requirements_split_type(
     assert is_valid is True
 
 
-def test_validate_pattern_requirements_join_type(
-    workflow_graph: Graph, ontology_graph: Graph
-) -> None:
+def test_validate_pattern_requirements_join_type(workflow_graph: Graph, ontology_graph: Graph) -> None:
     """Pattern join type requirement is validated."""
     task_uri = "http://example.org/task2"
     pattern = PatternDefinition(
@@ -490,9 +478,7 @@ def test_validate_pattern_requirements_join_type(
     assert is_valid is True
 
 
-def test_validate_pattern_requirements_predicate(
-    workflow_graph: Graph, ontology_graph: Graph
-) -> None:
+def test_validate_pattern_requirements_predicate(workflow_graph: Graph, ontology_graph: Graph) -> None:
     """Pattern requiring flow predicate is validated."""
     task_uri = "http://example.org/task1"
     pattern = PatternDefinition(
@@ -513,9 +499,7 @@ def test_validate_pattern_requirements_predicate(
     assert is_valid is False  # Fails on split type, not predicate
 
 
-def test_validate_pattern_requirements_quorum(
-    workflow_graph: Graph, ontology_graph: Graph
-) -> None:
+def test_validate_pattern_requirements_quorum(workflow_graph: Graph, ontology_graph: Graph) -> None:
     """Pattern requiring quorum is validated."""
     task_uri = "http://example.org/task3"
     pattern = PatternDefinition(

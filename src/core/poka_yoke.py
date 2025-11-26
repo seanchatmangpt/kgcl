@@ -199,9 +199,7 @@ class Poka:
                 dangerous_patterns = [".unwrap()", ".panic!()", "raise Exception()"]
                 for pattern in dangerous_patterns:
                     if pattern in source:
-                        raise PokaYokeError(
-                            f"Production code contains dangerous pattern: {pattern}"
-                        )
+                        raise PokaYokeError(f"Production code contains dangerous pattern: {pattern}")
             except (OSError, TypeError):
                 # Source not available (compiled code, etc)
                 pass

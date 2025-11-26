@@ -97,9 +97,7 @@ class Receipt:
             "timestamp": self.timestamp.isoformat(),
             "actor": self.actor,
             "condition_triggered": (
-                self.condition_result.triggered
-                if hasattr(self.condition_result, "triggered")
-                else False
+                self.condition_result.triggered if hasattr(self.condition_result, "triggered") else False
             ),
             "handler_result": self.handler_result,
             "duration_ms": self.duration_ms,
@@ -130,15 +128,10 @@ class Receipt:
             "@type": "HookReceipt",
             "@id": f"urn:uuid:{self.receipt_id}",
             "hookId": self.hook_id,
-            "timestamp": {
-                "@type": "xsd:dateTime",
-                "@value": self.timestamp.isoformat(),
-            },
+            "timestamp": {"@type": "xsd:dateTime", "@value": self.timestamp.isoformat()},
             "actor": self.actor,
             "conditionTriggered": (
-                self.condition_result.triggered
-                if hasattr(self.condition_result, "triggered")
-                else False
+                self.condition_result.triggered if hasattr(self.condition_result, "triggered") else False
             ),
             "handlerResult": self.handler_result,
             "durationMs": self.duration_ms,
@@ -169,9 +162,7 @@ class Receipt:
         else:
             timestamp = datetime.fromisoformat(timestamp_value)
 
-        condition_result = ConditionResult(
-            triggered=data.get("conditionTriggered", False), metadata={}
-        )
+        condition_result = ConditionResult(triggered=data.get("conditionTriggered", False), metadata={})
 
         return cls(
             receipt_id=data.get("@id", "").replace("urn:uuid:", ""),
@@ -208,9 +199,7 @@ class Receipt:
             triples.append((subject, "error", self.error))
 
         if hasattr(self.condition_result, "triggered"):
-            triples.append(
-                (subject, "conditionTriggered", str(self.condition_result.triggered))
-            )
+            triples.append((subject, "conditionTriggered", str(self.condition_result.triggered)))
 
         return triples
 
@@ -326,17 +315,11 @@ class ReceiptStore:
         # Filter by actor
         if actor:
             actor_ids = set(self._index_by_actor.get(actor, []))
-            receipt_ids = (
-                actor_ids
-                if receipt_ids is None
-                else receipt_ids.intersection(actor_ids)
-            )
+            receipt_ids = actor_ids if receipt_ids is None else receipt_ids.intersection(actor_ids)
 
         # Get receipts
         if receipt_ids is not None:
-            receipts = [
-                self._receipts[rid] for rid in receipt_ids if rid in self._receipts
-            ]
+            receipts = [self._receipts[rid] for rid in receipt_ids if rid in self._receipts]
         else:
             receipts = list(self._receipts.values())
 
@@ -416,8 +399,4 @@ class MerkleTree:
         MerkleAnchor
             Merkle anchor
         """
-        return MerkleAnchor(
-            root_hash=self.compute_root(),
-            graph_version=graph_version,
-            timestamp=datetime.now(UTC),
-        )
+        return MerkleAnchor(root_hash=self.compute_root(), graph_version=graph_version, timestamp=datetime.now(UTC))

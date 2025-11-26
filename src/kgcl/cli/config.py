@@ -64,12 +64,7 @@ def config() -> None:
 
 @config.command()
 @click.option(
-    "--format",
-    "-f",
-    "output_format",
-    type=click.Choice(["json", "table"]),
-    default="json",
-    help="Output format",
+    "--format", "-f", "output_format", type=click.Choice(["json", "table"]), default="json", help="Output format"
 )
 def show(output_format: str) -> None:
     """Show current configuration."""
@@ -97,9 +92,7 @@ def init() -> None:
         config_file = get_config_file()
 
         if config_file.exists():
-            if not confirm_action(
-                "Configuration already exists. Overwrite?", default=False
-            ):
+            if not confirm_action("Configuration already exists. Overwrite?", default=False):
                 print_info("Aborted")
                 return
 
@@ -117,27 +110,19 @@ def exclude() -> None:
 
 @exclude.command("add")
 @click.option("--file", "file_pattern", type=str, help="File pattern to exclude")
-@click.option(
-    "--directory", "dir_pattern", type=str, help="Directory pattern to exclude"
-)
+@click.option("--directory", "dir_pattern", type=str, help="Directory pattern to exclude")
 @click.option("--pattern", type=str, help="General pattern to exclude")
-def exclude_add(
-    file_pattern: str | None, dir_pattern: str | None, pattern: str | None
-) -> None:
+def exclude_add(file_pattern: str | None, dir_pattern: str | None, pattern: str | None) -> None:
     """Add exclusion pattern."""
     try:
         cfg = load_config() or DEFAULT_CONFIG.copy()
 
         if file_pattern:
-            cfg.setdefault("exclusions", {}).setdefault("files", []).append(
-                file_pattern
-            )
+            cfg.setdefault("exclusions", {}).setdefault("files", []).append(file_pattern)
             print_success(f"Added file exclusion: {file_pattern}")
 
         if dir_pattern:
-            cfg.setdefault("exclusions", {}).setdefault("directories", []).append(
-                dir_pattern
-            )
+            cfg.setdefault("exclusions", {}).setdefault("directories", []).append(dir_pattern)
             print_success(f"Added directory exclusion: {dir_pattern}")
 
         if pattern:
@@ -152,13 +137,9 @@ def exclude_add(
 
 @exclude.command("remove")
 @click.option("--file", "file_pattern", type=str, help="File pattern to remove")
-@click.option(
-    "--directory", "dir_pattern", type=str, help="Directory pattern to remove"
-)
+@click.option("--directory", "dir_pattern", type=str, help="Directory pattern to remove")
 @click.option("--pattern", type=str, help="General pattern to remove")
-def exclude_remove(
-    file_pattern: str | None, dir_pattern: str | None, pattern: str | None
-) -> None:
+def exclude_remove(file_pattern: str | None, dir_pattern: str | None, pattern: str | None) -> None:
     """Remove exclusion pattern."""
     try:
         cfg = load_config() or DEFAULT_CONFIG.copy()
@@ -167,9 +148,7 @@ def exclude_remove(
             cfg["exclusions"]["files"].remove(file_pattern)
             print_success(f"Removed file exclusion: {file_pattern}")
 
-        if dir_pattern and dir_pattern in cfg.get("exclusions", {}).get(
-            "directories", []
-        ):
+        if dir_pattern and dir_pattern in cfg.get("exclusions", {}).get("directories", []):
             cfg["exclusions"]["directories"].remove(dir_pattern)
             print_success(f"Removed directory exclusion: {dir_pattern}")
 
@@ -334,9 +313,7 @@ def _display_config_tables(cfg: dict) -> None:
     """
     # Capabilities table
     if "capabilities" in cfg:
-        cap_data = [
-            {"capability": k, "enabled": v} for k, v in cfg["capabilities"].items()
-        ]
+        cap_data = [{"capability": k, "enabled": v} for k, v in cfg["capabilities"].items()]
         print_table(cap_data, columns=["capability", "enabled"], title="Capabilities")
         print()
 

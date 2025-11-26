@@ -26,9 +26,7 @@ class BaseCollector(ABC):
     Defines the interface that all collectors must implement.
     """
 
-    def __init__(
-        self, output_path: Path, flush_interval: int = 60, batch_size: int = 100
-    ) -> None:
+    def __init__(self, output_path: Path, flush_interval: int = 60, batch_size: int = 100) -> None:
         """Initialize collector.
 
         Parameters

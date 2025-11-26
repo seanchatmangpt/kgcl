@@ -9,9 +9,7 @@ from rdflib import Graph
 from personal_kgcl.ingest.validation import AppleIngestValidator, ValidationReport
 
 
-def validate_ingest(
-    input_path: Path | None = None, verbose: bool = False, dry_run: bool = False
-) -> str:
+def validate_ingest(input_path: Path | None = None, verbose: bool = False, dry_run: bool = False) -> str:
     """Validate the ingest RDF graph against SHACL invariants."""
     graph_path = input_path or Path("data/apple-ingest.ttl")
     if not graph_path.exists():
@@ -25,8 +23,7 @@ def validate_ingest(
 
     if not report.conforms:
         raise ValueError(
-            "Ingest graph failed validation:\n"
-            + (report.text if verbose else "See detailed report with --verbose.")
+            "Ingest graph failed validation:\n" + (report.text if verbose else "See detailed report with --verbose.")
         )
 
     if dry_run:

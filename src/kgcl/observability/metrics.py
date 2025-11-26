@@ -8,19 +8,11 @@ import logging
 from typing import Any
 
 from opentelemetry import metrics
-from opentelemetry.exporter.otlp.proto.grpc.metric_exporter import (
-    OTLPMetricExporter as OTLPGrpcMetricExporter,
-)
-from opentelemetry.exporter.otlp.proto.http.metric_exporter import (
-    OTLPMetricExporter as OTLPHttpMetricExporter,
-)
+from opentelemetry.exporter.otlp.proto.grpc.metric_exporter import OTLPMetricExporter as OTLPGrpcMetricExporter
+from opentelemetry.exporter.otlp.proto.http.metric_exporter import OTLPMetricExporter as OTLPHttpMetricExporter
 from opentelemetry.metrics import Meter, ObservableGauge
 from opentelemetry.sdk.metrics import MeterProvider
-from opentelemetry.sdk.metrics.export import (
-    ConsoleMetricExporter,
-    MetricExporter,
-    PeriodicExportingMetricReader,
-)
+from opentelemetry.sdk.metrics.export import ConsoleMetricExporter, MetricExporter, PeriodicExportingMetricReader
 from opentelemetry.sdk.resources import Resource
 
 from kgcl.observability.config import ExporterType, ObservabilityConfig
@@ -31,9 +23,7 @@ _meter_provider: MeterProvider | None = None
 _configured = False
 
 
-def configure_metrics(
-    config: ObservabilityConfig | None = None,
-) -> MeterProvider | None:
+def configure_metrics(config: ObservabilityConfig | None = None) -> MeterProvider | None:
     """Configure OpenTelemetry metrics with the specified configuration.
 
     Parameters
@@ -119,19 +109,13 @@ def _create_metric_exporter(config: ObservabilityConfig) -> MetricExporter:
         if not config.otlp_endpoint:
             msg = "OTLP endpoint required for OTLP HTTP exporter"
             raise ValueError(msg)
-        return OTLPHttpMetricExporter(
-            endpoint=f"{config.otlp_endpoint}/v1/metrics", insecure=config.otlp_insecure
-        )
+        return OTLPHttpMetricExporter(endpoint=f"{config.otlp_endpoint}/v1/metrics", insecure=config.otlp_insecure)
     if config.metric_exporter == ExporterType.OTLP_GRPC:
         if not config.otlp_endpoint:
             msg = "OTLP endpoint required for OTLP gRPC exporter"
             raise ValueError(msg)
-        return OTLPGrpcMetricExporter(
-            endpoint=config.otlp_endpoint, insecure=config.otlp_insecure
-        )
-    logger.warning(
-        f"Unsupported metric exporter: {config.metric_exporter}, using console"
-    )
+        return OTLPGrpcMetricExporter(endpoint=config.otlp_endpoint, insecure=config.otlp_insecure)
+    logger.warning(f"Unsupported metric exporter: {config.metric_exporter}, using console")
     return ConsoleMetricExporter()
 
 
@@ -180,110 +164,76 @@ class KGCLMetrics:
 
         # Ingestion metrics
         self.events_ingested = meter.create_counter(
-            name="kgcl.events.ingested",
-            description="Total number of events ingested",
-            unit="events",
+            name="kgcl.events.ingested", description="Total number of events ingested", unit="events"
         )
 
         self.ingestion_errors = meter.create_counter(
-            name="kgcl.ingestion.errors",
-            description="Total number of ingestion errors",
-            unit="errors",
+            name="kgcl.ingestion.errors", description="Total number of ingestion errors", unit="errors"
         )
 
         self.ingestion_duration = meter.create_histogram(
-            name="kgcl.ingestion.duration",
-            description="Duration of ingestion operations",
-            unit="ms",
+            name="kgcl.ingestion.duration", description="Duration of ingestion operations", unit="ms"
         )
 
         # Graph operations metrics
         self.graph_operations = meter.create_counter(
-            name="kgcl.graph.operations",
-            description="Total number of graph operations",
-            unit="operations",
+            name="kgcl.graph.operations", description="Total number of graph operations", unit="operations"
         )
 
         self.graph_operation_duration = meter.create_histogram(
-            name="kgcl.graph.operation.duration",
-            description="Duration of graph operations",
-            unit="ms",
+            name="kgcl.graph.operation.duration", description="Duration of graph operations", unit="ms"
         )
 
         self.graph_query_duration = meter.create_histogram(
-            name="kgcl.graph.query.duration",
-            description="Duration of graph queries",
-            unit="ms",
+            name="kgcl.graph.query.duration", description="Duration of graph queries", unit="ms"
         )
 
         # DSPy/LM metrics
         self.lm_calls = meter.create_counter(
-            name="kgcl.lm.calls",
-            description="Total number of language model calls",
-            unit="calls",
+            name="kgcl.lm.calls", description="Total number of language model calls", unit="calls"
         )
 
         self.lm_tokens_used = meter.create_counter(
-            name="kgcl.lm.tokens",
-            description="Total number of tokens used",
-            unit="tokens",
+            name="kgcl.lm.tokens", description="Total number of tokens used", unit="tokens"
         )
 
         self.lm_call_duration = meter.create_histogram(
-            name="kgcl.lm.call.duration",
-            description="Duration of language model calls",
-            unit="ms",
+            name="kgcl.lm.call.duration", description="Duration of language model calls", unit="ms"
         )
 
         self.lm_errors = meter.create_counter(
-            name="kgcl.lm.errors",
-            description="Total number of language model errors",
-            unit="errors",
+            name="kgcl.lm.errors", description="Total number of language model errors", unit="errors"
         )
 
         # Parsing metrics
         self.parse_operations = meter.create_counter(
-            name="kgcl.parse.operations",
-            description="Total number of parse operations",
-            unit="operations",
+            name="kgcl.parse.operations", description="Total number of parse operations", unit="operations"
         )
 
         self.parse_duration = meter.create_histogram(
-            name="kgcl.parse.duration",
-            description="Duration of parse operations",
-            unit="ms",
+            name="kgcl.parse.duration", description="Duration of parse operations", unit="ms"
         )
 
         self.parse_errors = meter.create_counter(
-            name="kgcl.parse.errors",
-            description="Total number of parse errors",
-            unit="errors",
+            name="kgcl.parse.errors", description="Total number of parse errors", unit="errors"
         )
 
         # Cache metrics
         self.cache_hits = meter.create_counter(
-            name="kgcl.cache.hits",
-            description="Total number of cache hits",
-            unit="hits",
+            name="kgcl.cache.hits", description="Total number of cache hits", unit="hits"
         )
 
         self.cache_misses = meter.create_counter(
-            name="kgcl.cache.misses",
-            description="Total number of cache misses",
-            unit="misses",
+            name="kgcl.cache.misses", description="Total number of cache misses", unit="misses"
         )
 
         # Feature generation metrics
         self.features_generated = meter.create_counter(
-            name="kgcl.features.generated",
-            description="Total number of features generated",
-            unit="features",
+            name="kgcl.features.generated", description="Total number of features generated", unit="features"
         )
 
         self.feature_generation_duration = meter.create_histogram(
-            name="kgcl.features.generation.duration",
-            description="Duration of feature generation",
-            unit="ms",
+            name="kgcl.features.generation.duration", description="Duration of feature generation", unit="ms"
         )
 
         # Capability crawler metrics
@@ -294,14 +244,10 @@ class KGCLMetrics:
         )
 
         self.crawler_duration = meter.create_histogram(
-            name="kgcl.crawler.duration",
-            description="Duration of capability crawling",
-            unit="ms",
+            name="kgcl.crawler.duration", description="Duration of capability crawling", unit="ms"
         )
 
-    def record_event_ingestion(
-        self, event_type: str, duration_ms: float, success: bool = True
-    ) -> None:
+    def record_event_ingestion(self, event_type: str, duration_ms: float, success: bool = True) -> None:
         """Record an event ingestion operation.
 
         Parameters
@@ -321,9 +267,7 @@ class KGCLMetrics:
         if not success:
             self.ingestion_errors.add(1, {"event_type": event_type})
 
-    def record_graph_operation(
-        self, operation: str, duration_ms: float, success: bool = True
-    ) -> None:
+    def record_graph_operation(self, operation: str, duration_ms: float, success: bool = True) -> None:
         """Record a graph operation.
 
         Parameters
@@ -340,9 +284,7 @@ class KGCLMetrics:
         self.graph_operations.add(1, attrs)
         self.graph_operation_duration.record(duration_ms, attrs)
 
-    def record_lm_call(
-        self, model: str, tokens: int, duration_ms: float, success: bool = True
-    ) -> None:
+    def record_lm_call(self, model: str, tokens: int, duration_ms: float, success: bool = True) -> None:
         """Record a language model call.
 
         Parameters
@@ -365,9 +307,7 @@ class KGCLMetrics:
         if not success:
             self.lm_errors.add(1, {"model": model})
 
-    def record_parse_operation(
-        self, parser: str, duration_ms: float, success: bool = True
-    ) -> None:
+    def record_parse_operation(self, parser: str, duration_ms: float, success: bool = True) -> None:
         """Record a parse operation.
 
         Parameters
@@ -404,9 +344,7 @@ class KGCLMetrics:
         else:
             self.cache_misses.add(1, attrs)
 
-    def create_gauge(
-        self, name: str, callback: Any, description: str = "", unit: str = ""
-    ) -> ObservableGauge:
+    def create_gauge(self, name: str, callback: Any, description: str = "", unit: str = "") -> ObservableGauge:
         """Create an observable gauge metric.
 
         Parameters
@@ -426,9 +364,7 @@ class KGCLMetrics:
             Created gauge metric
 
         """
-        return self._meter.create_observable_gauge(
-            name=name, callbacks=[callback], description=description, unit=unit
-        )
+        return self._meter.create_observable_gauge(name=name, callbacks=[callback], description=description, unit=unit)
 
 
 def shutdown_metrics() -> None:

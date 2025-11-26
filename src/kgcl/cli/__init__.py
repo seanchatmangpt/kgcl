@@ -19,11 +19,4 @@ from kgcl.cli.weekly_retro import weekly_retro
 
 __version__ = "0.1.0"
 
-__all__ = [
-    "__version__",
-    "config",
-    "daily_brief",
-    "feature_list",
-    "query",
-    "weekly_retro",
-]
+__all__ = ["__version__", "config", "daily_brief", "feature_list", "query", "weekly_retro"]

@@ -23,7 +23,7 @@ YAWL Patterns: http://www.workflowpatterns.com/
 Enterprise Integration Patterns: https://www.enterpriseintegrationpatterns.com/
 """
 
-# ruff: noqa: PLR2004  # Magic values OK in tests
+# Magic values OK in tests
 
 from __future__ import annotations
 
@@ -33,13 +33,7 @@ import pytest
 from rdflib import Dataset, Graph, Literal, Namespace, URIRef
 
 from kgcl.yawl_engine.patterns.cancellation import CancelCase, CancelTask
-from kgcl.yawl_engine.patterns.data_patterns import (
-    CaseData,
-    DataContext,
-    DataInteractionTaskToTask,
-    TaskData,
-    WorkflowData,
-)
+from kgcl.yawl_engine.patterns.data_patterns import DataContext, DataInteractionTaskToTask
 from kgcl.yawl_engine.patterns.multiple_instance import (
     MIDesignTime,
     MIDynamic,
@@ -126,9 +120,7 @@ class TestBatchOrderProcessing:
         # Verify batch completion
         assert check_completion(order_graph, parent_id)
 
-    def test_batch_report_generation_after_completion(
-        self, order_graph: Graph, data_context: DataContext
-    ) -> None:
+    def test_batch_report_generation_after_completion(self, order_graph: Graph, data_context: DataContext) -> None:
         """Batch report is generated only after all 100 orders complete."""
         process_order_task = EX.processBatchOrder
         generate_report_task = EX.generateBatchReport
@@ -157,18 +149,11 @@ class TestBatchOrderProcessing:
         data_context.workflow_data.set("batch_completed", True)
 
         # Simulate report generation
-        data_context.task_data.set(
-            generate_report_task, "report_id", "BATCH_REPORT_001"
-        )
-        data_context.task_data.set(
-            generate_report_task, "total_orders", len(result.instance_ids)
-        )
+        data_context.task_data.set(generate_report_task, "report_id", "BATCH_REPORT_001")
+        data_context.task_data.set(generate_report_task, "total_orders", len(result.instance_ids))
 
         assert data_context.task_data.get(generate_report_task, "total_orders") == 100
-        assert (
-            data_context.task_data.get(generate_report_task, "report_id")
-            == "BATCH_REPORT_001"
-        )
+        assert data_context.task_data.get(generate_report_task, "report_id") == "BATCH_REPORT_001"
 
 
 # ============================================================================
@@ -185,17 +170,13 @@ class TestDynamicOrderLineItems:
 
         # Order A: 5 line items
         order_a_pattern = MIRunTimeKnown(instance_count_variable="line_item_count")
-        result_a = order_a_pattern.execute(
-            order_graph, process_line_item_task, context={"line_item_count": 5}
-        )
+        result_a = order_a_pattern.execute(order_graph, process_line_item_task, context={"line_item_count": 5})
 
         assert result_a.success
         assert len(result_a.instance_ids) == 5
 
         # Order B: 12 line items
-        result_b = order_a_pattern.execute(
-            order_graph, process_line_item_task, context={"line_item_count": 12}
-        )
+        result_b = order_a_pattern.execute(order_graph, process_line_item_task, context={"line_item_count": 12})
 
         assert result_b.success
         assert len(result_b.instance_ids) == 12
@@ -205,9 +186,7 @@ class TestDynamicOrderLineItems:
         process_line_item_task = EX.processLineItem
         pattern = MIRunTimeKnown(instance_count_variable="item_count")
 
-        result = pattern.execute(
-            order_graph, process_line_item_task, context={"item_count": 8}
-        )
+        result = pattern.execute(order_graph, process_line_item_task, context={"item_count": 8})
 
         assert result.success
         assert len(result.instance_ids) == 8
@@ -219,9 +198,7 @@ class TestDynamicOrderLineItems:
             assert len(state_values) == 1
             assert str(state_values[0]) == MIState.RUNNING.value
 
-    def test_line_item_aggregation_after_completion(
-        self, order_graph: Graph, data_context: DataContext
-    ) -> None:
+    def test_line_item_aggregation_after_completion(self, order_graph: Graph, data_context: DataContext) -> None:
         """Order total is aggregated after all line items complete."""
         process_line_item_task = EX.processLineItem
         calculate_total_task = EX.calculateOrderTotal
@@ -229,19 +206,13 @@ class TestDynamicOrderLineItems:
 
         # Process 4 line items
         line_item_prices = [100.0, 250.0, 75.0, 150.0]
-        result = pattern.execute(
-            order_graph,
-            process_line_item_task,
-            context={"item_count": len(line_item_prices)},
-        )
+        result = pattern.execute(order_graph, process_line_item_task, context={"item_count": len(line_item_prices)})
 
         parent_id = result.metadata["parent_id"]
 
         # Simulate line item processing with prices
         for i, instance_id in enumerate(result.instance_ids):
-            data_context.task_data.set(
-                URIRef(instance_id), "item_price", line_item_prices[i]
-            )
+            data_context.task_data.set(URIRef(instance_id), "item_price", line_item_prices[i])
             mark_instance_complete(order_graph, instance_id)
 
         # All line items complete
@@ -265,15 +236,11 @@ class TestStreamingOrderProcessing:
     def test_streaming_no_synchronization(self, order_graph: Graph) -> None:
         """Orders processed as they arrive without waiting for batch."""
         process_order_task = EX.processStreamingOrder
-        pattern = MIDynamic(
-            spawn_condition="order_received", termination_condition="queue_empty"
-        )
+        pattern = MIDynamic(spawn_condition="order_received", termination_condition="queue_empty")
 
         # Simulate 6 orders arriving
         order_stream = ["ORD-001", "ORD-002", "ORD-003", "ORD-004", "ORD-005", "ORD-006"]
-        result = pattern.execute(
-            order_graph, process_order_task, context={"events": order_stream}
-        )
+        result = pattern.execute(order_graph, process_order_task, context={"events": order_stream})
 
         assert result.success
         assert len(result.instance_ids) == 6
@@ -293,17 +260,13 @@ class TestStreamingOrderProcessing:
 
         # First batch: 3 orders
         result1 = pattern.execute(
-            order_graph,
-            process_order_task,
-            context={"events": ["ORD-001", "ORD-002", "ORD-003"]},
+            order_graph, process_order_task, context={"events": ["ORD-001", "ORD-002", "ORD-003"]}
         )
 
         assert len(result1.instance_ids) == 3
 
         # Second batch: 2 more orders arrive
-        result2 = pattern.execute(
-            order_graph, process_order_task, context={"events": ["ORD-004", "ORD-005"]}
-        )
+        result2 = pattern.execute(order_graph, process_order_task, context={"events": ["ORD-004", "ORD-005"]})
 
         assert len(result2.instance_ids) == 2
 
@@ -337,33 +300,23 @@ class TestOrderCompensation:
 
         # Reserve inventory (succeeds)
         order_dataset.add((reserve_inventory_task, YAWL.status, Literal("completed")))
-        order_dataset.add(
-            (reserve_inventory_task, ORDER.reservedQuantity, Literal(10))
-        )
+        order_dataset.add((reserve_inventory_task, ORDER.reservedQuantity, Literal(10)))
 
         # Process payment (fails)
         order_dataset.add((process_payment_task, YAWL.status, Literal("failed")))
 
         # Compensation: Cancel reservation
         cancel = CancelTask()
-        result = cancel.cancel(
-            order_dataset, reserve_inventory_task, "Payment failed - rollback inventory"
-        )
+        result = cancel.cancel(order_dataset, reserve_inventory_task, "Payment failed - rollback inventory")
 
         assert result.success
         assert str(reserve_inventory_task) in result.cancelled_tasks
 
         # Verify reservation is cancelled
-        cancelled_status = list(
-            order_dataset.triples(
-                (reserve_inventory_task, YAWL.status, Literal("cancelled"))
-            )
-        )
+        cancelled_status = list(order_dataset.triples((reserve_inventory_task, YAWL.status, Literal("cancelled"))))
         assert len(cancelled_status) == 1
 
-    def test_shipping_failure_refund_payment(
-        self, order_graph: Graph, data_context: DataContext
-    ) -> None:
+    def test_shipping_failure_refund_payment(self, order_graph: Graph, data_context: DataContext) -> None:
         """Shipping fails → Refund payment."""
         process_payment_task = EX.processPayment
         ship_order_task = EX.shipOrder
@@ -378,23 +331,16 @@ class TestOrderCompensation:
         order_graph.add((ship_order_task, YAWL.status, Literal("failed")))
 
         # Compensation: Refund payment
-        transaction_id = data_context.task_data.get(
-            process_payment_task, "transaction_id"
-        )
+        transaction_id = data_context.task_data.get(process_payment_task, "transaction_id")
         refund_amount = data_context.task_data.get(process_payment_task, "amount")
 
         data_context.task_data.set(refund_payment_task, "refund_txn_id", transaction_id)
         data_context.task_data.set(refund_payment_task, "refund_amount", refund_amount)
 
-        assert (
-            data_context.task_data.get(refund_payment_task, "refund_txn_id")
-            == "TXN-12345"
-        )
+        assert data_context.task_data.get(refund_payment_task, "refund_txn_id") == "TXN-12345"
         assert data_context.task_data.get(refund_payment_task, "refund_amount") == 500.0
 
-    def test_cancel_entire_order_on_critical_failure(
-        self, order_dataset: Dataset
-    ) -> None:
+    def test_cancel_entire_order_on_critical_failure(self, order_dataset: Dataset) -> None:
         """Critical failure cancels entire order workflow."""
         order_workflow = EX.orderWorkflow_W123
         task1 = EX.validateOrder
@@ -417,9 +363,7 @@ class TestOrderCompensation:
         assert len(result.cancelled_tasks) == 3
 
         # Verify workflow aborted
-        aborted = list(
-            order_dataset.triples((order_workflow, YAWL.status, Literal("aborted")))
-        )
+        aborted = list(order_dataset.triples((order_workflow, YAWL.status, Literal("aborted"))))
         assert len(aborted) == 1
 
 
@@ -437,9 +381,7 @@ class TestOrderSplitting:
         pattern = MIWithoutSync()
 
         # Split order across 3 warehouses (no synchronization needed)
-        result = pattern.execute(
-            order_graph, fulfill_order_task, context={"count": 3}
-        )
+        result = pattern.execute(order_graph, fulfill_order_task, context={"count": 3})
 
         assert result.success
         assert len(result.instance_ids) == 3
@@ -457,9 +399,7 @@ class TestOrderSplitting:
         fulfill_order_task = EX.fulfillOrder
         pattern = MIWithoutSync()
 
-        result = pattern.execute(
-            order_graph, fulfill_order_task, context={"count": 5}
-        )
+        result = pattern.execute(order_graph, fulfill_order_task, context={"count": 5})
 
         assert result.success
         assert len(result.instance_ids) == 5
@@ -503,9 +443,7 @@ class TestOrderStatusTracking:
         data_context.case_data.set(order_case_id, "customer_id", "CUST-999")
         data_context.case_data.set(order_case_id, "total_amount", 1200.0)
 
-        assert (
-            data_context.case_data.get(order_case_id, "order_status") == "IN_PROGRESS"
-        )
+        assert data_context.case_data.get(order_case_id, "order_status") == "IN_PROGRESS"
         assert data_context.case_data.get(order_case_id, "customer_id") == "CUST-999"
 
         # Other orders don't see this data
@@ -523,16 +461,12 @@ class TestOrderStatusTracking:
             order_amount = (i + 1) * 100.0
             data_context.workflow_data.increment("daily_order_count", 1)
             current_revenue = data_context.workflow_data.get("daily_revenue") or 0.0
-            data_context.workflow_data.set(
-                "daily_revenue", current_revenue + order_amount
-            )
+            data_context.workflow_data.set("daily_revenue", current_revenue + order_amount)
 
         assert data_context.workflow_data.get("daily_order_count") == 5
         assert data_context.workflow_data.get("daily_revenue") == 1500.0
 
-    def test_status_propagation_task_to_case(
-        self, order_graph: Graph, data_context: DataContext
-    ) -> None:
+    def test_status_propagation_task_to_case(self, order_graph: Graph, data_context: DataContext) -> None:
         """Status propagates from task level to case level."""
         process_payment_task = EX.processPayment
         update_order_status_task = EX.updateOrderStatus
@@ -550,20 +484,14 @@ class TestOrderStatusTracking:
         )
 
         source_context: dict[str, Any] = {
-            "payment_status": data_context.task_data.get(
-                process_payment_task, "payment_status"
-            )
+            "payment_status": data_context.task_data.get(process_payment_task, "payment_status")
         }
         target_context = interaction.transfer(order_graph, source_context)
 
         # Update case-level status
-        data_context.case_data.set(
-            order_case_id, "payment_status", target_context["order_payment_status"]
-        )
+        data_context.case_data.set(order_case_id, "payment_status", target_context["order_payment_status"])
 
-        assert (
-            data_context.case_data.get(order_case_id, "payment_status") == "COMPLETED"
-        )
+        assert data_context.case_data.get(order_case_id, "payment_status") == "COMPLETED"
 
 
 # ============================================================================
@@ -574,9 +502,7 @@ class TestOrderStatusTracking:
 class TestCompleteOrderWorkflows:
     """End-to-end order processing scenarios combining multiple patterns."""
 
-    def test_complete_order_lifecycle(
-        self, order_graph: Graph, data_context: DataContext
-    ) -> None:
+    def test_complete_order_lifecycle(self, order_graph: Graph, data_context: DataContext) -> None:
         """Complete order: Runtime line items → Case status → Workflow totals."""
         order_case_id = "ORDER-COMPLETE-001"
         process_line_item_task = EX.processLineItem
@@ -587,9 +513,7 @@ class TestCompleteOrderWorkflows:
 
         # Dynamic line items (3 items)
         line_item_pattern = MIRunTimeKnown(instance_count_variable="item_count")
-        result = line_item_pattern.execute(
-            order_graph, process_line_item_task, context={"item_count": 3}
-        )
+        result = line_item_pattern.execute(order_graph, process_line_item_task, context={"item_count": 3})
 
         assert result.success
         parent_id = result.metadata["parent_id"]
@@ -597,9 +521,7 @@ class TestCompleteOrderWorkflows:
         # Process line items
         line_item_prices = [200.0, 350.0, 150.0]
         for i, instance_id in enumerate(result.instance_ids):
-            data_context.task_data.set(
-                URIRef(instance_id), "item_price", line_item_prices[i]
-            )
+            data_context.task_data.set(URIRef(instance_id), "item_price", line_item_prices[i])
             mark_instance_complete(order_graph, instance_id)
 
         # All items complete
@@ -613,9 +535,7 @@ class TestCompleteOrderWorkflows:
         # Update workflow totals
         data_context.workflow_data.increment("total_orders_today", 1)
         current_revenue = data_context.workflow_data.get("total_revenue_today") or 0.0
-        data_context.workflow_data.set(
-            "total_revenue_today", current_revenue + order_total
-        )
+        data_context.workflow_data.set("total_revenue_today", current_revenue + order_total)
 
         # Verify end state
         assert data_context.case_data.get(order_case_id, "order_status") == "COMPLETED"
@@ -623,9 +543,7 @@ class TestCompleteOrderWorkflows:
         assert data_context.workflow_data.get("total_orders_today") == 1
         assert data_context.workflow_data.get("total_revenue_today") == 700.0
 
-    def test_batch_with_failed_orders(
-        self, order_graph: Graph, data_context: DataContext
-    ) -> None:
+    def test_batch_with_failed_orders(self, order_graph: Graph, data_context: DataContext) -> None:
         """Batch of 10 orders: 8 succeed, 2 fail with compensation."""
         process_order_task = EX.processBatchOrder
         batch_pattern = MIDesignTime(instance_count=10)

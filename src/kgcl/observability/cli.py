@@ -21,12 +21,7 @@ def cli() -> None:
 
 
 @cli.command()
-@click.option(
-    "--format",
-    type=click.Choice(["json", "text"]),
-    default="text",
-    help="Output format",
-)
+@click.option("--format", type=click.Choice(["json", "text"]), default="text", help="Output format")
 def health(format: str) -> None:
     """Check system health and connectivity.
 
@@ -133,9 +128,7 @@ def test_tracing(duration: int) -> None:
     try:
         while time.time() < end_time:
             with traced_operation(
-                tracer,
-                "test_operation",
-                attributes={"test": "true", "iteration": str(int(time.time()))},
+                tracer, "test_operation", attributes={"test": "true", "iteration": str(int(time.time()))}
             ):
                 time.sleep(1)
                 click.echo(".", nl=False)

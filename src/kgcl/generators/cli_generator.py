@@ -22,17 +22,13 @@ try:
     import rdflib
     from rdflib import RDF, RDFS, Graph, Namespace
 except ImportError:
-    print(
-        "Error: rdflib not installed. Install with: pip install rdflib", file=sys.stderr
-    )
+    print("Error: rdflib not installed. Install with: pip install rdflib", file=sys.stderr)
     sys.exit(1)
 
 try:
     from jinja2 import Environment, FileSystemLoader, select_autoescape
 except ImportError:
-    print(
-        "Error: jinja2 not installed. Install with: pip install jinja2", file=sys.stderr
-    )
+    print("Error: jinja2 not installed. Install with: pip install jinja2", file=sys.stderr)
     sys.exit(1)
 
 
@@ -50,9 +46,7 @@ class CLIGenerator:
         self.ontology_path = Path(ontology_path)
         self.cli_ontology_path = Path(cli_ontology_path or ontology_path)
         self.template_path = Path(template_path)
-        self.output_path = (
-            Path(output_path) if output_path else Path("personal_kgct_cli.py")
-        )
+        self.output_path = Path(output_path) if output_path else Path("personal_kgct_cli.py")
 
         # Load RDF graph
         self.graph = Graph()
@@ -66,10 +60,7 @@ class CLIGenerator:
         # Setup Jinja
         template_dir = self.template_path.parent
         self.jinja_env = Environment(
-            loader=FileSystemLoader(template_dir),
-            autoescape=select_autoescape(),
-            trim_blocks=True,
-            lstrip_blocks=True,
+            loader=FileSystemLoader(template_dir), autoescape=select_autoescape(), trim_blocks=True, lstrip_blocks=True
         )
 
     def query_commands(self) -> list[dict[str, Any]]:
@@ -142,9 +133,7 @@ class CLIGenerator:
                     "name": str(row.arg_name),
                     "help": str(row.arg_help),
                     "python_type": str(row.arg_type) if row.arg_type else "str",
-                    "required": str(row.required).lower() == "true"
-                    if row.required
-                    else True,
+                    "required": str(row.required).lower() == "true" if row.required else True,
                 }
             )
 
@@ -179,9 +168,7 @@ class CLIGenerator:
                     "python_type": str(row.opt_type) if row.opt_type else "str",
                     "default": str(row.opt_default) if row.opt_default else None,
                     "required": (
-                        str(row.required).lower() == "true"
-                        if hasattr(row, "required") and row.required
-                        else False
+                        str(row.required).lower() == "true" if hasattr(row, "required") and row.required else False
                     ),
                     "repeatable": (
                         str(row.repeatable).lower() == "true"
@@ -269,9 +256,7 @@ def main():
     """CLI entry point."""
     import argparse
 
-    parser = argparse.ArgumentParser(
-        description="Generate KGCT Typer CLI from RDF ontology"
-    )
+    parser = argparse.ArgumentParser(description="Generate KGCT Typer CLI from RDF ontology")
     parser.add_argument(
         "--ontology",
         type=Path,
@@ -279,10 +264,7 @@ def main():
         help="Path to ontology.ttl (default: .kgc/ontology.ttl)",
     )
     parser.add_argument(
-        "--cli-ontology",
-        type=Path,
-        default=Path(".kgc/cli.ttl"),
-        help="Path to CLI ontology (default: .kgc/cli.ttl)",
+        "--cli-ontology", type=Path, default=Path(".kgc/cli.ttl"), help="Path to CLI ontology (default: .kgc/cli.ttl)"
     )
     parser.add_argument(
         "--template",
@@ -291,16 +273,9 @@ def main():
         help="Path to CLI template (default: .kgc/projections/cli.py.j2)",
     )
     parser.add_argument(
-        "--output",
-        type=Path,
-        default=Path("personal_kgct_cli.py"),
-        help="Output path (default: personal_kgct_cli.py)",
+        "--output", type=Path, default=Path("personal_kgct_cli.py"), help="Output path (default: personal_kgct_cli.py)"
     )
-    parser.add_argument(
-        "--check-receipt",
-        action="store_true",
-        help="Verify receipt hash instead of generating",
-    )
+    parser.add_argument("--check-receipt", action="store_true", help="Verify receipt hash instead of generating")
     parser.add_argument("--verbose", "-v", action="store_true", help="Verbose output")
 
     args = parser.parse_args()

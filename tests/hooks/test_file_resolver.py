@@ -126,9 +126,7 @@ class TestFileResolverIntegration:
         resolver = FileResolver()
 
         # Create condition with file reference
-        condition = SparqlAskCondition(
-            ref={"uri": f"file://{sparql_file}", "sha256": None}
-        )
+        condition = SparqlAskCondition(ref={"uri": f"file://{sparql_file}", "sha256": None})
 
         # Get query using resolver
         query = condition.get_query(resolver)
@@ -146,9 +144,7 @@ class TestFileResolverIntegration:
         resolver = FileResolver()
 
         # Create condition with file reference + hash
-        condition = SparqlAskCondition(
-            ref={"uri": f"file://{sparql_file}", "sha256": expected_hash}
-        )
+        condition = SparqlAskCondition(ref={"uri": f"file://{sparql_file}", "sha256": expected_hash})
 
         # Get query using resolver
         query = condition.get_query(resolver)
@@ -163,8 +159,7 @@ class TestFileResolverIntegration:
 
         # Both inline and ref provided
         condition = SparqlAskCondition(
-            query="ASK { ?s ?p ?o }",
-            ref={"uri": "file:///some/file.sparql", "sha256": None},
+            query="ASK { ?s ?p ?o }", ref={"uri": "file:///some/file.sparql", "sha256": None}
         )
 
         # Inline query should be returned

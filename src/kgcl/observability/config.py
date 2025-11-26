@@ -141,21 +141,14 @@ class ObservabilityConfig:
 
         return cls(
             service_name=os.getenv("OTEL_SERVICE_NAME", "kgcl"),
-            environment=Environment(
-                os.getenv("KGCL_ENVIRONMENT", Environment.LOCAL.value).lower()
-            ),
+            environment=Environment(os.getenv("KGCL_ENVIRONMENT", Environment.LOCAL.value).lower()),
             enable_tracing=os.getenv("OTEL_TRACES_ENABLED", "true").lower() == "true",
             enable_metrics=os.getenv("OTEL_METRICS_ENABLED", "true").lower() == "true",
             enable_logging=os.getenv("OTEL_LOGS_ENABLED", "true").lower() == "true",
-            trace_exporter=ExporterType(
-                os.getenv("OTEL_TRACES_EXPORTER", ExporterType.CONSOLE.value).lower()
-            ),
-            metric_exporter=ExporterType(
-                os.getenv("OTEL_METRICS_EXPORTER", ExporterType.CONSOLE.value).lower()
-            ),
+            trace_exporter=ExporterType(os.getenv("OTEL_TRACES_EXPORTER", ExporterType.CONSOLE.value).lower()),
+            metric_exporter=ExporterType(os.getenv("OTEL_METRICS_EXPORTER", ExporterType.CONSOLE.value).lower()),
             otlp_endpoint=os.getenv("OTEL_EXPORTER_OTLP_ENDPOINT"),
-            otlp_insecure=os.getenv("OTEL_EXPORTER_OTLP_INSECURE", "true").lower()
-            == "true",
+            otlp_insecure=os.getenv("OTEL_EXPORTER_OTLP_INSECURE", "true").lower() == "true",
             sampling_rate=sampling_rate,
             log_level=os.getenv("KGCL_LOG_LEVEL", "INFO").upper(),
             log_format=os.getenv("KGCL_LOG_FORMAT", "json").lower(),  # type: ignore[arg-type]

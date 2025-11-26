@@ -11,11 +11,7 @@ class TestMetricThreshold:
     def test_create_threshold(self):
         """Test creating MetricThreshold."""
         threshold = MetricThreshold(
-            metric_name="response_time",
-            baseline=100.0,
-            variance=10.0,
-            current_threshold=120.0,
-            sample_count=50,
+            metric_name="response_time", baseline=100.0, variance=10.0, current_threshold=120.0, sample_count=50
         )
         assert threshold.metric_name == "response_time"
         assert threshold.baseline == 100.0

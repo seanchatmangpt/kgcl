@@ -9,10 +9,7 @@ from pyshacl import validate
 from rdflib import Graph
 
 DEFAULT_KGC_DIR = Path(__file__).resolve().parents[3] / ".kgc"
-DEFAULT_SHAPES = [
-    DEFAULT_KGC_DIR / "types.ttl",
-    DEFAULT_KGC_DIR / "invariants.shacl.ttl",
-]
+DEFAULT_SHAPES = [DEFAULT_KGC_DIR / "types.ttl", DEFAULT_KGC_DIR / "invariants.shacl.ttl"]
 
 
 @dataclass(frozen=True)
@@ -38,10 +35,6 @@ class AppleIngestValidator:
     def validate(self, graph: Graph) -> ValidationReport:
         shapes_graph = self._load_shapes()
         conforms, _, report_text = validate(
-            data_graph=graph,
-            shacl_graph=shapes_graph,
-            inference="rdfs",
-            allow_infos=True,
-            allow_warnings=True,
+            data_graph=graph, shacl_graph=shapes_graph, inference="rdfs", allow_infos=True, allow_warnings=True
         )
         return ValidationReport(conforms=bool(conforms), text=str(report_text))

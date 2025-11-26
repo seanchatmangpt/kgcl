@@ -101,8 +101,7 @@ class FixtureMetadata:
 
     def __repr__(self) -> str:
         return (
-            f"FixtureMetadata(id={self.fixture_id!r}, "
-            f"created_at={self.created_at!r}, snapshots={len(self.snapshots)})"
+            f"FixtureMetadata(id={self.fixture_id!r}, created_at={self.created_at!r}, snapshots={len(self.snapshots)})"
         )
 
 

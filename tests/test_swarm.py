@@ -1,14 +1,7 @@
 """Tests for swarm orchestration."""
 
 import pytest
-from src.swarm import (
-    CompositionBuilder,
-    SwarmCoordinator,
-    SwarmMember,
-    SwarmTask,
-    TaskResult,
-    TaskStatus,
-)
+from src.swarm import CompositionBuilder, SwarmCoordinator, SwarmMember, SwarmTask, TaskResult, TaskStatus
 
 
 class TestSwarmMember:
@@ -24,9 +17,7 @@ class TestSwarmMember:
         member = SwarmMember("worker")
 
         def handler(task: SwarmTask) -> TaskResult:
-            return TaskResult(
-                task_name=task.name, status=TaskStatus.SUCCESS, output="done"
-            )
+            return TaskResult(task_name=task.name, status=TaskStatus.SUCCESS, output="done")
 
         member.register_handler("unit_test", handler)
         task = SwarmTask("handler_test", task_type="unit_test")

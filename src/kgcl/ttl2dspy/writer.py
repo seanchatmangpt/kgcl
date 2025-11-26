@@ -105,8 +105,7 @@ class ModuleWriter:
         self._write_history.append(result)
 
         logger.info(
-            f"Wrote {signatures_count} signatures ({lines_count} lines, "
-            f"{file_size} bytes) in {write_time:.3f}s"
+            f"Wrote {signatures_count} signatures ({lines_count} lines, {file_size} bytes) in {write_time:.3f}s"
         )
 
         return result
@@ -131,9 +130,7 @@ class ModuleWriter:
         results = []
         for module_name, code in modules.items():
             output_path = output_dir / f"{module_name}.py"
-            result = self.write_module(
-                code=code, output_path=output_path, format_code=format_code
-            )
+            result = self.write_module(code=code, output_path=output_path, format_code=format_code)
             results.append(result)
 
         # Write __init__.py to make it a package
@@ -144,9 +141,7 @@ class ModuleWriter:
 
         return results
 
-    def write_receipt(
-        self, result: WriteResult, receipt_path: str | Path | None = None
-    ) -> Path:
+    def write_receipt(self, result: WriteResult, receipt_path: str | Path | None = None) -> Path:
         """Write a JSON receipt for a module write.
 
         Args:
@@ -201,11 +196,7 @@ class ModuleWriter:
         -------
             __init__.py content
         """
-        lines = [
-            '"""Auto-generated DSPy signatures package."""',
-            "",
-            "# Import all signatures from submodules",
-        ]
+        lines = ['"""Auto-generated DSPy signatures package."""', "", "# Import all signatures from submodules"]
 
         for name in module_names:
             lines.append(f"from .{name} import *")

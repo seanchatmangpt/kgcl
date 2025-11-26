@@ -83,12 +83,7 @@ class TestStateMachineTest:
         sm.add_transition("pending", "active", "start")
         sm.add_transition("active", "done", "finish")
 
-        test = StateMachineTest(
-            "workflow",
-            "pending",
-            expected_path=["pending", "active", "done"],
-            machine=sm,
-        )
+        test = StateMachineTest("workflow", "pending", expected_path=["pending", "active", "done"], machine=sm)
 
         result = test.run([("start", None), ("finish", None)])
 

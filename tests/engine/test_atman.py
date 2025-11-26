@@ -70,10 +70,7 @@ class TestQuadDelta:
 
     def test_create_delta_with_both(self) -> None:
         """Delta with both additions and removals."""
-        delta = QuadDelta(
-            additions=[("urn:s1", "urn:p1", "urn:o1")],
-            removals=[("urn:s2", "urn:p2", "urn:o2")],
-        )
+        delta = QuadDelta(additions=[("urn:s1", "urn:p1", "urn:o1")], removals=[("urn:s2", "urn:p2", "urn:o2")])
         assert len(delta.additions) == 1
         assert len(delta.removals) == 1
 
@@ -87,25 +84,19 @@ class TestQuadDelta:
 
     def test_chatman_constant_enforced_additions(self) -> None:
         """Batch size cannot exceed CHATMAN_CONSTANT for additions."""
-        oversized = [
-            ("urn:s", f"urn:p{i}", f"urn:o{i}") for i in range(CHATMAN_CONSTANT + 1)
-        ]
+        oversized = [("urn:s", f"urn:p{i}", f"urn:o{i}") for i in range(CHATMAN_CONSTANT + 1)]
         with pytest.raises(ValueError, match="Topology Violation"):
             QuadDelta(additions=oversized)
 
     def test_chatman_constant_enforced_removals(self) -> None:
         """Batch size cannot exceed CHATMAN_CONSTANT for removals."""
-        oversized = [
-            ("urn:s", f"urn:p{i}", f"urn:o{i}") for i in range(CHATMAN_CONSTANT + 1)
-        ]
+        oversized = [("urn:s", f"urn:p{i}", f"urn:o{i}") for i in range(CHATMAN_CONSTANT + 1)]
         with pytest.raises(ValueError, match="Topology Violation"):
             QuadDelta(removals=oversized)
 
     def test_chatman_constant_at_limit(self) -> None:
         """Batch size exactly at CHATMAN_CONSTANT is allowed."""
-        at_limit = [
-            ("urn:s", f"urn:p{i}", f"urn:o{i}") for i in range(CHATMAN_CONSTANT)
-        ]
+        at_limit = [("urn:s", f"urn:p{i}", f"urn:o{i}") for i in range(CHATMAN_CONSTANT)]
         delta = QuadDelta(additions=at_limit)
         assert len(delta.additions) == CHATMAN_CONSTANT
 
@@ -145,12 +136,7 @@ class TestHookResult:
 
     def test_create_hook_result(self) -> None:
         """HookResult captures execution metadata."""
-        result = HookResult(
-            hook_id="test-hook",
-            mode=HookMode.PRE,
-            success=True,
-            duration_ns=MOCK_DURATION_NS,
-        )
+        result = HookResult(hook_id="test-hook", mode=HookMode.PRE, success=True, duration_ns=MOCK_DURATION_NS)
         assert result.hook_id == "test-hook"
         assert result.mode == HookMode.PRE
         assert result.success is True
@@ -197,9 +183,7 @@ class TestKnowledgeHook:
     def allow_all_handler(self) -> Callable[..., Awaitable[bool]]:
         """Create a handler that allows all transactions."""
 
-        async def handler(
-            store: Dataset, delta: QuadDelta, ctx: TransactionContext
-        ) -> bool:
+        async def handler(store: Dataset, delta: QuadDelta, ctx: TransactionContext) -> bool:
             return True
 
         return handler
@@ -208,41 +192,31 @@ class TestKnowledgeHook:
     def deny_all_handler(self) -> Callable[..., Awaitable[bool]]:
         """Create a handler that denies all transactions."""
 
-        async def handler(
-            store: Dataset, delta: QuadDelta, ctx: TransactionContext
-        ) -> bool:
+        async def handler(store: Dataset, delta: QuadDelta, ctx: TransactionContext) -> bool:
             return False
 
         return handler
 
-    def test_create_pre_hook(
-        self, allow_all_handler: Callable[..., Awaitable[bool]]
-    ) -> None:
+    def test_create_pre_hook(self, allow_all_handler: Callable[..., Awaitable[bool]]) -> None:
         """PRE hook acts as blocking guard."""
         hook = KnowledgeHook("test-guard", HookMode.PRE, allow_all_handler)
         assert hook.id == "test-guard"
         assert hook.mode == HookMode.PRE
         assert hook.priority == DEFAULT_HOOK_PRIORITY
 
-    def test_create_post_hook(
-        self, allow_all_handler: Callable[..., Awaitable[bool]]
-    ) -> None:
+    def test_create_post_hook(self, allow_all_handler: Callable[..., Awaitable[bool]]) -> None:
         """POST hook acts as side effect."""
         hook = KnowledgeHook("test-effect", HookMode.POST, allow_all_handler)
         assert hook.mode == HookMode.POST
 
-    def test_hook_signature_deterministic(
-        self, allow_all_handler: Callable[..., Awaitable[bool]]
-    ) -> None:
+    def test_hook_signature_deterministic(self, allow_all_handler: Callable[..., Awaitable[bool]]) -> None:
         """Hook signature is deterministic for logic hashing."""
         hook = KnowledgeHook("test-hook", HookMode.PRE, allow_all_handler, priority=50)
         signature = hook.signature()
         assert signature == "test-hook:pre:50"
 
     @pytest.mark.asyncio
-    async def test_hook_execute(
-        self, allow_all_handler: Callable[..., Awaitable[bool]]
-    ) -> None:
+    async def test_hook_execute(self, allow_all_handler: Callable[..., Awaitable[bool]]) -> None:
         """Hook execution returns handler result."""
         hook = KnowledgeHook("test-hook", HookMode.PRE, allow_all_handler)
         store = Dataset()
@@ -425,9 +399,7 @@ class TestAtman:
     async def test_pre_hook_allows_transaction(self) -> None:
         """PRE hook returning True allows transaction."""
 
-        async def allow_handler(
-            s: Dataset, d: QuadDelta, c: TransactionContext
-        ) -> bool:
+        async def allow_handler(s: Dataset, d: QuadDelta, c: TransactionContext) -> bool:
             return True
 
         engine = Atman()
@@ -565,9 +537,7 @@ class TestPerformance:
         await engine.apply(delta)
         elapsed_ms = (time.perf_counter() - start) * 1000
 
-        assert elapsed_ms < P99_TARGET_MS, (
-            f"Apply took {elapsed_ms:.2f}ms, target <{P99_TARGET_MS}ms"
-        )
+        assert elapsed_ms < P99_TARGET_MS, f"Apply took {elapsed_ms:.2f}ms, target <{P99_TARGET_MS}ms"
 
     @pytest.mark.asyncio
     async def test_batch_apply_latency(self) -> None:
@@ -581,9 +551,7 @@ class TestPerformance:
         elapsed_ms = (time.perf_counter() - start) * 1000
 
         assert receipt.committed is True
-        assert elapsed_ms < P99_TARGET_MS, (
-            f"Batch took {elapsed_ms:.2f}ms, target <{P99_TARGET_MS}ms"
-        )
+        assert elapsed_ms < P99_TARGET_MS, f"Batch took {elapsed_ms:.2f}ms, target <{P99_TARGET_MS}ms"
 
     def test_logic_hash_latency(self) -> None:
         """Logic hash computation is fast."""
@@ -628,12 +596,8 @@ class TestIntegration:
             return True
 
         engine = Atman()
-        engine.register_hook(
-            KnowledgeHook("guard", HookMode.PRE, pre_guard, priority=200)
-        )
-        engine.register_hook(
-            KnowledgeHook("validate", HookMode.PRE, pre_validate, priority=100)
-        )
+        engine.register_hook(KnowledgeHook("guard", HookMode.PRE, pre_guard, priority=200))
+        engine.register_hook(KnowledgeHook("validate", HookMode.PRE, pre_validate, priority=100))
         engine.register_hook(KnowledgeHook("notify", HookMode.POST, post_notify))
 
         delta = QuadDelta(additions=[("urn:s1", "urn:p1", "urn:o1")])

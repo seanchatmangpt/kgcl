@@ -182,9 +182,7 @@ class KnowledgeHook(ABC):
     ...         super().__init__(
     ...             name="feature_template_processor",
     ...             phases=[HookPhase.POST_COMMIT],
-    ...             trigger=TriggerCondition(
-    ...                 pattern="?s rdf:type unrdf:FeatureTemplate"
-    ...             ),
+    ...             trigger=TriggerCondition(pattern="?s rdf:type unrdf:FeatureTemplate"),
     ...         )
     ...
     ...     def execute(self, context):
@@ -266,9 +264,7 @@ class HookRegistry:
     def __init__(self) -> None:
         """Initialize hook registry."""
         self._hooks: dict[str, KnowledgeHook] = {}
-        self._hooks_by_phase: dict[HookPhase, list[KnowledgeHook]] = {
-            phase: [] for phase in HookPhase
-        }
+        self._hooks_by_phase: dict[HookPhase, list[KnowledgeHook]] = {phase: [] for phase in HookPhase}
 
     @tracer.start_as_current_span("hooks.register")
     def register(self, hook: KnowledgeHook) -> None:
@@ -381,9 +377,7 @@ class HookExecutor:
         self._execution_history: list[dict[str, Any]] = []
 
     @tracer.start_as_current_span("hooks.execute_phase")
-    def execute_phase(
-        self, phase: HookPhase, context: HookContext, fail_fast: bool = False
-    ) -> list[dict[str, Any]]:
+    def execute_phase(self, phase: HookPhase, context: HookContext, fail_fast: bool = False) -> list[dict[str, Any]]:
         """Execute all hooks for a specific phase.
 
         Parameters
@@ -423,9 +417,7 @@ class HookExecutor:
         return results
 
     @tracer.start_as_current_span("hooks.execute_hook")
-    def _execute_hook(
-        self, hook: KnowledgeHook, context: HookContext
-    ) -> dict[str, Any]:
+    def _execute_hook(self, hook: KnowledgeHook, context: HookContext) -> dict[str, Any]:
         """Execute a single hook.
 
         Parameters
@@ -490,11 +482,7 @@ class HookExecutor:
 
             # Create receipt for successful execution
             receipt = Receipt(
-                hook_id=hook.name,
-                phase=context.phase,
-                timestamp=timestamp,
-                success=True,
-                duration_ms=duration_ms,
+                hook_id=hook.name, phase=context.phase, timestamp=timestamp, success=True, duration_ms=duration_ms
             )
             context.receipts.append(receipt)
 
@@ -581,9 +569,7 @@ class FeatureTemplateHook(KnowledgeHook):
     Materializes feature templates by applying them to matching entities.
     """
 
-    def __init__(
-        self, materializer: Callable[[HookContext], None] | None = None
-    ) -> None:
+    def __init__(self, materializer: Callable[[HookContext], None] | None = None) -> None:
         """Initialize feature template hook.
 
         Parameters
@@ -596,9 +582,7 @@ class FeatureTemplateHook(KnowledgeHook):
             name="feature_template_materializer",
             phases=[HookPhase.POST_COMMIT],
             trigger=TriggerCondition(
-                pattern="?s rdf:type <http://unrdf.org/ontology/FeatureTemplate>",
-                check_delta=True,
-                min_matches=1,
+                pattern="?s rdf:type <http://unrdf.org/ontology/FeatureTemplate>", check_delta=True, min_matches=1
             ),
         )
         self.materializer = materializer

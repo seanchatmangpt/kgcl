@@ -186,19 +186,13 @@ class TestFullPipeline:
                     "id": e.event_id,
                     "type": type(e).__name__,
                     "timestamp": e.timestamp.isoformat(),
-                    **{
-                        k: v
-                        for k, v in e.model_dump().items()
-                        if k not in ["event_id", "schema_version"]
-                    },
+                    **{k: v for k, v in e.model_dump().items() if k not in ["event_id", "schema_version"]},
                 }
                 for e in events
             ]
 
             # Ingest batch
-            result = pipeline.ingest_json(
-                data=event_dicts, agent="test_agent", reason="Integration test"
-            )
+            result = pipeline.ingest_json(data=event_dicts, agent="test_agent", reason="Integration test")
 
             assert result.success is True
             assert result.triples_added > 0
@@ -218,12 +212,7 @@ class TestFullPipeline:
 
             # Step 3: Materialize features
             config = FeatureConfig(
-                enabled_features=[
-                    "app_usage_time",
-                    "browser_domain_visits",
-                    "meeting_count",
-                    "context_switches",
-                ]
+                enabled_features=["app_usage_time", "browser_domain_visits", "meeting_count", "context_switches"]
             )
             materializer = FeatureMaterializer(config)
 
@@ -240,15 +229,11 @@ class TestFullPipeline:
             assert "context_switches" in feature_ids
 
             # Verify feature values are correct
-            vscode_feature = next(
-                (f for f in features if "VSCode" in f.feature_id), None
-            )
+            vscode_feature = next((f for f in features if "VSCode" in f.feature_id), None)
             assert vscode_feature is not None
             assert vscode_feature.value > 7200  # More than 2 hours
 
-            meeting_feature = next(
-                (f for f in features if f.feature_id == "meeting_count"), None
-            )
+            meeting_feature = next((f for f in features if f.feature_id == "meeting_count"), None)
             assert meeting_feature is not None
             assert meeting_feature.value == 3  # 3 meetings
 
@@ -263,12 +248,7 @@ class TestFullPipeline:
             template_uri = UNRDF["AppUsageTemplate"]
             engine.add_triple(template_uri, RDF.type, UNRDF.FeatureTemplate, txn)
             engine.add_triple(template_uri, UNRDF.property, UNRDF.appUsageTime, txn)
-            engine.add_triple(
-                template_uri,
-                UNRDF.targetPattern,
-                Literal("?s unrdf:type 'AppEvent'"),
-                txn,
-            )
+            engine.add_triple(template_uri, UNRDF.targetPattern, Literal("?s unrdf:type 'AppEvent'"), txn)
             engine.commit(txn)
 
             # Ingest events
@@ -290,9 +270,7 @@ class TestFullPipeline:
 
             # Materialize from template
             materialize_result = pipeline.materialize_features(
-                template_uri=template_uri,
-                target_pattern="?target unrdf:type 'AppEvent'",
-                agent="test",
+                template_uri=template_uri, target_pattern="?target unrdf:type 'AppEvent'", agent="test"
             )
 
             # In this simplified test, materialization completes
@@ -317,12 +295,8 @@ class TestFullPipeline:
         mock_lm_cls.return_value = mock_lm
 
         mock_prediction = Mock()
-        mock_prediction.summary = (
-            "Daily productivity summary: 3 hours coding, 2 meetings"
-        )
-        mock_prediction.key_insights = (
-            "Deep work in morning, context switches in evening"
-        )
+        mock_prediction.summary = "Daily productivity summary: 3 hours coding, 2 meetings"
+        mock_prediction.key_insights = "Deep work in morning, context switches in evening"
 
         mock_predictor = Mock()
         mock_predictor.return_value = mock_prediction
@@ -386,20 +360,13 @@ class TestFullPipeline:
             bridge = UNRDFBridge()
 
             # Prepare inputs from materialized features
-            meeting_feature = next(
-                (f for f in features if f.feature_id == "meeting_count"), None
-            )
+            meeting_feature = next((f for f in features if f.feature_id == "meeting_count"), None)
             app_usage = "VSCode: 3h, Mail: 0.5h, Safari: 1h"
 
             result = bridge.invoke(
                 module_path=str(sig_file),
                 signature_name="DailyBriefSignature",
-                inputs={
-                    "app_usage": app_usage,
-                    "meeting_count": int(meeting_feature.value)
-                    if meeting_feature
-                    else 0,
-                },
+                inputs={"app_usage": app_usage, "meeting_count": int(meeting_feature.value) if meeting_feature else 0},
                 source_features=[f.feature_id for f in features],
             )
 
@@ -457,9 +424,7 @@ class TestFullPipeline:
             assert len(props) >= MIN_RDF_PROPERTY_COUNT
 
             # 4. Verify provenance tracking
-            provenance = engine.get_provenance(
-                entity_uri, UNRDF.type, Literal("AppEvent")
-            )
+            provenance = engine.get_provenance(entity_uri, UNRDF.type, Literal("AppEvent"))
             assert provenance is not None
             assert provenance.agent == "test"
 
@@ -480,9 +445,7 @@ class TestFullPipeline:
         hourly_features = materializer.materialize(events, hourly_start, hourly_end)
 
         # Verify only events in first hour are included
-        first_hour_events = [
-            e for e in events if hourly_start <= e.timestamp < hourly_end
-        ]
+        first_hour_events = [e for e in events if hourly_start <= e.timestamp < hourly_end]
         assert len(first_hour_events) > 0
 
         # Check feature values match expectations

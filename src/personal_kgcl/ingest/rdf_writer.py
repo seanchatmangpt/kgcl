@@ -5,19 +5,12 @@ from __future__ import annotations
 import hashlib
 from collections.abc import Iterable
 from dataclasses import dataclass, field
-from datetime import datetime
 from urllib.parse import quote
 
 from rdflib import RDF, Graph, Literal, Namespace, URIRef
 from rdflib.namespace import XSD
 
-from personal_kgcl.ingest.models import (
-    AppleIngestInput,
-    CalendarEvent,
-    FileArtifact,
-    MailMessage,
-    ReminderTask,
-)
+from personal_kgcl.ingest.models import AppleIngestInput, CalendarEvent, FileArtifact, MailMessage, ReminderTask
 
 SCHEMA = Namespace("http://schema.org/")
 APPLE = Namespace("urn:kgc:apple:")
@@ -100,10 +93,7 @@ class AppleGraphBuilder:
         if event.all_day:
             self.graph.add((uri, APPLE.isAllDay, Literal(True)))
         for attendee in event.attendees:
-            attendee_uri = _uri(
-                "attendee",
-                _hash_components(uri, attendee.get("email", attendee.get("name", ""))),
-            )
+            attendee_uri = _uri("attendee", _hash_components(uri, attendee.get("email", attendee.get("name", ""))))
             self.graph.add((attendee_uri, RDF.type, SCHEMA.Person))
             if attendee.get("name"):
                 self.graph.add((attendee_uri, SCHEMA.name, Literal(attendee["name"])))
@@ -111,13 +101,7 @@ class AppleGraphBuilder:
                 self.graph.add((attendee_uri, SCHEMA.email, Literal(attendee["email"])))
             self.graph.add((uri, SCHEMA.attendee, attendee_uri))
 
-        self._add_receipt(
-            uri,
-            event.identifier,
-            event.title,
-            event.start.isoformat(),
-            event.end.isoformat(),
-        )
+        self._add_receipt(uri, event.identifier, event.title, event.start.isoformat(), event.end.isoformat())
 
     def _add_reminder(self, task: ReminderTask) -> None:
         uri = _uri("reminder", task.identifier)
@@ -126,9 +110,7 @@ class AppleGraphBuilder:
         self.graph.add((uri, APPLE.list, Literal(task.list_name)))
         self.graph.add((uri, APPLE.hasIdentifier, Literal(task.identifier)))
         status_value = (
-            "http://schema.org/CompletedActionStatus"
-            if task.completed
-            else "http://schema.org/PotentialActionStatus"
+            "http://schema.org/CompletedActionStatus" if task.completed else "http://schema.org/PotentialActionStatus"
         )
         self.graph.add((uri, SCHEMA.actionStatus, Literal(status_value)))
         if task.due:

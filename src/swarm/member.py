@@ -36,9 +36,7 @@ class SwarmMember:
 
     def __init__(self, name: str) -> None:
         self._name = name
-        self._metadata = MemberMetadata(
-            member_id=str(uuid.uuid4())[:8], name=name, created_at=datetime.now()
-        )
+        self._metadata = MemberMetadata(member_id=str(uuid.uuid4())[:8], name=name, created_at=datetime.now())
         self._task_handlers: dict[str, Callable[[SwarmTask], TaskResult]] = {}
         self._state: dict[str, Any] = {}
 
@@ -50,9 +48,7 @@ class SwarmMember:
         """Get member metadata."""
         return self._metadata
 
-    def register_handler(
-        self, task_type: str, handler: Callable[[SwarmTask], TaskResult]
-    ) -> None:
+    def register_handler(self, task_type: str, handler: Callable[[SwarmTask], TaskResult]) -> None:
         """Register handler for task type.
 
         Args:
@@ -89,9 +85,7 @@ class SwarmMember:
             return result
         except Exception as e:
             self._metadata.tasks_failed += 1
-            return TaskResult(
-                task_name=task.name, status=TaskStatus.FAILED, error=str(e), exception=e
-            )
+            return TaskResult(task_name=task.name, status=TaskStatus.FAILED, error=str(e), exception=e)
 
     def set_state(self, key: str, value: Any) -> None:
         """Set state value."""

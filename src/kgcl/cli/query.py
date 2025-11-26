@@ -17,14 +17,7 @@ import click
 from rdflib import Graph
 from rdflib.util import guess_format
 
-from kgcl.cli.utils import (
-    OutputFormat,
-    console,
-    format_output,
-    print_error,
-    print_info,
-    print_success,
-)
+from kgcl.cli.utils import OutputFormat, console, format_output, print_error, print_info, print_success
 
 # Template queries for common use cases
 TEMPLATE_QUERIES = {
@@ -87,20 +80,11 @@ TEMPLATE_QUERIES = {
 
 @click.command()
 @click.option("--query", "-q", type=str, help="SPARQL query to execute")
+@click.option("--file", type=click.Path(exists=True, path_type=Path), help="File containing SPARQL query")
 @click.option(
-    "--file",
-    type=click.Path(exists=True, path_type=Path),
-    help="File containing SPARQL query",
+    "--template", "-t", type=click.Choice(list(TEMPLATE_QUERIES.keys())), help="Use a predefined query template"
 )
-@click.option(
-    "--template",
-    "-t",
-    type=click.Choice(list(TEMPLATE_QUERIES.keys())),
-    help="Use a predefined query template",
-)
-@click.option(
-    "--output", "-o", type=click.Path(path_type=Path), help="Output file path"
-)
+@click.option("--output", "-o", type=click.Path(path_type=Path), help="Output file path")
 @click.option(
     "--format",
     "-f",
@@ -110,15 +94,8 @@ TEMPLATE_QUERIES = {
     help="Output format",
 )
 @click.option("--limit", type=int, help="Limit number of results")
-@click.option(
-    "--endpoint",
-    type=str,
-    default="http://localhost:3030/kgcl/sparql",
-    help="SPARQL endpoint URL",
-)
-@click.option(
-    "--show-templates", is_flag=True, help="Show available query templates and exit"
-)
+@click.option("--endpoint", type=str, default="http://localhost:3030/kgcl/sparql", help="SPARQL endpoint URL")
+@click.option("--show-templates", is_flag=True, help="Show available query templates and exit")
 @click.option("--verbose", "-v", is_flag=True, help="Verbose output")
 def query(
     query: str | None,
@@ -159,9 +136,7 @@ def query(
         sparql_query = _get_query(query, file, template)
 
         if not sparql_query:
-            print_error(
-                "No query specified. Use --query, --file, or --template", exit_code=1
-            )
+            print_error("No query specified. Use --query, --file, or --template", exit_code=1)
             return
 
         # Apply limit if specified
@@ -203,9 +178,7 @@ def _show_templates() -> None:
         console.print(f"  {query.strip()[:100]}...\n")
 
 
-def _get_query(
-    query: str | None, file: Path | None, template: str | None
-) -> str | None:
+def _get_query(query: str | None, file: Path | None, template: str | None) -> str | None:
     """Get SPARQL query from various sources.
 
     Parameters
@@ -250,9 +223,7 @@ class Verbosity(Enum):
         return self is Verbosity.VERBOSE
 
 
-def _execute_query(
-    sparql_query: str, endpoint: str, verbosity: Verbosity
-) -> list[dict[str, str]]:
+def _execute_query(sparql_query: str, endpoint: str, verbosity: Verbosity) -> list[dict[str, str]]:
     """Execute SPARQL query against endpoint.
 
     Parameters
@@ -305,11 +276,7 @@ def _execute_query_local(sparql_query: str, dataset_path: Path) -> list[dict[str
         msg = f"Dataset not found: {dataset_path}"
         raise ValueError(msg)
 
-    rdf_format = (
-        guess_format(dataset_path.suffix[1:])
-        or guess_format(dataset_path.name)
-        or "turtle"
-    )
+    rdf_format = guess_format(dataset_path.suffix[1:]) or guess_format(dataset_path.name) or "turtle"
 
     graph = Graph()
     graph.parse(dataset_path, format=rdf_format)
@@ -339,10 +306,7 @@ def _execute_query_http(sparql_query: str, endpoint: str) -> list[dict[str, str]
     request = Request(  # Safe due to explicit scheme validation above
         endpoint,
         data=encoded_data,
-        headers={
-            "Accept": "application/sparql-results+json",
-            "Content-Type": "application/x-www-form-urlencoded",
-        },
+        headers={"Accept": "application/sparql-results+json", "Content-Type": "application/x-www-form-urlencoded"},
         method="POST",
     )
 

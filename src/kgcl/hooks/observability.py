@@ -82,9 +82,7 @@ class Observability:
 
         self.logger.debug(f"Recorded metric {name}={value}")
 
-    def set_threshold(
-        self, name: str, warning: float | None = None, error: float | None = None
-    ) -> None:
+    def set_threshold(self, name: str, warning: float | None = None, error: float | None = None) -> None:
         """
         Set thresholds for metric.
 
@@ -126,13 +124,9 @@ class Observability:
             if name in self.thresholds:
                 thresholds = self.thresholds[name]
                 if "error" in thresholds and current > thresholds["error"]:
-                    errors.append(
-                        f"{name} is {current:.2f} (threshold: {thresholds['error']:.2f})"
-                    )
+                    errors.append(f"{name} is {current:.2f} (threshold: {thresholds['error']:.2f})")
                 elif "warning" in thresholds and current > thresholds["warning"]:
-                    warnings.append(
-                        f"{name} is {current:.2f} (threshold: {thresholds['warning']:.2f})"
-                    )
+                    warnings.append(f"{name} is {current:.2f} (threshold: {thresholds['warning']:.2f})")
 
             # Check for anomalies (2x average)
             if len(values) >= 10:
@@ -261,15 +255,11 @@ class Observability:
 
             # Check if current value is threshold * stddev away from mean
             if abs(current - mean) > threshold * stddev:
-                anomalies.append(
-                    f"{name}: {current:.2f} (mean: {mean:.2f}, stddev: {stddev:.2f})"
-                )
+                anomalies.append(f"{name}: {current:.2f} (mean: {mean:.2f}, stddev: {stddev:.2f})")
 
         return anomalies
 
-    def record_hook_execution(
-        self, hook_id: str, duration_ms: float, success: bool
-    ) -> None:
+    def record_hook_execution(self, hook_id: str, duration_ms: float, success: bool) -> None:
         """
         Record hook execution metrics.
 

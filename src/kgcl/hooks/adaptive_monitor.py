@@ -30,12 +30,7 @@ class AdaptiveMonitor:
     - Adapts as system behavior changes
     """
 
-    def __init__(
-        self,
-        window_size: int = 100,
-        stddev_multiplier: float = 2.0,
-        min_samples: int = 10,
-    ):
+    def __init__(self, window_size: int = 100, stddev_multiplier: float = 2.0, min_samples: int = 10):
         """Initialize adaptive monitor.
 
         Args:
@@ -104,16 +99,11 @@ class AdaptiveMonitor:
 
         # Update threshold
         self.thresholds[name] = MetricThreshold(
-            metric_name=name,
-            baseline=mean,
-            variance=stdev,
-            current_threshold=threshold,
-            sample_count=len(values),
+            metric_name=name, baseline=mean, variance=stdev, current_threshold=threshold, sample_count=len(values)
         )
 
         self._logger.debug(
-            f"Updated threshold for {name}: "
-            f"baseline={mean:.2f}, stdev={stdev:.2f}, threshold={threshold:.2f}"
+            f"Updated threshold for {name}: baseline={mean:.2f}, stdev={stdev:.2f}, threshold={threshold:.2f}"
         )
 
     def is_anomaly(self, name: str, value: float) -> bool:

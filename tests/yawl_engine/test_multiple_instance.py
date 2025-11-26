@@ -9,7 +9,7 @@ Tests verify:
 All tests use Chicago School TDD with real RDF graphs and no mocking.
 """
 
-# ruff: noqa: PLR2004  # Magic values OK in tests
+# Magic values OK in tests
 
 from __future__ import annotations
 
@@ -49,9 +49,7 @@ def sample_task() -> URIRef:
 class TestMIWithoutSync:
     """Tests for Pattern 12: MI without Synchronization."""
 
-    def test_spawn_instances_basic(
-        self, empty_graph: Graph, sample_task: URIRef
-    ) -> None:
+    def test_spawn_instances_basic(self, empty_graph: Graph, sample_task: URIRef) -> None:
         """Fire-and-forget spawning creates all instances."""
         pattern = MIWithoutSync()
         instance_ids = pattern.spawn_instances(empty_graph, sample_task, count=5)
@@ -64,9 +62,7 @@ class TestMIWithoutSync:
         instances = list(empty_graph.subjects(YAWL.instanceOf, sample_task))
         assert len(instances) == 5
 
-    def test_spawn_instances_state_is_running(
-        self, empty_graph: Graph, sample_task: URIRef
-    ) -> None:
+    def test_spawn_instances_state_is_running(self, empty_graph: Graph, sample_task: URIRef) -> None:
         """Spawned instances start in RUNNING state."""
         pattern = MIWithoutSync()
         instance_ids = pattern.spawn_instances(empty_graph, sample_task, count=3)
@@ -76,9 +72,7 @@ class TestMIWithoutSync:
             assert len(state_values) == 1
             assert str(state_values[0]) == MIState.RUNNING.value
 
-    def test_spawn_instances_numbered(
-        self, empty_graph: Graph, sample_task: URIRef
-    ) -> None:
+    def test_spawn_instances_numbered(self, empty_graph: Graph, sample_task: URIRef) -> None:
         """Each instance has sequential number."""
         pattern = MIWithoutSync()
         pattern.spawn_instances(empty_graph, sample_task, count=4)
@@ -91,25 +85,19 @@ class TestMIWithoutSync:
 
         assert sorted(numbers) == [0, 1, 2, 3]
 
-    def test_spawn_zero_count_raises(
-        self, empty_graph: Graph, sample_task: URIRef
-    ) -> None:
+    def test_spawn_zero_count_raises(self, empty_graph: Graph, sample_task: URIRef) -> None:
         """Zero count raises ValueError."""
         pattern = MIWithoutSync()
         with pytest.raises(ValueError, match="must be positive"):
             pattern.spawn_instances(empty_graph, sample_task, count=0)
 
-    def test_spawn_negative_count_raises(
-        self, empty_graph: Graph, sample_task: URIRef
-    ) -> None:
+    def test_spawn_negative_count_raises(self, empty_graph: Graph, sample_task: URIRef) -> None:
         """Negative count raises ValueError."""
         pattern = MIWithoutSync()
         with pytest.raises(ValueError, match="must be positive"):
             pattern.spawn_instances(empty_graph, sample_task, count=-5)
 
-    def test_execute_with_context(
-        self, empty_graph: Graph, sample_task: URIRef
-    ) -> None:
+    def test_execute_with_context(self, empty_graph: Graph, sample_task: URIRef) -> None:
         """Execute spawns instances from context count."""
         pattern = MIWithoutSync()
         result = pattern.execute(empty_graph, sample_task, context={"count": 7})
@@ -120,9 +108,7 @@ class TestMIWithoutSync:
         assert result.metadata["pattern"] == 12
         assert result.metadata["sync"] is False
 
-    def test_execute_default_count(
-        self, empty_graph: Graph, sample_task: URIRef
-    ) -> None:
+    def test_execute_default_count(self, empty_graph: Graph, sample_task: URIRef) -> None:
         """Execute with no count defaults to 1 instance."""
         pattern = MIWithoutSync()
         result = pattern.execute(empty_graph, sample_task, context={})
@@ -134,9 +120,7 @@ class TestMIWithoutSync:
 class TestMIDesignTime:
     """Tests for Pattern 13: MI with Design-Time Knowledge."""
 
-    def test_fixed_instance_count(
-        self, empty_graph: Graph, sample_task: URIRef
-    ) -> None:
+    def test_fixed_instance_count(self, empty_graph: Graph, sample_task: URIRef) -> None:
         """Pattern spawns exactly the design-time count."""
         pattern = MIDesignTime(instance_count=3)
         result = pattern.execute(empty_graph, sample_task, context={})
@@ -145,9 +129,7 @@ class TestMIDesignTime:
         assert len(result.instance_ids) == 3
         assert result.metadata["instance_count"] == 3
 
-    def test_synchronization_barrier_created(
-        self, empty_graph: Graph, sample_task: URIRef
-    ) -> None:
+    def test_synchronization_barrier_created(self, empty_graph: Graph, sample_task: URIRef) -> None:
         """Synchronization barrier tracks required instances."""
         pattern = MIDesignTime(instance_count=5)
         result = pattern.execute(empty_graph, sample_task, context={})
@@ -163,9 +145,7 @@ class TestMIDesignTime:
         assert len(completed) == 1
         assert int(cast(Literal, completed[0]).value) == 0
 
-    def test_all_instances_have_parent(
-        self, empty_graph: Graph, sample_task: URIRef
-    ) -> None:
+    def test_all_instances_have_parent(self, empty_graph: Graph, sample_task: URIRef) -> None:
         """All instances reference same parent MI."""
         pattern = MIDesignTime(instance_count=4)
         result = pattern.execute(empty_graph, sample_task, context={})
@@ -181,9 +161,7 @@ class TestMIDesignTime:
         assert len(parents) == 1
         assert next(iter(parents)) == parent_id
 
-    def test_requires_sync_metadata(
-        self, empty_graph: Graph, sample_task: URIRef
-    ) -> None:
+    def test_requires_sync_metadata(self, empty_graph: Graph, sample_task: URIRef) -> None:
         """Result metadata indicates synchronization required."""
         pattern = MIDesignTime(instance_count=2)
         result = pattern.execute(empty_graph, sample_task, context={})
@@ -205,9 +183,7 @@ class TestMIDesignTime:
 class TestMIRunTimeKnown:
     """Tests for Pattern 14: MI with Runtime Knowledge."""
 
-    def test_runtime_count_from_variable(
-        self, empty_graph: Graph, sample_task: URIRef
-    ) -> None:
+    def test_runtime_count_from_variable(self, empty_graph: Graph, sample_task: URIRef) -> None:
         """Instance count determined from runtime variable."""
         pattern = MIRunTimeKnown(instance_count_variable="order_count")
         result = pattern.execute(empty_graph, sample_task, context={"order_count": 7})
@@ -217,9 +193,7 @@ class TestMIRunTimeKnown:
         assert result.metadata["instance_count"] == 7
         assert result.metadata["count_variable"] == "order_count"
 
-    def test_missing_variable_fails(
-        self, empty_graph: Graph, sample_task: URIRef
-    ) -> None:
+    def test_missing_variable_fails(self, empty_graph: Graph, sample_task: URIRef) -> None:
         """Missing count variable causes failure."""
         pattern = MIRunTimeKnown(instance_count_variable="missing_var")
         result = pattern.execute(empty_graph, sample_task, context={})
@@ -229,9 +203,7 @@ class TestMIRunTimeKnown:
         assert result.error is not None
         assert "not found in context" in result.error
 
-    def test_invalid_count_type_fails(
-        self, empty_graph: Graph, sample_task: URIRef
-    ) -> None:
+    def test_invalid_count_type_fails(self, empty_graph: Graph, sample_task: URIRef) -> None:
         """Non-integer count value causes failure."""
         pattern = MIRunTimeKnown(instance_count_variable="count")
         result = pattern.execute(empty_graph, sample_task, context={"count": "five"})
@@ -249,18 +221,14 @@ class TestMIRunTimeKnown:
         assert not result.success
         assert result.state == MIState.FAILED
 
-    def test_negative_count_fails(
-        self, empty_graph: Graph, sample_task: URIRef
-    ) -> None:
+    def test_negative_count_fails(self, empty_graph: Graph, sample_task: URIRef) -> None:
         """Negative runtime count causes failure."""
         pattern = MIRunTimeKnown(instance_count_variable="count")
         result = pattern.execute(empty_graph, sample_task, context={"count": -5})
 
         assert not result.success
 
-    def test_synchronization_barrier_created(
-        self, empty_graph: Graph, sample_task: URIRef
-    ) -> None:
+    def test_synchronization_barrier_created(self, empty_graph: Graph, sample_task: URIRef) -> None:
         """Synchronization barrier uses runtime count."""
         pattern = MIRunTimeKnown(instance_count_variable="items")
         result = pattern.execute(empty_graph, sample_task, context={"items": 10})
@@ -271,9 +239,7 @@ class TestMIRunTimeKnown:
 
         assert required == 10
 
-    def test_custom_variable_name(
-        self, empty_graph: Graph, sample_task: URIRef
-    ) -> None:
+    def test_custom_variable_name(self, empty_graph: Graph, sample_task: URIRef) -> None:
         """Custom variable name works correctly."""
         pattern = MIRunTimeKnown(instance_count_variable="batch_size")
         result = pattern.execute(empty_graph, sample_task, context={"batch_size": 15})
@@ -285,22 +251,16 @@ class TestMIRunTimeKnown:
 class TestMIDynamic:
     """Tests for Pattern 15: MI without Runtime Knowledge."""
 
-    def test_dynamic_spawning_from_events(
-        self, empty_graph: Graph, sample_task: URIRef
-    ) -> None:
+    def test_dynamic_spawning_from_events(self, empty_graph: Graph, sample_task: URIRef) -> None:
         """One instance spawned per event."""
         pattern = MIDynamic(spawn_condition="new_order")
-        result = pattern.execute(
-            empty_graph, sample_task, context={"events": ["order1", "order2", "order3"]}
-        )
+        result = pattern.execute(empty_graph, sample_task, context={"events": ["order1", "order2", "order3"]})
 
         assert result.success
         assert len(result.instance_ids) == 3
         assert result.metadata["initial_instance_count"] == 3
 
-    def test_no_events_spawns_zero(
-        self, empty_graph: Graph, sample_task: URIRef
-    ) -> None:
+    def test_no_events_spawns_zero(self, empty_graph: Graph, sample_task: URIRef) -> None:
         """No events results in zero instances."""
         pattern = MIDynamic(spawn_condition="new_item")
         result = pattern.execute(empty_graph, sample_task, context={})
@@ -319,13 +279,9 @@ class TestMIDynamic:
             assert len(trigger_values) == 1
             assert str(trigger_values[0]) in events
 
-    def test_termination_condition_stored(
-        self, empty_graph: Graph, sample_task: URIRef
-    ) -> None:
+    def test_termination_condition_stored(self, empty_graph: Graph, sample_task: URIRef) -> None:
         """Termination condition stored in parent."""
-        pattern = MIDynamic(
-            spawn_condition="new_order", termination_condition="all_processed"
-        )
+        pattern = MIDynamic(spawn_condition="new_order", termination_condition="all_processed")
         result = pattern.execute(empty_graph, sample_task, context={"events": ["e1"]})
 
         parent_uri = URIRef(result.metadata["parent_id"])
@@ -337,20 +293,14 @@ class TestMIDynamic:
     def test_no_sync_for_dynamic(self, empty_graph: Graph, sample_task: URIRef) -> None:
         """Dynamic pattern doesn't require pre-sync."""
         pattern = MIDynamic(spawn_condition="event")
-        result = pattern.execute(
-            empty_graph, sample_task, context={"events": ["e1", "e2"]}
-        )
+        result = pattern.execute(empty_graph, sample_task, context={"events": ["e1", "e2"]})
 
         assert result.metadata["requires_sync"] is False
 
-    def test_spawned_count_tracked(
-        self, empty_graph: Graph, sample_task: URIRef
-    ) -> None:
+    def test_spawned_count_tracked(self, empty_graph: Graph, sample_task: URIRef) -> None:
         """Parent tracks total spawned instances."""
         pattern = MIDynamic(spawn_condition="event")
-        result = pattern.execute(
-            empty_graph, sample_task, context={"events": ["a", "b", "c", "d"]}
-        )
+        result = pattern.execute(empty_graph, sample_task, context={"events": ["a", "b", "c", "d"]})
 
         parent_uri = URIRef(result.metadata["parent_id"])
         spawned_objs = list(empty_graph.objects(parent_uri, YAWL.spawnedInstances))
@@ -414,9 +364,7 @@ class TestCompletionTracking:
         assert len(state_values) == 1
         assert str(state_values[0]) == MIState.COMPLETED.value
 
-    def test_mark_instance_complete_increments_counter(
-        self, empty_graph: Graph
-    ) -> None:
+    def test_mark_instance_complete_increments_counter(self, empty_graph: Graph) -> None:
         """Marking complete increments parent counter."""
         instance_id = "http://example.org/instance-2"
         instance_uri = URIRef(instance_id)
@@ -458,30 +406,18 @@ class TestExecutionResultValidation:
     def test_success_with_error_raises(self) -> None:
         """Successful result with error message raises ValueError."""
         with pytest.raises(ValueError, match="Successful execution cannot have error"):
-            ExecutionResult(
-                success=True,
-                instance_ids=["i1"],
-                state=MIState.COMPLETED,
-                error="Should not be here",
-            )
+            ExecutionResult(success=True, instance_ids=["i1"], state=MIState.COMPLETED, error="Should not be here")
 
     def test_valid_failure(self) -> None:
         """Valid failure result with error message."""
-        result = ExecutionResult(
-            success=False,
-            instance_ids=[],
-            state=MIState.FAILED,
-            error="Something went wrong",
-        )
+        result = ExecutionResult(success=False, instance_ids=[], state=MIState.FAILED, error="Something went wrong")
 
         assert not result.success
         assert result.error == "Something went wrong"
 
     def test_valid_success(self) -> None:
         """Valid success result without error."""
-        result = ExecutionResult(
-            success=True, instance_ids=["i1", "i2"], state=MIState.COMPLETED
-        )
+        result = ExecutionResult(success=True, instance_ids=["i1", "i2"], state=MIState.COMPLETED)
 
         assert result.success
         assert result.error is None
@@ -490,9 +426,7 @@ class TestExecutionResultValidation:
 class TestIntegrationScenarios:
     """Integration tests for complete MI workflows."""
 
-    def test_design_time_full_cycle(
-        self, empty_graph: Graph, sample_task: URIRef
-    ) -> None:
+    def test_design_time_full_cycle(self, empty_graph: Graph, sample_task: URIRef) -> None:
         """Complete design-time MI lifecycle."""
         # Spawn 3 instances
         pattern = MIDesignTime(instance_count=3)
@@ -508,9 +442,7 @@ class TestIntegrationScenarios:
         # Check overall completion
         assert check_completion(empty_graph, parent_id)
 
-    def test_runtime_variable_workflow(
-        self, empty_graph: Graph, sample_task: URIRef
-    ) -> None:
+    def test_runtime_variable_workflow(self, empty_graph: Graph, sample_task: URIRef) -> None:
         """Runtime variable determines instance count."""
         # Simulate batch of 5 orders
         context = {"order_count": 5, "batch_id": "B-123"}
@@ -534,9 +466,7 @@ class TestIntegrationScenarios:
 
         assert check_completion(empty_graph, parent_id)
 
-    def test_dynamic_event_driven(
-        self, empty_graph: Graph, sample_task: URIRef
-    ) -> None:
+    def test_dynamic_event_driven(self, empty_graph: Graph, sample_task: URIRef) -> None:
         """Dynamic spawning from event stream."""
         events = [
             {"order_id": "O-1", "customer": "Alice"},
@@ -544,9 +474,7 @@ class TestIntegrationScenarios:
             {"order_id": "O-3", "customer": "Carol"},
         ]
 
-        pattern = MIDynamic(
-            spawn_condition="order_received", termination_condition="queue_empty"
-        )
+        pattern = MIDynamic(spawn_condition="order_received", termination_condition="queue_empty")
 
         result = pattern.execute(empty_graph, sample_task, context={"events": events})
 

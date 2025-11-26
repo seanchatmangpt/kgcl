@@ -40,13 +40,7 @@ from .collectors import (
     create_frontmost_app_collector,
 )
 from .crawler import FrameworkName, PyObjCFrameworkCrawler
-from .plugins import (
-    BaseCapabilityPlugin,
-    CapabilityData,
-    CapabilityDescriptor,
-    get_registry,
-    load_builtin_plugins,
-)
+from .plugins import BaseCapabilityPlugin, CapabilityData, CapabilityDescriptor, get_registry, load_builtin_plugins
 
 __all__ = [
     # Plugins

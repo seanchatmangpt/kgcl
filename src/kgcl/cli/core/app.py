@@ -23,9 +23,7 @@ class CliApp:
     context: CliContext
     console: Console
 
-    def run(
-        self, command_name: str, func: Callable[[CliContext], T]
-    ) -> tuple[T | None, ExecutionReceipt]:
+    def run(self, command_name: str, func: Callable[[CliContext], T]) -> tuple[T | None, ExecutionReceipt]:
         """Execute a command and capture a receipt."""
         started_at = datetime.now(UTC).replace(tzinfo=None)
         try:

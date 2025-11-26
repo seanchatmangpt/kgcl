@@ -65,9 +65,7 @@ class PyObjCAgent:
                 {
                     "service.name": "pyobjc-agent",
                     "service.version": "1.0.0",
-                    "deployment.environment": self.config.get(
-                        "environment", "development"
-                    ),
+                    "deployment.environment": self.config.get("environment", "development"),
                 }
             )
 
@@ -132,9 +130,7 @@ class PyObjCAgent:
         if collectors_config.get("frontmost_app", {}).get("enabled", True):
             logger.info("Creating frontmost app collector")
             collector = create_frontmost_app_collector(
-                interval_seconds=collectors_config.get("frontmost_app", {}).get(
-                    "interval", 1.0
-                ),
+                interval_seconds=collectors_config.get("frontmost_app", {}).get("interval", 1.0),
                 output_path=f"{data_dir}/frontmost_app.jsonl",
             )
             self._collectors["frontmost_app"] = collector
@@ -143,9 +139,7 @@ class PyObjCAgent:
         if collectors_config.get("browser_history", {}).get("enabled", True):
             logger.info("Creating browser history collector")
             collector = create_browser_history_collector(
-                interval_seconds=collectors_config.get("browser_history", {}).get(
-                    "interval", 300.0
-                ),
+                interval_seconds=collectors_config.get("browser_history", {}).get("interval", 300.0),
                 output_path=f"{data_dir}/browser_history.jsonl",
             )
             self._collectors["browser_history"] = collector
@@ -154,9 +148,7 @@ class PyObjCAgent:
         if collectors_config.get("calendar", {}).get("enabled", True):
             logger.info("Creating calendar collector")
             collector = create_calendar_collector(
-                interval_seconds=collectors_config.get("calendar", {}).get(
-                    "interval", 300.0
-                ),
+                interval_seconds=collectors_config.get("calendar", {}).get("interval", 300.0),
                 output_path=f"{data_dir}/calendar_events.jsonl",
             )
             self._collectors["calendar"] = collector
@@ -311,10 +303,7 @@ def main():
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-        handlers=[
-            logging.StreamHandler(sys.stdout),
-            logging.FileHandler("/Users/sac/dev/kgcl/logs/pyobjc_agent.log"),
-        ],
+        handlers=[logging.StreamHandler(sys.stdout), logging.FileHandler("/Users/sac/dev/kgcl/logs/pyobjc_agent.log")],
     )
 
     # Create log directory

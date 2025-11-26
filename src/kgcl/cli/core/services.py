@@ -26,18 +26,14 @@ class IngestionService(Protocol):
 class DspyService(Protocol):
     """Service for executing DSPy signatures."""
 
-    def generate_daily_brief(
-        self, features: dict[str, Any], model: str
-    ) -> dict[str, Any]:
+    def generate_daily_brief(self, features: dict[str, Any], model: str) -> dict[str, Any]:
         """Produce a structured brief using DSPy or fallback logic."""
 
 
 class SparqlService(Protocol):
     """Service for running SPARQL queries."""
 
-    def query(
-        self, query_text: str, *, limit: int | None = None
-    ) -> list[dict[str, str]]:
+    def query(self, query_text: str, *, limit: int | None = None) -> list[dict[str, str]]:
         """Execute a SPARQL query and return bindings."""
 
 

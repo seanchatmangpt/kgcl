@@ -390,9 +390,7 @@ class WorkflowBuilder:
         WorkflowBuilder
             Self for method chaining
         """
-        node = WorkflowNode(
-            node_id=task_id, node_type="Task", label=label, properties=properties
-        )
+        node = WorkflowNode(node_id=task_id, node_type="Task", label=label, properties=properties)
         self.nodes.append(node)
 
         task_uri = URIRef(f"{self.base_uri}{task_id}")
@@ -404,9 +402,7 @@ class WorkflowBuilder:
 
         return self
 
-    def add_split(
-        self, split_id: str, split_type: str, label: str, **properties: Any
-    ) -> WorkflowBuilder:
+    def add_split(self, split_id: str, split_type: str, label: str, **properties: Any) -> WorkflowBuilder:
         """Add split node (XOR, AND, OR) to workflow.
 
         Parameters
@@ -425,12 +421,7 @@ class WorkflowBuilder:
         WorkflowBuilder
             Self for method chaining
         """
-        node = WorkflowNode(
-            node_id=split_id,
-            node_type=f"{split_type}Split",
-            label=label,
-            properties=properties,
-        )
+        node = WorkflowNode(node_id=split_id, node_type=f"{split_type}Split", label=label, properties=properties)
         self.nodes.append(node)
 
         split_uri = URIRef(f"{self.base_uri}{split_id}")
@@ -443,9 +434,7 @@ class WorkflowBuilder:
 
         return self
 
-    def add_join(
-        self, join_id: str, join_type: str, label: str, **properties: Any
-    ) -> WorkflowBuilder:
+    def add_join(self, join_id: str, join_type: str, label: str, **properties: Any) -> WorkflowBuilder:
         """Add join node (XOR, AND, OR, Discriminator) to workflow.
 
         Parameters
@@ -464,12 +453,7 @@ class WorkflowBuilder:
         WorkflowBuilder
             Self for method chaining
         """
-        node = WorkflowNode(
-            node_id=join_id,
-            node_type=f"{join_type}Join",
-            label=label,
-            properties=properties,
-        )
+        node = WorkflowNode(node_id=join_id, node_type=f"{join_type}Join", label=label, properties=properties)
         self.nodes.append(node)
 
         join_uri = URIRef(f"{self.base_uri}{join_id}")
@@ -572,12 +556,7 @@ def sequence_workflow(workflow_builder: WorkflowBuilder) -> Graph:
     Graph
         Workflow with sequential task execution
     """
-    return (
-        workflow_builder.add_task("A", "Task A")
-        .add_task("B", "Task B")
-        .connect("A", "B")
-        .build()
-    )
+    return workflow_builder.add_task("A", "Task A").add_task("B", "Task B").connect("A", "B").build()
 
 
 @pytest.fixture

@@ -74,10 +74,7 @@ class MockYawlEngine:
         self.tasks[task.task_id] = task
 
     async def execute_task(
-        self,
-        task_id: str,
-        case_data: dict[str, Any],
-        context: TransactionContext | YawlContext,
+        self, task_id: str, case_data: dict[str, Any], context: TransactionContext | YawlContext
     ) -> dict[str, Any]:
         """Execute a YAWL task with given context."""
         task = self.tasks.get(task_id)
@@ -141,11 +138,8 @@ class MockYawlEngine:
             "status": "Completed" if task_id not in self.voided_tasks else "Voided",
         }
 
-    async def _execute_verb(  # noqa: PLR0911  # Verb dispatcher pattern
-        self,
-        task: MockYawlTask,
-        case_data: dict[str, Any],
-        context: TransactionContext | YawlContext,
+    async def _execute_verb(  # Verb dispatcher pattern
+        self, task: MockYawlTask, case_data: dict[str, Any], context: TransactionContext | YawlContext
     ) -> dict[str, Any]:
         """Execute YAWL verb (Transmute, Copy, Filter, Await, Void)."""
         if task.verb == "Transmute":
@@ -172,9 +166,7 @@ class MockYawlEngine:
         if task.verb == "Await":
             # AND-join: Wait for all inputs
             required_inputs = case_data.get("required_inputs", [])
-            all_completed = all(
-                task_id in self.completed_tasks for task_id in required_inputs
-            )
+            all_completed = all(task_id in self.completed_tasks for task_id in required_inputs)
             if all_completed:
                 for next_task_id in task.flows_into:
                     self.active_tokens.add(next_task_id)
@@ -244,9 +236,7 @@ class TestDataPerspective:
         self, yawl_engine: MockYawlEngine, case_data: dict[str, Any]
     ) -> None:
         """Data mapping transforms input_code -> hashed_code."""
-        task = MockYawlTask(
-            task_id="hash_transform", verb="Transmute", flows_into=["next_task"]
-        )
+        task = MockYawlTask(task_id="hash_transform", verb="Transmute", flows_into=["next_task"])
         yawl_engine.register_task(task)
 
         ctx = TransactionContext(prev_hash=GENESIS_HASH)
@@ -278,9 +268,7 @@ class TestDataPerspective:
         # In real YAWL, these would merge into next task's context
 
     @pytest.mark.asyncio
-    async def test_xquery_simulation_handles_missing_input(
-        self, yawl_engine: MockYawlEngine
-    ) -> None:
+    async def test_xquery_simulation_handles_missing_input(self, yawl_engine: MockYawlEngine) -> None:
         """Missing input_code doesn't crash, returns empty updates."""
         task = MockYawlTask(task_id="missing_input_task", verb="Transmute")
         yawl_engine.register_task(task)
@@ -302,20 +290,13 @@ class TestResourcePerspective:
 
     @pytest.mark.asyncio
     async def test_resource_gate_blocks_unauthorized_role(
-        self,
-        yawl_engine: MockYawlEngine,
-        case_data: dict[str, Any],
-        private_context: YawlContext,
+        self, yawl_engine: MockYawlEngine, case_data: dict[str, Any], private_context: YawlContext
     ) -> None:
         """Private cannot execute task requiring General role."""
-        task = MockYawlTask(
-            task_id="authorize_launch", verb="Transmute", required_role=ROLE_GENERAL
-        )
+        task = MockYawlTask(task_id="authorize_launch", verb="Transmute", required_role=ROLE_GENERAL)
         yawl_engine.register_task(task)
 
-        result = await yawl_engine.execute_task(
-            "authorize_launch", case_data, private_context
-        )
+        result = await yawl_engine.execute_task("authorize_launch", case_data, private_context)
 
         assert result["success"] is False
         assert "Unauthorized" in result["error"]
@@ -323,30 +304,20 @@ class TestResourcePerspective:
 
     @pytest.mark.asyncio
     async def test_resource_gate_allows_authorized_role(
-        self,
-        yawl_engine: MockYawlEngine,
-        case_data: dict[str, Any],
-        general_context: YawlContext,
+        self, yawl_engine: MockYawlEngine, case_data: dict[str, Any], general_context: YawlContext
     ) -> None:
         """General can execute task requiring General role."""
-        task = MockYawlTask(
-            task_id="authorize_launch", verb="Transmute", required_role=ROLE_GENERAL
-        )
+        task = MockYawlTask(task_id="authorize_launch", verb="Transmute", required_role=ROLE_GENERAL)
         yawl_engine.register_task(task)
 
-        result = await yawl_engine.execute_task(
-            "authorize_launch", case_data, general_context
-        )
+        result = await yawl_engine.execute_task("authorize_launch", case_data, general_context)
 
         assert result["success"] is True
         assert result.get("status") != "Blocked"
 
     @pytest.mark.asyncio
     async def test_resource_check_with_no_constraint_allows_all(
-        self,
-        yawl_engine: MockYawlEngine,
-        case_data: dict[str, Any],
-        private_context: YawlContext,
+        self, yawl_engine: MockYawlEngine, case_data: dict[str, Any], private_context: YawlContext
     ) -> None:
         """Tasks without yawl:hasResourcing allow any actor."""
         task = MockYawlTask(
@@ -356,9 +327,7 @@ class TestResourcePerspective:
         )
         yawl_engine.register_task(task)
 
-        result = await yawl_engine.execute_task(
-            "public_task", case_data, private_context
-        )
+        result = await yawl_engine.execute_task("public_task", case_data, private_context)
 
         assert result["success"] is True
 
@@ -372,9 +341,7 @@ class TestServicePerspective:
     ) -> None:
         """Tasks with yawl:hasExternalInteraction log service URI."""
         service_uri = "https://missile.defense.gov/api/validate"
-        task = MockYawlTask(
-            task_id="validate_codes", verb="Transmute", service_uri=service_uri
-        )
+        task = MockYawlTask(task_id="validate_codes", verb="Transmute", service_uri=service_uri)
         yawl_engine.register_task(task)
 
         ctx = TransactionContext(prev_hash=GENESIS_HASH)
@@ -391,9 +358,7 @@ class TestServicePerspective:
     ) -> None:
         """Service response '200 OK' added to data_updates."""
         service_uri = "https://example.com/api/test"
-        task = MockYawlTask(
-            task_id="call_service", verb="Transmute", service_uri=service_uri
-        )
+        task = MockYawlTask(task_id="call_service", verb="Transmute", service_uri=service_uri)
         yawl_engine.register_task(task)
 
         ctx = TransactionContext(prev_hash=GENESIS_HASH)
@@ -412,9 +377,7 @@ class TestExceptionPerspective:
         self, yawl_engine: MockYawlEngine, case_data: dict[str, Any]
     ) -> None:
         """simulated_elapsed > duration triggers Void verb."""
-        task = MockYawlTask(
-            task_id="timed_task", verb="Transmute", timeout_ms=TIMEOUT_DURATION_MS
-        )
+        task = MockYawlTask(task_id="timed_task", verb="Transmute", timeout_ms=TIMEOUT_DURATION_MS)
         yawl_engine.register_task(task)
 
         # Context with elapsed time exceeding timeout
@@ -434,9 +397,7 @@ class TestExceptionPerspective:
         self, yawl_engine: MockYawlEngine, case_data: dict[str, Any]
     ) -> None:
         """simulated_elapsed <= duration continues normally."""
-        task = MockYawlTask(
-            task_id="timed_task", verb="Transmute", timeout_ms=TIMEOUT_DURATION_MS
-        )
+        task = MockYawlTask(task_id="timed_task", verb="Transmute", timeout_ms=TIMEOUT_DURATION_MS)
         yawl_engine.register_task(task)
 
         # Context with elapsed time within timeout
@@ -491,9 +452,7 @@ class TestKernelVerbs:
         self, yawl_engine: MockYawlEngine, case_data: dict[str, Any]
     ) -> None:
         """AND-split activates all outgoing flows."""
-        task = MockYawlTask(
-            task_id="and_split", verb="Copy", flows_into=["path_1", "path_2", "path_3"]
-        )
+        task = MockYawlTask(task_id="and_split", verb="Copy", flows_into=["path_1", "path_2", "path_3"])
         yawl_engine.register_task(task)
 
         ctx = TransactionContext(prev_hash=GENESIS_HASH)
@@ -508,21 +467,13 @@ class TestKernelVerbs:
             assert path in yawl_engine.active_tokens
 
     @pytest.mark.asyncio
-    async def test_filter_selects_single_path_based_on_predicate(
-        self, yawl_engine: MockYawlEngine
-    ) -> None:
+    async def test_filter_selects_single_path_based_on_predicate(self, yawl_engine: MockYawlEngine) -> None:
         """XOR-split activates only matching flow."""
-        task = MockYawlTask(
-            task_id="xor_split",
-            verb="Filter",
-            flows_into=["approved_path", "rejected_path"],
-        )
+        task = MockYawlTask(task_id="xor_split", verb="Filter", flows_into=["approved_path", "rejected_path"])
         yawl_engine.register_task(task)
 
         # Predicate selects "approved_path"
-        case_data_with_filter: dict[str, Any] = {
-            "filter_predicate": lambda task_id: task_id == "approved_path"
-        }
+        case_data_with_filter: dict[str, Any] = {"filter_predicate": lambda task_id: task_id == "approved_path"}
 
         ctx = TransactionContext(prev_hash=GENESIS_HASH)
         result = await yawl_engine.execute_task("xor_split", case_data_with_filter, ctx)
@@ -547,9 +498,7 @@ class TestKernelVerbs:
         yawl_engine.register_task(task)
 
         # Case data specifies required inputs
-        case_data_with_inputs: dict[str, Any] = {
-            "required_inputs": ["input_1", "input_2"]
-        }
+        case_data_with_inputs: dict[str, Any] = {"required_inputs": ["input_1", "input_2"]}
 
         ctx = TransactionContext(prev_hash=GENESIS_HASH)
         result = await yawl_engine.execute_task("and_join", case_data_with_inputs, ctx)
@@ -571,9 +520,7 @@ class TestKernelVerbs:
         task = MockYawlTask(task_id="and_join", verb="Await", flows_into=["next_task"])
         yawl_engine.register_task(task)
 
-        case_data_with_inputs: dict[str, Any] = {
-            "required_inputs": ["input_1", "input_2"]
-        }
+        case_data_with_inputs: dict[str, Any] = {"required_inputs": ["input_1", "input_2"]}
 
         ctx = TransactionContext(prev_hash=GENESIS_HASH)
         result = await yawl_engine.execute_task("and_join", case_data_with_inputs, ctx)
@@ -616,20 +563,10 @@ class TestNuclearProtocol:
         """Complete workflow: Start -> Split -> Auth+Validate -> Join -> Launch."""
         # Define workflow tasks
         start = MockYawlTask("start", "Transmute", flows_into=["and_split"])
-        and_split = MockYawlTask(
-            "and_split", "Copy", flows_into=["authorize", "validate"]
-        )
-        authorize = MockYawlTask(
-            "authorize",
-            "Transmute",
-            required_role=ROLE_GENERAL,
-            flows_into=["and_join"],
-        )
+        and_split = MockYawlTask("and_split", "Copy", flows_into=["authorize", "validate"])
+        authorize = MockYawlTask("authorize", "Transmute", required_role=ROLE_GENERAL, flows_into=["and_join"])
         validate = MockYawlTask(
-            "validate",
-            "Transmute",
-            service_uri="https://defense.gov/validate",
-            flows_into=["and_join"],
+            "validate", "Transmute", service_uri="https://defense.gov/validate", flows_into=["and_join"]
         )
         and_join = MockYawlTask("and_join", "Await", flows_into=["launch"])
         launch = MockYawlTask("launch", "Transmute")
@@ -693,9 +630,7 @@ class TestNuclearProtocol:
         self, yawl_engine: MockYawlEngine, case_data: dict[str, Any]
     ) -> None:
         """Timeout on Auth task cancels the region."""
-        authorize = MockYawlTask(
-            "authorize", "Transmute", required_role=ROLE_GENERAL, timeout_ms=5000
-        )
+        authorize = MockYawlTask("authorize", "Transmute", required_role=ROLE_GENERAL, timeout_ms=5000)
         yawl_engine.register_task(authorize)
 
         # General context with timeout exceeded
@@ -740,9 +675,7 @@ class TestProvenance:
         assert receipt2.committed is True
 
     @pytest.mark.asyncio
-    async def test_receipts_track_verb_executed(
-        self, yawl_engine: MockYawlEngine, case_data: dict[str, Any]
-    ) -> None:
+    async def test_receipts_track_verb_executed(self, yawl_engine: MockYawlEngine, case_data: dict[str, Any]) -> None:
         """Receipt metadata tracks which verb was executed."""
         task = MockYawlTask("test_verb", "Copy", flows_into=["a", "b"])
         yawl_engine.register_task(task)
@@ -761,13 +694,9 @@ class TestPerformance:
     """Performance tests against p99 targets."""
 
     @pytest.mark.asyncio
-    async def test_task_execution_latency_p99(
-        self, yawl_engine: MockYawlEngine, case_data: dict[str, Any]
-    ) -> None:
+    async def test_task_execution_latency_p99(self, yawl_engine: MockYawlEngine, case_data: dict[str, Any]) -> None:
         """YAWL task execution completes within p99 target (<100ms)."""
-        task = MockYawlTask(
-            "perf_test", "Transmute", service_uri="https://fast.example.com"
-        )
+        task = MockYawlTask("perf_test", "Transmute", service_uri="https://fast.example.com")
         yawl_engine.register_task(task)
 
         ctx = TransactionContext(prev_hash=GENESIS_HASH)
@@ -776,14 +705,10 @@ class TestPerformance:
         await yawl_engine.execute_task("perf_test", case_data, ctx)
         elapsed_ms = (time.perf_counter() - start) * 1000
 
-        assert elapsed_ms < P99_TARGET_MS, (
-            f"Task took {elapsed_ms:.2f}ms, target <{P99_TARGET_MS}ms"
-        )
+        assert elapsed_ms < P99_TARGET_MS, f"Task took {elapsed_ms:.2f}ms, target <{P99_TARGET_MS}ms"
 
     @pytest.mark.asyncio
-    async def test_workflow_step_latency(
-        self, yawl_engine: MockYawlEngine, case_data: dict[str, Any]
-    ) -> None:
+    async def test_workflow_step_latency(self, yawl_engine: MockYawlEngine, case_data: dict[str, Any]) -> None:
         """Each workflow step (verb execution) within p99 target."""
         verbs = ["Transmute", "Copy", "Filter", "Await", "Void"]
 
@@ -797,6 +722,4 @@ class TestPerformance:
             await yawl_engine.execute_task(f"verb_{verb}", case_data, ctx)
             elapsed_ms = (time.perf_counter() - start) * 1000
 
-            assert elapsed_ms < P99_TARGET_MS, (
-                f"{verb} took {elapsed_ms:.2f}ms, target <{P99_TARGET_MS}ms"
-            )
+            assert elapsed_ms < P99_TARGET_MS, f"{verb} took {elapsed_ms:.2f}ms, target <{P99_TARGET_MS}ms"

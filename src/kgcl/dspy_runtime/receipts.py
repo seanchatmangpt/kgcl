@@ -162,38 +162,18 @@ class ReceiptGenerator:
         self.graph.add((uri, RDFS.label, Literal(receipt.receipt_id)))
         self.graph.add((uri, DSPY.signatureName, Literal(receipt.signature_name)))
         self.graph.add((uri, DSPY.modulePath, Literal(receipt.module_path)))
-        self.graph.add(
-            (uri, DSPY.success, Literal(receipt.success, datatype=XSD.boolean))
-        )
-        self.graph.add(
-            (
-                uri,
-                PROV.generatedAtTime,
-                Literal(receipt.datetime, datatype=XSD.dateTime),
-            )
-        )
+        self.graph.add((uri, DSPY.success, Literal(receipt.success, datatype=XSD.boolean)))
+        self.graph.add((uri, PROV.generatedAtTime, Literal(receipt.datetime, datatype=XSD.dateTime)))
 
         # Model and metrics
         if receipt.model:
             self.graph.add((uri, DSPY.model, Literal(receipt.model)))
 
         if receipt.latency_seconds is not None:
-            self.graph.add(
-                (
-                    uri,
-                    DSPY.latencySeconds,
-                    Literal(receipt.latency_seconds, datatype=XSD.float),
-                )
-            )
+            self.graph.add((uri, DSPY.latencySeconds, Literal(receipt.latency_seconds, datatype=XSD.float)))
 
         if receipt.token_count is not None:
-            self.graph.add(
-                (
-                    uri,
-                    DSPY.tokenCount,
-                    Literal(receipt.token_count, datatype=XSD.integer),
-                )
-            )
+            self.graph.add((uri, DSPY.tokenCount, Literal(receipt.token_count, datatype=XSD.integer)))
 
         if receipt.error:
             self.graph.add((uri, DSPY.error, Literal(receipt.error)))
@@ -257,12 +237,8 @@ class ReceiptGenerator:
             outputs = {}
 
         # Get source features and signatures
-        source_features = [
-            str(obj) for obj in self.graph.objects(uri, PROV.wasDerivedFrom)
-        ]
-        source_signatures = [
-            str(obj) for obj in self.graph.objects(uri, DSPY.usedSignature)
-        ]
+        source_features = [str(obj) for obj in self.graph.objects(uri, PROV.wasDerivedFrom)]
+        source_signatures = [str(obj) for obj in self.graph.objects(uri, DSPY.usedSignature)]
 
         receipt = Receipt(
             receipt_id=receipt_id,
@@ -284,10 +260,7 @@ class ReceiptGenerator:
         return receipt
 
     def list_receipts(
-        self,
-        signature_name: str | None = None,
-        success: bool | None = None,
-        limit: int | None = None,
+        self, signature_name: str | None = None, success: bool | None = None, limit: int | None = None
     ) -> list[Receipt]:
         """
         List receipts from graph.

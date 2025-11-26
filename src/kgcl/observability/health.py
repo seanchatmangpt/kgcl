@@ -11,7 +11,7 @@ import logging
 import os
 import time
 from dataclasses import dataclass
-from datetime import UTC, datetime, timezone
+from datetime import UTC, datetime
 from enum import Enum
 from pathlib import Path
 from typing import Any
@@ -156,11 +156,7 @@ class HealthChecker:
             status = HealthStatus.HEALTHY if is_healthy else HealthStatus.UNHEALTHY
 
             return ComponentHealth(
-                name=name,
-                status=status,
-                message=message,
-                details=details,
-                check_duration_ms=duration_ms,
+                name=name, status=status, message=message, details=details, check_duration_ms=duration_ms
             )
         except Exception as e:
             duration_ms = (time.perf_counter() - start_time) * 1000
@@ -194,9 +190,7 @@ class HealthChecker:
         else:
             overall_status = HealthStatus.DEGRADED
 
-        return SystemHealth(
-            status=overall_status, components=components, timestamp=timestamp
-        )
+        return SystemHealth(status=overall_status, components=components, timestamp=timestamp)
 
 
 # Global health checker instance
@@ -247,17 +241,9 @@ def check_ollama_connectivity() -> tuple[bool, str, dict[str, Any]]:
 
         models = response.json().get("models", [])
 
-        return (
-            True,
-            f"Connected to Ollama ({len(models)} models available)",
-            {"models": [m["name"] for m in models]},
-        )
+        return (True, f"Connected to Ollama ({len(models)} models available)", {"models": [m["name"] for m in models]})
     except requests.exceptions.ConnectionError:
-        return (
-            False,
-            "Cannot connect to Ollama service",
-            {"endpoint": "http://localhost:11434"},
-        )
+        return (False, "Cannot connect to Ollama service", {"endpoint": "http://localhost:11434"})
     except Exception as e:
         return (False, f"Ollama health check failed: {e!s}", {"error": str(e)})
 
@@ -274,18 +260,11 @@ def check_graph_integrity() -> tuple[bool, str, dict[str, Any]]:
     graph_path, search_paths = _resolve_graph_file()
     search_paths_str = [str(path) for path in search_paths]
     if graph_path is None:
-        details = {
-            "error": "graph_file_not_configured",
-            "search_paths": search_paths_str,
-        }
+        details = {"error": "graph_file_not_configured", "search_paths": search_paths_str}
         return (False, "Graph file not configured", details)
 
     if not graph_path.exists():
-        details = {
-            "error": "graph_file_not_found",
-            "graph_file": str(graph_path),
-            "search_paths": search_paths_str,
-        }
+        details = {"error": "graph_file_not_found", "graph_file": str(graph_path), "search_paths": search_paths_str}
         return (False, "Configured graph file not found", details)
 
     try:
@@ -295,11 +274,7 @@ def check_graph_integrity() -> tuple[bool, str, dict[str, Any]]:
             parse_kwargs["format"] = graph_format
         graph.parse(graph_path, **parse_kwargs)
     except Exception as exc:
-        details = {
-            "error": str(exc),
-            "graph_file": str(graph_path),
-            "search_paths": search_paths_str,
-        }
+        details = {"error": str(exc), "graph_file": str(graph_path), "search_paths": search_paths_str}
         return (False, "Failed to parse graph file", details)
 
     triple_count = len(graph)
@@ -417,14 +392,10 @@ def _compute_file_hash(graph_path: Path) -> str:
     return hasher.hexdigest()
 
 
-def _build_graph_metrics(
-    graph: Graph, graph_path: Path, search_paths: list[str]
-) -> dict[str, Any]:
+def _build_graph_metrics(graph: Graph, graph_path: Path, search_paths: list[str]) -> dict[str, Any]:
     """Build diagnostic metrics for the loaded RDF graph."""
     stat_result = graph_path.stat()
-    namespaces = {
-        prefix: str(uri) for prefix, uri in graph.namespace_manager.namespaces()
-    }
+    namespaces = {prefix: str(uri) for prefix, uri in graph.namespace_manager.namespaces()}
     return {
         "graph_file": str(graph_path),
         "search_paths": search_paths,
@@ -435,8 +406,6 @@ def _build_graph_metrics(
         "namespace_count": len(namespaces),
         "namespaces": namespaces,
         "size_bytes": stat_result.st_size,
-        "last_modified": datetime.fromtimestamp(
-            stat_result.st_mtime, tz=UTC
-        ).isoformat(),
+        "last_modified": datetime.fromtimestamp(stat_result.st_mtime, tz=UTC).isoformat(),
         "sha256": _compute_file_hash(graph_path),
     }

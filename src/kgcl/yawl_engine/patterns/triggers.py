@@ -43,7 +43,6 @@ from dataclasses import dataclass, field, replace
 from typing import Any
 
 from rdflib import Graph, Literal, Namespace, URIRef
-from rdflib.query import ResultRow
 
 logger = logging.getLogger(__name__)
 
@@ -188,9 +187,7 @@ class TransientTrigger:
         Examples
         --------
         >>> graph = Graph()
-        >>> trigger = TransientTrigger(
-        ...     trigger_condition="count > 10", condition_type="expression"
-        ... )
+        >>> trigger = TransientTrigger(trigger_condition="count > 10", condition_type="expression")
         >>> assert trigger.check_trigger(graph, {"count": 15})
         >>> assert not trigger.check_trigger(graph, {"count": 5})
         """
@@ -209,17 +206,11 @@ class TransientTrigger:
         except Exception as e:
             logger.exception(
                 "Trigger condition evaluation failed",
-                extra={
-                    "pattern": self.name,
-                    "condition": self.trigger_condition,
-                    "error": str(e),
-                },
+                extra={"pattern": self.name, "condition": self.trigger_condition, "error": str(e)},
             )
             return False
 
-    def fire(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> tuple[TriggerResult, TransientTrigger]:
+    def fire(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> tuple[TriggerResult, TransientTrigger]:
         """Fire the trigger and deactivate permanently.
 
         Parameters
@@ -245,9 +236,7 @@ class TransientTrigger:
         --------
         >>> graph = Graph()
         >>> trigger = TransientTrigger(trigger_condition="count > 10")
-        >>> result, new_trigger = trigger.fire(
-        ...     graph, URIRef("urn:task:1"), {"count": 15}
-        ... )
+        >>> result, new_trigger = trigger.fire(graph, URIRef("urn:task:1"), {"count": 15})
         >>> assert result.triggered
         >>> assert new_trigger.fired
         """
@@ -262,10 +251,7 @@ class TransientTrigger:
         graph.add((task, YAWL.triggerTimestamp, Literal(timestamp)))
         graph.add((task, YAWL.triggerType, Literal("transient")))
 
-        logger.info(
-            "Transient trigger fired",
-            extra={"pattern": self.name, "task": str(task), "timestamp": timestamp},
-        )
+        logger.info("Transient trigger fired", extra={"pattern": self.name, "task": str(task), "timestamp": timestamp})
 
         result = TriggerResult(
             triggered=True,
@@ -327,9 +313,7 @@ class PersistentTrigger:
     condition_type: str = "expression"
     enabled: bool = True
 
-    def on_event(
-        self, graph: Graph, event: dict[str, Any]
-    ) -> tuple[TriggerResult, PersistentTrigger]:
+    def on_event(self, graph: Graph, event: dict[str, Any]) -> tuple[TriggerResult, PersistentTrigger]:
         """Evaluate trigger on incoming event.
 
         Parameters
@@ -370,13 +354,9 @@ class PersistentTrigger:
             triggered = False
             if self.condition_type == "sparql":
                 result = graph.query(self.trigger_condition)
-                triggered = (
-                    bool(result.askAnswer) if hasattr(result, "askAnswer") else False
-                )
+                triggered = bool(result.askAnswer) if hasattr(result, "askAnswer") else False
             else:
-                triggered = bool(
-                    eval(self.trigger_condition, {"__builtins__": {}}, event)
-                )
+                triggered = bool(eval(self.trigger_condition, {"__builtins__": {}}, event))
 
             if not triggered:
                 not_triggered_result = TriggerResult(
@@ -394,11 +374,7 @@ class PersistentTrigger:
 
             logger.info(
                 "Persistent trigger fired",
-                extra={
-                    "pattern": self.name,
-                    "fire_count": new_count,
-                    "timestamp": timestamp,
-                },
+                extra={"pattern": self.name, "fire_count": new_count, "timestamp": timestamp},
             )
 
             triggered_result = TriggerResult(
@@ -415,10 +391,7 @@ class PersistentTrigger:
             return triggered_result, new_trigger
 
         except Exception as e:
-            logger.exception(
-                "Persistent trigger evaluation failed",
-                extra={"pattern": self.name, "error": str(e)},
-            )
+            logger.exception("Persistent trigger evaluation failed", extra={"pattern": self.name, "error": str(e)})
             error_result = TriggerResult(
                 triggered=False,
                 target_task=None,
@@ -547,27 +520,20 @@ class CancelMIActivity:
                     # Mark instance as cancelled
                     graph.add((instance, YAWL.status, Literal("cancelled")))
                     graph.add((instance, YAWL.cancelledAt, Literal(timestamp)))
-                    graph.add(
-                        (instance, YAWL.cancellationReason, Literal("mi_cancellation"))
-                    )
+                    graph.add((instance, YAWL.cancellationReason, Literal("mi_cancellation")))
 
                     cancelled.append(str(instance))
 
                     logger.info(
                         "MI instance cancelled",
-                        extra={
-                            "pattern": self.name,
-                            "mi_task": str(mi_task),
-                            "instance": str(instance),
-                        },
+                        extra={"pattern": self.name, "mi_task": str(mi_task), "instance": str(instance)},
                     )
 
                 except Exception as e:
                     error_msg = f"Failed to cancel {instance}: {e}"
                     errors.append(error_msg)
                     logger.exception(
-                        "MI instance cancellation failed",
-                        extra={"instance": str(instance), "error": str(e)},
+                        "MI instance cancellation failed", extra={"instance": str(instance), "error": str(e)}
                     )
 
             # Mark MI task itself as cancelled
@@ -593,10 +559,7 @@ class CancelMIActivity:
             )
 
         except Exception as e:
-            logger.exception(
-                "MI cancellation failed",
-                extra={"mi_task": str(mi_task), "error": str(e)},
-            )
+            logger.exception("MI cancellation failed", extra={"mi_task": str(mi_task), "error": str(e)})
             return CancellationResult(
                 cancelled_count=0,
                 failed_count=1,

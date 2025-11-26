@@ -8,10 +8,7 @@ from personal_kgcl.generators.cli_generator import generate_cli_module
 
 
 def generate_cli(
-    template_path: Path | None = None,
-    output_path: Path | None = None,
-    verbose: bool = False,
-    dry_run: bool = False,
+    template_path: Path | None = None, output_path: Path | None = None, verbose: bool = False, dry_run: bool = False
 ) -> str:
     """Regenerate the Typer CLI from `.kgc/cli.ttl`.
 
@@ -31,9 +28,7 @@ def generate_cli(
     str
         Human-readable summary for the CLI/technician.
     """
-    generated = generate_cli_module(
-        template_path=template_path, output_path=output_path, dry_run=dry_run
-    )
+    generated = generate_cli_module(template_path=template_path, output_path=output_path, dry_run=dry_run)
 
     if dry_run:
         return f"[DRY-RUN] CLI generation succeeded ({len(generated.source)} bytes rendered)."

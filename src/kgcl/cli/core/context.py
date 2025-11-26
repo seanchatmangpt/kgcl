@@ -8,13 +8,7 @@ from pathlib import Path
 from kgcl.cli.core.clipboard import ClipboardGateway
 from kgcl.cli.core.config_store import CliConfigStore
 from kgcl.cli.core.renderers import CliRenderer
-from kgcl.cli.core.services import (
-    ConfigService,
-    DspyService,
-    IngestionService,
-    LinkmlValidator,
-    SparqlService,
-)
+from kgcl.cli.core.services import ConfigService, DspyService, IngestionService, LinkmlValidator, SparqlService
 
 
 @dataclass(frozen=True)

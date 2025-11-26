@@ -33,10 +33,7 @@ Chicago-Style test using fakes::
 
         # Act - real execution
         context = HookContext(
-            phase=HookPhase.PRE_TRANSACTION,
-            graph=rdf_store.graph,
-            delta=Graph(),
-            transaction_id="txn-001",
+            phase=HookPhase.PRE_TRANSACTION, graph=rdf_store.graph, delta=Graph(), transaction_id="txn-001"
         )
         executor.execute_phase(HookPhase.PRE_TRANSACTION, context)
 
@@ -92,9 +89,7 @@ class FakeReceiptStore:
     """
 
     _receipts: dict[str, Receipt] = field(default_factory=dict)
-    _receipts_by_phase: dict[HookPhase, list[Receipt]] = field(
-        default_factory=lambda: defaultdict(list)
-    )
+    _receipts_by_phase: dict[HookPhase, list[Receipt]] = field(default_factory=lambda: defaultdict(list))
 
     def save(self, receipt: Receipt) -> None:
         """Store a receipt.
@@ -209,16 +204,10 @@ class FakeRdfStore:
     """
 
     graph: Graph = field(default_factory=Graph)
-    _provenance: dict[tuple[URIRef, URIRef, URIRef | Literal], ProvenanceRecord] = (
-        field(default_factory=dict)
-    )
+    _provenance: dict[tuple[URIRef, URIRef, URIRef | Literal], ProvenanceRecord] = field(default_factory=dict)
 
     def add_triple(
-        self,
-        subject: URIRef,
-        predicate: URIRef,
-        obj: URIRef | Literal,
-        provenance: ProvenanceRecord | None = None,
+        self, subject: URIRef, predicate: URIRef, obj: URIRef | Literal, provenance: ProvenanceRecord | None = None
     ) -> None:
         """Add a triple to the graph.
 
@@ -239,9 +228,7 @@ class FakeRdfStore:
         if provenance:
             self._provenance[triple] = provenance
 
-    def remove_triple(
-        self, subject: URIRef, predicate: URIRef, obj: URIRef | Literal
-    ) -> None:
+    def remove_triple(self, subject: URIRef, predicate: URIRef, obj: URIRef | Literal) -> None:
         """Remove a triple from the graph.
 
         Parameters
@@ -299,9 +286,7 @@ class FakeRdfStore:
         """
         return self.graph.query(sparql)
 
-    def get_provenance(
-        self, subject: URIRef, predicate: URIRef, obj: URIRef | Literal
-    ) -> ProvenanceRecord | None:
+    def get_provenance(self, subject: URIRef, predicate: URIRef, obj: URIRef | Literal) -> ProvenanceRecord | None:
         """Get provenance for a triple.
 
         Parameters
@@ -475,12 +460,7 @@ class FakeHookExecutor:
     >>> executor = FakeHookExecutor(registry=registry)
     >>> hook = ValidationHook(name="validator", phases=[HookPhase.PRE_TRANSACTION])
     >>> registry.register(hook)
-    >>> context = HookContext(
-    ...     phase=HookPhase.PRE_TRANSACTION,
-    ...     graph=Graph(),
-    ...     delta=Graph(),
-    ...     transaction_id="txn-001",
-    ... )
+    >>> context = HookContext(phase=HookPhase.PRE_TRANSACTION, graph=Graph(), delta=Graph(), transaction_id="txn-001")
     >>> results = executor.execute_phase(HookPhase.PRE_TRANSACTION, context)
     >>> assert len(results) == 1
     >>> assert results[0]["success"] is True
@@ -490,9 +470,7 @@ class FakeHookExecutor:
     registry: FakeHookRegistry
     _execution_history: list[dict[str, Any]] = field(default_factory=list)
 
-    def execute_phase(
-        self, phase: HookPhase, context: HookContext, fail_fast: bool = False
-    ) -> list[dict[str, Any]]:
+    def execute_phase(self, phase: HookPhase, context: HookContext, fail_fast: bool = False) -> list[dict[str, Any]]:
         """Execute all hooks for a phase.
 
         Parameters
@@ -523,9 +501,7 @@ class FakeHookExecutor:
         self._execution_history.extend(results)
         return results
 
-    def _execute_hook(
-        self, hook: KnowledgeHook, context: HookContext
-    ) -> dict[str, Any]:
+    def _execute_hook(self, hook: KnowledgeHook, context: HookContext) -> dict[str, Any]:
         """Execute a single hook.
 
         Parameters
@@ -582,11 +558,7 @@ class FakeHookExecutor:
 
             # Create receipt for successful execution
             receipt = Receipt(
-                hook_id=hook.name,
-                phase=context.phase,
-                timestamp=timestamp,
-                success=True,
-                duration_ms=duration_ms,
+                hook_id=hook.name, phase=context.phase, timestamp=timestamp, success=True, duration_ms=duration_ms
             )
             context.receipts.append(receipt)
 
@@ -635,11 +607,7 @@ class FakeTransactionStore:
     >>> store = FakeTransactionStore()
     >>> txn = Transaction(
     ...     transaction_id="txn-001",
-    ...     provenance=ProvenanceRecord(
-    ...         agent="test_user",
-    ...         timestamp=datetime.now(UTC),
-    ...         reason="test transaction",
-    ...     ),
+    ...     provenance=ProvenanceRecord(agent="test_user", timestamp=datetime.now(UTC), reason="test transaction"),
     ... )
     >>> store.save(txn)
     >>> assert store.get("txn-001") == txn
@@ -734,9 +702,7 @@ class FakeIngestionPipeline:
     Examples
     --------
     >>> pipeline = FakeIngestionPipeline()
-    >>> result = pipeline.ingest_json(
-    ...     data={"type": "Person", "name": "Alice"}, agent="test_service"
-    ... )
+    >>> result = pipeline.ingest_json(data={"type": "Person", "name": "Alice"}, agent="test_service")
     >>> assert result.success is True
     >>> assert result.triples_added > 0
 
@@ -746,10 +712,7 @@ class FakeIngestionPipeline:
     _ingestion_history: list[dict[str, Any]] = field(default_factory=list)
 
     def ingest_json(
-        self,
-        data: dict[str, Any] | list[dict[str, Any]],
-        agent: str,
-        reason: str | None = None,
+        self, data: dict[str, Any] | list[dict[str, Any]], agent: str, reason: str | None = None
     ) -> dict[str, Any]:
         """Ingest JSON data.
 
@@ -788,12 +751,7 @@ class FakeIngestionPipeline:
             return result
 
         except Exception as e:
-            result = {
-                "success": False,
-                "triples_added": 0,
-                "transaction_id": txn_id,
-                "error": str(e),
-            }
+            result = {"success": False, "triples_added": 0, "transaction_id": txn_id, "error": str(e)}
             self._ingestion_history.append(result)
             return result
 

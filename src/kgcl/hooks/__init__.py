@@ -3,12 +3,7 @@
 from kgcl.hooks.adaptive_monitor import AdaptiveMonitor, MetricThreshold
 
 # Advanced UNRDF modules
-from kgcl.hooks.dark_matter import (
-    DarkMatterOptimizer,
-    OptimizationRule,
-    OptimizedPlan,
-    QueryStep,
-)
+from kgcl.hooks.dark_matter import DarkMatterOptimizer, OptimizationRule, OptimizedPlan, QueryStep
 from kgcl.hooks.edge_cases import EdgeCaseHandler
 from kgcl.hooks.federation import (
     ConsistencyLevel,
@@ -23,22 +18,11 @@ from kgcl.hooks.federation import (
 # Hook orchestration and execution
 from kgcl.hooks.loader import HookDefinition, HookEffect, HookLoader
 from kgcl.hooks.monitoring import AndonBoard, AndonSignal, SignalSeverity
-from kgcl.hooks.orchestrator import (
-    EffectHandler,
-    ExecutionContext,
-    ExecutionResult,
-    HookOrchestrator,
-)
+from kgcl.hooks.orchestrator import EffectHandler, ExecutionContext, ExecutionResult, HookOrchestrator
 from kgcl.hooks.registry import HookRegistry, HookStatus, RegisteredHook
 from kgcl.hooks.resilience import CircuitBreaker, CircuitBreakerConfig, CircuitState
 from kgcl.hooks.scheduler import HookScheduler, ScheduledExecution
-from kgcl.hooks.streaming import (
-    Change,
-    ChangeFeed,
-    ChangeType,
-    StreamProcessor,
-    WindowedStreamProcessor,
-)
+from kgcl.hooks.streaming import Change, ChangeFeed, ChangeType, StreamProcessor, WindowedStreamProcessor
 
 __all__ = [
     "AdaptiveMonitor",

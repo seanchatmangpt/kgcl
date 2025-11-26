@@ -4,9 +4,8 @@ from __future__ import annotations
 
 import json
 from dataclasses import dataclass
-from datetime import UTC, datetime
+from datetime import datetime
 from pathlib import Path
-from typing import Any
 
 from rdflib import Graph
 
@@ -72,20 +71,14 @@ class LocalDatasetSparqlService(SparqlService):
 
     dataset_path: Path
 
-    def query(
-        self, query_text: str, *, limit: int | None = None
-    ) -> list[dict[str, str]]:
+    def query(self, query_text: str, *, limit: int | None = None) -> list[dict[str, str]]:
         # Check if dataset exists, raise FileNotFoundError if not
         if not self.dataset_path.exists():
             raise FileNotFoundError(f"Dataset file not found: {self.dataset_path}")
 
         graph = Graph()
         graph.parse(self.dataset_path, format=self._guess_format())
-        sparql = (
-            query_text
-            if not limit or "LIMIT" in query_text.upper()
-            else f"{query_text}\nLIMIT {limit}"
-        )
+        sparql = query_text if not limit or "LIMIT" in query_text.upper() else f"{query_text}\nLIMIT {limit}"
         results = graph.query(sparql)
         normalized: list[dict[str, str]] = []
         for binding in results.bindings:
@@ -98,9 +91,7 @@ class LocalDatasetSparqlService(SparqlService):
 
     def _guess_format(self) -> str:
         suffix = self.dataset_path.suffix.lower()
-        return (
-            "trig" if suffix in {".trig"} else "n3" if suffix in {".n3"} else "turtle"
-        )
+        return "trig" if suffix in {".trig"} else "n3" if suffix in {".n3"} else "turtle"
 
 
 class JsonConfigService(ConfigService):
@@ -135,15 +126,9 @@ class NoOpLinkmlValidator(LinkmlValidator):
                 data_graph.parse(data=json.dumps(payload), format="json-ld")
                 shapes_graph = Graph()
                 shapes_graph.parse(self._shapes_path, format="turtle")
-                r = validate(
-                    data_graph=data_graph, shacl_graph=shapes_graph, inference="rdfs"
-                )
+                r = validate(data_graph=data_graph, shacl_graph=shapes_graph, inference="rdfs")
                 conforms, _, results_text = r
                 if not conforms:
-                    raise ValueError(
-                        f"Payload failed LinkML/SHACL validation: {results_text}"
-                    )
+                    raise ValueError(f"Payload failed LinkML/SHACL validation: {results_text}")
             except ImportError:
-                raise RuntimeError(
-                    "pyshacl is required for LinkML validation but is not installed."
-                ) from None
+                raise RuntimeError("pyshacl is required for LinkML validation but is not installed.") from None

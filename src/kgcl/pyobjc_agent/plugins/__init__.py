@@ -10,13 +10,7 @@ This package provides:
 import logging
 from typing import Dict, List, Optional, Type
 
-from .base import (
-    BaseCapabilityPlugin,
-    CapabilityData,
-    CapabilityDescriptor,
-    EntitlementLevel,
-    PluginStatus,
-)
+from .base import BaseCapabilityPlugin, CapabilityData, CapabilityDescriptor, EntitlementLevel, PluginStatus
 
 logger = logging.getLogger(__name__)
 
@@ -37,9 +31,7 @@ class PluginRegistry:
         self._instances: dict[str, BaseCapabilityPlugin] = {}
         logger.debug("Initialized plugin registry")
 
-    def register(
-        self, plugin_class: type[BaseCapabilityPlugin], plugin_id: str | None = None
-    ) -> None:
+    def register(self, plugin_class: type[BaseCapabilityPlugin], plugin_id: str | None = None) -> None:
         """
         Register a plugin class.
 
@@ -149,9 +141,7 @@ class PluginRegistry:
 
         return capabilities
 
-    def collect_all_data(
-        self, parameters: dict | None = None
-    ) -> dict[str, list[CapabilityData]]:
+    def collect_all_data(self, parameters: dict | None = None) -> dict[str, list[CapabilityData]]:
         """
         Collect data from all initialized plugins.
 
@@ -194,9 +184,7 @@ def get_registry() -> PluginRegistry:
     return _global_registry
 
 
-def register_plugin(
-    plugin_class: type[BaseCapabilityPlugin], plugin_id: str | None = None
-) -> None:
+def register_plugin(plugin_class: type[BaseCapabilityPlugin], plugin_id: str | None = None) -> None:
     """
     Register a plugin with the global registry.
 

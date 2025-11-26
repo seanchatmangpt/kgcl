@@ -99,17 +99,13 @@ class SwarmCoordinator:
 
                 self._task_history.append((task, result))
             except Exception as e:
-                result = TaskResult(
-                    task_name=task.name, status=TaskStatus.FAILED, error=str(e)
-                )
+                result = TaskResult(task_name=task.name, status=TaskStatus.FAILED, error=str(e))
                 results[member.name()] = result
                 self._metrics.failed_tasks += 1
 
         self._metrics.end_time = datetime.now()
         if self._metrics.end_time and self._metrics.start_time:
-            duration = (
-                self._metrics.end_time - self._metrics.start_time
-            ).total_seconds()
+            duration = (self._metrics.end_time - self._metrics.start_time).total_seconds()
             if self._metrics.total_tasks > 0:
                 self._metrics.avg_duration = duration / self._metrics.total_tasks
 
@@ -128,7 +124,4 @@ class SwarmCoordinator:
         self._task_history.clear()
 
     def __repr__(self) -> str:
-        return (
-            f"SwarmCoordinator(id={self._id!r}, members={len(self._members)}, "
-            f"max_workers={self._max_workers})"
-        )
+        return f"SwarmCoordinator(id={self._id!r}, members={len(self._members)}, max_workers={self._max_workers})"

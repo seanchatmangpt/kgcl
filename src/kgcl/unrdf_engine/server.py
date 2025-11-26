@@ -23,11 +23,7 @@ tracer = trace.get_tracer(__name__)
 logger = logging.getLogger(__name__)
 
 
-def create_app(
-    graph_file: Path | None = None,
-    shapes_file: Path | None = None,
-    enable_hooks: bool = True,
-) -> Flask:
+def create_app(graph_file: Path | None = None, shapes_file: Path | None = None, enable_hooks: bool = True) -> Flask:
     """Create Flask application for UNRDF engine.
 
     Parameters
@@ -63,9 +59,7 @@ def create_app(
         hook_executor = HookExecutor(registry)
 
     # Initialize pipeline
-    pipeline = IngestionPipeline(
-        engine=engine, validator=validator, hook_executor=hook_executor
-    )
+    pipeline = IngestionPipeline(engine=engine, validator=validator, hook_executor=hook_executor)
 
     # Store in app context
     app.config["engine"] = engine
@@ -121,9 +115,7 @@ def create_app(
             span.set_attribute("agent", agent)
 
             # Ingest data
-            result = pipeline.ingest_json(
-                data=data["data"], agent=agent, reason=reason, base_uri=base_uri
-            )
+            result = pipeline.ingest_json(data=data["data"], agent=agent, reason=reason, base_uri=base_uri)
 
             # Save graph if file-backed
             if result.success and graph_file:
@@ -179,11 +171,7 @@ def create_app(
                 if prov:
                     provenance_data.append(
                         {
-                            "triple": {
-                                "subject": str(s),
-                                "predicate": str(p),
-                                "object": str(o),
-                            },
+                            "triple": {"subject": str(s), "predicate": str(p), "object": str(o)},
                             "provenance": prov.to_dict(),
                         }
                     )
@@ -236,12 +224,7 @@ def create_app(
 
             hooks = hook_executor.registry.list_all()
             hooks_data = [
-                {
-                    "name": h.name,
-                    "phases": [p.value for p in h.phases],
-                    "priority": h.priority,
-                    "enabled": h.enabled,
-                }
+                {"name": h.name, "phases": [p.value for p in h.phases], "priority": h.priority, "enabled": h.enabled}
                 for h in hooks
             ]
 
@@ -269,10 +252,7 @@ def create_app(
 
 
 def main(
-    host: str = "0.0.0.0",
-    port: int = 8000,
-    graph_file: Path | None = None,
-    shapes_file: Path | None = None,
+    host: str = "0.0.0.0", port: int = 8000, graph_file: Path | None = None, shapes_file: Path | None = None
 ) -> None:
     """Run the UNRDF HTTP server.
 

@@ -12,12 +12,7 @@ import logging
 from datetime import UTC, datetime, timedelta
 from typing import Any
 
-from .base import (
-    BaseCapabilityPlugin,
-    CapabilityData,
-    CapabilityDescriptor,
-    EntitlementLevel,
-)
+from .base import BaseCapabilityPlugin, CapabilityData, CapabilityDescriptor, EntitlementLevel
 
 logger = logging.getLogger(__name__)
 
@@ -64,14 +59,8 @@ class CalendarPlugin(BaseCapabilityPlugin):
                                 "type": "object",
                                 "properties": {
                                     "title": {"type": "string"},
-                                    "start_date": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                    },
-                                    "end_date": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                    },
+                                    "start_date": {"type": "string", "format": "date-time"},
+                                    "end_date": {"type": "string", "format": "date-time"},
                                     "location": {"type": "string"},
                                     "is_all_day": {"type": "boolean"},
                                     "calendar_name": {"type": "string"},
@@ -164,9 +153,7 @@ class CalendarPlugin(BaseCapabilityPlugin):
             # Check authorization status
             # Note: This doesn't prompt, just checks current status
             # In a real app, you'd use requestAccessToEntityType:completion:
-            auth_status = store.authorizationStatusForEntityType_(
-                0
-            )  # EKEntityTypeEvent
+            auth_status = store.authorizationStatusForEntityType_(0)  # EKEntityTypeEvent
 
             # 0 = Not Determined, 1 = Restricted, 2 = Denied, 3 = Authorized
             if auth_status != 3:
@@ -182,9 +169,7 @@ class CalendarPlugin(BaseCapabilityPlugin):
             logger.error(f"Error checking calendar access: {e}")
             return False
 
-    def collect_capability_data(
-        self, capability_name: str, parameters: dict[str, Any] | None = None
-    ) -> CapabilityData:
+    def collect_capability_data(self, capability_name: str, parameters: dict[str, Any] | None = None) -> CapabilityData:
         """Collect calendar data."""
         timestamp = datetime.now(UTC)
         params = parameters or {}
@@ -202,20 +187,12 @@ class CalendarPlugin(BaseCapabilityPlugin):
                 raise ValueError(f"Unknown capability: {capability_name}")
 
             return CapabilityData(
-                capability_name=capability_name,
-                timestamp=timestamp,
-                data=data,
-                metadata={"plugin": self.plugin_id},
+                capability_name=capability_name, timestamp=timestamp, data=data, metadata={"plugin": self.plugin_id}
             )
 
         except Exception as e:
             logger.error(f"Error collecting {capability_name}: {e}")
-            return CapabilityData(
-                capability_name=capability_name,
-                timestamp=timestamp,
-                data={},
-                error=str(e),
-            )
+            return CapabilityData(capability_name=capability_name, timestamp=timestamp, data={}, error=str(e))
 
     def _get_event_store(self):
         """Get or create EventKit event store."""
@@ -266,15 +243,10 @@ class CalendarPlugin(BaseCapabilityPlugin):
             calendars = store.calendarsForEntityType_(0)  # EKEntityTypeEvent
 
             if not calendars:
-                return {
-                    "error": "No calendars available or access denied",
-                    "events": [],
-                }
+                return {"error": "No calendars available or access denied", "events": []}
 
             # Create predicate for date range
-            predicate = store.predicateForEventsWithStartDate_endDate_calendars_(
-                ns_start, ns_end, calendars
-            )
+            predicate = store.predicateForEventsWithStartDate_endDate_calendars_(ns_start, ns_end, calendars)
 
             # Fetch events
             events = store.eventsMatchingPredicate_(predicate)
@@ -283,20 +255,12 @@ class CalendarPlugin(BaseCapabilityPlugin):
             for event in events:
                 event_data = {
                     "title": str(event.title()) if event.title() else "",
-                    "start_date": datetime.fromtimestamp(
-                        event.startDate().timeIntervalSince1970()
-                    ).isoformat(),
-                    "end_date": datetime.fromtimestamp(
-                        event.endDate().timeIntervalSince1970()
-                    ).isoformat(),
+                    "start_date": datetime.fromtimestamp(event.startDate().timeIntervalSince1970()).isoformat(),
+                    "end_date": datetime.fromtimestamp(event.endDate().timeIntervalSince1970()).isoformat(),
                     "is_all_day": bool(event.isAllDay()),
                     "location": str(event.location()) if event.location() else "",
-                    "calendar_name": str(event.calendar().title())
-                    if event.calendar()
-                    else "",
-                    "has_attendees": bool(
-                        event.attendees() and len(event.attendees()) > 0
-                    ),
+                    "calendar_name": str(event.calendar().title()) if event.calendar() else "",
+                    "has_attendees": bool(event.attendees() and len(event.attendees()) > 0),
                     "status": event.status(),  # 0=None, 1=Confirmed, 2=Tentative, 3=Cancelled
                 }
 
@@ -305,10 +269,7 @@ class CalendarPlugin(BaseCapabilityPlugin):
             return {
                 "count": len(event_list),
                 "events": event_list,
-                "query_params": {
-                    "start_date": start_date.isoformat(),
-                    "end_date": end_date.isoformat(),
-                },
+                "query_params": {"start_date": start_date.isoformat(), "end_date": end_date.isoformat()},
             }
 
         except Exception as e:
@@ -333,9 +294,7 @@ class CalendarPlugin(BaseCapabilityPlugin):
 
         # Find next event
         now = datetime.now(UTC)
-        future_events = [
-            e for e in events if datetime.fromisoformat(e["start_date"]) > now
-        ]
+        future_events = [e for e in events if datetime.fromisoformat(e["start_date"]) > now]
 
         # Sort by start time
         future_events.sort(key=lambda e: e["start_date"])
@@ -346,13 +305,7 @@ class CalendarPlugin(BaseCapabilityPlugin):
         today_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
         today_end = today_start + timedelta(days=1)
 
-        events_today = len(
-            [
-                e
-                for e in events
-                if today_start <= datetime.fromisoformat(e["start_date"]) < today_end
-            ]
-        )
+        events_today = len([e for e in events if today_start <= datetime.fromisoformat(e["start_date"]) < today_end])
 
         return {
             "count": len(future_events),
@@ -410,9 +363,7 @@ class CalendarPlugin(BaseCapabilityPlugin):
         now = datetime.now(UTC)
 
         # Get events for current time window
-        events_data = self._get_calendar_events(
-            {"start_date": now.isoformat(), "days_ahead": 1}
-        )
+        events_data = self._get_calendar_events({"start_date": now.isoformat(), "days_ahead": 1})
 
         events = events_data.get("events", [])
 

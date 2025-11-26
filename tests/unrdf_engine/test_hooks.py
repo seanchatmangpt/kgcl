@@ -44,13 +44,7 @@ class TestTriggerCondition:
     def test_matches_delta(self) -> None:
         """Test matching against delta graph."""
         delta = Graph()
-        delta.add(
-            (
-                URIRef("http://example.org/s"),
-                RDF.type,
-                URIRef("http://unrdf.org/ontology/FeatureTemplate"),
-            )
-        )
+        delta.add((URIRef("http://example.org/s"), RDF.type, URIRef("http://unrdf.org/ontology/FeatureTemplate")))
 
         trigger = TriggerCondition(
             pattern="?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://unrdf.org/ontology/FeatureTemplate>",
@@ -58,38 +52,20 @@ class TestTriggerCondition:
             min_matches=1,
         )
 
-        context = HookContext(
-            phase=HookPhase.POST_COMMIT,
-            graph=Graph(),
-            delta=delta,
-            transaction_id="txn-1",
-        )
+        context = HookContext(phase=HookPhase.POST_COMMIT, graph=Graph(), delta=delta, transaction_id="txn-1")
 
         assert trigger.matches(context)
 
     def test_matches_with_custom_variables(self) -> None:
         """TriggerCondition matches even when pattern variables omit ?s."""
         delta = Graph()
-        delta.add(
-            (
-                URIRef("http://example.org/person1"),
-                URIRef("http://unrdf.org/ontology/age"),
-                Literal(30),
-            )
-        )
+        delta.add((URIRef("http://example.org/person1"), URIRef("http://unrdf.org/ontology/age"), Literal(30)))
 
         trigger = TriggerCondition(
-            pattern="?person <http://unrdf.org/ontology/age> ?age",
-            check_delta=True,
-            min_matches=1,
+            pattern="?person <http://unrdf.org/ontology/age> ?age", check_delta=True, min_matches=1
         )
 
-        context = HookContext(
-            phase=HookPhase.POST_COMMIT,
-            graph=Graph(),
-            delta=delta,
-            transaction_id="txn-1",
-        )
+        context = HookContext(phase=HookPhase.POST_COMMIT, graph=Graph(), delta=delta, transaction_id="txn-1")
 
         assert trigger.matches(context)
 
@@ -103,12 +79,7 @@ class TestTriggerCondition:
             min_matches=1,
         )
 
-        context = HookContext(
-            phase=HookPhase.POST_COMMIT,
-            graph=Graph(),
-            delta=delta,
-            transaction_id="txn-1",
-        )
+        context = HookContext(phase=HookPhase.POST_COMMIT, graph=Graph(), delta=delta, transaction_id="txn-1")
 
         assert not trigger.matches(context)
 
@@ -158,12 +129,7 @@ class TestKnowledgeHook:
         """Test should_execute returns true when conditions met."""
         hook = SimpleHook()
 
-        context = HookContext(
-            phase=HookPhase.POST_COMMIT,
-            graph=Graph(),
-            delta=Graph(),
-            transaction_id="txn-1",
-        )
+        context = HookContext(phase=HookPhase.POST_COMMIT, graph=Graph(), delta=Graph(), transaction_id="txn-1")
 
         assert hook.should_execute(context)
 
@@ -172,12 +138,7 @@ class TestKnowledgeHook:
         hook = SimpleHook()
         hook.enabled = False
 
-        context = HookContext(
-            phase=HookPhase.POST_COMMIT,
-            graph=Graph(),
-            delta=Graph(),
-            transaction_id="txn-1",
-        )
+        context = HookContext(phase=HookPhase.POST_COMMIT, graph=Graph(), delta=Graph(), transaction_id="txn-1")
 
         assert not hook.should_execute(context)
 
@@ -185,12 +146,7 @@ class TestKnowledgeHook:
         """Test should_execute returns false for wrong phase."""
         hook = SimpleHook()
 
-        context = HookContext(
-            phase=HookPhase.PRE_INGESTION,
-            graph=Graph(),
-            delta=Graph(),
-            transaction_id="txn-1",
-        )
+        context = HookContext(phase=HookPhase.PRE_INGESTION, graph=Graph(), delta=Graph(), transaction_id="txn-1")
 
         assert not hook.should_execute(context)
 
@@ -288,9 +244,7 @@ class TestHookRegistry:
 
         class HighPriorityHook(KnowledgeHook):
             def __init__(self) -> None:
-                super().__init__(
-                    name="high_priority", phases=[HookPhase.POST_COMMIT], priority=100
-                )
+                super().__init__(name="high_priority", phases=[HookPhase.POST_COMMIT], priority=100)
 
             def execute(self, context: HookContext) -> None:
                 """Execute high priority hook - no-op for testing."""
@@ -298,9 +252,7 @@ class TestHookRegistry:
 
         class LowPriorityHook(KnowledgeHook):
             def __init__(self) -> None:
-                super().__init__(
-                    name="low_priority", phases=[HookPhase.POST_COMMIT], priority=10
-                )
+                super().__init__(name="low_priority", phases=[HookPhase.POST_COMMIT], priority=10)
 
             def execute(self, context: HookContext) -> None:
                 """Execute low priority hook - no-op for testing."""
@@ -335,12 +287,7 @@ class TestHookExecutor:
         hook = SimpleHook()
         registry.register(hook)
 
-        context = HookContext(
-            phase=HookPhase.POST_COMMIT,
-            graph=Graph(),
-            delta=Graph(),
-            transaction_id="txn-1",
-        )
+        context = HookContext(phase=HookPhase.POST_COMMIT, graph=Graph(), delta=Graph(), transaction_id="txn-1")
 
         results = executor.execute_phase(HookPhase.POST_COMMIT, context)
 
@@ -354,12 +301,7 @@ class TestHookExecutor:
         registry = HookRegistry()
         executor = HookExecutor(registry)
 
-        context = HookContext(
-            phase=HookPhase.POST_COMMIT,
-            graph=Graph(),
-            delta=Graph(),
-            transaction_id="txn-1",
-        )
+        context = HookContext(phase=HookPhase.POST_COMMIT, graph=Graph(), delta=Graph(), transaction_id="txn-1")
 
         results = executor.execute_phase(HookPhase.POST_COMMIT, context)
 
@@ -374,12 +316,7 @@ class TestHookExecutor:
         hook.enabled = False
         registry.register(hook)
 
-        context = HookContext(
-            phase=HookPhase.POST_COMMIT,
-            graph=Graph(),
-            delta=Graph(),
-            transaction_id="txn-1",
-        )
+        context = HookContext(phase=HookPhase.POST_COMMIT, graph=Graph(), delta=Graph(), transaction_id="txn-1")
 
         results = executor.execute_phase(HookPhase.POST_COMMIT, context)
 
@@ -404,12 +341,7 @@ class TestHookExecutor:
         hook = ErrorHook()
         registry.register(hook)
 
-        context = HookContext(
-            phase=HookPhase.POST_COMMIT,
-            graph=Graph(),
-            delta=Graph(),
-            transaction_id="txn-1",
-        )
+        context = HookContext(phase=HookPhase.POST_COMMIT, graph=Graph(), delta=Graph(), transaction_id="txn-1")
 
         results = executor.execute_phase(HookPhase.POST_COMMIT, context)
 
@@ -422,9 +354,7 @@ class TestHookExecutor:
 
         class ErrorHook(KnowledgeHook):
             def __init__(self) -> None:
-                super().__init__(
-                    name="error_hook", phases=[HookPhase.POST_COMMIT], priority=100
-                )
+                super().__init__(name="error_hook", phases=[HookPhase.POST_COMMIT], priority=100)
 
             def execute(self, _context: HookContext) -> None:
                 msg = "Hook error"
@@ -439,12 +369,7 @@ class TestHookExecutor:
         registry.register(error_hook)
         registry.register(success_hook)
 
-        context = HookContext(
-            phase=HookPhase.POST_COMMIT,
-            graph=Graph(),
-            delta=Graph(),
-            transaction_id="txn-1",
-        )
+        context = HookContext(phase=HookPhase.POST_COMMIT, graph=Graph(), delta=Graph(), transaction_id="txn-1")
 
         results = executor.execute_phase(HookPhase.POST_COMMIT, context, fail_fast=True)
 
@@ -461,12 +386,7 @@ class TestHookExecutor:
         hook = SimpleHook()
         registry.register(hook)
 
-        context = HookContext(
-            phase=HookPhase.POST_COMMIT,
-            graph=Graph(),
-            delta=Graph(),
-            transaction_id="txn-1",
-        )
+        context = HookContext(phase=HookPhase.POST_COMMIT, graph=Graph(), delta=Graph(), transaction_id="txn-1")
 
         executor.execute_phase(HookPhase.POST_COMMIT, context)
 
@@ -482,12 +402,7 @@ class TestHookExecutor:
         hook = SimpleHook()
         registry.register(hook)
 
-        context = HookContext(
-            phase=HookPhase.POST_COMMIT,
-            graph=Graph(),
-            delta=Graph(),
-            transaction_id="txn-1",
-        )
+        context = HookContext(phase=HookPhase.POST_COMMIT, graph=Graph(), delta=Graph(), transaction_id="txn-1")
 
         executor.execute_phase(HookPhase.POST_COMMIT, context)
         assert len(executor.get_execution_history()) == 1
@@ -554,12 +469,7 @@ class TestFeatureTemplateHook:
 
         hook = FeatureTemplateHook(materializer=materializer)
 
-        context = HookContext(
-            phase=HookPhase.POST_COMMIT,
-            graph=Graph(),
-            delta=Graph(),
-            transaction_id="txn-1",
-        )
+        context = HookContext(phase=HookPhase.POST_COMMIT, graph=Graph(), delta=Graph(), transaction_id="txn-1")
 
         hook.execute(context)
 

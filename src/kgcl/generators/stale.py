@@ -5,7 +5,7 @@ and suggests decommissioning with cleanup savings estimates.
 """
 
 from dataclasses import dataclass
-from datetime import UTC, datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from typing import Any
 
 from rdflib import Graph, Literal, Namespace
@@ -94,18 +94,12 @@ class StaleItemsGenerator(ProjectionGenerator):
         """
         stale_items = self._query_stale_items()
         completed_items = self._query_completed_items()
-        cleanup_estimate = self._calculate_cleanup_estimate(
-            stale_items, completed_items
-        )
+        cleanup_estimate = self._calculate_cleanup_estimate(stale_items, completed_items)
 
         return {
             "cutoff_date": self.cutoff_date,
-            "stale_items": sorted(
-                stale_items, key=lambda i: i.days_stale, reverse=True
-            ),
-            "completed_items": sorted(
-                completed_items, key=lambda i: i.days_unarchived, reverse=True
-            ),
+            "stale_items": sorted(stale_items, key=lambda i: i.days_stale, reverse=True),
+            "completed_items": sorted(completed_items, key=lambda i: i.days_unarchived, reverse=True),
             "cleanup_estimate": cleanup_estimate,
             "total_items": len(stale_items) + len(completed_items),
         }

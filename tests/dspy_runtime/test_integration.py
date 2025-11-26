@@ -9,12 +9,7 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from kgcl.dspy_runtime import (
-    DSPY_AVAILABLE,
-    ReceiptGenerator,
-    SignatureInvoker,
-    UNRDFBridge,
-)
+from kgcl.dspy_runtime import DSPY_AVAILABLE, ReceiptGenerator, SignatureInvoker, UNRDFBridge
 
 
 @pytest.fixture
@@ -47,9 +42,7 @@ class TestEndToEndWorkflow:
 
     @patch("dspy.Predict")
     @patch("dspy.LM")
-    def test_simple_invocation_workflow(
-        self, mock_lm_cls, mock_predict, test_signature_module
-    ):
+    def test_simple_invocation_workflow(self, mock_lm_cls, mock_predict, test_signature_module):
         """Test simple invocation from module to receipt."""
         # Mock LM
         mock_lm = Mock()
@@ -98,9 +91,7 @@ class TestEndToEndWorkflow:
 
     @patch("dspy.Predict")
     @patch("dspy.LM")
-    def test_multi_signature_workflow(
-        self, mock_lm_cls, mock_predict, test_signature_module
-    ):
+    def test_multi_signature_workflow(self, mock_lm_cls, mock_predict, test_signature_module):
         """Test invoking multiple signatures."""
         mock_lm = Mock()
         mock_lm_cls.return_value = mock_lm
@@ -152,9 +143,7 @@ class TestEndToEndWorkflow:
 
     @patch("dspy.Predict")
     @patch("dspy.LM")
-    def test_batch_invocation_workflow(
-        self, mock_lm_cls, mock_predict, test_signature_module
-    ):
+    def test_batch_invocation_workflow(self, mock_lm_cls, mock_predict, test_signature_module):
         """Test batch invocation workflow."""
         mock_lm = Mock()
         mock_lm_cls.return_value = mock_lm
@@ -195,9 +184,7 @@ class TestEndToEndWorkflow:
 
     @patch("dspy.Predict")
     @patch("dspy.LM")
-    def test_receipt_persistence_workflow(
-        self, mock_lm_cls, mock_predict, test_signature_module, tmp_path
-    ):
+    def test_receipt_persistence_workflow(self, mock_lm_cls, mock_predict, test_signature_module, tmp_path):
         """Test receipt persistence and loading."""
         mock_lm = Mock()
         mock_lm_cls.return_value = mock_lm
@@ -218,9 +205,7 @@ class TestEndToEndWorkflow:
             # Create bridge and invoke
             bridge1 = UNRDFBridge()
             result = bridge1.invoke(
-                module_path=str(test_signature_module),
-                signature_name="SimpleSignature",
-                inputs={"text": "Test text"},
+                module_path=str(test_signature_module), signature_name="SimpleSignature", inputs={"text": "Test text"}
             )
 
             receipt_id = result["receipt"]["receipt_id"]
@@ -240,9 +225,7 @@ class TestEndToEndWorkflow:
 
     @patch("dspy.Predict")
     @patch("dspy.LM")
-    def test_error_handling_workflow(
-        self, mock_lm_cls, mock_predict, test_signature_module
-    ):
+    def test_error_handling_workflow(self, mock_lm_cls, mock_predict, test_signature_module):
         """Test error handling in workflow."""
         mock_lm = Mock()
         mock_lm_cls.return_value = mock_lm
@@ -260,9 +243,7 @@ class TestEndToEndWorkflow:
 
             # Invoke (should handle error gracefully)
             result = bridge.invoke(
-                module_path=str(test_signature_module),
-                signature_name="SimpleSignature",
-                inputs={"text": "Test"},
+                module_path=str(test_signature_module), signature_name="SimpleSignature", inputs={"text": "Test"}
             )
 
             # Verify error captured
@@ -276,9 +257,7 @@ class TestEndToEndWorkflow:
 
     @patch("dspy.Predict")
     @patch("dspy.LM")
-    def test_statistics_workflow(
-        self, mock_lm_cls, mock_predict, test_signature_module
-    ):
+    def test_statistics_workflow(self, mock_lm_cls, mock_predict, test_signature_module):
         """Test statistics collection workflow."""
         mock_lm = Mock()
         mock_lm_cls.return_value = mock_lm
@@ -288,12 +267,7 @@ class TestEndToEndWorkflow:
         mock_success.summary = "Summary"
 
         mock_predictor = Mock()
-        mock_predictor.side_effect = [
-            mock_success,
-            mock_success,
-            RuntimeError("Failed"),
-            mock_success,
-        ]
+        mock_predictor.side_effect = [mock_success, mock_success, RuntimeError("Failed"), mock_success]
         mock_predict.return_value = mock_predictor
 
         with patch("requests.get") as mock_get:
@@ -341,9 +315,7 @@ class TestComponentIntegration:
             invoker = SignatureInvoker()
 
             # Invoke
-            result = invoker.invoke_from_module(
-                str(test_signature_module), "SimpleSignature", {"text": "Test"}
-            )
+            result = invoker.invoke_from_module(str(test_signature_module), "SimpleSignature", {"text": "Test"})
 
             # Create receipt from result
             generator = ReceiptGenerator()

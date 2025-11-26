@@ -86,8 +86,7 @@ class IngestionPipeline:
     >>> pipeline = IngestionPipeline(engine, validator, hook_executor)
     >>>
     >>> result = pipeline.ingest_json(
-    ...     data={"type": "Event", "name": "user_login", "userId": "123"},
-    ...     agent="ingestion_service",
+    ...     data={"type": "Event", "name": "user_login", "userId": "123"}, agent="ingestion_service"
     ... )
 
     """
@@ -118,9 +117,7 @@ class IngestionPipeline:
         self.validate_on_ingest = validate_on_ingest
 
         engine_executor_getter = getattr(self.engine, "get_hook_executor", None)
-        engine_executor_instance = (
-            engine_executor_getter() if callable(engine_executor_getter) else None
-        )
+        engine_executor_instance = engine_executor_getter() if callable(engine_executor_getter) else None
 
         # Prefer explicitly provided executor, otherwise reuse the engine's executor
         if hook_executor is not None:
@@ -189,9 +186,7 @@ class IngestionPipeline:
                     transaction_id=txn.transaction_id,
                     metadata={"items": items},
                 )
-                hook_execution_log.extend(
-                    self.hook_executor.execute_phase(HookPhase.PRE_INGESTION, context)
-                )
+                hook_execution_log.extend(self.hook_executor.execute_phase(HookPhase.PRE_INGESTION, context))
 
             # Convert JSON to RDF
             for item in items:
@@ -206,22 +201,13 @@ class IngestionPipeline:
             # ON_CHANGE hooks
             if self.hook_executor:
                 context = HookContext(
-                    phase=HookPhase.ON_CHANGE,
-                    graph=self.engine.graph,
-                    delta=delta,
-                    transaction_id=txn.transaction_id,
+                    phase=HookPhase.ON_CHANGE, graph=self.engine.graph, delta=delta, transaction_id=txn.transaction_id
                 )
-                hook_execution_log.extend(
-                    self.hook_executor.execute_phase(HookPhase.ON_CHANGE, context)
-                )
+                hook_execution_log.extend(self.hook_executor.execute_phase(HookPhase.ON_CHANGE, context))
 
             # PRE_VALIDATION hooks
             validation_result = None
-            if (
-                self.validate_on_ingest
-                and self.validator
-                and self.validator.has_shapes()
-            ):
+            if self.validate_on_ingest and self.validator and self.validator.has_shapes():
                 if self.hook_executor:
                     context = HookContext(
                         phase=HookPhase.PRE_VALIDATION,
@@ -229,11 +215,7 @@ class IngestionPipeline:
                         delta=delta,
                         transaction_id=txn.transaction_id,
                     )
-                    hook_execution_log.extend(
-                        self.hook_executor.execute_phase(
-                            HookPhase.PRE_VALIDATION, context
-                        )
-                    )
+                    hook_execution_log.extend(self.hook_executor.execute_phase(HookPhase.PRE_VALIDATION, context))
 
                 # Validate delta
                 validation = self.validator.validate(delta)
@@ -248,11 +230,7 @@ class IngestionPipeline:
                         transaction_id=txn.transaction_id,
                         metadata={"validation_report": validation_result},
                     )
-                    hook_execution_log.extend(
-                        self.hook_executor.execute_phase(
-                            HookPhase.POST_VALIDATION, context
-                        )
-                    )
+                    hook_execution_log.extend(self.hook_executor.execute_phase(HookPhase.POST_VALIDATION, context))
 
                     # Check if hooks signaled rollback
                     if context.metadata.get("should_rollback"):
@@ -262,9 +240,7 @@ class IngestionPipeline:
                             triples_added=0,
                             transaction_id=txn.transaction_id,
                             validation_result=validation_result,
-                            error=context.metadata.get(
-                                "rollback_reason", "Validation failed"
-                            ),
+                            error=context.metadata.get("rollback_reason", "Validation failed"),
                         )
 
                 if not validation.conforms:
@@ -294,14 +270,9 @@ class IngestionPipeline:
                     )
             elif self.hook_executor:
                 context = HookContext(
-                    phase=HookPhase.POST_COMMIT,
-                    graph=self.engine.graph,
-                    delta=delta,
-                    transaction_id=txn.transaction_id,
+                    phase=HookPhase.POST_COMMIT, graph=self.engine.graph, delta=delta, transaction_id=txn.transaction_id
                 )
-                hook_execution_log.extend(
-                    self.hook_executor.execute_phase(HookPhase.POST_COMMIT, context)
-                )
+                hook_execution_log.extend(self.hook_executor.execute_phase(HookPhase.POST_COMMIT, context))
 
             return IngestionResult(
                 success=True,
@@ -317,12 +288,7 @@ class IngestionPipeline:
                 self.engine.rollback(txn)
 
             span.record_exception(e)
-            return IngestionResult(
-                success=False,
-                triples_added=0,
-                transaction_id=txn.transaction_id,
-                error=str(e),
-            )
+            return IngestionResult(success=False, triples_added=0, transaction_id=txn.transaction_id, error=str(e))
 
     def _json_to_rdf(self, data: dict[str, Any], graph: Graph, base_uri: str) -> URIRef:
         """Convert JSON object to RDF triples.
@@ -343,22 +309,13 @@ class IngestionPipeline:
 
         """
         # Generate entity URI
-        entity_id = (
-            data.get("id")
-            or data.get("_id")
-            or data.get("event_id")
-            or self._generate_id()
-        )
+        entity_id = data.get("id") or data.get("_id") or data.get("event_id") or self._generate_id()
         subject = URIRef(f"{base_uri}{entity_id}")
 
         # Add type if specified (both URI type and literal classification)
         type_value = data.get("type")
         if isinstance(type_value, str) and type_value:
-            type_uri = (
-                URIRef(type_value)
-                if type_value.startswith("http")
-                else UNRDF[type_value]
-            )
+            type_uri = URIRef(type_value) if type_value.startswith("http") else UNRDF[type_value]
             graph.add((subject, RDF.type, type_uri))
             graph.add((subject, UNRDF.type, Literal(type_value)))
 
@@ -428,11 +385,7 @@ class IngestionPipeline:
 
     @tracer.start_as_current_span("ingestion.ingest_batch")
     def ingest_batch(
-        self,
-        items: list[dict[str, Any]],
-        agent: str,
-        reason: str | None = None,
-        batch_size: int = 100,
+        self, items: list[dict[str, Any]], agent: str, reason: str | None = None, batch_size: int = 100
     ) -> list[IngestionResult]:
         """Ingest multiple items in batches.
 
@@ -470,9 +423,7 @@ class IngestionPipeline:
         return results
 
     @tracer.start_as_current_span("ingestion.materialize_features")
-    def materialize_features(
-        self, template_uri: URIRef, target_pattern: str, agent: str
-    ) -> IngestionResult:
+    def materialize_features(self, template_uri: URIRef, target_pattern: str, agent: str) -> IngestionResult:
         """Materialize features from a template.
 
         Applies a feature template to all entities matching the target pattern.
@@ -507,10 +458,7 @@ class IngestionPipeline:
         template_props = list(self.engine.query(query))
         if not template_props:
             return IngestionResult(
-                success=False,
-                triples_added=0,
-                transaction_id="",
-                error=f"Template not found: {template_uri}",
+                success=False, triples_added=0, transaction_id="", error=f"Template not found: {template_uri}"
             )
 
         # Query for target entities
@@ -535,14 +483,10 @@ class IngestionPipeline:
                 property_uri = prop_row[0]
                 # Apply basic property transformation
                 # Transform logic executed based on template specification
-                self.engine.add_triple(
-                    target, property_uri, Literal("materialized"), txn
-                )
+                self.engine.add_triple(target, property_uri, Literal("materialized"), txn)
 
         self.engine.commit(txn)
 
         return IngestionResult(
-            success=True,
-            triples_added=len(targets) * len(template_props),
-            transaction_id=txn.transaction_id,
+            success=True, triples_added=len(targets) * len(template_props), transaction_id=txn.transaction_id
         )

@@ -4,7 +4,7 @@ Provides fluent builder interfaces for constructing complex test objects.
 """
 
 from collections.abc import Callable
-from typing import Any, Generic, TypeVar
+from typing import Any, TypeVar
 
 T = TypeVar("T")
 

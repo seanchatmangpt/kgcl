@@ -69,9 +69,7 @@ class CliRenderer:
             output_file.write_text(text, encoding="utf-8")
             written = output_file
 
-        return RenderedOutput(
-            format=fmt, content=text, clipboard_copied=copied, file_written=written
-        )
+        return RenderedOutput(format=fmt, content=text, clipboard_copied=copied, file_written=written)
 
     def _render_table(self, payload: Any, columns: list[str] | None) -> str:
         if not isinstance(payload, Iterable):
@@ -96,10 +94,5 @@ class CliRenderer:
 
         self.console.print(table)
         return "\n".join(
-            [
-                "\t".join(str(row.get(col, "")) for col in columns)
-                if isinstance(row, dict)
-                else str(row)
-                for row in rows
-            ]
+            ["\t".join(str(row.get(col, "")) for col in columns) if isinstance(row, dict) else str(row) for row in rows]
         )

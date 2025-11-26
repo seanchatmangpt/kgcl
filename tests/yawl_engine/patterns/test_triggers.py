@@ -18,11 +18,7 @@ from typing import Any
 import pytest
 from rdflib import Graph, Literal, Namespace, URIRef
 
-from kgcl.yawl_engine.patterns.triggers import (
-    CancelMIActivity,
-    PersistentTrigger,
-    TransientTrigger,
-)
+from kgcl.yawl_engine.patterns.triggers import CancelMIActivity, PersistentTrigger, TransientTrigger
 
 YAWL = Namespace("http://www.yawlfoundation.org/yawlschema#")
 
@@ -36,9 +32,7 @@ def test_transient_trigger_fires_once_on_condition() -> None:
     """Transient trigger fires exactly once when condition is met."""
     # Arrange
     graph = Graph()
-    trigger = TransientTrigger(
-        trigger_condition="count > 10", condition_type="expression"
-    )
+    trigger = TransientTrigger(trigger_condition="count > 10", condition_type="expression")
     task = URIRef("urn:task:threshold")
     context: dict[str, Any] = {"count": 15}
 
@@ -266,11 +260,7 @@ def test_cancel_mi_activity_cancels_all_instances() -> None:
     # Arrange
     graph = Graph()
     mi_task = URIRef("urn:task:mi:parallel")
-    instances = [
-        URIRef("urn:task:mi:parallel:1"),
-        URIRef("urn:task:mi:parallel:2"),
-        URIRef("urn:task:mi:parallel:3"),
-    ]
+    instances = [URIRef("urn:task:mi:parallel:1"), URIRef("urn:task:mi:parallel:2"), URIRef("urn:task:mi:parallel:3")]
 
     # Add MI instances to graph
     for instance in instances:
@@ -289,9 +279,7 @@ def test_cancel_mi_activity_cancels_all_instances() -> None:
 
     # Verify RDF state
     for instance in instances:
-        assert (instance, YAWL.status, Literal("cancelled")) in graph, (
-            f"Instance {instance} should be cancelled"
-        )
+        assert (instance, YAWL.status, Literal("cancelled")) in graph, f"Instance {instance} should be cancelled"
 
     assert (mi_task, YAWL.status, Literal("cancelled")) in graph
 

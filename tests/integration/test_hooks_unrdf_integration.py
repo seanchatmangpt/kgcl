@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import tempfile
 from pathlib import Path
-from typing import Tuple
 
 import pytest
 from rdflib import Namespace, URIRef
@@ -61,8 +60,7 @@ class TestHookIntegration:
 
             pipeline = IngestionPipeline(engine)
             result = pipeline.ingest_json(
-                data={"id": "person-1", "type": "Person", "name": "Test User"},
-                agent="tester",
+                data={"id": "person-1", "type": "Person", "name": "Test User"}, agent="tester"
             )
 
         assert result.success is True
@@ -80,9 +78,7 @@ class TestHookIntegration:
             registry.register(high)
 
             pipeline = IngestionPipeline(engine)
-            result = pipeline.ingest_json(
-                data={"id": "event", "type": "Event"}, agent="tester"
-            )
+            result = pipeline.ingest_json(data={"id": "event", "type": "Event"}, agent="tester")
 
         assert result.success is True
         assert high.calls[0] == low.calls[0]
@@ -105,9 +101,7 @@ class TestHookIntegration:
             registry.register(FailingHook())
 
             txn = engine.transaction("tester", "post failure")
-            engine.add_triple(
-                URIRef("http://example.org/p1"), RDF.type, UNRDF.Person, txn
-            )
+            engine.add_triple(URIRef("http://example.org/p1"), RDF.type, UNRDF.Person, txn)
             engine.commit(txn)
 
         assert txn.committed is True
@@ -129,9 +123,7 @@ class TestHookIntegration:
             engine, registry = _create_engine(tmpdir)
             registry.register(RejectHook())
             txn = engine.transaction("tester", "pre failure")
-            engine.add_triple(
-                URIRef("http://example.org/p2"), RDF.type, UNRDF.Person, txn
-            )
+            engine.add_triple(URIRef("http://example.org/p2"), RDF.type, UNRDF.Person, txn)
 
             with pytest.raises(ValueError, match="Rejected by hook"):
                 engine.commit(txn)

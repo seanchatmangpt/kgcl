@@ -127,7 +127,4 @@ class InvariantValidator:
             raise AssertionError(msg)
 
     def __repr__(self) -> str:
-        return (
-            f"InvariantValidator(invariants={len(self._invariants)}, "
-            f"violations={len(self._violations)})"
-        )
+        return f"InvariantValidator(invariants={len(self._invariants)}, violations={len(self._violations)})"

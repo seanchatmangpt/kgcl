@@ -57,9 +57,7 @@ def load_ingest_config(path: Path | None = None) -> AppleIngestConfig:
     """Load ingest configuration from the provided TTL file."""
     config_path = path or DEFAULT_CONFIG_PATH
     if not config_path.exists():
-        raise FileNotFoundError(
-            f"Apple ingest configuration not found at {config_path}"
-        )
+        raise FileNotFoundError(f"Apple ingest configuration not found at {config_path}")
 
     graph = Graph()
     graph.parse(config_path, format="turtle")
@@ -74,26 +72,13 @@ def load_ingest_config(path: Path | None = None) -> AppleIngestConfig:
         include_mail=_bool(graph, subject, APPLE.includeMail),
         include_files=_bool(graph, subject, APPLE.includeFiles),
         calendar_past_days=_int(
-            graph,
-            graph.value(subject=subject, predicate=APPLE.includeCalendarDateRange),
-            KGC.pastDays,
-            90,
+            graph, graph.value(subject=subject, predicate=APPLE.includeCalendarDateRange), KGC.pastDays, 90
         ),
         calendar_future_days=_int(
-            graph,
-            graph.value(subject=subject, predicate=APPLE.includeCalendarDateRange),
-            KGC.futureDays,
-            180,
+            graph, graph.value(subject=subject, predicate=APPLE.includeCalendarDateRange), KGC.futureDays, 180
         ),
-        reminder_completed_age=_int(
-            graph, subject, APPLE.reminderCompletedAgeThreshold, 30
-        ),
-        mail_past_days=_int(
-            graph,
-            graph.value(subject=subject, predicate=APPLE.mailDateRange),
-            KGC.pastDays,
-            60,
-        ),
+        reminder_completed_age=_int(graph, subject, APPLE.reminderCompletedAgeThreshold, 30),
+        mail_past_days=_int(graph, graph.value(subject=subject, predicate=APPLE.mailDateRange), KGC.pastDays, 60),
         file_threshold_days=_int(graph, subject, APPLE.fileModificationThreshold, 90),
         max_events=_int(graph, subject, APPLE.maxEvents, 2000),
         max_reminders=_int(graph, subject, APPLE.maxReminders, 1000),

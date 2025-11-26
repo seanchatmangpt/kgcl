@@ -30,14 +30,10 @@ class CalendarEvent:
             start=event.startDate,
             end=event.endDate,
             calendar=getattr(getattr(event, "calendar", None), "title", "Calendar"),
-            location=getattr(event, "location", None)
-            or getattr(event, "location_property", None),
-            notes=getattr(event, "notes", None)
-            or getattr(event, "notes_property", None),
+            location=getattr(event, "location", None) or getattr(event, "location_property", None),
+            notes=getattr(event, "notes", None) or getattr(event, "notes_property", None),
             attendees=cls._normalize_attendees(event),
-            all_day=bool(
-                getattr(event, "isAllDay", False) or getattr(event, "is_all_day", False)
-            ),
+            all_day=bool(getattr(event, "isAllDay", False) or getattr(event, "is_all_day", False)),
         )
 
     @staticmethod
@@ -62,25 +58,13 @@ class ReminderTask:
     @classmethod
     def from_eventkit(cls, reminder: Any) -> ReminderTask:
         return cls(
-            identifier=getattr(
-                reminder, "calendarItemIdentifier", reminder.reminder_id
-            ),
+            identifier=getattr(reminder, "calendarItemIdentifier", reminder.reminder_id),
             title=getattr(reminder, "title", getattr(reminder, "title_property", "")),
-            completed=bool(
-                getattr(reminder, "isCompleted", getattr(reminder, "completed", False))
-            ),
-            due=getattr(
-                reminder, "dueDateComponents", getattr(reminder, "due_date", None)
-            ),
-            list_name=getattr(
-                getattr(reminder, "calendar", None),
-                "title",
-                getattr(reminder, "list_title", "Inbox"),
-            ),
+            completed=bool(getattr(reminder, "isCompleted", getattr(reminder, "completed", False))),
+            due=getattr(reminder, "dueDateComponents", getattr(reminder, "due_date", None)),
+            list_name=getattr(getattr(reminder, "calendar", None), "title", getattr(reminder, "list_title", "Inbox")),
             notes=getattr(reminder, "notes", getattr(reminder, "notes_property", None)),
-            priority=int(
-                getattr(reminder, "priority_property", getattr(reminder, "priority", 0))
-            ),
+            priority=int(getattr(reminder, "priority_property", getattr(reminder, "priority", 0))),
         )
 
 
@@ -97,17 +81,11 @@ class MailMessage:
     def from_mailkit(cls, message: Any) -> MailMessage:
         return cls(
             identifier=getattr(message, "messageID", message.message_id),
-            subject=getattr(
-                message, "subject", getattr(message, "subject_property", "")
-            ),
+            subject=getattr(message, "subject", getattr(message, "subject_property", "")),
             sender=cls._extract_sender(message),
-            recipients=tuple(
-                r.get("email") for r in getattr(message, "recipients", [])
-            ),
+            recipients=tuple(r.get("email") for r in getattr(message, "recipients", [])),
             received=getattr(message, "dateReceived", message.date_received),
-            flagged=bool(
-                getattr(message, "isFlagged", getattr(message, "is_flagged", False))
-            ),
+            flagged=bool(getattr(message, "isFlagged", getattr(message, "is_flagged", False))),
         )
 
     @staticmethod

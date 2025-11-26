@@ -22,25 +22,14 @@ class TestProperty:
 
     def test_property_builder(self) -> None:
         """Test property builder."""
-        test = (
-            Property()
-            .name("test_add")
-            .predicate(lambda a, b: a + b == b + a)
-            .example(1, 2)
-            .example(3, 4)
-            .build()
-        )
+        test = Property().name("test_add").predicate(lambda a, b: a + b == b + a).example(1, 2).example(3, 4).build()
 
         assert test.name == "test_add"
         assert len(test.examples) == PROPERTY_EXAMPLE_COUNT
 
     def test_property_test_run(self) -> None:
         """Test running property test."""
-        test = PropertyTest(
-            "commutative",
-            lambda a, b: a + b == b + a,
-            examples=[(1, 2), (3, 4), (5, 6)],
-        )
+        test = PropertyTest("commutative", lambda a, b: a + b == b + a, examples=[(1, 2), (3, 4), (5, 6)])
 
         assert test.run() is True
         assert test.failure_count() == 0
@@ -143,8 +132,7 @@ class TestValidatedValue:
     def test_multiple_validators(self) -> None:
         """Test multiple validators."""
         val = ValidatedValue(
-            SECONDARY_POSITIVE_VALUE,
-            [("positive", lambda x: x > 0), ("under_100", lambda x: x < MAX_THRESHOLD)],
+            SECONDARY_POSITIVE_VALUE, [("positive", lambda x: x > 0), ("under_100", lambda x: x < MAX_THRESHOLD)]
         )
         assert val.is_valid() is True
 

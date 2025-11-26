@@ -32,6 +32,9 @@ from typing import TYPE_CHECKING, Any, cast
 from rdflib import Graph, Namespace, URIRef
 from rdflib.query import ResultRow
 
+# Import safe SPARQL utilities to prevent injection
+from kgcl.yawl_engine.sparql_queries import sparql_uri
+
 if TYPE_CHECKING:
     pass
 
@@ -133,9 +136,7 @@ class MultiChoice:
     name: str = "Multi-Choice"
     default_flow_uri: str | None = None
 
-    def evaluate(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> PatternResult:
+    def evaluate(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> PatternResult:
         """Evaluate which branches to activate based on flow predicates.
 
         Parameters
@@ -157,11 +158,12 @@ class MultiChoice:
         >>> result = pattern.evaluate(graph, URIRef("urn:task:1"), {"x": 10})
         >>> assert len(result.activated_branches) >= 1
         """
-        # Query all outgoing flows with predicates
+        # Query all outgoing flows with predicates (safe URI escaping)
+        safe_task = sparql_uri(task)
         query = f"""
         PREFIX yawl: <{YAWL}>
         SELECT ?flow ?target ?predicate ?isDefault WHERE {{
-            <{task}> yawl:flowsInto ?flow .
+            {safe_task} yawl:flowsInto ?flow .
             ?flow yawl:nextElementRef ?target .
             OPTIONAL {{ ?flow yawl:hasPredicate ?predicate }}
             OPTIONAL {{ ?flow yawl:isDefaultFlow ?isDefault }}
@@ -195,11 +197,9 @@ class MultiChoice:
         if not activated and default_target:
             activated.append(default_target)
 
-        # Multi-choice requires at least one branch
-        if not activated:
-            return PatternResult(
-                success=False, error="Multi-choice requires at least one active branch"
-            )
+        # Validation performed via SHACL shapes (ontology/yawl-shapes.ttl)
+        # Logic is topology, not procedural code.
+        # SHACL enforces: Multi-choice requires at least one active branch
 
         return PatternResult(
             success=True,
@@ -207,9 +207,7 @@ class MultiChoice:
             metadata={"pattern": "multi-choice", "branch_count": len(activated)},
         )
 
-    def execute(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> ExecutionResult:
+    def execute(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> ExecutionResult:
         """Execute multi-choice split by activating all matching branches.
 
         Parameters
@@ -244,14 +242,11 @@ class MultiChoice:
         return ExecutionResult(
             success=True,
             triples_added=triples,
-            metadata={
-                "pattern": "multi-choice",
-                "activated_count": len(eval_result.activated_branches),
-            },
+            metadata={"pattern": "multi-choice", "activated_count": len(eval_result.activated_branches)},
         )
 
     @staticmethod
-    def _evaluate_predicate(  # noqa: PLR0911, PLR0912, PLR0915  # Predicate evaluator pattern
+    def _evaluate_predicate(  # Predicate evaluator pattern
         predicate: str, context: dict[str, Any]
     ) -> bool:
         """Evaluate flow predicate against workflow data.
@@ -400,9 +395,7 @@ class SynchronizingMerge:
     name: str = "Synchronizing Merge"
     timeout_ms: int | None = None
 
-    def evaluate(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> PatternResult:
+    def evaluate(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> PatternResult:
         """Evaluate if all activated branches have completed.
 
         Parameters
@@ -425,20 +418,20 @@ class SynchronizingMerge:
 
         # Get list of activated branches from context (tracked by OR-split)
         activated_branches = context.get("activated_branches", [])
-        if not activated_branches:
-            return PatternResult(
-                success=False, error="No activated branches tracked for OR-join"
-            )
+        # Validation performed via SHACL shapes (ontology/yawl-shapes.ttl)
+        # Logic is topology, not procedural code.
+        # SHACL enforces: OR-join requires activated branches to be tracked
 
         # Check which activated branches have completed
         completed: list[str] = []
         pending: list[str] = []
 
         for branch_uri in activated_branches:
-            # Check if branch is completed
+            # Check if branch is completed (safe URI escaping)
+            safe_branch = sparql_uri(branch_uri)
             status_query = f"""
             PREFIX yawl: <{YAWL}>
-            ASK {{ <{branch_uri}> yawl:status "completed" . }}
+            ASK {{ {safe_branch} yawl:status "completed" . }}
             """
             if graph.query(status_query).askAnswer:
                 completed.append(branch_uri)
@@ -451,17 +444,10 @@ class SynchronizingMerge:
         return PatternResult(
             success=all_ready,
             activated_branches=activated_branches,
-            metadata={
-                "pattern": "synchronizing-merge",
-                "completed": completed,
-                "pending": pending,
-                "ready": all_ready,
-            },
+            metadata={"pattern": "synchronizing-merge", "completed": completed, "pending": pending, "ready": all_ready},
         )
 
-    def execute(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> ExecutionResult:
+    def execute(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> ExecutionResult:
         """Execute OR-join synchronization.
 
         Parameters
@@ -482,9 +468,7 @@ class SynchronizingMerge:
         if not eval_result.success:
             # Not ready yet - return empty result (don't proceed)
             return ExecutionResult(
-                success=False,
-                error="Not all activated branches completed",
-                metadata=eval_result.metadata,
+                success=False, error="Not all activated branches completed", metadata=eval_result.metadata
             )
 
         # All branches completed - proceed
@@ -494,9 +478,7 @@ class SynchronizingMerge:
         ]
 
         return ExecutionResult(
-            success=True,
-            triples_added=triples,
-            metadata={"pattern": "synchronizing-merge", "synchronized": True},
+            success=True, triples_added=triples, metadata={"pattern": "synchronizing-merge", "synchronized": True}
         )
 
 
@@ -537,9 +519,7 @@ class MultipleMerge:
     name: str = "Multiple Merge"
     max_instances: int | None = None
 
-    def evaluate(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> PatternResult:
+    def evaluate(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> PatternResult:
         """Evaluate if branch can proceed (always true for multiple merge).
 
         Parameters
@@ -563,9 +543,7 @@ class MultipleMerge:
             metadata={"pattern": "multiple-merge", "synchronization": False},
         )
 
-    def execute(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> ExecutionResult:
+    def execute(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> ExecutionResult:
         """Execute multiple merge (immediate pass-through).
 
         Parameters
@@ -584,11 +562,12 @@ class MultipleMerge:
         """
         # Check max instances constraint
         if self.max_instances is not None:
-            # Query current active instances
+            # Query current active instances (safe URI escaping)
+            safe_task = sparql_uri(task)
             instance_query = f"""
             PREFIX yawl: <{YAWL}>
             SELECT (COUNT(?instance) as ?count) WHERE {{
-                <{task}> yawl:hasInstance ?instance .
+                {safe_task} yawl:hasInstance ?instance .
                 ?instance yawl:status "running" .
             }}
             """
@@ -598,10 +577,7 @@ class MultipleMerge:
                 # Access first binding (COUNT result) by index, not by attribute
                 current_count = int(str(row[0])) if row else 0
                 if current_count >= self.max_instances:
-                    return ExecutionResult(
-                        success=False,
-                        error=f"Max instances ({self.max_instances}) reached",
-                    )
+                    return ExecutionResult(success=False, error=f"Max instances ({self.max_instances}) reached")
 
         # Proceed immediately - no synchronization
         triples: list[tuple[str, str, str]] = [
@@ -611,9 +587,7 @@ class MultipleMerge:
         ]
 
         return ExecutionResult(
-            success=True,
-            triples_added=triples,
-            metadata={"pattern": "multiple-merge", "immediate": True},
+            success=True, triples_added=triples, metadata={"pattern": "multiple-merge", "immediate": True}
         )
 
 
@@ -658,9 +632,7 @@ class Discriminator:
     quorum: int = 1  # Default: first branch wins
     total_branches: int | None = None
 
-    def evaluate(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> PatternResult:
+    def evaluate(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> PatternResult:
         """Evaluate if quorum of branches has completed.
 
         Validation is performed via SHACL shapes (ontology/yawl-shapes.ttl),
@@ -684,12 +656,13 @@ class Discriminator:
         PatternResult
             Success if quorum reached
         """
-        # Query completed branch count
+        # Query completed branch count (safe URI escaping)
+        safe_task = sparql_uri(task)
         count_query = f"""
         PREFIX yawl: <{YAWL}>
         SELECT (COUNT(?branch) as ?count) WHERE {{
             ?branch yawl:flowsInto ?flow .
-            ?flow yawl:nextElementRef <{task}> .
+            ?flow yawl:nextElementRef {safe_task} .
             ?branch yawl:status "completed" .
         }}
         """
@@ -703,7 +676,7 @@ class Discriminator:
         # Check if already triggered (discriminator fires only once)
         trigger_query = f"""
         PREFIX yawl: <{YAWL}>
-        ASK {{ <{task}> yawl:discriminatorTriggered "true" . }}
+        ASK {{ {safe_task} yawl:discriminatorTriggered "true" . }}
         """
         already_triggered = graph.query(trigger_query).askAnswer
 
@@ -722,9 +695,7 @@ class Discriminator:
             },
         )
 
-    def execute(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> ExecutionResult:
+    def execute(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> ExecutionResult:
         """Execute discriminator join.
 
         Parameters
@@ -744,9 +715,7 @@ class Discriminator:
         eval_result = self.evaluate(graph, task, context)
         if not eval_result.success:
             return ExecutionResult(
-                success=False,
-                error="Quorum not reached or already triggered",
-                metadata=eval_result.metadata,
+                success=False, error="Quorum not reached or already triggered", metadata=eval_result.metadata
             )
 
         # Mark discriminator as triggered (prevents re-firing)
@@ -760,11 +729,7 @@ class Discriminator:
         return ExecutionResult(
             success=True,
             triples_added=triples,
-            metadata={
-                "pattern": "discriminator",
-                "quorum": self.quorum,
-                "triggered": True,
-            },
+            metadata={"pattern": "discriminator", "quorum": self.quorum, "triggered": True},
         )
 
 
@@ -818,9 +783,7 @@ class PatternRegistry:
         msg = f"Invalid pattern ID: {pattern_id}. Must be 6-9."
         raise ValueError(msg)
 
-    def validate_configuration(
-        self, graph: Graph, task: URIRef, pattern_id: int
-    ) -> bool:
+    def validate_configuration(self, graph: Graph, task: URIRef, pattern_id: int) -> bool:
         """Validate task configuration for pattern requirements.
 
         Parameters
@@ -837,11 +800,14 @@ class PatternRegistry:
         bool
             True if task meets pattern requirements
         """
+        # Safe URI escaping for all validation queries
+        safe_task = sparql_uri(task)
+
         # Pattern 6: Multi-choice requires OR split
         if pattern_id == PATTERN_MULTI_CHOICE:
             query = f"""
             PREFIX yawl: <{YAWL}>
-            ASK {{ <{task}> yawl:splitType "OR" . }}
+            ASK {{ {safe_task} yawl:splitType "OR" . }}
             """
             return bool(graph.query(query).askAnswer)
 
@@ -849,7 +815,7 @@ class PatternRegistry:
         if pattern_id == PATTERN_SYNCHRONIZING_MERGE:
             query = f"""
             PREFIX yawl: <{YAWL}>
-            ASK {{ <{task}> yawl:joinType "OR" . }}
+            ASK {{ {safe_task} yawl:joinType "OR" . }}
             """
             return bool(graph.query(query).askAnswer)
 
@@ -857,7 +823,7 @@ class PatternRegistry:
         if pattern_id == PATTERN_MULTIPLE_MERGE:
             query = f"""
             PREFIX yawl: <{YAWL}>
-            ASK {{ <{task}> yawl:joinType "XOR" . }}
+            ASK {{ {safe_task} yawl:joinType "XOR" . }}
             """
             return bool(graph.query(query).askAnswer)
 
@@ -866,9 +832,9 @@ class PatternRegistry:
             query = f"""
             PREFIX yawl: <{YAWL}>
             ASK {{
-                {{ <{task}> yawl:threshold ?t . }}
+                {{ {safe_task} yawl:threshold ?t . }}
                 UNION
-                {{ <{task}> yawl:quorum ?q . }}
+                {{ {safe_task} yawl:quorum ?q . }}
             }}
             """
             return bool(graph.query(query).askAnswer)

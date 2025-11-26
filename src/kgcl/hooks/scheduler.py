@@ -11,19 +11,17 @@ Chicago TDD Pattern:
     - Support manual override
 """
 
-import asyncio
 import logging
 import threading
 import time
-from dataclasses import dataclass, field
-from datetime import datetime, timedelta
-from pathlib import Path
-from typing import Any, Dict, List, Optional
+from dataclasses import dataclass
+from datetime import datetime
+from typing import Any
 
 from croniter import croniter
 from rdflib import Graph
 
-from kgcl.hooks.loader import HookDefinition, HookLoader
+from kgcl.hooks.loader import HookDefinition
 from kgcl.hooks.orchestrator import ExecutionResult, HookOrchestrator
 from kgcl.hooks.registry import HookRegistry
 
@@ -70,9 +68,7 @@ class HookScheduler:
         >>> scheduler.stop()
     """
 
-    def __init__(
-        self, graph: Graph, orchestrator: HookOrchestrator, registry: HookRegistry
-    ) -> None:
+    def __init__(self, graph: Graph, orchestrator: HookOrchestrator, registry: HookRegistry) -> None:
         """Initialize scheduler with orchestrator and registry.
 
         Args:
@@ -101,9 +97,7 @@ class HookScheduler:
             return
 
         self._running = True
-        self._scheduler_thread = threading.Thread(
-            target=self._run_scheduler, daemon=True
-        )
+        self._scheduler_thread = threading.Thread(target=self._run_scheduler, daemon=True)
         self._scheduler_thread.start()
 
         logger.info("Hook scheduler started")
@@ -151,9 +145,7 @@ class HookScheduler:
                     self._execute_scheduled_hook(hook, now)
 
             except Exception as e:
-                logger.error(
-                    f"Failed to execute scheduled hook {hook.name}: {e}", exc_info=True
-                )
+                logger.error(f"Failed to execute scheduled hook {hook.name}: {e}", exc_info=True)
 
     def _should_execute(self, hook: HookDefinition, now: datetime) -> bool:
         """Check if hook should execute at current time.
@@ -192,9 +184,7 @@ class HookScheduler:
         # Execute if we're past next scheduled time
         return now >= next_time
 
-    def _execute_scheduled_hook(
-        self, hook: HookDefinition, scheduled_time: datetime
-    ) -> None:
+    def _execute_scheduled_hook(self, hook: HookDefinition, scheduled_time: datetime) -> None:
         """Execute a scheduled hook.
 
         Args:
@@ -207,26 +197,19 @@ class HookScheduler:
             # Trigger event (use hook URI as event)
             event_type = str(hook.uri)
             result = self.orchestrator.trigger_event(
-                event_type,
-                event_data={"scheduled_time": scheduled_time.isoformat()},
-                actor="scheduler",
+                event_type, event_data={"scheduled_time": scheduled_time.isoformat()}, actor="scheduler"
             )
 
             # Record execution
             execution = ScheduledExecution(
-                hook_name=hook.name,
-                scheduled_time=scheduled_time,
-                actual_time=actual_time,
-                result=result,
+                hook_name=hook.name, scheduled_time=scheduled_time, actual_time=actual_time, result=result
             )
 
             if hook.name not in self._history:
                 self._history[hook.name] = []
             self._history[hook.name].append(execution)
 
-            logger.info(
-                f"Scheduled hook {hook.name} executed successfully ({len(result.receipts)} effects)"
-            )
+            logger.info(f"Scheduled hook {hook.name} executed successfully ({len(result.receipts)} effects)")
 
         except Exception as e:
             # Record failed execution
@@ -244,9 +227,7 @@ class HookScheduler:
 
             logger.error(f"Failed to execute scheduled hook {hook.name}: {e}")
 
-    def trigger_hook_manually(
-        self, hook_name: str, event_data: dict[str, Any] | None = None
-    ) -> ExecutionResult:
+    def trigger_hook_manually(self, hook_name: str, event_data: dict[str, Any] | None = None) -> ExecutionResult:
         """Manually trigger a timed hook outside its schedule.
 
         Args:
@@ -275,15 +256,11 @@ class HookScheduler:
         # Execute
         now = datetime.now()
         result = self.orchestrator.trigger_event(
-            str(hook.uri),
-            event_data=event_data or {"manual_trigger": True},
-            actor="manual",
+            str(hook.uri), event_data=event_data or {"manual_trigger": True}, actor="manual"
         )
 
         # Record execution
-        execution = ScheduledExecution(
-            hook_name=hook_name, scheduled_time=now, actual_time=now, result=result
-        )
+        execution = ScheduledExecution(hook_name=hook_name, scheduled_time=now, actual_time=now, result=result)
 
         if hook_name not in self._history:
             self._history[hook_name] = []
@@ -293,9 +270,7 @@ class HookScheduler:
 
         return result
 
-    def get_execution_history(
-        self, hook_name: str, limit: int | None = None
-    ) -> list[ScheduledExecution]:
+    def get_execution_history(self, hook_name: str, limit: int | None = None) -> list[ScheduledExecution]:
         """Get execution history for hook.
 
         Args:
@@ -359,9 +334,7 @@ class HookScheduler:
                     "cron_schedule": hook.cron_schedule,
                     "next_execution": next_time.isoformat() if next_time else None,
                     "execution_count": len(history),
-                    "last_execution": history[-1].actual_time.isoformat()
-                    if history
-                    else None,
+                    "last_execution": history[-1].actual_time.isoformat() if history else None,
                 }
             )
 

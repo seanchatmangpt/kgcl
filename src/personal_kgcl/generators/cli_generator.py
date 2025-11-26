@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-from collections.abc import Iterable, Sequence
+from collections.abc import Sequence
 from dataclasses import dataclass
-from datetime import UTC, datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import List
 
 from jinja2 import Environment, FileSystemLoader, Template
 from rdflib import RDF, Graph, Namespace
@@ -80,15 +79,9 @@ def _extract_params(graph: Graph, node, predicate) -> list[CliParam]:
             CliParam(
                 name=str(graph.value(subject=obj, predicate=CLI.name)),
                 help=str(graph.value(subject=obj, predicate=CLI.help, default="")),
-                required=bool(
-                    graph.value(subject=obj, predicate=CLI.isRequired, default=False)
-                ),
-                repeatable=bool(
-                    graph.value(subject=obj, predicate=CLI.repeatable, default=False)
-                ),
-                default=_literal_to_python(
-                    graph.value(subject=obj, predicate=CLI.default)
-                ),
+                required=bool(graph.value(subject=obj, predicate=CLI.isRequired, default=False)),
+                repeatable=bool(graph.value(subject=obj, predicate=CLI.repeatable, default=False)),
+                default=_literal_to_python(graph.value(subject=obj, predicate=CLI.default)),
             )
         )
     return params
@@ -117,11 +110,7 @@ def generate_cli_module(
     commands = _extract_commands(graph)
     root_node = CLI["KgctRoot"]
     root_name = str(graph.value(subject=root_node, predicate=CLI.name, default="kgct"))
-    root_help = str(
-        graph.value(
-            subject=root_node, predicate=CLI.help, default="KGC Technician Console"
-        )
-    )
+    root_help = str(graph.value(subject=root_node, predicate=CLI.help, default="KGC Technician Console"))
 
     template = _load_template(tpl_path)
     rendered = template.render(

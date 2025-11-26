@@ -85,11 +85,7 @@ class BaseIngestEngine(ABC):
             receipt_hash=receipt_hash,
             items_processed=processed,
             errors=all_errors,
-            metadata={
-                "batch_size": len(objects),
-                "processed": processed,
-                "errors": len(all_errors),
-            },
+            metadata={"batch_size": len(objects), "processed": processed, "errors": len(all_errors)},
         )
 
     def _generate_receipt(self) -> str:
@@ -115,9 +111,7 @@ class BaseIngestEngine(ABC):
         """
         return URIRef(f"urn:kgc:{prefix}:{identifier}")
 
-    def _add_literal(
-        self, subject: URIRef, predicate, value: Any, datatype: str | None = None
-    ):
+    def _add_literal(self, subject: URIRef, predicate, value: Any, datatype: str | None = None):
         """Add a literal triple to the graph.
 
         Args:
@@ -130,9 +124,7 @@ class BaseIngestEngine(ABC):
             if isinstance(value, datetime):
                 # Convert to ISO 8601 string
                 value = value.isoformat()
-                datatype = str(
-                    Namespace("http://www.w3.org/2001/XMLSchema#")["dateTime"]
-                )
+                datatype = str(Namespace("http://www.w3.org/2001/XMLSchema#")["dateTime"])
             literal = Literal(value, datatype=datatype) if datatype else Literal(value)
             self.graph.add((subject, predicate, literal))
 

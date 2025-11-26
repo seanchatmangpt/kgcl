@@ -5,14 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 
-from rdflib import Graph
-
 from personal_kgcl.ingest.config import AppleIngestConfig, load_ingest_config
-from personal_kgcl.ingest.models import (
-    AppleIngestInput,
-    AppleIngestResult,
-    AppleIngestStats,
-)
+from personal_kgcl.ingest.models import AppleIngestInput, AppleIngestResult, AppleIngestStats
 from personal_kgcl.ingest.rdf_writer import build_graph
 from personal_kgcl.ingest.validation import AppleIngestValidator
 
@@ -22,9 +16,7 @@ class AppleIngestEngine:
     config: AppleIngestConfig | None = None
     validator: AppleIngestValidator | None = None
 
-    def ingest(
-        self, data: AppleIngestInput, dry_run: bool = False
-    ) -> AppleIngestResult:
+    def ingest(self, data: AppleIngestInput, dry_run: bool = False) -> AppleIngestResult:
         config = self.config or load_ingest_config()
 
         builder = build_graph(data)
@@ -42,9 +34,7 @@ class AppleIngestEngine:
         if validator:
             report = validator.validate(graph)
             if not report.conforms:
-                raise ValueError(
-                    "Ingest graph failed SHACL validation:\n" + report.text
-                )
+                raise ValueError("Ingest graph failed SHACL validation:\n" + report.text)
 
         stats = AppleIngestStats(
             event_count=len(data.events),

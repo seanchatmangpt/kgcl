@@ -11,12 +11,7 @@ import pytest
 
 from kgcl.hooks.conditions import Condition, ConditionResult
 from kgcl.hooks.core import Hook, HookExecutor, HookState
-from kgcl.hooks.lifecycle import (
-    HookChain,
-    HookContext,
-    HookExecutionPipeline,
-    HookLifecycleEvent,
-)
+from kgcl.hooks.lifecycle import HookChain, HookContext, HookExecutionPipeline, HookLifecycleEvent
 from kgcl.hooks.value_objects import LifecycleEventType
 
 
@@ -52,12 +47,7 @@ class TestHookStateTransitions:
     @pytest.mark.asyncio
     async def test_hook_transitions_from_pending_to_active(self):
         """Hook lifecycle: PENDING → ACTIVE on condition evaluation."""
-        hook = Hook(
-            name="test",
-            description="Test",
-            condition=SimpleCondition(),
-            handler=simple_handler,
-        )
+        hook = Hook(name="test", description="Test", condition=SimpleCondition(), handler=simple_handler)
 
         assert hook.state == HookState.PENDING
 
@@ -71,10 +61,7 @@ class TestHookStateTransitions:
     async def test_successful_condition_triggers_handler_execution(self):
         """Successful condition triggers handler execution."""
         hook = Hook(
-            name="test",
-            description="Test",
-            condition=SimpleCondition(should_trigger=True),
-            handler=simple_handler,
+            name="test", description="Test", condition=SimpleCondition(should_trigger=True), handler=simple_handler
         )
 
         executor = HookExecutor()
@@ -88,10 +75,7 @@ class TestHookStateTransitions:
     async def test_failed_condition_skips_handler(self):
         """Failed condition skips handler."""
         hook = Hook(
-            name="test",
-            description="Test",
-            condition=SimpleCondition(should_trigger=False),
-            handler=simple_handler,
+            name="test", description="Test", condition=SimpleCondition(should_trigger=False), handler=simple_handler
         )
 
         executor = HookExecutor()
@@ -108,10 +92,7 @@ class TestHandlerExecution:
     async def test_handler_execution_with_input_output_transformation(self):
         """Handler execution with input/output transformation."""
         hook = Hook(
-            name="transformer",
-            description="Transform data",
-            condition=SimpleCondition(),
-            handler=transforming_handler,
+            name="transformer", description="Transform data", condition=SimpleCondition(), handler=transforming_handler
         )
 
         executor = HookExecutor()
@@ -123,12 +104,7 @@ class TestHandlerExecution:
     @pytest.mark.asyncio
     async def test_handler_errors_are_caught_and_stored_in_receipt(self):
         """Handler errors are caught and stored in receipt."""
-        hook = Hook(
-            name="failing",
-            description="Failing hook",
-            condition=SimpleCondition(),
-            handler=failing_handler,
-        )
+        hook = Hook(name="failing", description="Failing hook", condition=SimpleCondition(), handler=failing_handler)
 
         executor = HookExecutor()
         receipt = await executor.execute(hook, context={})
@@ -144,12 +120,7 @@ class TestHookFinalStates:
     @pytest.mark.asyncio
     async def test_hook_reaches_completed_state_on_success(self):
         """Hook reaches COMPLETED state on successful execution."""
-        hook = Hook(
-            name="test",
-            description="Test",
-            condition=SimpleCondition(),
-            handler=simple_handler,
-        )
+        hook = Hook(name="test", description="Test", condition=SimpleCondition(), handler=simple_handler)
 
         executor = HookExecutor()
         await executor.execute(hook, context={})
@@ -159,12 +130,7 @@ class TestHookFinalStates:
     @pytest.mark.asyncio
     async def test_hook_reaches_failed_state_on_error(self):
         """Hook reaches FAILED state on error."""
-        hook = Hook(
-            name="failing",
-            description="Failing hook",
-            condition=SimpleCondition(),
-            handler=failing_handler,
-        )
+        hook = Hook(name="failing", description="Failing hook", condition=SimpleCondition(), handler=failing_handler)
 
         executor = HookExecutor()
         await executor.execute(hook, context={})
@@ -178,12 +144,7 @@ class TestHookAuditability:
     @pytest.mark.asyncio
     async def test_hook_lifecycle_is_auditable(self):
         """Hook lifecycle is auditable (all state changes logged)."""
-        hook = Hook(
-            name="test",
-            description="Test",
-            condition=SimpleCondition(),
-            handler=simple_handler,
-        )
+        hook = Hook(name="test", description="Test", condition=SimpleCondition(), handler=simple_handler)
 
         executor = HookExecutor()
         receipt = await executor.execute(hook, context={})
@@ -208,19 +169,9 @@ class TestHookChaining:
         def second_handler(context: dict[str, Any]) -> dict[str, Any]:
             return {"step": 2, "value": context.get("value", 0) + 5}
 
-        hook1 = Hook(
-            name="first",
-            description="First in chain",
-            condition=SimpleCondition(),
-            handler=first_handler,
-        )
+        hook1 = Hook(name="first", description="First in chain", condition=SimpleCondition(), handler=first_handler)
 
-        hook2 = Hook(
-            name="second",
-            description="Second in chain",
-            condition=SimpleCondition(),
-            handler=second_handler,
-        )
+        hook2 = Hook(name="second", description="Second in chain", condition=SimpleCondition(), handler=second_handler)
 
         chain = HookChain(hooks=[hook1, hook2])
         results = await chain.execute(context={})
@@ -246,16 +197,9 @@ class TestHookContext:
                 "request_id": hook_context.request_id if hook_context else None,
             }
 
-        hook = Hook(
-            name="test",
-            description="Test",
-            condition=SimpleCondition(),
-            handler=context_aware_handler,
-        )
+        hook = Hook(name="test", description="Test", condition=SimpleCondition(), handler=context_aware_handler)
 
-        hook_context = HookContext(
-            actor="test_user", request_id="req-123", metadata={"source": "test"}
-        )
+        hook_context = HookContext(actor="test_user", request_id="req-123", metadata={"source": "test"})
 
         executor = HookExecutor()
         receipt = await executor.execute(hook, context={"hook_context": hook_context})
@@ -275,12 +219,7 @@ class TestHookLifecycleEvents:
         def event_handler(event: HookLifecycleEvent):
             events.append(event)
 
-        hook = Hook(
-            name="test",
-            description="Test",
-            condition=SimpleCondition(),
-            handler=simple_handler,
-        )
+        hook = Hook(name="test", description="Test", condition=SimpleCondition(), handler=simple_handler)
 
         executor = HookExecutor()
         executor.on_event(event_handler)
@@ -290,14 +229,8 @@ class TestHookLifecycleEvents:
         # Should have received lifecycle events
         assert len(events) > 0
         event_types = {e.event_type for e in events}
-        assert (
-            LifecycleEventType.PRE_CONDITION in event_types
-            or LifecycleEventType.PRE_EXECUTE in event_types
-        )
-        assert (
-            LifecycleEventType.POST_CONDITION in event_types
-            or LifecycleEventType.POST_EXECUTE in event_types
-        )
+        assert LifecycleEventType.PRE_CONDITION in event_types or LifecycleEventType.PRE_EXECUTE in event_types
+        assert LifecycleEventType.POST_CONDITION in event_types or LifecycleEventType.POST_EXECUTE in event_types
 
 
 class TestHookExecutionPipeline:
@@ -306,12 +239,7 @@ class TestHookExecutionPipeline:
     @pytest.mark.asyncio
     async def test_execution_pipeline_manages_hook_flow(self):
         """HookExecutionPipeline manages complete hook execution flow."""
-        hook = Hook(
-            name="test",
-            description="Test",
-            condition=SimpleCondition(),
-            handler=simple_handler,
-        )
+        hook = Hook(name="test", description="Test", condition=SimpleCondition(), handler=simple_handler)
 
         pipeline = HookExecutionPipeline()
         receipt = await pipeline.execute(hook, context={"test": "data"})
@@ -326,11 +254,7 @@ class TestHookExecutionPipeline:
         """Pipeline executes multiple hooks in priority order."""
         hooks = [
             Hook(
-                name="low",
-                description="Low priority",
-                condition=SimpleCondition(),
-                handler=simple_handler,
-                priority=10,
+                name="low", description="Low priority", condition=SimpleCondition(), handler=simple_handler, priority=10
             ),
             Hook(
                 name="high",
@@ -340,11 +264,7 @@ class TestHookExecutionPipeline:
                 priority=90,
             ),
             Hook(
-                name="mid",
-                description="Mid priority",
-                condition=SimpleCondition(),
-                handler=simple_handler,
-                priority=50,
+                name="mid", description="Mid priority", condition=SimpleCondition(), handler=simple_handler, priority=50
             ),
         ]
 
@@ -363,24 +283,9 @@ class TestErrorHandlingAndRecovery:
     async def test_pipeline_continues_after_hook_failure(self):
         """Pipeline continues executing hooks after one fails."""
         hooks = [
-            Hook(
-                name="first",
-                description="First hook",
-                condition=SimpleCondition(),
-                handler=simple_handler,
-            ),
-            Hook(
-                name="failing",
-                description="Failing hook",
-                condition=SimpleCondition(),
-                handler=failing_handler,
-            ),
-            Hook(
-                name="third",
-                description="Third hook",
-                condition=SimpleCondition(),
-                handler=simple_handler,
-            ),
+            Hook(name="first", description="First hook", condition=SimpleCondition(), handler=simple_handler),
+            Hook(name="failing", description="Failing hook", condition=SimpleCondition(), handler=failing_handler),
+            Hook(name="third", description="Third hook", condition=SimpleCondition(), handler=simple_handler),
         ]
 
         pipeline = HookExecutionPipeline(stop_on_error=False)
@@ -395,24 +300,9 @@ class TestErrorHandlingAndRecovery:
     async def test_pipeline_stops_on_error_when_configured(self):
         """Pipeline stops on first error when stop_on_error=True."""
         hooks = [
-            Hook(
-                name="first",
-                description="First hook",
-                condition=SimpleCondition(),
-                handler=simple_handler,
-            ),
-            Hook(
-                name="failing",
-                description="Failing hook",
-                condition=SimpleCondition(),
-                handler=failing_handler,
-            ),
-            Hook(
-                name="third",
-                description="Third hook",
-                condition=SimpleCondition(),
-                handler=simple_handler,
-            ),
+            Hook(name="first", description="First hook", condition=SimpleCondition(), handler=simple_handler),
+            Hook(name="failing", description="Failing hook", condition=SimpleCondition(), handler=failing_handler),
+            Hook(name="third", description="Third hook", condition=SimpleCondition(), handler=simple_handler),
         ]
 
         pipeline = HookExecutionPipeline(stop_on_error=True)

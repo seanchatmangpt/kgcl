@@ -22,11 +22,7 @@ logger = logging.getLogger(__name__)
 class IngestionHook:
     """Hook for pre/post ingestion processing."""
 
-    def __init__(
-        self,
-        name: str,
-        handler: Callable[[list[AppEvent | BrowserVisit | CalendarBlock]], Any],
-    ) -> None:
+    def __init__(self, name: str, handler: Callable[[list[AppEvent | BrowserVisit | CalendarBlock]], Any]) -> None:
         """Initialize hook.
 
         Parameters
@@ -39,9 +35,7 @@ class IngestionHook:
         self.name = name
         self.handler = handler
 
-    async def execute(
-        self, events: list[AppEvent | BrowserVisit | CalendarBlock]
-    ) -> Any:
+    async def execute(self, events: list[AppEvent | BrowserVisit | CalendarBlock]) -> Any:
         """Execute hook handler.
 
         Parameters
@@ -99,9 +93,7 @@ class IngestionService:
             "last_ingestion": None,
         }
 
-    def ingest_event(
-        self, event: AppEvent | BrowserVisit | CalendarBlock
-    ) -> dict[str, Any]:
+    def ingest_event(self, event: AppEvent | BrowserVisit | CalendarBlock) -> dict[str, Any]:
         """Ingest single event.
 
         Parameters
@@ -116,9 +108,7 @@ class IngestionService:
         """
         return asyncio.run(self.ingest_event_async(event))
 
-    async def ingest_event_async(
-        self, event: AppEvent | BrowserVisit | CalendarBlock
-    ) -> dict[str, Any]:
+    async def ingest_event_async(self, event: AppEvent | BrowserVisit | CalendarBlock) -> dict[str, Any]:
         """Ingest single event asynchronously.
 
         Parameters
@@ -138,11 +128,7 @@ class IngestionService:
 
             # Apply filters
             if self._should_filter_event(event):
-                return {
-                    "status": "filtered",
-                    "event_id": event.event_id,
-                    "reason": "Event filtered by configuration",
-                }
+                return {"status": "filtered", "event_id": event.event_id, "reason": "Event filtered by configuration"}
 
             # Add to collector
             self.collector.add_event(event)
@@ -153,23 +139,15 @@ class IngestionService:
 
             # Update stats
             self._stats["total_events"] += 1
-            self._stats["last_ingestion"] = (
-                datetime.now(UTC).replace(tzinfo=None).isoformat()
-            )
+            self._stats["last_ingestion"] = datetime.now(UTC).replace(tzinfo=None).isoformat()
 
-            return {
-                "status": "success",
-                "event_id": event.event_id,
-                "event_type": type(event).__name__,
-            }
+            return {"status": "success", "event_id": event.event_id, "event_type": type(event).__name__}
 
         except Exception as e:
             self._stats["failed_events"] += 1
             return {"status": "error", "event_id": event.event_id, "error": str(e)}
 
-    def ingest_batch(
-        self, batch: EventBatch | list[AppEvent | BrowserVisit | CalendarBlock]
-    ) -> dict[str, Any]:
+    def ingest_batch(self, batch: EventBatch | list[AppEvent | BrowserVisit | CalendarBlock]) -> dict[str, Any]:
         """Ingest batch of events.
 
         Parameters
@@ -231,9 +209,7 @@ class IngestionService:
             # Update stats
             self._stats["total_events"] += len(filtered_events)
             self._stats["total_batches"] += 1
-            self._stats["last_ingestion"] = (
-                datetime.now(UTC).replace(tzinfo=None).isoformat()
-            )
+            self._stats["last_ingestion"] = datetime.now(UTC).replace(tzinfo=None).isoformat()
 
             return {
                 "status": "success",
@@ -248,9 +224,7 @@ class IngestionService:
             self._stats["failed_events"] += len(events)
             return {"status": "error", "batch_id": batch_id, "error": str(e)}
 
-    async def _process_transaction_batch(
-        self, events: list[AppEvent | BrowserVisit | CalendarBlock]
-    ) -> dict[str, Any]:
+    async def _process_transaction_batch(self, events: list[AppEvent | BrowserVisit | CalendarBlock]) -> dict[str, Any]:
         """Process events in a transaction.
 
         Parameters
@@ -287,9 +261,7 @@ class IngestionService:
             "features_computed": len(features),
         }
 
-    def _should_filter_event(
-        self, event: AppEvent | BrowserVisit | CalendarBlock
-    ) -> bool:
+    def _should_filter_event(self, event: AppEvent | BrowserVisit | CalendarBlock) -> bool:
         """Check if event should be filtered.
 
         Parameters
@@ -306,28 +278,20 @@ class IngestionService:
         if isinstance(event, AppEvent):
             if event.app_name in self.config.filter.excluded_apps:
                 return True
-            if (
-                event.duration_seconds is not None
-                and event.duration_seconds < self.config.filter.min_duration_seconds
-            ):
+            if event.duration_seconds is not None and event.duration_seconds < self.config.filter.min_duration_seconds:
                 return True
 
         # Filter by domain
         if isinstance(event, BrowserVisit):
             if event.domain in self.config.filter.excluded_domains:
                 return True
-            if (
-                event.duration_seconds is not None
-                and event.duration_seconds < self.config.filter.min_duration_seconds
-            ):
+            if event.duration_seconds is not None and event.duration_seconds < self.config.filter.min_duration_seconds:
                 return True
 
         return False
 
     async def _execute_hooks(
-        self,
-        hooks: list[IngestionHook],
-        events: list[AppEvent | BrowserVisit | CalendarBlock],
+        self, hooks: list[IngestionHook], events: list[AppEvent | BrowserVisit | CalendarBlock]
     ) -> None:
         """Execute list of hooks.
 
@@ -345,18 +309,12 @@ class IngestionService:
                 # Log error but don't fail ingestion
                 logger.error(
                     "Hook execution failed",
-                    extra={
-                        "hook_name": hook.name,
-                        "error": str(e),
-                        "event_count": len(events),
-                    },
+                    extra={"hook_name": hook.name, "error": str(e), "event_count": len(events)},
                     exc_info=True,
                 )
 
     def register_pre_hook(
-        self,
-        name: str,
-        handler: Callable[[list[AppEvent | BrowserVisit | CalendarBlock]], Any],
+        self, name: str, handler: Callable[[list[AppEvent | BrowserVisit | CalendarBlock]], Any]
     ) -> None:
         """Register pre-ingestion hook.
 
@@ -370,9 +328,7 @@ class IngestionService:
         self._pre_hooks.append(IngestionHook(name, handler))
 
     def register_post_hook(
-        self,
-        name: str,
-        handler: Callable[[list[AppEvent | BrowserVisit | CalendarBlock]], Any],
+        self, name: str, handler: Callable[[list[AppEvent | BrowserVisit | CalendarBlock]], Any]
     ) -> None:
         """Register post-ingestion hook.
 

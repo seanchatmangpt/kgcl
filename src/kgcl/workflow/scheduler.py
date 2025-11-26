@@ -9,9 +9,8 @@ Supports:
 """
 
 import json
-from collections.abc import Callable
-from dataclasses import dataclass, field
-from datetime import UTC, datetime, time, timedelta, timezone
+from dataclasses import dataclass
+from datetime import UTC, datetime, time, timedelta
 from enum import Enum
 from pathlib import Path
 from threading import Event, Thread
@@ -79,9 +78,7 @@ class WorkflowExecution:
         return {
             "workflow_id": self.workflow_id,
             "started_at": self.started_at.isoformat(),
-            "completed_at": self.completed_at.isoformat()
-            if self.completed_at
-            else None,
+            "completed_at": self.completed_at.isoformat() if self.completed_at else None,
             "success": self.success,
             "triggered_by": self.triggered_by,
             "error": self.error,
@@ -94,9 +91,7 @@ class WorkflowExecution:
         return cls(
             workflow_id=data["workflow_id"],
             started_at=datetime.fromisoformat(data["started_at"]),
-            completed_at=datetime.fromisoformat(completed_str)
-            if completed_str
-            else None,
+            completed_at=datetime.fromisoformat(completed_str) if completed_str else None,
             success=data.get("success", False),
             triggered_by=data.get("triggered_by", "scheduler"),
             error=data.get("error"),
@@ -111,10 +106,7 @@ class WorkflowScheduler:
     """
 
     def __init__(
-        self,
-        orchestrator: StandardWorkLoop,
-        schedule_config: ScheduleConfig,
-        history_dir: Path | None = None,
+        self, orchestrator: StandardWorkLoop, schedule_config: ScheduleConfig, history_dir: Path | None = None
     ):
         """Initialize scheduler.
 
@@ -159,9 +151,7 @@ class WorkflowScheduler:
             WorkflowState from execution
         """
         execution = WorkflowExecution(
-            workflow_id=f"manual-{datetime.now(UTC).isoformat()}",
-            started_at=datetime.now(UTC),
-            triggered_by="manual",
+            workflow_id=f"manual-{datetime.now(UTC).isoformat()}", started_at=datetime.now(UTC), triggered_by="manual"
         )
 
         try:
@@ -193,9 +183,7 @@ class WorkflowScheduler:
         -------
             List of WorkflowExecution records, newest first
         """
-        return sorted(self._executions, key=lambda e: e.started_at, reverse=True)[
-            :limit
-        ]
+        return sorted(self._executions, key=lambda e: e.started_at, reverse=True)[:limit]
 
     def get_next_execution_time(self) -> datetime | None:
         """Calculate next scheduled execution time.
@@ -216,10 +204,7 @@ class WorkflowScheduler:
             # Schedule for next occurrence of time_of_day
             if self.config.time_of_day:
                 next_time = now.replace(
-                    hour=self.config.time_of_day.hour,
-                    minute=self.config.time_of_day.minute,
-                    second=0,
-                    microsecond=0,
+                    hour=self.config.time_of_day.hour, minute=self.config.time_of_day.minute, second=0, microsecond=0
                 )
                 if next_time <= now:
                     next_time += timedelta(days=1)
@@ -230,10 +215,7 @@ class WorkflowScheduler:
                 return None
 
             next_time = now.replace(
-                hour=self.config.time_of_day.hour,
-                minute=self.config.time_of_day.minute,
-                second=0,
-                microsecond=0,
+                hour=self.config.time_of_day.hour, minute=self.config.time_of_day.minute, second=0, microsecond=0
             )
 
             # If already passed today, schedule for tomorrow
@@ -252,10 +234,7 @@ class WorkflowScheduler:
             days_ahead = (target_day - current_day) % 7
 
             next_time = now.replace(
-                hour=self.config.time_of_day.hour,
-                minute=self.config.time_of_day.minute,
-                second=0,
-                microsecond=0,
+                hour=self.config.time_of_day.hour, minute=self.config.time_of_day.minute, second=0, microsecond=0
             ) + timedelta(days=days_ahead)
 
             # If already passed this week, schedule for next week
@@ -269,9 +248,7 @@ class WorkflowScheduler:
                 return None
 
             if self._last_execution:
-                return self._last_execution + timedelta(
-                    hours=self.config.interval_hours
-                )
+                return self._last_execution + timedelta(hours=self.config.interval_hours)
             return now
 
         return None
@@ -326,9 +303,7 @@ class WorkflowScheduler:
         """Persist execution history to disk."""
         history_file = self.history_dir / "executions.json"
         data = {
-            "last_execution": self._last_execution.isoformat()
-            if self._last_execution
-            else None,
+            "last_execution": self._last_execution.isoformat() if self._last_execution else None,
             "executions": [e.to_dict() for e in self._executions],
         }
         with history_file.open("w") as f:
@@ -347,9 +322,7 @@ class WorkflowScheduler:
         if last_exec:
             self._last_execution = datetime.fromisoformat(last_exec)
 
-        self._executions = [
-            WorkflowExecution.from_dict(e) for e in data.get("executions", [])
-        ]
+        self._executions = [WorkflowExecution.from_dict(e) for e in data.get("executions", [])]
 
     @property
     def is_running(self) -> bool:
@@ -368,12 +341,8 @@ class WorkflowScheduler:
             "enabled": self.config.enabled,
             "running": self.is_running,
             "schedule_type": self.config.schedule_type.value,
-            "last_execution": self._last_execution.isoformat()
-            if self._last_execution
-            else None,
-            "next_execution": self.get_next_execution_time().isoformat()
-            if self.get_next_execution_time()
-            else None,
+            "last_execution": self._last_execution.isoformat() if self._last_execution else None,
+            "next_execution": self.get_next_execution_time().isoformat() if self.get_next_execution_time() else None,
             "total_executions": len(self._executions),
             "successful_executions": sum(1 for e in self._executions if e.success),
         }

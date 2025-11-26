@@ -10,7 +10,7 @@ Tracks execution state across the 5 workflow steps:
 
 import json
 from dataclasses import dataclass, field
-from datetime import UTC, datetime, timezone
+from datetime import UTC, datetime
 from enum import Enum
 from pathlib import Path
 from typing import Any
@@ -198,10 +198,7 @@ class WorkflowState:
 
         for i, step in enumerate(completed_order):
             if i < len(expected_order) and step != expected_order[i]:
-                errors.append(
-                    f"Step order violation: {step.value} at position {i}, "
-                    f"expected {expected_order[i].value}"
-                )
+                errors.append(f"Step order violation: {step.value} at position {i}, expected {expected_order[i].value}")
 
         # Check current step is valid
         if self.current_step and self.is_complete:
@@ -234,12 +231,8 @@ class WorkflowState:
         return cls(
             workflow_id=data["workflow_id"],
             started_at=datetime.fromisoformat(data["started_at"]),
-            current_step=WorkflowStep(current_step_value)
-            if current_step_value
-            else None,
-            completed_steps=[
-                StepResult.from_dict(r) for r in data.get("completed_steps", [])
-            ],
+            current_step=WorkflowStep(current_step_value) if current_step_value else None,
+            completed_steps=[StepResult.from_dict(r) for r in data.get("completed_steps", [])],
             is_complete=data.get("is_complete", False),
             failed=data.get("failed", False),
         )

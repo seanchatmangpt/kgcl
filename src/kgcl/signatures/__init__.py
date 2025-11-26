@@ -24,27 +24,15 @@ from kgcl.signatures.context_classifier import (
 )
 
 # Import all signature modules
-from kgcl.signatures.daily_brief import (
-    DailyBriefInput,
-    DailyBriefModule,
-    DailyBriefOutput,
-)
-from kgcl.signatures.feature_analyzer import (
-    FeatureAnalyzerInput,
-    FeatureAnalyzerModule,
-    FeatureAnalyzerOutput,
-)
+from kgcl.signatures.daily_brief import DailyBriefInput, DailyBriefModule, DailyBriefOutput
+from kgcl.signatures.feature_analyzer import FeatureAnalyzerInput, FeatureAnalyzerModule, FeatureAnalyzerOutput
 from kgcl.signatures.pattern_detector import (
     DetectedPattern,
     PatternDetectorInput,
     PatternDetectorModule,
     PatternDetectorOutput,
 )
-from kgcl.signatures.weekly_retro import (
-    WeeklyRetroInput,
-    WeeklyRetroModule,
-    WeeklyRetroOutput,
-)
+from kgcl.signatures.weekly_retro import WeeklyRetroInput, WeeklyRetroModule, WeeklyRetroOutput
 from kgcl.signatures.wellbeing import WellbeingInput, WellbeingModule, WellbeingOutput
 
 # Check DSPy availability
@@ -159,10 +147,8 @@ class SignatureConfig:
             temperature=float(os.getenv("KGCL_TEMPERATURE", "0.7")),
             model=os.getenv("OLLAMA_MODEL", "llama3.1"),
             base_url=os.getenv("OLLAMA_BASE_URL", "http://localhost:11434"),
-            fallback_on_error=os.getenv("KGCL_FALLBACK_ON_ERROR", "true").lower()
-            == "true",
-            enable_telemetry=os.getenv("KGCL_ENABLE_TELEMETRY", "true").lower()
-            == "true",
+            fallback_on_error=os.getenv("KGCL_FALLBACK_ON_ERROR", "true").lower() == "true",
+            enable_telemetry=os.getenv("KGCL_ENABLE_TELEMETRY", "true").lower() == "true",
         )
 
     def to_dict(self) -> dict:
@@ -206,11 +192,7 @@ def configure_signatures(config: SignatureConfig | None = None) -> SignatureConf
             # Configure DSPy with Ollama
             from kgcl.dspy_runtime import OllamaConfig, configure_ollama
 
-            ollama_config = OllamaConfig(
-                model=config.model,
-                base_url=config.base_url,
-                temperature=config.temperature,
-            )
+            ollama_config = OllamaConfig(model=config.model, base_url=config.base_url, temperature=config.temperature)
 
             configure_ollama(ollama_config)
             logger.info(f"DSPy configured with Ollama: {config.model}")
@@ -243,30 +225,18 @@ def create_all_modules(config: SignatureConfig | None = None) -> dict[str, objec
         config = configure_signatures()
 
     modules = {
-        "daily_brief": DailyBriefModule(
-            use_llm=config.use_llm, temperature=config.temperature
-        ),
-        "weekly_retro": WeeklyRetroModule(
-            use_llm=config.use_llm, temperature=config.temperature
-        ),
-        "feature_analyzer": FeatureAnalyzerModule(
-            use_llm=config.use_llm, temperature=config.temperature
-        ),
-        "pattern_detector": PatternDetectorModule(
-            use_llm=config.use_llm, temperature=config.temperature
-        ),
+        "daily_brief": DailyBriefModule(use_llm=config.use_llm, temperature=config.temperature),
+        "weekly_retro": WeeklyRetroModule(use_llm=config.use_llm, temperature=config.temperature),
+        "feature_analyzer": FeatureAnalyzerModule(use_llm=config.use_llm, temperature=config.temperature),
+        "pattern_detector": PatternDetectorModule(use_llm=config.use_llm, temperature=config.temperature),
         "context_classifier": ContextClassifierModule(
             use_llm=config.use_llm,
             temperature=0.3,  # Lower temperature for consistent classification
         ),
-        "wellbeing": WellbeingModule(
-            use_llm=config.use_llm, temperature=config.temperature
-        ),
+        "wellbeing": WellbeingModule(use_llm=config.use_llm, temperature=config.temperature),
     }
 
-    logger.info(
-        f"Created {len(modules)} signature modules (LLM mode: {config.use_llm})"
-    )
+    logger.info(f"Created {len(modules)} signature modules (LLM mode: {config.use_llm})")
     return modules
 
 
@@ -338,9 +308,7 @@ def health_check() -> dict[str, object]:
 
 
 # Utility functions for prompt construction
-def build_prompt_context(
-    feature_names: list[str], time_window: str, additional_context: str = ""
-) -> str:
+def build_prompt_context(feature_names: list[str], time_window: str, additional_context: str = "") -> str:
     """Build context string for DSPy prompts.
 
     Args:
@@ -352,10 +320,7 @@ def build_prompt_context(
     -------
         Formatted context string
     """
-    context_parts = [
-        f"Time window: {time_window}",
-        f"Features: {', '.join(feature_names)}",
-    ]
+    context_parts = [f"Time window: {time_window}", f"Features: {', '.join(feature_names)}"]
 
     if additional_context:
         context_parts.append(additional_context)
@@ -363,9 +328,7 @@ def build_prompt_context(
     return " | ".join(context_parts)
 
 
-def validate_module_inputs(
-    module_name: str, input_data: object
-) -> tuple[bool, str | None]:
+def validate_module_inputs(module_name: str, input_data: object) -> tuple[bool, str | None]:
     """Validate inputs for a signature module.
 
     Args:
@@ -392,10 +355,7 @@ def validate_module_inputs(
 
         expected_type = input_types[module_name]
         if not isinstance(input_data, expected_type):
-            return (
-                False,
-                f"Expected {expected_type.__name__}, got {type(input_data).__name__}",
-            )
+            return (False, f"Expected {expected_type.__name__}, got {type(input_data).__name__}")
 
         # Pydantic validation happens automatically on instantiation
         return True, None

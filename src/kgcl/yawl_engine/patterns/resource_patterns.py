@@ -28,9 +28,7 @@ Examples
 >>> # Role-based allocation
 >>> rbac = RoleBasedAllocation()
 >>> result = rbac.offer(graph, URIRef("urn:task:ApproveRequest"), "role:Manager")
->>> users = rbac.get_eligible_users(
-...     graph, URIRef("urn:task:ApproveRequest"), "role:Manager"
-... )
+>>> users = rbac.get_eligible_users(graph, URIRef("urn:task:ApproveRequest"), "role:Manager")
 >>> claim_result = rbac.claim(graph, URIRef("urn:task:ApproveRequest"), users[0])
 >>>
 >>> # Separation of duties (4-eyes principle)
@@ -207,19 +205,12 @@ class DirectAllocation:
             msg = f"Invalid user identifier: {user}"
             raise ValueError(msg)
 
-        logger.info(
-            "Direct allocation",
-            extra={"task": str(task), "user": user, "pattern_id": self.pattern_id},
-        )
+        logger.info("Direct allocation", extra={"task": str(task), "user": user, "pattern_id": self.pattern_id})
 
         # Mark task as allocated to user
         graph.add((task, YawlNamespace.YAWL.allocatedTo, Literal(user)))
-        graph.add(
-            (task, YawlNamespace.YAWL.status, Literal(WorkItemStatus.ALLOCATED.value))
-        )
-        graph.add(
-            (task, YawlNamespace.YAWL.allocationPattern, Literal(str(self.pattern_id)))
-        )
+        graph.add((task, YawlNamespace.YAWL.status, Literal(WorkItemStatus.ALLOCATED.value)))
+        graph.add((task, YawlNamespace.YAWL.allocationPattern, Literal(str(self.pattern_id))))
 
         return AllocationResult(
             success=True,
@@ -273,9 +264,7 @@ class RoleBasedAllocation:
     >>> assert result.success
     >>>
     >>> # Get eligible users
-    >>> users = rbac.get_eligible_users(
-    ...     graph, URIRef("urn:task:Approve"), "role:Manager"
-    ... )
+    >>> users = rbac.get_eligible_users(graph, URIRef("urn:task:Approve"), "role:Manager")
     >>> assert "urn:org:user:alice" in users
     >>>
     >>> # User claims task
@@ -313,9 +302,7 @@ class RoleBasedAllocation:
         >>> graph.add((USER.alice, ROLE.hasRole, Literal("role:Manager")))
         >>>
         >>> rbac = RoleBasedAllocation()
-        >>> users = rbac.get_eligible_users(
-        ...     graph, URIRef("urn:task:T1"), "role:Manager"
-        ... )
+        >>> users = rbac.get_eligible_users(graph, URIRef("urn:task:T1"), "role:Manager")
         >>> assert len(users) >= 0
         """
         # Query for users with specified role
@@ -327,16 +314,9 @@ class RoleBasedAllocation:
         """
         results = graph.query(query)
 
-        users = [
-            str(cast(ResultRow, row).user)
-            for row in results
-            if hasattr(row, "user")
-        ]
+        users = [str(cast(ResultRow, row).user) for row in results if hasattr(row, "user")]
 
-        logger.debug(
-            "Eligible users for role",
-            extra={"task": str(task), "role": role, "user_count": len(users)},
-        )
+        logger.debug("Eligible users for role", extra={"task": str(task), "role": role, "user_count": len(users)})
 
         return users
 
@@ -378,12 +358,8 @@ class RoleBasedAllocation:
 
         # Mark task as offered to role
         graph.add((task, YawlNamespace.YAWL.offeredTo, Literal(role)))
-        graph.add(
-            (task, YawlNamespace.YAWL.status, Literal(WorkItemStatus.OFFERED.value))
-        )
-        graph.add(
-            (task, YawlNamespace.YAWL.allocationPattern, Literal(str(self.pattern_id)))
-        )
+        graph.add((task, YawlNamespace.YAWL.status, Literal(WorkItemStatus.OFFERED.value)))
+        graph.add((task, YawlNamespace.YAWL.allocationPattern, Literal(str(self.pattern_id))))
 
         # Store eligible user list
         for user in eligible_users:
@@ -459,15 +435,10 @@ class RoleBasedAllocation:
             msg = f"User {user} is not eligible to claim task {task}"
             raise PermissionError(msg)
 
-        logger.info(
-            "Task claimed",
-            extra={"task": str(task), "user": user, "pattern_id": self.pattern_id},
-        )
+        logger.info("Task claimed", extra={"task": str(task), "user": user, "pattern_id": self.pattern_id})
 
         # Update allocation
-        graph.set(
-            (task, YawlNamespace.YAWL.status, Literal(WorkItemStatus.ALLOCATED.value))
-        )
+        graph.set((task, YawlNamespace.YAWL.status, Literal(WorkItemStatus.ALLOCATED.value)))
         graph.add((task, YawlNamespace.YAWL.allocatedTo, Literal(user)))
 
         return AllocationResult(
@@ -521,9 +492,7 @@ class DeferredAllocation:
     name: str = "Deferred Allocation"
     allocation_expression: str = "data['allocated_user']"
 
-    def allocate(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> AllocationResult:
+    def allocate(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> AllocationResult:
         """Allocate task using runtime-evaluated expression.
 
         Parameters
@@ -557,9 +526,7 @@ class DeferredAllocation:
             # Evaluate allocation expression with context
             # Safe evaluation limited to data access
             allowed_names = {"data": context}
-            allocated_to = eval(
-                self.allocation_expression, {"__builtins__": {}}, allowed_names
-            )
+            allocated_to = eval(self.allocation_expression, {"__builtins__": {}}, allowed_names)
 
             if not allocated_to or not isinstance(allocated_to, str):
                 msg = f"Invalid allocation target: {allocated_to}"
@@ -582,12 +549,8 @@ class DeferredAllocation:
 
         # Apply allocation
         graph.add((task, YawlNamespace.YAWL.allocatedTo, Literal(allocated_to)))
-        graph.add(
-            (task, YawlNamespace.YAWL.status, Literal(WorkItemStatus.ALLOCATED.value))
-        )
-        graph.add(
-            (task, YawlNamespace.YAWL.allocationPattern, Literal(str(self.pattern_id)))
-        )
+        graph.add((task, YawlNamespace.YAWL.status, Literal(WorkItemStatus.ALLOCATED.value)))
+        graph.add((task, YawlNamespace.YAWL.allocationPattern, Literal(str(self.pattern_id))))
 
         return AllocationResult(
             success=True,
@@ -595,11 +558,7 @@ class DeferredAllocation:
             allocated_to=allocated_to,
             status=WorkItemStatus.ALLOCATED,
             message=f"Task {task} allocated to {allocated_to} (deferred)",
-            metadata={
-                "pattern": self.name,
-                "pattern_id": self.pattern_id,
-                "expression": self.allocation_expression,
-            },
+            metadata={"pattern": self.name, "pattern_id": self.pattern_id, "expression": self.allocation_expression},
         )
 
 
@@ -638,9 +597,7 @@ class Authorization:
     >>> graph.add((USER.alice, USER.hasCapability, Literal("sign_contracts")))
     >>>
     >>> authz = Authorization(required_capabilities=["sign_contracts"])
-    >>> result = authz.check_authorization(
-    ...     graph, URIRef("urn:task:SignContract"), "urn:org:user:alice"
-    ... )
+    >>> result = authz.check_authorization(graph, URIRef("urn:task:SignContract"), "urn:org:user:alice")
     >>> assert result.success
     """
 
@@ -648,9 +605,7 @@ class Authorization:
     name: str = "Authorization"
     required_capabilities: list[str] = field(default_factory=list)
 
-    def check_authorization(
-        self, graph: Graph, task: URIRef, user: str
-    ) -> AllocationResult:
+    def check_authorization(self, graph: Graph, task: URIRef, user: str) -> AllocationResult:
         """Check if user is authorized to execute task.
 
         Parameters
@@ -675,9 +630,7 @@ class Authorization:
         >>> graph.add((USER.bob, USER.hasCapability, Literal("approve_requests")))
         >>>
         >>> authz = Authorization(required_capabilities=["approve_requests"])
-        >>> result = authz.check_authorization(
-        ...     graph, URIRef("urn:task:Approve"), "urn:org:user:bob"
-        ... )
+        >>> result = authz.check_authorization(graph, URIRef("urn:task:Approve"), "urn:org:user:bob")
         >>> assert result.success
         """
         missing_capabilities = []
@@ -791,8 +744,7 @@ class SeparationOfDuties:
     >>>
     >>> # 4-eyes principle: Different users for submit and approve
     >>> sod = SeparationOfDuties(
-    ...     constraint_type="4-eyes",
-    ...     related_tasks=["urn:task:SubmitRequest", "urn:task:ApproveRequest"],
+    ...     constraint_type="4-eyes", related_tasks=["urn:task:SubmitRequest", "urn:task:ApproveRequest"]
     ... )
     >>>
     >>> # Check if Alice can approve Bob's submission
@@ -819,9 +771,7 @@ class SeparationOfDuties:
     constraint_type: str = ConstraintType.FOUR_EYES.value
     related_tasks: list[str] = field(default_factory=list)
 
-    def check_constraint(
-        self, graph: Graph, task: URIRef, user: str, history: list[str]
-    ) -> bool:
+    def check_constraint(self, graph: Graph, task: URIRef, user: str, history: list[str]) -> bool:
         """Check if user assignment satisfies separation of duties constraint.
 
         Parameters
@@ -846,14 +796,10 @@ class SeparationOfDuties:
         >>> sod = SeparationOfDuties(constraint_type="4-eyes")
         >>>
         >>> # Valid: Different users
-        >>> assert sod.check_constraint(
-        ...     graph, URIRef("urn:task:Approve"), "user:manager", ["user:employee"]
-        ... )
+        >>> assert sod.check_constraint(graph, URIRef("urn:task:Approve"), "user:manager", ["user:employee"])
         >>>
         >>> # Invalid: Same user (4-eyes violated)
-        >>> assert not sod.check_constraint(
-        ...     graph, URIRef("urn:task:Approve"), "user:employee", ["user:employee"]
-        ... )
+        >>> assert not sod.check_constraint(graph, URIRef("urn:task:Approve"), "user:employee", ["user:employee"])
         """
         constraint_satisfied = True
         violation_reason = ""
@@ -862,25 +808,19 @@ class SeparationOfDuties:
             # Different user must perform this task
             if user in history:
                 constraint_satisfied = False
-                violation_reason = (
-                    f"4-eyes violated: {user} already performed related task"
-                )
+                violation_reason = f"4-eyes violated: {user} already performed related task"
 
         elif self.constraint_type == ConstraintType.MUST_DO_SAME.value:
             # Same user must perform all related tasks
             if history and user not in history:
                 constraint_satisfied = False
-                violation_reason = (
-                    f"Must-do-same violated: {user} not in history {history}"
-                )
+                violation_reason = f"Must-do-same violated: {user} not in history {history}"
 
         elif self.constraint_type == ConstraintType.MUST_DO_DIFFERENT.value:
             # Each task must have different user
             if user in history:
                 constraint_satisfied = False
-                violation_reason = (
-                    f"Must-do-different violated: {user} already in history"
-                )
+                violation_reason = f"Must-do-different violated: {user} already in history"
 
         logger.info(
             "Separation of duties check",
@@ -896,15 +836,12 @@ class SeparationOfDuties:
 
         if not constraint_satisfied:
             logger.warning(
-                "SoD constraint violation",
-                extra={"task": str(task), "user": user, "reason": violation_reason},
+                "SoD constraint violation", extra={"task": str(task), "user": user, "reason": violation_reason}
             )
 
         return constraint_satisfied
 
-    def validate_allocation(
-        self, graph: Graph, task: URIRef, user: str
-    ) -> AllocationResult:
+    def validate_allocation(self, graph: Graph, task: URIRef, user: str) -> AllocationResult:
         """Validate user allocation against separation of duties constraints.
 
         Parameters
@@ -928,19 +865,12 @@ class SeparationOfDuties:
         >>> YAWL = Namespace("http://www.yawlfoundation.org/yawlschema#")
         >>>
         >>> # Record previous task execution
-        >>> graph.add(
-        ...     (URIRef("urn:task:Submit"), YAWL.completedBy, Literal("user:alice"))
-        ... )
+        >>> graph.add((URIRef("urn:task:Submit"), YAWL.completedBy, Literal("user:alice")))
         >>>
-        >>> sod = SeparationOfDuties(
-        ...     constraint_type="4-eyes",
-        ...     related_tasks=["urn:task:Submit", "urn:task:Approve"],
-        ... )
+        >>> sod = SeparationOfDuties(constraint_type="4-eyes", related_tasks=["urn:task:Submit", "urn:task:Approve"])
         >>>
         >>> # Validate allocation
-        >>> result = sod.validate_allocation(
-        ...     graph, URIRef("urn:task:Approve"), "user:bob"
-        ... )
+        >>> result = sod.validate_allocation(graph, URIRef("urn:task:Approve"), "user:bob")
         >>> assert result.success  # Different user - OK
         """
         # Query for users who completed related tasks
@@ -953,13 +883,7 @@ class SeparationOfDuties:
             }}
             """
             results = graph.query(query)
-            history.extend(
-                [
-                    str(cast(ResultRow, row).user)
-                    for row in results
-                    if hasattr(row, "user")
-                ]
-            )
+            history.extend([str(cast(ResultRow, row).user) for row in results if hasattr(row, "user")])
 
         # Check constraint
         satisfied = self.check_constraint(graph, task, user, history)
@@ -986,9 +910,5 @@ class SeparationOfDuties:
             allocated_to=user,
             status=WorkItemStatus.ALLOCATED,
             message=f"SoD constraint satisfied for user {user}",
-            metadata={
-                "pattern": self.name,
-                "pattern_id": self.pattern_id,
-                "constraint_type": self.constraint_type,
-            },
+            metadata={"pattern": self.name, "pattern_id": self.pattern_id, "constraint_type": self.constraint_type},
         )

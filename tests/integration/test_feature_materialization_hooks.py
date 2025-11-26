@@ -13,12 +13,7 @@ from rdflib.namespace import RDF
 
 from kgcl.unrdf_engine.engine import UnrdfEngine
 from kgcl.unrdf_engine.hook_registry import PersistentHookRegistry
-from kgcl.unrdf_engine.hooks import (
-    HookContext,
-    HookPhase,
-    KnowledgeHook,
-    TriggerCondition,
-)
+from kgcl.unrdf_engine.hooks import HookContext, HookPhase, KnowledgeHook, TriggerCondition
 from kgcl.unrdf_engine.ingestion import IngestionPipeline
 
 UNRDF = Namespace("http://unrdf.org/ontology/")
@@ -32,9 +27,7 @@ class TestFeatureMaterializationHooks:
         """Test that adding a FeatureTemplate triggers materialization."""
         with tempfile.TemporaryDirectory() as tmpdir:
             registry = PersistentHookRegistry()
-            engine = UnrdfEngine(
-                file_path=Path(tmpdir) / "graph.ttl", hook_registry=registry
-            )
+            engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl", hook_registry=registry)
 
             materialized_features = []
 
@@ -44,8 +37,7 @@ class TestFeatureMaterializationHooks:
                         name="feature_template_materializer",
                         phases=[HookPhase.POST_COMMIT],
                         trigger=TriggerCondition(
-                            pattern="?template a <http://unrdf.org/ontology/FeatureTemplate>",
-                            check_delta=True,
+                            pattern="?template a <http://unrdf.org/ontology/FeatureTemplate>", check_delta=True
                         ),
                     )
 
@@ -65,13 +57,7 @@ class TestFeatureMaterializationHooks:
                             for row in results:
                                 entity = row[0]
                                 # Materialize feature for each entity
-                                context.graph.add(
-                                    (
-                                        entity,
-                                        FEATURE.hasFeature,
-                                        Literal(f"feature_from_{s}"),
-                                    )
-                                )
+                                context.graph.add((entity, FEATURE.hasFeature, Literal(f"feature_from_{s}")))
                                 materialized_features.append(str(entity))
 
             registry.register(FeatureTemplateMaterializer())
@@ -88,12 +74,7 @@ class TestFeatureMaterializationHooks:
 
             # Then add a feature template
             result = pipeline.ingest_json(
-                data={
-                    "id": "template1",
-                    "type": "FeatureTemplate",
-                    "name": "ActivityScore",
-                },
-                agent="test",
+                data={"id": "template1", "type": "FeatureTemplate", "name": "ActivityScore"}, agent="test"
             )
 
             assert result.success is True
@@ -104,9 +85,7 @@ class TestFeatureMaterializationHooks:
         """Test hook that computes features based on existing data."""
         with tempfile.TemporaryDirectory() as tmpdir:
             registry = PersistentHookRegistry()
-            engine = UnrdfEngine(
-                file_path=Path(tmpdir) / "graph.ttl", hook_registry=registry
-            )
+            engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl", hook_registry=registry)
 
             class AgeGroupComputer(KnowledgeHook):
                 def __init__(self):
@@ -114,8 +93,7 @@ class TestFeatureMaterializationHooks:
                         name="age_group_computer",
                         phases=[HookPhase.POST_COMMIT],
                         trigger=TriggerCondition(
-                            pattern="?person <http://unrdf.org/ontology/age> ?age",
-                            check_delta=True,
+                            pattern="?person <http://unrdf.org/ontology/age> ?age", check_delta=True
                         ),
                     )
 
@@ -125,17 +103,9 @@ class TestFeatureMaterializationHooks:
                         if "age" in str(p):
                             try:
                                 age = int(o)
-                                age_group = (
-                                    "child"
-                                    if age < 18
-                                    else "adult"
-                                    if age < 65
-                                    else "senior"
-                                )
+                                age_group = "child" if age < 18 else "adult" if age < 65 else "senior"
                                 # Add computed feature to graph
-                                context.graph.add(
-                                    (s, UNRDF.ageGroup, Literal(age_group))
-                                )
+                                context.graph.add((s, UNRDF.ageGroup, Literal(age_group)))
                             except (ValueError, TypeError):
                                 pass
 
@@ -144,8 +114,7 @@ class TestFeatureMaterializationHooks:
 
             # Ingest person with age
             result = pipeline.ingest_json(
-                data={"id": "person1", "type": "Person", "name": "Alice", "age": 30},
-                agent="test",
+                data={"id": "person1", "type": "Person", "name": "Alice", "age": 30}, agent="test"
             )
 
             assert result.success is True
@@ -162,9 +131,7 @@ class TestFeatureMaterializationHooks:
         """Test features can trigger other feature computations."""
         with tempfile.TemporaryDirectory() as tmpdir:
             registry = PersistentHookRegistry()
-            engine = UnrdfEngine(
-                file_path=Path(tmpdir) / "graph.ttl", hook_registry=registry
-            )
+            engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl", hook_registry=registry)
 
             computation_log = []
 
@@ -175,8 +142,7 @@ class TestFeatureMaterializationHooks:
                         phases=[HookPhase.POST_COMMIT],
                         priority=100,
                         trigger=TriggerCondition(
-                            pattern="?person a <http://unrdf.org/ontology/Person>",
-                            check_delta=True,
+                            pattern="?person a <http://unrdf.org/ontology/Person>", check_delta=True
                         ),
                     )
 
@@ -189,11 +155,7 @@ class TestFeatureMaterializationHooks:
 
             class SecondFeatureComputer(KnowledgeHook):
                 def __init__(self):
-                    super().__init__(
-                        name="second_feature",
-                        phases=[HookPhase.POST_COMMIT],
-                        priority=50,
-                    )
+                    super().__init__(name="second_feature", phases=[HookPhase.POST_COMMIT], priority=50)
 
                 def execute(self, context: HookContext):
                     # Check if first feature exists
@@ -214,9 +176,7 @@ class TestFeatureMaterializationHooks:
             registry.register(SecondFeatureComputer())
 
             pipeline = IngestionPipeline(engine)
-            result = pipeline.ingest_json(
-                data={"id": "person1", "type": "Person"}, agent="test"
-            )
+            result = pipeline.ingest_json(data={"id": "person1", "type": "Person"}, agent="test")
 
             assert result.success is True
             # Both features should be computed in order
@@ -227,15 +187,11 @@ class TestFeatureMaterializationHooks:
         """Test hook that aggregates features across entities."""
         with tempfile.TemporaryDirectory() as tmpdir:
             registry = PersistentHookRegistry()
-            engine = UnrdfEngine(
-                file_path=Path(tmpdir) / "graph.ttl", hook_registry=registry
-            )
+            engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl", hook_registry=registry)
 
             class FeatureAggregator(KnowledgeHook):
                 def __init__(self):
-                    super().__init__(
-                        name="feature_aggregator", phases=[HookPhase.POST_COMMIT]
-                    )
+                    super().__init__(name="feature_aggregator", phases=[HookPhase.POST_COMMIT])
 
                 def execute(self, context: HookContext):
                     # Count total people
@@ -280,9 +236,7 @@ class TestFeatureMaterializationHooks:
         """Test features materialize only when conditions are met."""
         with tempfile.TemporaryDirectory() as tmpdir:
             registry = PersistentHookRegistry()
-            engine = UnrdfEngine(
-                file_path=Path(tmpdir) / "graph.ttl", hook_registry=registry
-            )
+            engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl", hook_registry=registry)
 
             class ConditionalFeatureMaterializer(KnowledgeHook):
                 def __init__(self):
@@ -306,9 +260,7 @@ class TestFeatureMaterializationHooks:
                             try:
                                 age = int(o)
                                 if age >= 18:
-                                    context.graph.add(
-                                        (s, UNRDF.premiumEligible, Literal(True))
-                                    )
+                                    context.graph.add((s, UNRDF.premiumEligible, Literal(True)))
                             except (ValueError, TypeError):
                                 pass
 
@@ -316,14 +268,10 @@ class TestFeatureMaterializationHooks:
             pipeline = IngestionPipeline(engine)
 
             # Add adult
-            pipeline.ingest_json(
-                data={"id": "adult", "type": "Person", "age": 25}, agent="test"
-            )
+            pipeline.ingest_json(data={"id": "adult", "type": "Person", "age": 25}, agent="test")
 
             # Add child
-            pipeline.ingest_json(
-                data={"id": "child", "type": "Person", "age": 12}, agent="test"
-            )
+            pipeline.ingest_json(data={"id": "child", "type": "Person", "age": 12}, agent="test")
 
             # Check only adult has premium feature
             query = """
@@ -339,15 +287,11 @@ class TestFeatureMaterializationHooks:
         """Test hook that invalidates stale features."""
         with tempfile.TemporaryDirectory() as tmpdir:
             registry = PersistentHookRegistry()
-            engine = UnrdfEngine(
-                file_path=Path(tmpdir) / "graph.ttl", hook_registry=registry
-            )
+            engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl", hook_registry=registry)
 
             class FeatureInvalidator(KnowledgeHook):
                 def __init__(self):
-                    super().__init__(
-                        name="feature_invalidator", phases=[HookPhase.POST_COMMIT]
-                    )
+                    super().__init__(name="feature_invalidator", phases=[HookPhase.POST_COMMIT])
 
                 def execute(self, context: HookContext):
                     # When age changes, invalidate age-dependent features
@@ -363,9 +307,7 @@ class TestFeatureMaterializationHooks:
             pipeline = IngestionPipeline(engine)
 
             # First ingestion
-            pipeline.ingest_json(
-                data={"id": "person1", "type": "Person", "age": 30}, agent="test"
-            )
+            pipeline.ingest_json(data={"id": "person1", "type": "Person", "age": 30}, agent="test")
 
             # Manually add derived feature
             txn = engine.transaction("test", "add derived")
@@ -390,9 +332,7 @@ class TestFeatureMaterializationHooks:
         """Test feature template that uses SPARQL for transformation."""
         with tempfile.TemporaryDirectory() as tmpdir:
             registry = PersistentHookRegistry()
-            engine = UnrdfEngine(
-                file_path=Path(tmpdir) / "graph.ttl", hook_registry=registry
-            )
+            engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl", hook_registry=registry)
 
             class SparqlTransformMaterializer(KnowledgeHook):
                 def __init__(self):
@@ -400,8 +340,7 @@ class TestFeatureMaterializationHooks:
                         name="sparql_transform",
                         phases=[HookPhase.POST_COMMIT],
                         trigger=TriggerCondition(
-                            pattern="?template a <http://unrdf.org/ontology/FeatureTemplate>",
-                            check_delta=True,
+                            pattern="?template a <http://unrdf.org/ontology/FeatureTemplate>", check_delta=True
                         ),
                     )
 
@@ -442,33 +381,25 @@ class TestFeatureMaterializationHooks:
         """Test tracking dependencies between materialized features."""
         with tempfile.TemporaryDirectory() as tmpdir:
             registry = PersistentHookRegistry()
-            engine = UnrdfEngine(
-                file_path=Path(tmpdir) / "graph.ttl", hook_registry=registry
-            )
+            engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl", hook_registry=registry)
 
             dependencies_tracked = []
 
             class DependencyTracker(KnowledgeHook):
                 def __init__(self):
-                    super().__init__(
-                        name="dependency_tracker", phases=[HookPhase.POST_COMMIT]
-                    )
+                    super().__init__(name="dependency_tracker", phases=[HookPhase.POST_COMMIT])
 
                 def execute(self, context: HookContext):
                     # Track which features depend on which source data
                     for s, p, o in context.delta:
                         if "Person" in str(o):
                             # Record that features depend on this person
-                            dependencies_tracked.append(
-                                {"entity": str(s), "depends_on": "person_data"}
-                            )
+                            dependencies_tracked.append({"entity": str(s), "depends_on": "person_data"})
 
             registry.register(DependencyTracker())
             pipeline = IngestionPipeline(engine)
 
-            result = pipeline.ingest_json(
-                data={"id": "person1", "type": "Person"}, agent="test"
-            )
+            result = pipeline.ingest_json(data={"id": "person1", "type": "Person"}, agent="test")
 
             assert result.success is True
             assert len(dependencies_tracked) > 0
@@ -477,17 +408,13 @@ class TestFeatureMaterializationHooks:
         """Test efficient batch materialization of features."""
         with tempfile.TemporaryDirectory() as tmpdir:
             registry = PersistentHookRegistry()
-            engine = UnrdfEngine(
-                file_path=Path(tmpdir) / "graph.ttl", hook_registry=registry
-            )
+            engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl", hook_registry=registry)
 
             batch_size = []
 
             class BatchMaterializer(KnowledgeHook):
                 def __init__(self):
-                    super().__init__(
-                        name="batch_materializer", phases=[HookPhase.POST_COMMIT]
-                    )
+                    super().__init__(name="batch_materializer", phases=[HookPhase.POST_COMMIT])
 
                 def execute(self, context: HookContext):
                     # Count entities in delta for batch processing
@@ -500,17 +427,14 @@ class TestFeatureMaterializationHooks:
                         batch_size.append(len(people))
                         # Materialize features for entire batch
                         for person in people:
-                            context.graph.add(
-                                (person, UNRDF.batchProcessed, Literal(True))
-                            )
+                            context.graph.add((person, UNRDF.batchProcessed, Literal(True)))
 
             registry.register(BatchMaterializer())
             pipeline = IngestionPipeline(engine)
 
             # Ingest batch
             result = pipeline.ingest_json(
-                data=[{"id": f"person{i}", "type": "Person"} for i in range(10)],
-                agent="test",
+                data=[{"id": f"person{i}", "type": "Person"} for i in range(10)], agent="test"
             )
 
             assert result.success is True
@@ -522,15 +446,11 @@ class TestFeatureMaterializationHooks:
         """Test tracking feature versions as they are updated."""
         with tempfile.TemporaryDirectory() as tmpdir:
             registry = PersistentHookRegistry()
-            engine = UnrdfEngine(
-                file_path=Path(tmpdir) / "graph.ttl", hook_registry=registry
-            )
+            engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl", hook_registry=registry)
 
             class FeatureVersionTracker(KnowledgeHook):
                 def __init__(self):
-                    super().__init__(
-                        name="version_tracker", phases=[HookPhase.POST_COMMIT]
-                    )
+                    super().__init__(name="version_tracker", phases=[HookPhase.POST_COMMIT])
 
                 def execute(self, context: HookContext):
                     from datetime import datetime
@@ -539,21 +459,14 @@ class TestFeatureMaterializationHooks:
                     for s, p, o in context.delta:
                         if "feature" in str(p).lower():
                             version_uri = URIRef(f"{s}_version")
-                            context.graph.add(
-                                (
-                                    version_uri,
-                                    UNRDF.timestamp,
-                                    Literal(datetime.now(UTC).isoformat()),
-                                )
-                            )
+                            context.graph.add((version_uri, UNRDF.timestamp, Literal(datetime.now(UTC).isoformat())))
                             context.graph.add((version_uri, UNRDF.featureOf, s))
 
             registry.register(FeatureVersionTracker())
             pipeline = IngestionPipeline(engine)
 
             result = pipeline.ingest_json(
-                data={"id": "person1", "type": "Person", "customFeature": "value"},
-                agent="test",
+                data={"id": "person1", "type": "Person", "customFeature": "value"}, agent="test"
             )
 
             assert result.success is True

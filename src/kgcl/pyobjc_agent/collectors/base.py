@@ -273,13 +273,8 @@ class BaseCollector(ABC):
                 consecutive_errors += 1
 
                 # Handle retries
-                if (
-                    not self.config.retry_on_error
-                    or consecutive_errors >= self.config.max_retries
-                ):
-                    logger.error(
-                        f"Max errors reached for {self.config.name}. Stopping collector."
-                    )
+                if not self.config.retry_on_error or consecutive_errors >= self.config.max_retries:
+                    logger.error(f"Max errors reached for {self.config.name}. Stopping collector.")
                     self.status = CollectorStatus.ERROR
                     break
 
@@ -302,10 +297,7 @@ class BaseCollector(ABC):
         with self._buffer_lock:
             # Check buffer size
             if len(self._event_buffer) >= self.config.buffer_size:
-                logger.warning(
-                    f"Buffer full for {self.config.name}. "
-                    f"Flushing {len(self._event_buffer)} events."
-                )
+                logger.warning(f"Buffer full for {self.config.name}. Flushing {len(self._event_buffer)} events.")
                 self._flush_buffer(force=True)
 
             self._event_buffer.append(event)
@@ -315,8 +307,7 @@ class BaseCollector(ABC):
         with self._buffer_lock:
             should_flush = (
                 len(self._event_buffer) >= self.config.batch_size
-                or (time.time() - self._last_flush_time)
-                >= self.config.batch_timeout_seconds
+                or (time.time() - self._last_flush_time) >= self.config.batch_timeout_seconds
             )
 
             if should_flush:

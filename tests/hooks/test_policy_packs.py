@@ -9,12 +9,7 @@ from datetime import UTC, datetime
 
 import pytest
 
-from kgcl.unrdf_engine.hook_registry import (
-    PersistentHookRegistry,
-    PolicyPack,
-    PolicyPackManager,
-    PolicyPackManifest,
-)
+from kgcl.unrdf_engine.hook_registry import PersistentHookRegistry, PolicyPack, PolicyPackManager, PolicyPackManifest
 from kgcl.unrdf_engine.hooks import HookContext, HookPhase, KnowledgeHook
 
 
@@ -24,43 +19,32 @@ class TestPolicyPackManifest:
     def test_manifest_validation_success(self):
         """Valid manifest passes validation."""
         manifest = PolicyPackManifest(
-            name="test-pack",
-            version="1.0.0",
-            description="Test policy pack",
-            hooks=["hook1", "hook2"],
+            name="test-pack", version="1.0.0", description="Test policy pack", hooks=["hook1", "hook2"]
         )
 
         assert manifest.validate() is True
 
     def test_manifest_validation_fails_missing_name(self):
         """Manifest validation fails with empty name."""
-        manifest = PolicyPackManifest(
-            name="", version="1.0.0", description="Test", hooks=["hook1"]
-        )
+        manifest = PolicyPackManifest(name="", version="1.0.0", description="Test", hooks=["hook1"])
 
         assert manifest.validate() is False
 
     def test_manifest_validation_fails_missing_version(self):
         """Manifest validation fails with empty version."""
-        manifest = PolicyPackManifest(
-            name="test", version="", description="Test", hooks=["hook1"]
-        )
+        manifest = PolicyPackManifest(name="test", version="", description="Test", hooks=["hook1"])
 
         assert manifest.validate() is False
 
     def test_manifest_validation_fails_invalid_semver(self):
         """Manifest validation fails with invalid semantic version."""
-        manifest = PolicyPackManifest(
-            name="test", version="1.0", description="Test", hooks=["hook1"]
-        )
+        manifest = PolicyPackManifest(name="test", version="1.0", description="Test", hooks=["hook1"])
 
         assert manifest.validate() is False
 
     def test_manifest_validation_fails_no_hooks(self):
         """Manifest validation fails with no hooks."""
-        manifest = PolicyPackManifest(
-            name="test", version="1.0.0", description="Test", hooks=[]
-        )
+        manifest = PolicyPackManifest(name="test", version="1.0.0", description="Test", hooks=[])
 
         assert manifest.validate() is False
 
@@ -97,11 +81,7 @@ class TestPolicyPack:
     def test_get_slo_target_exists(self):
         """Get SLO target returns value when defined."""
         manifest = PolicyPackManifest(
-            name="test",
-            version="1.0.0",
-            description="Test",
-            hooks=["h1"],
-            slos={"latency": 100.0},
+            name="test", version="1.0.0", description="Test", hooks=["h1"], slos={"latency": 100.0}
         )
         pack = PolicyPack(manifest=manifest, hooks={})
 
@@ -109,9 +89,7 @@ class TestPolicyPack:
 
     def test_get_slo_target_missing(self):
         """Get SLO target returns None when not defined."""
-        manifest = PolicyPackManifest(
-            name="test", version="1.0.0", description="Test", hooks=["h1"]
-        )
+        manifest = PolicyPackManifest(name="test", version="1.0.0", description="Test", hooks=["h1"])
         pack = PolicyPack(manifest=manifest, hooks={})
 
         assert pack.get_slo_target("latency") is None
@@ -119,11 +97,7 @@ class TestPolicyPack:
     def test_validate_slos_all_compliant(self):
         """Validate SLOs returns True for compliant metrics."""
         manifest = PolicyPackManifest(
-            name="test",
-            version="1.0.0",
-            description="Test",
-            hooks=["h1"],
-            slos={"latency": 100.0, "error_rate": 0.01},
+            name="test", version="1.0.0", description="Test", hooks=["h1"], slos={"latency": 100.0, "error_rate": 0.01}
         )
         pack = PolicyPack(manifest=manifest, hooks={})
 
@@ -135,11 +109,7 @@ class TestPolicyPack:
     def test_validate_slos_non_compliant(self):
         """Validate SLOs returns False for non-compliant metrics."""
         manifest = PolicyPackManifest(
-            name="test",
-            version="1.0.0",
-            description="Test",
-            hooks=["h1"],
-            slos={"latency": 100.0},
+            name="test", version="1.0.0", description="Test", hooks=["h1"], slos={"latency": 100.0}
         )
         pack = PolicyPack(manifest=manifest, hooks={})
 
@@ -150,11 +120,7 @@ class TestPolicyPack:
     def test_validate_slos_undefined_metrics_pass(self):
         """Validate SLOs treats undefined metrics as compliant."""
         manifest = PolicyPackManifest(
-            name="test",
-            version="1.0.0",
-            description="Test",
-            hooks=["h1"],
-            slos={"latency": 100.0},
+            name="test", version="1.0.0", description="Test", hooks=["h1"], slos={"latency": 100.0}
         )
         pack = PolicyPack(manifest=manifest, hooks={})
 
@@ -187,12 +153,8 @@ class TestPolicyPackManager:
                 return {"result": "executed"}
 
         # Register test hooks
-        hook1 = TestHook1(
-            name="test-hook-1", phases=[HookPhase.PRE_QUERY], priority=50, trigger=None
-        )
-        hook2 = TestHook2(
-            name="test-hook-2", phases=[HookPhase.POST_QUERY], priority=60, trigger=None
-        )
+        hook1 = TestHook1(name="test-hook-1", phases=[HookPhase.PRE_QUERY], priority=50, trigger=None)
+        hook2 = TestHook2(name="test-hook-2", phases=[HookPhase.POST_QUERY], priority=60, trigger=None)
 
         registry.register(hook1)
         registry.register(hook2)
@@ -340,9 +302,7 @@ class TestPolicyPackManager:
         assert result["dep-pack"] is True
         assert result["main-pack"] is True
 
-    def test_validate_dependencies_fails_missing_dependency(
-        self, tmp_path, hook_registry
-    ):
+    def test_validate_dependencies_fails_missing_dependency(self, tmp_path, hook_registry):
         """Validate dependencies fails when dependency missing."""
         manager = PolicyPackManager(base_path=tmp_path, hook_registry=hook_registry)
 
@@ -365,21 +325,14 @@ class TestPolicyPackManager:
 
         assert result["pack"] is False
 
-    def test_validate_dependencies_fails_version_mismatch(
-        self, tmp_path, hook_registry
-    ):
+    def test_validate_dependencies_fails_version_mismatch(self, tmp_path, hook_registry):
         """Validate dependencies fails when version incompatible."""
         manager = PolicyPackManager(base_path=tmp_path, hook_registry=hook_registry)
 
         # Create dependency pack v1.0
         dep_pack_path = tmp_path / "dep-pack"
         dep_pack_path.mkdir()
-        dep_manifest = {
-            "name": "dep-pack",
-            "version": "1.0.0",
-            "description": "Dependency",
-            "hooks": ["test-hook-1"],
-        }
+        dep_manifest = {"name": "dep-pack", "version": "1.0.0", "description": "Dependency", "hooks": ["test-hook-1"]}
         with open(dep_pack_path / "manifest.json", "w") as f:
             json.dump(dep_manifest, f)
 

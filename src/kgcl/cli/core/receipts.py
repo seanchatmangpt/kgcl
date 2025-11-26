@@ -13,12 +13,8 @@ class ExecutionReceipt:
 
     command: str
     success: bool
-    started_at: datetime = field(
-        default_factory=lambda: datetime.now(UTC).replace(tzinfo=None)
-    )
-    finished_at: datetime = field(
-        default_factory=lambda: datetime.now(UTC).replace(tzinfo=None)
-    )
+    started_at: datetime = field(default_factory=lambda: datetime.now(UTC).replace(tzinfo=None))
+    finished_at: datetime = field(default_factory=lambda: datetime.now(UTC).replace(tzinfo=None))
     metadata: dict[str, Any] = field(default_factory=dict)
 
     def duration_seconds(self) -> float:

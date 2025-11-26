@@ -94,10 +94,7 @@ class QuadDelta(BaseModel):
 
     Examples
     --------
-    >>> delta = QuadDelta(
-    ...     additions=[("urn:s1", "urn:p1", "urn:o1")],
-    ...     removals=[("urn:s2", "urn:p2", "urn:o2")],
-    ... )
+    >>> delta = QuadDelta(additions=[("urn:s1", "urn:p1", "urn:o1")], removals=[("urn:s2", "urn:p2", "urn:o2")])
     """
 
     additions: list[Triple] = Field(default_factory=list)
@@ -129,10 +126,7 @@ class QuadDelta(BaseModel):
             If batch size exceeds CHATMAN_CONSTANT.
         """
         if len(v) > CHATMAN_CONSTANT:
-            msg = (
-                f"Topology Violation: Batch size {len(v)} "
-                f"exceeds Hot Path limit ({CHATMAN_CONSTANT})."
-            )
+            msg = f"Topology Violation: Batch size {len(v)} exceeds Hot Path limit ({CHATMAN_CONSTANT})."
             raise ValueError(msg)
         return v
 
@@ -276,18 +270,14 @@ class KnowledgeHook:
 
     __slots__ = ("_handler", "id", "mode", "priority")
 
-    def __init__(
-        self, hook_id: str, mode: HookMode, handler: HookHandler, priority: int = 100
-    ) -> None:
+    def __init__(self, hook_id: str, mode: HookMode, handler: HookHandler, priority: int = 100) -> None:
         """Initialize a KnowledgeHook."""
         self.id = hook_id
         self.mode = mode
         self._handler = handler
         self.priority = priority
 
-    async def execute(
-        self, store: Dataset, delta: QuadDelta, ctx: TransactionContext
-    ) -> bool:
+    async def execute(self, store: Dataset, delta: QuadDelta, ctx: TransactionContext) -> bool:
         """
         Execute the hook handler.
 
@@ -442,9 +432,7 @@ class Atman:
         payload = "|".join(signatures)
         return hashlib.sha256(payload.encode()).hexdigest()
 
-    def _convert_triple(
-        self, t: Triple
-    ) -> tuple[URIRef | Literal, URIRef, URIRef | Literal]:
+    def _convert_triple(self, t: Triple) -> tuple[URIRef | Literal, URIRef, URIRef | Literal]:
         """
         JIT Compilation of Strings to RDF Terms.
 
@@ -536,10 +524,7 @@ class Atman:
                 await hook.execute(self.store, delta, ctx)
                 hook_results.append(
                     HookResult(
-                        hook_id=hook.id,
-                        mode=HookMode.POST,
-                        success=True,
-                        duration_ns=time.perf_counter_ns() - h_start,
+                        hook_id=hook.id, mode=HookMode.POST, success=True, duration_ns=time.perf_counter_ns() - h_start
                     )
                 )
 

@@ -30,9 +30,7 @@ class TestCollectorConfig:
 
     def test_custom_config(self):
         """Test custom collector configuration."""
-        config = CollectorConfig(
-            flush_interval_seconds=30, batch_size=50, output_format="json"
-        )
+        config = CollectorConfig(flush_interval_seconds=30, batch_size=50, output_format="json")
 
         assert config.flush_interval_seconds == 30
         assert config.batch_size == 50
@@ -56,9 +54,7 @@ class TestFilterConfig:
 
     def test_custom_exclusions(self):
         """Test custom exclusion lists."""
-        config = FilterConfig(
-            excluded_apps=["com.test.app"], excluded_domains=["test.local"]
-        )
+        config = FilterConfig(excluded_apps=["com.test.app"], excluded_domains=["test.local"])
 
         assert config.excluded_apps == ["com.test.app"]
         assert config.excluded_domains == ["test.local"]
@@ -82,9 +78,7 @@ class TestFeatureConfig:
 
     def test_custom_features(self):
         """Test custom feature configuration."""
-        config = FeatureConfig(
-            enabled_features=["custom_feature"], aggregation_windows=["30m", "2h"]
-        )
+        config = FeatureConfig(enabled_features=["custom_feature"], aggregation_windows=["30m", "2h"])
 
         assert config.enabled_features == ["custom_feature"]
         assert "30m" in config.aggregation_windows
@@ -164,10 +158,7 @@ class TestIngestionConfig:
 
     def test_nested_config(self):
         """Test nested configuration."""
-        config = IngestionConfig(
-            collector=CollectorConfig(batch_size=50),
-            filter=FilterConfig(privacy_mode=True),
-        )
+        config = IngestionConfig(collector=CollectorConfig(batch_size=50), filter=FilterConfig(privacy_mode=True))
 
         assert config.collector.batch_size == 50
         assert config.filter.privacy_mode is True
@@ -175,8 +166,7 @@ class TestIngestionConfig:
     def test_yaml_roundtrip(self):
         """Test saving and loading YAML configuration."""
         config = IngestionConfig(
-            collector=CollectorConfig(batch_size=75),
-            filter=FilterConfig(min_duration_seconds=2.0),
+            collector=CollectorConfig(batch_size=75), filter=FilterConfig(min_duration_seconds=2.0)
         )
 
         with tempfile.NamedTemporaryFile(mode="w", suffix=".yaml", delete=False) as f:

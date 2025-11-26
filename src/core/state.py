@@ -7,7 +7,7 @@ from collections.abc import Callable
 from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Generic, TypeVar
+from typing import Any, TypeVar
 
 S = TypeVar("S", bound="State")
 T = TypeVar("T")
@@ -19,6 +19,9 @@ class State(Enum):
     Provides a common base class for state enums with utility methods.
     Subclass this to create specific state enumerations.
 
+    Note: This is an empty base class to allow subclassing in Python 3.12+.
+    Enum subclasses can only extend base enums that have no members.
+
     Example
     -------
     >>> class OrderState(State):
@@ -27,8 +30,8 @@ class State(Enum):
     ...     SHIPPED = "shipped"
     """
 
-    # Base state for initialization - subclasses define their own states
-    INITIAL = "initial"
+    # No members defined - allows subclassing in Python 3.12+
+    pass
 
 
 @dataclass
@@ -77,9 +80,7 @@ class StateManager[S: "State"]:
         """Get current state."""
         return self._current
 
-    def transition_to(
-        self, next_state: S, context: dict[str, Any] | None = None
-    ) -> bool:
+    def transition_to(self, next_state: S, context: dict[str, Any] | None = None) -> bool:
         """Transition to next state.
 
         Returns True if transition succeeded, False otherwise.
@@ -90,9 +91,7 @@ class StateManager[S: "State"]:
                 return False
 
         # Record transition
-        transition = StateTransition(
-            from_state=self._current, to_state=next_state, context=context or {}
-        )
+        transition = StateTransition(from_state=self._current, to_state=next_state, context=context or {})
         self._transitions.append(transition)
 
         # Update current state
@@ -135,6 +134,4 @@ class StateManager[S: "State"]:
         self._transitions = []
 
     def __repr__(self) -> str:
-        return (
-            f"StateManager(current={self._current}, history_len={len(self._history)})"
-        )
+        return f"StateManager(current={self._current}, history_len={len(self._history)})"

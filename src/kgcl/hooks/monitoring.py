@@ -55,9 +55,7 @@ class AndonBoard:
             max_signals: Maximum number of signals to retain in history
         """
         self.signals: list[AndonSignal] = []
-        self.handlers: dict[SignalSeverity, list[Callable]] = {
-            severity: [] for severity in SignalSeverity
-        }
+        self.handlers: dict[SignalSeverity, list[Callable]] = {severity: [] for severity in SignalSeverity}
         self.max_signals = max_signals
         self._stopped = False
         self._logger = logging.getLogger(__name__)
@@ -99,9 +97,7 @@ class AndonBoard:
             self._stopped = True
             self._logger.critical(f"SYSTEM STOPPED: {signal.message}")
 
-    def register_handler(
-        self, severity: SignalSeverity, handler: Callable[[AndonSignal], None]
-    ) -> None:
+    def register_handler(self, severity: SignalSeverity, handler: Callable[[AndonSignal], None]) -> None:
         """Register handler for severity level.
 
         Args:
@@ -112,9 +108,7 @@ class AndonBoard:
             self.handlers[severity] = []
         self.handlers[severity].append(handler)
 
-    def unregister_handler(
-        self, severity: SignalSeverity, handler: Callable[[AndonSignal], None]
-    ) -> bool:
+    def unregister_handler(self, severity: SignalSeverity, handler: Callable[[AndonSignal], None]) -> bool:
         """Unregister a handler.
 
         Args:

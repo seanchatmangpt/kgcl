@@ -46,11 +46,7 @@ class TestCacheConfig:
 
     def test_custom_config(self, tmp_path):
         """Test custom configuration."""
-        config = CacheConfig(
-            memory_cache_enabled=False,
-            disk_cache_dir=tmp_path / "cache",
-            max_disk_cache_age=3600,
-        )
+        config = CacheConfig(memory_cache_enabled=False, disk_cache_dir=tmp_path / "cache", max_disk_cache_age=3600)
 
         assert config.memory_cache_enabled is False
         assert config.disk_cache_dir == tmp_path / "cache"
@@ -87,15 +83,11 @@ class TestShapeIndex:
         index = ShapeIndex()
 
         shape1 = SHACLShape(
-            uri=URIRef("http://example.org/Shape1"),
-            name="Shape1",
-            target_class=URIRef("http://example.org/Person"),
+            uri=URIRef("http://example.org/Shape1"), name="Shape1", target_class=URIRef("http://example.org/Person")
         )
 
         shape2 = SHACLShape(
-            uri=URIRef("http://example.org/Shape2"),
-            name="Shape2",
-            target_class=URIRef("http://example.org/Person"),
+            uri=URIRef("http://example.org/Shape2"), name="Shape2", target_class=URIRef("http://example.org/Person")
         )
 
         index.add(shape1)
@@ -149,11 +141,7 @@ class TestUltraOptimizer:
 
     def test_disk_cache(self, sample_ttl_file, tmp_path):
         """Test disk caching."""
-        config = CacheConfig(
-            memory_cache_enabled=False,
-            disk_cache_enabled=True,
-            disk_cache_dir=tmp_path / "cache",
-        )
+        config = CacheConfig(memory_cache_enabled=False, disk_cache_enabled=True, disk_cache_dir=tmp_path / "cache")
         optimizer = UltraOptimizer(config)
 
         # First parse
@@ -179,12 +167,7 @@ class TestUltraOptimizer:
                 uri=URIRef("http://example.org/TestShape"),
                 name="TestShape",
                 properties=[
-                    PropertyShape(
-                        path=URIRef("http://example.org/prop"),
-                        name="prop",
-                        datatype=XSD.string,
-                        min_count=1,
-                    )
+                    PropertyShape(path=URIRef("http://example.org/prop"), name="prop", datatype=XSD.string, min_count=1)
                 ],
             )
         ]
@@ -237,9 +220,7 @@ class TestUltraOptimizer:
         # Add some data
         optimizer._memory_cache["test"] = "value"
         optimizer.parser._graph_cache["test"] = Graph()
-        optimizer.shape_index.add(
-            SHACLShape(uri=URIRef("http://example.org/Test"), name="Test")
-        )
+        optimizer.shape_index.add(SHACLShape(uri=URIRef("http://example.org/Test"), name="Test"))
 
         # Create a disk cache file
         cache_file = config.disk_cache_dir / "test.pkl"

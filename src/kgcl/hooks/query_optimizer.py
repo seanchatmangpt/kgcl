@@ -102,9 +102,7 @@ class QueryOptimizer:
         estimated_cost = base_cost
 
         # Build execution path
-        execution_path = self._build_execution_path(
-            query, triple_count, has_union, has_optional, has_filter
-        )
+        execution_path = self._build_execution_path(query, triple_count, has_union, has_optional, has_filter)
 
         # Check for index usage
         uses_index = self._can_use_index(query)
@@ -130,12 +128,7 @@ class QueryOptimizer:
         )
 
         # Store stats
-        self.query_stats[query_hash] = {
-            "query": query_normalized,
-            "plan": plan,
-            "executions": 0,
-            "avg_time_ms": 0.0,
-        }
+        self.query_stats[query_hash] = {"query": query_normalized, "plan": plan, "executions": 0, "avg_time_ms": 0.0}
 
         return plan
 
@@ -222,9 +215,7 @@ class QueryOptimizer:
             stats["executions"] += 1
             # Update rolling average
             prev_avg = stats["avg_time_ms"]
-            stats["avg_time_ms"] = (
-                prev_avg * (stats["executions"] - 1) + execution_time_ms
-            ) / stats["executions"]
+            stats["avg_time_ms"] = (prev_avg * (stats["executions"] - 1) + execution_time_ms) / stats["executions"]
 
     def get_stats(self, query: str) -> dict[str, Any] | None:
         """
@@ -251,9 +242,7 @@ class QueryOptimizer:
         """Create hash of query for identification."""
         return hashlib.md5(query.encode()).hexdigest()
 
-    def _estimate_selectivity(
-        self, query: str, triple_count: int, has_filter: bool
-    ) -> float:
+    def _estimate_selectivity(self, query: str, triple_count: int, has_filter: bool) -> float:
         """
         Estimate query selectivity (0.0 = very selective, 1.0 = returns all).
         """
@@ -272,12 +261,7 @@ class QueryOptimizer:
         return max(0.0, min(1.0, selectivity))
 
     def _build_execution_path(
-        self,
-        query: str,
-        triple_count: int,
-        has_union: bool,
-        has_optional: bool,
-        has_filter: bool,
+        self, query: str, triple_count: int, has_union: bool, has_optional: bool, has_filter: bool
     ) -> list[str]:
         """Build step-by-step execution plan."""
         path = []
@@ -372,9 +356,7 @@ class QueryOptimizer:
                     last_producing_triple_idx = idx
 
             # If found, insert FILTER after that triple
-            if last_producing_triple_idx >= 0 and last_producing_triple_idx < len(
-                triples
-            ):
+            if last_producing_triple_idx >= 0 and last_producing_triple_idx < len(triples):
                 # Find position of triple in query
                 triple_text = triples[last_producing_triple_idx]
                 triple_pos = query_without_filters.find(triple_text)
@@ -384,10 +366,7 @@ class QueryOptimizer:
                     insert_pos = triple_pos + len(triple_text)
 
                     # Find next period/semicolon/closing brace
-                    while (
-                        insert_pos < len(query_without_filters)
-                        and query_without_filters[insert_pos] not in ".;}"
-                    ):
+                    while insert_pos < len(query_without_filters) and query_without_filters[insert_pos] not in ".;}":
                         insert_pos += 1
 
                     if insert_pos < len(query_without_filters):
@@ -396,9 +375,7 @@ class QueryOptimizer:
                     # Insert FILTER
                     filter_text = f" FILTER({filter_cond}) "
                     query_without_filters = (
-                        query_without_filters[:insert_pos]
-                        + filter_text
-                        + query_without_filters[insert_pos:]
+                        query_without_filters[:insert_pos] + filter_text + query_without_filters[insert_pos:]
                     )
 
         return query_without_filters
@@ -459,16 +436,10 @@ class QueryOptimizer:
             elif subject.startswith("<") or subject.startswith('"'):
                 selectivity = 0.3
             # URI predicate (bound)
-            elif predicate.startswith("<") or (
-                ":" in predicate and not predicate.startswith("?")
-            ):
+            elif predicate.startswith("<") or (":" in predicate and not predicate.startswith("?")):
                 selectivity = 0.4
             # All variables - least selective (full scan)
-            elif (
-                subject.startswith("?")
-                and predicate.startswith("?")
-                and obj.startswith("?")
-            ):
+            elif subject.startswith("?") and predicate.startswith("?") and obj.startswith("?"):
                 selectivity = 0.9
 
             selectivities.append(((subject, predicate, obj), selectivity))
@@ -477,9 +448,7 @@ class QueryOptimizer:
         sorted_triples = [t for t, _ in sorted(selectivities, key=lambda x: x[1])]
 
         # Reconstruct WHERE clause
-        new_where_content = " .\n    ".join(
-            f"{s} {p} {o}" for s, p, o in sorted_triples
-        )
+        new_where_content = " .\n    ".join(f"{s} {p} {o}" for s, p, o in sorted_triples)
 
         # Replace WHERE clause in query
         new_query = where_pattern.sub(f"WHERE {{\n    {new_where_content}\n}}", query)

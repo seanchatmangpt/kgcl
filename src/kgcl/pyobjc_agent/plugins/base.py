@@ -166,9 +166,7 @@ class BaseCapabilityPlugin(ABC):
         """
 
     @abstractmethod
-    def collect_capability_data(
-        self, capability_name: str, parameters: dict[str, Any] | None = None
-    ) -> CapabilityData:
+    def collect_capability_data(self, capability_name: str, parameters: dict[str, Any] | None = None) -> CapabilityData:
         """
         Collect data for a specific capability.
 
@@ -212,15 +210,11 @@ class BaseCapabilityPlugin(ABC):
             entitlements = self.check_entitlements()
             missing = [k for k, v in entitlements.items() if not v]
             if missing:
-                logger.warning(
-                    f"Plugin {self.plugin_id} missing entitlements: {missing}"
-                )
+                logger.warning(f"Plugin {self.plugin_id} missing entitlements: {missing}")
 
             # Discover capabilities
             self._capabilities_cache = self.discover_capabilities()
-            logger.info(
-                f"Plugin {self.plugin_id} discovered {len(self._capabilities_cache)} capabilities"
-            )
+            logger.info(f"Plugin {self.plugin_id} discovered {len(self._capabilities_cache)} capabilities")
 
             self.status = PluginStatus.READY
             return True
@@ -264,9 +258,7 @@ class BaseCapabilityPlugin(ABC):
             RuntimeError: If plugin not initialized
         """
         if self.status != PluginStatus.READY:
-            raise RuntimeError(
-                f"Plugin {self.plugin_id} not ready. Status: {self.status}"
-            )
+            raise RuntimeError(f"Plugin {self.plugin_id} not ready. Status: {self.status}")
 
         if self._capabilities_cache is None:
             self._capabilities_cache = self.discover_capabilities()
@@ -290,9 +282,7 @@ class BaseCapabilityPlugin(ABC):
                 return cap
         return None
 
-    def collect_all_capabilities(
-        self, parameters: dict[str, Any] | None = None
-    ) -> list[CapabilityData]:
+    def collect_all_capabilities(self, parameters: dict[str, Any] | None = None) -> list[CapabilityData]:
         """
         Collect data for all available capabilities.
 
@@ -304,9 +294,7 @@ class BaseCapabilityPlugin(ABC):
             List of collected capability data
         """
         if self.status != PluginStatus.READY:
-            logger.warning(
-                f"Cannot collect from plugin {self.plugin_id}. Status: {self.status}"
-            )
+            logger.warning(f"Cannot collect from plugin {self.plugin_id}. Status: {self.status}")
             return []
 
         results = []
@@ -317,17 +305,10 @@ class BaseCapabilityPlugin(ABC):
                 data = self.collect_capability_data(capability.name, parameters)
                 results.append(data)
             except Exception as e:
-                logger.error(
-                    f"Failed to collect {capability.name} from {self.plugin_id}: {e}"
-                )
+                logger.error(f"Failed to collect {capability.name} from {self.plugin_id}: {e}")
                 # Add error result
                 results.append(
-                    CapabilityData(
-                        capability_name=capability.name,
-                        timestamp=datetime.now(UTC),
-                        data={},
-                        error=str(e),
-                    )
+                    CapabilityData(capability_name=capability.name, timestamp=datetime.now(UTC), data={}, error=str(e))
                 )
 
         return results
@@ -346,9 +327,7 @@ class BaseCapabilityPlugin(ABC):
             "version": self.plugin_version,
             "status": self.status.value,
             "error": self._error_message,
-            "capabilities_count": (
-                len(self._capabilities_cache) if self._capabilities_cache else 0
-            ),
+            "capabilities_count": (len(self._capabilities_cache) if self._capabilities_cache else 0),
             "required_frameworks": self.required_frameworks,
         }
 

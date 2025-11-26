@@ -93,9 +93,7 @@ class CancelTask:
     >>> store = Dataset()
     >>> # ... populate store with task ...
     >>> cancel = CancelTask()
-    >>> result = cancel.cancel(
-    ...     store, URIRef("urn:task:code_entry"), "User timeout exceeded"
-    ... )
+    >>> result = cancel.cancel(store, URIRef("urn:task:code_entry"), "User timeout exceeded")
     >>> assert result.success is True
     """
 
@@ -138,9 +136,7 @@ class CancelTask:
         >>> result = cancel.cancel(store, task_uri, "Manual cancellation")
         >>> assert result.success is True
         >>> # Verify task is cancelled in graph
-        >>> cancelled = list(
-        ...     store.triples((task_uri, YAWL.status, Literal("cancelled")))
-        ... )
+        >>> cancelled = list(store.triples((task_uri, YAWL.status, Literal("cancelled"))))
         >>> assert len(cancelled) == 1
         """
         timestamp = time.time()
@@ -149,11 +145,7 @@ class CancelTask:
         task_triples = list(graph.triples((task, None, None)))
         if not task_triples:
             return CancellationResult(
-                cancelled_tasks=(),
-                reason=reason,
-                timestamp=timestamp,
-                success=False,
-                error=f"Task not found: {task}",
+                cancelled_tasks=(), reason=reason, timestamp=timestamp, success=False, error=f"Task not found: {task}"
             )
 
         # Remove active status
@@ -171,12 +163,7 @@ class CancelTask:
         for _, _, token in graph.triples((task, KGC.hasToken, None)):
             graph.remove((task, KGC.hasToken, token))
 
-        return CancellationResult(
-            cancelled_tasks=(str(task),),
-            reason=reason,
-            timestamp=timestamp,
-            success=True,
-        )
+        return CancellationResult(cancelled_tasks=(str(task),), reason=reason, timestamp=timestamp, success=True)
 
 
 @dataclass(frozen=True)
@@ -199,18 +186,14 @@ class CancelCase:
     >>> store = Dataset()
     >>> # ... populate store with workflow ...
     >>> cancel = CancelCase()
-    >>> result = cancel.cancel(
-    ...     store, URIRef("urn:workflow:nuclear_launch"), "Emergency abort initiated"
-    ... )
+    >>> result = cancel.cancel(store, URIRef("urn:workflow:nuclear_launch"), "Emergency abort initiated")
     >>> assert result.success is True
     """
 
     pattern_id: int = 20
     name: str = "Cancel Case"
 
-    def cancel(
-        self, graph: Dataset, workflow: URIRef, reason: str
-    ) -> CancellationResult:
+    def cancel(self, graph: Dataset, workflow: URIRef, reason: str) -> CancellationResult:
         """Cancel entire workflow instance.
 
         All tasks in the workflow are marked as cancelled, active tokens are removed,
@@ -304,10 +287,7 @@ class CancelCase:
         graph.add((workflow, YAWL.abortReason, Literal(reason)))
 
         return CancellationResult(
-            cancelled_tasks=tuple(cancelled_tasks),
-            reason=reason,
-            timestamp=timestamp,
-            success=True,
+            cancelled_tasks=tuple(cancelled_tasks), reason=reason, timestamp=timestamp, success=True
         )
 
 
@@ -332,9 +312,7 @@ class CancelRegion:
     >>> from rdflib import Dataset, URIRef
     >>> store = Dataset()
     >>> # ... populate store with workflow ...
-    >>> cancel = CancelRegion(
-    ...     region_tasks=frozenset(["urn:task:auth", "urn:task:validate"])
-    ... )
+    >>> cancel = CancelRegion(region_tasks=frozenset(["urn:task:auth", "urn:task:validate"]))
     >>> result = cancel.cancel_region(store, URIRef("urn:task:auth"))
     >>> assert result.success is True
     """
@@ -376,9 +354,7 @@ class CancelRegion:
         >>> store.add((task1, YAWL.status, Literal("active")))
         >>> store.add((task2, YAWL.status, Literal("active")))
         >>> store.add((task3, YAWL.status, Literal("active")))
-        >>> cancel = CancelRegion(
-        ...     region_tasks=frozenset(["urn:task:auth", "urn:task:validate"])
-        ... )
+        >>> cancel = CancelRegion(region_tasks=frozenset(["urn:task:auth", "urn:task:validate"]))
         >>> result = cancel.cancel_region(store, task1)
         >>> assert result.success is True
         >>> assert len(result.cancelled_tasks) == 2
@@ -427,8 +403,5 @@ class CancelRegion:
             cancelled_tasks.append(task_str)
 
         return CancellationResult(
-            cancelled_tasks=tuple(cancelled_tasks),
-            reason=reason,
-            timestamp=timestamp,
-            success=True,
+            cancelled_tasks=tuple(cancelled_tasks), reason=reason, timestamp=timestamp, success=True
         )

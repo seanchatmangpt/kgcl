@@ -52,11 +52,7 @@ def traced_ingestion(event_type: str) -> Any:
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             with tracer.start_as_current_span(
                 f"ingestion.{func.__name__}",
-                attributes={
-                    "subsystem": "unrdf_engine",
-                    "event_type": event_type,
-                    "operation": "ingest",
-                },
+                attributes={"subsystem": "unrdf_engine", "event_type": event_type, "operation": "ingest"},
             ) as span:
                 start_time = time.perf_counter()
 
@@ -69,9 +65,7 @@ def traced_ingestion(event_type: str) -> Any:
 
                     # Record metrics if metrics instance is available
                     if len(args) > 0 and hasattr(args[0], "metrics"):
-                        args[0].metrics.record_event_ingestion(
-                            event_type, duration_ms, success=True
-                        )
+                        args[0].metrics.record_event_ingestion(event_type, duration_ms, success=True)
 
                     span.set_status(Status(StatusCode.OK))
                     return result
@@ -83,9 +77,7 @@ def traced_ingestion(event_type: str) -> Any:
 
                     # Record error metrics
                     if len(args) > 0 and hasattr(args[0], "metrics"):
-                        args[0].metrics.record_event_ingestion(
-                            event_type, duration_ms, success=False
-                        )
+                        args[0].metrics.record_event_ingestion(event_type, duration_ms, success=False)
 
                     raise
 
@@ -113,8 +105,7 @@ def traced_graph_operation(operation: str) -> Any:
         @functools.wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             with tracer.start_as_current_span(
-                f"graph.{operation}.{func.__name__}",
-                attributes={"subsystem": "unrdf_engine", "operation": operation},
+                f"graph.{operation}.{func.__name__}", attributes={"subsystem": "unrdf_engine", "operation": operation}
             ) as span:
                 start_time = time.perf_counter()
 
@@ -124,9 +115,7 @@ def traced_graph_operation(operation: str) -> Any:
 
                     # Record metrics
                     if len(args) > 0 and hasattr(args[0], "metrics"):
-                        args[0].metrics.record_graph_operation(
-                            operation, duration_ms, success=True
-                        )
+                        args[0].metrics.record_graph_operation(operation, duration_ms, success=True)
 
                     span.set_status(Status(StatusCode.OK))
                     return result
@@ -137,9 +126,7 @@ def traced_graph_operation(operation: str) -> Any:
 
                     # Record error metrics
                     if len(args) > 0 and hasattr(args[0], "metrics"):
-                        args[0].metrics.record_graph_operation(
-                            operation, duration_ms, success=False
-                        )
+                        args[0].metrics.record_graph_operation(operation, duration_ms, success=False)
 
                     raise
 
@@ -167,8 +154,7 @@ def traced_hook(hook_name: str) -> Any:
         @functools.wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             with tracer.start_as_current_span(
-                f"hook.{hook_name}",
-                attributes={"subsystem": "unrdf_engine", "hook_name": hook_name},
+                f"hook.{hook_name}", attributes={"subsystem": "unrdf_engine", "hook_name": hook_name}
             ) as span:
                 try:
                     result = func(*args, **kwargs)

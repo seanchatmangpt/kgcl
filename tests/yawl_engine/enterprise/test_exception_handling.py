@@ -33,17 +33,11 @@ Examples
 from __future__ import annotations
 
 import time
-from typing import Any
 
 import pytest
 from rdflib import Graph, Literal, Namespace, URIRef
 
-from kgcl.yawl_engine.patterns.exception_patterns import (
-    CaseFailure,
-    ExceptionResult,
-    ServiceFailure,
-    WorkItemFailure,
-)
+from kgcl.yawl_engine.patterns.exception_patterns import CaseFailure, ServiceFailure, WorkItemFailure
 
 # YAWL namespace definitions
 YAWL = Namespace("http://www.yawlfoundation.org/yawlschema#")
@@ -132,9 +126,7 @@ class TestExponentialBackoffRetry:
             (4, [1.0, 2.0, 4.0, 8.0]),  # Fourth retry: 2^3 = 8s
         ],
     )
-    def test_exponential_backoff_delays(
-        self, empty_graph: Graph, failures: int, expected_delays: list[float]
-    ) -> None:
+    def test_exponential_backoff_delays(self, empty_graph: Graph, failures: int, expected_delays: list[float]) -> None:
         """Retry delays follow exponential backoff: 1s → 2s → 4s → 8s."""
         task = URIRef("urn:task:api_call")
         empty_graph.add((task, YAWL.status, Literal("active")))
@@ -159,16 +151,12 @@ class TestExponentialBackoffRetry:
         """After max retries exceeded, compensation task is invoked."""
         task = URIRef("urn:task:reserve_inventory")
         compensation_task = "urn:task:release_inventory"
-        wif = WorkItemFailure(
-            retry_policy="exponential", max_retries=3, compensation_task=compensation_task
-        )
+        wif = WorkItemFailure(retry_policy="exponential", max_retries=3, compensation_task=compensation_task)
 
         # Simulate 3 retries already attempted
         graph_with_task.add((task, YAWL_EXCEPTION.retryCount, Literal(3)))
 
-        result = wif.on_failure(
-            graph_with_task, task, RuntimeError("Persistent failure")
-        )
+        result = wif.on_failure(graph_with_task, task, RuntimeError("Persistent failure"))
 
         # Should trigger compensation, not retry
         assert result.action_taken == "compensate"
@@ -177,9 +165,7 @@ class TestExponentialBackoffRetry:
 
         # Verify compensation task enabled in graph
         comp_uri = URIRef(compensation_task)
-        comp_status = list(
-            graph_with_task.triples((comp_uri, YAWL.status, Literal("enabled")))
-        )
+        comp_status = list(graph_with_task.triples((comp_uri, YAWL.status, Literal("enabled"))))
         assert len(comp_status) == 1
 
     def test_linear_retry_policy(self, empty_graph: Graph) -> None:
@@ -209,16 +195,12 @@ class TestExponentialBackoffRetry:
         assert result.action_taken == "retry"
         assert result.recovery_data["retry_delay"] == 0.1
 
-    def test_no_retry_policy_goes_straight_to_compensation(
-        self, empty_graph: Graph
-    ) -> None:
+    def test_no_retry_policy_goes_straight_to_compensation(self, empty_graph: Graph) -> None:
         """retry_policy='none' skips retries and goes to compensation."""
         task = URIRef("urn:task:test")
         empty_graph.add((task, YAWL.status, Literal("active")))
         compensation_task = "urn:task:rollback"
-        wif = WorkItemFailure(
-            retry_policy="none", max_retries=0, compensation_task=compensation_task
-        )
+        wif = WorkItemFailure(retry_policy="none", max_retries=0, compensation_task=compensation_task)
 
         result = wif.on_failure(empty_graph, task, ValueError("Immediate failure"))
 
@@ -234,23 +216,17 @@ class TestExponentialBackoffRetry:
 class TestCircuitBreaker:
     """Tests for circuit breaker pattern."""
 
-    def test_circuit_breaker_opens_after_threshold(
-        self, graph_with_service: Graph
-    ) -> None:
+    def test_circuit_breaker_opens_after_threshold(self, graph_with_service: Graph) -> None:
         """Circuit opens after 5 consecutive failures."""
         service = URIRef("urn:service:payment_gateway")
-        sf = ServiceFailure(
-            circuit_breaker_threshold=5, fallback_service="urn:service:backup_gateway"
-        )
+        sf = ServiceFailure(circuit_breaker_threshold=5, fallback_service="urn:service:backup_gateway")
 
         # First 4 failures: circuit stays closed, retry
         for i in range(4):
             graph_with_service.remove((service, YAWL_EXCEPTION.failureCount, None))
             graph_with_service.add((service, YAWL_EXCEPTION.failureCount, Literal(i)))
 
-            result = sf.on_service_failure(
-                graph_with_service, service, ConnectionError("Timeout")
-            )
+            result = sf.on_service_failure(graph_with_service, service, ConnectionError("Timeout"))
 
             assert result.action_taken == "retry"
             assert result.recovery_data["circuit_state"] == "closed"
@@ -260,25 +236,17 @@ class TestCircuitBreaker:
         graph_with_service.remove((service, YAWL_EXCEPTION.failureCount, None))
         graph_with_service.add((service, YAWL_EXCEPTION.failureCount, Literal(4)))
 
-        result = sf.on_service_failure(
-            graph_with_service, service, ConnectionError("Timeout")
-        )
+        result = sf.on_service_failure(graph_with_service, service, ConnectionError("Timeout"))
 
         assert result.action_taken == "fallback"
         assert result.recovery_data["circuit_state"] == "open"
         assert result.recovery_data["failure_count"] == 5
 
         # Verify circuit state in graph
-        circuit_state = list(
-            graph_with_service.triples(
-                (service, YAWL_EXCEPTION.circuitState, Literal("open"))
-            )
-        )
+        circuit_state = list(graph_with_service.triples((service, YAWL_EXCEPTION.circuitState, Literal("open"))))
         assert len(circuit_state) == 1
 
-    def test_circuit_breaker_without_fallback_aborts(
-        self, graph_with_service: Graph
-    ) -> None:
+    def test_circuit_breaker_without_fallback_aborts(self, graph_with_service: Graph) -> None:
         """Circuit opens without fallback → abort."""
         service = URIRef("urn:service:payment_gateway")
         sf = ServiceFailure(circuit_breaker_threshold=3, fallback_service=None)
@@ -287,45 +255,31 @@ class TestCircuitBreaker:
         for i in range(3):
             graph_with_service.remove((service, YAWL_EXCEPTION.failureCount, None))
             graph_with_service.add((service, YAWL_EXCEPTION.failureCount, Literal(i)))
-            sf.on_service_failure(
-                graph_with_service, service, ConnectionError("Timeout")
-            )
+            sf.on_service_failure(graph_with_service, service, ConnectionError("Timeout"))
 
         # Circuit should be open
-        circuit_state = list(
-            graph_with_service.triples(
-                (service, YAWL_EXCEPTION.circuitState, Literal("open"))
-            )
-        )
+        circuit_state = list(graph_with_service.triples((service, YAWL_EXCEPTION.circuitState, Literal("open"))))
         assert len(circuit_state) == 1
 
         # Next failure should abort (no fallback)
-        result = sf.on_service_failure(
-            graph_with_service, service, ConnectionError("Still failing")
-        )
+        result = sf.on_service_failure(graph_with_service, service, ConnectionError("Still failing"))
 
         assert result.action_taken == "abort"
         assert result.handled is False
 
-    def test_circuit_breaker_tracks_failure_count(
-        self, graph_with_service: Graph
-    ) -> None:
+    def test_circuit_breaker_tracks_failure_count(self, graph_with_service: Graph) -> None:
         """Failure count increments on each error."""
         service = URIRef("urn:service:payment_gateway")
         sf = ServiceFailure(circuit_breaker_threshold=10)
 
         for i in range(5):
-            result = sf.on_service_failure(
-                graph_with_service, service, ConnectionError(f"Failure {i + 1}")
-            )
+            result = sf.on_service_failure(graph_with_service, service, ConnectionError(f"Failure {i + 1}"))
 
             assert result.recovery_data["failure_count"] == i + 1
 
         # Verify final count in graph (implementation adds multiple triples)
         # Get the latest failure count (highest value)
-        failure_counts = list(
-            graph_with_service.triples((service, YAWL_EXCEPTION.failureCount, None))
-        )
+        failure_counts = list(graph_with_service.triples((service, YAWL_EXCEPTION.failureCount, None)))
         # Implementation adds triples instead of updating, so get max value
         max_count = max(int(str(triple[2])) for triple in failure_counts)
         assert max_count == 5
@@ -339,9 +293,7 @@ class TestCircuitBreaker:
 class TestFallbackService:
     """Tests for fallback service handling."""
 
-    def test_fallback_service_invoked_when_circuit_opens(
-        self, graph_with_service: Graph
-    ) -> None:
+    def test_fallback_service_invoked_when_circuit_opens(self, graph_with_service: Graph) -> None:
         """When circuit opens, fallback service is invoked."""
         primary = URIRef("urn:service:primary_api")
         fallback = "urn:service:backup_api"
@@ -351,35 +303,27 @@ class TestFallbackService:
         graph_with_service.add((primary, YAWL_EXCEPTION.failureCount, Literal(1)))
         graph_with_service.add((primary, YAWL_EXCEPTION.circuitState, Literal("closed")))
 
-        result = sf.on_service_failure(
-            graph_with_service, primary, ConnectionError("Timeout")
-        )
+        result = sf.on_service_failure(graph_with_service, primary, ConnectionError("Timeout"))
 
         assert result.action_taken == "fallback"
         assert result.recovery_data["fallback_service"] == fallback
         # Fallback was handled (try_fallback returned committed=True)
         assert result.handled is True
 
-    def test_fallback_service_logs_degraded_operation(
-        self, graph_with_service: Graph
-    ) -> None:
+    def test_fallback_service_logs_degraded_operation(self, graph_with_service: Graph) -> None:
         """Fallback service usage is logged as degraded operation."""
         primary = URIRef("urn:service:primary_api")
         fallback = "urn:service:backup_api"
         sf = ServiceFailure(circuit_breaker_threshold=1, fallback_service=fallback)
 
-        result = sf.on_service_failure(
-            graph_with_service, primary, ConnectionError("Primary down")
-        )
+        result = sf.on_service_failure(graph_with_service, primary, ConnectionError("Primary down"))
 
         # Should use fallback
         assert result.action_taken == "fallback"
         assert result.handled is True
         assert result.recovery_data["fallback_service"] == fallback
 
-    def test_try_fallback_without_configuration_fails(
-        self, empty_graph: Graph
-    ) -> None:
+    def test_try_fallback_without_configuration_fails(self, empty_graph: Graph) -> None:
         """try_fallback without configured fallback returns error."""
         service = URIRef("urn:service:primary")
         sf = ServiceFailure(circuit_breaker_threshold=5, fallback_service=None)
@@ -398,9 +342,7 @@ class TestFallbackService:
 class TestCompensationChain:
     """Tests for compensation chain rollback."""
 
-    def test_compensation_chain_reverses_all_steps(
-        self, graph_with_workflow: Graph
-    ) -> None:
+    def test_compensation_chain_reverses_all_steps(self, graph_with_workflow: Graph) -> None:
         """When Step 3 fails, Steps 2 and 1 are compensated in reverse order."""
         task1 = URIRef("urn:task:reserve_inventory")
         task2 = URIRef("urn:task:charge_payment")
@@ -416,17 +358,13 @@ class TestCompensationChain:
 
         # Step 3 failure triggers compensation
         wif3 = WorkItemFailure(retry_policy="none", compensation_task=None)
-        result3 = wif3.on_failure(
-            graph_with_workflow, task3, RuntimeError("Shipping unavailable")
-        )
+        result3 = wif3.on_failure(graph_with_workflow, task3, RuntimeError("Shipping unavailable"))
 
         assert result3.action_taken == "abort"
 
         # Compensate Step 2 (refund payment)
         wif2 = WorkItemFailure(retry_policy="none", compensation_task=comp2)
-        graph_with_workflow.add(
-            (task2, YAWL_EXCEPTION.compensationTask, URIRef(comp2))
-        )
+        graph_with_workflow.add((task2, YAWL_EXCEPTION.compensationTask, URIRef(comp2)))
         comp_result2 = wif2.compensate(graph_with_workflow, task2)
 
         assert comp_result2.committed is True
@@ -435,9 +373,7 @@ class TestCompensationChain:
 
         # Compensate Step 1 (release inventory)
         wif1 = WorkItemFailure(retry_policy="none", compensation_task=comp1)
-        graph_with_workflow.add(
-            (task1, YAWL_EXCEPTION.compensationTask, URIRef(comp1))
-        )
+        graph_with_workflow.add((task1, YAWL_EXCEPTION.compensationTask, URIRef(comp1)))
         comp_result1 = wif1.compensate(graph_with_workflow, task1)
 
         assert comp_result1.committed is True
@@ -448,16 +384,12 @@ class TestCompensationChain:
         assert comp_result1.task == URIRef(comp1)
         assert comp_result2.task == URIRef(comp2)
 
-    def test_compensation_task_updates_graph_relationships(
-        self, empty_graph: Graph
-    ) -> None:
+    def test_compensation_task_updates_graph_relationships(self, empty_graph: Graph) -> None:
         """Compensation returns updates with compensatesFor relationship."""
         failed_task = URIRef("urn:task:failed")
         comp_task = "urn:task:rollback"
         empty_graph.add((failed_task, YAWL.status, Literal("failed")))
-        empty_graph.add(
-            (failed_task, YAWL_EXCEPTION.compensationTask, URIRef(comp_task))
-        )
+        empty_graph.add((failed_task, YAWL_EXCEPTION.compensationTask, URIRef(comp_task)))
 
         wif = WorkItemFailure(retry_policy="none", compensation_task=comp_task)
         result = wif.compensate(empty_graph, failed_task)
@@ -487,30 +419,16 @@ class TestCompensationChain:
 class TestEscalationChain:
     """Tests for escalation chain handling."""
 
-    @pytest.mark.parametrize(
-        "level,expected_target",
-        [
-            (0, "supervisor"),
-            (1, "manager"),
-            (2, "director"),
-            (3, "cto"),
-        ],
-    )
-    def test_escalation_chain_levels(
-        self, empty_graph: Graph, level: int, expected_target: str
-    ) -> None:
+    @pytest.mark.parametrize("level,expected_target", [(0, "supervisor"), (1, "manager"), (2, "director"), (3, "cto")])
+    def test_escalation_chain_levels(self, empty_graph: Graph, level: int, expected_target: str) -> None:
         """Escalation progresses through chain: supervisor → manager → director → CTO."""
         workflow = URIRef("urn:workflow:critical_process")
         empty_graph.add((workflow, YAWL.status, Literal("active")))
         empty_graph.add((workflow, YAWL_EXCEPTION.escalationLevel, Literal(level)))
 
-        cf = CaseFailure(
-            escalation_chain=("supervisor", "manager", "director", "cto")
-        )
+        cf = CaseFailure(escalation_chain=("supervisor", "manager", "director", "cto"))
 
-        result = cf.on_case_failure(
-            empty_graph, workflow, RuntimeError("Critical failure")
-        )
+        result = cf.on_case_failure(empty_graph, workflow, RuntimeError("Critical failure"))
 
         assert result.action_taken == "escalate"
         assert result.recovery_data["escalated_to"] == expected_target
@@ -523,24 +441,18 @@ class TestEscalationChain:
         escalation_chain = ("supervisor", "manager", "executive")
 
         # Set escalation level to max
-        empty_graph.add(
-            (workflow, YAWL_EXCEPTION.escalationLevel, Literal(len(escalation_chain)))
-        )
+        empty_graph.add((workflow, YAWL_EXCEPTION.escalationLevel, Literal(len(escalation_chain))))
 
         cf = CaseFailure(escalation_chain=escalation_chain)
 
-        result = cf.on_case_failure(
-            empty_graph, workflow, RuntimeError("Unrecoverable")
-        )
+        result = cf.on_case_failure(empty_graph, workflow, RuntimeError("Unrecoverable"))
 
         assert result.action_taken == "abort"
         assert result.handled is False
         assert result.recovery_data["escalation_exhausted"] is True
 
         # Verify workflow aborted
-        aborted = list(
-            empty_graph.triples((workflow, YAWL.status, Literal("aborted")))
-        )
+        aborted = list(empty_graph.triples((workflow, YAWL.status, Literal("aborted"))))
         assert len(aborted) == 1
 
     def test_escalation_without_chain_aborts(self, empty_graph: Graph) -> None:
@@ -550,9 +462,7 @@ class TestEscalationChain:
 
         cf = CaseFailure(escalation_chain=())
 
-        result = cf.on_case_failure(
-            empty_graph, workflow, RuntimeError("No escalation")
-        )
+        result = cf.on_case_failure(empty_graph, workflow, RuntimeError("No escalation"))
 
         assert result.action_taken == "abort"
         assert result.handled is False
@@ -569,15 +479,11 @@ class TestEscalationChain:
         after = time.time()
 
         # Verify escalation metadata
-        escalated_to = list(
-            empty_graph.triples((workflow, YAWL_EXCEPTION.escalatedTo, None))
-        )
+        escalated_to = list(empty_graph.triples((workflow, YAWL_EXCEPTION.escalatedTo, None)))
         assert len(escalated_to) == 1
         assert str(escalated_to[0][2]) == "team-lead"
 
-        escalated_at = list(
-            empty_graph.triples((workflow, YAWL_EXCEPTION.escalatedAt, None))
-        )
+        escalated_at = list(empty_graph.triples((workflow, YAWL_EXCEPTION.escalatedAt, None)))
         assert len(escalated_at) == 1
         timestamp = float(str(escalated_at[0][2]))
         assert before <= timestamp <= after
@@ -591,9 +497,7 @@ class TestEscalationChain:
 class TestGracefulDegradation:
     """Tests for graceful degradation patterns."""
 
-    def test_non_critical_failure_continues_with_defaults(
-        self, empty_graph: Graph
-    ) -> None:
+    def test_non_critical_failure_continues_with_defaults(self, empty_graph: Graph) -> None:
         """Non-critical failure → continue with defaults."""
         task = URIRef("urn:task:send_notification")
         empty_graph.add((task, YAWL.status, Literal("active")))
@@ -601,30 +505,22 @@ class TestGracefulDegradation:
         # Non-critical task with immediate retry
         wif = WorkItemFailure(retry_policy="immediate", max_retries=1)
 
-        result = wif.on_failure(
-            empty_graph, task, ConnectionError("Notification service down")
-        )
+        result = wif.on_failure(empty_graph, task, ConnectionError("Notification service down"))
 
         # Should retry once, then continue
         assert result.action_taken == "retry"
         assert result.handled is True
 
-    def test_critical_failure_aborts_and_compensates(
-        self, empty_graph: Graph
-    ) -> None:
+    def test_critical_failure_aborts_and_compensates(self, empty_graph: Graph) -> None:
         """Critical failure → abort and compensate."""
         task = URIRef("urn:task:commit_transaction")
         empty_graph.add((task, YAWL.status, Literal("active")))
         compensation_task = "urn:task:rollback_transaction"
 
         # Critical task with no retry, immediate compensation
-        wif = WorkItemFailure(
-            retry_policy="none", max_retries=0, compensation_task=compensation_task
-        )
+        wif = WorkItemFailure(retry_policy="none", max_retries=0, compensation_task=compensation_task)
 
-        result = wif.on_failure(
-            empty_graph, task, RuntimeError("Transaction commit failed")
-        )
+        result = wif.on_failure(empty_graph, task, RuntimeError("Transaction commit failed"))
 
         assert result.action_taken == "compensate"
         assert result.handled is True
@@ -639,9 +535,7 @@ class TestGracefulDegradation:
 
         sf = ServiceFailure(circuit_breaker_threshold=1, fallback_service=fallback)
 
-        result = sf.on_service_failure(
-            empty_graph, primary, ConnectionError("Primary down")
-        )
+        result = sf.on_service_failure(empty_graph, primary, ConnectionError("Primary down"))
 
         assert result.action_taken == "fallback"
         assert result.handled is True
@@ -656,18 +550,14 @@ class TestGracefulDegradation:
 class TestExceptionHandlingIntegration:
     """Integration tests for exception handling patterns."""
 
-    def test_full_exception_workflow_with_retry_then_compensation(
-        self, empty_graph: Graph
-    ) -> None:
+    def test_full_exception_workflow_with_retry_then_compensation(self, empty_graph: Graph) -> None:
         """Full workflow: Retry 3x → Compensation → Success."""
         task = URIRef("urn:task:process_order")
         compensation_task = "urn:task:cancel_order"
         empty_graph.add((task, YAWL.status, Literal("active")))
         empty_graph.add((task, YAWL_EXCEPTION.retryCount, Literal(0)))
 
-        wif = WorkItemFailure(
-            retry_policy="exponential", max_retries=3, compensation_task=compensation_task
-        )
+        wif = WorkItemFailure(retry_policy="exponential", max_retries=3, compensation_task=compensation_task)
 
         # Retry 1, 2, 3
         for i in range(3):
@@ -688,9 +578,7 @@ class TestExceptionHandlingIntegration:
         assert result.action_taken == "compensate"
         assert result.recovery_data["compensation_task"] == compensation_task
 
-    def test_circuit_breaker_with_fallback_recovery(
-        self, empty_graph: Graph
-    ) -> None:
+    def test_circuit_breaker_with_fallback_recovery(self, empty_graph: Graph) -> None:
         """Circuit breaker opens → fallback → circuit recovers."""
         primary = URIRef("urn:service:primary_api")
         fallback = "urn:service:backup_api"
@@ -706,15 +594,11 @@ class TestExceptionHandlingIntegration:
             sf.on_service_failure(empty_graph, primary, ConnectionError("Timeout"))
 
         # Circuit should be open
-        circuit_state = list(
-            empty_graph.triples((primary, YAWL_EXCEPTION.circuitState, Literal("open")))
-        )
+        circuit_state = list(empty_graph.triples((primary, YAWL_EXCEPTION.circuitState, Literal("open"))))
         assert len(circuit_state) == 1
 
         # Use fallback
-        result = sf.on_service_failure(
-            empty_graph, primary, ConnectionError("Still down")
-        )
+        result = sf.on_service_failure(empty_graph, primary, ConnectionError("Still down"))
 
         assert result.action_taken == "fallback"
         assert result.recovery_data["fallback_service"] == fallback
@@ -732,9 +616,7 @@ class TestExceptionHandlingIntegration:
 
         # Escalate workflow failure
         cf = CaseFailure(escalation_chain=("supervisor", "manager"))
-        result = cf.on_case_failure(
-            empty_graph, workflow, RuntimeError("Critical error")
-        )
+        result = cf.on_case_failure(empty_graph, workflow, RuntimeError("Critical error"))
 
         assert result.action_taken == "escalate"
         assert result.recovery_data["escalated_to"] == "supervisor"
@@ -769,9 +651,7 @@ class TestExceptionHandlingPerformance:
         elapsed_ms = (time.perf_counter() - start) * 1000
 
         assert result.action_taken == "retry"
-        assert elapsed_ms < P99_TARGET_MS, (
-            f"Retry took {elapsed_ms:.2f}ms, target <{P99_TARGET_MS}ms"
-        )
+        assert elapsed_ms < P99_TARGET_MS, f"Retry took {elapsed_ms:.2f}ms, target <{P99_TARGET_MS}ms"
 
     def test_circuit_breaker_performance_p99(self, empty_graph: Graph) -> None:
         """Circuit breaker check completes within p99 target (<100ms)."""
@@ -782,15 +662,11 @@ class TestExceptionHandlingPerformance:
         sf = ServiceFailure(circuit_breaker_threshold=5)
 
         start = time.perf_counter()
-        result = sf.on_service_failure(
-            empty_graph, service, ConnectionError("Performance test")
-        )
+        result = sf.on_service_failure(empty_graph, service, ConnectionError("Performance test"))
         elapsed_ms = (time.perf_counter() - start) * 1000
 
         assert result.action_taken == "retry"
-        assert elapsed_ms < P99_TARGET_MS, (
-            f"Circuit breaker took {elapsed_ms:.2f}ms, target <{P99_TARGET_MS}ms"
-        )
+        assert elapsed_ms < P99_TARGET_MS, f"Circuit breaker took {elapsed_ms:.2f}ms, target <{P99_TARGET_MS}ms"
 
     def test_compensation_performance_p99(self, empty_graph: Graph) -> None:
         """Compensation operation completes within p99 target (<100ms)."""
@@ -806,9 +682,7 @@ class TestExceptionHandlingPerformance:
         elapsed_ms = (time.perf_counter() - start) * 1000
 
         assert result.committed is True
-        assert elapsed_ms < P99_TARGET_MS, (
-            f"Compensation took {elapsed_ms:.2f}ms, target <{P99_TARGET_MS}ms"
-        )
+        assert elapsed_ms < P99_TARGET_MS, f"Compensation took {elapsed_ms:.2f}ms, target <{P99_TARGET_MS}ms"
 
     def test_escalation_performance_p99(self, empty_graph: Graph) -> None:
         """Escalation operation completes within p99 target (<100ms)."""
@@ -818,12 +692,8 @@ class TestExceptionHandlingPerformance:
         cf = CaseFailure(escalation_chain=("supervisor", "manager", "executive"))
 
         start = time.perf_counter()
-        result = cf.on_case_failure(
-            empty_graph, workflow, RuntimeError("Performance test")
-        )
+        result = cf.on_case_failure(empty_graph, workflow, RuntimeError("Performance test"))
         elapsed_ms = (time.perf_counter() - start) * 1000
 
         assert result.action_taken == "escalate"
-        assert elapsed_ms < P99_TARGET_MS, (
-            f"Escalation took {elapsed_ms:.2f}ms, target <{P99_TARGET_MS}ms"
-        )
+        assert elapsed_ms < P99_TARGET_MS, f"Escalation took {elapsed_ms:.2f}ms, target <{P99_TARGET_MS}ms"

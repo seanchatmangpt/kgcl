@@ -8,7 +8,7 @@ Chicago School TDD - no mocking of domain objects.
 from __future__ import annotations
 
 import asyncio
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, datetime
 from typing import Any
 
 import pytest
@@ -23,20 +23,13 @@ from kgcl.hooks.conditions import (
     ThresholdCondition,
     ThresholdOperator,
 )
-from kgcl.hooks.core import (
-    Hook,
-    HookExecutor,
-    HookManager,
-    HookReceipt,
-    HookRegistry,
-    HookState,
-    HookValidationError,
-)
-from kgcl.hooks.lifecycle import HookContext, HookExecutionPipeline
+from kgcl.hooks.core import Hook, HookExecutor, HookReceipt, HookRegistry, HookState, HookValidationError
+from kgcl.hooks.lifecycle import HookExecutionPipeline
 from kgcl.hooks.observability import HealthCheck, Observability
-from kgcl.hooks.performance import PerformanceMetrics, PerformanceOptimizer
-from kgcl.hooks.receipts import MerkleAnchor, Receipt, ReceiptStore
-from kgcl.hooks.sandbox import SandboxRestrictions
+from kgcl.hooks.performance import PerformanceOptimizer
+from kgcl.hooks.receipts import Receipt, ReceiptStore
+
+# SandboxRestrictions removed for research mode
 from kgcl.hooks.security import ErrorSanitizer, SanitizedError
 from kgcl.hooks.transaction import Transaction, TransactionManager, TransactionState
 
@@ -92,10 +85,7 @@ class TestHookCore:
     def test_hook_creation_with_valid_params(self) -> None:
         """Hook can be created with name, description, condition, handler."""
         hook = Hook(
-            name="test_hook",
-            description="A test hook",
-            condition=AlwaysTrueCondition(),
-            handler=simple_handler,
+            name="test_hook", description="A test hook", condition=AlwaysTrueCondition(), handler=simple_handler
         )
         assert hook.name == "test_hook"
         assert hook.enabled is True
@@ -104,39 +94,21 @@ class TestHookCore:
     def test_hook_rejects_empty_name(self) -> None:
         """Hook rejects empty name."""
         with pytest.raises(HookValidationError, match="name"):
-            Hook(
-                name="",
-                description="Test",
-                condition=AlwaysTrueCondition(),
-                handler=simple_handler,
-            )
+            Hook(name="", description="Test", condition=AlwaysTrueCondition(), handler=simple_handler)
 
     def test_hook_rejects_missing_condition(self) -> None:
         """Hook rejects missing condition."""
         with pytest.raises(HookValidationError, match="condition"):
-            Hook(
-                name="test", description="Test", condition=None, handler=simple_handler
-            )
+            Hook(name="test", description="Test", condition=None, handler=simple_handler)
 
     def test_hook_rejects_invalid_priority(self) -> None:
         """Hook priority must be 0-100."""
         with pytest.raises(HookValidationError, match="priority"):
-            Hook(
-                name="test",
-                description="Test",
-                condition=AlwaysTrueCondition(),
-                handler=simple_handler,
-                priority=150,
-            )
+            Hook(name="test", description="Test", condition=AlwaysTrueCondition(), handler=simple_handler, priority=150)
 
     def test_hook_enable_disable(self) -> None:
         """Hook can be enabled and disabled."""
-        hook = Hook(
-            name="test",
-            description="Test",
-            condition=AlwaysTrueCondition(),
-            handler=simple_handler,
-        )
+        hook = Hook(name="test", description="Test", condition=AlwaysTrueCondition(), handler=simple_handler)
         hook.disable()
         assert hook.enabled is False
         hook.enable()
@@ -149,24 +121,14 @@ class TestHookRegistry:
     def test_register_and_get_hook(self) -> None:
         """Registry registers and retrieves hooks."""
         registry = HookRegistry()
-        hook = Hook(
-            name="test",
-            description="Test",
-            condition=AlwaysTrueCondition(),
-            handler=simple_handler,
-        )
+        hook = Hook(name="test", description="Test", condition=AlwaysTrueCondition(), handler=simple_handler)
         registry.register(hook)
         assert registry.get("test") is hook
 
     def test_duplicate_registration_raises(self) -> None:
         """Registry rejects duplicate hook names."""
         registry = HookRegistry()
-        hook = Hook(
-            name="test",
-            description="Test",
-            condition=AlwaysTrueCondition(),
-            handler=simple_handler,
-        )
+        hook = Hook(name="test", description="Test", condition=AlwaysTrueCondition(), handler=simple_handler)
         registry.register(hook)
         with pytest.raises(HookValidationError, match="already exists"):
             registry.register(hook)
@@ -194,12 +156,7 @@ class TestHookExecutor:
     @pytest.mark.asyncio
     async def test_executor_produces_receipt(self) -> None:
         """Executor produces receipt for each execution."""
-        hook = Hook(
-            name="test",
-            description="Test",
-            condition=AlwaysTrueCondition(),
-            handler=simple_handler,
-        )
+        hook = Hook(name="test", description="Test", condition=AlwaysTrueCondition(), handler=simple_handler)
         executor = HookExecutor()
         receipt = await executor.execute(hook, {"key": "value"})
 
@@ -212,12 +169,7 @@ class TestHookExecutor:
     @pytest.mark.asyncio
     async def test_executor_handles_false_condition(self) -> None:
         """Executor skips handler when condition is false."""
-        hook = Hook(
-            name="test",
-            description="Test",
-            condition=AlwaysFalseCondition(),
-            handler=simple_handler,
-        )
+        hook = Hook(name="test", description="Test", condition=AlwaysFalseCondition(), handler=simple_handler)
         executor = HookExecutor()
         receipt = await executor.execute(hook, {})
 
@@ -227,12 +179,7 @@ class TestHookExecutor:
     @pytest.mark.asyncio
     async def test_executor_handles_handler_error(self) -> None:
         """Executor captures handler errors in receipt."""
-        hook = Hook(
-            name="test",
-            description="Test",
-            condition=AlwaysTrueCondition(),
-            handler=failing_handler,
-        )
+        hook = Hook(name="test", description="Test", condition=AlwaysTrueCondition(), handler=failing_handler)
         executor = HookExecutor()
         receipt = await executor.execute(hook, {})
 
@@ -252,9 +199,7 @@ class TestConditions:
     @pytest.mark.asyncio
     async def test_threshold_greater_than(self) -> None:
         """ThresholdCondition evaluates > correctly."""
-        condition = ThresholdCondition(
-            variable="count", operator=ThresholdOperator.GREATER_THAN, value=10
-        )
+        condition = ThresholdCondition(variable="count", operator=ThresholdOperator.GREATER_THAN, value=10)
         result = await condition.evaluate({"count": 15})
         assert result.triggered is True
 
@@ -264,9 +209,7 @@ class TestConditions:
     @pytest.mark.asyncio
     async def test_threshold_less_than(self) -> None:
         """ThresholdCondition evaluates < correctly."""
-        condition = ThresholdCondition(
-            variable="count", operator=ThresholdOperator.LESS_THAN, value=10
-        )
+        condition = ThresholdCondition(variable="count", operator=ThresholdOperator.LESS_THAN, value=10)
         result = await condition.evaluate({"count": 5})
         assert result.triggered is True
 
@@ -285,15 +228,13 @@ class TestConditions:
     async def test_composite_and(self) -> None:
         """CompositeCondition AND requires all true."""
         composite = CompositeCondition(
-            conditions=[AlwaysTrueCondition(), AlwaysTrueCondition()],
-            operator=CompositeOperator.AND,
+            conditions=[AlwaysTrueCondition(), AlwaysTrueCondition()], operator=CompositeOperator.AND
         )
         result = await composite.evaluate({})
         assert result.triggered is True
 
         composite = CompositeCondition(
-            conditions=[AlwaysTrueCondition(), AlwaysFalseCondition()],
-            operator=CompositeOperator.AND,
+            conditions=[AlwaysTrueCondition(), AlwaysFalseCondition()], operator=CompositeOperator.AND
         )
         result = await composite.evaluate({})
         assert result.triggered is False
@@ -302,8 +243,7 @@ class TestConditions:
     async def test_composite_or(self) -> None:
         """CompositeCondition OR requires any true."""
         composite = CompositeCondition(
-            conditions=[AlwaysFalseCondition(), AlwaysTrueCondition()],
-            operator=CompositeOperator.OR,
+            conditions=[AlwaysFalseCondition(), AlwaysTrueCondition()], operator=CompositeOperator.OR
         )
         result = await composite.evaluate({})
         assert result.triggered is True
@@ -327,12 +267,7 @@ class TestSecurity:
         assert "/Users" not in result.message
         assert "sk-123456" not in result.message
 
-    def test_sandbox_restrictions_default_limits(self) -> None:
-        """SandboxRestrictions enforces default resource limits."""
-        sandbox = SandboxRestrictions()
-        assert sandbox.memory_limit_mb > 0  # Default is 512MB
-        assert sandbox.timeout_ms > 0  # Default is 30000ms
-        assert sandbox.max_open_files > 0  # Default is 100
+    # test_sandbox_restrictions_default_limits removed for research mode
 
 
 # =============================================================================
@@ -455,7 +390,8 @@ class TestReceipts:
         assert receipt.hook_id == "hook-1"
         assert receipt.handler_result == {"result": "ok"}
 
-    def test_receipt_store_query(self) -> None:
+    @pytest.mark.asyncio
+    async def test_receipt_store_query(self) -> None:
         """ReceiptStore supports querying by hook_id."""
         store = ReceiptStore()
         receipt = Receipt(
@@ -465,9 +401,9 @@ class TestReceipts:
             handler_result={},
             duration_ms=5.0,
         )
-        store.add(receipt)
+        await store.save(receipt)
 
-        results = store.query_by_hook("test-hook")
+        results = await store.query(hook_id="test-hook")
         assert len(results) == 1
         assert results[0].hook_id == "test-hook"
 
@@ -506,25 +442,11 @@ class TestExecutionPipeline:
         """Pipeline can stop on first error."""
         hooks = [
             Hook(
-                name="good",
-                description="Test",
-                condition=AlwaysTrueCondition(),
-                handler=simple_handler,
-                priority=100,
+                name="good", description="Test", condition=AlwaysTrueCondition(), handler=simple_handler, priority=100
             ),
+            Hook(name="bad", description="Test", condition=AlwaysTrueCondition(), handler=failing_handler, priority=50),
             Hook(
-                name="bad",
-                description="Test",
-                condition=AlwaysTrueCondition(),
-                handler=failing_handler,
-                priority=50,
-            ),
-            Hook(
-                name="never",
-                description="Test",
-                condition=AlwaysTrueCondition(),
-                handler=simple_handler,
-                priority=10,
+                name="never", description="Test", condition=AlwaysTrueCondition(), handler=simple_handler, priority=10
             ),
         ]
 

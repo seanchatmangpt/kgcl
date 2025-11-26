@@ -12,7 +12,6 @@ import click
 from kgcl.cli.bootstrap import build_cli_app
 from kgcl.cli.core.errors import CliCommandError
 from kgcl.cli.core.renderers import OutputFormat
-from kgcl.cli.core.services import DailyBriefRequest
 from kgcl.cli.daily_brief_pipeline import (
     DailyBriefEventBatch,
     DailyBriefFeatureBuilder,
@@ -25,9 +24,7 @@ from kgcl.cli.daily_brief_pipeline import (
 cli_app = build_cli_app()
 
 
-def _ingest_events(
-    start_date: datetime, end_date: datetime, verbose: bool
-) -> DailyBriefEventBatch:
+def _ingest_events(start_date: datetime, end_date: datetime, verbose: bool) -> DailyBriefEventBatch:
     """Load calendar/app/browser events for the requested window."""
     loader = EventLogLoader()
     batch = loader.load(start_date, end_date)
@@ -40,9 +37,7 @@ def _ingest_events(
     return batch
 
 
-def _materialize_features(
-    batch: DailyBriefEventBatch, verbose: bool
-) -> DailyBriefFeatureSet:
+def _materialize_features(batch: DailyBriefEventBatch, verbose: bool) -> DailyBriefFeatureSet:
     """Materialize features used to drive the DSPy generation."""
     builder = DailyBriefFeatureBuilder()
     feature_set = builder.build(batch)
@@ -54,25 +49,17 @@ def _materialize_features(
     return feature_set
 
 
-def _generate_brief(
-    feature_set: DailyBriefFeatureSet, model: str, verbose: bool
-) -> DailyBriefResult:
+def _generate_brief(feature_set: DailyBriefFeatureSet, model: str, verbose: bool) -> DailyBriefResult:
     """Generate the final brief output using DSPy."""
     brief = generate_daily_brief(feature_set, model=model)
     if verbose:
-        click.echo(
-            f"Generated daily brief with model={model} (llm_enabled={brief.metadata['llm_enabled']})"
-        )
+        click.echo(f"Generated daily brief with model={model} (llm_enabled={brief.metadata['llm_enabled']})")
     return brief
 
 
-def _select_payload_for_format(
-    brief: DailyBriefResult, output_format: OutputFormat
-) -> Any:
+def _select_payload_for_format(brief: DailyBriefResult, output_format: OutputFormat) -> Any:
     """Select the rendered payload for the requested output format."""
-    fmt_value = (
-        output_format.value if hasattr(output_format, "value") else str(output_format)
-    )
+    fmt_value = output_format.value if hasattr(output_format, "value") else str(output_format)
     if fmt_value == OutputFormat.MARKDOWN.value:
         return brief.to_markdown()
     if fmt_value == OutputFormat.TABLE.value:
@@ -87,12 +74,8 @@ def _select_payload_for_format(
     default=None,
     help="Target date for the brief (defaults to today)",
 )
-@click.option(
-    "--lookback", type=int, default=1, help="Number of days to look back (default: 1)"
-)
-@click.option(
-    "--output", "-o", type=click.Path(path_type=Path), help="Output file path"
-)
+@click.option("--lookback", type=int, default=1, help="Number of days to look back (default: 1)")
+@click.option("--output", "-o", type=click.Path(path_type=Path), help="Output file path")
 @click.option("--clipboard", "-c", is_flag=True, help="Copy result to clipboard")
 @click.option(
     "--format",
@@ -102,9 +85,7 @@ def _select_payload_for_format(
     default=OutputFormat.MARKDOWN.value,
     help="Output format",
 )
-@click.option(
-    "--model", type=str, default="llama3.2", help="Ollama model to use for generation"
-)
+@click.option("--model", type=str, default="llama3.2", help="Ollama model to use for generation")
 @click.option("--verbose", "-v", is_flag=True, help="Verbose output")
 def daily_brief(
     date: datetime | None,
@@ -241,9 +222,7 @@ def daily_brief(
     weekly_retro : Generate weekly retrospective from aggregated features
     feature_list : List available features from the knowledge graph
     """
-    start_dt = (date or datetime.now(UTC).replace(tzinfo=None)) - timedelta(
-        days=lookback
-    )
+    start_dt = (date or datetime.now(UTC).replace(tzinfo=None)) - timedelta(days=lookback)
     end_dt = date or datetime.now(UTC).replace(tzinfo=None)
 
     def _execute(context):
@@ -252,9 +231,7 @@ def daily_brief(
         brief_result = _generate_brief(feature_set, model, verbose)
         fmt = OutputFormat(output_format)
         payload = _select_payload_for_format(brief_result, fmt)
-        context.renderer.render(
-            payload, fmt=fmt, clipboard=clipboard, output_file=output
-        )
+        context.renderer.render(payload, fmt=fmt, clipboard=clipboard, output_file=output)
         return brief_result.to_dict()
 
     result, _receipt = cli_app.run("daily-brief", _execute)

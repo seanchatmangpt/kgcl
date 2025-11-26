@@ -19,9 +19,7 @@ cli_app = build_cli_app()
 @click.option("--search", type=str, help="Search term for feature name")
 @click.option("--templates-only", is_flag=True, help="Show only feature templates")
 @click.option("--instances-only", is_flag=True, help="Show only feature instances")
-@click.option(
-    "--output", "-o", type=click.Path(path_type=Path), help="Output file path"
-)
+@click.option("--output", "-o", type=click.Path(path_type=Path), help="Output file path")
 @click.option(
     "--format",
     "-f",
@@ -31,10 +29,7 @@ cli_app = build_cli_app()
     help="Output format",
 )
 @click.option(
-    "--sort-by",
-    type=click.Choice(["name", "updated", "category", "source"]),
-    default="name",
-    help="Sort by field",
+    "--sort-by", type=click.Choice(["name", "updated", "category", "source"]), default="name", help="Sort by field"
 )
 @click.option("--verbose", "-v", is_flag=True, help="Verbose output with full details")
 def feature_list(
@@ -249,17 +244,11 @@ def feature_list(
 def _build_sparql(filters: dict, sort_by: str) -> str:
     conditions = []
     if filters.get("category"):
-        conditions.append(
-            f'FILTER(CONTAINS(LCASE(?category), "{filters["category"].lower()}"))'
-        )
+        conditions.append(f'FILTER(CONTAINS(LCASE(?category), "{filters["category"].lower()}"))')
     if filters.get("source"):
-        conditions.append(
-            f'FILTER(CONTAINS(LCASE(?source), "{filters["source"].lower()}"))'
-        )
+        conditions.append(f'FILTER(CONTAINS(LCASE(?source), "{filters["source"].lower()}"))')
     if filters.get("search"):
-        conditions.append(
-            f'FILTER(CONTAINS(LCASE(?name), "{filters["search"].lower()}"))'
-        )
+        conditions.append(f'FILTER(CONTAINS(LCASE(?name), "{filters["search"].lower()}"))')
     if filters.get("templates_only"):
         conditions.append('FILTER(?type = "template")')
     if filters.get("instances_only"):
@@ -318,20 +307,11 @@ def _fallback_features(filters: dict, sort_by: str) -> list[dict[str, str]]:
     """Return synthetic feature rows when local SPARQL data is unavailable."""
 
     def _matches(row: dict[str, str]) -> bool:
-        if (
-            filters.get("category")
-            and filters["category"].lower() not in row["category"].lower()
-        ):
+        if filters.get("category") and filters["category"].lower() not in row["category"].lower():
             return False
-        if (
-            filters.get("source")
-            and filters["source"].lower() not in row["source"].lower()
-        ):
+        if filters.get("source") and filters["source"].lower() not in row["source"].lower():
             return False
-        if (
-            filters.get("search")
-            and filters["search"].lower() not in row["name"].lower()
-        ):
+        if filters.get("search") and filters["search"].lower() not in row["name"].lower():
             return False
         if filters.get("templates_only") and row["type"] != "template":
             return False

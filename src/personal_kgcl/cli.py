@@ -13,8 +13,6 @@ From: /Users/sac/dev/kgcl/.kgc/cli.ttl
 """
 
 import sys
-from pathlib import Path
-from typing import List, Optional
 
 import typer
 
@@ -52,15 +50,9 @@ app = typer.Typer(
 
 @app.command(name="generate-agenda")
 def generate_agenda(
-    day: str = typer.Option(
-        None, "--day", help="Which day to generate (today, tomorrow, this-week)"
-    ),
-    verbose: bool = typer.Option(
-        False, "--verbose", "-v", help="Enable verbose output"
-    ),
-    dry_run: bool = typer.Option(
-        False, "--dry-run", help="Simulate without making changes"
-    ),
+    day: str = typer.Option(None, "--day", help="Which day to generate (today, tomorrow, this-week)"),
+    verbose: bool = typer.Option(False, "--verbose", "-v", help="Enable verbose output"),
+    dry_run: bool = typer.Option(False, "--dry-run", help="Simulate without making changes"),
 ):
     """
     Render agenda projection for a day or week.
@@ -95,12 +87,8 @@ def generate_agenda(
 
 @app.command(name="generate-cli")
 def generate_cli(
-    verbose: bool = typer.Option(
-        False, "--verbose", "-v", help="Enable verbose output"
-    ),
-    dry_run: bool = typer.Option(
-        False, "--dry-run", help="Simulate without making changes"
-    ),
+    verbose: bool = typer.Option(False, "--verbose", "-v", help="Enable verbose output"),
+    dry_run: bool = typer.Option(False, "--dry-run", help="Simulate without making changes"),
 ):
     """
     Regenerate Typer CLI from .kgc/cli.ttl + Jinja template.
@@ -136,24 +124,14 @@ def generate_cli(
 @app.command(name="scan-apple")
 def scan_apple(
     source: str | None = typer.Option(
-        None,
-        "--source",
-        help="Subset of sources to ingest (calendars, reminders, mail, files)",
+        None, "--source", help="Subset of sources to ingest (calendars, reminders, mail, files)"
     ),
-    input: str | None = typer.Option(
-        None, "--input", help="Path to JSON payload exported from PyObjC ingest bridge"
-    ),
+    input: str | None = typer.Option(None, "--input", help="Path to JSON payload exported from PyObjC ingest bridge"),
     output: str | None = typer.Option(
-        None,
-        "--output",
-        help="Override output Turtle path (default from apple.ingest.ttl)",
+        None, "--output", help="Override output Turtle path (default from apple.ingest.ttl)"
     ),
-    verbose: bool = typer.Option(
-        False, "--verbose", "-v", help="Enable verbose output"
-    ),
-    dry_run: bool = typer.Option(
-        False, "--dry-run", help="Simulate without making changes"
-    ),
+    verbose: bool = typer.Option(False, "--verbose", "-v", help="Enable verbose output"),
+    dry_run: bool = typer.Option(False, "--dry-run", help="Simulate without making changes"),
 ):
     """
     Ingest Calendar/Reminders/Mail/File data via PyObjC or structured JSON.
@@ -162,13 +140,7 @@ def scan_apple(
     """
     try:
         # Build kwargs from provided args
-        kwargs = {
-            "source": source,
-            "input": input,
-            "output": output,
-            "verbose": verbose,
-            "dry_run": dry_run,
-        }
+        kwargs = {"source": source, "input": input, "output": output, "verbose": verbose, "dry_run": dry_run}
 
         # Remove None values
         kwargs = {k: v for k, v in kwargs.items() if v is not None}
@@ -194,15 +166,9 @@ def scan_apple(
 
 @app.command(name="validate-data")
 def validate_data(
-    input: str | None = typer.Option(
-        None, "--input", help="Path to Turtle/N3 graph to validate"
-    ),
-    verbose: bool = typer.Option(
-        False, "--verbose", "-v", help="Enable verbose output"
-    ),
-    dry_run: bool = typer.Option(
-        False, "--dry-run", help="Simulate without making changes"
-    ),
+    input: str | None = typer.Option(None, "--input", help="Path to Turtle/N3 graph to validate"),
+    verbose: bool = typer.Option(False, "--verbose", "-v", help="Enable verbose output"),
+    dry_run: bool = typer.Option(False, "--dry-run", help="Simulate without making changes"),
 ):
     """
     Run SHACL/ASK validation for ingested RDF.
@@ -242,10 +208,7 @@ def validate_data(
 
 @app.callback(invoke_without_command=True)
 @app.callback()
-def main(
-    ctx: typer.Context,
-    version: bool = typer.Option(False, "--version", help="Show version"),
-):
+def main(ctx: typer.Context, version: bool = typer.Option(False, "--version", help="Show version")):
     """
     KGC Technician Console (macOS/iOS personal fabric).
 

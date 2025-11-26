@@ -245,9 +245,7 @@ class OntologyParser:
         """
         # Extract basic info
         name = str(shape_uri).split("/")[-1].split("#")[-1]
-        description = self._get_description(
-            graph, shape_uri
-        ) or self._humanize_identifier(name)
+        description = self._get_description(graph, shape_uri) or self._humanize_identifier(name)
         target_class = graph.value(shape_uri, SH.targetClass)
         closed = self._get_boolean(graph, shape_uri, SH.closed)
 
@@ -276,9 +274,7 @@ class OntologyParser:
 
         return shape
 
-    def _parse_property_shape(
-        self, graph: Graph, prop_uri: URIRef
-    ) -> PropertyShape | None:
+    def _parse_property_shape(self, graph: Graph, prop_uri: URIRef) -> PropertyShape | None:
         """Parse a SHACL PropertyShape.
 
         Args:
@@ -301,9 +297,7 @@ class OntologyParser:
         node_kind = graph.value(prop_uri, SH.nodeKind)
         min_count = self._get_integer(graph, prop_uri, SH.minCount, default=0)
         max_count = self._get_integer(graph, prop_uri, SH.maxCount)
-        description = self._get_description(
-            graph, prop_uri
-        ) or self._humanize_identifier(name)
+        description = self._get_description(graph, prop_uri) or self._humanize_identifier(name)
         field_role = self._get_literal(graph, prop_uri, UNRDF.fieldType)
         default_value = self._get_literal(graph, prop_uri, SH.defaultValue)
         pattern = self._get_literal(graph, prop_uri, SH.pattern)
@@ -328,9 +322,7 @@ class OntologyParser:
             in_values=in_values,
         )
 
-    def _get_literal(
-        self, graph: Graph, subject: URIRef, predicate: URIRef
-    ) -> str | None:
+    def _get_literal(self, graph: Graph, subject: URIRef, predicate: URIRef) -> str | None:
         """Get a literal value from the graph."""
         value = graph.value(subject, predicate)
         return str(value) if value else None
@@ -343,13 +335,7 @@ class OntologyParser:
                 return text
         return None
 
-    def _get_integer(
-        self,
-        graph: Graph,
-        subject: URIRef,
-        predicate: URIRef,
-        default: int | None = None,
-    ) -> int | None:
+    def _get_integer(self, graph: Graph, subject: URIRef, predicate: URIRef, default: int | None = None) -> int | None:
         """Get an integer value from the graph."""
         value = graph.value(subject, predicate)
         if value is None:
@@ -396,7 +382,4 @@ class OntologyParser:
 
     def get_cache_stats(self) -> dict[str, int]:
         """Get cache statistics."""
-        return {
-            "graph_cache_size": len(self._graph_cache),
-            "shape_cache_size": len(self._shape_cache),
-        }
+        return {"graph_cache_size": len(self._graph_cache), "shape_cache_size": len(self._shape_cache)}

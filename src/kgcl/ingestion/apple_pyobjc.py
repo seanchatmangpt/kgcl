@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import json
 from dataclasses import dataclass
-from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -55,8 +54,7 @@ class AppleIngestor:
             return json.loads(payload_path.read_text(encoding="utf-8"))
         if not HAVE_PYOBJC:
             raise RuntimeError(
-                "PyObjC not available and no payload provided. "
-                "Run on macOS with PyObjC or supply --input JSON."
+                "PyObjC not available and no payload provided. Run on macOS with PyObjC or supply --input JSON."
             )
         # Return empty data when PyObjC is available but no actual data collected yet.
         # Real implementation would use EventKit/Mail APIs via PyObjC.
@@ -76,18 +74,14 @@ class AppleIngestor:
             self._graph.add((subject, RDF.type, APPLE.Reminder))
             self._graph.add((subject, SCHEMA.name, Literal(reminder["title"])))
             self._graph.add((subject, APPLE.hasDueTime, Literal(reminder.get("due"))))
-            self._graph.add(
-                (subject, APPLE.hasStatus, Literal(reminder.get("status", "unknown")))
-            )
+            self._graph.add((subject, APPLE.hasStatus, Literal(reminder.get("status", "unknown"))))
 
         for message in records.get("mail", []):
             subject = URIRef(message["uri"])
             self._graph.add((subject, RDF.type, APPLE.MailMessage))
             self._graph.add((subject, SCHEMA.name, Literal(message["subject"])))
             self._graph.add((subject, SCHEMA.author, Literal(message["from"])))
-            self._graph.add(
-                (subject, SCHEMA.dateReceived, Literal(message.get("received")))
-            )
+            self._graph.add((subject, SCHEMA.dateReceived, Literal(message.get("received"))))
 
         for artifact in records.get("files", []):
             subject = URIRef(artifact["uri"])
@@ -107,13 +101,9 @@ class AppleIngestor:
 
             shapes_graph = Graph()
             shapes_graph.parse(shapes_path, format="turtle")
-            conforms, _, results_text = validate(
-                data_graph=self._graph, shacl_graph=shapes_graph, inference="rdfs"
-            )
+            conforms, _, results_text = validate(data_graph=self._graph, shacl_graph=shapes_graph, inference="rdfs")
             if not conforms:
-                raise ValueError(
-                    f"Apple ingest failed SHACL validation: {results_text}"
-                )
+                raise ValueError(f"Apple ingest failed SHACL validation: {results_text}")
         except ImportError:
             # Defer validation until pyshacl is available
             return

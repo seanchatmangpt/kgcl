@@ -150,9 +150,7 @@ class PyObjCFrameworkCrawler:
             return False
 
         except Exception as e:
-            logger.error(
-                f"Unexpected error loading framework {framework_name.value}: {e}"
-            )
+            logger.error(f"Unexpected error loading framework {framework_name.value}: {e}")
             return False
 
     def enumerate_classes(self, framework_name: FrameworkName) -> list[str]:
@@ -214,9 +212,7 @@ class PyObjCFrameworkCrawler:
         # No arguments and returns value typically indicates getter
         return bool(":" not in selector and not selector.startswith("set"))
 
-    def enumerate_methods(
-        self, framework_name: FrameworkName, class_name: str
-    ) -> list[CapabilityMethod]:
+    def enumerate_methods(self, framework_name: FrameworkName, class_name: str) -> list[CapabilityMethod]:
         """
         Enumerate methods for a specific class.
 
@@ -256,9 +252,7 @@ class PyObjCFrameworkCrawler:
                     # Check if it's a method
                     is_method = callable(attr)
 
-                    if is_property or (
-                        is_method and self._is_observable_method(attr_name)
-                    ):
+                    if is_property or (is_method and self._is_observable_method(attr_name)):
                         method = CapabilityMethod(
                             selector=attr_name,
                             return_type="unknown",  # Would need objc introspection
@@ -308,9 +302,7 @@ class PyObjCFrameworkCrawler:
             methods = self.enumerate_methods(framework_name, class_name)
 
             if methods:  # Only include classes with discoverable methods
-                capability_class = CapabilityClass(
-                    name=class_name, framework=framework_name.value, methods=methods
-                )
+                capability_class = CapabilityClass(name=class_name, framework=framework_name.value, methods=methods)
                 capabilities.classes.append(capability_class)
 
         logger.info(
@@ -341,10 +333,7 @@ class PyObjCFrameworkCrawler:
             "capability": "macos:Capability",
             "method": "macos:Method",
             "selector": "macos:selector",
-            "discoveredAt": {
-                "@id": "macos:discoveredAt",
-                "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-            },
+            "discoveredAt": {"@id": "macos:discoveredAt", "@type": "http://www.w3.org/2001/XMLSchema#dateTime"},
         }
 
         capabilities_list = []
@@ -393,10 +382,7 @@ class PyObjCFrameworkCrawler:
         return all_capabilities
 
     def export_capabilities(
-        self,
-        capabilities: dict[str, FrameworkCapabilities],
-        output_path: str,
-        format: str = "jsonld",
+        self, capabilities: dict[str, FrameworkCapabilities], output_path: str, format: str = "jsonld"
     ) -> None:
         """
         Export discovered capabilities to file.
@@ -411,9 +397,7 @@ class PyObjCFrameworkCrawler:
                 # Generate JSON-LD for each framework
                 output: dict[str, Any] = {
                     "@context": "https://kgcl.dev/ontology/macos",
-                    "@graph": [
-                        self.generate_jsonld(cap) for cap in capabilities.values()
-                    ],
+                    "@graph": [self.generate_jsonld(cap) for cap in capabilities.values()],
                 }
             else:
                 # Plain JSON export
@@ -439,16 +423,11 @@ def main() -> None:
     all_capabilities = crawler.crawl_all_frameworks()
 
     # Export to JSON-LD
-    crawler.export_capabilities(
-        all_capabilities, "/Users/sac/dev/kgcl/capabilities.jsonld", format="jsonld"
-    )
+    crawler.export_capabilities(all_capabilities, "/Users/sac/dev/kgcl/capabilities.jsonld", format="jsonld")
 
     # Print summary
     total_classes = sum(len(cap.classes) for cap in all_capabilities.values())
-    total_methods = sum(
-        sum(len(cls.methods) for cls in cap.classes)
-        for cap in all_capabilities.values()
-    )
+    total_methods = sum(sum(len(cls.methods) for cls in cap.classes) for cap in all_capabilities.values())
 
     print("\n=== Capability Discovery Summary ===")
     print(f"Frameworks crawled: {len(all_capabilities)}")

@@ -11,12 +11,7 @@ import unittest
 from datetime import UTC, datetime
 from pathlib import Path
 
-from ..collectors.base import (
-    BaseCollector,
-    CollectedEvent,
-    CollectorConfig,
-    CollectorStatus,
-)
+from ..collectors.base import BaseCollector, CollectedEvent, CollectorConfig, CollectorStatus
 
 
 class MockCollector(BaseCollector):
@@ -41,9 +36,7 @@ class TestBaseCollector(unittest.TestCase):
 
     def setUp(self):
         """Set up test fixtures."""
-        self.temp_file = tempfile.NamedTemporaryFile(
-            mode="w", delete=False, suffix=".jsonl"
-        )
+        self.temp_file = tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".jsonl")
         self.temp_path = self.temp_file.name
         self.temp_file.close()
 
@@ -112,17 +105,11 @@ class TestBaseCollector(unittest.TestCase):
     def test_event_buffering(self):
         """Test event buffering."""
         event1 = CollectedEvent(
-            collector_name="test",
-            timestamp=datetime.now(UTC).isoformat(),
-            data={"test": 1},
-            sequence_number=1,
+            collector_name="test", timestamp=datetime.now(UTC).isoformat(), data={"test": 1}, sequence_number=1
         )
 
         event2 = CollectedEvent(
-            collector_name="test",
-            timestamp=datetime.now(UTC).isoformat(),
-            data={"test": 2},
-            sequence_number=2,
+            collector_name="test", timestamp=datetime.now(UTC).isoformat(), data={"test": 2}, sequence_number=2
         )
 
         self.collector._add_to_buffer(event1)
@@ -137,10 +124,7 @@ class TestBaseCollector(unittest.TestCase):
         # Add events to buffer
         for i in range(5):
             event = CollectedEvent(
-                collector_name="test",
-                timestamp=datetime.now(UTC).isoformat(),
-                data={"value": i},
-                sequence_number=i,
+                collector_name="test", timestamp=datetime.now(UTC).isoformat(), data={"value": i}, sequence_number=i
             )
             self.collector._event_buffer.append(event)
 
@@ -210,11 +194,7 @@ class TestCollectorConfig(unittest.TestCase):
     def test_custom_values(self):
         """Test custom configuration values."""
         config = CollectorConfig(
-            name="test",
-            interval_seconds=30.0,
-            batch_size=50,
-            output_path="/tmp/test.jsonl",
-            retry_on_error=False,
+            name="test", interval_seconds=30.0, batch_size=50, output_path="/tmp/test.jsonl", retry_on_error=False
         )
 
         self.assertEqual(config.interval_seconds, 30.0)
@@ -228,9 +208,7 @@ class TestCollectorIntegration(unittest.TestCase):
 
     def setUp(self):
         """Set up test fixtures."""
-        self.temp_file = tempfile.NamedTemporaryFile(
-            mode="w", delete=False, suffix=".jsonl"
-        )
+        self.temp_file = tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".jsonl")
         self.temp_path = self.temp_file.name
         self.temp_file.close()
 

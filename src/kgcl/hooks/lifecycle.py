@@ -120,9 +120,7 @@ class HookExecutionPipeline:
     Manages batch execution, priority ordering, error recovery, and performance tracking.
     """
 
-    def __init__(
-        self, stop_on_error: bool = False, enable_performance_tracking: bool = True
-    ):
+    def __init__(self, stop_on_error: bool = False, enable_performance_tracking: bool = True):
         """
         Initialize execution pipeline.
 
@@ -136,9 +134,7 @@ class HookExecutionPipeline:
         self.stop_on_error = stop_on_error
         self._event_handlers: list[Callable[..., Any]] = []
         self._error_sanitizer = ErrorSanitizer()
-        self._performance_optimizer = (
-            PerformanceOptimizer() if enable_performance_tracking else None
-        )
+        self._performance_optimizer = PerformanceOptimizer() if enable_performance_tracking else None
 
     def on_event(self, handler: Callable[..., Any]) -> None:
         """Register event handler."""
@@ -180,9 +176,7 @@ class HookExecutionPipeline:
                 latency_ms = (end_time - start_time) * 1000
 
                 metric = PerformanceMetrics(
-                    operation=f"hook_execute_{hook.name}",
-                    latency_ms=latency_ms,
-                    success=receipt.error is None,
+                    operation=f"hook_execute_{hook.name}", latency_ms=latency_ms, success=receipt.error is None
                 )
                 self._performance_optimizer.record_metric(metric)
 
@@ -216,9 +210,7 @@ class HookExecutionPipeline:
 
                 perf_metadata = {}
                 if self._performance_optimizer:
-                    stats = self._performance_optimizer.get_stats(
-                        f"hook_execute_{hook.name}"
-                    )
+                    stats = self._performance_optimizer.get_stats(f"hook_execute_{hook.name}")
                     if stats:
                         perf_metadata["performance_stats"] = stats
 
@@ -232,12 +224,7 @@ class HookExecutionPipeline:
                     error=sanitized.message,
                     stack_trace=None,  # Remove stack trace for security
                     input_context=receipt.input_context,
-                    metadata={
-                        **receipt.metadata,
-                        "error_code": sanitized.code,
-                        "sanitized": True,
-                        **perf_metadata,
-                    },
+                    metadata={**receipt.metadata, "error_code": sanitized.code, "sanitized": True, **perf_metadata},
                     receipt_id=receipt.receipt_id,
                 )
 
@@ -248,11 +235,7 @@ class HookExecutionPipeline:
                 end_time = time.perf_counter()
                 latency_ms = (end_time - start_time) * 1000
 
-                metric = PerformanceMetrics(
-                    operation=f"hook_execute_{hook.name}",
-                    latency_ms=latency_ms,
-                    success=False,
-                )
+                metric = PerformanceMetrics(operation=f"hook_execute_{hook.name}", latency_ms=latency_ms, success=False)
                 self._performance_optimizer.record_metric(metric)
 
             # Sanitize unexpected errors
@@ -268,9 +251,7 @@ class HookExecutionPipeline:
                 hook_id=hook.name,
                 timestamp=datetime.now(UTC),
                 actor=getattr(hook, "actor", None),
-                condition_result=ConditionResult(
-                    triggered=False, metadata={"error": sanitized.code}
-                ),
+                condition_result=ConditionResult(triggered=False, metadata={"error": sanitized.code}),
                 handler_result=None,
                 duration_ms=0.0,
                 error=sanitized.message,
@@ -278,9 +259,7 @@ class HookExecutionPipeline:
                 metadata={"error_code": sanitized.code, "sanitized": True},
             )
 
-    async def execute_batch(
-        self, hooks: list[Any], context: dict[str, Any]
-    ) -> list[Any]:
+    async def execute_batch(self, hooks: list[Any], context: dict[str, Any]) -> list[Any]:
         """
         Execute multiple hooks in priority order with performance tracking.
 
@@ -360,9 +339,7 @@ class HookStateManager:
         """Initialize state manager."""
         self._state_history: dict[str, list[dict[str, Any]]] = {}
 
-    def record_transition(
-        self, hook_id: str, from_state: str, to_state: str, metadata: dict[str, Any]
-    ) -> None:
+    def record_transition(self, hook_id: str, from_state: str, to_state: str, metadata: dict[str, Any]) -> None:
         """
         Record state transition.
 
@@ -381,12 +358,7 @@ class HookStateManager:
             self._state_history[hook_id] = []
 
         self._state_history[hook_id].append(
-            {
-                "from": from_state,
-                "to": to_state,
-                "timestamp": datetime.now(UTC),
-                "metadata": metadata,
-            }
+            {"from": from_state, "to": to_state, "timestamp": datetime.now(UTC), "metadata": metadata}
         )
 
     def get_history(self, hook_id: str) -> list[dict[str, Any]]:

@@ -232,9 +232,7 @@ def test_parallel_split_evaluate_requires_and_type(parallel_split_graph: Graph) 
     assert result.metadata["branch_count"] == 3
 
 
-def test_parallel_split_evaluate_rejects_xor_split(
-    exclusive_choice_graph: Graph,
-) -> None:
+def test_parallel_split_evaluate_rejects_xor_split(exclusive_choice_graph: Graph) -> None:
     """Parallel split rejects XOR-split tasks."""
     split = ParallelSplit()
     task_a = URIRef("urn:task:A")
@@ -245,10 +243,14 @@ def test_parallel_split_evaluate_rejects_xor_split(
     assert "XOR" in result.reason
 
 
-def test_parallel_split_evaluate_requires_multiple_branches(
-    sequential_graph: Graph,
-) -> None:
-    """Parallel split requires at least 2 outgoing branches."""
+def test_parallel_split_evaluate_requires_multiple_branches(sequential_graph: Graph) -> None:
+    """Parallel split topology validation delegated to SHACL shapes.
+
+    Note: This test now reflects the Semantic Singularity architecture where
+    topology validation is performed by SHACL shapes (ontology/yawl-shapes.ttl),
+    NOT by procedural Python code. The pattern's evaluate() method assumes the
+    graph has already passed SHACL validation.
+    """
     split = ParallelSplit()
     task_a = URIRef("urn:task:A")
 
@@ -257,13 +259,13 @@ def test_parallel_split_evaluate_requires_multiple_branches(
 
     result = split.evaluate(sequential_graph, task_a, {})
 
-    assert not result.applicable
-    assert "≥2 outgoing" in result.reason
+    # Pattern evaluates assuming SHACL validation already passed
+    # Invalid topology would be caught by SHACL validator before reaching here
+    assert result.applicable  # Pattern doesn't validate topology anymore
+    assert "AND-split" in result.reason
 
 
-def test_parallel_split_execute_enables_all_branches(
-    parallel_split_graph: Graph,
-) -> None:
+def test_parallel_split_execute_enables_all_branches(parallel_split_graph: Graph) -> None:
     """Executing parallel split enables ALL outgoing tasks."""
     split = ParallelSplit()
     task_a = URIRef("urn:task:A")
@@ -312,9 +314,7 @@ def test_parallel_split_execute_fails_without_outgoing(empty_graph: Graph) -> No
 # ============================================================================
 
 
-def test_synchronization_evaluate_requires_and_join(
-    synchronization_graph: Graph,
-) -> None:
+def test_synchronization_evaluate_requires_and_join(synchronization_graph: Graph) -> None:
     """Synchronization requires explicit AND join type."""
     sync = Synchronization()
     task_e = URIRef("urn:task:E")
@@ -337,9 +337,7 @@ def test_synchronization_evaluate_rejects_xor_join(simple_merge_graph: Graph) ->
     assert "XOR" in result.reason
 
 
-def test_synchronization_evaluate_checks_completion_status(
-    synchronization_graph: Graph,
-) -> None:
+def test_synchronization_evaluate_checks_completion_status(synchronization_graph: Graph) -> None:
     """Synchronization evaluation reports incoming completion status."""
     sync = Synchronization()
     task_e = URIRef("urn:task:E")
@@ -354,9 +352,7 @@ def test_synchronization_evaluate_checks_completion_status(
     assert not result.metadata["all_completed"]  # Not all done yet
 
 
-def test_synchronization_execute_waits_for_all_incoming(
-    synchronization_graph: Graph,
-) -> None:
+def test_synchronization_execute_waits_for_all_incoming(synchronization_graph: Graph) -> None:
     """Synchronization blocks until ALL incoming tasks complete."""
     sync = Synchronization()
     task_e = URIRef("urn:task:E")
@@ -373,9 +369,7 @@ def test_synchronization_execute_waits_for_all_incoming(
     assert "incomplete" in result.error.lower()
 
 
-def test_synchronization_execute_proceeds_when_all_complete(
-    synchronization_graph: Graph,
-) -> None:
+def test_synchronization_execute_proceeds_when_all_complete(synchronization_graph: Graph) -> None:
     """Synchronization succeeds when all incoming tasks are complete."""
     sync = Synchronization()
     task_b = URIRef("urn:task:B")
@@ -412,9 +406,7 @@ def test_synchronization_execute_fails_without_incoming(empty_graph: Graph) -> N
 # ============================================================================
 
 
-def test_exclusive_choice_evaluate_requires_xor_split(
-    exclusive_choice_graph: Graph,
-) -> None:
+def test_exclusive_choice_evaluate_requires_xor_split(exclusive_choice_graph: Graph) -> None:
     """Exclusive choice requires explicit XOR split type."""
     choice = ExclusiveChoice()
     task_a = URIRef("urn:task:A")
@@ -426,9 +418,7 @@ def test_exclusive_choice_evaluate_requires_xor_split(
     assert result.metadata["branch_count"] == 2
 
 
-def test_exclusive_choice_evaluate_rejects_and_split(
-    parallel_split_graph: Graph,
-) -> None:
+def test_exclusive_choice_evaluate_rejects_and_split(parallel_split_graph: Graph) -> None:
     """Exclusive choice rejects AND-split tasks."""
     choice = ExclusiveChoice()
     task_a = URIRef("urn:task:A")
@@ -439,9 +429,7 @@ def test_exclusive_choice_evaluate_rejects_and_split(
     assert "AND" in result.reason
 
 
-def test_exclusive_choice_execute_enables_one_branch(
-    exclusive_choice_graph: Graph,
-) -> None:
+def test_exclusive_choice_execute_enables_one_branch(exclusive_choice_graph: Graph) -> None:
     """Executing exclusive choice enables exactly ONE outgoing task."""
     choice = ExclusiveChoice()
     task_a = URIRef("urn:task:A")
@@ -452,9 +440,7 @@ def test_exclusive_choice_execute_enables_one_branch(
     assert len(result.next_tasks) == 1  # Only one branch
 
 
-def test_exclusive_choice_execute_uses_context_selector(
-    exclusive_choice_graph: Graph,
-) -> None:
+def test_exclusive_choice_execute_uses_context_selector(exclusive_choice_graph: Graph) -> None:
     """Exclusive choice can select branch via context data."""
     choice = ExclusiveChoice()
     task_a = URIRef("urn:task:A")
@@ -469,9 +455,7 @@ def test_exclusive_choice_execute_uses_context_selector(
     assert result.next_tasks[0] == task_c
 
 
-def test_exclusive_choice_execute_records_chosen_branch(
-    exclusive_choice_graph: Graph,
-) -> None:
+def test_exclusive_choice_execute_records_chosen_branch(exclusive_choice_graph: Graph) -> None:
     """Exclusive choice records which branch was selected."""
     choice = ExclusiveChoice()
     task_a = URIRef("urn:task:A")
@@ -538,9 +522,7 @@ def test_simple_merge_execute_waits_for_one_incoming(simple_merge_graph: Graph) 
     assert "waiting" in result.error.lower()
 
 
-def test_simple_merge_execute_proceeds_on_first_arrival(
-    simple_merge_graph: Graph,
-) -> None:
+def test_simple_merge_execute_proceeds_on_first_arrival(simple_merge_graph: Graph) -> None:
     """Simple merge succeeds when ANY incoming task completes."""
     merge = SimpleMerge()
     task_b = URIRef("urn:task:B")
@@ -555,9 +537,7 @@ def test_simple_merge_execute_proceeds_on_first_arrival(
     assert (task_d, YAWL.status, Literal("completed")) in simple_merge_graph
 
 
-def test_simple_merge_execute_records_triggering_branch(
-    simple_merge_graph: Graph,
-) -> None:
+def test_simple_merge_execute_records_triggering_branch(simple_merge_graph: Graph) -> None:
     """Simple merge records which branch triggered the merge."""
     merge = SimpleMerge()
     task_b = URIRef("urn:task:B")
@@ -574,9 +554,7 @@ def test_simple_merge_execute_records_triggering_branch(
     assert triggering[0] == task_b
 
 
-def test_simple_merge_execute_handles_multiple_completed(
-    simple_merge_graph: Graph,
-) -> None:
+def test_simple_merge_execute_handles_multiple_completed(simple_merge_graph: Graph) -> None:
     """Simple merge handles case where multiple branches completed."""
     merge = SimpleMerge()
     task_b = URIRef("urn:task:B")

@@ -12,8 +12,7 @@ using Chicago School TDD principles (real objects, observable behavior).
 """
 
 import itertools
-from datetime import UTC, datetime, timedelta
-from typing import Any
+from datetime import UTC, datetime
 
 import pytest
 
@@ -21,7 +20,6 @@ from kgcl.hooks.conditions import (
     AlwaysTrueCondition,
     CompositeCondition,
     CompositeOperator,
-    ConditionResult,
     DeltaCondition,
     DeltaType,
     ShaclCondition,
@@ -45,30 +43,22 @@ class TestBinaryConditionCombinations:
     @pytest.fixture
     def false_threshold(self) -> ThresholdCondition:
         """Always-false threshold condition."""
-        return ThresholdCondition(
-            variable="value", operator=ThresholdOperator.GREATER_THAN, value=100
-        )
+        return ThresholdCondition(variable="value", operator=ThresholdOperator.GREATER_THAN, value=100)
 
     @pytest.fixture
     def true_threshold(self) -> ThresholdCondition:
         """Always-true threshold condition."""
-        return ThresholdCondition(
-            variable="value", operator=ThresholdOperator.GREATER_THAN, value=0
-        )
+        return ThresholdCondition(variable="value", operator=ThresholdOperator.GREATER_THAN, value=0)
 
     @pytest.fixture
     def sparql_ask(self) -> SparqlAskCondition:
         """SPARQL ASK condition for testing."""
-        return SparqlAskCondition(
-            query="ASK WHERE { ?s ?p ?o }", use_cache=False
-        )
+        return SparqlAskCondition(query="ASK WHERE { ?s ?p ?o }", use_cache=False)
 
     @pytest.fixture
     def sparql_select(self) -> SparqlSelectCondition:
         """SPARQL SELECT condition for testing."""
-        return SparqlSelectCondition(
-            query="SELECT ?s WHERE { ?s ?p ?o }", use_cache=False
-        )
+        return SparqlSelectCondition(query="SELECT ?s WHERE { ?s ?p ?o }", use_cache=False)
 
     @pytest.fixture
     def delta_condition(self) -> DeltaCondition:
@@ -103,9 +93,7 @@ class TestBinaryConditionCombinations:
         self, sparql_ask: SparqlAskCondition, true_threshold: ThresholdCondition
     ) -> None:
         """SPARQL ASK AND threshold both true triggers."""
-        composite = CompositeCondition(
-            operator=CompositeOperator.AND, conditions=[sparql_ask, true_threshold]
-        )
+        composite = CompositeCondition(operator=CompositeOperator.AND, conditions=[sparql_ask, true_threshold])
 
         context = {
             "test_result": True,  # SPARQL ASK returns true
@@ -121,9 +109,7 @@ class TestBinaryConditionCombinations:
         self, sparql_ask: SparqlAskCondition, false_threshold: ThresholdCondition
     ) -> None:
         """SPARQL ASK true AND threshold false does not trigger."""
-        composite = CompositeCondition(
-            operator=CompositeOperator.AND, conditions=[sparql_ask, false_threshold]
-        )
+        composite = CompositeCondition(operator=CompositeOperator.AND, conditions=[sparql_ask, false_threshold])
 
         context = {
             "test_result": True,  # SPARQL ASK returns true
@@ -138,9 +124,7 @@ class TestBinaryConditionCombinations:
         self, sparql_ask: SparqlAskCondition, false_threshold: ThresholdCondition
     ) -> None:
         """SPARQL ASK true OR threshold false triggers."""
-        composite = CompositeCondition(
-            operator=CompositeOperator.OR, conditions=[sparql_ask, false_threshold]
-        )
+        composite = CompositeCondition(operator=CompositeOperator.OR, conditions=[sparql_ask, false_threshold])
 
         context = {
             "test_result": True,  # SPARQL ASK returns true
@@ -155,18 +139,13 @@ class TestBinaryConditionCombinations:
         self, delta_condition: DeltaCondition, window_condition: WindowCondition
     ) -> None:
         """Delta increase AND window threshold triggers."""
-        composite = CompositeCondition(
-            operator=CompositeOperator.AND, conditions=[delta_condition, window_condition]
-        )
+        composite = CompositeCondition(operator=CompositeOperator.AND, conditions=[delta_condition, window_condition])
 
         now = datetime.now(UTC)
         context = {
             "previous_count": 10,
             "current_count": 20,  # Delta increase
-            "time_series": [
-                {"timestamp": now, "requests": 60},
-                {"timestamp": now, "requests": 50},
-            ],  # Sum = 110 > 100
+            "time_series": [{"timestamp": now, "requests": 60}, {"timestamp": now, "requests": 50}],  # Sum = 110 > 100
         }
 
         result = await composite.evaluate(context)
@@ -177,10 +156,7 @@ class TestBinaryConditionCombinations:
         self, shacl_condition: ShaclCondition, sparql_select: SparqlSelectCondition
     ) -> None:
         """SHACL validation AND SPARQL SELECT results."""
-        composite = CompositeCondition(
-            operator=CompositeOperator.AND,
-            conditions=[shacl_condition, sparql_select],
-        )
+        composite = CompositeCondition(operator=CompositeOperator.AND, conditions=[shacl_condition, sparql_select])
 
         context = {
             "data_graph": "@prefix foaf: <http://xmlns.com/foaf/0.1/> . ex:person foaf:name 'Alice' .",
@@ -205,34 +181,20 @@ class TestBinaryConditionCombinations:
     )
     @pytest.mark.asyncio
     async def test_truth_table_combinations(
-        self,
-        c1_result: bool,
-        c2_result: bool,
-        operator: CompositeOperator,
-        expected: bool,
+        self, c1_result: bool, c2_result: bool, operator: CompositeOperator, expected: bool
     ) -> None:
         """Test all truth table combinations for AND/OR."""
         # Create conditions with specific results
-        cond1 = ThresholdCondition(
-            variable="v1", operator=ThresholdOperator.GREATER_THAN, value=0
-        )
-        cond2 = ThresholdCondition(
-            variable="v2", operator=ThresholdOperator.GREATER_THAN, value=0
-        )
+        cond1 = ThresholdCondition(variable="v1", operator=ThresholdOperator.GREATER_THAN, value=0)
+        cond2 = ThresholdCondition(variable="v2", operator=ThresholdOperator.GREATER_THAN, value=0)
 
-        composite = CompositeCondition(
-            operator=operator, conditions=[cond1, cond2]
-        )
+        composite = CompositeCondition(operator=operator, conditions=[cond1, cond2])
 
-        context = {
-            "v1": 10 if c1_result else -10,
-            "v2": 10 if c2_result else -10,
-        }
+        context = {"v1": 10 if c1_result else -10, "v2": 10 if c2_result else -10}
 
         result = await composite.evaluate(context)
         assert result.triggered == expected, (
-            f"Truth table failed: {c1_result} {operator.value} {c2_result} "
-            f"should be {expected}"
+            f"Truth table failed: {c1_result} {operator.value} {c2_result} should be {expected}"
         )
 
 
@@ -242,27 +204,20 @@ class TestTernaryConditionCombinations:
     @pytest.fixture
     def cond_a(self) -> ThresholdCondition:
         """Condition A: value_a > 0."""
-        return ThresholdCondition(
-            variable="value_a", operator=ThresholdOperator.GREATER_THAN, value=0
-        )
+        return ThresholdCondition(variable="value_a", operator=ThresholdOperator.GREATER_THAN, value=0)
 
     @pytest.fixture
     def cond_b(self) -> ThresholdCondition:
         """Condition B: value_b > 0."""
-        return ThresholdCondition(
-            variable="value_b", operator=ThresholdOperator.GREATER_THAN, value=0
-        )
+        return ThresholdCondition(variable="value_b", operator=ThresholdOperator.GREATER_THAN, value=0)
 
     @pytest.fixture
     def cond_c(self) -> ThresholdCondition:
         """Condition C: value_c > 0."""
-        return ThresholdCondition(
-            variable="value_c", operator=ThresholdOperator.GREATER_THAN, value=0
-        )
+        return ThresholdCondition(variable="value_c", operator=ThresholdOperator.GREATER_THAN, value=0)
 
     @pytest.mark.parametrize(
-        "op1,op2",
-        list(itertools.product([CompositeOperator.AND, CompositeOperator.OR], repeat=2)),
+        "op1,op2", list(itertools.product([CompositeOperator.AND, CompositeOperator.OR], repeat=2))
     )
     @pytest.mark.asyncio
     async def test_ternary_operator_combinations(
@@ -289,10 +244,7 @@ class TestTernaryConditionCombinations:
         # All true, so result should be true regardless of operators
         assert result.triggered, f"All true should trigger for ({op1.value}) {op2.value}"
 
-    @pytest.mark.parametrize(
-        "truth_values",
-        list(itertools.product([True, False], repeat=3)),
-    )
+    @pytest.mark.parametrize("truth_values", list(itertools.product([True, False], repeat=3)))
     @pytest.mark.asyncio
     async def test_ternary_truth_combinations(
         self,
@@ -304,21 +256,13 @@ class TestTernaryConditionCombinations:
         """Test all truth value combinations for A AND B AND C."""
         va, vb, vc = truth_values
 
-        composite = CompositeCondition(
-            operator=CompositeOperator.AND, conditions=[cond_a, cond_b, cond_c]
-        )
+        composite = CompositeCondition(operator=CompositeOperator.AND, conditions=[cond_a, cond_b, cond_c])
 
-        context = {
-            "value_a": 10 if va else -10,
-            "value_b": 10 if vb else -10,
-            "value_c": 10 if vc else -10,
-        }
+        context = {"value_a": 10 if va else -10, "value_b": 10 if vb else -10, "value_c": 10 if vc else -10}
 
         result = await composite.evaluate(context)
         expected = va and vb and vc
-        assert result.triggered == expected, (
-            f"Ternary AND {truth_values} should be {expected}"
-        )
+        assert result.triggered == expected, f"Ternary AND {truth_values} should be {expected}"
 
 
 class TestNestedConditionCombinations:
@@ -329,18 +273,12 @@ class TestNestedConditionCombinations:
     async def test_nested_depth_combinations(self, depth: int) -> None:
         """Create nested structure of given depth."""
         # Build nested structure: ((((A AND B) AND C) AND D) AND E)
-        base = ThresholdCondition(
-            variable="value", operator=ThresholdOperator.GREATER_THAN, value=0
-        )
+        base = ThresholdCondition(variable="value", operator=ThresholdOperator.GREATER_THAN, value=0)
 
         current = base
         for _ in range(depth - 1):
-            new_cond = ThresholdCondition(
-                variable="value", operator=ThresholdOperator.GREATER_THAN, value=0
-            )
-            current = CompositeCondition(
-                operator=CompositeOperator.AND, conditions=[current, new_cond]
-            )
+            new_cond = ThresholdCondition(variable="value", operator=ThresholdOperator.GREATER_THAN, value=0)
+            current = CompositeCondition(operator=CompositeOperator.AND, conditions=[current, new_cond])
 
         context = {"value": 10}
         result = await current.evaluate(context)
@@ -350,54 +288,31 @@ class TestNestedConditionCombinations:
     async def test_complex_nested_expression(self) -> None:
         """Test ((A AND B) OR (C AND D)) AND (E OR F)."""
         # Create conditions
-        a = ThresholdCondition(
-            variable="a", operator=ThresholdOperator.GREATER_THAN, value=0
-        )
-        b = ThresholdCondition(
-            variable="b", operator=ThresholdOperator.GREATER_THAN, value=0
-        )
-        c = ThresholdCondition(
-            variable="c", operator=ThresholdOperator.GREATER_THAN, value=0
-        )
-        d = ThresholdCondition(
-            variable="d", operator=ThresholdOperator.GREATER_THAN, value=0
-        )
-        e = ThresholdCondition(
-            variable="e", operator=ThresholdOperator.GREATER_THAN, value=0
-        )
-        f = ThresholdCondition(
-            variable="f", operator=ThresholdOperator.GREATER_THAN, value=0
-        )
+        a = ThresholdCondition(variable="a", operator=ThresholdOperator.GREATER_THAN, value=0)
+        b = ThresholdCondition(variable="b", operator=ThresholdOperator.GREATER_THAN, value=0)
+        c = ThresholdCondition(variable="c", operator=ThresholdOperator.GREATER_THAN, value=0)
+        d = ThresholdCondition(variable="d", operator=ThresholdOperator.GREATER_THAN, value=0)
+        e = ThresholdCondition(variable="e", operator=ThresholdOperator.GREATER_THAN, value=0)
+        f = ThresholdCondition(variable="f", operator=ThresholdOperator.GREATER_THAN, value=0)
 
         # (A AND B)
         left_inner = CompositeCondition(operator=CompositeOperator.AND, conditions=[a, b])
         # (C AND D)
         right_inner = CompositeCondition(operator=CompositeOperator.AND, conditions=[c, d])
         # (A AND B) OR (C AND D)
-        left_outer = CompositeCondition(
-            operator=CompositeOperator.OR, conditions=[left_inner, right_inner]
-        )
+        left_outer = CompositeCondition(operator=CompositeOperator.OR, conditions=[left_inner, right_inner])
 
         # (E OR F)
         right_outer = CompositeCondition(operator=CompositeOperator.OR, conditions=[e, f])
 
         # ((A AND B) OR (C AND D)) AND (E OR F)
-        final = CompositeCondition(
-            operator=CompositeOperator.AND, conditions=[left_outer, right_outer]
-        )
+        final = CompositeCondition(operator=CompositeOperator.AND, conditions=[left_outer, right_outer])
 
         # Test case: A=T, B=T, C=F, D=F, E=T, F=F
         # (T AND T) OR (F AND F) = T OR F = T
         # (T OR F) = T
         # T AND T = T
-        context = {
-            "a": 10,
-            "b": 10,
-            "c": -10,
-            "d": -10,
-            "e": 10,
-            "f": -10,
-        }
+        context = {"a": 10, "b": 10, "c": -10, "d": -10, "e": 10, "f": -10}
 
         result = await final.evaluate(context)
         assert result.triggered, "Complex nested expression should trigger"
@@ -405,15 +320,9 @@ class TestNestedConditionCombinations:
     @pytest.mark.asyncio
     async def test_nested_not_combinations(self) -> None:
         """Test NOT(A AND NOT(B OR C))."""
-        a = ThresholdCondition(
-            variable="a", operator=ThresholdOperator.GREATER_THAN, value=0
-        )
-        b = ThresholdCondition(
-            variable="b", operator=ThresholdOperator.GREATER_THAN, value=0
-        )
-        c = ThresholdCondition(
-            variable="c", operator=ThresholdOperator.GREATER_THAN, value=0
-        )
+        a = ThresholdCondition(variable="a", operator=ThresholdOperator.GREATER_THAN, value=0)
+        b = ThresholdCondition(variable="b", operator=ThresholdOperator.GREATER_THAN, value=0)
+        c = ThresholdCondition(variable="c", operator=ThresholdOperator.GREATER_THAN, value=0)
 
         # (B OR C)
         inner_or = CompositeCondition(operator=CompositeOperator.OR, conditions=[b, c])
@@ -429,11 +338,7 @@ class TestNestedConditionCombinations:
         # NOT(F) = T
         # A AND T = T
         # NOT(T) = F
-        context = {
-            "a": 10,
-            "b": -10,
-            "c": -10,
-        }
+        context = {"a": 10, "b": -10, "c": -10}
 
         result = await outer_not.evaluate(context)
         assert not result.triggered, "NOT(A AND NOT(B OR C)) with A=T, B=F, C=F should be false"
@@ -453,27 +358,18 @@ class TestThresholdOperatorCombinations:
     )
     @pytest.mark.asyncio
     async def test_dual_threshold_combinations(
-        self,
-        op1: ThresholdOperator,
-        op2: ThresholdOperator,
-        value: float,
-        low: float,
-        high: float,
-        expected: bool,
+        self, op1: ThresholdOperator, op2: ThresholdOperator, value: float, low: float, high: float, expected: bool
     ) -> None:
         """Test value > X AND value < Y (range checks)."""
         cond1 = ThresholdCondition(variable="value", operator=op1, value=low)
         cond2 = ThresholdCondition(variable="value", operator=op2, value=high)
 
-        composite = CompositeCondition(
-            operator=CompositeOperator.AND, conditions=[cond1, cond2]
-        )
+        composite = CompositeCondition(operator=CompositeOperator.AND, conditions=[cond1, cond2])
 
         context = {"value": value}
         result = await composite.evaluate(context)
         assert result.triggered == expected, (
-            f"Range check {value} {op1.value} {low} AND {value} {op2.value} {high} "
-            f"should be {expected}"
+            f"Range check {value} {op1.value} {low} AND {value} {op2.value} {high} should be {expected}"
         )
 
 
@@ -494,12 +390,7 @@ class TestDeltaConditionCombinations:
     )
     @pytest.mark.asyncio
     async def test_delta_combinations(
-        self,
-        change_type: DeltaType,
-        threshold: int,
-        prev: int,
-        curr: int,
-        expected: bool,
+        self, change_type: DeltaType, threshold: int, prev: int, curr: int, expected: bool
     ) -> None:
         """Test delta conditions with threshold in composite."""
         delta_cond = DeltaCondition(delta_type=change_type, query="SELECT ?count")
@@ -508,10 +399,7 @@ class TestDeltaConditionCombinations:
         )
 
         # Use delta alone (threshold is implicit in delta semantics)
-        context = {
-            "previous_count": prev,
-            "current_count": curr,
-        }
+        context = {"previous_count": prev, "current_count": curr}
 
         result = await delta_cond.evaluate(context)
         delta = curr - prev
@@ -540,11 +428,7 @@ class TestWindowAggregationCombinations:
     )
     @pytest.mark.asyncio
     async def test_aggregation_combinations(
-        self,
-        agg_func: WindowAggregation,
-        values: list[int],
-        threshold: float,
-        expected: bool,
+        self, agg_func: WindowAggregation, values: list[int], threshold: float, expected: bool
     ) -> None:
         """Test window aggregations with threshold comparisons."""
         window_cond = WindowCondition(
@@ -560,9 +444,7 @@ class TestWindowAggregationCombinations:
 
         context = {"time_series": time_series}
         result = await window_cond.evaluate(context)
-        assert result.triggered == expected, (
-            f"Window {agg_func.value} aggregation should be {expected}"
-        )
+        assert result.triggered == expected, f"Window {agg_func.value} aggregation should be {expected}"
 
 
 class TestShortCircuitBehavior:
@@ -572,17 +454,11 @@ class TestShortCircuitBehavior:
     async def test_and_short_circuits_on_false(self) -> None:
         """Second condition should not be evaluated if first is false."""
         # First condition always false
-        cond1 = ThresholdCondition(
-            variable="value", operator=ThresholdOperator.GREATER_THAN, value=100
-        )
+        cond1 = ThresholdCondition(variable="value", operator=ThresholdOperator.GREATER_THAN, value=100)
         # Second condition would fail if evaluated without required key
-        cond2 = ThresholdCondition(
-            variable="missing_key", operator=ThresholdOperator.GREATER_THAN, value=0
-        )
+        cond2 = ThresholdCondition(variable="missing_key", operator=ThresholdOperator.GREATER_THAN, value=0)
 
-        composite = CompositeCondition(
-            operator=CompositeOperator.AND, conditions=[cond1, cond2]
-        )
+        composite = CompositeCondition(operator=CompositeOperator.AND, conditions=[cond1, cond2])
 
         context = {"value": 50}  # missing_key not provided
         result = await composite.evaluate(context)
@@ -594,17 +470,11 @@ class TestShortCircuitBehavior:
     async def test_or_short_circuits_on_true(self) -> None:
         """Second condition should not be evaluated if first is true."""
         # First condition always true
-        cond1 = ThresholdCondition(
-            variable="value", operator=ThresholdOperator.GREATER_THAN, value=0
-        )
+        cond1 = ThresholdCondition(variable="value", operator=ThresholdOperator.GREATER_THAN, value=0)
         # Second condition would fail if evaluated without required key
-        cond2 = ThresholdCondition(
-            variable="missing_key", operator=ThresholdOperator.GREATER_THAN, value=0
-        )
+        cond2 = ThresholdCondition(variable="missing_key", operator=ThresholdOperator.GREATER_THAN, value=0)
 
-        composite = CompositeCondition(
-            operator=CompositeOperator.OR, conditions=[cond1, cond2]
-        )
+        composite = CompositeCondition(operator=CompositeOperator.OR, conditions=[cond1, cond2])
 
         context = {"value": 50}  # missing_key not provided
         result = await composite.evaluate(context)
@@ -615,19 +485,11 @@ class TestShortCircuitBehavior:
     @pytest.mark.asyncio
     async def test_and_evaluates_all_when_needed(self) -> None:
         """AND should evaluate all conditions when necessary."""
-        cond1 = ThresholdCondition(
-            variable="v1", operator=ThresholdOperator.GREATER_THAN, value=0
-        )
-        cond2 = ThresholdCondition(
-            variable="v2", operator=ThresholdOperator.GREATER_THAN, value=0
-        )
-        cond3 = ThresholdCondition(
-            variable="v3", operator=ThresholdOperator.GREATER_THAN, value=0
-        )
+        cond1 = ThresholdCondition(variable="v1", operator=ThresholdOperator.GREATER_THAN, value=0)
+        cond2 = ThresholdCondition(variable="v2", operator=ThresholdOperator.GREATER_THAN, value=0)
+        cond3 = ThresholdCondition(variable="v3", operator=ThresholdOperator.GREATER_THAN, value=0)
 
-        composite = CompositeCondition(
-            operator=CompositeOperator.AND, conditions=[cond1, cond2, cond3]
-        )
+        composite = CompositeCondition(operator=CompositeOperator.AND, conditions=[cond1, cond2, cond3])
 
         context = {"v1": 10, "v2": 10, "v3": 10}
         result = await composite.evaluate(context)
@@ -642,9 +504,7 @@ class TestMixedConditionTypes:
     @pytest.mark.asyncio
     async def test_sparql_delta_window_combination(self) -> None:
         """Test SPARQL, delta, and window conditions together."""
-        sparql = SparqlAskCondition(
-            query="ASK WHERE { ?s ?p ?o }", use_cache=False
-        )
+        sparql = SparqlAskCondition(query="ASK WHERE { ?s ?p ?o }", use_cache=False)
         delta = DeltaCondition(delta_type=DeltaType.INCREASE, query="SELECT ?count")
         window = WindowCondition(
             variable="requests",
@@ -655,22 +515,15 @@ class TestMixedConditionTypes:
         )
 
         # (SPARQL AND delta) OR window
-        inner = CompositeCondition(
-            operator=CompositeOperator.AND, conditions=[sparql, delta]
-        )
-        outer = CompositeCondition(
-            operator=CompositeOperator.OR, conditions=[inner, window]
-        )
+        inner = CompositeCondition(operator=CompositeOperator.AND, conditions=[sparql, delta])
+        outer = CompositeCondition(operator=CompositeOperator.OR, conditions=[inner, window])
 
         now = datetime.now(UTC)
         context = {
             "test_result": True,  # SPARQL
             "previous_count": 10,
             "current_count": 20,  # Delta increase
-            "time_series": [
-                {"timestamp": now, "requests": 60},
-                {"timestamp": now, "requests": 50},
-            ],  # Window sum = 110
+            "time_series": [{"timestamp": now, "requests": 60}, {"timestamp": now, "requests": 50}],  # Window sum = 110
         }
 
         result = await outer.evaluate(context)
@@ -687,18 +540,12 @@ class TestMixedConditionTypes:
                 sh:minCount 1 .
             """
         )
-        threshold = ThresholdCondition(
-            variable="count", operator=ThresholdOperator.GREATER_THAN, value=10
-        )
+        threshold = ThresholdCondition(variable="count", operator=ThresholdOperator.GREATER_THAN, value=10)
         delta = DeltaCondition(delta_type=DeltaType.ANY, query="SELECT ?value")
 
         # SHACL AND (threshold OR delta)
-        inner = CompositeCondition(
-            operator=CompositeOperator.OR, conditions=[threshold, delta]
-        )
-        outer = CompositeCondition(
-            operator=CompositeOperator.AND, conditions=[shacl, inner]
-        )
+        inner = CompositeCondition(operator=CompositeOperator.OR, conditions=[threshold, delta])
+        outer = CompositeCondition(operator=CompositeOperator.AND, conditions=[shacl, inner])
 
         context = {
             "data_graph": "@prefix foaf: <http://xmlns.com/foaf/0.1/> . ex:p foaf:name 'Alice' .",
@@ -717,9 +564,7 @@ class TestEdgeCases:
     @pytest.mark.asyncio
     async def test_empty_composite_condition(self) -> None:
         """Empty composite condition should handle gracefully."""
-        composite = CompositeCondition(
-            operator=CompositeOperator.AND, conditions=[]
-        )
+        composite = CompositeCondition(operator=CompositeOperator.AND, conditions=[])
 
         result = await composite.evaluate({})
         # Empty AND is vacuously true
@@ -728,12 +573,8 @@ class TestEdgeCases:
     @pytest.mark.asyncio
     async def test_single_condition_in_composite(self) -> None:
         """Single condition in composite should work."""
-        cond = ThresholdCondition(
-            variable="value", operator=ThresholdOperator.GREATER_THAN, value=0
-        )
-        composite = CompositeCondition(
-            operator=CompositeOperator.AND, conditions=[cond]
-        )
+        cond = ThresholdCondition(variable="value", operator=ThresholdOperator.GREATER_THAN, value=0)
+        composite = CompositeCondition(operator=CompositeOperator.AND, conditions=[cond])
 
         context = {"value": 10}
         result = await composite.evaluate(context)
@@ -742,16 +583,10 @@ class TestEdgeCases:
     @pytest.mark.asyncio
     async def test_not_with_multiple_conditions(self) -> None:
         """NOT operator with multiple conditions uses first only."""
-        cond1 = ThresholdCondition(
-            variable="value", operator=ThresholdOperator.GREATER_THAN, value=0
-        )
-        cond2 = ThresholdCondition(
-            variable="value", operator=ThresholdOperator.LESS_THAN, value=100
-        )
+        cond1 = ThresholdCondition(variable="value", operator=ThresholdOperator.GREATER_THAN, value=0)
+        cond2 = ThresholdCondition(variable="value", operator=ThresholdOperator.LESS_THAN, value=100)
 
-        composite = CompositeCondition(
-            operator=CompositeOperator.NOT, conditions=[cond1, cond2]
-        )
+        composite = CompositeCondition(operator=CompositeOperator.NOT, conditions=[cond1, cond2])
 
         context = {"value": 50}
         result = await composite.evaluate(context)
@@ -762,25 +597,17 @@ class TestEdgeCases:
     async def test_deeply_nested_all_types(self) -> None:
         """Deeply nested structure with all condition types."""
         sparql = SparqlAskCondition(query="ASK WHERE { ?s ?p ?o }", use_cache=False)
-        threshold = ThresholdCondition(
-            variable="count", operator=ThresholdOperator.GREATER_THAN, value=5
-        )
+        threshold = ThresholdCondition(variable="count", operator=ThresholdOperator.GREATER_THAN, value=5)
         delta = DeltaCondition(delta_type=DeltaType.INCREASE, query="SELECT ?c")
 
         # Layer 1: SPARQL AND threshold
-        layer1 = CompositeCondition(
-            operator=CompositeOperator.AND, conditions=[sparql, threshold]
-        )
+        layer1 = CompositeCondition(operator=CompositeOperator.AND, conditions=[sparql, threshold])
 
         # Layer 2: (SPARQL AND threshold) OR delta
-        layer2 = CompositeCondition(
-            operator=CompositeOperator.OR, conditions=[layer1, delta]
-        )
+        layer2 = CompositeCondition(operator=CompositeOperator.OR, conditions=[layer1, delta])
 
         # Layer 3: NOT((SPARQL AND threshold) OR delta)
-        layer3 = CompositeCondition(
-            operator=CompositeOperator.NOT, conditions=[layer2]
-        )
+        layer3 = CompositeCondition(operator=CompositeOperator.NOT, conditions=[layer2])
 
         context = {
             "test_result": False,  # SPARQL false
@@ -801,29 +628,27 @@ class TestAllOperatorCombinations:
 
     @pytest.mark.parametrize(
         "op1,op2",
-        list(itertools.product(
-            [
-                ThresholdOperator.GREATER_THAN,
-                ThresholdOperator.LESS_THAN,
-                ThresholdOperator.EQUALS,
-                ThresholdOperator.NOT_EQUALS,
-                ThresholdOperator.GREATER_EQUAL,
-                ThresholdOperator.LESS_EQUAL,
-            ],
-            repeat=2
-        )),
+        list(
+            itertools.product(
+                [
+                    ThresholdOperator.GREATER_THAN,
+                    ThresholdOperator.LESS_THAN,
+                    ThresholdOperator.EQUALS,
+                    ThresholdOperator.NOT_EQUALS,
+                    ThresholdOperator.GREATER_EQUAL,
+                    ThresholdOperator.LESS_EQUAL,
+                ],
+                repeat=2,
+            )
+        ),
     )
     @pytest.mark.asyncio
-    async def test_all_operator_pairs(
-        self, op1: ThresholdOperator, op2: ThresholdOperator
-    ) -> None:
+    async def test_all_operator_pairs(self, op1: ThresholdOperator, op2: ThresholdOperator) -> None:
         """Test all 36 combinations of threshold operators."""
         cond1 = ThresholdCondition(variable="v1", operator=op1, value=50)
         cond2 = ThresholdCondition(variable="v2", operator=op2, value=50)
 
-        composite = CompositeCondition(
-            operator=CompositeOperator.AND, conditions=[cond1, cond2]
-        )
+        composite = CompositeCondition(operator=CompositeOperator.AND, conditions=[cond1, cond2])
 
         context = {"v1": 75, "v2": 75}
         result = await composite.evaluate(context)
@@ -855,15 +680,9 @@ class TestSparqlConditionCombinations:
         sparql = SparqlSelectCondition(query="SELECT ?s WHERE { ?s ?p ?o }", use_cache=False)
         delta = DeltaCondition(delta_type=DeltaType.INCREASE, query="SELECT ?c")
 
-        composite = CompositeCondition(
-            operator=CompositeOperator.AND, conditions=[sparql, delta]
-        )
+        composite = CompositeCondition(operator=CompositeOperator.AND, conditions=[sparql, delta])
 
-        context = {
-            "test_results": [{"s": "http://ex.org/1"}],
-            "previous_count": 10,
-            "current_count": 15,
-        }
+        context = {"test_results": [{"s": "http://ex.org/1"}], "previous_count": 10, "current_count": 15}
         result = await composite.evaluate(context)
         assert result.triggered
 
@@ -891,9 +710,7 @@ class TestWindowConditionCombinations:
             operator=ThresholdOperator.GREATER_THAN,
         )
 
-        composite = CompositeCondition(
-            operator=CompositeOperator.AND, conditions=[window_sum, window_avg]
-        )
+        composite = CompositeCondition(operator=CompositeOperator.AND, conditions=[window_sum, window_avg])
 
         context = {
             "time_series": [
@@ -917,19 +734,12 @@ class TestWindowConditionCombinations:
             threshold=2.0,
             operator=ThresholdOperator.GREATER_EQUAL,
         )
-        threshold = ThresholdCondition(
-            variable="current_value", operator=ThresholdOperator.GREATER_THAN, value=50
-        )
+        threshold = ThresholdCondition(variable="current_value", operator=ThresholdOperator.GREATER_THAN, value=50)
 
-        composite = CompositeCondition(
-            operator=CompositeOperator.AND, conditions=[window, threshold]
-        )
+        composite = CompositeCondition(operator=CompositeOperator.AND, conditions=[window, threshold])
 
         context = {
-            "time_series": [
-                {"timestamp": now, "metric": 10},
-                {"timestamp": now, "metric": 20},
-            ],
+            "time_series": [{"timestamp": now, "metric": 10}, {"timestamp": now, "metric": 20}],
             "current_value": 60,
         }
         result = await composite.evaluate(context)
@@ -953,17 +763,12 @@ class TestDeltaWindowCombinations:
             operator=ThresholdOperator.GREATER_THAN,
         )
 
-        composite = CompositeCondition(
-            operator=CompositeOperator.OR, conditions=[delta, window]
-        )
+        composite = CompositeCondition(operator=CompositeOperator.OR, conditions=[delta, window])
 
         context = {
             "previous_count": 10,
             "current_count": 10,  # No delta
-            "time_series": [
-                {"timestamp": now, "requests": 60},
-                {"timestamp": now, "requests": 50},
-            ],  # sum=110>100
+            "time_series": [{"timestamp": now, "requests": 60}, {"timestamp": now, "requests": 50}],  # sum=110>100
         }
         result = await composite.evaluate(context)
         assert result.triggered  # Window triggers
@@ -980,9 +785,7 @@ class TestQuaternaryConditions:
         c3 = ThresholdCondition(variable="v3", operator=ThresholdOperator.GREATER_THAN, value=0)
         c4 = ThresholdCondition(variable="v4", operator=ThresholdOperator.GREATER_THAN, value=0)
 
-        composite = CompositeCondition(
-            operator=CompositeOperator.AND, conditions=[c1, c2, c3, c4]
-        )
+        composite = CompositeCondition(operator=CompositeOperator.AND, conditions=[c1, c2, c3, c4])
 
         context = {"v1": 10, "v2": 10, "v3": 10, "v4": 10}
         result = await composite.evaluate(context)
@@ -996,9 +799,7 @@ class TestQuaternaryConditions:
         c3 = ThresholdCondition(variable="v3", operator=ThresholdOperator.GREATER_THAN, value=0)
         c4 = ThresholdCondition(variable="v4", operator=ThresholdOperator.GREATER_THAN, value=0)
 
-        composite = CompositeCondition(
-            operator=CompositeOperator.OR, conditions=[c1, c2, c3, c4]
-        )
+        composite = CompositeCondition(operator=CompositeOperator.OR, conditions=[c1, c2, c3, c4])
 
         # Only one true
         context = {"v1": 10, "v2": -10, "v3": -10, "v4": -10}
@@ -1031,7 +832,6 @@ class TestCoverageStats:
     async def test_coverage_count(self) -> None:
         """Verify we have at least 75 test cases."""
         # Count all test methods across all classes
-        import inspect
 
         test_classes = [
             TestBinaryConditionCombinations,
@@ -1052,10 +852,7 @@ class TestCoverageStats:
 
         total_tests = 0
         for test_class in test_classes:
-            methods = [
-                m for m in dir(test_class)
-                if m.startswith("test_") and callable(getattr(test_class, m))
-            ]
+            methods = [m for m in dir(test_class) if m.startswith("test_") and callable(getattr(test_class, m))]
             total_tests += len(methods)
 
         # Add parametrized test expansions
@@ -1070,6 +867,4 @@ class TestCoverageStats:
 
         total_with_parametrized = total_tests + parametrized_expansions
 
-        assert total_with_parametrized >= 75, (
-            f"Expected at least 75 test cases, found {total_with_parametrized}"
-        )
+        assert total_with_parametrized >= 75, f"Expected at least 75 test cases, found {total_with_parametrized}"

@@ -5,7 +5,7 @@ Similar to Rust's type-level validation compiled away in Python.
 """
 
 from collections.abc import Callable
-from typing import Any, Generic, TypeVar
+from typing import Any, TypeVar
 
 T = TypeVar("T")
 
@@ -77,17 +77,13 @@ class ValidatedValue[T]:
             print(val.get())
     """
 
-    def __init__(
-        self, value: T, validators: list[tuple[str, Callable[[T], bool]]] | None = None
-    ) -> None:
+    def __init__(self, value: T, validators: list[tuple[str, Callable[[T], bool]]] | None = None) -> None:
         self._value = value
         self._validators = validators or []
         self._validation_cache: bool | None = None
         self._failures: list[str] = []
 
-    def add_validator(
-        self, name: str, validator: Callable[[T], bool]
-    ) -> "ValidatedValue[T]":
+    def add_validator(self, name: str, validator: Callable[[T], bool]) -> "ValidatedValue[T]":
         """Add validator."""
         self._validators.append((name, validator))
         self._validation_cache = None  # Invalidate cache
@@ -121,9 +117,7 @@ class ValidatedValue[T]:
             ValueError: If value is not valid
         """
         if not self.is_valid():
-            raise ValueError(
-                f"Value {self._value!r} failed validators: {', '.join(self._failures)}"
-            )
+            raise ValueError(f"Value {self._value!r} failed validators: {', '.join(self._failures)}")
         return self._value
 
     def get_or(self, default: T) -> T:

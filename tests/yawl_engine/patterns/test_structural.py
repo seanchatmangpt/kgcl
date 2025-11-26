@@ -224,26 +224,18 @@ def test_cycle_pattern_metadata() -> None:
 # ============================================================================
 
 
-def test_implicit_termination_detects_active_tasks(
-    active_workflow_graph: Graph,
-) -> None:
+def test_implicit_termination_detects_active_tasks(active_workflow_graph: Graph) -> None:
     """Implicit termination returns False when tasks are active."""
     termination = ImplicitTermination()
-    should_terminate = termination.check_termination(
-        active_workflow_graph, URIRef("urn:workflow:W1")
-    )
+    should_terminate = termination.check_termination(active_workflow_graph, URIRef("urn:workflow:W1"))
 
     assert should_terminate is False
 
 
-def test_implicit_termination_detects_completion(
-    completed_workflow_graph: Graph,
-) -> None:
+def test_implicit_termination_detects_completion(completed_workflow_graph: Graph) -> None:
     """Implicit termination returns True when all tasks completed."""
     termination = ImplicitTermination()
-    should_terminate = termination.check_termination(
-        completed_workflow_graph, URIRef("urn:workflow:W1")
-    )
+    should_terminate = termination.check_termination(completed_workflow_graph, URIRef("urn:workflow:W1"))
 
     assert should_terminate is True
 
@@ -251,9 +243,7 @@ def test_implicit_termination_detects_completion(
 def test_implicit_termination_handles_empty_workflow(empty_graph: Graph) -> None:
     """Implicit termination handles empty workflow gracefully."""
     termination = ImplicitTermination()
-    should_terminate = termination.check_termination(
-        empty_graph, URIRef("urn:workflow:Empty")
-    )
+    should_terminate = termination.check_termination(empty_graph, URIRef("urn:workflow:Empty"))
 
     # Empty workflow has no active tasks - should terminate
     assert should_terminate is True
@@ -262,9 +252,7 @@ def test_implicit_termination_handles_empty_workflow(empty_graph: Graph) -> None
 def test_implicit_termination_evaluate_success(completed_workflow_graph: Graph) -> None:
     """Evaluate returns success when workflow should terminate."""
     termination = ImplicitTermination()
-    result = termination.evaluate(
-        completed_workflow_graph, URIRef("urn:workflow:W1"), {}
-    )
+    result = termination.evaluate(completed_workflow_graph, URIRef("urn:workflow:W1"), {})
 
     assert isinstance(result, PatternResult)
     assert result.success is True
@@ -283,28 +271,20 @@ def test_implicit_termination_evaluate_pending(active_workflow_graph: Graph) -> 
     assert "active tasks" in result.message
 
 
-def test_implicit_termination_execute_marks_workflow(
-    completed_workflow_graph: Graph,
-) -> None:
+def test_implicit_termination_execute_marks_workflow(completed_workflow_graph: Graph) -> None:
     """Execute marks workflow as completed with implicit termination."""
     termination = ImplicitTermination()
-    result = termination.execute(
-        completed_workflow_graph, URIRef("urn:workflow:W1"), {}
-    )
+    result = termination.execute(completed_workflow_graph, URIRef("urn:workflow:W1"), {})
 
     assert isinstance(result, ExecutionResult)
     assert result.committed is True
     assert result.data_updates["workflow_terminated"] is True
 
 
-def test_implicit_termination_execute_creates_rdf_updates(
-    completed_workflow_graph: Graph,
-) -> None:
+def test_implicit_termination_execute_creates_rdf_updates(completed_workflow_graph: Graph) -> None:
     """Execute creates correct RDF triple updates."""
     termination = ImplicitTermination()
-    result = termination.execute(
-        completed_workflow_graph, URIRef("urn:workflow:W1"), {}
-    )
+    result = termination.execute(completed_workflow_graph, URIRef("urn:workflow:W1"), {})
 
     assert len(result.updates) == 3
     # Verify status, termination type, and pattern ID
@@ -346,20 +326,13 @@ def test_cycle_with_implicit_termination(cycle_graph: Graph) -> None:
         cycle_graph.add((URIRef(task), YAWL.status, Literal("completed")))
 
     # Verify implicit termination triggers
-    should_terminate = termination.check_termination(
-        cycle_graph, URIRef("urn:workflow:W1")
-    )
+    should_terminate = termination.check_termination(cycle_graph, URIRef("urn:workflow:W1"))
     assert should_terminate is True
 
 
 def test_pattern_result_immutability() -> None:
     """PatternResult is immutable frozen dataclass."""
-    result = PatternResult(
-        success=True,
-        status=PatternStatus.SUCCESS,
-        message="Test",
-        metadata={"key": "value"},
-    )
+    result = PatternResult(success=True, status=PatternStatus.SUCCESS, message="Test", metadata={"key": "value"})
 
     # Verify cannot modify fields
     with pytest.raises(AttributeError):
@@ -368,9 +341,7 @@ def test_pattern_result_immutability() -> None:
 
 def test_execution_result_immutability() -> None:
     """ExecutionResult is immutable frozen dataclass."""
-    result = ExecutionResult(
-        committed=True, task=URIRef("urn:task:Test"), updates=[], data_updates={}
-    )
+    result = ExecutionResult(committed=True, task=URIRef("urn:task:Test"), updates=[], data_updates={})
 
     # Verify cannot modify fields
     with pytest.raises(AttributeError):

@@ -20,13 +20,7 @@ Examples
 --------
 Basic usage with hooks::
 
-    from kgcl.unrdf_engine import (
-        UnrdfEngine,
-        PersistentHookRegistry,
-        KnowledgeHook,
-        HookPhase,
-        IngestionPipeline,
-    )
+    from kgcl.unrdf_engine import UnrdfEngine, PersistentHookRegistry, KnowledgeHook, HookPhase, IngestionPipeline
 
     # Create engine with hook support
     registry = PersistentHookRegistry(storage_path=Path("hooks.json"))
@@ -50,9 +44,7 @@ Basic usage with hooks::
 
     # Use ingestion pipeline
     pipeline = IngestionPipeline(engine)
-    result = pipeline.ingest_json(
-        data={"type": "Person", "name": "Alice"}, agent="api_service"
-    )
+    result = pipeline.ingest_json(data={"type": "Person", "name": "Alice"}, agent="api_service")
 
     # Check hook receipts
     for receipt in result.hook_results:

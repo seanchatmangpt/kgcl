@@ -8,12 +8,7 @@ from datetime import datetime, timedelta
 from typing import Any
 
 from kgcl.ingestion.config import FeatureConfig
-from kgcl.ingestion.models import (
-    AppEvent,
-    BrowserVisit,
-    CalendarBlock,
-    MaterializedFeature,
-)
+from kgcl.ingestion.models import AppEvent, BrowserVisit, CalendarBlock, MaterializedFeature
 
 
 class FeatureMaterializer:
@@ -36,10 +31,7 @@ class FeatureMaterializer:
         self._cache_misses = 0
 
     def materialize(
-        self,
-        events: list[AppEvent | BrowserVisit | CalendarBlock],
-        window_start: datetime,
-        window_end: datetime,
+        self, events: list[AppEvent | BrowserVisit | CalendarBlock], window_start: datetime, window_end: datetime
     ) -> list[MaterializedFeature]:
         """Materialize features for event batch.
 
@@ -65,36 +57,18 @@ class FeatureMaterializer:
         # Compute each enabled feature
         for feature_id in self.config.enabled_features:
             if feature_id == "app_usage_time":
-                features.extend(
-                    self._compute_app_usage_time(
-                        windowed_events, window_start, window_end
-                    )
-                )
+                features.extend(self._compute_app_usage_time(windowed_events, window_start, window_end))
             elif feature_id == "browser_domain_visits":
-                features.extend(
-                    self._compute_browser_domain_visits(
-                        windowed_events, window_start, window_end
-                    )
-                )
+                features.extend(self._compute_browser_domain_visits(windowed_events, window_start, window_end))
             elif feature_id == "meeting_count":
-                features.extend(
-                    self._compute_meeting_count(
-                        windowed_events, window_start, window_end
-                    )
-                )
+                features.extend(self._compute_meeting_count(windowed_events, window_start, window_end))
             elif feature_id == "context_switches":
-                features.extend(
-                    self._compute_context_switches(
-                        windowed_events, window_start, window_end
-                    )
-                )
+                features.extend(self._compute_context_switches(windowed_events, window_start, window_end))
 
         return features
 
     def materialize_incremental(
-        self,
-        new_events: list[AppEvent | BrowserVisit | CalendarBlock],
-        existing_features: list[MaterializedFeature],
+        self, new_events: list[AppEvent | BrowserVisit | CalendarBlock], existing_features: list[MaterializedFeature]
     ) -> list[MaterializedFeature]:
         """Incrementally update features with new events.
 
@@ -127,9 +101,7 @@ class FeatureMaterializer:
         # Recompute features for affected windows
         updated_features: list[MaterializedFeature] = []
         for window_start, window_end in affected_windows:
-            windowed_events = self._filter_by_window(
-                new_events, window_start, window_end
-            )
+            windowed_events = self._filter_by_window(new_events, window_start, window_end)
             new_features = self.materialize(windowed_events, window_start, window_end)
 
             # Merge with existing features
@@ -146,10 +118,7 @@ class FeatureMaterializer:
         return list(feature_map.values())
 
     def _compute_app_usage_time(
-        self,
-        events: list[AppEvent | BrowserVisit | CalendarBlock],
-        window_start: datetime,
-        window_end: datetime,
+        self, events: list[AppEvent | BrowserVisit | CalendarBlock], window_start: datetime, window_end: datetime
     ) -> list[MaterializedFeature]:
         """Compute total time per application.
 
@@ -192,10 +161,7 @@ class FeatureMaterializer:
         return features
 
     def _compute_browser_domain_visits(
-        self,
-        events: list[AppEvent | BrowserVisit | CalendarBlock],
-        window_start: datetime,
-        window_end: datetime,
+        self, events: list[AppEvent | BrowserVisit | CalendarBlock], window_start: datetime, window_end: datetime
     ) -> list[MaterializedFeature]:
         """Compute visit counts per domain.
 
@@ -231,20 +197,14 @@ class FeatureMaterializer:
                     aggregation_type="count",
                     value=count,
                     sample_count=count,
-                    metadata={
-                        "domain": domain,
-                        "unique_urls": len(unique_urls[domain]),
-                    },
+                    metadata={"domain": domain, "unique_urls": len(unique_urls[domain])},
                 )
             )
 
         return features
 
     def _compute_meeting_count(
-        self,
-        events: list[AppEvent | BrowserVisit | CalendarBlock],
-        window_start: datetime,
-        window_end: datetime,
+        self, events: list[AppEvent | BrowserVisit | CalendarBlock], window_start: datetime, window_end: datetime
     ) -> list[MaterializedFeature]:
         """Compute meeting statistics.
 
@@ -299,10 +259,7 @@ class FeatureMaterializer:
         return features
 
     def _compute_context_switches(
-        self,
-        events: list[AppEvent | BrowserVisit | CalendarBlock],
-        window_start: datetime,
-        window_end: datetime,
+        self, events: list[AppEvent | BrowserVisit | CalendarBlock], window_start: datetime, window_end: datetime
     ) -> list[MaterializedFeature]:
         """Compute application context switch count.
 
@@ -320,9 +277,7 @@ class FeatureMaterializer:
         list[MaterializedFeature]
             Context switch features
         """
-        app_events = sorted(
-            [e for e in events if isinstance(e, AppEvent)], key=lambda e: e.timestamp
-        )
+        app_events = sorted([e for e in events if isinstance(e, AppEvent)], key=lambda e: e.timestamp)
 
         switch_count = 0
         prev_app: str | None = None
@@ -345,10 +300,7 @@ class FeatureMaterializer:
         ]
 
     def _filter_by_window(
-        self,
-        events: list[AppEvent | BrowserVisit | CalendarBlock],
-        window_start: datetime,
-        window_end: datetime,
+        self, events: list[AppEvent | BrowserVisit | CalendarBlock], window_start: datetime, window_end: datetime
     ) -> list[AppEvent | BrowserVisit | CalendarBlock]:
         """Filter events by time window.
 
@@ -450,9 +402,7 @@ class FeatureMaterializer:
         aligned_seconds = (seconds_since_epoch // window_seconds) * window_seconds
         return epoch + timedelta(seconds=aligned_seconds)
 
-    def _merge_features(
-        self, existing: MaterializedFeature, new: MaterializedFeature
-    ) -> MaterializedFeature:
+    def _merge_features(self, existing: MaterializedFeature, new: MaterializedFeature) -> MaterializedFeature:
         """Merge existing and new feature values.
 
         Parameters
@@ -476,8 +426,7 @@ class FeatureMaterializer:
             # Weighted average
             total_samples = existing.sample_count + new.sample_count
             merged_value = (
-                float(existing.value) * existing.sample_count
-                + float(new.value) * new.sample_count
+                float(existing.value) * existing.sample_count + float(new.value) * new.sample_count
             ) / total_samples
         else:
             # Default: use new value

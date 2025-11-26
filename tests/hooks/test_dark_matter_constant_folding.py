@@ -81,10 +81,7 @@ def test_constant_folding_unary_operators() -> None:
 def test_constant_folding_no_expression_field() -> None:
     """Constant folding skips steps without expression field."""
     optimizer = DarkMatterOptimizer()
-    steps = [
-        {"step_id": 1, "operation": "scan", "cost": 1.0},
-        {"step_id": 2, "operation": "join", "cost": 10.0},
-    ]
+    steps = [{"step_id": 1, "operation": "scan", "cost": 1.0}, {"step_id": 2, "operation": "join", "cost": 10.0}]
 
     result = optimizer._apply_constant_folding(steps)
 

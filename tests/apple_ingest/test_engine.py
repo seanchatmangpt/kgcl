@@ -11,11 +11,10 @@ Tests verify behavior of AppleIngestor including:
 from __future__ import annotations
 
 import json
-from datetime import UTC, datetime
 from pathlib import Path
 
 import pytest
-from rdflib import RDF, Namespace
+from rdflib import RDF
 
 from kgcl.ingestion.apple_pyobjc import APPLE, SCHEMA, AppleIngestConfig, AppleIngestor
 
@@ -50,9 +49,7 @@ def sample_payload(tmp_path: Path, full_ingest_data) -> Path:
         return {
             "uri": f"urn:apple:reminder:{reminder.calendarItemIdentifier}",
             "title": reminder.title,
-            "due": reminder.dueDateComponents.isoformat()
-            if reminder.dueDateComponents
-            else None,
+            "due": reminder.dueDateComponents.isoformat() if reminder.dueDateComponents else None,
             "status": "completed" if reminder.isCompleted else "pending",
         }
 
@@ -94,9 +91,7 @@ def test_apple_ingestor_initialization(temp_config: AppleIngestConfig):
     assert len(ingestor._graph) == 0  # Empty graph initially
 
 
-def test_ingest_creates_output_file(
-    temp_config: AppleIngestConfig, sample_payload: Path
-):
+def test_ingest_creates_output_file(temp_config: AppleIngestConfig, sample_payload: Path):
     """Ingest creates Turtle output file at configured path."""
     ingestor = AppleIngestor(temp_config)
     output_path = ingestor.ingest(payload_path=sample_payload)
@@ -106,9 +101,7 @@ def test_ingest_creates_output_file(
     assert output_path.stat().st_size > 0
 
 
-def test_ingest_emits_rdf_triples_for_calendar_events(
-    temp_config: AppleIngestConfig, sample_payload: Path
-):
+def test_ingest_emits_rdf_triples_for_calendar_events(temp_config: AppleIngestConfig, sample_payload: Path):
     """Ingest emits RDF triples for calendar events."""
     ingestor = AppleIngestor(temp_config)
     ingestor.ingest(payload_path=sample_payload)
@@ -121,15 +114,11 @@ def test_ingest_emits_rdf_triples_for_calendar_events(
     for event_uri in events:
         title = ingestor._graph.value(subject=event_uri, predicate=SCHEMA.name)
         assert title is not None
-        start_time = ingestor._graph.value(
-            subject=event_uri, predicate=APPLE.hasStartTime
-        )
+        start_time = ingestor._graph.value(subject=event_uri, predicate=APPLE.hasStartTime)
         assert start_time is not None
 
 
-def test_ingest_emits_rdf_triples_for_reminders(
-    temp_config: AppleIngestConfig, sample_payload: Path
-):
+def test_ingest_emits_rdf_triples_for_reminders(temp_config: AppleIngestConfig, sample_payload: Path):
     """Ingest emits RDF triples for reminders."""
     ingestor = AppleIngestor(temp_config)
     ingestor.ingest(payload_path=sample_payload)
@@ -146,9 +135,7 @@ def test_ingest_emits_rdf_triples_for_reminders(
         assert status is not None
 
 
-def test_ingest_emits_rdf_triples_for_mail(
-    temp_config: AppleIngestConfig, sample_payload: Path
-):
+def test_ingest_emits_rdf_triples_for_mail(temp_config: AppleIngestConfig, sample_payload: Path):
     """Ingest emits RDF triples for mail messages."""
     ingestor = AppleIngestor(temp_config)
     ingestor.ingest(payload_path=sample_payload)
@@ -165,9 +152,7 @@ def test_ingest_emits_rdf_triples_for_mail(
         assert author is not None
 
 
-def test_ingest_emits_rdf_triples_for_files(
-    temp_config: AppleIngestConfig, sample_payload: Path
-):
+def test_ingest_emits_rdf_triples_for_files(temp_config: AppleIngestConfig, sample_payload: Path):
     """Ingest emits RDF triples for file artifacts."""
     ingestor = AppleIngestor(temp_config)
     ingestor.ingest(payload_path=sample_payload)
@@ -184,9 +169,7 @@ def test_ingest_emits_rdf_triples_for_files(
         assert url is not None
 
 
-def test_ingest_without_pyobjc_and_no_payload_raises_error(
-    temp_config: AppleIngestConfig,
-):
+def test_ingest_without_pyobjc_and_no_payload_raises_error(temp_config: AppleIngestConfig):
     """Ingest raises error when PyObjC unavailable and no payload provided."""
     ingestor = AppleIngestor(temp_config)
 
@@ -235,10 +218,7 @@ apple:CalendarEventShape a sh:NodeShape ;
 def test_ingest_handles_empty_payload(temp_config: AppleIngestConfig, tmp_path: Path):
     """Ingest handles empty payload gracefully."""
     empty_payload = tmp_path / "empty.json"
-    empty_payload.write_text(
-        json.dumps({"events": [], "reminders": [], "mail": [], "files": []}),
-        encoding="utf-8",
-    )
+    empty_payload.write_text(json.dumps({"events": [], "reminders": [], "mail": [], "files": []}), encoding="utf-8")
 
     ingestor = AppleIngestor(temp_config)
     output_path = ingestor.ingest(payload_path=empty_payload)
@@ -263,9 +243,7 @@ def test_ingest_creates_parent_directories(tmp_path: Path, sample_payload: Path)
 
 
 @pytest.mark.performance
-def test_ingest_meets_performance_target(
-    temp_config: AppleIngestConfig, sample_payload: Path
-):
+def test_ingest_meets_performance_target(temp_config: AppleIngestConfig, sample_payload: Path):
     """Ingest completes within performance target (p99 < 100ms)."""
     import time
 
@@ -280,9 +258,7 @@ def test_ingest_meets_performance_target(
 
 
 @pytest.mark.integration
-def test_full_pipeline_produces_valid_turtle(
-    temp_config: AppleIngestConfig, sample_payload: Path
-):
+def test_full_pipeline_produces_valid_turtle(temp_config: AppleIngestConfig, sample_payload: Path):
     """Full pipeline produces syntactically valid Turtle file."""
     ingestor = AppleIngestor(temp_config)
     output_path = ingestor.ingest(payload_path=sample_payload)
@@ -303,9 +279,7 @@ def test_full_pipeline_produces_valid_turtle(
     assert len(reminder_types) > 0
 
 
-def test_ingest_with_partial_config_includes_only_selected_sources(
-    tmp_path: Path, sample_payload: Path
-):
+def test_ingest_with_partial_config_includes_only_selected_sources(tmp_path: Path, sample_payload: Path):
     """Ingest respects configuration to include only selected data sources."""
     # Config with only calendars and reminders
     config = AppleIngestConfig(

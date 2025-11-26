@@ -11,15 +11,9 @@ from typing import Literal
 
 from kgcl.ingestion.apple_pyobjc import AppleIngestConfig as CoreAppleIngestConfig
 from kgcl.ingestion.apple_pyobjc import AppleIngestor
-from personal_kgcl.ingest.config import AppleIngestConfig, load_ingest_config
+from personal_kgcl.ingest.config import load_ingest_config
 from personal_kgcl.ingest.engine import AppleIngestEngine
-from personal_kgcl.ingest.models import (
-    AppleIngestInput,
-    CalendarEvent,
-    FileArtifact,
-    MailMessage,
-    ReminderTask,
-)
+from personal_kgcl.ingest.models import AppleIngestInput, CalendarEvent, FileArtifact, MailMessage, ReminderTask
 
 SourceName = Literal["calendars", "reminders", "mail", "files"]
 
@@ -40,11 +34,7 @@ def scan_apple(
     payload = _load_payload(input) if input else None
 
     if payload is None:
-        ingestor = AppleIngestor(
-            CoreAppleIngestConfig(
-                output_path=config.output_path if output is None else output
-            )
-        )
+        ingestor = AppleIngestor(CoreAppleIngestConfig(output_path=config.output_path if output is None else output))
         output_path = ingestor.ingest(payload_path=input)
         return f"PyObjC ingest complete → {output_path}"
 
@@ -155,14 +145,8 @@ def _convert_files(records: list[dict]) -> list[FileArtifact]:
 
 
 def _build_ingest_input(payload: dict, sources: set[str]) -> AppleIngestInput:
-    events = (
-        _convert_events(payload.get("events", [])) if "calendars" in sources else []
-    )
-    reminders = (
-        _convert_reminders(payload.get("reminders", []))
-        if "reminders" in sources
-        else []
-    )
+    events = _convert_events(payload.get("events", [])) if "calendars" in sources else []
+    reminders = _convert_reminders(payload.get("reminders", [])) if "reminders" in sources else []
     mail = _convert_mail(payload.get("mail", [])) if "mail" in sources else []
     files = _convert_files(payload.get("files", [])) if "files" in sources else []
 

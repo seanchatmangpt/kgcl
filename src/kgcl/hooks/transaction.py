@@ -70,9 +70,7 @@ class IsolationViolation(TransactionError):
             ID of conflicting transaction
         """
         self.conflicting_tx_id = conflicting_tx_id
-        super().__init__(
-            tx_id, f"Isolation violated by transaction '{conflicting_tx_id}'"
-        )
+        super().__init__(tx_id, f"Isolation violated by transaction '{conflicting_tx_id}'")
 
 
 @dataclass
@@ -119,9 +117,7 @@ class Transaction:
             If transaction is not in PENDING state
         """
         if self.state != TransactionState.PENDING:
-            raise TransactionError(
-                f"Cannot begin transaction in state {self.state.value}"
-            )
+            raise TransactionError(self.tx_id, f"Cannot begin transaction in state {self.state.value}")
         self.state = TransactionState.EXECUTING
 
     def commit(self) -> None:
@@ -134,9 +130,7 @@ class Transaction:
             If transaction is not in EXECUTING state
         """
         if self.state != TransactionState.EXECUTING:
-            raise TransactionError(
-                f"Cannot commit transaction in state {self.state.value}"
-            )
+            raise TransactionError(self.tx_id, f"Cannot commit transaction in state {self.state.value}")
         self.state = TransactionState.COMMITTED
         self.completed_at = datetime.now(UTC)
 
@@ -203,10 +197,7 @@ class Transaction:
         Dict[str, List[Tuple[str, str, str]]]
             Dictionary with 'added' and 'removed' keys
         """
-        return {
-            "added": self.added_triples.copy(),
-            "removed": self.removed_triples.copy(),
-        }
+        return {"added": self.added_triples.copy(), "removed": self.removed_triples.copy()}
 
 
 class TransactionManager:
@@ -231,9 +222,7 @@ class TransactionManager:
         self.rolled_back_transactions: list[Transaction] = []
         self._locks: dict[str, str] = {}  # resource_id -> tx_id
 
-    def begin_transaction(
-        self, tx_id: str | None = None, isolation_level: str = "READ_COMMITTED"
-    ) -> Transaction:
+    def begin_transaction(self, tx_id: str | None = None, isolation_level: str = "READ_COMMITTED") -> Transaction:
         """
         Start new transaction.
 
@@ -255,15 +244,13 @@ class TransactionManager:
             If too many concurrent transactions or tx_id already exists
         """
         if len(self.transactions) >= self.max_concurrent:
-            raise TransactionError(
-                f"Too many concurrent transactions (max: {self.max_concurrent})"
-            )
+            raise TransactionError("SYSTEM", f"Too many concurrent transactions (max: {self.max_concurrent})")
 
         if tx_id is None:
             tx_id = str(uuid.uuid4())
 
         if tx_id in self.transactions:
-            raise TransactionError(f"Transaction {tx_id} already exists")
+            raise TransactionError(tx_id, "Transaction already exists")
 
         tx = Transaction(tx_id=tx_id, isolation_level=isolation_level)
         tx.begin()
@@ -285,7 +272,7 @@ class TransactionManager:
             If transaction not found or cannot be committed
         """
         if tx_id not in self.transactions:
-            raise TransactionError(f"Transaction {tx_id} not found")
+            raise TransactionError(tx_id, "Transaction not found")
 
         tx = self.transactions[tx_id]
 
@@ -317,7 +304,7 @@ class TransactionManager:
             If transaction not found
         """
         if tx_id not in self.transactions:
-            raise TransactionError(f"Transaction {tx_id} not found")
+            raise TransactionError(tx_id, "Transaction not found")
 
         tx = self.transactions[tx_id]
         tx.rollback()
@@ -394,7 +381,7 @@ class TransactionManager:
             If transaction not found
         """
         if tx_id not in self.transactions:
-            raise TransactionError(f"Transaction {tx_id} not found")
+            raise TransactionError(tx_id, "Transaction not found")
 
         if resource_id in self._locks:
             # Already locked by another transaction
@@ -444,12 +431,8 @@ class TransactionManager:
             # Check for conflicting changes
             for triple in tx.added_triples:
                 if triple in other_tx.removed_triples:
-                    raise IsolationViolation(
-                        f"Transaction {tx.tx_id} conflicts with {other_tx.tx_id}"
-                    )
+                    raise IsolationViolation(f"Transaction {tx.tx_id} conflicts with {other_tx.tx_id}")
 
             for triple in tx.removed_triples:
                 if triple in other_tx.added_triples:
-                    raise IsolationViolation(
-                        f"Transaction {tx.tx_id} conflicts with {other_tx.tx_id}"
-                    )
+                    raise IsolationViolation(f"Transaction {tx.tx_id} conflicts with {other_tx.tx_id}")

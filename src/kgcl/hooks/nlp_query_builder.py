@@ -56,11 +56,7 @@ class NLPQueryBuilder:
         self.templates = {
             # "What is X?" pattern
             "what_is": {
-                "patterns": [
-                    r"what\s+is\s+(?:a|an|the)?\s*(\w+)",
-                    r"describe\s+(\w+)",
-                    r"tell\s+me\s+about\s+(\w+)",
-                ],
+                "patterns": [r"what\s+is\s+(?:a|an|the)?\s*(\w+)", r"describe\s+(\w+)", r"tell\s+me\s+about\s+(\w+)"],
                 "sparql": """
                     SELECT ?property ?value
                     WHERE {{
@@ -72,10 +68,7 @@ class NLPQueryBuilder:
             },
             # "Find all X" pattern
             "find_all": {
-                "patterns": [
-                    r"(?:find|list|show)\s+(?:all|the)?\s*(\w+)",
-                    r"what\s+are\s+(?:all|the)?\s*(\w+)",
-                ],
+                "patterns": [r"(?:find|list|show)\s+(?:all|the)?\s*(\w+)", r"what\s+are\s+(?:all|the)?\s*(\w+)"],
                 "sparql": """
                     SELECT ?item ?label
                     WHERE {{
@@ -99,10 +92,7 @@ class NLPQueryBuilder:
             },
             # "Which X has Y" pattern
             "which_has": {
-                "patterns": [
-                    r"which\s+(\w+)\s+(?:has|have)\s+(\w+)",
-                    r"(\w+)\s+with\s+(\w+)",
-                ],
+                "patterns": [r"which\s+(\w+)\s+(?:has|have)\s+(\w+)", r"(\w+)\s+with\s+(\w+)"],
                 "sparql": """
                     SELECT ?item ?label
                     WHERE {{
@@ -116,10 +106,7 @@ class NLPQueryBuilder:
             },
             # "X of Y" pattern
             "property_of": {
-                "patterns": [
-                    r"(\w+)\s+of\s+(\w+)",
-                    r"what\s+is\s+the\s+(\w+)\s+of\s+(\w+)",
-                ],
+                "patterns": [r"(\w+)\s+of\s+(\w+)", r"what\s+is\s+the\s+(\w+)\s+of\s+(\w+)"],
                 "sparql": """
                     SELECT ?value
                     WHERE {{
@@ -145,11 +132,7 @@ class NLPQueryBuilder:
             },
             # "Show classes" pattern
             "show_classes": {
-                "patterns": [
-                    r"(?:show|list)\s+classes",
-                    r"what\s+classes",
-                    r"all\s+types",
-                ],
+                "patterns": [r"(?:show|list)\s+classes", r"what\s+classes", r"all\s+types"],
                 "sparql": """
                     SELECT DISTINCT ?class (COUNT(?instance) as ?count)
                     WHERE {{
@@ -203,9 +186,7 @@ class NLPQueryBuilder:
 
         # Step 4: SPARQL construction
         if best_match:
-            sparql = self._build_sparql_from_template(
-                best_match, matched_groups, entity_texts, relation_texts
-            )
+            sparql = self._build_sparql_from_template(best_match, matched_groups, entity_texts, relation_texts)
             query_type = self._extract_query_type(sparql)
             variables = self._extract_variables(sparql)
         else:
@@ -226,11 +207,7 @@ class NLPQueryBuilder:
         )
 
     def _build_sparql_from_template(
-        self,
-        template_name: str,
-        groups: list[str],
-        entities: list[str],
-        relations: list[str],
+        self, template_name: str, groups: list[str], entities: list[str], relations: list[str]
     ) -> str:
         """Build SPARQL query from template."""
         template = self.templates[template_name]
@@ -302,9 +279,7 @@ class NLPQueryBuilder:
         matches = pattern.findall(sparql)
         return list(set(matches))  # Remove duplicates
 
-    def build_sparql(
-        self, entities: list[str], relations: list[str], query_type: str = "SELECT"
-    ) -> str:
+    def build_sparql(self, entities: list[str], relations: list[str], query_type: str = "SELECT") -> str:
         """
         Build SPARQL query from entities and relations.
 
@@ -349,13 +324,7 @@ class NLPQueryBuilder:
         # Default
         return self._build_generic_query(entities, relations)
 
-    def add_template(
-        self,
-        name: str,
-        patterns: list[str],
-        sparql_template: str,
-        confidence: float = 0.5,
-    ) -> None:
+    def add_template(self, name: str, patterns: list[str], sparql_template: str, confidence: float = 0.5) -> None:
         """
         Add custom query template.
 
@@ -365,11 +334,7 @@ class NLPQueryBuilder:
             sparql_template: SPARQL template with placeholders
             confidence: Confidence score for matches
         """
-        self.templates[name] = {
-            "patterns": patterns,
-            "sparql": sparql_template,
-            "confidence": confidence,
-        }
+        self.templates[name] = {"patterns": patterns, "sparql": sparql_template, "confidence": confidence}
 
     def get_suggestions(self, partial_query: str) -> list[str]:
         """
@@ -385,16 +350,7 @@ class NLPQueryBuilder:
         suggestions = []
 
         # Common question starters
-        starters = [
-            "What is",
-            "Find all",
-            "How many",
-            "Which",
-            "Show me",
-            "List all",
-            "Count",
-            "Describe",
-        ]
+        starters = ["What is", "Find all", "How many", "Which", "Show me", "List all", "Count", "Describe"]
 
         partial_lower = partial_query.lower()
 

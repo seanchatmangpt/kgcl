@@ -45,15 +45,9 @@ class WellbeingInput(BaseModel):
     break_intervals: int = Field(..., ge=0, description="Number of breaks taken")
     context_switches: int = Field(..., ge=0, description="Context switch count")
     work_hours: float = Field(..., ge=0, description="Total work hours")
-    after_hours_time: float = Field(
-        default=0, ge=0, description="After-hours work time (hours)"
-    )
-    weekend_work_time: float = Field(
-        default=0, ge=0, description="Weekend work time (hours)"
-    )
-    physical_activity: float = Field(
-        default=0, ge=0, description="Physical activity time (hours, optional)"
-    )
+    after_hours_time: float = Field(default=0, ge=0, description="After-hours work time (hours)")
+    weekend_work_time: float = Field(default=0, ge=0, description="Weekend work time (hours)")
+    physical_activity: float = Field(default=0, ge=0, description="Physical activity time (hours, optional)")
 
     model_config = {
         "json_schema_extra": {
@@ -87,30 +81,14 @@ class WellbeingOutput(BaseModel):
         positive_factors: Positive wellbeing indicators
     """
 
-    wellbeing_score: int = Field(
-        default=0, ge=0, le=100, description="Overall wellbeing score (0-100)"
-    )
-    work_life_balance: dict[str, Any] = Field(
-        default_factory=dict, description="Work-life balance metrics"
-    )
-    focus_quality: dict[str, Any] = Field(
-        default_factory=dict, description="Focus and concentration quality"
-    )
-    break_patterns: dict[str, Any] = Field(
-        default_factory=dict, description="Break frequency and quality"
-    )
-    health_indicators: dict[str, str] = Field(
-        default_factory=dict, description="Health signal indicators"
-    )
-    recommendations: list[str] = Field(
-        default_factory=list, description="Wellbeing recommendations"
-    )
-    risk_factors: list[str] = Field(
-        default_factory=list, description="Identified risk factors"
-    )
-    positive_factors: list[str] = Field(
-        default_factory=list, description="Positive wellbeing indicators"
-    )
+    wellbeing_score: int = Field(default=0, ge=0, le=100, description="Overall wellbeing score (0-100)")
+    work_life_balance: dict[str, Any] = Field(default_factory=dict, description="Work-life balance metrics")
+    focus_quality: dict[str, Any] = Field(default_factory=dict, description="Focus and concentration quality")
+    break_patterns: dict[str, Any] = Field(default_factory=dict, description="Break frequency and quality")
+    health_indicators: dict[str, str] = Field(default_factory=dict, description="Health signal indicators")
+    recommendations: list[str] = Field(default_factory=list, description="Wellbeing recommendations")
+    risk_factors: list[str] = Field(default_factory=list, description="Identified risk factors")
+    positive_factors: list[str] = Field(default_factory=list, description="Positive wellbeing indicators")
 
     model_config = {
         "json_schema_extra": {
@@ -121,21 +99,9 @@ class WellbeingOutput(BaseModel):
                     "after_hours_ratio": 0.16,
                     "weekend_work": False,
                 },
-                "focus_quality": {
-                    "rating": "moderate",
-                    "focus_ratio": 0.25,
-                    "interruption_rate": "high",
-                },
-                "break_patterns": {
-                    "frequency": "low",
-                    "breaks_per_hour": 0.35,
-                    "recommended_breaks": 6,
-                },
-                "health_indicators": {
-                    "screen_time": "high",
-                    "physical_activity": "low",
-                    "stress_signals": "moderate",
-                },
+                "focus_quality": {"rating": "moderate", "focus_ratio": 0.25, "interruption_rate": "high"},
+                "break_patterns": {"frequency": "low", "breaks_per_hour": 0.35, "recommended_breaks": 6},
+                "health_indicators": {"screen_time": "high", "physical_activity": "low", "stress_signals": "moderate"},
                 "recommendations": [
                     "Take more frequent breaks (aim for 1 every 90 minutes)",
                     "Reduce after-hours work to improve work-life balance",
@@ -145,10 +111,7 @@ class WellbeingOutput(BaseModel):
                     "High screen time (8.5h) without sufficient breaks",
                     "After-hours work detected (1.5h)",
                 ],
-                "positive_factors": [
-                    "No weekend work - good boundary setting",
-                    "Some physical activity tracked",
-                ],
+                "positive_factors": ["No weekend work - good boundary setting", "Some physical activity tracked"],
             }
         }
     }
@@ -173,21 +136,13 @@ if DSPY_AVAILABLE:
         after_hours_time: float = dspy.InputField(desc="After-hours work (hours)")
 
         # Output fields
-        wellbeing_score: int = dspy.OutputField(
-            desc="Overall wellbeing score 0-100 based on all indicators"
-        )
+        wellbeing_score: int = dspy.OutputField(desc="Overall wellbeing score 0-100 based on all indicators")
         work_life_balance: str = dspy.OutputField(
             desc="Work-life balance assessment: excellent, good, needs_attention, or poor"
         )
-        health_indicators: str = dspy.OutputField(
-            desc="Key health signals and concerns (bullet points)"
-        )
-        recommendations: str = dspy.OutputField(
-            desc="5-7 actionable wellbeing recommendations prioritized by impact"
-        )
-        risk_factors: str = dspy.OutputField(
-            desc="Identified risk factors for burnout, stress, or health issues"
-        )
+        health_indicators: str = dspy.OutputField(desc="Key health signals and concerns (bullet points)")
+        recommendations: str = dspy.OutputField(desc="5-7 actionable wellbeing recommendations prioritized by impact")
+        risk_factors: str = dspy.OutputField(desc="Identified risk factors for burnout, stress, or health issues")
 
 
 class WellbeingModule:
@@ -350,9 +305,7 @@ class WellbeingModule:
             Break pattern assessment
         """
         breaks_per_hour = input_data.break_intervals / max(1, input_data.work_hours)
-        recommended_breaks = max(
-            3, int(input_data.work_hours / 2)
-        )  # 1 break per 2 hours
+        recommended_breaks = max(3, int(input_data.work_hours / 2))  # 1 break per 2 hours
 
         # Frequency assessment
         if input_data.break_intervals >= recommended_breaks:
@@ -470,9 +423,7 @@ class WellbeingModule:
                     "Set clear work end times and protect personal time."
                 )
             if input_data.weekend_work_time > 0:
-                recommendations.append(
-                    "Avoid weekend work to maintain healthy boundaries and prevent burnout."
-                )
+                recommendations.append("Avoid weekend work to maintain healthy boundaries and prevent burnout.")
 
         # Screen time recommendations
         if health.get("screen_time") in ["very_high", "high"]:
@@ -522,29 +473,19 @@ class WellbeingModule:
         risks = []
 
         if input_data.screen_time > 10:
-            risks.append(
-                f"Very high screen time ({input_data.screen_time:.1f}h) - eye strain and fatigue risk"
-            )
+            risks.append(f"Very high screen time ({input_data.screen_time:.1f}h) - eye strain and fatigue risk")
 
         if input_data.break_intervals < 2:
-            risks.append(
-                "Insufficient breaks - increased stress and reduced cognitive performance"
-            )
+            risks.append("Insufficient breaks - increased stress and reduced cognitive performance")
 
         if input_data.after_hours_time > 1.5:
-            risks.append(
-                f"Significant after-hours work ({input_data.after_hours_time:.1f}h) - work-life imbalance"
-            )
+            risks.append(f"Significant after-hours work ({input_data.after_hours_time:.1f}h) - work-life imbalance")
 
         if input_data.weekend_work_time > 0:
-            risks.append(
-                "Weekend work detected - burnout risk from insufficient recovery time"
-            )
+            risks.append("Weekend work detected - burnout risk from insufficient recovery time")
 
         if input_data.context_switches > 20:
-            risks.append(
-                "Very high context switching - mental fatigue and reduced efficiency"
-            )
+            risks.append("Very high context switching - mental fatigue and reduced efficiency")
 
         if input_data.meeting_time > 5:
             risks.append("Excessive meeting time - limited deep work capacity")
@@ -570,14 +511,10 @@ class WellbeingModule:
             positives.append("No weekend work - excellent boundary setting")
 
         if input_data.after_hours_time == 0:
-            positives.append(
-                "No after-hours work - maintaining healthy work-life balance"
-            )
+            positives.append("No after-hours work - maintaining healthy work-life balance")
 
         if input_data.break_intervals >= 4:
-            positives.append(
-                f"Good break frequency ({input_data.break_intervals} breaks)"
-            )
+            positives.append(f"Good break frequency ({input_data.break_intervals} breaks)")
 
         if input_data.focus_time >= 2.5:
             positives.append(f"Strong deep focus time ({input_data.focus_time:.1f}h)")
@@ -586,9 +523,7 @@ class WellbeingModule:
             positives.append("Low context switching - excellent concentration")
 
         if input_data.physical_activity > 0:
-            positives.append(
-                f"Physical activity tracked ({input_data.physical_activity:.1f}h)"
-            )
+            positives.append(f"Physical activity tracked ({input_data.physical_activity:.1f}h)")
 
         if input_data.screen_time < 7:
             positives.append("Healthy screen time levels")
@@ -613,9 +548,7 @@ class WellbeingModule:
         health = self._identify_health_indicators(input_data)
 
         # Generate recommendations and factors
-        recommendations = self._generate_recommendations(
-            input_data, balance, focus, breaks, health
-        )
+        recommendations = self._generate_recommendations(input_data, balance, focus, breaks, health)
         risk_factors = self._identify_risk_factors(input_data)
         positive_factors = self._identify_positive_factors(input_data)
 
@@ -677,12 +610,8 @@ class WellbeingModule:
         )
 
         # Parse outputs
-        health_indicators_raw = [
-            h.strip() for h in result.health_indicators.split("\n") if h.strip()
-        ]
-        recommendations = [
-            r.strip() for r in result.recommendations.split("\n") if r.strip()
-        ]
+        health_indicators_raw = [h.strip() for h in result.health_indicators.split("\n") if h.strip()]
+        recommendations = [r.strip() for r in result.recommendations.split("\n") if r.strip()]
         risk_factors = [r.strip() for r in result.risk_factors.split("\n") if r.strip()]
 
         # Use fallback for detailed assessments

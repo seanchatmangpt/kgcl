@@ -10,12 +10,7 @@ import pytest
 
 from kgcl.hooks.embeddings import EmbeddingsManager
 from kgcl.hooks.nlp_query_builder import NLPQuery, NLPQueryBuilder
-from kgcl.hooks.semantic_analysis import (
-    EntityType,
-    RelationType,
-    SemanticAnalyzer,
-    SemanticEntity,
-)
+from kgcl.hooks.semantic_analysis import EntityType, RelationType, SemanticAnalyzer, SemanticEntity
 
 
 class TestEmbeddingsManager:
@@ -138,11 +133,7 @@ class TestEmbeddingsManager:
         """Test TF-IDF based embeddings."""
         manager = EmbeddingsManager(model="tfidf")
 
-        texts = [
-            "knowledge graph semantic search",
-            "database query optimization",
-            "semantic web ontology",
-        ]
+        texts = ["knowledge graph semantic search", "database query optimization", "semantic web ontology"]
 
         # Build vocabulary
         embeddings = manager.batch_embed(texts)
@@ -308,11 +299,7 @@ class TestSemanticAnalyzer:
     def test_entity_to_dict(self):
         """Test entity serialization."""
         entity = SemanticEntity(
-            text="TestEntity",
-            entity_type=EntityType.CONCEPT,
-            confidence=0.9,
-            start_pos=0,
-            end_pos=10,
+            text="TestEntity", entity_type=EntityType.CONCEPT, confidence=0.9, start_pos=0, end_pos=10
         )
 
         entity_dict = entity.to_dict()

@@ -6,7 +6,7 @@ Provides generators and property tests for example-driven testing.
 import random
 from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Any, Generic, TypeVar
+from typing import Any, TypeVar
 
 T = TypeVar("T")
 P = TypeVar("P")
@@ -45,13 +45,9 @@ class PropertyGenerator[T]:
         return PropertyGenerator(lambda: random.uniform(min, max))
 
     @staticmethod
-    def strings(
-        length: int = 10, chars: str = "abcdefghijklmnopqrstuvwxyz"
-    ) -> "PropertyGenerator[str]":
+    def strings(length: int = 10, chars: str = "abcdefghijklmnopqrstuvwxyz") -> "PropertyGenerator[str]":
         """Generate random strings."""
-        return PropertyGenerator(
-            lambda: "".join(random.choice(chars) for _ in range(length))
-        )
+        return PropertyGenerator(lambda: "".join(random.choice(chars) for _ in range(length)))
 
     @staticmethod
     def booleans() -> "PropertyGenerator[bool]":
@@ -65,9 +61,7 @@ class PropertyGenerator[T]:
 
     @staticmethod
     def lists(
-        element_generator: "PropertyGenerator[T]",
-        min_length: int = 0,
-        max_length: int = 10,
+        element_generator: "PropertyGenerator[T]", min_length: int = 0, max_length: int = 10
     ) -> "PropertyGenerator[list[T]]":
         """Generate lists of values."""
 
@@ -216,6 +210,4 @@ class Property:
         """Build property test."""
         if self._predicate is None:
             raise ValueError("Predicate not set")
-        return PropertyTest(
-            name=self._name, predicate=self._predicate, examples=self._examples.copy()
-        )
+        return PropertyTest(name=self._name, predicate=self._predicate, examples=self._examples.copy())

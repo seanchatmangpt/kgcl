@@ -19,25 +19,19 @@ Examples
 >>> graph = Graph()
 >>> # Pattern 41: Work item failure with retry
 >>> wif = WorkItemFailure(retry_policy="exponential", max_retries=3)
->>> result = wif.on_failure(
-...     graph, URIRef("urn:task:FailedTask"), ValueError("Validation error")
-... )
+>>> result = wif.on_failure(graph, URIRef("urn:task:FailedTask"), ValueError("Validation error"))
 >>> assert result.handled
 >>> assert result.action_taken in ("retry", "compensate")
 
 >>> # Pattern 42: Case failure with escalation
 >>> cf = CaseFailure(escalation_chain=("supervisor", "manager", "executive"))
->>> result = cf.on_case_failure(
-...     graph, URIRef("urn:workflow:W1"), RuntimeError("Critical error")
-... )
+>>> result = cf.on_case_failure(graph, URIRef("urn:workflow:W1"), RuntimeError("Critical error"))
 >>> assert result.handled
 >>> assert result.action_taken == "escalate"
 
 >>> # Pattern 43: Service failure with fallback
 >>> sf = ServiceFailure(circuit_breaker_threshold=5, fallback_service="backup")
->>> result = sf.on_service_failure(
-...     graph, URIRef("urn:service:API"), ConnectionError("Timeout")
-... )
+>>> result = sf.on_service_failure(graph, URIRef("urn:service:API"), ConnectionError("Timeout"))
 >>> assert result.action_taken in ("retry", "fallback", "abort")
 """
 
@@ -149,12 +143,8 @@ class WorkItemFailure:
     >>> assert result.recovery_data["retry_delay"] > 0
 
     >>> # Work item with compensation task
-    >>> wif_comp = WorkItemFailure(
-    ...     retry_policy="none", compensation_task="urn:task:RollbackTransaction"
-    ... )
-    >>> result = wif_comp.on_failure(
-    ...     graph, URIRef("urn:task:CommitTx"), RuntimeError("Commit failed")
-    ... )
+    >>> wif_comp = WorkItemFailure(retry_policy="none", compensation_task="urn:task:RollbackTransaction")
+    >>> result = wif_comp.on_failure(graph, URIRef("urn:task:CommitTx"), RuntimeError("Commit failed"))
     >>> assert result.action_taken == "compensate"
     """
 
@@ -187,9 +177,7 @@ class WorkItemFailure:
             return 2.0**attempt  # 1s, 2s, 4s, 8s, ...
         return 0.0
 
-    def on_failure(
-        self, graph: Graph, task: URIRef, error: Exception
-    ) -> ExceptionResult:
+    def on_failure(self, graph: Graph, task: URIRef, error: Exception) -> ExceptionResult:
         """Handle work item failure with retry or compensation.
 
         Parameters
@@ -262,19 +250,13 @@ class WorkItemFailure:
         if self.compensation_task:
             logger.error(
                 "Work item failure - invoking compensation",
-                extra={
-                    "task": task_str,
-                    "error": error_msg,
-                    "compensation_task": self.compensation_task,
-                },
+                extra={"task": task_str, "error": error_msg, "compensation_task": self.compensation_task},
             )
 
             # Mark task as failed and trigger compensation
             graph.add((task, YAWL.status, Literal("failed")))
             graph.add((task, YAWL_EXCEPTION.lastError, Literal(error_msg)))
-            graph.add(
-                (task, YAWL_EXCEPTION.compensationTask, URIRef(self.compensation_task))
-            )
+            graph.add((task, YAWL_EXCEPTION.compensationTask, URIRef(self.compensation_task)))
 
             # Enable compensation task
             compensation_uri = URIRef(self.compensation_task)
@@ -285,25 +267,17 @@ class WorkItemFailure:
                 handled=True,
                 action_taken="compensate",
                 error_message=error_msg,
-                recovery_data={
-                    "compensation_task": self.compensation_task,
-                    "failed_task": task_str,
-                },
+                recovery_data={"compensation_task": self.compensation_task, "failed_task": task_str},
             )
 
         # No compensation - abort
-        logger.error(
-            "Work item failure - aborting", extra={"task": task_str, "error": error_msg}
-        )
+        logger.error("Work item failure - aborting", extra={"task": task_str, "error": error_msg})
 
         graph.add((task, YAWL.status, Literal("failed")))
         graph.add((task, YAWL_EXCEPTION.lastError, Literal(error_msg)))
 
         return ExceptionResult(
-            handled=False,
-            action_taken="abort",
-            error_message=error_msg,
-            recovery_data={"failed_task": task_str},
+            handled=False, action_taken="abort", error_message=error_msg, recovery_data={"failed_task": task_str}
         )
 
     def compensate(self, graph: Graph, task: URIRef) -> ExecutionResult:
@@ -348,10 +322,7 @@ class WorkItemFailure:
 
         comp_str = str(compensation_task)
 
-        logger.info(
-            "Executing compensation task",
-            extra={"failed_task": task_str, "compensation_task": comp_str},
-        )
+        logger.info("Executing compensation task", extra={"failed_task": task_str, "compensation_task": comp_str})
 
         # Execute compensation by updating task status and relationships
         updates = [
@@ -361,11 +332,7 @@ class WorkItemFailure:
         ]
 
         # Ensure compensation_task is URIRef
-        comp_uri = (
-            URIRef(compensation_task)
-            if isinstance(compensation_task, str)
-            else compensation_task
-        )
+        comp_uri = URIRef(compensation_task) if isinstance(compensation_task, str) else compensation_task
 
         return ExecutionResult(
             committed=True,
@@ -413,9 +380,7 @@ class CaseFailure:
     >>> # Define case failure with 3-level escalation
     >>> cf = CaseFailure(escalation_chain=("team-lead", "director", "ceo"))
     >>> error = RuntimeError("Critical workflow failure: Data corruption detected")
-    >>> result = cf.on_case_failure(
-    ...     graph, URIRef("urn:workflow:CriticalProcess"), error
-    ... )
+    >>> result = cf.on_case_failure(graph, URIRef("urn:workflow:CriticalProcess"), error)
     >>> assert result.action_taken == "escalate"
     >>> assert result.recovery_data["escalation_level"] == 0
     >>> assert result.recovery_data["escalated_to"] == "team-lead"
@@ -425,9 +390,7 @@ class CaseFailure:
     name: str = "Case Failure"
     escalation_chain: tuple[str, ...] = ()
 
-    def on_case_failure(
-        self, graph: Graph, workflow: URIRef, error: Exception
-    ) -> ExceptionResult:
+    def on_case_failure(self, graph: Graph, workflow: URIRef, error: Exception) -> ExceptionResult:
         """Handle workflow case failure with escalation.
 
         Parameters
@@ -464,10 +427,7 @@ class CaseFailure:
 
         # Check if escalation chain exists
         if not self.escalation_chain:
-            logger.critical(
-                "Case failure - no escalation chain",
-                extra={"workflow": workflow_str, "error": error_msg},
-            )
+            logger.critical("Case failure - no escalation chain", extra={"workflow": workflow_str, "error": error_msg})
 
             graph.add((workflow, YAWL.status, Literal("failed")))
             graph.add((workflow, YAWL_EXCEPTION.lastError, Literal(error_msg)))
@@ -508,28 +468,18 @@ class CaseFailure:
 
         # Escalation chain exhausted - abort case
         logger.critical(
-            "Case failure - escalation chain exhausted",
-            extra={"workflow": workflow_str, "error": error_msg},
+            "Case failure - escalation chain exhausted", extra={"workflow": workflow_str, "error": error_msg}
         )
 
         graph.add((workflow, YAWL.status, Literal("aborted")))
         graph.add((workflow, YAWL_EXCEPTION.lastError, Literal(error_msg)))
-        graph.add(
-            (
-                workflow,
-                YAWL_EXCEPTION.escalationExhausted,
-                Literal(len(self.escalation_chain)),
-            )
-        )
+        graph.add((workflow, YAWL_EXCEPTION.escalationExhausted, Literal(len(self.escalation_chain))))
 
         return ExceptionResult(
             handled=False,
             action_taken="abort",
             error_message=error_msg,
-            recovery_data={
-                "escalation_exhausted": True,
-                "final_level": len(self.escalation_chain) - 1,
-            },
+            recovery_data={"escalation_exhausted": True, "final_level": len(self.escalation_chain) - 1},
         )
 
     def escalate(self, graph: Graph, workflow: URIRef, level: int) -> None:
@@ -544,21 +494,12 @@ class CaseFailure:
         level : int
             Current escalation level (0-indexed)
         """
-        escalated_to = (
-            self.escalation_chain[level]
-            if level < len(self.escalation_chain)
-            else "unknown"
-        )
+        escalated_to = self.escalation_chain[level] if level < len(self.escalation_chain) else "unknown"
 
         workflow_str = str(workflow)
 
         logger.info(
-            "Escalating case failure",
-            extra={
-                "workflow": workflow_str,
-                "level": level,
-                "escalated_to": escalated_to,
-            },
+            "Escalating case failure", extra={"workflow": workflow_str, "level": level, "escalated_to": escalated_to}
         )
 
         # Update escalation metadata
@@ -606,9 +547,7 @@ class ServiceFailure:
     >>> from rdflib import Graph, URIRef
     >>> graph = Graph()
     >>> # Define service failure with circuit breaker
-    >>> sf = ServiceFailure(
-    ...     circuit_breaker_threshold=3, fallback_service="urn:service:BackupAPI"
-    ... )
+    >>> sf = ServiceFailure(circuit_breaker_threshold=3, fallback_service="urn:service:BackupAPI")
     >>> error = ConnectionError("Service timeout after 30s")
     >>> result = sf.on_service_failure(graph, URIRef("urn:service:PrimaryAPI"), error)
     >>> assert result.action_taken in ("retry", "fallback")
@@ -626,9 +565,7 @@ class ServiceFailure:
     circuit_breaker_threshold: int = 5
     fallback_service: str | None = None
 
-    def on_service_failure(
-        self, graph: Graph, service: URIRef, error: Exception
-    ) -> ExceptionResult:
+    def on_service_failure(self, graph: Graph, service: URIRef, error: Exception) -> ExceptionResult:
         """Handle external service failure with circuit breaker.
 
         Parameters
@@ -674,10 +611,7 @@ class ServiceFailure:
         graph.add((service, YAWL_EXCEPTION.lastFailureTime, Literal(time.time())))
 
         # Check circuit breaker threshold
-        if (
-            new_failure_count >= self.circuit_breaker_threshold
-            and circuit_state == "closed"
-        ):
+        if new_failure_count >= self.circuit_breaker_threshold and circuit_state == "closed":
             # Open circuit
             logger.error(
                 "Service circuit breaker opened",
@@ -697,11 +631,7 @@ class ServiceFailure:
             if self.fallback_service:
                 logger.warning(
                     "Service failure - using fallback",
-                    extra={
-                        "service": service_str,
-                        "fallback": self.fallback_service,
-                        "error": error_msg,
-                    },
+                    extra={"service": service_str, "fallback": self.fallback_service, "error": error_msg},
                 )
 
                 fallback_result = self.try_fallback(graph, service)
@@ -720,21 +650,14 @@ class ServiceFailure:
             # No fallback - abort
             logger.critical(
                 "Service failure - no fallback available",
-                extra={
-                    "service": service_str,
-                    "error": error_msg,
-                    "circuit_state": "open",
-                },
+                extra={"service": service_str, "error": error_msg, "circuit_state": "open"},
             )
 
             return ExceptionResult(
                 handled=False,
                 action_taken="abort",
                 error_message=error_msg,
-                recovery_data={
-                    "circuit_state": "open",
-                    "failure_count": new_failure_count,
-                },
+                recovery_data={"circuit_state": "open", "failure_count": new_failure_count},
             )
 
         # Circuit closed or half-open - retry
@@ -786,10 +709,7 @@ class ServiceFailure:
         fallback_uri = URIRef(self.fallback_service)
         fallback_str = self.fallback_service
 
-        logger.info(
-            "Using fallback service",
-            extra={"failed_service": service_str, "fallback": fallback_str},
-        )
+        logger.info("Using fallback service", extra={"failed_service": service_str, "fallback": fallback_str})
 
         # Execute fallback by updating service status and relationships
         updates = [
@@ -802,11 +722,7 @@ class ServiceFailure:
             committed=True,
             task=fallback_uri,
             updates=updates,
-            data_updates={
-                "fallback_used": True,
-                "fallback_service": fallback_str,
-                "original_service": service_str,
-            },
+            data_updates={"fallback_used": True, "fallback_service": fallback_str, "original_service": service_str},
         )
 
 
@@ -847,16 +763,10 @@ def create_work_item_failure_with_exponential_retry(
     WorkItemFailure
         Configured work item failure handler
     """
-    return WorkItemFailure(
-        retry_policy="exponential",
-        max_retries=max_retries,
-        compensation_task=compensation_task,
-    )
+    return WorkItemFailure(retry_policy="exponential", max_retries=max_retries, compensation_task=compensation_task)
 
 
-def create_case_failure_with_escalation(
-    escalation_chain: tuple[str, ...],
-) -> CaseFailure:
+def create_case_failure_with_escalation(escalation_chain: tuple[str, ...]) -> CaseFailure:
     """Create case failure handler with multi-level escalation.
 
     Parameters
@@ -889,6 +799,4 @@ def create_service_failure_with_circuit_breaker(
     ServiceFailure
         Configured service failure handler
     """
-    return ServiceFailure(
-        circuit_breaker_threshold=threshold, fallback_service=fallback_service
-    )
+    return ServiceFailure(circuit_breaker_threshold=threshold, fallback_service=fallback_service)

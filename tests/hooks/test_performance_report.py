@@ -4,9 +4,7 @@ Performance Report Generation for KGCL Hooks System.
 Aggregates performance benchmark results and generates comprehensive SLO compliance report.
 """
 
-import json
 import subprocess
-import sys
 from pathlib import Path
 
 
@@ -25,15 +23,9 @@ def run_performance_benchmarks() -> dict:
         "--json-report-file=reports/performance_benchmark.json",
     ]
 
-    result = subprocess.run(
-        cmd, check=False, capture_output=True, text=True, timeout=120
-    )
+    result = subprocess.run(cmd, check=False, capture_output=True, text=True, timeout=120)
 
-    return {
-        "returncode": result.returncode,
-        "stdout": result.stdout,
-        "stderr": result.stderr,
-    }
+    return {"returncode": result.returncode, "stdout": result.stdout, "stderr": result.stderr}
 
 
 def parse_benchmark_results(stdout: str) -> list[dict]:

@@ -22,11 +22,7 @@ class ClipboardGateway:
     def _run(command: list[str], text: str) -> bool:
         try:
             subprocess.run(
-                command,
-                input=text.encode(),
-                check=True,
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
+                command, input=text.encode(), check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
             )
             return True
         except (FileNotFoundError, subprocess.CalledProcessError):

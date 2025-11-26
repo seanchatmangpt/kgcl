@@ -37,7 +37,7 @@ from kgcl.yawl_engine.patterns.data_patterns import (
 )
 
 if TYPE_CHECKING:
-    from collections.abc import Callable
+    pass
 
 # YAWL Namespace
 YAWL = Namespace("http://www.yawlfoundation.org/yawlschema#")
@@ -294,9 +294,7 @@ class TestPattern33TaskToTaskInteraction:
 
     def test_partial_mappings(self) -> None:
         """Only mapped variables are transferred."""
-        interaction = DataInteractionTaskToTask(
-            source_task="T1", target_task="T2", mappings={"price": "total_price"}
-        )
+        interaction = DataInteractionTaskToTask(source_task="T1", target_task="T2", mappings={"price": "total_price"})
 
         source_context = {"price": 500.0, "quantity": 10}
         target_context = interaction.transfer(Graph(), source_context)
@@ -307,9 +305,7 @@ class TestPattern33TaskToTaskInteraction:
     def test_missing_source_variable(self) -> None:
         """Missing source variables are not transferred."""
         interaction = DataInteractionTaskToTask(
-            source_task="T1",
-            target_task="T2",
-            mappings={"var1": "var2", "missing": "also_missing"},
+            source_task="T1", target_task="T2", mappings={"var1": "var2", "missing": "also_missing"}
         )
 
         source_context = {"var1": "value1"}
@@ -329,17 +325,13 @@ class TestPattern33TaskToTaskInteraction:
         graph.add((source, YAWL.outputMapping, Literal("price -> total_price")))
         graph.add((source, YAWL.outputMapping, Literal("quantity -> order_qty")))
 
-        interaction = DataInteractionTaskToTask.extract_from_graph(
-            graph, source, target
-        )
+        interaction = DataInteractionTaskToTask.extract_from_graph(graph, source, target)
 
         assert interaction.mappings == {"price": "total_price", "quantity": "order_qty"}
 
     def test_pattern_id(self) -> None:
         """Pattern 33 has correct ID."""
-        interaction = DataInteractionTaskToTask(
-            source_task="T1", target_task="T2", mappings={}
-        )
+        interaction = DataInteractionTaskToTask(source_task="T1", target_task="T2", mappings={})
         assert interaction.pattern_id == 33
 
 
@@ -367,10 +359,7 @@ class TestPattern34BlockToSubWorkflowInteraction:
             parent_block="Main",
             sub_workflow="Sub",
             input_mappings={},
-            output_mappings={
-                "credit_score": "customer_score",
-                "approval_status": "approved",
-            },
+            output_mappings={"credit_score": "customer_score", "approval_status": "approved"},
         )
 
         sub_context = {"credit_score": 750, "approval_status": "APPROVED"}
@@ -438,10 +427,7 @@ class TestPattern35CaseToCaseInteraction:
     def test_signal_based_interaction(self) -> None:
         """Signal-based interactions are identified correctly."""
         signal_interaction = DataInteractionCaseToCase(
-            source_case="C1",
-            target_case="C2",
-            shared_variables={"signal": "trigger"},
-            interaction_type="signal",
+            source_case="C1", target_case="C2", shared_variables={"signal": "trigger"}, interaction_type="signal"
         )
 
         assert signal_interaction.is_event_based() is True
@@ -449,19 +435,14 @@ class TestPattern35CaseToCaseInteraction:
     def test_data_copy_not_event_based(self) -> None:
         """Data copy is not event-based."""
         data_copy = DataInteractionCaseToCase(
-            source_case="C1",
-            target_case="C2",
-            shared_variables={"var": "var"},
-            interaction_type="data_copy",
+            source_case="C1", target_case="C2", shared_variables={"var": "var"}, interaction_type="data_copy"
         )
 
         assert data_copy.is_event_based() is False
 
     def test_pattern_id(self) -> None:
         """Pattern 35 has correct ID."""
-        interaction = DataInteractionCaseToCase(
-            source_case="C1", target_case="C2", shared_variables={}
-        )
+        interaction = DataInteractionCaseToCase(source_case="C1", target_case="C2", shared_variables={})
         assert interaction.pattern_id == 35
 
 

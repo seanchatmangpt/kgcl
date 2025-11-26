@@ -6,13 +6,7 @@ from pathlib import Path
 
 from rich.console import Console
 
-from kgcl.cli.core import (
-    CliApp,
-    CliConfigStore,
-    CliContext,
-    ClipboardGateway,
-    CliRenderer,
-)
+from kgcl.cli.core import CliApp, CliConfigStore, CliContext, ClipboardGateway, CliRenderer
 from kgcl.cli.services_impl import (
     DailyBriefDspyService,
     DailyBriefIngestionService,
@@ -22,9 +16,7 @@ from kgcl.cli.services_impl import (
 )
 
 
-def build_cli_app(
-    project_root: Path | None = None, dataset_path: Path | None = None
-) -> CliApp:
+def build_cli_app(project_root: Path | None = None, dataset_path: Path | None = None) -> CliApp:
     """Construct a fully-wired CliApp with all default services and dependencies.
 
     Factory function that assembles a complete CLI application context including
@@ -153,9 +145,7 @@ def build_cli_app(
     config_store = CliConfigStore(root / ".config" / "kgcl")
     ingestion_service = DailyBriefIngestionService(project_root=root)
     dspy_service = DailyBriefDspyService()
-    sparql_service = LocalDatasetSparqlService(
-        dataset_path=dataset_path or root / "data" / "apple-ingest.ttl"
-    )
+    sparql_service = LocalDatasetSparqlService(dataset_path=dataset_path or root / "data" / "apple-ingest.ttl")
     config_service = JsonConfigService(config_store)
     validator = NoOpLinkmlValidator(shapes_path=root / ".kgc" / "types.ttl")
 

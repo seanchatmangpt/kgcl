@@ -15,8 +15,6 @@ from pathlib import Path
 import pytest
 from rdflib import RDF, Graph, Namespace
 
-from kgcl.ingestion.apple_pyobjc import APPLE, SCHEMA
-
 SCHEMA_NS = Namespace("http://schema.org/")
 APPLE_NS = Namespace("urn:kgc:apple:")
 
@@ -70,9 +68,7 @@ def test_scan_apple_writes_rdf_from_json(tmp_path: Path, ingest_payload_json: Pa
         pytest.skip("personal_kgcl.handlers.ingest not available")
 
     output = tmp_path / "result.ttl"
-    message = scan_apple(
-        input=ingest_payload_json, output=output, verbose=True, dry_run=False
-    )
+    message = scan_apple(input=ingest_payload_json, output=output, verbose=True, dry_run=False)
 
     # Verify output file created
     assert output.exists()
@@ -88,9 +84,7 @@ def test_scan_apple_writes_rdf_from_json(tmp_path: Path, ingest_payload_json: Pa
     assert len(events) > 0
 
 
-def test_scan_apple_dry_run_does_not_write_file(
-    tmp_path: Path, ingest_payload_json: Path
-):
+def test_scan_apple_dry_run_does_not_write_file(tmp_path: Path, ingest_payload_json: Path):
     """scan_apple with dry_run=True does not write output file."""
     try:
         from personal_kgcl.handlers.ingest import scan_apple
@@ -98,9 +92,7 @@ def test_scan_apple_dry_run_does_not_write_file(
         pytest.skip("personal_kgcl.handlers.ingest not available")
 
     output = tmp_path / "result.ttl"
-    message = scan_apple(
-        input=ingest_payload_json, output=output, verbose=True, dry_run=True
-    )
+    message = scan_apple(input=ingest_payload_json, output=output, verbose=True, dry_run=True)
 
     # Verify dry run message
     assert "dry run" in message.lower() or "would write" in message.lower()
@@ -123,9 +115,7 @@ def test_scan_apple_handles_missing_input_file(tmp_path: Path):
         scan_apple(input=missing_input, output=output, verbose=False, dry_run=False)
 
 
-def test_generate_agenda_reads_rdf_and_creates_markdown(
-    tmp_path: Path, sample_apple_rdf: Path
-):
+def test_generate_agenda_reads_rdf_and_creates_markdown(tmp_path: Path, sample_apple_rdf: Path):
     """generate_agenda reads RDF and creates Markdown agenda."""
     try:
         from personal_kgcl.handlers.docs import generate_agenda
@@ -133,9 +123,7 @@ def test_generate_agenda_reads_rdf_and_creates_markdown(
         pytest.skip("personal_kgcl.handlers.docs not available")
 
     agenda_path = tmp_path / "agenda.md"
-    message = generate_agenda(
-        day="today", input_path=sample_apple_rdf, output_path=agenda_path
-    )
+    message = generate_agenda(day="today", input_path=sample_apple_rdf, output_path=agenda_path)
 
     # Verify agenda file created
     assert agenda_path.exists()
@@ -147,9 +135,7 @@ def test_generate_agenda_reads_rdf_and_creates_markdown(
     assert len(content) > 0
 
 
-def test_generate_agenda_includes_calendar_events(
-    tmp_path: Path, sample_apple_rdf: Path
-):
+def test_generate_agenda_includes_calendar_events(tmp_path: Path, sample_apple_rdf: Path):
     """generate_agenda includes calendar events in output."""
     try:
         from personal_kgcl.handlers.docs import generate_agenda
@@ -233,9 +219,7 @@ def test_scan_apple_meets_performance_target(tmp_path: Path, ingest_payload_json
 
 
 @pytest.mark.performance
-def test_generate_agenda_meets_performance_target(
-    tmp_path: Path, sample_apple_rdf: Path
-):
+def test_generate_agenda_meets_performance_target(tmp_path: Path, sample_apple_rdf: Path):
     """generate_agenda completes within performance target (p99 < 100ms)."""
     try:
         from personal_kgcl.handlers.docs import generate_agenda
@@ -251,15 +235,11 @@ def test_generate_agenda_meets_performance_target(
     elapsed_ms = (time.perf_counter() - start) * 1000
 
     # Performance target: p99 < 100ms
-    assert elapsed_ms < 100.0, (
-        f"generate_agenda took {elapsed_ms:.2f}ms, expected <100ms"
-    )
+    assert elapsed_ms < 100.0, f"generate_agenda took {elapsed_ms:.2f}ms, expected <100ms"
 
 
 @pytest.mark.integration
-def test_full_workflow_scan_then_generate_agenda(
-    tmp_path: Path, ingest_payload_json: Path
-):
+def test_full_workflow_scan_then_generate_agenda(tmp_path: Path, ingest_payload_json: Path):
     """Full workflow: scan Apple data then generate agenda."""
     try:
         from personal_kgcl.handlers.docs import generate_agenda
@@ -269,17 +249,13 @@ def test_full_workflow_scan_then_generate_agenda(
 
     # Step 1: Scan Apple data
     rdf_path = tmp_path / "apple.ttl"
-    scan_message = scan_apple(
-        input=ingest_payload_json, output=rdf_path, verbose=False, dry_run=False
-    )
+    scan_message = scan_apple(input=ingest_payload_json, output=rdf_path, verbose=False, dry_run=False)
     assert "Ingested" in scan_message
     assert rdf_path.exists()
 
     # Step 2: Generate agenda
     agenda_path = tmp_path / "agenda.md"
-    agenda_message = generate_agenda(
-        day="today", input_path=rdf_path, output_path=agenda_path
-    )
+    agenda_message = generate_agenda(day="today", input_path=rdf_path, output_path=agenda_path)
     assert "Agenda generated" in agenda_message
     assert agenda_path.exists()
 

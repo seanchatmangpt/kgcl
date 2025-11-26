@@ -12,12 +12,7 @@ import logging
 from datetime import UTC, datetime
 from typing import Any
 
-from .base import (
-    BaseCapabilityPlugin,
-    CapabilityData,
-    CapabilityDescriptor,
-    EntitlementLevel,
-)
+from .base import BaseCapabilityPlugin, CapabilityData, CapabilityDescriptor, EntitlementLevel
 
 logger = logging.getLogger(__name__)
 
@@ -113,10 +108,7 @@ class AppKitPlugin(BaseCapabilityPlugin):
                 tags={"display", "hardware"},
                 data_schema={
                     "type": "object",
-                    "properties": {
-                        "display_count": {"type": "integer"},
-                        "main_display": {"type": "object"},
-                    },
+                    "properties": {"display_count": {"type": "integer"}, "main_display": {"type": "object"}},
                 },
             ),
             CapabilityDescriptor(
@@ -168,9 +160,7 @@ class AppKitPlugin(BaseCapabilityPlugin):
             trusted = Quartz.AXIsProcessTrustedWithOptions(options)
 
             if not trusted:
-                logger.warning(
-                    "Accessibility access not granted. Window enumeration will be limited."
-                )
+                logger.warning("Accessibility access not granted. Window enumeration will be limited.")
 
             return trusted
 
@@ -178,9 +168,7 @@ class AppKitPlugin(BaseCapabilityPlugin):
             logger.error(f"Error checking accessibility access: {e}")
             return False
 
-    def collect_capability_data(
-        self, capability_name: str, parameters: dict[str, Any] | None = None
-    ) -> CapabilityData:
+    def collect_capability_data(self, capability_name: str, parameters: dict[str, Any] | None = None) -> CapabilityData:
         """Collect data for a specific AppKit capability."""
         timestamp = datetime.now(UTC)
 
@@ -197,20 +185,12 @@ class AppKitPlugin(BaseCapabilityPlugin):
                 raise ValueError(f"Unknown capability: {capability_name}")
 
             return CapabilityData(
-                capability_name=capability_name,
-                timestamp=timestamp,
-                data=data,
-                metadata={"plugin": self.plugin_id},
+                capability_name=capability_name, timestamp=timestamp, data=data, metadata={"plugin": self.plugin_id}
             )
 
         except Exception as e:
             logger.error(f"Error collecting {capability_name}: {e}")
-            return CapabilityData(
-                capability_name=capability_name,
-                timestamp=timestamp,
-                data={},
-                error=str(e),
-            )
+            return CapabilityData(capability_name=capability_name, timestamp=timestamp, data={}, error=str(e))
 
     def _get_frontmost_application(self) -> dict[str, Any]:
         """
@@ -357,8 +337,7 @@ class AppKitPlugin(BaseCapabilityPlugin):
 
             # Get window list
             window_list = Quartz.CGWindowListCopyWindowInfo(
-                Quartz.kCGWindowListOptionOnScreenOnly
-                | Quartz.kCGWindowListExcludeDesktopElements,
+                Quartz.kCGWindowListOptionOnScreenOnly | Quartz.kCGWindowListExcludeDesktopElements,
                 Quartz.kCGNullWindowID,
             )
 

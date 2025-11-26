@@ -32,12 +32,7 @@ class RemindersIngestEngine(BaseIngestEngine):
             if not task_id:
                 errors.append("Missing task identifier")
                 return IngestResult(
-                    success=False,
-                    graph=self.graph,
-                    receipt_hash="",
-                    items_processed=0,
-                    errors=errors,
-                    metadata={},
+                    success=False, graph=self.graph, receipt_hash="", items_processed=0, errors=errors, metadata={}
                 )
 
             # Create task URI
@@ -47,50 +42,30 @@ class RemindersIngestEngine(BaseIngestEngine):
             self.graph.add((task_uri, RDF.type, self.schema_ns.Action))
 
             # Map EKReminder properties to schema.org
-            title = getattr(source_object, "title_property", None) or getattr(
-                source_object, "title", None
-            )
+            title = getattr(source_object, "title_property", None) or getattr(source_object, "title", None)
             self._add_literal(task_uri, self.schema_ns.name, title)
 
             # Map task status
-            is_completed = getattr(source_object, "isCompleted", None) or getattr(
-                source_object, "completed", None
-            )
+            is_completed = getattr(source_object, "isCompleted", None) or getattr(source_object, "completed", None)
             if is_completed:
-                self._add_uri(
-                    task_uri,
-                    self.schema_ns.actionStatus,
-                    self.schema_ns.CompletedActionStatus,
-                )
+                self._add_uri(task_uri, self.schema_ns.actionStatus, self.schema_ns.CompletedActionStatus)
             else:
-                self._add_uri(
-                    task_uri,
-                    self.schema_ns.actionStatus,
-                    self.schema_ns.PotentialActionStatus,
-                )
+                self._add_uri(task_uri, self.schema_ns.actionStatus, self.schema_ns.PotentialActionStatus)
 
             # Add due date if present
-            due_date = getattr(source_object, "dueDateComponents", None) or getattr(
-                source_object, "due_date", None
-            )
+            due_date = getattr(source_object, "dueDateComponents", None) or getattr(source_object, "due_date", None)
             self._add_literal(task_uri, self.schema_ns.dueDate, due_date)
 
             # Add notes if present
-            notes = getattr(source_object, "notes_property", None) or getattr(
-                source_object, "notes", None
-            )
+            notes = getattr(source_object, "notes_property", None) or getattr(source_object, "notes", None)
             self._add_literal(task_uri, self.schema_ns.description, notes)
 
             # Add priority if present
-            priority = getattr(source_object, "priority_property", None) or getattr(
-                source_object, "priority", None
-            )
+            priority = getattr(source_object, "priority_property", None) or getattr(source_object, "priority", None)
             if priority and priority > 0:
                 priority_map = {1: "high", 5: "medium", 9: "low"}
                 priority_str = priority_map.get(priority, str(priority))
-                self._add_literal(
-                    task_uri, self.schema_ns.keywords, f"priority:{priority_str}"
-                )
+                self._add_literal(task_uri, self.schema_ns.keywords, f"priority:{priority_str}")
 
             # Add Apple-specific properties
             list_obj = getattr(source_object, "calendar", None)
@@ -110,20 +85,11 @@ class RemindersIngestEngine(BaseIngestEngine):
                 receipt_hash=receipt_hash,
                 items_processed=1,
                 errors=errors,
-                metadata={
-                    "task_id": task_id,
-                    "title": title,
-                    "completed": is_completed,
-                },
+                metadata={"task_id": task_id, "title": title, "completed": is_completed},
             )
 
         except Exception as e:
             errors.append(f"Reminders ingest error: {e!s}")
             return IngestResult(
-                success=False,
-                graph=self.graph,
-                receipt_hash="",
-                items_processed=0,
-                errors=errors,
-                metadata={},
+                success=False, graph=self.graph, receipt_hash="", items_processed=0, errors=errors, metadata={}
             )

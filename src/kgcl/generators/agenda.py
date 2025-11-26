@@ -5,7 +5,7 @@ and formats as markdown agenda with focus time blocks.
 """
 
 from dataclasses import dataclass, field
-from datetime import UTC, datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from typing import Any
 
 from rdflib import Graph, Literal, Namespace
@@ -92,9 +92,7 @@ class AgendaGenerator(ProjectionGenerator):
             start_date: Start date for agenda, defaults to today
         """
         super().__init__(graph)
-        self.start_date = start_date or datetime.now(tz=UTC).replace(
-            hour=0, minute=0, second=0, microsecond=0
-        )
+        self.start_date = start_date or datetime.now(tz=UTC).replace(hour=0, minute=0, second=0, microsecond=0)
 
     def gather_data(self) -> dict[str, Any]:
         """Gather calendar events and reminders from RDF graph.
@@ -232,9 +230,7 @@ class AgendaGenerator(ProjectionGenerator):
 
             # Identify focus blocks (gaps >= 2 hours during work hours)
             if gap_hours >= 2.0 and self._is_work_hours(current_end):
-                focus_blocks.append(
-                    FocusBlock(start=current_end, end=next_start, purpose="Deep Work")
-                )
+                focus_blocks.append(FocusBlock(start=current_end, end=next_start, purpose="Deep Work"))
 
         return focus_blocks
 

@@ -93,16 +93,10 @@ class TestGeneratorHandlers:
 
         assert result["artifact_type"] == "agenda"
         assert result["artifact_name"] is not None
-        assert (
-            "daily-" in result["artifact_name"].lower()
-            or "agenda" in result["artifact_name"].lower()
-        )
+        assert "daily-" in result["artifact_name"].lower() or "agenda" in result["artifact_name"].lower()
         assert result["artifact_content"] is not None
         assert len(result["artifact_content"]) > 0
-        assert (
-            "Summary" in result["artifact_content"]
-            or "summary" in result["artifact_content"].lower()
-        )
+        assert "Summary" in result["artifact_content"] or "summary" in result["artifact_content"].lower()
 
     def test_quality_report_handler_produces_artifact(self, test_graph: Graph) -> None:
         """Test that quality report handler produces valid artifact."""
@@ -158,9 +152,7 @@ class TestGeneratorHandlers:
         assert result["artifact_name"] is not None
         assert "stale" in result["artifact_name"].lower()
 
-    def test_all_reports_handler_runs_multiple_generators(
-        self, test_graph: Graph
-    ) -> None:
+    def test_all_reports_handler_runs_multiple_generators(self, test_graph: Graph) -> None:
         """Test that all_reports handler runs all generators."""
         ctx = ExecutionContext(
             event_type="urn:kgc:OntologyChanged",
@@ -183,14 +175,10 @@ class TestGeneratorHandlers:
 class TestHookHandlerIntegration:
     """Test hooks and handlers working together."""
 
-    def test_hook_orchestrator_executes_handlers(
-        self, test_graph: Graph, test_hooks_file: Path
-    ) -> None:
+    def test_hook_orchestrator_executes_handlers(self, test_graph: Graph, test_hooks_file: Path) -> None:
         """Test that hook orchestrator can execute handlers."""
         # Initialize orchestrator
-        orchestrator = HookOrchestrator(
-            graph=test_graph, hooks_file=test_hooks_file, continue_on_error=True
-        )
+        orchestrator = HookOrchestrator(graph=test_graph, hooks_file=test_hooks_file, continue_on_error=True)
 
         # Register handlers
         register_all_handlers(orchestrator)
@@ -200,13 +188,9 @@ class TestHookHandlerIntegration:
         assert registered_hooks
         assert "IngestHook" in registered_hooks
 
-    def test_hook_orchestrator_sanitizes_handler_errors(
-        self, test_graph: Graph, test_hooks_file: Path
-    ) -> None:
+    def test_hook_orchestrator_sanitizes_handler_errors(self, test_graph: Graph, test_hooks_file: Path) -> None:
         """Handlers that raise should yield sanitized receipts."""
-        orchestrator = HookOrchestrator(
-            graph=test_graph, hooks_file=test_hooks_file, continue_on_error=True
-        )
+        orchestrator = HookOrchestrator(graph=test_graph, hooks_file=test_hooks_file, continue_on_error=True)
 
         ingest_hook = HookDefinition(
             uri=URIRef("urn:kgc:IngestHook"),
@@ -217,12 +201,7 @@ class TestHookHandlerIntegration:
             trigger_label="Data Ingested",
             cron_schedule=None,
             effects=[
-                HookEffect(
-                    label="Failing Effect",
-                    description="Raises error",
-                    command="kgct failing",
-                    target="out.txt",
-                )
+                HookEffect(label="Failing Effect", description="Raises error", command="kgct failing", target="out.txt")
             ],
             waste_removed="",
         )
@@ -288,10 +267,7 @@ class TestWorkflowWithGenerators:
         }
 
         state.complete_step(
-            step=WorkflowStep.REGENERATE,
-            success=True,
-            started_at=datetime.now(tz=UTC),
-            data=artifacts_data,
+            step=WorkflowStep.REGENERATE, success=True, started_at=datetime.now(tz=UTC), data=artifacts_data
         )
 
         # Verify step was recorded

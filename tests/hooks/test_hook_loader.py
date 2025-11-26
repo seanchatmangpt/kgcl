@@ -8,11 +8,9 @@ Chicago TDD Pattern - London School:
 """
 
 from pathlib import Path
-from unittest.mock import Mock, patch
 
 import pytest
-from rdflib import Graph, Literal, Namespace, URIRef
-from rdflib.namespace import RDF, RDFS
+from rdflib import Graph, Namespace, URIRef
 
 from kgcl.hooks.loader import HookDefinition, HookEffect, HookLoader
 from kgcl.hooks.value_objects import HookName
@@ -125,9 +123,7 @@ apple:DataIngested a kgc:HookEvent ;
         assert hook is not None
         assert hook.name == "IngestHook"
 
-    def test_get_hook_by_name_returns_none_for_missing(
-        self, loader: HookLoader
-    ) -> None:
+    def test_get_hook_by_name_returns_none_for_missing(self, loader: HookLoader) -> None:
         """Test get_hook_by_name returns None for missing hooks."""
         hook = loader.get_hook_by_name("NonexistentHook")
 
@@ -246,12 +242,7 @@ class TestHookDefinition:
 
     def test_hook_definition_valid_with_event_trigger(self) -> None:
         """Test HookDefinition accepts event trigger."""
-        effect = HookEffect(
-            label="Test Effect",
-            description="Test",
-            command="test-cmd",
-            target="output.txt",
-        )
+        effect = HookEffect(label="Test Effect", description="Test", command="test-cmd", target="output.txt")
 
         hook = HookDefinition(
             uri=URIRef("urn:test:hook"),
@@ -269,12 +260,7 @@ class TestHookDefinition:
 
     def test_hook_definition_valid_with_cron_trigger(self) -> None:
         """Test HookDefinition accepts cron trigger."""
-        effect = HookEffect(
-            label="Test Effect",
-            description="Test",
-            command="test-cmd",
-            target="output.txt",
-        )
+        effect = HookEffect(label="Test Effect", description="Test", command="test-cmd", target="output.txt")
 
         hook = HookDefinition(
             uri=URIRef("urn:test:hook"),

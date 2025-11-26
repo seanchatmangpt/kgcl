@@ -21,9 +21,7 @@ Examples
 >>> assert task_data.get(URIRef("urn:task:T1"), "local_var") == 42
 
 >>> # Pattern 33: Task-to-Task Data Interaction
->>> interaction = DataInteractionTaskToTask(
-...     source_task="T1", target_task="T2", mappings={"output_x": "input_y"}
-... )
+>>> interaction = DataInteractionTaskToTask(source_task="T1", target_task="T2", mappings={"output_x": "input_y"})
 >>> result = interaction.transfer(graph, {"output_x": 100})
 >>> assert result["input_y"] == 100
 """
@@ -138,9 +136,7 @@ class TaskData:
         task_str = str(task)
         if task_str not in self.storage:
             # Bypass frozen dataclass by using object.__setattr__
-            object.__setattr__(
-                self, "storage", {**self.storage, task_str: {key: value}}
-            )
+            object.__setattr__(self, "storage", {**self.storage, task_str: {key: value}})
         else:
             current_vars = self.storage[task_str].copy()
             current_vars[key] = value
@@ -225,9 +221,7 @@ class BlockData:
         """
         block_str = str(block)
         if block_str not in self.storage:
-            object.__setattr__(
-                self, "storage", {**self.storage, block_str: {key: value}}
-            )
+            object.__setattr__(self, "storage", {**self.storage, block_str: {key: value}})
         else:
             current_vars = self.storage[block_str].copy()
             current_vars[key] = value
@@ -525,9 +519,7 @@ class DataInteractionTaskToTask:
 
         Examples
         --------
-        >>> interaction = DataInteractionTaskToTask(
-        ...     source_task="T1", target_task="T2", mappings={"out": "in"}
-        ... )
+        >>> interaction = DataInteractionTaskToTask(source_task="T1", target_task="T2", mappings={"out": "in"})
         >>> result = interaction.transfer(Graph(), {"out": 42})
         >>> assert result["in"] == 42
         """
@@ -540,9 +532,7 @@ class DataInteractionTaskToTask:
         return target_context
 
     @staticmethod
-    def extract_from_graph(
-        graph: Graph, source: URIRef, target: URIRef
-    ) -> DataInteractionTaskToTask:
+    def extract_from_graph(graph: Graph, source: URIRef, target: URIRef) -> DataInteractionTaskToTask:
         """Extract task-to-task data mappings from RDF graph.
 
         Parameters
@@ -579,9 +569,7 @@ class DataInteractionTaskToTask:
                 source_var, target_var = mapping_str.split(" -> ", 1)
                 mappings[source_var.strip()] = target_var.strip()
 
-        return DataInteractionTaskToTask(
-            source_task=str(source), target_task=str(target), mappings=mappings
-        )
+        return DataInteractionTaskToTask(source_task=str(source), target_task=str(target), mappings=mappings)
 
 
 @dataclass(frozen=True)
@@ -772,9 +760,7 @@ class DataContext:
     workflow_data: WorkflowData = field(default_factory=WorkflowData)
     env_data: EnvironmentData = field(default_factory=EnvironmentData)
 
-    def resolve_variable(
-        self, case_id: str, task: URIRef, block: URIRef | None, var_name: str
-    ) -> Any:
+    def resolve_variable(self, case_id: str, task: URIRef, block: URIRef | None, var_name: str) -> Any:
         """Resolve variable with scope precedence.
 
         Precedence: task → block → case → workflow → env.

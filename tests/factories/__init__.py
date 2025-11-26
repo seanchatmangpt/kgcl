@@ -93,11 +93,7 @@ class AlwaysTrueConditionFactory(factory.Factory):
 
 def _default_hook_handler(context: dict[str, Any]) -> dict[str, Any]:
     """Default test handler that logs context and returns success."""
-    return {
-        "status": "success",
-        "processed": True,
-        "context_keys": list(context.keys()),
-    }
+    return {"status": "success", "processed": True, "context_keys": list(context.keys())}
 
 
 class HookFactory(factory.Factory):
@@ -139,9 +135,7 @@ class HookReceiptFactory(factory.Factory):
     >>> receipt = HookReceiptFactory(error=None)
     >>> assert receipt.error is None
     >>> assert receipt.duration_ms > 0
-    >>> failed_receipt = HookReceiptFactory(
-    ...     error="Handler timeout", handler_result=None
-    ... )
+    >>> failed_receipt = HookReceiptFactory(error="Handler timeout", handler_result=None)
     >>> assert failed_receipt.error == "Handler timeout"
     """
 
@@ -151,17 +145,13 @@ class HookReceiptFactory(factory.Factory):
     hook_id = LazyAttribute(lambda _: HookName.new(f"hook-{uuid.uuid4()}"))
     timestamp = LazyFunction(lambda: datetime.now(UTC))
     condition_result = SubFactory(ConditionResultFactory, triggered=True)
-    handler_result = LazyFunction(
-        lambda: {"status": "success", "result": {"key": "value"}}
-    )
+    handler_result = LazyFunction(lambda: {"status": "success", "result": {"key": "value"}})
     duration_ms = Faker("pyfloat", min_value=1.0, max_value=5000.0, right_digits=2)
     actor = Faker("user_name")
     error = None
     stack_trace = None
     memory_delta_bytes = Faker("random_int", min=0, max=1024 * 1024)
-    input_context = LazyFunction(
-        lambda: {"event": "test", "timestamp": datetime.now(UTC)}
-    )
+    input_context = LazyFunction(lambda: {"event": "test", "timestamp": datetime.now(UTC)})
     metadata = LazyFunction(dict)
     receipt_id = LazyAttribute(lambda _: str(uuid.uuid4()))
     max_size_bytes = None
@@ -218,9 +208,7 @@ class ReceiptFactory(factory.Factory):
     timestamp = LazyFunction(lambda: datetime.now(UTC))
     actor = Faker("email")
     condition_result = SubFactory(ConditionResultFactory, triggered=True)
-    handler_result = LazyFunction(
-        lambda: {"status": "completed", "data": {"key": "value"}}
-    )
+    handler_result = LazyFunction(lambda: {"status": "completed", "data": {"key": "value"}})
     duration_ms = Faker("pyfloat", min_value=0.5, max_value=3000.0, right_digits=2)
     error = None
     stack_trace = None

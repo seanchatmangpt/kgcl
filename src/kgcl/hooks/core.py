@@ -33,9 +33,7 @@ class HookValidationError(Exception):
         Validation failure reason (optional)
     """
 
-    def __init__(
-        self, message: str, hook_name: str | None = None, reason: str | None = None
-    ) -> None:
+    def __init__(self, message: str, hook_name: str | None = None, reason: str | None = None) -> None:
         """Initialize HookValidationError.
 
         Parameters
@@ -131,9 +129,7 @@ class HookReceipt:
             result_size = len(json.dumps(self.handler_result))
             if result_size > self.max_size_bytes:
                 object.__setattr__(self, "truncated", True)
-                object.__setattr__(
-                    self, "handler_result", {"_truncated": True, "_size": result_size}
-                )
+                object.__setattr__(self, "handler_result", {"_truncated": True, "_size": result_size})
 
 
 @dataclass
@@ -427,12 +423,7 @@ class HookManager:
         executions = [r for r in self.execution_history if r.hook_id == hook_id]
 
         if not executions:
-            return {
-                "total_executions": 0,
-                "successes": 0,
-                "failures": 0,
-                "success_rate": 0.0,
-            }
+            return {"total_executions": 0, "successes": 0, "failures": 0, "success_rate": 0.0}
 
         successes = sum(1 for r in executions if not r.error)
         failures = sum(1 for r in executions if r.error)
@@ -487,17 +478,12 @@ class HookExecutor:
         """
         self._event_handlers.append(handler)
 
-    def _emit_event(
-        self, event_type: LifecycleEventType, hook: Hook, **kwargs: Any
-    ) -> None:
+    def _emit_event(self, event_type: LifecycleEventType, hook: Hook, **kwargs: Any) -> None:
         """Emit lifecycle event."""
         from kgcl.hooks.lifecycle import HookLifecycleEvent
 
         event = HookLifecycleEvent(
-            event_type=event_type,
-            hook_id=hook.name,
-            timestamp=datetime.now(UTC),
-            metadata=kwargs,
+            event_type=event_type, hook_id=hook.name, timestamp=datetime.now(UTC), metadata=kwargs
         )
 
         for handler in self._event_handlers:
@@ -536,26 +522,18 @@ class HookExecutor:
 
             # Evaluate condition with timeout
             try:
-                condition_result = await asyncio.wait_for(
-                    hook.condition.evaluate(context), timeout=hook.timeout
-                )
+                condition_result = await asyncio.wait_for(hook.condition.evaluate(context), timeout=hook.timeout)
             except TimeoutError:
                 error = f"Condition evaluation exceeded timeout of {hook.timeout}s"
                 hook._transition_state(HookState.FAILED)
-                condition_result = ConditionResult(
-                    triggered=False, metadata={"error": "timeout"}
-                )
+                condition_result = ConditionResult(triggered=False, metadata={"error": "timeout"})
             except Exception as e:
                 error = f"Condition evaluation failed: {e!s}"
                 stack_trace = traceback.format_exc()
                 hook._transition_state(HookState.FAILED)
-                condition_result = ConditionResult(
-                    triggered=False, metadata={"error": str(e)}
-                )
+                condition_result = ConditionResult(triggered=False, metadata={"error": str(e)})
 
-            self._emit_event(
-                LifecycleEventType.POST_CONDITION, hook, result=condition_result
-            )
+            self._emit_event(LifecycleEventType.POST_CONDITION, hook, result=condition_result)
 
             # Execute handler if condition triggered
             if condition_result and condition_result.triggered and not error:
@@ -565,9 +543,7 @@ class HookExecutor:
                 try:
                     # Execute handler (sync or async)
                     if asyncio.iscoroutinefunction(hook.handler):
-                        handler_result = await asyncio.wait_for(
-                            hook.handler(context), timeout=hook.timeout
-                        )
+                        handler_result = await asyncio.wait_for(hook.handler(context), timeout=hook.timeout)
                     else:
                         handler_result = hook.handler(context)
 
@@ -580,9 +556,7 @@ class HookExecutor:
                     stack_trace = traceback.format_exc()
                     hook._transition_state(HookState.FAILED)
 
-                self._emit_event(
-                    LifecycleEventType.POST_EXECUTE, hook, result=handler_result
-                )
+                self._emit_event(LifecycleEventType.POST_EXECUTE, hook, result=handler_result)
             elif condition_result and not condition_result.triggered:
                 # Condition not triggered, mark as completed
                 hook._transition_state(HookState.COMPLETED)
@@ -601,8 +575,7 @@ class HookExecutor:
             hook_id=hook.name,
             timestamp=start_time,
             actor=hook.actor,
-            condition_result=condition_result
-            or ConditionResult(triggered=False, metadata={}),
+            condition_result=condition_result or ConditionResult(triggered=False, metadata={}),
             handler_result=handler_result,
             duration_ms=duration_ms,
             error=error,

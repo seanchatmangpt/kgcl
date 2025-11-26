@@ -9,14 +9,7 @@ from pathlib import Path
 from rdflib import Namespace
 
 from kgcl.unrdf_engine.engine import UnrdfEngine
-from kgcl.unrdf_engine.hooks import (
-    HookContext,
-    HookExecutor,
-    HookPhase,
-    HookRegistry,
-    KnowledgeHook,
-    TriggerCondition,
-)
+from kgcl.unrdf_engine.hooks import HookContext, HookExecutor, HookPhase, HookRegistry, KnowledgeHook, TriggerCondition
 from kgcl.unrdf_engine.ingestion import IngestionPipeline
 from kgcl.unrdf_engine.validation import ShaclValidator
 
@@ -52,9 +45,7 @@ class TestHooksIntegration:
             pipeline = IngestionPipeline(engine, hook_executor=hook_executor)
 
             # Ingest data
-            result = pipeline.ingest_json(
-                data={"id": "test_001", "type": "TestEvent"}, agent="test"
-            )
+            result = pipeline.ingest_json(data={"id": "test_001", "type": "TestEvent"}, agent="test")
 
             assert result.success is True
             # Should execute in order
@@ -69,9 +60,7 @@ class TestHooksIntegration:
 
             class PriorityHook(KnowledgeHook):
                 def __init__(self, name: str, priority: int) -> None:
-                    super().__init__(
-                        name=name, phases=[HookPhase.POST_COMMIT], priority=priority
-                    )
+                    super().__init__(name=name, phases=[HookPhase.POST_COMMIT], priority=priority)
                     self.hook_name = name
 
                 def execute(self, _context: HookContext) -> None:
@@ -104,8 +93,7 @@ class TestHooksIntegration:
                         name="conditional",
                         phases=[HookPhase.POST_COMMIT],
                         trigger=TriggerCondition(
-                            pattern='?s <http://unrdf.org/ontology/type> "SpecialEvent"',
-                            check_delta=True,
+                            pattern='?s <http://unrdf.org/ontology/type> "SpecialEvent"', check_delta=True
                         ),
                     )
 
@@ -117,17 +105,13 @@ class TestHooksIntegration:
             pipeline = IngestionPipeline(engine, hook_executor=hook_executor)
 
             # Ingest non-matching event
-            result1 = pipeline.ingest_json(
-                data={"id": "normal", "type": "NormalEvent"}, agent="test"
-            )
+            result1 = pipeline.ingest_json(data={"id": "normal", "type": "NormalEvent"}, agent="test")
             assert result1.success is True
             # Hook may not trigger if pattern doesn't match delta graph structure
             initial_triggered = len(triggered)
 
             # Ingest matching event
-            result2 = pipeline.ingest_json(
-                data={"id": "special", "type": "SpecialEvent"}, agent="test"
-            )
+            result2 = pipeline.ingest_json(data={"id": "special", "type": "SpecialEvent"}, agent="test")
             assert result2.success is True
             # Hook should have executed at least once across both ingestions
             # (May depend on how RDF is structured in delta graph)
@@ -149,9 +133,7 @@ class TestHooksIntegration:
 
             class SuccessHook(KnowledgeHook):
                 def __init__(self) -> None:
-                    super().__init__(
-                        name="success", phases=[HookPhase.POST_COMMIT], priority=50
-                    )
+                    super().__init__(name="success", phases=[HookPhase.POST_COMMIT], priority=50)
 
                 def execute(self, _context: HookContext) -> None:
                     return
@@ -168,9 +150,7 @@ class TestHooksIntegration:
             assert result.success is True  # Transaction still commits
             # Hook results should show failure
             assert len(result.hook_results) >= MIN_HOOK_RESULTS
-            failing_result = next(
-                (r for r in result.hook_results if r["hook"] == "failing"), None
-            )
+            failing_result = next((r for r in result.hook_results if r["hook"] == "failing"), None)
             assert failing_result is not None
             assert failing_result["success"] is False
 
@@ -182,9 +162,7 @@ class TestHooksIntegration:
 
             class RollbackHook(KnowledgeHook):
                 def __init__(self) -> None:
-                    super().__init__(
-                        name="rollback", phases=[HookPhase.POST_VALIDATION]
-                    )
+                    super().__init__(name="rollback", phases=[HookPhase.POST_VALIDATION])
 
                 def execute(self, context: HookContext) -> None:
                     # Signal rollback
@@ -195,9 +173,7 @@ class TestHooksIntegration:
             hook_executor = HookExecutor(registry)
 
             validator = ShaclValidator()
-            pipeline = IngestionPipeline(
-                engine, validator=validator, hook_executor=hook_executor
-            )
+            pipeline = IngestionPipeline(engine, validator=validator, hook_executor=hook_executor)
 
             # Ingest data (validation won't run without shapes, but hook mechanism tested)
             result = pipeline.ingest_json(data={"id": "test"}, agent="test")
@@ -213,18 +189,14 @@ class TestHooksIntegration:
 
             class Hook1(KnowledgeHook):
                 def __init__(self) -> None:
-                    super().__init__(
-                        name="hook1", phases=[HookPhase.ON_CHANGE], priority=100
-                    )
+                    super().__init__(name="hook1", phases=[HookPhase.ON_CHANGE], priority=100)
 
                 def execute(self, context: HookContext) -> None:
                     context.metadata["hook1_ran"] = True
 
             class Hook2(KnowledgeHook):
                 def __init__(self) -> None:
-                    super().__init__(
-                        name="hook2", phases=[HookPhase.ON_CHANGE], priority=50
-                    )
+                    super().__init__(name="hook2", phases=[HookPhase.ON_CHANGE], priority=50)
 
                 def execute(self, context: HookContext) -> None:
                     # Should see metadata from Hook1

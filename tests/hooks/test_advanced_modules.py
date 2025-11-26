@@ -9,19 +9,8 @@ from datetime import UTC, datetime
 import pytest
 
 from kgcl.hooks.dark_matter import DarkMatterOptimizer, OptimizedPlan
-from kgcl.hooks.federation import (
-    FederationCoordinator,
-    GossipProtocol,
-    Node,
-    NodeStatus,
-)
-from kgcl.hooks.streaming import (
-    Change,
-    ChangeFeed,
-    ChangeType,
-    StreamProcessor,
-    WindowedStreamProcessor,
-)
+from kgcl.hooks.federation import FederationCoordinator, GossipProtocol, Node, NodeStatus
+from kgcl.hooks.streaming import Change, ChangeFeed, ChangeType, StreamProcessor, WindowedStreamProcessor
 
 # ============================================================================
 # Dark Matter Optimizer Tests
@@ -44,20 +33,8 @@ class TestDarkMatterOptimizer:
         plan = {
             "steps": [
                 {"step_id": 1, "operation": "scan", "cost": 100.0, "cardinality": 1000},
-                {
-                    "step_id": 2,
-                    "operation": "filter",
-                    "cost": 10.0,
-                    "cardinality": 100,
-                    "dependencies": [1],
-                },
-                {
-                    "step_id": 3,
-                    "operation": "project",
-                    "cost": 5.0,
-                    "cardinality": 100,
-                    "dependencies": [2],
-                },
+                {"step_id": 2, "operation": "filter", "cost": 10.0, "cardinality": 100, "dependencies": [1]},
+                {"step_id": 3, "operation": "project", "cost": 5.0, "cardinality": 100, "dependencies": [2]},
             ]
         }
 
@@ -73,13 +50,7 @@ class TestDarkMatterOptimizer:
         steps = [
             {"step_id": 1, "operation": "scan", "cost": 100.0},
             {"step_id": 2, "operation": "join", "cost": 50.0, "dependencies": [1]},
-            {
-                "step_id": 3,
-                "operation": "filter",
-                "cost": 10.0,
-                "dependencies": [1],
-                "predicate": "x > 10",
-            },
+            {"step_id": 3, "operation": "filter", "cost": 10.0, "dependencies": [1], "predicate": "x > 10"},
         ]
 
         result = optimizer._apply_filter_pushdown(steps)
@@ -105,12 +76,7 @@ class TestDarkMatterOptimizer:
 
         steps = [
             {"step_id": 1, "operation": "filter", "predicate": "x > 10", "cost": 10.0},
-            {
-                "step_id": 2,
-                "operation": "filter",
-                "predicate": "x > 10",
-                "cost": 10.0,
-            },  # Duplicate
+            {"step_id": 2, "operation": "filter", "predicate": "x > 10", "cost": 10.0},  # Duplicate
             {"step_id": 3, "operation": "scan", "cost": 100.0},
         ]
 
@@ -143,12 +109,7 @@ class TestDarkMatterOptimizer:
             "steps": [
                 {"step_id": 1, "operation": "scan", "cost": 10.0, "dependencies": []},
                 {"step_id": 2, "operation": "scan", "cost": 10.0, "dependencies": []},
-                {
-                    "step_id": 3,
-                    "operation": "join",
-                    "cost": 20.0,
-                    "dependencies": [1, 2],
-                },
+                {"step_id": 3, "operation": "join", "cost": 20.0, "dependencies": [1, 2]},
             ]
         }
 
@@ -165,12 +126,7 @@ class TestDarkMatterOptimizer:
             "steps": [
                 {"step_id": 1, "operation": "scan", "cost": 10.0, "dependencies": []},
                 {"step_id": 2, "operation": "scan", "cost": 10.0, "dependencies": []},
-                {
-                    "step_id": 3,
-                    "operation": "join",
-                    "cost": 20.0,
-                    "dependencies": [1, 2],
-                },
+                {"step_id": 3, "operation": "join", "cost": 20.0, "dependencies": [1, 2]},
             ]
         }
 
@@ -192,19 +148,8 @@ class TestDarkMatterOptimizer:
         optimizer = DarkMatterOptimizer()
 
         steps = [
-            {
-                "step_id": 1,
-                "operation": "scan",
-                "cost": 100.0,
-                "output_columns": ["a", "b", "c"],
-            },
-            {
-                "step_id": 2,
-                "operation": "project",
-                "cost": 5.0,
-                "columns": ["a", "b"],
-                "dependencies": [1],
-            },
+            {"step_id": 1, "operation": "scan", "cost": 100.0, "output_columns": ["a", "b", "c"]},
+            {"step_id": 2, "operation": "project", "cost": 5.0, "columns": ["a", "b"], "dependencies": [1]},
         ]
 
         result = optimizer._apply_projection_pushdown(steps)
@@ -373,9 +318,7 @@ class TestStreamProcessor:
         processor.register_processor("counter", counter)
 
         ts = datetime.now(UTC).timestamp()
-        changes = [
-            Change(ChangeType.ADDED, (f"s{i}", "p", "o"), ts, "test") for i in range(5)
-        ]
+        changes = [Change(ChangeType.ADDED, (f"s{i}", "p", "o"), ts, "test") for i in range(5)]
 
         results = processor.process_batch(changes)
         assert len(results) == 5
@@ -412,9 +355,7 @@ class TestStreamProcessor:
 
         ts = datetime.now(UTC).timestamp()
         processor.process_change(Change(ChangeType.ADDED, ("s1", "p", "o"), ts, "test"))
-        processor.process_change(
-            Change(ChangeType.REMOVED, ("s2", "p", "o"), ts, "test")
-        )
+        processor.process_change(Change(ChangeType.REMOVED, ("s2", "p", "o"), ts, "test"))
 
         assert len(filtered) == 1
 
@@ -541,11 +482,7 @@ class TestFederationCoordinator:
         """Test heartbeat checking."""
         coordinator = FederationCoordinator("local1")
 
-        node = Node(
-            node_id="node1",
-            address="localhost:8001",
-            last_heartbeat=datetime.now(UTC).timestamp(),
-        )
+        node = Node(node_id="node1", address="localhost:8001", last_heartbeat=datetime.now(UTC).timestamp())
         coordinator.register_node(node)
 
         # Recent heartbeat should be valid
@@ -563,11 +500,7 @@ class TestFederationCoordinator:
 
         # Register multiple nodes
         for i in range(5):
-            node = Node(
-                node_id=f"node{i}",
-                address=f"localhost:800{i}",
-                last_heartbeat=datetime.now(UTC).timestamp(),
-            )
+            node = Node(node_id=f"node{i}", address=f"localhost:800{i}", last_heartbeat=datetime.now(UTC).timestamp())
             coordinator.register_node(node)
 
         coordinator.replication_config.replication_factor = 3
@@ -585,11 +518,7 @@ class TestFederationCoordinator:
 
         # Register nodes
         for i in range(5):
-            node = Node(
-                node_id=f"node{i}",
-                address=f"localhost:800{i}",
-                last_heartbeat=datetime.now(UTC).timestamp(),
-            )
+            node = Node(node_id=f"node{i}", address=f"localhost:800{i}", last_heartbeat=datetime.now(UTC).timestamp())
             coordinator.register_node(node)
 
         triple = ("subject", "predicate", "object")
@@ -616,10 +545,7 @@ class TestFederationCoordinator:
         # Register 5 nodes, 3 healthy
         for i in range(5):
             node = Node(
-                f"node{i}",
-                f"localhost:800{i}",
-                is_healthy=(i < 3),
-                last_heartbeat=datetime.now(UTC).timestamp(),
+                f"node{i}", f"localhost:800{i}", is_healthy=(i < 3), last_heartbeat=datetime.now(UTC).timestamp()
             )
             coordinator.register_node(node)
 
@@ -664,12 +590,7 @@ class TestGossipProtocol:
 
         # Register nodes
         for i in range(5):
-            node = Node(
-                f"node{i}",
-                f"localhost:800{i}",
-                is_healthy=True,
-                last_heartbeat=datetime.now(UTC).timestamp(),
-            )
+            node = Node(f"node{i}", f"localhost:800{i}", is_healthy=True, last_heartbeat=datetime.now(UTC).timestamp())
             coordinator.register_node(node)
 
         gossip = GossipProtocol(coordinator)

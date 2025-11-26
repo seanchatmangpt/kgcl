@@ -78,9 +78,7 @@ class EmbeddingsManager:
                 word_doc_count[token] = word_doc_count.get(token, 0) + 1
 
         # Build vocabulary index
-        self.vocabulary = {
-            word: idx for idx, word in enumerate(sorted(word_doc_count.keys()))
-        }
+        self.vocabulary = {word: idx for idx, word in enumerate(sorted(word_doc_count.keys()))}
 
         # Calculate IDF scores
         num_docs = len(texts)
@@ -173,10 +171,7 @@ class EmbeddingsManager:
         if use_cache:
             # Evict oldest if cache full
             if len(self.embeddings_cache) >= self.cache_size:
-                oldest_key = min(
-                    self.embeddings_cache.keys(),
-                    key=lambda k: self.embeddings_cache[k].timestamp,
-                )
+                oldest_key = min(self.embeddings_cache.keys(), key=lambda k: self.embeddings_cache[k].timestamp)
                 del self.embeddings_cache[oldest_key]
 
             self.embeddings_cache[cache_key] = Embedding(
@@ -284,11 +279,7 @@ class EmbeddingsManager:
 
     def get_stats(self) -> dict[str, int]:
         """Get cache statistics."""
-        return {
-            **self._stats,
-            "cache_size": len(self.embeddings_cache),
-            "vocabulary_size": len(self.vocabulary),
-        }
+        return {**self._stats, "cache_size": len(self.embeddings_cache), "vocabulary_size": len(self.vocabulary)}
 
     def clear_cache(self) -> None:
         """Clear embedding cache."""

@@ -15,17 +15,8 @@ from rdflib import Graph, Literal, Namespace
 from rdflib.namespace import RDF
 
 from kgcl.cli.config import DEFAULT_CONFIG
-from kgcl.cli.daily_brief import (
-    _generate_brief,
-    _ingest_events,
-    _materialize_features,
-    _select_payload_for_format,
-)
-from kgcl.cli.daily_brief_pipeline import (
-    DailyBriefEventBatch,
-    DailyBriefFeatureSet,
-    DailyBriefResult,
-)
+from kgcl.cli.daily_brief import _generate_brief, _ingest_events, _materialize_features, _select_payload_for_format
+from kgcl.cli.daily_brief_pipeline import DailyBriefEventBatch, DailyBriefFeatureSet, DailyBriefResult
 from kgcl.cli.utils import OutputFormat, format_output, print_error
 from kgcl.observability.health import check_health
 from kgcl.signatures.daily_brief import DailyBriefInput
@@ -133,12 +124,7 @@ class TestCLIIntegration:
         with tempfile.NamedTemporaryFile(mode="w", suffix=".md", delete=False) as f:
             output_path = Path(f.name)
 
-        format_output(
-            test_content,
-            OutputFormat.MARKDOWN,
-            output_file=output_path,
-            clipboard=False,
-        )
+        format_output(test_content, OutputFormat.MARKDOWN, output_file=output_path, clipboard=False)
 
         assert output_path.exists()
         assert output_path.read_text() == test_content

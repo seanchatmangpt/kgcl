@@ -87,9 +87,7 @@ class TestRDFConverter:
         converter = RDFConverter(config)
 
         event = AppEvent(
-            event_id="test_001",
-            timestamp=datetime(2024, 11, 24, 10, 30, 0, tzinfo=UTC),
-            app_name="com.apple.Safari",
+            event_id="test_001", timestamp=datetime(2024, 11, 24, 10, 30, 0, tzinfo=UTC), app_name="com.apple.Safari"
         )
 
         graph = converter.convert_event(event)
@@ -130,11 +128,7 @@ class TestRDFConverter:
         converter = RDFConverter(config)
 
         events = [
-            AppEvent(
-                event_id="app_001",
-                timestamp=datetime(2024, 11, 24, 10, 0, 0),
-                app_name="com.apple.Safari",
-            ),
+            AppEvent(event_id="app_001", timestamp=datetime(2024, 11, 24, 10, 0, 0), app_name="com.apple.Safari"),
             BrowserVisit(
                 event_id="browser_001",
                 timestamp=datetime(2024, 11, 24, 10, 5, 0),
@@ -148,9 +142,7 @@ class TestRDFConverter:
 
         # Should have triples for both events
         app_subjects = list(graph.subjects(RDF.type, converter.schema_ns.AppEvent))
-        browser_subjects = list(
-            graph.subjects(RDF.type, converter.schema_ns.BrowserVisit)
-        )
+        browser_subjects = list(graph.subjects(RDF.type, converter.schema_ns.BrowserVisit))
 
         assert len(app_subjects) == 1
         assert len(browser_subjects) == 1
@@ -161,9 +153,7 @@ class TestRDFConverter:
         converter = RDFConverter(config)
 
         event = AppEvent(
-            event_id="test with spaces",
-            timestamp=datetime(2024, 11, 24, 10, 0, 0),
-            app_name="com.apple.Safari",
+            event_id="test with spaces", timestamp=datetime(2024, 11, 24, 10, 0, 0), app_name="com.apple.Safari"
         )
 
         graph = converter.convert_event(event)

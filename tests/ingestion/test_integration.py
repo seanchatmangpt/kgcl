@@ -4,13 +4,7 @@ import tempfile
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
-from kgcl.ingestion.config import (
-    CollectorConfig,
-    FeatureConfig,
-    FilterConfig,
-    IngestionConfig,
-    RDFConfig,
-)
+from kgcl.ingestion.config import CollectorConfig, FeatureConfig, FilterConfig, IngestionConfig, RDFConfig
 from kgcl.ingestion.models import AppEvent, BrowserVisit, CalendarBlock
 from kgcl.ingestion.service import IngestionService
 
@@ -23,9 +17,7 @@ class TestEndToEndPipeline:
         with tempfile.TemporaryDirectory() as tmpdir:
             config = IngestionConfig(
                 collector=CollectorConfig(output_directory=Path(tmpdir), batch_size=10),
-                feature=FeatureConfig(
-                    enabled_features=["app_usage_time", "browser_domain_visits"]
-                ),
+                feature=FeatureConfig(enabled_features=["app_usage_time", "browser_domain_visits"]),
             )
 
             service = IngestionService(config)
@@ -34,12 +26,7 @@ class TestEndToEndPipeline:
             # Create diverse events
             now = datetime.now(UTC)
             events = [
-                AppEvent(
-                    event_id="app_001",
-                    timestamp=now,
-                    app_name="com.apple.Safari",
-                    duration_seconds=120.0,
-                ),
+                AppEvent(event_id="app_001", timestamp=now, app_name="com.apple.Safari", duration_seconds=120.0),
                 AppEvent(
                     event_id="app_002",
                     timestamp=now + timedelta(minutes=5),
@@ -85,9 +72,7 @@ class TestEndToEndPipeline:
             config = IngestionConfig(
                 collector=CollectorConfig(output_directory=Path(tmpdir)),
                 rdf=RDFConfig(base_namespace="http://test.example.org/"),
-                filter=FilterConfig(
-                    min_duration_seconds=0.0
-                ),  # Don't filter any events
+                filter=FilterConfig(min_duration_seconds=0.0),  # Don't filter any events
             )
 
             service = IngestionService(config)
@@ -118,12 +103,7 @@ class TestEndToEndPipeline:
             config = IngestionConfig(
                 collector=CollectorConfig(output_directory=Path(tmpdir)),
                 feature=FeatureConfig(
-                    enabled_features=[
-                        "app_usage_time",
-                        "browser_domain_visits",
-                        "meeting_count",
-                        "context_switches",
-                    ]
+                    enabled_features=["app_usage_time", "browser_domain_visits", "meeting_count", "context_switches"]
                 ),
             )
 
@@ -184,9 +164,7 @@ class TestEndToEndPipeline:
 
             # Materialize features
             window_end = window_start + timedelta(hours=3)
-            features = service.materializer.materialize(
-                events, window_start, window_end
-            )
+            features = service.materializer.materialize(events, window_start, window_end)
 
             # Verify features computed
             assert len(features) > 0
@@ -203,9 +181,7 @@ class TestEndToEndPipeline:
     def test_hooks_execution_in_pipeline(self):
         """Test pre/post hooks in complete pipeline."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = IngestionConfig(
-                collector=CollectorConfig(output_directory=Path(tmpdir))
-            )
+            config = IngestionConfig(collector=CollectorConfig(output_directory=Path(tmpdir)))
 
             service = IngestionService(config)
 
@@ -223,11 +199,7 @@ class TestEndToEndPipeline:
 
             service.start()
 
-            event = AppEvent(
-                event_id="test_001",
-                timestamp=datetime.now(UTC),
-                app_name="com.apple.Safari",
-            )
+            event = AppEvent(event_id="test_001", timestamp=datetime.now(UTC), app_name="com.apple.Safari")
 
             service.ingest_event(event)
 
@@ -261,12 +233,8 @@ class TestEndToEndPipeline:
         """Test ingestion with high event volume."""
         with tempfile.TemporaryDirectory() as tmpdir:
             config = IngestionConfig(
-                collector=CollectorConfig(
-                    output_directory=Path(tmpdir), batch_size=100
-                ),
-                filter=FilterConfig(
-                    min_duration_seconds=0.0
-                ),  # Don't filter any events
+                collector=CollectorConfig(output_directory=Path(tmpdir), batch_size=100),
+                filter=FilterConfig(min_duration_seconds=0.0),  # Don't filter any events
             )
 
             service = IngestionService(config)
@@ -299,9 +267,7 @@ class TestEndToEndPipeline:
     def test_mixed_event_types(self):
         """Test handling mixed event types."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = IngestionConfig(
-                collector=CollectorConfig(output_directory=Path(tmpdir))
-            )
+            config = IngestionConfig(collector=CollectorConfig(output_directory=Path(tmpdir)))
 
             service = IngestionService(config)
             service.start()
@@ -309,9 +275,7 @@ class TestEndToEndPipeline:
             now = datetime.now(UTC)
 
             # Create one of each event type
-            app_event = AppEvent(
-                event_id="app_001", timestamp=now, app_name="com.apple.Safari"
-            )
+            app_event = AppEvent(event_id="app_001", timestamp=now, app_name="com.apple.Safari")
 
             browser_event = BrowserVisit(
                 event_id="browser_001",
@@ -341,22 +305,14 @@ class TestEndToEndPipeline:
     def test_error_recovery(self):
         """Test error recovery in pipeline."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = IngestionConfig(
-                collector=CollectorConfig(
-                    output_directory=Path(tmpdir), enable_recovery=True
-                )
-            )
+            config = IngestionConfig(collector=CollectorConfig(output_directory=Path(tmpdir), enable_recovery=True))
 
             service = IngestionService(config)
             service.start()
 
             # Ingest valid events
             valid_events = [
-                AppEvent(
-                    event_id=f"app_{i:03d}",
-                    timestamp=datetime.now(UTC),
-                    app_name="com.apple.Safari",
-                )
+                AppEvent(event_id=f"app_{i:03d}", timestamp=datetime.now(UTC), app_name="com.apple.Safari")
                 for i in range(5)
             ]
 

@@ -8,12 +8,7 @@ from unittest.mock import Mock, patch
 import pytest
 import requests
 
-from kgcl.dspy_runtime.ollama_config import (
-    DSPY_AVAILABLE,
-    OllamaConfig,
-    OllamaLM,
-    health_check,
-)
+from kgcl.dspy_runtime.ollama_config import DSPY_AVAILABLE, OllamaConfig, OllamaLM, health_check
 
 
 class TestOllamaConfig:
@@ -115,9 +110,7 @@ class TestOllamaLM:
 
         mock_response = Mock()
         mock_response.status_code = 200
-        mock_response.json.return_value = {
-            "models": [{"name": "llama3.1:latest"}, {"name": "llama2:latest"}]
-        }
+        mock_response.json.return_value = {"models": [{"name": "llama3.1:latest"}, {"name": "llama2:latest"}]}
 
         with patch("requests.get", return_value=mock_response):
             assert lm.is_model_available() is True
@@ -144,10 +137,7 @@ class TestOllamaLM:
         mock_response = Mock()
         mock_response.status_code = 200
         mock_response.json.return_value = {
-            "models": [
-                {"name": "llama3.1", "size": 1000000},
-                {"name": "llama2", "size": 2000000},
-            ]
+            "models": [{"name": "llama3.1", "size": 1000000}, {"name": "llama2", "size": 2000000}]
         }
 
         with patch("requests.get", return_value=mock_response):
@@ -187,9 +177,7 @@ class TestOllamaLM:
 
         mock_response = Mock()
         mock_response.status_code = 404
-        mock_response.raise_for_status.side_effect = requests.exceptions.HTTPError(
-            response=mock_response
-        )
+        mock_response.raise_for_status.side_effect = requests.exceptions.HTTPError(response=mock_response)
 
         with patch("requests.post", return_value=mock_response):
             with pytest.raises(ValueError, match="Model not found"):

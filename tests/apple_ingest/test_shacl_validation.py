@@ -27,9 +27,7 @@ class TestEventTitleNotEmptyInvariant:
         THEN: Validation passes.
         """
         validator = SHACLValidator()
-        report = validator.validate_invariant(
-            calendar_event_simple, invariant="EventTitleNotEmptyInvariant"
-        )
+        report = validator.validate_invariant(calendar_event_simple, invariant="EventTitleNotEmptyInvariant")
         assert report.conforms is True
         assert len(report.violations) == 0
 
@@ -40,32 +38,24 @@ class TestEventTitleNotEmptyInvariant:
         THEN: Validation fails with "title" in violation message.
         """
         validator = SHACLValidator()
-        report = validator.validate_invariant(
-            calendar_event_no_title, invariant="EventTitleNotEmptyInvariant"
-        )
+        report = validator.validate_invariant(calendar_event_no_title, invariant="EventTitleNotEmptyInvariant")
         assert report.conforms is False
         assert len(report.violations) == 1
         assert any("title" in str(v).lower() for v in report.violations)
 
-    def test_violation_message_indicates_defect_prevention(
-        self, calendar_event_no_title
-    ):
+    def test_violation_message_indicates_defect_prevention(self, calendar_event_no_title):
         """
         GIVEN: Event without title
         WHEN: Validation fails
         THEN: Violation message explains defect prevented (context loss).
         """
         validator = SHACLValidator()
-        report = validator.validate_invariant(
-            calendar_event_no_title, invariant="EventTitleNotEmptyInvariant"
-        )
+        report = validator.validate_invariant(calendar_event_no_title, invariant="EventTitleNotEmptyInvariant")
         assert len(report.violations) > 0
 
         # Should mention defect being prevented
         violation = report.violations[0]
-        title_or_empty = (
-            "title" in violation.message.lower() or "empty" in violation.message.lower()
-        )
+        title_or_empty = "title" in violation.message.lower() or "empty" in violation.message.lower()
         assert title_or_empty
         assert violation.defect_description is not None
         assert "context loss" in violation.defect_description.lower()
@@ -81,9 +71,7 @@ class TestEventTimeRangeValidInvariant:
         THEN: Validation passes.
         """
         validator = SHACLValidator()
-        report = validator.validate_invariant(
-            calendar_event_simple, invariant="EventTimeRangeValidInvariant"
-        )
+        report = validator.validate_invariant(calendar_event_simple, invariant="EventTimeRangeValidInvariant")
         assert report.conforms is True
         assert len(report.violations) == 0
 
@@ -94,17 +82,11 @@ class TestEventTimeRangeValidInvariant:
         THEN: Validation fails with "time" or "range" in message.
         """
         validator = SHACLValidator()
-        report = validator.validate_invariant(
-            calendar_event_invalid_times, invariant="EventTimeRangeValidInvariant"
-        )
+        report = validator.validate_invariant(calendar_event_invalid_times, invariant="EventTimeRangeValidInvariant")
         assert report.conforms is False
         assert len(report.violations) == 1
         violation_text = str(report.violations[0]).lower()
-        time_or_range_or_start = (
-            "time" in violation_text
-            or "range" in violation_text
-            or "start" in violation_text
-        )
+        time_or_range_or_start = "time" in violation_text or "range" in violation_text or "start" in violation_text
         assert time_or_range_or_start
 
     def test_event_with_same_start_and_end_fails(self, calendar_event_simple):
@@ -118,9 +100,7 @@ class TestEventTimeRangeValidInvariant:
         calendar_event_simple.end_date = datetime(2025, 11, 24, 10, 0, 0, tzinfo=UTC)
 
         validator = SHACLValidator()
-        report = validator.validate_invariant(
-            calendar_event_simple, invariant="EventTimeRangeValidInvariant"
-        )
+        report = validator.validate_invariant(calendar_event_simple, invariant="EventTimeRangeValidInvariant")
 
         # Zero-duration events should fail (start >= end)
         assert report.conforms is False
@@ -136,9 +116,7 @@ class TestReminderStatusRequiredInvariant:
         THEN: Validation passes.
         """
         validator = SHACLValidator()
-        report = validator.validate_invariant(
-            reminder_task_simple, invariant="ReminderStatusRequiredInvariant"
-        )
+        report = validator.validate_invariant(reminder_task_simple, invariant="ReminderStatusRequiredInvariant")
         assert report.conforms is True
         assert len(report.violations) == 0
 
@@ -149,9 +127,7 @@ class TestReminderStatusRequiredInvariant:
         THEN: Validation fails with "status" in message.
         """
         validator = SHACLValidator()
-        report = validator.validate_invariant(
-            reminder_task_no_status, invariant="ReminderStatusRequiredInvariant"
-        )
+        report = validator.validate_invariant(reminder_task_no_status, invariant="ReminderStatusRequiredInvariant")
         assert report.conforms is False
         assert len(report.violations) == 1
         assert any("status" in str(v).lower() for v in report.violations)
@@ -163,9 +139,7 @@ class TestReminderStatusRequiredInvariant:
         THEN: Violation explains defect (ambiguous state).
         """
         validator = SHACLValidator()
-        report = validator.validate_invariant(
-            reminder_task_no_status, invariant="ReminderStatusRequiredInvariant"
-        )
+        report = validator.validate_invariant(reminder_task_no_status, invariant="ReminderStatusRequiredInvariant")
         assert len(report.violations) > 0
         violation = report.violations[0]
         assert violation.defect_description is not None
@@ -183,9 +157,7 @@ class TestReminderDueTodayValidInvariant:
         """
         validator = SHACLValidator()
         report = validator.validate_invariant(
-            reminder_task_today,
-            invariant="ReminderDueTodayValidInvariant",
-            tags=["today"],
+            reminder_task_today, invariant="ReminderDueTodayValidInvariant", tags=["today"]
         )
         assert report.conforms is True
         assert len(report.violations) == 0
@@ -222,9 +194,7 @@ class TestMailMetadataValidInvariant:
         THEN: Validation passes.
         """
         validator = SHACLValidator()
-        report = validator.validate_invariant(
-            mail_message_simple, invariant="MailMetadataValidInvariant"
-        )
+        report = validator.validate_invariant(mail_message_simple, invariant="MailMetadataValidInvariant")
         assert report.conforms is True
         assert len(report.violations) == 0
 
@@ -235,9 +205,7 @@ class TestMailMetadataValidInvariant:
         THEN: Validation fails with "sender" in message.
         """
         validator = SHACLValidator()
-        report = validator.validate_invariant(
-            mail_message_no_sender, invariant="MailMetadataValidInvariant"
-        )
+        report = validator.validate_invariant(mail_message_no_sender, invariant="MailMetadataValidInvariant")
         assert report.conforms is False
         assert len(report.violations) == 1
         assert any("sender" in str(v).lower() for v in report.violations)
@@ -249,9 +217,7 @@ class TestMailMetadataValidInvariant:
         THEN: Violation explains defect (orphaned data).
         """
         validator = SHACLValidator()
-        report = validator.validate_invariant(
-            mail_message_no_sender, invariant="MailMetadataValidInvariant"
-        )
+        report = validator.validate_invariant(mail_message_no_sender, invariant="MailMetadataValidInvariant")
         assert len(report.violations) > 0
         violation = report.violations[0]
         assert violation.defect_description is not None
@@ -268,9 +234,7 @@ class TestFilePathValidInvariant:
         THEN: Validation passes.
         """
         validator = SHACLValidator()
-        report = validator.validate_invariant(
-            file_markdown_note, invariant="FilePathValidInvariant"
-        )
+        report = validator.validate_invariant(file_markdown_note, invariant="FilePathValidInvariant")
         assert report.conforms is True
         assert len(report.violations) == 0
 
@@ -281,9 +245,7 @@ class TestFilePathValidInvariant:
         THEN: Validation fails with "path" in message.
         """
         validator = SHACLValidator()
-        report = validator.validate_invariant(
-            file_invalid_path, invariant="FilePathValidInvariant"
-        )
+        report = validator.validate_invariant(file_invalid_path, invariant="FilePathValidInvariant")
         assert report.conforms is False
         assert len(report.violations) == 1
         assert any("path" in str(v).lower() for v in report.violations)
@@ -295,9 +257,7 @@ class TestFilePathValidInvariant:
         THEN: Violation explains defect (broken reference).
         """
         validator = SHACLValidator()
-        report = validator.validate_invariant(
-            file_invalid_path, invariant="FilePathValidInvariant"
-        )
+        report = validator.validate_invariant(file_invalid_path, invariant="FilePathValidInvariant")
         assert len(report.violations) > 0
         violation = report.violations[0]
         assert violation.defect_description is not None
@@ -314,9 +274,7 @@ class TestDataHasSourceInvariant:
         THEN: Validation passes.
         """
         validator = SHACLValidator()
-        report = validator.validate_invariant(
-            calendar_event_simple, invariant="DataHasSourceInvariant"
-        )
+        report = validator.validate_invariant(calendar_event_simple, invariant="DataHasSourceInvariant")
         assert report.conforms is True
         assert len(report.violations) == 0
 
@@ -338,9 +296,7 @@ class TestDataHasSourceInvariant:
         )()
 
         validator = SHACLValidator()
-        report = validator.validate_invariant(
-            event_no_source, invariant="DataHasSourceInvariant"
-        )
+        report = validator.validate_invariant(event_no_source, invariant="DataHasSourceInvariant")
         assert report.conforms is False
         assert len(report.violations) == 1
 
@@ -361,9 +317,7 @@ class TestDataHasSourceInvariant:
         )()
 
         validator = SHACLValidator()
-        report = validator.validate_invariant(
-            event_no_source, invariant="DataHasSourceInvariant"
-        )
+        report = validator.validate_invariant(event_no_source, invariant="DataHasSourceInvariant")
         assert len(report.violations) > 0
         violation = report.violations[0]
         assert violation.defect_description is not None
@@ -387,15 +341,9 @@ class TestNoCircularDependenciesInvariant:
         validator = SHACLValidator()
 
         # Validate each task individually
-        report_a = validator.validate_invariant(
-            task_a, invariant="NoCircularDependenciesInvariant"
-        )
-        report_b = validator.validate_invariant(
-            task_b, invariant="NoCircularDependenciesInvariant"
-        )
-        report_c = validator.validate_invariant(
-            task_c, invariant="NoCircularDependenciesInvariant"
-        )
+        report_a = validator.validate_invariant(task_a, invariant="NoCircularDependenciesInvariant")
+        report_b = validator.validate_invariant(task_b, invariant="NoCircularDependenciesInvariant")
+        report_c = validator.validate_invariant(task_c, invariant="NoCircularDependenciesInvariant")
 
         # All should pass (no cycles)
         assert report_a.conforms is True
@@ -416,9 +364,7 @@ class TestNoCircularDependenciesInvariant:
         # Individual task validation always passes
         # Circular dependency detection requires full task graph analysis
         # which is beyond the scope of single-object validation
-        report_a = validator.validate_invariant(
-            task_a, invariant="NoCircularDependenciesInvariant"
-        )
+        report_a = validator.validate_invariant(task_a, invariant="NoCircularDependenciesInvariant")
 
         # Individual task validation cannot detect cycles without full graph
         # Future enhancement: implement graph-level circular dependency detection
@@ -434,9 +380,7 @@ class TestNoCircularDependenciesInvariant:
         task_a = type("Task", (), {"id": "a", "depends_on": "b"})()
 
         validator = SHACLValidator()
-        report = validator.validate_invariant(
-            task_a, invariant="NoCircularDependenciesInvariant"
-        )
+        report = validator.validate_invariant(task_a, invariant="NoCircularDependenciesInvariant")
 
         # Individual task validation cannot detect cycles without full graph
         # Circular dependency detection requires analyzing all tasks together
@@ -520,9 +464,7 @@ class TestInvariantPerformance:
         max_latency_seconds = max_latency_ms / 1000.0
 
         start = time.perf_counter()
-        report = validator.validate_invariant(
-            calendar_event_simple, invariant="EventTitleNotEmptyInvariant"
-        )
+        report = validator.validate_invariant(calendar_event_simple, invariant="EventTitleNotEmptyInvariant")
         elapsed = time.perf_counter() - start
 
         assert elapsed < max_latency_seconds
@@ -556,9 +498,7 @@ class TestInvariantRecovery:
         THEN: Violation message suggests fix ("provide title").
         """
         validator = SHACLValidator()
-        report = validator.validate_invariant(
-            calendar_event_no_title, invariant="EventTitleNotEmptyInvariant"
-        )
+        report = validator.validate_invariant(calendar_event_no_title, invariant="EventTitleNotEmptyInvariant")
         assert len(report.violations) > 0
         violation = report.violations[0]
         assert violation.suggested_fix is not None
@@ -571,9 +511,7 @@ class TestInvariantRecovery:
         THEN: Violation explains what defect is prevented.
         """
         validator = SHACLValidator()
-        report = validator.validate_invariant(
-            calendar_event_invalid_times, invariant="EventTimeRangeValidInvariant"
-        )
+        report = validator.validate_invariant(calendar_event_invalid_times, invariant="EventTimeRangeValidInvariant")
         assert len(report.violations) > 0
         violation = report.violations[0]
         assert violation.defect_description is not None

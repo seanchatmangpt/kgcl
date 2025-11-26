@@ -8,13 +8,7 @@ Provides assertion utilities, test fixtures, and decorators following Chicago TD
 """
 
 from .assertions import AssertionError as ChicagoAssertionError
-from .assertions import (
-    assert_eq_with_msg,
-    assert_error,
-    assert_in_range,
-    assert_success,
-    assert_that,
-)
+from .assertions import assert_eq_with_msg, assert_error, assert_in_range, assert_success, assert_that
 from .builders import Builder
 from .decorators import async_test, fixture_test, test
 from .fail_fast import FailFastValidator

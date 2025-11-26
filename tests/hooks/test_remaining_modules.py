@@ -12,12 +12,7 @@ from kgcl.hooks.conditions import ConditionResult
 from kgcl.hooks.core import Hook, HookManager, HookReceipt, HookValidationError
 from kgcl.hooks.observability import HealthCheck, Observability
 from kgcl.hooks.query_optimizer import QueryOptimizer, QueryPlan
-from kgcl.hooks.transaction import (
-    Transaction,
-    TransactionError,
-    TransactionManager,
-    TransactionState,
-)
+from kgcl.hooks.transaction import Transaction, TransactionError, TransactionManager, TransactionState
 
 
 # Helper for tests
@@ -379,10 +374,7 @@ class TestHookManager:
         """Should register hook and return ID."""
         manager = HookManager()
         hook = Hook(
-            name="test_hook",
-            description="Test",
-            condition=SimpleCondition(),
-            handler=lambda ctx: {"status": "ok"},
+            name="test_hook", description="Test", condition=SimpleCondition(), handler=lambda ctx: {"status": "ok"}
         )
 
         hook_id = manager.register_hook(hook)
@@ -395,10 +387,7 @@ class TestHookManager:
         """Should not allow duplicate hook names."""
         manager = HookManager()
         hook = Hook(
-            name="test_hook",
-            description="Test",
-            condition=SimpleCondition(),
-            handler=lambda ctx: {"status": "ok"},
+            name="test_hook", description="Test", condition=SimpleCondition(), handler=lambda ctx: {"status": "ok"}
         )
 
         manager.register_hook(hook)
@@ -410,10 +399,7 @@ class TestHookManager:
         """Should unregister hook."""
         manager = HookManager()
         hook = Hook(
-            name="test_hook",
-            description="Test",
-            condition=SimpleCondition(),
-            handler=lambda ctx: {"status": "ok"},
+            name="test_hook", description="Test", condition=SimpleCondition(), handler=lambda ctx: {"status": "ok"}
         )
 
         hook_id = manager.register_hook(hook)
@@ -426,10 +412,7 @@ class TestHookManager:
         """Should retrieve hook by ID."""
         manager = HookManager()
         hook = Hook(
-            name="test_hook",
-            description="Test",
-            condition=SimpleCondition(),
-            handler=lambda ctx: {"status": "ok"},
+            name="test_hook", description="Test", condition=SimpleCondition(), handler=lambda ctx: {"status": "ok"}
         )
 
         hook_id = manager.register_hook(hook)
@@ -441,10 +424,7 @@ class TestHookManager:
         """Should retrieve hook by name."""
         manager = HookManager()
         hook = Hook(
-            name="test_hook",
-            description="Test",
-            condition=SimpleCondition(),
-            handler=lambda ctx: {"status": "ok"},
+            name="test_hook", description="Test", condition=SimpleCondition(), handler=lambda ctx: {"status": "ok"}
         )
 
         manager.register_hook(hook)
@@ -456,10 +436,7 @@ class TestHookManager:
         """Should record execution receipt."""
         manager = HookManager()
         hook = Hook(
-            name="test_hook",
-            description="Test",
-            condition=SimpleCondition(),
-            handler=lambda ctx: {"status": "ok"},
+            name="test_hook", description="Test", condition=SimpleCondition(), handler=lambda ctx: {"status": "ok"}
         )
 
         hook_id = manager.register_hook(hook)
@@ -480,10 +457,7 @@ class TestHookManager:
         """Should compute hook statistics."""
         manager = HookManager()
         hook = Hook(
-            name="test_hook",
-            description="Test",
-            condition=SimpleCondition(),
-            handler=lambda ctx: {"status": "ok"},
+            name="test_hook", description="Test", condition=SimpleCondition(), handler=lambda ctx: {"status": "ok"}
         )
 
         hook_id = manager.register_hook(hook)
@@ -520,18 +494,8 @@ class TestHookManager:
     def test_get_all_hooks(self):
         """Should return all hooks."""
         manager = HookManager()
-        hook1 = Hook(
-            name="hook1",
-            description="Test 1",
-            condition=SimpleCondition(),
-            handler=lambda ctx: {},
-        )
-        hook2 = Hook(
-            name="hook2",
-            description="Test 2",
-            condition=SimpleCondition(),
-            handler=lambda ctx: {},
-        )
+        hook1 = Hook(name="hook1", description="Test 1", condition=SimpleCondition(), handler=lambda ctx: {})
+        hook2 = Hook(name="hook2", description="Test 2", condition=SimpleCondition(), handler=lambda ctx: {})
 
         manager.register_hook(hook1)
         manager.register_hook(hook2)
@@ -545,12 +509,7 @@ class TestHookManager:
     def test_clear_history(self):
         """Should clear execution history."""
         manager = HookManager()
-        hook = Hook(
-            name="test_hook",
-            description="Test",
-            condition=SimpleCondition(),
-            handler=lambda ctx: {},
-        )
+        hook = Hook(name="test_hook", description="Test", condition=SimpleCondition(), handler=lambda ctx: {})
 
         hook_id = manager.register_hook(hook)
         receipt = HookReceipt(

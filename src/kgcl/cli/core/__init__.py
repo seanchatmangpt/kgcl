@@ -7,13 +7,7 @@ from kgcl.cli.core.context import CliContext
 from kgcl.cli.core.errors import CliCommandError
 from kgcl.cli.core.receipts import ExecutionReceipt
 from kgcl.cli.core.renderers import CliRenderer, RenderedOutput
-from kgcl.cli.core.services import (
-    ConfigService,
-    DspyService,
-    IngestionService,
-    LinkmlValidator,
-    SparqlService,
-)
+from kgcl.cli.core.services import ConfigService, DspyService, IngestionService, LinkmlValidator, SparqlService
 
 __all__ = [
     "CliApp",

@@ -175,19 +175,12 @@ class MIWithoutSync:
 
             logger.info(
                 "Spawned instance (no sync)",
-                extra={
-                    "pattern": self.pattern_id,
-                    "task": str(task),
-                    "instance_id": instance_id,
-                    "instance_number": i,
-                },
+                extra={"pattern": self.pattern_id, "task": str(task), "instance_id": instance_id, "instance_number": i},
             )
 
         return instance_ids
 
-    def execute(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> ExecutionResult:
+    def execute(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> ExecutionResult:
         """Execute pattern with fire-and-forget semantics.
 
         Parameters
@@ -256,9 +249,7 @@ class MIDesignTime:
             msg = f"Instance count must be positive, got {self.instance_count}"
             raise ValueError(msg)
 
-    def execute(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> ExecutionResult:
+    def execute(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> ExecutionResult:
         """Execute with fixed instance count and synchronization.
 
         Parameters
@@ -350,9 +341,7 @@ class MIRunTimeKnown:
     name: str = "MI with Run-Time Knowledge"
     instance_count_variable: str = "item_count"
 
-    def execute(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> ExecutionResult:
+    def execute(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> ExecutionResult:
         """Execute with runtime-determined instance count.
 
         Parameters
@@ -375,20 +364,13 @@ class MIRunTimeKnown:
             If instance count variable not found in context
         """
         if self.instance_count_variable not in context:
-            msg = (
-                f"Instance count variable '{self.instance_count_variable}' "
-                f"not found in context"
-            )
-            return ExecutionResult(
-                success=False, instance_ids=[], state=MIState.FAILED, error=msg
-            )
+            msg = f"Instance count variable '{self.instance_count_variable}' not found in context"
+            return ExecutionResult(success=False, instance_ids=[], state=MIState.FAILED, error=msg)
 
         instance_count = context[self.instance_count_variable]
         if not isinstance(instance_count, int) or instance_count <= 0:
             msg = f"Instance count must be positive integer, got {instance_count!r}"
-            return ExecutionResult(
-                success=False, instance_ids=[], state=MIState.FAILED, error=msg
-            )
+            return ExecutionResult(success=False, instance_ids=[], state=MIState.FAILED, error=msg)
 
         instance_ids = []
         parent_id = f"{task}#mi-parent-{uuid.uuid4()}"
@@ -456,13 +438,8 @@ class MIDynamic:
     >>> from rdflib import Graph, Namespace
     >>> ex = Namespace("http://example.org/")
     >>> g = Graph()
-    >>> pattern = MIDynamic(
-    ...     spawn_condition="new_order_received",
-    ...     termination_condition="all_orders_processed",
-    ... )
-    >>> result = pattern.execute(
-    ...     g, ex.processOrder, context={"events": ["order1", "order2", "order3"]}
-    ... )
+    >>> pattern = MIDynamic(spawn_condition="new_order_received", termination_condition="all_orders_processed")
+    >>> result = pattern.execute(g, ex.processOrder, context={"events": ["order1", "order2", "order3"]})
     >>> result.success
     True
     >>> len(result.instance_ids)
@@ -474,14 +451,7 @@ class MIDynamic:
     spawn_condition: str = "event_received"
     termination_condition: str | None = None
 
-    def spawn_instance(
-        self,
-        graph: Graph,
-        task: URIRef,
-        parent_id: str,
-        instance_number: int,
-        event_data: Any,
-    ) -> str:
+    def spawn_instance(self, graph: Graph, task: URIRef, parent_id: str, instance_number: int, event_data: Any) -> str:
         """Spawn a single instance dynamically.
 
         Parameters
@@ -524,9 +494,7 @@ class MIDynamic:
 
         return instance_id
 
-    def execute(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> ExecutionResult:
+    def execute(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> ExecutionResult:
         """Execute with dynamic instance spawning.
 
         Parameters
@@ -549,10 +517,7 @@ class MIDynamic:
         # Get events that trigger spawning
         events = context.get("events", [])
         if not events:
-            logger.warning(
-                "No events found for dynamic MI",
-                extra={"pattern": self.pattern_id, "task": str(task)},
-            )
+            logger.warning("No events found for dynamic MI", extra={"pattern": self.pattern_id, "task": str(task)})
 
         # Spawn instance for each event
         for i, event in enumerate(events):
@@ -567,13 +532,7 @@ class MIDynamic:
         graph.add((parent_uri, YAWL.spawnCondition, Literal(self.spawn_condition)))
 
         if self.termination_condition:
-            graph.add(
-                (
-                    parent_uri,
-                    YAWL.terminationCondition,
-                    Literal(self.termination_condition),
-                )
-            )
+            graph.add((parent_uri, YAWL.terminationCondition, Literal(self.termination_condition)))
 
         return ExecutionResult(
             success=True,
@@ -658,9 +617,5 @@ def mark_instance_complete(graph: Graph, instance_id: str) -> None:
 
     logger.info(
         "MI instance completed",
-        extra={
-            "instance_id": instance_id,
-            "parent_id": str(parent_uri),
-            "completed_count": current_count + 1,
-        },
+        extra={"instance_id": instance_id, "parent_id": str(parent_uri), "completed_count": current_count + 1},
     )

@@ -77,9 +77,7 @@ class OllamaLM:
             ConnectionError: If Ollama is not accessible
         """
         if not DSPY_AVAILABLE:
-            raise RuntimeError(
-                "DSPy is not installed. Install with: pip install dspy-ai"
-            )
+            raise RuntimeError("DSPy is not installed. Install with: pip install dspy-ai")
 
         self.config = config or OllamaConfig.from_env()
         self._lm: DSPyLM | None = None
@@ -101,16 +99,12 @@ class OllamaLM:
         # Check Ollama availability
         if not self.is_available():
             raise ConnectionError(
-                f"Ollama is not accessible at {self.config.base_url}. "
-                "Please start Ollama: ollama serve"
+                f"Ollama is not accessible at {self.config.base_url}. Please start Ollama: ollama serve"
             )
 
         # Check model availability
         if not self.is_model_available():
-            logger.warning(
-                f"Model {self.config.model} not found. "
-                f"Pull it with: ollama pull {self.config.model}"
-            )
+            logger.warning(f"Model {self.config.model} not found. Pull it with: ollama pull {self.config.model}")
 
         # Configure DSPy LM
         try:
@@ -194,9 +188,7 @@ class OllamaLM:
         model = model_name or self.config.model
 
         try:
-            response = requests.post(
-                f"{self.config.base_url}/api/show", json={"name": model}, timeout=5
-            )
+            response = requests.post(f"{self.config.base_url}/api/show", json={"name": model}, timeout=5)
             response.raise_for_status()
             return response.json()
         except requests.exceptions.HTTPError as e:

@@ -246,9 +246,7 @@ class ValidationReport:
         """
         return [v for v in self.violations if v.severity == severity]
 
-    def get_violations_by_constraint(
-        self, constraint_name: str
-    ) -> list[SHACLViolation]:
+    def get_violations_by_constraint(self, constraint_name: str) -> list[SHACLViolation]:
         """Filter violations by constraint name.
 
         Parameters
@@ -278,9 +276,7 @@ class SHACLValidator:
     Examples
     --------
     >>> validator = SHACLValidator()
-    >>> report = validator.validate_invariant(
-    ...     event, invariant="EventTitleNotEmptyInvariant"
-    ... )
+    >>> report = validator.validate_invariant(event, invariant="EventTitleNotEmptyInvariant")
     >>> assert report.conforms is True
     """
 
@@ -298,9 +294,7 @@ class SHACLValidator:
         "NoCircularDependenciesInvariant": "_validate_no_circular_dependencies",
     }
 
-    def validate_invariant(
-        self, data: Any, invariant: str, tags: list[str] | None = None
-    ) -> ValidationReport:
+    def validate_invariant(self, data: Any, invariant: str, tags: list[str] | None = None) -> ValidationReport:
         """Validate data against a single invariant.
 
         Parameters
@@ -337,16 +331,11 @@ class SHACLValidator:
         # Dispatch to invariant-specific validator with proper typing
         if invariant == "ReminderDueTodayValidInvariant":
             # Special case: this validator requires tags parameter
-            method_with_tags = cast(
-                Callable[[Validatable, list[str]], ValidationReport],
-                getattr(self, method_name),
-            )
+            method_with_tags = cast(Callable[[Validatable, list[str]], ValidationReport], getattr(self, method_name))
             return method_with_tags(validatable, tags or [])
 
         # All other validators take only validatable parameter
-        method_simple = cast(
-            Callable[[Validatable], ValidationReport], getattr(self, method_name)
-        )
+        method_simple = cast(Callable[[Validatable], ValidationReport], getattr(self, method_name))
         return method_simple(validatable)
 
     def validate_all_invariants(self, data: dict[str, Any]) -> ValidationReport:
@@ -378,9 +367,7 @@ class SHACLValidator:
 
         # Validate reminders
         for reminder in data.get("reminders", []):
-            report4 = self.validate_invariant(
-                reminder, "ReminderStatusRequiredInvariant"
-            )
+            report4 = self.validate_invariant(reminder, "ReminderStatusRequiredInvariant")
             all_violations.extend(report4.violations)
 
             report5 = self.validate_invariant(reminder, "DataHasSourceInvariant")
@@ -407,9 +394,7 @@ class SHACLValidator:
             all_violations.extend(report2.violations)
 
         for reminder in data.get("bad_reminders", []):
-            report4 = self.validate_invariant(
-                reminder, "ReminderStatusRequiredInvariant"
-            )
+            report4 = self.validate_invariant(reminder, "ReminderStatusRequiredInvariant")
             all_violations.extend(report4.violations)
 
         for message in data.get("bad_mail_messages", []):
@@ -461,9 +446,7 @@ class SHACLValidator:
                 constraint_name="EventTimeRangeValidInvariant",
                 message=f"Event start time ({start}) must be before end time ({end})",
                 severity=Severity.VIOLATION,
-                defect_description=(
-                    "Prevents malformed time ranges that break scheduling logic"
-                ),
+                defect_description=("Prevents malformed time ranges that break scheduling logic"),
                 suggested_fix="Ensure start_date < end_date",
             )
             return ValidationReport(conforms=False, violations=(violation,))
@@ -483,18 +466,14 @@ class SHACLValidator:
                 constraint_name="ReminderStatusRequiredInvariant",
                 message="Reminder must have a completion status (True/False)",
                 severity=Severity.VIOLATION,
-                defect_description=(
-                    "Prevents ambiguous task states where completion is unknown"
-                ),
+                defect_description=("Prevents ambiguous task states where completion is unknown"),
                 suggested_fix="Set 'completed' to True or False",
             )
             return ValidationReport(conforms=False, violations=(violation,))
 
         return ValidationReport(conforms=True, violations=())
 
-    def _validate_reminder_due_today(
-        self, data: Validatable, tags: list[str]
-    ) -> ValidationReport:
+    def _validate_reminder_due_today(self, data: Validatable, tags: list[str]) -> ValidationReport:
         """Validate ReminderDueTodayValidInvariant.
 
         Prevents: Inconsistent "today" tags when due date is not today.
@@ -527,9 +506,7 @@ class SHACLValidator:
                 constraint_name="ReminderDueTodayValidInvariant",
                 message=f"Task marked 'today' but due date is {due_day} (not {today})",
                 severity=Severity.VIOLATION,
-                defect_description=(
-                    "Prevents inconsistent 'today' tags when due date is different"
-                ),
+                defect_description=("Prevents inconsistent 'today' tags when due date is different"),
                 suggested_fix=f"Update due_date to {today} or remove 'today' tag",
             )
             return ValidationReport(conforms=False, violations=(violation,))
@@ -543,17 +520,13 @@ class SHACLValidator:
         """
         sender_email = data.get_value("sender_email")
 
-        if not sender_email or (
-            isinstance(sender_email, str) and sender_email.strip() == ""
-        ):
+        if not sender_email or (isinstance(sender_email, str) and sender_email.strip() == ""):
             violation = SHACLViolation(
                 focus_node="sender_email",
                 constraint_name="MailMetadataValidInvariant",
                 message="Email message must have a sender email address",
                 severity=Severity.VIOLATION,
-                defect_description=(
-                    "Prevents orphaned email data with no sender information"
-                ),
+                defect_description=("Prevents orphaned email data with no sender information"),
                 suggested_fix="Ensure sender_email is populated",
             )
             return ValidationReport(conforms=False, violations=(violation,))
@@ -585,9 +558,7 @@ class SHACLValidator:
                 constraint_name="FilePathValidInvariant",
                 message=f"File path must be absolute (got: {file_path!r})",
                 severity=Severity.VIOLATION,
-                defect_description=(
-                    "Prevents broken file references from relative paths"
-                ),
+                defect_description=("Prevents broken file references from relative paths"),
                 suggested_fix="Use absolute path starting with /",
             )
             return ValidationReport(conforms=False, violations=(violation,))
@@ -611,9 +582,7 @@ class SHACLValidator:
         sender_email = data.get_value("sender_email")
         file_path = data.get_value("file_path")
 
-        has_source = bool(
-            calendar_title or list_title or message_id or sender_email or file_path
-        )
+        has_source = bool(calendar_title or list_title or message_id or sender_email or file_path)
 
         if not has_source:
             # No source tracking found
@@ -625,12 +594,9 @@ class SHACLValidator:
                     "message_id, sender_email, or file_path)"
                 ),
                 severity=Severity.VIOLATION,
-                defect_description=(
-                    "Prevents unclear data origin without source tracking"
-                ),
+                defect_description=("Prevents unclear data origin without source tracking"),
                 suggested_fix=(
-                    "Add calendar_title, list_title, message_id, sender_email, "
-                    "or file_path to identify source"
+                    "Add calendar_title, list_title, message_id, sender_email, or file_path to identify source"
                 ),
             )
             return ValidationReport(conforms=False, violations=(violation,))

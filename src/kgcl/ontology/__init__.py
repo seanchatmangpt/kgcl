@@ -102,9 +102,7 @@ def load_ontology(include_examples: bool = False) -> "Graph":
     try:
         from rdflib import Graph
     except ImportError:
-        raise ImportError(
-            "rdflib is required to load the ontology. Install with: pip install rdflib"
-        )
+        raise ImportError("rdflib is required to load the ontology. Install with: pip install rdflib")
 
     g = Graph()
 
@@ -152,9 +150,7 @@ def validate_instance_data(data_graph: "Graph", shapes_graph: "Graph" = None) ->
     try:
         from pyshacl import validate
     except ImportError:
-        raise ImportError(
-            "pyshacl is required for SHACL validation. Install with: pip install pyshacl"
-        )
+        raise ImportError("pyshacl is required for SHACL validation. Install with: pip install pyshacl")
 
     if shapes_graph is None:
         from rdflib import Graph
@@ -204,9 +200,7 @@ def get_ontology_statistics() -> dict:
         "capabilities": len(list(g.subjects(RDF.type, CORE.Capability))),
     }
 
-    stats["total_properties"] = (
-        stats["object_properties"] + stats["datatype_properties"]
-    )
+    stats["total_properties"] = stats["object_properties"] + stats["datatype_properties"]
 
     return stats
 

@@ -29,12 +29,7 @@ import time
 import pytest
 from rdflib import Dataset, Literal, Namespace, URIRef
 
-from kgcl.yawl_engine.patterns.cancellation import (
-    CancelCase,
-    CancellationResult,
-    CancelRegion,
-    CancelTask,
-)
+from kgcl.yawl_engine.patterns.cancellation import CancelCase, CancellationResult, CancelRegion, CancelTask
 
 # YAWL namespace definitions
 YAWL = Namespace("http://www.yawlfoundation.org/yawlschema#")
@@ -118,9 +113,7 @@ def store_with_regions() -> Dataset:
 class TestCancelTask:
     """Tests for YAWL Pattern 19: Cancel Task."""
 
-    def test_cancel_task_marks_status_as_cancelled(
-        self, store_with_single_task: Dataset
-    ) -> None:
+    def test_cancel_task_marks_status_as_cancelled(self, store_with_single_task: Dataset) -> None:
         """Task status changes from 'active' to 'cancelled'."""
         task = URIRef("urn:task:auth_code_entry")
         cancel = CancelTask()
@@ -129,20 +122,14 @@ class TestCancelTask:
 
         # Verify status change
         assert result.success is True
-        cancelled_status = list(
-            store_with_single_task.triples((task, YAWL.status, Literal("cancelled")))
-        )
+        cancelled_status = list(store_with_single_task.triples((task, YAWL.status, Literal("cancelled"))))
         assert len(cancelled_status) == 1
 
         # Verify active status removed
-        active_status = list(
-            store_with_single_task.triples((task, YAWL.status, Literal("active")))
-        )
+        active_status = list(store_with_single_task.triples((task, YAWL.status, Literal("active"))))
         assert len(active_status) == 0
 
-    def test_cancel_task_adds_audit_metadata(
-        self, store_with_single_task: Dataset
-    ) -> None:
+    def test_cancel_task_adds_audit_metadata(self, store_with_single_task: Dataset) -> None:
         """Cancellation adds timestamp and reason to graph."""
         task = URIRef("urn:task:auth_code_entry")
         cancel = CancelTask()
@@ -157,23 +144,17 @@ class TestCancelTask:
         assert result.reason == reason
 
         # Check timestamp in graph
-        timestamps = list(
-            store_with_single_task.triples((task, YAWL.cancelledAt, None))
-        )
+        timestamps = list(store_with_single_task.triples((task, YAWL.cancelledAt, None)))
         assert len(timestamps) == 1
         timestamp_value = float(timestamps[0][2])
         assert before <= timestamp_value <= after
 
         # Check reason in graph
-        reasons = list(
-            store_with_single_task.triples((task, YAWL.cancellationReason, None))
-        )
+        reasons = list(store_with_single_task.triples((task, YAWL.cancellationReason, None)))
         assert len(reasons) == 1
         assert str(reasons[0][2]) == reason
 
-    def test_cancel_task_removes_active_tokens(
-        self, store_with_single_task: Dataset
-    ) -> None:
+    def test_cancel_task_removes_active_tokens(self, store_with_single_task: Dataset) -> None:
         """Active tokens are cleaned up after cancellation."""
         task = URIRef("urn:task:auth_code_entry")
         cancel = CancelTask()
@@ -189,9 +170,7 @@ class TestCancelTask:
         tokens_after = list(store_with_single_task.triples((task, KGC.hasToken, None)))
         assert len(tokens_after) == 0
 
-    def test_cancel_task_with_nonexistent_task_fails(
-        self, empty_store: Dataset
-    ) -> None:
+    def test_cancel_task_with_nonexistent_task_fails(self, empty_store: Dataset) -> None:
         """Cancelling non-existent task returns error."""
         task = URIRef("urn:task:does_not_exist")
         cancel = CancelTask()
@@ -203,9 +182,7 @@ class TestCancelTask:
         assert "not found" in result.error.lower()
         assert len(result.cancelled_tasks) == 0
 
-    def test_cancel_task_returns_cancelled_task_uri(
-        self, store_with_single_task: Dataset
-    ) -> None:
+    def test_cancel_task_returns_cancelled_task_uri(self, store_with_single_task: Dataset) -> None:
         """CancellationResult includes cancelled task URI."""
         task = URIRef("urn:task:auth_code_entry")
         cancel = CancelTask()
@@ -216,9 +193,7 @@ class TestCancelTask:
         assert len(result.cancelled_tasks) == 1
         assert result.cancelled_tasks[0] == str(task)
 
-    def test_cancel_task_removes_all_active_statuses(
-        self, empty_store: Dataset
-    ) -> None:
+    def test_cancel_task_removes_all_active_statuses(self, empty_store: Dataset) -> None:
         """Cancel removes active, enabled, and executing statuses."""
         task = URIRef("urn:task:multi_status")
         empty_store.add((task, YAWL.status, Literal("active")))
@@ -232,9 +207,7 @@ class TestCancelTask:
 
         # Verify all statuses removed
         for status in ["active", "enabled", "executing"]:
-            status_triples = list(
-                empty_store.triples((task, YAWL.status, Literal(status)))
-            )
+            status_triples = list(empty_store.triples((task, YAWL.status, Literal(status))))
             assert len(status_triples) == 0
 
         # Verify cancelled status added
@@ -252,18 +225,14 @@ class TestCancelTask:
         elapsed_ms = (time.perf_counter() - start) * 1000
 
         assert result.success is True
-        assert elapsed_ms < P99_TARGET_MS, (
-            f"Cancel took {elapsed_ms:.2f}ms, target <{P99_TARGET_MS}ms"
-        )
+        assert elapsed_ms < P99_TARGET_MS, f"Cancel took {elapsed_ms:.2f}ms, target <{P99_TARGET_MS}ms"
 
 
 # Tests for Pattern 20: Cancel Case
 class TestCancelCase:
     """Tests for YAWL Pattern 20: Cancel Case."""
 
-    def test_cancel_case_cancels_all_workflow_tasks(
-        self, store_with_workflow: Dataset
-    ) -> None:
+    def test_cancel_case_cancels_all_workflow_tasks(self, store_with_workflow: Dataset) -> None:
         """All tasks in workflow are marked as cancelled."""
         workflow = URIRef("urn:workflow:nuclear_launch")
         cancel = CancelCase()
@@ -277,14 +246,10 @@ class TestCancelCase:
         # Check each task has cancelled status
         for task_str in result.cancelled_tasks:
             task = URIRef(task_str)
-            cancelled_status = list(
-                store_with_workflow.triples((task, YAWL.status, Literal("cancelled")))
-            )
+            cancelled_status = list(store_with_workflow.triples((task, YAWL.status, Literal("cancelled"))))
             assert len(cancelled_status) == 1
 
-    def test_cancel_case_marks_workflow_as_aborted(
-        self, store_with_workflow: Dataset
-    ) -> None:
+    def test_cancel_case_marks_workflow_as_aborted(self, store_with_workflow: Dataset) -> None:
         """Workflow instance status changes to 'aborted'."""
         workflow = URIRef("urn:workflow:nuclear_launch")
         cancel = CancelCase()
@@ -294,14 +259,10 @@ class TestCancelCase:
         assert result.success is True
 
         # Verify workflow aborted status
-        aborted_status = list(
-            store_with_workflow.triples((workflow, YAWL.status, Literal("aborted")))
-        )
+        aborted_status = list(store_with_workflow.triples((workflow, YAWL.status, Literal("aborted"))))
         assert len(aborted_status) == 1
 
-    def test_cancel_case_adds_workflow_audit_trail(
-        self, store_with_workflow: Dataset
-    ) -> None:
+    def test_cancel_case_adds_workflow_audit_trail(self, store_with_workflow: Dataset) -> None:
         """Workflow aborted timestamp and reason are recorded."""
         workflow = URIRef("urn:workflow:nuclear_launch")
         cancel = CancelCase()
@@ -324,9 +285,7 @@ class TestCancelCase:
         assert len(reasons) == 1
         assert str(reasons[0][2]) == reason
 
-    def test_cancel_case_removes_all_task_tokens(
-        self, store_with_workflow: Dataset
-    ) -> None:
+    def test_cancel_case_removes_all_task_tokens(self, store_with_workflow: Dataset) -> None:
         """All task tokens are cleaned up."""
         workflow = URIRef("urn:workflow:nuclear_launch")
         cancel = CancelCase()
@@ -343,9 +302,7 @@ class TestCancelCase:
         tokens_after = list(store_with_workflow.triples((None, KGC.hasToken, None)))
         assert len(tokens_after) == 0
 
-    def test_cancel_case_with_nonexistent_workflow_fails(
-        self, empty_store: Dataset
-    ) -> None:
+    def test_cancel_case_with_nonexistent_workflow_fails(self, empty_store: Dataset) -> None:
         """Cancelling non-existent workflow returns error."""
         workflow = URIRef("urn:workflow:does_not_exist")
         cancel = CancelCase()
@@ -357,9 +314,7 @@ class TestCancelCase:
         assert "not found" in result.error.lower()
         assert len(result.cancelled_tasks) == 0
 
-    def test_cancel_case_adds_audit_to_all_tasks(
-        self, store_with_workflow: Dataset
-    ) -> None:
+    def test_cancel_case_adds_audit_to_all_tasks(self, store_with_workflow: Dataset) -> None:
         """Each task gets cancellation timestamp and reason."""
         workflow = URIRef("urn:workflow:nuclear_launch")
         cancel = CancelCase()
@@ -376,17 +331,13 @@ class TestCancelCase:
             task = URIRef(task_str)
 
             # Check timestamp
-            timestamps = list(
-                store_with_workflow.triples((task, YAWL.cancelledAt, None))
-            )
+            timestamps = list(store_with_workflow.triples((task, YAWL.cancelledAt, None)))
             assert len(timestamps) == 1
             timestamp_value = float(timestamps[0][2])
             assert before <= timestamp_value <= after
 
             # Check reason
-            reasons = list(
-                store_with_workflow.triples((task, YAWL.cancellationReason, None))
-            )
+            reasons = list(store_with_workflow.triples((task, YAWL.cancellationReason, None)))
             assert len(reasons) == 1
             assert str(reasons[0][2]) == reason
 
@@ -401,22 +352,16 @@ class TestCancelCase:
         elapsed_ms = (time.perf_counter() - start) * 1000
 
         assert result.success is True
-        assert elapsed_ms < P99_TARGET_MS, (
-            f"Cancel case took {elapsed_ms:.2f}ms, target <{P99_TARGET_MS}ms"
-        )
+        assert elapsed_ms < P99_TARGET_MS, f"Cancel case took {elapsed_ms:.2f}ms, target <{P99_TARGET_MS}ms"
 
 
 # Tests for Pattern 21: Cancel Region
 class TestCancelRegion:
     """Tests for YAWL Pattern 21: Cancel Region."""
 
-    def test_cancel_region_cancels_only_region_tasks(
-        self, store_with_regions: Dataset
-    ) -> None:
+    def test_cancel_region_cancels_only_region_tasks(self, store_with_regions: Dataset) -> None:
         """Only tasks in region are cancelled, others continue."""
-        region_a_tasks = frozenset(
-            ["urn:task:region_a_auth", "urn:task:region_a_validate"]
-        )
+        region_a_tasks = frozenset(["urn:task:region_a_auth", "urn:task:region_a_validate"])
         cancel = CancelRegion(region_tasks=region_a_tasks)
         trigger = URIRef("urn:task:region_a_auth")
 
@@ -428,27 +373,19 @@ class TestCancelRegion:
         # Verify region A tasks cancelled
         for task_str in region_a_tasks:
             task = URIRef(task_str)
-            cancelled_status = list(
-                store_with_regions.triples((task, YAWL.status, Literal("cancelled")))
-            )
+            cancelled_status = list(store_with_regions.triples((task, YAWL.status, Literal("cancelled"))))
             assert len(cancelled_status) == 1
 
         # Verify region B tasks still active
         region_b_1 = URIRef("urn:task:region_b_prepare")
         region_b_2 = URIRef("urn:task:region_b_execute")
         for task in [region_b_1, region_b_2]:
-            active_status = list(
-                store_with_regions.triples((task, YAWL.status, Literal("active")))
-            )
+            active_status = list(store_with_regions.triples((task, YAWL.status, Literal("active"))))
             assert len(active_status) == 1
 
-    def test_cancel_region_with_trigger_outside_region_fails(
-        self, store_with_regions: Dataset
-    ) -> None:
+    def test_cancel_region_with_trigger_outside_region_fails(self, store_with_regions: Dataset) -> None:
         """Trigger task must be in region."""
-        region_a_tasks = frozenset(
-            ["urn:task:region_a_auth", "urn:task:region_a_validate"]
-        )
+        region_a_tasks = frozenset(["urn:task:region_a_auth", "urn:task:region_a_validate"])
         cancel = CancelRegion(region_tasks=region_a_tasks)
         trigger = URIRef("urn:task:region_b_prepare")  # Outside region A
 
@@ -459,13 +396,9 @@ class TestCancelRegion:
         assert "region" in result.error.lower()
         assert len(result.cancelled_tasks) == 0
 
-    def test_cancel_region_removes_tokens_only_in_region(
-        self, store_with_regions: Dataset
-    ) -> None:
+    def test_cancel_region_removes_tokens_only_in_region(self, store_with_regions: Dataset) -> None:
         """Tokens removed from region tasks, not from others."""
-        region_a_tasks = frozenset(
-            ["urn:task:region_a_auth", "urn:task:region_a_validate"]
-        )
+        region_a_tasks = frozenset(["urn:task:region_a_auth", "urn:task:region_a_validate"])
         cancel = CancelRegion(region_tasks=region_a_tasks)
         trigger = URIRef("urn:task:region_a_auth")
 
@@ -490,13 +423,9 @@ class TestCancelRegion:
             tokens = list(store_with_regions.triples((task, KGC.hasToken, None)))
             assert len(tokens) == 1
 
-    def test_cancel_region_adds_audit_trail_with_trigger(
-        self, store_with_regions: Dataset
-    ) -> None:
+    def test_cancel_region_adds_audit_trail_with_trigger(self, store_with_regions: Dataset) -> None:
         """Cancellation reason includes trigger task URI."""
-        region_a_tasks = frozenset(
-            ["urn:task:region_a_auth", "urn:task:region_a_validate"]
-        )
+        region_a_tasks = frozenset(["urn:task:region_a_auth", "urn:task:region_a_validate"])
         cancel = CancelRegion(region_tasks=region_a_tasks)
         trigger = URIRef("urn:task:region_a_auth")
 
@@ -512,17 +441,13 @@ class TestCancelRegion:
             task = URIRef(task_str)
 
             # Check timestamp
-            timestamps = list(
-                store_with_regions.triples((task, YAWL.cancelledAt, None))
-            )
+            timestamps = list(store_with_regions.triples((task, YAWL.cancelledAt, None)))
             assert len(timestamps) == 1
             timestamp_value = float(timestamps[0][2])
             assert before <= timestamp_value <= after
 
             # Check reason includes trigger
-            reasons = list(
-                store_with_regions.triples((task, YAWL.cancellationReason, None))
-            )
+            reasons = list(store_with_regions.triples((task, YAWL.cancellationReason, None)))
             assert len(reasons) == 1
             assert str(trigger) in str(reasons[0][2])
 
@@ -537,9 +462,7 @@ class TestCancelRegion:
         assert result.success is False
         assert len(result.cancelled_tasks) == 0
 
-    def test_cancel_region_skips_nonexistent_tasks(
-        self, store_with_regions: Dataset
-    ) -> None:
+    def test_cancel_region_skips_nonexistent_tasks(self, store_with_regions: Dataset) -> None:
         """Region with non-existent tasks skips them gracefully."""
         region_with_missing = frozenset(
             [
@@ -559,9 +482,7 @@ class TestCancelRegion:
     @pytest.mark.performance
     def test_cancel_region_performance_p99(self, store_with_regions: Dataset) -> None:
         """Cancel region completes within p99 target (<100ms)."""
-        region_a_tasks = frozenset(
-            ["urn:task:region_a_auth", "urn:task:region_a_validate"]
-        )
+        region_a_tasks = frozenset(["urn:task:region_a_auth", "urn:task:region_a_validate"])
         cancel = CancelRegion(region_tasks=region_a_tasks)
         trigger = URIRef("urn:task:region_a_auth")
 
@@ -570,9 +491,7 @@ class TestCancelRegion:
         elapsed_ms = (time.perf_counter() - start) * 1000
 
         assert result.success is True
-        assert elapsed_ms < P99_TARGET_MS, (
-            f"Cancel region took {elapsed_ms:.2f}ms, target <{P99_TARGET_MS}ms"
-        )
+        assert elapsed_ms < P99_TARGET_MS, f"Cancel region took {elapsed_ms:.2f}ms, target <{P99_TARGET_MS}ms"
 
 
 # Integration Tests
@@ -580,9 +499,7 @@ class TestCancelRegion:
 class TestCancellationIntegration:
     """Integration tests for cancellation patterns."""
 
-    def test_cancel_task_then_cancel_remaining_case(
-        self, store_with_workflow: Dataset
-    ) -> None:
+    def test_cancel_task_then_cancel_remaining_case(self, store_with_workflow: Dataset) -> None:
         """Cancel single task, then cancel entire workflow."""
         workflow = URIRef("urn:workflow:nuclear_launch")
         task1 = URIRef("urn:task:initiate")
@@ -602,17 +519,13 @@ class TestCancellationIntegration:
         assert len(result2.cancelled_tasks) == 3  # All tasks
 
         # Verify workflow aborted
-        aborted = list(
-            store_with_workflow.triples((workflow, YAWL.status, Literal("aborted")))
-        )
+        aborted = list(store_with_workflow.triples((workflow, YAWL.status, Literal("aborted"))))
         assert len(aborted) == 1
 
     def test_cancel_region_then_cancel_case(self, store_with_regions: Dataset) -> None:
         """Cancel region A, then cancel entire workflow."""
         workflow = URIRef("urn:workflow:parallel_ops")
-        region_a_tasks = frozenset(
-            ["urn:task:region_a_auth", "urn:task:region_a_validate"]
-        )
+        region_a_tasks = frozenset(["urn:task:region_a_auth", "urn:task:region_a_validate"])
 
         # Add workflow to store
         store_with_regions.add((workflow, YAWL.status, Literal("active")))
@@ -636,10 +549,7 @@ class TestCancellationIntegration:
     def test_cancellation_result_immutability(self) -> None:
         """CancellationResult is immutable (frozen dataclass)."""
         result = CancellationResult(
-            cancelled_tasks=("urn:task:t1",),
-            reason="Test",
-            timestamp=1704067200.0,
-            success=True,
+            cancelled_tasks=("urn:task:t1",), reason="Test", timestamp=1704067200.0, success=True
         )
 
         # Verify frozen

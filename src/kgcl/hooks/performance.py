@@ -178,9 +178,7 @@ class PerformanceOptimizer:
             "compliant_count": compliant,
             "total_count": total,
             "compliance_rate": compliant / total if total > 0 else 0.0,
-            "success_rate": sum(1 for m in metrics if m.success) / total
-            if total > 0
-            else 0.0,
+            "success_rate": sum(1 for m in metrics if m.success) / total if total > 0 else 0.0,
         }
 
     def get_all_operations(self) -> list[str]:

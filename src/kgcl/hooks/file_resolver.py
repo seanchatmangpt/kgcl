@@ -56,9 +56,7 @@ class FileResolver:
     --------
     >>> resolver = FileResolver(allowed_paths=["/path/to/queries"])
     >>> content = resolver.load_file("file:///path/to/query.sparql")
-    >>> verified = resolver.load_file(
-    ...     "file:///path/to/query.sparql", expected_sha256="abc123..."
-    ... )
+    >>> verified = resolver.load_file("file:///path/to/query.sparql", expected_sha256="abc123...")
 
     """
 
@@ -98,9 +96,7 @@ class FileResolver:
         >>> resolver = FileResolver()
         >>> content = resolver.load_file("file:///tmp/query.sparql")
         >>> # With integrity check
-        >>> content = resolver.load_file(
-        ...     "file:///tmp/query.sparql", expected_sha256="abc123..."
-        ... )
+        >>> content = resolver.load_file("file:///tmp/query.sparql", expected_sha256="abc123...")
 
         """
         if uri.startswith("file://"):
@@ -136,10 +132,7 @@ class FileResolver:
         # Security: verify path is allowed
         if self.allowed_paths:
             normalized = str(path_obj.resolve())
-            allowed = any(
-                normalized.startswith(str(Path(ap).resolve()))
-                for ap in self.allowed_paths
-            )
+            allowed = any(normalized.startswith(str(Path(ap).resolve())) for ap in self.allowed_paths)
             if not allowed:
                 raise FileResolverError(path, "Path not allowed")
 

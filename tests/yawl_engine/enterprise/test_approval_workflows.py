@@ -20,16 +20,12 @@ References
 Examples
 --------
 >>> # Sequential approval chain
->>> chain = ApprovalWorkflowBuilder.sequential_approval(
-...     ["junior", "senior", "manager", "director"]
-... )
+>>> chain = ApprovalWorkflowBuilder.sequential_approval(["junior", "senior", "manager", "director"])
 >>> result = chain.execute_all_approvals(graph)
 >>> assert result.all_approved
 
 >>> # Parallel approval (all must approve)
->>> parallel = ApprovalWorkflowBuilder.parallel_approval(
-...     ["legal", "finance", "compliance"]
-... )
+>>> parallel = ApprovalWorkflowBuilder.parallel_approval(["legal", "finance", "compliance"])
 >>> result = parallel.execute_parallel(graph)
 >>> assert result.all_completed
 """
@@ -40,16 +36,10 @@ import pytest
 from rdflib import Graph, Literal, Namespace, URIRef
 
 from kgcl.yawl_engine.core import YawlNamespace
-from kgcl.yawl_engine.patterns.basic_control import (
-    ExclusiveChoice,
-    ParallelSplit,
-    Sequence,
-    Synchronization,
-)
+from kgcl.yawl_engine.patterns.basic_control import ExclusiveChoice, ParallelSplit, Sequence, Synchronization
 from kgcl.yawl_engine.patterns.resource_patterns import (
     Authorization,
     DeferredAllocation,
-    DirectAllocation,
     RoleBasedAllocation,
     SeparationOfDuties,
     WorkItemStatus,
@@ -280,9 +270,7 @@ class TestSequentialApproval:
             completed_exists = (task, YAWL.status, Literal("completed")) in graph
             assert completed_exists, f"Task {task} should have completed status"
 
-    def test_sequential_approval_rejection_stops_chain(
-        self, sequential_approval_chain: Graph
-    ) -> None:
+    def test_sequential_approval_rejection_stops_chain(self, sequential_approval_chain: Graph) -> None:
         """Test rejection at any level stops the approval chain.
 
         Workflow: Junior → (Senior REJECTS) → ❌ Chain stops
@@ -313,9 +301,7 @@ class TestSequentialApproval:
         assert not manager_enabled
         assert not director_enabled
 
-    def test_sequential_approval_with_authorization(
-        self, sequential_approval_chain: Graph
-    ) -> None:
+    def test_sequential_approval_with_authorization(self, sequential_approval_chain: Graph) -> None:
         """Test sequential approval enforces authorization at each level.
 
         Workflow: Each level checks user has required capabilities
@@ -387,9 +373,7 @@ class TestParallelApproval:
             status = graph.value(task, YAWL.status)
             assert status == Literal("enabled")
 
-    def test_parallel_approval_synchronization_waits(
-        self, parallel_approval_graph: Graph
-    ) -> None:
+    def test_parallel_approval_synchronization_waits(self, parallel_approval_graph: Graph) -> None:
         """Test synchronization waits for ALL parallel branches.
 
         Workflow: 2 of 3 departments approve → Final Decision WAITS
@@ -427,9 +411,7 @@ class TestParallelApproval:
         result = sync.execute(graph, TASK.FinalDecision, {})
         assert result.success
 
-    def test_parallel_approval_one_rejection_blocks_all(
-        self, parallel_approval_graph: Graph
-    ) -> None:
+    def test_parallel_approval_one_rejection_blocks_all(self, parallel_approval_graph: Graph) -> None:
         """Test one department rejection blocks final decision.
 
         Workflow: Legal REJECTS → All branches must cancel
@@ -477,9 +459,7 @@ class TestTieredApproval:
     - >= $100K → Board approval
     """
 
-    def test_tiered_approval_auto_approve_small_amount(
-        self, tiered_approval_graph: Graph
-    ) -> None:
+    def test_tiered_approval_auto_approve_small_amount(self, tiered_approval_graph: Graph) -> None:
         """Test automatic approval for amounts under $1K.
 
         Workflow: Amount $500 → Auto-approve
@@ -503,9 +483,7 @@ class TestTieredApproval:
         assert len(result.next_tasks) == 1
         assert TASK.AutoApprove in result.next_tasks
 
-    def test_tiered_approval_manager_for_medium_amount(
-        self, tiered_approval_graph: Graph
-    ) -> None:
+    def test_tiered_approval_manager_for_medium_amount(self, tiered_approval_graph: Graph) -> None:
         """Test manager approval for amounts $1K-$10K.
 
         Workflow: Amount $5,000 → Manager approval
@@ -528,9 +506,7 @@ class TestTieredApproval:
         assert result.success
         assert TASK.ManagerApprovalTier in result.next_tasks
 
-    def test_tiered_approval_director_for_large_amount(
-        self, tiered_approval_graph: Graph
-    ) -> None:
+    def test_tiered_approval_director_for_large_amount(self, tiered_approval_graph: Graph) -> None:
         """Test director approval for amounts $10K-$100K.
 
         Workflow: Amount $50,000 → Director approval
@@ -553,9 +529,7 @@ class TestTieredApproval:
         assert result.success
         assert TASK.DirectorApprovalTier in result.next_tasks
 
-    def test_tiered_approval_board_for_huge_amount(
-        self, tiered_approval_graph: Graph
-    ) -> None:
+    def test_tiered_approval_board_for_huge_amount(self, tiered_approval_graph: Graph) -> None:
         """Test board approval for amounts >= $100K.
 
         Workflow: Amount $500,000 → Board approval
@@ -617,9 +591,7 @@ class TestApprovalEscalation:
         graph.add((TASK.ManagerApprovalTimeout, YAWL.timedOutAt, Literal("2024-11-26T10:00:00Z")))
 
         # Use deferred allocation to escalate to director
-        deferred = DeferredAllocation(
-            allocation_expression="data['escalated_to']"
-        )
+        deferred = DeferredAllocation(allocation_expression="data['escalated_to']")
 
         context = {
             "escalated_to": str(USER.diana),
@@ -718,11 +690,7 @@ class TestApprovalDelegation:
         # Use deferred allocation for delegation
         deferred = DeferredAllocation(allocation_expression="data['delegate']")
 
-        context = {
-            "delegate": str(USER.bob),
-            "delegated_by": str(USER.charlie),
-            "delegation_reason": "Out of office",
-        }
+        context = {"delegate": str(USER.bob), "delegated_by": str(USER.charlie), "delegation_reason": "Out of office"}
 
         result = deferred.allocate(graph, TASK.DelegatedApproval, context)
 
@@ -733,11 +701,7 @@ class TestApprovalDelegation:
         graph.add((TASK.DelegatedApproval, YAWL.delegatedBy, Literal(str(USER.charlie))))
         graph.add((TASK.DelegatedApproval, YAWL.delegatedTo, Literal(str(USER.bob))))
 
-        delegation_recorded = (
-            TASK.DelegatedApproval,
-            YAWL.delegatedBy,
-            Literal(str(USER.charlie)),
-        ) in graph
+        delegation_recorded = (TASK.DelegatedApproval, YAWL.delegatedBy, Literal(str(USER.charlie))) in graph
 
         assert delegation_recorded
 
@@ -758,10 +722,7 @@ class TestApprovalDelegation:
 
         # Perform delegation
         deferred = DeferredAllocation(allocation_expression="data['delegate']")
-        context = {
-            "delegate": str(USER.charlie),
-            "delegated_by": str(USER.diana),
-        }
+        context = {"delegate": str(USER.charlie), "delegated_by": str(USER.diana)}
 
         deferred.allocate(graph, TASK.DelegatedApprovalWithNotification, context)
 
@@ -769,20 +730,10 @@ class TestApprovalDelegation:
         notification_task = TASK.DelegationNotification
         graph.add((notification_task, YAWL.notificationType, Literal("delegation")))
         graph.add((notification_task, YAWL.notifyUser, Literal(str(USER.diana))))
-        graph.add(
-            (
-                notification_task,
-                YAWL.message,
-                Literal(f"Task delegated to {USER.charlie}"),
-            )
-        )
+        graph.add((notification_task, YAWL.message, Literal(f"Task delegated to {USER.charlie}")))
 
         # Verify notification created
-        notification_exists = (
-            notification_task,
-            YAWL.notificationType,
-            Literal("delegation"),
-        ) in graph
+        notification_exists = (notification_task, YAWL.notificationType, Literal("delegation")) in graph
 
         assert notification_exists
 
@@ -802,9 +753,7 @@ class TestCompleteApprovalWorkflows:
     Validates combinations of patterns working together.
     """
 
-    def test_complete_sequential_with_4eyes_separation(
-        self, sequential_approval_chain: Graph
-    ) -> None:
+    def test_complete_sequential_with_4eyes_separation(self, sequential_approval_chain: Graph) -> None:
         """Test sequential approval with 4-eyes separation of duties.
 
         Workflow: Submitter → Approver (different user)
@@ -826,25 +775,18 @@ class TestCompleteApprovalWorkflows:
 
         # Check 4-eyes constraint - Alice cannot approve her own submission
         sod = SeparationOfDuties(
-            constraint_type="4-eyes",
-            related_tasks=[str(TASK.SubmitRequest), str(TASK.JuniorApproval)],
+            constraint_type="4-eyes", related_tasks=[str(TASK.SubmitRequest), str(TASK.JuniorApproval)]
         )
 
         # Alice tries to approve - should FAIL
-        alice_can_approve = sod.check_constraint(
-            graph, TASK.JuniorApproval, str(USER.alice), [str(USER.alice)]
-        )
+        alice_can_approve = sod.check_constraint(graph, TASK.JuniorApproval, str(USER.alice), [str(USER.alice)])
         assert not alice_can_approve
 
         # Bob approves - should SUCCEED
-        bob_can_approve = sod.check_constraint(
-            graph, TASK.JuniorApproval, str(USER.bob), [str(USER.alice)]
-        )
+        bob_can_approve = sod.check_constraint(graph, TASK.JuniorApproval, str(USER.bob), [str(USER.alice)])
         assert bob_can_approve
 
-    def test_complete_parallel_with_role_based_allocation(
-        self, parallel_approval_graph: Graph
-    ) -> None:
+    def test_complete_parallel_with_role_based_allocation(self, parallel_approval_graph: Graph) -> None:
         """Test parallel approval with role-based task allocation.
 
         Workflow: Offer tasks to roles → Users claim → Parallel execution
@@ -909,9 +851,7 @@ class TestCompleteApprovalWorkflows:
         graph.set((TASK.DirectorApprovalTier, YAWL.status, Literal("timed_out")))
 
         # 3. Escalate to Board via deferred allocation
-        deferred_escalate = DeferredAllocation(
-            allocation_expression="data['escalated_to']"
-        )
+        deferred_escalate = DeferredAllocation(allocation_expression="data['escalated_to']")
         escalate_result = deferred_escalate.allocate(
             graph,
             TASK.BoardApproval,
@@ -920,13 +860,9 @@ class TestCompleteApprovalWorkflows:
         assert escalate_result.success
 
         # 4. Board member delegates to backup
-        deferred_delegate = DeferredAllocation(
-            allocation_expression="data['delegate']"
-        )
+        deferred_delegate = DeferredAllocation(allocation_expression="data['delegate']")
         delegate_result = deferred_delegate.allocate(
-            graph,
-            TASK.BoardApprovalDelegated,
-            {"delegate": str(USER.charlie), "delegated_by": str(USER.diana)},
+            graph, TASK.BoardApprovalDelegated, {"delegate": str(USER.charlie), "delegated_by": str(USER.diana)}
         )
         assert delegate_result.success
         assert delegate_result.allocated_to == str(USER.charlie)

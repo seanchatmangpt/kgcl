@@ -104,11 +104,7 @@ class ComposedTest:
         return len(self.results)
 
     def __repr__(self) -> str:
-        return (
-            f"ComposedTest(name={self.name!r}, "
-            f"strategy={self.strategy.value}, "
-            f"tests={len(self.tests)})"
-        )
+        return f"ComposedTest(name={self.name!r}, strategy={self.strategy.value}, tests={len(self.tests)})"
 
 
 class CompositionBuilder:

@@ -48,9 +48,7 @@ class TestObservabilityIntegration:
 
         with tempfile.TemporaryDirectory() as tmpdir:
             pipeline = _create_pipeline(tmpdir)
-            result = pipeline.ingest_json(
-                data={"id": "span_test", "type": "Ping"}, agent="test"
-            )
+            result = pipeline.ingest_json(data={"id": "span_test", "type": "Ping"}, agent="test")
 
         assert result.success is True
         spans = exporter.get_finished_spans()
@@ -62,10 +60,7 @@ class TestObservabilityIntegration:
         _configure_tracer(exporter)
         tracer = trace.get_tracer(__name__)
 
-        with (
-            tracer.start_as_current_span("parent"),
-            tracer.start_as_current_span("child"),
-        ):
+        with tracer.start_as_current_span("parent"), tracer.start_as_current_span("child"):
             pass
 
         spans = exporter.get_finished_spans()
@@ -97,9 +92,7 @@ class TestObservabilityIntegration:
         with tempfile.TemporaryDirectory() as tmpdir:
             pipeline = _create_pipeline(tmpdir)
             start = time.perf_counter()
-            result = pipeline.ingest_json(
-                data={"id": "perf", "type": "PerfTest"}, agent="tester"
-            )
+            result = pipeline.ingest_json(data={"id": "perf", "type": "PerfTest"}, agent="tester")
             duration = time.perf_counter() - start
 
         assert result.success is True

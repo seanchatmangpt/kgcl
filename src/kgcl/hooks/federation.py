@@ -202,9 +202,7 @@ class FederationCoordinator:
 
         return True
 
-    async def replicate_change(
-        self, triple: tuple, write_id: str | None = None
-    ) -> ReplicationResult:
+    async def replicate_change(self, triple: tuple, write_id: str | None = None) -> ReplicationResult:
         """Replicate change to other nodes.
 
         Parameters
@@ -223,9 +221,7 @@ class FederationCoordinator:
             write_id = f"write_{datetime.now(UTC).timestamp()}"
 
         healthy_nodes = self.get_healthy_nodes()
-        target_count = min(
-            self.replication_config.replication_factor, len(healthy_nodes)
-        )
+        target_count = min(self.replication_config.replication_factor, len(healthy_nodes))
 
         # Select nodes for replication
         target_nodes = healthy_nodes[:target_count]
@@ -251,9 +247,7 @@ class FederationCoordinator:
                 failed.append(node.node_id)
 
         # Check consistency
-        consistency_achieved = self._check_consistency(
-            len(confirmed), len(target_nodes)
-        )
+        consistency_achieved = self._check_consistency(len(confirmed), len(target_nodes))
 
         result = ReplicationResult(
             success=consistency_achieved,

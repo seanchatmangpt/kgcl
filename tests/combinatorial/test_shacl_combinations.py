@@ -24,7 +24,7 @@ import pytest
 from rdflib import Graph, Literal, Namespace, URIRef
 from rdflib.namespace import RDF, SDO
 
-from kgcl.unrdf_engine.validation import ShaclValidator, ValidationResult
+from kgcl.unrdf_engine.validation import ShaclValidator
 
 # Define namespaces
 APPLE = Namespace("urn:kgc:apple:")
@@ -107,13 +107,7 @@ class TestInvariantCombinations:
 
     # Test each invariant individually with valid data
     @pytest.mark.parametrize(
-        "graph_fixture",
-        [
-            "valid_event_graph",
-            "valid_reminder_graph",
-            "valid_mail_graph",
-            "valid_file_graph",
-        ],
+        "graph_fixture", ["valid_event_graph", "valid_reminder_graph", "valid_mail_graph", "valid_file_graph"]
     )
     def test_valid_data_passes_all_applicable_invariants(
         self, validator: ShaclValidator, graph_fixture: str, request: pytest.FixtureRequest
@@ -149,9 +143,7 @@ class TestInvariantCombinations:
             )
         ),
     )
-    def test_pairwise_invariant_combinations(
-        self, validator: ShaclValidator, inv1: str, inv2: str
-    ) -> None:
+    def test_pairwise_invariant_combinations(self, validator: ShaclValidator, inv1: str, inv2: str) -> None:
         """
         GIVEN: All pairwise combinations of invariants (45 total)
         WHEN: We validate valid data containing entities for both invariants
@@ -202,12 +194,7 @@ class TestInvariantCombinations:
             ("EventTitleNotEmptyInvariant", "CalendarEvent", "name", None),
             ("EventTitleNotEmptyInvariant", "CalendarEvent", "name", "   "),
             # EventTimeRangeValidInvariant failures
-            (
-                "EventTimeRangeValidInvariant",
-                "CalendarEvent",
-                "end_before_start",
-                True,
-            ),
+            ("EventTimeRangeValidInvariant", "CalendarEvent", "end_before_start", True),
             ("EventTimeRangeValidInvariant", "CalendarEvent", "same_times", True),
             # ReminderStatusRequiredInvariant failures
             ("ReminderStatusRequiredInvariant", "Reminder", "status", None),
@@ -265,13 +252,7 @@ class TestInvariantCombinations:
                 g.add((entity, APPLE.hasEndTime, Literal(start)))
             else:
                 g.add((entity, APPLE.hasStartTime, Literal(datetime.now(tz=UTC))))
-                g.add(
-                    (
-                        entity,
-                        APPLE.hasEndTime,
-                        Literal(datetime.now(tz=UTC) + timedelta(hours=1)),
-                    )
-                )
+                g.add((entity, APPLE.hasEndTime, Literal(datetime.now(tz=UTC) + timedelta(hours=1))))
 
             if invalid_field != "sourceApp":
                 g.add((entity, APPLE.hasSourceApp, Literal("Calendar")))
@@ -465,7 +446,7 @@ class TestEdgeCaseCombinations:
         else:
             # Missing email should fail
             if result.conforms:
-                pytest.skip(f"Missing email sender did not trigger validation failure")
+                pytest.skip("Missing email sender did not trigger validation failure")
             assert result.conforms is False
 
 
@@ -483,9 +464,7 @@ class TestMultipleFailureCombinations:
         return validator
 
     @pytest.mark.parametrize("num_failures", [2, 3, 5])
-    def test_n_simultaneous_failures(
-        self, validator: ShaclValidator, num_failures: int
-    ) -> None:
+    def test_n_simultaneous_failures(self, validator: ShaclValidator, num_failures: int) -> None:
         """
         GIVEN: Data with exactly N invariant violations
         WHEN: We validate
@@ -534,10 +513,7 @@ class TestMultipleFailureCombinations:
         result = validator.validate(g)
         # Some SHACL invariants may not trigger without full graph context
         if result.conforms:
-            pytest.skip(
-                f"Expected {num_failures} failures but validation conforms. "
-                "May require full graph context."
-            )
+            pytest.skip(f"Expected {num_failures} failures but validation conforms. May require full graph context.")
         assert result.conforms is False
         # We should have at least num_failures violations
         # (may have more due to overlapping checks)

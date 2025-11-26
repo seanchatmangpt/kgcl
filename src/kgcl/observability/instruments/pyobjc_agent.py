@@ -54,10 +54,7 @@ def traced_capability_crawler(func: Any) -> Any:
     def wrapper(*args: Any, **kwargs: Any) -> Any:
         with tracer.start_as_current_span(
             f"capability_crawler.{func.__name__}",
-            attributes={
-                "subsystem": "pyobjc_agent",
-                "operation": "capability_discovery",
-            },
+            attributes={"subsystem": "pyobjc_agent", "operation": "capability_discovery"},
         ) as span:
             start_time = time.perf_counter()
 
@@ -100,11 +97,7 @@ def traced_collector(collector_type: str) -> Any:
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             with tracer.start_as_current_span(
                 f"collector.{collector_type}.{func.__name__}",
-                attributes={
-                    "subsystem": "pyobjc_agent",
-                    "collector_type": collector_type,
-                    "operation": "collect",
-                },
+                attributes={"subsystem": "pyobjc_agent", "collector_type": collector_type, "operation": "collect"},
             ) as span:
                 start_time = time.perf_counter()
 

@@ -19,11 +19,7 @@ class TestPerformance:
     def test_batch_ingestion_throughput(self):
         """Test batch ingestion throughput."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = IngestionConfig(
-                collector=CollectorConfig(
-                    output_directory=Path(tmpdir), batch_size=1000
-                )
-            )
+            config = IngestionConfig(collector=CollectorConfig(output_directory=Path(tmpdir), batch_size=1000))
 
             service = IngestionService(config)
             service.start()
@@ -60,13 +56,7 @@ class TestPerformance:
         with tempfile.TemporaryDirectory() as tmpdir:
             config = IngestionConfig(
                 collector=CollectorConfig(output_directory=Path(tmpdir)),
-                feature=FeatureConfig(
-                    enabled_features=[
-                        "app_usage_time",
-                        "browser_domain_visits",
-                        "context_switches",
-                    ]
-                ),
+                feature=FeatureConfig(enabled_features=["app_usage_time", "browser_domain_visits", "context_switches"]),
             )
 
             service = IngestionService(config)
@@ -100,9 +90,7 @@ class TestPerformance:
 
             # Measure materialization time
             start_time = time.perf_counter()
-            features = service.materializer.materialize(
-                events, window_start, window_end
-            )
+            features = service.materializer.materialize(events, window_start, window_end)
             end_time = time.perf_counter()
 
             elapsed = end_time - start_time
@@ -110,16 +98,12 @@ class TestPerformance:
 
             assert len(features) > 0
             assert elapsed < 5.0  # Should complete in under 5 seconds
-            print(
-                f"Materialization: {throughput:.2f} events/sec, {len(features)} features"
-            )
+            print(f"Materialization: {throughput:.2f} events/sec, {len(features)} features")
 
     def test_flush_latency(self):
         """Test flush operation latency."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = IngestionConfig(
-                collector=CollectorConfig(output_directory=Path(tmpdir), batch_size=100)
-            )
+            config = IngestionConfig(collector=CollectorConfig(output_directory=Path(tmpdir), batch_size=100))
 
             service = IngestionService(config)
             service.start()
@@ -128,9 +112,7 @@ class TestPerformance:
             now = datetime.now(UTC)
             for i in range(50):
                 event = AppEvent(
-                    event_id=f"app_{i:03d}",
-                    timestamp=now + timedelta(seconds=i),
-                    app_name="com.apple.Safari",
+                    event_id=f"app_{i:03d}", timestamp=now + timedelta(seconds=i), app_name="com.apple.Safari"
                 )
                 service.ingest_event(event)
 
@@ -143,9 +125,7 @@ class TestPerformance:
 
             assert result["events_flushed"] == 50
             assert elapsed < 1.0  # Should flush in under 1 second
-            print(
-                f"Flush latency: {elapsed * 1000:.2f}ms for {result['events_flushed']} events"
-            )
+            print(f"Flush latency: {elapsed * 1000:.2f}ms for {result['events_flushed']} events")
 
             service.stop()
 
@@ -183,9 +163,7 @@ class TestPerformance:
         with tempfile.TemporaryDirectory() as tmpdir:
             config = IngestionConfig(
                 collector=CollectorConfig(output_directory=Path(tmpdir)),
-                feature=FeatureConfig(
-                    enabled_features=["app_usage_time"], incremental_updates=True
-                ),
+                feature=FeatureConfig(enabled_features=["app_usage_time"], incremental_updates=True),
             )
 
             service = IngestionService(config)
@@ -205,9 +183,7 @@ class TestPerformance:
                 for i in range(1000)
             ]
 
-            initial_features = service.materializer.materialize(
-                initial_events, window_start, window_end
-            )
+            initial_features = service.materializer.materialize(initial_events, window_start, window_end)
 
             # New events
             new_events = [
@@ -222,9 +198,7 @@ class TestPerformance:
 
             # Measure incremental update time
             start_time = time.perf_counter()
-            updated_features = service.materializer.materialize_incremental(
-                new_events, initial_features
-            )
+            updated_features = service.materializer.materialize_incremental(new_events, initial_features)
             end_time = time.perf_counter()
 
             elapsed = end_time - start_time
@@ -236,9 +210,7 @@ class TestPerformance:
     def test_concurrent_ingestion(self):
         """Test concurrent event ingestion."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = IngestionConfig(
-                collector=CollectorConfig(output_directory=Path(tmpdir), batch_size=100)
-            )
+            config = IngestionConfig(collector=CollectorConfig(output_directory=Path(tmpdir), batch_size=100))
 
             service = IngestionService(config)
             service.start()
@@ -277,11 +249,7 @@ class TestPerformance:
         import sys
 
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = IngestionConfig(
-                collector=CollectorConfig(
-                    output_directory=Path(tmpdir), batch_size=1000
-                )
-            )
+            config = IngestionConfig(collector=CollectorConfig(output_directory=Path(tmpdir), batch_size=1000))
 
             service = IngestionService(config)
             service.start()

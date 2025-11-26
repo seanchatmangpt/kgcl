@@ -34,15 +34,9 @@ class PatternDetectorInput(BaseModel):
         context: Optional context about the data
     """
 
-    multiple_features: dict[str, list[float]] = Field(
-        ..., description="Feature names mapped to time series values"
-    )
-    time_window: str = Field(
-        default="daily", description="Time window: hourly, daily, weekly"
-    )
-    timestamps: list[str] = Field(
-        default_factory=list, description="ISO timestamps for alignment (optional)"
-    )
+    multiple_features: dict[str, list[float]] = Field(..., description="Feature names mapped to time series values")
+    time_window: str = Field(default="daily", description="Time window: hourly, daily, weekly")
+    timestamps: list[str] = Field(default_factory=list, description="ISO timestamps for alignment (optional)")
     context: str = Field(default="", description="Context about the feature set")
 
     model_config = {
@@ -77,16 +71,10 @@ class DetectedPattern(BaseModel):
 
     pattern_name: str = Field(..., description="Pattern name or description")
     evidence: str = Field(..., description="Evidence supporting the pattern")
-    frequency: str = Field(
-        ..., description="Pattern frequency (e.g., 'daily', '3/5 days')"
-    )
-    confidence: int = Field(
-        default=0, ge=0, le=100, description="Confidence in pattern (0-100)"
-    )
+    frequency: str = Field(..., description="Pattern frequency (e.g., 'daily', '3/5 days')")
+    confidence: int = Field(default=0, ge=0, le=100, description="Confidence in pattern (0-100)")
     recommendation: str = Field(..., description="Actionable recommendation")
-    involved_features: list[str] = Field(
-        default_factory=list, description="Features involved in pattern"
-    )
+    involved_features: list[str] = Field(default_factory=list, description="Features involved in pattern")
 
 
 class PatternDetectorOutput(BaseModel):
@@ -101,19 +89,11 @@ class PatternDetectorOutput(BaseModel):
         anomalies: Detected anomalous combinations
     """
 
-    detected_patterns: list[DetectedPattern] = Field(
-        default_factory=list, description="Identified patterns"
-    )
-    correlations: dict[str, float] = Field(
-        default_factory=dict, description="Feature pair correlations (-1 to 1)"
-    )
+    detected_patterns: list[DetectedPattern] = Field(default_factory=list, description="Identified patterns")
+    correlations: dict[str, float] = Field(default_factory=dict, description="Feature pair correlations (-1 to 1)")
     insights: list[str] = Field(default_factory=list, description="High-level insights")
-    behavioral_clusters: dict[str, list[str]] = Field(
-        default_factory=dict, description="Clustered behavioral patterns"
-    )
-    anomalies: list[str] = Field(
-        default_factory=list, description="Anomalous feature combinations"
-    )
+    behavioral_clusters: dict[str, list[str]] = Field(default_factory=dict, description="Clustered behavioral patterns")
+    anomalies: list[str] = Field(default_factory=list, description="Anomalous feature combinations")
 
     model_config = {
         "json_schema_extra": {
@@ -128,29 +108,16 @@ class PatternDetectorOutput(BaseModel):
                         "involved_features": ["focus_time", "context_switches"],
                     }
                 ],
-                "correlations": {
-                    "focus_time_vs_meeting_hours": -0.75,
-                    "meeting_hours_vs_context_switches": 0.68,
-                },
+                "correlations": {"focus_time_vs_meeting_hours": -0.75, "meeting_hours_vs_context_switches": 0.68},
                 "insights": [
                     "High meeting load consistently reduces focus time",
                     "Browser usage spikes during meeting days (research/documentation)",
                 ],
                 "behavioral_clusters": {
-                    "deep_work_days": [
-                        "low meetings",
-                        "high focus",
-                        "low context switches",
-                    ],
-                    "collaborative_days": [
-                        "high meetings",
-                        "high browser usage",
-                        "high context switches",
-                    ],
+                    "deep_work_days": ["low meetings", "high focus", "low context switches"],
+                    "collaborative_days": ["high meetings", "high browser usage", "high context switches"],
                 },
-                "anomalies": [
-                    "Day 3: High focus time despite high meeting load (unusual)"
-                ],
+                "anomalies": ["Day 3: High focus time despite high meeting load (unusual)"],
             }
         }
     }
@@ -166,29 +133,17 @@ if DSPY_AVAILABLE:
         """
 
         # Input fields
-        features_summary: str = dspy.InputField(
-            desc="Summary of all features with names and value ranges"
-        )
-        correlation_matrix: str = dspy.InputField(
-            desc="Key correlations between feature pairs"
-        )
-        time_window: str = dspy.InputField(
-            desc="Time window for analysis: hourly, daily, or weekly"
-        )
-        context: str = dspy.InputField(
-            desc="Context about what these features represent"
-        )
+        features_summary: str = dspy.InputField(desc="Summary of all features with names and value ranges")
+        correlation_matrix: str = dspy.InputField(desc="Key correlations between feature pairs")
+        time_window: str = dspy.InputField(desc="Time window for analysis: hourly, daily, or weekly")
+        context: str = dspy.InputField(desc="Context about what these features represent")
 
         # Output fields
         patterns: str = dspy.OutputField(
             desc="Detected behavioral patterns with evidence and frequency (numbered list)"
         )
-        insights: str = dspy.OutputField(
-            desc="High-level insights from multi-feature analysis (bullet points)"
-        )
-        recommendations: str = dspy.OutputField(
-            desc="Actionable recommendations based on detected patterns"
-        )
+        insights: str = dspy.OutputField(desc="High-level insights from multi-feature analysis (bullet points)")
+        recommendations: str = dspy.OutputField(desc="Actionable recommendations based on detected patterns")
         behavioral_clusters: str = dspy.OutputField(
             desc="Groups of related behavioral patterns (e.g., 'deep work days', 'meeting days')"
         )
@@ -241,9 +196,7 @@ class PatternDetectorModule:
 
         return numerator / denominator
 
-    def _detect_correlations(
-        self, features: dict[str, list[float]]
-    ) -> dict[str, float]:
+    def _detect_correlations(self, features: dict[str, list[float]]) -> dict[str, float]:
         """Detect correlations between all feature pairs.
 
         Args:
@@ -267,9 +220,7 @@ class PatternDetectorModule:
 
         return correlations
 
-    def _fallback_generate(
-        self, input_data: PatternDetectorInput
-    ) -> PatternDetectorOutput:
+    def _fallback_generate(self, input_data: PatternDetectorInput) -> PatternDetectorOutput:
         """Generate pattern detection using statistical methods (no LLM required).
 
         Args:
@@ -303,9 +254,7 @@ class PatternDetectorModule:
                     involved_features=[feat1, feat2],
                 )
                 detected_patterns.append(pattern)
-                insights.append(
-                    f"{feat1} and {feat2} show inverse relationship ({corr:.2f})"
-                )
+                insights.append(f"{feat1} and {feat2} show inverse relationship ({corr:.2f})")
 
         # Strong positive correlation patterns
         for pair, corr in correlations.items():
@@ -320,25 +269,17 @@ class PatternDetectorModule:
                     involved_features=[feat1, feat2],
                 )
                 detected_patterns.append(pattern)
-                insights.append(
-                    f"{feat1} and {feat2} tend to occur together ({corr:.2f})"
-                )
+                insights.append(f"{feat1} and {feat2} tend to occur together ({corr:.2f})")
 
         # Identify behavioral clusters based on feature means
-        feature_means = {
-            name: statistics.mean(values) for name, values in features.items()
-        }
+        feature_means = {name: statistics.mean(values) for name, values in features.items()}
 
         # Simple clustering: high/low for each feature
         high_features = [
-            name
-            for name, mean in feature_means.items()
-            if mean > statistics.mean(list(feature_means.values()))
+            name for name, mean in feature_means.items() if mean > statistics.mean(list(feature_means.values()))
         ]
         low_features = [
-            name
-            for name, mean in feature_means.items()
-            if mean <= statistics.mean(list(feature_means.values()))
+            name for name, mean in feature_means.items() if mean <= statistics.mean(list(feature_means.values()))
         ]
 
         if high_features:
@@ -354,11 +295,9 @@ class PatternDetectorModule:
 
             for i in range(min(len(first_feat_values), len(second_feat_values))):
                 # Check if both features are simultaneously high
-                if first_feat_values[i] > statistics.mean(
+                if first_feat_values[i] > statistics.mean(first_feat_values) + statistics.stdev(
                     first_feat_values
-                ) + statistics.stdev(first_feat_values) and second_feat_values[
-                    i
-                ] > statistics.mean(second_feat_values) + statistics.stdev(
+                ) and second_feat_values[i] > statistics.mean(second_feat_values) + statistics.stdev(
                     second_feat_values
                 ):
                     anomalies.append(
@@ -431,9 +370,7 @@ class PatternDetectorModule:
         features_summary_lines = []
         for name, values in input_data.multiple_features.items():
             mean = statistics.mean(values)
-            features_summary_lines.append(
-                f"{name}: mean={mean:.2f}, range=[{min(values):.2f}, {max(values):.2f}]"
-            )
+            features_summary_lines.append(f"{name}: mean={mean:.2f}, range=[{min(values):.2f}, {max(values):.2f}]")
         features_summary = "\n".join(features_summary_lines)
 
         # Prepare correlation matrix
@@ -472,15 +409,11 @@ class PatternDetectorModule:
 
         # Parse behavioral clusters
         behavioral_clusters = {}
-        cluster_lines = [
-            c.strip() for c in result.behavioral_clusters.split("\n") if c.strip()
-        ]
+        cluster_lines = [c.strip() for c in result.behavioral_clusters.split("\n") if c.strip()]
         for line in cluster_lines:
             if ":" in line:
                 cluster_name, features = line.split(":", 1)
-                behavioral_clusters[cluster_name.strip()] = [
-                    f.strip() for f in features.split(",")
-                ]
+                behavioral_clusters[cluster_name.strip()] = [f.strip() for f in features.split(",")]
 
         # Use fallback for anomalies
         fallback_result = self._fallback_generate(input_data)
@@ -493,9 +426,7 @@ class PatternDetectorModule:
             anomalies=fallback_result.anomalies,
         )
 
-    async def detect_async(
-        self, input_data: PatternDetectorInput
-    ) -> PatternDetectorOutput:
+    async def detect_async(self, input_data: PatternDetectorInput) -> PatternDetectorOutput:
         """Async version of detect.
 
         Args:

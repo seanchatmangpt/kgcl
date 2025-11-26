@@ -15,9 +15,7 @@ from .ollama_config import OllamaLM, health_check
 from .unrdf_bridge import UNRDFBridge
 
 # Configure logging
-logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-)
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 
@@ -136,9 +134,7 @@ def cmd_invoke(args) -> int:
             print(json.dumps(result, indent=2))
 
         if result["result"]["success"]:
-            print(
-                f"\n✓ Invocation successful (receipt: {result['receipt']['receipt_id']})"
-            )
+            print(f"\n✓ Invocation successful (receipt: {result['receipt']['receipt_id']})")
             return 0
         print(f"\n✗ Invocation failed: {result['result']['error']}")
         return 1
@@ -154,9 +150,7 @@ def cmd_receipts(args) -> int:
     try:
         bridge = UNRDFBridge()
 
-        receipts = bridge.list_receipts(
-            signature_name=args.signature, success=args.success, limit=args.limit
-        )
+        receipts = bridge.list_receipts(signature_name=args.signature, success=args.success, limit=args.limit)
 
         if not receipts:
             print("No receipts found")
@@ -166,9 +160,7 @@ def cmd_receipts(args) -> int:
         for receipt in receipts:
             status = "✓" if receipt["success"] else "✗"
             latency = receipt.get("latency_seconds", 0)
-            print(
-                f"  {status} {receipt['receipt_id']} - {receipt['signature_name']} - {latency:.3f}s"
-            )
+            print(f"  {status} {receipt['receipt_id']} - {receipt['signature_name']} - {latency:.3f}s")
 
         return 0
     except Exception as e:
@@ -218,9 +210,7 @@ class SimpleQA(dspy.Signature):
         inputs = {"question": "What is 2 + 2?"}
         print(f"Testing with inputs: {inputs}")
 
-        result = bridge.invoke(
-            module_path=str(test_file), signature_name="SimpleQA", inputs=inputs
-        )
+        result = bridge.invoke(module_path=str(test_file), signature_name="SimpleQA", inputs=inputs)
 
         print("\nTest Results:")
         print(json.dumps(result, indent=2))
@@ -240,16 +230,13 @@ class SimpleQA(dspy.Signature):
 def main():
     """Main CLI entry point."""
     parser = argparse.ArgumentParser(
-        description="DSPy runtime CLI for KGCL",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
+        description="DSPy runtime CLI for KGCL", formatter_class=argparse.RawDescriptionHelpFormatter
     )
 
     subparsers = parser.add_subparsers(dest="command", help="Command to execute")
 
     # Health check command
-    health_parser = subparsers.add_parser(
-        "health", help="Check health of Ollama service and DSPy runtime"
-    )
+    health_parser = subparsers.add_parser("health", help="Check health of Ollama service and DSPy runtime")
     health_parser.set_defaults(func=cmd_health)
 
     # Models command
@@ -257,9 +244,7 @@ def main():
     models_parser.set_defaults(func=cmd_models)
 
     # Model info command
-    info_parser = subparsers.add_parser(
-        "model-info", help="Get information about a specific model"
-    )
+    info_parser = subparsers.add_parser("model-info", help="Get information about a specific model")
     info_parser.add_argument("model", help="Model name")
     info_parser.set_defaults(func=cmd_model_info)
 
@@ -269,31 +254,18 @@ def main():
     invoke_parser.add_argument("signature", help="Signature class name")
     invoke_parser.add_argument("--inputs", help="JSON string of inputs")
     invoke_parser.add_argument("--inputs-file", help="Path to JSON file with inputs")
-    invoke_parser.add_argument(
-        "--output", help="Output file for results (default: stdout)"
-    )
-    invoke_parser.add_argument(
-        "--source-features", help="Comma-separated source feature URIs"
-    )
-    invoke_parser.add_argument(
-        "--source-signatures", help="Comma-separated source signature URIs"
-    )
+    invoke_parser.add_argument("--output", help="Output file for results (default: stdout)")
+    invoke_parser.add_argument("--source-features", help="Comma-separated source feature URIs")
+    invoke_parser.add_argument("--source-signatures", help="Comma-separated source signature URIs")
     invoke_parser.set_defaults(func=cmd_invoke)
 
     # Receipts command
     receipts_parser = subparsers.add_parser("receipts", help="List invocation receipts")
     receipts_parser.add_argument("--signature", help="Filter by signature name")
     receipts_parser.add_argument(
-        "--success",
-        type=lambda x: x.lower() == "true",
-        help="Filter by success status (true/false)",
+        "--success", type=lambda x: x.lower() == "true", help="Filter by success status (true/false)"
     )
-    receipts_parser.add_argument(
-        "--limit",
-        type=int,
-        default=100,
-        help="Maximum number of receipts (default: 100)",
-    )
+    receipts_parser.add_argument("--limit", type=int, default=100, help="Maximum number of receipts (default: 100)")
     receipts_parser.set_defaults(func=cmd_receipts)
 
     # Stats command

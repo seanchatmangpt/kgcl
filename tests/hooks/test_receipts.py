@@ -181,9 +181,7 @@ class TestMerkleAnchor:
 
     def test_receipt_contains_merkle_anchor_to_graph_state(self):
         """Receipt contains merkle anchor to graph state."""
-        merkle_anchor = MerkleAnchor(
-            root_hash="abc123", graph_version=42, timestamp=datetime.now(UTC)
-        )
+        merkle_anchor = MerkleAnchor(root_hash="abc123", graph_version=42, timestamp=datetime.now(UTC))
 
         receipt = Receipt(
             hook_id="test",
@@ -381,9 +379,7 @@ class TestReceiptStore:
         await store.save(receipt_new)
 
         # Query by timestamp range
-        results = await store.query(
-            timestamp_from=now - timedelta(minutes=5), timestamp_to=future
-        )
+        results = await store.query(timestamp_from=now - timedelta(minutes=5), timestamp_to=future)
 
         assert len(results) == 1
         assert results[0].hook_id == "new"

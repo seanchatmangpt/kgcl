@@ -19,12 +19,9 @@ from kgcl.hooks.conditions import (
     AlwaysTrueCondition,
     CompositeCondition,
     CompositeOperator,
-    ConditionResult,
     SparqlAskCondition,
     ThresholdCondition,
     ThresholdOperator,
-    WindowAggregation,
-    WindowCondition,
 )
 from kgcl.hooks.core import Hook, HookReceipt
 from kgcl.hooks.dark_matter import DarkMatterOptimizer
@@ -72,30 +69,13 @@ class TestQueryOptimizerDarkMatterIntegration:
 
     @pytest.mark.parametrize("has_constants", [True, False])
     def test_query_constant_detection(
-        self,
-        query_optimizer: QueryOptimizer,
-        dark_matter: DarkMatterOptimizer,
-        has_constants: bool,
+        self, query_optimizer: QueryOptimizer, dark_matter: DarkMatterOptimizer, has_constants: bool
     ) -> None:
         """Test detection and optimization of constant expressions."""
         if has_constants:
-            plan = {
-                "steps": [
-                    {
-                        "type": "filter",
-                        "expression": {"op": "+", "left": 1, "right": 1},
-                    },
-                ]
-            }
+            plan = {"steps": [{"type": "filter", "expression": {"op": "+", "left": 1, "right": 1}}]}
         else:
-            plan = {
-                "steps": [
-                    {
-                        "type": "filter",
-                        "expression": {"op": ">", "left": "?x", "right": 5},
-                    },
-                ]
-            }
+            plan = {"steps": [{"type": "filter", "expression": {"op": ">", "left": "?x", "right": 5}}]}
 
         # Apply dark matter optimization
         optimized_plan = dark_matter.optimize_query_plan(plan)
@@ -110,10 +90,7 @@ class TestQueryOptimizerDarkMatterIntegration:
         """Test optimizer chain with query caching."""
         plan = {
             "steps": [
-                {
-                    "type": "filter",
-                    "expression": {"op": ">", "left": 5, "right": 3},
-                },
+                {"type": "filter", "expression": {"op": ">", "left": 5, "right": 3}},
                 {"type": "scan", "pattern": "?event a <http://example.org/Event>"},
             ]
         }
@@ -142,15 +119,9 @@ class TestQueryOptimizerDarkMatterIntegration:
         """Verify optimizer preserves query semantics."""
         plan = {
             "steps": [
-                {
-                    "type": "filter",
-                    "expression": {"op": ">", "left": "?priority", "right": 5},
-                },
+                {"type": "filter", "expression": {"op": ">", "left": "?priority", "right": 5}},
                 {"type": "scan", "pattern": "?event a <http://example.org/Event>"},
-                {
-                    "type": "scan",
-                    "pattern": "?event <http://example.org/priority> ?priority",
-                },
+                {"type": "scan", "pattern": "?event <http://example.org/priority> ?priority"},
             ]
         }
 
@@ -178,18 +149,10 @@ class TestConditionHookIntegration:
 
     @pytest.mark.parametrize(
         "condition_type,trigger_expected",
-        [
-            ("always_true", True),
-            ("threshold_met", True),
-            ("threshold_not_met", False),
-        ],
+        [("always_true", True), ("threshold_met", True), ("threshold_not_met", False)],
     )
     def test_condition_triggers_hook(
-        self,
-        executor: SyncHookExecutor,
-        evaluator: SyncConditionEvaluator,
-        condition_type: str,
-        trigger_expected: bool,
+        self, executor: SyncHookExecutor, evaluator: SyncConditionEvaluator, condition_type: str, trigger_expected: bool
     ) -> None:
         """Test various condition types trigger hooks correctly."""
         # Create condition based on type
@@ -198,15 +161,11 @@ class TestConditionHookIntegration:
             context: dict[str, Any] = {}
 
         elif condition_type == "threshold_met":
-            condition = ThresholdCondition(
-                variable="value", operator=ThresholdOperator.GREATER_THAN, value=5.0
-            )
+            condition = ThresholdCondition(variable="value", operator=ThresholdOperator.GREATER_THAN, value=5.0)
             context = {"value": 10}
 
         elif condition_type == "threshold_not_met":
-            condition = ThresholdCondition(
-                variable="value", operator=ThresholdOperator.GREATER_THAN, value=5.0
-            )
+            condition = ThresholdCondition(variable="value", operator=ThresholdOperator.GREATER_THAN, value=5.0)
             context = {"value": 3}
 
         else:
@@ -239,12 +198,7 @@ class TestConditionHookIntegration:
 
     @pytest.mark.parametrize(
         "num_conditions,combinator",
-        [
-            (2, CompositeOperator.AND),
-            (2, CompositeOperator.OR),
-            (3, CompositeOperator.AND),
-            (3, CompositeOperator.OR),
-        ],
+        [(2, CompositeOperator.AND), (2, CompositeOperator.OR), (3, CompositeOperator.AND), (3, CompositeOperator.OR)],
     )
     def test_composite_condition_hook_integration(
         self,
@@ -258,11 +212,7 @@ class TestConditionHookIntegration:
 
         # Create multiple threshold conditions
         for i in range(num_conditions):
-            condition = ThresholdCondition(
-                variable=f"value_{i}",
-                operator=ThresholdOperator.GREATER_THAN,
-                value=5.0,
-            )
+            condition = ThresholdCondition(variable=f"value_{i}", operator=ThresholdOperator.GREATER_THAN, value=5.0)
             conditions.append(condition)
 
         composite = CompositeCondition(operator=combinator, conditions=conditions)
@@ -279,12 +229,7 @@ class TestConditionHookIntegration:
             executed.append(True)
             return {"success": True}
 
-        hook = Hook(
-            name="composite_hook",
-            description="Test composite_hook",
-            condition=composite,
-            handler=handler,
-        )
+        hook = Hook(name="composite_hook", description="Test composite_hook", condition=composite, handler=handler)
         receipt = executor.execute(hook, context)
 
         # Verify based on combinator
@@ -297,24 +242,15 @@ class TestConditionHookIntegration:
             assert receipt.condition_result.triggered is True
             assert len(executed) == 1
 
-    def test_hook_receipt_captures_condition_state(
-        self, executor: SyncHookExecutor
-    ) -> None:
+    def test_hook_receipt_captures_condition_state(self, executor: SyncHookExecutor) -> None:
         """Hook receipt should capture condition evaluation state."""
-        condition = ThresholdCondition(
-            variable="value", operator=ThresholdOperator.GREATER_THAN, value=5.0
-        )
+        condition = ThresholdCondition(variable="value", operator=ThresholdOperator.GREATER_THAN, value=5.0)
         context = {"value": 10}
 
         def handler(ctx: dict[str, Any]) -> dict[str, Any]:
             return {"processed": True}
 
-        hook = Hook(
-            name="test_hook",
-            description="Test test_hook",
-            condition=condition,
-            handler=handler,
-        )
+        hook = Hook(name="test_hook", description="Test test_hook", condition=condition, handler=handler)
         receipt = executor.execute(hook, context)
 
         # Receipt should capture trigger state
@@ -338,18 +274,10 @@ class TestConditionHookIntegration:
             return {"step": 2}
 
         hook1 = Hook(
-            name="hook1",
-            description="Test hook1",
-            condition=AlwaysTrueCondition(),
-            handler=handler1,
-            priority=50,
+            name="hook1", description="Test hook1", condition=AlwaysTrueCondition(), handler=handler1, priority=50
         )
         hook2 = Hook(
-            name="hook2",
-            description="Test hook2",
-            condition=AlwaysTrueCondition(),
-            handler=handler2,
-            priority=40,
+            name="hook2", description="Test hook2", condition=AlwaysTrueCondition(), handler=handler2, priority=40
         )
 
         registry.register(hook1)
@@ -377,9 +305,7 @@ class TestFullPipelineIntegration:
             "executor": SyncHookExecutor(),
         }
 
-    def test_data_to_receipt_pipeline(
-        self, pipeline_components: dict[str, Any]
-    ) -> None:
+    def test_data_to_receipt_pipeline(self, pipeline_components: dict[str, Any]) -> None:
         """Full pipeline: optimize query, evaluate condition, execute hook."""
         # 1. Ingest data
         data_graph = Graph()
@@ -406,10 +332,7 @@ class TestFullPipelineIntegration:
             return {"processed": True, "query": ctx.get("optimized_query", "")}
 
         hook = Hook(
-            name="pipeline_hook",
-            description="Test pipeline_hook",
-            condition=AlwaysTrueCondition(),
-            handler=handler,
+            name="pipeline_hook", description="Test pipeline_hook", condition=AlwaysTrueCondition(), handler=handler
         )
 
         # 5. Execute and produce receipt
@@ -422,18 +345,9 @@ class TestFullPipelineIntegration:
         assert receipt.hook_id == "pipeline_hook"
         assert receipt.error is None
 
-    @pytest.mark.parametrize(
-        "condition_met,expected_triggered",
-        [
-            (True, True),
-            (False, False),
-        ],
-    )
+    @pytest.mark.parametrize("condition_met,expected_triggered", [(True, True), (False, False)])
     def test_pipeline_outcome_matrix(
-        self,
-        pipeline_components: dict[str, Any],
-        condition_met: bool,
-        expected_triggered: bool,
+        self, pipeline_components: dict[str, Any], condition_met: bool, expected_triggered: bool
     ) -> None:
         """Test pipeline outcomes with different conditions."""
         # Create condition based on whether it should be met
@@ -441,21 +355,14 @@ class TestFullPipelineIntegration:
             condition = AlwaysTrueCondition()
         else:
             condition = ThresholdCondition(
-                variable="impossible_metric",
-                operator=ThresholdOperator.GREATER_THAN,
-                value=100.0,
+                variable="impossible_metric", operator=ThresholdOperator.GREATER_THAN, value=100.0
             )
 
         # Execute hook
         def handler(ctx: dict[str, Any]) -> dict[str, Any]:
             return {"processed": True}
 
-        hook = Hook(
-            name="matrix_hook",
-            description="Test matrix_hook",
-            condition=condition,
-            handler=handler,
-        )
+        hook = Hook(name="matrix_hook", description="Test matrix_hook", condition=condition, handler=handler)
 
         executor = pipeline_components["executor"]
         context: dict[str, Any] = {}
@@ -474,16 +381,8 @@ class TestCrossModuleErrorHandling:
         """Create sync hook executor."""
         return SyncHookExecutor()
 
-    @pytest.mark.parametrize(
-        "failing_module",
-        [
-            "optimizer",
-            "hook_handler",
-        ],
-    )
-    def test_error_propagation(
-        self, executor: SyncHookExecutor, failing_module: str
-    ) -> None:
+    @pytest.mark.parametrize("failing_module", ["optimizer", "hook_handler"])
+    def test_error_propagation(self, executor: SyncHookExecutor, failing_module: str) -> None:
         """Induce error in one module and verify handling."""
         if failing_module == "optimizer":
             optimizer = QueryOptimizer()
@@ -502,10 +401,7 @@ class TestCrossModuleErrorHandling:
                 raise RuntimeError("Handler failure")
 
             hook = Hook(
-                name="failing",
-                description="Test failing",
-                condition=AlwaysTrueCondition(),
-                handler=failing_handler,
+                name="failing", description="Test failing", condition=AlwaysTrueCondition(), handler=failing_handler
             )
             receipt = executor.execute(hook, {})
 
@@ -522,12 +418,7 @@ class TestCrossModuleErrorHandling:
         def handler(ctx: dict[str, Any]) -> dict[str, Any]:
             return {"processed": True}
 
-        hook = Hook(
-            name="query_error_hook",
-            description="Test query_error_hook",
-            condition=condition,
-            handler=handler,
-        )
+        hook = Hook(name="query_error_hook", description="Test query_error_hook", condition=condition, handler=handler)
 
         context: dict[str, Any] = {"rdf_data": []}
 
@@ -546,25 +437,14 @@ class TestPerformanceCombinations:
         """Create sync hook executor."""
         return SyncHookExecutor()
 
-    @pytest.mark.parametrize(
-        "num_queries,num_hooks",
-        [
-            (10, 10),
-            (50, 50),
-        ],
-    )
-    def test_batch_processing_combinations(
-        self, executor: SyncHookExecutor, num_queries: int, num_hooks: int
-    ) -> None:
+    @pytest.mark.parametrize("num_queries,num_hooks", [(10, 10), (50, 50)])
+    def test_batch_processing_combinations(self, executor: SyncHookExecutor, num_queries: int, num_hooks: int) -> None:
         """Measure time for combined operations."""
         optimizer = QueryOptimizer()
         registry = SyncHookRegistry()
 
         # Create queries
-        queries = [
-            f"SELECT ?event WHERE {{ ?event a <http://example.org/Event{i}> }}"
-            for i in range(num_queries)
-        ]
+        queries = [f"SELECT ?event WHERE {{ ?event a <http://example.org/Event{i}> }}" for i in range(num_queries)]
 
         # Create hooks
         for i in range(num_hooks):
@@ -576,10 +456,7 @@ class TestPerformanceCombinations:
                 return handler
 
             hook = Hook(
-                name=f"hook_{i}",
-                description=f"Test hook {i}",
-                condition=AlwaysTrueCondition(),
-                handler=make_handler(i),
+                name=f"hook_{i}", description=f"Test hook {i}", condition=AlwaysTrueCondition(), handler=make_handler(i)
             )
             registry.register(hook)
 
@@ -587,7 +464,7 @@ class TestPerformanceCombinations:
         start = time.perf_counter()
 
         # Query optimizations
-        for query in queries[:min(num_queries, 100)]:
+        for query in queries[: min(num_queries, 100)]:
             optimizer.optimize(query)
 
         # Hook executions
@@ -601,17 +478,13 @@ class TestPerformanceCombinations:
         assert duration < max_duration
         assert len(receipts) == num_hooks
 
-    def test_concurrent_condition_evaluation(
-        self, executor: SyncHookExecutor
-    ) -> None:
+    def test_concurrent_condition_evaluation(self, executor: SyncHookExecutor) -> None:
         """Test multiple conditions evaluated sequentially."""
         evaluator = SyncConditionEvaluator()
 
         conditions = [
             AlwaysTrueCondition(),
-            ThresholdCondition(
-                variable="value", operator=ThresholdOperator.GREATER_THAN, value=5.0
-            ),
+            ThresholdCondition(variable="value", operator=ThresholdOperator.GREATER_THAN, value=5.0),
         ]
 
         context = {"value": 10}
@@ -629,9 +502,7 @@ class TestPerformanceCombinations:
         # Should be fast
         assert duration < 0.5  # 500ms
 
-    def test_hook_registry_bulk_operations(
-        self, executor: SyncHookExecutor
-    ) -> None:
+    def test_hook_registry_bulk_operations(self, executor: SyncHookExecutor) -> None:
         """Test bulk hook registration and execution."""
         registry = SyncHookRegistry()
 
@@ -684,9 +555,7 @@ class TestComplexIntegrationScenarios:
             return {"processed": True}
 
         # Condition: priority > 5
-        condition = ThresholdCondition(
-            variable="priority", operator=ThresholdOperator.GREATER_THAN, value=5.0
-        )
+        condition = ThresholdCondition(variable="priority", operator=ThresholdOperator.GREATER_THAN, value=5.0)
 
         hook = Hook(
             name="high_priority_hook",
@@ -731,13 +600,7 @@ class TestComplexIntegrationScenarios:
             registry.register(hook)
 
         # Stream events
-        events = [
-            {"type": "typeA"},
-            {"type": "typeB"},
-            {"type": "typeA"},
-            {"type": "typeC"},
-            {"type": "typeB"},
-        ]
+        events = [{"type": "typeA"}, {"type": "typeB"}, {"type": "typeA"}, {"type": "typeC"}, {"type": "typeB"}]
 
         all_receipts = []
         for event in events:

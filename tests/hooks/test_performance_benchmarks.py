@@ -24,14 +24,7 @@ from typing import Any
 
 import pytest
 
-from kgcl.hooks.conditions import (
-    Condition,
-    ConditionResult,
-    SparqlAskCondition,
-    SparqlSelectCondition,
-    ThresholdCondition,
-    ThresholdOperator,
-)
+from kgcl.hooks.conditions import Condition, ConditionResult, SparqlAskCondition, ThresholdCondition, ThresholdOperator
 from kgcl.hooks.core import Hook, HookManager, HookReceipt, HookRegistry
 from kgcl.hooks.lifecycle import HookExecutionPipeline
 from kgcl.hooks.performance import PerformanceOptimizer
@@ -79,9 +72,7 @@ class PerformanceBenchmark:
     """Utility class for running performance benchmarks."""
 
     @staticmethod
-    def measure_latency(
-        samples: list[float], target_ms: float, operation: str
-    ) -> BenchmarkResult:
+    def measure_latency(samples: list[float], target_ms: float, operation: str) -> BenchmarkResult:
         """Calculate performance statistics from samples."""
         if not samples:
             return BenchmarkResult(
@@ -131,9 +122,7 @@ class PerformanceBenchmark:
         )
 
     @staticmethod
-    async def benchmark_async(
-        operation: str, target_ms: float, iterations: int, func: Any
-    ) -> BenchmarkResult:
+    async def benchmark_async(operation: str, target_ms: float, iterations: int, func: Any) -> BenchmarkResult:
         """Benchmark an async function."""
         samples = []
 
@@ -147,9 +136,7 @@ class PerformanceBenchmark:
         return PerformanceBenchmark.measure_latency(samples, target_ms, operation)
 
     @staticmethod
-    def benchmark_sync(
-        operation: str, target_ms: float, iterations: int, func: Any
-    ) -> BenchmarkResult:
+    def benchmark_sync(operation: str, target_ms: float, iterations: int, func: Any) -> BenchmarkResult:
         """Benchmark a synchronous function."""
         samples = []
 
@@ -182,14 +169,10 @@ def test_hook_registration_single():
         )
         registry.register(hook)
 
-    result = PerformanceBenchmark.benchmark_sync(
-        "hook_registration_single", 5.0, 100, register_hook
-    )
+    result = PerformanceBenchmark.benchmark_sync("hook_registration_single", 5.0, 100, register_hook)
 
     assert result.p99 < 5.0, f"P99 latency {result.p99:.2f}ms exceeds 5ms target"
-    assert result.mean < 2.0, (
-        f"Mean latency {result.mean:.2f}ms should be well under target"
-    )
+    assert result.mean < 2.0, f"Mean latency {result.mean:.2f}ms should be well under target"
 
 
 @pytest.mark.performance
@@ -236,9 +219,7 @@ def test_hook_registration_1000():
         duration_ms = (end - start) * 1000
         samples.append(duration_ms)
 
-    result = PerformanceBenchmark.measure_latency(
-        samples, 5.0, "hook_registration_1000"
-    )
+    result = PerformanceBenchmark.measure_latency(samples, 5.0, "hook_registration_1000")
 
     assert result.p99 < 5.0, f"P99 latency {result.p99:.2f}ms exceeds 5ms target"
 
@@ -258,14 +239,10 @@ async def test_condition_evaluation_always_true():
     async def evaluate():
         await condition.evaluate(context)
 
-    result = await PerformanceBenchmark.benchmark_async(
-        "condition_eval_always_true", 10.0, 100, evaluate
-    )
+    result = await PerformanceBenchmark.benchmark_async("condition_eval_always_true", 10.0, 100, evaluate)
 
     assert result.p99 < 10.0, f"P99 latency {result.p99:.2f}ms exceeds 10ms target"
-    assert result.mean < 2.0, (
-        f"Mean latency {result.mean:.2f}ms should be well under target"
-    )
+    assert result.mean < 2.0, f"Mean latency {result.mean:.2f}ms should be well under target"
 
 
 @pytest.mark.performance
@@ -278,9 +255,7 @@ async def test_condition_evaluation_threshold():
     async def evaluate():
         await condition.evaluate(context)
 
-    result = await PerformanceBenchmark.benchmark_async(
-        "condition_eval_threshold", 10.0, 100, evaluate
-    )
+    result = await PerformanceBenchmark.benchmark_async("condition_eval_threshold", 10.0, 100, evaluate)
 
     assert result.p99 < 10.0, f"P99 latency {result.p99:.2f}ms exceeds 10ms target"
 
@@ -295,9 +270,7 @@ async def test_condition_evaluation_sparql_ask_no_cache():
     async def evaluate():
         await condition.evaluate(context)
 
-    result = await PerformanceBenchmark.benchmark_async(
-        "condition_eval_sparql_ask_no_cache", 10.0, 100, evaluate
-    )
+    result = await PerformanceBenchmark.benchmark_async("condition_eval_sparql_ask_no_cache", 10.0, 100, evaluate)
 
     assert result.p99 < 10.0, f"P99 latency {result.p99:.2f}ms exceeds 10ms target"
 
@@ -321,17 +294,11 @@ async def test_condition_evaluation_sparql_ask_with_cache():
         duration_ms = (end - start) * 1000
         samples.append(duration_ms)
 
-    result = PerformanceBenchmark.measure_latency(
-        samples, 5.0, "condition_eval_sparql_ask_with_cache"
-    )
+    result = PerformanceBenchmark.measure_latency(samples, 5.0, "condition_eval_sparql_ask_with_cache")
 
     # Cache hits should be much faster
-    assert result.p99 < 5.0, (
-        f"P99 latency {result.p99:.2f}ms exceeds 5ms target with cache"
-    )
-    assert result.mean < 2.0, (
-        f"Mean cache hit latency {result.mean:.2f}ms should be <2ms"
-    )
+    assert result.p99 < 5.0, f"P99 latency {result.p99:.2f}ms exceeds 5ms target with cache"
+    assert result.mean < 2.0, f"Mean cache hit latency {result.mean:.2f}ms should be <2ms"
 
 
 # ============================================================================
@@ -348,12 +315,7 @@ async def test_hook_execution_simple_handler():
     condition = AlwaysTrueCondition()
     handler = lambda ctx: {"result": "success"}
 
-    hook = Hook(
-        name="benchmark_hook",
-        description="Benchmark hook",
-        condition=condition,
-        handler=handler,
-    )
+    hook = Hook(name="benchmark_hook", description="Benchmark hook", condition=condition, handler=handler)
 
     context = {"test": "data"}
 
@@ -365,14 +327,10 @@ async def test_hook_execution_simple_handler():
         duration_ms = (end - start) * 1000
         samples.append(duration_ms)
 
-    result = PerformanceBenchmark.measure_latency(
-        samples, 100.0, "hook_execution_simple"
-    )
+    result = PerformanceBenchmark.measure_latency(samples, 100.0, "hook_execution_simple")
 
     assert result.p99 < 100.0, f"P99 latency {result.p99:.2f}ms exceeds 100ms target"
-    assert result.mean < 10.0, (
-        f"Mean latency {result.mean:.2f}ms should be well under target"
-    )
+    assert result.mean < 10.0, f"Mean latency {result.mean:.2f}ms should be well under target"
 
 
 @pytest.mark.performance
@@ -388,10 +346,7 @@ async def test_hook_execution_async_handler():
         return {"result": "async_success"}
 
     hook = Hook(
-        name="async_benchmark_hook",
-        description="Async benchmark hook",
-        condition=condition,
-        handler=async_handler,
+        name="async_benchmark_hook", description="Async benchmark hook", condition=condition, handler=async_handler
     )
 
     context = {"test": "data"}
@@ -404,9 +359,7 @@ async def test_hook_execution_async_handler():
         duration_ms = (end - start) * 1000
         samples.append(duration_ms)
 
-    result = PerformanceBenchmark.measure_latency(
-        samples, 100.0, "hook_execution_async"
-    )
+    result = PerformanceBenchmark.measure_latency(samples, 100.0, "hook_execution_async")
 
     assert result.p99 < 100.0, f"P99 latency {result.p99:.2f}ms exceeds 100ms target"
 
@@ -423,10 +376,7 @@ async def test_hook_execution_concurrent():
         condition = AlwaysTrueCondition()
         handler = lambda ctx, i=i: {"result": f"success_{i}"}
         hook = Hook(
-            name=f"concurrent_hook_{i}",
-            description=f"Concurrent hook {i}",
-            condition=condition,
-            handler=handler,
+            name=f"concurrent_hook_{i}", description=f"Concurrent hook {i}", condition=condition, handler=handler
         )
         hooks.append(hook)
 
@@ -441,9 +391,7 @@ async def test_hook_execution_concurrent():
         duration_ms = (end - start) * 1000
         samples.append(duration_ms)
 
-    result = PerformanceBenchmark.measure_latency(
-        samples, 500.0, "hook_execution_concurrent_10"
-    )
+    result = PerformanceBenchmark.measure_latency(samples, 500.0, "hook_execution_concurrent_10")
 
     # All 10 should complete within 500ms
     assert result.p99 < 500.0, f"P99 latency {result.p99:.2f}ms exceeds 500ms target"
@@ -531,12 +479,7 @@ async def test_full_pipeline_single_hook():
     condition = SparqlAskCondition("ASK { ?s ?p ?o }", use_cache=False)
     handler = lambda ctx: {"result": "pipeline_success"}
 
-    hook = Hook(
-        name="pipeline_hook",
-        description="Full pipeline hook",
-        condition=condition,
-        handler=handler,
-    )
+    hook = Hook(name="pipeline_hook", description="Full pipeline hook", condition=condition, handler=handler)
 
     context = {"test_result": True}
 
@@ -548,14 +491,10 @@ async def test_full_pipeline_single_hook():
         duration_ms = (end - start) * 1000
         samples.append(duration_ms)
 
-    result = PerformanceBenchmark.measure_latency(
-        samples, 500.0, "full_pipeline_single"
-    )
+    result = PerformanceBenchmark.measure_latency(samples, 500.0, "full_pipeline_single")
 
     assert result.p99 < 500.0, f"P99 latency {result.p99:.2f}ms exceeds 500ms target"
-    assert result.mean < 50.0, (
-        f"Mean latency {result.mean:.2f}ms should be well under target"
-    )
+    assert result.mean < 50.0, f"Mean latency {result.mean:.2f}ms should be well under target"
 
 
 @pytest.mark.performance
@@ -568,12 +507,7 @@ async def test_full_pipeline_multiple_hooks_sequential():
     for i in range(5):
         condition = ThresholdCondition("value", ThresholdOperator.GREATER_THAN, 10.0)
         handler = lambda ctx, i=i: {"result": f"hook_{i}"}
-        hook = Hook(
-            name=f"pipeline_hook_{i}",
-            description=f"Pipeline hook {i}",
-            condition=condition,
-            handler=handler,
-        )
+        hook = Hook(name=f"pipeline_hook_{i}", description=f"Pipeline hook {i}", condition=condition, handler=handler)
         hooks.append(hook)
 
     context = {"value": 50}
@@ -587,9 +521,7 @@ async def test_full_pipeline_multiple_hooks_sequential():
         duration_ms = (end - start) * 1000
         samples.append(duration_ms)
 
-    result = PerformanceBenchmark.measure_latency(
-        samples, 500.0, "full_pipeline_5_hooks_sequential"
-    )
+    result = PerformanceBenchmark.measure_latency(samples, 500.0, "full_pipeline_5_hooks_sequential")
 
     assert result.p99 < 500.0, f"P99 latency {result.p99:.2f}ms exceeds 500ms target"
 
@@ -674,12 +606,7 @@ def test_performance_optimizer_recording():
 
     samples = []
     for i in range(100):
-        metric = PerformanceMetrics(
-            operation="test_operation",
-            latency_ms=float(i),
-            success=True,
-            p99_target_ms=100.0,
-        )
+        metric = PerformanceMetrics(operation="test_operation", latency_ms=float(i), success=True, p99_target_ms=100.0)
 
         start = time.perf_counter()
         optimizer.record_metric(metric)
@@ -687,9 +614,7 @@ def test_performance_optimizer_recording():
         duration_ms = (end - start) * 1000
         samples.append(duration_ms)
 
-    result = PerformanceBenchmark.measure_latency(
-        samples, 2.0, "optimizer_record_metric"
-    )
+    result = PerformanceBenchmark.measure_latency(samples, 2.0, "optimizer_record_metric")
 
     assert result.p99 < 2.0, f"P99 latency {result.p99:.2f}ms exceeds 2ms target"
 

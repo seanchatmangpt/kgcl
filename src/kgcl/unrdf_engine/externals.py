@@ -80,15 +80,11 @@ class ExecutionReceipt:
             Receipt URI
 
         """
-        receipt_uri = URIRef(
-            f"urn:unrdf:receipt:{self.capability_id}:{self.timestamp.isoformat()}"
-        )
+        receipt_uri = URIRef(f"urn:unrdf:receipt:{self.capability_id}:{self.timestamp.isoformat()}")
 
         # Receipt metadata
         graph.add((receipt_uri, UNRDF.capabilityId, Literal(self.capability_id)))
-        graph.add(
-            (receipt_uri, UNRDF.capabilityType, Literal(self.capability_type.value))
-        )
+        graph.add((receipt_uri, UNRDF.capabilityType, Literal(self.capability_type.value)))
         graph.add((receipt_uri, PROV.endedAtTime, Literal(self.timestamp)))
         graph.add((receipt_uri, UNRDF.durationMs, Literal(self.duration_ms)))
         graph.add((receipt_uri, UNRDF.exitCode, Literal(self.exit_code)))
@@ -134,9 +130,7 @@ class ExternalCapabilityBridge:
     Examples
     --------
     >>> bridge = ExternalCapabilityBridge()
-    >>> receipt = bridge.execute_python(
-    ...     script=Path("process_data.py"), input_data={"features": [...]}, timeout=30.0
-    ... )
+    >>> receipt = bridge.execute_python(script=Path("process_data.py"), input_data={"features": [...]}, timeout=30.0)
     >>> if receipt.exit_code == 0:
     ...     result = receipt.output_data
 
@@ -156,11 +150,7 @@ class ExternalCapabilityBridge:
 
     @tracer.start_as_current_span("externals.execute_python")
     def execute_python(
-        self,
-        script: Path,
-        input_data: dict[str, Any],
-        timeout: float = 30.0,
-        python_exe: str = "python3",
+        self, script: Path, input_data: dict[str, Any], timeout: float = 30.0, python_exe: str = "python3"
     ) -> ExecutionReceipt:
         """Execute a Python script with JSON input/output.
 
@@ -197,11 +187,7 @@ class ExternalCapabilityBridge:
 
     @tracer.start_as_current_span("externals.execute_node")
     def execute_node(
-        self,
-        script: Path,
-        input_data: dict[str, Any],
-        timeout: float = 30.0,
-        node_exe: str = "node",
+        self, script: Path, input_data: dict[str, Any], timeout: float = 30.0, node_exe: str = "node"
     ) -> ExecutionReceipt:
         """Execute a Node.js script with JSON input/output.
 
@@ -237,9 +223,7 @@ class ExternalCapabilityBridge:
         )
 
     @tracer.start_as_current_span("externals.execute_shell")
-    def execute_shell(
-        self, command: list[str], input_data: dict[str, Any], timeout: float = 30.0
-    ) -> ExecutionReceipt:
+    def execute_shell(self, command: list[str], input_data: dict[str, Any], timeout: float = 30.0) -> ExecutionReceipt:
         """Execute a shell command with JSON input/output.
 
         The command receives JSON via stdin and writes JSON to stdout.
@@ -303,11 +287,7 @@ class ExternalCapabilityBridge:
         import time
 
         start_time = time.time()
-        receipt = ExecutionReceipt(
-            capability_id=capability_id,
-            capability_type=capability_type,
-            input_data=input_data,
-        )
+        receipt = ExecutionReceipt(capability_id=capability_id, capability_type=capability_type, input_data=input_data)
 
         try:
             # Serialize input to JSON

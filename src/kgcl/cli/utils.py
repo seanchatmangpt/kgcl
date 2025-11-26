@@ -119,11 +119,7 @@ def print_json(data: Any, indent: int = 2) -> None:
     console.print(syntax)
 
 
-def print_table(
-    data: Sequence[dict[str, Any]],
-    columns: list[str] | None = None,
-    title: str | None = None,
-) -> None:
+def print_table(data: Sequence[dict[str, Any]], columns: list[str] | None = None, title: str | None = None) -> None:
     """Print data as a formatted table.
 
     Parameters
@@ -240,11 +236,7 @@ def copy_to_clipboard(text: str) -> bool:
     try:
         # Try pbcopy (macOS)
         subprocess.run(
-            ["pbcopy"],
-            input=text.encode(),
-            check=True,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
+            ["pbcopy"], input=text.encode(), check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
         )
         return True
     except (FileNotFoundError, subprocess.CalledProcessError):
@@ -280,10 +272,7 @@ def copy_to_clipboard(text: str) -> bool:
 
 
 def format_output(
-    data: Any,
-    format_type: OutputFormat,
-    output_file: Path | None = None,
-    clipboard: bool = False,
+    data: Any, format_type: OutputFormat, output_file: Path | None = None, clipboard: bool = False
 ) -> None:
     """Format and output data according to specified format.
 

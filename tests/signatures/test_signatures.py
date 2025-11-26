@@ -35,9 +35,7 @@ CompleteDailyData = dict[str, Any]
 class TestDailyBriefModule:
     """Tests for DailyBriefModule."""
 
-    def test_fallback_generation_standard(
-        self, daily_brief_input_standard: DailyBriefInput
-    ) -> None:
+    def test_fallback_generation_standard(self, daily_brief_input_standard: DailyBriefInput) -> None:
         """Test fallback generation with standard input."""
         module = DailyBriefModule(use_llm=False)
         output = module.generate(daily_brief_input_standard)
@@ -51,9 +49,7 @@ class TestDailyBriefModule:
         assert isinstance(output.recommendations, list)
         assert isinstance(output.wellbeing_indicators, dict)
 
-    def test_fallback_generation_high_focus(
-        self, daily_brief_input_high_focus: DailyBriefInput
-    ) -> None:
+    def test_fallback_generation_high_focus(self, daily_brief_input_high_focus: DailyBriefInput) -> None:
         """Test fallback with high focus input."""
         module = DailyBriefModule(use_llm=False)
         output = module.generate(daily_brief_input_high_focus)
@@ -62,9 +58,7 @@ class TestDailyBriefModule:
         assert output.productivity_score >= 70
         assert any("focus" in h.lower() for h in output.highlights)
 
-    def test_fallback_generation_meeting_heavy(
-        self, daily_brief_input_meeting_heavy: DailyBriefInput
-    ) -> None:
+    def test_fallback_generation_meeting_heavy(self, daily_brief_input_meeting_heavy: DailyBriefInput) -> None:
         """Test fallback with meeting-heavy input."""
         module = DailyBriefModule(use_llm=False)
         output = module.generate(daily_brief_input_meeting_heavy)
@@ -93,9 +87,7 @@ class TestDailyBriefModule:
         assert output.productivity_score >= 80
 
     @pytest.mark.asyncio
-    async def test_async_generation(
-        self, daily_brief_input_standard: DailyBriefInput
-    ) -> None:
+    async def test_async_generation(self, daily_brief_input_standard: DailyBriefInput) -> None:
         """Test async generation."""
         module = DailyBriefModule(use_llm=False)
         output = await module.generate_async(daily_brief_input_standard)
@@ -107,9 +99,7 @@ class TestDailyBriefModule:
 class TestWeeklyRetroModule:
     """Tests for WeeklyRetroModule."""
 
-    def test_fallback_generation_standard(
-        self, weekly_retro_input_standard: WeeklyRetroInput
-    ) -> None:
+    def test_fallback_generation_standard(self, weekly_retro_input_standard: WeeklyRetroInput) -> None:
         """Test fallback generation with standard input."""
         module = WeeklyRetroModule(use_llm=False)
         output = module.generate(weekly_retro_input_standard)
@@ -123,9 +113,7 @@ class TestWeeklyRetroModule:
         assert isinstance(output.progress_on_goals, dict)
         assert isinstance(output.trends, dict)
 
-    def test_fallback_generation_excellent(
-        self, weekly_retro_input_excellent: WeeklyRetroInput
-    ) -> None:
+    def test_fallback_generation_excellent(self, weekly_retro_input_excellent: WeeklyRetroInput) -> None:
         """Test fallback with excellent week."""
         module = WeeklyRetroModule(use_llm=False)
         output = module.generate(weekly_retro_input_excellent)
@@ -134,9 +122,7 @@ class TestWeeklyRetroModule:
         assert output.weekly_productivity_score >= 80
         assert len(output.achievements) > 0
 
-    def test_goal_progress_tracking(
-        self, weekly_retro_input_standard: WeeklyRetroInput
-    ) -> None:
+    def test_goal_progress_tracking(self, weekly_retro_input_standard: WeeklyRetroInput) -> None:
         """Test goal progress tracking."""
         module = WeeklyRetroModule(use_llm=False)
         output = module.generate(weekly_retro_input_standard)
@@ -146,9 +132,7 @@ class TestWeeklyRetroModule:
         for goal in weekly_retro_input_standard.goals:
             assert goal in output.progress_on_goals
 
-    def test_trend_analysis(
-        self, weekly_retro_input_standard: WeeklyRetroInput
-    ) -> None:
+    def test_trend_analysis(self, weekly_retro_input_standard: WeeklyRetroInput) -> None:
         """Test trend analysis."""
         module = WeeklyRetroModule(use_llm=False)
         output = module.generate(weekly_retro_input_standard)
@@ -157,9 +141,7 @@ class TestWeeklyRetroModule:
         assert output.trends["overall"] in ["improving", "declining", "stable"]
 
     @pytest.mark.asyncio
-    async def test_async_generation(
-        self, weekly_retro_input_standard: WeeklyRetroInput
-    ) -> None:
+    async def test_async_generation(self, weekly_retro_input_standard: WeeklyRetroInput) -> None:
         """Test async generation."""
         module = WeeklyRetroModule(use_llm=False)
         output = await module.generate_async(weekly_retro_input_standard)
@@ -171,9 +153,7 @@ class TestWeeklyRetroModule:
 class TestFeatureAnalyzerModule:
     """Tests for FeatureAnalyzerModule."""
 
-    def test_fallback_analysis_stable(
-        self, feature_analyzer_input_stable: FeatureAnalyzerInput
-    ) -> None:
+    def test_fallback_analysis_stable(self, feature_analyzer_input_stable: FeatureAnalyzerInput) -> None:
         """Test fallback analysis with stable pattern."""
         module = FeatureAnalyzerModule(use_llm=False)
         output = module.analyze(feature_analyzer_input_stable)
@@ -183,9 +163,7 @@ class TestFeatureAnalyzerModule:
         assert output.summary_stats["mean"] > 0
         assert output.interpretation
 
-    def test_fallback_analysis_trending(
-        self, feature_analyzer_input_trending: FeatureAnalyzerInput
-    ) -> None:
+    def test_fallback_analysis_trending(self, feature_analyzer_input_trending: FeatureAnalyzerInput) -> None:
         """Test fallback analysis with trending pattern."""
         module = FeatureAnalyzerModule(use_llm=False)
         output = module.analyze(feature_analyzer_input_trending)
@@ -193,9 +171,7 @@ class TestFeatureAnalyzerModule:
         assert output.trend == "increasing"
         assert len(output.recommendations) > 0
 
-    def test_outlier_detection(
-        self, feature_analyzer_input_outliers: FeatureAnalyzerInput
-    ) -> None:
+    def test_outlier_detection(self, feature_analyzer_input_outliers: FeatureAnalyzerInput) -> None:
         """Test outlier detection."""
         module = FeatureAnalyzerModule(use_llm=False)
         output = module.analyze(feature_analyzer_input_outliers)
@@ -205,9 +181,7 @@ class TestFeatureAnalyzerModule:
         outlier_indices = [o["index"] for o in output.outliers]
         assert OUTLIER_INDEX in outlier_indices
 
-    def test_statistical_calculations(
-        self, feature_analyzer_input_stable: FeatureAnalyzerInput
-    ) -> None:
+    def test_statistical_calculations(self, feature_analyzer_input_stable: FeatureAnalyzerInput) -> None:
         """Test statistical calculations."""
         module = FeatureAnalyzerModule(use_llm=False)
         output = module.analyze(feature_analyzer_input_stable)
@@ -221,9 +195,7 @@ class TestFeatureAnalyzerModule:
         assert stats["min"] <= stats["mean"] <= stats["max"]
 
     @pytest.mark.asyncio
-    async def test_async_analysis(
-        self, feature_analyzer_input_stable: FeatureAnalyzerInput
-    ) -> None:
+    async def test_async_analysis(self, feature_analyzer_input_stable: FeatureAnalyzerInput) -> None:
         """Test async analysis."""
         module = FeatureAnalyzerModule(use_llm=False)
         output = await module.analyze_async(feature_analyzer_input_stable)
@@ -234,9 +206,7 @@ class TestFeatureAnalyzerModule:
 class TestPatternDetectorModule:
     """Tests for PatternDetectorModule."""
 
-    def test_fallback_detection_standard(
-        self, pattern_detector_input_standard: PatternDetectorInput
-    ) -> None:
+    def test_fallback_detection_standard(self, pattern_detector_input_standard: PatternDetectorInput) -> None:
         """Test fallback detection with standard input."""
         module = PatternDetectorModule(use_llm=False)
         output = module.detect(pattern_detector_input_standard)
@@ -246,9 +216,7 @@ class TestPatternDetectorModule:
         assert isinstance(output.insights, list)
         assert isinstance(output.behavioral_clusters, dict)
 
-    def test_correlation_detection(
-        self, pattern_detector_input_correlated: PatternDetectorInput
-    ) -> None:
+    def test_correlation_detection(self, pattern_detector_input_correlated: PatternDetectorInput) -> None:
         """Test correlation detection."""
         module = PatternDetectorModule(use_llm=False)
         output = module.detect(pattern_detector_input_correlated)
@@ -258,9 +226,7 @@ class TestPatternDetectorModule:
         corr_values = list(output.correlations.values())
         assert any(abs(c) > STRONG_CORRELATION_THRESHOLD for c in corr_values)
 
-    def test_pattern_confidence(
-        self, pattern_detector_input_standard: PatternDetectorInput
-    ) -> None:
+    def test_pattern_confidence(self, pattern_detector_input_standard: PatternDetectorInput) -> None:
         """Test pattern confidence scores."""
         module = PatternDetectorModule(use_llm=False)
         output = module.detect(pattern_detector_input_standard)
@@ -271,9 +237,7 @@ class TestPatternDetectorModule:
             assert pattern.pattern_name
             assert pattern.evidence
 
-    def test_behavioral_clustering(
-        self, pattern_detector_input_standard: PatternDetectorInput
-    ) -> None:
+    def test_behavioral_clustering(self, pattern_detector_input_standard: PatternDetectorInput) -> None:
         """Test behavioral clustering."""
         module = PatternDetectorModule(use_llm=False)
         output = module.detect(pattern_detector_input_standard)
@@ -282,9 +246,7 @@ class TestPatternDetectorModule:
         assert len(output.behavioral_clusters) > 0
 
     @pytest.mark.asyncio
-    async def test_async_detection(
-        self, pattern_detector_input_standard: PatternDetectorInput
-    ) -> None:
+    async def test_async_detection(self, pattern_detector_input_standard: PatternDetectorInput) -> None:
         """Test async detection."""
         module = PatternDetectorModule(use_llm=False)
         output = await module.detect_async(pattern_detector_input_standard)
@@ -295,9 +257,7 @@ class TestPatternDetectorModule:
 class TestContextClassifierModule:
     """Tests for ContextClassifierModule."""
 
-    def test_fallback_classify_coding(
-        self, context_classifier_input_coding: ContextClassifierInput
-    ) -> None:
+    def test_fallback_classify_coding(self, context_classifier_input_coding: ContextClassifierInput) -> None:
         """Test fallback classification for coding activity."""
         module = ContextClassifierModule(use_llm=False)
         output = module.classify(context_classifier_input_coding)
@@ -306,22 +266,15 @@ class TestContextClassifierModule:
         assert output.confidence > 0
         assert output.reasoning
 
-    def test_fallback_classify_research(
-        self, context_classifier_input_research: ContextClassifierInput
-    ) -> None:
+    def test_fallback_classify_research(self, context_classifier_input_research: ContextClassifierInput) -> None:
         """Test fallback classification for research activity."""
         module = ContextClassifierModule(use_llm=False)
         output = module.classify(context_classifier_input_research)
 
         assert output.context_label == "research"
-        assert (
-            "github" in output.reasoning.lower()
-            or "documentation" in output.reasoning.lower()
-        )
+        assert "github" in output.reasoning.lower() or "documentation" in output.reasoning.lower()
 
-    def test_fallback_classify_meeting(
-        self, context_classifier_input_meeting: ContextClassifierInput
-    ) -> None:
+    def test_fallback_classify_meeting(self, context_classifier_input_meeting: ContextClassifierInput) -> None:
         """Test fallback classification for meeting activity."""
         module = ContextClassifierModule(use_llm=False)
         output = module.classify(context_classifier_input_meeting)
@@ -338,9 +291,7 @@ class TestContextClassifierModule:
 
         assert output.context_label == "communication"
 
-    def test_suggested_tags(
-        self, context_classifier_input_coding: ContextClassifierInput
-    ) -> None:
+    def test_suggested_tags(self, context_classifier_input_coding: ContextClassifierInput) -> None:
         """Test suggested tags generation."""
         module = ContextClassifierModule(use_llm=False)
         output = module.classify(context_classifier_input_coding)
@@ -349,9 +300,7 @@ class TestContextClassifierModule:
         assert len(output.suggested_tags) > 0
 
     @pytest.mark.asyncio
-    async def test_async_classification(
-        self, context_classifier_input_coding: ContextClassifierInput
-    ) -> None:
+    async def test_async_classification(self, context_classifier_input_coding: ContextClassifierInput) -> None:
         """Test async classification."""
         module = ContextClassifierModule(use_llm=False)
         output = await module.classify_async(context_classifier_input_coding)
@@ -363,9 +312,7 @@ class TestContextClassifierModule:
 class TestWellbeingModule:
     """Tests for WellbeingModule."""
 
-    def test_fallback_analysis_healthy(
-        self, wellbeing_input_healthy: WellbeingInput
-    ) -> None:
+    def test_fallback_analysis_healthy(self, wellbeing_input_healthy: WellbeingInput) -> None:
         """Test fallback analysis with healthy patterns."""
         module = WellbeingModule(use_llm=False)
         output = module.analyze(wellbeing_input_healthy)
@@ -374,9 +321,7 @@ class TestWellbeingModule:
         assert output.work_life_balance["assessment"] in ["good", "excellent"]
         assert len(output.positive_factors) > 0
 
-    def test_fallback_analysis_at_risk(
-        self, wellbeing_input_at_risk: WellbeingInput
-    ) -> None:
+    def test_fallback_analysis_at_risk(self, wellbeing_input_at_risk: WellbeingInput) -> None:
         """Test fallback analysis with at-risk patterns."""
         module = WellbeingModule(use_llm=False)
         output = module.analyze(wellbeing_input_at_risk)
@@ -385,24 +330,15 @@ class TestWellbeingModule:
         assert len(output.risk_factors) > 0
         assert len(output.recommendations) > 0
 
-    def test_work_life_balance_assessment(
-        self, wellbeing_input_moderate: WellbeingInput
-    ) -> None:
+    def test_work_life_balance_assessment(self, wellbeing_input_moderate: WellbeingInput) -> None:
         """Test work-life balance assessment."""
         module = WellbeingModule(use_llm=False)
         output = module.analyze(wellbeing_input_moderate)
 
         assert "assessment" in output.work_life_balance
-        assert output.work_life_balance["assessment"] in [
-            "excellent",
-            "good",
-            "needs_attention",
-            "poor",
-        ]
+        assert output.work_life_balance["assessment"] in ["excellent", "good", "needs_attention", "poor"]
 
-    def test_focus_quality_assessment(
-        self, wellbeing_input_healthy: WellbeingInput
-    ) -> None:
+    def test_focus_quality_assessment(self, wellbeing_input_healthy: WellbeingInput) -> None:
         """Test focus quality assessment."""
         module = WellbeingModule(use_llm=False)
         output = module.analyze(wellbeing_input_healthy)
@@ -410,9 +346,7 @@ class TestWellbeingModule:
         assert "rating" in output.focus_quality
         assert "focus_ratio" in output.focus_quality
 
-    def test_break_pattern_assessment(
-        self, wellbeing_input_at_risk: WellbeingInput
-    ) -> None:
+    def test_break_pattern_assessment(self, wellbeing_input_at_risk: WellbeingInput) -> None:
         """Test break pattern assessment."""
         module = WellbeingModule(use_llm=False)
         output = module.analyze(wellbeing_input_at_risk)
@@ -421,9 +355,7 @@ class TestWellbeingModule:
         # At-risk has only 2 breaks, should be flagged
         assert output.break_patterns["frequency"] in ["low", "moderate"]
 
-    def test_recommendations_generated(
-        self, wellbeing_input_moderate: WellbeingInput
-    ) -> None:
+    def test_recommendations_generated(self, wellbeing_input_moderate: WellbeingInput) -> None:
         """Test recommendations generation."""
         module = WellbeingModule(use_llm=False)
         output = module.analyze(wellbeing_input_moderate)
@@ -432,9 +364,7 @@ class TestWellbeingModule:
         assert all(isinstance(r, str) for r in output.recommendations)
 
     @pytest.mark.asyncio
-    async def test_async_analysis(
-        self, wellbeing_input_healthy: WellbeingInput
-    ) -> None:
+    async def test_async_analysis(self, wellbeing_input_healthy: WellbeingInput) -> None:
         """Test async analysis."""
         module = WellbeingModule(use_llm=False)
         output = await module.analyze_async(wellbeing_input_healthy)
@@ -510,16 +440,12 @@ class TestIntegration:
         modules = create_all_modules(config)
 
         # Generate daily brief
-        brief_output = modules["daily_brief"].generate(
-            complete_daily_data["brief_input"]
-        )
+        brief_output = modules["daily_brief"].generate(complete_daily_data["brief_input"])
         assert brief_output.summary
         assert brief_output.productivity_score >= 0
 
         # Analyze wellbeing
-        wellbeing_output = modules["wellbeing"].analyze(
-            complete_daily_data["wellbeing_input"]
-        )
+        wellbeing_output = modules["wellbeing"].analyze(complete_daily_data["wellbeing_input"])
         assert wellbeing_output.wellbeing_score >= 0
 
         # Classify activities
@@ -537,9 +463,7 @@ class TestIntegration:
         assert output.summary
         assert output.productivity_score >= 0
 
-    def test_edge_case_maximum_load(
-        self, edge_case_maximum_load: DailyBriefInput
-    ) -> None:
+    def test_edge_case_maximum_load(self, edge_case_maximum_load: DailyBriefInput) -> None:
         """Test edge case with maximum load."""
         module = DailyBriefModule(use_llm=False)
         output = module.generate(edge_case_maximum_load)

@@ -134,10 +134,7 @@ class QueryCache:
 
         # Store entry
         self.cache[query_hash] = CacheEntry(
-            result=result,
-            timestamp=datetime.now(UTC),
-            ttl_seconds=ttl,
-            query_hash=query_hash,
+            result=result, timestamp=datetime.now(UTC), ttl_seconds=ttl, query_hash=query_hash
         )
 
         # Update access order

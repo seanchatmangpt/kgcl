@@ -221,9 +221,7 @@ class StreamProcessor:
         self.processors: dict[str, Callable[[Change], Any | None]] = {}
         self._processor_stats: dict[str, dict[str, int]] = {}
 
-    def register_processor(
-        self, name: str, processor: Callable[[Change], Any | None]
-    ) -> None:
+    def register_processor(self, name: str, processor: Callable[[Change], Any | None]) -> None:
         """Register change processor.
 
         Parameters
@@ -319,10 +317,7 @@ class StreamProcessor:
         return self._processor_stats.copy()
 
     def create_filter_processor(
-        self,
-        name: str,
-        predicate: Callable[[Change], bool],
-        action: Callable[[Change], None],
+        self, name: str, predicate: Callable[[Change], bool], action: Callable[[Change], None]
     ) -> None:
         """Create processor that filters and acts on changes.
 
@@ -344,9 +339,7 @@ class StreamProcessor:
 
         self.register_processor(name, processor)
 
-    def create_transform_processor(
-        self, name: str, transform: Callable[[Change], Change]
-    ) -> None:
+    def create_transform_processor(self, name: str, transform: Callable[[Change], Change]) -> None:
         """Create processor that transforms changes.
 
         Parameters
@@ -393,9 +386,7 @@ class WindowedStreamProcessor(StreamProcessor):
         self.window_start: float | None = None
         self.window_callbacks: list[Callable[[list[Change]], None]] = []
 
-    def register_window_callback(
-        self, callback: Callable[[list[Change]], None]
-    ) -> None:
+    def register_window_callback(self, callback: Callable[[list[Change]], None]) -> None:
         """Register callback for completed windows.
 
         Parameters

@@ -7,13 +7,7 @@ from datetime import UTC, datetime
 from unittest.mock import MagicMock, patch
 
 from ..plugins import PluginRegistry
-from ..plugins.base import (
-    BaseCapabilityPlugin,
-    CapabilityData,
-    CapabilityDescriptor,
-    EntitlementLevel,
-    PluginStatus,
-)
+from ..plugins.base import BaseCapabilityPlugin, CapabilityData, CapabilityDescriptor, EntitlementLevel, PluginStatus
 
 
 class MockPlugin(BaseCapabilityPlugin):
@@ -45,11 +39,7 @@ class MockPlugin(BaseCapabilityPlugin):
         return {"test": True}
 
     def collect_capability_data(self, capability_name: str, parameters=None):
-        return CapabilityData(
-            capability_name=capability_name,
-            timestamp=datetime.now(UTC),
-            data={"test": "data"},
-        )
+        return CapabilityData(capability_name=capability_name, timestamp=datetime.now(UTC), data={"test": "data"})
 
 
 class TestBaseCapabilityPlugin(unittest.TestCase):
@@ -184,11 +174,7 @@ class TestCapabilityData(unittest.TestCase):
         """Test data creation."""
         timestamp = datetime.now(UTC)
         data = CapabilityData(
-            capability_name="test",
-            timestamp=timestamp,
-            data={"key": "value"},
-            metadata={"source": "test"},
-            error=None,
+            capability_name="test", timestamp=timestamp, data={"key": "value"}, metadata={"source": "test"}, error=None
         )
 
         self.assertEqual(data.capability_name, "test")
@@ -199,9 +185,7 @@ class TestCapabilityData(unittest.TestCase):
     def test_to_dict(self):
         """Test conversion to dictionary."""
         timestamp = datetime.now(UTC)
-        data = CapabilityData(
-            capability_name="test", timestamp=timestamp, data={"key": "value"}
-        )
+        data = CapabilityData(capability_name="test", timestamp=timestamp, data={"key": "value"})
 
         dict_data = data.to_dict()
 

@@ -4,9 +4,7 @@ This package provides comprehensive instrumentation for tracing, metrics,
 and logging across all KGCL subsystems.
 """
 
-from opentelemetry.sdk.trace.export.in_memory_span_exporter import (
-    InMemorySpanExporter as _OtelInMemorySpanExporter,
-)
+from opentelemetry.sdk.trace.export.in_memory_span_exporter import InMemorySpanExporter as _OtelInMemorySpanExporter
 
 from kgcl.observability.config import ObservabilityConfig
 from kgcl.observability.logging import configure_logging, get_logger
@@ -26,11 +24,4 @@ if not getattr(_OtelInMemorySpanExporter.get_finished_spans, "_kgcl_patched", Fa
     _OtelInMemorySpanExporter.get_finished_spans = _kgcl_get_finished_spans
     _OtelInMemorySpanExporter.get_finished_spans._kgcl_patched = True  # type: ignore[attr-defined]
 
-__all__ = [
-    "KGCLMetrics",
-    "ObservabilityConfig",
-    "configure_logging",
-    "configure_tracing",
-    "get_logger",
-    "get_tracer",
-]
+__all__ = ["KGCLMetrics", "ObservabilityConfig", "configure_logging", "configure_tracing", "get_logger", "get_tracer"]

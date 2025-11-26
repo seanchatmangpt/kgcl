@@ -26,18 +26,11 @@ class CalendarIngestEngine(BaseIngestEngine):
 
         try:
             # Extract event data
-            event_id = getattr(source_object, "eventIdentifier", None) or getattr(
-                source_object, "event_id", None
-            )
+            event_id = getattr(source_object, "eventIdentifier", None) or getattr(source_object, "event_id", None)
             if not event_id:
                 errors.append("Missing event identifier")
                 return IngestResult(
-                    success=False,
-                    graph=self.graph,
-                    receipt_hash="",
-                    items_processed=0,
-                    errors=errors,
-                    metadata={},
+                    success=False, graph=self.graph, receipt_hash="", items_processed=0, errors=errors, metadata={}
                 )
 
             # Create event URI
@@ -47,36 +40,24 @@ class CalendarIngestEngine(BaseIngestEngine):
             self.graph.add((event_uri, RDF.type, self.schema_ns.Event))
 
             # Map EKEvent properties to schema.org
-            title = getattr(source_object, "title_property", None) or getattr(
-                source_object, "title", None
-            )
+            title = getattr(source_object, "title_property", None) or getattr(source_object, "title", None)
             self._add_literal(event_uri, self.schema_ns.name, title)
 
-            start_date = getattr(source_object, "startDate", None) or getattr(
-                source_object, "start_date", None
-            )
+            start_date = getattr(source_object, "startDate", None) or getattr(source_object, "start_date", None)
             self._add_literal(event_uri, self.schema_ns.startDate, start_date)
 
-            end_date = getattr(source_object, "endDate", None) or getattr(
-                source_object, "end_date", None
-            )
+            end_date = getattr(source_object, "endDate", None) or getattr(source_object, "end_date", None)
             self._add_literal(event_uri, self.schema_ns.endDate, end_date)
 
-            location = getattr(source_object, "location_property", None) or getattr(
-                source_object, "location", None
-            )
+            location = getattr(source_object, "location_property", None) or getattr(source_object, "location", None)
             self._add_literal(event_uri, self.schema_ns.location, location)
 
-            notes = getattr(source_object, "notes_property", None) or getattr(
-                source_object, "notes", None
-            )
+            notes = getattr(source_object, "notes_property", None) or getattr(source_object, "notes", None)
             self._add_literal(event_uri, self.schema_ns.description, notes)
 
             # Add attendees
             attendees = (
-                getattr(source_object, "attendees_list", None)
-                or getattr(source_object, "attendees", None)
-                or []
+                getattr(source_object, "attendees_list", None) or getattr(source_object, "attendees", None) or []
             )
             for attendee in attendees:
                 if isinstance(attendee, dict):
@@ -86,12 +67,8 @@ class CalendarIngestEngine(BaseIngestEngine):
                         attendee_uri = self._create_uri(attendee_email, "person")
                         self.graph.add((attendee_uri, RDF.type, self.schema_ns.Person))
                         if attendee_name:
-                            self._add_literal(
-                                attendee_uri, self.schema_ns.name, attendee_name
-                            )
-                        self._add_literal(
-                            attendee_uri, self.schema_ns.email, attendee_email
-                        )
+                            self._add_literal(attendee_uri, self.schema_ns.name, attendee_name)
+                        self._add_literal(attendee_uri, self.schema_ns.email, attendee_email)
                         self._add_uri(event_uri, self.schema_ns.attendee, attendee_uri)
 
             # Add Apple-specific properties
@@ -118,10 +95,5 @@ class CalendarIngestEngine(BaseIngestEngine):
         except Exception as e:
             errors.append(f"Calendar ingest error: {e!s}")
             return IngestResult(
-                success=False,
-                graph=self.graph,
-                receipt_hash="",
-                items_processed=0,
-                errors=errors,
-                metadata={},
+                success=False, graph=self.graph, receipt_hash="", items_processed=0, errors=errors, metadata={}
             )

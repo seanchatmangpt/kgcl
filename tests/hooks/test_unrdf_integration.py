@@ -32,10 +32,7 @@ class GraphQueryCondition(Condition):
         count = graph.count_triples(self.query)
         triggered = count >= self.expected_count
 
-        return ConditionResult(
-            triggered=triggered,
-            metadata={"count": count, "expected": self.expected_count},
-        )
+        return ConditionResult(triggered=triggered, metadata={"count": count, "expected": self.expected_count})
 
 
 class GraphDeltaCondition(Condition):
@@ -47,8 +44,7 @@ class GraphDeltaCondition(Condition):
         delta = after_count - before_count
 
         return ConditionResult(
-            triggered=delta > 0,
-            metadata={"delta": delta, "before": before_count, "after": after_count},
+            triggered=delta > 0, metadata={"delta": delta, "before": before_count, "after": after_count}
         )
 
 
@@ -117,9 +113,7 @@ class TestHookGraphQuery:
         graph.add_triple("http://ex.org/s1", "http://ex.org/p", "http://ex.org/o1")
         graph.add_triple("http://ex.org/s2", "http://ex.org/p", "http://ex.org/o2")
 
-        condition = GraphQueryCondition(
-            query="SELECT * WHERE { ?s ?p ?o }", expected_count=2
-        )
+        condition = GraphQueryCondition(query="SELECT * WHERE { ?s ?p ?o }", expected_count=2)
 
         hook = Hook(
             name="query_test",
@@ -153,11 +147,7 @@ class TestHookGraphModification:
 
         executor = HookExecutor()
         receipt = await executor.execute(
-            hook,
-            context={
-                "graph": graph,
-                "triple": ("http://ex.org/s", "http://ex.org/p", "http://ex.org/o"),
-            },
+            hook, context={"graph": graph, "triple": ("http://ex.org/s", "http://ex.org/p", "http://ex.org/o")}
         )
 
         assert receipt.handler_result["added"] is True
@@ -179,12 +169,8 @@ class TestTransactionalModifications:
             version_before = graph.version
 
             try:
-                graph.add_triple(
-                    "http://ex.org/s2", "http://ex.org/p", "http://ex.org/o2"
-                )
-                graph.add_triple(
-                    "http://ex.org/s3", "http://ex.org/p", "http://ex.org/o3"
-                )
+                graph.add_triple("http://ex.org/s2", "http://ex.org/p", "http://ex.org/o2")
+                graph.add_triple("http://ex.org/s3", "http://ex.org/p", "http://ex.org/o3")
                 # Commit transaction
                 return {"committed": True, "version": graph.version}
             except Exception as e:
@@ -231,12 +217,7 @@ class TestGraphDeltaDetection:
 
         executor = HookExecutor()
         receipt = await executor.execute(
-            hook,
-            context={
-                "graph": graph,
-                "before_triple_count": before_count,
-                "after_triple_count": after_count,
-            },
+            hook, context={"graph": graph, "before_triple_count": before_count, "after_triple_count": after_count}
         )
 
         assert receipt.condition_result.triggered is True
@@ -354,9 +335,7 @@ class TestHookSuccessProvenance:
 
             # Record provenance as triple
             graph.add_triple(
-                f"http://ex.org/execution/{hook_id}",
-                "http://purl.org/pav/executedAt",
-                datetime.now(UTC).isoformat(),
+                f"http://ex.org/execution/{hook_id}", "http://purl.org/pav/executedAt", datetime.now(UTC).isoformat()
             )
 
             return {"provenance_recorded": True}
@@ -369,9 +348,7 @@ class TestHookSuccessProvenance:
         )
 
         executor = HookExecutor()
-        receipt = await executor.execute(
-            hook, context={"graph": graph, "hook_id": "provenance_test"}
-        )
+        receipt = await executor.execute(hook, context={"graph": graph, "hook_id": "provenance_test"})
 
         assert receipt.handler_result["provenance_recorded"] is True
         # Check that provenance triple was added
@@ -391,15 +368,9 @@ class TestGraphStateConsistency:
 
         def snapshot_handler(ctx: dict[str, Any]) -> dict[str, Any]:
             graph = ctx.get("graph")
-            state_snapshots.append(
-                {"count": len(graph.triples), "hash": graph.get_state_hash()}
-            )
+            state_snapshots.append({"count": len(graph.triples), "hash": graph.get_state_hash()})
             # Add a triple
-            graph.add_triple(
-                f"http://ex.org/s{len(state_snapshots)}",
-                "http://ex.org/p",
-                "http://ex.org/o",
-            )
+            graph.add_triple(f"http://ex.org/s{len(state_snapshots)}", "http://ex.org/p", "http://ex.org/o")
             return {"snapshot": len(state_snapshots)}
 
         hooks = [
@@ -469,9 +440,7 @@ class TestConcurrentHookExecution:
         import asyncio
 
         executor = HookExecutor()
-        results = await asyncio.gather(
-            *[executor.execute(hook, context={"graph": graph}) for hook in hooks]
-        )
+        results = await asyncio.gather(*[executor.execute(hook, context={"graph": graph}) for hook in hooks])
 
         # All should succeed
         assert all(r.handler_result["locked"] for r in results)

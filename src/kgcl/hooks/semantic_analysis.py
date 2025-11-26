@@ -109,17 +109,8 @@ class SemanticAnalyzer:
                 re.compile(r"\b[A-Z][a-z]+, [A-Z]{2}\b"),  # City, ST
                 re.compile(r"\b(New York|Los Angeles|Chicago|Houston|Phoenix)\b"),
             ],
-            EntityType.CONCEPT: [
-                re.compile(
-                    r"\b(knowledge|ontology|taxonomy|schema|graph)\b", re.IGNORECASE
-                )
-            ],
-            EntityType.ACTION: [
-                re.compile(
-                    r"\b(create|delete|update|modify|change|add|remove)\b",
-                    re.IGNORECASE,
-                )
-            ],
+            EntityType.CONCEPT: [re.compile(r"\b(knowledge|ontology|taxonomy|schema|graph)\b", re.IGNORECASE)],
+            EntityType.ACTION: [re.compile(r"\b(create|delete|update|modify|change|add|remove)\b", re.IGNORECASE)],
             EntityType.PROPERTY: [
                 re.compile(r"\b[a-z_]+:[a-z_]+\b"),  # namespace:property
                 re.compile(r"\brdf:(type|label|comment|seeAlso)\b"),
@@ -132,14 +123,8 @@ class SemanticAnalyzer:
 
         # Relation patterns
         self.relation_patterns = {
-            RelationType.IS_A: [
-                re.compile(r"(\w+)\s+is\s+an?\s+(\w+)"),
-                re.compile(r"(\w+)\s+are\s+(\w+)"),
-            ],
-            RelationType.HAS_A: [
-                re.compile(r"(\w+)\s+has\s+(\w+)"),
-                re.compile(r"(\w+)\s+contains\s+(\w+)"),
-            ],
+            RelationType.IS_A: [re.compile(r"(\w+)\s+is\s+an?\s+(\w+)"), re.compile(r"(\w+)\s+are\s+(\w+)")],
+            RelationType.HAS_A: [re.compile(r"(\w+)\s+has\s+(\w+)"), re.compile(r"(\w+)\s+contains\s+(\w+)")],
             RelationType.PART_OF: [
                 re.compile(r"(\w+)\s+(?:is\s+)?part\s+of\s+(\w+)"),
                 re.compile(r"(\w+)\s+belongs\s+to\s+(\w+)"),
@@ -148,10 +133,7 @@ class SemanticAnalyzer:
                 re.compile(r"(\w+)\s+(?:is\s+a\s+)?subclass\s+of\s+(\w+)"),
                 re.compile(r"(\w+)\s+extends\s+(\w+)"),
             ],
-            RelationType.CAUSES: [
-                re.compile(r"(\w+)\s+causes\s+(\w+)"),
-                re.compile(r"(\w+)\s+results\s+in\s+(\w+)"),
-            ],
+            RelationType.CAUSES: [re.compile(r"(\w+)\s+causes\s+(\w+)"), re.compile(r"(\w+)\s+results\s+in\s+(\w+)")],
         }
 
         # Sentiment keywords
@@ -180,21 +162,10 @@ class SemanticAnalyzer:
                 "problem",
                 "issue",
             ],
-            "neutral": [
-                "okay",
-                "fine",
-                "normal",
-                "standard",
-                "average",
-                "typical",
-                "regular",
-                "common",
-            ],
+            "neutral": ["okay", "fine", "normal", "standard", "average", "typical", "regular", "common"],
         }
 
-    def extract_entities(
-        self, text: str, min_confidence: float = 0.5
-    ) -> list[SemanticEntity]:
+    def extract_entities(self, text: str, min_confidence: float = 0.5) -> list[SemanticEntity]:
         """
         Extract semantic entities from text.
 
@@ -219,11 +190,7 @@ class SemanticAnalyzer:
                         continue
 
                     # Calculate confidence based on pattern specificity
-                    confidence = (
-                        0.8
-                        if entity_type in [EntityType.PERSON, EntityType.ORGANIZATION]
-                        else 0.6
-                    )
+                    confidence = 0.8 if entity_type in [EntityType.PERSON, EntityType.ORGANIZATION] else 0.6
 
                     if confidence >= min_confidence:
                         entities.append(
@@ -241,9 +208,7 @@ class SemanticAnalyzer:
         entities.sort(key=lambda e: e.start_pos)
         return entities
 
-    def extract_relations(
-        self, text: str, entities: list[SemanticEntity] | None = None
-    ) -> list[SemanticRelation]:
+    def extract_relations(self, text: str, entities: list[SemanticEntity] | None = None) -> list[SemanticRelation]:
         """
         Extract semantic relations between entities.
 
@@ -275,12 +240,7 @@ class SemanticAnalyzer:
                         # Create relation
                         confidence = 0.7
                         relations.append(
-                            SemanticRelation(
-                                subject=subject,
-                                relation=relation_type,
-                                object=obj,
-                                confidence=confidence,
-                            )
+                            SemanticRelation(subject=subject, relation=relation_type, object=obj, confidence=confidence)
                         )
 
         return relations
@@ -391,13 +351,7 @@ class SemanticAnalyzer:
         """
         categories = {
             "technical": ["code", "function", "class", "method", "api", "database"],
-            "documentation": [
-                "guide",
-                "tutorial",
-                "example",
-                "documentation",
-                "readme",
-            ],
+            "documentation": ["guide", "tutorial", "example", "documentation", "readme"],
             "query": ["select", "where", "from", "sparql", "query"],
             "ontology": ["class", "property", "relation", "ontology", "schema"],
         }

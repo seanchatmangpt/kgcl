@@ -15,7 +15,6 @@ import logging
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
-from typing import Dict, List, Optional, Set
 
 from rdflib import Graph
 
@@ -124,10 +123,7 @@ class HookRegistry:
                         self._effect_index[effect.generator] = set()
                     self._effect_index[effect.generator].add(hook.name)
 
-        logger.debug(
-            f"Built indexes: {len(self._trigger_index)} triggers, "
-            f"{len(self._effect_index)} generators"
-        )
+        logger.debug(f"Built indexes: {len(self._trigger_index)} triggers, {len(self._effect_index)} generators")
 
     def register_hook(self, hook: HookDefinition) -> None:
         """Register a new hook dynamically.
@@ -260,11 +256,7 @@ class HookRegistry:
         -------
             List of active timed hooks
         """
-        return [
-            h
-            for h in self._registry.values()
-            if h.definition.cron_schedule and h.status == HookStatus.ACTIVE
-        ]
+        return [h for h in self._registry.values() if h.definition.cron_schedule and h.status == HookStatus.ACTIVE]
 
     def activate_hook(self, hook_name: str) -> None:
         """Activate a hook.
@@ -349,9 +341,7 @@ class HookRegistry:
         # Validate each effect
         for effect in hook.effects:
             if not effect.command:
-                raise ValueError(
-                    f"Effect {effect.label} in hook {hook.name} has no command"
-                )
+                raise ValueError(f"Effect {effect.label} in hook {hook.name} has no command")
 
     def reload(self) -> None:
         """Reload hooks from file and rebuild indexes."""
@@ -379,15 +369,9 @@ class HookRegistry:
         """
         return {
             "total_hooks": len(self._registry),
-            "active_hooks": len(
-                [h for h in self._registry.values() if h.status == HookStatus.ACTIVE]
-            ),
-            "inactive_hooks": len(
-                [h for h in self._registry.values() if h.status == HookStatus.INACTIVE]
-            ),
-            "error_hooks": len(
-                [h for h in self._registry.values() if h.status == HookStatus.ERROR]
-            ),
+            "active_hooks": len([h for h in self._registry.values() if h.status == HookStatus.ACTIVE]),
+            "inactive_hooks": len([h for h in self._registry.values() if h.status == HookStatus.INACTIVE]),
+            "error_hooks": len([h for h in self._registry.values() if h.status == HookStatus.ERROR]),
             "timed_hooks": len(self.get_timed_hooks()),
             "trigger_types": len(self._trigger_index),
             "generator_types": len(self._effect_index),

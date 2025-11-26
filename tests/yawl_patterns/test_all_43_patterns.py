@@ -40,28 +40,15 @@ EXPECTED_PATTERNS = {
     6: {"name": "Multi-Choice", "split": "OR", "join": None, "predicate": True},
     7: {"name": "Synchronizing Merge", "split": None, "join": "OR"},
     8: {"name": "Multiple Merge", "split": None, "join": "OR"},
-    9: {
-        "name": "Discriminator",
-        "split": None,
-        "join": "Discriminator",
-        "quorum": True,
-    },
+    9: {"name": "Discriminator", "split": None, "join": "Discriminator", "quorum": True},
     # Structural (10-11)
     10: {"name": "Arbitrary Cycles", "split": None, "join": None},
     11: {"name": "Implicit Termination", "split": None, "join": None},
     # Multiple Instance (12-15)
     12: {"name": "MI Without Synchronization", "split": "AND", "join": None},
-    13: {
-        "name": "MI With A Priori Design-Time Knowledge",
-        "split": "AND",
-        "join": "AND",
-    },
+    13: {"name": "MI With A Priori Design-Time Knowledge", "split": "AND", "join": "AND"},
     14: {"name": "MI With A Priori Run-Time Knowledge", "split": "AND", "join": "AND"},
-    15: {
-        "name": "MI Without A Priori Run-Time Knowledge",
-        "split": "AND",
-        "join": "AND",
-    },
+    15: {"name": "MI Without A Priori Run-Time Knowledge", "split": "AND", "join": "AND"},
     # State-Based (16-18)
     16: {"name": "Deferred Choice", "split": "XOR", "join": None},
     17: {"name": "Interleaved Parallel Routing", "split": "AND", "join": "AND"},
@@ -86,11 +73,7 @@ EXPECTED_PATTERNS = {
     # Multiple Instance Extended (33-36)
     33: {"name": "Generalised AND-Join", "split": None, "join": "AND"},
     34: {"name": "Static Partial Join for MI", "split": None, "join": "Discriminator"},
-    35: {
-        "name": "Cancelling Partial Join for MI",
-        "split": None,
-        "join": "Discriminator",
-    },
+    35: {"name": "Cancelling Partial Join for MI", "split": None, "join": "Discriminator"},
     36: {"name": "Dynamic Partial Join for MI", "split": None, "join": "Discriminator"},
     # State-Based Extended (37-40)
     37: {"name": "Acyclic Synchronising Merge", "split": None, "join": "OR"},
@@ -126,9 +109,7 @@ class TestOntologyLoading:
         """
         assert len(yawl_graph) > 0, "YAWL graph should not be empty"
 
-    def test_yawl_graph_contains_patterns(
-        self, yawl_graph: Graph, pattern_count_query: str
-    ) -> None:
+    def test_yawl_graph_contains_patterns(self, yawl_graph: Graph, pattern_count_query: str) -> None:
         """Ontology contains workflow pattern definitions.
 
         Parameters
@@ -146,9 +127,7 @@ class TestOntologyLoading:
         count = int(results[0][0]) if results else 0
         assert count >= 9, f"Expected at least 9 patterns, found {count}"
 
-    def test_yawl_graph_contains_split_types(
-        self, yawl_graph: Graph, split_types_query: str
-    ) -> None:
+    def test_yawl_graph_contains_split_types(self, yawl_graph: Graph, split_types_query: str) -> None:
         """Ontology defines split types (AND, OR, XOR).
 
         Parameters
@@ -163,13 +142,9 @@ class TestOntologyLoading:
         At least 3 split types are defined
         """
         results = list(yawl_graph.query(split_types_query))
-        assert len(results) >= 3, (
-            f"Expected at least 3 split types, found {len(results)}"
-        )
+        assert len(results) >= 3, f"Expected at least 3 split types, found {len(results)}"
 
-    def test_yawl_graph_contains_join_types(
-        self, yawl_graph: Graph, join_types_query: str
-    ) -> None:
+    def test_yawl_graph_contains_join_types(self, yawl_graph: Graph, join_types_query: str) -> None:
         """Ontology defines join types (AND, OR, XOR, Discriminator).
 
         Parameters
@@ -184,9 +159,7 @@ class TestOntologyLoading:
         At least 3 join types are defined
         """
         results = list(yawl_graph.query(join_types_query))
-        assert len(results) >= 3, (
-            f"Expected at least 3 join types, found {len(results)}"
-        )
+        assert len(results) >= 3, f"Expected at least 3 join types, found {len(results)}"
 
 
 # ============================================================================
@@ -197,9 +170,7 @@ class TestOntologyLoading:
 class TestPatternRegistry:
     """Test pattern extraction from ontology."""
 
-    def test_pattern_registry_extracts_patterns(
-        self, pattern_registry: dict[int, PatternDefinition]
-    ) -> None:
+    def test_pattern_registry_extracts_patterns(self, pattern_registry: dict[int, PatternDefinition]) -> None:
         """Pattern registry contains extracted patterns.
 
         Parameters
@@ -213,9 +184,7 @@ class TestPatternRegistry:
         """
         assert len(pattern_registry) > 0, "Pattern registry should not be empty"
 
-    def test_pattern_1_sequence_defined(
-        self, pattern_registry: dict[int, PatternDefinition]
-    ) -> None:
+    def test_pattern_1_sequence_defined(self, pattern_registry: dict[int, PatternDefinition]) -> None:
         """Pattern 1 (Sequence) is defined in registry.
 
         Parameters
@@ -230,9 +199,7 @@ class TestPatternRegistry:
         assert 1 in pattern_registry, "Pattern 1 should be in registry"
         assert pattern_registry[1].name == "Sequence"
 
-    def test_pattern_2_parallel_split_defined(
-        self, pattern_registry: dict[int, PatternDefinition]
-    ) -> None:
+    def test_pattern_2_parallel_split_defined(self, pattern_registry: dict[int, PatternDefinition]) -> None:
         """Pattern 2 (Parallel Split) is defined with AND split.
 
         Parameters
@@ -249,9 +216,7 @@ class TestPatternRegistry:
         assert pattern.name == "Parallel Split"
         assert pattern.required_split == "AND"
 
-    def test_pattern_3_synchronization_defined(
-        self, pattern_registry: dict[int, PatternDefinition]
-    ) -> None:
+    def test_pattern_3_synchronization_defined(self, pattern_registry: dict[int, PatternDefinition]) -> None:
         """Pattern 3 (Synchronization) is defined with AND join.
 
         Parameters
@@ -268,9 +233,7 @@ class TestPatternRegistry:
         assert pattern.name == "Synchronization"
         assert pattern.required_join == "AND"
 
-    def test_pattern_4_exclusive_choice_defined(
-        self, pattern_registry: dict[int, PatternDefinition]
-    ) -> None:
+    def test_pattern_4_exclusive_choice_defined(self, pattern_registry: dict[int, PatternDefinition]) -> None:
         """Pattern 4 (Exclusive Choice) is defined with XOR split and predicate.
 
         Parameters
@@ -288,9 +251,7 @@ class TestPatternRegistry:
         assert pattern.required_split == "XOR"
         assert pattern.requires_predicate is True
 
-    def test_pattern_5_simple_merge_defined(
-        self, pattern_registry: dict[int, PatternDefinition]
-    ) -> None:
+    def test_pattern_5_simple_merge_defined(self, pattern_registry: dict[int, PatternDefinition]) -> None:
         """Pattern 5 (Simple Merge) is defined with XOR join.
 
         Parameters
@@ -307,9 +268,7 @@ class TestPatternRegistry:
         assert pattern.name == "Simple Merge"
         assert pattern.required_join == "XOR"
 
-    def test_pattern_6_multi_choice_defined(
-        self, pattern_registry: dict[int, PatternDefinition]
-    ) -> None:
+    def test_pattern_6_multi_choice_defined(self, pattern_registry: dict[int, PatternDefinition]) -> None:
         """Pattern 6 (Multi-Choice) is defined with OR split.
 
         Parameters
@@ -326,9 +285,7 @@ class TestPatternRegistry:
         assert pattern.name == "Multi-Choice"
         assert pattern.required_split == "OR"
 
-    def test_pattern_7_sync_merge_defined(
-        self, pattern_registry: dict[int, PatternDefinition]
-    ) -> None:
+    def test_pattern_7_sync_merge_defined(self, pattern_registry: dict[int, PatternDefinition]) -> None:
         """Pattern 7 (Synchronizing Merge) is defined with OR join.
 
         Parameters
@@ -345,9 +302,7 @@ class TestPatternRegistry:
         assert pattern.name == "Synchronizing Merge"
         assert pattern.required_join == "OR"
 
-    def test_pattern_8_multiple_merge_defined(
-        self, pattern_registry: dict[int, PatternDefinition]
-    ) -> None:
+    def test_pattern_8_multiple_merge_defined(self, pattern_registry: dict[int, PatternDefinition]) -> None:
         """Pattern 8 (Multiple Merge) is defined with OR join.
 
         Parameters
@@ -364,9 +319,7 @@ class TestPatternRegistry:
         assert pattern.name == "Multiple Merge"
         assert pattern.required_join == "OR"
 
-    def test_pattern_9_discriminator_defined(
-        self, pattern_registry: dict[int, PatternDefinition]
-    ) -> None:
+    def test_pattern_9_discriminator_defined(self, pattern_registry: dict[int, PatternDefinition]) -> None:
         """Pattern 9 (Discriminator) is defined with quorum requirement.
 
         Parameters
@@ -418,9 +371,7 @@ class TestPatternRegistry:
 class TestPermutationMatrix:
     """Test split-join permutation extraction."""
 
-    def test_permutation_matrix_extracts_combinations(
-        self, permutation_matrix: list[PermutationEntry]
-    ) -> None:
+    def test_permutation_matrix_extracts_combinations(self, permutation_matrix: list[PermutationEntry]) -> None:
         """Permutation matrix contains valid combinations.
 
         Parameters
@@ -434,9 +385,7 @@ class TestPermutationMatrix:
         """
         assert len(permutation_matrix) > 0, "Permutation matrix should not be empty"
 
-    def test_and_and_combination_is_valid(
-        self, permutation_matrix: list[PermutationEntry]
-    ) -> None:
+    def test_and_and_combination_is_valid(self, permutation_matrix: list[PermutationEntry]) -> None:
         """AND-split + AND-join is a valid combination.
 
         Parameters
@@ -448,17 +397,11 @@ class TestPermutationMatrix:
         -------
         AND-AND combination exists and is valid
         """
-        and_and = [
-            p
-            for p in permutation_matrix
-            if p.split_type == "AND" and p.join_type == "AND"
-        ]
+        and_and = [p for p in permutation_matrix if p.split_type == "AND" and p.join_type == "AND"]
         if and_and:
             assert and_and[0].is_valid is True
 
-    def test_xor_xor_combination_is_valid(
-        self, permutation_matrix: list[PermutationEntry]
-    ) -> None:
+    def test_xor_xor_combination_is_valid(self, permutation_matrix: list[PermutationEntry]) -> None:
         """XOR-split + XOR-join is a valid combination (Sequence, Exclusive Choice).
 
         Parameters
@@ -470,17 +413,11 @@ class TestPermutationMatrix:
         -------
         XOR-XOR combination exists and is valid
         """
-        xor_xor = [
-            p
-            for p in permutation_matrix
-            if p.split_type == "XOR" and p.join_type == "XOR"
-        ]
+        xor_xor = [p for p in permutation_matrix if p.split_type == "XOR" and p.join_type == "XOR"]
         if xor_xor:
             assert xor_xor[0].is_valid is True
 
-    def test_or_or_combination_is_valid(
-        self, permutation_matrix: list[PermutationEntry]
-    ) -> None:
+    def test_or_or_combination_is_valid(self, permutation_matrix: list[PermutationEntry]) -> None:
         """OR-split + OR-join is a valid combination (Synchronizing Merge).
 
         Parameters
@@ -492,17 +429,11 @@ class TestPermutationMatrix:
         -------
         OR-OR combination exists and is valid
         """
-        or_or = [
-            p
-            for p in permutation_matrix
-            if p.split_type == "OR" and p.join_type == "OR"
-        ]
+        or_or = [p for p in permutation_matrix if p.split_type == "OR" and p.join_type == "OR"]
         if or_or:
             assert or_or[0].is_valid is True
 
-    def test_and_discriminator_combination_is_valid(
-        self, permutation_matrix: list[PermutationEntry]
-    ) -> None:
+    def test_and_discriminator_combination_is_valid(self, permutation_matrix: list[PermutationEntry]) -> None:
         """AND-split + Discriminator join is valid (Pattern 9).
 
         Parameters
@@ -514,11 +445,7 @@ class TestPermutationMatrix:
         -------
         AND-Discriminator combination exists and is valid
         """
-        and_disc = [
-            p
-            for p in permutation_matrix
-            if p.split_type == "AND" and p.join_type == "Discriminator"
-        ]
+        and_disc = [p for p in permutation_matrix if p.split_type == "AND" and p.join_type == "Discriminator"]
         if and_disc:
             assert and_disc[0].is_valid is True
 
@@ -570,9 +497,7 @@ class TestWorkflowGraphStructure:
         flow_count = sum(1 for s, p, o in flow_triples if "flowsTo" in str(p))
         assert flow_count >= 1, f"Expected at least 1 flow edge, found {flow_count}"
 
-    def test_parallel_split_workflow_has_and_split(
-        self, parallel_split_workflow: Graph
-    ) -> None:
+    def test_parallel_split_workflow_has_and_split(self, parallel_split_workflow: Graph) -> None:
         """Parallel split workflow contains AND split.
 
         Parameters
@@ -595,9 +520,7 @@ class TestWorkflowGraphStructure:
         results = list(parallel_split_workflow.query(query))
         assert len(results) >= 1, "Expected AND split in parallel split workflow"
 
-    def test_synchronization_workflow_has_and_join(
-        self, synchronization_workflow: Graph
-    ) -> None:
+    def test_synchronization_workflow_has_and_join(self, synchronization_workflow: Graph) -> None:
         """Synchronization workflow contains AND join.
 
         Parameters
@@ -620,9 +543,7 @@ class TestWorkflowGraphStructure:
         results = list(synchronization_workflow.query(query))
         assert len(results) >= 1, "Expected AND join in synchronization workflow"
 
-    def test_exclusive_choice_workflow_has_xor_split(
-        self, exclusive_choice_workflow: Graph
-    ) -> None:
+    def test_exclusive_choice_workflow_has_xor_split(self, exclusive_choice_workflow: Graph) -> None:
         """Exclusive choice workflow contains XOR split with conditions.
 
         Parameters
@@ -645,9 +566,7 @@ class TestWorkflowGraphStructure:
         results = list(exclusive_choice_workflow.query(query))
         assert len(results) >= 1, "Expected XOR split in exclusive choice workflow"
 
-    def test_discriminator_workflow_has_quorum_join(
-        self, discriminator_workflow: Graph
-    ) -> None:
+    def test_discriminator_workflow_has_quorum_join(self, discriminator_workflow: Graph) -> None:
         """Discriminator workflow contains quorum-based join.
 
         Parameters
@@ -668,13 +587,9 @@ class TestWorkflowGraphStructure:
             }
         """
         results = list(discriminator_workflow.query(query))
-        assert len(results) >= 1, (
-            "Expected Discriminator join in discriminator workflow"
-        )
+        assert len(results) >= 1, "Expected Discriminator join in discriminator workflow"
 
-    def test_arbitrary_cycles_workflow_has_loop(
-        self, arbitrary_cycles_workflow: Graph
-    ) -> None:
+    def test_arbitrary_cycles_workflow_has_loop(self, arbitrary_cycles_workflow: Graph) -> None:
         """Arbitrary cycles workflow contains backward edge (loop).
 
         Parameters
@@ -695,9 +610,7 @@ class TestWorkflowGraphStructure:
             }
         """
         results = list(arbitrary_cycles_workflow.query(query))
-        assert len(results) >= 1, (
-            "Expected conditional flow in arbitrary cycles workflow"
-        )
+        assert len(results) >= 1, "Expected conditional flow in arbitrary cycles workflow"
 
 
 # ============================================================================
@@ -727,9 +640,7 @@ class TestAll43PatternsCoverage:
         """
         # Patterns 1-9 should be fully defined in yawl-extended.ttl
         if pattern_id <= 9:
-            assert pattern_id in pattern_registry, (
-                f"Pattern {pattern_id} should be defined in ontology"
-            )
+            assert pattern_id in pattern_registry, f"Pattern {pattern_id} should be defined in ontology"
             expected = EXPECTED_PATTERNS.get(pattern_id, {})
             actual = pattern_registry[pattern_id]
             assert actual.name == expected.get("name"), (
@@ -740,9 +651,7 @@ class TestAll43PatternsCoverage:
             pattern = pattern_registry[pattern_id]
             assert pattern.name is not None, f"Pattern {pattern_id} should have a name"
 
-    def test_basic_control_flow_patterns_complete(
-        self, pattern_registry: dict[int, PatternDefinition]
-    ) -> None:
+    def test_basic_control_flow_patterns_complete(self, pattern_registry: dict[int, PatternDefinition]) -> None:
         """Patterns 1-5 (Basic Control Flow) are all defined.
 
         Parameters
@@ -758,9 +667,7 @@ class TestAll43PatternsCoverage:
         for pid in basic_patterns:
             assert pid in pattern_registry, f"Basic pattern {pid} should be defined"
 
-    def test_advanced_branching_patterns_complete(
-        self, pattern_registry: dict[int, PatternDefinition]
-    ) -> None:
+    def test_advanced_branching_patterns_complete(self, pattern_registry: dict[int, PatternDefinition]) -> None:
         """Patterns 6-9 (Advanced Branching) are all defined.
 
         Parameters
@@ -785,9 +692,7 @@ class TestAll43PatternsCoverage:
 class TestPatternPropertiesValidation:
     """Test that patterns have correct property constraints."""
 
-    def test_split_patterns_have_split_type(
-        self, pattern_registry: dict[int, PatternDefinition]
-    ) -> None:
+    def test_split_patterns_have_split_type(self, pattern_registry: dict[int, PatternDefinition]) -> None:
         """Patterns requiring split have split type defined.
 
         Parameters
@@ -803,13 +708,9 @@ class TestPatternPropertiesValidation:
         for pid in split_patterns:
             if pid in pattern_registry:
                 pattern = pattern_registry[pid]
-                assert pattern.required_split is not None, (
-                    f"Pattern {pid} ({pattern.name}) should have split type"
-                )
+                assert pattern.required_split is not None, f"Pattern {pid} ({pattern.name}) should have split type"
 
-    def test_join_patterns_have_join_type(
-        self, pattern_registry: dict[int, PatternDefinition]
-    ) -> None:
+    def test_join_patterns_have_join_type(self, pattern_registry: dict[int, PatternDefinition]) -> None:
         """Patterns requiring join have join type defined.
 
         Parameters
@@ -821,23 +722,13 @@ class TestPatternPropertiesValidation:
         -------
         Patterns 3, 5, 7, 8, 9 have join type
         """
-        join_patterns = [
-            3,
-            5,
-            7,
-            8,
-            9,
-        ]  # Sync, Simple Merge, Sync Merge, Multi Merge, Disc
+        join_patterns = [3, 5, 7, 8, 9]  # Sync, Simple Merge, Sync Merge, Multi Merge, Disc
         for pid in join_patterns:
             if pid in pattern_registry:
                 pattern = pattern_registry[pid]
-                assert pattern.required_join is not None, (
-                    f"Pattern {pid} ({pattern.name}) should have join type"
-                )
+                assert pattern.required_join is not None, f"Pattern {pid} ({pattern.name}) should have join type"
 
-    def test_predicate_patterns_require_predicate(
-        self, pattern_registry: dict[int, PatternDefinition]
-    ) -> None:
+    def test_predicate_patterns_require_predicate(self, pattern_registry: dict[int, PatternDefinition]) -> None:
         """Patterns with conditions require predicate evaluation.
 
         Parameters
@@ -851,13 +742,9 @@ class TestPatternPropertiesValidation:
         """
         if 4 in pattern_registry:
             pattern = pattern_registry[4]
-            assert pattern.requires_predicate is True, (
-                "Exclusive Choice should require predicate"
-            )
+            assert pattern.requires_predicate is True, "Exclusive Choice should require predicate"
 
-    def test_discriminator_requires_quorum(
-        self, pattern_registry: dict[int, PatternDefinition]
-    ) -> None:
+    def test_discriminator_requires_quorum(self, pattern_registry: dict[int, PatternDefinition]) -> None:
         """Discriminator pattern requires quorum counting.
 
         Parameters
@@ -871,9 +758,7 @@ class TestPatternPropertiesValidation:
         """
         if 9 in pattern_registry:
             pattern = pattern_registry[9]
-            assert pattern.requires_quorum is True, (
-                "Discriminator should require quorum"
-            )
+            assert pattern.requires_quorum is True, "Discriminator should require quorum"
 
 
 # ============================================================================
@@ -912,9 +797,7 @@ class TestPatternOntologyIntegration:
             assert flow_count >= 1, "Sequence workflow should have flow edges"
 
     def test_parallel_split_validates_against_pattern(
-        self,
-        pattern_registry: dict[int, PatternDefinition],
-        parallel_split_workflow: Graph,
+        self, pattern_registry: dict[int, PatternDefinition], parallel_split_workflow: Graph
     ) -> None:
         """Parallel split workflow validates against Pattern 2 definition.
 

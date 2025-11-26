@@ -69,8 +69,7 @@ def generate_agenda(
     ingest_path = input_path or Path("data/apple-ingest.ttl")
     if not ingest_path.exists():
         raise FileNotFoundError(
-            f"Ingest graph not found at {ingest_path}. "
-            "Run `kgct scan-apple` before generating projections."
+            f"Ingest graph not found at {ingest_path}. Run `kgct scan-apple` before generating projections."
         )
 
     graph = _load_graph(ingest_path)

@@ -143,26 +143,10 @@ class TestFeatureMaterializer:
         window_end = window_start + timedelta(hours=1)
 
         events = [
-            AppEvent(
-                event_id="app_001",
-                timestamp=window_start + timedelta(minutes=0),
-                app_name="com.apple.Safari",
-            ),
-            AppEvent(
-                event_id="app_002",
-                timestamp=window_start + timedelta(minutes=10),
-                app_name="com.apple.Mail",
-            ),
-            AppEvent(
-                event_id="app_003",
-                timestamp=window_start + timedelta(minutes=20),
-                app_name="com.apple.Safari",
-            ),
-            AppEvent(
-                event_id="app_004",
-                timestamp=window_start + timedelta(minutes=30),
-                app_name="com.apple.Mail",
-            ),
+            AppEvent(event_id="app_001", timestamp=window_start + timedelta(minutes=0), app_name="com.apple.Safari"),
+            AppEvent(event_id="app_002", timestamp=window_start + timedelta(minutes=10), app_name="com.apple.Mail"),
+            AppEvent(event_id="app_003", timestamp=window_start + timedelta(minutes=20), app_name="com.apple.Safari"),
+            AppEvent(event_id="app_004", timestamp=window_start + timedelta(minutes=30), app_name="com.apple.Mail"),
         ]
 
         features = materializer.materialize(events, window_start, window_end)
@@ -292,9 +276,7 @@ class TestFeatureMaterializer:
 
     def test_incremental_updates(self):
         """Test incremental feature updates."""
-        config = FeatureConfig(
-            enabled_features=["app_usage_time"], incremental_updates=True
-        )
+        config = FeatureConfig(enabled_features=["app_usage_time"], incremental_updates=True)
         materializer = FeatureMaterializer(config)
 
         now = datetime.now(UTC).replace(tzinfo=None)
@@ -311,9 +293,7 @@ class TestFeatureMaterializer:
             )
         ]
 
-        existing_features = materializer.materialize(
-            initial_events, window_start, window_end
-        )
+        existing_features = materializer.materialize(initial_events, window_start, window_end)
 
         # New events
         new_events = [
@@ -326,9 +306,7 @@ class TestFeatureMaterializer:
         ]
 
         # Update incrementally
-        updated_features = materializer.materialize_incremental(
-            new_events, existing_features
-        )
+        updated_features = materializer.materialize_incremental(new_events, existing_features)
 
         assert len(updated_features) > 0
 

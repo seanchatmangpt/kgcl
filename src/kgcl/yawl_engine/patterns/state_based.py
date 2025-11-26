@@ -34,10 +34,9 @@ from __future__ import annotations
 
 import logging
 from dataclasses import dataclass, field
-from typing import Any, FrozenSet
+from typing import Any
 
 from rdflib import Graph, Literal, Namespace, URIRef
-from rdflib.namespace import RDF
 
 from kgcl.yawl_engine.core.execution import ExecutionResult
 
@@ -146,15 +145,11 @@ class DeferredChoice:
             graph.add((branch, STATE.enabled, Literal(True)))
             graph.add((branch, STATE.choiceType, Literal("deferred")))
 
-        logger.info(
-            "Enabled %d branches for deferred choice at task %s", len(branches), task
-        )
+        logger.info("Enabled %d branches for deferred choice at task %s", len(branches), task)
 
         return branches
 
-    def on_event(
-        self, graph: Graph, branch: URIRef, event: dict[str, Any]
-    ) -> ExecutionResult:
+    def on_event(self, graph: Graph, branch: URIRef, event: dict[str, Any]) -> ExecutionResult:
         """Handle event arrival - first event wins.
 
         When an event arrives for a branch, that branch is selected and all
@@ -213,21 +208,13 @@ class DeferredChoice:
             if other_branch != branch:
                 graph.set((other_branch, STATE.enabled, Literal(False)))
                 graph.add((other_branch, STATE.disabled, Literal(True)))
-                graph.add(
-                    (
-                        other_branch,
-                        STATE.disabledReason,
-                        Literal("deferred_choice_lost"),
-                    )
-                )
+                graph.add((other_branch, STATE.disabledReason, Literal("deferred_choice_lost")))
 
         # Mark chosen branch
         graph.add((branch, STATE.chosen, Literal(True)))
         graph.add((branch, STATE.eventData, Literal(str(event))))
 
-        logger.info(
-            "Deferred choice made: branch %s selected (event: %s)", branch, event
-        )
+        logger.info("Deferred choice made: branch %s selected (event: %s)", branch, event)
 
         # Return execution result with chosen branch
         return ExecutionResult(

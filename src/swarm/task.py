@@ -53,10 +53,7 @@ class SwarmTask:
         return self.payload.get(key, default)
 
     def __repr__(self) -> str:
-        return (
-            f"SwarmTask(id={self.task_id!r}, name={self.name!r}, "
-            f"type={self.task_type!r}, priority={self.priority})"
-        )
+        return f"SwarmTask(id={self.task_id!r}, name={self.name!r}, type={self.task_type!r}, priority={self.priority})"
 
 
 @dataclass
@@ -91,8 +88,4 @@ class TaskResult:
             self.duration_ms = (self.end_time - self.start_time).total_seconds() * 1000
 
     def __repr__(self) -> str:
-        return (
-            f"TaskResult(task={self.task_name!r}, "
-            f"status={self.status.value}, "
-            f"duration={self.duration_ms:.1f}ms)"
-        )
+        return f"TaskResult(task={self.task_name!r}, status={self.status.value}, duration={self.duration_ms:.1f}ms)"

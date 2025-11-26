@@ -22,12 +22,8 @@ cli_app = build_cli_app()
     default=None,
     help="End date for the retrospective (defaults to today)",
 )
-@click.option(
-    "--days", type=int, default=7, help="Number of days to include (default: 7)"
-)
-@click.option(
-    "--output", "-o", type=click.Path(path_type=Path), help="Output file path"
-)
+@click.option("--days", type=int, default=7, help="Number of days to include (default: 7)")
+@click.option("--output", "-o", type=click.Path(path_type=Path), help="Output file path")
 @click.option("--clipboard", "-c", is_flag=True, help="Copy result to clipboard")
 @click.option(
     "--format",
@@ -37,12 +33,8 @@ cli_app = build_cli_app()
     default=OutputFormat.MARKDOWN.value,
     help="Output format",
 )
-@click.option(
-    "--model", type=str, default="llama3.2", help="Ollama model to use for generation"
-)
-@click.option(
-    "--include-metrics", is_flag=True, help="Include detailed metrics in output"
-)
+@click.option("--model", type=str, default="llama3.2", help="Ollama model to use for generation")
+@click.option("--include-metrics", is_flag=True, help="Include detailed metrics in output")
 @click.option("--verbose", "-v", is_flag=True, help="Verbose output")
 def weekly_retro(
     end_date: datetime | None,
@@ -216,17 +208,12 @@ def weekly_retro(
 
     def _execute(context):
         request = DailyBriefRequest(
-            start_date=start_date.isoformat(),
-            end_date=target_end.isoformat(),
-            model=model,
-            verbose=verbose,
+            start_date=start_date.isoformat(), end_date=target_end.isoformat(), model=model, verbose=verbose
         )
         features = context.ingestion_service.load_daily_brief(request)
         payload = _build_retro_payload(features, include_metrics, days)
         fmt = OutputFormat(output_format)
-        data = (
-            payload["markdown"] if fmt is OutputFormat.MARKDOWN else payload["summary"]
-        )
+        data = payload["markdown"] if fmt is OutputFormat.MARKDOWN else payload["summary"]
         context.renderer.render(data, fmt=fmt, clipboard=clipboard, output_file=output)
         return payload
 
@@ -256,22 +243,15 @@ def _build_retro_payload(features: dict, include_metrics: bool, days: int) -> di
         "",
         "## Top Apps",
     ]
-    lines += [
-        f"- {item['name']}: {item['hours']}h" for item in summary["top_apps"]
-    ] or ["- None"]
+    lines += [f"- {item['name']}: {item['hours']}h" for item in summary["top_apps"]] or ["- None"]
     lines.append("")
     lines.append("## Top Domains")
-    lines += [
-        f"- {item['domain']}: {item['visits']} visits"
-        for item in summary["top_domains"]
-    ] or ["- None"]
+    lines += [f"- {item['domain']}: {item['visits']} visits" for item in summary["top_domains"]] or ["- None"]
 
     if include_metrics:
         lines.append("")
         lines.append("## Metrics")
-        lines.append(
-            f"- Average events/day: {summary['event_count'] / max(days, 1):.2f}"
-        )
+        lines.append(f"- Average events/day: {summary['event_count'] / max(days, 1):.2f}")
         lines.append(f"- Focus hours/day: {summary['focus_hours'] / max(days, 1):.2f}")
 
     lines.append("\n---\nGenerated via KGCL Lean CLI.")

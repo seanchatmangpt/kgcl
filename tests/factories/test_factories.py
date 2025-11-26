@@ -163,9 +163,7 @@ def test_hook_receipt_factory_creates_valid_receipts() -> None:
 
 def test_hook_receipt_factory_with_error() -> None:
     """HookReceiptFactory can create failed receipts."""
-    receipt = HookReceiptFactory(
-        error="Timeout exceeded", handler_result=None, stack_trace="..."
-    )
+    receipt = HookReceiptFactory(error="Timeout exceeded", handler_result=None, stack_trace="...")
 
     assert receipt.error == "Timeout exceeded"
     assert receipt.handler_result is None

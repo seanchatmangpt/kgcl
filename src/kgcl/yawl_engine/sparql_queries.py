@@ -19,11 +19,11 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, cast
 from urllib.parse import quote as url_quote
 
-from rdflib import Graph, Literal, Namespace, URIRef
+from rdflib import Graph, Namespace, URIRef
 from rdflib.query import ResultRow
 
 if TYPE_CHECKING:
-    from collections.abc import Sequence
+    pass
 
 
 def escape_sparql_uri(uri: str | URIRef) -> str:
@@ -419,15 +419,11 @@ def extract_all_patterns(graph: Graph) -> list[PatternDefinition]:
                 pattern_uri=str(row_typed.pattern),
                 pattern_id=int(row_typed.id),
                 name=str(row_typed.name),
-                description=str(row_typed.description)
-                if row_typed.description
-                else None,
+                description=str(row_typed.description) if row_typed.description else None,
                 category=str(row_typed.category) if row_typed.category else None,
                 required_split=str(row_typed.split) if row_typed.split else None,
                 required_join=str(row_typed.join) if row_typed.join else None,
-                requires_predicate=bool(row_typed.predicate)
-                if row_typed.predicate
-                else False,
+                requires_predicate=bool(row_typed.predicate) if row_typed.predicate else False,
                 requires_quorum=bool(row_typed.quorum) if row_typed.quorum else False,
             )
         )
@@ -466,9 +462,7 @@ def extract_permutation_matrix(graph: Graph) -> list[PermutationEntry]:
                 join_type=str(row_typed.join),
                 is_valid=bool(row_typed.valid),
                 generated_patterns=pattern_ids,
-                description=str(row_typed.description)
-                if row_typed.description
-                else None,
+                description=str(row_typed.description) if row_typed.description else None,
             )
         )
 
@@ -499,12 +493,8 @@ def extract_task_configurations(graph: Graph) -> list[TaskConfiguration]:
                 split_type=str(row_typed.split) if row_typed.split else None,
                 join_type=str(row_typed.join) if row_typed.join else None,
                 timer_uri=str(row_typed.timer) if row_typed.timer else None,
-                resourcing_uri=str(row_typed.resourcing)
-                if row_typed.resourcing
-                else None,
-                cancellation_region=str(row_typed.cancellation)
-                if row_typed.cancellation
-                else None,
+                resourcing_uri=str(row_typed.resourcing) if row_typed.resourcing else None,
+                cancellation_region=str(row_typed.cancellation) if row_typed.cancellation else None,
             )
         )
 
@@ -537,9 +527,7 @@ def extract_flow_topology(graph: Graph) -> list[FlowDefinition]:
                 predicate=str(row_typed.predicate) if row_typed.predicate else None,
                 is_default=bool(row_typed.default) if row_typed.default else False,
                 priority=int(row_typed.priority) if row_typed.priority else None,
-                evaluation_order=int(row_typed.evaluation)
-                if row_typed.evaluation
-                else None,
+                evaluation_order=int(row_typed.evaluation) if row_typed.evaluation else None,
             )
         )
 
@@ -561,12 +549,13 @@ def validate_workflow(graph: Graph, workflow_uri: str) -> bool:
     bool
         True if all task split-join combinations are valid
     """
-    # Bind workflow URI to query
+    # Bind workflow URI to query with safe escaping
+    safe_workflow = sparql_uri(workflow_uri)
     query_with_binding = f"""
     PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
 
     ASK {{
-        <{workflow_uri}> yawl:hasTask ?task .
+        {safe_workflow} yawl:hasTask ?task .
         ?task yawl:hasSplit ?split ;
               yawl:hasJoin ?join .
 
@@ -605,9 +594,7 @@ def extract_execution_semantics(graph: Graph) -> list[ExecutionSemantics]:
                 timeout_policy=str(row_typed.timeout) if row_typed.timeout else None,
                 retry_policy=str(row_typed.retry) if row_typed.retry else None,
                 duration=str(row_typed.duration) if row_typed.duration else None,
-                max_instances=int(row_typed.maxInstances)
-                if row_typed.maxInstances
-                else None,
+                max_instances=int(row_typed.maxInstances) if row_typed.maxInstances else None,
                 threshold=int(row_typed.threshold) if row_typed.threshold else None,
             )
         )
@@ -615,9 +602,7 @@ def extract_execution_semantics(graph: Graph) -> list[ExecutionSemantics]:
     return semantics
 
 
-def extract_patterns_by_category(
-    graph: Graph, category: str
-) -> list[PatternDefinition]:
+def extract_patterns_by_category(graph: Graph, category: str) -> list[PatternDefinition]:
     """Extract patterns filtered by category.
 
     Parameters
@@ -655,9 +640,7 @@ def extract_patterns_by_category(
     return patterns
 
 
-def extract_workflow_patterns(
-    graph: Graph, workflow_uri: str
-) -> list[PatternDefinition]:
+def extract_workflow_patterns(graph: Graph, workflow_uri: str) -> list[PatternDefinition]:
     """Extract all patterns used in a specific workflow.
 
     Parameters
@@ -672,9 +655,7 @@ def extract_workflow_patterns(
     list[PatternDefinition]
         Patterns present in the workflow
     """
-    query_with_binding = WORKFLOW_PATTERNS_QUERY.replace(
-        "?workflow", sparql_uri(workflow_uri)
-    )
+    query_with_binding = WORKFLOW_PATTERNS_QUERY.replace("?workflow", sparql_uri(workflow_uri))
     results = graph.query(query_with_binding)
     patterns: list[PatternDefinition] = []
 
@@ -697,9 +678,7 @@ def extract_workflow_patterns(
     return patterns
 
 
-def validate_pattern_requirements(
-    graph: Graph, task_uri: str, pattern: PatternDefinition
-) -> bool:
+def validate_pattern_requirements(graph: Graph, task_uri: str, pattern: PatternDefinition) -> bool:
     """Validate that a task meets all requirements for a specific pattern.
 
     Parameters
@@ -720,6 +699,7 @@ def validate_pattern_requirements(
     safe_task = sparql_uri(task_uri)
 
     # Check split type requirement (compare literals, not URIs)
+    # Note: safe_task is already escaped via sparql_uri() at line 720
     if pattern.required_split:
         query = f"""
         PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>

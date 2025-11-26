@@ -89,12 +89,8 @@ class KGCIntegration:
 
         # 1️⃣ Initialize hook orchestrator
         try:
-            self.hook_orchestrator = HookOrchestrator(
-                graph=graph, hooks_file=hooks_file, continue_on_error=True
-            )
-            logger.info(
-                f"✅ Hook Orchestrator initialized with {len(self.hook_orchestrator.hooks)} hooks"
-            )
+            self.hook_orchestrator = HookOrchestrator(graph=graph, hooks_file=hooks_file, continue_on_error=True)
+            logger.info(f"✅ Hook Orchestrator initialized with {len(self.hook_orchestrator.hooks)} hooks")
         except Exception as e:
             logger.error(f"❌ Failed to initialize hook orchestrator: {e}")
             raise
@@ -141,9 +137,7 @@ class KGCIntegration:
 
         logger.info("✅ KGC Integration initialized successfully!")
 
-    def trigger_hook_event(
-        self, event_uri: str, event_data: dict[str, Any] | None = None
-    ) -> None:
+    def trigger_hook_event(self, event_uri: str, event_data: dict[str, Any] | None = None) -> None:
         """Trigger a hook event (implements HookRegistry protocol).
 
         This method is called by the workflow orchestrator when hooks should fire.
@@ -187,9 +181,7 @@ class KGCIntegration:
             raise
 
     def start_background_schedulers(
-        self,
-        hook_schedule: dict[str, str] | None = None,
-        workflow_schedule: ScheduleConfig | None = None,
+        self, hook_schedule: dict[str, str] | None = None, workflow_schedule: ScheduleConfig | None = None
     ) -> None:
         """Start background schedulers for hooks and workflows.
 

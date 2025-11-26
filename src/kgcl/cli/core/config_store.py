@@ -43,6 +43,4 @@ class CliConfigStore:
 
     def save(self, config: CliConfig) -> None:
         """Persist configuration to disk."""
-        self._config_file.write_text(
-            json.dumps(config.data, indent=2, sort_keys=True), encoding="utf-8"
-        )
+        self._config_file.write_text(json.dumps(config.data, indent=2, sort_keys=True), encoding="utf-8")

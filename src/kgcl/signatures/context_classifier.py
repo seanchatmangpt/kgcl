@@ -53,17 +53,11 @@ class ContextClassifierInput(BaseModel):
     """
 
     app_name: str = Field(..., description="Application bundle or display name")
-    domain_names: list[str] = Field(
-        default_factory=list, description="Visited domain names"
-    )
-    calendar_event: str = Field(
-        default="", description="Calendar event title if in meeting"
-    )
+    domain_names: list[str] = Field(default_factory=list, description="Visited domain names")
+    calendar_event: str = Field(default="", description="Calendar event title if in meeting")
     time_of_day: int = Field(..., ge=0, le=23, description="Hour of day (0-23)")
     window_title: str = Field(default="", description="Active window title")
-    duration_seconds: float = Field(
-        default=0, ge=0, description="Activity duration in seconds"
-    )
+    duration_seconds: float = Field(default=0, ge=0, description="Activity duration in seconds")
 
     model_config = {
         "json_schema_extra": {
@@ -91,19 +85,13 @@ class ContextClassifierOutput(BaseModel):
         suggested_tags: Suggested activity tags
     """
 
-    context_label: ContextLabel = Field(
-        ..., description="Primary context classification"
-    )
-    confidence: int = Field(
-        default=0, ge=0, le=100, description="Classification confidence (0-100)"
-    )
+    context_label: ContextLabel = Field(..., description="Primary context classification")
+    confidence: int = Field(default=0, ge=0, le=100, description="Classification confidence (0-100)")
     reasoning: str = Field(..., description="Classification reasoning")
     secondary_contexts: dict[str, int] = Field(
         default_factory=dict, description="Alternative contexts with confidence scores"
     )
-    suggested_tags: list[str] = Field(
-        default_factory=list, description="Suggested activity tags"
-    )
+    suggested_tags: list[str] = Field(default_factory=list, description="Suggested activity tags")
 
     model_config = {
         "json_schema_extra": {
@@ -130,9 +118,7 @@ if DSPY_AVAILABLE:
         # Input fields
         app_name: str = dspy.InputField(desc="Application name")
         domains: str = dspy.InputField(desc="Comma-separated domain names (if browser)")
-        calendar_event: str = dspy.InputField(
-            desc="Calendar event title (empty if none)"
-        )
+        calendar_event: str = dspy.InputField(desc="Calendar event title (empty if none)")
         time_of_day: int = dspy.InputField(desc="Hour of day (0-23)")
         window_title: str = dspy.InputField(desc="Active window title")
 
@@ -141,9 +127,7 @@ if DSPY_AVAILABLE:
             desc="Primary context: work_focus, communication, meetings, research, admin, learning, debugging, code_review, planning, break, or other"
         )
         confidence: int = dspy.OutputField(desc="Confidence score 0-100")
-        reasoning: str = dspy.OutputField(
-            desc="1-2 sentence explanation for classification"
-        )
+        reasoning: str = dspy.OutputField(desc="1-2 sentence explanation for classification")
         suggested_tags: str = dspy.OutputField(desc="Comma-separated activity tags")
 
 
@@ -161,18 +145,12 @@ class ContextClassifierModule:
         self.temperature = temperature
 
         if self.use_llm:
-            self.predictor = dspy.Predict(
-                ContextClassifierSignature
-            )  # Predict for classification
+            self.predictor = dspy.Predict(ContextClassifierSignature)  # Predict for classification
             logger.info("ContextClassifierModule initialized with DSPy")
         else:
-            logger.info(
-                "ContextClassifierModule initialized with fallback (rule-based)"
-            )
+            logger.info("ContextClassifierModule initialized with fallback (rule-based)")
 
-    def _fallback_classify(
-        self, input_data: ContextClassifierInput
-    ) -> ContextClassifierOutput:
+    def _fallback_classify(self, input_data: ContextClassifierInput) -> ContextClassifierOutput:
         """Classify context using rule-based logic (no LLM required).
 
         Args:
@@ -198,16 +176,7 @@ class ContextClassifierModule:
             )
 
         # Priority 2: IDE and code editors (work focus)
-        ide_apps = [
-            "vscode",
-            "intellij",
-            "pycharm",
-            "sublime",
-            "vim",
-            "emacs",
-            "xcode",
-            "code",
-        ]
+        ide_apps = ["vscode", "intellij", "pycharm", "sublime", "vim", "emacs", "xcode", "code"]
         if any(ide in app_lower for ide in ide_apps):
             return ContextClassifierOutput(
                 context_label="work_focus",
@@ -218,16 +187,7 @@ class ContextClassifierModule:
             )
 
         # Priority 3: Communication apps
-        comm_apps = [
-            "slack",
-            "teams",
-            "discord",
-            "mail",
-            "outlook",
-            "messages",
-            "zoom",
-            "meet",
-        ]
+        comm_apps = ["slack", "teams", "discord", "mail", "outlook", "messages", "zoom", "meet"]
         if any(comm in app_lower for comm in comm_apps):
             # Check if it's a call/meeting
             if "zoom" in app_lower or "meet" in app_lower or "call" in window_lower:
@@ -247,15 +207,8 @@ class ContextClassifierModule:
             )
 
         # Priority 4: Browser - classify by domains
-        if (
-            "safari" in app_lower
-            or "chrome" in app_lower
-            or "firefox" in app_lower
-            or "browser" in app_lower
-        ):
-            return self._classify_browser_activity(
-                input_data, domains_lower, window_lower
-            )
+        if "safari" in app_lower or "chrome" in app_lower or "firefox" in app_lower or "browser" in app_lower:
+            return self._classify_browser_activity(input_data, domains_lower, window_lower)
 
         # Priority 5: Terminal (work focus or debugging)
         if "terminal" in app_lower or "iterm" in app_lower or "console" in app_lower:
@@ -296,10 +249,7 @@ class ContextClassifierModule:
         )
 
     def _classify_browser_activity(
-        self,
-        input_data: ContextClassifierInput,
-        domains_lower: list[str],
-        window_lower: str,
+        self, input_data: ContextClassifierInput, domains_lower: list[str], window_lower: str
     ) -> ContextClassifierOutput:
         """Classify browser activity based on domains and window title.
 
@@ -370,9 +320,7 @@ class ContextClassifierModule:
             )
 
         # Code review domains
-        if any(
-            "github.com/pulls" in d or "gitlab.com/merge" in d for d in domains_lower
-        ):
+        if any("github.com/pulls" in d or "gitlab.com/merge" in d for d in domains_lower):
             return ContextClassifierOutput(
                 context_label="code_review",
                 confidence=85,
@@ -415,9 +363,7 @@ class ContextClassifierModule:
                 span.set_attribute("fallback_used", True)
                 return self._fallback_classify(input_data)
 
-    def _llm_classify(
-        self, input_data: ContextClassifierInput
-    ) -> ContextClassifierOutput:
+    def _llm_classify(self, input_data: ContextClassifierInput) -> ContextClassifierOutput:
         """Classify context using DSPy LLM.
 
         Args:
@@ -428,9 +374,7 @@ class ContextClassifierModule:
             ContextClassifierOutput with LLM classification
         """
         # Prepare inputs
-        domains_str = (
-            ", ".join(input_data.domain_names) if input_data.domain_names else "none"
-        )
+        domains_str = ", ".join(input_data.domain_names) if input_data.domain_names else "none"
         calendar_str = input_data.calendar_event or "none"
         window_str = input_data.window_title or "unknown"
 
@@ -463,9 +407,7 @@ class ContextClassifierModule:
             context_label = result.context_label  # type: ignore[assignment]  # Dynamic context label validation
 
         # Parse suggested tags
-        suggested_tags = [
-            t.strip() for t in result.suggested_tags.split(",") if t.strip()
-        ]
+        suggested_tags = [t.strip() for t in result.suggested_tags.split(",") if t.strip()]
 
         return ContextClassifierOutput(
             context_label=context_label,
@@ -475,9 +417,7 @@ class ContextClassifierModule:
             suggested_tags=suggested_tags[:5],
         )
 
-    async def classify_async(
-        self, input_data: ContextClassifierInput
-    ) -> ContextClassifierOutput:
+    async def classify_async(self, input_data: ContextClassifierInput) -> ContextClassifierOutput:
         """Async version of classify.
 
         Args:

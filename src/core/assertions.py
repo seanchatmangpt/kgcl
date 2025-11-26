@@ -6,7 +6,7 @@ Uses callable predicates for flexible, composable assertions.
 
 from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Any, Generic, TypeVar
+from typing import Any, TypeVar
 
 T = TypeVar("T")
 
@@ -24,13 +24,7 @@ class AssertionError(Exception):
         Actual value
     """
 
-    def __init__(
-        self,
-        message: str,
-        assertion_type: str = "generic",
-        expected: Any = None,
-        actual: Any = None,
-    ) -> None:
+    def __init__(self, message: str, assertion_type: str = "generic", expected: Any = None, actual: Any = None) -> None:
         """Initialize AssertionError.
 
         Parameters
@@ -129,14 +123,10 @@ def assert_in_range(value: float, min_val: float, max_val: float, msg: str) -> N
         AssertionError: If value is not in range
     """
     if not (min_val <= value <= max_val):
-        raise AssertionError(
-            f"{msg}: value {value!r} not in range [{min_val}, {max_val}]"
-        )
+        raise AssertionError(f"{msg}: value {value!r} not in range [{min_val}, {max_val}]")
 
 
-def assert_that(
-    value: T, predicate: Callable[[T], bool], msg: str | None = None
-) -> None:
+def assert_that(value: T, predicate: Callable[[T], bool], msg: str | None = None) -> None:
     """Assert that a value satisfies a predicate.
 
     Args:
@@ -153,9 +143,7 @@ def assert_that(
         >>> assert_that(-1, lambda v: v > 0)  # Raises AssertionError
     """
     if not predicate(value):
-        error_msg = (
-            msg or f"Assertion failed for value {value!r} with predicate {predicate}"
-        )
+        error_msg = msg or f"Assertion failed for value {value!r} with predicate {predicate}"
         raise AssertionError(error_msg)
 
 
@@ -166,35 +154,24 @@ class AssertionBuilder[T]:
     Allows chaining multiple assertions together for cleaner test code.
 
     Example:
-        >>> (
-        ...     AssertionBuilder(42)
-        ...     .assert_greater_than(0)
-        ...     .assert_less_than(100)
-        ...     .assert_that(lambda v: v % 2 == 0)
-        ... )
+        >>> (AssertionBuilder(42).assert_greater_than(0).assert_less_than(100).assert_that(lambda v: v % 2 == 0))
     """
 
     value: T
 
-    def assert_that(
-        self, predicate: Callable[[T], bool], msg: str | None = None
-    ) -> "AssertionBuilder[T]":
+    def assert_that(self, predicate: Callable[[T], bool], msg: str | None = None) -> "AssertionBuilder[T]":
         """Chain assertion using a predicate."""
         assert_that(self.value, predicate, msg)
         return self
 
-    def assert_equal(
-        self, expected: T, msg: str | None = None
-    ) -> "AssertionBuilder[T]":
+    def assert_equal(self, expected: T, msg: str | None = None) -> "AssertionBuilder[T]":
         """Chain equality assertion."""
         if self.value != expected:
             error_msg = msg or f"Expected {expected!r}, got {self.value!r}"
             raise AssertionError(error_msg)
         return self
 
-    def assert_not_equal(
-        self, unexpected: T, msg: str | None = None
-    ) -> "AssertionBuilder[T]":
+    def assert_not_equal(self, unexpected: T, msg: str | None = None) -> "AssertionBuilder[T]":
         """Chain inequality assertion."""
         if self.value == unexpected:
             error_msg = msg or f"Expected not equal to {unexpected!r}"

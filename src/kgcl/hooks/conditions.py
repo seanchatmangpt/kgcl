@@ -135,11 +135,7 @@ class Condition(ABC):
         now = datetime.now(UTC)
 
         # Check cache validity
-        if (
-            self.cache_ttl
-            and self._cache is not None
-            and self._cache_timestamp is not None
-        ):
+        if self.cache_ttl and self._cache is not None and self._cache_timestamp is not None:
             age = (now - self._cache_timestamp).total_seconds()
             if age < self.cache_ttl:
                 return self._cache
@@ -268,12 +264,7 @@ class SparqlAskCondition(Condition):
             cached_result = SparqlAskCondition._cache.get(query_string)
             if cached_result is not None:
                 return ConditionResult(
-                    triggered=cached_result,
-                    metadata={
-                        "query": query_string,
-                        "type": "sparql_ask",
-                        "cache_hit": True,
-                    },
+                    triggered=cached_result, metadata={"query": query_string, "type": "sparql_ask", "cache_hit": True}
                 )
 
         # Execute SPARQL ASK query against provided RDF data
@@ -289,8 +280,7 @@ class SparqlAskCondition(Condition):
             SparqlAskCondition._cache.set(query_string, triggered)
 
         return ConditionResult(
-            triggered=triggered,
-            metadata={"query": query_string, "type": "sparql_ask", "cache_hit": False},
+            triggered=triggered, metadata={"query": query_string, "type": "sparql_ask", "cache_hit": False}
         )
 
     def _interpolate_query(self, context: dict[str, Any]) -> str:
@@ -312,9 +302,7 @@ class SparqlAskCondition(Condition):
             query = query.replace(placeholder, str(value))
         return query
 
-    def _execute_ask_query(
-        self, query: str, rdf_data: list[tuple[str, str, str]]
-    ) -> bool:
+    def _execute_ask_query(self, query: str, rdf_data: list[tuple[str, str, str]]) -> bool:
         """Execute SPARQL ASK query against in-memory RDF triples.
 
         Parses the WHERE clause pattern and matches against triples.
@@ -334,9 +322,7 @@ class SparqlAskCondition(Condition):
         import re
 
         # Extract pattern from ASK query
-        where_match = re.search(
-            r"WHERE\s*\{([^}]+)\}", query, re.IGNORECASE | re.DOTALL
-        )
+        where_match = re.search(r"WHERE\s*\{([^}]+)\}", query, re.IGNORECASE | re.DOTALL)
         if not where_match:
             return False
 
@@ -463,12 +449,7 @@ class SparqlSelectCondition(Condition):
 
         return ConditionResult(
             triggered=result_count > 0,
-            metadata={
-                "query": query_string,
-                "result_count": result_count,
-                "type": "sparql_select",
-                "cache_hit": False,
-            },
+            metadata={"query": query_string, "result_count": result_count, "type": "sparql_select", "cache_hit": False},
         )
 
     @classmethod
@@ -529,13 +510,10 @@ class ShaclCondition(Condition):
         conforms, violations = self._validate_shacl(data_graph, self.shapes)
 
         return ConditionResult(
-            triggered=conforms,
-            metadata={"conforms": conforms, "violations": violations, "type": "shacl"},
+            triggered=conforms, metadata={"conforms": conforms, "violations": violations, "type": "shacl"}
         )
 
-    def _validate_shacl(
-        self, data_graph: str, shapes_graph: str
-    ) -> tuple[bool, list[dict[str, str]]]:
+    def _validate_shacl(self, data_graph: str, shapes_graph: str) -> tuple[bool, list[dict[str, str]]]:
         """Validate RDF data against SHACL shapes.
 
         Performs basic SHACL validation by checking required properties.
@@ -561,11 +539,7 @@ class ShaclCondition(Condition):
         for prop in required_props:
             if prop not in data_graph:
                 violations.append(
-                    {
-                        "message": f"Missing required property: {prop}",
-                        "property": prop,
-                        "severity": "Violation",
-                    }
+                    {"message": f"Missing required property: {prop}", "property": prop, "severity": "Violation"}
                 )
 
         conforms = len(violations) == 0
@@ -637,13 +611,7 @@ class DeltaCondition(Condition):
             triggered = delta < 0
 
         return ConditionResult(
-            triggered=triggered,
-            metadata={
-                "delta": delta,
-                "previous": previous,
-                "current": current,
-                "type": "delta",
-            },
+            triggered=triggered, metadata={"delta": delta, "previous": previous, "current": current, "type": "delta"}
         )
 
 
@@ -665,9 +633,7 @@ class ThresholdCondition(Condition):
     Example: count > 5, temperature < 100
     """
 
-    def __init__(
-        self, variable: str, operator: ThresholdOperator, value: float, **kwargs: Any
-    ) -> None:
+    def __init__(self, variable: str, operator: ThresholdOperator, value: float, **kwargs: Any) -> None:
         """
         Initialize threshold condition.
 
@@ -690,10 +656,7 @@ class ThresholdCondition(Condition):
         actual_value = context.get(self.variable)
 
         if actual_value is None:
-            return ConditionResult(
-                triggered=False,
-                metadata={"error": f"Variable '{self.variable}' not found"},
-            )
+            return ConditionResult(triggered=False, metadata={"error": f"Variable '{self.variable}' not found"})
 
         triggered = False
         if self.operator == ThresholdOperator.GREATER_THAN:
@@ -843,9 +806,7 @@ class CompositeCondition(Condition):
     Supports AND, OR, NOT logical operators.
     """
 
-    def __init__(
-        self, operator: CompositeOperator, conditions: list[Condition], **kwargs: Any
-    ) -> None:
+    def __init__(self, operator: CompositeOperator, conditions: list[Condition], **kwargs: Any) -> None:
         """
         Initialize composite condition.
 
@@ -863,9 +824,7 @@ class CompositeCondition(Condition):
     async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
         """Evaluate composite condition."""
         # Evaluate all child conditions
-        results = await asyncio.gather(
-            *[cond.evaluate(context) for cond in self.conditions]
-        )
+        results = await asyncio.gather(*[cond.evaluate(context) for cond in self.conditions])
 
         triggered = False
         if self.operator == CompositeOperator.AND:
@@ -879,9 +838,7 @@ class CompositeCondition(Condition):
             triggered=triggered,
             metadata={
                 "operator": self.operator.value,
-                "child_results": [
-                    {"triggered": r.triggered, "metadata": r.metadata} for r in results
-                ],
+                "child_results": [{"triggered": r.triggered, "metadata": r.metadata} for r in results],
                 "type": "composite",
             },
         )

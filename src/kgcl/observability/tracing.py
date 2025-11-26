@@ -9,19 +9,11 @@ from contextlib import contextmanager
 from typing import Any
 
 from opentelemetry import trace
-from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import (
-    OTLPSpanExporter as OTLPGrpcExporter,
-)
-from opentelemetry.exporter.otlp.proto.http.trace_exporter import (
-    OTLPSpanExporter as OTLPHttpExporter,
-)
+from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter as OTLPGrpcExporter
+from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter as OTLPHttpExporter
 from opentelemetry.sdk.resources import Resource
 from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import (
-    BatchSpanProcessor,
-    ConsoleSpanExporter,
-    SpanExporter,
-)
+from opentelemetry.sdk.trace.export import BatchSpanProcessor, ConsoleSpanExporter, SpanExporter
 from opentelemetry.sdk.trace.sampling import ParentBasedTraceIdRatio, TraceIdRatioBased
 from opentelemetry.trace import Status, StatusCode, Tracer
 from opentelemetry.util._once import Once
@@ -34,9 +26,7 @@ _tracer_provider: TracerProvider | None = None
 _configured = False
 
 
-def configure_tracing(
-    config: ObservabilityConfig | None = None,
-) -> TracerProvider | None:
+def configure_tracing(config: ObservabilityConfig | None = None) -> TracerProvider | None:
     """Configure OpenTelemetry tracing with the specified configuration.
 
     Parameters
@@ -137,39 +127,26 @@ def _create_exporters(config: ObservabilityConfig) -> list[SpanExporter]:
         if not config.otlp_endpoint:
             msg = "OTLP endpoint required for OTLP HTTP exporter"
             raise ValueError(msg)
-        exporters.append(
-            OTLPHttpExporter(
-                endpoint=f"{config.otlp_endpoint}/v1/traces",
-                insecure=config.otlp_insecure,
-            )
-        )
+        exporters.append(OTLPHttpExporter(endpoint=f"{config.otlp_endpoint}/v1/traces", insecure=config.otlp_insecure))
     elif config.trace_exporter == ExporterType.OTLP_GRPC:
         if not config.otlp_endpoint:
             msg = "OTLP endpoint required for OTLP gRPC exporter"
             raise ValueError(msg)
-        exporters.append(
-            OTLPGrpcExporter(
-                endpoint=config.otlp_endpoint, insecure=config.otlp_insecure
-            )
-        )
+        exporters.append(OTLPGrpcExporter(endpoint=config.otlp_endpoint, insecure=config.otlp_insecure))
     elif config.trace_exporter == ExporterType.JAEGER:
         try:
             from opentelemetry.exporter.jaeger.thrift import JaegerExporter
 
             exporters.append(JaegerExporter())
         except ImportError:
-            logger.warning(
-                "Jaeger exporter not available, install opentelemetry-exporter-jaeger"
-            )
+            logger.warning("Jaeger exporter not available, install opentelemetry-exporter-jaeger")
     elif config.trace_exporter == ExporterType.ZIPKIN:
         try:
             from opentelemetry.exporter.zipkin.json import ZipkinExporter
 
             exporters.append(ZipkinExporter())
         except ImportError:
-            logger.warning(
-                "Zipkin exporter not available, install opentelemetry-exporter-zipkin"
-            )
+            logger.warning("Zipkin exporter not available, install opentelemetry-exporter-zipkin")
 
     # Add console exporter if requested
     if config.console_export and config.trace_exporter != ExporterType.CONSOLE:
@@ -200,10 +177,7 @@ def get_tracer(name: str) -> Tracer:
 
 @contextmanager
 def traced_operation(
-    tracer: Tracer,
-    operation_name: str,
-    attributes: dict[str, Any] | None = None,
-    record_exception: bool = True,
+    tracer: Tracer, operation_name: str, attributes: dict[str, Any] | None = None, record_exception: bool = True
 ):
     """Context manager for tracing operations with error handling.
 
@@ -282,6 +256,4 @@ def reset_tracer_provider() -> None:
         trace._TRACER_PROVIDER = None  # type: ignore[attr-defined,assignment]
         trace._TRACER_PROVIDER_SET_ONCE = Once()  # type: ignore[attr-defined,assignment]
     except AttributeError:
-        logger.warning(
-            "Tracer provider reset is not supported in this OpenTelemetry version"
-        )
+        logger.warning("Tracer provider reset is not supported in this OpenTelemetry version")

@@ -17,12 +17,7 @@ from pathlib import Path
 import yaml
 
 from .agent import PyObjCAgent, create_default_agent
-from .aggregators import (
-    BrowserHistoryAggregator,
-    CalendarAggregator,
-    FrontmostAppAggregator,
-    aggregate_jsonl_file,
-)
+from .aggregators import BrowserHistoryAggregator, CalendarAggregator, FrontmostAppAggregator, aggregate_jsonl_file
 from .crawler import FrameworkName, PyObjCFrameworkCrawler
 from .plugins import get_registry, load_builtin_plugins
 
@@ -32,9 +27,7 @@ logger = logging.getLogger(__name__)
 def setup_logging(verbose: bool = False):
     """Setup logging configuration."""
     level = logging.DEBUG if verbose else logging.INFO
-    logging.basicConfig(
-        level=level, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-    )
+    logging.basicConfig(level=level, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
 
 def cmd_run(args):
@@ -47,9 +40,7 @@ def cmd_run(args):
         config = load_config(args.config)
 
     # Create agent
-    agent = (
-        PyObjCAgent(config) if config else create_default_agent(data_dir=args.data_dir)
-    )
+    agent = PyObjCAgent(config) if config else create_default_agent(data_dir=args.data_dir)
 
     # Run agent
     try:
@@ -74,13 +65,8 @@ def cmd_discover(args):
             capabilities = crawler.crawl_framework(framework)
 
             # Export
-            output_path = (
-                args.output
-                or f"/Users/sac/dev/kgcl/{args.framework}_capabilities.jsonld"
-            )
-            crawler.export_capabilities(
-                {framework.value: capabilities}, output_path, format="jsonld"
-            )
+            output_path = args.output or f"/Users/sac/dev/kgcl/{args.framework}_capabilities.jsonld"
+            crawler.export_capabilities({framework.value: capabilities}, output_path, format="jsonld")
 
             print(f"\nDiscovered capabilities for {args.framework}:")
             print(f"  Classes: {len(capabilities.classes)}")
@@ -101,10 +87,7 @@ def cmd_discover(args):
 
         # Print summary
         total_classes = sum(len(cap.classes) for cap in all_capabilities.values())
-        total_methods = sum(
-            sum(len(cls.methods) for cls in cap.classes)
-            for cap in all_capabilities.values()
-        )
+        total_methods = sum(sum(len(cls.methods) for cls in cap.classes) for cap in all_capabilities.values())
 
         print("\n=== Capability Discovery Summary ===")
         print(f"Frameworks: {len(all_capabilities)}")
@@ -126,9 +109,7 @@ def cmd_aggregate(args):
         aggregator = CalendarAggregator(window_size_hours=args.window_hours)
     else:
         logger.error("Cannot determine aggregator type from filename")
-        print(
-            "Specify aggregator type in filename: frontmost_app, browser, or calendar"
-        )
+        print("Specify aggregator type in filename: frontmost_app, browser, or calendar")
         sys.exit(1)
 
     # Aggregate
@@ -183,24 +164,14 @@ def cmd_config(args):
             "otlp_endpoint": "http://localhost:4317",
             "environment": "development",
             "collectors": {
-                "frontmost_app": {
-                    "enabled": True,
-                    "interval": 1.0,
-                    "batch_size": 50,
-                    "batch_timeout_seconds": 60.0,
-                },
+                "frontmost_app": {"enabled": True, "interval": 1.0, "batch_size": 50, "batch_timeout_seconds": 60.0},
                 "browser_history": {
                     "enabled": True,
                     "interval": 300.0,
                     "batch_size": 10,
                     "batch_timeout_seconds": 600.0,
                 },
-                "calendar": {
-                    "enabled": True,
-                    "interval": 300.0,
-                    "batch_size": 10,
-                    "batch_timeout_seconds": 600.0,
-                },
+                "calendar": {"enabled": True, "interval": 300.0, "batch_size": 10, "batch_timeout_seconds": 600.0},
             },
         }
 
@@ -276,64 +247,38 @@ Examples:
         """,
     )
 
-    parser.add_argument(
-        "-v", "--verbose", action="store_true", help="Enable verbose logging"
-    )
+    parser.add_argument("-v", "--verbose", action="store_true", help="Enable verbose logging")
 
     subparsers = parser.add_subparsers(dest="command", help="Commands")
 
     # Run command
     run_parser = subparsers.add_parser("run", help="Run the agent daemon")
     run_parser.add_argument("-c", "--config", help="Path to configuration file")
-    run_parser.add_argument(
-        "-d",
-        "--data-dir",
-        default="/Users/sac/dev/kgcl/data",
-        help="Data directory for output",
-    )
+    run_parser.add_argument("-d", "--data-dir", default="/Users/sac/dev/kgcl/data", help="Data directory for output")
 
     # Discover command
     discover_parser = subparsers.add_parser("discover", help="Discover capabilities")
-    discover_parser.add_argument(
-        "-f", "--framework", help="Specific framework to discover"
-    )
+    discover_parser.add_argument("-f", "--framework", help="Specific framework to discover")
     discover_parser.add_argument("-o", "--output", help="Output file path")
-    discover_parser.add_argument(
-        "--unsafe", action="store_true", help="Include potentially unsafe methods"
-    )
+    discover_parser.add_argument("--unsafe", action="store_true", help="Include potentially unsafe methods")
 
     # Aggregate command
-    aggregate_parser = subparsers.add_parser(
-        "aggregate", help="Aggregate collected data"
-    )
+    aggregate_parser = subparsers.add_parser("aggregate", help="Aggregate collected data")
     aggregate_parser.add_argument("input", help="Input JSONL file")
     aggregate_parser.add_argument("-o", "--output", help="Output JSON file")
     aggregate_parser.add_argument(
-        "-w",
-        "--window-hours",
-        type=float,
-        default=1.0,
-        help="Aggregation window size in hours",
+        "-w", "--window-hours", type=float, default=1.0, help="Aggregation window size in hours"
     )
 
     # Status command
     status_parser = subparsers.add_parser("status", help="Check agent status")
-    status_parser.add_argument(
-        "-d",
-        "--data-dir",
-        default="/Users/sac/dev/kgcl/data",
-        help="Data directory to check",
-    )
+    status_parser.add_argument("-d", "--data-dir", default="/Users/sac/dev/kgcl/data", help="Data directory to check")
 
     # Config command
     config_parser = subparsers.add_parser("config", help="Manage configuration")
-    config_parser.add_argument(
-        "-g", "--generate", action="store_true", help="Generate default configuration"
-    )
+    config_parser.add_argument("-g", "--generate", action="store_true", help="Generate default configuration")
     config_parser.add_argument("-v", "--validate", help="Validate configuration file")
-    config_parser.add_argument(
-        "-o", "--output", help="Output file for generated config"
-    )
+    config_parser.add_argument("-o", "--output", help="Output file for generated config")
 
     # Parse arguments
     args = parser.parse_args()

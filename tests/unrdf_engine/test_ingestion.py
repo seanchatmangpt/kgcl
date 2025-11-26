@@ -6,13 +6,7 @@ from rdflib import Literal, URIRef
 from rdflib.namespace import RDF
 
 from kgcl.unrdf_engine.engine import UNRDF, UnrdfEngine
-from kgcl.unrdf_engine.hooks import (
-    HookContext,
-    HookExecutor,
-    HookPhase,
-    HookRegistry,
-    KnowledgeHook,
-)
+from kgcl.unrdf_engine.hooks import HookContext, HookExecutor, HookPhase, HookRegistry, KnowledgeHook
 from kgcl.unrdf_engine.ingestion import IngestionPipeline, IngestionResult
 from kgcl.unrdf_engine.validation import ShaclValidator
 
@@ -26,9 +20,7 @@ class TestIngestionResult:
 
     def test_creation(self) -> None:
         """Test creating ingestion result."""
-        result = IngestionResult(
-            success=True, triples_added=EXPECTED_TRIPLES_ADDED, transaction_id="txn-1"
-        )
+        result = IngestionResult(success=True, triples_added=EXPECTED_TRIPLES_ADDED, transaction_id="txn-1")
 
         assert result.success
         assert result.triples_added == EXPECTED_TRIPLES_ADDED
@@ -36,12 +28,7 @@ class TestIngestionResult:
 
     def test_to_dict(self) -> None:
         """Test converting to dictionary."""
-        result = IngestionResult(
-            success=False,
-            triples_added=0,
-            transaction_id="txn-1",
-            error="Validation failed",
-        )
+        result = IngestionResult(success=False, triples_added=0, transaction_id="txn-1", error="Validation failed")
 
         result_dict = result.to_dict()
 
@@ -92,11 +79,7 @@ class TestIngestionPipeline:
         engine = UnrdfEngine()
         pipeline = IngestionPipeline(engine=engine, validate_on_ingest=False)
 
-        data = {
-            "type": "Person",
-            "name": "Alice",
-            "address": {"street": "123 Main St", "city": "Springfield"},
-        }
+        data = {"type": "Person", "name": "Alice", "address": {"street": "123 Main St", "city": "Springfield"}}
 
         result = pipeline.ingest_json(data=data, agent="test_agent")
 
@@ -125,9 +108,7 @@ class TestIngestionPipeline:
 
         data = {"id": "item1", "type": "Item"}
 
-        result = pipeline.ingest_json(
-            data=data, agent="test_agent", base_uri="http://example.org/"
-        )
+        result = pipeline.ingest_json(data=data, agent="test_agent", base_uri="http://example.org/")
 
         assert result.success
 
@@ -149,9 +130,7 @@ class TestIngestionPipeline:
         """
         validator.load_shapes_from_string(shapes_ttl)
 
-        pipeline = IngestionPipeline(
-            engine=engine, validator=validator, validate_on_ingest=True
-        )
+        pipeline = IngestionPipeline(engine=engine, validator=validator, validate_on_ingest=True)
 
         data = {"type": "Person", "name": "Alice"}
 
@@ -179,9 +158,7 @@ class TestIngestionPipeline:
         """
         validator.load_shapes_from_string(shapes_ttl)
 
-        pipeline = IngestionPipeline(
-            engine=engine, validator=validator, validate_on_ingest=True
-        )
+        pipeline = IngestionPipeline(engine=engine, validator=validator, validate_on_ingest=True)
 
         # Data missing required name
         data = {"type": "Person"}
@@ -209,9 +186,7 @@ class TestIngestionPipeline:
         registry.register(hook)
 
         hook_executor = HookExecutor(registry)
-        pipeline = IngestionPipeline(
-            engine=engine, hook_executor=hook_executor, validate_on_ingest=False
-        )
+        pipeline = IngestionPipeline(engine=engine, hook_executor=hook_executor, validate_on_ingest=False)
 
         data = {"type": "Person", "name": "Alice"}
 
@@ -254,9 +229,7 @@ class TestIngestionPipeline:
 
         data = {"type": "Person", "name": "Alice"}
 
-        result = pipeline.ingest_json(
-            data=data, agent="test_agent", reason="Initial data load"
-        )
+        result = pipeline.ingest_json(data=data, agent="test_agent", reason="Initial data load")
 
         assert result.success
 
@@ -270,13 +243,7 @@ class TestIngestionPipeline:
         engine = UnrdfEngine()
         pipeline = IngestionPipeline(engine=engine, validate_on_ingest=False)
 
-        data = {
-            "type": "TestObject",
-            "string_val": "text",
-            "int_val": 42,
-            "float_val": 3.14,
-            "bool_val": True,
-        }
+        data = {"type": "TestObject", "string_val": "text", "int_val": 42, "float_val": 3.14, "bool_val": True}
 
         result = pipeline.ingest_json(data=data, agent="test_agent")
 
@@ -339,9 +306,7 @@ class TestIngestionPipeline:
         """
         validator.load_shapes_from_string(shapes_ttl)
 
-        pipeline = IngestionPipeline(
-            engine=engine, validator=validator, validate_on_ingest=True
-        )
+        pipeline = IngestionPipeline(engine=engine, validator=validator, validate_on_ingest=True)
 
         # Data with only 1 name (needs 2)
         data = {"type": "Person", "name": "Alice"}

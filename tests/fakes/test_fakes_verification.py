@@ -26,9 +26,7 @@ class SimpleValidationHook(KnowledgeHook):
 
     def __init__(self) -> None:
         """Initialize validation hook."""
-        super().__init__(
-            name="simple_validator", phases=[HookPhase.PRE_TRANSACTION], priority=10
-        )
+        super().__init__(name="simple_validator", phases=[HookPhase.PRE_TRANSACTION], priority=10)
         self.executed_count = 0
 
     def execute(self, context: HookContext) -> None:
@@ -198,9 +196,7 @@ class TestFakeRdfStore:
         subject = URIRef("http://example.org/person1")
         predicate = URIRef("http://xmlns.com/foaf/0.1/name")
         obj = Literal("Alice")
-        provenance = ProvenanceRecord(
-            agent="test_user", timestamp=datetime.now(UTC), reason="test data"
-        )
+        provenance = ProvenanceRecord(agent="test_user", timestamp=datetime.now(UTC), reason="test data")
 
         # Act
         store.add_triple(subject, predicate, obj, provenance=provenance)
@@ -237,9 +233,7 @@ class TestFakeHookRegistry:
 
         class LowPriorityHook(KnowledgeHook):
             def __init__(self) -> None:
-                super().__init__(
-                    name="low_priority", phases=[HookPhase.PRE_TRANSACTION], priority=1
-                )
+                super().__init__(name="low_priority", phases=[HookPhase.PRE_TRANSACTION], priority=1)
 
             def execute(self, context: HookContext) -> None:
                 """Execute low priority hook - no-op for testing."""
@@ -247,11 +241,7 @@ class TestFakeHookRegistry:
 
         class HighPriorityHook(KnowledgeHook):
             def __init__(self) -> None:
-                super().__init__(
-                    name="high_priority",
-                    phases=[HookPhase.PRE_TRANSACTION],
-                    priority=100,
-                )
+                super().__init__(name="high_priority", phases=[HookPhase.PRE_TRANSACTION], priority=100)
 
             def execute(self, context: HookContext) -> None:
                 """Execute high priority hook - no-op for testing."""
@@ -296,12 +286,7 @@ class TestFakeHookExecutor:
         hook = SimpleValidationHook()
         registry.register(hook)
 
-        context = HookContext(
-            phase=HookPhase.PRE_TRANSACTION,
-            graph=Graph(),
-            delta=Graph(),
-            transaction_id="txn-001",
-        )
+        context = HookContext(phase=HookPhase.PRE_TRANSACTION, graph=Graph(), delta=Graph(), transaction_id="txn-001")
 
         # Act
         results = executor.execute_phase(HookPhase.PRE_TRANSACTION, context)
@@ -321,12 +306,7 @@ class TestFakeHookExecutor:
         hook = SimpleValidationHook()
         registry.register(hook)
 
-        context = HookContext(
-            phase=HookPhase.PRE_TRANSACTION,
-            graph=Graph(),
-            delta=Graph(),
-            transaction_id="txn-001",
-        )
+        context = HookContext(phase=HookPhase.PRE_TRANSACTION, graph=Graph(), delta=Graph(), transaction_id="txn-001")
 
         # Act
         executor.execute_phase(HookPhase.PRE_TRANSACTION, context)
@@ -346,18 +326,8 @@ class TestFakeHookExecutor:
         hook = SimpleValidationHook()
         registry.register(hook)
 
-        context1 = HookContext(
-            phase=HookPhase.PRE_TRANSACTION,
-            graph=Graph(),
-            delta=Graph(),
-            transaction_id="txn-001",
-        )
-        context2 = HookContext(
-            phase=HookPhase.PRE_TRANSACTION,
-            graph=Graph(),
-            delta=Graph(),
-            transaction_id="txn-002",
-        )
+        context1 = HookContext(phase=HookPhase.PRE_TRANSACTION, graph=Graph(), delta=Graph(), transaction_id="txn-001")
+        context2 = HookContext(phase=HookPhase.PRE_TRANSACTION, graph=Graph(), delta=Graph(), transaction_id="txn-002")
 
         # Act
         executor.execute_phase(HookPhase.PRE_TRANSACTION, context1)
@@ -379,11 +349,7 @@ class TestFakeTransactionStore:
         store = FakeTransactionStore()
         txn = Transaction(
             transaction_id="txn-001",
-            provenance=ProvenanceRecord(
-                agent="test_user",
-                timestamp=datetime.now(UTC),
-                reason="test transaction",
-            ),
+            provenance=ProvenanceRecord(agent="test_user", timestamp=datetime.now(UTC), reason="test transaction"),
         )
 
         # Act
@@ -489,10 +455,7 @@ class TestChicagoStyleIntegration:
 
         # Act - real execution
         context = HookContext(
-            phase=HookPhase.PRE_TRANSACTION,
-            graph=rdf_store.graph,
-            delta=Graph(),
-            transaction_id="txn-001",
+            phase=HookPhase.PRE_TRANSACTION, graph=rdf_store.graph, delta=Graph(), transaction_id="txn-001"
         )
         results = executor.execute_phase(HookPhase.PRE_TRANSACTION, context)
 
@@ -519,17 +482,10 @@ class TestChicagoStyleIntegration:
         """
         # Arrange
         pipeline = FakeIngestionPipeline()
-        data = {
-            "type": "Event",
-            "name": "user_login",
-            "userId": "123",
-            "timestamp": "2024-01-01T00:00:00Z",
-        }
+        data = {"type": "Event", "name": "user_login", "userId": "123", "timestamp": "2024-01-01T00:00:00Z"}
 
         # Act
-        result = pipeline.ingest_json(
-            data=data, agent="ingestion_service", reason="test data"
-        )
+        result = pipeline.ingest_json(data=data, agent="ingestion_service", reason="test data")
 
         # Assert - verify observable state
         assert result["success"] is True

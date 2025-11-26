@@ -11,7 +11,7 @@ Each step triggers appropriate hooks and tracks execution state.
 """
 
 import uuid
-from datetime import UTC, datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, Protocol
 
@@ -126,11 +126,7 @@ class StandardWorkLoop:
             Exception: If critical step fails (captured in state)
         """
         workflow_id = workflow_id or str(uuid.uuid4())
-        state = WorkflowState(
-            workflow_id=workflow_id,
-            started_at=datetime.now(UTC),
-            current_step=WorkflowStep.DISCOVER,
-        )
+        state = WorkflowState(workflow_id=workflow_id, started_at=datetime.now(UTC), current_step=WorkflowStep.DISCOVER)
 
         # Execute each step in sequence
         try:
@@ -171,11 +167,7 @@ class StandardWorkLoop:
             # Trigger IngestHook (will trigger AgendaGenerator)
             self.hooks.trigger(
                 "ingest_complete",
-                {
-                    "workflow_id": state.workflow_id,
-                    "data": ingested_data,
-                    "timestamp": datetime.now(UTC).isoformat(),
-                },
+                {"workflow_id": state.workflow_id, "data": ingested_data, "timestamp": datetime.now(UTC).isoformat()},
             )
 
             # Success
@@ -183,19 +175,11 @@ class StandardWorkLoop:
                 step=step,
                 success=True,
                 started_at=started_at,
-                data={
-                    "ingested": ingested_data,
-                    "record_count": ingested_data.get("count", 0),
-                },
+                data={"ingested": ingested_data, "record_count": ingested_data.get("count", 0)},
             )
 
         except Exception as e:
-            state.complete_step(
-                step=step,
-                success=False,
-                started_at=started_at,
-                errors=[f"Ingest failed: {e!s}"],
-            )
+            state.complete_step(step=step, success=False, started_at=started_at, errors=[f"Ingest failed: {e!s}"])
 
     def _execute_align(self, state: WorkflowState) -> None:
         """Step 2: Align - Check ontology drift, update if needed."""
@@ -214,11 +198,7 @@ class StandardWorkLoop:
             if has_drift:
                 self.hooks.trigger(
                     "ontology_changed",
-                    {
-                        "workflow_id": state.workflow_id,
-                        "changes": changes,
-                        "timestamp": datetime.now(UTC).isoformat(),
-                    },
+                    {"workflow_id": state.workflow_id, "changes": changes, "timestamp": datetime.now(UTC).isoformat()},
                 )
 
             # Success
@@ -236,10 +216,7 @@ class StandardWorkLoop:
 
         except Exception as e:
             state.complete_step(
-                step=step,
-                success=False,
-                started_at=started_at,
-                errors=[f"Ontology alignment failed: {e!s}"],
+                step=step, success=False, started_at=started_at, errors=[f"Ontology alignment failed: {e!s}"]
             )
 
     def _execute_regenerate(self, state: WorkflowState) -> None:
@@ -269,20 +246,11 @@ class StandardWorkLoop:
                 step=step,
                 success=True,
                 started_at=started_at,
-                data={
-                    "artifacts": artifacts,
-                    "generators": generator_names,
-                    "artifact_count": artifact_count,
-                },
+                data={"artifacts": artifacts, "generators": generator_names, "artifact_count": artifact_count},
             )
 
         except Exception as e:
-            state.complete_step(
-                step=step,
-                success=False,
-                started_at=started_at,
-                errors=[f"Regeneration failed: {e!s}"],
-            )
+            state.complete_step(step=step, success=False, started_at=started_at, errors=[f"Regeneration failed: {e!s}"])
 
     def _execute_review(self, state: WorkflowState) -> None:
         """Step 4: Review - Validate artifacts against SHACL."""
@@ -324,18 +292,11 @@ class StandardWorkLoop:
                     "violation_count": len(violations),
                     "validated_count": validation_result.get("artifact_count", 0),
                 },
-                warnings=[f"Found {len(violations)} validation violations"]
-                if has_violations
-                else [],
+                warnings=[f"Found {len(violations)} validation violations"] if has_violations else [],
             )
 
         except Exception as e:
-            state.complete_step(
-                step=step,
-                success=False,
-                started_at=started_at,
-                errors=[f"Validation failed: {e!s}"],
-            )
+            state.complete_step(step=step, success=False, started_at=started_at, errors=[f"Validation failed: {e!s}"])
 
     def _execute_remove(self, state: WorkflowState) -> None:
         """Step 5: Remove - Detect waste, identify cleanup opportunities."""
@@ -370,17 +331,12 @@ class StandardWorkLoop:
                     "cleanup_opportunities": cleanup_opportunities,
                     "waste_count": len(waste_items),
                 },
-                warnings=[f"Found {len(waste_items)} waste items"]
-                if waste_items
-                else [],
+                warnings=[f"Found {len(waste_items)} waste items"] if waste_items else [],
             )
 
         except Exception as e:
             state.complete_step(
-                step=step,
-                success=False,
-                started_at=started_at,
-                errors=[f"Waste detection failed: {e!s}"],
+                step=step, success=False, started_at=started_at, errors=[f"Waste detection failed: {e!s}"]
             )
 
     def _save_state(self, state: WorkflowState) -> None:

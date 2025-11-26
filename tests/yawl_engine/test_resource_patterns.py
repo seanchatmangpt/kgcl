@@ -117,11 +117,7 @@ def test_rbac_offer_to_role(graph_with_users: Graph) -> None:
     assert result.metadata["role"] == "role:Manager"
 
     # Verify RDF updates
-    assert (
-        task,
-        YawlNamespace.YAWL.offeredTo,
-        Literal("role:Manager"),
-    ) in graph_with_users
+    assert (task, YawlNamespace.YAWL.offeredTo, Literal("role:Manager")) in graph_with_users
     assert (task, YawlNamespace.YAWL.status, Literal("offered")) in graph_with_users
 
 
@@ -141,11 +137,7 @@ def test_rbac_claim_task(graph_with_users: Graph) -> None:
     assert result.allocated_to == "urn:org:user:alice"
 
     # Verify task is now allocated
-    assert (
-        task,
-        YawlNamespace.YAWL.allocatedTo,
-        Literal("urn:org:user:alice"),
-    ) in graph_with_users
+    assert (task, YawlNamespace.YAWL.allocatedTo, Literal("urn:org:user:alice")) in graph_with_users
     assert (task, YawlNamespace.YAWL.status, Literal("allocated")) in graph_with_users
 
 
@@ -197,9 +189,7 @@ def test_deferred_allocation_from_context(empty_graph: Graph) -> None:
 def test_deferred_allocation_complex_expression(empty_graph: Graph) -> None:
     """Test deferred allocation with conditional expression."""
     deferred = DeferredAllocation(
-        allocation_expression=(
-            "data['manager'] if data['amount'] > 1000 else data['supervisor']"
-        )
+        allocation_expression=("data['manager'] if data['amount'] > 1000 else data['supervisor']")
     )
     task = TASK.Approve
 
@@ -288,8 +278,7 @@ def test_authorization_multiple_capabilities(graph_with_users: Graph) -> None:
 def test_sod_four_eyes_different_users(empty_graph: Graph) -> None:
     """Test 4-eyes principle allows different users."""
     sod = SeparationOfDuties(
-        constraint_type=ConstraintType.FOUR_EYES.value,
-        related_tasks=["urn:task:Submit", "urn:task:Approve"],
+        constraint_type=ConstraintType.FOUR_EYES.value, related_tasks=["urn:task:Submit", "urn:task:Approve"]
     )
     task = TASK.Approve
 
@@ -302,8 +291,7 @@ def test_sod_four_eyes_different_users(empty_graph: Graph) -> None:
 def test_sod_four_eyes_same_user_fails(empty_graph: Graph) -> None:
     """Test 4-eyes principle rejects same user."""
     sod = SeparationOfDuties(
-        constraint_type=ConstraintType.FOUR_EYES.value,
-        related_tasks=["urn:task:Submit", "urn:task:Approve"],
+        constraint_type=ConstraintType.FOUR_EYES.value, related_tasks=["urn:task:Submit", "urn:task:Approve"]
     )
     task = TASK.Approve
 
@@ -316,8 +304,7 @@ def test_sod_four_eyes_same_user_fails(empty_graph: Graph) -> None:
 def test_sod_must_do_same_requires_same_user(empty_graph: Graph) -> None:
     """Test must-do-same constraint requires same user."""
     sod = SeparationOfDuties(
-        constraint_type=ConstraintType.MUST_DO_SAME.value,
-        related_tasks=["urn:task:Start", "urn:task:Complete"],
+        constraint_type=ConstraintType.MUST_DO_SAME.value, related_tasks=["urn:task:Start", "urn:task:Complete"]
     )
     task = TASK.Complete
 
@@ -333,8 +320,7 @@ def test_sod_must_do_same_requires_same_user(empty_graph: Graph) -> None:
 def test_sod_must_do_different_requires_different_users(empty_graph: Graph) -> None:
     """Test must-do-different constraint requires different users."""
     sod = SeparationOfDuties(
-        constraint_type=ConstraintType.MUST_DO_DIFFERENT.value,
-        related_tasks=["urn:task:Step1", "urn:task:Step2"],
+        constraint_type=ConstraintType.MUST_DO_DIFFERENT.value, related_tasks=["urn:task:Step1", "urn:task:Step2"]
     )
     task = TASK.Step2
 
@@ -350,13 +336,10 @@ def test_sod_must_do_different_requires_different_users(empty_graph: Graph) -> N
 def test_sod_validate_allocation_with_history(empty_graph: Graph) -> None:
     """Test SoD validation with task execution history."""
     # Record previous task execution
-    empty_graph.add(
-        (TASK.Submit, YawlNamespace.YAWL.completedBy, Literal("user:charlie"))
-    )
+    empty_graph.add((TASK.Submit, YawlNamespace.YAWL.completedBy, Literal("user:charlie")))
 
     sod = SeparationOfDuties(
-        constraint_type=ConstraintType.FOUR_EYES.value,
-        related_tasks=["urn:task:Submit", "urn:task:Approve"],
+        constraint_type=ConstraintType.FOUR_EYES.value, related_tasks=["urn:task:Submit", "urn:task:Approve"]
     )
 
     # Alice can approve (different from Charlie)
@@ -372,8 +355,7 @@ def test_sod_validate_allocation_with_history(empty_graph: Graph) -> None:
 def test_sod_validate_allocation_empty_history(empty_graph: Graph) -> None:
     """Test SoD validation with no execution history."""
     sod = SeparationOfDuties(
-        constraint_type=ConstraintType.FOUR_EYES.value,
-        related_tasks=["urn:task:Submit", "urn:task:Approve"],
+        constraint_type=ConstraintType.FOUR_EYES.value, related_tasks=["urn:task:Submit", "urn:task:Approve"]
     )
 
     # No history - should succeed
@@ -406,19 +388,11 @@ def test_full_rbac_workflow(graph_with_users: Graph) -> None:
 def test_authorization_with_sod(graph_with_users: Graph) -> None:
     """Test authorization combined with separation of duties."""
     # Setup: Record submission
-    graph_with_users.add(
-        (
-            TASK.SubmitExpense,
-            YawlNamespace.YAWL.completedBy,
-            Literal("urn:org:user:charlie"),
-        )
-    )
+    graph_with_users.add((TASK.SubmitExpense, YawlNamespace.YAWL.completedBy, Literal("urn:org:user:charlie")))
 
     # Check authorization
     authz = Authorization(required_capabilities=["approve_requests"])
-    authz_result = authz.check_authorization(
-        graph_with_users, TASK.ApproveExpense, "urn:org:user:alice"
-    )
+    authz_result = authz.check_authorization(graph_with_users, TASK.ApproveExpense, "urn:org:user:alice")
     assert authz_result.success
 
     # Check SoD
@@ -426,9 +400,7 @@ def test_authorization_with_sod(graph_with_users: Graph) -> None:
         constraint_type=ConstraintType.FOUR_EYES.value,
         related_tasks=["urn:task:SubmitExpense", "urn:task:ApproveExpense"],
     )
-    sod_result = sod.validate_allocation(
-        graph_with_users, TASK.ApproveExpense, "urn:org:user:alice"
-    )
+    sod_result = sod.validate_allocation(graph_with_users, TASK.ApproveExpense, "urn:org:user:alice")
     assert sod_result.success
 
     # Both checks pass - Alice is authorized and satisfies SoD
@@ -458,11 +430,7 @@ def test_deferred_then_direct_allocation(empty_graph: Graph) -> None:
 def test_allocation_result_immutability() -> None:
     """Test AllocationResult is immutable."""
     result = AllocationResult(
-        success=True,
-        task=TASK.T1,
-        allocated_to="user:alice",
-        status=WorkItemStatus.ALLOCATED,
-        message="Success",
+        success=True, task=TASK.T1, allocated_to="user:alice", status=WorkItemStatus.ALLOCATED, message="Success"
     )
 
     with pytest.raises(AttributeError):

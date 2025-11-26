@@ -12,11 +12,4 @@ from kgcl.ingestion.config import IngestionConfig
 from kgcl.ingestion.models import AppEvent, BrowserVisit, CalendarBlock, EventBatch
 from kgcl.ingestion.service import IngestionService
 
-__all__ = [
-    "AppEvent",
-    "BrowserVisit",
-    "CalendarBlock",
-    "EventBatch",
-    "IngestionConfig",
-    "IngestionService",
-]
+__all__ = ["AppEvent", "BrowserVisit", "CalendarBlock", "EventBatch", "IngestionConfig", "IngestionService"]

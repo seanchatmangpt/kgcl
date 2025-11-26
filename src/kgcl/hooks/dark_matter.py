@@ -74,21 +74,11 @@ class DarkMatterOptimizer:
 
     def _register_rules(self) -> None:
         """Register optimization rules."""
-        self.optimization_rules[OptimizationRule.FILTER_PUSHDOWN.value] = (
-            self._apply_filter_pushdown
-        )
-        self.optimization_rules[OptimizationRule.JOIN_REORDERING.value] = (
-            self._apply_join_reordering
-        )
-        self.optimization_rules[OptimizationRule.PREDICATE_ELIMINATION.value] = (
-            self._apply_predicate_elimination
-        )
-        self.optimization_rules[OptimizationRule.CONSTANT_FOLDING.value] = (
-            self._apply_constant_folding
-        )
-        self.optimization_rules[OptimizationRule.PROJECTION_PUSHDOWN.value] = (
-            self._apply_projection_pushdown
-        )
+        self.optimization_rules[OptimizationRule.FILTER_PUSHDOWN.value] = self._apply_filter_pushdown
+        self.optimization_rules[OptimizationRule.JOIN_REORDERING.value] = self._apply_join_reordering
+        self.optimization_rules[OptimizationRule.PREDICATE_ELIMINATION.value] = self._apply_predicate_elimination
+        self.optimization_rules[OptimizationRule.CONSTANT_FOLDING.value] = self._apply_constant_folding
+        self.optimization_rules[OptimizationRule.PROJECTION_PUSHDOWN.value] = self._apply_projection_pushdown
 
     def optimize_query_plan(self, plan: dict[str, Any]) -> OptimizedPlan:
         """Apply optimization rules to query plan.
@@ -117,11 +107,7 @@ class DarkMatterOptimizer:
                 rules_applied.append(rule_name)
 
         optimized_cost = self._calculate_plan_cost(optimized_steps)
-        improvement = (
-            ((original_cost - optimized_cost) / original_cost * 100)
-            if original_cost > 0
-            else 0.0
-        )
+        improvement = ((original_cost - optimized_cost) / original_cost * 100) if original_cost > 0 else 0.0
 
         # Find parallelizable steps
         parallelizable = self._find_parallelizable_steps(optimized_steps)
@@ -156,9 +142,7 @@ class DarkMatterOptimizer:
         filters as early as possible.
         """
         # Find filter steps and their positions
-        filter_indices = [
-            i for i, s in enumerate(steps) if s.get("operation") == "filter"
-        ]
+        filter_indices = [i for i, s in enumerate(steps) if s.get("operation") == "filter"]
 
         if not filter_indices:
             return {"applied": False, "steps": steps}
@@ -208,9 +192,7 @@ class DarkMatterOptimizer:
 
         if modified:
             # Rebuild steps list with reordered joins
-            non_joins = [
-                (i, s) for i, s in enumerate(new_steps) if s.get("operation") != "join"
-            ]
+            non_joins = [(i, s) for i, s in enumerate(new_steps) if s.get("operation") != "join"]
             result_steps = []
             join_idx = 0
 
@@ -225,9 +207,7 @@ class DarkMatterOptimizer:
 
         return {"applied": False, "steps": steps}
 
-    def _apply_predicate_elimination(
-        self, steps: list[dict[str, Any]]
-    ) -> dict[str, Any]:
+    def _apply_predicate_elimination(self, steps: list[dict[str, Any]]) -> dict[str, Any]:
         """Eliminate redundant predicates."""
         # Remove duplicate filters
         seen_predicates: set[str] = set()
@@ -295,17 +275,7 @@ class DarkMatterOptimizer:
                 tree = ast.parse(expr, mode="eval")
                 # Check if all nodes are literals or operators
                 for node in ast.walk(tree):
-                    if isinstance(
-                        node,
-                        (
-                            ast.Constant,
-                            ast.Expr,
-                            ast.Expression,
-                            ast.BinOp,
-                            ast.UnaryOp,
-                            ast.Compare,
-                        ),
-                    ):
+                    if isinstance(node, (ast.Constant, ast.Expr, ast.Expression, ast.BinOp, ast.UnaryOp, ast.Compare)):
                         continue
                     if type(node) in SAFE_OPERATORS:
                         continue
@@ -405,9 +375,7 @@ class DarkMatterOptimizer:
     def _apply_projection_pushdown(self, steps: list[dict[str, Any]]) -> dict[str, Any]:
         """Push projections (column selection) closer to source."""
         # Find projection steps
-        projection_indices = [
-            i for i, s in enumerate(steps) if s.get("operation") == "project"
-        ]
+        projection_indices = [i for i, s in enumerate(steps) if s.get("operation") == "project"]
 
         if not projection_indices:
             return {"applied": False, "steps": steps}
@@ -447,10 +415,7 @@ class DarkMatterOptimizer:
 
             for j in parallelizable:
                 other_deps = set(steps[j].get("dependencies", []))
-                if (
-                    step.get("step_id") in other_deps
-                    or steps[j].get("step_id") in dependencies
-                ):
+                if step.get("step_id") in other_deps or steps[j].get("step_id") in dependencies:
                     can_parallelize = False
                     break
 
@@ -581,9 +546,7 @@ class DarkMatterOptimizer:
         total_cost = sum(s.get("cost", 1.0) for s in steps)
 
         # Calculate critical path cost
-        critical_cost = sum(
-            s.get("cost", 1.0) for s in steps if s.get("step_id") in critical_path
-        )
+        critical_cost = sum(s.get("cost", 1.0) for s in steps if s.get("step_id") in critical_path)
 
         # Amdahl's law: speedup limited by critical path
         parallel_cost = critical_cost + (total_cost - critical_cost) / parallel_degree

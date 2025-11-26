@@ -12,14 +12,7 @@ from typing import Any
 import pytest
 
 from kgcl.hooks.conditions import Condition, ConditionResult
-from kgcl.hooks.core import (
-    Hook,
-    HookExecutor,
-    HookReceipt,
-    HookRegistry,
-    HookState,
-    HookValidationError,
-)
+from kgcl.hooks.core import Hook, HookExecutor, HookReceipt, HookRegistry, HookState, HookValidationError
 
 
 class AlwaysTrueCondition(Condition):
@@ -64,10 +57,7 @@ class TestHookCreation:
     def test_hook_can_be_defined_with_name_description_condition_and_handler(self):
         """Hook can be defined with name, description, condition, and handler."""
         hook = Hook(
-            name="test_hook",
-            description="A test hook",
-            condition=AlwaysTrueCondition(),
-            handler=simple_handler,
+            name="test_hook", description="A test hook", condition=AlwaysTrueCondition(), handler=simple_handler
         )
 
         assert hook.name == "test_hook"
@@ -79,27 +69,15 @@ class TestHookCreation:
         """Hook validates structure on creation (must have name, condition, handler)."""
         # Missing name
         with pytest.raises(HookValidationError, match="name"):
-            Hook(
-                name="",
-                description="Test",
-                condition=AlwaysTrueCondition(),
-                handler=simple_handler,
-            )
+            Hook(name="", description="Test", condition=AlwaysTrueCondition(), handler=simple_handler)
 
         # Missing condition
         with pytest.raises(HookValidationError, match="condition"):
-            Hook(
-                name="test", description="Test", condition=None, handler=simple_handler
-            )
+            Hook(name="test", description="Test", condition=None, handler=simple_handler)
 
         # Missing handler
         with pytest.raises(HookValidationError, match="handler"):
-            Hook(
-                name="test",
-                description="Test",
-                condition=AlwaysTrueCondition(),
-                handler=None,
-            )
+            Hook(name="test", description="Test", condition=AlwaysTrueCondition(), handler=None)
 
 
 class TestHookLifecycle:
@@ -107,12 +85,7 @@ class TestHookLifecycle:
 
     def test_hook_starts_in_pending_state(self):
         """Hook lifecycle: starts in PENDING state."""
-        hook = Hook(
-            name="test_hook",
-            description="Test",
-            condition=AlwaysTrueCondition(),
-            handler=simple_handler,
-        )
+        hook = Hook(name="test_hook", description="Test", condition=AlwaysTrueCondition(), handler=simple_handler)
 
         assert hook.state == HookState.PENDING
 
@@ -132,24 +105,14 @@ class TestHookMetadata:
     def test_hook_tracks_created_at_timestamp(self):
         """Hook tracks metadata: created_at timestamp."""
         before = datetime.now(UTC)
-        hook = Hook(
-            name="test_hook",
-            description="Test",
-            condition=AlwaysTrueCondition(),
-            handler=simple_handler,
-        )
+        hook = Hook(name="test_hook", description="Test", condition=AlwaysTrueCondition(), handler=simple_handler)
         after = datetime.now(UTC)
 
         assert before <= hook.created_at <= after
 
     def test_hook_tracks_executed_at_after_execution(self):
         """Hook tracks metadata: executed_at after execution."""
-        hook = Hook(
-            name="test_hook",
-            description="Test",
-            condition=AlwaysTrueCondition(),
-            handler=simple_handler,
-        )
+        hook = Hook(name="test_hook", description="Test", condition=AlwaysTrueCondition(), handler=simple_handler)
 
         assert hook.executed_at is None
         # Execution will be tested in lifecycle tests
@@ -181,11 +144,7 @@ class TestHookPriority:
         )
 
         low_priority = Hook(
-            name="low",
-            description="Low priority",
-            condition=AlwaysTrueCondition(),
-            handler=simple_handler,
-            priority=10,
+            name="low", description="Low priority", condition=AlwaysTrueCondition(), handler=simple_handler, priority=10
         )
 
         assert high_priority.priority == 90
@@ -194,34 +153,17 @@ class TestHookPriority:
 
     def test_hook_priority_defaults_to_50(self):
         """Hook priority defaults to 50 if not specified."""
-        hook = Hook(
-            name="test",
-            description="Test",
-            condition=AlwaysTrueCondition(),
-            handler=simple_handler,
-        )
+        hook = Hook(name="test", description="Test", condition=AlwaysTrueCondition(), handler=simple_handler)
 
         assert hook.priority == 50
 
     def test_hook_priority_validates_range(self):
         """Hook priority must be in range 0-100."""
         with pytest.raises(HookValidationError, match="priority"):
-            Hook(
-                name="test",
-                description="Test",
-                condition=AlwaysTrueCondition(),
-                handler=simple_handler,
-                priority=-1,
-            )
+            Hook(name="test", description="Test", condition=AlwaysTrueCondition(), handler=simple_handler, priority=-1)
 
         with pytest.raises(HookValidationError, match="priority"):
-            Hook(
-                name="test",
-                description="Test",
-                condition=AlwaysTrueCondition(),
-                handler=simple_handler,
-                priority=101,
-            )
+            Hook(name="test", description="Test", condition=AlwaysTrueCondition(), handler=simple_handler, priority=101)
 
 
 class TestHookEnableDisable:
@@ -229,12 +171,7 @@ class TestHookEnableDisable:
 
     def test_hook_can_be_disabled_without_deletion(self):
         """Hook can be enabled/disabled without deletion."""
-        hook = Hook(
-            name="test",
-            description="Test",
-            condition=AlwaysTrueCondition(),
-            handler=simple_handler,
-        )
+        hook = Hook(name="test", description="Test", condition=AlwaysTrueCondition(), handler=simple_handler)
 
         assert hook.enabled is True  # Default enabled
 
@@ -289,15 +226,9 @@ class TestHookRegistry:
         """Hook registry returns hooks sorted by priority."""
         registry = HookRegistry()
 
-        registry.register(
-            Hook("low", "Low", AlwaysTrueCondition(), simple_handler, priority=10)
-        )
-        registry.register(
-            Hook("high", "High", AlwaysTrueCondition(), simple_handler, priority=90)
-        )
-        registry.register(
-            Hook("mid", "Mid", AlwaysTrueCondition(), simple_handler, priority=50)
-        )
+        registry.register(Hook("low", "Low", AlwaysTrueCondition(), simple_handler, priority=10))
+        registry.register(Hook("high", "High", AlwaysTrueCondition(), simple_handler, priority=90))
+        registry.register(Hook("mid", "Mid", AlwaysTrueCondition(), simple_handler, priority=50))
 
         hooks = registry.get_all_sorted()
         priorities = [h.priority for h in hooks]
@@ -311,12 +242,7 @@ class TestHookExecution:
     @pytest.mark.asyncio
     async def test_hook_execution_produces_receipt(self):
         """Hook execution produces receipt with timestamp, result, error."""
-        hook = Hook(
-            name="test",
-            description="Test",
-            condition=AlwaysTrueCondition(),
-            handler=simple_handler,
-        )
+        hook = Hook(name="test", description="Test", condition=AlwaysTrueCondition(), handler=simple_handler)
 
         executor = HookExecutor()
         receipt = await executor.execute(hook, context={})
@@ -332,10 +258,7 @@ class TestHookExecution:
     async def test_hook_execution_captures_errors(self):
         """Hook execution receipt includes error information."""
         hook = Hook(
-            name="failing",
-            description="Failing hook",
-            condition=AlwaysTrueCondition(),
-            handler=failing_handler,
+            name="failing", description="Failing hook", condition=AlwaysTrueCondition(), handler=failing_handler
         )
 
         executor = HookExecutor()

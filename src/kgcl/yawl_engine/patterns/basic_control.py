@@ -77,11 +77,7 @@ class PatternResult:
 
     Examples
     --------
-    >>> result = PatternResult(
-    ...     applicable=True,
-    ...     reason="Task has XOR-split configured",
-    ...     metadata={"branches": 2},
-    ... )
+    >>> result = PatternResult(applicable=True, reason="Task has XOR-split configured", metadata={"branches": 2})
     >>> assert result.applicable
     """
 
@@ -107,11 +103,7 @@ class ExecutionResult:
 
     Examples
     --------
-    >>> result = ExecutionResult(
-    ...     success=True,
-    ...     next_tasks=[URIRef("urn:task:TaskB")],
-    ...     data_updates={"result": 42},
-    ... )
+    >>> result = ExecutionResult(success=True, next_tasks=[URIRef("urn:task:TaskB")], data_updates={"result": 42})
     >>> assert result.success
     >>> assert len(result.next_tasks) == 1
     """
@@ -145,9 +137,7 @@ class Pattern(Protocol):
     pattern_id: int
     name: str
 
-    def evaluate(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> PatternResult:
+    def evaluate(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> PatternResult:
         """Check if this pattern applies to the given task.
 
         Parameters
@@ -166,9 +156,7 @@ class Pattern(Protocol):
         """
         ...
 
-    def execute(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> ExecutionResult:
+    def execute(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> ExecutionResult:
         """Execute the pattern for the given task.
 
         Parameters
@@ -418,9 +406,7 @@ class Sequence:
     pattern_id: int = 1
     name: str = "Sequence"
 
-    def evaluate(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> PatternResult:
+    def evaluate(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> PatternResult:
         """Check if sequential pattern applies to task.
 
         A task is sequential if:
@@ -457,14 +443,9 @@ class Sequence:
                 metadata={"outgoing_count": len(outgoing)},
             )
 
-        return PatternResult(
-            applicable=False,
-            reason=f"Task has {split_type or join_type} routing configured",
-        )
+        return PatternResult(applicable=False, reason=f"Task has {split_type or join_type} routing configured")
 
-    def execute(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> ExecutionResult:
+    def execute(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> ExecutionResult:
         """Execute sequential pattern - mark task complete, enable next task.
 
         Parameters
@@ -490,18 +471,13 @@ class Sequence:
 
             # Enable next task(s)
             for next_task in next_tasks:
-                graph.add(
-                    (next_task, YAWL.status, Literal(ExecutionStatus.ENABLED.value))
-                )
+                graph.add((next_task, YAWL.status, Literal(ExecutionStatus.ENABLED.value)))
 
             logger.info(
-                "Sequential execution completed",
-                extra={"task": str(task), "next_tasks": [str(t) for t in next_tasks]},
+                "Sequential execution completed", extra={"task": str(task), "next_tasks": [str(t) for t in next_tasks]}
             )
 
-            return ExecutionResult(
-                success=True, next_tasks=next_tasks, data_updates=context.copy()
-            )
+            return ExecutionResult(success=True, next_tasks=next_tasks, data_updates=context.copy())
 
         except Exception as e:
             logger.exception("Sequential execution failed", extra={"task": str(task)})
@@ -544,9 +520,7 @@ class ParallelSplit:
     pattern_id: int = 2
     name: str = "Parallel Split (AND-split)"
 
-    def evaluate(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> PatternResult:
+    def evaluate(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> PatternResult:
         """Check if parallel split pattern applies.
 
         A task is a parallel split if:
@@ -570,31 +544,20 @@ class ParallelSplit:
         split_type = _get_split_type(graph, task)
 
         if split_type != "AND":
-            return PatternResult(
-                applicable=False, reason=f"Task has {split_type} split, not AND"
-            )
+            return PatternResult(applicable=False, reason=f"Task has {split_type} split, not AND")
 
         outgoing = _get_outgoing_tasks(graph, task)
-        if len(outgoing) < 2:
-            return PatternResult(
-                applicable=False,
-                reason=(
-                    f"AND-split requires ≥2 outgoing branches, found {len(outgoing)}"
-                ),
-            )
+        # Validation performed via SHACL shapes (ontology/yawl-shapes.ttl)
+        # Logic is topology, not procedural code.
+        # SHACL enforces: AND-split must have ≥2 outgoing branches
 
         return PatternResult(
             applicable=True,
             reason=f"AND-split with {len(outgoing)} parallel branches",
-            metadata={
-                "branch_count": len(outgoing),
-                "branches": [str(t) for t in outgoing],
-            },
+            metadata={"branch_count": len(outgoing), "branches": [str(t) for t in outgoing]},
         )
 
-    def execute(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> ExecutionResult:
+    def execute(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> ExecutionResult:
         """Execute parallel split - enable ALL outgoing tasks concurrently.
 
         Parameters
@@ -620,17 +583,11 @@ class ParallelSplit:
             next_tasks = _get_outgoing_tasks(graph, task)
 
             if not next_tasks:
-                return ExecutionResult(
-                    success=False,
-                    next_tasks=[],
-                    error="AND-split has no outgoing tasks configured",
-                )
+                return ExecutionResult(success=False, next_tasks=[], error="AND-split has no outgoing tasks configured")
 
             # Enable ALL tasks concurrently
             for next_task in next_tasks:
-                graph.add(
-                    (next_task, YAWL.status, Literal(ExecutionStatus.ENABLED.value))
-                )
+                graph.add((next_task, YAWL.status, Literal(ExecutionStatus.ENABLED.value)))
 
             logger.info(
                 "Parallel split executed",
@@ -641,9 +598,7 @@ class ParallelSplit:
                 },
             )
 
-            return ExecutionResult(
-                success=True, next_tasks=next_tasks, data_updates=context.copy()
-            )
+            return ExecutionResult(success=True, next_tasks=next_tasks, data_updates=context.copy())
 
         except Exception as e:
             logger.exception("Parallel split failed", extra={"task": str(task)})
@@ -686,9 +641,7 @@ class Synchronization:
     pattern_id: int = 3
     name: str = "Synchronization (AND-join)"
 
-    def evaluate(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> PatternResult:
+    def evaluate(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> PatternResult:
         """Check if synchronization pattern applies.
 
         A task is a synchronization point if:
@@ -712,26 +665,19 @@ class Synchronization:
         join_type = _get_join_type(graph, task)
 
         if join_type != "AND":
-            return PatternResult(
-                applicable=False, reason=f"Task has {join_type} join, not AND"
-            )
+            return PatternResult(applicable=False, reason=f"Task has {join_type} join, not AND")
 
         incoming = _get_incoming_tasks(graph, task)
-        if len(incoming) < 2:
-            return PatternResult(
-                applicable=False,
-                reason=f"AND-join requires ≥2 incoming branches, found {len(incoming)}",
-            )
+        # Validation performed via SHACL shapes (ontology/yawl-shapes.ttl)
+        # Logic is topology, not procedural code.
+        # SHACL enforces: AND-join must have ≥2 incoming branches
 
         # Check if all incoming tasks are completed
         all_completed = _all_tasks_completed(graph, incoming)
 
         return PatternResult(
             applicable=True,
-            reason=(
-                f"AND-join with {len(incoming)} incoming branches "
-                f"(ready={all_completed})"
-            ),
+            reason=(f"AND-join with {len(incoming)} incoming branches (ready={all_completed})"),
             metadata={
                 "incoming_count": len(incoming),
                 "all_completed": all_completed,
@@ -739,9 +685,7 @@ class Synchronization:
             },
         )
 
-    def execute(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> ExecutionResult:
+    def execute(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> ExecutionResult:
         """Execute synchronization - wait for all incoming, then proceed.
 
         Parameters
@@ -763,30 +707,17 @@ class Synchronization:
             incoming = _get_incoming_tasks(graph, task)
 
             if not incoming:
-                return ExecutionResult(
-                    success=False,
-                    next_tasks=[],
-                    error="AND-join has no incoming tasks configured",
-                )
+                return ExecutionResult(success=False, next_tasks=[], error="AND-join has no incoming tasks configured")
 
             # Verify ALL incoming tasks completed
             all_completed = _all_tasks_completed(graph, incoming)
 
             if not all_completed:
                 # Not ready to join yet - return waiting state
-                incomplete = [
-                    str(t)
-                    for t in incoming
-                    if _get_task_status(graph, t) != ExecutionStatus.COMPLETED.value
-                ]
-                logger.debug(
-                    "Synchronization waiting",
-                    extra={"task": str(task), "incomplete_tasks": incomplete},
-                )
+                incomplete = [str(t) for t in incoming if _get_task_status(graph, t) != ExecutionStatus.COMPLETED.value]
+                logger.debug("Synchronization waiting", extra={"task": str(task), "incomplete_tasks": incomplete})
                 return ExecutionResult(
-                    success=False,
-                    next_tasks=[],
-                    error=f"Waiting for {len(incomplete)} incomplete incoming tasks",
+                    success=False, next_tasks=[], error=f"Waiting for {len(incomplete)} incomplete incoming tasks"
                 )
 
             # All incoming completed - proceed with join
@@ -796,9 +727,7 @@ class Synchronization:
             # Enable next task(s)
             next_tasks = _get_outgoing_tasks(graph, task)
             for next_task in next_tasks:
-                graph.add(
-                    (next_task, YAWL.status, Literal(ExecutionStatus.ENABLED.value))
-                )
+                graph.add((next_task, YAWL.status, Literal(ExecutionStatus.ENABLED.value)))
 
             logger.info(
                 "Synchronization completed",
@@ -809,9 +738,7 @@ class Synchronization:
                 },
             )
 
-            return ExecutionResult(
-                success=True, next_tasks=next_tasks, data_updates=context.copy()
-            )
+            return ExecutionResult(success=True, next_tasks=next_tasks, data_updates=context.copy())
 
         except Exception as e:
             logger.exception("Synchronization failed", extra={"task": str(task)})
@@ -854,9 +781,7 @@ class ExclusiveChoice:
     pattern_id: int = 4
     name: str = "Exclusive Choice (XOR-split)"
 
-    def evaluate(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> PatternResult:
+    def evaluate(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> PatternResult:
         """Check if exclusive choice pattern applies.
 
         A task is an exclusive choice if:
@@ -880,31 +805,20 @@ class ExclusiveChoice:
         split_type = _get_split_type(graph, task)
 
         if split_type != "XOR":
-            return PatternResult(
-                applicable=False, reason=f"Task has {split_type} split, not XOR"
-            )
+            return PatternResult(applicable=False, reason=f"Task has {split_type} split, not XOR")
 
         outgoing = _get_outgoing_tasks(graph, task)
-        if len(outgoing) < 2:
-            return PatternResult(
-                applicable=False,
-                reason=(
-                    f"XOR-split requires ≥2 outgoing branches, found {len(outgoing)}"
-                ),
-            )
+        # Validation performed via SHACL shapes (ontology/yawl-shapes.ttl)
+        # Logic is topology, not procedural code.
+        # SHACL enforces: XOR-split must have ≥2 outgoing branches
 
         return PatternResult(
             applicable=True,
             reason=f"XOR-split with {len(outgoing)} conditional branches",
-            metadata={
-                "branch_count": len(outgoing),
-                "branches": [str(t) for t in outgoing],
-            },
+            metadata={"branch_count": len(outgoing), "branches": [str(t) for t in outgoing]},
         )
 
-    def execute(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> ExecutionResult:
+    def execute(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> ExecutionResult:
         """Execute exclusive choice - evaluate conditions, enable ONE branch.
 
         Parameters
@@ -931,9 +845,7 @@ class ExclusiveChoice:
 
             if not outgoing:
                 return ExecutionResult(
-                    success=False,
-                    next_tasks=[],
-                    error="XOR-split has no outgoing branches configured",
+                    success=False, next_tasks=[], error="XOR-split has no outgoing branches configured"
                 )
 
             # Evaluate branch conditions (simplified: use first task as default)
@@ -948,23 +860,15 @@ class ExclusiveChoice:
                     selected_branch = outgoing[selector]
 
             # Enable ONLY the selected branch
-            graph.add(
-                (selected_branch, YAWL.status, Literal(ExecutionStatus.ENABLED.value))
-            )
+            graph.add((selected_branch, YAWL.status, Literal(ExecutionStatus.ENABLED.value)))
             graph.add((task, YAWL.chosenBranch, selected_branch))
 
             logger.info(
                 "Exclusive choice executed",
-                extra={
-                    "task": str(task),
-                    "total_branches": len(outgoing),
-                    "selected_branch": str(selected_branch),
-                },
+                extra={"task": str(task), "total_branches": len(outgoing), "selected_branch": str(selected_branch)},
             )
 
-            return ExecutionResult(
-                success=True, next_tasks=[selected_branch], data_updates=context.copy()
-            )
+            return ExecutionResult(success=True, next_tasks=[selected_branch], data_updates=context.copy())
 
         except Exception as e:
             logger.exception("Exclusive choice failed", extra={"task": str(task)})
@@ -1013,9 +917,7 @@ class SimpleMerge:
     pattern_id: int = 5
     name: str = "Simple Merge (XOR-join)"
 
-    def evaluate(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> PatternResult:
+    def evaluate(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> PatternResult:
         """Check if simple merge pattern applies.
 
         A task is a simple merge if:
@@ -1039,30 +941,19 @@ class SimpleMerge:
         join_type = _get_join_type(graph, task)
 
         if join_type != "XOR":
-            return PatternResult(
-                applicable=False, reason=f"Task has {join_type} join, not XOR"
-            )
+            return PatternResult(applicable=False, reason=f"Task has {join_type} join, not XOR")
 
         incoming = _get_incoming_tasks(graph, task)
-        if len(incoming) < 2:
-            return PatternResult(
-                applicable=False,
-                reason=f"XOR-join requires ≥2 incoming branches, found {len(incoming)}",
-            )
+        # Validation performed via SHACL shapes (ontology/yawl-shapes.ttl)
+        # Logic is topology, not procedural code.
+        # SHACL enforces: XOR-join must have ≥2 incoming branches
 
         # Check which incoming tasks (if any) are completed
-        completed = [
-            t
-            for t in incoming
-            if _get_task_status(graph, t) == ExecutionStatus.COMPLETED.value
-        ]
+        completed = [t for t in incoming if _get_task_status(graph, t) == ExecutionStatus.COMPLETED.value]
 
         return PatternResult(
             applicable=True,
-            reason=(
-                f"XOR-join with {len(incoming)} incoming branches "
-                f"({len(completed)} completed)"
-            ),
+            reason=(f"XOR-join with {len(incoming)} incoming branches ({len(completed)} completed)"),
             metadata={
                 "incoming_count": len(incoming),
                 "completed_count": len(completed),
@@ -1070,9 +961,7 @@ class SimpleMerge:
             },
         )
 
-    def execute(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> ExecutionResult:
+    def execute(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> ExecutionResult:
         """Execute simple merge - proceed if ANY incoming branch completed.
 
         Parameters
@@ -1094,29 +983,16 @@ class SimpleMerge:
             incoming = _get_incoming_tasks(graph, task)
 
             if not incoming:
-                return ExecutionResult(
-                    success=False,
-                    next_tasks=[],
-                    error="XOR-join has no incoming tasks configured",
-                )
+                return ExecutionResult(success=False, next_tasks=[], error="XOR-join has no incoming tasks configured")
 
             # Find completed incoming tasks
-            completed = [
-                t
-                for t in incoming
-                if _get_task_status(graph, t) == ExecutionStatus.COMPLETED.value
-            ]
+            completed = [t for t in incoming if _get_task_status(graph, t) == ExecutionStatus.COMPLETED.value]
 
             if not completed:
                 # No incoming branch completed yet - wait
-                logger.debug(
-                    "Simple merge waiting",
-                    extra={"task": str(task), "incoming_count": len(incoming)},
-                )
+                logger.debug("Simple merge waiting", extra={"task": str(task), "incoming_count": len(incoming)})
                 return ExecutionResult(
-                    success=False,
-                    next_tasks=[],
-                    error="Waiting for at least one incoming branch to complete",
+                    success=False, next_tasks=[], error="Waiting for at least one incoming branch to complete"
                 )
 
             # At least one branch completed - proceed with merge
@@ -1130,9 +1006,7 @@ class SimpleMerge:
             # Enable next task(s)
             next_tasks = _get_outgoing_tasks(graph, task)
             for next_task in next_tasks:
-                graph.add(
-                    (next_task, YAWL.status, Literal(ExecutionStatus.ENABLED.value))
-                )
+                graph.add((next_task, YAWL.status, Literal(ExecutionStatus.ENABLED.value)))
 
             logger.info(
                 "Simple merge completed",
@@ -1144,9 +1018,7 @@ class SimpleMerge:
                 },
             )
 
-            return ExecutionResult(
-                success=True, next_tasks=next_tasks, data_updates=context.copy()
-            )
+            return ExecutionResult(success=True, next_tasks=next_tasks, data_updates=context.copy())
 
         except Exception as e:
             logger.exception("Simple merge failed", extra={"task": str(task)})

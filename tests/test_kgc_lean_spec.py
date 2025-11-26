@@ -135,10 +135,7 @@ class KGCTechnician:
 
     def review(self) -> dict[str, Any]:
         """Step 4: Inspect projections (not raw data)."""
-        return {
-            "projected_artifacts": self.regenerated_artifacts,
-            "waste_areas": self._identify_waste(),
-        }
+        return {"projected_artifacts": self.regenerated_artifacts, "waste_areas": self._identify_waste()}
 
     def remove_waste(self, waste_story: str) -> None:
         """Step 5: Eliminate repeated manual steps."""
@@ -165,23 +162,12 @@ def minimal_kgc_context() -> KGCContext:
     manifest = KGCManifest(
         project_uri="urn:project:kgc:osx-personal-fabric",
         project_name="macOS/iOS Personal Fabric",
-        planes=[
-            KGCPlane.ONTOLOGY,
-            KGCPlane.TYPE,
-            KGCPlane.INVARIANT,
-            KGCPlane.PROJECTION,
-        ],
+        planes=[KGCPlane.ONTOLOGY, KGCPlane.TYPE, KGCPlane.INVARIANT, KGCPlane.PROJECTION],
     )
 
     context = KGCContext(
         manifest=manifest,
-        ontology_entities=[
-            "CalendarEvent",
-            "Reminder",
-            "Note",
-            "MailMessage",
-            "FileArtifact",
-        ],
+        ontology_entities=["CalendarEvent", "Reminder", "Note", "MailMessage", "FileArtifact"],
         invariants=[
             Invariant(
                 name="calendar_event_complete",
@@ -250,11 +236,7 @@ def test_lean_value_waste_elimination(minimal_kgc_context: KGCContext) -> None:
     assert_that(technician.regenerated_artifacts, lambda a: len(a) > 0)
 
     hook = context.hooks[0]
-    assert_that(
-        hook.waste_removed,
-        lambda waste_story: len(waste_story) > 0,
-        "Hook must describe the waste eliminated",
-    )
+    assert_that(hook.waste_removed, lambda waste_story: len(waste_story) > 0, "Hook must describe the waste eliminated")
     assert_that(
         context.projections,
         lambda projections: "agenda" in projections,
@@ -290,21 +272,13 @@ def test_value_stream_mapping() -> None:
     Per spec 1.1: "We model the entire flow... Every step must be traceable."
     """
     # Arrange: Minimal value stream
-    flow = [
-        "apple_data_ingest",
-        "rdf_mapping",
-        "shacl_validation",
-        "projection_generation",
-        "cli_update",
-    ]
+    flow = ["apple_data_ingest", "rdf_mapping", "shacl_validation", "projection_generation", "cli_update"]
 
     # Act: Walk the value stream
     completeness = [step for step in flow if step]
 
     # Assert: All steps present (none are None)
-    assert len(completeness) == VALUE_STREAM_STEP_COUNT, (
-        "All value stream steps must be present"
-    )
+    assert len(completeness) == VALUE_STREAM_STEP_COUNT, "All value stream steps must be present"
 
 
 def test_value_stream_eliminates_handoffs() -> None:
@@ -315,9 +289,7 @@ def test_value_stream_eliminates_handoffs() -> None:
     Per spec 1.2: "Single source of truth: O. Query Q dynamically."
     """
     # Arrange: Technician with generator capability
-    manifest = KGCManifest(
-        project_uri="urn:test:kgc", project_name="Test", has_projection_config=True
-    )
+    manifest = KGCManifest(project_uri="urn:test:kgc", project_name="Test", has_projection_config=True)
     context = KGCContext(
         manifest=manifest,
         ontology_entities=["Event", "Task"],
@@ -332,10 +304,7 @@ def test_value_stream_eliminates_handoffs() -> None:
     technician.regenerate(["cli", "docs"])
 
     # Assert: Artifacts exist without manual handoff
-    assert_that(
-        technician.regenerated_artifacts,
-        lambda artifacts: len(artifacts) == PULL_ARTIFACT_COUNT,
-    )
+    assert_that(technician.regenerated_artifacts, lambda artifacts: len(artifacts) == PULL_ARTIFACT_COUNT)
 
 
 # ============================================================================
@@ -384,9 +353,7 @@ def test_artifacts_pulled_not_pushed() -> None:
     Per spec 1.4: "Pull-based: generated when needed, not pushed upfront."
     """
     # Arrange: Generator that can selectively produce artifacts
-    manifest = KGCManifest(
-        project_uri="urn:test:kgc", project_name="Test", has_projection_config=True
-    )
+    manifest = KGCManifest(project_uri="urn:test:kgc", project_name="Test", has_projection_config=True)
     context = KGCContext(
         manifest=manifest,
         ontology_entities=["Event"],
@@ -458,12 +425,7 @@ def test_kgc_minimal_structure(minimal_kgc_context: KGCContext) -> None:
     assert context.manifest.has_projection_config
 
     # Assert: All planes present
-    expected_planes = [
-        KGCPlane.ONTOLOGY,
-        KGCPlane.TYPE,
-        KGCPlane.INVARIANT,
-        KGCPlane.PROJECTION,
-    ]
+    expected_planes = [KGCPlane.ONTOLOGY, KGCPlane.TYPE, KGCPlane.INVARIANT, KGCPlane.PROJECTION]
     for plane in expected_planes:
         assert plane in context.manifest.planes
 
@@ -502,9 +464,7 @@ def test_apple_entity_invariants(minimal_kgc_context: KGCContext) -> None:
 # ============================================================================
 
 
-def test_technician_standard_work_loop(
-    minimal_kgc_context: KGCContext, kgc_technician: KGCTechnician
-) -> None:
+def test_technician_standard_work_loop(minimal_kgc_context: KGCContext, kgc_technician: KGCTechnician) -> None:
     """
     Chicago TDD: 5-step standard work loop from spec Section 7.
 

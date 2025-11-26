@@ -15,7 +15,7 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import Any
 
-from rdflib import Graph, Literal, URIRef
+from rdflib import Graph, URIRef
 
 from kgcl.yawl_engine.core import ExecutionResult, YawlNamespace
 
@@ -148,9 +148,7 @@ class StructuredLoop:
     loop_type: LoopType = LoopType.WHILE
     max_iterations: int = 1000
 
-    def init_loop(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> LoopState:
+    def init_loop(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> LoopState:
         """Initialize loop state from task definition.
 
         Reads loop parameters from RDF graph:
@@ -190,10 +188,7 @@ class StructuredLoop:
         loop_vars = {"iteration": counter, "continue": True}
 
         return LoopState(
-            iteration=counter,
-            max_iterations=max_iter,
-            continue_condition=condition,
-            loop_variables=loop_vars,
+            iteration=counter, max_iterations=max_iter, continue_condition=condition, loop_variables=loop_vars
         )
 
     def check_condition(self, state: LoopState, context: dict[str, Any]) -> bool:
@@ -234,9 +229,7 @@ class StructuredLoop:
             # Invalid condition defaults to false (terminate loop)
             return False
 
-    def iterate(
-        self, graph: Graph, task: URIRef, state: LoopState, context: dict[str, Any]
-    ) -> ExecutionResult:
+    def iterate(self, graph: Graph, task: URIRef, state: LoopState, context: dict[str, Any]) -> ExecutionResult:
         """Execute one loop iteration.
 
         Executes task body with loop-scoped context and returns result.
@@ -276,9 +269,7 @@ class StructuredLoop:
             error_message=None,
         )
 
-    def execute(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> ExecutionResult:
+    def execute(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> ExecutionResult:
         """Execute complete loop until termination.
 
         Orchestrates loop execution based on loop_type:
@@ -329,11 +320,7 @@ class StructuredLoop:
             iterations.append(result.output_data)
             state = result.output_data.get("loop_state", state)
 
-            while (
-                self.check_condition(state, context)
-                and result.success
-                and not state.completed
-            ):
+            while self.check_condition(state, context) and result.success and not state.completed:
                 result = self.iterate(graph, task, state, context)
                 iterations.append(result.output_data)
                 state = result.output_data.get("loop_state", state)
@@ -350,11 +337,7 @@ class StructuredLoop:
         return ExecutionResult(
             task_id=str(task),
             success=True,
-            output_data={
-                "iterations": iterations,
-                "final_state": state,
-                "total_iterations": len(iterations),
-            },
+            output_data={"iterations": iterations, "final_state": state, "total_iterations": len(iterations)},
             error_message=None,
         )
 
@@ -382,9 +365,7 @@ class RecursionFrame:
     return_point: str
     workflow_id: str
 
-    def push(
-        self, workflow_id: str, return_point: str, context: dict[str, Any]
-    ) -> RecursionFrame:
+    def push(self, workflow_id: str, return_point: str, context: dict[str, Any]) -> RecursionFrame:
         """Push new recursion frame.
 
         Parameters
@@ -402,10 +383,7 @@ class RecursionFrame:
             New frame with incremented depth
         """
         return RecursionFrame(
-            depth=self.depth + 1,
-            parent_context=context,
-            return_point=return_point,
-            workflow_id=workflow_id,
+            depth=self.depth + 1, parent_context=context, return_point=return_point, workflow_id=workflow_id
         )
 
 
@@ -438,11 +416,7 @@ class Recursion:
     max_depth: int = 100
 
     def push_frame(
-        self,
-        current_frame: RecursionFrame | None,
-        workflow_id: str,
-        return_point: str,
-        context: dict[str, Any],
+        self, current_frame: RecursionFrame | None, workflow_id: str, return_point: str, context: dict[str, Any]
     ) -> RecursionFrame:
         """Push new recursion frame onto stack.
 
@@ -474,18 +448,11 @@ class Recursion:
             raise RuntimeError(msg)
 
         return RecursionFrame(
-            depth=depth,
-            parent_context=context.copy(),
-            return_point=return_point,
-            workflow_id=workflow_id,
+            depth=depth, parent_context=context.copy(), return_point=return_point, workflow_id=workflow_id
         )
 
     def invoke_recursive(
-        self,
-        graph: Graph,
-        workflow: URIRef,
-        frame: RecursionFrame,
-        context: dict[str, Any],
+        self, graph: Graph, workflow: URIRef, frame: RecursionFrame, context: dict[str, Any]
     ) -> ExecutionResult:
         """Invoke workflow recursively.
 
@@ -519,18 +486,9 @@ class Recursion:
         # Workflow execution delegated to YAWL engine
         # Engine handles recursive workflow invocation
         success = True
-        output_data = {
-            "depth": frame.depth,
-            "workflow": str(workflow),
-            "result": "recursive_call_completed",
-        }
+        output_data = {"depth": frame.depth, "workflow": str(workflow), "result": "recursive_call_completed"}
 
-        return ExecutionResult(
-            task_id=str(workflow),
-            success=success,
-            output_data=output_data,
-            error_message=None,
-        )
+        return ExecutionResult(task_id=str(workflow), success=success, output_data=output_data, error_message=None)
 
     def pop_frame(self, frame: RecursionFrame) -> dict[str, Any]:
         """Pop recursion frame and restore parent context.
@@ -549,12 +507,7 @@ class Recursion:
         return frame.parent_context.copy()
 
     def execute_recursive(
-        self,
-        graph: Graph,
-        workflow: URIRef,
-        context: dict[str, Any],
-        *,
-        initial_depth: int = 0,
+        self, graph: Graph, workflow: URIRef, context: dict[str, Any], *, initial_depth: int = 0
     ) -> ExecutionResult:
         """Execute recursive workflow with stack management.
 
@@ -581,10 +534,7 @@ class Recursion:
         """
         # Initialize root frame
         root_frame = RecursionFrame(
-            depth=initial_depth,
-            parent_context={},
-            return_point="root",
-            workflow_id=str(workflow),
+            depth=initial_depth, parent_context={}, return_point="root", workflow_id=str(workflow)
         )
 
         # Execute with recursion tracking
@@ -598,10 +548,7 @@ class Recursion:
         }
 
         return ExecutionResult(
-            task_id=result.task_id,
-            success=result.success,
-            output_data=final_output,
-            error_message=result.error_message,
+            task_id=result.task_id, success=result.success, output_data=final_output, error_message=result.error_message
         )
 
 

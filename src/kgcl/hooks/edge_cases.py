@@ -154,9 +154,7 @@ class EdgeCaseHandler:
         """
         threshold = context.get("threshold", "unknown")
         current = context.get("current_usage", "unknown")
-        self._logger.critical(
-            f"Memory pressure detected (current={current}, threshold={threshold})"
-        )
+        self._logger.critical(f"Memory pressure detected (current={current}, threshold={threshold})")
         # In real implementation, this would trigger cache cleanup, etc.
 
     def _handle_rate_limit(self, context: dict[str, Any]) -> dict[str, Any]:
@@ -173,16 +171,9 @@ class EdgeCaseHandler:
         window = context.get("window", "unknown")
         retry_after = context.get("retry_after", 60)
 
-        self._logger.warning(
-            f"Rate limit exceeded (limit={limit}/{window}s), retry after {retry_after}s"
-        )
+        self._logger.warning(f"Rate limit exceeded (limit={limit}/{window}s), retry after {retry_after}s")
 
-        return {
-            "should_retry": True,
-            "retry_after_seconds": retry_after,
-            "limit": limit,
-            "window": window,
-        }
+        return {"should_retry": True, "retry_after_seconds": retry_after, "limit": limit, "window": window}
 
     def _handle_invalid_input(self, context: dict[str, Any]) -> None:
         """Handle invalid input data.
@@ -198,9 +189,7 @@ class EdgeCaseHandler:
         expected = context.get("expected", "valid data")
         reason = context.get("reason", "validation failed")
 
-        self._logger.error(
-            f"Invalid input: {input_val} (expected {expected}): {reason}"
-        )
+        self._logger.error(f"Invalid input: {input_val} (expected {expected}): {reason}")
 
     def _handle_connection_error(self, context: dict[str, Any]) -> dict[str, Any]:
         """Handle connection error.
@@ -240,6 +229,4 @@ class EdgeCaseHandler:
         limit = context.get("limit", "unknown")
         requested = context.get("requested", "unknown")
 
-        self._logger.critical(
-            f"Resource exhausted: {resource} (limit={limit}, requested={requested})"
-        )
+        self._logger.critical(f"Resource exhausted: {resource} (limit={limit}, requested={requested})")

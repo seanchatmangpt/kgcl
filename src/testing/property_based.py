@@ -61,12 +61,7 @@ class PropertyBasedTest:
                 failed += 1
                 errors.append(f"Error for {example}: {e}")
 
-        self.results = {
-            "passed": passed,
-            "failed": failed,
-            "total": len(self.examples),
-            "errors": errors,
-        }
+        self.results = {"passed": passed, "failed": failed, "total": len(self.examples), "errors": errors}
 
         return failed == 0
 
@@ -95,7 +90,5 @@ class PropertyBasedTest:
 
     def __repr__(self) -> str:
         return (
-            f"PropertyBasedTest({self.name!r}, "
-            f"examples={len(self.examples)}, "
-            f"success_rate={self.success_rate():.1f}%)"
+            f"PropertyBasedTest({self.name!r}, examples={len(self.examples)}, success_rate={self.success_rate():.1f}%)"
         )

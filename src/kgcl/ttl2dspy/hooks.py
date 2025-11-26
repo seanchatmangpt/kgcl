@@ -79,18 +79,13 @@ class TTL2DSpyHook:
             # Save to temp file
             import tempfile
 
-            with tempfile.NamedTemporaryFile(
-                mode="w", suffix=".ttl", delete=False
-            ) as f:
+            with tempfile.NamedTemporaryFile(mode="w", suffix=".ttl", delete=False) as f:
                 f.write(request["ttl_content"])
                 ttl_path = Path(f.name)
         elif "ttl_path" in request:
             ttl_path = Path(request["ttl_path"])
         else:
-            return {
-                "success": False,
-                "error": "Either 'ttl_content' or 'ttl_path' required",
-            }
+            return {"success": False, "error": "Either 'ttl_content' or 'ttl_path' required"}
 
         # Route to appropriate handler
         if action == "parse":
@@ -102,10 +97,7 @@ class TTL2DSpyHook:
         if action == "generate":
             output_dir = request.get("output_dir")
             if not output_dir:
-                return {
-                    "success": False,
-                    "error": "'output_dir' required for generate action",
-                }
+                return {"success": False, "error": "'output_dir' required for generate action"}
             module_name = request.get("module_name", "signatures")
             format_code = request.get("format_code", True)
             return self._handle_generate(ttl_path, output_dir, module_name, format_code)
@@ -198,9 +190,7 @@ class TTL2DSpyHook:
                     "uri": str(shape.uri),
                     "signature_name": shape.signature_name,
                     "description": shape.description,
-                    "target_class": str(shape.target_class)
-                    if shape.target_class
-                    else None,
+                    "target_class": str(shape.target_class) if shape.target_class else None,
                     "inputs": [
                         {
                             "name": prop.name,
@@ -211,11 +201,7 @@ class TTL2DSpyHook:
                         for prop in shape.input_properties
                     ],
                     "outputs": [
-                        {
-                            "name": prop.name,
-                            "type": prop.get_python_type(),
-                            "description": prop.description,
-                        }
+                        {"name": prop.name, "type": prop.get_python_type(), "description": prop.description}
                         for prop in shape.output_properties
                     ],
                 }
@@ -223,9 +209,7 @@ class TTL2DSpyHook:
             ],
         }
 
-    def _handle_generate(
-        self, ttl_path: Path, output_dir: str, module_name: str, format_code: bool
-    ) -> dict[str, Any]:
+    def _handle_generate(self, ttl_path: Path, output_dir: str, module_name: str, format_code: bool) -> dict[str, Any]:
         """Handle generate action."""
         # Parse shapes
         shapes = self.optimizer.parse_with_cache(ttl_path)
@@ -236,11 +220,7 @@ class TTL2DSpyHook:
         # Write module
         output_path = Path(output_dir) / f"{module_name}.py"
         result = self.writer.write_module(
-            code=code,
-            output_path=output_path,
-            shapes_count=len(shapes),
-            ttl_source=ttl_path,
-            format_code=format_code,
+            code=code, output_path=output_path, shapes_count=len(shapes), ttl_source=ttl_path, format_code=format_code
         )
 
         # Write JSON receipt
@@ -269,9 +249,7 @@ def main_hook():
     """
     # Configure logging to stderr
     logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-        stream=sys.stderr,
+        level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", stream=sys.stderr
     )
 
     try:

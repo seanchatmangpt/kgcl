@@ -11,12 +11,9 @@ Tests verify behavior of CLIGenerator including:
 from __future__ import annotations
 
 import hashlib
-import tempfile
-from datetime import datetime
 from pathlib import Path
 
 import pytest
-from rdflib import RDF, Graph, Literal, Namespace
 
 from kgcl.generators.cli_generator import CLIGenerator
 
@@ -109,30 +106,20 @@ if __name__ == "__main__":
     return template
 
 
-def test_cli_generator_initialization_succeeds(
-    sample_cli_ontology: Path, sample_template: Path, tmp_path: Path
-):
+def test_cli_generator_initialization_succeeds(sample_cli_ontology: Path, sample_template: Path, tmp_path: Path):
     """CLIGenerator initializes successfully with valid paths."""
     output = tmp_path / "output.py"
-    generator = CLIGenerator(
-        ontology_path=sample_cli_ontology,
-        template_path=sample_template,
-        output_path=output,
-    )
+    generator = CLIGenerator(ontology_path=sample_cli_ontology, template_path=sample_template, output_path=output)
     assert generator.ontology_path == sample_cli_ontology
     assert generator.template_path == sample_template
     assert generator.output_path == output
     assert generator.graph is not None
 
 
-def test_cli_generator_parses_rdf_graph(
-    sample_cli_ontology: Path, sample_template: Path, tmp_path: Path
-):
+def test_cli_generator_parses_rdf_graph(sample_cli_ontology: Path, sample_template: Path, tmp_path: Path):
     """CLIGenerator parses RDF graph and extracts namespaces."""
     generator = CLIGenerator(
-        ontology_path=sample_cli_ontology,
-        template_path=sample_template,
-        output_path=tmp_path / "output.py",
+        ontology_path=sample_cli_ontology, template_path=sample_template, output_path=tmp_path / "output.py"
     )
     # Verify graph loaded triples
     assert len(generator.graph) > 0
@@ -142,14 +129,10 @@ def test_cli_generator_parses_rdf_graph(
     assert str(cli_cmd) == "urn:kgc:cli:Command"
 
 
-def test_query_commands_returns_all_commands(
-    sample_cli_ontology: Path, sample_template: Path, tmp_path: Path
-):
+def test_query_commands_returns_all_commands(sample_cli_ontology: Path, sample_template: Path, tmp_path: Path):
     """query_commands extracts all CLI commands from RDF."""
     generator = CLIGenerator(
-        ontology_path=sample_cli_ontology,
-        template_path=sample_template,
-        output_path=tmp_path / "output.py",
+        ontology_path=sample_cli_ontology, template_path=sample_template, output_path=tmp_path / "output.py"
     )
     commands = generator.query_commands()
 
@@ -172,14 +155,10 @@ def test_query_commands_returns_all_commands(
     assert query_cmd["args"][0]["required"] is True
 
 
-def test_query_args_extracts_positional_arguments(
-    sample_cli_ontology: Path, sample_template: Path, tmp_path: Path
-):
+def test_query_args_extracts_positional_arguments(sample_cli_ontology: Path, sample_template: Path, tmp_path: Path):
     """_query_args extracts positional arguments for a command."""
     generator = CLIGenerator(
-        ontology_path=sample_cli_ontology,
-        template_path=sample_template,
-        output_path=tmp_path / "output.py",
+        ontology_path=sample_cli_ontology, template_path=sample_template, output_path=tmp_path / "output.py"
     )
     commands = generator.query_commands()
     query_cmd = next((c for c in commands if c["name"] == "query"), None)
@@ -192,23 +171,17 @@ def test_query_args_extracts_positional_arguments(
     assert arg["required"] is True
 
 
-def test_query_options_extracts_optional_flags(
-    sample_cli_ontology: Path, sample_template: Path, tmp_path: Path
-):
+def test_query_options_extracts_optional_flags(sample_cli_ontology: Path, sample_template: Path, tmp_path: Path):
     """_query_options extracts optional flags for a command."""
     generator = CLIGenerator(
-        ontology_path=sample_cli_ontology,
-        template_path=sample_template,
-        output_path=tmp_path / "output.py",
+        ontology_path=sample_cli_ontology, template_path=sample_template, output_path=tmp_path / "output.py"
     )
     commands = generator.query_commands()
     daily_brief = next((c for c in commands if c["name"] == "daily-brief"), None)
 
     assert len(daily_brief["options"]) == 2
 
-    start_opt = next(
-        (o for o in daily_brief["options"] if o["name"] == "start-date"), None
-    )
+    start_opt = next((o for o in daily_brief["options"] if o["name"] == "start-date"), None)
     assert start_opt is not None
     assert start_opt["required"] is True
     assert start_opt["python_type"] == "str"
@@ -219,14 +192,10 @@ def test_query_options_extracts_optional_flags(
     assert end_opt["default"] == "today"
 
 
-def test_get_root_command_returns_metadata(
-    sample_cli_ontology: Path, sample_template: Path, tmp_path: Path
-):
+def test_get_root_command_returns_metadata(sample_cli_ontology: Path, sample_template: Path, tmp_path: Path):
     """get_root_command extracts root command metadata."""
     generator = CLIGenerator(
-        ontology_path=sample_cli_ontology,
-        template_path=sample_template,
-        output_path=tmp_path / "output.py",
+        ontology_path=sample_cli_ontology, template_path=sample_template, output_path=tmp_path / "output.py"
     )
     root = generator.get_root_command()
 
@@ -234,14 +203,10 @@ def test_get_root_command_returns_metadata(
     assert root["help"] == "Knowledge Graph CLI Tool"
 
 
-def test_generate_renders_template_with_commands(
-    sample_cli_ontology: Path, sample_template: Path, tmp_path: Path
-):
+def test_generate_renders_template_with_commands(sample_cli_ontology: Path, sample_template: Path, tmp_path: Path):
     """Generate renders Jinja2 template with RDF-extracted commands."""
     generator = CLIGenerator(
-        ontology_path=sample_cli_ontology,
-        template_path=sample_template,
-        output_path=tmp_path / "output.py",
+        ontology_path=sample_cli_ontology, template_path=sample_template, output_path=tmp_path / "output.py"
     )
     output = generator.generate()
 
@@ -253,16 +218,10 @@ def test_generate_renders_template_with_commands(
     assert "Generated at:" in output
 
 
-def test_write_output_creates_executable_file(
-    sample_cli_ontology: Path, sample_template: Path, tmp_path: Path
-):
+def test_write_output_creates_executable_file(sample_cli_ontology: Path, sample_template: Path, tmp_path: Path):
     """write_output creates executable file with correct permissions."""
     output_path = tmp_path / "output.py"
-    generator = CLIGenerator(
-        ontology_path=sample_cli_ontology,
-        template_path=sample_template,
-        output_path=output_path,
-    )
+    generator = CLIGenerator(ontology_path=sample_cli_ontology, template_path=sample_template, output_path=output_path)
     content = generator.generate()
     generator.write_output(content)
 
@@ -278,14 +237,10 @@ def test_write_output_creates_executable_file(
     assert mode & stat.S_IWUSR  # Owner write
 
 
-def test_generate_receipt_produces_sha256_hash(
-    sample_cli_ontology: Path, sample_template: Path, tmp_path: Path
-):
+def test_generate_receipt_produces_sha256_hash(sample_cli_ontology: Path, sample_template: Path, tmp_path: Path):
     """generate_receipt produces SHA256 hash of output content."""
     generator = CLIGenerator(
-        ontology_path=sample_cli_ontology,
-        template_path=sample_template,
-        output_path=tmp_path / "output.py",
+        ontology_path=sample_cli_ontology, template_path=sample_template, output_path=tmp_path / "output.py"
     )
     content = generator.generate()
     receipt = generator.generate_receipt(content)
@@ -304,23 +259,17 @@ def test_generator_fails_with_missing_ontology(sample_template: Path, tmp_path: 
     missing_ontology = tmp_path / "missing.ttl"
     with pytest.raises(FileNotFoundError):
         generator = CLIGenerator(
-            ontology_path=missing_ontology,
-            template_path=sample_template,
-            output_path=tmp_path / "output.py",
+            ontology_path=missing_ontology, template_path=sample_template, output_path=tmp_path / "output.py"
         )
         generator.generate()
 
 
-def test_generator_fails_with_missing_template(
-    sample_cli_ontology: Path, tmp_path: Path
-):
+def test_generator_fails_with_missing_template(sample_cli_ontology: Path, tmp_path: Path):
     """CLIGenerator raises error when template file doesn't exist."""
     missing_template = tmp_path / "missing.j2"
     with pytest.raises(Exception):  # Jinja2 raises TemplateNotFound
         generator = CLIGenerator(
-            ontology_path=sample_cli_ontology,
-            template_path=missing_template,
-            output_path=tmp_path / "output.py",
+            ontology_path=sample_cli_ontology, template_path=missing_template, output_path=tmp_path / "output.py"
         )
         generator.generate()
 
@@ -331,9 +280,7 @@ def test_generator_handles_empty_ontology(sample_template: Path, tmp_path: Path)
     empty_ontology.write_text("", encoding="utf-8")
 
     generator = CLIGenerator(
-        ontology_path=empty_ontology,
-        template_path=sample_template,
-        output_path=tmp_path / "output.py",
+        ontology_path=empty_ontology, template_path=sample_template, output_path=tmp_path / "output.py"
     )
     commands = generator.query_commands()
 
@@ -342,16 +289,12 @@ def test_generator_handles_empty_ontology(sample_template: Path, tmp_path: Path)
 
 
 @pytest.mark.performance
-def test_generator_meets_performance_target(
-    sample_cli_ontology: Path, sample_template: Path, tmp_path: Path
-):
+def test_generator_meets_performance_target(sample_cli_ontology: Path, sample_template: Path, tmp_path: Path):
     """CLIGenerator generates output within performance target (p99 < 100ms)."""
     import time
 
     generator = CLIGenerator(
-        ontology_path=sample_cli_ontology,
-        template_path=sample_template,
-        output_path=tmp_path / "output.py",
+        ontology_path=sample_cli_ontology, template_path=sample_template, output_path=tmp_path / "output.py"
     )
 
     start = time.perf_counter()
@@ -364,16 +307,10 @@ def test_generator_meets_performance_target(
 
 
 @pytest.mark.integration
-def test_full_pipeline_generates_valid_python_file(
-    sample_cli_ontology: Path, sample_template: Path, tmp_path: Path
-):
+def test_full_pipeline_generates_valid_python_file(sample_cli_ontology: Path, sample_template: Path, tmp_path: Path):
     """Full pipeline generates syntactically valid Python file."""
     output_path = tmp_path / "cli.py"
-    generator = CLIGenerator(
-        ontology_path=sample_cli_ontology,
-        template_path=sample_template,
-        output_path=output_path,
-    )
+    generator = CLIGenerator(ontology_path=sample_cli_ontology, template_path=sample_template, output_path=output_path)
 
     content = generator.generate()
     generator.write_output(content)
@@ -397,9 +334,7 @@ def test_full_pipeline_generates_valid_python_file(
     assert receipt == expected_receipt
 
 
-def test_cli_generator_default_fallback_for_missing_root(
-    sample_template: Path, tmp_path: Path
-):
+def test_cli_generator_default_fallback_for_missing_root(sample_template: Path, tmp_path: Path):
     """CLIGenerator provides default root command when RDF has none."""
     # Create ontology without RootCommand
     ontology = tmp_path / "cli.ttl"
@@ -417,11 +352,7 @@ cli:TestCmd a cli:Command ;
         encoding="utf-8",
     )
 
-    generator = CLIGenerator(
-        ontology_path=ontology,
-        template_path=sample_template,
-        output_path=tmp_path / "output.py",
-    )
+    generator = CLIGenerator(ontology_path=ontology, template_path=sample_template, output_path=tmp_path / "output.py")
     root = generator.get_root_command()
 
     # Should return fallback defaults

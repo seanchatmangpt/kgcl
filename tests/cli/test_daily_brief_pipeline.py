@@ -24,18 +24,14 @@ def synthetic_batch(tmp_path_factory: pytest.TempPathFactory) -> DailyBriefEvent
     return loader.load(start, end)
 
 
-def test_event_loader_generates_synthetic_when_logs_missing(
-    synthetic_batch: DailyBriefEventBatch,
-) -> None:
+def test_event_loader_generates_synthetic_when_logs_missing(synthetic_batch: DailyBriefEventBatch) -> None:
     """Loader should generate deterministic synthetic events when logs are absent."""
     assert synthetic_batch.synthetic
     assert synthetic_batch.event_count > 0
     assert synthetic_batch.start_date.date().isoformat() >= "2024-11-24"
 
 
-def test_feature_builder_produces_daily_brief_input(
-    synthetic_batch: DailyBriefEventBatch,
-) -> None:
+def test_feature_builder_produces_daily_brief_input(synthetic_batch: DailyBriefEventBatch) -> None:
     """Feature builder should convert events into a fully-typed DailyBriefInput."""
     builder = DailyBriefFeatureBuilder()
     feature_set = builder.build(synthetic_batch)
@@ -46,9 +42,7 @@ def test_feature_builder_produces_daily_brief_input(
     assert feature_set.input_data.meeting_count >= 1
 
 
-def test_generate_daily_brief_returns_markdown_payload(
-    synthetic_batch: DailyBriefEventBatch,
-) -> None:
+def test_generate_daily_brief_returns_markdown_payload(synthetic_batch: DailyBriefEventBatch) -> None:
     """Pipeline should yield structured outputs and metadata."""
     builder = DailyBriefFeatureBuilder()
     feature_set = builder.build(synthetic_batch)

@@ -27,9 +27,7 @@ class TestValidationResult:
     def test_to_dict(self) -> None:
         """Test converting to dictionary."""
         result = ValidationResult(
-            conforms=False,
-            violations=[{"message": "test error"}],
-            report_text="Validation failed",
+            conforms=False, violations=[{"message": "test error"}], report_text="Validation failed"
         )
 
         result_dict = result.to_dict()
@@ -206,9 +204,7 @@ class TestShaclValidator:
 
         # Create data
         data_graph = Graph()
-        data_graph.add(
-            (URIRef("http://example.org/item1"), RDF.type, EXAMPLE_NS.Custom)
-        )
+        data_graph.add((URIRef("http://example.org/item1"), RDF.type, EXAMPLE_NS.Custom))
 
         # Validate with custom shapes
         result = validator.validate_with_custom_shapes(data_graph, custom_shapes)
@@ -279,9 +275,7 @@ class TestShaclValidator:
 
         person = URIRef("http://example.org/person1")
         data_graph.add((person, RDF.type, EXAMPLE_NS.Employee))
-        data_graph.add(
-            (person, EXAMPLE_NS.hasManager, URIRef("http://example.org/manager1"))
-        )
+        data_graph.add((person, EXAMPLE_NS.hasManager, URIRef("http://example.org/manager1")))
 
         # Validate with RDFS inference
         result = validator.validate(data_graph, inference="rdfs")

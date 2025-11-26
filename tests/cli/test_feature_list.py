@@ -81,9 +81,7 @@ def test_feature_list_with_output_file():
     """Test feature list with output file."""
     runner = CliRunner()
     with runner.isolated_filesystem():
-        result = runner.invoke(
-            feature_list, ["--format", "json", "--output", "features.json"]
-        )
+        result = runner.invoke(feature_list, ["--format", "json", "--output", "features.json"])
         assert result.exit_code == 0
 
 

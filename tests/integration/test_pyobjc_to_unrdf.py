@@ -11,14 +11,7 @@ from pathlib import Path
 from rdflib import Namespace, URIRef
 
 from kgcl.unrdf_engine.engine import UnrdfEngine
-from kgcl.unrdf_engine.hooks import (
-    HookContext,
-    HookExecutor,
-    HookPhase,
-    HookRegistry,
-    KnowledgeHook,
-    TriggerCondition,
-)
+from kgcl.unrdf_engine.hooks import HookContext, HookExecutor, HookPhase, HookRegistry, KnowledgeHook, TriggerCondition
 from kgcl.unrdf_engine.ingestion import IngestionPipeline
 from kgcl.unrdf_engine.validation import ShaclValidator
 
@@ -95,9 +88,7 @@ class TestPyObjCToUNRDF:
             app_event = events[0]
 
             result = pipeline.ingest_json(
-                data=app_event,
-                agent="pyobjc_agent",
-                reason="App event from PyObjC AppKit plugin",
+                data=app_event, agent="pyobjc_agent", reason="App event from PyObjC AppKit plugin"
             )
 
             assert result.success is True
@@ -126,14 +117,10 @@ class TestPyObjCToUNRDF:
 
             events = create_pyobjc_format_events()
 
-            result = pipeline.ingest_json(
-                data=events, agent="pyobjc_agent", reason="Batch from PyObjC plugins"
-            )
+            result = pipeline.ingest_json(data=events, agent="pyobjc_agent", reason="Batch from PyObjC plugins")
 
             assert result.success is True
-            assert (
-                result.triples_added >= len(events) * 3
-            )  # At least 3 triples per event
+            assert result.triples_added >= len(events) * 3  # At least 3 triples per event
 
             # Verify all events present
             for event in events:
@@ -191,11 +178,7 @@ class TestPyObjCToUNRDF:
 
             event = create_pyobjc_format_events()[0]
 
-            result = pipeline.ingest_json(
-                data=event,
-                agent="pyobjc_appkit_plugin",
-                reason="Automatic app monitoring",
-            )
+            result = pipeline.ingest_json(data=event, agent="pyobjc_appkit_plugin", reason="Automatic app monitoring")
 
             assert result.success is True
 
@@ -224,18 +207,14 @@ class TestPyObjCToUNRDF:
 
             class TestPreIngestionHook(KnowledgeHook):
                 def __init__(self) -> None:
-                    super().__init__(
-                        name="test_pre_ingestion", phases=[HookPhase.PRE_INGESTION]
-                    )
+                    super().__init__(name="test_pre_ingestion", phases=[HookPhase.PRE_INGESTION])
 
                 def execute(self, context: HookContext) -> None:
                     pre_ingestion_called.append(context.transaction_id)
 
             class TestPostCommitHook(KnowledgeHook):
                 def __init__(self) -> None:
-                    super().__init__(
-                        name="test_post_commit", phases=[HookPhase.POST_COMMIT]
-                    )
+                    super().__init__(name="test_post_commit", phases=[HookPhase.POST_COMMIT])
 
                 def execute(self, context: HookContext) -> None:
                     post_commit_called.append(context.transaction_id)
@@ -311,20 +290,14 @@ class TestPyObjCToUNRDF:
 
             class HighPriorityHook(KnowledgeHook):
                 def __init__(self) -> None:
-                    super().__init__(
-                        name="high_priority",
-                        phases=[HookPhase.POST_COMMIT],
-                        priority=100,
-                    )
+                    super().__init__(name="high_priority", phases=[HookPhase.POST_COMMIT], priority=100)
 
                 def execute(self, _context: HookContext) -> None:
                     execution_order.append("high")
 
             class LowPriorityHook(KnowledgeHook):
                 def __init__(self) -> None:
-                    super().__init__(
-                        name="low_priority", phases=[HookPhase.POST_COMMIT], priority=10
-                    )
+                    super().__init__(name="low_priority", phases=[HookPhase.POST_COMMIT], priority=10)
 
                 def execute(self, _context: HookContext) -> None:
                     execution_order.append("low")
@@ -353,11 +326,7 @@ class TestPyObjCToUNRDF:
 
             class FailingValidationHook(KnowledgeHook):
                 def __init__(self) -> None:
-                    super().__init__(
-                        name="failing_validation",
-                        phases=[HookPhase.POST_VALIDATION],
-                        priority=1000,
-                    )
+                    super().__init__(name="failing_validation", phases=[HookPhase.POST_VALIDATION], priority=1000)
 
                 def execute(self, context: HookContext) -> None:
                     # Signal rollback
@@ -371,9 +340,7 @@ class TestPyObjCToUNRDF:
             event = create_pyobjc_format_events()[0]
 
             validator = ShaclValidator()
-            pipeline_with_validation = IngestionPipeline(
-                engine, validator=validator, hook_executor=hook_executor
-            )
+            pipeline_with_validation = IngestionPipeline(engine, validator=validator, hook_executor=hook_executor)
 
             result = pipeline_with_validation.ingest_json(data=event, agent="test")
 
@@ -393,9 +360,7 @@ class TestPyObjCToUNRDF:
             # Ingest one at a time
             for event in events:
                 result = pipeline.ingest_json(
-                    data=event,
-                    agent="pyobjc_agent",
-                    reason=f"Event from {event.get('source', 'unknown')}",
+                    data=event, agent="pyobjc_agent", reason=f"Event from {event.get('source', 'unknown')}"
                 )
                 assert result.success is True
 

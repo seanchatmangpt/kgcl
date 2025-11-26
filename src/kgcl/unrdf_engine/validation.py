@@ -47,11 +47,7 @@ class ValidationResult:
             Validation result as dictionary
 
         """
-        return {
-            "conforms": self.conforms,
-            "violations": self.violations,
-            "report_text": self.report_text,
-        }
+        return {"conforms": self.conforms, "violations": self.violations, "report_text": self.report_text}
 
 
 class ShaclValidator:
@@ -114,10 +110,7 @@ class ShaclValidator:
 
     @tracer.start_as_current_span("shacl.validate")
     def validate(
-        self,
-        data_graph: Graph,
-        inference: str | None = None,
-        abort_on_first: bool = False,
+        self, data_graph: Graph, inference: str | None = None, abort_on_first: bool = False
     ) -> ValidationResult:
         """Validate an RDF graph against loaded SHACL shapes.
 
@@ -161,10 +154,7 @@ class ShaclValidator:
         span.set_attribute("validation.violations", len(violations))
 
         return ValidationResult(
-            conforms=conforms,
-            violations=violations,
-            report_graph=report_graph,
-            report_text=report_text,
+            conforms=conforms, violations=violations, report_graph=report_graph, report_text=report_text
         )
 
     def _parse_violations(self, report_graph: Graph) -> list[dict[str, Any]]:
@@ -216,9 +206,7 @@ class ShaclValidator:
         return violations
 
     @tracer.start_as_current_span("shacl.validate_with_custom_shapes")
-    def validate_with_custom_shapes(
-        self, data_graph: Graph, custom_shapes: Graph
-    ) -> ValidationResult:
+    def validate_with_custom_shapes(self, data_graph: Graph, custom_shapes: Graph) -> ValidationResult:
         """Validate using custom shapes instead of loaded ones.
 
         Parameters
@@ -237,17 +225,12 @@ class ShaclValidator:
         span = trace.get_current_span()
         span.set_attribute("custom_shapes.triples", len(custom_shapes))
 
-        conforms, report_graph, report_text = validate(
-            data_graph, shacl_graph=custom_shapes, advanced=True
-        )
+        conforms, report_graph, report_text = validate(data_graph, shacl_graph=custom_shapes, advanced=True)
 
         violations = self._parse_violations(report_graph) if report_graph else []
 
         return ValidationResult(
-            conforms=conforms,
-            violations=violations,
-            report_graph=report_graph,
-            report_text=report_text,
+            conforms=conforms, violations=violations, report_graph=report_graph, report_text=report_text
         )
 
     def has_shapes(self) -> bool:

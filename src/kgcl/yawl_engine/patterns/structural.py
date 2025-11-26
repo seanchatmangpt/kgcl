@@ -222,9 +222,7 @@ class ArbitraryCycles:
             return path
         return []
 
-    def evaluate(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> PatternResult:
+    def evaluate(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> PatternResult:
         """Evaluate cycle pattern for a given task.
 
         Parameters
@@ -257,18 +255,12 @@ class ArbitraryCycles:
         if current_iteration >= self.max_iterations:
             logger.warning(
                 "Max iterations exceeded",
-                extra={
-                    "task": task_str,
-                    "iterations": current_iteration,
-                    "max": self.max_iterations,
-                },
+                extra={"task": task_str, "iterations": current_iteration, "max": self.max_iterations},
             )
             return PatternResult(
                 success=False,
                 status=PatternStatus.MAX_ITERATIONS,
-                message=(
-                    f"Task {task_str} exceeded max iterations ({self.max_iterations})"
-                ),
+                message=(f"Task {task_str} exceeded max iterations ({self.max_iterations})"),
                 metadata={"iterations": current_iteration},
             )
 
@@ -277,11 +269,7 @@ class ArbitraryCycles:
         if cycle_path:
             logger.info(
                 "Cycle detected",
-                extra={
-                    "task": task_str,
-                    "cycle_length": len(cycle_path),
-                    "iteration": current_iteration,
-                },
+                extra={"task": task_str, "cycle_length": len(cycle_path), "iteration": current_iteration},
             )
             return PatternResult(
                 success=True,
@@ -301,9 +289,7 @@ class ArbitraryCycles:
             metadata={"iterations": current_iteration},
         )
 
-    def execute(
-        self, graph: Graph, task: URIRef, context: dict[str, Any]
-    ) -> ExecutionResult:
+    def execute(self, graph: Graph, task: URIRef, context: dict[str, Any]) -> ExecutionResult:
         """Execute cycle pattern - increment iteration counter and mark task.
 
         Parameters
@@ -345,15 +331,11 @@ class ArbitraryCycles:
         ]
 
         logger.info(
-            "Cycle iteration executed",
-            extra={"task": task_str, "iteration": new_iteration, "pattern": self.name},
+            "Cycle iteration executed", extra={"task": task_str, "iteration": new_iteration, "pattern": self.name}
         )
 
         return ExecutionResult(
-            committed=True,
-            task=task,
-            updates=updates,
-            data_updates={"iteration_counts": updated_counts},
+            committed=True, task=task, updates=updates, data_updates={"iteration_counts": updated_counts}
         )
 
 
@@ -390,9 +372,7 @@ class ImplicitTermination:
     >>> graph.add((URIRef("urn:task:TaskA"), YAWL.status, Literal("completed")))
     >>> graph.add((URIRef("urn:task:TaskB"), YAWL.status, Literal("completed")))
     >>> termination = ImplicitTermination()
-    >>> should_terminate = termination.check_termination(
-    ...     graph, URIRef("urn:workflow:W1")
-    ... )
+    >>> should_terminate = termination.check_termination(graph, URIRef("urn:workflow:W1"))
     >>> assert should_terminate is True
     """
 
@@ -434,22 +414,14 @@ class ImplicitTermination:
         has_active_tasks = graph.query(query).askAnswer
 
         if has_active_tasks:
-            logger.debug(
-                "Workflow has active tasks",
-                extra={"workflow": str(workflow), "pattern": self.name},
-            )
+            logger.debug("Workflow has active tasks", extra={"workflow": str(workflow), "pattern": self.name})
             return False
 
         # No active tasks - implicit termination
-        logger.info(
-            "Implicit termination triggered",
-            extra={"workflow": str(workflow), "pattern": self.name},
-        )
+        logger.info("Implicit termination triggered", extra={"workflow": str(workflow), "pattern": self.name})
         return True
 
-    def evaluate(
-        self, graph: Graph, workflow: URIRef, context: dict[str, Any]
-    ) -> PatternResult:
+    def evaluate(self, graph: Graph, workflow: URIRef, context: dict[str, Any]) -> PatternResult:
         """Evaluate implicit termination pattern.
 
         Parameters
@@ -499,10 +471,7 @@ class ImplicitTermination:
                 success=True,
                 status=PatternStatus.SUCCESS,
                 message=f"Workflow {workflow} terminated implicitly",
-                metadata={
-                    "completed_tasks": completed_count,
-                    "termination_type": "implicit",
-                },
+                metadata={"completed_tasks": completed_count, "termination_type": "implicit"},
             )
 
         return PatternResult(
@@ -512,9 +481,7 @@ class ImplicitTermination:
             metadata={"termination_type": "pending"},
         )
 
-    def execute(
-        self, graph: Graph, workflow: URIRef, context: dict[str, Any]
-    ) -> ExecutionResult:
+    def execute(self, graph: Graph, workflow: URIRef, context: dict[str, Any]) -> ExecutionResult:
         """Execute implicit termination - mark workflow as completed.
 
         Parameters
@@ -547,14 +514,8 @@ class ImplicitTermination:
             (workflow_str, str(KGC.patternId), "11"),
         ]
 
-        logger.info(
-            "Workflow terminated implicitly",
-            extra={"workflow": workflow_str, "pattern": self.name},
-        )
+        logger.info("Workflow terminated implicitly", extra={"workflow": workflow_str, "pattern": self.name})
 
         return ExecutionResult(
-            committed=True,
-            task=workflow,
-            updates=updates,
-            data_updates={"workflow_terminated": True},
+            committed=True, task=workflow, updates=updates, data_updates={"workflow_terminated": True}
         )

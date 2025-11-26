@@ -10,15 +10,7 @@ import tempfile
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
-import pytest
-
-from kgcl.ingestion.config import (
-    CollectorConfig,
-    FeatureConfig,
-    FilterConfig,
-    IngestionConfig,
-    RDFConfig,
-)
+from kgcl.ingestion.config import CollectorConfig, FeatureConfig, FilterConfig, IngestionConfig, RDFConfig
 from kgcl.ingestion.models import AppEvent, BrowserVisit, CalendarBlock, EventBatch
 from kgcl.ingestion.service import IngestionService
 
@@ -28,9 +20,7 @@ class TestModels:
 
     def test_app_event_creation(self) -> None:
         """AppEvent creates with required fields."""
-        event = AppEvent(
-            event_id="app_001", timestamp=datetime.now(UTC), app_name="com.apple.Safari"
-        )
+        event = AppEvent(event_id="app_001", timestamp=datetime.now(UTC), app_name="com.apple.Safari")
         assert event.event_id == "app_001"
         assert event.app_name == "com.apple.Safari"
 
@@ -61,9 +51,7 @@ class TestModels:
     def test_event_batch_aggregation(self) -> None:
         """EventBatch aggregates events with metadata."""
         now = datetime.now(UTC)
-        events = [
-            AppEvent(event_id=f"e_{i}", timestamp=now, app_name="App") for i in range(5)
-        ]
+        events = [AppEvent(event_id=f"e_{i}", timestamp=now, app_name="App") for i in range(5)]
         batch = EventBatch(batch_id="batch_001", events=events)
 
         assert batch.event_count() == 5
@@ -96,9 +84,7 @@ class TestService:
     def test_service_lifecycle(self) -> None:
         """Service starts and stops cleanly."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = IngestionConfig(
-                collector=CollectorConfig(output_directory=Path(tmpdir))
-            )
+            config = IngestionConfig(collector=CollectorConfig(output_directory=Path(tmpdir)))
             service = IngestionService(config)
 
             service.start()
@@ -112,31 +98,20 @@ class TestService:
         with tempfile.TemporaryDirectory() as tmpdir:
             config = IngestionConfig(
                 collector=CollectorConfig(output_directory=Path(tmpdir)),
-                filter=FilterConfig(
-                    excluded_apps=["com.excluded.App"], min_duration_seconds=10
-                ),
+                filter=FilterConfig(excluded_apps=["com.excluded.App"], min_duration_seconds=10),
             )
             service = IngestionService(config)
             service.start()
 
             # Excluded app
             result = service.ingest_event(
-                AppEvent(
-                    event_id="excluded",
-                    timestamp=datetime.now(UTC),
-                    app_name="com.excluded.App",
-                )
+                AppEvent(event_id="excluded", timestamp=datetime.now(UTC), app_name="com.excluded.App")
             )
             assert result["status"] == "filtered"
 
             # Too short
             result = service.ingest_event(
-                AppEvent(
-                    event_id="short",
-                    timestamp=datetime.now(UTC),
-                    app_name="com.ok.App",
-                    duration_seconds=5.0,
-                )
+                AppEvent(event_id="short", timestamp=datetime.now(UTC), app_name="com.ok.App", duration_seconds=5.0)
             )
             assert result["status"] == "filtered"
 
@@ -145,9 +120,7 @@ class TestService:
     def test_hook_registration(self) -> None:
         """Service accepts pre and post hooks."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = IngestionConfig(
-                collector=CollectorConfig(output_directory=Path(tmpdir))
-            )
+            config = IngestionConfig(collector=CollectorConfig(output_directory=Path(tmpdir)))
             service = IngestionService(config)
 
             pre_calls: list[int] = []
@@ -157,13 +130,7 @@ class TestService:
             service.register_post_hook("post", lambda e: post_calls.append(len(e)))
             service.start()
 
-            service.ingest_event(
-                AppEvent(
-                    event_id="hook_test",
-                    timestamp=datetime.now(UTC),
-                    app_name="com.test.App",
-                )
-            )
+            service.ingest_event(AppEvent(event_id="hook_test", timestamp=datetime.now(UTC), app_name="com.test.App"))
 
             assert len(pre_calls) == 1
             assert len(post_calls) == 1
@@ -183,11 +150,7 @@ class TestService:
             service.start()
 
             for i in range(10):
-                service.ingest_event(
-                    AppEvent(
-                        event_id=f"e_{i}", timestamp=datetime.now(UTC), app_name="App"
-                    )
-                )
+                service.ingest_event(AppEvent(event_id=f"e_{i}", timestamp=datetime.now(UTC), app_name="App"))
 
             result = service.flush()
             assert result["events_flushed"] == 10
@@ -203,13 +166,7 @@ class TestRDFConversion:
         config = IngestionConfig(rdf=RDFConfig(base_namespace="http://example.org/"))
         service = IngestionService(config)
 
-        events = [
-            AppEvent(
-                event_id="rdf_test",
-                timestamp=datetime.now(UTC),
-                app_name="com.test.App",
-            )
-        ]
+        events = [AppEvent(event_id="rdf_test", timestamp=datetime.now(UTC), app_name="com.test.App")]
 
         graph = service.rdf_converter.convert_batch(events)
         assert len(graph) > 0
@@ -220,9 +177,7 @@ class TestMaterialization:
 
     def test_materialize_app_usage(self) -> None:
         """Materializer computes app usage features."""
-        config = IngestionConfig(
-            feature=FeatureConfig(enabled_features=["app_usage_time"])
-        )
+        config = IngestionConfig(feature=FeatureConfig(enabled_features=["app_usage_time"]))
         service = IngestionService(config)
 
         now = datetime.now(UTC).replace(tzinfo=None)

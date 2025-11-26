@@ -23,33 +23,139 @@
 | Full type hints | Mypy | Every function needs param and return types |
 | No TODO/FIXME/WIP | Lies | Complete the work, no deferred implementation |
 
-### Common Patterns
-
+### Line Length Examples (88 chars MAX)
 ```python
-# ❌ WRONG - Line too long
-result = function_name(param_one, param_two, param_three, param_four)
+# ❌ WRONG - These lines are too long
+async def execute_hook_with_timeout(self, hook: Hook, context: HookContext, timeout_seconds: float = 30.0) -> HookReceipt:
 
-# ✅ CORRECT - Break into multiple lines
-result = function_name(
-    param_one,
-    param_two,
-    param_three,
-    param_four,
+receipt = HookReceipt(execution_id=str(uuid4()), hook_id=hook.name, status=HookStatus.SUCCESS, duration_ms=duration, metadata={"phase": phase.value})
+
+validated_results: list[ValidationResult] = [validator.validate(entity, schema) for validator, entity, schema in zip(validators, entities, schemas)]
+
+# ✅ CORRECT - Break at 88 characters
+async def execute_hook_with_timeout(
+    self,
+    hook: Hook,
+    context: HookContext,
+    timeout_seconds: float = 30.0,
+) -> HookReceipt:
+
+receipt = HookReceipt(
+    execution_id=str(uuid4()),
+    hook_id=hook.name,
+    status=HookStatus.SUCCESS,
+    duration_ms=duration,
+    metadata={"phase": phase.value},
 )
 
-# ❌ WRONG - Unused import
-from typing import Dict, List, Optional  # Optional never used
+validated_results: list[ValidationResult] = [
+    validator.validate(entity, schema)
+    for validator, entity, schema in zip(validators, entities, schemas)
+]
+```
 
-# ✅ CORRECT - Only import what you use
-from typing import Dict, List
+### Unused Imports Examples (F401)
+```python
+# ❌ WRONG - Unused imports after refactoring (common mistake)
+from dataclasses import dataclass, field, asdict, replace  # asdict, replace unused
+from typing import Any, Callable, TypeVar, Generic, Protocol  # Generic, Protocol unused
+from kgcl.hooks.core import Hook, HookReceipt, HookRegistry, HookExecutor  # HookExecutor unused
+from kgcl.hooks.conditions import (
+    Condition, ThresholdCondition, SparqlAskCondition,  # SparqlAskCondition unused
+    TimeWindowCondition, CompositeCondition,  # CompositeCondition unused
+)
+import json  # Was used in deleted code
 
-# ❌ WRONG - Missing types
-def process(data):
-    return data
+# ✅ CORRECT - Only import what you actually use
+from dataclasses import dataclass, field
+from typing import Any, Callable, TypeVar
+from kgcl.hooks.core import Hook, HookReceipt, HookRegistry
+from kgcl.hooks.conditions import Condition, ThresholdCondition, TimeWindowCondition
+```
 
-# ✅ CORRECT - Full type hints
-def process(data: str) -> str:
-    return data
+### Unused Variables Examples (F841)
+```python
+# ❌ WRONG - Variables assigned but never read
+async def process_hooks(self, hooks: list[Hook], context: HookContext) -> list[HookReceipt]:
+    start_time = datetime.now(timezone.utc)
+    results: list[HookReceipt] = []
+    error_count = 0  # Assigned but never read
+
+    for idx, hook in enumerate(hooks):
+        hook_start = datetime.now(timezone.utc)  # Assigned but never read
+        receipt = await self.execute(hook, context)
+        elapsed = (datetime.now(timezone.utc) - hook_start).total_seconds()  # Never used
+        results.append(receipt)
+
+    total_duration = (datetime.now(timezone.utc) - start_time).total_seconds()  # Never used
+    return results
+
+# ✅ CORRECT - Remove unused or actually use them
+async def process_hooks(self, hooks: list[Hook], context: HookContext) -> list[HookReceipt]:
+    results: list[HookReceipt] = []
+    for hook in hooks:
+        receipt = await self.execute(hook, context)
+        results.append(receipt)
+    return results
+```
+
+### Type Hints Examples (Mypy strict)
+```python
+# ❌ WRONG - Missing or incomplete type hints
+class HookProcessor:
+    def __init__(self, registry, executor, cache=None):  # No types!
+        self.registry = registry
+        self.executor = executor
+        self.cache = cache or {}
+
+    async def process(self, event):  # No types!
+        hooks = self.registry.get_hooks_for_event(event)
+        return [await self.executor.execute(h, event) for h in hooks]
+
+# ✅ CORRECT - Full type hints everywhere
+class HookProcessor:
+    def __init__(
+        self,
+        registry: HookRegistry,
+        executor: HookExecutor,
+        cache: dict[str, HookReceipt] | None = None,
+    ) -> None:
+        self.registry: HookRegistry = registry
+        self.executor: HookExecutor = executor
+        self.cache: dict[str, HookReceipt] = cache or {}
+
+    async def process(self, event: dict[str, Any]) -> list[HookReceipt]:
+        hooks: list[Hook] = self.registry.get_hooks_for_event(event)
+        return [await self.executor.execute(h, event) for h in hooks]
+```
+
+### Dataclass Examples (Common Mistakes)
+```python
+# ❌ WRONG - Mutable default, missing generic types, line too long
+@dataclass
+class HookConfiguration:
+    name: str
+    conditions: list = field(default_factory=list)  # Missing generic
+    handlers: dict = field(default_factory=dict)  # Missing generics
+    metadata = {}  # WRONG: Mutable default!
+    retry_policy: RetryPolicy = RetryPolicy(max_retries=3, backoff_seconds=1.0, retry_on=[TimeoutError, ConnectionError])
+
+# ✅ CORRECT - Immutable, fully typed, formatted
+@dataclass(frozen=True)
+class HookConfiguration:
+    name: str
+    conditions: list[Condition] = field(default_factory=list)
+    handlers: dict[str, Callable[[HookContext], Awaitable[Any]]] = field(
+        default_factory=dict
+    )
+    metadata: dict[str, str] = field(default_factory=dict)
+    retry_policy: RetryPolicy = field(
+        default_factory=lambda: RetryPolicy(
+            max_retries=3,
+            backoff_seconds=1.0,
+            retry_on=[TimeoutError, ConnectionError],
+        )
+    )
 ```
 
 ## File Organization

@@ -53,6 +53,17 @@ from __future__ import annotations
 # PyOxigraph + EYE hybrid engine
 from kgcl.hybrid.hybrid_engine import HybridEngine, PhysicsResult
 
+# Knowledge Hooks - Pure N3 Logic
+from kgcl.hybrid.knowledge_hooks import (
+    N3_HOOK_PHYSICS,
+    HookAction,
+    HookExecutor,
+    HookPhase,
+    HookReceipt,
+    HookRegistry,
+    KnowledgeHook,
+)
+
 # PyOxigraph-based architecture components
 # Wrapped in try/except for graceful degradation if pyoxigraph not installed
 try:
@@ -110,6 +121,14 @@ __all__ = [
     # PyOxigraph + EYE hybrid engine
     "HybridEngine",
     "PhysicsResult",
+    # Knowledge Hooks - Pure N3 Logic
+    "KnowledgeHook",
+    "HookRegistry",
+    "HookExecutor",
+    "HookPhase",
+    "HookAction",
+    "HookReceipt",
+    "N3_HOOK_PHYSICS",
     # Tick controller
     "TickController",
     "NewTickResult",

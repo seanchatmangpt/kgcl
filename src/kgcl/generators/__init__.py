@@ -35,25 +35,25 @@ from .stale import CompletedItem, StaleItem, StaleItemsGenerator
 __version__ = "1.0.0"
 
 __all__ = [
-    # Base generator
-    "ProjectionGenerator",
     # Agenda generator
     "AgendaGenerator",
     "CalendarEvent",
-    "Reminder",
-    "FocusBlock",
-    # Quality generator
-    "QualityReportGenerator",
-    "Violation",
-    "QualityCategory",
+    "CompletedItem",
     # Conflict generator
     "ConflictReportGenerator",
-    "TimeConflict",
+    "FocusBlock",
+    # Base generator
+    "ProjectionGenerator",
+    "QualityCategory",
+    # Quality generator
+    "QualityReportGenerator",
+    "Reminder",
     "ResourceConflict",
+    "StaleItem",
     # Stale items generator
     "StaleItemsGenerator",
-    "StaleItem",
-    "CompletedItem",
+    "TimeConflict",
+    "Violation",
 ]
 
 

@@ -1,5 +1,6 @@
 """Test fixtures for Apple data ingest (EventKit, Mail, Spotlight)."""
 
+import json
 from dataclasses import dataclass
 from datetime import UTC, datetime
 
@@ -310,7 +311,10 @@ def calendar_event_no_title():
 def reminder_task_simple():
     """Simple task (incomplete, no due date)."""
     return MockEKReminder(
-        reminder_id="ek-reminder-001", title="Review Q4 metrics", completed=False, list_title="Work"
+        reminder_id="ek-reminder-001",
+        title="Review Q4 metrics",
+        completed=False,
+        list_title="Work",
     )
 
 
@@ -453,11 +457,17 @@ def calendar_event_batch(
     calendar_event_simple, calendar_event_with_attendees, calendar_event_all_day
 ):
     """Batch of multiple calendar events."""
-    return [calendar_event_simple, calendar_event_with_attendees, calendar_event_all_day]
+    return [
+        calendar_event_simple,
+        calendar_event_with_attendees,
+        calendar_event_all_day,
+    ]
 
 
 @pytest.fixture
-def reminder_task_batch(reminder_task_simple, reminder_task_with_due_date, reminder_task_completed):
+def reminder_task_batch(
+    reminder_task_simple, reminder_task_with_due_date, reminder_task_completed
+):
     """Batch of multiple reminders."""
     return [reminder_task_simple, reminder_task_with_due_date, reminder_task_completed]
 
@@ -540,3 +550,63 @@ def invalid_ingest_data():
             )
         ],
     }
+
+
+@pytest.fixture
+def ingest_payload_json(tmp_path, full_ingest_data):
+    """Write ingest data to a JSON payload compatible with scan-apple."""
+
+    def _event_to_dict(event: MockEKEvent) -> dict:
+        return {
+            "id": event.eventIdentifier,
+            "title": event.title,
+            "start": event.startDate.isoformat(),
+            "end": event.endDate.isoformat(),
+            "calendar": event.calendar.title,
+            "location": event.location,
+            "notes": event.notes,
+            "attendees": event.attendees_list,
+            "all_day": event.isAllDay,
+        }
+
+    def _reminder_to_dict(reminder: MockEKReminder) -> dict:
+        return {
+            "id": reminder.calendarItemIdentifier,
+            "title": reminder.title,
+            "completed": reminder.completed,
+            "due": reminder.due_date.isoformat() if reminder.due_date else None,
+            "list": reminder.calendar.title,
+            "notes": reminder.notes,
+            "priority": reminder.priority,
+        }
+
+    def _mail_to_dict(message: MockMailMessage) -> dict:
+        return {
+            "id": message.messageID,
+            "subject": message.subject,
+            "sender": message.sender_email,
+            "recipients": message.recipient_emails,
+            "received": message.date_received.isoformat(),
+            "flagged": message.is_flagged,
+        }
+
+    def _file_to_dict(file_meta: MockFileMetadata) -> dict:
+        return {
+            "path": file_meta.path,
+            "name": file_meta.name,
+            "created": file_meta.created_date.isoformat(),
+            "modified": file_meta.modified_date.isoformat(),
+            "mime_type": file_meta.file_type,
+            "tags": file_meta.tags,
+        }
+
+    payload = {
+        "events": [_event_to_dict(evt) for evt in full_ingest_data["calendar_events"]],
+        "reminders": [_reminder_to_dict(rem) for rem in full_ingest_data["reminders"]],
+        "mail": [_mail_to_dict(msg) for msg in full_ingest_data["mail_messages"]],
+        "files": [_file_to_dict(f) for f in full_ingest_data["files"]],
+    }
+
+    payload_path = tmp_path / "ingest.json"
+    payload_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    return payload_path

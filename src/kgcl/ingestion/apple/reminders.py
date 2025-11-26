@@ -58,11 +58,15 @@ class RemindersIngestEngine(BaseIngestEngine):
             )
             if is_completed:
                 self._add_uri(
-                    task_uri, self.schema_ns.actionStatus, self.schema_ns.CompletedActionStatus
+                    task_uri,
+                    self.schema_ns.actionStatus,
+                    self.schema_ns.CompletedActionStatus,
                 )
             else:
                 self._add_uri(
-                    task_uri, self.schema_ns.actionStatus, self.schema_ns.PotentialActionStatus
+                    task_uri,
+                    self.schema_ns.actionStatus,
+                    self.schema_ns.PotentialActionStatus,
                 )
 
             # Add due date if present
@@ -84,7 +88,9 @@ class RemindersIngestEngine(BaseIngestEngine):
             if priority and priority > 0:
                 priority_map = {1: "high", 5: "medium", 9: "low"}
                 priority_str = priority_map.get(priority, str(priority))
-                self._add_literal(task_uri, self.schema_ns.keywords, f"priority:{priority_str}")
+                self._add_literal(
+                    task_uri, self.schema_ns.keywords, f"priority:{priority_str}"
+                )
 
             # Add Apple-specific properties
             list_obj = getattr(source_object, "calendar", None)
@@ -104,7 +110,11 @@ class RemindersIngestEngine(BaseIngestEngine):
                 receipt_hash=receipt_hash,
                 items_processed=1,
                 errors=errors,
-                metadata={"task_id": task_id, "title": title, "completed": is_completed},
+                metadata={
+                    "task_id": task_id,
+                    "title": title,
+                    "completed": is_completed,
+                },
             )
 
         except Exception as e:

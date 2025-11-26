@@ -9,7 +9,7 @@ import hashlib
 import json
 import uuid
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import Any
 
 
@@ -130,7 +130,10 @@ class Receipt:
             "@type": "HookReceipt",
             "@id": f"urn:uuid:{self.receipt_id}",
             "hookId": self.hook_id,
-            "timestamp": {"@type": "xsd:dateTime", "@value": self.timestamp.isoformat()},
+            "timestamp": {
+                "@type": "xsd:dateTime",
+                "@value": self.timestamp.isoformat(),
+            },
             "actor": self.actor,
             "conditionTriggered": (
                 self.condition_result.triggered
@@ -205,7 +208,9 @@ class Receipt:
             triples.append((subject, "error", self.error))
 
         if hasattr(self.condition_result, "triggered"):
-            triples.append((subject, "conditionTriggered", str(self.condition_result.triggered)))
+            triples.append(
+                (subject, "conditionTriggered", str(self.condition_result.triggered))
+            )
 
         return triples
 
@@ -321,11 +326,17 @@ class ReceiptStore:
         # Filter by actor
         if actor:
             actor_ids = set(self._index_by_actor.get(actor, []))
-            receipt_ids = actor_ids if receipt_ids is None else receipt_ids.intersection(actor_ids)
+            receipt_ids = (
+                actor_ids
+                if receipt_ids is None
+                else receipt_ids.intersection(actor_ids)
+            )
 
         # Get receipts
         if receipt_ids is not None:
-            receipts = [self._receipts[rid] for rid in receipt_ids if rid in self._receipts]
+            receipts = [
+                self._receipts[rid] for rid in receipt_ids if rid in self._receipts
+            ]
         else:
             receipts = list(self._receipts.values())
 
@@ -406,5 +417,7 @@ class MerkleTree:
             Merkle anchor
         """
         return MerkleAnchor(
-            root_hash=self.compute_root(), graph_version=graph_version, timestamp=datetime.utcnow()
+            root_hash=self.compute_root(),
+            graph_version=graph_version,
+            timestamp=datetime.now(UTC),
         )

@@ -9,10 +9,15 @@ This plugin provides capabilities for:
 """
 
 import logging
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import Any
 
-from .base import BaseCapabilityPlugin, CapabilityData, CapabilityDescriptor, EntitlementLevel
+from .base import (
+    BaseCapabilityPlugin,
+    CapabilityData,
+    CapabilityDescriptor,
+    EntitlementLevel,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -177,7 +182,7 @@ class AppKitPlugin(BaseCapabilityPlugin):
         self, capability_name: str, parameters: dict[str, Any] | None = None
     ) -> CapabilityData:
         """Collect data for a specific AppKit capability."""
-        timestamp = datetime.utcnow()
+        timestamp = datetime.now(UTC)
 
         try:
             if capability_name == "frontmost_application":
@@ -201,7 +206,10 @@ class AppKitPlugin(BaseCapabilityPlugin):
         except Exception as e:
             logger.error(f"Error collecting {capability_name}: {e}")
             return CapabilityData(
-                capability_name=capability_name, timestamp=timestamp, data={}, error=str(e)
+                capability_name=capability_name,
+                timestamp=timestamp,
+                data={},
+                error=str(e),
             )
 
     def _get_frontmost_application(self) -> dict[str, Any]:
@@ -349,7 +357,8 @@ class AppKitPlugin(BaseCapabilityPlugin):
 
             # Get window list
             window_list = Quartz.CGWindowListCopyWindowInfo(
-                Quartz.kCGWindowListOptionOnScreenOnly | Quartz.kCGWindowListExcludeDesktopElements,
+                Quartz.kCGWindowListOptionOnScreenOnly
+                | Quartz.kCGWindowListExcludeDesktopElements,
                 Quartz.kCGNullWindowID,
             )
 

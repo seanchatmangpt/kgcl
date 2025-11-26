@@ -1,0 +1,100 @@
+@prefix cli: <urn:kgc:cli:> .
+@prefix kgc: <urn:kgc:> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Vocabulary -----------------------------------------------------------------
+
+cli:RootCommand a rdfs:Class .
+cli:Command a rdfs:Class .
+cli:Argument a rdfs:Class .
+cli:Option a rdfs:Class .
+
+cli:name a rdfs:Property .
+cli:help a rdfs:Property .
+cli:handlerModule a rdfs:Property .
+cli:handlerFunction a rdfs:Property .
+cli:hasArgument a rdfs:Property .
+cli:hasOption a rdfs:Property .
+cli:isRequired a rdfs:Property .
+cli:default a rdfs:Property .
+cli:choice a rdfs:Property .
+cli:dataType a rdfs:Property .
+cli:repeatable a rdfs:Property .
+cli:root a rdfs:Property .
+
+# Root command ---------------------------------------------------------------
+
+cli:KgctRoot a cli:RootCommand ;
+    cli:name "kgct" ;
+    cli:help "KGC Technician Console (macOS/iOS personal fabric)" ;
+    cli:root cli:KgctRoot ;
+    cli:hasOption [
+        a cli:Option ;
+        cli:name "version" ;
+        cli:help "Show CLI version" ;
+        cli:isRequired false
+    ] .
+
+# Command: scan-apple --------------------------------------------------------
+
+cli:ScanApple a cli:Command ;
+    cli:name "scan-apple" ;
+    cli:help "Ingest Calendar/Reminders/Mail/File data via PyObjC or structured JSON" ;
+    cli:handlerModule "ingest" ;
+    cli:handlerFunction "scan_apple" ;
+    cli:hasOption [
+        a cli:Option ;
+        cli:name "source" ;
+        cli:help "Subset of sources to ingest (calendars, reminders, mail, files)" ;
+        cli:isRequired false ;
+        cli:repeatable true
+    ] ;
+    cli:hasOption [
+        a cli:Option ;
+        cli:name "input" ;
+        cli:help "Path to JSON payload exported from PyObjC ingest bridge" ;
+        cli:isRequired false
+    ] ;
+    cli:hasOption [
+        a cli:Option ;
+        cli:name "output" ;
+        cli:help "Override output Turtle path (default from apple.ingest.ttl)" ;
+        cli:isRequired false
+    ] .
+
+# Command: generate-cli ------------------------------------------------------
+
+cli:GenerateCli a cli:Command ;
+    cli:name "generate-cli" ;
+    cli:help "Regenerate Typer CLI from .kgc/cli.ttl + Jinja template" ;
+    cli:handlerModule "codegen" ;
+    cli:handlerFunction "generate_cli" .
+
+# Command: generate-agenda ---------------------------------------------------
+
+cli:GenerateAgenda a cli:Command ;
+    cli:name "generate-agenda" ;
+    cli:help "Render agenda projection for a day or week" ;
+    cli:handlerModule "docs" ;
+    cli:handlerFunction "generate_agenda" ;
+    cli:hasArgument [
+        a cli:Argument ;
+        cli:name "day" ;
+        cli:help "Which day to generate (today, tomorrow, this-week)" ;
+        cli:isRequired true
+    ] .
+
+# Command: validate-data -----------------------------------------------------
+
+cli:ValidateData a cli:Command ;
+    cli:name "validate-data" ;
+    cli:help "Run SHACL/ASK validation for ingested RDF" ;
+    cli:handlerModule "validation" ;
+    cli:handlerFunction "validate_ingest" ;
+    cli:hasOption [
+        a cli:Option ;
+        cli:name "input" ;
+        cli:help "Path to Turtle/N3 graph to validate" ;
+        cli:isRequired false
+    ] .
+

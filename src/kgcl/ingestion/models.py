@@ -52,7 +52,7 @@ class AppEvent(BaseModel):
     def normalize_timestamp(cls, v: Any) -> datetime:
         """Ensure timestamp is in UTC."""
         if isinstance(v, str):
-            dt = datetime.fromisoformat(v.replace("Z", "+00:00"))
+            dt = datetime.fromisoformat(v)
         elif isinstance(v, datetime):
             dt = v
         else:
@@ -102,7 +102,7 @@ class BrowserVisit(BaseModel):
     def normalize_timestamp(cls, v: Any) -> datetime:
         """Ensure timestamp is in UTC."""
         if isinstance(v, str):
-            dt = datetime.fromisoformat(v.replace("Z", "+00:00"))
+            dt = datetime.fromisoformat(v)
         elif isinstance(v, datetime):
             dt = v
         else:
@@ -143,7 +143,9 @@ class CalendarBlock(BaseModel):
     title: str = Field(..., description="Event title")
     description: str | None = Field(None, description="Event description")
     location: str | None = Field(None, description="Event location")
-    attendees: list[str] = Field(default_factory=list, description="Attendee email addresses")
+    attendees: list[str] = Field(
+        default_factory=list, description="Attendee email addresses"
+    )
     organizer: str | None = Field(None, description="Event organizer email")
     calendar_name: str | None = Field(None, description="Calendar source name")
     is_all_day: bool = Field(default=False, description="All-day event flag")
@@ -154,7 +156,7 @@ class CalendarBlock(BaseModel):
     def normalize_timestamp(cls, v: Any) -> datetime:
         """Ensure timestamp is in UTC."""
         if isinstance(v, str):
-            dt = datetime.fromisoformat(v.replace("Z", "+00:00"))
+            dt = datetime.fromisoformat(v)
         elif isinstance(v, datetime):
             dt = v
         else:
@@ -205,7 +207,7 @@ class FeatureInstance(BaseModel):
     def normalize_timestamp(cls, v: Any) -> datetime:
         """Ensure timestamp is in UTC."""
         if isinstance(v, str):
-            dt = datetime.fromisoformat(v.replace("Z", "+00:00"))
+            dt = datetime.fromisoformat(v)
         elif isinstance(v, datetime):
             dt = v
         else:
@@ -231,7 +233,9 @@ class MaterializedFeature(BaseModel):
     )
     value: float | int | str | bool = Field(..., description="Aggregated value")
     sample_count: int = Field(..., ge=0, description="Number of samples in aggregation")
-    metadata: dict[str, Any] = Field(default_factory=dict, description="Additional metadata")
+    metadata: dict[str, Any] = Field(
+        default_factory=dict, description="Additional metadata"
+    )
 
 
 class EventBatch(BaseModel):

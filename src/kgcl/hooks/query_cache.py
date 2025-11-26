@@ -6,7 +6,7 @@ Ported from UNRDF query-cache.mjs.
 """
 
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import UTC, datetime
 from hashlib import sha256
 from typing import Any
 
@@ -22,13 +22,13 @@ class CacheEntry:
 
     def is_expired(self) -> bool:
         """Check if entry has expired."""
-        age_seconds = (datetime.utcnow() - self.timestamp).total_seconds()
+        age_seconds = (datetime.now(UTC) - self.timestamp).total_seconds()
         return age_seconds > self.ttl_seconds
 
     @property
     def age_seconds(self) -> float:
         """Get age of entry in seconds."""
-        return (datetime.utcnow() - self.timestamp).total_seconds()
+        return (datetime.now(UTC) - self.timestamp).total_seconds()
 
 
 class QueryCache:
@@ -56,6 +56,7 @@ class QueryCache:
         self.ttl = ttl_seconds
         self.hits = 0
         self.misses = 0
+        self.query_stats: dict[str, dict[str, int | str]] = {}
         self.access_order: list[str] = []  # For LRU tracking
 
     def _compute_hash(self, query: str) -> str:
@@ -89,7 +90,7 @@ class QueryCache:
         query_hash = self._compute_hash(query)
 
         if query_hash not in self.cache:
-            self.misses += 1
+            self._record_miss(query_hash, query)
             return None
 
         entry = self.cache[query_hash]
@@ -99,7 +100,7 @@ class QueryCache:
             del self.cache[query_hash]
             if query_hash in self.access_order:
                 self.access_order.remove(query_hash)
-            self.misses += 1
+            self._record_miss(query_hash, query)
             return None
 
         # Update access order for LRU
@@ -107,7 +108,7 @@ class QueryCache:
             self.access_order.remove(query_hash)
         self.access_order.append(query_hash)
 
-        self.hits += 1
+        self._record_hit(query_hash)
         return entry.result
 
     def set(self, query: str, result: Any, ttl_seconds: int | None = None) -> None:
@@ -133,7 +134,10 @@ class QueryCache:
 
         # Store entry
         self.cache[query_hash] = CacheEntry(
-            result=result, timestamp=datetime.utcnow(), ttl_seconds=ttl, query_hash=query_hash
+            result=result,
+            timestamp=datetime.now(UTC),
+            ttl_seconds=ttl,
+            query_hash=query_hash,
         )
 
         # Update access order
@@ -161,6 +165,7 @@ class QueryCache:
         self.access_order.clear()
         self.hits = 0
         self.misses = 0
+        self.query_stats.clear()
 
     @property
     def hit_rate(self) -> float:
@@ -174,20 +179,14 @@ class QueryCache:
         total = self.hits + self.misses
         return self.hits / total if total > 0 else 0.0
 
-    def get_stats(self) -> dict[str, Any]:
-        """Get comprehensive cache statistics.
-
-        Returns
-        -------
-        Dict[str, Any]
-            Dict with cache stats
-        """
+    def get_stats(self, query: str | None = None) -> dict[str, Any]:
+        """Get cache statistics, optionally scoped to a specific query."""
         total = self.hits + self.misses
 
         # Analyze entries
         expired_count = sum(1 for e in self.cache.values() if e.is_expired())
 
-        return {
+        stats = {
             "size": len(self.cache),
             "max_size": self.max_size,
             "hits": self.hits,
@@ -197,3 +196,31 @@ class QueryCache:
             "expired_entries": expired_count,
             "ttl_default": self.ttl,
         }
+
+        if query:
+            query_hash = self._compute_hash(query)
+            scoped = self.query_stats.get(query_hash, {"hits": 0, "misses": 0})
+            stats.update(
+                {
+                    "query_hits": scoped["hits"],
+                    "query_misses": scoped["misses"],
+                    "hits": scoped["hits"],
+                    "misses": scoped["misses"],
+                }
+            )
+
+        return stats
+
+    def _record_hit(self, query_hash: str) -> None:
+        """Record cache hit for query."""
+        self.hits += 1
+        stats = self.query_stats.setdefault(query_hash, {"hits": 0, "misses": 0})
+        stats["hits"] += 1
+
+    def _record_miss(self, query_hash: str, query: str | None = None) -> None:
+        """Record cache miss for query."""
+        self.misses += 1
+        stats = self.query_stats.setdefault(query_hash, {"hits": 0, "misses": 0})
+        stats["misses"] += 1
+        if query is not None and "fingerprint" not in stats:
+            stats["fingerprint"] = sha256(f"{query_hash}:{query}".encode()).hexdigest()

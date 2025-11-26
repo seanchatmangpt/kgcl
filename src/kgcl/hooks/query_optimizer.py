@@ -8,6 +8,7 @@ for improving SPARQL query performance.
 import hashlib
 import re
 from dataclasses import dataclass, field
+from typing import Any
 
 
 @dataclass
@@ -55,7 +56,7 @@ class QueryOptimizer:
 
     def __init__(self) -> None:
         """Initialize optimizer."""
-        self.query_stats: dict[str, dict] = {}
+        self.query_stats: dict[str, dict[str, Any]] = {}
         self.index_hints: dict[str, str] = {}
         self._known_indexes: set[str] = set()
 
@@ -193,16 +194,14 @@ class QueryOptimizer:
                 self._known_indexes.add(index_name)
 
         # Suggest index for subject lookups
-        if re.search(r"\?s [<a-z]", query):
-            if "idx_subject" not in self._known_indexes:
-                suggestions.append("CREATE INDEX idx_subject ON triples(subject)")
-                self._known_indexes.add("idx_subject")
+        if re.search(r"\?s [<a-z]", query) and "idx_subject" not in self._known_indexes:
+            suggestions.append("CREATE INDEX idx_subject ON triples(subject)")
+            self._known_indexes.add("idx_subject")
 
         # Suggest index for object lookups
-        if re.search(r"[<a-z]+ \?o", query):
-            if "idx_object" not in self._known_indexes:
-                suggestions.append("CREATE INDEX idx_object ON triples(object)")
-                self._known_indexes.add("idx_object")
+        if re.search(r"[<a-z]+ \?o", query) and "idx_object" not in self._known_indexes:
+            suggestions.append("CREATE INDEX idx_object ON triples(object)")
+            self._known_indexes.add("idx_object")
 
         return suggestions
 
@@ -227,7 +226,7 @@ class QueryOptimizer:
                 prev_avg * (stats["executions"] - 1) + execution_time_ms
             ) / stats["executions"]
 
-    def get_stats(self, query: str) -> dict | None:
+    def get_stats(self, query: str) -> dict[str, Any] | None:
         """
         Get statistics for a query.
 
@@ -252,7 +251,9 @@ class QueryOptimizer:
         """Create hash of query for identification."""
         return hashlib.md5(query.encode()).hexdigest()
 
-    def _estimate_selectivity(self, query: str, triple_count: int, has_filter: bool) -> float:
+    def _estimate_selectivity(
+        self, query: str, triple_count: int, has_filter: bool
+    ) -> float:
         """
         Estimate query selectivity (0.0 = very selective, 1.0 = returns all).
         """
@@ -271,7 +272,12 @@ class QueryOptimizer:
         return max(0.0, min(1.0, selectivity))
 
     def _build_execution_path(
-        self, query: str, triple_count: int, has_union: bool, has_optional: bool, has_filter: bool
+        self,
+        query: str,
+        triple_count: int,
+        has_union: bool,
+        has_optional: bool,
+        has_filter: bool,
     ) -> list[str]:
         """Build step-by-step execution plan."""
         path = []
@@ -305,27 +311,177 @@ class QueryOptimizer:
             return True
 
         # Check for specific subject/object patterns
-        if re.search(r"<[^>]+> \?[a-z]", query):
-            return True
-
-        return False
+        return bool(re.search(r"<[^>]+> \?[a-z]", query))
 
     def _push_down_filters(self, query: str) -> str:
         """
-        Push filter conditions closer to triple patterns.
+        Push FILTER clauses closer to triple patterns that produce filtered variables.
 
-        This is a simplified implementation that demonstrates the concept.
+        Algorithm:
+        1. Parse query to extract FILTER clauses and their positions
+        2. For each FILTER, identify which variables it references
+        3. Find the triple pattern that produces each variable
+        4. Move FILTER to immediately after the last producing triple
+
+        Parameters
+        ----------
+        query : str
+            Original SPARQL query
+
+        Returns
+        -------
+        str
+            Query with filters pushed down closer to producing patterns
+
+        Note
+        ----
+        Implementation uses regex-based parsing. Production systems should use
+        proper SPARQL parser for complete query transformation.
         """
-        # For now, return query unchanged
-        # Real implementation would parse and rewrite query AST
-        return query
+        # Extract FILTER clauses and their conditions using regex
+        filter_pattern = re.compile(r"FILTER\s*\((.*?)\)", re.IGNORECASE | re.DOTALL)
+        filters = filter_pattern.findall(query)
+
+        if not filters:
+            return query
+
+        # Remove existing FILTER clauses temporarily
+        query_without_filters = filter_pattern.sub("", query)
+
+        # Extract triple patterns (simplified: match ?var predicate object)
+        triple_pattern = re.compile(r"\?[a-zA-Z0-9_]+\s+[^\s]+\s+[^\s.;]+")
+        triples = triple_pattern.findall(query_without_filters)
+
+        if not triples:
+            return query
+
+        # For each FILTER, find variables it references
+        for filter_cond in filters:
+            # Extract variables from filter condition (?varname)
+            var_pattern = re.compile(r"\?([a-zA-Z0-9_]+)")
+            filter_vars = set(var_pattern.findall(filter_cond))
+
+            if not filter_vars:
+                continue
+
+            # Find the last triple that produces any of these variables
+            last_producing_triple_idx = -1
+            for idx, triple in enumerate(triples):
+                triple_vars = set(var_pattern.findall(triple))
+                if filter_vars & triple_vars:  # Intersection
+                    last_producing_triple_idx = idx
+
+            # If found, insert FILTER after that triple
+            if last_producing_triple_idx >= 0 and last_producing_triple_idx < len(
+                triples
+            ):
+                # Find position of triple in query
+                triple_text = triples[last_producing_triple_idx]
+                triple_pos = query_without_filters.find(triple_text)
+
+                if triple_pos >= 0:
+                    # Insert FILTER after triple (after period or semicolon)
+                    insert_pos = triple_pos + len(triple_text)
+
+                    # Find next period/semicolon/closing brace
+                    while (
+                        insert_pos < len(query_without_filters)
+                        and query_without_filters[insert_pos] not in ".;}"
+                    ):
+                        insert_pos += 1
+
+                    if insert_pos < len(query_without_filters):
+                        insert_pos += 1  # After period/semicolon
+
+                    # Insert FILTER
+                    filter_text = f" FILTER({filter_cond}) "
+                    query_without_filters = (
+                        query_without_filters[:insert_pos]
+                        + filter_text
+                        + query_without_filters[insert_pos:]
+                    )
+
+        return query_without_filters
 
     def _reorder_triple_patterns(self, query: str) -> str:
         """
-        Reorder triple patterns for optimal execution.
+        Reorder triple patterns by estimated selectivity.
 
-        This is a simplified implementation that demonstrates the concept.
+        Algorithm:
+        1. Parse query to extract triple patterns
+        2. Estimate selectivity for each pattern:
+           - Literal objects: 0.1 (most selective)
+           - URI predicates with rdf:type: 0.2
+           - Bound subjects: 0.3
+           - All variables: 0.9 (least selective)
+        3. Sort patterns by selectivity (most selective first)
+        4. Reconstruct query with reordered patterns
+
+        Parameters
+        ----------
+        query : str
+            Original SPARQL query
+
+        Returns
+        -------
+        str
+            Query with triple patterns reordered by selectivity
         """
-        # For now, return query unchanged
-        # Real implementation would analyze selectivity and reorder
-        return query
+        # Extract WHERE clause
+        where_pattern = re.compile(r"WHERE\s*\{(.*?)\}", re.IGNORECASE | re.DOTALL)
+        where_match = where_pattern.search(query)
+
+        if not where_match:
+            return query
+
+        where_content = where_match.group(1)
+
+        # Extract triple patterns (subject predicate object)
+        triple_pattern = re.compile(r"([^\s.;]+)\s+([^\s.;]+)\s+([^\s.;]+)")
+        triples = triple_pattern.findall(where_content)
+
+        if len(triples) <= 1:
+            return query  # No reordering needed
+
+        # Estimate selectivity for each triple
+        selectivities: list[tuple[tuple[str, str, str], float]] = []
+
+        for subject, predicate, obj in triples:
+            selectivity = 0.5  # Default
+
+            # Literal objects (quoted strings or numbers) - most selective
+            if obj.startswith('"') or obj.isdigit():
+                selectivity = 0.1
+            # URI predicate with rdf:type - very selective
+            elif "rdf:type" in predicate or ":type" in predicate:
+                selectivity = 0.2
+            # Bound subject (URI or literal)
+            elif subject.startswith("<") or subject.startswith('"'):
+                selectivity = 0.3
+            # URI predicate (bound)
+            elif predicate.startswith("<") or (
+                ":" in predicate and not predicate.startswith("?")
+            ):
+                selectivity = 0.4
+            # All variables - least selective (full scan)
+            elif (
+                subject.startswith("?")
+                and predicate.startswith("?")
+                and obj.startswith("?")
+            ):
+                selectivity = 0.9
+
+            selectivities.append(((subject, predicate, obj), selectivity))
+
+        # Sort by selectivity (most selective first)
+        sorted_triples = [t for t, _ in sorted(selectivities, key=lambda x: x[1])]
+
+        # Reconstruct WHERE clause
+        new_where_content = " .\n    ".join(
+            f"{s} {p} {o}" for s, p, o in sorted_triples
+        )
+
+        # Replace WHERE clause in query
+        new_query = where_pattern.sub(f"WHERE {{\n    {new_where_content}\n}}", query)
+
+        return new_query

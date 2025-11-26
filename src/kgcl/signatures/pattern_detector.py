@@ -37,7 +37,9 @@ class PatternDetectorInput(BaseModel):
     multiple_features: dict[str, list[float]] = Field(
         ..., description="Feature names mapped to time series values"
     )
-    time_window: str = Field(default="daily", description="Time window: hourly, daily, weekly")
+    time_window: str = Field(
+        default="daily", description="Time window: hourly, daily, weekly"
+    )
     timestamps: list[str] = Field(
         default_factory=list, description="ISO timestamps for alignment (optional)"
     )
@@ -75,8 +77,12 @@ class DetectedPattern(BaseModel):
 
     pattern_name: str = Field(..., description="Pattern name or description")
     evidence: str = Field(..., description="Evidence supporting the pattern")
-    frequency: str = Field(..., description="Pattern frequency (e.g., 'daily', '3/5 days')")
-    confidence: int = Field(default=0, ge=0, le=100, description="Confidence in pattern (0-100)")
+    frequency: str = Field(
+        ..., description="Pattern frequency (e.g., 'daily', '3/5 days')"
+    )
+    confidence: int = Field(
+        default=0, ge=0, le=100, description="Confidence in pattern (0-100)"
+    )
     recommendation: str = Field(..., description="Actionable recommendation")
     involved_features: list[str] = Field(
         default_factory=list, description="Features involved in pattern"
@@ -105,7 +111,9 @@ class PatternDetectorOutput(BaseModel):
     behavioral_clusters: dict[str, list[str]] = Field(
         default_factory=dict, description="Clustered behavioral patterns"
     )
-    anomalies: list[str] = Field(default_factory=list, description="Anomalous feature combinations")
+    anomalies: list[str] = Field(
+        default_factory=list, description="Anomalous feature combinations"
+    )
 
     model_config = {
         "json_schema_extra": {
@@ -129,14 +137,20 @@ class PatternDetectorOutput(BaseModel):
                     "Browser usage spikes during meeting days (research/documentation)",
                 ],
                 "behavioral_clusters": {
-                    "deep_work_days": ["low meetings", "high focus", "low context switches"],
+                    "deep_work_days": [
+                        "low meetings",
+                        "high focus",
+                        "low context switches",
+                    ],
                     "collaborative_days": [
                         "high meetings",
                         "high browser usage",
                         "high context switches",
                     ],
                 },
-                "anomalies": ["Day 3: High focus time despite high meeting load (unusual)"],
+                "anomalies": [
+                    "Day 3: High focus time despite high meeting load (unusual)"
+                ],
             }
         }
     }
@@ -155,11 +169,15 @@ if DSPY_AVAILABLE:
         features_summary: str = dspy.InputField(
             desc="Summary of all features with names and value ranges"
         )
-        correlation_matrix: str = dspy.InputField(desc="Key correlations between feature pairs")
+        correlation_matrix: str = dspy.InputField(
+            desc="Key correlations between feature pairs"
+        )
         time_window: str = dspy.InputField(
             desc="Time window for analysis: hourly, daily, or weekly"
         )
-        context: str = dspy.InputField(desc="Context about what these features represent")
+        context: str = dspy.InputField(
+            desc="Context about what these features represent"
+        )
 
         # Output fields
         patterns: str = dspy.OutputField(
@@ -223,7 +241,9 @@ class PatternDetectorModule:
 
         return numerator / denominator
 
-    def _detect_correlations(self, features: dict[str, list[float]]) -> dict[str, float]:
+    def _detect_correlations(
+        self, features: dict[str, list[float]]
+    ) -> dict[str, float]:
         """Detect correlations between all feature pairs.
 
         Args:
@@ -247,7 +267,9 @@ class PatternDetectorModule:
 
         return correlations
 
-    def _fallback_generate(self, input_data: PatternDetectorInput) -> PatternDetectorOutput:
+    def _fallback_generate(
+        self, input_data: PatternDetectorInput
+    ) -> PatternDetectorOutput:
         """Generate pattern detection using statistical methods (no LLM required).
 
         Args:
@@ -281,7 +303,9 @@ class PatternDetectorModule:
                     involved_features=[feat1, feat2],
                 )
                 detected_patterns.append(pattern)
-                insights.append(f"{feat1} and {feat2} show inverse relationship ({corr:.2f})")
+                insights.append(
+                    f"{feat1} and {feat2} show inverse relationship ({corr:.2f})"
+                )
 
         # Strong positive correlation patterns
         for pair, corr in correlations.items():
@@ -296,10 +320,14 @@ class PatternDetectorModule:
                     involved_features=[feat1, feat2],
                 )
                 detected_patterns.append(pattern)
-                insights.append(f"{feat1} and {feat2} tend to occur together ({corr:.2f})")
+                insights.append(
+                    f"{feat1} and {feat2} tend to occur together ({corr:.2f})"
+                )
 
         # Identify behavioral clusters based on feature means
-        feature_means = {name: statistics.mean(values) for name, values in features.items()}
+        feature_means = {
+            name: statistics.mean(values) for name, values in features.items()
+        }
 
         # Simple clustering: high/low for each feature
         high_features = [
@@ -326,18 +354,20 @@ class PatternDetectorModule:
 
             for i in range(min(len(first_feat_values), len(second_feat_values))):
                 # Check if both features are simultaneously high
-                if first_feat_values[i] > statistics.mean(first_feat_values) + statistics.stdev(
+                if first_feat_values[i] > statistics.mean(
                     first_feat_values
-                ) and second_feat_values[i] > statistics.mean(
+                ) + statistics.stdev(first_feat_values) and second_feat_values[
+                    i
+                ] > statistics.mean(second_feat_values) + statistics.stdev(
                     second_feat_values
-                ) + statistics.stdev(second_feat_values):
+                ):
                     anomalies.append(
                         f"Day {i + 1}: Unusually high {first_feat_name} and {second_feat_name} simultaneously"
                     )
 
         # Add domain-specific pattern detection
         if "focus_time" in features and "meeting" in str(features.keys()).lower():
-            meeting_key = [k for k in features.keys() if "meeting" in k.lower()][0]
+            meeting_key = next(k for k in features if "meeting" in k.lower())
             avg_focus = statistics.mean(features["focus_time"])
             avg_meetings = statistics.mean(features[meeting_key])
 
@@ -442,11 +472,15 @@ class PatternDetectorModule:
 
         # Parse behavioral clusters
         behavioral_clusters = {}
-        cluster_lines = [c.strip() for c in result.behavioral_clusters.split("\n") if c.strip()]
+        cluster_lines = [
+            c.strip() for c in result.behavioral_clusters.split("\n") if c.strip()
+        ]
         for line in cluster_lines:
             if ":" in line:
                 cluster_name, features = line.split(":", 1)
-                behavioral_clusters[cluster_name.strip()] = [f.strip() for f in features.split(",")]
+                behavioral_clusters[cluster_name.strip()] = [
+                    f.strip() for f in features.split(",")
+                ]
 
         # Use fallback for anomalies
         fallback_result = self._fallback_generate(input_data)
@@ -459,7 +493,9 @@ class PatternDetectorModule:
             anomalies=fallback_result.anomalies,
         )
 
-    async def detect_async(self, input_data: PatternDetectorInput) -> PatternDetectorOutput:
+    async def detect_async(
+        self, input_data: PatternDetectorInput
+    ) -> PatternDetectorOutput:
         """Async version of detect.
 
         Args:

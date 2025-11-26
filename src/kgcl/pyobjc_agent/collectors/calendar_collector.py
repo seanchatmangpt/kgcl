@@ -77,13 +77,21 @@ class CalendarCollector(BaseCollector):
             upcoming_data = self._plugin.collect_capability_data("upcoming_events")
 
             if upcoming_data.error:
-                logger.warning(f"Error collecting upcoming events: {upcoming_data.error}")
-                return {"error": upcoming_data.error, "upcoming_count": 0, "events_today": 0}
+                logger.warning(
+                    f"Error collecting upcoming events: {upcoming_data.error}"
+                )
+                return {
+                    "error": upcoming_data.error,
+                    "upcoming_count": 0,
+                    "events_today": 0,
+                }
 
             upcoming = upcoming_data.data
 
             # Get availability status
-            availability_data = self._plugin.collect_capability_data("availability_status")
+            availability_data = self._plugin.collect_capability_data(
+                "availability_status"
+            )
             availability = availability_data.data if not availability_data.error else {}
 
             # Detect availability changes
@@ -108,7 +116,9 @@ class CalendarCollector(BaseCollector):
                 next_event_id = self._make_event_id(next_event)
 
             # Check for new events
-            new_event_started = current_event_id and current_event_id not in self._seen_event_ids
+            new_event_started = (
+                current_event_id and current_event_id not in self._seen_event_ids
+            )
 
             if current_event_id:
                 self._seen_event_ids.add(current_event_id)
@@ -176,7 +186,11 @@ def create_calendar_collector(
         output_path=output_path or "/Users/sac/dev/kgcl/data/calendar_events.jsonl",
         batch_size=kwargs.get("batch_size", 10),
         batch_timeout_seconds=kwargs.get("batch_timeout_seconds", 600.0),
-        **{k: v for k, v in kwargs.items() if k not in ["batch_size", "batch_timeout_seconds"]},
+        **{
+            k: v
+            for k, v in kwargs.items()
+            if k not in ["batch_size", "batch_timeout_seconds"]
+        },
     )
 
     return CalendarCollector(config)

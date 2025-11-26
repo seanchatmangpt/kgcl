@@ -23,7 +23,7 @@ class TestCalendarEventMapping:
         """
         GIVEN: A simple calendar event from EventKit
         WHEN: We ingest it to RDF
-        THEN: A schema:Event triple is created with required properties
+        THEN: A schema:Event triple is created with required properties.
         """
         # TODO: Replace with actual CalendarIngestEngine
         # engine = CalendarIngestEngine()
@@ -47,11 +47,13 @@ class TestCalendarEventMapping:
 
         # TODO: Implement
 
-    def test_event_with_attendees_preserves_attendee_list(self, calendar_event_with_attendees):
+    def test_event_with_attendees_preserves_attendee_list(
+        self, calendar_event_with_attendees
+    ):
         """
         GIVEN: A calendar event with multiple attendees
         WHEN: We ingest it to RDF
-        THEN: All attendees are preserved as schema:attendee objects
+        THEN: All attendees are preserved as schema:attendee objects.
         """
         # TODO: Implement
         # engine = CalendarIngestEngine()
@@ -74,7 +76,7 @@ class TestCalendarEventMapping:
         """
         GIVEN: A calendar event with location
         WHEN: We ingest it to RDF
-        THEN: Location is preserved as schema:location
+        THEN: Location is preserved as schema:location.
         """
         # TODO: Implement
         # engine = CalendarIngestEngine()
@@ -90,7 +92,7 @@ class TestCalendarEventMapping:
         """
         GIVEN: A calendar event with notes/description
         WHEN: We ingest it to RDF
-        THEN: Description is preserved as schema:description
+        THEN: Description is preserved as schema:description.
         """
         # TODO: Implement
         # engine = CalendarIngestEngine()
@@ -106,7 +108,7 @@ class TestCalendarEventMapping:
         """
         GIVEN: A calendar event from a specific calendar
         WHEN: We ingest it to RDF
-        THEN: The source calendar is recorded as apple:calendar
+        THEN: The source calendar is recorded as apple:calendar.
         """
         # TODO: Implement
         # engine = CalendarIngestEngine()
@@ -123,7 +125,7 @@ class TestCalendarEventMapping:
         """
         GIVEN: A calendar event ingested from EventKit
         WHEN: We ingest it to RDF
-        THEN: The source app is recorded as apple:sourceApp = "Calendar"
+        THEN: The source app is recorded as apple:sourceApp = "Calendar".
         """
         # TODO: Implement
         # engine = CalendarIngestEngine()
@@ -140,7 +142,7 @@ class TestCalendarEventMapping:
         """
         GIVEN: A calendar event with EventKit identifier
         WHEN: We ingest it to RDF
-        THEN: The EventKit ID is preserved as apple:sourceIdentifier (for idempotency)
+        THEN: The EventKit ID is preserved as apple:sourceIdentifier (for idempotency).
         """
         # TODO: Implement
         # engine = CalendarIngestEngine()
@@ -161,7 +163,7 @@ class TestCalendarEventValidation:
         """
         GIVEN: A calendar event with empty title
         WHEN: We validate against SHACL
-        THEN: Validation fails (EventTitleNotEmptyInvariant)
+        THEN: Validation fails (EventTitleNotEmptyInvariant).
         """
         # TODO: Implement
         # engine = CalendarIngestEngine()
@@ -174,11 +176,13 @@ class TestCalendarEventValidation:
 
         # TODO: Implement
 
-    def test_event_with_invalid_time_range_fails_validation(self, calendar_event_invalid_times):
+    def test_event_with_invalid_time_range_fails_validation(
+        self, calendar_event_invalid_times
+    ):
         """
         GIVEN: A calendar event where start >= end
         WHEN: We validate against SHACL
-        THEN: Validation fails (EventTimeRangeValidInvariant)
+        THEN: Validation fails (EventTimeRangeValidInvariant).
         """
         # TODO: Implement
         # engine = CalendarIngestEngine()
@@ -195,7 +199,7 @@ class TestCalendarEventValidation:
         """
         GIVEN: A valid calendar event (title, start, end)
         WHEN: We validate against SHACL
-        THEN: Validation passes
+        THEN: Validation passes.
         """
         # TODO: Implement
         # engine = CalendarIngestEngine()
@@ -211,7 +215,7 @@ class TestCalendarEventValidation:
         """
         GIVEN: A valid all-day calendar event
         WHEN: We validate against SHACL
-        THEN: Validation passes (no special handling required)
+        THEN: Validation passes (no special handling required).
         """
         # TODO: Implement
         # engine = CalendarIngestEngine()
@@ -231,7 +235,7 @@ class TestCalendarEventBatch:
         """
         GIVEN: A batch of 3 calendar events
         WHEN: We ingest them together
-        THEN: All 3 events are in the result graph
+        THEN: All 3 events are in the result graph.
         """
         # TODO: Implement
         # engine = CalendarIngestEngine()
@@ -247,7 +251,7 @@ class TestCalendarEventBatch:
         """
         GIVEN: A batch of calendar events (some linked)
         WHEN: We ingest them together
-        THEN: Cross-event relationships are preserved (if any)
+        THEN: Cross-event relationships are preserved (if any).
         """
         # TODO: Implement (depends on if we add cross-linking)
         # TODO: Implement
@@ -256,7 +260,7 @@ class TestCalendarEventBatch:
         """
         GIVEN: A batch of calendar events
         WHEN: We ingest them
-        THEN: A SHA256 receipt hash is generated for idempotency
+        THEN: A SHA256 receipt hash is generated for idempotency.
         """
         # TODO: Implement
         # engine = CalendarIngestEngine()
@@ -275,7 +279,7 @@ class TestCalendarIngestIdempotency:
         """
         GIVEN: A calendar event ingested once
         WHEN: We ingest the same event again
-        THEN: The RDF graph is identical (same triples, same URIs)
+        THEN: The RDF graph is identical (same triples, same URIs).
         """
         # TODO: Implement
         # engine = CalendarIngestEngine()
@@ -293,7 +297,7 @@ class TestCalendarIngestIdempotency:
         """
         GIVEN: A calendar event, then the same event with updated title
         WHEN: We ingest both versions
-        THEN: The second ingest updates the graph (old triple removed, new one added)
+        THEN: The second ingest updates the graph (old triple removed, new one added).
         """
         # TODO: Implement
         # engine = CalendarIngestEngine()
@@ -315,7 +319,7 @@ class TestCalendarIngestIdempotency:
         """
         GIVEN: A calendar event with source identifier
         WHEN: We try to re-ingest without changes
-        THEN: Cache skips it (no duplicate processing)
+        THEN: Cache skips it (no duplicate processing).
         """
         # TODO: Implement (requires cache layer)
         # engine = CalendarIngestEngine()
@@ -337,7 +341,7 @@ class TestCalendarIngestPerformance:
         """
         GIVEN: A large batch of 1000 calendar events
         WHEN: We ingest them
-        THEN: Ingest completes in reasonable time (< 5 seconds)
+        THEN: Ingest completes in reasonable time (< 5 seconds).
         """
         # TODO: Implement with large test data
         # import time
@@ -357,7 +361,7 @@ class TestCalendarIngestPerformance:
         """
         GIVEN: A batch of calendar events
         WHEN: We ingest them to RDF
-        THEN: The resulting RDF file size is reasonable (< 100 KB per event)
+        THEN: The resulting RDF file size is reasonable (< 100 KB per event).
         """
         # TODO: Implement
         # engine = CalendarIngestEngine()
@@ -382,7 +386,7 @@ class TestCalendarIngestIntegration:
         """
         GIVEN: A calendar event ingested from EventKit
         WHEN: We load it into RDF and validate against .kgc/types.ttl
-        THEN: It conforms to schema:EventShape
+        THEN: It conforms to schema:EventShape.
         """
         # TODO: Implement
         # engine = CalendarIngestEngine()
@@ -402,7 +406,7 @@ class TestCalendarIngestIntegration:
         """
         GIVEN: Calendar events ingested
         WHEN: Ingest completes successfully
-        THEN: IngestHook is triggered (should regenerate agenda, CLI)
+        THEN: IngestHook is triggered (should regenerate agenda, CLI).
         """
         # TODO: Implement (requires hook system)
         # from kgcl.hooks import HookRegistry
@@ -434,7 +438,7 @@ class TestCalendarIngestErrorHandling:
         """
         GIVEN: A calendar event without a start date
         WHEN: We try to ingest it
-        THEN: Error is logged, event is skipped, ingest continues
+        THEN: Error is logged, event is skipped, ingest continues.
         """
         # TODO: Implement
         # event_no_start = MockEKEvent(
@@ -455,7 +459,7 @@ class TestCalendarIngestErrorHandling:
         """
         GIVEN: A calendar event with corrupted data
         WHEN: We try to ingest it
-        THEN: Error is caught, logged, and ingest continues
+        THEN: Error is caught, logged, and ingest continues.
         """
         # TODO: Implement
         # TODO: Implement
@@ -464,7 +468,7 @@ class TestCalendarIngestErrorHandling:
         """
         GIVEN: EventKit framework is unavailable (non-macOS system)
         WHEN: We try to ingest calendar events
-        THEN: Graceful error message, ingest is skipped
+        THEN: Graceful error message, ingest is skipped.
         """
         # TODO: Implement
         # TODO: Implement

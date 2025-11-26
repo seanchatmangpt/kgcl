@@ -33,7 +33,9 @@ def test_event_loader_generates_synthetic_when_logs_missing(
     assert synthetic_batch.start_date.date().isoformat() >= "2024-11-24"
 
 
-def test_feature_builder_produces_daily_brief_input(synthetic_batch: DailyBriefEventBatch) -> None:
+def test_feature_builder_produces_daily_brief_input(
+    synthetic_batch: DailyBriefEventBatch,
+) -> None:
     """Feature builder should convert events into a fully-typed DailyBriefInput."""
     builder = DailyBriefFeatureBuilder()
     feature_set = builder.build(synthetic_batch)

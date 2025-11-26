@@ -34,13 +34,17 @@ class TestPolicyPackManifest:
 
     def test_manifest_validation_fails_missing_name(self):
         """Manifest validation fails with empty name."""
-        manifest = PolicyPackManifest(name="", version="1.0.0", description="Test", hooks=["hook1"])
+        manifest = PolicyPackManifest(
+            name="", version="1.0.0", description="Test", hooks=["hook1"]
+        )
 
         assert manifest.validate() is False
 
     def test_manifest_validation_fails_missing_version(self):
         """Manifest validation fails with empty version."""
-        manifest = PolicyPackManifest(name="test", version="", description="Test", hooks=["hook1"])
+        manifest = PolicyPackManifest(
+            name="test", version="", description="Test", hooks=["hook1"]
+        )
 
         assert manifest.validate() is False
 
@@ -54,7 +58,9 @@ class TestPolicyPackManifest:
 
     def test_manifest_validation_fails_no_hooks(self):
         """Manifest validation fails with no hooks."""
-        manifest = PolicyPackManifest(name="test", version="1.0.0", description="Test", hooks=[])
+        manifest = PolicyPackManifest(
+            name="test", version="1.0.0", description="Test", hooks=[]
+        )
 
         assert manifest.validate() is False
 
@@ -91,7 +97,11 @@ class TestPolicyPack:
     def test_get_slo_target_exists(self):
         """Get SLO target returns value when defined."""
         manifest = PolicyPackManifest(
-            name="test", version="1.0.0", description="Test", hooks=["h1"], slos={"latency": 100.0}
+            name="test",
+            version="1.0.0",
+            description="Test",
+            hooks=["h1"],
+            slos={"latency": 100.0},
         )
         pack = PolicyPack(manifest=manifest, hooks={})
 
@@ -125,7 +135,11 @@ class TestPolicyPack:
     def test_validate_slos_non_compliant(self):
         """Validate SLOs returns False for non-compliant metrics."""
         manifest = PolicyPackManifest(
-            name="test", version="1.0.0", description="Test", hooks=["h1"], slos={"latency": 100.0}
+            name="test",
+            version="1.0.0",
+            description="Test",
+            hooks=["h1"],
+            slos={"latency": 100.0},
         )
         pack = PolicyPack(manifest=manifest, hooks={})
 
@@ -136,7 +150,11 @@ class TestPolicyPack:
     def test_validate_slos_undefined_metrics_pass(self):
         """Validate SLOs treats undefined metrics as compliant."""
         manifest = PolicyPackManifest(
-            name="test", version="1.0.0", description="Test", hooks=["h1"], slos={"latency": 100.0}
+            name="test",
+            version="1.0.0",
+            description="Test",
+            hooks=["h1"],
+            slos={"latency": 100.0},
         )
         pack = PolicyPack(manifest=manifest, hooks={})
 
@@ -322,7 +340,9 @@ class TestPolicyPackManager:
         assert result["dep-pack"] is True
         assert result["main-pack"] is True
 
-    def test_validate_dependencies_fails_missing_dependency(self, tmp_path, hook_registry):
+    def test_validate_dependencies_fails_missing_dependency(
+        self, tmp_path, hook_registry
+    ):
         """Validate dependencies fails when dependency missing."""
         manager = PolicyPackManager(base_path=tmp_path, hook_registry=hook_registry)
 
@@ -345,7 +365,9 @@ class TestPolicyPackManager:
 
         assert result["pack"] is False
 
-    def test_validate_dependencies_fails_version_mismatch(self, tmp_path, hook_registry):
+    def test_validate_dependencies_fails_version_mismatch(
+        self, tmp_path, hook_registry
+    ):
         """Validate dependencies fails when version incompatible."""
         manager = PolicyPackManager(base_path=tmp_path, hook_registry=hook_registry)
 

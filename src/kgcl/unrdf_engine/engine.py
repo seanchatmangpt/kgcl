@@ -57,8 +57,12 @@ class Transaction:
     """Transaction context for atomic RDF operations."""
 
     transaction_id: str
-    added_triples: list[tuple[URIRef, URIRef, URIRef | Literal]] = field(default_factory=list)
-    removed_triples: list[tuple[URIRef, URIRef, URIRef | Literal]] = field(default_factory=list)
+    added_triples: list[tuple[URIRef, URIRef, URIRef | Literal]] = field(
+        default_factory=list
+    )
+    removed_triples: list[tuple[URIRef, URIRef, URIRef | Literal]] = field(
+        default_factory=list
+    )
     provenance: ProvenanceRecord | None = None
     committed: bool = False
     rolled_back: bool = False
@@ -94,7 +98,9 @@ class UnrdfEngine:
 
     """
 
-    def __init__(self, file_path: Path | None = None, hook_registry: Any = None) -> None:
+    def __init__(
+        self, file_path: Path | None = None, hook_registry: Any = None
+    ) -> None:
         """Initialize the UNRDF engine.
 
         Parameters
@@ -189,7 +195,9 @@ class UnrdfEngine:
         if reason:
             span.set_attribute("transaction.reason", reason)
 
-        provenance = ProvenanceRecord(agent=agent, timestamp=datetime.now(UTC), reason=reason)
+        provenance = ProvenanceRecord(
+            agent=agent, timestamp=datetime.now(UTC), reason=reason
+        )
 
         txn = Transaction(transaction_id=transaction_id, provenance=provenance)
         self._transactions[transaction_id] = txn
@@ -197,7 +205,11 @@ class UnrdfEngine:
 
     @tracer.start_as_current_span("unrdf.add_triple")
     def add_triple(
-        self, subject: URIRef, predicate: URIRef, obj: URIRef | Literal, transaction: Transaction
+        self,
+        subject: URIRef,
+        predicate: URIRef,
+        obj: URIRef | Literal,
+        transaction: Transaction,
     ) -> None:
         """Add a triple to the graph within a transaction.
 
@@ -227,7 +239,11 @@ class UnrdfEngine:
 
     @tracer.start_as_current_span("unrdf.remove_triple")
     def remove_triple(
-        self, subject: URIRef, predicate: URIRef, obj: URIRef | Literal, transaction: Transaction
+        self,
+        subject: URIRef,
+        predicate: URIRef,
+        obj: URIRef | Literal,
+        transaction: Transaction,
     ) -> None:
         """Remove a triple from the graph within a transaction.
 
@@ -294,7 +310,9 @@ class UnrdfEngine:
             # Check if hooks signaled rollback
             if context.metadata.get("should_rollback"):
                 self.rollback(transaction)
-                msg = context.metadata.get("rollback_reason", "Hook rejected transaction")
+                msg = context.metadata.get(
+                    "rollback_reason", "Hook rejected transaction"
+                )
                 raise ValueError(msg)
 
         # Apply removals
@@ -352,6 +370,16 @@ class UnrdfEngine:
 
     def get_hook_executor(self) -> HookExecutorType | None:
         """Return the active hook executor if hooks are enabled."""
+        return self._hook_executor
+
+    @property
+    def hook_registry(self) -> PersistentHookRegistry | None:
+        """Expose the configured hook registry for callers that need direct access."""
+        return self._hook_registry
+
+    @property
+    def hook_executor(self) -> HookExecutorType | None:
+        """Expose the active hook executor."""
         return self._hook_executor
 
     def query(self, sparql: str, **kwargs: Any) -> Result:

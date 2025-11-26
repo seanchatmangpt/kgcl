@@ -88,7 +88,9 @@ TEMPLATE_QUERIES = {
 @click.command()
 @click.option("--query", "-q", type=str, help="SPARQL query to execute")
 @click.option(
-    "--file", type=click.Path(exists=True, path_type=Path), help="File containing SPARQL query"
+    "--file",
+    type=click.Path(exists=True, path_type=Path),
+    help="File containing SPARQL query",
 )
 @click.option(
     "--template",
@@ -96,7 +98,9 @@ TEMPLATE_QUERIES = {
     type=click.Choice(list(TEMPLATE_QUERIES.keys())),
     help="Use a predefined query template",
 )
-@click.option("--output", "-o", type=click.Path(path_type=Path), help="Output file path")
+@click.option(
+    "--output", "-o", type=click.Path(path_type=Path), help="Output file path"
+)
 @click.option(
     "--format",
     "-f",
@@ -107,11 +111,16 @@ TEMPLATE_QUERIES = {
 )
 @click.option("--limit", type=int, help="Limit number of results")
 @click.option(
-    "--endpoint", type=str, default="http://localhost:3030/kgcl/sparql", help="SPARQL endpoint URL"
+    "--endpoint",
+    type=str,
+    default="http://localhost:3030/kgcl/sparql",
+    help="SPARQL endpoint URL",
 )
-@click.option("--show-templates", is_flag=True, help="Show available query templates and exit")
+@click.option(
+    "--show-templates", is_flag=True, help="Show available query templates and exit"
+)
 @click.option("--verbose", "-v", is_flag=True, help="Verbose output")
-def query(  # noqa: PLR0913
+def query(
     query: str | None,
     file: Path | None,
     template: str | None,
@@ -119,8 +128,8 @@ def query(  # noqa: PLR0913
     output_format: str,
     limit: int | None,
     endpoint: str,
-    show_templates: bool,  # noqa: FBT001
-    verbose: bool,  # noqa: FBT001
+    show_templates: bool,
+    verbose: bool,
 ) -> None:
     """Execute SPARQL queries against the knowledge graph.
 
@@ -150,7 +159,9 @@ def query(  # noqa: PLR0913
         sparql_query = _get_query(query, file, template)
 
         if not sparql_query:
-            print_error("No query specified. Use --query, --file, or --template", exit_code=1)
+            print_error(
+                "No query specified. Use --query, --file, or --template", exit_code=1
+            )
             return
 
         # Apply limit if specified
@@ -192,7 +203,9 @@ def _show_templates() -> None:
         console.print(f"  {query.strip()[:100]}...\n")
 
 
-def _get_query(query: str | None, file: Path | None, template: str | None) -> str | None:
+def _get_query(
+    query: str | None, file: Path | None, template: str | None
+) -> str | None:
     """Get SPARQL query from various sources.
 
     Parameters
@@ -237,7 +250,9 @@ class Verbosity(Enum):
         return self is Verbosity.VERBOSE
 
 
-def _execute_query(sparql_query: str, endpoint: str, verbosity: Verbosity) -> list[dict[str, str]]:
+def _execute_query(
+    sparql_query: str, endpoint: str, verbosity: Verbosity
+) -> list[dict[str, str]]:
     """Execute SPARQL query against endpoint.
 
     Parameters
@@ -291,7 +306,9 @@ def _execute_query_local(sparql_query: str, dataset_path: Path) -> list[dict[str
         raise ValueError(msg)
 
     rdf_format = (
-        guess_format(dataset_path.suffix[1:]) or guess_format(dataset_path.name) or "turtle"
+        guess_format(dataset_path.suffix[1:])
+        or guess_format(dataset_path.name)
+        or "turtle"
     )
 
     graph = Graph()
@@ -319,7 +336,7 @@ def _execute_query_http(sparql_query: str, endpoint: str) -> list[dict[str, str]
         raise ValueError(msg)
 
     encoded_data = urlencode({"query": sparql_query}).encode("utf-8")
-    request = Request(  # noqa: S310  # Safe due to explicit scheme validation above
+    request = Request(  # Safe due to explicit scheme validation above
         endpoint,
         data=encoded_data,
         headers={
@@ -329,7 +346,7 @@ def _execute_query_http(sparql_query: str, endpoint: str) -> list[dict[str, str]
         method="POST",
     )
 
-    with urlopen(request, timeout=_HTTP_TIMEOUT_SECONDS) as response:  # noqa: S310
+    with urlopen(request, timeout=_HTTP_TIMEOUT_SECONDS) as response:
         payload: dict[str, Any] = json.loads(response.read().decode("utf-8"))
     bindings = payload.get("results", {}).get("bindings", [])
 

@@ -23,7 +23,7 @@ class TestFileMetadataMapping:
         """
         GIVEN: A markdown file with metadata from Spotlight
         WHEN: We ingest it to RDF
-        THEN: A schema:CreativeWork triple is created with required properties
+        THEN: A schema:CreativeWork triple is created with required properties.
         """
         # TODO: Implement
         # engine = FilesIngestEngine()
@@ -45,7 +45,7 @@ class TestFileMetadataMapping:
         """
         GIVEN: A file with creation date
         WHEN: We ingest it to RDF
-        THEN: Creation date is preserved as schema:dateCreated
+        THEN: Creation date is preserved as schema:dateCreated.
         """
         # TODO: Implement
         # engine = FilesIngestEngine()
@@ -62,7 +62,7 @@ class TestFileMetadataMapping:
         """
         GIVEN: A file with modification date
         WHEN: We ingest it to RDF
-        THEN: Modification date is preserved as schema:dateModified
+        THEN: Modification date is preserved as schema:dateModified.
         """
         # TODO: Implement
         # engine = FilesIngestEngine()
@@ -79,7 +79,7 @@ class TestFileMetadataMapping:
         """
         GIVEN: A document file with MIME type
         WHEN: We ingest it to RDF
-        THEN: Format is preserved as schema:fileFormat
+        THEN: Format is preserved as schema:fileFormat.
         """
         # TODO: Implement
         # engine = FilesIngestEngine()
@@ -96,7 +96,7 @@ class TestFileMetadataMapping:
         """
         GIVEN: A file with size metadata
         WHEN: We ingest it to RDF
-        THEN: Size is recorded as schema:contentSize
+        THEN: Size is recorded as schema:contentSize.
         """
         # TODO: Implement
         # engine = FilesIngestEngine()
@@ -112,7 +112,7 @@ class TestFileMetadataMapping:
         """
         GIVEN: A file with Finder tags
         WHEN: We ingest it to RDF
-        THEN: Tags are preserved as schema:keywords
+        THEN: Tags are preserved as schema:keywords.
         """
         # TODO: Implement
         # engine = FilesIngestEngine()
@@ -129,7 +129,7 @@ class TestFileMetadataMapping:
         """
         GIVEN: A file with absolute path
         WHEN: We ingest it to RDF
-        THEN: Path is preserved as apple:sourceIdentifier (for idempotency)
+        THEN: Path is preserved as apple:sourceIdentifier (for idempotency).
         """
         # TODO: Implement
         # engine = FilesIngestEngine()
@@ -146,7 +146,7 @@ class TestFileMetadataMapping:
         """
         GIVEN: A file discovered from Spotlight
         WHEN: We ingest it to RDF
-        THEN: The source is recorded as apple:sourceApp = "Finder"
+        THEN: The source is recorded as apple:sourceApp = "Finder".
         """
         # TODO: Implement
         # engine = FilesIngestEngine()
@@ -167,7 +167,7 @@ class TestFileMetadataValidation:
         """
         GIVEN: A file with relative/invalid path
         WHEN: We validate against SHACL
-        THEN: Validation fails (FilePathValidInvariant)
+        THEN: Validation fails (FilePathValidInvariant).
         """
         # TODO: Implement
         # engine = FilesIngestEngine()
@@ -184,7 +184,7 @@ class TestFileMetadataValidation:
         """
         GIVEN: A valid file with all required metadata
         WHEN: We validate against SHACL
-        THEN: Validation passes
+        THEN: Validation passes.
         """
         # TODO: Implement
         # engine = FilesIngestEngine()
@@ -200,7 +200,7 @@ class TestFileMetadataValidation:
         """
         GIVEN: A file ingested from Spotlight
         WHEN: We validate required properties
-        THEN: name, dateModified, and url are present
+        THEN: name, dateModified, and url are present.
         """
         # TODO: Implement
         # engine = FilesIngestEngine()
@@ -225,7 +225,7 @@ class TestFileMetadataBatch:
         """
         GIVEN: A batch of 2 files
         WHEN: We ingest them together
-        THEN: Both files are in the result graph
+        THEN: Both files are in the result graph.
         """
         # TODO: Implement
         # engine = FilesIngestEngine()
@@ -241,7 +241,7 @@ class TestFileMetadataBatch:
         """
         GIVEN: A batch of files with different formats (md, docx)
         WHEN: We ingest them
-        THEN: All file format variants are preserved
+        THEN: All file format variants are preserved.
         """
         # TODO: Implement
         # engine = FilesIngestEngine()
@@ -263,7 +263,7 @@ class TestFileIngestIdempotency:
         """
         GIVEN: A file ingested once
         WHEN: We ingest the same file again
-        THEN: The RDF graph is identical (same triples)
+        THEN: The RDF graph is identical (same triples).
         """
         # TODO: Implement
         # engine = FilesIngestEngine()
@@ -280,7 +280,7 @@ class TestFileIngestIdempotency:
         """
         GIVEN: A file ingested, then file is modified
         WHEN: We ingest the modified version
-        THEN: dateModified is updated in the graph
+        THEN: dateModified is updated in the graph.
         """
         # TODO: Implement
         # engine = FilesIngestEngine()
@@ -305,7 +305,7 @@ class TestFileIngestPerformance:
         """
         GIVEN: A large batch of 5000 files
         WHEN: We ingest them
-        THEN: Ingest completes in reasonable time (< 10 seconds)
+        THEN: Ingest completes in reasonable time (< 10 seconds).
         """
         # TODO: Implement with large test data
         # import time
@@ -329,7 +329,7 @@ class TestFileIngestIntegration:
         """
         GIVEN: A file related to a calendar event (agenda notes, etc.)
         WHEN: We ingest both
-        THEN: File has apple:relatedEvent → Event
+        THEN: File has apple:relatedEvent → Event.
         """
         # TODO: Implement (requires multi-source ingest)
         # TODO: Implement
@@ -338,7 +338,7 @@ class TestFileIngestIntegration:
         """
         GIVEN: A file that relates to a task (project document, etc.)
         WHEN: We ingest both
-        THEN: File has apple:relatedAction → Task
+        THEN: File has apple:relatedAction → Task.
         """
         # TODO: Implement
         # TODO: Implement
@@ -347,7 +347,7 @@ class TestFileIngestIntegration:
         """
         GIVEN: A file attachment reference from email
         WHEN: We ingest both
-        THEN: File can be linked back to originating email
+        THEN: File can be linked back to originating email.
         """
         # TODO: Implement
         # TODO: Implement

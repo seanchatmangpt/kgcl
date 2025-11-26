@@ -77,12 +77,16 @@ class SignatureInvoker:
             lm: DSPy language model. If None, uses configured LM.
         """
         if not DSPY_AVAILABLE:
-            raise RuntimeError("DSPy is not installed. Install with: pip install dspy-ai")
+            raise RuntimeError(
+                "DSPy is not installed. Install with: pip install dspy-ai"
+            )
 
         self._lm = lm
         self._signature_cache: dict[str, type[dspy.Signature]] = {}
 
-    def load_signature(self, module_path: str, signature_name: str) -> type["dspy.Signature"]:
+    def load_signature(
+        self, module_path: str, signature_name: str
+    ) -> type["dspy.Signature"]:
         """
         Load DSPy signature from Python module.
 
@@ -169,7 +173,9 @@ class SignatureInvoker:
                 predictor = dspy.Predict(signature, **kwargs)
 
                 # Execute prediction
-                logger.info(f"Invoking {signature.__name__} with inputs: {list(inputs.keys())}")
+                logger.info(
+                    f"Invoking {signature.__name__} with inputs: {list(inputs.keys())}"
+                )
                 prediction = predictor(**inputs)
 
                 # Extract outputs
@@ -187,7 +193,9 @@ class SignatureInvoker:
                 }
 
                 # Record metrics
-                prediction_counter.add(1, {"signature": signature.__name__, "status": "success"})
+                prediction_counter.add(
+                    1, {"signature": signature.__name__, "status": "success"}
+                )
                 prediction_latency.record(latency, {"signature": signature.__name__})
 
                 span.set_attribute("success", True)
@@ -208,7 +216,9 @@ class SignatureInvoker:
                 error_msg = str(e)
 
                 # Record error metrics
-                prediction_counter.add(1, {"signature": signature.__name__, "status": "error"})
+                prediction_counter.add(
+                    1, {"signature": signature.__name__, "status": "error"}
+                )
                 prediction_errors.add(
                     1, {"signature": signature.__name__, "error_type": type(e).__name__}
                 )
@@ -217,7 +227,9 @@ class SignatureInvoker:
                 span.set_attribute("error", error_msg)
                 span.set_attribute("error_type", type(e).__name__)
 
-                logger.error(f"Prediction failed for {signature.__name__}: {e}", exc_info=True)
+                logger.error(
+                    f"Prediction failed for {signature.__name__}: {e}", exc_info=True
+                )
 
                 return InvocationResult(
                     success=False,

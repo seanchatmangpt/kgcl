@@ -1,4 +1,4 @@
-"""Test Decorators for Chicago TDD
+"""Test Decorators for Chicago TDD.
 
 Provides decorators for test functions following AAA (Arrange-Act-Assert) pattern.
 Supports synchronous, asynchronous, and fixture-based tests.
@@ -9,13 +9,13 @@ import functools
 from collections.abc import Callable
 from typing import Any, TypeVar
 
-from .fixture import TestFixture
+from .fixture import Fixture
 
 F = TypeVar("F", bound=Callable[..., Any])
 
 
-def test(func: F) -> F:
-    """Decorator for synchronous unit tests
+def test[F: Callable[..., Any]](func: F) -> F:
+    """Decorator for synchronous unit tests.
 
     Enforces AAA pattern and provides test metadata.
 
@@ -43,8 +43,8 @@ def test(func: F) -> F:
     return wrapper
 
 
-def async_test(func: F) -> F:
-    """Decorator for asynchronous unit tests
+def async_test[F: Callable[..., Any]](func: F) -> F:
+    """Decorator for asynchronous unit tests.
 
     Enforces AAA pattern with async/await support.
 
@@ -81,16 +81,16 @@ def async_test(func: F) -> F:
     return wrapper
 
 
-def fixture_test(fixture_class: type[TestFixture]) -> Callable[[F], F]:
-    """Decorator factory for fixture-based tests
+def fixture_test(fixture_class: type[Fixture]) -> Callable[[F], F]:
+    """Decorator factory for fixture-based tests.
 
     Creates a test that receives a fixture instance as an argument.
 
     Args:
-        fixture_class: The TestFixture subclass to instantiate
+        fixture_class: The Fixture subclass to instantiate
 
     Example:
-        class CounterFixture(TestFixture):
+        class CounterFixture(Fixture):
             def setup(self):
                 self.counter = 0
 
@@ -130,7 +130,7 @@ def fixture_test(fixture_class: type[TestFixture]) -> Callable[[F], F]:
 
 
 class TestMetadata:
-    """Metadata about a test function"""
+    """Metadata about a test function."""
 
     def __init__(self, func: Callable[..., Any]) -> None:
         self.name = getattr(func, "__test_name__", func.__name__)

@@ -158,7 +158,9 @@ class TestGeneratorHandlers:
         assert result["artifact_name"] is not None
         assert "stale" in result["artifact_name"].lower()
 
-    def test_all_reports_handler_runs_multiple_generators(self, test_graph: Graph) -> None:
+    def test_all_reports_handler_runs_multiple_generators(
+        self, test_graph: Graph
+    ) -> None:
         """Test that all_reports handler runs all generators."""
         ctx = ExecutionContext(
             event_type="urn:kgc:OntologyChanged",

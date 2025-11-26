@@ -22,7 +22,7 @@ class EdgeCaseHandler:
         Args:
             log_level: Default logging level for edge cases
         """
-        self.handlers: dict[str, Callable] = {}
+        self.handlers: dict[str, Callable[..., Any]] = {}
         self._logger = logging.getLogger(__name__)
         self._logger.setLevel(log_level)
         self._register_default_handlers()
@@ -100,7 +100,7 @@ class EdgeCaseHandler:
 
     # Default handlers
 
-    def _handle_empty_result(self, context: dict) -> None:
+    def _handle_empty_result(self, context: dict[str, Any]) -> None:
         """Handle empty query result.
 
         Args:
@@ -114,7 +114,7 @@ class EdgeCaseHandler:
         self._logger.warning(f"Empty result for: {operation}")
         return context.get("default")
 
-    def _handle_null_value(self, context: dict) -> Any:
+    def _handle_null_value(self, context: dict[str, Any]) -> Any:
         """Handle null/None value.
 
         Args:
@@ -128,7 +128,7 @@ class EdgeCaseHandler:
         self._logger.warning(f"Null value in field: {field}")
         return context.get("default")
 
-    def _handle_timeout(self, context: dict) -> None:
+    def _handle_timeout(self, context: dict[str, Any]) -> None:
         """Handle operation timeout.
 
         Args:
@@ -142,7 +142,7 @@ class EdgeCaseHandler:
         timeout = context.get("timeout_seconds", "unknown")
         self._logger.error(f"Timeout on {operation} (timeout={timeout}s)")
 
-    def _handle_memory_pressure(self, context: dict) -> None:
+    def _handle_memory_pressure(self, context: dict[str, Any]) -> None:
         """Handle memory pressure situation.
 
         Args:
@@ -159,7 +159,7 @@ class EdgeCaseHandler:
         )
         # In real implementation, this would trigger cache cleanup, etc.
 
-    def _handle_rate_limit(self, context: dict) -> dict[str, Any]:
+    def _handle_rate_limit(self, context: dict[str, Any]) -> dict[str, Any]:
         """Handle rate limit exceeded.
 
         Args:
@@ -184,7 +184,7 @@ class EdgeCaseHandler:
             "window": window,
         }
 
-    def _handle_invalid_input(self, context: dict) -> None:
+    def _handle_invalid_input(self, context: dict[str, Any]) -> None:
         """Handle invalid input data.
 
         Args:
@@ -198,9 +198,11 @@ class EdgeCaseHandler:
         expected = context.get("expected", "valid data")
         reason = context.get("reason", "validation failed")
 
-        self._logger.error(f"Invalid input: {input_val} (expected {expected}): {reason}")
+        self._logger.error(
+            f"Invalid input: {input_val} (expected {expected}): {reason}"
+        )
 
-    def _handle_connection_error(self, context: dict) -> dict[str, Any]:
+    def _handle_connection_error(self, context: dict[str, Any]) -> dict[str, Any]:
         """Handle connection error.
 
         Args:
@@ -224,7 +226,7 @@ class EdgeCaseHandler:
             "error": str(error),
         }
 
-    def _handle_resource_exhausted(self, context: dict) -> None:
+    def _handle_resource_exhausted(self, context: dict[str, Any]) -> None:
         """Handle resource exhaustion.
 
         Args:

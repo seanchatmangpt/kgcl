@@ -82,7 +82,9 @@ class TestSignature(dspy.Signature):
         code = "import dspy\n\nclass TestSignature(dspy.Signature):\n    pass\n"
 
         output_path = tmp_path / "subdir" / "test.py"
-        result = writer.write_module(code=code, output_path=output_path, format_code=False)
+        result = writer.write_module(
+            code=code, output_path=output_path, format_code=False
+        )
 
         assert output_path.exists()
         assert output_path.parent.exists()
@@ -97,7 +99,9 @@ class TestSignature(dspy.Signature):
         }
 
         output_dir = tmp_path / "modules"
-        results = writer.write_batch(modules=modules, output_dir=output_dir, format_code=False)
+        results = writer.write_batch(
+            modules=modules, output_dir=output_dir, format_code=False
+        )
 
         assert len(results) == 2
         assert (output_dir / "module1.py").exists()
@@ -134,9 +138,13 @@ class TestSignature(dspy.Signature):
 
         code = "import dspy\n\nclass TestSignature(dspy.Signature):\n    pass\n"
 
-        writer.write_module(code=code, output_path=tmp_path / "test1.py", format_code=False)
+        writer.write_module(
+            code=code, output_path=tmp_path / "test1.py", format_code=False
+        )
 
-        writer.write_module(code=code, output_path=tmp_path / "test2.py", format_code=False)
+        writer.write_module(
+            code=code, output_path=tmp_path / "test2.py", format_code=False
+        )
 
         history = writer.get_history()
         assert len(history) == 2
@@ -147,7 +155,9 @@ class TestSignature(dspy.Signature):
 
         code = "import dspy\n\nclass TestSignature(dspy.Signature):\n    pass\n"
 
-        writer.write_module(code=code, output_path=tmp_path / "test.py", format_code=False)
+        writer.write_module(
+            code=code, output_path=tmp_path / "test.py", format_code=False
+        )
 
         metrics_path = tmp_path / "metrics.json"
         writer.export_metrics(metrics_path)

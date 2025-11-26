@@ -23,7 +23,7 @@ Write only observable facts:
 - What: `tests/hooks/test_policy_packs.py::test_activation_persists_hooks` raises KeyError
 - Where: CI Ubuntu runner (Python 3.12)
 - When: 40% of runs since commit 9f1c0b3
-- Impact: `cargo-make verify` fails, blocking merges
+- Impact: `poe verify` fails, blocking merges
 ```
 
 Avoid guessing at causes here—capture logs, error messages, receipts, CLI arguments.
@@ -100,7 +100,7 @@ Include: symptom, root cause, fix, tests added.
 1. Stay in the data—trust receipts, SPARQL logs, LinkML reports.
 2. Go at least five Whys unless the root cause is clearly systemic earlier.
 3. Prefer design-level fixes (type safety, CLI invariants) over patching symptoms.
-4. Tie fixes to automated tests (`pytest`, `cargo-make unrdf-full`, etc.).
+4. Tie fixes to automated tests (`pytest`, `poe unrdf-full`, etc.).
 5. Use containment only if absolutely necessary and remove it quickly.
 
 ## Related Commands

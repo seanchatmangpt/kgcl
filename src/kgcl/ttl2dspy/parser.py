@@ -55,9 +55,13 @@ class PropertyShape:
 
     @property
     def is_list(self) -> bool:
-        """Check if this property is a list."""
-        # Only treat as list if maxCount is explicitly > 1
-        return self.max_count is not None and self.max_count > 1
+        """Check if this property is a list.
+
+        A property is considered a list if:
+        - max_count is None (unlimited cardinality), OR
+        - max_count is explicitly > 1 (multiple values allowed)
+        """
+        return self.max_count is None or self.max_count > 1
 
     def get_python_type(self) -> str:
         """Map SHACL datatype to Python type hint."""
@@ -241,7 +245,9 @@ class OntologyParser:
         """
         # Extract basic info
         name = str(shape_uri).split("/")[-1].split("#")[-1]
-        description = self._get_description(graph, shape_uri) or self._humanize_identifier(name)
+        description = self._get_description(
+            graph, shape_uri
+        ) or self._humanize_identifier(name)
         target_class = graph.value(shape_uri, SH.targetClass)
         closed = self._get_boolean(graph, shape_uri, SH.closed)
 
@@ -270,7 +276,9 @@ class OntologyParser:
 
         return shape
 
-    def _parse_property_shape(self, graph: Graph, prop_uri: URIRef) -> PropertyShape | None:
+    def _parse_property_shape(
+        self, graph: Graph, prop_uri: URIRef
+    ) -> PropertyShape | None:
         """Parse a SHACL PropertyShape.
 
         Args:
@@ -293,7 +301,9 @@ class OntologyParser:
         node_kind = graph.value(prop_uri, SH.nodeKind)
         min_count = self._get_integer(graph, prop_uri, SH.minCount, default=0)
         max_count = self._get_integer(graph, prop_uri, SH.maxCount)
-        description = self._get_description(graph, prop_uri) or self._humanize_identifier(name)
+        description = self._get_description(
+            graph, prop_uri
+        ) or self._humanize_identifier(name)
         field_role = self._get_literal(graph, prop_uri, UNRDF.fieldType)
         default_value = self._get_literal(graph, prop_uri, SH.defaultValue)
         pattern = self._get_literal(graph, prop_uri, SH.pattern)
@@ -318,7 +328,9 @@ class OntologyParser:
             in_values=in_values,
         )
 
-    def _get_literal(self, graph: Graph, subject: URIRef, predicate: URIRef) -> str | None:
+    def _get_literal(
+        self, graph: Graph, subject: URIRef, predicate: URIRef
+    ) -> str | None:
         """Get a literal value from the graph."""
         value = graph.value(subject, predicate)
         return str(value) if value else None
@@ -332,7 +344,11 @@ class OntologyParser:
         return None
 
     def _get_integer(
-        self, graph: Graph, subject: URIRef, predicate: URIRef, default: int | None = None
+        self,
+        graph: Graph,
+        subject: URIRef,
+        predicate: URIRef,
+        default: int | None = None,
     ) -> int | None:
         """Get an integer value from the graph."""
         value = graph.value(subject, predicate)

@@ -35,12 +35,16 @@ def parse(ttl_file: str, no_cache: bool):
     """Parse and validate a TTL file."""
     ttl_path = Path(ttl_file)
 
-    config = CacheConfig(memory_cache_enabled=not no_cache, disk_cache_enabled=not no_cache)
+    config = CacheConfig(
+        memory_cache_enabled=not no_cache, disk_cache_enabled=not no_cache
+    )
     optimizer = UltraOptimizer(config)
 
     try:
         shapes = optimizer.parse_with_cache(ttl_path)
-        click.echo(f"Successfully parsed {len(shapes)} SHACL shapes from {ttl_path.name}")
+        click.echo(
+            f"Successfully parsed {len(shapes)} SHACL shapes from {ttl_path.name}"
+        )
 
         # Show summary
         for shape in shapes:
@@ -69,13 +73,20 @@ def parse(ttl_file: str, no_cache: bool):
 @click.option("--no-format", is_flag=True, help="Skip code formatting")
 @click.option("--receipt", is_flag=True, help="Write JSON receipt")
 def generate(
-    ttl_file: str, output_dir: str, module_name: str, no_cache: bool, no_format: bool, receipt: bool
+    ttl_file: str,
+    output_dir: str,
+    module_name: str,
+    no_cache: bool,
+    no_format: bool,
+    receipt: bool,
 ):
     """Generate DSPy signatures from a TTL file."""
     ttl_path = Path(ttl_file)
     output_path = Path(output_dir) / f"{module_name}.py"
 
-    config = CacheConfig(memory_cache_enabled=not no_cache, disk_cache_enabled=not no_cache)
+    config = CacheConfig(
+        memory_cache_enabled=not no_cache, disk_cache_enabled=not no_cache
+    )
     optimizer = UltraOptimizer(config)
     writer = ModuleWriter()
 
@@ -165,14 +176,20 @@ def validate(ttl_file: str):
 
         if not errors and not warnings:
             click.echo(
-                click.style(f"Validation passed! {len(shapes)} shapes are valid.", fg="green")
+                click.style(
+                    f"Validation passed! {len(shapes)} shapes are valid.", fg="green"
+                )
             )
         elif not errors:
             click.echo(
-                click.style(f"\nValidation passed with {len(warnings)} warnings.", fg="green")
+                click.style(
+                    f"\nValidation passed with {len(warnings)} warnings.", fg="green"
+                )
             )
         else:
-            click.echo(click.style(f"\nValidation failed with {len(errors)} errors.", fg="red"))
+            click.echo(
+                click.style(f"\nValidation failed with {len(errors)} errors.", fg="red")
+            )
             sys.exit(1)
 
     except Exception as e:
@@ -256,7 +273,9 @@ def cache_stats(output_json: bool):
 
         if stats["generator"]["generated_signatures"] > 0:
             click.echo("\nGenerator:")
-            click.echo(f"  Cached signatures: {stats['generator']['generated_signatures']}")
+            click.echo(
+                f"  Cached signatures: {stats['generator']['generated_signatures']}"
+            )
 
         if stats["index"]["shapes_by_name"] > 0:
             click.echo("\nIndex:")

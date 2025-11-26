@@ -40,14 +40,18 @@ class TestAppEvent:
     def test_timestamp_normalization_utc(self):
         """Test timestamp normalization to UTC."""
         tz_timestamp = datetime.now(UTC)
-        event = AppEvent(event_id="test_001", timestamp=tz_timestamp, app_name="com.apple.Safari")
+        event = AppEvent(
+            event_id="test_001", timestamp=tz_timestamp, app_name="com.apple.Safari"
+        )
 
         assert event.timestamp.tzinfo is None
 
     def test_timestamp_from_iso_string(self):
         """Test timestamp parsing from ISO string."""
         event = AppEvent(
-            event_id="test_001", timestamp="2024-11-24T10:30:00Z", app_name="com.apple.Safari"
+            event_id="test_001",
+            timestamp="2024-11-24T10:30:00Z",
+            app_name="com.apple.Safari",
         )
 
         assert event.timestamp.year == 2024
@@ -67,7 +71,9 @@ class TestAppEvent:
     def test_optional_fields(self):
         """Test that optional fields can be None."""
         event = AppEvent(
-            event_id="test_001", timestamp=datetime.now(UTC), app_name="com.apple.Safari"
+            event_id="test_001",
+            timestamp=datetime.now(UTC),
+            app_name="com.apple.Safari",
         )
 
         assert event.app_display_name is None
@@ -160,7 +166,9 @@ class TestFeatureInstance:
     def test_create_string_feature(self):
         """Test creating feature with string value."""
         feature = FeatureInstance(
-            feature_id="most_used_app", timestamp=datetime.now(UTC), value="com.apple.Safari"
+            feature_id="most_used_app",
+            timestamp=datetime.now(UTC),
+            value="com.apple.Safari",
         )
 
         assert isinstance(feature.value, str)
@@ -249,7 +257,9 @@ class TestEventBatch:
     def test_batch_metadata(self):
         """Test batch with custom metadata."""
         batch = EventBatch(
-            batch_id="batch_001", events=[], metadata={"source": "test", "version": "1.0"}
+            batch_id="batch_001",
+            events=[],
+            metadata={"source": "test", "version": "1.0"},
         )
 
         assert batch.metadata["source"] == "test"

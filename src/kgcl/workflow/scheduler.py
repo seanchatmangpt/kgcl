@@ -15,6 +15,7 @@ from datetime import UTC, datetime, time, timedelta, timezone
 from enum import Enum
 from pathlib import Path
 from threading import Event, Thread
+from typing import Any
 
 from .orchestrator import StandardWorkLoop
 from .state import WorkflowState
@@ -39,7 +40,7 @@ class ScheduleConfig:
     interval_hours: int | None = None  # For INTERVAL
     enabled: bool = True
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         """Convert to JSON-serializable dict."""
         return {
             "schedule_type": self.schedule_type.value,
@@ -73,12 +74,14 @@ class WorkflowExecution:
     triggered_by: str = "scheduler"  # or "manual"
     error: str | None = None
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         """Convert to JSON-serializable dict."""
         return {
             "workflow_id": self.workflow_id,
             "started_at": self.started_at.isoformat(),
-            "completed_at": self.completed_at.isoformat() if self.completed_at else None,
+            "completed_at": self.completed_at.isoformat()
+            if self.completed_at
+            else None,
             "success": self.success,
             "triggered_by": self.triggered_by,
             "error": self.error,
@@ -91,7 +94,9 @@ class WorkflowExecution:
         return cls(
             workflow_id=data["workflow_id"],
             started_at=datetime.fromisoformat(data["started_at"]),
-            completed_at=datetime.fromisoformat(completed_str) if completed_str else None,
+            completed_at=datetime.fromisoformat(completed_str)
+            if completed_str
+            else None,
             success=data.get("success", False),
             triggered_by=data.get("triggered_by", "scheduler"),
             error=data.get("error"),
@@ -188,7 +193,9 @@ class WorkflowScheduler:
         -------
             List of WorkflowExecution records, newest first
         """
-        return sorted(self._executions, key=lambda e: e.started_at, reverse=True)[:limit]
+        return sorted(self._executions, key=lambda e: e.started_at, reverse=True)[
+            :limit
+        ]
 
     def get_next_execution_time(self) -> datetime | None:
         """Calculate next scheduled execution time.
@@ -262,7 +269,9 @@ class WorkflowScheduler:
                 return None
 
             if self._last_execution:
-                return self._last_execution + timedelta(hours=self.config.interval_hours)
+                return self._last_execution + timedelta(
+                    hours=self.config.interval_hours
+                )
             return now
 
         return None
@@ -317,7 +326,9 @@ class WorkflowScheduler:
         """Persist execution history to disk."""
         history_file = self.history_dir / "executions.json"
         data = {
-            "last_execution": self._last_execution.isoformat() if self._last_execution else None,
+            "last_execution": self._last_execution.isoformat()
+            if self._last_execution
+            else None,
             "executions": [e.to_dict() for e in self._executions],
         }
         with history_file.open("w") as f:
@@ -336,7 +347,9 @@ class WorkflowScheduler:
         if last_exec:
             self._last_execution = datetime.fromisoformat(last_exec)
 
-        self._executions = [WorkflowExecution.from_dict(e) for e in data.get("executions", [])]
+        self._executions = [
+            WorkflowExecution.from_dict(e) for e in data.get("executions", [])
+        ]
 
     @property
     def is_running(self) -> bool:
@@ -344,7 +357,7 @@ class WorkflowScheduler:
         return self._thread is not None and self._thread.is_alive()
 
     @property
-    def status(self) -> dict:
+    def status(self) -> dict[str, Any]:
         """Get scheduler status.
 
         Returns
@@ -355,7 +368,9 @@ class WorkflowScheduler:
             "enabled": self.config.enabled,
             "running": self.is_running,
             "schedule_type": self.config.schedule_type.value,
-            "last_execution": self._last_execution.isoformat() if self._last_execution else None,
+            "last_execution": self._last_execution.isoformat()
+            if self._last_execution
+            else None,
             "next_execution": self.get_next_execution_time().isoformat()
             if self.get_next_execution_time()
             else None,

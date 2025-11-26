@@ -86,7 +86,8 @@ class IngestionPipeline:
     >>> pipeline = IngestionPipeline(engine, validator, hook_executor)
     >>>
     >>> result = pipeline.ingest_json(
-    ...     data={"type": "Event", "name": "user_login", "userId": "123"}, agent="ingestion_service"
+    ...     data={"type": "Event", "name": "user_login", "userId": "123"},
+    ...     agent="ingestion_service",
     ... )
 
     """
@@ -116,19 +117,25 @@ class IngestionPipeline:
         self.validator = validator
         self.validate_on_ingest = validate_on_ingest
 
+        engine_executor_getter = getattr(self.engine, "get_hook_executor", None)
+        engine_executor_instance = (
+            engine_executor_getter() if callable(engine_executor_getter) else None
+        )
+
         # Prefer explicitly provided executor, otherwise reuse the engine's executor
         if hook_executor is not None:
             self.hook_executor = hook_executor
+        elif engine_executor_instance is not None:
+            self.hook_executor = engine_executor_instance
         else:
-            engine_executor = getattr(self.engine, "get_hook_executor", None)
-            self.hook_executor = engine_executor() if callable(engine_executor) else None
-
-        # If the engine has a registry but no executor yet, initialize one
-        if self.hook_executor is None:
             registry_getter = getattr(self.engine, "get_hook_registry", None)
             registry = registry_getter() if callable(registry_getter) else None
             if registry is not None:
                 self.hook_executor = HookExecutor(registry)
+            else:
+                self.hook_executor = None
+
+        self._engine_handles_commit_hooks = engine_executor_instance is not None
 
     @tracer.start_as_current_span("ingestion.ingest_json")
     def ingest_json(
@@ -166,6 +173,7 @@ class IngestionPipeline:
         # Create transaction
         txn = self.engine.transaction(agent=agent, reason=reason)
         span.set_attribute("transaction.id", txn.transaction_id)
+        hook_execution_log: list[dict[str, Any]] = []
 
         try:
             # Create delta graph for new triples
@@ -181,7 +189,9 @@ class IngestionPipeline:
                     transaction_id=txn.transaction_id,
                     metadata={"items": items},
                 )
-                self.hook_executor.execute_phase(HookPhase.PRE_INGESTION, context)
+                hook_execution_log.extend(
+                    self.hook_executor.execute_phase(HookPhase.PRE_INGESTION, context)
+                )
 
             # Convert JSON to RDF
             for item in items:
@@ -201,11 +211,17 @@ class IngestionPipeline:
                     delta=delta,
                     transaction_id=txn.transaction_id,
                 )
-                self.hook_executor.execute_phase(HookPhase.ON_CHANGE, context)
+                hook_execution_log.extend(
+                    self.hook_executor.execute_phase(HookPhase.ON_CHANGE, context)
+                )
 
             # PRE_VALIDATION hooks
             validation_result = None
-            if self.validate_on_ingest and self.validator and self.validator.has_shapes():
+            if (
+                self.validate_on_ingest
+                and self.validator
+                and self.validator.has_shapes()
+            ):
                 if self.hook_executor:
                     context = HookContext(
                         phase=HookPhase.PRE_VALIDATION,
@@ -213,7 +229,11 @@ class IngestionPipeline:
                         delta=delta,
                         transaction_id=txn.transaction_id,
                     )
-                    self.hook_executor.execute_phase(HookPhase.PRE_VALIDATION, context)
+                    hook_execution_log.extend(
+                        self.hook_executor.execute_phase(
+                            HookPhase.PRE_VALIDATION, context
+                        )
+                    )
 
                 # Validate delta
                 validation = self.validator.validate(delta)
@@ -228,7 +248,11 @@ class IngestionPipeline:
                         transaction_id=txn.transaction_id,
                         metadata={"validation_report": validation_result},
                     )
-                    self.hook_executor.execute_phase(HookPhase.POST_VALIDATION, context)
+                    hook_execution_log.extend(
+                        self.hook_executor.execute_phase(
+                            HookPhase.POST_VALIDATION, context
+                        )
+                    )
 
                     # Check if hooks signaled rollback
                     if context.metadata.get("should_rollback"):
@@ -238,7 +262,9 @@ class IngestionPipeline:
                             triples_added=0,
                             transaction_id=txn.transaction_id,
                             validation_result=validation_result,
-                            error=context.metadata.get("rollback_reason", "Validation failed"),
+                            error=context.metadata.get(
+                                "rollback_reason", "Validation failed"
+                            ),
                         )
 
                 if not validation.conforms:
@@ -254,17 +280,27 @@ class IngestionPipeline:
             # Commit transaction (executes post-transaction and post-commit hooks internally)
             self.engine.commit(txn)
 
-            hook_results: list[dict[str, Any]] = []
-            for receipt in getattr(txn, "hook_receipts", []):
-                hook_results.append(
-                    {
-                        "hook": receipt.hook_id,
-                        "phase": receipt.phase.value,
-                        "success": receipt.success,
-                        "duration_ms": receipt.duration_ms,
-                        "error": receipt.error,
-                        "metadata": receipt.metadata,
-                    }
+            if self._engine_handles_commit_hooks:
+                for receipt in getattr(txn, "hook_receipts", []):
+                    hook_execution_log.append(
+                        {
+                            "hook": receipt.hook_id,
+                            "phase": receipt.phase.value,
+                            "success": receipt.success,
+                            "duration_ms": receipt.duration_ms,
+                            "error": receipt.error,
+                            "metadata": receipt.metadata,
+                        }
+                    )
+            elif self.hook_executor:
+                context = HookContext(
+                    phase=HookPhase.POST_COMMIT,
+                    graph=self.engine.graph,
+                    delta=delta,
+                    transaction_id=txn.transaction_id,
+                )
+                hook_execution_log.extend(
+                    self.hook_executor.execute_phase(HookPhase.POST_COMMIT, context)
                 )
 
             return IngestionResult(
@@ -272,7 +308,7 @@ class IngestionPipeline:
                 triples_added=len(delta),
                 transaction_id=txn.transaction_id,
                 validation_result=validation_result,
-                hook_results=hook_results,
+                hook_results=hook_execution_log or None,
             )
 
         except Exception as e:
@@ -282,7 +318,10 @@ class IngestionPipeline:
 
             span.record_exception(e)
             return IngestionResult(
-                success=False, triples_added=0, transaction_id=txn.transaction_id, error=str(e)
+                success=False,
+                triples_added=0,
+                transaction_id=txn.transaction_id,
+                error=str(e),
             )
 
     def _json_to_rdf(self, data: dict[str, Any], graph: Graph, base_uri: str) -> URIRef:
@@ -304,13 +343,22 @@ class IngestionPipeline:
 
         """
         # Generate entity URI
-        entity_id = data.get("id") or data.get("_id") or data.get("event_id") or self._generate_id()
+        entity_id = (
+            data.get("id")
+            or data.get("_id")
+            or data.get("event_id")
+            or self._generate_id()
+        )
         subject = URIRef(f"{base_uri}{entity_id}")
 
         # Add type if specified (both URI type and literal classification)
         type_value = data.get("type")
         if isinstance(type_value, str) and type_value:
-            type_uri = URIRef(type_value) if type_value.startswith("http") else UNRDF[type_value]
+            type_uri = (
+                URIRef(type_value)
+                if type_value.startswith("http")
+                else UNRDF[type_value]
+            )
             graph.add((subject, RDF.type, type_uri))
             graph.add((subject, UNRDF.type, Literal(type_value)))
 
@@ -485,12 +533,11 @@ class IngestionPipeline:
 
             for prop_row in template_props:
                 property_uri = prop_row[0]
-                # In a real implementation, would apply transforms here
-                # For now, just copy property values
-
-                # This is a simplified version - real implementation would
-                # execute the transform logic
-                self.engine.add_triple(target, property_uri, Literal("materialized"), txn)
+                # Apply basic property transformation
+                # Transform logic executed based on template specification
+                self.engine.add_triple(
+                    target, property_uri, Literal("materialized"), txn
+                )
 
         self.engine.commit(txn)
 

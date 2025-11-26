@@ -39,7 +39,7 @@ class TestCLIIntegration:
         start_date = datetime(2024, 11, 24, 9, 0, 0, tzinfo=UTC)
         end_date = start_date + timedelta(days=1)
 
-        # Ingest events (placeholder)
+        # Ingest events from test data
         events = _ingest_events(start_date, end_date, verbose=False)
         assert isinstance(events, DailyBriefEventBatch)
         assert events.event_count > 0
@@ -133,7 +133,12 @@ class TestCLIIntegration:
         with tempfile.NamedTemporaryFile(mode="w", suffix=".md", delete=False) as f:
             output_path = Path(f.name)
 
-        format_output(test_content, OutputFormat.MARKDOWN, output_file=output_path, clipboard=False)
+        format_output(
+            test_content,
+            OutputFormat.MARKDOWN,
+            output_file=output_path,
+            clipboard=False,
+        )
 
         assert output_path.exists()
         assert output_path.read_text() == test_content

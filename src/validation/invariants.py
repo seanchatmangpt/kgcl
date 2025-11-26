@@ -1,4 +1,4 @@
-"""Invariant Properties for Tests
+"""Invariant Properties for Tests.
 
 Provides invariant validation that must hold throughout test execution.
 """
@@ -10,7 +10,7 @@ from typing import Any
 
 @dataclass
 class Invariant:
-    """An invariant that should always hold
+    """An invariant that should always hold.
 
     Example:
         inv = Invariant(
@@ -23,7 +23,7 @@ class Invariant:
     predicate: Callable[[Any], bool]
 
     def validate(self, obj: Any) -> bool:
-        """Validate object against invariant
+        """Validate object against invariant.
 
         Returns
         -------
@@ -39,7 +39,7 @@ class Invariant:
 
 
 class InvariantValidator:
-    """Validates invariants throughout test execution
+    """Validates invariants throughout test execution.
 
     Tracks invariants and their violations for debugging.
 
@@ -57,15 +57,15 @@ class InvariantValidator:
         self._violations: list[tuple[str, Any]] = []
 
     def add(self, name: str, predicate: Callable[[Any], bool]) -> None:
-        """Add an invariant"""
+        """Add an invariant."""
         self._invariants[name] = Invariant(name, predicate)
 
     def add_invariant(self, invariant: Invariant) -> None:
-        """Add an invariant object"""
+        """Add an invariant object."""
         self._invariants[invariant.name] = invariant
 
     def validate(self, name: str, obj: Any) -> bool:
-        """Validate single invariant
+        """Validate single invariant.
 
         Returns
         -------
@@ -83,7 +83,7 @@ class InvariantValidator:
         return valid
 
     def validate_all(self, obj: Any) -> bool:
-        """Validate all invariants against object
+        """Validate all invariants against object.
 
         Returns
         -------
@@ -98,23 +98,23 @@ class InvariantValidator:
         return all_valid
 
     def violation_count(self) -> int:
-        """Get number of violations"""
+        """Get number of violations."""
         return len(self._violations)
 
     def violations(self) -> list[tuple[str, Any]]:
-        """Get all violations"""
+        """Get all violations."""
         return self._violations.copy()
 
     def has_violations(self) -> bool:
-        """Check if there are violations"""
+        """Check if there are violations."""
         return len(self._violations) > 0
 
     def reset(self) -> None:
-        """Clear violations"""
+        """Clear violations."""
         self._violations.clear()
 
     def assert_no_violations(self) -> None:
-        """Assert no violations occurred
+        """Assert no violations occurred.
 
         Raises
         ------

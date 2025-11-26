@@ -11,7 +11,7 @@ This module provides functionality to:
 import json
 import logging
 from dataclasses import asdict, dataclass, field
-from datetime import datetime
+from datetime import UTC, datetime
 from enum import Enum
 from typing import Any
 
@@ -63,7 +63,7 @@ class FrameworkCapabilities:
     version: str | None = None
     classes: list[CapabilityClass] = field(default_factory=list)
     protocols: list[str] = field(default_factory=list)
-    discovered_at: str = field(default_factory=lambda: datetime.utcnow().isoformat())
+    discovered_at: str = field(default_factory=lambda: datetime.now(UTC).isoformat())
 
 
 class PyObjCFrameworkCrawler:
@@ -150,7 +150,9 @@ class PyObjCFrameworkCrawler:
             return False
 
         except Exception as e:
-            logger.error(f"Unexpected error loading framework {framework_name.value}: {e}")
+            logger.error(
+                f"Unexpected error loading framework {framework_name.value}: {e}"
+            )
             return False
 
     def enumerate_classes(self, framework_name: FrameworkName) -> list[str]:
@@ -210,10 +212,7 @@ class PyObjCFrameworkCrawler:
                 return True
 
         # No arguments and returns value typically indicates getter
-        if ":" not in selector and not selector.startswith("set"):
-            return True
-
-        return False
+        return bool(":" not in selector and not selector.startswith("set"))
 
     def enumerate_methods(
         self, framework_name: FrameworkName, class_name: str
@@ -257,7 +256,9 @@ class PyObjCFrameworkCrawler:
                     # Check if it's a method
                     is_method = callable(attr)
 
-                    if is_property or (is_method and self._is_observable_method(attr_name)):
+                    if is_property or (
+                        is_method and self._is_observable_method(attr_name)
+                    ):
                         method = CapabilityMethod(
                             selector=attr_name,
                             return_type="unknown",  # Would need objc introspection
@@ -408,9 +409,11 @@ class PyObjCFrameworkCrawler:
         try:
             if format == "jsonld":
                 # Generate JSON-LD for each framework
-                output = {
+                output: dict[str, Any] = {
                     "@context": "https://kgcl.dev/ontology/macos",
-                    "@graph": [self.generate_jsonld(cap) for cap in capabilities.values()],
+                    "@graph": [
+                        self.generate_jsonld(cap) for cap in capabilities.values()
+                    ],
                 }
             else:
                 # Plain JSON export
@@ -426,7 +429,7 @@ class PyObjCFrameworkCrawler:
             raise
 
 
-def main():
+def main() -> None:
     """CLI entry point for framework crawler."""
     logging.basicConfig(level=logging.INFO)
 
@@ -443,7 +446,8 @@ def main():
     # Print summary
     total_classes = sum(len(cap.classes) for cap in all_capabilities.values())
     total_methods = sum(
-        sum(len(cls.methods) for cls in cap.classes) for cap in all_capabilities.values()
+        sum(len(cls.methods) for cls in cap.classes)
+        for cap in all_capabilities.values()
     )
 
     print("\n=== Capability Discovery Summary ===")

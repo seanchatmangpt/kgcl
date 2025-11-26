@@ -140,8 +140,8 @@ Enforces cleanup even if the hook fails, preventing leaked resources.
 
 ## 4. Verify with Tooling
 
-1. `cargo-make type-check` – mypy rejects any misuse.
-2. `cargo-make test` – Chicago School tests exercise real objects.
+1. `poe type-check` – mypy rejects any misuse.
+2. `poe test` – Chicago School tests exercise real objects.
 3. Add regression tests around new invariants; e.g., `pytest.raises(ValueError)` for invalid HookName.
 
 When invariants span modules, add integration tests (e.g., `tests/integration/test_unrdf_porting.py`) to prove end-to-end enforcement.

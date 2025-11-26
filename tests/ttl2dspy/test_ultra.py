@@ -47,7 +47,9 @@ class TestCacheConfig:
     def test_custom_config(self, tmp_path):
         """Test custom configuration."""
         config = CacheConfig(
-            memory_cache_enabled=False, disk_cache_dir=tmp_path / "cache", max_disk_cache_age=3600
+            memory_cache_enabled=False,
+            disk_cache_dir=tmp_path / "cache",
+            max_disk_cache_age=3600,
         )
 
         assert config.memory_cache_enabled is False
@@ -148,7 +150,9 @@ class TestUltraOptimizer:
     def test_disk_cache(self, sample_ttl_file, tmp_path):
         """Test disk caching."""
         config = CacheConfig(
-            memory_cache_enabled=False, disk_cache_enabled=True, disk_cache_dir=tmp_path / "cache"
+            memory_cache_enabled=False,
+            disk_cache_enabled=True,
+            disk_cache_dir=tmp_path / "cache",
         )
         optimizer = UltraOptimizer(config)
 
@@ -188,7 +192,7 @@ class TestUltraOptimizer:
 
         # First generation
         code1 = optimizer.generate_with_cache(shapes)
-        assert "class TestShapeSignature(dspy.Signature):" in code1
+        assert "class TestSignature(dspy.Signature):" in code1
         assert optimizer.stats.memory_misses == 1
 
         # Second generation (should use cache)
@@ -233,7 +237,9 @@ class TestUltraOptimizer:
         # Add some data
         optimizer._memory_cache["test"] = "value"
         optimizer.parser._graph_cache["test"] = Graph()
-        optimizer.shape_index.add(SHACLShape(uri=URIRef("http://example.org/Test"), name="Test"))
+        optimizer.shape_index.add(
+            SHACLShape(uri=URIRef("http://example.org/Test"), name="Test")
+        )
 
         # Create a disk cache file
         cache_file = config.disk_cache_dir / "test.pkl"

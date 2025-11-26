@@ -156,7 +156,9 @@ class UltraOptimizer:
         try:
             import redis
 
-            self._redis_client = redis.from_url(self.config.redis_url or "redis://localhost:6379")
+            self._redis_client = redis.from_url(
+                self.config.redis_url or "redis://localhost:6379"
+            )
             self._redis_client.ping()
             logger.info("Redis cache initialized")
         except ImportError:
@@ -322,7 +324,12 @@ class UltraOptimizer:
         """Generate cache key for shapes."""
         # Use shape URIs and properties
         shape_data = [
-            (str(s.uri), len(s.properties), len(s.input_properties), len(s.output_properties))
+            (
+                str(s.uri),
+                len(s.properties),
+                len(s.input_properties),
+                len(s.output_properties),
+            )
             for s in shapes
         ]
         data_str = json.dumps(shape_data, sort_keys=True)
@@ -334,7 +341,10 @@ class UltraOptimizer:
         if not self.config.disk_cache_dir:
             return None
 
-        cache_file = self.config.disk_cache_dir / f"{hashlib.sha256(key.encode()).hexdigest()}.pkl"
+        cache_file = (
+            self.config.disk_cache_dir
+            / f"{hashlib.sha256(key.encode()).hexdigest()}.pkl"
+        )
 
         if not cache_file.exists():
             return None
@@ -358,7 +368,10 @@ class UltraOptimizer:
         if not self.config.disk_cache_dir:
             return
 
-        cache_file = self.config.disk_cache_dir / f"{hashlib.sha256(key.encode()).hexdigest()}.pkl"
+        cache_file = (
+            self.config.disk_cache_dir
+            / f"{hashlib.sha256(key.encode()).hexdigest()}.pkl"
+        )
 
         try:
             with open(cache_file, "wb") as f:

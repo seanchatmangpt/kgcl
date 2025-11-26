@@ -1,4 +1,4 @@
-"""Advanced Testing Utilities
+"""Advanced Testing Utilities.
 
 Provides advanced testing features like property generators, state machines, and mutation testing.
 """

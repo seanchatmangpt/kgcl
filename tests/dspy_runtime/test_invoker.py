@@ -88,7 +88,9 @@ class TestSignatureInvoker:
         """Test loading signature from module."""
         invoker = SignatureInvoker()
 
-        signature = invoker.load_signature(str(sample_signature_module), "TestSignature")
+        signature = invoker.load_signature(
+            str(sample_signature_module), "TestSignature"
+        )
 
         assert signature.__name__ == "TestSignature"
         assert "input_text" in signature.input_fields
@@ -122,7 +124,9 @@ class TestSignatureInvoker:
     def test_validate_inputs_success(self, sample_signature_module):
         """Test input validation - success."""
         invoker = SignatureInvoker()
-        signature = invoker.load_signature(str(sample_signature_module), "TestSignature")
+        signature = invoker.load_signature(
+            str(sample_signature_module), "TestSignature"
+        )
 
         is_valid, error = invoker.validate_inputs(signature, {"input_text": "test"})
 
@@ -132,7 +136,9 @@ class TestSignatureInvoker:
     def test_validate_inputs_missing_field(self, sample_signature_module):
         """Test input validation - missing field."""
         invoker = SignatureInvoker()
-        signature = invoker.load_signature(str(sample_signature_module), "TestSignature")
+        signature = invoker.load_signature(
+            str(sample_signature_module), "TestSignature"
+        )
 
         is_valid, error = invoker.validate_inputs(signature, {})
 
@@ -142,9 +148,11 @@ class TestSignatureInvoker:
     def test_validate_inputs_extra_field(self, sample_signature_module):
         """Test input validation - extra field."""
         invoker = SignatureInvoker()
-        signature = invoker.load_signature(str(sample_signature_module), "TestSignature")
+        signature = invoker.load_signature(
+            str(sample_signature_module), "TestSignature"
+        )
 
-        is_valid, error = invoker.validate_inputs(
+        is_valid, _error = invoker.validate_inputs(
             signature, {"input_text": "test", "extra_field": "value"}
         )
 
@@ -163,7 +171,9 @@ class TestSignatureInvoker:
         mock_predict.return_value = mock_predictor
 
         invoker = SignatureInvoker()
-        signature = invoker.load_signature(str(sample_signature_module), "TestSignature")
+        signature = invoker.load_signature(
+            str(sample_signature_module), "TestSignature"
+        )
 
         result = invoker.invoke(signature, {"input_text": "test input"})
 
@@ -177,7 +187,9 @@ class TestSignatureInvoker:
         mock_predict.side_effect = RuntimeError("Prediction failed")
 
         invoker = SignatureInvoker()
-        signature = invoker.load_signature(str(sample_signature_module), "TestSignature")
+        signature = invoker.load_signature(
+            str(sample_signature_module), "TestSignature"
+        )
 
         result = invoker.invoke(signature, {"input_text": "test"})
 

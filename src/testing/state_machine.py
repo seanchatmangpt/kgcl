@@ -1,4 +1,4 @@
-"""State Machine Testing
+"""State Machine Testing.
 
 Provides state machine test models and runners.
 """
@@ -10,7 +10,7 @@ from typing import Any
 
 @dataclass
 class Transition:
-    """State transition"""
+    """State transition."""
 
     from_state: str
     to_state: str
@@ -20,7 +20,7 @@ class Transition:
 
 
 class StateMachine:
-    """Abstract state machine for testing
+    """Abstract state machine for testing.
 
     Models system behavior through states and transitions.
     """
@@ -38,7 +38,7 @@ class StateMachine:
         precondition: Callable[[Any], bool] | None = None,
         postcondition: Callable[[Any], bool] | None = None,
     ) -> None:
-        """Add state transition"""
+        """Add state transition."""
         if from_state not in self._transitions:
             self._transitions[from_state] = []
 
@@ -52,17 +52,17 @@ class StateMachine:
         self._transitions[from_state].append(transition)
 
     def current_state(self) -> str:
-        """Get current state"""
+        """Get current state."""
         return self._current_state
 
     def valid_actions(self) -> list[str]:
-        """Get valid actions from current state"""
+        """Get valid actions from current state."""
         if self._current_state not in self._transitions:
             return []
         return [t.action for t in self._transitions[self._current_state]]
 
     def can_transition(self, action: str, context: Any | None = None) -> bool:
-        """Check if transition is valid"""
+        """Check if transition is valid."""
         if self._current_state not in self._transitions:
             return False
 
@@ -75,7 +75,7 @@ class StateMachine:
         return False
 
     def perform_action(self, action: str, context: Any | None = None) -> bool:
-        """Perform action and transition state
+        """Perform action and transition state.
 
         Returns
         -------
@@ -102,18 +102,18 @@ class StateMachine:
         return False
 
     def history(self) -> list[str]:
-        """Get state history"""
+        """Get state history."""
         return self._history.copy()
 
     def reset(self, initial_state: str) -> None:
-        """Reset to initial state"""
+        """Reset to initial state."""
         self._current_state = initial_state
         self._history = [initial_state]
 
 
 @dataclass
 class StateMachineTest:
-    """Test for a state machine
+    """Test for a state machine.
 
     Example:
         test = StateMachineTest(
@@ -134,7 +134,7 @@ class StateMachineTest:
             self.machine = StateMachine(self.initial_state)
 
     def run(self, actions: list[tuple[str, Any | None]]) -> bool:
-        """Run test with sequence of actions
+        """Run test with sequence of actions.
 
         Args:
             actions: List of (action, context) tuples

@@ -7,7 +7,7 @@ Tests the full flow: PyObjC events → UNRDF ingestion → Feature materializati
 import tempfile
 from datetime import datetime, timedelta
 from pathlib import Path
-from unittest.mock import Mock, patch
+from unittest.mock import MagicMock, Mock, patch
 
 import pytest
 from rdflib import Literal, Namespace, URIRef
@@ -23,6 +23,8 @@ from kgcl.unrdf_engine.engine import UnrdfEngine
 from kgcl.unrdf_engine.ingestion import IngestionPipeline
 
 UNRDF = Namespace("http://unrdf.org/ontology/")
+MIN_RDF_PROPERTY_COUNT = 4
+MIN_FEATURE_PROPERTIES = 4
 
 
 def create_sample_daily_events() -> tuple[list, datetime, datetime]:
@@ -238,15 +240,19 @@ class TestFullPipeline:
             assert "context_switches" in feature_ids
 
             # Verify feature values are correct
-            vscode_feature = next((f for f in features if "VSCode" in f.feature_id), None)
+            vscode_feature = next(
+                (f for f in features if "VSCode" in f.feature_id), None
+            )
             assert vscode_feature is not None
             assert vscode_feature.value > 7200  # More than 2 hours
 
-            meeting_feature = next((f for f in features if f.feature_id == "meeting_count"), None)
+            meeting_feature = next(
+                (f for f in features if f.feature_id == "meeting_count"), None
+            )
             assert meeting_feature is not None
             assert meeting_feature.value == 3  # 3 meetings
 
-    def test_pipeline_with_feature_templates(self):
+    def test_pipeline_with_feature_templates(self) -> None:
         """Test pipeline with feature template materialization."""
         with tempfile.TemporaryDirectory() as tmpdir:
             engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl")
@@ -258,7 +264,10 @@ class TestFullPipeline:
             engine.add_triple(template_uri, RDF.type, UNRDF.FeatureTemplate, txn)
             engine.add_triple(template_uri, UNRDF.property, UNRDF.appUsageTime, txn)
             engine.add_triple(
-                template_uri, UNRDF.targetPattern, Literal("?s unrdf:type 'AppEvent'"), txn
+                template_uri,
+                UNRDF.targetPattern,
+                Literal("?s unrdf:type 'AppEvent'"),
+                txn,
             )
             engine.commit(txn)
 
@@ -293,7 +302,9 @@ class TestFullPipeline:
     @patch("dspy.Predict")
     @patch("dspy.LM")
     @patch("requests.get")
-    def test_pipeline_with_dspy_integration(self, mock_get, mock_lm_cls, mock_predict):
+    def test_pipeline_with_dspy_integration(
+        self, mock_get: MagicMock, mock_lm_cls: MagicMock, mock_predict: MagicMock
+    ) -> None:
         """Test complete pipeline including DSPy signature generation and invocation."""
         # Mock Ollama availability
         mock_response = Mock()
@@ -306,8 +317,12 @@ class TestFullPipeline:
         mock_lm_cls.return_value = mock_lm
 
         mock_prediction = Mock()
-        mock_prediction.summary = "Daily productivity summary: 3 hours coding, 2 meetings"
-        mock_prediction.key_insights = "Deep work in morning, context switches in evening"
+        mock_prediction.summary = (
+            "Daily productivity summary: 3 hours coding, 2 meetings"
+        )
+        mock_prediction.key_insights = (
+            "Deep work in morning, context switches in evening"
+        )
 
         mock_predictor = Mock()
         mock_predictor.return_value = mock_prediction
@@ -355,7 +370,6 @@ class TestFullPipeline:
 
             # Step 2: Generate DSPy signature code
             generator = DSPyGenerator()
-            signature_def = generator.generate_signature(shape)
             module_code = generator.generate_module([shape])
 
             # Write signature module
@@ -372,7 +386,9 @@ class TestFullPipeline:
             bridge = UNRDFBridge()
 
             # Prepare inputs from materialized features
-            meeting_feature = next((f for f in features if f.feature_id == "meeting_count"), None)
+            meeting_feature = next(
+                (f for f in features if f.feature_id == "meeting_count"), None
+            )
             app_usage = "VSCode: 3h, Mail: 0.5h, Safari: 1h"
 
             result = bridge.invoke(
@@ -380,7 +396,9 @@ class TestFullPipeline:
                 signature_name="DailyBriefSignature",
                 inputs={
                     "app_usage": app_usage,
-                    "meeting_count": int(meeting_feature.value) if meeting_feature else 0,
+                    "meeting_count": int(meeting_feature.value)
+                    if meeting_feature
+                    else 0,
                 },
                 source_features=[f.feature_id for f in features],
             )
@@ -391,9 +409,9 @@ class TestFullPipeline:
             assert result["receipt"]["success"] is True
             assert result["result"]["outputs"]["summary"] is not None
 
-    def test_pipeline_validates_rdf_structure(self):
+    def test_pipeline_validates_rdf_structure(self) -> None:
         """Test that pipeline produces correct RDF structure at each stage."""
-        events, start_time, end_time = create_sample_daily_events()
+        events, _start_time, _end_time = create_sample_daily_events()
 
         with tempfile.TemporaryDirectory() as tmpdir:
             engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl")
@@ -436,16 +454,18 @@ class TestFullPipeline:
             }}
             """
             props = list(engine.query(prop_query))
-            assert len(props) >= 4  # At least id, type, timestamp, app_name
+            assert len(props) >= MIN_RDF_PROPERTY_COUNT
 
             # 4. Verify provenance tracking
-            provenance = engine.get_provenance(entity_uri, UNRDF.type, Literal("AppEvent"))
+            provenance = engine.get_provenance(
+                entity_uri, UNRDF.type, Literal("AppEvent")
+            )
             assert provenance is not None
             assert provenance.agent == "test"
 
-    def test_pipeline_handles_time_windows(self):
+    def test_pipeline_handles_time_windows(self) -> None:
         """Test that pipeline correctly handles time window aggregation."""
-        events, start_time, end_time = create_sample_daily_events()
+        events, start_time, _end_time = create_sample_daily_events()
 
         config = FeatureConfig(
             enabled_features=["app_usage_time"],
@@ -460,7 +480,9 @@ class TestFullPipeline:
         hourly_features = materializer.materialize(events, hourly_start, hourly_end)
 
         # Verify only events in first hour are included
-        first_hour_events = [e for e in events if hourly_start <= e.timestamp < hourly_end]
+        first_hour_events = [
+            e for e in events if hourly_start <= e.timestamp < hourly_end
+        ]
         assert len(first_hour_events) > 0
 
         # Check feature values match expectations

@@ -94,10 +94,22 @@ def test_custom_error_code():
     sanitizer = ErrorSanitizer()
 
     class CustomError(Exception):
-        pass
+        """Test-specific custom error with error_code attribute."""
 
-    error = CustomError("Something went wrong")
-    error.error_code = "CUSTOM_FAILURE"
+        def __init__(self, message: str, error_code: str | None = None) -> None:
+            """Initialize CustomError.
+
+            Parameters
+            ----------
+            message : str
+                Error message
+            error_code : str, optional
+                Error code for categorization
+            """
+            self.error_code = error_code
+            super().__init__(message)
+
+    error = CustomError("Something went wrong", error_code="CUSTOM_FAILURE")
 
     result = sanitizer.sanitize(error)
 
@@ -181,7 +193,10 @@ def test_validate_path_normalization():
 def test_validate_restrictions_valid():
     """Test that valid configuration passes validation."""
     sandbox = SandboxRestrictions(
-        allowed_paths=["/tmp"], memory_limit_mb=512, timeout_ms=30000, max_open_files=100
+        allowed_paths=["/tmp"],
+        memory_limit_mb=512,
+        timeout_ms=30000,
+        max_open_files=100,
     )
 
     assert sandbox.validate_restrictions()
@@ -259,7 +274,9 @@ def test_process_spawn_restrictions():
     sandbox = SandboxRestrictions(allowed_paths=["/tmp"], no_process_spawn=True)
     assert sandbox.no_process_spawn
 
-    sandbox_with_spawn = SandboxRestrictions(allowed_paths=["/tmp"], no_process_spawn=False)
+    sandbox_with_spawn = SandboxRestrictions(
+        allowed_paths=["/tmp"], no_process_spawn=False
+    )
     assert not sandbox_with_spawn.no_process_spawn
 
 

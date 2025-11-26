@@ -3,7 +3,12 @@
 from kgcl.hooks.adaptive_monitor import AdaptiveMonitor, MetricThreshold
 
 # Advanced UNRDF modules
-from kgcl.hooks.dark_matter import DarkMatterOptimizer, OptimizationRule, OptimizedPlan, QueryStep
+from kgcl.hooks.dark_matter import (
+    DarkMatterOptimizer,
+    OptimizationRule,
+    OptimizedPlan,
+    QueryStep,
+)
 from kgcl.hooks.edge_cases import EdgeCaseHandler
 from kgcl.hooks.federation import (
     ConsistencyLevel,
@@ -36,43 +41,43 @@ from kgcl.hooks.streaming import (
 )
 
 __all__ = [
+    "AdaptiveMonitor",
     "AndonBoard",
     "AndonSignal",
-    "SignalSeverity",
-    "CircuitBreaker",
-    "CircuitBreakerConfig",
-    "CircuitState",
-    "AdaptiveMonitor",
-    "MetricThreshold",
-    "EdgeCaseHandler",
-    # Hook orchestration
-    "HookLoader",
-    "HookDefinition",
-    "HookEffect",
-    "HookOrchestrator",
-    "ExecutionContext",
-    "ExecutionResult",
-    "EffectHandler",
-    "HookRegistry",
-    "HookStatus",
-    "RegisteredHook",
-    "HookScheduler",
-    "ScheduledExecution",
-    # Advanced UNRDF modules
-    "DarkMatterOptimizer",
-    "OptimizedPlan",
-    "OptimizationRule",
-    "QueryStep",
     "Change",
     "ChangeFeed",
     "ChangeType",
-    "StreamProcessor",
-    "WindowedStreamProcessor",
+    "CircuitBreaker",
+    "CircuitBreakerConfig",
+    "CircuitState",
     "ConsistencyLevel",
+    # Advanced UNRDF modules
+    "DarkMatterOptimizer",
+    "EdgeCaseHandler",
+    "EffectHandler",
+    "ExecutionContext",
+    "ExecutionResult",
     "FederationCoordinator",
     "GossipProtocol",
+    "HookDefinition",
+    "HookEffect",
+    # Hook orchestration
+    "HookLoader",
+    "HookOrchestrator",
+    "HookRegistry",
+    "HookScheduler",
+    "HookStatus",
+    "MetricThreshold",
     "Node",
     "NodeStatus",
+    "OptimizationRule",
+    "OptimizedPlan",
+    "QueryStep",
+    "RegisteredHook",
     "ReplicationConfig",
     "ReplicationResult",
+    "ScheduledExecution",
+    "SignalSeverity",
+    "StreamProcessor",
+    "WindowedStreamProcessor",
 ]

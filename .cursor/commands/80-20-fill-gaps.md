@@ -1,89 +1,75 @@
-# 80/20 Fill the Gaps - KGCL Capability Completion Playbook
+# 80/20 Fill the Gaps – KGCL Capability Completion Order
 
 ## Purpose
 
-Use this command when the codebase needs an aggressive, autonomous sweep for partially implemented KGCL capabilities. The agent applies 80/20 thinking to finish the highest-value work, validates everything with Chicago School TDD rigor, and ships production-grade Python without asking for confirmation.
+Eliminate the highest-impact incomplete capabilities before they become regressions. Every pass through this command must tighten quality, consistency, and maintainability.
 
 ### Action Directive (DfLSS)
 
-This playbook is an order from the core team’s Design for Lean Six Sigma initiative. When `/80-20-fill-gaps` is invoked, execute every step immediately and independently—do not pause to ask for additional approval.
+This is a Design for Lean Six Sigma order. When `/80-20-fill-gaps` runs, execute every step immediately and independently—no permission loops.
 
-## Core Principle
+## Principles
 
-- **Value = Quality + Consistency + Maintainability**. Shipping partial work is negative value.
-- **80/20 targeting**: the top 20% of unfinished capabilities deliver 80% of the real value (SLO compliance, type safety, UNRDF readiness).
-- **No tech debt allowed**: work is complete only when typed, documented, tested, and validated end-to-end.
+- **Value is Quality × Consistency × Maintainability.**
+- **80/20 targeting:** finish the top 20 % of gaps that unlock 80 % of the user value (SLOs, LinkML safety, UNRDF parity).
+- **No partial work:** done means typed, tested (Chicago TDD), documented, validated.
 
-## Workflow
+## Flow
 
 ```
-Scan → Identify → Finish → Validate → Plan Next Moves
+Scan quickly → Rank by impact/value → Execute fixes → Validate → Log next steps
 ```
 
-## Step 1: 80/20 Scan
+## 1. Scan Quickly
 
-### 1.1 High-Signal Sweep
+Use lightweight sweeps to surface unfinished work:
 
 ```bash
-# Critical directories
 rg -n "TODO|FIXME|pass|raise NotImplementedError" src/kgcl
-rg -n "TODO|xfail|skip" tests
+rg -n "xfail|skip" tests
 rg -n "pass$" src/kgcl/**/*.py
 ```
 
-Targets:
-- `src/kgcl/hooks/**`: lifecycle gaps, missing receipts, sandbox violations
-- `src/kgcl/unrdf_engine/**`: UNRDF adapters, RDF parsers, SPARQL evaluators
-- `tests/**`: missing integration hooks, absent perf/security markers
-- `docs/*.md`: implementation references that lag reality
+Targets to inspect:
+- `src/kgcl/hooks/**` – lifecycle gaps, receipts, sandboxing
+- `src/kgcl/unrdf_engine/**` – adapters, SPARQL, ingestion
+- `tests/**` – integration holes, perf/security markers
+- `docs/*.md` – implementation drift
 
-### 1.2 Pattern Recognition
-
-Incomplete capability signals:
-1. `pass` blocks guarding production paths
-2. Missing NumPy docstrings or partial parameter docs
-3. Functions without return type annotations (`mypy` will fail)
-4. Integration tests not covering new hook phases
-5. Partial UNRDF porting (JS pseudo-code left in comments)
-
-Document findings immediately:
+Capture findings as you go:
 
 ```markdown
 ## Capability Inventory
-- hooks/policy_pack_manager.py::PolicyPackManager.activate_pack – missing idempotency guard
-- unrdf_engine/executor.py::execute_plan – lacks timeout receipt data
-- tests/integration/test_unrdf_porting.py – no coverage for lockchain writer regression
+- `hooks/policy_pack_manager.py::activate_pack` – missing idempotency guard
+- `unrdf_engine/executor.py::execute_plan` – timeout data absent from receipts
+- `tests/integration/test_unrdf_porting.py` – no lockchain regression coverage
 ```
 
-## Step 2: Identify + Prioritize
+## 2. Rank by Impact & Value
 
-### 2.1 Categorize
+Categories:
+- **Error handling** – sanitizer gaps, raw tracebacks
+- **Type safety** – missing Literal enums, implicit `Any`
+- **Validation** – LinkML not enforced, schema drift
+- **Testing** – Chicago structure missing, no phase assertions
+- **Performance** – no SLO metrics, cache not tracked
 
-- **Error Handling**: sanitizer gaps, unsanitized tracebacks, raised raw exceptions
-- **Type Safety**: missing Literal-based phase enums, Optional misuse, implicit `Any`
-- **Validation**: CLI commands without LinkML validation, missing schema hooks
-- **Testing**: Chicago TDD violations, no pre/post-phase assertions
-- **Performance**: missing metrics for p99 SLO, absent caching paths
-
-### 2.2 80/20 Matrix (Quality-First)
+Apply the 80/20 matrix:
 
 | Quadrant | Examples | Action |
 | --- | --- | --- |
-| High Impact + High Value | Hook receipts missing sandbox metrics; UNRDF cache invalidation incomplete | Finish now |
-| High Impact + Medium Value | Additional integration markers | Plan after high-value |
-| Low Impact + High Value | Doc sync for new CLI command | Batch after core |
-| Low Impact + Low Value | Cosmetic refactors | Skip |
+| High impact + high value | Receipt metrics missing, UNRDF cache invalid | Do now |
+| High impact + medium value | Integration markers, observability gaps | Plan next |
+| Low impact + high value | Doc sync for new CLI | Batch later |
+| Low impact + low value | Cosmetic refactors | Ignore |
 
-Keep a running prioritized stack ranked by value to SLO, safety, and UNRDF parity.
+Keep a running stack ordered by SLO risk and user value.
 
-## Step 3: Finish Capabilities
+## 3. Execute the Fix
 
-### 3.1 Implementation Flow
-
-1. Stop scanning; laser-focus on the highest-value capability.
-2. Flesh out the implementation using idiomatic Python + dataclasses.
-3. Enforce absolute imports and full type hints.
-4. Add/adjust Chicago-style tests first when feasible.
+1. Pick the top item; stop scanning.
+2. Implement with frozen dataclasses, full type hints, absolute imports.
+3. Add/expand Chicago tests first (real hooks/UNRDF, no mocks).
 
 Example transformation:
 
@@ -96,71 +82,63 @@ def build_receipt(hook, duration_ms):
 from kgcl.hooks.models import Hook, HookReceipt
 
 def build_receipt(hook: Hook, duration_ms: float) -> HookReceipt:
-    """Create immutable receipt with sanitized metadata."""
-    receipt = HookReceipt.from_execution(
+    """Emit sanitized receipt with phase metrics."""
+    return HookReceipt.from_execution(
         hook=hook,
         duration_ms=duration_ms,
         phase_metrics=hook.metrics.snapshot(),
-    )
-    return receipt.sanitize()
+    ).sanitize()
 ```
 
-### 3.2 Completion Checklist
-
-- [ ] Implementation uses frozen dataclasses or typed functions
-- [ ] Error handling routes through `ErrorSanitizer`
+Completion checklist:
+- [ ] Frozen dataclasses or typed functions
+- [ ] ErrorSanitizer invoked at boundaries
 - [ ] Performance metrics recorded (`duration_ms`, cache hits)
-- [ ] Chicago tests cover happy path + failure path + receipt assertions
-- [ ] Documentation references updated if behavior changed
+- [ ] Chicago tests cover pass/fail/receipt scenarios
+- [ ] Docs updated if behavior changed
 
-### 3.3 Batch Wisely
-
-Batch only tightly related fixes (e.g., all hook receipt metrics). Avoid mixing CLI edits with UNRDF internals in a single pass to keep verification sharp.
-
-## Step 4: Validate Ruthlessly
+## 4. Validate Ruthlessly
 
 ```bash
 uv sync --frozen
-cargo-make format
-cargo-make lint
-cargo-make type-check
-cargo-make test
-cargo-make unrdf-full      # when capability touches UNRDF porting
+poe format
+poe lint
+poe type-check
+poe test
+poe unrdf-full        # required if the change touches UNRDF paths
+poe pre-commit-run
 ```
 
-Validation gates:
-- Ruff clean (ALL rules minus allowed ignores)
+Gates:
+- Ruff clean (ALL rules except documented ignores)
 - `poe type-check` passes with `strict = true`
-- Pytest green with strict markers, no unexpected skips
-- Performance-focused tests stay within documented SLO thresholds
+- Pytest strict markers green, no new skips
+- Performance stays within SLOs
 
-Capture evidence (command + exit code) if reporting back.
+Store evidence (command + exit code) in the PR or issue.
 
-## Step 5: Plan Next Moves
-
-Create a crisp follow-up plan:
+## 5. Log Next Moves
 
 ```markdown
 ## Next Steps
-1. Instrument hook sandbox limits in `HookExecutionPipeline` (blocked on metrics schema)
-2. Expand integration test matrix for `PolicyPackManager` activation errors
-3. Document new LinkML validation flow in `docs/CLI_IMPLEMENTATION_SUMMARY.md`
+1. Instrument sandbox limits in `HookExecutionPipeline` (requires metrics schema)
+2. Expand integration suite for `PolicyPackManager` error handling
+3. Document the new LinkML validation guard in `docs/CLI_IMPLEMENTATION_SUMMARY.md`
 ```
 
-If a capability cannot be finished immediately, log blockers, open TODO with owner, and ensure the codebase remains production-ready (feature flag off, guard clause, or revert partial change).
+If something can’t be finished, record owner/blocker and leave the codebase production-ready (feature flag off or guard clause).
 
-## Integration with Other Commands
+## Cross-Checks
 
-- Pair with **[Gemba Walk](./gemba-walk.md)** to see real behavior before declaring complete.
-- Use **[Poka-Yoke Design](./poka-yoke-design.md)** for type-safety and sandbox guards.
-- Run **[Expert Testing Patterns](./expert-testing-patterns.md)** once a capability spans multiple layers.
-- Finish by **[Verify Tests](./verify-tests.md)** to ensure Chicago coverage.
+- Pair with **`/gemba-walk`** to observe behavior before declaring complete.
+- Use **`/poka-yoke-design`** for invariants and **`/expert-testing-patterns`** for multi-layer tests.
+- Close with **`/verify-tests`** to ensure suites remain green.
 
-## Expert Reminders
+## Reminders
 
-- Never degrade NumPy docstrings or type hints while filling gaps.
-- Chicago School TDD means real objects, real IO, no mocks for core domain.
-- `print` statements are banned—capture diagnostics via structured receipts/tests instead.
-- Capability is “done” only when it can pass `.githooks/pre-commit` and `cargo-make verify`.
-- Always keep LinkML validation enabled for CLI flows—no escape hatches.
+- Never reduce NumPy docstrings or type hints while filling gaps.
+- Chicago TDD = real collaborators only.
+- Structured logging/receipts only—`print` is banned.
+- “Done” = `.githooks/pre-commit` + `poe verify` both pass.
+- LinkML validation stays mandatory for CLI flows (including `kgct` commands).
 

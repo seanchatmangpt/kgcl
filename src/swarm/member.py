@@ -1,4 +1,4 @@
-"""Swarm Member - Individual test executor
+"""Swarm Member - Individual test executor.
 
 Represents a single member of a test swarm.
 """
@@ -9,12 +9,12 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import Any
 
-from .task import TaskResult, TaskStatus, TestTask
+from .task import SwarmTask, TaskResult, TaskStatus
 
 
 @dataclass
 class MemberMetadata:
-    """Metadata about a swarm member"""
+    """Metadata about a swarm member."""
 
     member_id: str
     name: str
@@ -24,13 +24,13 @@ class MemberMetadata:
 
 
 class SwarmMember:
-    """Individual member of a test swarm
+    """Individual member of a test swarm.
 
     Executes tasks and reports results back to coordinator.
 
     Example:
         member = SwarmMember("test-worker-1")
-        task = TestTask("unit_test")
+        task = SwarmTask("unit_test")
         result = member.execute_task(task)
     """
 
@@ -39,19 +39,21 @@ class SwarmMember:
         self._metadata = MemberMetadata(
             member_id=str(uuid.uuid4())[:8], name=name, created_at=datetime.now()
         )
-        self._task_handlers: dict[str, Callable[[TestTask], TaskResult]] = {}
+        self._task_handlers: dict[str, Callable[[SwarmTask], TaskResult]] = {}
         self._state: dict[str, Any] = {}
 
     def name(self) -> str:
-        """Get member name"""
+        """Get member name."""
         return self._name
 
     def metadata(self) -> MemberMetadata:
-        """Get member metadata"""
+        """Get member metadata."""
         return self._metadata
 
-    def register_handler(self, task_type: str, handler: Callable[[TestTask], TaskResult]) -> None:
-        """Register handler for task type
+    def register_handler(
+        self, task_type: str, handler: Callable[[SwarmTask], TaskResult]
+    ) -> None:
+        """Register handler for task type.
 
         Args:
             task_type: Type of task (e.g., "unit_test", "integration_test")
@@ -59,8 +61,8 @@ class SwarmMember:
         """
         self._task_handlers[task_type] = handler
 
-    def execute_task(self, task: TestTask) -> TaskResult:
-        """Execute a task
+    def execute_task(self, task: SwarmTask) -> TaskResult:
+        """Execute a task.
 
         Args:
             task: Task to execute
@@ -92,15 +94,15 @@ class SwarmMember:
             )
 
     def set_state(self, key: str, value: Any) -> None:
-        """Set state value"""
+        """Set state value."""
         self._state[key] = value
 
     def get_state(self, key: str, default: Any = None) -> Any:
-        """Get state value"""
+        """Get state value."""
         return self._state.get(key, default)
 
     def reset_state(self) -> None:
-        """Clear all state"""
+        """Clear all state."""
         self._state.clear()
 
     def __repr__(self) -> str:

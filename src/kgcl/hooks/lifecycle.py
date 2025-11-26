@@ -9,7 +9,7 @@ import time
 import uuid
 from collections.abc import Callable
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import Any
 
 from kgcl.hooks.performance import PerformanceMetrics, PerformanceOptimizer
@@ -38,7 +38,7 @@ class HookContext:
     request_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     execution_id: ExecutionId = field(default_factory=ExecutionId.new)
     metadata: dict[str, Any] = field(default_factory=dict)
-    timestamp: datetime = field(default_factory=datetime.utcnow)
+    timestamp: datetime = field(default_factory=lambda: datetime.now(UTC))
 
 
 @dataclass
@@ -120,7 +120,9 @@ class HookExecutionPipeline:
     Manages batch execution, priority ordering, error recovery, and performance tracking.
     """
 
-    def __init__(self, stop_on_error: bool = False, enable_performance_tracking: bool = True):
+    def __init__(
+        self, stop_on_error: bool = False, enable_performance_tracking: bool = True
+    ):
         """
         Initialize execution pipeline.
 
@@ -186,9 +188,22 @@ class HookExecutionPipeline:
 
             # Sanitize error if present
             if receipt.error:
-                # Create a dummy exception to sanitize
+                # Create an exception to sanitize
                 class ReceiptException(Exception):
-                    pass
+                    """Exception wrapping receipt error for sanitization.
+
+                    Attributes
+                    ----------
+                    error_code : str
+                        Error code for categorization
+                    original_error : str
+                        The original error message
+                    """
+
+                    def __init__(self, message: str, error_code: str = "UNKNOWN") -> None:
+                        self.original_error = message
+                        self.error_code = error_code
+                        super().__init__(message)
 
                 exc = ReceiptException(receipt.error)
                 if hasattr(hook, "error_code"):
@@ -201,7 +216,9 @@ class HookExecutionPipeline:
 
                 perf_metadata = {}
                 if self._performance_optimizer:
-                    stats = self._performance_optimizer.get_stats(f"hook_execute_{hook.name}")
+                    stats = self._performance_optimizer.get_stats(
+                        f"hook_execute_{hook.name}"
+                    )
                     if stats:
                         perf_metadata["performance_stats"] = stats
 
@@ -232,7 +249,9 @@ class HookExecutionPipeline:
                 latency_ms = (end_time - start_time) * 1000
 
                 metric = PerformanceMetrics(
-                    operation=f"hook_execute_{hook.name}", latency_ms=latency_ms, success=False
+                    operation=f"hook_execute_{hook.name}",
+                    latency_ms=latency_ms,
+                    success=False,
                 )
                 self._performance_optimizer.record_metric(metric)
 
@@ -240,14 +259,14 @@ class HookExecutionPipeline:
             sanitized = self._error_sanitizer.sanitize(e)
 
             # Create a failed receipt with sanitized error
-            from datetime import datetime
+            from datetime import UTC, datetime
 
             from kgcl.hooks.conditions import ConditionResult
             from kgcl.hooks.core import HookReceipt
 
             return HookReceipt(
                 hook_id=hook.name,
-                timestamp=datetime.utcnow(),
+                timestamp=datetime.now(UTC),
                 actor=getattr(hook, "actor", None),
                 condition_result=ConditionResult(
                     triggered=False, metadata={"error": sanitized.code}
@@ -259,7 +278,9 @@ class HookExecutionPipeline:
                 metadata={"error_code": sanitized.code, "sanitized": True},
             )
 
-    async def execute_batch(self, hooks: list[Any], context: dict[str, Any]) -> list[Any]:
+    async def execute_batch(
+        self, hooks: list[Any], context: dict[str, Any]
+    ) -> list[Any]:
         """
         Execute multiple hooks in priority order with performance tracking.
 
@@ -363,7 +384,7 @@ class HookStateManager:
             {
                 "from": from_state,
                 "to": to_state,
-                "timestamp": datetime.utcnow(),
+                "timestamp": datetime.now(UTC),
                 "metadata": metadata,
             }
         )

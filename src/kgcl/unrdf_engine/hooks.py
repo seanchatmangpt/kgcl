@@ -182,7 +182,9 @@ class KnowledgeHook(ABC):
     ...         super().__init__(
     ...             name="feature_template_processor",
     ...             phases=[HookPhase.POST_COMMIT],
-    ...             trigger=TriggerCondition(pattern="?s rdf:type unrdf:FeatureTemplate"),
+    ...             trigger=TriggerCondition(
+    ...                 pattern="?s rdf:type unrdf:FeatureTemplate"
+    ...             ),
     ...         )
     ...
     ...     def execute(self, context):
@@ -241,10 +243,7 @@ class KnowledgeHook(ABC):
         if context.phase not in self.phases:
             return False
 
-        if self.trigger and not self.trigger.matches(context):
-            return False
-
-        return True
+        return not (self.trigger and not self.trigger.matches(context))
 
     @abstractmethod
     def execute(self, context: HookContext) -> None:
@@ -424,7 +423,9 @@ class HookExecutor:
         return results
 
     @tracer.start_as_current_span("hooks.execute_hook")
-    def _execute_hook(self, hook: KnowledgeHook, context: HookContext) -> dict[str, Any]:
+    def _execute_hook(
+        self, hook: KnowledgeHook, context: HookContext
+    ) -> dict[str, Any]:
         """Execute a single hook.
 
         Parameters
@@ -580,7 +581,9 @@ class FeatureTemplateHook(KnowledgeHook):
     Materializes feature templates by applying them to matching entities.
     """
 
-    def __init__(self, materializer: Callable[[HookContext], None] | None = None) -> None:
+    def __init__(
+        self, materializer: Callable[[HookContext], None] | None = None
+    ) -> None:
         """Initialize feature template hook.
 
         Parameters

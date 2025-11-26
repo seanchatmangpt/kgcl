@@ -8,7 +8,7 @@ monitoring for the hook execution framework.
 import logging
 import statistics
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import Any
 
 
@@ -35,7 +35,7 @@ class HealthCheck:
     metrics: dict[str, float]
     warnings: list[str] = field(default_factory=list)
     errors: list[str] = field(default_factory=list)
-    timestamp: datetime = field(default_factory=datetime.utcnow)
+    timestamp: datetime = field(default_factory=lambda: datetime.now(UTC))
 
 
 class Observability:
@@ -126,7 +126,9 @@ class Observability:
             if name in self.thresholds:
                 thresholds = self.thresholds[name]
                 if "error" in thresholds and current > thresholds["error"]:
-                    errors.append(f"{name} is {current:.2f} (threshold: {thresholds['error']:.2f})")
+                    errors.append(
+                        f"{name} is {current:.2f} (threshold: {thresholds['error']:.2f})"
+                    )
                 elif "warning" in thresholds and current > thresholds["warning"]:
                     warnings.append(
                         f"{name} is {current:.2f} (threshold: {thresholds['warning']:.2f})"
@@ -143,7 +145,7 @@ class Observability:
             metrics=self._compute_stats(),
             warnings=warnings,
             errors=errors,
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(UTC),
         )
 
         self._health_checks.append(health)
@@ -259,11 +261,15 @@ class Observability:
 
             # Check if current value is threshold * stddev away from mean
             if abs(current - mean) > threshold * stddev:
-                anomalies.append(f"{name}: {current:.2f} (mean: {mean:.2f}, stddev: {stddev:.2f})")
+                anomalies.append(
+                    f"{name}: {current:.2f} (mean: {mean:.2f}, stddev: {stddev:.2f})"
+                )
 
         return anomalies
 
-    def record_hook_execution(self, hook_id: str, duration_ms: float, success: bool) -> None:
+    def record_hook_execution(
+        self, hook_id: str, duration_ms: float, success: bool
+    ) -> None:
         """
         Record hook execution metrics.
 

@@ -93,7 +93,9 @@ class TestDailyBriefModule:
         assert output.productivity_score >= 80
 
     @pytest.mark.asyncio
-    async def test_async_generation(self, daily_brief_input_standard: DailyBriefInput) -> None:
+    async def test_async_generation(
+        self, daily_brief_input_standard: DailyBriefInput
+    ) -> None:
         """Test async generation."""
         module = DailyBriefModule(use_llm=False)
         output = await module.generate_async(daily_brief_input_standard)
@@ -132,7 +134,9 @@ class TestWeeklyRetroModule:
         assert output.weekly_productivity_score >= 80
         assert len(output.achievements) > 0
 
-    def test_goal_progress_tracking(self, weekly_retro_input_standard: WeeklyRetroInput) -> None:
+    def test_goal_progress_tracking(
+        self, weekly_retro_input_standard: WeeklyRetroInput
+    ) -> None:
         """Test goal progress tracking."""
         module = WeeklyRetroModule(use_llm=False)
         output = module.generate(weekly_retro_input_standard)
@@ -142,7 +146,9 @@ class TestWeeklyRetroModule:
         for goal in weekly_retro_input_standard.goals:
             assert goal in output.progress_on_goals
 
-    def test_trend_analysis(self, weekly_retro_input_standard: WeeklyRetroInput) -> None:
+    def test_trend_analysis(
+        self, weekly_retro_input_standard: WeeklyRetroInput
+    ) -> None:
         """Test trend analysis."""
         module = WeeklyRetroModule(use_llm=False)
         output = module.generate(weekly_retro_input_standard)
@@ -151,7 +157,9 @@ class TestWeeklyRetroModule:
         assert output.trends["overall"] in ["improving", "declining", "stable"]
 
     @pytest.mark.asyncio
-    async def test_async_generation(self, weekly_retro_input_standard: WeeklyRetroInput) -> None:
+    async def test_async_generation(
+        self, weekly_retro_input_standard: WeeklyRetroInput
+    ) -> None:
         """Test async generation."""
         module = WeeklyRetroModule(use_llm=False)
         output = await module.generate_async(weekly_retro_input_standard)
@@ -185,7 +193,9 @@ class TestFeatureAnalyzerModule:
         assert output.trend == "increasing"
         assert len(output.recommendations) > 0
 
-    def test_outlier_detection(self, feature_analyzer_input_outliers: FeatureAnalyzerInput) -> None:
+    def test_outlier_detection(
+        self, feature_analyzer_input_outliers: FeatureAnalyzerInput
+    ) -> None:
         """Test outlier detection."""
         module = FeatureAnalyzerModule(use_llm=False)
         output = module.analyze(feature_analyzer_input_outliers)
@@ -304,7 +314,10 @@ class TestContextClassifierModule:
         output = module.classify(context_classifier_input_research)
 
         assert output.context_label == "research"
-        assert "github" in output.reasoning.lower() or "documentation" in output.reasoning.lower()
+        assert (
+            "github" in output.reasoning.lower()
+            or "documentation" in output.reasoning.lower()
+        )
 
     def test_fallback_classify_meeting(
         self, context_classifier_input_meeting: ContextClassifierInput
@@ -325,7 +338,9 @@ class TestContextClassifierModule:
 
         assert output.context_label == "communication"
 
-    def test_suggested_tags(self, context_classifier_input_coding: ContextClassifierInput) -> None:
+    def test_suggested_tags(
+        self, context_classifier_input_coding: ContextClassifierInput
+    ) -> None:
         """Test suggested tags generation."""
         module = ContextClassifierModule(use_llm=False)
         output = module.classify(context_classifier_input_coding)
@@ -348,7 +363,9 @@ class TestContextClassifierModule:
 class TestWellbeingModule:
     """Tests for WellbeingModule."""
 
-    def test_fallback_analysis_healthy(self, wellbeing_input_healthy: WellbeingInput) -> None:
+    def test_fallback_analysis_healthy(
+        self, wellbeing_input_healthy: WellbeingInput
+    ) -> None:
         """Test fallback analysis with healthy patterns."""
         module = WellbeingModule(use_llm=False)
         output = module.analyze(wellbeing_input_healthy)
@@ -357,7 +374,9 @@ class TestWellbeingModule:
         assert output.work_life_balance["assessment"] in ["good", "excellent"]
         assert len(output.positive_factors) > 0
 
-    def test_fallback_analysis_at_risk(self, wellbeing_input_at_risk: WellbeingInput) -> None:
+    def test_fallback_analysis_at_risk(
+        self, wellbeing_input_at_risk: WellbeingInput
+    ) -> None:
         """Test fallback analysis with at-risk patterns."""
         module = WellbeingModule(use_llm=False)
         output = module.analyze(wellbeing_input_at_risk)
@@ -366,7 +385,9 @@ class TestWellbeingModule:
         assert len(output.risk_factors) > 0
         assert len(output.recommendations) > 0
 
-    def test_work_life_balance_assessment(self, wellbeing_input_moderate: WellbeingInput) -> None:
+    def test_work_life_balance_assessment(
+        self, wellbeing_input_moderate: WellbeingInput
+    ) -> None:
         """Test work-life balance assessment."""
         module = WellbeingModule(use_llm=False)
         output = module.analyze(wellbeing_input_moderate)
@@ -379,7 +400,9 @@ class TestWellbeingModule:
             "poor",
         ]
 
-    def test_focus_quality_assessment(self, wellbeing_input_healthy: WellbeingInput) -> None:
+    def test_focus_quality_assessment(
+        self, wellbeing_input_healthy: WellbeingInput
+    ) -> None:
         """Test focus quality assessment."""
         module = WellbeingModule(use_llm=False)
         output = module.analyze(wellbeing_input_healthy)
@@ -387,7 +410,9 @@ class TestWellbeingModule:
         assert "rating" in output.focus_quality
         assert "focus_ratio" in output.focus_quality
 
-    def test_break_pattern_assessment(self, wellbeing_input_at_risk: WellbeingInput) -> None:
+    def test_break_pattern_assessment(
+        self, wellbeing_input_at_risk: WellbeingInput
+    ) -> None:
         """Test break pattern assessment."""
         module = WellbeingModule(use_llm=False)
         output = module.analyze(wellbeing_input_at_risk)
@@ -396,7 +421,9 @@ class TestWellbeingModule:
         # At-risk has only 2 breaks, should be flagged
         assert output.break_patterns["frequency"] in ["low", "moderate"]
 
-    def test_recommendations_generated(self, wellbeing_input_moderate: WellbeingInput) -> None:
+    def test_recommendations_generated(
+        self, wellbeing_input_moderate: WellbeingInput
+    ) -> None:
         """Test recommendations generation."""
         module = WellbeingModule(use_llm=False)
         output = module.analyze(wellbeing_input_moderate)
@@ -405,7 +432,9 @@ class TestWellbeingModule:
         assert all(isinstance(r, str) for r in output.recommendations)
 
     @pytest.mark.asyncio
-    async def test_async_analysis(self, wellbeing_input_healthy: WellbeingInput) -> None:
+    async def test_async_analysis(
+        self, wellbeing_input_healthy: WellbeingInput
+    ) -> None:
         """Test async analysis."""
         module = WellbeingModule(use_llm=False)
         output = await module.analyze_async(wellbeing_input_healthy)
@@ -481,12 +510,16 @@ class TestIntegration:
         modules = create_all_modules(config)
 
         # Generate daily brief
-        brief_output = modules["daily_brief"].generate(complete_daily_data["brief_input"])
+        brief_output = modules["daily_brief"].generate(
+            complete_daily_data["brief_input"]
+        )
         assert brief_output.summary
         assert brief_output.productivity_score >= 0
 
         # Analyze wellbeing
-        wellbeing_output = modules["wellbeing"].analyze(complete_daily_data["wellbeing_input"])
+        wellbeing_output = modules["wellbeing"].analyze(
+            complete_daily_data["wellbeing_input"]
+        )
         assert wellbeing_output.wellbeing_score >= 0
 
         # Classify activities
@@ -504,7 +537,9 @@ class TestIntegration:
         assert output.summary
         assert output.productivity_score >= 0
 
-    def test_edge_case_maximum_load(self, edge_case_maximum_load: DailyBriefInput) -> None:
+    def test_edge_case_maximum_load(
+        self, edge_case_maximum_load: DailyBriefInput
+    ) -> None:
         """Test edge case with maximum load."""
         module = DailyBriefModule(use_llm=False)
         output = module.generate(edge_case_maximum_load)

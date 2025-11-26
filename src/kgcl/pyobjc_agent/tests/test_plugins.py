@@ -3,7 +3,7 @@ Unit tests for plugin system.
 """
 
 import unittest
-from datetime import datetime
+from datetime import UTC, datetime
 from unittest.mock import MagicMock, patch
 
 from ..plugins import PluginRegistry
@@ -46,7 +46,9 @@ class MockPlugin(BaseCapabilityPlugin):
 
     def collect_capability_data(self, capability_name: str, parameters=None):
         return CapabilityData(
-            capability_name=capability_name, timestamp=datetime.utcnow(), data={"test": "data"}
+            capability_name=capability_name,
+            timestamp=datetime.now(UTC),
+            data={"test": "data"},
         )
 
 
@@ -180,7 +182,7 @@ class TestCapabilityData(unittest.TestCase):
 
     def test_creation(self):
         """Test data creation."""
-        timestamp = datetime.utcnow()
+        timestamp = datetime.now(UTC)
         data = CapabilityData(
             capability_name="test",
             timestamp=timestamp,
@@ -196,8 +198,10 @@ class TestCapabilityData(unittest.TestCase):
 
     def test_to_dict(self):
         """Test conversion to dictionary."""
-        timestamp = datetime.utcnow()
-        data = CapabilityData(capability_name="test", timestamp=timestamp, data={"key": "value"})
+        timestamp = datetime.now(UTC)
+        data = CapabilityData(
+            capability_name="test", timestamp=timestamp, data={"key": "value"}
+        )
 
         dict_data = data.to_dict()
 

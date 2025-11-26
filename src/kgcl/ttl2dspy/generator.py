@@ -92,10 +92,11 @@ class SignatureDefinition:
             field_args.append(f'prefix="{prop.name}:"')
 
         # Build field call
-        if field_args:
-            field_call = f"{field_class}({', '.join(field_args)})"
-        else:
-            field_call = f"{field_class}()"
+        field_call = (
+            f"{field_class}({', '.join(field_args)})"
+            if field_args
+            else f"{field_class}()"
+        )
 
         # Add default value for optional inputs
         if is_input and not prop.is_required and prop.default_value:

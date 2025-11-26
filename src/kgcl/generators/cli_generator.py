@@ -22,28 +22,41 @@ try:
     import rdflib
     from rdflib import RDF, RDFS, Graph, Namespace
 except ImportError:
-    print("Error: rdflib not installed. Install with: pip install rdflib", file=sys.stderr)
+    print(
+        "Error: rdflib not installed. Install with: pip install rdflib", file=sys.stderr
+    )
     sys.exit(1)
 
 try:
     from jinja2 import Environment, FileSystemLoader, select_autoescape
 except ImportError:
-    print("Error: jinja2 not installed. Install with: pip install jinja2", file=sys.stderr)
+    print(
+        "Error: jinja2 not installed. Install with: pip install jinja2", file=sys.stderr
+    )
     sys.exit(1)
 
 
 class CLIGenerator:
     """Generate KGCT Typer CLI from RDF definitions."""
 
-    def __init__(self, ontology_path: Path, template_path: Path, output_path: Path | None = None):
+    def __init__(
+        self,
+        ontology_path: Path,
+        template_path: Path,
+        output_path: Path | None = None,
+        cli_ontology_path: Path | None = None,
+    ):
         """Initialize generator."""
         self.ontology_path = Path(ontology_path)
+        self.cli_ontology_path = Path(cli_ontology_path or ontology_path)
         self.template_path = Path(template_path)
-        self.output_path = Path(output_path) if output_path else Path("personal_kgct_cli.py")
+        self.output_path = (
+            Path(output_path) if output_path else Path("personal_kgct_cli.py")
+        )
 
         # Load RDF graph
         self.graph = Graph()
-        self.graph.parse(self.ontology_path, format="ttl")
+        self.graph.parse(self.cli_ontology_path, format="ttl")
 
         # Define namespaces
         self.CLI = Namespace("urn:kgc:cli:")
@@ -112,11 +125,11 @@ class CLIGenerator:
 
         SELECT ?arg_name ?arg_help ?arg_type ?required
         WHERE {{
-            <{cmd_uri}> cli:arg ?arg .
+            <{cmd_uri}> cli:hasArgument ?arg .
             ?arg cli:name ?arg_name ;
                  cli:help ?arg_help .
-            OPTIONAL {{ ?arg cli:pythonType ?arg_type . }}
-            OPTIONAL {{ ?arg cli:required ?required . }}
+            OPTIONAL {{ ?arg cli:dataType ?arg_type . }}
+            OPTIONAL {{ ?arg cli:isRequired ?required . }}
         }}
         ORDER BY ?arg_name
         """
@@ -129,7 +142,9 @@ class CLIGenerator:
                     "name": str(row.arg_name),
                     "help": str(row.arg_help),
                     "python_type": str(row.arg_type) if row.arg_type else "str",
-                    "required": str(row.required).lower() == "true" if row.required else True,
+                    "required": str(row.required).lower() == "true"
+                    if row.required
+                    else True,
                 }
             )
 
@@ -141,14 +156,15 @@ class CLIGenerator:
         PREFIX cli: <urn:kgc:cli:>
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-        SELECT ?opt_name ?opt_help ?opt_type ?opt_default ?required
+        SELECT ?opt_name ?opt_help ?opt_type ?opt_default ?required ?repeatable
         WHERE {{
-            <{cmd_uri}> cli:option ?opt .
+            <{cmd_uri}> cli:hasOption ?opt .
             ?opt cli:name ?opt_name ;
                  cli:help ?opt_help .
-            OPTIONAL {{ ?opt cli:pythonType ?opt_type . }}
+            OPTIONAL {{ ?opt cli:dataType ?opt_type . }}
             OPTIONAL {{ ?opt cli:default ?opt_default . }}
-            OPTIONAL {{ ?opt cli:required ?required . }}
+            OPTIONAL {{ ?opt cli:isRequired ?required . }}
+            OPTIONAL {{ ?opt cli:repeatable ?repeatable . }}
         }}
         ORDER BY ?opt_name
         """
@@ -162,7 +178,16 @@ class CLIGenerator:
                     "help": str(row.opt_help),
                     "python_type": str(row.opt_type) if row.opt_type else "str",
                     "default": str(row.opt_default) if row.opt_default else None,
-                    "required": str(row.required).lower() == "true" if row.required else False,
+                    "required": (
+                        str(row.required).lower() == "true"
+                        if hasattr(row, "required") and row.required
+                        else False
+                    ),
+                    "repeatable": (
+                        str(row.repeatable).lower() == "true"
+                        if hasattr(row, "repeatable") and row.repeatable
+                        else False
+                    ),
                 }
             )
 
@@ -192,10 +217,9 @@ class CLIGenerator:
 
         SELECT ?name ?help
         WHERE {
-            ?root a cli:Command ;
+            ?root a cli:RootCommand ;
                   cli:name ?name ;
-                  cli:help ?help ;
-                  cli:isRoot "true"^^xsd:boolean .
+                  cli:help ?help .
         }
         LIMIT 1
         """
@@ -219,6 +243,7 @@ class CLIGenerator:
             "commands": commands,
             "generated_at": datetime.now().isoformat(),
             "kgc_ontology_path": str(self.ontology_path),
+            "cli_ontology_path": str(self.cli_ontology_path),
             "app_version": "1.0.0",
         }
 
@@ -244,12 +269,20 @@ def main():
     """CLI entry point."""
     import argparse
 
-    parser = argparse.ArgumentParser(description="Generate KGCT Typer CLI from RDF ontology")
+    parser = argparse.ArgumentParser(
+        description="Generate KGCT Typer CLI from RDF ontology"
+    )
     parser.add_argument(
         "--ontology",
         type=Path,
         default=Path(".kgc/ontology.ttl"),
         help="Path to ontology.ttl (default: .kgc/ontology.ttl)",
+    )
+    parser.add_argument(
+        "--cli-ontology",
+        type=Path,
+        default=Path(".kgc/cli.ttl"),
+        help="Path to CLI ontology (default: .kgc/cli.ttl)",
     )
     parser.add_argument(
         "--template",
@@ -264,7 +297,9 @@ def main():
         help="Output path (default: personal_kgct_cli.py)",
     )
     parser.add_argument(
-        "--check-receipt", action="store_true", help="Verify receipt hash instead of generating"
+        "--check-receipt",
+        action="store_true",
+        help="Verify receipt hash instead of generating",
     )
     parser.add_argument("--verbose", "-v", action="store_true", help="Verbose output")
 
@@ -279,7 +314,12 @@ def main():
         sys.exit(1)
 
     try:
-        gen = CLIGenerator(args.ontology, args.template, args.output)
+        gen = CLIGenerator(
+            ontology_path=args.ontology,
+            cli_ontology_path=args.cli_ontology,
+            template_path=args.template,
+            output_path=args.output,
+        )
 
         if args.verbose:
             print(f"Generating from: {args.ontology}")

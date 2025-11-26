@@ -80,11 +80,15 @@ class ExecutionReceipt:
             Receipt URI
 
         """
-        receipt_uri = URIRef(f"urn:unrdf:receipt:{self.capability_id}:{self.timestamp.isoformat()}")
+        receipt_uri = URIRef(
+            f"urn:unrdf:receipt:{self.capability_id}:{self.timestamp.isoformat()}"
+        )
 
         # Receipt metadata
         graph.add((receipt_uri, UNRDF.capabilityId, Literal(self.capability_id)))
-        graph.add((receipt_uri, UNRDF.capabilityType, Literal(self.capability_type.value)))
+        graph.add(
+            (receipt_uri, UNRDF.capabilityType, Literal(self.capability_type.value))
+        )
         graph.add((receipt_uri, PROV.endedAtTime, Literal(self.timestamp)))
         graph.add((receipt_uri, UNRDF.durationMs, Literal(self.duration_ms)))
         graph.add((receipt_uri, UNRDF.exitCode, Literal(self.exit_code)))
@@ -300,7 +304,9 @@ class ExternalCapabilityBridge:
 
         start_time = time.time()
         receipt = ExecutionReceipt(
-            capability_id=capability_id, capability_type=capability_type, input_data=input_data
+            capability_id=capability_id,
+            capability_type=capability_type,
+            input_data=input_data,
         )
 
         try:

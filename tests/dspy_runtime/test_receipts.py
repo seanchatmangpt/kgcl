@@ -143,7 +143,10 @@ class TestReceiptGenerator:
             inputs={},
             outputs={},
             success=True,
-            source_features=["http://example.com/feature1", "http://example.com/feature2"],
+            source_features=[
+                "http://example.com/feature1",
+                "http://example.com/feature2",
+            ],
             source_signatures=["http://example.com/sig1"],
         )
 

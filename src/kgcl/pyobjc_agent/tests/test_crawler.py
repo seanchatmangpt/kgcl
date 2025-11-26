@@ -81,7 +81,11 @@ class TestPyObjCFrameworkCrawler(unittest.TestCase):
         mock_class1 = type("MockClass1", (), {})
         mock_class2 = type("MockClass2", (), {})
         mock_framework = MagicMock()
-        mock_framework.__dir__ = lambda self: ["MockClass1", "MockClass2", "not_a_class"]
+        mock_framework.__dir__ = lambda self: [
+            "MockClass1",
+            "MockClass2",
+            "not_a_class",
+        ]
         mock_framework.MockClass1 = mock_class1
         mock_framework.MockClass2 = mock_class2
         mock_framework.not_a_class = "string"
@@ -99,12 +103,19 @@ class TestPyObjCFrameworkCrawler(unittest.TestCase):
         """Test JSON-LD generation."""
         # Create test capabilities
         method = CapabilityMethod(
-            selector="isActive", return_type="bool", is_property=True, is_observable=True
+            selector="isActive",
+            return_type="bool",
+            is_property=True,
+            is_observable=True,
         )
 
-        cls = CapabilityClass(name="TestClass", framework="TestFramework", methods=[method])
+        cls = CapabilityClass(
+            name="TestClass", framework="TestFramework", methods=[method]
+        )
 
-        capabilities = FrameworkCapabilities(framework_name="TestFramework", classes=[cls])
+        capabilities = FrameworkCapabilities(
+            framework_name="TestFramework", classes=[cls]
+        )
 
         # Generate JSON-LD
         jsonld = self.crawler.generate_jsonld(capabilities)
@@ -131,7 +142,9 @@ class TestPyObjCFrameworkCrawler(unittest.TestCase):
 
         # Create test capabilities
         capabilities = {
-            "TestFramework": FrameworkCapabilities(framework_name="TestFramework", classes=[])
+            "TestFramework": FrameworkCapabilities(
+                framework_name="TestFramework", classes=[]
+            )
         }
 
         # Export to temp file

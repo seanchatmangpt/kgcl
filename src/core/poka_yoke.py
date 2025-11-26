@@ -1,4 +1,4 @@
-"""Poka-Yoke (Error Proofing)
+"""Poka-Yoke (Error Proofing).
 
 Prevents common testing mistakes through compile-time and runtime validation.
 Translates Rust's type system guarantees to Python runtime checks.
@@ -13,11 +13,33 @@ T = TypeVar("T")
 
 
 class PokaYokeError(Exception):
-    """Poka-Yoke validation error"""
+    """Poka-Yoke validation error.
+
+    Attributes
+    ----------
+    validation_type : str
+        Type of validation that failed (unwrap, validate, not_none, etc.)
+    message : str
+        Detailed error message
+    """
+
+    def __init__(self, message: str, validation_type: str = "unknown") -> None:
+        """Initialize PokaYokeError.
+
+        Parameters
+        ----------
+        message : str
+            Detailed error message
+        validation_type : str
+            Type of validation that failed
+        """
+        self.validation_type = validation_type
+        self.message = message
+        super().__init__(message)
 
 
 class Poka:
-    """Error-proofing utility for test code
+    """Error-proofing utility for test code.
 
     Prevents common mistakes like:
     - Unwrap on error values
@@ -35,7 +57,7 @@ class Poka:
 
     @staticmethod
     def unwrap(value: Any, msg: str = "called unwrap on None/Error") -> Any:
-        """Extract value from Result/Option-like or raise
+        """Extract value from Result/Option-like or raise.
 
         Equivalent to Rust's .unwrap() but fails safely with clear message.
 
@@ -68,7 +90,7 @@ class Poka:
 
     @staticmethod
     def expect(value: Any, msg: str) -> Any:
-        """Extract value from Result/Option or raise with custom message
+        """Extract value from Result/Option or raise with custom message.
 
         Alias for unwrap with better error messages.
 
@@ -88,7 +110,7 @@ class Poka:
 
     @staticmethod
     def unwrap_or(value: Any, default: T) -> Any:
-        """Extract value or return default
+        """Extract value or return default.
 
         Args:
             value: Value to unwrap
@@ -105,7 +127,7 @@ class Poka:
 
     @staticmethod
     def unwrap_or_else(value: Any, fn: Callable[[], T]) -> Any:
-        """Extract value or compute default
+        """Extract value or compute default.
 
         Args:
             value: Value to unwrap
@@ -122,7 +144,7 @@ class Poka:
 
     @staticmethod
     def validate(condition: bool, msg: str) -> None:
-        """Validate a condition (replaces assert for clearer semantics)
+        """Validate a condition (replaces assert for clearer semantics).
 
         Args:
             condition: Condition that should be True
@@ -137,7 +159,7 @@ class Poka:
 
     @staticmethod
     def not_none(value: T | None, msg: str = "value is None") -> T:
-        """Assert value is not None
+        """Assert value is not None.
 
         Args:
             value: Value to check
@@ -157,7 +179,7 @@ class Poka:
 
     @staticmethod
     def guard_production_code(func: Callable[..., T]) -> Callable[..., T]:
-        """Decorator to prevent unwrap/panic in production code
+        """Decorator to prevent unwrap/panic in production code.
 
         Scans function for dangerous patterns that would work in Rust
         but should be caught in Python tests.

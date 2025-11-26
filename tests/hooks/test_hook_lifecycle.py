@@ -11,7 +11,12 @@ import pytest
 
 from kgcl.hooks.conditions import Condition, ConditionResult
 from kgcl.hooks.core import Hook, HookExecutor, HookState
-from kgcl.hooks.lifecycle import HookChain, HookContext, HookExecutionPipeline, HookLifecycleEvent
+from kgcl.hooks.lifecycle import (
+    HookChain,
+    HookContext,
+    HookExecutionPipeline,
+    HookLifecycleEvent,
+)
 from kgcl.hooks.value_objects import LifecycleEventType
 
 
@@ -48,7 +53,10 @@ class TestHookStateTransitions:
     async def test_hook_transitions_from_pending_to_active(self):
         """Hook lifecycle: PENDING → ACTIVE on condition evaluation."""
         hook = Hook(
-            name="test", description="Test", condition=SimpleCondition(), handler=simple_handler
+            name="test",
+            description="Test",
+            condition=SimpleCondition(),
+            handler=simple_handler,
         )
 
         assert hook.state == HookState.PENDING
@@ -137,7 +145,10 @@ class TestHookFinalStates:
     async def test_hook_reaches_completed_state_on_success(self):
         """Hook reaches COMPLETED state on successful execution."""
         hook = Hook(
-            name="test", description="Test", condition=SimpleCondition(), handler=simple_handler
+            name="test",
+            description="Test",
+            condition=SimpleCondition(),
+            handler=simple_handler,
         )
 
         executor = HookExecutor()
@@ -168,7 +179,10 @@ class TestHookAuditability:
     async def test_hook_lifecycle_is_auditable(self):
         """Hook lifecycle is auditable (all state changes logged)."""
         hook = Hook(
-            name="test", description="Test", condition=SimpleCondition(), handler=simple_handler
+            name="test",
+            description="Test",
+            condition=SimpleCondition(),
+            handler=simple_handler,
         )
 
         executor = HookExecutor()
@@ -262,7 +276,10 @@ class TestHookLifecycleEvents:
             events.append(event)
 
         hook = Hook(
-            name="test", description="Test", condition=SimpleCondition(), handler=simple_handler
+            name="test",
+            description="Test",
+            condition=SimpleCondition(),
+            handler=simple_handler,
         )
 
         executor = HookExecutor()
@@ -290,7 +307,10 @@ class TestHookExecutionPipeline:
     async def test_execution_pipeline_manages_hook_flow(self):
         """HookExecutionPipeline manages complete hook execution flow."""
         hook = Hook(
-            name="test", description="Test", condition=SimpleCondition(), handler=simple_handler
+            name="test",
+            description="Test",
+            condition=SimpleCondition(),
+            handler=simple_handler,
         )
 
         pipeline = HookExecutionPipeline()

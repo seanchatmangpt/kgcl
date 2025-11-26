@@ -18,7 +18,29 @@ from pathlib import Path
 
 
 class FileResolverError(Exception):
-    """Raised when file resolution fails."""
+    """Raised when file resolution fails.
+
+    Attributes
+    ----------
+    path : str
+        The path that could not be resolved
+    reason : str
+        Why resolution failed
+    """
+
+    def __init__(self, path: str, reason: str) -> None:
+        """Initialize FileResolverError.
+
+        Parameters
+        ----------
+        path : str
+            The path that could not be resolved
+        reason : str
+            Why resolution failed
+        """
+        self.path = path
+        self.reason = reason
+        super().__init__(f"Failed to resolve '{path}': {reason}")
 
 
 class FileResolver:
@@ -34,7 +56,9 @@ class FileResolver:
     --------
     >>> resolver = FileResolver(allowed_paths=["/path/to/queries"])
     >>> content = resolver.load_file("file:///path/to/query.sparql")
-    >>> verified = resolver.load_file("file:///path/to/query.sparql", expected_sha256="abc123...")
+    >>> verified = resolver.load_file(
+    ...     "file:///path/to/query.sparql", expected_sha256="abc123..."
+    ... )
 
     """
 
@@ -74,7 +98,9 @@ class FileResolver:
         >>> resolver = FileResolver()
         >>> content = resolver.load_file("file:///tmp/query.sparql")
         >>> # With integrity check
-        >>> content = resolver.load_file("file:///tmp/query.sparql", expected_sha256="abc123...")
+        >>> content = resolver.load_file(
+        ...     "file:///tmp/query.sparql", expected_sha256="abc123..."
+        ... )
 
         """
         if uri.startswith("file://"):
@@ -82,8 +108,7 @@ class FileResolver:
             return self._load_local_file(path, expected_sha256)
         if uri.startswith("http://") or uri.startswith("https://"):
             return self._load_remote_file(uri, expected_sha256)
-        msg = f"Unsupported URI scheme: {uri}"
-        raise FileResolverError(msg)
+        raise FileResolverError(uri, "Unsupported URI scheme")
 
     def _load_local_file(self, path: str, expected_sha256: str | None) -> str:
         """Load local file with integrity check.
@@ -112,15 +137,14 @@ class FileResolver:
         if self.allowed_paths:
             normalized = str(path_obj.resolve())
             allowed = any(
-                normalized.startswith(str(Path(ap).resolve())) for ap in self.allowed_paths
+                normalized.startswith(str(Path(ap).resolve()))
+                for ap in self.allowed_paths
             )
             if not allowed:
-                msg = f"Path not allowed: {path}"
-                raise FileResolverError(msg)
+                raise FileResolverError(path, "Path not allowed")
 
         if not path_obj.exists():
-            msg = f"File not found: {path}"
-            raise FileResolverError(msg)
+            raise FileResolverError(path, "File not found")
 
         # Read file content
         with open(path_obj) as f:
@@ -130,11 +154,8 @@ class FileResolver:
         if expected_sha256:
             actual_hash = sha256(content.encode()).hexdigest()
             if actual_hash != expected_sha256:
-                msg = (
-                    f"Integrity check failed for {path}: "
-                    f"expected {expected_sha256}, got {actual_hash}"
-                )
-                raise FileResolverError(msg)
+                reason = f"expected {expected_sha256}, got {actual_hash}"
+                raise FileResolverError(path, f"Integrity check failed: {reason}")
 
         return content
 
@@ -163,18 +184,14 @@ class FileResolver:
             with urllib.request.urlopen(uri) as response:
                 content = response.read().decode()
         except Exception as e:
-            msg = f"Failed to load remote file {uri}: {e}"
-            raise FileResolverError(msg) from e
+            raise FileResolverError(uri, f"Failed to load remote file: {e}") from e
 
         # Verify integrity if hash provided
         if expected_sha256:
             actual_hash = sha256(content.encode()).hexdigest()
             if actual_hash != expected_sha256:
-                msg = (
-                    f"Integrity check failed for {uri}: "
-                    f"expected {expected_sha256}, got {actual_hash}"
-                )
-                raise FileResolverError(msg)
+                reason = f"expected {expected_sha256}, got {actual_hash}"
+                raise FileResolverError(uri, f"Integrity check failed: {reason}")
 
         return content
 

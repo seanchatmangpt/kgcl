@@ -37,13 +37,16 @@ class FeatureAnalyzerInput(BaseModel):
     """
 
     feature_name: str = Field(..., description="Name of the feature")
-    feature_values: list[float] = Field(..., min_length=1, description="Time series values")
+    feature_values: list[float] = Field(
+        ..., min_length=1, description="Time series values"
+    )
     window: Literal["hourly", "daily", "weekly"] = Field(..., description="Time window")
     timestamps: list[str] = Field(
         default_factory=list, description="ISO timestamps for each value (optional)"
     )
     context: str = Field(
-        default="", description="Context about the feature (e.g., 'Safari usage in hours')"
+        default="",
+        description="Context about the feature (e.g., 'Safari usage in hours')",
     )
 
     model_config = {
@@ -52,7 +55,11 @@ class FeatureAnalyzerInput(BaseModel):
                 "feature_name": "safari_usage_hours",
                 "feature_values": [1.2, 2.5, 1.8, 3.2, 2.1, 1.5, 2.8],
                 "window": "daily",
-                "timestamps": ["2024-11-18T00:00:00", "2024-11-19T00:00:00", "2024-11-20T00:00:00"],
+                "timestamps": [
+                    "2024-11-18T00:00:00",
+                    "2024-11-19T00:00:00",
+                    "2024-11-20T00:00:00",
+                ],
                 "context": "Daily Safari browser usage in hours",
             }
         }
@@ -126,9 +133,13 @@ if DSPY_AVAILABLE:
 
         # Input fields
         feature_name: str = dspy.InputField(desc="Name of the feature being analyzed")
-        feature_values_str: str = dspy.InputField(desc="Comma-separated feature values over time")
+        feature_values_str: str = dspy.InputField(
+            desc="Comma-separated feature values over time"
+        )
         window: str = dspy.InputField(desc="Time window: hourly, daily, or weekly")
-        context: str = dspy.InputField(desc="Context about what this feature represents")
+        context: str = dspy.InputField(
+            desc="Context about what this feature represents"
+        )
         summary_stats_str: str = dspy.InputField(
             desc="Statistical summary: mean, median, std, min, max"
         )
@@ -190,7 +201,9 @@ class FeatureAnalyzerModule:
             "count": len(values),
         }
 
-    def _detect_outliers(self, values: list[float], threshold: float = 2.0) -> list[dict[str, Any]]:
+    def _detect_outliers(
+        self, values: list[float], threshold: float = 2.0
+    ) -> list[dict[str, Any]]:
         """Detect outliers using z-score method.
 
         Args:
@@ -214,7 +227,9 @@ class FeatureAnalyzerModule:
         for idx, value in enumerate(values):
             z_score = abs((value - mean) / std)
             if z_score > threshold:
-                outliers.append({"index": idx, "value": value, "z_score": round(z_score, 2)})
+                outliers.append(
+                    {"index": idx, "value": value, "z_score": round(z_score, 2)}
+                )
 
         return outliers
 
@@ -261,7 +276,9 @@ class FeatureAnalyzerModule:
             return "decreasing"
         return "stable"
 
-    def _fallback_generate(self, input_data: FeatureAnalyzerInput) -> FeatureAnalyzerOutput:
+    def _fallback_generate(
+        self, input_data: FeatureAnalyzerInput
+    ) -> FeatureAnalyzerOutput:
         """Generate analysis using statistical methods (no LLM required).
 
         Args:
@@ -302,7 +319,9 @@ class FeatureAnalyzerModule:
                 "Browser usage often correlates with research and documentation tasks"
             )
         if "meeting" in input_data.feature_name.lower():
-            correlations.append("Meeting time typically anti-correlates with focus time")
+            correlations.append(
+                "Meeting time typically anti-correlates with focus time"
+            )
         if "context_switch" in input_data.feature_name.lower():
             correlations.append(
                 "Context switches often correlate with communication apps (Slack, email)"
@@ -357,7 +376,11 @@ class FeatureAnalyzerModule:
         return interpretation
 
     def _generate_recommendations(
-        self, feature_name: str, trend: str, stats: dict[str, float], outliers: list[dict[str, Any]]
+        self,
+        feature_name: str,
+        trend: str,
+        stats: dict[str, float],
+        outliers: list[dict[str, Any]],
     ) -> list[str]:
         """Generate actionable recommendations.
 
@@ -378,7 +401,9 @@ class FeatureAnalyzerModule:
                 f"{feature_name} is trending upward - monitor if this aligns with goals"
             )
         elif trend == "decreasing":
-            recommendations.append(f"{feature_name} is declining - verify if this is intentional")
+            recommendations.append(
+                f"{feature_name} is declining - verify if this is intentional"
+            )
         elif trend == "volatile":
             recommendations.append(
                 f"{feature_name} shows high volatility - consider establishing more consistent patterns"
@@ -400,9 +425,10 @@ class FeatureAnalyzerModule:
                 recommendations.append(
                     "Meeting time exceeds 4h average - audit for low-value meetings"
                 )
-        elif "context_switch" in feature_name.lower():
-            if stats.get("mean", 0) > 15:
-                recommendations.append("High context switching - batch similar tasks together")
+        elif "context_switch" in feature_name.lower() and stats.get("mean", 0) > 15:
+            recommendations.append(
+                "High context switching - batch similar tasks together"
+            )
 
         return recommendations[:5]  # Limit to top 5
 
@@ -453,7 +479,8 @@ class FeatureAnalyzerModule:
             f"std={stats['std']:.2f}, min={stats['min']:.2f}, max={stats['max']:.2f}"
         )
         context = (
-            input_data.context or f"{input_data.feature_name} over {input_data.window} windows"
+            input_data.context
+            or f"{input_data.feature_name} over {input_data.window} windows"
         )
 
         # Invoke DSPy predictor
@@ -467,7 +494,9 @@ class FeatureAnalyzerModule:
 
         # Parse outputs
         correlations = [c.strip() for c in result.correlations.split("\n") if c.strip()]
-        recommendations = [r.strip() for r in result.recommendations.split("\n") if r.strip()]
+        recommendations = [
+            r.strip() for r in result.recommendations.split("\n") if r.strip()
+        ]
 
         return FeatureAnalyzerOutput(
             trend=result.trend
@@ -480,7 +509,9 @@ class FeatureAnalyzerModule:
             recommendations=recommendations[:5],
         )
 
-    async def analyze_async(self, input_data: FeatureAnalyzerInput) -> FeatureAnalyzerOutput:
+    async def analyze_async(
+        self, input_data: FeatureAnalyzerInput
+    ) -> FeatureAnalyzerOutput:
         """Async version of analyze.
 
         Args:

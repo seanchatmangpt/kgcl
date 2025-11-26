@@ -2,12 +2,12 @@
 
 import pytest
 from src.swarm import (
+    CompositionBuilder,
+    SwarmCoordinator,
     SwarmMember,
+    SwarmTask,
     TaskResult,
     TaskStatus,
-    TestComposition,
-    TestCoordinator,
-    TestTask,
 )
 
 
@@ -23,23 +23,25 @@ class TestSwarmMember:
         """Test registering task handler."""
         member = SwarmMember("worker")
 
-        def handler(task: TestTask) -> TaskResult:
-            return TaskResult(task_name=task.name, status=TaskStatus.SUCCESS, output="done")
+        def handler(task: SwarmTask) -> TaskResult:
+            return TaskResult(
+                task_name=task.name, status=TaskStatus.SUCCESS, output="done"
+            )
 
         member.register_handler("unit_test", handler)
-        task = TestTask("handler_test", task_type="unit_test")
+        task = SwarmTask("handler_test", task_type="unit_test")
         assert member.execute_task(task).is_success()
 
     def test_execute_task(self) -> None:
         """Test executing a task."""
         member = SwarmMember("worker")
 
-        def handler(task: TestTask) -> TaskResult:
+        def handler(task: SwarmTask) -> TaskResult:
             return TaskResult(task_name=task.name, status=TaskStatus.SUCCESS)
 
         member.register_handler("test", handler)
 
-        task = TestTask("my_test", task_type="test")
+        task = SwarmTask("my_test", task_type="test")
         result = member.execute_task(task)
 
         assert result.is_success()
@@ -51,24 +53,24 @@ class TestCoordinatorSuite:
 
     def test_coordinator_creation(self) -> None:
         """Test creating coordinator."""
-        coordinator = TestCoordinator(max_workers=4)
+        coordinator = SwarmCoordinator(max_workers=4)
         assert coordinator.member_count() == 0
 
     def test_register_member(self) -> None:
         """Test registering members."""
-        coordinator = TestCoordinator()
+        coordinator = SwarmCoordinator()
         member = SwarmMember("worker-1")
         coordinator.register_member(member)
         assert coordinator.member_count() == 1
 
     def test_execute_task(self) -> None:
         """Test executing task across members."""
-        coordinator = TestCoordinator()
+        coordinator = SwarmCoordinator()
 
         # Create member with handler
         member = SwarmMember("worker")
 
-        def handler(task: TestTask) -> TaskResult:
+        def handler(task: SwarmTask) -> TaskResult:
             return TaskResult(task_name=task.name, status=TaskStatus.SUCCESS)
 
         member.register_handler("test", handler)
@@ -76,7 +78,7 @@ class TestCoordinatorSuite:
         coordinator.register_member(member)
 
         # Execute task
-        task = TestTask("test_task", task_type="test")
+        task = SwarmTask("test_task", task_type="test")
         results = coordinator.execute(task)
 
         assert "worker" in results
@@ -84,16 +86,16 @@ class TestCoordinatorSuite:
 
     def test_metrics(self) -> None:
         """Test coordination metrics."""
-        coordinator = TestCoordinator()
+        coordinator = SwarmCoordinator()
         member = SwarmMember("worker")
 
-        def handler(task: TestTask) -> TaskResult:
+        def handler(task: SwarmTask) -> TaskResult:
             return TaskResult(task_name=task.name, status=TaskStatus.SUCCESS)
 
         member.register_handler("test", handler)
         coordinator.register_member(member)
 
-        task = TestTask("test", task_type="test")
+        task = SwarmTask("test", task_type="test")
         coordinator.execute(task)
 
         metrics = coordinator.metrics()
@@ -101,18 +103,18 @@ class TestCoordinatorSuite:
         assert metrics.completed_tasks == 1
 
 
-class TestTaskSuite:
+class SwarmTaskSuite:
     """Test task functionality."""
 
     def test_task_creation(self) -> None:
         """Test creating task."""
-        task = TestTask("my_test", task_type="unit_test")
+        task = SwarmTask("my_test", task_type="unit_test")
         assert task.name == "my_test"
         assert task.task_type == "unit_test"
 
     def test_task_with_payload(self) -> None:
         """Test task with payload."""
-        task = TestTask("test")
+        task = SwarmTask("test")
         task.with_payload("key", "value")
         assert task.get_payload("key") == "value"
 
@@ -131,7 +133,7 @@ class TestCompositionFlow:
         results = []
 
         composition = (
-            TestComposition("sequential")
+            CompositionBuilder("sequential")
             .sequential()
             .add_test(lambda: results.append(1))
             .add_test(lambda: results.append(2))
@@ -146,7 +148,7 @@ class TestCompositionFlow:
         state = {"setup": False, "teardown": False}
 
         composition = (
-            TestComposition("with_hooks")
+            CompositionBuilder("with_hooks")
             .before(lambda: state.update({"setup": True}))
             .add_test(lambda: None)
             .after(lambda: state.update({"teardown": True}))

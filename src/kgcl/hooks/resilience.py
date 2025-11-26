@@ -10,7 +10,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from enum import Enum
 from functools import wraps
-from typing import TypeVar
+from typing import Any, TypeVar
 
 
 class CircuitState(Enum):
@@ -35,7 +35,31 @@ T = TypeVar("T")
 
 
 class CircuitBreakerError(Exception):
-    """Raised when circuit breaker is open."""
+    """Raised when circuit breaker is open.
+
+    Attributes
+    ----------
+    circuit_name : str
+        Name of the circuit breaker
+    state : CircuitState
+        Current circuit state
+    """
+
+    def __init__(self, circuit_name: str, state: CircuitState) -> None:
+        """Initialize CircuitBreakerError.
+
+        Parameters
+        ----------
+        circuit_name : str
+            Name of the circuit breaker
+        state : CircuitState
+            Current circuit state
+        """
+        self.circuit_name = circuit_name
+        self.state = state
+        super().__init__(
+            f"Circuit breaker '{circuit_name}' is {state.value}, request blocked"
+        )
 
 
 class CircuitBreaker:
@@ -84,7 +108,9 @@ class CircuitBreaker:
                 self.state = CircuitState.HALF_OPEN
                 self.success_count = 0
             else:
-                raise CircuitBreakerError(f"Circuit breaker '{self.config.name}' is OPEN")
+                raise CircuitBreakerError(
+                    f"Circuit breaker '{self.config.name}' is OPEN"
+                )
 
         # Attempt the call
         try:
@@ -123,11 +149,15 @@ class CircuitBreaker:
 
         if self.state == CircuitState.HALF_OPEN:
             # Any failure in HALF_OPEN immediately opens circuit
-            self._logger.warning(f"[{self.config.name}] Failure in HALF_OPEN, opening circuit")
+            self._logger.warning(
+                f"[{self.config.name}] Failure in HALF_OPEN, opening circuit"
+            )
             self.state = CircuitState.OPEN
             self.failure_count = 0
         elif self.failure_count >= self.config.failure_threshold:
-            self._logger.error(f"[{self.config.name}] Threshold exceeded, opening circuit")
+            self._logger.error(
+                f"[{self.config.name}] Threshold exceeded, opening circuit"
+            )
             self.state = CircuitState.OPEN
 
     def reset(self) -> None:
@@ -142,7 +172,7 @@ class CircuitBreaker:
         """Get current circuit state."""
         return self.state
 
-    def get_stats(self) -> dict:
+    def get_stats(self) -> dict[str, Any]:
         """Get circuit breaker statistics.
 
         Returns

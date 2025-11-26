@@ -22,7 +22,9 @@ tracer = trace.get_tracer(__name__)
 class UNRDFBridge:
     """Bridge between UNRDF and DSPy runtime."""
 
-    def __init__(self, ollama_config: OllamaConfig | None = None, rdf_graph: Graph | None = None):
+    def __init__(
+        self, ollama_config: OllamaConfig | None = None, rdf_graph: Graph | None = None
+    ):
         """
         Initialize UNRDF bridge.
 
@@ -98,7 +100,10 @@ class UNRDFBridge:
 
             # Invoke signature
             result = self.invoker.invoke_from_module(
-                module_path=module_path, signature_name=signature_name, inputs=inputs, **kwargs
+                module_path=module_path,
+                signature_name=signature_name,
+                inputs=inputs,
+                **kwargs,
             )
 
             # Prepare metrics to avoid duplicate kwargs (e.g., latency_seconds)
@@ -177,7 +182,9 @@ class UNRDFBridge:
                         }
                     )
 
-            span.set_attribute("success_count", sum(1 for r in results if r["result"]["success"]))
+            span.set_attribute(
+                "success_count", sum(1 for r in results if r["result"]["success"])
+            )
 
             return results
 
@@ -271,7 +278,9 @@ class UNRDFBridge:
         failed = total - successful
 
         if total > 0:
-            avg_latency = sum(r.latency_seconds for r in receipts if r.latency_seconds) / total
+            avg_latency = (
+                sum(r.latency_seconds for r in receipts if r.latency_seconds) / total
+            )
         else:
             avg_latency = 0
 

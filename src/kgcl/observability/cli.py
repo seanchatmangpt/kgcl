@@ -21,7 +21,12 @@ def cli() -> None:
 
 
 @cli.command()
-@click.option("--format", type=click.Choice(["json", "text"]), default="text", help="Output format")
+@click.option(
+    "--format",
+    type=click.Choice(["json", "text"]),
+    default="text",
+    help="Output format",
+)
 def health(format: str) -> None:
     """Check system health and connectivity.
 

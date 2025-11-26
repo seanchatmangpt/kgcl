@@ -82,7 +82,9 @@ class HookDefinition:
     def __post_init__(self) -> None:
         """Validate hook definition after initialization."""
         if not self.trigger_event and not self.cron_schedule:
-            raise ValueError(f"Hook {self.name} must have either trigger_event or cron_schedule")
+            raise ValueError(
+                f"Hook {self.name} must have either trigger_event or cron_schedule"
+            )
         if not self.effects:
             raise ValueError(f"Hook {self.name} must have at least one effect")
 
@@ -200,7 +202,9 @@ class HookLoader:
 
         # Get trigger event
         trigger_event = self._get_trigger_event(hook_uri)
-        trigger_label = self._get_trigger_label(trigger_event) if trigger_event else None
+        trigger_label = (
+            self._get_trigger_label(trigger_event) if trigger_event else None
+        )
 
         # Get cron schedule (if any)
         cron_schedule = self._get_cron_schedule(hook_uri)
@@ -325,7 +329,9 @@ class HookLoader:
                 target = str(obj)
 
         if not all([label, description, command, target]):
-            raise ValueError(f"Effect missing required fields: label={label}, command={command}")
+            raise ValueError(
+                f"Effect missing required fields: label={label}, command={command}"
+            )
 
         # Map command to generator
         generator = self._map_command_to_generator(command)

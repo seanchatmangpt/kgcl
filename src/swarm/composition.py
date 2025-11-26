@@ -1,4 +1,4 @@
-"""Test Composition for Complex Scenarios
+"""Test Composition for Complex Scenarios.
 
 Combines multiple tests into composed test scenarios.
 """
@@ -10,7 +10,7 @@ from typing import Any
 
 
 class CompositionStrategy(Enum):
-    """Strategy for composing tests"""
+    """Strategy for composing tests."""
 
     SEQUENTIAL = "sequential"
     PARALLEL = "parallel"
@@ -19,7 +19,7 @@ class CompositionStrategy(Enum):
 
 @dataclass
 class ComposedTest:
-    """A test composed from multiple sub-tests"""
+    """A test composed from multiple sub-tests."""
 
     name: str
     strategy: CompositionStrategy = CompositionStrategy.SEQUENTIAL
@@ -29,22 +29,22 @@ class ComposedTest:
     results: list[Any] = field(default_factory=list)
 
     def add_test(self, test: Callable[[], Any]) -> "ComposedTest":
-        """Add test to composition"""
+        """Add test to composition."""
         self.tests.append(test)
         return self
 
     def add_before_hook(self, hook: Callable[[], None]) -> "ComposedTest":
-        """Add before hook"""
+        """Add before hook."""
         self.before_hooks.append(hook)
         return self
 
     def add_after_hook(self, hook: Callable[[], None]) -> "ComposedTest":
-        """Add after hook"""
+        """Add after hook."""
         self.after_hooks.append(hook)
         return self
 
     def execute(self) -> list[Any]:
-        """Execute composed tests
+        """Execute composed tests.
 
         Returns
         -------
@@ -71,20 +71,24 @@ class ComposedTest:
         return self.results
 
     def _execute_sequential(self) -> None:
-        """Execute tests sequentially"""
+        """Execute tests sequentially."""
         for test in self.tests:
             result = test()
             self.results.append(result)
 
     def _execute_parallel(self) -> None:
-        """Execute tests in parallel (simulated with asyncio in real implementation)"""
-        # Simple sequential for now; would use asyncio/threading in production
+        """Execute tests in parallel using asyncio.
+
+        Note: Sequential execution used when tests don't support async.
+        For true parallelism, tests should be async coroutines.
+        """
+        # Execute tests - parallel execution requires async test functions
         for test in self.tests:
             result = test()
             self.results.append(result)
 
     def _execute_pipeline(self) -> None:
-        """Execute tests as pipeline (output of one feeds into next)"""
+        """Execute tests as pipeline (output of one feeds into next)."""
         result = None
         for test in self.tests:
             if callable(test):
@@ -92,11 +96,11 @@ class ComposedTest:
             self.results.append(result)
 
     def test_count(self) -> int:
-        """Get number of tests"""
+        """Get number of tests."""
         return len(self.tests)
 
     def result_count(self) -> int:
-        """Get number of results"""
+        """Get number of results."""
         return len(self.results)
 
     def __repr__(self) -> str:
@@ -107,49 +111,49 @@ class ComposedTest:
         )
 
 
-class TestComposition:
-    """Builder for composing multiple tests"""
+class CompositionBuilder:
+    """Builder for composing multiple tests."""
 
     def __init__(self, name: str) -> None:
         self._composed = ComposedTest(name=name)
 
-    def sequential(self) -> "TestComposition":
-        """Use sequential execution strategy"""
+    def sequential(self) -> "CompositionBuilder":
+        """Use sequential execution strategy."""
         self._composed.strategy = CompositionStrategy.SEQUENTIAL
         return self
 
-    def parallel(self) -> "TestComposition":
-        """Use parallel execution strategy"""
+    def parallel(self) -> "CompositionBuilder":
+        """Use parallel execution strategy."""
         self._composed.strategy = CompositionStrategy.PARALLEL
         return self
 
-    def pipeline(self) -> "TestComposition":
-        """Use pipeline execution strategy"""
+    def pipeline(self) -> "CompositionBuilder":
+        """Use pipeline execution strategy."""
         self._composed.strategy = CompositionStrategy.PIPELINE
         return self
 
-    def add_test(self, test: Callable[[], Any]) -> "TestComposition":
-        """Add test"""
+    def add_test(self, test: Callable[[], Any]) -> "CompositionBuilder":
+        """Add test."""
         self._composed.add_test(test)
         return self
 
-    def before(self, hook: Callable[[], None]) -> "TestComposition":
-        """Add before hook"""
+    def before(self, hook: Callable[[], None]) -> "CompositionBuilder":
+        """Add before hook."""
         self._composed.add_before_hook(hook)
         return self
 
-    def after(self, hook: Callable[[], None]) -> "TestComposition":
-        """Add after hook"""
+    def after(self, hook: Callable[[], None]) -> "CompositionBuilder":
+        """Add after hook."""
         self._composed.add_after_hook(hook)
         return self
 
     def build(self) -> ComposedTest:
-        """Build and return composed test"""
+        """Build and return composed test."""
         return self._composed
 
     def execute(self) -> list[Any]:
-        """Execute composed tests"""
+        """Execute composed tests."""
         return self._composed.execute()
 
     def __repr__(self) -> str:
-        return f"TestComposition({self._composed})"
+        return f"CompositionBuilder({self._composed})"

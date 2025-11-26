@@ -66,7 +66,11 @@ class DailyBriefInput(BaseModel):
                 "focus_time": 2.1,
                 "screen_time": 8.5,
                 "top_apps": {"VSCode": 2.5, "Safari": 1.8, "Slack": 0.9},
-                "top_domains": {"github.com": 12, "stackoverflow.com": 8, "docs.python.org": 5},
+                "top_domains": {
+                    "github.com": 12,
+                    "stackoverflow.com": 8,
+                    "docs.python.org": 5,
+                },
                 "meeting_count": 6,
                 "break_intervals": 3,
             }
@@ -91,7 +95,9 @@ class DailyBriefOutput(BaseModel):
     highlights: list[str] = Field(
         default_factory=list, description="Key achievements or notable activities"
     )
-    patterns: list[str] = Field(default_factory=list, description="Observed behavioral patterns")
+    patterns: list[str] = Field(
+        default_factory=list, description="Observed behavioral patterns"
+    )
     recommendations: list[str] = Field(
         default_factory=list, description="Actionable improvement suggestions"
     )
@@ -144,11 +150,19 @@ if DSPY_AVAILABLE:
         """
 
         # Input fields
-        time_in_app: float = dspy.InputField(desc="Total time spent in applications (hours)")
+        time_in_app: float = dspy.InputField(
+            desc="Total time spent in applications (hours)"
+        )
         domain_visits: int = dspy.InputField(desc="Number of unique domains visited")
-        calendar_busy_hours: float = dspy.InputField(desc="Hours spent in calendar events/meetings")
-        context_switches: int = dspy.InputField(desc="Number of application/context switches")
-        focus_time: float = dspy.InputField(desc="Continuous uninterrupted work time (hours)")
+        calendar_busy_hours: float = dspy.InputField(
+            desc="Hours spent in calendar events/meetings"
+        )
+        context_switches: int = dspy.InputField(
+            desc="Number of application/context switches"
+        )
+        focus_time: float = dspy.InputField(
+            desc="Continuous uninterrupted work time (hours)"
+        )
         screen_time: float = dspy.InputField(desc="Total screen time (hours)")
         meeting_count: int = dspy.InputField(desc="Number of meetings attended")
 
@@ -213,7 +227,9 @@ class DailyBriefModule:
         # Extract highlights
         highlights = []
         if input_data.focus_time > 2.0:
-            highlights.append(f"{input_data.focus_time:.1f} hours of quality focus time")
+            highlights.append(
+                f"{input_data.focus_time:.1f} hours of quality focus time"
+            )
         if input_data.top_apps:
             top_app = max(input_data.top_apps.items(), key=lambda x: x[1])
             highlights.append(f"Primarily used {top_app[0]} ({top_app[1]:.1f}h)")
@@ -236,9 +252,13 @@ class DailyBriefModule:
         if input_data.break_intervals < 3:
             recommendations.append("Take more frequent breaks (aim for 1 per 2 hours)")
         if input_data.calendar_busy_hours > 4:
-            recommendations.append("Consider reducing meeting load to preserve focus time")
+            recommendations.append(
+                "Consider reducing meeting load to preserve focus time"
+            )
         if input_data.focus_time < 2:
-            recommendations.append("Schedule dedicated focus blocks without interruptions")
+            recommendations.append(
+                "Schedule dedicated focus blocks without interruptions"
+            )
 
         # Wellbeing indicators
         wellbeing = {
@@ -286,7 +306,9 @@ class DailyBriefModule:
         score += min(10, int(input_data.break_intervals * 3))  # Up to +10 for breaks
 
         # Negative factors
-        score -= min(20, int(input_data.context_switches / 2))  # -1 per 2 switches, max -20
+        score -= min(
+            20, int(input_data.context_switches / 2)
+        )  # -1 per 2 switches, max -20
         score -= min(
             15, int(max(0, input_data.calendar_busy_hours - 3) * 3)
         )  # Penalty for >3h meetings
@@ -341,7 +363,9 @@ class DailyBriefModule:
         # Parse LLM output into structured format
         highlights = [h.strip() for h in result.highlights.split("\n") if h.strip()]
         patterns = [p.strip() for p in result.patterns.split("\n") if p.strip()]
-        recommendations = [r.strip() for r in result.recommendations.split("\n") if r.strip()]
+        recommendations = [
+            r.strip() for r in result.recommendations.split("\n") if r.strip()
+        ]
 
         # Calculate wellbeing indicators
         wellbeing = {
@@ -350,7 +374,9 @@ class DailyBriefModule:
             else "good"
             if input_data.focus_time > 2
             else "needs improvement",
-            "meeting_load": "high" if input_data.calendar_busy_hours > 4 else "moderate",
+            "meeting_load": "high"
+            if input_data.calendar_busy_hours > 4
+            else "moderate",
             "break_frequency": "good" if input_data.break_intervals >= 3 else "low",
         }
 

@@ -112,10 +112,10 @@ def execute(hook: Hook, event: HookEvent) -> HookReceipt:
 Validation:
 
 ```bash
-cargo-make format
-cargo-make lint
-cargo-make type-check
-cargo-make test
+poe format
+poe lint
+poe type-check
+poe test
 ```
 
 ## Step 5: Control

@@ -79,13 +79,18 @@ class TTL2DSpyHook:
             # Save to temp file
             import tempfile
 
-            with tempfile.NamedTemporaryFile(mode="w", suffix=".ttl", delete=False) as f:
+            with tempfile.NamedTemporaryFile(
+                mode="w", suffix=".ttl", delete=False
+            ) as f:
                 f.write(request["ttl_content"])
                 ttl_path = Path(f.name)
         elif "ttl_path" in request:
             ttl_path = Path(request["ttl_path"])
         else:
-            return {"success": False, "error": "Either 'ttl_content' or 'ttl_path' required"}
+            return {
+                "success": False,
+                "error": "Either 'ttl_content' or 'ttl_path' required",
+            }
 
         # Route to appropriate handler
         if action == "parse":
@@ -97,7 +102,10 @@ class TTL2DSpyHook:
         if action == "generate":
             output_dir = request.get("output_dir")
             if not output_dir:
-                return {"success": False, "error": "'output_dir' required for generate action"}
+                return {
+                    "success": False,
+                    "error": "'output_dir' required for generate action",
+                }
             module_name = request.get("module_name", "signatures")
             format_code = request.get("format_code", True)
             return self._handle_generate(ttl_path, output_dir, module_name, format_code)
@@ -190,7 +198,9 @@ class TTL2DSpyHook:
                     "uri": str(shape.uri),
                     "signature_name": shape.signature_name,
                     "description": shape.description,
-                    "target_class": str(shape.target_class) if shape.target_class else None,
+                    "target_class": str(shape.target_class)
+                    if shape.target_class
+                    else None,
                     "inputs": [
                         {
                             "name": prop.name,

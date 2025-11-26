@@ -69,7 +69,9 @@ class TestUNRDFBridge:
     @pytest.mark.skipif(not DSPY_AVAILABLE, reason="DSPy not available")
     @patch("kgcl.dspy_runtime.unrdf_bridge.OllamaLM")
     @patch("kgcl.dspy_runtime.unrdf_bridge.SignatureInvoker")
-    def test_invoke_success(self, mock_invoker_class, mock_lm_class, sample_signature_module):
+    def test_invoke_success(
+        self, mock_invoker_class, mock_lm_class, sample_signature_module
+    ):
         """Test successful invocation through bridge."""
         # Mock components
         mock_lm = Mock()
@@ -101,7 +103,9 @@ class TestUNRDFBridge:
     @pytest.mark.skipif(not DSPY_AVAILABLE, reason="DSPy not available")
     @patch("kgcl.dspy_runtime.unrdf_bridge.OllamaLM")
     @patch("kgcl.dspy_runtime.unrdf_bridge.SignatureInvoker")
-    def test_invoke_with_features(self, mock_invoker_class, mock_lm_class, sample_signature_module):
+    def test_invoke_with_features(
+        self, mock_invoker_class, mock_lm_class, sample_signature_module
+    ):
         """Test invocation with source features."""
         mock_lm = Mock()
         mock_lm_class.return_value = mock_lm
@@ -136,7 +140,9 @@ class TestUNRDFBridge:
     @pytest.mark.skipif(not DSPY_AVAILABLE, reason="DSPy not available")
     @patch("kgcl.dspy_runtime.unrdf_bridge.OllamaLM")
     @patch("kgcl.dspy_runtime.unrdf_bridge.SignatureInvoker")
-    def test_batch_invoke(self, mock_invoker_class, mock_lm_class, sample_signature_module):
+    def test_batch_invoke(
+        self, mock_invoker_class, mock_lm_class, sample_signature_module
+    ):
         """Test batch invocation."""
         mock_lm = Mock()
         mock_lm_class.return_value = mock_lm
@@ -192,7 +198,10 @@ class TestUNRDFBridge:
         mock_lm_class.return_value = mock_lm
 
         mock_result_success = InvocationResult(
-            success=True, inputs={"question": "q1"}, outputs={"answer": "a1"}, metrics={}
+            success=True,
+            inputs={"question": "q1"},
+            outputs={"answer": "a1"},
+            metrics={},
         )
 
         mock_invoker = Mock()
@@ -225,7 +234,9 @@ class TestUNRDFBridge:
     @pytest.mark.skipif(not DSPY_AVAILABLE, reason="DSPy not available")
     @patch("kgcl.dspy_runtime.unrdf_bridge.OllamaLM")
     @patch("kgcl.dspy_runtime.unrdf_bridge.SignatureInvoker")
-    def test_get_receipt(self, mock_invoker_class, mock_lm_class, sample_signature_module):
+    def test_get_receipt(
+        self, mock_invoker_class, mock_lm_class, sample_signature_module
+    ):
         """Test retrieving receipt by ID."""
         mock_lm = Mock()
         mock_lm_class.return_value = mock_lm
@@ -268,13 +279,18 @@ class TestUNRDFBridge:
     @pytest.mark.skipif(not DSPY_AVAILABLE, reason="DSPy not available")
     @patch("kgcl.dspy_runtime.unrdf_bridge.OllamaLM")
     @patch("kgcl.dspy_runtime.unrdf_bridge.SignatureInvoker")
-    def test_list_receipts(self, mock_invoker_class, mock_lm_class, sample_signature_module):
+    def test_list_receipts(
+        self, mock_invoker_class, mock_lm_class, sample_signature_module
+    ):
         """Test listing receipts."""
         mock_lm = Mock()
         mock_lm_class.return_value = mock_lm
 
         mock_result = InvocationResult(
-            success=True, inputs={"question": "test"}, outputs={"answer": "result"}, metrics={}
+            success=True,
+            inputs={"question": "test"},
+            outputs={"answer": "result"},
+            metrics={},
         )
 
         mock_invoker = Mock()
@@ -332,7 +348,9 @@ class TestUNRDFBridge:
     @pytest.mark.skipif(not DSPY_AVAILABLE, reason="DSPy not available")
     @patch("kgcl.dspy_runtime.unrdf_bridge.OllamaLM")
     @patch("kgcl.dspy_runtime.unrdf_bridge.SignatureInvoker")
-    def test_get_stats(self, mock_invoker_class, mock_lm_class, sample_signature_module):
+    def test_get_stats(
+        self, mock_invoker_class, mock_lm_class, sample_signature_module
+    ):
         """Test getting statistics."""
         mock_lm = Mock()
         mock_lm_class.return_value = mock_lm
@@ -343,7 +361,11 @@ class TestUNRDFBridge:
         )
 
         mock_failure = InvocationResult(
-            success=False, inputs={}, outputs={}, error="Failed", metrics={"latency_seconds": 2.0}
+            success=False,
+            inputs={},
+            outputs={},
+            error="Failed",
+            metrics={"latency_seconds": 2.0},
         )
 
         mock_invoker = Mock()

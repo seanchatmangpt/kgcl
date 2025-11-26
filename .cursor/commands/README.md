@@ -3,7 +3,7 @@
 These commands encode the workflows we run inside Cursor for the KGCL repository. Each one assumes:
 
 - Chicago School TDD (real hooks/engines, no mocked domain objects)
-- `uv` + `cargo-make` build tooling
+- `uv` + `poe` build tooling
 - Strict Ruff + mypy settings from `pyproject.toml`
 - LinkML validation always enabled for the CLI
 
@@ -64,7 +64,7 @@ Every slash command is an execution order from the core team’s Design for Lean
 ## Contributing New Commands
 
 1. Follow the structure (Purpose → Workflow → Steps → Examples → Best practices).
-2. Reference KGCL paths and tooling (e.g., `src/kgcl/hooks/**`, `cargo-make` tasks).
+2. Reference KGCL paths and tooling (e.g., `src/kgcl/hooks/**`, `poe` tasks).
 3. Tie into Chicago TDD + UNRDF rules where relevant.
 4. Update this README with a concise description once the command is added.
 

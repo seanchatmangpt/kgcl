@@ -1,0 +1,894 @@
+"""YAWL Exception Patterns (41-43) - Work Item, Case, and Service Failures.
+
+Implements:
+- Pattern 41: Work Item Failure (individual task failure with retry/compensation)
+- Pattern 42: Case Failure (workflow-level failure with escalation)
+- Pattern 43: Service Failure (external service unavailability with fallback)
+
+These patterns align with the Java YAWL Foundation reference implementation
+for robust exception handling, compensation, and recovery.
+
+References:
+- YAWL specification: http://www.yawlfoundation.org/
+- Workflow Patterns Initiative: http://workflowpatterns.com/patterns/exception/
+- Java YAWL: org.yawlfoundation.yawl.exceptions
+
+Examples
+--------
+>>> from rdflib import Graph, URIRef
+>>> graph = Graph()
+>>> # Pattern 41: Work item failure with retry
+>>> wif = WorkItemFailure(retry_policy="exponential", max_retries=3)
+>>> result = wif.on_failure(
+...     graph, URIRef("urn:task:FailedTask"), ValueError("Validation error")
+... )
+>>> assert result.handled
+>>> assert result.action_taken in ("retry", "compensate")
+
+>>> # Pattern 42: Case failure with escalation
+>>> cf = CaseFailure(escalation_chain=("supervisor", "manager", "executive"))
+>>> result = cf.on_case_failure(
+...     graph, URIRef("urn:workflow:W1"), RuntimeError("Critical error")
+... )
+>>> assert result.handled
+>>> assert result.action_taken == "escalate"
+
+>>> # Pattern 43: Service failure with fallback
+>>> sf = ServiceFailure(circuit_breaker_threshold=5, fallback_service="backup")
+>>> result = sf.on_service_failure(
+...     graph, URIRef("urn:service:API"), ConnectionError("Timeout")
+... )
+>>> assert result.action_taken in ("retry", "fallback", "abort")
+"""
+
+from __future__ import annotations
+
+import logging
+import time
+from dataclasses import dataclass, field
+from typing import Any
+
+from rdflib import Graph, Literal, Namespace, URIRef
+from rdflib.query import ResultRow
+
+from kgcl.yawl_engine.patterns.structural import ExecutionResult
+
+# YAWL Foundation namespace
+YAWL = Namespace("http://www.yawlfoundation.org/yawlschema#")
+KGC = Namespace("https://kgc.org/ns/")
+YAWL_EXCEPTION = Namespace("http://bitflow.ai/ontology/yawl/exception/v1#")
+
+logger = logging.getLogger(__name__)
+
+
+# ============================================================================
+# Exception Result Types
+# ============================================================================
+
+
+@dataclass(frozen=True)
+class ExceptionResult:
+    """Immutable exception handling result.
+
+    Captures the outcome of exception handling including recovery actions,
+    compensation logic, and escalation chains.
+
+    Parameters
+    ----------
+    handled : bool
+        Whether the exception was successfully handled
+    action_taken : str
+        Recovery action executed: "retry", "compensate", "escalate", "fallback", "abort"
+    error_message : str
+        Original error message (sanitized for logging)
+    recovery_data : dict[str, Any]
+        Recovery metadata (attempt count, escalation level, fallback service)
+
+    Examples
+    --------
+    >>> result = ExceptionResult(
+    ...     handled=True,
+    ...     action_taken="retry",
+    ...     error_message="Connection timeout",
+    ...     recovery_data={"attempt": 2, "next_retry_delay": 4.0},
+    ... )
+    >>> assert result.handled
+    >>> assert result.recovery_data["attempt"] == 2
+    """
+
+    handled: bool
+    action_taken: str
+    error_message: str
+    recovery_data: dict[str, Any] = field(default_factory=dict)
+
+
+# ============================================================================
+# Pattern 41: Work Item Failure
+# ============================================================================
+
+
+@dataclass(frozen=True)
+class WorkItemFailure:
+    """YAWL Pattern 41: Work Item Failure.
+
+    Handles failure of individual work items (tasks) with:
+    - Retry policies (none, immediate, linear, exponential backoff)
+    - Compensation tasks for rollback
+    - Failure logging and diagnostics
+    - State restoration
+
+    Java YAWL Requirements:
+    - Try-catch-finally semantics at task level
+    - Configurable retry policies with backoff
+    - Compensation task invocation for rollback
+    - Failure event propagation to workflow engine
+    - Work item state transition tracking (enabled → failed → retrying → compensating)
+
+    Parameters
+    ----------
+    pattern_id : int
+        YAWL pattern identifier (41)
+    name : str
+        Pattern name
+    retry_policy : str
+        Retry strategy: "none", "immediate", "linear", "exponential"
+    max_retries : int
+        Maximum retry attempts (default: 3)
+    compensation_task : str | None
+        URI of compensation task for rollback (default: None)
+
+    Examples
+    --------
+    >>> from rdflib import Graph, URIRef
+    >>> graph = Graph()
+    >>> # Define work item with exponential retry
+    >>> wif = WorkItemFailure(retry_policy="exponential", max_retries=3)
+    >>> error = ValueError("Validation failed: Invalid input")
+    >>> result = wif.on_failure(graph, URIRef("urn:task:ValidateInput"), error)
+    >>> assert result.action_taken == "retry"
+    >>> assert result.recovery_data["retry_delay"] > 0
+
+    >>> # Work item with compensation task
+    >>> wif_comp = WorkItemFailure(
+    ...     retry_policy="none", compensation_task="urn:task:RollbackTransaction"
+    ... )
+    >>> result = wif_comp.on_failure(
+    ...     graph, URIRef("urn:task:CommitTx"), RuntimeError("Commit failed")
+    ... )
+    >>> assert result.action_taken == "compensate"
+    """
+
+    pattern_id: int = 41
+    name: str = "Work Item Failure"
+    retry_policy: str = "exponential"  # "none", "immediate", "linear", "exponential"
+    max_retries: int = 3
+    compensation_task: str | None = None
+
+    def _calculate_retry_delay(self, attempt: int) -> float:
+        """Calculate retry delay based on retry policy.
+
+        Parameters
+        ----------
+        attempt : int
+            Current retry attempt number (0-indexed)
+
+        Returns
+        -------
+        float
+            Delay in seconds before next retry
+        """
+        if self.retry_policy == "none":
+            return 0.0
+        if self.retry_policy == "immediate":
+            return 0.1  # Minimal delay
+        if self.retry_policy == "linear":
+            return float(attempt + 1)  # 1s, 2s, 3s, ...
+        if self.retry_policy == "exponential":
+            return 2.0**attempt  # 1s, 2s, 4s, 8s, ...
+        return 0.0
+
+    def on_failure(
+        self, graph: Graph, task: URIRef, error: Exception
+    ) -> ExceptionResult:
+        """Handle work item failure with retry or compensation.
+
+        Parameters
+        ----------
+        graph : Graph
+            RDF workflow graph
+        task : URIRef
+            Failed task URI
+        error : Exception
+            Exception that caused failure
+
+        Returns
+        -------
+        ExceptionResult
+            Exception handling result with retry/compensation action
+        """
+        task_str = str(task)
+        error_msg = f"{error.__class__.__name__}: {error}"
+
+        # Query current retry count
+        query = f"""
+        PREFIX yawl-exception: <{YAWL_EXCEPTION}>
+        SELECT ?retryCount WHERE {{
+            <{task}> yawl-exception:retryCount ?retryCount .
+        }}
+        """
+        retry_count = 0
+        for row in graph.query(query):
+            if hasattr(row, "retryCount"):
+                row_typed = row if isinstance(row, ResultRow) else None
+                if row_typed is not None:
+                    count_val = getattr(row_typed, "retryCount", 0)
+                    retry_count = int(count_val) if count_val else 0
+
+        # Decide action: retry or compensate
+        if retry_count < self.max_retries and self.retry_policy != "none":
+            # Retry logic
+            retry_delay = self._calculate_retry_delay(retry_count)
+
+            logger.warning(
+                "Work item failure - will retry",
+                extra={
+                    "task": task_str,
+                    "error": error_msg,
+                    "attempt": retry_count + 1,
+                    "max_retries": self.max_retries,
+                    "retry_delay": retry_delay,
+                    "policy": self.retry_policy,
+                },
+            )
+
+            # Mark task for retry (in real implementation, schedule retry)
+            graph.add((task, YAWL_EXCEPTION.retryCount, Literal(retry_count + 1)))
+            graph.add((task, YAWL_EXCEPTION.lastError, Literal(error_msg)))
+            graph.add((task, YAWL.status, Literal("retrying")))
+
+            return ExceptionResult(
+                handled=True,
+                action_taken="retry",
+                error_message=error_msg,
+                recovery_data={
+                    "retry_attempt": retry_count + 1,
+                    "retry_delay": retry_delay,
+                    "retry_policy": self.retry_policy,
+                    "scheduled_at": time.time() + retry_delay,
+                },
+            )
+
+        # Max retries exceeded or no retry policy - compensate or abort
+        if self.compensation_task:
+            logger.error(
+                "Work item failure - invoking compensation",
+                extra={
+                    "task": task_str,
+                    "error": error_msg,
+                    "compensation_task": self.compensation_task,
+                },
+            )
+
+            # Mark task as failed and trigger compensation
+            graph.add((task, YAWL.status, Literal("failed")))
+            graph.add((task, YAWL_EXCEPTION.lastError, Literal(error_msg)))
+            graph.add(
+                (task, YAWL_EXCEPTION.compensationTask, URIRef(self.compensation_task))
+            )
+
+            # Enable compensation task
+            compensation_uri = URIRef(self.compensation_task)
+            graph.add((compensation_uri, YAWL.status, Literal("enabled")))
+            graph.add((compensation_uri, YAWL_EXCEPTION.compensatesFor, task))
+
+            return ExceptionResult(
+                handled=True,
+                action_taken="compensate",
+                error_message=error_msg,
+                recovery_data={
+                    "compensation_task": self.compensation_task,
+                    "failed_task": task_str,
+                },
+            )
+
+        # No compensation - abort
+        logger.error(
+            "Work item failure - aborting", extra={"task": task_str, "error": error_msg}
+        )
+
+        graph.add((task, YAWL.status, Literal("failed")))
+        graph.add((task, YAWL_EXCEPTION.lastError, Literal(error_msg)))
+
+        return ExceptionResult(
+            handled=False,
+            action_taken="abort",
+            error_message=error_msg,
+            recovery_data={"failed_task": task_str},
+        )
+
+    def compensate(self, graph: Graph, task: URIRef) -> ExecutionResult:
+        """Execute compensation task for rollback.
+
+        Parameters
+        ----------
+        graph : Graph
+            RDF workflow graph
+        task : URIRef
+            Original failed task URI (compensation task retrieved from graph)
+
+        Returns
+        -------
+        ExecutionResult
+            Compensation execution result
+        """
+        task_str = str(task)
+
+        # Query compensation task
+        query = f"""
+        PREFIX yawl-exception: <{YAWL_EXCEPTION}>
+        SELECT ?compTask WHERE {{
+            <{task}> yawl-exception:compensationTask ?compTask .
+        }}
+        """
+        compensation_task = None
+        for row in graph.query(query):
+            if hasattr(row, "compTask"):
+                row_typed = row if isinstance(row, ResultRow) else None
+                if row_typed is not None:
+                    compensation_task = getattr(row_typed, "compTask", None)
+
+        if not compensation_task:
+            logger.error("No compensation task found", extra={"task": task_str})
+            return ExecutionResult(
+                committed=False,
+                task=task,
+                updates=[],
+                data_updates={"compensation_error": "No compensation task defined"},
+            )
+
+        comp_str = str(compensation_task)
+
+        logger.info(
+            "Executing compensation task",
+            extra={"failed_task": task_str, "compensation_task": comp_str},
+        )
+
+        # Execute compensation by updating task status and relationships
+        updates = [
+            (comp_str, str(YAWL.status), "completed"),
+            (comp_str, str(YAWL_EXCEPTION.compensatesFor), task_str),
+            (task_str, str(YAWL_EXCEPTION.compensated), "true"),
+        ]
+
+        # Ensure compensation_task is URIRef
+        comp_uri = (
+            URIRef(compensation_task)
+            if isinstance(compensation_task, str)
+            else compensation_task
+        )
+
+        return ExecutionResult(
+            committed=True,
+            task=comp_uri,
+            updates=updates,
+            data_updates={"compensation_completed": True, "compensated_task": task_str},
+        )
+
+
+# ============================================================================
+# Pattern 42: Case Failure
+# ============================================================================
+
+
+@dataclass(frozen=True)
+class CaseFailure:
+    """YAWL Pattern 42: Case Failure.
+
+    Handles failure at the workflow case (instance) level with:
+    - Escalation chains (supervisor → manager → executive)
+    - Case-level rollback
+    - Failure notifications
+    - Incident management integration
+
+    Java YAWL Requirements:
+    - Workflow-level exception handling
+    - Escalation chain with timeouts
+    - Case state transitions (running → failing → escalated → aborted)
+    - Notification mechanisms
+    - Audit trail of failure events
+
+    Parameters
+    ----------
+    pattern_id : int
+        YAWL pattern identifier (42)
+    name : str
+        Pattern name
+    escalation_chain : tuple[str, ...]
+        Ordered escalation targets (e.g., ("supervisor", "manager", "executive"))
+
+    Examples
+    --------
+    >>> from rdflib import Graph, URIRef
+    >>> graph = Graph()
+    >>> # Define case failure with 3-level escalation
+    >>> cf = CaseFailure(escalation_chain=("team-lead", "director", "ceo"))
+    >>> error = RuntimeError("Critical workflow failure: Data corruption detected")
+    >>> result = cf.on_case_failure(
+    ...     graph, URIRef("urn:workflow:CriticalProcess"), error
+    ... )
+    >>> assert result.action_taken == "escalate"
+    >>> assert result.recovery_data["escalation_level"] == 0
+    >>> assert result.recovery_data["escalated_to"] == "team-lead"
+    """
+
+    pattern_id: int = 42
+    name: str = "Case Failure"
+    escalation_chain: tuple[str, ...] = ()
+
+    def on_case_failure(
+        self, graph: Graph, workflow: URIRef, error: Exception
+    ) -> ExceptionResult:
+        """Handle workflow case failure with escalation.
+
+        Parameters
+        ----------
+        graph : Graph
+            RDF workflow graph
+        workflow : URIRef
+            Failed workflow instance URI
+        error : Exception
+            Exception that caused case failure
+
+        Returns
+        -------
+        ExceptionResult
+            Exception handling result with escalation action
+        """
+        workflow_str = str(workflow)
+        error_msg = f"{error.__class__.__name__}: {error}"
+
+        # Query current escalation level
+        query = f"""
+        PREFIX yawl-exception: <{YAWL_EXCEPTION}>
+        SELECT ?escalationLevel WHERE {{
+            <{workflow}> yawl-exception:escalationLevel ?escalationLevel .
+        }}
+        """
+        escalation_level = 0
+        for row in graph.query(query):
+            if hasattr(row, "escalationLevel"):
+                row_typed = row if isinstance(row, ResultRow) else None
+                if row_typed is not None:
+                    level_val = getattr(row_typed, "escalationLevel", 0)
+                    escalation_level = int(level_val) if level_val else 0
+
+        # Check if escalation chain exists
+        if not self.escalation_chain:
+            logger.critical(
+                "Case failure - no escalation chain",
+                extra={"workflow": workflow_str, "error": error_msg},
+            )
+
+            graph.add((workflow, YAWL.status, Literal("failed")))
+            graph.add((workflow, YAWL_EXCEPTION.lastError, Literal(error_msg)))
+
+            return ExceptionResult(
+                handled=False,
+                action_taken="abort",
+                error_message=error_msg,
+                recovery_data={"failed_workflow": workflow_str},
+            )
+
+        # Escalate to next level
+        if escalation_level < len(self.escalation_chain):
+            escalated_to = self.escalation_chain[escalation_level]
+
+            logger.critical(
+                "Case failure - escalating",
+                extra={
+                    "workflow": workflow_str,
+                    "error": error_msg,
+                    "escalation_level": escalation_level,
+                    "escalated_to": escalated_to,
+                },
+            )
+
+            self.escalate(graph, workflow, escalation_level)
+
+            return ExceptionResult(
+                handled=True,
+                action_taken="escalate",
+                error_message=error_msg,
+                recovery_data={
+                    "escalation_level": escalation_level,
+                    "escalated_to": escalated_to,
+                    "total_levels": len(self.escalation_chain),
+                },
+            )
+
+        # Escalation chain exhausted - abort case
+        logger.critical(
+            "Case failure - escalation chain exhausted",
+            extra={"workflow": workflow_str, "error": error_msg},
+        )
+
+        graph.add((workflow, YAWL.status, Literal("aborted")))
+        graph.add((workflow, YAWL_EXCEPTION.lastError, Literal(error_msg)))
+        graph.add(
+            (
+                workflow,
+                YAWL_EXCEPTION.escalationExhausted,
+                Literal(len(self.escalation_chain)),
+            )
+        )
+
+        return ExceptionResult(
+            handled=False,
+            action_taken="abort",
+            error_message=error_msg,
+            recovery_data={
+                "escalation_exhausted": True,
+                "final_level": len(self.escalation_chain) - 1,
+            },
+        )
+
+    def escalate(self, graph: Graph, workflow: URIRef, level: int) -> None:
+        """Escalate workflow failure to next level in chain.
+
+        Parameters
+        ----------
+        graph : Graph
+            RDF workflow graph
+        workflow : URIRef
+            Workflow instance URI
+        level : int
+            Current escalation level (0-indexed)
+        """
+        escalated_to = (
+            self.escalation_chain[level]
+            if level < len(self.escalation_chain)
+            else "unknown"
+        )
+
+        workflow_str = str(workflow)
+
+        logger.info(
+            "Escalating case failure",
+            extra={
+                "workflow": workflow_str,
+                "level": level,
+                "escalated_to": escalated_to,
+            },
+        )
+
+        # Update escalation metadata
+        graph.add((workflow, YAWL_EXCEPTION.escalationLevel, Literal(level + 1)))
+        graph.add((workflow, YAWL_EXCEPTION.escalatedTo, Literal(escalated_to)))
+        graph.add((workflow, YAWL_EXCEPTION.escalatedAt, Literal(time.time())))
+        graph.add((workflow, YAWL.status, Literal("escalated")))
+
+
+# ============================================================================
+# Pattern 43: Service Failure
+# ============================================================================
+
+
+@dataclass(frozen=True)
+class ServiceFailure:
+    """YAWL Pattern 43: Service Failure.
+
+    Handles external service unavailability with:
+    - Circuit breaker pattern (open/half-open/closed states)
+    - Fallback services
+    - Service health monitoring
+    - Automatic retry with backoff
+
+    Java YAWL Requirements:
+    - External service wrapper with failure detection
+    - Circuit breaker state machine
+    - Fallback service configuration
+    - Service health checks
+    - Failure rate tracking and thresholds
+
+    Parameters
+    ----------
+    pattern_id : int
+        YAWL pattern identifier (43)
+    name : str
+        Pattern name
+    circuit_breaker_threshold : int
+        Failure threshold before opening circuit (default: 5)
+    fallback_service : str | None
+        URI of fallback service (default: None)
+
+    Examples
+    --------
+    >>> from rdflib import Graph, URIRef
+    >>> graph = Graph()
+    >>> # Define service failure with circuit breaker
+    >>> sf = ServiceFailure(
+    ...     circuit_breaker_threshold=3, fallback_service="urn:service:BackupAPI"
+    ... )
+    >>> error = ConnectionError("Service timeout after 30s")
+    >>> result = sf.on_service_failure(graph, URIRef("urn:service:PrimaryAPI"), error)
+    >>> assert result.action_taken in ("retry", "fallback")
+
+    >>> # Circuit breaker opens after threshold
+    >>> for _ in range(3):
+    ...     sf.on_service_failure(graph, URIRef("urn:service:PrimaryAPI"), error)
+    >>> # Next failure triggers fallback
+    >>> result = sf.on_service_failure(graph, URIRef("urn:service:PrimaryAPI"), error)
+    >>> assert result.recovery_data.get("circuit_state") == "open"
+    """
+
+    pattern_id: int = 43
+    name: str = "Service Failure"
+    circuit_breaker_threshold: int = 5
+    fallback_service: str | None = None
+
+    def on_service_failure(
+        self, graph: Graph, service: URIRef, error: Exception
+    ) -> ExceptionResult:
+        """Handle external service failure with circuit breaker.
+
+        Parameters
+        ----------
+        graph : Graph
+            RDF workflow graph
+        service : URIRef
+            Failed service URI
+        error : Exception
+            Exception from service call
+
+        Returns
+        -------
+        ExceptionResult
+            Exception handling result with retry/fallback action
+        """
+        service_str = str(service)
+        error_msg = f"{error.__class__.__name__}: {error}"
+
+        # Query failure count and circuit state
+        query = f"""
+        PREFIX yawl-exception: <{YAWL_EXCEPTION}>
+        SELECT ?failureCount ?circuitState WHERE {{
+            <{service}> yawl-exception:failureCount ?failureCount .
+            OPTIONAL {{ <{service}> yawl-exception:circuitState ?circuitState }}
+        }}
+        """
+        failure_count = 0
+        circuit_state = "closed"
+        for row in graph.query(query):
+            if hasattr(row, "failureCount"):
+                row_typed = row if isinstance(row, ResultRow) else None
+                if row_typed is not None:
+                    count_val = getattr(row_typed, "failureCount", 0)
+                    failure_count = int(count_val) if count_val else 0
+                    state_val = getattr(row_typed, "circuitState", None)
+                    circuit_state = str(state_val) if state_val else "closed"
+
+        # Increment failure count
+        new_failure_count = failure_count + 1
+        graph.add((service, YAWL_EXCEPTION.failureCount, Literal(new_failure_count)))
+        graph.add((service, YAWL_EXCEPTION.lastError, Literal(error_msg)))
+        graph.add((service, YAWL_EXCEPTION.lastFailureTime, Literal(time.time())))
+
+        # Check circuit breaker threshold
+        if (
+            new_failure_count >= self.circuit_breaker_threshold
+            and circuit_state == "closed"
+        ):
+            # Open circuit
+            logger.error(
+                "Service circuit breaker opened",
+                extra={
+                    "service": service_str,
+                    "failure_count": new_failure_count,
+                    "threshold": self.circuit_breaker_threshold,
+                },
+            )
+
+            graph.add((service, YAWL_EXCEPTION.circuitState, Literal("open")))
+            circuit_state = "open"
+
+        # Decide action based on circuit state
+        if circuit_state == "open":
+            # Circuit open - try fallback
+            if self.fallback_service:
+                logger.warning(
+                    "Service failure - using fallback",
+                    extra={
+                        "service": service_str,
+                        "fallback": self.fallback_service,
+                        "error": error_msg,
+                    },
+                )
+
+                fallback_result = self.try_fallback(graph, service)
+
+                return ExceptionResult(
+                    handled=fallback_result.committed,
+                    action_taken="fallback",
+                    error_message=error_msg,
+                    recovery_data={
+                        "fallback_service": self.fallback_service,
+                        "circuit_state": "open",
+                        "failure_count": new_failure_count,
+                    },
+                )
+
+            # No fallback - abort
+            logger.critical(
+                "Service failure - no fallback available",
+                extra={
+                    "service": service_str,
+                    "error": error_msg,
+                    "circuit_state": "open",
+                },
+            )
+
+            return ExceptionResult(
+                handled=False,
+                action_taken="abort",
+                error_message=error_msg,
+                recovery_data={
+                    "circuit_state": "open",
+                    "failure_count": new_failure_count,
+                },
+            )
+
+        # Circuit closed or half-open - retry
+        logger.warning(
+            "Service failure - will retry",
+            extra={
+                "service": service_str,
+                "error": error_msg,
+                "failure_count": new_failure_count,
+                "circuit_state": circuit_state,
+            },
+        )
+
+        return ExceptionResult(
+            handled=True,
+            action_taken="retry",
+            error_message=error_msg,
+            recovery_data={
+                "circuit_state": circuit_state,
+                "failure_count": new_failure_count,
+                "threshold": self.circuit_breaker_threshold,
+            },
+        )
+
+    def try_fallback(self, graph: Graph, service: URIRef) -> ExecutionResult:
+        """Attempt to use fallback service.
+
+        Parameters
+        ----------
+        graph : Graph
+            RDF workflow graph
+        service : URIRef
+            Original failed service URI
+
+        Returns
+        -------
+        ExecutionResult
+            Fallback execution result
+        """
+        if not self.fallback_service:
+            return ExecutionResult(
+                committed=False,
+                task=service,
+                updates=[],
+                data_updates={"fallback_error": "No fallback service configured"},
+            )
+
+        service_str = str(service)
+        fallback_uri = URIRef(self.fallback_service)
+        fallback_str = self.fallback_service
+
+        logger.info(
+            "Using fallback service",
+            extra={"failed_service": service_str, "fallback": fallback_str},
+        )
+
+        # Execute fallback by updating service status and relationships
+        updates = [
+            (fallback_str, str(YAWL.status), "invoked"),
+            (fallback_str, str(YAWL_EXCEPTION.fallbackFor), service_str),
+            (service_str, str(YAWL_EXCEPTION.usingFallback), fallback_str),
+        ]
+
+        return ExecutionResult(
+            committed=True,
+            task=fallback_uri,
+            updates=updates,
+            data_updates={
+                "fallback_used": True,
+                "fallback_service": fallback_str,
+                "original_service": service_str,
+            },
+        )
+
+
+# ============================================================================
+# Namespace Export (for consistency with iteration.py pattern)
+# ============================================================================
+
+
+@dataclass(frozen=True)
+class YawlNamespace:
+    """YAWL namespace container for patterns module.
+
+    Provides access to all YAWL-related RDF namespaces used in exception patterns.
+    """
+
+    yawl: Namespace = YAWL
+    kgc: Namespace = KGC
+    exception: Namespace = YAWL_EXCEPTION
+
+
+# Factory functions for common exception handling configurations
+
+
+def create_work_item_failure_with_exponential_retry(
+    max_retries: int = 3, compensation_task: str | None = None
+) -> WorkItemFailure:
+    """Create work item failure handler with exponential backoff retry.
+
+    Parameters
+    ----------
+    max_retries : int, optional
+        Maximum retry attempts (default: 3)
+    compensation_task : str | None, optional
+        Compensation task URI (default: None)
+
+    Returns
+    -------
+    WorkItemFailure
+        Configured work item failure handler
+    """
+    return WorkItemFailure(
+        retry_policy="exponential",
+        max_retries=max_retries,
+        compensation_task=compensation_task,
+    )
+
+
+def create_case_failure_with_escalation(
+    escalation_chain: tuple[str, ...],
+) -> CaseFailure:
+    """Create case failure handler with multi-level escalation.
+
+    Parameters
+    ----------
+    escalation_chain : tuple[str, ...]
+        Ordered escalation targets (e.g., ("supervisor", "manager", "executive"))
+
+    Returns
+    -------
+    CaseFailure
+        Configured case failure handler
+    """
+    return CaseFailure(escalation_chain=escalation_chain)
+
+
+def create_service_failure_with_circuit_breaker(
+    threshold: int = 5, fallback_service: str | None = None
+) -> ServiceFailure:
+    """Create service failure handler with circuit breaker.
+
+    Parameters
+    ----------
+    threshold : int, optional
+        Circuit breaker threshold (default: 5)
+    fallback_service : str | None, optional
+        Fallback service URI (default: None)
+
+    Returns
+    -------
+    ServiceFailure
+        Configured service failure handler
+    """
+    return ServiceFailure(
+        circuit_breaker_threshold=threshold, fallback_service=fallback_service
+    )

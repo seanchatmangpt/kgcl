@@ -7,7 +7,7 @@ ensuring atomic, consistent, isolated, and durable hook execution.
 
 import uuid
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import UTC, datetime
 from enum import Enum
 from typing import Any
 
@@ -23,11 +23,56 @@ class TransactionState(Enum):
 
 
 class TransactionError(Exception):
-    """Raised when transaction operation fails."""
+    """Raised when transaction operation fails.
+
+    Attributes
+    ----------
+    tx_id : str
+        Transaction identifier
+    reason : str
+        Failure reason
+    """
+
+    def __init__(self, tx_id: str, reason: str) -> None:
+        """Initialize TransactionError.
+
+        Parameters
+        ----------
+        tx_id : str
+            Transaction identifier
+        reason : str
+            Failure reason
+        """
+        self.tx_id = tx_id
+        self.reason = reason
+        super().__init__(f"Transaction '{tx_id}' failed: {reason}")
 
 
 class IsolationViolation(TransactionError):
-    """Raised when transaction isolation is violated."""
+    """Raised when transaction isolation is violated.
+
+    Attributes
+    ----------
+    tx_id : str
+        Transaction identifier
+    conflicting_tx_id : str
+        ID of conflicting transaction
+    """
+
+    def __init__(self, tx_id: str, conflicting_tx_id: str) -> None:
+        """Initialize IsolationViolation.
+
+        Parameters
+        ----------
+        tx_id : str
+            Transaction identifier
+        conflicting_tx_id : str
+            ID of conflicting transaction
+        """
+        self.conflicting_tx_id = conflicting_tx_id
+        super().__init__(
+            tx_id, f"Isolation violated by transaction '{conflicting_tx_id}'"
+        )
 
 
 @dataclass
@@ -59,7 +104,7 @@ class Transaction:
     state: TransactionState = TransactionState.PENDING
     added_triples: list[tuple[str, str, str]] = field(default_factory=list)
     removed_triples: list[tuple[str, str, str]] = field(default_factory=list)
-    started_at: datetime = field(default_factory=datetime.utcnow)
+    started_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     completed_at: datetime | None = None
     metadata: dict[str, Any] = field(default_factory=dict)
     isolation_level: str = "READ_COMMITTED"
@@ -74,7 +119,9 @@ class Transaction:
             If transaction is not in PENDING state
         """
         if self.state != TransactionState.PENDING:
-            raise TransactionError(f"Cannot begin transaction in state {self.state.value}")
+            raise TransactionError(
+                f"Cannot begin transaction in state {self.state.value}"
+            )
         self.state = TransactionState.EXECUTING
 
     def commit(self) -> None:
@@ -87,9 +134,11 @@ class Transaction:
             If transaction is not in EXECUTING state
         """
         if self.state != TransactionState.EXECUTING:
-            raise TransactionError(f"Cannot commit transaction in state {self.state.value}")
+            raise TransactionError(
+                f"Cannot commit transaction in state {self.state.value}"
+            )
         self.state = TransactionState.COMMITTED
-        self.completed_at = datetime.utcnow()
+        self.completed_at = datetime.now(UTC)
 
     def rollback(self) -> None:
         """
@@ -100,7 +149,7 @@ class Transaction:
         self.added_triples.clear()
         self.removed_triples.clear()
         self.state = TransactionState.ROLLED_BACK
-        self.completed_at = datetime.utcnow()
+        self.completed_at = datetime.now(UTC)
 
     def fail(self, error: str) -> None:
         """
@@ -112,7 +161,7 @@ class Transaction:
             Error message describing failure
         """
         self.state = TransactionState.FAILED
-        self.completed_at = datetime.utcnow()
+        self.completed_at = datetime.now(UTC)
         self.metadata["error"] = error
 
     def add_triple(self, subject: str, predicate: str, obj: str) -> None:
@@ -154,7 +203,10 @@ class Transaction:
         Dict[str, List[Tuple[str, str, str]]]
             Dictionary with 'added' and 'removed' keys
         """
-        return {"added": self.added_triples.copy(), "removed": self.removed_triples.copy()}
+        return {
+            "added": self.added_triples.copy(),
+            "removed": self.removed_triples.copy(),
+        }
 
 
 class TransactionManager:
@@ -203,7 +255,9 @@ class TransactionManager:
             If too many concurrent transactions or tx_id already exists
         """
         if len(self.transactions) >= self.max_concurrent:
-            raise TransactionError(f"Too many concurrent transactions (max: {self.max_concurrent})")
+            raise TransactionError(
+                f"Too many concurrent transactions (max: {self.max_concurrent})"
+            )
 
         if tx_id is None:
             tx_id = str(uuid.uuid4())

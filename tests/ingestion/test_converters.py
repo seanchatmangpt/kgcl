@@ -148,7 +148,9 @@ class TestRDFConverter:
 
         # Should have triples for both events
         app_subjects = list(graph.subjects(RDF.type, converter.schema_ns.AppEvent))
-        browser_subjects = list(graph.subjects(RDF.type, converter.schema_ns.BrowserVisit))
+        browser_subjects = list(
+            graph.subjects(RDF.type, converter.schema_ns.BrowserVisit)
+        )
 
         assert len(app_subjects) == 1
         assert len(browser_subjects) == 1

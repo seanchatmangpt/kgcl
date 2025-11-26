@@ -8,6 +8,7 @@ and sentiment analysis for knowledge graph content.
 import re
 from dataclasses import dataclass, field
 from enum import Enum
+from typing import Any
 
 
 class EntityType(Enum):
@@ -47,7 +48,7 @@ class SemanticEntity:
     end_pos: int = 0
     properties: dict[str, str] = field(default_factory=dict)
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary."""
         return {
             "text": self.text,
@@ -81,16 +82,20 @@ class SemanticAnalyzer:
     for knowledge graph content understanding.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize semantic analyzer."""
-        self.entity_patterns: dict[EntityType, list[re.Pattern]] = {}
-        self.relation_patterns: dict[RelationType, list[re.Pattern]] = {}
+        self.entity_patterns: dict[EntityType, list[re.Pattern[str]]] = {}
+        self.relation_patterns: dict[RelationType, list[re.Pattern[str]]] = {}
         self.sentiment_keywords: dict[str, list[str]] = {}
         self._init_patterns()
 
     def _init_patterns(self) -> None:
-        """Initialize entity and relation recognition patterns."""
-        # Entity patterns (simple regex-based for now)
+        """Initialize entity and relation recognition patterns.
+
+        Uses regex-based pattern matching for entity recognition.
+        For production, consider NLP libraries like spaCy or NLTK.
+        """
+        # Entity patterns using regex for basic recognition
         self.entity_patterns = {
             EntityType.PERSON: [
                 re.compile(r"\b[A-Z][a-z]+ [A-Z][a-z]+\b"),  # John Smith
@@ -105,10 +110,15 @@ class SemanticAnalyzer:
                 re.compile(r"\b(New York|Los Angeles|Chicago|Houston|Phoenix)\b"),
             ],
             EntityType.CONCEPT: [
-                re.compile(r"\b(knowledge|ontology|taxonomy|schema|graph)\b", re.IGNORECASE)
+                re.compile(
+                    r"\b(knowledge|ontology|taxonomy|schema|graph)\b", re.IGNORECASE
+                )
             ],
             EntityType.ACTION: [
-                re.compile(r"\b(create|delete|update|modify|change|add|remove)\b", re.IGNORECASE)
+                re.compile(
+                    r"\b(create|delete|update|modify|change|add|remove)\b",
+                    re.IGNORECASE,
+                )
             ],
             EntityType.PROPERTY: [
                 re.compile(r"\b[a-z_]+:[a-z_]+\b"),  # namespace:property
@@ -182,7 +192,9 @@ class SemanticAnalyzer:
             ],
         }
 
-    def extract_entities(self, text: str, min_confidence: float = 0.5) -> list[SemanticEntity]:
+    def extract_entities(
+        self, text: str, min_confidence: float = 0.5
+    ) -> list[SemanticEntity]:
         """
         Extract semantic entities from text.
 
@@ -208,7 +220,9 @@ class SemanticAnalyzer:
 
                     # Calculate confidence based on pattern specificity
                     confidence = (
-                        0.8 if entity_type in [EntityType.PERSON, EntityType.ORGANIZATION] else 0.6
+                        0.8
+                        if entity_type in [EntityType.PERSON, EntityType.ORGANIZATION]
+                        else 0.6
                     )
 
                     if confidence >= min_confidence:
@@ -377,7 +391,13 @@ class SemanticAnalyzer:
         """
         categories = {
             "technical": ["code", "function", "class", "method", "api", "database"],
-            "documentation": ["guide", "tutorial", "example", "documentation", "readme"],
+            "documentation": [
+                "guide",
+                "tutorial",
+                "example",
+                "documentation",
+                "readme",
+            ],
             "query": ["select", "where", "from", "sparql", "query"],
             "ontology": ["class", "property", "relation", "ontology", "schema"],
         }

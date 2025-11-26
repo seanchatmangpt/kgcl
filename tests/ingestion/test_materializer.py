@@ -292,7 +292,9 @@ class TestFeatureMaterializer:
 
     def test_incremental_updates(self):
         """Test incremental feature updates."""
-        config = FeatureConfig(enabled_features=["app_usage_time"], incremental_updates=True)
+        config = FeatureConfig(
+            enabled_features=["app_usage_time"], incremental_updates=True
+        )
         materializer = FeatureMaterializer(config)
 
         now = datetime.now(UTC).replace(tzinfo=None)
@@ -309,7 +311,9 @@ class TestFeatureMaterializer:
             )
         ]
 
-        existing_features = materializer.materialize(initial_events, window_start, window_end)
+        existing_features = materializer.materialize(
+            initial_events, window_start, window_end
+        )
 
         # New events
         new_events = [
@@ -322,7 +326,9 @@ class TestFeatureMaterializer:
         ]
 
         # Update incrementally
-        updated_features = materializer.materialize_incremental(new_events, existing_features)
+        updated_features = materializer.materialize_incremental(
+            new_events, existing_features
+        )
 
         assert len(updated_features) > 0
 

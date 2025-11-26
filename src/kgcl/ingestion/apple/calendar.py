@@ -86,8 +86,12 @@ class CalendarIngestEngine(BaseIngestEngine):
                         attendee_uri = self._create_uri(attendee_email, "person")
                         self.graph.add((attendee_uri, RDF.type, self.schema_ns.Person))
                         if attendee_name:
-                            self._add_literal(attendee_uri, self.schema_ns.name, attendee_name)
-                        self._add_literal(attendee_uri, self.schema_ns.email, attendee_email)
+                            self._add_literal(
+                                attendee_uri, self.schema_ns.name, attendee_name
+                            )
+                        self._add_literal(
+                            attendee_uri, self.schema_ns.email, attendee_email
+                        )
                         self._add_uri(event_uri, self.schema_ns.attendee, attendee_uri)
 
             # Add Apple-specific properties

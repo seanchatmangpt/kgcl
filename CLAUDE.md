@@ -67,6 +67,8 @@ This project uses SPARC (Specification, Pseudocode, Architecture, Refinement, Co
 3. **Production-Grade**: Code ready for immediate production use without refactoring.
 4. **UNRDF Alignment**: Port UNRDF JavaScript patterns to Python idiomatically.
 5. **No Tech Debt**: Clean code first time. No "TODO: refactor later".
+6. **Single-File POCs**: When exploring, create complete working POCs in `examples/` - never scattered stubs.
+7. **Zero Implementation Lies**: No TODO/FIXME/STUB/HACK/WIP. Pre-commit blocks these automatically.
 
 ## Build & Test Automation (using `poe` - Poetry)
 
@@ -91,6 +93,11 @@ timeout 60s uv run poe prod-build       # Strict production build - 60s max
 # UNRDF-Specific
 timeout 30s uv run poe unrdf-validate   # Type-check + UNRDF tests - 30s max
 timeout 60s uv run poe unrdf-full       # All UNRDF porting tests - 60s max
+
+# Implementation Lies Detection (Lean Six Sigma)
+timeout 30s uv run poe detect-lies        # Scan src/ and tests/ - 30s max
+timeout 15s uv run poe detect-lies-staged # Staged files only - 15s max
+timeout 30s uv run poe detect-lies-strict # Warnings as errors - 30s max
 
 # Git Hooks
 timeout 3s uv run poe pre-commit-setup  # Install hooks - 3s max
@@ -415,6 +422,9 @@ Blocks commits if:
 - Public APIs lack docstrings
 - Relative imports used
 - Integration tests lack markers
+- **Implementation lies detected** (TODO/FIXME/STUB/WIP/HACK)
+- **Blanket suppressions** (noqa, type: ignore without specific codes)
+- **Temporal deferral phrases** ("for now", "placeholder", "quick fix")
 
 ## File Organization & Complexity Limits
 - Max file size: 500 lines (unless justified for cohesion)
@@ -454,6 +464,207 @@ Blocks commits if:
 - No `.unwrap()`, `.expect()`, or silent exception swallowing anywhere.
 - No runtime checks when invariants can be enforced via types/dataclasses.
 - Never rebase shared branches; prefer merge or fast-forward.
+
+## 🚨 FORBIDDEN: Implementation Lies (Andon Cord Violations)
+
+**Implementation Lies are patterns that appear to complete work while actually deferring it.**
+These violate Chicago School TDD and Lean Six Sigma zero-defect standards.
+
+### Detection: `uv run poe detect-lies`
+
+The pre-commit hook automatically runs `scripts/detect_implementation_lies.py` which detects:
+
+### Category 1: DEFERRED_WORK (FORBIDDEN)
+```python
+# ❌ FORBIDDEN - These block commits
+# TODO: Implement this later
+# FIXME: This needs work
+# XXX: Hack around the issue
+# HACK: Quick workaround
+# WIP: Work in progress
+# STUB: Placeholder for now
+# noqa  (blanket suppression)
+# type: ignore  (blanket suppression)
+```
+
+### Category 2: STUB_PATTERNS (FORBIDDEN)
+```python
+# ❌ FORBIDDEN - Empty implementations
+def process_data(data: list) -> dict:
+    pass  # Stub!
+
+def validate(input: str) -> bool:
+    ...  # Ellipsis stub!
+
+def handle_error(e: Exception) -> None:
+    raise NotImplementedError  # Deferred!
+```
+
+### Category 3: PLACEHOLDER_RETURNS (WARNING)
+```python
+# ⚠️ WARNING - Suspicious placeholder returns
+def get_config() -> dict:
+    return {}  # Empty dict with no logic
+
+def fetch_data() -> list:
+    return []  # Empty list with no logic
+
+def calculate() -> int:
+    return 0  # Zero with no calculation
+```
+
+### Category 4: MOCK_ASSERTIONS (FORBIDDEN)
+```python
+# ❌ FORBIDDEN - Meaningless test assertions
+def test_feature():
+    result = do_something()
+    assert True  # Always passes - tests nothing!
+    assert result  # Just truthy check - weak!
+```
+
+### Category 5: INCOMPLETE_TESTS (FORBIDDEN)
+```python
+# ❌ FORBIDDEN - Tests without assertions
+def test_api_endpoint():
+    response = client.get("/api/data")
+    # No assertions! Test proves nothing.
+```
+
+### Category 6: SPECULATIVE_SCAFFOLDING (WARNING)
+```python
+# ⚠️ WARNING - Empty classes with no implementation
+class FutureFeature:
+    """Will implement later."""
+    pass
+```
+
+### Category 7: TEMPORAL_DEFERRAL (FORBIDDEN)
+```python
+# ❌ FORBIDDEN - Deferral phrases
+# do later, fix later, implement later
+# for now (implies future change)
+# quick fix (not proper solution)
+# placeholder (not real implementation)
+# work in progress
+# not yet implemented
+# skip for now
+# needs more work
+# to be done
+# incomplete implementation
+# need to refactor, should refactor
+```
+
+### Running the Detector
+```bash
+# Scan entire codebase
+uv run poe detect-lies
+
+# Scan staged files only (used by pre-commit)
+uv run poe detect-lies-staged
+
+# Strict mode (warnings become errors)
+uv run poe detect-lies-strict
+```
+
+## 🎯 Single-File POC Pattern (MANDATORY)
+
+**Instead of deferred work (TODO/STUB), create a Single-File Proof of Concept.**
+
+When exploring a new feature or pattern, DO NOT scatter incomplete code across multiple files.
+Instead, create ONE complete, working file in `examples/` or `scripts/poc/`.
+
+### The Single-File POC Rule
+
+```python
+# ✅ CORRECT: Single-file POC in examples/poc_feature_x.py
+"""
+POC: Feature X - Complete working demonstration.
+
+This single file contains:
+1. All types/dataclasses needed
+2. Core implementation
+3. Tests (inline or at bottom)
+4. Usage examples
+
+Run: python examples/poc_feature_x.py
+"""
+
+from dataclasses import dataclass
+
+@dataclass(frozen=True)
+class FeatureXConfig:
+    """Configuration for Feature X."""
+    threshold: float = 0.5
+
+class FeatureXProcessor:
+    """Complete implementation of Feature X."""
+
+    def __init__(self, config: FeatureXConfig) -> None:
+        self.config = config
+
+    def process(self, data: list[float]) -> float:
+        """Process data and return result."""
+        # REAL implementation - not a stub!
+        return sum(d for d in data if d > self.config.threshold)
+
+# Inline tests
+def test_processor_filters_below_threshold() -> None:
+    """Processor filters values below threshold."""
+    proc = FeatureXProcessor(FeatureXConfig(threshold=0.5))
+    result = proc.process([0.1, 0.6, 0.3, 0.8])
+    assert result == 1.4  # 0.6 + 0.8
+
+if __name__ == "__main__":
+    # Run tests
+    test_processor_filters_below_threshold()
+    print("✓ All tests passed")
+
+    # Demo usage
+    config = FeatureXConfig(threshold=0.7)
+    processor = FeatureXProcessor(config)
+    result = processor.process([0.5, 0.8, 0.9, 0.6])
+    print(f"Result: {result}")  # 1.7 (0.8 + 0.9)
+```
+
+### Why Single-File POCs?
+
+| Deferred Work (WRONG) | Single-File POC (CORRECT) |
+|----------------------|---------------------------|
+| `# TODO: implement` | Complete working code |
+| Scattered across files | All in one place |
+| No tests | Inline tests included |
+| Can't run it | `python examples/poc_x.py` |
+| Blocks commits | Passes all quality gates |
+| Technical debt | Reusable reference |
+
+### POC Directory Structure
+```
+examples/
+├── poc_hook_executor.py      # Hook execution POC
+├── poc_sparql_cache.py       # SPARQL caching POC
+├── poc_error_sanitizer.py    # Error handling POC
+└── poc_policy_pack.py        # Policy pack POC
+
+scripts/poc/
+├── poc_performance_test.py   # Performance testing POC
+└── poc_integration.py        # Integration pattern POC
+```
+
+### POC Requirements
+1. **Self-contained**: All imports, types, and code in ONE file
+2. **Runnable**: `python examples/poc_x.py` works immediately
+3. **Tested**: Inline tests that run with the file
+4. **Documented**: Docstring explaining purpose and usage
+5. **Complete**: No TODOs, stubs, or placeholders
+6. **Typed**: Full type hints throughout
+
+### Graduating a POC to Production
+Once the POC is validated:
+1. Move types to appropriate module (`src/kgcl/types/`)
+2. Move implementation to feature module (`src/kgcl/feature/`)
+3. Move tests to test directory (`tests/feature/`)
+4. Delete or archive the POC file
+5. All moves must maintain 100% type coverage and test coverage
 
 ## Work Completion Protocol - Lean Six Sigma Quality
 

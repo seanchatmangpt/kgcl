@@ -1,4 +1,4 @@
-"""Validation and Property Testing
+"""Validation and Property Testing.
 
 Provides property-based testing, invariant validation, and property generators.
 """

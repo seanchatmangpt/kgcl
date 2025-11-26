@@ -65,7 +65,9 @@ def test_query_show_templates() -> None:
 def test_query_with_template(sample_dataset: Path) -> None:
     """Test query using a template."""
     runner = CliRunner()
-    result = runner.invoke(query, ["--template", "all_features", "--endpoint", str(sample_dataset)])
+    result = runner.invoke(
+        query, ["--template", "all_features", "--endpoint", str(sample_dataset)]
+    )
     assert result.exit_code == 0
     assert "Query executed successfully" in result.output
 
@@ -75,7 +77,12 @@ def test_query_with_custom_query(sample_dataset: Path) -> None:
     runner = CliRunner()
     result = runner.invoke(
         query,
-        ["--query", "SELECT * WHERE { ?s ?p ?o } LIMIT 10", "--endpoint", str(sample_dataset)],
+        [
+            "--query",
+            "SELECT * WHERE { ?s ?p ?o } LIMIT 10",
+            "--endpoint",
+            str(sample_dataset),
+        ],
     )
     assert result.exit_code == 0
 
@@ -84,7 +91,15 @@ def test_query_with_limit(sample_dataset: Path) -> None:
     """Test query with result limit."""
     runner = CliRunner()
     result = runner.invoke(
-        query, ["--template", "all_features", "--limit", "5", "--endpoint", str(sample_dataset)]
+        query,
+        [
+            "--template",
+            "all_features",
+            "--limit",
+            "5",
+            "--endpoint",
+            str(sample_dataset),
+        ],
     )
     assert result.exit_code == 0
 
@@ -96,13 +111,28 @@ def test_query_output_formats(sample_dataset: Path) -> None:
     # Test table format
     result = runner.invoke(
         query,
-        ["--template", "all_features", "--format", "table", "--endpoint", str(sample_dataset)],
+        [
+            "--template",
+            "all_features",
+            "--format",
+            "table",
+            "--endpoint",
+            str(sample_dataset),
+        ],
     )
     assert result.exit_code == 0
 
     # Test JSON format
     result = runner.invoke(
-        query, ["--template", "all_features", "--format", "json", "--endpoint", str(sample_dataset)]
+        query,
+        [
+            "--template",
+            "all_features",
+            "--format",
+            "json",
+            "--endpoint",
+            str(sample_dataset),
+        ],
     )
     assert result.exit_code == 0
 
@@ -134,7 +164,8 @@ def test_query_verbose(sample_dataset: Path) -> None:
     """Test query with verbose output."""
     runner = CliRunner()
     result = runner.invoke(
-        query, ["--template", "all_features", "--verbose", "--endpoint", str(sample_dataset)]
+        query,
+        ["--template", "all_features", "--verbose", "--endpoint", str(sample_dataset)],
     )
     assert result.exit_code == 0
     assert "Executing query" in result.output
@@ -159,7 +190,9 @@ def test_template_queries_valid() -> None:
 
 def test_execute_query_with_local_dataset(sample_dataset: Path) -> None:
     """_execute_query should return RDF bindings for local dataset endpoints."""
-    results = _execute_query(TEMPLATE_QUERIES["all_features"], str(sample_dataset), Verbosity.QUIET)
+    results = _execute_query(
+        TEMPLATE_QUERIES["all_features"], str(sample_dataset), Verbosity.QUIET
+    )
     assert any(binding["feature"].endswith("FeatureAlpha") for binding in results)
     assert any(binding["feature"].endswith("FeatureBeta") for binding in results)
 
@@ -215,4 +248,5 @@ def test_execute_query_over_http() -> None:
         assert parsed["query"][0].startswith("SELECT ?feature ?category")
     finally:
         server.shutdown()
+        server.server_close()  # Close the socket to prevent ResourceWarning
         thread.join()

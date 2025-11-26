@@ -48,8 +48,12 @@ class WeeklyRetroInput(BaseModel):
     total_screen_time: float = Field(..., ge=0, description="Total screen hours")
     total_focus_time: float = Field(..., ge=0, description="Total focus hours")
     total_meeting_hours: float = Field(..., ge=0, description="Total meeting hours")
-    avg_context_switches: float = Field(..., ge=0, description="Avg context switches/day")
-    daily_summaries: list[str] = Field(default_factory=list, description="Daily summary texts")
+    avg_context_switches: float = Field(
+        ..., ge=0, description="Avg context switches/day"
+    )
+    daily_summaries: list[str] = Field(
+        default_factory=list, description="Daily summary texts"
+    )
     daily_productivity_scores: list[int] = Field(
         default_factory=list, description="Daily productivity scores (0-100)"
     )
@@ -60,7 +64,9 @@ class WeeklyRetroInput(BaseModel):
         default_factory=dict, description="Domain names to weekly visit counts"
     )
     total_breaks: int = Field(..., ge=0, description="Total breaks taken")
-    goals: list[str] = Field(default_factory=list, description="User-defined weekly goals")
+    goals: list[str] = Field(
+        default_factory=list, description="User-defined weekly goals"
+    )
 
     model_config = {
         "json_schema_extra": {
@@ -106,8 +112,12 @@ class WeeklyRetroOutput(BaseModel):
     """
 
     narrative: str = Field(..., description="Weekly narrative overview")
-    metrics_summary: dict[str, Any] = Field(default_factory=dict, description="Aggregated metrics")
-    patterns: list[str] = Field(default_factory=list, description="Multi-day behavioral patterns")
+    metrics_summary: dict[str, Any] = Field(
+        default_factory=dict, description="Aggregated metrics"
+    )
+    patterns: list[str] = Field(
+        default_factory=list, description="Multi-day behavioral patterns"
+    )
     progress_on_goals: dict[str, str] = Field(
         default_factory=dict, description="Goal completion assessments"
     )
@@ -117,8 +127,12 @@ class WeeklyRetroOutput(BaseModel):
     weekly_productivity_score: int = Field(
         default=0, ge=0, le=100, description="Overall weekly productivity (0-100)"
     )
-    trends: dict[str, str] = Field(default_factory=dict, description="Trend analysis by category")
-    achievements: list[str] = Field(default_factory=list, description="Notable achievements")
+    trends: dict[str, str] = Field(
+        default_factory=dict, description="Trend analysis by category"
+    )
+    achievements: list[str] = Field(
+        default_factory=list, description="Notable achievements"
+    )
 
     model_config = {
         "json_schema_extra": {
@@ -172,10 +186,18 @@ if DSPY_AVAILABLE:
         """
 
         # Input fields
-        total_focus_time: float = dspy.InputField(desc="Total deep focus time for the week (hours)")
-        total_meeting_hours: float = dspy.InputField(desc="Total time spent in meetings (hours)")
-        avg_context_switches: float = dspy.InputField(desc="Average context switches per day")
-        daily_summaries: str = dspy.InputField(desc="Daily summary texts joined with newlines")
+        total_focus_time: float = dspy.InputField(
+            desc="Total deep focus time for the week (hours)"
+        )
+        total_meeting_hours: float = dspy.InputField(
+            desc="Total time spent in meetings (hours)"
+        )
+        avg_context_switches: float = dspy.InputField(
+            desc="Average context switches per day"
+        )
+        daily_summaries: str = dspy.InputField(
+            desc="Daily summary texts joined with newlines"
+        )
         daily_productivity_scores: str = dspy.InputField(
             desc="Comma-separated daily productivity scores"
         )
@@ -261,10 +283,14 @@ class WeeklyRetroModule:
         for goal in input_data.goals:
             # Simple heuristic: check if keywords appear in daily summaries
             mentions = sum(
-                1 for summary in input_data.daily_summaries if goal.lower() in summary.lower()
+                1
+                for summary in input_data.daily_summaries
+                if goal.lower() in summary.lower()
             )
             if mentions >= 3:
-                progress_on_goals[goal] = "Strong progress - mentioned in multiple daily summaries"
+                progress_on_goals[goal] = (
+                    "Strong progress - mentioned in multiple daily summaries"
+                )
             elif mentions >= 1:
                 progress_on_goals[goal] = "Some progress - mentioned in summaries"
             else:
@@ -356,7 +382,9 @@ class WeeklyRetroModule:
         if avg_daily_focus > 2.5:
             patterns.append("Strong daily focus time averaging >2.5h")
         elif avg_daily_focus < 1.5:
-            patterns.append("Limited focus time - consider blocking dedicated work periods")
+            patterns.append(
+                "Limited focus time - consider blocking dedicated work periods"
+            )
 
         # Meeting pattern
         avg_daily_meetings = input_data.total_meeting_hours / 7
@@ -408,19 +436,27 @@ class WeeklyRetroModule:
 
         # Context switching
         if input_data.avg_context_switches > 15:
-            recommendations.append("Batch similar tasks together to reduce context switches")
+            recommendations.append(
+                "Batch similar tasks together to reduce context switches"
+            )
 
         # Break recommendations
         avg_breaks_per_day = input_data.total_breaks / 7
         if avg_breaks_per_day < 3:
-            recommendations.append("Increase break frequency - aim for 3-4 breaks per day")
+            recommendations.append(
+                "Increase break frequency - aim for 3-4 breaks per day"
+            )
 
         # Goal-based recommendations
         if input_data.goals:
-            recommendations.append("Review weekly goals on Monday and Friday to track progress")
+            recommendations.append(
+                "Review weekly goals on Monday and Friday to track progress"
+            )
 
         # General recommendations
-        recommendations.append("Identify your peak focus hours and protect them from meetings")
+        recommendations.append(
+            "Identify your peak focus hours and protect them from meetings"
+        )
 
         return recommendations[:7]  # Limit to top 7
 
@@ -463,7 +499,11 @@ class WeeklyRetroModule:
         # Meeting load trend
         avg_daily_meetings = input_data.total_meeting_hours / 7
         trends["meeting_load"] = (
-            "high" if avg_daily_meetings > 3 else "moderate" if avg_daily_meetings > 1.5 else "low"
+            "high"
+            if avg_daily_meetings > 3
+            else "moderate"
+            if avg_daily_meetings > 1.5
+            else "low"
         )
 
         # Context switching
@@ -514,7 +554,9 @@ class WeeklyRetroModule:
         # Prepare inputs for DSPy
         daily_summaries_str = "\n".join(input_data.daily_summaries)
         scores_str = ",".join(map(str, input_data.daily_productivity_scores))
-        goals_str = ", ".join(input_data.goals) if input_data.goals else "No specific goals set"
+        goals_str = (
+            ", ".join(input_data.goals) if input_data.goals else "No specific goals set"
+        )
 
         # Invoke DSPy predictor
         result = self.predictor(
@@ -528,7 +570,9 @@ class WeeklyRetroModule:
 
         # Parse outputs
         patterns = [p.strip() for p in result.patterns.split("\n") if p.strip()]
-        recommendations = [r.strip() for r in result.recommendations.split("\n") if r.strip()]
+        recommendations = [
+            r.strip() for r in result.recommendations.split("\n") if r.strip()
+        ]
 
         # Parse goal progress
         progress_on_goals = {}
@@ -541,7 +585,9 @@ class WeeklyRetroModule:
         trends = self._analyze_trends(input_data)
         achievements = []
         if input_data.total_focus_time > 15:
-            achievements.append(f"Maintained {input_data.total_focus_time:.1f}h of focus time")
+            achievements.append(
+                f"Maintained {input_data.total_focus_time:.1f}h of focus time"
+            )
 
         # Metrics summary
         metrics_summary = {

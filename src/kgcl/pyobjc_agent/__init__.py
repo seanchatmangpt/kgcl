@@ -49,28 +49,28 @@ from .plugins import (
 )
 
 __all__ = [
-    # Agent
-    "PyObjCAgent",
-    "create_default_agent",
-    # Crawler
-    "PyObjCFrameworkCrawler",
-    "FrameworkName",
     # Plugins
     "BaseCapabilityPlugin",
-    "CapabilityDescriptor",
-    "CapabilityData",
-    "load_builtin_plugins",
-    "get_registry",
     # Collectors
     "BaseCollector",
-    "CollectorConfig",
-    "create_frontmost_app_collector",
-    "create_browser_history_collector",
-    "create_calendar_collector",
-    # Aggregators
-    "FeatureAggregator",
-    "FrontmostAppAggregator",
     "BrowserHistoryAggregator",
     "CalendarAggregator",
+    "CapabilityData",
+    "CapabilityDescriptor",
+    "CollectorConfig",
+    # Aggregators
+    "FeatureAggregator",
+    "FrameworkName",
+    "FrontmostAppAggregator",
+    # Agent
+    "PyObjCAgent",
+    # Crawler
+    "PyObjCFrameworkCrawler",
     "aggregate_jsonl_file",
+    "create_browser_history_collector",
+    "create_calendar_collector",
+    "create_default_agent",
+    "create_frontmost_app_collector",
+    "get_registry",
+    "load_builtin_plugins",
 ]

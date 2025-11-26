@@ -14,7 +14,11 @@ from kgcl.hooks.security import ErrorSanitizer
 from kgcl.ingestion.config import FeatureConfig, IngestionConfig
 from kgcl.ingestion.materializer import FeatureMaterializer
 from kgcl.ingestion.models import AppEvent, BrowserVisit, CalendarBlock
-from kgcl.signatures.daily_brief import DailyBriefInput, DailyBriefModule, DailyBriefOutput
+from kgcl.signatures.daily_brief import (
+    DailyBriefInput,
+    DailyBriefModule,
+    DailyBriefOutput,
+)
 
 if TYPE_CHECKING:
     from collections.abc import Iterable, Sequence
@@ -65,7 +69,8 @@ class DailyBriefResult:
     def to_markdown(self) -> str:
         """Render result as markdown string."""
         highlights = (
-            "\n".join(f"- {item}" for item in self.output.highlights) or "- No highlights captured"
+            "\n".join(f"- {item}" for item in self.output.highlights)
+            or "- No highlights captured"
         )
         patterns = (
             "\n".join(f"- {item}" for item in self.output.patterns)
@@ -88,10 +93,13 @@ class DailyBriefResult:
         top_apps = self.metadata.get("top_apps", [])
         top_domains = self.metadata.get("top_domains", [])
         app_lines = (
-            "\n".join(f"- {item['name']}: {item['hours']:.2f}h" for item in top_apps) or "- None"
+            "\n".join(f"- {item['name']}: {item['hours']:.2f}h" for item in top_apps)
+            or "- None"
         )
         domain_lines = (
-            "\n".join(f"- {item['domain']}: {item['visits']} visits" for item in top_domains)
+            "\n".join(
+                f"- {item['domain']}: {item['visits']} visits" for item in top_domains
+            )
             or "- None"
         )
 
@@ -130,20 +138,32 @@ class DailyBriefResult:
         """Render result as flat rows for table/CSV output."""
         rows: list[dict[str, str]] = [
             {"section": "Summary", "value": self.output.summary},
-            {"section": "Productivity Score", "value": str(self.output.productivity_score)},
+            {
+                "section": "Productivity Score",
+                "value": str(self.output.productivity_score),
+            },
         ]
-        rows.extend({"section": "Highlight", "value": item} for item in self.output.highlights)
-        rows.extend({"section": "Pattern", "value": item} for item in self.output.patterns)
         rows.extend(
-            {"section": "Recommendation", "value": item} for item in self.output.recommendations
+            {"section": "Highlight", "value": item} for item in self.output.highlights
+        )
+        rows.extend(
+            {"section": "Pattern", "value": item} for item in self.output.patterns
+        )
+        rows.extend(
+            {"section": "Recommendation", "value": item}
+            for item in self.output.recommendations
         )
         for key, value in self.metadata.items():
             if key == "window":
-                rows.append({"section": "Window", "value": f"{value['start']} → {value['end']}"})
+                rows.append(
+                    {"section": "Window", "value": f"{value['start']} → {value['end']}"}
+                )
             elif key in {"top_apps", "top_domains"}:
                 continue
             else:
-                rows.append({"section": key.replace("_", " ").title(), "value": str(value)})
+                rows.append(
+                    {"section": key.replace("_", " ").title(), "value": str(value)}
+                )
         return rows
 
     def to_dict(self) -> dict[str, Any]:
@@ -206,7 +226,9 @@ class EventLogLoader:
             synthetic=False,
         )
 
-    def _candidate_files(self, start_date: datetime, end_date: datetime) -> Iterable[Path]:
+    def _candidate_files(
+        self, start_date: datetime, end_date: datetime
+    ) -> Iterable[Path]:
         """Yield JSONL files that may contain data for the window."""
         current = start_date.replace(hour=0, minute=0, second=0, microsecond=0)
         limit = end_date + timedelta(days=1)
@@ -245,7 +267,9 @@ class EventLogLoader:
 
         return results
 
-    def _synthetic_events(self, start_date: datetime, end_date: datetime) -> list[EventRecord]:
+    def _synthetic_events(
+        self, start_date: datetime, end_date: datetime
+    ) -> list[EventRecord]:
         """Generate deterministic synthetic events as a fallback."""
         midpoint = start_date + (end_date - start_date) / 2
         focus_start = midpoint.replace(hour=9, minute=0, second=0, microsecond=0)
@@ -329,7 +353,9 @@ class DailyBriefFeatureBuilder:
             context_switches=context_switches,
             focus_time=round(focus_hours, 2),
             screen_time=round(total_app_seconds / 3600, 2),
-            top_apps={name: round(seconds / 3600, 2) for name, seconds in app_usage.items()},
+            top_apps={
+                name: round(seconds / 3600, 2) for name, seconds in app_usage.items()
+            },
             top_domains=domain_counts,
             meeting_count=meeting_count,
             break_intervals=break_intervals,
@@ -351,7 +377,9 @@ class DailyBriefFeatureBuilder:
 
         return DailyBriefFeatureSet(input_data=brief_input, metadata=metadata)
 
-    def _aggregate_app_usage(self, events: Sequence[EventRecord]) -> tuple[float, dict[str, float]]:
+    def _aggregate_app_usage(
+        self, events: Sequence[EventRecord]
+    ) -> tuple[float, dict[str, float]]:
         total_seconds = 0.0
         app_usage: dict[str, float] = {}
 
@@ -365,7 +393,9 @@ class DailyBriefFeatureBuilder:
 
         return total_seconds, app_usage
 
-    def _aggregate_domains(self, events: Sequence[EventRecord]) -> tuple[int, dict[str, int]]:
+    def _aggregate_domains(
+        self, events: Sequence[EventRecord]
+    ) -> tuple[int, dict[str, int]]:
         domain_counts: dict[str, int] = {}
         for event in events:
             if isinstance(event, BrowserVisit):
@@ -383,7 +413,8 @@ class DailyBriefFeatureBuilder:
 
     def _count_context_switches(self, events: Sequence[EventRecord]) -> int:
         app_events = sorted(
-            (e for e in events if isinstance(e, AppEvent)), key=lambda evt: evt.timestamp
+            (e for e in events if isinstance(e, AppEvent)),
+            key=lambda evt: evt.timestamp,
         )
         switches = 0
         prev_app: str | None = None
@@ -404,14 +435,20 @@ class DailyBriefFeatureBuilder:
 
     def _format_top_apps(self, app_usage: dict[str, float]) -> list[dict[str, Any]]:
         top = sorted(app_usage.items(), key=lambda item: item[1], reverse=True)[:5]
-        return [{"name": name, "hours": round(seconds / 3600, 2)} for name, seconds in top]
+        return [
+            {"name": name, "hours": round(seconds / 3600, 2)} for name, seconds in top
+        ]
 
-    def _format_top_domains(self, domain_counts: dict[str, int]) -> list[dict[str, Any]]:
+    def _format_top_domains(
+        self, domain_counts: dict[str, int]
+    ) -> list[dict[str, Any]]:
         top = sorted(domain_counts.items(), key=lambda item: item[1], reverse=True)[:5]
         return [{"domain": name, "visits": count} for name, count in top]
 
 
-def generate_daily_brief(feature_set: DailyBriefFeatureSet, model: str) -> DailyBriefResult:
+def generate_daily_brief(
+    feature_set: DailyBriefFeatureSet, model: str
+) -> DailyBriefResult:
     """Generate a daily brief result from the provided feature set."""
     use_llm = model.lower() not in {"fallback", "rule-based"}
     module = DailyBriefModule(use_llm=use_llm)

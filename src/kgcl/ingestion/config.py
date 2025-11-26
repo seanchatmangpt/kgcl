@@ -13,15 +13,21 @@ from pydantic import BaseModel, Field
 class CollectorConfig(BaseModel):
     """Configuration for event collectors."""
 
-    flush_interval_seconds: int = Field(default=60, ge=1, description="Time between batch flushes")
+    flush_interval_seconds: int = Field(
+        default=60, ge=1, description="Time between batch flushes"
+    )
     batch_size: int = Field(default=100, ge=1, description="Maximum events per batch")
     output_format: str = Field(
-        default="jsonl", pattern="^(jsonl|json|parquet)$", description="Output file format"
+        default="jsonl",
+        pattern="^(jsonl|json|parquet)$",
+        description="Output file format",
     )
     output_directory: Path = Field(
         default=Path.home() / ".kgcl" / "events", description="Directory for event logs"
     )
-    enable_recovery: bool = Field(default=True, description="Enable recovery from corrupted logs")
+    enable_recovery: bool = Field(
+        default=True, description="Enable recovery from corrupted logs"
+    )
     max_retry_attempts: int = Field(
         default=3, ge=0, description="Maximum retry attempts for failed operations"
     )
@@ -63,7 +69,8 @@ class FeatureConfig(BaseModel):
         description="Enabled feature templates",
     )
     aggregation_windows: list[str] = Field(
-        default_factory=lambda: ["1h", "1d", "1w"], description="Time windows for aggregation"
+        default_factory=lambda: ["1h", "1d", "1w"],
+        description="Time windows for aggregation",
     )
     incremental_updates: bool = Field(
         default=True, description="Enable incremental feature updates"
@@ -80,8 +87,12 @@ class RDFConfig(BaseModel):
     auto_namespace_assignment: bool = Field(
         default=True, description="Automatically assign namespaces to entities"
     )
-    normalize_timestamps: bool = Field(default=True, description="Normalize all timestamps to UTC")
-    property_cleanup: bool = Field(default=True, description="Clean and normalize property names")
+    normalize_timestamps: bool = Field(
+        default=True, description="Normalize all timestamps to UTC"
+    )
+    property_cleanup: bool = Field(
+        default=True, description="Clean and normalize property names"
+    )
     include_schema_version: bool = Field(
         default=True, description="Include schema version in RDF output"
     )
@@ -94,7 +105,9 @@ class ValidationConfig(BaseModel):
     shapes_directory: Path | None = Field(
         default=None, description="Directory containing SHACL shapes"
     )
-    strict_mode: bool = Field(default=False, description="Fail ingestion on validation errors")
+    strict_mode: bool = Field(
+        default=False, description="Fail ingestion on validation errors"
+    )
     validation_report_format: str = Field(
         default="turtle",
         pattern="^(turtle|json-ld|nt|xml)$",
@@ -107,9 +120,15 @@ class ServiceConfig(BaseModel):
 
     enable_http_api: bool = Field(default=True, description="Enable HTTP ingestion API")
     api_host: str = Field(default="127.0.0.1", description="API server host")
-    api_port: int = Field(default=8080, ge=1024, le=65535, description="API server port")
-    transaction_batch_size: int = Field(default=50, ge=1, description="Events per transaction")
-    enable_hooks: bool = Field(default=True, description="Enable pre/post ingestion hooks")
+    api_port: int = Field(
+        default=8080, ge=1024, le=65535, description="API server port"
+    )
+    transaction_batch_size: int = Field(
+        default=50, ge=1, description="Events per transaction"
+    )
+    enable_hooks: bool = Field(
+        default=True, description="Enable pre/post ingestion hooks"
+    )
     max_concurrent_requests: int = Field(
         default=10, ge=1, description="Maximum concurrent API requests"
     )
@@ -168,7 +187,12 @@ class IngestionConfig(BaseModel):
         config_path.parent.mkdir(parents=True, exist_ok=True)
 
         with config_path.open("w") as f:
-            yaml.dump(self.model_dump(mode="json"), f, default_flow_style=False, sort_keys=False)
+            yaml.dump(
+                self.model_dump(mode="json"),
+                f,
+                default_flow_style=False,
+                sort_keys=False,
+            )
 
     @classmethod
     def default(cls) -> "IngestionConfig":

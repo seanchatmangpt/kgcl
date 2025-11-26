@@ -2,6 +2,8 @@
 Unit tests for feature aggregators.
 """
 
+import builtins
+import contextlib
 import json
 import tempfile
 import unittest
@@ -66,7 +68,8 @@ class TestAggregatedFeature(unittest.TestCase):
     def test_creation(self):
         """Test feature creation."""
         window = TimeWindow(
-            start_time=datetime(2024, 1, 1, 12, 0, 0), end_time=datetime(2024, 1, 1, 13, 0, 0)
+            start_time=datetime(2024, 1, 1, 12, 0, 0),
+            end_time=datetime(2024, 1, 1, 13, 0, 0),
         )
 
         feature = AggregatedFeature(
@@ -84,7 +87,8 @@ class TestAggregatedFeature(unittest.TestCase):
     def test_to_dict(self):
         """Test conversion to dictionary."""
         window = TimeWindow(
-            start_time=datetime(2024, 1, 1, 12, 0, 0), end_time=datetime(2024, 1, 1, 13, 0, 0)
+            start_time=datetime(2024, 1, 1, 12, 0, 0),
+            end_time=datetime(2024, 1, 1, 13, 0, 0),
         )
 
         feature = AggregatedFeature(feature_name="test", time_window=window, value=100)
@@ -235,7 +239,9 @@ class TestAggregateJsonlFile(unittest.TestCase):
 
     def setUp(self):
         """Set up test fixtures."""
-        self.temp_file = tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".jsonl")
+        self.temp_file = tempfile.NamedTemporaryFile(
+            mode="w", delete=False, suffix=".jsonl"
+        )
         self.temp_path = self.temp_file.name
 
         # Write test data
@@ -244,7 +250,11 @@ class TestAggregateJsonlFile(unittest.TestCase):
             event = {
                 "collector_name": "frontmost_app",
                 "timestamp": (base_time + timedelta(minutes=i)).isoformat(),
-                "data": {"app_name": "TestApp", "bundle_id": "com.test.app", "is_switch": i > 0},
+                "data": {
+                    "app_name": "TestApp",
+                    "bundle_id": "com.test.app",
+                    "is_switch": i > 0,
+                },
                 "sequence_number": i,
             }
             self.temp_file.write(json.dumps(event) + "\n")
@@ -253,10 +263,8 @@ class TestAggregateJsonlFile(unittest.TestCase):
 
     def tearDown(self):
         """Clean up test fixtures."""
-        try:
+        with contextlib.suppress(builtins.BaseException):
             Path(self.temp_path).unlink()
-        except:
-            pass
 
     def test_aggregate_file(self):
         """Test aggregating from JSONL file."""
@@ -268,14 +276,18 @@ class TestAggregateJsonlFile(unittest.TestCase):
 
     def test_aggregate_file_with_output(self):
         """Test aggregating with output file."""
-        output_file = tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".json")
+        output_file = tempfile.NamedTemporaryFile(
+            mode="w", delete=False, suffix=".json"
+        )
         output_path = output_file.name
         output_file.close()
 
         try:
             aggregator = FrontmostAppAggregator()
 
-            features = aggregate_jsonl_file(self.temp_path, aggregator, output_path=output_path)
+            features = aggregate_jsonl_file(
+                self.temp_path, aggregator, output_path=output_path
+            )
 
             # Verify output file created
             self.assertTrue(Path(output_path).exists())
@@ -288,10 +300,8 @@ class TestAggregateJsonlFile(unittest.TestCase):
             self.assertIn("event_count", data)
 
         finally:
-            try:
+            with contextlib.suppress(builtins.BaseException):
                 Path(output_path).unlink()
-            except:
-                pass
 
 
 if __name__ == "__main__":

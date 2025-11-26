@@ -31,7 +31,10 @@ class AdaptiveMonitor:
     """
 
     def __init__(
-        self, window_size: int = 100, stddev_multiplier: float = 2.0, min_samples: int = 10
+        self,
+        window_size: int = 100,
+        stddev_multiplier: float = 2.0,
+        min_samples: int = 10,
     ):
         """Initialize adaptive monitor.
 
@@ -90,10 +93,7 @@ class AdaptiveMonitor:
         mean = statistics.mean(values)
 
         # Calculate standard deviation (need at least 2 samples)
-        if len(values) > 1:
-            stdev = statistics.stdev(values)
-        else:
-            stdev = 0
+        stdev = statistics.stdev(values) if len(values) > 1 else 0
 
         # Threshold = mean + N * stddev
         # For very low variance, use percentage-based threshold

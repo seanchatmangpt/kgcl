@@ -1,4 +1,4 @@
-"""Property-Based Testing
+"""Property-Based Testing.
 
 Provides generators and property tests for example-driven testing.
 """
@@ -12,8 +12,8 @@ T = TypeVar("T")
 P = TypeVar("P")
 
 
-class PropertyGenerator(Generic[T]):
-    """Generates values for property-based testing
+class PropertyGenerator[T]:
+    """Generates values for property-based testing.
 
     Example:
         @test
@@ -27,45 +27,49 @@ class PropertyGenerator(Generic[T]):
         self._generator_fn = generator_fn
 
     def generate(self) -> T:
-        """Generate a single value"""
+        """Generate a single value."""
         return self._generator_fn()
 
     def take(self, n: int) -> list[T]:
-        """Generate n values"""
+        """Generate n values."""
         return [self.generate() for _ in range(n)]
 
     @staticmethod
     def integers(min: int = 0, max: int = 100) -> "PropertyGenerator[int]":
-        """Generate random integers in range"""
+        """Generate random integers in range."""
         return PropertyGenerator(lambda: random.randint(min, max))
 
     @staticmethod
     def floats(min: float = 0.0, max: float = 1.0) -> "PropertyGenerator[float]":
-        """Generate random floats in range"""
+        """Generate random floats in range."""
         return PropertyGenerator(lambda: random.uniform(min, max))
 
     @staticmethod
     def strings(
         length: int = 10, chars: str = "abcdefghijklmnopqrstuvwxyz"
     ) -> "PropertyGenerator[str]":
-        """Generate random strings"""
-        return PropertyGenerator(lambda: "".join(random.choice(chars) for _ in range(length)))
+        """Generate random strings."""
+        return PropertyGenerator(
+            lambda: "".join(random.choice(chars) for _ in range(length))
+        )
 
     @staticmethod
     def booleans() -> "PropertyGenerator[bool]":
-        """Generate random booleans"""
+        """Generate random booleans."""
         return PropertyGenerator(lambda: random.choice([True, False]))
 
     @staticmethod
     def one_of(values: list[T]) -> "PropertyGenerator[T]":
-        """Generate from a list of values"""
+        """Generate from a list of values."""
         return PropertyGenerator(lambda: random.choice(values))
 
     @staticmethod
     def lists(
-        element_generator: "PropertyGenerator[T]", min_length: int = 0, max_length: int = 10
+        element_generator: "PropertyGenerator[T]",
+        min_length: int = 0,
+        max_length: int = 10,
     ) -> "PropertyGenerator[list[T]]":
-        """Generate lists of values"""
+        """Generate lists of values."""
 
         def gen() -> list[T]:
             length = random.randint(min_length, max_length)
@@ -76,7 +80,7 @@ class PropertyGenerator(Generic[T]):
 
 @dataclass
 class PropertyTest:
-    """A property test with examples
+    """A property test with examples.
 
     Example:
         test = PropertyTest(
@@ -103,11 +107,11 @@ class PropertyTest:
             self.failed_examples = []
 
     def add_example(self, *args: Any) -> None:
-        """Add an example to test"""
+        """Add an example to test."""
         self.examples.append(args)
 
     def run(self) -> bool:
-        """Run property test against all examples
+        """Run property test against all examples.
 
         Returns
         -------
@@ -125,7 +129,7 @@ class PropertyTest:
         return len(self.failed_examples) == 0
 
     def run_generated(self, count: int = 100) -> bool:
-        """Run property test with generated examples
+        """Run property test with generated examples.
 
         Args:
             count: Number of examples to generate
@@ -160,11 +164,11 @@ class PropertyTest:
         return len(self.failed_examples) == 0
 
     def failure_count(self) -> int:
-        """Get number of failed examples"""
+        """Get number of failed examples."""
         return len(self.failed_examples)
 
     def success_rate(self) -> float:
-        """Calculate success rate"""
+        """Calculate success rate."""
         total = len(self.examples) + len(self.failed_examples)
         if total == 0:
             return 0.0
@@ -172,7 +176,7 @@ class PropertyTest:
 
 
 class Property:
-    """Builder for property tests
+    """Builder for property tests.
 
     Example:
         test = (Property()
@@ -189,27 +193,27 @@ class Property:
         self._examples: list[tuple] = []
 
     def name(self, name: str) -> "Property":
-        """Set property name"""
+        """Set property name."""
         self._name = name
         return self
 
     def predicate(self, predicate: Callable[..., bool]) -> "Property":
-        """Set property predicate"""
+        """Set property predicate."""
         self._predicate = predicate
         return self
 
     def example(self, *args: Any) -> "Property":
-        """Add example"""
+        """Add example."""
         self._examples.append(args)
         return self
 
     def examples(self, examples: list[tuple]) -> "Property":
-        """Set all examples"""
+        """Set all examples."""
         self._examples = examples
         return self
 
     def build(self) -> PropertyTest:
-        """Build property test"""
+        """Build property test."""
         if self._predicate is None:
             raise ValueError("Predicate not set")
         return PropertyTest(

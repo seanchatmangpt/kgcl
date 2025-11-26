@@ -1,4 +1,4 @@
-"""Guard Types for Validated Values
+"""Guard Types for Validated Values.
 
 Provides wrapper types that enforce validation at runtime.
 Similar to Rust's type-level validation compiled away in Python.
@@ -10,8 +10,8 @@ from typing import Any, Generic, TypeVar
 T = TypeVar("T")
 
 
-class Guard(Generic[T]):
-    """Type guard for runtime validation
+class Guard[T]:
+    """Type guard for runtime validation.
 
     Similar to Rust's type-level guarantees, but with runtime checks.
 
@@ -34,7 +34,7 @@ class Guard(Generic[T]):
 
     @staticmethod
     def validated(value: T, validator: Callable[[T], bool]) -> "Guard[T]":
-        """Create a validated guard
+        """Create a validated guard.
 
         Args:
             value: Value to wrap
@@ -51,19 +51,19 @@ class Guard(Generic[T]):
         return Guard(value, validator)
 
     def get(self) -> T:
-        """Get the wrapped value (guaranteed to be valid)"""
+        """Get the wrapped value (guaranteed to be valid)."""
         return self._value
 
     def map(self, f: Callable[[T], Any]) -> Any:
-        """Transform the value"""
+        """Transform the value."""
         return f(self._value)
 
     def __repr__(self) -> str:
         return f"Guard({self._value!r})"
 
 
-class ValidatedValue(Generic[T]):
-    """Wrapper for validated values with lazy evaluation
+class ValidatedValue[T]:
+    """Wrapper for validated values with lazy evaluation.
 
     Example:
         val = ValidatedValue(
@@ -85,14 +85,16 @@ class ValidatedValue(Generic[T]):
         self._validation_cache: bool | None = None
         self._failures: list[str] = []
 
-    def add_validator(self, name: str, validator: Callable[[T], bool]) -> "ValidatedValue[T]":
-        """Add validator"""
+    def add_validator(
+        self, name: str, validator: Callable[[T], bool]
+    ) -> "ValidatedValue[T]":
+        """Add validator."""
         self._validators.append((name, validator))
         self._validation_cache = None  # Invalidate cache
         return self
 
     def is_valid(self) -> bool:
-        """Check if value is valid (with caching)"""
+        """Check if value is valid (with caching)."""
         if self._validation_cache is not None:
             return self._validation_cache
 
@@ -108,7 +110,7 @@ class ValidatedValue(Generic[T]):
         return self._validation_cache
 
     def get(self) -> T:
-        """Get value if valid
+        """Get value if valid.
 
         Returns
         -------
@@ -125,15 +127,15 @@ class ValidatedValue(Generic[T]):
         return self._value
 
     def get_or(self, default: T) -> T:
-        """Get value or return default"""
+        """Get value or return default."""
         return self._value if self.is_valid() else default
 
     def failures(self) -> list[str]:
-        """Get list of failed validators"""
+        """Get list of failed validators."""
         return self._failures.copy()
 
     def failure_count(self) -> int:
-        """Get number of failed validators"""
+        """Get number of failed validators."""
         return len(self._failures)
 
     def __repr__(self) -> str:

@@ -5,7 +5,7 @@ Tests define receipt behaviors including cryptographic verification,
 RDF serialization, and queryability.
 """
 
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 
 import pytest
 
@@ -18,7 +18,7 @@ class TestReceiptCapture:
 
     def test_receipt_captures_hook_id_timestamp_actor(self):
         """Receipt captures: hookId, timestamp, actor, condition_result, handler_result."""
-        timestamp = datetime.utcnow()
+        timestamp = datetime.now(UTC)
         condition_result = ConditionResult(triggered=True, metadata={"test": "value"})
         handler_result = {"success": True}
 
@@ -41,7 +41,7 @@ class TestReceiptCapture:
         """Receipt includes duration_ms and memory_delta."""
         receipt = Receipt(
             hook_id="test",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(UTC),
             condition_result=ConditionResult(triggered=True, metadata={}),
             handler_result={"success": True},
             duration_ms=250.75,
@@ -58,7 +58,7 @@ class TestReceiptCapture:
 
         receipt = Receipt(
             hook_id="test",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(UTC),
             condition_result=ConditionResult(triggered=True, metadata={}),
             handler_result=large_output,
             duration_ms=100.0,
@@ -74,7 +74,7 @@ class TestReceiptCapture:
 
         receipt = Receipt(
             hook_id="test",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(UTC),
             condition_result=ConditionResult(triggered=True, metadata={}),
             handler_result=huge_data,
             duration_ms=100.0,
@@ -96,7 +96,7 @@ class TestReceiptErrorHandling:
 
         receipt = Receipt(
             hook_id="failing_hook",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(UTC),
             condition_result=ConditionResult(triggered=True, metadata={}),
             handler_result=None,
             duration_ms=50.0,
@@ -116,7 +116,7 @@ class TestReceiptCryptography:
         """Receipt is cryptographically hashable (sha256)."""
         receipt = Receipt(
             hook_id="test",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(UTC),
             condition_result=ConditionResult(triggered=True, metadata={}),
             handler_result={"success": True},
             duration_ms=100.0,
@@ -129,7 +129,7 @@ class TestReceiptCryptography:
 
     def test_receipt_hash_is_deterministic(self):
         """Receipt hash is deterministic for same data."""
-        timestamp = datetime.utcnow()
+        timestamp = datetime.now(UTC)
         condition_result = ConditionResult(triggered=True, metadata={"key": "value"})
         receipt_id = "deterministic-id-123"
 
@@ -155,7 +155,7 @@ class TestReceiptCryptography:
 
     def test_receipt_hash_changes_with_data(self):
         """Receipt hash changes when data changes."""
-        timestamp = datetime.utcnow()
+        timestamp = datetime.now(UTC)
 
         receipt1 = Receipt(
             hook_id="test1",
@@ -182,12 +182,12 @@ class TestMerkleAnchor:
     def test_receipt_contains_merkle_anchor_to_graph_state(self):
         """Receipt contains merkle anchor to graph state."""
         merkle_anchor = MerkleAnchor(
-            root_hash="abc123", graph_version=42, timestamp=datetime.utcnow()
+            root_hash="abc123", graph_version=42, timestamp=datetime.now(UTC)
         )
 
         receipt = Receipt(
             hook_id="test",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(UTC),
             condition_result=ConditionResult(triggered=True, metadata={}),
             handler_result={"success": True},
             duration_ms=100.0,
@@ -206,7 +206,7 @@ class TestReceiptSerialization:
         """Receipt supports JSON-LD serialization."""
         receipt = Receipt(
             hook_id="test",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(UTC),
             actor="test_user",
             condition_result=ConditionResult(triggered=True, metadata={}),
             handler_result={"success": True},
@@ -224,7 +224,7 @@ class TestReceiptSerialization:
         """Receipt can be deserialized from JSON-LD."""
         original = Receipt(
             hook_id="test",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(UTC),
             actor="test_user",
             condition_result=ConditionResult(triggered=True, metadata={"key": "value"}),
             handler_result={"success": True},
@@ -246,7 +246,7 @@ class TestReceiptRDFTriples:
         """Receipt can be stored as RDF triple."""
         receipt = Receipt(
             hook_id="test",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(UTC),
             actor="test_user",
             condition_result=ConditionResult(triggered=True, metadata={}),
             handler_result={"success": True},
@@ -264,7 +264,7 @@ class TestReceiptRDFTriples:
         """RDF triples include provenance data."""
         receipt = Receipt(
             hook_id="test",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(UTC),
             actor="test_user",
             condition_result=ConditionResult(triggered=True, metadata={}),
             handler_result={"success": True},
@@ -285,7 +285,7 @@ class TestReceiptProof:
         """Receipt provides proof that hook executed."""
         receipt = Receipt(
             hook_id="test",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(UTC),
             actor="test_user",
             condition_result=ConditionResult(triggered=True, metadata={}),
             handler_result={"success": True},
@@ -310,7 +310,7 @@ class TestReceiptStore:
 
         receipt = Receipt(
             hook_id="test",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(UTC),
             condition_result=ConditionResult(triggered=True, metadata={}),
             handler_result={"success": True},
             duration_ms=100.0,
@@ -330,7 +330,7 @@ class TestReceiptStore:
 
         receipt1 = Receipt(
             hook_id="test1",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(UTC),
             condition_result=ConditionResult(triggered=True, metadata={}),
             handler_result={"success": True},
             duration_ms=100.0,
@@ -338,7 +338,7 @@ class TestReceiptStore:
 
         receipt2 = Receipt(
             hook_id="test2",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(UTC),
             condition_result=ConditionResult(triggered=True, metadata={}),
             handler_result={"success": True},
             duration_ms=100.0,
@@ -357,7 +357,7 @@ class TestReceiptStore:
         """Receipts queryable by timestamp range."""
         store = ReceiptStore()
 
-        now = datetime.utcnow()
+        now = datetime.now(UTC)
         past = now - timedelta(hours=1)
         future = now + timedelta(hours=1)
 
@@ -381,7 +381,9 @@ class TestReceiptStore:
         await store.save(receipt_new)
 
         # Query by timestamp range
-        results = await store.query(timestamp_from=now - timedelta(minutes=5), timestamp_to=future)
+        results = await store.query(
+            timestamp_from=now - timedelta(minutes=5), timestamp_to=future
+        )
 
         assert len(results) == 1
         assert results[0].hook_id == "new"
@@ -393,7 +395,7 @@ class TestReceiptStore:
 
         receipt1 = Receipt(
             hook_id="test1",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(UTC),
             actor="user1",
             condition_result=ConditionResult(triggered=True, metadata={}),
             handler_result={"success": True},
@@ -402,7 +404,7 @@ class TestReceiptStore:
 
         receipt2 = Receipt(
             hook_id="test2",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(UTC),
             actor="user2",
             condition_result=ConditionResult(triggered=True, metadata={}),
             handler_result={"success": True},

@@ -4,12 +4,17 @@ Comprehensive tests for advanced UNRDF modules.
 Tests for dark matter optimization, streaming processing, and federation.
 """
 
-from datetime import datetime
+from datetime import UTC, datetime
 
 import pytest
 
 from kgcl.hooks.dark_matter import DarkMatterOptimizer, OptimizedPlan
-from kgcl.hooks.federation import FederationCoordinator, GossipProtocol, Node, NodeStatus
+from kgcl.hooks.federation import (
+    FederationCoordinator,
+    GossipProtocol,
+    Node,
+    NodeStatus,
+)
 from kgcl.hooks.streaming import (
     Change,
     ChangeFeed,
@@ -100,7 +105,12 @@ class TestDarkMatterOptimizer:
 
         steps = [
             {"step_id": 1, "operation": "filter", "predicate": "x > 10", "cost": 10.0},
-            {"step_id": 2, "operation": "filter", "predicate": "x > 10", "cost": 10.0},  # Duplicate
+            {
+                "step_id": 2,
+                "operation": "filter",
+                "predicate": "x > 10",
+                "cost": 10.0,
+            },  # Duplicate
             {"step_id": 3, "operation": "scan", "cost": 100.0},
         ]
 
@@ -133,7 +143,12 @@ class TestDarkMatterOptimizer:
             "steps": [
                 {"step_id": 1, "operation": "scan", "cost": 10.0, "dependencies": []},
                 {"step_id": 2, "operation": "scan", "cost": 10.0, "dependencies": []},
-                {"step_id": 3, "operation": "join", "cost": 20.0, "dependencies": [1, 2]},
+                {
+                    "step_id": 3,
+                    "operation": "join",
+                    "cost": 20.0,
+                    "dependencies": [1, 2],
+                },
             ]
         }
 
@@ -150,7 +165,12 @@ class TestDarkMatterOptimizer:
             "steps": [
                 {"step_id": 1, "operation": "scan", "cost": 10.0, "dependencies": []},
                 {"step_id": 2, "operation": "scan", "cost": 10.0, "dependencies": []},
-                {"step_id": 3, "operation": "join", "cost": 20.0, "dependencies": [1, 2]},
+                {
+                    "step_id": 3,
+                    "operation": "join",
+                    "cost": 20.0,
+                    "dependencies": [1, 2],
+                },
             ]
         }
 
@@ -172,7 +192,12 @@ class TestDarkMatterOptimizer:
         optimizer = DarkMatterOptimizer()
 
         steps = [
-            {"step_id": 1, "operation": "scan", "cost": 100.0, "output_columns": ["a", "b", "c"]},
+            {
+                "step_id": 1,
+                "operation": "scan",
+                "cost": 100.0,
+                "output_columns": ["a", "b", "c"],
+            },
             {
                 "step_id": 2,
                 "operation": "project",
@@ -207,7 +232,7 @@ class TestChangeFeed:
         change = Change(
             change_type=ChangeType.ADDED,
             triple=("s1", "p1", "o1"),
-            timestamp=datetime.utcnow().timestamp(),
+            timestamp=datetime.now(UTC).timestamp(),
             source="test",
         )
 
@@ -228,7 +253,7 @@ class TestChangeFeed:
         change = Change(
             change_type=ChangeType.ADDED,
             triple=("s1", "p1", "o1"),
-            timestamp=datetime.utcnow().timestamp(),
+            timestamp=datetime.now(UTC).timestamp(),
             source="test",
         )
 
@@ -252,7 +277,7 @@ class TestChangeFeed:
         """Test retrieving changes after timestamp."""
         feed = ChangeFeed()
 
-        ts1 = datetime.utcnow().timestamp()
+        ts1 = datetime.now(UTC).timestamp()
         change1 = Change(ChangeType.ADDED, ("s1", "p1", "o1"), ts1, "test")
         feed.publish_change(change1)
 
@@ -268,7 +293,7 @@ class TestChangeFeed:
         """Test filtering changes by type."""
         feed = ChangeFeed()
 
-        ts = datetime.utcnow().timestamp()
+        ts = datetime.now(UTC).timestamp()
         feed.publish_change(Change(ChangeType.ADDED, ("s1", "p1", "o1"), ts, "test"))
         feed.publish_change(Change(ChangeType.REMOVED, ("s2", "p2", "o2"), ts, "test"))
         feed.publish_change(Change(ChangeType.ADDED, ("s3", "p3", "o3"), ts, "test"))
@@ -280,7 +305,7 @@ class TestChangeFeed:
         """Test buffer size limit enforcement."""
         feed = ChangeFeed(max_buffer_size=10)
 
-        ts = datetime.utcnow().timestamp()
+        ts = datetime.now(UTC).timestamp()
         for i in range(20):
             change = Change(ChangeType.ADDED, (f"s{i}", "p", "o"), ts, "test")
             feed.publish_change(change)
@@ -291,7 +316,7 @@ class TestChangeFeed:
         """Test feed statistics."""
         feed = ChangeFeed()
 
-        ts = datetime.utcnow().timestamp()
+        ts = datetime.now(UTC).timestamp()
         feed.publish_change(Change(ChangeType.ADDED, ("s1", "p1", "o1"), ts, "test"))
 
         stats = feed.get_stats()
@@ -329,7 +354,7 @@ class TestStreamProcessor:
 
         processor.register_processor("test", test_proc)
 
-        ts = datetime.utcnow().timestamp()
+        ts = datetime.now(UTC).timestamp()
         change = Change(ChangeType.ADDED, ("s1", "p1", "o1"), ts, "test")
 
         result = processor.process_change(change)
@@ -347,8 +372,10 @@ class TestStreamProcessor:
 
         processor.register_processor("counter", counter)
 
-        ts = datetime.utcnow().timestamp()
-        changes = [Change(ChangeType.ADDED, (f"s{i}", "p", "o"), ts, "test") for i in range(5)]
+        ts = datetime.now(UTC).timestamp()
+        changes = [
+            Change(ChangeType.ADDED, (f"s{i}", "p", "o"), ts, "test") for i in range(5)
+        ]
 
         results = processor.process_batch(changes)
         assert len(results) == 5
@@ -363,7 +390,7 @@ class TestStreamProcessor:
 
         processor.register_processor("failer", failing_proc)
 
-        ts = datetime.utcnow().timestamp()
+        ts = datetime.now(UTC).timestamp()
         change = Change(ChangeType.ADDED, ("s1", "p1", "o1"), ts, "test")
 
         result = processor.process_change(change)
@@ -383,9 +410,11 @@ class TestStreamProcessor:
 
         processor.create_filter_processor("filter", predicate, action)
 
-        ts = datetime.utcnow().timestamp()
+        ts = datetime.now(UTC).timestamp()
         processor.process_change(Change(ChangeType.ADDED, ("s1", "p", "o"), ts, "test"))
-        processor.process_change(Change(ChangeType.REMOVED, ("s2", "p", "o"), ts, "test"))
+        processor.process_change(
+            Change(ChangeType.REMOVED, ("s2", "p", "o"), ts, "test")
+        )
 
         assert len(filtered) == 1
 
@@ -408,7 +437,7 @@ class TestWindowedStreamProcessor:
 
         processor.register_window_callback(window_callback)
 
-        ts = datetime.utcnow().timestamp()
+        ts = datetime.now(UTC).timestamp()
 
         # Add changes in first window
         for i in range(3):
@@ -430,7 +459,7 @@ class TestWindowedStreamProcessor:
 
         processor.register_window_callback(lambda changes: windows.append(len(changes)))
 
-        ts = datetime.utcnow().timestamp()
+        ts = datetime.now(UTC).timestamp()
         processor.process_change(Change(ChangeType.ADDED, ("s1", "p", "o"), ts, "test"))
 
         processor.flush_window()
@@ -457,7 +486,7 @@ class TestNode:
         node = Node(node_id="node1", address="localhost:8001", is_healthy=False)
         node.status = NodeStatus.FAILED
 
-        ts = datetime.utcnow().timestamp()
+        ts = datetime.now(UTC).timestamp()
         node.update_heartbeat(ts)
 
         assert node.last_heartbeat == ts
@@ -513,7 +542,9 @@ class TestFederationCoordinator:
         coordinator = FederationCoordinator("local1")
 
         node = Node(
-            node_id="node1", address="localhost:8001", last_heartbeat=datetime.utcnow().timestamp()
+            node_id="node1",
+            address="localhost:8001",
+            last_heartbeat=datetime.now(UTC).timestamp(),
         )
         coordinator.register_node(node)
 
@@ -535,7 +566,7 @@ class TestFederationCoordinator:
             node = Node(
                 node_id=f"node{i}",
                 address=f"localhost:800{i}",
-                last_heartbeat=datetime.utcnow().timestamp(),
+                last_heartbeat=datetime.now(UTC).timestamp(),
             )
             coordinator.register_node(node)
 
@@ -557,7 +588,7 @@ class TestFederationCoordinator:
             node = Node(
                 node_id=f"node{i}",
                 address=f"localhost:800{i}",
-                last_heartbeat=datetime.utcnow().timestamp(),
+                last_heartbeat=datetime.now(UTC).timestamp(),
             )
             coordinator.register_node(node)
 
@@ -588,7 +619,7 @@ class TestFederationCoordinator:
                 f"node{i}",
                 f"localhost:800{i}",
                 is_healthy=(i < 3),
-                last_heartbeat=datetime.utcnow().timestamp(),
+                last_heartbeat=datetime.now(UTC).timestamp(),
             )
             coordinator.register_node(node)
 
@@ -637,7 +668,7 @@ class TestGossipProtocol:
                 f"node{i}",
                 f"localhost:800{i}",
                 is_healthy=True,
-                last_heartbeat=datetime.utcnow().timestamp(),
+                last_heartbeat=datetime.now(UTC).timestamp(),
             )
             coordinator.register_node(node)
 

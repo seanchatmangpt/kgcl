@@ -25,7 +25,8 @@ class BatchCollector(BaseCollector):
     def __init__(
         self,
         config: CollectorConfig,
-        source_fn: Callable[[], list[AppEvent | BrowserVisit | CalendarBlock]] | None = None,
+        source_fn: Callable[[], list[AppEvent | BrowserVisit | CalendarBlock]]
+        | None = None,
     ) -> None:
         """Initialize batch collector.
 
@@ -143,7 +144,9 @@ class BatchCollector(BaseCollector):
             return flushed_count
 
         except Exception as e:
-            self._handle_error(e, {"operation": "flush", "buffer_size": len(self._buffer)})
+            self._handle_error(
+                e, {"operation": "flush", "buffer_size": len(self._buffer)}
+            )
             return 0
 
     def _write_batch(self, batch: EventBatch, output_file: Path) -> None:
@@ -252,7 +255,9 @@ class BatchCollector(BaseCollector):
                         corrupted += 1
                         if self.config.enable_recovery:
                             # Log error and continue
-                            self._handle_error(e, {"line_num": line_num, "file": str(file_path)})
+                            self._handle_error(
+                                e, {"line_num": line_num, "file": str(file_path)}
+                            )
                         else:
                             raise
 

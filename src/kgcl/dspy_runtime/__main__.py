@@ -136,7 +136,9 @@ def cmd_invoke(args) -> int:
             print(json.dumps(result, indent=2))
 
         if result["result"]["success"]:
-            print(f"\n✓ Invocation successful (receipt: {result['receipt']['receipt_id']})")
+            print(
+                f"\n✓ Invocation successful (receipt: {result['receipt']['receipt_id']})"
+            )
             return 0
         print(f"\n✗ Invocation failed: {result['result']['error']}")
         return 1
@@ -216,7 +218,9 @@ class SimpleQA(dspy.Signature):
         inputs = {"question": "What is 2 + 2?"}
         print(f"Testing with inputs: {inputs}")
 
-        result = bridge.invoke(module_path=str(test_file), signature_name="SimpleQA", inputs=inputs)
+        result = bridge.invoke(
+            module_path=str(test_file), signature_name="SimpleQA", inputs=inputs
+        )
 
         print("\nTest Results:")
         print(json.dumps(result, indent=2))
@@ -253,7 +257,9 @@ def main():
     models_parser.set_defaults(func=cmd_models)
 
     # Model info command
-    info_parser = subparsers.add_parser("model-info", help="Get information about a specific model")
+    info_parser = subparsers.add_parser(
+        "model-info", help="Get information about a specific model"
+    )
     info_parser.add_argument("model", help="Model name")
     info_parser.set_defaults(func=cmd_model_info)
 
@@ -263,9 +269,15 @@ def main():
     invoke_parser.add_argument("signature", help="Signature class name")
     invoke_parser.add_argument("--inputs", help="JSON string of inputs")
     invoke_parser.add_argument("--inputs-file", help="Path to JSON file with inputs")
-    invoke_parser.add_argument("--output", help="Output file for results (default: stdout)")
-    invoke_parser.add_argument("--source-features", help="Comma-separated source feature URIs")
-    invoke_parser.add_argument("--source-signatures", help="Comma-separated source signature URIs")
+    invoke_parser.add_argument(
+        "--output", help="Output file for results (default: stdout)"
+    )
+    invoke_parser.add_argument(
+        "--source-features", help="Comma-separated source feature URIs"
+    )
+    invoke_parser.add_argument(
+        "--source-signatures", help="Comma-separated source signature URIs"
+    )
     invoke_parser.set_defaults(func=cmd_invoke)
 
     # Receipts command
@@ -277,7 +289,10 @@ def main():
         help="Filter by success status (true/false)",
     )
     receipts_parser.add_argument(
-        "--limit", type=int, default=100, help="Maximum number of receipts (default: 100)"
+        "--limit",
+        type=int,
+        default=100,
+        help="Maximum number of receipts (default: 100)",
     )
     receipts_parser.set_defaults(func=cmd_receipts)
 

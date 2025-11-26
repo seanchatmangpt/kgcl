@@ -10,7 +10,12 @@ import pytest
 
 from kgcl.hooks.embeddings import EmbeddingsManager
 from kgcl.hooks.nlp_query_builder import NLPQuery, NLPQueryBuilder
-from kgcl.hooks.semantic_analysis import EntityType, RelationType, SemanticAnalyzer, SemanticEntity
+from kgcl.hooks.semantic_analysis import (
+    EntityType,
+    RelationType,
+    SemanticAnalyzer,
+    SemanticEntity,
+)
 
 
 class TestEmbeddingsManager:
@@ -111,7 +116,7 @@ class TestEmbeddingsManager:
 
         # First result should be most similar
         text1, score1 = results[0]
-        text2, score2 = results[1]
+        _text2, score2 = results[1]
         assert score1 >= score2
 
         # Should find semantically related texts

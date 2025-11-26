@@ -4,6 +4,7 @@ Provides the main ingestion interface for KGCL events.
 """
 
 import asyncio
+import logging
 from collections.abc import Callable
 from datetime import UTC, datetime
 from pathlib import Path
@@ -15,12 +16,16 @@ from kgcl.ingestion.converters import RDFConverter
 from kgcl.ingestion.materializer import FeatureMaterializer
 from kgcl.ingestion.models import AppEvent, BrowserVisit, CalendarBlock, EventBatch
 
+logger = logging.getLogger(__name__)
+
 
 class IngestionHook:
     """Hook for pre/post ingestion processing."""
 
     def __init__(
-        self, name: str, handler: Callable[[list[AppEvent | BrowserVisit | CalendarBlock]], Any]
+        self,
+        name: str,
+        handler: Callable[[list[AppEvent | BrowserVisit | CalendarBlock]], Any],
     ) -> None:
         """Initialize hook.
 
@@ -34,7 +39,9 @@ class IngestionHook:
         self.name = name
         self.handler = handler
 
-    async def execute(self, events: list[AppEvent | BrowserVisit | CalendarBlock]) -> Any:
+    async def execute(
+        self, events: list[AppEvent | BrowserVisit | CalendarBlock]
+    ) -> Any:
         """Execute hook handler.
 
         Parameters
@@ -92,7 +99,9 @@ class IngestionService:
             "last_ingestion": None,
         }
 
-    def ingest_event(self, event: AppEvent | BrowserVisit | CalendarBlock) -> dict[str, Any]:
+    def ingest_event(
+        self, event: AppEvent | BrowserVisit | CalendarBlock
+    ) -> dict[str, Any]:
         """Ingest single event.
 
         Parameters
@@ -144,7 +153,9 @@ class IngestionService:
 
             # Update stats
             self._stats["total_events"] += 1
-            self._stats["last_ingestion"] = datetime.now(UTC).replace(tzinfo=None).isoformat()
+            self._stats["last_ingestion"] = (
+                datetime.now(UTC).replace(tzinfo=None).isoformat()
+            )
 
             return {
                 "status": "success",
@@ -220,7 +231,9 @@ class IngestionService:
             # Update stats
             self._stats["total_events"] += len(filtered_events)
             self._stats["total_batches"] += 1
-            self._stats["last_ingestion"] = datetime.now(UTC).replace(tzinfo=None).isoformat()
+            self._stats["last_ingestion"] = (
+                datetime.now(UTC).replace(tzinfo=None).isoformat()
+            )
 
             return {
                 "status": "success",
@@ -261,9 +274,11 @@ class IngestionService:
         # Materialize features if enabled
         features = []
         if self.config.feature.enabled_features:
+            from datetime import timedelta
+
             now = datetime.now(UTC).replace(tzinfo=None)
             window_start = now.replace(minute=0, second=0, microsecond=0)
-            window_end = window_start.replace(hour=window_start.hour + 1)
+            window_end = window_start + timedelta(hours=1)
             features = self.materializer.materialize(events, window_start, window_end)
 
         return {
@@ -272,7 +287,9 @@ class IngestionService:
             "features_computed": len(features),
         }
 
-    def _should_filter_event(self, event: AppEvent | BrowserVisit | CalendarBlock) -> bool:
+    def _should_filter_event(
+        self, event: AppEvent | BrowserVisit | CalendarBlock
+    ) -> bool:
         """Check if event should be filtered.
 
         Parameters
@@ -308,7 +325,9 @@ class IngestionService:
         return False
 
     async def _execute_hooks(
-        self, hooks: list[IngestionHook], events: list[AppEvent | BrowserVisit | CalendarBlock]
+        self,
+        hooks: list[IngestionHook],
+        events: list[AppEvent | BrowserVisit | CalendarBlock],
     ) -> None:
         """Execute list of hooks.
 
@@ -324,10 +343,20 @@ class IngestionService:
                 await hook.execute(events)
             except Exception as e:
                 # Log error but don't fail ingestion
-                print(f"Hook {hook.name} failed: {e}")
+                logger.error(
+                    "Hook execution failed",
+                    extra={
+                        "hook_name": hook.name,
+                        "error": str(e),
+                        "event_count": len(events),
+                    },
+                    exc_info=True,
+                )
 
     def register_pre_hook(
-        self, name: str, handler: Callable[[list[AppEvent | BrowserVisit | CalendarBlock]], Any]
+        self,
+        name: str,
+        handler: Callable[[list[AppEvent | BrowserVisit | CalendarBlock]], Any],
     ) -> None:
         """Register pre-ingestion hook.
 
@@ -341,7 +370,9 @@ class IngestionService:
         self._pre_hooks.append(IngestionHook(name, handler))
 
     def register_post_hook(
-        self, name: str, handler: Callable[[list[AppEvent | BrowserVisit | CalendarBlock]], Any]
+        self,
+        name: str,
+        handler: Callable[[list[AppEvent | BrowserVisit | CalendarBlock]], Any],
     ) -> None:
         """Register post-ingestion hook.
 

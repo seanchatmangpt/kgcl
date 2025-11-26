@@ -135,22 +135,14 @@ class StandardWorkLoop:
         # Execute each step in sequence
         try:
             self._execute_discover(state)
-            if state.failed:
-                return state
-
-            self._execute_align(state)
-            if state.failed:
-                return state
-
-            self._execute_regenerate(state)
-            if state.failed:
-                return state
-
-            self._execute_review(state)
-            if state.failed:
-                return state
-
-            self._execute_remove(state)
+            if not state.failed:
+                self._execute_align(state)
+            if not state.failed:
+                self._execute_regenerate(state)
+            if not state.failed:
+                self._execute_review(state)
+            if not state.failed:
+                self._execute_remove(state)
 
         except Exception as e:
             # Capture unexpected errors
@@ -191,12 +183,18 @@ class StandardWorkLoop:
                 step=step,
                 success=True,
                 started_at=started_at,
-                data={"ingested": ingested_data, "record_count": ingested_data.get("count", 0)},
+                data={
+                    "ingested": ingested_data,
+                    "record_count": ingested_data.get("count", 0),
+                },
             )
 
         except Exception as e:
             state.complete_step(
-                step=step, success=False, started_at=started_at, errors=[f"Ingest failed: {e!s}"]
+                step=step,
+                success=False,
+                started_at=started_at,
+                errors=[f"Ingest failed: {e!s}"],
             )
 
     def _execute_align(self, state: WorkflowState) -> None:
@@ -372,7 +370,9 @@ class StandardWorkLoop:
                     "cleanup_opportunities": cleanup_opportunities,
                     "waste_count": len(waste_items),
                 },
-                warnings=[f"Found {len(waste_items)} waste items"] if waste_items else [],
+                warnings=[f"Found {len(waste_items)} waste items"]
+                if waste_items
+                else [],
             )
 
         except Exception as e:

@@ -17,7 +17,7 @@ Analyze → Auto-fix → Batch Critical → Batch Style → Verify
 ## Step 1: Analyze Violations
 
 ```bash
-cargo-make lint-check 2>&1 | tee /tmp/ruff.log
+poe lint-check 2>&1 | tee /tmp/ruff.log
 rg -n "error" /tmp/ruff.log | head -50
 ```
 
@@ -33,15 +33,15 @@ Document the count per code area to plan batching.
 ## Step 2: Auto-Fix What Ruff Can
 
 ```bash
-cargo-make lint        # runs ruff --fix
+poe lint        # runs ruff --fix
 ```
 
 Auto-fix handles:
 - Import sorting/removal
-- Simple formatting (but still run `cargo-make format`)
+- Simple formatting (but still run `poe format`)
 - Some docstring spacing
 
-Re-run `cargo-make lint-check` afterwards to view remaining violations.
+Re-run `poe lint-check` afterwards to view remaining violations.
 
 ## Step 3: Fix Critical Issues First
 
@@ -94,10 +94,10 @@ Re-run `cargo-make lint-check` afterwards to view remaining violations.
 ## Step 5: Verify
 
 ```bash
-cargo-make format
-cargo-make lint
-cargo-make type-check
-cargo-make test
+poe format
+poe lint
+poe type-check
+poe test
 .githooks/pre-commit
 ```
 
@@ -123,13 +123,13 @@ All commands must exit 0. Lint phase should output “0 violations”.
 ## Example Mini-Workflow
 
 ```bash
-cargo-make lint-check                          # F401, D102 flagged
+poe lint-check                          # F401, D102 flagged
 # Remove unused import in src/kgcl/hooks/core.py
 # Add docstring to HookRegistry.register
-cargo-make lint-check                          # clean
-cargo-make format
-cargo-make type-check
-cargo-make test
+poe lint-check                          # clean
+poe format
+poe type-check
+poe test
 ```
 
 ## Tips

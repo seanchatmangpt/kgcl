@@ -91,7 +91,9 @@ class TestFeatureMaterialization:
         features = materializer.materialize(events, window_start, window_end)
 
         # Should have feature for github.com
-        github_feature = next((f for f in features if "github.com" in f.feature_id), None)
+        github_feature = next(
+            (f for f in features if "github.com" in f.feature_id), None
+        )
         assert github_feature is not None
         assert github_feature.value == 8  # 8 visits
         assert github_feature.aggregation_type == "count"
@@ -108,7 +110,9 @@ class TestFeatureMaterialization:
         features = materializer.materialize(events, window_start, window_end)
 
         # Should have meeting_count feature
-        meeting_count = next((f for f in features if f.feature_id == "meeting_count"), None)
+        meeting_count = next(
+            (f for f in features if f.feature_id == "meeting_count"), None
+        )
         assert meeting_count is not None
         assert meeting_count.value == 2  # 2 meetings
 
@@ -131,7 +135,9 @@ class TestFeatureMaterialization:
         features = materializer.materialize(events, window_start, window_end)
 
         # Should have context_switches feature
-        switches = next((f for f in features if f.feature_id == "context_switches"), None)
+        switches = next(
+            (f for f in features if f.feature_id == "context_switches"), None
+        )
         assert switches is not None
         # 12 app events alternating between 2 apps = 11 switches
         assert switches.value == 11
@@ -171,7 +177,9 @@ class TestFeatureMaterialization:
 
     def test_incremental_updates(self):
         """Test incremental feature materialization."""
-        config = FeatureConfig(enabled_features=["app_usage_time"], incremental_updates=True)
+        config = FeatureConfig(
+            enabled_features=["app_usage_time"], incremental_updates=True
+        )
         materializer = FeatureMaterializer(config)
 
         # Initial batch
@@ -179,11 +187,15 @@ class TestFeatureMaterialization:
         window_start = datetime(2024, 11, 24, 10, 0, 0)
         window_end = window_start + timedelta(hours=2)
 
-        initial_features = materializer.materialize(initial_events, window_start, window_end)
+        initial_features = materializer.materialize(
+            initial_events, window_start, window_end
+        )
 
         # New events arrive
         new_events = create_event_batch()[6:9]  # Next 3 events
-        updated_features = materializer.materialize_incremental(new_events, initial_features)
+        updated_features = materializer.materialize_incremental(
+            new_events, initial_features
+        )
 
         # Should have updated features
         assert len(updated_features) >= len(initial_features)

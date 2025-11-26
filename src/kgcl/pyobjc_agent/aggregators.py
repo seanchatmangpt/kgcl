@@ -9,7 +9,7 @@ import json
 import logging
 from collections import defaultdict
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -151,13 +151,13 @@ class FrontmostAppAggregator(FeatureAggregator):
             return []
 
         # Group events by time windows
-        windows = self._group_by_windows(events)
+        windows: dict[TimeWindow, list[dict[str, Any]]] = self._group_by_windows(events)
 
         features = []
 
         for window, window_events in windows.items():
             # Calculate app usage time
-            app_times = self._calculate_app_times(window_events)
+            app_times: dict[str, float] = self._calculate_app_times(window_events)
 
             # App switch count
             switch_count = sum(
@@ -165,7 +165,9 @@ class FrontmostAppAggregator(FeatureAggregator):
             )
 
             # Most used app
-            most_used_app = max(app_times.items(), key=lambda x: x[1])[0] if app_times else None
+            most_used_app = (
+                max(app_times.items(), key=lambda x: x[1])[0] if app_times else None
+            )
 
             # Total active time
             total_time = sum(app_times.values())
@@ -205,15 +207,21 @@ class FrontmostAppAggregator(FeatureAggregator):
                         time_window=window,
                         value=most_used_app,
                         unit="app_name",
-                        metadata={"duration_minutes": round(app_times[most_used_app] / 60.0, 2)},
+                        metadata={
+                            "duration_minutes": round(
+                                app_times[most_used_app] / 60.0, 2
+                            )
+                        },
                     )
                 )
 
         return features
 
-    def _group_by_windows(self, events: list[dict[str, Any]]) -> dict[TimeWindow, list[dict]]:
+    def _group_by_windows(
+        self, events: list[dict[str, Any]]
+    ) -> dict[TimeWindow, list[dict[str, Any]]]:
         """Group events by time windows."""
-        windows = {}
+        windows: dict[TimeWindow, list[dict[str, Any]]] = {}
 
         for event in events:
             timestamp_str = event.get("timestamp")
@@ -249,7 +257,7 @@ class FrontmostAppAggregator(FeatureAggregator):
         -------
             Dictionary mapping app names to seconds
         """
-        app_times = defaultdict(float)
+        app_times: defaultdict[str, float] = defaultdict(float)
 
         # Sort events by timestamp
         sorted_events = sorted(events, key=lambda e: e.get("timestamp", ""))
@@ -261,9 +269,14 @@ class FrontmostAppAggregator(FeatureAggregator):
             # Calculate duration until next event or use session duration
             if i < len(sorted_events) - 1:
                 # Time until next event
-                current_time = datetime.fromisoformat(event.get("timestamp"))
-                next_time = datetime.fromisoformat(sorted_events[i + 1].get("timestamp"))
-                duration = (next_time - current_time).total_seconds()
+                current_timestamp = event.get("timestamp")
+                next_timestamp = sorted_events[i + 1].get("timestamp")
+                if current_timestamp is not None and next_timestamp is not None:
+                    current_time = datetime.fromisoformat(current_timestamp)
+                    next_time = datetime.fromisoformat(next_timestamp)
+                    duration = (next_time - current_time).total_seconds()
+                else:
+                    duration = 0
             else:
                 # Last event - use session duration if available
                 duration = data.get("session_duration_seconds", 0) or 0
@@ -294,7 +307,9 @@ class BrowserHistoryAggregator(FeatureAggregator):
 
         for window, window_events in windows.items():
             # Total visits
-            total_visits = sum(e.get("data", {}).get("total_visits", 0) for e in window_events)
+            total_visits = sum(
+                e.get("data", {}).get("total_visits", 0) for e in window_events
+            )
 
             # New visits
             new_visits_count = sum(
@@ -309,7 +324,7 @@ class BrowserHistoryAggregator(FeatureAggregator):
                     unique_domains.add(domain_data.get("domain"))
 
             # Browser usage
-            browser_visits = defaultdict(int)
+            browser_visits: defaultdict[str, int] = defaultdict(int)
             for event in window_events:
                 browsers = event.get("data", {}).get("browsers", {})
                 for browser, count in browsers.items():
@@ -355,9 +370,11 @@ class BrowserHistoryAggregator(FeatureAggregator):
 
         return features
 
-    def _group_by_windows(self, events: list[dict[str, Any]]) -> dict[TimeWindow, list[dict]]:
+    def _group_by_windows(
+        self, events: list[dict[str, Any]]
+    ) -> dict[TimeWindow, list[dict[str, Any]]]:
         """Group events by time windows."""
-        windows = {}
+        windows: dict[TimeWindow, list[dict[str, Any]]] = {}
 
         for event in events:
             timestamp_str = event.get("timestamp")
@@ -403,7 +420,9 @@ class CalendarAggregator(FeatureAggregator):
 
         for window, window_events in windows.items():
             # Count times when busy
-            busy_count = sum(1 for e in window_events if e.get("data", {}).get("is_busy", False))
+            busy_count = sum(
+                1 for e in window_events if e.get("data", {}).get("is_busy", False)
+            )
 
             # Average upcoming events
             avg_upcoming = (
@@ -415,12 +434,16 @@ class CalendarAggregator(FeatureAggregator):
 
             # New events started
             new_events = sum(
-                1 for e in window_events if e.get("data", {}).get("new_event_started", False)
+                1
+                for e in window_events
+                if e.get("data", {}).get("new_event_started", False)
             )
 
             # Events today (use latest value)
             events_today = (
-                window_events[-1].get("data", {}).get("events_today", 0) if window_events else 0
+                window_events[-1].get("data", {}).get("events_today", 0)
+                if window_events
+                else 0
             )
 
             # Create features
@@ -463,9 +486,11 @@ class CalendarAggregator(FeatureAggregator):
 
         return features
 
-    def _group_by_windows(self, events: list[dict[str, Any]]) -> dict[TimeWindow, list[dict]]:
+    def _group_by_windows(
+        self, events: list[dict[str, Any]]
+    ) -> dict[TimeWindow, list[dict[str, Any]]]:
         """Group events by time windows."""
-        windows = {}
+        windows: dict[TimeWindow, list[dict[str, Any]]] = {}
 
         for event in events:
             timestamp_str = event.get("timestamp")
@@ -532,7 +557,7 @@ def aggregate_jsonl_file(
     if output_path:
         try:
             output = {
-                "aggregated_at": datetime.utcnow().isoformat(),
+                "aggregated_at": datetime.now(UTC).isoformat(),
                 "input_file": input_path,
                 "event_count": len(events),
                 "feature_count": len(features),

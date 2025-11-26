@@ -63,6 +63,12 @@ class ErrorSanitizer:
         r"line \d+",  # Standalone line numbers
         r"\bfunction [a-z_][a-z0-9_]*",  # Function names with "function" prefix
         r"\b[a-z_]+_[a-z0-9_]+\s*$",  # Snake_case identifiers at end (likely functions/vars)
+        # API keys and secrets
+        r"sk-[a-zA-Z0-9]{6,}",  # OpenAI/Anthropic-style API keys (sk-...)
+        r"api[_-]?key[:\s]*[a-zA-Z0-9\-_]+",  # Generic API key references
+        r"secret[:\s]*[a-zA-Z0-9\-_]+",  # Generic secrets
+        r"token[:\s]*[a-zA-Z0-9\-_]+",  # Tokens
+        r"password[:\s]*[a-zA-Z0-9\-_]+",  # Passwords
     ]
 
     def sanitize(self, error: Exception) -> SanitizedError:

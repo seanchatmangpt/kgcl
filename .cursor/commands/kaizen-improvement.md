@@ -78,14 +78,14 @@ if phase is HookPhase.RUN:
 Run the full gate relevant to the change:
 
 ```bash
-cargo-make format
-cargo-make lint
-cargo-make type-check
-cargo-make test
+poe format
+poe lint
+poe type-check
+poe test
 ```
 
 Add specialized suites if touched:
-- `cargo-make unrdf-full` for UNRDF components
+- `poe unrdf-full` for UNRDF components
 - `poe pytest tests/cli -vv` for CLI updates
 
 Ensure the improvement actually provides value (readability, perf numbers, etc.). If there’s no measurable improvement, iterate or revert.

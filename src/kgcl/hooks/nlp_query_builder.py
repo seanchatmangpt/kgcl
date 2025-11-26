@@ -7,6 +7,7 @@ for knowledge graph querying.
 
 import re
 from dataclasses import dataclass, field
+from typing import Any
 
 from .semantic_analysis import SemanticAnalyzer
 
@@ -23,7 +24,7 @@ class NLPQuery:
     query_type: str = "SELECT"
     variables: list[str] = field(default_factory=list)
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary."""
         return {
             "original": self.original_text,
@@ -44,9 +45,9 @@ class NLPQueryBuilder:
     into SPARQL queries for knowledge graph querying.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize NLP query builder."""
-        self.templates: dict[str, dict] = {}
+        self.templates: dict[str, dict[str, Any]] = {}
         self.semantic_analyzer = SemanticAnalyzer()
         self._load_templates()
 
@@ -98,7 +99,10 @@ class NLPQueryBuilder:
             },
             # "Which X has Y" pattern
             "which_has": {
-                "patterns": [r"which\s+(\w+)\s+(?:has|have)\s+(\w+)", r"(\w+)\s+with\s+(\w+)"],
+                "patterns": [
+                    r"which\s+(\w+)\s+(?:has|have)\s+(\w+)",
+                    r"(\w+)\s+with\s+(\w+)",
+                ],
                 "sparql": """
                     SELECT ?item ?label
                     WHERE {{
@@ -112,7 +116,10 @@ class NLPQueryBuilder:
             },
             # "X of Y" pattern
             "property_of": {
-                "patterns": [r"(\w+)\s+of\s+(\w+)", r"what\s+is\s+the\s+(\w+)\s+of\s+(\w+)"],
+                "patterns": [
+                    r"(\w+)\s+of\s+(\w+)",
+                    r"what\s+is\s+the\s+(\w+)\s+of\s+(\w+)",
+                ],
                 "sparql": """
                     SELECT ?value
                     WHERE {{
@@ -138,7 +145,11 @@ class NLPQueryBuilder:
             },
             # "Show classes" pattern
             "show_classes": {
-                "patterns": [r"(?:show|list)\s+classes", r"what\s+classes", r"all\s+types"],
+                "patterns": [
+                    r"(?:show|list)\s+classes",
+                    r"what\s+classes",
+                    r"all\s+types",
+                ],
                 "sparql": """
                     SELECT DISTINCT ?class (COUNT(?instance) as ?count)
                     WHERE {{
@@ -215,7 +226,11 @@ class NLPQueryBuilder:
         )
 
     def _build_sparql_from_template(
-        self, template_name: str, groups: list[str], entities: list[str], relations: list[str]
+        self,
+        template_name: str,
+        groups: list[str],
+        entities: list[str],
+        relations: list[str],
     ) -> str:
         """Build SPARQL query from template."""
         template = self.templates[template_name]
@@ -335,7 +350,11 @@ class NLPQueryBuilder:
         return self._build_generic_query(entities, relations)
 
     def add_template(
-        self, name: str, patterns: list[str], sparql_template: str, confidence: float = 0.5
+        self,
+        name: str,
+        patterns: list[str],
+        sparql_template: str,
+        confidence: float = 0.5,
     ) -> None:
         """
         Add custom query template.

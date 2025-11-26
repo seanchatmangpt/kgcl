@@ -73,7 +73,9 @@ class FrontmostAppCollector(BaseCollector):
         """
         try:
             # Collect frontmost app data
-            capability_data = self._plugin.collect_capability_data("frontmost_application")
+            capability_data = self._plugin.collect_capability_data(
+                "frontmost_application"
+            )
 
             if capability_data.error:
                 logger.error(f"Error collecting frontmost app: {capability_data.error}")
@@ -90,22 +92,23 @@ class FrontmostAppCollector(BaseCollector):
 
             # Detect app switch
             is_switch = (
-                self._last_app_bundle_id is not None and bundle_id != self._last_app_bundle_id
+                self._last_app_bundle_id is not None
+                and bundle_id != self._last_app_bundle_id
             )
 
             # Calculate session duration if switching
             session_duration = None
             if is_switch and self._session_start:
-                from datetime import datetime
+                from datetime import UTC, datetime
 
-                current_time = datetime.utcnow()
+                current_time = datetime.now(UTC)
                 session_duration = (current_time - self._session_start).total_seconds()
 
             # Update tracking
             if is_switch:
-                from datetime import datetime
+                from datetime import UTC, datetime
 
-                self._session_start = datetime.utcnow()
+                self._session_start = datetime.now(UTC)
 
             self._last_app_bundle_id = bundle_id
             self._last_app_name = app_name
@@ -149,7 +152,11 @@ def create_frontmost_app_collector(
         output_path=output_path or "/Users/sac/dev/kgcl/data/frontmost_app.jsonl",
         batch_size=kwargs.get("batch_size", 50),
         batch_timeout_seconds=kwargs.get("batch_timeout_seconds", 60.0),
-        **{k: v for k, v in kwargs.items() if k not in ["batch_size", "batch_timeout_seconds"]},
+        **{
+            k: v
+            for k, v in kwargs.items()
+            if k not in ["batch_size", "batch_timeout_seconds"]
+        },
     )
 
     return FrontmostAppCollector(config)

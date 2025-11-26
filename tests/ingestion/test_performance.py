@@ -20,7 +20,9 @@ class TestPerformance:
         """Test batch ingestion throughput."""
         with tempfile.TemporaryDirectory() as tmpdir:
             config = IngestionConfig(
-                collector=CollectorConfig(output_directory=Path(tmpdir), batch_size=1000)
+                collector=CollectorConfig(
+                    output_directory=Path(tmpdir), batch_size=1000
+                )
             )
 
             service = IngestionService(config)
@@ -59,7 +61,11 @@ class TestPerformance:
             config = IngestionConfig(
                 collector=CollectorConfig(output_directory=Path(tmpdir)),
                 feature=FeatureConfig(
-                    enabled_features=["app_usage_time", "browser_domain_visits", "context_switches"]
+                    enabled_features=[
+                        "app_usage_time",
+                        "browser_domain_visits",
+                        "context_switches",
+                    ]
                 ),
             )
 
@@ -94,7 +100,9 @@ class TestPerformance:
 
             # Measure materialization time
             start_time = time.perf_counter()
-            features = service.materializer.materialize(events, window_start, window_end)
+            features = service.materializer.materialize(
+                events, window_start, window_end
+            )
             end_time = time.perf_counter()
 
             elapsed = end_time - start_time
@@ -102,7 +110,9 @@ class TestPerformance:
 
             assert len(features) > 0
             assert elapsed < 5.0  # Should complete in under 5 seconds
-            print(f"Materialization: {throughput:.2f} events/sec, {len(features)} features")
+            print(
+                f"Materialization: {throughput:.2f} events/sec, {len(features)} features"
+            )
 
     def test_flush_latency(self):
         """Test flush operation latency."""
@@ -133,7 +143,9 @@ class TestPerformance:
 
             assert result["events_flushed"] == 50
             assert elapsed < 1.0  # Should flush in under 1 second
-            print(f"Flush latency: {elapsed * 1000:.2f}ms for {result['events_flushed']} events")
+            print(
+                f"Flush latency: {elapsed * 1000:.2f}ms for {result['events_flushed']} events"
+            )
 
             service.stop()
 
@@ -266,7 +278,9 @@ class TestPerformance:
 
         with tempfile.TemporaryDirectory() as tmpdir:
             config = IngestionConfig(
-                collector=CollectorConfig(output_directory=Path(tmpdir), batch_size=1000)
+                collector=CollectorConfig(
+                    output_directory=Path(tmpdir), batch_size=1000
+                )
             )
 
             service = IngestionService(config)

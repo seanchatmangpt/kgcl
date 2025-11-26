@@ -24,7 +24,9 @@ logger = logging.getLogger(__name__)
 
 
 def create_app(
-    graph_file: Path | None = None, shapes_file: Path | None = None, enable_hooks: bool = True
+    graph_file: Path | None = None,
+    shapes_file: Path | None = None,
+    enable_hooks: bool = True,
 ) -> Flask:
     """Create Flask application for UNRDF engine.
 
@@ -61,7 +63,9 @@ def create_app(
         hook_executor = HookExecutor(registry)
 
     # Initialize pipeline
-    pipeline = IngestionPipeline(engine=engine, validator=validator, hook_executor=hook_executor)
+    pipeline = IngestionPipeline(
+        engine=engine, validator=validator, hook_executor=hook_executor
+    )
 
     # Store in app context
     app.config["engine"] = engine
@@ -175,7 +179,11 @@ def create_app(
                 if prov:
                     provenance_data.append(
                         {
-                            "triple": {"subject": str(s), "predicate": str(p), "object": str(o)},
+                            "triple": {
+                                "subject": str(s),
+                                "predicate": str(p),
+                                "object": str(o),
+                            },
                             "provenance": prov.to_dict(),
                         }
                     )

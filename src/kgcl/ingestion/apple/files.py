@@ -81,15 +81,15 @@ class FilesIngestEngine(BaseIngestEngine):
             self._add_literal(file_uri, self.schema_ns.url, f"file://{file_path}")
 
             # Add creation date
-            created_date = getattr(source_object, "contentCreationDate", None) or getattr(
-                source_object, "created_date", None
-            )
+            created_date = getattr(
+                source_object, "contentCreationDate", None
+            ) or getattr(source_object, "created_date", None)
             self._add_literal(file_uri, self.schema_ns.dateCreated, created_date)
 
             # Add modification date
-            modified_date = getattr(source_object, "contentModificationDate", None) or getattr(
-                source_object, "modified_date", None
-            )
+            modified_date = getattr(
+                source_object, "contentModificationDate", None
+            ) or getattr(source_object, "modified_date", None)
             self._add_literal(file_uri, self.schema_ns.dateModified, modified_date)
 
             # Add file size
@@ -126,7 +126,11 @@ class FilesIngestEngine(BaseIngestEngine):
                 receipt_hash=receipt_hash,
                 items_processed=1,
                 errors=errors,
-                metadata={"file_path": file_path, "file_name": file_name, "file_size": file_size},
+                metadata={
+                    "file_path": file_path,
+                    "file_name": file_name,
+                    "file_size": file_size,
+                },
             )
 
         except Exception as e:

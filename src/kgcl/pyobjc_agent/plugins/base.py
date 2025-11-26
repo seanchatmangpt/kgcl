@@ -8,7 +8,7 @@ discover and monitor specific macOS features through PyObjC frameworks.
 import logging
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import UTC, datetime
 from enum import Enum
 from typing import Any
 
@@ -212,7 +212,9 @@ class BaseCapabilityPlugin(ABC):
             entitlements = self.check_entitlements()
             missing = [k for k, v in entitlements.items() if not v]
             if missing:
-                logger.warning(f"Plugin {self.plugin_id} missing entitlements: {missing}")
+                logger.warning(
+                    f"Plugin {self.plugin_id} missing entitlements: {missing}"
+                )
 
             # Discover capabilities
             self._capabilities_cache = self.discover_capabilities()
@@ -262,7 +264,9 @@ class BaseCapabilityPlugin(ABC):
             RuntimeError: If plugin not initialized
         """
         if self.status != PluginStatus.READY:
-            raise RuntimeError(f"Plugin {self.plugin_id} not ready. Status: {self.status}")
+            raise RuntimeError(
+                f"Plugin {self.plugin_id} not ready. Status: {self.status}"
+            )
 
         if self._capabilities_cache is None:
             self._capabilities_cache = self.discover_capabilities()
@@ -300,7 +304,9 @@ class BaseCapabilityPlugin(ABC):
             List of collected capability data
         """
         if self.status != PluginStatus.READY:
-            logger.warning(f"Cannot collect from plugin {self.plugin_id}. Status: {self.status}")
+            logger.warning(
+                f"Cannot collect from plugin {self.plugin_id}. Status: {self.status}"
+            )
             return []
 
         results = []
@@ -311,12 +317,14 @@ class BaseCapabilityPlugin(ABC):
                 data = self.collect_capability_data(capability.name, parameters)
                 results.append(data)
             except Exception as e:
-                logger.error(f"Failed to collect {capability.name} from {self.plugin_id}: {e}")
+                logger.error(
+                    f"Failed to collect {capability.name} from {self.plugin_id}: {e}"
+                )
                 # Add error result
                 results.append(
                     CapabilityData(
                         capability_name=capability.name,
-                        timestamp=datetime.utcnow(),
+                        timestamp=datetime.now(UTC),
                         data={},
                         error=str(e),
                     )

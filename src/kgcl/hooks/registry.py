@@ -349,7 +349,9 @@ class HookRegistry:
         # Validate each effect
         for effect in hook.effects:
             if not effect.command:
-                raise ValueError(f"Effect {effect.label} in hook {hook.name} has no command")
+                raise ValueError(
+                    f"Effect {effect.label} in hook {hook.name} has no command"
+                )
 
     def reload(self) -> None:
         """Reload hooks from file and rebuild indexes."""

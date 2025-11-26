@@ -13,7 +13,9 @@ class TestHookName:
         assert isinstance(name, HookName)
         assert name == "valid-hook_01"
 
-    @pytest.mark.parametrize("raw", ["", "   ", "bad name", "name/with space", "x" * 200])
+    @pytest.mark.parametrize(
+        "raw", ["", "   ", "bad name", "name/with space", "x" * 200]
+    )
     def test_invalid_names_raise(self, raw: str) -> None:
         with pytest.raises(ValueError):
             HookName.new(raw)

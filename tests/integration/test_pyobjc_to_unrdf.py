@@ -95,7 +95,9 @@ class TestPyObjCToUNRDF:
             app_event = events[0]
 
             result = pipeline.ingest_json(
-                data=app_event, agent="pyobjc_agent", reason="App event from PyObjC AppKit plugin"
+                data=app_event,
+                agent="pyobjc_agent",
+                reason="App event from PyObjC AppKit plugin",
             )
 
             assert result.success is True
@@ -129,7 +131,9 @@ class TestPyObjCToUNRDF:
             )
 
             assert result.success is True
-            assert result.triples_added >= len(events) * 3  # At least 3 triples per event
+            assert (
+                result.triples_added >= len(events) * 3
+            )  # At least 3 triples per event
 
             # Verify all events present
             for event in events:
@@ -188,7 +192,9 @@ class TestPyObjCToUNRDF:
             event = create_pyobjc_format_events()[0]
 
             result = pipeline.ingest_json(
-                data=event, agent="pyobjc_appkit_plugin", reason="Automatic app monitoring"
+                data=event,
+                agent="pyobjc_appkit_plugin",
+                reason="Automatic app monitoring",
             )
 
             assert result.success is True
@@ -198,7 +204,7 @@ class TestPyObjCToUNRDF:
             assert len(all_provenance) > 0
 
             # Verify agent and reason recorded
-            for _triple, prov in all_provenance.items():
+            for prov in all_provenance.values():
                 assert prov.agent == "pyobjc_appkit_plugin"
                 assert prov.reason == "Automatic app monitoring"
                 assert prov.timestamp is not None
@@ -218,14 +224,18 @@ class TestPyObjCToUNRDF:
 
             class TestPreIngestionHook(KnowledgeHook):
                 def __init__(self) -> None:
-                    super().__init__(name="test_pre_ingestion", phases=[HookPhase.PRE_INGESTION])
+                    super().__init__(
+                        name="test_pre_ingestion", phases=[HookPhase.PRE_INGESTION]
+                    )
 
                 def execute(self, context: HookContext) -> None:
                     pre_ingestion_called.append(context.transaction_id)
 
             class TestPostCommitHook(KnowledgeHook):
                 def __init__(self) -> None:
-                    super().__init__(name="test_post_commit", phases=[HookPhase.POST_COMMIT])
+                    super().__init__(
+                        name="test_post_commit", phases=[HookPhase.POST_COMMIT]
+                    )
 
                 def execute(self, context: HookContext) -> None:
                     post_commit_called.append(context.transaction_id)
@@ -302,7 +312,9 @@ class TestPyObjCToUNRDF:
             class HighPriorityHook(KnowledgeHook):
                 def __init__(self) -> None:
                     super().__init__(
-                        name="high_priority", phases=[HookPhase.POST_COMMIT], priority=100
+                        name="high_priority",
+                        phases=[HookPhase.POST_COMMIT],
+                        priority=100,
                     )
 
                 def execute(self, _context: HookContext) -> None:
@@ -342,7 +354,9 @@ class TestPyObjCToUNRDF:
             class FailingValidationHook(KnowledgeHook):
                 def __init__(self) -> None:
                     super().__init__(
-                        name="failing_validation", phases=[HookPhase.POST_VALIDATION], priority=1000
+                        name="failing_validation",
+                        phases=[HookPhase.POST_VALIDATION],
+                        priority=1000,
                     )
 
                 def execute(self, context: HookContext) -> None:

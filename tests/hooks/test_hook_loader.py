@@ -125,7 +125,9 @@ apple:DataIngested a kgc:HookEvent ;
         assert hook is not None
         assert hook.name == "IngestHook"
 
-    def test_get_hook_by_name_returns_none_for_missing(self, loader: HookLoader) -> None:
+    def test_get_hook_by_name_returns_none_for_missing(
+        self, loader: HookLoader
+    ) -> None:
         """Test get_hook_by_name returns None for missing hooks."""
         hook = loader.get_hook_by_name("NonexistentHook")
 
@@ -245,7 +247,10 @@ class TestHookDefinition:
     def test_hook_definition_valid_with_event_trigger(self) -> None:
         """Test HookDefinition accepts event trigger."""
         effect = HookEffect(
-            label="Test Effect", description="Test", command="test-cmd", target="output.txt"
+            label="Test Effect",
+            description="Test",
+            command="test-cmd",
+            target="output.txt",
         )
 
         hook = HookDefinition(
@@ -265,7 +270,10 @@ class TestHookDefinition:
     def test_hook_definition_valid_with_cron_trigger(self) -> None:
         """Test HookDefinition accepts cron trigger."""
         effect = HookEffect(
-            label="Test Effect", description="Test", command="test-cmd", target="output.txt"
+            label="Test Effect",
+            description="Test",
+            command="test-cmd",
+            target="output.txt",
         )
 
         hook = HookDefinition(

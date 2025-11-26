@@ -5,7 +5,7 @@ and suggests decommissioning with cleanup savings estimates.
 """
 
 from dataclasses import dataclass
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta, timezone
 from typing import Any
 
 from rdflib import Graph, Literal, Namespace
@@ -83,7 +83,7 @@ class StaleItemsGenerator(ProjectionGenerator):
         """
         super().__init__(graph)
         self.stale_threshold = stale_threshold
-        self.cutoff_date = datetime.now() - timedelta(days=stale_threshold)
+        self.cutoff_date = datetime.now(tz=UTC) - timedelta(days=stale_threshold)
 
     def gather_data(self) -> dict[str, Any]:
         """Gather stale items from RDF graph.
@@ -94,11 +94,15 @@ class StaleItemsGenerator(ProjectionGenerator):
         """
         stale_items = self._query_stale_items()
         completed_items = self._query_completed_items()
-        cleanup_estimate = self._calculate_cleanup_estimate(stale_items, completed_items)
+        cleanup_estimate = self._calculate_cleanup_estimate(
+            stale_items, completed_items
+        )
 
         return {
             "cutoff_date": self.cutoff_date,
-            "stale_items": sorted(stale_items, key=lambda i: i.days_stale, reverse=True),
+            "stale_items": sorted(
+                stale_items, key=lambda i: i.days_stale, reverse=True
+            ),
             "completed_items": sorted(
                 completed_items, key=lambda i: i.days_unarchived, reverse=True
             ),
@@ -132,10 +136,10 @@ class StaleItemsGenerator(ProjectionGenerator):
             if row.modified:
                 last_modified = self._parse_datetime(row.modified)
             else:
-                last_modified = datetime(2000, 1, 1)
+                last_modified = datetime(2000, 1, 1, tzinfo=UTC)
 
             # Calculate days since last modification
-            days_stale = (datetime.now() - last_modified).days
+            days_stale = (datetime.now(tz=UTC) - last_modified).days
 
             # Only include items past threshold
             if days_stale < self.stale_threshold:
@@ -180,7 +184,7 @@ class StaleItemsGenerator(ProjectionGenerator):
 
         for row in results:
             completed_date = self._parse_datetime(row.completedDate)
-            days_unarchived = (datetime.now() - completed_date).days
+            days_unarchived = (datetime.now(tz=UTC) - completed_date).days
 
             # Only include items completed > 7 days ago
             if days_unarchived < 7:

@@ -22,7 +22,7 @@ class TestReminderTaskMapping:
         """
         GIVEN: A simple incomplete task from Reminders.app
         WHEN: We ingest it to RDF
-        THEN: A schema:Action triple is created with required properties
+        THEN: A schema:Action triple is created with required properties.
         """
         # TODO: Implement
         # engine = RemindersIngestEngine()
@@ -45,7 +45,7 @@ class TestReminderTaskMapping:
         """
         GIVEN: A task with a due date
         WHEN: We ingest it to RDF
-        THEN: Due date is preserved as schema:dueDate
+        THEN: Due date is preserved as schema:dueDate.
         """
         # TODO: Implement
         # engine = RemindersIngestEngine()
@@ -62,7 +62,7 @@ class TestReminderTaskMapping:
         """
         GIVEN: A completed task
         WHEN: We ingest it to RDF
-        THEN: Status is schema:actionStatus = CompletedActionStatus
+        THEN: Status is schema:actionStatus = CompletedActionStatus.
         """
         # TODO: Implement
         # engine = RemindersIngestEngine()
@@ -79,7 +79,7 @@ class TestReminderTaskMapping:
         """
         GIVEN: A task from a specific list (e.g., "Work")
         WHEN: We ingest it to RDF
-        THEN: The source list is recorded as apple:list
+        THEN: The source list is recorded as apple:list.
         """
         # TODO: Implement
         # engine = RemindersIngestEngine()
@@ -96,7 +96,7 @@ class TestReminderTaskMapping:
         """
         GIVEN: A task ingested from Reminders.app
         WHEN: We ingest it to RDF
-        THEN: The source app is recorded as apple:sourceApp = "Reminders"
+        THEN: The source app is recorded as apple:sourceApp = "Reminders".
         """
         # TODO: Implement
         # engine = RemindersIngestEngine()
@@ -113,7 +113,7 @@ class TestReminderTaskMapping:
         """
         GIVEN: A task with EventKit identifier
         WHEN: We ingest it to RDF
-        THEN: The EventKit ID is preserved as apple:sourceIdentifier
+        THEN: The EventKit ID is preserved as apple:sourceIdentifier.
         """
         # TODO: Implement
         # engine = RemindersIngestEngine()
@@ -134,7 +134,7 @@ class TestReminderTaskValidation:
         """
         GIVEN: A task with valid status (PotentialActionStatus)
         WHEN: We validate against SHACL
-        THEN: Validation passes
+        THEN: Validation passes.
         """
         # TODO: Implement
         # engine = RemindersIngestEngine()
@@ -150,7 +150,7 @@ class TestReminderTaskValidation:
         """
         GIVEN: A task with no status
         WHEN: We validate against SHACL
-        THEN: Validation fails (ReminderStatusRequiredInvariant)
+        THEN: Validation fails (ReminderStatusRequiredInvariant).
         """
         # TODO: Implement
         # engine = RemindersIngestEngine()
@@ -167,7 +167,7 @@ class TestReminderTaskValidation:
         """
         GIVEN: A task with empty title
         WHEN: We validate against SHACL
-        THEN: Validation fails
+        THEN: Validation fails.
         """
         # TODO: Implement
         # TODO: Implement
@@ -176,7 +176,7 @@ class TestReminderTaskValidation:
         """
         GIVEN: A task tagged as due today
         WHEN: We validate against SHACL
-        THEN: Due date must match today (ReminderDueTodayValidInvariant)
+        THEN: Due date must match today (ReminderDueTodayValidInvariant).
         """
         # TODO: Implement
         # engine = RemindersIngestEngine()
@@ -197,7 +197,7 @@ class TestReminderTaskBatch:
         """
         GIVEN: A batch of 3 reminder tasks
         WHEN: We ingest them together
-        THEN: All 3 tasks are in the result graph
+        THEN: All 3 tasks are in the result graph.
         """
         # TODO: Implement
         # engine = RemindersIngestEngine()
@@ -213,7 +213,7 @@ class TestReminderTaskBatch:
         """
         GIVEN: A batch with mixed task statuses (incomplete, complete)
         WHEN: We ingest them
-        THEN: All status variants are preserved
+        THEN: All status variants are preserved.
         """
         # TODO: Implement
         # engine = RemindersIngestEngine()
@@ -241,7 +241,7 @@ class TestReminderTaskDependencies:
         """
         GIVEN: Task A is blocked by Task B
         WHEN: We ingest both tasks
-        THEN: Dependency is recorded as apple:dependsOn → Task B
+        THEN: Dependency is recorded as apple:dependsOn → Task B.
         """
         # TODO: Implement (requires Task fixture with dependency)
         # task_blocked = create_reminder_task(
@@ -261,7 +261,7 @@ class TestReminderTaskDependencies:
         """
         GIVEN: Task A depends on Task B, Task B depends on Task A
         WHEN: We validate against SHACL
-        THEN: Validation fails (NoCircularDependenciesInvariant)
+        THEN: Validation fails (NoCircularDependenciesInvariant).
         """
         # TODO: Implement
         # task_a = create_reminder_task(id="a", depends_on="b")
@@ -283,7 +283,7 @@ class TestReminderIngestIdempotency:
         """
         GIVEN: A task ingested once
         WHEN: We ingest the same task again
-        THEN: The RDF graph is identical
+        THEN: The RDF graph is identical.
         """
         # TODO: Implement
         # engine = RemindersIngestEngine()
@@ -300,7 +300,7 @@ class TestReminderIngestIdempotency:
         """
         GIVEN: A task (incomplete), then marked as complete
         WHEN: We ingest both versions
-        THEN: The second ingest updates the status
+        THEN: The second ingest updates the status.
         """
         # TODO: Implement
         # engine = RemindersIngestEngine()
@@ -323,7 +323,7 @@ class TestReminderIngestPerformance:
         """
         GIVEN: A large batch of 1000 reminder tasks
         WHEN: We ingest them
-        THEN: Ingest completes in reasonable time (< 5 seconds)
+        THEN: Ingest completes in reasonable time (< 5 seconds).
         """
         # TODO: Implement
         # import time
@@ -347,7 +347,7 @@ class TestReminderIngestIntegration:
         """
         GIVEN: A task linked to a calendar event
         WHEN: We ingest both
-        THEN: Cross-link is preserved as apple:relatedEvent
+        THEN: Cross-link is preserved as apple:relatedEvent.
         """
         # TODO: Implement (requires multi-source ingest)
         # TODO: Implement
@@ -356,7 +356,7 @@ class TestReminderIngestIntegration:
         """
         GIVEN: A task created from an email (apple:relatedAction)
         WHEN: We ingest both
-        THEN: Cross-link is preserved
+        THEN: Cross-link is preserved.
         """
         # TODO: Implement
         # TODO: Implement

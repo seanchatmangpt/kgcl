@@ -8,7 +8,12 @@ from unittest.mock import Mock, patch
 import pytest
 import requests
 
-from kgcl.dspy_runtime.ollama_config import DSPY_AVAILABLE, OllamaConfig, OllamaLM, health_check
+from kgcl.dspy_runtime.ollama_config import (
+    DSPY_AVAILABLE,
+    OllamaConfig,
+    OllamaLM,
+    health_check,
+)
 
 
 class TestOllamaConfig:
@@ -139,7 +144,10 @@ class TestOllamaLM:
         mock_response = Mock()
         mock_response.status_code = 200
         mock_response.json.return_value = {
-            "models": [{"name": "llama3.1", "size": 1000000}, {"name": "llama2", "size": 2000000}]
+            "models": [
+                {"name": "llama3.1", "size": 1000000},
+                {"name": "llama2", "size": 2000000},
+            ]
         }
 
         with patch("requests.get", return_value=mock_response):

@@ -165,12 +165,23 @@ def minimal_kgc_context() -> KGCContext:
     manifest = KGCManifest(
         project_uri="urn:project:kgc:osx-personal-fabric",
         project_name="macOS/iOS Personal Fabric",
-        planes=[KGCPlane.ONTOLOGY, KGCPlane.TYPE, KGCPlane.INVARIANT, KGCPlane.PROJECTION],
+        planes=[
+            KGCPlane.ONTOLOGY,
+            KGCPlane.TYPE,
+            KGCPlane.INVARIANT,
+            KGCPlane.PROJECTION,
+        ],
     )
 
     context = KGCContext(
         manifest=manifest,
-        ontology_entities=["CalendarEvent", "Reminder", "Note", "MailMessage", "FileArtifact"],
+        ontology_entities=[
+            "CalendarEvent",
+            "Reminder",
+            "Note",
+            "MailMessage",
+            "FileArtifact",
+        ],
         invariants=[
             Invariant(
                 name="calendar_event_complete",
@@ -291,7 +302,9 @@ def test_value_stream_mapping() -> None:
     completeness = [step for step in flow if step]
 
     # Assert: All steps present (none are None)
-    assert len(completeness) == VALUE_STREAM_STEP_COUNT, "All value stream steps must be present"
+    assert len(completeness) == VALUE_STREAM_STEP_COUNT, (
+        "All value stream steps must be present"
+    )
 
 
 def test_value_stream_eliminates_handoffs() -> None:
@@ -320,7 +333,8 @@ def test_value_stream_eliminates_handoffs() -> None:
 
     # Assert: Artifacts exist without manual handoff
     assert_that(
-        technician.regenerated_artifacts, lambda artifacts: len(artifacts) == PULL_ARTIFACT_COUNT
+        technician.regenerated_artifacts,
+        lambda artifacts: len(artifacts) == PULL_ARTIFACT_COUNT,
     )
 
 
@@ -444,7 +458,12 @@ def test_kgc_minimal_structure(minimal_kgc_context: KGCContext) -> None:
     assert context.manifest.has_projection_config
 
     # Assert: All planes present
-    expected_planes = [KGCPlane.ONTOLOGY, KGCPlane.TYPE, KGCPlane.INVARIANT, KGCPlane.PROJECTION]
+    expected_planes = [
+        KGCPlane.ONTOLOGY,
+        KGCPlane.TYPE,
+        KGCPlane.INVARIANT,
+        KGCPlane.PROJECTION,
+    ]
     for plane in expected_planes:
         assert plane in context.manifest.planes
 

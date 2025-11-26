@@ -111,7 +111,9 @@ class HookOrchestrator:
         >>> print(f"Executed {len(result.receipts)} effects")
     """
 
-    def __init__(self, graph: Graph, hooks_file: Path, continue_on_error: bool = True) -> None:
+    def __init__(
+        self, graph: Graph, hooks_file: Path, continue_on_error: bool = True
+    ) -> None:
         """Initialize orchestrator with RDF graph and hooks file.
 
         Args:
@@ -150,7 +152,9 @@ class HookOrchestrator:
         """Record a formatted error entry."""
         errors.append(f"{hook_name} [{code}]: {message}")
 
-    def _append_exception(self, errors: list[str], hook_name: HookName, error: Exception) -> None:
+    def _append_exception(
+        self, errors: list[str], hook_name: HookName, error: Exception
+    ) -> None:
         """Sanitize and record an exception."""
         sanitized = self._sanitizer.sanitize(error)
         self._append_error(errors, hook_name, sanitized.code, sanitized.message)
@@ -160,7 +164,9 @@ class HookOrchestrator:
         """Compute elapsed milliseconds."""
         return (datetime.now() - start_time).total_seconds() * 1000
 
-    def register_handler(self, hook_name: str | HookName, handler: EffectHandler) -> None:
+    def register_handler(
+        self, hook_name: str | HookName, handler: EffectHandler
+    ) -> None:
         """Register effect handler for a hook.
 
         Multiple handlers can be registered for the same hook.
@@ -204,7 +210,10 @@ class HookOrchestrator:
             logger.debug(f"Unregistered handler for {key}")
 
     def trigger_event(
-        self, event_type: str, event_data: dict[str, Any] | None = None, actor: str | None = None
+        self,
+        event_type: str,
+        event_data: dict[str, Any] | None = None,
+        actor: str | None = None,
     ) -> ExecutionResult:
         """Trigger hooks matching event type.
 
@@ -251,7 +260,10 @@ class HookOrchestrator:
 
         success = len(all_errors) == 0
         return ExecutionResult(
-            success=success, receipts=all_receipts, errors=all_errors, triggered_hooks=all_triggered
+            success=success,
+            receipts=all_receipts,
+            errors=all_errors,
+            triggered_hooks=all_triggered,
         )
 
     def execute_hook(
@@ -292,7 +304,9 @@ class HookOrchestrator:
             # Execute each effect
             for effect in hook.effects:
                 try:
-                    receipt = self._execute_effect(hook, effect, event_type, event_data, actor)
+                    receipt = self._execute_effect(
+                        hook, effect, event_type, event_data, actor
+                    )
                     receipts.append(receipt)
 
                     # Capture receipt-level errors
@@ -312,7 +326,10 @@ class HookOrchestrator:
 
             success = len(errors) == 0
             return ExecutionResult(
-                success=success, receipts=receipts, errors=errors, triggered_hooks=triggered_hooks
+                success=success,
+                receipts=receipts,
+                errors=errors,
+                triggered_hooks=triggered_hooks,
             )
 
         finally:
@@ -419,6 +436,12 @@ class HookOrchestrator:
     def _check_for_chaining(self, receipt: HookReceipt) -> list[HookName]:
         """Check if receipt result triggers other hooks (chaining).
 
+        Chaining Logic:
+        1. Check handler_result for "trigger" key with event URI
+        2. Find hooks triggered by that event type
+        3. Execute chained hooks if not already in execution stack (prevent cycles)
+        4. Return list of triggered hook names
+
         Args:
             receipt: Execution receipt to check
 
@@ -426,10 +449,6 @@ class HookOrchestrator:
         -------
             List of hook names triggered by this execution
         """
-        # TODO: Implement chaining logic
-        # Check receipt.handler_result for trigger events
-        # Example: if handler_result contains "trigger": "OntologyModified"
-
         triggered: list[HookName] = []
 
         if not receipt.handler_result:

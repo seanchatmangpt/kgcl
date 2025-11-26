@@ -1,5 +1,5 @@
 """
-KGC OS Graph Agent Ontology Package
+KGC OS Graph Agent Ontology Package.
 
 Complete RDF/SHACL ontology for the Knowledge Graph Comprehension OS Graph Agent system.
 
@@ -204,7 +204,9 @@ def get_ontology_statistics() -> dict:
         "capabilities": len(list(g.subjects(RDF.type, CORE.Capability))),
     }
 
-    stats["total_properties"] = stats["object_properties"] + stats["datatype_properties"]
+    stats["total_properties"] = (
+        stats["object_properties"] + stats["datatype_properties"]
+    )
 
     return stats
 

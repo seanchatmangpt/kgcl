@@ -24,7 +24,7 @@ class TestFullIngestPipeline:
         """
         GIVEN: Complete ingest data (calendar, reminders, mail, files)
         WHEN: We run the full ingest pipeline
-        THEN: All sources are ingested and present in result graph
+        THEN: All sources are ingested and present in result graph.
         """
         # TODO: Implement
         # pipeline = AppleIngestPipeline()
@@ -48,7 +48,7 @@ class TestFullIngestPipeline:
         """
         GIVEN: Multiple data sources ingested
         WHEN: Pipeline completes
-        THEN: Result is a single consolidated RDF graph
+        THEN: Result is a single consolidated RDF graph.
         """
         # TODO: Implement
         # pipeline = AppleIngestPipeline()
@@ -64,7 +64,7 @@ class TestFullIngestPipeline:
         """
         GIVEN: All data sources ingested
         WHEN: Pipeline validates against SHACL
-        THEN: Entire graph conforms to all shapes and invariants
+        THEN: Entire graph conforms to all shapes and invariants.
         """
         # TODO: Implement
         # pipeline = AppleIngestPipeline()
@@ -84,7 +84,7 @@ class TestCrossSourceLinking:
         """
         GIVEN: A task related to a calendar event (e.g., "prepare for standup")
         WHEN: We ingest both with explicit linking
-        THEN: Task has apple:relatedEvent → Event
+        THEN: Task has apple:relatedEvent → Event.
         """
         # TODO: Implement (requires metadata linking)
         # # Create task: "Prepare for standup"
@@ -106,7 +106,7 @@ class TestCrossSourceLinking:
         """
         GIVEN: An email with action item
         WHEN: We ingest email and extract task
-        THEN: Task has apple:relatedAction → Email
+        THEN: Task has apple:relatedAction → Email.
         """
         # TODO: Implement (requires task extraction from email)
         # TODO: Implement
@@ -115,7 +115,7 @@ class TestCrossSourceLinking:
         """
         GIVEN: A file referenced in email, task, and calendar event
         WHEN: We ingest all sources
-        THEN: File has multiple apple:relatedEvent, apple:relatedAction links
+        THEN: File has multiple apple:relatedEvent, apple:relatedAction links.
         """
         # TODO: Implement
         # TODO: Implement
@@ -124,7 +124,7 @@ class TestCrossSourceLinking:
         """
         GIVEN: Event→Task, Task→File, File→Event (circular)
         WHEN: We ingest all
-        THEN: All cross-references are preserved without duplication
+        THEN: All cross-references are preserved without duplication.
         """
         # TODO: Implement
         # TODO: Implement
@@ -137,7 +137,7 @@ class TestDataSourceInteraction:
         """
         GIVEN: Calendar events and reminders with same dates
         WHEN: We ingest both
-        THEN: Both are preserved with correct schema (Event vs Action)
+        THEN: Both are preserved with correct schema (Event vs Action).
         """
         # TODO: Implement
         # pipeline = AppleIngestPipeline()
@@ -158,7 +158,7 @@ class TestDataSourceInteraction:
         """
         GIVEN: Same item referenced in multiple sources
         WHEN: We ingest all
-        THEN: Duplicates are detected and merged (using sourceIdentifier)
+        THEN: Duplicates are detected and merged (using sourceIdentifier).
         """
         # TODO: Implement (requires duplicate detection logic)
         # TODO: Implement
@@ -167,7 +167,7 @@ class TestDataSourceInteraction:
         """
         GIVEN: Data from different sources with source-specific properties
         WHEN: We ingest all
-        THEN: All source-specific properties are preserved without loss
+        THEN: All source-specific properties are preserved without loss.
         """
         # TODO: Implement
         # # Calendar: attendees, location, allDay
@@ -199,7 +199,7 @@ class TestPipelineMetricsAndReceipts:
         """
         GIVEN: Full ingest data
         WHEN: Pipeline ingests
-        THEN: SHA256 receipt hash is generated for idempotency
+        THEN: SHA256 receipt hash is generated for idempotency.
         """
         # TODO: Implement
         # pipeline = AppleIngestPipeline()
@@ -214,7 +214,7 @@ class TestPipelineMetricsAndReceipts:
         """
         GIVEN: Full ingest data ingested once
         WHEN: We ingest identical data again
-        THEN: Receipt hash matches (idempotent)
+        THEN: Receipt hash matches (idempotent).
         """
         # TODO: Implement
         # pipeline = AppleIngestPipeline()
@@ -229,7 +229,7 @@ class TestPipelineMetricsAndReceipts:
         """
         GIVEN: Mixed data sources
         WHEN: Pipeline ingests
-        THEN: Metrics show count by type
+        THEN: Metrics show count by type.
         """
         # TODO: Implement
         # pipeline = AppleIngestPipeline()
@@ -247,7 +247,7 @@ class TestPipelineMetricsAndReceipts:
         """
         GIVEN: Complete ingest data
         WHEN: Pipeline ingests and validates
-        THEN: Report shows pass/fail per invariant
+        THEN: Report shows pass/fail per invariant.
         """
         # TODO: Implement
         # pipeline = AppleIngestPipeline()
@@ -266,7 +266,7 @@ class TestPipelineErrorHandling:
         """
         GIVEN: Batch with intentional validation failures
         WHEN: Pipeline processes
-        THEN: Valid items processed, invalid items reported (not fatal)
+        THEN: Valid items processed, invalid items reported (not fatal).
         """
         # TODO: Implement
         # pipeline = AppleIngestPipeline()
@@ -282,7 +282,7 @@ class TestPipelineErrorHandling:
         """
         GIVEN: Calendar ingest fails but others available
         WHEN: Pipeline runs
-        THEN: Other sources processed, error logged, pipeline completes
+        THEN: Other sources processed, error logged, pipeline completes.
         """
         # TODO: Implement
         # pipeline = AppleIngestPipeline()
@@ -306,7 +306,7 @@ class TestPipelineErrorHandling:
         """
         GIVEN: Invalid ingest data
         WHEN: Pipeline validates
-        THEN: Error report details which items failed and why
+        THEN: Error report details which items failed and why.
         """
         # TODO: Implement
         # pipeline = AppleIngestPipeline()
@@ -333,7 +333,7 @@ class TestPipelinePerformance:
                - 500 emails
                - 5000 files
         WHEN: Pipeline ingests all
-        THEN: Completes in < 30 seconds
+        THEN: Completes in < 30 seconds.
         """
         # TODO: Implement with large test data
         # import time
@@ -358,7 +358,7 @@ class TestPipelinePerformance:
         """
         GIVEN: Large batch
         WHEN: Pipeline ingests
-        THEN: Memory usage stays reasonable (monitor with tracemalloc)
+        THEN: Memory usage stays reasonable (monitor with tracemalloc).
         """
         # TODO: Implement with memory profiling
         # TODO: Implement
@@ -371,7 +371,7 @@ class TestPipelineWithHookIntegration:
         """
         GIVEN: Full ingest completes
         WHEN: Pipeline finishes
-        THEN: IngestHook triggered → CLI, docs, agenda regenerated
+        THEN: IngestHook triggered → CLI, docs, agenda regenerated.
         """
         # TODO: Implement (requires hook system)
         # from kgcl.hooks import HookRegistry
@@ -395,7 +395,7 @@ class TestPipelineWithHookIntegration:
         """
         GIVEN: Invalid data that fails SHACL validation
         WHEN: Pipeline validates
-        THEN: ValidationFailureHook triggered → quality report generated
+        THEN: ValidationFailureHook triggered → quality report generated.
         """
         # TODO: Implement
         # from kgcl.hooks import HookRegistry
@@ -422,7 +422,7 @@ class TestPipelineConsistency:
         """
         GIVEN: Data with cross-references (Event→Task, Task→File)
         WHEN: Pipeline ingests
-        THEN: All references resolve (no broken links)
+        THEN: All references resolve (no broken links).
         """
         # TODO: Implement
         # pipeline = AppleIngestPipeline()
@@ -440,7 +440,7 @@ class TestPipelineConsistency:
         """
         GIVEN: Events with specific dates in chronological order
         WHEN: Pipeline ingests
-        THEN: Dates are preserved correctly (no reordering)
+        THEN: Dates are preserved correctly (no reordering).
         """
         # TODO: Implement
         # TODO: Implement
@@ -449,7 +449,7 @@ class TestPipelineConsistency:
         """
         GIVEN: Events with various timezone information
         WHEN: Pipeline ingests
-        THEN: All times preserved in UTC or with timezone info
+        THEN: All times preserved in UTC or with timezone info.
         """
         # TODO: Implement
         # TODO: Implement

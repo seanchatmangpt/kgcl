@@ -31,7 +31,7 @@ class AndonSignal:
     auto_stop: bool = False  # Should stop operations
     metadata: dict | None = None
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Validate signal data."""
         if not isinstance(self.severity, SignalSeverity):
             raise ValueError(f"Invalid severity: {self.severity}")

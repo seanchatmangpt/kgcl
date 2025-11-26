@@ -1,4 +1,4 @@
-"""Snapshot Testing
+"""Snapshot Testing.
 
 Provides snapshot comparison for regression testing.
 """
@@ -11,7 +11,7 @@ from typing import Any
 
 @dataclass
 class SnapshotTest:
-    """Snapshot test for regression testing
+    """Snapshot test for regression testing.
 
     Example:
         test = SnapshotTest(
@@ -27,7 +27,7 @@ class SnapshotTest:
     matched: bool = False
 
     def matches_snapshot(self, snapshot_path: str, update: bool = False) -> bool:
-        """Check if actual matches snapshot
+        """Check if actual matches snapshot.
 
         Args:
             snapshot_path: Path to snapshot file
@@ -59,11 +59,11 @@ class SnapshotTest:
         return self.matched
 
     def _compare(self, actual: Any, expected: Any) -> bool:
-        """Compare actual and expected values"""
+        """Compare actual and expected values."""
         if isinstance(actual, dict) and isinstance(expected, dict):
             if set(actual.keys()) != set(expected.keys()):
                 return False
-            return all(self._compare(actual[k], expected[k]) for k in actual.keys())
+            return all(self._compare(actual[k], expected[k]) for k in actual)
         if isinstance(actual, list) and isinstance(expected, list):
             if len(actual) != len(expected):
                 return False
@@ -71,14 +71,16 @@ class SnapshotTest:
         return actual == expected
 
     def diff(self) -> str | None:
-        """Get diff between actual and expected"""
+        """Get diff between actual and expected."""
         if self.expected is None:
             return f"No snapshot file exists for {self.name}"
 
         if self.matched:
             return None
 
-        return f"Snapshot mismatch:\n  Expected: {self.expected}\n  Actual: {self.actual}"
+        return (
+            f"Snapshot mismatch:\n  Expected: {self.expected}\n  Actual: {self.actual}"
+        )
 
     def __repr__(self) -> str:
         return f"SnapshotTest({self.name!r}, matched={self.matched})"

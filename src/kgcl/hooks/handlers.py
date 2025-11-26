@@ -118,7 +118,9 @@ class HookHandlers:
             validation_graph = ctx.event_data.get("validation_graph", ctx.graph)
 
             # Instantiate generator
-            generator = QualityReportGenerator(graph=ctx.graph, validation_graph=validation_graph)
+            generator = QualityReportGenerator(
+                graph=ctx.graph, validation_graph=validation_graph
+            )
 
             # Generate artifact
             artifact_content = generator.generate()
@@ -166,7 +168,9 @@ class HookHandlers:
             lookahead = ctx.event_data.get("lookahead_days", 7)
 
             # Instantiate generator
-            generator = ConflictReportGenerator(graph=ctx.graph, lookahead_days=lookahead)
+            generator = ConflictReportGenerator(
+                graph=ctx.graph, lookahead_days=lookahead
+            )
 
             # Generate artifact
             artifact_content = generator.generate()
@@ -288,7 +292,10 @@ class HookHandlers:
                     results["metadata"]["generators_run"].append(gen_name)
                 except Exception as e:
                     logger.warning(f"Error running {gen_name}: {e}")
-                    results["artifacts"][gen_name] = {"error": str(e), "artifact_type": gen_name}
+                    results["artifacts"][gen_name] = {
+                        "error": str(e),
+                        "artifact_type": gen_name,
+                    }
 
             logger.info(
                 f"✅ All reports regenerated: {len(results['metadata']['generators_run'])} generators"
@@ -297,7 +304,11 @@ class HookHandlers:
 
         except Exception as e:
             logger.error(f"❌ Failed to regenerate all reports: {e}")
-            return {"artifact_type": "all_reports", "artifacts": {}, "metadata": {"error": str(e)}}
+            return {
+                "artifact_type": "all_reports",
+                "artifacts": {},
+                "metadata": {"error": str(e)},
+            }
 
 
 def register_all_handlers(orchestrator) -> None:

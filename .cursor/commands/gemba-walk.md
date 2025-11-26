@@ -98,11 +98,11 @@ Produce a todo inventory (10+ if possible) with severity and owner hints:
 4. Re-run full gates:
 
 ```bash
-cargo-make format
-cargo-make lint
-cargo-make type-check
-cargo-make test
-.githooks/pre-commit
+poe format
+poe lint
+poe type-check
+poe test
+poe pre-commit-run
 ```
 
 When the fix requires broader architectural work, open an explicit issue or backlog item referencing the Gemba notes.

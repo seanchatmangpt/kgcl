@@ -103,10 +103,9 @@ class PluginRegistry:
         plugin_class = self._plugins[plugin_id]
         instance = plugin_class(plugin_id=plugin_id, config=config)
 
-        if auto_initialize:
-            if not instance.initialize():
-                logger.error(f"Failed to initialize plugin {plugin_id}")
-                return None
+        if auto_initialize and not instance.initialize():
+            logger.error(f"Failed to initialize plugin {plugin_id}")
+            return None
 
         self._instances[plugin_id] = instance
         return instance
@@ -150,7 +149,9 @@ class PluginRegistry:
 
         return capabilities
 
-    def collect_all_data(self, parameters: dict | None = None) -> dict[str, list[CapabilityData]]:
+    def collect_all_data(
+        self, parameters: dict | None = None
+    ) -> dict[str, list[CapabilityData]]:
         """
         Collect data from all initialized plugins.
 
@@ -193,7 +194,9 @@ def get_registry() -> PluginRegistry:
     return _global_registry
 
 
-def register_plugin(plugin_class: type[BaseCapabilityPlugin], plugin_id: str | None = None) -> None:
+def register_plugin(
+    plugin_class: type[BaseCapabilityPlugin], plugin_id: str | None = None
+) -> None:
     """
     Register a plugin with the global registry.
 

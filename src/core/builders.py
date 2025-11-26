@@ -1,4 +1,4 @@
-"""Builder Pattern Support for Tests
+"""Builder Pattern Support for Tests.
 
 Provides fluent builder interfaces for constructing complex test objects.
 """
@@ -9,8 +9,8 @@ from typing import Any, Generic, TypeVar
 T = TypeVar("T")
 
 
-class Builder(Generic[T]):
-    """Generic builder pattern for constructing test objects
+class Builder[T]:
+    """Generic builder pattern for constructing test objects.
 
     Provides fluent interface for building complex objects in tests.
 
@@ -47,36 +47,36 @@ class Builder(Generic[T]):
         self._transformers: list[Callable[[Any], Any]] = []
 
     def add_mutation(self, mutation: Callable[[Any], None]) -> "Builder[T]":
-        """Add a mutation function"""
+        """Add a mutation function."""
         self._mutations.append(mutation)
         return self
 
     def add_validator(self, validator: Callable[[Any], bool]) -> "Builder[T]":
-        """Add a validator function"""
+        """Add a validator function."""
         self._validators.append(validator)
         return self
 
     def add_transformer(self, transformer: Callable[[Any], Any]) -> "Builder[T]":
-        """Add a transformer function"""
+        """Add a transformer function."""
         self._transformers.append(transformer)
         return self
 
     def build(self) -> T:
-        """Build the object (override in subclasses)"""
+        """Build the object (override in subclasses)."""
         raise NotImplementedError("Subclasses must implement build()")
 
     def mutate(self, obj: T) -> T:
-        """Apply all mutations to object"""
+        """Apply all mutations to object."""
         for mutation in self._mutations:
             mutation(obj)
         return obj
 
     def validate(self, obj: T) -> bool:
-        """Validate object against all validators"""
+        """Validate object against all validators."""
         return all(validator(obj) for validator in self._validators)
 
     def transform(self, obj: T) -> T:
-        """Apply all transformations to object"""
+        """Apply all transformations to object."""
         result = obj
         for transformer in self._transformers:
             result = transformer(result)
@@ -84,7 +84,7 @@ class Builder(Generic[T]):
 
 
 class SimpleBuilder(Builder[T]):
-    """Simple builder for basic object construction"""
+    """Simple builder for basic object construction."""
 
     def __init__(self, factory: Callable[..., T], **kwargs: Any) -> None:
         super().__init__()
@@ -92,17 +92,17 @@ class SimpleBuilder(Builder[T]):
         self._attributes: dict[str, Any] = kwargs
 
     def with_attr(self, key: str, value: Any) -> "SimpleBuilder[T]":
-        """Set an attribute"""
+        """Set an attribute."""
         self._attributes[key] = value
         return self
 
     def with_attrs(self, attrs: dict[str, Any]) -> "SimpleBuilder[T]":
-        """Set multiple attributes"""
+        """Set multiple attributes."""
         self._attributes.update(attrs)
         return self
 
     def build(self) -> T:
-        """Build object using factory and attributes"""
+        """Build object using factory and attributes."""
         obj = self._factory(**self._attributes)
         obj = self.mutate(obj)
         if not self.validate(obj):

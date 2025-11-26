@@ -234,8 +234,12 @@ class WorkflowState:
         return cls(
             workflow_id=data["workflow_id"],
             started_at=datetime.fromisoformat(data["started_at"]),
-            current_step=WorkflowStep(current_step_value) if current_step_value else None,
-            completed_steps=[StepResult.from_dict(r) for r in data.get("completed_steps", [])],
+            current_step=WorkflowStep(current_step_value)
+            if current_step_value
+            else None,
+            completed_steps=[
+                StepResult.from_dict(r) for r in data.get("completed_steps", [])
+            ],
             is_complete=data.get("is_complete", False),
             failed=data.get("failed", False),
         )

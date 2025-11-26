@@ -1,0 +1,462 @@
+@prefix yawl: <http://www.yawlfoundation.org/yawlschema#> .
+@prefix yawl-pattern: <http://bitflow.ai/ontology/yawl/patterns/v1#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix yawl-shapes: <http://bitflow.ai/ontology/yawl/shapes/v1#> .
+
+# =============================================================================
+# YAWL WORKFLOW PATTERN SHACL SHAPES
+# =============================================================================
+#
+# This ontology defines the TOPOLOGICAL constraints for YAWL patterns.
+# Logic is expressed as SHAPE GEOMETRY, not procedural code.
+#
+# The Semantic Singularity Principle:
+#   "If the data doesn't fit the shape, the logic cannot execute."
+#   Validation IS Execution.
+#
+# References:
+# - YAWL Foundation: http://www.yawlfoundation.org/
+# - SHACL: https://www.w3.org/TR/shacl/
+# =============================================================================
+
+<http://bitflow.ai/ontology/yawl/shapes/v1#>
+    a owl:Ontology ;
+    rdfs:label "YAWL Pattern SHACL Shapes"@en ;
+    rdfs:comment "Topological validation shapes for YAWL workflow patterns. Logic as Geometry."@en ;
+    owl:versionInfo "1.0.0" .
+
+# =============================================================================
+# PATTERN 9: DISCRIMINATOR (N-of-M Join) - Quorum Constraints
+# =============================================================================
+#
+# The Discriminator pattern fires when N branches complete (quorum).
+# Constraints encoded as TOPOLOGY, not Python `if` statements:
+#   1. Quorum must be >= 1 (at least one branch must complete)
+#   2. Quorum cannot exceed total branches (mathematical impossibility)
+#   3. Total branches must be >= 1 (pattern requires incoming branches)
+#
+
+yawl-shapes:DiscriminatorShape
+    a sh:NodeShape ;
+    sh:targetClass yawl-pattern:Discriminator ;
+    rdfs:label "Discriminator Pattern Shape"@en ;
+    rdfs:comment "Validates Discriminator (N-of-M join) topology"@en ;
+
+    # Quorum must be a positive integer >= 1
+    sh:property [
+        sh:path yawl:quorum ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 1 ;
+        sh:message "Quorum must be >= 1 (at least one branch must complete)"@en ;
+    ] ;
+
+    # Total branches must be >= 1
+    sh:property [
+        sh:path yawl:totalBranches ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 1 ;
+        sh:message "Total branches must be >= 1"@en ;
+    ] ;
+
+    # SPARQL constraint: quorum <= totalBranches (when totalBranches is defined)
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Quorum cannot exceed total branches (mathematical impossibility)"@en ;
+        sh:prefixes yawl-shapes: ;
+        sh:select """
+            PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+            SELECT $this
+            WHERE {
+                $this yawl:quorum ?quorum ;
+                      yawl:totalBranches ?total .
+                FILTER (?quorum > ?total)
+            }
+        """ ;
+    ] .
+
+# =============================================================================
+# PATTERN 8: MULTIPLE MERGE - Instance Constraints
+# =============================================================================
+#
+# Multiple Merge allows parallel tokens to each trigger execution.
+# Max instances constrains concurrent executions.
+#
+
+yawl-shapes:MultipleMergeShape
+    a sh:NodeShape ;
+    sh:targetClass yawl-pattern:MultipleMerge ;
+    rdfs:label "Multiple Merge Pattern Shape"@en ;
+    rdfs:comment "Validates Multiple Merge (XOR-join with concurrent execution) topology"@en ;
+
+    # Max instances must be positive when specified
+    sh:property [
+        sh:path yawl:maxInstances ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 1 ;
+        sh:message "Max instances must be >= 1 when specified"@en ;
+    ] .
+
+# =============================================================================
+# SPLIT-JOIN COMBINATION VALIDITY
+# =============================================================================
+#
+# The Permutation Matrix defines which split-join combinations are VALID.
+# Invalid combinations are topologically impossible.
+#
+
+yawl-shapes:SplitJoinCombinationShape
+    a sh:NodeShape ;
+    sh:targetClass yawl:SplitJoinCombination ;
+    rdfs:label "Split-Join Combination Shape"@en ;
+    rdfs:comment "Validates split-join permutation topology"@en ;
+
+    # Split type required
+    sh:property [
+        sh:path yawl:splitType ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:in ( yawl:AND yawl:OR yawl:XOR ) ;
+        sh:message "Split type must be AND, OR, or XOR"@en ;
+    ] ;
+
+    # Join type required
+    sh:property [
+        sh:path yawl:joinType ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:in ( yawl:AND yawl:OR yawl:XOR yawl:Discriminator ) ;
+        sh:message "Join type must be AND, OR, XOR, or Discriminator"@en ;
+    ] .
+
+# Invalid combination: XOR split cannot have AND join
+# (XOR produces exactly one branch, AND requires all branches)
+yawl-shapes:XORSplitANDJoinInvalid
+    a sh:NodeShape ;
+    sh:targetClass yawl:SplitJoinCombination ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "XOR split cannot have AND join (XOR produces 1 branch, AND requires all)"@en ;
+        sh:severity sh:Violation ;
+        sh:select """
+            PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+            SELECT $this
+            WHERE {
+                $this yawl:splitType yawl:XOR ;
+                      yawl:joinType yawl:AND .
+            }
+        """ ;
+    ] .
+
+# Invalid combination: XOR split cannot have OR join
+# (OR join waits for "active" branches, but XOR only activates one)
+yawl-shapes:XORSplitORJoinInvalid
+    a sh:NodeShape ;
+    sh:targetClass yawl:SplitJoinCombination ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "XOR split cannot have OR join (semantically equivalent to XOR-XOR)"@en ;
+        sh:severity sh:Warning ;
+        sh:select """
+            PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+            SELECT $this
+            WHERE {
+                $this yawl:splitType yawl:XOR ;
+                      yawl:joinType yawl:OR .
+            }
+        """ ;
+    ] .
+
+# =============================================================================
+# FLOW TOPOLOGY CONSTRAINTS
+# =============================================================================
+
+yawl-shapes:FlowShape
+    a sh:NodeShape ;
+    sh:targetClass yawl:Flow ;
+    rdfs:label "Flow Shape"@en ;
+    rdfs:comment "Validates flow edge topology"@en ;
+
+    # Flow must have a source task
+    sh:property [
+        sh:path yawl:flowsFrom ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class yawl:Task ;
+        sh:message "Flow must have exactly one source task"@en ;
+    ] ;
+
+    # Flow must have a target task
+    sh:property [
+        sh:path yawl:nextElementRef ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class yawl:Task ;
+        sh:message "Flow must have exactly one target task"@en ;
+    ] ;
+
+    # Predicate expression must be valid when present
+    sh:property [
+        sh:path yawl:hasPredicate ;
+        sh:datatype xsd:string ;
+        sh:minLength 1 ;
+        sh:message "Predicate expression cannot be empty"@en ;
+    ] .
+
+# =============================================================================
+# TASK TOPOLOGY CONSTRAINTS
+# =============================================================================
+
+yawl-shapes:TaskShape
+    a sh:NodeShape ;
+    sh:targetClass yawl:Task ;
+    rdfs:label "Task Shape"@en ;
+    rdfs:comment "Validates task node topology"@en ;
+
+    # Task must have a unique identifier
+    sh:property [
+        sh:path yawl:id ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:minLength 1 ;
+        sh:message "Task must have a unique identifier"@en ;
+    ] ;
+
+    # Split type must be valid when specified
+    sh:property [
+        sh:path yawl:splitType ;
+        sh:maxCount 1 ;
+        sh:in ( yawl:AND yawl:OR yawl:XOR ) ;
+        sh:message "Split type must be AND, OR, or XOR"@en ;
+    ] ;
+
+    # Join type must be valid when specified
+    sh:property [
+        sh:path yawl:joinType ;
+        sh:maxCount 1 ;
+        sh:in ( yawl:AND yawl:OR yawl:XOR yawl:Discriminator ) ;
+        sh:message "Join type must be AND, OR, XOR, or Discriminator"@en ;
+    ] .
+
+# AND-split must have >= 2 outgoing flows
+yawl-shapes:ANDSplitMinFlows
+    a sh:NodeShape ;
+    sh:targetClass yawl:Task ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "AND-split must have at least 2 outgoing flows"@en ;
+        sh:select """
+            PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+            SELECT $this (COUNT(?flow) AS ?flowCount)
+            WHERE {
+                $this yawl:splitType yawl:AND ;
+                      yawl:flowsInto ?flow .
+            }
+            GROUP BY $this
+            HAVING (COUNT(?flow) < 2)
+        """ ;
+    ] .
+
+# OR-split must have >= 2 outgoing flows
+yawl-shapes:ORSplitMinFlows
+    a sh:NodeShape ;
+    sh:targetClass yawl:Task ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "OR-split must have at least 2 outgoing flows"@en ;
+        sh:select """
+            PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+            SELECT $this (COUNT(?flow) AS ?flowCount)
+            WHERE {
+                $this yawl:splitType yawl:OR ;
+                      yawl:flowsInto ?flow .
+            }
+            GROUP BY $this
+            HAVING (COUNT(?flow) < 2)
+        """ ;
+    ] .
+
+# XOR-split must have >= 2 outgoing flows (for choice)
+yawl-shapes:XORSplitMinFlows
+    a sh:NodeShape ;
+    sh:targetClass yawl:Task ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "XOR-split must have at least 2 outgoing flows for exclusive choice"@en ;
+        sh:select """
+            PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+            SELECT $this (COUNT(?flow) AS ?flowCount)
+            WHERE {
+                $this yawl:splitType yawl:XOR ;
+                      yawl:flowsInto ?flow .
+            }
+            GROUP BY $this
+            HAVING (COUNT(?flow) < 2)
+        """ ;
+    ] .
+
+# AND-join must have >= 2 incoming flows
+yawl-shapes:ANDJoinMinFlows
+    a sh:NodeShape ;
+    sh:targetClass yawl:Task ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "AND-join must have at least 2 incoming flows to synchronize"@en ;
+        sh:select """
+            PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+            SELECT $this (COUNT(?incoming) AS ?inCount)
+            WHERE {
+                $this yawl:joinType yawl:AND .
+                ?incoming yawl:flowsInto ?flow .
+                ?flow yawl:nextElementRef $this .
+            }
+            GROUP BY $this
+            HAVING (COUNT(?incoming) < 2)
+        """ ;
+    ] .
+
+# =============================================================================
+# WORKFLOW INSTANCE CONSTRAINTS
+# =============================================================================
+
+yawl-shapes:WorkflowInstanceShape
+    a sh:NodeShape ;
+    sh:targetClass yawl:WorkflowInstance ;
+    rdfs:label "Workflow Instance Shape"@en ;
+    rdfs:comment "Validates workflow execution instance topology"@en ;
+
+    # Instance must reference a workflow specification
+    sh:property [
+        sh:path yawl:instanceOf ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class yawl:Workflow ;
+        sh:message "Instance must reference exactly one workflow specification"@en ;
+    ] ;
+
+    # Status must be valid
+    sh:property [
+        sh:path yawl:status ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in ( "enabled" "running" "completed" "suspended" "cancelled" "failed" ) ;
+        sh:message "Status must be a valid workflow state"@en ;
+    ] .
+
+# =============================================================================
+# ITERATION PATTERN CONSTRAINTS
+# =============================================================================
+
+yawl-shapes:StructuredLoopShape
+    a sh:NodeShape ;
+    sh:targetClass yawl-pattern:StructuredLoop ;
+    rdfs:label "Structured Loop Shape"@en ;
+    rdfs:comment "Validates structured loop (repeat N times) topology"@en ;
+
+    # Max iterations must be positive
+    sh:property [
+        sh:path yawl:maxIterations ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 1 ;
+        sh:message "Max iterations must be >= 1"@en ;
+    ] .
+
+# =============================================================================
+# CANCELLATION PATTERN CONSTRAINTS
+# =============================================================================
+
+yawl-shapes:CancellationRegionShape
+    a sh:NodeShape ;
+    sh:targetClass yawl:CancellationRegion ;
+    rdfs:label "Cancellation Region Shape"@en ;
+    rdfs:comment "Validates cancellation region topology"@en ;
+
+    # Region must have at least one task in scope
+    sh:property [
+        sh:path yawl:cancellationScope ;
+        sh:minCount 1 ;
+        sh:class yawl:Task ;
+        sh:message "Cancellation region must include at least one task"@en ;
+    ] ;
+
+    # Region must have a trigger task
+    sh:property [
+        sh:path yawl:cancellationTrigger ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class yawl:Task ;
+        sh:message "Cancellation region must have exactly one trigger task"@en ;
+    ] .
+
+# =============================================================================
+# MILESTONE PATTERN CONSTRAINTS
+# =============================================================================
+
+yawl-shapes:MilestoneShape
+    a sh:NodeShape ;
+    sh:targetClass yawl-pattern:Milestone ;
+    rdfs:label "Milestone Shape"@en ;
+    rdfs:comment "Validates milestone (checkpoint) topology"@en ;
+
+    # Milestone must have a target state
+    sh:property [
+        sh:path yawl:milestoneState ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Milestone must define a target state"@en ;
+    ] .
+
+# =============================================================================
+# DEFERRED CHOICE CONSTRAINTS
+# =============================================================================
+
+yawl-shapes:DeferredChoiceShape
+    a sh:NodeShape ;
+    sh:targetClass yawl-pattern:DeferredChoice ;
+    rdfs:label "Deferred Choice Shape"@en ;
+    rdfs:comment "Validates deferred choice (race condition) topology"@en ;
+
+    # Deferred choice must have >= 2 competing branches
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Deferred choice must have at least 2 competing branches"@en ;
+        sh:select """
+            PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+            PREFIX yawl-pattern: <http://bitflow.ai/ontology/yawl/patterns/v1#>
+            SELECT $this (COUNT(?branch) AS ?branchCount)
+            WHERE {
+                $this a yawl-pattern:DeferredChoice ;
+                      yawl:competingBranch ?branch .
+            }
+            GROUP BY $this
+            HAVING (COUNT(?branch) < 2)
+        """ ;
+    ] .
+
+# =============================================================================
+# SUMMARY: Logic as Topology
+# =============================================================================
+#
+# This shapes file encodes ALL validation logic as GRAPH GEOMETRY:
+#
+# 1. Property constraints (sh:minInclusive, sh:maxCount) = Field validation
+# 2. SPARQL constraints = Relational validation across nodes
+# 3. sh:in constraints = Enumeration validation
+#
+# The Engine (Python) does NOT contain business logic.
+# The Engine only:
+#   - Traverses the graph
+#   - Validates shapes (SHACL)
+#   - Applies verbs (Split, Join, Execute)
+#
+# If the data fits the shape: Execution proceeds.
+# If the data violates the shape: Execution fails with SHACL validation report.
+#
+# This is the Semantic Singularity: Logic IS Topology.
+# =============================================================================

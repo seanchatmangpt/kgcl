@@ -5,7 +5,7 @@ Tests define how hooks interact with UNRDF store with real graph operations.
 Real object collaboration - hooks modify actual graphs.
 """
 
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import Any
 
 import pytest
@@ -33,7 +33,8 @@ class GraphQueryCondition(Condition):
         triggered = count >= self.expected_count
 
         return ConditionResult(
-            triggered=triggered, metadata={"count": count, "expected": self.expected_count}
+            triggered=triggered,
+            metadata={"count": count, "expected": self.expected_count},
         )
 
 
@@ -87,7 +88,7 @@ class MockGraph:
         self.triples.remove((subject, predicate, obj))
         self.version += 1
 
-    def count_triples(self, query: str = None) -> int:
+    def count_triples(self, query: str | None = None) -> int:
         """Count triples matching query."""
         if query is None:
             return len(self.triples)
@@ -116,7 +117,9 @@ class TestHookGraphQuery:
         graph.add_triple("http://ex.org/s1", "http://ex.org/p", "http://ex.org/o1")
         graph.add_triple("http://ex.org/s2", "http://ex.org/p", "http://ex.org/o2")
 
-        condition = GraphQueryCondition(query="SELECT * WHERE { ?s ?p ?o }", expected_count=2)
+        condition = GraphQueryCondition(
+            query="SELECT * WHERE { ?s ?p ?o }", expected_count=2
+        )
 
         hook = Hook(
             name="query_test",
@@ -176,8 +179,12 @@ class TestTransactionalModifications:
             version_before = graph.version
 
             try:
-                graph.add_triple("http://ex.org/s2", "http://ex.org/p", "http://ex.org/o2")
-                graph.add_triple("http://ex.org/s3", "http://ex.org/p", "http://ex.org/o3")
+                graph.add_triple(
+                    "http://ex.org/s2", "http://ex.org/p", "http://ex.org/o2"
+                )
+                graph.add_triple(
+                    "http://ex.org/s3", "http://ex.org/p", "http://ex.org/o3"
+                )
                 # Commit transaction
                 return {"committed": True, "version": graph.version}
             except Exception as e:
@@ -349,7 +356,7 @@ class TestHookSuccessProvenance:
             graph.add_triple(
                 f"http://ex.org/execution/{hook_id}",
                 "http://purl.org/pav/executedAt",
-                datetime.utcnow().isoformat(),
+                datetime.now(UTC).isoformat(),
             )
 
             return {"provenance_recorded": True}
@@ -384,10 +391,14 @@ class TestGraphStateConsistency:
 
         def snapshot_handler(ctx: dict[str, Any]) -> dict[str, Any]:
             graph = ctx.get("graph")
-            state_snapshots.append({"count": len(graph.triples), "hash": graph.get_state_hash()})
+            state_snapshots.append(
+                {"count": len(graph.triples), "hash": graph.get_state_hash()}
+            )
             # Add a triple
             graph.add_triple(
-                f"http://ex.org/s{len(state_snapshots)}", "http://ex.org/p", "http://ex.org/o"
+                f"http://ex.org/s{len(state_snapshots)}",
+                "http://ex.org/p",
+                "http://ex.org/o",
             )
             return {"snapshot": len(state_snapshots)}
 

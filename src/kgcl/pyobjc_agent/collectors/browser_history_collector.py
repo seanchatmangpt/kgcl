@@ -6,7 +6,7 @@ web browsing activity.
 """
 
 import logging
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import Any
 
 from ..plugins import get_registry
@@ -74,7 +74,7 @@ class BrowserHistoryCollector(BaseCollector):
             if self._last_collection_time:
                 # Only get history since last collection
                 hours_back = (
-                    datetime.utcnow() - self._last_collection_time
+                    datetime.now(UTC) - self._last_collection_time
                 ).total_seconds() / 3600.0
                 hours_back = max(hours_back, 0.1)  # At least 6 minutes
             else:
@@ -87,13 +87,15 @@ class BrowserHistoryCollector(BaseCollector):
             )
 
             if capability_data.error:
-                logger.warning(f"Error collecting browser history: {capability_data.error}")
+                logger.warning(
+                    f"Error collecting browser history: {capability_data.error}"
+                )
                 return None
 
             activity_data = capability_data.data
 
             # Update last collection time
-            self._last_collection_time = datetime.utcnow()
+            self._last_collection_time = datetime.now(UTC)
 
             # Get individual browser histories for new visits
             new_visits = []
@@ -202,7 +204,11 @@ def create_browser_history_collector(
         output_path=output_path or "/Users/sac/dev/kgcl/data/browser_history.jsonl",
         batch_size=kwargs.get("batch_size", 10),
         batch_timeout_seconds=kwargs.get("batch_timeout_seconds", 600.0),
-        **{k: v for k, v in kwargs.items() if k not in ["batch_size", "batch_timeout_seconds"]},
+        **{
+            k: v
+            for k, v in kwargs.items()
+            if k not in ["batch_size", "batch_timeout_seconds"]
+        },
     )
 
     return BrowserHistoryCollector(config)

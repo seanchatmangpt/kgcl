@@ -68,12 +68,16 @@ class TestIngestionService:
     def test_ingest_single_event(self):
         """Test ingesting single event."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = IngestionConfig(collector=CollectorConfig(output_directory=Path(tmpdir)))
+            config = IngestionConfig(
+                collector=CollectorConfig(output_directory=Path(tmpdir))
+            )
             service = IngestionService(config)
             service.start()
 
             event = AppEvent(
-                event_id="test_001", timestamp=datetime.now(UTC), app_name="com.apple.Safari"
+                event_id="test_001",
+                timestamp=datetime.now(UTC),
+                app_name="com.apple.Safari",
             )
 
             result = service.ingest_event(event)
@@ -86,12 +90,16 @@ class TestIngestionService:
     async def test_ingest_event_async(self):
         """Test async event ingestion."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = IngestionConfig(collector=CollectorConfig(output_directory=Path(tmpdir)))
+            config = IngestionConfig(
+                collector=CollectorConfig(output_directory=Path(tmpdir))
+            )
             service = IngestionService(config)
             service.start()
 
             event = AppEvent(
-                event_id="test_001", timestamp=datetime.now(UTC), app_name="com.apple.Safari"
+                event_id="test_001",
+                timestamp=datetime.now(UTC),
+                app_name="com.apple.Safari",
             )
 
             result = await service.ingest_event_async(event)
@@ -101,7 +109,9 @@ class TestIngestionService:
     def test_ingest_batch(self):
         """Test batch ingestion."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = IngestionConfig(collector=CollectorConfig(output_directory=Path(tmpdir)))
+            config = IngestionConfig(
+                collector=CollectorConfig(output_directory=Path(tmpdir))
+            )
             service = IngestionService(config)
             service.start()
 
@@ -124,7 +134,9 @@ class TestIngestionService:
     def test_event_filtering(self):
         """Test event filtering."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = IngestionConfig(collector=CollectorConfig(output_directory=Path(tmpdir)))
+            config = IngestionConfig(
+                collector=CollectorConfig(output_directory=Path(tmpdir))
+            )
             service = IngestionService(config)
             service.start()
 
@@ -142,7 +154,9 @@ class TestIngestionService:
     def test_duration_filtering(self):
         """Test filtering by minimum duration."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = IngestionConfig(collector=CollectorConfig(output_directory=Path(tmpdir)))
+            config = IngestionConfig(
+                collector=CollectorConfig(output_directory=Path(tmpdir))
+            )
             service = IngestionService(config)
             service.start()
 
@@ -161,7 +175,9 @@ class TestIngestionService:
     def test_register_pre_hook(self):
         """Test registering pre-ingestion hook."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = IngestionConfig(collector=CollectorConfig(output_directory=Path(tmpdir)))
+            config = IngestionConfig(
+                collector=CollectorConfig(output_directory=Path(tmpdir))
+            )
             service = IngestionService(config)
 
             hook_executed = False
@@ -174,7 +190,9 @@ class TestIngestionService:
             service.start()
 
             event = AppEvent(
-                event_id="test_001", timestamp=datetime.now(UTC), app_name="com.apple.Safari"
+                event_id="test_001",
+                timestamp=datetime.now(UTC),
+                app_name="com.apple.Safari",
             )
 
             service.ingest_event(event)
@@ -184,7 +202,9 @@ class TestIngestionService:
     def test_register_post_hook(self):
         """Test registering post-ingestion hook."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = IngestionConfig(collector=CollectorConfig(output_directory=Path(tmpdir)))
+            config = IngestionConfig(
+                collector=CollectorConfig(output_directory=Path(tmpdir))
+            )
             service = IngestionService(config)
 
             hook_executed = False
@@ -197,7 +217,9 @@ class TestIngestionService:
             service.start()
 
             event = AppEvent(
-                event_id="test_001", timestamp=datetime.now(UTC), app_name="com.apple.Safari"
+                event_id="test_001",
+                timestamp=datetime.now(UTC),
+                app_name="com.apple.Safari",
             )
 
             service.ingest_event(event)
@@ -231,7 +253,9 @@ class TestIngestionService:
     def test_get_stats(self):
         """Test getting service statistics."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = IngestionConfig(collector=CollectorConfig(output_directory=Path(tmpdir)))
+            config = IngestionConfig(
+                collector=CollectorConfig(output_directory=Path(tmpdir))
+            )
             service = IngestionService(config)
 
             stats = service.get_stats()
@@ -244,13 +268,17 @@ class TestIngestionService:
     def test_start_stop(self):
         """Test service lifecycle."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = IngestionConfig(collector=CollectorConfig(output_directory=Path(tmpdir)))
+            config = IngestionConfig(
+                collector=CollectorConfig(output_directory=Path(tmpdir))
+            )
             service = IngestionService(config)
 
             service.start()
             # Add event
             event = AppEvent(
-                event_id="test_001", timestamp=datetime.now(UTC), app_name="com.apple.Safari"
+                event_id="test_001",
+                timestamp=datetime.now(UTC),
+                app_name="com.apple.Safari",
             )
             service.ingest_event(event)
 
@@ -283,7 +311,9 @@ class TestIngestionService:
     async def test_http_handler_ingest_event(self):
         """Test HTTP handler for single event ingestion."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = IngestionConfig(collector=CollectorConfig(output_directory=Path(tmpdir)))
+            config = IngestionConfig(
+                collector=CollectorConfig(output_directory=Path(tmpdir))
+            )
             service = IngestionService(config)
             service.start()
 
@@ -310,7 +340,9 @@ class TestIngestionService:
     async def test_http_handler_ingest_batch(self):
         """Test HTTP handler for batch ingestion."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = IngestionConfig(collector=CollectorConfig(output_directory=Path(tmpdir)))
+            config = IngestionConfig(
+                collector=CollectorConfig(output_directory=Path(tmpdir))
+            )
             service = IngestionService(config)
             service.start()
 
@@ -352,7 +384,9 @@ class TestIngestionService:
     async def test_http_handler_stats(self):
         """Test HTTP handler for stats endpoint."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = IngestionConfig(collector=CollectorConfig(output_directory=Path(tmpdir)))
+            config = IngestionConfig(
+                collector=CollectorConfig(output_directory=Path(tmpdir))
+            )
             service = IngestionService(config)
 
             handler = service.to_http_handler()
@@ -368,7 +402,9 @@ class TestIngestionService:
     async def test_http_handler_flush(self):
         """Test HTTP handler for flush endpoint."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = IngestionConfig(collector=CollectorConfig(output_directory=Path(tmpdir)))
+            config = IngestionConfig(
+                collector=CollectorConfig(output_directory=Path(tmpdir))
+            )
             service = IngestionService(config)
 
             handler = service.to_http_handler()

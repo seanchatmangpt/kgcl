@@ -41,7 +41,9 @@ class TestBatchCollector:
             collector = BatchCollector(config)
 
             event = AppEvent(
-                event_id="test_001", timestamp=datetime.now(UTC), app_name="com.apple.Safari"
+                event_id="test_001",
+                timestamp=datetime.now(UTC),
+                app_name="com.apple.Safari",
             )
 
             collector.add_event(event)
@@ -120,7 +122,9 @@ class TestBatchCollector:
             collector.start()
 
             event = AppEvent(
-                event_id="test_001", timestamp=datetime.now(UTC), app_name="com.apple.Safari"
+                event_id="test_001",
+                timestamp=datetime.now(UTC),
+                app_name="com.apple.Safari",
             )
             collector.add_event(event)
             collector.flush()
@@ -137,7 +141,9 @@ class TestBatchCollector:
     def test_recovery_from_corrupted_file(self):
         """Test recovery from corrupted JSONL file."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config = CollectorConfig(output_directory=Path(tmpdir), enable_recovery=True)
+            config = CollectorConfig(
+                output_directory=Path(tmpdir), enable_recovery=True
+            )
             collector = BatchCollector(config)
 
             # Create corrupted JSONL file
@@ -195,7 +201,9 @@ class TestBatchCollector:
 
             # Add event
             event = AppEvent(
-                event_id="test_001", timestamp=datetime.now(UTC), app_name="com.apple.Safari"
+                event_id="test_001",
+                timestamp=datetime.now(UTC),
+                app_name="com.apple.Safari",
             )
             collector.add_event(event)
 

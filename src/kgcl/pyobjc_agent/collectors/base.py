@@ -11,12 +11,23 @@ import threading
 import time
 from abc import ABC, abstractmethod
 from dataclasses import asdict, dataclass, field
-from datetime import datetime
+from datetime import UTC, datetime
 from enum import Enum
 from pathlib import Path
-from typing import Any, TextIO
+from typing import Any, TextIO, TypedDict
 
 logger = logging.getLogger(__name__)
+
+
+class CollectorStats(TypedDict):
+    """Statistics for a collector."""
+
+    events_collected: int
+    events_written: int
+    batches_flushed: int
+    errors: int
+    started_at: str | None
+    last_collection_at: str | None
 
 
 class CollectorStatus(str, Enum):
@@ -115,7 +126,7 @@ class BaseCollector(ABC):
         self._output_file: TextIO | None = None
 
         # Statistics
-        self._stats = {
+        self._stats: CollectorStats = {
             "events_collected": 0,
             "events_written": 0,
             "batches_flushed": 0,
@@ -174,7 +185,7 @@ class BaseCollector(ABC):
         self._thread = threading.Thread(target=self._collection_loop, daemon=True)
         self._thread.start()
 
-        self._stats["started_at"] = datetime.utcnow().isoformat()
+        self._stats["started_at"] = datetime.now(UTC).isoformat()
         logger.info(f"Started collector: {self.config.name}")
 
     def stop(self) -> None:
@@ -237,7 +248,7 @@ class BaseCollector(ABC):
                     # Create event
                     event = CollectedEvent(
                         collector_name=self.config.name,
-                        timestamp=datetime.utcnow().isoformat(),
+                        timestamp=datetime.now(UTC).isoformat(),
                         data=event_data,
                         sequence_number=self._get_next_sequence(),
                     )
@@ -262,8 +273,13 @@ class BaseCollector(ABC):
                 consecutive_errors += 1
 
                 # Handle retries
-                if not self.config.retry_on_error or consecutive_errors >= self.config.max_retries:
-                    logger.error(f"Max errors reached for {self.config.name}. Stopping collector.")
+                if (
+                    not self.config.retry_on_error
+                    or consecutive_errors >= self.config.max_retries
+                ):
+                    logger.error(
+                        f"Max errors reached for {self.config.name}. Stopping collector."
+                    )
                     self.status = CollectorStatus.ERROR
                     break
 
@@ -299,7 +315,8 @@ class BaseCollector(ABC):
         with self._buffer_lock:
             should_flush = (
                 len(self._event_buffer) >= self.config.batch_size
-                or (time.time() - self._last_flush_time) >= self.config.batch_timeout_seconds
+                or (time.time() - self._last_flush_time)
+                >= self.config.batch_timeout_seconds
             )
 
             if should_flush:

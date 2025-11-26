@@ -11,6 +11,8 @@ from rdflib.namespace import RDF, SH
 
 from kgcl.unrdf_engine.validation import ShaclValidator, ValidationResult
 
+EXAMPLE_NS = Namespace("http://example.org/")
+
 
 class TestValidationResult:
     """Test ValidationResult class."""
@@ -25,7 +27,9 @@ class TestValidationResult:
     def test_to_dict(self) -> None:
         """Test converting to dictionary."""
         result = ValidationResult(
-            conforms=False, violations=[{"message": "test error"}], report_text="Validation failed"
+            conforms=False,
+            violations=[{"message": "test error"}],
+            report_text="Validation failed",
         )
 
         result_dict = result.to_dict()
@@ -132,13 +136,12 @@ class TestShaclValidator:
         validator.load_shapes_from_string(shapes_ttl)
 
         # Create conforming data
-        EX = Namespace("http://example.org/")
         data_graph = Graph()
-        data_graph.bind("ex", EX)
+        data_graph.bind("ex", EXAMPLE_NS)
 
         person = URIRef("http://example.org/person1")
-        data_graph.add((person, RDF.type, EX.Person))
-        data_graph.add((person, EX.name, Literal("Alice")))
+        data_graph.add((person, RDF.type, EXAMPLE_NS.Person))
+        data_graph.add((person, EXAMPLE_NS.name, Literal("Alice")))
 
         result = validator.validate(data_graph)
 
@@ -166,12 +169,11 @@ class TestShaclValidator:
         validator.load_shapes_from_string(shapes_ttl)
 
         # Create non-conforming data (missing name)
-        EX = Namespace("http://example.org/")
         data_graph = Graph()
-        data_graph.bind("ex", EX)
+        data_graph.bind("ex", EXAMPLE_NS)
 
         person = URIRef("http://example.org/person1")
-        data_graph.add((person, RDF.type, EX.Person))
+        data_graph.add((person, RDF.type, EXAMPLE_NS.Person))
         # Missing name property
 
         result = validator.validate(data_graph)
@@ -195,17 +197,18 @@ class TestShaclValidator:
 
         # Create custom shapes
         custom_shapes = Graph()
-        EX = Namespace("http://example.org/")
-        custom_shapes.bind("ex", EX)
+        custom_shapes.bind("ex", EXAMPLE_NS)
         custom_shapes.bind("sh", SH)
 
         shape = URIRef("http://example.org/CustomShape")
         custom_shapes.add((shape, RDF.type, SH.NodeShape))
-        custom_shapes.add((shape, SH.targetClass, EX.Custom))
+        custom_shapes.add((shape, SH.targetClass, EXAMPLE_NS.Custom))
 
         # Create data
         data_graph = Graph()
-        data_graph.add((URIRef("http://example.org/item1"), RDF.type, EX.Custom))
+        data_graph.add(
+            (URIRef("http://example.org/item1"), RDF.type, EXAMPLE_NS.Custom)
+        )
 
         # Validate with custom shapes
         result = validator.validate_with_custom_shapes(data_graph, custom_shapes)
@@ -235,13 +238,12 @@ class TestShaclValidator:
         validator.load_shapes_from_string(shapes_ttl)
 
         # Create invalid data
-        EX = Namespace("http://example.org/")
         data_graph = Graph()
-        data_graph.bind("ex", EX)
+        data_graph.bind("ex", EXAMPLE_NS)
 
         person = URIRef("http://example.org/person1")
-        data_graph.add((person, RDF.type, EX.Person))
-        data_graph.add((person, EX.age, Literal(200)))  # Exceeds max
+        data_graph.add((person, RDF.type, EXAMPLE_NS.Person))
+        data_graph.add((person, EXAMPLE_NS.age, Literal(200)))  # Exceeds max
 
         result = validator.validate(data_graph)
 
@@ -272,13 +274,14 @@ class TestShaclValidator:
         validator.load_shapes_from_string(shapes_ttl)
 
         # Create data that requires inference
-        EX = Namespace("http://example.org/")
         data_graph = Graph()
-        data_graph.bind("ex", EX)
+        data_graph.bind("ex", EXAMPLE_NS)
 
         person = URIRef("http://example.org/person1")
-        data_graph.add((person, RDF.type, EX.Employee))
-        data_graph.add((person, EX.hasManager, URIRef("http://example.org/manager1")))
+        data_graph.add((person, RDF.type, EXAMPLE_NS.Employee))
+        data_graph.add(
+            (person, EXAMPLE_NS.hasManager, URIRef("http://example.org/manager1"))
+        )
 
         # Validate with RDFS inference
         result = validator.validate(data_graph, inference="rdfs")
@@ -309,12 +312,11 @@ class TestShaclValidator:
         validator.load_shapes_from_string(shapes_ttl)
 
         # Create data with multiple violations
-        EX = Namespace("http://example.org/")
         data_graph = Graph()
-        data_graph.bind("ex", EX)
+        data_graph.bind("ex", EXAMPLE_NS)
 
         person = URIRef("http://example.org/person1")
-        data_graph.add((person, RDF.type, EX.Person))
+        data_graph.add((person, RDF.type, EXAMPLE_NS.Person))
         # Missing both name and age
 
         # With abort_on_first, should stop after first violation

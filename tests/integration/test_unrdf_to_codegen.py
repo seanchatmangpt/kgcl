@@ -55,13 +55,21 @@ def create_feature_template_graph() -> Graph:
     brief_template = UNRDF.DailyBriefTemplate
     g.add((brief_template, RDF.type, UNRDF.FeatureTemplate))
     g.add((brief_template, UNRDF.name, Literal("DailyBrief")))
-    g.add((brief_template, UNRDF.description, Literal("Generate daily productivity brief")))
+    g.add(
+        (
+            brief_template,
+            UNRDF.description,
+            Literal("Generate daily productivity brief"),
+        )
+    )
 
     # SHACL shape for the signature
     shape_uri = UNRDF.DailyBriefShape
     g.add((shape_uri, RDF.type, SH.NodeShape))
     g.add((shape_uri, UNRDF.signatureName, Literal("DailyBriefSignature")))
-    g.add((shape_uri, UNRDF.description, Literal("Signature for generating daily brief")))
+    g.add(
+        (shape_uri, UNRDF.description, Literal("Signature for generating daily brief"))
+    )
 
     # Input property: app_usage
     prop1 = UNRDF.prop_app_usage
@@ -181,7 +189,9 @@ class TestUNRDFToCodegen:
         assert "__all__" in module_code
 
         # Verify can be written to file
-        with tempfile.NamedTemporaryFile(mode="w", suffix=".py", delete=False) as temp_file:
+        with tempfile.NamedTemporaryFile(
+            mode="w", suffix=".py", delete=False
+        ) as temp_file:
             temp_file.write(module_code)
             module_path = Path(temp_file.name)
 
@@ -274,11 +284,17 @@ class TestUNRDFToCodegen:
             shape_triples = []
 
             for s, p, o in g:
-                shape_triples.append({"subject": str(s), "predicate": str(p), "object": str(o)})
+                shape_triples.append(
+                    {"subject": str(s), "predicate": str(p), "object": str(o)}
+                )
 
             # Ingest shape
             result = pipeline.ingest_json(
-                data={"id": "shape_001", "type": "SHACLShape", "triples": shape_triples},
+                data={
+                    "id": "shape_001",
+                    "type": "SHACLShape",
+                    "triples": shape_triples,
+                },
                 agent="test",
             )
 

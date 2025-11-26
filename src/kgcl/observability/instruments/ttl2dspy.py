@@ -52,7 +52,11 @@ def traced_parser(parser_name: str) -> Any:
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             with tracer.start_as_current_span(
                 f"parser.{parser_name}.{func.__name__}",
-                attributes={"subsystem": "ttl2dspy", "parser": parser_name, "operation": "parse"},
+                attributes={
+                    "subsystem": "ttl2dspy",
+                    "parser": parser_name,
+                    "operation": "parse",
+                },
             ) as span:
                 start_time = time.perf_counter()
 
@@ -124,7 +128,9 @@ def traced_generator(generator_name: str) -> Any:
 
                     # Record metrics
                     if len(args) > 0 and hasattr(args[0], "metrics"):
-                        args[0].metrics.features_generated.add(1, {"generator": generator_name})
+                        args[0].metrics.features_generated.add(
+                            1, {"generator": generator_name}
+                        )
                         args[0].metrics.feature_generation_duration.record(
                             duration_ms, {"generator": generator_name}
                         )

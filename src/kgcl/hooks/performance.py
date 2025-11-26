@@ -7,7 +7,8 @@ Ported from UNRDF performance-optimizer.mjs.
 
 import statistics
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import UTC, datetime
+from typing import Any
 
 
 @dataclass
@@ -18,7 +19,7 @@ class PerformanceMetrics:
     latency_ms: float
     memory_delta_bytes: int = 0
     success: bool = True
-    timestamp: datetime = field(default_factory=datetime.utcnow)
+    timestamp: datetime = field(default_factory=lambda: datetime.now(UTC))
     p99_target_ms: float = 100.0
 
     @property
@@ -119,7 +120,7 @@ class PerformanceOptimizer:
         idx = min(max(0, idx), len(sorted_samples) - 1)
         return sorted_samples[idx]
 
-    def get_stats(self, operation: str) -> dict | None:
+    def get_stats(self, operation: str) -> dict[str, Any] | None:
         """Get comprehensive statistics for operation.
 
         Parameters
@@ -149,7 +150,7 @@ class PerformanceOptimizer:
             "stdev": statistics.stdev(samples) if len(samples) > 1 else 0.0,
         }
 
-    def get_slo_status(self, operation: str, target_ms: float) -> dict | None:
+    def get_slo_status(self, operation: str, target_ms: float) -> dict[str, Any] | None:
         """Get SLO compliance status.
 
         Parameters
@@ -177,7 +178,9 @@ class PerformanceOptimizer:
             "compliant_count": compliant,
             "total_count": total,
             "compliance_rate": compliant / total if total > 0 else 0.0,
-            "success_rate": sum(1 for m in metrics if m.success) / total if total > 0 else 0.0,
+            "success_rate": sum(1 for m in metrics if m.success) / total
+            if total > 0
+            else 0.0,
         }
 
     def get_all_operations(self) -> list[str]:

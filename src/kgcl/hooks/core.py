@@ -12,7 +12,7 @@ import traceback
 import uuid
 from collections.abc import Callable
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import UTC, datetime
 from enum import Enum
 from typing import Any
 
@@ -21,7 +21,39 @@ from kgcl.hooks.value_objects import HookName, LifecycleEventType
 
 
 class HookValidationError(Exception):
-    """Raised when hook validation fails."""
+    """Raised when hook validation fails.
+
+    Attributes
+    ----------
+    message : str
+        Validation failure message
+    hook_name : str | None
+        Name of the hook that failed validation (optional)
+    reason : str | None
+        Validation failure reason (optional)
+    """
+
+    def __init__(
+        self, message: str, hook_name: str | None = None, reason: str | None = None
+    ) -> None:
+        """Initialize HookValidationError.
+
+        Parameters
+        ----------
+        message : str
+            Validation failure message (required)
+        hook_name : str | None, optional
+            Name of the hook that failed validation
+        reason : str | None, optional
+            Validation failure reason
+        """
+        self.message = message
+        self.hook_name = hook_name
+        self.reason = reason
+        if hook_name and reason:
+            super().__init__(f"Hook '{hook_name}' validation failed: {reason}")
+        else:
+            super().__init__(message)
 
 
 class HookState(Enum):
@@ -145,7 +177,7 @@ class Hook:
 
     # Lifecycle tracking
     state: HookState = field(default=HookState.PENDING, init=False)
-    created_at: datetime = field(default_factory=datetime.utcnow, init=False)
+    created_at: datetime = field(default_factory=lambda: datetime.now(UTC), init=False)
     executed_at: datetime | None = field(default=None, init=False)
 
     def __post_init__(self) -> None:
@@ -176,7 +208,7 @@ class Hook:
         """Transition to a new state."""
         self.state = new_state
         if new_state in [HookState.EXECUTED, HookState.COMPLETED, HookState.FAILED]:
-            self.executed_at = datetime.utcnow()
+            self.executed_at = datetime.now(UTC)
 
 
 class HookRegistry:
@@ -395,7 +427,12 @@ class HookManager:
         executions = [r for r in self.execution_history if r.hook_id == hook_id]
 
         if not executions:
-            return {"total_executions": 0, "successes": 0, "failures": 0, "success_rate": 0.0}
+            return {
+                "total_executions": 0,
+                "successes": 0,
+                "failures": 0,
+                "success_rate": 0.0,
+            }
 
         successes = sum(1 for r in executions if not r.error)
         failures = sum(1 for r in executions if r.error)
@@ -450,12 +487,17 @@ class HookExecutor:
         """
         self._event_handlers.append(handler)
 
-    def _emit_event(self, event_type: LifecycleEventType, hook: Hook, **kwargs: Any) -> None:
+    def _emit_event(
+        self, event_type: LifecycleEventType, hook: Hook, **kwargs: Any
+    ) -> None:
         """Emit lifecycle event."""
         from kgcl.hooks.lifecycle import HookLifecycleEvent
 
         event = HookLifecycleEvent(
-            event_type=event_type, hook_id=hook.name, timestamp=datetime.utcnow(), metadata=kwargs
+            event_type=event_type,
+            hook_id=hook.name,
+            timestamp=datetime.now(UTC),
+            metadata=kwargs,
         )
 
         for handler in self._event_handlers:
@@ -481,7 +523,7 @@ class HookExecutor:
         HookReceipt
             Execution receipt
         """
-        start_time = datetime.utcnow()
+        start_time = datetime.now(UTC)
         condition_result: ConditionResult | None = None
         handler_result: dict[str, Any] | None = None
         error: str | None = None
@@ -500,14 +542,20 @@ class HookExecutor:
             except TimeoutError:
                 error = f"Condition evaluation exceeded timeout of {hook.timeout}s"
                 hook._transition_state(HookState.FAILED)
-                condition_result = ConditionResult(triggered=False, metadata={"error": "timeout"})
+                condition_result = ConditionResult(
+                    triggered=False, metadata={"error": "timeout"}
+                )
             except Exception as e:
                 error = f"Condition evaluation failed: {e!s}"
                 stack_trace = traceback.format_exc()
                 hook._transition_state(HookState.FAILED)
-                condition_result = ConditionResult(triggered=False, metadata={"error": str(e)})
+                condition_result = ConditionResult(
+                    triggered=False, metadata={"error": str(e)}
+                )
 
-            self._emit_event(LifecycleEventType.POST_CONDITION, hook, result=condition_result)
+            self._emit_event(
+                LifecycleEventType.POST_CONDITION, hook, result=condition_result
+            )
 
             # Execute handler if condition triggered
             if condition_result and condition_result.triggered and not error:
@@ -532,7 +580,9 @@ class HookExecutor:
                     stack_trace = traceback.format_exc()
                     hook._transition_state(HookState.FAILED)
 
-                self._emit_event(LifecycleEventType.POST_EXECUTE, hook, result=handler_result)
+                self._emit_event(
+                    LifecycleEventType.POST_EXECUTE, hook, result=handler_result
+                )
             elif condition_result and not condition_result.triggered:
                 # Condition not triggered, mark as completed
                 hook._transition_state(HookState.COMPLETED)
@@ -543,7 +593,7 @@ class HookExecutor:
             hook._transition_state(HookState.FAILED)
 
         # Calculate duration
-        end_time = datetime.utcnow()
+        end_time = datetime.now(UTC)
         duration_ms = (end_time - start_time).total_seconds() * 1000
 
         # Create receipt
@@ -551,7 +601,8 @@ class HookExecutor:
             hook_id=hook.name,
             timestamp=start_time,
             actor=hook.actor,
-            condition_result=condition_result or ConditionResult(triggered=False, metadata={}),
+            condition_result=condition_result
+            or ConditionResult(triggered=False, metadata={}),
             handler_result=handler_result,
             duration_ms=duration_ms,
             error=error,

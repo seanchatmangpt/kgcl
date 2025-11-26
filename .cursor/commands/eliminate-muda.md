@@ -103,12 +103,12 @@ Always keep LinkML validation, sandbox limits, and UNRDF parity intact.
 ## Step 4: Verify Value Stream
 
 ```bash
-cargo-make format
-cargo-make lint
-cargo-make type-check
-cargo-make test
-cargo-make unrdf-full        # if touching UNRDF paths
-.githooks/pre-commit
+poe format
+poe lint
+poe type-check
+poe test
+poe unrdf-full        # if touching UNRDF paths
+poe pre-commit-run
 ```
 
 Ensure:

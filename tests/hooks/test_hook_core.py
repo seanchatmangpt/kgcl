@@ -6,7 +6,7 @@ No mocking of core domain objects - real object collaboration testing.
 """
 
 import asyncio
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import Any
 
 import pytest
@@ -80,16 +80,26 @@ class TestHookCreation:
         # Missing name
         with pytest.raises(HookValidationError, match="name"):
             Hook(
-                name="", description="Test", condition=AlwaysTrueCondition(), handler=simple_handler
+                name="",
+                description="Test",
+                condition=AlwaysTrueCondition(),
+                handler=simple_handler,
             )
 
         # Missing condition
         with pytest.raises(HookValidationError, match="condition"):
-            Hook(name="test", description="Test", condition=None, handler=simple_handler)
+            Hook(
+                name="test", description="Test", condition=None, handler=simple_handler
+            )
 
         # Missing handler
         with pytest.raises(HookValidationError, match="handler"):
-            Hook(name="test", description="Test", condition=AlwaysTrueCondition(), handler=None)
+            Hook(
+                name="test",
+                description="Test",
+                condition=AlwaysTrueCondition(),
+                handler=None,
+            )
 
 
 class TestHookLifecycle:
@@ -121,14 +131,14 @@ class TestHookMetadata:
 
     def test_hook_tracks_created_at_timestamp(self):
         """Hook tracks metadata: created_at timestamp."""
-        before = datetime.utcnow()
+        before = datetime.now(UTC)
         hook = Hook(
             name="test_hook",
             description="Test",
             condition=AlwaysTrueCondition(),
             handler=simple_handler,
         )
-        after = datetime.utcnow()
+        after = datetime.now(UTC)
 
         assert before <= hook.created_at <= after
 
@@ -185,7 +195,10 @@ class TestHookPriority:
     def test_hook_priority_defaults_to_50(self):
         """Hook priority defaults to 50 if not specified."""
         hook = Hook(
-            name="test", description="Test", condition=AlwaysTrueCondition(), handler=simple_handler
+            name="test",
+            description="Test",
+            condition=AlwaysTrueCondition(),
+            handler=simple_handler,
         )
 
         assert hook.priority == 50
@@ -217,7 +230,10 @@ class TestHookEnableDisable:
     def test_hook_can_be_disabled_without_deletion(self):
         """Hook can be enabled/disabled without deletion."""
         hook = Hook(
-            name="test", description="Test", condition=AlwaysTrueCondition(), handler=simple_handler
+            name="test",
+            description="Test",
+            condition=AlwaysTrueCondition(),
+            handler=simple_handler,
         )
 
         assert hook.enabled is True  # Default enabled
@@ -273,9 +289,15 @@ class TestHookRegistry:
         """Hook registry returns hooks sorted by priority."""
         registry = HookRegistry()
 
-        registry.register(Hook("low", "Low", AlwaysTrueCondition(), simple_handler, priority=10))
-        registry.register(Hook("high", "High", AlwaysTrueCondition(), simple_handler, priority=90))
-        registry.register(Hook("mid", "Mid", AlwaysTrueCondition(), simple_handler, priority=50))
+        registry.register(
+            Hook("low", "Low", AlwaysTrueCondition(), simple_handler, priority=10)
+        )
+        registry.register(
+            Hook("high", "High", AlwaysTrueCondition(), simple_handler, priority=90)
+        )
+        registry.register(
+            Hook("mid", "Mid", AlwaysTrueCondition(), simple_handler, priority=50)
+        )
 
         hooks = registry.get_all_sorted()
         priorities = [h.priority for h in hooks]
@@ -290,7 +312,10 @@ class TestHookExecution:
     async def test_hook_execution_produces_receipt(self):
         """Hook execution produces receipt with timestamp, result, error."""
         hook = Hook(
-            name="test", description="Test", condition=AlwaysTrueCondition(), handler=simple_handler
+            name="test",
+            description="Test",
+            condition=AlwaysTrueCondition(),
+            handler=simple_handler,
         )
 
         executor = HookExecutor()
@@ -328,7 +353,7 @@ class TestHookReceipt:
         """Receipts are immutable after creation."""
         receipt = HookReceipt(
             hook_id="test",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(UTC),
             condition_result=ConditionResult(triggered=True, metadata={}),
             handler_result={"success": True},
             duration_ms=100.0,

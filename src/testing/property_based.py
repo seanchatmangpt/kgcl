@@ -1,4 +1,4 @@
-"""Property-Based Testing
+"""Property-Based Testing.
 
 Advanced property-based testing with shrinking and statistics.
 """
@@ -10,7 +10,7 @@ from typing import Any
 
 @dataclass
 class PropertyBasedTest:
-    """Property-based test with statistics and shrinking
+    """Property-based test with statistics and shrinking.
 
     Example:
         test = PropertyBasedTest(
@@ -36,11 +36,11 @@ class PropertyBasedTest:
             self.results = {}
 
     def add_example(self, *args: Any) -> None:
-        """Add example to test"""
+        """Add example to test."""
         self.examples.append(args)
 
     def run(self) -> bool:
-        """Run property test
+        """Run property test.
 
         Returns
         -------
@@ -71,13 +71,13 @@ class PropertyBasedTest:
         return failed == 0
 
     def success_rate(self) -> float:
-        """Get success rate as percentage"""
+        """Get success rate as percentage."""
         if not self.examples:
             return 0.0
         return (self.results.get("passed", 0) / len(self.examples)) * 100
 
     def report(self) -> str:
-        """Generate test report"""
+        """Generate test report."""
         lines = [
             f"Property Test: {self.name}",
             f"Examples: {len(self.examples)}",

@@ -22,7 +22,9 @@ tracer = trace.get_tracer(__name__)
 
 @click.group()
 @click.option(
-    "--graph-file", type=click.Path(path_type=Path), help="Path to RDF graph file (Turtle format)"
+    "--graph-file",
+    type=click.Path(path_type=Path),
+    help="Path to RDF graph file (Turtle format)",
 )
 @click.pass_context
 def cli(ctx: click.Context, graph_file: Path | None) -> None:
@@ -38,9 +40,15 @@ def cli(ctx: click.Context, graph_file: Path | None) -> None:
 @click.argument("data_file", type=click.Path(exists=True, path_type=Path))
 @click.option("--agent", default="cli", help="Agent performing ingestion")
 @click.option("--reason", help="Reason for ingestion")
-@click.option("--shapes", type=click.Path(exists=True, path_type=Path), help="SHACL shapes file")
-@click.option("--validate/--no-validate", default=True, help="Validate data before committing")
-@click.option("--base-uri", default="http://unrdf.org/data/", help="Base URI for entities")
+@click.option(
+    "--shapes", type=click.Path(exists=True, path_type=Path), help="SHACL shapes file"
+)
+@click.option(
+    "--validate/--no-validate", default=True, help="Validate data before committing"
+)
+@click.option(
+    "--base-uri", default="http://unrdf.org/data/", help="Base URI for entities"
+)
 @click.pass_context
 def ingest(
     ctx: click.Context,
@@ -78,7 +86,9 @@ def ingest(
         )
 
         # Ingest data
-        result = pipeline.ingest_json(data=data, agent=agent, reason=reason, base_uri=base_uri)
+        result = pipeline.ingest_json(
+            data=data, agent=agent, reason=reason, base_uri=base_uri
+        )
 
         # Output result
         click.echo(json.dumps(result.to_dict(), indent=2))
@@ -96,7 +106,9 @@ def ingest(
 
 @cli.command()
 @click.argument("sparql_query")
-@click.option("--format", "output_format", type=click.Choice(["json", "table"]), default="table")
+@click.option(
+    "--format", "output_format", type=click.Choice(["json", "table"]), default="table"
+)
 @click.pass_context
 def query(ctx: click.Context, sparql_query: str, output_format: str) -> None:
     """Execute SPARQL query against the graph.
@@ -155,7 +167,9 @@ def stats(ctx: click.Context) -> None:
 
 @cli.command()
 @click.argument("subject")
-@click.option("--format", "output_format", type=click.Choice(["json", "turtle"]), default="json")
+@click.option(
+    "--format", "output_format", type=click.Choice(["json", "turtle"]), default="json"
+)
 @click.pass_context
 def provenance(ctx: click.Context, subject: str, output_format: str) -> None:
     """Get provenance information for triples involving a subject.
@@ -175,7 +189,11 @@ def provenance(ctx: click.Context, subject: str, output_format: str) -> None:
             if prov:
                 provenance_data.append(
                     {
-                        "triple": {"subject": str(s), "predicate": str(p), "object": str(o)},
+                        "triple": {
+                            "subject": str(s),
+                            "predicate": str(p),
+                            "object": str(o),
+                        },
                         "provenance": prov.to_dict(),
                     }
                 )
@@ -197,7 +215,10 @@ def provenance(ctx: click.Context, subject: str, output_format: str) -> None:
 @cli.command()
 @click.argument("output_file", type=click.Path(path_type=Path))
 @click.option(
-    "--format", "output_format", type=click.Choice(["turtle", "xml", "json-ld"]), default="turtle"
+    "--format",
+    "output_format",
+    type=click.Choice(["turtle", "xml", "json-ld"]),
+    default="turtle",
 )
 @click.pass_context
 def export(ctx: click.Context, output_file: Path, output_format: str) -> None:
@@ -214,7 +235,9 @@ def export(ctx: click.Context, output_file: Path, output_format: str) -> None:
         # Map format names to rdflib format strings
         format_map = {"turtle": "turtle", "xml": "xml", "json-ld": "json-ld"}
 
-        engine.graph.serialize(destination=output_file, format=format_map[output_format])
+        engine.graph.serialize(
+            destination=output_file, format=format_map[output_format]
+        )
         click.echo(f"Graph exported to {output_file} ({output_format})")
 
 

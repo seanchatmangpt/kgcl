@@ -1,4 +1,4 @@
-"""State Management for Tests
+"""State Management for Tests.
 
 Provides state machines and state tracking for complex test scenarios.
 """
@@ -14,12 +14,26 @@ T = TypeVar("T")
 
 
 class State(Enum):
-    """Base state enumeration"""
+    """Base state enumeration for state machine implementations.
+
+    Provides a common base class for state enums with utility methods.
+    Subclass this to create specific state enumerations.
+
+    Example
+    -------
+    >>> class OrderState(State):
+    ...     PENDING = "pending"
+    ...     CONFIRMED = "confirmed"
+    ...     SHIPPED = "shipped"
+    """
+
+    # Base state for initialization - subclasses define their own states
+    INITIAL = "initial"
 
 
 @dataclass
-class StateTransition(Generic[S]):
-    """Represents a transition between states"""
+class StateTransition[S: "State"]:
+    """Represents a transition between states."""
 
     from_state: S
     to_state: S
@@ -27,8 +41,8 @@ class StateTransition(Generic[S]):
     context: dict[str, Any] = field(default_factory=dict)
 
 
-class StateManager(Generic[S]):
-    """Manages state transitions and history
+class StateManager[S: "State"]:
+    """Manages state transitions and history.
 
     Provides a simple state machine for test scenarios.
 
@@ -60,11 +74,13 @@ class StateManager(Generic[S]):
         self._listeners: list[Callable[[S, S], None]] = []
 
     def current_state(self) -> S:
-        """Get current state"""
+        """Get current state."""
         return self._current
 
-    def transition_to(self, next_state: S, context: dict[str, Any] | None = None) -> bool:
-        """Transition to next state
+    def transition_to(
+        self, next_state: S, context: dict[str, Any] | None = None
+    ) -> bool:
+        """Transition to next state.
 
         Returns True if transition succeeded, False otherwise.
         """
@@ -91,32 +107,34 @@ class StateManager(Generic[S]):
         return True
 
     def can_transition_to(self, next_state: S) -> bool:
-        """Check if transition is valid"""
+        """Check if transition is valid."""
         if next_state in self._validators:
             return self._validators[next_state](self._current)
         return True
 
     def history(self) -> list[S]:
-        """Get complete state history"""
+        """Get complete state history."""
         return self._history.copy()
 
     def transitions(self) -> list[StateTransition[S]]:
-        """Get all transitions"""
+        """Get all transitions."""
         return self._transitions.copy()
 
     def add_validator(self, state: S, validator: Callable[[S], bool]) -> None:
-        """Add validator for state transitions"""
+        """Add validator for state transitions."""
         self._validators[state] = validator
 
     def add_listener(self, listener: Callable[[S, S], None]) -> None:
-        """Add listener for state changes"""
+        """Add listener for state changes."""
         self._listeners.append(listener)
 
     def reset(self, initial_state: S) -> None:
-        """Reset to initial state"""
+        """Reset to initial state."""
         self._current = initial_state
         self._history = [initial_state]
         self._transitions = []
 
     def __repr__(self) -> str:
-        return f"StateManager(current={self._current}, history_len={len(self._history)})"
+        return (
+            f"StateManager(current={self._current}, history_len={len(self._history)})"
+        )

@@ -77,7 +77,9 @@ class OllamaLM:
             ConnectionError: If Ollama is not accessible
         """
         if not DSPY_AVAILABLE:
-            raise RuntimeError("DSPy is not installed. Install with: pip install dspy-ai")
+            raise RuntimeError(
+                "DSPy is not installed. Install with: pip install dspy-ai"
+            )
 
         self.config = config or OllamaConfig.from_env()
         self._lm: DSPyLM | None = None

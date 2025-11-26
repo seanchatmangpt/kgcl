@@ -11,11 +11,16 @@ This plugin provides capabilities for:
 import logging
 import os
 import sqlite3
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
-from .base import BaseCapabilityPlugin, CapabilityData, CapabilityDescriptor, EntitlementLevel
+from .base import (
+    BaseCapabilityPlugin,
+    CapabilityData,
+    CapabilityDescriptor,
+    EntitlementLevel,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -68,7 +73,10 @@ class BrowserPlugin(BaseCapabilityPlugin):
                                 "properties": {
                                     "url": {"type": "string"},
                                     "title": {"type": "string"},
-                                    "visit_time": {"type": "string", "format": "date-time"},
+                                    "visit_time": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                    },
                                     "visit_count": {"type": "integer"},
                                 },
                             },
@@ -93,7 +101,10 @@ class BrowserPlugin(BaseCapabilityPlugin):
                                 "properties": {
                                     "url": {"type": "string"},
                                     "title": {"type": "string"},
-                                    "visit_time": {"type": "string", "format": "date-time"},
+                                    "visit_time": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                    },
                                     "visit_count": {"type": "integer"},
                                 },
                             },
@@ -167,7 +178,7 @@ class BrowserPlugin(BaseCapabilityPlugin):
         self, capability_name: str, parameters: dict[str, Any] | None = None
     ) -> CapabilityData:
         """Collect browser history data."""
-        timestamp = datetime.utcnow()
+        timestamp = datetime.now(UTC)
         params = parameters or {}
 
         try:
@@ -190,7 +201,10 @@ class BrowserPlugin(BaseCapabilityPlugin):
         except Exception as e:
             logger.error(f"Error collecting {capability_name}: {e}")
             return CapabilityData(
-                capability_name=capability_name, timestamp=timestamp, data={}, error=str(e)
+                capability_name=capability_name,
+                timestamp=timestamp,
+                data={},
+                error=str(e),
             )
 
     def _get_safari_history(self, params: dict[str, Any]) -> dict[str, Any]:
@@ -216,7 +230,7 @@ class BrowserPlugin(BaseCapabilityPlugin):
             # Safari uses WebKit timestamp (seconds since 2001-01-01)
             webkit_epoch = datetime(2001, 1, 1)
             time_threshold = (
-                datetime.utcnow() - timedelta(hours=hours_back) - webkit_epoch
+                datetime.now(UTC) - timedelta(hours=hours_back) - webkit_epoch
             ).total_seconds()
 
             # Connect to Safari history database (read-only)
@@ -290,7 +304,8 @@ class BrowserPlugin(BaseCapabilityPlugin):
         try:
             # Chrome uses microseconds since Unix epoch
             time_threshold = int(
-                (datetime.utcnow() - timedelta(hours=hours_back)).timestamp() * 1_000_000
+                (datetime.now(UTC) - timedelta(hours=hours_back)).timestamp()
+                * 1_000_000
             )
 
             # Connect to Chrome history database (read-only)
@@ -358,8 +373,12 @@ class BrowserPlugin(BaseCapabilityPlugin):
         hours_back = params.get("hours_back", 24)
 
         # Collect from both browsers
-        safari_data = self._get_safari_history({"hours_back": hours_back, "limit": 1000})
-        chrome_data = self._get_chrome_history({"hours_back": hours_back, "limit": 1000})
+        safari_data = self._get_safari_history(
+            {"hours_back": hours_back, "limit": 1000}
+        )
+        chrome_data = self._get_chrome_history(
+            {"hours_back": hours_back, "limit": 1000}
+        )
 
         # Aggregate statistics
         safari_visits = safari_data.get("visits", [])

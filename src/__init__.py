@@ -1,4 +1,4 @@
-"""Chicago TDD Tools - Python Implementation
+"""Chicago TDD Tools - Python Implementation.
 
 A testing framework enforcing Chicago-style TDD (Classicist Test-Driven Development)
 with compile-time guarantees translated to Python type hints and runtime validation.
@@ -17,11 +17,13 @@ Quick Start:
         assert_eq_with_msg(5 + 3, 8, "math works")
 """
 
+from __future__ import annotations
+
 __version__ = "1.4.0"
 __author__ = "Chicago TDD Tools Contributors"
 __license__ = "MIT"
 __all__ = [
-    "TestFixture",
+    "Fixture",
     "assert_eq_with_msg",
     "assert_error",
     "assert_in_range",
@@ -36,9 +38,10 @@ __all__ = [
     "validation",
 ]
 
-from . import core, swarm, testing, validation
-from .core import (
-    TestFixture,
+# Absolute imports required by Ruff TID252
+from src import core, swarm, testing, validation
+from src.core import (
+    Fixture,
     assert_eq_with_msg,
     assert_error,
     assert_in_range,

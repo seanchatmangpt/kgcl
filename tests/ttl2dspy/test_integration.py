@@ -28,7 +28,13 @@ def text_analysis_ttl(tmp_path: Path) -> Path:
     classify_shape = kgcl_ns.TextClassificationShape
     g.add((classify_shape, RDF.type, SH.NodeShape))
     g.add((classify_shape, SH.targetClass, kgcl_ns.TextClassification))
-    g.add((classify_shape, RDFS.comment, Literal("Classify text into predefined categories")))
+    g.add(
+        (
+            classify_shape,
+            RDFS.comment,
+            Literal("Classify text into predefined categories"),
+        )
+    )
 
     # Input text property.
     prop1 = kgcl_ns.TextClassificationShape_text
@@ -126,7 +132,9 @@ class TestEndToEnd:
     def test_caching_workflow(self, text_analysis_ttl: Path, tmp_path: Path) -> None:
         """Test that caching works across the workflow."""
         config = CacheConfig(
-            memory_cache_enabled=True, disk_cache_enabled=True, disk_cache_dir=tmp_path / "cache"
+            memory_cache_enabled=True,
+            disk_cache_enabled=True,
+            disk_cache_dir=tmp_path / "cache",
         )
 
         # First run
@@ -182,7 +190,9 @@ class TestEndToEnd:
         for shapes in results.values():
             assert len(shapes) == 1
 
-    def test_generated_module_is_importable(self, text_analysis_ttl: Path, tmp_path: Path) -> None:
+    def test_generated_module_is_importable(
+        self, text_analysis_ttl: Path, tmp_path: Path
+    ) -> None:
         """Test that generated module can be imported."""
         optimizer = UltraOptimizer()
         writer = ModuleWriter()
@@ -198,7 +208,9 @@ class TestEndToEnd:
 
         try:
             # This will fail if the generated code has syntax errors
-            spec = importlib.util.spec_from_file_location("test_signatures", output_path)
+            spec = importlib.util.spec_from_file_location(
+                "test_signatures", output_path
+            )
             assert spec is not None, "Failed to create module spec"
             loader = spec.loader
             assert loader is not None, "Spec loader missing"
@@ -259,7 +271,9 @@ class TestHooks:
             assert "inputs" in shape
             assert "outputs" in shape
 
-    def test_hook_generate_action(self, text_analysis_ttl: Path, tmp_path: Path) -> None:
+    def test_hook_generate_action(
+        self, text_analysis_ttl: Path, tmp_path: Path
+    ) -> None:
         """Test hook with generate action."""
         hook = TTL2DSpyHook()
 

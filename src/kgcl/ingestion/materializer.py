@@ -8,7 +8,12 @@ from datetime import datetime, timedelta
 from typing import Any
 
 from kgcl.ingestion.config import FeatureConfig
-from kgcl.ingestion.models import AppEvent, BrowserVisit, CalendarBlock, MaterializedFeature
+from kgcl.ingestion.models import (
+    AppEvent,
+    BrowserVisit,
+    CalendarBlock,
+    MaterializedFeature,
+)
 
 
 class FeatureMaterializer:
@@ -61,19 +66,27 @@ class FeatureMaterializer:
         for feature_id in self.config.enabled_features:
             if feature_id == "app_usage_time":
                 features.extend(
-                    self._compute_app_usage_time(windowed_events, window_start, window_end)
+                    self._compute_app_usage_time(
+                        windowed_events, window_start, window_end
+                    )
                 )
             elif feature_id == "browser_domain_visits":
                 features.extend(
-                    self._compute_browser_domain_visits(windowed_events, window_start, window_end)
+                    self._compute_browser_domain_visits(
+                        windowed_events, window_start, window_end
+                    )
                 )
             elif feature_id == "meeting_count":
                 features.extend(
-                    self._compute_meeting_count(windowed_events, window_start, window_end)
+                    self._compute_meeting_count(
+                        windowed_events, window_start, window_end
+                    )
                 )
             elif feature_id == "context_switches":
                 features.extend(
-                    self._compute_context_switches(windowed_events, window_start, window_end)
+                    self._compute_context_switches(
+                        windowed_events, window_start, window_end
+                    )
                 )
 
         return features
@@ -114,7 +127,9 @@ class FeatureMaterializer:
         # Recompute features for affected windows
         updated_features: list[MaterializedFeature] = []
         for window_start, window_end in affected_windows:
-            windowed_events = self._filter_by_window(new_events, window_start, window_end)
+            windowed_events = self._filter_by_window(
+                new_events, window_start, window_end
+            )
             new_features = self.materialize(windowed_events, window_start, window_end)
 
             # Merge with existing features
@@ -216,7 +231,10 @@ class FeatureMaterializer:
                     aggregation_type="count",
                     value=count,
                     sample_count=count,
-                    metadata={"domain": domain, "unique_urls": len(unique_urls[domain])},
+                    metadata={
+                        "domain": domain,
+                        "unique_urls": len(unique_urls[domain]),
+                    },
                 )
             )
 
@@ -458,7 +476,8 @@ class FeatureMaterializer:
             # Weighted average
             total_samples = existing.sample_count + new.sample_count
             merged_value = (
-                float(existing.value) * existing.sample_count + float(new.value) * new.sample_count
+                float(existing.value) * existing.sample_count
+                + float(new.value) * new.sample_count
             ) / total_samples
         else:
             # Default: use new value

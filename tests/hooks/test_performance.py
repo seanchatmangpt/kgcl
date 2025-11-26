@@ -165,7 +165,9 @@ def test_get_slo_status_violations():
 
     # Record metrics with failures
     optimizer.record_metric(
-        PerformanceMetrics(operation="test_op", latency_ms=50.0, success=True, p99_target_ms=100.0)
+        PerformanceMetrics(
+            operation="test_op", latency_ms=50.0, success=True, p99_target_ms=100.0
+        )
     )
     optimizer.record_metric(
         PerformanceMetrics(
@@ -181,8 +183,12 @@ def test_get_slo_status_violations():
 
 def test_meets_slo_property():
     """Test PerformanceMetrics.meets_slo property."""
-    metric_compliant = PerformanceMetrics(operation="test", latency_ms=50.0, p99_target_ms=100.0)
-    metric_violation = PerformanceMetrics(operation="test", latency_ms=150.0, p99_target_ms=100.0)
+    metric_compliant = PerformanceMetrics(
+        operation="test", latency_ms=50.0, p99_target_ms=100.0
+    )
+    metric_violation = PerformanceMetrics(
+        operation="test", latency_ms=150.0, p99_target_ms=100.0
+    )
 
     assert metric_compliant.meets_slo is True
     assert metric_violation.meets_slo is False
@@ -430,7 +436,9 @@ async def test_performance_metrics_recorded():
     condition = SparqlAskCondition("ASK { ?s ?p ?o }", use_cache=False)
     handler = lambda ctx: {"result": "success"}
 
-    hook = Hook(name="test_hook", description="Test hook", condition=condition, handler=handler)
+    hook = Hook(
+        name="test_hook", description="Test hook", condition=condition, handler=handler
+    )
 
     context = {"test_result": True}
     receipt = await pipeline.execute(hook, context)
@@ -449,7 +457,9 @@ async def test_latency_tracking_per_phase():
     condition = SparqlAskCondition("ASK { ?s ?p ?o }", use_cache=False)
     handler = lambda ctx: {"result": "success"}
 
-    hook = Hook(name="test_hook", description="Test hook", condition=condition, handler=handler)
+    hook = Hook(
+        name="test_hook", description="Test hook", condition=condition, handler=handler
+    )
 
     context = {"test_result": True}
     receipt = await pipeline.execute(hook, context)
@@ -468,7 +478,9 @@ async def test_metrics_in_receipt():
     condition = SparqlAskCondition("ASK { ?s ?p ?o }", use_cache=False)
     handler = lambda ctx: {"result": "success"}
 
-    hook = Hook(name="test_hook", description="Test hook", condition=condition, handler=handler)
+    hook = Hook(
+        name="test_hook", description="Test hook", condition=condition, handler=handler
+    )
 
     # Execute twice to build up stats
     context = {"test_result": True}
@@ -492,7 +504,10 @@ async def test_slo_violation_detection():
     condition = SparqlAskCondition("ASK { ?s ?p ?o }", use_cache=False)
 
     hook = Hook(
-        name="slow_hook", description="Slow hook", condition=condition, handler=slow_handler
+        name="slow_hook",
+        description="Slow hook",
+        condition=condition,
+        handler=slow_handler,
     )
 
     context = {"test_result": True}
@@ -512,8 +527,12 @@ async def test_multiple_operations_tracked():
     condition2 = SparqlAskCondition("ASK { ?x ?y ?z }", use_cache=False)
     handler = lambda ctx: {"result": "success"}
 
-    hook1 = Hook(name="hook1", description="Hook 1", condition=condition1, handler=handler)
-    hook2 = Hook(name="hook2", description="Hook 2", condition=condition2, handler=handler)
+    hook1 = Hook(
+        name="hook1", description="Hook 1", condition=condition1, handler=handler
+    )
+    hook2 = Hook(
+        name="hook2", description="Hook 2", condition=condition2, handler=handler
+    )
 
     context = {"test_result": True}
     await pipeline.execute(hook1, context)
@@ -578,7 +597,9 @@ async def test_performance_statistics_available():
     condition = SparqlAskCondition("ASK { ?s ?p ?o }", use_cache=False)
     handler = lambda ctx: {"result": "success"}
 
-    hook = Hook(name="test_hook", description="Test hook", condition=condition, handler=handler)
+    hook = Hook(
+        name="test_hook", description="Test hook", condition=condition, handler=handler
+    )
 
     context = {"test_result": True}
     await pipeline.execute(hook, context)

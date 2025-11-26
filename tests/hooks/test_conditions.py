@@ -6,7 +6,7 @@ Real condition evaluation with actual SPARQL/SHACL where possible.
 """
 
 import asyncio
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 from typing import Any
 
 import pytest
@@ -196,7 +196,8 @@ class TestDeltaCondition:
     async def test_delta_condition_detects_any_changes(self):
         """DeltaCondition detects graph changes (any/increase/decrease)."""
         condition = DeltaCondition(
-            delta_type=DeltaType.ANY, query="SELECT (COUNT(*) as ?count) WHERE { ?s ?p ?o }"
+            delta_type=DeltaType.ANY,
+            query="SELECT (COUNT(*) as ?count) WHERE { ?s ?p ?o }",
         )
 
         context = {"previous_count": 100, "current_count": 110}
@@ -210,7 +211,8 @@ class TestDeltaCondition:
     async def test_delta_condition_detects_increase(self):
         """DeltaCondition detects increase in values."""
         condition = DeltaCondition(
-            delta_type=DeltaType.INCREASE, query="SELECT (COUNT(*) as ?count) WHERE { ?s ?p ?o }"
+            delta_type=DeltaType.INCREASE,
+            query="SELECT (COUNT(*) as ?count) WHERE { ?s ?p ?o }",
         )
 
         context = {"previous_count": 100, "current_count": 110}
@@ -224,7 +226,8 @@ class TestDeltaCondition:
     async def test_delta_condition_detects_decrease(self):
         """DeltaCondition detects decrease in values."""
         condition = DeltaCondition(
-            delta_type=DeltaType.DECREASE, query="SELECT (COUNT(*) as ?count) WHERE { ?s ?p ?o }"
+            delta_type=DeltaType.DECREASE,
+            query="SELECT (COUNT(*) as ?count) WHERE { ?s ?p ?o }",
         )
 
         context = {"previous_count": 110, "current_count": 100}
@@ -304,9 +307,15 @@ class TestWindowCondition:
 
         context = {
             "time_series": [
-                {"timestamp": datetime.utcnow() - timedelta(seconds=30), "requests": 40},
-                {"timestamp": datetime.utcnow() - timedelta(seconds=15), "requests": 35},
-                {"timestamp": datetime.utcnow(), "requests": 30},
+                {
+                    "timestamp": datetime.now(UTC) - timedelta(seconds=30),
+                    "requests": 40,
+                },
+                {
+                    "timestamp": datetime.now(UTC) - timedelta(seconds=15),
+                    "requests": 35,
+                },
+                {"timestamp": datetime.now(UTC), "requests": 30},
             ]
         }
 
@@ -328,9 +337,15 @@ class TestWindowCondition:
 
         context = {
             "time_series": [
-                {"timestamp": datetime.utcnow() - timedelta(seconds=30), "response_time": 600},
-                {"timestamp": datetime.utcnow() - timedelta(seconds=15), "response_time": 700},
-                {"timestamp": datetime.utcnow(), "response_time": 800},
+                {
+                    "timestamp": datetime.now(UTC) - timedelta(seconds=30),
+                    "response_time": 600,
+                },
+                {
+                    "timestamp": datetime.now(UTC) - timedelta(seconds=15),
+                    "response_time": 700,
+                },
+                {"timestamp": datetime.now(UTC), "response_time": 800},
             ]
         }
 
@@ -360,9 +375,9 @@ class TestWindowCondition:
 
         context = {
             "time_series": [
-                {"timestamp": datetime.utcnow() - timedelta(seconds=30), "value": 20},
-                {"timestamp": datetime.utcnow() - timedelta(seconds=15), "value": 50},
-                {"timestamp": datetime.utcnow(), "value": 100},
+                {"timestamp": datetime.now(UTC) - timedelta(seconds=30), "value": 20},
+                {"timestamp": datetime.now(UTC) - timedelta(seconds=15), "value": 50},
+                {"timestamp": datetime.now(UTC), "value": 100},
             ]
         }
 
@@ -409,7 +424,9 @@ class TestConditionCaching:
 
             async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
                 self.call_count += 1
-                return ConditionResult(triggered=True, metadata={"count": self.call_count})
+                return ConditionResult(
+                    triggered=True, metadata={"count": self.call_count}
+                )
 
         condition = CountingCondition()
 
@@ -446,14 +463,16 @@ class TestCompositeConditions:
 
         # True AND True = True
         and_true = CompositeCondition(
-            operator=CompositeOperator.AND, conditions=[TrueCondition(), TrueCondition()]
+            operator=CompositeOperator.AND,
+            conditions=[TrueCondition(), TrueCondition()],
         )
         result = await and_true.evaluate({})
         assert result.triggered is True
 
         # True AND False = False
         and_false = CompositeCondition(
-            operator=CompositeOperator.AND, conditions=[TrueCondition(), FalseCondition()]
+            operator=CompositeOperator.AND,
+            conditions=[TrueCondition(), FalseCondition()],
         )
         result = await and_false.evaluate({})
         assert result.triggered is False
@@ -472,14 +491,16 @@ class TestCompositeConditions:
 
         # False OR False = False
         or_false = CompositeCondition(
-            operator=CompositeOperator.OR, conditions=[FalseCondition(), FalseCondition()]
+            operator=CompositeOperator.OR,
+            conditions=[FalseCondition(), FalseCondition()],
         )
         result = await or_false.evaluate({})
         assert result.triggered is False
 
         # True OR False = True
         or_true = CompositeCondition(
-            operator=CompositeOperator.OR, conditions=[TrueCondition(), FalseCondition()]
+            operator=CompositeOperator.OR,
+            conditions=[TrueCondition(), FalseCondition()],
         )
         result = await or_true.evaluate({})
         assert result.triggered is True
@@ -497,7 +518,9 @@ class TestCompositeConditions:
                 return ConditionResult(triggered=False, metadata={})
 
         # NOT True = False
-        not_true = CompositeCondition(operator=CompositeOperator.NOT, conditions=[TrueCondition()])
+        not_true = CompositeCondition(
+            operator=CompositeOperator.NOT, conditions=[TrueCondition()]
+        )
         result = await not_true.evaluate({})
         assert result.triggered is False
 
@@ -525,10 +548,12 @@ class TestCompositeConditions:
             operator=CompositeOperator.OR,
             conditions=[
                 CompositeCondition(
-                    operator=CompositeOperator.AND, conditions=[FalseCondition(), TrueCondition()]
+                    operator=CompositeOperator.AND,
+                    conditions=[FalseCondition(), TrueCondition()],
                 ),
                 CompositeCondition(
-                    operator=CompositeOperator.AND, conditions=[TrueCondition(), TrueCondition()]
+                    operator=CompositeOperator.AND,
+                    conditions=[TrueCondition(), TrueCondition()],
                 ),
             ],
         )

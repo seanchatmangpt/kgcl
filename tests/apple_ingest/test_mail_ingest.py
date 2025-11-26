@@ -19,7 +19,7 @@ class TestMailMessageMapping:
         """
         GIVEN: A simple email message from Mail.app
         WHEN: We ingest it to RDF
-        THEN: A schema:Message triple is created with required properties
+        THEN: A schema:Message triple is created with required properties.
         """
         # TODO: Implement
         # engine = MailIngestEngine()
@@ -38,7 +38,7 @@ class TestMailMessageMapping:
         """
         GIVEN: An email message with sender
         WHEN: We ingest it to RDF
-        THEN: Sender is preserved as schema:author (schema:Person)
+        THEN: Sender is preserved as schema:author (schema:Person).
         """
         # TODO: Implement
         # engine = MailIngestEngine()
@@ -54,7 +54,7 @@ class TestMailMessageMapping:
         """
         GIVEN: An email with multiple recipients
         WHEN: We ingest it to RDF
-        THEN: All recipients are preserved as schema:recipient
+        THEN: All recipients are preserved as schema:recipient.
         """
         # TODO: Implement
         # engine = MailIngestEngine()
@@ -70,7 +70,7 @@ class TestMailMessageMapping:
         """
         GIVEN: An email message with date received
         WHEN: We ingest it to RDF
-        THEN: Date is preserved as schema:dateReceived (xsd:dateTime)
+        THEN: Date is preserved as schema:dateReceived (xsd:dateTime).
         """
         # TODO: Implement
         # engine = MailIngestEngine()
@@ -86,7 +86,7 @@ class TestMailMessageMapping:
         """
         GIVEN: A flagged email message
         WHEN: We ingest it to RDF
-        THEN: Flagged status is recorded as schema:keywords = "flagged"
+        THEN: Flagged status is recorded as schema:keywords = "flagged".
         """
         # TODO: Implement
         # engine = MailIngestEngine()
@@ -102,7 +102,7 @@ class TestMailMessageMapping:
         """
         GIVEN: An email with RFC 5322 Message-ID
         WHEN: We ingest it to RDF
-        THEN: Message-ID is preserved as apple:sourceIdentifier
+        THEN: Message-ID is preserved as apple:sourceIdentifier.
         """
         # TODO: Implement
         # engine = MailIngestEngine()
@@ -122,7 +122,7 @@ class TestMailMessageValidation:
         """
         GIVEN: An email with no sender
         WHEN: We validate against SHACL
-        THEN: Validation fails (MailMetadataValidInvariant)
+        THEN: Validation fails (MailMetadataValidInvariant).
         """
         # TODO: Implement
         # engine = MailIngestEngine()
@@ -139,7 +139,7 @@ class TestMailMessageValidation:
         """
         GIVEN: A valid email (subject, sender, date)
         WHEN: We validate against SHACL
-        THEN: Validation passes
+        THEN: Validation passes.
         """
         # TODO: Implement
         # engine = MailIngestEngine()
@@ -159,7 +159,7 @@ class TestMailMessageBatch:
         """
         GIVEN: A batch of 2 email messages
         WHEN: We ingest them together
-        THEN: Both messages are in the result graph
+        THEN: Both messages are in the result graph.
         """
         # TODO: Implement
         # engine = MailIngestEngine()
@@ -179,7 +179,7 @@ class TestMailIngestIntegration:
         """
         GIVEN: An email message that created a task
         WHEN: We ingest both
-        THEN: Task has apple:relatedAction → Message
+        THEN: Task has apple:relatedAction → Message.
         """
         # TODO: Implement
         # TODO: Implement
@@ -188,7 +188,7 @@ class TestMailIngestIntegration:
         """
         GIVEN: An email message about a calendar event
         WHEN: We ingest both
-        THEN: Calendar event has apple:relatedAction → Message
+        THEN: Calendar event has apple:relatedAction → Message.
         """
         # TODO: Implement
         # TODO: Implement

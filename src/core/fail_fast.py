@@ -1,4 +1,4 @@
-"""Fail-Fast Validation
+"""Fail-Fast Validation.
 
 Provides early failure detection for test scenarios.
 """
@@ -11,7 +11,7 @@ from typing import Any
 
 @dataclass
 class ValidationFailure:
-    """Represents a validation failure"""
+    """Represents a validation failure."""
 
     check_name: str
     reason: str
@@ -23,7 +23,7 @@ class ValidationFailure:
 
 
 class FailFastValidator:
-    """Fail-fast validator for early error detection
+    """Fail-fast validator for early error detection.
 
     Collects validation failures and can throw immediately or collect for later review.
 
@@ -41,9 +41,12 @@ class FailFastValidator:
         self._failures: list[ValidationFailure] = []
 
     def check_that(
-        self, check_name: str, condition: Callable[[], bool], context: dict | None = None
+        self,
+        check_name: str,
+        condition: Callable[[], bool],
+        context: dict | None = None,
     ) -> bool:
-        """Check a condition
+        """Check a condition.
 
         Args:
             check_name: Name of the check
@@ -60,7 +63,9 @@ class FailFastValidator:
         """
         if not condition():
             failure = ValidationFailure(
-                check_name=check_name, reason=f"Check '{check_name}' failed", context=context or {}
+                check_name=check_name,
+                reason=f"Check '{check_name}' failed",
+                context=context or {},
             )
             self._failures.append(failure)
 
@@ -70,33 +75,35 @@ class FailFastValidator:
         return True
 
     def check_equal(self, check_name: str, actual: Any, expected: Any) -> bool:
-        """Check equality"""
+        """Check equality."""
         return self.check_that(
-            check_name, lambda: actual == expected, context={"actual": actual, "expected": expected}
+            check_name,
+            lambda: actual == expected,
+            context={"actual": actual, "expected": expected},
         )
 
     def check_true(self, check_name: str, value: bool) -> bool:
-        """Check boolean is True"""
+        """Check boolean is True."""
         return self.check_that(check_name, lambda: value)
 
     def check_false(self, check_name: str, value: bool) -> bool:
-        """Check boolean is False"""
+        """Check boolean is False."""
         return self.check_that(check_name, lambda: not value)
 
     def has_failures(self) -> bool:
-        """Check if any failures occurred"""
+        """Check if any failures occurred."""
         return len(self._failures) > 0
 
     def failure_count(self) -> int:
-        """Get count of failures"""
+        """Get count of failures."""
         return len(self._failures)
 
     def failures(self) -> list[ValidationFailure]:
-        """Get all failures"""
+        """Get all failures."""
         return self._failures.copy()
 
     def assert_all_pass(self) -> None:
-        """Assert that all checks passed
+        """Assert that all checks passed.
 
         Raises
         ------
@@ -109,7 +116,7 @@ class FailFastValidator:
             raise AssertionError(msg)
 
     def reset(self) -> None:
-        """Reset failures list"""
+        """Reset failures list."""
         self._failures.clear()
 
     def __repr__(self) -> str:

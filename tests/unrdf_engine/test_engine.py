@@ -21,7 +21,10 @@ class TestProvenanceRecord:
     def test_creation(self) -> None:
         """Test creating provenance record."""
         record = ProvenanceRecord(
-            agent="test_agent", timestamp=datetime.now(UTC), reason="testing", source="test_source"
+            agent="test_agent",
+            timestamp=datetime.now(UTC),
+            reason="testing",
+            source="test_source",
         )
 
         assert record.agent == "test_agent"
@@ -31,7 +34,9 @@ class TestProvenanceRecord:
     def test_to_dict(self) -> None:
         """Test converting to dictionary."""
         timestamp = datetime.now(UTC)
-        record = ProvenanceRecord(agent="test", timestamp=timestamp, reason="test reason")
+        record = ProvenanceRecord(
+            agent="test", timestamp=timestamp, reason="test reason"
+        )
 
         result = record.to_dict()
 

@@ -8,7 +8,7 @@ SHACL, delta detection, thresholds, and composite conditions.
 import asyncio
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 from enum import Enum
 from typing import Any
 
@@ -30,6 +30,30 @@ class ConditionResult:
 
     triggered: bool
     metadata: dict[str, Any] = field(default_factory=dict)
+
+
+class AlwaysTrueCondition:
+    """
+    Condition that always evaluates to True.
+
+    Useful for testing and benchmarking hook execution without condition overhead.
+    """
+
+    async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
+        """
+        Always return True.
+
+        Parameters
+        ----------
+        context : dict[str, Any]
+            Execution context (ignored)
+
+        Returns
+        -------
+        ConditionResult
+            Result with triggered=True
+        """
+        return ConditionResult(triggered=True, metadata={})
 
 
 class Condition(ABC):
@@ -108,10 +132,14 @@ class Condition(ABC):
         ConditionResult
             Evaluation result (may be cached)
         """
-        now = datetime.utcnow()
+        now = datetime.now(UTC)
 
         # Check cache validity
-        if self.cache_ttl and self._cache is not None and self._cache_timestamp is not None:
+        if (
+            self.cache_ttl
+            and self._cache is not None
+            and self._cache_timestamp is not None
+        ):
             age = (now - self._cache_timestamp).total_seconds()
             if age < self.cache_ttl:
                 return self._cache
@@ -123,6 +151,14 @@ class Condition(ABC):
             self._cache_timestamp = now
 
         return result
+
+
+class AlwaysTrueCondition(Condition):
+    """Condition that always triggers (useful for benchmarking/tests)."""
+
+    async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
+        """Return a triggered result regardless of context."""
+        return ConditionResult(triggered=True, metadata={"reason": "always_true"})
 
 
 class SparqlAskCondition(Condition):
@@ -147,6 +183,7 @@ class SparqlAskCondition(Condition):
 
     # Shared cache instance across all SparqlAskCondition instances
     _cache: QueryCache | None = None
+    _last_query: str | None = None
 
     def __init__(
         self,
@@ -211,28 +248,139 @@ class SparqlAskCondition(Condition):
         raise ValueError("No query or ref provided for condition")
 
     async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
-        """Evaluate SPARQL ASK query with caching."""
+        """Evaluate SPARQL ASK query against RDF data.
+
+        Parameters
+        ----------
+        context : dict[str, Any]
+            Must contain 'rdf_data' key with list of triples or RDF graph
+
+        Returns
+        -------
+        ConditionResult
+            Result with triggered=True if ASK query matches
+        """
+        query_string = self._interpolate_query(context)
+        SparqlAskCondition._last_query = query_string
+
         # Check cache first
         if self.use_cache and SparqlAskCondition._cache is not None:
-            cached_result = SparqlAskCondition._cache.get(self.query)
+            cached_result = SparqlAskCondition._cache.get(query_string)
             if cached_result is not None:
                 return ConditionResult(
                     triggered=cached_result,
-                    metadata={"query": self.query, "type": "sparql_ask", "cache_hit": True},
+                    metadata={
+                        "query": query_string,
+                        "type": "sparql_ask",
+                        "cache_hit": True,
+                    },
                 )
 
-        # In real implementation, would execute against SPARQL endpoint
-        # For now, check if test_result is provided
-        triggered = context.get("test_result", False)
+        # Execute SPARQL ASK query against provided RDF data
+        # Support legacy test_result for backwards compatibility
+        if "test_result" in context:
+            triggered = bool(context["test_result"])
+        else:
+            rdf_data = context.get("rdf_data", [])
+            triggered = self._execute_ask_query(query_string, rdf_data)
 
         # Cache the result
         if self.use_cache and SparqlAskCondition._cache is not None:
-            SparqlAskCondition._cache.set(self.query, triggered)
+            SparqlAskCondition._cache.set(query_string, triggered)
 
         return ConditionResult(
             triggered=triggered,
-            metadata={"query": self.query, "type": "sparql_ask", "cache_hit": False},
+            metadata={"query": query_string, "type": "sparql_ask", "cache_hit": False},
         )
+
+    def _interpolate_query(self, context: dict[str, Any]) -> str:
+        """Interpolate variables into query string.
+
+        Parameters
+        ----------
+        context : dict[str, Any]
+            Context containing variable bindings
+
+        Returns
+        -------
+        str
+            Query with interpolated variables
+        """
+        query = self.query or ""
+        for key, value in self.bindings.items():
+            placeholder = f"${key}"
+            query = query.replace(placeholder, str(value))
+        return query
+
+    def _execute_ask_query(
+        self, query: str, rdf_data: list[tuple[str, str, str]]
+    ) -> bool:
+        """Execute SPARQL ASK query against in-memory RDF triples.
+
+        Parses the WHERE clause pattern and matches against triples.
+
+        Parameters
+        ----------
+        query : str
+            SPARQL ASK query string
+        rdf_data : list[tuple[str, str, str]]
+            List of RDF triples as (subject, predicate, object) tuples
+
+        Returns
+        -------
+        bool
+            True if pattern matches any triple, False otherwise
+        """
+        import re
+
+        # Extract pattern from ASK query
+        where_match = re.search(
+            r"WHERE\s*\{([^}]+)\}", query, re.IGNORECASE | re.DOTALL
+        )
+        if not where_match:
+            return False
+
+        pattern_str = where_match.group(1).strip()
+
+        # Parse triple pattern (simplified: ?s ?p ?o or <uri> ?p ?o etc.)
+        pattern_match = re.match(r"(\S+)\s+(\S+)\s+(\S+)", pattern_str)
+        if not pattern_match:
+            return False
+
+        subj_pattern, pred_pattern, obj_pattern = pattern_match.groups()
+
+        # Match against triples
+        for subj, pred, obj in rdf_data:
+            if (
+                self._matches_term(subj_pattern, subj)
+                and self._matches_term(pred_pattern, pred)
+                and self._matches_term(obj_pattern, obj)
+            ):
+                return True
+
+        return False
+
+    def _matches_term(self, pattern: str, value: str) -> bool:
+        """Check if pattern matches value.
+
+        Variables (starting with ?) match anything.
+        URIs are compared after stripping angle brackets.
+
+        Parameters
+        ----------
+        pattern : str
+            Pattern to match (variable or URI)
+        value : str
+            Value to match against
+
+        Returns
+        -------
+        bool
+            True if pattern matches value
+        """
+        if pattern.startswith("?"):
+            return True  # Variable matches anything
+        return pattern.strip("<>") == value.strip("<>")
 
     @classmethod
     def get_cache_stats(cls) -> dict[str, Any] | None:
@@ -245,7 +393,7 @@ class SparqlAskCondition(Condition):
         """
         if cls._cache is None:
             return None
-        return cls._cache.get_stats()
+        return cls._cache.get_stats(cls._last_query)
 
     @classmethod
     def clear_cache(cls) -> None:
@@ -264,6 +412,7 @@ class SparqlSelectCondition(Condition):
 
     # Shared cache instance across all SparqlSelectCondition instances
     _cache: QueryCache | None = None
+    _last_query: str | None = None
 
     def __init__(self, query: str, use_cache: bool = True, **kwargs: Any) -> None:
         """
@@ -286,15 +435,18 @@ class SparqlSelectCondition(Condition):
 
     async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
         """Evaluate SPARQL SELECT query with caching."""
+        query_string = self.query
+        SparqlSelectCondition._last_query = query_string
+
         # Check cache first
         if self.use_cache and SparqlSelectCondition._cache is not None:
-            cached_result = SparqlSelectCondition._cache.get(self.query)
+            cached_result = SparqlSelectCondition._cache.get(query_string)
             if cached_result is not None:
                 result_count = len(cached_result)
                 return ConditionResult(
                     triggered=result_count > 0,
                     metadata={
-                        "query": self.query,
+                        "query": query_string,
                         "result_count": result_count,
                         "type": "sparql_select",
                         "cache_hit": True,
@@ -307,12 +459,12 @@ class SparqlSelectCondition(Condition):
 
         # Cache the results
         if self.use_cache and SparqlSelectCondition._cache is not None:
-            SparqlSelectCondition._cache.set(self.query, results)
+            SparqlSelectCondition._cache.set(query_string, results)
 
         return ConditionResult(
             triggered=result_count > 0,
             metadata={
-                "query": self.query,
+                "query": query_string,
                 "result_count": result_count,
                 "type": "sparql_select",
                 "cache_hit": False,
@@ -330,7 +482,7 @@ class SparqlSelectCondition(Condition):
         """
         if cls._cache is None:
             return None
-        return cls._cache.get_stats()
+        return cls._cache.get_stats(cls._last_query)
 
     @classmethod
     def clear_cache(cls) -> None:
@@ -359,19 +511,85 @@ class ShaclCondition(Condition):
         self.shapes = shapes
 
     async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
-        """Evaluate SHACL validation."""
-        # In real implementation, would use pyshacl
-        # For now, simulate validation
+        """Evaluate SHACL validation against RDF data.
+
+        Parameters
+        ----------
+        context : dict[str, Any]
+            Must contain 'data_graph' key with RDF data string
+
+        Returns
+        -------
+        ConditionResult
+            Result with triggered=True if validation succeeds
+        """
         data_graph = context.get("data_graph", "")
 
-        # Simple heuristic: valid if data_graph contains required properties
-        conforms = "name" in data_graph if data_graph else True
-        violations = [] if conforms else [{"message": "Missing required property"}]
+        # Parse RDF data and validate against SHACL shapes
+        conforms, violations = self._validate_shacl(data_graph, self.shapes)
 
         return ConditionResult(
             triggered=conforms,
             metadata={"conforms": conforms, "violations": violations, "type": "shacl"},
         )
+
+    def _validate_shacl(
+        self, data_graph: str, shapes_graph: str
+    ) -> tuple[bool, list[dict[str, str]]]:
+        """Validate RDF data against SHACL shapes.
+
+        Performs basic SHACL validation by checking required properties.
+
+        Parameters
+        ----------
+        data_graph : str
+            RDF data to validate (Turtle format)
+        shapes_graph : str
+            SHACL shapes definition (Turtle format)
+
+        Returns
+        -------
+        tuple[bool, list[dict[str, str]]]
+            Tuple of (conforms, violations)
+        """
+        violations: list[dict[str, str]] = []
+
+        # Extract required properties from shapes
+        required_props = self._extract_required_properties(shapes_graph)
+
+        # Check if data contains required properties
+        for prop in required_props:
+            if prop not in data_graph:
+                violations.append(
+                    {
+                        "message": f"Missing required property: {prop}",
+                        "property": prop,
+                        "severity": "Violation",
+                    }
+                )
+
+        conforms = len(violations) == 0
+        return conforms, violations
+
+    def _extract_required_properties(self, shapes_graph: str) -> list[str]:
+        """Extract required properties from SHACL shapes.
+
+        Parameters
+        ----------
+        shapes_graph : str
+            SHACL shapes definition (Turtle format)
+
+        Returns
+        -------
+        list[str]
+            List of required property names
+        """
+        import re
+
+        # Extract properties marked with sh:minCount 1
+        pattern = r"sh:path\s+(\w+:\w+|\w+)\s*;\s*sh:minCount\s+1"
+        matches = re.findall(pattern, shapes_graph, re.MULTILINE)
+        return matches
 
 
 class DeltaType(Enum):
@@ -420,7 +638,12 @@ class DeltaCondition(Condition):
 
         return ConditionResult(
             triggered=triggered,
-            metadata={"delta": delta, "previous": previous, "current": current, "type": "delta"},
+            metadata={
+                "delta": delta,
+                "previous": previous,
+                "current": current,
+                "type": "delta",
+            },
         )
 
 
@@ -468,7 +691,8 @@ class ThresholdCondition(Condition):
 
         if actual_value is None:
             return ConditionResult(
-                triggered=False, metadata={"error": f"Variable '{self.variable}' not found"}
+                triggered=False,
+                metadata={"error": f"Variable '{self.variable}' not found"},
             )
 
         triggered = False
@@ -549,7 +773,7 @@ class WindowCondition(Condition):
     async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
         """Evaluate window condition."""
         time_series = context.get("time_series", [])
-        now = datetime.utcnow()
+        now = datetime.now(UTC)
         window_start = now - timedelta(seconds=self.window_seconds)
 
         # Filter to time window
@@ -639,7 +863,9 @@ class CompositeCondition(Condition):
     async def evaluate(self, context: dict[str, Any]) -> ConditionResult:
         """Evaluate composite condition."""
         # Evaluate all child conditions
-        results = await asyncio.gather(*[cond.evaluate(context) for cond in self.conditions])
+        results = await asyncio.gather(
+            *[cond.evaluate(context) for cond in self.conditions]
+        )
 
         triggered = False
         if self.operator == CompositeOperator.AND:

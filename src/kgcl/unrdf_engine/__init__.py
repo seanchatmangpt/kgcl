@@ -50,7 +50,9 @@ Basic usage with hooks::
 
     # Use ingestion pipeline
     pipeline = IngestionPipeline(engine)
-    result = pipeline.ingest_json(data={"type": "Person", "name": "Alice"}, agent="api_service")
+    result = pipeline.ingest_json(
+        data={"type": "Person", "name": "Alice"}, agent="api_service"
+    )
 
     # Check hook receipts
     for receipt in result.hook_results:
@@ -76,29 +78,29 @@ from kgcl.unrdf_engine.ingestion import IngestionPipeline, IngestionResult
 from kgcl.unrdf_engine.validation import ShaclValidator, ValidationResult
 
 __all__ = [
-    # Core engine
-    "UnrdfEngine",
-    "Transaction",
-    "ProvenanceRecord",
-    # Hooks
-    "KnowledgeHook",
-    "HookRegistry",
-    "HookExecutor",
-    "HookPhase",
-    "HookContext",
-    "Receipt",
-    "TriggerCondition",
-    "ValidationFailureHook",
-    "FeatureTemplateHook",
-    # Hook registry
-    "PersistentHookRegistry",
-    "HookMetadata",
-    # Validation
-    "ShaclValidator",
-    "ValidationResult",
     # External capabilities
     "ExternalCapabilityBridge",
+    "FeatureTemplateHook",
+    "HookContext",
+    "HookExecutor",
+    "HookMetadata",
+    "HookPhase",
+    "HookRegistry",
     # Ingestion
     "IngestionPipeline",
     "IngestionResult",
+    # Hooks
+    "KnowledgeHook",
+    # Hook registry
+    "PersistentHookRegistry",
+    "ProvenanceRecord",
+    "Receipt",
+    # Validation
+    "ShaclValidator",
+    "Transaction",
+    "TriggerCondition",
+    # Core engine
+    "UnrdfEngine",
+    "ValidationFailureHook",
+    "ValidationResult",
 ]

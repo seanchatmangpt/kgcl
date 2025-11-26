@@ -17,9 +17,14 @@ from opentelemetry.exporter.otlp.proto.http.trace_exporter import (
 )
 from opentelemetry.sdk.resources import Resource
 from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import BatchSpanProcessor, ConsoleSpanExporter, SpanExporter
+from opentelemetry.sdk.trace.export import (
+    BatchSpanProcessor,
+    ConsoleSpanExporter,
+    SpanExporter,
+)
 from opentelemetry.sdk.trace.sampling import ParentBasedTraceIdRatio, TraceIdRatioBased
 from opentelemetry.trace import Status, StatusCode, Tracer
+from opentelemetry.util._once import Once
 
 from kgcl.observability.config import ExporterType, ObservabilityConfig
 
@@ -29,7 +34,9 @@ _tracer_provider: TracerProvider | None = None
 _configured = False
 
 
-def configure_tracing(config: ObservabilityConfig | None = None) -> TracerProvider | None:
+def configure_tracing(
+    config: ObservabilityConfig | None = None,
+) -> TracerProvider | None:
     """Configure OpenTelemetry tracing with the specified configuration.
 
     Parameters
@@ -58,10 +65,18 @@ def configure_tracing(config: ObservabilityConfig | None = None) -> TracerProvid
         return None
 
     # Create resource with service information
+    # Get version from package metadata or environment variable
+    try:
+        import importlib.metadata
+
+        service_version = importlib.metadata.version("kgcl")
+    except Exception:
+        service_version = "0.0.0"
+
     resource_attrs = {
         "service.name": config.service_name,
         "service.environment": config.environment.value,
-        "service.version": "0.0.0",  # TODO: Get from package metadata
+        "service.version": service_version,
         **config.resource_attributes,
     }
     resource = Resource.create(resource_attrs)
@@ -124,7 +139,8 @@ def _create_exporters(config: ObservabilityConfig) -> list[SpanExporter]:
             raise ValueError(msg)
         exporters.append(
             OTLPHttpExporter(
-                endpoint=f"{config.otlp_endpoint}/v1/traces", insecure=config.otlp_insecure
+                endpoint=f"{config.otlp_endpoint}/v1/traces",
+                insecure=config.otlp_insecure,
             )
         )
     elif config.trace_exporter == ExporterType.OTLP_GRPC:
@@ -132,7 +148,9 @@ def _create_exporters(config: ObservabilityConfig) -> list[SpanExporter]:
             msg = "OTLP endpoint required for OTLP gRPC exporter"
             raise ValueError(msg)
         exporters.append(
-            OTLPGrpcExporter(endpoint=config.otlp_endpoint, insecure=config.otlp_insecure)
+            OTLPGrpcExporter(
+                endpoint=config.otlp_endpoint, insecure=config.otlp_insecure
+            )
         )
     elif config.trace_exporter == ExporterType.JAEGER:
         try:
@@ -140,14 +158,18 @@ def _create_exporters(config: ObservabilityConfig) -> list[SpanExporter]:
 
             exporters.append(JaegerExporter())
         except ImportError:
-            logger.warning("Jaeger exporter not available, install opentelemetry-exporter-jaeger")
+            logger.warning(
+                "Jaeger exporter not available, install opentelemetry-exporter-jaeger"
+            )
     elif config.trace_exporter == ExporterType.ZIPKIN:
         try:
             from opentelemetry.exporter.zipkin.json import ZipkinExporter
 
             exporters.append(ZipkinExporter())
         except ImportError:
-            logger.warning("Zipkin exporter not available, install opentelemetry-exporter-zipkin")
+            logger.warning(
+                "Zipkin exporter not available, install opentelemetry-exporter-zipkin"
+            )
 
     # Add console exporter if requested
     if config.console_export and config.trace_exporter != ExporterType.CONSOLE:
@@ -250,3 +272,16 @@ def shutdown_tracing() -> None:
         _tracer_provider = None
         _configured = False
         logger.info("Tracing shutdown completed")
+
+
+def reset_tracer_provider() -> None:
+    """Forcefully reset the global tracer provider (testing/andon utility)."""
+    shutdown_tracing()
+    try:
+        # Reset OpenTelemetry globals so a new provider can be installed.
+        trace._TRACER_PROVIDER = None  # type: ignore[attr-defined,assignment]
+        trace._TRACER_PROVIDER_SET_ONCE = Once()  # type: ignore[attr-defined,assignment]
+    except AttributeError:
+        logger.warning(
+            "Tracer provider reset is not supported in this OpenTelemetry version"
+        )

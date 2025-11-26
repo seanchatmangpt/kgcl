@@ -124,7 +124,9 @@ def traced_graph_operation(operation: str) -> Any:
 
                     # Record metrics
                     if len(args) > 0 and hasattr(args[0], "metrics"):
-                        args[0].metrics.record_graph_operation(operation, duration_ms, success=True)
+                        args[0].metrics.record_graph_operation(
+                            operation, duration_ms, success=True
+                        )
 
                     span.set_status(Status(StatusCode.OK))
                     return result

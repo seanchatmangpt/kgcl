@@ -18,14 +18,17 @@ from kgcl.unrdf_engine.hooks import (
     TriggerCondition,
 )
 from kgcl.unrdf_engine.ingestion import IngestionPipeline
+from kgcl.unrdf_engine.validation import ShaclValidator
 
 UNRDF = Namespace("http://unrdf.org/ontology/")
+MIN_HOOK_RESULTS = 2
+TRACKED_EXECUTION_COUNT = 3
 
 
 class TestHooksIntegration:
     """Test hook system integration."""
 
-    def test_hook_execution_phases(self):
+    def test_hook_execution_phases(self) -> None:
         """Test hooks execute in correct phases."""
         with tempfile.TemporaryDirectory() as tmpdir:
             engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl")
@@ -33,11 +36,11 @@ class TestHooksIntegration:
             execution_log = []
 
             class PhaseTracker(KnowledgeHook):
-                def __init__(self, phase_name, phase):
+                def __init__(self, phase_name: str, phase: HookPhase) -> None:
                     super().__init__(name=f"tracker_{phase_name}", phases=[phase])
                     self.phase_name = phase_name
 
-                def execute(self, context: HookContext):
+                def execute(self, _context: HookContext) -> None:
                     execution_log.append(self.phase_name)
 
             # Register hooks for different phases
@@ -57,7 +60,7 @@ class TestHooksIntegration:
             # Should execute in order
             assert execution_log == ["pre_ingestion", "on_change", "post_commit"]
 
-    def test_hook_priority_ordering(self):
+    def test_hook_priority_ordering(self) -> None:
         """Test hooks execute in priority order."""
         with tempfile.TemporaryDirectory() as tmpdir:
             engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl")
@@ -65,11 +68,13 @@ class TestHooksIntegration:
             execution_order = []
 
             class PriorityHook(KnowledgeHook):
-                def __init__(self, name, priority):
-                    super().__init__(name=name, phases=[HookPhase.POST_COMMIT], priority=priority)
+                def __init__(self, name: str, priority: int) -> None:
+                    super().__init__(
+                        name=name, phases=[HookPhase.POST_COMMIT], priority=priority
+                    )
                     self.hook_name = name
 
-                def execute(self, context: HookContext):
+                def execute(self, _context: HookContext) -> None:
                     execution_order.append(self.hook_name)
 
             # Register in random order
@@ -86,7 +91,7 @@ class TestHooksIntegration:
             # Should execute highest priority first
             assert execution_order == ["high", "medium", "low"]
 
-    def test_hook_trigger_conditions(self):
+    def test_hook_trigger_conditions(self) -> None:
         """Test conditional hook triggering."""
         with tempfile.TemporaryDirectory() as tmpdir:
             engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl")
@@ -94,7 +99,7 @@ class TestHooksIntegration:
             triggered = []
 
             class ConditionalHook(KnowledgeHook):
-                def __init__(self):
+                def __init__(self) -> None:
                     super().__init__(
                         name="conditional",
                         phases=[HookPhase.POST_COMMIT],
@@ -104,7 +109,7 @@ class TestHooksIntegration:
                         ),
                     )
 
-                def execute(self, context: HookContext):
+                def execute(self, _context: HookContext) -> None:
                     triggered.append("conditional")
 
             registry.register(ConditionalHook())
@@ -128,25 +133,28 @@ class TestHooksIntegration:
             # (May depend on how RDF is structured in delta graph)
             assert len(triggered) >= initial_triggered
 
-    def test_hook_error_handling(self):
+    def test_hook_error_handling(self) -> None:
         """Test hook error handling."""
         with tempfile.TemporaryDirectory() as tmpdir:
             engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl")
             registry = HookRegistry()
 
             class FailingHook(KnowledgeHook):
-                def __init__(self):
+                def __init__(self) -> None:
                     super().__init__(name="failing", phases=[HookPhase.POST_COMMIT])
 
-                def execute(self, context: HookContext):
-                    raise RuntimeError("Hook failed intentionally")
+                def execute(self, _context: HookContext) -> None:
+                    message = "Hook failed intentionally"
+                    raise RuntimeError(message)
 
             class SuccessHook(KnowledgeHook):
-                def __init__(self):
-                    super().__init__(name="success", phases=[HookPhase.POST_COMMIT], priority=50)
+                def __init__(self) -> None:
+                    super().__init__(
+                        name="success", phases=[HookPhase.POST_COMMIT], priority=50
+                    )
 
-                def execute(self, context: HookContext):
-                    pass  # Does nothing
+                def execute(self, _context: HookContext) -> None:
+                    return
 
             registry.register(FailingHook())
             registry.register(SuccessHook())
@@ -159,22 +167,26 @@ class TestHooksIntegration:
 
             assert result.success is True  # Transaction still commits
             # Hook results should show failure
-            assert len(result.hook_results) >= 2
-            failing_result = next((r for r in result.hook_results if r["hook"] == "failing"), None)
+            assert len(result.hook_results) >= MIN_HOOK_RESULTS
+            failing_result = next(
+                (r for r in result.hook_results if r["hook"] == "failing"), None
+            )
             assert failing_result is not None
             assert failing_result["success"] is False
 
-    def test_hook_rollback_mechanism(self):
+    def test_hook_rollback_mechanism(self) -> None:
         """Test hooks can trigger rollback."""
         with tempfile.TemporaryDirectory() as tmpdir:
             engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl")
             registry = HookRegistry()
 
             class RollbackHook(KnowledgeHook):
-                def __init__(self):
-                    super().__init__(name="rollback", phases=[HookPhase.POST_VALIDATION])
+                def __init__(self) -> None:
+                    super().__init__(
+                        name="rollback", phases=[HookPhase.POST_VALIDATION]
+                    )
 
-                def execute(self, context: HookContext):
+                def execute(self, context: HookContext) -> None:
                     # Signal rollback
                     context.metadata["should_rollback"] = True
                     context.metadata["rollback_reason"] = "Test rollback"
@@ -182,10 +194,10 @@ class TestHooksIntegration:
             registry.register(RollbackHook())
             hook_executor = HookExecutor(registry)
 
-            from kgcl.unrdf_engine.validation import ShaclValidator
-
             validator = ShaclValidator()
-            pipeline = IngestionPipeline(engine, validator=validator, hook_executor=hook_executor)
+            pipeline = IngestionPipeline(
+                engine, validator=validator, hook_executor=hook_executor
+            )
 
             # Ingest data (validation won't run without shapes, but hook mechanism tested)
             result = pipeline.ingest_json(data={"id": "test"}, agent="test")
@@ -193,24 +205,28 @@ class TestHooksIntegration:
             # Result depends on whether validation was triggered
             assert result.transaction_id is not None
 
-    def test_hook_metadata_propagation(self):
+    def test_hook_metadata_propagation(self) -> None:
         """Test metadata propagates through hook chain."""
         with tempfile.TemporaryDirectory() as tmpdir:
             engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl")
             registry = HookRegistry()
 
             class Hook1(KnowledgeHook):
-                def __init__(self):
-                    super().__init__(name="hook1", phases=[HookPhase.ON_CHANGE], priority=100)
+                def __init__(self) -> None:
+                    super().__init__(
+                        name="hook1", phases=[HookPhase.ON_CHANGE], priority=100
+                    )
 
-                def execute(self, context: HookContext):
+                def execute(self, context: HookContext) -> None:
                     context.metadata["hook1_ran"] = True
 
             class Hook2(KnowledgeHook):
-                def __init__(self):
-                    super().__init__(name="hook2", phases=[HookPhase.ON_CHANGE], priority=50)
+                def __init__(self) -> None:
+                    super().__init__(
+                        name="hook2", phases=[HookPhase.ON_CHANGE], priority=50
+                    )
 
-                def execute(self, context: HookContext):
+                def execute(self, context: HookContext) -> None:
                     # Should see metadata from Hook1
                     assert context.metadata.get("hook1_ran") is True
                     context.metadata["hook2_ran"] = True
@@ -225,18 +241,18 @@ class TestHooksIntegration:
 
             assert result.success is True
 
-    def test_hook_execution_history(self):
+    def test_hook_execution_history(self) -> None:
         """Test hook execution history tracking."""
         with tempfile.TemporaryDirectory() as tmpdir:
             engine = UnrdfEngine(file_path=Path(tmpdir) / "graph.ttl")
             registry = HookRegistry()
 
             class TrackedHook(KnowledgeHook):
-                def __init__(self):
+                def __init__(self) -> None:
                     super().__init__(name="tracked", phases=[HookPhase.POST_COMMIT])
 
-                def execute(self, context: HookContext):
-                    pass
+                def execute(self, _context: HookContext) -> None:
+                    return
 
             registry.register(TrackedHook())
             hook_executor = HookExecutor(registry)
@@ -249,4 +265,4 @@ class TestHooksIntegration:
             # Check history
             history = hook_executor.get_execution_history()
             tracked_executions = [h for h in history if h["hook"] == "tracked"]
-            assert len(tracked_executions) == 3
+            assert len(tracked_executions) == TRACKED_EXECUTION_COUNT

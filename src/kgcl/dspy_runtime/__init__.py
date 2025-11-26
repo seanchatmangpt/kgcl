@@ -6,7 +6,13 @@ with comprehensive observability, error handling, and UNRDF integration.
 """
 
 from .invoker import InvocationResult, SignatureInvoker
-from .ollama_config import DSPY_AVAILABLE, OllamaConfig, OllamaLM, configure_ollama, health_check
+from .ollama_config import (
+    DSPY_AVAILABLE,
+    OllamaConfig,
+    OllamaLM,
+    configure_ollama,
+    health_check,
+)
 from .receipts import Receipt, ReceiptGenerator
 from .unrdf_bridge import UNRDFBridge
 

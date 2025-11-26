@@ -6,10 +6,10 @@ import pytest
 from src.core import (
     ChicagoAssertionError,
     FailFastValidator,
+    Fixture,
     Poka,
     PokaYokeError,
     StateManager,
-    TestFixture,
     assert_eq_with_msg,
     assert_error,
     assert_in_range,
@@ -78,7 +78,7 @@ class TestFixtures:
     def test_fixture_basic(self) -> None:
         """Test basic fixture lifecycle."""
 
-        class LocalFixture(TestFixture):
+        class LocalFixture(Fixture):
             def setup(self) -> None:
                 self.value = POSITIVE_SENTINEL
 
@@ -92,7 +92,7 @@ class TestFixtures:
 
     def test_fixture_metadata(self) -> None:
         """Test fixture metadata tracking."""
-        fixture = TestFixture()
+        fixture = Fixture()
         fixture.setup()
         metadata = fixture.metadata()
         assert metadata is not None
@@ -100,7 +100,7 @@ class TestFixtures:
 
     def test_fixture_state(self) -> None:
         """Test fixture state management."""
-        fixture = TestFixture()
+        fixture = Fixture()
         fixture.set_state("key", "value")
         assert fixture.get_state("key") == "value"
         assert fixture.get_state("missing", "default") == "default"

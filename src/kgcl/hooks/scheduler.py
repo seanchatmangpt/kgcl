@@ -101,7 +101,9 @@ class HookScheduler:
             return
 
         self._running = True
-        self._scheduler_thread = threading.Thread(target=self._run_scheduler, daemon=True)
+        self._scheduler_thread = threading.Thread(
+            target=self._run_scheduler, daemon=True
+        )
         self._scheduler_thread.start()
 
         logger.info("Hook scheduler started")
@@ -149,7 +151,9 @@ class HookScheduler:
                     self._execute_scheduled_hook(hook, now)
 
             except Exception as e:
-                logger.error(f"Failed to execute scheduled hook {hook.name}: {e}", exc_info=True)
+                logger.error(
+                    f"Failed to execute scheduled hook {hook.name}: {e}", exc_info=True
+                )
 
     def _should_execute(self, hook: HookDefinition, now: datetime) -> bool:
         """Check if hook should execute at current time.
@@ -188,7 +192,9 @@ class HookScheduler:
         # Execute if we're past next scheduled time
         return now >= next_time
 
-    def _execute_scheduled_hook(self, hook: HookDefinition, scheduled_time: datetime) -> None:
+    def _execute_scheduled_hook(
+        self, hook: HookDefinition, scheduled_time: datetime
+    ) -> None:
         """Execute a scheduled hook.
 
         Args:
@@ -269,7 +275,9 @@ class HookScheduler:
         # Execute
         now = datetime.now()
         result = self.orchestrator.trigger_event(
-            str(hook.uri), event_data=event_data or {"manual_trigger": True}, actor="manual"
+            str(hook.uri),
+            event_data=event_data or {"manual_trigger": True},
+            actor="manual",
         )
 
         # Record execution
@@ -351,7 +359,9 @@ class HookScheduler:
                     "cron_schedule": hook.cron_schedule,
                     "next_execution": next_time.isoformat() if next_time else None,
                     "execution_count": len(history),
-                    "last_execution": history[-1].actual_time.isoformat() if history else None,
+                    "last_execution": history[-1].actual_time.isoformat()
+                    if history
+                    else None,
                 }
             )
 

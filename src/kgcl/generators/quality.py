@@ -139,7 +139,9 @@ class QualityReportGenerator(ProjectionGenerator):
 
         return violations
 
-    def _categorize_violations(self, violations: list[Violation]) -> list[QualityCategory]:
+    def _categorize_violations(
+        self, violations: list[Violation]
+    ) -> list[QualityCategory]:
         """Categorize violations by constraint type."""
         categories_map = defaultdict(list)
 
@@ -152,7 +154,9 @@ class QualityReportGenerator(ProjectionGenerator):
             category = QualityCategory(
                 name=name,
                 description=self._get_category_description(name),
-                violations=sorted(category_violations, key=lambda v: v.severity_priority()),
+                violations=sorted(
+                    category_violations, key=lambda v: v.severity_priority()
+                ),
                 recommendation=self._get_recommendation(name),
             )
             categories.append(category)
@@ -161,7 +165,11 @@ class QualityReportGenerator(ProjectionGenerator):
 
     def _map_severity(self, severity_uri: URIRef) -> str:
         """Map SHACL severity URI to readable severity level."""
-        severity_map = {str(SH.Violation): "high", str(SH.Warning): "medium", str(SH.Info): "low"}
+        severity_map = {
+            str(SH.Violation): "high",
+            str(SH.Warning): "medium",
+            str(SH.Info): "low",
+        }
         return severity_map.get(str(severity_uri), "medium")
 
     def _get_category_name(self, constraint: str) -> str:
@@ -215,8 +223,14 @@ class QualityReportGenerator(ProjectionGenerator):
         return counts
 
     def _query_trends(self) -> list[QualityTrend]:
-        """Query historical validation results for trends."""
-        # Placeholder - would query historical data if stored
+        """Query historical validation results for trends.
+
+        Returns
+        -------
+        list[QualityTrend]
+            Historical quality trends (empty if no historical data stored)
+        """
+        # No historical data stored yet - return empty list
         return []
 
     def _get_ontology_link(self) -> str:

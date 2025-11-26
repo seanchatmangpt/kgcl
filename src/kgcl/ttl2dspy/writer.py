@@ -6,6 +6,7 @@ import time
 from dataclasses import asdict, dataclass
 from datetime import datetime
 from pathlib import Path
+from typing import Any
 
 logger = logging.getLogger(__name__)
 
@@ -23,7 +24,7 @@ class WriteResult:
     timestamp: str
     ttl_source: str | None = None
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary."""
         return {
             **asdict(self),
@@ -130,7 +131,9 @@ class ModuleWriter:
         results = []
         for module_name, code in modules.items():
             output_path = output_dir / f"{module_name}.py"
-            result = self.write_module(code=code, output_path=output_path, format_code=format_code)
+            result = self.write_module(
+                code=code, output_path=output_path, format_code=format_code
+            )
             results.append(result)
 
         # Write __init__.py to make it a package
@@ -141,7 +144,9 @@ class ModuleWriter:
 
         return results
 
-    def write_receipt(self, result: WriteResult, receipt_path: str | Path | None = None) -> Path:
+    def write_receipt(
+        self, result: WriteResult, receipt_path: str | Path | None = None
+    ) -> Path:
         """Write a JSON receipt for a module write.
 
         Args:

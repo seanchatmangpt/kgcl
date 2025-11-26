@@ -9,7 +9,12 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from kgcl.dspy_runtime import DSPY_AVAILABLE, ReceiptGenerator, SignatureInvoker, UNRDFBridge
+from kgcl.dspy_runtime import (
+    DSPY_AVAILABLE,
+    ReceiptGenerator,
+    SignatureInvoker,
+    UNRDFBridge,
+)
 
 
 @pytest.fixture
@@ -42,7 +47,9 @@ class TestEndToEndWorkflow:
 
     @patch("dspy.Predict")
     @patch("dspy.LM")
-    def test_simple_invocation_workflow(self, mock_lm_cls, mock_predict, test_signature_module):
+    def test_simple_invocation_workflow(
+        self, mock_lm_cls, mock_predict, test_signature_module
+    ):
         """Test simple invocation from module to receipt."""
         # Mock LM
         mock_lm = Mock()
@@ -91,7 +98,9 @@ class TestEndToEndWorkflow:
 
     @patch("dspy.Predict")
     @patch("dspy.LM")
-    def test_multi_signature_workflow(self, mock_lm_cls, mock_predict, test_signature_module):
+    def test_multi_signature_workflow(
+        self, mock_lm_cls, mock_predict, test_signature_module
+    ):
         """Test invoking multiple signatures."""
         mock_lm = Mock()
         mock_lm_cls.return_value = mock_lm
@@ -143,7 +152,9 @@ class TestEndToEndWorkflow:
 
     @patch("dspy.Predict")
     @patch("dspy.LM")
-    def test_batch_invocation_workflow(self, mock_lm_cls, mock_predict, test_signature_module):
+    def test_batch_invocation_workflow(
+        self, mock_lm_cls, mock_predict, test_signature_module
+    ):
         """Test batch invocation workflow."""
         mock_lm = Mock()
         mock_lm_cls.return_value = mock_lm
@@ -229,7 +240,9 @@ class TestEndToEndWorkflow:
 
     @patch("dspy.Predict")
     @patch("dspy.LM")
-    def test_error_handling_workflow(self, mock_lm_cls, mock_predict, test_signature_module):
+    def test_error_handling_workflow(
+        self, mock_lm_cls, mock_predict, test_signature_module
+    ):
         """Test error handling in workflow."""
         mock_lm = Mock()
         mock_lm_cls.return_value = mock_lm
@@ -263,7 +276,9 @@ class TestEndToEndWorkflow:
 
     @patch("dspy.Predict")
     @patch("dspy.LM")
-    def test_statistics_workflow(self, mock_lm_cls, mock_predict, test_signature_module):
+    def test_statistics_workflow(
+        self, mock_lm_cls, mock_predict, test_signature_module
+    ):
         """Test statistics collection workflow."""
         mock_lm = Mock()
         mock_lm_cls.return_value = mock_lm

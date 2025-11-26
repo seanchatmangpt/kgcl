@@ -5,7 +5,7 @@ and formats as markdown agenda with focus time blocks.
 """
 
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta, timezone
 from typing import Any
 
 from rdflib import Graph, Literal, Namespace
@@ -92,7 +92,7 @@ class AgendaGenerator(ProjectionGenerator):
             start_date: Start date for agenda, defaults to today
         """
         super().__init__(graph)
-        self.start_date = start_date or datetime.now().replace(
+        self.start_date = start_date or datetime.now(tz=UTC).replace(
             hour=0, minute=0, second=0, microsecond=0
         )
 

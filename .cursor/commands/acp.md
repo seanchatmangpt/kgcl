@@ -68,8 +68,8 @@ Document stubborn failures in TODOs/issues but do not move forward with red chec
 Re-run the exact commands from Step 1. No warnings, no flaky tests, no skipped gates.
 
 ```bash
-cargo-make verify
-.githooks/pre-commit
+poe verify
+poe pre-commit-run
 ```
 
 Only continue once everything is green twice in a row.
@@ -131,10 +131,10 @@ If push fails due to divergence:
 
 ```bash
 uv sync --frozen
-cargo-make verify                          # fails lint
-cargo-make lint && cargo-make format
-cargo-make verify                          # green
-.githooks/pre-commit                       # green
+poe verify                          # fails lint
+poe lint && poe format
+poe verify                          # green
+poe pre-commit-run                   # green
 git add -A
 git status
 git commit -m "feat: record hook phase metrics"
@@ -145,7 +145,7 @@ git push
 
 - **Persistent mypy errors**: Introduce typed helper functions instead of ignoring; never bypass with `# type: ignore`.
 - **Ruff complexity warnings**: Break down functions >40 lines or split classes exceeding 7 methods.
-- **Flaky tests**: Reproduce locally with `uv run pytest -vv --maxfail=1`; stabilize immediately or isolate with marker + follow-up issue.
+- **Flaky tests**: Reproduce locally with `poe pytest -vv --maxfail=1`; stabilize immediately or isolate with marker + follow-up issue.
 - **Docs drift**: Update `docs/*.md` when behavior or CLI contract changes; failing to do so will break readiness reviews.
 
 ## Best Practices

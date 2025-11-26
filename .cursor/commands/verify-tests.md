@@ -58,8 +58,8 @@ After applying the fix:
 
 ```bash
 poe pytest <node> -vv
-cargo-make test
-cargo-make unrdf-full          # if touched UNRDF
+poe test
+poe unrdf-full          # if touched UNRDF
 ```
 
 All commands must exit 0 twice in a row. For flaky tests, run an additional loop (e.g., `pytest -n auto --count=5`) to confirm stability.

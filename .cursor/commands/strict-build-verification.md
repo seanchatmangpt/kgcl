@@ -15,7 +15,6 @@ KGCL uses a strict Python build system equivalent to Rust's Cargo with custom Ma
 uv sync                          # Install dependencies
 
 # Build automation (Poe tasks)
-poe                       # Run all checks (default)
 poe verify                # Format + lint + type check + tests
 poe ci                    # Full CI pipeline
 poe prod-build            # Strict production build

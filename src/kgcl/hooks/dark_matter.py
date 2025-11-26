@@ -61,7 +61,7 @@ class DarkMatterOptimizer:
 
     def __init__(self) -> None:
         """Initialize dark matter optimizer."""
-        self.optimization_rules: dict[str, Callable] = {}
+        self.optimization_rules: dict[str, Callable[..., Any]] = {}
         self.cost_model: dict[str, float] = {
             "scan": 10.0,
             "filter": 1.0,
@@ -118,7 +118,9 @@ class DarkMatterOptimizer:
 
         optimized_cost = self._calculate_plan_cost(optimized_steps)
         improvement = (
-            ((original_cost - optimized_cost) / original_cost * 100) if original_cost > 0 else 0.0
+            ((original_cost - optimized_cost) / original_cost * 100)
+            if original_cost > 0
+            else 0.0
         )
 
         # Find parallelizable steps
@@ -154,7 +156,9 @@ class DarkMatterOptimizer:
         filters as early as possible.
         """
         # Find filter steps and their positions
-        filter_indices = [i for i, s in enumerate(steps) if s.get("operation") == "filter"]
+        filter_indices = [
+            i for i, s in enumerate(steps) if s.get("operation") == "filter"
+        ]
 
         if not filter_indices:
             return {"applied": False, "steps": steps}
@@ -204,7 +208,9 @@ class DarkMatterOptimizer:
 
         if modified:
             # Rebuild steps list with reordered joins
-            non_joins = [(i, s) for i, s in enumerate(new_steps) if s.get("operation") != "join"]
+            non_joins = [
+                (i, s) for i, s in enumerate(new_steps) if s.get("operation") != "join"
+            ]
             result_steps = []
             join_idx = 0
 
@@ -219,7 +225,9 @@ class DarkMatterOptimizer:
 
         return {"applied": False, "steps": steps}
 
-    def _apply_predicate_elimination(self, steps: list[dict[str, Any]]) -> dict[str, Any]:
+    def _apply_predicate_elimination(
+        self, steps: list[dict[str, Any]]
+    ) -> dict[str, Any]:
         """Eliminate redundant predicates."""
         # Remove duplicate filters
         seen_predicates: set[str] = set()
@@ -239,15 +247,167 @@ class DarkMatterOptimizer:
         return {"applied": modified, "steps": new_steps}
 
     def _apply_constant_folding(self, steps: list[dict[str, Any]]) -> dict[str, Any]:
-        """Fold constant expressions at optimization time."""
-        # Placeholder for constant folding
-        # In a real implementation, would evaluate constant expressions
-        return {"applied": False, "steps": steps}
+        """Fold constant expressions at optimization time.
+
+        Evaluates constant expressions and replaces them with computed values:
+        - Arithmetic: "2 + 3" -> "5"
+        - String concat: "'foo' + 'bar'" -> "'foobar'"
+        - Boolean: "true AND false" -> "false"
+        - Comparisons: "5 > 3" -> "true"
+
+        Parameters
+        ----------
+        steps : list[dict[str, Any]]
+            Query execution steps with potential constant expressions
+
+        Returns
+        -------
+        dict[str, Any]
+            {"applied": bool, "steps": list[dict]} with folded constants
+        """
+        import ast
+        import operator as op
+
+        SAFE_OPERATORS = {
+            ast.Add: op.add,
+            ast.Sub: op.sub,
+            ast.Mult: op.mul,
+            ast.Div: op.truediv,
+            ast.FloorDiv: op.floordiv,
+            ast.Mod: op.mod,
+            ast.Pow: op.pow,
+            ast.BitOr: op.or_,
+            ast.BitAnd: op.and_,
+            ast.BitXor: op.xor,
+            ast.Eq: op.eq,
+            ast.NotEq: op.ne,
+            ast.Lt: op.lt,
+            ast.LtE: op.le,
+            ast.Gt: op.gt,
+            ast.GtE: op.ge,
+        }
+
+        def is_constant_expr(expr: str) -> bool:
+            """Check if expression contains only literals and operators."""
+            if not expr or not isinstance(expr, str):
+                return False
+            try:
+                tree = ast.parse(expr, mode="eval")
+                # Check if all nodes are literals or operators
+                for node in ast.walk(tree):
+                    if isinstance(
+                        node,
+                        (
+                            ast.Constant,
+                            ast.Expr,
+                            ast.Expression,
+                            ast.BinOp,
+                            ast.UnaryOp,
+                            ast.Compare,
+                        ),
+                    ):
+                        continue
+                    if type(node) in SAFE_OPERATORS:
+                        continue
+                    # Allow unary operator nodes
+                    if isinstance(node, (ast.UAdd, ast.USub, ast.Not, ast.Invert)):
+                        continue
+                    if isinstance(node, (ast.Load, ast.Store)):
+                        continue
+                    # Variables, function calls, etc. are not constant
+                    return False
+                return True
+            except (SyntaxError, ValueError):
+                return False
+
+        def eval_constant(expr: str) -> str:
+            """Safely evaluate constant expression using AST."""
+            try:
+                tree = ast.parse(expr, mode="eval")
+                result = self._eval_node(tree.body)
+                return str(result)
+            except Exception:
+                # If evaluation fails, return original
+                return expr
+
+        modified = False
+        new_steps = []
+        for step in steps:
+            if "expression" in step and is_constant_expr(step["expression"]):
+                folded = eval_constant(step["expression"])
+                if folded != step["expression"]:
+                    new_step = {**step, "expression": folded}
+                    new_steps.append(new_step)
+                    modified = True
+                else:
+                    new_steps.append(step)
+            else:
+                new_steps.append(step)
+
+        return {"applied": modified, "steps": new_steps}
+
+    def _eval_node(self, node: Any) -> Any:
+        """Recursively evaluate AST node."""
+        import ast
+        import operator as op
+        from collections.abc import Callable
+
+        SAFE_OPERATORS: dict[type, Callable[[Any, Any], Any]] = {
+            ast.Add: op.add,
+            ast.Sub: op.sub,
+            ast.Mult: op.mul,
+            ast.Div: op.truediv,
+            ast.FloorDiv: op.floordiv,
+            ast.Mod: op.mod,
+            ast.Pow: op.pow,
+            ast.BitOr: op.or_,
+            ast.BitAnd: op.and_,
+            ast.BitXor: op.xor,
+            ast.Eq: op.eq,
+            ast.NotEq: op.ne,
+            ast.Lt: op.lt,
+            ast.LtE: op.le,
+            ast.Gt: op.gt,
+            ast.GtE: op.ge,
+        }
+
+        SAFE_UNARY: dict[type, Callable[[Any], Any]] = {
+            ast.UAdd: op.pos,
+            ast.USub: op.neg,
+            ast.Not: op.not_,
+            ast.Invert: op.invert,
+        }
+
+        if isinstance(node, ast.Constant):
+            return node.value
+        if isinstance(node, ast.BinOp):
+            left = self._eval_node(node.left)
+            right = self._eval_node(node.right)
+            operator_fn = SAFE_OPERATORS.get(type(node.op))
+            if operator_fn:
+                return operator_fn(left, right)
+        if isinstance(node, ast.UnaryOp):
+            operand = self._eval_node(node.operand)
+            operator_type = type(node.op)
+            if operator_type in SAFE_UNARY:
+                unary_fn = SAFE_UNARY[operator_type]
+                return unary_fn(operand)
+        if isinstance(node, ast.Compare):
+            left = self._eval_node(node.left)
+            if len(node.ops) == 1 and len(node.comparators) == 1:
+                right = self._eval_node(node.comparators[0])
+                operator_fn = SAFE_OPERATORS.get(type(node.ops[0]))
+                if operator_fn:
+                    return operator_fn(left, right)
+        msg = f"Unsupported node type: {type(node).__name__}"
+        raise ValueError(msg)
 
     def _apply_projection_pushdown(self, steps: list[dict[str, Any]]) -> dict[str, Any]:
         """Push projections (column selection) closer to source."""
         # Find projection steps
-        projection_indices = [i for i, s in enumerate(steps) if s.get("operation") == "project"]
+        projection_indices = [
+            i for i, s in enumerate(steps) if s.get("operation") == "project"
+        ]
 
         if not projection_indices:
             return {"applied": False, "steps": steps}
@@ -287,7 +447,10 @@ class DarkMatterOptimizer:
 
             for j in parallelizable:
                 other_deps = set(steps[j].get("dependencies", []))
-                if step.get("step_id") in other_deps or steps[j].get("step_id") in dependencies:
+                if (
+                    step.get("step_id") in other_deps
+                    or steps[j].get("step_id") in dependencies
+                ):
                     can_parallelize = False
                     break
 
@@ -350,7 +513,7 @@ class DarkMatterOptimizer:
                     max_path = dep_path
 
             current_cost = step_costs.get(step_id, 0.0)
-            result = (max_cost + current_cost, max_path + [step_id])
+            result = (max_cost + current_cost, [*max_path, step_id])
             memo[step_id] = result
             return result
 
@@ -418,7 +581,9 @@ class DarkMatterOptimizer:
         total_cost = sum(s.get("cost", 1.0) for s in steps)
 
         # Calculate critical path cost
-        critical_cost = sum(s.get("cost", 1.0) for s in steps if s.get("step_id") in critical_path)
+        critical_cost = sum(
+            s.get("cost", 1.0) for s in steps if s.get("step_id") in critical_path
+        )
 
         # Amdahl's law: speedup limited by critical path
         parallel_cost = critical_cost + (total_cost - critical_cost) / parallel_degree

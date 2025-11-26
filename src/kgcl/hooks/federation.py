@@ -9,7 +9,7 @@ Ported from UNRDF federation/federation-coordinator.mjs.
 import asyncio
 import logging
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import UTC, datetime
 from enum import Enum
 from typing import Any
 
@@ -193,7 +193,7 @@ class FederationCoordinator:
             return False
 
         node = self.nodes[node_id]
-        now = datetime.utcnow().timestamp()
+        now = datetime.now(UTC).timestamp()
         age_ms = (now - node.last_heartbeat) * 1000
 
         if age_ms > max_age_ms:
@@ -220,10 +220,12 @@ class FederationCoordinator:
             Result of replication operation
         """
         if write_id is None:
-            write_id = f"write_{datetime.utcnow().timestamp()}"
+            write_id = f"write_{datetime.now(UTC).timestamp()}"
 
         healthy_nodes = self.get_healthy_nodes()
-        target_count = min(self.replication_config.replication_factor, len(healthy_nodes))
+        target_count = min(
+            self.replication_config.replication_factor, len(healthy_nodes)
+        )
 
         # Select nodes for replication
         target_nodes = healthy_nodes[:target_count]
@@ -249,14 +251,16 @@ class FederationCoordinator:
                 failed.append(node.node_id)
 
         # Check consistency
-        consistency_achieved = self._check_consistency(len(confirmed), len(target_nodes))
+        consistency_achieved = self._check_consistency(
+            len(confirmed), len(target_nodes)
+        )
 
         result = ReplicationResult(
             success=consistency_achieved,
             nodes_confirmed=confirmed,
             nodes_failed=failed,
             consistency_achieved=consistency_achieved,
-            timestamp=datetime.utcnow().timestamp(),
+            timestamp=datetime.now(UTC).timestamp(),
         )
 
         # Clean up pending write

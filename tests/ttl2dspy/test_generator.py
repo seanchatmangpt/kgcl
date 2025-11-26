@@ -25,6 +25,7 @@ def sample_shape() -> SHACLShape:
                 name="name",
                 datatype=XSD.string,
                 min_count=1,
+                max_count=1,  # Single value
                 description="Person's name",
             ),
             PropertyShape(
@@ -32,12 +33,14 @@ def sample_shape() -> SHACLShape:
                 name="age",
                 datatype=XSD.integer,
                 min_count=0,
+                max_count=1,  # Single value
                 description="Person's age",
             ),
             PropertyShape(
                 path=URIRef("http://example.org/description"),
                 name="description",
                 datatype=XSD.string,
+                max_count=1,  # Single value
                 description="Generated description",
             ),
         ],
@@ -60,6 +63,7 @@ class TestSignatureDefinition:
                     name="input_text",
                     datatype=XSD.string,
                     min_count=1,
+                    max_count=1,  # Single value, not a list
                 )
             ],
             outputs=[
@@ -67,6 +71,7 @@ class TestSignatureDefinition:
                     path=URIRef("http://example.org/output"),
                     name="output_text",
                     datatype=XSD.string,
+                    max_count=1,  # Single value, not a list
                 )
             ],
         )
@@ -116,6 +121,7 @@ class TestSignatureDefinition:
                     name="text",
                     datatype=XSD.string,
                     min_count=1,
+                    max_count=1,  # Single value, no List import needed
                 )
             ],
         )
@@ -139,7 +145,9 @@ class TestSignatureDefinition:
             ],
             outputs=[
                 PropertyShape(
-                    path=URIRef("http://example.org/output"), name="result", datatype=XSD.string
+                    path=URIRef("http://example.org/output"),
+                    name="result",
+                    datatype=XSD.string,
                 )
             ],
         )
@@ -207,7 +215,9 @@ class TestDSPyGenerator:
                     min_count=1,
                 ),
                 PropertyShape(
-                    path=URIRef("http://example.org/output1"), name="output1", datatype=XSD.string
+                    path=URIRef("http://example.org/output1"),
+                    name="output1",
+                    datatype=XSD.string,
                 ),
             ],
         )
@@ -224,7 +234,9 @@ class TestDSPyGenerator:
                     min_count=1,
                 ),
                 PropertyShape(
-                    path=URIRef("http://example.org/output2"), name="output2", datatype=XSD.boolean
+                    path=URIRef("http://example.org/output2"),
+                    name="output2",
+                    datatype=XSD.boolean,
                 ),
             ],
         )

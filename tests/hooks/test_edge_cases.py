@@ -118,7 +118,9 @@ class TestEdgeCaseHandler:
     def test_handle_rate_limit(self):
         """Test handling rate limit."""
         handler = EdgeCaseHandler()
-        result = handler.handle_case("rate_limit", {"limit": 100, "window": 60, "retry_after": 30})
+        result = handler.handle_case(
+            "rate_limit", {"limit": 100, "window": 60, "retry_after": 30}
+        )
         assert isinstance(result, dict)
         assert result["should_retry"] is True
         assert result["retry_after_seconds"] == 30
@@ -135,7 +137,8 @@ class TestEdgeCaseHandler:
         """Test handling invalid input."""
         handler = EdgeCaseHandler()
         result = handler.handle_case(
-            "invalid_input", {"input": "abc", "expected": "integer", "reason": "not a number"}
+            "invalid_input",
+            {"input": "abc", "expected": "integer", "reason": "not a number"},
         )
         assert result is None
 
@@ -144,7 +147,11 @@ class TestEdgeCaseHandler:
         handler = EdgeCaseHandler()
         result = handler.handle_case(
             "connection_error",
-            {"host": "database.example.com", "port": 5432, "error": "Connection refused"},
+            {
+                "host": "database.example.com",
+                "port": 5432,
+                "error": "Connection refused",
+            },
         )
         assert isinstance(result, dict)
         assert result["should_retry"] is True
@@ -156,7 +163,12 @@ class TestEdgeCaseHandler:
         handler = EdgeCaseHandler()
         result = handler.handle_case(
             "connection_error",
-            {"host": "api.example.com", "port": 443, "error": "Timeout", "retry_after": 10},
+            {
+                "host": "api.example.com",
+                "port": 443,
+                "error": "Timeout",
+                "retry_after": 10,
+            },
         )
         assert result["retry_after_seconds"] == 10
 
@@ -164,7 +176,8 @@ class TestEdgeCaseHandler:
         """Test handling resource exhaustion."""
         handler = EdgeCaseHandler()
         result = handler.handle_case(
-            "resource_exhausted", {"resource": "file_descriptors", "limit": 1024, "requested": 1050}
+            "resource_exhausted",
+            {"resource": "file_descriptors", "limit": 1024, "requested": 1050},
         )
         assert result is None
 

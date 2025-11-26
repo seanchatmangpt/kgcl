@@ -24,7 +24,11 @@ from kgcl.signatures.context_classifier import (
 )
 
 # Import all signature modules
-from kgcl.signatures.daily_brief import DailyBriefInput, DailyBriefModule, DailyBriefOutput
+from kgcl.signatures.daily_brief import (
+    DailyBriefInput,
+    DailyBriefModule,
+    DailyBriefOutput,
+)
 from kgcl.signatures.feature_analyzer import (
     FeatureAnalyzerInput,
     FeatureAnalyzerModule,
@@ -36,7 +40,11 @@ from kgcl.signatures.pattern_detector import (
     PatternDetectorModule,
     PatternDetectorOutput,
 )
-from kgcl.signatures.weekly_retro import WeeklyRetroInput, WeeklyRetroModule, WeeklyRetroOutput
+from kgcl.signatures.weekly_retro import (
+    WeeklyRetroInput,
+    WeeklyRetroModule,
+    WeeklyRetroOutput,
+)
 from kgcl.signatures.wellbeing import WellbeingInput, WellbeingModule, WellbeingOutput
 
 # Check DSPy availability
@@ -52,38 +60,38 @@ logger = logging.getLogger(__name__)
 
 # Export all public classes
 __all__ = [
-    # Daily Brief
-    "DailyBriefInput",
-    "DailyBriefOutput",
-    "DailyBriefModule",
-    # Weekly Retro
-    "WeeklyRetroInput",
-    "WeeklyRetroOutput",
-    "WeeklyRetroModule",
-    # Feature Analyzer
-    "FeatureAnalyzerInput",
-    "FeatureAnalyzerOutput",
-    "FeatureAnalyzerModule",
-    # Pattern Detector
-    "PatternDetectorInput",
-    "PatternDetectorOutput",
-    "DetectedPattern",
-    "PatternDetectorModule",
+    "DSPY_AVAILABLE",
     # Context Classifier
     "ContextClassifierInput",
+    "ContextClassifierModule",
     "ContextClassifierOutput",
     "ContextLabel",
-    "ContextClassifierModule",
-    # Wellbeing
-    "WellbeingInput",
-    "WellbeingOutput",
-    "WellbeingModule",
+    # Daily Brief
+    "DailyBriefInput",
+    "DailyBriefModule",
+    "DailyBriefOutput",
+    "DetectedPattern",
+    # Feature Analyzer
+    "FeatureAnalyzerInput",
+    "FeatureAnalyzerModule",
+    "FeatureAnalyzerOutput",
+    # Pattern Detector
+    "PatternDetectorInput",
+    "PatternDetectorModule",
+    "PatternDetectorOutput",
     # Utilities
     "SignatureConfig",
+    # Weekly Retro
+    "WeeklyRetroInput",
+    "WeeklyRetroModule",
+    "WeeklyRetroOutput",
+    # Wellbeing
+    "WellbeingInput",
+    "WellbeingModule",
+    "WellbeingOutput",
     "configure_signatures",
     "create_all_modules",
     "health_check",
-    "DSPY_AVAILABLE",
 ]
 
 
@@ -151,8 +159,10 @@ class SignatureConfig:
             temperature=float(os.getenv("KGCL_TEMPERATURE", "0.7")),
             model=os.getenv("OLLAMA_MODEL", "llama3.1"),
             base_url=os.getenv("OLLAMA_BASE_URL", "http://localhost:11434"),
-            fallback_on_error=os.getenv("KGCL_FALLBACK_ON_ERROR", "true").lower() == "true",
-            enable_telemetry=os.getenv("KGCL_ENABLE_TELEMETRY", "true").lower() == "true",
+            fallback_on_error=os.getenv("KGCL_FALLBACK_ON_ERROR", "true").lower()
+            == "true",
+            enable_telemetry=os.getenv("KGCL_ENABLE_TELEMETRY", "true").lower()
+            == "true",
         )
 
     def to_dict(self) -> dict:
@@ -197,7 +207,9 @@ def configure_signatures(config: SignatureConfig | None = None) -> SignatureConf
             from kgcl.dspy_runtime import OllamaConfig, configure_ollama
 
             ollama_config = OllamaConfig(
-                model=config.model, base_url=config.base_url, temperature=config.temperature
+                model=config.model,
+                base_url=config.base_url,
+                temperature=config.temperature,
             )
 
             configure_ollama(ollama_config)
@@ -231,8 +243,12 @@ def create_all_modules(config: SignatureConfig | None = None) -> dict[str, objec
         config = configure_signatures()
 
     modules = {
-        "daily_brief": DailyBriefModule(use_llm=config.use_llm, temperature=config.temperature),
-        "weekly_retro": WeeklyRetroModule(use_llm=config.use_llm, temperature=config.temperature),
+        "daily_brief": DailyBriefModule(
+            use_llm=config.use_llm, temperature=config.temperature
+        ),
+        "weekly_retro": WeeklyRetroModule(
+            use_llm=config.use_llm, temperature=config.temperature
+        ),
         "feature_analyzer": FeatureAnalyzerModule(
             use_llm=config.use_llm, temperature=config.temperature
         ),
@@ -243,10 +259,14 @@ def create_all_modules(config: SignatureConfig | None = None) -> dict[str, objec
             use_llm=config.use_llm,
             temperature=0.3,  # Lower temperature for consistent classification
         ),
-        "wellbeing": WellbeingModule(use_llm=config.use_llm, temperature=config.temperature),
+        "wellbeing": WellbeingModule(
+            use_llm=config.use_llm, temperature=config.temperature
+        ),
     }
 
-    logger.info(f"Created {len(modules)} signature modules (LLM mode: {config.use_llm})")
+    logger.info(
+        f"Created {len(modules)} signature modules (LLM mode: {config.use_llm})"
+    )
     return modules
 
 
@@ -332,7 +352,10 @@ def build_prompt_context(
     -------
         Formatted context string
     """
-    context_parts = [f"Time window: {time_window}", f"Features: {', '.join(feature_names)}"]
+    context_parts = [
+        f"Time window: {time_window}",
+        f"Features: {', '.join(feature_names)}",
+    ]
 
     if additional_context:
         context_parts.append(additional_context)
@@ -340,7 +363,9 @@ def build_prompt_context(
     return " | ".join(context_parts)
 
 
-def validate_module_inputs(module_name: str, input_data: object) -> tuple[bool, str | None]:
+def validate_module_inputs(
+    module_name: str, input_data: object
+) -> tuple[bool, str | None]:
     """Validate inputs for a signature module.
 
     Args:
@@ -367,7 +392,10 @@ def validate_module_inputs(module_name: str, input_data: object) -> tuple[bool, 
 
         expected_type = input_types[module_name]
         if not isinstance(input_data, expected_type):
-            return False, f"Expected {expected_type.__name__}, got {type(input_data).__name__}"
+            return (
+                False,
+                f"Expected {expected_type.__name__}, got {type(input_data).__name__}",
+            )
 
         # Pydantic validation happens automatically on instantiation
         return True, None

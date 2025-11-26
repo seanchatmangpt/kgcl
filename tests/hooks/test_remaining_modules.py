@@ -4,7 +4,7 @@ Tests for remaining hook modules: QueryOptimizer, TransactionManager, HookManage
 Chicago School TDD: No mocking of domain objects, real implementations.
 """
 
-from datetime import datetime
+from datetime import UTC, datetime
 
 import pytest
 
@@ -465,7 +465,7 @@ class TestHookManager:
         hook_id = manager.register_hook(hook)
         receipt = HookReceipt(
             hook_id=hook_id,
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(UTC),
             condition_result=ConditionResult(triggered=True),
             handler_result={"status": "ok"},
             duration_ms=50.0,
@@ -491,7 +491,7 @@ class TestHookManager:
         # Record successful execution
         receipt1 = HookReceipt(
             hook_id=hook_id,
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(UTC),
             condition_result=ConditionResult(triggered=True),
             handler_result={"status": "ok"},
             duration_ms=50.0,
@@ -501,7 +501,7 @@ class TestHookManager:
         # Record failed execution
         receipt2 = HookReceipt(
             hook_id=hook_id,
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(UTC),
             condition_result=ConditionResult(triggered=True),
             handler_result=None,
             duration_ms=30.0,
@@ -521,10 +521,16 @@ class TestHookManager:
         """Should return all hooks."""
         manager = HookManager()
         hook1 = Hook(
-            name="hook1", description="Test 1", condition=SimpleCondition(), handler=lambda ctx: {}
+            name="hook1",
+            description="Test 1",
+            condition=SimpleCondition(),
+            handler=lambda ctx: {},
         )
         hook2 = Hook(
-            name="hook2", description="Test 2", condition=SimpleCondition(), handler=lambda ctx: {}
+            name="hook2",
+            description="Test 2",
+            condition=SimpleCondition(),
+            handler=lambda ctx: {},
         )
 
         manager.register_hook(hook1)
@@ -549,7 +555,7 @@ class TestHookManager:
         hook_id = manager.register_hook(hook)
         receipt = HookReceipt(
             hook_id=hook_id,
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(UTC),
             condition_result=ConditionResult(triggered=True),
             handler_result={},
             duration_ms=10.0,

@@ -1,15 +1,9 @@
 """Tests for validation module."""
 
 import pytest
-from src.validation import (
-    Guard,
-    Invariant,
-    InvariantValidator,
-    Property,
-    PropertyGenerator,
-    PropertyTest,
-    ValidatedValue,
-)
+from src.validation.guards import Guard, ValidatedValue
+from src.validation.invariants import Invariant, InvariantValidator
+from src.validation.property import Property, PropertyGenerator, PropertyTest
 
 POSITIVE_VALUE: int = 42
 SECONDARY_POSITIVE_VALUE: int = 50
@@ -43,7 +37,9 @@ class TestProperty:
     def test_property_test_run(self) -> None:
         """Test running property test."""
         test = PropertyTest(
-            "commutative", lambda a, b: a + b == b + a, examples=[(1, 2), (3, 4), (5, 6)]
+            "commutative",
+            lambda a, b: a + b == b + a,
+            examples=[(1, 2), (3, 4), (5, 6)],
         )
 
         assert test.run() is True

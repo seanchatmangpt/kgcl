@@ -2,14 +2,21 @@
 Unit tests for collectors.
 """
 
+import builtins
+import contextlib
 import json
 import tempfile
 import time
 import unittest
-from datetime import datetime
+from datetime import UTC, datetime
 from pathlib import Path
 
-from ..collectors.base import BaseCollector, CollectedEvent, CollectorConfig, CollectorStatus
+from ..collectors.base import (
+    BaseCollector,
+    CollectedEvent,
+    CollectorConfig,
+    CollectorStatus,
+)
 
 
 class MockCollector(BaseCollector):
@@ -34,7 +41,9 @@ class TestBaseCollector(unittest.TestCase):
 
     def setUp(self):
         """Set up test fixtures."""
-        self.temp_file = tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".jsonl")
+        self.temp_file = tempfile.NamedTemporaryFile(
+            mode="w", delete=False, suffix=".jsonl"
+        )
         self.temp_path = self.temp_file.name
         self.temp_file.close()
 
@@ -50,10 +59,8 @@ class TestBaseCollector(unittest.TestCase):
 
     def tearDown(self):
         """Clean up test fixtures."""
-        try:
+        with contextlib.suppress(builtins.BaseException):
             Path(self.temp_path).unlink()
-        except:
-            pass
 
     def test_initialization(self):
         """Test collector initialization."""
@@ -106,14 +113,14 @@ class TestBaseCollector(unittest.TestCase):
         """Test event buffering."""
         event1 = CollectedEvent(
             collector_name="test",
-            timestamp=datetime.utcnow().isoformat(),
+            timestamp=datetime.now(UTC).isoformat(),
             data={"test": 1},
             sequence_number=1,
         )
 
         event2 = CollectedEvent(
             collector_name="test",
-            timestamp=datetime.utcnow().isoformat(),
+            timestamp=datetime.now(UTC).isoformat(),
             data={"test": 2},
             sequence_number=2,
         )
@@ -131,7 +138,7 @@ class TestBaseCollector(unittest.TestCase):
         for i in range(5):
             event = CollectedEvent(
                 collector_name="test",
-                timestamp=datetime.utcnow().isoformat(),
+                timestamp=datetime.now(UTC).isoformat(),
                 data={"value": i},
                 sequence_number=i,
             )
@@ -221,16 +228,16 @@ class TestCollectorIntegration(unittest.TestCase):
 
     def setUp(self):
         """Set up test fixtures."""
-        self.temp_file = tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".jsonl")
+        self.temp_file = tempfile.NamedTemporaryFile(
+            mode="w", delete=False, suffix=".jsonl"
+        )
         self.temp_path = self.temp_file.name
         self.temp_file.close()
 
     def tearDown(self):
         """Clean up test fixtures."""
-        try:
+        with contextlib.suppress(builtins.BaseException):
             Path(self.temp_path).unlink()
-        except:
-            pass
 
     def test_full_collection_cycle(self):
         """Test full collection, buffering, and writing cycle."""

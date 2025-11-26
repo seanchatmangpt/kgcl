@@ -141,7 +141,9 @@ class KGCIntegration:
 
         logger.info("✅ KGC Integration initialized successfully!")
 
-    def trigger_hook_event(self, event_uri: str, event_data: dict[str, Any] | None = None) -> None:
+    def trigger_hook_event(
+        self, event_uri: str, event_data: dict[str, Any] | None = None
+    ) -> None:
         """Trigger a hook event (implements HookRegistry protocol).
 
         This method is called by the workflow orchestrator when hooks should fire.

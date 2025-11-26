@@ -113,6 +113,7 @@ N3_PHYSICS = """
 # CRITICAL: Do NOT fire if:
 #   1. The current task has a split control (handled by LAW 2/4)
 #   2. The next task has a join control (handled by LAW 3)
+#   3. The next task requires a milestone (handled by LAW 16)
 {
     ?task kgc:status "Completed" .
     ?task yawl:flowsInto ?flow .
@@ -121,6 +122,8 @@ N3_PHYSICS = """
     ?scope log:notIncludes { ?task yawl:hasSplit ?anySplit } .
     # Guard 2: Only fire if NEXT task has NO join type (let AND-JOIN handle it)
     ?scope log:notIncludes { ?next yawl:hasJoin ?anyJoin } .
+    # Guard 3: Only fire if NEXT task has NO milestone requirement (let LAW 16 handle it)
+    ?scope log:notIncludes { ?next kgc:requiresMilestone ?anyMilestone } .
 }
 =>
 {
@@ -209,11 +212,14 @@ N3_PHYSICS = """
 # =============================================================================
 # Active tasks with outgoing flows complete automatically (instant task).
 # EXCLUDES tasks marked as kgc:requiresManualCompletion (e.g., human auth).
+# EXCLUDES tasks that require a milestone (handled by LAW 16).
 {
     ?task kgc:status "Active" .
     ?task yawl:flowsInto ?flow .
     # Guard: Only auto-complete if NOT a manual task
     ?scope log:notIncludes { ?task kgc:requiresManualCompletion true } .
+    # Guard: Only auto-complete if NOT requiring a milestone
+    ?scope log:notIncludes { ?task kgc:requiresMilestone ?anyMilestone } .
 }
 =>
 {
@@ -225,11 +231,14 @@ N3_PHYSICS = """
 # =============================================================================
 # Active tasks that are typed as Task complete (terminal states).
 # EXCLUDES tasks marked as kgc:requiresManualCompletion.
+# EXCLUDES tasks that require a milestone (handled by LAW 16).
 {
     ?task kgc:status "Active" .
     ?task a yawl:Task .
     # Guard: Only auto-complete if NOT a manual task
     ?scope log:notIncludes { ?task kgc:requiresManualCompletion true } .
+    # Guard: Only auto-complete if NOT requiring a milestone
+    ?scope log:notIncludes { ?task kgc:requiresMilestone ?anyMilestone } .
 }
 =>
 {
@@ -441,6 +450,93 @@ N3_PHYSICS = """
 {
     ?discrim kgc:status "Active" .
     ?discrim kgc:completedCount ?count .
+} .
+
+# =============================================================================
+# LAW 15: OR-SPLIT (WCP-6: Multi-Choice)
+# =============================================================================
+# Unlike XOR (exclusive), OR-split activates ALL branches whose predicates are true.
+# Multiple branches can be activated simultaneously.
+# This enables modeling scenarios like multiple amendments being active.
+{
+    ?task kgc:status "Completed" .
+    ?task yawl:hasSplit yawl:ControlTypeOr .
+    ?task yawl:flowsInto ?flow .
+    ?flow yawl:nextElementRef ?next .
+    ?flow yawl:hasPredicate ?pred .
+    ?pred kgc:evaluatesTo true .
+}
+=>
+{
+    ?next kgc:status "Active" .
+} .
+
+# LAW 15b: OR-SPLIT DEFAULT (when no predicates are true)
+# If OR-split has no true predicates, take the default path
+{
+    ?task kgc:status "Completed" .
+    ?task yawl:hasSplit yawl:ControlTypeOr .
+    ?task yawl:flowsInto ?defaultFlow .
+    ?defaultFlow yawl:nextElementRef ?next .
+    ?defaultFlow yawl:isDefaultFlow true .
+    # Only fire if ALL other predicates are false
+    # This requires checking no predicate flow has evaluatesTo true
+    ?scope log:notIncludes {
+        ?task yawl:flowsInto ?anyFlow .
+        ?anyFlow yawl:hasPredicate ?anyPred .
+        ?anyPred kgc:evaluatesTo true
+    } .
+}
+=>
+{
+    ?next kgc:status "Active" .
+} .
+
+# =============================================================================
+# LAW 16: MILESTONE (WCP-18: Milestone)
+# =============================================================================
+# Tasks can require milestones to be reached before activation.
+# State: kgc:requiresMilestone links task to milestone, milestone has kgc:reached.
+{
+    ?task kgc:requiresMilestone ?milestone .
+    ?milestone kgc:status "Reached" .
+    ?predecessor kgc:status "Completed" .
+    ?predecessor yawl:flowsInto ?flow .
+    ?flow yawl:nextElementRef ?task .
+}
+=>
+{
+    ?task kgc:status "Active" .
+} .
+
+# LAW 16b: MILESTONE BLOCK (task blocked until milestone reached)
+# When a task requires a milestone that hasn't been reached, it stays Waiting
+{
+    ?task kgc:requiresMilestone ?milestone .
+    ?scope log:notIncludes { ?milestone kgc:status "Reached" } .
+    ?predecessor kgc:status "Completed" .
+    ?predecessor yawl:flowsInto ?flow .
+    ?flow yawl:nextElementRef ?task .
+}
+=>
+{
+    ?task kgc:status "Waiting" .
+} .
+
+# =============================================================================
+# LAW 17: OR-JOIN (WCP-7: Structured Synchronizing Merge)
+# =============================================================================
+# OR-join activates when ANY predecessor completes (unlike AND-join which waits for all).
+# This is the merge counterpart to OR-split.
+{
+    ?join yawl:hasJoin yawl:ControlTypeOr .
+    ?prev yawl:flowsInto ?flow .
+    ?flow yawl:nextElementRef ?join .
+    ?prev kgc:status "Completed" .
+}
+=>
+{
+    ?join kgc:status "Active" .
 } .
 """
 

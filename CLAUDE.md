@@ -57,6 +57,90 @@ kgcl/
 └── examples/              # Example code
 ```
 
+## 🚨 WRITE IT RIGHT THE FIRST TIME - Lint & Type Requirements
+
+**PRE-PUSH HOOK BLOCKS ALL PUSHES WITH ERRORS.** Write correct code from the start.
+
+### Line Length: 88 Characters MAX (ENFORCED)
+```python
+# ❌ WRONG - Line too long (will block push)
+result = some_function_with_long_name(first_parameter_with_long_name, second_parameter_with_long_name, third_parameter_with_long_name)
+
+# ✅ CORRECT - Break into multiple lines
+result = some_function_with_long_name(
+    first_parameter_with_long_name,
+    second_parameter_with_long_name,
+    third_parameter_with_long_name,
+)
+```
+
+### Unused Imports: REMOVE IMMEDIATELY (F401 - blocks push)
+```python
+# ❌ WRONG - Unused import will block push
+from typing import Dict, List, Optional  # If Optional is unused, REMOVE IT
+
+# ✅ CORRECT - Only import what you use
+from typing import Dict, List
+```
+
+### Unused Variables: REMOVE OR USE (F841 - blocks push)
+```python
+# ❌ WRONG - Unused variable will block push
+def process(data: list[str]) -> int:
+    result = transform(data)  # If 'result' is never used, REMOVE IT
+    return len(data)
+
+# ✅ CORRECT - Either use it or don't assign it
+def process(data: list[str]) -> int:
+    return len(transform(data))
+```
+
+### Type Hints: REQUIRED ON EVERYTHING (Mypy strict)
+```python
+# ❌ WRONG - Missing type hints will block push
+def process(data):
+    return data.upper()
+
+# ✅ CORRECT - Full type hints
+def process(data: str) -> str:
+    return data.upper()
+```
+
+### Common Lint Errors to Avoid
+
+| Error | What It Means | How to Fix |
+|-------|--------------|------------|
+| `E501` | Line > 88 chars | Break into multiple lines |
+| `F401` | Unused import | Remove the import |
+| `F841` | Unused variable | Remove or use the variable |
+| `B007` | Loop variable not used | Use `_` for ignored values |
+| `N802` | Function name not lowercase | Use `snake_case` |
+| `N806` | Variable in function should be lowercase | Use `snake_case` |
+| `UP035` | Deprecated typing import | Use `list` not `List`, `dict` not `Dict` |
+| `PLR0913` | Too many arguments (>7) | Refactor to use dataclass |
+
+### Pre-Push Checks (MUST ALL PASS)
+```bash
+# These run automatically on git push:
+1. Implementation lies scan (TODO/FIXME/WIP blocked)
+2. Ruff lint (ALL files)
+3. Mypy strict (ALL src/ files)
+4. Full test suite (PYTHONWARNINGS=error)
+```
+
+### Quick Fix Commands
+```bash
+# Fix ALL lint issues before pushing
+uv run ruff check --fix src/ tests/
+uv run ruff format src/ tests/
+
+# Check types
+uv run mypy src/ --strict
+
+# Run tests
+uv run pytest tests/ -W error
+```
+
 ## Project Overview
 
 This project uses SPARC (Specification, Pseudocode, Architecture, Refinement, Completion) methodology with Claude-Flow orchestration for systematic **Chicago School Test-Driven Development** (tests drive implementation, no mocking domain objects).
@@ -404,27 +488,28 @@ except Exception as e:
 
 ```bash
 # Install hooks (one-time setup)
-poe pre-commit-setup
+git config core.hooksPath scripts/git_hooks
 
-# Manually run pre-commit checks
-poe pre-commit-run
-
-# Push to remote (hooks verify code quality)
-git push
+# Hooks are now active - they run automatically
+git commit  # Runs pre-commit (fast, <10s)
+git push    # Runs pre-push (heavy, 30-120s)
 ```
 
-### Pre-Commit Hook (.githooks/pre-commit)
-Blocks commits if:
-- Missing type hints on functions
-- Hardcoded secrets detected
-- No tests for new features
-- Debug print statements found
-- Public APIs lack docstrings
-- Relative imports used
-- Integration tests lack markers
-- **Implementation lies detected** (TODO/FIXME/STUB/WIP/HACK)
-- **Blanket suppressions** (noqa, type: ignore without specific codes)
-- **Temporal deferral phrases** ("for now", "placeholder", "quick fix")
+### Pre-Commit Hook (scripts/git_hooks/pre-commit) - FAST (<10s)
+Allows backup commits but blocks obvious issues:
+- Hardcoded secrets scan
+- Implementation lies (TODO/FIXME/WIP markers)
+- Format check (ruff format --check)
+- Basic lint (staged files only)
+
+### Pre-Push Hook (scripts/git_hooks/pre-push) - HEAVY (30-120s)
+**BLOCKS CORRUPTING THE PROJECT** with full validation:
+- Implementation lies scan (comprehensive)
+- Ruff lint (ALL src/ and tests/ files)
+- Mypy strict type checking (ALL src/ files)
+- Full test suite (PYTHONWARNINGS=error)
+
+**ANDON CORD:** ANY failure blocks the push. Fix issues before pushing.
 
 ## File Organization & Complexity Limits
 - Max file size: 500 lines (unless justified for cohesion)

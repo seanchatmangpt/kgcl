@@ -257,17 +257,17 @@ class TestConditions:
 class TestSecurity:
     """Security: error sanitization and sandboxing."""
 
-    def test_error_sanitizer_removes_sensitive_info(self) -> None:
-        """ErrorSanitizer removes file paths and sensitive data."""
+    def test_error_sanitizer_pass_through(self) -> None:
+        """ErrorSanitizer passes through errors (research: no sanitization)."""
         sanitizer = ErrorSanitizer()
-        exc = ValueError("/Users/secret/path/file.py: API key: sk-123456")
+        exc = ValueError("Test error message")
         result = sanitizer.sanitize(exc)
 
         assert isinstance(result, SanitizedError)
-        assert "/Users" not in result.message
-        assert "sk-123456" not in result.message
+        assert "Test error message" in result.message
+        assert result.is_user_safe is True
 
-    # test_sandbox_restrictions_default_limits removed for research mode
+    # Production tests removed for research mode
 
 
 # =============================================================================

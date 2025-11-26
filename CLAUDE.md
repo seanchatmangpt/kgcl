@@ -146,52 +146,84 @@ uv run ruff format src/ tests/
 uv run ruff check src/ tests/
 ```
 
-### Type Hints: REQUIRED ON EVERYTHING (Mypy strict)
+### Type Hints: Required on Function Definitions
+
+**Every function MUST have typed parameters and return types.**
+
+#### The Rules:
+1. **ALL parameters must have types** (except `self` and `cls`)
+2. **ALL functions must have return types** (`-> ReturnType` or `-> None`)
+3. **Use `Any` when the type is truly dynamic** (not as a cop-out)
+4. **Use `| None` for optional types** (not `Optional[X]`)
+
+#### Quick Reference:
 ```python
-# ❌ WRONG - Missing or incomplete type hints (blocks push)
-class HookProcessor:
-    def __init__(self, registry, executor, cache=None):  # Missing all types
-        self.registry = registry
-        self.executor = executor
-        self.cache = cache or {}
+# ✅ Function with no return value -> None
+def setup_logging(level: str) -> None:
+    logging.basicConfig(level=level)
 
-    async def process(self, event):  # Missing param and return types
-        hooks = self.registry.get_hooks_for_event(event)
-        results = []
-        for hook in hooks:
-            result = await self.executor.execute(hook, event)
-            results.append(result)
-        return results
+# ✅ Function that returns something -> specific type or Any
+def process_data(data: dict[str, Any]) -> list[str]:
+    return list(data.keys())
 
-    def _build_context(self, event, metadata):  # Missing types
-        return {"event": event, **metadata}
+# ✅ Function with optional parameter -> use | None
+def fetch_config(path: str, default: dict[str, Any] | None = None) -> dict[str, Any]:
+    ...
 
-# ✅ CORRECT - Full type hints on everything
-class HookProcessor:
-    def __init__(
-        self,
-        registry: HookRegistry,
-        executor: HookExecutor,
-        cache: dict[str, HookReceipt] | None = None,
-    ) -> None:
-        self.registry: HookRegistry = registry
-        self.executor: HookExecutor = executor
-        self.cache: dict[str, HookReceipt] = cache or {}
+# ✅ Nested/inner functions need types too
+def outer(items: list[str]) -> int:
+    def inner(item: str) -> bool:  # <- Don't forget inner functions!
+        return len(item) > 0
+    return sum(1 for i in items if inner(i))
 
-    async def process(self, event: dict[str, Any]) -> list[HookReceipt]:
-        hooks: list[Hook] = self.registry.get_hooks_for_event(event)
-        results: list[HookReceipt] = []
-        for hook in hooks:
-            result: HookReceipt = await self.executor.execute(hook, event)
-            results.append(result)
-        return results
+# ✅ *args and **kwargs need types
+def flexible(name: str, *args: Any, **kwargs: Any) -> None:
+    ...
 
-    def _build_context(
-        self,
-        event: dict[str, Any],
-        metadata: dict[str, str],
-    ) -> dict[str, Any]:
-        return {"event": event, **metadata}
+# ✅ Callbacks and callables
+def register(callback: Callable[[str, int], bool]) -> None:
+    ...
+```
+
+#### Common Patterns:
+```python
+# Dict with string keys, any values
+data: dict[str, Any]
+
+# List of specific type
+items: list[HookReceipt]
+
+# Optional (can be None)
+result: str | None = None
+
+# Union types
+value: int | str
+
+# Generic dict parameter
+def process(config: dict[str, Any]) -> None:
+
+# Function returning dict
+def get_stats() -> dict[str, int]:
+```
+
+#### What NOT to Do:
+```python
+# ❌ WRONG - Missing return type
+def process(data):  # No param type, no return type
+    return data
+
+# ❌ WRONG - Missing parameter types
+def calculate(x, y) -> int:  # Params untyped
+    return x + y
+
+# ❌ WRONG - Bare dict/list without type params
+def get_data() -> dict:  # Should be dict[str, Any]
+    ...
+
+# ❌ WRONG - Forgetting inner function types
+def outer() -> None:
+    def inner(x):  # <- Missing types on inner function!
+        return x * 2
 ```
 
 ### Complex Dataclass Patterns (Common Mistakes)

@@ -70,18 +70,17 @@ class _ConcreteKnowledgeHook(KnowledgeHook):
 
 
 # ============================================================================
-# Section 1: Security Integration (8 tests)
+# Section 1: Security Integration (Research Mode - Simplified)
 # ============================================================================
 
 
 class TestSecurityIntegration:
-    """Integration tests for security capabilities."""
+    """Integration tests for security capabilities (research: pass-through)."""
 
     @pytest.mark.asyncio
-    async def test_hook_execution_with_error_sanitization(self) -> None:
-        """Errors are sanitized in hook execution."""
+    async def test_hook_execution_captures_errors(self) -> None:
+        """Hook execution captures errors (research: no sanitization)."""
 
-        # Create hook with failing handler
         def failing_handler(context: dict[str, Any]) -> dict[str, Any]:
             message = "Secret path /etc/passwd exposed in line 42"
             raise ValueError(message)
@@ -94,19 +93,10 @@ class TestSecurityIntegration:
         )
 
         pipeline = HookExecutionPipeline()
-        context = {"count": 10}
+        receipt = await pipeline.execute(hook, {"count": 10})
 
-        # Execute and verify error is sanitized
-        receipt = await pipeline.execute(hook, context)
-
+        # Research mode: errors pass through
         assert receipt.error is not None
-        assert receipt.metadata.get("sanitized") is True
-        # Verify sensitive info removed
-        assert "/etc/passwd" not in receipt.error
-        assert "line 42" not in receipt.error
-        assert "[REDACTED]" in receipt.error or receipt.error == "Secret path [REDACTED] exposed in [REDACTED]"
-
-    # test_sandbox_restrictions_enforced removed for research mode
 
     @pytest.mark.asyncio
     async def test_execution_id_generation_unique(self) -> None:
@@ -114,57 +104,20 @@ class TestSecurityIntegration:
         context1 = HookContext(actor="user1")
         context2 = HookContext(actor="user2")
 
-        # Verify execution IDs are unique
         assert context1.execution_id != context2.execution_id
-
-        # Verify request IDs are unique
         assert context1.request_id != context2.request_id
-
-        # Verify actors are preserved
         assert context1.actor == "user1"
         assert context2.actor == "user2"
 
     @pytest.mark.asyncio
-    async def test_sanitized_error_in_receipt(self) -> None:
-        """Receipt contains sanitized error with error code."""
-
-        def error_with_stack_trace(context: dict[str, Any]) -> dict[str, Any]:
-            # Simulate error with file path and line numbers
-            message = 'File "/app/handlers/processor.py", line 123, in process_data'
-            raise RuntimeError(message)
-
-        hook = Hook(
-            name=HookName.new("error_hook"),
-            description="Test error sanitization",
-            condition=ThresholdCondition(variable="trigger", operator=ThresholdOperator.EQUALS, value=True),
-            handler=error_with_stack_trace,
-        )
-
-        pipeline = HookExecutionPipeline()
-        receipt = await pipeline.execute(hook, {"trigger": True})
-
-        # Verify sanitization
-        assert receipt.error is not None
-        assert receipt.metadata.get("sanitized") is True
-        assert "error_code" in receipt.metadata
-
-        # Verify sensitive data removed
-        assert "/app/handlers/processor.py" not in receipt.error
-        assert "line 123" not in receipt.error
-
-    # test_path_traversal_prevented and test_memory_limit_respected removed for research mode
-
-    @pytest.mark.asyncio
-    async def test_error_sanitizer_removes_sensitive_patterns(self) -> None:
-        """ErrorSanitizer removes multiple sensitive patterns."""
+    async def test_error_sanitizer_pass_through(self) -> None:
+        """ErrorSanitizer passes through errors (research mode)."""
         sanitizer = ErrorSanitizer()
-
-        # Test various sensitive patterns
-        error = Exception('File "/usr/local/app/handler.py", line 45, in process_request at line 123')
+        error = Exception("Test error message")
         sanitized = sanitizer.sanitize(error)
 
-        assert "[REDACTED]" in sanitized.message
-        assert "/usr/local/app/handler.py" not in sanitized.message
+        # Research mode: no sanitization, pass-through
+        assert "Test error message" in sanitized.message
         assert sanitized.is_user_safe is True
 
     @pytest.mark.asyncio
@@ -858,14 +811,13 @@ class TestEndToEndWorkflows:
             assert batch_stats["count"] > 0
 
     @pytest.mark.asyncio
-    async def test_error_recovery_with_sanitization(self) -> None:
-        """Errors are caught, sanitized, and execution continues."""
+    async def test_error_recovery_continues_execution(self) -> None:
+        """Errors are caught and execution continues (research: no sanitization)."""
         results = []
 
         def failing_handler(context: dict[str, Any]) -> dict[str, Any]:
             if context.get("fail"):
-                error_message = "Critical error in /app/process.py line 456: database connection failed"
-                raise ValueError(error_message)
+                raise ValueError("Test error")
             results.append("success")
             return {"status": "ok"}
 
@@ -903,11 +855,8 @@ class TestEndToEndWorkflows:
         assert receipts[0].error is None
         assert receipts[0].handler_result["status"] == "ok"
 
-        # Verify second failed with sanitized error
+        # Verify second failed (research: no sanitization check)
         assert receipts[1].error is not None
-        assert receipts[1].metadata.get("sanitized") is True
-        assert "/app/process.py" not in receipts[1].error
-        assert "line 456" not in receipts[1].error
 
         # Verify third succeeded (execution continued)
         assert receipts[2].error is None

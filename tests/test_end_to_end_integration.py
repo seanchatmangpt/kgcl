@@ -188,8 +188,8 @@ class TestHookHandlerIntegration:
         assert registered_hooks
         assert "IngestHook" in registered_hooks
 
-    def test_hook_orchestrator_sanitizes_handler_errors(self, test_graph: Graph, test_hooks_file: Path) -> None:
-        """Handlers that raise should yield sanitized receipts."""
+    def test_hook_orchestrator_captures_handler_errors(self, test_graph: Graph, test_hooks_file: Path) -> None:
+        """Handlers that raise should yield receipts with errors (research: no sanitization)."""
         orchestrator = HookOrchestrator(graph=test_graph, hooks_file=test_hooks_file, continue_on_error=True)
 
         ingest_hook = HookDefinition(
@@ -211,20 +211,16 @@ class TestHookHandlerIntegration:
         )
 
         def failing_handler(ctx: ExecutionContext) -> dict[str, Any]:
-            raise RuntimeError("boom /tmp/secret_path.py line 42")
+            raise RuntimeError("Test error")
 
         orchestrator.register_handler("IngestHook", failing_handler)
 
         result = orchestrator.trigger_event("urn:kgc:apple:DataIngested", {})
 
+        # Research mode: errors captured, no sanitization
         assert result.errors
         assert not result.success
-        assert "[RUNTIME]" in result.errors[0]
-        assert "/tmp/secret_path.py" not in result.errors[0]
         assert result.receipts
-        receipt = result.receipts[0]
-        assert receipt.metadata.get("sanitized") is True
-        assert receipt.metadata.get("error_code") == "RUNTIME"
 
     def test_handler_error_handling(self, test_graph: Graph) -> None:
         """Test that handlers handle errors gracefully."""

@@ -1,0 +1,468 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix kgc: <http://bitflow.ai/ontology/kgc/v3#> .
+@prefix kgc-inv: <http://bitflow.ai/ontology/kgc/invariants/v1#> .
+@prefix yawl: <http://www.yawlfoundation.org/yawlschema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+# =============================================================================
+# KGC INVARIANTS (The Constitution)
+# =============================================================================
+#
+# THE THREE FUNDAMENTAL LAWS
+# --------------------------
+# 1. TYPING LAW: Every node MUST have an rdf:type
+# 2. HERMETICITY LAW: Closed-world assumption (only known predicates)
+# 3. CHRONOLOGY LAW: Time must flow forward (no causal loops)
+#
+# These are the physics of the universe. Violations are IMPOSSIBLE.
+# If data doesn't fit the shape, execution CANNOT proceed.
+#
+# THE CHATMAN CONSTANT: 64
+# ------------------------
+# Maximum operations per QuadDelta batch.
+# Topology must be simple enough to execute in Hot Path.
+#
+# =============================================================================
+
+<http://bitflow.ai/ontology/kgc/invariants/v1#>
+    a owl:Ontology ;
+    rdfs:label "KGC Invariants (The Constitution)"@en ;
+    rdfs:comment "Fundamental laws that govern the KGC universe. Violations make execution impossible."@en ;
+    owl:versionInfo "1.0.0" .
+
+# =============================================================================
+# LAW 1: TYPING (Every Node Must Have a Type)
+# =============================================================================
+#
+# "No anonymous matter exists."
+# Every subject in the graph MUST declare its type.
+# This enables the Semantic Driver to resolve verb mappings.
+#
+
+kgc-inv:TypingLaw a sh:NodeShape ;
+    sh:targetNode kgc-inv:TypingLaw ;
+    rdfs:label "Typing Law"@en ;
+    rdfs:comment "Every node must have rdf:type. Untyped nodes violate physics."@en ;
+    sh:description "LAW 1: All subjects must declare their type for verb resolution." .
+
+# Token Typing Shape
+kgc-inv:TokenTypingShape a sh:NodeShape ;
+    sh:targetClass kgc:Token ;
+    rdfs:label "Token Typing"@en ;
+
+    # Token must have a type
+    sh:property [
+        sh:path rdf:type ;
+        sh:minCount 1 ;
+        sh:message "TYPING VIOLATION: Token must have rdf:type"@en ;
+        sh:severity sh:Violation ;
+    ] ;
+
+    # Token must be at a task
+    sh:property [
+        sh:path kgc:atTask ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class yawl:Task ;
+        sh:message "TYPING VIOLATION: Token must be at exactly one task"@en ;
+        sh:severity sh:Violation ;
+    ] ;
+
+    # Token must have creation timestamp
+    sh:property [
+        sh:path kgc:createdAt ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:dateTime ;
+        sh:message "TYPING VIOLATION: Token must have creation timestamp"@en ;
+        sh:severity sh:Violation ;
+    ] .
+
+# Task Typing Shape
+kgc-inv:TaskTypingShape a sh:NodeShape ;
+    sh:targetClass yawl:Task ;
+    rdfs:label "Task Typing"@en ;
+
+    # Task must have an ID
+    sh:property [
+        sh:path yawl:id ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:minLength 1 ;
+        sh:message "TYPING VIOLATION: Task must have unique identifier"@en ;
+        sh:severity sh:Violation ;
+    ] .
+
+# =============================================================================
+# LAW 2: HERMETICITY (Closed World Assumption)
+# =============================================================================
+#
+# "Only known forces can act on matter."
+# Predicates must be from known vocabularies (kgc:, yawl:, rdf:, rdfs:).
+# Unknown predicates are Dark Energy (forbidden).
+#
+
+kgc-inv:HermeticityLaw a sh:NodeShape ;
+    sh:targetNode kgc-inv:HermeticityLaw ;
+    rdfs:label "Hermeticity Law"@en ;
+    rdfs:comment "Only predicates from known vocabularies are permitted."@en ;
+    sh:description "LAW 2: Closed-world assumption prevents Dark Energy (unknown predicates)." .
+
+# QuadDelta Hermeticity - Maximum batch size
+kgc-inv:QuadDeltaShape a sh:NodeShape ;
+    sh:targetClass kgc:QuadDelta ;
+    rdfs:label "QuadDelta Hermeticity"@en ;
+
+    # Additions must be <= CHATMAN_CONSTANT (64)
+    sh:property [
+        sh:path kgc:additionCount ;
+        sh:maxInclusive 64 ;
+        sh:message "HERMETICITY VIOLATION: Additions exceed Chatman Constant (64)"@en ;
+        sh:severity sh:Violation ;
+    ] ;
+
+    # Removals must be <= CHATMAN_CONSTANT (64)
+    sh:property [
+        sh:path kgc:removalCount ;
+        sh:maxInclusive 64 ;
+        sh:message "HERMETICITY VIOLATION: Removals exceed Chatman Constant (64)"@en ;
+        sh:severity sh:Violation ;
+    ] .
+
+# =============================================================================
+# LAW 3: CHRONOLOGY (Time Must Flow Forward)
+# =============================================================================
+#
+# "No causal loops. No time travel."
+# Created timestamps must be <= completed timestamps.
+# Execution receipts must chain forward (prev_hash → current_hash).
+#
+
+kgc-inv:ChronologyLaw a sh:NodeShape ;
+    sh:targetNode kgc-inv:ChronologyLaw ;
+    rdfs:label "Chronology Law"@en ;
+    rdfs:comment "Time flows forward only. No causal loops permitted."@en ;
+    sh:description "LAW 3: Arrow of Time - created <= completed, prev_hash chains forward." .
+
+# Task Chronology Shape
+kgc-inv:TaskChronologyShape a sh:NodeShape ;
+    sh:targetClass yawl:Task ;
+    rdfs:label "Task Chronology"@en ;
+
+    # SPARQL constraint: completedAt must be >= createdAt (when both exist)
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "CHRONOLOGY VIOLATION: Task completed before it was created (time paradox)"@en ;
+        sh:severity sh:Violation ;
+        sh:prefixes kgc-inv: ;
+        sh:select """
+            PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            SELECT $this
+            WHERE {
+                $this kgc:createdAt ?created ;
+                      kgc:completedAt ?completed .
+                FILTER (?completed < ?created)
+            }
+        """ ;
+    ] .
+
+# Receipt Chronology Shape (Lockchain Integrity)
+kgc-inv:ReceiptChronologyShape a sh:NodeShape ;
+    sh:targetClass kgc:Receipt ;
+    rdfs:label "Receipt Chronology"@en ;
+
+    # Receipt must have merkle root
+    sh:property [
+        sh:path kgc:merkleRoot ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:minLength 64 ;
+        sh:maxLength 64 ;
+        sh:pattern "^[a-f0-9]{64}$" ;
+        sh:message "CHRONOLOGY VIOLATION: merkleRoot must be 64-char hex SHA256"@en ;
+        sh:severity sh:Violation ;
+    ] ;
+
+    # Receipt must have previous hash (except genesis)
+    sh:property [
+        sh:path kgc:prevHash ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:minLength 64 ;
+        sh:maxLength 64 ;
+        sh:pattern "^[a-f0-9]{64}$" ;
+        sh:message "CHRONOLOGY VIOLATION: prevHash must be 64-char hex SHA256"@en ;
+        sh:severity sh:Violation ;
+    ] .
+
+# =============================================================================
+# VERB EXECUTION INVARIANTS
+# =============================================================================
+
+# Transmute Invariant: Must have exactly one successor
+kgc-inv:TransmuteInvariant a sh:NodeShape ;
+    sh:targetSubjectsOf kgc:verbExecuted ;
+    rdfs:label "Transmute Invariant"@en ;
+
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "TRANSMUTE VIOLATION: Task has no successor for Transmute verb"@en ;
+        sh:severity sh:Violation ;
+        sh:select """
+            PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+            PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+            SELECT $this
+            WHERE {
+                $this kgc:verbExecuted kgc:Transmute .
+                FILTER NOT EXISTS {
+                    $this yawl:flowsInto ?flow .
+                    ?flow yawl:nextElementRef ?next .
+                }
+            }
+        """ ;
+    ] .
+
+# Copy Invariant: Must have >= 2 successors
+kgc-inv:CopyInvariant a sh:NodeShape ;
+    sh:targetSubjectsOf kgc:verbExecuted ;
+    rdfs:label "Copy Invariant"@en ;
+
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "COPY VIOLATION: AND-split must have at least 2 successors"@en ;
+        sh:severity sh:Violation ;
+        sh:select """
+            PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+            PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+            SELECT $this (COUNT(?next) AS ?count)
+            WHERE {
+                $this kgc:verbExecuted kgc:Copy ;
+                      yawl:flowsInto ?flow .
+                ?flow yawl:nextElementRef ?next .
+            }
+            GROUP BY $this
+            HAVING (COUNT(?next) < 2)
+        """ ;
+    ] .
+
+# Await Invariant: Must have >= 2 predecessors
+kgc-inv:AwaitInvariant a sh:NodeShape ;
+    sh:targetSubjectsOf kgc:verbExecuted ;
+    rdfs:label "Await Invariant"@en ;
+
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "AWAIT VIOLATION: Join must have at least 2 predecessors"@en ;
+        sh:severity sh:Violation ;
+        sh:select """
+            PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+            PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+            SELECT $this (COUNT(?source) AS ?count)
+            WHERE {
+                $this kgc:verbExecuted kgc:Await .
+                ?source yawl:flowsInto ?flow .
+                ?flow yawl:nextElementRef $this .
+            }
+            GROUP BY $this
+            HAVING (COUNT(?source) < 2)
+        """ ;
+    ] .
+
+# =============================================================================
+# SPLIT-JOIN PERMUTATION INVARIANTS
+# =============================================================================
+#
+# Some split-join combinations are mathematically impossible.
+# These shapes encode the Permutation Matrix.
+#
+
+# XOR-split cannot have AND-join (XOR produces 1, AND needs all)
+kgc-inv:XorAndInvariant a sh:NodeShape ;
+    sh:targetClass yawl:Task ;
+    rdfs:label "XOR-AND Impossibility"@en ;
+
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "PERMUTATION VIOLATION: XOR-split cannot have AND-join (mathematical impossibility)"@en ;
+        sh:severity sh:Violation ;
+        sh:select """
+            PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+            SELECT $this
+            WHERE {
+                # Find XOR-split task
+                ?splitTask yawl:hasSplit yawl:ControlTypeXor ;
+                           yawl:flowsInto ?flow .
+                ?flow yawl:nextElementRef ?branch .
+
+                # Branches converge to AND-join
+                ?branch yawl:flowsInto ?joinFlow .
+                ?joinFlow yawl:nextElementRef $this .
+                $this yawl:hasJoin yawl:ControlTypeAnd .
+            }
+        """ ;
+    ] .
+
+# =============================================================================
+# QUORUM INVARIANTS (Discriminator Pattern)
+# =============================================================================
+
+kgc-inv:QuorumInvariant a sh:NodeShape ;
+    sh:targetSubjectsOf yawl:quorum ;
+    rdfs:label "Quorum Invariant"@en ;
+
+    # Quorum must be >= 1
+    sh:property [
+        sh:path yawl:quorum ;
+        sh:minInclusive 1 ;
+        sh:message "QUORUM VIOLATION: Quorum must be >= 1"@en ;
+        sh:severity sh:Violation ;
+    ] ;
+
+    # Quorum cannot exceed total branches
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "QUORUM VIOLATION: Quorum cannot exceed total branches"@en ;
+        sh:severity sh:Violation ;
+        sh:select """
+            PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+            SELECT $this
+            WHERE {
+                $this yawl:quorum ?quorum ;
+                      yawl:totalBranches ?total .
+                FILTER (?quorum > ?total)
+            }
+        """ ;
+    ] .
+
+# =============================================================================
+# FLOW TOPOLOGY INVARIANTS
+# =============================================================================
+
+kgc-inv:FlowInvariant a sh:NodeShape ;
+    sh:targetClass yawl:FlowsInto ;
+    rdfs:label "Flow Invariant"@en ;
+
+    # Flow must have target
+    sh:property [
+        sh:path yawl:nextElementRef ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "FLOW VIOLATION: Flow must have exactly one target"@en ;
+        sh:severity sh:Violation ;
+    ] .
+
+# No self-loops (task cannot flow to itself)
+kgc-inv:NoSelfLoopInvariant a sh:NodeShape ;
+    sh:targetClass yawl:Task ;
+    rdfs:label "No Self-Loop Invariant"@en ;
+
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "FLOW VIOLATION: Task cannot have self-loop"@en ;
+        sh:severity sh:Violation ;
+        sh:select """
+            PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+            SELECT $this
+            WHERE {
+                $this yawl:flowsInto ?flow .
+                ?flow yawl:nextElementRef $this .
+            }
+        """ ;
+    ] .
+
+# =============================================================================
+# PREDICATE INVARIANTS (Filter Verb)
+# =============================================================================
+
+kgc-inv:PredicateInvariant a sh:NodeShape ;
+    sh:targetClass yawl:Predicate ;
+    rdfs:label "Predicate Invariant"@en ;
+
+    # Predicate must have query expression
+    sh:property [
+        sh:path yawl:query ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:minLength 1 ;
+        sh:message "PREDICATE VIOLATION: Predicate must have non-empty query"@en ;
+        sh:severity sh:Violation ;
+    ] ;
+
+    # Predicate must have ordering (for deterministic evaluation)
+    sh:property [
+        sh:path yawl:ordering ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+        sh:message "PREDICATE VIOLATION: Predicate must have non-negative ordering"@en ;
+        sh:severity sh:Violation ;
+    ] .
+
+# XOR-split must have exactly one default flow
+kgc-inv:XorDefaultFlowInvariant a sh:NodeShape ;
+    sh:targetClass yawl:Task ;
+    rdfs:label "XOR Default Flow Invariant"@en ;
+
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "PREDICATE VIOLATION: XOR-split must have exactly one default flow"@en ;
+        sh:severity sh:Warning ;
+        sh:select """
+            PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+            SELECT $this (COUNT(?default) AS ?defaultCount)
+            WHERE {
+                $this yawl:hasSplit yawl:ControlTypeXor ;
+                      yawl:flowsInto ?flow .
+                ?flow yawl:isDefaultFlow true .
+                BIND(?flow AS ?default)
+            }
+            GROUP BY $this
+            HAVING (COUNT(?default) != 1)
+        """ ;
+    ] .
+
+# =============================================================================
+# TIMER INVARIANTS
+# =============================================================================
+
+kgc-inv:TimerInvariant a sh:NodeShape ;
+    sh:targetClass yawl:Timer ;
+    rdfs:label "Timer Invariant"@en ;
+
+    # Timer must have trigger type
+    sh:property [
+        sh:path yawl:hasTrigger ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "TIMER VIOLATION: Timer must have trigger type"@en ;
+        sh:severity sh:Violation ;
+    ] ;
+
+    # Timer must have either expiry or duration (not both)
+    sh:xone (
+        [ sh:property [ sh:path yawl:expiry ; sh:minCount 1 ; sh:maxCount 1 ] ]
+        [ sh:property [ sh:path yawl:duration ; sh:minCount 1 ; sh:maxCount 1 ] ]
+    ) ;
+    sh:message "TIMER VIOLATION: Timer must have exactly one of expiry or duration"@en .
+
+# =============================================================================
+# SUMMARY: THE THREE LAWS + CHATMAN CONSTANT
+# =============================================================================
+#
+# LAW 1 (TYPING): Every node must have rdf:type
+# LAW 2 (HERMETICITY): Only known predicates, max 64 ops/batch
+# LAW 3 (CHRONOLOGY): Time flows forward, hashes chain correctly
+#
+# If ANY shape violation occurs, the engine CANNOT proceed.
+# "Validation IS Execution" - conformance = green light.
+#
+# =============================================================================

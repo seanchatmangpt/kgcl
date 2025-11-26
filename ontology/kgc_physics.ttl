@@ -1,0 +1,373 @@
+@prefix kgc: <http://bitflow.ai/ontology/kgc/v3#> .
+@prefix yawl: <http://www.yawlfoundation.org/yawlschema#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# =============================================================================
+# KGC PHYSICS ONTOLOGY v3.0
+# =============================================================================
+#
+# THE CHATMAN EQUATION: A = μ(O)
+# ------------------------------
+# - Observation (O): RDF graph representing workflow topology
+# - Operator (μ): This ontology mapping patterns to verbs
+# - Action (A): Execution result (only if topology conforms)
+#
+# THE 5 ELEMENTAL VERBS
+# ---------------------
+# These are the ONLY operations the engine can perform.
+# New patterns = new mappings to existing verbs, NOT new engine code.
+#
+# 1. TRANSMUTE (Arrow of Time): A → B
+# 2. COPY (Divergence): A → {B, C}
+# 3. FILTER (Selection): A → {Subset}
+# 4. AWAIT (Convergence): {A, B} → C
+# 5. VOID (Termination): A → ∅
+#
+# =============================================================================
+
+<http://bitflow.ai/ontology/kgc/v3#>
+    a owl:Ontology ;
+    rdfs:label "KGC Physics Ontology"@en ;
+    rdfs:comment "The Laws of Physics for Knowledge Graph Calculus. Defines 5 elemental verbs and their mappings to YAWL workflow patterns."@en ;
+    owl:versionInfo "3.0.0" .
+
+# =============================================================================
+# SECTION 1: THE 5 ELEMENTAL VERBS
+# =============================================================================
+
+kgc:Verb a rdfs:Class ;
+    rdfs:label "Verb"@en ;
+    rdfs:comment "An elemental operation that can be applied to graph nodes. The engine implements exactly 5 verbs."@en .
+
+# -----------------------------------------------------------------------------
+# VERB 1: TRANSMUTE (Arrow of Time)
+# -----------------------------------------------------------------------------
+# Semantics: A → B
+# Logic: Find yawl:nextElementRef and move the token to successor
+# YAWL Mappings: Sequence, Data Mappings, Task Completion
+
+kgc:Transmute a kgc:Verb ;
+    rdfs:label "Transmute"@en ;
+    rdfs:comment "Arrow of Time. Moves token from current node to next node via yawl:nextElementRef. Executes yawl:startingMappings for data transformation."@en ;
+    kgc:verbId 1 ;
+    kgc:sparqlPattern """
+        SELECT ?next WHERE {
+            ?current yawl:flowsInto ?flow .
+            ?flow yawl:nextElementRef ?next .
+        }
+    """^^xsd:string .
+
+# -----------------------------------------------------------------------------
+# VERB 2: COPY (Divergence)
+# -----------------------------------------------------------------------------
+# Semantics: A → {B, C}
+# Logic: Clone token state to ALL next elements
+# YAWL Mappings: AND-split, Service calls (webhooks)
+
+kgc:Copy a kgc:Verb ;
+    rdfs:label "Copy"@en ;
+    rdfs:comment "Divergence. Clones token to multiple successors simultaneously. Used for AND-split and external service dispatch."@en ;
+    kgc:verbId 2 ;
+    kgc:sparqlPattern """
+        SELECT ?next WHERE {
+            ?current yawl:flowsInto ?flow .
+            ?flow yawl:nextElementRef ?next .
+        }
+    """^^xsd:string .
+
+# -----------------------------------------------------------------------------
+# VERB 3: FILTER (Selection)
+# -----------------------------------------------------------------------------
+# Semantics: A → {Subset}
+# Logic: Evaluate yawl:hasPredicate or yawl:hasResourcing to select paths
+# YAWL Mappings: XOR-split, OR-split, Resource Authorization
+
+kgc:Filter a kgc:Verb ;
+    rdfs:label "Filter"@en ;
+    rdfs:comment "Selection. Evaluates predicates to select which paths receive tokens. Used for XOR-split (exactly one), OR-split (one or more), and resource authorization."@en ;
+    kgc:verbId 3 ;
+    kgc:sparqlPattern """
+        SELECT ?next ?predicate ?ordering WHERE {
+            ?current yawl:flowsInto ?flow .
+            ?flow yawl:nextElementRef ?next .
+            OPTIONAL { ?flow yawl:hasPredicate ?pred . ?pred yawl:query ?predicate ; yawl:ordering ?ordering . }
+        }
+        ORDER BY ?ordering
+    """^^xsd:string .
+
+# -----------------------------------------------------------------------------
+# VERB 4: AWAIT (Convergence)
+# -----------------------------------------------------------------------------
+# Semantics: {A, B} → C
+# Logic: Check if all/some incoming flows have completion history
+# YAWL Mappings: AND-join, OR-join, Discriminator
+
+kgc:Await a kgc:Verb ;
+    rdfs:label "Await"@en ;
+    rdfs:comment "Convergence. Waits for incoming flows to complete before proceeding. AND-join waits for all, OR-join waits for active, Discriminator waits for quorum."@en ;
+    kgc:verbId 4 ;
+    kgc:sparqlPattern """
+        SELECT ?source ?completed WHERE {
+            ?source yawl:flowsInto ?flow .
+            ?flow yawl:nextElementRef ?current .
+            OPTIONAL { ?source kgc:completedAt ?completed . }
+        }
+    """^^xsd:string .
+
+# -----------------------------------------------------------------------------
+# VERB 5: VOID (Termination)
+# -----------------------------------------------------------------------------
+# Semantics: A → ∅
+# Logic: Remove token without producing a successor
+# YAWL Mappings: Timeout expiry, Cancel task, Exception handling
+
+kgc:Void a kgc:Verb ;
+    rdfs:label "Void"@en ;
+    rdfs:comment "Termination. Destroys token without creating successor. Used for timeouts, cancellation, and exception handling."@en ;
+    kgc:verbId 5 ;
+    kgc:sparqlPattern """
+        SELECT ?reason WHERE {
+            { ?current yawl:hasTimer ?timer . ?timer yawl:expiry ?expiry . FILTER (NOW() > ?expiry) . BIND("timeout" AS ?reason) }
+            UNION
+            { ?current kgc:cancelled true . BIND("cancelled" AS ?reason) }
+            UNION
+            { ?current kgc:failed true . BIND("exception" AS ?reason) }
+        }
+    """^^xsd:string .
+
+# =============================================================================
+# SECTION 2: PATTERN → VERB MAPPINGS
+# =============================================================================
+#
+# The Semantic Driver queries this section to determine which verb to execute.
+# Query: SELECT ?verb WHERE { ?mapping kgc:pattern ?pattern ; kgc:verb ?verb . }
+#
+# THIS IS THE ONLY PLACE WHERE PATTERNS ARE MAPPED TO BEHAVIOR.
+# The Python engine contains NO pattern-specific code.
+#
+
+kgc:PatternMapping a rdfs:Class ;
+    rdfs:label "Pattern Mapping"@en ;
+    rdfs:comment "Maps a YAWL pattern or topology to a KGC verb. The Semantic Driver resolves these mappings at runtime."@en .
+
+kgc:pattern a rdf:Property ;
+    rdfs:label "pattern"@en ;
+    rdfs:domain kgc:PatternMapping ;
+    rdfs:range rdfs:Resource ;
+    rdfs:comment "The YAWL pattern or control type being mapped."@en .
+
+kgc:verb a rdf:Property ;
+    rdfs:label "verb"@en ;
+    rdfs:domain kgc:PatternMapping ;
+    rdfs:range kgc:Verb ;
+    rdfs:comment "The KGC verb that implements this pattern."@en .
+
+kgc:condition a rdf:Property ;
+    rdfs:label "condition"@en ;
+    rdfs:domain kgc:PatternMapping ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Optional SPARQL ASK condition for contextual mapping."@en .
+
+# -----------------------------------------------------------------------------
+# BASIC CONTROL FLOW MAPPINGS (Patterns 1-5)
+# -----------------------------------------------------------------------------
+
+kgc:SequenceMapping a kgc:PatternMapping ;
+    rdfs:label "Sequence → Transmute"@en ;
+    kgc:pattern yawl:Sequence ;
+    kgc:verb kgc:Transmute ;
+    rdfs:comment "Pattern 1: Sequence. A single token moves from A to B."@en .
+
+kgc:ParallelSplitMapping a kgc:PatternMapping ;
+    rdfs:label "AND-Split → Copy"@en ;
+    kgc:pattern yawl:ControlTypeAnd ;
+    kgc:verb kgc:Copy ;
+    kgc:condition "ASK { ?task yawl:hasSplit yawl:ControlTypeAnd }" ;
+    rdfs:comment "Pattern 2: Parallel Split (AND-split). Token is copied to all branches."@en .
+
+kgc:SynchronizationMapping a kgc:PatternMapping ;
+    rdfs:label "AND-Join → Await"@en ;
+    kgc:pattern yawl:ControlTypeAnd ;
+    kgc:verb kgc:Await ;
+    kgc:condition "ASK { ?task yawl:hasJoin yawl:ControlTypeAnd }" ;
+    rdfs:comment "Pattern 3: Synchronization (AND-join). Wait for ALL incoming flows."@en .
+
+kgc:ExclusiveChoiceMapping a kgc:PatternMapping ;
+    rdfs:label "XOR-Split → Filter"@en ;
+    kgc:pattern yawl:ControlTypeXor ;
+    kgc:verb kgc:Filter ;
+    kgc:condition "ASK { ?task yawl:hasSplit yawl:ControlTypeXor }" ;
+    rdfs:comment "Pattern 4: Exclusive Choice (XOR-split). Exactly ONE branch receives token."@en .
+
+kgc:SimpleMergeMapping a kgc:PatternMapping ;
+    rdfs:label "XOR-Join → Transmute"@en ;
+    kgc:pattern yawl:ControlTypeXor ;
+    kgc:verb kgc:Transmute ;
+    kgc:condition "ASK { ?task yawl:hasJoin yawl:ControlTypeXor }" ;
+    rdfs:comment "Pattern 5: Simple Merge (XOR-join). First arrival continues, no wait."@en .
+
+# -----------------------------------------------------------------------------
+# ADVANCED BRANCHING MAPPINGS (Patterns 6-9)
+# -----------------------------------------------------------------------------
+
+kgc:MultiChoiceMapping a kgc:PatternMapping ;
+    rdfs:label "OR-Split → Filter"@en ;
+    kgc:pattern yawl:ControlTypeOr ;
+    kgc:verb kgc:Filter ;
+    kgc:condition "ASK { ?task yawl:hasSplit yawl:ControlTypeOr }" ;
+    rdfs:comment "Pattern 6: Multi-Choice (OR-split). One or more branches receive tokens."@en .
+
+kgc:SynchronizingMergeMapping a kgc:PatternMapping ;
+    rdfs:label "OR-Join → Await"@en ;
+    kgc:pattern yawl:ControlTypeOr ;
+    kgc:verb kgc:Await ;
+    kgc:condition "ASK { ?task yawl:hasJoin yawl:ControlTypeOr }" ;
+    rdfs:comment "Pattern 7: Synchronizing Merge (OR-join). Wait for ACTIVE branches only."@en .
+
+kgc:MultipleMergeMapping a kgc:PatternMapping ;
+    rdfs:label "Multiple Merge → Transmute"@en ;
+    kgc:pattern yawl:MultipleMerge ;
+    kgc:verb kgc:Transmute ;
+    rdfs:comment "Pattern 8: Multiple Merge. Each arrival triggers execution (no sync)."@en .
+
+kgc:DiscriminatorMapping a kgc:PatternMapping ;
+    rdfs:label "Discriminator → Await"@en ;
+    kgc:pattern yawl:Discriminator ;
+    kgc:verb kgc:Await ;
+    rdfs:comment "Pattern 9: Discriminator. Wait for N-of-M (quorum) completions."@en .
+
+# -----------------------------------------------------------------------------
+# DATA PERSPECTIVE MAPPINGS
+# -----------------------------------------------------------------------------
+
+kgc:DataMappingTransform a kgc:PatternMapping ;
+    rdfs:label "Data Mapping → Transmute"@en ;
+    kgc:pattern yawl:VarMappingSet ;
+    kgc:verb kgc:Transmute ;
+    rdfs:comment "Data transformation via yawl:startingMappings uses Transmute verb."@en .
+
+# -----------------------------------------------------------------------------
+# RESOURCE PERSPECTIVE MAPPINGS
+# -----------------------------------------------------------------------------
+
+kgc:ResourceAuthMapping a kgc:PatternMapping ;
+    rdfs:label "Resource Auth → Filter"@en ;
+    kgc:pattern yawl:Resourcing ;
+    kgc:verb kgc:Filter ;
+    rdfs:comment "Resource authorization check. If actor not in allowed set, path is filtered out."@en .
+
+# -----------------------------------------------------------------------------
+# SERVICE PERSPECTIVE MAPPINGS
+# -----------------------------------------------------------------------------
+
+kgc:ExternalServiceMapping a kgc:PatternMapping ;
+    rdfs:label "External Service → Copy"@en ;
+    kgc:pattern yawl:WebServiceGateway ;
+    kgc:verb kgc:Copy ;
+    rdfs:comment "External service calls. Payload copied to service endpoint."@en .
+
+# -----------------------------------------------------------------------------
+# TIMER/EXCEPTION MAPPINGS
+# -----------------------------------------------------------------------------
+
+kgc:TimerExpiryMapping a kgc:PatternMapping ;
+    rdfs:label "Timer Expiry → Void"@en ;
+    kgc:pattern yawl:Timer ;
+    kgc:verb kgc:Void ;
+    kgc:condition "ASK { ?task yawl:hasTimer ?timer . ?timer yawl:expiry ?exp . FILTER (NOW() > ?exp) }" ;
+    rdfs:comment "Timer expiry destroys token via Void verb."@en .
+
+kgc:CancellationMapping a kgc:PatternMapping ;
+    rdfs:label "Cancellation → Void"@en ;
+    kgc:pattern yawl:CancellationRegion ;
+    kgc:verb kgc:Void ;
+    rdfs:comment "Task cancellation destroys token via Void verb."@en .
+
+# =============================================================================
+# SECTION 3: EXECUTION STATE
+# =============================================================================
+
+kgc:Token a rdfs:Class ;
+    rdfs:label "Token"@en ;
+    rdfs:comment "A workflow token representing active execution state."@en .
+
+kgc:atTask a rdf:Property ;
+    rdfs:label "at task"@en ;
+    rdfs:domain kgc:Token ;
+    rdfs:range yawl:Task ;
+    rdfs:comment "The task where this token currently resides."@en .
+
+kgc:payload a rdf:Property ;
+    rdfs:label "payload"@en ;
+    rdfs:domain kgc:Token ;
+    rdfs:range rdfs:Resource ;
+    rdfs:comment "Data payload carried by this token."@en .
+
+kgc:createdAt a rdf:Property ;
+    rdfs:label "created at"@en ;
+    rdfs:domain kgc:Token ;
+    rdfs:range xsd:dateTime ;
+    rdfs:comment "Timestamp when token was created."@en .
+
+kgc:completedAt a rdf:Property ;
+    rdfs:label "completed at"@en ;
+    rdfs:domain yawl:Task ;
+    rdfs:range xsd:dateTime ;
+    rdfs:comment "Timestamp when task completed (for join convergence checks)."@en .
+
+# =============================================================================
+# SECTION 4: SEMANTIC DRIVER QUERY
+# =============================================================================
+#
+# The Atman (Semantic Driver) uses this query to resolve which verb to execute:
+#
+# SELECT ?verb ?verbId WHERE {
+#     ?mapping kgc:pattern ?patternType ;
+#              kgc:verb ?verb .
+#     ?verb kgc:verbId ?verbId .
+#     OPTIONAL { ?mapping kgc:condition ?cond . }
+#     FILTER (!BOUND(?cond) || ... ASK evaluation ...)
+# }
+#
+# This is the ONLY dispatch mechanism. No Python if/else for patterns.
+#
+
+kgc:verbId a rdf:Property ;
+    rdfs:label "verb ID"@en ;
+    rdfs:domain kgc:Verb ;
+    rdfs:range xsd:integer ;
+    rdfs:comment "Numeric identifier for verb dispatch. Used by Kernel."@en .
+
+# =============================================================================
+# SECTION 5: PROVENANCE
+# =============================================================================
+
+kgc:Receipt a rdfs:Class ;
+    rdfs:label "Receipt"@en ;
+    rdfs:comment "Cryptographic proof of execution: State + Logic + History."@en .
+
+kgc:merkleRoot a rdf:Property ;
+    rdfs:label "merkle root"@en ;
+    rdfs:domain kgc:Receipt ;
+    rdfs:range xsd:string ;
+    rdfs:comment "SHA3-256(prev_hash + delta). Links to previous state."@en .
+
+kgc:verbExecuted a rdf:Property ;
+    rdfs:label "verb executed"@en ;
+    rdfs:domain kgc:Receipt ;
+    rdfs:range kgc:Verb ;
+    rdfs:comment "Which verb was applied."@en .
+
+kgc:prevHash a rdf:Property ;
+    rdfs:label "previous hash"@en ;
+    rdfs:domain kgc:Receipt ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Hash of previous transaction (Lockchain link)."@en .
+
+# =============================================================================
+# END OF KGC PHYSICS ONTOLOGY
+# =============================================================================

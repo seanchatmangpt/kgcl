@@ -7,13 +7,58 @@
 3. **Production-Grade**: Code ready for immediate production use without refactoring.
 4. **UNRDF Alignment**: Port UNRDF JavaScript patterns to Python idiomatically.
 5. **No Tech Debt**: Clean code first time. No "TODO: refactor later".
+6. **Write It Right**: Line length 88, no unused imports/vars, full type hints from the start.
+
+## 🚨 WRITE IT RIGHT THE FIRST TIME
+
+**PRE-PUSH HOOK BLOCKS ALL PUSHES WITH ERRORS.** Write correct code from the start.
+
+### Critical Rules (Enforced by Pre-Push Hook)
+
+| Rule | Error Code | What It Means |
+|------|------------|---------------|
+| Line length ≤ 88 | E501 | Break long lines into multiple lines |
+| No unused imports | F401 | Remove imports you don't use |
+| No unused variables | F841 | Remove or use assigned variables |
+| Full type hints | Mypy | Every function needs param and return types |
+| No TODO/FIXME/WIP | Lies | Complete the work, no deferred implementation |
+
+### Common Patterns
+
+```python
+# ❌ WRONG - Line too long
+result = function_name(param_one, param_two, param_three, param_four)
+
+# ✅ CORRECT - Break into multiple lines
+result = function_name(
+    param_one,
+    param_two,
+    param_three,
+    param_four,
+)
+
+# ❌ WRONG - Unused import
+from typing import Dict, List, Optional  # Optional never used
+
+# ✅ CORRECT - Only import what you use
+from typing import Dict, List
+
+# ❌ WRONG - Missing types
+def process(data):
+    return data
+
+# ✅ CORRECT - Full type hints
+def process(data: str) -> str:
+    return data
+```
 
 ## File Organization
 ```
 kgcl/
-├── pyproject.toml              # Strictest build settings (ALL lint rules enabled)
-├── .githooks/
-│   └── pre-commit              # Block commits that violate standards
+├── pyproject.toml              # Strictest build settings (lint rules enabled)
+├── scripts/git_hooks/
+│   ├── pre-commit              # Fast checks (<10s) - allows backups
+│   └── pre-push                # Heavy checks (30-120s) - blocks corruption
 ├── .cursor/
 │   ├── commands/               # Slash command definitions
 │   └── rules.md                # This file
@@ -171,17 +216,45 @@ poe type-check    # Type check
 poe test          # Run all tests
 ```
 
-Or via `git hooks` (automatic on commit):
+Or via `git hooks` (automatic):
 ```bash
-.githooks/pre-commit     # Blocks commits violating standards
+git commit   # Runs pre-commit (fast, <10s)
+git push     # Runs pre-push (heavy, 30-120s)
 ```
 
 ### Ruff Configuration
 From `pyproject.toml`:
 ```toml
+[tool.ruff]
+line-length = 88  # Black-compatible - STRICT ENFORCEMENT
+
 [tool.ruff.lint]
-select = ["ALL"]  # Enable ALL rules
-ignore = ["CPY", "FIX", "T20", "ARG001", "COM812", "D203", "D213", "E501", "PD008", "PD009", "PGH003", "RET504", "S101", "TD003"]
+select = ["E", "F", "B", "W", "I", "N", "UP", "PL", "RUF"]
+ignore = ["D203", "D213", "COM812", "ISC001"]
+unfixable = ["F401", "F841"]  # Manual review required
+```
+
+### Line Length: 88 Characters MAX (ENFORCED)
+```python
+# ❌ WRONG - Line too long (blocks push)
+result = some_function(first_param, second_param, third_param, fourth_param)
+
+# ✅ CORRECT - Break into multiple lines
+result = some_function(
+    first_param,
+    second_param,
+    third_param,
+    fourth_param,
+)
+```
+
+### Unused Imports/Variables: REMOVE IMMEDIATELY
+```python
+# ❌ WRONG - F401 (unused import) blocks push
+from typing import Dict, List, Optional  # Optional unused? REMOVE IT
+
+# ❌ WRONG - F841 (unused variable) blocks push
+result = compute()  # If never used, REMOVE IT
 ```
 
 ### Mypy Configuration (Strictest)
@@ -225,15 +298,21 @@ Each pattern must integrate with:
 
 ## Build & CI Requirements
 
-### Pre-Commit Hook (.githooks/pre-commit)
-Blocks commits if:
-- Missing type hints on functions
-- Hardcoded secrets detected
-- No tests for new features
-- Debug print statements found
-- Public APIs lack docstrings
-- Relative imports used
-- Integration tests lack markers
+### Pre-Commit Hook (scripts/git_hooks/pre-commit) - FAST (<10s)
+Allows backup commits but blocks obvious issues:
+- Hardcoded secrets scan
+- Implementation lies (TODO/FIXME/WIP markers)
+- Format check (ruff format --check)
+- Basic lint (staged files only)
+
+### Pre-Push Hook (scripts/git_hooks/pre-push) - HEAVY (30-120s)
+**BLOCKS CORRUPTING THE PROJECT** with full validation:
+- Implementation lies scan (comprehensive)
+- Ruff lint (ALL src/ and tests/ files)
+- Mypy strict type checking (ALL src/ files)
+- Full test suite (PYTHONWARNINGS=error)
+
+**ANDON CORD:** ANY failure blocks the push. Fix issues before pushing.
 
 ### Poe Automation Tasks
 ```bash
@@ -268,13 +347,11 @@ asyncio_mode = "auto"       # Async test support
 ## Git Hooks Setup
 ```bash
 # Install hooks (one-time setup)
-poe pre-commit-setup
+git config core.hooksPath scripts/git_hooks
 
-# Manually run pre-commit checks
-poe pre-commit-run
-
-# Push to remote (hooks verify code quality)
-git push
+# Hooks are now active - they run automatically
+git commit  # Runs pre-commit (fast, <10s)
+git push    # Runs pre-push (heavy, 30-120s)
 ```
 
 ## Imports - Absolute Only
@@ -374,16 +451,18 @@ See `.cursor/commands/` for:
 - `expert-testing-patterns.md` - TDD patterns
 - And more...
 
-## Final Checklist Before Commit
+## Final Checklist Before Push
+- [ ] Line length ≤ 88 characters (E501)
+- [ ] No unused imports (F401)
+- [ ] No unused variables (F841)
 - [ ] All functions have type hints
-- [ ] All tests pass: `poe test`
-- [ ] Lint passes: `poe lint-check`
-- [ ] Types pass: `poe type-check`
-- [ ] Format correct: `poe format-check`
-- [ ] Pre-commit hook passes: `.githooks/pre-commit`
+- [ ] All tests pass: `uv run poe test`
+- [ ] Lint passes: `uv run ruff check src/ tests/`
+- [ ] Types pass: `uv run mypy src/ --strict`
+- [ ] Format correct: `uv run ruff format --check src/ tests/`
 - [ ] NumPy docstrings on public APIs
 - [ ] No hardcoded secrets
-- [ ] No debug print statements
+- [ ] No TODO/FIXME/WIP markers
 - [ ] New features have tests
 - [ ] Integration tests marked with `@pytest.mark.integration`
 

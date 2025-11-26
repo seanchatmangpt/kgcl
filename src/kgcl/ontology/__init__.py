@@ -54,6 +54,10 @@ Version: 1.0.0
 """
 
 from pathlib import Path
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from rdflib import Graph
 
 __version__ = "1.0.0"
 __all__ = [
@@ -120,7 +124,7 @@ def load_ontology(include_examples: bool = False) -> "Graph":
     return g
 
 
-def validate_instance_data(data_graph: "Graph", shapes_graph: "Graph" = None) -> tuple:
+def validate_instance_data(data_graph: "Graph", shapes_graph: "Graph | None" = None) -> tuple[bool, "Graph", str]:
     """
     Validate instance data against SHACL shapes.
 
@@ -165,7 +169,7 @@ def validate_instance_data(data_graph: "Graph", shapes_graph: "Graph" = None) ->
     return conforms, results_graph, results_text
 
 
-def get_ontology_statistics() -> dict:
+def get_ontology_statistics() -> dict[str, int]:
     """
     Get statistics about the ontology.
 

@@ -1,0 +1,980 @@
+@prefix kgc: <http://bitflow.ai/ontology/kgc/v3#> .
+@prefix yawl: <http://www.yawlfoundation.org/yawlschema#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+# =============================================================================
+# SPARQL CONSTRUCT EXECUTION TEMPLATES - WCP 16-27
+# =============================================================================
+#
+# These templates are EXECUTED directly by the engine, not interpreted.
+# Each template:
+# 1. Uses CONSTRUCT to produce new triples (additions)
+# 2. Uses DELETE WHERE pattern for removals where needed
+# 3. Includes all parameter bindings from VerbConfig
+# 4. Is self-contained (no Python interpretation)
+#
+# =============================================================================
+
+# =============================================================================
+# STATE-BASED PATTERNS (WCP 16-18)
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# WCP-16: Deferred Choice → Filter(deferred)
+# -----------------------------------------------------------------------------
+# Pattern: Environment determines branch at runtime
+# Behavior: Mark task as waiting for external resolution
+# Parameters: selectionMode="deferred"
+# -----------------------------------------------------------------------------
+
+kgc:WCP16_Template a kgc:ExecutionTemplate ;
+    rdfs:label "WCP-16: Deferred Choice Execution Template"@en ;
+    kgc:forPattern kgc:WCP16_DeferredChoice ;
+    kgc:constructQuery """
+PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+CONSTRUCT {
+    # Mark all successor tasks as waiting for external resolution
+    ?successor kgc:status "Waiting" .
+    ?successor kgc:waitReason "DeferredChoice" .
+    ?successor kgc:enabledAt ?now .
+    ?successor kgc:resolutionPending true .
+
+    # Remove token from current task
+    ?task kgc:hasToken false .
+    ?task kgc:completedAt ?now .
+
+    # Create external choice event
+    ?choiceEvent a kgc:ExternalChoiceEvent .
+    ?choiceEvent kgc:sourceTask ?task .
+    ?choiceEvent kgc:candidates ?successor .
+    ?choiceEvent kgc:createdAt ?now .
+}
+WHERE {
+    # Bind current task with token
+    ?task kgc:hasToken true .
+    ?task a yawl:Task .
+
+    # Find all outgoing flows
+    ?task yawl:flowsTo ?successor .
+
+    # Get current timestamp
+    BIND(NOW() AS ?now)
+
+    # Generate choice event IRI
+    BIND(IRI(CONCAT(STR(?task), "/deferredChoice/", STR(?now))) AS ?choiceEvent)
+}
+""" ;
+    kgc:deleteQuery """
+PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+
+DELETE WHERE {
+    ?task kgc:hasToken ?anyToken .
+}
+""" .
+
+# -----------------------------------------------------------------------------
+# WCP-17: Interleaved Parallel Routing → Filter(mutex)
+# -----------------------------------------------------------------------------
+# Pattern: Tasks execute in any order, one at a time (mutual exclusion)
+# Behavior: Enable first available, block others until completion
+# Parameters: selectionMode="mutex"
+# -----------------------------------------------------------------------------
+
+kgc:WCP17_Template a kgc:ExecutionTemplate ;
+    rdfs:label "WCP-17: Interleaved Parallel Routing Execution Template"@en ;
+    kgc:forPattern kgc:WCP17_InterleavedParallel ;
+    kgc:constructQuery """
+PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+CONSTRUCT {
+    # If no task is currently executing in mutex region
+    ?firstAvailable kgc:hasToken true .
+    ?firstAvailable kgc:status "Active" .
+    ?firstAvailable kgc:activatedAt ?now .
+    ?firstAvailable kgc:mutexLock ?mutexId .
+
+    # Mark remaining tasks as blocked
+    ?otherTask kgc:status "Blocked" .
+    ?otherTask kgc:blockReason "MutexHeld" .
+    ?otherTask kgc:waitingFor ?mutexId .
+
+    # Create mutex lock
+    ?mutexId a kgc:MutexLock .
+    ?mutexId kgc:holder ?firstAvailable .
+    ?mutexId kgc:region ?mutexRegion .
+    ?mutexId kgc:createdAt ?now .
+}
+WHERE {
+    # Identify mutex region
+    ?task kgc:hasToken true .
+    ?task yawl:inRegion ?mutexRegion .
+    ?mutexRegion a yawl:InterleavedParallel .
+
+    # Find all tasks in mutex region
+    ?candidateTask yawl:inRegion ?mutexRegion .
+    ?candidateTask kgc:status "Ready" .
+
+    # Check no task currently holds mutex
+    FILTER NOT EXISTS {
+        ?anyTask kgc:mutexLock ?existingLock .
+        ?existingLock kgc:region ?mutexRegion .
+    }
+
+    # Select first available task (deterministic ordering)
+    {
+        SELECT ?firstAvailable WHERE {
+            ?candidateTask yawl:inRegion ?mutexRegion .
+            ?candidateTask kgc:status "Ready" .
+        }
+        ORDER BY ?candidateTask
+        LIMIT 1
+    }
+
+    # Identify other tasks to block
+    ?otherTask yawl:inRegion ?mutexRegion .
+    ?otherTask kgc:status "Ready" .
+    FILTER(?otherTask != ?firstAvailable)
+
+    # Generate mutex ID
+    BIND(NOW() AS ?now)
+    BIND(IRI(CONCAT(STR(?mutexRegion), "/mutex/", STR(?now))) AS ?mutexId)
+}
+""" ;
+    kgc:onCompletionQuery """
+PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+
+CONSTRUCT {
+    # Release mutex on task completion
+    ?mutexId kgc:released true .
+    ?mutexId kgc:releasedAt ?now .
+
+    # Unblock next task
+    ?nextTask kgc:status "Ready" .
+    ?nextTask kgc:unblocked ?now .
+}
+WHERE {
+    ?completedTask kgc:mutexLock ?mutexId .
+    ?completedTask kgc:status "Completed" .
+
+    # Find next waiting task
+    ?mutexId kgc:region ?mutexRegion .
+    ?nextTask kgc:waitingFor ?mutexId .
+    ?nextTask kgc:status "Blocked" .
+
+    BIND(NOW() AS ?now)
+}
+""" .
+
+# -----------------------------------------------------------------------------
+# WCP-18: Milestone → Await(milestone)
+# -----------------------------------------------------------------------------
+# Pattern: Task enabled only while milestone is active
+# Behavior: Enable task when milestone reached, disable when milestone expires
+# Parameters: hasThreshold="milestone", completionStrategy="waitMilestone"
+# -----------------------------------------------------------------------------
+
+kgc:WCP18_Template a kgc:ExecutionTemplate ;
+    rdfs:label "WCP-18: Milestone Execution Template"@en ;
+    kgc:forPattern kgc:WCP18_Milestone ;
+    kgc:constructQuery """
+PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+CONSTRUCT {
+    # Enable task when milestone becomes active
+    ?task kgc:status "Enabled" .
+    ?task kgc:enabledAt ?now .
+    ?task kgc:constrainedBy ?milestone .
+    ?task kgc:milestoneActive true .
+
+    # Track milestone state
+    ?milestone kgc:status "Active" .
+    ?milestone kgc:activatedAt ?now .
+    ?milestone kgc:constrains ?task .
+}
+WHERE {
+    # Identify task with milestone dependency
+    ?task yawl:milestoneCondition ?milestoneCondition .
+    ?task kgc:status "Ready" .
+
+    # Evaluate milestone condition
+    ?milestoneCondition kgc:evaluatesTo ?milestone .
+
+    # Check milestone is active
+    ?milestone a yawl:Milestone .
+    ?milestone kgc:status "Active" .
+
+    BIND(NOW() AS ?now)
+}
+""" ;
+    kgc:disableQuery """
+PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+
+CONSTRUCT {
+    # Disable task when milestone expires
+    ?task kgc:status "Disabled" .
+    ?task kgc:disabledAt ?now .
+    ?task kgc:disableReason "MilestoneExpired" .
+    ?task kgc:milestoneActive false .
+
+    # Mark milestone as expired
+    ?milestone kgc:status "Expired" .
+    ?milestone kgc:expiredAt ?now .
+}
+WHERE {
+    # Find tasks constrained by milestone
+    ?task kgc:constrainedBy ?milestone .
+    ?task kgc:status "Enabled" .
+
+    # Check milestone has expired
+    ?milestone a yawl:Milestone .
+    ?milestone kgc:status "Expired" .
+
+    BIND(NOW() AS ?now)
+}
+""" .
+
+# =============================================================================
+# CANCELLATION PATTERNS (WCP 19-27)
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# WCP-19: Cancel Task → Void(self)
+# -----------------------------------------------------------------------------
+# Pattern: Withdraw task before completion
+# Behavior: Void self only, remove token
+# Parameters: cancellationScope="self"
+# -----------------------------------------------------------------------------
+
+kgc:WCP19_Template a kgc:ExecutionTemplate ;
+    rdfs:label "WCP-19: Cancel Task Execution Template"@en ;
+    kgc:forPattern kgc:WCP19_CancelTask ;
+    kgc:constructQuery """
+PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+CONSTRUCT {
+    # Void task
+    ?task kgc:status "Voided" .
+    ?task kgc:voidedAt ?now .
+    ?task kgc:hasToken false .
+    ?task kgc:cancellationReason "SelfCancellation" .
+
+    # Create cancellation receipt
+    ?receipt a kgc:CancellationReceipt .
+    ?receipt kgc:voidedTask ?task .
+    ?receipt kgc:scope "self" .
+    ?receipt kgc:timestamp ?now .
+}
+WHERE {
+    # Identify task to cancel
+    ?task kgc:cancelSignal true .
+    ?task kgc:hasToken true .
+    ?task a yawl:Task .
+
+    BIND(NOW() AS ?now)
+    BIND(IRI(CONCAT(STR(?task), "/cancellation/", STR(?now))) AS ?receipt)
+}
+""" ;
+    kgc:deleteQuery """
+PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+
+DELETE WHERE {
+    ?task kgc:hasToken true .
+    ?task kgc:cancelSignal true .
+}
+""" .
+
+# -----------------------------------------------------------------------------
+# WCP-20: Cancel Case → Void(case)
+# -----------------------------------------------------------------------------
+# Pattern: Remove all tokens from case
+# Behavior: Void all tasks in case instance
+# Parameters: cancellationScope="case"
+# -----------------------------------------------------------------------------
+
+kgc:WCP20_Template a kgc:ExecutionTemplate ;
+    rdfs:label "WCP-20: Cancel Case Execution Template"@en ;
+    kgc:forPattern kgc:WCP20_CancelCase ;
+    kgc:constructQuery """
+PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+CONSTRUCT {
+    # Void all tasks in case
+    ?task kgc:status "Voided" .
+    ?task kgc:voidedAt ?now .
+    ?task kgc:hasToken false .
+    ?task kgc:cancellationReason "CaseCancellation" .
+
+    # Mark case as cancelled
+    ?case kgc:status "Cancelled" .
+    ?case kgc:cancelledAt ?now .
+
+    # Create cancellation receipt
+    ?receipt a kgc:CancellationReceipt .
+    ?receipt kgc:voidedCase ?case .
+    ?receipt kgc:voidedTasks ?task .
+    ?receipt kgc:scope "case" .
+    ?receipt kgc:timestamp ?now .
+}
+WHERE {
+    # Identify case to cancel
+    ?case kgc:cancelSignal true .
+    ?case a yawl:Case .
+
+    # Find all tasks with tokens in this case
+    ?task yawl:inCase ?case .
+    ?task kgc:hasToken true .
+
+    BIND(NOW() AS ?now)
+    BIND(IRI(CONCAT(STR(?case), "/cancellation/", STR(?now))) AS ?receipt)
+}
+""" ;
+    kgc:deleteQuery """
+PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+
+DELETE WHERE {
+    ?task kgc:hasToken true .
+    ?task yawl:inCase ?case .
+    ?case kgc:cancelSignal true .
+}
+""" .
+
+# -----------------------------------------------------------------------------
+# WCP-21: Cancel Region → Void(region)
+# -----------------------------------------------------------------------------
+# Pattern: Void all tasks in cancellation region
+# Behavior: Void tasks in defined cancellation set
+# Parameters: cancellationScope="region"
+# -----------------------------------------------------------------------------
+
+kgc:WCP21_Template a kgc:ExecutionTemplate ;
+    rdfs:label "WCP-21: Cancel Region Execution Template"@en ;
+    kgc:forPattern kgc:WCP21_CancelRegion ;
+    kgc:constructQuery """
+PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+CONSTRUCT {
+    # Void all tasks in region
+    ?task kgc:status "Voided" .
+    ?task kgc:voidedAt ?now .
+    ?task kgc:hasToken false .
+    ?task kgc:cancellationReason "RegionCancellation" .
+
+    # Mark region as cancelled
+    ?region kgc:status "Cancelled" .
+    ?region kgc:cancelledAt ?now .
+
+    # Create cancellation receipt
+    ?receipt a kgc:CancellationReceipt .
+    ?receipt kgc:voidedRegion ?region .
+    ?receipt kgc:voidedTasks ?task .
+    ?receipt kgc:scope "region" .
+    ?receipt kgc:timestamp ?now .
+}
+WHERE {
+    # Identify cancellation region
+    ?trigger kgc:cancelsRegion ?region .
+    ?trigger kgc:fired true .
+    ?region a yawl:CancellationRegion .
+
+    # Find all tasks in region
+    ?task yawl:inRegion ?region .
+    ?task kgc:hasToken true .
+
+    BIND(NOW() AS ?now)
+    BIND(IRI(CONCAT(STR(?region), "/cancellation/", STR(?now))) AS ?receipt)
+}
+""" ;
+    kgc:deleteQuery """
+PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+
+DELETE WHERE {
+    ?task kgc:hasToken true .
+    ?task yawl:inRegion ?region .
+    ?trigger kgc:cancelsRegion ?region .
+    ?trigger kgc:fired true .
+}
+""" .
+
+# -----------------------------------------------------------------------------
+# WCP-22: Cancel MI Activity → Void(instances)
+# -----------------------------------------------------------------------------
+# Pattern: Cancel all instances of MI task
+# Behavior: Void all MI instances regardless of completion state
+# Parameters: cancellationScope="instances"
+# -----------------------------------------------------------------------------
+
+kgc:WCP22_Template a kgc:ExecutionTemplate ;
+    rdfs:label "WCP-22: Cancel MI Activity Execution Template"@en ;
+    kgc:forPattern kgc:WCP22_CancelMI ;
+    kgc:constructQuery """
+PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+CONSTRUCT {
+    # Void all MI instances
+    ?instance kgc:status "Voided" .
+    ?instance kgc:voidedAt ?now .
+    ?instance kgc:hasToken false .
+    ?instance kgc:cancellationReason "MICancellation" .
+
+    # Mark MI task as cancelled
+    ?miTask kgc:status "Cancelled" .
+    ?miTask kgc:cancelledAt ?now .
+    ?miTask kgc:allInstancesVoided true .
+
+    # Create cancellation receipt
+    ?receipt a kgc:CancellationReceipt .
+    ?receipt kgc:voidedMITask ?miTask .
+    ?receipt kgc:voidedInstances ?instance .
+    ?receipt kgc:instanceCount ?count .
+    ?receipt kgc:scope "instances" .
+    ?receipt kgc:timestamp ?now .
+}
+WHERE {
+    # Identify MI task to cancel
+    ?miTask a yawl:MultiInstanceTask .
+    ?miTask kgc:cancelSignal true .
+
+    # Find all instances (active or waiting)
+    ?instance kgc:parentTask ?miTask .
+    ?instance kgc:instanceId ?instanceId .
+    FILTER(?instance != ?miTask)
+
+    # Count instances
+    {
+        SELECT ?miTask (COUNT(?inst) AS ?count) WHERE {
+            ?inst kgc:parentTask ?miTask .
+            ?inst kgc:instanceId ?instId .
+        }
+        GROUP BY ?miTask
+    }
+
+    BIND(NOW() AS ?now)
+    BIND(IRI(CONCAT(STR(?miTask), "/cancellation/", STR(?now))) AS ?receipt)
+}
+""" ;
+    kgc:deleteQuery """
+PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+
+DELETE WHERE {
+    ?instance kgc:hasToken true .
+    ?instance kgc:parentTask ?miTask .
+    ?miTask kgc:cancelSignal true .
+}
+""" .
+
+# -----------------------------------------------------------------------------
+# WCP-23: Complete MI Activity → Await(N)+Void(remaining)
+# -----------------------------------------------------------------------------
+# Pattern: Complete when N instances finish, cancel rest
+# Behavior: Wait for threshold, then void remaining instances
+# Parameters: hasThreshold="N", completionStrategy="waitQuorum", cancellationScope="instances"
+# -----------------------------------------------------------------------------
+
+kgc:WCP23_Template a kgc:ExecutionTemplate ;
+    rdfs:label "WCP-23: Complete MI Activity Execution Template"@en ;
+    kgc:forPattern kgc:WCP23_CompleteMI ;
+    kgc:constructQuery """
+PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+CONSTRUCT {
+    # Void remaining instances
+    ?remaining kgc:status "Voided" .
+    ?remaining kgc:voidedAt ?now .
+    ?remaining kgc:hasToken false .
+    ?remaining kgc:cancellationReason "ThresholdReached" .
+
+    # Mark MI task as completed
+    ?miTask kgc:status "Completed" .
+    ?miTask kgc:completedAt ?now .
+    ?miTask kgc:completedInstances ?completedCount .
+    ?miTask kgc:voidedInstances ?voidedCount .
+
+    # Enable successor
+    ?successor kgc:hasToken true .
+    ?successor kgc:status "Active" .
+    ?successor kgc:activatedAt ?now .
+
+    # Create completion receipt
+    ?receipt a kgc:CompletionReceipt .
+    ?receipt kgc:completedMITask ?miTask .
+    ?receipt kgc:threshold ?threshold .
+    ?receipt kgc:completed ?completedCount .
+    ?receipt kgc:voided ?voidedCount .
+    ?receipt kgc:timestamp ?now .
+}
+WHERE {
+    # Identify MI task with threshold
+    ?miTask a yawl:MultiInstanceTask .
+    ?miTask yawl:miThreshold ?threshold .
+
+    # Count completed instances
+    {
+        SELECT ?miTask (COUNT(?inst) AS ?completedCount) WHERE {
+            ?inst kgc:parentTask ?miTask .
+            ?inst kgc:status "Completed" .
+        }
+        GROUP BY ?miTask
+    }
+
+    # Check threshold reached
+    FILTER(?completedCount >= ?threshold)
+
+    # Find remaining active instances
+    ?remaining kgc:parentTask ?miTask .
+    ?remaining kgc:hasToken true .
+    FILTER(?remaining != ?miTask)
+
+    # Count instances to void
+    {
+        SELECT ?miTask (COUNT(?rem) AS ?voidedCount) WHERE {
+            ?rem kgc:parentTask ?miTask .
+            ?rem kgc:hasToken true .
+        }
+        GROUP BY ?miTask
+    }
+
+    # Find successor
+    ?miTask yawl:flowsTo ?successor .
+
+    BIND(NOW() AS ?now)
+    BIND(IRI(CONCAT(STR(?miTask), "/completion/", STR(?now))) AS ?receipt)
+}
+""" ;
+    kgc:deleteQuery """
+PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+
+DELETE WHERE {
+    ?remaining kgc:hasToken true .
+    ?remaining kgc:parentTask ?miTask .
+    ?miTask a yawl:MultiInstanceTask .
+}
+""" .
+
+# -----------------------------------------------------------------------------
+# WCP-24: Exception Handling → Void+Transmute(handler)
+# -----------------------------------------------------------------------------
+# Pattern: Void task, transmute to exception handler
+# Behavior: Cancel task and route to handler path
+# Parameters: cancellationScope="task"
+# -----------------------------------------------------------------------------
+
+kgc:WCP24_Template a kgc:ExecutionTemplate ;
+    rdfs:label "WCP-24: Exception Handling Execution Template"@en ;
+    kgc:forPattern kgc:WCP24_ExceptionHandling ;
+    kgc:constructQuery """
+PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+CONSTRUCT {
+    # Void task
+    ?task kgc:status "Voided" .
+    ?task kgc:voidedAt ?now .
+    ?task kgc:hasToken false .
+    ?task kgc:cancellationReason "Exception" .
+    ?task kgc:exceptionType ?exceptionType .
+
+    # Transmute token to exception handler
+    ?handler kgc:hasToken true .
+    ?handler kgc:status "Active" .
+    ?handler kgc:activatedAt ?now .
+    ?handler kgc:handlingException ?exceptionType .
+    ?handler kgc:sourceTask ?task .
+
+    # Create exception receipt
+    ?receipt a kgc:ExceptionReceipt .
+    ?receipt kgc:voidedTask ?task .
+    ?receipt kgc:handler ?handler .
+    ?receipt kgc:exceptionType ?exceptionType .
+    ?receipt kgc:timestamp ?now .
+}
+WHERE {
+    # Identify task with exception
+    ?task kgc:exception ?exception .
+    ?task kgc:hasToken true .
+
+    # Get exception type
+    ?exception a ?exceptionType .
+
+    # Find appropriate handler
+    ?task yawl:exceptionHandler ?handler .
+    ?handler yawl:handlesException ?exceptionType .
+
+    BIND(NOW() AS ?now)
+    BIND(IRI(CONCAT(STR(?task), "/exception/", STR(?now))) AS ?receipt)
+}
+""" ;
+    kgc:deleteQuery """
+PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+
+DELETE WHERE {
+    ?task kgc:hasToken true .
+    ?task kgc:exception ?exception .
+}
+""" .
+
+# -----------------------------------------------------------------------------
+# WCP-25: Timeout → Void(self)
+# -----------------------------------------------------------------------------
+# Pattern: Void task when timer expires
+# Behavior: Check timer expiry, void if expired
+# Parameters: cancellationScope="self"
+# -----------------------------------------------------------------------------
+
+kgc:WCP25_Template a kgc:ExecutionTemplate ;
+    rdfs:label "WCP-25: Timeout Execution Template"@en ;
+    kgc:forPattern kgc:WCP25_Timeout ;
+    kgc:constructQuery """
+PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+CONSTRUCT {
+    # Void task on timeout
+    ?task kgc:status "Voided" .
+    ?task kgc:voidedAt ?now .
+    ?task kgc:hasToken false .
+    ?task kgc:cancellationReason "Timeout" .
+    ?task kgc:timerExpiry ?expiry .
+
+    # Mark timer as expired
+    ?timer kgc:status "Expired" .
+    ?timer kgc:expiredAt ?now .
+
+    # Optional: Transmute to timeout handler
+    ?timeoutHandler kgc:hasToken true .
+    ?timeoutHandler kgc:status "Active" .
+    ?timeoutHandler kgc:activatedAt ?now .
+    ?timeoutHandler kgc:sourceTask ?task .
+
+    # Create timeout receipt
+    ?receipt a kgc:TimeoutReceipt .
+    ?receipt kgc:voidedTask ?task .
+    ?receipt kgc:expiredTimer ?timer .
+    ?receipt kgc:handler ?timeoutHandler .
+    ?receipt kgc:timestamp ?now .
+}
+WHERE {
+    # Identify task with timer
+    ?task yawl:hasTimer ?timer .
+    ?task kgc:hasToken true .
+
+    # Get timer expiry
+    ?timer time:hasBeginning ?start .
+    ?timer time:hasDurationDescription ?duration .
+    ?duration time:seconds ?seconds .
+
+    # Calculate expiry time
+    BIND(?start + ?seconds AS ?expiry)
+
+    # Check if expired
+    BIND(NOW() AS ?now)
+    FILTER(?now >= ?expiry)
+
+    # Optional timeout handler
+    OPTIONAL {
+        ?task yawl:timeoutHandler ?timeoutHandler .
+    }
+
+    BIND(IRI(CONCAT(STR(?task), "/timeout/", STR(?now))) AS ?receipt)
+}
+""" ;
+    kgc:deleteQuery """
+PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+
+DELETE WHERE {
+    ?task kgc:hasToken true .
+    ?task yawl:hasTimer ?timer .
+}
+""" .
+
+# -----------------------------------------------------------------------------
+# WCP-26: Structured Loop → Filter(loopCondition)
+# -----------------------------------------------------------------------------
+# Pattern: Repeat while/until condition
+# Behavior: Evaluate loop condition, route accordingly
+# Parameters: selectionMode="loopCondition", resetOnFire=true
+# -----------------------------------------------------------------------------
+
+kgc:WCP26_Template a kgc:ExecutionTemplate ;
+    rdfs:label "WCP-26: Structured Loop Execution Template"@en ;
+    kgc:forPattern kgc:WCP26_StructuredLoop ;
+    kgc:constructQuery """
+PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+CONSTRUCT {
+    # Continue loop (condition true)
+    ?loopBody kgc:hasToken true .
+    ?loopBody kgc:status "Active" .
+    ?loopBody kgc:activatedAt ?now .
+    ?loopBody kgc:iteration ?nextIteration .
+
+    # Update loop state
+    ?task kgc:hasToken false .
+    ?task kgc:currentIteration ?nextIteration .
+    ?task kgc:loopCondition ?conditionResult .
+}
+WHERE {
+    # Identify loop task
+    ?task a yawl:StructuredLoop .
+    ?task kgc:hasToken true .
+    ?task yawl:loopCondition ?condition .
+
+    # Evaluate loop condition
+    ?condition kgc:evaluatesTo ?conditionResult .
+    FILTER(?conditionResult = true)
+
+    # Get current iteration
+    OPTIONAL {
+        ?task kgc:currentIteration ?iteration .
+    }
+    BIND(COALESCE(?iteration, 0) + 1 AS ?nextIteration)
+
+    # Find loop body
+    ?task yawl:loopBody ?loopBody .
+
+    BIND(NOW() AS ?now)
+}
+""" ;
+    kgc:exitLoopQuery """
+PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+CONSTRUCT {
+    # Exit loop (condition false)
+    ?successor kgc:hasToken true .
+    ?successor kgc:status "Active" .
+    ?successor kgc:activatedAt ?now .
+
+    # Complete loop task
+    ?task kgc:hasToken false .
+    ?task kgc:status "Completed" .
+    ?task kgc:completedAt ?now .
+    ?task kgc:totalIterations ?iteration .
+}
+WHERE {
+    # Identify loop task
+    ?task a yawl:StructuredLoop .
+    ?task kgc:hasToken true .
+    ?task yawl:loopCondition ?condition .
+
+    # Evaluate loop condition
+    ?condition kgc:evaluatesTo ?conditionResult .
+    FILTER(?conditionResult = false)
+
+    # Get final iteration count
+    OPTIONAL {
+        ?task kgc:currentIteration ?iteration .
+    }
+    BIND(COALESCE(?iteration, 0) AS ?finalIteration)
+
+    # Find successor
+    ?task yawl:flowsTo ?successor .
+
+    BIND(NOW() AS ?now)
+}
+""" .
+
+# -----------------------------------------------------------------------------
+# WCP-27: Recursion → Copy(subprocess)
+# -----------------------------------------------------------------------------
+# Pattern: Invoke same process as subprocess
+# Behavior: Create recursive instance with parent reference
+# Parameters: hasCardinality="1", instanceBinding="recursive"
+# -----------------------------------------------------------------------------
+
+kgc:WCP27_Template a kgc:ExecutionTemplate ;
+    rdfs:label "WCP-27: Recursion Execution Template"@en ;
+    kgc:forPattern kgc:WCP27_Recursion ;
+    kgc:constructQuery """
+PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+CONSTRUCT {
+    # Create recursive subprocess instance
+    ?recursiveInstance a yawl:ProcessInstance .
+    ?recursiveInstance yawl:instanceOf ?process .
+    ?recursiveInstance kgc:parentInstance ?currentInstance .
+    ?recursiveInstance kgc:recursionDepth ?nextDepth .
+    ?recursiveInstance kgc:status "Active" .
+    ?recursiveInstance kgc:createdAt ?now .
+
+    # Initialize recursive instance with input data
+    ?recursiveInstance kgc:inputData ?inputData .
+
+    # Mark current task as waiting for subprocess
+    ?task kgc:status "Waiting" .
+    ?task kgc:waitingFor ?recursiveInstance .
+    ?task kgc:waitStarted ?now .
+
+    # Start token in recursive instance
+    ?startTask kgc:hasToken true .
+    ?startTask kgc:status "Active" .
+    ?startTask kgc:activatedAt ?now .
+    ?startTask yawl:inInstance ?recursiveInstance .
+
+    # Create recursion receipt
+    ?receipt a kgc:RecursionReceipt .
+    ?receipt kgc:parentTask ?task .
+    ?receipt kgc:parentInstance ?currentInstance .
+    ?receipt kgc:recursiveInstance ?recursiveInstance .
+    ?receipt kgc:depth ?nextDepth .
+    ?receipt kgc:timestamp ?now .
+}
+WHERE {
+    # Identify recursive task
+    ?task a yawl:RecursiveTask .
+    ?task kgc:hasToken true .
+    ?task yawl:invokesProcess ?process .
+
+    # Get current instance and depth
+    ?task yawl:inInstance ?currentInstance .
+    OPTIONAL {
+        ?currentInstance kgc:recursionDepth ?depth .
+    }
+    BIND(COALESCE(?depth, 0) + 1 AS ?nextDepth)
+
+    # Get input data for recursion
+    ?task yawl:recursiveInput ?inputData .
+
+    # Find start task in recursive process
+    ?process yawl:hasTask ?startTask .
+    ?startTask a yawl:InputCondition .
+
+    # Generate recursive instance IRI
+    BIND(NOW() AS ?now)
+    BIND(IRI(CONCAT(STR(?currentInstance), "/recursive/", STR(?nextDepth), "/", STR(?now))) AS ?recursiveInstance)
+    BIND(IRI(CONCAT(STR(?recursiveInstance), "/receipt")) AS ?receipt)
+}
+""" ;
+    kgc:returnQuery """
+PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+
+CONSTRUCT {
+    # Return from recursion
+    ?task kgc:status "Active" .
+    ?task kgc:hasToken true .
+    ?task kgc:resumed ?now .
+    ?task kgc:recursiveOutput ?output .
+
+    # Mark recursive instance as completed
+    ?recursiveInstance kgc:status "Completed" .
+    ?recursiveInstance kgc:completedAt ?now .
+}
+WHERE {
+    # Find completed recursive instance
+    ?recursiveInstance a yawl:ProcessInstance .
+    ?recursiveInstance kgc:status "Completed" .
+    ?recursiveInstance kgc:parentInstance ?parentInstance .
+
+    # Find waiting parent task
+    ?task kgc:waitingFor ?recursiveInstance .
+    ?task kgc:status "Waiting" .
+    ?task yawl:inInstance ?parentInstance .
+
+    # Get output from recursive instance
+    ?recursiveInstance kgc:outputData ?output .
+
+    BIND(NOW() AS ?now)
+}
+""" .
+
+# =============================================================================
+# EXECUTION TEMPLATE METADATA
+# =============================================================================
+
+kgc:ExecutionTemplate a rdfs:Class ;
+    rdfs:label "Execution Template"@en ;
+    rdfs:comment "SPARQL CONSTRUCT template executed directly by engine."@en .
+
+kgc:forPattern a rdf:Property ;
+    rdfs:label "for pattern"@en ;
+    rdfs:domain kgc:ExecutionTemplate ;
+    rdfs:range kgc:PatternMapping .
+
+kgc:constructQuery a rdf:Property ;
+    rdfs:label "construct query"@en ;
+    rdfs:domain kgc:ExecutionTemplate ;
+    rdfs:range xsd:string ;
+    rdfs:comment "SPARQL CONSTRUCT query to produce new triples."@en .
+
+kgc:deleteQuery a rdf:Property ;
+    rdfs:label "delete query"@en ;
+    rdfs:domain kgc:ExecutionTemplate ;
+    rdfs:range xsd:string ;
+    rdfs:comment "SPARQL DELETE WHERE query to remove triples."@en .
+
+kgc:onCompletionQuery a rdf:Property ;
+    rdfs:label "on completion query"@en ;
+    rdfs:domain kgc:ExecutionTemplate ;
+    rdfs:range xsd:string ;
+    rdfs:comment "SPARQL query executed when task completes."@en .
+
+kgc:disableQuery a rdf:Property ;
+    rdfs:label "disable query"@en ;
+    rdfs:domain kgc:ExecutionTemplate ;
+    rdfs:range xsd:string ;
+    rdfs:comment "SPARQL query to disable task when conditions expire."@en .
+
+kgc:exitLoopQuery a rdf:Property ;
+    rdfs:label "exit loop query"@en ;
+    rdfs:domain kgc:ExecutionTemplate ;
+    rdfs:range xsd:string ;
+    rdfs:comment "SPARQL query to exit loop when condition false."@en .
+
+kgc:returnQuery a rdf:Property ;
+    rdfs:label "return query"@en ;
+    rdfs:domain kgc:ExecutionTemplate ;
+    rdfs:range xsd:string ;
+    rdfs:comment "SPARQL query to handle return from subprocess."@en .
+
+# =============================================================================
+# STATUS VALUES
+# =============================================================================
+
+kgc:StatusValue a rdfs:Class ;
+    rdfs:label "Status Value"@en ;
+    rdfs:comment "Enumeration of execution status values."@en .
+
+kgc:Active a kgc:StatusValue ; rdfs:label "Active" .
+kgc:Completed a kgc:StatusValue ; rdfs:label "Completed" .
+kgc:Voided a kgc:StatusValue ; rdfs:label "Voided" .
+kgc:Waiting a kgc:StatusValue ; rdfs:label "Waiting" .
+kgc:Enabled a kgc:StatusValue ; rdfs:label "Enabled" .
+kgc:Disabled a kgc:StatusValue ; rdfs:label "Disabled" .
+kgc:Blocked a kgc:StatusValue ; rdfs:label "Blocked" .
+kgc:Cancelled a kgc:StatusValue ; rdfs:label "Cancelled" .
+kgc:Ready a kgc:StatusValue ; rdfs:label "Ready" .
+
+# =============================================================================
+# END OF SPARQL TEMPLATES WCP 16-27
+# =============================================================================

@@ -1,0 +1,81 @@
+@startuml C3_Components
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title Component Diagram: The Semantic Driver (Atman)
+
+LAYOUT_WITH_LEGEND()
+
+Container_Boundary(bbb_boundary, "Blood-Brain Barrier") {
+    Component(lifter, "JSON Lifter\n(lift_json_to_quads)", "Python", "Converts JSON to QuadDelta.\nValidates s/p/o structure.")
+
+    Component(validator, "SHACL Validator\n(validate_topology)", "pyshacl", "Validates against Three Laws.\nCaches shapes for performance.")
+
+    Component(prefix_expander, "Prefix Expander\n(_expand_prefix)", "Python", "rdf: \u2192 http://...\nyawl: \u2192 http://...")
+}
+
+Container_Boundary(driver_boundary, "Semantic Driver") {
+    Component(resolver, "Verb Resolver\n(resolve_verb)", "SPARQL", "Queries kgc_physics.ttl:\npattern \u2192 (verb, params)\n\nZero Python if/else logic.")
+
+    Component(executor, "Step Runner\n(execute)", "Python", "Orchestrates cycle:\n1. Resolve \u2192 2. Execute \u2192 3. Commit\n\nA = \u03bc(O, P)")
+
+    Component(provenance, "Provenance Minter", "SHA256", "Generates merkle_root.\nLinks to Lockchain.")
+}
+
+Container_Boundary(kernel_boundary, "The Kernel (Physics)") {
+    Component(v_transmute, "TRANSMUTE", "Verb 1", "Arrow of Time\nA \u2192 B\nyawl:nextElementRef")
+
+    Component(v_copy, "COPY", "Verb 2", "Divergence\nA \u2192 {B\u2081..B\u2099}\ncardinality param")
+
+    Component(v_filter, "FILTER", "Verb 3", "Selection\nA \u2192 {Subset}\nselectionMode param")
+
+    Component(v_await, "AWAIT", "Verb 4", "Convergence\n{A,B} \u2192 C\nthreshold param")
+
+    Component(v_void, "VOID", "Verb 5", "Termination\nA \u2192 \u2205\ncancellationScope param")
+}
+
+System_Ext(ontology, "kgc_physics.ttl", "43 Pattern Mappings")
+
+Rel(lifter, validator, "QuadDelta")
+Rel(validator, ontology, "SHACL shapes", "invariants.shacl.ttl")
+
+Rel_D(validator, executor, "Validated Delta")
+
+Rel(executor, resolver, "1. Resolve Task")
+Rel(resolver, ontology, "SPARQL Query", "kgc:triggerProperty\nkgc:triggerValue")
+Rel(resolver, executor, "VerbConfig", "(verb, params)")
+
+Rel(executor, v_transmute, "dispatch('transmute')", "Context + Config")
+Rel(executor, v_copy, "dispatch('copy')", "Context + Config")
+Rel(executor, v_filter, "dispatch('filter')", "Context + Config")
+Rel(executor, v_await, "dispatch('await')", "Context + Config")
+Rel(executor, v_void, "dispatch('void')", "Context + Config")
+
+Rel(executor, provenance, "Delta applied")
+
+note right of resolver
+  **Logic IS Topology**
+  The "IF" statements live in kgc_physics.ttl.
+  Python code is just a dispatcher.
+
+  Example SPARQL:
+  SELECT ?verbLabel ?threshold
+  WHERE {
+    ?mapping kgc:pattern <pattern> ;
+             kgc:verb ?verb .
+    ?verb rdfs:label ?verbLabel .
+    OPTIONAL { ?mapping kgc:hasThreshold ?threshold }
+  }
+end note
+
+note bottom of v_copy
+  **7 Force Multipliers (VerbConfig)**
+  \u2022 threshold: "all", "1", "N", "active"
+  \u2022 cardinality: "topology", "static", "dynamic"
+  \u2022 completionStrategy: "waitAll", "waitFirst"
+  \u2022 selectionMode: "exactlyOne", "oneOrMore"
+  \u2022 cancellationScope: "self", "region", "case"
+  \u2022 resetOnFire: boolean
+  \u2022 instanceBinding: "none", "index", "data"
+end note
+
+@enduml

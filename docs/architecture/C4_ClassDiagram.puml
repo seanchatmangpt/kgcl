@@ -1,0 +1,152 @@
+@startuml C4_ClassDiagram
+
+title Class Diagram: KGCL v3.1 Data Structures
+
+skinparam classAttributeIconSize 0
+skinparam classFontStyle bold
+skinparam stereotypeCBackgroundColor<<Immutable>> LightGreen
+skinparam stereotypeCBackgroundColor<<Protocol>> LightBlue
+
+package "Data Structures" <<Rectangle>> {
+
+    class QuadDelta <<Immutable>> {
+        + additions: tuple[Triple, ...]
+        + removals: tuple[Triple, ...]
+        --
+        + __post_init__()
+        **Invariant**: total \u2264 64 (Chatman Constant)
+    }
+
+    class VerbConfig <<Immutable>> {
+        + verb: str
+        + threshold: str | None
+        + cardinality: str | None
+        + completion_strategy: str | None
+        + selection_mode: str | None
+        + cancellation_scope: str | None
+        + reset_on_fire: bool
+        + instance_binding: str | None
+        --
+        **The P in A = \u03bc(O, P)**
+    }
+
+    class TransactionContext <<Immutable>> {
+        + tx_id: str
+        + actor: str
+        + prev_hash: str
+        + data: dict[str, Any]
+        --
+        **Lockchain Link**
+    }
+
+    class Receipt <<Immutable>> {
+        + merkle_root: str
+        + verb_executed: str
+        + delta: QuadDelta
+        + params_used: VerbConfig | None
+        --
+        **The A in A = \u03bc(O, P)**
+        Cryptographic Proof of Execution
+    }
+
+    note bottom of QuadDelta
+        The Observation (O)
+        Immutable intent to mutate reality
+    end note
+
+    note bottom of Receipt
+        Hash(prev_hash + tx_id + verb + params + delta)
+        Links to Lockchain
+    end note
+}
+
+package "Engine" <<Rectangle>> {
+
+    interface Verb <<Protocol>> {
+        + execute(graph, subject, ctx, config): QuadDelta
+    }
+
+    class Kernel {
+        {static} + transmute(graph, subject, ctx, config): QuadDelta
+        {static} + copy(graph, subject, ctx, config): QuadDelta
+        {static} + filter(graph, subject, ctx, config): QuadDelta
+        {static} + await_(graph, subject, ctx, config): QuadDelta
+        {static} + void(graph, subject, ctx, config): QuadDelta
+        --
+        **5 Elemental Verbs**
+        Pure functions on graph nodes
+    }
+
+    class SemanticDriver {
+        - physics_ontology: Graph
+        - _verb_dispatch: dict[str, Callable]
+        --
+        + __init__(physics_ontology: Graph)
+        + resolve_verb(graph, node): VerbConfig
+        + execute(graph, subject, ctx): Receipt
+        --
+        **The \u03bc Operator**
+        Ontology-driven dispatch
+    }
+
+    note right of Kernel
+        **Event Horizon**
+        These 5 verbs are the ONLY operations.
+        No Python if/else for pattern dispatch.
+    end note
+}
+
+package "Ingress" <<Rectangle>> {
+
+    class BBBIngress {
+        - shapes_path: Path
+        --
+        + ingest(payload: dict): QuadDelta
+        + ingest_json_string(json_str): QuadDelta
+        --
+        **Blood-Brain Barrier**
+        LIFT \u2192 SCREEN \u2192 PASS/REJECT
+    }
+
+    class TopologyViolationError <<Exception>> {
+        + violations: list[str]
+        + law: str
+        --
+        TYPING | HERMETICITY | CHRONOLOGY
+    }
+
+    note right of BBBIngress
+        **Three Laws** (SHACL enforced)
+        1. TYPING: rdf:type required
+        2. HERMETICITY: \u226464 ops
+        3. CHRONOLOGY: Time forward
+    end note
+}
+
+' Relationships
+Verb <|.. Kernel : implements
+SemanticDriver --> Kernel : dispatches to
+SemanticDriver --> VerbConfig : resolves
+SemanticDriver --> Receipt : generates
+SemanticDriver --> QuadDelta : applies
+
+BBBIngress --> QuadDelta : produces
+BBBIngress ..> TopologyViolationError : throws
+
+Receipt --> QuadDelta : contains
+Receipt --> VerbConfig : records
+
+' Chatman Equation visualization
+note as ChatmanEquation
+    **The Chatman Equation: A = \u03bc(O, P)**
+
+    O (Observation) = QuadDelta
+    P (Parameters) = VerbConfig
+    \u03bc (Operator) = SemanticDriver
+    A (Action) = Receipt
+
+    **Data Flow:**
+    JSON \u2192 BBB \u2192 QuadDelta \u2192 SemanticDriver \u2192 Receipt
+end note
+
+@enduml

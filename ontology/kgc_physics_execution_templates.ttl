@@ -1,0 +1,884 @@
+@prefix kgc: <http://bitflow.ai/ontology/kgc/v3#> .
+@prefix yawl: <http://www.yawlfoundation.org/yawlschema#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# =============================================================================
+# KGC PHYSICS EXECUTION TEMPLATES v1.0
+# SPARQL CONSTRUCT Templates for Advanced Workflow Patterns
+# =============================================================================
+#
+# This ontology extends kgc_physics.ttl with executable SPARQL CONSTRUCT
+# templates for WCP 28-43 and auxiliary patterns (data, resource, service, trigger).
+#
+# Each template follows the pattern:
+#   1. Pattern detection (ASK query embedded)
+#   2. Verb selection with parameters
+#   3. Execution template (CONSTRUCT query)
+#
+# =============================================================================
+
+<http://bitflow.ai/ontology/kgc/execution#>
+    a owl:Ontology ;
+    rdfs:label "KGC Execution Templates"@en ;
+    rdfs:comment "SPARQL CONSTRUCT templates for executing workflow patterns"@en ;
+    owl:versionInfo "1.0.0" ;
+    owl:imports <http://bitflow.ai/ontology/kgc/v3#> .
+
+# =============================================================================
+# SECTION 1: MI JOIN PATTERNS (WCP 34-36)
+# =============================================================================
+
+# WCP-34: Static Partial Join - Await N of M
+kgc:WCP34_ExecutionTemplate a kgc:ExecutionTemplate ;
+    rdfs:label "WCP-34: Static Partial Join Execution"@en ;
+    kgc:forPattern kgc:WCP34_MIStaticPartialJoin ;
+    kgc:detectionQuery """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+
+        ASK {
+            ?task a yawl:MultiInstanceTask ;
+                  yawl:miThreshold ?threshold ;
+                  yawl:maximum ?max .
+            FILTER(?threshold < ?max)
+            FILTER(isLiteral(?threshold))
+        }
+    """ ;
+    kgc:executionTemplate """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+
+        CONSTRUCT {
+            ?task kgc:hasExecutionPlan _:plan .
+            _:plan a kgc:ExecutionPlan ;
+                   kgc:verb kgc:Await ;
+                   kgc:hasThreshold ?threshold ;
+                   kgc:completionStrategy "waitQuorum" ;
+                   kgc:totalInstances ?max ;
+                   kgc:resetOnFire false ;
+                   kgc:voidRemaining false .
+        }
+        WHERE {
+            ?task a yawl:MultiInstanceTask ;
+                  yawl:miThreshold ?threshold ;
+                  yawl:maximum ?max .
+            FILTER(?threshold < ?max)
+        }
+    """ ;
+    rdfs:comment "Wait for N completions out of M total instances, then proceed."@en .
+
+# WCP-35: Cancelling Partial Join - Await N + Void Rest
+kgc:WCP35_ExecutionTemplate a kgc:ExecutionTemplate ;
+    rdfs:label "WCP-35: Cancelling Partial Join Execution"@en ;
+    kgc:forPattern kgc:WCP35_MICancellingJoin ;
+    kgc:detectionQuery """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+
+        ASK {
+            ?task a yawl:MultiInstanceTask ;
+                  yawl:miThreshold ?threshold ;
+                  yawl:miCancelling true .
+        }
+    """ ;
+    kgc:executionTemplate """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+
+        CONSTRUCT {
+            ?task kgc:hasExecutionPlan _:plan .
+            _:plan a kgc:ExecutionPlan ;
+                   kgc:verb kgc:Await ;
+                   kgc:hasThreshold ?threshold ;
+                   kgc:completionStrategy "waitQuorum" ;
+                   kgc:voidRemaining true ;
+                   kgc:cancellationScope "region" ;
+                   kgc:cancellationTarget ?instances .
+
+            ?instances a kgc:CancellationSet ;
+                       kgc:memberOf ?task ;
+                       kgc:filter "kgc:status != 'Completed'" .
+        }
+        WHERE {
+            ?task a yawl:MultiInstanceTask ;
+                  yawl:miThreshold ?threshold ;
+                  yawl:miCancelling true .
+        }
+    """ ;
+    rdfs:comment "Wait for N completions, then VOID all remaining instances."@en .
+
+# WCP-36: Dynamic Partial Join - Threshold from Data
+kgc:WCP36_ExecutionTemplate a kgc:ExecutionTemplate ;
+    rdfs:label "WCP-36: Dynamic Partial Join Execution"@en ;
+    kgc:forPattern kgc:WCP36_MIDynamicJoin ;
+    kgc:detectionQuery """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+
+        ASK {
+            ?task a yawl:MultiInstanceTask ;
+                  yawl:miThreshold ?threshold .
+            FILTER(!isLiteral(?threshold))
+        }
+    """ ;
+    kgc:executionTemplate """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+
+        CONSTRUCT {
+            ?task kgc:hasExecutionPlan _:plan .
+            _:plan a kgc:ExecutionPlan ;
+                   kgc:verb kgc:Await ;
+                   kgc:hasThreshold "dynamic" ;
+                   kgc:completionStrategy "waitQuorum" ;
+                   kgc:thresholdSource ?threshold ;
+                   kgc:evaluateAt "runtime" .
+
+            _:plan kgc:thresholdExpression ?expr .
+            ?expr a kgc:DynamicExpression ;
+                  kgc:variableRef ?threshold ;
+                  kgc:scope "case" ;
+                  kgc:evaluationType "integer" .
+        }
+        WHERE {
+            ?task a yawl:MultiInstanceTask ;
+                  yawl:miThreshold ?threshold .
+            FILTER(!isLiteral(?threshold))
+        }
+    """ ;
+    rdfs:comment "Threshold computed at runtime from case data variable."@en .
+
+# =============================================================================
+# SECTION 2: TERMINATION PATTERN (WCP 43)
+# =============================================================================
+
+# WCP-43: Explicit Termination - Void Entire Case
+kgc:WCP43_ExecutionTemplate a kgc:ExecutionTemplate ;
+    rdfs:label "WCP-43: Explicit Termination Execution"@en ;
+    kgc:forPattern kgc:WCP43_ExplicitTermination ;
+    kgc:detectionQuery """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+
+        ASK {
+            ?task a yawl:Task ;
+                  yawl:isExplicitTermination true .
+        }
+    """ ;
+    kgc:executionTemplate """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+
+        CONSTRUCT {
+            ?task kgc:hasExecutionPlan _:plan .
+            _:plan a kgc:ExecutionPlan ;
+                   kgc:verb kgc:Void ;
+                   kgc:cancellationScope "case" ;
+                   kgc:finalState true ;
+                   kgc:triggeredBy "completion" .
+
+            _:plan kgc:affectsTokens _:tokenSet .
+            _:tokenSet a kgc:TokenSet ;
+                       kgc:scope "case" ;
+                       kgc:selector "kgc:status == 'Active'" .
+        }
+        WHERE {
+            ?task a yawl:Task ;
+                  yawl:isExplicitTermination true .
+        }
+    """ ;
+    rdfs:comment "Explicit end event that voids all active tokens in case."@en .
+
+# =============================================================================
+# SECTION 3: DATA PATTERNS
+# =============================================================================
+
+# Data Mapping Transform - Apply Transformations During Transition
+kgc:DataMapping_ExecutionTemplate a kgc:ExecutionTemplate ;
+    rdfs:label "Data Mapping Transform Execution"@en ;
+    kgc:forPattern kgc:DataMapping_Transform ;
+    kgc:detectionQuery """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+
+        ASK {
+            ?flow a yawl:Flow ;
+                  yawl:hasMappingSet ?mappings .
+            ?mappings a yawl:VarMappingSet .
+        }
+    """ ;
+    kgc:executionTemplate """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+
+        CONSTRUCT {
+            ?flow kgc:hasExecutionPlan _:plan .
+            _:plan a kgc:ExecutionPlan ;
+                   kgc:verb kgc:Transmute ;
+                   kgc:withTransform true ;
+                   kgc:transformations ?mappings .
+
+            ?mappings kgc:executionOrder _:order .
+            _:order rdf:type rdf:List ;
+                    rdf:rest*/rdf:first ?mapping .
+
+            ?mapping a kgc:DataMapping ;
+                     kgc:sourceVariable ?source ;
+                     kgc:targetVariable ?target ;
+                     kgc:expression ?expr ;
+                     kgc:evaluationType "JEXL" .
+        }
+        WHERE {
+            ?flow a yawl:Flow ;
+                  yawl:hasMappingSet ?mappings .
+            ?mappings yawl:hasMapping ?mapping .
+            ?mapping yawl:maps ?source ;
+                     yawl:to ?target ;
+                     yawl:expression ?expr .
+        }
+    """ ;
+    rdfs:comment "Apply data transformations when moving token from source to target."@en .
+
+# Task Data Visibility - Bind Case Data to Task Scope
+kgc:DataVisibility_ExecutionTemplate a kgc:ExecutionTemplate ;
+    rdfs:label "Task Data Visibility Execution"@en ;
+    kgc:forPattern kgc:DataVisibility_Task ;
+    kgc:detectionQuery """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+
+        ASK {
+            ?task a yawl:Task ;
+                  yawl:hasInputBinding ?binding .
+        }
+    """ ;
+    kgc:executionTemplate """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+
+        CONSTRUCT {
+            ?task kgc:hasExecutionPlan _:plan .
+            _:plan a kgc:ExecutionPlan ;
+                   kgc:verb kgc:Transmute ;
+                   kgc:withDataBinding true ;
+                   kgc:inputScope "case" ;
+                   kgc:outputScope "task" .
+
+            _:plan kgc:bindings ?bindingSet .
+            ?bindingSet a kgc:BindingSet ;
+                        kgc:hasBinding ?binding .
+
+            ?binding a kgc:DataBinding ;
+                     kgc:caseVariable ?caseVar ;
+                     kgc:taskVariable ?taskVar ;
+                     kgc:direction "input" ;
+                     kgc:required ?required .
+        }
+        WHERE {
+            ?task a yawl:Task ;
+                  yawl:hasInputBinding ?binding .
+            ?binding yawl:fromCase ?caseVar ;
+                     yawl:toTask ?taskVar ;
+                     yawl:mandatory ?required .
+        }
+    """ ;
+    rdfs:comment "Bind case-level data variables to task-local scope for execution."@en .
+
+# =============================================================================
+# SECTION 4: RESOURCE PATTERNS
+# =============================================================================
+
+# Resource Authorization - Filter by Authorized Resources
+kgc:ResourceAuth_ExecutionTemplate a kgc:ExecutionTemplate ;
+    rdfs:label "Resource Authorization Execution"@en ;
+    kgc:forPattern kgc:Resource_Authorization ;
+    kgc:detectionQuery """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+
+        ASK {
+            ?task a yawl:Task ;
+                  yawl:hasResourcing ?resourcing .
+            ?resourcing yawl:authorization ?authMode .
+        }
+    """ ;
+    kgc:executionTemplate """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+
+        CONSTRUCT {
+            ?task kgc:hasExecutionPlan _:plan .
+            _:plan a kgc:ExecutionPlan ;
+                   kgc:verb kgc:Filter ;
+                   kgc:selectionMode "authorized" ;
+                   kgc:filterDomain "resources" .
+
+            _:plan kgc:authorizationPolicy _:policy .
+            _:policy a kgc:AuthorizationPolicy ;
+                     kgc:mode ?authMode ;
+                     kgc:resourceSet ?resourceSet ;
+                     kgc:predicate ?authPredicate .
+
+            ?authPredicate a kgc:FilterPredicate ;
+                          kgc:expression "resource.hasPermission(?task, 'execute')" ;
+                          kgc:evaluationType "boolean" .
+        }
+        WHERE {
+            ?task a yawl:Task ;
+                  yawl:hasResourcing ?resourcing .
+            ?resourcing yawl:authorization ?authMode ;
+                        yawl:resourceSet ?resourceSet .
+        }
+    """ ;
+    rdfs:comment "Filter available resources to only those authorized for this task."@en .
+
+# Role Allocation - Filter by Role Match
+kgc:RoleAllocation_ExecutionTemplate a kgc:ExecutionTemplate ;
+    rdfs:label "Role Allocation Execution"@en ;
+    kgc:forPattern kgc:Resource_RoleAllocation ;
+    kgc:detectionQuery """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+
+        ASK {
+            ?task a yawl:Task ;
+                  yawl:hasResourcing ?resourcing .
+            ?resourcing yawl:allocation ?allocation .
+            ?allocation yawl:byRole ?role .
+        }
+    """ ;
+    kgc:executionTemplate """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+
+        CONSTRUCT {
+            ?task kgc:hasExecutionPlan _:plan .
+            _:plan a kgc:ExecutionPlan ;
+                   kgc:verb kgc:Filter ;
+                   kgc:selectionMode "roleMatch" ;
+                   kgc:filterDomain "participants" .
+
+            _:plan kgc:roleFilter _:filter .
+            _:filter a kgc:RoleFilter ;
+                     kgc:requiredRole ?role ;
+                     kgc:allocationStrategy ?strategy ;
+                     kgc:predicate ?rolePredicate .
+
+            ?rolePredicate a kgc:FilterPredicate ;
+                          kgc:expression "participant.hasRole(?role)" ;
+                          kgc:evaluationType "boolean" .
+        }
+        WHERE {
+            ?task a yawl:Task ;
+                  yawl:hasResourcing ?resourcing .
+            ?resourcing yawl:allocation ?allocation .
+            ?allocation yawl:byRole ?role ;
+                        yawl:strategy ?strategy .
+        }
+    """ ;
+    rdfs:comment "Filter participants to those with matching role for allocation."@en .
+
+# =============================================================================
+# SECTION 5: SERVICE PATTERNS
+# =============================================================================
+
+# Web Service Invocation - Copy to Service Call
+kgc:WebService_ExecutionTemplate a kgc:ExecutionTemplate ;
+    rdfs:label "Web Service Invocation Execution"@en ;
+    kgc:forPattern kgc:Service_WebService ;
+    kgc:detectionQuery """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+
+        ASK {
+            ?task a yawl:Task ;
+                  yawl:invokesService ?service .
+            ?service a yawl:WebServiceGateway .
+        }
+    """ ;
+    kgc:executionTemplate """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+
+        CONSTRUCT {
+            ?task kgc:hasExecutionPlan _:plan .
+            _:plan a kgc:ExecutionPlan ;
+                   kgc:verb kgc:Copy ;
+                   kgc:hasCardinality "1" ;
+                   kgc:copyTarget "service" ;
+                   kgc:executionMode "external" .
+
+            _:plan kgc:serviceInvocation _:invocation .
+            _:invocation a kgc:ServiceInvocation ;
+                         kgc:endpoint ?endpoint ;
+                         kgc:operation ?operation ;
+                         kgc:inputMapping ?inputMap ;
+                         kgc:outputMapping ?outputMap ;
+                         kgc:timeout ?timeout .
+        }
+        WHERE {
+            ?task a yawl:Task ;
+                  yawl:invokesService ?service .
+            ?service a yawl:WebServiceGateway ;
+                     yawl:endpoint ?endpoint ;
+                     yawl:operation ?operation ;
+                     yawl:inputMapping ?inputMap ;
+                     yawl:outputMapping ?outputMap .
+            OPTIONAL { ?service yawl:timeout ?timeout }
+        }
+    """ ;
+    rdfs:comment "Invoke external web service by copying token to service call context."@en .
+
+# Async Callback - Await Callback Response
+kgc:AsyncCallback_ExecutionTemplate a kgc:ExecutionTemplate ;
+    rdfs:label "Async Callback Execution"@en ;
+    kgc:forPattern kgc:Service_AsyncCallback ;
+    kgc:detectionQuery """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+
+        ASK {
+            ?task a yawl:Task ;
+                  yawl:awaitsCallback ?callback .
+        }
+    """ ;
+    kgc:executionTemplate """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+
+        CONSTRUCT {
+            ?task kgc:hasExecutionPlan _:plan .
+            _:plan a kgc:ExecutionPlan ;
+                   kgc:verb kgc:Await ;
+                   kgc:hasThreshold "1" ;
+                   kgc:completionStrategy "waitCallback" ;
+                   kgc:awaitType "externalEvent" .
+
+            _:plan kgc:callbackSpec _:spec .
+            _:spec a kgc:CallbackSpecification ;
+                   kgc:callbackId ?callbackId ;
+                   kgc:correlationKey ?correlationKey ;
+                   kgc:timeout ?timeout ;
+                   kgc:timeoutAction ?timeoutAction ;
+                   kgc:responseMapping ?responseMap .
+        }
+        WHERE {
+            ?task a yawl:Task ;
+                  yawl:awaitsCallback ?callback .
+            ?callback yawl:id ?callbackId ;
+                      yawl:correlationKey ?correlationKey ;
+                      yawl:responseMapping ?responseMap .
+            OPTIONAL { ?callback yawl:timeout ?timeout }
+            OPTIONAL { ?callback yawl:timeoutAction ?timeoutAction }
+        }
+    """ ;
+    rdfs:comment "Wait for asynchronous callback from external service before proceeding."@en .
+
+# =============================================================================
+# SECTION 6: TRIGGER PATTERNS
+# =============================================================================
+
+# Transient Trigger - Await Transient Signal
+kgc:TransientTrigger_ExecutionTemplate a kgc:ExecutionTemplate ;
+    rdfs:label "Transient Trigger Execution"@en ;
+    kgc:forPattern kgc:WCP23_TransientTrigger ;
+    kgc:detectionQuery """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+
+        ASK {
+            ?task a yawl:Task ;
+                  yawl:triggeredBy ?trigger .
+            ?trigger a yawl:TransientTrigger .
+        }
+    """ ;
+    kgc:executionTemplate """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+
+        CONSTRUCT {
+            ?task kgc:hasExecutionPlan _:plan .
+            _:plan a kgc:ExecutionPlan ;
+                   kgc:verb kgc:Await ;
+                   kgc:hasThreshold "signal" ;
+                   kgc:completionStrategy "waitSignal" ;
+                   kgc:signalType "transient" ;
+                   kgc:persistence false .
+
+            _:plan kgc:triggerSpec _:spec .
+            _:spec a kgc:TriggerSpecification ;
+                   kgc:signalName ?signalName ;
+                   kgc:signalScope ?scope ;
+                   kgc:missedSignalBehavior "skip" ;
+                   kgc:predicate ?predicate .
+        }
+        WHERE {
+            ?task a yawl:Task ;
+                  yawl:triggeredBy ?trigger .
+            ?trigger a yawl:TransientTrigger ;
+                     yawl:signalName ?signalName ;
+                     yawl:scope ?scope .
+            OPTIONAL { ?trigger yawl:predicate ?predicate }
+        }
+    """ ;
+    rdfs:comment "Task enabled by transient signal - if missed, task never executes."@en .
+
+# Persistent Trigger - Await Persistent Signal
+kgc:PersistentTrigger_ExecutionTemplate a kgc:ExecutionTemplate ;
+    rdfs:label "Persistent Trigger Execution"@en ;
+    kgc:forPattern kgc:WCP24_PersistentTrigger ;
+    kgc:detectionQuery """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+
+        ASK {
+            ?task a yawl:Task ;
+                  yawl:triggeredBy ?trigger .
+            ?trigger a yawl:PersistentTrigger .
+        }
+    """ ;
+    kgc:executionTemplate """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+
+        CONSTRUCT {
+            ?task kgc:hasExecutionPlan _:plan .
+            _:plan a kgc:ExecutionPlan ;
+                   kgc:verb kgc:Await ;
+                   kgc:hasThreshold "persistent" ;
+                   kgc:completionStrategy "waitPersistent" ;
+                   kgc:signalType "persistent" ;
+                   kgc:persistence true .
+
+            _:plan kgc:triggerSpec _:spec .
+            _:spec a kgc:TriggerSpecification ;
+                   kgc:signalName ?signalName ;
+                   kgc:signalScope ?scope ;
+                   kgc:missedSignalBehavior "queue" ;
+                   kgc:persistenceStore ?store ;
+                   kgc:predicate ?predicate .
+        }
+        WHERE {
+            ?task a yawl:Task ;
+                  yawl:triggeredBy ?trigger .
+            ?trigger a yawl:PersistentTrigger ;
+                     yawl:signalName ?signalName ;
+                     yawl:scope ?scope .
+            OPTIONAL { ?trigger yawl:persistenceStore ?store }
+            OPTIONAL { ?trigger yawl:predicate ?predicate }
+        }
+    """ ;
+    rdfs:comment "Task enabled by persistent signal - signal queued if task not ready."@en .
+
+# =============================================================================
+# SECTION 7: ADVANCED CANCELLATION PATTERNS
+# =============================================================================
+
+# WCP-28: Cancelling AND-Join - Cancel Region on First Arrival
+kgc:WCP28_ExecutionTemplate a kgc:ExecutionTemplate ;
+    rdfs:label "WCP-28: Cancelling AND-Join Execution"@en ;
+    kgc:forPattern yawl:CancellingANDJoin ;
+    kgc:detectionQuery """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+
+        ASK {
+            ?task a yawl:Task ;
+                  yawl:hasJoinType yawl:ControlTypeAnd ;
+                  yawl:cancelOthersOnFirst true .
+        }
+    """ ;
+    kgc:executionTemplate """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+
+        CONSTRUCT {
+            ?task kgc:hasExecutionPlan _:plan .
+            _:plan a kgc:ExecutionPlan ;
+                   kgc:verb kgc:Await ;
+                   kgc:hasThreshold "1" ;
+                   kgc:completionStrategy "waitFirst" ;
+                   kgc:voidRemaining true ;
+                   kgc:cancellationScope "region" .
+
+            _:plan kgc:cancellationSet _:cancelSet .
+            _:cancelSet a kgc:CancellationSet ;
+                        kgc:includes ?predecessors ;
+                        kgc:filter "kgc:status == 'Active'" .
+        }
+        WHERE {
+            ?task a yawl:Task ;
+                  yawl:hasJoinType yawl:ControlTypeAnd ;
+                  yawl:cancelOthersOnFirst true .
+            ?task yawl:hasPredecessor ?predecessors .
+        }
+    """ ;
+    rdfs:comment "First branch to arrive cancels all other branches in AND-join."@en .
+
+# WCP-29: Cancelling OR-Join - Cancel Disabled Branches
+kgc:WCP29_ExecutionTemplate a kgc:ExecutionTemplate ;
+    rdfs:label "WCP-29: Cancelling OR-Join Execution"@en ;
+    kgc:forPattern yawl:CancellingORJoin ;
+    kgc:detectionQuery """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+
+        ASK {
+            ?task a yawl:Task ;
+                  yawl:hasJoinType yawl:ControlTypeOr ;
+                  yawl:cancelDisabledBranches true .
+        }
+    """ ;
+    kgc:executionTemplate """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+
+        CONSTRUCT {
+            ?task kgc:hasExecutionPlan _:plan .
+            _:plan a kgc:ExecutionPlan ;
+                   kgc:verb kgc:Await ;
+                   kgc:hasThreshold "active" ;
+                   kgc:completionStrategy "waitActive" ;
+                   kgc:voidDisabled true ;
+                   kgc:cancellationScope "region" .
+
+            _:plan kgc:cancellationSet _:cancelSet .
+            _:cancelSet a kgc:CancellationSet ;
+                        kgc:includes ?predecessors ;
+                        kgc:filter "kgc:isEnabled == false" .
+        }
+        WHERE {
+            ?task a yawl:Task ;
+                  yawl:hasJoinType yawl:ControlTypeOr ;
+                  yawl:cancelDisabledBranches true .
+            ?task yawl:hasPredecessor ?predecessors .
+        }
+    """ ;
+    rdfs:comment "OR-join waits for active branches, cancels disabled ones."@en .
+
+# =============================================================================
+# SECTION 8: ADVANCED MI PATTERNS
+# =============================================================================
+
+# WCP-37: Local Synchronizing Merge for MI
+kgc:WCP37_ExecutionTemplate a kgc:ExecutionTemplate ;
+    rdfs:label "WCP-37: Local Synchronizing Merge Execution"@en ;
+    kgc:forPattern yawl:MILocalSyncMerge ;
+    kgc:detectionQuery """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+
+        ASK {
+            ?task a yawl:MultiInstanceTask ;
+                  yawl:miSynchronization "local" .
+        }
+    """ ;
+    kgc:executionTemplate """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+
+        CONSTRUCT {
+            ?task kgc:hasExecutionPlan _:plan .
+            _:plan a kgc:ExecutionPlan ;
+                   kgc:verb kgc:Await ;
+                   kgc:hasThreshold "perInstance" ;
+                   kgc:completionStrategy "waitLocalMerge" ;
+                   kgc:scope "instance" .
+
+            _:plan kgc:instanceSync _:sync .
+            _:sync a kgc:InstanceSynchronization ;
+                   kgc:mergeStrategy "local" ;
+                   kgc:groupBy ?groupKey .
+        }
+        WHERE {
+            ?task a yawl:MultiInstanceTask ;
+                  yawl:miSynchronization "local" .
+            OPTIONAL { ?task yawl:miGroupBy ?groupKey }
+        }
+    """ ;
+    rdfs:comment "Synchronize MI instances locally per group before global merge."@en .
+
+# WCP-38: General Synchronizing Merge for MI
+kgc:WCP38_ExecutionTemplate a kgc:ExecutionTemplate ;
+    rdfs:label "WCP-38: General Synchronizing Merge Execution"@en ;
+    kgc:forPattern yawl:MIGeneralSyncMerge ;
+    kgc:detectionQuery """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+
+        ASK {
+            ?task a yawl:MultiInstanceTask ;
+                  yawl:miSynchronization "general" .
+        }
+    """ ;
+    kgc:executionTemplate """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+
+        CONSTRUCT {
+            ?task kgc:hasExecutionPlan _:plan .
+            _:plan a kgc:ExecutionPlan ;
+                   kgc:verb kgc:Await ;
+                   kgc:hasThreshold "all" ;
+                   kgc:completionStrategy "waitAll" ;
+                   kgc:scope "global" ;
+                   kgc:resetOnFire true .
+
+            _:plan kgc:instanceSync _:sync .
+            _:sync a kgc:InstanceSynchronization ;
+                   kgc:mergeStrategy "general" ;
+                   kgc:aggregation ?aggregation .
+        }
+        WHERE {
+            ?task a yawl:MultiInstanceTask ;
+                  yawl:miSynchronization "general" .
+            OPTIONAL { ?task yawl:miAggregation ?aggregation }
+        }
+    """ ;
+    rdfs:comment "General synchronization across all MI instances with optional aggregation."@en .
+
+# =============================================================================
+# SECTION 9: ADVANCED STATE PATTERNS
+# =============================================================================
+
+# WCP-39: Critical Section with Priority
+kgc:WCP39_ExecutionTemplate a kgc:ExecutionTemplate ;
+    rdfs:label "WCP-39: Critical Section Execution"@en ;
+    kgc:forPattern yawl:CriticalSection ;
+    kgc:detectionQuery """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+
+        ASK {
+            ?task a yawl:Task ;
+                  yawl:criticalSection ?section .
+        }
+    """ ;
+    kgc:executionTemplate """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+
+        CONSTRUCT {
+            ?task kgc:hasExecutionPlan _:plan .
+            _:plan a kgc:ExecutionPlan ;
+                   kgc:verb kgc:Filter ;
+                   kgc:selectionMode "mutex" ;
+                   kgc:exclusivityScope ?section .
+
+            _:plan kgc:mutexControl _:mutex .
+            _:mutex a kgc:MutexControl ;
+                    kgc:semaphore ?semaphore ;
+                    kgc:priority ?priority ;
+                    kgc:fairness ?fairness .
+        }
+        WHERE {
+            ?task a yawl:Task ;
+                  yawl:criticalSection ?section .
+            OPTIONAL { ?section yawl:semaphore ?semaphore }
+            OPTIONAL { ?task yawl:priority ?priority }
+            OPTIONAL { ?section yawl:fairness ?fairness }
+        }
+    """ ;
+    rdfs:comment "Mutual exclusion with semaphore, priority, and fairness control."@en .
+
+# WCP-40: Interleaved Routing with Constraints
+kgc:WCP40_ExecutionTemplate a kgc:ExecutionTemplate ;
+    rdfs:label "WCP-40: Interleaved Routing Execution"@en ;
+    kgc:forPattern yawl:InterleavedRouting ;
+    kgc:detectionQuery """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+
+        ASK {
+            ?task a yawl:Task ;
+                  yawl:interleavingMode ?mode .
+        }
+    """ ;
+    kgc:executionTemplate """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+
+        CONSTRUCT {
+            ?task kgc:hasExecutionPlan _:plan .
+            _:plan a kgc:ExecutionPlan ;
+                   kgc:verb kgc:Filter ;
+                   kgc:selectionMode "interleaved" ;
+                   kgc:interleavingMode ?mode .
+
+            _:plan kgc:orderingConstraints _:constraints .
+            _:constraints a kgc:OrderingConstraints ;
+                         kgc:mode ?mode ;
+                         kgc:constraints ?orderRules .
+        }
+        WHERE {
+            ?task a yawl:Task ;
+                  yawl:interleavingMode ?mode .
+            OPTIONAL { ?task yawl:orderingRules ?orderRules }
+        }
+    """ ;
+    rdfs:comment "Interleaved execution with ordering constraints between tasks."@en .
+
+# =============================================================================
+# SECTION 10: TEMPLATE METADATA AND DISPATCH
+# =============================================================================
+
+kgc:ExecutionTemplate a rdfs:Class ;
+    rdfs:label "Execution Template"@en ;
+    rdfs:comment "SPARQL CONSTRUCT template for pattern execution"@en .
+
+kgc:forPattern a rdf:Property ;
+    rdfs:label "for pattern"@en ;
+    rdfs:domain kgc:ExecutionTemplate ;
+    rdfs:range kgc:PatternMapping ;
+    rdfs:comment "Which pattern this template implements"@en .
+
+kgc:detectionQuery a rdf:Property ;
+    rdfs:label "detection query"@en ;
+    rdfs:domain kgc:ExecutionTemplate ;
+    rdfs:range xsd:string ;
+    rdfs:comment "SPARQL ASK query to detect pattern in workflow"@en .
+
+kgc:executionTemplate a rdf:Property ;
+    rdfs:label "execution template"@en ;
+    rdfs:domain kgc:ExecutionTemplate ;
+    rdfs:range xsd:string ;
+    rdfs:comment "SPARQL CONSTRUCT query to generate execution plan"@en .
+
+kgc:ExecutionPlan a rdfs:Class ;
+    rdfs:label "Execution Plan"@en ;
+    rdfs:comment "Generated execution plan for a workflow element"@en .
+
+kgc:hasExecutionPlan a rdf:Property ;
+    rdfs:label "has execution plan"@en ;
+    rdfs:domain rdfs:Resource ;
+    rdfs:range kgc:ExecutionPlan ;
+    rdfs:comment "Link to generated execution plan"@en .
+
+# =============================================================================
+# USAGE PATTERN
+# =============================================================================
+#
+# 1. PATTERN DETECTION:
+#    For each task/flow in workflow, run all detectionQuery ASK queries
+#    to identify which patterns are present.
+#
+# 2. TEMPLATE SELECTION:
+#    Select the ExecutionTemplate where detectionQuery returns true.
+#
+# 3. EXECUTION PLAN GENERATION:
+#    Execute the executionTemplate CONSTRUCT query to generate
+#    the ExecutionPlan with verb, parameters, and constraints.
+#
+# 4. VERB DISPATCH:
+#    Extract verb and parameters from ExecutionPlan.
+#    Dispatch to engine's 5 elemental verbs with parameters.
+#
+# 5. EXECUTION:
+#    Engine executes verb with parameters.
+#    Updates token state, data bindings, resource allocations.
+#
+# Example workflow:
+#
+# SELECT ?template ?plan WHERE {
+#   # Step 1: Detect pattern
+#   ?template a kgc:ExecutionTemplate ;
+#             kgc:detectionQuery ?askQuery .
+#
+#   # Step 2: Run detection (pseudo-code)
+#   FILTER(ASK { ?askQuery })
+#
+#   # Step 3: Generate plan
+#   ?template kgc:executionTemplate ?constructQuery .
+#   # Execute CONSTRUCT to get ?plan
+# }
+#
+# =============================================================================
+# END OF KGC PHYSICS EXECUTION TEMPLATES
+# =============================================================================

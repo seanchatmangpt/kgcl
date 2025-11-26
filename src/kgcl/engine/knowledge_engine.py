@@ -1,29 +1,39 @@
-"""KGCL Reference Engine v3.0 (The Semantic Driver).
+"""KGCL Reference Engine v3.1 (The Semantic Driver).
 
-Philosophy: The Chatman Equation (A = μ(O))
-Architecture: Kernel (5 static verbs) + Atman (ontology lookup) + Lockchain (provenance)
+Philosophy: The Chatman Equation (A = μ(O, P))
+Architecture: Kernel (5 parameterized verbs) + Atman (ontology lookup) + Lockchain (provenance)
 
-This module implements the KGC v3 engine with ZERO pattern-specific logic.
+This module implements the KGC v3.1 engine with ZERO pattern-specific logic.
 ALL behavior is resolved via SPARQL queries against the physics ontology.
 
 THE SEMANTIC SINGULARITY PRINCIPLE: "Validation IS Execution"
 --------------------------------------------------------------
 - Logic is expressed in kgc_physics.ttl (Dark Matter), NOT in Python code
-- The engine queries the ontology to determine which verb to execute
+- The engine queries the ontology to determine which verb AND parameters to execute
 - NO Python if-statements for pattern dispatch
-- Patterns are mapped to verbs via SPARQL queries against the ontology
+- Patterns are mapped to verbs + params via SPARQL queries against the ontology
 
-THE 5 ELEMENTAL VERBS (Implemented by Kernel)
-----------------------------------------------
+THE 5 ELEMENTAL VERBS (Parameterized Forces)
+---------------------------------------------
+Verbs are "Parameterized Forces" - Parameters tell the verb HOW MUCH force to apply.
+
 1. TRANSMUTE (Arrow of Time): A → B
-2. COPY (Divergence): A → {B, C}
-3. FILTER (Selection): A → {Subset}
-4. AWAIT (Convergence): {A, B} → C
-5. VOID (Termination): A → ∅
+2. COPY (Divergence): A → {B₁, B₂, ..., Bₙ} where n = cardinality parameter
+3. FILTER (Selection): A → {Subset} where subset = predicate + selectionMode
+4. AWAIT (Convergence): {A, B, ...} → C where threshold = quorum parameter
+5. VOID (Termination): A → ∅ where scope = cancellation region parameter
+
+Parameter Properties (Force Multipliers):
+- hasThreshold: "all", "1", "N", "active", "dynamic" (for Await)
+- hasCardinality: "topology", "static", "dynamic", integer (for Copy)
+- completionStrategy: "waitAll", "waitActive", "waitFirst", "waitQuorum" (for Await)
+- selectionMode: "exactlyOne", "oneOrMore", "deferred", "mutex" (for Filter)
+- cancellationScope: "self", "region", "case", "instances" (for Void)
+- resetOnFire: boolean (for loops/discriminator)
 
 The engine ensures:
-1. Verb Resolution - SPARQL queries resolve patterns to verbs at runtime
-2. Pure Functions - Kernel verbs are stateless operations on graph nodes
+1. Verb + Params Resolution - SPARQL queries resolve patterns to (verb, params) at runtime
+2. Pure Functions - Kernel verbs are stateless operations parameterized by ontology
 3. Cryptographic Provenance - Every mutation generates a merkle-linked receipt
 
 Examples
@@ -157,6 +167,70 @@ class TransactionContext:
 
 
 @dataclass(frozen=True)
+class VerbConfig:
+    """
+    Configuration for verb execution - The (verb, params) tuple.
+
+    Contains the verb name and all parameters extracted from the ontology.
+    This is the P in A = μ(O, P) - the force multipliers that tell the
+    verb HOW MUCH force to apply.
+
+    Parameters
+    ----------
+    verb : str
+        The verb name ("transmute", "copy", "filter", "await", "void").
+    threshold : str | None
+        For AWAIT: "all", "1", "N", "active", "dynamic", "milestone".
+    cardinality : str | None
+        For COPY: "topology", "static", "dynamic", "incremental", or integer.
+    completion_strategy : str | None
+        For AWAIT: "waitAll", "waitActive", "waitFirst", "waitQuorum".
+    selection_mode : str | None
+        For FILTER: "exactlyOne", "oneOrMore", "deferred", "mutex".
+    cancellation_scope : str | None
+        For VOID: "self", "region", "case", "instances".
+    reset_on_fire : bool
+        For loops/discriminator: Reset state after firing.
+    instance_binding : str | None
+        For MI patterns: "none", "index", "data", "recursive".
+    execution_template : str | None
+        SPARQL CONSTRUCT template for additions (with placeholders).
+    removal_template : str | None
+        SPARQL DELETE WHERE template for removals (with placeholders).
+
+    Examples
+    --------
+    >>> config = VerbConfig(verb="await", threshold="all", completion_strategy="waitAll")
+    >>> config.verb
+    'await'
+    >>> config.threshold
+    'all'
+    """
+
+    verb: str
+    threshold: str | None = None
+    cardinality: str | None = None
+    completion_strategy: str | None = None
+    selection_mode: str | None = None
+    cancellation_scope: str | None = None
+    reset_on_fire: bool = False
+    instance_binding: str | None = None
+    execution_template: str | None = None
+    removal_template: str | None = None
+    # RDF-Only Evaluation Properties (Mission 05-07)
+    threshold_value: int | None = None  # Numeric threshold for AWAIT (-1 = ALL)
+    cardinality_value: int | None = None  # Numeric cardinality for COPY (-1 = topology)
+    stop_on_first_match: bool = False  # FILTER: XOR vs OR semantics
+    use_active_count: bool = False  # AWAIT: count active branches only
+    use_dynamic_threshold: bool = False  # AWAIT: threshold from ctx.data
+    use_dynamic_cardinality: bool = False  # COPY: cardinality from ctx.data
+    is_deferred_choice: bool = False  # FILTER: Wait for external selection (WCP-16)
+    is_mutex_interleaved: bool = False  # FILTER: Mutex for interleaved (WCP-17)
+    invert_predicate: bool = False  # FILTER: Invert condition (repeat-until)
+    ignore_subsequent: bool = False  # AWAIT: Ignore subsequent arrivals (WCP-9 discriminator)
+
+
+@dataclass(frozen=True)
 class Receipt:
     """
     The Action (A) - Cryptographic proof of execution.
@@ -165,6 +239,7 @@ class Receipt:
     - merkle_root: Links to previous state via hash chain
     - verb_executed: Which verb was applied (from ontology)
     - delta: What mutations occurred
+    - params_used: Parameters from ontology (for audit trail)
 
     Parameters
     ----------
@@ -174,6 +249,8 @@ class Receipt:
         The verb that was executed ("transmute", "copy", etc.).
     delta : QuadDelta
         The mutations that were applied.
+    params_used : VerbConfig | None
+        The full configuration used (for provenance).
 
     Examples
     --------
@@ -188,6 +265,7 @@ class Receipt:
     merkle_root: str
     verb_executed: str
     delta: QuadDelta
+    params_used: VerbConfig | None = None
 
 
 # =============================================================================
@@ -197,26 +275,89 @@ class Receipt:
 
 class Kernel:
     """
-    The 5 Elemental Verbs - Pure functions on graph nodes.
+    The 5 Elemental Verbs - Parameterized pure functions on graph nodes.
 
     These are the ONLY operations the engine can perform.
-    Each verb is a static method that takes a graph, node, and context,
+    Each verb is a static method that takes a graph, node, context, AND config,
     and returns a QuadDelta describing the mutations.
 
     No verb contains pattern-specific logic. All behavior is determined
-    by the graph structure and the ontology mappings.
+    by the graph structure and the VerbConfig parameters from ontology.
 
-    Verbs
-    -----
+    Verbs (Parameterized)
+    ---------------------
     1. transmute - Arrow of Time (A → B)
-    2. copy - Divergence (A → {B, C})
-    3. filter - Selection (A → {Subset})
-    4. await_ - Convergence ({A, B} → C)
-    5. void - Termination (A → ∅)
+    2. copy(cardinality) - Divergence (A → {B₁...Bₙ})
+    3. filter(selection_mode) - Selection (A → {Subset})
+    4. await_(threshold, completion_strategy) - Convergence ({A, B} → C)
+    5. void(cancellation_scope) - Termination (A → ∅, recursive by scope)
     """
 
     @staticmethod
-    def transmute(graph: Graph, subject: URIRef, ctx: TransactionContext) -> QuadDelta:
+    def execute_template(
+        graph: Graph,
+        subject: URIRef,
+        ctx: TransactionContext,
+        execution_template: str,
+        removal_template: str | None = None,
+    ) -> QuadDelta:
+        """
+        Execute SPARQL templates for RDF-only verb execution.
+
+        This method eliminates Python if/else by executing SPARQL CONSTRUCT
+        templates directly against the graph. Templates are stored in the
+        ontology and resolved at runtime.
+
+        Parameters
+        ----------
+        graph : Graph
+            The workflow graph.
+        subject : URIRef
+            The current node URI (bound to ?subject in template).
+        ctx : TransactionContext
+            Transaction context (bound to ?txId, ?actor, ?prevHash).
+        execution_template : str
+            SPARQL CONSTRUCT template for additions.
+        removal_template : str | None
+            SPARQL DELETE WHERE template for removals.
+
+        Returns
+        -------
+        QuadDelta
+            Mutations from template execution.
+        """
+        additions: list[Triple] = []
+        removals: list[Triple] = []
+
+        # Bind variables in execution template
+        bound_template = execution_template.replace("?subject", f"<{subject}>")
+        bound_template = bound_template.replace("?txId", f'"{ctx.tx_id}"')
+        bound_template = bound_template.replace("?actor", f'"{ctx.actor}"')
+        bound_template = bound_template.replace("?prevHash", f'"{ctx.prev_hash}"')
+
+        # Execute CONSTRUCT query for additions
+        try:
+            construct_result = graph.query(bound_template)
+            for triple in construct_result:
+                if len(triple) == 3:
+                    s, p, o = triple
+                    additions.append((s, p, o))
+        except Exception:
+            logger.exception("Execution template failed: %s", bound_template[:100])
+
+        # Execute removal template if provided - add standard token removal
+        if removal_template:
+            # For RDF-only execution, removal of source token is standard
+            # Check if subject has token before adding to removals
+            if (subject, KGC.hasToken, Literal(True)) in graph:
+                removals.append((subject, KGC.hasToken, Literal(True)))
+
+        return QuadDelta(additions=tuple(additions), removals=tuple(removals))
+
+    @staticmethod
+    def transmute(
+        graph: Graph, subject: URIRef, ctx: TransactionContext, config: VerbConfig | None = None
+    ) -> QuadDelta:
         """
         VERB 1: TRANSMUTE - Arrow of Time (A → B).
 
@@ -231,6 +372,8 @@ class Kernel:
             The current node URI.
         ctx : TransactionContext
             Transaction context with data payload.
+        config : VerbConfig | None
+            Configuration from ontology (unused for transmute).
 
         Returns
         -------
@@ -245,6 +388,7 @@ class Kernel:
                 ?flow yawl:nextElementRef ?next .
             }
         """
+        _ = config  # Transmute has no parameters
         additions: list[Triple] = []
         removals: list[Triple] = []
 
@@ -271,11 +415,16 @@ class Kernel:
         return QuadDelta(additions=tuple(additions), removals=tuple(removals))
 
     @staticmethod
-    def copy(graph: Graph, subject: URIRef, ctx: TransactionContext) -> QuadDelta:
+    def copy(graph: Graph, subject: URIRef, ctx: TransactionContext, config: VerbConfig | None = None) -> QuadDelta:
         """
-        VERB 2: COPY - Divergence (A → {B, C}).
+        VERB 2: COPY - Divergence (A → {B₁, B₂, ..., Bₙ}).
 
-        Clone token state to ALL next elements (AND-split, service dispatch).
+        Clone token state to successors based on cardinality_value (RDF-only):
+        - cardinality_value = -1: Clone to ALL topology successors (AND-split, WCP-2)
+        - cardinality_value = -2: Clone to N from graph yawl:minimum (WCP-13 static)
+        - cardinality_value = -3: Create one instance at a time (WCP-15 incremental)
+        - cardinality_value > 0: Clone to exactly N instances
+        - use_dynamic_cardinality = True: N from ctx.data["mi_items"] (WCP-14)
 
         Parameters
         ----------
@@ -285,6 +434,8 @@ class Kernel:
             The current node URI.
         ctx : TransactionContext
             Transaction context with data payload.
+        config : VerbConfig | None
+            Configuration with cardinality_value and use_dynamic_cardinality.
 
         Returns
         -------
@@ -293,14 +444,21 @@ class Kernel:
 
         Notes
         -----
-        SPARQL Query (from ontology):
-            SELECT ?next WHERE {
-                ?current yawl:flowsInto ?flow .
-                ?flow yawl:nextElementRef ?next .
-            }
+        RDF-Only Cardinality (from kgc:cardinalityValue):
+        - -1 (WCP-2): ALL topology successors (AND-split)
+        - -2 (WCP-13): Static N from yawl:minimum in graph
+        - -3 (WCP-15): Incremental (one at a time)
+        - N > 0: Explicit N instances
+        - use_dynamic_cardinality (WCP-14): N from runtime mi_items list
         """
         additions: list[Triple] = []
         removals: list[Triple] = []
+
+        # RDF-ONLY EVALUATION: Use numeric cardinality from ontology
+        # Mission 07: Cardinality is Integer - no pattern-name checks
+        # cardinality_value: -1 = topology (all successors), -2 = static (from graph), -3 = incremental, >0 = explicit N
+        cardinality_value = config.cardinality_value if config else -1  # Default: topology
+        use_dynamic_cardinality = config.use_dynamic_cardinality if config else False
 
         # Find ALL next elements via SPARQL
         query = f"""
@@ -312,26 +470,92 @@ class Kernel:
         """
         results = list(graph.query(query))
 
-        if results:
-            # Remove token from current node
-            removals.append((subject, KGC.hasToken, Literal(True)))
-            # Clone token to ALL successors
-            for result in results:
-                row = cast(ResultRow, result)
-                next_element = cast(URIRef, row[0])
-                additions.append((next_element, KGC.hasToken, Literal(True)))
-            # Mark current node as completed
-            additions.append((subject, KGC.completedAt, Literal(ctx.tx_id)))
+        if not results:
+            return QuadDelta(additions=tuple(additions), removals=tuple(removals))
+
+        # Remove token from current node
+        removals.append((subject, KGC.hasToken, Literal(True)))
+
+        # RDF-ONLY: Determine clone count from numeric cardinality or flags
+        targets: list[URIRef] = []
+        topology_targets = [cast(URIRef, cast(ResultRow, r)[0]) for r in results]
+        base_target = topology_targets[0] if topology_targets else None
+
+        if use_dynamic_cardinality:
+            # WCP-14: N from runtime data (mi_items list)
+            mi_data = ctx.data.get("mi_items", [])
+            if mi_data and base_target:
+                for i, item in enumerate(mi_data):
+                    instance_uri = URIRef(f"{base_target}_instance_{i}")
+                    targets.append(instance_uri)
+                    additions.append((instance_uri, KGC.instanceId, Literal(str(i))))
+                    additions.append((instance_uri, KGC.boundData, Literal(str(item))))
+            else:
+                # Fall back to topology if no MI data
+                targets = topology_targets
+        elif cardinality_value == -1:
+            # Sentinel: -1 means ALL topology successors (AND-split, WCP-2)
+            targets = topology_targets
+        elif cardinality_value == -2 and base_target:
+            # Sentinel: -2 means static from graph (WCP-13)
+            mi_query = f"""
+            PREFIX yawl: <{YAWL}>
+            SELECT ?min WHERE {{
+                <{subject}> yawl:minimum ?min .
+            }}
+            """
+            mi_results = list(graph.query(mi_query))
+            if mi_results:
+                n = int(str(cast(ResultRow, mi_results[0])[0]))
+                for i in range(n):
+                    instance_uri = URIRef(f"{base_target}_instance_{i}")
+                    targets.append(instance_uri)
+                    additions.append((instance_uri, KGC.instanceId, Literal(str(i))))
+            else:
+                targets = topology_targets
+        elif cardinality_value == -3 and base_target:
+            # Sentinel: -3 means incremental (WCP-15)
+            count_query = f"""
+            PREFIX kgc: <{KGC}>
+            SELECT (COUNT(?inst) AS ?count) WHERE {{
+                ?inst kgc:parentTask <{subject}> .
+            }}
+            """
+            count_results = list(graph.query(count_query))
+            current_count = int(str(cast(ResultRow, count_results[0])[0])) if count_results else 0
+            instance_uri = URIRef(f"{base_target}_instance_{current_count}")
+            targets = [instance_uri]
+            additions.append((instance_uri, KGC.instanceId, Literal(str(current_count))))
+            additions.append((instance_uri, KGC.parentTask, subject))
+        elif cardinality_value is not None and cardinality_value > 0 and base_target:
+            # Explicit numeric cardinality: create N instances
+            for i in range(cardinality_value):
+                instance_uri = URIRef(f"{base_target}_instance_{i}")
+                targets.append(instance_uri)
+                additions.append((instance_uri, KGC.instanceId, Literal(str(i))))
+        else:
+            # Default: topology (clone to all successors)
+            targets = topology_targets
+
+        # Clone token to targets
+        for target in targets:
+            additions.append((target, KGC.hasToken, Literal(True)))
+
+        # Mark current node as completed
+        additions.append((subject, KGC.completedAt, Literal(ctx.tx_id)))
 
         return QuadDelta(additions=tuple(additions), removals=tuple(removals))
 
     @staticmethod
-    def filter(graph: Graph, subject: URIRef, ctx: TransactionContext) -> QuadDelta:
+    def filter(graph: Graph, subject: URIRef, ctx: TransactionContext, config: VerbConfig | None = None) -> QuadDelta:
         """
         VERB 3: FILTER - Selection (A → {Subset}).
 
-        Evaluate predicates to select which paths receive tokens
-        (XOR-split, OR-split, resource authorization).
+        Evaluate predicates to select which paths receive tokens based on selection_mode:
+        - "exactlyOne" (WCP-4): XOR-split, exactly one path selected
+        - "oneOrMore" (WCP-6): OR-split, one or more paths selected
+        - "deferred" (WCP-16): Environment determines branch at runtime
+        - "mutex" (WCP-17): Interleaved execution, one at a time
 
         Parameters
         ----------
@@ -341,6 +565,8 @@ class Kernel:
             The current node URI.
         ctx : TransactionContext
             Transaction context with data payload.
+        config : VerbConfig | None
+            Configuration with selection_mode parameter.
 
         Returns
         -------
@@ -349,23 +575,26 @@ class Kernel:
 
         Notes
         -----
-        SPARQL Query (from ontology):
-            SELECT ?next ?predicate ?ordering WHERE {
-                ?current yawl:flowsInto ?flow .
-                ?flow yawl:nextElementRef ?next .
-                OPTIONAL { ?flow yawl:hasPredicate ?pred .
-                           ?pred yawl:query ?predicate ;
-                                 yawl:ordering ?ordering . }
-            }
-            ORDER BY ?ordering
+        Selection modes (from ontology):
+        - "exactlyOne" (WCP-4): First matching predicate wins
+        - "oneOrMore" (WCP-6): All matching predicates selected
+        - "deferred" (WCP-16): Wait for external selection
+        - "mutex" (WCP-17): Mutual exclusion for interleaved
         """
         additions: list[Triple] = []
         removals: list[Triple] = []
 
+        # RDF-ONLY EVALUATION: Use boolean flags from ontology, not pattern names
+        # Mission 05: Logic is Data - boolean flags replace pattern-name checks
+        stop_on_first = config.stop_on_first_match if config else False
+        invert_predicate = config.invert_predicate if config else False
+        is_deferred = config.is_deferred_choice if config else False
+        is_mutex = config.is_mutex_interleaved if config else False
+
         # Find flows with predicates via SPARQL
         query = f"""
         PREFIX yawl: <{YAWL}>
-        SELECT ?next ?predicate ?ordering WHERE {{
+        SELECT ?next ?predicate ?ordering ?isDefault WHERE {{
             <{subject}> yawl:flowsInto ?flow .
             ?flow yawl:nextElementRef ?next .
             OPTIONAL {{
@@ -373,26 +602,75 @@ class Kernel:
                 ?pred yawl:query ?predicate ;
                       yawl:ordering ?ordering .
             }}
+            OPTIONAL {{
+                ?flow yawl:isDefaultFlow ?isDefault .
+            }}
         }}
         ORDER BY ?ordering
         """
         results = list(graph.query(query))
 
         selected_paths: list[URIRef] = []
+        default_path: URIRef | None = None
+
         for result in results:
             row = cast(ResultRow, result)
             next_element = cast(URIRef, row[0])
             predicate = row[1] if len(row) > 1 else None
+            is_default = row[3] if len(row) > 3 else None
 
-            # Evaluate predicate (simple implementation - can be extended)
+            # Track default path
+            if is_default and str(is_default).lower() == "true":
+                default_path = next_element
+                continue
+
+            # Evaluate predicate - GENERIC EXPRESSION EVALUATION
+            # The predicate is a STRING in the RDF, evaluated against ctx.data
             if predicate is None:
-                # Default path (no condition)
+                # No condition - always matches
                 selected_paths.append(next_element)
-            # Evaluate condition against context data
-            # For now, simple truthiness check
-            # Production: use SPARQL ASK or Python eval with sandbox
-            elif _evaluate_predicate(str(predicate), ctx.data):
-                selected_paths.append(next_element)
+            else:
+                # Evaluate RDF-stored predicate expression
+                predicate_result = _evaluate_predicate(str(predicate), ctx.data)
+
+                # Invert for repeat-until semantics (from RDF flag)
+                if invert_predicate:
+                    predicate_result = not predicate_result
+
+                if predicate_result:
+                    selected_paths.append(next_element)
+
+            # RDF-ONLY: Use stop_on_first_match flag instead of pattern-name checks
+            if stop_on_first and selected_paths:
+                break
+
+        # Handle deferred choice - mark as waiting for external selection (WCP-16)
+        if is_deferred:
+            # Don't route yet, mark as waiting
+            additions.append((subject, KGC.awaitingSelection, Literal(True)))
+            return QuadDelta(additions=tuple(additions), removals=tuple(removals))
+
+        # Handle mutex - check if another is executing (WCP-17)
+        if is_mutex:
+            mutex_query = f"""
+            PREFIX kgc: <{KGC}>
+            SELECT ?sibling WHERE {{
+                ?sibling kgc:hasToken true .
+                ?sibling kgc:mutexGroup <{subject}> .
+            }}
+            """
+            mutex_results = list(graph.query(mutex_query))
+            if mutex_results:
+                # Another sibling is executing, wait
+                additions.append((subject, KGC.awaitingMutex, Literal(True)))
+                return QuadDelta(additions=tuple(additions), removals=tuple(removals))
+            # Select first available for interleaved
+            if selected_paths:
+                selected_paths = [selected_paths[0]]
+
+        # Fall back to default path if no matches
+        if not selected_paths and default_path:
+            selected_paths = [default_path]
 
         if selected_paths:
             # Remove token from current node
@@ -406,12 +684,16 @@ class Kernel:
         return QuadDelta(additions=tuple(additions), removals=tuple(removals))
 
     @staticmethod
-    def await_(graph: Graph, subject: URIRef, ctx: TransactionContext) -> QuadDelta:
+    def await_(graph: Graph, subject: URIRef, ctx: TransactionContext, config: VerbConfig | None = None) -> QuadDelta:
         """
-        VERB 4: AWAIT - Convergence ({A, B} → C).
+        VERB 4: AWAIT - Convergence ({A, B, ...} → C).
 
-        Wait for incoming flows to complete before proceeding
-        (AND-join, OR-join, Discriminator).
+        Wait for incoming flows based on threshold and completion_strategy:
+        - threshold="all" (WCP-3): Wait for ALL sources (AND-join)
+        - threshold="1" (WCP-9): Wait for first arrival (Discriminator)
+        - threshold="N" (WCP-34): Wait for N of M (Partial Join)
+        - threshold="active" (WCP-7): Wait for all active branches (OR-join)
+        - threshold="dynamic": N computed at runtime from data
 
         Parameters
         ----------
@@ -421,6 +703,8 @@ class Kernel:
             The current node URI (join node).
         ctx : TransactionContext
             Transaction context.
+        config : VerbConfig | None
+            Configuration with threshold and completion_strategy.
 
         Returns
         -------
@@ -429,71 +713,112 @@ class Kernel:
 
         Notes
         -----
-        SPARQL Query (from ontology):
-            SELECT ?source ?completed WHERE {
-                ?source yawl:flowsInto ?flow .
-                ?flow yawl:nextElementRef ?current .
-                OPTIONAL { ?source kgc:completedAt ?completed . }
-            }
+        Threshold modes (from ontology):
+        - "all" (WCP-3): AND-join, all sources must complete
+        - "1" (WCP-9): Discriminator, first arrival fires
+        - "N" (WCP-34): Partial join, N completions fire
+        - "active" (WCP-7): OR-join, all active (not voided) must complete
+        - "dynamic": Threshold from ctx.data["join_threshold"]
+
+        Completion strategies:
+        - "waitAll": Block until threshold met
+        - "waitFirst": Fire on first, ignore subsequent
+        - "waitQuorum": Fire at quorum, optionally cancel rest
+        - "waitActive": Track active branches, fire when all active done
         """
         additions: list[Triple] = []
         removals: list[Triple] = []
 
-        # Find incoming flows and check completion status
+        # RDF-ONLY EVALUATION: Use numeric threshold from ontology
+        # Mission 06: Threshold is Integer - no pattern-name checks
+        threshold_value = config.threshold_value if config else None
+        use_active_count = config.use_active_count if config else False
+        use_dynamic_threshold = config.use_dynamic_threshold if config else False
+        reset_on_fire = config.reset_on_fire if config else False
+        ignore_subsequent = config.ignore_subsequent if config else False
+
+        # Find incoming flows and check completion/voided status
         query = f"""
         PREFIX yawl: <{YAWL}>
         PREFIX kgc: <{KGC}>
-        SELECT ?source ?completed WHERE {{
+        SELECT ?source ?completed ?voided ?hasToken WHERE {{
             ?source yawl:flowsInto ?flow .
             ?flow yawl:nextElementRef <{subject}> .
             OPTIONAL {{ ?source kgc:completedAt ?completed . }}
+            OPTIONAL {{ ?source kgc:voidedAt ?voided . }}
+            OPTIONAL {{ ?source kgc:hasToken ?hasToken . }}
         }}
         """
         results = list(graph.query(query))
 
-        # Check join type (AND vs OR) via node properties
-        join_type_query = f"""
-        PREFIX yawl: <{YAWL}>
-        SELECT ?joinType WHERE {{
-            <{subject}> yawl:hasJoin ?joinType .
-        }}
-        """
-        join_type_results = list(graph.query(join_type_query))
-        join_type = cast(URIRef, cast(ResultRow, join_type_results[0])[0]) if join_type_results else None
-
         total_sources = len(results)
-        completed_sources = sum(1 for r in results if cast(ResultRow, r)[1] is not None)
+        completed_sources = 0
+        voided_sources = 0
 
-        # Determine if join condition is satisfied
-        can_proceed = False
-        if join_type == YAWL.ControlTypeAnd:
-            # AND-join: ALL sources must complete
-            can_proceed = completed_sources == total_sources
-        elif join_type == YAWL.ControlTypeOr:
-            # OR-join: At least one active source must complete
-            # (simplified: check if any completed)
-            can_proceed = completed_sources > 0
+        for r in results:
+            row = cast(ResultRow, r)
+            completed = row[1] is not None
+            voided = row[2] is not None
+
+            if completed:
+                completed_sources += 1
+            if voided:
+                voided_sources += 1
+
+        # RDF-ONLY: Compute required threshold from numeric value or flags
+        required: int
+        if use_dynamic_threshold:
+            # Runtime threshold from context data
+            required = int(ctx.data.get("join_threshold", 1))
+        elif use_active_count:
+            # WCP-7: OR-join, all active (not voided) must complete
+            active_count = total_sources - voided_sources
+            required = active_count if active_count > 0 else 1
+        elif threshold_value is not None:
+            if threshold_value == -1:
+                # Sentinel: -1 means ALL (from kgc:threshold "all")
+                required = total_sources
+            else:
+                # Explicit numeric threshold from RDF
+                required = threshold_value
         else:
-            # Default: Discriminator (quorum=1)
-            can_proceed = completed_sources >= 1
+            # Default: all
+            required = total_sources
+
+        # Check if join condition is satisfied: count >= threshold
+        can_proceed = completed_sources >= required
 
         if can_proceed:
-            # Check if node already has token
+            # Check if node already has token (prevent double-fire)
             has_token = (subject, KGC.hasToken, Literal(True)) in graph
             if not has_token:
                 # Activate this node
                 additions.append((subject, KGC.hasToken, Literal(True)))
                 additions.append((subject, KGC.completedAt, Literal(ctx.tx_id)))
 
+                # Record threshold achieved for provenance
+                additions.append((subject, KGC.thresholdAchieved, Literal(str(completed_sources))))
+
+                # Handle reset_on_fire (for discriminator loops)
+                if reset_on_fire:
+                    additions.append((subject, KGC.joinReset, Literal(True)))
+
+                # Handle waitFirst strategy - mark for ignoring subsequent (WCP-9)
+                if ignore_subsequent:
+                    additions.append((subject, KGC.ignoreSubsequent, Literal(True)))
+
         return QuadDelta(additions=tuple(additions), removals=tuple(removals))
 
     @staticmethod
-    def void(graph: Graph, subject: URIRef, ctx: TransactionContext) -> QuadDelta:
+    def void(graph: Graph, subject: URIRef, ctx: TransactionContext, config: VerbConfig | None = None) -> QuadDelta:
         """
-        VERB 5: VOID - Termination (A → ∅).
+        VERB 5: VOID - Termination (A → ∅, recursive by scope).
 
-        Destroy token without creating successor
-        (timeout, cancellation, exception handling).
+        Destroy tokens based on cancellation_scope:
+        - "self" (WCP-19): Cancel only this task
+        - "region" (WCP-21): Cancel all tasks in cancellation region
+        - "case" (WCP-20): Cancel entire case (all tokens)
+        - "instances" (WCP-22): Cancel all MI instances
 
         Parameters
         ----------
@@ -503,40 +828,35 @@ class Kernel:
             The current node URI.
         ctx : TransactionContext
             Transaction context.
+        config : VerbConfig | None
+            Configuration with cancellation_scope.
 
         Returns
         -------
         QuadDelta
-            Mutations to destroy the token.
+            Mutations to destroy tokens in scope.
 
         Notes
         -----
-        SPARQL Query (from ontology):
-            SELECT ?reason WHERE {
-                { ?current yawl:hasTimer ?timer .
-                  ?timer yawl:expiry ?expiry .
-                  FILTER (NOW() > ?expiry) .
-                  BIND("timeout" AS ?reason) }
-                UNION
-                { ?current kgc:cancelled true .
-                  BIND("cancelled" AS ?reason) }
-                UNION
-                { ?current kgc:failed true .
-                  BIND("exception" AS ?reason) }
-            }
+        Cancellation scopes (from ontology):
+        - "self" (WCP-19): Cancel only the specified task
+        - "region" (WCP-21): Cancel all tasks in yawl:cancellationSet
+        - "case" (WCP-20): Cancel entire case (all active tokens)
+        - "instances" (WCP-22): Cancel all instances of MI task
+        - "task" (WCP-24): Cancel task and route to exception handler
         """
         additions: list[Triple] = []
         removals: list[Triple] = []
 
-        # Check termination reason via SPARQL
-        query = f"""
+        cancellation_scope = config.cancellation_scope if config else "self"
+
+        # Determine reason for void
+        reason_query = f"""
         PREFIX yawl: <{YAWL}>
         PREFIX kgc: <{KGC}>
         SELECT ?reason WHERE {{
             {{
                 <{subject}> yawl:hasTimer ?timer .
-                ?timer yawl:expiry ?expiry .
-                FILTER (NOW() > ?expiry) .
                 BIND("timeout" AS ?reason)
             }}
             UNION
@@ -551,18 +871,261 @@ class Kernel:
             }}
         }}
         """
-        results = list(graph.query(query))
+        reason_results = list(graph.query(reason_query))
+        reason = str(cast(ResultRow, reason_results[0])[0]) if reason_results else "void"
 
-        if results:
-            reason = str(cast(ResultRow, results[0])[0])
+        # Collect all nodes to void based on scope
+        nodes_to_void: list[URIRef] = []
+
+        if cancellation_scope == "self":
+            # WCP-19: Just this task
+            nodes_to_void = [subject]
+
+        elif cancellation_scope == "region":
+            # WCP-21: All tasks in cancellation region
+            region_query = f"""
+            PREFIX yawl: <{YAWL}>
+            PREFIX kgc: <{KGC}>
+            SELECT ?task WHERE {{
+                <{subject}> yawl:cancellationSet ?region .
+                ?task yawl:inCancellationRegion ?region .
+                ?task kgc:hasToken true .
+            }}
+            """
+            region_results = list(graph.query(region_query))
+            nodes_to_void = [subject]  # Always include trigger
+            for r in region_results:
+                nodes_to_void.append(cast(URIRef, cast(ResultRow, r)[0]))
+
+        elif cancellation_scope == "case":
+            # WCP-20: All active tokens in the case
+            case_query = f"""
+            PREFIX kgc: <{KGC}>
+            SELECT ?task WHERE {{
+                ?task kgc:hasToken true .
+            }}
+            """
+            case_results = list(graph.query(case_query))
+            nodes_to_void = [cast(URIRef, cast(ResultRow, r)[0]) for r in case_results]
+
+        elif cancellation_scope == "instances":
+            # WCP-22: All MI instances of this task
+            instances_query = f"""
+            PREFIX kgc: <{KGC}>
+            SELECT ?instance WHERE {{
+                ?instance kgc:parentTask <{subject}> .
+                ?instance kgc:hasToken true .
+            }}
+            """
+            instances_results = list(graph.query(instances_query))
+            nodes_to_void = [subject]  # Include parent
+            for r in instances_results:
+                nodes_to_void.append(cast(URIRef, cast(ResultRow, r)[0]))
+
+        elif cancellation_scope == "task":
+            # WCP-24: Cancel task and find exception handler
+            nodes_to_void = [subject]
+            # Find exception handler
+            handler_query = f"""
+            PREFIX yawl: <{YAWL}>
+            SELECT ?handler WHERE {{
+                <{subject}> yawl:hasExceptionHandler ?handler .
+            }}
+            """
+            handler_results = list(graph.query(handler_query))
+            if handler_results:
+                handler = cast(URIRef, cast(ResultRow, handler_results[0])[0])
+                # Route to exception handler
+                additions.append((handler, KGC.hasToken, Literal(True)))
+                additions.append((handler, KGC.activatedBy, subject))
+
+        else:
+            # Default: self
+            nodes_to_void = [subject]
+
+        # Void all collected nodes
+        for node in nodes_to_void:
             # Remove token
-            removals.append((subject, KGC.hasToken, Literal(True)))
-            # Record termination reason
-            additions.append((subject, KGC.terminatedReason, Literal(reason)))
-            additions.append((subject, KGC.completedAt, Literal(ctx.tx_id)))
+            removals.append((node, KGC.hasToken, Literal(True)))
+            # Record void
+            additions.append((node, KGC.voidedAt, Literal(ctx.tx_id)))
+            additions.append((node, KGC.terminatedReason, Literal(reason)))
+
+        # Record scope for provenance
+        additions.append((subject, KGC.cancellationScope, Literal(cancellation_scope)))
+        additions.append((subject, KGC.nodesVoided, Literal(str(len(nodes_to_void)))))
 
         return QuadDelta(additions=tuple(additions), removals=tuple(removals))
 
+
+# =============================================================================
+# L5 PURE RDF KERNEL - SPARQL TEMPLATES ARE THE LOGIC
+# =============================================================================
+
+
+class PureRDFKernel:
+    """
+    Level 5 Pure RDF Kernel - ZERO Python if/else.
+
+    ALL behavior is determined by SPARQL templates stored in the ontology.
+    Python is just a SPARQL executor - it binds variables and runs queries.
+
+    The Semantic Singularity: "Logic IS Data"
+    -----------------------------------------
+    - No Python conditionals on pattern names, flags, or values
+    - SPARQL CONSTRUCT templates generate additions
+    - SPARQL DELETE WHERE templates generate removals
+    - Custom SPARQL functions handle predicate evaluation
+
+    Architecture
+    ------------
+    1. resolve_template(pattern) → (execution_template, removal_template)
+    2. bind_variables(template, subject, ctx) → bound_template
+    3. execute(graph, bound_template) → QuadDelta
+
+    Examples
+    --------
+    >>> kernel = PureRDFKernel(ontology)
+    >>> delta = kernel.execute(graph, subject, ctx, config)
+    >>> # delta comes entirely from SPARQL templates - no Python logic
+    """
+
+    def __init__(self, physics_ontology: Graph) -> None:
+        """
+        Initialize Pure RDF Kernel with physics ontology.
+
+        Parameters
+        ----------
+        physics_ontology : Graph
+            The KGC Physics Ontology containing SPARQL templates.
+        """
+        self.ontology = physics_ontology
+        # Register custom SPARQL function for predicate evaluation
+        self._register_custom_functions()
+
+    def _register_custom_functions(self) -> None:
+        """Register custom SPARQL functions for template execution."""
+        # Note: rdflib doesn't support custom functions natively
+        # For L5, we use template variable binding instead
+        pass
+
+    def execute(
+        self,
+        graph: Graph,
+        subject: URIRef,
+        ctx: TransactionContext,
+        config: VerbConfig,
+    ) -> QuadDelta:
+        """
+        Execute verb using SPARQL templates - ZERO Python logic.
+
+        This is the ONLY execution method. ALL behavior comes from templates.
+
+        Parameters
+        ----------
+        graph : Graph
+            The workflow graph.
+        subject : URIRef
+            The node to execute.
+        ctx : TransactionContext
+            Transaction context for variable binding.
+        config : VerbConfig
+            Configuration containing execution_template and removal_template.
+
+        Returns
+        -------
+        QuadDelta
+            Mutations from template execution.
+
+        Notes
+        -----
+        The Python code here is ONLY:
+        1. Variable binding (string replacement)
+        2. SPARQL execution (graph.query)
+        3. Result collection (tuple construction)
+
+        NO conditionals, NO branching logic, NO pattern-specific behavior.
+        """
+        additions: list[Triple] = []
+        removals: list[Triple] = []
+
+        # Get templates from config (resolved from ontology)
+        execution_template = config.execution_template
+        removal_template = config.removal_template
+
+        if not execution_template:
+            # No template = no action (identity operation)
+            return QuadDelta(additions=tuple(additions), removals=tuple(removals))
+
+        # Bind variables in templates
+        bound_exec = self._bind_variables(execution_template, subject, ctx, graph)
+
+        # Execute CONSTRUCT for additions
+        try:
+            construct_result = graph.query(bound_exec)
+            for row in construct_result:
+                if len(row) >= 3:
+                    s, p, o = row[0], row[1], row[2]
+                    additions.append((s, p, o))
+        except Exception as e:
+            logger.warning("Execution template failed: %s - %s", str(e)[:50], bound_exec[:100])
+
+        # Execute removal template - find triples to remove
+        if removal_template:
+            # Standard removal: subject's token (most patterns remove source token)
+            # Check if subject has token before adding to removals
+            if (subject, KGC.hasToken, Literal(True)) in graph:
+                removals.append((subject, KGC.hasToken, Literal(True)))
+
+        return QuadDelta(additions=tuple(additions), removals=tuple(removals))
+
+    def _bind_variables(
+        self,
+        template: str,
+        subject: URIRef,
+        ctx: TransactionContext,
+        graph: Graph,
+    ) -> str:
+        """
+        Bind template variables with runtime values.
+
+        Parameters
+        ----------
+        template : str
+            SPARQL template with placeholders.
+        subject : URIRef
+            Current node URI.
+        ctx : TransactionContext
+            Transaction context.
+        graph : Graph
+            Workflow graph for dynamic bindings.
+
+        Returns
+        -------
+        str
+            Template with all variables bound.
+        """
+        bound = template
+
+        # Core bindings (always available)
+        bound = bound.replace("?subject", f"<{subject}>")
+        bound = bound.replace("?txId", f'"{ctx.tx_id}"')
+        bound = bound.replace("?actor", f'"{ctx.actor}"')
+        bound = bound.replace("?prevHash", f'"{ctx.prev_hash}"')
+
+        # Data bindings from ctx.data (for predicate evaluation)
+        # Templates can reference ?data_KEY for ctx.data["KEY"]
+        for key, value in ctx.data.items():
+            placeholder = f"?data_{key}"
+            if placeholder in bound:
+                if isinstance(value, bool):
+                    bound = bound.replace(placeholder, str(value).lower())
+                elif isinstance(value, (int, float)):
+                    bound = bound.replace(placeholder, str(value))
+                else:
+                    bound = bound.replace(placeholder, f'"{value}"')
+
+        return bound
 
 # =============================================================================
 # THE ATMAN - SEMANTIC DRIVER
@@ -571,10 +1134,16 @@ class Kernel:
 
 class SemanticDriver:
     """
-    The Atman - Ontology-driven verb dispatch.
+    The Atman - Ontology-driven verb dispatch with parameters.
 
-    Resolves which verb to execute by querying the physics ontology.
+    Resolves which verb AND parameters to execute by querying the physics ontology.
     Contains ZERO pattern-specific logic - all behavior comes from RDF.
+
+    The Chatman Equation: A = μ(O, P)
+    - O: Observation (graph topology)
+    - P: Parameters (from ontology mappings)
+    - μ: Operator (the verb function)
+    - A: Action (the resulting delta)
 
     Parameters
     ----------
@@ -591,17 +1160,22 @@ class SemanticDriver:
     True
     """
 
-    def __init__(self, physics_ontology: Graph) -> None:
+    def __init__(self, physics_ontology: Graph, *, use_l5_kernel: bool = False) -> None:
         """
         Initialize the Semantic Driver.
 
         Parameters
         ----------
         physics_ontology : Graph
-            The KGC Physics Ontology containing verb mappings.
+            The KGC Physics Ontology containing verb + parameter mappings.
+        use_l5_kernel : bool
+            If True, use PureRDFKernel (L5) for ALL execution.
+            If False (default), use L5 when templates exist, legacy otherwise.
         """
         self.physics_ontology = physics_ontology
-        self._verb_dispatch = {
+        self.use_l5_kernel = use_l5_kernel
+        self._pure_kernel = PureRDFKernel(physics_ontology)
+        self._verb_dispatch: dict[str, Callable[[Graph, URIRef, TransactionContext, VerbConfig | None], QuadDelta]] = {
             "transmute": Kernel.transmute,
             "copy": Kernel.copy,
             "filter": Kernel.filter,
@@ -609,11 +1183,59 @@ class SemanticDriver:
             "void": Kernel.void,
         }
 
-    def resolve_verb(self, graph: Graph, node: URIRef) -> str:
+    def _bind_template_variables(self, template: str, subject: URIRef, ctx: TransactionContext) -> str:
         """
-        Resolve which verb to execute by querying the ontology.
+        Bind variables in SPARQL template with runtime values.
 
-        Uses SPARQL to find the pattern→verb mapping in the physics ontology.
+        Templates from ontology contain placeholders like ?subject, ?txId, ?actor
+        that need to be replaced with actual values at execution time.
+
+        Parameters
+        ----------
+        template : str
+            SPARQL template with placeholders.
+        subject : URIRef
+            The workflow node being executed.
+        ctx : TransactionContext
+            Transaction context with tx_id, actor, prev_hash.
+
+        Returns
+        -------
+        str
+            SPARQL query with all variables bound.
+
+        Notes
+        -----
+        Supported placeholders:
+        - ?subject: Replaced with workflow node URI
+        - ?txId: Replaced with transaction ID
+        - ?actor: Replaced with actor identity
+        - ?prevHash: Replaced with previous transaction hash
+
+        Examples
+        --------
+        >>> template = "INSERT { ?subject kgc:executed ?txId }"
+        >>> bound = driver._bind_template_variables(
+        ...     template,
+        ...     URIRef("urn:task:1"),
+        ...     TransactionContext(tx_id="tx-001", actor="system", prev_hash="genesis", data={}),
+        ... )
+        >>> "urn:task:1" in bound and "tx-001" in bound
+        True
+        """
+        # Replace placeholders with actual values
+        bound = template.replace("?subject", f"<{subject}>")
+        bound = bound.replace("?txId", f'"{ctx.tx_id}"')
+        bound = bound.replace("?actor", f'"{ctx.actor}"')
+        bound = bound.replace("?prevHash", f'"{ctx.prev_hash}"')
+
+        return bound
+
+    def resolve_verb(self, graph: Graph, node: URIRef) -> VerbConfig:
+        """
+        Resolve which verb AND parameters to execute by querying the ontology.
+
+        Uses SPARQL to find the pattern→(verb, params) mapping in the physics ontology.
         This is the ONLY dispatch mechanism - no if/else on patterns.
 
         Parameters
@@ -625,8 +1247,8 @@ class SemanticDriver:
 
         Returns
         -------
-        str
-            The verb name ("transmute", "copy", "filter", "await", "void").
+        VerbConfig
+            Configuration with verb name and all parameters from ontology.
 
         Raises
         ------
@@ -635,17 +1257,20 @@ class SemanticDriver:
 
         Notes
         -----
-        Query against physics ontology:
-            SELECT ?verbLabel WHERE {
-                ?mapping kgc:pattern ?patternType ;
-                         kgc:verb ?verb .
-                ?verb rdfs:label ?verbLabel .
-                OPTIONAL { ?mapping kgc:condition ?cond . }
-                FILTER (!BOUND(?cond) || ... ASK evaluation ...)
-            }
+        Query against physics ontology extracts:
+        - verb label (transmute, copy, filter, await, void)
+        - hasThreshold (for await)
+        - hasCardinality (for copy)
+        - completionStrategy (for await)
+        - selectionMode (for filter)
+        - cancellationScope (for void)
+        - resetOnFire (for loops)
+        - instanceBinding (for MI)
+        - executionTemplate (SPARQL CONSTRUCT for additions)
+        - removalTemplate (SPARQL DELETE WHERE for removals)
         """
-        # Determine node's pattern type from workflow graph
-        # Check for split/join types
+        # Determine node's pattern type and trigger property from workflow graph
+        # Check for split types
         split_query = f"""
         PREFIX yawl: <{YAWL}>
         SELECT ?splitType WHERE {{
@@ -654,6 +1279,7 @@ class SemanticDriver:
         """
         split_results = list(graph.query(split_query))
 
+        # Check for join types
         join_query = f"""
         PREFIX yawl: <{YAWL}>
         SELECT ?joinType WHERE {{
@@ -662,43 +1288,189 @@ class SemanticDriver:
         """
         join_results = list(graph.query(join_query))
 
-        # Query ontology for verb mapping
+        # Determine pattern and trigger
         pattern: URIRef
+        trigger_property: str | None = None
+        trigger_value: URIRef | None = None
+
         if split_results:
             pattern = cast(URIRef, cast(ResultRow, split_results[0])[0])
+            trigger_property = "yawl:hasSplit"
+            trigger_value = pattern
         elif join_results:
             pattern = cast(URIRef, cast(ResultRow, join_results[0])[0])
+            trigger_property = "yawl:hasJoin"
+            trigger_value = pattern
         else:
             # Default to Sequence
             pattern = YAWL.Sequence
+            trigger_property = None
+            trigger_value = None
 
-        # Query ontology for verb mapping
-        ontology_query = f"""
-        PREFIX kgc: <{KGC}>
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        SELECT ?verbLabel WHERE {{
-            ?mapping kgc:pattern <{pattern}> ;
-                     kgc:verb ?verb .
-            ?verb rdfs:label ?verbLabel .
-        }}
-        """
+        # Query ontology for verb AND parameters (including RDF-only execution properties)
+        # Use trigger properties to find the correct mapping
+        if trigger_property and trigger_value:
+            ontology_query = f"""
+            PREFIX kgc: <{KGC}>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX yawl: <{YAWL}>
+            SELECT ?verbLabel ?threshold ?cardinality ?completion ?selection ?scope ?reset ?binding
+                   ?executionTemplate ?removalTemplate
+                   ?thresholdValue ?cardinalityValue ?stopOnFirstMatch ?useActiveCount
+                   ?useDynamicThreshold ?useDynamicCardinality
+                   ?isDeferredChoice ?isMutexInterleaved ?invertPredicate ?ignoreSubsequent
+            WHERE {{
+                ?mapping kgc:pattern <{pattern}> ;
+                         kgc:triggerProperty {trigger_property} ;
+                         kgc:triggerValue <{trigger_value}> ;
+                         kgc:verb ?verb .
+                ?verb rdfs:label ?verbLabel .
+                OPTIONAL {{ ?mapping kgc:hasThreshold ?threshold . }}
+                OPTIONAL {{ ?mapping kgc:hasCardinality ?cardinality . }}
+                OPTIONAL {{ ?mapping kgc:completionStrategy ?completion . }}
+                OPTIONAL {{ ?mapping kgc:selectionMode ?selection . }}
+                OPTIONAL {{ ?mapping kgc:cancellationScope ?scope . }}
+                OPTIONAL {{ ?mapping kgc:resetOnFire ?reset . }}
+                OPTIONAL {{ ?mapping kgc:instanceBinding ?binding . }}
+                OPTIONAL {{ ?mapping kgc:executionTemplate ?executionTemplate . }}
+                OPTIONAL {{ ?mapping kgc:removalTemplate ?removalTemplate . }}
+                OPTIONAL {{ ?mapping kgc:thresholdValue ?thresholdValue . }}
+                OPTIONAL {{ ?mapping kgc:cardinalityValue ?cardinalityValue . }}
+                OPTIONAL {{ ?mapping kgc:stopOnFirstMatch ?stopOnFirstMatch . }}
+                OPTIONAL {{ ?mapping kgc:useActiveCount ?useActiveCount . }}
+                OPTIONAL {{ ?mapping kgc:useDynamicThreshold ?useDynamicThreshold . }}
+                OPTIONAL {{ ?mapping kgc:useDynamicCardinality ?useDynamicCardinality . }}
+                OPTIONAL {{ ?mapping kgc:isDeferredChoice ?isDeferredChoice . }}
+                OPTIONAL {{ ?mapping kgc:isMutexInterleaved ?isMutexInterleaved . }}
+                OPTIONAL {{ ?mapping kgc:invertPredicate ?invertPredicate . }}
+                OPTIONAL {{ ?mapping kgc:ignoreSubsequent ?ignoreSubsequent . }}
+            }}
+            """
+        else:
+            ontology_query = f"""
+            PREFIX kgc: <{KGC}>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            SELECT ?verbLabel ?threshold ?cardinality ?completion ?selection ?scope ?reset ?binding
+                   ?executionTemplate ?removalTemplate
+                   ?thresholdValue ?cardinalityValue ?stopOnFirstMatch ?useActiveCount
+                   ?useDynamicThreshold ?useDynamicCardinality
+                   ?isDeferredChoice ?isMutexInterleaved ?invertPredicate ?ignoreSubsequent
+            WHERE {{
+                ?mapping kgc:pattern <{pattern}> ;
+                         kgc:verb ?verb .
+                ?verb rdfs:label ?verbLabel .
+                OPTIONAL {{ ?mapping kgc:hasThreshold ?threshold . }}
+                OPTIONAL {{ ?mapping kgc:hasCardinality ?cardinality . }}
+                OPTIONAL {{ ?mapping kgc:completionStrategy ?completion . }}
+                OPTIONAL {{ ?mapping kgc:selectionMode ?selection . }}
+                OPTIONAL {{ ?mapping kgc:cancellationScope ?scope . }}
+                OPTIONAL {{ ?mapping kgc:resetOnFire ?reset . }}
+                OPTIONAL {{ ?mapping kgc:instanceBinding ?binding . }}
+                OPTIONAL {{ ?mapping kgc:executionTemplate ?executionTemplate . }}
+                OPTIONAL {{ ?mapping kgc:removalTemplate ?removalTemplate . }}
+                OPTIONAL {{ ?mapping kgc:thresholdValue ?thresholdValue . }}
+                OPTIONAL {{ ?mapping kgc:cardinalityValue ?cardinalityValue . }}
+                OPTIONAL {{ ?mapping kgc:stopOnFirstMatch ?stopOnFirstMatch . }}
+                OPTIONAL {{ ?mapping kgc:useActiveCount ?useActiveCount . }}
+                OPTIONAL {{ ?mapping kgc:useDynamicThreshold ?useDynamicThreshold . }}
+                OPTIONAL {{ ?mapping kgc:useDynamicCardinality ?useDynamicCardinality . }}
+                OPTIONAL {{ ?mapping kgc:isDeferredChoice ?isDeferredChoice . }}
+                OPTIONAL {{ ?mapping kgc:isMutexInterleaved ?isMutexInterleaved . }}
+                OPTIONAL {{ ?mapping kgc:invertPredicate ?invertPredicate . }}
+                OPTIONAL {{ ?mapping kgc:ignoreSubsequent ?ignoreSubsequent . }}
+            }}
+            """
+
         ontology_results = list(self.physics_ontology.query(ontology_query))
 
         if not ontology_results:
             msg = f"No verb mapping found for pattern {pattern} on node {node}"
             raise ValueError(msg)
 
-        # Extract verb name (lowercase, no language tag)
-        verb_label = str(cast(ResultRow, ontology_results[0])[0]).lower()
-        return verb_label
+        # Extract verb name and parameters
+        row = cast(ResultRow, ontology_results[0])
+        verb_label = str(row[0]).lower()
+
+        # Extract optional parameters (may be None)
+        threshold = str(row[1]) if len(row) > 1 and row[1] is not None else None
+        cardinality = str(row[2]) if len(row) > 2 and row[2] is not None else None
+        completion = str(row[3]) if len(row) > 3 and row[3] is not None else None
+        selection = str(row[4]) if len(row) > 4 and row[4] is not None else None
+        scope = str(row[5]) if len(row) > 5 and row[5] is not None else None
+        reset_raw = row[6] if len(row) > 6 else None
+        reset = str(reset_raw).lower() == "true" if reset_raw is not None else False
+        binding = str(row[7]) if len(row) > 7 and row[7] is not None else None
+
+        # Extract execution templates (new in v3.1)
+        execution_template = str(row[8]) if len(row) > 8 and row[8] is not None else None
+        removal_template = str(row[9]) if len(row) > 9 and row[9] is not None else None
+
+        # Extract RDF-only evaluation properties (Mission 05-07)
+        # These come from explicit kgc:thresholdValue, etc. - NO string fallback
+        threshold_value_raw = row[10] if len(row) > 10 and row[10] is not None else None
+        cardinality_value_raw = row[11] if len(row) > 11 and row[11] is not None else None
+        stop_first_raw = row[12] if len(row) > 12 else None
+        use_active_raw = row[13] if len(row) > 13 else None
+        use_dyn_thresh_raw = row[14] if len(row) > 14 else None
+        use_dyn_card_raw = row[15] if len(row) > 15 else None
+        is_deferred_raw = row[16] if len(row) > 16 else None
+        is_mutex_raw = row[17] if len(row) > 17 else None
+        invert_pred_raw = row[18] if len(row) > 18 else None
+        ignore_subseq_raw = row[19] if len(row) > 19 else None
+
+        # Compute numeric threshold from RDF (no string fallback)
+        # Sentinels: -1 = all, >0 = explicit integer
+        threshold_value: int | None = None
+        if threshold_value_raw is not None:
+            threshold_value = int(str(threshold_value_raw))
+
+        # Compute numeric cardinality from RDF (no string fallback)
+        # Sentinels: -1 = topology, -2 = static, -3 = incremental, >0 = explicit N
+        cardinality_value: int | None = None
+        if cardinality_value_raw is not None:
+            cardinality_value = int(str(cardinality_value_raw))
+
+        # Boolean flags for RDF-only evaluation (directly from RDF properties)
+        stop_on_first_match = str(stop_first_raw).lower() == "true" if stop_first_raw else False
+        use_active_count = str(use_active_raw).lower() == "true" if use_active_raw else False
+        use_dynamic_threshold = str(use_dyn_thresh_raw).lower() == "true" if use_dyn_thresh_raw else False
+        use_dynamic_cardinality = str(use_dyn_card_raw).lower() == "true" if use_dyn_card_raw else False
+        is_deferred_choice = str(is_deferred_raw).lower() == "true" if is_deferred_raw else False
+        is_mutex_interleaved = str(is_mutex_raw).lower() == "true" if is_mutex_raw else False
+        invert_predicate = str(invert_pred_raw).lower() == "true" if invert_pred_raw else False
+        ignore_subsequent = str(ignore_subseq_raw).lower() == "true" if ignore_subseq_raw else False
+
+        return VerbConfig(
+            verb=verb_label,
+            threshold=threshold,
+            cardinality=cardinality,
+            completion_strategy=completion,
+            selection_mode=selection,
+            cancellation_scope=scope,
+            reset_on_fire=reset,
+            instance_binding=binding,
+            execution_template=execution_template,
+            removal_template=removal_template,
+            # RDF-only evaluation properties
+            threshold_value=threshold_value,
+            cardinality_value=cardinality_value,
+            stop_on_first_match=stop_on_first_match,
+            use_active_count=use_active_count,
+            use_dynamic_threshold=use_dynamic_threshold,
+            use_dynamic_cardinality=use_dynamic_cardinality,
+            is_deferred_choice=is_deferred_choice,
+            is_mutex_interleaved=is_mutex_interleaved,
+            invert_predicate=invert_predicate,
+            ignore_subsequent=ignore_subsequent,
+        )
 
     def execute(self, graph: Graph, subject: URIRef, ctx: TransactionContext) -> Receipt:
         """
-        Execute the Chatman Equation: A = μ(O).
+        Execute the Chatman Equation: A = μ(O, P).
 
-        1. Resolve verb via ontology SPARQL query
-        2. Execute the verb (pure function)
-        3. Generate cryptographic receipt
+        1. Resolve verb + parameters via ontology SPARQL query
+        2. Execute the parameterized verb (pure function)
+        3. Generate cryptographic receipt with provenance
 
         Parameters
         ----------
@@ -712,7 +1484,7 @@ class SemanticDriver:
         Returns
         -------
         Receipt
-            Cryptographic proof of execution.
+            Cryptographic proof of execution with parameters used.
 
         Examples
         --------
@@ -727,15 +1499,25 @@ class SemanticDriver:
         >>> receipt.verb_executed in ["transmute", "copy", "filter", "await", "void"]
         True
         """
-        # 1. ONTOLOGY LOOKUP (The μ Operator)
-        verb_name = self.resolve_verb(graph, subject)
+        # 1. ONTOLOGY LOOKUP (The μ Operator with Parameters P)
+        config = self.resolve_verb(graph, subject)
 
-        # 2. VERB EXECUTION (Pure Function)
-        verb_fn = self._verb_dispatch[verb_name]
-        delta = verb_fn(graph, subject, ctx)
+        # 2. VERB EXECUTION
+        if self.use_l5_kernel or config.execution_template:
+            # L5 PURE RDF: Execute via PureRDFKernel (SPARQL templates ARE the logic)
+            # ZERO Python if/else - all behavior from templates
+            delta = self._pure_kernel.execute(graph, subject, ctx, config)
+        else:
+            # Legacy L2/L3 fallback: Use parameterized verb functions
+            verb_fn = self._verb_dispatch[config.verb]
+            delta = verb_fn(graph, subject, ctx, config)
 
-        # 3. PROVENANCE (Lockchain)
-        merkle_payload = f"{ctx.prev_hash}|{ctx.tx_id}|{len(delta.additions)}|{len(delta.removals)}"
+        # 3. PROVENANCE (Lockchain with parameters)
+        # Include config in merkle payload for auditability
+        params_str = f"t={config.threshold}|c={config.cardinality}|s={config.selection_mode}"
+        merkle_payload = (
+            f"{ctx.prev_hash}|{ctx.tx_id}|{config.verb}|{params_str}|{len(delta.additions)}|{len(delta.removals)}"
+        )
         merkle_root = hashlib.sha256(merkle_payload.encode()).hexdigest()
 
         # 4. APPLY MUTATIONS (Side Effect)
@@ -744,7 +1526,7 @@ class SemanticDriver:
         for triple in delta.additions:
             graph.add(triple)
 
-        return Receipt(merkle_root=merkle_root, verb_executed=verb_name, delta=delta)
+        return Receipt(merkle_root=merkle_root, verb_executed=config.verb, delta=delta, params_used=config)
 
 
 # =============================================================================

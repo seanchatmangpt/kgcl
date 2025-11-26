@@ -7,33 +7,34 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 # =============================================================================
-# KGC PHYSICS ONTOLOGY v3.0
+# KGC PHYSICS ONTOLOGY v3.1 - PARAMETERIZED VERBS
 # =============================================================================
 #
-# THE CHATMAN EQUATION: A = μ(O)
-# ------------------------------
+# THE CHATMAN EQUATION: A = μ(O, P)
+# ---------------------------------
 # - Observation (O): RDF graph representing workflow topology
 # - Operator (μ): This ontology mapping patterns to verbs
+# - Parameters (P): Force multipliers extracted from mappings
 # - Action (A): Execution result (only if topology conforms)
 #
-# THE 5 ELEMENTAL VERBS
-# ---------------------
+# THE 5 ELEMENTAL VERBS (Parameterized)
+# -------------------------------------
 # These are the ONLY operations the engine can perform.
-# New patterns = new mappings to existing verbs, NOT new engine code.
+# Parameters tell the verb HOW MUCH force to apply.
 #
 # 1. TRANSMUTE (Arrow of Time): A → B
-# 2. COPY (Divergence): A → {B, C}
-# 3. FILTER (Selection): A → {Subset}
-# 4. AWAIT (Convergence): {A, B} → C
-# 5. VOID (Termination): A → ∅
+# 2. COPY (Divergence): A → {B₁, B₂, ..., Bₙ} where n = cardinality
+# 3. FILTER (Selection): A → {Subset} where subset = predicate matches
+# 4. AWAIT (Convergence): {A, B, ...} → C where threshold = quorum
+# 5. VOID (Termination): A → ∅ where scope = cancellation region
 #
 # =============================================================================
 
 <http://bitflow.ai/ontology/kgc/v3#>
     a owl:Ontology ;
     rdfs:label "KGC Physics Ontology"@en ;
-    rdfs:comment "The Laws of Physics for Knowledge Graph Calculus. Defines 5 elemental verbs and their mappings to YAWL workflow patterns."@en ;
-    owl:versionInfo "3.0.0" .
+    rdfs:comment "Laws of Physics for Knowledge Graph Calculus. Parameterized verbs for all 43 YAWL patterns."@en ;
+    owl:versionInfo "3.1.0" .
 
 # =============================================================================
 # SECTION 1: THE 5 ELEMENTAL VERBS
@@ -41,333 +42,935 @@
 
 kgc:Verb a rdfs:Class ;
     rdfs:label "Verb"@en ;
-    rdfs:comment "An elemental operation that can be applied to graph nodes. The engine implements exactly 5 verbs."@en .
+    rdfs:comment "An elemental operation. The engine implements exactly 5 verbs."@en .
 
-# -----------------------------------------------------------------------------
-# VERB 1: TRANSMUTE (Arrow of Time)
-# -----------------------------------------------------------------------------
-# Semantics: A → B
-# Logic: Find yawl:nextElementRef and move the token to successor
-# YAWL Mappings: Sequence, Data Mappings, Task Completion
-
+# VERB 1: TRANSMUTE
 kgc:Transmute a kgc:Verb ;
     rdfs:label "Transmute"@en ;
-    rdfs:comment "Arrow of Time. Moves token from current node to next node via yawl:nextElementRef. Executes yawl:startingMappings for data transformation."@en ;
-    kgc:verbId 1 ;
-    kgc:sparqlPattern """
-        SELECT ?next WHERE {
-            ?current yawl:flowsInto ?flow .
-            ?flow yawl:nextElementRef ?next .
-        }
-    """^^xsd:string .
+    rdfs:comment "Arrow of Time. Moves token from A to B."@en ;
+    kgc:verbId 1 .
 
-# -----------------------------------------------------------------------------
-# VERB 2: COPY (Divergence)
-# -----------------------------------------------------------------------------
-# Semantics: A → {B, C}
-# Logic: Clone token state to ALL next elements
-# YAWL Mappings: AND-split, Service calls (webhooks)
-
+# VERB 2: COPY
 kgc:Copy a kgc:Verb ;
     rdfs:label "Copy"@en ;
-    rdfs:comment "Divergence. Clones token to multiple successors simultaneously. Used for AND-split and external service dispatch."@en ;
-    kgc:verbId 2 ;
-    kgc:sparqlPattern """
-        SELECT ?next WHERE {
-            ?current yawl:flowsInto ?flow .
-            ?flow yawl:nextElementRef ?next .
-        }
-    """^^xsd:string .
+    rdfs:comment "Divergence. Clones token to N successors."@en ;
+    kgc:verbId 2 .
 
-# -----------------------------------------------------------------------------
-# VERB 3: FILTER (Selection)
-# -----------------------------------------------------------------------------
-# Semantics: A → {Subset}
-# Logic: Evaluate yawl:hasPredicate or yawl:hasResourcing to select paths
-# YAWL Mappings: XOR-split, OR-split, Resource Authorization
-
+# VERB 3: FILTER
 kgc:Filter a kgc:Verb ;
     rdfs:label "Filter"@en ;
-    rdfs:comment "Selection. Evaluates predicates to select which paths receive tokens. Used for XOR-split (exactly one), OR-split (one or more), and resource authorization."@en ;
-    kgc:verbId 3 ;
-    kgc:sparqlPattern """
-        SELECT ?next ?predicate ?ordering WHERE {
-            ?current yawl:flowsInto ?flow .
-            ?flow yawl:nextElementRef ?next .
-            OPTIONAL { ?flow yawl:hasPredicate ?pred . ?pred yawl:query ?predicate ; yawl:ordering ?ordering . }
-        }
-        ORDER BY ?ordering
-    """^^xsd:string .
+    rdfs:comment "Selection. Routes token to paths matching predicates."@en ;
+    kgc:verbId 3 .
 
-# -----------------------------------------------------------------------------
-# VERB 4: AWAIT (Convergence)
-# -----------------------------------------------------------------------------
-# Semantics: {A, B} → C
-# Logic: Check if all/some incoming flows have completion history
-# YAWL Mappings: AND-join, OR-join, Discriminator
-
+# VERB 4: AWAIT
 kgc:Await a kgc:Verb ;
     rdfs:label "Await"@en ;
-    rdfs:comment "Convergence. Waits for incoming flows to complete before proceeding. AND-join waits for all, OR-join waits for active, Discriminator waits for quorum."@en ;
-    kgc:verbId 4 ;
-    kgc:sparqlPattern """
-        SELECT ?source ?completed WHERE {
-            ?source yawl:flowsInto ?flow .
-            ?flow yawl:nextElementRef ?current .
-            OPTIONAL { ?source kgc:completedAt ?completed . }
-        }
-    """^^xsd:string .
+    rdfs:comment "Convergence. Waits for threshold T tokens before firing."@en ;
+    kgc:verbId 4 .
 
-# -----------------------------------------------------------------------------
-# VERB 5: VOID (Termination)
-# -----------------------------------------------------------------------------
-# Semantics: A → ∅
-# Logic: Remove token without producing a successor
-# YAWL Mappings: Timeout expiry, Cancel task, Exception handling
-
+# VERB 5: VOID
 kgc:Void a kgc:Verb ;
     rdfs:label "Void"@en ;
-    rdfs:comment "Termination. Destroys token without creating successor. Used for timeouts, cancellation, and exception handling."@en ;
-    kgc:verbId 5 ;
-    kgc:sparqlPattern """
-        SELECT ?reason WHERE {
-            { ?current yawl:hasTimer ?timer . ?timer yawl:expiry ?expiry . FILTER (NOW() > ?expiry) . BIND("timeout" AS ?reason) }
-            UNION
-            { ?current kgc:cancelled true . BIND("cancelled" AS ?reason) }
-            UNION
-            { ?current kgc:failed true . BIND("exception" AS ?reason) }
-        }
-    """^^xsd:string .
+    rdfs:comment "Termination. Destroys tokens in scope S."@en ;
+    kgc:verbId 5 .
 
 # =============================================================================
-# SECTION 2: PATTERN → VERB MAPPINGS
+# SECTION 2: PARAMETER PROPERTIES (Force Multipliers)
 # =============================================================================
-#
-# The Semantic Driver queries this section to determine which verb to execute.
-# Query: SELECT ?verb WHERE { ?mapping kgc:pattern ?pattern ; kgc:verb ?verb . }
-#
-# THIS IS THE ONLY PLACE WHERE PATTERNS ARE MAPPED TO BEHAVIOR.
-# The Python engine contains NO pattern-specific code.
-#
+
+kgc:hasThreshold a rdf:Property ;
+    rdfs:label "threshold"@en ;
+    rdfs:domain kgc:PatternMapping ;
+    rdfs:range xsd:string ;
+    rdfs:comment "For AWAIT: How many tokens trigger firing? 'all', '1', 'N', 'dynamic'"@en .
+
+kgc:hasCardinality a rdf:Property ;
+    rdfs:label "cardinality"@en ;
+    rdfs:domain kgc:PatternMapping ;
+    rdfs:range xsd:string ;
+    rdfs:comment "For COPY: How many clones? 'topology', 'dynamic', or integer."@en .
+
+kgc:completionStrategy a rdf:Property ;
+    rdfs:label "completion strategy"@en ;
+    rdfs:domain kgc:PatternMapping ;
+    rdfs:range xsd:string ;
+    rdfs:comment "For AWAIT: 'waitAll', 'waitActive', 'waitFirst', 'waitQuorum'"@en .
+
+kgc:selectionMode a rdf:Property ;
+    rdfs:label "selection mode"@en ;
+    rdfs:domain kgc:PatternMapping ;
+    rdfs:range xsd:string ;
+    rdfs:comment "For FILTER: 'exactlyOne' (XOR), 'oneOrMore' (OR), 'all' (deferred)."@en .
+
+kgc:cancellationScope a rdf:Property ;
+    rdfs:label "cancellation scope"@en ;
+    rdfs:domain kgc:PatternMapping ;
+    rdfs:range xsd:string ;
+    rdfs:comment "For VOID: 'self', 'region', 'case', 'subprocess'"@en .
+
+kgc:resetOnFire a rdf:Property ;
+    rdfs:label "reset on fire"@en ;
+    rdfs:domain kgc:PatternMapping ;
+    rdfs:range xsd:boolean ;
+    rdfs:comment "For AWAIT: Reset join state after firing (for loops)."@en .
+
+kgc:instanceBinding a rdf:Property ;
+    rdfs:label "instance binding"@en ;
+    rdfs:domain kgc:PatternMapping ;
+    rdfs:range xsd:string ;
+    rdfs:comment "For MI patterns: 'none', 'index', 'data'"@en .
+
+# =============================================================================
+# MISSION 05-07: RDF-ONLY EVALUATION PROPERTIES
+# Logic is Data - These replace hardcoded Python conditionals
+# =============================================================================
+
+kgc:thresholdValue a rdf:Property ;
+    rdfs:label "threshold value"@en ;
+    rdfs:domain kgc:PatternMapping ;
+    rdfs:range xsd:integer ;
+    rdfs:comment "Numeric threshold for AWAIT. If -1: use total incoming flows (ALL). Engine does: if count >= threshold: fire()"@en .
+
+kgc:cardinalityValue a rdf:Property ;
+    rdfs:label "cardinality value"@en ;
+    rdfs:domain kgc:PatternMapping ;
+    rdfs:range xsd:integer ;
+    rdfs:comment "Numeric cardinality for COPY. If -1: clone to all topology successors. Engine does: for i in range(n): emit()"@en .
+
+kgc:stopOnFirstMatch a rdf:Property ;
+    rdfs:label "stop on first match"@en ;
+    rdfs:domain kgc:PatternMapping ;
+    rdfs:range xsd:boolean ;
+    rdfs:comment "For FILTER. If true: XOR semantics (stop after first match). If false: OR semantics (all matches)."@en .
+
+kgc:useActiveCount a rdf:Property ;
+    rdfs:label "use active count"@en ;
+    rdfs:domain kgc:PatternMapping ;
+    rdfs:range xsd:boolean ;
+    rdfs:comment "For AWAIT (OR-join). If true: threshold = active (non-voided) branches instead of total."@en .
+
+kgc:useDynamicThreshold a rdf:Property ;
+    rdfs:label "use dynamic threshold"@en ;
+    rdfs:domain kgc:PatternMapping ;
+    rdfs:range xsd:boolean ;
+    rdfs:comment "For AWAIT. If true: threshold comes from ctx.data['join_threshold']."@en .
+
+kgc:useDynamicCardinality a rdf:Property ;
+    rdfs:label "use dynamic cardinality"@en ;
+    rdfs:domain kgc:PatternMapping ;
+    rdfs:range xsd:boolean ;
+    rdfs:comment "For COPY (MI). If true: cardinality = len(ctx.data['mi_items'])."@en .
+
+kgc:executionTemplate a rdf:Property ;
+    rdfs:label "execution template"@en ;
+    rdfs:domain kgc:PatternMapping ;
+    rdfs:range xsd:string ;
+    rdfs:comment "SPARQL CONSTRUCT template for RDF-only verb execution. Replaces Python if/else."@en .
+
+kgc:removalTemplate a rdf:Property ;
+    rdfs:label "removal template"@en ;
+    rdfs:domain kgc:PatternMapping ;
+    rdfs:range xsd:string ;
+    rdfs:comment "SPARQL DELETE WHERE template for token removals."@en .
+
+# =============================================================================
+# SECTION 3: PATTERN MAPPING CLASS
+# =============================================================================
 
 kgc:PatternMapping a rdfs:Class ;
     rdfs:label "Pattern Mapping"@en ;
-    rdfs:comment "Maps a YAWL pattern or topology to a KGC verb. The Semantic Driver resolves these mappings at runtime."@en .
+    rdfs:comment "Maps YAWL pattern to KGC verb with parameters."@en .
 
 kgc:pattern a rdf:Property ;
     rdfs:label "pattern"@en ;
     rdfs:domain kgc:PatternMapping ;
-    rdfs:range rdfs:Resource ;
-    rdfs:comment "The YAWL pattern or control type being mapped."@en .
+    rdfs:range rdfs:Resource .
 
 kgc:verb a rdf:Property ;
     rdfs:label "verb"@en ;
     rdfs:domain kgc:PatternMapping ;
-    rdfs:range kgc:Verb ;
-    rdfs:comment "The KGC verb that implements this pattern."@en .
+    rdfs:range kgc:Verb .
 
 kgc:condition a rdf:Property ;
     rdfs:label "condition"@en ;
     rdfs:domain kgc:PatternMapping ;
     rdfs:range xsd:string ;
-    rdfs:comment "Optional SPARQL ASK condition for contextual mapping."@en .
+    rdfs:comment "SPARQL ASK condition for contextual mapping."@en .
 
-# -----------------------------------------------------------------------------
-# BASIC CONTROL FLOW MAPPINGS (Patterns 1-5)
-# -----------------------------------------------------------------------------
+kgc:triggerProperty a rdf:Property ;
+    rdfs:label "trigger property"@en ;
+    rdfs:domain kgc:PatternMapping ;
+    rdfs:range rdf:Property ;
+    rdfs:comment "Property on node that triggers this mapping."@en .
 
-kgc:SequenceMapping a kgc:PatternMapping ;
-    rdfs:label "Sequence → Transmute"@en ;
+kgc:triggerValue a rdf:Property ;
+    rdfs:label "trigger value"@en ;
+    rdfs:domain kgc:PatternMapping ;
+    rdfs:range rdfs:Resource ;
+    rdfs:comment "Value that triggers this mapping."@en .
+
+# =============================================================================
+# SECTION 4: BASIC CONTROL FLOW PATTERNS (WCP 1-5)
+# =============================================================================
+
+# WCP-1: Sequence
+kgc:WCP1_Sequence a kgc:PatternMapping ;
+    rdfs:label "WCP-1: Sequence → Transmute"@en ;
     kgc:pattern yawl:Sequence ;
     kgc:verb kgc:Transmute ;
-    rdfs:comment "Pattern 1: Sequence. A single token moves from A to B."@en .
+    kgc:executionTemplate """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        CONSTRUCT {
+            ?next kgc:hasToken true .
+            ?subject kgc:completedAt ?txId .
+        }
+        WHERE {
+            ?subject yawl:flowsInto ?flow .
+            ?flow yawl:nextElementRef ?next .
+        }
+    """ ;
+    kgc:removalTemplate """
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        DELETE WHERE { ?subject kgc:hasToken true }
+    """ ;
+    rdfs:comment "A task completes and enables the next task."@en .
 
-kgc:ParallelSplitMapping a kgc:PatternMapping ;
-    rdfs:label "AND-Split → Copy"@en ;
+# WCP-2: Parallel Split (AND-split)
+kgc:WCP2_ParallelSplit a kgc:PatternMapping ;
+    rdfs:label "WCP-2: Parallel Split → Copy"@en ;
     kgc:pattern yawl:ControlTypeAnd ;
+    kgc:triggerProperty yawl:hasSplit ;
+    kgc:triggerValue yawl:ControlTypeAnd ;
     kgc:verb kgc:Copy ;
-    kgc:condition "ASK { ?task yawl:hasSplit yawl:ControlTypeAnd }" ;
-    rdfs:comment "Pattern 2: Parallel Split (AND-split). Token is copied to all branches."@en .
+    kgc:hasCardinality "topology" ;
+    kgc:executionTemplate """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        CONSTRUCT {
+            ?next kgc:hasToken true .
+            ?subject kgc:completedAt ?txId .
+        }
+        WHERE {
+            ?subject yawl:flowsInto ?flow .
+            ?flow yawl:nextElementRef ?next .
+        }
+    """ ;
+    kgc:removalTemplate """
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        DELETE WHERE { ?subject kgc:hasToken true }
+    """ ;
+    rdfs:comment "Divergence into multiple parallel branches."@en .
 
-kgc:SynchronizationMapping a kgc:PatternMapping ;
-    rdfs:label "AND-Join → Await"@en ;
+# WCP-3: Synchronization (AND-join)
+# NOTE: AWAIT patterns require Python threshold counting - no L5 template
+kgc:WCP3_Synchronization a kgc:PatternMapping ;
+    rdfs:label "WCP-3: Synchronization → Await(all)"@en ;
     kgc:pattern yawl:ControlTypeAnd ;
+    kgc:triggerProperty yawl:hasJoin ;
+    kgc:triggerValue yawl:ControlTypeAnd ;
     kgc:verb kgc:Await ;
-    kgc:condition "ASK { ?task yawl:hasJoin yawl:ControlTypeAnd }" ;
-    rdfs:comment "Pattern 3: Synchronization (AND-join). Wait for ALL incoming flows."@en .
+    kgc:hasThreshold "all" ;
+    kgc:thresholdValue -1 ;
+    kgc:completionStrategy "waitAll" ;
+    rdfs:comment "Convergence requiring ALL branches to complete."@en .
 
-kgc:ExclusiveChoiceMapping a kgc:PatternMapping ;
-    rdfs:label "XOR-Split → Filter"@en ;
+# WCP-4: Exclusive Choice (XOR-split)
+# NOTE: FILTER patterns require Python predicate evaluation - no L5 template
+kgc:WCP4_ExclusiveChoice a kgc:PatternMapping ;
+    rdfs:label "WCP-4: Exclusive Choice → Filter(exactlyOne)"@en ;
     kgc:pattern yawl:ControlTypeXor ;
+    kgc:triggerProperty yawl:hasSplit ;
+    kgc:triggerValue yawl:ControlTypeXor ;
     kgc:verb kgc:Filter ;
-    kgc:condition "ASK { ?task yawl:hasSplit yawl:ControlTypeXor }" ;
-    rdfs:comment "Pattern 4: Exclusive Choice (XOR-split). Exactly ONE branch receives token."@en .
+    kgc:selectionMode "exactlyOne" ;
+    kgc:stopOnFirstMatch true ;
+    rdfs:comment "Exactly ONE branch selected based on predicate."@en .
 
-kgc:SimpleMergeMapping a kgc:PatternMapping ;
-    rdfs:label "XOR-Join → Transmute"@en ;
+# WCP-5: Simple Merge (XOR-join)
+kgc:WCP5_SimpleMerge a kgc:PatternMapping ;
+    rdfs:label "WCP-5: Simple Merge → Transmute"@en ;
     kgc:pattern yawl:ControlTypeXor ;
+    kgc:triggerProperty yawl:hasJoin ;
+    kgc:triggerValue yawl:ControlTypeXor ;
     kgc:verb kgc:Transmute ;
-    kgc:condition "ASK { ?task yawl:hasJoin yawl:ControlTypeXor }" ;
-    rdfs:comment "Pattern 5: Simple Merge (XOR-join). First arrival continues, no wait."@en .
+    kgc:executionTemplate """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        CONSTRUCT {
+            ?next kgc:hasToken true .
+            ?subject kgc:completedAt ?txId .
+        }
+        WHERE {
+            ?subject yawl:flowsInto ?flow .
+            ?flow yawl:nextElementRef ?next .
+        }
+    """ ;
+    kgc:removalTemplate """
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        DELETE WHERE { ?subject kgc:hasToken true }
+    """ ;
+    rdfs:comment "First arrival continues, no synchronization."@en .
 
-# -----------------------------------------------------------------------------
-# ADVANCED BRANCHING MAPPINGS (Patterns 6-9)
-# -----------------------------------------------------------------------------
+# =============================================================================
+# SECTION 5: ADVANCED BRANCHING PATTERNS (WCP 6-9)
+# =============================================================================
 
-kgc:MultiChoiceMapping a kgc:PatternMapping ;
-    rdfs:label "OR-Split → Filter"@en ;
+# WCP-6: Multi-Choice (OR-split)
+# NOTE: FILTER patterns require Python predicate evaluation - no L5 template
+# Template would require external ?selectedNext binding after predicate eval
+kgc:WCP6_MultiChoice a kgc:PatternMapping ;
+    rdfs:label "WCP-6: Multi-Choice → Filter(oneOrMore)"@en ;
     kgc:pattern yawl:ControlTypeOr ;
+    kgc:triggerProperty yawl:hasSplit ;
+    kgc:triggerValue yawl:ControlTypeOr ;
     kgc:verb kgc:Filter ;
-    kgc:condition "ASK { ?task yawl:hasSplit yawl:ControlTypeOr }" ;
-    rdfs:comment "Pattern 6: Multi-Choice (OR-split). One or more branches receive tokens."@en .
+    kgc:selectionMode "oneOrMore" ;
+    kgc:stopOnFirstMatch false ;
+    rdfs:comment "One or more branches selected based on predicates."@en .
 
-kgc:SynchronizingMergeMapping a kgc:PatternMapping ;
-    rdfs:label "OR-Join → Await"@en ;
+# WCP-7: Structured Synchronizing Merge (OR-join)
+# NOTE: AWAIT patterns require Python threshold counting - no L5 template
+kgc:WCP7_StructuredSyncMerge a kgc:PatternMapping ;
+    rdfs:label "WCP-7: Sync Merge → Await(waitActive)"@en ;
     kgc:pattern yawl:ControlTypeOr ;
+    kgc:triggerProperty yawl:hasJoin ;
+    kgc:triggerValue yawl:ControlTypeOr ;
     kgc:verb kgc:Await ;
-    kgc:condition "ASK { ?task yawl:hasJoin yawl:ControlTypeOr }" ;
-    rdfs:comment "Pattern 7: Synchronizing Merge (OR-join). Wait for ACTIVE branches only."@en .
+    kgc:hasThreshold "active" ;
+    kgc:useActiveCount true ;
+    kgc:completionStrategy "waitActive" ;
+    rdfs:comment "Wait for all ACTIVE branches (not voided)."@en .
 
-kgc:MultipleMergeMapping a kgc:PatternMapping ;
-    rdfs:label "Multiple Merge → Transmute"@en ;
+# WCP-8: Multi-Merge
+kgc:WCP8_MultiMerge a kgc:PatternMapping ;
+    rdfs:label "WCP-8: Multi-Merge → Transmute"@en ;
     kgc:pattern yawl:MultipleMerge ;
     kgc:verb kgc:Transmute ;
-    rdfs:comment "Pattern 8: Multiple Merge. Each arrival triggers execution (no sync)."@en .
+    kgc:executionTemplate """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        CONSTRUCT {
+            ?next kgc:hasToken true .
+            ?subject kgc:completedAt ?txId .
+        }
+        WHERE {
+            ?subject yawl:flowsInto ?flow .
+            ?flow yawl:nextElementRef ?next .
+        }
+    """ ;
+    kgc:removalTemplate """
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        DELETE WHERE { ?subject kgc:hasToken true }
+    """ ;
+    rdfs:comment "Each arrival triggers successor (no sync)."@en .
 
-kgc:DiscriminatorMapping a kgc:PatternMapping ;
-    rdfs:label "Discriminator → Await"@en ;
+# WCP-9: Structured Discriminator
+# NOTE: AWAIT patterns require Python threshold counting - no L5 template
+kgc:WCP9_Discriminator a kgc:PatternMapping ;
+    rdfs:label "WCP-9: Discriminator → Await(1)"@en ;
     kgc:pattern yawl:Discriminator ;
     kgc:verb kgc:Await ;
-    rdfs:comment "Pattern 9: Discriminator. Wait for N-of-M (quorum) completions."@en .
+    kgc:hasThreshold "1" ;
+    kgc:thresholdValue 1 ;
+    kgc:completionStrategy "waitFirst" ;
+    kgc:resetOnFire true ;
+    rdfs:comment "Fire on first arrival, ignore subsequent."@en .
 
-# -----------------------------------------------------------------------------
-# DATA PERSPECTIVE MAPPINGS
-# -----------------------------------------------------------------------------
+# =============================================================================
+# SECTION 6: STRUCTURAL PATTERNS (WCP 10-11)
+# =============================================================================
 
-kgc:DataMappingTransform a kgc:PatternMapping ;
+# WCP-10: Arbitrary Cycles
+# NOTE: FILTER patterns require Python predicate evaluation - no L5 template
+kgc:WCP10_ArbitraryCycles a kgc:PatternMapping ;
+    rdfs:label "WCP-10: Arbitrary Cycles → Filter"@en ;
+    kgc:pattern yawl:ArbitraryCycle ;
+    kgc:triggerProperty yawl:hasSplit ;
+    kgc:triggerValue yawl:ArbitraryCycle ;
+    kgc:verb kgc:Filter ;
+    kgc:selectionMode "oneOrMore" ;
+    rdfs:comment "Loops via conditional back-edges."@en .
+
+# WCP-11: Implicit Termination
+kgc:WCP11_ImplicitTermination a kgc:PatternMapping ;
+    rdfs:label "WCP-11: Implicit Termination → Void(case)"@en ;
+    kgc:pattern yawl:ImplicitTermination ;
+    kgc:verb kgc:Void ;
+    kgc:cancellationScope "case" ;
+    kgc:executionTemplate """
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        CONSTRUCT {
+            ?subject kgc:voidedAt ?txId .
+            ?subject kgc:terminationReason "implicit" .
+        }
+        WHERE {
+            ?subject kgc:hasToken true .
+        }
+    """ ;
+    kgc:removalTemplate """
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        DELETE WHERE { ?subject kgc:hasToken true }
+    """ ;
+    rdfs:comment "Case terminates when no tokens remain."@en .
+
+# =============================================================================
+# SECTION 7: MULTIPLE INSTANCE PATTERNS (WCP 12-15, 34-36)
+# =============================================================================
+
+# WCP-12: MI without Synchronization
+# NOTE: COPY patterns with dynamic cardinality require Python to determine N from ctx.data - no L5 template
+kgc:WCP12_MINoSync a kgc:PatternMapping ;
+    rdfs:label "WCP-12: MI No Sync → Copy(dynamic)"@en ;
+    kgc:pattern yawl:MultiInstanceTask ;
+    kgc:condition "ASK { ?task yawl:miDataOutput yawl:NoSync }" ;
+    kgc:verb kgc:Copy ;
+    kgc:hasCardinality "dynamic" ;
+    kgc:useDynamicCardinality true ;
+    kgc:instanceBinding "data" ;
+    rdfs:comment "Create N instances, no sync on completion."@en .
+
+# WCP-13: MI with Design-Time Knowledge
+# NOTE: COPY patterns with static cardinality require Python to read yawl:minimum from graph - no L5 template
+kgc:WCP13_MIDesignTime a kgc:PatternMapping ;
+    rdfs:label "WCP-13: MI Design-Time → Copy(N)+Await(all)"@en ;
+    kgc:pattern yawl:MultiInstanceTask ;
+    kgc:condition "ASK { ?task yawl:minimum ?min . ?task yawl:maximum ?max . FILTER(?min = ?max) }" ;
+    kgc:verb kgc:Copy ;
+    kgc:hasCardinality "static" ;
+    kgc:cardinalityValue -2 ;
+    kgc:instanceBinding "index" ;
+    rdfs:comment "N known at design time, sync all."@en .
+
+# WCP-14: MI with Runtime Knowledge
+# NOTE: COPY patterns with dynamic cardinality require Python to determine N from ctx.data - no L5 template
+kgc:WCP14_MIRuntime a kgc:PatternMapping ;
+    rdfs:label "WCP-14: MI Runtime → Copy(dynamic)+Await(all)"@en ;
+    kgc:pattern yawl:MultiInstanceTask ;
+    kgc:condition "ASK { ?task yawl:miDataInput ?input }" ;
+    kgc:verb kgc:Copy ;
+    kgc:hasCardinality "dynamic" ;
+    kgc:useDynamicCardinality true ;
+    kgc:instanceBinding "data" ;
+    rdfs:comment "N determined at runtime from data."@en .
+
+# WCP-15: MI without Prior Runtime Knowledge
+# NOTE: COPY patterns with incremental cardinality require Python to count existing instances - no L5 template
+kgc:WCP15_MINoPrior a kgc:PatternMapping ;
+    rdfs:label "WCP-15: MI No Prior → Copy(incremental)"@en ;
+    kgc:pattern yawl:MultiInstanceTask ;
+    kgc:condition "ASK { ?task yawl:miCreationMode yawl:Dynamic }" ;
+    kgc:verb kgc:Copy ;
+    kgc:hasCardinality "incremental" ;
+    kgc:cardinalityValue -3 ;
+    kgc:instanceBinding "data" ;
+    rdfs:comment "Instances created incrementally during execution."@en .
+
+# WCP-34: Static Partial Join for MI
+# NOTE: AWAIT patterns with threshold require Python to count completions - no L5 template
+kgc:WCP34_MIStaticPartialJoin a kgc:PatternMapping ;
+    rdfs:label "WCP-34: MI Partial Join → Await(N)"@en ;
+    kgc:pattern yawl:MultiInstanceTask ;
+    kgc:condition "ASK { ?task yawl:miThreshold ?t . FILTER(?t < ?max) }" ;
+    kgc:verb kgc:Await ;
+    kgc:hasThreshold "static" ;
+    kgc:completionStrategy "waitQuorum" ;
+    rdfs:comment "Sync when N of M instances complete."@en .
+
+# WCP-35: Cancelling Partial Join for MI
+# NOTE: AWAIT patterns with threshold require Python to count completions - no L5 template
+kgc:WCP35_MICancellingJoin a kgc:PatternMapping ;
+    rdfs:label "WCP-35: MI Cancelling Join → Await(N)+Void(region)"@en ;
+    kgc:pattern yawl:MultiInstanceTask ;
+    kgc:condition "ASK { ?task yawl:miThreshold ?t ; yawl:miCancelling true }" ;
+    kgc:verb kgc:Await ;
+    kgc:hasThreshold "static" ;
+    kgc:completionStrategy "waitQuorum" ;
+    kgc:cancellationScope "region" ;
+    rdfs:comment "When N complete, cancel remaining instances."@en .
+
+# WCP-36: Dynamic Partial Join for MI
+# NOTE: AWAIT patterns with dynamic threshold require Python to count and compare - no L5 template
+kgc:WCP36_MIDynamicJoin a kgc:PatternMapping ;
+    rdfs:label "WCP-36: MI Dynamic Join → Await(dynamic)"@en ;
+    kgc:pattern yawl:MultiInstanceTask ;
+    kgc:condition "ASK { ?task yawl:miThreshold ?t . FILTER(isLiteral(?t) = false) }" ;
+    kgc:verb kgc:Await ;
+    kgc:hasThreshold "dynamic" ;
+    kgc:useDynamicThreshold true ;
+    kgc:completionStrategy "waitQuorum" ;
+    rdfs:comment "Threshold computed at runtime."@en .
+
+# =============================================================================
+# SECTION 8: STATE-BASED PATTERNS (WCP 16-18)
+# =============================================================================
+
+# WCP-16: Deferred Choice
+# NOTE: FILTER patterns require Python predicate evaluation - no L5 template
+kgc:WCP16_DeferredChoice a kgc:PatternMapping ;
+    rdfs:label "WCP-16: Deferred Choice → Filter(deferred)"@en ;
+    kgc:pattern yawl:DeferredChoice ;
+    kgc:triggerProperty yawl:hasSplit ;
+    kgc:triggerValue yawl:DeferredChoice ;
+    kgc:verb kgc:Filter ;
+    kgc:selectionMode "deferred" ;
+    kgc:isDeferredChoice true ;
+    rdfs:comment "Environment/resource determines branch at runtime."@en .
+
+# WCP-17: Interleaved Parallel Routing
+# NOTE: FILTER patterns require Python predicate evaluation - no L5 template
+kgc:WCP17_InterleavedParallel a kgc:PatternMapping ;
+    rdfs:label "WCP-17: Interleaved Parallel → Filter(mutex)"@en ;
+    kgc:pattern yawl:InterleavedParallel ;
+    kgc:triggerProperty yawl:hasSplit ;
+    kgc:triggerValue yawl:InterleavedParallel ;
+    kgc:verb kgc:Filter ;
+    kgc:selectionMode "mutex" ;
+    kgc:isMutexInterleaved true ;
+    kgc:stopOnFirstMatch true ;
+    rdfs:comment "Tasks execute in any order, one at a time."@en .
+
+# WCP-18: Milestone
+# NOTE: AWAIT patterns require Python milestone checking - no L5 template
+kgc:WCP18_Milestone a kgc:PatternMapping ;
+    rdfs:label "WCP-18: Milestone → Await(milestone)"@en ;
+    kgc:pattern yawl:Milestone ;
+    kgc:triggerProperty yawl:hasJoin ;
+    kgc:triggerValue yawl:Milestone ;
+    kgc:verb kgc:Await ;
+    kgc:hasThreshold "milestone" ;
+    kgc:completionStrategy "waitMilestone" ;
+    rdfs:comment "Task enabled only while milestone is active."@en .
+
+# =============================================================================
+# SECTION 9: CANCELLATION PATTERNS (WCP 19-27)
+# =============================================================================
+
+# WCP-19: Cancel Task
+kgc:WCP19_CancelTask a kgc:PatternMapping ;
+    rdfs:label "WCP-19: Cancel Task → Void(self)"@en ;
+    kgc:pattern yawl:CancelTask ;
+    kgc:verb kgc:Void ;
+    kgc:cancellationScope "self" ;
+    kgc:executionTemplate """
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        CONSTRUCT {
+            ?subject kgc:voidedAt ?txId .
+            ?subject kgc:cancellationScope "self" .
+        }
+        WHERE {
+            ?subject kgc:hasToken true .
+        }
+    """ ;
+    kgc:removalTemplate """
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        DELETE WHERE { ?subject kgc:hasToken true }
+    """ ;
+    rdfs:comment "Withdraw task before completion."@en .
+
+# WCP-20: Cancel Case
+kgc:WCP20_CancelCase a kgc:PatternMapping ;
+    rdfs:label "WCP-20: Cancel Case → Void(case)"@en ;
+    kgc:pattern yawl:CancelCase ;
+    kgc:verb kgc:Void ;
+    kgc:cancellationScope "case" ;
+    kgc:executionTemplate """
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        CONSTRUCT {
+            ?subject kgc:voidedAt ?txId .
+            ?subject kgc:cancellationScope "case" .
+        }
+        WHERE {
+            ?subject kgc:hasToken true .
+        }
+    """ ;
+    kgc:removalTemplate """
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        DELETE WHERE { ?subject kgc:hasToken true }
+    """ ;
+    rdfs:comment "Remove all tokens from case."@en .
+
+# WCP-21: Cancel Region
+kgc:WCP21_CancelRegion a kgc:PatternMapping ;
+    rdfs:label "WCP-21: Cancel Region → Void(region)"@en ;
+    kgc:pattern yawl:CancellationRegion ;
+    kgc:verb kgc:Void ;
+    kgc:cancellationScope "region" ;
+    kgc:executionTemplate """
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        CONSTRUCT {
+            ?subject kgc:voidedAt ?txId .
+            ?subject kgc:cancellationScope "region" .
+        }
+        WHERE {
+            ?subject kgc:hasToken true .
+        }
+    """ ;
+    kgc:removalTemplate """
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        DELETE WHERE { ?subject kgc:hasToken true }
+    """ ;
+    rdfs:comment "Void all tasks in cancellation set."@en .
+
+# WCP-22: Cancel MI Activity
+kgc:WCP22_CancelMI a kgc:PatternMapping ;
+    rdfs:label "WCP-22: Cancel MI → Void(instances)"@en ;
+    kgc:pattern yawl:CancelMI ;
+    kgc:verb kgc:Void ;
+    kgc:cancellationScope "instances" ;
+    kgc:executionTemplate """
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        CONSTRUCT {
+            ?subject kgc:voidedAt ?txId .
+            ?subject kgc:cancellationScope "instances" .
+        }
+        WHERE {
+            ?subject kgc:hasToken true .
+        }
+    """ ;
+    kgc:removalTemplate """
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        DELETE WHERE { ?subject kgc:hasToken true }
+    """ ;
+    rdfs:comment "Cancel all instances of MI task."@en .
+
+# WCP-23: Complete MI Activity (Threshold)
+kgc:WCP23_CompleteMI a kgc:PatternMapping ;
+    rdfs:label "WCP-23: Complete MI → Await(N)+Void(remaining)"@en ;
+    kgc:pattern yawl:CompleteMI ;
+    kgc:verb kgc:Await ;
+    kgc:hasThreshold "N" ;
+    kgc:completionStrategy "waitQuorum" ;
+    kgc:cancellationScope "instances" ;
+    rdfs:comment "Complete when N finish, cancel rest."@en .
+
+# WCP-24: Exception Handling
+kgc:WCP24_ExceptionHandling a kgc:PatternMapping ;
+    rdfs:label "WCP-24: Exception → Void+Transmute(handler)"@en ;
+    kgc:pattern yawl:ExceptionHandling ;
+    kgc:verb kgc:Void ;
+    kgc:cancellationScope "task" ;
+    kgc:executionTemplate """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        CONSTRUCT {
+            ?subject kgc:voidedAt ?txId .
+            ?subject kgc:exceptionRaised true .
+            ?handler kgc:hasToken true .
+        }
+        WHERE {
+            ?subject yawl:hasExceptionHandler ?handler .
+        }
+    """ ;
+    kgc:removalTemplate """
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        DELETE WHERE { ?subject kgc:hasToken true }
+    """ ;
+    rdfs:comment "Void task, transmute to exception handler."@en .
+
+# WCP-25: Timeout
+kgc:WCP25_Timeout a kgc:PatternMapping ;
+    rdfs:label "WCP-25: Timeout → Void(self)"@en ;
+    kgc:pattern yawl:Timer ;
+    kgc:condition "ASK { ?task yawl:hasTimer ?timer . ?timer yawl:expiry ?exp }" ;
+    kgc:verb kgc:Void ;
+    kgc:cancellationScope "self" ;
+    kgc:executionTemplate """
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        CONSTRUCT {
+            ?subject kgc:voidedAt ?txId .
+            ?subject kgc:timeoutExpired true .
+        }
+        WHERE {
+            ?subject kgc:hasToken true .
+        }
+    """ ;
+    kgc:removalTemplate """
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        DELETE WHERE { ?subject kgc:hasToken true }
+    """ ;
+    rdfs:comment "Void task when timer expires."@en .
+
+# WCP-26: Structured Loop
+kgc:WCP26_StructuredLoop a kgc:PatternMapping ;
+    rdfs:label "WCP-26: Structured Loop → Filter(loopCondition)"@en ;
+    kgc:pattern yawl:StructuredLoop ;
+    kgc:verb kgc:Filter ;
+    kgc:selectionMode "loopCondition" ;
+    kgc:resetOnFire true ;
+    rdfs:comment "Repeat while/until condition."@en .
+
+# WCP-27: Recursion
+kgc:WCP27_Recursion a kgc:PatternMapping ;
+    rdfs:label "WCP-27: Recursion → Copy(subprocess)"@en ;
+    kgc:pattern yawl:Recursion ;
+    kgc:verb kgc:Copy ;
+    kgc:hasCardinality "1" ;
+    kgc:instanceBinding "recursive" ;
+    rdfs:comment "Invoke same process as subprocess."@en .
+
+# =============================================================================
+# SECTION 10: ITERATION PATTERNS (WCP 21, 10)
+# =============================================================================
+
+# WCP-21 variant: Structured Loop (While)
+kgc:WCP21_WhileLoop a kgc:PatternMapping ;
+    rdfs:label "WCP-21: While Loop → Filter(while)"@en ;
+    kgc:pattern yawl:WhileLoop ;
+    kgc:triggerProperty yawl:hasSplit ;
+    kgc:triggerValue yawl:WhileLoop ;
+    kgc:verb kgc:Filter ;
+    kgc:selectionMode "whileTrue" ;
+    rdfs:comment "Pre-test loop: evaluate before iteration."@en .
+
+# WCP-21 variant: Repeat Until
+kgc:WCP21_RepeatUntil a kgc:PatternMapping ;
+    rdfs:label "WCP-21: Repeat Until → Filter(until)"@en ;
+    kgc:pattern yawl:RepeatUntil ;
+    kgc:triggerProperty yawl:hasSplit ;
+    kgc:triggerValue yawl:RepeatUntil ;
+    kgc:verb kgc:Filter ;
+    kgc:selectionMode "untilTrue" ;
+    kgc:invertPredicate true ;
+    rdfs:comment "Post-test loop: evaluate after iteration."@en .
+
+# =============================================================================
+# SECTION 11: TRIGGER PATTERNS (WCP 23-24)
+# =============================================================================
+
+# WCP-23: Transient Trigger
+kgc:WCP23_TransientTrigger a kgc:PatternMapping ;
+    rdfs:label "WCP-23: Transient Trigger → Await(signal)"@en ;
+    kgc:pattern yawl:TransientTrigger ;
+    kgc:verb kgc:Await ;
+    kgc:hasThreshold "signal" ;
+    kgc:completionStrategy "waitSignal" ;
+    rdfs:comment "Task enabled by transient signal."@en .
+
+# WCP-24: Persistent Trigger
+kgc:WCP24_PersistentTrigger a kgc:PatternMapping ;
+    rdfs:label "WCP-24: Persistent Trigger → Await(persistent)"@en ;
+    kgc:pattern yawl:PersistentTrigger ;
+    kgc:verb kgc:Await ;
+    kgc:hasThreshold "persistent" ;
+    kgc:completionStrategy "waitPersistent" ;
+    rdfs:comment "Task enabled by persistent signal."@en .
+
+# =============================================================================
+# SECTION 12: TERMINATION PATTERNS (WCP 43)
+# =============================================================================
+
+# WCP-43: Explicit Termination
+kgc:WCP43_ExplicitTermination a kgc:PatternMapping ;
+    rdfs:label "WCP-43: Explicit Termination → Void(case)"@en ;
+    kgc:pattern yawl:ExplicitTermination ;
+    kgc:verb kgc:Void ;
+    kgc:cancellationScope "case" ;
+    kgc:executionTemplate """
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        CONSTRUCT {
+            ?subject kgc:voidedAt ?txId .
+            ?subject kgc:terminationReason "explicit" .
+        }
+        WHERE {
+            ?subject kgc:hasToken true .
+        }
+    """ ;
+    kgc:removalTemplate """
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        DELETE WHERE { ?subject kgc:hasToken true }
+    """ ;
+    rdfs:comment "Explicit end event terminates case."@en .
+
+# =============================================================================
+# SECTION 13: DATA PATTERNS
+# =============================================================================
+
+# Data Transformation via Mappings
+kgc:DataMapping_Transform a kgc:PatternMapping ;
     rdfs:label "Data Mapping → Transmute"@en ;
     kgc:pattern yawl:VarMappingSet ;
     kgc:verb kgc:Transmute ;
-    rdfs:comment "Data transformation via yawl:startingMappings uses Transmute verb."@en .
+    kgc:executionTemplate """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        CONSTRUCT {
+            ?next kgc:hasToken true .
+            ?subject kgc:completedAt ?txId .
+            ?subject kgc:dataMapped true .
+        }
+        WHERE {
+            ?subject yawl:flowsInto ?flow .
+            ?flow yawl:nextElementRef ?next .
+        }
+    """ ;
+    kgc:removalTemplate """
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        DELETE WHERE { ?subject kgc:hasToken true }
+    """ ;
+    rdfs:comment "Data transformation during transition."@en .
 
-# -----------------------------------------------------------------------------
-# RESOURCE PERSPECTIVE MAPPINGS
-# -----------------------------------------------------------------------------
-
-kgc:ResourceAuthMapping a kgc:PatternMapping ;
-    rdfs:label "Resource Auth → Filter"@en ;
-    kgc:pattern yawl:Resourcing ;
-    kgc:verb kgc:Filter ;
-    rdfs:comment "Resource authorization check. If actor not in allowed set, path is filtered out."@en .
-
-# -----------------------------------------------------------------------------
-# SERVICE PERSPECTIVE MAPPINGS
-# -----------------------------------------------------------------------------
-
-kgc:ExternalServiceMapping a kgc:PatternMapping ;
-    rdfs:label "External Service → Copy"@en ;
-    kgc:pattern yawl:WebServiceGateway ;
-    kgc:verb kgc:Copy ;
-    rdfs:comment "External service calls. Payload copied to service endpoint."@en .
-
-# -----------------------------------------------------------------------------
-# TIMER/EXCEPTION MAPPINGS
-# -----------------------------------------------------------------------------
-
-kgc:TimerExpiryMapping a kgc:PatternMapping ;
-    rdfs:label "Timer Expiry → Void"@en ;
-    kgc:pattern yawl:Timer ;
-    kgc:verb kgc:Void ;
-    kgc:condition "ASK { ?task yawl:hasTimer ?timer . ?timer yawl:expiry ?exp . FILTER (NOW() > ?exp) }" ;
-    rdfs:comment "Timer expiry destroys token via Void verb."@en .
-
-kgc:CancellationMapping a kgc:PatternMapping ;
-    rdfs:label "Cancellation → Void"@en ;
-    kgc:pattern yawl:CancellationRegion ;
-    kgc:verb kgc:Void ;
-    rdfs:comment "Task cancellation destroys token via Void verb."@en .
+# Task Data Visibility
+kgc:DataVisibility_Task a kgc:PatternMapping ;
+    rdfs:label "Task Data → Transmute(binding)"@en ;
+    kgc:pattern yawl:TaskData ;
+    kgc:verb kgc:Transmute ;
+    kgc:executionTemplate """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        CONSTRUCT {
+            ?next kgc:hasToken true .
+            ?subject kgc:completedAt ?txId .
+            ?subject kgc:dataBound true .
+        }
+        WHERE {
+            ?subject yawl:flowsInto ?flow .
+            ?flow yawl:nextElementRef ?next .
+        }
+    """ ;
+    kgc:removalTemplate """
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        DELETE WHERE { ?subject kgc:hasToken true }
+    """ ;
+    rdfs:comment "Bind case data to task scope."@en .
 
 # =============================================================================
-# SECTION 3: EXECUTION STATE
+# SECTION 14: RESOURCE PATTERNS
+# =============================================================================
+
+# Resource Authorization
+kgc:Resource_Authorization a kgc:PatternMapping ;
+    rdfs:label "Resource Auth → Filter(authorized)"@en ;
+    kgc:pattern yawl:Resourcing ;
+    kgc:verb kgc:Filter ;
+    kgc:selectionMode "authorized" ;
+    rdfs:comment "Filter based on resource authorization."@en .
+
+# Role-Based Allocation
+kgc:Resource_RoleAllocation a kgc:PatternMapping ;
+    rdfs:label "Role Allocation → Filter(role)"@en ;
+    kgc:pattern yawl:RoleAllocation ;
+    kgc:verb kgc:Filter ;
+    kgc:selectionMode "roleMatch" ;
+    rdfs:comment "Allocate to participant by role."@en .
+
+# =============================================================================
+# SECTION 15: EXTERNAL SERVICE PATTERNS
+# =============================================================================
+
+# Web Service Invocation
+kgc:Service_WebService a kgc:PatternMapping ;
+    rdfs:label "Web Service → Copy(service)"@en ;
+    kgc:pattern yawl:WebServiceGateway ;
+    kgc:verb kgc:Copy ;
+    kgc:hasCardinality "1" ;
+    kgc:executionTemplate """
+        PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        CONSTRUCT {
+            ?next kgc:hasToken true .
+            ?subject kgc:completedAt ?txId .
+            ?subject kgc:serviceInvoked true .
+        }
+        WHERE {
+            ?subject yawl:flowsInto ?flow .
+            ?flow yawl:nextElementRef ?next .
+        }
+    """ ;
+    kgc:removalTemplate """
+        PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+        DELETE WHERE { ?subject kgc:hasToken true }
+    """ ;
+    rdfs:comment "Invoke external web service."@en .
+
+# Asynchronous Callback
+kgc:Service_AsyncCallback a kgc:PatternMapping ;
+    rdfs:label "Async Callback → Await(callback)"@en ;
+    kgc:pattern yawl:AsyncCallback ;
+    kgc:verb kgc:Await ;
+    kgc:hasThreshold "1" ;
+    kgc:completionStrategy "waitCallback" ;
+    rdfs:comment "Wait for async service response."@en .
+
+# =============================================================================
+# SECTION 16: EXECUTION STATE
 # =============================================================================
 
 kgc:Token a rdfs:Class ;
     rdfs:label "Token"@en ;
-    rdfs:comment "A workflow token representing active execution state."@en .
+    rdfs:comment "Workflow token representing active execution state."@en .
 
-kgc:atTask a rdf:Property ;
-    rdfs:label "at task"@en ;
-    rdfs:domain kgc:Token ;
-    rdfs:range yawl:Task ;
-    rdfs:comment "The task where this token currently resides."@en .
+kgc:status a rdf:Property ;
+    rdfs:label "status"@en ;
+    rdfs:domain rdfs:Resource ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Execution status: 'Active', 'Completed', 'Voided', 'Waiting'"@en .
 
-kgc:payload a rdf:Property ;
-    rdfs:label "payload"@en ;
-    rdfs:domain kgc:Token ;
-    rdfs:range rdfs:Resource ;
-    rdfs:comment "Data payload carried by this token."@en .
-
-kgc:createdAt a rdf:Property ;
-    rdfs:label "created at"@en ;
-    rdfs:domain kgc:Token ;
-    rdfs:range xsd:dateTime ;
-    rdfs:comment "Timestamp when token was created."@en .
+kgc:hasToken a rdf:Property ;
+    rdfs:label "has token"@en ;
+    rdfs:domain yawl:Task ;
+    rdfs:range xsd:boolean ;
+    rdfs:comment "Whether task has an active token."@en .
 
 kgc:completedAt a rdf:Property ;
     rdfs:label "completed at"@en ;
     rdfs:domain yawl:Task ;
     rdfs:range xsd:dateTime ;
-    rdfs:comment "Timestamp when task completed (for join convergence checks)."@en .
+    rdfs:comment "Timestamp when task completed."@en .
+
+kgc:voidedAt a rdf:Property ;
+    rdfs:label "voided at"@en ;
+    rdfs:domain yawl:Task ;
+    rdfs:range xsd:dateTime ;
+    rdfs:comment "Timestamp when task was voided/cancelled."@en .
+
+kgc:instanceId a rdf:Property ;
+    rdfs:label "instance ID"@en ;
+    rdfs:domain kgc:Token ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Unique ID for MI instance tracking."@en .
+
+kgc:parentInstance a rdf:Property ;
+    rdfs:label "parent instance"@en ;
+    rdfs:domain kgc:Token ;
+    rdfs:range kgc:Token ;
+    rdfs:comment "Parent token for nested/recursive instances."@en .
 
 # =============================================================================
-# SECTION 4: SEMANTIC DRIVER QUERY
+# SECTION 17: PROVENANCE
 # =============================================================================
-#
-# The Atman (Semantic Driver) uses this query to resolve which verb to execute:
-#
-# SELECT ?verb ?verbId WHERE {
-#     ?mapping kgc:pattern ?patternType ;
-#              kgc:verb ?verb .
-#     ?verb kgc:verbId ?verbId .
-#     OPTIONAL { ?mapping kgc:condition ?cond . }
-#     FILTER (!BOUND(?cond) || ... ASK evaluation ...)
-# }
-#
-# This is the ONLY dispatch mechanism. No Python if/else for patterns.
-#
 
 kgc:verbId a rdf:Property ;
     rdfs:label "verb ID"@en ;
     rdfs:domain kgc:Verb ;
     rdfs:range xsd:integer ;
-    rdfs:comment "Numeric identifier for verb dispatch. Used by Kernel."@en .
-
-# =============================================================================
-# SECTION 5: PROVENANCE
-# =============================================================================
+    rdfs:comment "Numeric identifier for verb dispatch."@en .
 
 kgc:Receipt a rdfs:Class ;
     rdfs:label "Receipt"@en ;
-    rdfs:comment "Cryptographic proof of execution: State + Logic + History."@en .
+    rdfs:comment "Cryptographic proof of execution."@en .
 
 kgc:merkleRoot a rdf:Property ;
     rdfs:label "merkle root"@en ;
     rdfs:domain kgc:Receipt ;
-    rdfs:range xsd:string ;
-    rdfs:comment "SHA3-256(prev_hash + delta). Links to previous state."@en .
+    rdfs:range xsd:string .
 
 kgc:verbExecuted a rdf:Property ;
     rdfs:label "verb executed"@en ;
     rdfs:domain kgc:Receipt ;
-    rdfs:range kgc:Verb ;
-    rdfs:comment "Which verb was applied."@en .
+    rdfs:range kgc:Verb .
+
+kgc:parametersUsed a rdf:Property ;
+    rdfs:label "parameters used"@en ;
+    rdfs:domain kgc:Receipt ;
+    rdfs:range xsd:string ;
+    rdfs:comment "JSON-serialized parameters from ontology."@en .
 
 kgc:prevHash a rdf:Property ;
     rdfs:label "previous hash"@en ;
     rdfs:domain kgc:Receipt ;
-    rdfs:range xsd:string ;
-    rdfs:comment "Hash of previous transaction (Lockchain link)."@en .
+    rdfs:range xsd:string .
 
 # =============================================================================
-# END OF KGC PHYSICS ONTOLOGY
+# END OF KGC PHYSICS ONTOLOGY v3.1
 # =============================================================================

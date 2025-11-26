@@ -1,0 +1,52 @@
+@startuml C2_Containers
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title Container Diagram: The KGC Architecture
+
+LAYOUT_WITH_LEGEND()
+
+Person(chatman, "Chatman Agent", "The Observer")
+
+System_Boundary(kgc_boundary, "KGC Interoperability Validator") {
+    Container(bbb, "Blood-Brain Barrier\n(BBBIngress)", "Python/pyshacl", "Active Transport Layer.\nLIFT: JSON \u2192 QuadDelta\nSCREEN: SHACL validation\nPASS/REJECT")
+
+    Container(semantic_driver, "Semantic Driver\n(SemanticDriver)", "Python/rdflib", "Ontology-driven verb dispatch.\nResolves: pattern \u2192 (verb, params)\nExecutes: A = \u03bc(O, P)")
+
+    Container(kernel, "The Kernel", "Python (Pure Functions)", "5 Elemental Verbs:\n\u2022 Transmute (A \u2192 B)\n\u2022 Copy (A \u2192 {B\u2081..B\u2099})\n\u2022 Filter (A \u2192 Subset)\n\u2022 Await ({A,B} \u2192 C)\n\u2022 Void (A \u2192 \u2205)")
+
+    ContainerDb(store, "The Store", "RDFLib Graph", "State Vector.\nHolds workflow graph and tokens.\nIn-memory or persistent.")
+
+    ContainerDb(lockchain, "The Lockchain", "SHA256 Merkle Chain", "Provenance Record.\nHash(A) = Hash(\u03bc(O, P))\nGenesis: 4d7c606c...")
+}
+
+System_Ext(ontology, "Dark Matter\n(Ontology)", "kgc_physics.ttl\ninvariants.shacl.ttl")
+
+Rel(chatman, bbb, "1. Ingress", "JSON payload")
+Rel(bbb, semantic_driver, "2. Validated Delta", "QuadDelta (immutable)")
+
+Rel_L(bbb, ontology, "2a. SHACL Shapes", "Three Laws validation")
+
+Rel(semantic_driver, ontology, "3. Resolve Verb", "SPARQL query\nkgc:pattern \u2192 kgc:verb")
+Rel(semantic_driver, kernel, "4. Dispatch", "Verb + VerbConfig params")
+
+Rel(kernel, store, "5. Mutate", "Add/Remove triples")
+Rel(semantic_driver, store, "5a. Apply Delta", "Atomic state change")
+
+Rel(semantic_driver, lockchain, "6. Mint Receipt", "SHA256(prev + delta)")
+Rel(semantic_driver, chatman, "7. Return Receipt", "merkle_root + verb_executed")
+
+note right of bbb
+  **The Constitution**
+  Three Laws enforced at ingress:
+  1. TYPING: Every node has rdf:type
+  2. HERMETICITY: \u226464 ops/batch
+  3. CHRONOLOGY: Time flows forward
+end note
+
+note right of kernel
+  **Event Horizon**
+  Only these 5 operations exist.
+  No 6th verb can be added.
+end note
+
+@enduml

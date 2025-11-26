@@ -157,8 +157,6 @@ disable_error_code = [
     "var-annotated",    # Variable annotations
     "name-defined",     # Name defined
     "call-overload",    # Call overload
-    "var",              # Variable types
-    "str",              # String formatting
     "no-redef",         # Redefinition
 ]
 

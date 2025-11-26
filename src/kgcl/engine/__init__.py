@@ -6,17 +6,24 @@ with cryptographic provenance, deterministic hooks, and O(1) receipts.
 
 The Chatman Equation
 --------------------
-A = μ(O)
+A = μ(O, P)
 
 Where:
     - O (Observation): QuadDelta - The intent to mutate reality
-    - μ (Operator): Atman - The deterministic mutation engine
+    - P (Parameters): VerbConfig - Force multipliers from ontology
+    - μ (Operator): SemanticDriver - The ontology-driven mutation engine
     - A (Action): Receipt - Cryptographic proof of execution
 
 Core Components
 ---------------
 Atman : class
     The deterministic knowledge graph mutation engine
+SemanticDriver : class
+    Ontology-driven verb dispatch (from kgc_physics.ttl)
+Kernel : class
+    The 5 Elemental Verbs (Transmute, Copy, Filter, Await, Void)
+VerbConfig : class
+    Configuration for parameterized verb execution
 QuadDelta : class
     Immutable observation representing graph mutations
 Receipt : class
@@ -78,6 +85,10 @@ from kgcl.engine.atman import (
     Receipt,
     TransactionContext,
 )
+from kgcl.engine.knowledge_engine import Kernel, SemanticDriver, VerbConfig
+from kgcl.engine.knowledge_engine import QuadDelta as KnowledgeQuadDelta
+from kgcl.engine.knowledge_engine import Receipt as KnowledgeReceipt
+from kgcl.engine.knowledge_engine import TransactionContext as KnowledgeTransactionContext
 
 __all__ = [
     "CHATMAN_CONSTANT",
@@ -85,8 +96,14 @@ __all__ = [
     "Atman",
     "HookMode",
     "HookResult",
+    "Kernel",
     "KnowledgeHook",
+    "KnowledgeQuadDelta",
+    "KnowledgeReceipt",
+    "KnowledgeTransactionContext",
     "QuadDelta",
     "Receipt",
+    "SemanticDriver",
     "TransactionContext",
+    "VerbConfig",
 ]

@@ -1,0 +1,566 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix kgc: <http://bitflow.ai/ontology/kgc/v3#> .
+@prefix kgc-inv: <http://bitflow.ai/ontology/kgc/invariants/v1#> .
+@prefix yawl: <http://www.yawlfoundation.org/yawlschema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+# =============================================================================
+# LAW 4: COMPLETENESS (Every Parameter Has Execution Template)
+# =============================================================================
+#
+# "No unexecutable parameters exist."
+# Every parameter value in a PatternMapping MUST have a corresponding
+# execution template (SPARQL query, RDF pattern, or verb dispatch rule).
+# This enforces RDF-only dispatch and prevents Python if/else logic.
+#
+# RATIONALE:
+# The YAWL engine failure occurred because parameter values (e.g.,
+# threshold="all", cardinality="dynamic") had NO executable RDF templates.
+# Instead, Python code checked these values with if/else statements,
+# violating the "RDF-only" architecture claim.
+#
+# COMPLETENESS ensures:
+# 1. Every kgc:hasThreshold value maps to a SPARQL ASK query
+# 2. Every kgc:hasCardinality value maps to a SPARQL COUNT query
+# 3. Every kgc:completionStrategy value maps to an execution template
+# 4. No "orphan" parameters exist without executable logic
+#
+
+kgc-inv:CompletenessLaw a sh:NodeShape ;
+    sh:targetNode kgc-inv:CompletenessLaw ;
+    rdfs:label "Completeness Law"@en ;
+    rdfs:comment "Every parameter value must have an RDF-based execution template."@en ;
+    sh:description "LAW 4: All parameter values must map to executable SPARQL/RDF patterns. No Python if/else dispatch allowed." .
+
+# =============================================================================
+# SECTION 1: Pattern Mapping Completeness
+# =============================================================================
+
+kgc-inv:PatternMappingCompletenessShape a sh:NodeShape ;
+    sh:targetClass kgc:PatternMapping ;
+    rdfs:label "Pattern Mapping Completeness"@en ;
+
+    # Every PatternMapping must have a verb
+    sh:property [
+        sh:path kgc:verb ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class kgc:Verb ;
+        sh:message "COMPLETENESS VIOLATION: PatternMapping must have exactly one verb"@en ;
+        sh:severity sh:Violation ;
+    ] ;
+
+    # Every PatternMapping must have execution semantics
+    sh:property [
+        sh:path kgc:executionTemplate ;
+        sh:minCount 1 ;
+        sh:message "COMPLETENESS VIOLATION: PatternMapping must have execution template (SPARQL query or RDF pattern)"@en ;
+        sh:severity sh:Violation ;
+    ] ;
+
+    # If threshold is defined, must have threshold template
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "COMPLETENESS VIOLATION: hasThreshold parameter requires thresholdTemplate"@en ;
+        sh:severity sh:Violation ;
+        sh:select """
+            PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+            SELECT $this
+            WHERE {
+                $this kgc:hasThreshold ?threshold .
+                FILTER NOT EXISTS {
+                    $this kgc:thresholdTemplate ?template .
+                }
+            }
+        """ ;
+    ] ;
+
+    # If cardinality is defined, must have cardinality template
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "COMPLETENESS VIOLATION: hasCardinality parameter requires cardinalityTemplate"@en ;
+        sh:severity sh:Violation ;
+        sh:select """
+            PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+            SELECT $this
+            WHERE {
+                $this kgc:hasCardinality ?cardinality .
+                FILTER NOT EXISTS {
+                    $this kgc:cardinalityTemplate ?template .
+                }
+            }
+        """ ;
+    ] ;
+
+    # If completionStrategy is defined, must have completion template
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "COMPLETENESS VIOLATION: completionStrategy parameter requires completionTemplate"@en ;
+        sh:severity sh:Violation ;
+        sh:select """
+            PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+            SELECT $this
+            WHERE {
+                $this kgc:completionStrategy ?strategy .
+                FILTER NOT EXISTS {
+                    $this kgc:completionTemplate ?template .
+                }
+            }
+        """ ;
+    ] ;
+
+    # If selectionMode is defined, must have selection template
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "COMPLETENESS VIOLATION: selectionMode parameter requires selectionTemplate"@en ;
+        sh:severity sh:Violation ;
+        sh:select """
+            PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+            SELECT $this
+            WHERE {
+                $this kgc:selectionMode ?mode .
+                FILTER NOT EXISTS {
+                    $this kgc:selectionTemplate ?template .
+                }
+            }
+        """ ;
+    ] ;
+
+    # If cancellationScope is defined, must have cancellation template
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "COMPLETENESS VIOLATION: cancellationScope parameter requires cancellationTemplate"@en ;
+        sh:severity sh:Violation ;
+        sh:select """
+            PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+            SELECT $this
+            WHERE {
+                $this kgc:cancellationScope ?scope .
+                FILTER NOT EXISTS {
+                    $this kgc:cancellationTemplate ?template .
+                }
+            }
+        """ ;
+    ] .
+
+# =============================================================================
+# SECTION 2: Execution Template Validation
+# =============================================================================
+
+kgc-inv:ExecutionTemplateShape a sh:NodeShape ;
+    sh:targetSubjectsOf kgc:executionTemplate ;
+    rdfs:label "Execution Template Validation"@en ;
+
+    # Execution template must be SPARQL query or RDF pattern
+    sh:property [
+        sh:path kgc:executionTemplate ;
+        sh:or (
+            [ sh:datatype xsd:string ; sh:pattern "^(SELECT|ASK|CONSTRUCT|DELETE|INSERT)" ]
+            [ sh:nodeKind sh:IRI ]
+            [ sh:nodeKind sh:BlankNode ]
+        ) ;
+        sh:message "COMPLETENESS VIOLATION: executionTemplate must be SPARQL query or RDF pattern IRI"@en ;
+        sh:severity sh:Violation ;
+    ] .
+
+# =============================================================================
+# SECTION 3: Parameter Value Templates (The Missing Piece)
+# =============================================================================
+
+# New properties to add to kgc_physics.ttl:
+# These are the execution templates that map parameter values to RDF logic
+
+# kgc:thresholdTemplate - Maps threshold values to SPARQL ASK queries
+# Examples:
+#   "all" → ASK { ?token kgc:atTask $this . FILTER NOT EXISTS { ?pending ... } }
+#   "1" → ASK { SELECT (COUNT(?token) as ?count) WHERE { ?token kgc:atTask $this } HAVING (?count >= 1) }
+#   "dynamic" → ASK { ... BIND(?task yawl:miThreshold ?threshold) ... }
+
+kgc-inv:ThresholdTemplateShape a sh:NodeShape ;
+    sh:targetSubjectsOf kgc:thresholdTemplate ;
+    rdfs:label "Threshold Template Validation"@en ;
+
+    sh:property [
+        sh:path kgc:thresholdTemplate ;
+        sh:datatype xsd:string ;
+        sh:pattern "^ASK" ;
+        sh:message "COMPLETENESS VIOLATION: thresholdTemplate must be SPARQL ASK query"@en ;
+        sh:severity sh:Violation ;
+    ] .
+
+# kgc:cardinalityTemplate - Maps cardinality values to SPARQL COUNT queries
+# Examples:
+#   "topology" → SELECT (COUNT(?successor) as ?count) WHERE { $this yawl:flowsInto ?flow . ?flow yawl:nextElementRef ?successor }
+#   "dynamic" → SELECT (COUNT(?item) as ?count) WHERE { $this yawl:miDataInput ?input . ?input rdf:rest*/rdf:first ?item }
+
+kgc-inv:CardinalityTemplateShape a sh:NodeShape ;
+    sh:targetSubjectsOf kgc:cardinalityTemplate ;
+    rdfs:label "Cardinality Template Validation"@en ;
+
+    sh:property [
+        sh:path kgc:cardinalityTemplate ;
+        sh:datatype xsd:string ;
+        sh:pattern "^SELECT" ;
+        sh:message "COMPLETENESS VIOLATION: cardinalityTemplate must be SPARQL SELECT query with COUNT"@en ;
+        sh:severity sh:Violation ;
+    ] .
+
+# kgc:completionTemplate - Maps completion strategies to SPARQL queries
+# Examples:
+#   "waitAll" → ASK { FILTER NOT EXISTS { ?token kgc:atTask ?predecessor . ?predecessor yawl:flowsInto/yawl:nextElementRef $this } }
+#   "waitActive" → ASK { FILTER NOT EXISTS { ?token kgc:status "Active" ; kgc:atTask ?pred . ?pred yawl:flowsInto/yawl:nextElementRef $this } }
+
+kgc-inv:CompletionTemplateShape a sh:NodeShape ;
+    sh:targetSubjectsOf kgc:completionTemplate ;
+    rdfs:label "Completion Template Validation"@en ;
+
+    sh:property [
+        sh:path kgc:completionTemplate ;
+        sh:datatype xsd:string ;
+        sh:pattern "^(ASK|SELECT)" ;
+        sh:message "COMPLETENESS VIOLATION: completionTemplate must be SPARQL query"@en ;
+        sh:severity sh:Violation ;
+    ] .
+
+# kgc:selectionTemplate - Maps selection modes to SPARQL FILTER expressions
+# Examples:
+#   "exactlyOne" → CONSTRUCT WHERE { ?flow yawl:hasPredicate ?pred . ?pred yawl:query ?q . FILTER(EXISTS { ASK { ?q } }) } LIMIT 1
+#   "oneOrMore" → CONSTRUCT WHERE { ?flow yawl:hasPredicate ?pred . ?pred yawl:query ?q . FILTER(EXISTS { ASK { ?q } }) }
+
+kgc-inv:SelectionTemplateShape a sh:NodeShape ;
+    sh:targetSubjectsOf kgc:selectionTemplate ;
+    rdfs:label "Selection Template Validation"@en ;
+
+    sh:property [
+        sh:path kgc:selectionTemplate ;
+        sh:datatype xsd:string ;
+        sh:pattern "^(CONSTRUCT|SELECT)" ;
+        sh:message "COMPLETENESS VIOLATION: selectionTemplate must be SPARQL CONSTRUCT or SELECT query"@en ;
+        sh:severity sh:Violation ;
+    ] .
+
+# kgc:cancellationTemplate - Maps cancellation scopes to DELETE WHERE queries
+# Examples:
+#   "self" → DELETE WHERE { $this kgc:hasToken ?token . ?token ?p ?o }
+#   "region" → DELETE WHERE { ?task kgc:inRegion $this ; kgc:hasToken ?token . ?token ?p ?o }
+
+kgc-inv:CancellationTemplateShape a sh:NodeShape ;
+    sh:targetSubjectsOf kgc:cancellationTemplate ;
+    rdfs:label "Cancellation Template Validation"@en ;
+
+    sh:property [
+        sh:path kgc:cancellationTemplate ;
+        sh:datatype xsd:string ;
+        sh:pattern "^DELETE WHERE" ;
+        sh:message "COMPLETENESS VIOLATION: cancellationTemplate must be SPARQL DELETE WHERE query"@en ;
+        sh:severity sh:Violation ;
+    ] .
+
+# =============================================================================
+# SECTION 4: Verb Dispatch Table Completeness
+# =============================================================================
+
+# Ensures all 5 verbs have complete dispatch implementations
+
+kgc-inv:VerbDispatchCompletenessShape a sh:NodeShape ;
+    sh:targetClass kgc:Verb ;
+    rdfs:label "Verb Dispatch Completeness"@en ;
+
+    # Every verb must have a dispatch query
+    sh:property [
+        sh:path kgc:dispatchQuery ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "COMPLETENESS VIOLATION: Every verb must have a dispatchQuery (SPARQL UPDATE)"@en ;
+        sh:severity sh:Violation ;
+    ] ;
+
+    # Dispatch query must be SPARQL UPDATE (INSERT/DELETE)
+    sh:property [
+        sh:path kgc:dispatchQuery ;
+        sh:pattern "^(INSERT|DELETE)" ;
+        sh:message "COMPLETENESS VIOLATION: dispatchQuery must be SPARQL UPDATE (INSERT/DELETE)"@en ;
+        sh:severity sh:Violation ;
+    ] .
+
+# =============================================================================
+# SECTION 5: No Python If/Else Enforcement
+# =============================================================================
+
+# Meta-validation: Ensures NO code-based dispatch logic exists
+# This would be enforced at schema validation time, not runtime
+
+kgc-inv:NoPythonDispatchShape a sh:NodeShape ;
+    sh:targetClass kgc:PatternMapping ;
+    rdfs:label "No Python Dispatch Enforcement"@en ;
+
+    # Pattern mappings cannot have code references
+    sh:not [
+        sh:property [
+            sh:path kgc:executionCode ;
+            sh:minCount 1 ;
+        ]
+    ] ;
+    sh:message "COMPLETENESS VIOLATION: PatternMapping cannot have executionCode property (RDF-only dispatch required)"@en ;
+    sh:severity sh:Violation ;
+
+    # Pattern mappings cannot reference Python modules
+    sh:not [
+        sh:property [
+            sh:path kgc:pythonModule ;
+            sh:minCount 1 ;
+        ]
+    ] ;
+    sh:message "COMPLETENESS VIOLATION: PatternMapping cannot have pythonModule property (RDF-only dispatch required)"@en ;
+    sh:severity sh:Violation .
+
+# =============================================================================
+# SECTION 6: Template Coverage Matrix
+# =============================================================================
+
+# Ensures every distinct parameter value across all PatternMappings has a template
+
+kgc-inv:ParameterValueCoverageShape a sh:NodeShape ;
+    sh:targetNode kgc-inv:ParameterValueCoverageShape ;
+    rdfs:label "Parameter Value Coverage"@en ;
+
+    # All threshold values must have templates
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "COMPLETENESS VIOLATION: Threshold value has no template definition"@en ;
+        sh:severity sh:Violation ;
+        sh:select """
+            PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+            SELECT DISTINCT ?value
+            WHERE {
+                ?mapping kgc:hasThreshold ?value .
+                FILTER NOT EXISTS {
+                    ?templateDef kgc:definesThresholdValue ?value ;
+                                 kgc:thresholdTemplate ?template .
+                }
+            }
+        """ ;
+    ] ;
+
+    # All cardinality values must have templates
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "COMPLETENESS VIOLATION: Cardinality value has no template definition"@en ;
+        sh:severity sh:Violation ;
+        sh:select """
+            PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+            SELECT DISTINCT ?value
+            WHERE {
+                ?mapping kgc:hasCardinality ?value .
+                FILTER NOT EXISTS {
+                    ?templateDef kgc:definesCardinalityValue ?value ;
+                                 kgc:cardinalityTemplate ?template .
+                }
+            }
+        """ ;
+    ] ;
+
+    # All completion strategies must have templates
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "COMPLETENESS VIOLATION: Completion strategy has no template definition"@en ;
+        sh:severity sh:Violation ;
+        sh:select """
+            PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+            SELECT DISTINCT ?value
+            WHERE {
+                ?mapping kgc:completionStrategy ?value .
+                FILTER NOT EXISTS {
+                    ?templateDef kgc:definesCompletionStrategy ?value ;
+                                 kgc:completionTemplate ?template .
+                }
+            }
+        """ ;
+    ] ;
+
+    # All selection modes must have templates
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "COMPLETENESS VIOLATION: Selection mode has no template definition"@en ;
+        sh:severity sh:Violation ;
+        sh:select """
+            PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+            SELECT DISTINCT ?value
+            WHERE {
+                ?mapping kgc:selectionMode ?value .
+                FILTER NOT EXISTS {
+                    ?templateDef kgc:definesSelectionMode ?value ;
+                                 kgc:selectionTemplate ?template .
+                }
+            }
+        """ ;
+    ] ;
+
+    # All cancellation scopes must have templates
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "COMPLETENESS VIOLATION: Cancellation scope has no template definition"@en ;
+        sh:severity sh:Violation ;
+        sh:select """
+            PREFIX kgc: <http://bitflow.ai/ontology/kgc/v3#>
+            SELECT DISTINCT ?value
+            WHERE {
+                ?mapping kgc:cancellationScope ?value .
+                FILTER NOT EXISTS {
+                    ?templateDef kgc:definesCancellationScope ?value ;
+                                 kgc:cancellationTemplate ?template .
+                }
+            }
+        """ ;
+    ] .
+
+# =============================================================================
+# SECTION 7: Template Library Requirements
+# =============================================================================
+
+# New class to define the Template Library (repository of execution templates)
+
+kgc:TemplateLibrary a rdfs:Class ;
+    rdfs:label "Template Library"@en ;
+    rdfs:comment "Collection of execution templates for parameter values"@en .
+
+kgc:TemplateDefinition a rdfs:Class ;
+    rdfs:label "Template Definition"@en ;
+    rdfs:comment "Maps a parameter value to its execution template"@en .
+
+# Properties for template definitions
+kgc:definesThresholdValue a rdf:Property ;
+    rdfs:label "defines threshold value"@en ;
+    rdfs:domain kgc:TemplateDefinition ;
+    rdfs:range xsd:string .
+
+kgc:definesCardinalityValue a rdf:Property ;
+    rdfs:label "defines cardinality value"@en ;
+    rdfs:domain kgc:TemplateDefinition ;
+    rdfs:range xsd:string .
+
+kgc:definesCompletionStrategy a rdf:Property ;
+    rdfs:label "defines completion strategy"@en ;
+    rdfs:domain kgc:TemplateDefinition ;
+    rdfs:range xsd:string .
+
+kgc:definesSelectionMode a rdf:Property ;
+    rdfs:label "defines selection mode"@en ;
+    rdfs:domain kgc:TemplateDefinition ;
+    rdfs:range xsd:string .
+
+kgc:definesCancellationScope a rdf:Property ;
+    rdfs:label "defines cancellation scope"@en ;
+    rdfs:domain kgc:TemplateDefinition ;
+    rdfs:range xsd:string .
+
+# Properties linking to actual templates
+kgc:executionTemplate a rdf:Property ;
+    rdfs:label "execution template"@en ;
+    rdfs:domain kgc:PatternMapping ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Primary SPARQL query for execution"@en .
+
+kgc:thresholdTemplate a rdf:Property ;
+    rdfs:label "threshold template"@en ;
+    rdfs:domain kgc:PatternMapping ;
+    rdfs:range xsd:string ;
+    rdfs:comment "SPARQL ASK query for threshold evaluation"@en .
+
+kgc:cardinalityTemplate a rdf:Property ;
+    rdfs:label "cardinality template"@en ;
+    rdfs:domain kgc:PatternMapping ;
+    rdfs:range xsd:string ;
+    rdfs:comment "SPARQL SELECT COUNT query for cardinality determination"@en .
+
+kgc:completionTemplate a rdf:Property ;
+    rdfs:label "completion template"@en ;
+    rdfs:domain kgc:PatternMapping ;
+    rdfs:range xsd:string ;
+    rdfs:comment "SPARQL query for completion strategy evaluation"@en .
+
+kgc:selectionTemplate a rdf:Property ;
+    rdfs:label "selection template"@en ;
+    rdfs:domain kgc:PatternMapping ;
+    rdfs:range xsd:string ;
+    rdfs:comment "SPARQL CONSTRUCT query for branch selection"@en .
+
+kgc:cancellationTemplate a rdf:Property ;
+    rdfs:label "cancellation template"@en ;
+    rdfs:domain kgc:PatternMapping ;
+    rdfs:range xsd:string ;
+    rdfs:comment "SPARQL DELETE WHERE query for cancellation"@en .
+
+kgc:dispatchQuery a rdf:Property ;
+    rdfs:label "dispatch query"@en ;
+    rdfs:domain kgc:Verb ;
+    rdfs:range xsd:string ;
+    rdfs:comment "SPARQL UPDATE query for verb execution"@en .
+
+# =============================================================================
+# USAGE EXAMPLE: How this fixes the YAWL engine
+# =============================================================================
+#
+# BEFORE (Python if/else - BROKEN):
+# ```python
+# def execute_await(task, threshold):
+#     if threshold == "all":
+#         return wait_for_all_predecessors(task)
+#     elif threshold == "1":
+#         return wait_for_first(task)
+#     elif threshold == "dynamic":
+#         return wait_for_dynamic_threshold(task)
+# ```
+#
+# AFTER (RDF-only - CORRECT):
+# ```turtle
+# kgc:WCP3_Synchronization
+#     kgc:hasThreshold "all" ;
+#     kgc:thresholdTemplate """
+#         ASK {
+#             FILTER NOT EXISTS {
+#                 ?token kgc:atTask ?predecessor .
+#                 ?predecessor yawl:flowsInto/yawl:nextElementRef $this .
+#             }
+#         }
+#     """ .
+#
+# kgc:WCP9_Discriminator
+#     kgc:hasThreshold "1" ;
+#     kgc:thresholdTemplate """
+#         ASK {
+#             SELECT (COUNT(?token) as ?count)
+#             WHERE { ?token kgc:atTask ?predecessor . ?predecessor yawl:flowsInto/yawl:nextElementRef $this }
+#             HAVING (?count >= 1)
+#         }
+#     """ .
+# ```
+#
+# The engine now executes by:
+# 1. Observing workflow topology (RDF graph)
+# 2. Matching topology to PatternMapping (SPARQL query)
+# 3. Extracting parameters (threshold, cardinality, etc.)
+# 4. Executing parameter-specific template (SPARQL query)
+# 5. Applying verb (SPARQL UPDATE)
+#
+# ZERO Python if/else statements. Pure RDF dispatch.
+#
+# =============================================================================
+# SUMMARY: THE FOUR LAWS
+# =============================================================================
+#
+# LAW 1 (TYPING): Every node must have rdf:type
+# LAW 2 (HERMETICITY): Only known predicates, max 64 ops/batch
+# LAW 3 (CHRONOLOGY): Time flows forward, hashes chain correctly
+# LAW 4 (COMPLETENESS): Every parameter must have RDF execution template
+#
+# If ANY shape violation occurs, the engine CANNOT proceed.
+# "Validation IS Execution" - conformance = green light.
+#
+# COMPLETENESS prevents the YAWL engine failure pattern where
+# "RDF-only" architecture secretly relied on Python if/else logic.
+#
+# =============================================================================

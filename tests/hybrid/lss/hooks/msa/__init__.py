@@ -1,0 +1,1 @@
+"""Hook MSA module initialization."""

@@ -736,7 +736,9 @@ class HookExecutor:
         """
         rdf = self._registry.export_all_rdf()
         if rdf.strip():
-            self._engine.load_data(rdf)
+            # Use trigger_hooks=False to avoid infinite recursion
+            # (loading hooks should not trigger hooks)
+            self._engine.load_data(rdf, trigger_hooks=False)
         return len(self._registry.get_all())
 
     def evaluate_conditions(self, phase: HookPhase) -> list[tuple[str, bool]]:
@@ -781,7 +783,8 @@ class HookExecutor:
             # Set conditionMatched in graph so N3 rules can fire
             if matched:
                 uri = f"<urn:hook:{hook.hook_id}>"
-                self._engine.load_data(f"{uri} <https://kgc.org/ns/hook/conditionMatched> true .")
+                # Use trigger_hooks=False to avoid infinite recursion
+                self._engine.load_data(f"{uri} <https://kgc.org/ns/hook/conditionMatched> true .", trigger_hooks=False)
 
             results.append((hook.hook_id, matched))
 
@@ -829,25 +832,23 @@ class HookExecutor:
         -------
         tuple[bool, str | None]
             (rollback_requested, reason)
-        """
-        # Query graph for rollback requests from N3 rules
-        query = """
-        PREFIX hook: <https://kgc.org/ns/hook/>
-        PREFIX kgc: <https://kgc.org/ns/>
 
-        SELECT ?hook ?reason WHERE {
-            ?hook kgc:rollbackRequested true .
-            ?hook kgc:rollbackReason ?reason .
-        }
+        Notes
+        -----
+        This checks receipts from the most recent phase execution.
+        If a REJECT action was taken, returns the rejection reason.
         """
-        try:
-            results = list(self._engine.store.query(query))
-            if results:
-                # PyOxigraph returns solution dict with variable bindings
-                reason_val = results[0]["reason"]
-                return (True, str(reason_val).strip('"'))
-        except Exception:
-            pass
+        # Check recent receipts for REJECT actions
+        # This is more reliable than querying N3 rules since it works
+        # without requiring EYE reasoner for simple validation hooks
+        recent_receipts = self._registry.get_receipts(limit=100)
+        for receipt in recent_receipts:
+            if receipt.action_taken == HookAction.REJECT and receipt.condition_matched:
+                # Find the hook to get the reason
+                hook = self._registry.get(receipt.hook_id)
+                if hook:
+                    reason = hook.handler_data.get("reason", "Validation failed")
+                    return (True, reason)
         return (False, None)
 
     def clear_tick_state(self) -> None:
@@ -858,5 +859,6 @@ class HookExecutor:
         tick_complete = """
         <urn:tick:current> <https://kgc.org/ns/tickComplete> true .
         """
-        self._engine.load_data(tick_complete)
+        # Use trigger_hooks=False to avoid infinite recursion
+        self._engine.load_data(tick_complete, trigger_hooks=False)
         self._engine.apply_physics()

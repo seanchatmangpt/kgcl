@@ -11,7 +11,7 @@ from contextlib import contextmanager
 from dataclasses import dataclass
 from typing import Any
 
-from pyoxigraph import QueryResults, QuerySolution, Store, parse
+from pyoxigraph import QuerySolution, QuerySolutions, RdfFormat, Store, parse
 
 
 # Custom Exceptions
@@ -107,7 +107,7 @@ class OxigraphStore:
         """
         try:
             count_before = self.triple_count()
-            for triple in parse(data, mime_type="text/turtle"):
+            for triple in parse(data, format=RdfFormat.TURTLE):
                 self.store.add(triple)
             return self.triple_count() - count_before
         except Exception as e:
@@ -133,7 +133,7 @@ class OxigraphStore:
         """
         try:
             count_before = self.triple_count()
-            for triple in parse(data, mime_type="text/n3"):
+            for triple in parse(data, format=RdfFormat.N3):
                 self.store.add(triple)
             return self.triple_count() - count_before
         except Exception as e:
@@ -159,18 +159,22 @@ class OxigraphStore:
         """
         try:
             results = self.store.query(sparql)
-            if not isinstance(results, QueryResults):
+            if not isinstance(results, QuerySolutions):
                 raise QueryError("Expected SELECT query results")
+
+            # Get variables from the QuerySolutions object
+            variables = results.variables
 
             bindings: list[dict[str, Any]] = []
             for solution in results:
                 if isinstance(solution, QuerySolution):
                     binding: dict[str, Any] = {}
-                    for var in solution.variables:
+                    for var in variables:
                         value = solution[var]
                         if value is not None:
                             # Convert RDF terms to Python types
-                            binding[str(var)] = self._convert_term(value)
+                            # Use var.value to get 's' instead of '?s'
+                            binding[var.value] = self._convert_term(value)
                     bindings.append(binding)
 
             return bindings
@@ -241,8 +245,10 @@ class OxigraphStore:
         """
         try:
             results = self.store.query(sparql)
-            if not isinstance(results, QueryResults):
-                raise QueryError("Expected CONSTRUCT query results")
+            # CONSTRUCT queries return an iterator of triples, not QuerySolutions
+            # Check that it's NOT QuerySolutions (SELECT queries return QuerySolutions)
+            if isinstance(results, QuerySolutions):
+                raise QueryError("Expected CONSTRUCT query, got SELECT query results")
 
             # Collect triples
             triples: list[str] = []

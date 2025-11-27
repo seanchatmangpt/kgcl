@@ -50,8 +50,18 @@ Examples
 
 from __future__ import annotations
 
-# PyOxigraph + EYE hybrid engine
-from kgcl.hybrid.hybrid_engine import HybridEngine, PhysicsResult
+# Adapters Layer - Port implementations
+from kgcl.hybrid.adapters import EYEAdapter, OxigraphAdapter, WCP43RulesAdapter
+
+# Application Layer - Use cases
+from kgcl.hybrid.application import ConvergenceRunner, StatusInspector, TickExecutor
+
+# Domain Layer - Core value objects and exceptions
+from kgcl.hybrid.domain import ConvergenceError, ReasonerError, StoreOperationError, TaskStatus
+from kgcl.hybrid.domain import PhysicsResult as DomainPhysicsResult
+
+# PyOxigraph + EYE hybrid engine (facade)
+from kgcl.hybrid.hybrid_engine import N3_PHYSICS, HybridEngine, PhysicsResult
 
 # Knowledge Hooks - Pure N3 Logic
 from kgcl.hybrid.knowledge_hooks import (
@@ -64,6 +74,9 @@ from kgcl.hybrid.knowledge_hooks import (
     KnowledgeHook,
 )
 
+# Ports Layer - Abstract protocols (for dependency injection)
+from kgcl.hybrid.ports import RDFStore, Reasoner, ReasoningOutput, RulesProvider
+
 # WCP-43 Complete Physics - All 43 YAWL Workflow Control Patterns
 from kgcl.hybrid.wcp43_physics import (
     WCP43_COMPLETE_PHYSICS,
@@ -72,8 +85,8 @@ from kgcl.hybrid.wcp43_physics import (
     get_pattern_rule,
     get_patterns_by_category,
     get_patterns_by_verb,
-    list_all_patterns as list_wcp_patterns,
 )
+from kgcl.hybrid.wcp43_physics import list_all_patterns as list_wcp_patterns
 
 # PyOxigraph-based architecture components
 # Wrapped in try/except for graceful degradation if pyoxigraph not installed
@@ -129,9 +142,29 @@ except ImportError as e:
     LockchainHook = None  # type: ignore[assignment, misc]
 
 __all__ = [
-    # PyOxigraph + EYE hybrid engine
+    # PyOxigraph + EYE hybrid engine (facade)
     "HybridEngine",
     "PhysicsResult",
+    "N3_PHYSICS",
+    # Domain Layer - Core value objects
+    "DomainPhysicsResult",
+    "TaskStatus",
+    "ConvergenceError",
+    "ReasonerError",
+    "StoreOperationError",
+    # Ports Layer - Abstract protocols
+    "RDFStore",
+    "Reasoner",
+    "ReasoningOutput",
+    "RulesProvider",
+    # Adapters Layer - Port implementations
+    "OxigraphAdapter",
+    "EYEAdapter",
+    "WCP43RulesAdapter",
+    # Application Layer - Use cases
+    "TickExecutor",
+    "ConvergenceRunner",
+    "StatusInspector",
     # Knowledge Hooks - Pure N3 Logic
     "KnowledgeHook",
     "HookRegistry",

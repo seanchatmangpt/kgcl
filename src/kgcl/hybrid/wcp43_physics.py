@@ -38,6 +38,8 @@ STANDARD_PREFIXES: str = """
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
 """
 
 # ==============================================================================
@@ -346,10 +348,10 @@ WCP11_IMPLICIT_TERMINATION = """
 # WCP-11: IMPLICIT TERMINATION (Void)
 # =============================================================================
 # Process terminates when no more tasks to execute (deadlock-free completion).
+# Note: N3 doesn't support FILTER NOT EXISTS. Use absence of yawl:flowsInto property.
 {
     ?task kgc:status "Completed" .
-    ?task yawl:flowsInto ?none .
-    FILTER NOT EXISTS { ?task yawl:flowsInto ?any }
+    ?task kgc:hasNoOutgoingFlow true .
 }
 =>
 {
@@ -418,7 +420,7 @@ WCP13_MI_DESIGN_TIME = """
     ?mi kgc:synchronization "all" .
     ?instance kgc:status "Completed" .
     ?mi kgc:remainingInstances ?remaining .
-    ?remaining > 0 .
+    ?remaining math:greaterThan 0 .
 }
 =>
 {
@@ -547,7 +549,7 @@ WCP16_DEFERRED_CHOICE = """
     ?choice kgc:selectedBranch ?winner .
     ?choice yawl:flowsInto ?flow .
     ?flow yawl:nextElementRef ?loser .
-    ?loser != ?winner .
+    ?loser log:notEqualTo ?winner .
 }
 =>
 {
@@ -593,7 +595,7 @@ WCP17_INTERLEAVED_PARALLEL = """
     ?task kgc:status "Ready" .
     ?region kgc:mutex ?mutex .
     ?mutex kgc:holder ?other .
-    ?other != "none" .
+    ?other log:notEqualTo "none" .
 }
 =>
 {
@@ -654,7 +656,8 @@ WCP19_CANCEL_TASK = """
 {
     ?task kgc:cancelRequested true .
     ?task kgc:status ?oldStatus .
-    FILTER(?oldStatus != "Completed" && ?oldStatus != "Cancelled")
+    ?oldStatus log:notEqualTo "Completed" .
+    ?oldStatus log:notEqualTo "Cancelled" .
 }
 =>
 {
@@ -673,7 +676,8 @@ WCP20_CANCEL_CASE = """
     ?case kgc:cancelRequested true .
     ?case kgc:hasTask ?task .
     ?task kgc:status ?status .
-    FILTER(?status != "Completed" && ?status != "Cancelled")
+    ?status log:notEqualTo "Completed" .
+    ?status log:notEqualTo "Cancelled" .
 }
 =>
 {
@@ -692,7 +696,8 @@ WCP25_CANCEL_REGION = """
     ?region kgc:cancelRequested true .
     ?region kgc:contains ?task .
     ?task kgc:status ?status .
-    FILTER(?status != "Completed" && ?status != "Cancelled")
+    ?status log:notEqualTo "Completed" .
+    ?status log:notEqualTo "Cancelled" .
 }
 =>
 {
@@ -712,7 +717,8 @@ WCP26_CANCEL_MI_ACTIVITY = """
     ?mi kgc:cancelRequested true .
     ?instance kgc:parentMI ?mi .
     ?instance kgc:status ?status .
-    FILTER(?status != "Completed" && ?status != "Cancelled")
+    ?status log:notEqualTo "Completed" .
+    ?status log:notEqualTo "Cancelled" .
 }
 =>
 {
@@ -744,7 +750,8 @@ WCP27_COMPLETE_MI_ACTIVITY = """
     ?mi kgc:forceCompleteRequested true .
     ?instance kgc:parentMI ?mi .
     ?instance kgc:status ?status .
-    FILTER(?status != "Completed" && ?status != "Cancelled")
+    ?status log:notEqualTo "Completed" .
+    ?status log:notEqualTo "Cancelled" .
 }
 =>
 {
@@ -782,7 +789,7 @@ WCP21_STRUCTURED_LOOP = """
     ?cond kgc:evaluatesTo true .
     ?loop kgc:iterationCount ?count .
     ?loop kgc:maxIterations ?max .
-    ?count < ?max .
+    ?count math:lessThan ?max .
 }
 =>
 {
@@ -828,7 +835,7 @@ WCP22_RECURSION = """
     ?cond kgc:evaluatesTo true .
     ?task kgc:depth ?depth .
     ?task kgc:maxDepth ?maxDepth .
-    ?depth < ?maxDepth .
+    ?depth math:lessThan ?maxDepth .
 }
 =>
 {
@@ -887,7 +894,7 @@ WCP23_TRANSIENT_TRIGGER = """
     ?trigger kgc:firedAt ?time .
     ?trigger kgc:targets ?task .
     ?task kgc:status ?status .
-    FILTER(?status != "Ready")
+    ?status log:notEqualTo "Ready" .
 }
 =>
 {
@@ -952,7 +959,8 @@ WCP28_BLOCKING_DISCRIMINATOR = """
     ?disc kgc:status "Fired" .
     ?disc kgc:waitingFor ?branch .
     ?branch kgc:status "Completed" .
-    ?branch != ?disc kgc:winningBranch .
+    ?disc kgc:winningBranch ?winningBranch .
+    ?branch log:notEqualTo ?winningBranch .
 }
 =>
 {
@@ -995,9 +1003,10 @@ WCP29_CANCELLING_DISCRIMINATOR = """
     ?disc kgc:status "Fired" .
     ?disc kgc:winningBranch ?winner .
     ?disc kgc:waitingFor ?loser .
-    ?loser != ?winner .
+    ?loser log:notEqualTo ?winner .
     ?loser kgc:status ?status .
-    FILTER(?status != "Completed" && ?status != "Cancelled")
+    ?status log:notEqualTo "Completed" .
+    ?status log:notEqualTo "Cancelled" .
 }
 =>
 {
@@ -1015,7 +1024,7 @@ WCP30_STRUCTURED_PARTIAL_JOIN = """
     ?join kgc:type "PartialJoin" .
     ?join kgc:threshold ?n .
     ?join kgc:completionCount ?count .
-    ?count >= ?n .
+    ?count math:notLessThan ?n .
     ?join kgc:status "Waiting" .
 }
 =>
@@ -1045,7 +1054,7 @@ WCP31_BLOCKING_PARTIAL_JOIN = """
     ?join kgc:type "BlockingPartialJoin" .
     ?join kgc:threshold ?n .
     ?join kgc:completionCount ?count .
-    ?count >= ?n .
+    ?count math:notLessThan ?n .
     ?join kgc:status "Waiting" .
     ?join kgc:blocked false .
 }
@@ -1078,7 +1087,7 @@ WCP32_CANCELLING_PARTIAL_JOIN = """
     ?join kgc:type "CancellingPartialJoin" .
     ?join kgc:threshold ?n .
     ?join kgc:completionCount ?count .
-    ?count >= ?n .
+    ?count math:notLessThan ?n .
     ?join kgc:status "Waiting" .
 }
 =>
@@ -1093,7 +1102,8 @@ WCP32_CANCELLING_PARTIAL_JOIN = """
     ?join kgc:cancelPending true .
     ?join kgc:waitingFor ?branch .
     ?branch kgc:status ?status .
-    FILTER(?status != "Completed" && ?status != "Cancelled")
+    ?status log:notEqualTo "Completed" .
+    ?status log:notEqualTo "Cancelled" .
 }
 =>
 {
@@ -1145,7 +1155,7 @@ WCP34_STATIC_PARTIAL_JOIN_MI = """
     ?mi kgc:joinType "StaticPartial" .
     ?mi kgc:threshold ?n .
     ?mi kgc:completedInstances ?count .
-    ?count >= ?n .
+    ?count math:notLessThan ?n .
     ?mi kgc:status "AwaitingCompletion" .
 }
 =>
@@ -1164,7 +1174,7 @@ WCP35_CANCELLING_PARTIAL_JOIN_MI = """
     ?mi kgc:joinType "CancellingPartial" .
     ?mi kgc:threshold ?n .
     ?mi kgc:completedInstances ?count .
-    ?count >= ?n .
+    ?count math:notLessThan ?n .
     ?mi kgc:status "AwaitingCompletion" .
 }
 =>
@@ -1178,7 +1188,8 @@ WCP35_CANCELLING_PARTIAL_JOIN_MI = """
     ?mi kgc:cancelRemaining true .
     ?instance kgc:parentMI ?mi .
     ?instance kgc:status ?status .
-    FILTER(?status != "Completed" && ?status != "Cancelled")
+    ?status log:notEqualTo "Completed" .
+    ?status log:notEqualTo "Cancelled" .
 }
 =>
 {
@@ -1197,7 +1208,7 @@ WCP36_DYNAMIC_PARTIAL_JOIN_MI = """
     ?mi kgc:thresholdExpression ?expr .
     ?expr kgc:evaluatesTo ?n .
     ?mi kgc:completedInstances ?count .
-    ?count >= ?n .
+    ?count math:notLessThan ?n .
     ?mi kgc:status "AwaitingCompletion" .
 }
 =>
@@ -1293,7 +1304,7 @@ WCP39_CRITICAL_SECTION = """
     ?task kgc:requiresCriticalSection ?cs .
     ?task kgc:status "Ready" .
     ?cs kgc:lockHolder ?other .
-    ?other != "none" .
+    ?other log:notEqualTo "none" .
 }
 =>
 {
@@ -1433,7 +1444,7 @@ WCP43_EXPLICIT_TERMINATION = """
     ?endTask kgc:terminationType "explicit" .
     ?endTask kgc:inCase ?case .
     ?otherTask kgc:inCase ?case .
-    ?otherTask != ?endTask .
+    ?otherTask log:notEqualTo ?endTask .
     ?otherTask kgc:status "Active" .
 }
 =>
@@ -1662,11 +1673,7 @@ def get_patterns_by_category(category: str) -> list[int]:
     list[int]
         Pattern numbers in that category
     """
-    return [
-        num
-        for num, info in WCP_PATTERN_CATALOG.items()
-        if info["category"] == category
-    ]
+    return [num for num, info in WCP_PATTERN_CATALOG.items() if info["category"] == category]
 
 
 def get_patterns_by_verb(verb: str) -> list[int]:
@@ -1682,8 +1689,4 @@ def get_patterns_by_verb(verb: str) -> list[int]:
     list[int]
         Pattern numbers using that verb
     """
-    return [
-        num
-        for num, info in WCP_PATTERN_CATALOG.items()
-        if verb in info["verb"]
-    ]
+    return [num for num, info in WCP_PATTERN_CATALOG.items() if verb in info["verb"]]

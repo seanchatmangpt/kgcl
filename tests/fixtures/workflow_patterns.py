@@ -894,10 +894,12 @@ def create_workflow_pattern(pattern_id: int, **kwargs: Any) -> Graph:
         pattern_id: WCP pattern number (1-43)
         **kwargs: Pattern-specific parameters (e.g., branch_count, instances)
 
-    Returns:
+    Returns
+    -------
         RDF graph implementing the pattern
 
-    Raises:
+    Raises
+    ------
         ValueError: If pattern_id is invalid or not a control-flow pattern
 
     Usage:
@@ -954,7 +956,8 @@ def create_workflow_pattern(pattern_id: int, **kwargs: Any) -> Graph:
 def workflow_pattern_factory() -> Any:
     """Fixture that returns the pattern factory function.
 
-    Returns:
+    Returns
+    -------
         Callable that generates workflow graphs for any of the 43 patterns.
 
     Usage in tests:

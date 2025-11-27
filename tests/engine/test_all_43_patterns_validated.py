@@ -190,7 +190,7 @@ def physics_ontology() -> Graph:
     True
     """
     ontology = Graph()
-    ontology_path = Path(__file__).parent.parent.parent / "ontology" / "kgc_physics.ttl"
+    ontology_path = Path(__file__).parent.parent.parent / "ontology" / "core" / "kgc_physics.ttl"
     ontology.parse(ontology_path, format="turtle")
     return ontology
 
@@ -206,7 +206,7 @@ def test_ontology_loads_successfully(physics_ontology: Graph) -> None:
     Examples
     --------
     >>> ontology = Graph()
-    >>> ontology.parse("ontology/kgc_physics.ttl", format="turtle")
+    >>> ontology.parse("ontology/core/kgc_physics.ttl", format="turtle")
     >>> len(ontology) > 0
     True
     """

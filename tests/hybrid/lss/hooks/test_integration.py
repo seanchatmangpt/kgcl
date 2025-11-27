@@ -25,8 +25,8 @@ from datetime import UTC, datetime, timedelta
 import pytest
 
 from kgcl.hybrid.knowledge_hooks import HookAction, HookExecutor, HookPhase, HookReceipt, HookRegistry
-from tests.hybrid.lss.hooks.spc.metrics import calculate_hook_spc_metrics, check_hook_stability
 from tests.hybrid.lss.hooks.ctq.factors import HookCTQDimension, HookCTQFactor
+from tests.hybrid.lss.hooks.spc.metrics import calculate_hook_spc_metrics, check_hook_stability
 
 
 class TestSPCMetricsIntegration:

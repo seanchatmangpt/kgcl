@@ -101,22 +101,31 @@ class TestWCP11ImplicitTermination:
 
     @pytest.mark.oxigraph
     def test_oxigraph_execution(self) -> None:
-        """Test WCP-11 on PyOxigraph engine."""
+        """Test WCP-11 on PyOxigraph engine.
+
+        WCP-11 implicit termination marks completed tasks with termination markers.
+        Expected delta: 2 (kgc:terminated true, kgc:terminationType "implicit")
+        """
         engine = HybridEngine()
         engine.load_data(WCP11_IMPLICIT_TERMINATION_TOPOLOGY)
         result = engine.apply_physics()
-        assert result.delta == 0
+        # Implicit termination adds termination markers to completed task
+        assert result.delta == 2  # terminated=true, terminationType="implicit"
 
     @pytest.mark.eye
     def test_eye_execution(self, eye_available: bool) -> None:
-        """Test WCP-11 on EYE reasoner."""
+        """Test WCP-11 on EYE reasoner.
+
+        WCP-11 implicit termination marks completed tasks with termination markers.
+        """
         if not eye_available:
             pytest.skip("EYE reasoner not installed")
 
         engine = HybridEngine()
         engine.load_data(WCP11_IMPLICIT_TERMINATION_TOPOLOGY)
         result = engine.apply_physics()
-        assert result.delta == 0
+        # Implicit termination adds termination markers
+        assert result.delta == 2
 
     @pytest.mark.cross_engine
     def test_cross_engine_consistency(self, eye_available: bool) -> None:

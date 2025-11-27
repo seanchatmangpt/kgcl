@@ -223,7 +223,7 @@ class SelfHealingExecutor:
                 duration_ms=duration_ms,
             )
 
-        except asyncio.TimeoutError:
+        except TimeoutError:
             result = self._handle_timeout(hook, self.config.timeout_ms)
             healing_results.append(result)
             return self._create_error_receipt(hook, "Execution timeout")

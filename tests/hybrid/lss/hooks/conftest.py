@@ -26,14 +26,7 @@ from typing import TYPE_CHECKING
 import pytest
 
 from kgcl.hybrid.hybrid_engine import HybridEngine
-from kgcl.hybrid.knowledge_hooks import (
-    HookAction,
-    HookExecutor,
-    HookPhase,
-    HookReceipt,
-    HookRegistry,
-    KnowledgeHook,
-)
+from kgcl.hybrid.knowledge_hooks import HookAction, HookExecutor, HookPhase, HookReceipt, HookRegistry, KnowledgeHook
 
 if TYPE_CHECKING:
     from collections.abc import Iterator

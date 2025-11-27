@@ -323,8 +323,7 @@ class TestWCP17InterleavedParallelWithMutex:
             try:
                 with access_lock:
                     current_accessors += 1
-                    if current_accessors > max_observed_concurrent:
-                        max_observed_concurrent = current_accessors
+                    max_observed_concurrent = max(max_observed_concurrent, current_accessors)
 
                 # Simulate resource access
                 time.sleep(0.02)

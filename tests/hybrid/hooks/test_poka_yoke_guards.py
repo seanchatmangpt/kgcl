@@ -8,11 +8,7 @@ from __future__ import annotations
 
 import pytest
 
-from kgcl.hybrid.hooks.poka_yoke_guards import (
-    HookPokaYokeType,
-    PokaYokeGuard,
-    PokaYokeViolation,
-)
+from kgcl.hybrid.hooks.poka_yoke_guards import HookPokaYokeType, PokaYokeGuard, PokaYokeViolation
 from kgcl.hybrid.knowledge_hooks import HookAction, HookPhase, HookRegistry, KnowledgeHook
 
 

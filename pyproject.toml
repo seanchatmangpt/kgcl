@@ -4,13 +4,13 @@ build-backend = "hatchling.build"
 
 [project]  # https://packaging.python.org/en/latest/specifications/pyproject-toml/
 name = "kgcl"
-version = "0.0.0"
+version = "0.1.0"
 description = "Knowledge Geometry Calculus for Life - Local-first autonomic knowledge engine"
 readme = "README.md"
 authors = [
   { name = "Your Name", email = "your.email@example.com" },
 ]
-requires-python = ">=3.12,<4.0"
+requires-python = ">=3.13,<4.0"
 dependencies = [
   "click>=8.1.7",
   "rich>=13.7.0",

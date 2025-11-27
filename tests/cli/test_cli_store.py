@@ -32,9 +32,7 @@ ex:Alice ex:name "Alice" .
 ex:Bob ex:name "Bob" .
 ex:Alice ex:knows ex:Bob .
 """
-        with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".ttl", delete=False
-        ) as f:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".ttl", delete=False) as f:
             f.write(data)
             f.flush()
             data_path = f.name
@@ -42,16 +40,7 @@ ex:Alice ex:knows ex:Bob .
         runner = CliRunner()
 
         # Act: Query with file loaded
-        result = runner.invoke(
-            app,
-            [
-                "store",
-                "query",
-                "SELECT ?s ?p ?o WHERE { ?s ?p ?o }",
-                "-f",
-                data_path,
-            ],
-        )
+        result = runner.invoke(app, ["store", "query", "SELECT ?s ?p ?o WHERE { ?s ?p ?o }", "-f", data_path])
 
         # Assert
         assert result.exit_code == 0, f"CLI failed: {result.output}"
@@ -70,9 +59,7 @@ ex:Alice ex:age 30 .
 ex:Bob ex:age 25 .
 ex:Carol ex:age 35 .
 """
-        with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".ttl", delete=False
-        ) as f:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".ttl", delete=False) as f:
             f.write(data)
             f.flush()
             data_path = f.name
@@ -83,7 +70,7 @@ ex:Carol ex:age 35 .
             [
                 "store",
                 "query",
-                'SELECT ?person WHERE { ?person <http://example.org/age> ?age . FILTER(?age > 28) }',
+                "SELECT ?person WHERE { ?person <http://example.org/age> ?age . FILTER(?age > 28) }",
                 "-f",
                 data_path,
             ],
@@ -102,9 +89,7 @@ ex:Carol ex:age 35 .
 @prefix ex: <http://example.org/> .
 ex:Alice ex:name "Alice" .
 """
-        with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".ttl", delete=False
-        ) as f:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".ttl", delete=False) as f:
             f.write(data)
             f.flush()
             data_path = f.name
@@ -137,9 +122,7 @@ ex:Alice ex:name "Alice" .
 ex:Alice ex:name "Alice" .
 ex:Bob ex:name "Bob" .
 """
-        with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".ttl", delete=False
-        ) as f:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".ttl", delete=False) as f:
             f.write(data)
             f.flush()
             data_path = f.name
@@ -171,23 +154,14 @@ ex:Bob ex:name "Bob" .
 @prefix ex: <http://example.org/> .
 ex:Alice ex:name "Alice" .
 """
-        with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".ttl", delete=False
-        ) as f:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".ttl", delete=False) as f:
             f.write(data)
             f.flush()
             data_path = f.name
 
         runner = CliRunner()
         result = runner.invoke(
-            app,
-            [
-                "store",
-                "query",
-                "SELECT ?x WHERE { ?x <http://example.org/nonexistent> ?y }",
-                "-f",
-                data_path,
-            ],
+            app, ["store", "query", "SELECT ?x WHERE { ?x <http://example.org/nonexistent> ?y }", "-f", data_path]
         )
 
         assert result.exit_code == 0, f"CLI failed: {result.output}"
@@ -202,24 +176,13 @@ ex:Alice ex:name "Alice" .
 @prefix ex: <http://example.org/> .
 ex:Alice ex:name "Alice" .
 """
-        with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".ttl", delete=False
-        ) as f:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".ttl", delete=False) as f:
             f.write(data)
             f.flush()
             data_path = f.name
 
         runner = CliRunner()
-        result = runner.invoke(
-            app,
-            [
-                "store",
-                "query",
-                "NOT VALID SPARQL",
-                "-f",
-                data_path,
-            ],
-        )
+        result = runner.invoke(app, ["store", "query", "NOT VALID SPARQL", "-f", data_path])
 
         assert result.exit_code != 0
 
@@ -239,9 +202,7 @@ ex:Alice ex:name "Alice" .
 ex:Bob ex:name "Bob" .
 ex:Alice ex:knows ex:Bob .
 """
-        with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".ttl", delete=False
-        ) as f:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".ttl", delete=False) as f:
             f.write(data)
             f.flush()
             data_path = f.name
@@ -269,9 +230,7 @@ class TestStoreDump:
 
 ex:Alice ex:name "Alice" .
 """
-        with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".ttl", delete=False
-        ) as f:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".ttl", delete=False) as f:
             f.write(data)
             f.flush()
             data_path = f.name

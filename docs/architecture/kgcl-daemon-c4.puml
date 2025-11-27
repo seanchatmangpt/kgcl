@@ -1,0 +1,312 @@
+@startuml kgcl-daemon-c4-context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title KGCL Daemon - System Context (C4 Level 1)
+
+Person(developer, "Developer", "Builds workflow-aware applications")
+Person(operator, "Operator", "Manages knowledge graph state")
+
+System(kgcld, "KGCL Daemon", "Long-running process maintaining warm PyOxigraph + EYE reasoner with automatic hook execution")
+
+System_Ext(git, "Git Repository", "Version controlled N3 rules and hooks")
+System_Ext(otel, "OpenTelemetry Collector", "Observability pipeline")
+System_Ext(external_kg, "External Knowledge Graphs", "SPARQL endpoints, LinkedData")
+
+Rel(developer, kgcld, "Adds triples, queries graph", "CLI / HTTP / gRPC")
+Rel(operator, kgcld, "Monitors, configures hooks", "HTTP API")
+Rel(kgcld, git, "Loads rules/hooks on startup", "File system")
+Rel(kgcld, otel, "Exports traces, metrics", "OTLP")
+Rel(kgcld, external_kg, "Federates queries", "SPARQL")
+
+@enduml
+
+
+@startuml kgcl-daemon-c4-container
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title KGCL Daemon - Container Diagram (C4 Level 2)
+
+Person(client, "Client", "CLI, Application, or Service")
+
+System_Boundary(kgcld, "KGCL Daemon") {
+    Container(api, "API Gateway", "Python asyncio", "Routes requests to appropriate handlers, manages sessions")
+
+    Container(matter, "Matter Layer", "PyOxigraph", "In-memory RDF store with SPARQL 1.1, keeps graph warm")
+
+    Container(physics, "Physics Layer", "eye-js WASM", "N3 reasoner running in warm WASM runtime, sub-ms inference")
+
+    Container(hooks, "Hook Executor", "Python", "Evaluates conditions, executes actions on graph mutations")
+
+    Container(time, "Time Controller", "Python asyncio", "Orchestrates tick cycles, manages temporal state")
+
+    ContainerDb(wal, "Write-Ahead Log", "SQLite", "Durability for graph mutations")
+
+    Container(metrics, "Metrics Exporter", "OTEL SDK", "Traces reasoning, hook execution, query latency")
+}
+
+System_Ext(otel, "OTEL Collector", "Observability")
+
+Rel(client, api, "add/query/subscribe", "HTTP/gRPC/Unix Socket")
+Rel(api, matter, "SPARQL queries", "In-process")
+Rel(api, hooks, "Trigger hooks", "In-process")
+Rel(matter, physics, "Request inference", "In-process WASM")
+Rel(matter, hooks, "Mutation events", "Async queue")
+Rel(hooks, matter, "Apply inferred triples", "In-process")
+Rel(time, matter, "Tick mutations", "In-process")
+Rel(time, hooks, "Temporal triggers", "In-process")
+Rel(matter, wal, "Persist mutations", "Async write")
+Rel(metrics, otel, "Export telemetry", "OTLP/gRPC")
+
+@enduml
+
+
+@startuml kgcl-daemon-c4-component-matter
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title Matter Layer - Component Diagram (C4 Level 3)
+
+Container_Boundary(matter, "Matter Layer (PyOxigraph)") {
+    Component(store, "Graph Store", "pyoxigraph.Store", "In-memory quad store with named graphs")
+
+    Component(sparql, "SPARQL Engine", "Oxigraph SPARQL", "Query parsing, optimization, execution")
+
+    Component(txn, "Transaction Manager", "Python", "ACID transactions with rollback support")
+
+    Component(index, "Triple Indexes", "Rust B-trees", "SPO, POS, OSP indexes for fast lookup")
+
+    Component(serializer, "Serializers", "Oxigraph", "Turtle, N-Triples, N3, JSON-LD, RDF/XML")
+
+    Component(mutation_bus, "Mutation Event Bus", "asyncio.Queue", "Publishes add/remove events to subscribers")
+}
+
+Container_Ext(physics, "Physics Layer")
+Container_Ext(hooks, "Hook Executor")
+Container_Ext(wal, "WAL")
+
+Rel(sparql, store, "Execute queries")
+Rel(sparql, index, "Index lookups")
+Rel(txn, store, "Begin/commit/rollback")
+Rel(txn, wal, "Write-ahead log")
+Rel(store, mutation_bus, "Emit mutations")
+Rel(mutation_bus, hooks, "Notify: triple added/removed")
+Rel(mutation_bus, physics, "Trigger reasoning on change")
+Rel(serializer, store, "Import/export graphs")
+
+@enduml
+
+
+@startuml kgcl-daemon-c4-component-physics
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title Physics Layer - Component Diagram (C4 Level 3)
+
+Container_Boundary(physics, "Physics Layer (EYE WASM)") {
+    Component(wasm_rt, "WASM Runtime", "wasmtime-py", "Persistent WASM instance, ~200ms cold / <1ms warm")
+
+    Component(eye_module, "EYE Module", "eye-js WASM", "SWI-Prolog + EYE compiled to WebAssembly")
+
+    Component(rule_cache, "Rule Cache", "Python dict", "Pre-parsed N3 rules by namespace")
+
+    Component(query_api, "Query API", "Python", "reason(state, rules) -> inferences")
+
+    Component(builtin_ext, "N3 Builtins", "Python callbacks", "Custom builtins: http:get, crypto:hash, time:now")
+
+    Component(result_parser, "Result Parser", "Python", "Parse N3 output to PyOxigraph quads")
+}
+
+Container_Ext(matter, "Matter Layer")
+
+Rel(query_api, wasm_rt, "Call WASM function")
+Rel(wasm_rt, eye_module, "Execute reasoning")
+Rel(query_api, rule_cache, "Lookup cached rules")
+Rel(eye_module, builtin_ext, "Callback for builtins")
+Rel(result_parser, matter, "Insert inferred triples")
+Rel(matter, query_api, "Request inference")
+
+@enduml
+
+
+@startuml kgcl-daemon-c4-component-hooks
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title Hook Executor - Component Diagram (C4 Level 3)
+
+Container_Boundary(hooks, "Hook Executor") {
+    Component(registry, "Hook Registry", "Python dict", "Loaded hooks indexed by trigger type")
+
+    Component(condition_eval, "Condition Evaluator", "Python", "8 condition types: sparql, shacl, file, env, etc.")
+
+    Component(action_exec, "Action Executor", "Python", "4 actions: insert, delete, notify, invoke")
+
+    Component(phase_mgr, "Phase Manager", "Python", "5 phases: pre-validate, validate, pre-commit, commit, post-commit")
+
+    Component(sandbox, "Execution Sandbox", "Python subprocess", "Isolated execution for invoke actions")
+
+    Component(receipt_log, "Receipt Logger", "Python", "Audit trail of hook executions")
+}
+
+Container_Ext(matter, "Matter Layer")
+Container_Ext(metrics, "Metrics Exporter")
+
+Rel(matter, registry, "Mutation event")
+Rel(registry, phase_mgr, "Dispatch to phase")
+Rel(phase_mgr, condition_eval, "Evaluate conditions")
+Rel(condition_eval, matter, "SPARQL ASK queries")
+Rel(phase_mgr, action_exec, "Execute if condition true")
+Rel(action_exec, matter, "Insert/delete triples")
+Rel(action_exec, sandbox, "Invoke external script")
+Rel(action_exec, receipt_log, "Log execution")
+Rel(receipt_log, metrics, "Export hook metrics")
+
+@enduml
+
+
+@startuml kgcl-daemon-c4-component-time
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title Time Controller - Component Diagram (C4 Level 3)
+
+Container_Boundary(time, "Time Controller") {
+    Component(tick_loop, "Tick Loop", "asyncio", "Main event loop, configurable tick rate")
+
+    Component(clock, "Logical Clock", "Python", "Monotonic tick counter, wall-clock mapping")
+
+    Component(scheduler, "Task Scheduler", "Python heapq", "Priority queue of scheduled mutations")
+
+    Component(wcp_engine, "WCP State Machine", "Python", "43 workflow control patterns as state transitions")
+
+    Component(temporal_hooks, "Temporal Triggers", "Python", "Time-based hook conditions: at, after, every")
+
+    Component(snapshot_mgr, "Snapshot Manager", "Python", "Point-in-time graph snapshots for replay")
+}
+
+Container_Ext(matter, "Matter Layer")
+Container_Ext(hooks, "Hook Executor")
+
+Rel(tick_loop, clock, "Advance tick")
+Rel(tick_loop, scheduler, "Process due tasks")
+Rel(scheduler, matter, "Apply scheduled mutations")
+Rel(tick_loop, wcp_engine, "Evaluate WCP transitions")
+Rel(wcp_engine, matter, "Query workflow state")
+Rel(wcp_engine, matter, "Apply state changes")
+Rel(tick_loop, temporal_hooks, "Check temporal conditions")
+Rel(temporal_hooks, hooks, "Trigger time-based hooks")
+Rel(snapshot_mgr, matter, "Serialize graph state")
+
+@enduml
+
+
+@startuml kgcl-daemon-c4-dynamic-add
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Dynamic.puml
+
+title KGCL Daemon - Dynamic: Add Triple with Hook Execution
+
+participant "Client" as client
+participant "API Gateway" as api
+participant "Matter Layer" as matter
+participant "Hook Executor" as hooks
+participant "Physics Layer" as physics
+participant "WAL" as wal
+
+client -> api: POST /add {"s": "task:1", "p": "status", "o": "Complete"}
+api -> matter: begin_transaction()
+matter -> wal: log_intent(ADD, triple)
+api -> matter: add(triple)
+matter -> hooks: emit(TRIPLE_ADDED, triple)
+hooks -> hooks: evaluate_conditions(pre-validate)
+hooks -> matter: SPARQL ASK (condition check)
+matter --> hooks: true
+hooks -> physics: reason(current_state, wcp_rules)
+physics --> hooks: inferred_triples[]
+hooks -> matter: add_all(inferred_triples)
+matter -> wal: log_intent(ADD, inferred[])
+hooks -> hooks: execute_actions(notify)
+api -> matter: commit_transaction()
+matter -> wal: flush()
+matter --> api: Receipt{added: 1, inferred: 3}
+api --> client: 200 OK {receipt}
+
+@enduml
+
+
+@startuml kgcl-daemon-c4-dynamic-warmup
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Dynamic.puml
+
+title KGCL Daemon - Dynamic: Startup Warm-up Sequence
+
+participant "Main" as main
+participant "Matter Layer" as matter
+participant "Physics Layer" as physics
+participant "Hook Executor" as hooks
+participant "Time Controller" as time
+participant "API Gateway" as api
+
+main -> matter: initialize()
+matter -> matter: load_store(wal_path)
+matter --> main: Store ready (~50ms)
+
+main -> physics: initialize()
+physics -> physics: load_wasm_module()
+physics -> physics: instantiate_eye()
+physics -> physics: precompile_rules(wcp43.n3)
+physics --> main: Physics ready (~200ms)
+
+main -> hooks: initialize()
+hooks -> hooks: load_hooks(hooks_dir)
+hooks -> hooks: validate_conditions()
+hooks --> main: Hooks ready (~10ms)
+
+main -> time: initialize()
+time -> time: restore_clock(wal)
+time -> time: rebuild_scheduler()
+time --> main: Time ready (~5ms)
+
+main -> api: start_server(port=8765)
+api -> api: bind_routes()
+api -> api: start_event_loop()
+api --> main: Listening
+
+note over main: Total cold start: ~300ms\nSubsequent requests: <5ms
+
+@enduml
+
+
+@startuml kgcl-daemon-c4-deployment
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml
+
+title KGCL Daemon - Deployment Diagram
+
+Deployment_Node(dev_machine, "Developer Machine", "macOS/Linux") {
+    Deployment_Node(docker, "Docker", "Container Runtime") {
+        Container(kgcld_container, "kgcld", "Python 3.12", "KGCL Daemon process")
+    }
+
+    Deployment_Node(volumes, "Docker Volumes") {
+        ContainerDb(wal_vol, "kgcl-wal", "SQLite", "Persistent WAL")
+        ContainerDb(rules_vol, "kgcl-rules", "N3 files", "Rules and hooks")
+    }
+}
+
+Deployment_Node(k8s, "Kubernetes Cluster", "Production") {
+    Deployment_Node(pod, "kgcld Pod", "StatefulSet") {
+        Container(kgcld_prod, "kgcld", "Python 3.12", "KGCL Daemon")
+        Container(otel_sidecar, "otel-collector", "OTEL", "Sidecar for telemetry")
+    }
+
+    Deployment_Node(pvc, "Persistent Volume Claims") {
+        ContainerDb(wal_pvc, "kgcl-wal-pvc", "SSD", "WAL storage")
+    }
+}
+
+Deployment_Node(monitoring, "Monitoring Stack") {
+    Container(jaeger, "Jaeger", "Tracing", "Distributed traces")
+    Container(prometheus, "Prometheus", "Metrics", "Time-series metrics")
+}
+
+Rel(kgcld_container, wal_vol, "Persist")
+Rel(kgcld_container, rules_vol, "Load")
+Rel(kgcld_prod, wal_pvc, "Persist")
+Rel(otel_sidecar, jaeger, "OTLP")
+Rel(otel_sidecar, prometheus, "Remote write")
+
+@enduml

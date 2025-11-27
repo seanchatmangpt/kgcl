@@ -42,7 +42,7 @@ WORKFLOW = Namespace("http://example.org/workflow#")
 def physics_ontology() -> Graph:
     """Load KGC Physics Ontology for verb resolution."""
     ontology = Graph()
-    ontology.parse("ontology/kgc_physics.ttl", format="turtle")
+    ontology.parse("ontology/core/kgc_physics.ttl", format="turtle")
     return ontology
 
 

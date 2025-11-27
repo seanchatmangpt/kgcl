@@ -25,7 +25,7 @@ def physics_ontology() -> Graph:
         The KGC physics ontology.
     """
     ontology = Graph()
-    ontology.parse("ontology/kgc_physics.ttl", format="turtle")
+    ontology.parse("ontology/core/kgc_physics.ttl", format="turtle")
     return ontology
 
 

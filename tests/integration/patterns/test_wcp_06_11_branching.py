@@ -794,7 +794,7 @@ class TestCrossServiceBranchingPatterns:
         )
 
         # Load minimal OR-split/OR-join topology
-        workflow_turtle = f"""
+        workflow_turtle = """
             @prefix yawl: <http://www.yawlfoundation.org/yawlschema#> .
             @prefix kgc: <http://kgcl.io/ontology/kgc#> .
             @prefix wf: <http://example.org/workflow/> .

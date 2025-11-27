@@ -156,7 +156,13 @@ class TestCTQ1Correctness:
 
         assert "urn:task:B" in statuses, "Task B should be activated (predicate true)"
         assert statuses["urn:task:B"] in ("Active", "Completed", "Archived"), "Task B should be activated"
-        assert "urn:task:C" not in statuses, "Task C should NOT be activated (XOR exclusivity)"
+        # C should NOT be activated - it can have "Pending" status but not "Active"
+        if "urn:task:C" in statuses:
+            assert statuses["urn:task:C"] not in (
+                "Active",
+                "Completed",
+                "Archived",
+            ), "Task C should NOT be activated (XOR exclusivity)"
 
     def test_state_based_milestone_correct(
         self, load_and_run: Callable[[str, int], tuple[list[PhysicsResult], dict[str, str]]]

@@ -134,22 +134,31 @@ class TestWCP43ExplicitTermination:
 
     @pytest.mark.oxigraph
     def test_oxigraph_execution(self) -> None:
-        """Test WCP-43 on PyOxigraph engine."""
+        """Test WCP-43 on PyOxigraph engine.
+
+        Explicit termination marks task with termination markers.
+        Expected delta: 2 (kgc:terminated true, kgc:terminationType "explicit")
+        """
         engine = HybridEngine()
         engine.load_data(WCP43_EXPLICIT_TERMINATION_TOPOLOGY)
         result = engine.apply_physics()
-        assert result.delta == 0
+        # Explicit termination adds termination markers
+        assert result.delta == 2
 
     @pytest.mark.eye
     def test_eye_execution(self, eye_available: bool) -> None:
-        """Test WCP-43 on EYE reasoner."""
+        """Test WCP-43 on EYE reasoner.
+
+        Explicit termination marks task with termination markers.
+        """
         if not eye_available:
             pytest.skip("EYE reasoner not installed")
 
         engine = HybridEngine()
         engine.load_data(WCP43_EXPLICIT_TERMINATION_TOPOLOGY)
         result = engine.apply_physics()
-        assert result.delta == 0
+        # Explicit termination adds termination markers
+        assert result.delta == 2
 
     @pytest.mark.cross_engine
     def test_cross_engine_consistency(self, eye_available: bool) -> None:

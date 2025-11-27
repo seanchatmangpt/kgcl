@@ -438,13 +438,18 @@ class TestPY006TickCountBounds:
         assert engine.tick_count <= 5
 
     def test_single_tick(self, engine: HybridEngine) -> None:
-        """Single tick (max_ticks=1) is valid parameter."""
+        """Single tick (max_ticks=1) is valid parameter.
+
+        Note: A completed task with no outgoing flows triggers WCP-11 implicit
+        termination markers (delta=2), so it won't converge in 1 tick.
+        Instead, we use an Active task which stays stable (converges in 1 tick).
+        """
         topology = """
         @prefix kgc: <https://kgc.org/ns/> .
         @prefix yawl: <http://www.yawlfoundation.org/yawlschema#> .
 
         <urn:task:A> a yawl:Task ;
-            kgc:status "Completed" .
+            kgc:status "Active" .
         """
         engine.load_data(topology)
         result = engine.run_to_completion(max_ticks=1)

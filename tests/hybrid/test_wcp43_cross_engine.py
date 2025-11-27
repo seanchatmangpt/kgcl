@@ -511,7 +511,11 @@ TestWCP10ArbitraryCycles = _make_catalog_test_class(10, "Arbitrary Cycles")
 
 @pytest.mark.wcp(11)
 class TestWCP11ImplicitTermination:
-    """WCP-11: Implicit Termination."""
+    """WCP-11: Implicit Termination.
+
+    WCP-11 fires when a task is Completed and has no outgoing flows,
+    producing termination markers (terminated=true, terminationType="implicit").
+    """
 
     @pytest.mark.oxigraph
     def test_oxigraph_execution(self) -> None:
@@ -519,7 +523,8 @@ class TestWCP11ImplicitTermination:
         engine = HybridEngine()
         engine.load_data(WCP11_IMPLICIT_TERMINATION_TOPOLOGY)
         result = engine.apply_physics()
-        assert result.delta == 0
+        # WCP-11 produces 2 triples (terminated=true, terminationType="implicit")
+        assert result.delta == 2
 
     @pytest.mark.eye
     def test_eye_execution(self, eye_available: bool) -> None:
@@ -530,7 +535,8 @@ class TestWCP11ImplicitTermination:
         engine = HybridEngine()
         engine.load_data(WCP11_IMPLICIT_TERMINATION_TOPOLOGY)
         result = engine.apply_physics()
-        assert result.delta == 0
+        # WCP-11 produces 2 triples (terminated=true, terminationType="implicit")
+        assert result.delta == 2
 
     @pytest.mark.cross_engine
     def test_cross_engine_consistency(self, eye_available: bool) -> None:
@@ -590,7 +596,11 @@ TestWCP42ThreadSplit = _make_catalog_test_class(42, "Thread Split")
 
 @pytest.mark.wcp(43)
 class TestWCP43ExplicitTermination:
-    """WCP-43: Explicit Termination."""
+    """WCP-43: Explicit Termination.
+
+    WCP-43 fires when a task has explicit terminatesWorkflow marker.
+    WCP-11 also fires since the task has no outgoing flows.
+    """
 
     @pytest.mark.oxigraph
     def test_oxigraph_execution(self) -> None:
@@ -598,7 +608,8 @@ class TestWCP43ExplicitTermination:
         engine = HybridEngine()
         engine.load_data(WCP43_EXPLICIT_TERMINATION_TOPOLOGY)
         result = engine.apply_physics()
-        assert result.delta == 0
+        # WCP-11 produces 2 triples (task is also implicitly terminated)
+        assert result.delta == 2
 
     @pytest.mark.eye
     def test_eye_execution(self, eye_available: bool) -> None:
@@ -609,7 +620,8 @@ class TestWCP43ExplicitTermination:
         engine = HybridEngine()
         engine.load_data(WCP43_EXPLICIT_TERMINATION_TOPOLOGY)
         result = engine.apply_physics()
-        assert result.delta == 0
+        # WCP-11 produces 2 triples (task is also implicitly terminated)
+        assert result.delta == 2
 
     @pytest.mark.cross_engine
     def test_cross_engine_consistency(self, eye_available: bool) -> None:

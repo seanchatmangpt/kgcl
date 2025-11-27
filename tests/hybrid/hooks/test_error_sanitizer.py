@@ -8,11 +8,7 @@ from __future__ import annotations
 
 import pytest
 
-from kgcl.hybrid.hooks.security.error_sanitizer import (
-    ErrorSanitizer,
-    RedactionLevel,
-    SanitizationConfig,
-)
+from kgcl.hybrid.hooks.security.error_sanitizer import ErrorSanitizer, RedactionLevel, SanitizationConfig
 
 
 class TestSanitizationConfig:

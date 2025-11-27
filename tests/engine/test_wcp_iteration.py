@@ -39,7 +39,7 @@ P99_TARGET_MS: float = 100.0
 def physics_ontology() -> Graph:
     """Load KGC Physics Ontology with iteration pattern mappings."""
     ontology = Graph()
-    ontology.parse("/Users/sac/dev/kgcl/ontology/kgc_physics.ttl", format="turtle")
+    ontology.parse("/Users/sac/dev/kgcl/ontology/core/kgc_physics.ttl", format="turtle")
     return ontology
 
 

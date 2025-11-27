@@ -627,8 +627,7 @@ class TestMIWithConcurrencyControl:
                 # Track concurrent executions
                 with concurrent_lock:
                     current_concurrent += 1
-                    if current_concurrent > max_observed_concurrent:
-                        max_observed_concurrent = current_concurrent
+                    max_observed_concurrent = max(max_observed_concurrent, current_concurrent)
 
                 # Simulate API call
                 time.sleep(0.02)  # 20ms

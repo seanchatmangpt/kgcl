@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KGCL Daemon - C4 Architecture Diagrams</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a2e;
+            color: #eee;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 { color: #00d4ff; text-align: center; }
+        h2 { color: #ff6b6b; border-bottom: 2px solid #ff6b6b; padding-bottom: 10px; }
+        .diagram-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .diagram-section {
+            background: #16213e;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .diagram-section img {
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            padding: 10px;
+        }
+        .level-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .l1 { background: #4ecdc4; color: #000; }
+        .l2 { background: #45b7d1; color: #000; }
+        .l3 { background: #96ceb4; color: #000; }
+        .dynamic { background: #ff6b6b; color: #fff; }
+        .deploy { background: #dda0dd; color: #000; }
+        p { color: #aaa; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <h1>🔮 KGCL Daemon Architecture</h1>
+    <p style="text-align: center; font-size: 18px;">C4 Model Diagrams - Knowledge Graph Control Language Daemon</p>
+
+    <div class="diagram-grid">
+        <div class="diagram-section">
+            <h2>System Context <span class="level-badge l1">C4 Level 1</span></h2>
+            <p>High-level view showing KGCL Daemon in its environment - developers, operators, and external systems it interacts with.</p>
+            <img src="kgcl-daemon-c4-context.svg" alt="System Context">
+        </div>
+
+        <div class="diagram-section">
+            <h2>Container Diagram <span class="level-badge l2">C4 Level 2</span></h2>
+            <p>The major containers within KGCL Daemon: Matter (PyOxigraph), Physics (EYE WASM), Hooks, Time Controller, and supporting infrastructure.</p>
+            <img src="kgcl-daemon-c4-container.svg" alt="Container Diagram">
+        </div>
+
+        <div class="diagram-section">
+            <h2>Matter Layer Components <span class="level-badge l3">C4 Level 3</span></h2>
+            <p>PyOxigraph internals: Graph Store, SPARQL Engine, Transaction Manager, Indexes, and Mutation Event Bus.</p>
+            <img src="kgcl-daemon-c4-component-matter.svg" alt="Matter Components">
+        </div>
+
+        <div class="diagram-section">
+            <h2>Physics Layer Components <span class="level-badge l3">C4 Level 3</span></h2>
+            <p>EYE WASM reasoner: WASM Runtime, Rule Cache, Query API, N3 Builtins, and Result Parser.</p>
+            <img src="kgcl-daemon-c4-component-physics.svg" alt="Physics Components">
+        </div>
+
+        <div class="diagram-section">
+            <h2>Hook Executor Components <span class="level-badge l3">C4 Level 3</span></h2>
+            <p>Hook system: Registry, Condition Evaluator (8 types), Action Executor (4 actions), Phase Manager (5 phases), Sandbox, Receipt Logger.</p>
+            <img src="kgcl-daemon-c4-component-hooks.svg" alt="Hook Components">
+        </div>
+
+        <div class="diagram-section">
+            <h2>Time Controller Components <span class="level-badge l3">C4 Level 3</span></h2>
+            <p>Temporal orchestration: Tick Loop, Logical Clock, Task Scheduler, WCP State Machine, Temporal Triggers, Snapshot Manager.</p>
+            <img src="kgcl-daemon-c4-component-time.svg" alt="Time Components">
+        </div>
+
+        <div class="diagram-section">
+            <h2>Dynamic: Add Triple Flow <span class="level-badge dynamic">Sequence</span></h2>
+            <p>Runtime behavior when a client adds a triple: transaction, mutation events, hook evaluation, reasoning, and commit.</p>
+            <img src="kgcl-daemon-c4-dynamic-add.svg" alt="Add Triple Flow">
+        </div>
+
+        <div class="diagram-section">
+            <h2>Dynamic: Startup Warm-up <span class="level-badge dynamic">Sequence</span></h2>
+            <p>Daemon initialization sequence: load store, instantiate WASM, load hooks, restore clock, start API server. ~300ms cold start.</p>
+            <img src="kgcl-daemon-c4-dynamic-warmup.svg" alt="Startup Flow">
+        </div>
+
+        <div class="diagram-section">
+            <h2>Deployment Diagram <span class="level-badge deploy">Infrastructure</span></h2>
+            <p>Development (Docker) and Production (Kubernetes) deployment configurations with persistent storage and observability.</p>
+            <img src="kgcl-daemon-c4-deployment.svg" alt="Deployment">
+        </div>
+    </div>
+
+    <footer style="text-align: center; margin-top: 40px; color: #666;">
+        <p>Generated from <code>kgcl-daemon-c4.puml</code> using PlantUML</p>
+    </footer>
+</body>
+</html>

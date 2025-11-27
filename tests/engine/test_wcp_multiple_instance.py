@@ -40,7 +40,7 @@ SHA256_HEX_LENGTH: int = 64
 def physics_ontology() -> Graph:
     """Load KGC physics ontology from file."""
     ontology = Graph()
-    ontology.parse("ontology/kgc_physics.ttl", format="turtle")
+    ontology.parse("ontology/core/kgc_physics.ttl", format="turtle")
     return ontology
 
 

@@ -178,8 +178,11 @@ kgcl/
 │   ├── integration/            # End-to-end UNRDF porting tests
 │   └── ...
 └── docs/                       # Documentation
-    ├── UNRDF_PORTING_GUIDE.md
-    └── UNRDF_PORTING_VALIDATION.md
+    ├── how-to/unrdf-porting.md
+    ├── explanation/unrdf-porting-validation.md
+    ├── explanation/build-system.md
+    ├── how-to/chicago-tdd-checklist.md
+    └── tutorials/kgcl-quick-start.md
 ```
 
 ## Automation Commands (Poe)
@@ -537,8 +540,13 @@ except Exception as e:
 
 ## Documentation
 - README.md - Project overview
-- docs/UNRDF_PORTING_GUIDE.md - All 8 patterns
-- docs/UNRDF_PORTING_VALIDATION.md - Test results
+- docs/how-to/unrdf-porting.md - All 8 patterns
+- docs/explanation/unrdf-porting-validation.md - Test results
+- docs/explanation/build-system.md - Build system reference
+- docs/how-to/chicago-tdd-checklist.md - TDD checklist
+- docs/tutorials/kgcl-quick-start.md - Quick start guide
+- docs/reference/security.md - Security guidelines
+- docs/reference/files-manifest.md - Files manifest
 - pyproject.toml docstrings - Tool configuration
 - NumPy docstrings - All public APIs
 - Comments - Only for "why", not "what"

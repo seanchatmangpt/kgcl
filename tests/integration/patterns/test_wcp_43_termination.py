@@ -283,12 +283,12 @@ class TestWCP43CrossServiceTermination:
             }}
         """)
         # Also clear related tasks
-        adapter.update(f"""
+        adapter.update("""
             PREFIX wf: <http://example.org/workflow/>
-            DELETE WHERE {{
+            DELETE WHERE {
                 wf:task_1 ?p ?o .
                 wf:task_2 ?p ?o .
-            }}
+            }
         """)
 
         # 2. Clear Redis

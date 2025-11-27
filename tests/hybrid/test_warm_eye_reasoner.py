@@ -17,7 +17,6 @@ from kgcl.hybrid.warm_eye_reasoner import (
     shutdown_warm_reasoner,
 )
 
-
 # Skip all tests if EYE not available
 pytestmark = pytest.mark.skipif(
     not pytest.importorskip("shutil").which("eye"),

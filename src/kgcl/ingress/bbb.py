@@ -59,7 +59,7 @@ YAWL = Namespace("http://www.yawlfoundation.org/yawlschema#")
 RDF = Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#")
 
 # Path to invariants SHACL shapes
-INVARIANTS_PATH = Path(__file__).parent.parent.parent.parent / "ontology" / "invariants.shacl.ttl"
+INVARIANTS_PATH = Path(__file__).parent.parent.parent.parent / "ontology" / "validation" / "invariants.shacl.ttl"
 
 # Chatman Constant: Maximum operations per batch
 CHATMAN_CONSTANT = 64

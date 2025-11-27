@@ -43,7 +43,7 @@ Examples
 >>>
 >>> # Load physics ontology
 >>> ontology = Graph()
->>> ontology.parse("ontology/kgc_physics.ttl", format="turtle")
+>>> ontology.parse("ontology/core/kgc_physics.ttl", format="turtle")
 >>>
 >>> # Create driver
 >>> driver = SemanticDriver(ontology)
@@ -1143,7 +1143,7 @@ class SemanticDriver:
     --------
     >>> from rdflib import Graph
     >>> ontology = Graph()
-    >>> ontology.parse("ontology/kgc_physics.ttl", format="turtle")
+    >>> ontology.parse("ontology/core/kgc_physics.ttl", format="turtle")
     >>> driver = SemanticDriver(ontology)
     >>> driver.physics_ontology is not None
     True
@@ -1479,7 +1479,7 @@ class SemanticDriver:
         --------
         >>> from rdflib import Graph, URIRef
         >>> ontology = Graph()
-        >>> ontology.parse("ontology/kgc_physics.ttl", format="turtle")
+        >>> ontology.parse("ontology/core/kgc_physics.ttl", format="turtle")
         >>> driver = SemanticDriver(ontology)
         >>> workflow = Graph()
         >>> # ... load workflow ...

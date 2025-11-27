@@ -32,7 +32,7 @@ from kgcl.engine.knowledge_engine import (
 # Fixtures
 def load_physics_ontology() -> Graph:
     """Load the KGC Physics Ontology."""
-    ontology_path = Path(__file__).parent.parent.parent / "ontology" / "kgc_physics.ttl"
+    ontology_path = Path(__file__).parent.parent.parent / "ontology" / "core" / "kgc_physics.ttl"
     ontology = Graph()
     ontology.parse(ontology_path, format="turtle")
     return ontology

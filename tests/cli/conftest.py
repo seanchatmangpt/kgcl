@@ -122,9 +122,7 @@ def xor_split_turtle() -> str:
 @pytest.fixture
 def topology_file(simple_sequence_turtle: str) -> Generator[Path, None, None]:
     """Create a temporary topology file for CLI testing."""
-    with tempfile.NamedTemporaryFile(
-        mode="w", suffix=".ttl", delete=False
-    ) as f:
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".ttl", delete=False) as f:
         f.write(simple_sequence_turtle)
         f.flush()
         yield Path(f.name)
@@ -134,9 +132,7 @@ def topology_file(simple_sequence_turtle: str) -> Generator[Path, None, None]:
 @pytest.fixture
 def and_split_file(and_split_turtle: str) -> Generator[Path, None, None]:
     """Create a temporary AND-split topology file."""
-    with tempfile.NamedTemporaryFile(
-        mode="w", suffix=".ttl", delete=False
-    ) as f:
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".ttl", delete=False) as f:
         f.write(and_split_turtle)
         f.flush()
         yield Path(f.name)
@@ -145,9 +141,7 @@ def and_split_file(and_split_turtle: str) -> Generator[Path, None, None]:
 @pytest.fixture
 def xor_split_file(xor_split_turtle: str) -> Generator[Path, None, None]:
     """Create a temporary XOR-split topology file."""
-    with tempfile.NamedTemporaryFile(
-        mode="w", suffix=".ttl", delete=False
-    ) as f:
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".ttl", delete=False) as f:
         f.write(xor_split_turtle)
         f.flush()
         yield Path(f.name)

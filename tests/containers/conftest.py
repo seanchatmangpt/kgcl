@@ -14,12 +14,7 @@ from typing import TYPE_CHECKING
 import pytest
 
 # Re-export all container fixtures for easy import
-from tests.containers.databases import (
-    postgres_connection,
-    postgres_container,
-    redis_client,
-    redis_container,
-)
+from tests.containers.databases import postgres_connection, postgres_container, redis_client, redis_container
 from tests.containers.message_queues import (
     cancellation_exchange,
     rabbitmq_channel,

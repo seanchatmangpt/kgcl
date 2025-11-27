@@ -8,12 +8,7 @@ from __future__ import annotations
 
 import pytest
 
-from kgcl.hybrid.hooks.condition_evaluator import (
-    Condition,
-    ConditionEvaluator,
-    ConditionKind,
-    ConditionResult,
-)
+from kgcl.hybrid.hooks.condition_evaluator import Condition, ConditionEvaluator, ConditionKind, ConditionResult
 
 
 class TestConditionKind:

@@ -38,9 +38,7 @@ class TestEngineRun:
 <urn:flow:1> yawl:nextElementRef <urn:task:End> .
 <urn:task:End> a yawl:Task .
 """
-        with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".ttl", delete=False
-        ) as f:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".ttl", delete=False) as f:
             f.write(topology)
             f.flush()
             topology_path = f.name
@@ -89,9 +87,7 @@ class TestEngineRun:
 <urn:flow:5> yawl:nextElementRef <urn:task:End> .
 <urn:task:End> a yawl:Task .
 """
-        with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".ttl", delete=False
-        ) as f:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".ttl", delete=False) as f:
             f.write(topology)
             f.flush()
             topology_path = f.name
@@ -118,9 +114,7 @@ class TestEngineRun:
 <urn:flow:1> yawl:nextElementRef <urn:task:End> .
 <urn:task:End> a yawl:Task .
 """
-        with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".ttl", delete=False
-        ) as f:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".ttl", delete=False) as f:
             f.write(topology)
             f.flush()
             topology_path = f.name
@@ -147,9 +141,7 @@ class TestEngineRun:
 <urn:flow:1> yawl:nextElementRef <urn:task:End> .
 <urn:task:End> a yawl:Task .
 """
-        with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".ttl", delete=False
-        ) as f:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".ttl", delete=False) as f:
             f.write(topology)
             f.flush()
             topology_path = f.name
@@ -187,9 +179,7 @@ class TestEngineTick:
 <urn:flow:1> yawl:nextElementRef <urn:task:End> .
 <urn:task:End> a yawl:Task .
 """
-        with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".ttl", delete=False
-        ) as f:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".ttl", delete=False) as f:
             f.write(topology)
             f.flush()
             topology_path = f.name

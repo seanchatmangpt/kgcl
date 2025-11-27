@@ -2,7 +2,7 @@
 
 ## YAWL Engine Status: BROKEN
 
-**The `src/kgcl/yawl_engine/` is non-functional.** Claims "RDF-only" architecture but uses Python if/else for all logic. See `docs/YAWL_IMPLEMENTATION_FAILURE_REPORT.md` for details. **Recommendation:** Delete and rewrite, or rename to acknowledge it's conventional code.
+**The `src/kgcl/yawl_engine/` is non-functional.** Claims "RDF-only" architecture but uses Python if/else for all logic. See `docs/explanation/yawl-failure-report.md` for details. **Recommendation:** Delete and rewrite, or rename to acknowledge it's conventional code.
 
 ---
 
@@ -29,6 +29,38 @@ poe type-check  # Mypy strict
 poe test        # Pytest
 poe verify      # All checks
 poe detect-lies # Find TODO/FIXME/stubs
+```
+
+### Python Execution: NEVER use `python` directly
+```bash
+# ✅ CORRECT - Always use uv
+uv python script.py           # Run script with uv-managed Python
+uv run python script.py       # Alternative (runs in venv)
+uv run pytest                 # Run tools through uv
+
+# ❌ WRONG - Never call python directly
+python script.py              # NO - uses system Python
+python3 script.py             # NO - bypasses uv
+python -m pytest              # NO - use uv run pytest
+```
+**Why:** `uv python` ensures correct Python version (3.13+) and project dependencies.
+
+### Dependency Rules: Python 3.13+ Required
+
+**All dependencies MUST support Python 3.13.** The project uses `requires-python = ">=3.13,<4.0"`.
+
+When adding dependencies:
+1. Check PyPI for Python version support (classifiers or `requires-python`)
+2. If a library doesn't list Python 3.13, check its GitHub for recent releases
+3. **DO NOT add libraries that only support Python ≤3.12**
+
+**Known incompatible libraries (DO NOT USE):**
+- `toxiproxy-python` - only supports Python ≤3.12
+
+**Verification:**
+```bash
+# uv will fail if any dependency doesn't support Python 3.13
+uv lock  # Must succeed without resolution errors
 ```
 
 ### File Organization
@@ -135,7 +167,7 @@ assert True  # meaningless test
 ### Instead: Single-File POCs
 When exploring, create complete working files in `examples/`:
 - Self-contained (all types, implementation, tests)
-- Runnable: `python examples/poc_x.py`
+- Runnable: `uv python examples/poc_x.py`
 - No TODOs, stubs, placeholders
 
 ---

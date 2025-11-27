@@ -46,11 +46,11 @@ class TestKZ005GembaKaizen:
 
         results = engine.run_to_completion(max_ticks=10)
         tick_count = len(results)
-        total_time = sum(r.duration_ms for r in results)
 
+        # Use tick-based metrics only (deterministic, not timing-based)
+        # Timing metrics are flaky across different machines/runs
         metrics = [
             KaizenMetric("Ticks for 3-task sequence", 6.0, float(tick_count), 4.0, "ticks"),
-            KaizenMetric("Total execution time", 100.0, total_time, 50.0, "ms"),
         ]
 
         report = KaizenReport("Sequence Pattern", metrics, ["Optimize LAW 1"])

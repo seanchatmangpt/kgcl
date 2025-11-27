@@ -42,9 +42,7 @@ class TestTaskList:
 
 <urn:task:End> a yawl:Task .
 """
-        with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".ttl", delete=False
-        ) as f:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".ttl", delete=False) as f:
             f.write(topology)
             f.flush()
             topology_path = f.name
@@ -67,9 +65,7 @@ class TestTaskList:
 @prefix ex: <http://example.org/> .
 ex:SomeResource ex:property "value" .
 """
-        with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".ttl", delete=False
-        ) as f:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".ttl", delete=False) as f:
             f.write(topology)
             f.flush()
             topology_path = f.name
@@ -102,17 +98,13 @@ class TestTaskInspect:
 
 <urn:flow:1> yawl:nextElementRef <urn:task:End> .
 """
-        with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".ttl", delete=False
-        ) as f:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".ttl", delete=False) as f:
             f.write(topology)
             f.flush()
             topology_path = f.name
 
         runner = CliRunner()
-        result = runner.invoke(
-            app, ["task", "inspect", topology_path, "urn:task:Process"]
-        )
+        result = runner.invoke(app, ["task", "inspect", topology_path, "urn:task:Process"])
 
         assert result.exit_code == 0, f"CLI failed: {result.output}"
         # Should show task URI in header
@@ -129,17 +121,13 @@ class TestTaskInspect:
 @prefix kgc: <https://kgc.org/ns/> .
 <urn:task:Exists> kgc:status "Active" .
 """
-        with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".ttl", delete=False
-        ) as f:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".ttl", delete=False) as f:
             f.write(topology)
             f.flush()
             topology_path = f.name
 
         runner = CliRunner()
-        result = runner.invoke(
-            app, ["task", "inspect", topology_path, "urn:task:NotFound"]
-        )
+        result = runner.invoke(app, ["task", "inspect", topology_path, "urn:task:NotFound"])
 
         assert result.exit_code == 0  # Command succeeds, just no results
         assert "not found" in result.output.lower()

@@ -44,7 +44,7 @@ SHA256_HEX_LENGTH: int = 64
 def physics_ontology() -> Graph:
     """Load KGC Physics Ontology with trigger pattern mappings."""
     ontology = Graph()
-    ontology.parse("/Users/sac/dev/kgcl/ontology/kgc_physics.ttl", format="turtle")
+    ontology.parse("/Users/sac/dev/kgcl/ontology/core/kgc_physics.ttl", format="turtle")
     return ontology
 
 

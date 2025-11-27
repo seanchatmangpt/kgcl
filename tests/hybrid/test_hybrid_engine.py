@@ -29,7 +29,7 @@ if TYPE_CHECKING:
     from collections.abc import Iterator
 
 # Test fixtures
-ONTOLOGY_PATH = Path(__file__).parent.parent.parent / "ontology" / "kgc_physics.ttl"
+ONTOLOGY_PATH = Path(__file__).parent.parent.parent / "ontology" / "core" / "kgc_physics.ttl"
 
 # Test URIs
 TEST_NAMESPACE = Namespace("urn:test:")

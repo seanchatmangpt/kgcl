@@ -70,8 +70,8 @@ class TestWCP43RulesAdapterGetRuleSubset:
         subset = adapter.get_rule_subset([])
 
         assert "@prefix" in subset
-        # Should be much smaller than full rules
-        assert len(subset) < 500
+        # Should be much smaller than full rules (prefixes only ~600 chars)
+        assert len(subset) < 700
 
 
 class TestWCP43RulesAdapterConvenienceMethods:

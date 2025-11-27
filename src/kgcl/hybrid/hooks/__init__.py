@@ -24,12 +24,7 @@ Examples
 
 from __future__ import annotations
 
-from kgcl.hybrid.hooks.condition_evaluator import (
-    Condition,
-    ConditionEvaluator,
-    ConditionKind,
-    ConditionResult,
-)
+from kgcl.hybrid.hooks.condition_evaluator import Condition, ConditionEvaluator, ConditionKind, ConditionResult
 from kgcl.hybrid.hooks.hook_batcher import HookBatcher
 from kgcl.hybrid.hooks.performance_optimizer import PerformanceConfig, PerformanceOptimizer
 from kgcl.hybrid.hooks.poka_yoke_guards import PokaYokeGuard, PokaYokeViolation

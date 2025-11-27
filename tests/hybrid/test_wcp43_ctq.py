@@ -212,10 +212,11 @@ class TestCTQ1Correctness:
         results, statuses = load_and_run(topology, max_ticks=5)
 
         assert "urn:task:B" in statuses, "Task B should be activated (predicate true)"
-        # Task B auto-completes (LAW 6)
+        # Task B activated (physics doesn't auto-complete)
         assert statuses["urn:task:B"] in ("Active", "Completed", "Archived"), "Task B should be activated"
-        # Task C should NOT be in statuses (XOR exclusivity - never activated)
-        assert "urn:task:C" not in statuses, "Task C should NOT be activated (XOR exclusivity)"
+        # Task C should NOT be activated (XOR exclusivity - stays Pending or not in statuses)
+        task_c_status = statuses.get("urn:task:C")
+        assert task_c_status in (None, "Pending"), "Task C should NOT be activated (XOR exclusivity)"
 
     def test_state_based_milestone_correct(
         self, load_and_run: Callable[[str, int], tuple[list[PhysicsResult], dict[str, str]]]

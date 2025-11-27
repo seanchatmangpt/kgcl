@@ -11,12 +11,7 @@ from typing import TYPE_CHECKING, Any
 import pytest
 
 # Import container fixtures
-from tests.containers.conftest import (
-    oxigraph_container,
-    postgres_container,
-    rabbitmq_container,
-    redis_container,
-)
+from tests.containers.conftest import oxigraph_container, postgres_container, rabbitmq_container, redis_container
 
 if TYPE_CHECKING:
     from collections.abc import Generator

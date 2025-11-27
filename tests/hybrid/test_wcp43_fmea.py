@@ -35,10 +35,10 @@ import pytest
 from kgcl.hybrid.hybrid_engine import HybridEngine, PhysicsResult
 from kgcl.hybrid.wcp43_physics import WCP_PATTERN_CATALOG
 
-
 # =============================================================================
 # FMEA SEVERITY LEVELS
 # =============================================================================
+
 
 class Severity:
     """FMEA Severity ratings (1-10 scale)."""

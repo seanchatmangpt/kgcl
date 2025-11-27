@@ -77,10 +77,7 @@ def eye_engine(eye_available: bool) -> HybridEngine:
 
 
 def assert_task_status(
-    statuses: dict[str, str | None],
-    task_uri: str,
-    expected_statuses: list[str],
-    pattern_name: str,
+    statuses: dict[str, str | None], task_uri: str, expected_statuses: list[str], pattern_name: str
 ) -> None:
     """Assert that a task has one of the expected statuses.
 
@@ -102,14 +99,11 @@ def assert_task_status(
     """
     actual = statuses.get(task_uri)
     assert actual in expected_statuses, (
-        f"{pattern_name}: Expected task {task_uri} to have status in {expected_statuses}, "
-        f"but got {actual}"
+        f"{pattern_name}: Expected task {task_uri} to have status in {expected_statuses}, but got {actual}"
     )
 
 
-def run_engine_test(
-    engine: HybridEngine, topology: str, max_ticks: int = 5
-) -> dict[str, str | None]:
+def run_engine_test(engine: HybridEngine, topology: str, max_ticks: int = 5) -> dict[str, str | None]:
     """Load topology into engine and run to completion.
 
     Parameters
@@ -162,10 +156,7 @@ class TestWCPPatternCatalog:
             verb_parts = info["verb"].replace("+", ",").split(",")
             for part in verb_parts:
                 part = part.strip()
-                assert part in valid_verbs, (
-                    f"WCP-{wcp_num} has invalid verb '{part}'. "
-                    f"Valid verbs: {valid_verbs}"
-                )
+                assert part in valid_verbs, f"WCP-{wcp_num} has invalid verb '{part}'. Valid verbs: {valid_verbs}"
 
 
 # =============================================================================
@@ -275,9 +266,7 @@ class TestWCP1Sequence:
         """Test WCP-1 on PyOxigraph engine."""
         engine = HybridEngine()
         statuses = run_engine_test(engine, WCP1_SEQUENCE_TOPOLOGY)
-        assert_task_status(
-            statuses, "urn:task:B", ["Active", "Completed", "Archived"], "WCP-1"
-        )
+        assert_task_status(statuses, "urn:task:B", ["Active", "Completed", "Archived"], "WCP-1")
 
     @pytest.mark.eye
     def test_eye_execution(self, eye_available: bool) -> None:
@@ -287,9 +276,7 @@ class TestWCP1Sequence:
 
         engine = HybridEngine()
         statuses = run_engine_test(engine, WCP1_SEQUENCE_TOPOLOGY)
-        assert_task_status(
-            statuses, "urn:task:B", ["Active", "Completed", "Archived"], "WCP-1"
-        )
+        assert_task_status(statuses, "urn:task:B", ["Active", "Completed", "Archived"], "WCP-1")
 
     @pytest.mark.cross_engine
     def test_cross_engine_consistency(self, eye_available: bool) -> None:
@@ -307,8 +294,7 @@ class TestWCP1Sequence:
 
         # Both should produce consistent results
         assert statuses1.get("urn:task:B") == statuses2.get("urn:task:B"), (
-            f"Cross-engine mismatch: {statuses1.get('urn:task:B')} vs "
-            f"{statuses2.get('urn:task:B')}"
+            f"Cross-engine mismatch: {statuses1.get('urn:task:B')} vs {statuses2.get('urn:task:B')}"
         )
 
 
@@ -330,12 +316,8 @@ class TestWCP2ParallelSplit:
         """Test WCP-2 on PyOxigraph engine."""
         engine = HybridEngine()
         statuses = run_engine_test(engine, WCP2_PARALLEL_SPLIT_TOPOLOGY)
-        assert_task_status(
-            statuses, "urn:task:A", ["Active", "Completed", "Archived"], "WCP-2"
-        )
-        assert_task_status(
-            statuses, "urn:task:B", ["Active", "Completed", "Archived"], "WCP-2"
-        )
+        assert_task_status(statuses, "urn:task:A", ["Active", "Completed", "Archived"], "WCP-2")
+        assert_task_status(statuses, "urn:task:B", ["Active", "Completed", "Archived"], "WCP-2")
 
     @pytest.mark.eye
     def test_eye_execution(self, eye_available: bool) -> None:
@@ -345,12 +327,8 @@ class TestWCP2ParallelSplit:
 
         engine = HybridEngine()
         statuses = run_engine_test(engine, WCP2_PARALLEL_SPLIT_TOPOLOGY)
-        assert_task_status(
-            statuses, "urn:task:A", ["Active", "Completed", "Archived"], "WCP-2"
-        )
-        assert_task_status(
-            statuses, "urn:task:B", ["Active", "Completed", "Archived"], "WCP-2"
-        )
+        assert_task_status(statuses, "urn:task:A", ["Active", "Completed", "Archived"], "WCP-2")
+        assert_task_status(statuses, "urn:task:B", ["Active", "Completed", "Archived"], "WCP-2")
 
     @pytest.mark.cross_engine
     def test_cross_engine_consistency(self, eye_available: bool) -> None:
@@ -387,9 +365,7 @@ class TestWCP3Synchronization:
         """Test WCP-3 on PyOxigraph engine."""
         engine = HybridEngine()
         statuses = run_engine_test(engine, WCP3_SYNCHRONIZATION_TOPOLOGY)
-        assert_task_status(
-            statuses, "urn:task:Join", ["Active", "Completed", "Archived"], "WCP-3"
-        )
+        assert_task_status(statuses, "urn:task:Join", ["Active", "Completed", "Archived"], "WCP-3")
 
     @pytest.mark.eye
     def test_eye_execution(self, eye_available: bool) -> None:
@@ -399,9 +375,7 @@ class TestWCP3Synchronization:
 
         engine = HybridEngine()
         statuses = run_engine_test(engine, WCP3_SYNCHRONIZATION_TOPOLOGY)
-        assert_task_status(
-            statuses, "urn:task:Join", ["Active", "Completed", "Archived"], "WCP-3"
-        )
+        assert_task_status(statuses, "urn:task:Join", ["Active", "Completed", "Archived"], "WCP-3")
 
     @pytest.mark.cross_engine
     def test_cross_engine_consistency(self, eye_available: bool) -> None:
@@ -437,9 +411,7 @@ class TestWCP4ExclusiveChoice:
         """Test WCP-4 on PyOxigraph engine."""
         engine = HybridEngine()
         statuses = run_engine_test(engine, WCP4_EXCLUSIVE_CHOICE_TOPOLOGY)
-        assert_task_status(
-            statuses, "urn:task:A", ["Active", "Completed", "Archived"], "WCP-4"
-        )
+        assert_task_status(statuses, "urn:task:A", ["Active", "Completed", "Archived"], "WCP-4")
 
     @pytest.mark.eye
     def test_eye_execution(self, eye_available: bool) -> None:
@@ -449,9 +421,7 @@ class TestWCP4ExclusiveChoice:
 
         engine = HybridEngine()
         statuses = run_engine_test(engine, WCP4_EXCLUSIVE_CHOICE_TOPOLOGY)
-        assert_task_status(
-            statuses, "urn:task:A", ["Active", "Completed", "Archived"], "WCP-4"
-        )
+        assert_task_status(statuses, "urn:task:A", ["Active", "Completed", "Archived"], "WCP-4")
 
     @pytest.mark.cross_engine
     def test_cross_engine_consistency(self, eye_available: bool) -> None:
@@ -500,9 +470,7 @@ def _make_catalog_test_class(wcp_num: int, pattern_name: str) -> type:
             """Verify pattern exists in catalog with correct metadata."""
             info = WCP_PATTERN_CATALOG.get(wcp_num)
             assert info is not None, f"WCP-{wcp_num} missing from catalog"
-            assert info["name"] == pattern_name, (
-                f"Expected name '{pattern_name}', got '{info['name']}'"
-            )
+            assert info["name"] == pattern_name, f"Expected name '{pattern_name}', got '{info['name']}'"
 
         @pytest.mark.eye
         def test_eye_execution(self, eye_available: bool) -> None:
@@ -530,9 +498,7 @@ def _make_catalog_test_class(wcp_num: int, pattern_name: str) -> type:
 # Generate test classes for WCP 5-10
 TestWCP5SimpleMerge = _make_catalog_test_class(5, "Simple Merge")
 TestWCP6MultiChoice = _make_catalog_test_class(6, "Multi-Choice")
-TestWCP7StructuredSynchronizingMerge = _make_catalog_test_class(
-    7, "Structured Synchronizing Merge"
-)
+TestWCP7StructuredSynchronizingMerge = _make_catalog_test_class(7, "Structured Synchronizing Merge")
 TestWCP8MultiMerge = _make_catalog_test_class(8, "Multi-Merge")
 TestWCP9StructuredDiscriminator = _make_catalog_test_class(9, "Structured Discriminator")
 TestWCP10ArbitraryCycles = _make_catalog_test_class(10, "Arbitrary Cycles")
@@ -607,9 +573,7 @@ TestWCP31BlockingPartialJoin = _make_catalog_test_class(31, "Blocking Partial Jo
 TestWCP32CancellingPartialJoin = _make_catalog_test_class(32, "Cancelling Partial Join")
 TestWCP33GeneralizedAndJoin = _make_catalog_test_class(33, "Generalized AND-Join")
 TestWCP34StaticPartialJoinMI = _make_catalog_test_class(34, "Static Partial Join for MI")
-TestWCP35CancellingPartialJoinMI = _make_catalog_test_class(
-    35, "Cancelling Partial Join for MI"
-)
+TestWCP35CancellingPartialJoinMI = _make_catalog_test_class(35, "Cancelling Partial Join for MI")
 TestWCP36DynamicPartialJoinMI = _make_catalog_test_class(36, "Dynamic Partial Join for MI")
 TestWCP37LocalSyncMerge = _make_catalog_test_class(37, "Local Synchronizing Merge")
 TestWCP38GeneralSyncMerge = _make_catalog_test_class(38, "General Synchronizing Merge")

@@ -39,16 +39,13 @@ dspy = [
 ]
 
 [project.scripts]
+kgcl = "kgcl.cli.app:app"
 kgc-daily-brief = "kgcl.cli.daily_brief:daily_brief"
 kgc-weekly-retro = "kgcl.cli.weekly_retro:weekly_retro"
 kgc-feature-list = "kgcl.cli.feature_list:feature_list"
 kgc-query = "kgcl.cli.query:query"
 kgc-config = "kgcl.cli.config:config"
 kgc-health = "kgcl.observability.cli:cli"
-kgc-dspy = "kgcl.dspy_runtime.__main__:main"
-unrdf = "kgcl.unrdf_engine.cli:main"
-unrdf-server = "kgcl.unrdf_engine.server:main"
-kgct = "personal_kgcl.cli:app"
 
 [project.urls]  # https://packaging.python.org/en/latest/specifications/well-known-project-urls/#well-known-labels
 homepage = "https://github.com/user/kgcl"

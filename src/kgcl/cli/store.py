@@ -52,7 +52,11 @@ def query(sparql: str, file: str | None, format: str) -> None:
         eng.load_data(Path(file).read_text())
 
     try:
-        results = list(eng.store.query(sparql))
+        query_result = eng.store.query(sparql)
+
+        # Get variables from the QuerySolutions object before consuming
+        variables = list(query_result.variables)
+        results = list(query_result)
 
         if not results:
             console.print("[yellow]No results[/]")
@@ -60,21 +64,19 @@ def query(sparql: str, file: str | None, format: str) -> None:
 
         if format == "table":
             table = Table(title="Results")
-            first = results[0]
-            for var in first:
-                table.add_column(str(var), style="cyan")
+            for var in variables:
+                table.add_column(str(var).lstrip("?"), style="cyan")
             for row in results:
-                table.add_row(*[str(row[var]) for var in first])
+                table.add_row(*[str(row[var]) for var in variables])
             console.print(table)
 
         elif format == "csv":
-            first = results[0]
-            print(",".join(str(var) for var in first))
+            print(",".join(str(var).lstrip("?") for var in variables))
             for row in results:
-                print(",".join(str(row[var]) for var in first))
+                print(",".join(str(row[var]) for var in variables))
 
         elif format == "json":
-            output = [{str(var): str(row[var]) for var in row} for row in results]
+            output = [{str(var).lstrip("?"): str(row[var]) for var in variables} for row in results]
             print(json.dumps(output, indent=2))
 
         console.print(f"\n[green]{len(results)} results[/]")

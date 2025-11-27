@@ -28,14 +28,22 @@ Create I-MR chart for individual hook execution times:
 
 Create X-bar & R chart for hook subgroups:
 
->>> receipts = [...]  # Multiple hooks per subgroup
->>> chart = create_hook_xbar_r_chart(receipts, subgroup_size=5)
->>> chart.xbar_chart.ucl > chart.xbar_chart.center_line
+>>> from datetime import datetime, UTC
+>>> subgroup_receipts = [
+...     HookReceipt("hook1", HookPhase.PRE_TICK, datetime.now(UTC), True, HookAction.ASSERT, 10.5),
+...     HookReceipt("hook1", HookPhase.PRE_TICK, datetime.now(UTC), True, HookAction.ASSERT, 11.2),
+...     HookReceipt("hook1", HookPhase.PRE_TICK, datetime.now(UTC), True, HookAction.ASSERT, 9.8),
+...     HookReceipt("hook1", HookPhase.PRE_TICK, datetime.now(UTC), True, HookAction.ASSERT, 10.1),
+...     HookReceipt("hook1", HookPhase.PRE_TICK, datetime.now(UTC), True, HookAction.ASSERT, 10.4),
+... ]
+>>> xbar_chart = create_hook_xbar_r_chart(subgroup_receipts, subgroup_size=5)
+>>> xbar_chart.xbar_chart.ucl > xbar_chart.xbar_chart.center_line
 True
 
 Detect out-of-control conditions:
 
->>> rules = detect_western_electric_rules(chart.i_chart)
+>>> imr_chart = create_hook_imr_chart(receipts)
+>>> rules = detect_western_electric_rules(imr_chart.i_chart)
 >>> rules["rule1_beyond_3sigma"]
 False
 >>> rules["rule2_2of3_beyond_2sigma"]

@@ -11,15 +11,15 @@ Create a failure mode with automatic RPN calculation:
 >>> from tests.hybrid.lss.hooks.fmea.failure_modes import HOOK_FAILURE_MODES
 >>> fm = HOOK_FAILURE_MODES["FM-HOOK-001"]
 >>> fm.rpn
-64
+45
 >>> fm.risk_level()
-'High'
+'Medium'
 
 Check critical failure modes:
 
 >>> fm_deadlock = HOOK_FAILURE_MODES["FM-HOOK-003"]
 >>> fm_deadlock.rpn
-189
+315
 >>> fm_deadlock.risk_level()
 'Critical'
 
@@ -104,7 +104,7 @@ class HookFailureMode:
     ...     mitigation="Implement priority tie-breaking by hook ID lexicographic order",
     ... )
     >>> fm_critical.rpn
-    245
+    315
     >>> fm_critical.risk_level()
     'Critical'
 

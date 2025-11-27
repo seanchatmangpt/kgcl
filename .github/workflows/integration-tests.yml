@@ -68,18 +68,23 @@ jobs:
           submodules: recursive
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v4
-        with:
-          version: "latest"
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Set up Python
-        run: uv python install ${{ env.PYTHON_VERSION }}
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          uv python install ${{ env.PYTHON_VERSION }}
 
       - name: Install dependencies
-        run: uv sync --all-extras
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          uv sync --all-extras
 
       - name: Run smoke tests
         run: |
+          export PATH="$HOME/.local/bin:$PATH"
           uv run pytest tests/containers/ -v --tb=short -m "not slow" \
             --ignore=tests/containers/test_oxigraph.py \
             --ignore=tests/containers/test_fuseki.py \
@@ -107,15 +112,19 @@ jobs:
           submodules: recursive
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v4
-        with:
-          version: "latest"
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Set up Python
-        run: uv python install ${{ env.PYTHON_VERSION }}
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          uv python install ${{ env.PYTHON_VERSION }}
 
       - name: Install dependencies
-        run: uv sync --all-extras
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          uv sync --all-extras
 
       - name: Start Oxigraph
         run: |
@@ -139,6 +148,7 @@ jobs:
 
       - name: Run RDF Store Tests
         run: |
+          export PATH="$HOME/.local/bin:$PATH"
           uv run pytest tests/integration/patterns/ -v --tb=short \
             -m "oxigraph_server or container" \
             --ignore=tests/integration/patterns/test_wcp_06_11_branching.py \
@@ -179,18 +189,23 @@ jobs:
           submodules: recursive
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v4
-        with:
-          version: "latest"
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Set up Python
-        run: uv python install ${{ env.PYTHON_VERSION }}
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          uv python install ${{ env.PYTHON_VERSION }}
 
       - name: Install dependencies
-        run: uv sync --all-extras
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          uv sync --all-extras
 
       - name: Run RabbitMQ Tests
         run: |
+          export PATH="$HOME/.local/bin:$PATH"
           uv run pytest tests/integration/patterns/test_wcp_06_11_branching.py -v --tb=short \
             -m "rabbitmq or container" \
             || echo "RabbitMQ tests completed"
@@ -239,18 +254,23 @@ jobs:
           submodules: recursive
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v4
-        with:
-          version: "latest"
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Set up Python
-        run: uv python install ${{ env.PYTHON_VERSION }}
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          uv python install ${{ env.PYTHON_VERSION }}
 
       - name: Install dependencies
-        run: uv sync --all-extras
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          uv sync --all-extras
 
       - name: Run Database Tests
         run: |
+          export PATH="$HOME/.local/bin:$PATH"
           uv run pytest tests/integration/patterns/ -v --tb=short \
             -m "postgres or redis" \
             --ignore=tests/integration/patterns/test_wcp_06_11_branching.py \
@@ -318,15 +338,19 @@ jobs:
           submodules: recursive
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v4
-        with:
-          version: "latest"
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Set up Python
-        run: uv python install ${{ env.PYTHON_VERSION }}
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          uv python install ${{ env.PYTHON_VERSION }}
 
       - name: Install dependencies
-        run: uv sync --all-extras
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          uv sync --all-extras
 
       - name: Start Oxigraph
         run: |
@@ -350,6 +374,7 @@ jobs:
 
       - name: Run All WCP Pattern Tests
         run: |
+          export PATH="$HOME/.local/bin:$PATH"
           uv run pytest tests/integration/patterns/ -v --tb=short \
             -m "container" \
             --junitxml=test-results/wcp-patterns.xml \
@@ -433,15 +458,19 @@ jobs:
           submodules: recursive
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v4
-        with:
-          version: "latest"
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Set up Python
-        run: uv python install ${{ env.PYTHON_VERSION }}
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          uv python install ${{ env.PYTHON_VERSION }}
 
       - name: Install dependencies
-        run: uv sync --all-extras
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          uv sync --all-extras
 
       - name: Start Oxigraph
         run: |
@@ -464,6 +493,7 @@ jobs:
 
       - name: Run E2E Scenario Tests
         run: |
+          export PATH="$HOME/.local/bin:$PATH"
           uv run pytest tests/integration/scenarios/ -v --tb=short \
             -m "container" \
             --junitxml=test-results/e2e-scenarios.xml \
@@ -548,18 +578,23 @@ jobs:
           submodules: recursive
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v4
-        with:
-          version: "latest"
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Set up Python
-        run: uv python install ${{ env.PYTHON_VERSION }}
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          uv python install ${{ env.PYTHON_VERSION }}
 
       - name: Install dependencies
-        run: uv sync --all-extras
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          uv sync --all-extras
 
       - name: Run Chaos Tests
         run: |
+          export PATH="$HOME/.local/bin:$PATH"
           uv run pytest tests/chaos/ -v --tb=short \
             -m "container or chaos" \
             --junitxml=test-results/chaos-tests.xml \
@@ -638,15 +673,19 @@ jobs:
           submodules: recursive
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v4
-        with:
-          version: "latest"
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Set up Python
-        run: uv python install ${{ env.PYTHON_VERSION }}
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          uv python install ${{ env.PYTHON_VERSION }}
 
       - name: Install dependencies
-        run: uv sync --all-extras
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          uv sync --all-extras
 
       - name: Start Oxigraph
         run: |
@@ -669,6 +708,7 @@ jobs:
 
       - name: Run Coordination Tests
         run: |
+          export PATH="$HOME/.local/bin:$PATH"
           uv run pytest tests/integration/coordination/ -v --tb=short \
             -m "container" \
             --junitxml=test-results/coordination-tests.xml \

@@ -12,14 +12,7 @@ from __future__ import annotations
 import pytest
 from rdflib import Graph, Literal, Namespace, URIRef
 
-from kgcl.engine.knowledge_engine import (
-    GENESIS_HASH,
-    KGC,
-    YAWL,
-    PureRDFKernel,
-    TransactionContext,
-    VerbConfig,
-)
+from kgcl.engine.knowledge_engine import GENESIS_HASH, KGC, YAWL, PureRDFKernel, TransactionContext, VerbConfig
 
 
 @pytest.fixture
@@ -62,22 +55,13 @@ def base_context() -> TransactionContext:
     TransactionContext
         Transaction context for test execution.
     """
-    return TransactionContext(
-        tx_id="tx-l5-test",
-        actor="l5-test-system",
-        prev_hash=GENESIS_HASH,
-        data={},
-    )
+    return TransactionContext(tx_id="tx-l5-test", actor="l5-test-system", prev_hash=GENESIS_HASH, data={})
 
 
 class TestPureRDFKernelL5:
     """Tests for L5 Pure RDF execution - SPARQL templates only."""
 
-    def test_transmute_via_template(
-        self,
-        pure_kernel: PureRDFKernel,
-        base_context: TransactionContext,
-    ) -> None:
+    def test_transmute_via_template(self, pure_kernel: PureRDFKernel, base_context: TransactionContext) -> None:
         """Test WCP-1 Sequence via execution template.
 
         The template should:
@@ -113,11 +97,7 @@ class TestPureRDFKernelL5:
             DELETE WHERE { ?subject kgc:hasToken true }
         """
 
-        config = VerbConfig(
-            verb="transmute",
-            execution_template=execution_template,
-            removal_template=removal_template,
-        )
+        config = VerbConfig(verb="transmute", execution_template=execution_template, removal_template=removal_template)
 
         # Act: Execute via Pure RDF Kernel
         delta = pure_kernel.execute(workflow, task_a, base_context, config)
@@ -126,11 +106,7 @@ class TestPureRDFKernelL5:
         assert (task_b, KGC.hasToken, Literal(True)) in delta.additions
         assert (task_a, KGC.completedAt, Literal(base_context.tx_id)) in delta.additions
 
-    def test_copy_topology_via_template(
-        self,
-        pure_kernel: PureRDFKernel,
-        base_context: TransactionContext,
-    ) -> None:
+    def test_copy_topology_via_template(self, pure_kernel: PureRDFKernel, base_context: TransactionContext) -> None:
         """Test WCP-2 Parallel Split via execution template.
 
         The template should:
@@ -170,11 +146,7 @@ class TestPureRDFKernelL5:
             DELETE WHERE { ?subject kgc:hasToken true }
         """
 
-        config = VerbConfig(
-            verb="copy",
-            execution_template=execution_template,
-            removal_template=removal_template,
-        )
+        config = VerbConfig(verb="copy", execution_template=execution_template, removal_template=removal_template)
 
         # Act: Execute via Pure RDF Kernel
         delta = pure_kernel.execute(workflow, task_a, base_context, config)
@@ -184,11 +156,7 @@ class TestPureRDFKernelL5:
         assert (task_c, KGC.hasToken, Literal(True)) in delta.additions
         assert (task_a, KGC.completedAt, Literal(base_context.tx_id)) in delta.additions
 
-    def test_void_case_via_template(
-        self,
-        pure_kernel: PureRDFKernel,
-        base_context: TransactionContext,
-    ) -> None:
+    def test_void_case_via_template(self, pure_kernel: PureRDFKernel, base_context: TransactionContext) -> None:
         """Test WCP-43 Explicit Termination via execution template.
 
         The template should:
@@ -236,9 +204,7 @@ class TestPureRDFKernelL5:
         assert (task2, KGC.voidedAt, Literal(base_context.tx_id)) in delta.additions
 
     def test_no_template_returns_empty_delta(
-        self,
-        pure_kernel: PureRDFKernel,
-        base_context: TransactionContext,
+        self, pure_kernel: PureRDFKernel, base_context: TransactionContext
     ) -> None:
         """Test that missing template returns empty delta (identity)."""
         # Arrange
@@ -261,11 +227,7 @@ class TestPureRDFKernelL5:
 class TestPureRDFKernelVariableBinding:
     """Tests for template variable binding."""
 
-    def test_subject_binding(
-        self,
-        pure_kernel: PureRDFKernel,
-        base_context: TransactionContext,
-    ) -> None:
+    def test_subject_binding(self, pure_kernel: PureRDFKernel, base_context: TransactionContext) -> None:
         """Test that ?subject is correctly bound."""
         workflow = Graph()
         task = URIRef("urn:task:specific")
@@ -293,10 +255,7 @@ class TestPureRDFKernelVariableBinding:
         # Should find next_task via the specific subject binding
         assert (next_task, KGC.hasToken, Literal(True)) in delta.additions
 
-    def test_txid_binding(
-        self,
-        pure_kernel: PureRDFKernel,
-    ) -> None:
+    def test_txid_binding(self, pure_kernel: PureRDFKernel) -> None:
         """Test that ?txId is correctly bound from context."""
         workflow = Graph()
         task = URIRef("urn:task:tx_test")
@@ -306,12 +265,7 @@ class TestPureRDFKernelVariableBinding:
         workflow.add((task, YAWL.flowsInto, flow))
         workflow.add((flow, YAWL.nextElementRef, next_task))
 
-        ctx = TransactionContext(
-            tx_id="tx-unique-12345",
-            actor="test",
-            prev_hash=GENESIS_HASH,
-            data={},
-        )
+        ctx = TransactionContext(tx_id="tx-unique-12345", actor="test", prev_hash=GENESIS_HASH, data={})
 
         template = """
             PREFIX yawl: <http://www.yawlfoundation.org/yawlschema#>
@@ -332,19 +286,13 @@ class TestPureRDFKernelVariableBinding:
         # Should have tx_id in completedAt
         assert (task, KGC.completedAt, Literal("tx-unique-12345")) in delta.additions
 
-    def test_data_binding(
-        self,
-        pure_kernel: PureRDFKernel,
-    ) -> None:
+    def test_data_binding(self, pure_kernel: PureRDFKernel) -> None:
         """Test that ctx.data values are bound to ?data_KEY placeholders."""
         workflow = Graph()
         task = URIRef("urn:task:data_test")
 
         ctx = TransactionContext(
-            tx_id="tx-data",
-            actor="test",
-            prev_hash=GENESIS_HASH,
-            data={"threshold": 5, "enabled": True},
+            tx_id="tx-data", actor="test", prev_hash=GENESIS_HASH, data={"threshold": 5, "enabled": True}
         )
 
         # Template that uses data binding
@@ -370,10 +318,7 @@ class TestPureRDFKernelVariableBinding:
 class TestPureRDFKernelZeroLogic:
     """Tests verifying ZERO Python logic in execution path."""
 
-    def test_kernel_has_no_conditionals_in_execute(
-        self,
-        pure_kernel: PureRDFKernel,
-    ) -> None:
+    def test_kernel_has_no_conditionals_in_execute(self, pure_kernel: PureRDFKernel) -> None:
         """Verify execute method has no pattern-specific conditionals.
 
         The execute method should ONLY:
@@ -408,11 +353,7 @@ class TestPureRDFKernelZeroLogic:
         for pattern in forbidden_patterns:
             assert pattern not in source, f"Found forbidden pattern: {pattern}"
 
-    def test_all_behavior_from_template(
-        self,
-        pure_kernel: PureRDFKernel,
-        base_context: TransactionContext,
-    ) -> None:
+    def test_all_behavior_from_template(self, pure_kernel: PureRDFKernel, base_context: TransactionContext) -> None:
         """Test that different behaviors come from different templates.
 
         Same kernel.execute(), different templates → different behavior.

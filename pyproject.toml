@@ -30,6 +30,7 @@ dependencies = [
   "semver>=3.0.0",
   "jinja2>=3.1.0",
   "croniter>=2.0.0",
+  "pyoxigraph>=0.5.2",
 ]
 
 [project.optional-dependencies]
@@ -195,6 +196,10 @@ markers = [
   "security: marks tests as security tests",
   "performance: marks tests as performance tests",
   "unrdf: marks tests as UNRDF porting tests",
+  "wcp(n): marks test as WCP (Workflow Control Pattern) number n (1-43)",
+  "oxigraph: marks test as PyOxigraph-specific",
+  "eye: marks test as EYE reasoner-specific (skipped if not installed)",
+  "cross_engine: marks test as cross-engine consistency check",
 ]
 python_files = ["test_*.py"]
 python_classes = ["Test*"]

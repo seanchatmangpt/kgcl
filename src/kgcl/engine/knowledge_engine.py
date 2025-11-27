@@ -1009,13 +1009,7 @@ class PureRDFKernel:
         # For L5, we use template variable binding instead
         pass
 
-    def execute(
-        self,
-        graph: Graph,
-        subject: URIRef,
-        ctx: TransactionContext,
-        config: VerbConfig,
-    ) -> QuadDelta:
+    def execute(self, graph: Graph, subject: URIRef, ctx: TransactionContext, config: VerbConfig) -> QuadDelta:
         """
         Execute verb using SPARQL templates - ZERO Python logic.
 
@@ -1079,13 +1073,7 @@ class PureRDFKernel:
 
         return QuadDelta(additions=tuple(additions), removals=tuple(removals))
 
-    def _bind_variables(
-        self,
-        template: str,
-        subject: URIRef,
-        ctx: TransactionContext,
-        graph: Graph,
-    ) -> str:
+    def _bind_variables(self, template: str, subject: URIRef, ctx: TransactionContext, graph: Graph) -> str:
         """
         Bind template variables with runtime values.
 
@@ -1126,6 +1114,7 @@ class PureRDFKernel:
                     bound = bound.replace(placeholder, f'"{value}"')
 
         return bound
+
 
 # =============================================================================
 # THE ATMAN - SEMANTIC DRIVER

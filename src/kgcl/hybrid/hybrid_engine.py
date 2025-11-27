@@ -828,11 +828,7 @@ class HybridEngine:
         'Completed'
         """
         # Status priority (higher = more progressed in workflow)
-        status_priority = {
-            "Active": 1,
-            "Completed": 2,
-            "Archived": 3,
-        }
+        status_priority = {"Active": 1, "Completed": 2, "Archived": 3}
 
         query = """
             PREFIX kgc: <https://kgc.org/ns/>

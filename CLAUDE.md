@@ -115,6 +115,23 @@ raise NotImplementedError
 assert True  # meaningless test
 ```
 
+### Test Skipping is Laziness
+```python
+# FORBIDDEN - These are excuses, not solutions:
+@pytest.mark.xfail(reason="...")  # NEVER - implement properly
+@pytest.mark.skipif(...)          # NEVER - make it work
+
+# If a test requires a dependency (EYE reasoner, etc.), ensure:
+# 1. The dependency IS installed in the dev environment
+# 2. The test RUNS and PASSES
+# 3. CI/CD has the dependency available
+
+# The only acceptable skip: platform-specific tests on wrong platform
+# e.g., skipif(sys.platform != "darwin") for macOS-only features
+```
+
+**Philosophy:** If you write a test, make it pass. If you can't make it pass, you haven't finished implementing.
+
 ### Instead: Single-File POCs
 When exploring, create complete working files in `examples/`:
 - Self-contained (all types, implementation, tests)

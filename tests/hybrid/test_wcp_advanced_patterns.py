@@ -14,7 +14,6 @@ import pytest
 
 from kgcl.hybrid.hybrid_engine import HybridEngine
 
-
 # =============================================================================
 # WCP-6: MULTI-CHOICE (OR-SPLIT) - LAW 15
 # =============================================================================

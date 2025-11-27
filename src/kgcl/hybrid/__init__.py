@@ -64,6 +64,17 @@ from kgcl.hybrid.knowledge_hooks import (
     KnowledgeHook,
 )
 
+# WCP-43 Complete Physics - All 43 YAWL Workflow Control Patterns
+from kgcl.hybrid.wcp43_physics import (
+    WCP43_COMPLETE_PHYSICS,
+    WCP_PATTERN_CATALOG,
+    get_pattern_info,
+    get_pattern_rule,
+    get_patterns_by_category,
+    get_patterns_by_verb,
+    list_all_patterns as list_wcp_patterns,
+)
+
 # PyOxigraph-based architecture components
 # Wrapped in try/except for graceful degradation if pyoxigraph not installed
 try:
@@ -129,6 +140,14 @@ __all__ = [
     "HookAction",
     "HookReceipt",
     "N3_HOOK_PHYSICS",
+    # WCP-43 Complete Physics - All 43 YAWL Workflow Control Patterns
+    "WCP43_COMPLETE_PHYSICS",
+    "WCP_PATTERN_CATALOG",
+    "get_pattern_info",
+    "get_pattern_rule",
+    "get_patterns_by_category",
+    "get_patterns_by_verb",
+    "list_wcp_patterns",
     # Tick controller
     "TickController",
     "NewTickResult",

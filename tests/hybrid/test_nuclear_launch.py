@@ -1446,7 +1446,9 @@ nuc:JoinPoint a yawl:Task ;
 
     # JoinPoint SHOULD activate (both branches complete)
     join_status = statuses.get("urn:nuclear:launch:JoinPoint")
-    assert join_status in ["Active", "Completed", "Archived"], f"JoinPoint should activate with 2/2 branches, got {join_status}"
+    assert join_status in ["Active", "Completed", "Archived"], (
+        f"JoinPoint should activate with 2/2 branches, got {join_status}"
+    )
 
 
 # =============================================================================
@@ -1488,7 +1490,9 @@ nuc:MergePoint a yawl:Task .
 
     # MergePoint should activate (PathA completed)
     merge_status = statuses.get("urn:nuclear:launch:MergePoint")
-    assert merge_status in ["Active", "Completed", "Archived"], f"MergePoint should activate via PathA, got {merge_status}"
+    assert merge_status in ["Active", "Completed", "Archived"], (
+        f"MergePoint should activate via PathA, got {merge_status}"
+    )
 
 
 # =============================================================================
@@ -1789,7 +1793,9 @@ nuc:End a yawl:Task .
 
     # LaunchMissile should NEVER be activated without dual auth
     launch_status = statuses.get("urn:nuclear:launch:LaunchMissile")
-    assert launch_status is None, f"SAFETY VIOLATION: LaunchMissile activated without dual auth! Status: {launch_status}"
+    assert launch_status is None, (
+        f"SAFETY VIOLATION: LaunchMissile activated without dual auth! Status: {launch_status}"
+    )
 
     # ArmWarhead should also not activate
     arm_status = statuses.get("urn:nuclear:launch:ArmWarhead")

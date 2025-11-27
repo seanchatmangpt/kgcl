@@ -98,9 +98,7 @@ class TestWcp23CompleteMi:
                 graph.add((instance, KGC.hasToken, Literal(True)))
 
         # Configure Await with threshold=3 (RDF-only: threshold_value)
-        config = VerbConfig(
-            verb="await", threshold_value=3, cancellation_scope="instances"
-        )
+        config = VerbConfig(verb="await", threshold_value=3, cancellation_scope="instances")
 
         # Act: Await checks threshold (3 complete), then Void remaining
         delta_await = Kernel.await_(graph, mi_task, transaction_context, config)

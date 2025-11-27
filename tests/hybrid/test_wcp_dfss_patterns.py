@@ -75,11 +75,7 @@ class PatternViolationError(Exception):
     pass
 
 
-def andon_assert(
-    condition: bool,
-    level: AndonLevel,
-    message: str,
-) -> None:
+def andon_assert(condition: bool, level: AndonLevel, message: str) -> None:
     """Lean Six Sigma Andon signal assertion.
 
     Parameters
@@ -204,9 +200,7 @@ ex:TaskB a yawl:Task .
 
         task_b = statuses.get("urn:example:TaskB")
         andon_assert(
-            task_b is None,
-            AndonLevel.RED,
-            f"WCP-1: TaskB should NOT activate before TaskA completes, got {task_b}",
+            task_b is None, AndonLevel.RED, f"WCP-1: TaskB should NOT activate before TaskA completes, got {task_b}"
         )
 
     def test_sequence_idempotency(self) -> None:
@@ -236,11 +230,7 @@ ex:TaskB a yawl:Task .
         task_b = statuses.get("urn:example:TaskB")
 
         # Should be exactly one status (not duplicated)
-        andon_assert(
-            task_b is not None,
-            AndonLevel.RED,
-            "WCP-1: TaskB should have exactly one status",
-        )
+        andon_assert(task_b is not None, AndonLevel.RED, "WCP-1: TaskB should have exactly one status")
 
 
 # =============================================================================
@@ -741,9 +731,7 @@ ex:BranchB a yawl:Task .
         activated_count = sum(1 for s in [a, b] if s in ["Active", "Completed", "Archived"])
 
         andon_assert(
-            activated_count >= 1,
-            AndonLevel.RED,
-            f"WCP-4: At least one XOR branch should activate, got A={a}, B={b}",
+            activated_count >= 1, AndonLevel.RED, f"WCP-4: At least one XOR branch should activate, got A={a}, B={b}"
         )
 
     def test_xor_three_way_choice(self) -> None:
@@ -892,11 +880,7 @@ ex:Merge a yawl:Task .
 
         # Merge should have exactly one status (highest priority)
         merge = statuses.get("urn:example:Merge")
-        andon_assert(
-            merge is not None,
-            AndonLevel.RED,
-            f"WCP-5: Merge should have one status, got {merge}",
-        )
+        andon_assert(merge is not None, AndonLevel.RED, f"WCP-5: Merge should have one status, got {merge}")
 
 
 # =============================================================================
@@ -934,18 +918,12 @@ ex:End a yawl:Task .
 
         end = statuses.get("urn:example:End")
         andon_assert(
-            end in ["Active", "Completed", "Archived"],
-            AndonLevel.RED,
-            f"WCP-11: End task should be reached, got {end}",
+            end in ["Active", "Completed", "Archived"], AndonLevel.RED, f"WCP-11: End task should be reached, got {end}"
         )
 
         # Should converge (terminate)
         last_result = results[-1]
-        andon_assert(
-            last_result.converged,
-            AndonLevel.YELLOW,
-            "WCP-11: Workflow should converge/terminate",
-        )
+        andon_assert(last_result.converged, AndonLevel.YELLOW, "WCP-11: Workflow should converge/terminate")
 
     def test_terminates_with_single_task(self) -> None:
         """Test termination with single isolated task."""

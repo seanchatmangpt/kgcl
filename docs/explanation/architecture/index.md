@@ -109,7 +109,7 @@ Every tick produces a receipt stored in the Lockchain for audit trail.
 |-----------|-------|---------|
 | `TickController` | L5 | Orchestrates tick execution |
 | `HybridEngine` | L4/L5 | Main engine interface |
-| `N3_PHYSICS` | L4 | 17 laws, 43 patterns |
+| `WCP43_COMPLETE_PHYSICS` | L4 | ALL 43 WCP patterns implemented |
 | `OxigraphStore` | L3 | RDF storage wrapper |
 | `EYEReasoner` | L2 | N3 rule execution |
 | `SHACL` | L1 | Ingress validation |

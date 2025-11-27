@@ -514,11 +514,7 @@ def count_completed_predecessors(engine: HybridEngine, join_task: str) -> int:
     return 0
 
 
-def evaluate_partial_join(
-    engine: HybridEngine,
-    join_task: str,
-    config: PartialJoinConfig,
-) -> bool:
+def evaluate_partial_join(engine: HybridEngine, join_task: str, config: PartialJoinConfig) -> bool:
     """Evaluate if partial join should fire based on completed predecessors.
 
     This is the Python-side threshold logic for WCP-30, 31, 32, 34, 35, 36.
@@ -732,9 +728,7 @@ class TestNuclearTriadDiscriminator:
 
         # SLBM should be Completed or Archived (monotonic: both statuses may exist)
         slbm_status = statuses.get("urn:task:SLBMAuth")
-        assert slbm_status in ["Completed", "Archived"], (
-            f"SLBMAuth should be Completed/Archived, got {slbm_status}"
-        )
+        assert slbm_status in ["Completed", "Archived"], f"SLBMAuth should be Completed/Archived, got {slbm_status}"
 
         # Using Python discriminator logic - check completed tasks
         triad_tasks = ["urn:task:ICBMAuth", "urn:task:SLBMAuth", "urn:task:BomberAuth"]
@@ -765,9 +759,7 @@ class TestNuclearTriadDiscriminator:
         winner = get_first_completion(engine, triad_tasks)
 
         # Lexicographic: BomberAuth < ICBMAuth < SLBMAuth
-        assert winner == "urn:task:BomberAuth", (
-            "BomberAuth should win tie-breaker (lexicographic)"
-        )
+        assert winner == "urn:task:BomberAuth", "BomberAuth should win tie-breaker (lexicographic)"
 
     def test_single_completion_activates_strike(self) -> None:
         """Single triad authorization should activate strike authority.
@@ -825,9 +817,7 @@ class TestStructuredPartialJoin:
         engine.run_to_completion(max_ticks=10)
 
         # Evaluate partial join via Python
-        should_fire = evaluate_partial_join(
-            engine, "urn:task:PartialJoin", config
-        )
+        should_fire = evaluate_partial_join(engine, "urn:task:PartialJoin", config)
         assert should_fire, "Partial join should fire with 2/3 completions"
 
     def test_1_of_3_insufficient(self) -> None:
@@ -846,9 +836,7 @@ class TestStructuredPartialJoin:
 
         engine.run_to_completion(max_ticks=10)
 
-        should_fire = evaluate_partial_join(
-            engine, "urn:task:PartialJoin", config
-        )
+        should_fire = evaluate_partial_join(engine, "urn:task:PartialJoin", config)
         assert not should_fire, "Partial join should NOT fire with 1/3 completions"
 
     def test_3_of_3_fires_immediately(self) -> None:
@@ -869,9 +857,7 @@ class TestStructuredPartialJoin:
 
         engine.run_to_completion(max_ticks=10)
 
-        should_fire = evaluate_partial_join(
-            engine, "urn:task:PartialJoin", config
-        )
+        should_fire = evaluate_partial_join(engine, "urn:task:PartialJoin", config)
         assert should_fire, "Partial join should fire with 3/3 completions"
 
 
@@ -917,9 +903,7 @@ class TestSynchronizingMerge:
         engine.run_to_completion(max_ticks=10)
 
         # Count completed paths
-        completed = count_completed_predecessors(
-            engine, "urn:task:EscalationDecision"
-        )
+        completed = count_completed_predecessors(engine, "urn:task:EscalationDecision")
         assert completed == 3, "All 3 diplomatic paths should be completed"
 
     def test_partial_path_blocks_escalation(self) -> None:
@@ -939,9 +923,7 @@ class TestSynchronizingMerge:
 
         engine.run_to_completion(max_ticks=10)
 
-        completed = count_completed_predecessors(
-            engine, "urn:task:EscalationDecision"
-        )
+        completed = count_completed_predecessors(engine, "urn:task:EscalationDecision")
         assert completed == 2, "Only 2 paths should be completed"
 
         # Document WCP-38 requirement
@@ -976,9 +958,7 @@ class TestSynchronizingMerge:
         engine.run_to_completion(max_ticks=10)
 
         # With 2 completed paths, N3 AND-join will fire
-        completed = count_completed_predecessors(
-            engine, "urn:task:EscalationDecision"
-        )
+        completed = count_completed_predecessors(engine, "urn:task:EscalationDecision")
         assert completed == 2, "2 paths should be completed"
 
         # Document N3 limitation
@@ -1034,9 +1014,7 @@ class TestInterleavedParallelRouting:
         # All speeches should be Completed or Archived
         for speaker in ["US", "UK", "FR"]:
             task = f"urn:task:{speaker}Speech"
-            assert statuses.get(task) in ["Completed", "Archived"], (
-                f"{speaker}Speech should be Completed"
-            )
+            assert statuses.get(task) in ["Completed", "Archived"], f"{speaker}Speech should be Completed"
 
     def test_order_unconstrained(self) -> None:
         """Speech order is unconstrained (any valid permutation).
@@ -1094,16 +1072,10 @@ class TestTierVSafetyInvariants:
 
         engine.run_to_completion(max_ticks=10)
 
-        completed = count_completed_predecessors(
-            engine, "urn:task:EscalationDecision"
-        )
+        completed = count_completed_predecessors(engine, "urn:task:EscalationDecision")
 
         # Safety check: less than all active paths completed
-        andon_assert(
-            completed < 3,
-            AndonLevel.BLACK,
-            "Premature escalation with incomplete diplomatic options"
-        )
+        andon_assert(completed < 3, AndonLevel.BLACK, "Premature escalation with incomplete diplomatic options")
 
     def test_discriminator_single_winner(self) -> None:
         """BLACK ANDON: Only one triad leg can have strike authority.
@@ -1127,19 +1099,11 @@ class TestTierVSafetyInvariants:
         winner = get_first_completion(engine, triad_tasks)
 
         # Verify exactly one winner
-        andon_assert(
-            winner is not None,
-            AndonLevel.BLACK,
-            "No winner in discriminator - command chain undefined"
-        )
+        andon_assert(winner is not None, AndonLevel.BLACK, "No winner in discriminator - command chain undefined")
 
         # Verify deterministic
         winner2 = get_first_completion(engine, triad_tasks)
-        andon_assert(
-            winner == winner2,
-            AndonLevel.BLACK,
-            "Discriminator not deterministic - multiple winners possible"
-        )
+        andon_assert(winner == winner2, AndonLevel.BLACK, "Discriminator not deterministic - multiple winners possible")
 
     def test_partial_join_threshold_respected(self) -> None:
         """BLACK ANDON: Partial join must respect k-of-n threshold.
@@ -1158,14 +1122,12 @@ class TestTierVSafetyInvariants:
 
         engine.run_to_completion(max_ticks=10)
 
-        should_fire = evaluate_partial_join(
-            engine, "urn:task:PartialJoin", config
-        )
+        should_fire = evaluate_partial_join(engine, "urn:task:PartialJoin", config)
 
         andon_assert(
             not should_fire,
             AndonLevel.BLACK,
-            f"Partial join fired with insufficient completions (2 < {config.required_count})"
+            f"Partial join fired with insufficient completions (2 < {config.required_count})",
         )
 
 
@@ -1205,9 +1167,7 @@ class TestTierVPerformance:
         elapsed_ms = (time.perf_counter() - start) * 1000
 
         if elapsed_ms > 50:
-            logger.warning(
-                f"YELLOW ANDON: Partial join evaluation took {elapsed_ms:.2f}ms (> 50ms)"
-            )
+            logger.warning(f"YELLOW ANDON: Partial join evaluation took {elapsed_ms:.2f}ms (> 50ms)")
 
         assert elapsed_ms < 100, f"Partial join evaluation too slow: {elapsed_ms:.2f}ms"
 
@@ -1228,9 +1188,7 @@ class TestTierVPerformance:
 
         tick_count = len(results)
         if tick_count > 10:
-            logger.warning(
-                f"YELLOW ANDON: Sync merge took {tick_count} ticks (> 10)"
-            )
+            logger.warning(f"YELLOW ANDON: Sync merge took {tick_count} ticks (> 10)")
 
         assert tick_count <= 20, f"Sync merge did not converge in 20 ticks: {tick_count}"
 

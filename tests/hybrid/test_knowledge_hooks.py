@@ -127,11 +127,7 @@ class TestKnowledgeHook:
 
     def test_basic_hook_creation(self) -> None:
         """Create hook with minimal configuration."""
-        hook = KnowledgeHook(
-            hook_id="basic-hook",
-            name="Basic Test Hook",
-            phase=HookPhase.ON_CHANGE,
-        )
+        hook = KnowledgeHook(hook_id="basic-hook", name="Basic Test Hook", phase=HookPhase.ON_CHANGE)
 
         assert hook.hook_id == "basic-hook"
         assert hook.name == "Basic Test Hook"
@@ -167,19 +163,9 @@ class TestKnowledgeHook:
 
     def test_hook_priority(self) -> None:
         """Hooks should support priority configuration."""
-        high_priority = KnowledgeHook(
-            hook_id="high",
-            name="High Priority",
-            phase=HookPhase.ON_CHANGE,
-            priority=100,
-        )
+        high_priority = KnowledgeHook(hook_id="high", name="High Priority", phase=HookPhase.ON_CHANGE, priority=100)
 
-        low_priority = KnowledgeHook(
-            hook_id="low",
-            name="Low Priority",
-            phase=HookPhase.ON_CHANGE,
-            priority=10,
-        )
+        low_priority = KnowledgeHook(hook_id="low", name="Low Priority", phase=HookPhase.ON_CHANGE, priority=10)
 
         assert high_priority.priority > low_priority.priority
 
@@ -217,12 +203,7 @@ class TestHookRegistry:
     @pytest.fixture
     def sample_hook(self) -> KnowledgeHook:
         """Create sample hook for tests."""
-        return KnowledgeHook(
-            hook_id="sample",
-            name="Sample Hook",
-            phase=HookPhase.ON_CHANGE,
-            priority=50,
-        )
+        return KnowledgeHook(hook_id="sample", name="Sample Hook", phase=HookPhase.ON_CHANGE, priority=50)
 
     def test_register_hook(self, registry: HookRegistry, sample_hook: KnowledgeHook) -> None:
         """Register a hook and retrieve it."""
@@ -274,12 +255,8 @@ class TestHookRegistry:
 
     def test_get_by_phase_excludes_disabled(self, registry: HookRegistry) -> None:
         """Disabled hooks should be excluded from phase queries."""
-        enabled = KnowledgeHook(
-            hook_id="enabled", name="Enabled", phase=HookPhase.ON_CHANGE, enabled=True
-        )
-        disabled = KnowledgeHook(
-            hook_id="disabled", name="Disabled", phase=HookPhase.ON_CHANGE, enabled=False
-        )
+        enabled = KnowledgeHook(hook_id="enabled", name="Enabled", phase=HookPhase.ON_CHANGE, enabled=True)
+        disabled = KnowledgeHook(hook_id="disabled", name="Disabled", phase=HookPhase.ON_CHANGE, enabled=False)
 
         registry.register(enabled)
         registry.register(disabled)
@@ -345,9 +322,7 @@ class TestHookRegistry:
 
     def test_get_statistics(self, registry: HookRegistry) -> None:
         """Get registry statistics."""
-        hook1 = KnowledgeHook(
-            hook_id="h1", name="H1", phase=HookPhase.PRE_TICK, action=HookAction.NOTIFY
-        )
+        hook1 = KnowledgeHook(hook_id="h1", name="H1", phase=HookPhase.PRE_TICK, action=HookAction.NOTIFY)
         hook2 = KnowledgeHook(
             hook_id="h2", name="H2", phase=HookPhase.ON_CHANGE, action=HookAction.REJECT, enabled=False
         )
@@ -430,15 +405,10 @@ class TestKnowledgeHookIntegration:
         """Create fresh registry for each test."""
         return HookRegistry()
 
-    def test_hook_loaded_to_graph(
-        self, engine: HybridEngine, registry: HookRegistry
-    ) -> None:
+    def test_hook_loaded_to_graph(self, engine: HybridEngine, registry: HookRegistry) -> None:
         """Hooks can be loaded into engine graph."""
         hook = KnowledgeHook(
-            hook_id="test-load",
-            name="Load Test",
-            phase=HookPhase.ON_CHANGE,
-            condition_query="ASK { ?s ?p ?o }",
+            hook_id="test-load", name="Load Test", phase=HookPhase.ON_CHANGE, condition_query="ASK { ?s ?p ?o }"
         )
 
         registry.register(hook)
@@ -458,9 +428,7 @@ class TestKnowledgeHookIntegration:
         results = list(engine.store.query(query))
         assert len(results) >= 1
 
-    def test_validation_hook_rejects_invalid_data(
-        self, engine: HybridEngine, registry: HookRegistry
-    ) -> None:
+    def test_validation_hook_rejects_invalid_data(self, engine: HybridEngine, registry: HookRegistry) -> None:
         """Validation hook can reject invalid data via N3 rules."""
         # Create validation hook
         hook = KnowledgeHook(
@@ -495,9 +463,7 @@ class TestKnowledgeHookIntegration:
         matched_hooks = [r for r in results if r[1]]
         assert len(matched_hooks) >= 1
 
-    def test_notification_hook_creates_notification(
-        self, engine: HybridEngine, registry: HookRegistry
-    ) -> None:
+    def test_notification_hook_creates_notification(self, engine: HybridEngine, registry: HookRegistry) -> None:
         """Notification hook creates audit record via N3 rules."""
         hook = KnowledgeHook(
             hook_id="audit-hook",
@@ -521,22 +487,10 @@ class TestKnowledgeHookIntegration:
         # Should have at least one receipt
         assert len(receipts) >= 0  # May be 0 if phase doesn't match
 
-    def test_hook_priority_ordering(
-        self, engine: HybridEngine, registry: HookRegistry
-    ) -> None:
+    def test_hook_priority_ordering(self, engine: HybridEngine, registry: HookRegistry) -> None:
         """Higher priority hooks execute first."""
-        high = KnowledgeHook(
-            hook_id="high-priority",
-            name="High Priority",
-            phase=HookPhase.ON_CHANGE,
-            priority=100,
-        )
-        low = KnowledgeHook(
-            hook_id="low-priority",
-            name="Low Priority",
-            phase=HookPhase.ON_CHANGE,
-            priority=10,
-        )
+        high = KnowledgeHook(hook_id="high-priority", name="High Priority", phase=HookPhase.ON_CHANGE, priority=100)
+        low = KnowledgeHook(hook_id="low-priority", name="Low Priority", phase=HookPhase.ON_CHANGE, priority=10)
 
         registry.register(low)  # Register low first
         registry.register(high)
@@ -546,9 +500,7 @@ class TestKnowledgeHookIntegration:
         assert hooks[0].hook_id == "high-priority"
         assert hooks[1].hook_id == "low-priority"
 
-    def test_disabled_hook_does_not_execute(
-        self, engine: HybridEngine, registry: HookRegistry
-    ) -> None:
+    def test_disabled_hook_does_not_execute(self, engine: HybridEngine, registry: HookRegistry) -> None:
         """Disabled hooks should not execute."""
         hook = KnowledgeHook(
             hook_id="disabled-hook",
@@ -570,15 +522,10 @@ class TestKnowledgeHookIntegration:
         hook_ids = [r[0] for r in results]
         assert "disabled-hook" not in hook_ids
 
-    def test_hook_receipts_recorded(
-        self, engine: HybridEngine, registry: HookRegistry
-    ) -> None:
+    def test_hook_receipts_recorded(self, engine: HybridEngine, registry: HookRegistry) -> None:
         """Hook executions produce receipts."""
         hook = KnowledgeHook(
-            hook_id="receipt-test",
-            name="Receipt Test",
-            phase=HookPhase.ON_CHANGE,
-            condition_query="ASK { ?s ?p ?o }",
+            hook_id="receipt-test", name="Receipt Test", phase=HookPhase.ON_CHANGE, condition_query="ASK { ?s ?p ?o }"
         )
 
         registry.register(hook)
@@ -596,9 +543,7 @@ class TestKnowledgeHookIntegration:
         assert len(receipts) >= 1
         assert receipts[0].phase == HookPhase.ON_CHANGE
 
-    def test_empty_condition_always_matches(
-        self, engine: HybridEngine, registry: HookRegistry
-    ) -> None:
+    def test_empty_condition_always_matches(self, engine: HybridEngine, registry: HookRegistry) -> None:
         """Hook with empty condition should always match."""
         hook = KnowledgeHook(
             hook_id="always-hook",

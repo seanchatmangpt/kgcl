@@ -626,9 +626,7 @@ class HookRegistry:
         """
         self._receipts.append(receipt)
 
-    def get_receipts(
-        self, hook_id: str | None = None, limit: int = 100
-    ) -> list[HookReceipt]:
+    def get_receipts(self, hook_id: str | None = None, limit: int = 100) -> list[HookReceipt]:
         """Get execution receipts.
 
         Parameters
@@ -772,9 +770,7 @@ class HookExecutor:
                     # Log error but don't fail
                     import logging
 
-                    logging.getLogger(__name__).warning(
-                        f"Hook {hook.hook_id} condition evaluation failed: {e}"
-                    )
+                    logging.getLogger(__name__).warning(f"Hook {hook.hook_id} condition evaluation failed: {e}")
                     matched = False
             else:
                 # Empty condition = always match
@@ -824,11 +820,7 @@ class HookExecutor:
 
         # Return receipts for this phase
         hooks = self._registry.get_by_phase(phase)
-        return [
-            r
-            for r in self._registry.get_receipts(limit=len(hooks) * 2)
-            if r.phase == phase
-        ]
+        return [r for r in self._registry.get_receipts(limit=len(hooks) * 2) if r.phase == phase]
 
     def check_rollback_requested(self) -> tuple[bool, str | None]:
         """Check if any hook requested a rollback.

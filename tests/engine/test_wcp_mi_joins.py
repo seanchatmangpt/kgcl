@@ -261,9 +261,7 @@ class TestWCP35CancellingPartialJoin:
         graph.add((instances[2], KGC.completedAt, Literal("tx-402")))
 
         # Act: First execute await to activate join (RDF-only: threshold_value)
-        await_config = VerbConfig(
-            verb="await", threshold_value=3, cancellation_scope="region"
-        )
+        await_config = VerbConfig(verb="await", threshold_value=3, cancellation_scope="region")
         await_delta = Kernel.await_(graph, join_task, transaction_context, await_config)
 
         # Apply await mutations

@@ -195,18 +195,7 @@ P5_MEMBERS = frozenset({"USA", "UK", "France"})  # NATO nuclear powers
 
 # Full NATO membership (simplified for test)
 NATO_MEMBERS = frozenset(
-    {
-        "USA",
-        "UK",
-        "France",
-        "Germany",
-        "Italy",
-        "Spain",
-        "Poland",
-        "Turkey",
-        "Canada",
-        "Netherlands",
-    }
+    {"USA", "UK", "France", "Germany", "Italy", "Spain", "Poland", "Turkey", "Canada", "Netherlands"}
 )
 
 # Quorum requirements
@@ -536,8 +525,7 @@ def authorize_deterrent_topology(nato_symposium_topology: str) -> str:
         Modified topology with authorization predicate true.
     """
     return nato_symposium_topology.replace(
-        "nato:pred_authorize kgc:evaluatesTo false .",
-        "nato:pred_authorize kgc:evaluatesTo true .",
+        "nato:pred_authorize kgc:evaluatesTo false .", "nato:pred_authorize kgc:evaluatesTo true ."
     )
 
 
@@ -556,8 +544,7 @@ def deescalate_topology(nato_symposium_topology: str) -> str:
         Modified topology with de-escalation predicate true.
     """
     return nato_symposium_topology.replace(
-        "nato:pred_deescalate kgc:evaluatesTo false .",
-        "nato:pred_deescalate kgc:evaluatesTo true .",
+        "nato:pred_deescalate kgc:evaluatesTo false .", "nato:pred_deescalate kgc:evaluatesTo true ."
     )
 
 
@@ -576,8 +563,7 @@ def abort_launch_topology(authorize_deterrent_topology: str) -> str:
         Modified topology with abort predicate true.
     """
     return authorize_deterrent_topology.replace(
-        "nato:pred_abort kgc:evaluatesTo false .",
-        "nato:pred_abort kgc:evaluatesTo true .",
+        "nato:pred_abort kgc:evaluatesTo false .", "nato:pred_abort kgc:evaluatesTo true ."
     )
 
 
@@ -589,9 +575,7 @@ def abort_launch_topology(authorize_deterrent_topology: str) -> str:
 class TestCallToOrder:
     """Tests for Robert's Rules Call to Order procedure."""
 
-    def test_session_begins_with_call_to_order(
-        self, engine: HybridEngine, nato_symposium_topology: str
-    ) -> None:
+    def test_session_begins_with_call_to_order(self, engine: HybridEngine, nato_symposium_topology: str) -> None:
         """WCP-1: Session begins with Call to Order, flows to quorum check.
 
         Verifies the initial sequence from CallToOrder → EstablishQuorum.
@@ -603,15 +587,12 @@ class TestCallToOrder:
 
         # Call to Order should flow to EstablishQuorum
         andon_assert(
-            statuses.get("urn:nato:symposium:EstablishQuorum")
-            in ["Active", "Completed", "Archived"],
+            statuses.get("urn:nato:symposium:EstablishQuorum") in ["Active", "Completed", "Archived"],
             AndonLevel.RED,
             "EstablishQuorum should be activated after CallToOrder",
         )
 
-    def test_quorum_flows_to_committee_formation(
-        self, engine: HybridEngine, nato_symposium_topology: str
-    ) -> None:
+    def test_quorum_flows_to_committee_formation(self, engine: HybridEngine, nato_symposium_topology: str) -> None:
         """WCP-1: Quorum established flows to committee formation."""
         engine.load_data(nato_symposium_topology)
         engine.run_to_completion(max_ticks=5)
@@ -635,9 +616,7 @@ class TestCallToOrder:
 class TestCommitteeFormation:
     """Tests for parallel committee formation (AND-Split)."""
 
-    def test_and_split_activates_all_three_committees(
-        self, engine: HybridEngine, nato_symposium_topology: str
-    ) -> None:
+    def test_and_split_activates_all_three_committees(self, engine: HybridEngine, nato_symposium_topology: str) -> None:
         """WCP-2: AND-Split activates all three committees simultaneously."""
         engine.load_data(nato_symposium_topology)
         engine.run_to_completion(max_ticks=10)
@@ -665,9 +644,7 @@ class TestCommitteeFormation:
             f"LegalFramework should be activated, got {legal}",
         )
 
-    def test_committees_execute_in_parallel(
-        self, engine: HybridEngine, nato_symposium_topology: str
-    ) -> None:
+    def test_committees_execute_in_parallel(self, engine: HybridEngine, nato_symposium_topology: str) -> None:
         """WCP-2: Committees operate independently (parallel execution)."""
         engine.load_data(nato_symposium_topology)
 
@@ -683,18 +660,10 @@ class TestCommitteeFormation:
             "urn:nato:symposium:IntelligenceReview",
             "urn:nato:symposium:LegalFramework",
         ]
-        activated = sum(
-            1
-            for c in committees
-            if statuses.get(c) in ["Active", "Completed", "Archived"]
-        )
+        activated = sum(1 for c in committees if statuses.get(c) in ["Active", "Completed", "Archived"])
 
         # All three should activate from single AND-split
-        andon_assert(
-            activated == 3,
-            AndonLevel.RED,
-            f"All 3 committees should activate in parallel, got {activated}",
-        )
+        andon_assert(activated == 3, AndonLevel.RED, f"All 3 committees should activate in parallel, got {activated}")
 
 
 # =============================================================================
@@ -705,9 +674,7 @@ class TestCommitteeFormation:
 class TestCommitteeSynchronization:
     """Tests for committee report synchronization (AND-Join)."""
 
-    def test_committee_sync_waits_for_all_three(
-        self, engine: HybridEngine, nato_symposium_topology: str
-    ) -> None:
+    def test_committee_sync_waits_for_all_three(self, engine: HybridEngine, nato_symposium_topology: str) -> None:
         """WCP-3: CommitteeSync requires ALL three committee reports."""
         engine.load_data(nato_symposium_topology)
         engine.run_to_completion(max_ticks=15)
@@ -734,14 +701,10 @@ class TestCommitteeSynchronization:
                 "CommitteeSync requires IntelligenceReview complete",
             )
             andon_assert(
-                legal in ["Completed", "Archived"],
-                AndonLevel.BLACK,
-                "CommitteeSync requires LegalFramework complete",
+                legal in ["Completed", "Archived"], AndonLevel.BLACK, "CommitteeSync requires LegalFramework complete"
             )
 
-    def test_partial_committee_completion_blocks_sync(
-        self, engine: HybridEngine
-    ) -> None:
+    def test_partial_committee_completion_blocks_sync(self, engine: HybridEngine) -> None:
         """WCP-3: Sync blocks if not all committees complete.
 
         Uses requiresManualCompletion to block one committee.
@@ -786,9 +749,7 @@ nato:CommitteeSync a yawl:Task ;
         # CommitteeSync should NOT activate (Legal blocked in 2-way join)
         sync_status = statuses.get("urn:nato:symposium:CommitteeSync")
         andon_assert(
-            sync_status is None,
-            AndonLevel.RED,
-            f"CommitteeSync should block when Legal incomplete, got {sync_status}",
+            sync_status is None, AndonLevel.RED, f"CommitteeSync should block when Legal incomplete, got {sync_status}"
         )
 
 
@@ -800,9 +761,7 @@ nato:CommitteeSync a yawl:Task ;
 class TestMainMotion:
     """Tests for main motion exclusive choice (XOR-Split)."""
 
-    def test_default_path_maintains_status_quo(
-        self, engine: HybridEngine, nato_symposium_topology: str
-    ) -> None:
+    def test_default_path_maintains_status_quo(self, engine: HybridEngine, nato_symposium_topology: str) -> None:
         """WCP-4: Default path (no predicates true) maintains status quo."""
         engine.load_data(nato_symposium_topology)
         engine.run_to_completion(max_ticks=20)
@@ -821,16 +780,8 @@ class TestMainMotion:
         authorize = statuses.get("urn:nato:symposium:AuthorizeDeterrent")
         deescalate = statuses.get("urn:nato:symposium:DeEscalate")
 
-        andon_assert(
-            authorize is None,
-            AndonLevel.RED,
-            f"AuthorizeDeterrent should not activate, got {authorize}",
-        )
-        andon_assert(
-            deescalate is None,
-            AndonLevel.RED,
-            f"DeEscalate should not activate, got {deescalate}",
-        )
+        andon_assert(authorize is None, AndonLevel.RED, f"AuthorizeDeterrent should not activate, got {authorize}")
+        andon_assert(deescalate is None, AndonLevel.RED, f"DeEscalate should not activate, got {deescalate}")
 
     def test_authorize_predicate_takes_authorization_path(
         self, engine: HybridEngine, authorize_deterrent_topology: str
@@ -860,9 +811,7 @@ class TestMainMotion:
         # Note: Due to N3 physics limitation, default path may also fire
         # The key invariant is that authorization path IS taken
 
-    def test_deescalate_predicate_takes_deescalation_path(
-        self, engine: HybridEngine, deescalate_topology: str
-    ) -> None:
+    def test_deescalate_predicate_takes_deescalation_path(self, engine: HybridEngine, deescalate_topology: str) -> None:
         """WCP-4: De-escalation predicate true takes de-escalate path.
 
         This verifies the de-escalation path IS taken when predicate is true.
@@ -880,9 +829,7 @@ class TestMainMotion:
             f"DeEscalate should activate, got {deescalate}",
         )
 
-    def test_xor_at_least_one_path_taken(
-        self, engine: HybridEngine, nato_symposium_topology: str
-    ) -> None:
+    def test_xor_at_least_one_path_taken(self, engine: HybridEngine, nato_symposium_topology: str) -> None:
         """WCP-4: XOR ensures at least one motion outcome is taken.
 
         Note: With default topology (all predicates false), only the default
@@ -900,17 +847,11 @@ class TestMainMotion:
             "urn:nato:symposium:MaintainStatusQuo",
             "urn:nato:symposium:DeEscalate",
         ]
-        activated = [
-            o
-            for o in outcomes
-            if statuses.get(o) in ["Active", "Completed", "Archived"]
-        ]
+        activated = [o for o in outcomes if statuses.get(o) in ["Active", "Completed", "Archived"]]
 
         # At least one path should be taken
         andon_assert(
-            len(activated) >= 1,
-            AndonLevel.RED,
-            f"At least ONE motion outcome should activate, got {len(activated)}",
+            len(activated) >= 1, AndonLevel.RED, f"At least ONE motion outcome should activate, got {len(activated)}"
         )
 
         # In default topology (all predicates false), only MaintainStatusQuo
@@ -929,9 +870,7 @@ class TestMainMotion:
 class TestNuclearAuthorizationChain:
     """Tests for the nuclear authorization chain (nested AND-Joins)."""
 
-    def test_authorization_triggers_nca_split(
-        self, engine: HybridEngine, authorize_deterrent_topology: str
-    ) -> None:
+    def test_authorization_triggers_nca_split(self, engine: HybridEngine, authorize_deterrent_topology: str) -> None:
         """Authorization path triggers NCA AND-split to all nuclear powers."""
         engine.load_data(authorize_deterrent_topology)
         engine.run_to_completion(max_ticks=20)
@@ -941,14 +880,10 @@ class TestNuclearAuthorizationChain:
         # NCAAuthorization should be reached (but blocked by manual)
         nca = statuses.get("urn:nato:symposium:NCAAuthorization")
         andon_assert(
-            nca in ["Active", "Completed", "Archived"],
-            AndonLevel.RED,
-            f"NCAAuthorization should activate, got {nca}",
+            nca in ["Active", "Completed", "Archived"], AndonLevel.RED, f"NCAAuthorization should activate, got {nca}"
         )
 
-    def test_nca_sync_requires_both_nuclear_powers(
-        self, engine: HybridEngine
-    ) -> None:
+    def test_nca_sync_requires_both_nuclear_powers(self, engine: HybridEngine) -> None:
         """WCP-3: NCA sync requires all authorized powers (2-way AND-join).
 
         Note: Current N3 physics uses 2-predecessor AND-join rule.
@@ -1036,11 +971,7 @@ nato:DualKeySync a yawl:Task ;
 
         # DualKeySync should NOT activate (only one key)
         sync_status = statuses.get("urn:nato:symposium:DualKeySync")
-        andon_assert(
-            sync_status is None,
-            AndonLevel.BLACK,
-            f"DualKeySync requires BOTH keys, got {sync_status}",
-        )
+        andon_assert(sync_status is None, AndonLevel.BLACK, f"DualKeySync requires BOTH keys, got {sync_status}")
 
 
 # =============================================================================
@@ -1051,9 +982,7 @@ nato:DualKeySync a yawl:Task ;
 class TestSafetyInvariants:
     """Tests for critical safety properties (BLACK ANDON violations)."""
 
-    def test_no_launch_without_all_nca_authorizations(
-        self, engine: HybridEngine
-    ) -> None:
+    def test_no_launch_without_all_nca_authorizations(self, engine: HybridEngine) -> None:
         """SAFETY: Launch preparation requires ALL nuclear power NCAs.
 
         Uses 2-way AND-join to properly demonstrate blocking behavior.
@@ -1176,9 +1105,7 @@ nato:PrepareLaunch a yawl:Task .
             f"SAFETY: PrepareLaunch should not activate on abort, got {prepare_status}",
         )
 
-    def test_at_least_one_final_outcome(
-        self, engine: HybridEngine, nato_symposium_topology: str
-    ) -> None:
+    def test_at_least_one_final_outcome(self, engine: HybridEngine, nato_symposium_topology: str) -> None:
         """SAFETY: Workflow reaches at least one final outcome.
 
         In the default topology (no predicates true), MaintainStatusQuo
@@ -1197,11 +1124,7 @@ nato:PrepareLaunch a yawl:Task .
             "urn:nato:symposium:DeEscalate",
         ]
 
-        activated = [
-            o
-            for o in final_outcomes
-            if statuses.get(o) in ["Active", "Completed", "Archived"]
-        ]
+        activated = [o for o in final_outcomes if statuses.get(o) in ["Active", "Completed", "Archived"]]
 
         andon_assert(
             len(activated) >= 1,
@@ -1225,9 +1148,7 @@ nato:PrepareLaunch a yawl:Task .
 class TestAdjournment:
     """Tests for proper session adjournment (WCP-11)."""
 
-    def test_status_quo_reaches_adjournment(
-        self, engine: HybridEngine, nato_symposium_topology: str
-    ) -> None:
+    def test_status_quo_reaches_adjournment(self, engine: HybridEngine, nato_symposium_topology: str) -> None:
         """WCP-11: Status quo path properly adjourns."""
         engine.load_data(nato_symposium_topology)
         results = engine.run_to_completion(max_ticks=25)
@@ -1237,21 +1158,13 @@ class TestAdjournment:
         # Adjournment should be reached
         adjourn = statuses.get("urn:nato:symposium:Adjournment")
         andon_assert(
-            adjourn in ["Active", "Completed"],
-            AndonLevel.RED,
-            f"Adjournment should be reached, got {adjourn}",
+            adjourn in ["Active", "Completed"], AndonLevel.RED, f"Adjournment should be reached, got {adjourn}"
         )
 
         # Should converge
-        andon_assert(
-            results[-1].converged,
-            AndonLevel.RED,
-            "Workflow should converge at adjournment",
-        )
+        andon_assert(results[-1].converged, AndonLevel.RED, "Workflow should converge at adjournment")
 
-    def test_deescalate_reaches_adjournment(
-        self, engine: HybridEngine, deescalate_topology: str
-    ) -> None:
+    def test_deescalate_reaches_adjournment(self, engine: HybridEngine, deescalate_topology: str) -> None:
         """WCP-11: De-escalation path properly adjourns."""
         engine.load_data(deescalate_topology)
         results = engine.run_to_completion(max_ticks=25)
@@ -1265,24 +1178,16 @@ class TestAdjournment:
             f"Adjournment should be reached via de-escalation, got {adjourn}",
         )
 
-    def test_no_infinite_loop(
-        self, engine: HybridEngine, nato_symposium_topology: str
-    ) -> None:
+    def test_no_infinite_loop(self, engine: HybridEngine, nato_symposium_topology: str) -> None:
         """Convergence: Symposium terminates in finite ticks."""
         engine.load_data(nato_symposium_topology)
         results = engine.run_to_completion(max_ticks=50)
 
         andon_assert(
-            len(results) < 50,
-            AndonLevel.RED,
-            f"Workflow should converge before 50 ticks, took {len(results)}",
+            len(results) < 50, AndonLevel.RED, f"Workflow should converge before 50 ticks, took {len(results)}"
         )
 
-        andon_assert(
-            results[-1].converged,
-            AndonLevel.RED,
-            "Workflow should reach fixed point",
-        )
+        andon_assert(results[-1].converged, AndonLevel.RED, "Workflow should reach fixed point")
 
 
 # =============================================================================
@@ -1293,9 +1198,7 @@ class TestAdjournment:
 class TestFullSymposiumScenarios:
     """Integration tests for complete symposium workflow scenarios."""
 
-    def test_full_status_quo_scenario(
-        self, engine: HybridEngine, nato_symposium_topology: str
-    ) -> None:
+    def test_full_status_quo_scenario(self, engine: HybridEngine, nato_symposium_topology: str) -> None:
         """Complete workflow: deliberation → status quo → adjournment."""
         engine.load_data(nato_symposium_topology)
         results = engine.run_to_completion(max_ticks=30)
@@ -1326,14 +1229,10 @@ class TestFullSymposiumScenarios:
         # Adjournment reached
         adjourn = statuses.get("urn:nato:symposium:Adjournment")
         andon_assert(
-            adjourn in ["Active", "Completed"],
-            AndonLevel.RED,
-            f"Adjournment should be reached, got {adjourn}",
+            adjourn in ["Active", "Completed"], AndonLevel.RED, f"Adjournment should be reached, got {adjourn}"
         )
 
-    def test_full_abort_scenario(
-        self, engine: HybridEngine, abort_launch_topology: str
-    ) -> None:
+    def test_full_abort_scenario(self, engine: HybridEngine, abort_launch_topology: str) -> None:
         """Complete workflow: authorization → NCA → dual-key → ABORT."""
         # Need to complete the manual steps for this scenario
         # Modify topology to have all manual tasks pre-completed
@@ -1401,16 +1300,8 @@ class TestFullSymposiumScenarios:
         abort = statuses.get("urn:nato:symposium:AbortLaunch")
         prepare = statuses.get("urn:nato:symposium:PrepareLaunch")
 
-        andon_assert(
-            abort in ["Completed", "Archived"],
-            AndonLevel.BLACK,
-            f"AbortLaunch should complete, got {abort}",
-        )
-        andon_assert(
-            prepare is None,
-            AndonLevel.BLACK,
-            f"PrepareLaunch should NOT activate, got {prepare}",
-        )
+        andon_assert(abort in ["Completed", "Archived"], AndonLevel.BLACK, f"AbortLaunch should complete, got {abort}")
+        andon_assert(prepare is None, AndonLevel.BLACK, f"PrepareLaunch should NOT activate, got {prepare}")
 
     def test_committee_failure_blocks_workflow(self, engine: HybridEngine) -> None:
         """If committee fails to report, main motion never proceeds.
@@ -1469,18 +1360,12 @@ nato:MainMotion a yawl:Task .
         # MainMotion should NOT be reached (committee blocked in 2-way join)
         main_motion = statuses.get("urn:nato:symposium:MainMotion")
         andon_assert(
-            main_motion is None,
-            AndonLevel.RED,
-            f"MainMotion should block when committee incomplete, got {main_motion}",
+            main_motion is None, AndonLevel.RED, f"MainMotion should block when committee incomplete, got {main_motion}"
         )
 
         # Legal should be Active (waiting)
         legal = statuses.get("urn:nato:symposium:LegalFramework")
-        andon_assert(
-            legal == "Active",
-            AndonLevel.RED,
-            f"LegalFramework should be Active (blocked), got {legal}",
-        )
+        andon_assert(legal == "Active", AndonLevel.RED, f"LegalFramework should be Active (blocked), got {legal}")
 
 
 # =============================================================================
@@ -1491,9 +1376,7 @@ nato:MainMotion a yawl:Task .
 class TestRobertsRulesPatterns:
     """Tests for Robert's Rules parliamentary patterns."""
 
-    def test_motion_requires_second(
-        self, engine: HybridEngine, nato_symposium_topology: str
-    ) -> None:
+    def test_motion_requires_second(self, engine: HybridEngine, nato_symposium_topology: str) -> None:
         """Parliamentary procedure: Main motion requires a second.
 
         Note: In this simplified model, the requiresSecond property is
@@ -1513,9 +1396,7 @@ class TestRobertsRulesPatterns:
         results = list(engine.store.query(query))
         assert len(results) > 0, "MainMotion should have requiresSecond property"
 
-    def test_quorum_required_for_proceedings(
-        self, engine: HybridEngine, nato_symposium_topology: str
-    ) -> None:
+    def test_quorum_required_for_proceedings(self, engine: HybridEngine, nato_symposium_topology: str) -> None:
         """Parliamentary procedure: Quorum required for valid proceedings."""
         engine.load_data(nato_symposium_topology)
 
@@ -1530,9 +1411,7 @@ class TestRobertsRulesPatterns:
         results = list(engine.store.query(query))
         assert len(results) > 0, "EstablishQuorum should have quorumRequired property"
 
-    def test_parliamentary_action_sequence(
-        self, engine: HybridEngine, nato_symposium_topology: str
-    ) -> None:
+    def test_parliamentary_action_sequence(self, engine: HybridEngine, nato_symposium_topology: str) -> None:
         """Verify correct parliamentary action sequence."""
         engine.load_data(nato_symposium_topology)
         engine.run_to_completion(max_ticks=25)

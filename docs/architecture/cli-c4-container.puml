@@ -1,0 +1,31 @@
+@startuml KGCL CLI - C4 Container Diagram
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title KGCL CLI - Container Diagram
+
+Person(user, "User", "Developer or operator")
+
+System_Boundary(kgcl, "KGCL System") {
+    Container(cli, "CLI Application", "Python/Click", "Noun-verb command interface")
+    Container(hybrid_engine, "HybridEngine", "Python", "Orchestrates PyOxigraph + EYE")
+    ContainerDb(pyoxigraph, "PyOxigraph Store", "Rust", "RDF triple store (in-memory or persistent)")
+    Container(n3_physics, "N3 Physics", "N3/Notation3", "Declarative workflow rules")
+}
+
+System_Ext(eye, "EYE Reasoner", "N3 inference engine")
+System_Ext(filesystem, "File System", "RDF files")
+
+Rel(user, cli, "kgcl engine run", "shell")
+Rel(user, cli, "kgcl store query", "shell")
+Rel(user, cli, "kgcl task list", "shell")
+Rel(user, cli, "kgcl physics show", "shell")
+Rel(user, cli, "kgcl system check", "shell")
+
+Rel(cli, hybrid_engine, "Creates/Invokes")
+Rel(hybrid_engine, pyoxigraph, "Loads/Queries/Updates")
+Rel(hybrid_engine, n3_physics, "Applies rules")
+Rel(hybrid_engine, eye, "Subprocess invocation")
+Rel(hybrid_engine, filesystem, "Reads Turtle files")
+Rel(pyoxigraph, filesystem, "Persists to disk")
+
+@enduml

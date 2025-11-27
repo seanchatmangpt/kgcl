@@ -1,0 +1,17 @@
+@startuml KGCL CLI - C4 Context Diagram
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title KGCL CLI - System Context
+
+Person(user, "User", "Developer or operator working with knowledge graphs")
+
+System(kgcl_cli, "KGCL CLI", "Command-line interface for hybrid RDF engine with noun-verb structure")
+
+System_Ext(eye, "EYE Reasoner", "Euler Yet another proof Engine for N3 logic reasoning")
+System_Ext(filesystem, "File System", "Turtle/N3 topology files and persistent stores")
+
+Rel(user, kgcl_cli, "Uses", "kgcl <noun> <verb>")
+Rel(kgcl_cli, eye, "Invokes", "subprocess")
+Rel(kgcl_cli, filesystem, "Reads/Writes", "RDF files")
+
+@enduml

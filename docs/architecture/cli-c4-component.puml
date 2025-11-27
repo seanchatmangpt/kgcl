@@ -1,0 +1,53 @@
+@startuml KGCL CLI - C4 Component Diagram
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title KGCL CLI - Component Diagram
+
+Container_Boundary(cli, "CLI Application") {
+    Component(app, "app.py", "Click Group", "Root CLI application, registers noun groups")
+
+    Component(engine_cmd, "engine.py", "Click Group", "kgcl engine <verb>\n- run: Run to convergence\n- tick: Single tick\n- status: Component status")
+
+    Component(store_cmd, "store.py", "Click Group", "kgcl store <verb>\n- query: SPARQL query\n- load: Load RDF\n- dump: Dump triples\n- repl: Interactive shell")
+
+    Component(task_cmd, "task.py", "Click Group", "kgcl task <verb>\n- list: List tasks\n- inspect: Task details")
+
+    Component(physics_cmd, "physics.py", "Click Group", "kgcl physics <verb>\n- show: Display rules\n- validate: Check syntax")
+
+    Component(system_cmd, "system.py", "Click Group", "kgcl system <verb>\n- check: Component health\n- info: Architecture info")
+}
+
+Container_Boundary(hybrid, "Hybrid Engine") {
+    Component(hybrid_engine, "HybridEngine", "Python Class", "Tick controller/orchestrator")
+    Component(physics_result, "PhysicsResult", "Dataclass", "Tick metrics")
+    Component(n3_rules, "N3_PHYSICS", "N3 String", "Workflow rules")
+}
+
+Container_Boundary(external, "External") {
+    Component(pyoxigraph, "PyOxigraph", "Rust Library", "RDF store")
+    Component(eye, "EYE", "Subprocess", "N3 reasoner")
+    Component(rich, "Rich", "Python Library", "Terminal output")
+}
+
+Rel(app, engine_cmd, "add_command")
+Rel(app, store_cmd, "add_command")
+Rel(app, task_cmd, "add_command")
+Rel(app, physics_cmd, "add_command")
+Rel(app, system_cmd, "add_command")
+
+Rel(engine_cmd, hybrid_engine, "Uses")
+Rel(store_cmd, hybrid_engine, "Uses")
+Rel(task_cmd, hybrid_engine, "Uses")
+Rel(physics_cmd, n3_rules, "Reads")
+Rel(system_cmd, hybrid_engine, "Checks")
+
+Rel(hybrid_engine, pyoxigraph, "Store operations")
+Rel(hybrid_engine, eye, "Reasoning")
+Rel(hybrid_engine, physics_result, "Returns")
+
+Rel(engine_cmd, rich, "Output")
+Rel(store_cmd, rich, "Output")
+Rel(task_cmd, rich, "Output")
+Rel(system_cmd, rich, "Output")
+
+@enduml

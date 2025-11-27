@@ -1,0 +1,103 @@
+@startuml KGCL CLI - C4 Code Diagram
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title KGCL CLI - Code Level Structure
+
+package "kgcl.cli" {
+    class app {
+        +app(): click.Group
+        --
+        Registers all noun groups
+    }
+
+    package "engine.py" {
+        class engine_group <<click.Group>> {
+            +engine(): Group
+            +run(topology, max_ticks, verbose)
+            +tick(topology)
+            +status()
+        }
+    }
+
+    package "store.py" {
+        class store_group <<click.Group>> {
+            +store(): Group
+            +query(sparql, file, format)
+            +load(file)
+            +dump(file)
+            +repl(persistent)
+        }
+    }
+
+    package "task.py" {
+        class task_group <<click.Group>> {
+            +task(): Group
+            +list(topology)
+            +inspect(topology, task_uri)
+        }
+    }
+
+    package "physics.py" {
+        class physics_group <<click.Group>> {
+            +physics(): Group
+            +show()
+            +validate()
+        }
+    }
+
+    package "system.py" {
+        class system_group <<click.Group>> {
+            +system(): Group
+            +check()
+            +info()
+        }
+    }
+}
+
+package "kgcl.hybrid" {
+    class HybridEngine {
+        +store: ox.Store
+        +physics_file: str
+        +tick_count: int
+        --
+        +load_data(turtle_data: str)
+        +apply_physics(): PhysicsResult
+        +run_to_completion(max_ticks): list[PhysicsResult]
+        +inspect(): dict[str, str]
+    }
+
+    class PhysicsResult <<frozen dataclass>> {
+        +tick_number: int
+        +duration_ms: float
+        +triples_before: int
+        +triples_after: int
+        +delta: int
+        +converged: bool
+    }
+
+    class N3_PHYSICS <<constant>> {
+        LAW 1: Sequence
+        LAW 2: AND-Split
+        LAW 3: AND-Join
+        LAW 4: XOR-Split
+        LAW 5: Auto-Complete
+        ...
+    }
+}
+
+app --> engine_group : add_command
+app --> store_group : add_command
+app --> task_group : add_command
+app --> physics_group : add_command
+app --> system_group : add_command
+
+engine_group --> HybridEngine : uses
+store_group --> HybridEngine : uses
+task_group --> HybridEngine : uses
+physics_group --> N3_PHYSICS : reads
+system_group --> HybridEngine : checks
+
+HybridEngine --> PhysicsResult : returns
+HybridEngine --> N3_PHYSICS : applies
+
+@enduml

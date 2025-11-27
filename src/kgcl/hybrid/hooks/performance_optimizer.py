@@ -401,7 +401,7 @@ class PerformanceOptimizer:
         --------
         >>> optimizer = PerformanceOptimizer()
         >>> report = optimizer.export_report()
-        >>> 'slo_target_ms' in report
+        >>> "slo_target_ms" in report
         True
         """
         metrics = self.get_metrics()

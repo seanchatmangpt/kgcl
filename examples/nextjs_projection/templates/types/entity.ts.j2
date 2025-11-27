@@ -1,0 +1,79 @@
+---
+id: nextjs-entity-type
+engine: jinja2
+language: typescript
+framework: nextjs
+version: "1.0.0"
+
+ontology:
+  graph_id: ecommerce
+  base_iri: "http://example.org/ecommerce#"
+
+queries:
+  - name: properties
+    purpose: Get all properties for this entity
+    source: inline
+    content: |
+      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+      PREFIX owl: <http://www.w3.org/2002/07/owl#>
+      PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+      PREFIX shop: <http://example.org/ecommerce#>
+
+      SELECT ?prop ?label ?range ?required ?default WHERE {
+        ?prop rdfs:domain <{{ entity.uri }}> ;
+              rdfs:label ?label .
+        OPTIONAL { ?prop rdfs:range ?range }
+        OPTIONAL { ?prop shop:required ?required }
+        OPTIONAL { ?prop shop:default ?default }
+        FILTER(?prop != rdfs:label && ?prop != rdfs:comment)
+      }
+      ORDER BY ?label
+
+  - name: relationships
+    purpose: Get object properties (relationships)
+    source: inline
+    content: |
+      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+      PREFIX owl: <http://www.w3.org/2002/07/owl#>
+      PREFIX shop: <http://example.org/ecommerce#>
+
+      SELECT ?prop ?label ?targetClass ?targetSlug ?cardinality WHERE {
+        ?prop a owl:ObjectProperty ;
+              rdfs:domain <{{ entity.uri }}> ;
+              rdfs:range ?targetClass ;
+              rdfs:label ?label .
+        ?targetClass shop:slug ?targetSlug .
+        OPTIONAL { ?prop shop:cardinality ?cardinality }
+      }
+
+metadata:
+  author: kgcl-projection
+  description: TypeScript interface for {{ entity.label }}
+  tags:
+    - typescript
+    - types
+    - nextjs
+---
+/**
+ * {{ entity.label }} - {{ entity.comment | default('Domain entity') }}
+ *
+ * @generated from RDF ontology via KGCL projection
+ * @see {{ entity.uri }}
+ */
+
+export interface {{ entity.label }} {
+  id: string;
+{% for prop in sparql.properties %}
+  /** {{ prop.label }} */
+  {{ prop.label | camel_case }}{% if prop.required != 'true' %}?{% endif %}: {{ prop.range | uri_local_name | xsd_to_typescript }}{% if prop.default %} // default: {{ prop.default }}{% endif %};
+{% endfor %}
+{% for rel in sparql.relationships %}
+  /** Relationship to {{ rel.targetSlug }} */
+  {{ rel.label | camel_case }}{% if rel.cardinality == 'many' %}{% endif %}: {% if rel.cardinality == 'many' %}{{ rel.targetSlug | pascal_case }}[]{% else %}{{ rel.targetSlug | pascal_case }} | null{% endif %};
+{% endfor %}
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export type {{ entity.label }}CreateInput = Omit<{{ entity.label }}, 'id' | 'createdAt' | 'updatedAt'>;
+export type {{ entity.label }}UpdateInput = Partial<{{ entity.label }}CreateInput>;

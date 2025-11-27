@@ -195,17 +195,21 @@ class RDFEventStore:
     1
     """
 
-    def __init__(self, store: Store | None = None) -> None:
+    def __init__(self, store: Store | None = None, max_event_log_size: int | None = None) -> None:
         """Initialize RDF event store.
 
         Parameters
         ----------
         store : Store | None
             PyOxigraph store instance (creates in-memory if None)
+        max_event_log_size : int | None
+            Maximum number of events to keep in log. Older events are purged
+            via FIFO when exceeded. If None, no limit.
         """
         self._store = store if store is not None else Store()
         self._sequence = self._get_max_sequence()
         self._tick = 0
+        self._max_event_log_size = max_event_log_size
 
     @property
     def sequence(self) -> int:
@@ -314,6 +318,10 @@ class RDFEventStore:
         elif event.event_type == EventType.TRIPLE_REMOVED:
             self._apply_triple_remove(payload)
 
+        # Compact if over limit (FIFO)
+        if self._max_event_log_size is not None:
+            self._compact_log_fifo()
+
         return self._sequence
 
     def _to_term(self, value: str) -> NamedNode | Literal:
@@ -337,6 +345,55 @@ class RDFEventStore:
                 self._to_term(payload["s"]), self._to_term(payload["p"]), self._to_term(payload["o"]), STATE_GRAPH
             )
             self._store.remove(quad)
+
+    def _compact_log_fifo(self) -> int:
+        """Compact event log by removing oldest events (FIFO).
+
+        Removes events oldest-first until log size is at or below
+        max_event_log_size. Only called when max_event_log_size is set.
+
+        Returns
+        -------
+        int
+            Number of events removed
+        """
+        if self._max_event_log_size is None:
+            return 0
+
+        current_count = self.count_events()
+        if current_count <= self._max_event_log_size:
+            return 0
+
+        events_to_remove = current_count - self._max_event_log_size
+
+        # Find oldest events to remove
+        query = f"""
+        PREFIX kgcl: <{KGCL_VOCAB}>
+        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+        SELECT ?event ?eventId
+        WHERE {{
+            GRAPH <{EVENTS_GRAPH_URI}> {{
+                ?event a kgcl:Event ;
+                       kgcl:eventId ?eventId ;
+                       kgcl:sequence ?seq .
+            }}
+        }}
+        ORDER BY xsd:integer(?seq)
+        LIMIT {events_to_remove}
+        """
+
+        removed = 0
+        for row in self._store.query(query):
+            event_node = row["event"]
+            # Remove all quads with this event as subject
+            quads_to_remove = list(self._store.quads_for_pattern(event_node, None, None, EVENTS_GRAPH))
+            for quad in quads_to_remove:
+                self._store.remove(quad)
+            # Also remove any blank node payloads connected to this event
+            # (handled by cascade since blank nodes are only reachable via event)
+            removed += 1
+
+        return removed
 
     def replay(
         self, from_seq: int = 0, to_seq: int | None = None, event_types: list[EventType] | None = None

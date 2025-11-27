@@ -79,11 +79,7 @@ class WorkflowAuditLogger:
     >>> import psycopg
     >>> conn = psycopg.connect("postgresql://...")  # doctest: +SKIP
     >>> logger = WorkflowAuditLogger(conn)  # doctest: +SKIP
-    >>> logger.log_event(
-    ...     workflow_id="WF-001",
-    ...     pattern_id=1,
-    ...     event_type="start",
-    ... )  # doctest: +SKIP
+    >>> logger.log_event(workflow_id="WF-001", pattern_id=1, event_type="start")  # doctest: +SKIP
     """
 
     def __init__(self, connection: Any) -> None:
@@ -159,11 +155,7 @@ class WorkflowAuditLogger:
             self._conn.commit()
             return result[0] if result else 0
 
-    def get_workflow_history(
-        self,
-        workflow_id: str,
-        pattern_id: int | None = None,
-    ) -> list[AuditEvent]:
+    def get_workflow_history(self, workflow_id: str, pattern_id: int | None = None) -> list[AuditEvent]:
         """Get audit history for a workflow.
 
         Parameters
@@ -209,11 +201,7 @@ class WorkflowAuditLogger:
             for row in results
         ]
 
-    def count_events(
-        self,
-        workflow_id: str,
-        event_type: str | None = None,
-    ) -> int:
+    def count_events(self, workflow_id: str, event_type: str | None = None) -> int:
         """Count events for a workflow.
 
         Parameters
@@ -280,10 +268,7 @@ class WorkflowAuditLogger:
             Number of records deleted.
         """
         with self._conn.cursor() as cursor:
-            cursor.execute(
-                "DELETE FROM workflow_audit WHERE workflow_id = %s",
-                (workflow_id,),
-            )
+            cursor.execute("DELETE FROM workflow_audit WHERE workflow_id = %s", (workflow_id,))
             deleted = cursor.rowcount
             self._conn.commit()
             return deleted

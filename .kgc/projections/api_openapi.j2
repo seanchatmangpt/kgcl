@@ -1,0 +1,46 @@
+---
+id: api_openapi
+engine: jinja2
+language: yaml
+framework: openapi
+version: 1.0.0
+ontology:
+  graph_id: main
+queries:
+  - name: entities
+    inline: |
+      SELECT ?entity ?label WHERE {
+        GRAPH <urn:kgcl:state> {
+          ?entity a <urn:type:Entity> .
+          OPTIONAL { ?entity <urn:rdfs:label> ?label }
+        }
+      }
+metadata:
+  author: KGCL Projection
+  description: Generate OpenAPI 3.0 specification from RDF entities
+  tags:
+    - openapi
+    - api
+    - rest
+---
+openapi: 3.0.0
+info:
+  title: {{ api_title | default("Generated API") }}
+  version: {{ version | default("1.0.0") }}
+  description: Auto-generated API from RDF ontology
+
+paths:
+{% for entity in entities %}
+  /{{ entity.label | default(entity.entity | replace('urn:', '')) | lower }}:
+    get:
+      summary: List {{ entity.label | default(entity.entity) }}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+{% endfor %}

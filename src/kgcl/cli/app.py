@@ -19,6 +19,7 @@ from kgcl.cli.physics import physics
 from kgcl.cli.store import store
 from kgcl.cli.system import system
 from kgcl.cli.task import task
+from kgcl.projection.cli import proj
 
 
 @click.group()
@@ -48,6 +49,7 @@ app.add_command(store)
 app.add_command(task)
 app.add_command(physics)
 app.add_command(system)
+app.add_command(proj)
 
 
 if __name__ == "__main__":

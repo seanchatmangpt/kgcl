@@ -186,8 +186,7 @@ class WarmEYEReasoner:
         # Verify EYE is available
         if not self._is_eye_available():
             raise WarmEYENotAvailableError(
-                f"EYE not found at '{self.config.eye_path}'. "
-                "Install from https://github.com/eyereasoner/eye"
+                f"EYE not found at '{self.config.eye_path}'. Install from https://github.com/eyereasoner/eye"
             )
 
     def _is_eye_available(self) -> bool:
@@ -297,23 +296,13 @@ class WarmEYEReasoner:
         try:
             # Spawn EYE process that reads from stdin
             # Using --pass to output all inferences
-            cmd = [
-                self.config.eye_path,
-                "--nope",
-                "--pass",
-                "--quiet",
-                self._rules_path or "",
-            ]
+            cmd = [self.config.eye_path, "--nope", "--pass", "--quiet", self._rules_path or ""]
 
             # Filter out empty args
             cmd = [c for c in cmd if c]
 
             process = subprocess.Popen(
-                cmd,
-                stdin=subprocess.PIPE,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                text=True,
+                cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
             )
 
             pooled = _PooledProcess(process=process, created_at=time.time())
@@ -382,21 +371,11 @@ class WarmEYEReasoner:
                     f.write(state)
 
                 # Run EYE with state file and rules
-                cmd = [
-                    self.config.eye_path,
-                    "--nope",
-                    "--pass",
-                    "--quiet",
-                    state_path,
-                    self._rules_path or "",
-                ]
+                cmd = [self.config.eye_path, "--nope", "--pass", "--quiet", state_path, self._rules_path or ""]
                 cmd = [c for c in cmd if c]
 
                 result = subprocess.run(
-                    cmd,
-                    check=False, capture_output=True,
-                    text=True,
-                    timeout=self.config.timeout_seconds,
+                    cmd, check=False, capture_output=True, text=True, timeout=self.config.timeout_seconds
                 )
 
                 duration_ms = (time.perf_counter() - start) * 1000
@@ -460,22 +439,13 @@ class WarmEYEReasoner:
             with os.fdopen(state_fd, "w") as f:
                 f.write(state)
 
-            cmd = [
-                self.config.eye_path,
-                "--nope",
-                "--pass",
-                "--quiet",
-                state_path,
-            ]
+            cmd = [self.config.eye_path, "--nope", "--pass", "--quiet", state_path]
 
             if self._rules_path:
                 cmd.append(self._rules_path)
 
             result = subprocess.run(
-                cmd,
-                check=False, capture_output=True,
-                text=True,
-                timeout=self.config.timeout_seconds,
+                cmd, check=False, capture_output=True, text=True, timeout=self.config.timeout_seconds
             )
 
             duration_ms = (time.perf_counter() - start) * 1000

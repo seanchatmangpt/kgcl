@@ -1,0 +1,44 @@
+---
+id: python_dataclass
+engine: jinja2
+language: python
+framework: dataclasses
+version: 1.0.0
+ontology:
+  graph_id: main
+queries:
+  - name: classes
+    inline: |
+      SELECT ?class ?prop ?label WHERE {
+        GRAPH <urn:kgcl:state> {
+          ?class a <urn:rdfs:Class> .
+          OPTIONAL {
+            ?class <urn:rdfs:property> ?prop .
+            ?prop <urn:rdfs:label> ?label
+          }
+        }
+      }
+metadata:
+  author: KGCL Projection
+  description: Generate Python dataclasses from RDF schema
+  tags:
+    - python
+    - dataclass
+    - codegen
+---
+"""Auto-generated dataclasses from RDF ontology."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from typing import Any
+
+{% for class_name, props in classes | groupby('class') %}
+@dataclass(frozen=True)
+class {{ class_name | replace('urn:', '') | replace(':', '_') | title }}:
+    """{{ class_name }}."""
+
+{% for prop in props %}
+    {{ prop.label | default(prop.prop | replace('urn:', '')) }}: Any
+{% endfor %}
+{% endfor %}

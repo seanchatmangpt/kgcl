@@ -120,11 +120,9 @@ class ErrorSanitizer:
             ],
             "ip_addresses": [
                 # IPv4
-                re.compile(r"\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b"),
+                re.compile(r"\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b")
             ],
-            "emails": [
-                re.compile(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"),
-            ],
+            "emails": [re.compile(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}")],
         }
 
         # Add custom patterns
@@ -244,15 +242,12 @@ class ErrorSanitizer:
         ...     raise ValueError("password=secret")
         ... except Exception as e:
         ...     result = sanitizer.sanitize_exception(e)
-        ...     'REDACTED' in result['message']
+        ...     "REDACTED" in result["message"]
         True
         """
         import traceback
 
-        result: dict[str, Any] = {
-            "type": type(exc).__name__,
-            "message": self.sanitize(str(exc)),
-        }
+        result: dict[str, Any] = {"type": type(exc).__name__, "message": self.sanitize(str(exc))}
 
         if self.config.redact_stack_traces:
             tb = "".join(traceback.format_exception(type(exc), exc, exc.__traceback__))

@@ -1,0 +1,38 @@
+---
+id: typescript_interface
+engine: jinja2
+language: typescript
+framework: typescript
+version: 1.0.0
+ontology:
+  graph_id: main
+queries:
+  - name: types
+    inline: |
+      SELECT ?type ?field WHERE {
+        GRAPH <urn:kgcl:state> {
+          ?type a <urn:type:Interface> .
+          OPTIONAL { ?type <urn:field> ?field }
+        }
+      }
+metadata:
+  author: KGCL Projection
+  description: Generate TypeScript interfaces from RDF types
+  tags:
+    - typescript
+    - interface
+    - codegen
+---
+/**
+ * Auto-generated TypeScript interfaces from RDF ontology
+ * Generated at: {{ now() }}
+ */
+
+{% for type_name, fields in types | groupby('type') %}
+export interface {{ type_name | replace('urn:', '') | replace(':', '') }} {
+{% for field in fields %}
+  {{ field.field | replace('urn:', '') }}: unknown;
+{% endfor %}
+}
+
+{% endfor %}

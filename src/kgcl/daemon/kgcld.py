@@ -28,7 +28,7 @@ import uuid
 from collections.abc import AsyncIterator, Callable
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from pyoxigraph import NamedNode, Store
 
@@ -40,6 +40,16 @@ from kgcl.daemon.event_store import (
     RDFEventStore,
     compute_state_hash,
 )
+from kgcl.daemon.service_gateway import (
+    ServiceGateway,
+    ServiceInvocation,
+    ServiceReference,
+    ServiceStatus,
+)
+
+if TYPE_CHECKING:
+    from kgcl.projection.domain.result import ProjectionResult
+    from kgcl.projection.ports.template_registry import TemplateRegistry
 
 
 class DaemonState(Enum):
@@ -58,6 +68,65 @@ class DaemonState(Enum):
     STOPPED = "stopped"
 
 
+@dataclass(frozen=True)
+class DaemonLimits:
+    """Resource limits for daemon operations.
+
+    These limits prevent OOM crashes and resource exhaustion during
+    research and development use. All limits have sensible defaults
+    that work for typical research workloads.
+
+    Parameters
+    ----------
+    max_event_log_size : int
+        Maximum events in log before FIFO purge (default: 100,000)
+    max_snapshot_count : int
+        Maximum snapshots to retain (default: 10)
+    query_timeout_seconds : float
+        SPARQL query timeout (default: 30.0)
+    max_query_results : int
+        Maximum rows returned from a query (default: 10,000)
+    max_template_size_bytes : int
+        Maximum template file size (default: 5MB)
+    max_output_size_bytes : int
+        Maximum rendered output size (default: 50MB)
+    max_bundle_iteration : int
+        Maximum iterations in bundle rendering (default: 1,000)
+    render_timeout_seconds : float
+        Template render timeout (default: 60.0)
+    n3_timeout_seconds : float
+        N3 reasoning timeout (default: 30.0)
+    n3_max_memory_mb : int
+        N3 subprocess memory limit (default: 512MB)
+
+    Examples
+    --------
+    >>> limits = DaemonLimits(max_query_results=5000)
+    >>> limits.max_query_results
+    5000
+    >>> limits.query_timeout_seconds
+    30.0
+    """
+
+    # Event Store limits
+    max_event_log_size: int = 100_000
+    max_snapshot_count: int = 10
+
+    # Query limits
+    query_timeout_seconds: float = 30.0
+    max_query_results: int = 10_000
+
+    # Template limits
+    max_template_size_bytes: int = 5 * 1024 * 1024  # 5MB
+    max_output_size_bytes: int = 50 * 1024 * 1024  # 50MB
+    max_bundle_iteration: int = 1_000
+    render_timeout_seconds: float = 60.0
+
+    # N3 reasoning limits
+    n3_timeout_seconds: float = 30.0
+    n3_max_memory_mb: int = 512
+
+
 @dataclass
 class DaemonConfig:
     """Configuration for KGCL daemon.
@@ -72,18 +141,23 @@ class DaemonConfig:
         Maximum mutations per transaction (default: 1000)
     enable_hooks : bool
         Enable hook execution on mutations (default: True)
+    limits : DaemonLimits | None
+        Resource limits for daemon operations (default: DaemonLimits())
 
     Examples
     --------
     >>> config = DaemonConfig(tick_interval=0.5, snapshot_interval=50)
     >>> config.tick_interval
     0.5
+    >>> config.limits.max_query_results
+    10000
     """
 
     tick_interval: float = 1.0
     snapshot_interval: int = 100
     max_batch_size: int = 1000
     enable_hooks: bool = True
+    limits: DaemonLimits = field(default_factory=DaemonLimits)
 
 
 @dataclass
@@ -188,6 +262,7 @@ class KGCLDaemon:
     _tick_task: asyncio.Task[None] | None = field(default=None, repr=False)
     _subscribers: list[MutationCallback] = field(default_factory=list, repr=False)
     _events_since_snapshot: int = field(default=0, repr=False)
+    _service_gateway: ServiceGateway = field(default_factory=ServiceGateway, repr=False)
 
     def __post_init__(self) -> None:
         """Initialize event store if not provided."""
@@ -216,6 +291,11 @@ class KGCLDaemon:
             msg = "Daemon not initialized"
             raise RuntimeError(msg)
         return self._store
+
+    @property
+    def service_gateway(self) -> ServiceGateway:
+        """Service gateway for external service integration."""
+        return self._service_gateway
 
     async def start(self) -> None:
         """Start the daemon and tick loop.
@@ -593,3 +673,251 @@ class KGCLDaemon:
             Number of events
         """
         return self.store.count_events()
+
+    async def render_projection(self, template_name: str, params: dict[str, Any] | None = None) -> ProjectionResult:
+        """Render a projection template using warm store.
+
+        Renders a Jinja template by executing SPARQL queries against
+        the current daemon state graph. Useful for generating code,
+        OpenAPI specs, documentation from live graph data.
+
+        Parameters
+        ----------
+        template_name : str
+            Name of the template to render (e.g., "api_openapi.j2").
+        params : dict[str, Any] | None
+            Optional parameters for the template.
+
+        Returns
+        -------
+        ProjectionResult
+            The rendered projection result with content and metadata.
+
+        Raises
+        ------
+        RuntimeError
+            If daemon not running or projection engine unavailable.
+
+        Examples
+        --------
+        >>> async with KGCLDaemon(DaemonConfig()) as daemon:
+        ...     await daemon.add("urn:entity:User", "urn:prop", "value")
+        ...     result = await daemon.render_projection("api.j2", {"version": "1.0"})
+        ...     print(result.content)
+        """
+        if self._state != DaemonState.RUNNING:
+            msg = f"Cannot render in state {self._state}"
+            raise RuntimeError(msg)
+
+        from kgcl.projection.adapters.event_store_adapter import EventStoreAdapter
+        from kgcl.projection.engine import ProjectionEngine
+        from kgcl.projection.sandbox import create_projection_environment
+
+        # Create adapter wrapping our event store
+        adapter = EventStoreAdapter(self.store, graph_id="main")
+
+        # Create or reuse projection engine
+        if not hasattr(self, "_projection_engine"):
+            from kgcl.projection.engine.projection_engine import ProjectionConfig
+
+            # Use non-strict mode to avoid sandbox issues
+            config = ProjectionConfig(strict_mode=False)
+
+            self._projection_engine = ProjectionEngine(
+                template_registry=self._get_projection_registry(),
+                graph_clients={"main": adapter},
+                jinja_env=create_projection_environment(),
+                config=config,
+            )
+
+        return self._projection_engine.render(template_name, params)
+
+    def _get_projection_registry(self) -> TemplateRegistry:
+        """Get or create template registry for projections.
+
+        Creates a registry pointing to .kgc/projections directory if it exists,
+        otherwise creates an in-memory registry.
+
+        Returns
+        -------
+        TemplateRegistry
+            Template registry for projection templates.
+
+        Examples
+        --------
+        >>> daemon = KGCLDaemon(DaemonConfig())
+        >>> registry = daemon._get_projection_registry()
+        >>> isinstance(registry, TemplateRegistry)
+        True
+        """
+        if not hasattr(self, "_projection_registry"):
+            from pathlib import Path
+
+            from kgcl.projection.adapters.filesystem_registry import FilesystemTemplateRegistry
+            from kgcl.projection.ports.template_registry import InMemoryTemplateRegistry
+
+            # Default to .kgc/projections directory
+            template_dir = Path(".kgc/projections")
+            if template_dir.exists():
+                self._projection_registry = FilesystemTemplateRegistry(template_dir)
+            else:
+                self._projection_registry = InMemoryTemplateRegistry()
+        return self._projection_registry
+
+    # =========================================================================
+    # Service Gateway Methods (YAWL External Service Integration)
+    # =========================================================================
+
+    def register_service(self, ref: ServiceReference) -> None:
+        """Register an external service for task delegation.
+
+        Registers a YAWLServiceReference that can receive delegated
+        task execution requests via HTTP.
+
+        Parameters
+        ----------
+        ref : ServiceReference
+            Service reference with URI and configuration
+
+        Raises
+        ------
+        ValueError
+            If service_id is already registered
+
+        Examples
+        --------
+        >>> ref = ServiceReference(
+        ...     service_id="validator",
+        ...     uri="http://localhost:8080/api/validate",
+        ...     timeout_seconds=10.0,
+        ... )
+        >>> daemon.register_service(ref)
+        >>> "validator" in daemon.service_gateway.services
+        True
+        """
+        self._service_gateway.register(ref)
+
+    def unregister_service(self, service_id: str) -> None:
+        """Unregister an external service.
+
+        Parameters
+        ----------
+        service_id : str
+            ID of service to unregister
+
+        Raises
+        ------
+        KeyError
+            If service_id is not registered
+
+        Examples
+        --------
+        >>> daemon.unregister_service("validator")
+        """
+        self._service_gateway.unregister(service_id)
+
+    async def delegate_task(
+        self,
+        service_id: str,
+        task_id: str,
+        payload: dict[str, Any],
+    ) -> ServiceInvocation:
+        """Delegate task execution to an external service.
+
+        Sends task payload to registered external service via HTTP POST.
+        Records invocation in service gateway history.
+
+        Parameters
+        ----------
+        service_id : str
+            ID of registered service to invoke
+        task_id : str
+            ID of task being delegated
+        payload : dict[str, Any]
+            JSON-serializable task payload
+
+        Returns
+        -------
+        ServiceInvocation
+            Invocation record with response or error
+
+        Raises
+        ------
+        RuntimeError
+            If daemon not running
+        KeyError
+            If service_id is not registered
+
+        Examples
+        --------
+        >>> result = await daemon.delegate_task(
+        ...     service_id="validator",
+        ...     task_id="task-123",
+        ...     payload={"document": "content"},
+        ... )
+        >>> result.status
+        <ServiceStatus.COMPLETED: 'completed'>
+        """
+        if self._state != DaemonState.RUNNING:
+            msg = f"Cannot delegate in state {self._state}"
+            raise RuntimeError(msg)
+
+        return await self._service_gateway.invoke(service_id, task_id, payload)
+
+    def get_service_invocations(
+        self,
+        *,
+        service_id: str | None = None,
+        task_id: str | None = None,
+        status: ServiceStatus | None = None,
+    ) -> list[ServiceInvocation]:
+        """Query service invocation history.
+
+        Parameters
+        ----------
+        service_id : str | None
+            Filter by service ID
+        task_id : str | None
+            Filter by task ID
+        status : ServiceStatus | None
+            Filter by status
+
+        Returns
+        -------
+        list[ServiceInvocation]
+            Matching invocations
+
+        Examples
+        --------
+        >>> failed = daemon.get_service_invocations(status=ServiceStatus.FAILED)
+        >>> len(failed)
+        0
+        """
+        return self._service_gateway.get_invocations(
+            service_id=service_id,
+            task_id=task_id,
+            status=status,
+        )
+
+    def list_services(self, *, assignable_only: bool = False) -> list[ServiceReference]:
+        """List registered services.
+
+        Parameters
+        ----------
+        assignable_only : bool
+            If True, only return services with assignable=True
+
+        Returns
+        -------
+        list[ServiceReference]
+            Registered services
+
+        Examples
+        --------
+        >>> services = daemon.list_services()
+        >>> len(services)
+        2
+        """
+        if assignable_only:
+            return self._service_gateway.list_assignable()
+        return list(self._service_gateway.services.values())

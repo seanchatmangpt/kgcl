@@ -22,12 +22,7 @@ def _is_docker_available() -> bool:
         True if Docker daemon is accessible, False otherwise.
     """
     try:
-        result = subprocess.run(
-            ["docker", "info"],
-            capture_output=True,
-            timeout=5,
-            check=False,
-        )
+        result = subprocess.run(["docker", "info"], capture_output=True, timeout=5, check=False)
         return result.returncode == 0
     except (subprocess.TimeoutExpired, FileNotFoundError, OSError):
         return False
@@ -46,14 +41,8 @@ def pytest_configure(config: pytest.Config) -> None:
         Pytest configuration object.
     """
     # Register custom markers (also defined in pyproject.toml for IDE support)
-    config.addinivalue_line(
-        "markers",
-        "container: marks tests requiring Docker containers",
-    )
-    config.addinivalue_line(
-        "markers",
-        "chaos: marks chaos engineering tests (failure injection, recovery)",
-    )
+    config.addinivalue_line("markers", "container: marks tests requiring Docker containers")
+    config.addinivalue_line("markers", "chaos: marks chaos engineering tests (failure injection, recovery)")
 
 
 def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item]) -> None:

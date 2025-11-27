@@ -81,9 +81,7 @@ class PokaYokeViolation:
     Examples
     --------
     >>> violation = PokaYokeViolation(
-    ...     rule_id="PY-HOOK-001",
-    ...     py_type=HookPokaYokeType.SHUTDOWN,
-    ...     message="Empty condition query"
+    ...     rule_id="PY-HOOK-001", py_type=HookPokaYokeType.SHUTDOWN, message="Empty condition query"
     ... )
     >>> violation.blocks_execution
     True
@@ -168,7 +166,7 @@ class PokaYokeGuard:
         ...     name="Test",
         ...     phase=HookPhase.ON_CHANGE,
         ...     condition_query="",  # Empty - violation!
-        ...     action=HookAction.NOTIFY
+        ...     action=HookAction.NOTIFY,
         ... )
         >>> violations = guard.validate_hook(hook)
         >>> any(v.rule_id == "PY-HOOK-001" for v in violations)

@@ -1,0 +1,129 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix shop: <http://example.org/ecommerce#> .
+
+# Ontology Declaration
+shop:EcommerceOntology a owl:Ontology ;
+    rdfs:label "E-Commerce Domain Ontology" ;
+    rdfs:comment "Simple e-commerce domain for Next.js projection demo" .
+
+# === CLASSES ===
+
+shop:Product a owl:Class ;
+    rdfs:label "Product" ;
+    rdfs:comment "A product available for purchase" ;
+    shop:slug "product" ;
+    shop:plural "products" .
+
+shop:Category a owl:Class ;
+    rdfs:label "Category" ;
+    rdfs:comment "Product category for organization" ;
+    shop:slug "category" ;
+    shop:plural "categories" .
+
+shop:Customer a owl:Class ;
+    rdfs:label "Customer" ;
+    rdfs:comment "A customer who can place orders" ;
+    shop:slug "customer" ;
+    shop:plural "customers" .
+
+shop:Order a owl:Class ;
+    rdfs:label "Order" ;
+    rdfs:comment "A customer order" ;
+    shop:slug "order" ;
+    shop:plural "orders" .
+
+# === PROPERTIES ===
+
+# Product properties
+shop:name a owl:DatatypeProperty ;
+    rdfs:domain shop:Product ;
+    rdfs:range xsd:string ;
+    rdfs:label "name" ;
+    shop:required "true" .
+
+shop:price a owl:DatatypeProperty ;
+    rdfs:domain shop:Product ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "price" ;
+    shop:required "true" .
+
+shop:description a owl:DatatypeProperty ;
+    rdfs:domain shop:Product ;
+    rdfs:range xsd:string ;
+    rdfs:label "description" .
+
+shop:inStock a owl:DatatypeProperty ;
+    rdfs:domain shop:Product ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "inStock" ;
+    shop:default "true" .
+
+shop:sku a owl:DatatypeProperty ;
+    rdfs:domain shop:Product ;
+    rdfs:range xsd:string ;
+    rdfs:label "sku" ;
+    shop:required "true" .
+
+# Category properties
+shop:categoryName a owl:DatatypeProperty ;
+    rdfs:domain shop:Category ;
+    rdfs:range xsd:string ;
+    rdfs:label "name" ;
+    shop:required "true" .
+
+# Customer properties
+shop:email a owl:DatatypeProperty ;
+    rdfs:domain shop:Customer ;
+    rdfs:range xsd:string ;
+    rdfs:label "email" ;
+    shop:required "true" .
+
+shop:firstName a owl:DatatypeProperty ;
+    rdfs:domain shop:Customer ;
+    rdfs:range xsd:string ;
+    rdfs:label "firstName" .
+
+shop:lastName a owl:DatatypeProperty ;
+    rdfs:domain shop:Customer ;
+    rdfs:range xsd:string ;
+    rdfs:label "lastName" .
+
+# Order properties
+shop:orderDate a owl:DatatypeProperty ;
+    rdfs:domain shop:Order ;
+    rdfs:range xsd:dateTime ;
+    rdfs:label "orderDate" ;
+    shop:required "true" .
+
+shop:totalAmount a owl:DatatypeProperty ;
+    rdfs:domain shop:Order ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "totalAmount" .
+
+shop:status a owl:DatatypeProperty ;
+    rdfs:domain shop:Order ;
+    rdfs:range xsd:string ;
+    rdfs:label "status" ;
+    shop:default "pending" .
+
+# === RELATIONSHIPS ===
+
+shop:belongsToCategory a owl:ObjectProperty ;
+    rdfs:domain shop:Product ;
+    rdfs:range shop:Category ;
+    rdfs:label "category" .
+
+shop:placedBy a owl:ObjectProperty ;
+    rdfs:domain shop:Order ;
+    rdfs:range shop:Customer ;
+    rdfs:label "customer" ;
+    shop:required "true" .
+
+shop:containsProduct a owl:ObjectProperty ;
+    rdfs:domain shop:Order ;
+    rdfs:range shop:Product ;
+    rdfs:label "products" ;
+    shop:cardinality "many" .

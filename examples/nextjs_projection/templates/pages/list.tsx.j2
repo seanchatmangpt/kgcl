@@ -1,0 +1,154 @@
+---
+id: nextjs-list-page
+engine: jinja2
+language: typescript
+framework: nextjs
+version: "1.0.0"
+
+ontology:
+  graph_id: ecommerce
+  base_iri: "http://example.org/ecommerce#"
+
+queries:
+  - name: entity_info
+    purpose: Get entity metadata
+    source: inline
+    content: |
+      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+      PREFIX shop: <http://example.org/ecommerce#>
+
+      SELECT ?label ?comment ?plural WHERE {
+        <{{ entity.uri }}> rdfs:label ?label .
+        OPTIONAL { <{{ entity.uri }}> rdfs:comment ?comment }
+        OPTIONAL { <{{ entity.uri }}> shop:plural ?plural }
+      }
+
+metadata:
+  author: kgcl-projection
+  description: Next.js list page for {{ entity.label }}
+  tags:
+    - page
+    - nextjs
+    - list
+---
+'use client';
+
+import { useState, useEffect } from 'react';
+import { {{ entity.label }} } from '@/types/{{ entity.slug }}';
+import { {{ entity.label }}Card } from '@/components/{{ entity.slug }}/card';
+import { Button } from '@/components/ui/button';
+import { Plus, RefreshCw } from 'lucide-react';
+
+/**
+ * {{ entity.label }} List Page
+ *
+ * @generated from RDF ontology via KGCL projection
+ * @route /{{ entity.plural }}
+ */
+
+interface PaginatedResponse {
+  data: {{ entity.label }}[];
+  meta: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+  };
+}
+
+export default function {{ entity.label }}ListPage() {
+  const [items, setItems] = useState<{{ entity.label }}[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const fetchItems = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(`/api/{{ entity.plural }}?page=${page}&limit=12`);
+      const json: PaginatedResponse = await res.json();
+      setItems(json.data);
+      setTotalPages(json.meta.totalPages);
+    } catch (error) {
+      console.error('Failed to fetch {{ entity.plural }}:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchItems();
+  }, [page]);
+
+  const handleItemClick = (item: {{ entity.label }}) => {
+    window.location.href = `/{{ entity.plural }}/${item.id}`;
+  };
+
+  return (
+    <div className="container mx-auto py-8">
+      <div className="flex items-center justify-between mb-8">
+        <div>
+          <h1 className="text-3xl font-bold">{{ entity.label | pascal_case }}s</h1>
+          <p className="text-muted-foreground">
+            {{ sparql.entity_info[0].comment | default('Manage ' + entity.plural) }}
+          </p>
+        </div>
+        <div className="flex gap-2">
+          <Button variant="outline" onClick={fetchItems} disabled={loading}>
+            <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+            Refresh
+          </Button>
+          <Button onClick={() => window.location.href = '/{{ entity.plural }}/new'}>
+            <Plus className="h-4 w-4 mr-2" />
+            Add {{ entity.label }}
+          </Button>
+        </div>
+      </div>
+
+      {loading ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[...Array(6)].map((_, i) => (
+            <div key={i} className="h-48 bg-muted animate-pulse rounded-lg" />
+          ))}
+        </div>
+      ) : items.length === 0 ? (
+        <div className="text-center py-12">
+          <p className="text-muted-foreground">No {{ entity.plural }} found</p>
+          <Button className="mt-4" onClick={() => window.location.href = '/{{ entity.plural }}/new'}>
+            Create your first {{ entity.slug }}
+          </Button>
+        </div>
+      ) : (
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {items.map((item) => (
+              <{{ entity.label }}Card key={item.id} item={item} onClick={handleItemClick} />
+            ))}
+          </div>
+
+          {totalPages > 1 && (
+            <div className="flex justify-center gap-2 mt-8">
+              <Button
+                variant="outline"
+                disabled={page === 1}
+                onClick={() => setPage(p => p - 1)}
+              >
+                Previous
+              </Button>
+              <span className="flex items-center px-4">
+                Page {page} of {totalPages}
+              </span>
+              <Button
+                variant="outline"
+                disabled={page === totalPages}
+                onClick={() => setPage(p => p + 1)}
+              >
+                Next
+              </Button>
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  );
+}

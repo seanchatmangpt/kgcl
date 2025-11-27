@@ -6,8 +6,7 @@ This adapter allows the hybrid engine to work with remote RDF stores
 Examples
 --------
 >>> adapter = RemoteStoreAdapter(
-...     query_endpoint="http://localhost:7878/query",
-...     update_endpoint="http://localhost:7878/update",
+...     query_endpoint="http://localhost:7878/query", update_endpoint="http://localhost:7878/update"
 ... )
 >>> adapter.triple_count()  # doctest: +SKIP
 0
@@ -52,24 +51,18 @@ class RemoteStoreAdapter:
     Create adapter for Oxigraph Server:
 
     >>> adapter = RemoteStoreAdapter(
-    ...     query_endpoint="http://localhost:7878/query",
-    ...     update_endpoint="http://localhost:7878/update",
+    ...     query_endpoint="http://localhost:7878/query", update_endpoint="http://localhost:7878/update"
     ... )
 
     Create adapter for Fuseki:
 
     >>> adapter = RemoteStoreAdapter(
-    ...     query_endpoint="http://localhost:3030/dataset/query",
-    ...     update_endpoint="http://localhost:3030/dataset/update",
+    ...     query_endpoint="http://localhost:3030/dataset/query", update_endpoint="http://localhost:3030/dataset/update"
     ... )
     """
 
     def __init__(
-        self,
-        query_endpoint: str,
-        update_endpoint: str,
-        store_endpoint: str | None = None,
-        timeout: float = 30.0,
+        self, query_endpoint: str, update_endpoint: str, store_endpoint: str | None = None, timeout: float = 30.0
     ) -> None:
         """Initialize RemoteStoreAdapter.
 
@@ -128,9 +121,7 @@ class RemoteStoreAdapter:
         if self.store_endpoint:
             try:
                 response = self._client.post(
-                    self.store_endpoint,
-                    content=data.encode("utf-8"),
-                    headers={"Content-Type": "text/turtle"},
+                    self.store_endpoint, content=data.encode("utf-8"), headers={"Content-Type": "text/turtle"}
                 )
                 if response.status_code in (200, 201, 204):
                     # Estimate triples from data (rough heuristic)
@@ -246,10 +237,7 @@ class RemoteStoreAdapter:
             response = self._client.post(
                 self.query_endpoint,
                 data={"query": sparql},
-                headers={
-                    "Content-Type": "application/x-www-form-urlencoded",
-                    "Accept": "text/turtle",
-                },
+                headers={"Content-Type": "application/x-www-form-urlencoded", "Accept": "text/turtle"},
             )
             response.raise_for_status()
             return response.text

@@ -7,10 +7,7 @@ Examples
 --------
 >>> writer = PostgresLockchainWriter(connection)
 >>> receipt_id = writer.write_tick_receipt(
-...     workflow_id="WF-001",
-...     tick_number=1,
-...     graph_hash="abc123...",
-...     hook_results=[{"hook_id": "h1", "result": True}],
+...     workflow_id="WF-001", tick_number=1, graph_hash="abc123...", hook_results=[{"hook_id": "h1", "result": True}]
 ... )  # doctest: +SKIP
 """
 
@@ -80,10 +77,7 @@ class PostgresLockchainWriter:
     >>> conn = psycopg.connect("postgresql://...")  # doctest: +SKIP
     >>> writer = PostgresLockchainWriter(conn)  # doctest: +SKIP
     >>> receipt_id = writer.write_tick_receipt(
-    ...     workflow_id="WF-001",
-    ...     tick_number=1,
-    ...     graph_hash="abc123...",
-    ...     hook_results=[],
+    ...     workflow_id="WF-001", tick_number=1, graph_hash="abc123...", hook_results=[]
     ... )  # doctest: +SKIP
     """
 
@@ -172,9 +166,7 @@ class PostgresLockchainWriter:
             result = cursor.fetchone()
             self._conn.commit()
 
-            logger.debug(
-                f"Wrote tick receipt: workflow={workflow_id}, tick={tick_number}, hash={receipt_hash[:16]}..."
-            )
+            logger.debug(f"Wrote tick receipt: workflow={workflow_id}, tick={tick_number}, hash={receipt_hash[:16]}...")
             return result[0] if result else 0
 
     def _get_previous_hash(self, workflow_id: str) -> str:
@@ -370,7 +362,10 @@ class PostgresLockchainWriter:
             )
 
             if receipt.receipt_hash != expected_hash:
-                return False, f"Hash mismatch at tick {receipt.tick_number}: expected {expected_hash}, got {receipt.receipt_hash}"
+                return (
+                    False,
+                    f"Hash mismatch at tick {receipt.tick_number}: expected {expected_hash}, got {receipt.receipt_hash}",
+                )
 
             # Verify chain link (except first)
             if i > 0:
@@ -435,10 +430,7 @@ class PostgresLockchainWriter:
             Number of tick receipts.
         """
         with self._conn.cursor() as cursor:
-            cursor.execute(
-                "SELECT COUNT(*) FROM tick_receipts WHERE workflow_id = %s",
-                (workflow_id,),
-            )
+            cursor.execute("SELECT COUNT(*) FROM tick_receipts WHERE workflow_id = %s", (workflow_id,))
             result = cursor.fetchone()
             return result[0] if result else 0
 
@@ -456,10 +448,7 @@ class PostgresLockchainWriter:
             Number of receipts deleted.
         """
         with self._conn.cursor() as cursor:
-            cursor.execute(
-                "DELETE FROM tick_receipts WHERE workflow_id = %s",
-                (workflow_id,),
-            )
+            cursor.execute("DELETE FROM tick_receipts WHERE workflow_id = %s", (workflow_id,))
             deleted = cursor.rowcount
             self._conn.commit()
             return deleted

@@ -21,9 +21,9 @@ Examples
 
 Cache hit detection:
 
->>> cache.stats()['hits']
+>>> cache.stats()["hits"]
 0
->>> cache.stats()['misses']
+>>> cache.stats()["misses"]
 0
 """
 
@@ -129,7 +129,7 @@ class QueryCache:
 
     >>> cache.clear()
     >>> stats = cache.stats()
-    >>> stats['size']
+    >>> stats["size"]
     0
     """
 
@@ -187,7 +187,7 @@ class QueryCache:
         --------
         >>> QueryCache.reset_instance()
         >>> cache = QueryCache.get_instance()
-        >>> cache.stats()['size']
+        >>> cache.stats()["size"]
         0
         """
         with cls._lock:
@@ -308,7 +308,7 @@ class QueryCache:
         --------
         >>> cache = QueryCache.get_instance()
         >>> cache.clear()
-        >>> cache.stats()['size']
+        >>> cache.stats()["size"]
         0
         """
         with self._lock:
@@ -329,9 +329,9 @@ class QueryCache:
         >>> cache = QueryCache.get_instance()
         >>> cache.clear()
         >>> stats = cache.stats()
-        >>> stats['size']
+        >>> stats["size"]
         0
-        >>> stats['hits']
+        >>> stats["hits"]
         0
         """
         with self._lock:

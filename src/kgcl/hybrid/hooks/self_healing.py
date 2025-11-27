@@ -450,10 +450,7 @@ class SelfHealingExecutor:
         """
         logger.warning("FM-HOOK-008: N3 hook physics rules may not be loaded")
         return HealingResult(
-            fm_id="FM-HOOK-008",
-            success=True,
-            action_taken="Recommended reload of N3_HOOK_PHYSICS",
-            fallback_used=True,
+            fm_id="FM-HOOK-008", success=True, action_taken="Recommended reload of N3_HOOK_PHYSICS", fallback_used=True
         )
 
     def _handle_receipt_exhaustion(self) -> HealingResult:
@@ -467,9 +464,7 @@ class SelfHealingExecutor:
         logger.info(f"FM-HOOK-009: Receipt count {self._receipt_count} exceeds max {self.config.max_receipts}")
         self._receipt_count = 0  # Reset counter
         return HealingResult(
-            fm_id="FM-HOOK-009",
-            success=True,
-            action_taken="Receipt counter reset, old receipts should be archived",
+            fm_id="FM-HOOK-009", success=True, action_taken="Receipt counter reset, old receipts should be archived"
         )
 
     def _handle_delta_explosion(self, match_count: int) -> HealingResult:
@@ -486,9 +481,7 @@ class SelfHealingExecutor:
             Healing result with cardinality bound
         """
         if match_count > self.config.max_delta_matches:
-            logger.warning(
-                f"FM-HOOK-010: Delta matches {match_count} exceeds max {self.config.max_delta_matches}"
-            )
+            logger.warning(f"FM-HOOK-010: Delta matches {match_count} exceeds max {self.config.max_delta_matches}")
             return HealingResult(
                 fm_id="FM-HOOK-010",
                 success=True,

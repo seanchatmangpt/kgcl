@@ -16,13 +16,11 @@ Condition Types
 
 Examples
 --------
->>> from kgcl.hybrid.hooks.condition_evaluator import (
-...     ConditionKind, Condition, ConditionEvaluator
-... )
+>>> from kgcl.hybrid.hooks.condition_evaluator import ConditionKind, Condition, ConditionEvaluator
 >>> cond = Condition(
 ...     kind=ConditionKind.THRESHOLD,
 ...     expression="errorRate > 0.05",
-...     parameters={"metric": "errorRate", "threshold": 0.05, "operator": ">"}
+...     parameters={"metric": "errorRate", "threshold": 0.05, "operator": ">"},
 ... )
 >>> cond.kind
 <ConditionKind.THRESHOLD: 'threshold'>
@@ -77,10 +75,7 @@ class Condition:
 
     Examples
     --------
-    >>> cond = Condition(
-    ...     kind=ConditionKind.SPARQL_ASK,
-    ...     expression="ASK { ?s a :Person }"
-    ... )
+    >>> cond = Condition(kind=ConditionKind.SPARQL_ASK, expression="ASK { ?s a :Person }")
     >>> cond.kind
     <ConditionKind.SPARQL_ASK: 'sparql-ask'>
     """
@@ -172,10 +167,7 @@ class ConditionEvaluator:
 
         duration_ms = (time.perf_counter() - start) * 1000
         return ConditionResult(
-            matched=result.matched,
-            bindings=result.bindings,
-            duration_ms=duration_ms,
-            metadata=result.metadata,
+            matched=result.matched, bindings=result.bindings, duration_ms=duration_ms, metadata=result.metadata
         )
 
     def _dispatch_evaluation(self, condition: Condition, store: ox.Store | None) -> ConditionResult:
@@ -289,7 +281,7 @@ class ConditionEvaluator:
         >>> cond = Condition(
         ...     kind=ConditionKind.THRESHOLD,
         ...     expression="errorRate > 0.05",
-        ...     parameters={"errorRate": 0.1, "threshold": 0.05, "operator": ">"}
+        ...     parameters={"errorRate": 0.1, "threshold": 0.05, "operator": ">"},
         ... )
         >>> evaluator._eval_threshold(cond).matched
         True
@@ -363,9 +355,7 @@ class ConditionEvaluator:
         changed = previous_state is not None and current_state != previous_state
         self._delta_state[key] = current_state
 
-        return ConditionResult(
-            matched=changed, metadata={"previous": previous_state is not None, "changed": changed}
-        )
+        return ConditionResult(matched=changed, metadata={"previous": previous_state is not None, "changed": changed})
 
     def _eval_count(self, condition: Condition, store: ox.Store | None) -> ConditionResult:
         """Evaluate count (cardinality) condition.
@@ -434,9 +424,7 @@ class ConditionEvaluator:
         count = len(window)
         matched = min_events <= count <= max_events
 
-        return ConditionResult(
-            matched=matched, metadata={"count": count, "window_seconds": window_seconds}
-        )
+        return ConditionResult(matched=matched, metadata={"count": count, "window_seconds": window_seconds})
 
     def _eval_shacl(self, condition: Condition, store: ox.Store | None) -> ConditionResult:
         """Evaluate SHACL shape validation condition.
@@ -459,9 +447,7 @@ class ConditionEvaluator:
         pattern matching if pyshacl not available.
         """
         # Placeholder - requires pyshacl integration
-        return ConditionResult(
-            matched=False, metadata={"error": "SHACL validation requires pyshacl integration"}
-        )
+        return ConditionResult(matched=False, metadata={"error": "SHACL validation requires pyshacl integration"})
 
     def _eval_n3_rule(self, condition: Condition, store: ox.Store | None) -> ConditionResult:
         """Evaluate N3 rule via EYE reasoner.

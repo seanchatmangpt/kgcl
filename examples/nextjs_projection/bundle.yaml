@@ -1,0 +1,87 @@
+# Next.js E-Commerce Bundle
+# Generates a complete Next.js application scaffold from RDF ontology
+#
+# Usage:
+#   kgcl proj bundle nextjs_projection/bundle.yaml --output ./generated
+#
+# When the ontology changes, re-run to regenerate all files.
+
+id: nextjs-ecommerce
+version: "1.0.0"
+description: |
+  Complete Next.js application scaffold generated from e-commerce ontology.
+  Includes TypeScript types, API routes, React components, and pages.
+
+ontology:
+  graph_id: ecommerce
+  source: ontology/ecommerce.ttl
+  base_iri: "http://example.org/ecommerce#"
+
+# Query to get all domain entities for iteration
+queries:
+  - name: all_entities
+    purpose: Get all owl:Class entities for iteration
+    source: inline
+    content: |
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+      PREFIX owl: <http://www.w3.org/2002/07/owl#>
+      PREFIX shop: <http://example.org/ecommerce#>
+
+      SELECT ?uri ?label ?comment ?slug ?plural WHERE {
+        ?uri a owl:Class ;
+             rdfs:label ?label ;
+             shop:slug ?slug .
+        OPTIONAL { ?uri rdfs:comment ?comment }
+        OPTIONAL { ?uri shop:plural ?plural }
+        FILTER(STRSTARTS(STR(?uri), "http://example.org/ecommerce#"))
+      }
+      ORDER BY ?label
+
+# Template entries - each generates one or more files
+templates:
+  # Static files (generated once)
+  - template: templates/types/index.ts.j2
+    output: types/index.ts
+    description: TypeScript barrel export
+
+  # Per-entity files (generated for each entity in all_entities)
+  - template: templates/types/entity.ts.j2
+    output: "types/{{ entity.slug }}.ts"
+    iterate:
+      query: all_entities
+      as_var: entity
+    description: TypeScript interface per entity
+
+  - template: templates/api/route.ts.j2
+    output: "app/api/{{ entity.plural }}/route.ts"
+    iterate:
+      query: all_entities
+      as_var: entity
+    description: Next.js API route per entity
+
+  - template: templates/components/card.tsx.j2
+    output: "components/{{ entity.slug }}/card.tsx"
+    iterate:
+      query: all_entities
+      as_var: entity
+    description: React card component per entity
+
+  - template: templates/pages/list.tsx.j2
+    output: "app/{{ entity.plural }}/page.tsx"
+    iterate:
+      query: all_entities
+      as_var: entity
+    description: List page per entity
+
+# Output configuration
+output:
+  base_dir: ./output
+  conflict_mode: overwrite
+  clean_before: false
+
+# Watch mode (for daemon integration)
+watch:
+  enabled: true
+  debounce_ms: 500
+  on_change: regenerate

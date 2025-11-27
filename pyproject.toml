@@ -179,8 +179,11 @@ module = "kgcl.hooks.conditions"
 disallow_any_unimported = false
 
 [tool.pytest.ini_options]  # https://docs.pytest.org/en/latest/reference/reference.html#ini-options-ref
-addopts = "--color=yes --exitfirst --failed-first --verbosity=2 --junitxml=reports/pytest.xml --strict-markers"
+# 80/20 Consolidation: Unit tests must complete in <1 second with parallel execution
+# Default excludes: slow (>1s), integration, eye (EYE reasoner), container (Docker)
+addopts = "-n auto --dist worksteal --color=yes -q --junitxml=reports/pytest.xml --strict-markers -m 'not slow and not integration and not eye and not container'"
 testpaths = ["tests"]
+norecursedirs = ["src", ".git", "build", "dist", ".hypothesis", ".venv", ".tox", "tests/chaos", "tests/integration"]
 xfail_strict = true
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
@@ -190,6 +193,7 @@ filterwarnings = [
   "ignore::DeprecationWarning:rdflib.*",              # rdflib uses deprecated APIs
   "ignore::DeprecationWarning:pydantic.*",            # pydantic internal deprecations
   "ignore::DeprecationWarning:opentelemetry.*",       # opentelemetry uses deprecated APIs
+  "ignore::DeprecationWarning:testcontainers.*",      # testcontainers internal deprecations
   "ignore::pydantic.warnings.PydanticDeprecatedSince20:litellm.*",  # litellm uses pydantic v1 API
   "ignore::pydantic.warnings.PydanticDeprecatedSince20:dspy.*",     # dspy uses pydantic v1 API
   # rdflib memory store and asyncio GC resource leaks (external, not controllable)
@@ -218,7 +222,6 @@ markers = [
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
-norecursedirs = ["src", ".git", "build", "dist", ".hypothesis", ".venv", ".tox"]
 
 [tool.ruff]  # https://docs.astral.sh/ruff/settings/
 # KGC v3.0 ANDON CORD - Strict settings

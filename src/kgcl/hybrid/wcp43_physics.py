@@ -163,14 +163,15 @@ WCP4_EXCLUSIVE_CHOICE = """
 # van der Aalst: "Based on decision, ONE of several branches is chosen."
 # Semantics: MUTUAL EXCLUSION - only ONE branch activates.
 #
-# Implementation: Uses _:scope log:notIncludes for deterministic branch selection.
-# - Rule 4a: Predicate branch with evaluatesTo true -> Active
+# Implementation: Uses monotonic marker kgc:xorBranchSelected for first-wins.
+# - Rule 4a: First true predicate wins (checked via log:notIncludes marker)
 # - Rule 4b: Default branch -> Active ONLY if NO predicate evaluates to true
+#            AND no branch already selected
 #
-# This approach uses EYE's scoped negation to check if any predicate evaluated
-# to true before activating the default branch.
+# CRITICAL: N3 fires ALL matching bindings. Without the marker guard,
+# multiple branches would activate when multiple predicates are true.
 
-# Rule 4a: Predicate-based branch selection (predicate evaluates to true)
+# Rule 4a: First true predicate wins - add marker to prevent others
 {
     ?task kgc:status "Completed" .
     ?task yawl:hasSplit yawl:ControlTypeXor .
@@ -179,14 +180,18 @@ WCP4_EXCLUSIVE_CHOICE = """
     ?flow yawl:hasPredicate ?pred .
     ?pred kgc:evaluatesTo true .
     ?next kgc:status "Pending" .
+    # GUARD: Only fire if no branch selected yet (monotonic first-wins)
+    _:scope log:notIncludes { ?task kgc:xorBranchSelected true } .
 }
 =>
 {
     ?next kgc:status "Active" .
+    ?task kgc:xorBranchSelected true .
+    ?task kgc:selectedBranch ?next .
 } .
 
 # Rule 4b: Default path - fires ONLY if no predicate branch evaluated to true
-# Uses scoped negation: check that no flow from this task has a true predicate
+# AND no branch already selected (ensures mutual exclusion)
 {
     ?task kgc:status "Completed" .
     ?task yawl:hasSplit yawl:ControlTypeXor .
@@ -194,9 +199,10 @@ WCP4_EXCLUSIVE_CHOICE = """
     ?flow yawl:nextElementRef ?next .
     ?flow yawl:isDefaultFlow true .
     ?next kgc:status "Pending" .
-
-    # Check that no flow from this task has a predicate that evaluates to true
-    _:scope log:notIncludes {
+    # GUARD: No branch selected yet
+    _:scope log:notIncludes { ?task kgc:xorBranchSelected true } .
+    # AND no predicate evaluates to true
+    _:scope2 log:notIncludes {
         ?task yawl:flowsInto _:otherFlow .
         _:otherFlow yawl:hasPredicate _:otherPred .
         _:otherPred kgc:evaluatesTo true .
@@ -205,6 +211,8 @@ WCP4_EXCLUSIVE_CHOICE = """
 =>
 {
     ?next kgc:status "Active" .
+    ?task kgc:xorBranchSelected true .
+    ?task kgc:selectedBranch ?next .
 } .
 """
 
@@ -391,9 +399,12 @@ WCP10_ARBITRARY_CYCLES = """
 # LAW 10 - WCP-10: ARBITRARY CYCLES (Filter)
 # =============================================================================
 # van der Aalst: "Tasks executed repeatedly (unstructured loops)."
-# Semantics: Back-edge conditional on loop predicate.
+# Semantics: Back-edge and exit-edge are MUTUALLY EXCLUSIVE based on condition.
+#
+# CRITICAL: Only ONE edge fires per completion - condition determines which.
+# Uses monotonic marker kgc:cycleEdgeSelected to enforce exclusivity.
 
-# Continue loop when condition true
+# Continue loop (back-edge) when condition TRUE - first-wins with marker
 {
     ?task kgc:status "Completed" .
     ?task yawl:flowsInto ?flow .
@@ -401,29 +412,38 @@ WCP10_ARBITRARY_CYCLES = """
     ?flow yawl:isBackEdge true .
     ?flow yawl:loopCondition ?cond .
     ?cond kgc:evaluatesTo true .
-    ?task kgc:iterationCount ?oldCount .
+    # GUARD: Only fire if no edge selected yet for this completion
+    _:scope log:notIncludes { ?task kgc:cycleEdgeSelected true } .
 }
 =>
 {
     ?next kgc:status "Active" .
-    (?oldCount 1) math:sum ?newCount .
-    ?next kgc:iterationCount ?newCount .
+    ?task kgc:cycleEdgeSelected true .
+    ?task kgc:selectedEdge "back" .
+    # Increment iteration counter monotonically
+    ?task kgc:loopContinued true .
 } .
 
-# Exit loop when condition false
+# Exit loop when condition FALSE - only if no edge selected yet
 {
     ?task kgc:status "Completed" .
     ?task yawl:flowsInto ?exitFlow .
     ?exitFlow yawl:nextElementRef ?exit .
     ?exitFlow yawl:isExitEdge true .
+    # Must have a back-edge with FALSE condition to exit
     ?task yawl:flowsInto ?loopFlow .
     ?loopFlow yawl:loopCondition ?cond .
     ?cond kgc:evaluatesTo false .
     ?exit kgc:status "Pending" .
+    # GUARD: Only fire if no edge selected yet
+    _:scope log:notIncludes { ?task kgc:cycleEdgeSelected true } .
 }
 =>
 {
     ?exit kgc:status "Active" .
+    ?task kgc:cycleEdgeSelected true .
+    ?task kgc:selectedEdge "exit" .
+    ?task kgc:loopExited true .
 } .
 """
 
@@ -455,8 +475,26 @@ WCP12_MI_WITHOUT_SYNC = """
 # =============================================================================
 # van der Aalst: "Multiple instances created, each independent."
 # Semantics: Each instance proceeds independently to successor.
+#
+# CRITICAL: Must have termination guard to prevent infinite spawning.
+# Uses kgc:spawningComplete marker when spawnedCount reaches instanceCount.
 
-# Spawn instances (instance creation tracked in RDF)
+# Rule 12a: Mark spawning complete when target reached (FIRST - prevents re-firing)
+{
+    ?mi kgc:type "MultiInstance" .
+    ?mi kgc:synchronization "none" .
+    ?mi kgc:spawnedCount ?spawned .
+    ?mi kgc:instanceCount ?n .
+    ?spawned math:notLessThan ?n .
+    # GUARD: Only mark once
+    _:scope log:notIncludes { ?mi kgc:spawningComplete true } .
+}
+=>
+{
+    ?mi kgc:spawningComplete true .
+} .
+
+# Rule 12b: Spawn instances ONLY if not yet complete
 {
     ?mi kgc:type "MultiInstance" .
     ?mi kgc:synchronization "none" .
@@ -464,6 +502,8 @@ WCP12_MI_WITHOUT_SYNC = """
     ?mi kgc:instanceCount ?n .
     ?mi kgc:spawnedCount ?spawned .
     ?spawned math:lessThan ?n .
+    # CRITICAL GUARD: Stop spawning when complete
+    _:scope log:notIncludes { ?mi kgc:spawningComplete true } .
 }
 =>
 {
@@ -472,14 +512,15 @@ WCP12_MI_WITHOUT_SYNC = """
     ?mi kgc:hasInstance ?newSpawned .
 } .
 
-# Each instance completion independently enables successor
+# Rule 12c: Each instance completion independently enables successor
 {
     ?instance kgc:parentMI ?mi .
     ?mi kgc:synchronization "none" .
     ?instance kgc:status "Completed" .
     ?mi yawl:flowsInto ?flow .
     ?flow yawl:nextElementRef ?next .
-    () log:notIncludes { ?instance kgc:successorEnabled true } .
+    # GUARD: Only enable successor once per instance
+    _:scope log:notIncludes { ?instance kgc:successorEnabled true } .
 }
 =>
 {
@@ -681,23 +722,69 @@ WCP17_INTERLEAVED_PARALLEL = """
 # LAW 17 - WCP-17: INTERLEAVED PARALLEL ROUTING (Filter+Await)
 # =============================================================================
 # van der Aalst: "Tasks execute in any order but not simultaneously."
-# Semantics: Mutex-based serialization.
+# Semantics: Mutex-based serialization with deterministic ordering.
+#
+# CRITICAL: When multiple Ready tasks exist and mutex is free, N3 fires ALL.
+# Solution: Use ordering (explicit kgc:ordering, else URI lexicographic).
+# Only the LOWEST-ordered Ready task acquires; others block.
 
-# Acquire mutex when free
+# Rule 17a: Acquire mutex - ONLY if no lower-ordered Ready task exists
 {
     ?region kgc:type "InterleavedParallel" .
     ?region kgc:contains ?task .
     ?task kgc:status "Ready" .
     ?region kgc:mutex ?mutex .
     ?mutex kgc:holder "none" .
+    # GUARD: No other Ready task has lower URI (deterministic ordering)
+    _:scope log:notIncludes {
+        ?region kgc:contains ?other .
+        ?other kgc:status "Ready" .
+        ?other string:lessThan ?task .
+    } .
 }
 =>
 {
     ?mutex kgc:holder ?task .
     ?task kgc:status "Active" .
+    ?task kgc:acquiredMutex ?mutex .
 } .
 
-# Release mutex on completion
+# Rule 17b: Block higher-ordered Ready tasks when mutex is free
+# (They would try to acquire but a lower-ordered task should win)
+{
+    ?region kgc:type "InterleavedParallel" .
+    ?region kgc:contains ?task .
+    ?task kgc:status "Ready" .
+    ?region kgc:mutex ?mutex .
+    ?mutex kgc:holder "none" .
+    # There EXISTS a lower-ordered Ready task
+    ?region kgc:contains ?other .
+    ?other kgc:status "Ready" .
+    ?other string:lessThan ?task .
+}
+=>
+{
+    ?task kgc:status "Blocked" .
+    ?task kgc:waitingFor ?mutex .
+    ?task kgc:blockedByOrdering ?other .
+} .
+
+# Rule 17c: Block when mutex held by another (explicit lock)
+{
+    ?region kgc:type "InterleavedParallel" .
+    ?region kgc:contains ?task .
+    ?task kgc:status "Ready" .
+    ?region kgc:mutex ?mutex .
+    ?mutex kgc:holder ?holder .
+    _:scope log:notIncludes { ?holder log:equalTo "none" } .
+}
+=>
+{
+    ?task kgc:status "Blocked" .
+    ?task kgc:waitingFor ?mutex .
+} .
+
+# Rule 17d: Release mutex on completion
 {
     ?region kgc:type "InterleavedParallel" .
     ?region kgc:contains ?task .
@@ -708,21 +795,7 @@ WCP17_INTERLEAVED_PARALLEL = """
 =>
 {
     ?mutex kgc:holder "none" .
-} .
-
-# Block when mutex held by another
-{
-    ?region kgc:type "InterleavedParallel" .
-    ?region kgc:contains ?task .
-    ?task kgc:status "Ready" .
-    ?region kgc:mutex ?mutex .
-    ?mutex kgc:holder ?other .
-    () log:notIncludes { ?other log:equalTo "none" } .
-}
-=>
-{
-    ?task kgc:status "Blocked" .
-    ?task kgc:waitingFor ?mutex .
+    ?task kgc:releasedMutex ?mutex .
 } .
 """
 
@@ -915,9 +988,30 @@ WCP21_STRUCTURED_LOOP = """
 # LAW 21 - WCP-21: STRUCTURED LOOP (Filter)
 # =============================================================================
 # van der Aalst: "Task executed repeatedly using structured loop constructs."
-# Semantics: Pre/post-test loop with counter.
+# Semantics: Pre/post-test loop with counter and termination guard.
+#
+# CRITICAL: Must have kgc:loopExhausted guard to prevent infinite iteration.
+# The loop terminates when EITHER:
+# 1. Condition becomes false
+# 2. Max iterations reached (kgc:loopExhausted marker)
 
-# Continue iteration when condition true and under max
+# Rule 21a: Mark loop exhausted when max reached (FIRST - prevents re-firing)
+{
+    ?loop kgc:type "StructuredLoop" .
+    ?loop kgc:iterationCount ?count .
+    ?loop kgc:maxIterations ?max .
+    ?count math:notLessThan ?max .
+    # GUARD: Only mark once
+    _:scope log:notIncludes { ?loop kgc:loopExhausted true } .
+}
+=>
+{
+    ?loop kgc:loopExhausted true .
+    ?loop kgc:status "Completed" .
+    ?loop kgc:exitReason "maxIterations" .
+} .
+
+# Rule 21b: Continue iteration when condition true and NOT exhausted
 {
     ?loop kgc:type "StructuredLoop" .
     ?loop kgc:status "Evaluating" .
@@ -926,6 +1020,8 @@ WCP21_STRUCTURED_LOOP = """
     ?loop kgc:iterationCount ?count .
     ?loop kgc:maxIterations ?max .
     ?count math:lessThan ?max .
+    # CRITICAL GUARD: Stop when exhausted
+    _:scope log:notIncludes { ?loop kgc:loopExhausted true } .
 }
 =>
 {
@@ -934,24 +1030,29 @@ WCP21_STRUCTURED_LOOP = """
     ?loop kgc:iterationCount ?newCount .
 } .
 
-# Exit loop when condition false
+# Rule 21c: Exit loop when condition false (NOT exhausted)
 {
     ?loop kgc:type "StructuredLoop" .
     ?loop kgc:status "Evaluating" .
     ?loop kgc:loopCondition ?cond .
     ?cond kgc:evaluatesTo false .
+    # Only if not already completed by exhaustion
+    _:scope log:notIncludes { ?loop kgc:loopExhausted true } .
 }
 =>
 {
     ?loop kgc:status "Completed" .
+    ?loop kgc:exitReason "conditionFalse" .
 } .
 
-# Return to evaluation after body completes
+# Rule 21d: Return to evaluation after body completes (NOT exhausted)
 {
     ?loop kgc:type "StructuredLoop" .
     ?loop kgc:status "Iterating" .
     ?loop kgc:body ?body .
     ?body kgc:status "Completed" .
+    # Only continue if not exhausted
+    _:scope log:notIncludes { ?loop kgc:loopExhausted true } .
 }
 =>
 {
@@ -1142,38 +1243,48 @@ WCP29_CANCELLING_DISCRIMINATOR = """
 # LAW 29 - WCP-29: CANCELLING DISCRIMINATOR (Await+Void)
 # =============================================================================
 # van der Aalst: "First completion wins, cancel remaining branches."
-# Semantics: First-wins with cancellation.
+# Semantics: First-wins with cancellation of ONLY non-completed branches.
+#
+# CRITICAL: Must NOT cancel already-completed branches (including the winner).
+# The winner is marked, and only non-completed, non-cancelled losers get cancelled.
 
-# First completion fires
+# Rule 29a: First completion fires the discriminator
 {
     ?disc kgc:type "CancellingDiscriminator" .
     ?disc kgc:status "Waiting" .
     ?disc kgc:waitingFor ?branch .
     ?branch kgc:status "Completed" .
-    () log:notIncludes { ?disc kgc:discriminatorFired true } .
+    # GUARD: Only fire once
+    _:scope log:notIncludes { ?disc kgc:discriminatorFired true } .
 }
 =>
 {
     ?disc kgc:status "Fired" .
     ?disc kgc:winningBranch ?branch .
     ?disc kgc:discriminatorFired true .
+    ?branch kgc:isWinningBranch true .
 } .
 
-# Cancel losing branches
+# Rule 29b: Cancel losing branches - but PRESERVE Completed tasks
 {
     ?disc kgc:type "CancellingDiscriminator" .
     ?disc kgc:discriminatorFired true .
     ?disc kgc:winningBranch ?winner .
     ?disc kgc:waitingFor ?loser .
-    () log:notIncludes { ?loser log:equalTo ?winner } .
+    # CRITICAL: loser must NOT be the winner
+    _:scope log:notIncludes { ?loser log:equalTo ?winner } .
     ?loser kgc:status ?status .
-    () log:notIncludes { ?status log:equalTo "Completed" } .
-    () log:notIncludes { ?status log:equalTo "Cancelled" } .
+    # CRITICAL GUARDS: Don't cancel if already Completed OR already Cancelled
+    _:scope2 log:notIncludes { ?status log:equalTo "Completed" } .
+    _:scope3 log:notIncludes { ?status log:equalTo "Cancelled" } .
+    # Additional guard: don't cancel anything marked as winning
+    _:scope4 log:notIncludes { ?loser kgc:isWinningBranch true } .
 }
 =>
 {
     ?loser kgc:status "Cancelled" .
     ?loser kgc:cancelledBy ?disc .
+    ?loser kgc:cancelReason "discriminatorLost" .
 } .
 """
 
@@ -1475,26 +1586,54 @@ WCP39_CRITICAL_SECTION = """
 # =============================================================================
 # van der Aalst: "Mutual exclusion across process instances."
 # Semantics: Global mutex for cross-instance serialization.
+#
+# CRITICAL: When multiple Ready tasks exist and lock is free, N3 fires ALL.
+# Solution: Use URI-based deterministic ordering (like WCP-17).
+# Only the LOWEST-ordered Ready task acquires the lock; others block.
 
-# Acquire critical section when free
+# Rule 39a: Acquire lock - ONLY if no lower-ordered Ready task exists
 {
     ?task kgc:requiresCriticalSection ?cs .
     ?task kgc:status "Ready" .
     ?cs kgc:lockHolder "none" .
+    # GUARD: No other Ready task (requiring same CS) has lower URI
+    _:scope log:notIncludes {
+        ?other kgc:requiresCriticalSection ?cs .
+        ?other kgc:status "Ready" .
+        ?other string:lessThan ?task .
+    } .
 }
 =>
 {
     ?cs kgc:lockHolder ?task .
     ?task kgc:status "Active" .
     ?task kgc:holdsLock ?cs .
+    ?task kgc:acquiredLockAt ?cs .
 } .
 
-# Block when locked by another
+# Rule 39b: Block higher-ordered Ready tasks when lock is free
 {
     ?task kgc:requiresCriticalSection ?cs .
     ?task kgc:status "Ready" .
-    ?cs kgc:lockHolder ?other .
-    () log:notIncludes { ?other log:equalTo "none" } .
+    ?cs kgc:lockHolder "none" .
+    # There EXISTS a lower-ordered Ready task requiring same CS
+    ?other kgc:requiresCriticalSection ?cs .
+    ?other kgc:status "Ready" .
+    ?other string:lessThan ?task .
+}
+=>
+{
+    ?task kgc:status "Blocked" .
+    ?task kgc:waitingFor ?cs .
+    ?task kgc:blockedByOrdering ?other .
+} .
+
+# Rule 39c: Block when lock held by another (explicit lock)
+{
+    ?task kgc:requiresCriticalSection ?cs .
+    ?task kgc:status "Ready" .
+    ?cs kgc:lockHolder ?holder .
+    _:scope log:notIncludes { ?holder log:equalTo "none" } .
 }
 =>
 {
@@ -1502,7 +1641,7 @@ WCP39_CRITICAL_SECTION = """
     ?task kgc:waitingFor ?cs .
 } .
 
-# Release on completion
+# Rule 39d: Release on completion
 {
     ?task kgc:holdsLock ?cs .
     ?task kgc:status "Completed" .
@@ -1510,6 +1649,7 @@ WCP39_CRITICAL_SECTION = """
 =>
 {
     ?cs kgc:lockHolder "none" .
+    ?task kgc:releasedLockAt ?cs .
 } .
 """
 

@@ -105,6 +105,13 @@ class Receipt:
 - 80%+ coverage, <1s total runtime
 - Verify behavior, not `assert result` / `assert True`
 
+### Testing: Prove the Engine, Not the Script
+1. **A test that passes without the engine running is worthless.** If you can delete the workflow engine and tests still pass, you tested Python, not the system.
+2. **The test must fail when the pattern is violated.** If WCP-3 sync test passes when only 2 of 3 branches complete, it's not testing synchronization.
+3. **Assert on engine state, not script variables.** Check RDF token positions, not Python counters you incremented yourself.
+4. **External services must influence control flow.** If RabbitMQ messages don't change which code path executes, the test proves nothing about event-driven behavior.
+5. **If you wrote the behavior in the test, you're testing your test.** The engine must produce the behavior; the test must only observe and assert.
+
 ### Lint: Ruff (120 char lines)
 Real errors enforced; style preferences (E501, PLR complexity) caught by tests. See `pyproject.toml` for full config.
 
@@ -136,6 +143,23 @@ from ..hooks.core import Hook     # WRONG
 ---
 
 ## Forbidden Patterns
+
+### Theater Code: Tests That Prove Nothing
+
+**DO NOT write tests that claim to validate behavior but only prove connectivity.**
+
+1. **ThreadPoolExecutor is not WCP-2.** Parallel Python threads are not workflow parallel splits—there are no tokens, no control flow constructs, no workflow semantics.
+2. **Sequential loops are not WCP-3.** Iterating through approvals and counting is not synchronization—real sync blocks until concurrent branches converge.
+3. **Logging "cancelled" is not cancellation.** Adding a supplier to a cancelled list after their work completed is not WCP-35—real cancellation aborts running tasks.
+4. **Hash-based branching is not deferred choice.** `if hash(x) % 3 == 0` is deterministic—WCP-16 requires external events racing to trigger branches.
+5. **Publishing without consuming is not coordination.** Fire-and-forget to RabbitMQ proves nothing—real event-driven systems have consumers that influence execution.
+6. **In-memory chains are not lockchains.** SHA-256 hashes in a Python list are not audit trails—real lockchains persist to PostgreSQL with hash columns.
+7. **Domain data in RDF is not workflow.** Storing supplier metadata is not workflow execution—real YAWL execution has tokens, task states, and control flow in RDF.
+8. **Pattern IDs in audit logs do not prove patterns.** Writing `pattern_id=35` to PostgreSQL while using Python if/else is a lie—the pattern must be enforced by the engine.
+9. **If the workflow is Python code, it's not RDF-driven.** The thesis claims RDF-only execution; tests must prove RDF rules fire, not that Python scripts run.
+10. **Name tests honestly.** `TestContainerConnectivity` not `TestWCPPatterns`. `test_services_respond` not `test_complete_supply_chain_lifecycle`.
+
+**The test for a workflow pattern must show the ENGINE enforcing the pattern, not Python code simulating it.**
 
 ### Implementation Lies (pre-commit blocks these)
 ```python

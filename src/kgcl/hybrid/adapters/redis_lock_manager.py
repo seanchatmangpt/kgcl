@@ -170,12 +170,7 @@ class RedisLockManager:
     return 0
     """
 
-    def __init__(
-        self,
-        redis_client: Redis[Any],
-        default_ttl: int = 30,
-        retry_interval: float = 0.1,
-    ) -> None:
+    def __init__(self, redis_client: Redis[Any], default_ttl: int = 30, retry_interval: float = 0.1) -> None:
         """Initialize the lock manager.
 
         Parameters
@@ -218,11 +213,7 @@ class RedisLockManager:
         return f"lock:{lock_type.value}:{name}"
 
     def acquire_exclusive(
-        self,
-        name: str,
-        ttl: int | None = None,
-        timeout: float = 10.0,
-        blocking: bool = True,
+        self, name: str, ttl: int | None = None, timeout: float = 10.0, blocking: bool = True
     ) -> LockInfo | None:
         """Acquire an exclusive lock.
 
@@ -248,10 +239,7 @@ class RedisLockManager:
 
         while True:
             acquired_at = time.time()
-            result = self._acquire_script(
-                keys=[lock_key],
-                args=[self._owner_id, ttl, str(acquired_at)],
-            )
+            result = self._acquire_script(keys=[lock_key], args=[self._owner_id, ttl, str(acquired_at)])
 
             if result == 1:
                 lock_info = LockInfo(
@@ -287,10 +275,7 @@ class RedisLockManager:
             True if released, False if not owner or not held
         """
         lock_key = self._make_lock_key(name, LockType.EXCLUSIVE)
-        result = self._release_script(
-            keys=[lock_key],
-            args=[self._owner_id],
-        )
+        result = self._release_script(keys=[lock_key], args=[self._owner_id])
 
         if result == 1:
             with self._local_lock:
@@ -315,18 +300,12 @@ class RedisLockManager:
         """
         lock_key = self._make_lock_key(name, LockType.EXCLUSIVE)
         ttl = ttl or self._default_ttl
-        result = self._renew_script(
-            keys=[lock_key],
-            args=[self._owner_id, ttl],
-        )
+        result = self._renew_script(keys=[lock_key], args=[self._owner_id, ttl])
         return result == 1
 
     @contextmanager
     def exclusive_lock(
-        self,
-        name: str,
-        ttl: int | None = None,
-        timeout: float = 10.0,
+        self, name: str, ttl: int | None = None, timeout: float = 10.0
     ) -> Generator[LockInfo | None, None, None]:
         """Context manager for exclusive locks.
 
@@ -358,12 +337,7 @@ class RedisLockManager:
                 self.release_exclusive(name)
 
     def acquire_semaphore(
-        self,
-        name: str,
-        max_count: int,
-        ttl: int | None = None,
-        timeout: float = 10.0,
-        blocking: bool = True,
+        self, name: str, max_count: int, ttl: int | None = None, timeout: float = 10.0, blocking: bool = True
     ) -> str | None:
         """Acquire a slot in a counting semaphore.
 
@@ -391,10 +365,7 @@ class RedisLockManager:
         start = time.time()
 
         while True:
-            result = self._semaphore_script(
-                keys=[sem_key],
-                args=[slot_id, max_count, ttl],
-            )
+            result = self._semaphore_script(keys=[sem_key], args=[slot_id, max_count, ttl])
 
             if result == 1:
                 return slot_id
@@ -428,11 +399,7 @@ class RedisLockManager:
 
     @contextmanager
     def semaphore(
-        self,
-        name: str,
-        max_count: int,
-        ttl: int | None = None,
-        timeout: float = 10.0,
+        self, name: str, max_count: int, ttl: int | None = None, timeout: float = 10.0
     ) -> Generator[str | None, None, None]:
         """Context manager for semaphore slots.
 
@@ -459,12 +426,7 @@ class RedisLockManager:
             if slot_id:
                 self.release_semaphore(name, slot_id)
 
-    def create_barrier(
-        self,
-        name: str,
-        count: int,
-        ttl: int = 60,
-    ) -> str:
+    def create_barrier(self, name: str, count: int, ttl: int = 60) -> str:
         """Create a distributed barrier.
 
         Parameters
@@ -482,18 +444,11 @@ class RedisLockManager:
             Barrier key
         """
         barrier_key = f"barrier:{name}"
-        self._redis.hset(barrier_key, mapping={
-            "required": str(count),
-            "released": "0",
-        })
+        self._redis.hset(barrier_key, mapping={"required": str(count), "released": "0"})
         self._redis.expire(barrier_key, ttl)
         return barrier_key
 
-    def arrive_at_barrier(
-        self,
-        name: str,
-        participant_id: str | None = None,
-    ) -> BarrierState:
+    def arrive_at_barrier(self, name: str, participant_id: str | None = None) -> BarrierState:
         """Arrive at a barrier and wait for release.
 
         Parameters
@@ -533,10 +488,7 @@ class RedisLockManager:
             released_bool = True
 
         # Decode participant IDs
-        decoded_participants = [
-            p.decode() if isinstance(p, bytes) else p
-            for p in participants
-        ]
+        decoded_participants = [p.decode() if isinstance(p, bytes) else p for p in participants]
 
         return BarrierState(
             barrier_key=barrier_key,
@@ -547,11 +499,7 @@ class RedisLockManager:
         )
 
     def wait_at_barrier(
-        self,
-        name: str,
-        participant_id: str | None = None,
-        timeout: float = 30.0,
-        poll_interval: float = 0.1,
+        self, name: str, participant_id: str | None = None, timeout: float = 30.0, poll_interval: float = 0.1
     ) -> BarrierState:
         """Wait at barrier until released.
 
@@ -597,12 +545,7 @@ class RedisLockManager:
         participants_key = f"{barrier_key}:participants"
         self._redis.delete(barrier_key, participants_key)
 
-    def acquire_read_lock(
-        self,
-        name: str,
-        ttl: int | None = None,
-        timeout: float = 10.0,
-    ) -> LockInfo | None:
+    def acquire_read_lock(self, name: str, ttl: int | None = None, timeout: float = 10.0) -> LockInfo | None:
         """Acquire a read lock (multiple readers allowed).
 
         Parameters
@@ -673,12 +616,7 @@ class RedisLockManager:
             return True
         return False
 
-    def acquire_write_lock(
-        self,
-        name: str,
-        ttl: int | None = None,
-        timeout: float = 10.0,
-    ) -> LockInfo | None:
+    def acquire_write_lock(self, name: str, ttl: int | None = None, timeout: float = 10.0) -> LockInfo | None:
         """Acquire a write lock (exclusive, waits for readers).
 
         Parameters
@@ -707,10 +645,7 @@ class RedisLockManager:
 
             if readers == 0 and not writer_exists:
                 acquired_at = time.time()
-                result = self._acquire_script(
-                    keys=[write_key],
-                    args=[self._owner_id, ttl, str(acquired_at)],
-                )
+                result = self._acquire_script(keys=[write_key], args=[self._owner_id, ttl, str(acquired_at)])
 
                 if result == 1:
                     lock_info = LockInfo(
@@ -743,10 +678,7 @@ class RedisLockManager:
             True if released
         """
         write_key = self._make_lock_key(name, LockType.WRITE)
-        result = self._release_script(
-            keys=[write_key],
-            args=[self._owner_id],
-        )
+        result = self._release_script(keys=[write_key], args=[self._owner_id])
 
         if result == 1:
             with self._local_lock:
@@ -756,10 +688,7 @@ class RedisLockManager:
 
     @contextmanager
     def read_lock(
-        self,
-        name: str,
-        ttl: int | None = None,
-        timeout: float = 10.0,
+        self, name: str, ttl: int | None = None, timeout: float = 10.0
     ) -> Generator[LockInfo | None, None, None]:
         """Context manager for read locks.
 
@@ -786,10 +715,7 @@ class RedisLockManager:
 
     @contextmanager
     def write_lock(
-        self,
-        name: str,
-        ttl: int | None = None,
-        timeout: float = 10.0,
+        self, name: str, ttl: int | None = None, timeout: float = 10.0
     ) -> Generator[LockInfo | None, None, None]:
         """Context manager for write locks.
 

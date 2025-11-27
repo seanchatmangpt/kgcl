@@ -1,0 +1,72 @@
+---
+id: nextjs-types-index
+engine: jinja2
+language: typescript
+framework: nextjs
+version: "1.0.0"
+
+ontology:
+  graph_id: ecommerce
+  base_iri: "http://example.org/ecommerce#"
+
+queries:
+  - name: all_entities
+    purpose: Get all entities for barrel export
+    source: inline
+    content: |
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+      PREFIX owl: <http://www.w3.org/2002/07/owl#>
+      PREFIX shop: <http://example.org/ecommerce#>
+
+      SELECT ?label ?slug WHERE {
+        ?uri a owl:Class ;
+             rdfs:label ?label ;
+             shop:slug ?slug .
+        FILTER(STRSTARTS(STR(?uri), "http://example.org/ecommerce#"))
+      }
+      ORDER BY ?label
+
+metadata:
+  author: kgcl-projection
+  description: TypeScript barrel export for all entity types
+  tags:
+    - typescript
+    - types
+    - index
+---
+/**
+ * E-Commerce Domain Types
+ *
+ * @generated from RDF ontology via KGCL projection
+ * @ontology http://example.org/ecommerce#
+ *
+ * This file re-exports all entity types for convenient imports:
+ *   import { Product, Customer, Order } from '@/types';
+ */
+
+{% for entity in sparql.all_entities %}
+export * from './{{ entity.slug }}';
+{% endfor %}
+
+// Common utility types
+export type EntityId = string;
+export type Timestamp = Date;
+
+export interface PaginationMeta {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+}
+
+export interface PaginatedResponse<T> {
+  data: T[];
+  meta: PaginationMeta;
+}
+
+export interface ApiError {
+  error: string;
+  code?: string;
+  details?: Record<string, unknown>;
+}

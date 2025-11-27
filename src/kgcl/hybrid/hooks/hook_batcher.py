@@ -128,10 +128,12 @@ class HookBatcher:
         >>> from kgcl.hybrid.knowledge_hooks import KnowledgeHook, HookPhase, HookAction
         >>> batcher = HookBatcher()
         >>> hooks = [
-        ...     KnowledgeHook("h1", "Hook1", HookPhase.ON_CHANGE, action=HookAction.NOTIFY,
-        ...                   handler_data={"message": "m1"}),
-        ...     KnowledgeHook("h2", "Hook2", HookPhase.ON_CHANGE, action=HookAction.NOTIFY,
-        ...                   handler_data={"message": "m2"}),
+        ...     KnowledgeHook(
+        ...         "h1", "Hook1", HookPhase.ON_CHANGE, action=HookAction.NOTIFY, handler_data={"message": "m1"}
+        ...     ),
+        ...     KnowledgeHook(
+        ...         "h2", "Hook2", HookPhase.ON_CHANGE, action=HookAction.NOTIFY, handler_data={"message": "m2"}
+        ...     ),
         ... ]
         >>> deps = batcher.analyze_dependencies(hooks)
         >>> len(deps)
@@ -182,10 +184,22 @@ class HookBatcher:
         >>> from kgcl.hybrid.knowledge_hooks import KnowledgeHook, HookPhase, HookAction
         >>> batcher = HookBatcher()
         >>> hooks = [
-        ...     KnowledgeHook("h1", "Hook1", HookPhase.ON_CHANGE, priority=100,
-        ...                   action=HookAction.NOTIFY, handler_data={"message": "m1"}),
-        ...     KnowledgeHook("h2", "Hook2", HookPhase.ON_CHANGE, priority=50,
-        ...                   action=HookAction.NOTIFY, handler_data={"message": "m2"}),
+        ...     KnowledgeHook(
+        ...         "h1",
+        ...         "Hook1",
+        ...         HookPhase.ON_CHANGE,
+        ...         priority=100,
+        ...         action=HookAction.NOTIFY,
+        ...         handler_data={"message": "m1"},
+        ...     ),
+        ...     KnowledgeHook(
+        ...         "h2",
+        ...         "Hook2",
+        ...         HookPhase.ON_CHANGE,
+        ...         priority=50,
+        ...         action=HookAction.NOTIFY,
+        ...         handler_data={"message": "m2"},
+        ...     ),
         ... ]
         >>> batches = batcher.create_batches(hooks)
         >>> len(batches) >= 1
@@ -223,9 +237,7 @@ class HookBatcher:
 
         return batches
 
-    async def execute_batch_async(
-        self, batch: list[KnowledgeHook], executor_func: Any
-    ) -> BatchResult:
+    async def execute_batch_async(self, batch: list[KnowledgeHook], executor_func: Any) -> BatchResult:
         """Execute a batch of hooks in parallel.
 
         Parameters
@@ -291,9 +303,7 @@ class HookBatcher:
         timeout = self.config.timeout_per_hook_ms / 1000.0
         return await asyncio.wait_for(asyncio.to_thread(executor_func, hook), timeout=timeout)
 
-    def execute_batches_sync(
-        self, hooks: list[KnowledgeHook], executor_func: Any
-    ) -> list[BatchResult]:
+    def execute_batches_sync(self, hooks: list[KnowledgeHook], executor_func: Any) -> list[BatchResult]:
         """Execute batches synchronously (non-async interface).
 
         Parameters
@@ -362,7 +372,7 @@ class HookBatcher:
         >>> from kgcl.hybrid.knowledge_hooks import KnowledgeHook, HookPhase, HookAction
         >>> batcher = HookBatcher()
         >>> plan = batcher.get_execution_plan([])
-        >>> plan['total_hooks']
+        >>> plan["total_hooks"]
         0
         """
         batches = self.create_batches(hooks)
@@ -371,11 +381,7 @@ class HookBatcher:
             "total_hooks": len(hooks),
             "total_batches": len(batches),
             "batches": [
-                {
-                    "batch_number": i + 1,
-                    "hooks": [h.hook_id for h in batch],
-                    "hook_count": len(batch),
-                }
+                {"batch_number": i + 1, "hooks": [h.hook_id for h in batch], "hook_count": len(batch)}
                 for i, batch in enumerate(batches)
             ],
             "dependencies": {k: list(v) for k, v in self._dep_graph.items()},

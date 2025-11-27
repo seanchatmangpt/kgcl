@@ -17,6 +17,7 @@ from __future__ import annotations
 
 from kgcl.daemon.event_store import DomainEvent, EventType, RDFEventStore, TemporalVector, compute_state_hash
 from kgcl.daemon.kgcld import DaemonConfig, DaemonState, KGCLDaemon, MutationReceipt, QueryResult
+from kgcl.daemon.service_gateway import ServiceGateway, ServiceInvocation, ServiceReference, ServiceStatus
 
 __all__ = [
     "DaemonConfig",
@@ -27,6 +28,10 @@ __all__ = [
     "MutationReceipt",
     "QueryResult",
     "RDFEventStore",
+    "ServiceGateway",
+    "ServiceInvocation",
+    "ServiceReference",
+    "ServiceStatus",
     "TemporalVector",
     "compute_state_hash",
 ]

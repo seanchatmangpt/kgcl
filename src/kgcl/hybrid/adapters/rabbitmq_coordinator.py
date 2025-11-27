@@ -64,14 +64,16 @@ class Event:
         str
             JSON representation of the event
         """
-        return json.dumps({
-            "event_type": self.event_type,
-            "payload": self.payload,
-            "correlation_id": self.correlation_id,
-            "source": self.source,
-            "timestamp": self.timestamp,
-            "event_id": self.event_id,
-        })
+        return json.dumps(
+            {
+                "event_type": self.event_type,
+                "payload": self.payload,
+                "correlation_id": self.correlation_id,
+                "source": self.source,
+                "timestamp": self.timestamp,
+                "event_id": self.event_id,
+            }
+        )
 
     @classmethod
     def from_json(cls, data: str | bytes) -> Event:
@@ -146,20 +148,19 @@ class EventCoordinator:
     Example
     -------
     >>> coordinator = EventCoordinator(channel, "workflow.events", "topic")
-    >>> coordinator.publish(Event(
-    ...     event_type="task.completed",
-    ...     payload={"task_id": "T1"},
-    ...     correlation_id="WF-001",
-    ...     source="worker-1",
-    ...     timestamp=time.time()
-    ... ))
+    >>> coordinator.publish(
+    ...     Event(
+    ...         event_type="task.completed",
+    ...         payload={"task_id": "T1"},
+    ...         correlation_id="WF-001",
+    ...         source="worker-1",
+    ...         timestamp=time.time(),
+    ...     )
+    ... )
     """
 
     def __init__(
-        self,
-        channel: BlockingChannel,
-        exchange_name: str = "workflow.events",
-        exchange_type: str = "topic",
+        self, channel: BlockingChannel, exchange_name: str = "workflow.events", exchange_type: str = "topic"
     ) -> None:
         """Initialize the event coordinator.
 
@@ -186,38 +187,19 @@ class EventCoordinator:
         """Set up the RabbitMQ exchange and dead letter queue."""
         # Main exchange
         self._channel.exchange_declare(
-            exchange=self._exchange_name,
-            exchange_type=self._exchange_type,
-            durable=False,
-            auto_delete=True,
+            exchange=self._exchange_name, exchange_type=self._exchange_type, durable=False, auto_delete=True
         )
 
         # Dead letter exchange for failed messages
         self._dlx_name = f"{self._exchange_name}.dlx"
-        self._channel.exchange_declare(
-            exchange=self._dlx_name,
-            exchange_type="fanout",
-            durable=False,
-            auto_delete=True,
-        )
+        self._channel.exchange_declare(exchange=self._dlx_name, exchange_type="fanout", durable=False, auto_delete=True)
 
         # Dead letter queue
         self._dlq_name = f"{self._exchange_name}.dlq"
-        self._channel.queue_declare(
-            queue=self._dlq_name,
-            durable=False,
-            auto_delete=True,
-        )
-        self._channel.queue_bind(
-            queue=self._dlq_name,
-            exchange=self._dlx_name,
-        )
+        self._channel.queue_declare(queue=self._dlq_name, durable=False, auto_delete=True)
+        self._channel.queue_bind(queue=self._dlq_name, exchange=self._dlx_name)
 
-    def publish(
-        self,
-        event: Event,
-        routing_key: str | None = None,
-    ) -> bool:
+    def publish(self, event: Event, routing_key: str | None = None) -> bool:
         """Publish an event to the exchange.
 
         Parameters
@@ -236,20 +218,13 @@ class EventCoordinator:
 
         try:
             self._channel.basic_publish(
-                exchange=self._exchange_name,
-                routing_key=key,
-                body=event.to_json().encode("utf-8"),
+                exchange=self._exchange_name, routing_key=key, body=event.to_json().encode("utf-8")
             )
             return True
         except Exception:
             return False
 
-    def subscribe(
-        self,
-        routing_pattern: str,
-        handler: EventHandler,
-        queue_name: str | None = None,
-    ) -> str:
+    def subscribe(self, routing_pattern: str, handler: EventHandler, queue_name: str | None = None) -> str:
         """Subscribe to events matching a routing pattern.
 
         Parameters
@@ -273,27 +248,16 @@ class EventCoordinator:
                 durable=False,
                 exclusive=True,
                 auto_delete=True,
-                arguments={
-                    "x-dead-letter-exchange": self._dlx_name,
-                },
+                arguments={"x-dead-letter-exchange": self._dlx_name},
             )
             queue_name = result.method.queue
         else:
             self._channel.queue_declare(
-                queue=queue_name,
-                durable=False,
-                auto_delete=True,
-                arguments={
-                    "x-dead-letter-exchange": self._dlx_name,
-                },
+                queue=queue_name, durable=False, auto_delete=True, arguments={"x-dead-letter-exchange": self._dlx_name}
             )
 
         # Bind queue to exchange
-        self._channel.queue_bind(
-            queue=queue_name,
-            exchange=self._exchange_name,
-            routing_key=routing_pattern,
-        )
+        self._channel.queue_bind(queue=queue_name, exchange=self._exchange_name, routing_key=routing_pattern)
 
         # Store handler
         if routing_pattern not in self._handlers:
@@ -301,12 +265,7 @@ class EventCoordinator:
         self._handlers[routing_pattern].append(handler)
 
         # Create callback wrapper
-        def callback(
-            ch: BlockingChannel,
-            method: Any,
-            properties: Any,
-            body: bytes,
-        ) -> None:
+        def callback(ch: BlockingChannel, method: Any, properties: Any, body: bytes) -> None:
             try:
                 event = Event.from_json(body)
                 result = handler(event)
@@ -319,11 +278,7 @@ class EventCoordinator:
                 ch.basic_reject(delivery_tag=method.delivery_tag, requeue=False)
 
         # Start consuming
-        consumer_tag = self._channel.basic_consume(
-            queue=queue_name,
-            on_message_callback=callback,
-            auto_ack=False,
-        )
+        consumer_tag = self._channel.basic_consume(queue=queue_name, on_message_callback=callback, auto_ack=False)
         self._consumer_tags.append(consumer_tag)
 
         return consumer_tag
@@ -340,11 +295,7 @@ class EventCoordinator:
             self._channel.basic_cancel(consumer_tag)
             self._consumer_tags.remove(consumer_tag)
 
-    def track_correlation(
-        self,
-        correlation_id: str,
-        event: Event,
-    ) -> list[Event]:
+    def track_correlation(self, correlation_id: str, event: Event) -> list[Event]:
         """Track an event by correlation ID.
 
         Parameters
@@ -370,10 +321,7 @@ class EventCoordinator:
             self._correlation_events[correlation_id].append(event)
             return list(self._correlation_events[correlation_id])
 
-    def get_correlated_events(
-        self,
-        correlation_id: str,
-    ) -> list[Event]:
+    def get_correlated_events(self, correlation_id: str) -> list[Event]:
         """Get all events with a correlation ID.
 
         Parameters
@@ -395,11 +343,7 @@ class EventCoordinator:
             return list(self._correlation_events.get(correlation_id, []))
 
     def wait_for_correlation(
-        self,
-        correlation_id: str,
-        expected_count: int,
-        timeout: float = 30.0,
-        poll_interval: float = 0.1,
+        self, correlation_id: str, expected_count: int, timeout: float = 30.0, poll_interval: float = 0.1
     ) -> list[Event]:
         """Wait for a specific number of correlated events.
 
@@ -443,12 +387,7 @@ class EventCoordinator:
                     self._correlation_events.pop(correlation_id, None)
                 del self._correlation_locks[correlation_id]
 
-    def request_reply(
-        self,
-        event: Event,
-        routing_key: str,
-        timeout: float = 30.0,
-    ) -> Event | None:
+    def request_reply(self, event: Event, routing_key: str, timeout: float = 30.0) -> Event | None:
         """Send request and wait for reply (sync pattern).
 
         Parameters
@@ -466,11 +405,7 @@ class EventCoordinator:
             Reply event or None if timeout
         """
         # Create reply queue
-        result = self._channel.queue_declare(
-            queue="",
-            exclusive=True,
-            auto_delete=True,
-        )
+        result = self._channel.queue_declare(queue="", exclusive=True, auto_delete=True)
         reply_queue = result.method.queue
 
         # Create correlation ID for this request
@@ -479,12 +414,7 @@ class EventCoordinator:
         reply_event: list[Event | None] = [None]
         reply_received = threading.Event()
 
-        def reply_callback(
-            ch: BlockingChannel,
-            method: Any,
-            properties: Any,
-            body: bytes,
-        ) -> None:
+        def reply_callback(ch: BlockingChannel, method: Any, properties: Any, body: bytes) -> None:
             received = Event.from_json(body)
             if received.correlation_id == request_correlation:
                 reply_event[0] = received
@@ -493,9 +423,7 @@ class EventCoordinator:
 
         # Subscribe to reply queue
         consumer_tag = self._channel.basic_consume(
-            queue=reply_queue,
-            on_message_callback=reply_callback,
-            auto_ack=False,
+            queue=reply_queue, on_message_callback=reply_callback, auto_ack=False
         )
 
         # Publish request with reply-to
@@ -518,10 +446,7 @@ class EventCoordinator:
 
         return reply_event[0]
 
-    def broadcast(
-        self,
-        event: Event,
-    ) -> bool:
+    def broadcast(self, event: Event) -> bool:
         """Broadcast event to all subscribers (fanout pattern).
 
         Parameters
@@ -569,11 +494,7 @@ class WorkflowEventBus:
     >>> bus.emit_task_completed("task_1", {"result": "success"})
     """
 
-    def __init__(
-        self,
-        coordinator: EventCoordinator,
-        workflow_id: str,
-    ) -> None:
+    def __init__(self, coordinator: EventCoordinator, workflow_id: str) -> None:
         """Initialize the workflow event bus.
 
         Parameters
@@ -591,11 +512,7 @@ class WorkflowEventBus:
         """Get the workflow ID."""
         return self._workflow_id
 
-    def emit_task_started(
-        self,
-        task_id: str,
-        data: dict[str, Any] | None = None,
-    ) -> bool:
+    def emit_task_started(self, task_id: str, data: dict[str, Any] | None = None) -> bool:
         """Emit task started event.
 
         Parameters
@@ -619,11 +536,7 @@ class WorkflowEventBus:
         )
         return self._coordinator.publish(event, f"workflow.{self._workflow_id}.task.started")
 
-    def emit_task_completed(
-        self,
-        task_id: str,
-        result: dict[str, Any] | None = None,
-    ) -> bool:
+    def emit_task_completed(self, task_id: str, result: dict[str, Any] | None = None) -> bool:
         """Emit task completed event.
 
         Parameters
@@ -647,12 +560,7 @@ class WorkflowEventBus:
         )
         return self._coordinator.publish(event, f"workflow.{self._workflow_id}.task.completed")
 
-    def emit_task_failed(
-        self,
-        task_id: str,
-        error: str,
-        data: dict[str, Any] | None = None,
-    ) -> bool:
+    def emit_task_failed(self, task_id: str, error: str, data: dict[str, Any] | None = None) -> bool:
         """Emit task failed event.
 
         Parameters
@@ -678,12 +586,7 @@ class WorkflowEventBus:
         )
         return self._coordinator.publish(event, f"workflow.{self._workflow_id}.task.failed")
 
-    def emit_token_moved(
-        self,
-        from_place: str,
-        to_place: str,
-        token_id: str,
-    ) -> bool:
+    def emit_token_moved(self, from_place: str, to_place: str, token_id: str) -> bool:
         """Emit token movement event.
 
         Parameters
@@ -709,12 +612,7 @@ class WorkflowEventBus:
         )
         return self._coordinator.publish(event, f"workflow.{self._workflow_id}.token")
 
-    def emit_pattern_triggered(
-        self,
-        pattern_id: int,
-        pattern_name: str,
-        data: dict[str, Any] | None = None,
-    ) -> bool:
+    def emit_pattern_triggered(self, pattern_id: int, pattern_name: str, data: dict[str, Any] | None = None) -> bool:
         """Emit workflow pattern triggered event.
 
         Parameters
@@ -733,21 +631,14 @@ class WorkflowEventBus:
         """
         event = Event(
             event_type="pattern.triggered",
-            payload={
-                "pattern_id": pattern_id,
-                "pattern_name": pattern_name,
-                **(data or {}),
-            },
+            payload={"pattern_id": pattern_id, "pattern_name": pattern_name, **(data or {})},
             correlation_id=self._workflow_id,
             source=f"workflow:{self._workflow_id}",
             timestamp=time.time(),
         )
         return self._coordinator.publish(event, f"workflow.{self._workflow_id}.pattern")
 
-    def emit_workflow_completed(
-        self,
-        final_state: dict[str, Any] | None = None,
-    ) -> bool:
+    def emit_workflow_completed(self, final_state: dict[str, Any] | None = None) -> bool:
         """Emit workflow completed event.
 
         Parameters
@@ -769,10 +660,7 @@ class WorkflowEventBus:
         )
         return self._coordinator.publish(event, f"workflow.{self._workflow_id}.lifecycle")
 
-    def subscribe_to_tasks(
-        self,
-        handler: EventHandler,
-    ) -> str:
+    def subscribe_to_tasks(self, handler: EventHandler) -> str:
         """Subscribe to all task events for this workflow.
 
         Parameters
@@ -785,15 +673,9 @@ class WorkflowEventBus:
         str
             Consumer tag
         """
-        return self._coordinator.subscribe(
-            f"workflow.{self._workflow_id}.task.*",
-            handler,
-        )
+        return self._coordinator.subscribe(f"workflow.{self._workflow_id}.task.*", handler)
 
-    def subscribe_to_patterns(
-        self,
-        handler: EventHandler,
-    ) -> str:
+    def subscribe_to_patterns(self, handler: EventHandler) -> str:
         """Subscribe to pattern events for this workflow.
 
         Parameters
@@ -806,7 +688,4 @@ class WorkflowEventBus:
         str
             Consumer tag
         """
-        return self._coordinator.subscribe(
-            f"workflow.{self._workflow_id}.pattern",
-            handler,
-        )
+        return self._coordinator.subscribe(f"workflow.{self._workflow_id}.pattern", handler)

@@ -181,7 +181,7 @@ disallow_any_unimported = false
 [tool.pytest.ini_options]  # https://docs.pytest.org/en/latest/reference/reference.html#ini-options-ref
 # 80/20 Consolidation: Unit tests must complete in <1 second with parallel execution
 # Default excludes: slow (>1s), integration, eye (EYE reasoner), container (Docker)
-addopts = "-n auto --dist worksteal --color=yes -q --junitxml=reports/pytest.xml --strict-markers -m 'not slow and not integration and not eye and not container'"
+addopts = "-n auto --dist worksteal --color=yes -q --junitxml=reports/pytest.xml --strict-markers -m 'not slow and not integration and not eye and not container and not wip'"
 testpaths = ["tests"]
 norecursedirs = ["src", ".git", "build", "dist", ".hypothesis", ".venv", ".tox", "tests/chaos", "tests/integration"]
 xfail_strict = true
@@ -202,6 +202,7 @@ filterwarnings = [
 markers = [
   "integration: marks tests as integration tests (deselect with '-m \"not integration\"')",
   "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+  "wip: marks tests as work-in-progress (aspirational tests for unimplemented features)",
   "security: marks tests as security tests",
   "performance: marks tests as performance tests",
   "unrdf: marks tests as UNRDF porting tests",

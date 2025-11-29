@@ -55,3 +55,5 @@ Create a table in `reports/qfd/<initiative>.md`:
 - `/dmaic-problem-solving` when VOC uncovers chronic quality issues.
 
 
+
+

@@ -59,7 +59,7 @@ def calculate(x: int) -> int:
 
 ### Execution Rules (CRITICAL)
 
-**ALL Python execution MUST use `uv run`** - Pre-commit hook blocks direct `python` usage.
+**ALL Python execution MUST use `uv run python`** - Pre-commit hook blocks direct `python` usage. Never run `python` directly; always use `uv run python` or `uv run poe <task>`.
 
 ```bash
 # ✅ CORRECT - MANDATORY
@@ -69,12 +69,13 @@ uv run poe type-check  # Mypy strict (<15s)
 uv run poe test        # Pytest (<1s per test)
 uv run poe verify      # All checks (<30s)
 uv run poe detect-lies # Find TODO/FIXME/stubs (<5s)
-uv run python script.py # Run scripts
+uv run python script.py # Run scripts - MANDATORY
 uv run pytest          # Run pytest
 
-# ❌ FORBIDDEN
-python script.py       # Uses system Python (may be 3.12)
-pytest                 # Bypasses uv dependency management
+# ❌ FORBIDDEN - NEVER USE DIRECT PYTHON
+python script.py       # Uses system Python (may be 3.12) - BLOCKED
+python3 script.py      # Bypasses uv dependency management - BLOCKED
+pytest                 # Bypasses uv dependency management - BLOCKED
 ```
 
 **Dependencies:** Python 3.13+ required. Check PyPI for version support. Known incompatible: `toxiproxy-python` (≤3.12 only). Verify with `uv lock`.
@@ -206,7 +207,7 @@ git config core.hooksPath scripts/git_hooks
 ```bash
 # ❌ WRONG - Don't use for validation
 uv run python -m kgcl.cli test
-python src/kgcl/cli.py
+python src/kgcl/cli.py  # FORBIDDEN: Direct python usage
 
 # ✅ CORRECT - Use installed package
 pip install -e .
@@ -224,9 +225,9 @@ kgcl test  # Or whatever the CLI command is
 
 ## 🤖 AI Assistant Guidelines
 
-**DO:** Run `uv run poe verify` before commits, use `uv run poe <task>` for execution, Chicago School TDD (tests first), proof scripts for claims, frozen dataclasses, NumPy docstrings, batch operations, assert on engine state.
+**DO:** Run `uv run poe verify` before commits, use `uv run poe <task>` for execution, use `uv run python script.py` for all Python scripts, Chicago School TDD (tests first), proof scripts for claims, frozen dataclasses, NumPy docstrings, batch operations, assert on engine state.
 
-**DON'T:** Skip tests, claim without proof, run Python directly, create root files, mark complete with signals, write theater code, use relative imports, skip verification, claim by reading code, blanket suppressions.
+**DON'T:** Skip tests, claim without proof, run `python` or `python3` directly (ALWAYS use `uv run python`), create root files, mark complete with signals, write theater code, use relative imports, skip verification, claim by reading code, blanket suppressions.
 
 ---
 

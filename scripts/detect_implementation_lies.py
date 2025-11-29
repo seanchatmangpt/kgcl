@@ -16,6 +16,7 @@ Categories of Lies:
 5. INCOMPLETE_TESTS - tests without assertions or single trivial assert
 6. SPECULATIVE_SCAFFOLDING - empty classes, unused imports
 7. TEMPORAL_DEFERRAL - # later, # temporary, # for now, # quick fix
+8. MOCKING_VIOLATION - unittest.mock usage (violates Chicago School TDD)
 
 Exit codes:
   0 - No lies detected (clean code)
@@ -50,6 +51,7 @@ class LieCategory(Enum):
     INCOMPLETE_TEST = "incomplete_test"
     SPECULATIVE_SCAFFOLDING = "speculative_scaffolding"
     TEMPORAL_DEFERRAL = "temporal_deferral"
+    MOCKING_VIOLATION = "mocking_violation"
 
 
 @dataclass
@@ -250,6 +252,10 @@ class ImplementationLiesDetector:
             # Category 6: Empty classes (speculative scaffolding)
             if isinstance(node, ast.ClassDef):
                 lies.extend(self._check_empty_class(file_path, node, lines))
+
+        # Category 8: Mocking violations (only in test files)
+        if is_test_file:
+            lies.extend(self._check_mocking_violations(file_path, tree, lines))
 
         return lies
 
@@ -498,6 +504,261 @@ class ImplementationLiesDetector:
 
         return lies
 
+    def _check_mocking_violations(
+        self, file_path: Path, tree: ast.AST, lines: list[str]
+    ) -> list[ImplementationLie]:
+        """Check for mocking violations in test files.
+
+        Chicago School TDD prohibits mocking domain objects.
+        This detects unittest.mock usage and suggests factory_boy factories.
+        """
+        lies: list[ImplementationLie] = []
+        has_mock_import = False
+        mock_import_line = 0
+
+        # Check for unittest.mock imports
+        for node in ast.walk(tree):
+            if isinstance(node, ast.ImportFrom):
+                if node.module == "unittest.mock":
+                    has_mock_import = True
+                    mock_import_line = node.lineno
+                    # Check what's being imported
+                    imported_names = [alias.name for alias in node.names]
+                    for name in imported_names:
+                        if name in ("MagicMock", "Mock", "patch", "PropertyMock", "call"):
+                            line_content = (
+                                lines[node.lineno - 1]
+                                if node.lineno <= len(lines)
+                                else ""
+                            )
+                            # Suggest appropriate factory based on context
+                            factory_suggestion = self._suggest_factory(name, file_path)
+                            lies.append(
+                                ImplementationLie(
+                                    file_path=str(file_path),
+                                    line_number=node.lineno,
+                                    category=LieCategory.MOCKING_VIOLATION,
+                                    pattern=(
+                                        f"Mocking violation: '{name}' from unittest.mock "
+                                        f"- Use {factory_suggestion} for Chicago TDD"
+                                    ),
+                                    code_snippet=line_content,
+                                    severity="ERROR",
+                                )
+                            )
+                elif node.module and "mock" in node.module.lower():
+                    # Catch other mock imports
+                    line_content = (
+                        lines[node.lineno - 1] if node.lineno <= len(lines) else ""
+                    )
+                    factory_suggestion = self._suggest_factory("mock", file_path)
+                    lies.append(
+                        ImplementationLie(
+                            file_path=str(file_path),
+                            line_number=node.lineno,
+                            category=LieCategory.MOCKING_VIOLATION,
+                            pattern=(
+                                f"Mocking violation: import from '{node.module}' "
+                                f"- Use {factory_suggestion} for Chicago TDD"
+                            ),
+                            code_snippet=line_content,
+                            severity="ERROR",
+                        )
+                    )
+
+            # Check for @patch decorator usage
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                for decorator in node.decorator_list:
+                    if isinstance(decorator, ast.Call):
+                        # @patch(...) or @patch.object(...)
+                        if isinstance(decorator.func, ast.Name):
+                            if decorator.func.id == "patch":
+                                line_content = (
+                                    lines[node.lineno - 1]
+                                    if node.lineno <= len(lines)
+                                    else ""
+                                )
+                                factory_suggestion = self._suggest_factory("patch", file_path)
+                                lies.append(
+                                    ImplementationLie(
+                                        file_path=str(file_path),
+                                        line_number=node.lineno,
+                                        category=LieCategory.MOCKING_VIOLATION,
+                                        pattern=(
+                                            f"Mocking violation: @patch decorator on "
+                                            f"'{node.name}' - Use {factory_suggestion} "
+                                            f"for Chicago TDD"
+                                        ),
+                                        code_snippet=line_content,
+                                        severity="ERROR",
+                                    )
+                                )
+                        elif isinstance(decorator.func, ast.Attribute):
+                            if decorator.func.attr == "patch":
+                                line_content = (
+                                    lines[node.lineno - 1]
+                                    if node.lineno <= len(lines)
+                                    else ""
+                                )
+                                lies.append(
+                                    ImplementationLie(
+                                        file_path=str(file_path),
+                                        line_number=node.lineno,
+                                        category=LieCategory.MOCKING_VIOLATION,
+                                        pattern=(
+                                            f"Mocking violation: @patch decorator on "
+                                            f"'{node.name}' - Use factory_boy factories "
+                                            f"for Chicago TDD"
+                                        ),
+                                        code_snippet=line_content,
+                                        severity="ERROR",
+                                    )
+                                )
+
+            # Check for MagicMock(), Mock(), patch() function calls
+            if isinstance(node, ast.Call):
+                if isinstance(node.func, ast.Name):
+                    if node.func.id in ("MagicMock", "Mock", "PropertyMock"):
+                        line_content = (
+                            lines[node.lineno - 1]
+                            if node.lineno <= len(lines)
+                            else ""
+                        )
+                        factory_suggestion = self._suggest_factory(node.func.id, file_path)
+                        lies.append(
+                            ImplementationLie(
+                                file_path=str(file_path),
+                                line_number=node.lineno,
+                                category=LieCategory.MOCKING_VIOLATION,
+                                pattern=(
+                                    f"Mocking violation: {node.func.id}() call - "
+                                    f"Use {factory_suggestion} for Chicago TDD"
+                                ),
+                                code_snippet=line_content,
+                                severity="ERROR",
+                            )
+                        )
+                    elif node.func.id == "patch":
+                        # patch() or patch.object() - check if it's from unittest.mock
+                        # We already check imports, but also check direct usage
+                        line_content = (
+                            lines[node.lineno - 1] if node.lineno <= len(lines) else ""
+                        )
+                        factory_suggestion = self._suggest_factory("patch", file_path)
+                        lies.append(
+                            ImplementationLie(
+                                file_path=str(file_path),
+                                line_number=node.lineno,
+                                category=LieCategory.MOCKING_VIOLATION,
+                                pattern=(
+                                    f"Mocking violation: patch() call - "
+                                    f"Use {factory_suggestion} for Chicago TDD"
+                                ),
+                                code_snippet=line_content,
+                                severity="ERROR",
+                            )
+                        )
+                elif isinstance(node.func, ast.Attribute):
+                    # patch.object(), monkeypatch.setattr(), etc.
+                    if node.func.attr in ("patch", "setattr") and has_mock_import:
+                        # Only flag if we know it's from unittest.mock
+                        line_content = (
+                            lines[node.lineno - 1]
+                            if node.lineno <= len(lines)
+                            else ""
+                        )
+                        if "monkeypatch" not in line_content.lower():
+                            # monkeypatch.setattr is pytest fixture, allow it
+                            # but flag if it's setting a mock object
+                            factory_suggestion = self._suggest_factory(node.func.attr, file_path)
+                            lies.append(
+                                ImplementationLie(
+                                    file_path=str(file_path),
+                                    line_number=node.lineno,
+                                    category=LieCategory.MOCKING_VIOLATION,
+                                    pattern=(
+                                        f"Mocking violation: {node.func.attr}() usage - "
+                                        f"Use {factory_suggestion} for Chicago TDD"
+                                    ),
+                                    code_snippet=line_content,
+                                    severity="ERROR",
+                                )
+                            )
+
+            # Check for Mock* class definitions (custom mock classes)
+            if isinstance(node, ast.ClassDef):
+                if node.name.startswith("Mock") and len(node.name) > 4:
+                    # MockEngine, MockResponse, etc.
+                    line_content = (
+                        lines[node.lineno - 1] if node.lineno <= len(lines) else ""
+                    )
+                    factory_suggestion = self._suggest_factory(node.name, file_path)
+                    lies.append(
+                        ImplementationLie(
+                            file_path=str(file_path),
+                            line_number=node.lineno,
+                            category=LieCategory.MOCKING_VIOLATION,
+                            pattern=(
+                                f"Mocking violation: Custom mock class '{node.name}' - "
+                                f"Use {factory_suggestion} for Chicago TDD"
+                            ),
+                            code_snippet=line_content,
+                            severity="ERROR",
+                        )
+                    )
+
+        return lies
+
+    def _suggest_factory(self, mock_name: str, file_path: Path) -> str:
+        """Suggest appropriate factory_boy factory based on context.
+
+        Parameters
+        ----------
+        mock_name : str
+            Name of the mock being used
+        file_path : Path
+            Path to the test file
+
+        Returns
+        -------
+        str
+            Suggested factory name or generic message
+        """
+        # Check file path for hints about domain
+        file_str = str(file_path).lower()
+
+        # Hook-related factories
+        if "hook" in file_str:
+            if "receipt" in file_str or "receipt" in mock_name.lower():
+                return "HookReceiptFactory() from tests.factories"
+            return "HookFactory() from tests.factories"
+
+        # Condition-related factories
+        if "condition" in file_str:
+            if "result" in mock_name.lower():
+                return "ConditionResultFactory() from tests.factories"
+            return "ConditionFactory() from tests.factories"
+
+        # YAWL-related factories
+        if "yawl" in file_str or "y_" in file_str:
+            if "case" in mock_name.lower() or "Case" in mock_name:
+                return "YCaseFactory() from tests.factories"
+            if "work" in mock_name.lower() or "WorkItem" in mock_name:
+                return "YWorkItemFactory() from tests.factories"
+            if "task" in mock_name.lower() or "Task" in mock_name:
+                return "YTaskFactory() from tests.factories"
+            if "spec" in mock_name.lower() or "Specification" in mock_name:
+                return "YSpecificationFactory() from tests.factories"
+
+        # Receipt-related factories
+        if "receipt" in file_str:
+            if "anchor" in mock_name.lower():
+                return "ChainAnchorFactory() from tests.factories"
+            return "ReceiptFactory() from tests.factories"
+
+        # Generic suggestion
+        return "factory_boy factories from tests.factories (see docs/how-to/migrate-from-mocks-to-factories.md)"
+
     def detect_in_directory(self, directory: Path, exclude_patterns: list[str] | None = None) -> DetectionResult:
         """Detect lies in all Python files in directory."""
         result = DetectionResult()
@@ -667,7 +928,8 @@ def main() -> int:
             print("  • No meaningless test assertions (assert True)")
             print("  • No empty classes or speculative scaffolding")
             print("  • No temporal deferral phrases ('later', 'for now', 'temporary')")
-            print("\nChicago School TDD requires COMPLETE implementations.")
+            print("  • No mocking of domain objects (use factory_boy factories)")
+            print("\nChicago School TDD requires COMPLETE implementations and REAL objects.")
             print("Fix all issues before committing.")
             return 1
     else:

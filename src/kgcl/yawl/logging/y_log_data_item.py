@@ -269,3 +269,5 @@ class YLogDataItem:
             self.descriptor = JDOMUtil.decode_escapes(element.findtext("descriptor") or "")
             self.data_type_name = JDOMUtil.decode_escapes(element.findtext("datatype") or "")
             self.data_type_definition = JDOMUtil.decode_escapes(element.findtext("datatypedefinition") or "")
+
+

@@ -56,3 +56,5 @@ Create a table in `reports/concept-selection/<decision>.md`:
 - `/triz-problem-solving` when contradictions remain.
 
 
+
+

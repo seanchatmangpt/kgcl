@@ -12,7 +12,7 @@ Examples
 from __future__ import annotations
 
 import factory_boy
-from datetime import UTC, datetime, timezone
+from datetime import UTC, datetime
 
 from kgcl.hybrid.knowledge_hooks import HookAction, HookPhase, HookReceipt, KnowledgeHook
 

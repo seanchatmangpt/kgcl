@@ -16,9 +16,6 @@ from kgcl.yawl.elements.y_condition import YCondition
 from kgcl.yawl.elements.y_external_net_element import YExternalNetElement
 from kgcl.yawl.elements.y_task import YTask
 
-# Type alias: YCompositeTask is YTask with decomposition
-YCompositeTask = YTask
-
 if TYPE_CHECKING:
     from kgcl.yawl.elements.y_flow import YFlow
     from kgcl.yawl.elements.y_net import YNet

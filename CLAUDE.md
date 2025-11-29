@@ -139,6 +139,244 @@ scripts/     # Utilities
 
 **Test Skipping:** `@pytest.mark.xfail`/`skipif` forbidden. If test needs dependency, install it. Only acceptable: platform-specific skips.
 
+## 🚨 Implementation Lies Detection - Prevent Writing Lies
+
+**CRITICAL:** The lies detector runs automatically on every commit, push, and pytest run. It **BLOCKS** commits/pushes/tests if any lies are detected. Write complete code from the start.
+
+### What Are Implementation Lies?
+
+Implementation lies are patterns that make code **appear complete** while actually **deferring work** or using **fake implementations**. They violate Chicago School TDD and Lean Six Sigma zero-defect standards.
+
+### 8 Categories of Lies (ALL BLOCKED)
+
+#### 1. DEFERRED_WORK - Deferred Work Comments
+**❌ FORBIDDEN:**
+```python
+# TODO: implement later
+# FIXME: known bug
+# XXX: hack/workaround
+# HACK: technical debt
+# WIP: incomplete work
+# STUB: placeholder
+# noqa  # Blanket suppression
+# type: ignore  # Blanket type suppression
+```
+
+**✅ CORRECT:** Complete the work immediately. If you need to document future work, use proper issue tracking, not code comments.
+
+#### 2. STUB_PATTERNS - Stub Implementations
+**❌ FORBIDDEN:**
+```python
+def calculate(x: int) -> int:
+    pass  # Stub
+
+def process(data: dict) -> dict:
+    ...  # Ellipsis stub
+
+def validate(value: str) -> bool:
+    raise NotImplementedError("Not implemented yet")
+```
+
+**✅ CORRECT:** Write the actual implementation:
+```python
+def calculate(x: int) -> int:
+    """Calculate result."""
+    return x * 2
+
+def process(data: dict) -> dict:
+    """Process data."""
+    return {k: v * 2 for k, v in data.items()}
+
+def validate(value: str) -> bool:
+    """Validate value."""
+    return len(value) > 0 and value.isalnum()
+```
+
+#### 3. PLACEHOLDER_RETURNS - Empty Returns Without Logic
+**❌ FORBIDDEN:**
+```python
+def get_config() -> dict:
+    return {}  # No logic, just empty dict
+
+def find_user(id: str) -> User | None:
+    return None  # No lookup logic
+
+def process_items(items: list) -> list:
+    return []  # No processing
+```
+
+**✅ CORRECT:** Implement the actual logic:
+```python
+def get_config() -> dict:
+    """Load configuration."""
+    config_path = Path("config.yaml")
+    if config_path.exists():
+        return yaml.safe_load(config_path.read_text())
+    return {"default": True}
+
+def find_user(id: str) -> User | None:
+    """Find user by ID."""
+    return db.session.query(User).filter(User.id == id).first()
+```
+
+#### 4. MOCK_ASSERTIONS - Meaningless Test Assertions
+**❌ FORBIDDEN:**
+```python
+def test_something():
+    result = do_work()
+    assert True  # Meaningless
+    assert result  # Too vague
+```
+
+**✅ CORRECT:** Assert on specific behavior:
+```python
+def test_calculate_doubles_value():
+    """Calculate doubles the input value."""
+    result = calculate(5)
+    assert result == 10
+    assert isinstance(result, int)
+```
+
+#### 5. INCOMPLETE_TESTS - Tests Without Assertions
+**❌ FORBIDDEN:**
+```python
+def test_process_data():
+    data = {"key": "value"}
+    process(data)  # No assertions!
+
+def test_validate():
+    validate("test")  # No check of result
+```
+
+**✅ CORRECT:** Every test must verify behavior:
+```python
+def test_process_data_doubles_values():
+    """Process doubles all values."""
+    data = {"a": 1, "b": 2}
+    result = process(data)
+    assert result == {"a": 2, "b": 4}
+
+def test_validate_rejects_empty():
+    """Validate rejects empty strings."""
+    assert validate("") is False
+    assert validate("abc123") is True
+```
+
+#### 6. SPECULATIVE_SCAFFOLDING - Empty Classes/Unused Code
+**❌ FORBIDDEN:**
+```python
+class UserService:
+    pass  # Empty class
+
+class DataProcessor:
+    """Will implement later."""
+    pass
+
+import json  # Unused import
+from typing import List, Dict  # Dict unused
+```
+
+**✅ CORRECT:** Only create classes when you implement them:
+```python
+class UserService:
+    """Service for user operations."""
+    
+    def __init__(self, db: Database) -> None:
+        self.db = db
+    
+    def get_user(self, id: str) -> User | None:
+        """Get user by ID."""
+        return self.db.query(User).filter(User.id == id).first()
+```
+
+#### 7. TEMPORAL_DEFERRAL - "Later", "For Now", "Temporary"
+**❌ FORBIDDEN:**
+```python
+# Do later
+# Fix later
+# Implement later
+# For now, just return None
+# Quick fix - needs proper solution
+# Temporary workaround
+# Skip for now
+# Needs more work
+# To be done
+# Incomplete implementation
+# Need to refactor
+# Should refactor
+```
+
+**✅ CORRECT:** Complete the work immediately. If it's truly temporary, use proper issue tracking and document the migration path.
+
+#### 8. MOCKING_VIOLATION - Mocking Domain Objects (Chicago TDD Violation)
+**❌ FORBIDDEN:**
+```python
+from unittest.mock import MagicMock, Mock, patch
+
+def test_hook_execution():
+    hook = MagicMock()  # Mocking domain object!
+    hook.name = "test"
+    # ...
+
+@patch("kgcl.hooks.core.Hook")
+def test_with_patch(mock_hook):
+    # Mocking domain object!
+
+class MockHook:  # Custom mock class
+    def __init__(self):
+        self.name = "test"
+```
+
+**✅ CORRECT:** Use factory_boy factories for real domain objects:
+```python
+from tests.factories.hooks import HookFactory, HookReceiptFactory
+
+def test_hook_execution():
+    """Hook execution creates receipt with correct metadata."""
+    hook = HookFactory()  # Real domain object
+    context = HookContextFactory()
+    
+    receipt = execute_hook(hook, context)
+    
+    assert receipt.hook_id == hook.hook_id
+    assert receipt.status == HookStatus.SUCCESS
+    assert receipt.duration_ms > 0
+```
+
+**Factory_boy Factories Available:**
+- `HookFactory`, `HookReceiptFactory` (from `tests.factories.hooks`)
+- `ConditionFactory`, `ConditionResultFactory` (from `tests.factories.conditions`)
+- `YCaseFactory`, `YWorkItemFactory`, `YTaskFactory`, `YSpecificationFactory` (from `tests.factories.yawl`)
+- `ReceiptFactory`, `ChainAnchorFactory` (from `tests.factories.receipts`)
+
+See `docs/how-to/migrate-from-mocks-to-factories.md` for migration guide.
+
+### Enforcement Mechanism
+
+**Automatic Detection:**
+- **Pre-commit hook:** Fast scan (<10s) - blocks commits with lies
+- **Pre-push hook:** Full scan (30-120s) - blocks pushes with lies
+- **Pytest integration:** Mandatory scan before tests run - blocks test execution if lies detected
+
+**No Bypass Available:** Detection is mandatory. Fix all lies before committing/pushing/running tests.
+
+**Manual Check:**
+```bash
+uv run python scripts/detect_implementation_lies.py tests/ src/
+uv run python scripts/detect_implementation_lies.py --staged  # Check staged files
+```
+
+### How to Avoid Writing Lies
+
+1. **Write complete implementations immediately** - Don't defer work
+2. **Use factory_boy for test data** - Never mock domain objects
+3. **Every test must assert behavior** - No empty tests
+4. **Remove unused imports/code** - No speculative scaffolding
+5. **Complete functions fully** - No `pass`, `...`, or `NotImplementedError`
+6. **Use proper issue tracking** - Not code comments for future work
+
+**Remember:** The detector runs automatically. Write it right the first time.
+
 **Poe Tasks:** Never run scripts directly - create `poe` tasks in `pyproject.toml` for standardization, consistency, and traceability.
 
 **Common Mistakes:** Use `uv run poe <task>` not direct commands, absolute imports not relative, proof scripts not code reading, fix issues not `--no-verify`, complete implementation not TODOs.

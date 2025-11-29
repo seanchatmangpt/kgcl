@@ -448,9 +448,9 @@ class ConditionEvaluator:
         """
         # SHACL validation not implemented - raise clear error
         raise NotImplementedError(
-            f"SHACL validation (condition '{condition.id}') requires pyshacl integration. "
-            "Install pyshacl and configure the SHACL adapter to use this condition type. "
-            "See: https://github.com/RDFLib/pySHACL"
+            f"SHACL validation (kind={condition.kind.value}, expr='{condition.expression[:50]}...') "
+            "requires pyshacl integration. Install pyshacl and configure the SHACL adapter "
+            "to use this condition type. See: https://github.com/RDFLib/pySHACL"
         )
 
     def _eval_n3_rule(self, condition: Condition, store: ox.Store | None) -> ConditionResult:
@@ -474,9 +474,9 @@ class ConditionEvaluator:
         """
         # N3/EYE evaluation not implemented - raise clear error
         raise NotImplementedError(
-            f"N3 rule evaluation (condition '{condition.id}') requires EYE reasoner integration. "
-            "Install eye-reasoner and configure the N3 adapter to use this condition type. "
-            "See: https://github.com/eyereasoner/eye"
+            f"N3 rule evaluation (kind={condition.kind.value}, expr='{condition.expression[:50]}...') "
+            "requires EYE reasoner integration. Install eye-reasoner and configure the N3 adapter "
+            "to use this condition type. See: https://github.com/eyereasoner/eye"
         )
 
     def reset_state(self) -> None:

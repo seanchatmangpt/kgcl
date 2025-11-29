@@ -5,12 +5,16 @@ Python modules (dataclass/pydantic/plain), and more. Provides batch processing,
 caching, and performance instrumentation.
 """
 
-import argparse
-import sys
+from __future__ import annotations
+
 from pathlib import Path
-from typing import Any
+from typing import Annotated
+
+import typer
 
 from kgcl.codegen.orchestrator import CodeGenOrchestrator, GenerationConfig, OutputFormat
+
+codegen = typer.Typer(help="Code generation from RDF ontologies", no_args_is_help=True)
 
 
 def collect_input_files(paths: list[str | Path]) -> list[Path]:
@@ -51,171 +55,113 @@ def collect_input_files(paths: list[str | Path]) -> list[Path]:
     return collected
 
 
-def main(args: list[str] | None = None) -> int:
-    """CLI entry point for unified code generation.
+@codegen.command()
+def generate(
+    input_files: Annotated[list[str], typer.Argument(help="TTL/RDF/OWL input files or directories")],
+    output: Annotated[Path | None, typer.Argument(help="Output file/directory path")] = None,
+    format: Annotated[str, typer.Option("--format", "-f", help="Output format")] = "dspy",
+    template_dir: Annotated[
+        Path | None, typer.Option("--template-dir", help="Custom template directory (optional for some formats)")
+    ] = None,
+    dry_run: Annotated[bool, typer.Option("--dry-run", help="Don't write output files, just validate")] = False,
+    cache_size: Annotated[int, typer.Option("--cache-size", help="Graph cache size for DSPy")] = 100,
+    max_workers: Annotated[int, typer.Option("--max-workers", help="Maximum parallel workers for DSPy")] = 4,
+    dspy_model: Annotated[str | None, typer.Option("--dspy-model", help="DSPy model to configure")] = None,
+    dspy_api_base: Annotated[str | None, typer.Option("--dspy-api-base", help="DSPy API base URL")] = None,
+    verbose: Annotated[bool, typer.Option("--verbose", "-v", help="Enable verbose output with metrics")] = False,
+) -> None:
+    """Generate code from RDF ontologies in multiple formats.
 
-    Parameters
-    ----------
-    args : list[str] | None, default=None
-        Command-line arguments (defaults to sys.argv)
-
-    Returns
-    -------
-    int
-        Exit code (0 for success, non-zero for errors)
+    Supported formats: dspy, yawl, python-dataclass, python-pydantic, python-plain
 
     Examples
     --------
-    >>> main(["ontology.ttl", "-o", "output.py", "--format", "dspy"])  # doctest: +SKIP
-    0
+    $ kgcl codegen generate ontology.ttl output.py --format dspy
+    $ kgcl codegen generate schema/ generated/ --format python-dataclass
     """
-    parser = argparse.ArgumentParser(
-        description="Generate code from RDF ontologies in multiple formats",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-    )
-
-    parser.add_argument("input_files", nargs="*", type=str, help="TTL/RDF/OWL input files or directories")
-
-    parser.add_argument(
-        "output",
-        nargs="?",
-        type=Path,
-        default=None,
-        help="Output file/directory path (default: auto-generated based on format)",
-    )
-
-    parser.add_argument(
-        "--format",
-        "-f",
-        type=str,
-        default="dspy",
-        choices=["dspy", "yawl", "python-dataclass", "python-pydantic", "python-plain"],
-        help="Output format (default: dspy)",
-    )
-
-    parser.add_argument(
-        "--template-dir", type=Path, default=None, help="Custom template directory (optional for some formats)"
-    )
-
-    parser.add_argument("--dry-run", action="store_true", help="Don't write output files, just validate")
-
-    parser.add_argument("--cache-size", type=int, default=100, help="Graph cache size for DSPy (default: 100)")
-
-    parser.add_argument("--max-workers", type=int, default=4, help="Maximum parallel workers for DSPy (default: 4)")
-
-    parser.add_argument(
-        "--dspy-model",
-        type=str,
-        default=None,
-        help="DSPy model to configure (default: ollama/granite4 from env or config)",
-    )
-
-    parser.add_argument(
-        "--dspy-api-base",
-        type=str,
-        default=None,
-        help="DSPy API base URL (default: http://localhost:11434 from env or config)",
-    )
-
-    parser.add_argument("--verbose", "-v", action="store_true", help="Enable verbose output with metrics")
-
-    parser.add_argument("--list-formats", action="store_true", help="List supported output formats and exit")
-
-    parsed_args = parser.parse_args(args)
-
-    # List formats if requested
-    if parsed_args.list_formats:
-        orchestrator = CodeGenOrchestrator()
-        print("Supported output formats:")
-        for fmt in orchestrator.list_formats():
-            info = orchestrator.get_format_info(fmt)
-            print(f"  {fmt:20s} - {info.get('description', 'No description')}")
-        return 0
-
-    # Validate input files provided
-    if not parsed_args.input_files:
-        parser.error("the following arguments are required: input_files")
-
-    # Handle positional output argument
-    input_paths = parsed_args.input_files
-    output_path = parsed_args.output
-
-    # Check if last input argument is actually the output file
-    if len(input_paths) >= 2 and output_path is None:
-        last_arg = Path(input_paths[-1])
-        # If last arg doesn't exist or isn't a recognized ontology extension
-        if not last_arg.exists() or last_arg.suffix.lower() not in {".ttl", ".rdf", ".owl", ".n3", ".turtle"}:
-            output_path = last_arg
-            input_paths = input_paths[:-1]
+    # Validate format
+    valid_formats = ["dspy", "yawl", "python-dataclass", "python-pydantic", "python-plain"]
+    if format not in valid_formats:
+        typer.echo(f"Error: Invalid format '{format}'. Must be one of: {', '.join(valid_formats)}", err=True)
+        raise typer.Exit(code=1)
 
     # Collect input files
-    input_files = collect_input_files(input_paths)
+    input_paths = collect_input_files(input_files)
 
-    if not input_files:
-        print("Error: No TTL/RDF/OWL files found in specified paths", file=sys.stderr)
-        return 2
+    if not input_paths:
+        typer.echo("Error: No TTL/RDF/OWL files found in specified paths", err=True)
+        raise typer.Exit(code=2)
 
     # Determine output directory
-    if output_path is None:
+    if output is None:
         # Auto-generate based on format
-        output_dir = Path("generated") / parsed_args.format
-    elif output_path.is_dir() or (not output_path.exists() and not output_path.suffix):
+        output_dir = Path("generated") / format
+        output_path = None
+    elif output.is_dir() or (not output.exists() and not output.suffix):
         # Output is a directory
-        output_dir = output_path
+        output_dir = output
         output_path = None  # Let generator decide filename
     else:
         # Output is a file
-        output_dir = output_path.parent
-        # Keep output_path for single file generation
+        output_dir = output.parent
+        output_path = output
 
-    if parsed_args.verbose:
-        print(f"Processing {len(input_files)} ontology files...")
-        print(f"Output format: {parsed_args.format}")
-        print(f"Output directory: {output_dir}")
+    if verbose:
+        typer.echo(f"Processing {len(input_paths)} ontology files...")
+        typer.echo(f"Output format: {format}")
+        typer.echo(f"Output directory: {output_dir}")
 
     # Create orchestrator and configuration
     orchestrator = CodeGenOrchestrator()
 
     config = GenerationConfig(
-        format=OutputFormat(parsed_args.format),
+        format=OutputFormat(format),
         output_dir=output_dir,
-        template_dir=parsed_args.template_dir,
-        dry_run=parsed_args.dry_run,
-        cache_size=parsed_args.cache_size,
-        max_workers=parsed_args.max_workers,
-        dspy_model=parsed_args.dspy_model,
-        dspy_api_base=parsed_args.dspy_api_base,
+        template_dir=template_dir,
+        dry_run=dry_run,
+        cache_size=cache_size,
+        max_workers=max_workers,
+        dspy_model=dspy_model,
+        dspy_api_base=dspy_api_base,
     )
 
     # Generate code
     try:
-        if len(input_files) == 1 and output_path:
+        if len(input_paths) == 1 and output_path:
             # Single file with explicit output path
-            result = orchestrator.generate(input_files[0], config, output_path=output_path)
+            result = orchestrator.generate(input_paths[0], config, output_path=output_path)
             results = [result]
         else:
             # Multiple files or auto-generated paths
-            results = orchestrator.generate_multiple(input_files, config)
+            results = orchestrator.generate_multiple(input_paths, config)
 
-        if parsed_args.verbose:
-            print(f"\nSuccessfully generated {len(results)} output file(s):")
+        if verbose:
+            typer.echo(f"\nSuccessfully generated {len(results)} output file(s):")
             for result in results:
-                print(f"  {result.output_path}")
+                typer.echo(f"  {result.output_path}")
                 if "signatures_generated" in result.metadata:
-                    print(f"    - Signatures: {result.metadata['signatures_generated']}")
+                    typer.echo(f"    - Signatures: {result.metadata['signatures_generated']}")
                 if "processing_time_ms" in result.metadata:
-                    print(f"    - Processing time: {result.metadata['processing_time_ms']:.1f}ms")
+                    typer.echo(f"    - Processing time: {result.metadata['processing_time_ms']:.1f}ms")
 
     except Exception as e:
-        print(f"Error during generation: {e}", file=sys.stderr)
-        if parsed_args.verbose:
+        typer.echo(f"Error during generation: {e}", err=True)
+        if verbose:
             import traceback
 
             traceback.print_exc()
-        return 1
+        raise typer.Exit(code=1)
 
-    return 0
+
+@codegen.command("list-formats")
+def list_formats() -> None:
+    """List supported output formats."""
+    orchestrator = CodeGenOrchestrator()
+    typer.echo("Supported output formats:")
+    for fmt in orchestrator.list_formats():
+        info = orchestrator.get_format_info(fmt)
+        typer.echo(f"  {fmt:20s} - {info.get('description', 'No description')}")
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    codegen()

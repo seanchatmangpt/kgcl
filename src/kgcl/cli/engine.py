@@ -5,46 +5,37 @@ kgcl engine <verb> - HybridEngine operations.
 
 from __future__ import annotations
 
+import subprocess
 import sys
 from pathlib import Path
+from typing import Annotated
 
-import click
+import typer
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 
 console = Console()
-
-
-@click.group()
-def engine() -> None:
-    """HybridEngine operations.
-
-    \b
-    Commands:
-      run     Run physics to convergence
-      tick    Execute single physics tick
-      status  Show engine status
-    """
+engine = typer.Typer(help="HybridEngine operations", no_args_is_help=True)
 
 
 @engine.command()
-@click.argument("topology", type=click.Path(exists=True))
-@click.option("--max-ticks", "-t", default=100, help="Maximum ticks to run")
-@click.option("--verbose", "-v", is_flag=True, help="Verbose output")
-def run(topology: str, max_ticks: int, verbose: bool) -> None:
+def run(
+    topology: Annotated[Path, typer.Argument(exists=True, help="Topology file to load")],
+    max_ticks: Annotated[int, typer.Option("--max-ticks", "-t", help="Maximum ticks to run")] = 100,
+    verbose: Annotated[bool, typer.Option("--verbose", "-v", help="Verbose output")] = False,
+) -> None:
     """Run physics to convergence.
 
     Load topology and apply N3 physics rules until fixed point.
     """
     from kgcl.hybrid import HybridEngine
 
-    path = Path(topology)
-    console.print(f"[bold blue]Loading:[/] {path.name}")
+    console.print(f"[bold blue]Loading:[/] {topology.name}")
 
     try:
         eng = HybridEngine()
-        eng.load_data(path.read_text())
+        eng.load_data(topology.read_text())
 
         console.print(f"[green]Loaded {len(list(eng.store))} triples[/]")
         console.print(f"[bold]Running physics (max {max_ticks} ticks)...[/]")
@@ -75,24 +66,22 @@ def run(topology: str, max_ticks: int, verbose: bool) -> None:
     except FileNotFoundError as e:
         console.print(f"[bold red]Error:[/] {e}")
         console.print("[yellow]Hint: Install EYE reasoner from https://github.com/eyereasoner/eye[/]")
-        sys.exit(1)
+        raise typer.Exit(code=1)
     except RuntimeError as e:
         console.print(f"[bold red]Error:[/] {e}")
-        sys.exit(1)
+        raise typer.Exit(code=1)
 
 
 @engine.command()
-@click.argument("topology", type=click.Path(exists=True))
-def tick(topology: str) -> None:
+def tick(topology: Annotated[Path, typer.Argument(exists=True, help="Topology file to load")]) -> None:
     """Execute single physics tick.
 
     Apply one round of N3 reasoning and show delta.
     """
     from kgcl.hybrid import HybridEngine
 
-    path = Path(topology)
     eng = HybridEngine()
-    eng.load_data(path.read_text())
+    eng.load_data(topology.read_text())
 
     console.print(f"[bold blue]Loaded:[/] {len(list(eng.store))} triples")
 
@@ -102,14 +91,12 @@ def tick(topology: str) -> None:
         console.print(f"Converged: {'Yes' if result.converged else 'No'}")
     except FileNotFoundError:
         console.print("[bold red]Error:[/] EYE reasoner not installed")
-        sys.exit(1)
+        raise typer.Exit(code=1)
 
 
 @engine.command()
 def status() -> None:
     """Show engine status and components."""
-    import subprocess
-
     from kgcl.hybrid import HybridEngine
 
     console.print(Panel.fit("[bold]Engine Status[/]", border_style="blue"))

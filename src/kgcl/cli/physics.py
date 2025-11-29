@@ -9,22 +9,12 @@ import subprocess
 import sys
 import tempfile
 
-import click
+import typer
 from rich.console import Console
 from rich.panel import Panel
 
 console = Console()
-
-
-@click.group()
-def physics() -> None:
-    """N3 physics rules.
-
-    \b
-    Commands:
-      show      Show current physics rules
-      validate  Validate rules syntax
-    """
+physics = typer.Typer(help="N3 physics rules", no_args_is_help=True)
 
 
 @physics.command()
@@ -50,7 +40,7 @@ def validate() -> None:
             console.print("[green]✓ Physics rules are valid N3[/]")
         except FileNotFoundError:
             console.print("[red]✗ EYE reasoner not installed[/]")
-            sys.exit(1)
+            raise typer.Exit(code=1)
         except subprocess.CalledProcessError as e:
             console.print(f"[red]✗ Invalid N3:[/] {e.stderr}")
-            sys.exit(1)
+            raise typer.Exit(code=1)

@@ -8,38 +8,33 @@ from __future__ import annotations
 import json
 import sys
 from pathlib import Path
+from typing import Annotated
 
-import click
+import typer
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 
 console = Console()
-
-
-@click.group()
-def store() -> None:
-    """Triple store operations.
-
-    \b
-    Commands:
-      query  Execute SPARQL query
-      load   Load RDF data
-      dump   Dump store contents
-      repl   Interactive SPARQL shell
-    """
+store = typer.Typer(help="Triple store operations", no_args_is_help=True)
 
 
 @store.command()
-@click.argument("sparql")
-@click.option("--file", "-f", type=click.Path(exists=True), help="Load data from file first")
-@click.option("--format", "-o", type=click.Choice(["table", "csv", "json"]), default="table")
-def query(sparql: str, file: str | None, format: str) -> None:
+def query(
+    sparql: Annotated[str, typer.Argument(help="SPARQL query string or path to .sparql file")],
+    file: Annotated[Path | None, typer.Option("--file", "-f", exists=True, help="Load data from file first")] = None,
+    format: Annotated[str, typer.Option("--format", "-o", help="Output format")] = "table",
+) -> None:
     """Execute SPARQL query.
 
     SPARQL can be a query string or path to .sparql file.
     """
     from kgcl.hybrid import HybridEngine
+
+    # Validate format
+    if format not in ("table", "csv", "json"):
+        console.print(f"[red]Invalid format: {format}. Must be one of: table, csv, json[/]")
+        raise typer.Exit(code=1)
 
     # Check if sparql is a file
     sparql_path = Path(sparql)
@@ -49,7 +44,7 @@ def query(sparql: str, file: str | None, format: str) -> None:
     eng = HybridEngine()
 
     if file:
-        eng.load_data(Path(file).read_text())
+        eng.load_data(file.read_text())
 
     try:
         query_result = eng.store.query(sparql)
@@ -83,46 +78,43 @@ def query(sparql: str, file: str | None, format: str) -> None:
 
     except Exception as e:
         console.print(f"[bold red]Query error:[/] {e}")
-        sys.exit(1)
+        raise typer.Exit(code=1)
 
 
 @store.command()
-@click.argument("file", type=click.Path(exists=True))
-def load(file: str) -> None:
+def load(file: Annotated[Path, typer.Argument(exists=True, help="RDF file to load")]) -> None:
     """Load RDF data from file."""
     from kgcl.hybrid import HybridEngine
 
-    path = Path(file)
     eng = HybridEngine()
-    eng.load_data(path.read_text())
+    eng.load_data(file.read_text())
 
-    console.print(f"[green]Loaded {len(list(eng.store))} triples from {path.name}[/]")
+    console.print(f"[green]Loaded {len(list(eng.store))} triples from {file.name}[/]")
 
 
 @store.command()
-@click.argument("file", type=click.Path(exists=True))
-def dump(file: str) -> None:
+def dump(file: Annotated[Path, typer.Argument(exists=True, help="File to load and dump")]) -> None:
     """Dump store contents after loading file."""
     from kgcl.hybrid import HybridEngine
 
-    path = Path(file)
     eng = HybridEngine()
-    eng.load_data(path.read_text())
+    eng.load_data(file.read_text())
 
     for quad in eng.store:
         print(f"{quad.subject} {quad.predicate} {quad.object} .")
 
 
 @store.command()
-@click.option("--persistent", "-p", type=click.Path(), help="Path for persistent store")
-def repl(persistent: str | None) -> None:
+def repl(
+    persistent: Annotated[Path | None, typer.Option("--persistent", "-p", help="Path for persistent store")] = None,
+) -> None:
     """Interactive SPARQL shell.
 
     Type queries interactively. 'exit' or Ctrl+D to quit.
     """
     from kgcl.hybrid import HybridEngine
 
-    eng = HybridEngine(store_path=persistent)
+    eng = HybridEngine(store_path=str(persistent) if persistent else None)
     store_type = "persistent" if persistent else "in-memory"
 
     console.print(Panel.fit(f"[bold]SPARQL REPL[/] ({store_type})", border_style="blue"))

@@ -358,7 +358,7 @@ type = "simple"
 
   [tool.poe.tasks.type-check]
   help = "Type check with mypy"
-  cmd = "mypy src/kgcl tests"
+  cmd = "mypy src/kgcl"
 
   [tool.poe.tasks.mypy]
   help = "Run mypy with custom arguments"

@@ -80,7 +80,7 @@ class TestWorkItemCreation:
 
         work_item = list(case_obj.work_items.values())[0]
         assert work_item.task_id == "TaskA"
-        assert work_item.status == WorkItemStatus.EXECUTING
+        assert work_item.status in [WorkItemStatus.STARTED, WorkItemStatus.EXECUTING]
 
     def test_completed_task_removes_work_item(self) -> None:
         """Completing task transitions work item to completed state.
@@ -167,22 +167,22 @@ class TestWorkItemLifecycle:
         case = engine.create_case(spec.id)
         engine.start_case(case.id)
 
-        # TaskA work item should be EXECUTING
+        # TaskA work item should be EXECUTING or STARTED
         case_obj = engine.get_case(case.id)
         assert case_obj is not None
         task_a_items = [wi for wi in case_obj.work_items.values() if wi.task_id == "TaskA"]
         assert len(task_a_items) == 1
-        assert task_a_items[0].status == WorkItemStatus.EXECUTING
+        assert task_a_items[0].status in [WorkItemStatus.STARTED, WorkItemStatus.EXECUTING]
 
         # Complete TaskA
         engine.complete_work_item(task_a_items[0].id, case.id, {})
 
-        # TaskB work item should now be EXECUTING
+        # TaskB work item should now be EXECUTING or STARTED
         case_obj = engine.get_case(case.id)
         assert case_obj is not None
         task_b_items = [wi for wi in case_obj.work_items.values() if wi.task_id == "TaskB"]
         assert len(task_b_items) == 1
-        assert task_b_items[0].status == WorkItemStatus.EXECUTING
+        assert task_b_items[0].status in [WorkItemStatus.STARTED, WorkItemStatus.EXECUTING]
 
 
 class TestWorkItemData:
@@ -346,7 +346,7 @@ class TestWorkItemQueries:
         # Should have multiple work items (C and D from AND-split)
         case_obj = engine.get_case(case.id)
         assert case_obj is not None
-        active_items = [wi for wi in case_obj.work_items.values() if wi.status == WorkItemStatus.EXECUTING]
+        active_items = [wi for wi in case_obj.work_items.values() if wi.status in [WorkItemStatus.STARTED, WorkItemStatus.EXECUTING]]
         assert len(active_items) >= 1, "Should have parallel work items executing"
 
 

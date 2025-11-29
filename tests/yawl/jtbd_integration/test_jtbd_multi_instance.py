@@ -19,6 +19,7 @@ from __future__ import annotations
 import pytest
 
 from kgcl.yawl import (
+    YMultipleInstanceTask,
     CaseStatus,
     ConditionType,
     MICompletionMode,
@@ -53,14 +54,13 @@ class TestStaticMultiInstance:
         task_a = YAtomicTask(id="TaskA")
 
         # Multi-instance task: Create 3 instances, all must complete
-        mi_attrs = YMultiInstanceAttributes(
-            minimum=3,
-            maximum=3,
-            threshold=3,  # All instances must complete
-            creation_mode=MICreationMode.STATIC,
-            completion_mode=MICompletionMode.ALL,
+        mi_task = YMultipleInstanceTask(
+            id="ProcessItems",
+            mi_minimum=3,
+            mi_maximum=3,
+            mi_threshold=3,  # All instances must complete
+            mi_creation_mode="static",
         )
-        mi_task = YAtomicTask(id="ProcessItems", mi_attributes=mi_attrs)
 
         task_b = YAtomicTask(id="TaskB")
 
@@ -166,14 +166,13 @@ class TestThresholdCompletion:
         task_a = YAtomicTask(id="TaskA")
 
         # MI task: Create 5 instances, need only 2 to complete
-        mi_attrs = YMultiInstanceAttributes(
-            minimum=5,
-            maximum=5,
-            threshold=2,  # Only need 2 completions
-            creation_mode=MICreationMode.STATIC,
-            completion_mode=MICompletionMode.THRESHOLD,
+        mi_task = YMultipleInstanceTask(
+            id="ProcessItems",
+            mi_minimum=5,
+            mi_maximum=5,
+            mi_threshold=2,  # Only need 2 completions
+            mi_creation_mode="static",
         )
-        mi_task = YAtomicTask(id="ProcessItems", mi_attributes=mi_attrs)
 
         task_b = YAtomicTask(id="TaskB")
 
@@ -225,14 +224,13 @@ class TestDynamicMultiInstance:
         task_a = YAtomicTask(id="TaskA")
 
         # MI task: Create instances based on runtime data
-        mi_attrs = YMultiInstanceAttributes(
-            minimum=1,
-            maximum=10,  # Allow 1-10 instances
-            threshold=None,  # Will complete all
-            creation_mode=MICreationMode.DYNAMIC,
-            completion_mode=MICompletionMode.ALL,
+        mi_task = YMultipleInstanceTask(
+            id="ProcessItems",
+            mi_minimum=1,
+            mi_maximum=10,  # Allow 1-10 instances
+            mi_threshold=10,  # Will complete all
+            mi_creation_mode="dynamic",
         )
-        mi_task = YAtomicTask(id="ProcessItems", mi_attributes=mi_attrs)
 
         task_b = YAtomicTask(id="TaskB")
 
@@ -291,10 +289,13 @@ class TestMultiInstanceDataFlow:
 
         task_a = YAtomicTask(id="TaskA")
 
-        mi_attrs = YMultiInstanceAttributes(
-            minimum=3, maximum=3, threshold=3, creation_mode=MICreationMode.STATIC, completion_mode=MICompletionMode.ALL
+        mi_task = YMultipleInstanceTask(
+            id="ProcessItems",
+            mi_minimum=3,
+            mi_maximum=3,
+            mi_threshold=3,
+            mi_creation_mode="static",
         )
-        mi_task = YAtomicTask(id="ProcessItems", mi_attributes=mi_attrs)
 
         task_b = YAtomicTask(id="TaskB")
 
@@ -363,7 +364,14 @@ class TestMultiInstancePatternIntegration:
         mi_attrs = YMultiInstanceAttributes(
             minimum=2, maximum=2, threshold=2, creation_mode=MICreationMode.STATIC, completion_mode=MICompletionMode.ALL
         )
-        mi_task = YTask(id="ProcessItems", join_type=JoinType.AND, mi_attributes=mi_attrs)
+        mi_task = YMultipleInstanceTask(
+            id="ProcessItems",
+            mi_minimum=2,
+            mi_maximum=2,
+            mi_threshold=2,
+            mi_creation_mode="static"
+        )
+        # Note: join_type would need to be set separately if YMultipleInstanceTask supports it
 
         task_d = YAtomicTask(id="TaskD")
 

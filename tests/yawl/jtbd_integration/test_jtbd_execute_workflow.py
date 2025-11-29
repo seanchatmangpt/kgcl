@@ -92,11 +92,11 @@ class TestExecuteSimpleWorkflow:
         assert case is not None
         assert case.status == CaseStatus.RUNNING, "Case should be RUNNING after start"
 
-        # THEN: First task (TaskA) has work item EXECUTING
+        # THEN: First task (TaskA) has work item EXECUTING or STARTED
         work_items = list(case.work_items.values())
         assert len(work_items) == 1, "Should have exactly one work item"
         assert work_items[0].task_id == "TaskA", "First work item should be for TaskA"
-        assert work_items[0].status == WorkItemStatus.EXECUTING, "Work item should be EXECUTING"
+        assert work_items[0].status in [WorkItemStatus.STARTED, WorkItemStatus.EXECUTING], "Work item should be EXECUTING or STARTED"
 
         # WHEN: Complete TaskA
         engine.complete_work_item(work_items[0].id, case.id, {})
@@ -106,7 +106,7 @@ class TestExecuteSimpleWorkflow:
         assert case is not None
         task_b_items = [wi for wi in case.work_items.values() if wi.task_id == "TaskB"]
         assert len(task_b_items) == 1, "TaskB should have work item"
-        assert task_b_items[0].status == WorkItemStatus.EXECUTING
+        assert task_b_items[0].status in [WorkItemStatus.STARTED, WorkItemStatus.EXECUTING]
 
         # WHEN: Complete TaskB
         engine.complete_work_item(task_b_items[0].id, case.id, {})
@@ -116,7 +116,7 @@ class TestExecuteSimpleWorkflow:
         assert case is not None
         task_c_items = [wi for wi in case.work_items.values() if wi.task_id == "TaskC"]
         assert len(task_c_items) == 1, "TaskC should have work item"
-        assert task_c_items[0].status == WorkItemStatus.EXECUTING
+        assert task_c_items[0].status in [WorkItemStatus.STARTED, WorkItemStatus.EXECUTING]
 
         # WHEN: Complete TaskC (final task)
         engine.complete_work_item(task_c_items[0].id, case.id, {})

@@ -204,8 +204,7 @@ class HybridOrchestrator:
                     raise ValueError(
                         f"Precondition validation failed: {precondition_result.violation_count} violations"
                     )
-                if transaction:
-                    transaction.log_operation("Preconditions validated")
+                self._log_transaction(transaction, "Preconditions validated")
 
             # 3. INFERENCE (EYE produces recommendations)
             current_state = self._dump_state()
@@ -218,14 +217,12 @@ class HybridOrchestrator:
             self._load_inference_results(inference_result.output)
             recommendations_inferred = self._count_recommendations()
 
-            if transaction:
-                transaction.log_operation(f"Inferred {recommendations_inferred} recommendations")
+            self._log_transaction(transaction, f"Inferred {recommendations_inferred} recommendations")
 
             # 4. EXECUTE MUTATIONS (SPARQL UPDATE)
             mutations_applied = self._execute_mutations()
 
-            if transaction:
-                transaction.log_operation(f"Applied {mutations_applied} mutations")
+            self._log_transaction(transaction, f"Applied {mutations_applied} mutations")
 
             # 5. CLEANUP RECOMMENDATIONS
             if self._config.cleanup_recommendations and recommendations_inferred > 0:
@@ -239,24 +236,14 @@ class HybridOrchestrator:
                     raise ValueError(
                         f"Postcondition validation failed: {postcondition_result.violation_count} violations"
                     )
-                if transaction:
-                    transaction.log_operation("Postconditions validated")
+                self._log_transaction(transaction, "Postconditions validated")
 
             # 7. COMMIT
             if transaction:
                 self._transaction_manager.commit(transaction)
 
-            # Build result
-            triples_after = len(self._store)
-            duration_ms = (time.perf_counter() - start_time) * 1000
-
-            physics_result = PhysicsResult(
-                tick_number=tick_number,
-                duration_ms=duration_ms,
-                triples_before=triples_before,
-                triples_after=triples_after,
-                delta=triples_after - triples_before,
-            )
+            # Build success result
+            physics_result = self._build_physics_result(tick_number, start_time, triples_before, len(self._store))
 
             return TickOutcome(
                 success=True,
@@ -269,26 +256,11 @@ class HybridOrchestrator:
 
         except Exception as e:
             # ROLLBACK on any failure
-            rolled_back = False
-            if transaction:
-                try:
-                    self._transaction_manager.rollback(transaction, reason=str(e))
-                    rolled_back = True
-                except Exception as rollback_error:
-                    logger.error(f"Rollback failed: {rollback_error}")
-
+            rolled_back = self._rollback_transaction(transaction, str(e))
             logger.error(f"Tick {tick_number} failed: {e}")
 
-            triples_after = len(self._store)
-            duration_ms = (time.perf_counter() - start_time) * 1000
-
-            physics_result = PhysicsResult(
-                tick_number=tick_number,
-                duration_ms=duration_ms,
-                triples_before=triples_before,
-                triples_after=triples_after,
-                delta=triples_after - triples_before,
-            )
+            # Build failure result
+            physics_result = self._build_physics_result(tick_number, start_time, triples_before, len(self._store))
 
             return TickOutcome(
                 success=False,
@@ -300,6 +272,74 @@ class HybridOrchestrator:
                 rolled_back=rolled_back,
                 error=str(e),
             )
+
+    def _build_physics_result(
+        self, tick_number: int, start_time: float, triples_before: int, triples_after: int
+    ) -> PhysicsResult:
+        """Build PhysicsResult from execution metrics.
+
+        Parameters
+        ----------
+        tick_number : int
+            Sequential tick identifier.
+        start_time : float
+            Start time from time.perf_counter().
+        triples_before : int
+            Triple count before execution.
+        triples_after : int
+            Triple count after execution.
+
+        Returns
+        -------
+        PhysicsResult
+            Physics application metrics.
+        """
+        duration_ms = (time.perf_counter() - start_time) * 1000
+        return PhysicsResult(
+            tick_number=tick_number,
+            duration_ms=duration_ms,
+            triples_before=triples_before,
+            triples_after=triples_after,
+            delta=triples_after - triples_before,
+        )
+
+    def _log_transaction(self, transaction: Transaction | None, message: str) -> None:
+        """Log operation to transaction if available.
+
+        Parameters
+        ----------
+        transaction : Transaction | None
+            Transaction to log to, or None if transactions disabled.
+        message : str
+            Operation message to log.
+        """
+        if transaction:
+            transaction.log_operation(message)
+
+    def _rollback_transaction(self, transaction: Transaction | None, reason: str) -> bool:
+        """Rollback transaction if available.
+
+        Parameters
+        ----------
+        transaction : Transaction | None
+            Transaction to rollback, or None if transactions disabled.
+        reason : str
+            Rollback reason.
+
+        Returns
+        -------
+        bool
+            True if rollback succeeded, False otherwise.
+        """
+        if not transaction:
+            return False
+
+        try:
+            self._transaction_manager.rollback(transaction, reason=reason)
+            return True
+        except Exception as rollback_error:
+            logger.error(f"Rollback failed: {rollback_error}")
+            return False
 
     def _dump_state(self) -> str:
         """Dump current store state as Turtle.

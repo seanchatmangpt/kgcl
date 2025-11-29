@@ -174,7 +174,7 @@ class StatusInspector:
         >>> "urn:task:B" in active
         False
         """
-        return self.get_tasks_by_status("Active")
+        return self.get_tasks_by_status(TaskStatus.ACTIVE.value)
 
     def get_completed_tasks(self) -> list[str]:
         """Get all completed tasks.
@@ -198,7 +198,7 @@ class StatusInspector:
         >>> "urn:task:B" in completed
         True
         """
-        return self.get_tasks_by_status("Completed")
+        return self.get_tasks_by_status(TaskStatus.COMPLETED.value)
 
     def is_workflow_complete(self) -> bool:
         """Check if workflow has no active tasks remaining.
@@ -222,7 +222,12 @@ class StatusInspector:
         True
         """
         all_statuses = self.get_task_statuses()
-        active_states = {"Active", "Pending", "Waiting", "Blocked"}
+        active_states = {
+            TaskStatus.ACTIVE.value,
+            TaskStatus.PENDING.value,
+            TaskStatus.WAITING.value,
+            TaskStatus.BLOCKED.value,
+        }
         return not any(status in active_states for status in all_statuses.values())
 
     def _extract_subject(self, binding: dict[str, Any]) -> str | None:

@@ -529,8 +529,7 @@ class UNRDFAdapter:
         str
             SHA-256 hash (placeholder for content-addressing)
         """
-        # In production, would read file and hash content
-        # For now, hash the path as placeholder
+        # Hash the file path (content-based hashing would require file read)
         return hashlib.sha256(filepath.encode()).hexdigest()
 
     def to_json_ld(self, events: list[YAWLEvent]) -> dict[str, Any]:

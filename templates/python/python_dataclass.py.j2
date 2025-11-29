@@ -18,19 +18,18 @@ class {{ cls.name }}{% if cls.parent_classes %}({{ cls.parent_classes|join(', ')
 
     RDF URI: {{ cls.uri }}
     """
+{% for prop in cls.properties %}
+    {{ prop.name }}: {{ prop.type }}{{ ' | None' if not prop.required else '' }}{% if prop.default is not none %} = {{ prop.default }}{% else %} = None{% endif %}
 
-    {% for prop in cls.properties %}
-    {{ prop.name }}: {{ prop.type }}{{ ' | None' if not prop.required else '' }}{% if prop.default is not none %} = {{ prop.default }}{% endif %}
     """{{ prop.docstring }}"""
-    {% endfor %}
-    {% if not cls.properties %}
+{% endfor %}
+{% if not cls.properties %}
     pass  # No properties defined
-    {% endif %}
+{% endif %}
 
 
 {% endfor %}
 __all__ = [
-    {% for cls in classes %}
+{% for cls in classes %}
     "{{ cls.name }}",
-    {% endfor %}
-]
+{% endfor %}]

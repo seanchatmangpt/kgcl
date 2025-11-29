@@ -1,0 +1,2 @@
+# DSPy generator uses transpiler directly, not templates
+# This directory exists only to satisfy BaseGenerator.__init__ requirement

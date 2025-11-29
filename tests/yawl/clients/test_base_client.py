@@ -198,11 +198,13 @@ class TestConnectionErrorHandling:
             """Client that fails to set handle on connect."""
 
             def connect(self) -> None:
-                # Doesn't set _handle
-                pass
+                """Intentionally doesn't set _handle to test error handling."""
+                # self._handle remains None - this tests the error path
+                return None
 
             def disconnect(self) -> None:
-                pass
+                """No-op disconnect for test fixture."""
+                return None
 
             def connected(self) -> bool:
                 return False

@@ -1,1102 +1,735 @@
-""""""
+"""Dynamic form field definition.
+
+Represents a field in a dynamically generated form, with metadata from XSD schema,
+extended attributes, restrictions, and hierarchical structure (parent/children).
+
+Converted from org.yawlfoundation.yawl.ui.dynform.DynFormField
+"""
 
 from __future__ import annotations
 
-from typing import Any
+from copy import copy
+from typing import TYPE_CHECKING, Any
 
-import httpx
+if TYPE_CHECKING:
+    from kgcl.yawl_ui.dynform.dyn_form_field_list_facet import DynFormFieldListFacet
+    from kgcl.yawl_ui.dynform.dyn_form_field_restriction import DynFormFieldRestriction
+    from kgcl.yawl_ui.dynform.dyn_form_field_union import DynFormFieldUnion
+
+from kgcl.yawl_ui.dynform.dyn_form_user_attributes import DynFormUserAttributes
 
 
 class DynFormField:
-    """"""
+    """Dynamic form field with XSD schema metadata and extended attributes.
 
-    def __init__(self, base_url: str, timeout: float = 30.0) -> None:
-        """Initialize YAWL client.
+    Represents a single field in a YAWL dynamic form, including:
+    - Basic metadata (name, datatype, value)
+    - Occurrence constraints (min/max occurs)
+    - Hierarchical structure (parent/subfields)
+    - Extended attributes (labels, tooltips, validation rules)
+    - Restrictions (enumerations, patterns, ranges)
+    - Unions and list types
+
+    Attributes
+    ----------
+    _name : str
+        Parameter name
+    _datatype : str
+        XSD datatype
+    _value : str | None
+        Current value
+    _minoccurs : int
+        Minimum occurrences (0 = optional)
+    _maxoccurs : int
+        Maximum occurrences (sys.maxsize = unbounded)
+    _param : Any
+        Form parameter definition
+    _occurs_count : int
+        Current occurrence count
+    _level : int
+        Nesting level in field hierarchy
+    _order : int
+        Display order
+    _required : bool
+        Whether field is required
+    _hidden : bool
+        Whether field is hidden
+    _empty_complex_type_flag : bool
+        Empty complex type marker
+    _hide_applied : bool | None
+        Cached hide evaluation result
+    _parent : DynFormField | None
+        Parent field (for hierarchical structures)
+    _restriction : DynFormFieldRestriction | None
+        Datatype restrictions
+    _union : DynFormFieldUnion | None
+        Union type definition
+    _list : DynFormFieldListFacet | None
+        List type definition
+    _attributes : DynFormUserAttributes
+        Extended attributes
+    _sub_field_list : list[DynFormField] | None
+        Child fields (for complex types)
+    _group_id : str | None
+        Group identifier (for min/max occurs > 1)
+    _choice_id : str | None
+        Choice identifier (for XSD choice constructs)
+    """
+
+    def __init__(
+        self,
+        name: str | None = None,
+        datatype: str | None = None,
+        value: str | None = None,
+        sub_field_list: list[DynFormField] | None = None,
+    ) -> None:
+        """Initialize dynamic form field.
 
         Parameters
         ----------
-        base_url : str
-            YAWL server base URL
-        timeout : float
-            HTTP request timeout in seconds
+        name : str | None
+            Field name
+        datatype : str | None
+            XSD datatype
+        value : str | None
+            Initial value
+        sub_field_list : list[DynFormField] | None
+            Subfields (for complex types)
         """
-        self.base_url = base_url.rstrip("/")
-        self.client = httpx.AsyncClient(timeout=timeout)
+        self._name = name
+        self._datatype = datatype
+        self._value = value
+        self._minoccurs: int = 1
+        self._maxoccurs: int = 1
+        self._null_minoccurs: bool = True
+        self._null_maxoccurs: bool = True
+        self._param: Any = None
+        self._occurs_count: int = 1
+        self._level: int = 0
+        self._order: int = 0
+        self._required: bool = False
+        self._hidden: bool = False
+        self._empty_complex_type_flag: bool = False
+        self._hide_applied: bool | None = None
+        self._parent: DynFormField | None = None
+        self._restriction: DynFormFieldRestriction | None = None
+        self._union: DynFormFieldUnion | None = None
+        self._list: DynFormFieldListFacet | None = None
+        self._attributes = DynFormUserAttributes()
+        self._sub_field_list = sub_field_list
+        self._group_id: str | None = None
+        self._choice_id: str | None = None
 
-    async def close(self) -> None:
-        """Close HTTP client connection."""
-        await self.client.aclose()
+        # Set parent for all subfields
+        if sub_field_list:
+            for field in sub_field_list:
+                field.set_parent(self)
 
-    async def __aenter__(self) -> DynFormField:
-        """Async context manager entry."""
-        return self
-
-    async def __aexit__(self, exc_type: Any, exc_val: Any, exc_tb: Any) -> None:
-        """Async context manager exit."""
-        await self.close()
-
-    async def clone(self) -> Any:
-        """
-
-        Parameters
-        ----------
+    def clone(self) -> DynFormField:
+        """Create shallow copy of field.
 
         Returns
         -------
-        Any
-
+        DynFormField
+            Cloned field
         """
-        # Auto-generated implementation stub
+        return copy(self)
 
-    async def get_name(self) -> str:
+    # Name
+
+    def get_name(self) -> str | None:
+        """Get field name."""
+        return self._name
+
+    def set_name(self, name: str) -> None:
+        """Set field name."""
+        self._name = name
+
+    # Datatype
+
+    def get_datatype(self) -> str:
+        """Get datatype name.
+
+        Returns datatype from field or from parameter definition.
         """
+        return self._datatype if self._datatype else self._param.get_data_type_name()
 
-        Parameters
-        ----------
+    def set_datatype(self, datatype: str) -> None:
+        """Set datatype name."""
+        self._datatype = datatype
+
+    def get_data_type_unprefixed(self) -> str:
+        """Get datatype without namespace prefix.
 
         Returns
         -------
         str
-
+            Datatype with prefix removed (e.g., "string" instead of "xsd:string")
         """
-        # Auto-generated implementation stub
+        datatype = self.get_datatype()
+        if datatype and ":" in datatype:
+            return datatype.split(":", 1)[1]
+        return datatype
 
-    async def set_name(self) -> None:
-        """
+    # Value
 
-        Parameters
-        ----------
+    def get_value(self) -> str | None:
+        """Get current value."""
+        return self._value
+
+    def set_value(self, value: str) -> None:
+        """Set current value."""
+        self._value = value
+
+    def has_null_value(self) -> bool:
+        """Check if value is null.
 
         Returns
         -------
-        None
-
+        bool
+            True if value is None and datatype is not string
         """
-        # Auto-generated implementation stub
+        datatype = self.get_data_type_unprefixed()
+        return self._value is None and datatype is not None and datatype != "string"
 
-    async def get_datatype(self) -> str:
-        """
+    # Occurrences
+
+    def get_minoccurs(self) -> int:
+        """Get minimum occurrences."""
+        return self._minoccurs
+
+    def set_minoccurs(self, minoccurs: str | None) -> None:
+        """Set minimum occurrences.
 
         Parameters
         ----------
+        minoccurs : str | None
+            Minimum as string ("0", "1", etc.) or None
+        """
+        self._null_minoccurs = minoccurs is None
+        self._minoccurs = self._convert_occurs(minoccurs)
+
+    def get_maxoccurs(self) -> int:
+        """Get maximum occurrences."""
+        return self._maxoccurs
+
+    def set_maxoccurs(self, maxoccurs: str | None) -> None:
+        """Set maximum occurrences.
+
+        Parameters
+        ----------
+        maxoccurs : str | None
+            Maximum as string ("1", "unbounded", etc.) or None
+        """
+        self._null_maxoccurs = maxoccurs is None
+        self._maxoccurs = self._convert_occurs(maxoccurs)
+
+    def set_occurs_count(self, occurs_count: int) -> None:
+        """Set current occurrence count."""
+        self._occurs_count = occurs_count
+
+    def has_zero_minimum(self) -> bool:
+        """Check if minimum occurrences is zero.
 
         Returns
         -------
-        str
-
+        bool
+            True if this field or any parent has minoccurs = 0
         """
-        # Auto-generated implementation stub
+        return (self.has_parent() and self._parent.has_zero_minimum()) or self._minoccurs == 0  # type: ignore
 
-    async def set_datatype(self) -> None:
-        """
+    def _convert_occurs(self, occurs: str | None) -> int:
+        """Convert occurs string to integer.
 
         Parameters
         ----------
-
-        Returns
-        -------
-        None
-
-        """
-        # Auto-generated implementation stub
-
-    async def get_data_type_unprefixed(self) -> str:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        str
-
-        """
-        # Auto-generated implementation stub
-
-    async def get_value(self) -> str:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        str
-
-        """
-        # Auto-generated implementation stub
-
-    async def set_value(self) -> None:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        None
-
-        """
-        # Auto-generated implementation stub
-
-    async def get_minoccurs(self) -> int:
-        """
-
-        Parameters
-        ----------
+        occurs : str | None
+            Occurrence string ("0", "1", "unbounded", etc.)
 
         Returns
         -------
         int
-
+            Integer occurrence count (sys.maxsize for "unbounded")
         """
-        # Auto-generated implementation stub
+        if occurs is None:
+            return 1
+        if occurs == "unbounded":
+            return 2**31 - 1  # Java's Integer.MAX_VALUE
+        try:
+            return int(occurs)
+        except ValueError:
+            return 1
 
-    async def set_minoccurs(self) -> None:
-        """
+    # Param
 
-        Parameters
-        ----------
+    def get_param(self) -> Any:
+        """Get form parameter definition."""
+        return self._param
 
-        Returns
-        -------
-        None
+    def set_param(self, param: Any) -> None:
+        """Set form parameter definition."""
+        self._param = param
 
-        """
-        # Auto-generated implementation stub
+    # Level and Order
 
-    async def get_maxoccurs(self) -> int:
-        """
+    def get_level(self) -> int:
+        """Get nesting level."""
+        return self._level
 
-        Parameters
-        ----------
+    def set_level(self, level: int) -> None:
+        """Set nesting level."""
+        self._level = level
 
-        Returns
-        -------
-        int
+    def get_order(self) -> int:
+        """Get display order."""
+        return self._order
 
-        """
-        # Auto-generated implementation stub
+    def set_order(self, order: int) -> None:
+        """Set display order."""
+        self._order = order
 
-    async def set_maxoccurs(self) -> None:
-        """
+    # Required
 
-        Parameters
-        ----------
-
-        Returns
-        -------
-        None
-
-        """
-        # Auto-generated implementation stub
-
-    async def get_param(self) -> Any:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        Any
-
-        """
-        # Auto-generated implementation stub
-
-    async def set_param(self) -> None:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        None
-
-        """
-        # Auto-generated implementation stub
-
-    async def get_level(self) -> int:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        int
-
-        """
-        # Auto-generated implementation stub
-
-    async def set_level(self) -> None:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        None
-
-        """
-        # Auto-generated implementation stub
-
-    async def get_order(self) -> int:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        int
-
-        """
-        # Auto-generated implementation stub
-
-    async def set_order(self) -> None:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        None
-
-        """
-        # Auto-generated implementation stub
-
-    async def set_occurs_count(self) -> None:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        None
-
-        """
-        # Auto-generated implementation stub
-
-    async def get_parent(self) -> Any:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        Any
-
-        """
-        # Auto-generated implementation stub
-
-    async def set_parent(self) -> None:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        None
-
-        """
-        # Auto-generated implementation stub
-
-    async def set_empty_complex_type_flag(self) -> None:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        None
-
-        """
-        # Auto-generated implementation stub
-
-    async def is_empty_complex_type_flag(self) -> bool:
-        """
-
-        Parameters
-        ----------
+    def is_required(self) -> bool:
+        """Check if field is required.
 
         Returns
         -------
         bool
-
+            True if field is required for form submission
         """
-        # Auto-generated implementation stub
+        self._required = (
+            not (self.is_input_only() or self.has_zero_minimum() or self._attributes.is_optional())
+        ) or self._attributes.is_mandatory()
+        return self._required
 
-    async def set_required(self) -> None:
-        """
+    def set_required(self, required: bool) -> None:
+        """Set required flag."""
+        self._required = required
 
-        Parameters
-        ----------
+    # Hidden
+
+    def set_empty_complex_type_flag(self, flag: bool) -> None:
+        """Set empty complex type flag."""
+        self._empty_complex_type_flag = flag
+
+    def is_empty_complex_type_flag(self) -> bool:
+        """Check if field is empty complex type."""
+        return self._empty_complex_type_flag
+
+    # Parent
+
+    def get_parent(self) -> DynFormField | None:
+        """Get parent field."""
+        return self._parent
+
+    def set_parent(self, parent: DynFormField) -> None:
+        """Set parent field."""
+        self._parent = parent
+
+    def has_parent(self) -> bool:
+        """Check if field has parent."""
+        return self._parent is not None
+
+    # Enumeration
+
+    def get_enumerated_values(self) -> list[str] | None:
+        """Get enumeration values from restrictions or union.
 
         Returns
         -------
-        None
-
+        list[str] | None
+            List of allowed values, or None if not enumerated
         """
-        # Auto-generated implementation stub
+        values: list[str] | None = None
+        if self._union and self._union.has_enumeration():
+            values = self._union.get_enumeration()
+        elif self._restriction and self._restriction.has_enumeration():
+            values = self._restriction.get_enumeration()
 
-    async def is_required(self) -> bool:
-        """
+        if values and not self.is_required():
+            # Add optional placeholder
+            placeholder = " " if self.is_input_only() else "<-- Choose (optional) -->"
+            values.insert(0, placeholder)
+
+        return values
+
+    def has_enumerated_values(self) -> bool:
+        """Check if field has enumeration values."""
+        return (self._union is not None and self._union.has_enumeration()) or (
+            self._restriction is not None and self._restriction.has_enumeration()
+        )
+
+    # Subfields
+
+    def get_sub_field_list(self) -> list[DynFormField] | None:
+        """Get list of subfields."""
+        return self._sub_field_list
+
+    def get_sub_field(self, name: str) -> DynFormField | None:
+        """Get subfield by name.
 
         Parameters
         ----------
+        name : str
+            Subfield name
+
+        Returns
+        -------
+        DynFormField | None
+            Subfield, or None if not found
+        """
+        if self._sub_field_list:
+            for field in self._sub_field_list:
+                if field.get_name() == name:
+                    return field
+        return None
+
+    def add_sub_field(self, field: DynFormField) -> None:
+        """Add subfield.
+
+        Parameters
+        ----------
+        field : DynFormField
+            Subfield to add
+        """
+        if self._sub_field_list is None:
+            self._sub_field_list = []
+        field.set_parent(self)
+        self._sub_field_list.append(field)
+
+    def add_sub_field_list(self, field_list: list[DynFormField] | None) -> None:
+        """Add multiple subfields.
+
+        Parameters
+        ----------
+        field_list : list[DynFormField] | None
+            Subfields to add
+        """
+        if field_list:
+            for field in field_list:
+                self.add_sub_field(field)
+
+    def is_field_container(self) -> bool:
+        """Check if field contains subfields.
 
         Returns
         -------
         bool
-
+            True if field is complex type or YDocument
         """
-        # Auto-generated implementation stub
+        return not (self.is_simple_field() or self.is_y_document())
 
-    async def has_zero_minimum(self) -> bool:
-        """
+    def is_simple_field(self) -> bool:
+        """Check if field is simple type (no subfields)."""
+        return self._sub_field_list is None
 
-        Parameters
-        ----------
+    # Group and Choice IDs
 
-        Returns
-        -------
-        bool
+    def get_group_id(self) -> str | None:
+        """Get group identifier."""
+        return self._group_id
 
-        """
-        # Auto-generated implementation stub
+    def set_group_id(self, group_id: str) -> None:
+        """Set group identifier."""
+        self._group_id = group_id
 
-    async def get_enumerated_values(self) -> list[str]:
-        """
+    def get_choice_id(self) -> str | None:
+        """Get choice identifier."""
+        return self._choice_id
 
-        Parameters
-        ----------
+    def set_choice_id(self, choice_id: str) -> None:
+        """Set choice identifier."""
+        self._choice_id = choice_id
 
-        Returns
-        -------
-        list[str]
+    def is_choice_field(self) -> bool:
+        """Check if field is part of XSD choice."""
+        return self._choice_id is not None
 
-        """
-        # Auto-generated implementation stub
+    def is_grouped_field(self) -> bool:
+        """Check if field is grouped (min/max occurs > 1)."""
+        return not (self.get_group_id() is None or self.is_y_document())
 
-    async def has_enumerated_values(self) -> bool:
-        """
+    # Restrictions and Unions
 
-        Parameters
-        ----------
+    def get_restriction(self) -> DynFormFieldRestriction | None:
+        """Get datatype restriction."""
+        return self._restriction
 
-        Returns
-        -------
-        bool
+    def set_restriction(self, restriction: DynFormFieldRestriction) -> None:
+        """Set datatype restriction."""
+        self._restriction = restriction
+        restriction.set_owner(self)
 
-        """
-        # Auto-generated implementation stub
+    def has_restriction(self) -> bool:
+        """Check if field has restriction."""
+        return self._restriction is not None
 
-    async def get_sub_field_list(self) -> list[Any]:
-        """
+    def get_union(self) -> DynFormFieldUnion | None:
+        """Get union type definition."""
+        return self._union
 
-        Parameters
-        ----------
+    def set_union(self, union: DynFormFieldUnion) -> None:
+        """Set union type definition."""
+        self._union = union
+        union.set_owner(self)
 
-        Returns
-        -------
-        list[Any]
+    def has_union(self) -> bool:
+        """Check if field has union type."""
+        return self._union is not None
 
-        """
-        # Auto-generated implementation stub
+    def set_list_type(self, list_facet: DynFormFieldListFacet) -> None:
+        """Set list type definition."""
+        self._list = list_facet
+        list_facet.set_owner(self)
 
-    async def get_sub_field(self) -> Any:
-        """
+    def has_list_type(self) -> bool:
+        """Check if field has list type."""
+        return self._list is not None
 
-        Parameters
-        ----------
+    # Attributes
 
-        Returns
-        -------
-        Any
+    def get_attributes(self) -> DynFormUserAttributes:
+        """Get extended attributes."""
+        return self._attributes
 
-        """
-        # Auto-generated implementation stub
+    def set_attributes(self, attributes: DynFormUserAttributes) -> None:
+        """Set extended attributes."""
+        self._attributes = attributes
 
-    async def is_field_container(self) -> bool:
-        """
+    # Extended Attribute Accessors
 
-        Parameters
-        ----------
+    def get_alert_text(self) -> str | None:
+        """Get validation error alert text."""
+        return self._parent.get_alert_text() if self.has_parent() else self._attributes.get_alert_text()  # type: ignore
 
-        Returns
-        -------
-        bool
-
-        """
-        # Auto-generated implementation stub
-
-    async def add_sub_field(self) -> None:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        None
-
-        """
-        # Auto-generated implementation stub
-
-    async def add_sub_field_list(self) -> None:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        None
-
-        """
-        # Auto-generated implementation stub
-
-    async def get_group_id(self) -> str:
-        """
-
-        Parameters
-        ----------
+    def get_label(self) -> str:
+        """Get field label.
 
         Returns
         -------
         str
-
+            Custom label or field name if no label defined
         """
-        # Auto-generated implementation stub
+        label = self._attributes.get_label_text()
+        return label if label else self._name  # type: ignore
 
-    async def set_group_id(self) -> None:
-        """
-
-        Parameters
-        ----------
+    def is_input_only(self) -> bool:
+        """Check if field is read-only/input-only.
 
         Returns
         -------
-        None
-
+        bool
+            True if field is read-only
         """
-        # Auto-generated implementation stub
+        return (
+            (self.has_parent() and self._parent.is_input_only())  # type: ignore
+            or (self._param is not None and (self._param.is_input_only() or self._param.is_read_only()))
+            or self._attributes.is_read_only()
+            or self.has_blackout_attribute()
+        )
 
-    async def get_choice_id(self) -> str:
-        """
+    def has_hide_attribute(self) -> bool:
+        """Check if field has hide attribute."""
+        return (
+            (self.has_parent() and self._parent.has_hide_attribute())  # type: ignore
+            or self._hidden
+            or self._attributes.is_hidden()
+        )
+
+    def has_hide_if_attribute(self, data: str) -> bool:
+        """Check if hideIf query evaluates to true.
 
         Parameters
         ----------
+        data : str
+            XML data for query evaluation
+
+        Returns
+        -------
+        bool
+            True if hideIf condition is met
+        """
+        return (self.has_parent() and self._parent.has_hide_if_attribute(data)) or self._attributes.is_hide_if(  # type: ignore
+            data
+        )
+
+    def is_hidden(self, data: str | None) -> bool:
+        """Check if field should be hidden.
+
+        Parameters
+        ----------
+        data : str | None
+            XML data for hideIf evaluation
+
+        Returns
+        -------
+        bool
+            True if field should be hidden
+        """
+        if data is None:
+            return False
+        if self._hide_applied is None:
+            self._hide_applied = self.has_hide_attribute() or self.has_hide_if_attribute(data)
+        return self._hide_applied
+
+    def is_empty_optional_input_only(self) -> bool:
+        """Check if field is empty optional input-only.
+
+        Returns
+        -------
+        bool
+            True if field is input-only, optional, and has null value
+        """
+        return self.is_input_only() and self._attributes.is_optional() and self.has_null_value()
+
+    def get_tool_tip(self) -> str:
+        """Get tooltip text.
 
         Returns
         -------
         str
-
+            Custom tooltip or default based on datatype
         """
-        # Auto-generated implementation stub
-
-    async def set_choice_id(self) -> None:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        None
-
-        """
-        # Auto-generated implementation stub
-
-    async def is_choice_field(self) -> bool:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        bool
-
-        """
-        # Auto-generated implementation stub
-
-    async def is_grouped_field(self) -> bool:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        bool
-
-        """
-        # Auto-generated implementation stub
-
-    async def is_simple_field(self) -> bool:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        bool
-
-        """
-        # Auto-generated implementation stub
-
-    async def get_font(self) -> Any:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        Any
-
-        """
-        # Auto-generated implementation stub
-
-    async def get_restriction(self) -> Any:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        Any
-
-        """
-        # Auto-generated implementation stub
-
-    async def set_restriction(self) -> None:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        None
-
-        """
-        # Auto-generated implementation stub
-
-    async def has_restriction(self) -> bool:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        bool
-
-        """
-        # Auto-generated implementation stub
-
-    async def set_union(self) -> None:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        None
-
-        """
-        # Auto-generated implementation stub
-
-    async def get_union(self) -> Any:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        Any
-
-        """
-        # Auto-generated implementation stub
-
-    async def has_union(self) -> bool:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        bool
-
-        """
-        # Auto-generated implementation stub
-
-    async def has_parent(self) -> bool:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        bool
-
-        """
-        # Auto-generated implementation stub
-
-    async def set_list_type(self) -> None:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        None
-
-        """
-        # Auto-generated implementation stub
-
-    async def has_list_type(self) -> bool:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        bool
-
-        """
-        # Auto-generated implementation stub
-
-    async def get_attributes(self) -> Any:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        Any
-
-        """
-        # Auto-generated implementation stub
-
-    async def set_attributes(self) -> None:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        None
-
-        """
-        # Auto-generated implementation stub
-
-    async def convert_occurs(self) -> int:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        int
-
-        """
-        # Auto-generated implementation stub
-
-    async def equals(self) -> bool:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        bool
-
-        """
-        # Auto-generated implementation stub
-
-    async def get_alert_text(self) -> str:
-        """
-
-        Parameters
-        ----------
+        tip = self._attributes.get_tool_tip_text()
+        return tip if tip else self.get_default_tool_tip()
+
+    def get_default_tool_tip(self) -> str:
+        """Get default tooltip based on datatype and restrictions.
 
         Returns
         -------
         str
-
+            Generated tooltip text
         """
-        # Auto-generated implementation stub
+        if self.has_blackout_attribute():
+            return " This field is intentionally blacked-out "
 
-    async def get_label(self) -> str:
+        datatype_name = self._param.get_data_type_name() if self._param else ""
+        datatype = "Duration or DateTime" if datatype_name == "YTimerType" else self.get_data_type_unprefixed()
+        tip = f" Please enter a value of {datatype} type"
+
+        if self.has_restriction():
+            tip += self._restriction.get_tool_tip_extn()  # type: ignore
+        elif self.has_list_type():
+            tip = f" Please enter {self._list.get_tool_tip_extn()}"  # type: ignore
+
+        return tip + " "
+
+    def has_skip_validation_attribute(self) -> bool:
+        """Check if validation should be skipped."""
+        return (
+            self.has_parent() and self._parent.has_skip_validation_attribute()  # type: ignore
+        ) or self._attributes.is_skip_validation()
+
+    def get_text_justify(self) -> str | None:
+        """Get text justification."""
+        return (
+            self._parent.get_text_justify() if self.has_parent() else self._attributes.get_text_justify()  # type: ignore
+        )
+
+    def has_blackout_attribute(self) -> bool:
+        """Check if field has blackout attribute."""
+        return (
+            self.has_parent() and self._parent.has_blackout_attribute()  # type: ignore
+        ) or self._attributes.is_blackout()
+
+    def get_user_defined_font_style(self) -> dict[str, str]:
+        """Get user-defined font styles."""
+        return (
+            self._parent.get_user_defined_font_style()  # type: ignore
+            if self.has_parent()
+            else self._attributes.get_user_defined_font_styles()
+        )
+
+    def get_background_colour(self) -> str | None:
+        """Get background color."""
+        return (
+            self._parent.get_background_colour() if self.has_parent() else self._attributes.get_background_colour()  # type: ignore
+        )
+
+    def is_text_area(self) -> bool:
+        """Check if field should use textarea."""
+        return self._attributes.is_text_area()
+
+    def is_y_document(self) -> bool:
+        """Check if field is YDocument type."""
+        return self.get_data_type_unprefixed() == "YDocumentType"
+
+    def get_image_above(self) -> str | None:
+        """Get image URL to display above field."""
+        return self._attributes.get_image_above()
+
+    def get_image_below(self) -> str | None:
+        """Get image URL to display below field."""
+        return self._attributes.get_image_below()
+
+    def get_image_above_align(self) -> str | None:
+        """Get alignment for image above field."""
+        return self._attributes.get_image_above_align()
+
+    def get_image_below_align(self) -> str | None:
+        """Get alignment for image below field."""
+        return self._attributes.get_image_below_align()
+
+    def is_line_above(self) -> bool:
+        """Check if line should be displayed above field."""
+        return self._attributes.is_line_above()
+
+    def is_line_below(self) -> bool:
+        """Check if line should be displayed below field."""
+        return self._attributes.is_line_below()
+
+    def get_text_above(self) -> str | None:
+        """Get text to display above field."""
+        return self._attributes.get_text_above()
+
+    def get_text_below(self) -> str | None:
+        """Get text to display below field."""
+        return self._attributes.get_text_below()
+
+    def set_restriction_attributes(self) -> None:
+        """Set restriction facets from extended attributes.
+
+        For built-in XSD types, reads restriction facets from attributes
+        and applies them to the field's restriction object.
         """
+        # TODO: Implement XSDType.isBuiltInType() and facet mapping
+        # This requires:
+        # 1. Check if datatype is XSD built-in type
+        # 2. Get valid facet map for the type
+        # 3. Read facet values from attributes
+        # 4. Apply to restriction object
 
-        Parameters
-        ----------
+    def _get_or_create_restriction(self) -> DynFormFieldRestriction:
+        """Get existing restriction or create new one.
 
         Returns
         -------
-        str
-
+        DynFormFieldRestriction
+            Restriction object
         """
-        # Auto-generated implementation stub
+        if not self.has_restriction():
+            # Import here to avoid circular dependency
+            from kgcl.yawl_ui.dynform.dyn_form_field_restriction import DynFormFieldRestriction
 
-    async def is_input_only(self) -> bool:
-        """
+            self._restriction = DynFormFieldRestriction(self)
+            self._restriction.set_base_type(self.get_datatype())
+
+        self._restriction.set_modified_flag()  # type: ignore
+        return self._restriction  # type: ignore
+
+    def equals(self, other: DynFormField) -> bool:
+        """Check equality with another field.
 
         Parameters
         ----------
-
-        Returns
-        -------
-        bool
-
-        """
-        # Auto-generated implementation stub
-
-    async def has_hide_attribute(self) -> bool:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        bool
-
-        """
-        # Auto-generated implementation stub
-
-    async def has_hide_if_attribute(self) -> bool:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        bool
-
-        """
-        # Auto-generated implementation stub
-
-    async def is_hidden(self) -> bool:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        bool
-
-        """
-        # Auto-generated implementation stub
-
-    async def is_empty_optional_input_only(self) -> bool:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        bool
-
-        """
-        # Auto-generated implementation stub
-
-    async def has_null_value(self) -> bool:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        bool
-
-        """
-        # Auto-generated implementation stub
-
-    async def get_tool_tip(self) -> str:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        str
-
-        """
-        # Auto-generated implementation stub
-
-    async def get_default_tool_tip(self) -> str:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        str
-
-        """
-        # Auto-generated implementation stub
-
-    async def has_skip_validation_attribute(self) -> bool:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        bool
-
-        """
-        # Auto-generated implementation stub
-
-    async def get_text_justify(self) -> str:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        str
-
-        """
-        # Auto-generated implementation stub
-
-    async def has_blackout_attribute(self) -> bool:
-        """
-
-        Parameters
-        ----------
+        other : DynFormField
+            Field to compare
 
         Returns
         -------
         bool
-
+            True if name and datatype match
         """
-        # Auto-generated implementation stub
-
-    async def get_user_defined_font_style(self) -> dict[str, str]:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        dict[str, str]
-
-        """
-        # Auto-generated implementation stub
-
-    async def get_background_colour(self) -> str:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        str
-
-        """
-        # Auto-generated implementation stub
-
-    async def is_text_area(self) -> bool:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        bool
-
-        """
-        # Auto-generated implementation stub
-
-    async def is_y_document(self) -> bool:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        bool
-
-        """
-        # Auto-generated implementation stub
-
-    async def get_image_above(self) -> str:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        str
-
-        """
-        # Auto-generated implementation stub
-
-    async def get_image_below(self) -> str:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        str
-
-        """
-        # Auto-generated implementation stub
-
-    async def get_image_above_align(self) -> str:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        str
-
-        """
-        # Auto-generated implementation stub
-
-    async def get_image_below_align(self) -> str:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        str
-
-        """
-        # Auto-generated implementation stub
-
-    async def is_line_above(self) -> bool:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        bool
-
-        """
-        # Auto-generated implementation stub
-
-    async def is_line_below(self) -> bool:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        bool
-
-        """
-        # Auto-generated implementation stub
-
-    async def get_text_above(self) -> str:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        str
-
-        """
-        # Auto-generated implementation stub
-
-    async def get_text_below(self) -> str:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        str
-
-        """
-        # Auto-generated implementation stub
-
-    async def get_user_defined_font(self) -> Any:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        Any
-
-        """
-        # Auto-generated implementation stub
-
-    async def set_restriction_attributes(self) -> None:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        None
-
-        """
-        # Auto-generated implementation stub
-
-    async def get_or_create_restriction(self) -> Any:
-        """
-
-        Parameters
-        ----------
-
-        Returns
-        -------
-        Any
-
-        """
-        # Auto-generated implementation stub
+        return other.get_name() == self.get_name() and other.get_datatype() == self.get_datatype()

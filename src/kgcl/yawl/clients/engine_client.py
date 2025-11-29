@@ -259,23 +259,23 @@ class EngineClient(AbstractClient):
         """
         self._ensure_connected()
 
-        # Create placeholder ID
-        placeholder_id = f"delayed-{id(spec_id)}-{delay_ms}"
+        # Generate temporary ID until actual case launch completes
+        temp_id = f"delayed-{id(spec_id)}-{delay_ms}"
 
         def delayed_launch() -> None:
             try:
                 actual_id = self.launch_case(spec_id, case_data)
                 # Update tracking
-                if placeholder_id in self._delayed_launches:
-                    del self._delayed_launches[placeholder_id]
+                if temp_id in self._delayed_launches:
+                    del self._delayed_launches[temp_id]
             except Exception:
                 pass  # Log error in production
 
         timer = threading.Timer(delay_ms / 1000.0, delayed_launch)
-        self._delayed_launches[placeholder_id] = timer
+        self._delayed_launches[temp_id] = timer
         timer.start()
 
-        return placeholder_id
+        return temp_id
 
     def cancel_case(self, case_id: str) -> bool:
         """Cancel a running case.

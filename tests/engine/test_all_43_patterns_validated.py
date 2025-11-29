@@ -433,7 +433,7 @@ def test_verb_parameter_properties_defined(physics_ontology: Graph) -> None:
         }}
         """
         result = bool(physics_ontology.query(query))
-        assert result, f"Parameter property kgc:{prop_name} not properly defined"
+        assert result is True, f"Parameter property kgc:{prop_name} not properly defined in ontology"
 
 
 def test_patterns_by_verb_distribution(physics_ontology: Graph) -> None:

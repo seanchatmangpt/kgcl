@@ -65,13 +65,19 @@ class AndonLevel(Enum):
 class SafetyViolationError(Exception):
     """BLACK ANDON: Critical safety violation requiring immediate halt."""
 
+    pass
+
 
 class PatternViolationError(Exception):
     """RED ANDON: Pattern behavior violation."""
 
+    pass
+
 
 class ThresholdViolationError(Exception):
     """RED ANDON: Threshold logic violation in partial joins."""
+
+    pass
 
 
 def andon_assert(condition: bool, level: AndonLevel, message: str) -> None:

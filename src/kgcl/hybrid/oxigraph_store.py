@@ -18,13 +18,19 @@ from pyoxigraph import QuerySolution, QuerySolutions, RdfFormat, Store, parse
 class StoreError(Exception):
     """Base exception for store operations."""
 
+    pass
+
 
 class QueryError(StoreError):
     """Exception for query execution failures."""
 
+    pass
+
 
 class UpdateError(StoreError):
     """Exception for update operation failures."""
+
+    pass
 
 
 @dataclass(frozen=True)

@@ -8,13 +8,13 @@ from __future__ import annotations
 
 from typing import Any
 
-from kgcl.yawl_ui.dynform.dyn_form_layout import DynFormLayout
-from kgcl.yawl_ui.dynform.dyn_form_field_assembler import DynFormFieldAssembler
-from kgcl.yawl_ui.dynform.dyn_form_component_builder import DynFormComponentBuilder
-from kgcl.yawl_ui.dynform.dyn_form_validator import DynFormValidator
 from kgcl.yawl_ui.dynform.data_list_generator import DataListGenerator
-from kgcl.yawl_ui.dynform.dyn_form_user_attributes import DynFormUserAttributes
+from kgcl.yawl_ui.dynform.dyn_form_component_builder import DynFormComponentBuilder
 from kgcl.yawl_ui.dynform.dyn_form_field import DynFormField
+from kgcl.yawl_ui.dynform.dyn_form_field_assembler import DynFormFieldAssembler
+from kgcl.yawl_ui.dynform.dyn_form_layout import DynFormLayout
+from kgcl.yawl_ui.dynform.dyn_form_user_attributes import DynFormUserAttributes
+from kgcl.yawl_ui.dynform.dyn_form_validator import DynFormValidator
 from kgcl.yawl_ui.dynform.sub_panel_controller import SubPanelController
 
 

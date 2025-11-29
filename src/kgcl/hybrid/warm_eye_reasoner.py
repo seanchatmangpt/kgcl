@@ -49,13 +49,19 @@ logger = logging.getLogger(__name__)
 class WarmEYEError(Exception):
     """Base exception for warm EYE reasoner."""
 
+    pass
+
 
 class WarmEYENotAvailableError(WarmEYEError):
     """EYE reasoner not found."""
 
+    pass
+
 
 class WarmEYEPoolExhaustedError(WarmEYEError):
     """All processes in pool are busy."""
+
+    pass
 
 
 @dataclass(frozen=True)

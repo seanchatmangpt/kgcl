@@ -14,13 +14,19 @@ from shutil import which
 class EYENotFoundError(Exception):
     """Raised when EYE reasoner executable is not found in PATH."""
 
+    pass
+
 
 class EYETimeoutError(Exception):
     """Raised when EYE reasoning operation exceeds timeout."""
 
+    pass
+
 
 class EYEReasoningError(Exception):
     """Raised when EYE reasoning fails with an error."""
+
+    pass
 
 
 @dataclass(frozen=True)

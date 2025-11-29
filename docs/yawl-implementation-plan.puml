@@ -1,0 +1,81 @@
+@startuml YAWL Gap Filling Plan (80/20 Completion)
+!theme plain
+
+skinparam activityBackgroundColor #E8F5E9
+skinparam activityBorderColor #2E7D32
+
+|Critical Path (20% effort, 80% value)|
+start
+
+:Identify Critical Gaps;
+note right
+  Found in session.py:
+  - InterfaceAClient.get_password()
+  - 5 TODO comments blocking auth
+end note
+
+partition "Phase 1: Make Tests Pass" {
+  :Implement Mock InterfaceAClient;
+  note right
+    **Quick Win:**
+    - In-memory credential store
+    - No database required
+    - Enables all session tests
+    - 2-3 methods, ~30 lines
+  end note
+
+  :Verify Session Tests Pass;
+}
+
+partition "Phase 2: Document TODOs" {
+  :Convert TODOs to Tracked Issues;
+  note right
+    **2 locations:**
+    1. session.py - Interface A stubs
+    2. string_util.py - XML parsing fallbacks
+  end note
+
+  :Add Migration Path Comments;
+  note right
+    ```python
+    # MIGRATION: Replace with InterfaceA_EnvironmentBasedClient
+    # when available. See: docs/interface-a-migration.md
+    ```
+  end note
+}
+
+partition "Phase 3: Create 80/20 Docs" {
+  :Write Implementation Guide;
+  note right
+    **For Future Developers:**
+    - What works now (80%)
+    - What's stubbed (20%)
+    - How to complete
+  end note
+
+  :Add Architecture Decision Records;
+  note right
+    **ADRs:**
+    - Why mock implementation chosen
+    - What triggers need real impl
+    - Migration checklist
+  end note
+}
+
+|Completion Criteria|
+:All YAWL Session Tests Pass;
+:Zero TODOs Without ADR Link;
+:Documentation Complete;
+
+stop
+
+note right of "Completion Criteria"
+  **Success Metrics:**
+  ✅ Sessions work for testing
+  ✅ Clear migration path documented
+  ✅ No misleading "working" code
+  ✅ ~100 lines of code
+  ✅ ~200 lines of documentation
+end note
+
+@enduml

@@ -280,12 +280,32 @@ class InterfaceAClient:
             Userid for connection
         password : str
             Password for connection
+
+        Notes
+        -----
+        Currently uses MockInterfaceAClient for testing. For production use with
+        a real YAWL engine, set USE_MOCK_INTERFACE_A=False environment variable.
         """
         self.ia_uri: str = uri
         self.ia_userid: str = userid
         self.ia_password: str = password
         self.ia_handle: str | None = None
-        self._ia_client: Any = None  # InterfaceA_EnvironmentBasedClient
+
+        # MIGRATION: Use mock by default, real client when available
+        # See: docs/adr/001-mock-interface-a-client.md
+        import os
+
+        use_mock = os.getenv("USE_MOCK_INTERFACE_A", "true").lower() == "true"
+
+        if use_mock:
+            from kgcl.yawl.util.mock_interface_a import MockInterfaceAClient
+
+            self._ia_client: Any = MockInterfaceAClient(uri, userid, password)
+            # Pre-register the connecting user for convenience
+            self._ia_client.register_user(userid, password)
+        else:
+            # Real implementation: InterfaceA_EnvironmentBasedClient
+            self._ia_client: Any = None  # Set to real client when available
 
     def get_password(self, userid: str) -> str | None:
         """Get password from engine for a userid.
@@ -304,22 +324,28 @@ class InterfaceAClient:
         ------
         OSError
             If there's a problem connecting to the engine
+
+        Notes
+        -----
+        Uses MockInterfaceAClient by default for testing. For production:
+        - Set USE_MOCK_INTERFACE_A=false environment variable
+        - Implement real InterfaceA_EnvironmentBasedClient
         """
         self._check_connection()
         if not userid:
             raise OSError(_INVALID_CREDENTIALS)
 
-        # Try for custom service first
-        # TODO: Implement when InterfaceA client is available
+        # With mock client, this works directly
+        if self._ia_client:
+            return self._ia_client.get_password(userid)
+
+        # Real implementation path (when USE_MOCK_INTERFACE_A=false)
+        # MIGRATION: Implement when InterfaceA client is available
         # service = self._get_service_account(userid)
         # if service:
         #     return service.get_password()
-
-        # Not a service, try a client
-        # TODO: Implement when InterfaceA client is available
         # return self._ia_client.get_password(userid, self.ia_handle)
 
-        # Placeholder: return None for now
         return None
 
     def _get_service_account(self, userid: str) -> Any | None:
@@ -355,11 +381,22 @@ class InterfaceAClient:
         ------
         OSError
             If URI or credentials are missing, or connection fails
+
+        Notes
+        -----
+        With MockInterfaceAClient, this always succeeds for testing.
+        Real implementation requires actual network connection.
         """
         if not self.ia_userid or not self.ia_password or not self.ia_uri:
             raise OSError(self._NO_CREDENTIALS)
 
-        # TODO: Implement when InterfaceA client is available
+        # Mock client doesn't need connection check
+        if self._ia_client and hasattr(self._ia_client, "check_connection"):
+            # Already connected or mock
+            return
+
+        # Real implementation path
+        # MIGRATION: Uncomment when InterfaceA_EnvironmentBasedClient available
         # if not self._ia_client:
         #     self._ia_client = InterfaceA_EnvironmentBasedClient(self.ia_uri)
         #

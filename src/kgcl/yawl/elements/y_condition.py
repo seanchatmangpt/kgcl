@@ -552,3 +552,9 @@ class YCondition:
             doc_elem.text = self.documentation
 
         return ET.tostring(root, encoding="unicode")
+
+
+# Type aliases for specialized condition types
+# YInputCondition and YOutputCondition are YCondition instances with specific types
+YInputCondition = YCondition
+YOutputCondition = YCondition

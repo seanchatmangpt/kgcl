@@ -14,7 +14,10 @@ from typing import TYPE_CHECKING
 from kgcl.yawl.elements.y_atomic_task import YAtomicTask
 from kgcl.yawl.elements.y_condition import YCondition
 from kgcl.yawl.elements.y_external_net_element import YExternalNetElement
-from kgcl.yawl.elements.y_task import YCompositeTask, YTask
+from kgcl.yawl.elements.y_task import YTask
+
+# Type alias: YCompositeTask is YTask with decomposition
+YCompositeTask = YTask
 
 if TYPE_CHECKING:
     from kgcl.yawl.elements.y_flow import YFlow

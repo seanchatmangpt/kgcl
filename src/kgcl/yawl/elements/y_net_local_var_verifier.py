@@ -11,11 +11,12 @@ import logging
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
+from kgcl.yawl.elements.y_atomic_task import YAtomicTask
 from kgcl.yawl.elements.y_condition import YCondition, YInputCondition
 from kgcl.yawl.elements.y_decomposition import YParameter, YVariable
 from kgcl.yawl.elements.y_external_net_element import YExternalNetElement
 from kgcl.yawl.elements.y_net import YNet
-from kgcl.yawl.elements.y_task import YAtomicTask, YTask
+from kgcl.yawl.elements.y_task import YTask
 from kgcl.yawl.engine.y_engine import YVerificationHandler
 
 if TYPE_CHECKING:

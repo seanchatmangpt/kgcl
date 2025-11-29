@@ -48,6 +48,7 @@ kgc-feature-list = "kgcl.cli.feature_list:feature_list"
 kgc-query = "kgcl.cli.query:query"
 kgc-config = "kgcl.cli.config:config"
 kgc-health = "kgcl.observability.cli:cli"
+kgc-yawl-ontology = "kgcl.yawl_ontology.cli:main"
 
 [project.urls]  # https://packaging.python.org/en/latest/specifications/well-known-project-urls/#well-known-labels
 homepage = "https://github.com/user/kgcl"
@@ -798,4 +799,32 @@ echo ""
 
     [[tool.poe.tasks.proof-all-avatars.sequence]]
     ref = "proof-avatar7"
+
+  [tool.poe.tasks.yawl-ontology-mailsender]
+  help = "Generate YAWL mailSender ontology (RDF/Turtle)"
+  cmd = "kgc-yawl-ontology vendors/yawl-v5.2/src/org/yawlfoundation/yawl/mailSender docs/yawl_mailsender_ontology.ttl"
+
+  [tool.poe.tasks.yawl-ontology-full]
+  help = "Generate full YAWL ontology (RDF/Turtle, ~6MB, 103K triples)"
+  cmd = "kgc-yawl-ontology generate vendors/yawl-v5.2/src/org/yawlfoundation/yawl docs/yawl_full_ontology.ttl"
+
+  [tool.poe.tasks.yawl-explore-hierarchy]
+  help = "Explore YAWL decomposition hierarchy"
+  cmd = "kgc-yawl-ontology explore docs/yawl_full_ontology.ttl --hierarchy"
+
+  [tool.poe.tasks.yawl-analyze-engine]
+  help = "Analyze YEngine API surface"
+  cmd = "kgc-yawl-ontology explore docs/yawl_full_ontology.ttl --class YEngine"
+
+  [tool.poe.tasks.yawl-generate-stubs]
+  help = "Generate Python implementation stubs from ontology"
+  cmd = "kgc-yawl-ontology generate-stubs docs/yawl_full_ontology.ttl"
+
+  [tool.poe.tasks.yawl-analyze-architecture]
+  help = "Generate comprehensive architecture analysis report"
+  cmd = "kgc-yawl-ontology analyze docs/yawl_full_ontology.ttl"
+
+  [tool.poe.tasks.yawl-proof-ontology-driven]
+  help = "Prove ontology-driven development workflow"
+  cmd = "python examples/proof_ontology_driven_development.py"
 

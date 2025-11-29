@@ -43,6 +43,29 @@ class SpecificationStatus(Enum):
     ARCHIVED = auto()
 
 
+@dataclass(frozen=True)
+class YSpecificationID:
+    """Unique identifier for a specification (mirrors Java YSpecificationID).
+
+    Parameters
+    ----------
+    uri : str
+        URI of the specification
+    version : str
+        Version string
+    identifier : str
+        Unique identifier
+
+    Examples
+    --------
+    >>> spec_id = YSpecificationID(uri="http://example.com/spec", version="1.0", identifier="my_spec")
+    """
+
+    uri: str
+    version: str
+    identifier: str
+
+
 @dataclass
 class YSpecificationVersion:
     """Version information for a specification.

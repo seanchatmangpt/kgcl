@@ -10,6 +10,7 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum, auto
 from typing import TYPE_CHECKING, Any
+from xml.etree import ElementTree as ET
 
 if TYPE_CHECKING:
     from kgcl.yawl.resources.y_resource import YParticipant
@@ -275,9 +276,26 @@ class YWorkItem:
     # Multi-instance
     parent_id: str | None = None
     children: list[str] = field(default_factory=list)
+    allows_dynamic_creation: bool = False
 
     # History
     history: list[WorkItemLog] = field(default_factory=list)
+
+    # Additional fields for Java parity
+    attributes: dict[str, Any] = field(default_factory=dict)
+    codelet: str = ""
+    custom_form_url: str = ""
+    documentation: str = ""
+    deferred_choice_group_id: str = ""
+    external_client: str = ""
+    requires_manual_resourcing: bool = False
+    prev_status: WorkItemStatus | None = None
+    timer_started: bool = False
+    timer_expiry_ms: int = 0
+
+    # Persistence-related
+    _parent_item: YWorkItem | None = field(default=None, repr=False)
+    _child_items: set[YWorkItem] = field(default_factory=set, repr=False)
 
     # Private - allowed transitions
     _transitions: dict[tuple[WorkItemStatus, WorkItemEvent], WorkItemStatus] = field(default_factory=dict, repr=False)
@@ -297,7 +315,7 @@ class YWorkItem:
             # From FIRED
             (WorkItemStatus.FIRED, WorkItemEvent.OFFER): WorkItemStatus.OFFERED,
             (WorkItemStatus.FIRED, WorkItemEvent.ALLOCATE): WorkItemStatus.ALLOCATED,
-            (WorkItemStatus.FIRED, WorkItemEvent.START): WorkItemStatus.EXECUTING,
+            (WorkItemStatus.FIRED, WorkItemEvent.START): WorkItemStatus.STARTED,
             (WorkItemStatus.FIRED, WorkItemEvent.CANCEL): WorkItemStatus.CANCELLED,
             # From OFFERED
             (WorkItemStatus.OFFERED, WorkItemEvent.ALLOCATE): WorkItemStatus.ALLOCATED,
@@ -323,6 +341,7 @@ class YWorkItem:
             # From EXECUTING (system task)
             (WorkItemStatus.EXECUTING, WorkItemEvent.COMPLETE): WorkItemStatus.COMPLETED,
             (WorkItemStatus.EXECUTING, WorkItemEvent.FAIL): WorkItemStatus.FAILED,
+            (WorkItemStatus.EXECUTING, WorkItemEvent.SUSPEND): WorkItemStatus.SUSPENDED,
             (WorkItemStatus.EXECUTING, WorkItemEvent.CANCEL): WorkItemStatus.CANCELLED,
             (WorkItemStatus.EXECUTING, WorkItemEvent.TIMEOUT): WorkItemStatus.FAILED,
         }
@@ -644,12 +663,1334 @@ class YWorkItem:
         self.children.append(child_id)
         self.status = WorkItemStatus.PARENT
 
+    # ==================== Java YAWL Missing Methods ====================
+    # Status Predicates
+
+    def is_fired(self) -> bool:
+        """Check if work item is in FIRED status.
+
+        Returns
+        -------
+        bool
+            True if status is FIRED
+
+        Notes
+        -----
+        Java signature: boolean isFired()
+        """
+        return self.status == WorkItemStatus.FIRED
+
+    def is_offered(self) -> bool:
+        """Check if work item is in OFFERED status.
+
+        Returns
+        -------
+        bool
+            True if status is OFFERED
+
+        Notes
+        -----
+        Java signature: boolean isOffered()
+        """
+        return self.status == WorkItemStatus.OFFERED
+
+    def is_allocated(self) -> bool:
+        """Check if work item is in ALLOCATED status.
+
+        Returns
+        -------
+        bool
+            True if status is ALLOCATED
+
+        Notes
+        -----
+        Java signature: boolean isAllocated()
+        """
+        return self.status == WorkItemStatus.ALLOCATED
+
+    def is_started(self) -> bool:
+        """Check if work item is in STARTED status.
+
+        Returns
+        -------
+        bool
+            True if status is STARTED
+
+        Notes
+        -----
+        Java signature: boolean isStarted()
+        """
+        return self.status == WorkItemStatus.STARTED
+
+    def is_executing(self) -> bool:
+        """Check if work item is in EXECUTING status.
+
+        Returns
+        -------
+        bool
+            True if status is EXECUTING
+
+        Notes
+        -----
+        Java signature: boolean isExecuting()
+        """
+        return self.status == WorkItemStatus.EXECUTING
+
+    def is_completed(self) -> bool:
+        """Check if work item is in COMPLETED status.
+
+        Returns
+        -------
+        bool
+            True if status is COMPLETED
+
+        Notes
+        -----
+        Java signature: boolean isCompleted()
+        """
+        return self.status == WorkItemStatus.COMPLETED
+
+    def is_suspended(self) -> bool:
+        """Check if work item is in SUSPENDED status.
+
+        Returns
+        -------
+        bool
+            True if status is SUSPENDED
+
+        Notes
+        -----
+        Java signature: boolean isSuspended()
+        """
+        return self.status == WorkItemStatus.SUSPENDED
+
+    def has_live_status(self) -> bool:
+        """Check if work item has a live status (active, not finished).
+
+        Returns
+        -------
+        bool
+            True if work item is active
+
+        Notes
+        -----
+        Java signature: boolean hasLiveStatus()
+        """
+        return self.is_active()
+
+    def has_finished_status(self) -> bool:
+        """Check if work item has finished status.
+
+        Returns
+        -------
+        bool
+            True if work item is finished
+
+        Notes
+        -----
+        Java signature: boolean hasFinishedStatus()
+        """
+        return self.is_finished()
+
+    def has_unfinished_status(self) -> bool:
+        """Check if work item has unfinished status.
+
+        Returns
+        -------
+        bool
+            True if work item is not finished
+
+        Notes
+        -----
+        Java signature: boolean hasUnfinishedStatus()
+        """
+        return not self.is_finished()
+
+    def has_completed_status(self) -> bool:
+        """Check if work item has completed status.
+
+        Returns
+        -------
+        bool
+            True if status is COMPLETED or FORCE_COMPLETED
+
+        Notes
+        -----
+        Java signature: boolean hasCompletedStatus()
+        """
+        return self.status in (WorkItemStatus.COMPLETED, WorkItemStatus.FORCE_COMPLETED)
+
+    def is_enabled_suspended(self) -> bool:
+        """Check if enabled work item is suspended.
+
+        Returns
+        -------
+        bool
+            True if work item was enabled and is now suspended
+
+        Notes
+        -----
+        Java signature: boolean isEnabledSuspended()
+        """
+        return self.status == WorkItemStatus.SUSPENDED and self.enabled_time is not None
+
+    def is_parent(self) -> bool:
+        """Check if this is a parent work item (has children).
+
+        Returns
+        -------
+        bool
+            True if work item is a parent
+
+        Notes
+        -----
+        Java signature: boolean isParent()
+        """
+        return self.status == WorkItemStatus.PARENT or len(self.children) > 0
+
+    def has_children(self) -> bool:
+        """Check if work item has child work items.
+
+        Returns
+        -------
+        bool
+            True if children exist
+
+        Notes
+        -----
+        Java signature: boolean hasChildren()
+        """
+        return len(self.children) > 0
+
+    # Child Management
+
+    def get_children(self) -> set[YWorkItem]:
+        """Get child work items.
+
+        Returns
+        -------
+        set[YWorkItem]
+            Set of child work items
+
+        Notes
+        -----
+        Java signature: Set getChildren()
+        """
+        return self._child_items.copy()
+
+    def set_children(self, children: set[YWorkItem]) -> None:
+        """Set child work items.
+
+        Parameters
+        ----------
+        children : set[YWorkItem]
+            Child work items
+
+        Notes
+        -----
+        Java signature: void setChildren(Set children)
+        """
+        self._child_items = children.copy()
+        self.children = [c.id for c in children]
+
+    def add_children(self, children: set[YWorkItem]) -> None:
+        """Add multiple child work items.
+
+        Parameters
+        ----------
+        children : set[YWorkItem]
+            Children to add
+
+        Notes
+        -----
+        Java signature: void add_children(Set children)
+        """
+        self._child_items.update(children)
+        self.children.extend([c.id for c in children if c.id not in self.children])
+
+    def create_child(self, child_case_id: str) -> YWorkItem:
+        """Create a child work item.
+
+        Parameters
+        ----------
+        child_case_id : str
+            Case ID for child
+
+        Returns
+        -------
+        YWorkItem
+            New child work item
+
+        Notes
+        -----
+        Java signature: YWorkItem createChild(YIdentifier childCaseID)
+        """
+        child = YWorkItem(
+            id=f"{self.id}_child_{len(self.children)}",
+            case_id=child_case_id,
+            task_id=self.task_id,
+            specification_id=self.specification_id,
+            net_id=self.net_id,
+            parent_id=self.id,
+        )
+        child._parent_item = self
+        self._child_items.add(child)
+        self.children.append(child.id)
+        self.status = WorkItemStatus.PARENT
+        return child
+
+    def get_parent(self) -> YWorkItem | None:
+        """Get parent work item.
+
+        Returns
+        -------
+        YWorkItem | None
+            Parent work item or None
+
+        Notes
+        -----
+        Java signature: YWorkItem getParent()
+        """
+        return self._parent_item
+
+    def set_parent(self, parent: YWorkItem) -> None:
+        """Set parent work item.
+
+        Parameters
+        ----------
+        parent : YWorkItem
+            Parent work item
+
+        Notes
+        -----
+        Java signature: void set_parent(YWorkItem parent)
+        """
+        self._parent_item = parent
+        self.parent_id = parent.id
+
+    # Getters
+
+    def get_case_id(self) -> str:
+        """Get case ID.
+
+        Returns
+        -------
+        str
+            Case identifier
+
+        Notes
+        -----
+        Java signature: YIdentifier getCaseID()
+        """
+        return self.case_id
+
+    def get_task_id(self) -> str:
+        """Get task ID.
+
+        Returns
+        -------
+        str
+            Task identifier
+
+        Notes
+        -----
+        Java signature: String getTaskID()
+        """
+        return self.task_id
+
+    def get_specification_id(self) -> str:
+        """Get specification ID.
+
+        Returns
+        -------
+        str
+            Specification identifier
+
+        Notes
+        -----
+        Java signature: YSpecificationID getSpecificationID()
+        """
+        return self.specification_id
+
+    def get_spec_name(self) -> str:
+        """Get specification name.
+
+        Returns
+        -------
+        str
+            Specification name
+
+        Notes
+        -----
+        Java signature: String getSpecName()
+        """
+        return self.specification_id.split("/")[-1] if self.specification_id else ""
+
+    def get_unique_id(self) -> str:
+        """Get unique work item ID.
+
+        Returns
+        -------
+        str
+            Unique identifier
+
+        Notes
+        -----
+        Java signature: String getUniqueID()
+        """
+        return self.id
+
+    def get_id_string(self) -> str:
+        """Get ID as string.
+
+        Returns
+        -------
+        str
+            ID string
+
+        Notes
+        -----
+        Java signature: String getIDString()
+        """
+        return self.id
+
+    def get_status(self) -> WorkItemStatus:
+        """Get current status.
+
+        Returns
+        -------
+        WorkItemStatus
+            Current status
+
+        Notes
+        -----
+        Java signature: YWorkItemStatus getStatus()
+        """
+        return self.status
+
+    def set_status(self, status: WorkItemStatus) -> None:
+        """Set work item status.
+
+        Parameters
+        ----------
+        status : WorkItemStatus
+            New status
+
+        Notes
+        -----
+        Java signature: void setStatus(YWorkItemStatus status)
+        """
+        self.prev_status = self.status
+        self.status = status
+
+    def get_enablement_time(self) -> datetime | None:
+        """Get enablement time.
+
+        Returns
+        -------
+        datetime | None
+            Time work item was enabled
+
+        Notes
+        -----
+        Java signature: Date getEnablementTime()
+        """
+        return self.enabled_time
+
+    def get_enablement_time_str(self) -> str:
+        """Get enablement time as string.
+
+        Returns
+        -------
+        str
+            Enablement time string
+
+        Notes
+        -----
+        Java signature: String getEnablementTimeStr()
+        """
+        return self.enabled_time.isoformat() if self.enabled_time else ""
+
+    def set_enablement_time(self, time: datetime) -> None:
+        """Set enablement time.
+
+        Parameters
+        ----------
+        time : datetime
+            Enablement time
+
+        Notes
+        -----
+        Java signature: void set_enablementTime(Date eTime)
+        """
+        self.enabled_time = time
+
+    def get_firing_time(self) -> datetime | None:
+        """Get firing time.
+
+        Returns
+        -------
+        datetime | None
+            Time work item was fired
+
+        Notes
+        -----
+        Java signature: Date getFiringTime()
+        """
+        return self.fired_time
+
+    def get_firing_time_str(self) -> str:
+        """Get firing time as string.
+
+        Returns
+        -------
+        str
+            Firing time string
+
+        Notes
+        -----
+        Java signature: String getFiringTimeStr()
+        """
+        return self.fired_time.isoformat() if self.fired_time else ""
+
+    def set_firing_time(self, time: datetime) -> None:
+        """Set firing time.
+
+        Parameters
+        ----------
+        time : datetime
+            Firing time
+
+        Notes
+        -----
+        Java signature: void set_firingTime(Date fTime)
+        """
+        self.fired_time = time
+
+    def get_start_time(self) -> datetime | None:
+        """Get start time.
+
+        Returns
+        -------
+        datetime | None
+            Time work started
+
+        Notes
+        -----
+        Java signature: Date getStartTime()
+        """
+        return self.started_time
+
+    def get_start_time_str(self) -> str:
+        """Get start time as string.
+
+        Returns
+        -------
+        str
+            Start time string
+
+        Notes
+        -----
+        Java signature: String getStartTimeStr()
+        """
+        return self.started_time.isoformat() if self.started_time else ""
+
+    def set_start_time(self, time: datetime) -> None:
+        """Set start time.
+
+        Parameters
+        ----------
+        time : datetime
+            Start time
+
+        Notes
+        -----
+        Java signature: void set_startTime(Date sTime)
+        """
+        self.started_time = time
+
+    # Data Methods
+
+    def get_data_string(self) -> str:
+        """Get data as XML string.
+
+        Returns
+        -------
+        str
+            XML representation of data
+
+        Notes
+        -----
+        Java signature: String getDataString()
+        """
+        if not self.data_input:
+            return "<data/>"
+        root = ET.Element("data")
+        for key, value in self.data_input.items():
+            elem = ET.SubElement(root, key)
+            elem.text = str(value)
+        return ET.tostring(root, encoding="unicode")
+
+    def set_data_string(self, data_str: str) -> None:
+        """Set data from XML string.
+
+        Parameters
+        ----------
+        data_str : str
+            XML data string
+
+        Notes
+        -----
+        Java signature: void set_dataString(String s)
+        """
+        root = ET.fromstring(data_str)
+        self.data_input = {child.tag: child.text or "" for child in root}
+
+    def get_data_element(self) -> ET.Element:
+        """Get data as XML element.
+
+        Returns
+        -------
+        ET.Element
+            Data element
+
+        Notes
+        -----
+        Java signature: Element getDataElement()
+        """
+        root = ET.Element("data")
+        for key, value in self.data_input.items():
+            elem = ET.SubElement(root, key)
+            elem.text = str(value)
+        return root
+
+    def set_data_element(self, data: ET.Element) -> None:
+        """Set data from XML element.
+
+        Parameters
+        ----------
+        data : ET.Element
+            Data element
+
+        Notes
+        -----
+        Java signature: void setDataElement(Element data)
+        """
+        self.data_input = {child.tag: child.text or "" for child in data}
+
+    def set_init_data(self, data: ET.Element) -> None:
+        """Set initial data.
+
+        Parameters
+        ----------
+        data : ET.Element
+            Initial data element
+
+        Notes
+        -----
+        Java signature: void setInitData(Element data)
+        """
+        self.set_data_element(data)
+
+    def complete_data(self, output: ET.ElementTree) -> None:
+        """Complete with output data.
+
+        Parameters
+        ----------
+        output : ET.ElementTree
+            Output data document
+
+        Notes
+        -----
+        Java signature: void completeData(Document output)
+        """
+        if output.getroot() is not None:
+            self.data_output = {child.tag: child.text or "" for child in output.getroot()}
+
+    # Timer Methods
+
+    def get_timer(self) -> WorkItemTimer | None:
+        """Get work item timer.
+
+        Returns
+        -------
+        WorkItemTimer | None
+            Timer or None
+
+        Notes
+        -----
+        Java signature: YWorkItemTimer getTimer()
+        """
+        return self.timer
+
+    def set_timer(self, timer: WorkItemTimer) -> None:
+        """Set work item timer.
+
+        Parameters
+        ----------
+        timer : WorkItemTimer
+            Timer to set
+
+        Notes
+        -----
+        Java signature: void setTimer(YWorkItemTimer timer)
+        """
+        self.timer = timer
+
+    def cancel_timer(self) -> None:
+        """Cancel active timer.
+
+        Notes
+        -----
+        Java signature: void cancelTimer()
+        """
+        if self.timer:
+            self.timer.expiry = None
+            self.timer_started = False
+
+    def get_timer_expiry(self) -> int:
+        """Get timer expiry time in milliseconds.
+
+        Returns
+        -------
+        int
+            Expiry time in ms since epoch
+
+        Notes
+        -----
+        Java signature: long getTimerExpiry()
+        """
+        return self.timer_expiry_ms
+
+    def set_timer_expiry(self, time_ms: int) -> None:
+        """Set timer expiry time.
+
+        Parameters
+        ----------
+        time_ms : int
+            Expiry time in milliseconds since epoch
+
+        Notes
+        -----
+        Java signature: void setTimerExpiry(long time)
+        """
+        self.timer_expiry_ms = time_ms
+        if self.timer:
+            self.timer.expiry = datetime.fromtimestamp(time_ms / 1000.0)
+
+    def has_timer_started(self) -> bool:
+        """Check if timer has started.
+
+        Returns
+        -------
+        bool
+            True if timer is running
+
+        Notes
+        -----
+        Java signature: boolean hasTimerStarted()
+        """
+        return self.timer_started
+
+    def set_timer_started(self, started: bool) -> None:
+        """Set timer started flag.
+
+        Parameters
+        ----------
+        started : bool
+            Timer started state
+
+        Notes
+        -----
+        Java signature: void setTimerStarted(boolean started)
+        """
+        self.timer_started = started
+
+    def set_timer_active(self) -> None:
+        """Mark timer as active.
+
+        Notes
+        -----
+        Java signature: void setTimerActive()
+        """
+        self.timer_started = True
+
+    def get_timer_status(self) -> str:
+        """Get timer status string.
+
+        Returns
+        -------
+        str
+            Timer status
+
+        Notes
+        -----
+        Java signature: String getTimerStatus()
+        """
+        if not self.timer:
+            return "none"
+        if self.timer_started:
+            return "active"
+        return "inactive"
+
+    # Attributes
+
+    def get_attributes(self) -> dict[str, Any]:
+        """Get work item attributes.
+
+        Returns
+        -------
+        dict[str, Any]
+            Attributes dictionary
+
+        Notes
+        -----
+        Java signature: Map getAttributes()
+        """
+        return self.attributes.copy()
+
+    def set_attributes(self, attributes: dict[str, Any]) -> None:
+        """Set work item attributes.
+
+        Parameters
+        ----------
+        attributes : dict[str, Any]
+            Attributes to set
+
+        Notes
+        -----
+        Java signature: void setAttributes(Map attributes)
+        """
+        self.attributes = attributes.copy()
+
+    # Codelet
+
+    def get_codelet(self) -> str:
+        """Get codelet name.
+
+        Returns
+        -------
+        str
+            Codelet name
+
+        Notes
+        -----
+        Java signature: String getCodelet()
+        """
+        return self.codelet
+
+    def set_codelet(self, codelet: str) -> None:
+        """Set codelet name.
+
+        Parameters
+        ----------
+        codelet : str
+            Codelet name
+
+        Notes
+        -----
+        Java signature: void setCodelet(String codelet)
+        """
+        self.codelet = codelet
+
+    # Custom Form
+
+    def get_custom_form_url(self) -> str:
+        """Get custom form URL.
+
+        Returns
+        -------
+        str
+            Custom form URL
+
+        Notes
+        -----
+        Java signature: URL getCustomFormURL()
+        """
+        return self.custom_form_url
+
+    def set_custom_form_url(self, form_url: str) -> None:
+        """Set custom form URL.
+
+        Parameters
+        ----------
+        form_url : str
+            Custom form URL
+
+        Notes
+        -----
+        Java signature: void setCustomFormURL(URL formURL)
+        """
+        self.custom_form_url = form_url
+
+    # Documentation
+
+    def get_documentation(self) -> str:
+        """Get documentation.
+
+        Returns
+        -------
+        str
+            Documentation text
+
+        Notes
+        -----
+        Java signature: String getDocumentation()
+        """
+        return self.documentation
+
+    # Deferred Choice
+
+    def get_deferred_choice_group_id(self) -> str:
+        """Get deferred choice group ID.
+
+        Returns
+        -------
+        str
+            Group ID
+
+        Notes
+        -----
+        Java signature: String getDeferredChoiceGroupID()
+        """
+        return self.deferred_choice_group_id
+
+    def set_deferred_choice_group_id(self, group_id: str) -> None:
+        """Set deferred choice group ID.
+
+        Parameters
+        ----------
+        group_id : str
+            Group ID
+
+        Notes
+        -----
+        Java signature: void setDeferredChoiceGroupID(String id)
+        """
+        self.deferred_choice_group_id = group_id
+
+    # External Client
+
+    def get_external_client(self) -> str:
+        """Get external client ID.
+
+        Returns
+        -------
+        str
+            External client ID
+
+        Notes
+        -----
+        Java signature: YClient getExternalClient()
+        """
+        return self.external_client
+
+    def set_external_client(self, client: str) -> None:
+        """Set external client ID.
+
+        Parameters
+        ----------
+        client : str
+            External client ID
+
+        Notes
+        -----
+        Java signature: void set_externalClient(String owner)
+        """
+        self.external_client = client
+
+    # Manual Resourcing
+
+    def get_requires_manual_resourcing(self) -> bool:
+        """Check if work item requires manual resourcing.
+
+        Returns
+        -------
+        bool
+            True if manual resourcing required
+
+        Notes
+        -----
+        Java signature: boolean requiresManualResourcing()
+        """
+        return self.requires_manual_resourcing
+
+    def set_requires_manual_resourcing(self, requires: bool) -> None:
+        """Set manual resourcing requirement.
+
+        Parameters
+        ----------
+        requires : bool
+            Manual resourcing required
+
+        Notes
+        -----
+        Java signature: void setRequiresManualResourcing(boolean requires)
+        """
+        self.requires_manual_resourcing = requires
+
+    # Dynamic Creation
+
+    def get_allows_dynamic_creation(self) -> bool:
+        """Check if dynamic instance creation is allowed.
+
+        Returns
+        -------
+        bool
+            True if dynamic creation allowed
+
+        Notes
+        -----
+        Java signature: boolean allowsDynamicCreation()
+        """
+        return self.allows_dynamic_creation
+
+    def set_allows_dynamic_creation(self, allows: bool) -> None:
+        """Set dynamic creation flag.
+
+        Parameters
+        ----------
+        allows : bool
+            Allow dynamic creation
+
+        Notes
+        -----
+        Java signature: void set_allowsDynamicCreation(boolean a)
+        """
+        self.allows_dynamic_creation = allows
+
+    # Status Change Methods
+
+    def set_status_to_started(self) -> None:
+        """Set status to STARTED.
+
+        Notes
+        -----
+        Java signature: void setStatusToStarted()
+        """
+        self.set_status(WorkItemStatus.STARTED)
+        self.started_time = datetime.now()
+
+    def set_status_to_complete(self, completion_flag: str = "normal") -> None:
+        """Set status to COMPLETED.
+
+        Parameters
+        ----------
+        completion_flag : str
+            Completion flag (normal or force)
+
+        Notes
+        -----
+        Java signature: void setStatusToComplete(WorkItemCompletion completionFlag)
+        """
+        if completion_flag == "force":
+            self.set_status(WorkItemStatus.FORCE_COMPLETED)
+        else:
+            self.set_status(WorkItemStatus.COMPLETED)
+        self.completed_time = datetime.now()
+
+    def set_status_to_suspended(self) -> None:
+        """Set status to SUSPENDED.
+
+        Notes
+        -----
+        Java signature: void setStatusToSuspended()
+        """
+        self.set_status(WorkItemStatus.SUSPENDED)
+
+    def set_status_to_unsuspended(self) -> None:
+        """Set status to STARTED (resume from suspended).
+
+        Notes
+        -----
+        Java signature: void setStatusToUnsuspended()
+        """
+        self.set_status(WorkItemStatus.STARTED)
+
+    def set_status_to_deleted(self) -> None:
+        """Set status to CANCELLED (deleted).
+
+        Notes
+        -----
+        Java signature: void setStatusToDeleted()
+        """
+        self.set_status(WorkItemStatus.CANCELLED)
+
+    def set_status_to_discarded(self) -> None:
+        """Set status to CANCELLED (discarded).
+
+        Notes
+        -----
+        Java signature: void setStatusToDiscarded()
+        """
+        self.set_status(WorkItemStatus.CANCELLED)
+
+    def roll_back_status(self) -> None:
+        """Roll back to previous status.
+
+        Notes
+        -----
+        Java signature: void rollBackStatus()
+        """
+        if self.prev_status is not None:
+            current = self.status
+            self.status = self.prev_status
+            self.prev_status = current
+
+    # Persistence Stubs (for Java compatibility)
+
+    def add_to_repository(self) -> None:
+        """Add work item to repository.
+
+        Notes
+        -----
+        Java signature: void addToRepository()
+        Stub for persistence layer integration.
+        """
+
+    def complete_persistence(self, completion_status: WorkItemStatus) -> None:
+        """Complete persistence operations.
+
+        Parameters
+        ----------
+        completion_status : WorkItemStatus
+            Final completion status
+
+        Notes
+        -----
+        Java signature: void completePersistence(YWorkItemStatus completionStatus)
+        Stub for persistence layer integration.
+        """
+
+    def complete_parent_persistence(self) -> None:
+        """Complete parent work item persistence.
+
+        Notes
+        -----
+        Java signature: void completeParentPersistence()
+        Stub for persistence layer integration.
+        """
+
+    def delete_work_item(self, item: YWorkItem) -> None:
+        """Delete a work item.
+
+        Parameters
+        ----------
+        item : YWorkItem
+            Work item to delete
+
+        Notes
+        -----
+        Java signature: void deleteWorkItem(YWorkItem item)
+        Stub for persistence layer integration.
+        """
+        if item in self._child_items:
+            self._child_items.remove(item)
+            if item.id in self.children:
+                self.children.remove(item.id)
+
+    def log_and_unpersist(self, item: YWorkItem) -> None:
+        """Log and remove item from persistence.
+
+        Parameters
+        ----------
+        item : YWorkItem
+            Work item to unpersist
+
+        Notes
+        -----
+        Java signature: void logAndUnpersist(YPersistenceManager pmgr, YWorkItem item)
+        Stub for persistence layer integration.
+        """
+
+    def log_status_change(self, log_list: list[str] | None = None) -> None:
+        """Log status change.
+
+        Parameters
+        ----------
+        log_list : list[str] | None
+            Log data items
+
+        Notes
+        -----
+        Java signature: void logStatusChange(YLogDataItemList logList)
+        Stub for logging integration.
+        """
+
+    def log_completion_data(self, output: ET.ElementTree | None = None) -> None:
+        """Log completion data.
+
+        Parameters
+        ----------
+        output : ET.ElementTree | None
+            Output document
+
+        Notes
+        -----
+        Java signature: void logCompletionData(Document output)
+        Stub for logging integration.
+        """
+
+    def get_starting_predicates(self) -> list[str]:
+        """Get starting log predicates.
+
+        Returns
+        -------
+        list[str]
+            Starting predicates
+
+        Notes
+        -----
+        Java signature: YLogDataItemList getStartingPredicates()
+        Stub for logging integration.
+        """
+        return []
+
+    def get_completion_predicates(self) -> list[str]:
+        """Get completion log predicates.
+
+        Returns
+        -------
+        list[str]
+            Completion predicates
+
+        Notes
+        -----
+        Java signature: YLogDataItemList getCompletionPredicates()
+        Stub for logging integration.
+        """
+        return []
+
+    def set_external_starting_log_predicate(self, predicate: str) -> None:
+        """Set external starting log predicate.
+
+        Parameters
+        ----------
+        predicate : str
+            Log predicate
+
+        Notes
+        -----
+        Java signature: void setExternalStartingLogPredicate(String predicate)
+        Stub for logging integration.
+        """
+
+    def set_external_completion_log_predicate(self, predicate: str) -> None:
+        """Set external completion log predicate.
+
+        Parameters
+        ----------
+        predicate : str
+            Log predicate
+
+        Notes
+        -----
+        Java signature: void setExternalCompletionLogPredicate(String predicate)
+        Stub for logging integration.
+        """
+
+    def set_external_log_predicate(self, predicate: str) -> None:
+        """Set external log predicate.
+
+        Parameters
+        ----------
+        predicate : str
+            Log predicate
+
+        Notes
+        -----
+        Java signature: void setExternalLogPredicate(String predicate)
+        Stub for logging integration.
+        """
+
+    def restore_data_to_net(self, services: set[str]) -> None:
+        """Restore data to net.
+
+        Parameters
+        ----------
+        services : set[str]
+            Service set
+
+        Notes
+        -----
+        Java signature: void restoreDataToNet(Set services)
+        Stub for data restoration.
+        """
+
+    # Utility Methods
+
+    def to_string(self) -> str:
+        """Convert work item to string representation.
+
+        Returns
+        -------
+        str
+            String representation
+
+        Notes
+        -----
+        Java signature: String toString()
+        """
+        return f"YWorkItem[{self.id}:{self.task_id}:{self.status.name}]"
+
+    def to_xml(self) -> str:
+        """Convert work item to XML representation.
+
+        Returns
+        -------
+        str
+            XML string
+
+        Notes
+        -----
+        Java signature: String toXML()
+        """
+        root = ET.Element("workItem")
+        ET.SubElement(root, "id").text = self.id
+        ET.SubElement(root, "caseID").text = self.case_id
+        ET.SubElement(root, "taskID").text = self.task_id
+        ET.SubElement(root, "status").text = self.status.name
+        if self.enabled_time:
+            ET.SubElement(root, "enablementTime").text = self.enabled_time.isoformat()
+        if self.fired_time:
+            ET.SubElement(root, "firingTime").text = self.fired_time.isoformat()
+        if self.started_time:
+            ET.SubElement(root, "startTime").text = self.started_time.isoformat()
+        if self.resource_id:
+            ET.SubElement(root, "resourceID").text = self.resource_id
+        return ET.tostring(root, encoding="unicode")
+
     def __hash__(self) -> int:
-        """Hash by ID."""
+        """Hash by ID.
+
+        Returns
+        -------
+        int
+            Hash value
+
+        Notes
+        -----
+        Java signature: int hashCode()
+        """
         return hash(self.id)
 
     def __eq__(self, other: object) -> bool:
-        """Equality by ID."""
+        """Equality by ID.
+
+        Parameters
+        ----------
+        other : object
+            Object to compare
+
+        Returns
+        -------
+        bool
+            True if equal
+
+        Notes
+        -----
+        Java signature: boolean equals(Object other)
+        """
         if not isinstance(other, YWorkItem):
             return NotImplemented
         return self.id == other.id

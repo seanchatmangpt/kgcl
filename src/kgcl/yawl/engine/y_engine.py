@@ -11,8 +11,11 @@ from collections.abc import Callable
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from enum import Enum, auto
+from io import IOBase
 from typing import TYPE_CHECKING, Any
+from xml.dom.minidom import Document, Element
 
+from kgcl.yawl.clients.models import YSpecificationID
 from kgcl.yawl.elements.y_identifier import YIdentifier
 from kgcl.yawl.elements.y_specification import SpecificationStatus, YSpecification
 from kgcl.yawl.engine.y_case import CaseFactory, CaseStatus, YCase
@@ -27,6 +30,279 @@ from kgcl.yawl.state.y_marking import YMarking
 if TYPE_CHECKING:
     from kgcl.yawl.elements.y_net import YNet
     from kgcl.yawl.elements.y_task import YTask
+
+
+# === Type stubs for Java YAWL classes ===
+
+
+@dataclass(frozen=True)
+class YExternalClient:
+    """External client that can interact with the engine.
+
+    Mirrors Java YExternalClient.
+
+    Parameters
+    ----------
+    id : str
+        Client ID
+    password : str
+        Client password (hashed)
+    documentation : str
+        Client documentation
+    """
+
+    id: str
+    password: str
+    documentation: str = ""
+
+
+@dataclass(frozen=True)
+class YAWLServiceReference:
+    """Reference to a YAWL service.
+
+    Mirrors Java YAWLServiceReference.
+
+    Parameters
+    ----------
+    service_id : str
+        Service ID
+    uri : str
+        Service URI
+    documentation : str
+        Service documentation
+    """
+
+    service_id: str
+    uri: str
+    documentation: str = ""
+
+
+@dataclass
+class YClient:
+    """Client reference (participant or service).
+
+    Parameters
+    ----------
+    id : str
+        Client ID
+    """
+
+    id: str
+
+
+class WorkItemCompletion(Enum):
+    """Work item completion type.
+
+    Attributes
+    ----------
+    NORMAL : auto
+        Normal completion
+    FORCE : auto
+        Force completion
+    FAIL : auto
+        Fail completion
+    """
+
+    NORMAL = auto()
+    FORCE = auto()
+    FAIL = auto()
+
+
+@dataclass
+class YNetData:
+    """Net data container.
+
+    Parameters
+    ----------
+    data : dict[str, Any]
+        Data dictionary
+    """
+
+    data: dict[str, Any] = field(default_factory=dict)
+
+
+@dataclass
+class AnnouncementContext:
+    """Context for announcements.
+
+    Parameters
+    ----------
+    events : list[str]
+        Event list
+    """
+
+    events: list[str] = field(default_factory=list)
+
+
+@dataclass
+class YAnnouncer:
+    """Event announcer.
+
+    Parameters
+    ----------
+    listeners : list[Callable[[str], None]]
+        Event listeners
+    """
+
+    listeners: list[Callable[[str], None]] = field(default_factory=list)
+
+
+@dataclass
+class YBuildProperties:
+    """Build properties.
+
+    Parameters
+    ----------
+    version : str
+        Build version
+    timestamp : datetime
+        Build timestamp
+    """
+
+    version: str = "5.2"
+    timestamp: datetime = field(default_factory=datetime.now)
+
+
+class Status(Enum):
+    """Engine status.
+
+    Attributes
+    ----------
+    RUNNING : auto
+        Engine running
+    STOPPED : auto
+        Engine stopped
+    """
+
+    RUNNING = auto()
+    STOPPED = auto()
+
+
+@dataclass
+class InstanceCache:
+    """Instance cache for persistence.
+
+    Parameters
+    ----------
+    cache : dict[str, Any]
+        Cache storage
+    """
+
+    cache: dict[str, Any] = field(default_factory=dict)
+
+
+@dataclass
+class YNetRunnerRepository:
+    """Repository of net runners.
+
+    Parameters
+    ----------
+    runners : dict[str, YNetRunner]
+        Runners by key
+    """
+
+    runners: dict[str, YNetRunner] = field(default_factory=dict)
+
+
+@dataclass
+class YPersistenceManager:
+    """Persistence manager.
+
+    Parameters
+    ----------
+    transaction_active : bool
+        Is transaction active
+    """
+
+    transaction_active: bool = False
+
+    def start_transaction(self) -> bool:
+        """Start transaction."""
+        if not self.transaction_active:
+            self.transaction_active = True
+            return True
+        return False
+
+    def commit_transaction(self) -> None:
+        """Commit transaction."""
+        self.transaction_active = False
+
+    def rollback_transaction(self) -> None:
+        """Rollback transaction."""
+        self.transaction_active = False
+
+    def store_object(self, obj: object) -> None:
+        """Store object."""
+
+    def update_object(self, obj: object) -> None:
+        """Update object."""
+
+    def delete_object(self, obj: object) -> None:
+        """Delete object."""
+
+
+@dataclass
+class YWorkItemRepository:
+    """Repository of work items.
+
+    Parameters
+    ----------
+    work_items : dict[str, YWorkItem]
+        Work items by ID
+    """
+
+    work_items: dict[str, YWorkItem] = field(default_factory=dict)
+
+
+@dataclass
+class YSessionCache:
+    """Session cache.
+
+    Parameters
+    ----------
+    sessions : dict[str, dict[str, Any]]
+        Sessions
+    """
+
+    sessions: dict[str, dict[str, Any]] = field(default_factory=dict)
+
+
+@dataclass
+class YLogDataItemList:
+    """Log data item list.
+
+    Parameters
+    ----------
+    items : list[dict[str, Any]]
+        Log items
+    """
+
+    items: list[dict[str, Any]] = field(default_factory=list)
+
+
+@dataclass
+class YVerificationHandler:
+    """Verification handler for spec validation.
+
+    Parameters
+    ----------
+    errors : list[str]
+        Verification errors
+    """
+
+    errors: list[str] = field(default_factory=list)
+
+
+class InterfaceAManagementObserver:
+    """Observer for Interface A management."""
+
+
+class InterfaceBClientObserver:
+    """Observer for Interface B events."""
+
+
+class ObserverGateway:
+    """Gateway for observers."""
 
 
 class EngineStatus(Enum):
@@ -196,6 +472,47 @@ class YEngine:
 
     # Timestamps
     started: datetime | None = None
+
+    # External clients and services (Gap 8)
+    external_clients: dict[str, YExternalClient] = field(default_factory=dict)
+    yawl_services: dict[str, YAWLServiceReference] = field(default_factory=dict)
+    interface_x_listeners: set[str] = field(default_factory=set)
+    interface_a_observers: list[InterfaceAManagementObserver] = field(default_factory=list)
+    interface_b_observers: list[InterfaceBClientObserver] = field(default_factory=list)
+    observer_gateways: list[ObserverGateway] = field(default_factory=list)
+
+    # Persistence
+    persistence_manager: YPersistenceManager = field(default_factory=YPersistenceManager)
+    persisting: bool = False
+
+    # Caching
+    instance_cache: InstanceCache = field(default_factory=InstanceCache)
+    session_cache: YSessionCache = field(default_factory=YSessionCache)
+    work_item_repository: YWorkItemRepository = field(default_factory=YWorkItemRepository)
+    net_runner_repository: YNetRunnerRepository = field(default_factory=YNetRunnerRepository)
+
+    # Configuration
+    engine_classes_root_path: str = ""
+    engine_nbr: int = 0
+    generate_ui_metadata: bool = False
+    allow_generic_admin: bool = False
+    hibernate_statistics_enabled: bool = False
+
+    # Logging
+    process_logging_enabled: bool = True
+
+    # Build info
+    build_properties: YBuildProperties = field(default_factory=YBuildProperties)
+
+    # Announcement
+    announcement_context: AnnouncementContext = field(default_factory=AnnouncementContext)
+    announcer: YAnnouncer = field(default_factory=YAnnouncer)
+
+    # Default worklist
+    default_worklist: YAWLServiceReference | None = None
+
+    # Case numbering
+    case_counter: int = 0
 
     # --- Engine lifecycle ---
 
@@ -723,13 +1040,17 @@ class YEngine:
                 )
 
             if participants:
-                # Offer to selected participants
+                # FIRE work item first (ENABLED → FIRED)
+                work_item.transition(WorkItemEvent.FIRE)
+                # Offer to selected participants (FIRED → OFFERED)
                 participant_ids = {p.id for p in participants}
                 work_item.offer(participant_ids)
                 # Maybe create timer
                 self._maybe_create_timer_for_work_item(work_item, task)
         else:
-            # Non-atomic task - auto-start
+            # Non-atomic task (system task) - fire then auto-start
+            # ENABLED → FIRED → EXECUTING
+            work_item.transition(WorkItemEvent.FIRE)
             work_item.transition(WorkItemEvent.START)
 
     def _is_composite_task(self, task: YTask) -> bool:
@@ -1366,6 +1687,2150 @@ class YEngine:
                 listener(event)
             except Exception:
                 pass  # Don't let listener errors break the engine
+
+    # --- External client management (Gap 8) ---
+
+    def addExternalClient(self, client: YExternalClient) -> bool:
+        """Add external client to engine.
+
+        Java signature: boolean addExternalClient(YExternalClient client)
+
+        Parameters
+        ----------
+        client : YExternalClient
+            Client to add
+
+        Returns
+        -------
+        bool
+            True if added successfully
+        """
+        if client.id in self.external_clients:
+            return False
+        self.external_clients[client.id] = client
+        self._emit_event("EXTERNAL_CLIENT_ADDED", data={"client_id": client.id})
+        return True
+
+    def removeExternalClient(self, client_name: str) -> YExternalClient | None:
+        """Remove external client from engine.
+
+        Java signature: YExternalClient removeExternalClient(String clientName)
+
+        Parameters
+        ----------
+        client_name : str
+            Client name/ID
+
+        Returns
+        -------
+        YExternalClient | None
+            Removed client or None
+        """
+        client = self.external_clients.pop(client_name, None)
+        if client:
+            self._emit_event("EXTERNAL_CLIENT_REMOVED", data={"client_id": client_name})
+        return client
+
+    def getExternalClient(self, name: str) -> YExternalClient | None:
+        """Get external client by name.
+
+        Java signature: YExternalClient getExternalClient(String name)
+
+        Parameters
+        ----------
+        name : str
+            Client name
+
+        Returns
+        -------
+        YExternalClient | None
+            Client or None
+        """
+        return self.external_clients.get(name)
+
+    def getExternalClients(self) -> set[YExternalClient]:
+        """Get all external clients.
+
+        Java signature: Set getExternalClients()
+
+        Returns
+        -------
+        set[YExternalClient]
+            Set of external clients
+        """
+        return set(self.external_clients.values())
+
+    def updateExternalClient(self, id: str, password: str, doco: str) -> bool:
+        """Update external client credentials.
+
+        Java signature: boolean updateExternalClient(String id, String password, String doco)
+
+        Parameters
+        ----------
+        id : str
+            Client ID
+        password : str
+            New password
+        doco : str
+            Documentation
+
+        Returns
+        -------
+        bool
+            True if updated
+        """
+        if id in self.external_clients:
+            # Create new client with updated info (frozen dataclass)
+            old_client = self.external_clients[id]
+            self.external_clients[id] = YExternalClient(id=id, password=password, documentation=doco)
+            return True
+        return False
+
+    def loadDefaultClients(self) -> set[YExternalClient]:
+        """Load default external clients.
+
+        Java signature: Set loadDefaultClients()
+
+        Returns
+        -------
+        set[YExternalClient]
+            Set of loaded clients
+        """
+        # Default admin client
+        admin = YExternalClient(id="admin", password="YAWL", documentation="Default admin client")
+        self.addExternalClient(admin)
+        return {admin}
+
+    # --- YAWL service management (Gap 8) ---
+
+    def addYawlService(self, yawl_service: YAWLServiceReference) -> None:
+        """Add YAWL service to engine.
+
+        Java signature: void addYawlService(YAWLServiceReference yawlService)
+
+        Parameters
+        ----------
+        yawl_service : YAWLServiceReference
+            Service to add
+        """
+        self.yawl_services[yawl_service.service_id] = yawl_service
+        self._emit_event("YAWL_SERVICE_ADDED", data={"service_id": yawl_service.service_id})
+
+    def removeYawlService(self, service_uri: str) -> YAWLServiceReference | None:
+        """Remove YAWL service.
+
+        Java signature: YAWLServiceReference removeYawlService(String serviceURI)
+
+        Parameters
+        ----------
+        service_uri : str
+            Service URI
+
+        Returns
+        -------
+        YAWLServiceReference | None
+            Removed service or None
+        """
+        for service_id, service in list(self.yawl_services.items()):
+            if service.uri == service_uri:
+                del self.yawl_services[service_id]
+                self._emit_event("YAWL_SERVICE_REMOVED", data={"service_id": service_id})
+                return service
+        return None
+
+    def getRegisteredYawlService(self, yawl_service_id: str) -> YAWLServiceReference | None:
+        """Get registered YAWL service by ID.
+
+        Java signature: YAWLServiceReference getRegisteredYawlService(String yawlServiceID)
+
+        Parameters
+        ----------
+        yawl_service_id : str
+            Service ID
+
+        Returns
+        -------
+        YAWLServiceReference | None
+            Service or None
+        """
+        return self.yawl_services.get(yawl_service_id)
+
+    def getYAWLServices(self) -> set[YAWLServiceReference]:
+        """Get all YAWL services.
+
+        Java signature: Set getYAWLServices()
+
+        Returns
+        -------
+        set[YAWLServiceReference]
+            Set of services
+        """
+        return set(self.yawl_services.values())
+
+    def setDefaultWorklist(self, param_str: str) -> None:
+        """Set default worklist service.
+
+        Java signature: void setDefaultWorklist(String paramStr)
+
+        Parameters
+        ----------
+        param_str : str
+            Service ID or URI
+        """
+        service = self.getRegisteredYawlService(param_str)
+        if service:
+            self.default_worklist = service
+
+    def getDefaultWorklist(self) -> YAWLServiceReference | None:
+        """Get default worklist service.
+
+        Java signature: YAWLServiceReference getDefaultWorklist()
+
+        Returns
+        -------
+        YAWLServiceReference | None
+            Default worklist or None
+        """
+        return self.default_worklist
+
+    # --- Interface X listeners ---
+
+    def addInterfaceXListener(self, observer_uri: str) -> bool:
+        """Add Interface X listener.
+
+        Java signature: boolean addInterfaceXListener(String observerURI)
+
+        Parameters
+        ----------
+        observer_uri : str
+            Observer URI
+
+        Returns
+        -------
+        bool
+            True if added
+        """
+        if observer_uri not in self.interface_x_listeners:
+            self.interface_x_listeners.add(observer_uri)
+            return True
+        return False
+
+    def removeInterfaceXListener(self, uri: str) -> bool:
+        """Remove Interface X listener.
+
+        Java signature: boolean removeInterfaceXListener(String uri)
+
+        Parameters
+        ----------
+        uri : str
+            Observer URI
+
+        Returns
+        -------
+        bool
+            True if removed
+        """
+        if uri in self.interface_x_listeners:
+            self.interface_x_listeners.remove(uri)
+            return True
+        return False
+
+    # --- Interface A/B observers ---
+
+    def registerInterfaceAClient(self, observer: InterfaceAManagementObserver) -> None:
+        """Register Interface A client.
+
+        Java signature: void registerInterfaceAClient(InterfaceAManagementObserver observer)
+
+        Parameters
+        ----------
+        observer : InterfaceAManagementObserver
+            Observer to register
+        """
+        if observer not in self.interface_a_observers:
+            self.interface_a_observers.append(observer)
+
+    def registerInterfaceBObserver(self, observer: InterfaceBClientObserver) -> None:
+        """Register Interface B observer.
+
+        Java signature: void registerInterfaceBObserver(InterfaceBClientObserver observer)
+
+        Parameters
+        ----------
+        observer : InterfaceBClientObserver
+            Observer to register
+        """
+        if observer not in self.interface_b_observers:
+            self.interface_b_observers.append(observer)
+
+    def registerInterfaceBObserverGateway(self, gateway: ObserverGateway) -> None:
+        """Register Interface B observer gateway.
+
+        Java signature: void registerInterfaceBObserverGateway(ObserverGateway gateway)
+
+        Parameters
+        ----------
+        gateway : ObserverGateway
+            Gateway to register
+        """
+        if gateway not in self.observer_gateways:
+            self.observer_gateways.append(gateway)
+
+    # --- Case data APIs ---
+
+    def getCaseData(self, id: YIdentifier) -> YNetData:
+        """Get case data by identifier.
+
+        Java signature: YNetData getCaseData(YIdentifier id)
+
+        Parameters
+        ----------
+        id : YIdentifier
+            Case identifier
+
+        Returns
+        -------
+        YNetData
+            Case data
+        """
+        case = self.get_case(id.case_id)
+        if case:
+            return YNetData(data=case.data.data)
+        return YNetData()
+
+    def getCaseData_str(self, case_id: str) -> str:
+        """Get case data as string.
+
+        Java signature: String getCaseData(String caseID)
+
+        Parameters
+        ----------
+        case_id : str
+            Case ID
+
+        Returns
+        -------
+        str
+            Case data as XML string
+        """
+        case = self.get_case(case_id)
+        if case:
+            import json
+
+            return json.dumps(case.data.data)
+        return ""
+
+    def getCaseDataDocument(self, id: str) -> Document:
+        """Get case data as XML document.
+
+        Java signature: Document getCaseDataDocument(String id)
+
+        Parameters
+        ----------
+        id : str
+            Case ID
+
+        Returns
+        -------
+        Document
+            XML document
+        """
+        # Stub - would need XML serialization
+        return Document()
+
+    def updateCaseData(self, id_str: str, data: str) -> bool:
+        """Update case data.
+
+        Java signature: boolean updateCaseData(String idStr, String data)
+
+        Parameters
+        ----------
+        id_str : str
+            Case ID
+        data : str
+            New data (JSON string)
+
+        Returns
+        -------
+        bool
+            True if updated
+        """
+        case = self.get_case(id_str)
+        if case:
+            import json
+
+            try:
+                data_dict = json.loads(data)
+                case.data.merge_input(data_dict)
+                return True
+            except json.JSONDecodeError:
+                return False
+        return False
+
+    def getNetData(self, case_id: str) -> str:
+        """Get net data for case.
+
+        Java signature: String getNetData(String caseID)
+
+        Parameters
+        ----------
+        case_id : str
+            Case ID
+
+        Returns
+        -------
+        str
+            Net data as string
+        """
+        return self.getCaseData_str(case_id)
+
+    # --- Work item data ---
+
+    def updateWorkItemData(self, work_item_id: str, data: str) -> bool:
+        """Update work item data.
+
+        Java signature: boolean updateWorkItemData(String workItemID, String data)
+
+        Parameters
+        ----------
+        work_item_id : str
+            Work item ID
+        data : str
+            New data
+
+        Returns
+        -------
+        bool
+            True if updated
+        """
+        work_item = self._find_work_item(work_item_id)
+        if work_item:
+            import json
+
+            try:
+                data_dict = json.loads(data)
+                if work_item.data is None:
+                    work_item.data = {}
+                work_item.data.update(data_dict)
+                return True
+            except json.JSONDecodeError:
+                return False
+        return False
+
+    # --- Persistence transaction support ---
+
+    def startTransaction(self) -> bool:
+        """Start persistence transaction.
+
+        Java signature: boolean startTransaction()
+
+        Returns
+        -------
+        bool
+            True if started
+        """
+        if self.persisting:
+            return self.persistence_manager.start_transaction()
+        return False
+
+    def commitTransaction(self) -> None:
+        """Commit persistence transaction.
+
+        Java signature: void commitTransaction()
+        """
+        if self.persisting:
+            self.persistence_manager.commit_transaction()
+
+    def rollbackTransaction(self) -> None:
+        """Rollback persistence transaction.
+
+        Java signature: void rollbackTransaction()
+        """
+        if self.persisting:
+            self.persistence_manager.rollback_transaction()
+
+    def storeObject(self, obj: object) -> None:
+        """Store object to persistence.
+
+        Java signature: void storeObject(Object obj)
+
+        Parameters
+        ----------
+        obj : object
+            Object to store
+        """
+        if self.persisting:
+            self.persistence_manager.store_object(obj)
+
+    def updateObject(self, obj: object) -> None:
+        """Update object in persistence.
+
+        Java signature: void updateObject(Object obj)
+
+        Parameters
+        ----------
+        obj : object
+            Object to update
+        """
+        if self.persisting:
+            self.persistence_manager.update_object(obj)
+
+    def deleteObject(self, obj: object) -> None:
+        """Delete object from persistence.
+
+        Java signature: void deleteObject(Object obj)
+
+        Parameters
+        ----------
+        obj : object
+            Object to delete
+        """
+        if self.persisting:
+            self.persistence_manager.delete_object(obj)
+
+    def doPersistAction(self, obj: object, action: int) -> None:
+        """Perform persistence action.
+
+        Java signature: void doPersistAction(Object obj, int action)
+
+        Parameters
+        ----------
+        obj : object
+            Object
+        action : int
+            Action code (0=store, 1=update, 2=delete)
+        """
+        if action == 0:
+            self.storeObject(obj)
+        elif action == 1:
+            self.updateObject(obj)
+        elif action == 2:
+            self.deleteObject(obj)
+
+    # --- Case ID allocation ---
+
+    def allocateCaseID(self) -> str:
+        """Allocate unique case ID.
+
+        Java signature: String allocateCaseID()
+
+        Returns
+        -------
+        str
+            New case ID
+        """
+        return str(uuid.uuid4())
+
+    def getNextCaseNbr(self) -> str:
+        """Get next case number.
+
+        Java signature: String getNextCaseNbr()
+
+        Returns
+        -------
+        str
+            Next case number
+        """
+        self.case_counter += 1
+        return str(self.case_counter)
+
+    # --- Net runners ---
+
+    def addRunner(self, runner: YNetRunner, specification: YSpecification | None = None) -> None:
+        """Add net runner.
+
+        Java signature: void addRunner(YNetRunner runner, YSpecification specification)
+        Java signature: void addRunner(YNetRunner runner)
+
+        Parameters
+        ----------
+        runner : YNetRunner
+            Runner to add
+        specification : YSpecification | None
+            Optional specification
+        """
+        key = f"{runner.case_id}:{runner.net.id}"
+        self.net_runners[key] = runner
+        self.net_runner_repository.runners[key] = runner
+
+    def getNetRunner(self, identifier: YIdentifier | str | YWorkItem) -> YNetRunner | None:
+        """Get net runner.
+
+        Java signature: YNetRunner getNetRunner(YIdentifier identifier)
+        Java signature: YNetRunner getNetRunner(YWorkItem workItem)
+
+        Parameters
+        ----------
+        identifier : YIdentifier | str | YWorkItem
+            Case identifier or work item
+
+        Returns
+        -------
+        YNetRunner | None
+            Net runner or None
+        """
+        if isinstance(identifier, YWorkItem):
+            # Get by work item
+            key = f"{identifier.case_id}:{identifier.net_id}"
+            return self.net_runners.get(key)
+        elif isinstance(identifier, YIdentifier):
+            # Get by identifier - find root net
+            case = self.get_case(identifier.case_id)
+            if case and case.root_net_id:
+                key = f"{identifier.case_id}:{case.root_net_id}"
+                return self.net_runners.get(key)
+        return None
+
+    def getNetRunnerRepository(self) -> YNetRunnerRepository:
+        """Get net runner repository.
+
+        Java signature: YNetRunnerRepository getNetRunnerRepository()
+
+        Returns
+        -------
+        YNetRunnerRepository
+            Repository
+        """
+        return self.net_runner_repository
+
+    # --- Specifications ---
+
+    def addSpecifications(
+        self, spec_str: str, ignore_errors: bool, verification_handler: YVerificationHandler
+    ) -> list[YSpecification]:
+        """Add specifications from string.
+
+        Java signature: List addSpecifications(String specStr, boolean ignoreErrors, YVerificationHandler verificationHandler)
+
+        Parameters
+        ----------
+        spec_str : str
+            Specification XML string
+        ignore_errors : bool
+            Ignore validation errors
+        verification_handler : YVerificationHandler
+            Verification handler
+
+        Returns
+        -------
+        list[YSpecification]
+            Loaded specifications
+        """
+        # Stub - would need XML parsing
+        return []
+
+    def getLatestSpecification(self, key: str) -> YSpecification | None:
+        """Get latest specification by key.
+
+        Java signature: YSpecification getLatestSpecification(String key)
+
+        Parameters
+        ----------
+        key : str
+            Specification key
+
+        Returns
+        -------
+        YSpecification | None
+            Latest specification or None
+        """
+        # Return first matching spec (simplified)
+        for spec in self.specifications.values():
+            if spec.id.startswith(key):
+                return spec
+        return None
+
+    def getLoadedSpecificationIDs(self) -> set[YSpecificationID]:
+        """Get loaded specification IDs.
+
+        Java signature: Set getLoadedSpecificationIDs()
+
+        Returns
+        -------
+        set[YSpecificationID]
+            Set of specification IDs
+        """
+        return {YSpecificationID(uri="", version="", identifier=spec_id) for spec_id in self.specifications.keys()}
+
+    def getLoadStatus(self, spec_id: YSpecificationID) -> str:
+        """Get load status of specification.
+
+        Java signature: String getLoadStatus(YSpecificationID specID)
+
+        Parameters
+        ----------
+        spec_id : YSpecificationID
+            Specification ID
+
+        Returns
+        -------
+        str
+            Load status
+        """
+        spec = self.specifications.get(spec_id.identifier)
+        if spec:
+            return spec.status.name
+        return "NOT_LOADED"
+
+    def getProcessDefinition(self, spec_id: YSpecificationID) -> YSpecification | None:
+        """Get process definition.
+
+        Java signature: YSpecification getProcessDefinition(YSpecificationID specID)
+
+        Parameters
+        ----------
+        spec_id : YSpecificationID
+            Specification ID
+
+        Returns
+        -------
+        YSpecification | None
+            Specification or None
+        """
+        return self.specifications.get(spec_id.identifier)
+
+    def getSpecificationDataSchema(self, spec_id: YSpecificationID) -> str:
+        """Get specification data schema.
+
+        Java signature: String getSpecificationDataSchema(YSpecificationID specID)
+
+        Parameters
+        ----------
+        spec_id : YSpecificationID
+            Specification ID
+
+        Returns
+        -------
+        str
+            Data schema as string
+        """
+        # Stub - would return XML schema
+        return ""
+
+    def getSpecificationForCase(self, case_id: YIdentifier) -> YSpecification | None:
+        """Get specification for case.
+
+        Java signature: YSpecification getSpecificationForCase(YIdentifier caseID)
+
+        Parameters
+        ----------
+        case_id : YIdentifier
+            Case identifier
+
+        Returns
+        -------
+        YSpecification | None
+            Specification or None
+        """
+        case = self.get_case(case_id.id)
+        if case:
+            return self.specifications.get(case.specification_id)
+        return None
+
+    # --- Task definitions ---
+
+    def getTaskDefinition(self, spec_id: YSpecificationID, task_id: str) -> YTask | None:
+        """Get task definition.
+
+        Java signature: YTask getTaskDefinition(YSpecificationID specID, String taskID)
+
+        Parameters
+        ----------
+        spec_id : YSpecificationID
+            Specification ID
+        task_id : str
+            Task ID
+
+        Returns
+        -------
+        YTask | None
+            Task or None
+        """
+        spec = self.specifications.get(spec_id.identifier)
+        if spec:
+            # Find task in nets
+            for net in spec.nets.values():
+                if task_id in net.tasks:
+                    return net.tasks[task_id]
+        return None
+
+    def getParameters(self, spec_id: YSpecificationID, task_id: str, input: bool) -> dict[str, Any]:
+        """Get task parameters.
+
+        Java signature: Map getParameters(YSpecificationID specID, String taskID, boolean input)
+
+        Parameters
+        ----------
+        spec_id : YSpecificationID
+            Specification ID
+        task_id : str
+            Task ID
+        input : bool
+            True for input params, False for output
+
+        Returns
+        -------
+        dict[str, Any]
+            Parameters
+        """
+        task = self.getTaskDefinition(spec_id, task_id)
+        if task:
+            from kgcl.yawl.elements.y_atomic_task import YAtomicTask
+
+            if isinstance(task, YAtomicTask):
+                if input:
+                    return {p.name: p for p in task.parameters if p.is_input}
+                else:
+                    return {p.name: p for p in task.parameters if p.is_output}
+        return {}
+
+    # --- Case operations ---
+
+    def formatCaseParams(self, param_str: str, spec: YSpecification) -> Element:
+        """Format case parameters.
+
+        Java signature: Element formatCaseParams(String paramStr, YSpecification spec)
+
+        Parameters
+        ----------
+        param_str : str
+            Parameter string
+        spec : YSpecification
+            Specification
+
+        Returns
+        -------
+        Element
+            XML element
+        """
+        # Stub - would create XML element
+        return Element("data")
+
+    def launchCase(
+        self,
+        spec_id: YSpecificationID | YSpecification,
+        case_params: str = "",
+        completion_observer: str | None = None,
+        case_id: str | None = None,
+        log_data: YLogDataItemList | None = None,
+        service_handle: str | None = None,
+        delayed: bool = False,
+    ) -> str | YNetRunner:
+        """Launch case.
+
+        Java signature: String launchCase(YSpecificationID specID, String caseParams, URI completionObserver, String caseID, YLogDataItemList logData, String serviceHandle, boolean delayed)
+        Java signature: YNetRunner launchCase(YSpecification spec, String caseID, String caseParams, YLogDataItemList logData)
+
+        Parameters
+        ----------
+        spec_id : YSpecificationID | YSpecification
+            Specification ID or specification
+        case_params : str
+            Case parameters
+        completion_observer : str | None
+            Completion observer URI
+        case_id : str | None
+            Case ID
+        log_data : YLogDataItemList | None
+            Log data
+        service_handle : str | None
+            Service handle
+        delayed : bool
+            Delayed launch
+
+        Returns
+        -------
+        str | YNetRunner
+            Case ID or net runner
+        """
+        if isinstance(spec_id, YSpecification):
+            # Direct spec launch
+            case = self.create_case(spec_id.id, case_id)
+            if case_params:
+                import json
+
+                try:
+                    params = json.loads(case_params)
+                    case.data.merge_input(params)
+                except json.JSONDecodeError:
+                    pass
+            started_case = self.start_case(case.id)
+            root_net_id = spec_id.get_root_net().id if spec_id.get_root_net() else ""
+            runner_key = f"{case.id}:{root_net_id}"
+            return self.net_runners.get(runner_key) or YNetRunner(net=spec_id.get_root_net(), case_id=case.id)  # type: ignore[arg-type]
+        else:
+            # Spec ID launch
+            case = self.create_case(spec_id.identifier, case_id)
+            if case_params:
+                import json
+
+                try:
+                    params = json.loads(case_params)
+                    case.data.merge_input(params)
+                except json.JSONDecodeError:
+                    pass
+            if not delayed:
+                self.start_case(case.id)
+            if log_data:
+                self.logCaseStarted_spec_id(
+                    spec_id,
+                    self.net_runners.get(f"{case.id}:{case.root_net_id}"),
+                    completion_observer,
+                    case_params,
+                    log_data,
+                    service_handle,
+                    delayed,  # type: ignore[arg-type]
+                )
+            return case.id
+
+    def logCaseStarted_spec(
+        self, spec: YSpecification, runner: YNetRunner, case_params: str, log_data: YLogDataItemList
+    ) -> None:
+        """Log case started.
+
+        Java signature: void logCaseStarted(YSpecification spec, YNetRunner runner, String caseParams, YLogDataItemList logData)
+
+        Parameters
+        ----------
+        spec : YSpecification
+            Specification
+        runner : YNetRunner
+            Net runner
+        case_params : str
+            Case parameters
+        log_data : YLogDataItemList
+            Log data
+        """
+        self._emit_event(
+            "CASE_STARTED_LOGGED",
+            case_id=runner.case_id,
+            data={"spec_id": spec.id, "params": case_params, "log_items": len(log_data.items)},
+        )
+
+    def logCaseStarted_spec_id(
+        self,
+        spec_id: YSpecificationID,
+        runner: YNetRunner,
+        completion_observer: str | None,
+        case_params: str,
+        log_data: YLogDataItemList,
+        service_ref: str | None,
+        delayed: bool,
+    ) -> None:
+        """Log case started with spec ID.
+
+        Java signature: void logCaseStarted(YSpecificationID specID, YNetRunner runner, URI completionObserver, String caseParams, YLogDataItemList logData, String serviceRef, boolean delayed)
+
+        Parameters
+        ----------
+        spec_id : YSpecificationID
+            Specification ID
+        runner : YNetRunner
+            Net runner
+        completion_observer : str | None
+            Completion observer
+        case_params : str
+            Case parameters
+        log_data : YLogDataItemList
+            Log data
+        service_ref : str | None
+            Service reference
+        delayed : bool
+            Delayed launch
+        """
+        self._emit_event(
+            "CASE_STARTED_LOGGED",
+            case_id=runner.case_id,
+            data={
+                "spec_id": spec_id.identifier,
+                "observer": completion_observer,
+                "service": service_ref,
+                "delayed": delayed,
+            },
+        )
+
+    # --- Case state ---
+
+    def getCaseID(self, case_id_str: str) -> YIdentifier:
+        """Get case identifier from string.
+
+        Java signature: YIdentifier getCaseID(String caseIDStr)
+
+        Parameters
+        ----------
+        case_id_str : str
+            Case ID string
+
+        Returns
+        -------
+        YIdentifier
+            Case identifier
+        """
+        return YIdentifier(id=case_id_str)
+
+    def getCaseLocations(self, case_id: YIdentifier) -> set[str]:
+        """Get case locations (marking).
+
+        Java signature: Set getCaseLocations(YIdentifier caseID)
+
+        Parameters
+        ----------
+        case_id : YIdentifier
+            Case identifier
+
+        Returns
+        -------
+        set[str]
+            Set of location IDs
+        """
+        marking = self.get_case_marking(case_id.id)
+        if marking:
+            return set(marking.tokens.keys())
+        return set()
+
+    def getCasesForSpecification(self, spec_id: YSpecificationID) -> set[YCase]:
+        """Get cases for specification.
+
+        Java signature: Set getCasesForSpecification(YSpecificationID specID)
+
+        Parameters
+        ----------
+        spec_id : YSpecificationID
+            Specification ID
+
+        Returns
+        -------
+        set[YCase]
+            Set of cases
+        """
+        return {case for case in self.cases.values() if case.specification_id == spec_id.identifier}
+
+    def getRunningCaseIDs(self) -> list[str]:
+        """Get running case IDs.
+
+        Java signature: List getRunningCaseIDs()
+
+        Returns
+        -------
+        list[str]
+            List of running case IDs
+        """
+        return [case.id for case in self.cases.values() if case.is_running()]
+
+    def getRunningCaseMap(self) -> dict[str, YCase]:
+        """Get running cases as map.
+
+        Java signature: Map getRunningCaseMap()
+
+        Returns
+        -------
+        dict[str, YCase]
+            Map of running cases
+        """
+        return {case.id: case for case in self.cases.values() if case.is_running()}
+
+    def getRunnersForPrimaryCase(self, primary_case_id: YIdentifier) -> list[YNetRunner]:
+        """Get runners for primary case.
+
+        Java signature: List getRunnersForPrimaryCase(YIdentifier primaryCaseID)
+
+        Parameters
+        ----------
+        primary_case_id : YIdentifier
+            Primary case identifier
+
+        Returns
+        -------
+        list[YNetRunner]
+            List of runners
+        """
+        case = self.get_case(primary_case_id.id)
+        if case:
+            return list(case.net_runners.values())
+        return []
+
+    def getStateForCase(self, case_id: YIdentifier) -> str:
+        """Get state for case (marking XML).
+
+        Java signature: String getStateForCase(YIdentifier caseID)
+
+        Parameters
+        ----------
+        case_id : YIdentifier
+            Case identifier
+
+        Returns
+        -------
+        str
+            State as string
+        """
+        case = self.get_case(case_id.id)
+        if case:
+            return case.status.name
+        return "UNKNOWN"
+
+    def getStateTextForCase(self, case_id: YIdentifier) -> str:
+        """Get state text for case.
+
+        Java signature: String getStateTextForCase(YIdentifier caseID)
+
+        Parameters
+        ----------
+        case_id : YIdentifier
+            Case identifier
+
+        Returns
+        -------
+        str
+            State text
+        """
+        return self.getStateForCase(case_id)
+
+    # --- Work items ---
+
+    def getAllWorkItems(self) -> set[YWorkItem]:
+        """Get all work items.
+
+        Java signature: Set getAllWorkItems()
+
+        Returns
+        -------
+        set[YWorkItem]
+            Set of all work items
+        """
+        work_items = set()
+        for case in self.cases.values():
+            work_items.update(case.work_items.values())
+        return work_items
+
+    def getAvailableWorkItems(self) -> set[YWorkItem]:
+        """Get available work items (offered or allocated).
+
+        Java signature: Set getAvailableWorkItems()
+
+        Returns
+        -------
+        set[YWorkItem]
+            Set of available work items
+        """
+        work_items = set()
+        for case in self.cases.values():
+            for wi in case.work_items.values():
+                if wi.status in (WorkItemStatus.OFFERED, WorkItemStatus.ALLOCATED):
+                    work_items.add(wi)
+        return work_items
+
+    def getWorkItem(self, work_item_id: str) -> YWorkItem | None:
+        """Get work item by ID.
+
+        Java signature: YWorkItem getWorkItem(String workItemID)
+
+        Parameters
+        ----------
+        work_item_id : str
+            Work item ID
+
+        Returns
+        -------
+        YWorkItem | None
+            Work item or None
+        """
+        return self._find_work_item(work_item_id)
+
+    def getWorkItemRepository(self) -> YWorkItemRepository:
+        """Get work item repository.
+
+        Java signature: YWorkItemRepository getWorkItemRepository()
+
+        Returns
+        -------
+        YWorkItemRepository
+            Repository
+        """
+        # Sync repository
+        self.work_item_repository.work_items.clear()
+        for case in self.cases.values():
+            self.work_item_repository.work_items.update(case.work_items)
+        return self.work_item_repository
+
+    def getChildrenOfWorkItem(self, work_item: YWorkItem) -> set[YWorkItem]:
+        """Get children of work item (for MI tasks).
+
+        Java signature: Set getChildrenOfWorkItem(YWorkItem workItem)
+
+        Parameters
+        ----------
+        work_item : YWorkItem
+            Parent work item
+
+        Returns
+        -------
+        set[YWorkItem]
+            Set of child work items
+        """
+        # Stub - would track MI children
+        return set()
+
+    def getStartingDataSnapshot(self, item_id: str) -> Element:
+        """Get starting data snapshot for work item.
+
+        Java signature: Element getStartingDataSnapshot(String itemID)
+
+        Parameters
+        ----------
+        item_id : str
+            Work item ID
+
+        Returns
+        -------
+        Element
+            XML element
+        """
+        # Stub - would return snapshot
+        return Element("snapshot")
+
+    # --- Work item operations ---
+
+    def canAddNewInstances(self, work_item_id: str) -> bool:
+        """Check if can add new MI instances.
+
+        Java signature: boolean canAddNewInstances(String workItemID)
+
+        Parameters
+        ----------
+        work_item_id : str
+            Work item ID
+
+        Returns
+        -------
+        bool
+            True if can add instances
+        """
+        # Stub - would check MI task
+        return False
+
+    def checkElegibilityToAddInstances(self, work_item_id: str) -> None:
+        """Check eligibility to add instances.
+
+        Java signature: void checkElegibilityToAddInstances(String workItemID)
+
+        Parameters
+        ----------
+        work_item_id : str
+            Work item ID
+        """
+
+    def checkEligibilityToAddInstances(self, item: YWorkItem) -> None:
+        """Check eligibility to add instances.
+
+        Java signature: void checkEligibilityToAddInstances(YWorkItem item)
+
+        Parameters
+        ----------
+        item : YWorkItem
+            Work item
+        """
+
+    def createNewInstance(self, work_item: YWorkItem, param_value_for_mi_creation: str) -> YWorkItem:
+        """Create new MI instance.
+
+        Java signature: YWorkItem createNewInstance(YWorkItem workItem, String paramValueForMICreation)
+
+        Parameters
+        ----------
+        work_item : YWorkItem
+            Parent work item
+        param_value_for_mi_creation : str
+            Parameter value
+
+        Returns
+        -------
+        YWorkItem
+            New work item instance
+        """
+        # Stub - would create MI instance
+        case = self.cases.get(work_item.case_id)
+        if case:
+            spec = self.specifications.get(case.specification_id)
+            if spec:
+                for net in spec.nets.values():
+                    if work_item.task_id in net.tasks:
+                        task = net.tasks[work_item.task_id]
+                        return self._create_work_item(case, task, net.id)
+        raise NotImplementedError("MI instance creation not implemented")
+
+    def cancelWorkItem(self, work_item: YWorkItem | str) -> YWorkItem | None:
+        """Cancel work item.
+
+        Java signature: YWorkItem cancelWorkItem(YNetRunner caseRunner, YWorkItem workItem)
+        Java signature: void cancelWorkItem(YWorkItem workItem)
+
+        Parameters
+        ----------
+        work_item : YWorkItem | str
+            Work item or ID
+
+        Returns
+        -------
+        YWorkItem | None
+            Cancelled work item or None
+        """
+        if isinstance(work_item, str):
+            wi = self._find_work_item(work_item)
+            if wi:
+                wi.transition(WorkItemEvent.CANCEL)
+            return None
+        else:
+            work_item.transition(WorkItemEvent.CANCEL)
+            return work_item
+
+    def rollbackWorkItem(self, work_item: YWorkItem | str) -> YWorkItem | None:
+        """Rollback work item.
+
+        Java signature: YWorkItem rollbackWorkItem(YWorkItem workItem)
+        Java signature: void rollbackWorkItem(String workItemID)
+
+        Parameters
+        ----------
+        work_item : YWorkItem | str
+            Work item or ID
+
+        Returns
+        -------
+        YWorkItem | None
+            Rolled back work item or None
+        """
+        if isinstance(work_item, str):
+            wi = self._find_work_item(work_item)
+            if wi and wi.status in (WorkItemStatus.STARTED, WorkItemStatus.EXECUTING):
+                wi.transition(WorkItemEvent.CANCEL)
+                wi.transition(WorkItemEvent.FIRE)
+            return None
+        else:
+            if work_item.status in (WorkItemStatus.STARTED, WorkItemStatus.EXECUTING):
+                work_item.transition(WorkItemEvent.CANCEL)
+                work_item.transition(WorkItemEvent.FIRE)
+            return work_item
+
+    def unsuspendWorkItem(self, work_item: YWorkItem | str) -> YWorkItem | None:
+        """Unsuspend work item.
+
+        Java signature: YWorkItem unsuspendWorkItem(YWorkItem workItem)
+        Java signature: YWorkItem unsuspendWorkItem(String workItemID)
+
+        Parameters
+        ----------
+        work_item : YWorkItem | str
+            Work item or ID
+
+        Returns
+        -------
+        YWorkItem | None
+            Unsuspended work item or None
+        """
+        if isinstance(work_item, str):
+            wi = self._find_work_item(work_item)
+            if wi:
+                self.resume_work_item(work_item)
+                return wi
+            return None
+        else:
+            self.resume_work_item(work_item.id)
+            return work_item
+
+    def startEnabledWorkItem(
+        self, net_runner: YNetRunner, work_item: YWorkItem, client: YClient | None = None
+    ) -> YWorkItem:
+        """Start enabled work item.
+
+        Java signature: YWorkItem startEnabledWorkItem(YNetRunner netRunner, YWorkItem workItem)
+        Java signature: YWorkItem startEnabledWorkItem(YNetRunner netRunner, YWorkItem workItem, YClient client)
+
+        Parameters
+        ----------
+        net_runner : YNetRunner
+            Net runner
+        work_item : YWorkItem
+            Work item
+        client : YClient | None
+            Client
+
+        Returns
+        -------
+        YWorkItem
+            Started work item
+        """
+        if work_item.status == WorkItemStatus.ENABLED:
+            work_item.transition(WorkItemEvent.FIRE)
+            if client:
+                work_item.allocate(client.id)
+                work_item.start(client.id)
+            else:
+                work_item.transition(WorkItemEvent.START)
+        return work_item
+
+    def startFiredWorkItem(
+        self, net_runner: YNetRunner, work_item: YWorkItem, client: YClient | None = None
+    ) -> YWorkItem:
+        """Start fired work item.
+
+        Java signature: YWorkItem startFiredWorkItem(YNetRunner netRunner, YWorkItem workItem)
+        Java signature: YWorkItem startFiredWorkItem(YNetRunner netRunner, YWorkItem workItem, YClient client)
+
+        Parameters
+        ----------
+        net_runner : YNetRunner
+            Net runner
+        work_item : YWorkItem
+            Work item
+        client : YClient | None
+            Client
+
+        Returns
+        -------
+        YWorkItem
+            Started work item
+        """
+        if work_item.status in (WorkItemStatus.FIRED, WorkItemStatus.OFFERED, WorkItemStatus.ALLOCATED):
+            if client:
+                if work_item.status == WorkItemStatus.OFFERED:
+                    work_item.allocate(client.id)
+                work_item.start(client.id)
+            else:
+                work_item.transition(WorkItemEvent.START)
+        return work_item
+
+    # --- Work item completion ---
+
+    def completeExecutingWorkitem(
+        self,
+        work_item: YWorkItem,
+        net_runner: YNetRunner,
+        data: str,
+        log_predicate: str,
+        completion_type: WorkItemCompletion,
+    ) -> None:
+        """Complete executing work item.
+
+        Java signature: void completeExecutingWorkitem(YWorkItem workItem, YNetRunner netRunner, String data, String logPredicate, WorkItemCompletion completionType)
+
+        Parameters
+        ----------
+        work_item : YWorkItem
+            Work item
+        net_runner : YNetRunner
+            Net runner
+        data : str
+            Output data
+        log_predicate : str
+            Log predicate
+        completion_type : WorkItemCompletion
+            Completion type
+        """
+        import json
+
+        output_data = {}
+        if data:
+            try:
+                output_data = json.loads(data)
+            except json.JSONDecodeError:
+                pass
+
+        if completion_type == WorkItemCompletion.NORMAL:
+            self.complete_work_item(work_item.id, output_data)
+        elif completion_type == WorkItemCompletion.FORCE:
+            self.complete_work_item(work_item.id, output_data)
+        elif completion_type == WorkItemCompletion.FAIL:
+            self.fail_work_item(work_item.id, log_predicate)
+
+    def cleanupCompletedWorkItem(self, work_item: YWorkItem, net_runner: YNetRunner, data: Document) -> None:
+        """Cleanup completed work item.
+
+        Java signature: void cleanupCompletedWorkItem(YWorkItem workItem, YNetRunner netRunner, Document data)
+
+        Parameters
+        ----------
+        work_item : YWorkItem
+            Work item
+        net_runner : YNetRunner
+            Net runner
+        data : Document
+            Data document
+        """
+
+    def completeWorkItemLogging(
+        self, work_item: YWorkItem, log_predicate: str, completion_type: WorkItemCompletion, doc: Document
+    ) -> None:
+        """Complete work item with logging.
+
+        Java signature: void completeWorkItemLogging(YWorkItem workItem, String logPredicate, WorkItemCompletion completionType, Document doc)
+
+        Parameters
+        ----------
+        work_item : YWorkItem
+            Work item
+        log_predicate : str
+            Log predicate
+        completion_type : WorkItemCompletion
+            Completion type
+        doc : Document
+            Document
+        """
+
+    def getDataDocForWorkItemCompletion(
+        self, work_item: YWorkItem, data: str, completion_type: WorkItemCompletion
+    ) -> Document:
+        """Get data document for work item completion.
+
+        Java signature: Document getDataDocForWorkItemCompletion(YWorkItem workItem, String data, WorkItemCompletion completionType)
+
+        Parameters
+        ----------
+        work_item : YWorkItem
+            Work item
+        data : str
+            Data string
+        completion_type : WorkItemCompletion
+            Completion type
+
+        Returns
+        -------
+        Document
+            Data document
+        """
+        return Document()
+
+    def mapOutputDataForSkippedWorkItem(self, work_item: YWorkItem, data: str) -> str:
+        """Map output data for skipped work item.
+
+        Java signature: String mapOutputDataForSkippedWorkItem(YWorkItem workItem, String data)
+
+        Parameters
+        ----------
+        work_item : YWorkItem
+            Work item
+        data : str
+            Input data
+
+        Returns
+        -------
+        str
+            Mapped output data
+        """
+        return data
+
+    # --- Announcements ---
+
+    def announceEvents(self, parent: YNetRunner | YIdentifier) -> None:
+        """Announce events.
+
+        Java signature: void announceEvents(YNetRunner parent)
+        Java signature: void announceEvents(YIdentifier caseID)
+
+        Parameters
+        ----------
+        parent : YNetRunner | YIdentifier
+            Net runner or case ID
+        """
+        if isinstance(parent, YNetRunner):
+            self._emit_event("EVENTS_ANNOUNCED", case_id=parent.case_id)
+        else:
+            self._emit_event("EVENTS_ANNOUNCED", case_id=parent.case_id)
+
+    def announceIfTimeServiceTimeout(self, net_runner: YNetRunner, work_item: YWorkItem) -> None:
+        """Announce if time service timeout.
+
+        Java signature: void announceIfTimeServiceTimeout(YNetRunner netRunner, YWorkItem workItem)
+
+        Parameters
+        ----------
+        net_runner : YNetRunner
+            Net runner
+        work_item : YWorkItem
+            Work item
+        """
+        timers = self.timer_service.get_timers_for_work_item(work_item.id)
+        for timer in timers:
+            if timer.is_expired():
+                self._emit_event("TIME_SERVICE_TIMEOUT", case_id=work_item.case_id, work_item_id=work_item.id)
+
+    def announceItemStarted(self, item: YWorkItem) -> None:
+        """Announce item started.
+
+        Java signature: void announceItemStarted(YWorkItem item)
+
+        Parameters
+        ----------
+        item : YWorkItem
+            Work item
+        """
+        self._emit_event("ITEM_STARTED", case_id=item.case_id, work_item_id=item.id)
+
+    def reannounceEnabledWorkItems(self) -> int:
+        """Reannounce enabled work items.
+
+        Java signature: int reannounceEnabledWorkItems()
+
+        Returns
+        -------
+        int
+            Count of reannounced items
+        """
+        enabled = self.get_enabled_work_items()
+        for wi in enabled:
+            self._emit_event("WORK_ITEM_REANNOUNCED", case_id=wi.case_id, work_item_id=wi.id)
+        return len(enabled)
+
+    def reannounceExecutingWorkItems(self) -> int:
+        """Reannounce executing work items.
+
+        Java signature: int reannounceExecutingWorkItems()
+
+        Returns
+        -------
+        int
+            Count of reannounced items
+        """
+        count = 0
+        for case in self.cases.values():
+            for wi in case.work_items.values():
+                if wi.status == WorkItemStatus.EXECUTING:
+                    self._emit_event("WORK_ITEM_REANNOUNCED", case_id=wi.case_id, work_item_id=wi.id)
+                    count += 1
+        return count
+
+    def reannounceFiredWorkItems(self) -> int:
+        """Reannounce fired work items.
+
+        Java signature: int reannounceFiredWorkItems()
+
+        Returns
+        -------
+        int
+            Count of reannounced items
+        """
+        count = 0
+        for case in self.cases.values():
+            for wi in case.work_items.values():
+                if wi.status == WorkItemStatus.FIRED:
+                    self._emit_event("WORK_ITEM_REANNOUNCED", case_id=wi.case_id, work_item_id=wi.id)
+                    count += 1
+        return count
+
+    def reannounceWorkItem(self, work_item: YWorkItem) -> None:
+        """Reannounce work item.
+
+        Java signature: void reannounceWorkItem(YWorkItem workItem)
+
+        Parameters
+        ----------
+        work_item : YWorkItem
+            Work item
+        """
+        self._emit_event("WORK_ITEM_REANNOUNCED", case_id=work_item.case_id, work_item_id=work_item.id)
+
+    def getAnnouncementContext(self) -> AnnouncementContext:
+        """Get announcement context.
+
+        Java signature: AnnouncementContext getAnnouncementContext()
+
+        Returns
+        -------
+        AnnouncementContext
+            Announcement context
+        """
+        return self.announcement_context
+
+    def getAnnouncer(self) -> YAnnouncer:
+        """Get announcer.
+
+        Java signature: YAnnouncer getAnnouncer()
+
+        Returns
+        -------
+        YAnnouncer
+            Announcer
+        """
+        return self.announcer
+
+    # --- Timers ---
+
+    def cancelTimer(self, work_item: YWorkItem) -> None:
+        """Cancel timer for work item.
+
+        Java signature: void cancelTimer(YWorkItem workItem)
+
+        Parameters
+        ----------
+        work_item : YWorkItem
+            Work item
+        """
+        self._cancel_timers_for_work_item(work_item.id)
+
+    # --- Persistence ---
+
+    def clearCaseFromPersistence(self, id: YIdentifier) -> None:
+        """Clear case from persistence.
+
+        Java signature: void clearCaseFromPersistence(YIdentifier id)
+
+        Parameters
+        ----------
+        id : YIdentifier
+            Case identifier
+        """
+        if self.persisting:
+            case = self.get_case(id.case_id)
+            if case:
+                self.persistence_manager.delete_object(case)
+
+    def clearWorkItemsFromPersistence(self, items: set[YWorkItem]) -> None:
+        """Clear work items from persistence.
+
+        Java signature: void clearWorkItemsFromPersistence(Set items)
+
+        Parameters
+        ----------
+        items : set[YWorkItem]
+            Work items to clear
+        """
+        if self.persisting:
+            for item in items:
+                self.persistence_manager.delete_object(item)
+
+    def removeCaseFromCaches(self, case_id: YIdentifier) -> None:
+        """Remove case from caches.
+
+        Java signature: void removeCaseFromCaches(YIdentifier caseID)
+
+        Parameters
+        ----------
+        case_id : YIdentifier
+            Case identifier
+        """
+        if case_id.id in self.cases:
+            del self.cases[case_id.id]
+        # Clear from instance cache
+        if case_id.id in self.instance_cache.cache:
+            del self.instance_cache.cache[case_id.id]
+
+    def progressCaseSuspension(
+        self, pmgr: YPersistenceManager | YNetRunner, case_id: YIdentifier | None = None
+    ) -> None:
+        """Progress case suspension.
+
+        Java signature: void progressCaseSuspension(YPersistenceManager pmgr, YIdentifier caseID)
+        Java signature: void progressCaseSuspension(YNetRunner runner)
+
+        Parameters
+        ----------
+        pmgr : YPersistenceManager | YNetRunner
+            Persistence manager or runner
+        case_id : YIdentifier | None
+            Case identifier
+        """
+        if isinstance(pmgr, YNetRunner):
+            # Runner variant
+            runner = pmgr
+            case = self.get_case(runner.case_id)
+            if case:
+                case.suspend("Suspension in progress")
+        elif case_id:
+            # Manager variant
+            case = self.get_case(case_id.id)
+            if case:
+                case.suspend("Suspension in progress")
+
+    # --- Engine configuration ---
+
+    def checkEngineRunning(self) -> None:
+        """Check if engine is running (raises exception if not).
+
+        Java signature: void checkEngineRunning()
+
+        Raises
+        ------
+        RuntimeError
+            If engine not running
+        """
+        if not self.is_running():
+            raise RuntimeError("Engine is not running")
+
+    def getEngineStatus(self) -> Status:
+        """Get engine status.
+
+        Java signature: Status getEngineStatus()
+
+        Returns
+        -------
+        Status
+            Engine status
+        """
+        if self.status == EngineStatus.RUNNING:
+            return Status.RUNNING
+        return Status.STOPPED
+
+    def setEngineStatus(self, status: Status) -> None:
+        """Set engine status.
+
+        Java signature: void setEngineStatus(Status status)
+
+        Parameters
+        ----------
+        status : Status
+            New status
+        """
+        if status == Status.RUNNING:
+            self.status = EngineStatus.RUNNING
+        else:
+            self.status = EngineStatus.STOPPED
+
+    def isPersisting(self) -> bool:
+        """Check if persistence is enabled.
+
+        Java signature: boolean isPersisting()
+
+        Returns
+        -------
+        bool
+            True if persisting
+        """
+        return self.persisting
+
+    def setPersisting(self, persist: bool) -> None:
+        """Set persistence enabled.
+
+        Java signature: void setPersisting(boolean persist)
+
+        Parameters
+        ----------
+        persist : bool
+            Enable persistence
+        """
+        self.persisting = persist
+
+    def getPersistenceManager(self) -> YPersistenceManager:
+        """Get persistence manager.
+
+        Java signature: YPersistenceManager getPersistenceManager()
+
+        Returns
+        -------
+        YPersistenceManager
+            Persistence manager
+        """
+        return self.persistence_manager
+
+    def getInstanceCache(self) -> InstanceCache:
+        """Get instance cache.
+
+        Java signature: InstanceCache getInstanceCache()
+
+        Returns
+        -------
+        InstanceCache
+            Instance cache
+        """
+        return self.instance_cache
+
+    def getSessionCache(self) -> YSessionCache:
+        """Get session cache.
+
+        Java signature: YSessionCache getSessionCache()
+
+        Returns
+        -------
+        YSessionCache
+            Session cache
+        """
+        return self.session_cache
+
+    def getEngineClassesRootFilePath(self) -> str:
+        """Get engine classes root file path.
+
+        Java signature: String getEngineClassesRootFilePath()
+
+        Returns
+        -------
+        str
+            Root file path
+        """
+        return self.engine_classes_root_path
+
+    def setEngineClassesRootFilePath(self, path: str) -> None:
+        """Set engine classes root file path.
+
+        Java signature: void setEngineClassesRootFilePath(String path)
+
+        Parameters
+        ----------
+        path : str
+            Root file path
+        """
+        self.engine_classes_root_path = path
+
+    def getEngineNbr(self) -> int:
+        """Get engine number.
+
+        Java signature: int getEngineNbr()
+
+        Returns
+        -------
+        int
+            Engine number
+        """
+        return self.engine_nbr
+
+    def generateUIMetaData(self) -> bool:
+        """Check if UI metadata generation is enabled.
+
+        Java signature: boolean generateUIMetaData()
+
+        Returns
+        -------
+        bool
+            True if enabled
+        """
+        return self.generate_ui_metadata
+
+    def setGenerateUIMetaData(self, generate: bool) -> None:
+        """Set UI metadata generation.
+
+        Java signature: void setGenerateUIMetaData(boolean generate)
+
+        Parameters
+        ----------
+        generate : bool
+            Enable generation
+        """
+        self.generate_ui_metadata = generate
+
+    def isGenericAdminAllowed(self) -> bool:
+        """Check if generic admin is allowed.
+
+        Java signature: boolean isGenericAdminAllowed()
+
+        Returns
+        -------
+        bool
+            True if allowed
+        """
+        return self.allow_generic_admin
+
+    def setAllowAdminID(self, allow: bool) -> None:
+        """Set allow admin ID.
+
+        Java signature: void setAllowAdminID(boolean allow)
+
+        Parameters
+        ----------
+        allow : bool
+            Allow admin
+        """
+        self.allow_generic_admin = allow
+
+    def isHibernateStatisticsEnabled(self) -> bool:
+        """Check if Hibernate statistics are enabled.
+
+        Java signature: boolean isHibernateStatisticsEnabled()
+
+        Returns
+        -------
+        bool
+            True if enabled
+        """
+        return self.hibernate_statistics_enabled
+
+    def setHibernateStatisticsEnabled(self, enabled: bool) -> None:
+        """Set Hibernate statistics enabled.
+
+        Java signature: void setHibernateStatisticsEnabled(boolean enabled)
+
+        Parameters
+        ----------
+        enabled : bool
+            Enable statistics
+        """
+        self.hibernate_statistics_enabled = enabled
+
+    def getHibernateStatistics(self) -> str:
+        """Get Hibernate statistics.
+
+        Java signature: String getHibernateStatistics()
+
+        Returns
+        -------
+        str
+            Statistics as string
+        """
+        if self.hibernate_statistics_enabled:
+            return "Hibernate statistics: enabled"
+        return "Hibernate statistics: disabled"
+
+    def disableProcessLogging(self) -> None:
+        """Disable process logging.
+
+        Java signature: void disableProcessLogging()
+        """
+        self.process_logging_enabled = False
+
+    def getBuildProperties(self) -> YBuildProperties:
+        """Get build properties.
+
+        Java signature: YBuildProperties getBuildProperties()
+
+        Returns
+        -------
+        YBuildProperties
+            Build properties
+        """
+        return self.build_properties
+
+    def initBuildProperties(self, stream: IOBase) -> None:
+        """Initialize build properties from stream.
+
+        Java signature: void initBuildProperties(InputStream stream)
+
+        Parameters
+        ----------
+        stream : IOBase
+            Input stream
+        """
+        # Stub - would parse properties file
+
+    def getUsers(self) -> set[YParticipant]:
+        """Get all users (participants).
+
+        Java signature: Set getUsers()
+
+        Returns
+        -------
+        set[YParticipant]
+            Set of participants
+        """
+        return set(self.resource_manager.participants.values())
+
+    # --- Engine lifecycle (advanced) ---
+
+    def initialise(
+        self, pmgr: YPersistenceManager, persisting: bool, gather_hbn_stats: bool, redundant_mode: bool
+    ) -> None:
+        """Initialize engine.
+
+        Java signature: void initialise(YPersistenceManager pmgr, boolean persisting, boolean gatherHbnStats, boolean redundantMode)
+
+        Parameters
+        ----------
+        pmgr : YPersistenceManager
+            Persistence manager
+        persisting : bool
+            Enable persistence
+        gather_hbn_stats : bool
+            Gather Hibernate statistics
+        redundant_mode : bool
+            Redundant mode
+        """
+        self.persistence_manager = pmgr
+        self.persisting = persisting
+        self.hibernate_statistics_enabled = gather_hbn_stats
+        # Redundant mode would be for HA setups
+
+    def initialised(self, max_wait_seconds: int) -> None:
+        """Wait for engine to be initialized.
+
+        Java signature: void initialised(int maxWaitSeconds)
+
+        Parameters
+        ----------
+        max_wait_seconds : int
+            Maximum wait time
+        """
+        # Would wait for engine to reach RUNNING state
+        import time
+
+        waited = 0
+        while self.status != EngineStatus.RUNNING and waited < max_wait_seconds:
+            time.sleep(0.1)
+            waited += 0.1
+
+    def shutdown(self) -> None:
+        """Shutdown engine.
+
+        Java signature: void shutdown()
+        """
+        self.stop()
+
+    def restore(self, redundant_mode: bool) -> None:
+        """Restore engine from persistence.
+
+        Java signature: void restore(boolean redundantMode)
+
+        Parameters
+        ----------
+        redundant_mode : bool
+            Redundant mode
+        """
+        # Would restore state from persistence
+
+    def promote(self) -> None:
+        """Promote engine (HA mode).
+
+        Java signature: void promote()
+        """
+        # Would promote to active in HA setup
+        self.status = EngineStatus.RUNNING
+
+    def demote(self) -> None:
+        """Demote engine (HA mode).
+
+        Java signature: void demote()
+        """
+        # Would demote to standby in HA setup
+        self.status = EngineStatus.PAUSED
+
+    def dump(self) -> None:
+        """Dump engine state.
+
+        Java signature: void dump()
+        """
+        # Would dump state for debugging
+        print(f"Engine {self.engine_id}: {self.status.name}")
+        print(f"  Specifications: {len(self.specifications)}")
+        print(f"  Cases: {len(self.cases)}")
+        print(f"  Running cases: {len(self.get_running_cases())}")
+
+    # --- Singleton getInstance methods (class methods would be better) ---
+
+    @classmethod
+    def getInstance(
+        cls, persisting: bool = False, gather_hbn_stats: bool = False, redundant_mode: bool = False
+    ) -> YEngine:
+        """Get engine instance (singleton pattern).
+
+        Java signature: YEngine getInstance()
+        Java signature: YEngine getInstance(boolean persisting, boolean gatherHbnStats)
+        Java signature: YEngine getInstance(boolean persisting)
+        Java signature: YEngine getInstance(boolean persisting, boolean gatherHbnStats, boolean redundantMode)
+
+        Parameters
+        ----------
+        persisting : bool
+            Enable persistence
+        gather_hbn_stats : bool
+            Gather Hibernate statistics
+        redundant_mode : bool
+            Redundant mode
+
+        Returns
+        -------
+        YEngine
+            Engine instance
+        """
+        # Simplified - would use actual singleton
+        engine = cls()
+        engine.persisting = persisting
+        engine.hibernate_statistics_enabled = gather_hbn_stats
+        return engine
 
     # --- Statistics ---
 

@@ -7,7 +7,7 @@ services and external applications.
 from __future__ import annotations
 
 import logging
-from collections.abc import MutableMapping
+from collections.abc import Iterator, MutableMapping
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -285,7 +285,7 @@ class YSessionCache(MutableMapping[str, YAbstractSession]):
         """Delete session by handle."""
         del self._sessions[key]
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[str]:
         """Iterate over session handles."""
         return iter(self._sessions)
 
@@ -328,9 +328,7 @@ class YSessionCache(MutableMapping[str, YAbstractSession]):
         """
         return service.get_service_password() == password
 
-    def _get_service(
-        self, name: str, engine: YEngine
-    ) -> YAWLServiceReference | None:
+    def _get_service(self, name: str, engine: YEngine) -> YAWLServiceReference | None:
         """Get service by name.
 
         Parameters

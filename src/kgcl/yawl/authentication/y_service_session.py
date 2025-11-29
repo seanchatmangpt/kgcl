@@ -5,9 +5,10 @@ Maintains an active session belonging to a custom service.
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 if TYPE_CHECKING:
+    from kgcl.yawl.authentication.y_client import YClient
     from kgcl.yawl.elements.y_awl_service_reference import YAWLServiceReference
     from kgcl.yawl.engine.y_engine import YEngine
     from kgcl.yawl.exceptions.y_exceptions import YPersistenceException
@@ -110,12 +111,12 @@ class YServiceSession(YSession):
         """
         self._service = service
 
-    def get_client(self) -> YAWLServiceReference:
+    def get_client(self) -> YClient | None:
         """Get service (as client interface).
 
         Returns
         -------
-        YAWLServiceReference
-            Service associated with this session
+        YClient | None
+            Service associated with this session (as YClient interface)
         """
-        return self._service
+        return cast("YClient", self._service)

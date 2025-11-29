@@ -1,0 +1,56 @@
+@startuml YAWL Session Management Flow (80/20)
+!theme plain
+
+actor "Client/Service" as Client
+participant "Sessions" as Sessions
+participant "YSessionCache" as Cache
+participant "Background Tasks" as BG
+database "Session Store" as Store
+
+== Connection (Most Common Path - 80%) ==
+Client -> Sessions : connect(userid, password)
+activate Sessions
+Sessions -> Sessions : validate credentials
+Sessions -> Sessions : _get_handle(userid)
+Sessions -> BG : create_task(_start_activity_timer)
+note right
+  **FIX APPLIED:**
+  Tasks tracked in _background_tasks
+  to prevent garbage collection
+end note
+Sessions -> Cache : store session
+Sessions --> Client : return handle
+deactivate Sessions
+
+== Activity Check (Frequent Operation) ==
+Client -> Sessions : check_connection(handle)
+activate Sessions
+Sessions -> Cache : lookup handle
+Sessions -> BG : create_task(_refresh_activity_timer)
+note right
+  **Pattern:**
+  - Add task to _background_tasks set
+  - Add done_callback to auto-remove
+  - Prevents memory leaks
+end note
+Sessions --> Client : return true
+deactivate Sessions
+
+== Disconnection (Clean Path) ==
+Client -> Sessions : disconnect(handle)
+activate Sessions
+Sessions -> BG : create_task(_remove_activity_timer)
+Sessions -> Cache : remove session
+Sessions --> Client : return true
+deactivate Sessions
+
+note over Sessions, BG
+  **80/20 Insight:**
+  - 80% of code complexity in session lifecycle
+  - 20% of methods handle 80% of operations:
+    * connect()
+    * check_connection()
+    * disconnect()
+end note
+
+@enduml

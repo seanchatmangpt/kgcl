@@ -12,6 +12,8 @@ import logging
 import uuid
 from typing import TYPE_CHECKING
 
+from kgcl.yawl.interface import InterfaceAClient
+
 if TYPE_CHECKING:
     from collections.abc import Callable
 
@@ -51,6 +53,7 @@ class Sessions:
         """
         self._id_to_handle: dict[str, str] = {}
         self._handle_to_timer: dict[str, asyncio.Task[None]] = {}
+        self._background_tasks: set[asyncio.Task[None]] = set()
         self._ia_client: InterfaceAClient | None = None
         self._loop: asyncio.AbstractEventLoop | None = None
 
@@ -75,6 +78,14 @@ class Sessions:
             Password of the registered service or client app
         """
         self._ia_client = InterfaceAClient(ia_uri, ia_userid, ia_password)
+
+        # Establish connection to engine and get session handle
+        try:
+            response = self._ia_client.connect()
+            if not self._ia_client.successful(response):
+                logger.error(f"Failed to connect to Interface A: {response}")
+        except OSError as e:
+            logger.error(f"Failed to setup Interface A: {e}")
 
     async def shutdown(self) -> None:
         """Cancel all current sessions and their inactivity timers.
@@ -104,8 +115,13 @@ class Sessions:
             if not self._ia_client:
                 return self._fail_msg("Interface A not configured")
 
-            stored_password = self._ia_client.get_password(userid)
-            if not stored_password or stored_password.startswith("<fail"):
+            if not self._ia_client.session_handle:
+                return self._fail_msg("Interface A not connected")
+
+            # Get stored password from engine via Interface A
+            stored_password = self._ia_client.get_client_password(userid, self._ia_client.session_handle)
+
+            if not self._ia_client.successful(stored_password):
                 return self._fail_msg(_INVALID_CREDENTIALS)
 
             if stored_password == password:
@@ -131,7 +147,9 @@ class Sessions:
         """
         if handle and handle in self._handle_to_timer:
             # Refresh activity timer
-            asyncio.create_task(self._refresh_activity_timer(handle))
+            task = asyncio.create_task(self._refresh_activity_timer(handle))
+            self._background_tasks.add(task)
+            task.add_done_callback(self._background_tasks.discard)
             return True
 
         return False
@@ -153,7 +171,10 @@ class Sessions:
         for userid, active_handle in list(self._id_to_handle.items()):
             if active_handle == handle:
                 del self._id_to_handle[userid]
-                asyncio.create_task(self._remove_activity_timer(handle))
+                # Clean up timer
+                task = asyncio.create_task(self._remove_activity_timer(handle))
+                self._background_tasks.add(task)
+                task.add_done_callback(self._background_tasks.discard)
                 return True
 
         return False
@@ -176,7 +197,10 @@ class Sessions:
             handle = str(uuid.uuid4())
             self._id_to_handle[userid] = handle
 
-        asyncio.create_task(self._start_activity_timer(handle))
+        # Start inactivity timer
+        task = asyncio.create_task(self._start_activity_timer(handle))
+        self._background_tasks.add(task)
+        task.add_done_callback(self._background_tasks.discard)
         return handle
 
     async def _refresh_activity_timer(self, handle: str) -> None:
@@ -240,152 +264,3 @@ class Sessions:
         from kgcl.yawl.util.string_util import wrap
 
         return wrap(msg, "failure")
-
-
-class InterfaceAClient:
-    """Client for engine Interface A to obtain credentials.
-
-    Creates a client to the engine via Interface A to obtain logon credentials
-    for custom services and client applications registered with the engine.
-
-    Parameters
-    ----------
-    uri : str
-        URI of engine's Interface A
-    userid : str
-        Userid registered as custom service or client app
-    password : str
-        Corresponding password
-    """
-
-    _NO_CREDENTIALS = "No Interface A credentials supplied to service"
-
-    def __init__(self, uri: str, userid: str, password: str) -> None:
-        """Initialize Interface A client.
-
-        Parameters
-        ----------
-        uri : str
-            URI of engine's Interface A
-        userid : str
-            Userid for connection
-        password : str
-            Password for connection
-        """
-        self.ia_uri: str = uri
-        self.ia_userid: str = userid
-        self.ia_password: str = password
-        self.ia_handle: str | None = None
-        self._ia_client: Any = None  # InterfaceA_EnvironmentBasedClient
-
-    def get_password(self, userid: str) -> str | None:
-        """Get password from engine for a userid.
-
-        Parameters
-        ----------
-        userid : str
-            Userid to get password for
-
-        Returns
-        -------
-        str | None
-            Retrieved password, or error message if userid is unknown
-
-        Raises
-        ------
-        OSError
-            If there's a problem connecting to the engine
-        """
-        self._check_connection()
-        if not userid:
-            raise OSError(_INVALID_CREDENTIALS)
-
-        # Try for custom service first
-        # TODO: Implement when InterfaceA client is available
-        # service = self._get_service_account(userid)
-        # if service:
-        #     return service.get_password()
-
-        # Not a service, try a client
-        # TODO: Implement when InterfaceA client is available
-        # return self._ia_client.get_password(userid, self.ia_handle)
-
-        # Placeholder: return None for now
-        return None
-
-    def _get_service_account(self, userid: str) -> Any | None:
-        """Get YAWL service using userid.
-
-        Parameters
-        ----------
-        userid : str
-            Userid of service to get
-
-        Returns
-        -------
-        Any | None
-            Matching service, or None if not found
-
-        Raises
-        ------
-        OSError
-            If there's a problem connecting to the engine
-        """
-        # TODO: Implement when InterfaceA client is available
-        # for service in self._ia_client.get_registered_yawl_services(
-        #     self.ia_handle
-        # ):
-        #     if service.get_service_name() == userid:
-        #         return service
-        return None
-
-    def _check_connection(self) -> None:
-        """Check and establish Interface A connection if needed.
-
-        Raises
-        ------
-        OSError
-            If URI or credentials are missing, or connection fails
-        """
-        if not self.ia_userid or not self.ia_password or not self.ia_uri:
-            raise OSError(self._NO_CREDENTIALS)
-
-        # TODO: Implement when InterfaceA client is available
-        # if not self._ia_client:
-        #     self._ia_client = InterfaceA_EnvironmentBasedClient(self.ia_uri)
-        #
-        # if (
-        #     not self.ia_handle
-        #     or not self._ia_client.successful(self.ia_handle)
-        #     or not self._ia_client.successful(
-        #         self._ia_client.check_connection(self.ia_handle)
-        #     )
-        # ):
-        #     self.ia_handle = self._ia_client.connect(
-        #         self.ia_userid, self.ia_password
-        #     )
-        #     if not self._ia_client.successful(self.ia_handle):
-        #         raise OSError(self._get_inner_msg(self.ia_handle))
-
-    def _get_inner_msg(self, xml_message: str) -> str:
-        """Strip XML tags from error message.
-
-        Parameters
-        ----------
-        xml_message : str
-            XML message to strip
-
-        Returns
-        -------
-        str
-            Innermost text
-        """
-        from kgcl.yawl.util.string_util import unwrap
-
-        result = xml_message
-        while result and result.startswith("<"):
-            result = unwrap(result) or result
-            if result == xml_message:  # Prevent infinite loop
-                break
-
-        return result

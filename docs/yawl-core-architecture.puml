@@ -1,0 +1,69 @@
+@startuml YAWL Core Architecture (80/20)
+!theme plain
+skinparam componentStyle rectangle
+
+package "YAWL Core (20% handling 80%)" {
+
+  component "Session Management" as Session {
+    [Sessions] --> [YSession]
+    [Sessions] --> [YSessionCache]
+    [Sessions] : Manages connections
+    [Sessions] : Tracks activity
+    [Sessions] : Background task cleanup
+  }
+
+  component "Workflow Elements" as Elements {
+    [YTask] --> [YAtomicTask]
+    [YTask] --> [YCompositeTask]
+    [YCondition] --> [YInputCondition]
+    [YNet] --> [YEnabledTransitionSet]
+
+    note right of Elements
+      Core workflow patterns:
+      - Tasks (atomic/composite)
+      - Conditions (places)
+      - Nets (processes)
+      - Enabled transitions (deferred choice)
+    end note
+  }
+
+  component "Persistence" as Persist {
+    [YRepository]
+    [YSerializer]
+    [XMLParser] --> [XNode]
+    [XNodeParser]
+
+    note right of Persist
+      Handles:
+      - Workflow state
+      - XML serialization
+      - Data binding
+    end note
+  }
+
+  component "Worklet Exception Handling" as Worklets {
+    [WorkletRepository]
+    [WorkletExecutor]
+
+    note right of Worklets
+      Dynamic exception handling:
+      - RDR trees
+      - Exception patterns
+      - Compensations
+    end note
+  }
+}
+
+Session -down-> Elements : authenticates\nfor execution
+Elements -down-> Persist : stores state
+Worklets -left-> Elements : handles\nexceptions
+
+note bottom of "YAWL Core (20% handling 80%)"
+  **Key Patterns Fixed:**
+  - Asyncio background task tracking
+  - Type safety (Literal[False] for __exit__)
+  - Import resolution (correct module paths)
+  - Attribute/method naming conflicts
+end note
+
+@enduml

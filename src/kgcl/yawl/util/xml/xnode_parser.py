@@ -43,7 +43,7 @@ class XNodeParser:
             Whether to suppress error messages, by default False
         """
         self.check = check
-        self.suppress_messages = suppress_messages
+        self._suppress_messages = suppress_messages
         self._attribute_splitter = re.compile(r'\s*=\s*"|"\s*')
         self._opening_comments: list[str] | None = None
         self._closing_comments: list[str] | None = None
@@ -87,7 +87,7 @@ class XNodeParser:
         suppress : bool
             True to suppress messages, False to show them
         """
-        self.suppress_messages = suppress
+        self._suppress_messages = suppress
 
     def _parse_string(self, s: str) -> XNode | None:
         """Parse XML string into XNode.
@@ -196,7 +196,7 @@ class XNodeParser:
             return node
 
         except Exception as e:
-            if not self.suppress_messages:
+            if not self._suppress_messages:
                 logger.error("Invalid format parsing string [%s] - %s", s, str(e))
             return None
 

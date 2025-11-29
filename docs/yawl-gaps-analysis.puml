@@ -1,0 +1,96 @@
+@startuml YAWL Critical Gaps (20% to Complete 80%)
+!theme plain
+
+!define CRITICAL #FFE6E6
+!define IMPLEMENTATION #FFF4E6
+!define DOCUMENTATION #E6F3FF
+
+package "Critical Implementation Gaps (20%)" CRITICAL {
+
+  component "Session Authentication" as Auth {
+    class InterfaceAClient {
+      - ia_handle: str | None
+      - _ia_client: Any
+      --
+      **GAP: get_password() returns None**
+      + get_password(userid) : str | None
+      - _get_service_account(userid) : Any | None
+      - _check_connection() : None
+
+      note right
+        **IMPACT: CRITICAL**
+        - Blocks all authentication
+        - 5 TODO comments
+        - Returns None placeholder
+        - Needs Interface A implementation
+      end note
+    }
+  }
+
+  component "XML Utilities (String Utils)" as XML {
+    class StringUtils {
+      **2 TODO comments:**
+      - wrap_with_escape(): Uses html.escape
+      - extract_set_from_xml(): Uses regex
+
+      note right
+        **IMPACT: MEDIUM**
+        - Works but suboptimal
+        - Should use jdom_util/XNodeParser
+        - Current: regex fallback
+      end note
+    }
+  }
+}
+
+package "Test Failures (Need Attention)" IMPLEMENTATION {
+  component "Failing Tests @ 61%" as Tests {
+    [13 test failures (F)]
+    [Multiple skipped (s)]
+
+    note right
+      **Pattern from verification:**
+      - Tests fail around codegen
+      - Some YAWL tests may fail
+      - Need to identify root cause
+    end note
+  }
+}
+
+package "Empty Exception Classes (Low Priority)" DOCUMENTATION {
+  component "Exception Scaffolding" as Exceptions {
+    [EYENotFoundError]
+    [EYETimeoutError]
+    [StoreError]
+    [WarmEYEError]
+
+    note right
+      **IMPACT: LOW**
+      - 32 empty exception classes
+      - Speculative scaffolding
+      - Can add docstrings later
+    end note
+  }
+}
+
+Auth --> Tests : causes\nauth failures
+XML --> Tests : may cause\nparsing issues
+
+note bottom
+  **80/20 Gap Analysis:**
+
+  **CRITICAL (Must Fix):**
+  1. InterfaceAClient.get_password() - blocks all auth ⚠️
+  2. Test failures - understand what's broken
+
+  **MEDIUM (Should Fix):**
+  3. XML utils TODO comments - working but suboptimal
+
+  **LOW (Nice to Have):**
+  4. Empty exception classes - documentation only
+
+  **Recommendation:** Implement InterfaceAClient or
+  provide mock/stub implementation for testing.
+end note
+
+@enduml

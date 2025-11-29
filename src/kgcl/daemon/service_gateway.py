@@ -32,12 +32,7 @@ from typing import Any
 
 import aiohttp
 
-__all__ = [
-    "ServiceGateway",
-    "ServiceInvocation",
-    "ServiceReference",
-    "ServiceStatus",
-]
+__all__ = ["ServiceGateway", "ServiceInvocation", "ServiceReference", "ServiceStatus"]
 
 
 class ServiceStatus(Enum):
@@ -273,12 +268,7 @@ class ServiceGateway:
         """
         return [ref for ref in self._services.values() if ref.assignable]
 
-    async def invoke(
-        self,
-        service_id: str,
-        task_id: str,
-        payload: dict[str, Any],
-    ) -> ServiceInvocation:
+    async def invoke(self, service_id: str, task_id: str, payload: dict[str, Any]) -> ServiceInvocation:
         """Invoke an external service with task payload.
 
         Makes an async HTTP POST request to the service endpoint
@@ -364,11 +354,7 @@ class ServiceGateway:
         return invocation
 
     def get_invocations(
-        self,
-        *,
-        service_id: str | None = None,
-        task_id: str | None = None,
-        status: ServiceStatus | None = None,
+        self, *, service_id: str | None = None, task_id: str | None = None, status: ServiceStatus | None = None
     ) -> list[ServiceInvocation]:
         """Query invocation history with filters.
 

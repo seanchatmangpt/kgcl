@@ -1,0 +1,311 @@
+@prefix xes: <https://kgcl.org/ontology/xes#> .
+@prefix pn: <https://kgcl.org/ontology/petri-net#> .
+@prefix pm: <https://kgcl.org/ontology/process-mining#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+@prefix string: <http://www.w3.org/2000/10/swap/string#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# =============================================================================
+# Process Mining Rules (van der Aalst α-algorithm in N3)
+# =============================================================================
+# Implements the α-algorithm for process discovery from event logs
+# Reference: van der Aalst, W.M.P. (2016). Process Mining: Data Science in Action
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Step 1: Extract Directly-Follows Relations (>)
+# If event A is immediately followed by event B in same trace, A > B
+# -----------------------------------------------------------------------------
+
+{
+    ?eventA xes:inTrace ?trace ;
+            xes:conceptName ?actA ;
+            xes:eventIndex ?idxA .
+
+    ?eventB xes:inTrace ?trace ;
+            xes:conceptName ?actB ;
+            xes:eventIndex ?idxB .
+
+    (?idxA 1) math:sum ?idxB .  # B directly follows A (idxB = idxA + 1)
+
+} => {
+    ?actA pm:directlyFollows ?actB .
+    (?actA ?actB) a pm:DirectlyFollowsPair .
+} .
+
+# -----------------------------------------------------------------------------
+# Step 2: Compute Causality Relation (→)
+# a → b iff (a > b) and NOT (b > a)
+# This is the causal dependency in the α-algorithm
+# -----------------------------------------------------------------------------
+
+{
+    ?a pm:directlyFollows ?b .
+
+    # Check that b does NOT directly follow a
+    ?scope log:notIncludes { ?b pm:directlyFollows ?a } .
+
+} => {
+    ?a pm:causes ?b .
+    (?a ?b) a pm:CausalPair .
+} .
+
+# -----------------------------------------------------------------------------
+# Step 3: Detect Parallel Activities (||)
+# a || b iff (a > b) AND (b > a)
+# Indicates concurrent execution in workflow
+# -----------------------------------------------------------------------------
+
+{
+    ?a pm:directlyFollows ?b .
+    ?b pm:directlyFollows ?a .
+
+} => {
+    ?a pm:parallelWith ?b .
+    ?b pm:parallelWith ?a .
+    (?a ?b) a pm:ParallelPair .
+} .
+
+# -----------------------------------------------------------------------------
+# Step 4: Detect Exclusive Choice (#)
+# a # b iff NOT (a > b) AND NOT (b > a) AND (a ≠ b)
+# Activities that never directly follow each other
+# -----------------------------------------------------------------------------
+
+{
+    ?a a xes:Activity .
+    ?b a xes:Activity .
+
+    ?scope log:notIncludes { ?a pm:directlyFollows ?b } .
+    ?scope log:notIncludes { ?b pm:directlyFollows ?a } .
+
+    ?a log:notEqualTo ?b .
+
+} => {
+    ?a pm:exclusiveWith ?b .
+    (?a ?b) a pm:ExclusivePair .
+} .
+
+# -----------------------------------------------------------------------------
+# Step 5: Identify Start Activities (Ti)
+# Activities that appear first in some trace
+# -----------------------------------------------------------------------------
+
+{
+    ?event xes:inTrace ?trace ;
+           xes:conceptName ?activity ;
+           xes:eventIndex 1 .
+
+} => {
+    ?activity a pm:StartActivity .
+} .
+
+# -----------------------------------------------------------------------------
+# Step 6: Identify End Activities (To)
+# Activities that appear last in some trace
+# -----------------------------------------------------------------------------
+
+{
+    ?event xes:inTrace ?trace ;
+           xes:conceptName ?activity ;
+           xes:eventIndex ?idx .
+
+    # No event with higher index in same trace
+    ?scope log:notIncludes {
+        ?other xes:inTrace ?trace ;
+               xes:eventIndex ?higherIdx .
+        ?higherIdx math:greaterThan ?idx .
+    } .
+
+} => {
+    ?activity a pm:EndActivity .
+} .
+
+# -----------------------------------------------------------------------------
+# Step 7: Workflow Pattern Detection
+# Identifies common workflow patterns from van der Aalst's taxonomy
+# -----------------------------------------------------------------------------
+
+# AND-split: One activity causes multiple parallel activities
+{
+    ?a pm:causes ?b .
+    ?a pm:causes ?c .
+    ?b pm:parallelWith ?c .
+    ?b log:notEqualTo ?c .
+
+} => {
+    ?a pm:isAndSplit true .
+    ?a pn:implementsPattern pn:AndSplit .
+} .
+
+# AND-join: Multiple parallel activities cause one activity
+{
+    ?a pm:causes ?c .
+    ?b pm:causes ?c .
+    ?a pm:parallelWith ?b .
+    ?a log:notEqualTo ?b .
+
+} => {
+    ?c pm:isAndJoin true .
+    ?c pn:implementsPattern pn:AndJoin .
+} .
+
+# XOR-split: One activity causes exclusive activities
+{
+    ?a pm:causes ?b .
+    ?a pm:causes ?c .
+    ?b pm:exclusiveWith ?c .
+
+} => {
+    ?a pm:isXorSplit true .
+    ?a pn:implementsPattern pn:XorSplit .
+} .
+
+# XOR-join: Exclusive activities cause same activity
+{
+    ?a pm:causes ?c .
+    ?b pm:causes ?c .
+    ?a pm:exclusiveWith ?b .
+
+} => {
+    ?c pm:isXorJoin true .
+    ?c pn:implementsPattern pn:XorJoin .
+} .
+
+# -----------------------------------------------------------------------------
+# Step 8: Conformance Checking Rules
+# Checks if traces conform to discovered process model
+# -----------------------------------------------------------------------------
+
+# Trace conforms if all directly-follows in trace exist in model
+{
+    ?trace a xes:Trace .
+
+    # All event pairs in trace have corresponding flow in model
+    ?scope log:forAllIn {
+        ?eventA xes:inTrace ?trace ;
+                xes:conceptName ?actA ;
+                xes:eventIndex ?idxA .
+        ?eventB xes:inTrace ?trace ;
+                xes:conceptName ?actB ;
+                xes:eventIndex ?idxB .
+        (?idxA 1) math:sum ?idxB .
+    } {
+        # Model allows this transition
+        { ?actA pm:causes ?actB } log:or { ?actA pm:parallelWith ?actB } .
+    } .
+
+} => {
+    ?trace pm:isConforming true .
+} .
+
+# Deviation: activity pair in trace not allowed by model
+{
+    ?eventA xes:inTrace ?trace ;
+            xes:conceptName ?actA ;
+            xes:eventIndex ?idxA .
+    ?eventB xes:inTrace ?trace ;
+            xes:conceptName ?actB ;
+            xes:eventIndex ?idxB .
+    (?idxA 1) math:sum ?idxB .
+
+    # Not in causal relation and not parallel
+    ?scope log:notIncludes { ?actA pm:causes ?actB } .
+    ?scope log:notIncludes { ?actA pm:parallelWith ?actB } .
+
+} => {
+    ?trace pm:hasDeviation [
+        a pm:UnexpectedTransition ;
+        pm:fromActivity ?actA ;
+        pm:toActivity ?actB ;
+        pm:atIndex ?idxA
+    ] .
+} .
+
+# -----------------------------------------------------------------------------
+# Step 9: Generate Petri Net Structure from Mined Relations
+# Constructs places and arcs based on discovered causal relations
+# -----------------------------------------------------------------------------
+
+# Create place for each causal pair
+{
+    ?a pm:causes ?b .
+
+} => {
+    _:place a pn:Place ;
+            pn:fromActivity ?a ;
+            pn:toActivity ?b ;
+            rdfs:label ?placeLabel .
+
+    _:arcIn a pn:Arc ;
+            pn:source ?a ;
+            pn:target _:place .
+
+    _:arcOut a pn:Arc ;
+             pn:source _:place ;
+             pn:target ?b .
+
+    (?a ?b) string:concatenation ?placeLabel .
+} .
+
+# Create source place for start activities
+{
+    ?a a pm:StartActivity .
+
+} => {
+    _:sourcePlace a pn:SourcePlace ;
+                  rdfs:label "i" .
+
+    _:arc a pn:Arc ;
+          pn:source _:sourcePlace ;
+          pn:target ?a .
+} .
+
+# Create sink place for end activities
+{
+    ?a a pm:EndActivity .
+
+} => {
+    _:sinkPlace a pn:SinkPlace ;
+                rdfs:label "o" .
+
+    _:arc a pn:Arc ;
+          pn:source ?a ;
+          pn:target _:sinkPlace .
+} .
+
+# -----------------------------------------------------------------------------
+# Step 10: Activity Frequency and Loop Detection
+# -----------------------------------------------------------------------------
+
+# Count occurrences of activity in trace
+{
+    ?trace a xes:Trace .
+    ?activity a xes:Activity .
+
+    # Count how many events with this activity
+    ?events list:in (
+        ?event
+        { ?event xes:inTrace ?trace ; xes:conceptName ?activity }
+    ) .
+    ?events list:length ?count .
+
+    ?count math:greaterThan 1 .
+
+} => {
+    ?trace pm:hasLoop [
+        pm:activity ?activity ;
+        pm:occurrences ?count
+    ] .
+} .
+
+# Self-loop: activity directly follows itself
+{
+    ?activity pm:directlyFollows ?activity .
+
+} => {
+    ?activity pm:hasSelfLoop true .
+    ?activity pn:implementsPattern pn:SelfLoop .
+} .

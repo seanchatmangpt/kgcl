@@ -113,3 +113,4 @@ def _render_markdown(day: str, rows: Iterable[str]) -> str:
     ]
     body = list(rows)
     return "\n".join(header + body) + "\n"
+

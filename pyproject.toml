@@ -31,6 +31,7 @@ dependencies = [
   "jinja2>=3.1.0",
   "croniter>=2.0.0",
   "pyoxigraph>=0.5.2",
+  "elementpath>=4.0.0",
 ]
 
 [project.optional-dependencies]
@@ -83,6 +84,7 @@ dev = [
   "pika>=1.3.0",
   "SPARQLWrapper>=2.0.0",
   "httpx>=0.27.0",
+  "javalang>=0.13.0",
 ]
 
 [tool.uv]
@@ -361,6 +363,37 @@ type = "simple"
   help = "Run mypy with custom arguments"
   cmd = "mypy"
 
+  [tool.poe.tasks.detect-lies]
+  help = "Detect implementation lies (TODO/FIXME/stubs/placeholders)"
+  cmd = "python scripts/detect_implementation_lies.py"
+
+  [tool.poe.tasks.pre-commit-fast]
+  help = "Fast pre-commit validation (<10s)"
+
+    [[tool.poe.tasks.pre-commit-fast.sequence]]
+    ref = "format-check"
+
+    [[tool.poe.tasks.pre-commit-fast.sequence]]
+    ref = "lint-check"
+
+    [[tool.poe.tasks.pre-commit-fast.sequence]]
+    ref = "detect-lies"
+
+  [tool.poe.tasks.pre-push-heavy]
+  help = "Heavy pre-push validation (30-120s)"
+
+    [[tool.poe.tasks.pre-push-heavy.sequence]]
+    ref = "detect-lies"
+
+    [[tool.poe.tasks.pre-push-heavy.sequence]]
+    ref = "lint-check"
+
+    [[tool.poe.tasks.pre-push-heavy.sequence]]
+    ref = "type-check"
+
+    [[tool.poe.tasks.pre-push-heavy.sequence]]
+    ref = "test-timeout"
+
   [tool.poe.tasks.all-checks]
   help = "Run all linting/type checks"
 
@@ -465,6 +498,18 @@ type = "simple"
 
     [[tool.poe.tasks.verify-strict.sequence]]
     ref = "docs-build"
+
+  [tool.poe.tasks.validate-code]
+  help = "Validate generated code (syntax, types, lint, imports)"
+  shell = "uv run python scripts/codegen/validator.py ${path}"
+
+  [tool.poe.tasks.validate-code-strict]
+  help = "Validate generated code in strict mode (warnings as errors)"
+  shell = "uv run python scripts/codegen/validator.py ${path} --strict"
+
+  [tool.poe.tasks.validate-code-autofix]
+  help = "Validate and auto-fix generated code issues"
+  shell = "uv run python scripts/codegen/validator.py ${path} --auto-fix"
 
   [tool.poe.tasks.ci]
   help = "Run all CI checks (format, lint, types, tests, docs)"
@@ -683,4 +728,8 @@ echo ""
   [tool.poe.tasks.detect-lies-strict]
   help = "Detect implementation lies (warnings as errors)"
   shell = "python scripts/detect_implementation_lies.py src/ tests/ --warnings-as-errors"
+
+  [tool.poe.tasks.codegen-yawl-ui]
+  help = "Generate YAWL UI Python/React code from Java sources"
+  cmd = "python scripts/codegen/generate_yawl_ui.py"
 

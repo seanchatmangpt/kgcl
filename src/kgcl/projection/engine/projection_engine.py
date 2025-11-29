@@ -210,8 +210,7 @@ class ProjectionEngine:
         # Create N3 executor if enabled
         if self.config.n3_enabled:
             n3_config = N3ExecutorConfig(
-                timeout_seconds=self.config.n3_timeout_seconds,
-                max_memory_mb=self.config.n3_max_memory_mb,
+                timeout_seconds=self.config.n3_timeout_seconds, max_memory_mb=self.config.n3_max_memory_mb
             )
             self._n3_executor: N3Executor | None = N3Executor(n3_config)
         else:
@@ -293,7 +292,7 @@ class ProjectionEngine:
         if client is None:
             raise GraphNotFoundError(graph_id)
 
-        # Get template state as TTL for N3 rules (empty for now, could be graph state)
+        # Get template state as TTL for N3 rules (empty - graph state not serialized)
         state_ttl = self._get_state_ttl(client)
 
         # Execute PRECONDITION N3 rules (before queries)
@@ -480,16 +479,11 @@ class ProjectionEngine:
         str
             Graph state as Turtle string.
         """
-        # For now, return empty state - could be extended to serialize graph
-        # This is a minimal implementation for N3 rule execution
+        # Returns empty state - graph serialization not implemented
+        # N3 rules execute without graph context as input
         return ""
 
-    def _execute_n3_rules(
-        self,
-        rules: tuple[N3RuleDescriptor, ...],
-        role: N3Role,
-        state_ttl: str,
-    ) -> dict[str, str]:
+    def _execute_n3_rules(self, rules: tuple[N3RuleDescriptor, ...], role: N3Role, state_ttl: str) -> dict[str, str]:
         """Execute N3 rules of a specific role.
 
         Parameters
@@ -520,11 +514,7 @@ class ProjectionEngine:
             if rule.role != role:
                 continue
 
-            result = self._n3_executor.execute_rule(
-                rule,
-                state_ttl,
-                base_path=self.template_base_path,
-            )
+            result = self._n3_executor.execute_rule(rule, state_ttl, base_path=self.template_base_path)
 
             if not result.success:
                 raise N3ReasoningError(rule.name, result.error or "Unknown error")

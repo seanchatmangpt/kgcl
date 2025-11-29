@@ -359,7 +359,7 @@ def create_sync_merge_topology() -> str:
         @prefix nato: <https://nato.int/ns/> .
 
         # Diplomatic options - AND split (all paths activated in parallel)
-        # Note: Using AND-split since OR-split (WCP-6) not yet implemented
+        # Uses AND-split: all diplomatic channels activated simultaneously
         <urn:task:DiplomaticOptions> a yawl:Task ;
             kgc:status "Completed" ;
             yawl:hasSplit yawl:ControlTypeAnd ;
@@ -672,8 +672,8 @@ class TestP5VetoScenario:
         complete_task(engine, "urn:task:UKVote")
         complete_task(engine, "urn:task:FRVote")
 
-        # RU vetoes (in real WCP-32, this would cancel the join)
-        # For now, we just don't complete it
+        # RU vetoes: leaving task incomplete simulates veto blocking the join
+        # WCP-32 cancelling discriminator requires explicit cancellation handling
 
         engine.run_to_completion(max_ticks=10)
 

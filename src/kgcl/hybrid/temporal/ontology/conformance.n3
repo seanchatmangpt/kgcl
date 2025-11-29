@@ -1,0 +1,363 @@
+@prefix xes: <https://kgcl.org/ontology/xes#> .
+@prefix pn: <https://kgcl.org/ontology/petri-net#> .
+@prefix pm: <https://kgcl.org/ontology/process-mining#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# =============================================================================
+# Conformance Checking Rules
+# Token Replay Algorithm in N3
+# =============================================================================
+# Implements token-based replay for conformance checking
+# Reference: Rozinat & van der Aalst (2008). Conformance checking of processes
+# based on monitoring real behavior
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Fitness Calculation Rules
+# fitness = 1 - (missing + remaining) / (consumed + produced + missing + remaining)
+# Measures how well trace fits the model
+# -----------------------------------------------------------------------------
+
+# Count consumed tokens (successful fires)
+{
+    ?trace pm:consumedTokens ?consumed .
+    ?trace pm:producedTokens ?produced .
+    ?trace pm:missingTokens ?missing .
+    ?trace pm:remainingTokens ?remaining .
+
+    (?consumed ?produced) math:sum ?total .
+    (?missing ?remaining) math:sum ?penalty .
+
+    ?penalty math:lessThan ?total .
+    (?total ?penalty) math:difference ?good .
+    (?good ?total) math:quotient ?fitness .
+
+} => {
+    ?trace xes:fitness ?fitness .
+} .
+
+# Perfect fitness (all tokens consumed, none missing/remaining)
+{
+    ?trace pm:missingTokens 0 .
+    ?trace pm:remainingTokens 0 .
+
+} => {
+    ?trace xes:fitness 1.0 .
+    ?trace pm:isPerfectlyFitting true .
+} .
+
+# Zero fitness (no progress possible)
+{
+    ?trace pm:consumedTokens 0 .
+    ?trace pm:producedTokens 0 .
+
+} => {
+    ?trace xes:fitness 0.0 .
+    ?trace pm:isNonFitting true .
+} .
+
+# -----------------------------------------------------------------------------
+# Deviation Classification
+# Categorizes different types of conformance violations
+# -----------------------------------------------------------------------------
+
+# Missing activity (in model, not in log)
+# Indicates skipped activity that should have occurred
+{
+    ?t a pn:Transition ;
+       pn:activityName ?activity .
+
+    # Transition should fire based on model but activity not in trace
+    ?trace a xes:Trace .
+    ?scope log:notIncludes {
+        ?event xes:inTrace ?trace ;
+               xes:conceptName ?activity .
+    } .
+
+    # But predecessor activity is in trace
+    ?arc pn:target ?t ;
+         pn:source ?place .
+    ?arc2 pn:target ?place ;
+          pn:source ?predTrans .
+    ?predTrans pn:activityName ?predActivity .
+
+    ?predEvent xes:inTrace ?trace ;
+               xes:conceptName ?predActivity .
+
+} => {
+    ?trace xes:hasDeviation [
+        a xes:MissingActivity ;
+        pm:activity ?activity ;
+        pm:afterActivity ?predActivity ;
+        pm:severity "high"
+    ] .
+} .
+
+# Inserted activity (in log, not in model)
+# Indicates unexpected activity execution
+{
+    ?event xes:inTrace ?trace ;
+           xes:conceptName ?activity .
+
+    # No transition with this activity name
+    ?scope log:notIncludes {
+        ?t a pn:Transition ;
+           pn:activityName ?activity .
+    } .
+
+} => {
+    ?trace xes:hasDeviation [
+        a xes:InsertedActivity ;
+        pm:activity ?activity ;
+        pm:event ?event ;
+        pm:severity "medium"
+    ] .
+} .
+
+# Wrong order deviation
+# Activities executed in incorrect sequence
+{
+    ?eventA xes:inTrace ?trace ;
+            xes:conceptName ?actA ;
+            xes:eventIndex ?idxA .
+    ?eventB xes:inTrace ?trace ;
+            xes:conceptName ?actB ;
+            xes:eventIndex ?idxB .
+
+    ?idxA math:lessThan ?idxB .
+
+    # Model requires B before A
+    ?actB pm:causes ?actA .
+
+    # But not parallel
+    ?scope log:notIncludes { ?actA pm:parallelWith ?actB } .
+
+} => {
+    ?trace xes:hasDeviation [
+        a xes:WrongOrderDeviation ;
+        pm:actualOrder (?actA ?actB) ;
+        pm:expectedOrder (?actB ?actA) ;
+        pm:severity "high"
+    ] .
+} .
+
+# -----------------------------------------------------------------------------
+# Precision Calculation
+# Measures how precisely model describes observed behavior
+# precision = 1 - (enabled but not taken) / (enabled)
+# -----------------------------------------------------------------------------
+
+{
+    ?trace pm:transitionsEnabled ?enabled .
+    ?trace pm:transitionsExecuted ?executed .
+
+    ?enabled math:greaterThan 0 .
+    (?enabled ?executed) math:difference ?notTaken .
+    (?notTaken ?enabled) math:quotient ?imprecision .
+    (1 ?imprecision) math:difference ?precision .
+
+} => {
+    ?trace xes:precision ?precision .
+} .
+
+# Perfect precision (all enabled transitions were taken)
+{
+    ?trace pm:transitionsEnabled ?enabled .
+    ?trace pm:transitionsExecuted ?enabled .
+
+} => {
+    ?trace xes:precision 1.0 .
+    ?trace pm:isPerfectlyPrecise true .
+} .
+
+# -----------------------------------------------------------------------------
+# Generalization Metrics
+# Measures if model is not overfitting to log
+# -----------------------------------------------------------------------------
+
+# Count trace variants
+{
+    ?log a xes:Log .
+    ?variants list:in (
+        ?trace
+        { ?trace a xes:Trace ; xes:inLog ?log }
+    ) .
+    ?variants list:length ?variantCount .
+
+    ?log pm:totalTraces ?totalTraces .
+    (?variantCount ?totalTraces) math:quotient ?variantRatio .
+
+} => {
+    ?log pm:variantRatio ?variantRatio .
+} .
+
+# Good generalization (low variant ratio)
+{
+    ?log pm:variantRatio ?ratio .
+    ?ratio math:lessThan 0.3 .
+
+} => {
+    ?log pm:hasGoodGeneralization true .
+} .
+
+# Overfitting warning (high variant ratio)
+{
+    ?log pm:variantRatio ?ratio .
+    ?ratio math:greaterThan 0.7 .
+
+} => {
+    ?log pm:mayBeOverfitting true .
+    ?log pm:hasDeviation [
+        a pm:OverfittingWarning ;
+        pm:variantRatio ?ratio
+    ] .
+} .
+
+# -----------------------------------------------------------------------------
+# Simplicity Metrics
+# Measures structural complexity of discovered model
+# -----------------------------------------------------------------------------
+
+{
+    ?model a pn:PetriNet .
+
+    # Count places
+    ?places list:in (
+        ?p
+        { ?p a pn:Place ; pn:inNet ?model }
+    ) .
+    ?places list:length ?placeCount .
+
+    # Count transitions
+    ?transitions list:in (
+        ?t
+        { ?t a pn:Transition ; pn:inNet ?model }
+    ) .
+    ?transitions list:length ?transCount .
+
+    # Count arcs
+    ?arcs list:in (
+        ?arc
+        { ?arc a pn:Arc ; pn:inNet ?model }
+    ) .
+    ?arcs list:length ?arcCount .
+
+    # Complexity score
+    (?placeCount ?transCount) math:sum ?nodes .
+    (?nodes ?arcCount) math:sum ?complexity .
+
+} => {
+    ?model pm:complexityScore ?complexity .
+    ?model pm:placeCount ?placeCount .
+    ?model pm:transitionCount ?transCount .
+    ?model pm:arcCount ?arcCount .
+} .
+
+# Simple model (low complexity)
+{
+    ?model pm:complexityScore ?complexity .
+    ?complexity math:lessThan 20 .
+
+} => {
+    ?model pm:isSimpleModel true .
+} .
+
+# Complex model (high complexity)
+{
+    ?model pm:complexityScore ?complexity .
+    ?complexity math:greaterThan 50 .
+
+} => {
+    ?model pm:isComplexModel true .
+    ?model pm:hasDeviation [
+        a pm:HighComplexityWarning ;
+        pm:complexityScore ?complexity
+    ] .
+} .
+
+# -----------------------------------------------------------------------------
+# Overall Conformance Score
+# F-measure combining fitness and precision
+# -----------------------------------------------------------------------------
+
+{
+    ?trace xes:fitness ?fitness .
+    ?trace xes:precision ?precision .
+
+    (?fitness ?precision) math:product ?product .
+    (2 ?product) math:product ?numerator .
+
+    (?fitness ?precision) math:sum ?denominator .
+    ?denominator math:greaterThan 0 .
+
+    (?numerator ?denominator) math:quotient ?fmeasure .
+
+} => {
+    ?trace xes:conformanceScore ?fmeasure .
+} .
+
+# Excellent conformance
+{
+    ?trace xes:conformanceScore ?score .
+    ?score math:greaterThan 0.9 .
+
+} => {
+    ?trace pm:hasExcellentConformance true .
+} .
+
+# Poor conformance
+{
+    ?trace xes:conformanceScore ?score .
+    ?score math:lessThan 0.5 .
+
+} => {
+    ?trace pm:hasPoorConformance true .
+    ?trace pm:hasDeviation [
+        a pm:PoorConformanceWarning ;
+        pm:conformanceScore ?score
+    ] .
+} .
+
+# -----------------------------------------------------------------------------
+# Bottleneck Detection
+# Identifies activities with high waiting times or rework
+# -----------------------------------------------------------------------------
+
+{
+    ?activity a xes:Activity .
+    ?activity pm:averageWaitingTime ?waitTime .
+    ?activity pm:averageDuration ?duration .
+
+    (?waitTime ?duration) math:quotient ?waitRatio .
+    ?waitRatio math:greaterThan 2.0 .
+
+} => {
+    ?activity pm:isBottleneck true .
+    ?activity pm:hasDeviation [
+        a pm:BottleneckWarning ;
+        pm:waitingTimeRatio ?waitRatio
+    ] .
+} .
+
+# Rework detection (activity occurs multiple times in trace)
+{
+    ?trace a xes:Trace .
+    ?activity a xes:Activity .
+
+    ?events list:in (
+        ?e
+        { ?e xes:inTrace ?trace ; xes:conceptName ?activity }
+    ) .
+    ?events list:length ?occurrences .
+
+    ?occurrences math:greaterThan 1 .
+
+} => {
+    ?trace pm:hasRework [
+        pm:activity ?activity ;
+        pm:occurrences ?occurrences
+    ] .
+} .

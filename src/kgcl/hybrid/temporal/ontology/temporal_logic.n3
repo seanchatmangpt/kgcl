@@ -1,0 +1,349 @@
+@prefix ltl: <http://kgcl.dev/ontology/ltl/> .
+@prefix evt: <http://kgcl.dev/ontology/event/> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+# ============================================================================
+# Linear Temporal Logic (LTL) Operators for Event Sourcing
+# ============================================================================
+# Implements:
+#   G (Always/Globally) - Property holds in ALL future states
+#   F (Eventually/Finally) - Property holds at SOME future state
+#   X (Next) - Property holds in the NEXT state
+#   U (Until) - Property1 holds UNTIL Property2 becomes true
+#   → (Precedes/Implies) - Event A always precedes Event B
+# ============================================================================
+
+# ============================================================================
+# ALWAYS (G) - Property holds in ALL states
+# ============================================================================
+# Checked by verifying NO violation exists in the event stream
+# If ANY event violates the condition, the property is violated
+
+{
+    ?prop a ltl:AlwaysProperty .
+    ?prop ltl:condition ?cond .
+    ?prop ltl:workflowId ?wfId .
+
+    # Find ANY event that violates the condition
+    ?event a evt:WorkflowEvent .
+    ?event evt:workflowId ?wfId .
+
+    # Condition evaluation: check if property holds
+    # This uses N3 log:includes to check if condition is met
+    _:scope log:notIncludes { ?event ?cond true } .
+}
+=>
+{
+    ?prop ltl:violated true .
+    ?prop ltl:violatingEvent ?event .
+    ?prop ltl:violationMessage "ALWAYS property violated: condition does not hold for all events" .
+} .
+
+# ============================================================================
+# EVENTUALLY (F) - Property holds at SOME state
+# ============================================================================
+# Satisfied if ANY event in the stream satisfies the condition
+# Used for liveness properties (e.g., "workflow eventually completes")
+
+{
+    ?prop a ltl:EventuallyProperty .
+    ?prop ltl:condition ?cond .
+    ?prop ltl:workflowId ?wfId .
+
+    # Find at least ONE event that satisfies the condition
+    ?event a evt:WorkflowEvent .
+    ?event evt:workflowId ?wfId .
+    ?event ?cond true .
+}
+=>
+{
+    ?prop ltl:satisfied true .
+    ?prop ltl:satisfyingEvent ?event .
+} .
+
+# Violation: EVENTUALLY property times out
+{
+    ?prop a ltl:EventuallyProperty .
+    ?prop ltl:condition ?cond .
+    ?prop ltl:workflowId ?wfId .
+    ?prop ltl:timeout ?timeoutTick .
+
+    # Check if we've passed the timeout tick
+    ?latestEvent a evt:WorkflowEvent .
+    ?latestEvent evt:workflowId ?wfId .
+    ?latestEvent evt:tickNumber ?currentTick .
+    (?currentTick ?timeoutTick) math:greaterThan true .
+
+    # No satisfying event found yet
+    _:scope log:notIncludes { ?prop ltl:satisfied true } .
+}
+=>
+{
+    ?prop ltl:violated true .
+    ?prop ltl:violationMessage "EVENTUALLY property violated: timeout exceeded without satisfaction" .
+} .
+
+# ============================================================================
+# NEXT (X) - Property holds in NEXT state
+# ============================================================================
+# Checks that the immediate successor event satisfies the condition
+
+{
+    ?prop a ltl:NextProperty .
+    ?prop ltl:afterEvent ?prevEvent .
+    ?prop ltl:condition ?cond .
+
+    # Get tick number of previous event
+    ?prevEvent evt:tickNumber ?prevTick .
+    ?prevEvent evt:workflowId ?wfId .
+
+    # Calculate next tick
+    (?prevTick 1) math:sum ?nextTick .
+
+    # Find event at next tick
+    ?nextEvent a evt:WorkflowEvent .
+    ?nextEvent evt:tickNumber ?nextTick .
+    ?nextEvent evt:workflowId ?wfId .
+
+    # Check if condition holds
+    ?nextEvent ?cond true .
+}
+=>
+{
+    ?prop ltl:satisfied true .
+    ?prop ltl:nextEvent ?nextEvent .
+} .
+
+# Violation: NEXT property not satisfied
+{
+    ?prop a ltl:NextProperty .
+    ?prop ltl:afterEvent ?prevEvent .
+    ?prop ltl:condition ?cond .
+
+    ?prevEvent evt:tickNumber ?prevTick .
+    ?prevEvent evt:workflowId ?wfId .
+    (?prevTick 1) math:sum ?nextTick .
+
+    # Next event exists but doesn't satisfy condition
+    ?nextEvent a evt:WorkflowEvent .
+    ?nextEvent evt:tickNumber ?nextTick .
+    ?nextEvent evt:workflowId ?wfId .
+
+    _:scope log:notIncludes { ?nextEvent ?cond true } .
+}
+=>
+{
+    ?prop ltl:violated true .
+    ?prop ltl:violatingEvent ?nextEvent .
+    ?prop ltl:violationMessage "NEXT property violated: condition does not hold in next state" .
+} .
+
+# ============================================================================
+# UNTIL (U) - Property1 holds UNTIL Property2 becomes true
+# ============================================================================
+# Checks that condition1 holds continuously until condition2 is satisfied
+
+{
+    ?prop a ltl:UntilProperty .
+    ?prop ltl:condition1 ?cond1 .
+    ?prop ltl:condition2 ?cond2 .
+    ?prop ltl:startEvent ?startEvent .
+
+    # Get starting tick
+    ?startEvent evt:tickNumber ?startTick .
+    ?startEvent evt:workflowId ?wfId .
+
+    # Find event where condition2 becomes true
+    ?endEvent a evt:WorkflowEvent .
+    ?endEvent evt:workflowId ?wfId .
+    ?endEvent evt:tickNumber ?endTick .
+    ?endEvent ?cond2 true .
+    (?endTick ?startTick) math:greaterThan true .
+
+    # Verify condition1 holds for all events between start and end
+    # (This is checked via absence of violations)
+    _:scope log:notIncludes {
+        ?violatingEvent a evt:WorkflowEvent .
+        ?violatingEvent evt:workflowId ?wfId .
+        ?violatingEvent evt:tickNumber ?vTick .
+        (?vTick ?startTick) math:greaterThan true .
+        (?vTick ?endTick) math:lessThan true .
+        _:vScope log:notIncludes { ?violatingEvent ?cond1 true } .
+    } .
+}
+=>
+{
+    ?prop ltl:satisfied true .
+    ?prop ltl:endEvent ?endEvent .
+} .
+
+# ============================================================================
+# PRECEDES (→) - Event A always precedes Event B
+# ============================================================================
+# Temporal ordering constraint: whenever B occurs, A must have occurred earlier
+
+{
+    ?prop a ltl:PrecedesProperty .
+    ?prop ltl:antecedent ?eventTypeA .
+    ?prop ltl:consequent ?eventTypeB .
+    ?prop ltl:workflowId ?wfId .
+
+    # Find instance of event B
+    ?eventB a ?eventTypeB .
+    ?eventB evt:workflowId ?wfId .
+    ?eventB evt:tickNumber ?tickB .
+
+    # Find instance of event A that occurred before B
+    ?eventA a ?eventTypeA .
+    ?eventA evt:workflowId ?wfId .
+    ?eventA evt:tickNumber ?tickA .
+    (?tickA ?tickB) math:lessThan true .
+}
+=>
+{
+    ?prop ltl:satisfied true .
+    ?prop ltl:antecedentEvent ?eventA .
+    ?prop ltl:consequentEvent ?eventB .
+} .
+
+# Violation: B occurs but A never occurred before
+{
+    ?prop a ltl:PrecedesProperty .
+    ?prop ltl:antecedent ?eventTypeA .
+    ?prop ltl:consequent ?eventTypeB .
+    ?prop ltl:workflowId ?wfId .
+
+    # Event B exists
+    ?eventB a ?eventTypeB .
+    ?eventB evt:workflowId ?wfId .
+    ?eventB evt:tickNumber ?tickB .
+
+    # No event A exists before B
+    _:scope log:notIncludes {
+        ?eventA a ?eventTypeA .
+        ?eventA evt:workflowId ?wfId .
+        ?eventA evt:tickNumber ?tickA .
+        (?tickA ?tickB) math:lessThan true .
+    } .
+}
+=>
+{
+    ?prop ltl:violated true .
+    ?prop ltl:violatingEvent ?eventB .
+    ?prop ltl:violationMessage "PRECEDES property violated: consequent occurred without antecedent" .
+} .
+
+# ============================================================================
+# RESPONSE - Event A always leads to Event B within N ticks
+# ============================================================================
+# Used for bounded liveness properties (e.g., "approval within 10 ticks")
+
+{
+    ?prop a ltl:ResponseProperty .
+    ?prop ltl:stimulus ?eventTypeA .
+    ?prop ltl:response ?eventTypeB .
+    ?prop ltl:maxTicks ?maxTicks .
+    ?prop ltl:workflowId ?wfId .
+
+    # Find stimulus event A
+    ?eventA a ?eventTypeA .
+    ?eventA evt:workflowId ?wfId .
+    ?eventA evt:tickNumber ?tickA .
+
+    # Find response event B within maxTicks
+    ?eventB a ?eventTypeB .
+    ?eventB evt:workflowId ?wfId .
+    ?eventB evt:tickNumber ?tickB .
+    (?tickB ?tickA) math:greaterThan true .
+    (?tickA ?maxTicks) math:sum ?deadline .
+    (?tickB ?deadline) math:notGreaterThan true .
+}
+=>
+{
+    ?prop ltl:satisfied true .
+    ?prop ltl:stimulusEvent ?eventA .
+    ?prop ltl:responseEvent ?eventB .
+} .
+
+# Violation: Response does not occur within maxTicks
+{
+    ?prop a ltl:ResponseProperty .
+    ?prop ltl:stimulus ?eventTypeA .
+    ?prop ltl:response ?eventTypeB .
+    ?prop ltl:maxTicks ?maxTicks .
+    ?prop ltl:workflowId ?wfId .
+
+    # Stimulus occurred
+    ?eventA a ?eventTypeA .
+    ?eventA evt:workflowId ?wfId .
+    ?eventA evt:tickNumber ?tickA .
+
+    # Current tick exceeds deadline
+    (?tickA ?maxTicks) math:sum ?deadline .
+    ?currentEvent a evt:WorkflowEvent .
+    ?currentEvent evt:workflowId ?wfId .
+    ?currentEvent evt:tickNumber ?currentTick .
+    (?currentTick ?deadline) math:greaterThan true .
+
+    # No response found
+    _:scope log:notIncludes {
+        ?eventB a ?eventTypeB .
+        ?eventB evt:workflowId ?wfId .
+        ?eventB evt:tickNumber ?tickB .
+        (?tickB ?tickA) math:greaterThan true .
+        (?tickB ?deadline) math:notGreaterThan true .
+    } .
+}
+=>
+{
+    ?prop ltl:violated true .
+    ?prop ltl:violatingEvent ?eventA .
+    ?prop ltl:violationMessage "RESPONSE property violated: response did not occur within maxTicks" .
+} .
+
+# ============================================================================
+# ABSENCE - Event type never occurs in workflow
+# ============================================================================
+# Safety property: certain events are forbidden (e.g., "no deadlock events")
+
+{
+    ?prop a ltl:AbsenceProperty .
+    ?prop ltl:forbiddenEventType ?eventType .
+    ?prop ltl:workflowId ?wfId .
+
+    # Check if forbidden event exists
+    ?event a ?eventType .
+    ?event evt:workflowId ?wfId .
+}
+=>
+{
+    ?prop ltl:violated true .
+    ?prop ltl:violatingEvent ?event .
+    ?prop ltl:violationMessage "ABSENCE property violated: forbidden event occurred" .
+} .
+
+# Satisfied: workflow completes without forbidden event
+{
+    ?prop a ltl:AbsenceProperty .
+    ?prop ltl:forbiddenEventType ?eventType .
+    ?prop ltl:workflowId ?wfId .
+
+    # Workflow has ended
+    ?endEvent a evt:TickEndEvent .
+    ?endEvent evt:workflowId ?wfId .
+    ?endEvent evt:nextTickScheduled false .
+
+    # No forbidden event exists
+    _:scope log:notIncludes {
+        ?event a ?eventType .
+        ?event evt:workflowId ?wfId .
+    } .
+}
+=>
+{
+    ?prop ltl:satisfied true .
+} .

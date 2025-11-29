@@ -19,7 +19,6 @@ from typing import Any
 
 import yaml
 
-from kgcl.projection.domain.exceptions import ResourceLimitExceeded
 from kgcl.projection.domain.descriptors import (
     N3RuleDescriptor,
     OntologyConfig,
@@ -29,6 +28,7 @@ from kgcl.projection.domain.descriptors import (
     create_n3_rule_from_dict,
     create_query_from_dict,
 )
+from kgcl.projection.domain.exceptions import ResourceLimitExceeded
 
 
 class FilesystemTemplateRegistry:
@@ -63,9 +63,7 @@ class FilesystemTemplateRegistry:
     []
     """
 
-    def __init__(
-        self, template_dir: Path, query_dir: Path | None = None, max_template_size: int | None = None
-    ) -> None:
+    def __init__(self, template_dir: Path, query_dir: Path | None = None, max_template_size: int | None = None) -> None:
         """Initialize registry with template directory.
 
         Parameters

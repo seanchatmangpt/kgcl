@@ -1,0 +1,48 @@
+"""Tests for {{ class_name }} Python client."""
+
+from __future__ import annotations
+
+import pytest
+
+from {{ module_path }}.{{ class_name | snake_case }} import {{ class_name }}
+
+
+class Test{{ class_name }}:
+    """Test {{ class_name }} client functionality."""
+
+    @pytest.fixture
+    def client(self) -> {{ class_name }}:
+        """Create client instance for testing.
+
+        Returns
+        -------
+        {{ class_name }}
+            Client instance
+        """
+        return {{ class_name }}()
+
+{% for method in methods %}
+    def test_{{ method.name }}(self, client: {{ class_name }}) -> None:
+        """Test {{ method.name }} method.
+
+        Parameters
+        ----------
+        client : {{ class_name }}
+            Client instance from fixture
+        """
+        # Arrange
+{% if method.parameters %}
+{% for param_name, param_type in method.parameters %}
+        {{ param_name }}: {{ param_type }} = {{ param_type | python_default }}
+{% endfor %}
+{% endif %}
+
+        # Act & Assert
+        with pytest.raises(NotImplementedError):
+            {% if method.parameters %}
+            result = client.{{ method.name }}({{ method.parameters | map(attribute=0) | join(', ') }})
+            {% else %}
+            result = client.{{ method.name }}()
+            {% endif %}
+
+{% endfor %}

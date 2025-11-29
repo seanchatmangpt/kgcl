@@ -6,3 +6,4 @@ from .ingest import scan_apple
 from .validation import validate_ingest
 
 __all__ = ["generate_agenda", "generate_cli", "scan_apple", "validate_ingest"]
+

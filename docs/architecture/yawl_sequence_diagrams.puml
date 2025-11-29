@@ -1,0 +1,561 @@
+@startuml YAWL_Engine_Overview
+!theme plain
+title YAWL Python Engine - Component Overview
+
+participant "Client" as C
+participant "YEngine" as E
+participant "YSpecification" as S
+participant "YCase" as CS
+participant "YNetRunner" as NR
+participant "YMarking" as M
+participant "YWorkItem" as WI
+participant "YResourceManager" as RM
+
+== Specification Loading ==
+C -> E: load_specification(spec)
+E -> S: is_valid()
+S --> E: (valid, errors)
+E -> E: specifications[spec.id] = spec
+E --> C: YSpecification
+
+== Case Creation & Start ==
+C -> E: create_case(spec_id)
+E -> S: get_root_net()
+S --> E: YNet
+E -> CS: CaseFactory.create_case()
+E --> C: YCase
+
+C -> E: start_case(case_id)
+E -> NR: new YNetRunner(net, case_id)
+E -> NR: start()
+NR -> M: add_token(input_condition, token_id)
+E -> E: _create_work_items_for_enabled_tasks()
+E -> WI: new YWorkItem(task_id)
+E -> E: _resource_work_item(wi, task)
+E --> C: YCase (running)
+
+@enduml
+
+@startuml YAWL_Token_Flow
+!theme plain
+title Token Flow - AND-Split/AND-Join Pattern
+
+participant "YEngine" as E
+participant "YNetRunner" as NR
+participant "YMarking" as M
+participant "YTask" as T
+
+note over NR, M
+  Initial: Token at "start" condition
+  Net: start -> Split(AND) -> [c1, c2] -> Join(AND) -> end
+end note
+
+== Fire Split Task (AND-Split) ==
+E -> NR: fire_task("Split")
+NR -> NR: _is_task_enabled(Split)
+NR -> M: has_tokens("start")
+M --> NR: true
+
+NR -> NR: _consume_tokens(Split)
+note right: AND-join consumes from ALL preset
+NR -> M: remove_one_token("start")
+M --> NR: token_0
+
+NR -> NR: _produce_tokens(Split)
+note right: AND-split produces to ALL postset
+NR -> M: add_token("c1", token_1)
+NR -> M: add_token("c2", token_2)
+
+NR --> E: FireResult(consumed=[token_0], produced=[token_1, token_2])
+
+== Check Enabled Tasks ==
+E -> NR: get_enabled_tasks()
+NR -> NR: _is_task_enabled(TaskA)
+NR -> M: has_tokens("c1")
+M --> NR: true
+NR -> NR: _is_task_enabled(TaskB)
+NR -> M: has_tokens("c2")
+M --> NR: true
+NR --> E: ["TaskA", "TaskB"]
+
+== Fire Join Task (AND-Join) ==
+note over NR
+  After TaskA and TaskB complete,
+  tokens are at c_post_a and c_post_b
+end note
+
+E -> NR: fire_task("Join")
+NR -> NR: _is_task_enabled(Join)
+note right: AND-join requires ALL preset tokens
+NR -> M: has_tokens("c_post_a")
+M --> NR: true
+NR -> M: has_tokens("c_post_b")
+M --> NR: true
+
+NR -> NR: _consume_tokens(Join)
+NR -> M: remove_one_token("c_post_a")
+NR -> M: remove_one_token("c_post_b")
+
+NR -> NR: _produce_tokens(Join)
+NR -> M: add_token("end", token_5)
+
+NR -> NR: check completion
+NR -> M: has_tokens(output_condition)
+M --> NR: true
+NR -> NR: completed = true
+
+NR --> E: FireResult(consumed=[t3,t4], produced=[t5])
+
+@enduml
+
+@startuml YAWL_XOR_Split
+!theme plain
+title XOR-Split with Predicates
+
+participant "YEngine" as E
+participant "YNetRunner" as NR
+participant "YMarking" as M
+participant "YFlow" as F
+
+note over NR
+  XOR-Split: Only ONE output flow fires
+  Based on predicate evaluation
+end note
+
+E -> NR: fire_task("Decision", data={"approved": true})
+
+NR -> NR: _produce_tokens(task, consumed, data)
+NR -> NR: _evaluate_xor_split(task, conditions, data)
+
+loop for each flow in ordering
+    NR -> F: get flow predicate
+    F --> NR: "approved"
+    NR -> NR: _evaluate_predicate("approved", data)
+    note right: data["approved"] = true
+    NR --> NR: true (first match wins)
+end
+
+NR -> M: add_token("approved_path", new_token)
+note right: Only ONE token produced
+
+NR --> E: FireResult(produced=[single_token])
+
+@enduml
+
+@startuml YAWL_OR_Join
+!theme plain
+title OR-Join Semantics (Simplified)
+
+participant "YEngine" as E
+participant "YNetRunner" as NR
+participant "YMarking" as M
+
+note over NR, M
+  OR-Join: Fires when at least one preset has token
+  AND no more tokens can arrive (simplified: any token present)
+
+  Full YAWL OR-join requires future path analysis
+  Current implementation is simplified
+end note
+
+== XOR-Split Takes Path A ==
+E -> NR: fire_task("Split")
+note right: XOR takes first true path
+NR -> M: add_token("c_a", token_1)
+note right: c_b has NO token
+
+== Task A Completes ==
+E -> NR: fire_task("A")
+NR -> M: add_token("c_post_a", token_2)
+
+== OR-Join Check ==
+E -> NR: get_enabled_tasks()
+NR -> NR: _is_task_enabled(Join)
+note over NR
+  OR-join enabled check:
+  - c_post_a has token? YES
+  - c_post_b has token? NO
+  - ANY preset has token → ENABLED
+end note
+NR --> E: ["Join"]
+
+== OR-Join Fires ==
+E -> NR: fire_task("Join")
+NR -> NR: _consume_tokens(Join)
+note right: OR consumes from ALL marked presets
+NR -> M: has_tokens("c_post_a")
+M --> NR: true
+NR -> M: remove_one_token("c_post_a")
+NR -> M: has_tokens("c_post_b")
+M --> NR: false (skip)
+
+NR -> M: add_token("end", token_3)
+NR --> E: FireResult(consumed=[token_2], produced=[token_3])
+
+@enduml
+
+@startuml YAWL_WorkItem_Lifecycle
+!theme plain
+title Work Item State Machine
+
+participant "YEngine" as E
+participant "YWorkItem" as WI
+participant "YResourceManager" as RM
+participant "Participant" as P
+
+== Creation ==
+E -> WI: new YWorkItem(task_id)
+note right: status = ENABLED
+
+== Firing ==
+E -> WI: fire()
+WI -> WI: transition(FIRE)
+note right: status = FIRED
+
+== Resourcing (Manual Task) ==
+E -> RM: find_participants(role_ids)
+RM --> E: [participant_1, participant_2]
+E -> WI: offer({p1.id, p2.id})
+WI -> WI: transition(OFFER)
+note right: status = OFFERED
+
+== Allocation ==
+P -> E: allocate_work_item(wi_id, participant_id)
+E -> WI: allocate(participant_id)
+WI -> WI: transition(ALLOCATE)
+note right: status = ALLOCATED
+
+== Start Work ==
+P -> E: start_work_item(wi_id, participant_id)
+E -> WI: start(participant_id)
+WI -> WI: transition(START)
+note right: status = STARTED
+
+== Complete ==
+P -> E: complete_work_item(wi_id, output_data)
+E -> WI: complete(output_data)
+WI -> WI: transition(COMPLETE)
+note right: status = COMPLETED
+
+E -> NR: fire_task(task_id)
+E -> E: _create_work_items_for_enabled_tasks()
+
+@enduml
+
+@startuml YAWL_WorkItem_System_Task
+!theme plain
+title System/Automated Task Flow
+
+participant "YEngine" as E
+participant "YWorkItem" as WI
+participant "YAtomicTask" as T
+
+E -> WI: new YWorkItem(task_id)
+E -> E: _resource_work_item(wi, task)
+
+E -> T: is_automated_task()
+alt has codelet
+    T --> E: true
+    E -> WI: fire()
+    E -> WI: transition(START)
+    note right: status = EXECUTING
+
+    note over E
+      Future: Execute codelet
+      Currently not implemented
+    end note
+
+    E -> WI: complete()
+    note right: status = COMPLETED
+else system task (no resources)
+    T --> E: false
+    E -> T: resourcing.is_system_task()
+    T --> E: true
+    E -> WI: fire()
+    E -> WI: transition(START)
+    note right: Auto-start for system tasks
+end
+
+@enduml
+
+@startuml YAWL_Cancellation_Set
+!theme plain
+title Cancellation Set (Reset Net)
+
+participant "YEngine" as E
+participant "YNetRunner" as NR
+participant "YMarking" as M
+participant "YTask" as T
+
+note over NR
+  Task with cancellation_set = {"c_parallel", "TaskB"}
+  When task fires, tokens in cancellation set are removed
+end note
+
+E -> NR: fire_task("CancellingTask")
+
+NR -> NR: _consume_tokens(task)
+NR -> M: remove_one_token("c_input")
+
+NR -> T: get cancellation_set
+T --> NR: {"c_parallel"}
+
+NR -> NR: _execute_cancellation({"c_parallel"})
+loop for each element_id in cancellation_set
+    NR -> M: get_tokens("c_parallel")
+    M --> NR: {token_a, token_b}
+    NR -> M: remove_token("c_parallel", token_a)
+    NR -> M: remove_token("c_parallel", token_b)
+end
+NR --> NR: cancelled = [token_a, token_b]
+
+NR -> NR: _produce_tokens(task)
+NR -> M: add_token("c_output", new_token)
+
+NR --> E: FireResult(consumed=[...], produced=[...], cancelled=[token_a, token_b])
+
+@enduml
+
+@startuml YAWL_Case_Completion
+!theme plain
+title Case Completion Flow
+
+participant "Client" as C
+participant "YEngine" as E
+participant "YCase" as CS
+participant "YNetRunner" as NR
+participant "YMarking" as M
+
+C -> E: complete_work_item(wi_id)
+E -> E: _find_work_item(wi_id)
+E -> WI: complete(output_data)
+
+E -> CS: get case
+E -> NR: fire_task(task_id)
+
+NR -> NR: _produce_tokens()
+NR -> M: add_token("end", token)
+
+NR -> NR: check completion
+NR -> M: has_tokens(output_condition.id)
+M --> NR: true
+NR -> NR: completed = true
+
+E -> NR: runner.completed?
+NR --> E: true
+
+E -> CS: complete(output_data)
+CS -> CS: status = COMPLETED
+CS -> CS: completed_time = now()
+
+E -> E: _emit_event("CASE_COMPLETED")
+
+E --> C: true
+
+@enduml
+
+@startuml YAWL_Multi_Instance_Future
+!theme plain
+title Multi-Instance Task (Future Implementation)
+
+participant "YEngine" as E
+participant "YNetRunner" as NR
+participant "YMultiInstanceTask" as MIT
+participant "YWorkItem" as WI
+
+note over E, WI #LightYellow
+  NOT YET IMPLEMENTED
+  This shows intended behavior
+end note
+
+E -> NR: fire_task("ReviewItems")
+NR -> MIT: get mi_attributes
+MIT --> NR: YMultiInstanceAttributes(min=1, max=10, threshold=5)
+
+NR -> MIT: evaluate mi_query("/order/items/item")
+MIT --> NR: [item1, item2, item3, item4, item5]
+
+loop for each item (5 instances)
+    E -> WI: new YWorkItem(parent_id=parent_wi)
+    WI -> WI: status = ENABLED
+    E -> E: resource_work_item(child_wi)
+end
+
+note over E
+  Parent work item status = PARENT
+  Children execute in parallel
+end note
+
+== Threshold Completion ==
+note over E
+  When 5 children complete (threshold met),
+  parent task completes even if some children pending
+end note
+
+E -> MIT: is_completion_satisfied(5, 5)
+MIT --> E: true
+E -> NR: produce tokens to postset
+
+@enduml
+
+@startuml YAWL_Timer_Service
+!theme plain
+title Timer Service Integration
+
+participant "YEngine" as E
+participant "YTimerService" as TS
+participant "YTimer" as T
+participant "YWorkItem" as WI
+
+== Timer Creation ==
+E -> TS: create_timer_for_work_item(wi_id, "PT1H", ON_STARTED)
+TS -> T: new YTimer(duration=1hour)
+T -> T: start()
+T -> T: expiry = now + 1hour
+TS -> TS: timers[timer.id] = timer
+
+== Background Check Loop ==
+loop every check_interval
+    TS -> TS: _check_all_timers()
+    TS -> T: check_expiry()
+    alt not expired
+        T --> TS: false
+    else expired
+        T --> TS: true
+        T -> T: expired = true
+        TS -> TS: _handle_timer_expiry(timer)
+        TS -> TS: handler = timer_handlers[NOTIFY]
+        TS -> handler: handler(timer)
+
+        note over TS, WI
+          Handler could:
+          - Fail work item
+          - Send notification
+          - Auto-complete
+        end note
+    end
+end
+
+@enduml
+
+@startuml YAWL_Exception_Handling
+!theme plain
+title Exception Handling Flow
+
+participant "YEngine" as E
+participant "YExceptionService" as ES
+participant "ExceptionRule" as R
+participant "RetryContext" as RC
+
+== Exception Occurs ==
+E -> ES: create_exception(TASK_FAILURE, "Service unavailable", wi_id)
+ES --> E: YWorkflowException
+
+E -> ES: handle_exception(exception)
+ES -> ES: exceptions.append(exception)
+
+== Find Matching Rule ==
+ES -> ES: find_matching_rule(exception)
+loop for each rule (by priority)
+    ES -> R: matches(exception)
+    R -> R: check exception_type
+    R -> R: check task_ids
+    R --> ES: true/false
+end
+ES --> ES: matching_rule
+
+== Handle Retry ==
+alt action == RETRY
+    ES -> ES: _handle_retry(exception, params)
+    ES -> RC: get or create RetryContext
+    RC -> RC: can_retry()?
+    alt retries available
+        RC -> RC: increment_retry()
+        ES --> E: RETRY
+        E -> E: re-execute work item
+    else max retries exceeded
+        ES --> E: FAIL
+        E -> WI: fail("Max retries exceeded")
+    end
+else other action
+    ES -> ES: execute handler
+    ES --> E: action taken
+end
+
+@enduml
+
+@startuml YAWL_Full_Workflow_Example
+!theme plain
+title Complete Workflow Execution Example
+
+actor User as U
+participant "YEngine" as E
+participant "YSpecification" as S
+participant "YCase" as C
+participant "YNetRunner" as NR
+participant "YWorkItem" as WI
+participant "YResourceManager" as RM
+
+== Setup ==
+U -> E: start()
+E -> E: status = RUNNING
+
+U -> E: load_specification(order_process_spec)
+E -> S: is_valid()
+S --> E: (true, [])
+E --> U: spec loaded
+
+U -> E: activate_specification(spec_id)
+E -> S: activate()
+S -> S: status = ACTIVE
+
+== Create and Start Case ==
+U -> E: create_case(spec_id, input_data={order_id: "123"})
+E -> C: new YCase()
+C -> C: data.merge_input(input_data)
+E --> U: case_id
+
+U -> E: start_case(case_id)
+E -> NR: new YNetRunner(root_net)
+E -> NR: start()
+NR -> NR: place token at input condition
+
+E -> E: _create_work_items_for_enabled_tasks()
+E -> WI: new YWorkItem("ReviewOrder")
+E -> RM: find_participants(["OrderClerk"])
+RM --> E: [clerk1, clerk2]
+E -> WI: offer({clerk1, clerk2})
+
+E --> U: case started, work item offered
+
+== Work Execution ==
+U -> E: allocate_work_item(wi_id, "clerk1")
+E -> WI: allocate("clerk1")
+
+U -> E: start_work_item(wi_id, "clerk1")
+E -> WI: start("clerk1")
+
+U -> E: complete_work_item(wi_id, {approved: true})
+E -> WI: complete({approved: true})
+E -> NR: fire_task("ReviewOrder", {approved: true})
+NR -> NR: XOR-split evaluates "approved" → true
+NR -> NR: token to "approved_path"
+
+E -> E: _create_work_items_for_enabled_tasks()
+note over E: Create work items for next tasks
+
+== Loop Until Completion ==
+loop while case.is_running()
+    U -> E: get work items
+    U -> E: complete work items
+    E -> NR: fire tasks
+    E -> E: check runner.completed
+end
+
+E -> C: complete()
+C -> C: status = COMPLETED
+E -> E: emit "CASE_COMPLETED"
+
+E --> U: Case completed successfully
+
+@enduml

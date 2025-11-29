@@ -1,0 +1,12 @@
+"""{{ description }}"""
+from __future__ import annotations
+
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True)
+class {{ class_name }}:
+    """{{ description }}"""
+{% for field in fields %}
+    {{ field.name }}: {{ field.type }}{% if field.default %} = {{ field.default }}{% endif %}
+{% endfor %}

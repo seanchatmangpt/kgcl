@@ -1,0 +1,233 @@
+@prefix pn: <https://kgcl.org/ontology/petri-net#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+# =============================================================================
+# Petri Net Ontology for Workflow Verification
+# Based on van der Aalst's Workflow Net (WF-net) definitions
+# =============================================================================
+
+pn: a owl:Ontology ;
+    rdfs:label "Petri Net Ontology for Workflow Analysis" ;
+    rdfs:comment "OWL ontology for Petri nets supporting van der Aalst soundness verification" .
+
+# -----------------------------------------------------------------------------
+# Core Classes
+# -----------------------------------------------------------------------------
+
+pn:PetriNet a owl:Class ;
+    rdfs:label "Petri Net" ;
+    rdfs:comment "A bipartite directed graph with places and transitions" .
+
+pn:Node a owl:Class ;
+    rdfs:label "Node" ;
+    rdfs:comment "Abstract node in a Petri net (place or transition)" .
+
+pn:Place a owl:Class ;
+    rdfs:subClassOf pn:Node ;
+    rdfs:label "Place" ;
+    rdfs:comment "Passive element that holds tokens (represented as circles)" .
+
+pn:Transition a owl:Class ;
+    rdfs:subClassOf pn:Node ;
+    rdfs:label "Transition" ;
+    rdfs:comment "Active element that fires when enabled (represented as rectangles)" .
+
+pn:Arc a owl:Class ;
+    rdfs:label "Arc" ;
+    rdfs:comment "Directed connection between place and transition" .
+
+pn:Marking a owl:Class ;
+    rdfs:label "Marking" ;
+    rdfs:comment "Token distribution across places (state of the net)" .
+
+pn:Token a owl:Class ;
+    rdfs:label "Token" ;
+    rdfs:comment "Token in a place" .
+
+# -----------------------------------------------------------------------------
+# Workflow Net Extensions (van der Aalst)
+# -----------------------------------------------------------------------------
+
+pn:WorkflowNet a owl:Class ;
+    rdfs:subClassOf pn:PetriNet ;
+    rdfs:label "Workflow Net" ;
+    rdfs:comment "WF-net with unique source (i) and sink (o) places" .
+
+pn:SourcePlace a owl:Class ;
+    rdfs:subClassOf pn:Place ;
+    rdfs:label "Source Place" ;
+    rdfs:comment "Unique initial place with no incoming arcs" .
+
+pn:SinkPlace a owl:Class ;
+    rdfs:subClassOf pn:Place ;
+    rdfs:label "Sink Place" ;
+    rdfs:comment "Unique final place with no outgoing arcs" .
+
+pn:SilentTransition a owl:Class ;
+    rdfs:subClassOf pn:Transition ;
+    rdfs:label "Silent Transition" ;
+    rdfs:comment "Invisible transition (tau) for routing" .
+
+# -----------------------------------------------------------------------------
+# Properties
+# -----------------------------------------------------------------------------
+
+# Net structure
+pn:hasPlace a owl:ObjectProperty ;
+    rdfs:domain pn:PetriNet ;
+    rdfs:range pn:Place .
+
+pn:hasTransition a owl:ObjectProperty ;
+    rdfs:domain pn:PetriNet ;
+    rdfs:range pn:Transition .
+
+pn:hasArc a owl:ObjectProperty ;
+    rdfs:domain pn:PetriNet ;
+    rdfs:range pn:Arc .
+
+# Arc endpoints
+pn:source a owl:ObjectProperty ;
+    rdfs:domain pn:Arc ;
+    rdfs:range pn:Node ;
+    rdfs:comment "Source node of arc" .
+
+pn:target a owl:ObjectProperty ;
+    rdfs:domain pn:Arc ;
+    rdfs:range pn:Node ;
+    rdfs:comment "Target node of arc" .
+
+pn:weight a owl:DatatypeProperty ;
+    rdfs:domain pn:Arc ;
+    rdfs:range xsd:positiveInteger ;
+    rdfs:comment "Arc weight (default 1)" .
+
+# Preset/Postset (derived)
+pn:preset a owl:ObjectProperty ;
+    rdfs:domain pn:Node ;
+    rdfs:range pn:Node ;
+    rdfs:comment "Input nodes (•n)" .
+
+pn:postset a owl:ObjectProperty ;
+    rdfs:domain pn:Node ;
+    rdfs:range pn:Node ;
+    rdfs:comment "Output nodes (n•)" .
+
+# Marking
+pn:hasMarking a owl:ObjectProperty ;
+    rdfs:domain pn:PetriNet ;
+    rdfs:range pn:Marking .
+
+pn:initialMarking a owl:ObjectProperty ;
+    rdfs:subPropertyOf pn:hasMarking ;
+    rdfs:comment "Initial marking [i]" .
+
+pn:finalMarking a owl:ObjectProperty ;
+    rdfs:subPropertyOf pn:hasMarking ;
+    rdfs:comment "Final marking [o]" .
+
+pn:tokenCount a owl:DatatypeProperty ;
+    rdfs:domain pn:Token ;
+    rdfs:range xsd:nonNegativeInteger .
+
+pn:inPlace a owl:ObjectProperty ;
+    rdfs:domain pn:Token ;
+    rdfs:range pn:Place .
+
+pn:atMarking a owl:ObjectProperty ;
+    rdfs:domain pn:Token ;
+    rdfs:range pn:Marking .
+
+# Transition properties
+pn:isEnabled a owl:DatatypeProperty ;
+    rdfs:domain pn:Transition ;
+    rdfs:range xsd:boolean ;
+    rdfs:comment "Whether transition is enabled at current marking" .
+
+pn:activityName a owl:DatatypeProperty ;
+    rdfs:domain pn:Transition ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Activity label for process mining" .
+
+# Workflow net specific
+pn:sourcePlace a owl:ObjectProperty ;
+    rdfs:domain pn:WorkflowNet ;
+    rdfs:range pn:SourcePlace .
+
+pn:sinkPlace a owl:ObjectProperty ;
+    rdfs:domain pn:WorkflowNet ;
+    rdfs:range pn:SinkPlace .
+
+# -----------------------------------------------------------------------------
+# Workflow Control Patterns (van der Aalst WCP)
+# -----------------------------------------------------------------------------
+
+pn:WorkflowPattern a owl:Class ;
+    rdfs:label "Workflow Pattern" ;
+    rdfs:comment "Control-flow pattern from van der Aalst's taxonomy" .
+
+pn:AndSplit a owl:Class ;
+    rdfs:subClassOf pn:WorkflowPattern ;
+    rdfs:comment "WCP-2: Parallel split (one transition, multiple output places)" .
+
+pn:AndJoin a owl:Class ;
+    rdfs:subClassOf pn:WorkflowPattern ;
+    rdfs:comment "WCP-3: Synchronization (multiple input places, one transition)" .
+
+pn:XorSplit a owl:Class ;
+    rdfs:subClassOf pn:WorkflowPattern ;
+    rdfs:comment "WCP-4: Exclusive choice (one place, multiple output transitions)" .
+
+pn:XorJoin a owl:Class ;
+    rdfs:subClassOf pn:WorkflowPattern ;
+    rdfs:comment "WCP-5: Simple merge (multiple transitions, one output place)" .
+
+pn:OrSplit a owl:Class ;
+    rdfs:subClassOf pn:WorkflowPattern ;
+    rdfs:comment "WCP-6: Multi-choice" .
+
+pn:OrJoin a owl:Class ;
+    rdfs:subClassOf pn:WorkflowPattern ;
+    rdfs:comment "WCP-7: Synchronizing merge (requires non-local semantics)" .
+
+pn:implementsPattern a owl:ObjectProperty ;
+    rdfs:domain pn:Node ;
+    rdfs:range pn:WorkflowPattern .
+
+# -----------------------------------------------------------------------------
+# Soundness Properties (for SHACL verification)
+# -----------------------------------------------------------------------------
+
+pn:SoundnessProperty a owl:Class ;
+    rdfs:label "Soundness Property" ;
+    rdfs:comment "Van der Aalst soundness criterion" .
+
+pn:OptionToComplete a owl:Class ;
+    rdfs:subClassOf pn:SoundnessProperty ;
+    rdfs:label "Option to Complete" ;
+    rdfs:comment "Every reachable marking can reach final marking" .
+
+pn:ProperCompletion a owl:Class ;
+    rdfs:subClassOf pn:SoundnessProperty ;
+    rdfs:label "Proper Completion" ;
+    rdfs:comment "Only sink place has token when complete" .
+
+pn:NoDeadTransitions a owl:Class ;
+    rdfs:subClassOf pn:SoundnessProperty ;
+    rdfs:label "No Dead Transitions" ;
+    rdfs:comment "Every transition can fire in some reachable marking" .
+
+pn:isSound a owl:DatatypeProperty ;
+    rdfs:domain pn:WorkflowNet ;
+    rdfs:range xsd:boolean ;
+    rdfs:comment "True if WF-net satisfies all soundness criteria" .
+
+pn:satisfies a owl:ObjectProperty ;
+    rdfs:domain pn:WorkflowNet ;
+    rdfs:range pn:SoundnessProperty .
+
+pn:violates a owl:ObjectProperty ;
+    rdfs:domain pn:WorkflowNet ;
+    rdfs:range pn:SoundnessProperty .

@@ -1,0 +1,16 @@
+"""Tests for {{ class_name }}."""
+from __future__ import annotations
+
+import pytest
+
+from {{ module_path }} import {{ class_name }}
+
+
+class Test{{ class_name }}:
+    """Test suite for {{ class_name }}."""
+{% for method in test_methods %}
+
+    def test_{{ method.name }}(self) -> None:
+        """{{ method.description }}"""
+        {{ method.implementation }}
+{% endfor %}

@@ -118,7 +118,7 @@ class N3Parser:
         >>> len(rule.insertions)
         1
         """
-        # Remove prefix declarations for now (they don't affect parsing)
+        # Strip prefix declarations (they don't affect N3 rule body parsing)
         cleaned_text = self.prefix_pattern.sub("", rule_text).strip()
 
         # Extract premise and conclusion

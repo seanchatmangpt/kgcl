@@ -171,9 +171,7 @@ class ContextBuilder:
                 # Execute query with optional timeout
                 if self._query_timeout_seconds is not None:
                     bindings = execute_with_timeout(
-                        lambda q=query.content: self.graph_client.query(q),
-                        self._query_timeout_seconds,
-                        query.name,
+                        lambda q=query.content: self.graph_client.query(q), self._query_timeout_seconds, query.name
                     )
                 else:
                     bindings = self.graph_client.query(query.content)

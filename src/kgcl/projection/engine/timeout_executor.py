@@ -9,6 +9,7 @@ Examples
 >>> from kgcl.projection.engine.timeout_executor import execute_with_timeout
 >>> def slow_query() -> list[dict[str, object]]:
 ...     import time
+...
 ...     time.sleep(0.1)
 ...     return [{"s": "ex:Entity1"}]
 >>> result = execute_with_timeout(slow_query, timeout_seconds=1.0)
@@ -18,21 +19,16 @@ Examples
 
 from __future__ import annotations
 
-from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeoutError
-from typing import Any, Callable, TypeVar
+from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import TimeoutError as FuturesTimeoutError
+from typing import Callable
 
 from kgcl.projection.domain.exceptions import QueryTimeoutError
 
 __all__ = ["execute_with_timeout"]
 
-T = TypeVar("T")
 
-
-def execute_with_timeout(
-    func: Callable[[], T],
-    timeout_seconds: float,
-    query_name: str = "unnamed",
-) -> T:
+def execute_with_timeout[T](func: Callable[[], T], timeout_seconds: float, query_name: str = "unnamed") -> T:
     """Execute a function with a timeout.
 
     Parameters

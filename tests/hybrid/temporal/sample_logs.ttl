@@ -1,0 +1,210 @@
+@prefix : <http://example.org/logs/> .
+@prefix xes: <https://kgcl.org/ontology/xes#> .
+@prefix pm: <https://kgcl.org/ontology/process-mining#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# =============================================================================
+# Sample XES Event Logs for Process Mining Testing
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Log 1: Sequential Process (A → B → C → D)
+# Expected: Pure causal relations, no parallelism
+# -----------------------------------------------------------------------------
+
+:log1 a xes:Log ;
+      rdfs:label "Sequential Process Log" ;
+      xes:hasTrace :trace1_1, :trace1_2, :trace1_3 .
+
+:trace1_1 a xes:Trace ;
+          xes:conceptName "case-001" ;
+          xes:inLog :log1 ;
+          xes:hasEvent :e1_1_1, :e1_1_2, :e1_1_3, :e1_1_4 .
+
+:e1_1_1 xes:conceptName "A" ; xes:eventIndex 1 ; xes:inTrace :trace1_1 .
+:e1_1_2 xes:conceptName "B" ; xes:eventIndex 2 ; xes:inTrace :trace1_1 .
+:e1_1_3 xes:conceptName "C" ; xes:eventIndex 3 ; xes:inTrace :trace1_1 .
+:e1_1_4 xes:conceptName "D" ; xes:eventIndex 4 ; xes:inTrace :trace1_1 .
+
+:trace1_2 a xes:Trace ;
+          xes:conceptName "case-002" ;
+          xes:inLog :log1 ;
+          xes:hasEvent :e1_2_1, :e1_2_2, :e1_2_3, :e1_2_4 .
+
+:e1_2_1 xes:conceptName "A" ; xes:eventIndex 1 ; xes:inTrace :trace1_2 .
+:e1_2_2 xes:conceptName "B" ; xes:eventIndex 2 ; xes:inTrace :trace1_2 .
+:e1_2_3 xes:conceptName "C" ; xes:eventIndex 3 ; xes:inTrace :trace1_2 .
+:e1_2_4 xes:conceptName "D" ; xes:eventIndex 4 ; xes:inTrace :trace1_2 .
+
+:trace1_3 a xes:Trace ;
+          xes:conceptName "case-003" ;
+          xes:inLog :log1 ;
+          xes:hasEvent :e1_3_1, :e1_3_2, :e1_3_3, :e1_3_4 .
+
+:e1_3_1 xes:conceptName "A" ; xes:eventIndex 1 ; xes:inTrace :trace1_3 .
+:e1_3_2 xes:conceptName "B" ; xes:eventIndex 2 ; xes:inTrace :trace1_3 .
+:e1_3_3 xes:conceptName "C" ; xes:eventIndex 3 ; xes:inTrace :trace1_3 .
+:e1_3_4 xes:conceptName "D" ; xes:eventIndex 4 ; xes:inTrace :trace1_3 .
+
+# Activities are identified by their conceptName (string literals) in events
+# The α-algorithm rules extract them via xes:conceptName property
+
+# -----------------------------------------------------------------------------
+# Log 2: Parallel Activities (A → (B || C) → D)
+# Expected: B and C are parallel (both follow A, both precede D)
+# -----------------------------------------------------------------------------
+
+:log2 a xes:Log ;
+      rdfs:label "Parallel Process Log" ;
+      xes:hasTrace :trace2_1, :trace2_2 .
+
+:trace2_1 a xes:Trace ;
+          xes:conceptName "case-101" ;
+          xes:inLog :log2 ;
+          xes:hasEvent :e2_1_1, :e2_1_2, :e2_1_3, :e2_1_4 .
+
+:e2_1_1 xes:conceptName "A" ; xes:eventIndex 1 ; xes:inTrace :trace2_1 .
+:e2_1_2 xes:conceptName "B" ; xes:eventIndex 2 ; xes:inTrace :trace2_1 .
+:e2_1_3 xes:conceptName "C" ; xes:eventIndex 3 ; xes:inTrace :trace2_1 .
+:e2_1_4 xes:conceptName "D" ; xes:eventIndex 4 ; xes:inTrace :trace2_1 .
+
+:trace2_2 a xes:Trace ;
+          xes:conceptName "case-102" ;
+          xes:inLog :log2 ;
+          xes:hasEvent :e2_2_1, :e2_2_2, :e2_2_3, :e2_2_4 .
+
+:e2_2_1 xes:conceptName "A" ; xes:eventIndex 1 ; xes:inTrace :trace2_2 .
+:e2_2_2 xes:conceptName "C" ; xes:eventIndex 2 ; xes:inTrace :trace2_2 .
+:e2_2_3 xes:conceptName "B" ; xes:eventIndex 3 ; xes:inTrace :trace2_2 .
+:e2_2_4 xes:conceptName "D" ; xes:eventIndex 4 ; xes:inTrace :trace2_2 .
+
+# -----------------------------------------------------------------------------
+# Log 3: Exclusive Choice (A → (B XOR C) → D)
+# Expected: B and C are exclusive (never both executed)
+# -----------------------------------------------------------------------------
+
+:log3 a xes:Log ;
+      rdfs:label "Exclusive Choice Log" ;
+      xes:hasTrace :trace3_1, :trace3_2, :trace3_3 .
+
+:trace3_1 a xes:Trace ;
+          xes:conceptName "case-201" ;
+          xes:inLog :log3 ;
+          xes:hasEvent :e3_1_1, :e3_1_2, :e3_1_3 .
+
+:e3_1_1 xes:conceptName "A" ; xes:eventIndex 1 ; xes:inTrace :trace3_1 .
+:e3_1_2 xes:conceptName "B" ; xes:eventIndex 2 ; xes:inTrace :trace3_1 .
+:e3_1_3 xes:conceptName "D" ; xes:eventIndex 3 ; xes:inTrace :trace3_1 .
+
+:trace3_2 a xes:Trace ;
+          xes:conceptName "case-202" ;
+          xes:inLog :log3 ;
+          xes:hasEvent :e3_2_1, :e3_2_2, :e3_2_3 .
+
+:e3_2_1 xes:conceptName "A" ; xes:eventIndex 1 ; xes:inTrace :trace3_2 .
+:e3_2_2 xes:conceptName "C" ; xes:eventIndex 2 ; xes:inTrace :trace3_2 .
+:e3_2_3 xes:conceptName "D" ; xes:eventIndex 3 ; xes:inTrace :trace3_2 .
+
+:trace3_3 a xes:Trace ;
+          xes:conceptName "case-203" ;
+          xes:inLog :log3 ;
+          xes:hasEvent :e3_3_1, :e3_3_2, :e3_3_3 .
+
+:e3_3_1 xes:conceptName "A" ; xes:eventIndex 1 ; xes:inTrace :trace3_3 .
+:e3_3_2 xes:conceptName "B" ; xes:eventIndex 2 ; xes:inTrace :trace3_3 .
+:e3_3_3 xes:conceptName "D" ; xes:eventIndex 3 ; xes:inTrace :trace3_3 .
+
+# -----------------------------------------------------------------------------
+# Log 4: Loop Pattern (A → B → C → B → D)
+# Expected: B → C → B forms a loop
+# -----------------------------------------------------------------------------
+
+:log4 a xes:Log ;
+      rdfs:label "Loop Process Log" ;
+      xes:hasTrace :trace4_1 .
+
+:trace4_1 a xes:Trace ;
+          xes:conceptName "case-301" ;
+          xes:inLog :log4 ;
+          xes:hasEvent :e4_1_1, :e4_1_2, :e4_1_3, :e4_1_4, :e4_1_5 .
+
+:e4_1_1 xes:conceptName "A" ; xes:eventIndex 1 ; xes:inTrace :trace4_1 .
+:e4_1_2 xes:conceptName "B" ; xes:eventIndex 2 ; xes:inTrace :trace4_1 .
+:e4_1_3 xes:conceptName "C" ; xes:eventIndex 3 ; xes:inTrace :trace4_1 .
+:e4_1_4 xes:conceptName "B" ; xes:eventIndex 4 ; xes:inTrace :trace4_1 .
+:e4_1_5 xes:conceptName "D" ; xes:eventIndex 5 ; xes:inTrace :trace4_1 .
+
+# -----------------------------------------------------------------------------
+# Log 5: Complex Workflow (AND-split, XOR-join)
+# A → (B || C) → (D XOR E) → F
+# -----------------------------------------------------------------------------
+
+:log5 a xes:Log ;
+      rdfs:label "Complex Workflow Log" ;
+      xes:hasTrace :trace5_1, :trace5_2, :trace5_3, :trace5_4 .
+
+# E and F are additional activities used in log5
+
+:trace5_1 a xes:Trace ;
+          xes:conceptName "case-401" ;
+          xes:inLog :log5 ;
+          xes:hasEvent :e5_1_1, :e5_1_2, :e5_1_3, :e5_1_4, :e5_1_5 .
+
+:e5_1_1 xes:conceptName "A" ; xes:eventIndex 1 ; xes:inTrace :trace5_1 .
+:e5_1_2 xes:conceptName "B" ; xes:eventIndex 2 ; xes:inTrace :trace5_1 .
+:e5_1_3 xes:conceptName "C" ; xes:eventIndex 3 ; xes:inTrace :trace5_1 .
+:e5_1_4 xes:conceptName "D" ; xes:eventIndex 4 ; xes:inTrace :trace5_1 .
+:e5_1_5 xes:conceptName "F" ; xes:eventIndex 5 ; xes:inTrace :trace5_1 .
+
+:trace5_2 a xes:Trace ;
+          xes:conceptName "case-402" ;
+          xes:inLog :log5 ;
+          xes:hasEvent :e5_2_1, :e5_2_2, :e5_2_3, :e5_2_4, :e5_2_5 .
+
+:e5_2_1 xes:conceptName "A" ; xes:eventIndex 1 ; xes:inTrace :trace5_2 .
+:e5_2_2 xes:conceptName "C" ; xes:eventIndex 2 ; xes:inTrace :trace5_2 .
+:e5_2_3 xes:conceptName "B" ; xes:eventIndex 3 ; xes:inTrace :trace5_2 .
+:e5_2_4 xes:conceptName "E" ; xes:eventIndex 4 ; xes:inTrace :trace5_2 .
+:e5_2_5 xes:conceptName "F" ; xes:eventIndex 5 ; xes:inTrace :trace5_2 .
+
+:trace5_3 a xes:Trace ;
+          xes:conceptName "case-403" ;
+          xes:inLog :log5 ;
+          xes:hasEvent :e5_3_1, :e5_3_2, :e5_3_3, :e5_3_4, :e5_3_5 .
+
+:e5_3_1 xes:conceptName "A" ; xes:eventIndex 1 ; xes:inTrace :trace5_3 .
+:e5_3_2 xes:conceptName "B" ; xes:eventIndex 2 ; xes:inTrace :trace5_3 .
+:e5_3_3 xes:conceptName "C" ; xes:eventIndex 3 ; xes:inTrace :trace5_3 .
+:e5_3_4 xes:conceptName "E" ; xes:eventIndex 4 ; xes:inTrace :trace5_3 .
+:e5_3_5 xes:conceptName "F" ; xes:eventIndex 5 ; xes:inTrace :trace5_3 .
+
+:trace5_4 a xes:Trace ;
+          xes:conceptName "case-404" ;
+          xes:inLog :log5 ;
+          xes:hasEvent :e5_4_1, :e5_4_2, :e5_4_3, :e5_4_4, :e5_4_5 .
+
+:e5_4_1 xes:conceptName "A" ; xes:eventIndex 1 ; xes:inTrace :trace5_4 .
+:e5_4_2 xes:conceptName "C" ; xes:eventIndex 2 ; xes:inTrace :trace5_4 .
+:e5_4_3 xes:conceptName "B" ; xes:eventIndex 3 ; xes:inTrace :trace5_4 .
+:e5_4_4 xes:conceptName "D" ; xes:eventIndex 4 ; xes:inTrace :trace5_4 .
+:e5_4_5 xes:conceptName "F" ; xes:eventIndex 5 ; xes:inTrace :trace5_4 .
+
+# -----------------------------------------------------------------------------
+# Log 6: Non-conforming Trace (for conformance testing)
+# Expected model: A → B → C → D
+# Actual trace: A → C → B → D (wrong order)
+# -----------------------------------------------------------------------------
+
+:log6 a xes:Log ;
+      rdfs:label "Non-conforming Log" ;
+      xes:hasTrace :trace6_1 .
+
+:trace6_1 a xes:Trace ;
+          xes:conceptName "case-501" ;
+          xes:inLog :log6 ;
+          xes:hasEvent :e6_1_1, :e6_1_2, :e6_1_3, :e6_1_4 .
+
+:e6_1_1 xes:conceptName "A" ; xes:eventIndex 1 ; xes:inTrace :trace6_1 .
+:e6_1_2 xes:conceptName "C" ; xes:eventIndex 2 ; xes:inTrace :trace6_1 .
+:e6_1_3 xes:conceptName "B" ; xes:eventIndex 3 ; xes:inTrace :trace6_1 .
+:e6_1_4 xes:conceptName "D" ; xes:eventIndex 4 ; xes:inTrace :trace6_1 .

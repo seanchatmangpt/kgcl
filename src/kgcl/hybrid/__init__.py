@@ -51,10 +51,29 @@ Examples
 from __future__ import annotations
 
 # Adapters Layer - Port implementations
-from kgcl.hybrid.adapters import EYEAdapter, OxigraphAdapter, WCP43RulesAdapter
+from kgcl.hybrid.adapters import (
+    EYEAdapter,
+    NoOpValidator,
+    OxigraphAdapter,
+    PyOxigraphTransactionManager,
+    PySHACLValidator,
+    SPARQLMutator,
+    WCP43RulesAdapter,
+    create_mutator,
+    create_transaction_manager,
+    create_validator,
+)
 
 # Application Layer - Use cases
-from kgcl.hybrid.application import ConvergenceRunner, StatusInspector, TickExecutor
+from kgcl.hybrid.application import (
+    ConvergenceRunner,
+    HybridOrchestrator,
+    OrchestratorConfig,
+    StatusInspector,
+    TickExecutor,
+    TickOutcome,
+    create_orchestrator,
+)
 
 # Domain Layer - Core value objects and exceptions
 from kgcl.hybrid.domain import ConvergenceError, ReasonerError, StoreOperationError, TaskStatus
@@ -75,7 +94,29 @@ from kgcl.hybrid.knowledge_hooks import (
 )
 
 # Ports Layer - Abstract protocols (for dependency injection)
-from kgcl.hybrid.ports import RDFStore, Reasoner, ReasoningOutput, RulesProvider
+from kgcl.hybrid.ports import (
+    MutationResult,
+    RDFStore,
+    Reasoner,
+    ReasoningOutput,
+    RulesProvider,
+    Snapshot,
+    StateMutation,
+    StateMutator,
+    Transaction,
+    TransactionError,
+    TransactionManager,
+    TransactionResult,
+    TransactionState,
+    Triple,
+    ValidationResult,
+    ValidationSeverity,
+    ValidationViolation,
+    WorkflowValidator,
+)
+
+# WCP-43 SPARQL UPDATE Templates (thesis architecture)
+from kgcl.hybrid.wcp43_mutations import WCP43_MUTATIONS, WCPMutation, get_all_mutations, get_mutation
 
 # WCP-43 Complete Physics - All 43 YAWL Workflow Control Patterns
 from kgcl.hybrid.wcp43_physics import (
@@ -117,7 +158,7 @@ try:
 except ImportError as e:
     _PYOXIGRAPH_AVAILABLE = False
     _PYOXIGRAPH_ERROR = str(e)
-    # Define placeholder classes for type checking
+    # Type stubs for optional pyoxigraph dependency (None when not installed)
     TickController = None  # type: ignore[assignment, misc]
     NewTickResult = None  # type: ignore[assignment, misc]
     TickPhase = None  # type: ignore[assignment, misc]
@@ -152,19 +193,52 @@ __all__ = [
     "ConvergenceError",
     "ReasonerError",
     "StoreOperationError",
-    # Ports Layer - Abstract protocols
+    # Ports Layer - Abstract protocols (original)
     "RDFStore",
     "Reasoner",
     "ReasoningOutput",
     "RulesProvider",
-    # Adapters Layer - Port implementations
+    # Ports Layer - Thesis architecture (NEW)
+    "StateMutator",
+    "StateMutation",
+    "MutationResult",
+    "Triple",
+    "WorkflowValidator",
+    "ValidationResult",
+    "ValidationViolation",
+    "ValidationSeverity",
+    "TransactionManager",
+    "Transaction",
+    "TransactionResult",
+    "TransactionState",
+    "TransactionError",
+    "Snapshot",
+    # Adapters Layer - Port implementations (original)
     "OxigraphAdapter",
     "EYEAdapter",
     "WCP43RulesAdapter",
-    # Application Layer - Use cases
+    # Adapters Layer - Thesis architecture (NEW)
+    "SPARQLMutator",
+    "create_mutator",
+    "PySHACLValidator",
+    "NoOpValidator",
+    "create_validator",
+    "PyOxigraphTransactionManager",
+    "create_transaction_manager",
+    # Application Layer - Use cases (original)
     "TickExecutor",
     "ConvergenceRunner",
     "StatusInspector",
+    # Application Layer - Thesis architecture (NEW)
+    "HybridOrchestrator",
+    "OrchestratorConfig",
+    "TickOutcome",
+    "create_orchestrator",
+    # WCP-43 SPARQL UPDATE Templates (NEW)
+    "WCP43_MUTATIONS",
+    "WCPMutation",
+    "get_mutation",
+    "get_all_mutations",
     # Knowledge Hooks - Pure N3 Logic
     "KnowledgeHook",
     "HookRegistry",

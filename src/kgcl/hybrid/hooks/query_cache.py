@@ -34,9 +34,7 @@ import threading
 import time
 from collections import OrderedDict
 from dataclasses import dataclass, field
-from typing import Any, ClassVar, Generic, TypeVar
-
-T = TypeVar("T")
+from typing import Any, ClassVar
 
 
 @dataclass(frozen=True)
@@ -67,7 +65,7 @@ class QueryCacheConfig:
 
 
 @dataclass
-class CacheEntry(Generic[T]):
+class CacheEntry[T]:
     """Individual cache entry with expiration tracking.
 
     Parameters

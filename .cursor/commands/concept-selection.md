@@ -55,3 +55,4 @@ Create a table in `reports/concept-selection/<decision>.md`:
 - `/voice-of-customer-qfd` to gather criteria from stakeholders.
 - `/triz-problem-solving` when contradictions remain.
 
+

@@ -1,0 +1,316 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix evt: <http://kgcl.dev/ontology/event/> .
+@prefix kgc: <http://kgcl.dev/ontology/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+
+# Shapes Ontology Metadata
+<http://kgcl.dev/ontology/shapes> a sh:Graph ;
+    dc:title "KGCL Temporal SHACL Shapes" ;
+    dc:description "Validation shapes for event chain integrity and temporal consistency" ;
+    dc:creator "KGCL Hybrid Engine v2" ;
+    sh:shapesGraph <http://kgcl.dev/ontology/shapes> .
+
+# ============================================================================
+# Event Chain Integrity Shape
+# ============================================================================
+
+evt:EventChainIntegrityShape a sh:NodeShape ;
+    sh:targetClass evt:WorkflowEvent ;
+    rdfs:label "Event Chain Integrity" ;
+    rdfs:comment "Validates that all events have required fields and proper structure" ;
+
+    # Event ID: UUID v7 (time-ordered)
+    sh:property [
+        sh:path evt:eventId ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$" ;
+        sh:message "Event ID must be a valid UUID v7 (time-ordered UUID)" ;
+        sh:severity sh:Violation
+    ] ;
+
+    # Event Hash: SHA-256 (64 hex chars)
+    sh:property [
+        sh:path evt:eventHash ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[a-f0-9]{64}$" ;
+        sh:message "Event hash must be 64-character hexadecimal SHA-256" ;
+        sh:severity sh:Violation
+    ] ;
+
+    # Previous Hash: SHA-256 or empty for genesis event
+    sh:property [
+        sh:path evt:previousHash ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^([a-f0-9]{64}|)$" ;
+        sh:message "Previous hash must be 64-char hex SHA-256 or empty for genesis event" ;
+        sh:severity sh:Violation
+    ] ;
+
+    # Timestamp: Required ISO 8601
+    sh:property [
+        sh:path evt:timestamp ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:dateTime ;
+        sh:message "Timestamp must be a valid ISO 8601 dateTime" ;
+        sh:severity sh:Violation
+    ] ;
+
+    # Tick Number: Non-negative integer
+    sh:property [
+        sh:path evt:tickNumber ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:message "Tick number must be a non-negative integer" ;
+        sh:severity sh:Violation
+    ] ;
+
+    # Workflow ID: UUID
+    sh:property [
+        sh:path evt:workflowId ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$" ;
+        sh:message "Workflow ID must be a valid UUID" ;
+        sh:severity sh:Violation
+    ] .
+
+# ============================================================================
+# Causal Consistency Shape
+# ============================================================================
+
+evt:CausalConsistencyShape a sh:NodeShape ;
+    sh:targetClass evt:WorkflowEvent ;
+    rdfs:label "Causal Consistency" ;
+    rdfs:comment "Ensures causal predecessors have earlier tick numbers (happens-before)" ;
+
+    # SPARQL rule: causedBy event must have strictly earlier tick
+    sh:sparql [
+        sh:message "Causal predecessor must have earlier tick number (happens-before violation)" ;
+        sh:prefixes evt: ;
+        sh:select """
+            SELECT $this ?cause ?effectTick ?causeTick
+            WHERE {
+                $this evt:causedBy ?cause ;
+                      evt:tickNumber ?effectTick .
+                ?cause evt:tickNumber ?causeTick .
+                FILTER (?causeTick >= ?effectTick)
+            }
+        """ ;
+        sh:severity sh:Violation
+    ] .
+
+# ============================================================================
+# Vector Clock Monotonicity Shape
+# ============================================================================
+
+evt:VectorClockMonotonicityShape a sh:NodeShape ;
+    sh:targetClass evt:WorkflowEvent ;
+    rdfs:label "Vector Clock Monotonicity" ;
+    rdfs:comment "Vector clocks must increase monotonically along event chain" ;
+
+    # Simplified check: vector clock must exist if event has causedBy
+    sh:property [
+        sh:path evt:vectorClock ;
+        sh:maxCount 1 ;
+        sh:class evt:VectorClock ;
+        sh:message "Vector clock must be a valid VectorClock instance" ;
+        sh:severity sh:Warning
+    ] ;
+
+    # SPARQL rule: vector clock format validation
+    sh:sparql [
+        sh:message "Vector clock value must be in format 'node1:N,node2:M,...'" ;
+        sh:prefixes evt: ;
+        sh:select """
+            SELECT $this ?vcValue
+            WHERE {
+                $this evt:vectorClock ?vc .
+                ?vc evt:clockValue ?vcValue .
+                FILTER (!regex(?vcValue, "^([a-zA-Z0-9_-]+:[0-9]+,)*[a-zA-Z0-9_-]+:[0-9]+$"))
+            }
+        """ ;
+        sh:severity sh:Violation
+    ] .
+
+# ============================================================================
+# Hash Chain Integrity Shape
+# ============================================================================
+
+evt:HashChainIntegrityShape a sh:NodeShape ;
+    sh:targetClass evt:WorkflowEvent ;
+    rdfs:label "Hash Chain Integrity" ;
+    rdfs:comment "Validates blockchain-style event chain linking" ;
+
+    # SPARQL rule: previousHash must match a prior event's eventHash
+    sh:sparql [
+        sh:message "Previous hash does not match any prior event's hash (broken chain)" ;
+        sh:prefixes evt: ;
+        sh:select """
+            SELECT $this ?prevHash
+            WHERE {
+                $this evt:previousHash ?prevHash .
+                FILTER (str(?prevHash) != "")
+                FILTER NOT EXISTS {
+                    ?priorEvent evt:eventHash ?prevHash .
+                }
+            }
+        """ ;
+        sh:severity sh:Violation
+    ] .
+
+# ============================================================================
+# Temporal Slice Validity Shape
+# ============================================================================
+
+kgc:TemporalSliceValidityShape a sh:NodeShape ;
+    sh:targetClass kgc:TemporalSlice ;
+    rdfs:label "Temporal Slice Validity" ;
+    rdfs:comment "Ensures temporal slices have valid time intervals" ;
+
+    # validFrom is required
+    sh:property [
+        sh:path kgc:validFrom ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:dateTime ;
+        sh:message "Temporal slice must have a validFrom timestamp" ;
+        sh:severity sh:Violation
+    ] ;
+
+    # validUntil must be after validFrom (if present)
+    sh:sparql [
+        sh:message "validUntil must be after validFrom (invalid time interval)" ;
+        sh:prefixes kgc: ;
+        sh:select """
+            SELECT $this ?from ?until
+            WHERE {
+                $this kgc:validFrom ?from ;
+                      kgc:validUntil ?until .
+                FILTER (?until <= ?from)
+            }
+        """ ;
+        sh:severity sh:Violation
+    ] .
+
+# ============================================================================
+# Event Type-Specific Shapes
+# ============================================================================
+
+# Status Change Event must have task ID and status fields
+evt:StatusChangeEventShape a sh:NodeShape ;
+    sh:targetClass evt:StatusChangeEvent ;
+    rdfs:label "Status Change Event" ;
+    sh:property [
+        sh:path evt:taskId ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Status change event must have a task ID" ;
+        sh:severity sh:Violation
+    ] ;
+    sh:property [
+        sh:path evt:toStatus ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in ("idle" "enabled" "started" "completed" "failed" "cancelled") ;
+        sh:message "toStatus must be one of: idle, enabled, started, completed, failed, cancelled" ;
+        sh:severity sh:Violation
+    ] .
+
+# Token Move Event must have operation type
+evt:TokenMoveEventShape a sh:NodeShape ;
+    sh:targetClass evt:TokenMoveEvent ;
+    rdfs:label "Token Move Event" ;
+    sh:property [
+        sh:path evt:operation ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in ("add" "remove") ;
+        sh:message "Token operation must be 'add' or 'remove'" ;
+        sh:severity sh:Violation
+    ] ;
+    sh:property [
+        sh:path evt:placeId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Token move event must have a place ID" ;
+        sh:severity sh:Violation
+    ] .
+
+# Split Event must have valid split type
+evt:SplitEventShape a sh:NodeShape ;
+    sh:targetClass evt:SplitEvent ;
+    rdfs:label "Split Event" ;
+    sh:property [
+        sh:path evt:splitType ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in ("and" "or" "xor") ;
+        sh:message "Split type must be 'and', 'or', or 'xor'" ;
+        sh:severity sh:Violation
+    ] ;
+    sh:property [
+        sh:path evt:sourceTask ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Split event must have a source task" ;
+        sh:severity sh:Violation
+    ] .
+
+# Hook Execution Event must have valid phase and result
+evt:HookExecutionEventShape a sh:NodeShape ;
+    sh:targetClass evt:HookExecutionEvent ;
+    rdfs:label "Hook Execution Event" ;
+    sh:property [
+        sh:path evt:hookPhase ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in ("pre" "post" "validation") ;
+        sh:message "Hook phase must be 'pre', 'post', or 'validation'" ;
+        sh:severity sh:Violation
+    ] ;
+    sh:property [
+        sh:path evt:hookResult ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in ("success" "failure") ;
+        sh:message "Hook result must be 'success' or 'failure'" ;
+        sh:severity sh:Violation
+    ] .
+
+# Validation Event must have result and violation count
+evt:ValidationEventShape a sh:NodeShape ;
+    sh:targetClass evt:ValidationEvent ;
+    rdfs:label "Validation Event" ;
+    sh:property [
+        sh:path evt:validationResult ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in ("valid" "invalid") ;
+        sh:message "Validation result must be 'valid' or 'invalid'" ;
+        sh:severity sh:Violation
+    ] ;
+    sh:property [
+        sh:path evt:violationCount ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:message "Validation event must have a violation count (0 for valid)" ;
+        sh:severity sh:Violation
+    ] .

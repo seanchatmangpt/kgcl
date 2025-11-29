@@ -1,0 +1,770 @@
+@prefix yawl: <http://www.yawlfoundation.org/yawlschema#> .
+@prefix yawl-client: <http://kgcl.dev/ontology/yawl/clients/v1#> .
+@prefix yawl-http: <http://kgcl.dev/ontology/yawl/http/v1#> .
+@prefix yawl-event: <http://kgcl.dev/ontology/yawl/events/v1#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix http: <http://www.w3.org/2011/http#> .
+@prefix http-methods: <http://www.w3.org/2011/http-methods#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix schema: <https://schema.org/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+# =============================================================================
+# YAWL HTTP Client Ontology v1.0
+#
+# This ontology models the YAWL HTTP client architecture with full Java parity.
+# It extends the core YAWL ontology with client-side communication patterns.
+#
+# Standard Ontologies Used:
+#   - W3C HTTP Vocabulary (http:)
+#   - Dublin Core Terms (dcterms:)
+#   - Schema.org (schema:)
+#   - PROV-O (prov:)
+#   - YAWL Foundation Schema (yawl:)
+# =============================================================================
+
+yawl-client: a owl:Ontology ;
+    owl:versionInfo "1.0.0" ;
+    dcterms:title "YAWL HTTP Client Ontology" ;
+    dcterms:description "Ontology for YAWL workflow engine HTTP clients with Java parity" ;
+    dcterms:creator "KGCL Project" ;
+    dcterms:created "2025-11-28"^^xsd:date ;
+    owl:imports <http://www.yawlfoundation.org/yawlschema#> ;
+    rdfs:seeAlso <https://github.com/yawlfoundation/yawl> .
+
+# =============================================================================
+# SECTION 1: CLIENT ARCHITECTURE CLASSES
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Base Client Interface (Abstract)
+# -----------------------------------------------------------------------------
+
+yawl-client:Client a owl:Class ;
+    rdfs:label "YAWL Client" ;
+    rdfs:comment "Abstract base class for YAWL engine clients" ;
+    rdfs:subClassOf schema:SoftwareApplication ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty yawl-client:baseURL ;
+        owl:cardinality 1
+    ] .
+
+yawl-client:AbstractClient a owl:Class ;
+    rdfs:label "Abstract Client" ;
+    rdfs:comment "Base client with connection and event management" ;
+    rdfs:subClassOf yawl-client:Client ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            yawl-client:Client
+            [ a owl:Restriction ;
+              owl:onProperty yawl-client:hasEventListener ;
+              owl:minCardinality 0 ]
+        )
+    ] .
+
+# -----------------------------------------------------------------------------
+# HTTP Interface Client (Base HTTP Communication)
+# Java: Interface_Client.java
+# -----------------------------------------------------------------------------
+
+yawl-client:InterfaceClient a owl:Class ;
+    rdfs:label "Interface Client" ;
+    rdfs:comment """Base HTTP client for YAWL engine interfaces.
+
+    Java Parity: Interface_Client.java
+    - executePost(uri, params) -> String
+    - executeGet(uri, params) -> String
+    - successful(message) -> boolean
+    - prepareParamMap(action, handle) -> Map
+    - stripOuterElement(xml) -> String""" ;
+    rdfs:subClassOf yawl-client:AbstractClient ;
+    rdfs:subClassOf http:Client ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty yawl-http:timeout ;
+        owl:maxCardinality 1
+    ] .
+
+# -----------------------------------------------------------------------------
+# InterfaceA Client (Management Interface)
+# Java: InterfaceA_EnvironmentBasedClient.java
+# Endpoint: /yawl/ia
+# -----------------------------------------------------------------------------
+
+yawl-client:InterfaceAClient a owl:Class ;
+    rdfs:label "InterfaceA Client" ;
+    rdfs:comment """Management interface client for YAWL engine.
+
+    Java Parity: InterfaceA_EnvironmentBasedClient.java
+    Endpoint: /yawl/ia
+
+    Operations:
+    - connect(userID, password) -> sessionHandle
+    - disconnect(handle) -> success
+    - checkConnection(handle) -> boolean
+    - getAccounts, createAccount, deleteAccount
+    - getYAWLServices, addYAWLService, removeYAWLService
+    - getBuildProperties, getExternalDBGateways""" ;
+    rdfs:subClassOf yawl-client:InterfaceClient ;
+    yawl-client:interfacePath "/ia" .
+
+# -----------------------------------------------------------------------------
+# InterfaceB Client (Workflow Interface)
+# Java: InterfaceB_EnvironmentBasedClient.java
+# Endpoint: /yawl/ib
+# -----------------------------------------------------------------------------
+
+yawl-client:InterfaceBClient a owl:Class ;
+    rdfs:label "InterfaceB Client" ;
+    rdfs:comment """Workflow interface client for YAWL engine.
+
+    Java Parity: InterfaceB_EnvironmentBasedClient.java
+    Endpoint: /yawl/ib
+
+    Operations:
+    - uploadSpecification(specXML, handle) -> UploadResult
+    - unloadSpecification(specID, handle) -> success
+    - getSpecificationList, getSpecification
+    - launchCase, cancelCase
+    - getRunningCases, getAllRunningCases
+    - getCaseData, getWorkItemsForCase""" ;
+    rdfs:subClassOf yawl-client:InterfaceClient ;
+    yawl-client:interfacePath "/ib" .
+
+# -----------------------------------------------------------------------------
+# HTTP Engine Client (Unified Client)
+# Java: EngineClient.java
+# Wraps InterfaceA + InterfaceB
+# -----------------------------------------------------------------------------
+
+yawl-client:HTTPEngineClient a owl:Class ;
+    rdfs:label "HTTP Engine Client" ;
+    rdfs:comment """Unified HTTP client wrapping InterfaceA and InterfaceB.
+
+    Java Parity: EngineClient.java
+    - Uses InterfaceA for authentication (connect/disconnect)
+    - Uses InterfaceB for workflow operations
+    - Shares session handle between interfaces""" ;
+    rdfs:subClassOf yawl-client:Client ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty yawl-client:hasInterfaceAClient ;
+        owl:cardinality 1
+    ] ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty yawl-client:hasInterfaceBClient ;
+        owl:cardinality 1
+    ] .
+
+# =============================================================================
+# SECTION 2: DATA MODEL CLASSES (Java Parity)
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# YSpecVersion (Java: YSpecVersion.java)
+# Major.minor version with comparison semantics
+# -----------------------------------------------------------------------------
+
+yawl-client:YSpecVersion a owl:Class ;
+    rdfs:label "Specification Version" ;
+    rdfs:comment """Version number as major.minor pair.
+
+    Java Parity: YSpecVersion.java
+    - Constructor: YSpecVersion(major, minor)
+    - from_string(version) -> YSpecVersion
+    - to_double() -> float
+    - minor_increment(), major_increment()
+    - Comparable interface""" ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty yawl-client:majorVersion ;
+        owl:cardinality 1
+    ] ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty yawl-client:minorVersion ;
+        owl:cardinality 1
+    ] .
+
+# -----------------------------------------------------------------------------
+# YSpecificationID (Java: YSpecificationID.java)
+# Identifier + Version + URI
+# -----------------------------------------------------------------------------
+
+yawl-client:YSpecificationID a owl:Class ;
+    rdfs:label "Specification Identifier" ;
+    rdfs:comment """Unique specification identifier with version.
+
+    Java Parity: YSpecificationID.java
+    - identifier: String (UUID)
+    - version: YSpecVersion
+    - uri: String (user-defined name)
+
+    Methods:
+    - get_identifier() -> String
+    - get_version_as_string() -> String
+    - get_uri() -> String""" ;
+    rdfs:subClassOf dcterms:Identifier ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty yawl-client:specIdentifier ;
+        owl:cardinality 1
+    ] ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty yawl-client:hasVersion ;
+        owl:cardinality 1
+    ] .
+
+# -----------------------------------------------------------------------------
+# RunningCase (Java: RunningCase.java)
+# Spec ID + Case ID tuple
+# -----------------------------------------------------------------------------
+
+yawl-client:RunningCase a owl:Class ;
+    rdfs:label "Running Case" ;
+    rdfs:comment """Running workflow case instance.
+
+    Java Parity: RunningCase.java
+    - spec_id: YSpecificationID
+    - case_id: String
+
+    Methods:
+    - get_case_id() -> String
+    - get_spec_name() -> String (URI)
+    - get_spec_version() -> String""" ;
+    rdfs:subClassOf yawl:Case ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty yawl-client:hasSpecificationID ;
+        owl:cardinality 1
+    ] ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty yawl-client:caseID ;
+        owl:cardinality 1
+    ] .
+
+# -----------------------------------------------------------------------------
+# UploadResult (Upload response parsing)
+# -----------------------------------------------------------------------------
+
+yawl-client:UploadResult a owl:Class ;
+    rdfs:label "Upload Result" ;
+    rdfs:comment """Result of specification upload operation.
+
+    Contains:
+    - specifications: List[YSpecificationID] (successfully uploaded)
+    - warnings: List[str]
+    - errors: List[str]
+    - raw_response: str (original XML)
+
+    Property: successful = len(errors) == 0 and len(specifications) > 0""" ;
+    rdfs:subClassOf prov:Entity .
+
+# -----------------------------------------------------------------------------
+# PiledTask (Java: PiledTask.java)
+# Task piled for batch execution
+# -----------------------------------------------------------------------------
+
+yawl-client:PiledTask a owl:Class ;
+    rdfs:label "Piled Task" ;
+    rdfs:comment """Task piled for batch execution.
+
+    Java Parity: PiledTask.java
+    When a participant piles a task, all future instances are
+    automatically started without re-offering.""" ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty yawl-client:hasSpecificationID ;
+        owl:cardinality 1
+    ] ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty yawl-client:taskID ;
+        owl:cardinality 1
+    ] .
+
+# -----------------------------------------------------------------------------
+# ChainedCase (Java: ChainedCase.java)
+# Case chained for sequential execution
+# -----------------------------------------------------------------------------
+
+yawl-client:ChainedCase a owl:Class ;
+    rdfs:label "Chained Case" ;
+    rdfs:comment """Case chained for sequential execution.
+
+    Java Parity: ChainedCase.java
+    Completion of a work item in one case automatically starts
+    the next item in the chained case.""" ;
+    rdfs:subClassOf yawl-client:RunningCase .
+
+# =============================================================================
+# SECTION 3: EVENT SYSTEM CLASSES
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# ClientAction (Java: ClientEvent.Action enum)
+# -----------------------------------------------------------------------------
+
+yawl-event:ClientAction a owl:Class ;
+    rdfs:label "Client Action" ;
+    rdfs:comment """Action types that trigger client events.
+
+    Java Parity: ClientEvent.Action enum
+    Core actions: SPECIFICATION_UPLOAD, SPECIFICATION_UNLOAD,
+                  LAUNCH_CASE, SERVICE_ADD, SERVICE_REMOVE
+
+    Python extensions: CANCEL_CASE, WORK_ITEM_UPDATE""" ;
+    owl:oneOf (
+        yawl-event:SpecificationUpload
+        yawl-event:SpecificationUnload
+        yawl-event:LaunchCase
+        yawl-event:CancelCase
+        yawl-event:ServiceAdd
+        yawl-event:ServiceRemove
+        yawl-event:WorkItemUpdate
+    ) .
+
+yawl-event:SpecificationUpload a yawl-event:ClientAction ;
+    rdfs:label "Specification Upload" ;
+    rdfs:comment "A specification was uploaded to the engine" .
+
+yawl-event:SpecificationUnload a yawl-event:ClientAction ;
+    rdfs:label "Specification Unload" ;
+    rdfs:comment "A specification was unloaded from the engine" .
+
+yawl-event:LaunchCase a yawl-event:ClientAction ;
+    rdfs:label "Launch Case" ;
+    rdfs:comment "A new case instance was launched" .
+
+yawl-event:CancelCase a yawl-event:ClientAction ;
+    rdfs:label "Cancel Case" ;
+    rdfs:comment "A running case was cancelled (Python extension)" .
+
+yawl-event:ServiceAdd a yawl-event:ClientAction ;
+    rdfs:label "Service Add" ;
+    rdfs:comment "A YAWL service was registered" .
+
+yawl-event:ServiceRemove a yawl-event:ClientAction ;
+    rdfs:label "Service Remove" ;
+    rdfs:comment "A YAWL service was unregistered" .
+
+yawl-event:WorkItemUpdate a yawl-event:ClientAction ;
+    rdfs:label "Work Item Update" ;
+    rdfs:comment "A work item status changed (Python extension)" .
+
+# -----------------------------------------------------------------------------
+# ClientEvent (Java: ClientEvent.java)
+# -----------------------------------------------------------------------------
+
+yawl-event:ClientEvent a owl:Class ;
+    rdfs:label "Client Event" ;
+    rdfs:comment """Event emitted by client operations.
+
+    Java Parity: ClientEvent.java
+    Fields:
+    - action: ClientAction
+    - payload: Any (object associated with event)
+
+    Methods:
+    - get_action() -> ClientAction
+    - get_object() -> Any""" ;
+    rdfs:subClassOf prov:Activity ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty yawl-event:hasAction ;
+        owl:cardinality 1
+    ] .
+
+# -----------------------------------------------------------------------------
+# ClientEventListener (Java: ClientEventListener interface)
+# -----------------------------------------------------------------------------
+
+yawl-event:ClientEventListener a owl:Class ;
+    rdfs:label "Client Event Listener" ;
+    rdfs:comment """Protocol for client event listeners.
+
+    Java Parity: ClientEventListener interface
+    Method: on_client_event(event: ClientEvent) -> None""" .
+
+# =============================================================================
+# SECTION 4: HTTP PROTOCOL CLASSES
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Session Handle (Authentication token)
+# -----------------------------------------------------------------------------
+
+yawl-http:SessionHandle a owl:Class ;
+    rdfs:label "Session Handle" ;
+    rdfs:comment """Authentication session handle from connect().
+
+    Obtained via InterfaceA.connect(userID, password).
+    Shared between InterfaceA and InterfaceB clients.
+    Must be included in all subsequent requests.""" ;
+    rdfs:subClassOf http:Header .
+
+# -----------------------------------------------------------------------------
+# YAWL HTTP Request
+# -----------------------------------------------------------------------------
+
+yawl-http:YAWLRequest a owl:Class ;
+    rdfs:label "YAWL HTTP Request" ;
+    rdfs:comment """HTTP request to YAWL engine.
+
+    Protocol:
+    - Method: Always POST (GETs rerouted for security)
+    - Content-Type: application/x-www-form-urlencoded
+    - Encoding: UTF-8
+    - Required params: action, sessionHandle""" ;
+    rdfs:subClassOf http:Request ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty http:method ;
+        owl:hasValue http-methods:POST
+    ] .
+
+# -----------------------------------------------------------------------------
+# YAWL HTTP Response
+# -----------------------------------------------------------------------------
+
+yawl-http:YAWLResponse a owl:Class ;
+    rdfs:label "YAWL HTTP Response" ;
+    rdfs:comment """HTTP response from YAWL engine.
+
+    Format: XML string
+    Success: Does NOT contain <failure> element
+    Failure: Contains <failure>message</failure>""" ;
+    rdfs:subClassOf http:Response .
+
+yawl-http:SuccessResponse a owl:Class ;
+    rdfs:label "Success Response" ;
+    rdfs:comment "Response without <failure> element" ;
+    rdfs:subClassOf yawl-http:YAWLResponse ;
+    owl:disjointWith yawl-http:FailureResponse .
+
+yawl-http:FailureResponse a owl:Class ;
+    rdfs:label "Failure Response" ;
+    rdfs:comment "Response containing <failure> element" ;
+    rdfs:subClassOf yawl-http:YAWLResponse .
+
+# =============================================================================
+# SECTION 5: ERROR/EXCEPTION CLASSES
+# =============================================================================
+
+yawl-client:YAWLException a owl:Class ;
+    rdfs:label "YAWL Exception" ;
+    rdfs:comment "Base exception for YAWL client operations" .
+
+yawl-client:YAWLConnectionError a owl:Class ;
+    rdfs:label "YAWL Connection Error" ;
+    rdfs:comment """Raised when connection to YAWL engine fails.
+
+    Java Parity: IOException
+    Causes: Network unreachable, timeout, connection refused""" ;
+    rdfs:subClassOf yawl-client:YAWLException .
+
+yawl-client:YAWLResponseError a owl:Class ;
+    rdfs:label "YAWL Response Error" ;
+    rdfs:comment """Raised when engine returns <failure> response.
+
+    Causes: Invalid credentials, invalid session, bad request""" ;
+    rdfs:subClassOf yawl-client:YAWLException .
+
+# =============================================================================
+# SECTION 6: PROPERTIES
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Client Properties
+# -----------------------------------------------------------------------------
+
+yawl-client:baseURL a owl:DatatypeProperty ;
+    rdfs:label "base URL" ;
+    rdfs:comment "Base URL of YAWL engine (e.g., http://localhost:8080/yawl)" ;
+    rdfs:domain yawl-client:Client ;
+    rdfs:range xsd:anyURI .
+
+yawl-client:interfacePath a owl:DatatypeProperty ;
+    rdfs:label "interface path" ;
+    rdfs:comment "Path suffix for interface endpoint (/ia or /ib)" ;
+    rdfs:domain yawl-client:InterfaceClient ;
+    rdfs:range xsd:string .
+
+yawl-client:hasSessionHandle a owl:ObjectProperty ;
+    rdfs:label "has session handle" ;
+    rdfs:comment "Current active session handle" ;
+    rdfs:domain yawl-client:Client ;
+    rdfs:range yawl-http:SessionHandle .
+
+yawl-client:hasInterfaceAClient a owl:ObjectProperty ;
+    rdfs:label "has InterfaceA client" ;
+    rdfs:comment "InterfaceA client for authentication" ;
+    rdfs:domain yawl-client:HTTPEngineClient ;
+    rdfs:range yawl-client:InterfaceAClient .
+
+yawl-client:hasInterfaceBClient a owl:ObjectProperty ;
+    rdfs:label "has InterfaceB client" ;
+    rdfs:comment "InterfaceB client for workflow operations" ;
+    rdfs:domain yawl-client:HTTPEngineClient ;
+    rdfs:range yawl-client:InterfaceBClient .
+
+yawl-client:hasEventListener a owl:ObjectProperty ;
+    rdfs:label "has event listener" ;
+    rdfs:comment "Registered event listeners" ;
+    rdfs:domain yawl-client:AbstractClient ;
+    rdfs:range yawl-event:ClientEventListener .
+
+# -----------------------------------------------------------------------------
+# Version Properties
+# -----------------------------------------------------------------------------
+
+yawl-client:majorVersion a owl:DatatypeProperty ;
+    rdfs:label "major version" ;
+    rdfs:comment "Major version number" ;
+    rdfs:domain yawl-client:YSpecVersion ;
+    rdfs:range xsd:nonNegativeInteger .
+
+yawl-client:minorVersion a owl:DatatypeProperty ;
+    rdfs:label "minor version" ;
+    rdfs:comment "Minor version number" ;
+    rdfs:domain yawl-client:YSpecVersion ;
+    rdfs:range xsd:nonNegativeInteger .
+
+yawl-client:versionString a owl:DatatypeProperty ;
+    rdfs:label "version string" ;
+    rdfs:comment "Version as dotted string (e.g., '1.5')" ;
+    rdfs:domain yawl-client:YSpecVersion ;
+    rdfs:range xsd:string .
+
+# -----------------------------------------------------------------------------
+# Specification ID Properties
+# -----------------------------------------------------------------------------
+
+yawl-client:specIdentifier a owl:DatatypeProperty ;
+    rdfs:label "specification identifier" ;
+    rdfs:comment "Unique identifier (UUID string)" ;
+    rdfs:domain yawl-client:YSpecificationID ;
+    rdfs:range xsd:string .
+
+yawl-client:specURI a owl:DatatypeProperty ;
+    rdfs:label "specification URI" ;
+    rdfs:comment "User-defined specification name/URI" ;
+    rdfs:domain yawl-client:YSpecificationID ;
+    rdfs:range xsd:string .
+
+yawl-client:hasVersion a owl:ObjectProperty ;
+    rdfs:label "has version" ;
+    rdfs:comment "Specification version" ;
+    rdfs:domain yawl-client:YSpecificationID ;
+    rdfs:range yawl-client:YSpecVersion .
+
+yawl-client:hasSpecificationID a owl:ObjectProperty ;
+    rdfs:label "has specification ID" ;
+    rdfs:comment "Reference to specification identifier" ;
+    rdfs:range yawl-client:YSpecificationID .
+
+# -----------------------------------------------------------------------------
+# Case Properties
+# -----------------------------------------------------------------------------
+
+yawl-client:caseID a owl:DatatypeProperty ;
+    rdfs:label "case ID" ;
+    rdfs:comment "Running case identifier" ;
+    rdfs:domain yawl-client:RunningCase ;
+    rdfs:range xsd:string .
+
+yawl-client:taskID a owl:DatatypeProperty ;
+    rdfs:label "task ID" ;
+    rdfs:comment "Task identifier within specification" ;
+    rdfs:range xsd:string .
+
+# -----------------------------------------------------------------------------
+# Upload Result Properties
+# -----------------------------------------------------------------------------
+
+yawl-client:hasUploadedSpec a owl:ObjectProperty ;
+    rdfs:label "has uploaded specification" ;
+    rdfs:comment "Successfully uploaded specification" ;
+    rdfs:domain yawl-client:UploadResult ;
+    rdfs:range yawl-client:YSpecificationID .
+
+yawl-client:hasWarning a owl:DatatypeProperty ;
+    rdfs:label "has warning" ;
+    rdfs:comment "Warning message from upload" ;
+    rdfs:domain yawl-client:UploadResult ;
+    rdfs:range xsd:string .
+
+yawl-client:hasError a owl:DatatypeProperty ;
+    rdfs:label "has error" ;
+    rdfs:comment "Error message from upload" ;
+    rdfs:domain yawl-client:UploadResult ;
+    rdfs:range xsd:string .
+
+yawl-client:rawResponse a owl:DatatypeProperty ;
+    rdfs:label "raw response" ;
+    rdfs:comment "Original XML response from engine" ;
+    rdfs:domain yawl-client:UploadResult ;
+    rdfs:range xsd:string .
+
+yawl-client:successful a owl:DatatypeProperty ;
+    rdfs:label "successful" ;
+    rdfs:comment "Whether upload was successful (no errors, has specs)" ;
+    rdfs:domain yawl-client:UploadResult ;
+    rdfs:range xsd:boolean .
+
+# -----------------------------------------------------------------------------
+# Event Properties
+# -----------------------------------------------------------------------------
+
+yawl-event:hasAction a owl:ObjectProperty ;
+    rdfs:label "has action" ;
+    rdfs:comment "Action that triggered the event" ;
+    rdfs:domain yawl-event:ClientEvent ;
+    rdfs:range yawl-event:ClientAction .
+
+yawl-event:hasPayload a owl:DatatypeProperty ;
+    rdfs:label "has payload" ;
+    rdfs:comment "Object associated with the event" ;
+    rdfs:domain yawl-event:ClientEvent .
+
+# -----------------------------------------------------------------------------
+# HTTP Properties
+# -----------------------------------------------------------------------------
+
+yawl-http:timeout a owl:DatatypeProperty ;
+    rdfs:label "timeout" ;
+    rdfs:comment "Request timeout in seconds" ;
+    rdfs:domain yawl-client:InterfaceClient ;
+    rdfs:range xsd:decimal .
+
+yawl-http:actionParam a owl:DatatypeProperty ;
+    rdfs:label "action parameter" ;
+    rdfs:comment "Action name in request parameters" ;
+    rdfs:domain yawl-http:YAWLRequest ;
+    rdfs:range xsd:string .
+
+yawl-http:sessionHandleParam a owl:DatatypeProperty ;
+    rdfs:label "session handle parameter" ;
+    rdfs:comment "Session handle in request parameters" ;
+    rdfs:domain yawl-http:YAWLRequest ;
+    rdfs:range xsd:string .
+
+yawl-http:failureMessage a owl:DatatypeProperty ;
+    rdfs:label "failure message" ;
+    rdfs:comment "Error message from <failure> element" ;
+    rdfs:domain yawl-http:FailureResponse ;
+    rdfs:range xsd:string .
+
+# =============================================================================
+# SECTION 7: SHACL-LIKE CONSTRAINTS (OWL Restrictions)
+# =============================================================================
+
+# Constraint: Session handle required for most operations
+yawl-client:RequiresSessionConstraint a owl:Class ;
+    rdfs:label "Requires Session" ;
+    rdfs:comment "Operations that require active session handle" ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:unionOf (
+            yawl-client:InterfaceAClient
+            yawl-client:InterfaceBClient
+        )
+    ] .
+
+# Constraint: Version must have valid major/minor
+yawl-client:ValidVersionConstraint a owl:Restriction ;
+    rdfs:label "Valid Version" ;
+    rdfs:comment "Version must have non-negative major and minor numbers" ;
+    owl:onClass yawl-client:YSpecVersion ;
+    owl:onProperty yawl-client:majorVersion ;
+    owl:minInclusive 0 .
+
+# =============================================================================
+# SECTION 8: INSTANCE EXAMPLES
+# =============================================================================
+
+# Example: Default version (0.1)
+yawl-client:DefaultVersion a yawl-client:YSpecVersion ;
+    rdfs:label "Default Version" ;
+    rdfs:comment "Default version 0.1 (Java parity)" ;
+    yawl-client:majorVersion 0 ;
+    yawl-client:minorVersion 1 ;
+    yawl-client:versionString "0.1" .
+
+# Example: InterfaceA endpoint
+yawl-client:InterfaceAEndpoint a yawl-client:InterfaceAClient ;
+    rdfs:label "InterfaceA Endpoint" ;
+    rdfs:comment "Management interface at /ia" ;
+    yawl-client:interfacePath "/ia" .
+
+# Example: InterfaceB endpoint
+yawl-client:InterfaceBEndpoint a yawl-client:InterfaceBClient ;
+    rdfs:label "InterfaceB Endpoint" ;
+    rdfs:comment "Workflow interface at /ib" ;
+    yawl-client:interfacePath "/ib" .
+
+# =============================================================================
+# SECTION 9: MAPPING TO PYTHON IMPLEMENTATION
+# =============================================================================
+
+# Annotation properties for implementation mapping
+yawl-client:pythonClass a owl:AnnotationProperty ;
+    rdfs:label "Python class" ;
+    rdfs:comment "Corresponding Python class name" .
+
+yawl-client:pythonModule a owl:AnnotationProperty ;
+    rdfs:label "Python module" ;
+    rdfs:comment "Python module path" .
+
+yawl-client:javaClass a owl:AnnotationProperty ;
+    rdfs:label "Java class" ;
+    rdfs:comment "Corresponding Java class name" .
+
+# Implementation mappings
+yawl-client:InterfaceClient
+    yawl-client:pythonClass "InterfaceClient" ;
+    yawl-client:pythonModule "kgcl.yawl.clients.interface_client" ;
+    yawl-client:javaClass "Interface_Client" .
+
+yawl-client:InterfaceAClient
+    yawl-client:pythonClass "InterfaceAClient" ;
+    yawl-client:pythonModule "kgcl.yawl.clients.interface_a_client" ;
+    yawl-client:javaClass "InterfaceA_EnvironmentBasedClient" .
+
+yawl-client:InterfaceBClient
+    yawl-client:pythonClass "InterfaceBClient" ;
+    yawl-client:pythonModule "kgcl.yawl.clients.interface_b_client" ;
+    yawl-client:javaClass "InterfaceB_EnvironmentBasedClient" .
+
+yawl-client:HTTPEngineClient
+    yawl-client:pythonClass "HTTPEngineClient" ;
+    yawl-client:pythonModule "kgcl.yawl.clients.http_engine_client" ;
+    yawl-client:javaClass "EngineClient" .
+
+yawl-client:YSpecVersion
+    yawl-client:pythonClass "YSpecVersion" ;
+    yawl-client:pythonModule "kgcl.yawl.clients.models" ;
+    yawl-client:javaClass "YSpecVersion" .
+
+yawl-client:YSpecificationID
+    yawl-client:pythonClass "YSpecificationID" ;
+    yawl-client:pythonModule "kgcl.yawl.clients.models" ;
+    yawl-client:javaClass "YSpecificationID" .
+
+yawl-event:ClientAction
+    yawl-client:pythonClass "ClientAction" ;
+    yawl-client:pythonModule "kgcl.yawl.clients.events" ;
+    yawl-client:javaClass "ClientEvent.Action" .
+
+yawl-event:ClientEvent
+    yawl-client:pythonClass "ClientEvent" ;
+    yawl-client:pythonModule "kgcl.yawl.clients.events" ;
+    yawl-client:javaClass "ClientEvent" .

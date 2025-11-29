@@ -55,41 +55,21 @@ echo -n "1. Secrets scan... "
 echo -e "${BLUE}⊘ SKIPPED${NC} (research library)"
 
 # ============================================================================
-# CHECK 2: Implementation Lies (Critical)
+# CHECK 2: Pre-Commit Fast (Format, Lint, Implementation Lies)
 # ============================================================================
-echo -n "2. Implementation lies... "
-TODO_MARKERS="$(git diff --cached -- '*.py' 2>/dev/null | grep '^+' | grep -iE '(TODO|FIXME|WIP|HACK|XXX)\s*:' | grep -v '^+++' || true)"
-if [ -n "$TODO_MARKERS" ]; then
-  echo -e "${RED}✗ FAILED${NC}"
-  echo "   Found TODO/FIXME/WIP markers. Complete all work before commit."
-  FAILED=1
-else
-  echo -e "${GREEN}✓${NC}"
-fi
-
-# ============================================================================
-# CHECK 3: Format Check (Fast)
-# ============================================================================
-echo -n "3. Format check... "
-if timeout 5s uv run ruff format --check $STAGED_PY_FILES >/dev/null 2>&1; then
+# Uses poe task for standardized execution (Lean Six Sigma quality)
+echo -n "2. Pre-commit checks (format, lint, lies)... "
+if timeout 10s uv run poe pre-commit-fast >/dev/null 2>&1; then
   echo -e "${GREEN}✓${NC}"
 else
   echo -e "${RED}✗ FAILED${NC}"
-  echo "   Run: uv run ruff format src/ tests/"
+  echo ""
+  echo "   Run these commands to fix:"
+  echo "   - Format: uv run poe format"
+  echo "   - Lint:   uv run poe lint"
+  echo "   - Check:  uv run poe pre-commit-fast"
+  echo ""
   FAILED=1
-fi
-
-# ============================================================================
-# CHECK 4: Basic Lint (Staged Files Only)
-# ============================================================================
-echo -n "4. Lint check... "
-LINT_OUTPUT="$(timeout 8s uv run ruff check --no-fix $STAGED_PY_FILES 2>&1 || true)"
-if echo "$LINT_OUTPUT" | grep -qE 'Found [1-9][0-9]* error'; then
-  echo -e "${RED}✗ FAILED${NC}"
-  echo "   Run: uv run ruff check --fix src/ tests/"
-  FAILED=1
-else
-  echo -e "${GREEN}✓${NC}"
 fi
 
 echo ""

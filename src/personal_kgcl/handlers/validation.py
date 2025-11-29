@@ -33,3 +33,4 @@ def validate_ingest(input_path: Path | None = None, verbose: bool = False, dry_r
     if verbose:
         message += f"\n{report.text}"
     return message
+

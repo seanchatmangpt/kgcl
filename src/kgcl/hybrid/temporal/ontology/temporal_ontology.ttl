@@ -1,0 +1,148 @@
+@prefix kgc: <http://kgcl.dev/ontology/> .
+@prefix evt: <http://kgcl.dev/ontology/event/> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+
+# Ontology Metadata
+<http://kgcl.dev/ontology/temporal> a owl:Ontology ;
+    dc:title "KGCL Temporal Ontology" ;
+    dc:description "4D temporal modeling for workflow event sourcing with W3C Time integration" ;
+    dc:creator "KGCL Hybrid Engine v2" ;
+    owl:versionInfo "2.0.0" .
+
+# ============================================================================
+# Temporal Continuant (4D Entity)
+# ============================================================================
+
+kgc:TemporalContinuant a owl:Class ;
+    rdfs:label "Temporal Continuant" ;
+    rdfs:comment "Entity that persists through time with temporal parts (4D perdurantism)" ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/temporal> .
+
+kgc:TemporalSlice a owl:Class ;
+    rdfs:label "Temporal Slice" ;
+    rdfs:comment "A temporal part of a continuant at a specific time interval" ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty kgc:validFrom ;
+        owl:cardinality 1
+    ] ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/temporal> .
+
+# ============================================================================
+# Temporal Properties
+# ============================================================================
+
+kgc:hasTemporalPart a owl:ObjectProperty ;
+    rdfs:label "has temporal part" ;
+    rdfs:comment "Relates a continuant to its temporal slices" ;
+    rdfs:domain kgc:TemporalContinuant ;
+    rdfs:range kgc:TemporalSlice ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/temporal> .
+
+kgc:validFrom a owl:DatatypeProperty ;
+    rdfs:label "valid from" ;
+    rdfs:comment "Start of temporal slice validity (inclusive)" ;
+    rdfs:domain kgc:TemporalSlice ;
+    rdfs:range xsd:dateTime ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/temporal> .
+
+kgc:validUntil a owl:DatatypeProperty ;
+    rdfs:label "valid until" ;
+    rdfs:comment "End of temporal slice validity (exclusive, optional for open intervals)" ;
+    rdfs:domain kgc:TemporalSlice ;
+    rdfs:range xsd:dateTime ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/temporal> .
+
+kgc:temporalPredecessor a owl:ObjectProperty ;
+    rdfs:label "temporal predecessor" ;
+    rdfs:comment "Previous temporal slice in chronological order" ;
+    rdfs:domain kgc:TemporalSlice ;
+    rdfs:range kgc:TemporalSlice ;
+    a owl:TransitiveProperty ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/temporal> .
+
+# ============================================================================
+# Vector Clock for Causal Ordering
+# ============================================================================
+
+evt:VectorClock a owl:Class ;
+    rdfs:label "Vector Clock" ;
+    rdfs:comment "Lamport vector clock for causal ordering in distributed systems" ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/temporal> .
+
+evt:clockValue a owl:DatatypeProperty ;
+    rdfs:label "clock value" ;
+    rdfs:comment "Serialized vector clock (e.g., 'node1:5,node2:3,node3:7')" ;
+    rdfs:domain evt:VectorClock ;
+    rdfs:range xsd:string ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/temporal> .
+
+evt:nodeId a owl:DatatypeProperty ;
+    rdfs:label "node identifier" ;
+    rdfs:comment "Distributed node/process identifier in vector clock" ;
+    rdfs:domain evt:VectorClock ;
+    rdfs:range xsd:string ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/temporal> .
+
+evt:happensBefore a owl:ObjectProperty ;
+    rdfs:label "happens before" ;
+    rdfs:comment "Lamport happens-before relation (causally precedes)" ;
+    rdfs:domain evt:VectorClock ;
+    rdfs:range evt:VectorClock ;
+    a owl:TransitiveProperty ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/temporal> .
+
+evt:concurrent a owl:ObjectProperty ;
+    rdfs:label "concurrent" ;
+    rdfs:comment "Causally independent events (neither happens-before holds)" ;
+    rdfs:domain evt:VectorClock ;
+    rdfs:range evt:VectorClock ;
+    a owl:SymmetricProperty ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/temporal> .
+
+# ============================================================================
+# W3C Time Integration
+# ============================================================================
+
+kgc:TemporalSlice rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty time:hasTime ;
+    owl:maxCardinality 1
+] .
+
+kgc:hasTimeInterval a owl:ObjectProperty ;
+    rdfs:label "has time interval" ;
+    rdfs:comment "Links temporal slice to W3C Time Interval" ;
+    rdfs:domain kgc:TemporalSlice ;
+    rdfs:range time:Interval ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/temporal> .
+
+# ============================================================================
+# Versioning and Provenance
+# ============================================================================
+
+kgc:versionNumber a owl:DatatypeProperty ;
+    rdfs:label "version number" ;
+    rdfs:comment "Monotonically increasing version for temporal slices" ;
+    rdfs:domain kgc:TemporalSlice ;
+    rdfs:range xsd:nonNegativeInteger ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/temporal> .
+
+kgc:supersedes a owl:ObjectProperty ;
+    rdfs:label "supersedes" ;
+    rdfs:comment "This temporal slice replaces an earlier version" ;
+    rdfs:domain kgc:TemporalSlice ;
+    rdfs:range kgc:TemporalSlice ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/temporal> .
+
+kgc:snapshotOf a owl:ObjectProperty ;
+    rdfs:label "snapshot of" ;
+    rdfs:comment "Links temporal slice to its continuant entity" ;
+    rdfs:domain kgc:TemporalSlice ;
+    rdfs:range kgc:TemporalContinuant ;
+    owl:inverseOf kgc:hasTemporalPart ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/temporal> .

@@ -1,0 +1,306 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix pn: <https://kgcl.org/ontology/petri-net#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# =============================================================================
+# SHACL Shapes for Workflow Net Soundness Verification
+# Implements van der Aalst's soundness criteria
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# WF-net Structure Validation
+# -----------------------------------------------------------------------------
+
+pn:WorkflowNetShape a sh:NodeShape ;
+    sh:targetClass pn:WorkflowNet ;
+    sh:name "Workflow Net Structure" ;
+    sh:description "Validates WF-net has exactly one source and one sink" ;
+
+    # Exactly one source place
+    sh:property [
+        sh:path pn:sourcePlace ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class pn:SourcePlace ;
+        sh:message "WF-net must have exactly one source place"
+    ] ;
+
+    # Exactly one sink place
+    sh:property [
+        sh:path pn:sinkPlace ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class pn:SinkPlace ;
+        sh:message "WF-net must have exactly one sink place"
+    ] ;
+
+    # Must have at least one transition
+    sh:property [
+        sh:path pn:hasTransition ;
+        sh:minCount 1 ;
+        sh:message "WF-net must have at least one transition"
+    ] .
+
+# -----------------------------------------------------------------------------
+# Source Place Validation (no incoming arcs)
+# -----------------------------------------------------------------------------
+
+pn:SourcePlaceShape a sh:NodeShape ;
+    sh:targetClass pn:SourcePlace ;
+    sh:name "Source Place" ;
+    sh:description "Source place has no incoming arcs" ;
+
+    # No preset (incoming nodes)
+    sh:sparql [
+        sh:message "Source place must have no incoming arcs" ;
+        sh:select """
+            PREFIX pn: <https://kgcl.org/ontology/petri-net#>
+            SELECT $this
+            WHERE {
+                ?arc pn:target $this .
+            }
+        """
+    ] .
+
+# -----------------------------------------------------------------------------
+# Sink Place Validation (no outgoing arcs)
+# -----------------------------------------------------------------------------
+
+pn:SinkPlaceShape a sh:NodeShape ;
+    sh:targetClass pn:SinkPlace ;
+    sh:name "Sink Place" ;
+    sh:description "Sink place has no outgoing arcs" ;
+
+    sh:sparql [
+        sh:message "Sink place must have no outgoing arcs" ;
+        sh:select """
+            PREFIX pn: <https://kgcl.org/ontology/petri-net#>
+            SELECT $this
+            WHERE {
+                ?arc pn:source $this .
+            }
+        """
+    ] .
+
+# -----------------------------------------------------------------------------
+# Arc Validation (place-transition bipartite)
+# -----------------------------------------------------------------------------
+
+pn:ArcShape a sh:NodeShape ;
+    sh:targetClass pn:Arc ;
+    sh:name "Arc Structure" ;
+    sh:description "Arcs connect places to transitions or vice versa" ;
+
+    sh:property [
+        sh:path pn:source ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Arc must have exactly one source"
+    ] ;
+
+    sh:property [
+        sh:path pn:target ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Arc must have exactly one target"
+    ] ;
+
+    sh:property [
+        sh:path pn:weight ;
+        sh:datatype xsd:positiveInteger ;
+        sh:minInclusive 1 ;
+        sh:message "Arc weight must be positive integer"
+    ] ;
+
+    # Bipartite constraint
+    sh:sparql [
+        sh:message "Arc must connect place to transition or transition to place" ;
+        sh:select """
+            PREFIX pn: <https://kgcl.org/ontology/petri-net#>
+            SELECT $this
+            WHERE {
+                $this pn:source ?s .
+                $this pn:target ?t .
+                # Both same type = violation
+                { ?s a pn:Place . ?t a pn:Place . }
+                UNION
+                { ?s a pn:Transition . ?t a pn:Transition . }
+            }
+        """
+    ] .
+
+# -----------------------------------------------------------------------------
+# Proper Completion Check
+# -----------------------------------------------------------------------------
+
+pn:ProperCompletionShape a sh:NodeShape ;
+    sh:targetClass pn:Marking ;
+    sh:name "Proper Completion" ;
+    sh:description "When sink has token, no other place has tokens" ;
+
+    sh:sparql [
+        sh:message "Improper completion: sink has token but other places do too" ;
+        sh:select """
+            PREFIX pn: <https://kgcl.org/ontology/petri-net#>
+            SELECT $this
+            WHERE {
+                # This marking has token in sink
+                ?sinkToken pn:atMarking $this ;
+                           pn:inPlace ?sink .
+                ?sink a pn:SinkPlace .
+                ?sinkToken pn:tokenCount ?sinkCount .
+                FILTER(?sinkCount > 0)
+
+                # But also has token in non-sink place
+                ?otherToken pn:atMarking $this ;
+                            pn:inPlace ?other .
+                FILTER(?other != ?sink)
+                ?otherToken pn:tokenCount ?otherCount .
+                FILTER(?otherCount > 0)
+            }
+        """
+    ] .
+
+# -----------------------------------------------------------------------------
+# Deadlock Detection
+# -----------------------------------------------------------------------------
+
+pn:DeadlockFreeShape a sh:NodeShape ;
+    sh:targetClass pn:Marking ;
+    sh:name "Deadlock Free" ;
+    sh:description "Non-final marking must have enabled transition" ;
+
+    sh:sparql [
+        sh:message "Deadlock: no enabled transitions at non-final marking" ;
+        sh:select """
+            PREFIX pn: <https://kgcl.org/ontology/petri-net#>
+            SELECT $this
+            WHERE {
+                # Not the final marking (sink doesn't have all tokens)
+                FILTER NOT EXISTS {
+                    ?token pn:atMarking $this ;
+                           pn:inPlace ?sink .
+                    ?sink a pn:SinkPlace .
+                }
+
+                # No transition is enabled
+                FILTER NOT EXISTS {
+                    ?t a pn:Transition .
+                    ?t pn:isEnabled true .
+                }
+            }
+        """
+    ] .
+
+# -----------------------------------------------------------------------------
+# No Dead Transitions (liveness check)
+# -----------------------------------------------------------------------------
+
+pn:NoDeadTransitionsShape a sh:NodeShape ;
+    sh:targetClass pn:WorkflowNet ;
+    sh:name "No Dead Transitions" ;
+    sh:description "Every transition must be firable in some reachable marking" ;
+
+    sh:sparql [
+        sh:message "Dead transition found: never enabled in any reachable marking" ;
+        sh:select """
+            PREFIX pn: <https://kgcl.org/ontology/petri-net#>
+            SELECT $this ?deadTransition
+            WHERE {
+                $this pn:hasTransition ?deadTransition .
+
+                # Transition never marked as enabled across all markings
+                FILTER NOT EXISTS {
+                    ?deadTransition pn:isEnabled true .
+                }
+            }
+        """
+    ] .
+
+# -----------------------------------------------------------------------------
+# Pattern Detection Shapes
+# -----------------------------------------------------------------------------
+
+pn:AndSplitShape a sh:NodeShape ;
+    sh:targetClass pn:Transition ;
+    sh:name "AND-Split Pattern" ;
+    sh:description "Detects parallel split pattern (WCP-2)" ;
+
+    sh:sparql [
+        sh:message "Transition implements AND-split pattern" ;
+        sh:select """
+            PREFIX pn: <https://kgcl.org/ontology/petri-net#>
+            SELECT $this
+            WHERE {
+                # Transition has multiple output arcs
+                ?arc1 pn:source $this ; pn:target ?p1 .
+                ?arc2 pn:source $this ; pn:target ?p2 .
+                ?p1 a pn:Place .
+                ?p2 a pn:Place .
+                FILTER(?p1 != ?p2)
+            }
+        """
+    ] .
+
+pn:AndJoinShape a sh:NodeShape ;
+    sh:targetClass pn:Transition ;
+    sh:name "AND-Join Pattern" ;
+    sh:description "Detects synchronization pattern (WCP-3)" ;
+
+    sh:sparql [
+        sh:message "Transition implements AND-join pattern" ;
+        sh:select """
+            PREFIX pn: <https://kgcl.org/ontology/petri-net#>
+            SELECT $this
+            WHERE {
+                # Transition has multiple input arcs
+                ?arc1 pn:target $this ; pn:source ?p1 .
+                ?arc2 pn:target $this ; pn:source ?p2 .
+                ?p1 a pn:Place .
+                ?p2 a pn:Place .
+                FILTER(?p1 != ?p2)
+            }
+        """
+    ] .
+
+pn:XorSplitShape a sh:NodeShape ;
+    sh:targetClass pn:Place ;
+    sh:name "XOR-Split Pattern" ;
+    sh:description "Detects exclusive choice pattern (WCP-4)" ;
+
+    sh:sparql [
+        sh:message "Place implements XOR-split pattern" ;
+        sh:select """
+            PREFIX pn: <https://kgcl.org/ontology/petri-net#>
+            SELECT $this
+            WHERE {
+                # Place has multiple output transitions
+                ?arc1 pn:source $this ; pn:target ?t1 .
+                ?arc2 pn:source $this ; pn:target ?t2 .
+                ?t1 a pn:Transition .
+                ?t2 a pn:Transition .
+                FILTER(?t1 != ?t2)
+            }
+        """
+    ] .
+
+pn:XorJoinShape a sh:NodeShape ;
+    sh:targetClass pn:Place ;
+    sh:name "XOR-Join Pattern" ;
+    sh:description "Detects simple merge pattern (WCP-5)" ;
+
+    sh:sparql [
+        sh:message "Place implements XOR-join pattern" ;
+        sh:select """
+            PREFIX pn: <https://kgcl.org/ontology/petri-net#>
+            SELECT $this
+            WHERE {
+                # Place has multiple input transitions
+                ?arc1 pn:target $this ; pn:source ?t1 .
+                ?arc2 pn:target $this ; pn:source ?t2 .
+                ?t1 a pn:Transition .
+                ?t2 a pn:Transition .
+                FILTER(?t1 != ?t2)
+            }
+        """
+    ] .

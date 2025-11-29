@@ -170,7 +170,7 @@ class RedisLockManager:
     return 0
     """
 
-    def __init__(self, redis_client: Redis[Any], default_ttl: int = 30, retry_interval: float = 0.1) -> None:
+    def __init__(self, redis_client: Redis, default_ttl: int = 30, retry_interval: float = 0.1) -> None:  # type: ignore[type-arg]
         """Initialize the lock manager.
 
         Parameters

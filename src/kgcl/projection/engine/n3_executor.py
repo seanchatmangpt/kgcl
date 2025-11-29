@@ -128,18 +128,12 @@ class N3Executor:
         --------
         >>> executor = N3Executor()
         >>> executor.is_available()  # depends on system
-        ...
         """
         if self._eye_available is None:
             self._eye_available = which(self.config.eye_path) is not None
         return self._eye_available
 
-    def execute_rule(
-        self,
-        rule: N3RuleDescriptor,
-        state_ttl: str,
-        base_path: Path | None = None,
-    ) -> N3ExecutionResult:
+    def execute_rule(self, rule: N3RuleDescriptor, state_ttl: str, base_path: Path | None = None) -> N3ExecutionResult:
         """Execute N3 rule against state.
 
         Parameters
@@ -180,18 +174,9 @@ class N3Executor:
         if not rules_path.exists():
             raise N3ReasoningError(rule.name, f"Rule file not found: {rules_path}")
 
-        return self._execute(
-            rule_name=rule.name,
-            rules_path=rules_path,
-            state_ttl=state_ttl,
-        )
+        return self._execute(rule_name=rule.name, rules_path=rules_path, state_ttl=state_ttl)
 
-    def execute(
-        self,
-        rules_path: str | Path,
-        state_ttl: str,
-        rule_name: str = "unnamed",
-    ) -> N3ExecutionResult:
+    def execute(self, rules_path: str | Path, state_ttl: str, rule_name: str = "unnamed") -> N3ExecutionResult:
         """Execute N3 rules from file against state.
 
         Parameters
@@ -221,18 +206,9 @@ class N3Executor:
         if not self.is_available():
             raise N3ReasoningError(rule_name, f"EYE reasoner not found at '{self.config.eye_path}'")
 
-        return self._execute(
-            rule_name=rule_name,
-            rules_path=Path(rules_path),
-            state_ttl=state_ttl,
-        )
+        return self._execute(rule_name=rule_name, rules_path=Path(rules_path), state_ttl=state_ttl)
 
-    def _execute(
-        self,
-        rule_name: str,
-        rules_path: Path,
-        state_ttl: str,
-    ) -> N3ExecutionResult:
+    def _execute(self, rule_name: str, rules_path: Path, state_ttl: str) -> N3ExecutionResult:
         """Execute EYE subprocess with resource limits.
 
         Parameters
@@ -277,10 +253,7 @@ class N3Executor:
 
                 if result.returncode == 0:
                     return N3ExecutionResult(
-                        success=True,
-                        output=result.stdout,
-                        duration_ms=duration_ms,
-                        rule_name=rule_name,
+                        success=True, output=result.stdout, duration_ms=duration_ms, rule_name=rule_name
                     )
                 else:
                     return N3ExecutionResult(

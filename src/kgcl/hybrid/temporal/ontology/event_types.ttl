@@ -1,0 +1,348 @@
+@prefix evt: <http://kgcl.dev/ontology/event/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+
+# Ontology Metadata
+<http://kgcl.dev/ontology/event-types> a owl:Ontology ;
+    dc:title "KGCL Event Type Taxonomy" ;
+    dc:description "Immutable event types for workflow event sourcing" ;
+    dc:creator "KGCL Hybrid Engine v2" ;
+    owl:versionInfo "2.0.0" .
+
+# ============================================================================
+# Base Event Class
+# ============================================================================
+
+evt:WorkflowEvent a owl:Class ;
+    rdfs:label "Workflow Event" ;
+    rdfs:comment "Base class for all immutable workflow events in event sourcing architecture" ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/event-types> .
+
+# ============================================================================
+# Core Event Properties (ALL events have these)
+# ============================================================================
+
+evt:eventId a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "event identifier" ;
+    rdfs:comment "Unique UUID v7 identifier (time-ordered)" ;
+    rdfs:domain evt:WorkflowEvent ;
+    rdfs:range xsd:string ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/event-types> .
+
+evt:timestamp a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "timestamp" ;
+    rdfs:comment "ISO 8601 timestamp when event occurred" ;
+    rdfs:domain evt:WorkflowEvent ;
+    rdfs:range xsd:dateTime ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/event-types> .
+
+evt:tickNumber a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "tick number" ;
+    rdfs:comment "Logical clock tick when event occurred" ;
+    rdfs:domain evt:WorkflowEvent ;
+    rdfs:range xsd:nonNegativeInteger ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/event-types> .
+
+evt:workflowId a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "workflow identifier" ;
+    rdfs:comment "UUID of workflow instance this event belongs to" ;
+    rdfs:domain evt:WorkflowEvent ;
+    rdfs:range xsd:string ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/event-types> .
+
+evt:causedBy a owl:ObjectProperty ;
+    rdfs:label "caused by" ;
+    rdfs:comment "Causal predecessor event (happens-before relation)" ;
+    rdfs:domain evt:WorkflowEvent ;
+    rdfs:range evt:WorkflowEvent ;
+    a owl:TransitiveProperty ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/event-types> .
+
+evt:previousHash a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "previous hash" ;
+    rdfs:comment "SHA-256 hash of previous event (blockchain-style chain link)" ;
+    rdfs:domain evt:WorkflowEvent ;
+    rdfs:range xsd:string ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/event-types> .
+
+evt:eventHash a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "event hash" ;
+    rdfs:comment "SHA-256 hash of this event's content (immutability proof)" ;
+    rdfs:domain evt:WorkflowEvent ;
+    rdfs:range xsd:string ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/event-types> .
+
+evt:vectorClock a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:label "vector clock" ;
+    rdfs:comment "Lamport vector clock for causal ordering" ;
+    rdfs:domain evt:WorkflowEvent ;
+    rdfs:range evt:VectorClock ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/event-types> .
+
+# ============================================================================
+# Event Type 1: Status Change
+# ============================================================================
+
+evt:StatusChangeEvent a owl:Class ;
+    rdfs:subClassOf evt:WorkflowEvent ;
+    rdfs:label "Status Change Event" ;
+    rdfs:comment "Task status transition (idle → enabled → started → completed)" ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/event-types> .
+
+evt:taskId a owl:DatatypeProperty ;
+    rdfs:label "task identifier" ;
+    rdfs:comment "Task affected by this event" ;
+    rdfs:domain evt:StatusChangeEvent ;
+    rdfs:range xsd:string .
+
+evt:fromStatus a owl:DatatypeProperty ;
+    rdfs:label "from status" ;
+    rdfs:comment "Previous status before transition" ;
+    rdfs:domain evt:StatusChangeEvent ;
+    rdfs:range xsd:string .
+
+evt:toStatus a owl:DatatypeProperty ;
+    rdfs:label "to status" ;
+    rdfs:comment "New status after transition" ;
+    rdfs:domain evt:StatusChangeEvent ;
+    rdfs:range xsd:string .
+
+# ============================================================================
+# Event Type 2: Token Move
+# ============================================================================
+
+evt:TokenMoveEvent a owl:Class ;
+    rdfs:subClassOf evt:WorkflowEvent ;
+    rdfs:label "Token Move Event" ;
+    rdfs:comment "Token added to or removed from a place" ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/event-types> .
+
+evt:placeId a owl:DatatypeProperty ;
+    rdfs:label "place identifier" ;
+    rdfs:comment "Petri net place affected" ;
+    rdfs:domain evt:TokenMoveEvent ;
+    rdfs:range xsd:string .
+
+evt:tokenId a owl:DatatypeProperty ;
+    rdfs:label "token identifier" ;
+    rdfs:comment "Unique token identifier (for colored Petri nets)" ;
+    rdfs:domain evt:TokenMoveEvent ;
+    rdfs:range xsd:string .
+
+evt:operation a owl:DatatypeProperty ;
+    rdfs:label "operation" ;
+    rdfs:comment "Token operation: 'add' or 'remove'" ;
+    rdfs:domain evt:TokenMoveEvent ;
+    rdfs:range xsd:string .
+
+# ============================================================================
+# Event Type 3: Split (AND/OR/XOR)
+# ============================================================================
+
+evt:SplitEvent a owl:Class ;
+    rdfs:subClassOf evt:WorkflowEvent ;
+    rdfs:label "Split Event" ;
+    rdfs:comment "Control flow split (AND-split, OR-split, XOR-split)" ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/event-types> .
+
+evt:splitType a owl:DatatypeProperty ;
+    rdfs:label "split type" ;
+    rdfs:comment "Type of split: 'and', 'or', or 'xor'" ;
+    rdfs:domain evt:SplitEvent ;
+    rdfs:range xsd:string .
+
+evt:sourceTask a owl:DatatypeProperty ;
+    rdfs:label "source task" ;
+    rdfs:comment "Task triggering the split" ;
+    rdfs:domain evt:SplitEvent ;
+    rdfs:range xsd:string .
+
+evt:targetTasks a owl:DatatypeProperty ;
+    rdfs:label "target tasks" ;
+    rdfs:comment "Comma-separated list of tasks activated by split" ;
+    rdfs:domain evt:SplitEvent ;
+    rdfs:range xsd:string .
+
+# ============================================================================
+# Event Type 4: Join (AND/OR/XOR)
+# ============================================================================
+
+evt:JoinEvent a owl:Class ;
+    rdfs:subClassOf evt:WorkflowEvent ;
+    rdfs:label "Join Event" ;
+    rdfs:comment "Control flow join (AND-join, OR-join, XOR-join)" ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/event-types> .
+
+evt:joinType a owl:DatatypeProperty ;
+    rdfs:label "join type" ;
+    rdfs:comment "Type of join: 'and', 'or', or 'xor'" ;
+    rdfs:domain evt:JoinEvent ;
+    rdfs:range xsd:string .
+
+evt:sourceTasks a owl:DatatypeProperty ;
+    rdfs:label "source tasks" ;
+    rdfs:comment "Comma-separated list of tasks completing before join" ;
+    rdfs:domain evt:JoinEvent ;
+    rdfs:range xsd:string .
+
+evt:targetTask a owl:DatatypeProperty ;
+    rdfs:label "target task" ;
+    rdfs:comment "Task activated after join completes" ;
+    rdfs:domain evt:JoinEvent ;
+    rdfs:range xsd:string .
+
+# ============================================================================
+# Event Type 5: Cancellation
+# ============================================================================
+
+evt:CancellationEvent a owl:Class ;
+    rdfs:subClassOf evt:WorkflowEvent ;
+    rdfs:label "Cancellation Event" ;
+    rdfs:comment "Task or workflow cancellation (reset or cancel-region)" ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/event-types> .
+
+evt:cancelledTasks a owl:DatatypeProperty ;
+    rdfs:label "cancelled tasks" ;
+    rdfs:comment "Comma-separated list of tasks cancelled" ;
+    rdfs:domain evt:CancellationEvent ;
+    rdfs:range xsd:string .
+
+evt:cancellationReason a owl:DatatypeProperty ;
+    rdfs:label "cancellation reason" ;
+    rdfs:comment "Human-readable reason for cancellation" ;
+    rdfs:domain evt:CancellationEvent ;
+    rdfs:range xsd:string .
+
+# ============================================================================
+# Event Type 6: Multi-Instance Spawn
+# ============================================================================
+
+evt:MISpawnEvent a owl:Class ;
+    rdfs:subClassOf evt:WorkflowEvent ;
+    rdfs:label "Multi-Instance Spawn Event" ;
+    rdfs:comment "Spawning of multiple task instances (dynamic parallelism)" ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/event-types> .
+
+evt:parentTask a owl:DatatypeProperty ;
+    rdfs:label "parent task" ;
+    rdfs:comment "Multi-instance task template" ;
+    rdfs:domain evt:MISpawnEvent ;
+    rdfs:range xsd:string .
+
+evt:spawnedInstances a owl:DatatypeProperty ;
+    rdfs:label "spawned instances" ;
+    rdfs:comment "Comma-separated list of instance IDs" ;
+    rdfs:domain evt:MISpawnEvent ;
+    rdfs:range xsd:string .
+
+evt:instanceCount a owl:DatatypeProperty ;
+    rdfs:label "instance count" ;
+    rdfs:comment "Number of instances spawned" ;
+    rdfs:domain evt:MISpawnEvent ;
+    rdfs:range xsd:positiveInteger .
+
+# ============================================================================
+# Event Type 7: Multi-Instance Complete
+# ============================================================================
+
+evt:MICompleteEvent a owl:Class ;
+    rdfs:subClassOf evt:WorkflowEvent ;
+    rdfs:label "Multi-Instance Complete Event" ;
+    rdfs:comment "Completion of all multi-instance tasks" ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/event-types> .
+
+evt:completedInstances a owl:DatatypeProperty ;
+    rdfs:label "completed instances" ;
+    rdfs:comment "Comma-separated list of completed instance IDs" ;
+    rdfs:domain evt:MICompleteEvent ;
+    rdfs:range xsd:string .
+
+# ============================================================================
+# Event Type 8: Hook Execution
+# ============================================================================
+
+evt:HookExecutionEvent a owl:Class ;
+    rdfs:subClassOf evt:WorkflowEvent ;
+    rdfs:label "Hook Execution Event" ;
+    rdfs:comment "Knowledge hook executed (pre-condition, post-effect, etc.)" ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/event-types> .
+
+evt:hookId a owl:DatatypeProperty ;
+    rdfs:label "hook identifier" ;
+    rdfs:comment "Unique hook identifier" ;
+    rdfs:domain evt:HookExecutionEvent ;
+    rdfs:range xsd:string .
+
+evt:hookPhase a owl:DatatypeProperty ;
+    rdfs:label "hook phase" ;
+    rdfs:comment "Execution phase: 'pre', 'post', 'validation'" ;
+    rdfs:domain evt:HookExecutionEvent ;
+    rdfs:range xsd:string .
+
+evt:hookResult a owl:DatatypeProperty ;
+    rdfs:label "hook result" ;
+    rdfs:comment "Execution result: 'success' or 'failure'" ;
+    rdfs:domain evt:HookExecutionEvent ;
+    rdfs:range xsd:string .
+
+# ============================================================================
+# Event Type 9: Validation
+# ============================================================================
+
+evt:ValidationEvent a owl:Class ;
+    rdfs:subClassOf evt:WorkflowEvent ;
+    rdfs:label "Validation Event" ;
+    rdfs:comment "SHACL validation result" ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/event-types> .
+
+evt:validationResult a owl:DatatypeProperty ;
+    rdfs:label "validation result" ;
+    rdfs:comment "SHACL validation outcome: 'valid' or 'invalid'" ;
+    rdfs:domain evt:ValidationEvent ;
+    rdfs:range xsd:string .
+
+evt:violationCount a owl:DatatypeProperty ;
+    rdfs:label "violation count" ;
+    rdfs:comment "Number of SHACL violations detected" ;
+    rdfs:domain evt:ValidationEvent ;
+    rdfs:range xsd:nonNegativeInteger .
+
+# ============================================================================
+# Event Type 10: Tick Start
+# ============================================================================
+
+evt:TickStartEvent a owl:Class ;
+    rdfs:subClassOf evt:WorkflowEvent ;
+    rdfs:label "Tick Start Event" ;
+    rdfs:comment "Beginning of a logical clock tick" ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/event-types> .
+
+evt:enabledTasks a owl:DatatypeProperty ;
+    rdfs:label "enabled tasks" ;
+    rdfs:comment "Comma-separated list of tasks enabled at tick start" ;
+    rdfs:domain evt:TickStartEvent ;
+    rdfs:range xsd:string .
+
+# ============================================================================
+# Event Type 11: Tick End
+# ============================================================================
+
+evt:TickEndEvent a owl:Class ;
+    rdfs:subClassOf evt:WorkflowEvent ;
+    rdfs:label "Tick End Event" ;
+    rdfs:comment "End of a logical clock tick" ;
+    rdfs:isDefinedBy <http://kgcl.dev/ontology/event-types> .
+
+evt:executedTasks a owl:DatatypeProperty ;
+    rdfs:label "executed tasks" ;
+    rdfs:comment "Comma-separated list of tasks executed during tick" ;
+    rdfs:domain evt:TickEndEvent ;
+    rdfs:range xsd:string .
+
+evt:nextTickScheduled a owl:DatatypeProperty ;
+    rdfs:label "next tick scheduled" ;
+    rdfs:comment "Whether another tick is needed (true/false)" ;
+    rdfs:domain evt:TickEndEvent ;
+    rdfs:range xsd:boolean .

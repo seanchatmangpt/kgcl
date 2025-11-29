@@ -1,0 +1,30 @@
+"""{{ class_name }} Python client.
+
+{{ docstring }}
+"""
+
+{{ imports | join('\n') }}
+
+{% if 'Any' in imports | join('') %}
+from typing import Any
+{% endif %}
+
+
+class {{ class_name }}:
+    """{{ docstring | default('Python client for ' + class_name + ' Java service.') }}"""
+
+    def __init__(self) -> None:
+        """Initialize {{ class_name }} client."""
+        pass
+
+{% for method in methods %}
+    def {{ method.name }}(
+        self
+        {%- for param_name, param_type in method.parameters -%}
+        , {{ param_name }}: {{ param_type }}
+        {%- endfor -%}
+    ) -> {{ method.return_type }}:
+        """{{ method.docstring }}"""
+        raise NotImplementedError("Generated stub - implement for real usage")
+
+{% endfor %}

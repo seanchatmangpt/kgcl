@@ -446,8 +446,12 @@ class ConditionEvaluator:
         Requires pyshacl for full validation. Falls back to basic
         pattern matching if pyshacl not available.
         """
-        # Placeholder - requires pyshacl integration
-        return ConditionResult(matched=False, metadata={"error": "SHACL validation requires pyshacl integration"})
+        # SHACL validation not implemented - raise clear error
+        raise NotImplementedError(
+            f"SHACL validation (condition '{condition.id}') requires pyshacl integration. "
+            "Install pyshacl and configure the SHACL adapter to use this condition type. "
+            "See: https://github.com/RDFLib/pySHACL"
+        )
 
     def _eval_n3_rule(self, condition: Condition, store: ox.Store | None) -> ConditionResult:
         """Evaluate N3 rule via EYE reasoner.
@@ -468,8 +472,12 @@ class ConditionEvaluator:
         -----
         Requires EYE reasoner to be installed.
         """
-        # Placeholder - requires EYE adapter integration
-        return ConditionResult(matched=False, metadata={"error": "N3 evaluation requires EYE reasoner integration"})
+        # N3/EYE evaluation not implemented - raise clear error
+        raise NotImplementedError(
+            f"N3 rule evaluation (condition '{condition.id}') requires EYE reasoner integration. "
+            "Install eye-reasoner and configure the N3 adapter to use this condition type. "
+            "See: https://github.com/eyereasoner/eye"
+        )
 
     def reset_state(self) -> None:
         """Reset all stateful condition tracking.

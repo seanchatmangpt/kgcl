@@ -1,0 +1,17 @@
+import React from 'react';
+{% if imports %}
+import { {{ imports | join(', ') }} } from '{{ import_path }}';
+{% endif %}
+
+interface {{ component_name }}Props {
+{% for prop in props %}
+  {{ prop.name }}: {{ prop.type }};
+{% endfor %}
+}
+
+/**
+ * {{ description }}
+ */
+export const {{ component_name }}: React.FC<{{ component_name }}Props> = ({ {% for prop in props %}{{ prop.name }}{% if not loop.last %}, {% endif %}{% endfor %} }) => {
+  {{ component_implementation }}
+};

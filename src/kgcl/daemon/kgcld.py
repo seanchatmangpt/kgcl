@@ -40,12 +40,7 @@ from kgcl.daemon.event_store import (
     RDFEventStore,
     compute_state_hash,
 )
-from kgcl.daemon.service_gateway import (
-    ServiceGateway,
-    ServiceInvocation,
-    ServiceReference,
-    ServiceStatus,
-)
+from kgcl.daemon.service_gateway import ServiceGateway, ServiceInvocation, ServiceReference, ServiceStatus
 
 if TYPE_CHECKING:
     from kgcl.projection.domain.result import ProjectionResult
@@ -787,9 +782,7 @@ class KGCLDaemon:
         Examples
         --------
         >>> ref = ServiceReference(
-        ...     service_id="validator",
-        ...     uri="http://localhost:8080/api/validate",
-        ...     timeout_seconds=10.0,
+        ...     service_id="validator", uri="http://localhost:8080/api/validate", timeout_seconds=10.0
         ... )
         >>> daemon.register_service(ref)
         >>> "validator" in daemon.service_gateway.services
@@ -816,12 +809,7 @@ class KGCLDaemon:
         """
         self._service_gateway.unregister(service_id)
 
-    async def delegate_task(
-        self,
-        service_id: str,
-        task_id: str,
-        payload: dict[str, Any],
-    ) -> ServiceInvocation:
+    async def delegate_task(self, service_id: str, task_id: str, payload: dict[str, Any]) -> ServiceInvocation:
         """Delegate task execution to an external service.
 
         Sends task payload to registered external service via HTTP POST.
@@ -851,9 +839,7 @@ class KGCLDaemon:
         Examples
         --------
         >>> result = await daemon.delegate_task(
-        ...     service_id="validator",
-        ...     task_id="task-123",
-        ...     payload={"document": "content"},
+        ...     service_id="validator", task_id="task-123", payload={"document": "content"}
         ... )
         >>> result.status
         <ServiceStatus.COMPLETED: 'completed'>
@@ -865,11 +851,7 @@ class KGCLDaemon:
         return await self._service_gateway.invoke(service_id, task_id, payload)
 
     def get_service_invocations(
-        self,
-        *,
-        service_id: str | None = None,
-        task_id: str | None = None,
-        status: ServiceStatus | None = None,
+        self, *, service_id: str | None = None, task_id: str | None = None, status: ServiceStatus | None = None
     ) -> list[ServiceInvocation]:
         """Query service invocation history.
 
@@ -893,11 +875,7 @@ class KGCLDaemon:
         >>> len(failed)
         0
         """
-        return self._service_gateway.get_invocations(
-            service_id=service_id,
-            task_id=task_id,
-            status=status,
-        )
+        return self._service_gateway.get_invocations(service_id=service_id, task_id=task_id, status=status)
 
     def list_services(self, *, assignable_only: bool = False) -> list[ServiceReference]:
         """List registered services.

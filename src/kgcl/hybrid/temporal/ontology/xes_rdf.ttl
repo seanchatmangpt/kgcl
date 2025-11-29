@@ -1,0 +1,210 @@
+@prefix xes: <https://kgcl.org/ontology/xes#> .
+@prefix pn: <https://kgcl.org/ontology/petri-net#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+# =============================================================================
+# XES Event Log Ontology (RDF version of IEEE 1849-2016)
+# For process mining compatibility with ProM, Disco, Celonis
+# =============================================================================
+
+xes: a owl:Ontology ;
+    rdfs:label "XES Event Log Ontology" ;
+    rdfs:comment "RDF representation of IEEE 1849-2016 XES standard" ;
+    owl:imports <http://www.w3.org/2006/time> .
+
+# -----------------------------------------------------------------------------
+# Core Classes
+# -----------------------------------------------------------------------------
+
+xes:Log a owl:Class ;
+    rdfs:label "Event Log" ;
+    rdfs:comment "Collection of traces (cases)" ;
+    rdfs:subClassOf prov:Collection .
+
+xes:Trace a owl:Class ;
+    rdfs:label "Trace" ;
+    rdfs:comment "Sequence of events for one case/process instance" ;
+    rdfs:subClassOf prov:Entity .
+
+xes:Event a owl:Class ;
+    rdfs:label "Event" ;
+    rdfs:comment "Single event in a trace" ;
+    rdfs:subClassOf prov:Activity .
+
+# -----------------------------------------------------------------------------
+# XES Standard Attributes (concept, time, lifecycle, org)
+# -----------------------------------------------------------------------------
+
+# Concept extension
+xes:conceptName a owl:DatatypeProperty ;
+    rdfs:label "concept:name" ;
+    rdfs:comment "Activity name or case identifier" ;
+    rdfs:range xsd:string .
+
+xes:conceptInstance a owl:DatatypeProperty ;
+    rdfs:label "concept:instance" ;
+    rdfs:comment "Instance identifier" ;
+    rdfs:range xsd:string .
+
+# Time extension
+xes:timestamp a owl:DatatypeProperty ;
+    rdfs:label "time:timestamp" ;
+    rdfs:comment "Event timestamp" ;
+    rdfs:range xsd:dateTime .
+
+# Lifecycle extension
+xes:Lifecycle a owl:Class ;
+    rdfs:label "Lifecycle Transition" .
+
+xes:lifecycleTransition a owl:ObjectProperty ;
+    rdfs:label "lifecycle:transition" ;
+    rdfs:domain xes:Event ;
+    rdfs:range xes:Lifecycle .
+
+# Standard lifecycle values
+xes:schedule a xes:Lifecycle ; rdfs:label "schedule" .
+xes:assign a xes:Lifecycle ; rdfs:label "assign" .
+xes:reassign a xes:Lifecycle ; rdfs:label "reassign" .
+xes:start a xes:Lifecycle ; rdfs:label "start" .
+xes:suspend a xes:Lifecycle ; rdfs:label "suspend" .
+xes:resume a xes:Lifecycle ; rdfs:label "resume" .
+xes:complete a xes:Lifecycle ; rdfs:label "complete" .
+xes:ate_abort a xes:Lifecycle ; rdfs:label "ate_abort" .
+xes:pi_abort a xes:Lifecycle ; rdfs:label "pi_abort" .
+xes:withdraw a xes:Lifecycle ; rdfs:label "withdraw" .
+xes:manualskip a xes:Lifecycle ; rdfs:label "manualskip" .
+xes:autoskip a xes:Lifecycle ; rdfs:label "autoskip" .
+
+# Organizational extension
+xes:resource a owl:DatatypeProperty ;
+    rdfs:label "org:resource" ;
+    rdfs:comment "Resource that executed the event" ;
+    rdfs:range xsd:string .
+
+xes:role a owl:DatatypeProperty ;
+    rdfs:label "org:role" ;
+    rdfs:range xsd:string .
+
+xes:group a owl:DatatypeProperty ;
+    rdfs:label "org:group" ;
+    rdfs:range xsd:string .
+
+# -----------------------------------------------------------------------------
+# Structure Properties
+# -----------------------------------------------------------------------------
+
+xes:hasTrace a owl:ObjectProperty ;
+    rdfs:domain xes:Log ;
+    rdfs:range xes:Trace .
+
+xes:hasEvent a owl:ObjectProperty ;
+    rdfs:domain xes:Trace ;
+    rdfs:range xes:Event .
+
+xes:eventIndex a owl:DatatypeProperty ;
+    rdfs:domain xes:Event ;
+    rdfs:range xsd:positiveInteger ;
+    rdfs:comment "Position of event in trace (1-based)" .
+
+xes:nextEvent a owl:ObjectProperty ;
+    rdfs:domain xes:Event ;
+    rdfs:range xes:Event ;
+    rdfs:comment "Next event in trace sequence" .
+
+xes:previousEvent a owl:ObjectProperty ;
+    rdfs:domain xes:Event ;
+    rdfs:range xes:Event ;
+    owl:inverseOf xes:nextEvent .
+
+xes:inTrace a owl:ObjectProperty ;
+    rdfs:domain xes:Event ;
+    rdfs:range xes:Trace ;
+    owl:inverseOf xes:hasEvent .
+
+# -----------------------------------------------------------------------------
+# Process Mining Extensions
+# -----------------------------------------------------------------------------
+
+# Directly-follows relation (for α-algorithm)
+xes:directlyFollows a owl:ObjectProperty ;
+    rdfs:domain xes:Event ;
+    rdfs:range xes:Event ;
+    rdfs:comment "a > b: activity a directly followed by b" .
+
+# Causality relation
+xes:causes a owl:ObjectProperty ;
+    rdfs:domain xes:Event ;
+    rdfs:range xes:Event ;
+    rdfs:comment "a → b: causal dependency" .
+
+# Parallel relation
+xes:parallelWith a owl:ObjectProperty ;
+    rdfs:domain xes:Event ;
+    rdfs:range xes:Event ;
+    owl:symmetricProperty true ;
+    rdfs:comment "a || b: activities in parallel" .
+
+# Choice relation
+xes:exclusiveWith a owl:ObjectProperty ;
+    rdfs:domain xes:Event ;
+    rdfs:range xes:Event ;
+    owl:symmetricProperty true ;
+    rdfs:comment "a # b: exclusive choice" .
+
+# -----------------------------------------------------------------------------
+# Conformance Checking Properties
+# -----------------------------------------------------------------------------
+
+xes:fitness a owl:DatatypeProperty ;
+    rdfs:domain xes:Trace ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment "Fitness score [0,1] - how well trace fits model" .
+
+xes:precision a owl:DatatypeProperty ;
+    rdfs:domain xes:Log ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment "Precision score [0,1] - model doesn't allow too much" .
+
+xes:conformsTo a owl:ObjectProperty ;
+    rdfs:domain xes:Log ;
+    rdfs:range pn:WorkflowNet ;
+    rdfs:comment "Log conforms to process model" .
+
+xes:deviatesFrom a owl:ObjectProperty ;
+    rdfs:domain xes:Trace ;
+    rdfs:range pn:WorkflowNet .
+
+# Deviation types
+xes:Deviation a owl:Class .
+xes:MissingActivity a owl:Class ;
+    rdfs:subClassOf xes:Deviation .
+xes:InsertedActivity a owl:Class ;
+    rdfs:subClassOf xes:Deviation .
+xes:WrongOrder a owl:Class ;
+    rdfs:subClassOf xes:Deviation .
+
+xes:hasDeviation a owl:ObjectProperty ;
+    rdfs:domain xes:Trace ;
+    rdfs:range xes:Deviation .
+
+# -----------------------------------------------------------------------------
+# Link to our temporal events
+# -----------------------------------------------------------------------------
+
+xes:fromWorkflowEvent a owl:ObjectProperty ;
+    rdfs:domain xes:Event ;
+    rdfs:comment "Links XES event to source WorkflowEvent" .
+
+xes:tickNumber a owl:DatatypeProperty ;
+    rdfs:domain xes:Event ;
+    rdfs:range xsd:integer ;
+    rdfs:comment "Tick number from workflow execution" .
+
+xes:vectorClock a owl:DatatypeProperty ;
+    rdfs:domain xes:Event ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Vector clock for causality" .

@@ -246,9 +246,8 @@ class WarmEYEReasoner:
         # Write rules to temp file
         self._rules_path = self._write_rules_file(rules_to_use)
 
-        # Pre-compile to PVM (optional optimization)
-        # Note: EYE --image creates a standalone executable, not a loadable module
-        # So we just cache the rules file for now
+        # EYE --image creates standalone executables, not loadable modules
+        # Rules are cached as text files for subprocess invocation
         logger.info(f"Rules cached at {self._rules_path}")
 
         # Spawn pool processes

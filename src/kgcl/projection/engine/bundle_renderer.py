@@ -248,9 +248,7 @@ class BundleRenderer:
 
         # Check iteration limit
         if self._max_iteration is not None and len(iteration_results) > self._max_iteration:
-            raise ResourceLimitExceeded(
-                f"iterations:{entry.template}", self._max_iteration, len(iteration_results)
-            )
+            raise ResourceLimitExceeded(f"iterations:{entry.template}", self._max_iteration, len(iteration_results))
 
         files: list[BundleFileResult] = []
         for row in iteration_results:

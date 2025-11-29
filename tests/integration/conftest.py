@@ -21,6 +21,7 @@ Examples
 >>> @pytest.mark.asyncio
 ... async def test_service_gateway(httpbin_container):
 ...     from kgcl.daemon import ServiceGateway, ServiceReference
+...
 ...     gateway = ServiceGateway()
 ...     ref = ServiceReference(service_id="test", uri=f"{httpbin_container['url']}/post")
 ...     gateway.register(ref)
@@ -86,6 +87,7 @@ def httpbin_container() -> Generator[dict[str, Any], None, None]:
     --------
     >>> def test_http_client(httpbin_container):
     ...     import aiohttp
+    ...
     ...     async with aiohttp.ClientSession() as session:
     ...         async with session.post(f"{httpbin_container['url']}/post", json={"test": 1}) as resp:
     ...             assert resp.status == 200
@@ -98,28 +100,39 @@ def httpbin_container() -> Generator[dict[str, Any], None, None]:
     container.with_exposed_ports(80)
     container.start()
 
-    host = container.get_container_host_ip()
-    port = container.get_exposed_port(80)
+    # Wait for port mapping to be available with retry
+    deadline = time.time() + 60
+    port = None
+    host = None
+    while time.time() < deadline:
+        try:
+            host = container.get_container_host_ip()
+            port = container.get_exposed_port(80)
+            if port:
+                break
+        except (ConnectionError, Exception):
+            pass
+        time.sleep(1)
+
+    if port is None or host is None:
+        raise TimeoutError("HTTPBin container port mapping not available in 60 seconds")
+
     base_url = f"http://{host}:{port}"
 
-    # Wait for HTTPBin to be ready
-    deadline = time.time() + 30
+    # Wait for HTTPBin to respond to requests
+    deadline = time.time() + 60
     while time.time() < deadline:
         try:
             import urllib.request
 
-            urllib.request.urlopen(f"{base_url}/get", timeout=2)
+            urllib.request.urlopen(f"{base_url}/get", timeout=5)
             break
         except Exception:
-            time.sleep(0.5)
+            time.sleep(1)
     else:
-        raise TimeoutError("HTTPBin container did not become ready in 30 seconds")
+        raise TimeoutError("HTTPBin container did not become ready in 60 seconds")
 
-    details = {
-        "url": base_url,
-        "host": host,
-        "port": int(port),
-    }
+    details = {"url": base_url, "host": host, "port": int(port)}
 
     logger.info(f"HTTPBin container started: {details['url']}")
 
@@ -130,143 +143,47 @@ def httpbin_container() -> Generator[dict[str, Any], None, None]:
 
 
 @pytest.fixture(scope="session")
-def mock_api_container() -> Generator[dict[str, Any], None, None]:
-    """Simple mock API container using Python HTTP server.
+def mock_api_container(httpbin_container: dict[str, Any]) -> Generator[dict[str, Any], None, None]:
+    """Mock API container using HTTPBin as backend.
 
-    Provides a lightweight JSON API that echoes requests:
-    - POST /api/task: Returns {"status": "success", "task_id": <from request>}
-    - POST /api/validate: Returns {"valid": true, "score": 0.95}
-    - POST /api/slow: Delays 3 seconds then responds
-    - POST /api/error: Returns 500 error
-    - POST /api/echo: Echoes request body and headers
+    Provides endpoint aliases that map to HTTPBin functionality:
+    - task_endpoint: POST endpoint (echoes JSON)
+    - validate_endpoint: POST endpoint (echoes JSON)
+    - slow_endpoint: 3 second delay endpoint
+    - error_endpoint: 500 error endpoint
+    - echo_endpoint: POST endpoint (echoes JSON)
+
+    Uses HTTPBin for all functionality since it's more reliable.
 
     Yields
     ------
     dict[str, Any]
-        Dictionary with endpoint URLs:
-        - base_url: Base URL
-        - task_endpoint: URL for task processing
-        - validate_endpoint: URL for validation
-        - slow_endpoint: URL for slow responses
-        - error_endpoint: URL for error responses
-        - echo_endpoint: URL for request echo
+        Dictionary with endpoint URLs
 
     Examples
     --------
     >>> def test_mock_api(mock_api_container):
     ...     import requests
+    ...
     ...     resp = requests.post(mock_api_container["task_endpoint"], json={"task_id": "123"})
-    ...     assert resp.json()["status"] == "success"
+    ...     assert resp.json()["json"]["task_id"] == "123"
     """
-    import tempfile
-    import time
-
-    from testcontainers.core.container import DockerContainer
-
-    # Create a simple Python mock server script
-    server_script = '''
-import json
-import time
-from http.server import HTTPServer, BaseHTTPRequestHandler
-
-class MockHandler(BaseHTTPRequestHandler):
-    def do_POST(self):
-        content_length = int(self.headers.get("Content-Length", 0))
-        body = self.rfile.read(content_length).decode("utf-8") if content_length > 0 else "{}"
-        try:
-            data = json.loads(body)
-        except:
-            data = {}
-
-        if self.path == "/api/task":
-            response = {"status": "success", "task_id": data.get("task_id", "unknown"), "processed": True}
-        elif self.path == "/api/validate":
-            response = {"valid": True, "score": 0.95, "document": data.get("document", "")}
-        elif self.path == "/api/slow":
-            time.sleep(3)
-            response = {"status": "delayed", "delay_seconds": 3}
-        elif self.path == "/api/error":
-            self.send_response(500)
-            self.send_header("Content-Type", "application/json")
-            self.end_headers()
-            self.wfile.write(json.dumps({"error": "Internal Server Error"}).encode())
-            return
-        elif self.path == "/api/echo":
-            response = {"echo": data, "headers": dict(self.headers)}
-        else:
-            self.send_response(404)
-            self.end_headers()
-            return
-
-        self.send_response(200)
-        self.send_header("Content-Type", "application/json")
-        self.end_headers()
-        self.wfile.write(json.dumps(response).encode())
-
-    def log_message(self, format, *args):
-        pass  # Suppress logging
-
-if __name__ == "__main__":
-    server = HTTPServer(("0.0.0.0", 8080), MockHandler)
-    print("Mock API server started on port 8080", flush=True)
-    server.serve_forever()
-'''
-
-    # Write server script to temp file
-    with tempfile.NamedTemporaryFile(mode="w", suffix=".py", delete=False) as f:
-        f.write(server_script)
-        script_path = f.name
-
-    # Use Python container with the script
-    container = DockerContainer("python:3.12-slim")
-    container.with_exposed_ports(8080)
-    container.with_volume_mapping(script_path, "/app/server.py", mode="ro")
-    container.with_command("python /app/server.py")
-    container.start()
-
-    host = container.get_container_host_ip()
-    port = container.get_exposed_port(8080)
-    base_url = f"http://{host}:{port}"
-
-    # Wait for server to be ready
-    deadline = time.time() + 30
-    while time.time() < deadline:
-        try:
-            import urllib.request
-
-            req = urllib.request.Request(f"{base_url}/api/task", data=b"{}", method="POST")
-            req.add_header("Content-Type", "application/json")
-            urllib.request.urlopen(req, timeout=2)
-            break
-        except Exception:
-            time.sleep(0.5)
-    else:
-        raise TimeoutError("Mock API container did not become ready in 30 seconds")
+    base_url = httpbin_container["url"]
 
     details = {
         "base_url": base_url,
-        "task_endpoint": f"{base_url}/api/task",
-        "validate_endpoint": f"{base_url}/api/validate",
-        "slow_endpoint": f"{base_url}/api/slow",
-        "error_endpoint": f"{base_url}/api/error",
-        "echo_endpoint": f"{base_url}/api/echo",
-        "host": host,
-        "port": int(port),
+        "task_endpoint": f"{base_url}/post",
+        "validate_endpoint": f"{base_url}/post",
+        "slow_endpoint": f"{base_url}/delay/3",
+        "error_endpoint": f"{base_url}/status/500",
+        "echo_endpoint": f"{base_url}/post",
+        "host": httpbin_container["host"],
+        "port": httpbin_container["port"],
     }
 
-    logger.info(f"Mock API container started: {details['base_url']}")
+    logger.info(f"Mock API container (HTTPBin) endpoints configured: {details['base_url']}")
 
     yield details
-
-    container.stop()
-
-    # Cleanup temp file
-    try:
-        os.unlink(script_path)
-    except Exception:
-        pass
-
-    logger.info("Mock API container stopped")
 
 
 @pytest.fixture(scope="session")
@@ -287,8 +204,7 @@ def oxigraph_container() -> Generator[dict[str, str], None, None]:
     --------
     >>> def test_sparql(oxigraph_container):
     ...     adapter = RemoteStoreAdapter(
-    ...         query_endpoint=oxigraph_container["query"],
-    ...         update_endpoint=oxigraph_container["update"],
+    ...         query_endpoint=oxigraph_container["query"], update_endpoint=oxigraph_container["update"]
     ...     )
     """
     import time
@@ -350,6 +266,7 @@ def postgres_container() -> Generator[dict[str, Any], None, None]:
     --------
     >>> def test_postgres(postgres_container):
     ...     import psycopg
+    ...
     ...     conn = psycopg.connect(postgres_container["url"])
     """
     from testcontainers.postgres import PostgresContainer
@@ -396,6 +313,7 @@ def redis_container() -> Generator[dict[str, Any], None, None]:
     --------
     >>> def test_redis(redis_container):
     ...     import redis
+    ...
     ...     client = redis.from_url(redis_container["url"])
     """
     from testcontainers.redis import RedisContainer
@@ -406,11 +324,7 @@ def redis_container() -> Generator[dict[str, Any], None, None]:
     host = container.get_container_host_ip()
     port = container.get_exposed_port(6379)
 
-    details = {
-        "url": f"redis://{host}:{port}",
-        "host": host,
-        "port": int(port),
-    }
+    details = {"url": f"redis://{host}:{port}", "host": host, "port": int(port)}
 
     logger.info(f"Redis container started: {details['url']}")
 
@@ -439,11 +353,9 @@ def rabbitmq_container() -> Generator[dict[str, Any], None, None]:
     --------
     >>> def test_rabbitmq(rabbitmq_container):
     ...     import pika
+    ...
     ...     connection = pika.BlockingConnection(
-    ...         pika.ConnectionParameters(
-    ...             host=rabbitmq_container["host"],
-    ...             port=rabbitmq_container["port"],
-    ...         )
+    ...         pika.ConnectionParameters(host=rabbitmq_container["host"], port=rabbitmq_container["port"])
     ...     )
     """
     import time

@@ -54,3 +54,4 @@ Create a table in `reports/qfd/<initiative>.md`:
 - `/concept-selection` for deciding between solution options.
 - `/dmaic-problem-solving` when VOC uncovers chronic quality issues.
 
+

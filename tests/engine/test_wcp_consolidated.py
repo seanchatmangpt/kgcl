@@ -26,15 +26,7 @@ from typing import Any
 import pytest
 from rdflib import Graph, Literal, Namespace, URIRef
 
-from kgcl.engine.knowledge_engine import (
-    GENESIS_HASH,
-    KGC,
-    YAWL,
-    QuadDelta,
-    Receipt,
-    SemanticDriver,
-    TransactionContext,
-)
+from kgcl.engine.knowledge_engine import GENESIS_HASH, KGC, YAWL, QuadDelta, Receipt, SemanticDriver, TransactionContext
 
 ONTOLOGY_PATH = Path(__file__).parent.parent.parent / "ontology" / "core" / "kgc_physics.ttl"
 TEST_NS = Namespace("urn:wcp-test:")
@@ -57,9 +49,7 @@ def driver(physics_ontology: Graph) -> SemanticDriver:
 @pytest.fixture
 def tx_context() -> TransactionContext:
     """Create standard transaction context."""
-    return TransactionContext(
-        tx_id="tx-wcp-test", actor="test-runner", prev_hash=GENESIS_HASH, data={}
-    )
+    return TransactionContext(tx_id="tx-wcp-test", actor="test-runner", prev_hash=GENESIS_HASH, data={})
 
 
 # =============================================================================
@@ -276,9 +266,7 @@ def test_all_verbs_produce_valid_receipt(driver: SemanticDriver, tx_context: Tra
     ids=["WCP12", "WCP13", "WCP14", "WCP15"],
 )
 def test_multiple_instance_patterns_resolve_correctly(
-    driver: SemanticDriver,
-    mi_pattern: str,
-    expected_cardinality: str,
+    driver: SemanticDriver, mi_pattern: str, expected_cardinality: str
 ) -> None:
     """Verify Multiple Instance patterns resolve with correct cardinality."""
     workflow = Graph()
@@ -312,11 +300,7 @@ def test_multiple_instance_patterns_resolve_correctly(
     ],
     ids=["WCP19", "WCP20", "WCP25", "WCP26", "WCP27"],
 )
-def test_cancellation_patterns_have_scope(
-    driver: SemanticDriver,
-    cancel_pattern: str,
-    expected_scope: str,
-) -> None:
+def test_cancellation_patterns_have_scope(driver: SemanticDriver, cancel_pattern: str, expected_scope: str) -> None:
     """Verify cancellation patterns resolve with correct scope."""
     workflow = Graph()
     task = TEST_NS[f"task_{cancel_pattern}"]
@@ -393,10 +377,7 @@ def test_wcp21_structured_loop_has_reset_flag() -> None:
 
 @pytest.mark.parametrize(
     "trigger_pattern,is_persistent",
-    [
-        ("WCP23_TransientTrigger", False),
-        ("WCP24_PersistentTrigger", True),
-    ],
+    [("WCP23_TransientTrigger", False), ("WCP24_PersistentTrigger", True)],
     ids=["WCP23", "WCP24"],
 )
 def test_trigger_patterns_persistence(trigger_pattern: str, is_persistent: bool) -> None:

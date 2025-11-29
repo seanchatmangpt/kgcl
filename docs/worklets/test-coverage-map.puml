@@ -1,0 +1,74 @@
+@startuml Integration Test Coverage Map
+!theme plain
+
+title JTBD Integration Tests - 80/20 Coverage Map
+
+' Test categories by importance (80/20 rule)
+package "Critical Path Tests (80% value)" #LightGreen {
+    usecase "Case Exception\nHandling" as UC1
+    usecase "RDR Tree\nTraversal" as UC2
+    usecase "Worklet\nExecution" as UC3
+    usecase "Lifecycle\nManagement" as UC4
+}
+
+package "Edge Cases (20% value)" #LightYellow {
+    usecase "Fallback\nChains" as UC5
+    usecase "Error\nHandling" as UC6
+    usecase "Repository\nOps" as UC7
+}
+
+' Key test scenarios
+actor "Integration Tests" as tests
+
+tests --> UC1 : 3 tests
+tests --> UC2 : 3 tests
+tests --> UC3 : 2 tests
+tests --> UC4 : 3 tests
+tests --> UC5 : 3 tests
+tests --> UC6 : 2 tests
+tests --> UC7 : 2 tests
+
+' What each category proves
+note right of UC1
+  **Proves:**
+  ✓ Timeout handling
+  ✓ Priority routing
+  ✓ No-match graceful fail
+end note
+
+note right of UC2
+  **Proves:**
+  ✓ Numeric conditions (>, <, >=, <=)
+  ✓ String equality (==, !=)
+  ✓ Nested refinement
+end note
+
+note right of UC3
+  **Proves:**
+  ✓ Item-level exceptions
+  ✓ Task-specific worklets
+end note
+
+note right of UC4
+  **Proves:**
+  ✓ State transitions
+  ✓ Cancellation
+  ✓ Active queries
+end note
+
+' Key assertions (what we verify)
+rectangle "Test Assertions" #LightBlue {
+    note as N1
+      **Engine State Verification:**
+      • WorkletCase.status transitions
+      • RDR tree node traversal
+      • Repository storage/retrieval
+      • Callback invocations
+
+      **No Mocking** - Real engine behavior
+    end note
+}
+
+tests -down-> N1
+
+@enduml

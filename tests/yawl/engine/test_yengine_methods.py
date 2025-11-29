@@ -11,8 +11,7 @@ import pytest
 
 from kgcl.yawl.elements.y_identifier import YIdentifier
 from kgcl.yawl.elements.y_specification import YSpecification, YSpecificationID
-from kgcl.yawl.engine.y_case import YCase
-from kgcl.yawl.engine.y_engine import (
+from kgcl.yawl.engine.engine_types import (
     AnnouncementContext,
     EngineStatus,
     InstanceCache,
@@ -25,7 +24,6 @@ from kgcl.yawl.engine.y_engine import (
     YAWLServiceReference,
     YBuildProperties,
     YClient,
-    YEngine,
     YExternalClient,
     YLogDataItemList,
     YNetData,
@@ -35,6 +33,8 @@ from kgcl.yawl.engine.y_engine import (
     YVerificationHandler,
     YWorkItemRepository,
 )
+from kgcl.yawl.engine.y_case import YCase
+from kgcl.yawl.engine.y_engine import YEngine
 from kgcl.yawl.engine.y_net_runner import YNetRunner
 from kgcl.yawl.engine.y_work_item import WorkItemStatus, YWorkItem
 

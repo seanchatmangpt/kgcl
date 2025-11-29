@@ -1,0 +1,70 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.util.CodeletRunner
+yawl:CodeletRunner a yawl:Class ;
+    rdfs:label "CodeletRunner" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/util/CodeletRunner.java"^^xsd:string ;
+    rdfs:comment """Executes a codelet in a separate thread, and announces its completion when done. @author Michael Adams @date 3/09/2010""" ;
+    yawl:implements yawl:Runnable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CodeletRunner_run_1 ;
+    yawl:hasMethod yawl:CodeletRunner_cancel_2 ;
+    yawl:hasMethod yawl:CodeletRunner_shutdown_3 ;
+    yawl:hasField yawl:CodeletRunner__wir ;
+    yawl:hasField yawl:CodeletRunner__taskInfo ;
+    yawl:hasField yawl:CodeletRunner__codelet ;
+    yawl:hasField yawl:CodeletRunner__init ;
+    yawl:hasField yawl:CodeletRunner__persisting ;
+    .
+
+
+# Method: CodeletRunner.run
+yawl:CodeletRunner_run_1 a yawl:Method ;
+    rdfs:label "run" ;
+    yawl:returnType "void" ;
+    yawl:signature "void run()" ;
+    rdfs:comment """Runs the codelet referenced by the work item passed to the constructor.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CodeletRunner.cancel
+yawl:CodeletRunner_cancel_2 a yawl:Method ;
+    rdfs:label "cancel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CodeletRunner.shutdown
+yawl:CodeletRunner_shutdown_3 a yawl:Method ;
+    rdfs:label "shutdown" ;
+    yawl:returnType "void" ;
+    yawl:signature "void shutdown()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:CodeletRunner__wir a yawl:Field ;
+    rdfs:label "_wir" .
+
+yawl:CodeletRunner__taskInfo a yawl:Field ;
+    rdfs:label "_taskInfo" .
+
+yawl:CodeletRunner__codelet a yawl:Field ;
+    rdfs:label "_codelet" .
+
+yawl:CodeletRunner__init a yawl:Field ;
+    rdfs:label "_init" .
+
+yawl:CodeletRunner__persisting a yawl:Field ;
+    rdfs:label "_persisting" .
+
+
+

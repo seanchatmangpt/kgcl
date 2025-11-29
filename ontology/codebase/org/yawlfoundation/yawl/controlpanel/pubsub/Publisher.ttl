@@ -1,0 +1,141 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.controlpanel.pubsub
+yawl:org_yawlfoundation_yawl_controlpanel_pubsub a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.controlpanel.pubsub" .
+# Class: org.yawlfoundation.yawl.controlpanel.pubsub.Publisher
+yawl:Publisher a yawl:Class ;
+    rdfs:label "Publisher" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_pubsub ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/pubsub/Publisher.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 4/08/2014""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Publisher_addEngineStatusListener_1 ;
+    yawl:hasMethod yawl:Publisher_removeEngineStatusListener_2 ;
+    yawl:hasMethod yawl:Publisher_statusChange_3 ;
+    yawl:hasMethod yawl:Publisher_getCurrentStatus_4 ;
+    yawl:hasMethod yawl:Publisher_isTransientStatus_5 ;
+    yawl:hasMethod yawl:Publisher_abortStarting_6 ;
+    yawl:hasMethod yawl:Publisher_announceStoppedStatus_7 ;
+    yawl:hasMethod yawl:Publisher_announceStoppingStatus_8 ;
+    yawl:hasMethod yawl:Publisher_announceStartingStatus_9 ;
+    yawl:hasMethod yawl:Publisher_announceRunningStatus_10 ;
+    yawl:hasField yawl:Publisher__currentStatus ;
+    yawl:hasField yawl:Publisher__listeners ;
+    yawl:hasField yawl:Publisher_LOCK ;
+    .
+
+
+# Method: Publisher.addEngineStatusListener
+yawl:Publisher_addEngineStatusListener_1 a yawl:Method ;
+    rdfs:label "addEngineStatusListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addEngineStatusListener(EngineStatusListener listener)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Publisher.removeEngineStatusListener
+yawl:Publisher_removeEngineStatusListener_2 a yawl:Method ;
+    rdfs:label "removeEngineStatusListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeEngineStatusListener(EngineStatusListener listener)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Publisher.statusChange
+yawl:Publisher_statusChange_3 a yawl:Method ;
+    rdfs:label "statusChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void statusChange(EngineStatus status)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Publisher.getCurrentStatus
+yawl:Publisher_getCurrentStatus_4 a yawl:Method ;
+    rdfs:label "getCurrentStatus" ;
+    yawl:returnType "EngineStatus" ;
+    yawl:signature "EngineStatus getCurrentStatus()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Publisher.isTransientStatus
+yawl:Publisher_isTransientStatus_5 a yawl:Method ;
+    rdfs:label "isTransientStatus" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isTransientStatus()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Publisher.abortStarting
+yawl:Publisher_abortStarting_6 a yawl:Method ;
+    rdfs:label "abortStarting" ;
+    yawl:returnType "void" ;
+    yawl:signature "void abortStarting()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Publisher.announceStoppedStatus
+yawl:Publisher_announceStoppedStatus_7 a yawl:Method ;
+    rdfs:label "announceStoppedStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceStoppedStatus()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Publisher.announceStoppingStatus
+yawl:Publisher_announceStoppingStatus_8 a yawl:Method ;
+    rdfs:label "announceStoppingStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceStoppingStatus()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Publisher.announceStartingStatus
+yawl:Publisher_announceStartingStatus_9 a yawl:Method ;
+    rdfs:label "announceStartingStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceStartingStatus()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Publisher.announceRunningStatus
+yawl:Publisher_announceRunningStatus_10 a yawl:Method ;
+    rdfs:label "announceRunningStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceRunningStatus()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:Publisher__currentStatus a yawl:Field ;
+    rdfs:label "_currentStatus" .
+
+yawl:Publisher__listeners a yawl:Field ;
+    rdfs:label "_listeners" .
+
+yawl:Publisher_LOCK a yawl:Field ;
+    rdfs:label "LOCK" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_controlpanel_editor a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.controlpanel.editor" .
+
+

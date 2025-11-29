@@ -1,0 +1,327 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.MainScreen
+yawl:MainScreen a yawl:Class ;
+    rdfs:label "MainScreen" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/MainScreen.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:MainScreen_loadProperties_1 ;
+    yawl:hasMethod yawl:MainScreen_getDbProperties_2 ;
+    yawl:hasMethod yawl:MainScreen_setYawlProperties_3 ;
+    yawl:hasMethod yawl:MainScreen_start_4 ;
+    yawl:hasMethod yawl:MainScreen_maximize_5 ;
+    yawl:hasMethod yawl:MainScreen_childClose_actionPerformed_6 ;
+    yawl:hasMethod yawl:MainScreen_setMenuKey_7 ;
+    yawl:hasMethod yawl:MainScreen_createMenuBar_8 ;
+    yawl:hasMethod yawl:MainScreen_jMenuBlock_actionPerformed_9 ;
+    yawl:hasMethod yawl:MainScreen_jMenuDecision_actionPerformed_10 ;
+    yawl:hasMethod yawl:MainScreen_jMenuDecisionBlock_actionPerformed_11 ;
+    yawl:hasMethod yawl:MainScreen_jMenuHandleException_actionPerformed_12 ;
+    yawl:hasMethod yawl:MainScreen_jModelNew_actionPerformed_13 ;
+    yawl:hasMethod yawl:MainScreen_jModelOpen_actionPerformed_14 ;
+    yawl:hasMethod yawl:MainScreen_jMenuSaveModel_actionPerformed_15 ;
+    yawl:hasMethod yawl:MainScreen_jMenuDeleteModel_actionPerformed_16 ;
+    yawl:hasMethod yawl:MainScreen_jMenuPConnsModel_actionPerformed_17 ;
+    yawl:hasMethod yawl:MainScreen_jMenuGraph_actionPerformed_18 ;
+    yawl:hasMethod yawl:MainScreen_jMenuHelpAbout_actionPerformed_19 ;
+    yawl:hasMethod yawl:MainScreen_setModelMenuItems_20 ;
+    yawl:hasMethod yawl:MainScreen_deactivated_21 ;
+    yawl:hasMethod yawl:MainScreen_activated_22 ;
+    yawl:hasMethod yawl:MainScreen_closed_23 ;
+    yawl:hasField yawl:MainScreen_KEY_NEW_MODEL ;
+    yawl:hasField yawl:MainScreen_KEY_QUIT ;
+    yawl:hasField yawl:MainScreen_KEY_OPEN_MODEL ;
+    yawl:hasField yawl:MainScreen_KEY_SAVE_MODEL ;
+    yawl:hasField yawl:MainScreen_KEY_DEL_MODEL ;
+    yawl:hasField yawl:MainScreen_KEY_PCONN_MODEL ;
+    yawl:hasField yawl:MainScreen_KEY_MODEL_NEW ;
+    yawl:hasField yawl:MainScreen_KEY_MODEL_EXPORT_IMAGE ;
+    yawl:hasField yawl:MainScreen_KEY_MODEL_VERIFY ;
+    yawl:hasField yawl:MainScreen_KEY_BLOCK ;
+    yawl:hasField yawl:MainScreen_KEY_DECISION ;
+    yawl:hasField yawl:MainScreen_KEY_GRAPH ;
+    yawl:hasField yawl:MainScreen_KEY_START_CASE ;
+    yawl:hasField yawl:MainScreen_KEY_HANDLE_EXCEPTION ;
+    yawl:hasField yawl:MainScreen_KEY_TEMPLATES ;
+    yawl:hasField yawl:MainScreen_YAWLlocation ;
+    yawl:hasField yawl:MainScreen_ProcletServiceLocation ;
+    yawl:hasField yawl:MainScreen_sUserId ;
+    yawl:hasField yawl:MainScreen_sPwd ;
+    yawl:hasField yawl:MainScreen_mainFrame ;
+    yawl:hasField yawl:MainScreen_desktop ;
+    yawl:hasField yawl:MainScreen_newItem ;
+    yawl:hasField yawl:MainScreen_save ;
+    yawl:hasField yawl:MainScreen_delete ;
+    yawl:hasField yawl:MainScreen_pconns ;
+    yawl:hasField yawl:MainScreen_editorProps ;
+    yawl:hasField yawl:MainScreen_frames ;
+    .
+
+
+# Method: MainScreen.loadProperties
+yawl:MainScreen_loadProperties_1 a yawl:Method ;
+    rdfs:label "loadProperties" ;
+    yawl:returnType "void" ;
+    yawl:signature "void loadProperties()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MainScreen.getDbProperties
+yawl:MainScreen_getDbProperties_2 a yawl:Method ;
+    rdfs:label "getDbProperties" ;
+    yawl:returnType "Properties" ;
+    yawl:signature "Properties getDbProperties()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MainScreen.setYawlProperties
+yawl:MainScreen_setYawlProperties_3 a yawl:Method ;
+    rdfs:label "setYawlProperties" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setYawlProperties()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MainScreen.start
+yawl:MainScreen_start_4 a yawl:Method ;
+    rdfs:label "start" ;
+    yawl:returnType "void" ;
+    yawl:signature "void start()" ;
+    rdfs:comment """start""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MainScreen.maximize
+yawl:MainScreen_maximize_5 a yawl:Method ;
+    rdfs:label "maximize" ;
+    yawl:returnType "void" ;
+    yawl:signature "void maximize(JInternalFrame aFrame)" ;
+    rdfs:comment """maximize @param aFrame aFrame Maximize an internal frame aFrame.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MainScreen.childClose_actionPerformed
+yawl:MainScreen_childClose_actionPerformed_6 a yawl:Method ;
+    rdfs:label "childClose_actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void childClose_actionPerformed(ActionEvent actionEvent)" ;
+    rdfs:comment """frameClosed / / public void frameClosed() { internalFrame = null; } @param actionEvent ActionEvent""" ;
+    .
+
+# Method: MainScreen.setMenuKey
+yawl:MainScreen_setMenuKey_7 a yawl:Method ;
+    rdfs:label "setMenuKey" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMenuKey(JMenuItem menuItem, int key)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MainScreen.createMenuBar
+yawl:MainScreen_createMenuBar_8 a yawl:Method ;
+    rdfs:label "createMenuBar" ;
+    yawl:returnType "JMenuBar" ;
+    yawl:signature "JMenuBar createMenuBar()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: MainScreen.jMenuBlock_actionPerformed
+yawl:MainScreen_jMenuBlock_actionPerformed_9 a yawl:Method ;
+    rdfs:label "jMenuBlock_actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void jMenuBlock_actionPerformed(ActionEvent actionEvent, String option)" ;
+    rdfs:comment """jMenuBlock_actionPerformed @param actionEvent actionEvent actionEvent Execute this method when user selects to work with \"Block\" Create the form for Block and start the blockCoordinator""" ;
+    .
+
+# Method: MainScreen.jMenuDecision_actionPerformed
+yawl:MainScreen_jMenuDecision_actionPerformed_10 a yawl:Method ;
+    rdfs:label "jMenuDecision_actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void jMenuDecision_actionPerformed(ActionEvent actionEvent)" ;
+    .
+
+# Method: MainScreen.jMenuDecisionBlock_actionPerformed
+yawl:MainScreen_jMenuDecisionBlock_actionPerformed_11 a yawl:Method ;
+    rdfs:label "jMenuDecisionBlock_actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void jMenuDecisionBlock_actionPerformed(ActionEvent actionEvent)" ;
+    .
+
+# Method: MainScreen.jMenuHandleException_actionPerformed
+yawl:MainScreen_jMenuHandleException_actionPerformed_12 a yawl:Method ;
+    rdfs:label "jMenuHandleException_actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void jMenuHandleException_actionPerformed(ActionEvent actionEvent)" ;
+    .
+
+# Method: MainScreen.jModelNew_actionPerformed
+yawl:MainScreen_jModelNew_actionPerformed_13 a yawl:Method ;
+    rdfs:label "jModelNew_actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void jModelNew_actionPerformed(ActionEvent actionEvent)" ;
+    .
+
+# Method: MainScreen.jModelOpen_actionPerformed
+yawl:MainScreen_jModelOpen_actionPerformed_14 a yawl:Method ;
+    rdfs:label "jModelOpen_actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void jModelOpen_actionPerformed(ActionEvent actionEvent)" ;
+    .
+
+# Method: MainScreen.jMenuSaveModel_actionPerformed
+yawl:MainScreen_jMenuSaveModel_actionPerformed_15 a yawl:Method ;
+    rdfs:label "jMenuSaveModel_actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void jMenuSaveModel_actionPerformed(ActionEvent actionEvent)" ;
+    .
+
+# Method: MainScreen.jMenuDeleteModel_actionPerformed
+yawl:MainScreen_jMenuDeleteModel_actionPerformed_16 a yawl:Method ;
+    rdfs:label "jMenuDeleteModel_actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void jMenuDeleteModel_actionPerformed(ActionEvent actionEvent)" ;
+    .
+
+# Method: MainScreen.jMenuPConnsModel_actionPerformed
+yawl:MainScreen_jMenuPConnsModel_actionPerformed_17 a yawl:Method ;
+    rdfs:label "jMenuPConnsModel_actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void jMenuPConnsModel_actionPerformed(ActionEvent actionEvent)" ;
+    .
+
+# Method: MainScreen.jMenuGraph_actionPerformed
+yawl:MainScreen_jMenuGraph_actionPerformed_18 a yawl:Method ;
+    rdfs:label "jMenuGraph_actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void jMenuGraph_actionPerformed(ActionEvent actionEvent, EntityMID emid)" ;
+    .
+
+# Method: MainScreen.jMenuHelpAbout_actionPerformed
+yawl:MainScreen_jMenuHelpAbout_actionPerformed_19 a yawl:Method ;
+    rdfs:label "jMenuHelpAbout_actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void jMenuHelpAbout_actionPerformed(ActionEvent actionEvent)" ;
+    .
+
+# Method: MainScreen.setModelMenuItems
+yawl:MainScreen_setModelMenuItems_20 a yawl:Method ;
+    rdfs:label "setModelMenuItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setModelMenuItems(boolean enabled)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MainScreen.deactivated
+yawl:MainScreen_deactivated_21 a yawl:Method ;
+    rdfs:label "deactivated" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deactivated(JInternalFrame frame)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MainScreen.activated
+yawl:MainScreen_activated_22 a yawl:Method ;
+    rdfs:label "activated" ;
+    yawl:returnType "void" ;
+    yawl:signature "void activated(JInternalFrame frame)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MainScreen.closed
+yawl:MainScreen_closed_23 a yawl:Method ;
+    rdfs:label "closed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void closed(JInternalFrame frame)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:MainScreen_KEY_NEW_MODEL a yawl:Field ;
+    rdfs:label "KEY_NEW_MODEL" .
+
+yawl:MainScreen_KEY_QUIT a yawl:Field ;
+    rdfs:label "KEY_QUIT" .
+
+yawl:MainScreen_KEY_OPEN_MODEL a yawl:Field ;
+    rdfs:label "KEY_OPEN_MODEL" .
+
+yawl:MainScreen_KEY_SAVE_MODEL a yawl:Field ;
+    rdfs:label "KEY_SAVE_MODEL" .
+
+yawl:MainScreen_KEY_DEL_MODEL a yawl:Field ;
+    rdfs:label "KEY_DEL_MODEL" .
+
+yawl:MainScreen_KEY_PCONN_MODEL a yawl:Field ;
+    rdfs:label "KEY_PCONN_MODEL" .
+
+yawl:MainScreen_KEY_MODEL_NEW a yawl:Field ;
+    rdfs:label "KEY_MODEL_NEW" .
+
+yawl:MainScreen_KEY_MODEL_EXPORT_IMAGE a yawl:Field ;
+    rdfs:label "KEY_MODEL_EXPORT_IMAGE" .
+
+yawl:MainScreen_KEY_MODEL_VERIFY a yawl:Field ;
+    rdfs:label "KEY_MODEL_VERIFY" .
+
+yawl:MainScreen_KEY_BLOCK a yawl:Field ;
+    rdfs:label "KEY_BLOCK" .
+
+yawl:MainScreen_KEY_DECISION a yawl:Field ;
+    rdfs:label "KEY_DECISION" .
+
+yawl:MainScreen_KEY_GRAPH a yawl:Field ;
+    rdfs:label "KEY_GRAPH" .
+
+yawl:MainScreen_KEY_START_CASE a yawl:Field ;
+    rdfs:label "KEY_START_CASE" .
+
+yawl:MainScreen_KEY_HANDLE_EXCEPTION a yawl:Field ;
+    rdfs:label "KEY_HANDLE_EXCEPTION" .
+
+yawl:MainScreen_KEY_TEMPLATES a yawl:Field ;
+    rdfs:label "KEY_TEMPLATES" .
+
+yawl:MainScreen_YAWLlocation a yawl:Field ;
+    rdfs:label "YAWLlocation" .
+
+yawl:MainScreen_ProcletServiceLocation a yawl:Field ;
+    rdfs:label "ProcletServiceLocation" .
+
+yawl:MainScreen_sUserId a yawl:Field ;
+    rdfs:label "sUserId" .
+
+yawl:MainScreen_sPwd a yawl:Field ;
+    rdfs:label "sPwd" .
+
+yawl:MainScreen_mainFrame a yawl:Field ;
+    rdfs:label "mainFrame" .
+
+yawl:MainScreen_desktop a yawl:Field ;
+    rdfs:label "desktop" .
+
+yawl:MainScreen_newItem a yawl:Field ;
+    rdfs:label "newItem" .
+
+yawl:MainScreen_save a yawl:Field ;
+    rdfs:label "save" .
+
+yawl:MainScreen_delete a yawl:Field ;
+    rdfs:label "delete" .
+
+yawl:MainScreen_pconns a yawl:Field ;
+    rdfs:label "pconns" .
+
+yawl:MainScreen_editorProps a yawl:Field ;
+    rdfs:label "editorProps" .
+
+yawl:MainScreen_frames a yawl:Field ;
+    rdfs:label "frames" .
+
+
+

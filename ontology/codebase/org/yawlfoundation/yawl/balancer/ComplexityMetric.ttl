@@ -1,0 +1,97 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.balancer.ComplexityMetric
+yawl:ComplexityMetric a yawl:Class ;
+    rdfs:label "ComplexityMetric" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/ComplexityMetric.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 11/6/18""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ComplexityMetric_calc_1 ;
+    yawl:hasMethod yawl:ComplexityMetric_getWeightedCarduso_2 ;
+    yawl:hasMethod yawl:ComplexityMetric_getWeightedTaskCardinality_3 ;
+    yawl:hasMethod yawl:ComplexityMetric_getWeightedUDTCount_4 ;
+    yawl:hasMethod yawl:ComplexityMetric_getWeightedIOCount_5 ;
+    yawl:hasMethod yawl:ComplexityMetric_getWeightedResourceCount_6 ;
+    yawl:hasMethod yawl:ComplexityMetric_getCardusoMetric_7 ;
+    yawl:hasField yawl:ComplexityMetric_YAWL_NAMESPACE ;
+    yawl:hasField yawl:ComplexityMetric_XSD_NAMESPACE ;
+    .
+
+
+# Method: ComplexityMetric.calc
+yawl:ComplexityMetric_calc_1 a yawl:Method ;
+    rdfs:label "calc" ;
+    yawl:returnType "double" ;
+    yawl:signature "double calc(String specXML)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ComplexityMetric.getWeightedCarduso
+yawl:ComplexityMetric_getWeightedCarduso_2 a yawl:Method ;
+    rdfs:label "getWeightedCarduso" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getWeightedCarduso(List taskElements)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ComplexityMetric.getWeightedTaskCardinality
+yawl:ComplexityMetric_getWeightedTaskCardinality_3 a yawl:Method ;
+    rdfs:label "getWeightedTaskCardinality" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getWeightedTaskCardinality(List taskElements)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ComplexityMetric.getWeightedUDTCount
+yawl:ComplexityMetric_getWeightedUDTCount_4 a yawl:Method ;
+    rdfs:label "getWeightedUDTCount" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getWeightedUDTCount(Document doc)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ComplexityMetric.getWeightedIOCount
+yawl:ComplexityMetric_getWeightedIOCount_5 a yawl:Method ;
+    rdfs:label "getWeightedIOCount" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getWeightedIOCount(List taskElements)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ComplexityMetric.getWeightedResourceCount
+yawl:ComplexityMetric_getWeightedResourceCount_6 a yawl:Method ;
+    rdfs:label "getWeightedResourceCount" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getWeightedResourceCount(Document doc)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ComplexityMetric.getCardusoMetric
+yawl:ComplexityMetric_getCardusoMetric_7 a yawl:Method ;
+    rdfs:label "getCardusoMetric" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getCardusoMetric(List taskElements)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:ComplexityMetric_YAWL_NAMESPACE a yawl:Field ;
+    rdfs:label "YAWL_NAMESPACE" .
+
+yawl:ComplexityMetric_XSD_NAMESPACE a yawl:Field ;
+    rdfs:label "XSD_NAMESPACE" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_smsModule a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.smsModule" .
+
+

@@ -1,0 +1,59 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.comparator.WorkItemAgeComparator
+yawl:WorkItemAgeComparator a yawl:Class ;
+    rdfs:label "WorkItemAgeComparator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf_comparator ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/comparator/WorkItemAgeComparator.java"^^xsd:string ;
+    rdfs:comment """Allows Workitems to be sorted on enablement time for display in age order in workqueues Author: Michael Adams Creation Date: 15/01/2008""" ;
+    yawl:implements yawl:Comparator ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:WorkItemAgeComparator_compare_1 ;
+    yawl:hasMethod yawl:WorkItemAgeComparator_compareCaseIDs_2 ;
+    yawl:hasMethod yawl:WorkItemAgeComparator_StringToLong_3 ;
+    yawl:hasMethod yawl:WorkItemAgeComparator_getDifference_4 ;
+    .
+
+
+# Method: WorkItemAgeComparator.compare
+yawl:WorkItemAgeComparator_compare_1 a yawl:Method ;
+    rdfs:label "compare" ;
+    yawl:returnType "int" ;
+    yawl:signature "int compare(WorkItemRecord wir1, WorkItemRecord wir2)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemAgeComparator.compareCaseIDs
+yawl:WorkItemAgeComparator_compareCaseIDs_2 a yawl:Method ;
+    rdfs:label "compareCaseIDs" ;
+    yawl:returnType "int" ;
+    yawl:signature "int compareCaseIDs(WorkItemRecord wir1, WorkItemRecord wir2)" ;
+    rdfs:comment """if there's a problem comparing enablement times, as a secondary choice compare on caseids (loose assumption: caseids get allocated in chronological order - which is not always true)""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkItemAgeComparator.StringToLong
+yawl:WorkItemAgeComparator_StringToLong_3 a yawl:Method ;
+    rdfs:label "StringToLong" ;
+    yawl:returnType "long" ;
+    yawl:signature "long StringToLong(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkItemAgeComparator.getDifference
+yawl:WorkItemAgeComparator_getDifference_4 a yawl:Method ;
+    rdfs:label "getDifference" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getDifference(long a, long b)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+
+

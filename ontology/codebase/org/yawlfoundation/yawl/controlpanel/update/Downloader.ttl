@@ -1,0 +1,115 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.update.Downloader
+yawl:Downloader a yawl:Class ;
+    rdfs:label "Downloader" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_update ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/update/Downloader.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 19/08/2014""" ;
+    yawl:extends yawl:SwingWorker ;
+    yawl:implements yawl:PropertyChangeListener ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Downloader_hasErrors_1 ;
+    yawl:hasMethod yawl:Downloader_getErrors_2 ;
+    yawl:hasMethod yawl:Downloader_doInBackground_3 ;
+    yawl:hasMethod yawl:Downloader_cancel_4 ;
+    yawl:hasMethod yawl:Downloader_propertyChange_5 ;
+    yawl:hasMethod yawl:Downloader_isComplete_6 ;
+    yawl:hasMethod yawl:Downloader_getTotalProgress_7 ;
+    yawl:hasMethod yawl:Downloader_pause_8 ;
+    yawl:hasField yawl:Downloader__fileNodes ;
+    yawl:hasField yawl:Downloader__totalBytes ;
+    yawl:hasField yawl:Downloader__targetDir ;
+    yawl:hasField yawl:Downloader__workerMap ;
+    yawl:hasField yawl:Downloader__lock ;
+    .
+
+
+# Method: Downloader.hasErrors
+yawl:Downloader_hasErrors_1 a yawl:Method ;
+    rdfs:label "hasErrors" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasErrors()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Downloader.getErrors
+yawl:Downloader_getErrors_2 a yawl:Method ;
+    rdfs:label "getErrors" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getErrors()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Downloader.doInBackground
+yawl:Downloader_doInBackground_3 a yawl:Method ;
+    rdfs:label "doInBackground" ;
+    yawl:returnType "Void" ;
+    yawl:signature "Void doInBackground()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Downloader.cancel
+yawl:Downloader_cancel_4 a yawl:Method ;
+    rdfs:label "cancel" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean cancel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Downloader.propertyChange
+yawl:Downloader_propertyChange_5 a yawl:Method ;
+    rdfs:label "propertyChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void propertyChange(PropertyChangeEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Downloader.isComplete
+yawl:Downloader_isComplete_6 a yawl:Method ;
+    rdfs:label "isComplete" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isComplete()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Downloader.getTotalProgress
+yawl:Downloader_getTotalProgress_7 a yawl:Method ;
+    rdfs:label "getTotalProgress" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getTotalProgress()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Downloader.pause
+yawl:Downloader_pause_8 a yawl:Method ;
+    rdfs:label "pause" ;
+    yawl:returnType "void" ;
+    yawl:signature "void pause(long milliseconds)" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:Downloader__fileNodes a yawl:Field ;
+    rdfs:label "_fileNodes" .
+
+yawl:Downloader__totalBytes a yawl:Field ;
+    rdfs:label "_totalBytes" .
+
+yawl:Downloader__targetDir a yawl:Field ;
+    rdfs:label "_targetDir" .
+
+yawl:Downloader__workerMap a yawl:Field ;
+    rdfs:label "_workerMap" .
+
+yawl:Downloader__lock a yawl:Field ;
+    rdfs:label "_lock" .
+
+
+

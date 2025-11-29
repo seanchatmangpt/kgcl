@@ -1,0 +1,468 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.stateless.YStatelessEngine
+yawl:YStatelessEngine a yawl:Class ;
+    rdfs:label "YStatelessEngine" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/YStatelessEngine.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 21/8/20""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YStatelessEngine_setIdleCaseTimer_1 ;
+    yawl:hasMethod yawl:YStatelessEngine_setCaseMonitoringEnabled_2 ;
+    yawl:hasMethod yawl:YStatelessEngine_setCaseMonitoringEnabled_3 ;
+    yawl:hasMethod yawl:YStatelessEngine_isCaseMonitoringEnabled_4 ;
+    yawl:hasMethod yawl:YStatelessEngine_getEngineNbr_5 ;
+    yawl:hasMethod yawl:YStatelessEngine_addCaseEventListener_6 ;
+    yawl:hasMethod yawl:YStatelessEngine_addWorkItemEventListener_7 ;
+    yawl:hasMethod yawl:YStatelessEngine_addExceptionEventListener_8 ;
+    yawl:hasMethod yawl:YStatelessEngine_addLogEventListener_9 ;
+    yawl:hasMethod yawl:YStatelessEngine_addTimerEventListener_10 ;
+    yawl:hasMethod yawl:YStatelessEngine_removeCaseEventListener_11 ;
+    yawl:hasMethod yawl:YStatelessEngine_removeWorkItemEventListener_12 ;
+    yawl:hasMethod yawl:YStatelessEngine_removeExceptionEventListener_13 ;
+    yawl:hasMethod yawl:YStatelessEngine_removeLogEventListener_14 ;
+    yawl:hasMethod yawl:YStatelessEngine_removeTimerEventListener_15 ;
+    yawl:hasMethod yawl:YStatelessEngine_enableMultiThreadedAnnouncements_16 ;
+    yawl:hasMethod yawl:YStatelessEngine_isMultiThreadedAnnouncementsEnabled_17 ;
+    yawl:hasMethod yawl:YStatelessEngine_unmarshalSpecification_18 ;
+    yawl:hasMethod yawl:YStatelessEngine_launchCase_19 ;
+    yawl:hasMethod yawl:YStatelessEngine_launchCase_20 ;
+    yawl:hasMethod yawl:YStatelessEngine_launchCase_21 ;
+    yawl:hasMethod yawl:YStatelessEngine_launchCase_22 ;
+    yawl:hasMethod yawl:YStatelessEngine_suspendCase_23 ;
+    yawl:hasMethod yawl:YStatelessEngine_resumeCase_24 ;
+    yawl:hasMethod yawl:YStatelessEngine_suspendWorkItem_25 ;
+    yawl:hasMethod yawl:YStatelessEngine_unsuspendWorkItem_26 ;
+    yawl:hasMethod yawl:YStatelessEngine_rollbackWorkItem_27 ;
+    yawl:hasMethod yawl:YStatelessEngine_completeWorkItem_28 ;
+    yawl:hasMethod yawl:YStatelessEngine_completeWorkItem_29 ;
+    yawl:hasMethod yawl:YStatelessEngine_startWorkItem_30 ;
+    yawl:hasMethod yawl:YStatelessEngine_skipWorkItem_31 ;
+    yawl:hasMethod yawl:YStatelessEngine_createNewInstance_32 ;
+    yawl:hasMethod yawl:YStatelessEngine_checkEligibilityToAddInstances_33 ;
+    yawl:hasMethod yawl:YStatelessEngine_cancelCase_34 ;
+    yawl:hasMethod yawl:YStatelessEngine_unloadCase_35 ;
+    yawl:hasMethod yawl:YStatelessEngine_marshalCase_36 ;
+    yawl:hasMethod yawl:YStatelessEngine_restoreCase_37 ;
+    yawl:hasMethod yawl:YStatelessEngine_isIdleCase_38 ;
+    yawl:hasMethod yawl:YStatelessEngine_isIdleCase_39 ;
+    yawl:hasMethod yawl:YStatelessEngine_isIdleCase_40 ;
+    yawl:hasMethod yawl:YStatelessEngine_isLoadedCase_41 ;
+    yawl:hasMethod yawl:YStatelessEngine_checkIsLoadedCase_42 ;
+    yawl:hasMethod yawl:YStatelessEngine_checkIsLoadedCase_43 ;
+    yawl:hasMethod yawl:YStatelessEngine_resumeCaseIdleTimer_44 ;
+    yawl:hasField yawl:YStatelessEngine__engine ;
+    yawl:hasField yawl:YStatelessEngine__caseMonitor ;
+    .
+
+
+# Method: YStatelessEngine.setIdleCaseTimer
+yawl:YStatelessEngine_setIdleCaseTimer_1 a yawl:Method ;
+    rdfs:label "setIdleCaseTimer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setIdleCaseTimer(long msecs)" ;
+    rdfs:comment """Set the idle case timer value for case monitoring. If case monitoring is currently enabled, the idle time is updated. If case monitoring not is currently enabled, and the msecs value is positive, case monitoring is started with that value. @param msecs the number of milliseconds that a case is allowed to remain idle. After the msecs have passed, all engine YCaseEventListeners will be notified of the CASE_IDLE_TIMEOUT event. A non-positive value disable the case idle time monitoring and the annou""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.setCaseMonitoringEnabled
+yawl:YStatelessEngine_setCaseMonitoringEnabled_2 a yawl:Method ;
+    rdfs:label "setCaseMonitoringEnabled" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCaseMonitoringEnabled(boolean enable)" ;
+    rdfs:comment """Enable or disable a case monitor that tracks all running cases. @param enable If true, enables the case monitor, but without monitoring case idle times. If false, disables case monitoring (and discards all currently monitored cases)""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.setCaseMonitoringEnabled
+yawl:YStatelessEngine_setCaseMonitoringEnabled_3 a yawl:Method ;
+    rdfs:label "setCaseMonitoringEnabled" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCaseMonitoringEnabled(boolean enable, long idleTimeout)" ;
+    rdfs:comment """Enable or disable a case monitor that tracks all running cases, and optionally monitor each case for idle time. @param enable If true, enables the case monitor, and if the case monitor is already enabled, updates its timeout value for all current cases. If false, disables case monitoring (and discards all currently monitored cases) @param idleTimeout the number of milliseconds that a case is allowed to remain idle. After the msecs have passed, all engine YCaseEventListeners will be notified of t""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.isCaseMonitoringEnabled
+yawl:YStatelessEngine_isCaseMonitoringEnabled_4 a yawl:Method ;
+    rdfs:label "isCaseMonitoringEnabled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isCaseMonitoringEnabled()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.getEngineNbr
+yawl:YStatelessEngine_getEngineNbr_5 a yawl:Method ;
+    rdfs:label "getEngineNbr" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getEngineNbr()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.addCaseEventListener
+yawl:YStatelessEngine_addCaseEventListener_6 a yawl:Method ;
+    rdfs:label "addCaseEventListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addCaseEventListener(YCaseEventListener listener)" ;
+    rdfs:comment """Add a listener for case events @param listener an object that implements the YCaseEventListener interface""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.addWorkItemEventListener
+yawl:YStatelessEngine_addWorkItemEventListener_7 a yawl:Method ;
+    rdfs:label "addWorkItemEventListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addWorkItemEventListener(YWorkItemEventListener listener)" ;
+    rdfs:comment """Add a listener for work item events @param listener an object that implements a YWorkItemEventListener interface""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.addExceptionEventListener
+yawl:YStatelessEngine_addExceptionEventListener_8 a yawl:Method ;
+    rdfs:label "addExceptionEventListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addExceptionEventListener(YExceptionEventListener listener)" ;
+    rdfs:comment """Add a listener for exception events @param listener an object that implements the YExceptionEventListener interface""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.addLogEventListener
+yawl:YStatelessEngine_addLogEventListener_9 a yawl:Method ;
+    rdfs:label "addLogEventListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addLogEventListener(YLogEventListener listener)" ;
+    rdfs:comment """Add a listener for log events @param listener an object that implements the YLogEventListener interface""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.addTimerEventListener
+yawl:YStatelessEngine_addTimerEventListener_10 a yawl:Method ;
+    rdfs:label "addTimerEventListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addTimerEventListener(YTimerEventListener listener)" ;
+    rdfs:comment """Add a listener for timer events @param listener an object that implements the YTimerEventListener interface""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.removeCaseEventListener
+yawl:YStatelessEngine_removeCaseEventListener_11 a yawl:Method ;
+    rdfs:label "removeCaseEventListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeCaseEventListener(YCaseEventListener listener)" ;
+    rdfs:comment """Remove a registered listener for case events @param listener a previously registered YCaseEventListener""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.removeWorkItemEventListener
+yawl:YStatelessEngine_removeWorkItemEventListener_12 a yawl:Method ;
+    rdfs:label "removeWorkItemEventListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeWorkItemEventListener(YWorkItemEventListener listener)" ;
+    rdfs:comment """Remove a registered listener for work item events @param listener a previously registered YWorkItemEventListener""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.removeExceptionEventListener
+yawl:YStatelessEngine_removeExceptionEventListener_13 a yawl:Method ;
+    rdfs:label "removeExceptionEventListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeExceptionEventListener(YExceptionEventListener listener)" ;
+    rdfs:comment """Remove a registered listener for exception events @param listener a previously registered YExceptionEventListener""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.removeLogEventListener
+yawl:YStatelessEngine_removeLogEventListener_14 a yawl:Method ;
+    rdfs:label "removeLogEventListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeLogEventListener(YLogEventListener listener)" ;
+    rdfs:comment """Remove a registered listener for log events @param listener a previously registered YLogEventListener""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.removeTimerEventListener
+yawl:YStatelessEngine_removeTimerEventListener_15 a yawl:Method ;
+    rdfs:label "removeTimerEventListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeTimerEventListener(YTimerEventListener listener)" ;
+    rdfs:comment """Remove a registered listener for timer events @param listener a previously registered YTimerEventListener""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.enableMultiThreadedAnnouncements
+yawl:YStatelessEngine_enableMultiThreadedAnnouncements_16 a yawl:Method ;
+    rdfs:label "enableMultiThreadedAnnouncements" ;
+    yawl:returnType "void" ;
+    yawl:signature "void enableMultiThreadedAnnouncements(boolean enable)" ;
+    rdfs:comment """Enable or disable multiple-threaded event announcements. @param enable true to enable multiple-threaded announcements, false for single-threaded announcements (default)""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.isMultiThreadedAnnouncementsEnabled
+yawl:YStatelessEngine_isMultiThreadedAnnouncementsEnabled_17 a yawl:Method ;
+    rdfs:label "isMultiThreadedAnnouncementsEnabled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isMultiThreadedAnnouncementsEnabled()" ;
+    rdfs:comment """@return true if announcements are currently multiple-threaded, false if they are single threaded""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.unmarshalSpecification
+yawl:YStatelessEngine_unmarshalSpecification_18 a yawl:Method ;
+    rdfs:label "unmarshalSpecification" ;
+    yawl:returnType "YSpecification" ;
+    yawl:signature "YSpecification unmarshalSpecification(String xml)" ;
+    rdfs:comment """Transform a YAWL specification XML string to a YSpecification object. @param xml the XML representation of the YAWL specification @return a populated YSpecification object @throws YSyntaxException if the XML is malformed""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.launchCase
+yawl:YStatelessEngine_launchCase_19 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "YNetRunner" ;
+    yawl:signature "YNetRunner launchCase(YSpecification spec)" ;
+    rdfs:comment """Launch a new case instance for the specification specified. A random UUID is assigned as the case identifier. @param spec the YAWL specification to create an instance from @return a YNetRunner object encapsulating the current case state @throws YStateException if there is a problem creating the case state @throws YDataStateException if the data state cannot be initialised @throws YEngineStateException if the engine is not in running state @throws YQueryException if the data extraction query is m""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.launchCase
+yawl:YStatelessEngine_launchCase_20 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "YNetRunner" ;
+    yawl:signature "YNetRunner launchCase(YSpecification spec, String caseID)" ;
+    rdfs:comment """Launch a new case instance for the specification specified @param spec the YAWL specification to create an instance from @param caseID the case identifier to assign to the new case @return a YNetRunner object encapsulating the current case state @throws YStateException if there is a problem creating the case state @throws YDataStateException if the data state cannot be initialised @throws YEngineStateException if the engine is not in running state @throws YQueryException if the data extraction q""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.launchCase
+yawl:YStatelessEngine_launchCase_21 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "YNetRunner" ;
+    yawl:signature "YNetRunner launchCase(YSpecification spec, String caseID, String caseParams)" ;
+    rdfs:comment """Launch a new case instance for the specification specified @param spec the YAWL specification to create an instance from @param caseID the case identifier to assign to the new case @param caseParams an XML string denoting the initial data values for case starting @return a YNetRunner object encapsulating the current case state @throws YStateException if there is a problem creating the case state @throws YDataStateException if the data state cannot be initialised @throws YEngineStateException if """ ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.launchCase
+yawl:YStatelessEngine_launchCase_22 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "YNetRunner" ;
+    yawl:signature "YNetRunner launchCase(YSpecification spec, String caseID, String caseParams, YLogDataItemList logItems)" ;
+    rdfs:comment """Launch a new case instance for the specification specified @param spec the YAWL specification to create an instance from @param caseID the case identifier to assign to the new case @param caseParams an XML string denoting the initial data values for case starting @param logItems a list of info items to be logged when the case starts @return a YNetRunner object encapsulating the current case state @throws YStateException if there is a problem creating the case state @throws YDataStateException if""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.suspendCase
+yawl:YStatelessEngine_suspendCase_23 a yawl:Method ;
+    rdfs:label "suspendCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void suspendCase(YNetRunner runner)" ;
+    rdfs:comment """Suspend a currently running case @param runner the current case state object @throws YStateException if the case state is out-of-sync""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.resumeCase
+yawl:YStatelessEngine_resumeCase_24 a yawl:Method ;
+    rdfs:label "resumeCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void resumeCase(YNetRunner runner)" ;
+    rdfs:comment """Resume a currently suspended case @param runner the current case state object @throws YStateException if the case state is out-of-sync""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.suspendWorkItem
+yawl:YStatelessEngine_suspendWorkItem_25 a yawl:Method ;
+    rdfs:label "suspendWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem suspendWorkItem(YWorkItem workItem)" ;
+    rdfs:comment """Suspend an executing work item @param workItem the work item to suspend @return the suspended work item @throws YStateException if the case state is out-of-sync""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.unsuspendWorkItem
+yawl:YStatelessEngine_unsuspendWorkItem_26 a yawl:Method ;
+    rdfs:label "unsuspendWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem unsuspendWorkItem(YWorkItem workItem)" ;
+    rdfs:comment """Resume a suspended work item @param workItem the work item to suspend @return the suspended work item @throws YStateException if the case state is out-of-sync""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.rollbackWorkItem
+yawl:YStatelessEngine_rollbackWorkItem_27 a yawl:Method ;
+    rdfs:label "rollbackWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem rollbackWorkItem(YWorkItem workItem)" ;
+    rdfs:comment """Roll back a work item from executing to enabled @param workItem the work item to roll back @throws YStateException if the item cannot be rolled back""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.completeWorkItem
+yawl:YStatelessEngine_completeWorkItem_28 a yawl:Method ;
+    rdfs:label "completeWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem completeWorkItem(YWorkItem workItem, String data, String logPredicate, WorkItemCompletion completionType)" ;
+    rdfs:comment """Complete a currently executing work item @param workItem the work item to complete @param data an XML string representing the item's output data @param logPredicate a log predicate string to be populated and added to the log @param completionType one of: NORMAL, FORCE or FAIL @throws YEngineStateException if the engine is not in running state @throws YStateException if there is a problem creating the case state @throws YQueryException if the data extraction query is malformed @throws YDataStateE""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.completeWorkItem
+yawl:YStatelessEngine_completeWorkItem_29 a yawl:Method ;
+    rdfs:label "completeWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem completeWorkItem(YWorkItem workItem, String data, String logPredicate)" ;
+    rdfs:comment """Complete a currently executing work item @param workItem the work item to complete @param data an XML string representing the item's output data @param logPredicate a log predicate string to be populated and added to the log @throws YEngineStateException if the engine is not in running state @throws YStateException if there is a problem creating the case state @throws YQueryException if the data extraction query is malformed @throws YDataStateException if the data state cannot be initialised""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.startWorkItem
+yawl:YStatelessEngine_startWorkItem_30 a yawl:Method ;
+    rdfs:label "startWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem startWorkItem(YWorkItem workItem)" ;
+    rdfs:comment """Begin executing a currently enabled or fired work item @param workItem the work item to start @throws YEngineStateException if the engine is not in running state @throws YStateException if there is a problem creating the case state @throws YQueryException if the data extraction query is malformed @throws YDataStateException if the data state cannot be initialised""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.skipWorkItem
+yawl:YStatelessEngine_skipWorkItem_31 a yawl:Method ;
+    rdfs:label "skipWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem skipWorkItem(YWorkItem workItem)" ;
+    rdfs:comment """Skip an enabled work item (immediately completes) @param workItem the work item to skip @throws YEngineStateException if the engine is not in running state @throws YStateException if there is a problem creating the case state @throws YQueryException if the data extraction query is malformed @throws YDataStateException if the data state cannot be initialised""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.createNewInstance
+yawl:YStatelessEngine_createNewInstance_32 a yawl:Method ;
+    rdfs:label "createNewInstance" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem createNewInstance(YWorkItem workItem, String paramValueForMICreation)" ;
+    rdfs:comment """Create a new work item instance from a dynamic multi-instance task @param workItem the work item to create a new instance of @param paramValueForMICreation format \"<data>[InputParam]</data> InputParam == <varName>varValue</varName> @return the work item of the new instance. @throws YStateException if the task is not able to create a new instance, due to its state or its design.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.checkEligibilityToAddInstances
+yawl:YStatelessEngine_checkEligibilityToAddInstances_33 a yawl:Method ;
+    rdfs:label "checkEligibilityToAddInstances" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkEligibilityToAddInstances(YWorkItem workItem)" ;
+    rdfs:comment """Determine whether a task will allow a dynamically created new instance to be created.  MultiInstance Task with dynamic instance creation is required. @param workItem the work item to check @throws YStateException if task is not MultiInstance, or if task does not allow dynamic instance creation, or if current number of instances is not less than the maxInstances for the task.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.cancelCase
+yawl:YStatelessEngine_cancelCase_34 a yawl:Method ;
+    rdfs:label "cancelCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancelCase(YNetRunner runner)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.unloadCase
+yawl:YStatelessEngine_unloadCase_35 a yawl:Method ;
+    rdfs:label "unloadCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String unloadCase(YIdentifier caseID)" ;
+    rdfs:comment """Get the complete state of a case, marshalled to an XML document @param caseID the case to get @return an XML document of the case state @throws YStateException if there's any problem capturing the current state""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.marshalCase
+yawl:YStatelessEngine_marshalCase_36 a yawl:Method ;
+    rdfs:label "marshalCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String marshalCase(YNetRunner runner)" ;
+    rdfs:comment """Marshals an active case to an XML document @param runner a runner within the case @return an XML document of the case state @throws YStateException if there's any problem marshaling the current state""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.restoreCase
+yawl:YStatelessEngine_restoreCase_37 a yawl:Method ;
+    rdfs:label "restoreCase" ;
+    yawl:returnType "YNetRunner" ;
+    yawl:signature "YNetRunner restoreCase(String caseXML)" ;
+    rdfs:comment """Restores a case instance from its XML representation (previously returned from unloadCase() @param caseXML the XML of the case state to restore @return The primary net runner of the case @throws YSyntaxException if there's an error in the specification portion of the xml @throws YStateException if there's any problem restoring the current state""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.isIdleCase
+yawl:YStatelessEngine_isIdleCase_38 a yawl:Method ;
+    rdfs:label "isIdleCase" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isIdleCase(YWorkItem workItem)" ;
+    rdfs:comment """Check if the engine is currently executing code for a monitored case of which this workitem is a member. @param workItem the workitem to check @return true if case monitoring is enabled and the case is currently in idle state (i.e. it has no current executing code associated with it), or false if case monitoring is enabled and there is code executing for the case. @throws YStateException when the case is unknown to the engine, or when case monitoring is disabled for the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.isIdleCase
+yawl:YStatelessEngine_isIdleCase_39 a yawl:Method ;
+    rdfs:label "isIdleCase" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isIdleCase(YNetRunner runner)" ;
+    rdfs:comment """Check if the engine is currently executing code for a monitored case of which this net runner is a member. @param runner the net runner to check @return true if case monitoring is enabled and the case is currently in idle state (i.e. it has no current executing code associated with it), or false if case monitoring is enabled and there is code executing for the case. @throws YStateException when the case is unknown to the engine, or when case monitoring is disabled for the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.isIdleCase
+yawl:YStatelessEngine_isIdleCase_40 a yawl:Method ;
+    rdfs:label "isIdleCase" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isIdleCase(YIdentifier caseID)" ;
+    rdfs:comment """Check if the engine is currently executing code for a monitored case. @param caseID the id of the case to check @return true if case monitoring is enabled and the case is currently in idle state (i.e. it has no current executing code associated with it), or false if case monitoring is enabled and there is code executing for the case. @throws YStateException when the case is unknown to the engine, or when case monitoring is disabled for the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStatelessEngine.isLoadedCase
+yawl:YStatelessEngine_isLoadedCase_41 a yawl:Method ;
+    rdfs:label "isLoadedCase" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isLoadedCase(YIdentifier caseID, String errMsg)" ;
+    rdfs:comment """Throws a YStateException if cases are being monitored AND the case is unknown to this engine @param caseID the id of the case to check @param errMsg to be inserted if an exception is thrown @throws YStateException if the condition described above evaluates to true""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YStatelessEngine.checkIsLoadedCase
+yawl:YStatelessEngine_checkIsLoadedCase_42 a yawl:Method ;
+    rdfs:label "checkIsLoadedCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkIsLoadedCase(YWorkItem item, String msg)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YStatelessEngine.checkIsLoadedCase
+yawl:YStatelessEngine_checkIsLoadedCase_43 a yawl:Method ;
+    rdfs:label "checkIsLoadedCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkIsLoadedCase(YNetRunner runner, String msg)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YStatelessEngine.resumeCaseIdleTimer
+yawl:YStatelessEngine_resumeCaseIdleTimer_44 a yawl:Method ;
+    rdfs:label "resumeCaseIdleTimer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void resumeCaseIdleTimer(YWorkItem workItem)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YStatelessEngine__engine a yawl:Field ;
+    rdfs:label "_engine" .
+
+yawl:YStatelessEngine__caseMonitor a yawl:Field ;
+    rdfs:label "_caseMonitor" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_authentication a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.authentication" .
+
+

@@ -1,0 +1,226 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.resource.SecondaryResources
+yawl:SecondaryResources a yawl:Class ;
+    rdfs:label "SecondaryResources" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_resource ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/resource/SecondaryResources.java"^^xsd:string ;
+    rdfs:comment """Manages a set of secondary resources for a single task (via a ResourceMap) @author Michael Adams @date 11/05/2011""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:SecondaryResources_toXML_1 ;
+    yawl:hasMethod yawl:SecondaryResources_fromXML_2 ;
+    yawl:hasMethod yawl:SecondaryResources_parse_3 ;
+    yawl:hasMethod yawl:SecondaryResources_engage_4 ;
+    yawl:hasMethod yawl:SecondaryResources_disengage_5 ;
+    yawl:hasMethod yawl:SecondaryResources_getReferenceItemID_6 ;
+    yawl:hasMethod yawl:SecondaryResources_available_7 ;
+    yawl:hasMethod yawl:SecondaryResources_checkAvailability_8 ;
+    yawl:hasMethod yawl:SecondaryResources_newDataSet_9 ;
+    yawl:hasMethod yawl:SecondaryResources_getDefaultDataSet_10 ;
+    yawl:hasMethod yawl:SecondaryResources_getDataSet_11 ;
+    yawl:hasMethod yawl:SecondaryResources_addDataSet_12 ;
+    yawl:hasMethod yawl:SecondaryResources_removeDataSet_13 ;
+    yawl:hasMethod yawl:SecondaryResources_removeDataSetsForCase_14 ;
+    yawl:hasMethod yawl:SecondaryResources_isAvailable_15 ;
+    yawl:hasMethod yawl:SecondaryResources_announceUnavailable_16 ;
+    yawl:hasMethod yawl:SecondaryResources_announceUnavailable_17 ;
+    yawl:hasMethod yawl:SecondaryResources_getRandomAvailableResource_18 ;
+    yawl:hasMethod yawl:SecondaryResources_getDataSet_19 ;
+    yawl:hasMethod yawl:SecondaryResources_removeDataSet_20 ;
+    yawl:hasMethod yawl:SecondaryResources_isDisengaged_21 ;
+    yawl:hasField yawl:SecondaryResources__rm ;
+    yawl:hasField yawl:SecondaryResources__defaultDataSet ;
+    yawl:hasField yawl:SecondaryResources__log ;
+    yawl:hasField yawl:SecondaryResources__itemToDataSetMap ;
+    .
+
+
+# Method: SecondaryResources.toXML
+yawl:SecondaryResources_toXML_1 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecondaryResources.fromXML
+yawl:SecondaryResources_fromXML_2 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecondaryResources.parse
+yawl:SecondaryResources_parse_3 a yawl:Method ;
+    rdfs:label "parse" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parse(Element e, Namespace nsYawl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecondaryResources.engage
+yawl:SecondaryResources_engage_4 a yawl:Method ;
+    rdfs:label "engage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void engage(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecondaryResources.disengage
+yawl:SecondaryResources_disengage_5 a yawl:Method ;
+    rdfs:label "disengage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disengage(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecondaryResources.getReferenceItemID
+yawl:SecondaryResources_getReferenceItemID_6 a yawl:Method ;
+    rdfs:label "getReferenceItemID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getReferenceItemID(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SecondaryResources.available
+yawl:SecondaryResources_available_7 a yawl:Method ;
+    rdfs:label "available" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean available(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecondaryResources.checkAvailability
+yawl:SecondaryResources_checkAvailability_8 a yawl:Method ;
+    rdfs:label "checkAvailability" ;
+    yawl:returnType "List" ;
+    yawl:signature "List checkAvailability(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecondaryResources.newDataSet
+yawl:SecondaryResources_newDataSet_9 a yawl:Method ;
+    rdfs:label "newDataSet" ;
+    yawl:returnType "SecResDataSet" ;
+    yawl:signature "SecResDataSet newDataSet()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecondaryResources.getDefaultDataSet
+yawl:SecondaryResources_getDefaultDataSet_10 a yawl:Method ;
+    rdfs:label "getDefaultDataSet" ;
+    yawl:returnType "SecResDataSet" ;
+    yawl:signature "SecResDataSet getDefaultDataSet()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecondaryResources.getDataSet
+yawl:SecondaryResources_getDataSet_11 a yawl:Method ;
+    rdfs:label "getDataSet" ;
+    yawl:returnType "SecResDataSet" ;
+    yawl:signature "SecResDataSet getDataSet(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecondaryResources.addDataSet
+yawl:SecondaryResources_addDataSet_12 a yawl:Method ;
+    rdfs:label "addDataSet" ;
+    yawl:returnType "SecResDataSet" ;
+    yawl:signature "SecResDataSet addDataSet(WorkItemRecord wir, SecResDataSet dataSet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecondaryResources.removeDataSet
+yawl:SecondaryResources_removeDataSet_13 a yawl:Method ;
+    rdfs:label "removeDataSet" ;
+    yawl:returnType "SecResDataSet" ;
+    yawl:signature "SecResDataSet removeDataSet(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecondaryResources.removeDataSetsForCase
+yawl:SecondaryResources_removeDataSetsForCase_14 a yawl:Method ;
+    rdfs:label "removeDataSetsForCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeDataSetsForCase(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecondaryResources.isAvailable
+yawl:SecondaryResources_isAvailable_15 a yawl:Method ;
+    rdfs:label "isAvailable" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAvailable(AbstractResource resource)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SecondaryResources.announceUnavailable
+yawl:SecondaryResources_announceUnavailable_16 a yawl:Method ;
+    rdfs:label "announceUnavailable" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceUnavailable(AbstractResource resource, WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SecondaryResources.announceUnavailable
+yawl:SecondaryResources_announceUnavailable_17 a yawl:Method ;
+    rdfs:label "announceUnavailable" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceUnavailable(String name, WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SecondaryResources.getRandomAvailableResource
+yawl:SecondaryResources_getRandomAvailableResource_18 a yawl:Method ;
+    rdfs:label "getRandomAvailableResource" ;
+    yawl:returnType "AbstractResource" ;
+    yawl:signature "AbstractResource getRandomAvailableResource(List resourceList)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SecondaryResources.getDataSet
+yawl:SecondaryResources_getDataSet_19 a yawl:Method ;
+    rdfs:label "getDataSet" ;
+    yawl:returnType "SecResDataSet" ;
+    yawl:signature "SecResDataSet getDataSet(String id)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SecondaryResources.removeDataSet
+yawl:SecondaryResources_removeDataSet_20 a yawl:Method ;
+    rdfs:label "removeDataSet" ;
+    yawl:returnType "SecResDataSet" ;
+    yawl:signature "SecResDataSet removeDataSet(String id)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SecondaryResources.isDisengaged
+yawl:SecondaryResources_isDisengaged_21 a yawl:Method ;
+    rdfs:label "isDisengaged" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isDisengaged(String resourceID)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:SecondaryResources__rm a yawl:Field ;
+    rdfs:label "_rm" .
+
+yawl:SecondaryResources__defaultDataSet a yawl:Field ;
+    rdfs:label "_defaultDataSet" .
+
+yawl:SecondaryResources__log a yawl:Field ;
+    rdfs:label "_log" .
+
+yawl:SecondaryResources__itemToDataSetMap a yawl:Field ;
+    rdfs:label "_itemToDataSetMap" .
+
+
+

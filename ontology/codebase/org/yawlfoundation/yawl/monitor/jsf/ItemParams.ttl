@@ -1,0 +1,1505 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.monitor.jsf.ItemParams
+yawl:ItemParams a yawl:Class ;
+    rdfs:label "ItemParams" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_monitor_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/monitor/jsf/ItemParams.java"^^xsd:string ;
+    rdfs:comment """Backing bean for the active cases page. @author Michael Adams 10/12/2009""" ;
+    yawl:extends yawl:AbstractPageBean ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ItemParams__init_1 ;
+    yawl:hasMethod yawl:ItemParams_getSessionBean_2 ;
+    yawl:hasMethod yawl:ItemParams_getApplicationBean_3 ;
+    yawl:hasMethod yawl:ItemParams_init_4 ;
+    yawl:hasMethod yawl:ItemParams_preprocess_5 ;
+    yawl:hasMethod yawl:ItemParams_destroy_6 ;
+    yawl:hasMethod yawl:ItemParams_getPage1_7 ;
+    yawl:hasMethod yawl:ItemParams_setPage1_8 ;
+    yawl:hasMethod yawl:ItemParams_getHtml1_9 ;
+    yawl:hasMethod yawl:ItemParams_setHtml1_10 ;
+    yawl:hasMethod yawl:ItemParams_getHead1_11 ;
+    yawl:hasMethod yawl:ItemParams_setHead1_12 ;
+    yawl:hasMethod yawl:ItemParams_getLink1_13 ;
+    yawl:hasMethod yawl:ItemParams_setLink1_14 ;
+    yawl:hasMethod yawl:ItemParams_getBody1_15 ;
+    yawl:hasMethod yawl:ItemParams_setBody1_16 ;
+    yawl:hasMethod yawl:ItemParams_getForm1_17 ;
+    yawl:hasMethod yawl:ItemParams_setForm1_18 ;
+    yawl:hasMethod yawl:ItemParams_getStEngineLogHeading_19 ;
+    yawl:hasMethod yawl:ItemParams_setStEngineLogHeading_20 ;
+    yawl:hasMethod yawl:ItemParams_getStResourceLogHeading_21 ;
+    yawl:hasMethod yawl:ItemParams_setStResourceLogHeading_22 ;
+    yawl:hasMethod yawl:ItemParams_getStaticText_23 ;
+    yawl:hasMethod yawl:ItemParams_setStaticText_24 ;
+    yawl:hasMethod yawl:ItemParams_getLayoutPanel_25 ;
+    yawl:hasMethod yawl:ItemParams_setLayoutPanel_26 ;
+    yawl:hasMethod yawl:ItemParams_getDataTable_27 ;
+    yawl:hasMethod yawl:ItemParams_setDataTable_28 ;
+    yawl:hasMethod yawl:ItemParams_getColName_29 ;
+    yawl:hasMethod yawl:ItemParams_setColName_30 ;
+    yawl:hasMethod yawl:ItemParams_getColNameRows_31 ;
+    yawl:hasMethod yawl:ItemParams_setColNameRows_32 ;
+    yawl:hasMethod yawl:ItemParams_getColDataType_33 ;
+    yawl:hasMethod yawl:ItemParams_setColDataType_34 ;
+    yawl:hasMethod yawl:ItemParams_getColDataTypeRows_35 ;
+    yawl:hasMethod yawl:ItemParams_setColDataTypeRows_36 ;
+    yawl:hasMethod yawl:ItemParams_getColDataSchema_37 ;
+    yawl:hasMethod yawl:ItemParams_setColDataSchema_38 ;
+    yawl:hasMethod yawl:ItemParams_getColDataSchemaRows_39 ;
+    yawl:hasMethod yawl:ItemParams_setColDataSchemaRows_40 ;
+    yawl:hasMethod yawl:ItemParams_getColUsage_41 ;
+    yawl:hasMethod yawl:ItemParams_setColUsage_42 ;
+    yawl:hasMethod yawl:ItemParams_getColUsageRows_43 ;
+    yawl:hasMethod yawl:ItemParams_setColUsageRows_44 ;
+    yawl:hasMethod yawl:ItemParams_getColInputPredicate_45 ;
+    yawl:hasMethod yawl:ItemParams_setColInputPredicate_46 ;
+    yawl:hasMethod yawl:ItemParams_getColInputPredicateRows_47 ;
+    yawl:hasMethod yawl:ItemParams_setColInputPredicateRows_48 ;
+    yawl:hasMethod yawl:ItemParams_getColOutputPredicate_49 ;
+    yawl:hasMethod yawl:ItemParams_setColOutputPredicate_50 ;
+    yawl:hasMethod yawl:ItemParams_getColOutputPredicateRows_51 ;
+    yawl:hasMethod yawl:ItemParams_setColOutputPredicateRows_52 ;
+    yawl:hasMethod yawl:ItemParams_getColOriginalValue_53 ;
+    yawl:hasMethod yawl:ItemParams_setColOriginalValue_54 ;
+    yawl:hasMethod yawl:ItemParams_getColOriginalValueRows_55 ;
+    yawl:hasMethod yawl:ItemParams_setColOriginalValueRows_56 ;
+    yawl:hasMethod yawl:ItemParams_getColDefaultValue_57 ;
+    yawl:hasMethod yawl:ItemParams_setColDefaultValue_58 ;
+    yawl:hasMethod yawl:ItemParams_getColDefaultValueRows_59 ;
+    yawl:hasMethod yawl:ItemParams_setColDefaultValueRows_60 ;
+    yawl:hasMethod yawl:ItemParams_getColValue_61 ;
+    yawl:hasMethod yawl:ItemParams_setColValue_62 ;
+    yawl:hasMethod yawl:ItemParams_getColValueRows_63 ;
+    yawl:hasMethod yawl:ItemParams_setColValueRows_64 ;
+    yawl:hasMethod yawl:ItemParams_getDtabEngineLog_65 ;
+    yawl:hasMethod yawl:ItemParams_setDtabEngineLog_66 ;
+    yawl:hasMethod yawl:ItemParams_getColEngineEventTime_67 ;
+    yawl:hasMethod yawl:ItemParams_setColEngineEventTime_68 ;
+    yawl:hasMethod yawl:ItemParams_getColEngineEvent_69 ;
+    yawl:hasMethod yawl:ItemParams_setColEngineEvent_70 ;
+    yawl:hasMethod yawl:ItemParams_getColEngineTimeRows_71 ;
+    yawl:hasMethod yawl:ItemParams_setColEngineTimeRows_72 ;
+    yawl:hasMethod yawl:ItemParams_getColEngineEventRows_73 ;
+    yawl:hasMethod yawl:ItemParams_setColEngineEventRows_74 ;
+    yawl:hasMethod yawl:ItemParams_getDtabResourceLog_75 ;
+    yawl:hasMethod yawl:ItemParams_setDtabResourceLog_76 ;
+    yawl:hasMethod yawl:ItemParams_getColResourceEventTime_77 ;
+    yawl:hasMethod yawl:ItemParams_setColResourceEventTime_78 ;
+    yawl:hasMethod yawl:ItemParams_getColResourceEvent_79 ;
+    yawl:hasMethod yawl:ItemParams_setColResourceEvent_80 ;
+    yawl:hasMethod yawl:ItemParams_getColResourceUser_81 ;
+    yawl:hasMethod yawl:ItemParams_setColResourceUser_82 ;
+    yawl:hasMethod yawl:ItemParams_getColResourceTimeRows_83 ;
+    yawl:hasMethod yawl:ItemParams_setColResourceTimeRows_84 ;
+    yawl:hasMethod yawl:ItemParams_getColResourceEventRows_85 ;
+    yawl:hasMethod yawl:ItemParams_setColResourceEventRows_86 ;
+    yawl:hasMethod yawl:ItemParams_getColResourceUserRows_87 ;
+    yawl:hasMethod yawl:ItemParams_setColResourceUserRows_88 ;
+    yawl:hasMethod yawl:ItemParams_getHdnRowIndex_89 ;
+    yawl:hasMethod yawl:ItemParams_setHdnRowIndex_90 ;
+    yawl:hasMethod yawl:ItemParams_getPnlContainer_91 ;
+    yawl:hasMethod yawl:ItemParams_setPnlContainer_92 ;
+    yawl:hasMethod yawl:ItemParams_getPnlGroup_93 ;
+    yawl:hasMethod yawl:ItemParams_setPnlGroup_94 ;
+    yawl:hasMethod yawl:ItemParams_getPnlGroupLogData_95 ;
+    yawl:hasMethod yawl:ItemParams_setPnlGroupLogData_96 ;
+    yawl:hasMethod yawl:ItemParams_getItemResourceLogPnlGroup_97 ;
+    yawl:hasMethod yawl:ItemParams_setItemResourceLogPnlGroup_98 ;
+    yawl:hasMethod yawl:ItemParams_getItemEngineLogPnlGroup_99 ;
+    yawl:hasMethod yawl:ItemParams_setItemEngineLogPnlGroup_100 ;
+    yawl:hasMethod yawl:ItemParams_getBtnDetails_101 ;
+    yawl:hasMethod yawl:ItemParams_setBtnDetails_102 ;
+    yawl:hasMethod yawl:ItemParams_getNameHeaderText_103 ;
+    yawl:hasMethod yawl:ItemParams_setNameHeaderText_104 ;
+    yawl:hasMethod yawl:ItemParams_getDataTypeHeaderText_105 ;
+    yawl:hasMethod yawl:ItemParams_setDataTypeHeaderText_106 ;
+    yawl:hasMethod yawl:ItemParams_getDataSchemaHeaderText_107 ;
+    yawl:hasMethod yawl:ItemParams_setDataSchemaHeaderText_108 ;
+    yawl:hasMethod yawl:ItemParams_getUsageHeaderText_109 ;
+    yawl:hasMethod yawl:ItemParams_setUsageHeaderText_110 ;
+    yawl:hasMethod yawl:ItemParams_getInputPredicateHeaderText_111 ;
+    yawl:hasMethod yawl:ItemParams_setInputPredicateHeaderText_112 ;
+    yawl:hasMethod yawl:ItemParams_getOutputPredicateHeaderText_113 ;
+    yawl:hasMethod yawl:ItemParams_setOutputPredicateHeaderText_114 ;
+    yawl:hasMethod yawl:ItemParams_getOriginalValueHeaderText_115 ;
+    yawl:hasMethod yawl:ItemParams_setOriginalValueHeaderText_116 ;
+    yawl:hasMethod yawl:ItemParams_getDefaultValueHeaderText_117 ;
+    yawl:hasMethod yawl:ItemParams_setDefaultValueHeaderText_118 ;
+    yawl:hasMethod yawl:ItemParams_getValueHeaderText_119 ;
+    yawl:hasMethod yawl:ItemParams_setValueHeaderText_120 ;
+    yawl:hasMethod yawl:ItemParams_prerender_121 ;
+    yawl:hasMethod yawl:ItemParams_btnRefresh_action_122 ;
+    yawl:hasMethod yawl:ItemParams_btnLogout_action_123 ;
+    yawl:hasMethod yawl:ItemParams_btnDetails_action_124 ;
+    yawl:hasMethod yawl:ItemParams_btnBack_action_125 ;
+    yawl:hasMethod yawl:ItemParams_nameHeaderClick_126 ;
+    yawl:hasMethod yawl:ItemParams_dataTypeHeaderClick_127 ;
+    yawl:hasMethod yawl:ItemParams_dataSchemaHeaderClick_128 ;
+    yawl:hasMethod yawl:ItemParams_usageHeaderClick_129 ;
+    yawl:hasMethod yawl:ItemParams_inputPredicateHeaderClick_130 ;
+    yawl:hasMethod yawl:ItemParams_outputPredicateHeaderClick_131 ;
+    yawl:hasMethod yawl:ItemParams_originalValueHeaderClick_132 ;
+    yawl:hasMethod yawl:ItemParams_defaultValueHeaderClick_133 ;
+    yawl:hasMethod yawl:ItemParams_valueHeaderClick_134 ;
+    yawl:hasMethod yawl:ItemParams_sortTable_135 ;
+    yawl:hasMethod yawl:ItemParams_setHeaderButtonText_136 ;
+    yawl:hasMethod yawl:ItemParams_resetHeaderButtons_137 ;
+    yawl:hasMethod yawl:ItemParams_getOrderIndicator_138 ;
+    yawl:hasField yawl:ItemParams___placeholder ;
+    yawl:hasField yawl:ItemParams_page1 ;
+    yawl:hasField yawl:ItemParams_html1 ;
+    yawl:hasField yawl:ItemParams_head1 ;
+    yawl:hasField yawl:ItemParams_link1 ;
+    yawl:hasField yawl:ItemParams_body1 ;
+    yawl:hasField yawl:ItemParams_form1 ;
+    yawl:hasField yawl:ItemParams_stEngineLogHeading ;
+    yawl:hasField yawl:ItemParams_stResourceLogHeading ;
+    yawl:hasField yawl:ItemParams_staticText ;
+    yawl:hasField yawl:ItemParams_layoutPanel ;
+    yawl:hasField yawl:ItemParams_dataTable ;
+    yawl:hasField yawl:ItemParams_colName ;
+    yawl:hasField yawl:ItemParams_colNameRows ;
+    yawl:hasField yawl:ItemParams_colDataType ;
+    yawl:hasField yawl:ItemParams_colDataTypeRows ;
+    yawl:hasField yawl:ItemParams_colDataSchema ;
+    yawl:hasField yawl:ItemParams_colDataSchemaRows ;
+    yawl:hasField yawl:ItemParams_colUsage ;
+    yawl:hasField yawl:ItemParams_colUsageRows ;
+    yawl:hasField yawl:ItemParams_colInputPredicate ;
+    yawl:hasField yawl:ItemParams_colInputPredicateRows ;
+    yawl:hasField yawl:ItemParams_colOutputPredicate ;
+    yawl:hasField yawl:ItemParams_colOutputPredicateRows ;
+    yawl:hasField yawl:ItemParams_colOriginalValue ;
+    yawl:hasField yawl:ItemParams_colOriginalValueRows ;
+    yawl:hasField yawl:ItemParams_colDefaultValue ;
+    yawl:hasField yawl:ItemParams_colDefaultValueRows ;
+    yawl:hasField yawl:ItemParams_colValue ;
+    yawl:hasField yawl:ItemParams_colValueRows ;
+    yawl:hasField yawl:ItemParams_dtabEngineLog ;
+    yawl:hasField yawl:ItemParams_colEngineEventTime ;
+    yawl:hasField yawl:ItemParams_colEngineEvent ;
+    yawl:hasField yawl:ItemParams_colEngineTimeRows ;
+    yawl:hasField yawl:ItemParams_colEngineEventRows ;
+    yawl:hasField yawl:ItemParams_dtabResourceLog ;
+    yawl:hasField yawl:ItemParams_colResourceEventTime ;
+    yawl:hasField yawl:ItemParams_colResourceEvent ;
+    yawl:hasField yawl:ItemParams_colResourceUser ;
+    yawl:hasField yawl:ItemParams_colResourceTimeRows ;
+    yawl:hasField yawl:ItemParams_colResourceEventRows ;
+    yawl:hasField yawl:ItemParams_colResourceUserRows ;
+    yawl:hasField yawl:ItemParams_hdnRowIndex ;
+    yawl:hasField yawl:ItemParams_pnlContainer ;
+    yawl:hasField yawl:ItemParams_pnlGroup ;
+    yawl:hasField yawl:ItemParams_pnlGroupLogData ;
+    yawl:hasField yawl:ItemParams_itemResourceLogPnlGroup ;
+    yawl:hasField yawl:ItemParams_itemEngineLogPnlGroup ;
+    yawl:hasField yawl:ItemParams_btnDetails ;
+    yawl:hasField yawl:ItemParams_nameHeaderText ;
+    yawl:hasField yawl:ItemParams_dataTypeHeaderText ;
+    yawl:hasField yawl:ItemParams_dataSchemaHeaderText ;
+    yawl:hasField yawl:ItemParams_usageHeaderText ;
+    yawl:hasField yawl:ItemParams_inputPredicateHeaderText ;
+    yawl:hasField yawl:ItemParams_outputPredicateHeaderText ;
+    yawl:hasField yawl:ItemParams_originalValueHeaderText ;
+    yawl:hasField yawl:ItemParams_defaultValueHeaderText ;
+    yawl:hasField yawl:ItemParams_valueHeaderText ;
+    yawl:hasField yawl:ItemParams__sb ;
+    yawl:hasField yawl:ItemParams_msgPanel ;
+    .
+
+
+# Method: ItemParams._init
+yawl:ItemParams__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ItemParams.getSessionBean
+yawl:ItemParams_getSessionBean_2 a yawl:Method ;
+    rdfs:label "getSessionBean" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getSessionBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ItemParams.getApplicationBean
+yawl:ItemParams_getApplicationBean_3 a yawl:Method ;
+    rdfs:label "getApplicationBean" ;
+    yawl:returnType "ApplicationBean" ;
+    yawl:signature "ApplicationBean getApplicationBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ItemParams.init
+yawl:ItemParams_init_4 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.preprocess
+yawl:ItemParams_preprocess_5 a yawl:Method ;
+    rdfs:label "preprocess" ;
+    yawl:returnType "void" ;
+    yawl:signature "void preprocess()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.destroy
+yawl:ItemParams_destroy_6 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getPage1
+yawl:ItemParams_getPage1_7 a yawl:Method ;
+    rdfs:label "getPage1" ;
+    yawl:returnType "Page" ;
+    yawl:signature "Page getPage1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setPage1
+yawl:ItemParams_setPage1_8 a yawl:Method ;
+    rdfs:label "setPage1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPage1(Page p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getHtml1
+yawl:ItemParams_getHtml1_9 a yawl:Method ;
+    rdfs:label "getHtml1" ;
+    yawl:returnType "Html" ;
+    yawl:signature "Html getHtml1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setHtml1
+yawl:ItemParams_setHtml1_10 a yawl:Method ;
+    rdfs:label "setHtml1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHtml1(Html h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getHead1
+yawl:ItemParams_getHead1_11 a yawl:Method ;
+    rdfs:label "getHead1" ;
+    yawl:returnType "Head" ;
+    yawl:signature "Head getHead1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setHead1
+yawl:ItemParams_setHead1_12 a yawl:Method ;
+    rdfs:label "setHead1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHead1(Head h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getLink1
+yawl:ItemParams_getLink1_13 a yawl:Method ;
+    rdfs:label "getLink1" ;
+    yawl:returnType "Link" ;
+    yawl:signature "Link getLink1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setLink1
+yawl:ItemParams_setLink1_14 a yawl:Method ;
+    rdfs:label "setLink1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLink1(Link l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getBody1
+yawl:ItemParams_getBody1_15 a yawl:Method ;
+    rdfs:label "getBody1" ;
+    yawl:returnType "Body" ;
+    yawl:signature "Body getBody1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setBody1
+yawl:ItemParams_setBody1_16 a yawl:Method ;
+    rdfs:label "setBody1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBody1(Body b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getForm1
+yawl:ItemParams_getForm1_17 a yawl:Method ;
+    rdfs:label "getForm1" ;
+    yawl:returnType "Form" ;
+    yawl:signature "Form getForm1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setForm1
+yawl:ItemParams_setForm1_18 a yawl:Method ;
+    rdfs:label "setForm1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setForm1(Form f)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getStEngineLogHeading
+yawl:ItemParams_getStEngineLogHeading_19 a yawl:Method ;
+    rdfs:label "getStEngineLogHeading" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getStEngineLogHeading()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setStEngineLogHeading
+yawl:ItemParams_setStEngineLogHeading_20 a yawl:Method ;
+    rdfs:label "setStEngineLogHeading" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStEngineLogHeading(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getStResourceLogHeading
+yawl:ItemParams_getStResourceLogHeading_21 a yawl:Method ;
+    rdfs:label "getStResourceLogHeading" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getStResourceLogHeading()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setStResourceLogHeading
+yawl:ItemParams_setStResourceLogHeading_22 a yawl:Method ;
+    rdfs:label "setStResourceLogHeading" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStResourceLogHeading(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getStaticText
+yawl:ItemParams_getStaticText_23 a yawl:Method ;
+    rdfs:label "getStaticText" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getStaticText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setStaticText
+yawl:ItemParams_setStaticText_24 a yawl:Method ;
+    rdfs:label "setStaticText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStaticText(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getLayoutPanel
+yawl:ItemParams_getLayoutPanel_25 a yawl:Method ;
+    rdfs:label "getLayoutPanel" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getLayoutPanel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setLayoutPanel
+yawl:ItemParams_setLayoutPanel_26 a yawl:Method ;
+    rdfs:label "setLayoutPanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLayoutPanel(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getDataTable
+yawl:ItemParams_getDataTable_27 a yawl:Method ;
+    rdfs:label "getDataTable" ;
+    yawl:returnType "HtmlDataTable" ;
+    yawl:signature "HtmlDataTable getDataTable()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setDataTable
+yawl:ItemParams_setDataTable_28 a yawl:Method ;
+    rdfs:label "setDataTable" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataTable(HtmlDataTable hdt)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColName
+yawl:ItemParams_getColName_29 a yawl:Method ;
+    rdfs:label "getColName" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColName
+yawl:ItemParams_setColName_30 a yawl:Method ;
+    rdfs:label "setColName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColName(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColNameRows
+yawl:ItemParams_getColNameRows_31 a yawl:Method ;
+    rdfs:label "getColNameRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColNameRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColNameRows
+yawl:ItemParams_setColNameRows_32 a yawl:Method ;
+    rdfs:label "setColNameRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColNameRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColDataType
+yawl:ItemParams_getColDataType_33 a yawl:Method ;
+    rdfs:label "getColDataType" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColDataType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColDataType
+yawl:ItemParams_setColDataType_34 a yawl:Method ;
+    rdfs:label "setColDataType" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColDataType(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColDataTypeRows
+yawl:ItemParams_getColDataTypeRows_35 a yawl:Method ;
+    rdfs:label "getColDataTypeRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColDataTypeRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColDataTypeRows
+yawl:ItemParams_setColDataTypeRows_36 a yawl:Method ;
+    rdfs:label "setColDataTypeRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColDataTypeRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColDataSchema
+yawl:ItemParams_getColDataSchema_37 a yawl:Method ;
+    rdfs:label "getColDataSchema" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColDataSchema()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColDataSchema
+yawl:ItemParams_setColDataSchema_38 a yawl:Method ;
+    rdfs:label "setColDataSchema" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColDataSchema(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColDataSchemaRows
+yawl:ItemParams_getColDataSchemaRows_39 a yawl:Method ;
+    rdfs:label "getColDataSchemaRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColDataSchemaRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColDataSchemaRows
+yawl:ItemParams_setColDataSchemaRows_40 a yawl:Method ;
+    rdfs:label "setColDataSchemaRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColDataSchemaRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColUsage
+yawl:ItemParams_getColUsage_41 a yawl:Method ;
+    rdfs:label "getColUsage" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColUsage()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColUsage
+yawl:ItemParams_setColUsage_42 a yawl:Method ;
+    rdfs:label "setColUsage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColUsage(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColUsageRows
+yawl:ItemParams_getColUsageRows_43 a yawl:Method ;
+    rdfs:label "getColUsageRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColUsageRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColUsageRows
+yawl:ItemParams_setColUsageRows_44 a yawl:Method ;
+    rdfs:label "setColUsageRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColUsageRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColInputPredicate
+yawl:ItemParams_getColInputPredicate_45 a yawl:Method ;
+    rdfs:label "getColInputPredicate" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColInputPredicate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColInputPredicate
+yawl:ItemParams_setColInputPredicate_46 a yawl:Method ;
+    rdfs:label "setColInputPredicate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColInputPredicate(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColInputPredicateRows
+yawl:ItemParams_getColInputPredicateRows_47 a yawl:Method ;
+    rdfs:label "getColInputPredicateRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColInputPredicateRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColInputPredicateRows
+yawl:ItemParams_setColInputPredicateRows_48 a yawl:Method ;
+    rdfs:label "setColInputPredicateRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColInputPredicateRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColOutputPredicate
+yawl:ItemParams_getColOutputPredicate_49 a yawl:Method ;
+    rdfs:label "getColOutputPredicate" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColOutputPredicate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColOutputPredicate
+yawl:ItemParams_setColOutputPredicate_50 a yawl:Method ;
+    rdfs:label "setColOutputPredicate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColOutputPredicate(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColOutputPredicateRows
+yawl:ItemParams_getColOutputPredicateRows_51 a yawl:Method ;
+    rdfs:label "getColOutputPredicateRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColOutputPredicateRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColOutputPredicateRows
+yawl:ItemParams_setColOutputPredicateRows_52 a yawl:Method ;
+    rdfs:label "setColOutputPredicateRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColOutputPredicateRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColOriginalValue
+yawl:ItemParams_getColOriginalValue_53 a yawl:Method ;
+    rdfs:label "getColOriginalValue" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColOriginalValue()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColOriginalValue
+yawl:ItemParams_setColOriginalValue_54 a yawl:Method ;
+    rdfs:label "setColOriginalValue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColOriginalValue(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColOriginalValueRows
+yawl:ItemParams_getColOriginalValueRows_55 a yawl:Method ;
+    rdfs:label "getColOriginalValueRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColOriginalValueRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColOriginalValueRows
+yawl:ItemParams_setColOriginalValueRows_56 a yawl:Method ;
+    rdfs:label "setColOriginalValueRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColOriginalValueRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColDefaultValue
+yawl:ItemParams_getColDefaultValue_57 a yawl:Method ;
+    rdfs:label "getColDefaultValue" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColDefaultValue()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColDefaultValue
+yawl:ItemParams_setColDefaultValue_58 a yawl:Method ;
+    rdfs:label "setColDefaultValue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColDefaultValue(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColDefaultValueRows
+yawl:ItemParams_getColDefaultValueRows_59 a yawl:Method ;
+    rdfs:label "getColDefaultValueRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColDefaultValueRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColDefaultValueRows
+yawl:ItemParams_setColDefaultValueRows_60 a yawl:Method ;
+    rdfs:label "setColDefaultValueRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColDefaultValueRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColValue
+yawl:ItemParams_getColValue_61 a yawl:Method ;
+    rdfs:label "getColValue" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColValue()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColValue
+yawl:ItemParams_setColValue_62 a yawl:Method ;
+    rdfs:label "setColValue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColValue(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColValueRows
+yawl:ItemParams_getColValueRows_63 a yawl:Method ;
+    rdfs:label "getColValueRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColValueRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColValueRows
+yawl:ItemParams_setColValueRows_64 a yawl:Method ;
+    rdfs:label "setColValueRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColValueRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getDtabEngineLog
+yawl:ItemParams_getDtabEngineLog_65 a yawl:Method ;
+    rdfs:label "getDtabEngineLog" ;
+    yawl:returnType "HtmlDataTable" ;
+    yawl:signature "HtmlDataTable getDtabEngineLog()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setDtabEngineLog
+yawl:ItemParams_setDtabEngineLog_66 a yawl:Method ;
+    rdfs:label "setDtabEngineLog" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDtabEngineLog(HtmlDataTable hdt)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColEngineEventTime
+yawl:ItemParams_getColEngineEventTime_67 a yawl:Method ;
+    rdfs:label "getColEngineEventTime" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColEngineEventTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColEngineEventTime
+yawl:ItemParams_setColEngineEventTime_68 a yawl:Method ;
+    rdfs:label "setColEngineEventTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColEngineEventTime(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColEngineEvent
+yawl:ItemParams_getColEngineEvent_69 a yawl:Method ;
+    rdfs:label "getColEngineEvent" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColEngineEvent()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColEngineEvent
+yawl:ItemParams_setColEngineEvent_70 a yawl:Method ;
+    rdfs:label "setColEngineEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColEngineEvent(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColEngineTimeRows
+yawl:ItemParams_getColEngineTimeRows_71 a yawl:Method ;
+    rdfs:label "getColEngineTimeRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColEngineTimeRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColEngineTimeRows
+yawl:ItemParams_setColEngineTimeRows_72 a yawl:Method ;
+    rdfs:label "setColEngineTimeRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColEngineTimeRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColEngineEventRows
+yawl:ItemParams_getColEngineEventRows_73 a yawl:Method ;
+    rdfs:label "getColEngineEventRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColEngineEventRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColEngineEventRows
+yawl:ItemParams_setColEngineEventRows_74 a yawl:Method ;
+    rdfs:label "setColEngineEventRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColEngineEventRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getDtabResourceLog
+yawl:ItemParams_getDtabResourceLog_75 a yawl:Method ;
+    rdfs:label "getDtabResourceLog" ;
+    yawl:returnType "HtmlDataTable" ;
+    yawl:signature "HtmlDataTable getDtabResourceLog()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setDtabResourceLog
+yawl:ItemParams_setDtabResourceLog_76 a yawl:Method ;
+    rdfs:label "setDtabResourceLog" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDtabResourceLog(HtmlDataTable hdt)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColResourceEventTime
+yawl:ItemParams_getColResourceEventTime_77 a yawl:Method ;
+    rdfs:label "getColResourceEventTime" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColResourceEventTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColResourceEventTime
+yawl:ItemParams_setColResourceEventTime_78 a yawl:Method ;
+    rdfs:label "setColResourceEventTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColResourceEventTime(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColResourceEvent
+yawl:ItemParams_getColResourceEvent_79 a yawl:Method ;
+    rdfs:label "getColResourceEvent" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColResourceEvent()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColResourceEvent
+yawl:ItemParams_setColResourceEvent_80 a yawl:Method ;
+    rdfs:label "setColResourceEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColResourceEvent(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColResourceUser
+yawl:ItemParams_getColResourceUser_81 a yawl:Method ;
+    rdfs:label "getColResourceUser" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColResourceUser()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColResourceUser
+yawl:ItemParams_setColResourceUser_82 a yawl:Method ;
+    rdfs:label "setColResourceUser" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColResourceUser(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColResourceTimeRows
+yawl:ItemParams_getColResourceTimeRows_83 a yawl:Method ;
+    rdfs:label "getColResourceTimeRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColResourceTimeRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColResourceTimeRows
+yawl:ItemParams_setColResourceTimeRows_84 a yawl:Method ;
+    rdfs:label "setColResourceTimeRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColResourceTimeRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColResourceEventRows
+yawl:ItemParams_getColResourceEventRows_85 a yawl:Method ;
+    rdfs:label "getColResourceEventRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColResourceEventRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColResourceEventRows
+yawl:ItemParams_setColResourceEventRows_86 a yawl:Method ;
+    rdfs:label "setColResourceEventRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColResourceEventRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getColResourceUserRows
+yawl:ItemParams_getColResourceUserRows_87 a yawl:Method ;
+    rdfs:label "getColResourceUserRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColResourceUserRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setColResourceUserRows
+yawl:ItemParams_setColResourceUserRows_88 a yawl:Method ;
+    rdfs:label "setColResourceUserRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColResourceUserRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getHdnRowIndex
+yawl:ItemParams_getHdnRowIndex_89 a yawl:Method ;
+    rdfs:label "getHdnRowIndex" ;
+    yawl:returnType "HiddenField" ;
+    yawl:signature "HiddenField getHdnRowIndex()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setHdnRowIndex
+yawl:ItemParams_setHdnRowIndex_90 a yawl:Method ;
+    rdfs:label "setHdnRowIndex" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHdnRowIndex(HiddenField hf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getPnlContainer
+yawl:ItemParams_getPnlContainer_91 a yawl:Method ;
+    rdfs:label "getPnlContainer" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlContainer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setPnlContainer
+yawl:ItemParams_setPnlContainer_92 a yawl:Method ;
+    rdfs:label "setPnlContainer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlContainer(PanelLayout pnl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getPnlGroup
+yawl:ItemParams_getPnlGroup_93 a yawl:Method ;
+    rdfs:label "getPnlGroup" ;
+    yawl:returnType "PanelGroup" ;
+    yawl:signature "PanelGroup getPnlGroup()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setPnlGroup
+yawl:ItemParams_setPnlGroup_94 a yawl:Method ;
+    rdfs:label "setPnlGroup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlGroup(PanelGroup group)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getPnlGroupLogData
+yawl:ItemParams_getPnlGroupLogData_95 a yawl:Method ;
+    rdfs:label "getPnlGroupLogData" ;
+    yawl:returnType "PanelGroup" ;
+    yawl:signature "PanelGroup getPnlGroupLogData()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setPnlGroupLogData
+yawl:ItemParams_setPnlGroupLogData_96 a yawl:Method ;
+    rdfs:label "setPnlGroupLogData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlGroupLogData(PanelGroup group)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getItemResourceLogPnlGroup
+yawl:ItemParams_getItemResourceLogPnlGroup_97 a yawl:Method ;
+    rdfs:label "getItemResourceLogPnlGroup" ;
+    yawl:returnType "PanelGroup" ;
+    yawl:signature "PanelGroup getItemResourceLogPnlGroup()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setItemResourceLogPnlGroup
+yawl:ItemParams_setItemResourceLogPnlGroup_98 a yawl:Method ;
+    rdfs:label "setItemResourceLogPnlGroup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setItemResourceLogPnlGroup(PanelGroup group)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getItemEngineLogPnlGroup
+yawl:ItemParams_getItemEngineLogPnlGroup_99 a yawl:Method ;
+    rdfs:label "getItemEngineLogPnlGroup" ;
+    yawl:returnType "PanelGroup" ;
+    yawl:signature "PanelGroup getItemEngineLogPnlGroup()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setItemEngineLogPnlGroup
+yawl:ItemParams_setItemEngineLogPnlGroup_100 a yawl:Method ;
+    rdfs:label "setItemEngineLogPnlGroup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setItemEngineLogPnlGroup(PanelGroup group)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getBtnDetails
+yawl:ItemParams_getBtnDetails_101 a yawl:Method ;
+    rdfs:label "getBtnDetails" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnDetails()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setBtnDetails
+yawl:ItemParams_setBtnDetails_102 a yawl:Method ;
+    rdfs:label "setBtnDetails" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnDetails(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getNameHeaderText
+yawl:ItemParams_getNameHeaderText_103 a yawl:Method ;
+    rdfs:label "getNameHeaderText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNameHeaderText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setNameHeaderText
+yawl:ItemParams_setNameHeaderText_104 a yawl:Method ;
+    rdfs:label "setNameHeaderText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNameHeaderText(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getDataTypeHeaderText
+yawl:ItemParams_getDataTypeHeaderText_105 a yawl:Method ;
+    rdfs:label "getDataTypeHeaderText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataTypeHeaderText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setDataTypeHeaderText
+yawl:ItemParams_setDataTypeHeaderText_106 a yawl:Method ;
+    rdfs:label "setDataTypeHeaderText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataTypeHeaderText(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getDataSchemaHeaderText
+yawl:ItemParams_getDataSchemaHeaderText_107 a yawl:Method ;
+    rdfs:label "getDataSchemaHeaderText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataSchemaHeaderText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setDataSchemaHeaderText
+yawl:ItemParams_setDataSchemaHeaderText_108 a yawl:Method ;
+    rdfs:label "setDataSchemaHeaderText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataSchemaHeaderText(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getUsageHeaderText
+yawl:ItemParams_getUsageHeaderText_109 a yawl:Method ;
+    rdfs:label "getUsageHeaderText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUsageHeaderText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setUsageHeaderText
+yawl:ItemParams_setUsageHeaderText_110 a yawl:Method ;
+    rdfs:label "setUsageHeaderText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUsageHeaderText(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getInputPredicateHeaderText
+yawl:ItemParams_getInputPredicateHeaderText_111 a yawl:Method ;
+    rdfs:label "getInputPredicateHeaderText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInputPredicateHeaderText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setInputPredicateHeaderText
+yawl:ItemParams_setInputPredicateHeaderText_112 a yawl:Method ;
+    rdfs:label "setInputPredicateHeaderText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setInputPredicateHeaderText(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getOutputPredicateHeaderText
+yawl:ItemParams_getOutputPredicateHeaderText_113 a yawl:Method ;
+    rdfs:label "getOutputPredicateHeaderText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOutputPredicateHeaderText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setOutputPredicateHeaderText
+yawl:ItemParams_setOutputPredicateHeaderText_114 a yawl:Method ;
+    rdfs:label "setOutputPredicateHeaderText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOutputPredicateHeaderText(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getOriginalValueHeaderText
+yawl:ItemParams_getOriginalValueHeaderText_115 a yawl:Method ;
+    rdfs:label "getOriginalValueHeaderText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOriginalValueHeaderText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setOriginalValueHeaderText
+yawl:ItemParams_setOriginalValueHeaderText_116 a yawl:Method ;
+    rdfs:label "setOriginalValueHeaderText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOriginalValueHeaderText(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getDefaultValueHeaderText
+yawl:ItemParams_getDefaultValueHeaderText_117 a yawl:Method ;
+    rdfs:label "getDefaultValueHeaderText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDefaultValueHeaderText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setDefaultValueHeaderText
+yawl:ItemParams_setDefaultValueHeaderText_118 a yawl:Method ;
+    rdfs:label "setDefaultValueHeaderText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDefaultValueHeaderText(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.getValueHeaderText
+yawl:ItemParams_getValueHeaderText_119 a yawl:Method ;
+    rdfs:label "getValueHeaderText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getValueHeaderText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.setValueHeaderText
+yawl:ItemParams_setValueHeaderText_120 a yawl:Method ;
+    rdfs:label "setValueHeaderText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setValueHeaderText(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.prerender
+yawl:ItemParams_prerender_121 a yawl:Method ;
+    rdfs:label "prerender" ;
+    yawl:returnType "void" ;
+    yawl:signature "void prerender()" ;
+    rdfs:comment """Overridden method that is called immediately before the page is rendered""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.btnRefresh_action
+yawl:ItemParams_btnRefresh_action_122 a yawl:Method ;
+    rdfs:label "btnRefresh_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnRefresh_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.btnLogout_action
+yawl:ItemParams_btnLogout_action_123 a yawl:Method ;
+    rdfs:label "btnLogout_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnLogout_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.btnDetails_action
+yawl:ItemParams_btnDetails_action_124 a yawl:Method ;
+    rdfs:label "btnDetails_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnDetails_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.btnBack_action
+yawl:ItemParams_btnBack_action_125 a yawl:Method ;
+    rdfs:label "btnBack_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnBack_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.nameHeaderClick
+yawl:ItemParams_nameHeaderClick_126 a yawl:Method ;
+    rdfs:label "nameHeaderClick" ;
+    yawl:returnType "String" ;
+    yawl:signature "String nameHeaderClick()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.dataTypeHeaderClick
+yawl:ItemParams_dataTypeHeaderClick_127 a yawl:Method ;
+    rdfs:label "dataTypeHeaderClick" ;
+    yawl:returnType "String" ;
+    yawl:signature "String dataTypeHeaderClick()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.dataSchemaHeaderClick
+yawl:ItemParams_dataSchemaHeaderClick_128 a yawl:Method ;
+    rdfs:label "dataSchemaHeaderClick" ;
+    yawl:returnType "String" ;
+    yawl:signature "String dataSchemaHeaderClick()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.usageHeaderClick
+yawl:ItemParams_usageHeaderClick_129 a yawl:Method ;
+    rdfs:label "usageHeaderClick" ;
+    yawl:returnType "String" ;
+    yawl:signature "String usageHeaderClick()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.inputPredicateHeaderClick
+yawl:ItemParams_inputPredicateHeaderClick_130 a yawl:Method ;
+    rdfs:label "inputPredicateHeaderClick" ;
+    yawl:returnType "String" ;
+    yawl:signature "String inputPredicateHeaderClick()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.outputPredicateHeaderClick
+yawl:ItemParams_outputPredicateHeaderClick_131 a yawl:Method ;
+    rdfs:label "outputPredicateHeaderClick" ;
+    yawl:returnType "String" ;
+    yawl:signature "String outputPredicateHeaderClick()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.originalValueHeaderClick
+yawl:ItemParams_originalValueHeaderClick_132 a yawl:Method ;
+    rdfs:label "originalValueHeaderClick" ;
+    yawl:returnType "String" ;
+    yawl:signature "String originalValueHeaderClick()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.defaultValueHeaderClick
+yawl:ItemParams_defaultValueHeaderClick_133 a yawl:Method ;
+    rdfs:label "defaultValueHeaderClick" ;
+    yawl:returnType "String" ;
+    yawl:signature "String defaultValueHeaderClick()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.valueHeaderClick
+yawl:ItemParams_valueHeaderClick_134 a yawl:Method ;
+    rdfs:label "valueHeaderClick" ;
+    yawl:returnType "String" ;
+    yawl:signature "String valueHeaderClick()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemParams.sortTable
+yawl:ItemParams_sortTable_135 a yawl:Method ;
+    rdfs:label "sortTable" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sortTable(TableSorter column)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ItemParams.setHeaderButtonText
+yawl:ItemParams_setHeaderButtonText_136 a yawl:Method ;
+    rdfs:label "setHeaderButtonText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHeaderButtonText()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ItemParams.resetHeaderButtons
+yawl:ItemParams_resetHeaderButtons_137 a yawl:Method ;
+    rdfs:label "resetHeaderButtons" ;
+    yawl:returnType "void" ;
+    yawl:signature "void resetHeaderButtons()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ItemParams.getOrderIndicator
+yawl:ItemParams_getOrderIndicator_138 a yawl:Method ;
+    rdfs:label "getOrderIndicator" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOrderIndicator(boolean ascending)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:ItemParams___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:ItemParams_page1 a yawl:Field ;
+    rdfs:label "page1" .
+
+yawl:ItemParams_html1 a yawl:Field ;
+    rdfs:label "html1" .
+
+yawl:ItemParams_head1 a yawl:Field ;
+    rdfs:label "head1" .
+
+yawl:ItemParams_link1 a yawl:Field ;
+    rdfs:label "link1" .
+
+yawl:ItemParams_body1 a yawl:Field ;
+    rdfs:label "body1" .
+
+yawl:ItemParams_form1 a yawl:Field ;
+    rdfs:label "form1" .
+
+yawl:ItemParams_stEngineLogHeading a yawl:Field ;
+    rdfs:label "stEngineLogHeading" .
+
+yawl:ItemParams_stResourceLogHeading a yawl:Field ;
+    rdfs:label "stResourceLogHeading" .
+
+yawl:ItemParams_staticText a yawl:Field ;
+    rdfs:label "staticText" .
+
+yawl:ItemParams_layoutPanel a yawl:Field ;
+    rdfs:label "layoutPanel" .
+
+yawl:ItemParams_dataTable a yawl:Field ;
+    rdfs:label "dataTable" .
+
+yawl:ItemParams_colName a yawl:Field ;
+    rdfs:label "colName" .
+
+yawl:ItemParams_colNameRows a yawl:Field ;
+    rdfs:label "colNameRows" .
+
+yawl:ItemParams_colDataType a yawl:Field ;
+    rdfs:label "colDataType" .
+
+yawl:ItemParams_colDataTypeRows a yawl:Field ;
+    rdfs:label "colDataTypeRows" .
+
+yawl:ItemParams_colDataSchema a yawl:Field ;
+    rdfs:label "colDataSchema" .
+
+yawl:ItemParams_colDataSchemaRows a yawl:Field ;
+    rdfs:label "colDataSchemaRows" .
+
+yawl:ItemParams_colUsage a yawl:Field ;
+    rdfs:label "colUsage" .
+
+yawl:ItemParams_colUsageRows a yawl:Field ;
+    rdfs:label "colUsageRows" .
+
+yawl:ItemParams_colInputPredicate a yawl:Field ;
+    rdfs:label "colInputPredicate" .
+
+yawl:ItemParams_colInputPredicateRows a yawl:Field ;
+    rdfs:label "colInputPredicateRows" .
+
+yawl:ItemParams_colOutputPredicate a yawl:Field ;
+    rdfs:label "colOutputPredicate" .
+
+yawl:ItemParams_colOutputPredicateRows a yawl:Field ;
+    rdfs:label "colOutputPredicateRows" .
+
+yawl:ItemParams_colOriginalValue a yawl:Field ;
+    rdfs:label "colOriginalValue" .
+
+yawl:ItemParams_colOriginalValueRows a yawl:Field ;
+    rdfs:label "colOriginalValueRows" .
+
+yawl:ItemParams_colDefaultValue a yawl:Field ;
+    rdfs:label "colDefaultValue" .
+
+yawl:ItemParams_colDefaultValueRows a yawl:Field ;
+    rdfs:label "colDefaultValueRows" .
+
+yawl:ItemParams_colValue a yawl:Field ;
+    rdfs:label "colValue" .
+
+yawl:ItemParams_colValueRows a yawl:Field ;
+    rdfs:label "colValueRows" .
+
+yawl:ItemParams_dtabEngineLog a yawl:Field ;
+    rdfs:label "dtabEngineLog" .
+
+yawl:ItemParams_colEngineEventTime a yawl:Field ;
+    rdfs:label "colEngineEventTime" .
+
+yawl:ItemParams_colEngineEvent a yawl:Field ;
+    rdfs:label "colEngineEvent" .
+
+yawl:ItemParams_colEngineTimeRows a yawl:Field ;
+    rdfs:label "colEngineTimeRows" .
+
+yawl:ItemParams_colEngineEventRows a yawl:Field ;
+    rdfs:label "colEngineEventRows" .
+
+yawl:ItemParams_dtabResourceLog a yawl:Field ;
+    rdfs:label "dtabResourceLog" .
+
+yawl:ItemParams_colResourceEventTime a yawl:Field ;
+    rdfs:label "colResourceEventTime" .
+
+yawl:ItemParams_colResourceEvent a yawl:Field ;
+    rdfs:label "colResourceEvent" .
+
+yawl:ItemParams_colResourceUser a yawl:Field ;
+    rdfs:label "colResourceUser" .
+
+yawl:ItemParams_colResourceTimeRows a yawl:Field ;
+    rdfs:label "colResourceTimeRows" .
+
+yawl:ItemParams_colResourceEventRows a yawl:Field ;
+    rdfs:label "colResourceEventRows" .
+
+yawl:ItemParams_colResourceUserRows a yawl:Field ;
+    rdfs:label "colResourceUserRows" .
+
+yawl:ItemParams_hdnRowIndex a yawl:Field ;
+    rdfs:label "hdnRowIndex" .
+
+yawl:ItemParams_pnlContainer a yawl:Field ;
+    rdfs:label "pnlContainer" .
+
+yawl:ItemParams_pnlGroup a yawl:Field ;
+    rdfs:label "pnlGroup" .
+
+yawl:ItemParams_pnlGroupLogData a yawl:Field ;
+    rdfs:label "pnlGroupLogData" .
+
+yawl:ItemParams_itemResourceLogPnlGroup a yawl:Field ;
+    rdfs:label "itemResourceLogPnlGroup" .
+
+yawl:ItemParams_itemEngineLogPnlGroup a yawl:Field ;
+    rdfs:label "itemEngineLogPnlGroup" .
+
+yawl:ItemParams_btnDetails a yawl:Field ;
+    rdfs:label "btnDetails" .
+
+yawl:ItemParams_nameHeaderText a yawl:Field ;
+    rdfs:label "nameHeaderText" .
+
+yawl:ItemParams_dataTypeHeaderText a yawl:Field ;
+    rdfs:label "dataTypeHeaderText" .
+
+yawl:ItemParams_dataSchemaHeaderText a yawl:Field ;
+    rdfs:label "dataSchemaHeaderText" .
+
+yawl:ItemParams_usageHeaderText a yawl:Field ;
+    rdfs:label "usageHeaderText" .
+
+yawl:ItemParams_inputPredicateHeaderText a yawl:Field ;
+    rdfs:label "inputPredicateHeaderText" .
+
+yawl:ItemParams_outputPredicateHeaderText a yawl:Field ;
+    rdfs:label "outputPredicateHeaderText" .
+
+yawl:ItemParams_originalValueHeaderText a yawl:Field ;
+    rdfs:label "originalValueHeaderText" .
+
+yawl:ItemParams_defaultValueHeaderText a yawl:Field ;
+    rdfs:label "defaultValueHeaderText" .
+
+yawl:ItemParams_valueHeaderText a yawl:Field ;
+    rdfs:label "valueHeaderText" .
+
+yawl:ItemParams__sb a yawl:Field ;
+    rdfs:label "_sb" .
+
+yawl:ItemParams_msgPanel a yawl:Field ;
+    rdfs:label "msgPanel" .
+
+
+

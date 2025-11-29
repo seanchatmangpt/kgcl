@@ -1,0 +1,67 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.interfce.interfaceX.Handler
+yawl:Handler a yawl:Class ;
+    rdfs:label "Handler" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_interfce_interfaceX ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/interfce/interfaceX/InterfaceX_EngineSideClient.java"^^xsd:string ;
+    rdfs:comment """Handler class called by the above announcement methods - passes the events to the service side.""" ;
+    yawl:implements yawl:Runnable ;
+    yawl:modifiers "private" ;
+    yawl:hasMethod yawl:Handler_run_1 ;
+    yawl:hasField yawl:Handler__workItem ;
+    yawl:hasField yawl:Handler__observerURI ;
+    yawl:hasField yawl:Handler__caseID ;
+    yawl:hasField yawl:Handler__command ;
+    yawl:hasField yawl:Handler__preCheck ;
+    yawl:hasField yawl:Handler__dataDoc ;
+    yawl:hasField yawl:Handler__dataStr ;
+    yawl:hasField yawl:Handler__specID ;
+    yawl:hasField yawl:Handler__taskList ;
+    .
+
+
+# Method: Handler.run
+yawl:Handler_run_1 a yawl:Method ;
+    rdfs:label "run" ;
+    yawl:returnType "void" ;
+    yawl:signature "void run()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:Handler__workItem a yawl:Field ;
+    rdfs:label "_workItem" .
+
+yawl:Handler__observerURI a yawl:Field ;
+    rdfs:label "_observerURI" .
+
+yawl:Handler__caseID a yawl:Field ;
+    rdfs:label "_caseID" .
+
+yawl:Handler__command a yawl:Field ;
+    rdfs:label "_command" .
+
+yawl:Handler__preCheck a yawl:Field ;
+    rdfs:label "_preCheck" .
+
+yawl:Handler__dataDoc a yawl:Field ;
+    rdfs:label "_dataDoc" .
+
+yawl:Handler__dataStr a yawl:Field ;
+    rdfs:label "_dataStr" .
+
+yawl:Handler__specID a yawl:Field ;
+    rdfs:label "_specID" .
+
+yawl:Handler__taskList a yawl:Field ;
+    rdfs:label "_taskList" .
+
+
+

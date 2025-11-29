@@ -1,0 +1,60 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.resourcing.calendar.utilisation
+yawl:org_yawlfoundation_yawl_resourcing_calendar_utilisation a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.calendar.utilisation" .
+# Class: org.yawlfoundation.yawl.resourcing.calendar.utilisation.UtilisationReconstructor
+yawl:UtilisationReconstructor a yawl:Class ;
+    rdfs:label "UtilisationReconstructor" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_calendar_utilisation ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/calendar/utilisation/UtilisationReconstructor.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 2/11/2010""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:UtilisationReconstructor_reconstructPlan_1 ;
+    yawl:hasMethod yawl:UtilisationReconstructor_reconstructActivity_2 ;
+    yawl:hasMethod yawl:UtilisationReconstructor_reconstructReservation_3 ;
+    yawl:hasMethod yawl:UtilisationReconstructor_reconstructResource_4 ;
+    .
+
+
+# Method: UtilisationReconstructor.reconstructPlan
+yawl:UtilisationReconstructor_reconstructPlan_1 a yawl:Method ;
+    rdfs:label "reconstructPlan" ;
+    yawl:returnType "UtilisationPlan" ;
+    yawl:signature "UtilisationPlan reconstructPlan(CalendarLogEntry logEntry, CalendarEntry calEntry)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationReconstructor.reconstructActivity
+yawl:UtilisationReconstructor_reconstructActivity_2 a yawl:Method ;
+    rdfs:label "reconstructActivity" ;
+    yawl:returnType "Activity" ;
+    yawl:signature "Activity reconstructActivity(CalendarEntry calEntry, String name, String phase)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationReconstructor.reconstructReservation
+yawl:UtilisationReconstructor_reconstructReservation_3 a yawl:Method ;
+    rdfs:label "reconstructReservation" ;
+    yawl:returnType "Reservation" ;
+    yawl:signature "Reservation reconstructReservation(CalendarEntry calEntry)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationReconstructor.reconstructResource
+yawl:UtilisationReconstructor_reconstructResource_4 a yawl:Method ;
+    rdfs:label "reconstructResource" ;
+    yawl:returnType "UtilisationResource" ;
+    yawl:signature "UtilisationResource reconstructResource(CalendarEntry calEntry)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

@@ -1,0 +1,82 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.models.procletModel.PortConnection
+yawl:PortConnection a yawl:Class ;
+    rdfs:label "PortConnection" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_models_procletModel ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/models/procletModel/PortConnection.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:PortConnection_getIPort_1 ;
+    yawl:hasMethod yawl:PortConnection_getOPort_2 ;
+    yawl:hasMethod yawl:PortConnection_getChannel_3 ;
+    yawl:hasMethod yawl:PortConnection_toString_4 ;
+    yawl:hasMethod yawl:PortConnection_newStoredPortConnection_5 ;
+    yawl:hasField yawl:PortConnection_iPort ;
+    yawl:hasField yawl:PortConnection_oPort ;
+    yawl:hasField yawl:PortConnection_channel ;
+    .
+
+
+# Method: PortConnection.getIPort
+yawl:PortConnection_getIPort_1 a yawl:Method ;
+    rdfs:label "getIPort" ;
+    yawl:returnType "ProcletPort" ;
+    yawl:signature "ProcletPort getIPort()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PortConnection.getOPort
+yawl:PortConnection_getOPort_2 a yawl:Method ;
+    rdfs:label "getOPort" ;
+    yawl:returnType "ProcletPort" ;
+    yawl:signature "ProcletPort getOPort()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PortConnection.getChannel
+yawl:PortConnection_getChannel_3 a yawl:Method ;
+    rdfs:label "getChannel" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getChannel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PortConnection.toString
+yawl:PortConnection_toString_4 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PortConnection.newStoredPortConnection
+yawl:PortConnection_newStoredPortConnection_5 a yawl:Method ;
+    rdfs:label "newStoredPortConnection" ;
+    yawl:returnType "StoredPortConnection" ;
+    yawl:signature "StoredPortConnection newStoredPortConnection()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:PortConnection_iPort a yawl:Field ;
+    rdfs:label "iPort" .
+
+yawl:PortConnection_oPort a yawl:Field ;
+    rdfs:label "oPort" .
+
+yawl:PortConnection_channel a yawl:Field ;
+    rdfs:label "channel" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_schema_internal a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.schema.internal" .
+
+

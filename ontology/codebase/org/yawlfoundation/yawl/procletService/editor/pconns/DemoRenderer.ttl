@@ -1,0 +1,30 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.pconns.DemoRenderer
+yawl:DemoRenderer a yawl:Class ;
+    rdfs:label "DemoRenderer" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor_pconns ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/pconns/VertexDemo.java"^^xsd:string ;
+    rdfs:comment """a special renderer that can turn outlines on and off in this demo. You won't need this for a real application. Use BasicVertexRenderer instead @author Tom Nelson""" ;
+    yawl:extends yawl:BasicVertexRenderer ;
+    yawl:hasMethod yawl:DemoRenderer_paintIconForVertex_1 ;
+    .
+
+
+# Method: DemoRenderer.paintIconForVertex
+yawl:DemoRenderer_paintIconForVertex_1 a yawl:Method ;
+    rdfs:label "paintIconForVertex" ;
+    yawl:returnType "void" ;
+    yawl:signature "void paintIconForVertex(RenderContext rc, V v, Layout layout)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

@@ -1,0 +1,270 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.elements.YTimerParameters
+yawl:YTimerParameters a yawl:Class ;
+    rdfs:label "YTimerParameters" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_elements ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/elements/YTimerParameters.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 30/07/12""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YTimerParameters_set_1 ;
+    yawl:hasMethod yawl:YTimerParameters_set_2 ;
+    yawl:hasMethod yawl:YTimerParameters_set_3 ;
+    yawl:hasMethod yawl:YTimerParameters_set_4 ;
+    yawl:hasMethod yawl:YTimerParameters_triggerMatchesStatus_5 ;
+    yawl:hasMethod yawl:YTimerParameters_getVariableName_6 ;
+    yawl:hasMethod yawl:YTimerParameters_setVariableName_7 ;
+    yawl:hasMethod yawl:YTimerParameters_getDate_8 ;
+    yawl:hasMethod yawl:YTimerParameters_setDate_9 ;
+    yawl:hasMethod yawl:YTimerParameters_getWorkDayDuration_10 ;
+    yawl:hasMethod yawl:YTimerParameters_getDuration_11 ;
+    yawl:hasMethod yawl:YTimerParameters_setDuration_12 ;
+    yawl:hasMethod yawl:YTimerParameters_getTicks_13 ;
+    yawl:hasMethod yawl:YTimerParameters_setTicks_14 ;
+    yawl:hasMethod yawl:YTimerParameters_getTimeUnit_15 ;
+    yawl:hasMethod yawl:YTimerParameters_setTimeUnit_16 ;
+    yawl:hasMethod yawl:YTimerParameters_getTrigger_17 ;
+    yawl:hasMethod yawl:YTimerParameters_setTrigger_18 ;
+    yawl:hasMethod yawl:YTimerParameters_isWorkDaysOnly_19 ;
+    yawl:hasMethod yawl:YTimerParameters_setWorkDaysOnly_20 ;
+    yawl:hasMethod yawl:YTimerParameters_getTimerType_21 ;
+    yawl:hasMethod yawl:YTimerParameters_parseYTimerType_22 ;
+    yawl:hasMethod yawl:YTimerParameters_toXML_23 ;
+    yawl:hasMethod yawl:YTimerParameters_toString_24 ;
+    yawl:hasField yawl:YTimerParameters__variableName ;
+    yawl:hasField yawl:YTimerParameters__expiryTime ;
+    yawl:hasField yawl:YTimerParameters__duration ;
+    yawl:hasField yawl:YTimerParameters__ticks ;
+    yawl:hasField yawl:YTimerParameters__timeUnit ;
+    yawl:hasField yawl:YTimerParameters__workDaysOnly ;
+    yawl:hasField yawl:YTimerParameters__trigger ;
+    yawl:hasField yawl:YTimerParameters__timerType ;
+    .
+
+
+# Method: YTimerParameters.set
+yawl:YTimerParameters_set_1 a yawl:Method ;
+    rdfs:label "set" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set(String netParamName)" ;
+    rdfs:comment """sets @param netParamName""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerParameters.set
+yawl:YTimerParameters_set_2 a yawl:Method ;
+    rdfs:label "set" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set(YWorkItemTimer trigger, Date expiryTime)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerParameters.set
+yawl:YTimerParameters_set_3 a yawl:Method ;
+    rdfs:label "set" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set(YWorkItemTimer trigger, Duration duration)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerParameters.set
+yawl:YTimerParameters_set_4 a yawl:Method ;
+    rdfs:label "set" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set(YWorkItemTimer trigger, long ticks, YTimer timeUnit)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerParameters.triggerMatchesStatus
+yawl:YTimerParameters_triggerMatchesStatus_5 a yawl:Method ;
+    rdfs:label "triggerMatchesStatus" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean triggerMatchesStatus(YWorkItemStatus status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerParameters.getVariableName
+yawl:YTimerParameters_getVariableName_6 a yawl:Method ;
+    rdfs:label "getVariableName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getVariableName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerParameters.setVariableName
+yawl:YTimerParameters_setVariableName_7 a yawl:Method ;
+    rdfs:label "setVariableName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setVariableName(String varName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerParameters.getDate
+yawl:YTimerParameters_getDate_8 a yawl:Method ;
+    rdfs:label "getDate" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date getDate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerParameters.setDate
+yawl:YTimerParameters_setDate_9 a yawl:Method ;
+    rdfs:label "setDate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDate(Date date)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerParameters.getWorkDayDuration
+yawl:YTimerParameters_getWorkDayDuration_10 a yawl:Method ;
+    rdfs:label "getWorkDayDuration" ;
+    yawl:returnType "Duration" ;
+    yawl:signature "Duration getWorkDayDuration()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerParameters.getDuration
+yawl:YTimerParameters_getDuration_11 a yawl:Method ;
+    rdfs:label "getDuration" ;
+    yawl:returnType "Duration" ;
+    yawl:signature "Duration getDuration()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerParameters.setDuration
+yawl:YTimerParameters_setDuration_12 a yawl:Method ;
+    rdfs:label "setDuration" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDuration(Duration duration)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerParameters.getTicks
+yawl:YTimerParameters_getTicks_13 a yawl:Method ;
+    rdfs:label "getTicks" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getTicks()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerParameters.setTicks
+yawl:YTimerParameters_setTicks_14 a yawl:Method ;
+    rdfs:label "setTicks" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTicks(long ticks)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerParameters.getTimeUnit
+yawl:YTimerParameters_getTimeUnit_15 a yawl:Method ;
+    rdfs:label "getTimeUnit" ;
+    yawl:returnType "YTimer" ;
+    yawl:signature "YTimer getTimeUnit()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerParameters.setTimeUnit
+yawl:YTimerParameters_setTimeUnit_16 a yawl:Method ;
+    rdfs:label "setTimeUnit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTimeUnit(YTimer timeUnit)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerParameters.getTrigger
+yawl:YTimerParameters_getTrigger_17 a yawl:Method ;
+    rdfs:label "getTrigger" ;
+    yawl:returnType "YWorkItemTimer" ;
+    yawl:signature "YWorkItemTimer getTrigger()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerParameters.setTrigger
+yawl:YTimerParameters_setTrigger_18 a yawl:Method ;
+    rdfs:label "setTrigger" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTrigger(YWorkItemTimer trigger)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerParameters.isWorkDaysOnly
+yawl:YTimerParameters_isWorkDaysOnly_19 a yawl:Method ;
+    rdfs:label "isWorkDaysOnly" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isWorkDaysOnly()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerParameters.setWorkDaysOnly
+yawl:YTimerParameters_setWorkDaysOnly_20 a yawl:Method ;
+    rdfs:label "setWorkDaysOnly" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setWorkDaysOnly(boolean workDaysOnly)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerParameters.getTimerType
+yawl:YTimerParameters_getTimerType_21 a yawl:Method ;
+    rdfs:label "getTimerType" ;
+    yawl:returnType "TimerType" ;
+    yawl:signature "TimerType getTimerType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerParameters.parseYTimerType
+yawl:YTimerParameters_parseYTimerType_22 a yawl:Method ;
+    rdfs:label "parseYTimerType" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean parseYTimerType(Element eTimerTypeValue)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerParameters.toXML
+yawl:YTimerParameters_toXML_23 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerParameters.toString
+yawl:YTimerParameters_toString_24 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YTimerParameters__variableName a yawl:Field ;
+    rdfs:label "_variableName" .
+
+yawl:YTimerParameters__expiryTime a yawl:Field ;
+    rdfs:label "_expiryTime" .
+
+yawl:YTimerParameters__duration a yawl:Field ;
+    rdfs:label "_duration" .
+
+yawl:YTimerParameters__ticks a yawl:Field ;
+    rdfs:label "_ticks" .
+
+yawl:YTimerParameters__timeUnit a yawl:Field ;
+    rdfs:label "_timeUnit" .
+
+yawl:YTimerParameters__workDaysOnly a yawl:Field ;
+    rdfs:label "_workDaysOnly" .
+
+yawl:YTimerParameters__trigger a yawl:Field ;
+    rdfs:label "_trigger" .
+
+yawl:YTimerParameters__timerType a yawl:Field ;
+    rdfs:label "_timerType" .
+
+
+

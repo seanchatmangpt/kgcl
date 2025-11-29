@@ -1,0 +1,210 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.ObserverGatewayController
+yawl:ObserverGatewayController a yawl:Class ;
+    rdfs:label "ObserverGatewayController" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/ObserverGatewayController.java"^^xsd:string ;
+    rdfs:comment """Class which encapsulates the management and processing of InterfaceB event observers. @author Andrew Hastie @author Michael Adams (for 2.2) @date 23-Aug-2005""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ObserverGatewayController_addGateway_1 ;
+    yawl:hasMethod yawl:ObserverGatewayController_removeGateway_2 ;
+    yawl:hasMethod yawl:ObserverGatewayController_isEmpty_3 ;
+    yawl:hasMethod yawl:ObserverGatewayController_announce_4 ;
+    yawl:hasMethod yawl:ObserverGatewayController_announce_5 ;
+    yawl:hasMethod yawl:ObserverGatewayController_notifyCaseCompletion_6 ;
+    yawl:hasMethod yawl:ObserverGatewayController_notifyCaseStarting_7 ;
+    yawl:hasMethod yawl:ObserverGatewayController_notifyCaseCompletion_8 ;
+    yawl:hasMethod yawl:ObserverGatewayController_notifyWorkItemStatusChange_9 ;
+    yawl:hasMethod yawl:ObserverGatewayController_notifyCaseSuspending_10 ;
+    yawl:hasMethod yawl:ObserverGatewayController_notifyCaseSuspended_11 ;
+    yawl:hasMethod yawl:ObserverGatewayController_notifyCaseResumption_12 ;
+    yawl:hasMethod yawl:ObserverGatewayController_notifyEngineInitialised_13 ;
+    yawl:hasMethod yawl:ObserverGatewayController_notifyCaseCancellation_14 ;
+    yawl:hasMethod yawl:ObserverGatewayController_notifyDeadlock_15 ;
+    yawl:hasMethod yawl:ObserverGatewayController_shutdownObserverGateways_16 ;
+    yawl:hasMethod yawl:ObserverGatewayController_getGatewaysForScheme_17 ;
+    yawl:hasMethod yawl:ObserverGatewayController_getServicesForScheme_18 ;
+    yawl:hasField yawl:ObserverGatewayController__gateways ;
+    yawl:hasField yawl:ObserverGatewayController__executor ;
+    yawl:hasField yawl:ObserverGatewayController_THREADPOOL_SIZE ;
+    .
+
+
+# Method: ObserverGatewayController.addGateway
+yawl:ObserverGatewayController_addGateway_1 a yawl:Method ;
+    rdfs:label "addGateway" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addGateway(ObserverGateway gateway)" ;
+    rdfs:comment """Add an observerGateway, which will receive event callbacks from the engine. @param gateway the gateway to add @throws YAWLException if the observerGateway has a null scheme value.""" ;
+    .
+
+# Method: ObserverGatewayController.removeGateway
+yawl:ObserverGatewayController_removeGateway_2 a yawl:Method ;
+    rdfs:label "removeGateway" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeGateway(ObserverGateway gateway)" ;
+    rdfs:comment """Removes a previously registered observer gateway. @param gateway the gateway to remove @return the boolean result of the removal.""" ;
+    .
+
+# Method: ObserverGatewayController.isEmpty
+yawl:ObserverGatewayController_isEmpty_3 a yawl:Method ;
+    rdfs:label "isEmpty" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEmpty()" ;
+    rdfs:comment """Checks if there are any currently registered gateways. @return true if there are no registered gateways""" ;
+    .
+
+# Method: ObserverGatewayController.announce
+yawl:ObserverGatewayController_announce_4 a yawl:Method ;
+    rdfs:label "announce" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announce(Set announcements)" ;
+    rdfs:comment """Announce a set of work item notifications to the relevant observers @param announcements the Set of announcements""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ObserverGatewayController.announce
+yawl:ObserverGatewayController_announce_5 a yawl:Method ;
+    rdfs:label "announce" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announce(YAnnouncement announcement)" ;
+    rdfs:comment """Announce a work item notification to the relevant observers @param announcement the announcement""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ObserverGatewayController.notifyCaseCompletion
+yawl:ObserverGatewayController_notifyCaseCompletion_6 a yawl:Method ;
+    rdfs:label "notifyCaseCompletion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void notifyCaseCompletion(YAWLServiceReference service, YIdentifier caseID, Document caseData)" ;
+    rdfs:comment """Notify the case completion to a particular service that has registered as a completion observer for this case when the case was launched. @param service the service to notify @param caseID the completing case identifier @param caseData the final case data document""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ObserverGatewayController.notifyCaseStarting
+yawl:ObserverGatewayController_notifyCaseStarting_7 a yawl:Method ;
+    rdfs:label "notifyCaseStarting" ;
+    yawl:returnType "void" ;
+    yawl:signature "void notifyCaseStarting(Set services, YSpecificationID specID, YIdentifier caseID, String launchingService, boolean delayed)" ;
+    rdfs:comment """Notify a case completion to all registered gateways. @param services a set of the current engine-registered services @param specID the specification id for thestarted case @param caseID the completing case identifier @param launchingService the service that launched the case @param delayed true if this is a delayed case launch, false if immediate""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ObserverGatewayController.notifyCaseCompletion
+yawl:ObserverGatewayController_notifyCaseCompletion_8 a yawl:Method ;
+    rdfs:label "notifyCaseCompletion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void notifyCaseCompletion(Set services, YIdentifier caseID, Document caseData)" ;
+    rdfs:comment """Notify a case completion to all registered gateways. @param services a set of the current engine-registered services @param caseID the completing case identifier @param caseData the final case data document""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ObserverGatewayController.notifyWorkItemStatusChange
+yawl:ObserverGatewayController_notifyWorkItemStatusChange_9 a yawl:Method ;
+    rdfs:label "notifyWorkItemStatusChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void notifyWorkItemStatusChange(Set services, YWorkItem workItem, YWorkItemStatus oldStatus, YWorkItemStatus newStatus)" ;
+    rdfs:comment """Notify of a change of status for a work item to all registered gateways. @param services a set of the current engine-registered services @param workItem the work item that has changed status @param oldStatus previous status @param newStatus new status""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ObserverGatewayController.notifyCaseSuspending
+yawl:ObserverGatewayController_notifyCaseSuspending_10 a yawl:Method ;
+    rdfs:label "notifyCaseSuspending" ;
+    yawl:returnType "void" ;
+    yawl:signature "void notifyCaseSuspending(YIdentifier caseID, Set services)" ;
+    rdfs:comment """Notify the case is suspending @param caseID the suspending case identifier @param services a set of the current engine-registered services""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ObserverGatewayController.notifyCaseSuspended
+yawl:ObserverGatewayController_notifyCaseSuspended_11 a yawl:Method ;
+    rdfs:label "notifyCaseSuspended" ;
+    yawl:returnType "void" ;
+    yawl:signature "void notifyCaseSuspended(YIdentifier caseID, Set services)" ;
+    rdfs:comment """Notify the case is suspended @param caseID the suspended case identifier @param services a set of the current engine-registered services""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ObserverGatewayController.notifyCaseResumption
+yawl:ObserverGatewayController_notifyCaseResumption_12 a yawl:Method ;
+    rdfs:label "notifyCaseResumption" ;
+    yawl:returnType "void" ;
+    yawl:signature "void notifyCaseResumption(YIdentifier caseID, Set services)" ;
+    rdfs:comment """Notify the case is resumption @param caseID the resuming case identifier @param services a set of the current engine-registered services""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ObserverGatewayController.notifyEngineInitialised
+yawl:ObserverGatewayController_notifyEngineInitialised_13 a yawl:Method ;
+    rdfs:label "notifyEngineInitialised" ;
+    yawl:returnType "void" ;
+    yawl:signature "void notifyEngineInitialised(Set services, int maxWaitSeconds)" ;
+    rdfs:comment """Notify the engine has completed initialisation and is running @param services all services registered with the engine @param maxWaitSeconds the maximum seconds to wait for services to be contactable""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ObserverGatewayController.notifyCaseCancellation
+yawl:ObserverGatewayController_notifyCaseCancellation_14 a yawl:Method ;
+    rdfs:label "notifyCaseCancellation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void notifyCaseCancellation(Set services, YIdentifier id)" ;
+    rdfs:comment """Notify environment that the engine has cancelled a case @param services - all services registered with the engine @param id - the case identifier""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ObserverGatewayController.notifyDeadlock
+yawl:ObserverGatewayController_notifyDeadlock_15 a yawl:Method ;
+    rdfs:label "notifyDeadlock" ;
+    yawl:returnType "void" ;
+    yawl:signature "void notifyDeadlock(Set services, YIdentifier id, Set tasks)" ;
+    rdfs:comment """Notify environment that a case has deadlocked @param services - all services registered with the engine @param id - the case identifier @param tasks - the set of deadlocked tasks""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ObserverGatewayController.shutdownObserverGateways
+yawl:ObserverGatewayController_shutdownObserverGateways_16 a yawl:Method ;
+    rdfs:label "shutdownObserverGateways" ;
+    yawl:returnType "void" ;
+    yawl:signature "void shutdownObserverGateways()" ;
+    rdfs:comment """Invoke finalisation processing on all observer gateways and the ExecutorService used to execute calls to them (called when the Engine servlet is being destroyed). Do in same thread to avoid issues where webapp is closed before gateways can complete their termination processing.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ObserverGatewayController.getGatewaysForScheme
+yawl:ObserverGatewayController_getGatewaysForScheme_17 a yawl:Method ;
+    rdfs:label "getGatewaysForScheme" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getGatewaysForScheme(String scheme)" ;
+    rdfs:comment """Get the set of gateways which satisfy the requested scheme. @param scheme The scheme or protocol the gateway needs to support. @return Gateways of the scheme""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ObserverGatewayController.getServicesForScheme
+yawl:ObserverGatewayController_getServicesForScheme_18 a yawl:Method ;
+    rdfs:label "getServicesForScheme" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getServicesForScheme(Set services, String scheme)" ;
+    rdfs:comment """Gets the set of all services of a particular scheme @param services all services currently registered with the engine @param scheme the scheme supported by services @return the set of services that are endpoints for the scheme""" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:ObserverGatewayController__gateways a yawl:Field ;
+    rdfs:label "_gateways" .
+
+yawl:ObserverGatewayController__executor a yawl:Field ;
+    rdfs:label "_executor" .
+
+yawl:ObserverGatewayController_THREADPOOL_SIZE a yawl:Field ;
+    rdfs:label "THREADPOOL_SIZE" .
+
+
+

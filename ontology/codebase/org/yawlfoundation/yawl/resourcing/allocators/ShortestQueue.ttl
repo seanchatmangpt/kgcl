@@ -1,0 +1,41 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.allocators.ShortestQueue
+yawl:ShortestQueue a yawl:Class ;
+    rdfs:label "ShortestQueue" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_allocators ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/allocators/ShortestQueue.java"^^xsd:string ;
+    rdfs:comment """Performs allocation based on work queue length. This is the default allocator. Create Date: 23/08/2007. Last Date: 12/11/2007 @author Michael Adams (BPM Group, QUT Australia) @version 2.0""" ;
+    yawl:extends yawl:AbstractAllocator ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ShortestQueue_performAllocation_1 ;
+    yawl:hasMethod yawl:ShortestQueue_getParamKeys_2 ;
+    .
+
+
+# Method: ShortestQueue.performAllocation
+yawl:ShortestQueue_performAllocation_1 a yawl:Method ;
+    rdfs:label "performAllocation" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant performAllocation(Set resSet, WorkItemRecord wir)" ;
+    rdfs:comment """selects the Participant with the least number of workitems in the 'allocated' workqueue, or the first participant with an empty queue  @param resSet the set of Participants to compare @param wir the work item to allocate @return the Participant with the shortest queue""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ShortestQueue.getParamKeys
+yawl:ShortestQueue_getParamKeys_2 a yawl:Method ;
+    rdfs:label "getParamKeys" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getParamKeys()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

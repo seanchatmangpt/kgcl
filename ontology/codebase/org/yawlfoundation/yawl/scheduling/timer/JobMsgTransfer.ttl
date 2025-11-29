@@ -1,0 +1,51 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.scheduling.timer
+yawl:org_yawlfoundation_yawl_scheduling_timer a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.scheduling.timer" .
+# Class: org.yawlfoundation.yawl.scheduling.timer.JobMsgTransfer
+yawl:JobMsgTransfer a yawl:Class ;
+    rdfs:label "JobMsgTransfer" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_scheduling_timer ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/scheduling/timer/JobMsgTransfer.java"^^xsd:string ;
+    rdfs:comment """periodische OP-Plan-Aktualisierung: min�tliche �berpr�fung, die ergibt, dass aktuelle utilisierung in andere reservierung hineinl�uft @author tbe @version $Id$""" ;
+    yawl:implements yawl:Runnable ;
+    yawl:implements yawl:Constants ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:JobMsgTransfer_run_1 ;
+    yawl:hasField yawl:JobMsgTransfer_name ;
+    yawl:hasField yawl:JobMsgTransfer_msgTransfer ;
+    yawl:hasField yawl:JobMsgTransfer_caseId ;
+    yawl:hasField yawl:JobMsgTransfer_startTime ;
+    .
+
+
+# Method: JobMsgTransfer.run
+yawl:JobMsgTransfer_run_1 a yawl:Method ;
+    rdfs:label "run" ;
+    yawl:returnType "void" ;
+    yawl:signature "void run()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:JobMsgTransfer_name a yawl:Field ;
+    rdfs:label "name" .
+
+yawl:JobMsgTransfer_msgTransfer a yawl:Field ;
+    rdfs:label "msgTransfer" .
+
+yawl:JobMsgTransfer_caseId a yawl:Field ;
+    rdfs:label "caseId" .
+
+yawl:JobMsgTransfer_startTime a yawl:Field ;
+    rdfs:label "startTime" .
+
+
+

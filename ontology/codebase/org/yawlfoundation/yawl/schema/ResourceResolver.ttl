@@ -1,0 +1,67 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.schema.ResourceResolver
+yawl:ResourceResolver a yawl:Class ;
+    rdfs:label "ResourceResolver" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_schema ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/schema/ResourceResolver.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 8/12/14""" ;
+    yawl:implements yawl:LSResourceResolver ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ResourceResolver_getInstance_1 ;
+    yawl:hasMethod yawl:ResourceResolver_resolveResource_2 ;
+    yawl:hasMethod yawl:ResourceResolver_streamToString_3 ;
+    yawl:hasMethod yawl:ResourceResolver_stringToStream_4 ;
+    yawl:hasField yawl:ResourceResolver_cache ;
+    yawl:hasField yawl:ResourceResolver_INSTANCE ;
+    .
+
+
+# Method: ResourceResolver.getInstance
+yawl:ResourceResolver_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "ResourceResolver" ;
+    yawl:signature "ResourceResolver getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ResourceResolver.resolveResource
+yawl:ResourceResolver_resolveResource_2 a yawl:Method ;
+    rdfs:label "resolveResource" ;
+    yawl:returnType "LSInput" ;
+    yawl:signature "LSInput resolveResource(String type, String namespaceURI, String publicId, String systemId, String baseURI)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceResolver.streamToString
+yawl:ResourceResolver_streamToString_3 a yawl:Method ;
+    rdfs:label "streamToString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String streamToString(InputStream is)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceResolver.stringToStream
+yawl:ResourceResolver_stringToStream_4 a yawl:Method ;
+    rdfs:label "stringToStream" ;
+    yawl:returnType "InputStream" ;
+    yawl:signature "InputStream stringToStream(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:ResourceResolver_cache a yawl:Field ;
+    rdfs:label "cache" .
+
+yawl:ResourceResolver_INSTANCE a yawl:Field ;
+    rdfs:label "INSTANCE" .
+
+
+

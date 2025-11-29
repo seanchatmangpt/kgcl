@@ -1,0 +1,147 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.models.procletModel.ProcletPort
+yawl:ProcletPort a yawl:Class ;
+    rdfs:label "ProcletPort" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_models_procletModel ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/models/procletModel/ProcletPort.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ProcletPort_getPortID_1 ;
+    yawl:hasMethod yawl:ProcletPort_setPortID_2 ;
+    yawl:hasMethod yawl:ProcletPort_getDirection_3 ;
+    yawl:hasMethod yawl:ProcletPort_setDirection_4 ;
+    yawl:hasMethod yawl:ProcletPort_getCardinality_5 ;
+    yawl:hasMethod yawl:ProcletPort_setCardinality_6 ;
+    yawl:hasMethod yawl:ProcletPort_getMultiplicity_7 ;
+    yawl:hasMethod yawl:ProcletPort_setMultiplicity_8 ;
+    yawl:hasMethod yawl:ProcletPort_getDirectionFromString_9 ;
+    yawl:hasMethod yawl:ProcletPort_getShortSignature_10 ;
+    yawl:hasMethod yawl:ProcletPort_getSignatureFromString_11 ;
+    yawl:hasMethod yawl:ProcletPort_toString_12 ;
+    yawl:hasField yawl:ProcletPort_portID ;
+    yawl:hasField yawl:ProcletPort_direction ;
+    yawl:hasField yawl:ProcletPort_cardinality ;
+    yawl:hasField yawl:ProcletPort_multiplicity ;
+    .
+
+
+# Method: ProcletPort.getPortID
+yawl:ProcletPort_getPortID_1 a yawl:Method ;
+    rdfs:label "getPortID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPortID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletPort.setPortID
+yawl:ProcletPort_setPortID_2 a yawl:Method ;
+    rdfs:label "setPortID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPortID(String portID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletPort.getDirection
+yawl:ProcletPort_getDirection_3 a yawl:Method ;
+    rdfs:label "getDirection" ;
+    yawl:returnType "Direction" ;
+    yawl:signature "Direction getDirection()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletPort.setDirection
+yawl:ProcletPort_setDirection_4 a yawl:Method ;
+    rdfs:label "setDirection" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDirection(Direction dir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletPort.getCardinality
+yawl:ProcletPort_getCardinality_5 a yawl:Method ;
+    rdfs:label "getCardinality" ;
+    yawl:returnType "Signature" ;
+    yawl:signature "Signature getCardinality()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletPort.setCardinality
+yawl:ProcletPort_setCardinality_6 a yawl:Method ;
+    rdfs:label "setCardinality" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCardinality(Signature card)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletPort.getMultiplicity
+yawl:ProcletPort_getMultiplicity_7 a yawl:Method ;
+    rdfs:label "getMultiplicity" ;
+    yawl:returnType "Signature" ;
+    yawl:signature "Signature getMultiplicity()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletPort.setMultiplicity
+yawl:ProcletPort_setMultiplicity_8 a yawl:Method ;
+    rdfs:label "setMultiplicity" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMultiplicity(Signature mult)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletPort.getDirectionFromString
+yawl:ProcletPort_getDirectionFromString_9 a yawl:Method ;
+    rdfs:label "getDirectionFromString" ;
+    yawl:returnType "Direction" ;
+    yawl:signature "Direction getDirectionFromString(String direction)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ProcletPort.getShortSignature
+yawl:ProcletPort_getShortSignature_10 a yawl:Method ;
+    rdfs:label "getShortSignature" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getShortSignature(Signature sign)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ProcletPort.getSignatureFromString
+yawl:ProcletPort_getSignatureFromString_11 a yawl:Method ;
+    rdfs:label "getSignatureFromString" ;
+    yawl:returnType "Signature" ;
+    yawl:signature "Signature getSignatureFromString(String sign)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ProcletPort.toString
+yawl:ProcletPort_toString_12 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:ProcletPort_portID a yawl:Field ;
+    rdfs:label "portID" .
+
+yawl:ProcletPort_direction a yawl:Field ;
+    rdfs:label "direction" .
+
+yawl:ProcletPort_cardinality a yawl:Field ;
+    rdfs:label "cardinality" .
+
+yawl:ProcletPort_multiplicity a yawl:Field ;
+    rdfs:label "multiplicity" .
+
+
+

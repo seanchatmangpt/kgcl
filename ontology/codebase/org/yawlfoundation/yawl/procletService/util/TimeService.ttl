@@ -1,0 +1,90 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.util.TimeService
+yawl:TimeService a yawl:Class ;
+    rdfs:label "TimeService" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/util/TimeService.java"^^xsd:string ;
+    yawl:extends yawl:InterfaceBWebsideController ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:TimeService_handleEnabledWorkItemEvent_1 ;
+    yawl:hasMethod yawl:TimeService_describeRequiredParams_2 ;
+    yawl:hasMethod yawl:TimeService_handleCancelledWorkItemEvent_3 ;
+    yawl:hasMethod yawl:TimeService_processRequestToCancel_4 ;
+    yawl:hasMethod yawl:TimeService_setRemoteAuthenticationDetails_5 ;
+    yawl:hasMethod yawl:TimeService_finish_6 ;
+    yawl:hasMethod yawl:TimeService_main_7 ;
+    yawl:hasField yawl:TimeService__sessionHandle ;
+    .
+
+
+# Method: TimeService.handleEnabledWorkItemEvent
+yawl:TimeService_handleEnabledWorkItemEvent_1 a yawl:Method ;
+    rdfs:label "handleEnabledWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleEnabledWorkItemEvent(WorkItemRecord workItemRecord)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TimeService.describeRequiredParams
+yawl:TimeService_describeRequiredParams_2 a yawl:Method ;
+    rdfs:label "describeRequiredParams" ;
+    yawl:returnType "YParameter" ;
+    yawl:signature "YParameter describeRequiredParams()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TimeService.handleCancelledWorkItemEvent
+yawl:TimeService_handleCancelledWorkItemEvent_3 a yawl:Method ;
+    rdfs:label "handleCancelledWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCancelledWorkItemEvent(WorkItemRecord workItemRecord)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TimeService.processRequestToCancel
+yawl:TimeService_processRequestToCancel_4 a yawl:Method ;
+    rdfs:label "processRequestToCancel" ;
+    yawl:returnType "String" ;
+    yawl:signature "String processRequestToCancel(WorkItemRecord workItemRecord)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TimeService.setRemoteAuthenticationDetails
+yawl:TimeService_setRemoteAuthenticationDetails_5 a yawl:Method ;
+    rdfs:label "setRemoteAuthenticationDetails" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRemoteAuthenticationDetails(String userName, String password, String httpProxyHost, String proxyPort)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TimeService.finish
+yawl:TimeService_finish_6 a yawl:Method ;
+    rdfs:label "finish" ;
+    yawl:returnType "void" ;
+    yawl:signature "void finish(WorkItemRecord itemRecord, String _sessionHandle)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TimeService.main
+yawl:TimeService_main_7 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String args)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:TimeService__sessionHandle a yawl:Field ;
+    rdfs:label "_sessionHandle" .
+
+
+

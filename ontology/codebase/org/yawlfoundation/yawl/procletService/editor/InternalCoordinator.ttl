@@ -1,0 +1,64 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.InternalCoordinator
+yawl:InternalCoordinator a yawl:Class ;
+    rdfs:label "InternalCoordinator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/InternalCoordinator.java"^^xsd:string ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:InternalCoordinator_getInternalFrame_1 ;
+    yawl:hasMethod yawl:InternalCoordinator_start_2 ;
+    yawl:hasMethod yawl:InternalCoordinator_end_3 ;
+    yawl:hasMethod yawl:InternalCoordinator_getControl_4 ;
+    yawl:hasField yawl:InternalCoordinator_mainFrame ;
+    .
+
+
+# Method: InternalCoordinator.getInternalFrame
+yawl:InternalCoordinator_getInternalFrame_1 a yawl:Method ;
+    rdfs:label "getInternalFrame" ;
+    yawl:returnType "JInternalFrame" ;
+    yawl:signature "JInternalFrame getInternalFrame()" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InternalCoordinator.start
+yawl:InternalCoordinator_start_2 a yawl:Method ;
+    rdfs:label "start" ;
+    yawl:returnType "void" ;
+    yawl:signature "void start()" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InternalCoordinator.end
+yawl:InternalCoordinator_end_3 a yawl:Method ;
+    rdfs:label "end" ;
+    yawl:returnType "void" ;
+    yawl:signature "void end()" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InternalCoordinator.getControl
+yawl:InternalCoordinator_getControl_4 a yawl:Method ;
+    rdfs:label "getControl" ;
+    yawl:returnType "Control" ;
+    yawl:signature "Control getControl()" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:InternalCoordinator_mainFrame a yawl:Field ;
+    rdfs:label "mainFrame" .
+
+
+

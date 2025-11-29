@@ -1,0 +1,22 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.exceptions.YEngineStateException
+yawl:YEngineStateException a yawl:Class ;
+    rdfs:label "YEngineStateException" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_exceptions ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/exceptions/YEngineStateException.java"^^xsd:string ;
+    rdfs:comment """Exception thrown when the engine state is invalid in relation to the request being actioned.""" ;
+    yawl:extends yawl:YAWLException ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+
+

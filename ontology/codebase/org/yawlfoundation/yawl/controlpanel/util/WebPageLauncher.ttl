@@ -1,0 +1,48 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.util.WebPageLauncher
+yawl:WebPageLauncher a yawl:Class ;
+    rdfs:label "WebPageLauncher" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/util/WebPageLauncher.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 13/10/2015""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:WebPageLauncher_createLink_1 ;
+    yawl:hasMethod yawl:WebPageLauncher_openWebPage_2 ;
+    yawl:hasMethod yawl:WebPageLauncher_showAsLink_3 ;
+    .
+
+
+# Method: WebPageLauncher.createLink
+yawl:WebPageLauncher_createLink_1 a yawl:Method ;
+    rdfs:label "createLink" ;
+    yawl:returnType "JButton" ;
+    yawl:signature "JButton createLink(String text, String url)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WebPageLauncher.openWebPage
+yawl:WebPageLauncher_openWebPage_2 a yawl:Method ;
+    rdfs:label "openWebPage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void openWebPage(String url)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WebPageLauncher.showAsLink
+yawl:WebPageLauncher_showAsLink_3 a yawl:Method ;
+    rdfs:label "showAsLink" ;
+    yawl:returnType "String" ;
+    yawl:signature "String showAsLink(String text)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+
+

@@ -1,0 +1,173 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.stateless.elements.TaskGroup
+yawl:TaskGroup a yawl:Class ;
+    rdfs:label "TaskGroup" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_elements ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/elements/YEnabledTransitionSet.java"^^xsd:string ;
+    rdfs:comment """A group of YTasks plus an identifier""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:TaskGroup_add_1 ;
+    yawl:hasMethod yawl:TaskGroup_getAtomicTasks_2 ;
+    yawl:hasMethod yawl:TaskGroup_hasEmptyTasks_3 ;
+    yawl:hasMethod yawl:TaskGroup_getCompositeTaskCount_4 ;
+    yawl:hasMethod yawl:TaskGroup_getEmptyTaskCount_5 ;
+    yawl:hasMethod yawl:TaskGroup_hasCompositeTasks_6 ;
+    yawl:hasMethod yawl:TaskGroup_getID_7 ;
+    yawl:hasMethod yawl:TaskGroup_getDeferredChoiceID_8 ;
+    yawl:hasMethod yawl:TaskGroup_getRandomCompositeTaskFromGroup_9 ;
+    yawl:hasMethod yawl:TaskGroup_getRandomEmptyTaskFromGroup_10 ;
+    yawl:hasMethod yawl:TaskGroup_addCompositeTask_11 ;
+    yawl:hasMethod yawl:TaskGroup_addAtomicTask_12 ;
+    yawl:hasMethod yawl:TaskGroup_getRandomTask_13 ;
+    yawl:hasMethod yawl:TaskGroup_getTaskCount_14 ;
+    yawl:hasField yawl:TaskGroup__id ;
+    yawl:hasField yawl:TaskGroup__compositeTasks ;
+    yawl:hasField yawl:TaskGroup__atomicTasks ;
+    yawl:hasField yawl:TaskGroup__emptyAtomicTasks ;
+    .
+
+
+# Method: TaskGroup.add
+yawl:TaskGroup_add_1 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean add(YTask task)" ;
+    rdfs:comment """Add a task to this group @param task the task to add @return true if the added task was not already in the group""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskGroup.getAtomicTasks
+yawl:TaskGroup_getAtomicTasks_2 a yawl:Method ;
+    rdfs:label "getAtomicTasks" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getAtomicTasks()" ;
+    rdfs:comment """Gets the set of atomic tasks in this group @return the set of enabled atomic tasks""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskGroup.hasEmptyTasks
+yawl:TaskGroup_hasEmptyTasks_3 a yawl:Method ;
+    rdfs:label "hasEmptyTasks" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasEmptyTasks()" ;
+    rdfs:comment """@return true if this group has at least one decomposition-less atomic task""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskGroup.getCompositeTaskCount
+yawl:TaskGroup_getCompositeTaskCount_4 a yawl:Method ;
+    rdfs:label "getCompositeTaskCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getCompositeTaskCount()" ;
+    rdfs:comment """@return the number of composite tasks in this group""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskGroup.getEmptyTaskCount
+yawl:TaskGroup_getEmptyTaskCount_5 a yawl:Method ;
+    rdfs:label "getEmptyTaskCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getEmptyTaskCount()" ;
+    rdfs:comment """@return the number of composite tasks in this group""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskGroup.hasCompositeTasks
+yawl:TaskGroup_hasCompositeTasks_6 a yawl:Method ;
+    rdfs:label "hasCompositeTasks" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasCompositeTasks()" ;
+    rdfs:comment """@return true if this group has at least one composite task""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskGroup.getID
+yawl:TaskGroup_getID_7 a yawl:Method ;
+    rdfs:label "getID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getID()" ;
+    rdfs:comment """@return the generated group id for this group""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskGroup.getDeferredChoiceID
+yawl:TaskGroup_getDeferredChoiceID_8 a yawl:Method ;
+    rdfs:label "getDeferredChoiceID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDeferredChoiceID()" ;
+    rdfs:comment """@return the deferred choice UID for this group (if any) - may be null""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskGroup.getRandomCompositeTaskFromGroup
+yawl:TaskGroup_getRandomCompositeTaskFromGroup_9 a yawl:Method ;
+    rdfs:label "getRandomCompositeTaskFromGroup" ;
+    yawl:returnType "YCompositeTask" ;
+    yawl:signature "YCompositeTask getRandomCompositeTaskFromGroup()" ;
+    rdfs:comment """YAWL semantics are that if there is more than one composite task enabled by a condition, one must be non-deterministically chosen to fire. @return null if there are no composite tasks in this group, the only composite task if there is one, or a randomly chosen one if there are several""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskGroup.getRandomEmptyTaskFromGroup
+yawl:TaskGroup_getRandomEmptyTaskFromGroup_10 a yawl:Method ;
+    rdfs:label "getRandomEmptyTaskFromGroup" ;
+    yawl:returnType "YAtomicTask" ;
+    yawl:signature "YAtomicTask getRandomEmptyTaskFromGroup()" ;
+    rdfs:comment """@return as above, except for empty tasks instead of composites""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskGroup.addCompositeTask
+yawl:TaskGroup_addCompositeTask_11 a yawl:Method ;
+    rdfs:label "addCompositeTask" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean addCompositeTask(YCompositeTask task)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskGroup.addAtomicTask
+yawl:TaskGroup_addAtomicTask_12 a yawl:Method ;
+    rdfs:label "addAtomicTask" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean addAtomicTask(YAtomicTask task)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskGroup.getRandomTask
+yawl:TaskGroup_getRandomTask_13 a yawl:Method ;
+    rdfs:label "getRandomTask" ;
+    yawl:returnType "T" ;
+    yawl:signature "T getRandomTask(List taskList)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskGroup.getTaskCount
+yawl:TaskGroup_getTaskCount_14 a yawl:Method ;
+    rdfs:label "getTaskCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getTaskCount(List taskList)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:TaskGroup__id a yawl:Field ;
+    rdfs:label "_id" .
+
+yawl:TaskGroup__compositeTasks a yawl:Field ;
+    rdfs:label "_compositeTasks" .
+
+yawl:TaskGroup__atomicTasks a yawl:Field ;
+    rdfs:label "_atomicTasks" .
+
+yawl:TaskGroup__emptyAtomicTasks a yawl:Field ;
+    rdfs:label "_emptyAtomicTasks" .
+
+
+

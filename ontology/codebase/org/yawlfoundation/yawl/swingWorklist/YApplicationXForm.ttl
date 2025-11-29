@@ -1,0 +1,146 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.swingWorklist.YApplicationXForm
+yawl:YApplicationXForm a yawl:Class ;
+    rdfs:label "YApplicationXForm" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_swingWorklist ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/swingWorklist/YApplicationXForm.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 27/10/2003 Time: 17:21:09""" ;
+    yawl:extends yawl:JDialog ;
+    yawl:implements yawl:ActionListener ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YApplicationXForm_storeData_1 ;
+    yawl:hasMethod yawl:YApplicationXForm_this_windowClosing_2 ;
+    yawl:hasMethod yawl:YApplicationXForm_createTopPanel_3 ;
+    yawl:hasMethod yawl:YApplicationXForm_createDataPanel_4 ;
+    yawl:hasMethod yawl:YApplicationXForm_createBottomPanel_5 ;
+    yawl:hasMethod yawl:YApplicationXForm_actionPerformed_6 ;
+    yawl:hasField yawl:YApplicationXForm__caseID ;
+    yawl:hasField yawl:YApplicationXForm__taskID ;
+    yawl:hasField yawl:YApplicationXForm__description ;
+    yawl:hasField yawl:YApplicationXForm__enableMentTime ;
+    yawl:hasField yawl:YApplicationXForm__firingTimeTime ;
+    yawl:hasField yawl:YApplicationXForm__startTime ;
+    yawl:hasField yawl:YApplicationXForm__sequence ;
+    yawl:hasField yawl:YApplicationXForm__allowsInstanceCreation ;
+    yawl:hasField yawl:YApplicationXForm__inputData ;
+    yawl:hasField yawl:YApplicationXForm__outputData ;
+    yawl:hasField yawl:YApplicationXForm__skeletonOutputData ;
+    yawl:hasField yawl:YApplicationXForm__outputDataTextPane ;
+    yawl:hasField yawl:YApplicationXForm__keepCommand ;
+    yawl:hasField yawl:YApplicationXForm__releaseCommand ;
+    yawl:hasField yawl:YApplicationXForm__resetCommand ;
+    yawl:hasField yawl:YApplicationXForm__model ;
+    yawl:hasField yawl:YApplicationXForm__worklistGUI ;
+    .
+
+
+# Method: YApplicationXForm.storeData
+yawl:YApplicationXForm_storeData_1 a yawl:Method ;
+    rdfs:label "storeData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void storeData()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YApplicationXForm.this_windowClosing
+yawl:YApplicationXForm_this_windowClosing_2 a yawl:Method ;
+    rdfs:label "this_windowClosing" ;
+    yawl:returnType "void" ;
+    yawl:signature "void this_windowClosing()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YApplicationXForm.createTopPanel
+yawl:YApplicationXForm_createTopPanel_3 a yawl:Method ;
+    rdfs:label "createTopPanel" ;
+    yawl:returnType "JPanel" ;
+    yawl:signature "JPanel createTopPanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YApplicationXForm.createDataPanel
+yawl:YApplicationXForm_createDataPanel_4 a yawl:Method ;
+    rdfs:label "createDataPanel" ;
+    yawl:returnType "JPanel" ;
+    yawl:signature "JPanel createDataPanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YApplicationXForm.createBottomPanel
+yawl:YApplicationXForm_createBottomPanel_5 a yawl:Method ;
+    rdfs:label "createBottomPanel" ;
+    yawl:returnType "JPanel" ;
+    yawl:signature "JPanel createBottomPanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YApplicationXForm.actionPerformed
+yawl:YApplicationXForm_actionPerformed_6 a yawl:Method ;
+    rdfs:label "actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void actionPerformed(ActionEvent e)" ;
+    rdfs:comment """Invoked when an action occurs.""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YApplicationXForm__caseID a yawl:Field ;
+    rdfs:label "_caseID" .
+
+yawl:YApplicationXForm__taskID a yawl:Field ;
+    rdfs:label "_taskID" .
+
+yawl:YApplicationXForm__description a yawl:Field ;
+    rdfs:label "_description" .
+
+yawl:YApplicationXForm__enableMentTime a yawl:Field ;
+    rdfs:label "_enableMentTime" .
+
+yawl:YApplicationXForm__firingTimeTime a yawl:Field ;
+    rdfs:label "_firingTimeTime" .
+
+yawl:YApplicationXForm__startTime a yawl:Field ;
+    rdfs:label "_startTime" .
+
+yawl:YApplicationXForm__sequence a yawl:Field ;
+    rdfs:label "_sequence" .
+
+yawl:YApplicationXForm__allowsInstanceCreation a yawl:Field ;
+    rdfs:label "_allowsInstanceCreation" .
+
+yawl:YApplicationXForm__inputData a yawl:Field ;
+    rdfs:label "_inputData" .
+
+yawl:YApplicationXForm__outputData a yawl:Field ;
+    rdfs:label "_outputData" .
+
+yawl:YApplicationXForm__skeletonOutputData a yawl:Field ;
+    rdfs:label "_skeletonOutputData" .
+
+yawl:YApplicationXForm__outputDataTextPane a yawl:Field ;
+    rdfs:label "_outputDataTextPane" .
+
+yawl:YApplicationXForm__keepCommand a yawl:Field ;
+    rdfs:label "_keepCommand" .
+
+yawl:YApplicationXForm__releaseCommand a yawl:Field ;
+    rdfs:label "_releaseCommand" .
+
+yawl:YApplicationXForm__resetCommand a yawl:Field ;
+    rdfs:label "_resetCommand" .
+
+yawl:YApplicationXForm__model a yawl:Field ;
+    rdfs:label "_model" .
+
+yawl:YApplicationXForm__worklistGUI a yawl:Field ;
+    rdfs:label "_worklistGUI" .
+
+
+

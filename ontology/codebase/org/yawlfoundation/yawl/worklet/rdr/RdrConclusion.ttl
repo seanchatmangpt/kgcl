@@ -1,0 +1,267 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.worklet.rdr
+yawl:org_yawlfoundation_yawl_worklet_rdr a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.worklet.rdr" .
+# Class: org.yawlfoundation.yawl.worklet.rdr.RdrConclusion
+yawl:RdrConclusion a yawl:Class ;
+    rdfs:label "RdrConclusion" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_rdr ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/rdr/RdrConclusion.java"^^xsd:string ;
+    rdfs:comment """This class represents the conclusion primitives of an RdrNode. @author Michael Adams v0.8, 04-09/2006""" ;
+    yawl:implements yawl:Cloneable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:RdrConclusion_setConclusion_1 ;
+    yawl:hasMethod yawl:RdrConclusion_getAction_2 ;
+    yawl:hasMethod yawl:RdrConclusion_getTarget_3 ;
+    yawl:hasMethod yawl:RdrConclusion_getCount_4 ;
+    yawl:hasMethod yawl:RdrConclusion_setSelectionPrimitive_5 ;
+    yawl:hasMethod yawl:RdrConclusion_setSelectionPrimitive_6 ;
+    yawl:hasMethod yawl:RdrConclusion_setSelectionPrimitive_7 ;
+    yawl:hasMethod yawl:RdrConclusion_addCompensationPrimitive_8 ;
+    yawl:hasMethod yawl:RdrConclusion_addCompensationPrimitive_9 ;
+    yawl:hasMethod yawl:RdrConclusion_addPrimitive_10 ;
+    yawl:hasMethod yawl:RdrConclusion_addPrimitive_11 ;
+    yawl:hasMethod yawl:RdrConclusion_setPrimitives_12 ;
+    yawl:hasMethod yawl:RdrConclusion_getPrimitives_13 ;
+    yawl:hasMethod yawl:RdrConclusion_equals_14 ;
+    yawl:hasMethod yawl:RdrConclusion_hashCode_15 ;
+    yawl:hasMethod yawl:RdrConclusion_clone_16 ;
+    yawl:hasMethod yawl:RdrConclusion_isNullConclusion_17 ;
+    yawl:hasMethod yawl:RdrConclusion_toString_18 ;
+    yawl:hasMethod yawl:RdrConclusion_toElement_19 ;
+    yawl:hasMethod yawl:RdrConclusion_toXML_20 ;
+    yawl:hasMethod yawl:RdrConclusion_toXNode_21 ;
+    yawl:hasMethod yawl:RdrConclusion_fromXML_22 ;
+    yawl:hasMethod yawl:RdrConclusion_getPrimitive_23 ;
+    yawl:hasMethod yawl:RdrConclusion_addPrimitive_24 ;
+    yawl:hasMethod yawl:RdrConclusion_parseSteps_25 ;
+    yawl:hasMethod yawl:RdrConclusion_rationaliseSteps_26 ;
+    yawl:hasField yawl:RdrConclusion_id ;
+    yawl:hasField yawl:RdrConclusion__primitives ;
+    .
+
+
+# Method: RdrConclusion.setConclusion
+yawl:RdrConclusion_setConclusion_1 a yawl:Method ;
+    rdfs:label "setConclusion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setConclusion(Element conc)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrConclusion.getAction
+yawl:RdrConclusion_getAction_2 a yawl:Method ;
+    rdfs:label "getAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAction(int i)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrConclusion.getTarget
+yawl:RdrConclusion_getTarget_3 a yawl:Method ;
+    rdfs:label "getTarget" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTarget(int i)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrConclusion.getCount
+yawl:RdrConclusion_getCount_4 a yawl:Method ;
+    rdfs:label "getCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrConclusion.setSelectionPrimitive
+yawl:RdrConclusion_setSelectionPrimitive_5 a yawl:Method ;
+    rdfs:label "setSelectionPrimitive" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSelectionPrimitive(String workletURI)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrConclusion.setSelectionPrimitive
+yawl:RdrConclusion_setSelectionPrimitive_6 a yawl:Method ;
+    rdfs:label "setSelectionPrimitive" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSelectionPrimitive(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrConclusion.setSelectionPrimitive
+yawl:RdrConclusion_setSelectionPrimitive_7 a yawl:Method ;
+    rdfs:label "setSelectionPrimitive" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSelectionPrimitive(List specIDs)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrConclusion.addCompensationPrimitive
+yawl:RdrConclusion_addCompensationPrimitive_8 a yawl:Method ;
+    rdfs:label "addCompensationPrimitive" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addCompensationPrimitive(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrConclusion.addCompensationPrimitive
+yawl:RdrConclusion_addCompensationPrimitive_9 a yawl:Method ;
+    rdfs:label "addCompensationPrimitive" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addCompensationPrimitive(List specIDs)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrConclusion.addPrimitive
+yawl:RdrConclusion_addPrimitive_10 a yawl:Method ;
+    rdfs:label "addPrimitive" ;
+    yawl:returnType "RdrPrimitive" ;
+    yawl:signature "RdrPrimitive addPrimitive(ExletAction action, ExletTarget target)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrConclusion.addPrimitive
+yawl:RdrConclusion_addPrimitive_11 a yawl:Method ;
+    rdfs:label "addPrimitive" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addPrimitive(String action, List specIDs)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrConclusion.setPrimitives
+yawl:RdrConclusion_setPrimitives_12 a yawl:Method ;
+    rdfs:label "setPrimitives" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPrimitives(List list)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrConclusion.getPrimitives
+yawl:RdrConclusion_getPrimitives_13 a yawl:Method ;
+    rdfs:label "getPrimitives" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getPrimitives()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrConclusion.equals
+yawl:RdrConclusion_equals_14 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrConclusion.hashCode
+yawl:RdrConclusion_hashCode_15 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrConclusion.clone
+yawl:RdrConclusion_clone_16 a yawl:Method ;
+    rdfs:label "clone" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object clone()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RdrConclusion.isNullConclusion
+yawl:RdrConclusion_isNullConclusion_17 a yawl:Method ;
+    rdfs:label "isNullConclusion" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isNullConclusion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrConclusion.toString
+yawl:RdrConclusion_toString_18 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrConclusion.toElement
+yawl:RdrConclusion_toElement_19 a yawl:Method ;
+    rdfs:label "toElement" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element toElement()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrConclusion.toXML
+yawl:RdrConclusion_toXML_20 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrConclusion.toXNode
+yawl:RdrConclusion_toXNode_21 a yawl:Method ;
+    rdfs:label "toXNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode toXNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrConclusion.fromXML
+yawl:RdrConclusion_fromXML_22 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrConclusion.getPrimitive
+yawl:RdrConclusion_getPrimitive_23 a yawl:Method ;
+    rdfs:label "getPrimitive" ;
+    yawl:returnType "RdrPrimitive" ;
+    yawl:signature "RdrPrimitive getPrimitive(int index)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrConclusion.addPrimitive
+yawl:RdrConclusion_addPrimitive_24 a yawl:Method ;
+    rdfs:label "addPrimitive" ;
+    yawl:returnType "RdrPrimitive" ;
+    yawl:signature "RdrPrimitive addPrimitive(String action, String target)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrConclusion.parseSteps
+yawl:RdrConclusion_parseSteps_25 a yawl:Method ;
+    rdfs:label "parseSteps" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseSteps(Element eConc)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RdrConclusion.rationaliseSteps
+yawl:RdrConclusion_rationaliseSteps_26 a yawl:Method ;
+    rdfs:label "rationaliseSteps" ;
+    yawl:returnType "void" ;
+    yawl:signature "void rationaliseSteps(Map sortedMap)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:RdrConclusion_id a yawl:Field ;
+    rdfs:label "id" .
+
+yawl:RdrConclusion__primitives a yawl:Field ;
+    rdfs:label "_primitives" .
+
+
+

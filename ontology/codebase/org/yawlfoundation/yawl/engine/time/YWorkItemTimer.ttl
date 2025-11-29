@@ -1,0 +1,129 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.time.YWorkItemTimer
+yawl:YWorkItemTimer a yawl:Class ;
+    rdfs:label "YWorkItemTimer" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_time ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/time/YWorkItemTimer.java"^^xsd:string ;
+    rdfs:comment """A timer associated with an Atomic Task. Author: Michael Adams Creation Date: 31/01/2008""" ;
+    yawl:implements yawl:YTimedObject ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YWorkItemTimer_getOwnerID_1 ;
+    yawl:hasMethod yawl:YWorkItemTimer_setOwnerID_2 ;
+    yawl:hasMethod yawl:YWorkItemTimer_getEndTime_3 ;
+    yawl:hasMethod yawl:YWorkItemTimer_setEndTime_4 ;
+    yawl:hasMethod yawl:YWorkItemTimer_setPersisting_5 ;
+    yawl:hasMethod yawl:YWorkItemTimer_unpersistThis_6 ;
+    yawl:hasMethod yawl:YWorkItemTimer_equals_7 ;
+    yawl:hasMethod yawl:YWorkItemTimer_hashCode_8 ;
+    yawl:hasMethod yawl:YWorkItemTimer_handleTimerExpiry_9 ;
+    yawl:hasMethod yawl:YWorkItemTimer_cancel_10 ;
+    yawl:hasField yawl:YWorkItemTimer__ownerID ;
+    yawl:hasField yawl:YWorkItemTimer__endTime ;
+    yawl:hasField yawl:YWorkItemTimer__persisting ;
+    .
+
+
+# Method: YWorkItemTimer.getOwnerID
+yawl:YWorkItemTimer_getOwnerID_1 a yawl:Method ;
+    rdfs:label "getOwnerID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOwnerID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemTimer.setOwnerID
+yawl:YWorkItemTimer_setOwnerID_2 a yawl:Method ;
+    rdfs:label "setOwnerID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOwnerID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemTimer.getEndTime
+yawl:YWorkItemTimer_getEndTime_3 a yawl:Method ;
+    rdfs:label "getEndTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getEndTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemTimer.setEndTime
+yawl:YWorkItemTimer_setEndTime_4 a yawl:Method ;
+    rdfs:label "setEndTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEndTime(long time)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemTimer.setPersisting
+yawl:YWorkItemTimer_setPersisting_5 a yawl:Method ;
+    rdfs:label "setPersisting" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPersisting(boolean persist)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemTimer.unpersistThis
+yawl:YWorkItemTimer_unpersistThis_6 a yawl:Method ;
+    rdfs:label "unpersistThis" ;
+    yawl:returnType "void" ;
+    yawl:signature "void unpersistThis()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemTimer.equals
+yawl:YWorkItemTimer_equals_7 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemTimer.hashCode
+yawl:YWorkItemTimer_hashCode_8 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemTimer.handleTimerExpiry
+yawl:YWorkItemTimer_handleTimerExpiry_9 a yawl:Method ;
+    rdfs:label "handleTimerExpiry" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleTimerExpiry()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemTimer.cancel
+yawl:YWorkItemTimer_cancel_10 a yawl:Method ;
+    rdfs:label "cancel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancel()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YWorkItemTimer__ownerID a yawl:Field ;
+    rdfs:label "_ownerID" .
+
+yawl:YWorkItemTimer__endTime a yawl:Field ;
+    rdfs:label "_endTime" .
+
+yawl:YWorkItemTimer__persisting a yawl:Field ;
+    rdfs:label "_persisting" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_engine_gui a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.engine.gui" .
+
+

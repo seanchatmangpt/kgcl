@@ -1,0 +1,408 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.YAnnouncer
+yawl:YAnnouncer a yawl:Class ;
+    rdfs:label "YAnnouncer" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/YAnnouncer.java"^^xsd:string ;
+    rdfs:comment """Handles the announcement of engine-generated events to the environment. @author Michael Adams @date 10/04/2010""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YAnnouncer_getObserverGatewayController_1 ;
+    yawl:hasMethod yawl:YAnnouncer_registerInterfaceBObserverGateway_2 ;
+    yawl:hasMethod yawl:YAnnouncer_getAnnouncementContext_3 ;
+    yawl:hasMethod yawl:YAnnouncer_setAnnouncementContext_4 ;
+    yawl:hasMethod yawl:YAnnouncer_addInterfaceXListener_5 ;
+    yawl:hasMethod yawl:YAnnouncer_addInterfaceXListener_6 ;
+    yawl:hasMethod yawl:YAnnouncer_removeInterfaceXListener_7 ;
+    yawl:hasMethod yawl:YAnnouncer_removeInterfaceXListener_8 ;
+    yawl:hasMethod yawl:YAnnouncer_hasInterfaceXListeners_9 ;
+    yawl:hasMethod yawl:YAnnouncer_shutdownInterfaceXListeners_10 ;
+    yawl:hasMethod yawl:YAnnouncer_announceEngineInitialisationCompletion_11 ;
+    yawl:hasMethod yawl:YAnnouncer_announceCaseCancellation_12 ;
+    yawl:hasMethod yawl:YAnnouncer_announceTimerExpiryEvent_13 ;
+    yawl:hasMethod yawl:YAnnouncer_announceCaseSuspending_14 ;
+    yawl:hasMethod yawl:YAnnouncer_announceCaseSuspended_15 ;
+    yawl:hasMethod yawl:YAnnouncer_announceCaseResumption_16 ;
+    yawl:hasMethod yawl:YAnnouncer_announceCaseStart_17 ;
+    yawl:hasMethod yawl:YAnnouncer_announceCaseCompletion_18 ;
+    yawl:hasMethod yawl:YAnnouncer_announceWorkItemStatusChange_19 ;
+    yawl:hasMethod yawl:YAnnouncer_announceCancelledWorkItem_20 ;
+    yawl:hasMethod yawl:YAnnouncer_shutdownObserverGateways_21 ;
+    yawl:hasMethod yawl:YAnnouncer_announceToGateways_22 ;
+    yawl:hasMethod yawl:YAnnouncer_announceToGateways_23 ;
+    yawl:hasMethod yawl:YAnnouncer_createAnnouncement_24 ;
+    yawl:hasMethod yawl:YAnnouncer_createAnnouncement_25 ;
+    yawl:hasMethod yawl:YAnnouncer_rejectAnnouncedEnabledTask_26 ;
+    yawl:hasMethod yawl:YAnnouncer_announceCheckWorkItemConstraints_27 ;
+    yawl:hasMethod yawl:YAnnouncer_announceCheckCaseConstraints_28 ;
+    yawl:hasMethod yawl:YAnnouncer_announceTimeServiceExpiry_29 ;
+    yawl:hasMethod yawl:YAnnouncer_announceWorkItemAbortToInterfaceXListeners_30 ;
+    yawl:hasMethod yawl:YAnnouncer_announceCaseCancellationToInterfaceXListeners_31 ;
+    yawl:hasMethod yawl:YAnnouncer_announceTimerExpiryToInterfaceXListeners_32 ;
+    yawl:hasMethod yawl:YAnnouncer_reannounceRestoredItems_33 ;
+    yawl:hasMethod yawl:YAnnouncer_reannounceEnabledWorkItems_34 ;
+    yawl:hasMethod yawl:YAnnouncer_reannounceExecutingWorkItems_35 ;
+    yawl:hasMethod yawl:YAnnouncer_reannounceFiredWorkItems_36 ;
+    yawl:hasMethod yawl:YAnnouncer_reannounceWorkItems_37 ;
+    yawl:hasMethod yawl:YAnnouncer_reannounceWorkItem_38 ;
+    yawl:hasMethod yawl:YAnnouncer_announceDeadlock_39 ;
+    yawl:hasField yawl:YAnnouncer__controller ;
+    yawl:hasField yawl:YAnnouncer__engine ;
+    yawl:hasField yawl:YAnnouncer__logger ;
+    yawl:hasField yawl:YAnnouncer__interfaceXListeners ;
+    yawl:hasField yawl:YAnnouncer__announcementContext ;
+    .
+
+
+# Method: YAnnouncer.getObserverGatewayController
+yawl:YAnnouncer_getObserverGatewayController_1 a yawl:Method ;
+    rdfs:label "getObserverGatewayController" ;
+    yawl:returnType "ObserverGatewayController" ;
+    yawl:signature "ObserverGatewayController getObserverGatewayController()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAnnouncer.registerInterfaceBObserverGateway
+yawl:YAnnouncer_registerInterfaceBObserverGateway_2 a yawl:Method ;
+    rdfs:label "registerInterfaceBObserverGateway" ;
+    yawl:returnType "void" ;
+    yawl:signature "void registerInterfaceBObserverGateway(ObserverGateway gateway)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAnnouncer.getAnnouncementContext
+yawl:YAnnouncer_getAnnouncementContext_3 a yawl:Method ;
+    rdfs:label "getAnnouncementContext" ;
+    yawl:returnType "AnnouncementContext" ;
+    yawl:signature "AnnouncementContext getAnnouncementContext()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAnnouncer.setAnnouncementContext
+yawl:YAnnouncer_setAnnouncementContext_4 a yawl:Method ;
+    rdfs:label "setAnnouncementContext" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAnnouncementContext(AnnouncementContext context)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YAnnouncer.addInterfaceXListener
+yawl:YAnnouncer_addInterfaceXListener_5 a yawl:Method ;
+    rdfs:label "addInterfaceXListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addInterfaceXListener(InterfaceX_EngineSideClient listener)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAnnouncer.addInterfaceXListener
+yawl:YAnnouncer_addInterfaceXListener_6 a yawl:Method ;
+    rdfs:label "addInterfaceXListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addInterfaceXListener(String uri)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAnnouncer.removeInterfaceXListener
+yawl:YAnnouncer_removeInterfaceXListener_7 a yawl:Method ;
+    rdfs:label "removeInterfaceXListener" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeInterfaceXListener(InterfaceX_EngineSideClient listener)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAnnouncer.removeInterfaceXListener
+yawl:YAnnouncer_removeInterfaceXListener_8 a yawl:Method ;
+    rdfs:label "removeInterfaceXListener" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeInterfaceXListener(String uri)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAnnouncer.hasInterfaceXListeners
+yawl:YAnnouncer_hasInterfaceXListeners_9 a yawl:Method ;
+    rdfs:label "hasInterfaceXListeners" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasInterfaceXListeners()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAnnouncer.shutdownInterfaceXListeners
+yawl:YAnnouncer_shutdownInterfaceXListeners_10 a yawl:Method ;
+    rdfs:label "shutdownInterfaceXListeners" ;
+    yawl:returnType "void" ;
+    yawl:signature "void shutdownInterfaceXListeners()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAnnouncer.announceEngineInitialisationCompletion
+yawl:YAnnouncer_announceEngineInitialisationCompletion_11 a yawl:Method ;
+    rdfs:label "announceEngineInitialisationCompletion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceEngineInitialisationCompletion(Set services, int maxWaitSeconds)" ;
+    rdfs:comment """Called by the engine when its initialisation is complete. Broadcast to all registered services and gateways. @param services the set of currently registered services @param maxWaitSeconds timeout to announce to each service before giving up""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAnnouncer.announceCaseCancellation
+yawl:YAnnouncer_announceCaseCancellation_12 a yawl:Method ;
+    rdfs:label "announceCaseCancellation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCaseCancellation(YIdentifier id, Set services)" ;
+    rdfs:comment """Called by the engine when a case is cancelled. Broadcast to all registered services and gateways. @param id the identifier of the cancelled case @param services the set of currently registered services""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAnnouncer.announceTimerExpiryEvent
+yawl:YAnnouncer_announceTimerExpiryEvent_13 a yawl:Method ;
+    rdfs:label "announceTimerExpiryEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceTimerExpiryEvent(YWorkItem item)" ;
+    rdfs:comment """Called by YWorkItemTimer when a work item's timer expires. Announced only to the designated service or gateway. @param item the work item that has had its timer expire""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAnnouncer.announceCaseSuspending
+yawl:YAnnouncer_announceCaseSuspending_14 a yawl:Method ;
+    rdfs:label "announceCaseSuspending" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCaseSuspending(YIdentifier id, Set services)" ;
+    rdfs:comment """Called by the engine when a case is suspending. Broadcast to all registered services and gateways. @param id the identifier of the suspending case @param services the set of currently registered services""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAnnouncer.announceCaseSuspended
+yawl:YAnnouncer_announceCaseSuspended_15 a yawl:Method ;
+    rdfs:label "announceCaseSuspended" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCaseSuspended(YIdentifier id, Set services)" ;
+    rdfs:comment """Called by the engine when a case has suspended. Broadcast to all registered services and gateways. @param id the identifier of the suspended case @param services the set of currently registered services""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAnnouncer.announceCaseResumption
+yawl:YAnnouncer_announceCaseResumption_16 a yawl:Method ;
+    rdfs:label "announceCaseResumption" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCaseResumption(YIdentifier id, Set services)" ;
+    rdfs:comment """Called by the engine when a case has resumed from suspension. Broadcast to all registered services and gateways. @param id the identifier of the resumed case @param services the set of currently registered services""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAnnouncer.announceCaseStart
+yawl:YAnnouncer_announceCaseStart_17 a yawl:Method ;
+    rdfs:label "announceCaseStart" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCaseStart(YSpecificationID specID, YIdentifier caseID, String launchingService, boolean delayed)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAnnouncer.announceCaseCompletion
+yawl:YAnnouncer_announceCaseCompletion_18 a yawl:Method ;
+    rdfs:label "announceCaseCompletion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCaseCompletion(YAWLServiceReference service, YIdentifier caseID, Document caseData)" ;
+    rdfs:comment """Called by a case's net runner when it completes. Announced only to the designated service or gateway when the 'service' parameter is not null, otherwise it is broadcast to all registered services and gateways. @param service the name of the service or gateway to announce the case completion to. If null, the event will be announced to all registered services and gateways @param caseID the identifier of the completed case @param caseData the final output data for the case""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAnnouncer.announceWorkItemStatusChange
+yawl:YAnnouncer_announceWorkItemStatusChange_19 a yawl:Method ;
+    rdfs:label "announceWorkItemStatusChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceWorkItemStatusChange(YWorkItem item, YWorkItemStatus oldStatus, YWorkItemStatus newStatus)" ;
+    rdfs:comment """Called by a workitem when it has a change of status. Broadcast to all registered services and gateways. @param item the work item that has had a change of status @param oldStatus the previous status of the work item @param newStatus the new status of the workitem""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAnnouncer.announceCancelledWorkItem
+yawl:YAnnouncer_announceCancelledWorkItem_20 a yawl:Method ;
+    rdfs:label "announceCancelledWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCancelledWorkItem(YWorkItem item)" ;
+    rdfs:comment """Called by a workitem when it is cancelled. Announced only to the designated service or gateway. @param item the work item that has had a change of status""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAnnouncer.shutdownObserverGateways
+yawl:YAnnouncer_shutdownObserverGateways_21 a yawl:Method ;
+    rdfs:label "shutdownObserverGateways" ;
+    yawl:returnType "void" ;
+    yawl:signature "void shutdownObserverGateways()" ;
+    rdfs:comment """Called by the engine when it begins to shutdown. Broadcast to all registered services and gateways.""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAnnouncer.announceToGateways
+yawl:YAnnouncer_announceToGateways_22 a yawl:Method ;
+    rdfs:label "announceToGateways" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceToGateways(Set announcements)" ;
+    rdfs:comment """Called by the engine each time a net runner advances a case, resulting in the enabling and/or cancelling of one or more work items. @param announcements A set of work item enabling or cancellation events""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAnnouncer.announceToGateways
+yawl:YAnnouncer_announceToGateways_23 a yawl:Method ;
+    rdfs:label "announceToGateways" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceToGateways(YAnnouncement announcement)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YAnnouncer.createAnnouncement
+yawl:YAnnouncer_createAnnouncement_24 a yawl:Method ;
+    rdfs:label "createAnnouncement" ;
+    yawl:returnType "YAnnouncement" ;
+    yawl:signature "YAnnouncement createAnnouncement(YAWLServiceReference ys, YWorkItem item, YEngineEvent event)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAnnouncer.createAnnouncement
+yawl:YAnnouncer_createAnnouncement_25 a yawl:Method ;
+    rdfs:label "createAnnouncement" ;
+    yawl:returnType "YAnnouncement" ;
+    yawl:signature "YAnnouncement createAnnouncement(YWorkItem item, YEngineEvent event)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAnnouncer.rejectAnnouncedEnabledTask
+yawl:YAnnouncer_rejectAnnouncedEnabledTask_26 a yawl:Method ;
+    rdfs:label "rejectAnnouncedEnabledTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void rejectAnnouncedEnabledTask(YWorkItem item)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAnnouncer.announceCheckWorkItemConstraints
+yawl:YAnnouncer_announceCheckWorkItemConstraints_27 a yawl:Method ;
+    rdfs:label "announceCheckWorkItemConstraints" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCheckWorkItemConstraints(YWorkItem item, Document data, boolean preCheck)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAnnouncer.announceCheckCaseConstraints
+yawl:YAnnouncer_announceCheckCaseConstraints_28 a yawl:Method ;
+    rdfs:label "announceCheckCaseConstraints" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCheckCaseConstraints(YSpecificationID specID, String caseID, String data, boolean preCheck)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAnnouncer.announceTimeServiceExpiry
+yawl:YAnnouncer_announceTimeServiceExpiry_29 a yawl:Method ;
+    rdfs:label "announceTimeServiceExpiry" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceTimeServiceExpiry(YWorkItem item, List timeOutTaskIds)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAnnouncer.announceWorkItemAbortToInterfaceXListeners
+yawl:YAnnouncer_announceWorkItemAbortToInterfaceXListeners_30 a yawl:Method ;
+    rdfs:label "announceWorkItemAbortToInterfaceXListeners" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceWorkItemAbortToInterfaceXListeners(YWorkItem item)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YAnnouncer.announceCaseCancellationToInterfaceXListeners
+yawl:YAnnouncer_announceCaseCancellationToInterfaceXListeners_31 a yawl:Method ;
+    rdfs:label "announceCaseCancellationToInterfaceXListeners" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCaseCancellationToInterfaceXListeners(YIdentifier caseID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YAnnouncer.announceTimerExpiryToInterfaceXListeners
+yawl:YAnnouncer_announceTimerExpiryToInterfaceXListeners_32 a yawl:Method ;
+    rdfs:label "announceTimerExpiryToInterfaceXListeners" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceTimerExpiryToInterfaceXListeners(YWorkItem item)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YAnnouncer.reannounceRestoredItems
+yawl:YAnnouncer_reannounceRestoredItems_33 a yawl:Method ;
+    rdfs:label "reannounceRestoredItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reannounceRestoredItems()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAnnouncer.reannounceEnabledWorkItems
+yawl:YAnnouncer_reannounceEnabledWorkItems_34 a yawl:Method ;
+    rdfs:label "reannounceEnabledWorkItems" ;
+    yawl:returnType "int" ;
+    yawl:signature "int reannounceEnabledWorkItems()" ;
+    rdfs:comment """Causes the engine to re-announce all workitems which are in an \"enabled\" state.<P> @return The number of enabled workitems that were reannounced""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAnnouncer.reannounceExecutingWorkItems
+yawl:YAnnouncer_reannounceExecutingWorkItems_35 a yawl:Method ;
+    rdfs:label "reannounceExecutingWorkItems" ;
+    yawl:returnType "int" ;
+    yawl:signature "int reannounceExecutingWorkItems()" ;
+    rdfs:comment """Causes the engine to re-announce all workitems which are in an \"executing\" state.<P> @return The number of executing workitems that were reannounced""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAnnouncer.reannounceFiredWorkItems
+yawl:YAnnouncer_reannounceFiredWorkItems_36 a yawl:Method ;
+    rdfs:label "reannounceFiredWorkItems" ;
+    yawl:returnType "int" ;
+    yawl:signature "int reannounceFiredWorkItems()" ;
+    rdfs:comment """Causes the engine to re-announce all workitems which are in an \"fired\" state.<P> @return The number of fired workitems that were reannounced""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAnnouncer.reannounceWorkItems
+yawl:YAnnouncer_reannounceWorkItems_37 a yawl:Method ;
+    rdfs:label "reannounceWorkItems" ;
+    yawl:returnType "int" ;
+    yawl:signature "int reannounceWorkItems(Set workItems)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YAnnouncer.reannounceWorkItem
+yawl:YAnnouncer_reannounceWorkItem_38 a yawl:Method ;
+    rdfs:label "reannounceWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reannounceWorkItem(YWorkItem workItem)" ;
+    rdfs:comment """Causes the engine to re-announce a specific workitem regardless of state.<P>""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAnnouncer.announceDeadlock
+yawl:YAnnouncer_announceDeadlock_39 a yawl:Method ;
+    rdfs:label "announceDeadlock" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceDeadlock(YIdentifier caseID, Set tasks)" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:YAnnouncer__controller a yawl:Field ;
+    rdfs:label "_controller" .
+
+yawl:YAnnouncer__engine a yawl:Field ;
+    rdfs:label "_engine" .
+
+yawl:YAnnouncer__logger a yawl:Field ;
+    rdfs:label "_logger" .
+
+yawl:YAnnouncer__interfaceXListeners a yawl:Field ;
+    rdfs:label "_interfaceXListeners" .
+
+yawl:YAnnouncer__announcementContext a yawl:Field ;
+    rdfs:label "_announcementContext" .
+
+
+

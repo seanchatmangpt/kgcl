@@ -1,0 +1,187 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.preferences.PreferencesDialog
+yawl:PreferencesDialog a yawl:Class ;
+    rdfs:label "PreferencesDialog" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_preferences ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/preferences/PreferencesDialog.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 5/08/2014""" ;
+    yawl:extends yawl:JDialog ;
+    yawl:implements yawl:ActionListener ;
+    yawl:implements yawl:EngineStatusListener ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:PreferencesDialog_actionPerformed_1 ;
+    yawl:hasMethod yawl:PreferencesDialog_statusChanged_2 ;
+    yawl:hasMethod yawl:PreferencesDialog_load_3 ;
+    yawl:hasMethod yawl:PreferencesDialog_save_4 ;
+    yawl:hasMethod yawl:PreferencesDialog_buildUI_5 ;
+    yawl:hasMethod yawl:PreferencesDialog_buildOptionsPanel_6 ;
+    yawl:hasMethod yawl:PreferencesDialog_getCentrePanel_7 ;
+    yawl:hasMethod yawl:PreferencesDialog_getBottomPanel_8 ;
+    yawl:hasMethod yawl:PreferencesDialog_makeCheckBox_9 ;
+    yawl:hasMethod yawl:PreferencesDialog_getPortValueFormatter_10 ;
+    yawl:hasMethod yawl:PreferencesDialog_buildButtonPanel_11 ;
+    yawl:hasMethod yawl:PreferencesDialog_createButton_12 ;
+    yawl:hasMethod yawl:PreferencesDialog_enablePanel_13 ;
+    yawl:hasMethod yawl:PreferencesDialog_savePort_14 ;
+    yawl:hasField yawl:PreferencesDialog__cbxStart ;
+    yawl:hasField yawl:PreferencesDialog__cbxUpdates ;
+    yawl:hasField yawl:PreferencesDialog__cbxLogon ;
+    yawl:hasField yawl:PreferencesDialog__cbxStop ;
+    yawl:hasField yawl:PreferencesDialog__portPanel ;
+    yawl:hasField yawl:PreferencesDialog__portField ;
+    yawl:hasField yawl:PreferencesDialog__prefs ;
+    yawl:hasField yawl:PreferencesDialog__origPortValue ;
+    .
+
+
+# Method: PreferencesDialog.actionPerformed
+yawl:PreferencesDialog_actionPerformed_1 a yawl:Method ;
+    rdfs:label "actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void actionPerformed(ActionEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PreferencesDialog.statusChanged
+yawl:PreferencesDialog_statusChanged_2 a yawl:Method ;
+    rdfs:label "statusChanged" ;
+    yawl:returnType "void" ;
+    yawl:signature "void statusChanged(EngineStatus status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PreferencesDialog.load
+yawl:PreferencesDialog_load_3 a yawl:Method ;
+    rdfs:label "load" ;
+    yawl:returnType "void" ;
+    yawl:signature "void load()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PreferencesDialog.save
+yawl:PreferencesDialog_save_4 a yawl:Method ;
+    rdfs:label "save" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean save()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PreferencesDialog.buildUI
+yawl:PreferencesDialog_buildUI_5 a yawl:Method ;
+    rdfs:label "buildUI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void buildUI()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PreferencesDialog.buildOptionsPanel
+yawl:PreferencesDialog_buildOptionsPanel_6 a yawl:Method ;
+    rdfs:label "buildOptionsPanel" ;
+    yawl:returnType "JPanel" ;
+    yawl:signature "JPanel buildOptionsPanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PreferencesDialog.getCentrePanel
+yawl:PreferencesDialog_getCentrePanel_7 a yawl:Method ;
+    rdfs:label "getCentrePanel" ;
+    yawl:returnType "JPanel" ;
+    yawl:signature "JPanel getCentrePanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PreferencesDialog.getBottomPanel
+yawl:PreferencesDialog_getBottomPanel_8 a yawl:Method ;
+    rdfs:label "getBottomPanel" ;
+    yawl:returnType "JPanel" ;
+    yawl:signature "JPanel getBottomPanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PreferencesDialog.makeCheckBox
+yawl:PreferencesDialog_makeCheckBox_9 a yawl:Method ;
+    rdfs:label "makeCheckBox" ;
+    yawl:returnType "JCheckBox" ;
+    yawl:signature "JCheckBox makeCheckBox(String caption, int mnemonic)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PreferencesDialog.getPortValueFormatter
+yawl:PreferencesDialog_getPortValueFormatter_10 a yawl:Method ;
+    rdfs:label "getPortValueFormatter" ;
+    yawl:returnType "NumberFormatter" ;
+    yawl:signature "NumberFormatter getPortValueFormatter()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PreferencesDialog.buildButtonPanel
+yawl:PreferencesDialog_buildButtonPanel_11 a yawl:Method ;
+    rdfs:label "buildButtonPanel" ;
+    yawl:returnType "JPanel" ;
+    yawl:signature "JPanel buildButtonPanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PreferencesDialog.createButton
+yawl:PreferencesDialog_createButton_12 a yawl:Method ;
+    rdfs:label "createButton" ;
+    yawl:returnType "JButton" ;
+    yawl:signature "JButton createButton(String caption)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PreferencesDialog.enablePanel
+yawl:PreferencesDialog_enablePanel_13 a yawl:Method ;
+    rdfs:label "enablePanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void enablePanel(JPanel panel, boolean enable)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PreferencesDialog.savePort
+yawl:PreferencesDialog_savePort_14 a yawl:Method ;
+    rdfs:label "savePort" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean savePort()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:PreferencesDialog__cbxStart a yawl:Field ;
+    rdfs:label "_cbxStart" .
+
+yawl:PreferencesDialog__cbxUpdates a yawl:Field ;
+    rdfs:label "_cbxUpdates" .
+
+yawl:PreferencesDialog__cbxLogon a yawl:Field ;
+    rdfs:label "_cbxLogon" .
+
+yawl:PreferencesDialog__cbxStop a yawl:Field ;
+    rdfs:label "_cbxStop" .
+
+yawl:PreferencesDialog__portPanel a yawl:Field ;
+    rdfs:label "_portPanel" .
+
+yawl:PreferencesDialog__portField a yawl:Field ;
+    rdfs:label "_portField" .
+
+yawl:PreferencesDialog__prefs a yawl:Field ;
+    rdfs:label "_prefs" .
+
+yawl:PreferencesDialog__origPortValue a yawl:Field ;
+    rdfs:label "_origPortValue" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_controlpanel_update a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.controlpanel.update" .
+
+

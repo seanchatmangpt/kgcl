@@ -1,0 +1,319 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.dynform.SubPanel
+yawl:SubPanel a yawl:Class ;
+    rdfs:label "SubPanel" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf_dynform ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/dynform/SubPanel.java"^^xsd:string ;
+    rdfs:comment """a panel layout with a few extra members @author Michael Adams Date: 26/02/2008""" ;
+    yawl:extends yawl:PanelLayout ;
+    yawl:implements yawl:Cloneable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:SubPanel_getHeight_1 ;
+    yawl:hasMethod yawl:SubPanel_setHeight_2 ;
+    yawl:hasMethod yawl:SubPanel_getWidth_3 ;
+    yawl:hasMethod yawl:SubPanel_setWidth_4 ;
+    yawl:hasMethod yawl:SubPanel_getTop_5 ;
+    yawl:hasMethod yawl:SubPanel_setTop_6 ;
+    yawl:hasMethod yawl:SubPanel_getName_7 ;
+    yawl:hasMethod yawl:SubPanel_setName_8 ;
+    yawl:hasMethod yawl:SubPanel_getBtnPlus_9 ;
+    yawl:hasMethod yawl:SubPanel_setBtnPlus_10 ;
+    yawl:hasMethod yawl:SubPanel_getBtnMinus_11 ;
+    yawl:hasMethod yawl:SubPanel_setBtnMinus_12 ;
+    yawl:hasMethod yawl:SubPanel_getController_13 ;
+    yawl:hasMethod yawl:SubPanel_setController_14 ;
+    yawl:hasMethod yawl:SubPanel_isChoicePanel_15 ;
+    yawl:hasMethod yawl:SubPanel_isEmpty_16 ;
+    yawl:hasMethod yawl:SubPanel_assignStyle_17 ;
+    yawl:hasMethod yawl:SubPanel_addOccursButton_18 ;
+    yawl:hasMethod yawl:SubPanel_clone_19 ;
+    yawl:hasMethod yawl:SubPanel_incTop_20 ;
+    yawl:hasMethod yawl:SubPanel_decTop_21 ;
+    yawl:hasMethod yawl:SubPanel_incHeight_22 ;
+    yawl:hasMethod yawl:SubPanel_enableOccursButtons_23 ;
+    yawl:hasMethod yawl:SubPanel_getTop_24 ;
+    yawl:hasMethod yawl:SubPanel_setContentTops_25 ;
+    yawl:hasMethod yawl:SubPanel_setContentTop_26 ;
+    yawl:hasMethod yawl:SubPanel_adjustTopForChoiceContainer_27 ;
+    yawl:hasMethod yawl:SubPanel_incComponentTops_28 ;
+    yawl:hasMethod yawl:SubPanel_resetTopStyle_29 ;
+    yawl:hasField yawl:SubPanel_height ;
+    yawl:hasField yawl:SubPanel_width ;
+    yawl:hasField yawl:SubPanel_top ;
+    yawl:hasField yawl:SubPanel_name ;
+    yawl:hasField yawl:SubPanel_controller ;
+    yawl:hasField yawl:SubPanel_btnPlus ;
+    yawl:hasField yawl:SubPanel_btnMinus ;
+    yawl:hasField yawl:SubPanel__contentTops ;
+    .
+
+
+# Method: SubPanel.getHeight
+yawl:SubPanel_getHeight_1 a yawl:Method ;
+    rdfs:label "getHeight" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getHeight()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.setHeight
+yawl:SubPanel_setHeight_2 a yawl:Method ;
+    rdfs:label "setHeight" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHeight(double height)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.getWidth
+yawl:SubPanel_getWidth_3 a yawl:Method ;
+    rdfs:label "getWidth" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getWidth()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.setWidth
+yawl:SubPanel_setWidth_4 a yawl:Method ;
+    rdfs:label "setWidth" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setWidth(int width)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.getTop
+yawl:SubPanel_getTop_5 a yawl:Method ;
+    rdfs:label "getTop" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getTop()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.setTop
+yawl:SubPanel_setTop_6 a yawl:Method ;
+    rdfs:label "setTop" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTop(int top)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.getName
+yawl:SubPanel_getName_7 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.setName
+yawl:SubPanel_setName_8 a yawl:Method ;
+    rdfs:label "setName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.getBtnPlus
+yawl:SubPanel_getBtnPlus_9 a yawl:Method ;
+    rdfs:label "getBtnPlus" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnPlus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.setBtnPlus
+yawl:SubPanel_setBtnPlus_10 a yawl:Method ;
+    rdfs:label "setBtnPlus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnPlus(Button btnPlus)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.getBtnMinus
+yawl:SubPanel_getBtnMinus_11 a yawl:Method ;
+    rdfs:label "getBtnMinus" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnMinus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.setBtnMinus
+yawl:SubPanel_setBtnMinus_12 a yawl:Method ;
+    rdfs:label "setBtnMinus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnMinus(Button btnMinus)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.getController
+yawl:SubPanel_getController_13 a yawl:Method ;
+    rdfs:label "getController" ;
+    yawl:returnType "SubPanelController" ;
+    yawl:signature "SubPanelController getController()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.setController
+yawl:SubPanel_setController_14 a yawl:Method ;
+    rdfs:label "setController" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setController(SubPanelController controller)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.isChoicePanel
+yawl:SubPanel_isChoicePanel_15 a yawl:Method ;
+    rdfs:label "isChoicePanel" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isChoicePanel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.isEmpty
+yawl:SubPanel_isEmpty_16 a yawl:Method ;
+    rdfs:label "isEmpty" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEmpty()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.assignStyle
+yawl:SubPanel_assignStyle_17 a yawl:Method ;
+    rdfs:label "assignStyle" ;
+    yawl:returnType "void" ;
+    yawl:signature "void assignStyle(int maxLevel)" ;
+    rdfs:comment """Calculates the screen co-ords for this panel (relative to the entire form) @param maxLevel the highest depth level of all panels on this form""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.addOccursButton
+yawl:SubPanel_addOccursButton_18 a yawl:Method ;
+    rdfs:label "addOccursButton" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addOccursButton(Button btn)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.clone
+yawl:SubPanel_clone_19 a yawl:Method ;
+    rdfs:label "clone" ;
+    yawl:returnType "SubPanel" ;
+    yawl:signature "SubPanel clone()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.incTop
+yawl:SubPanel_incTop_20 a yawl:Method ;
+    rdfs:label "incTop" ;
+    yawl:returnType "int" ;
+    yawl:signature "int incTop(int amount)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.decTop
+yawl:SubPanel_decTop_21 a yawl:Method ;
+    rdfs:label "decTop" ;
+    yawl:returnType "int" ;
+    yawl:signature "int decTop(int amount)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.incHeight
+yawl:SubPanel_incHeight_22 a yawl:Method ;
+    rdfs:label "incHeight" ;
+    yawl:returnType "double" ;
+    yawl:signature "double incHeight(int amount)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.enableOccursButtons
+yawl:SubPanel_enableOccursButtons_23 a yawl:Method ;
+    rdfs:label "enableOccursButtons" ;
+    yawl:returnType "void" ;
+    yawl:signature "void enableOccursButtons(boolean enable)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.getTop
+yawl:SubPanel_getTop_24 a yawl:Method ;
+    rdfs:label "getTop" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getTop(UIComponent component)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.setContentTops
+yawl:SubPanel_setContentTops_25 a yawl:Method ;
+    rdfs:label "setContentTops" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setContentTops(DynFormComponentList content, int top)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.setContentTop
+yawl:SubPanel_setContentTop_26 a yawl:Method ;
+    rdfs:label "setContentTop" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setContentTop(UIComponent component, int top)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.adjustTopForChoiceContainer
+yawl:SubPanel_adjustTopForChoiceContainer_27 a yawl:Method ;
+    rdfs:label "adjustTopForChoiceContainer" ;
+    yawl:returnType "int" ;
+    yawl:signature "int adjustTopForChoiceContainer(int top)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.incComponentTops
+yawl:SubPanel_incComponentTops_28 a yawl:Method ;
+    rdfs:label "incComponentTops" ;
+    yawl:returnType "void" ;
+    yawl:signature "void incComponentTops(int top, int adjustment)" ;
+    rdfs:comment """reset the tops of all simple components lower than the top specified @param top the y-coord below which components should be moved down @param adjustment how much to move them down by""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanel.resetTopStyle
+yawl:SubPanel_resetTopStyle_29 a yawl:Method ;
+    rdfs:label "resetTopStyle" ;
+    yawl:returnType "void" ;
+    yawl:signature "void resetTopStyle(UIComponent component, int top)" ;
+    rdfs:comment """Sets the top (y-coord) of a component (via its style setting) @param component the componnt to reposition @param top the new top value""" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:SubPanel_height a yawl:Field ;
+    rdfs:label "height" .
+
+yawl:SubPanel_width a yawl:Field ;
+    rdfs:label "width" .
+
+yawl:SubPanel_top a yawl:Field ;
+    rdfs:label "top" .
+
+yawl:SubPanel_name a yawl:Field ;
+    rdfs:label "name" .
+
+yawl:SubPanel_controller a yawl:Field ;
+    rdfs:label "controller" .
+
+yawl:SubPanel_btnPlus a yawl:Field ;
+    rdfs:label "btnPlus" .
+
+yawl:SubPanel_btnMinus a yawl:Field ;
+    rdfs:label "btnMinus" .
+
+yawl:SubPanel__contentTops a yawl:Field ;
+    rdfs:label "_contentTops" .
+
+
+

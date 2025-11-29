@@ -1,0 +1,111 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.rdr.RdrSetLoader
+yawl:RdrSetLoader a yawl:Class ;
+    rdfs:label "RdrSetLoader" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_rdr ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/rdr/RdrSetLoader.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 17/09/2014""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:RdrSetLoader_load_1 ;
+    yawl:hasMethod yawl:RdrSetLoader_load_2 ;
+    yawl:hasMethod yawl:RdrSetLoader_loadNode_3 ;
+    yawl:hasMethod yawl:RdrSetLoader_getSetIDs_4 ;
+    yawl:hasMethod yawl:RdrSetLoader_removeSet_5 ;
+    yawl:hasMethod yawl:RdrSetLoader_removeSet_6 ;
+    yawl:hasMethod yawl:RdrSetLoader_removeSet_7 ;
+    yawl:hasMethod yawl:RdrSetLoader_loadSet_8 ;
+    yawl:hasMethod yawl:RdrSetLoader_loadSet_9 ;
+    yawl:hasMethod yawl:RdrSetLoader_loadSet_10 ;
+    .
+
+
+# Method: RdrSetLoader.load
+yawl:RdrSetLoader_load_1 a yawl:Method ;
+    rdfs:label "load" ;
+    yawl:returnType "RdrSet" ;
+    yawl:signature "RdrSet load(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrSetLoader.load
+yawl:RdrSetLoader_load_2 a yawl:Method ;
+    rdfs:label "load" ;
+    yawl:returnType "RdrSet" ;
+    yawl:signature "RdrSet load(String processName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrSetLoader.loadNode
+yawl:RdrSetLoader_loadNode_3 a yawl:Method ;
+    rdfs:label "loadNode" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode loadNode(long nodeID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrSetLoader.getSetIDs
+yawl:RdrSetLoader_getSetIDs_4 a yawl:Method ;
+    rdfs:label "getSetIDs" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getSetIDs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrSetLoader.removeSet
+yawl:RdrSetLoader_removeSet_5 a yawl:Method ;
+    rdfs:label "removeSet" ;
+    yawl:returnType "RdrSet" ;
+    yawl:signature "RdrSet removeSet(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrSetLoader.removeSet
+yawl:RdrSetLoader_removeSet_6 a yawl:Method ;
+    rdfs:label "removeSet" ;
+    yawl:returnType "RdrSet" ;
+    yawl:signature "RdrSet removeSet(String processName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrSetLoader.removeSet
+yawl:RdrSetLoader_removeSet_7 a yawl:Method ;
+    rdfs:label "removeSet" ;
+    yawl:returnType "RdrSet" ;
+    yawl:signature "RdrSet removeSet(RdrSet rdrSet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrSetLoader.loadSet
+yawl:RdrSetLoader_loadSet_8 a yawl:Method ;
+    rdfs:label "loadSet" ;
+    yawl:returnType "RdrSet" ;
+    yawl:signature "RdrSet loadSet(YSpecificationID specID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RdrSetLoader.loadSet
+yawl:RdrSetLoader_loadSet_9 a yawl:Method ;
+    rdfs:label "loadSet" ;
+    yawl:returnType "RdrSet" ;
+    yawl:signature "RdrSet loadSet(String name)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RdrSetLoader.loadSet
+yawl:RdrSetLoader_loadSet_10 a yawl:Method ;
+    rdfs:label "loadSet" ;
+    yawl:returnType "RdrSet" ;
+    yawl:signature "RdrSet loadSet(String column, String value)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+
+

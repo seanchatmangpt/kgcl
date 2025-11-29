@@ -1,0 +1,139 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.scheduling.Mapping
+yawl:Mapping a yawl:Class ;
+    rdfs:label "Mapping" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_scheduling ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/scheduling/Mapping.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Mapping_getWorkItemId_1 ;
+    yawl:hasMethod yawl:Mapping_setWorkItemId_2 ;
+    yawl:hasMethod yawl:Mapping_getRequestKey_3 ;
+    yawl:hasMethod yawl:Mapping_setRequestKey_4 ;
+    yawl:hasMethod yawl:Mapping_isLocked_5 ;
+    yawl:hasMethod yawl:Mapping_setLocked_6 ;
+    yawl:hasMethod yawl:Mapping_getWorkItemStatus_7 ;
+    yawl:hasMethod yawl:Mapping_setWorkItemStatus_8 ;
+    yawl:hasMethod yawl:Mapping_toString_9 ;
+    yawl:hasField yawl:Mapping_workItemId ;
+    yawl:hasField yawl:Mapping_requestKey ;
+    yawl:hasField yawl:Mapping_workItemStatus ;
+    yawl:hasField yawl:Mapping_isLocked ;
+    yawl:hasField yawl:Mapping_WORKITEM_STATUS_PARENT ;
+    yawl:hasField yawl:Mapping_WORKITEM_STATUS_CHECKOUT ;
+    yawl:hasField yawl:Mapping_WORKITEM_STATUS_CACHED ;
+    yawl:hasField yawl:Mapping_WORKITEM_STATUS_PROCESSING ;
+    .
+
+
+# Method: Mapping.getWorkItemId
+yawl:Mapping_getWorkItemId_1 a yawl:Method ;
+    rdfs:label "getWorkItemId" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItemId()" ;
+    rdfs:comment """@return the workItemId""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Mapping.setWorkItemId
+yawl:Mapping_setWorkItemId_2 a yawl:Method ;
+    rdfs:label "setWorkItemId" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setWorkItemId(String workItemId)" ;
+    rdfs:comment """@param workItemId the workItemId to set""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Mapping.getRequestKey
+yawl:Mapping_getRequestKey_3 a yawl:Method ;
+    rdfs:label "getRequestKey" ;
+    yawl:returnType "Integer" ;
+    yawl:signature "Integer getRequestKey()" ;
+    rdfs:comment """@return the requestKey""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Mapping.setRequestKey
+yawl:Mapping_setRequestKey_4 a yawl:Method ;
+    rdfs:label "setRequestKey" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRequestKey(Integer requestKey)" ;
+    rdfs:comment """@param requestKey the requestKey to set""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Mapping.isLocked
+yawl:Mapping_isLocked_5 a yawl:Method ;
+    rdfs:label "isLocked" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isLocked()" ;
+    rdfs:comment """@return the isLocked""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Mapping.setLocked
+yawl:Mapping_setLocked_6 a yawl:Method ;
+    rdfs:label "setLocked" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLocked(boolean isLocked)" ;
+    rdfs:comment """@param isLocked the isLocked to set""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Mapping.getWorkItemStatus
+yawl:Mapping_getWorkItemStatus_7 a yawl:Method ;
+    rdfs:label "getWorkItemStatus" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItemStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Mapping.setWorkItemStatus
+yawl:Mapping_setWorkItemStatus_8 a yawl:Method ;
+    rdfs:label "setWorkItemStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setWorkItemStatus(String workItemStatus)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Mapping.toString
+yawl:Mapping_toString_9 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:Mapping_workItemId a yawl:Field ;
+    rdfs:label "workItemId" .
+
+yawl:Mapping_requestKey a yawl:Field ;
+    rdfs:label "requestKey" .
+
+yawl:Mapping_workItemStatus a yawl:Field ;
+    rdfs:label "workItemStatus" .
+
+yawl:Mapping_isLocked a yawl:Field ;
+    rdfs:label "isLocked" .
+
+yawl:Mapping_WORKITEM_STATUS_PARENT a yawl:Field ;
+    rdfs:label "WORKITEM_STATUS_PARENT" .
+
+yawl:Mapping_WORKITEM_STATUS_CHECKOUT a yawl:Field ;
+    rdfs:label "WORKITEM_STATUS_CHECKOUT" .
+
+yawl:Mapping_WORKITEM_STATUS_CACHED a yawl:Field ;
+    rdfs:label "WORKITEM_STATUS_CACHED" .
+
+yawl:Mapping_WORKITEM_STATUS_PROCESSING a yawl:Field ;
+    rdfs:label "WORKITEM_STATUS_PROCESSING" .
+
+
+

@@ -1,0 +1,28 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.swingWorklist.TopPopupMenu
+yawl:TopPopupMenu a yawl:Class ;
+    rdfs:label "TopPopupMenu" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_swingWorklist ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/swingWorklist/YWorklistGUI.java"^^xsd:string ;
+    yawl:extends yawl:JPopupMenu ;
+    yawl:hasField yawl:TopPopupMenu__applyItem ;
+    yawl:hasField yawl:TopPopupMenu__ref ;
+    .
+
+
+
+
+yawl:TopPopupMenu__applyItem a yawl:Field ;
+    rdfs:label "_applyItem" .
+
+yawl:TopPopupMenu__ref a yawl:Field ;
+    rdfs:label "_ref" .
+
+
+

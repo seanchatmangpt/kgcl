@@ -1,0 +1,458 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.update.Updater
+yawl:Updater a yawl:Class ;
+    rdfs:label "Updater" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_update ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/update/Updater.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 19/11/2015""" ;
+    yawl:implements yawl:PropertyChangeListener ;
+    yawl:implements yawl:EngineStatusListener ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Updater_start_1 ;
+    yawl:hasMethod yawl:Updater_propertyChange_2 ;
+    yawl:hasMethod yawl:Updater_statusChanged_3 ;
+    yawl:hasMethod yawl:Updater_setState_4 ;
+    yawl:hasMethod yawl:Updater_download_5 ;
+    yawl:hasMethod yawl:Updater_verify_6 ;
+    yawl:hasMethod yawl:Updater_stopEngine_7 ;
+    yawl:hasMethod yawl:Updater_update_8 ;
+    yawl:hasMethod yawl:Updater_startEngine_9 ;
+    yawl:hasMethod yawl:Updater_complete_10 ;
+    yawl:hasMethod yawl:Updater_finalise_11 ;
+    yawl:hasMethod yawl:Updater_getDownloadList_12 ;
+    yawl:hasMethod yawl:Updater_getDeletionList_13 ;
+    yawl:hasMethod yawl:Updater_getInstallList_14 ;
+    yawl:hasMethod yawl:Updater_getMd5Map_15 ;
+    yawl:hasMethod yawl:Updater_getUpdatesList_16 ;
+    yawl:hasMethod yawl:Updater_getDownloadSize_17 ;
+    yawl:hasMethod yawl:Updater_consolidateLibs_18 ;
+    yawl:hasMethod yawl:Updater_download_19 ;
+    yawl:hasMethod yawl:Updater_downloadCompleted_20 ;
+    yawl:hasMethod yawl:Updater_verifyCompleted_21 ;
+    yawl:hasMethod yawl:Updater_getProgressPanel_22 ;
+    yawl:hasMethod yawl:Updater_getDownloader_23 ;
+    yawl:hasMethod yawl:Updater_showError_24 ;
+    yawl:hasMethod yawl:Updater_showWarning_25 ;
+    yawl:hasMethod yawl:Updater_doUpdates_26 ;
+    yawl:hasMethod yawl:Updater_copy_27 ;
+    yawl:hasMethod yawl:Updater_getCopyTarget_28 ;
+    yawl:hasMethod yawl:Updater_isControlPanelFileName_29 ;
+    yawl:hasMethod yawl:Updater_onlyUpdatingControlPanel_30 ;
+    yawl:hasMethod yawl:Updater_updateThis_31 ;
+    yawl:hasMethod yawl:Updater_doDeletions_32 ;
+    yawl:hasMethod yawl:Updater_doUninstalls_33 ;
+    yawl:hasMethod yawl:Updater_updateServiceRegistration_34 ;
+    yawl:hasMethod yawl:Updater_consolidateLibDir_35 ;
+    yawl:hasMethod yawl:Updater_restartApp_36 ;
+    yawl:hasMethod yawl:Updater_getPathForNewAppName_37 ;
+    yawl:hasMethod yawl:Updater_getPathPart_38 ;
+    yawl:hasMethod yawl:Updater_updatePort_39 ;
+    yawl:hasMethod yawl:Updater_showProgress_40 ;
+    yawl:hasMethod yawl:Updater_prepareDiffer_41 ;
+    yawl:hasMethod yawl:Updater_resetCursor_42 ;
+    yawl:hasMethod yawl:Updater_setWaitCursor_43 ;
+    yawl:hasField yawl:Updater__componentsPane ;
+    yawl:hasField yawl:Updater__progressPanel ;
+    yawl:hasField yawl:Updater__downloader ;
+    yawl:hasField yawl:Updater__appRows ;
+    yawl:hasField yawl:Updater__checker ;
+    yawl:hasField yawl:Updater__cycled ;
+    yawl:hasField yawl:Updater__differ ;
+    yawl:hasField yawl:Updater__installs ;
+    yawl:hasField yawl:Updater__downloads ;
+    yawl:hasField yawl:Updater__deletions ;
+    yawl:hasField yawl:Updater__state ;
+    yawl:hasField yawl:Updater__updatingThis ;
+    .
+
+
+# Method: Updater.start
+yawl:Updater_start_1 a yawl:Method ;
+    rdfs:label "start" ;
+    yawl:returnType "void" ;
+    yawl:signature "void start()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Updater.propertyChange
+yawl:Updater_propertyChange_2 a yawl:Method ;
+    rdfs:label "propertyChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void propertyChange(PropertyChangeEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Updater.statusChanged
+yawl:Updater_statusChanged_3 a yawl:Method ;
+    rdfs:label "statusChanged" ;
+    yawl:returnType "void" ;
+    yawl:signature "void statusChanged(EngineStatus status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Updater.setState
+yawl:Updater_setState_4 a yawl:Method ;
+    rdfs:label "setState" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setState(State state)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Updater.download
+yawl:Updater_download_5 a yawl:Method ;
+    rdfs:label "download" ;
+    yawl:returnType "void" ;
+    yawl:signature "void download()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Updater.verify
+yawl:Updater_verify_6 a yawl:Method ;
+    rdfs:label "verify" ;
+    yawl:returnType "void" ;
+    yawl:signature "void verify()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Updater.stopEngine
+yawl:Updater_stopEngine_7 a yawl:Method ;
+    rdfs:label "stopEngine" ;
+    yawl:returnType "void" ;
+    yawl:signature "void stopEngine()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Updater.update
+yawl:Updater_update_8 a yawl:Method ;
+    rdfs:label "update" ;
+    yawl:returnType "void" ;
+    yawl:signature "void update()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Updater.startEngine
+yawl:Updater_startEngine_9 a yawl:Method ;
+    rdfs:label "startEngine" ;
+    yawl:returnType "void" ;
+    yawl:signature "void startEngine()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Updater.complete
+yawl:Updater_complete_10 a yawl:Method ;
+    rdfs:label "complete" ;
+    yawl:returnType "void" ;
+    yawl:signature "void complete()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Updater.finalise
+yawl:Updater_finalise_11 a yawl:Method ;
+    rdfs:label "finalise" ;
+    yawl:returnType "void" ;
+    yawl:signature "void finalise()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Updater.getDownloadList
+yawl:Updater_getDownloadList_12 a yawl:Method ;
+    rdfs:label "getDownloadList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getDownloadList(List updates)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Updater.getDeletionList
+yawl:Updater_getDeletionList_13 a yawl:Method ;
+    rdfs:label "getDeletionList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getDeletionList(List updates)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Updater.getInstallList
+yawl:Updater_getInstallList_14 a yawl:Method ;
+    rdfs:label "getInstallList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getInstallList(List updateRows)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Updater.getMd5Map
+yawl:Updater_getMd5Map_15 a yawl:Method ;
+    rdfs:label "getMd5Map" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getMd5Map()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Updater.getUpdatesList
+yawl:Updater_getUpdatesList_16 a yawl:Method ;
+    rdfs:label "getUpdatesList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getUpdatesList()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Updater.getDownloadSize
+yawl:Updater_getDownloadSize_17 a yawl:Method ;
+    rdfs:label "getDownloadSize" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getDownloadSize(List updates)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Updater.consolidateLibs
+yawl:Updater_consolidateLibs_18 a yawl:Method ;
+    rdfs:label "consolidateLibs" ;
+    yawl:returnType "List" ;
+    yawl:signature "List consolidateLibs(List updates)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Updater.download
+yawl:Updater_download_19 a yawl:Method ;
+    rdfs:label "download" ;
+    yawl:returnType "void" ;
+    yawl:signature "void download(List updates)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Updater.downloadCompleted
+yawl:Updater_downloadCompleted_20 a yawl:Method ;
+    rdfs:label "downloadCompleted" ;
+    yawl:returnType "void" ;
+    yawl:signature "void downloadCompleted()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Updater.verifyCompleted
+yawl:Updater_verifyCompleted_21 a yawl:Method ;
+    rdfs:label "verifyCompleted" ;
+    yawl:returnType "void" ;
+    yawl:signature "void verifyCompleted(Verifier verifier)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Updater.getProgressPanel
+yawl:Updater_getProgressPanel_22 a yawl:Method ;
+    rdfs:label "getProgressPanel" ;
+    yawl:returnType "ProgressPanel" ;
+    yawl:signature "ProgressPanel getProgressPanel()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Updater.getDownloader
+yawl:Updater_getDownloader_23 a yawl:Method ;
+    rdfs:label "getDownloader" ;
+    yawl:returnType "Downloader" ;
+    yawl:signature "Downloader getDownloader()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Updater.showError
+yawl:Updater_showError_24 a yawl:Method ;
+    rdfs:label "showError" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showError(String message)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Updater.showWarning
+yawl:Updater_showWarning_25 a yawl:Method ;
+    rdfs:label "showWarning" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showWarning(String message)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Updater.doUpdates
+yawl:Updater_doUpdates_26 a yawl:Method ;
+    rdfs:label "doUpdates" ;
+    yawl:returnType "File" ;
+    yawl:signature "File doUpdates(File tomcatDir)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Updater.copy
+yawl:Updater_copy_27 a yawl:Method ;
+    rdfs:label "copy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void copy(File source, File target)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Updater.getCopyTarget
+yawl:Updater_getCopyTarget_28 a yawl:Method ;
+    rdfs:label "getCopyTarget" ;
+    yawl:returnType "File" ;
+    yawl:signature "File getCopyTarget(File tomcatDir, String fileName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Updater.isControlPanelFileName
+yawl:Updater_isControlPanelFileName_29 a yawl:Method ;
+    rdfs:label "isControlPanelFileName" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isControlPanelFileName(String fileName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Updater.onlyUpdatingControlPanel
+yawl:Updater_onlyUpdatingControlPanel_30 a yawl:Method ;
+    rdfs:label "onlyUpdatingControlPanel" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean onlyUpdatingControlPanel()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Updater.updateThis
+yawl:Updater_updateThis_31 a yawl:Method ;
+    rdfs:label "updateThis" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean updateThis()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Updater.doDeletions
+yawl:Updater_doDeletions_32 a yawl:Method ;
+    rdfs:label "doDeletions" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doDeletions(File tomcatRoot)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Updater.doUninstalls
+yawl:Updater_doUninstalls_33 a yawl:Method ;
+    rdfs:label "doUninstalls" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doUninstalls(File tomcatRoot)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Updater.updateServiceRegistration
+yawl:Updater_updateServiceRegistration_34 a yawl:Method ;
+    rdfs:label "updateServiceRegistration" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateServiceRegistration()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Updater.consolidateLibDir
+yawl:Updater_consolidateLibDir_35 a yawl:Method ;
+    rdfs:label "consolidateLibDir" ;
+    yawl:returnType "void" ;
+    yawl:signature "void consolidateLibDir(File tomcatRoot)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Updater.restartApp
+yawl:Updater_restartApp_36 a yawl:Method ;
+    rdfs:label "restartApp" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restartApp()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Updater.getPathForNewAppName
+yawl:Updater_getPathForNewAppName_37 a yawl:Method ;
+    rdfs:label "getPathForNewAppName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPathForNewAppName(String appPath)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Updater.getPathPart
+yawl:Updater_getPathPart_38 a yawl:Method ;
+    rdfs:label "getPathPart" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPathPart(String appPath)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Updater.updatePort
+yawl:Updater_updatePort_39 a yawl:Method ;
+    rdfs:label "updatePort" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updatePort(File webxml, int port)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Updater.showProgress
+yawl:Updater_showProgress_40 a yawl:Method ;
+    rdfs:label "showProgress" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showProgress(String text)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Updater.prepareDiffer
+yawl:Updater_prepareDiffer_41 a yawl:Method ;
+    rdfs:label "prepareDiffer" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean prepareDiffer()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Updater.resetCursor
+yawl:Updater_resetCursor_42 a yawl:Method ;
+    rdfs:label "resetCursor" ;
+    yawl:returnType "void" ;
+    yawl:signature "void resetCursor()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Updater.setWaitCursor
+yawl:Updater_setWaitCursor_43 a yawl:Method ;
+    rdfs:label "setWaitCursor" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setWaitCursor()" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:Updater__componentsPane a yawl:Field ;
+    rdfs:label "_componentsPane" .
+
+yawl:Updater__progressPanel a yawl:Field ;
+    rdfs:label "_progressPanel" .
+
+yawl:Updater__downloader a yawl:Field ;
+    rdfs:label "_downloader" .
+
+yawl:Updater__appRows a yawl:Field ;
+    rdfs:label "_appRows" .
+
+yawl:Updater__checker a yawl:Field ;
+    rdfs:label "_checker" .
+
+yawl:Updater__cycled a yawl:Field ;
+    rdfs:label "_cycled" .
+
+yawl:Updater__differ a yawl:Field ;
+    rdfs:label "_differ" .
+
+yawl:Updater__installs a yawl:Field ;
+    rdfs:label "_installs" .
+
+yawl:Updater__downloads a yawl:Field ;
+    rdfs:label "_downloads" .
+
+yawl:Updater__deletions a yawl:Field ;
+    rdfs:label "_deletions" .
+
+yawl:Updater__state a yawl:Field ;
+    rdfs:label "_state" .
+
+yawl:Updater__updatingThis a yawl:Field ;
+    rdfs:label "_updatingThis" .
+
+
+

@@ -1,0 +1,1361 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.rsInterface.ResourceGatewayClientAdapter
+yawl:ResourceGatewayClientAdapter a yawl:Class ;
+    rdfs:label "ResourceGatewayClientAdapter" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_rsInterface ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/rsInterface/ResourceGatewayClientAdapter.java"^^xsd:string ;
+    rdfs:comment """This adapter class adds a transformation layer to the resource gateway client, effectively reconstituting the Strings returned from the gateway into java objects. Author: Michael Adams Date: 26/10/2007""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_setClientURI_1 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getClientURI_2 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getClient_3 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_successful_4 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_successCheck_5 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_CSVToStringList_6 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_xmlToStringMap_7 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_xmlToStringList_8 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getChildren_9 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_newAttributeClass_10 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_newSelectorClass_11 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_xmlStringToResourceAttributeList_12 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_xmlStringToSelectorList_13 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_xmlToNonHumanResourceList_14 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_buildNonHumanResource_15 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_checkConnection_16 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_connect_17 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_disconnect_18 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_validateUserCredentials_19 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getAllParticipantNames_20 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getAllRoleNames_21 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getAllNonHumanResourceNames_22 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getNonHumanResources_23 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getNonHumanCategoryMembers_24 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getRoles_25 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getCapabilities_26 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getPositions_27 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getOrgGroups_28 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getParticipants_29 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getParticipant_30 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getReferencedParticipantIDs_31 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getConstraints_32 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getAllocators_33 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getFilters_34 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getCodelets_35 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getCodeletMap_36 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getCodeletParameters_37 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_isOrgDataSetModifiable_38 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_isKnownCapability_39 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_isKnownNonHumanResource_40 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_isKnownRole_41 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_isKnownParticipant_42 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_isKnownPosition_43 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_isKnownOrgGroup_44 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_isKnownNonHumanCategory_45 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getActiveParticipants_46 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getParticipantRoles_47 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getParticipantCapabilities_48 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getParticipantPositions_49 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getParticipantsWithRole_50 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getParticipantsWithPosition_51 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getParticipantsWithCapability_52 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getParticipantFromUserID_53 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getNonHumanResource_54 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getNonHumanResourceByName_55 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getRole_56 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getRoleByName_57 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getCapability_58 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getCapabilityByName_59 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getPosition_60 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getPositionByName_61 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getOrgGroup_62 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getOrgGroupByName_63 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getParticipantIdentifiers_64 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getParticipantIdentifiersToJSON_65 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getParticipantIdentifiers_66 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getParticipantIdentifiersToJSON_67 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getNonHumanResourceIdentifiers_68 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getNonHumanResourceIdentifiersToJSON_69 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getRoleIdentifiers_70 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getRoleIdentifiersToJSON_71 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getPositionIdentifiers_72 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getPositionIdentifiersToJSON_73 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getCapabilityIdentifiers_74 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getCapabilityIdentifiersToJSON_75 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getOrgGroupIdentifiers_76 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getOrgGroupIdentifiersToJSON_77 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getUserPrivileges_78 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_addParticipant_79 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_addParticipant_80 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_addNonHumanResource_81 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_addCapability_82 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_addRole_83 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_addPosition_84 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_addOrgGroup_85 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_addParticipantToRole_86 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_addParticipantToCapability_87 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_addParticipantToPosition_88 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_updateParticipant_89 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_updateParticipant_90 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_updateNonHumanResource_91 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_updateCapability_92 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_updateRole_93 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_updatePosition_94 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_updateOrgGroup_95 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_updateNonHumanCategory_96 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_removeParticipant_97 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_removeNonHumanResource_98 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_removeCapability_99 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_removeRole_100 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_removePosition_101 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_removeOrgGroup_102 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_removeParticipantFromRole_103 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_removeParticipantFromCapability_104 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_removeParticipantFromPosition_105 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_setContainingRole_106 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_setContainingOrgGroup_107 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_setContainingPosition_108 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_setPositionOrgGroup_109 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_setParticipantPrivileges_110 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_setParticipantPrivileges_111 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getNonHumanCategory_112 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getNonHumanCategoryByName_113 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getNonHumanCategories_114 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getNonHumanCategoriesToJSON_115 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getNonHumanSubCategories_116 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getNonHumanSubCategoriesByName_117 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getNonHumanSubCategoriesToJSON_118 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getNonHumanSubCategoriesToJSONByName_119 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getNonHumanCategorySet_120 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_addNonHumanCategory_121 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_addNonHumanSubCategoryByName_122 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_addNonHumanSubCategory_123 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_removeNonHumanCategory_124 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_removeNonHumanCategoryByName_125 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_removeNonHumanSubCategoryByName_126 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_removeNonHumanSubCategory_127 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_importOrgData_128 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_exportOrgData_129 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getSecondaryResources_130 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_setSecondaryResources_131 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_checkSecondaryResourcesAvailability_132 ;
+    yawl:hasMethod yawl:ResourceGatewayClientAdapter_getBuildProperties_133 ;
+    yawl:hasField yawl:ResourceGatewayClientAdapter_XML_FORMAT ;
+    yawl:hasField yawl:ResourceGatewayClientAdapter_JSON_FORMAT ;
+    yawl:hasField yawl:ResourceGatewayClientAdapter__rgclient ;
+    yawl:hasField yawl:ResourceGatewayClientAdapter__uri ;
+    yawl:hasField yawl:ResourceGatewayClientAdapter__marshaller ;
+    yawl:hasField yawl:ResourceGatewayClientAdapter__xnodeParser ;
+    .
+
+
+# Method: ResourceGatewayClientAdapter.setClientURI
+yawl:ResourceGatewayClientAdapter_setClientURI_1 a yawl:Method ;
+    rdfs:label "setClientURI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setClientURI(String uri)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getClientURI
+yawl:ResourceGatewayClientAdapter_getClientURI_2 a yawl:Method ;
+    rdfs:label "getClientURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getClientURI()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getClient
+yawl:ResourceGatewayClientAdapter_getClient_3 a yawl:Method ;
+    rdfs:label "getClient" ;
+    yawl:returnType "ResourceGatewayClient" ;
+    yawl:signature "ResourceGatewayClient getClient()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.successful
+yawl:ResourceGatewayClientAdapter_successful_4 a yawl:Method ;
+    rdfs:label "successful" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean successful(String result)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.successCheck
+yawl:ResourceGatewayClientAdapter_successCheck_5 a yawl:Method ;
+    rdfs:label "successCheck" ;
+    yawl:returnType "String" ;
+    yawl:signature "String successCheck(String xml)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.CSVToStringList
+yawl:ResourceGatewayClientAdapter_CSVToStringList_6 a yawl:Method ;
+    rdfs:label "CSVToStringList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List CSVToStringList(String csv)" ;
+    rdfs:comment """Converts a CSV string into a List of String objects @param csv the string of items separated by commas @return a List of items as Strings""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.xmlToStringMap
+yawl:ResourceGatewayClientAdapter_xmlToStringMap_7 a yawl:Method ;
+    rdfs:label "xmlToStringMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map xmlToStringMap(String xml)" ;
+    rdfs:comment """Converts an XML string into a Map of string key/value pairs. Assumes the xml contains a set of child items, each with an 'id' attribute and a text value. @param xml the xml string to parse @return a Map of String key/value pairs, or null if the string can't be parsed.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.xmlToStringList
+yawl:ResourceGatewayClientAdapter_xmlToStringList_8 a yawl:Method ;
+    rdfs:label "xmlToStringList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List xmlToStringList(String xml)" ;
+    rdfs:comment """Converts an XML string into a List of String values. Assumes the xml contains a set of child items, each with a text value. @param xml the xml string to parse @return a List of Strings, or null if the string can't be parsed.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getChildren
+yawl:ResourceGatewayClientAdapter_getChildren_9 a yawl:Method ;
+    rdfs:label "getChildren" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getChildren(String s)" ;
+    rdfs:comment """Converts the string passed to a JDOM Element and returns its child Elements @param s the xml string to be converted @return a list of child elements of the converted element passed""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.newAttributeClass
+yawl:ResourceGatewayClientAdapter_newAttributeClass_10 a yawl:Method ;
+    rdfs:label "newAttributeClass" ;
+    yawl:returnType "AbstractResourceAttribute" ;
+    yawl:signature "AbstractResourceAttribute newAttributeClass(String className)" ;
+    rdfs:comment """Creates a new class instance of the name passed. @pre className is the valid name of a class that extends from the base AbstractResourceAtttribute @param className the name of the extended class to create @return An instantiated class of type 'className', or null if there's a problem""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.newSelectorClass
+yawl:ResourceGatewayClientAdapter_newSelectorClass_11 a yawl:Method ;
+    rdfs:label "newSelectorClass" ;
+    yawl:returnType "AbstractSelector" ;
+    yawl:signature "AbstractSelector newSelectorClass(String className)" ;
+    rdfs:comment """Creates a new class instance of the name passed. @pre className is the valid name of a class that extends from the base AbstractSelector @param className the name of the extended class to create @return An instantiated class of type 'className', or null if there's a problem""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.xmlStringToResourceAttributeList
+yawl:ResourceGatewayClientAdapter_xmlStringToResourceAttributeList_12 a yawl:Method ;
+    rdfs:label "xmlStringToResourceAttributeList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List xmlStringToResourceAttributeList(String xml, String className)" ;
+    rdfs:comment """Converts a string version of a JDOM Element into a List of instantiated ResourceAttribute child objects (i.e. Role, Position, Capability, OrgGroup) @param xml the string to be converted to a JDOM Element @param className the type of child class to instantiate @return a List of instantiated objects""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.xmlStringToSelectorList
+yawl:ResourceGatewayClientAdapter_xmlStringToSelectorList_13 a yawl:Method ;
+    rdfs:label "xmlStringToSelectorList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List xmlStringToSelectorList(String xml, String className)" ;
+    rdfs:comment """Converts a string version of a JDOM Element into a List of instantiated ResourceAttribute child objects (i.e. GenericConstraint, GenericFilter, GenericAllocator) @param xml the string to be converted to a JDOM Element @param className the type of child class to instantiate @return a List of instantiated objects""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.xmlToNonHumanResourceList
+yawl:ResourceGatewayClientAdapter_xmlToNonHumanResourceList_14 a yawl:Method ;
+    rdfs:label "xmlToNonHumanResourceList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List xmlToNonHumanResourceList(String xml, String handle)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.buildNonHumanResource
+yawl:ResourceGatewayClientAdapter_buildNonHumanResource_15 a yawl:Method ;
+    rdfs:label "buildNonHumanResource" ;
+    yawl:returnType "NonHumanResource" ;
+    yawl:signature "NonHumanResource buildNonHumanResource(Element e, String handle)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.checkConnection
+yawl:ResourceGatewayClientAdapter_checkConnection_16 a yawl:Method ;
+    rdfs:label "checkConnection" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean checkConnection(String handle)" ;
+    rdfs:comment """Checks that the connection to the service is valid @param handle the current sessionhandle @return true if the connection is valid, false if otherwise""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.connect
+yawl:ResourceGatewayClientAdapter_connect_17 a yawl:Method ;
+    rdfs:label "connect" ;
+    yawl:returnType "String" ;
+    yawl:signature "String connect(String userid, String password)" ;
+    rdfs:comment """Attempts to connect to the service @param userid the userid @param password  the corresponding password @return a sessionhandle if successful, or a failure message if otherwise""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.disconnect
+yawl:ResourceGatewayClientAdapter_disconnect_18 a yawl:Method ;
+    rdfs:label "disconnect" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disconnect(String handle)" ;
+    rdfs:comment """Disconnects a session from the service @param handle the sessionhandle of the session to disconnect""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.validateUserCredentials
+yawl:ResourceGatewayClientAdapter_validateUserCredentials_19 a yawl:Method ;
+    rdfs:label "validateUserCredentials" ;
+    yawl:returnType "String" ;
+    yawl:signature "String validateUserCredentials(String userid, String password, boolean checkForAdmin, String handle)" ;
+    rdfs:comment """Checks the user credentials passed against those stored @param userid the userid of the Participant @param password the associated password @param checkForAdmin when true, also checks that the user has admin privileges @param handle a valid session handle @return an XML message of success or an appropriate error message @throws IOException if the service can't be reached @throws ResourceGatewayException if there was a problem validating the credentials""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getAllParticipantNames
+yawl:ResourceGatewayClientAdapter_getAllParticipantNames_20 a yawl:Method ;
+    rdfs:label "getAllParticipantNames" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAllParticipantNames(String handle)" ;
+    rdfs:comment """Gets the full name of each participant @param handle the current sessionhandle @return a List of participant full names @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the names""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getAllRoleNames
+yawl:ResourceGatewayClientAdapter_getAllRoleNames_21 a yawl:Method ;
+    rdfs:label "getAllRoleNames" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAllRoleNames(String handle)" ;
+    rdfs:comment """Gets the name of each role @param handle the current sessionhandle @return a List of role names @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the names""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getAllNonHumanResourceNames
+yawl:ResourceGatewayClientAdapter_getAllNonHumanResourceNames_22 a yawl:Method ;
+    rdfs:label "getAllNonHumanResourceNames" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAllNonHumanResourceNames(String handle)" ;
+    rdfs:comment """Gets the name of each NonHumanResource @param handle the current sessionhandle @return a List of NonHumanResource names @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the names""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getNonHumanResources
+yawl:ResourceGatewayClientAdapter_getNonHumanResources_23 a yawl:Method ;
+    rdfs:label "getNonHumanResources" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getNonHumanResources(String handle)" ;
+    rdfs:comment """Gets a complete list of available NonHumanResource objects @param handle the current sessionhandle @return a List of NonHumanResource objects @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the NonHumanResource""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getNonHumanCategoryMembers
+yawl:ResourceGatewayClientAdapter_getNonHumanCategoryMembers_24 a yawl:Method ;
+    rdfs:label "getNonHumanCategoryMembers" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getNonHumanCategoryMembers(String categoryID, String subCategory, String handle)" ;
+    rdfs:comment """Gets all the NonHumanResources belonging to a category @param categoryID the id of the category @param subCategory a sub-category name. If provided, will return members only with that category + sub-category combination. If null, all the members of the category are returned @param handle a valid session handle @return a List of all NonHumanResources for that category @throws IOException if the service can't be reached @throws ResourceGatewayException if there was a problem getting the NonHumanRe""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getRoles
+yawl:ResourceGatewayClientAdapter_getRoles_25 a yawl:Method ;
+    rdfs:label "getRoles" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getRoles(String handle)" ;
+    rdfs:comment """Gets a complete list of available Role objects @param handle the current sessionhandle @return a List of Role objects @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the roles""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getCapabilities
+yawl:ResourceGatewayClientAdapter_getCapabilities_26 a yawl:Method ;
+    rdfs:label "getCapabilities" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getCapabilities(String handle)" ;
+    rdfs:comment """Gets a complete list of available Capability objects @param handle the current sessionhandle @return a List of Capability objects @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the capabilities""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getPositions
+yawl:ResourceGatewayClientAdapter_getPositions_27 a yawl:Method ;
+    rdfs:label "getPositions" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getPositions(String handle)" ;
+    rdfs:comment """Gets a complete list of available Position objects @param handle the current sessionhandle @return a List of Position objects @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the positions""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getOrgGroups
+yawl:ResourceGatewayClientAdapter_getOrgGroups_28 a yawl:Method ;
+    rdfs:label "getOrgGroups" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getOrgGroups(String handle)" ;
+    rdfs:comment """Gets a complete list of available OrgGroup objects @param handle the current sessionhandle @return a List of OrgGroup objects @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the groups""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getParticipants
+yawl:ResourceGatewayClientAdapter_getParticipants_29 a yawl:Method ;
+    rdfs:label "getParticipants" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getParticipants(String handle)" ;
+    rdfs:comment """Gets a complete list of available Participant objects @param handle the current sessionhandle @return a List of Participant objects @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the participants""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getParticipant
+yawl:ResourceGatewayClientAdapter_getParticipant_30 a yawl:Method ;
+    rdfs:label "getParticipant" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant getParticipant(String pid, String handle)" ;
+    rdfs:comment """Gets a particular Participant @param pid the id of the Participant to get @param handle the current session handle @return a Participant object for the id, or null if not found @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the participant""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getReferencedParticipantIDs
+yawl:ResourceGatewayClientAdapter_getReferencedParticipantIDs_31 a yawl:Method ;
+    rdfs:label "getReferencedParticipantIDs" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getReferencedParticipantIDs(String anyID, String handle)" ;
+    rdfs:comment """Gets a set of participant ids referenced by the id string argument @param anyID the id of a Participant, Role, Capability, Position or OrgGroup @param handle a valid session handle @return the set of the ids of all participants who are members of the group object referenced; if anyID is the id of a single participant, then only that id is returned in the set @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getConstraints
+yawl:ResourceGatewayClientAdapter_getConstraints_32 a yawl:Method ;
+    rdfs:label "getConstraints" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getConstraints(String handle)" ;
+    rdfs:comment """Gets a complete list of available Constraint objects @param handle the current sessionhandle @return a List of Constraint objects (instantiated as GenericConstraint objs) @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the constraints""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getAllocators
+yawl:ResourceGatewayClientAdapter_getAllocators_33 a yawl:Method ;
+    rdfs:label "getAllocators" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAllocators(String handle)" ;
+    rdfs:comment """Gets a complete list of available Allocator objects @param handle the current sessionhandle @return a List of Allocator objects (instantiated as GenericAllocator objs) @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the allocators""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getFilters
+yawl:ResourceGatewayClientAdapter_getFilters_34 a yawl:Method ;
+    rdfs:label "getFilters" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getFilters(String handle)" ;
+    rdfs:comment """Gets a complete list of available Filter objects @param handle the current sessionhandle @return a List of Filter objects (instantiated as GenericFilter objs) @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the filters""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getCodelets
+yawl:ResourceGatewayClientAdapter_getCodelets_35 a yawl:Method ;
+    rdfs:label "getCodelets" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getCodelets(String handle)" ;
+    rdfs:comment """Gets a complete list of available codelets @param handle the current sessionhandle @return a List of AbstractCodelet objects @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the codelets""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getCodeletMap
+yawl:ResourceGatewayClientAdapter_getCodeletMap_36 a yawl:Method ;
+    rdfs:label "getCodeletMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getCodeletMap(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getCodeletParameters
+yawl:ResourceGatewayClientAdapter_getCodeletParameters_37 a yawl:Method ;
+    rdfs:label "getCodeletParameters" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getCodeletParameters(String codeletName, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.isOrgDataSetModifiable
+yawl:ResourceGatewayClientAdapter_isOrgDataSetModifiable_38 a yawl:Method ;
+    rdfs:label "isOrgDataSetModifiable" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isOrgDataSetModifiable(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.isKnownCapability
+yawl:ResourceGatewayClientAdapter_isKnownCapability_39 a yawl:Method ;
+    rdfs:label "isKnownCapability" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isKnownCapability(String capabilityID, String handle)" ;
+    rdfs:comment """Checks if an id corresponds to a capability id known to the service @param capabilityID the id to check @param handle the current sessionhandle @return true if the id is known (valid), false if otherwise""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.isKnownNonHumanResource
+yawl:ResourceGatewayClientAdapter_isKnownNonHumanResource_40 a yawl:Method ;
+    rdfs:label "isKnownNonHumanResource" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isKnownNonHumanResource(String id, String handle)" ;
+    rdfs:comment """Checks if an id corresponds to a NonHumanResource id known to the service @param id the id to check @param handle the current sessionhandle @return true if the id is known (valid), false if otherwise""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.isKnownRole
+yawl:ResourceGatewayClientAdapter_isKnownRole_41 a yawl:Method ;
+    rdfs:label "isKnownRole" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isKnownRole(String roleID, String handle)" ;
+    rdfs:comment """Checks if an id corresponds to a role id known to the service @param roleID the id to check @param handle the current sessionhandle @return true if the id is known (valid), false if otherwise""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.isKnownParticipant
+yawl:ResourceGatewayClientAdapter_isKnownParticipant_42 a yawl:Method ;
+    rdfs:label "isKnownParticipant" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isKnownParticipant(String participantID, String handle)" ;
+    rdfs:comment """Checks if an id corresponds to a participant id known to the service @param participantID the id to check @param handle the current sessionhandle @return true if the id is known (valid), false if otherwise""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.isKnownPosition
+yawl:ResourceGatewayClientAdapter_isKnownPosition_43 a yawl:Method ;
+    rdfs:label "isKnownPosition" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isKnownPosition(String positionID, String handle)" ;
+    rdfs:comment """Checks if an id corresponds to a position id known to the service @param positionID the id to check @param handle the current sessionhandle @return true if the id is known (valid), false if otherwise""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.isKnownOrgGroup
+yawl:ResourceGatewayClientAdapter_isKnownOrgGroup_44 a yawl:Method ;
+    rdfs:label "isKnownOrgGroup" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isKnownOrgGroup(String groupID, String handle)" ;
+    rdfs:comment """Checks if an id corresponds to a OrgGroup id known to the service @param groupID the id to check @param handle the current sessionhandle @return true if the id is known (valid), false if otherwise""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.isKnownNonHumanCategory
+yawl:ResourceGatewayClientAdapter_isKnownNonHumanCategory_45 a yawl:Method ;
+    rdfs:label "isKnownNonHumanCategory" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isKnownNonHumanCategory(String id, String handle)" ;
+    rdfs:comment """Checks if an id corresponds to a NonHumanCategory id known to the service @param id the id to check @param handle the current sessionhandle @return true if the id is known (valid), false if otherwise""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getActiveParticipants
+yawl:ResourceGatewayClientAdapter_getActiveParticipants_46 a yawl:Method ;
+    rdfs:label "getActiveParticipants" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getActiveParticipants(String handle)" ;
+    rdfs:comment """Gets the set of Participants that are currently logged on @param handle the current sessionhandle @return the Set of currently logged on Participants @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the participants""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getParticipantRoles
+yawl:ResourceGatewayClientAdapter_getParticipantRoles_47 a yawl:Method ;
+    rdfs:label "getParticipantRoles" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getParticipantRoles(String pid, String handle)" ;
+    rdfs:comment """Gets a list of all roles 'occupied' by the specified participant @param pid the id of the Participant of interest @param handle the current sessionhandle @return a List of (Role) objects @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the roles""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getParticipantCapabilities
+yawl:ResourceGatewayClientAdapter_getParticipantCapabilities_48 a yawl:Method ;
+    rdfs:label "getParticipantCapabilities" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getParticipantCapabilities(String pid, String handle)" ;
+    rdfs:comment """Gets a list of all capabilities held by the specified participant @param pid the id of the Participant of interest @param handle the current sessionhandle @return a List of (Capability) objects @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the capabilities""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getParticipantPositions
+yawl:ResourceGatewayClientAdapter_getParticipantPositions_49 a yawl:Method ;
+    rdfs:label "getParticipantPositions" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getParticipantPositions(String pid, String handle)" ;
+    rdfs:comment """Gets a list of all positions held by the specified participant @param pid the id of the Participant of interest @param handle the current sessionhandle @return a List of (Position) objects @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the positions""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getParticipantsWithRole
+yawl:ResourceGatewayClientAdapter_getParticipantsWithRole_50 a yawl:Method ;
+    rdfs:label "getParticipantsWithRole" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getParticipantsWithRole(String roleName, String handle)" ;
+    rdfs:comment """Gets the set of Participants that 'occupy' the named role @param roleName the name of the role in question (not the id) @param handle the current sessionhandle @return a Set of Participant objects @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the participants""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getParticipantsWithPosition
+yawl:ResourceGatewayClientAdapter_getParticipantsWithPosition_51 a yawl:Method ;
+    rdfs:label "getParticipantsWithPosition" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getParticipantsWithPosition(String positionName, String handle)" ;
+    rdfs:comment """Gets the set of Participants that 'occupy' the named position @param positionName the name of the position in question (not the id) @param handle the current sessionhandle @return a Set of Participant objects @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the participants""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getParticipantsWithCapability
+yawl:ResourceGatewayClientAdapter_getParticipantsWithCapability_52 a yawl:Method ;
+    rdfs:label "getParticipantsWithCapability" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getParticipantsWithCapability(String capabilityName, String handle)" ;
+    rdfs:comment """Gets the set of Participants that hold the named capability @param capabilityName the name of the capability in question (not the id) @param handle the current sessionhandle @return a Set of Participant objects @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the participants""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getParticipantFromUserID
+yawl:ResourceGatewayClientAdapter_getParticipantFromUserID_53 a yawl:Method ;
+    rdfs:label "getParticipantFromUserID" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant getParticipantFromUserID(String userID, String handle)" ;
+    rdfs:comment """Gets the Participant with the specified user id @param userID the userid to match to a Participant @param handle a valid session handle @return the matching Participant @throws IOException if the service can't be reached @throws ResourceGatewayException if there is some problem getting the Participant""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getNonHumanResource
+yawl:ResourceGatewayClientAdapter_getNonHumanResource_54 a yawl:Method ;
+    rdfs:label "getNonHumanResource" ;
+    yawl:returnType "NonHumanResource" ;
+    yawl:signature "NonHumanResource getNonHumanResource(String id, String handle)" ;
+    rdfs:comment """Gets the NonHumanResource with the specified id @param id the id of the NonHumanResource to get @param handle a valid session handle @return the matching NonHumanResource @throws IOException if the service can't be reached @throws ResourceGatewayException if there is some problem getting the NonHumanResource""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getNonHumanResourceByName
+yawl:ResourceGatewayClientAdapter_getNonHumanResourceByName_55 a yawl:Method ;
+    rdfs:label "getNonHumanResourceByName" ;
+    yawl:returnType "NonHumanResource" ;
+    yawl:signature "NonHumanResource getNonHumanResourceByName(String name, String handle)" ;
+    rdfs:comment """Gets the NonHumanResource with the specified name @param name the id of the NonHumanResource to get @param handle a valid session handle @return the matching NonHumanResource @throws IOException if the service can't be reached @throws ResourceGatewayException if there is some problem getting the NonHumanResource""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getRole
+yawl:ResourceGatewayClientAdapter_getRole_56 a yawl:Method ;
+    rdfs:label "getRole" ;
+    yawl:returnType "Role" ;
+    yawl:signature "Role getRole(String id, String handle)" ;
+    rdfs:comment """Gets the Role with the specified id @param id the id of the Role to get @param handle a valid session handle @return the matching Role @throws IOException if the service can't be reached @throws ResourceGatewayException if there is some problem getting the Role""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getRoleByName
+yawl:ResourceGatewayClientAdapter_getRoleByName_57 a yawl:Method ;
+    rdfs:label "getRoleByName" ;
+    yawl:returnType "Role" ;
+    yawl:signature "Role getRoleByName(String name, String handle)" ;
+    rdfs:comment """Gets the Role with the specified name @param name the id of the Role to get @param handle a valid session handle @return the matching Role @throws IOException if the service can't be reached @throws ResourceGatewayException if there is some problem getting the Role""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getCapability
+yawl:ResourceGatewayClientAdapter_getCapability_58 a yawl:Method ;
+    rdfs:label "getCapability" ;
+    yawl:returnType "Capability" ;
+    yawl:signature "Capability getCapability(String id, String handle)" ;
+    rdfs:comment """Gets the Capability with the specified id @param id the id of the Capability to get @param handle a valid session handle @return the matching Capability @throws IOException if the service can't be reached @throws ResourceGatewayException if there is some problem getting the Capability""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getCapabilityByName
+yawl:ResourceGatewayClientAdapter_getCapabilityByName_59 a yawl:Method ;
+    rdfs:label "getCapabilityByName" ;
+    yawl:returnType "Capability" ;
+    yawl:signature "Capability getCapabilityByName(String name, String handle)" ;
+    rdfs:comment """Gets the Capability with the specified name @param name the id of the Capability to get @param handle a valid session handle @return the matching Capability @throws IOException if the service can't be reached @throws ResourceGatewayException if there is some problem getting the Capability""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getPosition
+yawl:ResourceGatewayClientAdapter_getPosition_60 a yawl:Method ;
+    rdfs:label "getPosition" ;
+    yawl:returnType "Position" ;
+    yawl:signature "Position getPosition(String id, String handle)" ;
+    rdfs:comment """Gets the Position with the specified id @param id the id of the Position to get @param handle a valid session handle @return the matching Position @throws IOException if the service can't be reached @throws ResourceGatewayException if there is some problem getting the Position""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getPositionByName
+yawl:ResourceGatewayClientAdapter_getPositionByName_61 a yawl:Method ;
+    rdfs:label "getPositionByName" ;
+    yawl:returnType "Position" ;
+    yawl:signature "Position getPositionByName(String name, String handle)" ;
+    rdfs:comment """Gets the Position with the specified name @param name the id of the Position to get @param handle a valid session handle @return the matching Position @throws IOException if the service can't be reached @throws ResourceGatewayException if there is some problem getting the Position""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getOrgGroup
+yawl:ResourceGatewayClientAdapter_getOrgGroup_62 a yawl:Method ;
+    rdfs:label "getOrgGroup" ;
+    yawl:returnType "OrgGroup" ;
+    yawl:signature "OrgGroup getOrgGroup(String id, String handle)" ;
+    rdfs:comment """Gets the OrgGroup with the specified id @param id the id of the OrgGroup to get @param handle a valid session handle @return the matching OrgGroup @throws IOException if the service can't be reached @throws ResourceGatewayException if there is some problem getting the OrgGroup""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getOrgGroupByName
+yawl:ResourceGatewayClientAdapter_getOrgGroupByName_63 a yawl:Method ;
+    rdfs:label "getOrgGroupByName" ;
+    yawl:returnType "OrgGroup" ;
+    yawl:signature "OrgGroup getOrgGroupByName(String name, String handle)" ;
+    rdfs:comment """Gets the OrgGroup with the specified name @param name the id of the OrgGroup to get @param handle a valid session handle @return the matching OrgGroup @throws IOException if the service can't be reached @throws ResourceGatewayException if there is some problem getting the OrgGroup""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getParticipantIdentifiers
+yawl:ResourceGatewayClientAdapter_getParticipantIdentifiers_64 a yawl:Method ;
+    rdfs:label "getParticipantIdentifiers" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getParticipantIdentifiers(String handle)" ;
+    rdfs:comment """Gets the id and full name of every Participant @param handle a valid session handle @return a Map of Participant id/name pairs @throws IOException if the service can't be reached @throws ResourceGatewayException if there is some problem getting the Participants""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getParticipantIdentifiersToJSON
+yawl:ResourceGatewayClientAdapter_getParticipantIdentifiersToJSON_65 a yawl:Method ;
+    rdfs:label "getParticipantIdentifiersToJSON" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParticipantIdentifiersToJSON(String handle)" ;
+    rdfs:comment """Gets the id and full name of every Participant in JSON format @param handle a valid session handle @return a JSON String of Participant id/name pairs @throws IOException if the service can't be reached @throws ResourceGatewayException if there is some problem getting the Participants""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getParticipantIdentifiers
+yawl:ResourceGatewayClientAdapter_getParticipantIdentifiers_66 a yawl:Method ;
+    rdfs:label "getParticipantIdentifiers" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getParticipantIdentifiers(ResourceDataSet identifier, String handle)" ;
+    rdfs:comment """Gets the id and chosen name value of every Participant @param identifier a valid ResourceDataSet Identifier value @param handle a valid session handle @return a Map of Participant id/name pairs @throws IOException if the service can't be reached @throws ResourceGatewayException if there is some problem getting the Participants""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getParticipantIdentifiersToJSON
+yawl:ResourceGatewayClientAdapter_getParticipantIdentifiersToJSON_67 a yawl:Method ;
+    rdfs:label "getParticipantIdentifiersToJSON" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParticipantIdentifiersToJSON(ResourceDataSet identifier, String handle)" ;
+    rdfs:comment """Gets the id and chosen name value of every Participant in JSON format @param identifier a valid ResourceDataSet Identifier value @param handle a valid session handle @return a JSON String of Participant id/name pairs @throws IOException if the service can't be reached @throws ResourceGatewayException if there is some problem getting the Participants""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getNonHumanResourceIdentifiers
+yawl:ResourceGatewayClientAdapter_getNonHumanResourceIdentifiers_68 a yawl:Method ;
+    rdfs:label "getNonHumanResourceIdentifiers" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getNonHumanResourceIdentifiers(String handle)" ;
+    rdfs:comment """Gets the id and name of every NonHumanResource @param handle a valid session handle @return a Map of NonHumanResource id/name pairs @throws IOException if the service can't be reached @throws ResourceGatewayException if there is some problem getting the NonHumanResources""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getNonHumanResourceIdentifiersToJSON
+yawl:ResourceGatewayClientAdapter_getNonHumanResourceIdentifiersToJSON_69 a yawl:Method ;
+    rdfs:label "getNonHumanResourceIdentifiersToJSON" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNonHumanResourceIdentifiersToJSON(String handle)" ;
+    rdfs:comment """Gets the id and name of every NonHumanResource in JSON format @param handle a valid session handle @return a JSON String of NonHumanResource id/name pairs @throws IOException if the service can't be reached @throws ResourceGatewayException if there is some problem getting the NonHumanResources""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getRoleIdentifiers
+yawl:ResourceGatewayClientAdapter_getRoleIdentifiers_70 a yawl:Method ;
+    rdfs:label "getRoleIdentifiers" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getRoleIdentifiers(String handle)" ;
+    rdfs:comment """Gets the id and name of every Role @param handle a valid session handle @return a Map of Role id/name pairs @throws IOException if the service can't be reached @throws ResourceGatewayException if there is some problem getting the Roles""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getRoleIdentifiersToJSON
+yawl:ResourceGatewayClientAdapter_getRoleIdentifiersToJSON_71 a yawl:Method ;
+    rdfs:label "getRoleIdentifiersToJSON" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRoleIdentifiersToJSON(String handle)" ;
+    rdfs:comment """Gets the id and name of every Role in JSON format @param handle a valid session handle @return a JSON String of Role id/name pairs @throws IOException if the service can't be reached @throws ResourceGatewayException if there is some problem getting the Roles""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getPositionIdentifiers
+yawl:ResourceGatewayClientAdapter_getPositionIdentifiers_72 a yawl:Method ;
+    rdfs:label "getPositionIdentifiers" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getPositionIdentifiers(String handle)" ;
+    rdfs:comment """Gets the id and name of every Position @param handle a valid session handle @return a Map of Position id/name pairs @throws IOException if the service can't be reached @throws ResourceGatewayException if there is some problem getting the Positions""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getPositionIdentifiersToJSON
+yawl:ResourceGatewayClientAdapter_getPositionIdentifiersToJSON_73 a yawl:Method ;
+    rdfs:label "getPositionIdentifiersToJSON" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPositionIdentifiersToJSON(String handle)" ;
+    rdfs:comment """Gets the id and name of every Position in JSON format @param handle a valid session handle @return a JSON String of Position id/name pairs @throws IOException if the service can't be reached @throws ResourceGatewayException if there is some problem getting the Positions""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getCapabilityIdentifiers
+yawl:ResourceGatewayClientAdapter_getCapabilityIdentifiers_74 a yawl:Method ;
+    rdfs:label "getCapabilityIdentifiers" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getCapabilityIdentifiers(String handle)" ;
+    rdfs:comment """Gets the id and name of every Capability @param handle a valid session handle @return a Map of Capability id/name pairs @throws IOException if the service can't be reached @throws ResourceGatewayException if there is some problem getting the Capabilities""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getCapabilityIdentifiersToJSON
+yawl:ResourceGatewayClientAdapter_getCapabilityIdentifiersToJSON_75 a yawl:Method ;
+    rdfs:label "getCapabilityIdentifiersToJSON" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCapabilityIdentifiersToJSON(String handle)" ;
+    rdfs:comment """Gets the id and name of every Capability in JSON format @param handle a valid session handle @return a JSON String of Capability id/name pairs @throws IOException if the service can't be reached @throws ResourceGatewayException if there is some problem getting the Capabilities""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getOrgGroupIdentifiers
+yawl:ResourceGatewayClientAdapter_getOrgGroupIdentifiers_76 a yawl:Method ;
+    rdfs:label "getOrgGroupIdentifiers" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getOrgGroupIdentifiers(String handle)" ;
+    rdfs:comment """Gets the id and name of every OrgGroup @param handle a valid session handle @return a Map of OrgGroup id/name pairs @throws IOException if the service can't be reached @throws ResourceGatewayException if there is some problem getting the OrgGroups""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getOrgGroupIdentifiersToJSON
+yawl:ResourceGatewayClientAdapter_getOrgGroupIdentifiersToJSON_77 a yawl:Method ;
+    rdfs:label "getOrgGroupIdentifiersToJSON" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOrgGroupIdentifiersToJSON(String handle)" ;
+    rdfs:comment """Gets the id and name of every OrgGroup in JSON format @param handle a valid session handle @return a JSON String of OrgGroup id/name pairs @throws IOException if the service can't be reached @throws ResourceGatewayException if there is some problem getting the OrgGroups""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getUserPrivileges
+yawl:ResourceGatewayClientAdapter_getUserPrivileges_78 a yawl:Method ;
+    rdfs:label "getUserPrivileges" ;
+    yawl:returnType "UserPrivileges" ;
+    yawl:signature "UserPrivileges getUserPrivileges(String id, String handle)" ;
+    rdfs:comment """Gets the UserPrivileges of the Participant with the specified id @param id the id of the Participant to get the UserPrivileges for @param handle a valid session handle @return the matching UserPrivileges @throws IOException if the service can't be reached @throws ResourceGatewayException if there is some problem getting the UserPrivileges""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.addParticipant
+yawl:ResourceGatewayClientAdapter_addParticipant_79 a yawl:Method ;
+    rdfs:label "addParticipant" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addParticipant(Participant p, String handle)" ;
+    rdfs:comment """Adds a new participant to the service's org data @param p the Participant @param handle the current sessionhandle @return the id of the newly added Participant, or an error message if there was a problem (note: the returned id should be subsequently added to the Participant object using p.setID() ) @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.addParticipant
+yawl:ResourceGatewayClientAdapter_addParticipant_80 a yawl:Method ;
+    rdfs:label "addParticipant" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addParticipant(Participant p, boolean encryptPassword, String handle)" ;
+    rdfs:comment """Adds a new participant to the service's org data @param p the Participant @param encryptPassword if true, will encrypt the current password within 'p' before storing it on the server side (recommended for plain text passwords) @param handle the current sessionhandle @return the id of the newly added Participant, or an error message if there was a problem (note: the returned id should be subsequently added to the Participant object using p.setID() ) @throws IOException if there was a problem conn""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.addNonHumanResource
+yawl:ResourceGatewayClientAdapter_addNonHumanResource_81 a yawl:Method ;
+    rdfs:label "addNonHumanResource" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addNonHumanResource(NonHumanResource resource, String handle)" ;
+    rdfs:comment """Adds a new NonHumanResource to the service's org data @param resource the NonHumanResource @param handle the current sessionhandle @return the id of the newly added NonHumanResource, or an error message if there was a problem (note: the returned id should be subsequently added to the NonHumanResource object using resource.setID() ) @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.addCapability
+yawl:ResourceGatewayClientAdapter_addCapability_82 a yawl:Method ;
+    rdfs:label "addCapability" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addCapability(Capability cap, String handle)" ;
+    rdfs:comment """Adds a new capability to the service's org data @param cap the Capability @param handle the current sessionhandle @return the id of the newly added Capability, or an error message if there was a problem (note: the returned id should be subsequently added to the Capability object using cap.setID() ) @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.addRole
+yawl:ResourceGatewayClientAdapter_addRole_83 a yawl:Method ;
+    rdfs:label "addRole" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addRole(Role role, String handle)" ;
+    rdfs:comment """Adds a new role to the service's org data @param role the Role @param handle the current sessionhandle @return the id of the newly added Role, or an error message if there was a problem (note: the returned id should be subsequently added to the Role object using role.setID() ) @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.addPosition
+yawl:ResourceGatewayClientAdapter_addPosition_84 a yawl:Method ;
+    rdfs:label "addPosition" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addPosition(Position pos, String handle)" ;
+    rdfs:comment """Adds a new position to the service's org data @param pos the Position @param handle the current sessionhandle @return the id of the newly added Position, or an error message if there was a problem (note: the returned id should be subsequently added to the Position object using pos.setID() ) @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.addOrgGroup
+yawl:ResourceGatewayClientAdapter_addOrgGroup_85 a yawl:Method ;
+    rdfs:label "addOrgGroup" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addOrgGroup(OrgGroup group, String handle)" ;
+    rdfs:comment """Adds a new org group to the service's org data @param group the OrgGroup @param handle the current sessionhandle @return the id of the newly added OrgGroup, or an error message if there was a problem (note: the returned id should be subsequently added to the OrgGroup object using group.setID() ) @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.addParticipantToRole
+yawl:ResourceGatewayClientAdapter_addParticipantToRole_86 a yawl:Method ;
+    rdfs:label "addParticipantToRole" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addParticipantToRole(Participant p, Role role, String handle)" ;
+    rdfs:comment """Adds the specified Participant to the specified Role @param p the Participant @param role the Role to add the Participant to @param handle the current sessionhandle @return a message indicating success, or describing a problem encountered @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.addParticipantToCapability
+yawl:ResourceGatewayClientAdapter_addParticipantToCapability_87 a yawl:Method ;
+    rdfs:label "addParticipantToCapability" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addParticipantToCapability(Participant p, Capability cap, String handle)" ;
+    rdfs:comment """Adds the specified Participant to the specified Capability @param p the Participant @param cap the Capability to add the Participant to @param handle the current sessionhandle @return a message indicating success, or describing a problem encountered @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.addParticipantToPosition
+yawl:ResourceGatewayClientAdapter_addParticipantToPosition_88 a yawl:Method ;
+    rdfs:label "addParticipantToPosition" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addParticipantToPosition(Participant p, Position pos, String handle)" ;
+    rdfs:comment """Adds the specified Participant to the specified Position @param p the Participant @param pos the Position to add the Participant to @param handle the current sessionhandle @return a message indicating success, or describing a problem encountered @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.updateParticipant
+yawl:ResourceGatewayClientAdapter_updateParticipant_89 a yawl:Method ;
+    rdfs:label "updateParticipant" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateParticipant(Participant p, boolean encryptPassword, String handle)" ;
+    rdfs:comment """Updates the Participant stored in the service's org data with the modified values of the Participant specified @param p the Participant @param encryptPassword if true, will encrypt the current password within 'p' before storing it on the server side (recommended for plain text passwords) @param handle the current sessionhandle @return a message indicating success, or describing a problem encountered @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.updateParticipant
+yawl:ResourceGatewayClientAdapter_updateParticipant_90 a yawl:Method ;
+    rdfs:label "updateParticipant" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateParticipant(Participant p, String handle)" ;
+    rdfs:comment """Updates the Participant stored in the service's org data with the modified values of the Participant specified @param p the Participant @param handle the current sessionhandle @return a message indicating success, or describing a problem encountered @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.updateNonHumanResource
+yawl:ResourceGatewayClientAdapter_updateNonHumanResource_91 a yawl:Method ;
+    rdfs:label "updateNonHumanResource" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateNonHumanResource(NonHumanResource resource, String handle)" ;
+    rdfs:comment """Updates a new NonHumanResource to the service's org data  with the modified values of the NonHumanResource specified @param resource the NonHumanResource @param handle the current sessionhandle @return a message indicating success, or describing a problem encountered @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.updateCapability
+yawl:ResourceGatewayClientAdapter_updateCapability_92 a yawl:Method ;
+    rdfs:label "updateCapability" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateCapability(Capability cap, String handle)" ;
+    rdfs:comment """Updates the Capability stored in the service's org data with the modified values of the Capability specified @param cap the Capability @param handle the current sessionhandle @return a message indicating success, or describing a problem encountered @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.updateRole
+yawl:ResourceGatewayClientAdapter_updateRole_93 a yawl:Method ;
+    rdfs:label "updateRole" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateRole(Role role, String handle)" ;
+    rdfs:comment """Updates the Role stored in the service's org data with the modified values of the Role specified @param role the Role @param handle the current sessionhandle @return a message indicating success, or describing a problem encountered @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.updatePosition
+yawl:ResourceGatewayClientAdapter_updatePosition_94 a yawl:Method ;
+    rdfs:label "updatePosition" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updatePosition(Position pos, String handle)" ;
+    rdfs:comment """Updates the Position stored in the service's org data with the modified values of the Position specified @param pos the Position @param handle the current sessionhandle @return a message indicating success, or describing a problem encountered @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.updateOrgGroup
+yawl:ResourceGatewayClientAdapter_updateOrgGroup_95 a yawl:Method ;
+    rdfs:label "updateOrgGroup" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateOrgGroup(OrgGroup group, String handle)" ;
+    rdfs:comment """Updates the OrgGroup stored in the service's org data with the modified values of the OrgGroup specified @param group the OrgGroup @param handle the current sessionhandle @return a message indicating success, or describing a problem encountered @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.updateNonHumanCategory
+yawl:ResourceGatewayClientAdapter_updateNonHumanCategory_96 a yawl:Method ;
+    rdfs:label "updateNonHumanCategory" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateNonHumanCategory(NonHumanCategory category, String handle)" ;
+    rdfs:comment """Updates the NonHumanCategory stored in the service's org data with the modified values of the NonHumanResource specified @param category the NonHumanResource @param handle the current sessionhandle @return a message indicating success, or describing a problem encountered @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.removeParticipant
+yawl:ResourceGatewayClientAdapter_removeParticipant_97 a yawl:Method ;
+    rdfs:label "removeParticipant" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeParticipant(Participant p, String handle)" ;
+    rdfs:comment """Removes (deletes) the specified Participant from the service's org data @param p the Participant @param handle the current sessionhandle @return a message indicating success, or describing a problem encountered @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.removeNonHumanResource
+yawl:ResourceGatewayClientAdapter_removeNonHumanResource_98 a yawl:Method ;
+    rdfs:label "removeNonHumanResource" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeNonHumanResource(NonHumanResource resource, String handle)" ;
+    rdfs:comment """Removes (deletes) the specified NonHumanResource from the service's org data @param resource the NonHumanResource @param handle the current sessionhandle @return a message indicating success, or describing a problem encountered @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.removeCapability
+yawl:ResourceGatewayClientAdapter_removeCapability_99 a yawl:Method ;
+    rdfs:label "removeCapability" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeCapability(Capability cap, String handle)" ;
+    rdfs:comment """Removes (deletes) the specified Capability from the service's org data @param cap the Capability @param handle the current sessionhandle @return a message indicating success, or describing a problem encountered @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.removeRole
+yawl:ResourceGatewayClientAdapter_removeRole_100 a yawl:Method ;
+    rdfs:label "removeRole" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeRole(Role role, String handle)" ;
+    rdfs:comment """Removes (deletes) the specified Role from the service's org data @param role the Role @param handle the current sessionhandle @return a message indicating success, or describing a problem encountered @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.removePosition
+yawl:ResourceGatewayClientAdapter_removePosition_101 a yawl:Method ;
+    rdfs:label "removePosition" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removePosition(Position pos, String handle)" ;
+    rdfs:comment """Removes (deletes) the specified Position from the service's org data @param pos the Position @param handle the current sessionhandle @return a message indicating success, or describing a problem encountered @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.removeOrgGroup
+yawl:ResourceGatewayClientAdapter_removeOrgGroup_102 a yawl:Method ;
+    rdfs:label "removeOrgGroup" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeOrgGroup(OrgGroup group, String handle)" ;
+    rdfs:comment """Removes (deletes) the specified OrgGroup from the service's org data @param group the OrgGroup @param handle the current sessionhandle @return a message indicating success, or describing a problem encountered @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.removeParticipantFromRole
+yawl:ResourceGatewayClientAdapter_removeParticipantFromRole_103 a yawl:Method ;
+    rdfs:label "removeParticipantFromRole" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeParticipantFromRole(Participant p, Role role, String handle)" ;
+    rdfs:comment """Removes (deletes) the specified Participant from the set of Participants occupying the specified Role @param p the Participant @param role the Role to remove the specified Participant from @param handle the current sessionhandle @return a message indicating success, or describing a problem encountered @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.removeParticipantFromCapability
+yawl:ResourceGatewayClientAdapter_removeParticipantFromCapability_104 a yawl:Method ;
+    rdfs:label "removeParticipantFromCapability" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeParticipantFromCapability(Participant p, Capability cap, String handle)" ;
+    rdfs:comment """Removes (deletes) the specified Participant from the set of Participants holding the specified Capability @param p the Participant @param cap the Capability to remove the specified Participant from @param handle the current sessionhandle @return a message indicating success, or describing a problem encountered @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.removeParticipantFromPosition
+yawl:ResourceGatewayClientAdapter_removeParticipantFromPosition_105 a yawl:Method ;
+    rdfs:label "removeParticipantFromPosition" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeParticipantFromPosition(Participant p, Position pos, String handle)" ;
+    rdfs:comment """Removes (deletes) the specified Participant from the set of Participants occupying the specified Position @param p the Participant @param pos the Position to remove the specified Participant from @param handle the current sessionhandle @return a message indicating success, or describing a problem encountered @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.setContainingRole
+yawl:ResourceGatewayClientAdapter_setContainingRole_106 a yawl:Method ;
+    rdfs:label "setContainingRole" ;
+    yawl:returnType "String" ;
+    yawl:signature "String setContainingRole(Role role, Role containingRole, String handle)" ;
+    rdfs:comment """Sets the containing Role for a Role (i.e. the 'parent' Role the Role 'belongs to') @param role the Role @param containingRole the containing or parent Role that encapsulates role @param handle the current sessionhandle @return a message indicating success, or describing a problem encountered @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.setContainingOrgGroup
+yawl:ResourceGatewayClientAdapter_setContainingOrgGroup_107 a yawl:Method ;
+    rdfs:label "setContainingOrgGroup" ;
+    yawl:returnType "String" ;
+    yawl:signature "String setContainingOrgGroup(OrgGroup group, OrgGroup containingGroup, String handle)" ;
+    rdfs:comment """Sets the containing OrgGroup for an OrgGroup (i.e. the 'parent' OrgGroup the OrgGroup 'belongs to') @param group the OrgGroup @param containingGroup the containing or parent OrgGroup that encapsulates group @param handle the current sessionhandle @return a message indicating success, or describing a problem encountered @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.setContainingPosition
+yawl:ResourceGatewayClientAdapter_setContainingPosition_108 a yawl:Method ;
+    rdfs:label "setContainingPosition" ;
+    yawl:returnType "String" ;
+    yawl:signature "String setContainingPosition(Position pos, Position containingPos, String handle)" ;
+    rdfs:comment """Sets the containing Position for a Position (i.e. the 'parent' Position the Position 'reports to') @param pos the Position @param containingPos the containing or parent Position that encapsulates pos @param handle the current sessionhandle @return a message indicating success, or describing a problem encountered @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.setPositionOrgGroup
+yawl:ResourceGatewayClientAdapter_setPositionOrgGroup_109 a yawl:Method ;
+    rdfs:label "setPositionOrgGroup" ;
+    yawl:returnType "String" ;
+    yawl:signature "String setPositionOrgGroup(Position pos, OrgGroup group, String handle)" ;
+    rdfs:comment """Sets the containing OrgGroup for a Position @param pos the Position @param group the containing OrgGroup @param handle the current sessionhandle @return a message indicating success, or describing a problem encountered @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.setParticipantPrivileges
+yawl:ResourceGatewayClientAdapter_setParticipantPrivileges_110 a yawl:Method ;
+    rdfs:label "setParticipantPrivileges" ;
+    yawl:returnType "String" ;
+    yawl:signature "String setParticipantPrivileges(Participant p, UserPrivileges privs, String handle)" ;
+    rdfs:comment """Sets the user privileges for a Participant @param p the Participant @param privs the UserPrivileges object @param handle the current sessionhandle @return a message indicating success, or describing a problem encountered @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.setParticipantPrivileges
+yawl:ResourceGatewayClientAdapter_setParticipantPrivileges_111 a yawl:Method ;
+    rdfs:label "setParticipantPrivileges" ;
+    yawl:returnType "String" ;
+    yawl:signature "String setParticipantPrivileges(Participant p, String handle)" ;
+    rdfs:comment """Sets the user privileges for a Participant @param p the Participant (note: the privilege values used are the ones currently within the Participant object specified)  @param handle the current sessionhandle @return a message indicating success, or describing a problem encountered @throws IOException if there was a problem connecting to the resource service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getNonHumanCategory
+yawl:ResourceGatewayClientAdapter_getNonHumanCategory_112 a yawl:Method ;
+    rdfs:label "getNonHumanCategory" ;
+    yawl:returnType "NonHumanCategory" ;
+    yawl:signature "NonHumanCategory getNonHumanCategory(String id, String handle)" ;
+    rdfs:comment """Gets the NonHumanCategory with the specified id @param id a valid NonHumanCategory identifier @param handle a valid session handle @return the NonHumanCategory object matching the id specified @throws IOException if the service can't be reached @throws ResourceGatewayException if there was a problem getting the NonHumanCategory""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getNonHumanCategoryByName
+yawl:ResourceGatewayClientAdapter_getNonHumanCategoryByName_113 a yawl:Method ;
+    rdfs:label "getNonHumanCategoryByName" ;
+    yawl:returnType "NonHumanCategory" ;
+    yawl:signature "NonHumanCategory getNonHumanCategoryByName(String name, String handle)" ;
+    rdfs:comment """Gets the NonHumanCategory with the specified name @param name a valid NonHumanCategory name @param handle a valid session handle @return the NonHumanCategory object matching the name specified @throws IOException if the service can't be reached @throws ResourceGatewayException if there was a problem getting the NonHumanCategory""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getNonHumanCategories
+yawl:ResourceGatewayClientAdapter_getNonHumanCategories_114 a yawl:Method ;
+    rdfs:label "getNonHumanCategories" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getNonHumanCategories(String handle)" ;
+    rdfs:comment """Gets the list of all NonHumanCategory objects known to the Resource Service @param handle the current sessionhandle @return a list of categories @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the list""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getNonHumanCategoriesToJSON
+yawl:ResourceGatewayClientAdapter_getNonHumanCategoriesToJSON_115 a yawl:Method ;
+    rdfs:label "getNonHumanCategoriesToJSON" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNonHumanCategoriesToJSON(String handle)" ;
+    rdfs:comment """Gets the list of all NonHumanResource category names in JSON format @param handle the current sessionhandle @return a JSON String of paired category names @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the list""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getNonHumanSubCategories
+yawl:ResourceGatewayClientAdapter_getNonHumanSubCategories_116 a yawl:Method ;
+    rdfs:label "getNonHumanSubCategories" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getNonHumanSubCategories(String id, String handle)" ;
+    rdfs:comment """Gets the list of all the subcategory names of a NonHumanResource category @param id the category id to get the subcategories for @param handle the current sessionhandle @return a list of category name strings @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the list""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getNonHumanSubCategoriesByName
+yawl:ResourceGatewayClientAdapter_getNonHumanSubCategoriesByName_117 a yawl:Method ;
+    rdfs:label "getNonHumanSubCategoriesByName" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getNonHumanSubCategoriesByName(String category, String handle)" ;
+    rdfs:comment """Gets the list of all the subcategory names of a NonHumanResource category @param category the category name to get the subcategories for @param handle the current sessionhandle @return a list of category name strings @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the list""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getNonHumanSubCategoriesToJSON
+yawl:ResourceGatewayClientAdapter_getNonHumanSubCategoriesToJSON_118 a yawl:Method ;
+    rdfs:label "getNonHumanSubCategoriesToJSON" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNonHumanSubCategoriesToJSON(String id, String handle)" ;
+    rdfs:comment """Gets the list of all the subcategory names of a NonHumanResource category in JSON format @param id the category id to get the subcategories for @param handle the current sessionhandle @return a JSON String of category name pairs @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the list""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getNonHumanSubCategoriesToJSONByName
+yawl:ResourceGatewayClientAdapter_getNonHumanSubCategoriesToJSONByName_119 a yawl:Method ;
+    rdfs:label "getNonHumanSubCategoriesToJSONByName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNonHumanSubCategoriesToJSONByName(String category, String handle)" ;
+    rdfs:comment """Gets the list of all the subcategory names of a NonHumanResource category in JSON format @param category the category name to get the subcategories for @param handle the current sessionhandle @return a JSON String of category name pairs @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the list""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getNonHumanCategorySet
+yawl:ResourceGatewayClientAdapter_getNonHumanCategorySet_120 a yawl:Method ;
+    rdfs:label "getNonHumanCategorySet" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getNonHumanCategorySet(String handle)" ;
+    rdfs:comment """Gets the list of all NonHumanResource category names and the subcategories of each @param handle the current sessionhandle @return a map of category names to a set of subcategory name strings @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem getting the list""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.addNonHumanCategory
+yawl:ResourceGatewayClientAdapter_addNonHumanCategory_121 a yawl:Method ;
+    rdfs:label "addNonHumanCategory" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addNonHumanCategory(String category, String handle)" ;
+    rdfs:comment """Adds a new NonHumanResource category @param category the category to add @param handle the current sessionhandle @return a unique id for the category @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem adding the category""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.addNonHumanSubCategoryByName
+yawl:ResourceGatewayClientAdapter_addNonHumanSubCategoryByName_122 a yawl:Method ;
+    rdfs:label "addNonHumanSubCategoryByName" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean addNonHumanSubCategoryByName(String category, String subcategory, String handle)" ;
+    rdfs:comment """Adds a new NonHumanResource category @param category the category name to add the subcategory to @param subcategory the subcategory to add @param handle the current sessionhandle @return true if the add was successful @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem adding the subcategory""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.addNonHumanSubCategory
+yawl:ResourceGatewayClientAdapter_addNonHumanSubCategory_123 a yawl:Method ;
+    rdfs:label "addNonHumanSubCategory" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean addNonHumanSubCategory(String id, String subcategory, String handle)" ;
+    rdfs:comment """Adds a new NonHumanResource category @param id the identifier of the category to add the subcategory to @param subcategory the subcategory to add @param handle the current sessionhandle @return true if the add was successful @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem adding the subcategory""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.removeNonHumanCategory
+yawl:ResourceGatewayClientAdapter_removeNonHumanCategory_124 a yawl:Method ;
+    rdfs:label "removeNonHumanCategory" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeNonHumanCategory(String id, String handle)" ;
+    rdfs:comment """Removes a category of the list of NonHumanResource categories @param id the identifier of the category to remove; all of the category's subcategories will also be removed @param handle the current sessionhandle @return true if the removal was successful @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem removing the category""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.removeNonHumanCategoryByName
+yawl:ResourceGatewayClientAdapter_removeNonHumanCategoryByName_125 a yawl:Method ;
+    rdfs:label "removeNonHumanCategoryByName" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeNonHumanCategoryByName(String name, String handle)" ;
+    rdfs:comment """Removes a category of the list of NonHumanResource categories @param name the name of the category to remove; all of the category's subcategories will also be removed @param handle the current sessionhandle @return true if the removal was successful @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem removing the category""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.removeNonHumanSubCategoryByName
+yawl:ResourceGatewayClientAdapter_removeNonHumanSubCategoryByName_126 a yawl:Method ;
+    rdfs:label "removeNonHumanSubCategoryByName" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeNonHumanSubCategoryByName(String category, String subcategory, String handle)" ;
+    rdfs:comment """Removes a subcategory of a NonHumanResource category @param category the name of the category to remove the subcategory from @param subcategory the subcategory name to remove @param handle the current sessionhandle @return true if the removal was successful @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem removing the subcategory""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.removeNonHumanSubCategory
+yawl:ResourceGatewayClientAdapter_removeNonHumanSubCategory_127 a yawl:Method ;
+    rdfs:label "removeNonHumanSubCategory" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeNonHumanSubCategory(String id, String subcategory, String handle)" ;
+    rdfs:comment """Removes a subcategory of a NonHumanResource category @param id the identifier of the category to remove the subcategory from @param subcategory the subcategory name to remove @param handle the current sessionhandle @return true if the removal was successful @throws IOException if there was a problem connecting to the resource service @throws ResourceGatewayException if there was a problem removing the subcategory""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.importOrgData
+yawl:ResourceGatewayClientAdapter_importOrgData_128 a yawl:Method ;
+    rdfs:label "importOrgData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String importOrgData(String xml, String handle)" ;
+    rdfs:comment """Imports the org data from a .ybkp file @param xml the file content @param handle  a current sessionhandle with admin privileges @return a message indicating success, or otherwise @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.exportOrgData
+yawl:ResourceGatewayClientAdapter_exportOrgData_129 a yawl:Method ;
+    rdfs:label "exportOrgData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String exportOrgData(String handle)" ;
+    rdfs:comment """Exports the current org data to xml for writing to a .ybkp file @param handle a current sessionhandle with admin privileges @return the xml representation of the current org data, or an error message @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getSecondaryResources
+yawl:ResourceGatewayClientAdapter_getSecondaryResources_130 a yawl:Method ;
+    rdfs:label "getSecondaryResources" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSecondaryResources(String itemID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.setSecondaryResources
+yawl:ResourceGatewayClientAdapter_setSecondaryResources_131 a yawl:Method ;
+    rdfs:label "setSecondaryResources" ;
+    yawl:returnType "List" ;
+    yawl:signature "List setSecondaryResources(String itemID, String resourcesXML, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.checkSecondaryResourcesAvailability
+yawl:ResourceGatewayClientAdapter_checkSecondaryResourcesAvailability_132 a yawl:Method ;
+    rdfs:label "checkSecondaryResourcesAvailability" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkSecondaryResourcesAvailability(String itemID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayClientAdapter.getBuildProperties
+yawl:ResourceGatewayClientAdapter_getBuildProperties_133 a yawl:Method ;
+    rdfs:label "getBuildProperties" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBuildProperties(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:ResourceGatewayClientAdapter_XML_FORMAT a yawl:Field ;
+    rdfs:label "XML_FORMAT" .
+
+yawl:ResourceGatewayClientAdapter_JSON_FORMAT a yawl:Field ;
+    rdfs:label "JSON_FORMAT" .
+
+yawl:ResourceGatewayClientAdapter__rgclient a yawl:Field ;
+    rdfs:label "_rgclient" .
+
+yawl:ResourceGatewayClientAdapter__uri a yawl:Field ;
+    rdfs:label "_uri" .
+
+yawl:ResourceGatewayClientAdapter__marshaller a yawl:Field ;
+    rdfs:label "_marshaller" .
+
+yawl:ResourceGatewayClientAdapter__xnodeParser a yawl:Field ;
+    rdfs:label "_xnodeParser" .
+
+
+

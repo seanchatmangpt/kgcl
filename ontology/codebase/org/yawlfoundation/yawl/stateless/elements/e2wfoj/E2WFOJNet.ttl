@@ -1,0 +1,246 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.stateless.elements.e2wfoj
+yawl:org_yawlfoundation_yawl_stateless_elements_e2wfoj a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.stateless.elements.e2wfoj" .
+# Class: org.yawlfoundation.yawl.stateless.elements.e2wfoj.E2WFOJNet
+yawl:E2WFOJNet a yawl:Class ;
+    rdfs:label "E2WFOJNet" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_elements_e2wfoj ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/elements/e2wfoj/E2WFOJNet.java"^^xsd:string ;
+    rdfs:comment """A Reset net formalisation of a YAWL net.""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "final" ;
+    yawl:hasMethod yawl:E2WFOJNet_ConvertToResetNet_1 ;
+    yawl:hasMethod yawl:E2WFOJNet_generateCombination_2 ;
+    yawl:hasMethod yawl:E2WFOJNet_addCancelSet_3 ;
+    yawl:hasMethod yawl:E2WFOJNet_OJRemove_4 ;
+    yawl:hasMethod yawl:E2WFOJNet_restrictNet_5 ;
+    yawl:hasMethod yawl:E2WFOJNet_restrictNet_6 ;
+    yawl:hasMethod yawl:E2WFOJNet_performRestriction_7 ;
+    yawl:hasMethod yawl:E2WFOJNet_getPostset_8 ;
+    yawl:hasMethod yawl:E2WFOJNet_getPreset_9 ;
+    yawl:hasMethod yawl:E2WFOJNet_Coverable_10 ;
+    yawl:hasMethod yawl:E2WFOJNet_FiniteBasisPred_11 ;
+    yawl:hasMethod yawl:E2WFOJNet_IsUpwardEqual_12 ;
+    yawl:hasMethod yawl:E2WFOJNet_pb_13 ;
+    yawl:hasMethod yawl:E2WFOJNet_pb_14 ;
+    yawl:hasMethod yawl:E2WFOJNet_isBackwardsEnabled_15 ;
+    yawl:hasMethod yawl:E2WFOJNet_getPreviousRMarking_16 ;
+    yawl:hasMethod yawl:E2WFOJNet_orJoinEnabled_17 ;
+    yawl:hasMethod yawl:E2WFOJNet_getMinimalCoveringSet2_18 ;
+    yawl:hasMethod yawl:E2WFOJNet_getMinimalCoveringSet_19 ;
+    yawl:hasField yawl:E2WFOJNet__Transitions ;
+    yawl:hasField yawl:E2WFOJNet__Places ;
+    yawl:hasField yawl:E2WFOJNet__OJ ;
+    yawl:hasField yawl:E2WFOJNet__YOJ ;
+    yawl:hasField yawl:E2WFOJNet__yNet ;
+    yawl:hasField yawl:E2WFOJNet_alreadyConsideredMarkings ;
+    yawl:hasField yawl:E2WFOJNet__Conditions ;
+    .
+
+
+# Method: E2WFOJNet.ConvertToResetNet
+yawl:E2WFOJNet_ConvertToResetNet_1 a yawl:Method ;
+    rdfs:label "ConvertToResetNet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void ConvertToResetNet()" ;
+    rdfs:comment """The method converts a YAWL net into a Reset net.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: E2WFOJNet.generateCombination
+yawl:E2WFOJNet_generateCombination_2 a yawl:Method ;
+    rdfs:label "generateCombination" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set generateCombination(Set netElements, int size)" ;
+    rdfs:comment """This method is used to generate combinations of markings for  comparison.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: E2WFOJNet.addCancelSet
+yawl:E2WFOJNet_addCancelSet_3 a yawl:Method ;
+    rdfs:label "addCancelSet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addCancelSet(RTransition rt, Set removeSet)" ;
+    rdfs:comment """This method is used to associate a cancellation set (RPlaces) with each RTransition. This is the implementation of R.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: E2WFOJNet.OJRemove
+yawl:E2WFOJNet_OJRemove_4 a yawl:Method ;
+    rdfs:label "OJRemove" ;
+    yawl:returnType "void" ;
+    yawl:signature "void OJRemove(YTask j)" ;
+    rdfs:comment """This method is called with an OR-join task to  prepare for OR-join enabling call.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: E2WFOJNet.restrictNet
+yawl:E2WFOJNet_restrictNet_5 a yawl:Method ;
+    rdfs:label "restrictNet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restrictNet(YTask j)" ;
+    rdfs:comment """Perform structural restriction of a reset net.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: E2WFOJNet.restrictNet
+yawl:E2WFOJNet_restrictNet_6 a yawl:Method ;
+    rdfs:label "restrictNet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restrictNet(YMarking M)" ;
+    rdfs:comment """This method is used to perform active projection restriction.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: E2WFOJNet.performRestriction
+yawl:E2WFOJNet_performRestriction_7 a yawl:Method ;
+    rdfs:label "performRestriction" ;
+    yawl:returnType "void" ;
+    yawl:signature "void performRestriction(Set restrictedTrans, Set restrictedPlaces)" ;
+    rdfs:comment """Private method for removing tranisitions and places. Used for both structural restriction and marking dependent restriction.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: E2WFOJNet.getPostset
+yawl:E2WFOJNet_getPostset_8 a yawl:Method ;
+    rdfs:label "getPostset" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getPostset(Set elements)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: E2WFOJNet.getPreset
+yawl:E2WFOJNet_getPreset_9 a yawl:Method ;
+    rdfs:label "getPreset" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getPreset(Set elements)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: E2WFOJNet.Coverable
+yawl:E2WFOJNet_Coverable_10 a yawl:Method ;
+    rdfs:label "Coverable" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean Coverable(RMarking s, RMarking t)" ;
+    rdfs:comment """This method takes two markings s and t, and check whether s'<= s is coverable  from the predecessors of t.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: E2WFOJNet.FiniteBasisPred
+yawl:E2WFOJNet_FiniteBasisPred_11 a yawl:Method ;
+    rdfs:label "FiniteBasisPred" ;
+    yawl:returnType "RSetOfMarkings" ;
+    yawl:signature "RSetOfMarkings FiniteBasisPred(RSetOfMarkings I)" ;
+    rdfs:comment """This methods returns the FiniteBasis of the Predecessors for a set of  RMarkings.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: E2WFOJNet.IsUpwardEqual
+yawl:E2WFOJNet_IsUpwardEqual_12 a yawl:Method ;
+    rdfs:label "IsUpwardEqual" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean IsUpwardEqual(RSetOfMarkings K, RSetOfMarkings Kn)" ;
+    rdfs:comment """This method checks whether the basis of the two sets of markings are equal. This is the implementation of K = Kn.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: E2WFOJNet.pb
+yawl:E2WFOJNet_pb_13 a yawl:Method ;
+    rdfs:label "pb" ;
+    yawl:returnType "RSetOfMarkings" ;
+    yawl:signature "RSetOfMarkings pb(RSetOfMarkings I)" ;
+    rdfs:comment """This method is called with a set of RMarkings to generate a set of precedessors.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: E2WFOJNet.pb
+yawl:E2WFOJNet_pb_14 a yawl:Method ;
+    rdfs:label "pb" ;
+    yawl:returnType "RSetOfMarkings" ;
+    yawl:signature "RSetOfMarkings pb(RMarking M)" ;
+    rdfs:comment """This method is called with a RMarking to generate a set of precedessors of this marking. The method returns  a finite basis for the predecessors set.(optimisation)""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: E2WFOJNet.isBackwardsEnabled
+yawl:E2WFOJNet_isBackwardsEnabled_15 a yawl:Method ;
+    rdfs:label "isBackwardsEnabled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isBackwardsEnabled(RMarking currentM, RTransition t)" ;
+    rdfs:comment """This method determines whether a transition should be backwards  enabled at a given RMarking. Currently, a transition  is not backwards enabled only if there is a token in removeSet.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: E2WFOJNet.getPreviousRMarking
+yawl:E2WFOJNet_getPreviousRMarking_16 a yawl:Method ;
+    rdfs:label "getPreviousRMarking" ;
+    yawl:returnType "RMarking" ;
+    yawl:signature "RMarking getPreviousRMarking(RMarking currentM, RTransition t)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: E2WFOJNet.orJoinEnabled
+yawl:E2WFOJNet_orJoinEnabled_17 a yawl:Method ;
+    rdfs:label "orJoinEnabled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean orJoinEnabled(YMarking M, YTask orJoin)" ;
+    rdfs:comment """This method is used to determine whether  an OrJoin task of a YAWL net should be enabled at  a given marking. The method returns TRUE if an OrJoin  should be enabled at the given marking and FALSE, otherwise.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: E2WFOJNet.getMinimalCoveringSet2
+yawl:E2WFOJNet_getMinimalCoveringSet2_18 a yawl:Method ;
+    rdfs:label "getMinimalCoveringSet2" ;
+    yawl:returnType "RSetOfMarkings" ;
+    yawl:signature "RSetOfMarkings getMinimalCoveringSet2(RSetOfMarkings Z)" ;
+    rdfs:comment """This method is used to generate the minimal covering set  for a given set of Markings.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: E2WFOJNet.getMinimalCoveringSet
+yawl:E2WFOJNet_getMinimalCoveringSet_19 a yawl:Method ;
+    rdfs:label "getMinimalCoveringSet" ;
+    yawl:returnType "RSetOfMarkings" ;
+    yawl:signature "RSetOfMarkings getMinimalCoveringSet(RSetOfMarkings pbZ, RSetOfMarkings Z)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:E2WFOJNet__Transitions a yawl:Field ;
+    rdfs:label "_Transitions" .
+
+yawl:E2WFOJNet__Places a yawl:Field ;
+    rdfs:label "_Places" .
+
+yawl:E2WFOJNet__OJ a yawl:Field ;
+    rdfs:label "_OJ" .
+
+yawl:E2WFOJNet__YOJ a yawl:Field ;
+    rdfs:label "_YOJ" .
+
+yawl:E2WFOJNet__yNet a yawl:Field ;
+    rdfs:label "_yNet" .
+
+yawl:E2WFOJNet_alreadyConsideredMarkings a yawl:Field ;
+    rdfs:label "alreadyConsideredMarkings" .
+
+yawl:E2WFOJNet__Conditions a yawl:Field ;
+    rdfs:label "_Conditions" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_stateless_elements_data a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.stateless.elements.data" .
+
+

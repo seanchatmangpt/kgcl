@@ -1,0 +1,75 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.util.DynamicValue
+yawl:DynamicValue a yawl:Class ;
+    rdfs:label "DynamicValue" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/util/DynamicValue.java"^^xsd:string ;
+    rdfs:comment """This class represents a value that is evaluated each time #toString is called. @author Mike Fowler (Nov 2, 2005)""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DynamicValue_getProperty_1 ;
+    yawl:hasMethod yawl:DynamicValue_setProperty_2 ;
+    yawl:hasMethod yawl:DynamicValue_getTarget_3 ;
+    yawl:hasMethod yawl:DynamicValue_setTarget_4 ;
+    yawl:hasMethod yawl:DynamicValue_toString_5 ;
+    yawl:hasField yawl:DynamicValue__property ;
+    yawl:hasField yawl:DynamicValue__target ;
+    .
+
+
+# Method: DynamicValue.getProperty
+yawl:DynamicValue_getProperty_1 a yawl:Method ;
+    rdfs:label "getProperty" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getProperty()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynamicValue.setProperty
+yawl:DynamicValue_setProperty_2 a yawl:Method ;
+    rdfs:label "setProperty" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setProperty(String property)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynamicValue.getTarget
+yawl:DynamicValue_getTarget_3 a yawl:Method ;
+    rdfs:label "getTarget" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object getTarget()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynamicValue.setTarget
+yawl:DynamicValue_setTarget_4 a yawl:Method ;
+    rdfs:label "setTarget" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTarget(Object target)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynamicValue.toString
+yawl:DynamicValue_toString_5 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    rdfs:comment """@return a string representation of property's get method invocation against target.""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:DynamicValue__property a yawl:Field ;
+    rdfs:label "_property" .
+
+yawl:DynamicValue__target a yawl:Field ;
+    rdfs:label "_target" .
+
+
+

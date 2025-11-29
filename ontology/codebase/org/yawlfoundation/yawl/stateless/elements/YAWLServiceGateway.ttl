@@ -1,0 +1,87 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.stateless.elements.YAWLServiceGateway
+yawl:YAWLServiceGateway a yawl:Class ;
+    rdfs:label "YAWLServiceGateway" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_elements ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/elements/YAWLServiceGateway.java"^^xsd:string ;
+    rdfs:comment """A decomposition associated with a Web Service Gateway. <p/> A web service gateway contains a reference to a YAWL Service, which represents the service that will take responsibility for the execution of any task based on this gateway decomposition. @author Lachlan Aldred @author Michael Adams (updates for v2.0) @since 0.1 @date 25/09/2003""" ;
+    yawl:extends yawl:YDecomposition ;
+    yawl:implements yawl:YVerifiable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YAWLServiceGateway_verify_1 ;
+    yawl:hasMethod yawl:YAWLServiceGateway_toXML_2 ;
+    yawl:hasMethod yawl:YAWLServiceGateway_getYawlService_3 ;
+    yawl:hasMethod yawl:YAWLServiceGateway_getYawlService_4 ;
+    yawl:hasMethod yawl:YAWLServiceGateway_setYawlService_5 ;
+    yawl:hasMethod yawl:YAWLServiceGateway_clearYawlService_6 ;
+    yawl:hasField yawl:YAWLServiceGateway__yawlServices ;
+    .
+
+
+# Method: YAWLServiceGateway.verify
+yawl:YAWLServiceGateway_verify_1 a yawl:Method ;
+    rdfs:label "verify" ;
+    yawl:returnType "void" ;
+    yawl:signature "void verify(YVerificationHandler handler)" ;
+    rdfs:comment """Verifies this service gateway decomposition against YAWL semantics. @return a List of error and/or warning messages. An empty list is returned if the verification is successful.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceGateway.toXML
+yawl:YAWLServiceGateway_toXML_2 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    rdfs:comment """Outputs this service gateway to an XML representation. @return an XML (String) representation of this service gateway""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceGateway.getYawlService
+yawl:YAWLServiceGateway_getYawlService_3 a yawl:Method ;
+    rdfs:label "getYawlService" ;
+    yawl:returnType "YAWLServiceReference" ;
+    yawl:signature "YAWLServiceReference getYawlService(String yawlServiceID)" ;
+    rdfs:comment """Gets the named YAWL Service associated with this gateway. @param yawlServiceID the identifier of the service. @return the Service associated with this gateway iff the service matches the id passed, or null if it doesn't match ori f there is no associated gateway.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceGateway.getYawlService
+yawl:YAWLServiceGateway_getYawlService_4 a yawl:Method ;
+    rdfs:label "getYawlService" ;
+    yawl:returnType "YAWLServiceReference" ;
+    yawl:signature "YAWLServiceReference getYawlService()" ;
+    rdfs:comment """Gets the YAWL Service associated with this gateway. @return the Service associated with this gateway, or null if there is no associated gateway.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceGateway.setYawlService
+yawl:YAWLServiceGateway_setYawlService_5 a yawl:Method ;
+    rdfs:label "setYawlService" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setYawlService(YAWLServiceReference yawlService)" ;
+    rdfs:comment """Sets the YAWL Service associated with this gateway. @param yawlService the Service to associate with this gateway.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceGateway.clearYawlService
+yawl:YAWLServiceGateway_clearYawlService_6 a yawl:Method ;
+    rdfs:label "clearYawlService" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clearYawlService()" ;
+    rdfs:comment """Clears any service associated with this gateway. Used at design time""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YAWLServiceGateway__yawlServices a yawl:Field ;
+    rdfs:label "_yawlServices" .
+
+
+

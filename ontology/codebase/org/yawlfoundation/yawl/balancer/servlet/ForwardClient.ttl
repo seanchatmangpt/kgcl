@@ -1,0 +1,83 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.balancer.servlet
+yawl:org_yawlfoundation_yawl_balancer_servlet a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.balancer.servlet" .
+# Class: org.yawlfoundation.yawl.balancer.servlet.ForwardClient
+yawl:ForwardClient a yawl:Class ;
+    rdfs:label "ForwardClient" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer_servlet ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/servlet/ForwardClient.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 20/7/17""" ;
+    yawl:extends yawl:Interface_Client ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ForwardClient_executeGet_1 ;
+    yawl:hasMethod yawl:ForwardClient_executePost_2 ;
+    yawl:hasMethod yawl:ForwardClient_executePost_3 ;
+    yawl:hasMethod yawl:ForwardClient_forward_4 ;
+    yawl:hasMethod yawl:ForwardClient_checkOrConnect_5 ;
+    yawl:hasMethod yawl:ForwardClient_buildConnectionParams_6 ;
+    yawl:hasField yawl:ForwardClient__connectionParams ;
+    .
+
+
+# Method: ForwardClient.executeGet
+yawl:ForwardClient_executeGet_1 a yawl:Method ;
+    rdfs:label "executeGet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String executeGet(String urlStr, Map paramsMap)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ForwardClient.executePost
+yawl:ForwardClient_executePost_2 a yawl:Method ;
+    rdfs:label "executePost" ;
+    yawl:returnType "String" ;
+    yawl:signature "String executePost(String urlStr, Map paramsMap)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ForwardClient.executePost
+yawl:ForwardClient_executePost_3 a yawl:Method ;
+    rdfs:label "executePost" ;
+    yawl:returnType "String" ;
+    yawl:signature "String executePost(EngineInstance instance, Map params, String path)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ForwardClient.forward
+yawl:ForwardClient_forward_4 a yawl:Method ;
+    rdfs:label "forward" ;
+    yawl:returnType "String" ;
+    yawl:signature "String forward(EngineInstance instance, Map params, String path, String method)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ForwardClient.checkOrConnect
+yawl:ForwardClient_checkOrConnect_5 a yawl:Method ;
+    rdfs:label "checkOrConnect" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkOrConnect(EngineInstance instance)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ForwardClient.buildConnectionParams
+yawl:ForwardClient_buildConnectionParams_6 a yawl:Method ;
+    rdfs:label "buildConnectionParams" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map buildConnectionParams(String user, String pw)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:ForwardClient__connectionParams a yawl:Field ;
+    rdfs:label "_connectionParams" .
+
+
+

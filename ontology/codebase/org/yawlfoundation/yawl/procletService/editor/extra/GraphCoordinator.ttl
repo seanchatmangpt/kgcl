@@ -1,0 +1,142 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.procletService.editor.extra
+yawl:org_yawlfoundation_yawl_procletService_editor_extra a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.procletService.editor.extra" .
+# Class: org.yawlfoundation.yawl.procletService.editor.extra.GraphCoordinator
+yawl:GraphCoordinator a yawl:Class ;
+    rdfs:label "GraphCoordinator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor_extra ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/extra/GraphCoordinator.java"^^xsd:string ;
+    yawl:extends yawl:InternalCoordinator ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:GraphCoordinator_singleton_1 ;
+    yawl:hasMethod yawl:GraphCoordinator_getInstance_2 ;
+    yawl:hasMethod yawl:GraphCoordinator_exists_3 ;
+    yawl:hasMethod yawl:GraphCoordinator_finish_4 ;
+    yawl:hasMethod yawl:GraphCoordinator_start_5 ;
+    yawl:hasMethod yawl:GraphCoordinator_getInternalFrame_6 ;
+    yawl:hasMethod yawl:GraphCoordinator_end_7 ;
+    yawl:hasMethod yawl:GraphCoordinator_getGraphControl_8 ;
+    yawl:hasMethod yawl:GraphCoordinator_setNameTextField_9 ;
+    yawl:hasMethod yawl:GraphCoordinator_getNameTextField_10 ;
+    yawl:hasMethod yawl:GraphCoordinator_getNameModel_11 ;
+    yawl:hasField yawl:GraphCoordinator_frame ;
+    yawl:hasField yawl:GraphCoordinator_instance ;
+    yawl:hasField yawl:GraphCoordinator_nameTextField ;
+    .
+
+
+# Method: GraphCoordinator.singleton
+yawl:GraphCoordinator_singleton_1 a yawl:Method ;
+    rdfs:label "singleton" ;
+    yawl:returnType "GraphCoordinator" ;
+    yawl:signature "GraphCoordinator singleton(JFrame aMainFrame, EntityMID emid)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: GraphCoordinator.getInstance
+yawl:GraphCoordinator_getInstance_2 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "GraphCoordinator" ;
+    yawl:signature "GraphCoordinator getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: GraphCoordinator.exists
+yawl:GraphCoordinator_exists_3 a yawl:Method ;
+    rdfs:label "exists" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean exists()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: GraphCoordinator.finish
+yawl:GraphCoordinator_finish_4 a yawl:Method ;
+    rdfs:label "finish" ;
+    yawl:returnType "void" ;
+    yawl:signature "void finish()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: GraphCoordinator.start
+yawl:GraphCoordinator_start_5 a yawl:Method ;
+    rdfs:label "start" ;
+    yawl:returnType "void" ;
+    yawl:signature "void start()" ;
+    rdfs:comment """start""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: GraphCoordinator.getInternalFrame
+yawl:GraphCoordinator_getInternalFrame_6 a yawl:Method ;
+    rdfs:label "getInternalFrame" ;
+    yawl:returnType "JInternalFrame" ;
+    yawl:signature "JInternalFrame getInternalFrame()" ;
+    rdfs:comment """getInternalFrame @return JInternalFrame""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: GraphCoordinator.end
+yawl:GraphCoordinator_end_7 a yawl:Method ;
+    rdfs:label "end" ;
+    yawl:returnType "void" ;
+    yawl:signature "void end()" ;
+    rdfs:comment """end""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: GraphCoordinator.getGraphControl
+yawl:GraphCoordinator_getGraphControl_8 a yawl:Method ;
+    rdfs:label "getGraphControl" ;
+    yawl:returnType "GraphControl" ;
+    yawl:signature "GraphControl getGraphControl()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: GraphCoordinator.setNameTextField
+yawl:GraphCoordinator_setNameTextField_9 a yawl:Method ;
+    rdfs:label "setNameTextField" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNameTextField(JTextField nameTextField)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: GraphCoordinator.getNameTextField
+yawl:GraphCoordinator_getNameTextField_10 a yawl:Method ;
+    rdfs:label "getNameTextField" ;
+    yawl:returnType "JTextField" ;
+    yawl:signature "JTextField getNameTextField()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: GraphCoordinator.getNameModel
+yawl:GraphCoordinator_getNameModel_11 a yawl:Method ;
+    rdfs:label "getNameModel" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNameModel()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:GraphCoordinator_frame a yawl:Field ;
+    rdfs:label "frame" .
+
+yawl:GraphCoordinator_instance a yawl:Field ;
+    rdfs:label "instance" .
+
+yawl:GraphCoordinator_nameTextField a yawl:Field ;
+    rdfs:label "nameTextField" .
+
+
+

@@ -1,0 +1,235 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.components.ToolBar
+yawl:ToolBar a yawl:Class ;
+    rdfs:label "ToolBar" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_components ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/components/ToolBar.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 13/10/2015""" ;
+    yawl:extends yawl:JToolBar ;
+    yawl:implements yawl:ActionListener ;
+    yawl:implements yawl:EngineStatusListener ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ToolBar_addSeparator_1 ;
+    yawl:hasMethod yawl:ToolBar_actionPerformed_2 ;
+    yawl:hasMethod yawl:ToolBar_statusChanged_3 ;
+    yawl:hasMethod yawl:ToolBar_performUserPreferencesOnStart_4 ;
+    yawl:hasMethod yawl:ToolBar_enableEditorButton_5 ;
+    yawl:hasMethod yawl:ToolBar_addButtons_6 ;
+    yawl:hasMethod yawl:ToolBar_createToolButton_7 ;
+    yawl:hasMethod yawl:ToolBar_enableButtons_8 ;
+    yawl:hasMethod yawl:ToolBar_addStatusPanel_9 ;
+    yawl:hasMethod yawl:ToolBar_startEngine_10 ;
+    yawl:hasMethod yawl:ToolBar_stopEngine_11 ;
+    yawl:hasMethod yawl:ToolBar_checkForUpdates_12 ;
+    yawl:hasMethod yawl:ToolBar_startEditor_13 ;
+    yawl:hasMethod yawl:ToolBar_showPreferencesDialog_14 ;
+    yawl:hasMethod yawl:ToolBar_showAboutDialog_15 ;
+    yawl:hasMethod yawl:ToolBar_browseTo_16 ;
+    yawl:hasMethod yawl:ToolBar_getLogonURL_17 ;
+    yawl:hasMethod yawl:ToolBar_offerToKillProcess_18 ;
+    yawl:hasMethod yawl:ToolBar_showWaitCursor_19 ;
+    yawl:hasField yawl:ToolBar_WEBPAGE_URL ;
+    yawl:hasField yawl:ToolBar_MANUAL_URL ;
+    yawl:hasField yawl:ToolBar_spacer ;
+    yawl:hasField yawl:ToolBar__mainWindow ;
+    yawl:hasField yawl:ToolBar__btnStart ;
+    yawl:hasField yawl:ToolBar__btnStop ;
+    yawl:hasField yawl:ToolBar__btnLogon ;
+    yawl:hasField yawl:ToolBar__btnEditor ;
+    yawl:hasField yawl:ToolBar__btnUpdates ;
+    yawl:hasField yawl:ToolBar__btnPreferences ;
+    .
+
+
+# Method: ToolBar.addSeparator
+yawl:ToolBar_addSeparator_1 a yawl:Method ;
+    rdfs:label "addSeparator" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addSeparator()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ToolBar.actionPerformed
+yawl:ToolBar_actionPerformed_2 a yawl:Method ;
+    rdfs:label "actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void actionPerformed(ActionEvent e)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ToolBar.statusChanged
+yawl:ToolBar_statusChanged_3 a yawl:Method ;
+    rdfs:label "statusChanged" ;
+    yawl:returnType "void" ;
+    yawl:signature "void statusChanged(EngineStatus status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ToolBar.performUserPreferencesOnStart
+yawl:ToolBar_performUserPreferencesOnStart_4 a yawl:Method ;
+    rdfs:label "performUserPreferencesOnStart" ;
+    yawl:returnType "void" ;
+    yawl:signature "void performUserPreferencesOnStart()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ToolBar.enableEditorButton
+yawl:ToolBar_enableEditorButton_5 a yawl:Method ;
+    rdfs:label "enableEditorButton" ;
+    yawl:returnType "void" ;
+    yawl:signature "void enableEditorButton(boolean enable)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ToolBar.addButtons
+yawl:ToolBar_addButtons_6 a yawl:Method ;
+    rdfs:label "addButtons" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addButtons()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ToolBar.createToolButton
+yawl:ToolBar_createToolButton_7 a yawl:Method ;
+    rdfs:label "createToolButton" ;
+    yawl:returnType "JButton" ;
+    yawl:signature "JButton createToolButton(String action, String tip)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ToolBar.enableButtons
+yawl:ToolBar_enableButtons_8 a yawl:Method ;
+    rdfs:label "enableButtons" ;
+    yawl:returnType "void" ;
+    yawl:signature "void enableButtons(EngineStatus status)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ToolBar.addStatusPanel
+yawl:ToolBar_addStatusPanel_9 a yawl:Method ;
+    rdfs:label "addStatusPanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addStatusPanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ToolBar.startEngine
+yawl:ToolBar_startEngine_10 a yawl:Method ;
+    rdfs:label "startEngine" ;
+    yawl:returnType "void" ;
+    yawl:signature "void startEngine()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ToolBar.stopEngine
+yawl:ToolBar_stopEngine_11 a yawl:Method ;
+    rdfs:label "stopEngine" ;
+    yawl:returnType "void" ;
+    yawl:signature "void stopEngine()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ToolBar.checkForUpdates
+yawl:ToolBar_checkForUpdates_12 a yawl:Method ;
+    rdfs:label "checkForUpdates" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkForUpdates()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ToolBar.startEditor
+yawl:ToolBar_startEditor_13 a yawl:Method ;
+    rdfs:label "startEditor" ;
+    yawl:returnType "void" ;
+    yawl:signature "void startEditor()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ToolBar.showPreferencesDialog
+yawl:ToolBar_showPreferencesDialog_14 a yawl:Method ;
+    rdfs:label "showPreferencesDialog" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showPreferencesDialog()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ToolBar.showAboutDialog
+yawl:ToolBar_showAboutDialog_15 a yawl:Method ;
+    rdfs:label "showAboutDialog" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showAboutDialog()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ToolBar.browseTo
+yawl:ToolBar_browseTo_16 a yawl:Method ;
+    rdfs:label "browseTo" ;
+    yawl:returnType "void" ;
+    yawl:signature "void browseTo(String url)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ToolBar.getLogonURL
+yawl:ToolBar_getLogonURL_17 a yawl:Method ;
+    rdfs:label "getLogonURL" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLogonURL()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ToolBar.offerToKillProcess
+yawl:ToolBar_offerToKillProcess_18 a yawl:Method ;
+    rdfs:label "offerToKillProcess" ;
+    yawl:returnType "void" ;
+    yawl:signature "void offerToKillProcess()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ToolBar.showWaitCursor
+yawl:ToolBar_showWaitCursor_19 a yawl:Method ;
+    rdfs:label "showWaitCursor" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showWaitCursor(boolean show)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:ToolBar_WEBPAGE_URL a yawl:Field ;
+    rdfs:label "WEBPAGE_URL" .
+
+yawl:ToolBar_MANUAL_URL a yawl:Field ;
+    rdfs:label "MANUAL_URL" .
+
+yawl:ToolBar_spacer a yawl:Field ;
+    rdfs:label "spacer" .
+
+yawl:ToolBar__mainWindow a yawl:Field ;
+    rdfs:label "_mainWindow" .
+
+yawl:ToolBar__btnStart a yawl:Field ;
+    rdfs:label "_btnStart" .
+
+yawl:ToolBar__btnStop a yawl:Field ;
+    rdfs:label "_btnStop" .
+
+yawl:ToolBar__btnLogon a yawl:Field ;
+    rdfs:label "_btnLogon" .
+
+yawl:ToolBar__btnEditor a yawl:Field ;
+    rdfs:label "_btnEditor" .
+
+yawl:ToolBar__btnUpdates a yawl:Field ;
+    rdfs:label "_btnUpdates" .
+
+yawl:ToolBar__btnPreferences a yawl:Field ;
+    rdfs:label "_btnPreferences" .
+
+
+

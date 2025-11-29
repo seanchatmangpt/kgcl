@@ -1,0 +1,291 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.simulation
+yawl:org_yawlfoundation_yawl_simulation a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.simulation" .
+# Class: org.yawlfoundation.yawl.simulation.YSimulator
+yawl:YSimulator a yawl:Class ;
+    rdfs:label "YSimulator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_simulation ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/simulation/YSimulator.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 1/10/12""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YSimulator_main_1 ;
+    yawl:hasMethod yawl:YSimulator_run_2 ;
+    yawl:hasMethod yawl:YSimulator_init_3 ;
+    yawl:hasMethod yawl:YSimulator_connect_4 ;
+    yawl:hasMethod yawl:YSimulator_checkSpecLoaded_5 ;
+    yawl:hasMethod yawl:YSimulator_getParticipantID_6 ;
+    yawl:hasMethod yawl:YSimulator_getPIDsForRole_7 ;
+    yawl:hasMethod yawl:YSimulator_start_8 ;
+    yawl:hasMethod yawl:YSimulator_startPoller_9 ;
+    yawl:hasMethod yawl:YSimulator_hasRunningCases_10 ;
+    yawl:hasMethod yawl:YSimulator_cancelAllCases_11 ;
+    yawl:hasMethod yawl:YSimulator_allocateOffers_12 ;
+    yawl:hasMethod yawl:YSimulator_getOffered_13 ;
+    yawl:hasMethod yawl:YSimulator_getAllocated_14 ;
+    yawl:hasMethod yawl:YSimulator_getExecutingCount_15 ;
+    yawl:hasMethod yawl:YSimulator_deadlocked_16 ;
+    yawl:hasMethod yawl:YSimulator_process_17 ;
+    yawl:hasMethod yawl:YSimulator_successful_18 ;
+    yawl:hasMethod yawl:YSimulator_fail_19 ;
+    yawl:hasMethod yawl:YSimulator_print_20 ;
+    yawl:hasMethod yawl:YSimulator_now_21 ;
+    yawl:hasMethod yawl:YSimulator_getCaseSummary_22 ;
+    yawl:hasField yawl:YSimulator__wqAdapter ;
+    yawl:hasField yawl:YSimulator__resAdapter ;
+    yawl:hasField yawl:YSimulator__props ;
+    yawl:hasField yawl:YSimulator__handle ;
+    yawl:hasField yawl:YSimulator__summaryMap ;
+    yawl:hasField yawl:YSimulator__userToPidMap ;
+    yawl:hasField yawl:YSimulator__roleToPidsMap ;
+    yawl:hasField yawl:YSimulator__caseStartTimeMap ;
+    yawl:hasField yawl:YSimulator__startTime ;
+    yawl:hasField yawl:YSimulator__slowestCaseTime ;
+    yawl:hasField yawl:YSimulator__fastestCaseTime ;
+    yawl:hasField yawl:YSimulator__totalTime ;
+    yawl:hasField yawl:YSimulator_DEFAULT_URL ;
+    yawl:hasField yawl:YSimulator_DEFAULT_USER ;
+    yawl:hasField yawl:YSimulator_DEFAULT_PASSWORD ;
+    yawl:hasField yawl:YSimulator_SDF ;
+    yawl:hasField yawl:YSimulator__timer ;
+    .
+
+
+# Method: YSimulator.main
+yawl:YSimulator_main_1 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String args)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YSimulator.run
+yawl:YSimulator_run_2 a yawl:Method ;
+    rdfs:label "run" ;
+    yawl:returnType "void" ;
+    yawl:signature "void run(String configFile)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSimulator.init
+yawl:YSimulator_init_3 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSimulator.connect
+yawl:YSimulator_connect_4 a yawl:Method ;
+    rdfs:label "connect" ;
+    yawl:returnType "void" ;
+    yawl:signature "void connect(String url)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YSimulator.checkSpecLoaded
+yawl:YSimulator_checkSpecLoaded_5 a yawl:Method ;
+    rdfs:label "checkSpecLoaded" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkSpecLoaded()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSimulator.getParticipantID
+yawl:YSimulator_getParticipantID_6 a yawl:Method ;
+    rdfs:label "getParticipantID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParticipantID(String userID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YSimulator.getPIDsForRole
+yawl:YSimulator_getPIDsForRole_7 a yawl:Method ;
+    rdfs:label "getPIDsForRole" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getPIDsForRole(String roleName)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YSimulator.start
+yawl:YSimulator_start_8 a yawl:Method ;
+    rdfs:label "start" ;
+    yawl:returnType "void" ;
+    yawl:signature "void start()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSimulator.startPoller
+yawl:YSimulator_startPoller_9 a yawl:Method ;
+    rdfs:label "startPoller" ;
+    yawl:returnType "void" ;
+    yawl:signature "void startPoller()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSimulator.hasRunningCases
+yawl:YSimulator_hasRunningCases_10 a yawl:Method ;
+    rdfs:label "hasRunningCases" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasRunningCases()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YSimulator.cancelAllCases
+yawl:YSimulator_cancelAllCases_11 a yawl:Method ;
+    rdfs:label "cancelAllCases" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancelAllCases()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YSimulator.allocateOffers
+yawl:YSimulator_allocateOffers_12 a yawl:Method ;
+    rdfs:label "allocateOffers" ;
+    yawl:returnType "void" ;
+    yawl:signature "void allocateOffers()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YSimulator.getOffered
+yawl:YSimulator_getOffered_13 a yawl:Method ;
+    rdfs:label "getOffered" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getOffered(String pid)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YSimulator.getAllocated
+yawl:YSimulator_getAllocated_14 a yawl:Method ;
+    rdfs:label "getAllocated" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getAllocated(String pid)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YSimulator.getExecutingCount
+yawl:YSimulator_getExecutingCount_15 a yawl:Method ;
+    rdfs:label "getExecutingCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getExecutingCount(String pid)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSimulator.deadlocked
+yawl:YSimulator_deadlocked_16 a yawl:Method ;
+    rdfs:label "deadlocked" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean deadlocked()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSimulator.process
+yawl:YSimulator_process_17 a yawl:Method ;
+    rdfs:label "process" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean process(String pid, WorkItemRecord wir)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YSimulator.successful
+yawl:YSimulator_successful_18 a yawl:Method ;
+    rdfs:label "successful" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean successful(String s)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YSimulator.fail
+yawl:YSimulator_fail_19 a yawl:Method ;
+    rdfs:label "fail" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fail(String msg)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YSimulator.print
+yawl:YSimulator_print_20 a yawl:Method ;
+    rdfs:label "print" ;
+    yawl:returnType "void" ;
+    yawl:signature "void print(String msg)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YSimulator.now
+yawl:YSimulator_now_21 a yawl:Method ;
+    rdfs:label "now" ;
+    yawl:returnType "String" ;
+    yawl:signature "String now()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSimulator.getCaseSummary
+yawl:YSimulator_getCaseSummary_22 a yawl:Method ;
+    rdfs:label "getCaseSummary" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseSummary()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YSimulator__wqAdapter a yawl:Field ;
+    rdfs:label "_wqAdapter" .
+
+yawl:YSimulator__resAdapter a yawl:Field ;
+    rdfs:label "_resAdapter" .
+
+yawl:YSimulator__props a yawl:Field ;
+    rdfs:label "_props" .
+
+yawl:YSimulator__handle a yawl:Field ;
+    rdfs:label "_handle" .
+
+yawl:YSimulator__summaryMap a yawl:Field ;
+    rdfs:label "_summaryMap" .
+
+yawl:YSimulator__userToPidMap a yawl:Field ;
+    rdfs:label "_userToPidMap" .
+
+yawl:YSimulator__roleToPidsMap a yawl:Field ;
+    rdfs:label "_roleToPidsMap" .
+
+yawl:YSimulator__caseStartTimeMap a yawl:Field ;
+    rdfs:label "_caseStartTimeMap" .
+
+yawl:YSimulator__startTime a yawl:Field ;
+    rdfs:label "_startTime" .
+
+yawl:YSimulator__slowestCaseTime a yawl:Field ;
+    rdfs:label "_slowestCaseTime" .
+
+yawl:YSimulator__fastestCaseTime a yawl:Field ;
+    rdfs:label "_fastestCaseTime" .
+
+yawl:YSimulator__totalTime a yawl:Field ;
+    rdfs:label "_totalTime" .
+
+yawl:YSimulator_DEFAULT_URL a yawl:Field ;
+    rdfs:label "DEFAULT_URL" .
+
+yawl:YSimulator_DEFAULT_USER a yawl:Field ;
+    rdfs:label "DEFAULT_USER" .
+
+yawl:YSimulator_DEFAULT_PASSWORD a yawl:Field ;
+    rdfs:label "DEFAULT_PASSWORD" .
+
+yawl:YSimulator_SDF a yawl:Field ;
+    rdfs:label "SDF" .
+
+yawl:YSimulator__timer a yawl:Field ;
+    rdfs:label "_timer" .
+
+
+

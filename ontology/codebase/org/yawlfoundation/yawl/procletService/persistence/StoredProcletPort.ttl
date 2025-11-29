@@ -1,0 +1,184 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.persistence.StoredProcletPort
+yawl:StoredProcletPort a yawl:Class ;
+    rdfs:label "StoredProcletPort" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_persistence ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/persistence/StoredProcletPort.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 2/02/12""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:StoredProcletPort_newProcletPort_1 ;
+    yawl:hasMethod yawl:StoredProcletPort_getClassID_2 ;
+    yawl:hasMethod yawl:StoredProcletPort_setClassID_3 ;
+    yawl:hasMethod yawl:StoredProcletPort_getBlockID_4 ;
+    yawl:hasMethod yawl:StoredProcletPort_setBlockID_5 ;
+    yawl:hasMethod yawl:StoredProcletPort_getPortID_6 ;
+    yawl:hasMethod yawl:StoredProcletPort_setPortID_7 ;
+    yawl:hasMethod yawl:StoredProcletPort_getDirection_8 ;
+    yawl:hasMethod yawl:StoredProcletPort_setDirection_9 ;
+    yawl:hasMethod yawl:StoredProcletPort_getCardinality_10 ;
+    yawl:hasMethod yawl:StoredProcletPort_setCardinality_11 ;
+    yawl:hasMethod yawl:StoredProcletPort_getMultiplicity_12 ;
+    yawl:hasMethod yawl:StoredProcletPort_setMultiplicity_13 ;
+    yawl:hasMethod yawl:StoredProcletPort_getPkey_14 ;
+    yawl:hasMethod yawl:StoredProcletPort_setPkey_15 ;
+    yawl:hasField yawl:StoredProcletPort_pkey ;
+    yawl:hasField yawl:StoredProcletPort_classID ;
+    yawl:hasField yawl:StoredProcletPort_blockID ;
+    yawl:hasField yawl:StoredProcletPort_portID ;
+    yawl:hasField yawl:StoredProcletPort_direction ;
+    yawl:hasField yawl:StoredProcletPort_cardinality ;
+    yawl:hasField yawl:StoredProcletPort_multiplicity ;
+    .
+
+
+# Method: StoredProcletPort.newProcletPort
+yawl:StoredProcletPort_newProcletPort_1 a yawl:Method ;
+    rdfs:label "newProcletPort" ;
+    yawl:returnType "ProcletPort" ;
+    yawl:signature "ProcletPort newProcletPort()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredProcletPort.getClassID
+yawl:StoredProcletPort_getClassID_2 a yawl:Method ;
+    rdfs:label "getClassID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getClassID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredProcletPort.setClassID
+yawl:StoredProcletPort_setClassID_3 a yawl:Method ;
+    rdfs:label "setClassID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setClassID(String classID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredProcletPort.getBlockID
+yawl:StoredProcletPort_getBlockID_4 a yawl:Method ;
+    rdfs:label "getBlockID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBlockID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredProcletPort.setBlockID
+yawl:StoredProcletPort_setBlockID_5 a yawl:Method ;
+    rdfs:label "setBlockID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBlockID(String blockID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredProcletPort.getPortID
+yawl:StoredProcletPort_getPortID_6 a yawl:Method ;
+    rdfs:label "getPortID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPortID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredProcletPort.setPortID
+yawl:StoredProcletPort_setPortID_7 a yawl:Method ;
+    rdfs:label "setPortID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPortID(String portID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredProcletPort.getDirection
+yawl:StoredProcletPort_getDirection_8 a yawl:Method ;
+    rdfs:label "getDirection" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDirection()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredProcletPort.setDirection
+yawl:StoredProcletPort_setDirection_9 a yawl:Method ;
+    rdfs:label "setDirection" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDirection(String direction)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredProcletPort.getCardinality
+yawl:StoredProcletPort_getCardinality_10 a yawl:Method ;
+    rdfs:label "getCardinality" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCardinality()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredProcletPort.setCardinality
+yawl:StoredProcletPort_setCardinality_11 a yawl:Method ;
+    rdfs:label "setCardinality" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCardinality(String cardinality)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredProcletPort.getMultiplicity
+yawl:StoredProcletPort_getMultiplicity_12 a yawl:Method ;
+    rdfs:label "getMultiplicity" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMultiplicity()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredProcletPort.setMultiplicity
+yawl:StoredProcletPort_setMultiplicity_13 a yawl:Method ;
+    rdfs:label "setMultiplicity" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMultiplicity(String multiplicity)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredProcletPort.getPkey
+yawl:StoredProcletPort_getPkey_14 a yawl:Method ;
+    rdfs:label "getPkey" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getPkey()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredProcletPort.setPkey
+yawl:StoredProcletPort_setPkey_15 a yawl:Method ;
+    rdfs:label "setPkey" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPkey(long pkey)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:StoredProcletPort_pkey a yawl:Field ;
+    rdfs:label "pkey" .
+
+yawl:StoredProcletPort_classID a yawl:Field ;
+    rdfs:label "classID" .
+
+yawl:StoredProcletPort_blockID a yawl:Field ;
+    rdfs:label "blockID" .
+
+yawl:StoredProcletPort_portID a yawl:Field ;
+    rdfs:label "portID" .
+
+yawl:StoredProcletPort_direction a yawl:Field ;
+    rdfs:label "direction" .
+
+yawl:StoredProcletPort_cardinality a yawl:Field ;
+    rdfs:label "cardinality" .
+
+yawl:StoredProcletPort_multiplicity a yawl:Field ;
+    rdfs:label "multiplicity" .
+
+
+

@@ -1,0 +1,79 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.pconns.DemoVertexIconTransformer
+yawl:DemoVertexIconTransformer a yawl:Class ;
+    rdfs:label "DemoVertexIconTransformer" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor_pconns ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/pconns/VertexDemo.java"^^xsd:string ;
+    rdfs:comment """this class exists only to provide settings to turn on/off shapes and image fill in this demo. In a real application, use DefaultVertexIconTransformer instead.""" ;
+    yawl:extends yawl:DefaultVertexIconTransformer ;
+    yawl:implements yawl:Transformer ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    yawl:hasMethod yawl:DemoVertexIconTransformer_isFillImages_1 ;
+    yawl:hasMethod yawl:DemoVertexIconTransformer_setFillImages_2 ;
+    yawl:hasMethod yawl:DemoVertexIconTransformer_isOutlineImages_3 ;
+    yawl:hasMethod yawl:DemoVertexIconTransformer_setOutlineImages_4 ;
+    yawl:hasMethod yawl:DemoVertexIconTransformer_transform_5 ;
+    yawl:hasField yawl:DemoVertexIconTransformer_fillImages ;
+    yawl:hasField yawl:DemoVertexIconTransformer_outlineImages ;
+    .
+
+
+# Method: DemoVertexIconTransformer.isFillImages
+yawl:DemoVertexIconTransformer_isFillImages_1 a yawl:Method ;
+    rdfs:label "isFillImages" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isFillImages()" ;
+    rdfs:comment """@return Returns the fillImages.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DemoVertexIconTransformer.setFillImages
+yawl:DemoVertexIconTransformer_setFillImages_2 a yawl:Method ;
+    rdfs:label "setFillImages" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setFillImages(boolean fillImages)" ;
+    rdfs:comment """@param fillImages The fillImages to set.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DemoVertexIconTransformer.isOutlineImages
+yawl:DemoVertexIconTransformer_isOutlineImages_3 a yawl:Method ;
+    rdfs:label "isOutlineImages" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isOutlineImages()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DemoVertexIconTransformer.setOutlineImages
+yawl:DemoVertexIconTransformer_setOutlineImages_4 a yawl:Method ;
+    rdfs:label "setOutlineImages" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOutlineImages(boolean outlineImages)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DemoVertexIconTransformer.transform
+yawl:DemoVertexIconTransformer_transform_5 a yawl:Method ;
+    rdfs:label "transform" ;
+    yawl:returnType "Icon" ;
+    yawl:signature "Icon transform(V v)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:DemoVertexIconTransformer_fillImages a yawl:Field ;
+    rdfs:label "fillImages" .
+
+yawl:DemoVertexIconTransformer_outlineImages a yawl:Field ;
+    rdfs:label "outlineImages" .
+
+
+

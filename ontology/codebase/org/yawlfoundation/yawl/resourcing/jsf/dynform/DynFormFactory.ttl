@@ -1,0 +1,1070 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.dynform.DynFormFactory
+yawl:DynFormFactory a yawl:Class ;
+    rdfs:label "DynFormFactory" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf_dynform ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/dynform/DynFormFactory.java"^^xsd:string ;
+    yawl:extends yawl:AbstractSessionBean ;
+    yawl:implements yawl:DynamicForm ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DynFormFactory__init_1 ;
+    yawl:hasMethod yawl:DynFormFactory_getCompPanel_2 ;
+    yawl:hasMethod yawl:DynFormFactory_setCompPanel_3 ;
+    yawl:hasMethod yawl:DynFormFactory_getHeaderText_4 ;
+    yawl:hasMethod yawl:DynFormFactory_setHeaderText_5 ;
+    yawl:hasMethod yawl:DynFormFactory_getContainerStyle_6 ;
+    yawl:hasMethod yawl:DynFormFactory_setContainerStyle_7 ;
+    yawl:hasMethod yawl:DynFormFactory_getBtnOKStyle_8 ;
+    yawl:hasMethod yawl:DynFormFactory_setBtnOKStyle_9 ;
+    yawl:hasMethod yawl:DynFormFactory_getBtnCancelStyle_10 ;
+    yawl:hasMethod yawl:DynFormFactory_setBtnCancelStyle_11 ;
+    yawl:hasMethod yawl:DynFormFactory_getBtnCompleteStyle_12 ;
+    yawl:hasMethod yawl:DynFormFactory_setBtnCompleteStyle_13 ;
+    yawl:hasMethod yawl:DynFormFactory_getBottomPanelStyle_14 ;
+    yawl:hasMethod yawl:DynFormFactory_setBottomPanelStyle_15 ;
+    yawl:hasMethod yawl:DynFormFactory_getTitle_16 ;
+    yawl:hasMethod yawl:DynFormFactory_setTitle_17 ;
+    yawl:hasMethod yawl:DynFormFactory_getFocus_18 ;
+    yawl:hasMethod yawl:DynFormFactory_setFocus_19 ;
+    yawl:hasMethod yawl:DynFormFactory_makeForm_20 ;
+    yawl:hasMethod yawl:DynFormFactory_makeForm_21 ;
+    yawl:hasMethod yawl:DynFormFactory_getDataList_22 ;
+    yawl:hasMethod yawl:DynFormFactory_getDocComponentIDs_23 ;
+    yawl:hasMethod yawl:DynFormFactory_processOccursAction_24 ;
+    yawl:hasMethod yawl:DynFormFactory_getFormWidth_25 ;
+    yawl:hasMethod yawl:DynFormFactory_getFormHeight_26 ;
+    yawl:hasMethod yawl:DynFormFactory_resetFormHeight_27 ;
+    yawl:hasMethod yawl:DynFormFactory_validateInputs_28 ;
+    yawl:hasMethod yawl:DynFormFactory_getButtonBlockWidth_29 ;
+    yawl:hasMethod yawl:DynFormFactory_makeOccursButton_30 ;
+    yawl:hasMethod yawl:DynFormFactory_getDefaultFormName_31 ;
+    yawl:hasMethod yawl:DynFormFactory_getFieldForComponent_32 ;
+    yawl:hasMethod yawl:DynFormFactory_addSubPanelControllerMap_33 ;
+    yawl:hasMethod yawl:DynFormFactory_addClonedFieldToTable_34 ;
+    yawl:hasMethod yawl:DynFormFactory_enspace_35 ;
+    yawl:hasMethod yawl:DynFormFactory_despace_36 ;
+    yawl:hasMethod yawl:DynFormFactory_reset_37 ;
+    yawl:hasMethod yawl:DynFormFactory_buildForm_38 ;
+    yawl:hasMethod yawl:DynFormFactory_getParamInfo_39 ;
+    yawl:hasMethod yawl:DynFormFactory_getCaseParamMap_40 ;
+    yawl:hasMethod yawl:DynFormFactory_getUserAttributes_41 ;
+    yawl:hasMethod yawl:DynFormFactory_getWorkItemData_42 ;
+    yawl:hasMethod yawl:DynFormFactory_getWorkItemData_43 ;
+    yawl:hasMethod yawl:DynFormFactory_getFormFonts_44 ;
+    yawl:hasMethod yawl:DynFormFactory_setFormFonts_45 ;
+    yawl:hasMethod yawl:DynFormFactory_setHeader_46 ;
+    yawl:hasMethod yawl:DynFormFactory_setShowBanner_47 ;
+    yawl:hasMethod yawl:DynFormFactory_buildForm_48 ;
+    yawl:hasMethod yawl:DynFormFactory_setBaseWidths_49 ;
+    yawl:hasMethod yawl:DynFormFactory_getStaticTextHeight_50 ;
+    yawl:hasMethod yawl:DynFormFactory_getStyle_51 ;
+    yawl:hasMethod yawl:DynFormFactory_getContainerWidth_52 ;
+    yawl:hasMethod yawl:DynFormFactory_getMaxFieldWidth_53 ;
+    yawl:hasMethod yawl:DynFormFactory_setStyle_54 ;
+    yawl:hasMethod yawl:DynFormFactory_isComponentVisible_55 ;
+    yawl:hasMethod yawl:DynFormFactory_replaceTopInStyle_56 ;
+    yawl:hasMethod yawl:DynFormFactory_adjustFieldOffsetsAndWidths_57 ;
+    yawl:hasMethod yawl:DynFormFactory_getComponentHeight_58 ;
+    yawl:hasMethod yawl:DynFormFactory_getFieldHeight_59 ;
+    yawl:hasMethod yawl:DynFormFactory_getFieldHeight_60 ;
+    yawl:hasMethod yawl:DynFormFactory_sizeAndPositionContent_61 ;
+    yawl:hasMethod yawl:DynFormFactory_getNumberOfVisibleButtons_62 ;
+    yawl:hasMethod yawl:DynFormFactory_setPanelStyles_63 ;
+    yawl:hasMethod yawl:DynFormFactory_positionButtons_64 ;
+    yawl:hasMethod yawl:DynFormFactory_setContentTops_65 ;
+    yawl:hasMethod yawl:DynFormFactory_getComponentForLabel_66 ;
+    yawl:hasMethod yawl:DynFormFactory_setTopStyle_67 ;
+    yawl:hasMethod yawl:DynFormFactory_getOuterPanelTop_68 ;
+    yawl:hasMethod yawl:DynFormFactory_buildInnerForm_69 ;
+    yawl:hasMethod yawl:DynFormFactory_buildChoiceSelector_70 ;
+    yawl:hasMethod yawl:DynFormFactory_buildSubPanel_71 ;
+    yawl:hasMethod yawl:DynFormFactory_bindOccursButtonListener_72 ;
+    yawl:hasMethod yawl:DynFormFactory_isMatchingRadioForData_73 ;
+    yawl:hasMethod yawl:DynFormFactory_createUniqueID_74 ;
+    yawl:hasMethod yawl:DynFormFactory_getMaxDepthLevel_75 ;
+    yawl:hasMethod yawl:DynFormFactory_addSubPanel_76 ;
+    yawl:hasMethod yawl:DynFormFactory_removeSubPanel_77 ;
+    yawl:hasMethod yawl:DynFormFactory_adjustLayouts_78 ;
+    yawl:hasMethod yawl:DynFormFactory_repositionLevel0Panels_79 ;
+    yawl:hasMethod yawl:DynFormFactory_removeSubPanelController_80 ;
+    yawl:hasMethod yawl:DynFormFactory_removeOrphanedControllers_81 ;
+    yawl:hasMethod yawl:DynFormFactory_repositionOutermostFields_82 ;
+    yawl:hasMethod yawl:DynFormFactory_getOuterPanelWidth_83 ;
+    yawl:hasMethod yawl:DynFormFactory_getAttributes_84 ;
+    yawl:hasMethod yawl:DynFormFactory_replaceInternalChars_85 ;
+    yawl:hasMethod yawl:DynFormFactory_getBodyStyle_86 ;
+    yawl:hasMethod yawl:DynFormFactory_getPageBackgroundURL_87 ;
+    yawl:hasMethod yawl:DynFormFactory_getPageBackgroundColour_88 ;
+    yawl:hasMethod yawl:DynFormFactory_getFormBackgroundColour_89 ;
+    yawl:hasMethod yawl:DynFormFactory_getFormAltBackgroundColour_90 ;
+    yawl:hasMethod yawl:DynFormFactory_getFormFontStyle_91 ;
+    yawl:hasMethod yawl:DynFormFactory_getFormFont_92 ;
+    yawl:hasMethod yawl:DynFormFactory_getFormHeaderFont_93 ;
+    yawl:hasMethod yawl:DynFormFactory_getFormHeaderFontStyle_94 ;
+    yawl:hasMethod yawl:DynFormFactory_getFormJustify_95 ;
+    yawl:hasMethod yawl:DynFormFactory_isFormReadOnly_96 ;
+    yawl:hasMethod yawl:DynFormFactory_getTaskLabel_97 ;
+    yawl:hasMethod yawl:DynFormFactory_getAttributeValue_98 ;
+    yawl:hasField yawl:DynFormFactory___placeholder ;
+    yawl:hasField yawl:DynFormFactory_compPanel ;
+    yawl:hasField yawl:DynFormFactory_headerText ;
+    yawl:hasField yawl:DynFormFactory_containerStyle ;
+    yawl:hasField yawl:DynFormFactory_btnOKStyle ;
+    yawl:hasField yawl:DynFormFactory_btnCancelStyle ;
+    yawl:hasField yawl:DynFormFactory_btnCompleteStyle ;
+    yawl:hasField yawl:DynFormFactory_bottomPanelStyle ;
+    yawl:hasField yawl:DynFormFactory_title ;
+    yawl:hasField yawl:DynFormFactory_focus ;
+    yawl:hasField yawl:DynFormFactory__subPanelTable ;
+    yawl:hasField yawl:DynFormFactory__componentFieldTable ;
+    yawl:hasField yawl:DynFormFactory__outermostTops ;
+    yawl:hasField yawl:DynFormFactory__sb ;
+    yawl:hasField yawl:DynFormFactory__userAttributes ;
+    yawl:hasField yawl:DynFormFactory__fieldAssembler ;
+    yawl:hasField yawl:DynFormFactory__displayedWIR ;
+    yawl:hasField yawl:DynFormFactory__formFonts ;
+    yawl:hasField yawl:DynFormFactory__overallHeight ;
+    yawl:hasField yawl:DynFormFactory_Y_DEF_INCREMENT ;
+    yawl:hasField yawl:DynFormFactory_Y_CHOICE_DECREMENT ;
+    yawl:hasField yawl:DynFormFactory_SUBPANEL_INSET ;
+    yawl:hasField yawl:DynFormFactory_OUTER_PANEL_TO_BUTTONS ;
+    yawl:hasField yawl:DynFormFactory_OUTER_PANEL_LEFT ;
+    yawl:hasField yawl:DynFormFactory_FORM_BUTTON_WIDTH ;
+    yawl:hasField yawl:DynFormFactory_FORM_BUTTON_HEIGHT ;
+    yawl:hasField yawl:DynFormFactory_FORM_BUTTON_GAP ;
+    yawl:hasField yawl:DynFormFactory_BOTTOM_PANEL_HEIGHT ;
+    yawl:hasField yawl:DynFormFactory_X_LABEL_OFFSET ;
+    yawl:hasField yawl:DynFormFactory_DEFAULT_FIELD_OFFSET ;
+    yawl:hasField yawl:DynFormFactory_DEFAULT_PANEL_BASE_WIDTH ;
+    yawl:hasField yawl:DynFormFactory_DEFAULT_FIELD_WIDTH ;
+    yawl:hasField yawl:DynFormFactory_DEFAULT_LABEL_FIELD_GAP ;
+    yawl:hasField yawl:DynFormFactory_CHECKBOX_FIELD_WIDTH ;
+    yawl:hasField yawl:DynFormFactory_DEFAULT_FIELD_HEIGHT ;
+    yawl:hasField yawl:DynFormFactory_LABEL_V_OFFSET ;
+    yawl:hasField yawl:DynFormFactory_FIELD_VSPACE ;
+    yawl:hasField yawl:DynFormFactory_X_FIELD_OFFSET ;
+    yawl:hasField yawl:DynFormFactory_PANEL_BASE_WIDTH ;
+    yawl:hasField yawl:DynFormFactory_FIELD_WIDTH ;
+    .
+
+
+# Method: DynFormFactory._init
+yawl:DynFormFactory__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.getCompPanel
+yawl:DynFormFactory_getCompPanel_2 a yawl:Method ;
+    rdfs:label "getCompPanel" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getCompPanel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.setCompPanel
+yawl:DynFormFactory_setCompPanel_3 a yawl:Method ;
+    rdfs:label "setCompPanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCompPanel(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.getHeaderText
+yawl:DynFormFactory_getHeaderText_4 a yawl:Method ;
+    rdfs:label "getHeaderText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getHeaderText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.setHeaderText
+yawl:DynFormFactory_setHeaderText_5 a yawl:Method ;
+    rdfs:label "setHeaderText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHeaderText(String text)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.getContainerStyle
+yawl:DynFormFactory_getContainerStyle_6 a yawl:Method ;
+    rdfs:label "getContainerStyle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getContainerStyle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.setContainerStyle
+yawl:DynFormFactory_setContainerStyle_7 a yawl:Method ;
+    rdfs:label "setContainerStyle" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setContainerStyle(String style)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.getBtnOKStyle
+yawl:DynFormFactory_getBtnOKStyle_8 a yawl:Method ;
+    rdfs:label "getBtnOKStyle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBtnOKStyle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.setBtnOKStyle
+yawl:DynFormFactory_setBtnOKStyle_9 a yawl:Method ;
+    rdfs:label "setBtnOKStyle" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnOKStyle(String style)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.getBtnCancelStyle
+yawl:DynFormFactory_getBtnCancelStyle_10 a yawl:Method ;
+    rdfs:label "getBtnCancelStyle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBtnCancelStyle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.setBtnCancelStyle
+yawl:DynFormFactory_setBtnCancelStyle_11 a yawl:Method ;
+    rdfs:label "setBtnCancelStyle" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnCancelStyle(String style)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.getBtnCompleteStyle
+yawl:DynFormFactory_getBtnCompleteStyle_12 a yawl:Method ;
+    rdfs:label "getBtnCompleteStyle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBtnCompleteStyle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.setBtnCompleteStyle
+yawl:DynFormFactory_setBtnCompleteStyle_13 a yawl:Method ;
+    rdfs:label "setBtnCompleteStyle" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnCompleteStyle(String style)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.getBottomPanelStyle
+yawl:DynFormFactory_getBottomPanelStyle_14 a yawl:Method ;
+    rdfs:label "getBottomPanelStyle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBottomPanelStyle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.setBottomPanelStyle
+yawl:DynFormFactory_setBottomPanelStyle_15 a yawl:Method ;
+    rdfs:label "setBottomPanelStyle" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBottomPanelStyle(String style)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.getTitle
+yawl:DynFormFactory_getTitle_16 a yawl:Method ;
+    rdfs:label "getTitle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTitle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.setTitle
+yawl:DynFormFactory_setTitle_17 a yawl:Method ;
+    rdfs:label "setTitle" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTitle(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.getFocus
+yawl:DynFormFactory_getFocus_18 a yawl:Method ;
+    rdfs:label "getFocus" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFocus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.setFocus
+yawl:DynFormFactory_setFocus_19 a yawl:Method ;
+    rdfs:label "setFocus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setFocus(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.makeForm
+yawl:DynFormFactory_makeForm_20 a yawl:Method ;
+    rdfs:label "makeForm" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean makeForm(String title, String header, String schema, WorkItemRecord wir)" ;
+    rdfs:comment """Build and show a form to capture the work item's output data values. @param title  The form's title @param header A header text for the form top @param schema An XSD schema of the data types and attributes to display @param wir    the work item record @return true if form creation is successful""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.makeForm
+yawl:DynFormFactory_makeForm_21 a yawl:Method ;
+    rdfs:label "makeForm" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean makeForm(String title, String header, String schema, List parameters)" ;
+    rdfs:comment """Build and show a form to capture the input data values on a case start. @param title      The form's title @param header     A header text for the form top @param schema     An XSD schema of the data types and attributes to display @param parameters a list of the root net's input parameters @return true if form creation is successful""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.getDataList
+yawl:DynFormFactory_getDataList_22 a yawl:Method ;
+    rdfs:label "getDataList" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataList()" ;
+    rdfs:comment """Gets the form's data list on completion of the form. The data list must be a well-formed XML string representing the expected data structure for the work item or case start. The opening and closing tag must be the name of task of which the work item is an instance, or of the root net name of the case instance. @return A well-formed XML String of the work item's output data values""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.getDocComponentIDs
+yawl:DynFormFactory_getDocComponentIDs_23 a yawl:Method ;
+    rdfs:label "getDocComponentIDs" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getDocComponentIDs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.processOccursAction
+yawl:DynFormFactory_processOccursAction_24 a yawl:Method ;
+    rdfs:label "processOccursAction" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processOccursAction(SubPanel panel, String btnType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.getFormWidth
+yawl:DynFormFactory_getFormWidth_25 a yawl:Method ;
+    rdfs:label "getFormWidth" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getFormWidth()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.getFormHeight
+yawl:DynFormFactory_getFormHeight_26 a yawl:Method ;
+    rdfs:label "getFormHeight" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getFormHeight()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.resetFormHeight
+yawl:DynFormFactory_resetFormHeight_27 a yawl:Method ;
+    rdfs:label "resetFormHeight" ;
+    yawl:returnType "void" ;
+    yawl:signature "void resetFormHeight()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.validateInputs
+yawl:DynFormFactory_validateInputs_28 a yawl:Method ;
+    rdfs:label "validateInputs" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validateInputs(boolean reportErrors)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.getButtonBlockWidth
+yawl:DynFormFactory_getButtonBlockWidth_29 a yawl:Method ;
+    rdfs:label "getButtonBlockWidth" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getButtonBlockWidth()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: DynFormFactory.makeOccursButton
+yawl:DynFormFactory_makeOccursButton_30 a yawl:Method ;
+    rdfs:label "makeOccursButton" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button makeOccursButton(String name, String text)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: DynFormFactory.getDefaultFormName
+yawl:DynFormFactory_getDefaultFormName_31 a yawl:Method ;
+    rdfs:label "getDefaultFormName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDefaultFormName()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: DynFormFactory.getFieldForComponent
+yawl:DynFormFactory_getFieldForComponent_32 a yawl:Method ;
+    rdfs:label "getFieldForComponent" ;
+    yawl:returnType "DynFormField" ;
+    yawl:signature "DynFormField getFieldForComponent(UIComponent component)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: DynFormFactory.addSubPanelControllerMap
+yawl:DynFormFactory_addSubPanelControllerMap_33 a yawl:Method ;
+    rdfs:label "addSubPanelControllerMap" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addSubPanelControllerMap(Map map)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: DynFormFactory.addClonedFieldToTable
+yawl:DynFormFactory_addClonedFieldToTable_34 a yawl:Method ;
+    rdfs:label "addClonedFieldToTable" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addClonedFieldToTable(TextField orig, TextField clone)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: DynFormFactory.enspace
+yawl:DynFormFactory_enspace_35 a yawl:Method ;
+    rdfs:label "enspace" ;
+    yawl:returnType "String" ;
+    yawl:signature "String enspace(String text)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: DynFormFactory.despace
+yawl:DynFormFactory_despace_36 a yawl:Method ;
+    rdfs:label "despace" ;
+    yawl:returnType "String" ;
+    yawl:signature "String despace(String text)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: DynFormFactory.reset
+yawl:DynFormFactory_reset_37 a yawl:Method ;
+    rdfs:label "reset" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reset()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.buildForm
+yawl:DynFormFactory_buildForm_38 a yawl:Method ;
+    rdfs:label "buildForm" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean buildForm(String title, String header, String schema, String data, Map paramMap)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.getParamInfo
+yawl:DynFormFactory_getParamInfo_39 a yawl:Method ;
+    rdfs:label "getParamInfo" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getParamInfo(WorkItemRecord wir)" ;
+    rdfs:comment """@return a map of case or workitem parameters [param name, param]""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.getCaseParamMap
+yawl:DynFormFactory_getCaseParamMap_40 a yawl:Method ;
+    rdfs:label "getCaseParamMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getCaseParamMap(List paramList)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.getUserAttributes
+yawl:DynFormFactory_getUserAttributes_41 a yawl:Method ;
+    rdfs:label "getUserAttributes" ;
+    yawl:returnType "DynFormUserAttributes" ;
+    yawl:signature "DynFormUserAttributes getUserAttributes()" ;
+    rdfs:comment """@return the decomposition-level extended attributes""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.getWorkItemData
+yawl:DynFormFactory_getWorkItemData_42 a yawl:Method ;
+    rdfs:label "getWorkItemData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItemData()" ;
+    rdfs:comment """@return the data of the displayed workitem""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: DynFormFactory.getWorkItemData
+yawl:DynFormFactory_getWorkItemData_43 a yawl:Method ;
+    rdfs:label "getWorkItemData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItemData(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.getFormFonts
+yawl:DynFormFactory_getFormFonts_44 a yawl:Method ;
+    rdfs:label "getFormFonts" ;
+    yawl:returnType "DynFormFont" ;
+    yawl:signature "DynFormFont getFormFonts()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: DynFormFactory.setFormFonts
+yawl:DynFormFactory_setFormFonts_45 a yawl:Method ;
+    rdfs:label "setFormFonts" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setFormFonts()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.setHeader
+yawl:DynFormFactory_setHeader_46 a yawl:Method ;
+    rdfs:label "setHeader" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHeader(String header)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.setShowBanner
+yawl:DynFormFactory_setShowBanner_47 a yawl:Method ;
+    rdfs:label "setShowBanner" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setShowBanner()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.buildForm
+yawl:DynFormFactory_buildForm_48 a yawl:Method ;
+    rdfs:label "buildForm" ;
+    yawl:returnType "void" ;
+    yawl:signature "void buildForm()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.setBaseWidths
+yawl:DynFormFactory_setBaseWidths_49 a yawl:Method ;
+    rdfs:label "setBaseWidths" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBaseWidths(DynFormComponentBuilder builder)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.getStaticTextHeight
+yawl:DynFormFactory_getStaticTextHeight_50 a yawl:Method ;
+    rdfs:label "getStaticTextHeight" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getStaticTextHeight(StaticText statText)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.getStyle
+yawl:DynFormFactory_getStyle_51 a yawl:Method ;
+    rdfs:label "getStyle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStyle(UIComponent component)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.getContainerWidth
+yawl:DynFormFactory_getContainerWidth_52 a yawl:Method ;
+    rdfs:label "getContainerWidth" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getContainerWidth(UIComponent component)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.getMaxFieldWidth
+yawl:DynFormFactory_getMaxFieldWidth_53 a yawl:Method ;
+    rdfs:label "getMaxFieldWidth" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getMaxFieldWidth(DynFormComponentBuilder builder)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.setStyle
+yawl:DynFormFactory_setStyle_54 a yawl:Method ;
+    rdfs:label "setStyle" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStyle(UIComponent component, String style)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.isComponentVisible
+yawl:DynFormFactory_isComponentVisible_55 a yawl:Method ;
+    rdfs:label "isComponentVisible" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isComponentVisible(Object o)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.replaceTopInStyle
+yawl:DynFormFactory_replaceTopInStyle_56 a yawl:Method ;
+    rdfs:label "replaceTopInStyle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String replaceTopInStyle(UIComponent component, int adjustment)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.adjustFieldOffsetsAndWidths
+yawl:DynFormFactory_adjustFieldOffsetsAndWidths_57 a yawl:Method ;
+    rdfs:label "adjustFieldOffsetsAndWidths" ;
+    yawl:returnType "void" ;
+    yawl:signature "void adjustFieldOffsetsAndWidths(List content)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.getComponentHeight
+yawl:DynFormFactory_getComponentHeight_58 a yawl:Method ;
+    rdfs:label "getComponentHeight" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getComponentHeight(UIComponent component)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.getFieldHeight
+yawl:DynFormFactory_getFieldHeight_59 a yawl:Method ;
+    rdfs:label "getFieldHeight" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getFieldHeight(UIComponent component)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.getFieldHeight
+yawl:DynFormFactory_getFieldHeight_60 a yawl:Method ;
+    rdfs:label "getFieldHeight" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getFieldHeight(DynFormField field)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.sizeAndPositionContent
+yawl:DynFormFactory_sizeAndPositionContent_61 a yawl:Method ;
+    rdfs:label "sizeAndPositionContent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sizeAndPositionContent(PanelLayout panel)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.getNumberOfVisibleButtons
+yawl:DynFormFactory_getNumberOfVisibleButtons_62 a yawl:Method ;
+    rdfs:label "getNumberOfVisibleButtons" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getNumberOfVisibleButtons()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.setPanelStyles
+yawl:DynFormFactory_setPanelStyles_63 a yawl:Method ;
+    rdfs:label "setPanelStyles" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPanelStyles(int containerWidth, int height, int top)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.positionButtons
+yawl:DynFormFactory_positionButtons_64 a yawl:Method ;
+    rdfs:label "positionButtons" ;
+    yawl:returnType "void" ;
+    yawl:signature "void positionButtons(int width, int height, int top)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.setContentTops
+yawl:DynFormFactory_setContentTops_65 a yawl:Method ;
+    rdfs:label "setContentTops" ;
+    yawl:returnType "double" ;
+    yawl:signature "double setContentTops(PanelLayout panel)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.getComponentForLabel
+yawl:DynFormFactory_getComponentForLabel_66 a yawl:Method ;
+    rdfs:label "getComponentForLabel" ;
+    yawl:returnType "UIComponent" ;
+    yawl:signature "UIComponent getComponentForLabel(PanelLayout panel, Label label)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.setTopStyle
+yawl:DynFormFactory_setTopStyle_67 a yawl:Method ;
+    rdfs:label "setTopStyle" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTopStyle(UIComponent component, int top)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.getOuterPanelTop
+yawl:DynFormFactory_getOuterPanelTop_68 a yawl:Method ;
+    rdfs:label "getOuterPanelTop" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getOuterPanelTop(int width)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.buildInnerForm
+yawl:DynFormFactory_buildInnerForm_69 a yawl:Method ;
+    rdfs:label "buildInnerForm" ;
+    yawl:returnType "DynFormComponentList" ;
+    yawl:signature "DynFormComponentList buildInnerForm(SubPanel container, DynFormComponentBuilder builder, List fieldList)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.buildChoiceSelector
+yawl:DynFormFactory_buildChoiceSelector_70 a yawl:Method ;
+    rdfs:label "buildChoiceSelector" ;
+    yawl:returnType "DynFormComponentList" ;
+    yawl:signature "DynFormComponentList buildChoiceSelector(SubPanel container, DynFormComponentBuilder builder, DynFormField field)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.buildSubPanel
+yawl:DynFormFactory_buildSubPanel_71 a yawl:Method ;
+    rdfs:label "buildSubPanel" ;
+    yawl:returnType "DynFormComponentList" ;
+    yawl:signature "DynFormComponentList buildSubPanel(DynFormComponentBuilder builder, DynFormField field)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.bindOccursButtonListener
+yawl:DynFormFactory_bindOccursButtonListener_72 a yawl:Method ;
+    rdfs:label "bindOccursButtonListener" ;
+    yawl:returnType "MethodBinding" ;
+    yawl:signature "MethodBinding bindOccursButtonListener()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.isMatchingRadioForData
+yawl:DynFormFactory_isMatchingRadioForData_73 a yawl:Method ;
+    rdfs:label "isMatchingRadioForData" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isMatchingRadioForData(DynFormField field)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.createUniqueID
+yawl:DynFormFactory_createUniqueID_74 a yawl:Method ;
+    rdfs:label "createUniqueID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String createUniqueID(String id)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.getMaxDepthLevel
+yawl:DynFormFactory_getMaxDepthLevel_75 a yawl:Method ;
+    rdfs:label "getMaxDepthLevel" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getMaxDepthLevel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.addSubPanel
+yawl:DynFormFactory_addSubPanel_76 a yawl:Method ;
+    rdfs:label "addSubPanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addSubPanel(SubPanel panel)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.removeSubPanel
+yawl:DynFormFactory_removeSubPanel_77 a yawl:Method ;
+    rdfs:label "removeSubPanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeSubPanel(SubPanel panel)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.adjustLayouts
+yawl:DynFormFactory_adjustLayouts_78 a yawl:Method ;
+    rdfs:label "adjustLayouts" ;
+    yawl:returnType "void" ;
+    yawl:signature "void adjustLayouts(SubPanel level0Container, int adjustment)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.repositionLevel0Panels
+yawl:DynFormFactory_repositionLevel0Panels_79 a yawl:Method ;
+    rdfs:label "repositionLevel0Panels" ;
+    yawl:returnType "void" ;
+    yawl:signature "void repositionLevel0Panels(SubPanel container, int adjustment, int top)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.removeSubPanelController
+yawl:DynFormFactory_removeSubPanelController_80 a yawl:Method ;
+    rdfs:label "removeSubPanelController" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeSubPanelController(SubPanel panel)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.removeOrphanedControllers
+yawl:DynFormFactory_removeOrphanedControllers_81 a yawl:Method ;
+    rdfs:label "removeOrphanedControllers" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeOrphanedControllers(SubPanel panel)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.repositionOutermostFields
+yawl:DynFormFactory_repositionOutermostFields_82 a yawl:Method ;
+    rdfs:label "repositionOutermostFields" ;
+    yawl:returnType "void" ;
+    yawl:signature "void repositionOutermostFields(int startingY, int adjustment)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.getOuterPanelWidth
+yawl:DynFormFactory_getOuterPanelWidth_83 a yawl:Method ;
+    rdfs:label "getOuterPanelWidth" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getOuterPanelWidth()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.getAttributes
+yawl:DynFormFactory_getAttributes_84 a yawl:Method ;
+    rdfs:label "getAttributes" ;
+    yawl:returnType "DynFormUserAttributes" ;
+    yawl:signature "DynFormUserAttributes getAttributes()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.replaceInternalChars
+yawl:DynFormFactory_replaceInternalChars_85 a yawl:Method ;
+    rdfs:label "replaceInternalChars" ;
+    yawl:returnType "String" ;
+    yawl:signature "String replaceInternalChars(String text, char pre, char post)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.getBodyStyle
+yawl:DynFormFactory_getBodyStyle_86 a yawl:Method ;
+    rdfs:label "getBodyStyle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBodyStyle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.getPageBackgroundURL
+yawl:DynFormFactory_getPageBackgroundURL_87 a yawl:Method ;
+    rdfs:label "getPageBackgroundURL" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPageBackgroundURL()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.getPageBackgroundColour
+yawl:DynFormFactory_getPageBackgroundColour_88 a yawl:Method ;
+    rdfs:label "getPageBackgroundColour" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPageBackgroundColour()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.getFormBackgroundColour
+yawl:DynFormFactory_getFormBackgroundColour_89 a yawl:Method ;
+    rdfs:label "getFormBackgroundColour" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFormBackgroundColour()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: DynFormFactory.getFormAltBackgroundColour
+yawl:DynFormFactory_getFormAltBackgroundColour_90 a yawl:Method ;
+    rdfs:label "getFormAltBackgroundColour" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFormAltBackgroundColour()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: DynFormFactory.getFormFontStyle
+yawl:DynFormFactory_getFormFontStyle_91 a yawl:Method ;
+    rdfs:label "getFormFontStyle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFormFontStyle()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.getFormFont
+yawl:DynFormFactory_getFormFont_92 a yawl:Method ;
+    rdfs:label "getFormFont" ;
+    yawl:returnType "Font" ;
+    yawl:signature "Font getFormFont()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.getFormHeaderFont
+yawl:DynFormFactory_getFormHeaderFont_93 a yawl:Method ;
+    rdfs:label "getFormHeaderFont" ;
+    yawl:returnType "Font" ;
+    yawl:signature "Font getFormHeaderFont()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.getFormHeaderFontStyle
+yawl:DynFormFactory_getFormHeaderFontStyle_94 a yawl:Method ;
+    rdfs:label "getFormHeaderFontStyle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFormHeaderFontStyle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFactory.getFormJustify
+yawl:DynFormFactory_getFormJustify_95 a yawl:Method ;
+    rdfs:label "getFormJustify" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFormJustify()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: DynFormFactory.isFormReadOnly
+yawl:DynFormFactory_isFormReadOnly_96 a yawl:Method ;
+    rdfs:label "isFormReadOnly" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isFormReadOnly()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: DynFormFactory.getTaskLabel
+yawl:DynFormFactory_getTaskLabel_97 a yawl:Method ;
+    rdfs:label "getTaskLabel" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskLabel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFactory.getAttributeValue
+yawl:DynFormFactory_getAttributeValue_98 a yawl:Method ;
+    rdfs:label "getAttributeValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAttributeValue(String key)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:DynFormFactory___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:DynFormFactory_compPanel a yawl:Field ;
+    rdfs:label "compPanel" .
+
+yawl:DynFormFactory_headerText a yawl:Field ;
+    rdfs:label "headerText" .
+
+yawl:DynFormFactory_containerStyle a yawl:Field ;
+    rdfs:label "containerStyle" .
+
+yawl:DynFormFactory_btnOKStyle a yawl:Field ;
+    rdfs:label "btnOKStyle" .
+
+yawl:DynFormFactory_btnCancelStyle a yawl:Field ;
+    rdfs:label "btnCancelStyle" .
+
+yawl:DynFormFactory_btnCompleteStyle a yawl:Field ;
+    rdfs:label "btnCompleteStyle" .
+
+yawl:DynFormFactory_bottomPanelStyle a yawl:Field ;
+    rdfs:label "bottomPanelStyle" .
+
+yawl:DynFormFactory_title a yawl:Field ;
+    rdfs:label "title" .
+
+yawl:DynFormFactory_focus a yawl:Field ;
+    rdfs:label "focus" .
+
+yawl:DynFormFactory__subPanelTable a yawl:Field ;
+    rdfs:label "_subPanelTable" .
+
+yawl:DynFormFactory__componentFieldTable a yawl:Field ;
+    rdfs:label "_componentFieldTable" .
+
+yawl:DynFormFactory__outermostTops a yawl:Field ;
+    rdfs:label "_outermostTops" .
+
+yawl:DynFormFactory__sb a yawl:Field ;
+    rdfs:label "_sb" .
+
+yawl:DynFormFactory__userAttributes a yawl:Field ;
+    rdfs:label "_userAttributes" .
+
+yawl:DynFormFactory__fieldAssembler a yawl:Field ;
+    rdfs:label "_fieldAssembler" .
+
+yawl:DynFormFactory__displayedWIR a yawl:Field ;
+    rdfs:label "_displayedWIR" .
+
+yawl:DynFormFactory__formFonts a yawl:Field ;
+    rdfs:label "_formFonts" .
+
+yawl:DynFormFactory__overallHeight a yawl:Field ;
+    rdfs:label "_overallHeight" .
+
+yawl:DynFormFactory_Y_DEF_INCREMENT a yawl:Field ;
+    rdfs:label "Y_DEF_INCREMENT" .
+
+yawl:DynFormFactory_Y_CHOICE_DECREMENT a yawl:Field ;
+    rdfs:label "Y_CHOICE_DECREMENT" .
+
+yawl:DynFormFactory_SUBPANEL_INSET a yawl:Field ;
+    rdfs:label "SUBPANEL_INSET" .
+
+yawl:DynFormFactory_OUTER_PANEL_TO_BUTTONS a yawl:Field ;
+    rdfs:label "OUTER_PANEL_TO_BUTTONS" .
+
+yawl:DynFormFactory_OUTER_PANEL_LEFT a yawl:Field ;
+    rdfs:label "OUTER_PANEL_LEFT" .
+
+yawl:DynFormFactory_FORM_BUTTON_WIDTH a yawl:Field ;
+    rdfs:label "FORM_BUTTON_WIDTH" .
+
+yawl:DynFormFactory_FORM_BUTTON_HEIGHT a yawl:Field ;
+    rdfs:label "FORM_BUTTON_HEIGHT" .
+
+yawl:DynFormFactory_FORM_BUTTON_GAP a yawl:Field ;
+    rdfs:label "FORM_BUTTON_GAP" .
+
+yawl:DynFormFactory_BOTTOM_PANEL_HEIGHT a yawl:Field ;
+    rdfs:label "BOTTOM_PANEL_HEIGHT" .
+
+yawl:DynFormFactory_X_LABEL_OFFSET a yawl:Field ;
+    rdfs:label "X_LABEL_OFFSET" .
+
+yawl:DynFormFactory_DEFAULT_FIELD_OFFSET a yawl:Field ;
+    rdfs:label "DEFAULT_FIELD_OFFSET" .
+
+yawl:DynFormFactory_DEFAULT_PANEL_BASE_WIDTH a yawl:Field ;
+    rdfs:label "DEFAULT_PANEL_BASE_WIDTH" .
+
+yawl:DynFormFactory_DEFAULT_FIELD_WIDTH a yawl:Field ;
+    rdfs:label "DEFAULT_FIELD_WIDTH" .
+
+yawl:DynFormFactory_DEFAULT_LABEL_FIELD_GAP a yawl:Field ;
+    rdfs:label "DEFAULT_LABEL_FIELD_GAP" .
+
+yawl:DynFormFactory_CHECKBOX_FIELD_WIDTH a yawl:Field ;
+    rdfs:label "CHECKBOX_FIELD_WIDTH" .
+
+yawl:DynFormFactory_DEFAULT_FIELD_HEIGHT a yawl:Field ;
+    rdfs:label "DEFAULT_FIELD_HEIGHT" .
+
+yawl:DynFormFactory_LABEL_V_OFFSET a yawl:Field ;
+    rdfs:label "LABEL_V_OFFSET" .
+
+yawl:DynFormFactory_FIELD_VSPACE a yawl:Field ;
+    rdfs:label "FIELD_VSPACE" .
+
+yawl:DynFormFactory_X_FIELD_OFFSET a yawl:Field ;
+    rdfs:label "X_FIELD_OFFSET" .
+
+yawl:DynFormFactory_PANEL_BASE_WIDTH a yawl:Field ;
+    rdfs:label "PANEL_BASE_WIDTH" .
+
+yawl:DynFormFactory_FIELD_WIDTH a yawl:Field ;
+    rdfs:label "FIELD_WIDTH" .
+
+
+

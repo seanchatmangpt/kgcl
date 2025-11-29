@@ -1,0 +1,51 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.util.EntitySID
+yawl:EntitySID a yawl:Class ;
+    rdfs:label "EntitySID" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/util/EntitySID.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:EntitySID_getValue_1 ;
+    yawl:hasMethod yawl:EntitySID_setEsid_2 ;
+    yawl:hasMethod yawl:EntitySID_toString_3 ;
+    yawl:hasField yawl:EntitySID_esid ;
+    .
+
+
+# Method: EntitySID.getValue
+yawl:EntitySID_getValue_1 a yawl:Method ;
+    rdfs:label "getValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getValue()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EntitySID.setEsid
+yawl:EntitySID_setEsid_2 a yawl:Method ;
+    rdfs:label "setEsid" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEsid(String esid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EntitySID.toString
+yawl:EntitySID_toString_3 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:EntitySID_esid a yawl:Field ;
+    rdfs:label "esid" .
+
+
+

@@ -1,0 +1,99 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.resource.Capability
+yawl:Capability a yawl:Class ;
+    rdfs:label "Capability" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_resource ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/resource/Capability.java"^^xsd:string ;
+    rdfs:comment """Represents a capability that may be held by a resource. @author Michael Adams v0.1, 03/08/2007""" ;
+    yawl:extends yawl:AbstractResourceAttribute ;
+    yawl:implements yawl:Comparable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Capability_setLabel_1 ;
+    yawl:hasMethod yawl:Capability_getCapability_2 ;
+    yawl:hasMethod yawl:Capability_setCapability_3 ;
+    yawl:hasMethod yawl:Capability_equals_4 ;
+    yawl:hasMethod yawl:Capability_compareTo_5 ;
+    yawl:hasMethod yawl:Capability_getName_6 ;
+    yawl:hasMethod yawl:Capability_toXML_7 ;
+    yawl:hasMethod yawl:Capability_reconstitute_8 ;
+    yawl:hasField yawl:Capability__capability ;
+    .
+
+
+# Method: Capability.setLabel
+yawl:Capability_setLabel_1 a yawl:Method ;
+    rdfs:label "setLabel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLabel(String label)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Capability.getCapability
+yawl:Capability_getCapability_2 a yawl:Method ;
+    rdfs:label "getCapability" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCapability()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Capability.setCapability
+yawl:Capability_setCapability_3 a yawl:Method ;
+    rdfs:label "setCapability" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCapability(String capability)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Capability.equals
+yawl:Capability_equals_4 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Capability.compareTo
+yawl:Capability_compareTo_5 a yawl:Method ;
+    rdfs:label "compareTo" ;
+    yawl:returnType "int" ;
+    yawl:signature "int compareTo(Object o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Capability.getName
+yawl:Capability_getName_6 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Capability.toXML
+yawl:Capability_toXML_7 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Capability.reconstitute
+yawl:Capability_reconstitute_8 a yawl:Method ;
+    rdfs:label "reconstitute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reconstitute(Element e)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:Capability__capability a yawl:Field ;
+    rdfs:label "_capability" .
+
+
+

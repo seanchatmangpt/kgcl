@@ -1,0 +1,405 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.resourcing.interactions
+yawl:org_yawlfoundation_yawl_resourcing_interactions a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.interactions" .
+# Class: org.yawlfoundation.yawl.resourcing.interactions.OfferInteraction
+yawl:OfferInteraction a yawl:Class ;
+    rdfs:label "OfferInteraction" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_interactions ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/interactions/OfferInteraction.java"^^xsd:string ;
+    rdfs:comment """This class describes the requirements of a task at the offer phase of allocating resources. @author Michael Adams v0.1, 02/08/2007""" ;
+    yawl:extends yawl:AbstractInteraction ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:OfferInteraction_addParticipant_1 ;
+    yawl:hasMethod yawl:OfferInteraction_addParticipantUnchecked_2 ;
+    yawl:hasMethod yawl:OfferInteraction_addParticipant_3 ;
+    yawl:hasMethod yawl:OfferInteraction_addParticipantsByID_4 ;
+    yawl:hasMethod yawl:OfferInteraction_addParticipantsByID_5 ;
+    yawl:hasMethod yawl:OfferInteraction_addParticipants_6 ;
+    yawl:hasMethod yawl:OfferInteraction_addRole_7 ;
+    yawl:hasMethod yawl:OfferInteraction_addRoleUnchecked_8 ;
+    yawl:hasMethod yawl:OfferInteraction_addRole_9 ;
+    yawl:hasMethod yawl:OfferInteraction_addRoles_10 ;
+    yawl:hasMethod yawl:OfferInteraction_addRoles_11 ;
+    yawl:hasMethod yawl:OfferInteraction_addInputParam_12 ;
+    yawl:hasMethod yawl:OfferInteraction_addInputParams_13 ;
+    yawl:hasMethod yawl:OfferInteraction_addFilters_14 ;
+    yawl:hasMethod yawl:OfferInteraction_addFilter_15 ;
+    yawl:hasMethod yawl:OfferInteraction_addConstraints_16 ;
+    yawl:hasMethod yawl:OfferInteraction_addConstraint_17 ;
+    yawl:hasMethod yawl:OfferInteraction_setFamiliarParticipantTask_18 ;
+    yawl:hasMethod yawl:OfferInteraction_getParticipants_19 ;
+    yawl:hasMethod yawl:OfferInteraction_getRoles_20 ;
+    yawl:hasMethod yawl:OfferInteraction_getFilters_21 ;
+    yawl:hasMethod yawl:OfferInteraction_getConstraints_22 ;
+    yawl:hasMethod yawl:OfferInteraction_getDistributionSet_23 ;
+    yawl:hasMethod yawl:OfferInteraction_getDynParamNames_24 ;
+    yawl:hasMethod yawl:OfferInteraction_performOffer_25 ;
+    yawl:hasMethod yawl:OfferInteraction_withdrawOffer_26 ;
+    yawl:hasMethod yawl:OfferInteraction_addParticipantToDistributionSet_27 ;
+    yawl:hasMethod yawl:OfferInteraction_parse_28 ;
+    yawl:hasMethod yawl:OfferInteraction_parseDistributionSet_29 ;
+    yawl:hasMethod yawl:OfferInteraction_parseInitialSet_30 ;
+    yawl:hasMethod yawl:OfferInteraction_parseParticipants_31 ;
+    yawl:hasMethod yawl:OfferInteraction_parseRoles_32 ;
+    yawl:hasMethod yawl:OfferInteraction_parseDynParams_33 ;
+    yawl:hasMethod yawl:OfferInteraction_parseFilters_34 ;
+    yawl:hasMethod yawl:OfferInteraction_parseConstraints_35 ;
+    yawl:hasMethod yawl:OfferInteraction_parseFamiliarTask_36 ;
+    yawl:hasMethod yawl:OfferInteraction_toXML_37 ;
+    yawl:hasField yawl:OfferInteraction__participants ;
+    yawl:hasField yawl:OfferInteraction__roles ;
+    yawl:hasField yawl:OfferInteraction__dynParams ;
+    yawl:hasField yawl:OfferInteraction__distributionSet ;
+    yawl:hasField yawl:OfferInteraction__filters ;
+    yawl:hasField yawl:OfferInteraction__constraints ;
+    yawl:hasField yawl:OfferInteraction__familiarParticipantTask ;
+    yawl:hasField yawl:OfferInteraction__rm ;
+    yawl:hasField yawl:OfferInteraction__log ;
+    yawl:hasField yawl:OfferInteraction_USER_PARAM ;
+    yawl:hasField yawl:OfferInteraction_ROLE_PARAM ;
+    .
+
+
+# Method: OfferInteraction.addParticipant
+yawl:OfferInteraction_addParticipant_1 a yawl:Method ;
+    rdfs:label "addParticipant" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addParticipant(String id)" ;
+    rdfs:comment """Adds a participant to the initial distribution list @param id - the id of the participant""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OfferInteraction.addParticipantUnchecked
+yawl:OfferInteraction_addParticipantUnchecked_2 a yawl:Method ;
+    rdfs:label "addParticipantUnchecked" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addParticipantUnchecked(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OfferInteraction.addParticipant
+yawl:OfferInteraction_addParticipant_3 a yawl:Method ;
+    rdfs:label "addParticipant" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addParticipant(Participant p)" ;
+    rdfs:comment """variation of the above @param p - the Participant object to add to the initial distribution list""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OfferInteraction.addParticipantsByID
+yawl:OfferInteraction_addParticipantsByID_4 a yawl:Method ;
+    rdfs:label "addParticipantsByID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addParticipantsByID(String idList)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OfferInteraction.addParticipantsByID
+yawl:OfferInteraction_addParticipantsByID_5 a yawl:Method ;
+    rdfs:label "addParticipantsByID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addParticipantsByID(Set idSet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OfferInteraction.addParticipants
+yawl:OfferInteraction_addParticipants_6 a yawl:Method ;
+    rdfs:label "addParticipants" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addParticipants(Set pSet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OfferInteraction.addRole
+yawl:OfferInteraction_addRole_7 a yawl:Method ;
+    rdfs:label "addRole" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addRole(String rid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OfferInteraction.addRoleUnchecked
+yawl:OfferInteraction_addRoleUnchecked_8 a yawl:Method ;
+    rdfs:label "addRoleUnchecked" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addRoleUnchecked(String rid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OfferInteraction.addRole
+yawl:OfferInteraction_addRole_9 a yawl:Method ;
+    rdfs:label "addRole" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addRole(Role r)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OfferInteraction.addRoles
+yawl:OfferInteraction_addRoles_10 a yawl:Method ;
+    rdfs:label "addRoles" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addRoles(String roleList)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OfferInteraction.addRoles
+yawl:OfferInteraction_addRoles_11 a yawl:Method ;
+    rdfs:label "addRoles" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addRoles(Set rSet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OfferInteraction.addInputParam
+yawl:OfferInteraction_addInputParam_12 a yawl:Method ;
+    rdfs:label "addInputParam" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean addInputParam(String name, int type)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OfferInteraction.addInputParams
+yawl:OfferInteraction_addInputParams_13 a yawl:Method ;
+    rdfs:label "addInputParams" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addInputParams(Map pMap)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OfferInteraction.addFilters
+yawl:OfferInteraction_addFilters_14 a yawl:Method ;
+    rdfs:label "addFilters" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addFilters(Set filters)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OfferInteraction.addFilter
+yawl:OfferInteraction_addFilter_15 a yawl:Method ;
+    rdfs:label "addFilter" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addFilter(AbstractFilter f)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OfferInteraction.addConstraints
+yawl:OfferInteraction_addConstraints_16 a yawl:Method ;
+    rdfs:label "addConstraints" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addConstraints(Set constraints)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OfferInteraction.addConstraint
+yawl:OfferInteraction_addConstraint_17 a yawl:Method ;
+    rdfs:label "addConstraint" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addConstraint(AbstractConstraint c)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OfferInteraction.setFamiliarParticipantTask
+yawl:OfferInteraction_setFamiliarParticipantTask_18 a yawl:Method ;
+    rdfs:label "setFamiliarParticipantTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setFamiliarParticipantTask(String taskid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OfferInteraction.getParticipants
+yawl:OfferInteraction_getParticipants_19 a yawl:Method ;
+    rdfs:label "getParticipants" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getParticipants()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OfferInteraction.getRoles
+yawl:OfferInteraction_getRoles_20 a yawl:Method ;
+    rdfs:label "getRoles" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getRoles()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OfferInteraction.getFilters
+yawl:OfferInteraction_getFilters_21 a yawl:Method ;
+    rdfs:label "getFilters" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getFilters()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OfferInteraction.getConstraints
+yawl:OfferInteraction_getConstraints_22 a yawl:Method ;
+    rdfs:label "getConstraints" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getConstraints()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OfferInteraction.getDistributionSet
+yawl:OfferInteraction_getDistributionSet_23 a yawl:Method ;
+    rdfs:label "getDistributionSet" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getDistributionSet()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OfferInteraction.getDynParamNames
+yawl:OfferInteraction_getDynParamNames_24 a yawl:Method ;
+    rdfs:label "getDynParamNames" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getDynParamNames()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OfferInteraction.performOffer
+yawl:OfferInteraction_performOffer_25 a yawl:Method ;
+    rdfs:label "performOffer" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set performOffer(WorkItemRecord wir)" ;
+    rdfs:comment """Takes the initial distribution set of participants, then expands any roles and/or dynamic parameters to their 'set of participants' equivalents, then applies the specified filters and/or constraints, and returns the final distribution set of participants. @param  wir the workitem being offered @return the final distribution set of Participant objects""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OfferInteraction.withdrawOffer
+yawl:OfferInteraction_withdrawOffer_26 a yawl:Method ;
+    rdfs:label "withdrawOffer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void withdrawOffer(WorkItemRecord wir, Set offeredSet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OfferInteraction.addParticipantToDistributionSet
+yawl:OfferInteraction_addParticipantToDistributionSet_27 a yawl:Method ;
+    rdfs:label "addParticipantToDistributionSet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addParticipantToDistributionSet(HashSet distributionSet, ArrayList uniqueIDs, Participant p)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: OfferInteraction.parse
+yawl:OfferInteraction_parse_28 a yawl:Method ;
+    rdfs:label "parse" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parse(Element e, Namespace nsYawl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OfferInteraction.parseDistributionSet
+yawl:OfferInteraction_parseDistributionSet_29 a yawl:Method ;
+    rdfs:label "parseDistributionSet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseDistributionSet(Element e, Namespace nsYawl)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: OfferInteraction.parseInitialSet
+yawl:OfferInteraction_parseInitialSet_30 a yawl:Method ;
+    rdfs:label "parseInitialSet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseInitialSet(Element e, Namespace nsYawl)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: OfferInteraction.parseParticipants
+yawl:OfferInteraction_parseParticipants_31 a yawl:Method ;
+    rdfs:label "parseParticipants" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseParticipants(Element e, Namespace nsYawl)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: OfferInteraction.parseRoles
+yawl:OfferInteraction_parseRoles_32 a yawl:Method ;
+    rdfs:label "parseRoles" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseRoles(Element e, Namespace nsYawl)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: OfferInteraction.parseDynParams
+yawl:OfferInteraction_parseDynParams_33 a yawl:Method ;
+    rdfs:label "parseDynParams" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseDynParams(Element e, Namespace nsYawl)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: OfferInteraction.parseFilters
+yawl:OfferInteraction_parseFilters_34 a yawl:Method ;
+    rdfs:label "parseFilters" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseFilters(Element e, Namespace nsYawl)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: OfferInteraction.parseConstraints
+yawl:OfferInteraction_parseConstraints_35 a yawl:Method ;
+    rdfs:label "parseConstraints" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseConstraints(Element e, Namespace nsYawl)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: OfferInteraction.parseFamiliarTask
+yawl:OfferInteraction_parseFamiliarTask_36 a yawl:Method ;
+    rdfs:label "parseFamiliarTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseFamiliarTask(Element e, Namespace nsYawl)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: OfferInteraction.toXML
+yawl:OfferInteraction_toXML_37 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:OfferInteraction__participants a yawl:Field ;
+    rdfs:label "_participants" .
+
+yawl:OfferInteraction__roles a yawl:Field ;
+    rdfs:label "_roles" .
+
+yawl:OfferInteraction__dynParams a yawl:Field ;
+    rdfs:label "_dynParams" .
+
+yawl:OfferInteraction__distributionSet a yawl:Field ;
+    rdfs:label "_distributionSet" .
+
+yawl:OfferInteraction__filters a yawl:Field ;
+    rdfs:label "_filters" .
+
+yawl:OfferInteraction__constraints a yawl:Field ;
+    rdfs:label "_constraints" .
+
+yawl:OfferInteraction__familiarParticipantTask a yawl:Field ;
+    rdfs:label "_familiarParticipantTask" .
+
+yawl:OfferInteraction__rm a yawl:Field ;
+    rdfs:label "_rm" .
+
+yawl:OfferInteraction__log a yawl:Field ;
+    rdfs:label "_log" .
+
+yawl:OfferInteraction_USER_PARAM a yawl:Field ;
+    rdfs:label "USER_PARAM" .
+
+yawl:OfferInteraction_ROLE_PARAM a yawl:Field ;
+    rdfs:label "ROLE_PARAM" .
+
+
+

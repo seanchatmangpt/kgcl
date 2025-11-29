@@ -1,0 +1,82 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.YDefClientsLoader
+yawl:YDefClientsLoader a yawl:Class ;
+    rdfs:label "YDefClientsLoader" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/YDefClientsLoader.java"^^xsd:string ;
+    rdfs:comment """Registers the default service and external client accounts when they have not been previously persisted (ie. on first startup) or when persistence is disabled. @author Michael Adams @date 27/01/2011""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YDefClientsLoader_getLoadedClients_1 ;
+    yawl:hasMethod yawl:YDefClientsLoader_getLoadedServices_2 ;
+    yawl:hasMethod yawl:YDefClientsLoader_getAllLoaded_3 ;
+    yawl:hasMethod yawl:YDefClientsLoader_load_4 ;
+    yawl:hasMethod yawl:YDefClientsLoader_processLine_5 ;
+    yawl:hasField yawl:YDefClientsLoader__propsFile ;
+    yawl:hasField yawl:YDefClientsLoader__log ;
+    yawl:hasField yawl:YDefClientsLoader__clients ;
+    yawl:hasField yawl:YDefClientsLoader__services ;
+    .
+
+
+# Method: YDefClientsLoader.getLoadedClients
+yawl:YDefClientsLoader_getLoadedClients_1 a yawl:Method ;
+    rdfs:label "getLoadedClients" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getLoadedClients()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDefClientsLoader.getLoadedServices
+yawl:YDefClientsLoader_getLoadedServices_2 a yawl:Method ;
+    rdfs:label "getLoadedServices" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getLoadedServices()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDefClientsLoader.getAllLoaded
+yawl:YDefClientsLoader_getAllLoaded_3 a yawl:Method ;
+    rdfs:label "getAllLoaded" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getAllLoaded()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDefClientsLoader.load
+yawl:YDefClientsLoader_load_4 a yawl:Method ;
+    rdfs:label "load" ;
+    yawl:returnType "void" ;
+    yawl:signature "void load()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YDefClientsLoader.processLine
+yawl:YDefClientsLoader_processLine_5 a yawl:Method ;
+    rdfs:label "processLine" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processLine(String rawLine)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YDefClientsLoader__propsFile a yawl:Field ;
+    rdfs:label "_propsFile" .
+
+yawl:YDefClientsLoader__log a yawl:Field ;
+    rdfs:label "_log" .
+
+yawl:YDefClientsLoader__clients a yawl:Field ;
+    rdfs:label "_clients" .
+
+yawl:YDefClientsLoader__services a yawl:Field ;
+    rdfs:label "_services" .
+
+
+

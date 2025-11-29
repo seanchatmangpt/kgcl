@@ -1,0 +1,48 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.swingWorklist.util.ParamsDefinitions
+yawl:ParamsDefinitions a yawl:Class ;
+    rdfs:label "ParamsDefinitions" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_swingWorklist_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/swingWorklist/util/ParamsDefinitions.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 5/11/2003 Time: 11:46:06""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ParamsDefinitions_getParamsForTask_1 ;
+    yawl:hasMethod yawl:ParamsDefinitions_setParamsForTask_2 ;
+    yawl:hasField yawl:ParamsDefinitions__nameNDecompositionIDMapsToParameterTuple ;
+    .
+
+
+# Method: ParamsDefinitions.getParamsForTask
+yawl:ParamsDefinitions_getParamsForTask_1 a yawl:Method ;
+    rdfs:label "getParamsForTask" ;
+    yawl:returnType "YParametersSchema" ;
+    yawl:signature "YParametersSchema getParamsForTask(String taskID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ParamsDefinitions.setParamsForTask
+yawl:ParamsDefinitions_setParamsForTask_2 a yawl:Method ;
+    rdfs:label "setParamsForTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setParamsForTask(String taskID, YParametersSchema parameterTuple)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:ParamsDefinitions__nameNDecompositionIDMapsToParameterTuple a yawl:Field ;
+    rdfs:label "_nameNDecompositionIDMapsToParameterTuple" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_cost_interfce a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.cost.interfce" .
+
+

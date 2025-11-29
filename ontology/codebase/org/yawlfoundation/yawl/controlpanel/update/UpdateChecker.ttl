@@ -1,0 +1,150 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.controlpanel.update
+yawl:org_yawlfoundation_yawl_controlpanel_update a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.controlpanel.update" .
+# Class: org.yawlfoundation.yawl.controlpanel.update.UpdateChecker
+yawl:UpdateChecker a yawl:Class ;
+    rdfs:label "UpdateChecker" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_update ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/update/UpdateChecker.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 18/08/2014""" ;
+    yawl:extends yawl:SwingWorker ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:UpdateChecker_doInBackground_1 ;
+    yawl:hasMethod yawl:UpdateChecker_check_2 ;
+    yawl:hasMethod yawl:UpdateChecker_getDiffer_3 ;
+    yawl:hasMethod yawl:UpdateChecker_getError_4 ;
+    yawl:hasMethod yawl:UpdateChecker_isNewVersion_5 ;
+    yawl:hasMethod yawl:UpdateChecker_hasUpdates_6 ;
+    yawl:hasMethod yawl:UpdateChecker_hasError_7 ;
+    yawl:hasMethod yawl:UpdateChecker_getErrorMessage_8 ;
+    yawl:hasMethod yawl:UpdateChecker_loadCurrentCheckSums_9 ;
+    yawl:hasMethod yawl:UpdateChecker_loadLatestCheckSums_10 ;
+    yawl:hasMethod yawl:UpdateChecker_getTmpDir_11 ;
+    yawl:hasMethod yawl:UpdateChecker_getCurrentVersion_12 ;
+    yawl:hasMethod yawl:UpdateChecker_getLatestVersion_13 ;
+    yawl:hasField yawl:UpdateChecker__differ ;
+    yawl:hasField yawl:UpdateChecker__error ;
+    .
+
+
+# Method: UpdateChecker.doInBackground
+yawl:UpdateChecker_doInBackground_1 a yawl:Method ;
+    rdfs:label "doInBackground" ;
+    yawl:returnType "Void" ;
+    yawl:signature "Void doInBackground()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateChecker.check
+yawl:UpdateChecker_check_2 a yawl:Method ;
+    rdfs:label "check" ;
+    yawl:returnType "void" ;
+    yawl:signature "void check()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateChecker.getDiffer
+yawl:UpdateChecker_getDiffer_3 a yawl:Method ;
+    rdfs:label "getDiffer" ;
+    yawl:returnType "Differ" ;
+    yawl:signature "Differ getDiffer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateChecker.getError
+yawl:UpdateChecker_getError_4 a yawl:Method ;
+    rdfs:label "getError" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getError()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateChecker.isNewVersion
+yawl:UpdateChecker_isNewVersion_5 a yawl:Method ;
+    rdfs:label "isNewVersion" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isNewVersion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateChecker.hasUpdates
+yawl:UpdateChecker_hasUpdates_6 a yawl:Method ;
+    rdfs:label "hasUpdates" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasUpdates()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateChecker.hasError
+yawl:UpdateChecker_hasError_7 a yawl:Method ;
+    rdfs:label "hasError" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasError()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateChecker.getErrorMessage
+yawl:UpdateChecker_getErrorMessage_8 a yawl:Method ;
+    rdfs:label "getErrorMessage" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getErrorMessage()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateChecker.loadCurrentCheckSums
+yawl:UpdateChecker_loadCurrentCheckSums_9 a yawl:Method ;
+    rdfs:label "loadCurrentCheckSums" ;
+    yawl:returnType "File" ;
+    yawl:signature "File loadCurrentCheckSums()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: UpdateChecker.loadLatestCheckSums
+yawl:UpdateChecker_loadLatestCheckSums_10 a yawl:Method ;
+    rdfs:label "loadLatestCheckSums" ;
+    yawl:returnType "File" ;
+    yawl:signature "File loadLatestCheckSums()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: UpdateChecker.getTmpDir
+yawl:UpdateChecker_getTmpDir_11 a yawl:Method ;
+    rdfs:label "getTmpDir" ;
+    yawl:returnType "File" ;
+    yawl:signature "File getTmpDir()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: UpdateChecker.getCurrentVersion
+yawl:UpdateChecker_getCurrentVersion_12 a yawl:Method ;
+    rdfs:label "getCurrentVersion" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCurrentVersion()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: UpdateChecker.getLatestVersion
+yawl:UpdateChecker_getLatestVersion_13 a yawl:Method ;
+    rdfs:label "getLatestVersion" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLatestVersion()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:UpdateChecker__differ a yawl:Field ;
+    rdfs:label "_differ" .
+
+yawl:UpdateChecker__error a yawl:Field ;
+    rdfs:label "_error" .
+
+
+

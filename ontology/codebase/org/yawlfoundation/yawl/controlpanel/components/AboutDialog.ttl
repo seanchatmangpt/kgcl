@@ -1,0 +1,102 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.components.AboutDialog
+yawl:AboutDialog a yawl:Class ;
+    rdfs:label "AboutDialog" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_components ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/components/AboutDialog.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 26/08/2014""" ;
+    yawl:extends yawl:JDialog ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:AboutDialog_init_1 ;
+    yawl:hasMethod yawl:AboutDialog_createContent_2 ;
+    yawl:hasMethod yawl:AboutDialog_getLabel_3 ;
+    yawl:hasMethod yawl:AboutDialog_getVersion_4 ;
+    yawl:hasMethod yawl:AboutDialog_getBuild_5 ;
+    yawl:hasMethod yawl:AboutDialog_getCopyrightText_6 ;
+    yawl:hasMethod yawl:AboutDialog_addMouseListener_7 ;
+    yawl:hasMethod yawl:AboutDialog_addKeyListener_8 ;
+    yawl:hasField yawl:AboutDialog_BACK_COLOUR ;
+    yawl:hasField yawl:AboutDialog_DEFAULT_YEAR ;
+    .
+
+
+# Method: AboutDialog.init
+yawl:AboutDialog_init_1 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init(JFrame frame)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: AboutDialog.createContent
+yawl:AboutDialog_createContent_2 a yawl:Method ;
+    rdfs:label "createContent" ;
+    yawl:returnType "JPanel" ;
+    yawl:signature "JPanel createContent()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: AboutDialog.getLabel
+yawl:AboutDialog_getLabel_3 a yawl:Method ;
+    rdfs:label "getLabel" ;
+    yawl:returnType "JLabel" ;
+    yawl:signature "JLabel getLabel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: AboutDialog.getVersion
+yawl:AboutDialog_getVersion_4 a yawl:Method ;
+    rdfs:label "getVersion" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getVersion(ChecksumsReader props)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: AboutDialog.getBuild
+yawl:AboutDialog_getBuild_5 a yawl:Method ;
+    rdfs:label "getBuild" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBuild(ChecksumsReader props)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: AboutDialog.getCopyrightText
+yawl:AboutDialog_getCopyrightText_6 a yawl:Method ;
+    rdfs:label "getCopyrightText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCopyrightText(ChecksumsReader props)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: AboutDialog.addMouseListener
+yawl:AboutDialog_addMouseListener_7 a yawl:Method ;
+    rdfs:label "addMouseListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addMouseListener(Component c)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: AboutDialog.addKeyListener
+yawl:AboutDialog_addKeyListener_8 a yawl:Method ;
+    rdfs:label "addKeyListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addKeyListener(Component c)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:AboutDialog_BACK_COLOUR a yawl:Field ;
+    rdfs:label "BACK_COLOUR" .
+
+yawl:AboutDialog_DEFAULT_YEAR a yawl:Field ;
+    rdfs:label "DEFAULT_YEAR" .
+
+
+

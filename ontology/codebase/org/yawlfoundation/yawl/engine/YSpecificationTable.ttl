@@ -1,0 +1,114 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.YSpecificationTable
+yawl:YSpecificationTable a yawl:Class ;
+    rdfs:label "YSpecificationTable" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/YSpecificationTable.java"^^xsd:string ;
+    rdfs:comment """A mapping of specification identifiers to a list of versions of that specification. The key used is the spec's unique identifier (introduced in v2.0); for earlier schema versions, it falls back to the spec's name (uri) @author Michael Adams (a refactor of Mike Fowler's YSpecificationMap) @since 2.0 @date 06/06/2008""" ;
+    yawl:extends yawl:ConcurrentHashMap ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YSpecificationTable_loadSpecification_1 ;
+    yawl:hasMethod yawl:YSpecificationTable_unloadSpecification_2 ;
+    yawl:hasMethod yawl:YSpecificationTable_getSpecification_3 ;
+    yawl:hasMethod yawl:YSpecificationTable_getLatestSpecification_4 ;
+    yawl:hasMethod yawl:YSpecificationTable_isLatest_5 ;
+    yawl:hasMethod yawl:YSpecificationTable_contains_6 ;
+    yawl:hasMethod yawl:YSpecificationTable_contains_7 ;
+    yawl:hasMethod yawl:YSpecificationTable_contains_8 ;
+    yawl:hasMethod yawl:YSpecificationTable_getSpecIDs_9 ;
+    yawl:hasMethod yawl:YSpecificationTable_getSpecificationForCaseStart_10 ;
+    .
+
+
+# Method: YSpecificationTable.loadSpecification
+yawl:YSpecificationTable_loadSpecification_1 a yawl:Method ;
+    rdfs:label "loadSpecification" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean loadSpecification(YSpecification spec)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationTable.unloadSpecification
+yawl:YSpecificationTable_unloadSpecification_2 a yawl:Method ;
+    rdfs:label "unloadSpecification" ;
+    yawl:returnType "void" ;
+    yawl:signature "void unloadSpecification(YSpecification spec)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationTable.getSpecification
+yawl:YSpecificationTable_getSpecification_3 a yawl:Method ;
+    rdfs:label "getSpecification" ;
+    yawl:returnType "YSpecification" ;
+    yawl:signature "YSpecification getSpecification(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationTable.getLatestSpecification
+yawl:YSpecificationTable_getLatestSpecification_4 a yawl:Method ;
+    rdfs:label "getLatestSpecification" ;
+    yawl:returnType "YSpecification" ;
+    yawl:signature "YSpecification getLatestSpecification(String key)" ;
+    rdfs:comment """Gets the latest version of the specification with the key passed @param key either the identifier or uri of the specification @return the specification with the latest version number that matches the key""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationTable.isLatest
+yawl:YSpecificationTable_isLatest_5 a yawl:Method ;
+    rdfs:label "isLatest" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isLatest(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationTable.contains
+yawl:YSpecificationTable_contains_6 a yawl:Method ;
+    rdfs:label "contains" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean contains(String key)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationTable.contains
+yawl:YSpecificationTable_contains_7 a yawl:Method ;
+    rdfs:label "contains" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean contains(YSpecification spec)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationTable.contains
+yawl:YSpecificationTable_contains_8 a yawl:Method ;
+    rdfs:label "contains" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean contains(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationTable.getSpecIDs
+yawl:YSpecificationTable_getSpecIDs_9 a yawl:Method ;
+    rdfs:label "getSpecIDs" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getSpecIDs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationTable.getSpecificationForCaseStart
+yawl:YSpecificationTable_getSpecificationForCaseStart_10 a yawl:Method ;
+    rdfs:label "getSpecificationForCaseStart" ;
+    yawl:returnType "YSpecification" ;
+    yawl:signature "YSpecification getSpecificationForCaseStart(YSpecificationID specID)" ;
+    rdfs:comment """Checks that the specID passed refers to a loaded specification, and that it is the latest version loaded @param specID the specID to check @return the YSpecification the specID refers to, iff it refers to the latest loaded version of that specification @throws YStateException if the specification is not loaded, or if the specID referes to other than the latest loaded version""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

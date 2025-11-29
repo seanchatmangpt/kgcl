@@ -1,0 +1,93 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.interfce.interfaceE.YLogGateway
+yawl:YLogGateway a yawl:Class ;
+    rdfs:label "YLogGateway" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_interfce_interfaceE ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/interfce/interfaceE/YLogGateway.java"^^xsd:string ;
+    rdfs:comment """The Log Gateway class acts as an API gateway between YAWL and its process logs. @author Michael Adams v0.1, 29/10/2007 Last Date: 1/2009""" ;
+    yawl:extends yawl:YHttpServlet ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YLogGateway_init_1 ;
+    yawl:hasMethod yawl:YLogGateway_doPost_2 ;
+    yawl:hasMethod yawl:YLogGateway_doGet_3 ;
+    yawl:hasMethod yawl:YLogGateway_validConnection_4 ;
+    yawl:hasMethod yawl:YLogGateway_getSpecificationID_5 ;
+    yawl:hasMethod yawl:YLogGateway_strToLong_6 ;
+    yawl:hasField yawl:YLogGateway__logSvr ;
+    yawl:hasField yawl:YLogGateway__engine ;
+    yawl:hasField yawl:YLogGateway__noEngine ;
+    .
+
+
+# Method: YLogGateway.init
+yawl:YLogGateway_init_1 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGateway.doPost
+yawl:YLogGateway_doPost_2 a yawl:Method ;
+    rdfs:label "doPost" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doPost(HttpServletRequest req, HttpServletResponse res)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGateway.doGet
+yawl:YLogGateway_doGet_3 a yawl:Method ;
+    rdfs:label "doGet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doGet(HttpServletRequest req, HttpServletResponse res)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGateway.validConnection
+yawl:YLogGateway_validConnection_4 a yawl:Method ;
+    rdfs:label "validConnection" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validConnection(String handle)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogGateway.getSpecificationID
+yawl:YLogGateway_getSpecificationID_5 a yawl:Method ;
+    rdfs:label "getSpecificationID" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getSpecificationID(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogGateway.strToLong
+yawl:YLogGateway_strToLong_6 a yawl:Method ;
+    rdfs:label "strToLong" ;
+    yawl:returnType "long" ;
+    yawl:signature "long strToLong(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YLogGateway__logSvr a yawl:Field ;
+    rdfs:label "_logSvr" .
+
+yawl:YLogGateway__engine a yawl:Field ;
+    rdfs:label "_engine" .
+
+yawl:YLogGateway__noEngine a yawl:Field ;
+    rdfs:label "_noEngine" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_engine_interfce_interfaceA a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.engine.interfce.interfaceA" .
+
+

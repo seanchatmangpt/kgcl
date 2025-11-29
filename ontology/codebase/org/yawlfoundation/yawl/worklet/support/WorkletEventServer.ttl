@@ -1,0 +1,196 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.worklet.support
+yawl:org_yawlfoundation_yawl_worklet_support a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.worklet.support" .
+# Class: org.yawlfoundation.yawl.worklet.support.WorkletEventServer
+yawl:WorkletEventServer a yawl:Class ;
+    rdfs:label "WorkletEventServer" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_support ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/support/WorkletEventServer.java"^^xsd:string ;
+    rdfs:comment """Announces worklet service events to registered listeners Author: Michael Adams Creation Date: 12/12/2012""" ;
+    yawl:extends yawl:Interface_Client ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:WorkletEventServer_hasListeners_1 ;
+    yawl:hasMethod yawl:WorkletEventServer_addListener_2 ;
+    yawl:hasMethod yawl:WorkletEventServer_removeListener_3 ;
+    yawl:hasMethod yawl:WorkletEventServer_announceException_4 ;
+    yawl:hasMethod yawl:WorkletEventServer_announceException_5 ;
+    yawl:hasMethod yawl:WorkletEventServer_announceConstraintPass_6 ;
+    yawl:hasMethod yawl:WorkletEventServer_announceConstraintPass_7 ;
+    yawl:hasMethod yawl:WorkletEventServer_announceSelection_8 ;
+    yawl:hasMethod yawl:WorkletEventServer_shutdownListeners_9 ;
+    yawl:hasMethod yawl:WorkletEventServer_announce_10 ;
+    yawl:hasMethod yawl:WorkletEventServer_announce_11 ;
+    yawl:hasMethod yawl:WorkletEventServer_prepareParams_12 ;
+    yawl:hasMethod yawl:WorkletEventServer_addValidatedListener_13 ;
+    yawl:hasMethod yawl:WorkletEventServer_toXML_14 ;
+    yawl:hasField yawl:WorkletEventServer_THREADPOOL_SIZE ;
+    yawl:hasField yawl:WorkletEventServer__executor ;
+    yawl:hasField yawl:WorkletEventServer__log ;
+    yawl:hasField yawl:WorkletEventServer__listeners ;
+    yawl:hasField yawl:WorkletEventServer_ADD_LISTENER_SUCCESS ;
+    yawl:hasField yawl:WorkletEventServer_REMOVE_LISTENER_SUCCESS ;
+    yawl:hasField yawl:WorkletEventServer_UNKNOWN_LISTENER ;
+    yawl:hasField yawl:WorkletEventServer_NULL_LISTENER ;
+    .
+
+
+# Method: WorkletEventServer.hasListeners
+yawl:WorkletEventServer_hasListeners_1 a yawl:Method ;
+    rdfs:label "hasListeners" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasListeners()" ;
+    rdfs:comment """@return true if the server has at least one registered listener""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletEventServer.addListener
+yawl:WorkletEventServer_addListener_2 a yawl:Method ;
+    rdfs:label "addListener" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addListener(String uri)" ;
+    rdfs:comment """Adds a listener to the set of registered listeners @param uri the URI of the listener to add @return a message describing success or error""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletEventServer.removeListener
+yawl:WorkletEventServer_removeListener_3 a yawl:Method ;
+    rdfs:label "removeListener" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeListener(String uri)" ;
+    rdfs:comment """Removes a listener to the set of registered listeners @param uri the URI of the listener to remove @return a message describing success or error""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletEventServer.announceException
+yawl:WorkletEventServer_announceException_4 a yawl:Method ;
+    rdfs:label "announceException" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceException(String caseID, Element caseData, RdrNode node, RuleType rType)" ;
+    rdfs:comment """Announces a case-level exception @param caseID the id of the case on which the exception was raised @param caseData the current case data used to evaluate the exception @param node the node that evaluated to true @param rType the type of exception raised""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletEventServer.announceException
+yawl:WorkletEventServer_announceException_5 a yawl:Method ;
+    rdfs:label "announceException" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceException(WorkItemRecord wir, Element caseData, RdrNode node, RuleType rType)" ;
+    rdfs:comment """Announces an item-level exception @param wir the workitem on which the exception was raised @param caseData the current case data used to evaluate the exception @param node the node that evaluated to true @param rType the type of exception raised""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletEventServer.announceConstraintPass
+yawl:WorkletEventServer_announceConstraintPass_6 a yawl:Method ;
+    rdfs:label "announceConstraintPass" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceConstraintPass(String caseID, Element caseData, RuleType rType)" ;
+    rdfs:comment """Announces a case-level exception @param caseID the id of the case on which the exception was raised @param caseData the current case data used to evaluate the exception @param rType the type of exception raised""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletEventServer.announceConstraintPass
+yawl:WorkletEventServer_announceConstraintPass_7 a yawl:Method ;
+    rdfs:label "announceConstraintPass" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceConstraintPass(WorkItemRecord wir, Element caseData, RuleType rType)" ;
+    rdfs:comment """Announces an item-level exception @param wir the workitem on which the exception was raised @param caseData the current case data used to evaluate the exception @param rType the type of exception raised""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletEventServer.announceSelection
+yawl:WorkletEventServer_announceSelection_8 a yawl:Method ;
+    rdfs:label "announceSelection" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceSelection(Set runners, RdrNode node)" ;
+    rdfs:comment """Announces a worklet selection @param runners a set of descriptors containing case, workitem, data and raised worklet info""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletEventServer.shutdownListeners
+yawl:WorkletEventServer_shutdownListeners_9 a yawl:Method ;
+    rdfs:label "shutdownListeners" ;
+    yawl:returnType "void" ;
+    yawl:signature "void shutdownListeners()" ;
+    rdfs:comment """Announces the worklet service is shutting down""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletEventServer.announce
+yawl:WorkletEventServer_announce_10 a yawl:Method ;
+    rdfs:label "announce" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announce(Map params, Element caseData, RdrNode node, RuleType rType)" ;
+    rdfs:comment """Makes an announcement to each registered listener @param params a parameter map describing the event @param caseData the current case data used to evaluate the event @param node the node that evaluated to true @param rType the type of rule that raised the event""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletEventServer.announce
+yawl:WorkletEventServer_announce_11 a yawl:Method ;
+    rdfs:label "announce" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announce(Map params)" ;
+    rdfs:comment """Makes an announcement to each registered listener @param params a parameter map describing the announcement""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletEventServer.prepareParams
+yawl:WorkletEventServer_prepareParams_12 a yawl:Method ;
+    rdfs:label "prepareParams" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map prepareParams(Event event)" ;
+    rdfs:comment """Initialises a parameter map, inserting the type of event to announce @param event @return""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletEventServer.addValidatedListener
+yawl:WorkletEventServer_addValidatedListener_13 a yawl:Method ;
+    rdfs:label "addValidatedListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addValidatedListener(String uri)" ;
+    rdfs:comment """Adds a pre-validated listener to the set of registered listeners @param uri the URI of the listener to add""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletEventServer.toXML
+yawl:WorkletEventServer_toXML_14 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML(Set runners)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:WorkletEventServer_THREADPOOL_SIZE a yawl:Field ;
+    rdfs:label "THREADPOOL_SIZE" .
+
+yawl:WorkletEventServer__executor a yawl:Field ;
+    rdfs:label "_executor" .
+
+yawl:WorkletEventServer__log a yawl:Field ;
+    rdfs:label "_log" .
+
+yawl:WorkletEventServer__listeners a yawl:Field ;
+    rdfs:label "_listeners" .
+
+yawl:WorkletEventServer_ADD_LISTENER_SUCCESS a yawl:Field ;
+    rdfs:label "ADD_LISTENER_SUCCESS" .
+
+yawl:WorkletEventServer_REMOVE_LISTENER_SUCCESS a yawl:Field ;
+    rdfs:label "REMOVE_LISTENER_SUCCESS" .
+
+yawl:WorkletEventServer_UNKNOWN_LISTENER a yawl:Field ;
+    rdfs:label "UNKNOWN_LISTENER" .
+
+yawl:WorkletEventServer_NULL_LISTENER a yawl:Field ;
+    rdfs:label "NULL_LISTENER" .
+
+
+

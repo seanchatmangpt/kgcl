@@ -1,0 +1,78 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.allocators.RiskAssessment
+yawl:RiskAssessment a yawl:Class ;
+    rdfs:label "RiskAssessment" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_allocators ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/allocators/RiskAssessment.java"^^xsd:string ;
+    rdfs:comment """Performs allocation based on the least average cost to allocate a work item @author Mairen Zeevenhoven & Michael Adams @date 20-12-2019""" ;
+    yawl:extends yawl:AbstractAllocator ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:RiskAssessment_performAllocation_1 ;
+    yawl:hasMethod yawl:RiskAssessment_getBestChoice_2 ;
+    yawl:hasMethod yawl:RiskAssessment_getFrequencyUX_3 ;
+    yawl:hasMethod yawl:RiskAssessment_getDurations_4 ;
+    yawl:hasMethod yawl:RiskAssessment_getParticipantTimes_5 ;
+    yawl:hasMethod yawl:RiskAssessment_pairEvents_6 ;
+    .
+
+
+# Method: RiskAssessment.performAllocation
+yawl:RiskAssessment_performAllocation_1 a yawl:Method ;
+    rdfs:label "performAllocation" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant performAllocation(Set participants, WorkItemRecord wir)" ;
+    rdfs:comment """Selects a single participant from the list provided that has the best probability of completion within a time threshold at the cheapest rate @param participants a distribution set of participants @param wir          the work item to allocate @return a single participant, or null if participants is null or empty""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RiskAssessment.getBestChoice
+yawl:RiskAssessment_getBestChoice_2 a yawl:Method ;
+    rdfs:label "getBestChoice" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBestChoice(Map costMap, Collection pSet, WorkItemRecord wir)" ;
+    rdfs:comment """Gets the participant id in the map corresponding to the lowest cost amount @param pSet a map of participant ids and their associated costs @param wir  the work item to allocate @return the participant id with the lowest cost""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RiskAssessment.getFrequencyUX
+yawl:RiskAssessment_getFrequencyUX_3 a yawl:Method ;
+    rdfs:label "getFrequencyUX" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getFrequencyUX(WorkItemRecord wir, long threshold)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RiskAssessment.getDurations
+yawl:RiskAssessment_getDurations_4 a yawl:Method ;
+    rdfs:label "getDurations" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getDurations(EventLogger fromEvent, EventLogger toEvent, WorkItemRecord wir)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RiskAssessment.getParticipantTimes
+yawl:RiskAssessment_getParticipantTimes_5 a yawl:Method ;
+    rdfs:label "getParticipantTimes" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getParticipantTimes(Collection pairedEvents)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RiskAssessment.pairEvents
+yawl:RiskAssessment_pairEvents_6 a yawl:Method ;
+    rdfs:label "pairEvents" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map pairEvents(List fromEvents, List toEvents)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+
+

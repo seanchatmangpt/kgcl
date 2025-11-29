@@ -1,0 +1,67 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.balancer.rule.HawkularForecaster
+yawl:HawkularForecaster a yawl:Class ;
+    rdfs:label "HawkularForecaster" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer_rule ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/rule/HawkularForecaster.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 14/8/17""" ;
+    yawl:implements yawl:BusynessRule ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:HawkularForecaster_add_1 ;
+    yawl:hasMethod yawl:HawkularForecaster_get_2 ;
+    yawl:hasMethod yawl:HawkularForecaster_forecast_3 ;
+    yawl:hasMethod yawl:HawkularForecaster_initConfig_4 ;
+    yawl:hasField yawl:HawkularForecaster__forecaster ;
+    .
+
+
+# Method: HawkularForecaster.add
+yawl:HawkularForecaster_add_1 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(double value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HawkularForecaster.get
+yawl:HawkularForecaster_get_2 a yawl:Method ;
+    rdfs:label "get" ;
+    yawl:returnType "double" ;
+    yawl:signature "double get()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HawkularForecaster.forecast
+yawl:HawkularForecaster_forecast_3 a yawl:Method ;
+    rdfs:label "forecast" ;
+    yawl:returnType "DataPoint" ;
+    yawl:signature "DataPoint forecast()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HawkularForecaster.initConfig
+yawl:HawkularForecaster_initConfig_4 a yawl:Method ;
+    rdfs:label "initConfig" ;
+    yawl:returnType "org" ;
+    yawl:signature "org initConfig(int windowSize)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:HawkularForecaster__forecaster a yawl:Field ;
+    rdfs:label "_forecaster" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_balancer_instance a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.balancer.instance" .
+
+

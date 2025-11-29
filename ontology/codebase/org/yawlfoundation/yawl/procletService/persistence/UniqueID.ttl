@@ -1,0 +1,65 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.persistence.UniqueID
+yawl:UniqueID a yawl:Class ;
+    rdfs:label "UniqueID" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_persistence ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/persistence/UniqueID.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 1/02/12""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:UniqueID_getUniqueID_1 ;
+    yawl:hasMethod yawl:UniqueID_setUniqueID_2 ;
+    yawl:hasMethod yawl:UniqueID_getPkey_3 ;
+    yawl:hasMethod yawl:UniqueID_setPkey_4 ;
+    yawl:hasField yawl:UniqueID_uniqueID ;
+    yawl:hasField yawl:UniqueID_pkey ;
+    .
+
+
+# Method: UniqueID.getUniqueID
+yawl:UniqueID_getUniqueID_1 a yawl:Method ;
+    rdfs:label "getUniqueID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUniqueID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UniqueID.setUniqueID
+yawl:UniqueID_setUniqueID_2 a yawl:Method ;
+    rdfs:label "setUniqueID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUniqueID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UniqueID.getPkey
+yawl:UniqueID_getPkey_3 a yawl:Method ;
+    rdfs:label "getPkey" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getPkey()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UniqueID.setPkey
+yawl:UniqueID_setPkey_4 a yawl:Method ;
+    rdfs:label "setPkey" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPkey(long key)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:UniqueID_uniqueID a yawl:Field ;
+    rdfs:label "uniqueID" .
+
+yawl:UniqueID_pkey a yawl:Field ;
+    rdfs:label "pkey" .
+
+
+

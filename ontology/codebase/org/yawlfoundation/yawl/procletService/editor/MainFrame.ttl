@@ -1,0 +1,54 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.MainFrame
+yawl:MainFrame a yawl:Class ;
+    rdfs:label "MainFrame" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/MainFrame.java"^^xsd:string ;
+    yawl:extends yawl:JFrame ;
+    yawl:implements yawl:ActionListener ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:MainFrame_jbInit_1 ;
+    yawl:hasMethod yawl:MainFrame_actionPerformed_2 ;
+    yawl:hasMethod yawl:MainFrame_quit_3 ;
+    yawl:hasField yawl:MainFrame_NAME ;
+    .
+
+
+# Method: MainFrame.jbInit
+yawl:MainFrame_jbInit_1 a yawl:Method ;
+    rdfs:label "jbInit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void jbInit()" ;
+    rdfs:comment """Component initialization. @throws java.lang.Exception""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MainFrame.actionPerformed
+yawl:MainFrame_actionPerformed_2 a yawl:Method ;
+    rdfs:label "actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void actionPerformed(ActionEvent e)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MainFrame.quit
+yawl:MainFrame_quit_3 a yawl:Method ;
+    rdfs:label "quit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void quit()" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:MainFrame_NAME a yawl:Field ;
+    rdfs:label "NAME" .
+
+
+

@@ -1,0 +1,85 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.exception.CaseStartEventMap
+yawl:CaseStartEventMap a yawl:Class ;
+    rdfs:label "CaseStartEventMap" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_exception ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/exception/CaseStartEventMap.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 8/02/2016""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CaseStartEventMap_addCasePreCheckComplete_1 ;
+    yawl:hasMethod yawl:CaseStartEventMap_isCasePreCheckComplete_2 ;
+    yawl:hasMethod yawl:CaseStartEventMap_caseCancelled_3 ;
+    yawl:hasMethod yawl:CaseStartEventMap_caseCompleted_4 ;
+    yawl:hasMethod yawl:CaseStartEventMap_addCheckWorkItemConstraintEvent_5 ;
+    yawl:hasMethod yawl:CaseStartEventMap_getCheckWorkItemConstraintEvent_6 ;
+    yawl:hasField yawl:CaseStartEventMap__constraintMap ;
+    yawl:hasField yawl:CaseStartEventMap__casesStarted ;
+    .
+
+
+# Method: CaseStartEventMap.addCasePreCheckComplete
+yawl:CaseStartEventMap_addCasePreCheckComplete_1 a yawl:Method ;
+    rdfs:label "addCasePreCheckComplete" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addCasePreCheckComplete(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseStartEventMap.isCasePreCheckComplete
+yawl:CaseStartEventMap_isCasePreCheckComplete_2 a yawl:Method ;
+    rdfs:label "isCasePreCheckComplete" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isCasePreCheckComplete(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseStartEventMap.caseCancelled
+yawl:CaseStartEventMap_caseCancelled_3 a yawl:Method ;
+    rdfs:label "caseCancelled" ;
+    yawl:returnType "void" ;
+    yawl:signature "void caseCancelled(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseStartEventMap.caseCompleted
+yawl:CaseStartEventMap_caseCompleted_4 a yawl:Method ;
+    rdfs:label "caseCompleted" ;
+    yawl:returnType "void" ;
+    yawl:signature "void caseCompleted(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseStartEventMap.addCheckWorkItemConstraintEvent
+yawl:CaseStartEventMap_addCheckWorkItemConstraintEvent_5 a yawl:Method ;
+    rdfs:label "addCheckWorkItemConstraintEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addCheckWorkItemConstraintEvent(WorkItemRecord wir, String data, boolean preCheck)" ;
+    rdfs:comment """stores the data passed to the event for later processing""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseStartEventMap.getCheckWorkItemConstraintEvent
+yawl:CaseStartEventMap_getCheckWorkItemConstraintEvent_6 a yawl:Method ;
+    rdfs:label "getCheckWorkItemConstraintEvent" ;
+    yawl:returnType "WorkItemConstraintData" ;
+    yawl:signature "WorkItemConstraintData getCheckWorkItemConstraintEvent(String caseID)" ;
+    rdfs:comment """retrieves the data passed to the initial event and recalls it""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:CaseStartEventMap__constraintMap a yawl:Field ;
+    rdfs:label "_constraintMap" .
+
+yawl:CaseStartEventMap__casesStarted a yawl:Field ;
+    rdfs:label "_casesStarted" .
+
+
+

@@ -1,0 +1,91 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.elements.e2wfoj
+yawl:org_yawlfoundation_yawl_elements_e2wfoj a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.elements.e2wfoj" .
+# Class: org.yawlfoundation.yawl.elements.e2wfoj.RSetOfMarkings
+yawl:RSetOfMarkings a yawl:Class ;
+    rdfs:label "RSetOfMarkings" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_elements_e2wfoj ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/elements/e2wfoj/RSetOfMarkings.java"^^xsd:string ;
+    rdfs:comment """Data structure for Storage of RMarkings.""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:RSetOfMarkings_addMarking_1 ;
+    yawl:hasMethod yawl:RSetOfMarkings_getMarkings_2 ;
+    yawl:hasMethod yawl:RSetOfMarkings_size_3 ;
+    yawl:hasMethod yawl:RSetOfMarkings_removeAll_4 ;
+    yawl:hasMethod yawl:RSetOfMarkings_removeMarking_5 ;
+    yawl:hasMethod yawl:RSetOfMarkings_addAll_6 ;
+    yawl:hasMethod yawl:RSetOfMarkings_equals_7 ;
+    yawl:hasField yawl:RSetOfMarkings__markings ;
+    .
+
+
+# Method: RSetOfMarkings.addMarking
+yawl:RSetOfMarkings_addMarking_1 a yawl:Method ;
+    rdfs:label "addMarking" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addMarking(RMarking marking)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RSetOfMarkings.getMarkings
+yawl:RSetOfMarkings_getMarkings_2 a yawl:Method ;
+    rdfs:label "getMarkings" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getMarkings()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RSetOfMarkings.size
+yawl:RSetOfMarkings_size_3 a yawl:Method ;
+    rdfs:label "size" ;
+    yawl:returnType "int" ;
+    yawl:signature "int size()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RSetOfMarkings.removeAll
+yawl:RSetOfMarkings_removeAll_4 a yawl:Method ;
+    rdfs:label "removeAll" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeAll()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RSetOfMarkings.removeMarking
+yawl:RSetOfMarkings_removeMarking_5 a yawl:Method ;
+    rdfs:label "removeMarking" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeMarking(RMarking marking)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RSetOfMarkings.addAll
+yawl:RSetOfMarkings_addAll_6 a yawl:Method ;
+    rdfs:label "addAll" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addAll(RSetOfMarkings newmarkings)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RSetOfMarkings.equals
+yawl:RSetOfMarkings_equals_7 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(RSetOfMarkings markings)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:RSetOfMarkings__markings a yawl:Field ;
+    rdfs:label "_markings" .
+
+
+

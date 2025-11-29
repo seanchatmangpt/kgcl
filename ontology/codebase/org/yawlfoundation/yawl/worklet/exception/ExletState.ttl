@@ -1,0 +1,51 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.exception.ExletState
+yawl:ExletState a yawl:Class ;
+    rdfs:label "ExletState" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_exception ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/exception/ExletValidator.java"^^xsd:string ;
+    yawl:hasMethod yawl:ExletState_getState_1 ;
+    yawl:hasMethod yawl:ExletState_setState_2 ;
+    yawl:hasField yawl:ExletState_caseState ;
+    yawl:hasField yawl:ExletState_ancestorCasesState ;
+    yawl:hasField yawl:ExletState_allCasesState ;
+    yawl:hasField yawl:ExletState_workitemState ;
+    .
+
+
+# Method: ExletState.getState
+yawl:ExletState_getState_1 a yawl:Method ;
+    rdfs:label "getState" ;
+    yawl:returnType "ExletAction" ;
+    yawl:signature "ExletAction getState(ExletTarget target)" ;
+    .
+
+# Method: ExletState.setState
+yawl:ExletState_setState_2 a yawl:Method ;
+    rdfs:label "setState" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setState(ExletAction action, ExletTarget target)" ;
+    .
+
+
+
+yawl:ExletState_caseState a yawl:Field ;
+    rdfs:label "caseState" .
+
+yawl:ExletState_ancestorCasesState a yawl:Field ;
+    rdfs:label "ancestorCasesState" .
+
+yawl:ExletState_allCasesState a yawl:Field ;
+    rdfs:label "allCasesState" .
+
+yawl:ExletState_workitemState a yawl:Field ;
+    rdfs:label "workitemState" .
+
+
+

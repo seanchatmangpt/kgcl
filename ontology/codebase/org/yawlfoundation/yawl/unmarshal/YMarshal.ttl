@@ -1,0 +1,92 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.unmarshal.YMarshal
+yawl:YMarshal a yawl:Class ;
+    rdfs:label "YMarshal" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_unmarshal ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/unmarshal/YMarshal.java"^^xsd:string ;
+    rdfs:comment """Marshals & Unmarshals specifications @author Lachlan Aldred @author Michael Adams (refactored for v2.0)""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YMarshal_buildSpecifications_1 ;
+    yawl:hasMethod yawl:YMarshal_unmarshalSpecifications_2 ;
+    yawl:hasMethod yawl:YMarshal_unmarshalSpecifications_3 ;
+    yawl:hasMethod yawl:YMarshal_marshal_4 ;
+    yawl:hasMethod yawl:YMarshal_marshal_5 ;
+    yawl:hasMethod yawl:YMarshal_getVersion_6 ;
+    .
+
+
+# Method: YMarshal.buildSpecifications
+yawl:YMarshal_buildSpecifications_1 a yawl:Method ;
+    rdfs:label "buildSpecifications" ;
+    yawl:returnType "List" ;
+    yawl:signature "List buildSpecifications(Element specificationSetElem, Namespace ns, YSchemaVersion version)" ;
+    rdfs:comment """Builds a list of specification objects from a XML document. @param specificationSetElem the JDOM Element containing the specification XML @param ns specificationSetElem namespace @param version the schema version of the specification set  @return a list of YSpecification objects taken from the XML document. @throws YSyntaxException if a parsed specification doesn't validate against schema""" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YMarshal.unmarshalSpecifications
+yawl:YMarshal_unmarshalSpecifications_2 a yawl:Method ;
+    rdfs:label "unmarshalSpecifications" ;
+    yawl:returnType "List" ;
+    yawl:signature "List unmarshalSpecifications(String specStr)" ;
+    rdfs:comment """Builds a list of specification objects from a XML string. This method is equivalent to calling unmarshalSpecifications(String, boolean) with the 'schemaValidate' flag set to true. @param specStr the XML string describing the specification set @return a list of YSpecification objects taken from the XML string. @throws YSyntaxException if a parsed specification doesn't validate against schema""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YMarshal.unmarshalSpecifications
+yawl:YMarshal_unmarshalSpecifications_3 a yawl:Method ;
+    rdfs:label "unmarshalSpecifications" ;
+    yawl:returnType "List" ;
+    yawl:signature "List unmarshalSpecifications(String specStr, boolean schemaValidate)" ;
+    rdfs:comment """Builds a list of specification objects from a XML string. @param specStr the XML string describing the specification set @param schemaValidate when true, will cause the specifications to be validated against schema while being parsed @return a list of YSpecification objects taken from the XML string. @throws YSyntaxException if a parsed specification doesn't validate against schema""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YMarshal.marshal
+yawl:YMarshal_marshal_4 a yawl:Method ;
+    rdfs:label "marshal" ;
+    yawl:returnType "String" ;
+    yawl:signature "String marshal(List specificationList, YSchemaVersion version)" ;
+    rdfs:comment """Builds an XML Document from a list of specifications @param specificationList the list of specifications to build into an XML document 'specification set' @param version the appropriate schema version to use @return the XML Document, rendered as a String""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YMarshal.marshal
+yawl:YMarshal_marshal_5 a yawl:Method ;
+    rdfs:label "marshal" ;
+    yawl:returnType "String" ;
+    yawl:signature "String marshal(YSpecification specification)" ;
+    rdfs:comment """Builds an XML Document from a specification @param specification the specification to build into an XML document 'specification set' @return the XML Document, rendered as a String""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YMarshal.getVersion
+yawl:YMarshal_getVersion_6 a yawl:Method ;
+    rdfs:label "getVersion" ;
+    yawl:returnType "YSchemaVersion" ;
+    yawl:signature "YSchemaVersion getVersion(Element specRoot)" ;
+    rdfs:comment """Gets the specification's schema version form its root Element @param specRoot the root Element of a specification set Document @return the specification's schema version""" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+
+
+
+yawl:org_yawlfoundation_yawl_documentStore a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.documentStore" .
+
+

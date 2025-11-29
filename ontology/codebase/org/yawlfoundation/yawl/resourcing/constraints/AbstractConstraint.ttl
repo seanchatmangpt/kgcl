@@ -1,0 +1,47 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.resourcing.constraints
+yawl:org_yawlfoundation_yawl_resourcing_constraints a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.constraints" .
+# Class: org.yawlfoundation.yawl.resourcing.constraints.AbstractConstraint
+yawl:AbstractConstraint a yawl:Class ;
+    rdfs:label "AbstractConstraint" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_constraints ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/constraints/AbstractConstraint.java"^^xsd:string ;
+    rdfs:comment """The base class for all constraints. <p/> Create Date: 03/08/2007. Last Date: 12/11/2007 @author Michael Adams (BPM Group, QUT Australia) @version 2.0""" ;
+    yawl:extends yawl:AbstractSelector ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:AbstractConstraint_toXML_1 ;
+    yawl:hasMethod yawl:AbstractConstraint_performConstraint_2 ;
+    .
+
+
+# Method: AbstractConstraint.toXML
+yawl:AbstractConstraint_toXML_1 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    rdfs:comment """Generates the XML required for the specification file @return an XML'd String containing the member values of an instantiation of this class""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractConstraint.performConstraint
+yawl:AbstractConstraint_performConstraint_2 a yawl:Method ;
+    rdfs:label "performConstraint" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set performConstraint(Set resources, WorkItemRecord wir)" ;
+    rdfs:comment """Performs a constraint against the distribution set passed @param resources the distribution set of participants @param wir       the workitem being resourced @return the constrined distribution set""" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

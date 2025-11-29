@@ -1,0 +1,526 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.datastore.orgdata.jdbcImpl
+yawl:jdbcImpl a yawl:Class ;
+    rdfs:label "jdbcImpl" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_datastore_orgdata ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/datastore/orgdata/jdbcImpl.java"^^xsd:string ;
+    rdfs:comment """A vanilla JDBC implementation of the DataSource abstraction @author Michael Adams v0.1, 28/08/2007""" ;
+    yawl:extends yawl:DataSource ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:jdbcImpl_loadDriver_1 ;
+    yawl:hasMethod yawl:jdbcImpl_openConnection_2 ;
+    yawl:hasMethod yawl:jdbcImpl_closeConnection_3 ;
+    yawl:hasMethod yawl:jdbcImpl_createStatement_4 ;
+    yawl:hasMethod yawl:jdbcImpl_getResultSet_5 ;
+    yawl:hasMethod yawl:jdbcImpl_execSelect_6 ;
+    yawl:hasMethod yawl:jdbcImpl_execUpdate_7 ;
+    yawl:hasMethod yawl:jdbcImpl_printDump_8 ;
+    yawl:hasMethod yawl:jdbcImpl_checkTables_9 ;
+    yawl:hasMethod yawl:jdbcImpl_makeTable_10 ;
+    yawl:hasMethod yawl:jdbcImpl_selectWhere_11 ;
+    yawl:hasMethod yawl:jdbcImpl_selectAll_12 ;
+    yawl:hasMethod yawl:jdbcImpl_selectAll_13 ;
+    yawl:hasMethod yawl:jdbcImpl_select_14 ;
+    yawl:hasMethod yawl:jdbcImpl_selectScalar_15 ;
+    yawl:hasMethod yawl:jdbcImpl_makeParticipant_16 ;
+    yawl:hasMethod yawl:jdbcImpl_makeRole_17 ;
+    yawl:hasMethod yawl:jdbcImpl_makeCapability_18 ;
+    yawl:hasMethod yawl:jdbcImpl_makePosition_19 ;
+    yawl:hasMethod yawl:jdbcImpl_makeOrgGroup_20 ;
+    yawl:hasMethod yawl:jdbcImpl_selectParticipantAttributeIDs_21 ;
+    yawl:hasMethod yawl:jdbcImpl_selectAttributeParticipantIDs_22 ;
+    yawl:hasMethod yawl:jdbcImpl_loadCapabilities_23 ;
+    yawl:hasMethod yawl:jdbcImpl_loadOrgGroups_24 ;
+    yawl:hasMethod yawl:jdbcImpl_loadPositions_25 ;
+    yawl:hasMethod yawl:jdbcImpl_loadRoles_26 ;
+    yawl:hasMethod yawl:jdbcImpl_loadParticipants_27 ;
+    yawl:hasMethod yawl:jdbcImpl_updateParticipant_28 ;
+    yawl:hasMethod yawl:jdbcImpl_insertParticipant_29 ;
+    yawl:hasMethod yawl:jdbcImpl_deleteParticipant_30 ;
+    yawl:hasMethod yawl:jdbcImpl_deleteParticipantAttributeRows_31 ;
+    yawl:hasMethod yawl:jdbcImpl_insertParticpantAttributeRows_32 ;
+    yawl:hasMethod yawl:jdbcImpl_updateRole_33 ;
+    yawl:hasMethod yawl:jdbcImpl_insertRole_34 ;
+    yawl:hasMethod yawl:jdbcImpl_deleteRole_35 ;
+    yawl:hasMethod yawl:jdbcImpl_updateCapability_36 ;
+    yawl:hasMethod yawl:jdbcImpl_insertCapability_37 ;
+    yawl:hasMethod yawl:jdbcImpl_deleteCapability_38 ;
+    yawl:hasMethod yawl:jdbcImpl_updatePosition_39 ;
+    yawl:hasMethod yawl:jdbcImpl_insertPosition_40 ;
+    yawl:hasMethod yawl:jdbcImpl_deletePosition_41 ;
+    yawl:hasMethod yawl:jdbcImpl_insertOrgGroup_42 ;
+    yawl:hasMethod yawl:jdbcImpl_updateOrgGroup_43 ;
+    yawl:hasMethod yawl:jdbcImpl_deleteOrgGroup_44 ;
+    yawl:hasMethod yawl:jdbcImpl_loadResources_45 ;
+    yawl:hasMethod yawl:jdbcImpl_insert_46 ;
+    yawl:hasMethod yawl:jdbcImpl_importObj_47 ;
+    yawl:hasMethod yawl:jdbcImpl_update_48 ;
+    yawl:hasMethod yawl:jdbcImpl_delete_49 ;
+    yawl:hasMethod yawl:jdbcImpl_authenticate_50 ;
+    yawl:hasField yawl:jdbcImpl_dbDriver ;
+    yawl:hasField yawl:jdbcImpl_dbUrl ;
+    yawl:hasField yawl:jdbcImpl_dbUser ;
+    yawl:hasField yawl:jdbcImpl_dbPassword ;
+    yawl:hasField yawl:jdbcImpl_connection ;
+    yawl:hasField yawl:jdbcImpl__log ;
+    .
+
+
+# Method: jdbcImpl.loadDriver
+yawl:jdbcImpl_loadDriver_1 a yawl:Method ;
+    rdfs:label "loadDriver" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean loadDriver(String driver)" ;
+    rdfs:comment """@param driver - the driver to load""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.openConnection
+yawl:jdbcImpl_openConnection_2 a yawl:Method ;
+    rdfs:label "openConnection" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean openConnection()" ;
+    rdfs:comment """Open the connection @return true if connection is successfully opened""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.closeConnection
+yawl:jdbcImpl_closeConnection_3 a yawl:Method ;
+    rdfs:label "closeConnection" ;
+    yawl:returnType "void" ;
+    yawl:signature "void closeConnection()" ;
+    rdfs:comment """close the connection to the database""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.createStatement
+yawl:jdbcImpl_createStatement_4 a yawl:Method ;
+    rdfs:label "createStatement" ;
+    yawl:returnType "Statement" ;
+    yawl:signature "Statement createStatement()" ;
+    rdfs:comment """@return a statement object (or null if the statement could not be created)""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.getResultSet
+yawl:jdbcImpl_getResultSet_5 a yawl:Method ;
+    rdfs:label "getResultSet" ;
+    yawl:returnType "ResultSet" ;
+    yawl:signature "ResultSet getResultSet(Statement statement, String sql)" ;
+    rdfs:comment """Executes a select statement @param statement the statement object to execute the query through @param sql the SQL select statement @return a ResultSet with the results of the selection (if successful)""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.execSelect
+yawl:jdbcImpl_execSelect_6 a yawl:Method ;
+    rdfs:label "execSelect" ;
+    yawl:returnType "ResultSet" ;
+    yawl:signature "ResultSet execSelect(String sql)" ;
+    rdfs:comment """executes a select statement @param sql the select statement to execute @return  a ResultSet with the results of the selection (if successful)""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.execUpdate
+yawl:jdbcImpl_execUpdate_7 a yawl:Method ;
+    rdfs:label "execUpdate" ;
+    yawl:returnType "int" ;
+    yawl:signature "int execUpdate(String sql)" ;
+    rdfs:comment """Executes an UPDATE, INSERT or DELETE statement @param sql the statement to execute @return the number of affected rows (or -1 if not successful)""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: jdbcImpl.printDump
+yawl:jdbcImpl_printDump_8 a yawl:Method ;
+    rdfs:label "printDump" ;
+    yawl:returnType "void" ;
+    yawl:signature "void printDump()" ;
+    rdfs:comment """Dump database connection metadata""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: jdbcImpl.checkTables
+yawl:jdbcImpl_checkTables_9 a yawl:Method ;
+    rdfs:label "checkTables" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkTables()" ;
+    rdfs:comment """Checks that all required tables exist""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.makeTable
+yawl:jdbcImpl_makeTable_10 a yawl:Method ;
+    rdfs:label "makeTable" ;
+    yawl:returnType "void" ;
+    yawl:signature "void makeTable(tbl table)" ;
+    rdfs:comment """Create the required tables if they don't already exist @param table the table to create""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.selectWhere
+yawl:jdbcImpl_selectWhere_11 a yawl:Method ;
+    rdfs:label "selectWhere" ;
+    yawl:returnType "String" ;
+    yawl:signature "String selectWhere(String table, String field, String value)" ;
+    rdfs:comment """constructs a select statement using the parameters passed @param table the table to select from @param field the [field] in 'WHERE [field] = [value]' @param value the [value] in the above @return a constructed select statement String""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.selectAll
+yawl:jdbcImpl_selectAll_12 a yawl:Method ;
+    rdfs:label "selectAll" ;
+    yawl:returnType "String" ;
+    yawl:signature "String selectAll(String table)" ;
+    rdfs:comment """constructs a 'select ' statement @param table the table to select from @return a constructed select statement String""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.selectAll
+yawl:jdbcImpl_selectAll_13 a yawl:Method ;
+    rdfs:label "selectAll" ;
+    yawl:returnType "List" ;
+    yawl:signature "List selectAll(tbl table)" ;
+    rdfs:comment """selects all objects stored in the table passed (unqualified selection) @param table the table to get the rows from @return a List of instantiated objects, one for each row in the table""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.select
+yawl:jdbcImpl_select_14 a yawl:Method ;
+    rdfs:label "select" ;
+    yawl:returnType "List" ;
+    yawl:signature "List select(tbl table, String field, String value)" ;
+    rdfs:comment """selects objects stored in the table passed, qualified by the field and value passed. Effectively 'SELECT  FROM [table] WHERE [field] = [value]' @param table the table to get the rows from @param field the name of the field to query in the where clause @param value the value to compare against the field values @return a List of instantiated objects, one for each row in the table that matches: [field] = [value]""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.selectScalar
+yawl:jdbcImpl_selectScalar_15 a yawl:Method ;
+    rdfs:label "selectScalar" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object selectScalar(tbl table, String field, String value)" ;
+    rdfs:comment """selects a single object from the datastore @param table the table to query @param field the name of the field to query in the where clause @param value the value to compare against the field values @return the object matching [field] = [value]. If more than one row is matched, only the first if returned - the rest are ignored.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.makeParticipant
+yawl:jdbcImpl_makeParticipant_16 a yawl:Method ;
+    rdfs:label "makeParticipant" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant makeParticipant(ResultSet rs)" ;
+    rdfs:comment """Constructs a Participant object from a ResultSet row @param rs the ResultSet containing the row of data @return a (partially) constructed Participant. Note that only the data members are added here to the Participant object. The many-to-many Roles, Positions and Capability Sets references need to be added elsewhere. @throws SQLException if there's a ResultSet issue""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.makeRole
+yawl:jdbcImpl_makeRole_17 a yawl:Method ;
+    rdfs:label "makeRole" ;
+    yawl:returnType "Role" ;
+    yawl:signature "Role makeRole(ResultSet rs)" ;
+    rdfs:comment """Constructs a Participant object from a ResultSet row @param rs the ResultSet containing the row of data @return a (mostly) constructed Role. Note that the id of the Role this Role belongs to is stored here for instatiation of the Role reference elsewhere. @throws SQLException if there's a ResultSet issue""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.makeCapability
+yawl:jdbcImpl_makeCapability_18 a yawl:Method ;
+    rdfs:label "makeCapability" ;
+    yawl:returnType "Capability" ;
+    yawl:signature "Capability makeCapability(ResultSet rs)" ;
+    rdfs:comment """Constructs a Capability object from a ResultSet row @param rs the ResultSet containing the row of data @return a fully constructed Capability object. @throws SQLException if there's a ResultSet issue""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.makePosition
+yawl:jdbcImpl_makePosition_19 a yawl:Method ;
+    rdfs:label "makePosition" ;
+    yawl:returnType "Position" ;
+    yawl:signature "Position makePosition(ResultSet rs)" ;
+    rdfs:comment """Constructs a Position object from a ResultSet row @param rs the ResultSet containing the row of data @return a (mostly) constructed Position. Note that the id of the Position this Position reports to, and the id of the OrgGRoup this Position belongs to, are stored here (in the Position object) for instatiation of the Position and OrgGroup object references elsewhere. @throws SQLException if there's a ResultSet issue""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.makeOrgGroup
+yawl:jdbcImpl_makeOrgGroup_20 a yawl:Method ;
+    rdfs:label "makeOrgGroup" ;
+    yawl:returnType "OrgGroup" ;
+    yawl:signature "OrgGroup makeOrgGroup(ResultSet rs)" ;
+    rdfs:comment """Constructs an OrgGroup object from a ResultSet row @param rs the ResultSet containing the row of data @return a (mostly) constructed OrgGroup. Note that the id of the OrgGroup this OrgGroup belongs to are stored here (in the OrgGroup object) for instatiation of the OrgGroup object references elsewhere. @throws SQLException if there's a ResultSet issue""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.selectParticipantAttributeIDs
+yawl:jdbcImpl_selectParticipantAttributeIDs_21 a yawl:Method ;
+    rdfs:label "selectParticipantAttributeIDs" ;
+    yawl:returnType "List" ;
+    yawl:signature "List selectParticipantAttributeIDs(tbl table, String pid)" ;
+    rdfs:comment """gets a List of Role, Position or Capability object id's (depending on the table passed) corresponding to a particular participant id. @param table the (foreign-key) table to get the id's from @param pid the Participant id @return a List of object ids associated with the participant""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.selectAttributeParticipantIDs
+yawl:jdbcImpl_selectAttributeParticipantIDs_22 a yawl:Method ;
+    rdfs:label "selectAttributeParticipantIDs" ;
+    yawl:returnType "List" ;
+    yawl:signature "List selectAttributeParticipantIDs(tbl table, String id)" ;
+    rdfs:comment """gets a List of Participant object id's corresponding to a particular attribute id (ie Role, Position or Capability) depending on the table passed @param table the (foreign-key) table to get the id's from @param id the id @return a List of participant ids associated with the object""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.loadCapabilities
+yawl:jdbcImpl_loadCapabilities_23 a yawl:Method ;
+    rdfs:label "loadCapabilities" ;
+    yawl:returnType "HashMap" ;
+    yawl:signature "HashMap loadCapabilities()" ;
+    rdfs:comment """Loads all Capability records from the data store. @return a map of Capability objects of the form [capabilityID, Capability]""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.loadOrgGroups
+yawl:jdbcImpl_loadOrgGroups_24 a yawl:Method ;
+    rdfs:label "loadOrgGroups" ;
+    yawl:returnType "HashMap" ;
+    yawl:signature "HashMap loadOrgGroups()" ;
+    rdfs:comment """Loads all OrgGroup records from the data store, and correctly maps 'belongs to' OrgGroup references @return a map of OrgGroup objects of the form [groupID, OrgGroup]""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.loadPositions
+yawl:jdbcImpl_loadPositions_25 a yawl:Method ;
+    rdfs:label "loadPositions" ;
+    yawl:returnType "HashMap" ;
+    yawl:signature "HashMap loadPositions(Map ogMap)" ;
+    rdfs:comment """Loads all Position records from the data store, and correctly maps 'belongs to' OrgGroup and 'reports to' Position references @return a map of Position objects of the form [id, Position]""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.loadRoles
+yawl:jdbcImpl_loadRoles_26 a yawl:Method ;
+    rdfs:label "loadRoles" ;
+    yawl:returnType "HashMap" ;
+    yawl:signature "HashMap loadRoles()" ;
+    rdfs:comment """Loads all Role records from the data store, and correctly maps 'belongs to' Role references @return a map of Role objects of the form [roleID, Role]""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.loadParticipants
+yawl:jdbcImpl_loadParticipants_27 a yawl:Method ;
+    rdfs:label "loadParticipants" ;
+    yawl:returnType "HashMap" ;
+    yawl:signature "HashMap loadParticipants(ResourceDataSet ds)" ;
+    rdfs:comment """Loads all Participant records from the data store, and maps the many-to-many relations between each Participant and its Role, Position and Capability Sets @return a map of Participant objects of the form [participantID, Participant]""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.updateParticipant
+yawl:jdbcImpl_updateParticipant_28 a yawl:Method ;
+    rdfs:label "updateParticipant" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateParticipant(Participant p)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.insertParticipant
+yawl:jdbcImpl_insertParticipant_29 a yawl:Method ;
+    rdfs:label "insertParticipant" ;
+    yawl:returnType "String" ;
+    yawl:signature "String insertParticipant(Participant p)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.deleteParticipant
+yawl:jdbcImpl_deleteParticipant_30 a yawl:Method ;
+    rdfs:label "deleteParticipant" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteParticipant(Participant p)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.deleteParticipantAttributeRows
+yawl:jdbcImpl_deleteParticipantAttributeRows_31 a yawl:Method ;
+    rdfs:label "deleteParticipantAttributeRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteParticipantAttributeRows(String pid)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.insertParticpantAttributeRows
+yawl:jdbcImpl_insertParticpantAttributeRows_32 a yawl:Method ;
+    rdfs:label "insertParticpantAttributeRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void insertParticpantAttributeRows(Participant p, String id)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.updateRole
+yawl:jdbcImpl_updateRole_33 a yawl:Method ;
+    rdfs:label "updateRole" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateRole(Role r)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.insertRole
+yawl:jdbcImpl_insertRole_34 a yawl:Method ;
+    rdfs:label "insertRole" ;
+    yawl:returnType "String" ;
+    yawl:signature "String insertRole(Role r)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.deleteRole
+yawl:jdbcImpl_deleteRole_35 a yawl:Method ;
+    rdfs:label "deleteRole" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteRole(Role r)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.updateCapability
+yawl:jdbcImpl_updateCapability_36 a yawl:Method ;
+    rdfs:label "updateCapability" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateCapability(Capability c)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.insertCapability
+yawl:jdbcImpl_insertCapability_37 a yawl:Method ;
+    rdfs:label "insertCapability" ;
+    yawl:returnType "String" ;
+    yawl:signature "String insertCapability(Capability c)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.deleteCapability
+yawl:jdbcImpl_deleteCapability_38 a yawl:Method ;
+    rdfs:label "deleteCapability" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteCapability(Capability c)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.updatePosition
+yawl:jdbcImpl_updatePosition_39 a yawl:Method ;
+    rdfs:label "updatePosition" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updatePosition(Position p)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.insertPosition
+yawl:jdbcImpl_insertPosition_40 a yawl:Method ;
+    rdfs:label "insertPosition" ;
+    yawl:returnType "String" ;
+    yawl:signature "String insertPosition(Position p)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.deletePosition
+yawl:jdbcImpl_deletePosition_41 a yawl:Method ;
+    rdfs:label "deletePosition" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deletePosition(Position p)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.insertOrgGroup
+yawl:jdbcImpl_insertOrgGroup_42 a yawl:Method ;
+    rdfs:label "insertOrgGroup" ;
+    yawl:returnType "String" ;
+    yawl:signature "String insertOrgGroup(OrgGroup o)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.updateOrgGroup
+yawl:jdbcImpl_updateOrgGroup_43 a yawl:Method ;
+    rdfs:label "updateOrgGroup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateOrgGroup(OrgGroup o)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.deleteOrgGroup
+yawl:jdbcImpl_deleteOrgGroup_44 a yawl:Method ;
+    rdfs:label "deleteOrgGroup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteOrgGroup(OrgGroup o)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: jdbcImpl.loadResources
+yawl:jdbcImpl_loadResources_45 a yawl:Method ;
+    rdfs:label "loadResources" ;
+    yawl:returnType "ResourceDataSet" ;
+    yawl:signature "ResourceDataSet loadResources()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: jdbcImpl.insert
+yawl:jdbcImpl_insert_46 a yawl:Method ;
+    rdfs:label "insert" ;
+    yawl:returnType "String" ;
+    yawl:signature "String insert(Object obj)" ;
+    rdfs:comment """inserts the object into the database @param obj the object to insert @return a unique primary key identifier generated during the insert""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: jdbcImpl.importObj
+yawl:jdbcImpl_importObj_47 a yawl:Method ;
+    rdfs:label "importObj" ;
+    yawl:returnType "void" ;
+    yawl:signature "void importObj(Object obj)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: jdbcImpl.update
+yawl:jdbcImpl_update_48 a yawl:Method ;
+    rdfs:label "update" ;
+    yawl:returnType "void" ;
+    yawl:signature "void update(Object obj)" ;
+    rdfs:comment """updates an existing object in the database with new values @param obj the object to update""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: jdbcImpl.delete
+yawl:jdbcImpl_delete_49 a yawl:Method ;
+    rdfs:label "delete" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean delete(Object obj)" ;
+    rdfs:comment """deletes the object from the database @param obj the object to delete""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: jdbcImpl.authenticate
+yawl:jdbcImpl_authenticate_50 a yawl:Method ;
+    rdfs:label "authenticate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean authenticate(String userid, String password)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:jdbcImpl_dbDriver a yawl:Field ;
+    rdfs:label "dbDriver" .
+
+yawl:jdbcImpl_dbUrl a yawl:Field ;
+    rdfs:label "dbUrl" .
+
+yawl:jdbcImpl_dbUser a yawl:Field ;
+    rdfs:label "dbUser" .
+
+yawl:jdbcImpl_dbPassword a yawl:Field ;
+    rdfs:label "dbPassword" .
+
+yawl:jdbcImpl_connection a yawl:Field ;
+    rdfs:label "connection" .
+
+yawl:jdbcImpl__log a yawl:Field ;
+    rdfs:label "_log" .
+
+
+

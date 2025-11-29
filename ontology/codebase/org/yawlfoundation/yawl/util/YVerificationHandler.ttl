@@ -1,0 +1,146 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.util.YVerificationHandler
+yawl:YVerificationHandler a yawl:Class ;
+    rdfs:label "YVerificationHandler" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/util/YVerificationHandler.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 6/05/12""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YVerificationHandler_error_1 ;
+    yawl:hasMethod yawl:YVerificationHandler_warn_2 ;
+    yawl:hasMethod yawl:YVerificationHandler_add_3 ;
+    yawl:hasMethod yawl:YVerificationHandler_reset_4 ;
+    yawl:hasMethod yawl:YVerificationHandler_hasErrors_5 ;
+    yawl:hasMethod yawl:YVerificationHandler_hasWarnings_6 ;
+    yawl:hasMethod yawl:YVerificationHandler_hasMessages_7 ;
+    yawl:hasMethod yawl:YVerificationHandler_getErrors_8 ;
+    yawl:hasMethod yawl:YVerificationHandler_getWarnings_9 ;
+    yawl:hasMethod yawl:YVerificationHandler_getMessages_10 ;
+    yawl:hasMethod yawl:YVerificationHandler_getMessageCount_11 ;
+    yawl:hasMethod yawl:YVerificationHandler_getMessagesXML_12 ;
+    yawl:hasMethod yawl:YVerificationHandler_populateNode_13 ;
+    yawl:hasField yawl:YVerificationHandler__errors ;
+    yawl:hasField yawl:YVerificationHandler__warnings ;
+    .
+
+
+# Method: YVerificationHandler.error
+yawl:YVerificationHandler_error_1 a yawl:Method ;
+    rdfs:label "error" ;
+    yawl:returnType "void" ;
+    yawl:signature "void error(Object object, String message)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YVerificationHandler.warn
+yawl:YVerificationHandler_warn_2 a yawl:Method ;
+    rdfs:label "warn" ;
+    yawl:returnType "void" ;
+    yawl:signature "void warn(Object object, String message)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YVerificationHandler.add
+yawl:YVerificationHandler_add_3 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(Object object, String message, MessageType mType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YVerificationHandler.reset
+yawl:YVerificationHandler_reset_4 a yawl:Method ;
+    rdfs:label "reset" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reset()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YVerificationHandler.hasErrors
+yawl:YVerificationHandler_hasErrors_5 a yawl:Method ;
+    rdfs:label "hasErrors" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasErrors()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YVerificationHandler.hasWarnings
+yawl:YVerificationHandler_hasWarnings_6 a yawl:Method ;
+    rdfs:label "hasWarnings" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasWarnings()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YVerificationHandler.hasMessages
+yawl:YVerificationHandler_hasMessages_7 a yawl:Method ;
+    rdfs:label "hasMessages" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasMessages()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YVerificationHandler.getErrors
+yawl:YVerificationHandler_getErrors_8 a yawl:Method ;
+    rdfs:label "getErrors" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getErrors()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YVerificationHandler.getWarnings
+yawl:YVerificationHandler_getWarnings_9 a yawl:Method ;
+    rdfs:label "getWarnings" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getWarnings()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YVerificationHandler.getMessages
+yawl:YVerificationHandler_getMessages_10 a yawl:Method ;
+    rdfs:label "getMessages" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getMessages()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YVerificationHandler.getMessageCount
+yawl:YVerificationHandler_getMessageCount_11 a yawl:Method ;
+    rdfs:label "getMessageCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getMessageCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YVerificationHandler.getMessagesXML
+yawl:YVerificationHandler_getMessagesXML_12 a yawl:Method ;
+    rdfs:label "getMessagesXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMessagesXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YVerificationHandler.populateNode
+yawl:YVerificationHandler_populateNode_13 a yawl:Method ;
+    rdfs:label "populateNode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void populateNode(XNode msgNode, YVerificationMessage message)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YVerificationHandler__errors a yawl:Field ;
+    rdfs:label "_errors" .
+
+yawl:YVerificationHandler__warnings a yawl:Field ;
+    rdfs:label "_warnings" .
+
+
+

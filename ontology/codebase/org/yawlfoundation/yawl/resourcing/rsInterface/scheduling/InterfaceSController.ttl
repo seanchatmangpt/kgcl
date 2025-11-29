@@ -1,0 +1,89 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.resourcing.rsInterface.scheduling
+yawl:org_yawlfoundation_yawl_resourcing_rsInterface_scheduling a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.rsInterface.scheduling" .
+# Class: org.yawlfoundation.yawl.resourcing.rsInterface.scheduling.InterfaceSController
+yawl:InterfaceSController a yawl:Class ;
+    rdfs:label "InterfaceSController" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_rsInterface_scheduling ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/rsInterface/scheduling/InterfaceSController.java"^^xsd:string ;
+    rdfs:comment """InterfaceSController passes scheduling event calls from the resource service to a listening scheduling service. This class is a member class of Interface S. InterfaceB_EnvironmentBasedServer was used as a template for this class. @author Michael Adams @date 15/10/2010""" ;
+    yawl:extends yawl:HttpServlet ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:InterfaceSController_init_1 ;
+    yawl:hasMethod yawl:InterfaceSController_doGet_2 ;
+    yawl:hasMethod yawl:InterfaceSController_doPost_3 ;
+    yawl:hasMethod yawl:InterfaceSController_processPostQuery_4 ;
+    yawl:hasMethod yawl:InterfaceSController_actionToNotifyType_5 ;
+    yawl:hasMethod yawl:InterfaceSController_strToLong_6 ;
+    yawl:hasField yawl:InterfaceSController__controller ;
+    .
+
+
+# Method: InterfaceSController.init
+yawl:InterfaceSController_init_1 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init(ServletConfig servletConfig)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceSController.doGet
+yawl:InterfaceSController_doGet_2 a yawl:Method ;
+    rdfs:label "doGet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doGet(HttpServletRequest request, HttpServletResponse response)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceSController.doPost
+yawl:InterfaceSController_doPost_3 a yawl:Method ;
+    rdfs:label "doPost" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doPost(HttpServletRequest request, HttpServletResponse response)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceSController.processPostQuery
+yawl:InterfaceSController_processPostQuery_4 a yawl:Method ;
+    rdfs:label "processPostQuery" ;
+    yawl:returnType "String" ;
+    yawl:signature "String processPostQuery(HttpServletRequest request)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: InterfaceSController.actionToNotifyType
+yawl:InterfaceSController_actionToNotifyType_5 a yawl:Method ;
+    rdfs:label "actionToNotifyType" ;
+    yawl:returnType "int" ;
+    yawl:signature "int actionToNotifyType(String action)" ;
+    rdfs:comment """@return the 'action' converted to an 'int' notify type, or -1 if invalid""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: InterfaceSController.strToLong
+yawl:InterfaceSController_strToLong_6 a yawl:Method ;
+    rdfs:label "strToLong" ;
+    yawl:returnType "long" ;
+    yawl:signature "long strToLong(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:InterfaceSController__controller a yawl:Field ;
+    rdfs:label "_controller" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_monitor_sort a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.monitor.sort" .
+
+

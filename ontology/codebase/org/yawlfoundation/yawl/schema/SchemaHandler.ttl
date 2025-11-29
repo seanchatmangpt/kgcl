@@ -1,0 +1,202 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.schema
+yawl:org_yawlfoundation_yawl_schema a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.schema" .
+# Class: org.yawlfoundation.yawl.schema.SchemaHandler
+yawl:SchemaHandler a yawl:Class ;
+    rdfs:label "SchemaHandler" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_schema ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/schema/SchemaHandler.java"^^xsd:string ;
+    rdfs:comment """This object acts as a reusable Schema validator for a given schema. Once the schema has been successfully compiled, any number of XML documents can be validated by calling either of the validate methods. @author Mike Fowler Date: 04-Jul-2006""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:SchemaHandler_compileAndValidate_1 ;
+    yawl:hasMethod yawl:SchemaHandler_compileSchema_2 ;
+    yawl:hasMethod yawl:SchemaHandler_validate_3 ;
+    yawl:hasMethod yawl:SchemaHandler_getErrorMessages_4 ;
+    yawl:hasMethod yawl:SchemaHandler_getWarningMessages_5 ;
+    yawl:hasMethod yawl:SchemaHandler_getMessages_6 ;
+    yawl:hasMethod yawl:SchemaHandler_getConcatenatedMessage_7 ;
+    yawl:hasMethod yawl:SchemaHandler_getSchema_8 ;
+    yawl:hasMethod yawl:SchemaHandler_setSchema_9 ;
+    yawl:hasMethod yawl:SchemaHandler_getPrimaryTypeNames_10 ;
+    yawl:hasMethod yawl:SchemaHandler_getDataTypeDefinition_11 ;
+    yawl:hasMethod yawl:SchemaHandler_getTypeMap_12 ;
+    yawl:hasMethod yawl:SchemaHandler_stringToSource_13 ;
+    yawl:hasMethod yawl:SchemaHandler_streamToString_14 ;
+    yawl:hasMethod yawl:SchemaHandler_assembleMap_15 ;
+    yawl:hasField yawl:SchemaHandler_schemaSource ;
+    yawl:hasField yawl:SchemaHandler_schema ;
+    yawl:hasField yawl:SchemaHandler_schemaString ;
+    yawl:hasField yawl:SchemaHandler_typeMap ;
+    yawl:hasField yawl:SchemaHandler_errorHandler ;
+    yawl:hasField yawl:SchemaHandler_exceptionMessage ;
+    yawl:hasField yawl:SchemaHandler_compiled ;
+    .
+
+
+# Method: SchemaHandler.compileAndValidate
+yawl:SchemaHandler_compileAndValidate_1 a yawl:Method ;
+    rdfs:label "compileAndValidate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean compileAndValidate(String xml)" ;
+    rdfs:comment """Compiles the schema, and if successful validates an XML String against it @param xml the XML String to validate against Schema @return true if the Schema compiles without error AND the XML is a valid instance of the Schema""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchemaHandler.compileSchema
+yawl:SchemaHandler_compileSchema_2 a yawl:Method ;
+    rdfs:label "compileSchema" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean compileSchema()" ;
+    rdfs:comment """Attempts to compile the schema. If successful, allows an XML document to be validated. @return true if the schema has compiled successfully.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchemaHandler.validate
+yawl:SchemaHandler_validate_3 a yawl:Method ;
+    rdfs:label "validate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validate(String xml)" ;
+    rdfs:comment """Validates the given XML document against the compiled schema. @param xml instance document to be validated. @return true if the xml is a valid instance of the schema @throws IllegalStateException if schema has not been compiled successfully""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchemaHandler.getErrorMessages
+yawl:SchemaHandler_getErrorMessages_4 a yawl:Method ;
+    rdfs:label "getErrorMessages" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getErrorMessages()" ;
+    rdfs:comment """@return all error messages from the last validation/compilation""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchemaHandler.getWarningMessages
+yawl:SchemaHandler_getWarningMessages_5 a yawl:Method ;
+    rdfs:label "getWarningMessages" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getWarningMessages()" ;
+    rdfs:comment """@return all warning messages from the last validation/compilation""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchemaHandler.getMessages
+yawl:SchemaHandler_getMessages_6 a yawl:Method ;
+    rdfs:label "getMessages" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getMessages()" ;
+    rdfs:comment """@return all messages from the last validation/compilation""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchemaHandler.getConcatenatedMessage
+yawl:SchemaHandler_getConcatenatedMessage_7 a yawl:Method ;
+    rdfs:label "getConcatenatedMessage" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getConcatenatedMessage()" ;
+    rdfs:comment """@return all messages since the last validation/compilation""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchemaHandler.getSchema
+yawl:SchemaHandler_getSchema_8 a yawl:Method ;
+    rdfs:label "getSchema" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSchema()" ;
+    rdfs:comment """@return String representation of the schema""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchemaHandler.setSchema
+yawl:SchemaHandler_setSchema_9 a yawl:Method ;
+    rdfs:label "setSchema" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSchema(String schema)" ;
+    rdfs:comment """@param schema new schema to use (resets everything)""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchemaHandler.getPrimaryTypeNames
+yawl:SchemaHandler_getPrimaryTypeNames_10 a yawl:Method ;
+    rdfs:label "getPrimaryTypeNames" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getPrimaryTypeNames()" ;
+    rdfs:comment """@return the set of (first-level) type names defined in this schema""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchemaHandler.getDataTypeDefinition
+yawl:SchemaHandler_getDataTypeDefinition_11 a yawl:Method ;
+    rdfs:label "getDataTypeDefinition" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getDataTypeDefinition(String typeName)" ;
+    rdfs:comment """Gets the schema element definition of a data type by name @param typeName the data type name @return the corresponding definition, or null if the type name is unknown""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchemaHandler.getTypeMap
+yawl:SchemaHandler_getTypeMap_12 a yawl:Method ;
+    rdfs:label "getTypeMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getTypeMap()" ;
+    rdfs:comment """Gets the map of data type names to their definitions @return the map of names to definitions""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchemaHandler.stringToSource
+yawl:SchemaHandler_stringToSource_13 a yawl:Method ;
+    rdfs:label "stringToSource" ;
+    yawl:returnType "Source" ;
+    yawl:signature "Source stringToSource(String xml)" ;
+    rdfs:comment """Converts a string to a UTF-8 encoded InputSource @param xml the XML string @return a Source object to the String @throws UnsupportedEncodingException""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SchemaHandler.streamToString
+yawl:SchemaHandler_streamToString_14 a yawl:Method ;
+    rdfs:label "streamToString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String streamToString(URL url)" ;
+    rdfs:comment """Reads the contents at a URL into a String @param url the URL resource @return a String containing the resource at the URL""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SchemaHandler.assembleMap
+yawl:SchemaHandler_assembleMap_15 a yawl:Method ;
+    rdfs:label "assembleMap" ;
+    yawl:returnType "void" ;
+    yawl:signature "void assembleMap()" ;
+    rdfs:comment """Creates a map of type names to their elements.""" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:SchemaHandler_schemaSource a yawl:Field ;
+    rdfs:label "schemaSource" .
+
+yawl:SchemaHandler_schema a yawl:Field ;
+    rdfs:label "schema" .
+
+yawl:SchemaHandler_schemaString a yawl:Field ;
+    rdfs:label "schemaString" .
+
+yawl:SchemaHandler_typeMap a yawl:Field ;
+    rdfs:label "typeMap" .
+
+yawl:SchemaHandler_errorHandler a yawl:Field ;
+    rdfs:label "errorHandler" .
+
+yawl:SchemaHandler_exceptionMessage a yawl:Field ;
+    rdfs:label "exceptionMessage" .
+
+yawl:SchemaHandler_compiled a yawl:Field ;
+    rdfs:label "compiled" .
+
+
+

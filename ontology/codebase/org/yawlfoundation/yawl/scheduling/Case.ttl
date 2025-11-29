@@ -1,0 +1,298 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.scheduling
+yawl:org_yawlfoundation_yawl_scheduling a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.scheduling" .
+# Class: org.yawlfoundation.yawl.scheduling.Case
+yawl:Case a yawl:Class ;
+    rdfs:label "Case" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_scheduling ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/scheduling/Case.java"^^xsd:string ;
+    rdfs:comment """Represents a YAWL case @author sga, jku""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Case_getId_1 ;
+    yawl:hasMethod yawl:Case_setId_2 ;
+    yawl:hasMethod yawl:Case_getCaseId_3 ;
+    yawl:hasMethod yawl:Case_setCaseId_4 ;
+    yawl:hasMethod yawl:Case_getCaseName_5 ;
+    yawl:hasMethod yawl:Case_setCaseName_6 ;
+    yawl:hasMethod yawl:Case_getCaseDescription_7 ;
+    yawl:hasMethod yawl:Case_getDescription_8 ;
+    yawl:hasMethod yawl:Case_setDescription_9 ;
+    yawl:hasMethod yawl:Case_getRUP_10 ;
+    yawl:hasMethod yawl:Case_setRUP_11 ;
+    yawl:hasMethod yawl:Case_getSavedBy_12 ;
+    yawl:hasMethod yawl:Case_setSavedBy_13 ;
+    yawl:hasMethod yawl:Case_isActive_14 ;
+    yawl:hasMethod yawl:Case_setActive_15 ;
+    yawl:hasMethod yawl:Case_getTimestamp_16 ;
+    yawl:hasMethod yawl:Case_setTimestamp_17 ;
+    yawl:hasMethod yawl:Case_getRupAsString_18 ;
+    yawl:hasMethod yawl:Case_setRupAsString_19 ;
+    yawl:hasMethod yawl:Case_getData_20 ;
+    yawl:hasMethod yawl:Case_readCaseData_21 ;
+    yawl:hasMethod yawl:Case_readCaseData_22 ;
+    yawl:hasMethod yawl:Case_getParentNetId_23 ;
+    yawl:hasMethod yawl:Case_getText_24 ;
+    yawl:hasMethod yawl:Case_getText_25 ;
+    yawl:hasField yawl:Case__log ;
+    yawl:hasField yawl:Case_id ;
+    yawl:hasField yawl:Case_caseId ;
+    yawl:hasField yawl:Case_data ;
+    yawl:hasField yawl:Case_rup ;
+    yawl:hasField yawl:Case_caseName ;
+    yawl:hasField yawl:Case_description ;
+    yawl:hasField yawl:Case_timestamp ;
+    yawl:hasField yawl:Case_savedBy ;
+    yawl:hasField yawl:Case_rupAsString ;
+    yawl:hasField yawl:Case_active ;
+    .
+
+
+# Method: Case.getId
+yawl:Case_getId_1 a yawl:Method ;
+    rdfs:label "getId" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getId()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Case.setId
+yawl:Case_setId_2 a yawl:Method ;
+    rdfs:label "setId" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setId(long id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Case.getCaseId
+yawl:Case_getCaseId_3 a yawl:Method ;
+    rdfs:label "getCaseId" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseId()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Case.setCaseId
+yawl:Case_setCaseId_4 a yawl:Method ;
+    rdfs:label "setCaseId" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCaseId(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Case.getCaseName
+yawl:Case_getCaseName_5 a yawl:Method ;
+    rdfs:label "getCaseName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Case.setCaseName
+yawl:Case_setCaseName_6 a yawl:Method ;
+    rdfs:label "setCaseName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCaseName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Case.getCaseDescription
+yawl:Case_getCaseDescription_7 a yawl:Method ;
+    rdfs:label "getCaseDescription" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseDescription()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Case.getDescription
+yawl:Case_getDescription_8 a yawl:Method ;
+    rdfs:label "getDescription" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDescription()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Case.setDescription
+yawl:Case_setDescription_9 a yawl:Method ;
+    rdfs:label "setDescription" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDescription(String desc)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Case.getRUP
+yawl:Case_getRUP_10 a yawl:Method ;
+    rdfs:label "getRUP" ;
+    yawl:returnType "Document" ;
+    yawl:signature "Document getRUP()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Case.setRUP
+yawl:Case_setRUP_11 a yawl:Method ;
+    rdfs:label "setRUP" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRUP(Document doc)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Case.getSavedBy
+yawl:Case_getSavedBy_12 a yawl:Method ;
+    rdfs:label "getSavedBy" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSavedBy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Case.setSavedBy
+yawl:Case_setSavedBy_13 a yawl:Method ;
+    rdfs:label "setSavedBy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSavedBy(String saver)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Case.isActive
+yawl:Case_isActive_14 a yawl:Method ;
+    rdfs:label "isActive" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isActive()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Case.setActive
+yawl:Case_setActive_15 a yawl:Method ;
+    rdfs:label "setActive" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setActive(boolean active)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Case.getTimestamp
+yawl:Case_getTimestamp_16 a yawl:Method ;
+    rdfs:label "getTimestamp" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getTimestamp()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Case.setTimestamp
+yawl:Case_setTimestamp_17 a yawl:Method ;
+    rdfs:label "setTimestamp" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTimestamp(long time)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Case.getRupAsString
+yawl:Case_getRupAsString_18 a yawl:Method ;
+    rdfs:label "getRupAsString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRupAsString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Case.setRupAsString
+yawl:Case_setRupAsString_19 a yawl:Method ;
+    rdfs:label "setRupAsString" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRupAsString(String ras)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Case.getData
+yawl:Case_getData_20 a yawl:Method ;
+    rdfs:label "getData" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getData()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Case.readCaseData
+yawl:Case_readCaseData_21 a yawl:Method ;
+    rdfs:label "readCaseData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void readCaseData()" ;
+    rdfs:comment """Reads case data recursively <p> The problem with case data is the hierarchical order of nets, which leads to multiple sets of variables. For example, if we want to find a patient caseName, we should look for it in the lowest net, since these are the newest ones. If we cannot find a caseName, we can go ahead and look for it in the net above and so on.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Case.readCaseData
+yawl:Case_readCaseData_22 a yawl:Method ;
+    rdfs:label "readCaseData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String readCaseData(String caseId)" ;
+    rdfs:comment """Read case data from the YAWL work queue @see Case#readCaseData() @param caseId the case to get the data for @return the net-level data for the case id @throws IOException if the case data can't be retrieved from the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Case.getParentNetId
+yawl:Case_getParentNetId_23 a yawl:Method ;
+    rdfs:label "getParentNetId" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParentNetId(String id)" ;
+    rdfs:comment """Returns ID of parent net <p> If the Id passed as the argument is a root ID, it will be returned unchanged. @param id the id of a child net @return the id of its parent""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Case.getText
+yawl:Case_getText_24 a yawl:Method ;
+    rdfs:label "getText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getText(int depth, String xPath)" ;
+    rdfs:comment """Gets the value for an XPath expression for an Element at a specified depth in the case's data @param depth the depth of the Element to use from the case data @param xPath the XPath expression @return the result of the XPath evaluation, or null if the depth exceeds the depth of the case data's Elements, or if the XPath expression evaluates to null, or if the Element result of the XPath expression contains no text""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Case.getText
+yawl:Case_getText_25 a yawl:Method ;
+    rdfs:label "getText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getText(String xPath)" ;
+    rdfs:comment """Traverses case data attempting to find an element that returns a non-null result for an XPath expression @param xPath the expression to evaluate @return the text matching the XPath evaluation, or null if no match is found""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:Case__log a yawl:Field ;
+    rdfs:label "_log" .
+
+yawl:Case_id a yawl:Field ;
+    rdfs:label "id" .
+
+yawl:Case_caseId a yawl:Field ;
+    rdfs:label "caseId" .
+
+yawl:Case_data a yawl:Field ;
+    rdfs:label "data" .
+
+yawl:Case_rup a yawl:Field ;
+    rdfs:label "rup" .
+
+yawl:Case_caseName a yawl:Field ;
+    rdfs:label "caseName" .
+
+yawl:Case_description a yawl:Field ;
+    rdfs:label "description" .
+
+yawl:Case_timestamp a yawl:Field ;
+    rdfs:label "timestamp" .
+
+yawl:Case_savedBy a yawl:Field ;
+    rdfs:label "savedBy" .
+
+yawl:Case_rupAsString a yawl:Field ;
+    rdfs:label "rupAsString" .
+
+yawl:Case_active a yawl:Field ;
+    rdfs:label "active" .
+
+
+

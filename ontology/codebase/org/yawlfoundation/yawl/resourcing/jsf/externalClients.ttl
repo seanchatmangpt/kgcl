@@ -1,0 +1,993 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.externalClients
+yawl:externalClients a yawl:Class ;
+    rdfs:label "externalClients" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/externalClients.java"^^xsd:string ;
+    rdfs:comment """Backing bean for the external client mgt  page. @author Michael Adams Date: 03/12/2009""" ;
+    yawl:extends yawl:AbstractPageBean ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:externalClients__init_1 ;
+    yawl:hasMethod yawl:externalClients_init_2 ;
+    yawl:hasMethod yawl:externalClients_preprocess_3 ;
+    yawl:hasMethod yawl:externalClients_destroy_4 ;
+    yawl:hasMethod yawl:externalClients_getApplicationBean_5 ;
+    yawl:hasMethod yawl:externalClients_getSessionBean_6 ;
+    yawl:hasMethod yawl:externalClients_getRequestBean_7 ;
+    yawl:hasMethod yawl:externalClients_getPage1_8 ;
+    yawl:hasMethod yawl:externalClients_setPage1_9 ;
+    yawl:hasMethod yawl:externalClients_getHtml1_10 ;
+    yawl:hasMethod yawl:externalClients_setHtml1_11 ;
+    yawl:hasMethod yawl:externalClients_getHead1_12 ;
+    yawl:hasMethod yawl:externalClients_setHead1_13 ;
+    yawl:hasMethod yawl:externalClients_getLink1_14 ;
+    yawl:hasMethod yawl:externalClients_setLink1_15 ;
+    yawl:hasMethod yawl:externalClients_getBody1_16 ;
+    yawl:hasMethod yawl:externalClients_setBody1_17 ;
+    yawl:hasMethod yawl:externalClients_getForm1_18 ;
+    yawl:hasMethod yawl:externalClients_setForm1_19 ;
+    yawl:hasMethod yawl:externalClients_getPnlAddService_20 ;
+    yawl:hasMethod yawl:externalClients_setPnlAddService_21 ;
+    yawl:hasMethod yawl:externalClients_getStaticText1_22 ;
+    yawl:hasMethod yawl:externalClients_setStaticText1_23 ;
+    yawl:hasMethod yawl:externalClients_getLblName_24 ;
+    yawl:hasMethod yawl:externalClients_setLblName_25 ;
+    yawl:hasMethod yawl:externalClients_getLblPassword_26 ;
+    yawl:hasMethod yawl:externalClients_setLblPassword_27 ;
+    yawl:hasMethod yawl:externalClients_getLblConfirmPassword_28 ;
+    yawl:hasMethod yawl:externalClients_setLblConfirmPassword_29 ;
+    yawl:hasMethod yawl:externalClients_getLblDesc_30 ;
+    yawl:hasMethod yawl:externalClients_setLblDesc_31 ;
+    yawl:hasMethod yawl:externalClients_getTxtName_32 ;
+    yawl:hasMethod yawl:externalClients_setTxtName_33 ;
+    yawl:hasMethod yawl:externalClients_getTxtPassword_34 ;
+    yawl:hasMethod yawl:externalClients_setTxtPassword_35 ;
+    yawl:hasMethod yawl:externalClients_getTxtConfirmPassword_36 ;
+    yawl:hasMethod yawl:externalClients_setTxtConfirmPassword_37 ;
+    yawl:hasMethod yawl:externalClients_getTxtDescription_38 ;
+    yawl:hasMethod yawl:externalClients_setTxtDescription_39 ;
+    yawl:hasMethod yawl:externalClients_getPnlServices_40 ;
+    yawl:hasMethod yawl:externalClients_setPnlServices_41 ;
+    yawl:hasMethod yawl:externalClients_getStaticText2_42 ;
+    yawl:hasMethod yawl:externalClients_setStaticText2_43 ;
+    yawl:hasMethod yawl:externalClients_getDataTable1_44 ;
+    yawl:hasMethod yawl:externalClients_setDataTable1_45 ;
+    yawl:hasMethod yawl:externalClients_getColName_46 ;
+    yawl:hasMethod yawl:externalClients_setColName_47 ;
+    yawl:hasMethod yawl:externalClients_getColNameRows_48 ;
+    yawl:hasMethod yawl:externalClients_setColNameRows_49 ;
+    yawl:hasMethod yawl:externalClients_getColNameHeader_50 ;
+    yawl:hasMethod yawl:externalClients_setColNameHeader_51 ;
+    yawl:hasMethod yawl:externalClients_getColDescription_52 ;
+    yawl:hasMethod yawl:externalClients_setColDescription_53 ;
+    yawl:hasMethod yawl:externalClients_getColDescriptionRows_54 ;
+    yawl:hasMethod yawl:externalClients_setColDescriptionRows_55 ;
+    yawl:hasMethod yawl:externalClients_getColDescriptionHeader_56 ;
+    yawl:hasMethod yawl:externalClients_setColDescriptionHeader_57 ;
+    yawl:hasMethod yawl:externalClients_getColSBar_58 ;
+    yawl:hasMethod yawl:externalClients_setColSBar_59 ;
+    yawl:hasMethod yawl:externalClients_getBtnRemove_60 ;
+    yawl:hasMethod yawl:externalClients_setBtnRemove_61 ;
+    yawl:hasMethod yawl:externalClients_getBtnEdit_62 ;
+    yawl:hasMethod yawl:externalClients_setBtnEdit_63 ;
+    yawl:hasMethod yawl:externalClients_getBtnAdd_64 ;
+    yawl:hasMethod yawl:externalClients_setBtnAdd_65 ;
+    yawl:hasMethod yawl:externalClients_getBtnClear_66 ;
+    yawl:hasMethod yawl:externalClients_setBtnClear_67 ;
+    yawl:hasMethod yawl:externalClients_getHdnRowIndex_68 ;
+    yawl:hasMethod yawl:externalClients_setHdnRowIndex_69 ;
+    yawl:hasMethod yawl:externalClients_getClientList_70 ;
+    yawl:hasMethod yawl:externalClients_setClientList_71 ;
+    yawl:hasMethod yawl:externalClients_getPnlContainer_72 ;
+    yawl:hasMethod yawl:externalClients_setPnlContainer_73 ;
+    yawl:hasMethod yawl:externalClients_getPnlGroup_74 ;
+    yawl:hasMethod yawl:externalClients_setPnlGroup_75 ;
+    yawl:hasMethod yawl:externalClients_getAddPanelHeading_76 ;
+    yawl:hasMethod yawl:externalClients_setAddPanelHeading_77 ;
+    yawl:hasMethod yawl:externalClients_getBtnAddText_78 ;
+    yawl:hasMethod yawl:externalClients_setBtnAddText_79 ;
+    yawl:hasMethod yawl:externalClients_prerender_80 ;
+    yawl:hasMethod yawl:externalClients_btnRemove_action_81 ;
+    yawl:hasMethod yawl:externalClients_btnAdd_action_82 ;
+    yawl:hasMethod yawl:externalClients_btnEdit_action_83 ;
+    yawl:hasMethod yawl:externalClients_isNullOrEmpty_84 ;
+    yawl:hasMethod yawl:externalClients_btnClear_action_85 ;
+    yawl:hasMethod yawl:externalClients_clearInputs_86 ;
+    yawl:hasMethod yawl:externalClients_getMode_87 ;
+    yawl:hasMethod yawl:externalClients_setMode_88 ;
+    yawl:hasMethod yawl:externalClients_inputsValid_89 ;
+    yawl:hasMethod yawl:externalClients_showMessagePanel_90 ;
+    yawl:hasField yawl:externalClients___placeholder ;
+    yawl:hasField yawl:externalClients_page1 ;
+    yawl:hasField yawl:externalClients_html1 ;
+    yawl:hasField yawl:externalClients_head1 ;
+    yawl:hasField yawl:externalClients_link1 ;
+    yawl:hasField yawl:externalClients_body1 ;
+    yawl:hasField yawl:externalClients_form1 ;
+    yawl:hasField yawl:externalClients_pnlAddService ;
+    yawl:hasField yawl:externalClients_staticText1 ;
+    yawl:hasField yawl:externalClients_lblName ;
+    yawl:hasField yawl:externalClients_lblPassword ;
+    yawl:hasField yawl:externalClients_lblConfirmPassword ;
+    yawl:hasField yawl:externalClients_lblDesc ;
+    yawl:hasField yawl:externalClients_txtName ;
+    yawl:hasField yawl:externalClients_txtPassword ;
+    yawl:hasField yawl:externalClients_txtConfirmPassword ;
+    yawl:hasField yawl:externalClients_txtDescription ;
+    yawl:hasField yawl:externalClients_pnlServices ;
+    yawl:hasField yawl:externalClients_staticText2 ;
+    yawl:hasField yawl:externalClients_dataTable1 ;
+    yawl:hasField yawl:externalClients_colName ;
+    yawl:hasField yawl:externalClients_colNameRows ;
+    yawl:hasField yawl:externalClients_colNameHeader ;
+    yawl:hasField yawl:externalClients_colDescription ;
+    yawl:hasField yawl:externalClients_colDescriptionRows ;
+    yawl:hasField yawl:externalClients_colDescriptionHeader ;
+    yawl:hasField yawl:externalClients_colSBar ;
+    yawl:hasField yawl:externalClients_btnRemove ;
+    yawl:hasField yawl:externalClients_btnEdit ;
+    yawl:hasField yawl:externalClients_btnAdd ;
+    yawl:hasField yawl:externalClients_btnClear ;
+    yawl:hasField yawl:externalClients_hdnRowIndex ;
+    yawl:hasField yawl:externalClients_clientList ;
+    yawl:hasField yawl:externalClients_pnlContainer ;
+    yawl:hasField yawl:externalClients_pnlGroup ;
+    yawl:hasField yawl:externalClients_addPanelHeading ;
+    yawl:hasField yawl:externalClients_btnAddText ;
+    yawl:hasField yawl:externalClients__appbean ;
+    yawl:hasField yawl:externalClients__sb ;
+    yawl:hasField yawl:externalClients_msgPanel ;
+    .
+
+
+# Method: externalClients._init
+yawl:externalClients__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: externalClients.init
+yawl:externalClients_init_2 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.preprocess
+yawl:externalClients_preprocess_3 a yawl:Method ;
+    rdfs:label "preprocess" ;
+    yawl:returnType "void" ;
+    yawl:signature "void preprocess()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.destroy
+yawl:externalClients_destroy_4 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getApplicationBean
+yawl:externalClients_getApplicationBean_5 a yawl:Method ;
+    rdfs:label "getApplicationBean" ;
+    yawl:returnType "ApplicationBean" ;
+    yawl:signature "ApplicationBean getApplicationBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: externalClients.getSessionBean
+yawl:externalClients_getSessionBean_6 a yawl:Method ;
+    rdfs:label "getSessionBean" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getSessionBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: externalClients.getRequestBean
+yawl:externalClients_getRequestBean_7 a yawl:Method ;
+    rdfs:label "getRequestBean" ;
+    yawl:returnType "RequestBean" ;
+    yawl:signature "RequestBean getRequestBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: externalClients.getPage1
+yawl:externalClients_getPage1_8 a yawl:Method ;
+    rdfs:label "getPage1" ;
+    yawl:returnType "Page" ;
+    yawl:signature "Page getPage1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setPage1
+yawl:externalClients_setPage1_9 a yawl:Method ;
+    rdfs:label "setPage1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPage1(Page p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getHtml1
+yawl:externalClients_getHtml1_10 a yawl:Method ;
+    rdfs:label "getHtml1" ;
+    yawl:returnType "Html" ;
+    yawl:signature "Html getHtml1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setHtml1
+yawl:externalClients_setHtml1_11 a yawl:Method ;
+    rdfs:label "setHtml1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHtml1(Html h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getHead1
+yawl:externalClients_getHead1_12 a yawl:Method ;
+    rdfs:label "getHead1" ;
+    yawl:returnType "Head" ;
+    yawl:signature "Head getHead1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setHead1
+yawl:externalClients_setHead1_13 a yawl:Method ;
+    rdfs:label "setHead1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHead1(Head h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getLink1
+yawl:externalClients_getLink1_14 a yawl:Method ;
+    rdfs:label "getLink1" ;
+    yawl:returnType "Link" ;
+    yawl:signature "Link getLink1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setLink1
+yawl:externalClients_setLink1_15 a yawl:Method ;
+    rdfs:label "setLink1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLink1(Link l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getBody1
+yawl:externalClients_getBody1_16 a yawl:Method ;
+    rdfs:label "getBody1" ;
+    yawl:returnType "Body" ;
+    yawl:signature "Body getBody1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setBody1
+yawl:externalClients_setBody1_17 a yawl:Method ;
+    rdfs:label "setBody1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBody1(Body b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getForm1
+yawl:externalClients_getForm1_18 a yawl:Method ;
+    rdfs:label "getForm1" ;
+    yawl:returnType "Form" ;
+    yawl:signature "Form getForm1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setForm1
+yawl:externalClients_setForm1_19 a yawl:Method ;
+    rdfs:label "setForm1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setForm1(Form f)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getPnlAddService
+yawl:externalClients_getPnlAddService_20 a yawl:Method ;
+    rdfs:label "getPnlAddService" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlAddService()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setPnlAddService
+yawl:externalClients_setPnlAddService_21 a yawl:Method ;
+    rdfs:label "setPnlAddService" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlAddService(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getStaticText1
+yawl:externalClients_getStaticText1_22 a yawl:Method ;
+    rdfs:label "getStaticText1" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getStaticText1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setStaticText1
+yawl:externalClients_setStaticText1_23 a yawl:Method ;
+    rdfs:label "setStaticText1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStaticText1(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getLblName
+yawl:externalClients_getLblName_24 a yawl:Method ;
+    rdfs:label "getLblName" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setLblName
+yawl:externalClients_setLblName_25 a yawl:Method ;
+    rdfs:label "setLblName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblName(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getLblPassword
+yawl:externalClients_getLblPassword_26 a yawl:Method ;
+    rdfs:label "getLblPassword" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblPassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setLblPassword
+yawl:externalClients_setLblPassword_27 a yawl:Method ;
+    rdfs:label "setLblPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblPassword(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getLblConfirmPassword
+yawl:externalClients_getLblConfirmPassword_28 a yawl:Method ;
+    rdfs:label "getLblConfirmPassword" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblConfirmPassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setLblConfirmPassword
+yawl:externalClients_setLblConfirmPassword_29 a yawl:Method ;
+    rdfs:label "setLblConfirmPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblConfirmPassword(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getLblDesc
+yawl:externalClients_getLblDesc_30 a yawl:Method ;
+    rdfs:label "getLblDesc" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblDesc()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setLblDesc
+yawl:externalClients_setLblDesc_31 a yawl:Method ;
+    rdfs:label "setLblDesc" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblDesc(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getTxtName
+yawl:externalClients_getTxtName_32 a yawl:Method ;
+    rdfs:label "getTxtName" ;
+    yawl:returnType "TextField" ;
+    yawl:signature "TextField getTxtName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setTxtName
+yawl:externalClients_setTxtName_33 a yawl:Method ;
+    rdfs:label "setTxtName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtName(TextField tf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getTxtPassword
+yawl:externalClients_getTxtPassword_34 a yawl:Method ;
+    rdfs:label "getTxtPassword" ;
+    yawl:returnType "PasswordField" ;
+    yawl:signature "PasswordField getTxtPassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setTxtPassword
+yawl:externalClients_setTxtPassword_35 a yawl:Method ;
+    rdfs:label "setTxtPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtPassword(PasswordField pw)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getTxtConfirmPassword
+yawl:externalClients_getTxtConfirmPassword_36 a yawl:Method ;
+    rdfs:label "getTxtConfirmPassword" ;
+    yawl:returnType "PasswordField" ;
+    yawl:signature "PasswordField getTxtConfirmPassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setTxtConfirmPassword
+yawl:externalClients_setTxtConfirmPassword_37 a yawl:Method ;
+    rdfs:label "setTxtConfirmPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtConfirmPassword(PasswordField pw)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getTxtDescription
+yawl:externalClients_getTxtDescription_38 a yawl:Method ;
+    rdfs:label "getTxtDescription" ;
+    yawl:returnType "TextArea" ;
+    yawl:signature "TextArea getTxtDescription()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setTxtDescription
+yawl:externalClients_setTxtDescription_39 a yawl:Method ;
+    rdfs:label "setTxtDescription" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtDescription(TextArea ta)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getPnlServices
+yawl:externalClients_getPnlServices_40 a yawl:Method ;
+    rdfs:label "getPnlServices" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlServices()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setPnlServices
+yawl:externalClients_setPnlServices_41 a yawl:Method ;
+    rdfs:label "setPnlServices" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlServices(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getStaticText2
+yawl:externalClients_getStaticText2_42 a yawl:Method ;
+    rdfs:label "getStaticText2" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getStaticText2()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setStaticText2
+yawl:externalClients_setStaticText2_43 a yawl:Method ;
+    rdfs:label "setStaticText2" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStaticText2(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getDataTable1
+yawl:externalClients_getDataTable1_44 a yawl:Method ;
+    rdfs:label "getDataTable1" ;
+    yawl:returnType "HtmlDataTable" ;
+    yawl:signature "HtmlDataTable getDataTable1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setDataTable1
+yawl:externalClients_setDataTable1_45 a yawl:Method ;
+    rdfs:label "setDataTable1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataTable1(HtmlDataTable hdt)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getColName
+yawl:externalClients_getColName_46 a yawl:Method ;
+    rdfs:label "getColName" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setColName
+yawl:externalClients_setColName_47 a yawl:Method ;
+    rdfs:label "setColName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColName(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getColNameRows
+yawl:externalClients_getColNameRows_48 a yawl:Method ;
+    rdfs:label "getColNameRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColNameRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setColNameRows
+yawl:externalClients_setColNameRows_49 a yawl:Method ;
+    rdfs:label "setColNameRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColNameRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getColNameHeader
+yawl:externalClients_getColNameHeader_50 a yawl:Method ;
+    rdfs:label "getColNameHeader" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColNameHeader()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setColNameHeader
+yawl:externalClients_setColNameHeader_51 a yawl:Method ;
+    rdfs:label "setColNameHeader" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColNameHeader(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getColDescription
+yawl:externalClients_getColDescription_52 a yawl:Method ;
+    rdfs:label "getColDescription" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColDescription()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setColDescription
+yawl:externalClients_setColDescription_53 a yawl:Method ;
+    rdfs:label "setColDescription" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColDescription(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getColDescriptionRows
+yawl:externalClients_getColDescriptionRows_54 a yawl:Method ;
+    rdfs:label "getColDescriptionRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColDescriptionRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setColDescriptionRows
+yawl:externalClients_setColDescriptionRows_55 a yawl:Method ;
+    rdfs:label "setColDescriptionRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColDescriptionRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getColDescriptionHeader
+yawl:externalClients_getColDescriptionHeader_56 a yawl:Method ;
+    rdfs:label "getColDescriptionHeader" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColDescriptionHeader()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setColDescriptionHeader
+yawl:externalClients_setColDescriptionHeader_57 a yawl:Method ;
+    rdfs:label "setColDescriptionHeader" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColDescriptionHeader(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getColSBar
+yawl:externalClients_getColSBar_58 a yawl:Method ;
+    rdfs:label "getColSBar" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColSBar()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setColSBar
+yawl:externalClients_setColSBar_59 a yawl:Method ;
+    rdfs:label "setColSBar" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColSBar(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getBtnRemove
+yawl:externalClients_getBtnRemove_60 a yawl:Method ;
+    rdfs:label "getBtnRemove" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnRemove()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setBtnRemove
+yawl:externalClients_setBtnRemove_61 a yawl:Method ;
+    rdfs:label "setBtnRemove" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnRemove(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getBtnEdit
+yawl:externalClients_getBtnEdit_62 a yawl:Method ;
+    rdfs:label "getBtnEdit" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnEdit()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setBtnEdit
+yawl:externalClients_setBtnEdit_63 a yawl:Method ;
+    rdfs:label "setBtnEdit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnEdit(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getBtnAdd
+yawl:externalClients_getBtnAdd_64 a yawl:Method ;
+    rdfs:label "getBtnAdd" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnAdd()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setBtnAdd
+yawl:externalClients_setBtnAdd_65 a yawl:Method ;
+    rdfs:label "setBtnAdd" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnAdd(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getBtnClear
+yawl:externalClients_getBtnClear_66 a yawl:Method ;
+    rdfs:label "getBtnClear" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnClear()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setBtnClear
+yawl:externalClients_setBtnClear_67 a yawl:Method ;
+    rdfs:label "setBtnClear" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnClear(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getHdnRowIndex
+yawl:externalClients_getHdnRowIndex_68 a yawl:Method ;
+    rdfs:label "getHdnRowIndex" ;
+    yawl:returnType "HiddenField" ;
+    yawl:signature "HiddenField getHdnRowIndex()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setHdnRowIndex
+yawl:externalClients_setHdnRowIndex_69 a yawl:Method ;
+    rdfs:label "setHdnRowIndex" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHdnRowIndex(HiddenField hf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getClientList
+yawl:externalClients_getClientList_70 a yawl:Method ;
+    rdfs:label "getClientList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getClientList()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setClientList
+yawl:externalClients_setClientList_71 a yawl:Method ;
+    rdfs:label "setClientList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setClientList(List d)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getPnlContainer
+yawl:externalClients_getPnlContainer_72 a yawl:Method ;
+    rdfs:label "getPnlContainer" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlContainer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setPnlContainer
+yawl:externalClients_setPnlContainer_73 a yawl:Method ;
+    rdfs:label "setPnlContainer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlContainer(PanelLayout pnl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getPnlGroup
+yawl:externalClients_getPnlGroup_74 a yawl:Method ;
+    rdfs:label "getPnlGroup" ;
+    yawl:returnType "PanelGroup" ;
+    yawl:signature "PanelGroup getPnlGroup()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setPnlGroup
+yawl:externalClients_setPnlGroup_75 a yawl:Method ;
+    rdfs:label "setPnlGroup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlGroup(PanelGroup group)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getAddPanelHeading
+yawl:externalClients_getAddPanelHeading_76 a yawl:Method ;
+    rdfs:label "getAddPanelHeading" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAddPanelHeading()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setAddPanelHeading
+yawl:externalClients_setAddPanelHeading_77 a yawl:Method ;
+    rdfs:label "setAddPanelHeading" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAddPanelHeading(String heading)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.getBtnAddText
+yawl:externalClients_getBtnAddText_78 a yawl:Method ;
+    rdfs:label "getBtnAddText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBtnAddText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.setBtnAddText
+yawl:externalClients_setBtnAddText_79 a yawl:Method ;
+    rdfs:label "setBtnAddText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnAddText(String text)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.prerender
+yawl:externalClients_prerender_80 a yawl:Method ;
+    rdfs:label "prerender" ;
+    yawl:returnType "void" ;
+    yawl:signature "void prerender()" ;
+    rdfs:comment """Overridden method that is called immediately before the page is rendered""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.btnRemove_action
+yawl:externalClients_btnRemove_action_81 a yawl:Method ;
+    rdfs:label "btnRemove_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnRemove_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.btnAdd_action
+yawl:externalClients_btnAdd_action_82 a yawl:Method ;
+    rdfs:label "btnAdd_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnAdd_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.btnEdit_action
+yawl:externalClients_btnEdit_action_83 a yawl:Method ;
+    rdfs:label "btnEdit_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnEdit_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.isNullOrEmpty
+yawl:externalClients_isNullOrEmpty_84 a yawl:Method ;
+    rdfs:label "isNullOrEmpty" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isNullOrEmpty(String text)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.btnClear_action
+yawl:externalClients_btnClear_action_85 a yawl:Method ;
+    rdfs:label "btnClear_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnClear_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: externalClients.clearInputs
+yawl:externalClients_clearInputs_86 a yawl:Method ;
+    rdfs:label "clearInputs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clearInputs()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: externalClients.getMode
+yawl:externalClients_getMode_87 a yawl:Method ;
+    rdfs:label "getMode" ;
+    yawl:returnType "Mode" ;
+    yawl:signature "Mode getMode()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: externalClients.setMode
+yawl:externalClients_setMode_88 a yawl:Method ;
+    rdfs:label "setMode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMode(Mode mode)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: externalClients.inputsValid
+yawl:externalClients_inputsValid_89 a yawl:Method ;
+    rdfs:label "inputsValid" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean inputsValid()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: externalClients.showMessagePanel
+yawl:externalClients_showMessagePanel_90 a yawl:Method ;
+    rdfs:label "showMessagePanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showMessagePanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:externalClients___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:externalClients_page1 a yawl:Field ;
+    rdfs:label "page1" .
+
+yawl:externalClients_html1 a yawl:Field ;
+    rdfs:label "html1" .
+
+yawl:externalClients_head1 a yawl:Field ;
+    rdfs:label "head1" .
+
+yawl:externalClients_link1 a yawl:Field ;
+    rdfs:label "link1" .
+
+yawl:externalClients_body1 a yawl:Field ;
+    rdfs:label "body1" .
+
+yawl:externalClients_form1 a yawl:Field ;
+    rdfs:label "form1" .
+
+yawl:externalClients_pnlAddService a yawl:Field ;
+    rdfs:label "pnlAddService" .
+
+yawl:externalClients_staticText1 a yawl:Field ;
+    rdfs:label "staticText1" .
+
+yawl:externalClients_lblName a yawl:Field ;
+    rdfs:label "lblName" .
+
+yawl:externalClients_lblPassword a yawl:Field ;
+    rdfs:label "lblPassword" .
+
+yawl:externalClients_lblConfirmPassword a yawl:Field ;
+    rdfs:label "lblConfirmPassword" .
+
+yawl:externalClients_lblDesc a yawl:Field ;
+    rdfs:label "lblDesc" .
+
+yawl:externalClients_txtName a yawl:Field ;
+    rdfs:label "txtName" .
+
+yawl:externalClients_txtPassword a yawl:Field ;
+    rdfs:label "txtPassword" .
+
+yawl:externalClients_txtConfirmPassword a yawl:Field ;
+    rdfs:label "txtConfirmPassword" .
+
+yawl:externalClients_txtDescription a yawl:Field ;
+    rdfs:label "txtDescription" .
+
+yawl:externalClients_pnlServices a yawl:Field ;
+    rdfs:label "pnlServices" .
+
+yawl:externalClients_staticText2 a yawl:Field ;
+    rdfs:label "staticText2" .
+
+yawl:externalClients_dataTable1 a yawl:Field ;
+    rdfs:label "dataTable1" .
+
+yawl:externalClients_colName a yawl:Field ;
+    rdfs:label "colName" .
+
+yawl:externalClients_colNameRows a yawl:Field ;
+    rdfs:label "colNameRows" .
+
+yawl:externalClients_colNameHeader a yawl:Field ;
+    rdfs:label "colNameHeader" .
+
+yawl:externalClients_colDescription a yawl:Field ;
+    rdfs:label "colDescription" .
+
+yawl:externalClients_colDescriptionRows a yawl:Field ;
+    rdfs:label "colDescriptionRows" .
+
+yawl:externalClients_colDescriptionHeader a yawl:Field ;
+    rdfs:label "colDescriptionHeader" .
+
+yawl:externalClients_colSBar a yawl:Field ;
+    rdfs:label "colSBar" .
+
+yawl:externalClients_btnRemove a yawl:Field ;
+    rdfs:label "btnRemove" .
+
+yawl:externalClients_btnEdit a yawl:Field ;
+    rdfs:label "btnEdit" .
+
+yawl:externalClients_btnAdd a yawl:Field ;
+    rdfs:label "btnAdd" .
+
+yawl:externalClients_btnClear a yawl:Field ;
+    rdfs:label "btnClear" .
+
+yawl:externalClients_hdnRowIndex a yawl:Field ;
+    rdfs:label "hdnRowIndex" .
+
+yawl:externalClients_clientList a yawl:Field ;
+    rdfs:label "clientList" .
+
+yawl:externalClients_pnlContainer a yawl:Field ;
+    rdfs:label "pnlContainer" .
+
+yawl:externalClients_pnlGroup a yawl:Field ;
+    rdfs:label "pnlGroup" .
+
+yawl:externalClients_addPanelHeading a yawl:Field ;
+    rdfs:label "addPanelHeading" .
+
+yawl:externalClients_btnAddText a yawl:Field ;
+    rdfs:label "btnAddText" .
+
+yawl:externalClients__appbean a yawl:Field ;
+    rdfs:label "_appbean" .
+
+yawl:externalClients__sb a yawl:Field ;
+    rdfs:label "_sb" .
+
+yawl:externalClients_msgPanel a yawl:Field ;
+    rdfs:label "msgPanel" .
+
+
+

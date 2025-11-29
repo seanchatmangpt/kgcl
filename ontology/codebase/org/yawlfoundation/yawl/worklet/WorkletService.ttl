@@ -1,0 +1,578 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.worklet
+yawl:org_yawlfoundation_yawl_worklet a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.worklet" .
+# Class: org.yawlfoundation.yawl.worklet.WorkletService
+yawl:WorkletService a yawl:Class ;
+    rdfs:label "WorkletService" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/WorkletService.java"^^xsd:string ;
+    rdfs:comment """This class and its support classes represent an implementation for YAWL of the Worklet paradigm. <p/> The WorkletService class is the main class for the selection and exception handling processes. For selection, it receives an enabled workitem from the engine and attempts to substitute it with a worklet. @author Michael Adams @version 0.8, 09/10/2006""" ;
+    yawl:extends yawl:InterfaceBWebsideController ;
+    yawl:implements yawl:InterfaceX_Service ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:WorkletService_getInstance_1 ;
+    yawl:hasMethod yawl:WorkletService_setupEngineClient_2 ;
+    yawl:hasMethod yawl:WorkletService_getExternalServiceHandle_3 ;
+    yawl:hasMethod yawl:WorkletService_setExceptionServiceEnabled_4 ;
+    yawl:hasMethod yawl:WorkletService_isExceptionHandlingEnabled_5 ;
+    yawl:hasMethod yawl:WorkletService_getServer_6 ;
+    yawl:hasMethod yawl:WorkletService_getRdrInterface_7 ;
+    yawl:hasMethod yawl:WorkletService_getRdrEvaluator_8 ;
+    yawl:hasMethod yawl:WorkletService_getResourceServiceURL_9 ;
+    yawl:hasMethod yawl:WorkletService_getLoader_10 ;
+    yawl:hasMethod yawl:WorkletService_getEngineClient_11 ;
+    yawl:hasMethod yawl:WorkletService_getEventQueue_12 ;
+    yawl:hasMethod yawl:WorkletService_getExceptionService_13 ;
+    yawl:hasMethod yawl:WorkletService_completeInitialisation_14 ;
+    yawl:hasMethod yawl:WorkletService_shutdown_15 ;
+    yawl:hasMethod yawl:WorkletService_handleEnabledWorkItemEvent_16 ;
+    yawl:hasMethod yawl:WorkletService_handleCancelledWorkItemEvent_17 ;
+    yawl:hasMethod yawl:WorkletService_handleCompleteCaseEvent_18 ;
+    yawl:hasMethod yawl:WorkletService_handleCancelledCaseEvent_19 ;
+    yawl:hasMethod yawl:WorkletService_doGet_20 ;
+    yawl:hasMethod yawl:WorkletService_handleEngineInitialisationCompletedEvent_21 ;
+    yawl:hasMethod yawl:WorkletService_handleCheckCaseConstraintEvent_22 ;
+    yawl:hasMethod yawl:WorkletService_handleCheckWorkItemConstraintEvent_23 ;
+    yawl:hasMethod yawl:WorkletService_handleWorkItemAbortException_24 ;
+    yawl:hasMethod yawl:WorkletService_handleTimeoutEvent_25 ;
+    yawl:hasMethod yawl:WorkletService_handleResourceUnavailableException_26 ;
+    yawl:hasMethod yawl:WorkletService_handleConstraintViolationException_27 ;
+    yawl:hasMethod yawl:WorkletService_handleCaseCancellationEvent_28 ;
+    yawl:hasMethod yawl:WorkletService_suspendCase_29 ;
+    yawl:hasMethod yawl:WorkletService_suspendWorkItem_30 ;
+    yawl:hasMethod yawl:WorkletService_processEnabledWorkItemEvent_31 ;
+    yawl:hasMethod yawl:WorkletService_handleWorkletSelection_32 ;
+    yawl:hasMethod yawl:WorkletService_launchWorklets_33 ;
+    yawl:hasMethod yawl:WorkletService_handleCompletingSelectionWorklet_34 ;
+    yawl:hasMethod yawl:WorkletService_processWorkItemSubstitution_35 ;
+    yawl:hasMethod yawl:WorkletService_cancelWorkletsForCompletedMITask_36 ;
+    yawl:hasMethod yawl:WorkletService_cancelWorkletsForCompletedMITask_37 ;
+    yawl:hasMethod yawl:WorkletService_checkInHandledWorkItem_38 ;
+    yawl:hasMethod yawl:WorkletService_checkInItem_39 ;
+    yawl:hasMethod yawl:WorkletService_handleCancelledWorklet_40 ;
+    yawl:hasMethod yawl:WorkletService_cancelWorkletSet_41 ;
+    yawl:hasMethod yawl:WorkletService_replaceWorklet_42 ;
+    yawl:hasMethod yawl:WorkletService_raise_43 ;
+    yawl:hasMethod yawl:WorkletService_cleanseRestoredRunners_44 ;
+    yawl:hasMethod yawl:WorkletService_getRunnerCaseIdList_45 ;
+    yawl:hasMethod yawl:WorkletService_updateDataList_46 ;
+    yawl:hasMethod yawl:WorkletService_getMITaskInfo_47 ;
+    yawl:hasMethod yawl:WorkletService_isMultiInstance_48 ;
+    yawl:hasMethod yawl:WorkletService_logSelectionForMISummary_49 ;
+    yawl:hasMethod yawl:WorkletService_getAllRunners_50 ;
+    yawl:hasMethod yawl:WorkletService_isAdminSession_51 ;
+    yawl:hasMethod yawl:WorkletService_isWorkletCase_52 ;
+    yawl:hasMethod yawl:WorkletService_restoreDataSets_53 ;
+    yawl:hasField yawl:WorkletService__engineClient ;
+    yawl:hasField yawl:WorkletService__runners ;
+    yawl:hasField yawl:WorkletService__persisting ;
+    yawl:hasField yawl:WorkletService__log ;
+    yawl:hasField yawl:WorkletService_INSTANCE ;
+    yawl:hasField yawl:WorkletService__exService ;
+    yawl:hasField yawl:WorkletService__rdr ;
+    yawl:hasField yawl:WorkletService__loader ;
+    yawl:hasField yawl:WorkletService__eventQueue ;
+    yawl:hasField yawl:WorkletService__initCompleted ;
+    yawl:hasField yawl:WorkletService_restored ;
+    yawl:hasField yawl:WorkletService__exceptionHandlingEnabled ;
+    .
+
+
+# Method: WorkletService.getInstance
+yawl:WorkletService_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "WorkletService" ;
+    yawl:signature "WorkletService getInstance()" ;
+    rdfs:comment """@return a reference to the current WorkletService instance""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: WorkletService.setupEngineClient
+yawl:WorkletService_setupEngineClient_2 a yawl:Method ;
+    rdfs:label "setupEngineClient" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setupEngineClient()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.getExternalServiceHandle
+yawl:WorkletService_getExternalServiceHandle_3 a yawl:Method ;
+    rdfs:label "getExternalServiceHandle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getExternalServiceHandle(CostGatewayClient costClient)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.setExceptionServiceEnabled
+yawl:WorkletService_setExceptionServiceEnabled_4 a yawl:Method ;
+    rdfs:label "setExceptionServiceEnabled" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setExceptionServiceEnabled(boolean enable)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.isExceptionHandlingEnabled
+yawl:WorkletService_isExceptionHandlingEnabled_5 a yawl:Method ;
+    rdfs:label "isExceptionHandlingEnabled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isExceptionHandlingEnabled()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.getServer
+yawl:WorkletService_getServer_6 a yawl:Method ;
+    rdfs:label "getServer" ;
+    yawl:returnType "WorkletEventServer" ;
+    yawl:signature "WorkletEventServer getServer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.getRdrInterface
+yawl:WorkletService_getRdrInterface_7 a yawl:Method ;
+    rdfs:label "getRdrInterface" ;
+    yawl:returnType "Rdr" ;
+    yawl:signature "Rdr getRdrInterface()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.getRdrEvaluator
+yawl:WorkletService_getRdrEvaluator_8 a yawl:Method ;
+    rdfs:label "getRdrEvaluator" ;
+    yawl:returnType "RdrEvaluator" ;
+    yawl:signature "RdrEvaluator getRdrEvaluator()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.getResourceServiceURL
+yawl:WorkletService_getResourceServiceURL_9 a yawl:Method ;
+    rdfs:label "getResourceServiceURL" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourceServiceURL()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.getLoader
+yawl:WorkletService_getLoader_10 a yawl:Method ;
+    rdfs:label "getLoader" ;
+    yawl:returnType "WorkletLoader" ;
+    yawl:signature "WorkletLoader getLoader()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.getEngineClient
+yawl:WorkletService_getEngineClient_11 a yawl:Method ;
+    rdfs:label "getEngineClient" ;
+    yawl:returnType "EngineClient" ;
+    yawl:signature "EngineClient getEngineClient()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.getEventQueue
+yawl:WorkletService_getEventQueue_12 a yawl:Method ;
+    rdfs:label "getEventQueue" ;
+    yawl:returnType "EnabledEventQueue" ;
+    yawl:signature "EnabledEventQueue getEventQueue()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.getExceptionService
+yawl:WorkletService_getExceptionService_13 a yawl:Method ;
+    rdfs:label "getExceptionService" ;
+    yawl:returnType "ExceptionService" ;
+    yawl:signature "ExceptionService getExceptionService()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.completeInitialisation
+yawl:WorkletService_completeInitialisation_14 a yawl:Method ;
+    rdfs:label "completeInitialisation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void completeInitialisation()" ;
+    rdfs:comment """completes the initialisation of the service load-up (mainly persistence) called from servlet WorkletGateway after contexts are loaded""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.shutdown
+yawl:WorkletService_shutdown_15 a yawl:Method ;
+    rdfs:label "shutdown" ;
+    yawl:returnType "void" ;
+    yawl:signature "void shutdown()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.handleEnabledWorkItemEvent
+yawl:WorkletService_handleEnabledWorkItemEvent_16 a yawl:Method ;
+    rdfs:label "handleEnabledWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleEnabledWorkItemEvent(WorkItemRecord workItemRecord)" ;
+    rdfs:comment """Handles a message from the engine that a workitem has been enabled (see InterfaceBWebsideController for more details) In this case, it either starts a worklet substitution process, or, if the workitem denotes the end of a worklet case, it completes the substitution process by checking the original workitem back into the engine. @param workItemRecord - a record describing the enabled workitem""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.handleCancelledWorkItemEvent
+yawl:WorkletService_handleCancelledWorkItemEvent_17 a yawl:Method ;
+    rdfs:label "handleCancelledWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCancelledWorkItemEvent(WorkItemRecord wir)" ;
+    rdfs:comment """Handles a message from the engine that a workitem has been cancelled (see InterfaceBWebsideController for more details) In this case, it cancels any worklet(s) running in place of the workitem. Only deals with child workitems currently checked out - not interested in workitems that haven't been handled by the service, or parent workitems, since handling all the children takes care of the parent. Includes MI items when threshold has been reached. @param wir - a record describing the cancelled wor""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.handleCompleteCaseEvent
+yawl:WorkletService_handleCompleteCaseEvent_18 a yawl:Method ;
+    rdfs:label "handleCompleteCaseEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCompleteCaseEvent(String caseID, String casedata)" ;
+    rdfs:comment """Handles a message from the engine that a (worklet) case has completed (see InterfaceBWebsideController for more details). <p/> Only those services that register as an 'observer' for the case will receive these events. All worklets launched (through launchCase()) register as an observer. @param caseID   - the id of the completed case @param casedata - an (XML) string containing the output data for the case""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.handleCancelledCaseEvent
+yawl:WorkletService_handleCancelledCaseEvent_19 a yawl:Method ;
+    rdfs:label "handleCancelledCaseEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCancelledCaseEvent(String caseID)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.doGet
+yawl:WorkletService_doGet_20 a yawl:Method ;
+    rdfs:label "doGet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doGet(HttpServletRequest request, HttpServletResponse response)" ;
+    rdfs:comment """displays a web page describing the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.handleEngineInitialisationCompletedEvent
+yawl:WorkletService_handleEngineInitialisationCompletedEvent_21 a yawl:Method ;
+    rdfs:label "handleEngineInitialisationCompletedEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleEngineInitialisationCompletedEvent()" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.handleCheckCaseConstraintEvent
+yawl:WorkletService_handleCheckCaseConstraintEvent_22 a yawl:Method ;
+    rdfs:label "handleCheckCaseConstraintEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCheckCaseConstraintEvent(YSpecificationID specID, String caseID, String data, boolean precheck)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.handleCheckWorkItemConstraintEvent
+yawl:WorkletService_handleCheckWorkItemConstraintEvent_23 a yawl:Method ;
+    rdfs:label "handleCheckWorkItemConstraintEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCheckWorkItemConstraintEvent(WorkItemRecord wir, String data, boolean precheck)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.handleWorkItemAbortException
+yawl:WorkletService_handleWorkItemAbortException_24 a yawl:Method ;
+    rdfs:label "handleWorkItemAbortException" ;
+    yawl:returnType "String" ;
+    yawl:signature "String handleWorkItemAbortException(WorkItemRecord wir, String caseData)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.handleTimeoutEvent
+yawl:WorkletService_handleTimeoutEvent_25 a yawl:Method ;
+    rdfs:label "handleTimeoutEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleTimeoutEvent(WorkItemRecord wir, String taskList)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.handleResourceUnavailableException
+yawl:WorkletService_handleResourceUnavailableException_26 a yawl:Method ;
+    rdfs:label "handleResourceUnavailableException" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleResourceUnavailableException(String resourceID, WorkItemRecord wir, String caseData, boolean primary)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.handleConstraintViolationException
+yawl:WorkletService_handleConstraintViolationException_27 a yawl:Method ;
+    rdfs:label "handleConstraintViolationException" ;
+    yawl:returnType "String" ;
+    yawl:signature "String handleConstraintViolationException(WorkItemRecord wir, String caseData)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.handleCaseCancellationEvent
+yawl:WorkletService_handleCaseCancellationEvent_28 a yawl:Method ;
+    rdfs:label "handleCaseCancellationEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCaseCancellationEvent(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.suspendCase
+yawl:WorkletService_suspendCase_29 a yawl:Method ;
+    rdfs:label "suspendCase" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean suspendCase(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.suspendWorkItem
+yawl:WorkletService_suspendWorkItem_30 a yawl:Method ;
+    rdfs:label "suspendWorkItem" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean suspendWorkItem(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.processEnabledWorkItemEvent
+yawl:WorkletService_processEnabledWorkItemEvent_31 a yawl:Method ;
+    rdfs:label "processEnabledWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processEnabledWorkItemEvent(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.handleWorkletSelection
+yawl:WorkletService_handleWorkletSelection_32 a yawl:Method ;
+    rdfs:label "handleWorkletSelection" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean handleWorkletSelection(WorkItemRecord wir)" ;
+    rdfs:comment """Attempt to substitute the enabled workitem with a worklet @param wir - the enabled workitem record""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletService.launchWorklets
+yawl:WorkletService_launchWorklets_33 a yawl:Method ;
+    rdfs:label "launchWorklets" ;
+    yawl:returnType "int" ;
+    yawl:signature "int launchWorklets(Set checkedOutItems, RdrPair pair, boolean isMITask)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletService.handleCompletingSelectionWorklet
+yawl:WorkletService_handleCompletingSelectionWorklet_34 a yawl:Method ;
+    rdfs:label "handleCompletingSelectionWorklet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCompletingSelectionWorklet(String caseId, String wlCasedata)" ;
+    rdfs:comment """Deals with the end of a selection worklet case. @param caseId     - the id of the completing case @param wlCasedata - the completing case's datalist Element""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletService.processWorkItemSubstitution
+yawl:WorkletService_processWorkItemSubstitution_35 a yawl:Method ;
+    rdfs:label "processWorkItemSubstitution" ;
+    yawl:returnType "int" ;
+    yawl:signature "int processWorkItemSubstitution(RdrPair pair, WorkItemRecord wir)" ;
+    rdfs:comment """Gets a worklet running for a checked-out workitem @param pair the RdrTree rule pair for the task that the checked-out workitem is an instance of. PRE: pair contains a valid conclusion @param wir the checked out workitem""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletService.cancelWorkletsForCompletedMITask
+yawl:WorkletService_cancelWorkletsForCompletedMITask_36 a yawl:Method ;
+    rdfs:label "cancelWorkletsForCompletedMITask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancelWorkletsForCompletedMITask(WorkItemRecord wir)" ;
+    rdfs:comment """Removes all remaining worklet cases and completes handling of a workitem which is a spawned item of a multi-instance task and that task has reached its threshold and already completed in the engine. @param wir - a record describing one of the remaining spawned workitems""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletService.cancelWorkletsForCompletedMITask
+yawl:WorkletService_cancelWorkletsForCompletedMITask_37 a yawl:Method ;
+    rdfs:label "cancelWorkletsForCompletedMITask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancelWorkletsForCompletedMITask(WorkItemRecord wir, Set runners)" ;
+    rdfs:comment """overloaded (see above) @param runners the set of worklet runners for the checked out child item that's a member workitem of the MI Task that has reached its threshold""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletService.checkInHandledWorkItem
+yawl:WorkletService_checkInHandledWorkItem_38 a yawl:Method ;
+    rdfs:label "checkInHandledWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkInHandledWorkItem(WorkletRunner runner, String wlCasedata)" ;
+    rdfs:comment """Checks in the workitem after its subbed worklets have (all) completed and, if the original parent workitem has no more children after this workitem is checked in, removes its record from the dynamic datsets of currently handled workitems @param runner       - the checkedOutChildItem for the workitem in question @param wlCasedata - the completing case's datalist Element""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletService.checkInItem
+yawl:WorkletService_checkInItem_39 a yawl:Method ;
+    rdfs:label "checkInItem" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean checkInItem(WorkItemRecord wir, Element in, Element out)" ;
+    rdfs:comment """Checks a (checked out) workitem back into the engine @param wir - workitem to check into the engine @param in  - a JDOM Element containing the input params of the workitem @param out - a JDOM Element containing the output params of the workitem @return true if check in is successful""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletService.handleCancelledWorklet
+yawl:WorkletService_handleCancelledWorklet_40 a yawl:Method ;
+    rdfs:label "handleCancelledWorklet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCancelledWorklet(String caseID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletService.cancelWorkletSet
+yawl:WorkletService_cancelWorkletSet_41 a yawl:Method ;
+    rdfs:label "cancelWorkletSet" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean cancelWorkletSet(Set runnerSet)" ;
+    rdfs:comment """Cancels each of the worklets listed in the wr as running @param runnerSet - the worklet record containing the list of worklets to cancel @return true if all of the worklets are successfully cancelled""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: WorkletService.replaceWorklet
+yawl:WorkletService_replaceWorklet_42 a yawl:Method ;
+    rdfs:label "replaceWorklet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String replaceWorklet(String wirID)" ;
+    rdfs:comment """Replaces a running worklet case with another worklet case after an amendment to the ruleset for this task. Called by WorkletGateway after a call from the Editor that the ruleset has been updated. @param wirID the id of the original checked out workitem @return a string of messages describing the success or otherwise of the process""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.raise
+yawl:WorkletService_raise_43 a yawl:Method ;
+    rdfs:label "raise" ;
+    yawl:returnType "void" ;
+    yawl:signature "void raise(String msg)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: WorkletService.cleanseRestoredRunners
+yawl:WorkletService_cleanseRestoredRunners_44 a yawl:Method ;
+    rdfs:label "cleanseRestoredRunners" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cleanseRestoredRunners()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletService.getRunnerCaseIdList
+yawl:WorkletService_getRunnerCaseIdList_45 a yawl:Method ;
+    rdfs:label "getRunnerCaseIdList" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRunnerCaseIdList(Set runners)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.updateDataList
+yawl:WorkletService_updateDataList_46 a yawl:Method ;
+    rdfs:label "updateDataList" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element updateDataList(Element in, Element out)" ;
+    rdfs:comment """updates the input datalist with the changed data in the output datalist @param in  - the JDOM Element containing the input params @param out - the JDOM Element containing the output params @return a JDOM Element with the data updated""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.getMITaskInfo
+yawl:WorkletService_getMITaskInfo_47 a yawl:Method ;
+    rdfs:label "getMITaskInfo" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMITaskInfo(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletService.isMultiInstance
+yawl:WorkletService_isMultiInstance_48 a yawl:Method ;
+    rdfs:label "isMultiInstance" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isMultiInstance(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletService.logSelectionForMISummary
+yawl:WorkletService_logSelectionForMISummary_49 a yawl:Method ;
+    rdfs:label "logSelectionForMISummary" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logSelectionForMISummary(WorkItemRecord wir, int itemCount, int workletCount)" ;
+    rdfs:comment """writes a summary of substitution outcomes for MI tasks to log""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletService.getAllRunners
+yawl:WorkletService_getAllRunners_50 a yawl:Method ;
+    rdfs:label "getAllRunners" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getAllRunners()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.isAdminSession
+yawl:WorkletService_isAdminSession_51 a yawl:Method ;
+    rdfs:label "isAdminSession" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAdminSession(String sessionHandle)" ;
+    rdfs:comment """returns true if the session specified is an admin session""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.isWorkletCase
+yawl:WorkletService_isWorkletCase_52 a yawl:Method ;
+    rdfs:label "isWorkletCase" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isWorkletCase(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletService.restoreDataSets
+yawl:WorkletService_restoreDataSets_53 a yawl:Method ;
+    rdfs:label "restoreDataSets" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restoreDataSets()" ;
+    rdfs:comment """restores runner hashmap from persistence""" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:WorkletService__engineClient a yawl:Field ;
+    rdfs:label "_engineClient" .
+
+yawl:WorkletService__runners a yawl:Field ;
+    rdfs:label "_runners" .
+
+yawl:WorkletService__persisting a yawl:Field ;
+    rdfs:label "_persisting" .
+
+yawl:WorkletService__log a yawl:Field ;
+    rdfs:label "_log" .
+
+yawl:WorkletService_INSTANCE a yawl:Field ;
+    rdfs:label "INSTANCE" .
+
+yawl:WorkletService__exService a yawl:Field ;
+    rdfs:label "_exService" .
+
+yawl:WorkletService__rdr a yawl:Field ;
+    rdfs:label "_rdr" .
+
+yawl:WorkletService__loader a yawl:Field ;
+    rdfs:label "_loader" .
+
+yawl:WorkletService__eventQueue a yawl:Field ;
+    rdfs:label "_eventQueue" .
+
+yawl:WorkletService__initCompleted a yawl:Field ;
+    rdfs:label "_initCompleted" .
+
+yawl:WorkletService_restored a yawl:Field ;
+    rdfs:label "restored" .
+
+yawl:WorkletService__exceptionHandlingEnabled a yawl:Field ;
+    rdfs:label "_exceptionHandlingEnabled" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_cost a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.cost" .
+
+

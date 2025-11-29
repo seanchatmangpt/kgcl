@@ -1,0 +1,65 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.util.ExampleAdapter
+yawl:ExampleAdapter a yawl:Class ;
+    rdfs:label "ExampleAdapter" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/util/ExampleAdapter.java"^^xsd:string ;
+    rdfs:comment """An small example of how one might use the resource client api Author: Michael Adams Date: Oct 26, 2007""" ;
+    yawl:extends yawl:ResourceGatewayClientAdapter ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ExampleAdapter_connected_1 ;
+    yawl:hasMethod yawl:ExampleAdapter_getParticipants_2 ;
+    yawl:hasMethod yawl:ExampleAdapter_getConstraints_3 ;
+    yawl:hasField yawl:ExampleAdapter__handle ;
+    yawl:hasField yawl:ExampleAdapter__userName ;
+    yawl:hasField yawl:ExampleAdapter__password ;
+    yawl:hasField yawl:ExampleAdapter__defURI ;
+    .
+
+
+# Method: ExampleAdapter.connected
+yawl:ExampleAdapter_connected_1 a yawl:Method ;
+    rdfs:label "connected" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean connected()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExampleAdapter.getParticipants
+yawl:ExampleAdapter_getParticipants_2 a yawl:Method ;
+    rdfs:label "getParticipants" ;
+    yawl:returnType "void" ;
+    yawl:signature "void getParticipants()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExampleAdapter.getConstraints
+yawl:ExampleAdapter_getConstraints_3 a yawl:Method ;
+    rdfs:label "getConstraints" ;
+    yawl:returnType "void" ;
+    yawl:signature "void getConstraints()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:ExampleAdapter__handle a yawl:Field ;
+    rdfs:label "_handle" .
+
+yawl:ExampleAdapter__userName a yawl:Field ;
+    rdfs:label "_userName" .
+
+yawl:ExampleAdapter__password a yawl:Field ;
+    rdfs:label "_password" .
+
+yawl:ExampleAdapter__defURI a yawl:Field ;
+    rdfs:label "_defURI" .
+
+
+

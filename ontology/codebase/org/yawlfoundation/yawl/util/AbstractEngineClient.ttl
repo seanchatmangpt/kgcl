@@ -1,0 +1,594 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.util.AbstractEngineClient
+yawl:AbstractEngineClient a yawl:Class ;
+    rdfs:label "AbstractEngineClient" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/util/AbstractEngineClient.java"^^xsd:string ;
+    rdfs:comment """Base class that abstracts interface connections and calls between custom services and the Engine and other services as needed, besides those that go through InterfaceBWebsideController @author Michael Adams @date 05/01/2015""" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:AbstractEngineClient_setInterfaceBClient_1 ;
+    yawl:hasMethod yawl:AbstractEngineClient_getEngineLogonName_2 ;
+    yawl:hasMethod yawl:AbstractEngineClient_getEngineLogonPassword_3 ;
+    yawl:hasMethod yawl:AbstractEngineClient_getNamespace_4 ;
+    yawl:hasMethod yawl:AbstractEngineClient_getEngineURI_5 ;
+    yawl:hasMethod yawl:AbstractEngineClient_initEngineURI_6 ;
+    yawl:hasMethod yawl:AbstractEngineClient_reestablishClients_7 ;
+    yawl:hasMethod yawl:AbstractEngineClient_setServiceURI_8 ;
+    yawl:hasMethod yawl:AbstractEngineClient_getServiceURI_9 ;
+    yawl:hasMethod yawl:AbstractEngineClient_getServiceURI_10 ;
+    yawl:hasMethod yawl:AbstractEngineClient_engineIsAvailable_11 ;
+    yawl:hasMethod yawl:AbstractEngineClient_connected_12 ;
+    yawl:hasMethod yawl:AbstractEngineClient_getSessionHandle_13 ;
+    yawl:hasMethod yawl:AbstractEngineClient_successful_14 ;
+    yawl:hasMethod yawl:AbstractEngineClient_checkConnection_15 ;
+    yawl:hasMethod yawl:AbstractEngineClient_isAdminSession_16 ;
+    yawl:hasMethod yawl:AbstractEngineClient_getEngineBuildProperties_17 ;
+    yawl:hasMethod yawl:AbstractEngineClient_getRegisteredServices_18 ;
+    yawl:hasMethod yawl:AbstractEngineClient_getAdminUserPassword_19 ;
+    yawl:hasMethod yawl:AbstractEngineClient_uploadSpecification_20 ;
+    yawl:hasMethod yawl:AbstractEngineClient_unloadSpecification_21 ;
+    yawl:hasMethod yawl:AbstractEngineClient_getRegisteredServicesAsXML_22 ;
+    yawl:hasMethod yawl:AbstractEngineClient_addRegisteredService_23 ;
+    yawl:hasMethod yawl:AbstractEngineClient_removeRegisteredService_24 ;
+    yawl:hasMethod yawl:AbstractEngineClient_getExternalClients_25 ;
+    yawl:hasMethod yawl:AbstractEngineClient_addExternalClient_26 ;
+    yawl:hasMethod yawl:AbstractEngineClient_removeExternalClient_27 ;
+    yawl:hasMethod yawl:AbstractEngineClient_updateExternalClient_28 ;
+    yawl:hasMethod yawl:AbstractEngineClient_getIABackendURI_29 ;
+    yawl:hasMethod yawl:AbstractEngineClient_getWorkItemsForService_30 ;
+    yawl:hasMethod yawl:AbstractEngineClient_suspendWorkItem_31 ;
+    yawl:hasMethod yawl:AbstractEngineClient_unsuspendWorkItem_32 ;
+    yawl:hasMethod yawl:AbstractEngineClient_skipWorkItem_33 ;
+    yawl:hasMethod yawl:AbstractEngineClient_getRunningCases_34 ;
+    yawl:hasMethod yawl:AbstractEngineClient_cancelCase_35 ;
+    yawl:hasMethod yawl:AbstractEngineClient_getCases_36 ;
+    yawl:hasMethod yawl:AbstractEngineClient_getCaseData_37 ;
+    yawl:hasMethod yawl:AbstractEngineClient_getSpecificationDataSchema_38 ;
+    yawl:hasMethod yawl:AbstractEngineClient_getSpecification_39 ;
+    yawl:hasMethod yawl:AbstractEngineClient_getMITaskAttributes_40 ;
+    yawl:hasMethod yawl:AbstractEngineClient_getLiveWorkItemsForCase_41 ;
+    yawl:hasMethod yawl:AbstractEngineClient_getLiveWorkItemsForIdentifier_42 ;
+    yawl:hasMethod yawl:AbstractEngineClient_getAllLiveWorkItems_43 ;
+    yawl:hasMethod yawl:AbstractEngineClient_launchCase_44 ;
+    yawl:hasMethod yawl:AbstractEngineClient_launchCase_45 ;
+    yawl:hasMethod yawl:AbstractEngineClient_launchCase_46 ;
+    yawl:hasMethod yawl:AbstractEngineClient_launchCase_47 ;
+    yawl:hasMethod yawl:AbstractEngineClient_getAllRunningCases_48 ;
+    yawl:hasMethod yawl:AbstractEngineClient_getAllRunningCaseIDs_49 ;
+    yawl:hasMethod yawl:AbstractEngineClient_isRunningCaseID_50 ;
+    yawl:hasMethod yawl:AbstractEngineClient_getRunningCasesAsList_51 ;
+    yawl:hasMethod yawl:AbstractEngineClient_getTaskParamsAsXML_52 ;
+    yawl:hasMethod yawl:AbstractEngineClient_canAddNewInstance_53 ;
+    yawl:hasMethod yawl:AbstractEngineClient_createNewWorkItemInstance_54 ;
+    yawl:hasMethod yawl:AbstractEngineClient_fail_55 ;
+    yawl:hasField yawl:AbstractEngineClient__sessionHandle ;
+    yawl:hasField yawl:AbstractEngineClient__engineLogonName ;
+    yawl:hasField yawl:AbstractEngineClient__engineLogonPassword ;
+    yawl:hasField yawl:AbstractEngineClient__defaultURI ;
+    yawl:hasField yawl:AbstractEngineClient__serviceName ;
+    yawl:hasField yawl:AbstractEngineClient__serviceURI ;
+    yawl:hasField yawl:AbstractEngineClient__engineURI ;
+    yawl:hasField yawl:AbstractEngineClient__yNameSpace ;
+    yawl:hasField yawl:AbstractEngineClient__interfaceAClient ;
+    yawl:hasField yawl:AbstractEngineClient__interfaceBClient ;
+    yawl:hasField yawl:AbstractEngineClient_ADMIN_STR ;
+    yawl:hasField yawl:AbstractEngineClient_WORKITEM_ERR ;
+    yawl:hasField yawl:AbstractEngineClient_SUCCESS_STR ;
+    yawl:hasField yawl:AbstractEngineClient_FAIL_STR ;
+    yawl:hasField yawl:AbstractEngineClient__log ;
+    yawl:hasField yawl:AbstractEngineClient__mutex ;
+    .
+
+
+# Method: AbstractEngineClient.setInterfaceBClient
+yawl:AbstractEngineClient_setInterfaceBClient_1 a yawl:Method ;
+    rdfs:label "setInterfaceBClient" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setInterfaceBClient(InterfaceB_EnvironmentBasedClient client)" ;
+    rdfs:comment """Assigns the IB client from InterfaceBWebsideController @param client an IB Client instance""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.getEngineLogonName
+yawl:AbstractEngineClient_getEngineLogonName_2 a yawl:Method ;
+    rdfs:label "getEngineLogonName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEngineLogonName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.getEngineLogonPassword
+yawl:AbstractEngineClient_getEngineLogonPassword_3 a yawl:Method ;
+    rdfs:label "getEngineLogonPassword" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEngineLogonPassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.getNamespace
+yawl:AbstractEngineClient_getNamespace_4 a yawl:Method ;
+    rdfs:label "getNamespace" ;
+    yawl:returnType "Namespace" ;
+    yawl:signature "Namespace getNamespace()" ;
+    rdfs:comment """@return the YAWL namespace""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractEngineClient.getEngineURI
+yawl:AbstractEngineClient_getEngineURI_5 a yawl:Method ;
+    rdfs:label "getEngineURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEngineURI()" ;
+    rdfs:comment """Gets the stored URI of the Engine @return the engine's URI""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.initEngineURI
+yawl:AbstractEngineClient_initEngineURI_6 a yawl:Method ;
+    rdfs:label "initEngineURI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initEngineURI(String engineURI)" ;
+    rdfs:comment """Called on servlet startup with the various uris needed to initialise the various clients @param engineURI the URI of the Engine's Interface B""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.reestablishClients
+yawl:AbstractEngineClient_reestablishClients_7 a yawl:Method ;
+    rdfs:label "reestablishClients" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reestablishClients(InterfaceB_EnvironmentBasedClient client)" ;
+    rdfs:comment """Reestablishes clients when the service restarts @param client the Interface B client from InterfaceBWebsideController""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.setServiceURI
+yawl:AbstractEngineClient_setServiceURI_8 a yawl:Method ;
+    rdfs:label "setServiceURI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setServiceURI()" ;
+    rdfs:comment """Sets the Service URI as read from that stored in the Engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.getServiceURI
+yawl:AbstractEngineClient_getServiceURI_9 a yawl:Method ;
+    rdfs:label "getServiceURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getServiceURI()" ;
+    rdfs:comment """Gets the Service's URI, initialising it if necessary @return the Service's URI, or a default if not found""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.getServiceURI
+yawl:AbstractEngineClient_getServiceURI_10 a yawl:Method ;
+    rdfs:label "getServiceURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getServiceURI(String serviceName)" ;
+    rdfs:comment """Gets the URI for a named service, as stored in the Engine @param serviceName the name of the service to get the URI for @return the URI, or null if not found""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractEngineClient.engineIsAvailable
+yawl:AbstractEngineClient_engineIsAvailable_11 a yawl:Method ;
+    rdfs:label "engineIsAvailable" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean engineIsAvailable()" ;
+    rdfs:comment """Check that the engine is contactable @return true if Engine is contactable""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.connected
+yawl:AbstractEngineClient_connected_12 a yawl:Method ;
+    rdfs:label "connected" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean connected()" ;
+    rdfs:comment """Checks if there is a connection to the engine, and if there isn't, attempts to connect @return true if connected to the engine""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractEngineClient.getSessionHandle
+yawl:AbstractEngineClient_getSessionHandle_13 a yawl:Method ;
+    rdfs:label "getSessionHandle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSessionHandle()" ;
+    rdfs:comment """@return the current session handle for the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.successful
+yawl:AbstractEngineClient_successful_14 a yawl:Method ;
+    rdfs:label "successful" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean successful(String input)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.checkConnection
+yawl:AbstractEngineClient_checkConnection_15 a yawl:Method ;
+    rdfs:label "checkConnection" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean checkConnection(String sessionHandle)" ;
+    rdfs:comment """Checks the current session handle for validity @param sessionHandle the handle to check @return true if handle is valid and active @throws IOException if there's a problem connection to the Engine through IB""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: AbstractEngineClient.isAdminSession
+yawl:AbstractEngineClient_isAdminSession_16 a yawl:Method ;
+    rdfs:label "isAdminSession" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAdminSession(String sessionHandle)" ;
+    rdfs:comment """returns true if the session specified is an admin session""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.getEngineBuildProperties
+yawl:AbstractEngineClient_getEngineBuildProperties_17 a yawl:Method ;
+    rdfs:label "getEngineBuildProperties" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEngineBuildProperties()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.getRegisteredServices
+yawl:AbstractEngineClient_getRegisteredServices_18 a yawl:Method ;
+    rdfs:label "getRegisteredServices" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getRegisteredServices()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.getAdminUserPassword
+yawl:AbstractEngineClient_getAdminUserPassword_19 a yawl:Method ;
+    rdfs:label "getAdminUserPassword" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAdminUserPassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.uploadSpecification
+yawl:AbstractEngineClient_uploadSpecification_20 a yawl:Method ;
+    rdfs:label "uploadSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String uploadSpecification(String fileContents, String fileName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.unloadSpecification
+yawl:AbstractEngineClient_unloadSpecification_21 a yawl:Method ;
+    rdfs:label "unloadSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String unloadSpecification(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.getRegisteredServicesAsXML
+yawl:AbstractEngineClient_getRegisteredServicesAsXML_22 a yawl:Method ;
+    rdfs:label "getRegisteredServicesAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRegisteredServicesAsXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.addRegisteredService
+yawl:AbstractEngineClient_addRegisteredService_23 a yawl:Method ;
+    rdfs:label "addRegisteredService" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addRegisteredService(YAWLServiceReference service)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.removeRegisteredService
+yawl:AbstractEngineClient_removeRegisteredService_24 a yawl:Method ;
+    rdfs:label "removeRegisteredService" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeRegisteredService(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.getExternalClients
+yawl:AbstractEngineClient_getExternalClients_25 a yawl:Method ;
+    rdfs:label "getExternalClients" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getExternalClients()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.addExternalClient
+yawl:AbstractEngineClient_addExternalClient_26 a yawl:Method ;
+    rdfs:label "addExternalClient" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addExternalClient(YExternalClient client)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.removeExternalClient
+yawl:AbstractEngineClient_removeExternalClient_27 a yawl:Method ;
+    rdfs:label "removeExternalClient" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeExternalClient(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.updateExternalClient
+yawl:AbstractEngineClient_updateExternalClient_28 a yawl:Method ;
+    rdfs:label "updateExternalClient" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateExternalClient(String id, String password, String doco)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.getIABackendURI
+yawl:AbstractEngineClient_getIABackendURI_29 a yawl:Method ;
+    rdfs:label "getIABackendURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getIABackendURI()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.getWorkItemsForService
+yawl:AbstractEngineClient_getWorkItemsForService_30 a yawl:Method ;
+    rdfs:label "getWorkItemsForService" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getWorkItemsForService()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.suspendWorkItem
+yawl:AbstractEngineClient_suspendWorkItem_31 a yawl:Method ;
+    rdfs:label "suspendWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String suspendWorkItem(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.unsuspendWorkItem
+yawl:AbstractEngineClient_unsuspendWorkItem_32 a yawl:Method ;
+    rdfs:label "unsuspendWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String unsuspendWorkItem(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.skipWorkItem
+yawl:AbstractEngineClient_skipWorkItem_33 a yawl:Method ;
+    rdfs:label "skipWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String skipWorkItem(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.getRunningCases
+yawl:AbstractEngineClient_getRunningCases_34 a yawl:Method ;
+    rdfs:label "getRunningCases" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRunningCases(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.cancelCase
+yawl:AbstractEngineClient_cancelCase_35 a yawl:Method ;
+    rdfs:label "cancelCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String cancelCase(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.getCases
+yawl:AbstractEngineClient_getCases_36 a yawl:Method ;
+    rdfs:label "getCases" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCases(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.getCaseData
+yawl:AbstractEngineClient_getCaseData_37 a yawl:Method ;
+    rdfs:label "getCaseData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseData(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.getSpecificationDataSchema
+yawl:AbstractEngineClient_getSpecificationDataSchema_38 a yawl:Method ;
+    rdfs:label "getSpecificationDataSchema" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationDataSchema(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.getSpecification
+yawl:AbstractEngineClient_getSpecification_39 a yawl:Method ;
+    rdfs:label "getSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecification(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.getMITaskAttributes
+yawl:AbstractEngineClient_getMITaskAttributes_40 a yawl:Method ;
+    rdfs:label "getMITaskAttributes" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMITaskAttributes(YSpecificationID specID, String taskID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.getLiveWorkItemsForCase
+yawl:AbstractEngineClient_getLiveWorkItemsForCase_41 a yawl:Method ;
+    rdfs:label "getLiveWorkItemsForCase" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getLiveWorkItemsForCase(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.getLiveWorkItemsForIdentifier
+yawl:AbstractEngineClient_getLiveWorkItemsForIdentifier_42 a yawl:Method ;
+    rdfs:label "getLiveWorkItemsForIdentifier" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getLiveWorkItemsForIdentifier(String idType, String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.getAllLiveWorkItems
+yawl:AbstractEngineClient_getAllLiveWorkItems_43 a yawl:Method ;
+    rdfs:label "getAllLiveWorkItems" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAllLiveWorkItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.launchCase
+yawl:AbstractEngineClient_launchCase_44 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseData, YLogDataItemList logList)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.launchCase
+yawl:AbstractEngineClient_launchCase_45 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseData, YLogDataItemList logList, long delay)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.launchCase
+yawl:AbstractEngineClient_launchCase_46 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseData, YLogDataItemList logList, Date delay)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.launchCase
+yawl:AbstractEngineClient_launchCase_47 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseData, YLogDataItemList logList, Duration delay)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.getAllRunningCases
+yawl:AbstractEngineClient_getAllRunningCases_48 a yawl:Method ;
+    rdfs:label "getAllRunningCases" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getAllRunningCases()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.getAllRunningCaseIDs
+yawl:AbstractEngineClient_getAllRunningCaseIDs_49 a yawl:Method ;
+    rdfs:label "getAllRunningCaseIDs" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getAllRunningCaseIDs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.isRunningCaseID
+yawl:AbstractEngineClient_isRunningCaseID_50 a yawl:Method ;
+    rdfs:label "isRunningCaseID" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isRunningCaseID(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.getRunningCasesAsList
+yawl:AbstractEngineClient_getRunningCasesAsList_51 a yawl:Method ;
+    rdfs:label "getRunningCasesAsList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getRunningCasesAsList(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.getTaskParamsAsXML
+yawl:AbstractEngineClient_getTaskParamsAsXML_52 a yawl:Method ;
+    rdfs:label "getTaskParamsAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskParamsAsXML(YSpecificationID specID, String taskID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.canAddNewInstance
+yawl:AbstractEngineClient_canAddNewInstance_53 a yawl:Method ;
+    rdfs:label "canAddNewInstance" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean canAddNewInstance(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.createNewWorkItemInstance
+yawl:AbstractEngineClient_createNewWorkItemInstance_54 a yawl:Method ;
+    rdfs:label "createNewWorkItemInstance" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord createNewWorkItemInstance(String id, String value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractEngineClient.fail
+yawl:AbstractEngineClient_fail_55 a yawl:Method ;
+    rdfs:label "fail" ;
+    yawl:returnType "String" ;
+    yawl:signature "String fail(String msg)" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:AbstractEngineClient__sessionHandle a yawl:Field ;
+    rdfs:label "_sessionHandle" .
+
+yawl:AbstractEngineClient__engineLogonName a yawl:Field ;
+    rdfs:label "_engineLogonName" .
+
+yawl:AbstractEngineClient__engineLogonPassword a yawl:Field ;
+    rdfs:label "_engineLogonPassword" .
+
+yawl:AbstractEngineClient__defaultURI a yawl:Field ;
+    rdfs:label "_defaultURI" .
+
+yawl:AbstractEngineClient__serviceName a yawl:Field ;
+    rdfs:label "_serviceName" .
+
+yawl:AbstractEngineClient__serviceURI a yawl:Field ;
+    rdfs:label "_serviceURI" .
+
+yawl:AbstractEngineClient__engineURI a yawl:Field ;
+    rdfs:label "_engineURI" .
+
+yawl:AbstractEngineClient__yNameSpace a yawl:Field ;
+    rdfs:label "_yNameSpace" .
+
+yawl:AbstractEngineClient__interfaceAClient a yawl:Field ;
+    rdfs:label "_interfaceAClient" .
+
+yawl:AbstractEngineClient__interfaceBClient a yawl:Field ;
+    rdfs:label "_interfaceBClient" .
+
+yawl:AbstractEngineClient_ADMIN_STR a yawl:Field ;
+    rdfs:label "ADMIN_STR" .
+
+yawl:AbstractEngineClient_WORKITEM_ERR a yawl:Field ;
+    rdfs:label "WORKITEM_ERR" .
+
+yawl:AbstractEngineClient_SUCCESS_STR a yawl:Field ;
+    rdfs:label "SUCCESS_STR" .
+
+yawl:AbstractEngineClient_FAIL_STR a yawl:Field ;
+    rdfs:label "FAIL_STR" .
+
+yawl:AbstractEngineClient__log a yawl:Field ;
+    rdfs:label "_log" .
+
+yawl:AbstractEngineClient__mutex a yawl:Field ;
+    rdfs:label "_mutex" .
+
+
+

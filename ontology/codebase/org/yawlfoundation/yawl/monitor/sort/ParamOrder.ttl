@@ -1,0 +1,56 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.monitor.sort.ParamOrder
+yawl:ParamOrder a yawl:Class ;
+    rdfs:label "ParamOrder" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_monitor_sort ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/monitor/sort/ParamOrder.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 9/12/2009""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ParamOrder_setOrder_1 ;
+    yawl:hasMethod yawl:ParamOrder_getColumn_2 ;
+    yawl:hasMethod yawl:ParamOrder_isAscending_3 ;
+    yawl:hasField yawl:ParamOrder__column ;
+    yawl:hasField yawl:ParamOrder__ascending ;
+    .
+
+
+# Method: ParamOrder.setOrder
+yawl:ParamOrder_setOrder_1 a yawl:Method ;
+    rdfs:label "setOrder" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOrder(TableSorter column)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ParamOrder.getColumn
+yawl:ParamOrder_getColumn_2 a yawl:Method ;
+    rdfs:label "getColumn" ;
+    yawl:returnType "TableSorter" ;
+    yawl:signature "TableSorter getColumn()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ParamOrder.isAscending
+yawl:ParamOrder_isAscending_3 a yawl:Method ;
+    rdfs:label "isAscending" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAscending()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:ParamOrder__column a yawl:Field ;
+    rdfs:label "_column" .
+
+yawl:ParamOrder__ascending a yawl:Field ;
+    rdfs:label "_ascending" .
+
+
+

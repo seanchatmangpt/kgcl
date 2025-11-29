@@ -1,0 +1,150 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.worklet.exception
+yawl:org_yawlfoundation_yawl_worklet_exception a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.worklet.exception" .
+# Class: org.yawlfoundation.yawl.worklet.exception.ExceptionActions
+yawl:ExceptionActions a yawl:Class ;
+    rdfs:label "ExceptionActions" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_exception ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/exception/ExceptionActions.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 6/01/2016""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ExceptionActions_suspendWorkItemList_1 ;
+    yawl:hasMethod yawl:ExceptionActions_suspendAncestorCases_2 ;
+    yawl:hasMethod yawl:ExceptionActions_getSuspendableWorkItems_3 ;
+    yawl:hasMethod yawl:ExceptionActions_suspendAllCases_4 ;
+    yawl:hasMethod yawl:ExceptionActions_suspendCase_5 ;
+    yawl:hasMethod yawl:ExceptionActions_suspendCase_6 ;
+    yawl:hasMethod yawl:ExceptionActions_suspendWorkItem_7 ;
+    yawl:hasMethod yawl:ExceptionActions_getSuspendableWorkItems_8 ;
+    yawl:hasMethod yawl:ExceptionActions_getSuspendableWorkItemsInChain_9 ;
+    yawl:hasMethod yawl:ExceptionActions_suspendAncestorCases_10 ;
+    yawl:hasMethod yawl:ExceptionActions_unsuspendWorkItem_11 ;
+    yawl:hasMethod yawl:ExceptionActions_unsuspendList_12 ;
+    yawl:hasField yawl:ExceptionActions__engineClient ;
+    yawl:hasField yawl:ExceptionActions__log ;
+    .
+
+
+# Method: ExceptionActions.suspendWorkItemList
+yawl:ExceptionActions_suspendWorkItemList_1 a yawl:Method ;
+    rdfs:label "suspendWorkItemList" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean suspendWorkItemList(Set items)" ;
+    rdfs:comment """Suspends each workitem in the list of items passed @param items - items a list of workitems to suspend @return true if all were successfully suspended""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ExceptionActions.suspendAncestorCases
+yawl:ExceptionActions_suspendAncestorCases_2 a yawl:Method ;
+    rdfs:label "suspendAncestorCases" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean suspendAncestorCases(ExletRunner runner, Set items)" ;
+    rdfs:comment """Suspends all running worklet cases in the hierarchy of handlers @param runner - the runner for the child worklet case""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ExceptionActions.getSuspendableWorkItems
+yawl:ExceptionActions_getSuspendableWorkItems_3 a yawl:Method ;
+    rdfs:label "getSuspendableWorkItems" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getSuspendableWorkItems(YSpecificationID id)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ExceptionActions.suspendAllCases
+yawl:ExceptionActions_suspendAllCases_4 a yawl:Method ;
+    rdfs:label "suspendAllCases" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean suspendAllCases(ExletRunner hr)" ;
+    rdfs:comment """Suspends all live workitems in all live cases for the specification passed @param hr the HandlerRunner instance with the workitem to suspend @return a List of the workitems suspended""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ExceptionActions.suspendCase
+yawl:ExceptionActions_suspendCase_5 a yawl:Method ;
+    rdfs:label "suspendCase" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean suspendCase(ExletRunner hr)" ;
+    rdfs:comment """Suspends all live workitems in the specified case @param hr the HandlerRunner instance with the workitem to suspend @return a List of the workitems suspended""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ExceptionActions.suspendCase
+yawl:ExceptionActions_suspendCase_6 a yawl:Method ;
+    rdfs:label "suspendCase" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set suspendCase(String caseID)" ;
+    rdfs:comment """Suspends all live workitems in the specified case @param caseID - the id of the case to suspend @return true on successful suspend""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ExceptionActions.suspendWorkItem
+yawl:ExceptionActions_suspendWorkItem_7 a yawl:Method ;
+    rdfs:label "suspendWorkItem" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean suspendWorkItem(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExceptionActions.getSuspendableWorkItems
+yawl:ExceptionActions_getSuspendableWorkItems_8 a yawl:Method ;
+    rdfs:label "getSuspendableWorkItems" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getSuspendableWorkItems(String scope, String id)" ;
+    rdfs:comment """Retrieves a list of 'suspendable' workitems (ie. enabled, fired or executing) for a specified scope. @param scope - either case (all items in a case) or spec (all items in all case instances of that specification) or task (all workitem instances of that task) @param id - the id of the case/spec/task @return a list of the requested workitems""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ExceptionActions.getSuspendableWorkItemsInChain
+yawl:ExceptionActions_getSuspendableWorkItemsInChain_9 a yawl:Method ;
+    rdfs:label "getSuspendableWorkItemsInChain" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getSuspendableWorkItemsInChain(Map runners, String caseID)" ;
+    rdfs:comment """Returns all suspendable workitems in the hierarchy of ancestor cases @param caseID @return the list of suspendable workitems""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ExceptionActions.suspendAncestorCases
+yawl:ExceptionActions_suspendAncestorCases_10 a yawl:Method ;
+    rdfs:label "suspendAncestorCases" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean suspendAncestorCases(Map runners, ExletRunner runner)" ;
+    rdfs:comment """Suspends all running worklet cases in the hierarchy of handlers @param runner - the runner for the child worklet case""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ExceptionActions.unsuspendWorkItem
+yawl:ExceptionActions_unsuspendWorkItem_11 a yawl:Method ;
+    rdfs:label "unsuspendWorkItem" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord unsuspendWorkItem(WorkItemRecord wir)" ;
+    rdfs:comment """Moves a workitem from suspended to its previous status @param wir - the workitem to unsuspend @return the unsuspended workitem (record)""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ExceptionActions.unsuspendList
+yawl:ExceptionActions_unsuspendList_12 a yawl:Method ;
+    rdfs:label "unsuspendList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void unsuspendList(ExletRunner runner)" ;
+    rdfs:comment """unsuspends all previously suspended workitems in this case and/or spec""" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:ExceptionActions__engineClient a yawl:Field ;
+    rdfs:label "_engineClient" .
+
+yawl:ExceptionActions__log a yawl:Field ;
+    rdfs:label "_log" .
+
+
+

@@ -1,0 +1,91 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.resourcing.util
+yawl:org_yawlfoundation_yawl_resourcing_util a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.util" .
+# Class: org.yawlfoundation.yawl.resourcing.util.DelayedLaunchRecord
+yawl:DelayedLaunchRecord a yawl:Class ;
+    rdfs:label "DelayedLaunchRecord" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/util/DelayedLaunchRecord.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 10/02/12""" ;
+    yawl:implements yawl:Comparable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DelayedLaunchRecord_getSpecID_1 ;
+    yawl:hasMethod yawl:DelayedLaunchRecord_setSpecID_2 ;
+    yawl:hasMethod yawl:DelayedLaunchRecord_logCaseLaunch_3 ;
+    yawl:hasMethod yawl:DelayedLaunchRecord_compareTo_4 ;
+    yawl:hasMethod yawl:DelayedLaunchRecord_equals_5 ;
+    yawl:hasMethod yawl:DelayedLaunchRecord_hashCode_6 ;
+    yawl:hasField yawl:DelayedLaunchRecord_specID ;
+    yawl:hasField yawl:DelayedLaunchRecord_launcher ;
+    yawl:hasField yawl:DelayedLaunchRecord_delay ;
+    .
+
+
+# Method: DelayedLaunchRecord.getSpecID
+yawl:DelayedLaunchRecord_getSpecID_1 a yawl:Method ;
+    rdfs:label "getSpecID" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getSpecID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DelayedLaunchRecord.setSpecID
+yawl:DelayedLaunchRecord_setSpecID_2 a yawl:Method ;
+    rdfs:label "setSpecID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSpecID(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DelayedLaunchRecord.logCaseLaunch
+yawl:DelayedLaunchRecord_logCaseLaunch_3 a yawl:Method ;
+    rdfs:label "logCaseLaunch" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logCaseLaunch(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DelayedLaunchRecord.compareTo
+yawl:DelayedLaunchRecord_compareTo_4 a yawl:Method ;
+    rdfs:label "compareTo" ;
+    yawl:returnType "int" ;
+    yawl:signature "int compareTo(DelayedLaunchRecord other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DelayedLaunchRecord.equals
+yawl:DelayedLaunchRecord_equals_5 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DelayedLaunchRecord.hashCode
+yawl:DelayedLaunchRecord_hashCode_6 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:DelayedLaunchRecord_specID a yawl:Field ;
+    rdfs:label "specID" .
+
+yawl:DelayedLaunchRecord_launcher a yawl:Field ;
+    rdfs:label "launcher" .
+
+yawl:DelayedLaunchRecord_delay a yawl:Field ;
+    rdfs:label "delay" .
+
+
+

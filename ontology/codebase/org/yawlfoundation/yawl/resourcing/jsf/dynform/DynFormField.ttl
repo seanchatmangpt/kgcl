@@ -1,0 +1,1018 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.dynform.DynFormField
+yawl:DynFormField a yawl:Class ;
+    rdfs:label "DynFormField" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf_dynform ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/dynform/DynFormField.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 5/07/2008""" ;
+    yawl:implements yawl:Cloneable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DynFormField_clone_1 ;
+    yawl:hasMethod yawl:DynFormField_getName_2 ;
+    yawl:hasMethod yawl:DynFormField_setName_3 ;
+    yawl:hasMethod yawl:DynFormField_getDatatype_4 ;
+    yawl:hasMethod yawl:DynFormField_setDatatype_5 ;
+    yawl:hasMethod yawl:DynFormField_getDataTypeUnprefixed_6 ;
+    yawl:hasMethod yawl:DynFormField_getNamespacePrefix_7 ;
+    yawl:hasMethod yawl:DynFormField_getValue_8 ;
+    yawl:hasMethod yawl:DynFormField_setValue_9 ;
+    yawl:hasMethod yawl:DynFormField_getMinoccurs_10 ;
+    yawl:hasMethod yawl:DynFormField_setMinoccurs_11 ;
+    yawl:hasMethod yawl:DynFormField_getMinOccursStr_12 ;
+    yawl:hasMethod yawl:DynFormField_setMinoccurs_13 ;
+    yawl:hasMethod yawl:DynFormField_getMaxoccurs_14 ;
+    yawl:hasMethod yawl:DynFormField_setMaxoccurs_15 ;
+    yawl:hasMethod yawl:DynFormField_setMaxoccurs_16 ;
+    yawl:hasMethod yawl:DynFormField_getMaxOccursStr_17 ;
+    yawl:hasMethod yawl:DynFormField_isNullMinoccurs_18 ;
+    yawl:hasMethod yawl:DynFormField_setNullMinoccurs_19 ;
+    yawl:hasMethod yawl:DynFormField_isNullMaxoccurs_20 ;
+    yawl:hasMethod yawl:DynFormField_setNullMaxoccurs_21 ;
+    yawl:hasMethod yawl:DynFormField_getParam_22 ;
+    yawl:hasMethod yawl:DynFormField_setParam_23 ;
+    yawl:hasMethod yawl:DynFormField_getLevel_24 ;
+    yawl:hasMethod yawl:DynFormField_setLevel_25 ;
+    yawl:hasMethod yawl:DynFormField_getOrder_26 ;
+    yawl:hasMethod yawl:DynFormField_setOrder_27 ;
+    yawl:hasMethod yawl:DynFormField_getOccursCount_28 ;
+    yawl:hasMethod yawl:DynFormField_setOccursCount_29 ;
+    yawl:hasMethod yawl:DynFormField_getParent_30 ;
+    yawl:hasMethod yawl:DynFormField_setParent_31 ;
+    yawl:hasMethod yawl:DynFormField_setEmptyComplexTypeFlag_32 ;
+    yawl:hasMethod yawl:DynFormField_isEmptyComplexTypeFlag_33 ;
+    yawl:hasMethod yawl:DynFormField_setRequired_34 ;
+    yawl:hasMethod yawl:DynFormField_isRequired_35 ;
+    yawl:hasMethod yawl:DynFormField_hide_36 ;
+    yawl:hasMethod yawl:DynFormField_show_37 ;
+    yawl:hasMethod yawl:DynFormField_hasZeroMinimum_38 ;
+    yawl:hasMethod yawl:DynFormField_setEnumeratedValues_39 ;
+    yawl:hasMethod yawl:DynFormField_getEnumeratedValues_40 ;
+    yawl:hasMethod yawl:DynFormField_hasEnumeratedValues_41 ;
+    yawl:hasMethod yawl:DynFormField_setSubFieldList_42 ;
+    yawl:hasMethod yawl:DynFormField_getSubFieldList_43 ;
+    yawl:hasMethod yawl:DynFormField_getSubField_44 ;
+    yawl:hasMethod yawl:DynFormField_isFieldContainer_45 ;
+    yawl:hasMethod yawl:DynFormField_addSubField_46 ;
+    yawl:hasMethod yawl:DynFormField_addSubFieldList_47 ;
+    yawl:hasMethod yawl:DynFormField_removeSubField_48 ;
+    yawl:hasMethod yawl:DynFormField_getGroupID_49 ;
+    yawl:hasMethod yawl:DynFormField_setGroupID_50 ;
+    yawl:hasMethod yawl:DynFormField_getChoiceID_51 ;
+    yawl:hasMethod yawl:DynFormField_setChoiceID_52 ;
+    yawl:hasMethod yawl:DynFormField_isChoiceField_53 ;
+    yawl:hasMethod yawl:DynFormField_isGroupedField_54 ;
+    yawl:hasMethod yawl:DynFormField_isSimpleField_55 ;
+    yawl:hasMethod yawl:DynFormField_getFont_56 ;
+    yawl:hasMethod yawl:DynFormField_getRestriction_57 ;
+    yawl:hasMethod yawl:DynFormField_setRestriction_58 ;
+    yawl:hasMethod yawl:DynFormField_hasRestriction_59 ;
+    yawl:hasMethod yawl:DynFormField_setUnion_60 ;
+    yawl:hasMethod yawl:DynFormField_getUnion_61 ;
+    yawl:hasMethod yawl:DynFormField_hasUnion_62 ;
+    yawl:hasMethod yawl:DynFormField_hasParent_63 ;
+    yawl:hasMethod yawl:DynFormField_setListType_64 ;
+    yawl:hasMethod yawl:DynFormField_getListType_65 ;
+    yawl:hasMethod yawl:DynFormField_hasListType_66 ;
+    yawl:hasMethod yawl:DynFormField_getAttributes_67 ;
+    yawl:hasMethod yawl:DynFormField_setAttributes_68 ;
+    yawl:hasMethod yawl:DynFormField_convertOccurs_69 ;
+    yawl:hasMethod yawl:DynFormField_isPrimitiveType_70 ;
+    yawl:hasMethod yawl:DynFormField_equals_71 ;
+    yawl:hasMethod yawl:DynFormField_getAlertText_72 ;
+    yawl:hasMethod yawl:DynFormField_getLabelText_73 ;
+    yawl:hasMethod yawl:DynFormField_isInputOnly_74 ;
+    yawl:hasMethod yawl:DynFormField_hasHideAttribute_75 ;
+    yawl:hasMethod yawl:DynFormField_hasHideIfAttribute_76 ;
+    yawl:hasMethod yawl:DynFormField_isHidden_77 ;
+    yawl:hasMethod yawl:DynFormField_isVisible_78 ;
+    yawl:hasMethod yawl:DynFormField_isEmptyOptionalInputOnly_79 ;
+    yawl:hasMethod yawl:DynFormField_hasNullValue_80 ;
+    yawl:hasMethod yawl:DynFormField_getToolTip_81 ;
+    yawl:hasMethod yawl:DynFormField_getDefaultToolTip_82 ;
+    yawl:hasMethod yawl:DynFormField_hasSkipValidationAttribute_83 ;
+    yawl:hasMethod yawl:DynFormField_getTextJustify_84 ;
+    yawl:hasMethod yawl:DynFormField_hasBlackoutAttribute_85 ;
+    yawl:hasMethod yawl:DynFormField_getUserDefinedFontStyle_86 ;
+    yawl:hasMethod yawl:DynFormField_getBackgroundColour_87 ;
+    yawl:hasMethod yawl:DynFormField_isTextArea_88 ;
+    yawl:hasMethod yawl:DynFormField_isYDocument_89 ;
+    yawl:hasMethod yawl:DynFormField_getImageAbove_90 ;
+    yawl:hasMethod yawl:DynFormField_getImageBelow_91 ;
+    yawl:hasMethod yawl:DynFormField_getImageAboveAlign_92 ;
+    yawl:hasMethod yawl:DynFormField_getImageBelowAlign_93 ;
+    yawl:hasMethod yawl:DynFormField_isLineAbove_94 ;
+    yawl:hasMethod yawl:DynFormField_isLineBelow_95 ;
+    yawl:hasMethod yawl:DynFormField_getTextAbove_96 ;
+    yawl:hasMethod yawl:DynFormField_getTextBelow_97 ;
+    yawl:hasMethod yawl:DynFormField_getUserDefinedFont_98 ;
+    yawl:hasMethod yawl:DynFormField_setRestrictionAttributes_99 ;
+    yawl:hasMethod yawl:DynFormField_getOrCreateRestriction_100 ;
+    yawl:hasField yawl:DynFormField__name ;
+    yawl:hasField yawl:DynFormField__datatype ;
+    yawl:hasField yawl:DynFormField__value ;
+    yawl:hasField yawl:DynFormField__minoccurs ;
+    yawl:hasField yawl:DynFormField__maxoccurs ;
+    yawl:hasField yawl:DynFormField__nullMinoccurs ;
+    yawl:hasField yawl:DynFormField__nullMaxoccurs ;
+    yawl:hasField yawl:DynFormField__param ;
+    yawl:hasField yawl:DynFormField__occursCount ;
+    yawl:hasField yawl:DynFormField__level ;
+    yawl:hasField yawl:DynFormField__order ;
+    yawl:hasField yawl:DynFormField__required ;
+    yawl:hasField yawl:DynFormField__hidden ;
+    yawl:hasField yawl:DynFormField__emptyComplexTypeFlag ;
+    yawl:hasField yawl:DynFormField__hideApplied ;
+    yawl:hasField yawl:DynFormField__font ;
+    yawl:hasField yawl:DynFormField__parent ;
+    yawl:hasField yawl:DynFormField__restriction ;
+    yawl:hasField yawl:DynFormField__union ;
+    yawl:hasField yawl:DynFormField__list ;
+    yawl:hasField yawl:DynFormField__attributes ;
+    yawl:hasField yawl:DynFormField__subFieldList ;
+    yawl:hasField yawl:DynFormField__groupID ;
+    yawl:hasField yawl:DynFormField__choiceID ;
+    .
+
+
+# Method: DynFormField.clone
+yawl:DynFormField_clone_1 a yawl:Method ;
+    rdfs:label "clone" ;
+    yawl:returnType "DynFormField" ;
+    yawl:signature "DynFormField clone()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getName
+yawl:DynFormField_getName_2 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.setName
+yawl:DynFormField_setName_3 a yawl:Method ;
+    rdfs:label "setName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getDatatype
+yawl:DynFormField_getDatatype_4 a yawl:Method ;
+    rdfs:label "getDatatype" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDatatype()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.setDatatype
+yawl:DynFormField_setDatatype_5 a yawl:Method ;
+    rdfs:label "setDatatype" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDatatype(String datatype)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getDataTypeUnprefixed
+yawl:DynFormField_getDataTypeUnprefixed_6 a yawl:Method ;
+    rdfs:label "getDataTypeUnprefixed" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataTypeUnprefixed()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getNamespacePrefix
+yawl:DynFormField_getNamespacePrefix_7 a yawl:Method ;
+    rdfs:label "getNamespacePrefix" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNamespacePrefix()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getValue
+yawl:DynFormField_getValue_8 a yawl:Method ;
+    rdfs:label "getValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getValue()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.setValue
+yawl:DynFormField_setValue_9 a yawl:Method ;
+    rdfs:label "setValue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setValue(String value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getMinoccurs
+yawl:DynFormField_getMinoccurs_10 a yawl:Method ;
+    rdfs:label "getMinoccurs" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getMinoccurs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.setMinoccurs
+yawl:DynFormField_setMinoccurs_11 a yawl:Method ;
+    rdfs:label "setMinoccurs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMinoccurs(long minoccurs)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getMinOccursStr
+yawl:DynFormField_getMinOccursStr_12 a yawl:Method ;
+    rdfs:label "getMinOccursStr" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMinOccursStr()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.setMinoccurs
+yawl:DynFormField_setMinoccurs_13 a yawl:Method ;
+    rdfs:label "setMinoccurs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMinoccurs(String minoccurs)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getMaxoccurs
+yawl:DynFormField_getMaxoccurs_14 a yawl:Method ;
+    rdfs:label "getMaxoccurs" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getMaxoccurs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.setMaxoccurs
+yawl:DynFormField_setMaxoccurs_15 a yawl:Method ;
+    rdfs:label "setMaxoccurs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMaxoccurs(long maxoccurs)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.setMaxoccurs
+yawl:DynFormField_setMaxoccurs_16 a yawl:Method ;
+    rdfs:label "setMaxoccurs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMaxoccurs(String maxoccurs)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getMaxOccursStr
+yawl:DynFormField_getMaxOccursStr_17 a yawl:Method ;
+    rdfs:label "getMaxOccursStr" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMaxOccursStr()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.isNullMinoccurs
+yawl:DynFormField_isNullMinoccurs_18 a yawl:Method ;
+    rdfs:label "isNullMinoccurs" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isNullMinoccurs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.setNullMinoccurs
+yawl:DynFormField_setNullMinoccurs_19 a yawl:Method ;
+    rdfs:label "setNullMinoccurs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNullMinoccurs(boolean nullMinoccurs)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.isNullMaxoccurs
+yawl:DynFormField_isNullMaxoccurs_20 a yawl:Method ;
+    rdfs:label "isNullMaxoccurs" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isNullMaxoccurs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.setNullMaxoccurs
+yawl:DynFormField_setNullMaxoccurs_21 a yawl:Method ;
+    rdfs:label "setNullMaxoccurs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNullMaxoccurs(boolean nullMaxoccurs)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getParam
+yawl:DynFormField_getParam_22 a yawl:Method ;
+    rdfs:label "getParam" ;
+    yawl:returnType "FormParameter" ;
+    yawl:signature "FormParameter getParam()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.setParam
+yawl:DynFormField_setParam_23 a yawl:Method ;
+    rdfs:label "setParam" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setParam(FormParameter param)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getLevel
+yawl:DynFormField_getLevel_24 a yawl:Method ;
+    rdfs:label "getLevel" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getLevel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.setLevel
+yawl:DynFormField_setLevel_25 a yawl:Method ;
+    rdfs:label "setLevel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLevel(int level)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getOrder
+yawl:DynFormField_getOrder_26 a yawl:Method ;
+    rdfs:label "getOrder" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getOrder()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.setOrder
+yawl:DynFormField_setOrder_27 a yawl:Method ;
+    rdfs:label "setOrder" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOrder(int order)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getOccursCount
+yawl:DynFormField_getOccursCount_28 a yawl:Method ;
+    rdfs:label "getOccursCount" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getOccursCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.setOccursCount
+yawl:DynFormField_setOccursCount_29 a yawl:Method ;
+    rdfs:label "setOccursCount" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOccursCount(long occursCount)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getParent
+yawl:DynFormField_getParent_30 a yawl:Method ;
+    rdfs:label "getParent" ;
+    yawl:returnType "DynFormField" ;
+    yawl:signature "DynFormField getParent()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.setParent
+yawl:DynFormField_setParent_31 a yawl:Method ;
+    rdfs:label "setParent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setParent(DynFormField parent)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.setEmptyComplexTypeFlag
+yawl:DynFormField_setEmptyComplexTypeFlag_32 a yawl:Method ;
+    rdfs:label "setEmptyComplexTypeFlag" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEmptyComplexTypeFlag(boolean flag)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.isEmptyComplexTypeFlag
+yawl:DynFormField_isEmptyComplexTypeFlag_33 a yawl:Method ;
+    rdfs:label "isEmptyComplexTypeFlag" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEmptyComplexTypeFlag()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.setRequired
+yawl:DynFormField_setRequired_34 a yawl:Method ;
+    rdfs:label "setRequired" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRequired(boolean required)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.isRequired
+yawl:DynFormField_isRequired_35 a yawl:Method ;
+    rdfs:label "isRequired" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isRequired()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.hide
+yawl:DynFormField_hide_36 a yawl:Method ;
+    rdfs:label "hide" ;
+    yawl:returnType "void" ;
+    yawl:signature "void hide()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.show
+yawl:DynFormField_show_37 a yawl:Method ;
+    rdfs:label "show" ;
+    yawl:returnType "void" ;
+    yawl:signature "void show()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.hasZeroMinimum
+yawl:DynFormField_hasZeroMinimum_38 a yawl:Method ;
+    rdfs:label "hasZeroMinimum" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasZeroMinimum()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.setEnumeratedValues
+yawl:DynFormField_setEnumeratedValues_39 a yawl:Method ;
+    rdfs:label "setEnumeratedValues" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEnumeratedValues(List enumValues)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getEnumeratedValues
+yawl:DynFormField_getEnumeratedValues_40 a yawl:Method ;
+    rdfs:label "getEnumeratedValues" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getEnumeratedValues()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.hasEnumeratedValues
+yawl:DynFormField_hasEnumeratedValues_41 a yawl:Method ;
+    rdfs:label "hasEnumeratedValues" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasEnumeratedValues()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.setSubFieldList
+yawl:DynFormField_setSubFieldList_42 a yawl:Method ;
+    rdfs:label "setSubFieldList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSubFieldList(List subList)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getSubFieldList
+yawl:DynFormField_getSubFieldList_43 a yawl:Method ;
+    rdfs:label "getSubFieldList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getSubFieldList()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getSubField
+yawl:DynFormField_getSubField_44 a yawl:Method ;
+    rdfs:label "getSubField" ;
+    yawl:returnType "DynFormField" ;
+    yawl:signature "DynFormField getSubField(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.isFieldContainer
+yawl:DynFormField_isFieldContainer_45 a yawl:Method ;
+    rdfs:label "isFieldContainer" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isFieldContainer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.addSubField
+yawl:DynFormField_addSubField_46 a yawl:Method ;
+    rdfs:label "addSubField" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addSubField(DynFormField field)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.addSubFieldList
+yawl:DynFormField_addSubFieldList_47 a yawl:Method ;
+    rdfs:label "addSubFieldList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addSubFieldList(List fieldList)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.removeSubField
+yawl:DynFormField_removeSubField_48 a yawl:Method ;
+    rdfs:label "removeSubField" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeSubField(DynFormField field)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getGroupID
+yawl:DynFormField_getGroupID_49 a yawl:Method ;
+    rdfs:label "getGroupID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getGroupID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.setGroupID
+yawl:DynFormField_setGroupID_50 a yawl:Method ;
+    rdfs:label "setGroupID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setGroupID(String groupID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getChoiceID
+yawl:DynFormField_getChoiceID_51 a yawl:Method ;
+    rdfs:label "getChoiceID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getChoiceID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.setChoiceID
+yawl:DynFormField_setChoiceID_52 a yawl:Method ;
+    rdfs:label "setChoiceID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setChoiceID(String choiceID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.isChoiceField
+yawl:DynFormField_isChoiceField_53 a yawl:Method ;
+    rdfs:label "isChoiceField" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isChoiceField()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.isGroupedField
+yawl:DynFormField_isGroupedField_54 a yawl:Method ;
+    rdfs:label "isGroupedField" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isGroupedField()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.isSimpleField
+yawl:DynFormField_isSimpleField_55 a yawl:Method ;
+    rdfs:label "isSimpleField" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isSimpleField()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getFont
+yawl:DynFormField_getFont_56 a yawl:Method ;
+    rdfs:label "getFont" ;
+    yawl:returnType "Font" ;
+    yawl:signature "Font getFont()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getRestriction
+yawl:DynFormField_getRestriction_57 a yawl:Method ;
+    rdfs:label "getRestriction" ;
+    yawl:returnType "DynFormFieldRestriction" ;
+    yawl:signature "DynFormFieldRestriction getRestriction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.setRestriction
+yawl:DynFormField_setRestriction_58 a yawl:Method ;
+    rdfs:label "setRestriction" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRestriction(DynFormFieldRestriction restriction)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.hasRestriction
+yawl:DynFormField_hasRestriction_59 a yawl:Method ;
+    rdfs:label "hasRestriction" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasRestriction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.setUnion
+yawl:DynFormField_setUnion_60 a yawl:Method ;
+    rdfs:label "setUnion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUnion(DynFormFieldUnion union)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getUnion
+yawl:DynFormField_getUnion_61 a yawl:Method ;
+    rdfs:label "getUnion" ;
+    yawl:returnType "DynFormFieldUnion" ;
+    yawl:signature "DynFormFieldUnion getUnion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.hasUnion
+yawl:DynFormField_hasUnion_62 a yawl:Method ;
+    rdfs:label "hasUnion" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasUnion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.hasParent
+yawl:DynFormField_hasParent_63 a yawl:Method ;
+    rdfs:label "hasParent" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasParent()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.setListType
+yawl:DynFormField_setListType_64 a yawl:Method ;
+    rdfs:label "setListType" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setListType(DynFormFieldListFacet list)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getListType
+yawl:DynFormField_getListType_65 a yawl:Method ;
+    rdfs:label "getListType" ;
+    yawl:returnType "DynFormFieldListFacet" ;
+    yawl:signature "DynFormFieldListFacet getListType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.hasListType
+yawl:DynFormField_hasListType_66 a yawl:Method ;
+    rdfs:label "hasListType" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasListType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getAttributes
+yawl:DynFormField_getAttributes_67 a yawl:Method ;
+    rdfs:label "getAttributes" ;
+    yawl:returnType "DynFormUserAttributes" ;
+    yawl:signature "DynFormUserAttributes getAttributes()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.setAttributes
+yawl:DynFormField_setAttributes_68 a yawl:Method ;
+    rdfs:label "setAttributes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAttributes(DynFormUserAttributes attributes)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.convertOccurs
+yawl:DynFormField_convertOccurs_69 a yawl:Method ;
+    rdfs:label "convertOccurs" ;
+    yawl:returnType "long" ;
+    yawl:signature "long convertOccurs(String occurs)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormField.isPrimitiveType
+yawl:DynFormField_isPrimitiveType_70 a yawl:Method ;
+    rdfs:label "isPrimitiveType" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isPrimitiveType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.equals
+yawl:DynFormField_equals_71 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(DynFormField other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getAlertText
+yawl:DynFormField_getAlertText_72 a yawl:Method ;
+    rdfs:label "getAlertText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAlertText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getLabelText
+yawl:DynFormField_getLabelText_73 a yawl:Method ;
+    rdfs:label "getLabelText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLabelText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.isInputOnly
+yawl:DynFormField_isInputOnly_74 a yawl:Method ;
+    rdfs:label "isInputOnly" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isInputOnly()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.hasHideAttribute
+yawl:DynFormField_hasHideAttribute_75 a yawl:Method ;
+    rdfs:label "hasHideAttribute" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasHideAttribute()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.hasHideIfAttribute
+yawl:DynFormField_hasHideIfAttribute_76 a yawl:Method ;
+    rdfs:label "hasHideIfAttribute" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasHideIfAttribute(String data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.isHidden
+yawl:DynFormField_isHidden_77 a yawl:Method ;
+    rdfs:label "isHidden" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isHidden(String data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.isVisible
+yawl:DynFormField_isVisible_78 a yawl:Method ;
+    rdfs:label "isVisible" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isVisible()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.isEmptyOptionalInputOnly
+yawl:DynFormField_isEmptyOptionalInputOnly_79 a yawl:Method ;
+    rdfs:label "isEmptyOptionalInputOnly" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEmptyOptionalInputOnly()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.hasNullValue
+yawl:DynFormField_hasNullValue_80 a yawl:Method ;
+    rdfs:label "hasNullValue" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasNullValue()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getToolTip
+yawl:DynFormField_getToolTip_81 a yawl:Method ;
+    rdfs:label "getToolTip" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getToolTip()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getDefaultToolTip
+yawl:DynFormField_getDefaultToolTip_82 a yawl:Method ;
+    rdfs:label "getDefaultToolTip" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDefaultToolTip()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.hasSkipValidationAttribute
+yawl:DynFormField_hasSkipValidationAttribute_83 a yawl:Method ;
+    rdfs:label "hasSkipValidationAttribute" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasSkipValidationAttribute()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getTextJustify
+yawl:DynFormField_getTextJustify_84 a yawl:Method ;
+    rdfs:label "getTextJustify" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTextJustify()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.hasBlackoutAttribute
+yawl:DynFormField_hasBlackoutAttribute_85 a yawl:Method ;
+    rdfs:label "hasBlackoutAttribute" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasBlackoutAttribute()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getUserDefinedFontStyle
+yawl:DynFormField_getUserDefinedFontStyle_86 a yawl:Method ;
+    rdfs:label "getUserDefinedFontStyle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUserDefinedFontStyle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getBackgroundColour
+yawl:DynFormField_getBackgroundColour_87 a yawl:Method ;
+    rdfs:label "getBackgroundColour" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBackgroundColour()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.isTextArea
+yawl:DynFormField_isTextArea_88 a yawl:Method ;
+    rdfs:label "isTextArea" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isTextArea()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.isYDocument
+yawl:DynFormField_isYDocument_89 a yawl:Method ;
+    rdfs:label "isYDocument" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isYDocument()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getImageAbove
+yawl:DynFormField_getImageAbove_90 a yawl:Method ;
+    rdfs:label "getImageAbove" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getImageAbove()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getImageBelow
+yawl:DynFormField_getImageBelow_91 a yawl:Method ;
+    rdfs:label "getImageBelow" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getImageBelow()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getImageAboveAlign
+yawl:DynFormField_getImageAboveAlign_92 a yawl:Method ;
+    rdfs:label "getImageAboveAlign" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getImageAboveAlign()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getImageBelowAlign
+yawl:DynFormField_getImageBelowAlign_93 a yawl:Method ;
+    rdfs:label "getImageBelowAlign" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getImageBelowAlign()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.isLineAbove
+yawl:DynFormField_isLineAbove_94 a yawl:Method ;
+    rdfs:label "isLineAbove" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isLineAbove()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.isLineBelow
+yawl:DynFormField_isLineBelow_95 a yawl:Method ;
+    rdfs:label "isLineBelow" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isLineBelow()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getTextAbove
+yawl:DynFormField_getTextAbove_96 a yawl:Method ;
+    rdfs:label "getTextAbove" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTextAbove()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getTextBelow
+yawl:DynFormField_getTextBelow_97 a yawl:Method ;
+    rdfs:label "getTextBelow" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTextBelow()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getUserDefinedFont
+yawl:DynFormField_getUserDefinedFont_98 a yawl:Method ;
+    rdfs:label "getUserDefinedFont" ;
+    yawl:returnType "Font" ;
+    yawl:signature "Font getUserDefinedFont()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.setRestrictionAttributes
+yawl:DynFormField_setRestrictionAttributes_99 a yawl:Method ;
+    rdfs:label "setRestrictionAttributes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRestrictionAttributes()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormField.getOrCreateRestriction
+yawl:DynFormField_getOrCreateRestriction_100 a yawl:Method ;
+    rdfs:label "getOrCreateRestriction" ;
+    yawl:returnType "DynFormFieldRestriction" ;
+    yawl:signature "DynFormFieldRestriction getOrCreateRestriction()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:DynFormField__name a yawl:Field ;
+    rdfs:label "_name" .
+
+yawl:DynFormField__datatype a yawl:Field ;
+    rdfs:label "_datatype" .
+
+yawl:DynFormField__value a yawl:Field ;
+    rdfs:label "_value" .
+
+yawl:DynFormField__minoccurs a yawl:Field ;
+    rdfs:label "_minoccurs" .
+
+yawl:DynFormField__maxoccurs a yawl:Field ;
+    rdfs:label "_maxoccurs" .
+
+yawl:DynFormField__nullMinoccurs a yawl:Field ;
+    rdfs:label "_nullMinoccurs" .
+
+yawl:DynFormField__nullMaxoccurs a yawl:Field ;
+    rdfs:label "_nullMaxoccurs" .
+
+yawl:DynFormField__param a yawl:Field ;
+    rdfs:label "_param" .
+
+yawl:DynFormField__occursCount a yawl:Field ;
+    rdfs:label "_occursCount" .
+
+yawl:DynFormField__level a yawl:Field ;
+    rdfs:label "_level" .
+
+yawl:DynFormField__order a yawl:Field ;
+    rdfs:label "_order" .
+
+yawl:DynFormField__required a yawl:Field ;
+    rdfs:label "_required" .
+
+yawl:DynFormField__hidden a yawl:Field ;
+    rdfs:label "_hidden" .
+
+yawl:DynFormField__emptyComplexTypeFlag a yawl:Field ;
+    rdfs:label "_emptyComplexTypeFlag" .
+
+yawl:DynFormField__hideApplied a yawl:Field ;
+    rdfs:label "_hideApplied" .
+
+yawl:DynFormField__font a yawl:Field ;
+    rdfs:label "_font" .
+
+yawl:DynFormField__parent a yawl:Field ;
+    rdfs:label "_parent" .
+
+yawl:DynFormField__restriction a yawl:Field ;
+    rdfs:label "_restriction" .
+
+yawl:DynFormField__union a yawl:Field ;
+    rdfs:label "_union" .
+
+yawl:DynFormField__list a yawl:Field ;
+    rdfs:label "_list" .
+
+yawl:DynFormField__attributes a yawl:Field ;
+    rdfs:label "_attributes" .
+
+yawl:DynFormField__subFieldList a yawl:Field ;
+    rdfs:label "_subFieldList" .
+
+yawl:DynFormField__groupID a yawl:Field ;
+    rdfs:label "_groupID" .
+
+yawl:DynFormField__choiceID a yawl:Field ;
+    rdfs:label "_choiceID" .
+
+
+

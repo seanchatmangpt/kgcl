@@ -1,0 +1,63 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.pconns.VertexDemo
+yawl:VertexDemo a yawl:Class ;
+    rdfs:label "VertexDemo" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor_pconns ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/pconns/VertexDemo.java"^^xsd:string ;
+    rdfs:comment """Demonstrates the use of images to represent graph vertices. The images are supplied via the VertexShapeFunction so that both the image and its shape can be utilized. The images used in this demo (courtesy of slashdot.org) are rectangular but with a transparent background. When vertices are represented by these images, it looks better if the actual shape of the opaque part of the image is computed so that the edge arrowheads follow the visual shape of the image. This demo uses the FourPassImageSh""" ;
+    yawl:extends yawl:JApplet ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:VertexDemo_createGraph_1 ;
+    yawl:hasMethod yawl:VertexDemo_main_2 ;
+    yawl:hasField yawl:VertexDemo_serialVersionUID ;
+    yawl:hasField yawl:VertexDemo_VERTEX_COUNT ;
+    yawl:hasField yawl:VertexDemo_graph ;
+    yawl:hasField yawl:VertexDemo_vv ;
+    yawl:hasField yawl:VertexDemo_iconNames ;
+    .
+
+
+# Method: VertexDemo.createGraph
+yawl:VertexDemo_createGraph_1 a yawl:Method ;
+    rdfs:label "createGraph" ;
+    yawl:returnType "void" ;
+    yawl:signature "void createGraph(int vertexCount)" ;
+    rdfs:comment """create some vertices @param count how many to create @return the Vertices in an array""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: VertexDemo.main
+yawl:VertexDemo_main_2 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String args)" ;
+    rdfs:comment """a driver for this demo""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:VertexDemo_serialVersionUID a yawl:Field ;
+    rdfs:label "serialVersionUID" .
+
+yawl:VertexDemo_VERTEX_COUNT a yawl:Field ;
+    rdfs:label "VERTEX_COUNT" .
+
+yawl:VertexDemo_graph a yawl:Field ;
+    rdfs:label "graph" .
+
+yawl:VertexDemo_vv a yawl:Field ;
+    rdfs:label "vv" .
+
+yawl:VertexDemo_iconNames a yawl:Field ;
+    rdfs:label "iconNames" .
+
+
+

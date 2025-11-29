@@ -1,0 +1,80 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.util.InterfaceAClient
+yawl:InterfaceAClient a yawl:Class ;
+    rdfs:label "InterfaceAClient" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/util/Sessions.java"^^xsd:string ;
+    rdfs:comment """Creates a client to the engine via IA to obtain logon credentials for custom services and client application registered with the engine. A registered client is accepted as a valid client of the service using this class.""" ;
+    yawl:hasMethod yawl:InterfaceAClient_getPassword_1 ;
+    yawl:hasMethod yawl:InterfaceAClient_getServiceAccount_2 ;
+    yawl:hasMethod yawl:InterfaceAClient_checkConnection_3 ;
+    yawl:hasMethod yawl:InterfaceAClient_getInnerMsg_4 ;
+    yawl:hasField yawl:InterfaceAClient_iaClient ;
+    yawl:hasField yawl:InterfaceAClient_iaUserid ;
+    yawl:hasField yawl:InterfaceAClient_iaPassword ;
+    yawl:hasField yawl:InterfaceAClient_iaHandle ;
+    yawl:hasField yawl:InterfaceAClient_iaURI ;
+    yawl:hasField yawl:InterfaceAClient_NO_CREDENTIALS ;
+    .
+
+
+# Method: InterfaceAClient.getPassword
+yawl:InterfaceAClient_getPassword_1 a yawl:Method ;
+    rdfs:label "getPassword" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPassword(String id)" ;
+    rdfs:comment """Gets the password from the engine for the userid passed @param id the userid to get the password for @return the retrieved password, or an error msg if the id is unknown @throws IOException if there's a problem connecting to the engine, or if there's some other problem getting the password from the engine""" ;
+    .
+
+# Method: InterfaceAClient.getServiceAccount
+yawl:InterfaceAClient_getServiceAccount_2 a yawl:Method ;
+    rdfs:label "getServiceAccount" ;
+    yawl:returnType "YClient" ;
+    yawl:signature "YClient getServiceAccount(String userid)" ;
+    rdfs:comment """Gets the YAWL service using the userid passed @param userid the userid of the service to get @return the matching service, or null of a mtch isn't found @throws IOException if there's a problem connecting to the engine""" ;
+    .
+
+# Method: InterfaceAClient.checkConnection
+yawl:InterfaceAClient_checkConnection_3 a yawl:Method ;
+    rdfs:label "checkConnection" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkConnection()" ;
+    rdfs:comment """Checks if the IA URI and credentials are available, then if there is an active IA connection and, if not, creates one @throws IOException if the URI or credentials are missing, or if there's a problem creating a connection""" ;
+    .
+
+# Method: InterfaceAClient.getInnerMsg
+yawl:InterfaceAClient_getInnerMsg_4 a yawl:Method ;
+    rdfs:label "getInnerMsg" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInnerMsg(String xmlMessage)" ;
+    rdfs:comment """Strips the XML tags from an error message returned from the engine @param xmlMessage the message to strip @return the innermost text""" ;
+    .
+
+
+
+yawl:InterfaceAClient_iaClient a yawl:Field ;
+    rdfs:label "iaClient" .
+
+yawl:InterfaceAClient_iaUserid a yawl:Field ;
+    rdfs:label "iaUserid" .
+
+yawl:InterfaceAClient_iaPassword a yawl:Field ;
+    rdfs:label "iaPassword" .
+
+yawl:InterfaceAClient_iaHandle a yawl:Field ;
+    rdfs:label "iaHandle" .
+
+yawl:InterfaceAClient_iaURI a yawl:Field ;
+    rdfs:label "iaURI" .
+
+yawl:InterfaceAClient_NO_CREDENTIALS a yawl:Field ;
+    rdfs:label "NO_CREDENTIALS" .
+
+
+

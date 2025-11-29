@@ -1,0 +1,216 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.util.DataSchemaBuilder
+yawl:DataSchemaBuilder a yawl:Class ;
+    rdfs:label "DataSchemaBuilder" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/util/DataSchemaBuilder.java"^^xsd:string ;
+    rdfs:comment """Expands a data schema for a case start or a task to its base xsd types for use in the definition of a dynamic form. Author: Michael Adams Creation Date: 5/04/2010""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DataSchemaBuilder_build_1 ;
+    yawl:hasMethod yawl:DataSchemaBuilder_build_2 ;
+    yawl:hasMethod yawl:DataSchemaBuilder_buildSchema_3 ;
+    yawl:hasMethod yawl:DataSchemaBuilder_buildSchema_4 ;
+    yawl:hasMethod yawl:DataSchemaBuilder_createPreamble_5 ;
+    yawl:hasMethod yawl:DataSchemaBuilder_completeSchema_6 ;
+    yawl:hasMethod yawl:DataSchemaBuilder_createParamElement_7 ;
+    yawl:hasMethod yawl:DataSchemaBuilder_createDataTypeElement_8 ;
+    yawl:hasMethod yawl:DataSchemaBuilder_createComplexType_9 ;
+    yawl:hasMethod yawl:DataSchemaBuilder_cloneUserDefinedType_10 ;
+    yawl:hasMethod yawl:DataSchemaBuilder_cloneContent_11 ;
+    yawl:hasMethod yawl:DataSchemaBuilder_cloneElement_12 ;
+    yawl:hasMethod yawl:DataSchemaBuilder_cloneAttributes_13 ;
+    yawl:hasMethod yawl:DataSchemaBuilder_getAttributeValue_14 ;
+    yawl:hasMethod yawl:DataSchemaBuilder_isXSDType_15 ;
+    yawl:hasMethod yawl:DataSchemaBuilder_prefix_16 ;
+    yawl:hasMethod yawl:DataSchemaBuilder_getTypeNameUnprefixed_17 ;
+    yawl:hasMethod yawl:DataSchemaBuilder_getDefaultNamespace_18 ;
+    yawl:hasMethod yawl:DataSchemaBuilder_addNamespace_19 ;
+    yawl:hasField yawl:DataSchemaBuilder__schemaMap ;
+    yawl:hasField yawl:DataSchemaBuilder__nsList ;
+    .
+
+
+# Method: DataSchemaBuilder.build
+yawl:DataSchemaBuilder_build_1 a yawl:Method ;
+    rdfs:label "build" ;
+    yawl:returnType "String" ;
+    yawl:signature "String build(SpecificationData specData)" ;
+    rdfs:comment """Constructs the expanded data schema, using the user-defined-types map passed in via the constructor @param specData the SpecificationData object for the spec to construct a schema for @return the constructed schema (as a string)""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataSchemaBuilder.build
+yawl:DataSchemaBuilder_build_2 a yawl:Method ;
+    rdfs:label "build" ;
+    yawl:returnType "String" ;
+    yawl:signature "String build(TaskInformation taskInfo)" ;
+    rdfs:comment """Constructs the expanded data schema, using the user-defined-types map passed in via the constructor @param taskInfo the TaskInformation object for the task to construct a schema for @return the constructed schema (as a string)""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataSchemaBuilder.buildSchema
+yawl:DataSchemaBuilder_buildSchema_3 a yawl:Method ;
+    rdfs:label "buildSchema" ;
+    yawl:returnType "String" ;
+    yawl:signature "String buildSchema(String rootName, List parameters)" ;
+    rdfs:comment """Constructs the expanded data schema, using the user-defined-types map passed in via the constructor. @param rootName the name of the root element (task or root net name) @param parameters the List of parameters to build the schema for @return the constructed schema (as a string)""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataSchemaBuilder.buildSchema
+yawl:DataSchemaBuilder_buildSchema_4 a yawl:Method ;
+    rdfs:label "buildSchema" ;
+    yawl:returnType "String" ;
+    yawl:signature "String buildSchema(String rootName, String varName, String dataType)" ;
+    rdfs:comment """Constructs a data schema for a single variable name and data type @param rootName the name to give to the root element @param varName the name to give to the data element @param dataType the datatype for the data element @return a schema for the datatype that variables of the name supplied can be validated against""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataSchemaBuilder.createPreamble
+yawl:DataSchemaBuilder_createPreamble_5 a yawl:Method ;
+    rdfs:label "createPreamble" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element createPreamble(String rootName, Namespace defNS)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataSchemaBuilder.completeSchema
+yawl:DataSchemaBuilder_completeSchema_6 a yawl:Method ;
+    rdfs:label "completeSchema" ;
+    yawl:returnType "String" ;
+    yawl:signature "String completeSchema(Document doc)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataSchemaBuilder.createParamElement
+yawl:DataSchemaBuilder_createParamElement_7 a yawl:Method ;
+    rdfs:label "createParamElement" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element createParamElement(YVariable param, Namespace defNS)" ;
+    rdfs:comment """Constructs a schema element for a parameter @param param the parameter to construct a schema for @param defNS the default namespace @return the constructed schema for this parameter""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataSchemaBuilder.createDataTypeElement
+yawl:DataSchemaBuilder_createDataTypeElement_8 a yawl:Method ;
+    rdfs:label "createDataTypeElement" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element createDataTypeElement(String varName, String dataType, Namespace defNS)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataSchemaBuilder.createComplexType
+yawl:DataSchemaBuilder_createComplexType_9 a yawl:Method ;
+    rdfs:label "createComplexType" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element createComplexType(YVariable param, Element base, Namespace defNS)" ;
+    rdfs:comment """Constructs a new complex type schema for a parameter @param param the parameter with a user-defined type definition @param base the base parameter element @param defNS the default namespace @return the constructed complex type schema""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataSchemaBuilder.cloneUserDefinedType
+yawl:DataSchemaBuilder_cloneUserDefinedType_10 a yawl:Method ;
+    rdfs:label "cloneUserDefinedType" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element cloneUserDefinedType(Element base, String type, Namespace defNS)" ;
+    rdfs:comment """Clones a user-defined type definition to use within a schema. May be called recursively. @param base the 'parent' element this type is defined for @param type the user-defined type name @param defNS the default namespace @return the user defined type definiton as a schema""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataSchemaBuilder.cloneContent
+yawl:DataSchemaBuilder_cloneContent_11 a yawl:Method ;
+    rdfs:label "cloneContent" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element cloneContent(Element base, Element toCopy, Namespace defNS)" ;
+    rdfs:comment """Clones the content of a user-defined type. May be called recursively. @param base the 'parent' element this content will form the schema for @param toCopy the user defined type definition @param defNS the default namespace @return the cloned content""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataSchemaBuilder.cloneElement
+yawl:DataSchemaBuilder_cloneElement_12 a yawl:Method ;
+    rdfs:label "cloneElement" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element cloneElement(Element element, Namespace defNS)" ;
+    rdfs:comment """Creates a new element with the same name and attributes as the old one @param element the elment to clone @param defNS the default namespace @return the cloned element""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataSchemaBuilder.cloneAttributes
+yawl:DataSchemaBuilder_cloneAttributes_13 a yawl:Method ;
+    rdfs:label "cloneAttributes" ;
+    yawl:returnType "List" ;
+    yawl:signature "List cloneAttributes(Element element, Namespace defNS)" ;
+    rdfs:comment """Clones a set of attributes. Needs to be done this way to (i) break the parental attachment to the attribute; and (ii) to fix any errant namespace prefixes @param element the element with the attributes to clone @param defNS the default namespace @return the List of clone attributes""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataSchemaBuilder.getAttributeValue
+yawl:DataSchemaBuilder_getAttributeValue_14 a yawl:Method ;
+    rdfs:label "getAttributeValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAttributeValue(Attribute attribute, String prefix, Namespace defNS)" ;
+    rdfs:comment """Gets an attribute value, fixing its namespace prefix (if any) @param attribute the attribute to get the value for @param prefix the correct namespace prefix @param defNS the default namespace @return the attribute's value with the prefix corrected if required""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataSchemaBuilder.isXSDType
+yawl:DataSchemaBuilder_isXSDType_15 a yawl:Method ;
+    rdfs:label "isXSDType" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isXSDType(String type)" ;
+    rdfs:comment """Checks that a type name is one of the XSD base types @param type the type name to check @return true if it is one of the base XSD type names""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataSchemaBuilder.prefix
+yawl:DataSchemaBuilder_prefix_16 a yawl:Method ;
+    rdfs:label "prefix" ;
+    yawl:returnType "String" ;
+    yawl:signature "String prefix(String type, Namespace ns)" ;
+    rdfs:comment """Attaches a prefix to a type name @param type the type name @param ns the namespace @return the type name prefixed with the namespace's prefix""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataSchemaBuilder.getTypeNameUnprefixed
+yawl:DataSchemaBuilder_getTypeNameUnprefixed_17 a yawl:Method ;
+    rdfs:label "getTypeNameUnprefixed" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTypeNameUnprefixed(Element e)" ;
+    rdfs:comment """Gets the value of an element's type attribute with the namespace prefix removed @param e the element with the type attribute @return the unprefixed type name""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataSchemaBuilder.getDefaultNamespace
+yawl:DataSchemaBuilder_getDefaultNamespace_18 a yawl:Method ;
+    rdfs:label "getDefaultNamespace" ;
+    yawl:returnType "Namespace" ;
+    yawl:signature "Namespace getDefaultNamespace()" ;
+    rdfs:comment """Creates and stores the default XSD namespace @return the default XSD namespace""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataSchemaBuilder.addNamespace
+yawl:DataSchemaBuilder_addNamespace_19 a yawl:Method ;
+    rdfs:label "addNamespace" ;
+    yawl:returnType "Namespace" ;
+    yawl:signature "Namespace addNamespace(String URI, String prefix)" ;
+    rdfs:comment """Adds a new namespace to the list of namespaces ussed by this schema @param URI the namespace's URI @param prefix the namespace's prefix @return the namespace""" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:DataSchemaBuilder__schemaMap a yawl:Field ;
+    rdfs:label "_schemaMap" .
+
+yawl:DataSchemaBuilder__nsList a yawl:Field ;
+    rdfs:label "_nsList" .
+
+
+

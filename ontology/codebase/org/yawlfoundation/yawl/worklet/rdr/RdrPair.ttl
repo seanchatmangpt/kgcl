@@ -1,0 +1,92 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.rdr.RdrPair
+yawl:RdrPair a yawl:Class ;
+    rdfs:label "RdrPair" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_rdr ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/rdr/RdrPair.java"^^xsd:string ;
+    rdfs:comment """This class holds the last evaluated node, and the last node that evaluated to true, as the result of a tree search @author Michael Adams @date 19/09/2014""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:RdrPair_isPairEqual_1 ;
+    yawl:hasMethod yawl:RdrPair_getParentForNewNode_2 ;
+    yawl:hasMethod yawl:RdrPair_getLastTrueNode_3 ;
+    yawl:hasMethod yawl:RdrPair_getLastEvaluatedNode_4 ;
+    yawl:hasMethod yawl:RdrPair_getConclusion_5 ;
+    yawl:hasMethod yawl:RdrPair_hasNullConclusion_6 ;
+    yawl:hasMethod yawl:RdrPair_toString_7 ;
+    yawl:hasField yawl:RdrPair_lastTrue ;
+    yawl:hasField yawl:RdrPair_lastEvaluated ;
+    .
+
+
+# Method: RdrPair.isPairEqual
+yawl:RdrPair_isPairEqual_1 a yawl:Method ;
+    rdfs:label "isPairEqual" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isPairEqual()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrPair.getParentForNewNode
+yawl:RdrPair_getParentForNewNode_2 a yawl:Method ;
+    rdfs:label "getParentForNewNode" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode getParentForNewNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrPair.getLastTrueNode
+yawl:RdrPair_getLastTrueNode_3 a yawl:Method ;
+    rdfs:label "getLastTrueNode" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode getLastTrueNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrPair.getLastEvaluatedNode
+yawl:RdrPair_getLastEvaluatedNode_4 a yawl:Method ;
+    rdfs:label "getLastEvaluatedNode" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode getLastEvaluatedNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrPair.getConclusion
+yawl:RdrPair_getConclusion_5 a yawl:Method ;
+    rdfs:label "getConclusion" ;
+    yawl:returnType "RdrConclusion" ;
+    yawl:signature "RdrConclusion getConclusion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrPair.hasNullConclusion
+yawl:RdrPair_hasNullConclusion_6 a yawl:Method ;
+    rdfs:label "hasNullConclusion" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasNullConclusion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrPair.toString
+yawl:RdrPair_toString_7 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:RdrPair_lastTrue a yawl:Field ;
+    rdfs:label "lastTrue" .
+
+yawl:RdrPair_lastEvaluated a yawl:Field ;
+    rdfs:label "lastEvaluated" .
+
+
+

@@ -1,0 +1,272 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.instance.CaseInstance
+yawl:CaseInstance a yawl:Class ;
+    rdfs:label "CaseInstance" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_instance ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/instance/CaseInstance.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 11/11/2008""" ;
+    yawl:implements yawl:YInstance ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CaseInstance_getCaseID_1 ;
+    yawl:hasMethod yawl:CaseInstance_setCaseID_2 ;
+    yawl:hasMethod yawl:CaseInstance_getSpecID_3 ;
+    yawl:hasMethod yawl:CaseInstance_setSpecID_4 ;
+    yawl:hasMethod yawl:CaseInstance_getSpecName_5 ;
+    yawl:hasMethod yawl:CaseInstance_getSpecVersion_6 ;
+    yawl:hasMethod yawl:CaseInstance_getCaseParams_7 ;
+    yawl:hasMethod yawl:CaseInstance_setCaseParams_8 ;
+    yawl:hasMethod yawl:CaseInstance_getLogData_9 ;
+    yawl:hasMethod yawl:CaseInstance_setLogData_10 ;
+    yawl:hasMethod yawl:CaseInstance_getStartTime_11 ;
+    yawl:hasMethod yawl:CaseInstance_getStartTimeAsDateString_12 ;
+    yawl:hasMethod yawl:CaseInstance_getAgeAsDateString_13 ;
+    yawl:hasMethod yawl:CaseInstance_formatAge_14 ;
+    yawl:hasMethod yawl:CaseInstance_setStartTime_15 ;
+    yawl:hasMethod yawl:CaseInstance_getWorkitemMap_16 ;
+    yawl:hasMethod yawl:CaseInstance_setWorkitemMap_17 ;
+    yawl:hasMethod yawl:CaseInstance_getWorkItems_18 ;
+    yawl:hasMethod yawl:CaseInstance_addWorkItemInstance_19 ;
+    yawl:hasMethod yawl:CaseInstance_addWorkItemInstance_20 ;
+    yawl:hasMethod yawl:CaseInstance_getWorkItemInstance_21 ;
+    yawl:hasMethod yawl:CaseInstance_marshalWorkitems_22 ;
+    yawl:hasMethod yawl:CaseInstance_toXML_23 ;
+    yawl:hasMethod yawl:CaseInstance_fromXML_24 ;
+    yawl:hasMethod yawl:CaseInstance_fromXML_25 ;
+    yawl:hasField yawl:CaseInstance_caseID ;
+    yawl:hasField yawl:CaseInstance_specID ;
+    yawl:hasField yawl:CaseInstance_caseParams ;
+    yawl:hasField yawl:CaseInstance_logData ;
+    yawl:hasField yawl:CaseInstance_startTime ;
+    yawl:hasField yawl:CaseInstance_workitems ;
+    .
+
+
+# Method: CaseInstance.getCaseID
+yawl:CaseInstance_getCaseID_1 a yawl:Method ;
+    rdfs:label "getCaseID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseInstance.setCaseID
+yawl:CaseInstance_setCaseID_2 a yawl:Method ;
+    rdfs:label "setCaseID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCaseID(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseInstance.getSpecID
+yawl:CaseInstance_getSpecID_3 a yawl:Method ;
+    rdfs:label "getSpecID" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getSpecID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseInstance.setSpecID
+yawl:CaseInstance_setSpecID_4 a yawl:Method ;
+    rdfs:label "setSpecID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSpecID(YSpecificationID id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseInstance.getSpecName
+yawl:CaseInstance_getSpecName_5 a yawl:Method ;
+    rdfs:label "getSpecName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseInstance.getSpecVersion
+yawl:CaseInstance_getSpecVersion_6 a yawl:Method ;
+    rdfs:label "getSpecVersion" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecVersion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseInstance.getCaseParams
+yawl:CaseInstance_getCaseParams_7 a yawl:Method ;
+    rdfs:label "getCaseParams" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseParams()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseInstance.setCaseParams
+yawl:CaseInstance_setCaseParams_8 a yawl:Method ;
+    rdfs:label "setCaseParams" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCaseParams(String params)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseInstance.getLogData
+yawl:CaseInstance_getLogData_9 a yawl:Method ;
+    rdfs:label "getLogData" ;
+    yawl:returnType "YLogDataItemList" ;
+    yawl:signature "YLogDataItemList getLogData()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseInstance.setLogData
+yawl:CaseInstance_setLogData_10 a yawl:Method ;
+    rdfs:label "setLogData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLogData(YLogDataItemList data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseInstance.getStartTime
+yawl:CaseInstance_getStartTime_11 a yawl:Method ;
+    rdfs:label "getStartTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getStartTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseInstance.getStartTimeAsDateString
+yawl:CaseInstance_getStartTimeAsDateString_12 a yawl:Method ;
+    rdfs:label "getStartTimeAsDateString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStartTimeAsDateString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseInstance.getAgeAsDateString
+yawl:CaseInstance_getAgeAsDateString_13 a yawl:Method ;
+    rdfs:label "getAgeAsDateString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAgeAsDateString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseInstance.formatAge
+yawl:CaseInstance_formatAge_14 a yawl:Method ;
+    rdfs:label "formatAge" ;
+    yawl:returnType "String" ;
+    yawl:signature "String formatAge(long age)" ;
+    rdfs:comment """formats a long time value into a string of the form 'ddd:hh:mm:ss' @param age the time value (in milliseconds) @return the formatted time string""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseInstance.setStartTime
+yawl:CaseInstance_setStartTime_15 a yawl:Method ;
+    rdfs:label "setStartTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStartTime(long time)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseInstance.getWorkitemMap
+yawl:CaseInstance_getWorkitemMap_16 a yawl:Method ;
+    rdfs:label "getWorkitemMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getWorkitemMap()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseInstance.setWorkitemMap
+yawl:CaseInstance_setWorkitemMap_17 a yawl:Method ;
+    rdfs:label "setWorkitemMap" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setWorkitemMap(Map items)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseInstance.getWorkItems
+yawl:CaseInstance_getWorkItems_18 a yawl:Method ;
+    rdfs:label "getWorkItems" ;
+    yawl:returnType "Collection" ;
+    yawl:signature "Collection getWorkItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseInstance.addWorkItemInstance
+yawl:CaseInstance_addWorkItemInstance_19 a yawl:Method ;
+    rdfs:label "addWorkItemInstance" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addWorkItemInstance(WorkItemInstance item)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseInstance.addWorkItemInstance
+yawl:CaseInstance_addWorkItemInstance_20 a yawl:Method ;
+    rdfs:label "addWorkItemInstance" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addWorkItemInstance(YWorkItem workitem)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseInstance.getWorkItemInstance
+yawl:CaseInstance_getWorkItemInstance_21 a yawl:Method ;
+    rdfs:label "getWorkItemInstance" ;
+    yawl:returnType "WorkItemInstance" ;
+    yawl:signature "WorkItemInstance getWorkItemInstance(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseInstance.marshalWorkitems
+yawl:CaseInstance_marshalWorkitems_22 a yawl:Method ;
+    rdfs:label "marshalWorkitems" ;
+    yawl:returnType "String" ;
+    yawl:signature "String marshalWorkitems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseInstance.toXML
+yawl:CaseInstance_toXML_23 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseInstance.fromXML
+yawl:CaseInstance_fromXML_24 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseInstance.fromXML
+yawl:CaseInstance_fromXML_25 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(Element instance)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:CaseInstance_caseID a yawl:Field ;
+    rdfs:label "caseID" .
+
+yawl:CaseInstance_specID a yawl:Field ;
+    rdfs:label "specID" .
+
+yawl:CaseInstance_caseParams a yawl:Field ;
+    rdfs:label "caseParams" .
+
+yawl:CaseInstance_logData a yawl:Field ;
+    rdfs:label "logData" .
+
+yawl:CaseInstance_startTime a yawl:Field ;
+    rdfs:label "startTime" .
+
+yawl:CaseInstance_workitems a yawl:Field ;
+    rdfs:label "workitems" .
+
+
+

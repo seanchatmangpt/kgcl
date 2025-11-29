@@ -1,0 +1,176 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.balancer.servlet.CaseCompletedObserver
+yawl:CaseCompletedObserver a yawl:Class ;
+    rdfs:label "CaseCompletedObserver" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer_servlet ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/servlet/CaseCompletedObserver.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 13/6/18""" ;
+    yawl:extends yawl:Interface_Client ;
+    yawl:implements yawl:ObserverGateway ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CaseCompletedObserver_getScheme_1 ;
+    yawl:hasMethod yawl:CaseCompletedObserver_announceCaseCompletion_2 ;
+    yawl:hasMethod yawl:CaseCompletedObserver_announceCaseCompletion_3 ;
+    yawl:hasMethod yawl:CaseCompletedObserver_announceCaseCancellation_4 ;
+    yawl:hasMethod yawl:CaseCompletedObserver_announce_5 ;
+    yawl:hasMethod yawl:CaseCompletedObserver_announceFiredWorkItem_6 ;
+    yawl:hasMethod yawl:CaseCompletedObserver_announceCancelledWorkItem_7 ;
+    yawl:hasMethod yawl:CaseCompletedObserver_announceTimerExpiry_8 ;
+    yawl:hasMethod yawl:CaseCompletedObserver_announceCaseStarted_9 ;
+    yawl:hasMethod yawl:CaseCompletedObserver_announceCaseSuspended_10 ;
+    yawl:hasMethod yawl:CaseCompletedObserver_announceCaseSuspending_11 ;
+    yawl:hasMethod yawl:CaseCompletedObserver_announceCaseResumption_12 ;
+    yawl:hasMethod yawl:CaseCompletedObserver_announceWorkItemStatusChange_13 ;
+    yawl:hasMethod yawl:CaseCompletedObserver_announceEngineInitialised_14 ;
+    yawl:hasMethod yawl:CaseCompletedObserver_announceDeadlock_15 ;
+    yawl:hasMethod yawl:CaseCompletedObserver_shutdown_16 ;
+    yawl:hasField yawl:CaseCompletedObserver_BAL_URL ;
+    .
+
+
+# Method: CaseCompletedObserver.getScheme
+yawl:CaseCompletedObserver_getScheme_1 a yawl:Method ;
+    rdfs:label "getScheme" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getScheme()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseCompletedObserver.announceCaseCompletion
+yawl:CaseCompletedObserver_announceCaseCompletion_2 a yawl:Method ;
+    rdfs:label "announceCaseCompletion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCaseCompletion(YAWLServiceReference yawlService, YIdentifier caseID, Document caseData)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseCompletedObserver.announceCaseCompletion
+yawl:CaseCompletedObserver_announceCaseCompletion_3 a yawl:Method ;
+    rdfs:label "announceCaseCompletion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCaseCompletion(Set services, YIdentifier caseID, Document caseData)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseCompletedObserver.announceCaseCancellation
+yawl:CaseCompletedObserver_announceCaseCancellation_4 a yawl:Method ;
+    rdfs:label "announceCaseCancellation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCaseCancellation(Set services, YIdentifier id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseCompletedObserver.announce
+yawl:CaseCompletedObserver_announce_5 a yawl:Method ;
+    rdfs:label "announce" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announce(String event, YIdentifier caseID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseCompletedObserver.announceFiredWorkItem
+yawl:CaseCompletedObserver_announceFiredWorkItem_6 a yawl:Method ;
+    rdfs:label "announceFiredWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceFiredWorkItem(YAnnouncement announcement)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseCompletedObserver.announceCancelledWorkItem
+yawl:CaseCompletedObserver_announceCancelledWorkItem_7 a yawl:Method ;
+    rdfs:label "announceCancelledWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCancelledWorkItem(YAnnouncement announcement)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseCompletedObserver.announceTimerExpiry
+yawl:CaseCompletedObserver_announceTimerExpiry_8 a yawl:Method ;
+    rdfs:label "announceTimerExpiry" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceTimerExpiry(YAnnouncement announcement)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseCompletedObserver.announceCaseStarted
+yawl:CaseCompletedObserver_announceCaseStarted_9 a yawl:Method ;
+    rdfs:label "announceCaseStarted" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCaseStarted(Set services, YSpecificationID specID, YIdentifier caseID, String launchingService, boolean delayed)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseCompletedObserver.announceCaseSuspended
+yawl:CaseCompletedObserver_announceCaseSuspended_10 a yawl:Method ;
+    rdfs:label "announceCaseSuspended" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCaseSuspended(Set services, YIdentifier caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseCompletedObserver.announceCaseSuspending
+yawl:CaseCompletedObserver_announceCaseSuspending_11 a yawl:Method ;
+    rdfs:label "announceCaseSuspending" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCaseSuspending(Set services, YIdentifier caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseCompletedObserver.announceCaseResumption
+yawl:CaseCompletedObserver_announceCaseResumption_12 a yawl:Method ;
+    rdfs:label "announceCaseResumption" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCaseResumption(Set services, YIdentifier caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseCompletedObserver.announceWorkItemStatusChange
+yawl:CaseCompletedObserver_announceWorkItemStatusChange_13 a yawl:Method ;
+    rdfs:label "announceWorkItemStatusChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceWorkItemStatusChange(Set services, YWorkItem workItem, YWorkItemStatus oldStatus, YWorkItemStatus newStatus)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseCompletedObserver.announceEngineInitialised
+yawl:CaseCompletedObserver_announceEngineInitialised_14 a yawl:Method ;
+    rdfs:label "announceEngineInitialised" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceEngineInitialised(Set services, int maxWaitSeconds)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseCompletedObserver.announceDeadlock
+yawl:CaseCompletedObserver_announceDeadlock_15 a yawl:Method ;
+    rdfs:label "announceDeadlock" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceDeadlock(Set services, YIdentifier id, Set tasks)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseCompletedObserver.shutdown
+yawl:CaseCompletedObserver_shutdown_16 a yawl:Method ;
+    rdfs:label "shutdown" ;
+    yawl:returnType "void" ;
+    yawl:signature "void shutdown()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:CaseCompletedObserver_BAL_URL a yawl:Field ;
+    rdfs:label "BAL_URL" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_balancer_monitor a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.balancer.monitor" .
+
+

@@ -1,0 +1,70 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.util.PluginLoaderUtil
+yawl:PluginLoaderUtil a yawl:Class ;
+    rdfs:label "PluginLoaderUtil" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/util/PluginLoaderUtil.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 19/04/2014""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:PluginLoaderUtil_setExternalPaths_1 ;
+    yawl:hasMethod yawl:PluginLoaderUtil_load_2 ;
+    yawl:hasMethod yawl:PluginLoaderUtil_loadInstance_3 ;
+    yawl:hasMethod yawl:PluginLoaderUtil_newInstance_4 ;
+    yawl:hasMethod yawl:PluginLoaderUtil_toInstanceSet_5 ;
+    yawl:hasField yawl:PluginLoaderUtil__externalPaths ;
+    .
+
+
+# Method: PluginLoaderUtil.setExternalPaths
+yawl:PluginLoaderUtil_setExternalPaths_1 a yawl:Method ;
+    rdfs:label "setExternalPaths" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setExternalPaths(String externalPaths)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PluginLoaderUtil.load
+yawl:PluginLoaderUtil_load_2 a yawl:Method ;
+    rdfs:label "load" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map load(Class clazz)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PluginLoaderUtil.loadInstance
+yawl:PluginLoaderUtil_loadInstance_3 a yawl:Method ;
+    rdfs:label "loadInstance" ;
+    yawl:returnType "T" ;
+    yawl:signature "T loadInstance(Class clazz, String instanceName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PluginLoaderUtil.newInstance
+yawl:PluginLoaderUtil_newInstance_4 a yawl:Method ;
+    rdfs:label "newInstance" ;
+    yawl:returnType "T" ;
+    yawl:signature "T newInstance(Class clazz)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PluginLoaderUtil.toInstanceSet
+yawl:PluginLoaderUtil_toInstanceSet_5 a yawl:Method ;
+    rdfs:label "toInstanceSet" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set toInstanceSet(Collection clazzSet)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:PluginLoaderUtil__externalPaths a yawl:Field ;
+    rdfs:label "_externalPaths" .
+
+
+

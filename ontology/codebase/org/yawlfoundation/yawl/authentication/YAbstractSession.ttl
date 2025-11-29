@@ -1,0 +1,57 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.authentication.YAbstractSession
+yawl:YAbstractSession a yawl:Class ;
+    rdfs:label "YAbstractSession" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_authentication ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/authentication/YAbstractSession.java"^^xsd:string ;
+    rdfs:comment """Base class which represents an active session between the engine and an external service or application. @author Michael Adams @since 2.1""" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YAbstractSession_getHandle_1 ;
+    yawl:hasMethod yawl:YAbstractSession_getInterval_2 ;
+    yawl:hasMethod yawl:YAbstractSession_setInterval_3 ;
+    yawl:hasField yawl:YAbstractSession__handle ;
+    yawl:hasField yawl:YAbstractSession__interval ;
+    .
+
+
+# Method: YAbstractSession.getHandle
+yawl:YAbstractSession_getHandle_1 a yawl:Method ;
+    rdfs:label "getHandle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getHandle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAbstractSession.getInterval
+yawl:YAbstractSession_getInterval_2 a yawl:Method ;
+    rdfs:label "getInterval" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getInterval()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAbstractSession.setInterval
+yawl:YAbstractSession_setInterval_3 a yawl:Method ;
+    rdfs:label "setInterval" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setInterval(long seconds)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YAbstractSession__handle a yawl:Field ;
+    rdfs:label "_handle" .
+
+yawl:YAbstractSession__interval a yawl:Field ;
+    rdfs:label "_interval" .
+
+
+

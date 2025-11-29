@@ -1,0 +1,187 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.models.procletModel.ProcletModels
+yawl:ProcletModels a yawl:Class ;
+    rdfs:label "ProcletModels" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_models_procletModel ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/models/procletModel/ProcletModels.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ProcletModels_addProcletModel_1 ;
+    yawl:hasMethod yawl:ProcletModels_getProcletClass_2 ;
+    yawl:hasMethod yawl:ProcletModels_getProcletClasses_3 ;
+    yawl:hasMethod yawl:ProcletModels_deleteProcletModel_4 ;
+    yawl:hasMethod yawl:ProcletModels_getPorts_5 ;
+    yawl:hasMethod yawl:ProcletModels_getBlockForInteractionNode_6 ;
+    yawl:hasMethod yawl:ProcletModels_getProcletBlock_7 ;
+    yawl:hasMethod yawl:ProcletModels_getPortsBlock_8 ;
+    yawl:hasMethod yawl:ProcletModels_getConnectedPortIn_9 ;
+    yawl:hasMethod yawl:ProcletModels_getConnectedPortOut_10 ;
+    yawl:hasMethod yawl:ProcletModels_getOutgoingPort_11 ;
+    yawl:hasMethod yawl:ProcletModels_getIncomingPort_12 ;
+    yawl:hasMethod yawl:ProcletModels_getInstance_13 ;
+    yawl:hasMethod yawl:ProcletModels_buildPModelsFromDB_14 ;
+    yawl:hasMethod yawl:ProcletModels_deletePModelsFromDB_15 ;
+    yawl:hasMethod yawl:ProcletModels_persistProcletModels_16 ;
+    yawl:hasMethod yawl:ProcletModels_main_17 ;
+    yawl:hasField yawl:ProcletModels_procletModelTN ;
+    yawl:hasField yawl:ProcletModels_pModels ;
+    yawl:hasField yawl:ProcletModels_pModelsList ;
+    .
+
+
+# Method: ProcletModels.addProcletModel
+yawl:ProcletModels_addProcletModel_1 a yawl:Method ;
+    rdfs:label "addProcletModel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addProcletModel(ProcletModel pmodel)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletModels.getProcletClass
+yawl:ProcletModels_getProcletClass_2 a yawl:Method ;
+    rdfs:label "getProcletClass" ;
+    yawl:returnType "ProcletModel" ;
+    yawl:signature "ProcletModel getProcletClass(String classID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletModels.getProcletClasses
+yawl:ProcletModels_getProcletClasses_3 a yawl:Method ;
+    rdfs:label "getProcletClasses" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getProcletClasses()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletModels.deleteProcletModel
+yawl:ProcletModels_deleteProcletModel_4 a yawl:Method ;
+    rdfs:label "deleteProcletModel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteProcletModel(ProcletModel pmodel)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletModels.getPorts
+yawl:ProcletModels_getPorts_5 a yawl:Method ;
+    rdfs:label "getPorts" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getPorts()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletModels.getBlockForInteractionNode
+yawl:ProcletModels_getBlockForInteractionNode_6 a yawl:Method ;
+    rdfs:label "getBlockForInteractionNode" ;
+    yawl:returnType "ProcletBlock" ;
+    yawl:signature "ProcletBlock getBlockForInteractionNode(InteractionNode node)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletModels.getProcletBlock
+yawl:ProcletModels_getProcletBlock_7 a yawl:Method ;
+    rdfs:label "getProcletBlock" ;
+    yawl:returnType "ProcletBlock" ;
+    yawl:signature "ProcletBlock getProcletBlock(String classID, String blockID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletModels.getPortsBlock
+yawl:ProcletModels_getPortsBlock_8 a yawl:Method ;
+    rdfs:label "getPortsBlock" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getPortsBlock(InteractionNode node)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletModels.getConnectedPortIn
+yawl:ProcletModels_getConnectedPortIn_9 a yawl:Method ;
+    rdfs:label "getConnectedPortIn" ;
+    yawl:returnType "ProcletPort" ;
+    yawl:signature "ProcletPort getConnectedPortIn(List oPorts, List iPorts)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletModels.getConnectedPortOut
+yawl:ProcletModels_getConnectedPortOut_10 a yawl:Method ;
+    rdfs:label "getConnectedPortOut" ;
+    yawl:returnType "ProcletPort" ;
+    yawl:signature "ProcletPort getConnectedPortOut(List iPorts, List oPorts)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletModels.getOutgoingPort
+yawl:ProcletModels_getOutgoingPort_11 a yawl:Method ;
+    rdfs:label "getOutgoingPort" ;
+    yawl:returnType "ProcletPort" ;
+    yawl:signature "ProcletPort getOutgoingPort(InteractionArc arc)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletModels.getIncomingPort
+yawl:ProcletModels_getIncomingPort_12 a yawl:Method ;
+    rdfs:label "getIncomingPort" ;
+    yawl:returnType "ProcletPort" ;
+    yawl:signature "ProcletPort getIncomingPort(InteractionArc arc)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletModels.getInstance
+yawl:ProcletModels_getInstance_13 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "ProcletModels" ;
+    yawl:signature "ProcletModels getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ProcletModels.buildPModelsFromDB
+yawl:ProcletModels_buildPModelsFromDB_14 a yawl:Method ;
+    rdfs:label "buildPModelsFromDB" ;
+    yawl:returnType "void" ;
+    yawl:signature "void buildPModelsFromDB()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletModels.deletePModelsFromDB
+yawl:ProcletModels_deletePModelsFromDB_15 a yawl:Method ;
+    rdfs:label "deletePModelsFromDB" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deletePModelsFromDB()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletModels.persistProcletModels
+yawl:ProcletModels_persistProcletModels_16 a yawl:Method ;
+    rdfs:label "persistProcletModels" ;
+    yawl:returnType "void" ;
+    yawl:signature "void persistProcletModels()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletModels.main
+yawl:ProcletModels_main_17 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String args)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:ProcletModels_procletModelTN a yawl:Field ;
+    rdfs:label "procletModelTN" .
+
+yawl:ProcletModels_pModels a yawl:Field ;
+    rdfs:label "pModels" .
+
+yawl:ProcletModels_pModelsList a yawl:Field ;
+    rdfs:label "pModelsList" .
+
+
+

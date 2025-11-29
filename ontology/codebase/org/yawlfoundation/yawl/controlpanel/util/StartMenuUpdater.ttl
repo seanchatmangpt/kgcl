@@ -1,0 +1,65 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.util.StartMenuUpdater
+yawl:StartMenuUpdater a yawl:Class ;
+    rdfs:label "StartMenuUpdater" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/util/StartMenuUpdater.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 27/03/15""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:StartMenuUpdater_getSettings_1 ;
+    yawl:hasMethod yawl:StartMenuUpdater_update_2 ;
+    yawl:hasMethod yawl:StartMenuUpdater_runScript_3 ;
+    yawl:hasMethod yawl:StartMenuUpdater_checkBatFile_4 ;
+    yawl:hasField yawl:StartMenuUpdater__settings ;
+    yawl:hasField yawl:StartMenuUpdater_VB_SCRIPT_TEMPLATE ;
+    .
+
+
+# Method: StartMenuUpdater.getSettings
+yawl:StartMenuUpdater_getSettings_1 a yawl:Method ;
+    rdfs:label "getSettings" ;
+    yawl:returnType "ScriptSettings" ;
+    yawl:signature "ScriptSettings getSettings()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StartMenuUpdater.update
+yawl:StartMenuUpdater_update_2 a yawl:Method ;
+    rdfs:label "update" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean update()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StartMenuUpdater.runScript
+yawl:StartMenuUpdater_runScript_3 a yawl:Method ;
+    rdfs:label "runScript" ;
+    yawl:returnType "void" ;
+    yawl:signature "void runScript(File f)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: StartMenuUpdater.checkBatFile
+yawl:StartMenuUpdater_checkBatFile_4 a yawl:Method ;
+    rdfs:label "checkBatFile" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkBatFile(File rootPath)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:StartMenuUpdater__settings a yawl:Field ;
+    rdfs:label "_settings" .
+
+yawl:StartMenuUpdater_VB_SCRIPT_TEMPLATE a yawl:Field ;
+    rdfs:label "VB_SCRIPT_TEMPLATE" .
+
+
+

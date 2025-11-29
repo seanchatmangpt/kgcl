@@ -1,0 +1,74 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.update.DownloadWorker
+yawl:DownloadWorker a yawl:Class ;
+    rdfs:label "DownloadWorker" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_update ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/update/DownloadWorker.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 19/08/2014""" ;
+    yawl:extends yawl:SwingWorker ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DownloadWorker_hasErrors_1 ;
+    yawl:hasMethod yawl:DownloadWorker_getError_2 ;
+    yawl:hasMethod yawl:DownloadWorker_doInBackground_3 ;
+    yawl:hasMethod yawl:DownloadWorker_makeDir_4 ;
+    yawl:hasField yawl:DownloadWorker__fileNode ;
+    yawl:hasField yawl:DownloadWorker__totalBytes ;
+    yawl:hasField yawl:DownloadWorker__tmpDir ;
+    yawl:hasField yawl:DownloadWorker__errorMsg ;
+    .
+
+
+# Method: DownloadWorker.hasErrors
+yawl:DownloadWorker_hasErrors_1 a yawl:Method ;
+    rdfs:label "hasErrors" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasErrors()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: DownloadWorker.getError
+yawl:DownloadWorker_getError_2 a yawl:Method ;
+    rdfs:label "getError" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getError()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: DownloadWorker.doInBackground
+yawl:DownloadWorker_doInBackground_3 a yawl:Method ;
+    rdfs:label "doInBackground" ;
+    yawl:returnType "Void" ;
+    yawl:signature "Void doInBackground()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: DownloadWorker.makeDir
+yawl:DownloadWorker_makeDir_4 a yawl:Method ;
+    rdfs:label "makeDir" ;
+    yawl:returnType "void" ;
+    yawl:signature "void makeDir(String name)" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:DownloadWorker__fileNode a yawl:Field ;
+    rdfs:label "_fileNode" .
+
+yawl:DownloadWorker__totalBytes a yawl:Field ;
+    rdfs:label "_totalBytes" .
+
+yawl:DownloadWorker__tmpDir a yawl:Field ;
+    rdfs:label "_tmpDir" .
+
+yawl:DownloadWorker__errorMsg a yawl:Field ;
+    rdfs:label "_errorMsg" .
+
+
+

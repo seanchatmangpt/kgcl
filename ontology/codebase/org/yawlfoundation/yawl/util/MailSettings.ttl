@@ -1,0 +1,113 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.util.MailSettings
+yawl:MailSettings a yawl:Class ;
+    rdfs:label "MailSettings" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/util/MailSettings.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 18/12/2024""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:MailSettings_getSetting_1 ;
+    yawl:hasMethod yawl:MailSettings_copyOf_2 ;
+    yawl:hasMethod yawl:MailSettings_toXML_3 ;
+    yawl:hasMethod yawl:MailSettings_fromXML_4 ;
+    yawl:hasField yawl:MailSettings__logger ;
+    yawl:hasField yawl:MailSettings_host ;
+    yawl:hasField yawl:MailSettings_port ;
+    yawl:hasField yawl:MailSettings_strategy ;
+    yawl:hasField yawl:MailSettings_user ;
+    yawl:hasField yawl:MailSettings_password ;
+    yawl:hasField yawl:MailSettings_fromName ;
+    yawl:hasField yawl:MailSettings_fromAddress ;
+    yawl:hasField yawl:MailSettings_toName ;
+    yawl:hasField yawl:MailSettings_toAddress ;
+    yawl:hasField yawl:MailSettings_ccAddress ;
+    yawl:hasField yawl:MailSettings_bccAddress ;
+    yawl:hasField yawl:MailSettings_subject ;
+    yawl:hasField yawl:MailSettings_content ;
+    .
+
+
+# Method: MailSettings.getSetting
+yawl:MailSettings_getSetting_1 a yawl:Method ;
+    rdfs:label "getSetting" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSetting(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MailSettings.copyOf
+yawl:MailSettings_copyOf_2 a yawl:Method ;
+    rdfs:label "copyOf" ;
+    yawl:returnType "MailSettings" ;
+    yawl:signature "MailSettings copyOf()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MailSettings.toXML
+yawl:MailSettings_toXML_3 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MailSettings.fromXML
+yawl:MailSettings_fromXML_4 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:MailSettings__logger a yawl:Field ;
+    rdfs:label "_logger" .
+
+yawl:MailSettings_host a yawl:Field ;
+    rdfs:label "host" .
+
+yawl:MailSettings_port a yawl:Field ;
+    rdfs:label "port" .
+
+yawl:MailSettings_strategy a yawl:Field ;
+    rdfs:label "strategy" .
+
+yawl:MailSettings_user a yawl:Field ;
+    rdfs:label "user" .
+
+yawl:MailSettings_password a yawl:Field ;
+    rdfs:label "password" .
+
+yawl:MailSettings_fromName a yawl:Field ;
+    rdfs:label "fromName" .
+
+yawl:MailSettings_fromAddress a yawl:Field ;
+    rdfs:label "fromAddress" .
+
+yawl:MailSettings_toName a yawl:Field ;
+    rdfs:label "toName" .
+
+yawl:MailSettings_toAddress a yawl:Field ;
+    rdfs:label "toAddress" .
+
+yawl:MailSettings_ccAddress a yawl:Field ;
+    rdfs:label "ccAddress" .
+
+yawl:MailSettings_bccAddress a yawl:Field ;
+    rdfs:label "bccAddress" .
+
+yawl:MailSettings_subject a yawl:Field ;
+    rdfs:label "subject" .
+
+yawl:MailSettings_content a yawl:Field ;
+    rdfs:label "content" .
+
+
+

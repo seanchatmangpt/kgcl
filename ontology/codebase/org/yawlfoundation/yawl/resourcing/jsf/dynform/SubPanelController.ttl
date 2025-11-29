@@ -1,0 +1,350 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.dynform.SubPanelController
+yawl:SubPanelController a yawl:Class ;
+    rdfs:label "SubPanelController" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf_dynform ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/dynform/SubPanelController.java"^^xsd:string ;
+    rdfs:comment """Manages a set of 'cloned' panels on a dynamic form Author: Michael Adams Date: 21/02/2008""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:SubPanelController_getMinOccurs_1 ;
+    yawl:hasMethod yawl:SubPanelController_setMinOccurs_2 ;
+    yawl:hasMethod yawl:SubPanelController_setMinOccurs_3 ;
+    yawl:hasMethod yawl:SubPanelController_getMaxOccurs_4 ;
+    yawl:hasMethod yawl:SubPanelController_setMaxOccurs_5 ;
+    yawl:hasMethod yawl:SubPanelController_setMaxOccurs_6 ;
+    yawl:hasMethod yawl:SubPanelController_getCurrOccurs_7 ;
+    yawl:hasMethod yawl:SubPanelController_setCurrOccurs_8 ;
+    yawl:hasMethod yawl:SubPanelController_getDepthlevel_9 ;
+    yawl:hasMethod yawl:SubPanelController_setDepthlevel_10 ;
+    yawl:hasMethod yawl:SubPanelController_getName_11 ;
+    yawl:hasMethod yawl:SubPanelController_setName_12 ;
+    yawl:hasMethod yawl:SubPanelController_getAltBgColour_13 ;
+    yawl:hasMethod yawl:SubPanelController_setAltBgColour_14 ;
+    yawl:hasMethod yawl:SubPanelController_getBgColour_15 ;
+    yawl:hasMethod yawl:SubPanelController_setBgColour_16 ;
+    yawl:hasMethod yawl:SubPanelController_getSubPanels_17 ;
+    yawl:hasMethod yawl:SubPanelController_hasPanel_18 ;
+    yawl:hasMethod yawl:SubPanelController_repositionAncestor_19 ;
+    yawl:hasMethod yawl:SubPanelController_incSiblingSubPanelTops_20 ;
+    yawl:hasMethod yawl:SubPanelController_convertOccurs_21 ;
+    yawl:hasMethod yawl:SubPanelController_getSubPanelStyleClass_22 ;
+    yawl:hasMethod yawl:SubPanelController_getUserDefinedBackgroundColour_23 ;
+    yawl:hasMethod yawl:SubPanelController_canVaryOccurs_24 ;
+    yawl:hasMethod yawl:SubPanelController_assignStyleToSubPanels_25 ;
+    yawl:hasMethod yawl:SubPanelController_addSubPanel_26 ;
+    yawl:hasMethod yawl:SubPanelController_removeSubPanel_27 ;
+    yawl:hasMethod yawl:SubPanelController_incSubPanelTops_28 ;
+    yawl:hasMethod yawl:SubPanelController_setOccursButtonsEnablement_29 ;
+    yawl:hasMethod yawl:SubPanelController_clone_30 ;
+    yawl:hasMethod yawl:SubPanelController_storeSubPanel_31 ;
+    yawl:hasField yawl:SubPanelController__minOccurs ;
+    yawl:hasField yawl:SubPanelController__maxOccurs ;
+    yawl:hasField yawl:SubPanelController__currOccurs ;
+    yawl:hasField yawl:SubPanelController__depthlevel ;
+    yawl:hasField yawl:SubPanelController__name ;
+    yawl:hasField yawl:SubPanelController__bgColour ;
+    yawl:hasField yawl:SubPanelController__altBgColour ;
+    yawl:hasField yawl:SubPanelController__panelList ;
+    .
+
+
+# Method: SubPanelController.getMinOccurs
+yawl:SubPanelController_getMinOccurs_1 a yawl:Method ;
+    rdfs:label "getMinOccurs" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getMinOccurs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelController.setMinOccurs
+yawl:SubPanelController_setMinOccurs_2 a yawl:Method ;
+    rdfs:label "setMinOccurs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMinOccurs(long minOccurs)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelController.setMinOccurs
+yawl:SubPanelController_setMinOccurs_3 a yawl:Method ;
+    rdfs:label "setMinOccurs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMinOccurs(String minOccurs)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelController.getMaxOccurs
+yawl:SubPanelController_getMaxOccurs_4 a yawl:Method ;
+    rdfs:label "getMaxOccurs" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getMaxOccurs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelController.setMaxOccurs
+yawl:SubPanelController_setMaxOccurs_5 a yawl:Method ;
+    rdfs:label "setMaxOccurs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMaxOccurs(long maxOccurs)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelController.setMaxOccurs
+yawl:SubPanelController_setMaxOccurs_6 a yawl:Method ;
+    rdfs:label "setMaxOccurs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMaxOccurs(String maxOccurs)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelController.getCurrOccurs
+yawl:SubPanelController_getCurrOccurs_7 a yawl:Method ;
+    rdfs:label "getCurrOccurs" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getCurrOccurs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelController.setCurrOccurs
+yawl:SubPanelController_setCurrOccurs_8 a yawl:Method ;
+    rdfs:label "setCurrOccurs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCurrOccurs(long currOccurs)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelController.getDepthlevel
+yawl:SubPanelController_getDepthlevel_9 a yawl:Method ;
+    rdfs:label "getDepthlevel" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getDepthlevel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelController.setDepthlevel
+yawl:SubPanelController_setDepthlevel_10 a yawl:Method ;
+    rdfs:label "setDepthlevel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDepthlevel(int depthlevel)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelController.getName
+yawl:SubPanelController_getName_11 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelController.setName
+yawl:SubPanelController_setName_12 a yawl:Method ;
+    rdfs:label "setName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelController.getAltBgColour
+yawl:SubPanelController_getAltBgColour_13 a yawl:Method ;
+    rdfs:label "getAltBgColour" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAltBgColour()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelController.setAltBgColour
+yawl:SubPanelController_setAltBgColour_14 a yawl:Method ;
+    rdfs:label "setAltBgColour" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAltBgColour(String colour)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelController.getBgColour
+yawl:SubPanelController_getBgColour_15 a yawl:Method ;
+    rdfs:label "getBgColour" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBgColour()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelController.setBgColour
+yawl:SubPanelController_setBgColour_16 a yawl:Method ;
+    rdfs:label "setBgColour" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBgColour(String colour)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelController.getSubPanels
+yawl:SubPanelController_getSubPanels_17 a yawl:Method ;
+    rdfs:label "getSubPanels" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getSubPanels()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelController.hasPanel
+yawl:SubPanelController_hasPanel_18 a yawl:Method ;
+    rdfs:label "hasPanel" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasPanel(SubPanel panel)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelController.repositionAncestor
+yawl:SubPanelController_repositionAncestor_19 a yawl:Method ;
+    rdfs:label "repositionAncestor" ;
+    yawl:returnType "SubPanel" ;
+    yawl:signature "SubPanel repositionAncestor(SubPanel subPanel, int adjustment, int top)" ;
+    rdfs:comment """A recursive method that resizes and repositions all the containing subpanels of the one passed. @param subPanel the subpanel that has instigated the change @param adjustment how much to increase panel heights & tops by @param top the new top position @return the outermost containing subpanel in the nest of subpanels""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SubPanelController.incSiblingSubPanelTops
+yawl:SubPanelController_incSiblingSubPanelTops_20 a yawl:Method ;
+    rdfs:label "incSiblingSubPanelTops" ;
+    yawl:returnType "void" ;
+    yawl:signature "void incSiblingSubPanelTops(SubPanel ancestor, SubPanelController controller, int top, int adjustment)" ;
+    rdfs:comment """Increment the relevant subpanel tops for all subpanels at the same depth level that are not ancestors of the subpanel passed @param ancestor an outer subpanel of the one that triggered the repositioning @param controller the controller of the triggering subpanel @param top the new top position of the triggering subpanel @param adjustment how much to add to the top of affected sibling subpanels""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SubPanelController.convertOccurs
+yawl:SubPanelController_convertOccurs_21 a yawl:Method ;
+    rdfs:label "convertOccurs" ;
+    yawl:returnType "int" ;
+    yawl:signature "int convertOccurs(String occurs)" ;
+    rdfs:comment """@return the int value of the min or max Occurs string for this panel set""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: SubPanelController.getSubPanelStyleClass
+yawl:SubPanelController_getSubPanelStyleClass_22 a yawl:Method ;
+    rdfs:label "getSubPanelStyleClass" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSubPanelStyleClass()" ;
+    rdfs:comment """@return the appropriate style class for this depthlevel""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelController.getUserDefinedBackgroundColour
+yawl:SubPanelController_getUserDefinedBackgroundColour_23 a yawl:Method ;
+    rdfs:label "getUserDefinedBackgroundColour" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUserDefinedBackgroundColour()" ;
+    rdfs:comment """@return the user-defined bg colour (if any) for this depthlevel""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelController.canVaryOccurs
+yawl:SubPanelController_canVaryOccurs_24 a yawl:Method ;
+    rdfs:label "canVaryOccurs" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean canVaryOccurs()" ;
+    rdfs:comment """@return true if this subpanel can appear more times that it currently is""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelController.assignStyleToSubPanels
+yawl:SubPanelController_assignStyleToSubPanels_25 a yawl:Method ;
+    rdfs:label "assignStyleToSubPanels" ;
+    yawl:returnType "void" ;
+    yawl:signature "void assignStyleToSubPanels(int maxLevel)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelController.addSubPanel
+yawl:SubPanelController_addSubPanel_26 a yawl:Method ;
+    rdfs:label "addSubPanel" ;
+    yawl:returnType "SubPanel" ;
+    yawl:signature "SubPanel addSubPanel(SubPanel newPanel)" ;
+    rdfs:comment """Adds a new, cloned subpanel to this controller @param newPanel the subpanel to add @return the outermost containing subpanel of the one added""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelController.removeSubPanel
+yawl:SubPanelController_removeSubPanel_27 a yawl:Method ;
+    rdfs:label "removeSubPanel" ;
+    yawl:returnType "SubPanel" ;
+    yawl:signature "SubPanel removeSubPanel(SubPanel oldPanel)" ;
+    rdfs:comment """Remove a subpanel from the set @param oldPanel the panel to remove @return the outermost containing subpanel of the one removed""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelController.incSubPanelTops
+yawl:SubPanelController_incSubPanelTops_28 a yawl:Method ;
+    rdfs:label "incSubPanelTops" ;
+    yawl:returnType "void" ;
+    yawl:signature "void incSubPanelTops(int top, int adjustment)" ;
+    rdfs:comment """reset the tops of all subpanels lower than the top specified @param top the y-coord below which subpanels should be moved down @param adjustment how much to move them down by""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelController.setOccursButtonsEnablement
+yawl:SubPanelController_setOccursButtonsEnablement_29 a yawl:Method ;
+    rdfs:label "setOccursButtonsEnablement" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOccursButtonsEnablement()" ;
+    rdfs:comment """enable/disable the occurs buttons as required""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelController.clone
+yawl:SubPanelController_clone_30 a yawl:Method ;
+    rdfs:label "clone" ;
+    yawl:returnType "SubPanelController" ;
+    yawl:signature "SubPanelController clone()" ;
+    rdfs:comment """clone this controller""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelController.storeSubPanel
+yawl:SubPanelController_storeSubPanel_31 a yawl:Method ;
+    rdfs:label "storeSubPanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void storeSubPanel(SubPanel panel)" ;
+    rdfs:comment """Adds a subpanel to the set without making any surrounding adjustments to screen coordinates @param panel the panel to add""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:SubPanelController__minOccurs a yawl:Field ;
+    rdfs:label "_minOccurs" .
+
+yawl:SubPanelController__maxOccurs a yawl:Field ;
+    rdfs:label "_maxOccurs" .
+
+yawl:SubPanelController__currOccurs a yawl:Field ;
+    rdfs:label "_currOccurs" .
+
+yawl:SubPanelController__depthlevel a yawl:Field ;
+    rdfs:label "_depthlevel" .
+
+yawl:SubPanelController__name a yawl:Field ;
+    rdfs:label "_name" .
+
+yawl:SubPanelController__bgColour a yawl:Field ;
+    rdfs:label "_bgColour" .
+
+yawl:SubPanelController__altBgColour a yawl:Field ;
+    rdfs:label "_altBgColour" .
+
+yawl:SubPanelController__panelList a yawl:Field ;
+    rdfs:label "_panelList" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_resourcing_jsf_dynform_dynattributes a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.jsf.dynform.dynattributes" .
+
+

@@ -1,0 +1,57 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.util.PostUpdateTasks
+yawl:PostUpdateTasks a yawl:Class ;
+    rdfs:label "PostUpdateTasks" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/util/PostUpdateTasks.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 29/03/15""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:PostUpdateTasks_go_1 ;
+    yawl:hasMethod yawl:PostUpdateTasks_cleanup_2 ;
+    yawl:hasMethod yawl:PostUpdateTasks_deleteFile_3 ;
+    yawl:hasMethod yawl:PostUpdateTasks_updateOSMenus_4 ;
+    .
+
+
+# Method: PostUpdateTasks.go
+yawl:PostUpdateTasks_go_1 a yawl:Method ;
+    rdfs:label "go" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean go()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PostUpdateTasks.cleanup
+yawl:PostUpdateTasks_cleanup_2 a yawl:Method ;
+    rdfs:label "cleanup" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean cleanup()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PostUpdateTasks.deleteFile
+yawl:PostUpdateTasks_deleteFile_3 a yawl:Method ;
+    rdfs:label "deleteFile" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean deleteFile(String homeDir, String fileName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PostUpdateTasks.updateOSMenus
+yawl:PostUpdateTasks_updateOSMenus_4 a yawl:Method ;
+    rdfs:label "updateOSMenus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateOSMenus(String homeFolder)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+
+

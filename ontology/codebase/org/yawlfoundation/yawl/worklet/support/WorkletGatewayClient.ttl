@@ -1,0 +1,521 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.support.WorkletGatewayClient
+yawl:WorkletGatewayClient a yawl:Class ;
+    rdfs:label "WorkletGatewayClient" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_support ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/support/WorkletGatewayClient.java"^^xsd:string ;
+    rdfs:comment """An API to be used by clients that want to interact with the worklet service. @author Michael Adams 11/07/2011""" ;
+    yawl:extends yawl:Interface_Client ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:WorkletGatewayClient_setURI_1 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_connect_2 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_checkConnection_3 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_disconnect_4 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_addListener_5 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_removeListener_6 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_refresh_7 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_process_8 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_evaluate_9 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_evaluate_10 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_evaluate_11 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_execute_12 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_execute_13 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_execute_14 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_addNode_15 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_addNode_16 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_addNode_17 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_getNode_18 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_removeNode_19 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_getRdrTree_20 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_getRdrTree_21 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_getRdrTree_22 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_getRdrSet_23 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_getRdrSet_24 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_getRdrSetIDs_25 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_addRdrSet_26 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_addRdrSet_27 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_removeRdrSet_28 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_removeRdrSet_29 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_getWorklet_30 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_addWorklet_31 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_replaceWorklet_32 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_replaceWorklet_33 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_removeWorklet_34 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_removeWorklet_35 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_getWorkletNames_36 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_getWorkletInfoList_37 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_getRunningWorklets_38 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_getOrphanedWorklets_39 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_loadFile_40 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_updateRdrSetTaskIDs_41 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_getAdministrationTask_42 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_getAdministrationTasks_43 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_addAdministrationTask_44 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_removeAdministrationTask_45 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_raiseCaseExternalException_46 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_raiseItemExternalException_47 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_getExternalTriggersForCase_48 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_getExternalTriggersForItem_49 ;
+    yawl:hasMethod yawl:WorkletGatewayClient_getBuildProperties_50 ;
+    yawl:hasField yawl:WorkletGatewayClient_DEFAULT_URI ;
+    yawl:hasField yawl:WorkletGatewayClient__wsURI ;
+    .
+
+
+# Method: WorkletGatewayClient.setURI
+yawl:WorkletGatewayClient_setURI_1 a yawl:Method ;
+    rdfs:label "setURI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setURI(String uri)" ;
+    rdfs:comment """Sets the uri of the Worklet Service Gateway @param uri the uri to set""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.connect
+yawl:WorkletGatewayClient_connect_2 a yawl:Method ;
+    rdfs:label "connect" ;
+    yawl:returnType "String" ;
+    yawl:signature "String connect(String userID, String password)" ;
+    rdfs:comment """Connects an external entity to the worklet service @param userID the userid @param password the corresponding password @return a session handle if successful, or a failure message if not @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.checkConnection
+yawl:WorkletGatewayClient_checkConnection_3 a yawl:Method ;
+    rdfs:label "checkConnection" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkConnection(String handle)" ;
+    rdfs:comment """Check that a session handle is active @param handle the session handle to check @return \"true\" if the id is valid, \"false\" if otherwise @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.disconnect
+yawl:WorkletGatewayClient_disconnect_4 a yawl:Method ;
+    rdfs:label "disconnect" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disconnect(String handle)" ;
+    rdfs:comment """Disconnects an external entity from the worklet service @param handle the session handle to disconnect @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.addListener
+yawl:WorkletGatewayClient_addListener_5 a yawl:Method ;
+    rdfs:label "addListener" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addListener(String listenerURI, String handle)" ;
+    rdfs:comment """Adds a listener for worklet events (selection, exception raising) @param listenerURI the URI of the listener to add @param handle a current session handle to the worklet service @return a message denoting success or describing an error @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.removeListener
+yawl:WorkletGatewayClient_removeListener_6 a yawl:Method ;
+    rdfs:label "removeListener" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeListener(String listenerURI, String handle)" ;
+    rdfs:comment """Removes a listener for worklet events @param listenerURI the URI of the listener to remove @param handle a current session handle to the worklet service @return a message denoting success or describing an error @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.refresh
+yawl:WorkletGatewayClient_refresh_7 a yawl:Method ;
+    rdfs:label "refresh" ;
+    yawl:returnType "String" ;
+    yawl:signature "String refresh(YSpecificationID specID, String handle)" ;
+    rdfs:comment """Refreshes the internal rules cache from storage for a specification @param specID the specification id to refresh the rule set for @param handle a current session handle to the worklet service @return a message denoting success or describing an error @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.process
+yawl:WorkletGatewayClient_process_8 a yawl:Method ;
+    rdfs:label "process" ;
+    yawl:returnType "String" ;
+    yawl:signature "String process(WorkItemRecord wir, Element data, RuleType rType, String handle)" ;
+    rdfs:comment """Evaluates a data set against the rule tree for a specification and task, and if a rule node is satisfied raises an exception and executes the exception handler for the node, if one is defined. A raised exception will be announced to listeners as a byproduct of this method call. @param wir the workitem containing specification and task identifiers. PRE: the workitem must currently exist in the engine @param data the data set to use in the evaluation @param rType the type of rule tree to evaluate.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.evaluate
+yawl:WorkletGatewayClient_evaluate_9 a yawl:Method ;
+    rdfs:label "evaluate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String evaluate(WorkItemRecord wir, Element data, RuleType rType, String handle)" ;
+    rdfs:comment """Evaluates a data set against the rule tree for a specification and task, and returns the conclusion, if any. Note that for a conclusion to be returned, a rule tree must exist for the specification/task/ruletype, and a rule in that tree must be satisfied. @param wir the workitem containing specification and task identifiers @param data the data set to use in the evaluation @param rType the type of rule tree to evaluate @param handle a current session handle to the worklet service @return a conclu""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.evaluate
+yawl:WorkletGatewayClient_evaluate_10 a yawl:Method ;
+    rdfs:label "evaluate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String evaluate(YSpecificationID specID, String taskID, Element data, RuleType rType, String handle)" ;
+    rdfs:comment """Evaluates a data set against the rule tree for a specification and task, and returns the conclusion, if any. Note that for a conclusion to be returned, a rule tree must exist for the specification/task/ruletype, and a rule in that tree must be satisfied. @param specID the specification identifier @param taskID the task identifier (may be null for case-level rule types) @param data the data set to use in the evaluation @param rType the type of rule tree to evaluate @param handle a current session""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.evaluate
+yawl:WorkletGatewayClient_evaluate_11 a yawl:Method ;
+    rdfs:label "evaluate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String evaluate(String processName, String taskID, Element data, RuleType rType, String handle)" ;
+    rdfs:comment """Evaluates a data set against the rule tree for a process and task, and returns the conclusion, if any. Note that for a conclusion to be returned, a rule tree must exist for the process/task/ruletype, and a rule in that tree must be satisfied. @param processName the process identifier, or unique ruleset name @param taskID the task identifier (may be null for case-level rule types) @param data the data set to use in the evaluation @param rType the type of rule tree to evaluate @param handle a curr""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.execute
+yawl:WorkletGatewayClient_execute_12 a yawl:Method ;
+    rdfs:label "execute" ;
+    yawl:returnType "String" ;
+    yawl:signature "String execute(WorkItemRecord wir, RuleType rType, RdrConclusion conclusion, String handle)" ;
+    rdfs:comment """Raises an exception and executes the exception handler defined in an RdrConclusion. A raised exception will be announced to listeners as a byproduct of this method call. @param wir the workitem containing specification and task identifiers. PRE: the workitem must currently exist in the engine @param rType the type of rule tree to evaluate. NOTE: Case-level exception types cannot be used with this method @param conclusion the RdrConclusion object that defines the exlet to execute @param handle a """ ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.execute
+yawl:WorkletGatewayClient_execute_13 a yawl:Method ;
+    rdfs:label "execute" ;
+    yawl:returnType "String" ;
+    yawl:signature "String execute(WorkItemRecord wir, RuleType rType, RdrConclusion conclusion, Set workletSet, String handle)" ;
+    rdfs:comment """Raises an exception and executes the exception handler defined in an RdrConclusion. A raised exception will be announced to listeners as a byproduct of this method call. @param wir the workitem containing specification and task identifiers. PRE: the workitem must currently exist in the engine @param rType the type of rule tree to evaluate. NOTE: Case-level exception types cannot be used with this method @param conclusion the RdrConclusion object that defines the exlet to execute @param workletSe""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.execute
+yawl:WorkletGatewayClient_execute_14 a yawl:Method ;
+    rdfs:label "execute" ;
+    yawl:returnType "String" ;
+    yawl:signature "String execute(WorkItemRecord wir, RuleType rType, RdrConclusion conclusion, String workletXML, String handle)" ;
+    rdfs:comment """Raises an exception and executes the exception handler defined in an RdrConclusion. A raised exception will be announced to listeners as a byproduct of this method call. @param wir the workitem containing specification and task identifiers. PRE: the workitem must currently exist in the engine @param rType the type of rule tree to evaluate. NOTE: Case-level exception types cannot be used with this method @param conclusion the RdrConclusion object that defines the exlet to execute @param workletXM""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.addNode
+yawl:WorkletGatewayClient_addNode_15 a yawl:Method ;
+    rdfs:label "addNode" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addNode(WorkItemRecord wir, RuleType rType, RdrNode node, String handle)" ;
+    rdfs:comment """Adds a node to a ruleSet. If the appropriate rule tree exists, the node is added to the correct place in the tree; if the rule tree does not yet exist, it is created and the node added as its first rule node (after the root); the there is no ruleSet for the parameters, one is created, and a new tree inserted as above. @param wir the workitem containing specification and task identifiers @param rType the type of rule tree to add the node to @param node the node to add. It is not required that val""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.addNode
+yawl:WorkletGatewayClient_addNode_16 a yawl:Method ;
+    rdfs:label "addNode" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addNode(YSpecificationID specID, String taskID, RuleType rType, RdrNode node, String handle)" ;
+    rdfs:comment """Adds a node to a ruleSet. If the appropriate rule tree exists, the node is added to the correct place in the tree; if the rule tree does not yet exist, it is created and the node added as its first rule node (after the root); the there is no ruleSet for the parameters, one is created, and a new tree inserted as above. @param specID the specification identifier @param taskID the task identifier (may be null for case-level rule types) @param rType the type of rule tree to add the node to @param no""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.addNode
+yawl:WorkletGatewayClient_addNode_17 a yawl:Method ;
+    rdfs:label "addNode" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addNode(String processName, String taskID, RuleType rType, RdrNode node, String handle)" ;
+    rdfs:comment """Adds a node to a ruleSet. If the appropriate rule tree exists, the node is added to the correct place in the tree; if the rule tree does not yet exist, it is created and the node added as its first rule node (after the root); the there is no ruleSet for the parameters, one is created, and a new tree inserted as above. @param processName the process identifier, or unique ruleset name @param taskID the task identifier (may be null for case-level rule types) @param rType the type of rule tree to ad""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.getNode
+yawl:WorkletGatewayClient_getNode_18 a yawl:Method ;
+    rdfs:label "getNode" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNode(long nodeID, String handle)" ;
+    rdfs:comment """Gets a copy of a particular node from a rule set @param nodeID the (integer) node id @param handle a current session handle to the worklet service @return the node, if found @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.removeNode
+yawl:WorkletGatewayClient_removeNode_19 a yawl:Method ;
+    rdfs:label "removeNode" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeNode(YSpecificationID specID, String taskID, RuleType rType, long nodeID, String handle)" ;
+    rdfs:comment """Removes a rule node from a rule tree, triggers a tree restructure @param specID the specification identifier @param taskID the task identifier (may be null for case-level rule types) @param rType the type of rule tree to get the node from @param handle a current session handle to the worklet service @return a success or failure message @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.getRdrTree
+yawl:WorkletGatewayClient_getRdrTree_20 a yawl:Method ;
+    rdfs:label "getRdrTree" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRdrTree(WorkItemRecord wir, RuleType rType, String handle)" ;
+    rdfs:comment """Gets a copy of a particular rule tree @param wir the workitem containing specification and task identifiers @param rType the type of rule tree to get the node from @param handle a current session handle to the worklet service @return the tree, if found for the specification/task/rule-type combination @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.getRdrTree
+yawl:WorkletGatewayClient_getRdrTree_21 a yawl:Method ;
+    rdfs:label "getRdrTree" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRdrTree(YSpecificationID specID, String taskID, RuleType rType, String handle)" ;
+    rdfs:comment """Gets a copy of a particular rule tree @param specID the specification identifier @param taskID the task identifier (may be null for case-level rule types) @param rType the type of rule tree to get the node from @param handle a current session handle to the worklet service @return the tree, if found for the specification/task/rule-type combination @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.getRdrTree
+yawl:WorkletGatewayClient_getRdrTree_22 a yawl:Method ;
+    rdfs:label "getRdrTree" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRdrTree(String processName, String taskID, RuleType rType, String handle)" ;
+    rdfs:comment """Gets a copy of a particular rule tree @param processName the process identifier, or unique ruleset name @param taskID the task identifier (may be null for case-level rule types) @param rType the type of rule tree to get the node from @param handle a current session handle to the worklet service @return the tree, if found for the process/task/rule-type combination @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.getRdrSet
+yawl:WorkletGatewayClient_getRdrSet_23 a yawl:Method ;
+    rdfs:label "getRdrSet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRdrSet(YSpecificationID specID, String handle)" ;
+    rdfs:comment """Gets a copy of a particular rule set @param specID the specification identifier @param handle a current session handle to the worklet service @return the rule set, if found for the specification @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.getRdrSet
+yawl:WorkletGatewayClient_getRdrSet_24 a yawl:Method ;
+    rdfs:label "getRdrSet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRdrSet(String processName, String handle)" ;
+    rdfs:comment """Gets a copy of a particular rule set @param processName the process identifier, or unique ruleset name @param handle a current session handle to the worklet service @return the rule set, if found for the process @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.getRdrSetIDs
+yawl:WorkletGatewayClient_getRdrSetIDs_25 a yawl:Method ;
+    rdfs:label "getRdrSetIDs" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRdrSetIDs(String handle)" ;
+    rdfs:comment """Gets the identifiers for all rule sets @param handle a current session handle to the worklet service @return the set of all rule set ids stored by the service (as XML). Specification ids will be of the form \"identifier:version:uri\" (i.e. its 'full string') @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.addRdrSet
+yawl:WorkletGatewayClient_addRdrSet_26 a yawl:Method ;
+    rdfs:label "addRdrSet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addRdrSet(YSpecificationID specID, String ruleSetXML, String handle)" ;
+    rdfs:comment """Adds a complete (legacy) rule set, expressed as xml @param specID the id of the specification the rule set is defined for @param ruleSetXML the rule set to add @param handle a current session handle to the worklet service @return a success or error message @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.addRdrSet
+yawl:WorkletGatewayClient_addRdrSet_27 a yawl:Method ;
+    rdfs:label "addRdrSet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addRdrSet(String processName, String ruleSetXML, String handle)" ;
+    rdfs:comment """Adds a complete (legacy) rule set, expressed as xml @param processName the name of the process the rule set is defined for @param ruleSetXML the rule set to add @param handle a current session handle to the worklet service @return a success or error message @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.removeRdrSet
+yawl:WorkletGatewayClient_removeRdrSet_28 a yawl:Method ;
+    rdfs:label "removeRdrSet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeRdrSet(YSpecificationID specID, String handle)" ;
+    rdfs:comment """Removes a rule set @param specID the specification id of the rule set to remove @param handle a current session handle to the worklet service @return a success or error message @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.removeRdrSet
+yawl:WorkletGatewayClient_removeRdrSet_29 a yawl:Method ;
+    rdfs:label "removeRdrSet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeRdrSet(String identifier, String handle)" ;
+    rdfs:comment """Removes a rule set @param identifier the id of the rule set to remove @param handle a current session handle to the worklet service @return a success or error message @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.getWorklet
+yawl:WorkletGatewayClient_getWorklet_30 a yawl:Method ;
+    rdfs:label "getWorklet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorklet(YSpecificationID specID, String handle)" ;
+    rdfs:comment """Gets the specified worklet, if loaded in the service @param specID the Worklet specification id @param handle a current session handle to the worklet service @return the worklet xml, if found, or an error message if not @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.addWorklet
+yawl:WorkletGatewayClient_addWorklet_31 a yawl:Method ;
+    rdfs:label "addWorklet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addWorklet(YSpecificationID specID, String workletXML, String handle)" ;
+    rdfs:comment """Adds a worklet to the service repertoire @param specID the Worklet specification id @param workletXML the worklet specification (as XML) to add @param handle a current session handle to the worklet service @return a success or error message @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.replaceWorklet
+yawl:WorkletGatewayClient_replaceWorklet_32 a yawl:Method ;
+    rdfs:label "replaceWorklet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String replaceWorklet(String itemID, String handle)" ;
+    rdfs:comment """Replaces a worklet instance (or instances) started for a work item with a new instance (or instances), based on a 'pre' updated rule set @param itemID the item id of the parent that launched the worklet(s) @param handle a current session handle to the worklet service @return a list of case ids of the new instances, or an error message @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.replaceWorklet
+yawl:WorkletGatewayClient_replaceWorklet_33 a yawl:Method ;
+    rdfs:label "replaceWorklet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String replaceWorklet(String caseID, String itemID, RuleType ruleType, String handle)" ;
+    rdfs:comment """Replaces a worklet instance (or instances) started for an exlet with a new instance (or instances), based on a 'pre' updated rule set @param caseID the parent case id @param itemID the item id of the parent that launched the worklet(s). May be null (if case level exception) @param handle a current session handle to the worklet service @return a list of case ids of the new instances, or an error message @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.removeWorklet
+yawl:WorkletGatewayClient_removeWorklet_34 a yawl:Method ;
+    rdfs:label "removeWorklet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeWorklet(String specKey, String handle)" ;
+    rdfs:comment """Gets the specified worklet, if loaded in the service @param specKey the Worklet specification id key @param handle a current session handle to the worklet service @return the worklet xml, if found, or an error message if not @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.removeWorklet
+yawl:WorkletGatewayClient_removeWorklet_35 a yawl:Method ;
+    rdfs:label "removeWorklet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeWorklet(YSpecificationID specID, String handle)" ;
+    rdfs:comment """Gets the specified worklet, if loaded in the service @param specID the Worklet specification id @param handle a current session handle to the worklet service @return the worklet xml, if found, or an error message if not @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.getWorkletNames
+yawl:WorkletGatewayClient_getWorkletNames_36 a yawl:Method ;
+    rdfs:label "getWorkletNames" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkletNames(String handle)" ;
+    rdfs:comment """Gets a list of the names of all the worklets in the repository @param handle a current session handle to the worklet service @return an XML representation of the list of worklet names @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.getWorkletInfoList
+yawl:WorkletGatewayClient_getWorkletInfoList_37 a yawl:Method ;
+    rdfs:label "getWorkletInfoList" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkletInfoList(String handle)" ;
+    rdfs:comment """Gets a list of specification descriptors of all the worklets in the repository @param handle a current session handle to the worklet service @return an XML representation of the list of worklet specifications @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.getRunningWorklets
+yawl:WorkletGatewayClient_getRunningWorklets_38 a yawl:Method ;
+    rdfs:label "getRunningWorklets" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRunningWorklets(String handle)" ;
+    rdfs:comment """Gets an info set of all currently running worklets @param handle a current session handle to the worklet service @return an XML representation of the list of running worklets @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.getOrphanedWorklets
+yawl:WorkletGatewayClient_getOrphanedWorklets_39 a yawl:Method ;
+    rdfs:label "getOrphanedWorklets" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOrphanedWorklets(String handle)" ;
+    rdfs:comment """Gets an info set of all stored worklets that are not referenced by any rule @param handle a current session handle to the worklet service @return an XML representation of the list of orphaned worklets @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.loadFile
+yawl:WorkletGatewayClient_loadFile_40 a yawl:Method ;
+    rdfs:label "loadFile" ;
+    yawl:returnType "String" ;
+    yawl:signature "String loadFile(String path, String extn, String handle)" ;
+    rdfs:comment """Loads a file or files into the worklet repository. If the path is a directory, will load all files in that directory and its sub-directories of the specified type. @param path the file path to load @param extn one of '.xrs' (for a rules file) or '.yawl' (for a worklet file) @param handle a current session handle to the worklet service @return a success message or a list of error messages @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.updateRdrSetTaskIDs
+yawl:WorkletGatewayClient_updateRdrSetTaskIDs_41 a yawl:Method ;
+    rdfs:label "updateRdrSetTaskIDs" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateRdrSetTaskIDs(YSpecificationID specID, Map updateMap, String handle)" ;
+    rdfs:comment """Updates the task ids in a rule set for those they have been changed to via a specification edit @param specID the specification id for the rule set to update @param updateMap the map of changes [oldID -> newID] @param handle a current session handle to the worklet service @return a success or error message @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.getAdministrationTask
+yawl:WorkletGatewayClient_getAdministrationTask_42 a yawl:Method ;
+    rdfs:label "getAdministrationTask" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAdministrationTask(int id, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.getAdministrationTasks
+yawl:WorkletGatewayClient_getAdministrationTasks_43 a yawl:Method ;
+    rdfs:label "getAdministrationTasks" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAdministrationTasks(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.addAdministrationTask
+yawl:WorkletGatewayClient_addAdministrationTask_44 a yawl:Method ;
+    rdfs:label "addAdministrationTask" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addAdministrationTask(String caseID, String itemID, String title, String scenario, String process, int taskType, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.removeAdministrationTask
+yawl:WorkletGatewayClient_removeAdministrationTask_45 a yawl:Method ;
+    rdfs:label "removeAdministrationTask" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeAdministrationTask(int id, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.raiseCaseExternalException
+yawl:WorkletGatewayClient_raiseCaseExternalException_46 a yawl:Method ;
+    rdfs:label "raiseCaseExternalException" ;
+    yawl:returnType "String" ;
+    yawl:signature "String raiseCaseExternalException(String caseID, String trigger, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.raiseItemExternalException
+yawl:WorkletGatewayClient_raiseItemExternalException_47 a yawl:Method ;
+    rdfs:label "raiseItemExternalException" ;
+    yawl:returnType "String" ;
+    yawl:signature "String raiseItemExternalException(String itemID, String trigger, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.getExternalTriggersForCase
+yawl:WorkletGatewayClient_getExternalTriggersForCase_48 a yawl:Method ;
+    rdfs:label "getExternalTriggersForCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getExternalTriggersForCase(String caseID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.getExternalTriggersForItem
+yawl:WorkletGatewayClient_getExternalTriggersForItem_49 a yawl:Method ;
+    rdfs:label "getExternalTriggersForItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getExternalTriggersForItem(String itemID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGatewayClient.getBuildProperties
+yawl:WorkletGatewayClient_getBuildProperties_50 a yawl:Method ;
+    rdfs:label "getBuildProperties" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBuildProperties(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:WorkletGatewayClient_DEFAULT_URI a yawl:Field ;
+    rdfs:label "DEFAULT_URI" .
+
+yawl:WorkletGatewayClient__wsURI a yawl:Field ;
+    rdfs:label "_wsURI" .
+
+
+

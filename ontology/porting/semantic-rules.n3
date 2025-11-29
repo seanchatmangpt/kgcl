@@ -1,0 +1,113 @@
+@prefix code: <http://kgcl.dev/ontology/codebase#> .
+@prefix port: <http://kgcl.dev/ontology/porting#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+# Semantic Porting Rules
+# Rules for detecting semantic equivalence and differences
+
+# ============================================================================
+# RULE 1: Fingerprint Similarity
+# ============================================================================
+# Match methods with similar semantic fingerprints
+
+{
+    ?javaMethod code:hasFingerprint ?javaFp .
+    ?pythonMethod code:hasFingerprint ?pythonFp .
+    
+    # Calculate similarity (simplified - EYE doesn't have string similarity)
+    # In practice, this would be pre-computed and stored
+    port:similarity(?javaFp, ?pythonFp, ?score) .
+    
+    ?score >= 0.8 .
+}
+=>
+{
+    ?javaMethod port:semanticallyEquivalent ?pythonMethod ;
+        port:similarityScore ?score ;
+        port:matchType "semantic" .
+} .
+
+# ============================================================================
+# RULE 2: Complexity Match
+# ============================================================================
+# Detect methods with similar cyclomatic complexity
+
+{
+    ?javaMethod code:complexity ?javaComplexity .
+    ?pythonMethod code:complexity ?pythonComplexity .
+    
+    math:difference(?javaComplexity, ?pythonComplexity, ?diff) .
+    math:absoluteValue(?diff, ?absDiff) .
+    
+    FILTER(?absDiff <= 2)
+}
+=>
+{
+    ?javaMethod port:complexityMatch ?pythonMethod ;
+        port:complexityDifference ?absDiff .
+} .
+
+# ============================================================================
+# RULE 3: Algorithm Pattern Match
+# ============================================================================
+# Match methods with similar algorithm patterns (loops, recursion)
+
+{
+    ?javaMethod code:hasLoops ?javaLoops .
+    ?javaMethod code:hasRecursion ?javaRecursion .
+    
+    ?pythonMethod code:hasLoops ?pythonLoops .
+    ?pythonMethod code:hasRecursion ?pythonRecursion .
+    
+    FILTER(?javaLoops = ?pythonLoops)
+    FILTER(?javaRecursion = ?pythonRecursion)
+}
+=>
+{
+    ?javaMethod port:algorithmMatch ?pythonMethod .
+} .
+
+# ============================================================================
+# RULE 4: Semantic Divergence Detection
+# ============================================================================
+# Detect methods with significant semantic differences
+
+{
+    ?javaMethod port:hasPort ?pythonMethod .
+    ?javaMethod code:hasFingerprint ?javaFp .
+    ?pythonMethod code:hasFingerprint ?pythonFp .
+    
+    port:similarity(?javaFp, ?pythonFp, ?score) .
+    
+    FILTER(?score < 0.7)
+}
+=>
+{
+    ?javaMethod port:semanticDivergence true ;
+        port:similarityScore ?score ;
+        port:severity "high" .
+} .
+
+# ============================================================================
+# RULE 5: Control Flow Difference
+# ============================================================================
+# Detect methods with different control flow complexity
+
+{
+    ?javaMethod port:hasPort ?pythonMethod .
+    ?javaMethod code:complexity ?javaComplexity .
+    ?pythonMethod code:complexity ?pythonComplexity .
+    
+    math:difference(?javaComplexity, ?pythonComplexity, ?diff) .
+    math:absoluteValue(?diff, ?absDiff) .
+    
+    FILTER(?absDiff > 3)
+}
+=>
+{
+    ?javaMethod port:controlFlowDifference true ;
+        port:complexityDifference ?absDiff ;
+        port:severity "medium" .
+} .
+

@@ -1,0 +1,94 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.schema.YDataSchemaCache
+yawl:YDataSchemaCache a yawl:Class ;
+    rdfs:label "YDataSchemaCache" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_schema ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/schema/YDataSchemaCache.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 15/04/2009""" ;
+    yawl:extends yawl:ConcurrentHashMap ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YDataSchemaCache_add_1 ;
+    yawl:hasMethod yawl:YDataSchemaCache_contains_2 ;
+    yawl:hasMethod yawl:YDataSchemaCache_remove_3 ;
+    yawl:hasMethod yawl:YDataSchemaCache_getSchemaType_4 ;
+    yawl:hasMethod yawl:YDataSchemaCache_getSchemaMap_5 ;
+    yawl:hasMethod yawl:YDataSchemaCache_getSchemaTypeAsString_6 ;
+    yawl:hasMethod yawl:YDataSchemaCache_assembleMap_7 ;
+    yawl:hasMethod yawl:YDataSchemaCache_getKey_8 ;
+    .
+
+
+# Method: YDataSchemaCache.add
+yawl:YDataSchemaCache_add_1 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDataSchemaCache.contains
+yawl:YDataSchemaCache_contains_2 a yawl:Method ;
+    rdfs:label "contains" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean contains(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDataSchemaCache.remove
+yawl:YDataSchemaCache_remove_3 a yawl:Method ;
+    rdfs:label "remove" ;
+    yawl:returnType "SchemaMap" ;
+    yawl:signature "SchemaMap remove(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDataSchemaCache.getSchemaType
+yawl:YDataSchemaCache_getSchemaType_4 a yawl:Method ;
+    rdfs:label "getSchemaType" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getSchemaType(YSpecificationID specID, String typeName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDataSchemaCache.getSchemaMap
+yawl:YDataSchemaCache_getSchemaMap_5 a yawl:Method ;
+    rdfs:label "getSchemaMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getSchemaMap(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDataSchemaCache.getSchemaTypeAsString
+yawl:YDataSchemaCache_getSchemaTypeAsString_6 a yawl:Method ;
+    rdfs:label "getSchemaTypeAsString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSchemaTypeAsString(YSpecificationID specID, String typeName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDataSchemaCache.assembleMap
+yawl:YDataSchemaCache_assembleMap_7 a yawl:Method ;
+    rdfs:label "assembleMap" ;
+    yawl:returnType "SchemaMap" ;
+    yawl:signature "SchemaMap assembleMap(String schema)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YDataSchemaCache.getKey
+yawl:YDataSchemaCache_getKey_8 a yawl:Method ;
+    rdfs:label "getKey" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getKey(YSpecificationID specID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+
+

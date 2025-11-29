@@ -1,0 +1,216 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.authentication.YSessionCache
+yawl:YSessionCache a yawl:Class ;
+    rdfs:label "YSessionCache" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_authentication ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/authentication/YSessionCache.java"^^xsd:string ;
+    rdfs:comment """An extended HashMap that manages connections to the engine from custom services and external applications. <p/> The map is of the form [sessionHandle, session]. @author Michael Adams @since 2.1""" ;
+    yawl:extends yawl:ConcurrentHashMap ;
+    yawl:implements yawl:ISessionCache ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YSessionCache_connect_1 ;
+    yawl:hasMethod yawl:YSessionCache_checkConnection_2 ;
+    yawl:hasMethod yawl:YSessionCache_isServiceConnected_3 ;
+    yawl:hasMethod yawl:YSessionCache_isClientConnected_4 ;
+    yawl:hasMethod yawl:YSessionCache_getSession_5 ;
+    yawl:hasMethod yawl:YSessionCache_expire_6 ;
+    yawl:hasMethod yawl:YSessionCache_disconnect_7 ;
+    yawl:hasMethod yawl:YSessionCache_disconnect_8 ;
+    yawl:hasMethod yawl:YSessionCache_shutdown_9 ;
+    yawl:hasMethod yawl:YSessionCache_validateCredentials_10 ;
+    yawl:hasMethod yawl:YSessionCache_validateCredentials_11 ;
+    yawl:hasMethod yawl:YSessionCache_getService_12 ;
+    yawl:hasMethod yawl:YSessionCache_storeSession_13 ;
+    yawl:hasMethod yawl:YSessionCache_removeSession_14 ;
+    yawl:hasMethod yawl:YSessionCache_failMsg_15 ;
+    yawl:hasMethod yawl:YSessionCache_audit_16 ;
+    yawl:hasMethod yawl:YSessionCache_badPassword_17 ;
+    yawl:hasMethod yawl:YSessionCache_unknownUser_18 ;
+    yawl:hasMethod yawl:YSessionCache_initDb_19 ;
+    yawl:hasField yawl:YSessionCache__timer ;
+    yawl:hasField yawl:YSessionCache__db ;
+    .
+
+
+# Method: YSessionCache.connect
+yawl:YSessionCache_connect_1 a yawl:Method ;
+    rdfs:label "connect" ;
+    yawl:returnType "String" ;
+    yawl:signature "String connect(String name, String password, long timeOutSeconds)" ;
+    rdfs:comment """Creates and stores a new session between the the Engine and a custom service or external application. @param name the username of the external client @param password the corresponding (hashed) password @param timeOutSeconds the maximum idle time for this session (in seconds). A value of 0 will default to 60 minutes; a value less than zero means this session will never timeout. @return a valid session handle, or an appropriate error message""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSessionCache.checkConnection
+yawl:YSessionCache_checkConnection_2 a yawl:Method ;
+    rdfs:label "checkConnection" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean checkConnection(String handle)" ;
+    rdfs:comment """Checks that a session handle represents an active session. If it does, the session idle timer is restarted also. @param handle the session handle held by a client or service. @return true if the handle's session is active.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSessionCache.isServiceConnected
+yawl:YSessionCache_isServiceConnected_3 a yawl:Method ;
+    rdfs:label "isServiceConnected" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isServiceConnected(String uri)" ;
+    rdfs:comment """Checks that a particular custom service has an active session with the Engine. @param uri the uri of the custom service. @return true if the service has an active session.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSessionCache.isClientConnected
+yawl:YSessionCache_isClientConnected_4 a yawl:Method ;
+    rdfs:label "isClientConnected" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isClientConnected(YExternalClient client)" ;
+    rdfs:comment """Checks that a particular external client has an active session with the Engine. @param client the client. @return true if the client has an active session.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSessionCache.getSession
+yawl:YSessionCache_getSession_5 a yawl:Method ;
+    rdfs:label "getSession" ;
+    yawl:returnType "YSession" ;
+    yawl:signature "YSession getSession(String handle)" ;
+    rdfs:comment """Gets the session associated with a session handle. @param handle a session handle. @return the session object associated with the handle, or null if the handle is invalid or inactive.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSessionCache.expire
+yawl:YSessionCache_expire_6 a yawl:Method ;
+    rdfs:label "expire" ;
+    yawl:returnType "void" ;
+    yawl:signature "void expire(String handle)" ;
+    rdfs:comment """Removes a session from the set of active sessions after an idle timeout. Also writes the expiration to the session audit log. @param handle the session handle of the session to remove.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSessionCache.disconnect
+yawl:YSessionCache_disconnect_7 a yawl:Method ;
+    rdfs:label "disconnect" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disconnect(YClient client)" ;
+    rdfs:comment """Ends an active session of a custom service or external application. @param client the service or application to disconnect from the Engine.  Also writes the disconnection to the session audit log.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSessionCache.disconnect
+yawl:YSessionCache_disconnect_8 a yawl:Method ;
+    rdfs:label "disconnect" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disconnect(String handle)" ;
+    rdfs:comment """Ends an active session of a custom service or external application. @param handle the session handle of a service or application to disconnect from the Engine. Also writes the disconnection to the session audit log.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSessionCache.shutdown
+yawl:YSessionCache_shutdown_9 a yawl:Method ;
+    rdfs:label "shutdown" ;
+    yawl:returnType "void" ;
+    yawl:signature "void shutdown()" ;
+    rdfs:comment """Called when the hosting server shuts down to write a shutdown record for each active session to the audit log.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSessionCache.validateCredentials
+yawl:YSessionCache_validateCredentials_10 a yawl:Method ;
+    rdfs:label "validateCredentials" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validateCredentials(YAWLServiceReference service, String password)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSessionCache.validateCredentials
+yawl:YSessionCache_validateCredentials_11 a yawl:Method ;
+    rdfs:label "validateCredentials" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validateCredentials(YExternalClient client, String password)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSessionCache.getService
+yawl:YSessionCache_getService_12 a yawl:Method ;
+    rdfs:label "getService" ;
+    yawl:returnType "YAWLServiceReference" ;
+    yawl:signature "YAWLServiceReference getService(String name)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSessionCache.storeSession
+yawl:YSessionCache_storeSession_13 a yawl:Method ;
+    rdfs:label "storeSession" ;
+    yawl:returnType "String" ;
+    yawl:signature "String storeSession(YSession session)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSessionCache.removeSession
+yawl:YSessionCache_removeSession_14 a yawl:Method ;
+    rdfs:label "removeSession" ;
+    yawl:returnType "YSession" ;
+    yawl:signature "YSession removeSession(String handle, YAuditEvent action)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSessionCache.failMsg
+yawl:YSessionCache_failMsg_15 a yawl:Method ;
+    rdfs:label "failMsg" ;
+    yawl:returnType "String" ;
+    yawl:signature "String failMsg(String msg)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSessionCache.audit
+yawl:YSessionCache_audit_16 a yawl:Method ;
+    rdfs:label "audit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void audit(String username, YAuditEvent action)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSessionCache.badPassword
+yawl:YSessionCache_badPassword_17 a yawl:Method ;
+    rdfs:label "badPassword" ;
+    yawl:returnType "String" ;
+    yawl:signature "String badPassword(String username)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSessionCache.unknownUser
+yawl:YSessionCache_unknownUser_18 a yawl:Method ;
+    rdfs:label "unknownUser" ;
+    yawl:returnType "String" ;
+    yawl:signature "String unknownUser(String username)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSessionCache.initDb
+yawl:YSessionCache_initDb_19 a yawl:Method ;
+    rdfs:label "initDb" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initDb()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YSessionCache__timer a yawl:Field ;
+    rdfs:label "_timer" .
+
+yawl:YSessionCache__db a yawl:Field ;
+    rdfs:label "_db" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_logging a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.logging" .
+
+

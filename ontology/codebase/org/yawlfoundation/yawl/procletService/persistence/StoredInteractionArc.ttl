@@ -1,0 +1,241 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.persistence.StoredInteractionArc
+yawl:StoredInteractionArc a yawl:Class ;
+    rdfs:label "StoredInteractionArc" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_persistence ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/persistence/StoredInteractionArc.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 2/02/12""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:StoredInteractionArc_getPkey_1 ;
+    yawl:hasMethod yawl:StoredInteractionArc_setPkey_2 ;
+    yawl:hasMethod yawl:StoredInteractionArc_getEmid_3 ;
+    yawl:hasMethod yawl:StoredInteractionArc_setEmid_4 ;
+    yawl:hasMethod yawl:StoredInteractionArc_getTailClassID_5 ;
+    yawl:hasMethod yawl:StoredInteractionArc_setTailClassID_6 ;
+    yawl:hasMethod yawl:StoredInteractionArc_getTailProcletID_7 ;
+    yawl:hasMethod yawl:StoredInteractionArc_setTailProcletID_8 ;
+    yawl:hasMethod yawl:StoredInteractionArc_getTailBlockID_9 ;
+    yawl:hasMethod yawl:StoredInteractionArc_setTailBlockID_10 ;
+    yawl:hasMethod yawl:StoredInteractionArc_getHeadClassID_11 ;
+    yawl:hasMethod yawl:StoredInteractionArc_setHeadClassID_12 ;
+    yawl:hasMethod yawl:StoredInteractionArc_getHeadProcletID_13 ;
+    yawl:hasMethod yawl:StoredInteractionArc_setHeadProcletID_14 ;
+    yawl:hasMethod yawl:StoredInteractionArc_getHeadBlockID_15 ;
+    yawl:hasMethod yawl:StoredInteractionArc_setHeadBlockID_16 ;
+    yawl:hasMethod yawl:StoredInteractionArc_getEsid_17 ;
+    yawl:hasMethod yawl:StoredInteractionArc_setEsid_18 ;
+    yawl:hasMethod yawl:StoredInteractionArc_getArcState_19 ;
+    yawl:hasMethod yawl:StoredInteractionArc_setArcState_20 ;
+    yawl:hasField yawl:StoredInteractionArc_pkey ;
+    yawl:hasField yawl:StoredInteractionArc_emid ;
+    yawl:hasField yawl:StoredInteractionArc_tailClassID ;
+    yawl:hasField yawl:StoredInteractionArc_tailProcletID ;
+    yawl:hasField yawl:StoredInteractionArc_tailBlockID ;
+    yawl:hasField yawl:StoredInteractionArc_headClassID ;
+    yawl:hasField yawl:StoredInteractionArc_headProcletID ;
+    yawl:hasField yawl:StoredInteractionArc_headBlockID ;
+    yawl:hasField yawl:StoredInteractionArc_esid ;
+    yawl:hasField yawl:StoredInteractionArc_arcState ;
+    .
+
+
+# Method: StoredInteractionArc.getPkey
+yawl:StoredInteractionArc_getPkey_1 a yawl:Method ;
+    rdfs:label "getPkey" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getPkey()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredInteractionArc.setPkey
+yawl:StoredInteractionArc_setPkey_2 a yawl:Method ;
+    rdfs:label "setPkey" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPkey(long pkey)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredInteractionArc.getEmid
+yawl:StoredInteractionArc_getEmid_3 a yawl:Method ;
+    rdfs:label "getEmid" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEmid()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredInteractionArc.setEmid
+yawl:StoredInteractionArc_setEmid_4 a yawl:Method ;
+    rdfs:label "setEmid" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEmid(String emid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredInteractionArc.getTailClassID
+yawl:StoredInteractionArc_getTailClassID_5 a yawl:Method ;
+    rdfs:label "getTailClassID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTailClassID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredInteractionArc.setTailClassID
+yawl:StoredInteractionArc_setTailClassID_6 a yawl:Method ;
+    rdfs:label "setTailClassID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTailClassID(String tailClassID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredInteractionArc.getTailProcletID
+yawl:StoredInteractionArc_getTailProcletID_7 a yawl:Method ;
+    rdfs:label "getTailProcletID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTailProcletID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredInteractionArc.setTailProcletID
+yawl:StoredInteractionArc_setTailProcletID_8 a yawl:Method ;
+    rdfs:label "setTailProcletID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTailProcletID(String tailProcletID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredInteractionArc.getTailBlockID
+yawl:StoredInteractionArc_getTailBlockID_9 a yawl:Method ;
+    rdfs:label "getTailBlockID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTailBlockID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredInteractionArc.setTailBlockID
+yawl:StoredInteractionArc_setTailBlockID_10 a yawl:Method ;
+    rdfs:label "setTailBlockID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTailBlockID(String tailBlockID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredInteractionArc.getHeadClassID
+yawl:StoredInteractionArc_getHeadClassID_11 a yawl:Method ;
+    rdfs:label "getHeadClassID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getHeadClassID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredInteractionArc.setHeadClassID
+yawl:StoredInteractionArc_setHeadClassID_12 a yawl:Method ;
+    rdfs:label "setHeadClassID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHeadClassID(String headClassID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredInteractionArc.getHeadProcletID
+yawl:StoredInteractionArc_getHeadProcletID_13 a yawl:Method ;
+    rdfs:label "getHeadProcletID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getHeadProcletID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredInteractionArc.setHeadProcletID
+yawl:StoredInteractionArc_setHeadProcletID_14 a yawl:Method ;
+    rdfs:label "setHeadProcletID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHeadProcletID(String headProcletID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredInteractionArc.getHeadBlockID
+yawl:StoredInteractionArc_getHeadBlockID_15 a yawl:Method ;
+    rdfs:label "getHeadBlockID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getHeadBlockID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredInteractionArc.setHeadBlockID
+yawl:StoredInteractionArc_setHeadBlockID_16 a yawl:Method ;
+    rdfs:label "setHeadBlockID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHeadBlockID(String headBlockID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredInteractionArc.getEsid
+yawl:StoredInteractionArc_getEsid_17 a yawl:Method ;
+    rdfs:label "getEsid" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEsid()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredInteractionArc.setEsid
+yawl:StoredInteractionArc_setEsid_18 a yawl:Method ;
+    rdfs:label "setEsid" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEsid(String esid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredInteractionArc.getArcState
+yawl:StoredInteractionArc_getArcState_19 a yawl:Method ;
+    rdfs:label "getArcState" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getArcState()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredInteractionArc.setArcState
+yawl:StoredInteractionArc_setArcState_20 a yawl:Method ;
+    rdfs:label "setArcState" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setArcState(String arcState)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:StoredInteractionArc_pkey a yawl:Field ;
+    rdfs:label "pkey" .
+
+yawl:StoredInteractionArc_emid a yawl:Field ;
+    rdfs:label "emid" .
+
+yawl:StoredInteractionArc_tailClassID a yawl:Field ;
+    rdfs:label "tailClassID" .
+
+yawl:StoredInteractionArc_tailProcletID a yawl:Field ;
+    rdfs:label "tailProcletID" .
+
+yawl:StoredInteractionArc_tailBlockID a yawl:Field ;
+    rdfs:label "tailBlockID" .
+
+yawl:StoredInteractionArc_headClassID a yawl:Field ;
+    rdfs:label "headClassID" .
+
+yawl:StoredInteractionArc_headProcletID a yawl:Field ;
+    rdfs:label "headProcletID" .
+
+yawl:StoredInteractionArc_headBlockID a yawl:Field ;
+    rdfs:label "headBlockID" .
+
+yawl:StoredInteractionArc_esid a yawl:Field ;
+    rdfs:label "esid" .
+
+yawl:StoredInteractionArc_arcState a yawl:Field ;
+    rdfs:label "arcState" .
+
+
+

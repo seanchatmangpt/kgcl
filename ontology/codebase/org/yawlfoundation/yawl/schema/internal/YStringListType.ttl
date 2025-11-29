@@ -1,0 +1,57 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.schema.internal.YStringListType
+yawl:YStringListType a yawl:Class ;
+    rdfs:label "YStringListType" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_schema_internal ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/schema/internal/YStringListType.java"^^xsd:string ;
+    rdfs:comment """Defines a datatype for a string list (i.e. a container for 0 or more strings) @author: Michael Adams @date: 04/2009""" ;
+    yawl:implements yawl:YDataType ;
+    yawl:hasMethod yawl:YStringListType_getSchemaString_1 ;
+    yawl:hasMethod yawl:YStringListType_getSchema_2 ;
+    yawl:hasMethod yawl:YStringListType_addElement_3 ;
+    yawl:hasField yawl:YStringListType_SCHEMA ;
+    .
+
+
+# Method: YStringListType.getSchemaString
+yawl:YStringListType_getSchemaString_1 a yawl:Method ;
+    rdfs:label "getSchemaString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSchemaString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStringListType.getSchema
+yawl:YStringListType_getSchema_2 a yawl:Method ;
+    rdfs:label "getSchema" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getSchema(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YStringListType.addElement
+yawl:YStringListType_addElement_3 a yawl:Method ;
+    rdfs:label "addElement" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element addElement(Element parent, String name)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YStringListType_SCHEMA a yawl:Field ;
+    rdfs:label "SCHEMA" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_swingWorklist_util a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.swingWorklist.util" .
+
+

@@ -1,0 +1,96 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.util.CheckSummer
+yawl:CheckSummer a yawl:Class ;
+    rdfs:label "CheckSummer" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/util/CheckSummer.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 5/07/2014""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CheckSummer_getMD5Hex_1 ;
+    yawl:hasMethod yawl:CheckSummer_getMD5Hex_2 ;
+    yawl:hasMethod yawl:CheckSummer_compare_3 ;
+    yawl:hasMethod yawl:CheckSummer_compare_4 ;
+    yawl:hasMethod yawl:CheckSummer_compare_5 ;
+    yawl:hasMethod yawl:CheckSummer_getMD5Hex_6 ;
+    yawl:hasMethod yawl:CheckSummer_getMD5Hex_7 ;
+    yawl:hasMethod yawl:CheckSummer_main_8 ;
+    .
+
+
+# Method: CheckSummer.getMD5Hex
+yawl:CheckSummer_getMD5Hex_1 a yawl:Method ;
+    rdfs:label "getMD5Hex" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMD5Hex(String fileName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CheckSummer.getMD5Hex
+yawl:CheckSummer_getMD5Hex_2 a yawl:Method ;
+    rdfs:label "getMD5Hex" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMD5Hex(File file)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CheckSummer.compare
+yawl:CheckSummer_compare_3 a yawl:Method ;
+    rdfs:label "compare" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean compare(String fileName, String hexToCompare)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CheckSummer.compare
+yawl:CheckSummer_compare_4 a yawl:Method ;
+    rdfs:label "compare" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean compare(File file, String hexToCompare)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CheckSummer.compare
+yawl:CheckSummer_compare_5 a yawl:Method ;
+    rdfs:label "compare" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean compare(FileInputStream fis, String hexToCompare)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CheckSummer.getMD5Hex
+yawl:CheckSummer_getMD5Hex_6 a yawl:Method ;
+    rdfs:label "getMD5Hex" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMD5Hex(FileInputStream fis)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: CheckSummer.getMD5Hex
+yawl:CheckSummer_getMD5Hex_7 a yawl:Method ;
+    rdfs:label "getMD5Hex" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMD5Hex(byte bytes)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: CheckSummer.main
+yawl:CheckSummer_main_8 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String arg)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+
+

@@ -1,0 +1,68 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.util.ThreadNotify
+yawl:ThreadNotify a yawl:Class ;
+    rdfs:label "ThreadNotify" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/util/ThreadNotify.java"^^xsd:string ;
+    yawl:extends yawl:Thread ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ThreadNotify_press_1 ;
+    yawl:hasMethod yawl:ThreadNotify_notification_2 ;
+    yawl:hasMethod yawl:ThreadNotify_run_3 ;
+    yawl:hasMethod yawl:ThreadNotify_isTimeOut_4 ;
+    yawl:hasField yawl:ThreadNotify_threadSuspended ;
+    yawl:hasField yawl:ThreadNotify_timeOut ;
+    .
+
+
+# Method: ThreadNotify.press
+yawl:ThreadNotify_press_1 a yawl:Method ;
+    rdfs:label "press" ;
+    yawl:returnType "void" ;
+    yawl:signature "void press()" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ThreadNotify.notification
+yawl:ThreadNotify_notification_2 a yawl:Method ;
+    rdfs:label "notification" ;
+    yawl:returnType "void" ;
+    yawl:signature "void notification(boolean b)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ThreadNotify.run
+yawl:ThreadNotify_run_3 a yawl:Method ;
+    rdfs:label "run" ;
+    yawl:returnType "void" ;
+    yawl:signature "void run()" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ThreadNotify.isTimeOut
+yawl:ThreadNotify_isTimeOut_4 a yawl:Method ;
+    rdfs:label "isTimeOut" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isTimeOut()" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:ThreadNotify_threadSuspended a yawl:Field ;
+    rdfs:label "threadSuspended" .
+
+yawl:ThreadNotify_timeOut a yawl:Field ;
+    rdfs:label "timeOut" .
+
+
+

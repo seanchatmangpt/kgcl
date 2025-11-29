@@ -1,0 +1,119 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.util.ScriptSettings
+yawl:ScriptSettings a yawl:Class ;
+    rdfs:label "ScriptSettings" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/util/StartMenuUpdater.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ScriptSettings_setFolderName_1 ;
+    yawl:hasMethod yawl:ScriptSettings_setMenuName_2 ;
+    yawl:hasMethod yawl:ScriptSettings_setTargetPath_3 ;
+    yawl:hasMethod yawl:ScriptSettings_setArguments_4 ;
+    yawl:hasMethod yawl:ScriptSettings_setDescription_5 ;
+    yawl:hasMethod yawl:ScriptSettings_setIconLocation_6 ;
+    yawl:hasMethod yawl:ScriptSettings_setWorkingDir_7 ;
+    yawl:hasMethod yawl:ScriptSettings_list_8 ;
+    yawl:hasField yawl:ScriptSettings_folderName ;
+    yawl:hasField yawl:ScriptSettings_menuName ;
+    yawl:hasField yawl:ScriptSettings_targetPath ;
+    yawl:hasField yawl:ScriptSettings_arguments ;
+    yawl:hasField yawl:ScriptSettings_description ;
+    yawl:hasField yawl:ScriptSettings_iconLocation ;
+    yawl:hasField yawl:ScriptSettings_workingDir ;
+    .
+
+
+# Method: ScriptSettings.setFolderName
+yawl:ScriptSettings_setFolderName_1 a yawl:Method ;
+    rdfs:label "setFolderName" ;
+    yawl:returnType "ScriptSettings" ;
+    yawl:signature "ScriptSettings setFolderName(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ScriptSettings.setMenuName
+yawl:ScriptSettings_setMenuName_2 a yawl:Method ;
+    rdfs:label "setMenuName" ;
+    yawl:returnType "ScriptSettings" ;
+    yawl:signature "ScriptSettings setMenuName(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ScriptSettings.setTargetPath
+yawl:ScriptSettings_setTargetPath_3 a yawl:Method ;
+    rdfs:label "setTargetPath" ;
+    yawl:returnType "ScriptSettings" ;
+    yawl:signature "ScriptSettings setTargetPath(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ScriptSettings.setArguments
+yawl:ScriptSettings_setArguments_4 a yawl:Method ;
+    rdfs:label "setArguments" ;
+    yawl:returnType "ScriptSettings" ;
+    yawl:signature "ScriptSettings setArguments(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ScriptSettings.setDescription
+yawl:ScriptSettings_setDescription_5 a yawl:Method ;
+    rdfs:label "setDescription" ;
+    yawl:returnType "ScriptSettings" ;
+    yawl:signature "ScriptSettings setDescription(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ScriptSettings.setIconLocation
+yawl:ScriptSettings_setIconLocation_6 a yawl:Method ;
+    rdfs:label "setIconLocation" ;
+    yawl:returnType "ScriptSettings" ;
+    yawl:signature "ScriptSettings setIconLocation(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ScriptSettings.setWorkingDir
+yawl:ScriptSettings_setWorkingDir_7 a yawl:Method ;
+    rdfs:label "setWorkingDir" ;
+    yawl:returnType "ScriptSettings" ;
+    yawl:signature "ScriptSettings setWorkingDir(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ScriptSettings.list
+yawl:ScriptSettings_list_8 a yawl:Method ;
+    rdfs:label "list" ;
+    yawl:returnType "String" ;
+    yawl:signature "String list()" ;
+    .
+
+
+
+yawl:ScriptSettings_folderName a yawl:Field ;
+    rdfs:label "folderName" .
+
+yawl:ScriptSettings_menuName a yawl:Field ;
+    rdfs:label "menuName" .
+
+yawl:ScriptSettings_targetPath a yawl:Field ;
+    rdfs:label "targetPath" .
+
+yawl:ScriptSettings_arguments a yawl:Field ;
+    rdfs:label "arguments" .
+
+yawl:ScriptSettings_description a yawl:Field ;
+    rdfs:label "description" .
+
+yawl:ScriptSettings_iconLocation a yawl:Field ;
+    rdfs:label "iconLocation" .
+
+yawl:ScriptSettings_workingDir a yawl:Field ;
+    rdfs:label "workingDir" .
+
+
+

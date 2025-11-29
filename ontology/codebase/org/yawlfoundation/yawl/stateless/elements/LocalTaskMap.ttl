@@ -1,0 +1,90 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.stateless.elements.LocalTaskMap
+yawl:LocalTaskMap a yawl:Class ;
+    rdfs:label "LocalTaskMap" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_elements ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/elements/YNetLocalVarVerifier.java"^^xsd:string ;
+    rdfs:comment """Stores the set of input and output tasks that reference a specific net-level uninitialised local variable""" ;
+    yawl:modifiers "private" ;
+    yawl:hasMethod yawl:LocalTaskMap_getLocalVar_1 ;
+    yawl:hasMethod yawl:LocalTaskMap_getInputTasks_2 ;
+    yawl:hasMethod yawl:LocalTaskMap_getOutputTasks_3 ;
+    yawl:hasMethod yawl:LocalTaskMap_isInitialisingTask_4 ;
+    yawl:hasMethod yawl:LocalTaskMap_add_5 ;
+    yawl:hasMethod yawl:LocalTaskMap_isOptionalParam_6 ;
+    yawl:hasField yawl:LocalTaskMap__localVar ;
+    yawl:hasField yawl:LocalTaskMap__inputTasks ;
+    yawl:hasField yawl:LocalTaskMap__outputTasks ;
+    .
+
+
+# Method: LocalTaskMap.getLocalVar
+yawl:LocalTaskMap_getLocalVar_1 a yawl:Method ;
+    rdfs:label "getLocalVar" ;
+    yawl:returnType "YVariable" ;
+    yawl:signature "YVariable getLocalVar()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LocalTaskMap.getInputTasks
+yawl:LocalTaskMap_getInputTasks_2 a yawl:Method ;
+    rdfs:label "getInputTasks" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getInputTasks()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LocalTaskMap.getOutputTasks
+yawl:LocalTaskMap_getOutputTasks_3 a yawl:Method ;
+    rdfs:label "getOutputTasks" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getOutputTasks()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LocalTaskMap.isInitialisingTask
+yawl:LocalTaskMap_isInitialisingTask_4 a yawl:Method ;
+    rdfs:label "isInitialisingTask" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isInitialisingTask(YTask task)" ;
+    rdfs:comment """Checks whether a task will map a value to the local variable @param task the task to check @return true if this task maps a value""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LocalTaskMap.add
+yawl:LocalTaskMap_add_5 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(YTask task, int paramType, String paramName)" ;
+    rdfs:comment """Adds a task to the set of tasks that reference the local variable @param task the task to add @param paramType one of YParameter._INPUT_PARAM_TYPE or YParameter._OUTPUT_PARAM_TYPE @param paramName the name of the variable""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LocalTaskMap.isOptionalParam
+yawl:LocalTaskMap_isOptionalParam_6 a yawl:Method ;
+    rdfs:label "isOptionalParam" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isOptionalParam(YTask task, String paramName)" ;
+    rdfs:comment """Checks if a variable is optional (i.e. requires an output value) @param task the task that contains the variable @param paramName the name of the variable @return true if this variable is optional""" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:LocalTaskMap__localVar a yawl:Field ;
+    rdfs:label "_localVar" .
+
+yawl:LocalTaskMap__inputTasks a yawl:Field ;
+    rdfs:label "_inputTasks" .
+
+yawl:LocalTaskMap__outputTasks a yawl:Field ;
+    rdfs:label "_outputTasks" .
+
+
+

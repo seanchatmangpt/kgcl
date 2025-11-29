@@ -1,0 +1,44 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.util.TaggedStringList
+yawl:TaggedStringList a yawl:Class ;
+    rdfs:label "TaggedStringList" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/util/TaggedStringList.java"^^xsd:string ;
+    rdfs:comment """Provides the storage of multiple String values for a single (tag) attribute @author Michael Adams Date: 05/03/2008""" ;
+    yawl:extends yawl:ArrayList ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:TaggedStringList_getTag_1 ;
+    yawl:hasMethod yawl:TaggedStringList_toXML_2 ;
+    yawl:hasField yawl:TaggedStringList__tag ;
+    .
+
+
+# Method: TaggedStringList.getTag
+yawl:TaggedStringList_getTag_1 a yawl:Method ;
+    rdfs:label "getTag" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTag()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaggedStringList.toXML
+yawl:TaggedStringList_toXML_2 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:TaggedStringList__tag a yawl:Field ;
+    rdfs:label "_tag" .
+
+
+

@@ -1,0 +1,1118 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.interfce.WorkItemRecord
+yawl:WorkItemRecord a yawl:Class ;
+    rdfs:label "WorkItemRecord" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_interfce ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/interfce/WorkItemRecord.java"^^xsd:string ;
+    rdfs:comment """A 'stringified' record of a workitem for passing across various HTTP interfaces @author Lachlan Aldred Date: 2/02/2004 Time: 18:30:18 Extended & refactored for version 2.0 by Michael Adams Last Date: 27/05/2008""" ;
+    yawl:implements yawl:Cloneable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:WorkItemRecord_resetDataState_1 ;
+    yawl:hasMethod yawl:WorkItemRecord_setSpecIdentifier_2 ;
+    yawl:hasMethod yawl:WorkItemRecord_setSpecVersion_3 ;
+    yawl:hasMethod yawl:WorkItemRecord_setSpecURI_4 ;
+    yawl:hasMethod yawl:WorkItemRecord_setCaseID_5 ;
+    yawl:hasMethod yawl:WorkItemRecord_setTaskID_6 ;
+    yawl:hasMethod yawl:WorkItemRecord_setUniqueID_7 ;
+    yawl:hasMethod yawl:WorkItemRecord_setTaskName_8 ;
+    yawl:hasMethod yawl:WorkItemRecord_setAllowsDynamicCreation_9 ;
+    yawl:hasMethod yawl:WorkItemRecord_setRequiresManualResourcing_10 ;
+    yawl:hasMethod yawl:WorkItemRecord_setCodelet_11 ;
+    yawl:hasMethod yawl:WorkItemRecord_setDeferredChoiceGroupID_12 ;
+    yawl:hasMethod yawl:WorkItemRecord_setExtendedAttributes_13 ;
+    yawl:hasMethod yawl:WorkItemRecord_setEnablementTimeMs_14 ;
+    yawl:hasMethod yawl:WorkItemRecord_setFiringTimeMs_15 ;
+    yawl:hasMethod yawl:WorkItemRecord_setStartTimeMs_16 ;
+    yawl:hasMethod yawl:WorkItemRecord_setCompletionTimeMs_17 ;
+    yawl:hasMethod yawl:WorkItemRecord_setTimerTrigger_18 ;
+    yawl:hasMethod yawl:WorkItemRecord_setTimerExpiry_19 ;
+    yawl:hasMethod yawl:WorkItemRecord_setStatus_20 ;
+    yawl:hasMethod yawl:WorkItemRecord_setResourceStatus_21 ;
+    yawl:hasMethod yawl:WorkItemRecord_setAssignedTo_22 ;
+    yawl:hasMethod yawl:WorkItemRecord_setStartedBy_23 ;
+    yawl:hasMethod yawl:WorkItemRecord_setCompletedBy_24 ;
+    yawl:hasMethod yawl:WorkItemRecord_setDataList_25 ;
+    yawl:hasMethod yawl:WorkItemRecord_setTag_26 ;
+    yawl:hasMethod yawl:WorkItemRecord_setUpdatedData_27 ;
+    yawl:hasMethod yawl:WorkItemRecord_setCustomFormURL_28 ;
+    yawl:hasMethod yawl:WorkItemRecord_setLogPredicateStarted_29 ;
+    yawl:hasMethod yawl:WorkItemRecord_setLogPredicateCompletion_30 ;
+    yawl:hasMethod yawl:WorkItemRecord_setDocumentation_31 ;
+    yawl:hasMethod yawl:WorkItemRecord_setDocumentationChanged_32 ;
+    yawl:hasMethod yawl:WorkItemRecord_getSpecIdentifier_33 ;
+    yawl:hasMethod yawl:WorkItemRecord_getSpecVersion_34 ;
+    yawl:hasMethod yawl:WorkItemRecord_getSpecURI_35 ;
+    yawl:hasMethod yawl:WorkItemRecord_getCaseID_36 ;
+    yawl:hasMethod yawl:WorkItemRecord_getTaskID_37 ;
+    yawl:hasMethod yawl:WorkItemRecord_getUniqueID_38 ;
+    yawl:hasMethod yawl:WorkItemRecord_getAllowsDynamicCreation_39 ;
+    yawl:hasMethod yawl:WorkItemRecord_isDynamicCreationAllowed_40 ;
+    yawl:hasMethod yawl:WorkItemRecord_getDeferredChoiceGroupID_41 ;
+    yawl:hasMethod yawl:WorkItemRecord_getRequiresManualResourcing_42 ;
+    yawl:hasMethod yawl:WorkItemRecord_isManualResourcingRequired_43 ;
+    yawl:hasMethod yawl:WorkItemRecord_getCodelet_44 ;
+    yawl:hasMethod yawl:WorkItemRecord_getAttributeTable_45 ;
+    yawl:hasMethod yawl:WorkItemRecord_getID_46 ;
+    yawl:hasMethod yawl:WorkItemRecord_getEnablementTime_47 ;
+    yawl:hasMethod yawl:WorkItemRecord_getFiringTime_48 ;
+    yawl:hasMethod yawl:WorkItemRecord_getStartTime_49 ;
+    yawl:hasMethod yawl:WorkItemRecord_getCompletionTime_50 ;
+    yawl:hasMethod yawl:WorkItemRecord_getEnablementTimeMs_51 ;
+    yawl:hasMethod yawl:WorkItemRecord_getFiringTimeMs_52 ;
+    yawl:hasMethod yawl:WorkItemRecord_getStartTimeMs_53 ;
+    yawl:hasMethod yawl:WorkItemRecord_getCompletionTimeMs_54 ;
+    yawl:hasMethod yawl:WorkItemRecord_getTimerTrigger_55 ;
+    yawl:hasMethod yawl:WorkItemRecord_getTimerExpiry_56 ;
+    yawl:hasMethod yawl:WorkItemRecord_getStatus_57 ;
+    yawl:hasMethod yawl:WorkItemRecord_getResourceStatus_58 ;
+    yawl:hasMethod yawl:WorkItemRecord_getAssignedTo_59 ;
+    yawl:hasMethod yawl:WorkItemRecord_getWhoStartedMe_60 ;
+    yawl:hasMethod yawl:WorkItemRecord_getStartedBy_61 ;
+    yawl:hasMethod yawl:WorkItemRecord_getCompletedBy_62 ;
+    yawl:hasMethod yawl:WorkItemRecord_getWorkItemData_63 ;
+    yawl:hasMethod yawl:WorkItemRecord_getDataList_64 ;
+    yawl:hasMethod yawl:WorkItemRecord_getDataListString_65 ;
+    yawl:hasMethod yawl:WorkItemRecord_getTag_66 ;
+    yawl:hasMethod yawl:WorkItemRecord_getUpdatedData_67 ;
+    yawl:hasMethod yawl:WorkItemRecord_getIDForDisplay_68 ;
+    yawl:hasMethod yawl:WorkItemRecord_getTaskName_69 ;
+    yawl:hasMethod yawl:WorkItemRecord_getDocumentation_70 ;
+    yawl:hasMethod yawl:WorkItemRecord_hasDocumentation_71 ;
+    yawl:hasMethod yawl:WorkItemRecord_isDocumentationChanged_72 ;
+    yawl:hasMethod yawl:WorkItemRecord_getRootCaseID_73 ;
+    yawl:hasMethod yawl:WorkItemRecord_getNetID_74 ;
+    yawl:hasMethod yawl:WorkItemRecord_getParentID_75 ;
+    yawl:hasMethod yawl:WorkItemRecord_getLogPredicateStarted_76 ;
+    yawl:hasMethod yawl:WorkItemRecord_getLogPredicateCompletion_77 ;
+    yawl:hasMethod yawl:WorkItemRecord_isEdited_78 ;
+    yawl:hasMethod yawl:WorkItemRecord_isDeferredChoiceGroupMember_79 ;
+    yawl:hasMethod yawl:WorkItemRecord_isAutoTask_80 ;
+    yawl:hasMethod yawl:WorkItemRecord_getCustomFormURL_81 ;
+    yawl:hasMethod yawl:WorkItemRecord_hasLiveStatus_82 ;
+    yawl:hasMethod yawl:WorkItemRecord_isEnabledOrFired_83 ;
+    yawl:hasMethod yawl:WorkItemRecord_hasStatus_84 ;
+    yawl:hasMethod yawl:WorkItemRecord_hasResourceStatus_85 ;
+    yawl:hasMethod yawl:WorkItemRecord_equals_86 ;
+    yawl:hasMethod yawl:WorkItemRecord_hashCode_87 ;
+    yawl:hasMethod yawl:WorkItemRecord_toString_88 ;
+    yawl:hasMethod yawl:WorkItemRecord_toXML_89 ;
+    yawl:hasMethod yawl:WorkItemRecord_attributeTableToString_90 ;
+    yawl:hasMethod yawl:WorkItemRecord_getFormattedDate_91 ;
+    yawl:hasMethod yawl:WorkItemRecord_clone_92 ;
+    yawl:hasMethod yawl:WorkItemRecord_set_id_93 ;
+    yawl:hasMethod yawl:WorkItemRecord_get_id_94 ;
+    yawl:hasMethod yawl:WorkItemRecord_set_dataList_95 ;
+    yawl:hasMethod yawl:WorkItemRecord_get_dataList_96 ;
+    yawl:hasMethod yawl:WorkItemRecord_set_dataListUpdated_97 ;
+    yawl:hasMethod yawl:WorkItemRecord_get_dataListUpdated_98 ;
+    yawl:hasMethod yawl:WorkItemRecord_set_extendedAttributes_99 ;
+    yawl:hasMethod yawl:WorkItemRecord_get_extendedAttributes_100 ;
+    yawl:hasField yawl:WorkItemRecord_statusEnabled ;
+    yawl:hasField yawl:WorkItemRecord_statusFired ;
+    yawl:hasField yawl:WorkItemRecord_statusExecuting ;
+    yawl:hasField yawl:WorkItemRecord_statusComplete ;
+    yawl:hasField yawl:WorkItemRecord_statusIsParent ;
+    yawl:hasField yawl:WorkItemRecord_statusDeadlocked ;
+    yawl:hasField yawl:WorkItemRecord_statusForcedComplete ;
+    yawl:hasField yawl:WorkItemRecord_statusFailed ;
+    yawl:hasField yawl:WorkItemRecord_statusSuspended ;
+    yawl:hasField yawl:WorkItemRecord_statusDiscarded ;
+    yawl:hasField yawl:WorkItemRecord_statusResourceOffered ;
+    yawl:hasField yawl:WorkItemRecord_statusResourceAllocated ;
+    yawl:hasField yawl:WorkItemRecord_statusResourceStarted ;
+    yawl:hasField yawl:WorkItemRecord_statusResourceSuspended ;
+    yawl:hasField yawl:WorkItemRecord_statusResourceUnoffered ;
+    yawl:hasField yawl:WorkItemRecord_statusResourceUnresourced ;
+    yawl:hasField yawl:WorkItemRecord_DATE_FORMAT ;
+    yawl:hasField yawl:WorkItemRecord__id ;
+    yawl:hasField yawl:WorkItemRecord__specIdentifier ;
+    yawl:hasField yawl:WorkItemRecord__specVersion ;
+    yawl:hasField yawl:WorkItemRecord__specURI ;
+    yawl:hasField yawl:WorkItemRecord__caseID ;
+    yawl:hasField yawl:WorkItemRecord__taskID ;
+    yawl:hasField yawl:WorkItemRecord__uniqueID ;
+    yawl:hasField yawl:WorkItemRecord__taskName ;
+    yawl:hasField yawl:WorkItemRecord__documentation ;
+    yawl:hasField yawl:WorkItemRecord__allowsDynamicCreation ;
+    yawl:hasField yawl:WorkItemRecord__requiresManualResourcing ;
+    yawl:hasField yawl:WorkItemRecord__codelet ;
+    yawl:hasField yawl:WorkItemRecord__attributeTable ;
+    yawl:hasField yawl:WorkItemRecord__deferredChoiceGroupID ;
+    yawl:hasField yawl:WorkItemRecord__enablementTimeMs ;
+    yawl:hasField yawl:WorkItemRecord__firingTimeMs ;
+    yawl:hasField yawl:WorkItemRecord__startTimeMs ;
+    yawl:hasField yawl:WorkItemRecord__completionTimeMs ;
+    yawl:hasField yawl:WorkItemRecord__timerTrigger ;
+    yawl:hasField yawl:WorkItemRecord__timerExpiry ;
+    yawl:hasField yawl:WorkItemRecord__status ;
+    yawl:hasField yawl:WorkItemRecord__resourceStatus ;
+    yawl:hasField yawl:WorkItemRecord__startedBy ;
+    yawl:hasField yawl:WorkItemRecord__completedBy ;
+    yawl:hasField yawl:WorkItemRecord__dataList ;
+    yawl:hasField yawl:WorkItemRecord__dataListUpdated ;
+    yawl:hasField yawl:WorkItemRecord__logPredicateStarted ;
+    yawl:hasField yawl:WorkItemRecord__logPredicateCompletion ;
+    yawl:hasField yawl:WorkItemRecord__customFormURL ;
+    yawl:hasField yawl:WorkItemRecord__docoChanged ;
+    yawl:hasField yawl:WorkItemRecord__tag ;
+    .
+
+
+# Method: WorkItemRecord.resetDataState
+yawl:WorkItemRecord_resetDataState_1 a yawl:Method ;
+    rdfs:label "resetDataState" ;
+    yawl:returnType "void" ;
+    yawl:signature "void resetDataState()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setSpecIdentifier
+yawl:WorkItemRecord_setSpecIdentifier_2 a yawl:Method ;
+    rdfs:label "setSpecIdentifier" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSpecIdentifier(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setSpecVersion
+yawl:WorkItemRecord_setSpecVersion_3 a yawl:Method ;
+    rdfs:label "setSpecVersion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSpecVersion(String version)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setSpecURI
+yawl:WorkItemRecord_setSpecURI_4 a yawl:Method ;
+    rdfs:label "setSpecURI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSpecURI(String uri)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setCaseID
+yawl:WorkItemRecord_setCaseID_5 a yawl:Method ;
+    rdfs:label "setCaseID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCaseID(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setTaskID
+yawl:WorkItemRecord_setTaskID_6 a yawl:Method ;
+    rdfs:label "setTaskID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTaskID(String taskID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setUniqueID
+yawl:WorkItemRecord_setUniqueID_7 a yawl:Method ;
+    rdfs:label "setUniqueID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUniqueID(String uniqueID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setTaskName
+yawl:WorkItemRecord_setTaskName_8 a yawl:Method ;
+    rdfs:label "setTaskName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTaskName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setAllowsDynamicCreation
+yawl:WorkItemRecord_setAllowsDynamicCreation_9 a yawl:Method ;
+    rdfs:label "setAllowsDynamicCreation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAllowsDynamicCreation(String allows)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setRequiresManualResourcing
+yawl:WorkItemRecord_setRequiresManualResourcing_10 a yawl:Method ;
+    rdfs:label "setRequiresManualResourcing" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRequiresManualResourcing(String manual)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setCodelet
+yawl:WorkItemRecord_setCodelet_11 a yawl:Method ;
+    rdfs:label "setCodelet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCodelet(String codelet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setDeferredChoiceGroupID
+yawl:WorkItemRecord_setDeferredChoiceGroupID_12 a yawl:Method ;
+    rdfs:label "setDeferredChoiceGroupID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDeferredChoiceGroupID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setExtendedAttributes
+yawl:WorkItemRecord_setExtendedAttributes_13 a yawl:Method ;
+    rdfs:label "setExtendedAttributes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setExtendedAttributes(Map attrMap)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setEnablementTimeMs
+yawl:WorkItemRecord_setEnablementTimeMs_14 a yawl:Method ;
+    rdfs:label "setEnablementTimeMs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEnablementTimeMs(String time)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setFiringTimeMs
+yawl:WorkItemRecord_setFiringTimeMs_15 a yawl:Method ;
+    rdfs:label "setFiringTimeMs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setFiringTimeMs(String time)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setStartTimeMs
+yawl:WorkItemRecord_setStartTimeMs_16 a yawl:Method ;
+    rdfs:label "setStartTimeMs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStartTimeMs(String time)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setCompletionTimeMs
+yawl:WorkItemRecord_setCompletionTimeMs_17 a yawl:Method ;
+    rdfs:label "setCompletionTimeMs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCompletionTimeMs(String time)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setTimerTrigger
+yawl:WorkItemRecord_setTimerTrigger_18 a yawl:Method ;
+    rdfs:label "setTimerTrigger" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTimerTrigger(String trigger)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setTimerExpiry
+yawl:WorkItemRecord_setTimerExpiry_19 a yawl:Method ;
+    rdfs:label "setTimerExpiry" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTimerExpiry(String expiry)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setStatus
+yawl:WorkItemRecord_setStatus_20 a yawl:Method ;
+    rdfs:label "setStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStatus(String status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setResourceStatus
+yawl:WorkItemRecord_setResourceStatus_21 a yawl:Method ;
+    rdfs:label "setResourceStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setResourceStatus(String status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setAssignedTo
+yawl:WorkItemRecord_setAssignedTo_22 a yawl:Method ;
+    rdfs:label "setAssignedTo" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAssignedTo(String whoStartedMe)" ;
+    rdfs:comment """@deprecated""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setStartedBy
+yawl:WorkItemRecord_setStartedBy_23 a yawl:Method ;
+    rdfs:label "setStartedBy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStartedBy(String resource)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setCompletedBy
+yawl:WorkItemRecord_setCompletedBy_24 a yawl:Method ;
+    rdfs:label "setCompletedBy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCompletedBy(String resource)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setDataList
+yawl:WorkItemRecord_setDataList_25 a yawl:Method ;
+    rdfs:label "setDataList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataList(Element dataList)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setTag
+yawl:WorkItemRecord_setTag_26 a yawl:Method ;
+    rdfs:label "setTag" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTag(String tag)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setUpdatedData
+yawl:WorkItemRecord_setUpdatedData_27 a yawl:Method ;
+    rdfs:label "setUpdatedData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUpdatedData(Element dataListUpdated)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setCustomFormURL
+yawl:WorkItemRecord_setCustomFormURL_28 a yawl:Method ;
+    rdfs:label "setCustomFormURL" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCustomFormURL(String url)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setLogPredicateStarted
+yawl:WorkItemRecord_setLogPredicateStarted_29 a yawl:Method ;
+    rdfs:label "setLogPredicateStarted" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLogPredicateStarted(String predicate)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setLogPredicateCompletion
+yawl:WorkItemRecord_setLogPredicateCompletion_30 a yawl:Method ;
+    rdfs:label "setLogPredicateCompletion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLogPredicateCompletion(String predicate)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setDocumentation
+yawl:WorkItemRecord_setDocumentation_31 a yawl:Method ;
+    rdfs:label "setDocumentation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDocumentation(String doco)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.setDocumentationChanged
+yawl:WorkItemRecord_setDocumentationChanged_32 a yawl:Method ;
+    rdfs:label "setDocumentationChanged" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDocumentationChanged(boolean added)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getSpecIdentifier
+yawl:WorkItemRecord_getSpecIdentifier_33 a yawl:Method ;
+    rdfs:label "getSpecIdentifier" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecIdentifier()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getSpecVersion
+yawl:WorkItemRecord_getSpecVersion_34 a yawl:Method ;
+    rdfs:label "getSpecVersion" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecVersion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getSpecURI
+yawl:WorkItemRecord_getSpecURI_35 a yawl:Method ;
+    rdfs:label "getSpecURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecURI()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getCaseID
+yawl:WorkItemRecord_getCaseID_36 a yawl:Method ;
+    rdfs:label "getCaseID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getTaskID
+yawl:WorkItemRecord_getTaskID_37 a yawl:Method ;
+    rdfs:label "getTaskID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getUniqueID
+yawl:WorkItemRecord_getUniqueID_38 a yawl:Method ;
+    rdfs:label "getUniqueID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUniqueID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getAllowsDynamicCreation
+yawl:WorkItemRecord_getAllowsDynamicCreation_39 a yawl:Method ;
+    rdfs:label "getAllowsDynamicCreation" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAllowsDynamicCreation()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.isDynamicCreationAllowed
+yawl:WorkItemRecord_isDynamicCreationAllowed_40 a yawl:Method ;
+    rdfs:label "isDynamicCreationAllowed" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isDynamicCreationAllowed()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getDeferredChoiceGroupID
+yawl:WorkItemRecord_getDeferredChoiceGroupID_41 a yawl:Method ;
+    rdfs:label "getDeferredChoiceGroupID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDeferredChoiceGroupID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getRequiresManualResourcing
+yawl:WorkItemRecord_getRequiresManualResourcing_42 a yawl:Method ;
+    rdfs:label "getRequiresManualResourcing" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRequiresManualResourcing()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.isManualResourcingRequired
+yawl:WorkItemRecord_isManualResourcingRequired_43 a yawl:Method ;
+    rdfs:label "isManualResourcingRequired" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isManualResourcingRequired()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getCodelet
+yawl:WorkItemRecord_getCodelet_44 a yawl:Method ;
+    rdfs:label "getCodelet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCodelet()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getAttributeTable
+yawl:WorkItemRecord_getAttributeTable_45 a yawl:Method ;
+    rdfs:label "getAttributeTable" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getAttributeTable()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getID
+yawl:WorkItemRecord_getID_46 a yawl:Method ;
+    rdfs:label "getID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getEnablementTime
+yawl:WorkItemRecord_getEnablementTime_47 a yawl:Method ;
+    rdfs:label "getEnablementTime" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEnablementTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getFiringTime
+yawl:WorkItemRecord_getFiringTime_48 a yawl:Method ;
+    rdfs:label "getFiringTime" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFiringTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getStartTime
+yawl:WorkItemRecord_getStartTime_49 a yawl:Method ;
+    rdfs:label "getStartTime" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStartTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getCompletionTime
+yawl:WorkItemRecord_getCompletionTime_50 a yawl:Method ;
+    rdfs:label "getCompletionTime" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCompletionTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getEnablementTimeMs
+yawl:WorkItemRecord_getEnablementTimeMs_51 a yawl:Method ;
+    rdfs:label "getEnablementTimeMs" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEnablementTimeMs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getFiringTimeMs
+yawl:WorkItemRecord_getFiringTimeMs_52 a yawl:Method ;
+    rdfs:label "getFiringTimeMs" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFiringTimeMs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getStartTimeMs
+yawl:WorkItemRecord_getStartTimeMs_53 a yawl:Method ;
+    rdfs:label "getStartTimeMs" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStartTimeMs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getCompletionTimeMs
+yawl:WorkItemRecord_getCompletionTimeMs_54 a yawl:Method ;
+    rdfs:label "getCompletionTimeMs" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCompletionTimeMs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getTimerTrigger
+yawl:WorkItemRecord_getTimerTrigger_55 a yawl:Method ;
+    rdfs:label "getTimerTrigger" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTimerTrigger()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getTimerExpiry
+yawl:WorkItemRecord_getTimerExpiry_56 a yawl:Method ;
+    rdfs:label "getTimerExpiry" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTimerExpiry()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getStatus
+yawl:WorkItemRecord_getStatus_57 a yawl:Method ;
+    rdfs:label "getStatus" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getResourceStatus
+yawl:WorkItemRecord_getResourceStatus_58 a yawl:Method ;
+    rdfs:label "getResourceStatus" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourceStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getAssignedTo
+yawl:WorkItemRecord_getAssignedTo_59 a yawl:Method ;
+    rdfs:label "getAssignedTo" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAssignedTo()" ;
+    rdfs:comment """@deprecated - use getStartedBy()""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getWhoStartedMe
+yawl:WorkItemRecord_getWhoStartedMe_60 a yawl:Method ;
+    rdfs:label "getWhoStartedMe" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWhoStartedMe()" ;
+    rdfs:comment """@deprecated - use getStartedBy()""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getStartedBy
+yawl:WorkItemRecord_getStartedBy_61 a yawl:Method ;
+    rdfs:label "getStartedBy" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStartedBy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getCompletedBy
+yawl:WorkItemRecord_getCompletedBy_62 a yawl:Method ;
+    rdfs:label "getCompletedBy" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCompletedBy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getWorkItemData
+yawl:WorkItemRecord_getWorkItemData_63 a yawl:Method ;
+    rdfs:label "getWorkItemData" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getWorkItemData()" ;
+    rdfs:comment """@deprecated - use getDataList()""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getDataList
+yawl:WorkItemRecord_getDataList_64 a yawl:Method ;
+    rdfs:label "getDataList" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getDataList()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getDataListString
+yawl:WorkItemRecord_getDataListString_65 a yawl:Method ;
+    rdfs:label "getDataListString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataListString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getTag
+yawl:WorkItemRecord_getTag_66 a yawl:Method ;
+    rdfs:label "getTag" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTag()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getUpdatedData
+yawl:WorkItemRecord_getUpdatedData_67 a yawl:Method ;
+    rdfs:label "getUpdatedData" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getUpdatedData()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getIDForDisplay
+yawl:WorkItemRecord_getIDForDisplay_68 a yawl:Method ;
+    rdfs:label "getIDForDisplay" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getIDForDisplay()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getTaskName
+yawl:WorkItemRecord_getTaskName_69 a yawl:Method ;
+    rdfs:label "getTaskName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getDocumentation
+yawl:WorkItemRecord_getDocumentation_70 a yawl:Method ;
+    rdfs:label "getDocumentation" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDocumentation()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.hasDocumentation
+yawl:WorkItemRecord_hasDocumentation_71 a yawl:Method ;
+    rdfs:label "hasDocumentation" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasDocumentation()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.isDocumentationChanged
+yawl:WorkItemRecord_isDocumentationChanged_72 a yawl:Method ;
+    rdfs:label "isDocumentationChanged" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isDocumentationChanged()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getRootCaseID
+yawl:WorkItemRecord_getRootCaseID_73 a yawl:Method ;
+    rdfs:label "getRootCaseID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRootCaseID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getNetID
+yawl:WorkItemRecord_getNetID_74 a yawl:Method ;
+    rdfs:label "getNetID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNetID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getParentID
+yawl:WorkItemRecord_getParentID_75 a yawl:Method ;
+    rdfs:label "getParentID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParentID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getLogPredicateStarted
+yawl:WorkItemRecord_getLogPredicateStarted_76 a yawl:Method ;
+    rdfs:label "getLogPredicateStarted" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLogPredicateStarted()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getLogPredicateCompletion
+yawl:WorkItemRecord_getLogPredicateCompletion_77 a yawl:Method ;
+    rdfs:label "getLogPredicateCompletion" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLogPredicateCompletion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.isEdited
+yawl:WorkItemRecord_isEdited_78 a yawl:Method ;
+    rdfs:label "isEdited" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEdited()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.isDeferredChoiceGroupMember
+yawl:WorkItemRecord_isDeferredChoiceGroupMember_79 a yawl:Method ;
+    rdfs:label "isDeferredChoiceGroupMember" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isDeferredChoiceGroupMember()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.isAutoTask
+yawl:WorkItemRecord_isAutoTask_80 a yawl:Method ;
+    rdfs:label "isAutoTask" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAutoTask()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.getCustomFormURL
+yawl:WorkItemRecord_getCustomFormURL_81 a yawl:Method ;
+    rdfs:label "getCustomFormURL" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCustomFormURL()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.hasLiveStatus
+yawl:WorkItemRecord_hasLiveStatus_82 a yawl:Method ;
+    rdfs:label "hasLiveStatus" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasLiveStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.isEnabledOrFired
+yawl:WorkItemRecord_isEnabledOrFired_83 a yawl:Method ;
+    rdfs:label "isEnabledOrFired" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEnabledOrFired()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.hasStatus
+yawl:WorkItemRecord_hasStatus_84 a yawl:Method ;
+    rdfs:label "hasStatus" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasStatus(String status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.hasResourceStatus
+yawl:WorkItemRecord_hasResourceStatus_85 a yawl:Method ;
+    rdfs:label "hasResourceStatus" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasResourceStatus(String status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.equals
+yawl:WorkItemRecord_equals_86 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.hashCode
+yawl:WorkItemRecord_hashCode_87 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.toString
+yawl:WorkItemRecord_toString_88 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.toXML
+yawl:WorkItemRecord_toXML_89 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.attributeTableToString
+yawl:WorkItemRecord_attributeTableToString_90 a yawl:Method ;
+    rdfs:label "attributeTableToString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String attributeTableToString()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkItemRecord.getFormattedDate
+yawl:WorkItemRecord_getFormattedDate_91 a yawl:Method ;
+    rdfs:label "getFormattedDate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFormattedDate(String msStr)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkItemRecord.clone
+yawl:WorkItemRecord_clone_92 a yawl:Method ;
+    rdfs:label "clone" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord clone()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemRecord.set_id
+yawl:WorkItemRecord_set_id_93 a yawl:Method ;
+    rdfs:label "set_id" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_id(long id)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkItemRecord.get_id
+yawl:WorkItemRecord_get_id_94 a yawl:Method ;
+    rdfs:label "get_id" ;
+    yawl:returnType "long" ;
+    yawl:signature "long get_id()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkItemRecord.set_dataList
+yawl:WorkItemRecord_set_dataList_95 a yawl:Method ;
+    rdfs:label "set_dataList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_dataList(String data)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkItemRecord.get_dataList
+yawl:WorkItemRecord_get_dataList_96 a yawl:Method ;
+    rdfs:label "get_dataList" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_dataList()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkItemRecord.set_dataListUpdated
+yawl:WorkItemRecord_set_dataListUpdated_97 a yawl:Method ;
+    rdfs:label "set_dataListUpdated" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_dataListUpdated(String data)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkItemRecord.get_dataListUpdated
+yawl:WorkItemRecord_get_dataListUpdated_98 a yawl:Method ;
+    rdfs:label "get_dataListUpdated" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_dataListUpdated()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkItemRecord.set_extendedAttributes
+yawl:WorkItemRecord_set_extendedAttributes_99 a yawl:Method ;
+    rdfs:label "set_extendedAttributes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_extendedAttributes(String attrStr)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkItemRecord.get_extendedAttributes
+yawl:WorkItemRecord_get_extendedAttributes_100 a yawl:Method ;
+    rdfs:label "get_extendedAttributes" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_extendedAttributes()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:WorkItemRecord_statusEnabled a yawl:Field ;
+    rdfs:label "statusEnabled" .
+
+yawl:WorkItemRecord_statusFired a yawl:Field ;
+    rdfs:label "statusFired" .
+
+yawl:WorkItemRecord_statusExecuting a yawl:Field ;
+    rdfs:label "statusExecuting" .
+
+yawl:WorkItemRecord_statusComplete a yawl:Field ;
+    rdfs:label "statusComplete" .
+
+yawl:WorkItemRecord_statusIsParent a yawl:Field ;
+    rdfs:label "statusIsParent" .
+
+yawl:WorkItemRecord_statusDeadlocked a yawl:Field ;
+    rdfs:label "statusDeadlocked" .
+
+yawl:WorkItemRecord_statusForcedComplete a yawl:Field ;
+    rdfs:label "statusForcedComplete" .
+
+yawl:WorkItemRecord_statusFailed a yawl:Field ;
+    rdfs:label "statusFailed" .
+
+yawl:WorkItemRecord_statusSuspended a yawl:Field ;
+    rdfs:label "statusSuspended" .
+
+yawl:WorkItemRecord_statusDiscarded a yawl:Field ;
+    rdfs:label "statusDiscarded" .
+
+yawl:WorkItemRecord_statusResourceOffered a yawl:Field ;
+    rdfs:label "statusResourceOffered" .
+
+yawl:WorkItemRecord_statusResourceAllocated a yawl:Field ;
+    rdfs:label "statusResourceAllocated" .
+
+yawl:WorkItemRecord_statusResourceStarted a yawl:Field ;
+    rdfs:label "statusResourceStarted" .
+
+yawl:WorkItemRecord_statusResourceSuspended a yawl:Field ;
+    rdfs:label "statusResourceSuspended" .
+
+yawl:WorkItemRecord_statusResourceUnoffered a yawl:Field ;
+    rdfs:label "statusResourceUnoffered" .
+
+yawl:WorkItemRecord_statusResourceUnresourced a yawl:Field ;
+    rdfs:label "statusResourceUnresourced" .
+
+yawl:WorkItemRecord_DATE_FORMAT a yawl:Field ;
+    rdfs:label "DATE_FORMAT" .
+
+yawl:WorkItemRecord__id a yawl:Field ;
+    rdfs:label "_id" .
+
+yawl:WorkItemRecord__specIdentifier a yawl:Field ;
+    rdfs:label "_specIdentifier" .
+
+yawl:WorkItemRecord__specVersion a yawl:Field ;
+    rdfs:label "_specVersion" .
+
+yawl:WorkItemRecord__specURI a yawl:Field ;
+    rdfs:label "_specURI" .
+
+yawl:WorkItemRecord__caseID a yawl:Field ;
+    rdfs:label "_caseID" .
+
+yawl:WorkItemRecord__taskID a yawl:Field ;
+    rdfs:label "_taskID" .
+
+yawl:WorkItemRecord__uniqueID a yawl:Field ;
+    rdfs:label "_uniqueID" .
+
+yawl:WorkItemRecord__taskName a yawl:Field ;
+    rdfs:label "_taskName" .
+
+yawl:WorkItemRecord__documentation a yawl:Field ;
+    rdfs:label "_documentation" .
+
+yawl:WorkItemRecord__allowsDynamicCreation a yawl:Field ;
+    rdfs:label "_allowsDynamicCreation" .
+
+yawl:WorkItemRecord__requiresManualResourcing a yawl:Field ;
+    rdfs:label "_requiresManualResourcing" .
+
+yawl:WorkItemRecord__codelet a yawl:Field ;
+    rdfs:label "_codelet" .
+
+yawl:WorkItemRecord__attributeTable a yawl:Field ;
+    rdfs:label "_attributeTable" .
+
+yawl:WorkItemRecord__deferredChoiceGroupID a yawl:Field ;
+    rdfs:label "_deferredChoiceGroupID" .
+
+yawl:WorkItemRecord__enablementTimeMs a yawl:Field ;
+    rdfs:label "_enablementTimeMs" .
+
+yawl:WorkItemRecord__firingTimeMs a yawl:Field ;
+    rdfs:label "_firingTimeMs" .
+
+yawl:WorkItemRecord__startTimeMs a yawl:Field ;
+    rdfs:label "_startTimeMs" .
+
+yawl:WorkItemRecord__completionTimeMs a yawl:Field ;
+    rdfs:label "_completionTimeMs" .
+
+yawl:WorkItemRecord__timerTrigger a yawl:Field ;
+    rdfs:label "_timerTrigger" .
+
+yawl:WorkItemRecord__timerExpiry a yawl:Field ;
+    rdfs:label "_timerExpiry" .
+
+yawl:WorkItemRecord__status a yawl:Field ;
+    rdfs:label "_status" .
+
+yawl:WorkItemRecord__resourceStatus a yawl:Field ;
+    rdfs:label "_resourceStatus" .
+
+yawl:WorkItemRecord__startedBy a yawl:Field ;
+    rdfs:label "_startedBy" .
+
+yawl:WorkItemRecord__completedBy a yawl:Field ;
+    rdfs:label "_completedBy" .
+
+yawl:WorkItemRecord__dataList a yawl:Field ;
+    rdfs:label "_dataList" .
+
+yawl:WorkItemRecord__dataListUpdated a yawl:Field ;
+    rdfs:label "_dataListUpdated" .
+
+yawl:WorkItemRecord__logPredicateStarted a yawl:Field ;
+    rdfs:label "_logPredicateStarted" .
+
+yawl:WorkItemRecord__logPredicateCompletion a yawl:Field ;
+    rdfs:label "_logPredicateCompletion" .
+
+yawl:WorkItemRecord__customFormURL a yawl:Field ;
+    rdfs:label "_customFormURL" .
+
+yawl:WorkItemRecord__docoChanged a yawl:Field ;
+    rdfs:label "_docoChanged" .
+
+yawl:WorkItemRecord__tag a yawl:Field ;
+    rdfs:label "_tag" .
+
+
+

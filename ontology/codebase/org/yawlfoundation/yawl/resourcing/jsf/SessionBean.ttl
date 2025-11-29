@@ -1,0 +1,4125 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.SessionBean
+yawl:SessionBean a yawl:Class ;
+    rdfs:label "SessionBean" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/SessionBean.java"^^xsd:string ;
+    yawl:extends yawl:AbstractSessionBean ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:SessionBean__init_1 ;
+    yawl:hasMethod yawl:SessionBean_getApplicationBean_2 ;
+    yawl:hasMethod yawl:SessionBean_init_3 ;
+    yawl:hasMethod yawl:SessionBean_passivate_4 ;
+    yawl:hasMethod yawl:SessionBean_activate_5 ;
+    yawl:hasMethod yawl:SessionBean_destroy_6 ;
+    yawl:hasMethod yawl:SessionBean_getScript_7 ;
+    yawl:hasMethod yawl:SessionBean_setScript_8 ;
+    yawl:hasMethod yawl:SessionBean_getBtnRefresh_9 ;
+    yawl:hasMethod yawl:SessionBean_setBtnRefresh_10 ;
+    yawl:hasMethod yawl:SessionBean_getUserid_11 ;
+    yawl:hasMethod yawl:SessionBean_setUserid_12 ;
+    yawl:hasMethod yawl:SessionBean_getSessionhandle_13 ;
+    yawl:hasMethod yawl:SessionBean_setSessionhandle_14 ;
+    yawl:hasMethod yawl:SessionBean_getParticipant_15 ;
+    yawl:hasMethod yawl:SessionBean_setParticipant_16 ;
+    yawl:hasMethod yawl:SessionBean_setUserName_17 ;
+    yawl:hasMethod yawl:SessionBean_getUserName_18 ;
+    yawl:hasMethod yawl:SessionBean_getAdminQueueSet_19 ;
+    yawl:hasMethod yawl:SessionBean_setAdminQueueSet_20 ;
+    yawl:hasMethod yawl:SessionBean_getQueueSet_21 ;
+    yawl:hasMethod yawl:SessionBean_setQueueSet_22 ;
+    yawl:hasMethod yawl:SessionBean_getQueue_23 ;
+    yawl:hasMethod yawl:SessionBean_getQueueSize_24 ;
+    yawl:hasMethod yawl:SessionBean_refreshQueue_25 ;
+    yawl:hasMethod yawl:SessionBean_getExternalSessionID_26 ;
+    yawl:hasMethod yawl:SessionBean_getExternalSession_27 ;
+    yawl:hasMethod yawl:SessionBean_getDefaultSessionTimeoutValue_28 ;
+    yawl:hasMethod yawl:SessionBean_setDefaultSessionTimeoutValue_29 ;
+    yawl:hasMethod yawl:SessionBean_resetSessionTimeout_30 ;
+    yawl:hasMethod yawl:SessionBean_isSessionTimeoutValueChanged_31 ;
+    yawl:hasMethod yawl:SessionBean_setSessionTimeoutValueChanged_32 ;
+    yawl:hasMethod yawl:SessionBean_hasNavigationBegun_33 ;
+    yawl:hasMethod yawl:SessionBean_getActivePage_34 ;
+    yawl:hasMethod yawl:SessionBean_setActivePage_35 ;
+    yawl:hasMethod yawl:SessionBean_dispatchToActivePage_36 ;
+    yawl:hasMethod yawl:SessionBean_getDynFormType_37 ;
+    yawl:hasMethod yawl:SessionBean_setDynFormType_38 ;
+    yawl:hasMethod yawl:SessionBean_getDynFormFactoryInstance_39 ;
+    yawl:hasMethod yawl:SessionBean_getWorklistOptions_40 ;
+    yawl:hasMethod yawl:SessionBean_getLoadedSpecListOptions_41 ;
+    yawl:hasMethod yawl:SessionBean_getRunningCaseListOptions_42 ;
+    yawl:hasMethod yawl:SessionBean_getSelectUserListOptions_43 ;
+    yawl:hasMethod yawl:SessionBean_getOwnedResourceAttributes_44 ;
+    yawl:hasMethod yawl:SessionBean_getAvailableResourceAttributes_45 ;
+    yawl:hasMethod yawl:SessionBean_getPiledTasks_46 ;
+    yawl:hasMethod yawl:SessionBean_getChainedCases_47 ;
+    yawl:hasMethod yawl:SessionBean_getOrgDataOptions_48 ;
+    yawl:hasMethod yawl:SessionBean_getOrgDataBelongsItems_49 ;
+    yawl:hasMethod yawl:SessionBean_getOrgDataGroupItems_50 ;
+    yawl:hasMethod yawl:SessionBean_getNhResourcesOptions_51 ;
+    yawl:hasMethod yawl:SessionBean_getNhResourcesCategoryItems_52 ;
+    yawl:hasMethod yawl:SessionBean_getNhResourcesSubcategoryItems_53 ;
+    yawl:hasMethod yawl:SessionBean_setWorklistOptions_54 ;
+    yawl:hasMethod yawl:SessionBean_setLoadedSpecListOptions_55 ;
+    yawl:hasMethod yawl:SessionBean_setRunningCaseListOptions_56 ;
+    yawl:hasMethod yawl:SessionBean_setSelectUserListOptions_57 ;
+    yawl:hasMethod yawl:SessionBean_setOwnedResourceAttributes_58 ;
+    yawl:hasMethod yawl:SessionBean_setAvailableResourceAttributes_59 ;
+    yawl:hasMethod yawl:SessionBean_setPiledTasks_60 ;
+    yawl:hasMethod yawl:SessionBean_setChainedCases_61 ;
+    yawl:hasMethod yawl:SessionBean_setOrgDataOptions_62 ;
+    yawl:hasMethod yawl:SessionBean_setOrgDataBelongsItems_63 ;
+    yawl:hasMethod yawl:SessionBean_setOrgDataGroupItems_64 ;
+    yawl:hasMethod yawl:SessionBean_setNhResourcesOptions_65 ;
+    yawl:hasMethod yawl:SessionBean_setNhResourcesCategoryItems_66 ;
+    yawl:hasMethod yawl:SessionBean_setNhResourcesSubcategoryItems_67 ;
+    yawl:hasMethod yawl:SessionBean_getNhResourcesSubcategoryList_68 ;
+    yawl:hasMethod yawl:SessionBean_setNhResourcesSubcategoryList_69 ;
+    yawl:hasMethod yawl:SessionBean_getWorklistChoice_70 ;
+    yawl:hasMethod yawl:SessionBean_getLoadedSpecListChoice_71 ;
+    yawl:hasMethod yawl:SessionBean_getRunningCaseListChoice_72 ;
+    yawl:hasMethod yawl:SessionBean_getSelectUserListChoice_73 ;
+    yawl:hasMethod yawl:SessionBean_getOrgDataChoice_74 ;
+    yawl:hasMethod yawl:SessionBean_getPiledTasksChoice_75 ;
+    yawl:hasMethod yawl:SessionBean_getChainedCasesChoice_76 ;
+    yawl:hasMethod yawl:SessionBean_getOrgDataBelongsChoice_77 ;
+    yawl:hasMethod yawl:SessionBean_getOrgDataGroupChoice_78 ;
+    yawl:hasMethod yawl:SessionBean_getNhResourcesChoice_79 ;
+    yawl:hasMethod yawl:SessionBean_getNhResourcesCategoryChoice_80 ;
+    yawl:hasMethod yawl:SessionBean_getNhResourcesSubcategoryChoice_81 ;
+    yawl:hasMethod yawl:SessionBean_setWorklistChoice_82 ;
+    yawl:hasMethod yawl:SessionBean_setRunningCaseListChoice_83 ;
+    yawl:hasMethod yawl:SessionBean_setSelectUserListChoice_84 ;
+    yawl:hasMethod yawl:SessionBean_setOrgDataChoice_85 ;
+    yawl:hasMethod yawl:SessionBean_setPiledTasksChoice_86 ;
+    yawl:hasMethod yawl:SessionBean_setChainedCasesChoice_87 ;
+    yawl:hasMethod yawl:SessionBean_setOrgDataBelongsChoice_88 ;
+    yawl:hasMethod yawl:SessionBean_setOrgDataGroupChoice_89 ;
+    yawl:hasMethod yawl:SessionBean_setNhResourcesChoice_90 ;
+    yawl:hasMethod yawl:SessionBean_setNhResourcesCategoryChoice_91 ;
+    yawl:hasMethod yawl:SessionBean_setNhResourcesSubcategoryChoice_92 ;
+    yawl:hasMethod yawl:SessionBean_setLoadedSpecListChoice_93 ;
+    yawl:hasMethod yawl:SessionBean_setDirectToMeChoice_94 ;
+    yawl:hasMethod yawl:SessionBean_getDirectToMeChoice_95 ;
+    yawl:hasMethod yawl:SessionBean_getLbxUserList_96 ;
+    yawl:hasMethod yawl:SessionBean_setLbxUserList_97 ;
+    yawl:hasMethod yawl:SessionBean_getSelectUserListBoxSelections_98 ;
+    yawl:hasMethod yawl:SessionBean_configureSelectUserListBox_99 ;
+    yawl:hasMethod yawl:SessionBean_getLbxRunningCases_100 ;
+    yawl:hasMethod yawl:SessionBean_setLbxRunningCases_101 ;
+    yawl:hasMethod yawl:SessionBean_getRunningCasesListBoxSelections_102 ;
+    yawl:hasMethod yawl:SessionBean_configureRunningCasesListBox_103 ;
+    yawl:hasMethod yawl:SessionBean_getRunningCaseListChoices_104 ;
+    yawl:hasMethod yawl:SessionBean_setRunningCaseListChoices_105 ;
+    yawl:hasMethod yawl:SessionBean_getRunningCasesCaption_106 ;
+    yawl:hasMethod yawl:SessionBean_getSelectUserListChoices_107 ;
+    yawl:hasMethod yawl:SessionBean_setSelectUserListChoices_108 ;
+    yawl:hasMethod yawl:SessionBean_setChosenWIR_109 ;
+    yawl:hasMethod yawl:SessionBean_getChosenWIR_110 ;
+    yawl:hasMethod yawl:SessionBean_isFirstWorkItemChosen_111 ;
+    yawl:hasMethod yawl:SessionBean_doLogout_112 ;
+    yawl:hasMethod yawl:SessionBean_checkLogon_113 ;
+    yawl:hasMethod yawl:SessionBean_isLoggedIn_114 ;
+    yawl:hasMethod yawl:SessionBean_isAdminSession_115 ;
+    yawl:hasMethod yawl:SessionBean_getSessionPrivileges_116 ;
+    yawl:hasMethod yawl:SessionBean_gotoPage_117 ;
+    yawl:hasMethod yawl:SessionBean_redirectIfActiveSession_118 ;
+    yawl:hasMethod yawl:SessionBean_isCaseLaunch_119 ;
+    yawl:hasMethod yawl:SessionBean_setCaseLaunch_120 ;
+    yawl:hasMethod yawl:SessionBean_isDelegating_121 ;
+    yawl:hasMethod yawl:SessionBean_setDelegating_122 ;
+    yawl:hasMethod yawl:SessionBean_isReallocating_123 ;
+    yawl:hasMethod yawl:SessionBean_setReallocating_124 ;
+    yawl:hasMethod yawl:SessionBean_isReallocatingStateful_125 ;
+    yawl:hasMethod yawl:SessionBean_setReallocatingStateful_126 ;
+    yawl:hasMethod yawl:SessionBean_isCustomFormPost_127 ;
+    yawl:hasMethod yawl:SessionBean_setCustomFormPost_128 ;
+    yawl:hasMethod yawl:SessionBean_getTitle_129 ;
+    yawl:hasMethod yawl:SessionBean_setTitle_130 ;
+    yawl:hasMethod yawl:SessionBean_getMnuSelectorStyle_131 ;
+    yawl:hasMethod yawl:SessionBean_setMnuSelectorStyle_132 ;
+    yawl:hasMethod yawl:SessionBean_getUserListFormHeaderText_133 ;
+    yawl:hasMethod yawl:SessionBean_setUserListFormHeaderText_134 ;
+    yawl:hasMethod yawl:SessionBean_getParticipantPiledTasks_135 ;
+    yawl:hasMethod yawl:SessionBean_formatPiledTaskString_136 ;
+    yawl:hasMethod yawl:SessionBean_getResourceMapFromLabel_137 ;
+    yawl:hasMethod yawl:SessionBean_getParticipantChainedCases_138 ;
+    yawl:hasMethod yawl:SessionBean_getLoadedSpecs_139 ;
+    yawl:hasMethod yawl:SessionBean_setLoadedSpecs_140 ;
+    yawl:hasMethod yawl:SessionBean_refreshLoadedSpecs_141 ;
+    yawl:hasMethod yawl:SessionBean_getLoadedSpecsCaption_142 ;
+    yawl:hasMethod yawl:SessionBean_getLoadedSpec_143 ;
+    yawl:hasMethod yawl:SessionBean_getLatestLoadedSpecVersion_144 ;
+    yawl:hasMethod yawl:SessionBean_isLoadedSpec_145 ;
+    yawl:hasMethod yawl:SessionBean_getCaseSchema_146 ;
+    yawl:hasMethod yawl:SessionBean_getTaskSchema_147 ;
+    yawl:hasMethod yawl:SessionBean_getAdminQueueAssignedList_148 ;
+    yawl:hasMethod yawl:SessionBean_setAdminQueueAssignedList_149 ;
+    yawl:hasMethod yawl:SessionBean_populateAdminQueueAssignedList_150 ;
+    yawl:hasMethod yawl:SessionBean_getFirstAssignedToID_151 ;
+    yawl:hasMethod yawl:SessionBean_getAssignedToText_152 ;
+    yawl:hasMethod yawl:SessionBean_orgDataIsRefreshing_153 ;
+    yawl:hasMethod yawl:SessionBean_getAdminQueueAction_154 ;
+    yawl:hasMethod yawl:SessionBean_setAdminQueueAction_155 ;
+    yawl:hasMethod yawl:SessionBean_performAdminQueueAction_156 ;
+    yawl:hasMethod yawl:SessionBean_performAdminQueueAction_157 ;
+    yawl:hasMethod yawl:SessionBean_getNavigateTo_158 ;
+    yawl:hasMethod yawl:SessionBean_setNavigateTo_159 ;
+    yawl:hasMethod yawl:SessionBean_isRedirectToMe_160 ;
+    yawl:hasMethod yawl:SessionBean_setRedirectToMe_161 ;
+    yawl:hasMethod yawl:SessionBean_getOrgMgtMode_162 ;
+    yawl:hasMethod yawl:SessionBean_setOrgMgtMode_163 ;
+    yawl:hasMethod yawl:SessionBean_getNhrMgtMode_164 ;
+    yawl:hasMethod yawl:SessionBean_setNhrMgtMode_165 ;
+    yawl:hasMethod yawl:SessionBean_getOrgDataParticipantList_166 ;
+    yawl:hasMethod yawl:SessionBean_getParticipantMap_167 ;
+    yawl:hasMethod yawl:SessionBean_setBlankStartOfParticipantList_168 ;
+    yawl:hasMethod yawl:SessionBean_setOrgDataParticipantList_169 ;
+    yawl:hasMethod yawl:SessionBean_orgDataUpdated_170 ;
+    yawl:hasMethod yawl:SessionBean_refreshOrgDataParticipantList_171 ;
+    yawl:hasMethod yawl:SessionBean_isAddParticipantMode_172 ;
+    yawl:hasMethod yawl:SessionBean_setAddParticipantMode_173 ;
+    yawl:hasMethod yawl:SessionBean_getAddedParticipant_174 ;
+    yawl:hasMethod yawl:SessionBean_setAddedParticipant_175 ;
+    yawl:hasMethod yawl:SessionBean_getEditedParticipant_176 ;
+    yawl:hasMethod yawl:SessionBean_setEditedParticipantToNull_177 ;
+    yawl:hasMethod yawl:SessionBean_setEditedParticipant_178 ;
+    yawl:hasMethod yawl:SessionBean_saveParticipantUpdates_179 ;
+    yawl:hasMethod yawl:SessionBean_getFullResourceAttributeListPlusNil_180 ;
+    yawl:hasMethod yawl:SessionBean_getFullResourceAttributeList_181 ;
+    yawl:hasMethod yawl:SessionBean_sortOptions_182 ;
+    yawl:hasMethod yawl:SessionBean_getParticipantAttributeList_183 ;
+    yawl:hasMethod yawl:SessionBean_getSortedRoleList_184 ;
+    yawl:hasMethod yawl:SessionBean_getRoleList_185 ;
+    yawl:hasMethod yawl:SessionBean_getPositionList_186 ;
+    yawl:hasMethod yawl:SessionBean_getCapabilityList_187 ;
+    yawl:hasMethod yawl:SessionBean_getOrgGroupList_188 ;
+    yawl:hasMethod yawl:SessionBean_getNhrItems_189 ;
+    yawl:hasMethod yawl:SessionBean_getNhResourcesList_190 ;
+    yawl:hasMethod yawl:SessionBean_getNhResourcesCategoryList_191 ;
+    yawl:hasMethod yawl:SessionBean_hasAtLeastOneNonHumanCategory_192 ;
+    yawl:hasMethod yawl:SessionBean_getNhResourcesCategoryListExpanded_193 ;
+    yawl:hasMethod yawl:SessionBean_addSecondaryParticipant_194 ;
+    yawl:hasMethod yawl:SessionBean_addSecondaryRole_195 ;
+    yawl:hasMethod yawl:SessionBean_addSecondaryNHResource_196 ;
+    yawl:hasMethod yawl:SessionBean_addSecondaryNHCategory_197 ;
+    yawl:hasMethod yawl:SessionBean_getSelectedSecondaryResources_198 ;
+    yawl:hasMethod yawl:SessionBean_setSecondaryResources_199 ;
+    yawl:hasMethod yawl:SessionBean_loadSecondaryResources_200 ;
+    yawl:hasMethod yawl:SessionBean_getSecondaryResourcesItemID_201 ;
+    yawl:hasMethod yawl:SessionBean_setSecondaryResourcesItemID_202 ;
+    yawl:hasMethod yawl:SessionBean_getSecondaryResourcesTitle_203 ;
+    yawl:hasMethod yawl:SessionBean_refreshSelectedSecondaryResourcesOptions_204 ;
+    yawl:hasMethod yawl:SessionBean_saveSelectedSecondaryResources_205 ;
+    yawl:hasMethod yawl:SessionBean_checkSelectedSecondaryResources_206 ;
+    yawl:hasMethod yawl:SessionBean_removeSelectedSecondaryResource_207 ;
+    yawl:hasMethod yawl:SessionBean_getSelectedSecondaryResource_208 ;
+    yawl:hasMethod yawl:SessionBean_setSelectedSecondaryResource_209 ;
+    yawl:hasMethod yawl:SessionBean_isOrgDataItemRemovedFlag_210 ;
+    yawl:hasMethod yawl:SessionBean_setOrgDataItemRemovedFlag_211 ;
+    yawl:hasMethod yawl:SessionBean_isNhResourcesItemRemovedFlag_212 ;
+    yawl:hasMethod yawl:SessionBean_setNhResourcesItemRemovedFlag_213 ;
+    yawl:hasMethod yawl:SessionBean_getActiveResourceAttributeTab_214 ;
+    yawl:hasMethod yawl:SessionBean_setActiveResourceAttributeTab_215 ;
+    yawl:hasMethod yawl:SessionBean_unselectResourceAttribute_216 ;
+    yawl:hasMethod yawl:SessionBean_unselectResourceAttribute_217 ;
+    yawl:hasMethod yawl:SessionBean_selectResourceAttribute_218 ;
+    yawl:hasMethod yawl:SessionBean_getParticipantForCurrentMode_219 ;
+    yawl:hasMethod yawl:SessionBean_selectResourceAttribute_220 ;
+    yawl:hasMethod yawl:SessionBean_resetParticipant_221 ;
+    yawl:hasMethod yawl:SessionBean_addParticipant_222 ;
+    yawl:hasMethod yawl:SessionBean_removeParticipant_223 ;
+    yawl:hasMethod yawl:SessionBean_getLblAgeText_224 ;
+    yawl:hasMethod yawl:SessionBean_setLblAgeText_225 ;
+    yawl:hasMethod yawl:SessionBean_updateWIRDoco_226 ;
+    yawl:hasMethod yawl:SessionBean_getInitSpecID_227 ;
+    yawl:hasMethod yawl:SessionBean_setInitSpecID_228 ;
+    yawl:hasMethod yawl:SessionBean_getInitCaseID_229 ;
+    yawl:hasMethod yawl:SessionBean_setInitCaseID_230 ;
+    yawl:hasMethod yawl:SessionBean_getInitTaskID_231 ;
+    yawl:hasMethod yawl:SessionBean_setInitTaskID_232 ;
+    yawl:hasMethod yawl:SessionBean_getInitStatus_233 ;
+    yawl:hasMethod yawl:SessionBean_setInitStatus_234 ;
+    yawl:hasMethod yawl:SessionBean_getInitAge_235 ;
+    yawl:hasMethod yawl:SessionBean_setInitAge_236 ;
+    yawl:hasMethod yawl:SessionBean_getInitCreatedDate_237 ;
+    yawl:hasMethod yawl:SessionBean_setInitCreatedDate_238 ;
+    yawl:hasMethod yawl:SessionBean_getInitTabText_239 ;
+    yawl:hasMethod yawl:SessionBean_getInitOfferedTabText_240 ;
+    yawl:hasMethod yawl:SessionBean_getInitAllocatedTabText_241 ;
+    yawl:hasMethod yawl:SessionBean_getInitStartedTabText_242 ;
+    yawl:hasMethod yawl:SessionBean_getInitSuspendedTabText_243 ;
+    yawl:hasMethod yawl:SessionBean_getInitUnOfferedTabText_244 ;
+    yawl:hasMethod yawl:SessionBean_getInitWorklistedTabText_245 ;
+    yawl:hasMethod yawl:SessionBean_setInitTabText_246 ;
+    yawl:hasMethod yawl:SessionBean_getInitTabStyle_247 ;
+    yawl:hasMethod yawl:SessionBean_isWirEdit_248 ;
+    yawl:hasMethod yawl:SessionBean_setWirEdit_249 ;
+    yawl:hasMethod yawl:SessionBean_isCompleteAfterEdit_250 ;
+    yawl:hasMethod yawl:SessionBean_setCompleteAfterEdit_251 ;
+    yawl:hasMethod yawl:SessionBean_setWarnedForNonEdit_252 ;
+    yawl:hasMethod yawl:SessionBean_hasWarnedForNonEdit_253 ;
+    yawl:hasMethod yawl:SessionBean_removeWarnedForNonEdit_254 ;
+    yawl:hasMethod yawl:SessionBean_getSourceTab_255 ;
+    yawl:hasMethod yawl:SessionBean_setSourceTab_256 ;
+    yawl:hasMethod yawl:SessionBean_getActiveTab_257 ;
+    yawl:hasMethod yawl:SessionBean_setActiveTab_258 ;
+    yawl:hasMethod yawl:SessionBean_setSourceTabAfterListboxSelection_259 ;
+    yawl:hasMethod yawl:SessionBean_refreshUserWorkQueues_260 ;
+    yawl:hasMethod yawl:SessionBean_getTransparentPanel_261 ;
+    yawl:hasMethod yawl:SessionBean_setTransparentPanel_262 ;
+    yawl:hasMethod yawl:SessionBean_getMessagePanel_263 ;
+    yawl:hasMethod yawl:SessionBean_setMessagePanel_264 ;
+    yawl:hasMethod yawl:SessionBean_showMessagePanel_265 ;
+    yawl:hasMethod yawl:SessionBean_messagePanelOKBtnAction_266 ;
+    yawl:hasMethod yawl:SessionBean_getOrgDataListLabelText_267 ;
+    yawl:hasMethod yawl:SessionBean_setOrgDataListLabelText_268 ;
+    yawl:hasMethod yawl:SessionBean_getOrgDataBelongsLabelText_269 ;
+    yawl:hasMethod yawl:SessionBean_setOrgDataBelongsLabelText_270 ;
+    yawl:hasMethod yawl:SessionBean_getOrgDataGroupLabelText_271 ;
+    yawl:hasMethod yawl:SessionBean_setOrgDataGroupLabelText_272 ;
+    yawl:hasMethod yawl:SessionBean_getNhResourceListLabelText_273 ;
+    yawl:hasMethod yawl:SessionBean_setNhResourceListLabelText_274 ;
+    yawl:hasMethod yawl:SessionBean_getNhResourceCategoryLabelText_275 ;
+    yawl:hasMethod yawl:SessionBean_setNhResourceCategoryLabelText_276 ;
+    yawl:hasMethod yawl:SessionBean_resetPageDefaults_277 ;
+    yawl:hasMethod yawl:SessionBean_getAddInstanceParamVal_278 ;
+    yawl:hasMethod yawl:SessionBean_setAddInstanceParamVal_279 ;
+    yawl:hasMethod yawl:SessionBean_isAddInstance_280 ;
+    yawl:hasMethod yawl:SessionBean_getAddInstanceParamName_281 ;
+    yawl:hasMethod yawl:SessionBean_setAddInstanceParamName_282 ;
+    yawl:hasMethod yawl:SessionBean_getAddInstanceParamNameLabelText_283 ;
+    yawl:hasMethod yawl:SessionBean_clearAddInstanceParam_284 ;
+    yawl:hasMethod yawl:SessionBean_getAddInstanceItemID_285 ;
+    yawl:hasMethod yawl:SessionBean_setAddInstanceItemID_286 ;
+    yawl:hasMethod yawl:SessionBean_getAddInstanceHeader_287 ;
+    yawl:hasMethod yawl:SessionBean_setAddInstanceHeader_288 ;
+    yawl:hasMethod yawl:SessionBean_isDelayTimeRBSelected_289 ;
+    yawl:hasMethod yawl:SessionBean_setDelayTimeRBSelected_290 ;
+    yawl:hasMethod yawl:SessionBean_isDelayDateRBSelected_291 ;
+    yawl:hasMethod yawl:SessionBean_setDelayDateRBSelected_292 ;
+    yawl:hasMethod yawl:SessionBean_isDelayDurationRBSelected_293 ;
+    yawl:hasMethod yawl:SessionBean_setDelayDurationRBSelected_294 ;
+    yawl:hasMethod yawl:SessionBean_getTeamRBSelected_295 ;
+    yawl:hasMethod yawl:SessionBean_isTeamRBSelected_296 ;
+    yawl:hasMethod yawl:SessionBean_setTeamRBSelected_297 ;
+    yawl:hasMethod yawl:SessionBean_getOrgGroupRBSelected_298 ;
+    yawl:hasMethod yawl:SessionBean_isOrgGroupRBSelected_299 ;
+    yawl:hasMethod yawl:SessionBean_setOrgGroupRBSelected_300 ;
+    yawl:hasMethod yawl:SessionBean_getTeamRBDisabled_301 ;
+    yawl:hasMethod yawl:SessionBean_getOrgGroupRBDisabled_302 ;
+    yawl:hasMethod yawl:SessionBean_getSelectedTeamQueueWIR_303 ;
+    yawl:hasMethod yawl:SessionBean_setSelectedTeamQueueWIR_304 ;
+    yawl:hasMethod yawl:SessionBean_getResourceState_305 ;
+    yawl:hasMethod yawl:SessionBean_setResourceState_306 ;
+    yawl:hasMethod yawl:SessionBean_getPnlUploadBlockout_307 ;
+    yawl:hasMethod yawl:SessionBean_setPnlUploadBlockout_308 ;
+    yawl:hasMethod yawl:SessionBean_isOrgDataUploadPanelVisible_309 ;
+    yawl:hasMethod yawl:SessionBean_setOrgDataUploadPanelVisible_310 ;
+    yawl:hasMethod yawl:SessionBean_isDelayedLaunchPanelVisible_311 ;
+    yawl:hasMethod yawl:SessionBean_setDelayedLaunchPanelVisible_312 ;
+    yawl:hasMethod yawl:SessionBean_resetDelayValues_313 ;
+    yawl:hasMethod yawl:SessionBean_getDelaySeconds_314 ;
+    yawl:hasMethod yawl:SessionBean_setDelaySeconds_315 ;
+    yawl:hasMethod yawl:SessionBean_getDelayDate_316 ;
+    yawl:hasMethod yawl:SessionBean_setDelayDate_317 ;
+    yawl:hasMethod yawl:SessionBean_getDelayDuration_318 ;
+    yawl:hasMethod yawl:SessionBean_setDelayDuration_319 ;
+    yawl:hasMethod yawl:SessionBean_hasDelayValueSet_320 ;
+    yawl:hasMethod yawl:SessionBean_getDelayValueError_321 ;
+    yawl:hasMethod yawl:SessionBean_setDelayValueError_322 ;
+    yawl:hasMethod yawl:SessionBean_isVisualiserReferred_323 ;
+    yawl:hasMethod yawl:SessionBean_setVisualiserReferred_324 ;
+    yawl:hasMethod yawl:SessionBean_getVisualiserEditedWIR_325 ;
+    yawl:hasMethod yawl:SessionBean_setVisualiserEditedWIR_326 ;
+    yawl:hasMethod yawl:SessionBean_isRssUserAlreadyLoggedOn_327 ;
+    yawl:hasMethod yawl:SessionBean_setRssUserAlreadyLoggedOn_328 ;
+    yawl:hasMethod yawl:SessionBean_getFormViewerInstance_329 ;
+    yawl:hasMethod yawl:SessionBean_setFormViewerInstance_330 ;
+    yawl:hasMethod yawl:SessionBean_getRssFormWIR_331 ;
+    yawl:hasMethod yawl:SessionBean_setRssFormWIR_332 ;
+    yawl:hasMethod yawl:SessionBean_resetPostFormDisplay_333 ;
+    yawl:hasMethod yawl:SessionBean_isRssFormDisplay_334 ;
+    yawl:hasMethod yawl:SessionBean_setRssFormDisplay_335 ;
+    yawl:hasMethod yawl:SessionBean_isRssFormCloseAttempted_336 ;
+    yawl:hasMethod yawl:SessionBean_setRssFormCloseAttempted_337 ;
+    yawl:hasMethod yawl:SessionBean_isAddClientAccountMode_338 ;
+    yawl:hasMethod yawl:SessionBean_setAddClientAccountMode_339 ;
+    yawl:hasMethod yawl:SessionBean_getOrgDataMembers_340 ;
+    yawl:hasMethod yawl:SessionBean_setOrgDataMembers_341 ;
+    yawl:hasMethod yawl:SessionBean_isShowYAWLBanner_342 ;
+    yawl:hasMethod yawl:SessionBean_setShowYAWLBanner_343 ;
+    yawl:hasMethod yawl:SessionBean_isSubCatAddMode_344 ;
+    yawl:hasMethod yawl:SessionBean_setSubCatAddMode_345 ;
+    yawl:hasMethod yawl:SessionBean_getCategoryMembers_346 ;
+    yawl:hasMethod yawl:SessionBean_setCategoryMembers_347 ;
+    yawl:hasMethod yawl:SessionBean_getSelectedNonHumanResource_348 ;
+    yawl:hasMethod yawl:SessionBean_setSelectedNonHumanResource_349 ;
+    yawl:hasMethod yawl:SessionBean_getMenuBarCount_350 ;
+    yawl:hasMethod yawl:SessionBean_setMenuBarCount_351 ;
+    yawl:hasMethod yawl:SessionBean_getOuterPanelTop_352 ;
+    yawl:hasMethod yawl:SessionBean_getFooterPanelStyle_353 ;
+    yawl:hasMethod yawl:SessionBean_getOuterPanelWidth_354 ;
+    yawl:hasMethod yawl:SessionBean_getOuterPanelHeight_355 ;
+    yawl:hasMethod yawl:SessionBean_getCalendarRows_356 ;
+    yawl:hasMethod yawl:SessionBean_getCalendarRowCount_357 ;
+    yawl:hasMethod yawl:SessionBean_refreshCalendarRows_358 ;
+    yawl:hasMethod yawl:SessionBean_getEntriesForSelection_359 ;
+    yawl:hasMethod yawl:SessionBean_removeCalendarRow_360 ;
+    yawl:hasMethod yawl:SessionBean_getSelectedCalendarRow_361 ;
+    yawl:hasMethod yawl:SessionBean_getSelectedCalendarRow_362 ;
+    yawl:hasMethod yawl:SessionBean_getSelectedEntry_363 ;
+    yawl:hasMethod yawl:SessionBean_getSelectedCalendarRowIndex_364 ;
+    yawl:hasMethod yawl:SessionBean_setSelectedCalendarRowIndex_365 ;
+    yawl:hasMethod yawl:SessionBean_getSelectedCalMgtDate_366 ;
+    yawl:hasMethod yawl:SessionBean_setSelectedCalMgtDate_367 ;
+    yawl:hasMethod yawl:SessionBean_getCalMgtMinDate_368 ;
+    yawl:hasMethod yawl:SessionBean_setCalMgtMinDate_369 ;
+    yawl:hasMethod yawl:SessionBean_getCalMgtMaxDate_370 ;
+    yawl:hasMethod yawl:SessionBean_setCalMgtMaxDate_371 ;
+    yawl:hasMethod yawl:SessionBean_createDate_372 ;
+    yawl:hasMethod yawl:SessionBean_getCalFilterSelection_373 ;
+    yawl:hasMethod yawl:SessionBean_setCalFilterSelection_374 ;
+    yawl:hasMethod yawl:SessionBean_getCalResourceSelection_375 ;
+    yawl:hasMethod yawl:SessionBean_setCalResourceSelection_376 ;
+    yawl:hasMethod yawl:SessionBean_getSelectedCalendarID_377 ;
+    yawl:hasMethod yawl:SessionBean_addCalendarEntry_378 ;
+    yawl:hasMethod yawl:SessionBean_logCalendarEntry_379 ;
+    yawl:hasMethod yawl:SessionBean_getSelectedResourceGroup_380 ;
+    yawl:hasMethod yawl:SessionBean_getNameForCalendarID_381 ;
+    yawl:hasMethod yawl:SessionBean_getCalResourceOptions_382 ;
+    yawl:hasMethod yawl:SessionBean_getSelectedDurationDate_383 ;
+    yawl:hasMethod yawl:SessionBean_setSelectedDurationDate_384 ;
+    yawl:hasMethod yawl:SessionBean_isAddCalendarRowMode_385 ;
+    yawl:hasMethod yawl:SessionBean_setAddCalendarRowMode_386 ;
+    yawl:hasMethod yawl:SessionBean_getCalEditedResourceName_387 ;
+    yawl:hasMethod yawl:SessionBean_setCalEditedResourceName_388 ;
+    yawl:hasMethod yawl:SessionBean_clashesWithCalendar_389 ;
+    yawl:hasMethod yawl:SessionBean_getCalDataTableStyle_390 ;
+    yawl:hasMethod yawl:SessionBean_stripXMLChars_391 ;
+    yawl:hasMethod yawl:SessionBean_getLblDocumentationStyle_392 ;
+    yawl:hasMethod yawl:SessionBean_getTxtDocumentationStyle_393 ;
+    yawl:hasMethod yawl:SessionBean_getYawlVersion_394 ;
+    yawl:hasField yawl:SessionBean___placeholder ;
+    yawl:hasField yawl:SessionBean__rm ;
+    yawl:hasField yawl:SessionBean_script ;
+    yawl:hasField yawl:SessionBean_btnRefresh ;
+    yawl:hasField yawl:SessionBean_userid ;
+    yawl:hasField yawl:SessionBean_sessionhandle ;
+    yawl:hasField yawl:SessionBean_participant ;
+    yawl:hasField yawl:SessionBean_userFullName ;
+    yawl:hasField yawl:SessionBean_adminQueueSet ;
+    yawl:hasField yawl:SessionBean_queueSet ;
+    yawl:hasField yawl:SessionBean_defaultSessionTimeoutValue ;
+    yawl:hasField yawl:SessionBean_sessionTimeoutValueChanged ;
+    yawl:hasField yawl:SessionBean__changeStamp ;
+    yawl:hasField yawl:SessionBean_activePage ;
+    yawl:hasField yawl:SessionBean_dynFormType ;
+    yawl:hasField yawl:SessionBean_navigationBegun ;
+    yawl:hasField yawl:SessionBean_worklistOptions ;
+    yawl:hasField yawl:SessionBean_loadedSpecListOptions ;
+    yawl:hasField yawl:SessionBean_runningCaseListOptions ;
+    yawl:hasField yawl:SessionBean_selectUserListOptions ;
+    yawl:hasField yawl:SessionBean_ownedResourceAttributes ;
+    yawl:hasField yawl:SessionBean_availableResourceAttributes ;
+    yawl:hasField yawl:SessionBean_piledTasks ;
+    yawl:hasField yawl:SessionBean_chainedCases ;
+    yawl:hasField yawl:SessionBean_orgDataOptions ;
+    yawl:hasField yawl:SessionBean_orgDataBelongsItems ;
+    yawl:hasField yawl:SessionBean_orgDataGroupItems ;
+    yawl:hasField yawl:SessionBean_nhResourcesOptions ;
+    yawl:hasField yawl:SessionBean_nhResourcesCategoryItems ;
+    yawl:hasField yawl:SessionBean_nhResourcesSubcategoryItems ;
+    yawl:hasField yawl:SessionBean_nhResourcesSubcategoryList ;
+    yawl:hasField yawl:SessionBean_worklistChoice ;
+    yawl:hasField yawl:SessionBean_loadedSpecListChoice ;
+    yawl:hasField yawl:SessionBean_runningCaseListChoice ;
+    yawl:hasField yawl:SessionBean_selectUserListChoice ;
+    yawl:hasField yawl:SessionBean_piledTasksChoice ;
+    yawl:hasField yawl:SessionBean_chainedCasesChoice ;
+    yawl:hasField yawl:SessionBean_orgDataChoice ;
+    yawl:hasField yawl:SessionBean_orgDataBelongsChoice ;
+    yawl:hasField yawl:SessionBean_orgDataGroupChoice ;
+    yawl:hasField yawl:SessionBean_nhResourcesChoice ;
+    yawl:hasField yawl:SessionBean_nhResourcesCategoryChoice ;
+    yawl:hasField yawl:SessionBean_nhResourcesSubcategoryChoice ;
+    yawl:hasField yawl:SessionBean_directToMeChoice ;
+    yawl:hasField yawl:SessionBean_lbxUserList ;
+    yawl:hasField yawl:SessionBean_lbxRunningCases ;
+    yawl:hasField yawl:SessionBean_runningCaseListChoices ;
+    yawl:hasField yawl:SessionBean_selectUserListChoices ;
+    yawl:hasField yawl:SessionBean_chosenWIR ;
+    yawl:hasField yawl:SessionBean_caseLaunch ;
+    yawl:hasField yawl:SessionBean_delegating ;
+    yawl:hasField yawl:SessionBean_reallocating ;
+    yawl:hasField yawl:SessionBean_reallocatingStateful ;
+    yawl:hasField yawl:SessionBean_customFormPost ;
+    yawl:hasField yawl:SessionBean_title ;
+    yawl:hasField yawl:SessionBean_mnuSelectorStyle ;
+    yawl:hasField yawl:SessionBean_userListFormHeaderText ;
+    yawl:hasField yawl:SessionBean_loadedSpecs ;
+    yawl:hasField yawl:SessionBean_schemaLibraries ;
+    yawl:hasField yawl:SessionBean_adminQueueAssignedList ;
+    yawl:hasField yawl:SessionBean_adminQueueAction ;
+    yawl:hasField yawl:SessionBean_navigateTo ;
+    yawl:hasField yawl:SessionBean_redirectToMe ;
+    yawl:hasField yawl:SessionBean__orgMgtMode ;
+    yawl:hasField yawl:SessionBean__nhrMgtMode ;
+    yawl:hasField yawl:SessionBean_orgDataParticipantList ;
+    yawl:hasField yawl:SessionBean_participantMap ;
+    yawl:hasField yawl:SessionBean_blankStartOfList ;
+    yawl:hasField yawl:SessionBean_addParticipantMode ;
+    yawl:hasField yawl:SessionBean_addedParticipant ;
+    yawl:hasField yawl:SessionBean_editedParticipant ;
+    yawl:hasField yawl:SessionBean_preEditAttributes ;
+    yawl:hasField yawl:SessionBean_secResDataSet ;
+    yawl:hasField yawl:SessionBean_selectedSecondaryResources ;
+    yawl:hasField yawl:SessionBean_secondaryResourcesItemID ;
+    yawl:hasField yawl:SessionBean_selectedSecondaryResource ;
+    yawl:hasField yawl:SessionBean_orgDataItemRemovedFlag ;
+    yawl:hasField yawl:SessionBean_nhResourcesItemRemovedFlag ;
+    yawl:hasField yawl:SessionBean_activeResourceAttributeTab ;
+    yawl:hasField yawl:SessionBean_lblAgeText ;
+    yawl:hasField yawl:SessionBean_docoParser ;
+    yawl:hasField yawl:SessionBean_wirEdit ;
+    yawl:hasField yawl:SessionBean_completeAfterEdit ;
+    yawl:hasField yawl:SessionBean_warnedWIRSet ;
+    yawl:hasField yawl:SessionBean_sourceTab ;
+    yawl:hasField yawl:SessionBean_activeTab ;
+    yawl:hasField yawl:SessionBean_transparentPanel ;
+    yawl:hasField yawl:SessionBean_messagePanel ;
+    yawl:hasField yawl:SessionBean_orgDataListLabelText ;
+    yawl:hasField yawl:SessionBean_orgDataBelongsLabelText ;
+    yawl:hasField yawl:SessionBean_orgDataGroupLabelText ;
+    yawl:hasField yawl:SessionBean_nhResourceListLabelText ;
+    yawl:hasField yawl:SessionBean_nhResourceCategoryLabelText ;
+    yawl:hasField yawl:SessionBean_addInstanceParamVal ;
+    yawl:hasField yawl:SessionBean_addInstanceParamName ;
+    yawl:hasField yawl:SessionBean_addInstanceItemID ;
+    yawl:hasField yawl:SessionBean_addInstanceHeader ;
+    yawl:hasField yawl:SessionBean_delayTimeRBSelected ;
+    yawl:hasField yawl:SessionBean_delayDateRBSelected ;
+    yawl:hasField yawl:SessionBean_delayDurationRBSelected ;
+    yawl:hasField yawl:SessionBean_teamRBSelected ;
+    yawl:hasField yawl:SessionBean_orgGroupRBSelected ;
+    yawl:hasField yawl:SessionBean_selectedTeamQueueWIR ;
+    yawl:hasField yawl:SessionBean_resourceState ;
+    yawl:hasField yawl:SessionBean_pnlUploadBlockout ;
+    yawl:hasField yawl:SessionBean_orgDataUploadPanelVisible ;
+    yawl:hasField yawl:SessionBean_delayedLaunchPanelVisible ;
+    yawl:hasField yawl:SessionBean_delaySeconds ;
+    yawl:hasField yawl:SessionBean_delayDate ;
+    yawl:hasField yawl:SessionBean_delayDuration ;
+    yawl:hasField yawl:SessionBean_delayValueError ;
+    yawl:hasField yawl:SessionBean_visualiserReferred ;
+    yawl:hasField yawl:SessionBean_visualiserEditedWIR ;
+    yawl:hasField yawl:SessionBean_rssUserAlreadyLoggedOn ;
+    yawl:hasField yawl:SessionBean_formViewerInstance ;
+    yawl:hasField yawl:SessionBean_rssFormWIR ;
+    yawl:hasField yawl:SessionBean_rssFormDisplay ;
+    yawl:hasField yawl:SessionBean_rssFormCloseAttempted ;
+    yawl:hasField yawl:SessionBean_addClientAccountMode ;
+    yawl:hasField yawl:SessionBean_orgDataMembers ;
+    yawl:hasField yawl:SessionBean_showYAWLBanner ;
+    yawl:hasField yawl:SessionBean_subCatAddMode ;
+    yawl:hasField yawl:SessionBean_categoryMembers ;
+    yawl:hasField yawl:SessionBean_selectedNonHumanResource ;
+    yawl:hasField yawl:SessionBean_menuBarCount ;
+    yawl:hasField yawl:SessionBean_calendarRows ;
+    yawl:hasField yawl:SessionBean_selectedCalendarRowIndex ;
+    yawl:hasField yawl:SessionBean_selectedCalMgtDate ;
+    yawl:hasField yawl:SessionBean_sdf ;
+    yawl:hasField yawl:SessionBean_calMgtMinDate ;
+    yawl:hasField yawl:SessionBean_calMgtMaxDate ;
+    yawl:hasField yawl:SessionBean_calFilterSelection ;
+    yawl:hasField yawl:SessionBean_calResourceSelection ;
+    yawl:hasField yawl:SessionBean__calLogger ;
+    yawl:hasField yawl:SessionBean_selectedDurationDate ;
+    yawl:hasField yawl:SessionBean_addCalendarRowMode ;
+    yawl:hasField yawl:SessionBean_calEditedResourceName ;
+    .
+
+
+# Method: SessionBean._init
+yawl:SessionBean__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SessionBean.getApplicationBean
+yawl:SessionBean_getApplicationBean_2 a yawl:Method ;
+    rdfs:label "getApplicationBean" ;
+    yawl:returnType "ApplicationBean" ;
+    yawl:signature "ApplicationBean getApplicationBean()" ;
+    rdfs:comment """@return a reference to the application data bean.""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: SessionBean.init
+yawl:SessionBean_init_3 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.passivate
+yawl:SessionBean_passivate_4 a yawl:Method ;
+    rdfs:label "passivate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void passivate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.activate
+yawl:SessionBean_activate_5 a yawl:Method ;
+    rdfs:label "activate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void activate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.destroy
+yawl:SessionBean_destroy_6 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getScript
+yawl:SessionBean_getScript_7 a yawl:Method ;
+    rdfs:label "getScript" ;
+    yawl:returnType "Script" ;
+    yawl:signature "Script getScript()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setScript
+yawl:SessionBean_setScript_8 a yawl:Method ;
+    rdfs:label "setScript" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setScript(Script s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getBtnRefresh
+yawl:SessionBean_getBtnRefresh_9 a yawl:Method ;
+    rdfs:label "getBtnRefresh" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnRefresh()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setBtnRefresh
+yawl:SessionBean_setBtnRefresh_10 a yawl:Method ;
+    rdfs:label "setBtnRefresh" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnRefresh(Button btn)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getUserid
+yawl:SessionBean_getUserid_11 a yawl:Method ;
+    rdfs:label "getUserid" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUserid()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setUserid
+yawl:SessionBean_setUserid_12 a yawl:Method ;
+    rdfs:label "setUserid" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUserid(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getSessionhandle
+yawl:SessionBean_getSessionhandle_13 a yawl:Method ;
+    rdfs:label "getSessionhandle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSessionhandle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setSessionhandle
+yawl:SessionBean_setSessionhandle_14 a yawl:Method ;
+    rdfs:label "setSessionhandle" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSessionhandle(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getParticipant
+yawl:SessionBean_getParticipant_15 a yawl:Method ;
+    rdfs:label "getParticipant" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant getParticipant()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setParticipant
+yawl:SessionBean_setParticipant_16 a yawl:Method ;
+    rdfs:label "setParticipant" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setParticipant(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setUserName
+yawl:SessionBean_setUserName_17 a yawl:Method ;
+    rdfs:label "setUserName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUserName(String userName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getUserName
+yawl:SessionBean_getUserName_18 a yawl:Method ;
+    rdfs:label "getUserName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUserName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getAdminQueueSet
+yawl:SessionBean_getAdminQueueSet_19 a yawl:Method ;
+    rdfs:label "getAdminQueueSet" ;
+    yawl:returnType "QueueSet" ;
+    yawl:signature "QueueSet getAdminQueueSet()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setAdminQueueSet
+yawl:SessionBean_setAdminQueueSet_20 a yawl:Method ;
+    rdfs:label "setAdminQueueSet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAdminQueueSet(QueueSet qSet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getQueueSet
+yawl:SessionBean_getQueueSet_21 a yawl:Method ;
+    rdfs:label "getQueueSet" ;
+    yawl:returnType "QueueSet" ;
+    yawl:signature "QueueSet getQueueSet()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setQueueSet
+yawl:SessionBean_setQueueSet_22 a yawl:Method ;
+    rdfs:label "setQueueSet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setQueueSet(QueueSet qSet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getQueue
+yawl:SessionBean_getQueue_23 a yawl:Method ;
+    rdfs:label "getQueue" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getQueue(int qType)" ;
+    rdfs:comment """@return the set of wir's for the queue passed""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getQueueSize
+yawl:SessionBean_getQueueSize_24 a yawl:Method ;
+    rdfs:label "getQueueSize" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getQueueSize(int qType)" ;
+    rdfs:comment """@return the number of workitems in the queue passed""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.refreshQueue
+yawl:SessionBean_refreshQueue_25 a yawl:Method ;
+    rdfs:label "refreshQueue" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set refreshQueue(int qType)" ;
+    rdfs:comment """Updates the queue data members (ie participant or admin queues)""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getExternalSessionID
+yawl:SessionBean_getExternalSessionID_26 a yawl:Method ;
+    rdfs:label "getExternalSessionID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getExternalSessionID()" ;
+    rdfs:comment """@return the id of the external http session""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getExternalSession
+yawl:SessionBean_getExternalSession_27 a yawl:Method ;
+    rdfs:label "getExternalSession" ;
+    yawl:returnType "HttpSession" ;
+    yawl:signature "HttpSession getExternalSession()" ;
+    rdfs:comment """@return the external http session""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getDefaultSessionTimeoutValue
+yawl:SessionBean_getDefaultSessionTimeoutValue_28 a yawl:Method ;
+    rdfs:label "getDefaultSessionTimeoutValue" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getDefaultSessionTimeoutValue()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setDefaultSessionTimeoutValue
+yawl:SessionBean_setDefaultSessionTimeoutValue_29 a yawl:Method ;
+    rdfs:label "setDefaultSessionTimeoutValue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDefaultSessionTimeoutValue(int value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.resetSessionTimeout
+yawl:SessionBean_resetSessionTimeout_30 a yawl:Method ;
+    rdfs:label "resetSessionTimeout" ;
+    yawl:returnType "void" ;
+    yawl:signature "void resetSessionTimeout()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isSessionTimeoutValueChanged
+yawl:SessionBean_isSessionTimeoutValueChanged_31 a yawl:Method ;
+    rdfs:label "isSessionTimeoutValueChanged" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isSessionTimeoutValueChanged()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setSessionTimeoutValueChanged
+yawl:SessionBean_setSessionTimeoutValueChanged_32 a yawl:Method ;
+    rdfs:label "setSessionTimeoutValueChanged" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSessionTimeoutValueChanged(boolean changed)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.hasNavigationBegun
+yawl:SessionBean_hasNavigationBegun_33 a yawl:Method ;
+    rdfs:label "hasNavigationBegun" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasNavigationBegun()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getActivePage
+yawl:SessionBean_getActivePage_34 a yawl:Method ;
+    rdfs:label "getActivePage" ;
+    yawl:returnType "ApplicationBean" ;
+    yawl:signature "ApplicationBean getActivePage()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setActivePage
+yawl:SessionBean_setActivePage_35 a yawl:Method ;
+    rdfs:label "setActivePage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setActivePage(ApplicationBean page)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.dispatchToActivePage
+yawl:SessionBean_dispatchToActivePage_36 a yawl:Method ;
+    rdfs:label "dispatchToActivePage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void dispatchToActivePage()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getDynFormType
+yawl:SessionBean_getDynFormType_37 a yawl:Method ;
+    rdfs:label "getDynFormType" ;
+    yawl:returnType "ApplicationBean" ;
+    yawl:signature "ApplicationBean getDynFormType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setDynFormType
+yawl:SessionBean_setDynFormType_38 a yawl:Method ;
+    rdfs:label "setDynFormType" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDynFormType(ApplicationBean type)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getDynFormFactoryInstance
+yawl:SessionBean_getDynFormFactoryInstance_39 a yawl:Method ;
+    rdfs:label "getDynFormFactoryInstance" ;
+    yawl:returnType "DynFormFactory" ;
+    yawl:signature "DynFormFactory getDynFormFactoryInstance()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getWorklistOptions
+yawl:SessionBean_getWorklistOptions_40 a yawl:Method ;
+    rdfs:label "getWorklistOptions" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getWorklistOptions()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getLoadedSpecListOptions
+yawl:SessionBean_getLoadedSpecListOptions_41 a yawl:Method ;
+    rdfs:label "getLoadedSpecListOptions" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getLoadedSpecListOptions()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getRunningCaseListOptions
+yawl:SessionBean_getRunningCaseListOptions_42 a yawl:Method ;
+    rdfs:label "getRunningCaseListOptions" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getRunningCaseListOptions()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getSelectUserListOptions
+yawl:SessionBean_getSelectUserListOptions_43 a yawl:Method ;
+    rdfs:label "getSelectUserListOptions" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getSelectUserListOptions()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getOwnedResourceAttributes
+yawl:SessionBean_getOwnedResourceAttributes_44 a yawl:Method ;
+    rdfs:label "getOwnedResourceAttributes" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getOwnedResourceAttributes()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getAvailableResourceAttributes
+yawl:SessionBean_getAvailableResourceAttributes_45 a yawl:Method ;
+    rdfs:label "getAvailableResourceAttributes" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getAvailableResourceAttributes()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getPiledTasks
+yawl:SessionBean_getPiledTasks_46 a yawl:Method ;
+    rdfs:label "getPiledTasks" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getPiledTasks()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getChainedCases
+yawl:SessionBean_getChainedCases_47 a yawl:Method ;
+    rdfs:label "getChainedCases" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getChainedCases()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getOrgDataOptions
+yawl:SessionBean_getOrgDataOptions_48 a yawl:Method ;
+    rdfs:label "getOrgDataOptions" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getOrgDataOptions()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getOrgDataBelongsItems
+yawl:SessionBean_getOrgDataBelongsItems_49 a yawl:Method ;
+    rdfs:label "getOrgDataBelongsItems" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getOrgDataBelongsItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getOrgDataGroupItems
+yawl:SessionBean_getOrgDataGroupItems_50 a yawl:Method ;
+    rdfs:label "getOrgDataGroupItems" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getOrgDataGroupItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getNhResourcesOptions
+yawl:SessionBean_getNhResourcesOptions_51 a yawl:Method ;
+    rdfs:label "getNhResourcesOptions" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getNhResourcesOptions()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getNhResourcesCategoryItems
+yawl:SessionBean_getNhResourcesCategoryItems_52 a yawl:Method ;
+    rdfs:label "getNhResourcesCategoryItems" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getNhResourcesCategoryItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getNhResourcesSubcategoryItems
+yawl:SessionBean_getNhResourcesSubcategoryItems_53 a yawl:Method ;
+    rdfs:label "getNhResourcesSubcategoryItems" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getNhResourcesSubcategoryItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setWorklistOptions
+yawl:SessionBean_setWorklistOptions_54 a yawl:Method ;
+    rdfs:label "setWorklistOptions" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setWorklistOptions(Option options)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setLoadedSpecListOptions
+yawl:SessionBean_setLoadedSpecListOptions_55 a yawl:Method ;
+    rdfs:label "setLoadedSpecListOptions" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLoadedSpecListOptions(Option options)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setRunningCaseListOptions
+yawl:SessionBean_setRunningCaseListOptions_56 a yawl:Method ;
+    rdfs:label "setRunningCaseListOptions" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRunningCaseListOptions(Option options)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setSelectUserListOptions
+yawl:SessionBean_setSelectUserListOptions_57 a yawl:Method ;
+    rdfs:label "setSelectUserListOptions" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSelectUserListOptions(Option options)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setOwnedResourceAttributes
+yawl:SessionBean_setOwnedResourceAttributes_58 a yawl:Method ;
+    rdfs:label "setOwnedResourceAttributes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOwnedResourceAttributes(Option attributes)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setAvailableResourceAttributes
+yawl:SessionBean_setAvailableResourceAttributes_59 a yawl:Method ;
+    rdfs:label "setAvailableResourceAttributes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAvailableResourceAttributes(Option attributes)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setPiledTasks
+yawl:SessionBean_setPiledTasks_60 a yawl:Method ;
+    rdfs:label "setPiledTasks" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPiledTasks(Option options)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setChainedCases
+yawl:SessionBean_setChainedCases_61 a yawl:Method ;
+    rdfs:label "setChainedCases" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setChainedCases(Option options)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setOrgDataOptions
+yawl:SessionBean_setOrgDataOptions_62 a yawl:Method ;
+    rdfs:label "setOrgDataOptions" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOrgDataOptions(Option orgDataOptions)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setOrgDataBelongsItems
+yawl:SessionBean_setOrgDataBelongsItems_63 a yawl:Method ;
+    rdfs:label "setOrgDataBelongsItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOrgDataBelongsItems(Option orgDataBelongsItems)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setOrgDataGroupItems
+yawl:SessionBean_setOrgDataGroupItems_64 a yawl:Method ;
+    rdfs:label "setOrgDataGroupItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOrgDataGroupItems(Option orgDataGroupItems)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setNhResourcesOptions
+yawl:SessionBean_setNhResourcesOptions_65 a yawl:Method ;
+    rdfs:label "setNhResourcesOptions" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNhResourcesOptions(Option nhResourcesOptions)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setNhResourcesCategoryItems
+yawl:SessionBean_setNhResourcesCategoryItems_66 a yawl:Method ;
+    rdfs:label "setNhResourcesCategoryItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNhResourcesCategoryItems(Option nhResourcesCategoryItems)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setNhResourcesSubcategoryItems
+yawl:SessionBean_setNhResourcesSubcategoryItems_67 a yawl:Method ;
+    rdfs:label "setNhResourcesSubcategoryItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNhResourcesSubcategoryItems(Option nhResourcesSubcategoryItems)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getNhResourcesSubcategoryList
+yawl:SessionBean_getNhResourcesSubcategoryList_68 a yawl:Method ;
+    rdfs:label "getNhResourcesSubcategoryList" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getNhResourcesSubcategoryList()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setNhResourcesSubcategoryList
+yawl:SessionBean_setNhResourcesSubcategoryList_69 a yawl:Method ;
+    rdfs:label "setNhResourcesSubcategoryList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNhResourcesSubcategoryList(Option nhResourcesSubcategoryList)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getWorklistChoice
+yawl:SessionBean_getWorklistChoice_70 a yawl:Method ;
+    rdfs:label "getWorklistChoice" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorklistChoice()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getLoadedSpecListChoice
+yawl:SessionBean_getLoadedSpecListChoice_71 a yawl:Method ;
+    rdfs:label "getLoadedSpecListChoice" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getLoadedSpecListChoice()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getRunningCaseListChoice
+yawl:SessionBean_getRunningCaseListChoice_72 a yawl:Method ;
+    rdfs:label "getRunningCaseListChoice" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRunningCaseListChoice()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getSelectUserListChoice
+yawl:SessionBean_getSelectUserListChoice_73 a yawl:Method ;
+    rdfs:label "getSelectUserListChoice" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSelectUserListChoice()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getOrgDataChoice
+yawl:SessionBean_getOrgDataChoice_74 a yawl:Method ;
+    rdfs:label "getOrgDataChoice" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOrgDataChoice()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getPiledTasksChoice
+yawl:SessionBean_getPiledTasksChoice_75 a yawl:Method ;
+    rdfs:label "getPiledTasksChoice" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPiledTasksChoice()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getChainedCasesChoice
+yawl:SessionBean_getChainedCasesChoice_76 a yawl:Method ;
+    rdfs:label "getChainedCasesChoice" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getChainedCasesChoice()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getOrgDataBelongsChoice
+yawl:SessionBean_getOrgDataBelongsChoice_77 a yawl:Method ;
+    rdfs:label "getOrgDataBelongsChoice" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOrgDataBelongsChoice()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getOrgDataGroupChoice
+yawl:SessionBean_getOrgDataGroupChoice_78 a yawl:Method ;
+    rdfs:label "getOrgDataGroupChoice" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOrgDataGroupChoice()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getNhResourcesChoice
+yawl:SessionBean_getNhResourcesChoice_79 a yawl:Method ;
+    rdfs:label "getNhResourcesChoice" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNhResourcesChoice()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getNhResourcesCategoryChoice
+yawl:SessionBean_getNhResourcesCategoryChoice_80 a yawl:Method ;
+    rdfs:label "getNhResourcesCategoryChoice" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNhResourcesCategoryChoice()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getNhResourcesSubcategoryChoice
+yawl:SessionBean_getNhResourcesSubcategoryChoice_81 a yawl:Method ;
+    rdfs:label "getNhResourcesSubcategoryChoice" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNhResourcesSubcategoryChoice()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setWorklistChoice
+yawl:SessionBean_setWorklistChoice_82 a yawl:Method ;
+    rdfs:label "setWorklistChoice" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setWorklistChoice(String choice)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setRunningCaseListChoice
+yawl:SessionBean_setRunningCaseListChoice_83 a yawl:Method ;
+    rdfs:label "setRunningCaseListChoice" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRunningCaseListChoice(String choice)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setSelectUserListChoice
+yawl:SessionBean_setSelectUserListChoice_84 a yawl:Method ;
+    rdfs:label "setSelectUserListChoice" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSelectUserListChoice(String choice)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setOrgDataChoice
+yawl:SessionBean_setOrgDataChoice_85 a yawl:Method ;
+    rdfs:label "setOrgDataChoice" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOrgDataChoice(String choice)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setPiledTasksChoice
+yawl:SessionBean_setPiledTasksChoice_86 a yawl:Method ;
+    rdfs:label "setPiledTasksChoice" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPiledTasksChoice(String choice)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setChainedCasesChoice
+yawl:SessionBean_setChainedCasesChoice_87 a yawl:Method ;
+    rdfs:label "setChainedCasesChoice" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setChainedCasesChoice(String choice)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setOrgDataBelongsChoice
+yawl:SessionBean_setOrgDataBelongsChoice_88 a yawl:Method ;
+    rdfs:label "setOrgDataBelongsChoice" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOrgDataBelongsChoice(String choice)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setOrgDataGroupChoice
+yawl:SessionBean_setOrgDataGroupChoice_89 a yawl:Method ;
+    rdfs:label "setOrgDataGroupChoice" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOrgDataGroupChoice(String choice)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setNhResourcesChoice
+yawl:SessionBean_setNhResourcesChoice_90 a yawl:Method ;
+    rdfs:label "setNhResourcesChoice" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNhResourcesChoice(String choice)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setNhResourcesCategoryChoice
+yawl:SessionBean_setNhResourcesCategoryChoice_91 a yawl:Method ;
+    rdfs:label "setNhResourcesCategoryChoice" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNhResourcesCategoryChoice(String choice)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setNhResourcesSubcategoryChoice
+yawl:SessionBean_setNhResourcesSubcategoryChoice_92 a yawl:Method ;
+    rdfs:label "setNhResourcesSubcategoryChoice" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNhResourcesSubcategoryChoice(String choice)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setLoadedSpecListChoice
+yawl:SessionBean_setLoadedSpecListChoice_93 a yawl:Method ;
+    rdfs:label "setLoadedSpecListChoice" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLoadedSpecListChoice(SpecificationData choice)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setDirectToMeChoice
+yawl:SessionBean_setDirectToMeChoice_94 a yawl:Method ;
+    rdfs:label "setDirectToMeChoice" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDirectToMeChoice(String choice)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getDirectToMeChoice
+yawl:SessionBean_getDirectToMeChoice_95 a yawl:Method ;
+    rdfs:label "getDirectToMeChoice" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDirectToMeChoice()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getLbxUserList
+yawl:SessionBean_getLbxUserList_96 a yawl:Method ;
+    rdfs:label "getLbxUserList" ;
+    yawl:returnType "Listbox" ;
+    yawl:signature "Listbox getLbxUserList()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setLbxUserList
+yawl:SessionBean_setLbxUserList_97 a yawl:Method ;
+    rdfs:label "setLbxUserList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLbxUserList(Listbox l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getSelectUserListBoxSelections
+yawl:SessionBean_getSelectUserListBoxSelections_98 a yawl:Method ;
+    rdfs:label "getSelectUserListBoxSelections" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object getSelectUserListBoxSelections()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.configureSelectUserListBox
+yawl:SessionBean_configureSelectUserListBox_99 a yawl:Method ;
+    rdfs:label "configureSelectUserListBox" ;
+    yawl:returnType "void" ;
+    yawl:signature "void configureSelectUserListBox(String action)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getLbxRunningCases
+yawl:SessionBean_getLbxRunningCases_100 a yawl:Method ;
+    rdfs:label "getLbxRunningCases" ;
+    yawl:returnType "Listbox" ;
+    yawl:signature "Listbox getLbxRunningCases()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setLbxRunningCases
+yawl:SessionBean_setLbxRunningCases_101 a yawl:Method ;
+    rdfs:label "setLbxRunningCases" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLbxRunningCases(Listbox l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getRunningCasesListBoxSelections
+yawl:SessionBean_getRunningCasesListBoxSelections_102 a yawl:Method ;
+    rdfs:label "getRunningCasesListBoxSelections" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object getRunningCasesListBoxSelections()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.configureRunningCasesListBox
+yawl:SessionBean_configureRunningCasesListBox_103 a yawl:Method ;
+    rdfs:label "configureRunningCasesListBox" ;
+    yawl:returnType "void" ;
+    yawl:signature "void configureRunningCasesListBox()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getRunningCaseListChoices
+yawl:SessionBean_getRunningCaseListChoices_104 a yawl:Method ;
+    rdfs:label "getRunningCaseListChoices" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object getRunningCaseListChoices()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setRunningCaseListChoices
+yawl:SessionBean_setRunningCaseListChoices_105 a yawl:Method ;
+    rdfs:label "setRunningCaseListChoices" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRunningCaseListChoices(Object list)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getRunningCasesCaption
+yawl:SessionBean_getRunningCasesCaption_106 a yawl:Method ;
+    rdfs:label "getRunningCasesCaption" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRunningCasesCaption()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getSelectUserListChoices
+yawl:SessionBean_getSelectUserListChoices_107 a yawl:Method ;
+    rdfs:label "getSelectUserListChoices" ;
+    yawl:returnType "ArrayList" ;
+    yawl:signature "ArrayList getSelectUserListChoices()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setSelectUserListChoices
+yawl:SessionBean_setSelectUserListChoices_108 a yawl:Method ;
+    rdfs:label "setSelectUserListChoices" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSelectUserListChoices(ArrayList list)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setChosenWIR
+yawl:SessionBean_setChosenWIR_109 a yawl:Method ;
+    rdfs:label "setChosenWIR" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setChosenWIR(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getChosenWIR
+yawl:SessionBean_getChosenWIR_110 a yawl:Method ;
+    rdfs:label "getChosenWIR" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord getChosenWIR(int qType)" ;
+    rdfs:comment """@return the WorkItemRecord for the id selected in the list""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isFirstWorkItemChosen
+yawl:SessionBean_isFirstWorkItemChosen_111 a yawl:Method ;
+    rdfs:label "isFirstWorkItemChosen" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isFirstWorkItemChosen()" ;
+    rdfs:comment """@return true if the chosen item in the list is also the first listed item""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.doLogout
+yawl:SessionBean_doLogout_112 a yawl:Method ;
+    rdfs:label "doLogout" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doLogout()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.checkLogon
+yawl:SessionBean_checkLogon_113 a yawl:Method ;
+    rdfs:label "checkLogon" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkLogon()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isLoggedIn
+yawl:SessionBean_isLoggedIn_114 a yawl:Method ;
+    rdfs:label "isLoggedIn" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isLoggedIn()" ;
+    rdfs:comment """@return whether the current session is valid""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isAdminSession
+yawl:SessionBean_isAdminSession_115 a yawl:Method ;
+    rdfs:label "isAdminSession" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAdminSession()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getSessionPrivileges
+yawl:SessionBean_getSessionPrivileges_116 a yawl:Method ;
+    rdfs:label "getSessionPrivileges" ;
+    yawl:returnType "UserPrivileges" ;
+    yawl:signature "UserPrivileges getSessionPrivileges()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.gotoPage
+yawl:SessionBean_gotoPage_117 a yawl:Method ;
+    rdfs:label "gotoPage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void gotoPage(String page)" ;
+    rdfs:comment """redirects to the specified page @param page the name of the page to go to""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.redirectIfActiveSession
+yawl:SessionBean_redirectIfActiveSession_118 a yawl:Method ;
+    rdfs:label "redirectIfActiveSession" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean redirectIfActiveSession()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isCaseLaunch
+yawl:SessionBean_isCaseLaunch_119 a yawl:Method ;
+    rdfs:label "isCaseLaunch" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isCaseLaunch()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setCaseLaunch
+yawl:SessionBean_setCaseLaunch_120 a yawl:Method ;
+    rdfs:label "setCaseLaunch" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCaseLaunch(boolean caseLaunch)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isDelegating
+yawl:SessionBean_isDelegating_121 a yawl:Method ;
+    rdfs:label "isDelegating" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isDelegating()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setDelegating
+yawl:SessionBean_setDelegating_122 a yawl:Method ;
+    rdfs:label "setDelegating" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDelegating(boolean delegating)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isReallocating
+yawl:SessionBean_isReallocating_123 a yawl:Method ;
+    rdfs:label "isReallocating" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isReallocating()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setReallocating
+yawl:SessionBean_setReallocating_124 a yawl:Method ;
+    rdfs:label "setReallocating" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setReallocating(boolean reallocating)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isReallocatingStateful
+yawl:SessionBean_isReallocatingStateful_125 a yawl:Method ;
+    rdfs:label "isReallocatingStateful" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isReallocatingStateful()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setReallocatingStateful
+yawl:SessionBean_setReallocatingStateful_126 a yawl:Method ;
+    rdfs:label "setReallocatingStateful" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setReallocatingStateful(boolean reallocatingStateful)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isCustomFormPost
+yawl:SessionBean_isCustomFormPost_127 a yawl:Method ;
+    rdfs:label "isCustomFormPost" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isCustomFormPost()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setCustomFormPost
+yawl:SessionBean_setCustomFormPost_128 a yawl:Method ;
+    rdfs:label "setCustomFormPost" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCustomFormPost(boolean flag)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getTitle
+yawl:SessionBean_getTitle_129 a yawl:Method ;
+    rdfs:label "getTitle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTitle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setTitle
+yawl:SessionBean_setTitle_130 a yawl:Method ;
+    rdfs:label "setTitle" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTitle(String title)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getMnuSelectorStyle
+yawl:SessionBean_getMnuSelectorStyle_131 a yawl:Method ;
+    rdfs:label "getMnuSelectorStyle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMnuSelectorStyle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setMnuSelectorStyle
+yawl:SessionBean_setMnuSelectorStyle_132 a yawl:Method ;
+    rdfs:label "setMnuSelectorStyle" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMnuSelectorStyle(String mnuSelectorStyle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getUserListFormHeaderText
+yawl:SessionBean_getUserListFormHeaderText_133 a yawl:Method ;
+    rdfs:label "getUserListFormHeaderText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUserListFormHeaderText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setUserListFormHeaderText
+yawl:SessionBean_setUserListFormHeaderText_134 a yawl:Method ;
+    rdfs:label "setUserListFormHeaderText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUserListFormHeaderText(String userListFormHeaderText)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getParticipantPiledTasks
+yawl:SessionBean_getParticipantPiledTasks_135 a yawl:Method ;
+    rdfs:label "getParticipantPiledTasks" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getParticipantPiledTasks()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SessionBean.formatPiledTaskString
+yawl:SessionBean_formatPiledTaskString_136 a yawl:Method ;
+    rdfs:label "formatPiledTaskString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String formatPiledTaskString(ResourceMap map)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SessionBean.getResourceMapFromLabel
+yawl:SessionBean_getResourceMapFromLabel_137 a yawl:Method ;
+    rdfs:label "getResourceMapFromLabel" ;
+    yawl:returnType "ResourceMap" ;
+    yawl:signature "ResourceMap getResourceMapFromLabel(String label)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getParticipantChainedCases
+yawl:SessionBean_getParticipantChainedCases_138 a yawl:Method ;
+    rdfs:label "getParticipantChainedCases" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getParticipantChainedCases()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SessionBean.getLoadedSpecs
+yawl:SessionBean_getLoadedSpecs_139 a yawl:Method ;
+    rdfs:label "getLoadedSpecs" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getLoadedSpecs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setLoadedSpecs
+yawl:SessionBean_setLoadedSpecs_140 a yawl:Method ;
+    rdfs:label "setLoadedSpecs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLoadedSpecs(List specs)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.refreshLoadedSpecs
+yawl:SessionBean_refreshLoadedSpecs_141 a yawl:Method ;
+    rdfs:label "refreshLoadedSpecs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void refreshLoadedSpecs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getLoadedSpecsCaption
+yawl:SessionBean_getLoadedSpecsCaption_142 a yawl:Method ;
+    rdfs:label "getLoadedSpecsCaption" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLoadedSpecsCaption()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getLoadedSpec
+yawl:SessionBean_getLoadedSpec_143 a yawl:Method ;
+    rdfs:label "getLoadedSpec" ;
+    yawl:returnType "SpecificationData" ;
+    yawl:signature "SpecificationData getLoadedSpec(int listIndex)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getLatestLoadedSpecVersion
+yawl:SessionBean_getLatestLoadedSpecVersion_144 a yawl:Method ;
+    rdfs:label "getLatestLoadedSpecVersion" ;
+    yawl:returnType "YSpecVersion" ;
+    yawl:signature "YSpecVersion getLatestLoadedSpecVersion(SpecificationData spec)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isLoadedSpec
+yawl:SessionBean_isLoadedSpec_145 a yawl:Method ;
+    rdfs:label "isLoadedSpec" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isLoadedSpec(String uri, String version, String documentation)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getCaseSchema
+yawl:SessionBean_getCaseSchema_146 a yawl:Method ;
+    rdfs:label "getCaseSchema" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseSchema()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getTaskSchema
+yawl:SessionBean_getTaskSchema_147 a yawl:Method ;
+    rdfs:label "getTaskSchema" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskSchema(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getAdminQueueAssignedList
+yawl:SessionBean_getAdminQueueAssignedList_148 a yawl:Method ;
+    rdfs:label "getAdminQueueAssignedList" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getAdminQueueAssignedList()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setAdminQueueAssignedList
+yawl:SessionBean_setAdminQueueAssignedList_149 a yawl:Method ;
+    rdfs:label "setAdminQueueAssignedList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAdminQueueAssignedList(Option list)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.populateAdminQueueAssignedList
+yawl:SessionBean_populateAdminQueueAssignedList_150 a yawl:Method ;
+    rdfs:label "populateAdminQueueAssignedList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void populateAdminQueueAssignedList(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getFirstAssignedToID
+yawl:SessionBean_getFirstAssignedToID_151 a yawl:Method ;
+    rdfs:label "getFirstAssignedToID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFirstAssignedToID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getAssignedToText
+yawl:SessionBean_getAssignedToText_152 a yawl:Method ;
+    rdfs:label "getAssignedToText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAssignedToText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.orgDataIsRefreshing
+yawl:SessionBean_orgDataIsRefreshing_153 a yawl:Method ;
+    rdfs:label "orgDataIsRefreshing" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean orgDataIsRefreshing()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getAdminQueueAction
+yawl:SessionBean_getAdminQueueAction_154 a yawl:Method ;
+    rdfs:label "getAdminQueueAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAdminQueueAction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setAdminQueueAction
+yawl:SessionBean_setAdminQueueAction_155 a yawl:Method ;
+    rdfs:label "setAdminQueueAction" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAdminQueueAction(String adminQueueAction)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.performAdminQueueAction
+yawl:SessionBean_performAdminQueueAction_156 a yawl:Method ;
+    rdfs:label "performAdminQueueAction" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean performAdminQueueAction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.performAdminQueueAction
+yawl:SessionBean_performAdminQueueAction_157 a yawl:Method ;
+    rdfs:label "performAdminQueueAction" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean performAdminQueueAction(String action)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getNavigateTo
+yawl:SessionBean_getNavigateTo_158 a yawl:Method ;
+    rdfs:label "getNavigateTo" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNavigateTo()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setNavigateTo
+yawl:SessionBean_setNavigateTo_159 a yawl:Method ;
+    rdfs:label "setNavigateTo" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNavigateTo(String navigateTo)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isRedirectToMe
+yawl:SessionBean_isRedirectToMe_160 a yawl:Method ;
+    rdfs:label "isRedirectToMe" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isRedirectToMe()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setRedirectToMe
+yawl:SessionBean_setRedirectToMe_161 a yawl:Method ;
+    rdfs:label "setRedirectToMe" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRedirectToMe(boolean redirectToMe)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getOrgMgtMode
+yawl:SessionBean_getOrgMgtMode_162 a yawl:Method ;
+    rdfs:label "getOrgMgtMode" ;
+    yawl:returnType "Mode" ;
+    yawl:signature "Mode getOrgMgtMode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setOrgMgtMode
+yawl:SessionBean_setOrgMgtMode_163 a yawl:Method ;
+    rdfs:label "setOrgMgtMode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOrgMgtMode(Mode mode)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getNhrMgtMode
+yawl:SessionBean_getNhrMgtMode_164 a yawl:Method ;
+    rdfs:label "getNhrMgtMode" ;
+    yawl:returnType "Mode" ;
+    yawl:signature "Mode getNhrMgtMode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setNhrMgtMode
+yawl:SessionBean_setNhrMgtMode_165 a yawl:Method ;
+    rdfs:label "setNhrMgtMode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNhrMgtMode(Mode mode)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getOrgDataParticipantList
+yawl:SessionBean_getOrgDataParticipantList_166 a yawl:Method ;
+    rdfs:label "getOrgDataParticipantList" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getOrgDataParticipantList()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getParticipantMap
+yawl:SessionBean_getParticipantMap_167 a yawl:Method ;
+    rdfs:label "getParticipantMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getParticipantMap()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SessionBean.setBlankStartOfParticipantList
+yawl:SessionBean_setBlankStartOfParticipantList_168 a yawl:Method ;
+    rdfs:label "setBlankStartOfParticipantList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBlankStartOfParticipantList(boolean b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setOrgDataParticipantList
+yawl:SessionBean_setOrgDataParticipantList_169 a yawl:Method ;
+    rdfs:label "setOrgDataParticipantList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOrgDataParticipantList(Option list)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.orgDataUpdated
+yawl:SessionBean_orgDataUpdated_170 a yawl:Method ;
+    rdfs:label "orgDataUpdated" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean orgDataUpdated(ResourceDataSet unit)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SessionBean.refreshOrgDataParticipantList
+yawl:SessionBean_refreshOrgDataParticipantList_171 a yawl:Method ;
+    rdfs:label "refreshOrgDataParticipantList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void refreshOrgDataParticipantList()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isAddParticipantMode
+yawl:SessionBean_isAddParticipantMode_172 a yawl:Method ;
+    rdfs:label "isAddParticipantMode" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAddParticipantMode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setAddParticipantMode
+yawl:SessionBean_setAddParticipantMode_173 a yawl:Method ;
+    rdfs:label "setAddParticipantMode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAddParticipantMode(boolean addParticipantMode)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getAddedParticipant
+yawl:SessionBean_getAddedParticipant_174 a yawl:Method ;
+    rdfs:label "getAddedParticipant" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant getAddedParticipant()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setAddedParticipant
+yawl:SessionBean_setAddedParticipant_175 a yawl:Method ;
+    rdfs:label "setAddedParticipant" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAddedParticipant(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getEditedParticipant
+yawl:SessionBean_getEditedParticipant_176 a yawl:Method ;
+    rdfs:label "getEditedParticipant" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant getEditedParticipant()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setEditedParticipantToNull
+yawl:SessionBean_setEditedParticipantToNull_177 a yawl:Method ;
+    rdfs:label "setEditedParticipantToNull" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEditedParticipantToNull()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setEditedParticipant
+yawl:SessionBean_setEditedParticipant_178 a yawl:Method ;
+    rdfs:label "setEditedParticipant" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant setEditedParticipant(String pid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.saveParticipantUpdates
+yawl:SessionBean_saveParticipantUpdates_179 a yawl:Method ;
+    rdfs:label "saveParticipantUpdates" ;
+    yawl:returnType "void" ;
+    yawl:signature "void saveParticipantUpdates(Participant cloned)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getFullResourceAttributeListPlusNil
+yawl:SessionBean_getFullResourceAttributeListPlusNil_180 a yawl:Method ;
+    rdfs:label "getFullResourceAttributeListPlusNil" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getFullResourceAttributeListPlusNil(String tab)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getFullResourceAttributeList
+yawl:SessionBean_getFullResourceAttributeList_181 a yawl:Method ;
+    rdfs:label "getFullResourceAttributeList" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getFullResourceAttributeList(String tab)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.sortOptions
+yawl:SessionBean_sortOptions_182 a yawl:Method ;
+    rdfs:label "sortOptions" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sortOptions(Option options)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SessionBean.getParticipantAttributeList
+yawl:SessionBean_getParticipantAttributeList_183 a yawl:Method ;
+    rdfs:label "getParticipantAttributeList" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getParticipantAttributeList(String tab, Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getSortedRoleList
+yawl:SessionBean_getSortedRoleList_184 a yawl:Method ;
+    rdfs:label "getSortedRoleList" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getSortedRoleList()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getRoleList
+yawl:SessionBean_getRoleList_185 a yawl:Method ;
+    rdfs:label "getRoleList" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getRoleList(Map roleMap)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SessionBean.getPositionList
+yawl:SessionBean_getPositionList_186 a yawl:Method ;
+    rdfs:label "getPositionList" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getPositionList(Map positionMap)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SessionBean.getCapabilityList
+yawl:SessionBean_getCapabilityList_187 a yawl:Method ;
+    rdfs:label "getCapabilityList" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getCapabilityList(Map capabilityMap)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SessionBean.getOrgGroupList
+yawl:SessionBean_getOrgGroupList_188 a yawl:Method ;
+    rdfs:label "getOrgGroupList" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getOrgGroupList(Map orgGroupMap)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SessionBean.getNhrItems
+yawl:SessionBean_getNhrItems_189 a yawl:Method ;
+    rdfs:label "getNhrItems" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getNhrItems(String tabName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getNhResourcesList
+yawl:SessionBean_getNhResourcesList_190 a yawl:Method ;
+    rdfs:label "getNhResourcesList" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getNhResourcesList()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getNhResourcesCategoryList
+yawl:SessionBean_getNhResourcesCategoryList_191 a yawl:Method ;
+    rdfs:label "getNhResourcesCategoryList" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getNhResourcesCategoryList()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.hasAtLeastOneNonHumanCategory
+yawl:SessionBean_hasAtLeastOneNonHumanCategory_192 a yawl:Method ;
+    rdfs:label "hasAtLeastOneNonHumanCategory" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasAtLeastOneNonHumanCategory()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getNhResourcesCategoryListExpanded
+yawl:SessionBean_getNhResourcesCategoryListExpanded_193 a yawl:Method ;
+    rdfs:label "getNhResourcesCategoryListExpanded" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getNhResourcesCategoryListExpanded()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.addSecondaryParticipant
+yawl:SessionBean_addSecondaryParticipant_194 a yawl:Method ;
+    rdfs:label "addSecondaryParticipant" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addSecondaryParticipant(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.addSecondaryRole
+yawl:SessionBean_addSecondaryRole_195 a yawl:Method ;
+    rdfs:label "addSecondaryRole" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addSecondaryRole(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.addSecondaryNHResource
+yawl:SessionBean_addSecondaryNHResource_196 a yawl:Method ;
+    rdfs:label "addSecondaryNHResource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addSecondaryNHResource(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.addSecondaryNHCategory
+yawl:SessionBean_addSecondaryNHCategory_197 a yawl:Method ;
+    rdfs:label "addSecondaryNHCategory" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addSecondaryNHCategory(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getSelectedSecondaryResources
+yawl:SessionBean_getSelectedSecondaryResources_198 a yawl:Method ;
+    rdfs:label "getSelectedSecondaryResources" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getSelectedSecondaryResources()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setSecondaryResources
+yawl:SessionBean_setSecondaryResources_199 a yawl:Method ;
+    rdfs:label "setSecondaryResources" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSecondaryResources(Option options)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.loadSecondaryResources
+yawl:SessionBean_loadSecondaryResources_200 a yawl:Method ;
+    rdfs:label "loadSecondaryResources" ;
+    yawl:returnType "void" ;
+    yawl:signature "void loadSecondaryResources()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getSecondaryResourcesItemID
+yawl:SessionBean_getSecondaryResourcesItemID_201 a yawl:Method ;
+    rdfs:label "getSecondaryResourcesItemID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSecondaryResourcesItemID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setSecondaryResourcesItemID
+yawl:SessionBean_setSecondaryResourcesItemID_202 a yawl:Method ;
+    rdfs:label "setSecondaryResourcesItemID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSecondaryResourcesItemID(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getSecondaryResourcesTitle
+yawl:SessionBean_getSecondaryResourcesTitle_203 a yawl:Method ;
+    rdfs:label "getSecondaryResourcesTitle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSecondaryResourcesTitle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.refreshSelectedSecondaryResourcesOptions
+yawl:SessionBean_refreshSelectedSecondaryResourcesOptions_204 a yawl:Method ;
+    rdfs:label "refreshSelectedSecondaryResourcesOptions" ;
+    yawl:returnType "void" ;
+    yawl:signature "void refreshSelectedSecondaryResourcesOptions()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.saveSelectedSecondaryResources
+yawl:SessionBean_saveSelectedSecondaryResources_205 a yawl:Method ;
+    rdfs:label "saveSelectedSecondaryResources" ;
+    yawl:returnType "void" ;
+    yawl:signature "void saveSelectedSecondaryResources()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.checkSelectedSecondaryResources
+yawl:SessionBean_checkSelectedSecondaryResources_206 a yawl:Method ;
+    rdfs:label "checkSelectedSecondaryResources" ;
+    yawl:returnType "List" ;
+    yawl:signature "List checkSelectedSecondaryResources()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.removeSelectedSecondaryResource
+yawl:SessionBean_removeSelectedSecondaryResource_207 a yawl:Method ;
+    rdfs:label "removeSelectedSecondaryResource" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeSelectedSecondaryResource()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getSelectedSecondaryResource
+yawl:SessionBean_getSelectedSecondaryResource_208 a yawl:Method ;
+    rdfs:label "getSelectedSecondaryResource" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSelectedSecondaryResource()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setSelectedSecondaryResource
+yawl:SessionBean_setSelectedSecondaryResource_209 a yawl:Method ;
+    rdfs:label "setSelectedSecondaryResource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSelectedSecondaryResource(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isOrgDataItemRemovedFlag
+yawl:SessionBean_isOrgDataItemRemovedFlag_210 a yawl:Method ;
+    rdfs:label "isOrgDataItemRemovedFlag" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isOrgDataItemRemovedFlag()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setOrgDataItemRemovedFlag
+yawl:SessionBean_setOrgDataItemRemovedFlag_211 a yawl:Method ;
+    rdfs:label "setOrgDataItemRemovedFlag" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOrgDataItemRemovedFlag(boolean flag)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isNhResourcesItemRemovedFlag
+yawl:SessionBean_isNhResourcesItemRemovedFlag_212 a yawl:Method ;
+    rdfs:label "isNhResourcesItemRemovedFlag" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isNhResourcesItemRemovedFlag()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setNhResourcesItemRemovedFlag
+yawl:SessionBean_setNhResourcesItemRemovedFlag_213 a yawl:Method ;
+    rdfs:label "setNhResourcesItemRemovedFlag" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNhResourcesItemRemovedFlag(boolean flag)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getActiveResourceAttributeTab
+yawl:SessionBean_getActiveResourceAttributeTab_214 a yawl:Method ;
+    rdfs:label "getActiveResourceAttributeTab" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getActiveResourceAttributeTab()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setActiveResourceAttributeTab
+yawl:SessionBean_setActiveResourceAttributeTab_215 a yawl:Method ;
+    rdfs:label "setActiveResourceAttributeTab" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setActiveResourceAttributeTab(String activeResourceAttributeTab)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.unselectResourceAttribute
+yawl:SessionBean_unselectResourceAttribute_216 a yawl:Method ;
+    rdfs:label "unselectResourceAttribute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void unselectResourceAttribute(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.unselectResourceAttribute
+yawl:SessionBean_unselectResourceAttribute_217 a yawl:Method ;
+    rdfs:label "unselectResourceAttribute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void unselectResourceAttribute(String id, Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.selectResourceAttribute
+yawl:SessionBean_selectResourceAttribute_218 a yawl:Method ;
+    rdfs:label "selectResourceAttribute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void selectResourceAttribute(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getParticipantForCurrentMode
+yawl:SessionBean_getParticipantForCurrentMode_219 a yawl:Method ;
+    rdfs:label "getParticipantForCurrentMode" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant getParticipantForCurrentMode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.selectResourceAttribute
+yawl:SessionBean_selectResourceAttribute_220 a yawl:Method ;
+    rdfs:label "selectResourceAttribute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void selectResourceAttribute(String id, Participant p)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SessionBean.resetParticipant
+yawl:SessionBean_resetParticipant_221 a yawl:Method ;
+    rdfs:label "resetParticipant" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant resetParticipant()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.addParticipant
+yawl:SessionBean_addParticipant_222 a yawl:Method ;
+    rdfs:label "addParticipant" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addParticipant(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.removeParticipant
+yawl:SessionBean_removeParticipant_223 a yawl:Method ;
+    rdfs:label "removeParticipant" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeParticipant(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getLblAgeText
+yawl:SessionBean_getLblAgeText_224 a yawl:Method ;
+    rdfs:label "getLblAgeText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLblAgeText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setLblAgeText
+yawl:SessionBean_setLblAgeText_225 a yawl:Method ;
+    rdfs:label "setLblAgeText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblAgeText(String text)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.updateWIRDoco
+yawl:SessionBean_updateWIRDoco_226 a yawl:Method ;
+    rdfs:label "updateWIRDoco" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateWIRDoco(String doco)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getInitSpecID
+yawl:SessionBean_getInitSpecID_227 a yawl:Method ;
+    rdfs:label "getInitSpecID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInitSpecID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setInitSpecID
+yawl:SessionBean_setInitSpecID_228 a yawl:Method ;
+    rdfs:label "setInitSpecID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setInitSpecID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getInitCaseID
+yawl:SessionBean_getInitCaseID_229 a yawl:Method ;
+    rdfs:label "getInitCaseID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInitCaseID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setInitCaseID
+yawl:SessionBean_setInitCaseID_230 a yawl:Method ;
+    rdfs:label "setInitCaseID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setInitCaseID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getInitTaskID
+yawl:SessionBean_getInitTaskID_231 a yawl:Method ;
+    rdfs:label "getInitTaskID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInitTaskID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setInitTaskID
+yawl:SessionBean_setInitTaskID_232 a yawl:Method ;
+    rdfs:label "setInitTaskID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setInitTaskID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getInitStatus
+yawl:SessionBean_getInitStatus_233 a yawl:Method ;
+    rdfs:label "getInitStatus" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInitStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setInitStatus
+yawl:SessionBean_setInitStatus_234 a yawl:Method ;
+    rdfs:label "setInitStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setInitStatus(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getInitAge
+yawl:SessionBean_getInitAge_235 a yawl:Method ;
+    rdfs:label "getInitAge" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInitAge()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setInitAge
+yawl:SessionBean_setInitAge_236 a yawl:Method ;
+    rdfs:label "setInitAge" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setInitAge(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getInitCreatedDate
+yawl:SessionBean_getInitCreatedDate_237 a yawl:Method ;
+    rdfs:label "getInitCreatedDate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInitCreatedDate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setInitCreatedDate
+yawl:SessionBean_setInitCreatedDate_238 a yawl:Method ;
+    rdfs:label "setInitCreatedDate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setInitCreatedDate(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getInitTabText
+yawl:SessionBean_getInitTabText_239 a yawl:Method ;
+    rdfs:label "getInitTabText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInitTabText(int n)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getInitOfferedTabText
+yawl:SessionBean_getInitOfferedTabText_240 a yawl:Method ;
+    rdfs:label "getInitOfferedTabText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInitOfferedTabText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getInitAllocatedTabText
+yawl:SessionBean_getInitAllocatedTabText_241 a yawl:Method ;
+    rdfs:label "getInitAllocatedTabText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInitAllocatedTabText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getInitStartedTabText
+yawl:SessionBean_getInitStartedTabText_242 a yawl:Method ;
+    rdfs:label "getInitStartedTabText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInitStartedTabText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getInitSuspendedTabText
+yawl:SessionBean_getInitSuspendedTabText_243 a yawl:Method ;
+    rdfs:label "getInitSuspendedTabText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInitSuspendedTabText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getInitUnOfferedTabText
+yawl:SessionBean_getInitUnOfferedTabText_244 a yawl:Method ;
+    rdfs:label "getInitUnOfferedTabText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInitUnOfferedTabText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getInitWorklistedTabText
+yawl:SessionBean_getInitWorklistedTabText_245 a yawl:Method ;
+    rdfs:label "getInitWorklistedTabText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInitWorklistedTabText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setInitTabText
+yawl:SessionBean_setInitTabText_246 a yawl:Method ;
+    rdfs:label "setInitTabText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setInitTabText(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getInitTabStyle
+yawl:SessionBean_getInitTabStyle_247 a yawl:Method ;
+    rdfs:label "getInitTabStyle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInitTabStyle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isWirEdit
+yawl:SessionBean_isWirEdit_248 a yawl:Method ;
+    rdfs:label "isWirEdit" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isWirEdit()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setWirEdit
+yawl:SessionBean_setWirEdit_249 a yawl:Method ;
+    rdfs:label "setWirEdit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setWirEdit(boolean wirEdit)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isCompleteAfterEdit
+yawl:SessionBean_isCompleteAfterEdit_250 a yawl:Method ;
+    rdfs:label "isCompleteAfterEdit" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isCompleteAfterEdit()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setCompleteAfterEdit
+yawl:SessionBean_setCompleteAfterEdit_251 a yawl:Method ;
+    rdfs:label "setCompleteAfterEdit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCompleteAfterEdit(boolean completeAfterEdit)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setWarnedForNonEdit
+yawl:SessionBean_setWarnedForNonEdit_252 a yawl:Method ;
+    rdfs:label "setWarnedForNonEdit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setWarnedForNonEdit(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.hasWarnedForNonEdit
+yawl:SessionBean_hasWarnedForNonEdit_253 a yawl:Method ;
+    rdfs:label "hasWarnedForNonEdit" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasWarnedForNonEdit(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.removeWarnedForNonEdit
+yawl:SessionBean_removeWarnedForNonEdit_254 a yawl:Method ;
+    rdfs:label "removeWarnedForNonEdit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeWarnedForNonEdit(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getSourceTab
+yawl:SessionBean_getSourceTab_255 a yawl:Method ;
+    rdfs:label "getSourceTab" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSourceTab()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setSourceTab
+yawl:SessionBean_setSourceTab_256 a yawl:Method ;
+    rdfs:label "setSourceTab" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSourceTab(String sourceTab)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getActiveTab
+yawl:SessionBean_getActiveTab_257 a yawl:Method ;
+    rdfs:label "getActiveTab" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getActiveTab()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setActiveTab
+yawl:SessionBean_setActiveTab_258 a yawl:Method ;
+    rdfs:label "setActiveTab" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setActiveTab(String activeTab)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setSourceTabAfterListboxSelection
+yawl:SessionBean_setSourceTabAfterListboxSelection_259 a yawl:Method ;
+    rdfs:label "setSourceTabAfterListboxSelection" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSourceTabAfterListboxSelection()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.refreshUserWorkQueues
+yawl:SessionBean_refreshUserWorkQueues_260 a yawl:Method ;
+    rdfs:label "refreshUserWorkQueues" ;
+    yawl:returnType "void" ;
+    yawl:signature "void refreshUserWorkQueues()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getTransparentPanel
+yawl:SessionBean_getTransparentPanel_261 a yawl:Method ;
+    rdfs:label "getTransparentPanel" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getTransparentPanel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setTransparentPanel
+yawl:SessionBean_setTransparentPanel_262 a yawl:Method ;
+    rdfs:label "setTransparentPanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTransparentPanel(PanelLayout panel)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getMessagePanel
+yawl:SessionBean_getMessagePanel_263 a yawl:Method ;
+    rdfs:label "getMessagePanel" ;
+    yawl:returnType "MessagePanel" ;
+    yawl:signature "MessagePanel getMessagePanel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setMessagePanel
+yawl:SessionBean_setMessagePanel_264 a yawl:Method ;
+    rdfs:label "setMessagePanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMessagePanel(MessagePanel messagePanel)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.showMessagePanel
+yawl:SessionBean_showMessagePanel_265 a yawl:Method ;
+    rdfs:label "showMessagePanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showMessagePanel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.messagePanelOKBtnAction
+yawl:SessionBean_messagePanelOKBtnAction_266 a yawl:Method ;
+    rdfs:label "messagePanelOKBtnAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String messagePanelOKBtnAction(ActionEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getOrgDataListLabelText
+yawl:SessionBean_getOrgDataListLabelText_267 a yawl:Method ;
+    rdfs:label "getOrgDataListLabelText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOrgDataListLabelText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setOrgDataListLabelText
+yawl:SessionBean_setOrgDataListLabelText_268 a yawl:Method ;
+    rdfs:label "setOrgDataListLabelText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOrgDataListLabelText(String orgDataListLabelText)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getOrgDataBelongsLabelText
+yawl:SessionBean_getOrgDataBelongsLabelText_269 a yawl:Method ;
+    rdfs:label "getOrgDataBelongsLabelText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOrgDataBelongsLabelText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setOrgDataBelongsLabelText
+yawl:SessionBean_setOrgDataBelongsLabelText_270 a yawl:Method ;
+    rdfs:label "setOrgDataBelongsLabelText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOrgDataBelongsLabelText(String orgDataBelongsLabelText)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getOrgDataGroupLabelText
+yawl:SessionBean_getOrgDataGroupLabelText_271 a yawl:Method ;
+    rdfs:label "getOrgDataGroupLabelText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOrgDataGroupLabelText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setOrgDataGroupLabelText
+yawl:SessionBean_setOrgDataGroupLabelText_272 a yawl:Method ;
+    rdfs:label "setOrgDataGroupLabelText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOrgDataGroupLabelText(String orgDataGroupLabelText)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getNhResourceListLabelText
+yawl:SessionBean_getNhResourceListLabelText_273 a yawl:Method ;
+    rdfs:label "getNhResourceListLabelText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNhResourceListLabelText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setNhResourceListLabelText
+yawl:SessionBean_setNhResourceListLabelText_274 a yawl:Method ;
+    rdfs:label "setNhResourceListLabelText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNhResourceListLabelText(String text)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getNhResourceCategoryLabelText
+yawl:SessionBean_getNhResourceCategoryLabelText_275 a yawl:Method ;
+    rdfs:label "getNhResourceCategoryLabelText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNhResourceCategoryLabelText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setNhResourceCategoryLabelText
+yawl:SessionBean_setNhResourceCategoryLabelText_276 a yawl:Method ;
+    rdfs:label "setNhResourceCategoryLabelText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNhResourceCategoryLabelText(String text)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.resetPageDefaults
+yawl:SessionBean_resetPageDefaults_277 a yawl:Method ;
+    rdfs:label "resetPageDefaults" ;
+    yawl:returnType "void" ;
+    yawl:signature "void resetPageDefaults(ApplicationBean page)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getAddInstanceParamVal
+yawl:SessionBean_getAddInstanceParamVal_278 a yawl:Method ;
+    rdfs:label "getAddInstanceParamVal" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAddInstanceParamVal()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setAddInstanceParamVal
+yawl:SessionBean_setAddInstanceParamVal_279 a yawl:Method ;
+    rdfs:label "setAddInstanceParamVal" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAddInstanceParamVal(String val)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isAddInstance
+yawl:SessionBean_isAddInstance_280 a yawl:Method ;
+    rdfs:label "isAddInstance" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAddInstance()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getAddInstanceParamName
+yawl:SessionBean_getAddInstanceParamName_281 a yawl:Method ;
+    rdfs:label "getAddInstanceParamName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAddInstanceParamName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setAddInstanceParamName
+yawl:SessionBean_setAddInstanceParamName_282 a yawl:Method ;
+    rdfs:label "setAddInstanceParamName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAddInstanceParamName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getAddInstanceParamNameLabelText
+yawl:SessionBean_getAddInstanceParamNameLabelText_283 a yawl:Method ;
+    rdfs:label "getAddInstanceParamNameLabelText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAddInstanceParamNameLabelText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.clearAddInstanceParam
+yawl:SessionBean_clearAddInstanceParam_284 a yawl:Method ;
+    rdfs:label "clearAddInstanceParam" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clearAddInstanceParam()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getAddInstanceItemID
+yawl:SessionBean_getAddInstanceItemID_285 a yawl:Method ;
+    rdfs:label "getAddInstanceItemID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAddInstanceItemID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setAddInstanceItemID
+yawl:SessionBean_setAddInstanceItemID_286 a yawl:Method ;
+    rdfs:label "setAddInstanceItemID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAddInstanceItemID(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getAddInstanceHeader
+yawl:SessionBean_getAddInstanceHeader_287 a yawl:Method ;
+    rdfs:label "getAddInstanceHeader" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAddInstanceHeader()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setAddInstanceHeader
+yawl:SessionBean_setAddInstanceHeader_288 a yawl:Method ;
+    rdfs:label "setAddInstanceHeader" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAddInstanceHeader(String taskID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isDelayTimeRBSelected
+yawl:SessionBean_isDelayTimeRBSelected_289 a yawl:Method ;
+    rdfs:label "isDelayTimeRBSelected" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isDelayTimeRBSelected()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setDelayTimeRBSelected
+yawl:SessionBean_setDelayTimeRBSelected_290 a yawl:Method ;
+    rdfs:label "setDelayTimeRBSelected" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDelayTimeRBSelected(boolean selected)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isDelayDateRBSelected
+yawl:SessionBean_isDelayDateRBSelected_291 a yawl:Method ;
+    rdfs:label "isDelayDateRBSelected" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isDelayDateRBSelected()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setDelayDateRBSelected
+yawl:SessionBean_setDelayDateRBSelected_292 a yawl:Method ;
+    rdfs:label "setDelayDateRBSelected" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDelayDateRBSelected(boolean selected)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isDelayDurationRBSelected
+yawl:SessionBean_isDelayDurationRBSelected_293 a yawl:Method ;
+    rdfs:label "isDelayDurationRBSelected" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isDelayDurationRBSelected()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setDelayDurationRBSelected
+yawl:SessionBean_setDelayDurationRBSelected_294 a yawl:Method ;
+    rdfs:label "setDelayDurationRBSelected" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDelayDurationRBSelected(boolean selected)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getTeamRBSelected
+yawl:SessionBean_getTeamRBSelected_295 a yawl:Method ;
+    rdfs:label "getTeamRBSelected" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean getTeamRBSelected()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isTeamRBSelected
+yawl:SessionBean_isTeamRBSelected_296 a yawl:Method ;
+    rdfs:label "isTeamRBSelected" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isTeamRBSelected()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setTeamRBSelected
+yawl:SessionBean_setTeamRBSelected_297 a yawl:Method ;
+    rdfs:label "setTeamRBSelected" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTeamRBSelected(boolean selected)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getOrgGroupRBSelected
+yawl:SessionBean_getOrgGroupRBSelected_298 a yawl:Method ;
+    rdfs:label "getOrgGroupRBSelected" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean getOrgGroupRBSelected()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isOrgGroupRBSelected
+yawl:SessionBean_isOrgGroupRBSelected_299 a yawl:Method ;
+    rdfs:label "isOrgGroupRBSelected" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isOrgGroupRBSelected()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setOrgGroupRBSelected
+yawl:SessionBean_setOrgGroupRBSelected_300 a yawl:Method ;
+    rdfs:label "setOrgGroupRBSelected" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOrgGroupRBSelected(boolean selected)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getTeamRBDisabled
+yawl:SessionBean_getTeamRBDisabled_301 a yawl:Method ;
+    rdfs:label "getTeamRBDisabled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean getTeamRBDisabled()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getOrgGroupRBDisabled
+yawl:SessionBean_getOrgGroupRBDisabled_302 a yawl:Method ;
+    rdfs:label "getOrgGroupRBDisabled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean getOrgGroupRBDisabled()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getSelectedTeamQueueWIR
+yawl:SessionBean_getSelectedTeamQueueWIR_303 a yawl:Method ;
+    rdfs:label "getSelectedTeamQueueWIR" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord getSelectedTeamQueueWIR()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setSelectedTeamQueueWIR
+yawl:SessionBean_setSelectedTeamQueueWIR_304 a yawl:Method ;
+    rdfs:label "setSelectedTeamQueueWIR" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSelectedTeamQueueWIR(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getResourceState
+yawl:SessionBean_getResourceState_305 a yawl:Method ;
+    rdfs:label "getResourceState" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourceState()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setResourceState
+yawl:SessionBean_setResourceState_306 a yawl:Method ;
+    rdfs:label "setResourceState" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setResourceState(String state)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getPnlUploadBlockout
+yawl:SessionBean_getPnlUploadBlockout_307 a yawl:Method ;
+    rdfs:label "getPnlUploadBlockout" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlUploadBlockout()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setPnlUploadBlockout
+yawl:SessionBean_setPnlUploadBlockout_308 a yawl:Method ;
+    rdfs:label "setPnlUploadBlockout" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlUploadBlockout(PanelLayout panel)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isOrgDataUploadPanelVisible
+yawl:SessionBean_isOrgDataUploadPanelVisible_309 a yawl:Method ;
+    rdfs:label "isOrgDataUploadPanelVisible" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isOrgDataUploadPanelVisible()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setOrgDataUploadPanelVisible
+yawl:SessionBean_setOrgDataUploadPanelVisible_310 a yawl:Method ;
+    rdfs:label "setOrgDataUploadPanelVisible" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOrgDataUploadPanelVisible(boolean visible)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isDelayedLaunchPanelVisible
+yawl:SessionBean_isDelayedLaunchPanelVisible_311 a yawl:Method ;
+    rdfs:label "isDelayedLaunchPanelVisible" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isDelayedLaunchPanelVisible()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setDelayedLaunchPanelVisible
+yawl:SessionBean_setDelayedLaunchPanelVisible_312 a yawl:Method ;
+    rdfs:label "setDelayedLaunchPanelVisible" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDelayedLaunchPanelVisible(boolean visible)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.resetDelayValues
+yawl:SessionBean_resetDelayValues_313 a yawl:Method ;
+    rdfs:label "resetDelayValues" ;
+    yawl:returnType "void" ;
+    yawl:signature "void resetDelayValues()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getDelaySeconds
+yawl:SessionBean_getDelaySeconds_314 a yawl:Method ;
+    rdfs:label "getDelaySeconds" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getDelaySeconds()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setDelaySeconds
+yawl:SessionBean_setDelaySeconds_315 a yawl:Method ;
+    rdfs:label "setDelaySeconds" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDelaySeconds(long seconds)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getDelayDate
+yawl:SessionBean_getDelayDate_316 a yawl:Method ;
+    rdfs:label "getDelayDate" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date getDelayDate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setDelayDate
+yawl:SessionBean_setDelayDate_317 a yawl:Method ;
+    rdfs:label "setDelayDate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDelayDate(Date date)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getDelayDuration
+yawl:SessionBean_getDelayDuration_318 a yawl:Method ;
+    rdfs:label "getDelayDuration" ;
+    yawl:returnType "Duration" ;
+    yawl:signature "Duration getDelayDuration()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setDelayDuration
+yawl:SessionBean_setDelayDuration_319 a yawl:Method ;
+    rdfs:label "setDelayDuration" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDelayDuration(Duration duration)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.hasDelayValueSet
+yawl:SessionBean_hasDelayValueSet_320 a yawl:Method ;
+    rdfs:label "hasDelayValueSet" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasDelayValueSet()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getDelayValueError
+yawl:SessionBean_getDelayValueError_321 a yawl:Method ;
+    rdfs:label "getDelayValueError" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDelayValueError()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setDelayValueError
+yawl:SessionBean_setDelayValueError_322 a yawl:Method ;
+    rdfs:label "setDelayValueError" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDelayValueError(String error)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isVisualiserReferred
+yawl:SessionBean_isVisualiserReferred_323 a yawl:Method ;
+    rdfs:label "isVisualiserReferred" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isVisualiserReferred()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setVisualiserReferred
+yawl:SessionBean_setVisualiserReferred_324 a yawl:Method ;
+    rdfs:label "setVisualiserReferred" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setVisualiserReferred(boolean referred)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getVisualiserEditedWIR
+yawl:SessionBean_getVisualiserEditedWIR_325 a yawl:Method ;
+    rdfs:label "getVisualiserEditedWIR" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord getVisualiserEditedWIR()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setVisualiserEditedWIR
+yawl:SessionBean_setVisualiserEditedWIR_326 a yawl:Method ;
+    rdfs:label "setVisualiserEditedWIR" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setVisualiserEditedWIR(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isRssUserAlreadyLoggedOn
+yawl:SessionBean_isRssUserAlreadyLoggedOn_327 a yawl:Method ;
+    rdfs:label "isRssUserAlreadyLoggedOn" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isRssUserAlreadyLoggedOn()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setRssUserAlreadyLoggedOn
+yawl:SessionBean_setRssUserAlreadyLoggedOn_328 a yawl:Method ;
+    rdfs:label "setRssUserAlreadyLoggedOn" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRssUserAlreadyLoggedOn(boolean loggedOn)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getFormViewerInstance
+yawl:SessionBean_getFormViewerInstance_329 a yawl:Method ;
+    rdfs:label "getFormViewerInstance" ;
+    yawl:returnType "FormViewer" ;
+    yawl:signature "FormViewer getFormViewerInstance()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setFormViewerInstance
+yawl:SessionBean_setFormViewerInstance_330 a yawl:Method ;
+    rdfs:label "setFormViewerInstance" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setFormViewerInstance(FormViewer instance)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getRssFormWIR
+yawl:SessionBean_getRssFormWIR_331 a yawl:Method ;
+    rdfs:label "getRssFormWIR" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord getRssFormWIR()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setRssFormWIR
+yawl:SessionBean_setRssFormWIR_332 a yawl:Method ;
+    rdfs:label "setRssFormWIR" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRssFormWIR(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.resetPostFormDisplay
+yawl:SessionBean_resetPostFormDisplay_333 a yawl:Method ;
+    rdfs:label "resetPostFormDisplay" ;
+    yawl:returnType "void" ;
+    yawl:signature "void resetPostFormDisplay()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isRssFormDisplay
+yawl:SessionBean_isRssFormDisplay_334 a yawl:Method ;
+    rdfs:label "isRssFormDisplay" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isRssFormDisplay()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setRssFormDisplay
+yawl:SessionBean_setRssFormDisplay_335 a yawl:Method ;
+    rdfs:label "setRssFormDisplay" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRssFormDisplay(boolean display)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isRssFormCloseAttempted
+yawl:SessionBean_isRssFormCloseAttempted_336 a yawl:Method ;
+    rdfs:label "isRssFormCloseAttempted" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isRssFormCloseAttempted()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setRssFormCloseAttempted
+yawl:SessionBean_setRssFormCloseAttempted_337 a yawl:Method ;
+    rdfs:label "setRssFormCloseAttempted" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRssFormCloseAttempted(boolean attempted)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isAddClientAccountMode
+yawl:SessionBean_isAddClientAccountMode_338 a yawl:Method ;
+    rdfs:label "isAddClientAccountMode" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAddClientAccountMode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setAddClientAccountMode
+yawl:SessionBean_setAddClientAccountMode_339 a yawl:Method ;
+    rdfs:label "setAddClientAccountMode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAddClientAccountMode(boolean mode)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getOrgDataMembers
+yawl:SessionBean_getOrgDataMembers_340 a yawl:Method ;
+    rdfs:label "getOrgDataMembers" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getOrgDataMembers()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setOrgDataMembers
+yawl:SessionBean_setOrgDataMembers_341 a yawl:Method ;
+    rdfs:label "setOrgDataMembers" ;
+    yawl:returnType "int" ;
+    yawl:signature "int setOrgDataMembers(AbstractResourceAttribute attribute)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isShowYAWLBanner
+yawl:SessionBean_isShowYAWLBanner_342 a yawl:Method ;
+    rdfs:label "isShowYAWLBanner" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isShowYAWLBanner()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setShowYAWLBanner
+yawl:SessionBean_setShowYAWLBanner_343 a yawl:Method ;
+    rdfs:label "setShowYAWLBanner" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setShowYAWLBanner(boolean show)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isSubCatAddMode
+yawl:SessionBean_isSubCatAddMode_344 a yawl:Method ;
+    rdfs:label "isSubCatAddMode" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isSubCatAddMode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setSubCatAddMode
+yawl:SessionBean_setSubCatAddMode_345 a yawl:Method ;
+    rdfs:label "setSubCatAddMode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSubCatAddMode(boolean adding)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getCategoryMembers
+yawl:SessionBean_getCategoryMembers_346 a yawl:Method ;
+    rdfs:label "getCategoryMembers" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getCategoryMembers()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setCategoryMembers
+yawl:SessionBean_setCategoryMembers_347 a yawl:Method ;
+    rdfs:label "setCategoryMembers" ;
+    yawl:returnType "int" ;
+    yawl:signature "int setCategoryMembers(NonHumanCategory category)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getSelectedNonHumanResource
+yawl:SessionBean_getSelectedNonHumanResource_348 a yawl:Method ;
+    rdfs:label "getSelectedNonHumanResource" ;
+    yawl:returnType "NonHumanResource" ;
+    yawl:signature "NonHumanResource getSelectedNonHumanResource()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setSelectedNonHumanResource
+yawl:SessionBean_setSelectedNonHumanResource_349 a yawl:Method ;
+    rdfs:label "setSelectedNonHumanResource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSelectedNonHumanResource(NonHumanResource resource, boolean editing)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getMenuBarCount
+yawl:SessionBean_getMenuBarCount_350 a yawl:Method ;
+    rdfs:label "getMenuBarCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getMenuBarCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setMenuBarCount
+yawl:SessionBean_setMenuBarCount_351 a yawl:Method ;
+    rdfs:label "setMenuBarCount" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMenuBarCount(int count)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getOuterPanelTop
+yawl:SessionBean_getOuterPanelTop_352 a yawl:Method ;
+    rdfs:label "getOuterPanelTop" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOuterPanelTop()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getFooterPanelStyle
+yawl:SessionBean_getFooterPanelStyle_353 a yawl:Method ;
+    rdfs:label "getFooterPanelStyle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFooterPanelStyle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getOuterPanelWidth
+yawl:SessionBean_getOuterPanelWidth_354 a yawl:Method ;
+    rdfs:label "getOuterPanelWidth" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getOuterPanelWidth()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SessionBean.getOuterPanelHeight
+yawl:SessionBean_getOuterPanelHeight_355 a yawl:Method ;
+    rdfs:label "getOuterPanelHeight" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getOuterPanelHeight()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SessionBean.getCalendarRows
+yawl:SessionBean_getCalendarRows_356 a yawl:Method ;
+    rdfs:label "getCalendarRows" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getCalendarRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getCalendarRowCount
+yawl:SessionBean_getCalendarRowCount_357 a yawl:Method ;
+    rdfs:label "getCalendarRowCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getCalendarRowCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.refreshCalendarRows
+yawl:SessionBean_refreshCalendarRows_358 a yawl:Method ;
+    rdfs:label "refreshCalendarRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void refreshCalendarRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getEntriesForSelection
+yawl:SessionBean_getEntriesForSelection_359 a yawl:Method ;
+    rdfs:label "getEntriesForSelection" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getEntriesForSelection(long from, long to)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SessionBean.removeCalendarRow
+yawl:SessionBean_removeCalendarRow_360 a yawl:Method ;
+    rdfs:label "removeCalendarRow" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeCalendarRow(int index)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getSelectedCalendarRow
+yawl:SessionBean_getSelectedCalendarRow_361 a yawl:Method ;
+    rdfs:label "getSelectedCalendarRow" ;
+    yawl:returnType "CalendarRow" ;
+    yawl:signature "CalendarRow getSelectedCalendarRow(int index)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getSelectedCalendarRow
+yawl:SessionBean_getSelectedCalendarRow_362 a yawl:Method ;
+    rdfs:label "getSelectedCalendarRow" ;
+    yawl:returnType "CalendarRow" ;
+    yawl:signature "CalendarRow getSelectedCalendarRow()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getSelectedEntry
+yawl:SessionBean_getSelectedEntry_363 a yawl:Method ;
+    rdfs:label "getSelectedEntry" ;
+    yawl:returnType "CalendarEntry" ;
+    yawl:signature "CalendarEntry getSelectedEntry()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getSelectedCalendarRowIndex
+yawl:SessionBean_getSelectedCalendarRowIndex_364 a yawl:Method ;
+    rdfs:label "getSelectedCalendarRowIndex" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getSelectedCalendarRowIndex()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setSelectedCalendarRowIndex
+yawl:SessionBean_setSelectedCalendarRowIndex_365 a yawl:Method ;
+    rdfs:label "setSelectedCalendarRowIndex" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSelectedCalendarRowIndex(int index)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getSelectedCalMgtDate
+yawl:SessionBean_getSelectedCalMgtDate_366 a yawl:Method ;
+    rdfs:label "getSelectedCalMgtDate" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date getSelectedCalMgtDate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setSelectedCalMgtDate
+yawl:SessionBean_setSelectedCalMgtDate_367 a yawl:Method ;
+    rdfs:label "setSelectedCalMgtDate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSelectedCalMgtDate(Date date)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getCalMgtMinDate
+yawl:SessionBean_getCalMgtMinDate_368 a yawl:Method ;
+    rdfs:label "getCalMgtMinDate" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date getCalMgtMinDate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setCalMgtMinDate
+yawl:SessionBean_setCalMgtMinDate_369 a yawl:Method ;
+    rdfs:label "setCalMgtMinDate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCalMgtMinDate(Date date)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getCalMgtMaxDate
+yawl:SessionBean_getCalMgtMaxDate_370 a yawl:Method ;
+    rdfs:label "getCalMgtMaxDate" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date getCalMgtMaxDate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setCalMgtMaxDate
+yawl:SessionBean_setCalMgtMaxDate_371 a yawl:Method ;
+    rdfs:label "setCalMgtMaxDate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCalMgtMaxDate(Date date)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.createDate
+yawl:SessionBean_createDate_372 a yawl:Method ;
+    rdfs:label "createDate" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date createDate(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SessionBean.getCalFilterSelection
+yawl:SessionBean_getCalFilterSelection_373 a yawl:Method ;
+    rdfs:label "getCalFilterSelection" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCalFilterSelection()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setCalFilterSelection
+yawl:SessionBean_setCalFilterSelection_374 a yawl:Method ;
+    rdfs:label "setCalFilterSelection" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCalFilterSelection(String selection)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getCalResourceSelection
+yawl:SessionBean_getCalResourceSelection_375 a yawl:Method ;
+    rdfs:label "getCalResourceSelection" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCalResourceSelection()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setCalResourceSelection
+yawl:SessionBean_setCalResourceSelection_376 a yawl:Method ;
+    rdfs:label "setCalResourceSelection" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCalResourceSelection(String selection)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getSelectedCalendarID
+yawl:SessionBean_getSelectedCalendarID_377 a yawl:Method ;
+    rdfs:label "getSelectedCalendarID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSelectedCalendarID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.addCalendarEntry
+yawl:SessionBean_addCalendarEntry_378 a yawl:Method ;
+    rdfs:label "addCalendarEntry" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addCalendarEntry(long startTime, long endTime, int workload, String comments)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.logCalendarEntry
+yawl:SessionBean_logCalendarEntry_379 a yawl:Method ;
+    rdfs:label "logCalendarEntry" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logCalendarEntry(long entryID, String resourceID, int workload)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getSelectedResourceGroup
+yawl:SessionBean_getSelectedResourceGroup_380 a yawl:Method ;
+    rdfs:label "getSelectedResourceGroup" ;
+    yawl:returnType "ResourceCalendar" ;
+    yawl:signature "ResourceCalendar getSelectedResourceGroup()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SessionBean.getNameForCalendarID
+yawl:SessionBean_getNameForCalendarID_381 a yawl:Method ;
+    rdfs:label "getNameForCalendarID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNameForCalendarID(String id)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SessionBean.getCalResourceOptions
+yawl:SessionBean_getCalResourceOptions_382 a yawl:Method ;
+    rdfs:label "getCalResourceOptions" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getCalResourceOptions()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getSelectedDurationDate
+yawl:SessionBean_getSelectedDurationDate_383 a yawl:Method ;
+    rdfs:label "getSelectedDurationDate" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date getSelectedDurationDate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setSelectedDurationDate
+yawl:SessionBean_setSelectedDurationDate_384 a yawl:Method ;
+    rdfs:label "setSelectedDurationDate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSelectedDurationDate(Date date)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.isAddCalendarRowMode
+yawl:SessionBean_isAddCalendarRowMode_385 a yawl:Method ;
+    rdfs:label "isAddCalendarRowMode" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAddCalendarRowMode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setAddCalendarRowMode
+yawl:SessionBean_setAddCalendarRowMode_386 a yawl:Method ;
+    rdfs:label "setAddCalendarRowMode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAddCalendarRowMode(boolean mode)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getCalEditedResourceName
+yawl:SessionBean_getCalEditedResourceName_387 a yawl:Method ;
+    rdfs:label "getCalEditedResourceName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCalEditedResourceName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.setCalEditedResourceName
+yawl:SessionBean_setCalEditedResourceName_388 a yawl:Method ;
+    rdfs:label "setCalEditedResourceName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCalEditedResourceName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.clashesWithCalendar
+yawl:SessionBean_clashesWithCalendar_389 a yawl:Method ;
+    rdfs:label "clashesWithCalendar" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean clashesWithCalendar(CalendarEntry entry, boolean add)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getCalDataTableStyle
+yawl:SessionBean_getCalDataTableStyle_390 a yawl:Method ;
+    rdfs:label "getCalDataTableStyle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCalDataTableStyle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.stripXMLChars
+yawl:SessionBean_stripXMLChars_391 a yawl:Method ;
+    rdfs:label "stripXMLChars" ;
+    yawl:returnType "String" ;
+    yawl:signature "String stripXMLChars(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getLblDocumentationStyle
+yawl:SessionBean_getLblDocumentationStyle_392 a yawl:Method ;
+    rdfs:label "getLblDocumentationStyle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLblDocumentationStyle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getTxtDocumentationStyle
+yawl:SessionBean_getTxtDocumentationStyle_393 a yawl:Method ;
+    rdfs:label "getTxtDocumentationStyle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTxtDocumentationStyle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionBean.getYawlVersion
+yawl:SessionBean_getYawlVersion_394 a yawl:Method ;
+    rdfs:label "getYawlVersion" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getYawlVersion()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:SessionBean___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:SessionBean__rm a yawl:Field ;
+    rdfs:label "_rm" .
+
+yawl:SessionBean_script a yawl:Field ;
+    rdfs:label "script" .
+
+yawl:SessionBean_btnRefresh a yawl:Field ;
+    rdfs:label "btnRefresh" .
+
+yawl:SessionBean_userid a yawl:Field ;
+    rdfs:label "userid" .
+
+yawl:SessionBean_sessionhandle a yawl:Field ;
+    rdfs:label "sessionhandle" .
+
+yawl:SessionBean_participant a yawl:Field ;
+    rdfs:label "participant" .
+
+yawl:SessionBean_userFullName a yawl:Field ;
+    rdfs:label "userFullName" .
+
+yawl:SessionBean_adminQueueSet a yawl:Field ;
+    rdfs:label "adminQueueSet" .
+
+yawl:SessionBean_queueSet a yawl:Field ;
+    rdfs:label "queueSet" .
+
+yawl:SessionBean_defaultSessionTimeoutValue a yawl:Field ;
+    rdfs:label "defaultSessionTimeoutValue" .
+
+yawl:SessionBean_sessionTimeoutValueChanged a yawl:Field ;
+    rdfs:label "sessionTimeoutValueChanged" .
+
+yawl:SessionBean__changeStamp a yawl:Field ;
+    rdfs:label "_changeStamp" .
+
+yawl:SessionBean_activePage a yawl:Field ;
+    rdfs:label "activePage" .
+
+yawl:SessionBean_dynFormType a yawl:Field ;
+    rdfs:label "dynFormType" .
+
+yawl:SessionBean_navigationBegun a yawl:Field ;
+    rdfs:label "navigationBegun" .
+
+yawl:SessionBean_worklistOptions a yawl:Field ;
+    rdfs:label "worklistOptions" .
+
+yawl:SessionBean_loadedSpecListOptions a yawl:Field ;
+    rdfs:label "loadedSpecListOptions" .
+
+yawl:SessionBean_runningCaseListOptions a yawl:Field ;
+    rdfs:label "runningCaseListOptions" .
+
+yawl:SessionBean_selectUserListOptions a yawl:Field ;
+    rdfs:label "selectUserListOptions" .
+
+yawl:SessionBean_ownedResourceAttributes a yawl:Field ;
+    rdfs:label "ownedResourceAttributes" .
+
+yawl:SessionBean_availableResourceAttributes a yawl:Field ;
+    rdfs:label "availableResourceAttributes" .
+
+yawl:SessionBean_piledTasks a yawl:Field ;
+    rdfs:label "piledTasks" .
+
+yawl:SessionBean_chainedCases a yawl:Field ;
+    rdfs:label "chainedCases" .
+
+yawl:SessionBean_orgDataOptions a yawl:Field ;
+    rdfs:label "orgDataOptions" .
+
+yawl:SessionBean_orgDataBelongsItems a yawl:Field ;
+    rdfs:label "orgDataBelongsItems" .
+
+yawl:SessionBean_orgDataGroupItems a yawl:Field ;
+    rdfs:label "orgDataGroupItems" .
+
+yawl:SessionBean_nhResourcesOptions a yawl:Field ;
+    rdfs:label "nhResourcesOptions" .
+
+yawl:SessionBean_nhResourcesCategoryItems a yawl:Field ;
+    rdfs:label "nhResourcesCategoryItems" .
+
+yawl:SessionBean_nhResourcesSubcategoryItems a yawl:Field ;
+    rdfs:label "nhResourcesSubcategoryItems" .
+
+yawl:SessionBean_nhResourcesSubcategoryList a yawl:Field ;
+    rdfs:label "nhResourcesSubcategoryList" .
+
+yawl:SessionBean_worklistChoice a yawl:Field ;
+    rdfs:label "worklistChoice" .
+
+yawl:SessionBean_loadedSpecListChoice a yawl:Field ;
+    rdfs:label "loadedSpecListChoice" .
+
+yawl:SessionBean_runningCaseListChoice a yawl:Field ;
+    rdfs:label "runningCaseListChoice" .
+
+yawl:SessionBean_selectUserListChoice a yawl:Field ;
+    rdfs:label "selectUserListChoice" .
+
+yawl:SessionBean_piledTasksChoice a yawl:Field ;
+    rdfs:label "piledTasksChoice" .
+
+yawl:SessionBean_chainedCasesChoice a yawl:Field ;
+    rdfs:label "chainedCasesChoice" .
+
+yawl:SessionBean_orgDataChoice a yawl:Field ;
+    rdfs:label "orgDataChoice" .
+
+yawl:SessionBean_orgDataBelongsChoice a yawl:Field ;
+    rdfs:label "orgDataBelongsChoice" .
+
+yawl:SessionBean_orgDataGroupChoice a yawl:Field ;
+    rdfs:label "orgDataGroupChoice" .
+
+yawl:SessionBean_nhResourcesChoice a yawl:Field ;
+    rdfs:label "nhResourcesChoice" .
+
+yawl:SessionBean_nhResourcesCategoryChoice a yawl:Field ;
+    rdfs:label "nhResourcesCategoryChoice" .
+
+yawl:SessionBean_nhResourcesSubcategoryChoice a yawl:Field ;
+    rdfs:label "nhResourcesSubcategoryChoice" .
+
+yawl:SessionBean_directToMeChoice a yawl:Field ;
+    rdfs:label "directToMeChoice" .
+
+yawl:SessionBean_lbxUserList a yawl:Field ;
+    rdfs:label "lbxUserList" .
+
+yawl:SessionBean_lbxRunningCases a yawl:Field ;
+    rdfs:label "lbxRunningCases" .
+
+yawl:SessionBean_runningCaseListChoices a yawl:Field ;
+    rdfs:label "runningCaseListChoices" .
+
+yawl:SessionBean_selectUserListChoices a yawl:Field ;
+    rdfs:label "selectUserListChoices" .
+
+yawl:SessionBean_chosenWIR a yawl:Field ;
+    rdfs:label "chosenWIR" .
+
+yawl:SessionBean_caseLaunch a yawl:Field ;
+    rdfs:label "caseLaunch" .
+
+yawl:SessionBean_delegating a yawl:Field ;
+    rdfs:label "delegating" .
+
+yawl:SessionBean_reallocating a yawl:Field ;
+    rdfs:label "reallocating" .
+
+yawl:SessionBean_reallocatingStateful a yawl:Field ;
+    rdfs:label "reallocatingStateful" .
+
+yawl:SessionBean_customFormPost a yawl:Field ;
+    rdfs:label "customFormPost" .
+
+yawl:SessionBean_title a yawl:Field ;
+    rdfs:label "title" .
+
+yawl:SessionBean_mnuSelectorStyle a yawl:Field ;
+    rdfs:label "mnuSelectorStyle" .
+
+yawl:SessionBean_userListFormHeaderText a yawl:Field ;
+    rdfs:label "userListFormHeaderText" .
+
+yawl:SessionBean_loadedSpecs a yawl:Field ;
+    rdfs:label "loadedSpecs" .
+
+yawl:SessionBean_schemaLibraries a yawl:Field ;
+    rdfs:label "schemaLibraries" .
+
+yawl:SessionBean_adminQueueAssignedList a yawl:Field ;
+    rdfs:label "adminQueueAssignedList" .
+
+yawl:SessionBean_adminQueueAction a yawl:Field ;
+    rdfs:label "adminQueueAction" .
+
+yawl:SessionBean_navigateTo a yawl:Field ;
+    rdfs:label "navigateTo" .
+
+yawl:SessionBean_redirectToMe a yawl:Field ;
+    rdfs:label "redirectToMe" .
+
+yawl:SessionBean__orgMgtMode a yawl:Field ;
+    rdfs:label "_orgMgtMode" .
+
+yawl:SessionBean__nhrMgtMode a yawl:Field ;
+    rdfs:label "_nhrMgtMode" .
+
+yawl:SessionBean_orgDataParticipantList a yawl:Field ;
+    rdfs:label "orgDataParticipantList" .
+
+yawl:SessionBean_participantMap a yawl:Field ;
+    rdfs:label "participantMap" .
+
+yawl:SessionBean_blankStartOfList a yawl:Field ;
+    rdfs:label "blankStartOfList" .
+
+yawl:SessionBean_addParticipantMode a yawl:Field ;
+    rdfs:label "addParticipantMode" .
+
+yawl:SessionBean_addedParticipant a yawl:Field ;
+    rdfs:label "addedParticipant" .
+
+yawl:SessionBean_editedParticipant a yawl:Field ;
+    rdfs:label "editedParticipant" .
+
+yawl:SessionBean_preEditAttributes a yawl:Field ;
+    rdfs:label "preEditAttributes" .
+
+yawl:SessionBean_secResDataSet a yawl:Field ;
+    rdfs:label "secResDataSet" .
+
+yawl:SessionBean_selectedSecondaryResources a yawl:Field ;
+    rdfs:label "selectedSecondaryResources" .
+
+yawl:SessionBean_secondaryResourcesItemID a yawl:Field ;
+    rdfs:label "secondaryResourcesItemID" .
+
+yawl:SessionBean_selectedSecondaryResource a yawl:Field ;
+    rdfs:label "selectedSecondaryResource" .
+
+yawl:SessionBean_orgDataItemRemovedFlag a yawl:Field ;
+    rdfs:label "orgDataItemRemovedFlag" .
+
+yawl:SessionBean_nhResourcesItemRemovedFlag a yawl:Field ;
+    rdfs:label "nhResourcesItemRemovedFlag" .
+
+yawl:SessionBean_activeResourceAttributeTab a yawl:Field ;
+    rdfs:label "activeResourceAttributeTab" .
+
+yawl:SessionBean_lblAgeText a yawl:Field ;
+    rdfs:label "lblAgeText" .
+
+yawl:SessionBean_docoParser a yawl:Field ;
+    rdfs:label "docoParser" .
+
+yawl:SessionBean_wirEdit a yawl:Field ;
+    rdfs:label "wirEdit" .
+
+yawl:SessionBean_completeAfterEdit a yawl:Field ;
+    rdfs:label "completeAfterEdit" .
+
+yawl:SessionBean_warnedWIRSet a yawl:Field ;
+    rdfs:label "warnedWIRSet" .
+
+yawl:SessionBean_sourceTab a yawl:Field ;
+    rdfs:label "sourceTab" .
+
+yawl:SessionBean_activeTab a yawl:Field ;
+    rdfs:label "activeTab" .
+
+yawl:SessionBean_transparentPanel a yawl:Field ;
+    rdfs:label "transparentPanel" .
+
+yawl:SessionBean_messagePanel a yawl:Field ;
+    rdfs:label "messagePanel" .
+
+yawl:SessionBean_orgDataListLabelText a yawl:Field ;
+    rdfs:label "orgDataListLabelText" .
+
+yawl:SessionBean_orgDataBelongsLabelText a yawl:Field ;
+    rdfs:label "orgDataBelongsLabelText" .
+
+yawl:SessionBean_orgDataGroupLabelText a yawl:Field ;
+    rdfs:label "orgDataGroupLabelText" .
+
+yawl:SessionBean_nhResourceListLabelText a yawl:Field ;
+    rdfs:label "nhResourceListLabelText" .
+
+yawl:SessionBean_nhResourceCategoryLabelText a yawl:Field ;
+    rdfs:label "nhResourceCategoryLabelText" .
+
+yawl:SessionBean_addInstanceParamVal a yawl:Field ;
+    rdfs:label "addInstanceParamVal" .
+
+yawl:SessionBean_addInstanceParamName a yawl:Field ;
+    rdfs:label "addInstanceParamName" .
+
+yawl:SessionBean_addInstanceItemID a yawl:Field ;
+    rdfs:label "addInstanceItemID" .
+
+yawl:SessionBean_addInstanceHeader a yawl:Field ;
+    rdfs:label "addInstanceHeader" .
+
+yawl:SessionBean_delayTimeRBSelected a yawl:Field ;
+    rdfs:label "delayTimeRBSelected" .
+
+yawl:SessionBean_delayDateRBSelected a yawl:Field ;
+    rdfs:label "delayDateRBSelected" .
+
+yawl:SessionBean_delayDurationRBSelected a yawl:Field ;
+    rdfs:label "delayDurationRBSelected" .
+
+yawl:SessionBean_teamRBSelected a yawl:Field ;
+    rdfs:label "teamRBSelected" .
+
+yawl:SessionBean_orgGroupRBSelected a yawl:Field ;
+    rdfs:label "orgGroupRBSelected" .
+
+yawl:SessionBean_selectedTeamQueueWIR a yawl:Field ;
+    rdfs:label "selectedTeamQueueWIR" .
+
+yawl:SessionBean_resourceState a yawl:Field ;
+    rdfs:label "resourceState" .
+
+yawl:SessionBean_pnlUploadBlockout a yawl:Field ;
+    rdfs:label "pnlUploadBlockout" .
+
+yawl:SessionBean_orgDataUploadPanelVisible a yawl:Field ;
+    rdfs:label "orgDataUploadPanelVisible" .
+
+yawl:SessionBean_delayedLaunchPanelVisible a yawl:Field ;
+    rdfs:label "delayedLaunchPanelVisible" .
+
+yawl:SessionBean_delaySeconds a yawl:Field ;
+    rdfs:label "delaySeconds" .
+
+yawl:SessionBean_delayDate a yawl:Field ;
+    rdfs:label "delayDate" .
+
+yawl:SessionBean_delayDuration a yawl:Field ;
+    rdfs:label "delayDuration" .
+
+yawl:SessionBean_delayValueError a yawl:Field ;
+    rdfs:label "delayValueError" .
+
+yawl:SessionBean_visualiserReferred a yawl:Field ;
+    rdfs:label "visualiserReferred" .
+
+yawl:SessionBean_visualiserEditedWIR a yawl:Field ;
+    rdfs:label "visualiserEditedWIR" .
+
+yawl:SessionBean_rssUserAlreadyLoggedOn a yawl:Field ;
+    rdfs:label "rssUserAlreadyLoggedOn" .
+
+yawl:SessionBean_formViewerInstance a yawl:Field ;
+    rdfs:label "formViewerInstance" .
+
+yawl:SessionBean_rssFormWIR a yawl:Field ;
+    rdfs:label "rssFormWIR" .
+
+yawl:SessionBean_rssFormDisplay a yawl:Field ;
+    rdfs:label "rssFormDisplay" .
+
+yawl:SessionBean_rssFormCloseAttempted a yawl:Field ;
+    rdfs:label "rssFormCloseAttempted" .
+
+yawl:SessionBean_addClientAccountMode a yawl:Field ;
+    rdfs:label "addClientAccountMode" .
+
+yawl:SessionBean_orgDataMembers a yawl:Field ;
+    rdfs:label "orgDataMembers" .
+
+yawl:SessionBean_showYAWLBanner a yawl:Field ;
+    rdfs:label "showYAWLBanner" .
+
+yawl:SessionBean_subCatAddMode a yawl:Field ;
+    rdfs:label "subCatAddMode" .
+
+yawl:SessionBean_categoryMembers a yawl:Field ;
+    rdfs:label "categoryMembers" .
+
+yawl:SessionBean_selectedNonHumanResource a yawl:Field ;
+    rdfs:label "selectedNonHumanResource" .
+
+yawl:SessionBean_menuBarCount a yawl:Field ;
+    rdfs:label "menuBarCount" .
+
+yawl:SessionBean_calendarRows a yawl:Field ;
+    rdfs:label "calendarRows" .
+
+yawl:SessionBean_selectedCalendarRowIndex a yawl:Field ;
+    rdfs:label "selectedCalendarRowIndex" .
+
+yawl:SessionBean_selectedCalMgtDate a yawl:Field ;
+    rdfs:label "selectedCalMgtDate" .
+
+yawl:SessionBean_sdf a yawl:Field ;
+    rdfs:label "sdf" .
+
+yawl:SessionBean_calMgtMinDate a yawl:Field ;
+    rdfs:label "calMgtMinDate" .
+
+yawl:SessionBean_calMgtMaxDate a yawl:Field ;
+    rdfs:label "calMgtMaxDate" .
+
+yawl:SessionBean_calFilterSelection a yawl:Field ;
+    rdfs:label "calFilterSelection" .
+
+yawl:SessionBean_calResourceSelection a yawl:Field ;
+    rdfs:label "calResourceSelection" .
+
+yawl:SessionBean__calLogger a yawl:Field ;
+    rdfs:label "_calLogger" .
+
+yawl:SessionBean_selectedDurationDate a yawl:Field ;
+    rdfs:label "selectedDurationDate" .
+
+yawl:SessionBean_addCalendarRowMode a yawl:Field ;
+    rdfs:label "addCalendarRowMode" .
+
+yawl:SessionBean_calEditedResourceName a yawl:Field ;
+    rdfs:label "calEditedResourceName" .
+
+
+

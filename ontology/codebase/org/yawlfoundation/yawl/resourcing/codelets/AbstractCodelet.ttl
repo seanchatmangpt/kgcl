@@ -1,0 +1,290 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.codelets.AbstractCodelet
+yawl:AbstractCodelet a yawl:Class ;
+    rdfs:label "AbstractCodelet" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_codelets ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/codelets/AbstractCodelet.java"^^xsd:string ;
+    rdfs:comment """The base class of all codelets. @author Michael Adams @date 17/06/2008""" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:AbstractCodelet_getDescription_1 ;
+    yawl:hasMethod yawl:AbstractCodelet_setDescription_2 ;
+    yawl:hasMethod yawl:AbstractCodelet_getWorkItem_3 ;
+    yawl:hasMethod yawl:AbstractCodelet_setWorkItem_4 ;
+    yawl:hasMethod yawl:AbstractCodelet_getPersist_5 ;
+    yawl:hasMethod yawl:AbstractCodelet_setPersist_6 ;
+    yawl:hasMethod yawl:AbstractCodelet_setInputs_7 ;
+    yawl:hasMethod yawl:AbstractCodelet_getParameterValue_8 ;
+    yawl:hasMethod yawl:AbstractCodelet_setParameterValue_9 ;
+    yawl:hasMethod yawl:AbstractCodelet_getOutputData_10 ;
+    yawl:hasMethod yawl:AbstractCodelet_getInputParameter_11 ;
+    yawl:hasMethod yawl:AbstractCodelet_getOutputParameter_12 ;
+    yawl:hasMethod yawl:AbstractCodelet_getParameter_13 ;
+    yawl:hasMethod yawl:AbstractCodelet_xmlDateToJavaDate_14 ;
+    yawl:hasMethod yawl:AbstractCodelet_getValue_15 ;
+    yawl:hasMethod yawl:AbstractCodelet_getClassName_16 ;
+    yawl:hasMethod yawl:AbstractCodelet_getCanonicalClassName_17 ;
+    yawl:hasMethod yawl:AbstractCodelet_toXML_18 ;
+    yawl:hasMethod yawl:AbstractCodelet_getRequiredParamsToXML_19 ;
+    yawl:hasMethod yawl:AbstractCodelet_init_20 ;
+    yawl:hasMethod yawl:AbstractCodelet_shutdown_21 ;
+    yawl:hasMethod yawl:AbstractCodelet_resume_22 ;
+    yawl:hasMethod yawl:AbstractCodelet_cancel_23 ;
+    yawl:hasMethod yawl:AbstractCodelet_getRequiredParams_24 ;
+    yawl:hasMethod yawl:AbstractCodelet_execute_25 ;
+    yawl:hasField yawl:AbstractCodelet__description ;
+    yawl:hasField yawl:AbstractCodelet__wir ;
+    yawl:hasField yawl:AbstractCodelet__inData ;
+    yawl:hasField yawl:AbstractCodelet__inParams ;
+    yawl:hasField yawl:AbstractCodelet__outParams ;
+    yawl:hasField yawl:AbstractCodelet__outData ;
+    yawl:hasField yawl:AbstractCodelet__persist ;
+    yawl:hasField yawl:AbstractCodelet_XSD_NAMESPACE ;
+    .
+
+
+# Method: AbstractCodelet.getDescription
+yawl:AbstractCodelet_getDescription_1 a yawl:Method ;
+    rdfs:label "getDescription" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDescription()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractCodelet.setDescription
+yawl:AbstractCodelet_setDescription_2 a yawl:Method ;
+    rdfs:label "setDescription" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDescription(String desc)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractCodelet.getWorkItem
+yawl:AbstractCodelet_getWorkItem_3 a yawl:Method ;
+    rdfs:label "getWorkItem" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord getWorkItem()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractCodelet.setWorkItem
+yawl:AbstractCodelet_setWorkItem_4 a yawl:Method ;
+    rdfs:label "setWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setWorkItem(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractCodelet.getPersist
+yawl:AbstractCodelet_getPersist_5 a yawl:Method ;
+    rdfs:label "getPersist" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean getPersist()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractCodelet.setPersist
+yawl:AbstractCodelet_setPersist_6 a yawl:Method ;
+    rdfs:label "setPersist" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPersist(boolean persist)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractCodelet.setInputs
+yawl:AbstractCodelet_setInputs_7 a yawl:Method ;
+    rdfs:label "setInputs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setInputs(Element inData, List inParams, List outParams)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractCodelet.getParameterValue
+yawl:AbstractCodelet_getParameterValue_8 a yawl:Method ;
+    rdfs:label "getParameterValue" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object getParameterValue(String varName)" ;
+    rdfs:comment """Converts the string representation of a parameter value to its specified data type, for the most frequent data types. Implementers may override this method to handle other data types if required. @param varName the name of the parameter @return the appropriately typed value @throws CodeletExecutionException if the string value can't be converted to the specified type.""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractCodelet.setParameterValue
+yawl:AbstractCodelet_setParameterValue_9 a yawl:Method ;
+    rdfs:label "setParameterValue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setParameterValue(String varName, String value)" ;
+    rdfs:comment """Adds a new value to an output parameter, and creates the parameter if it doesn't already exist @param varName the name of the parameter @param value the value to assign to it""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractCodelet.getOutputData
+yawl:AbstractCodelet_getOutputData_10 a yawl:Method ;
+    rdfs:label "getOutputData" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getOutputData()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractCodelet.getInputParameter
+yawl:AbstractCodelet_getInputParameter_11 a yawl:Method ;
+    rdfs:label "getInputParameter" ;
+    yawl:returnType "YParameter" ;
+    yawl:signature "YParameter getInputParameter(String paramName)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractCodelet.getOutputParameter
+yawl:AbstractCodelet_getOutputParameter_12 a yawl:Method ;
+    rdfs:label "getOutputParameter" ;
+    yawl:returnType "YParameter" ;
+    yawl:signature "YParameter getOutputParameter(String paramName)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractCodelet.getParameter
+yawl:AbstractCodelet_getParameter_13 a yawl:Method ;
+    rdfs:label "getParameter" ;
+    yawl:returnType "YParameter" ;
+    yawl:signature "YParameter getParameter(String paramName, List params)" ;
+    rdfs:comment """Extracts a parameter from a List of parameters @param paramName the parameter to extract @param params the list of parameters containing the parameter @return the specified parameters @throws CodeletExecutionException if the requested parameter isn't in the list""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: AbstractCodelet.xmlDateToJavaDate
+yawl:AbstractCodelet_xmlDateToJavaDate_14 a yawl:Method ;
+    rdfs:label "xmlDateToJavaDate" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date xmlDateToJavaDate(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: AbstractCodelet.getValue
+yawl:AbstractCodelet_getValue_15 a yawl:Method ;
+    rdfs:label "getValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getValue(String varName)" ;
+    rdfs:comment """Gets the value of a parameter @param varName the name of the parameter @return its value @throws CodeletExecutionException if the parameter doesn't exist in the input data""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractCodelet.getClassName
+yawl:AbstractCodelet_getClassName_16 a yawl:Method ;
+    rdfs:label "getClassName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getClassName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractCodelet.getCanonicalClassName
+yawl:AbstractCodelet_getCanonicalClassName_17 a yawl:Method ;
+    rdfs:label "getCanonicalClassName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCanonicalClassName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractCodelet.toXML
+yawl:AbstractCodelet_toXML_18 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractCodelet.getRequiredParamsToXML
+yawl:AbstractCodelet_getRequiredParamsToXML_19 a yawl:Method ;
+    rdfs:label "getRequiredParamsToXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRequiredParamsToXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractCodelet.init
+yawl:AbstractCodelet_init_20 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    rdfs:comment """This method is called when a codelet first starts. Override to include any initialisations required.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractCodelet.shutdown
+yawl:AbstractCodelet_shutdown_21 a yawl:Method ;
+    rdfs:label "shutdown" ;
+    yawl:returnType "void" ;
+    yawl:signature "void shutdown()" ;
+    rdfs:comment """This method is called when the server is shutting down. Override to include any state saving required.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractCodelet.resume
+yawl:AbstractCodelet_resume_22 a yawl:Method ;
+    rdfs:label "resume" ;
+    yawl:returnType "void" ;
+    yawl:signature "void resume()" ;
+    rdfs:comment """This method is called when the codelet is resumed after a server shutdown. Override to include any state restoring required.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractCodelet.cancel
+yawl:AbstractCodelet_cancel_23 a yawl:Method ;
+    rdfs:label "cancel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancel()" ;
+    rdfs:comment """This method is called when the work item running this codelet is cancelled. Override to cancel the codelet as required.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractCodelet.getRequiredParams
+yawl:AbstractCodelet_getRequiredParams_24 a yawl:Method ;
+    rdfs:label "getRequiredParams" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getRequiredParams()" ;
+    rdfs:comment """This method is called when an external entity (such as the YAWL editor) requests the list of parameters required by the codelet. Override to populate the list. Each parameter should include a name, data type and description as a minimum. @return the List of parameters required by the codelet.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractCodelet.execute
+yawl:AbstractCodelet_execute_25 a yawl:Method ;
+    rdfs:label "execute" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element execute(Element inData, List inParams, List outParams)" ;
+    rdfs:comment """This method must be implemented to do the work of the codelet. @param inData the work item's input data @param inParams the work item's input parameters @param outParams the work item's output parameters @return a JDOM Element containing the output data generated by this method @throws CodeletExecutionException if there's any problem getting the required input data, composing the required output data, or performing the execution.""" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:AbstractCodelet__description a yawl:Field ;
+    rdfs:label "_description" .
+
+yawl:AbstractCodelet__wir a yawl:Field ;
+    rdfs:label "_wir" .
+
+yawl:AbstractCodelet__inData a yawl:Field ;
+    rdfs:label "_inData" .
+
+yawl:AbstractCodelet__inParams a yawl:Field ;
+    rdfs:label "_inParams" .
+
+yawl:AbstractCodelet__outParams a yawl:Field ;
+    rdfs:label "_outParams" .
+
+yawl:AbstractCodelet__outData a yawl:Field ;
+    rdfs:label "_outData" .
+
+yawl:AbstractCodelet__persist a yawl:Field ;
+    rdfs:label "_persist" .
+
+yawl:AbstractCodelet_XSD_NAMESPACE a yawl:Field ;
+    rdfs:label "XSD_NAMESPACE" .
+
+
+

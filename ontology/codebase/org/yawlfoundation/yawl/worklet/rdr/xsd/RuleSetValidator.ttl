@@ -1,0 +1,66 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.worklet.rdr.xsd
+yawl:org_yawlfoundation_yawl_worklet_rdr_xsd a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.worklet.rdr.xsd" .
+# Class: org.yawlfoundation.yawl.worklet.rdr.xsd.RuleSetValidator
+yawl:RuleSetValidator a yawl:Class ;
+    rdfs:label "RuleSetValidator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_rdr_xsd ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/rdr/xsd/RuleSetValidator.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 13/05/2016""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:RuleSetValidator_validate_1 ;
+    yawl:hasMethod yawl:RuleSetValidator_addAttributes_2 ;
+    yawl:hasMethod yawl:RuleSetValidator_getAttributes_3 ;
+    yawl:hasMethod yawl:RuleSetValidator_main_4 ;
+    .
+
+
+# Method: RuleSetValidator.validate
+yawl:RuleSetValidator_validate_1 a yawl:Method ;
+    rdfs:label "validate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validate(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RuleSetValidator.addAttributes
+yawl:RuleSetValidator_addAttributes_2 a yawl:Method ;
+    rdfs:label "addAttributes" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addAttributes(String xml)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RuleSetValidator.getAttributes
+yawl:RuleSetValidator_getAttributes_3 a yawl:Method ;
+    rdfs:label "getAttributes" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getAttributes()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RuleSetValidator.main
+yawl:RuleSetValidator_main_4 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String args)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+
+
+
+yawl:org_yawlfoundation_yawl_scheduling_servlet a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.scheduling.servlet" .
+
+

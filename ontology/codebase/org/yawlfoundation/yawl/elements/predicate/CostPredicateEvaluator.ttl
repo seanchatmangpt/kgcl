@@ -1,0 +1,120 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.elements.predicate.CostPredicateEvaluator
+yawl:CostPredicateEvaluator a yawl:Class ;
+    rdfs:label "CostPredicateEvaluator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_elements_predicate ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/elements/predicate/CostPredicateEvaluator.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 5/12/12""" ;
+    yawl:implements yawl:PredicateEvaluator ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CostPredicateEvaluator_accept_1 ;
+    yawl:hasMethod yawl:CostPredicateEvaluator_substituteDefaults_2 ;
+    yawl:hasMethod yawl:CostPredicateEvaluator_replace_3 ;
+    yawl:hasMethod yawl:CostPredicateEvaluator_connect_4 ;
+    yawl:hasMethod yawl:CostPredicateEvaluator_checkHandle_5 ;
+    yawl:hasMethod yawl:CostPredicateEvaluator_successful_6 ;
+    yawl:hasMethod yawl:CostPredicateEvaluator_extract_7 ;
+    yawl:hasMethod yawl:CostPredicateEvaluator_getClient_8 ;
+    yawl:hasMethod yawl:CostPredicateEvaluator_calculate_9 ;
+    yawl:hasField yawl:CostPredicateEvaluator__client ;
+    yawl:hasField yawl:CostPredicateEvaluator__handle ;
+    yawl:hasField yawl:CostPredicateEvaluator_PATTERN ;
+    .
+
+
+# Method: CostPredicateEvaluator.accept
+yawl:CostPredicateEvaluator_accept_1 a yawl:Method ;
+    rdfs:label "accept" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean accept(String predicate)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostPredicateEvaluator.substituteDefaults
+yawl:CostPredicateEvaluator_substituteDefaults_2 a yawl:Method ;
+    rdfs:label "substituteDefaults" ;
+    yawl:returnType "String" ;
+    yawl:signature "String substituteDefaults(String predicate)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostPredicateEvaluator.replace
+yawl:CostPredicateEvaluator_replace_3 a yawl:Method ;
+    rdfs:label "replace" ;
+    yawl:returnType "String" ;
+    yawl:signature "String replace(YDecomposition decomposition, String predicate, YIdentifier token)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostPredicateEvaluator.connect
+yawl:CostPredicateEvaluator_connect_4 a yawl:Method ;
+    rdfs:label "connect" ;
+    yawl:returnType "void" ;
+    yawl:signature "void connect()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostPredicateEvaluator.checkHandle
+yawl:CostPredicateEvaluator_checkHandle_5 a yawl:Method ;
+    rdfs:label "checkHandle" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean checkHandle()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostPredicateEvaluator.successful
+yawl:CostPredicateEvaluator_successful_6 a yawl:Method ;
+    rdfs:label "successful" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean successful(String msg)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostPredicateEvaluator.extract
+yawl:CostPredicateEvaluator_extract_7 a yawl:Method ;
+    rdfs:label "extract" ;
+    yawl:returnType "List" ;
+    yawl:signature "List extract(String predicate)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostPredicateEvaluator.getClient
+yawl:CostPredicateEvaluator_getClient_8 a yawl:Method ;
+    rdfs:label "getClient" ;
+    yawl:returnType "CostGatewayClient" ;
+    yawl:signature "CostGatewayClient getClient()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostPredicateEvaluator.calculate
+yawl:CostPredicateEvaluator_calculate_9 a yawl:Method ;
+    rdfs:label "calculate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String calculate(YDecomposition decomposition, String expression, YIdentifier token)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:CostPredicateEvaluator__client a yawl:Field ;
+    rdfs:label "_client" .
+
+yawl:CostPredicateEvaluator__handle a yawl:Field ;
+    rdfs:label "_handle" .
+
+yawl:CostPredicateEvaluator_PATTERN a yawl:Field ;
+    rdfs:label "PATTERN" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_elements_state a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.elements.state" .
+
+

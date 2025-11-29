@@ -1,0 +1,219 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.resource.OrgGroup
+yawl:OrgGroup a yawl:Class ;
+    rdfs:label "OrgGroup" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_resource ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/resource/OrgGroup.java"^^xsd:string ;
+    rdfs:comment """Represents an organisational group to which a position (occupied by a participant) may belong. Note that one org group may belong to a larger org group (or alternately, an org group may contain a number of smaller org groups). @author Michael Adams v0.1, 03/08/2007""" ;
+    yawl:extends yawl:AbstractResourceAttribute ;
+    yawl:implements yawl:Comparable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:OrgGroup_setLabel_1 ;
+    yawl:hasMethod yawl:OrgGroup_getGroupName_2 ;
+    yawl:hasMethod yawl:OrgGroup_setGroupName_3 ;
+    yawl:hasMethod yawl:OrgGroup_getName_4 ;
+    yawl:hasMethod yawl:OrgGroup_getGroupType_5 ;
+    yawl:hasMethod yawl:OrgGroup_getGroupTypeFromString_6 ;
+    yawl:hasMethod yawl:OrgGroup_setGroupType_7 ;
+    yawl:hasMethod yawl:OrgGroup_setGroupType_8 ;
+    yawl:hasMethod yawl:OrgGroup_getBelongsTo_9 ;
+    yawl:hasMethod yawl:OrgGroup_setBelongsTo_10 ;
+    yawl:hasMethod yawl:OrgGroup_setBelongsTo_11 ;
+    yawl:hasMethod yawl:OrgGroup_hasResourceInHierarchy_12 ;
+    yawl:hasMethod yawl:OrgGroup_get_groupType_13 ;
+    yawl:hasMethod yawl:OrgGroup_set_groupType_14 ;
+    yawl:hasMethod yawl:OrgGroup_equals_15 ;
+    yawl:hasMethod yawl:OrgGroup_compareTo_16 ;
+    yawl:hasMethod yawl:OrgGroup_toXML_17 ;
+    yawl:hasMethod yawl:OrgGroup_reconstitute_18 ;
+    yawl:hasMethod yawl:OrgGroup_get_belongsToID_19 ;
+    yawl:hasMethod yawl:OrgGroup_set_belongsToID_20 ;
+    yawl:hasField yawl:OrgGroup__groupName ;
+    yawl:hasField yawl:OrgGroup__groupType ;
+    yawl:hasField yawl:OrgGroup__belongsTo ;
+    yawl:hasField yawl:OrgGroup__belongsToID ;
+    .
+
+
+# Method: OrgGroup.setLabel
+yawl:OrgGroup_setLabel_1 a yawl:Method ;
+    rdfs:label "setLabel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLabel(String label)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OrgGroup.getGroupName
+yawl:OrgGroup_getGroupName_2 a yawl:Method ;
+    rdfs:label "getGroupName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getGroupName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OrgGroup.setGroupName
+yawl:OrgGroup_setGroupName_3 a yawl:Method ;
+    rdfs:label "setGroupName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setGroupName(String groupName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OrgGroup.getName
+yawl:OrgGroup_getName_4 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OrgGroup.getGroupType
+yawl:OrgGroup_getGroupType_5 a yawl:Method ;
+    rdfs:label "getGroupType" ;
+    yawl:returnType "GroupType" ;
+    yawl:signature "GroupType getGroupType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OrgGroup.getGroupTypeFromString
+yawl:OrgGroup_getGroupTypeFromString_6 a yawl:Method ;
+    rdfs:label "getGroupTypeFromString" ;
+    yawl:returnType "GroupType" ;
+    yawl:signature "GroupType getGroupTypeFromString(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OrgGroup.setGroupType
+yawl:OrgGroup_setGroupType_7 a yawl:Method ;
+    rdfs:label "setGroupType" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setGroupType(GroupType groupType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OrgGroup.setGroupType
+yawl:OrgGroup_setGroupType_8 a yawl:Method ;
+    rdfs:label "setGroupType" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setGroupType(String groupTypeStr)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OrgGroup.getBelongsTo
+yawl:OrgGroup_getBelongsTo_9 a yawl:Method ;
+    rdfs:label "getBelongsTo" ;
+    yawl:returnType "OrgGroup" ;
+    yawl:signature "OrgGroup getBelongsTo()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OrgGroup.setBelongsTo
+yawl:OrgGroup_setBelongsTo_10 a yawl:Method ;
+    rdfs:label "setBelongsTo" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBelongsTo(OrgGroup belongsTo)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OrgGroup.setBelongsTo
+yawl:OrgGroup_setBelongsTo_11 a yawl:Method ;
+    rdfs:label "setBelongsTo" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean setBelongsTo(String ownerID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OrgGroup.hasResourceInHierarchy
+yawl:OrgGroup_hasResourceInHierarchy_12 a yawl:Method ;
+    rdfs:label "hasResourceInHierarchy" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasResourceInHierarchy(AbstractResource resource)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OrgGroup.get_groupType
+yawl:OrgGroup_get_groupType_13 a yawl:Method ;
+    rdfs:label "get_groupType" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_groupType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OrgGroup.set_groupType
+yawl:OrgGroup_set_groupType_14 a yawl:Method ;
+    rdfs:label "set_groupType" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_groupType(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OrgGroup.equals
+yawl:OrgGroup_equals_15 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OrgGroup.compareTo
+yawl:OrgGroup_compareTo_16 a yawl:Method ;
+    rdfs:label "compareTo" ;
+    yawl:returnType "int" ;
+    yawl:signature "int compareTo(Object o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OrgGroup.toXML
+yawl:OrgGroup_toXML_17 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OrgGroup.reconstitute
+yawl:OrgGroup_reconstitute_18 a yawl:Method ;
+    rdfs:label "reconstitute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reconstitute(Element e)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OrgGroup.get_belongsToID
+yawl:OrgGroup_get_belongsToID_19 a yawl:Method ;
+    rdfs:label "get_belongsToID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_belongsToID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OrgGroup.set_belongsToID
+yawl:OrgGroup_set_belongsToID_20 a yawl:Method ;
+    rdfs:label "set_belongsToID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_belongsToID(String belongsToID)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:OrgGroup__groupName a yawl:Field ;
+    rdfs:label "_groupName" .
+
+yawl:OrgGroup__groupType a yawl:Field ;
+    rdfs:label "_groupType" .
+
+yawl:OrgGroup__belongsTo a yawl:Field ;
+    rdfs:label "_belongsTo" .
+
+yawl:OrgGroup__belongsToID a yawl:Field ;
+    rdfs:label "_belongsToID" .
+
+
+

@@ -1,0 +1,139 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.interfce.TaskInformation
+yawl:TaskInformation a yawl:Class ;
+    rdfs:label "TaskInformation" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_interfce ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/interfce/TaskInformation.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 26/02/2004 Time: 14:54:10 @author Michael Adams - reworked for v2.1 Apr-09""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:TaskInformation_setAttributes_1 ;
+    yawl:hasMethod yawl:TaskInformation_addAttribute_2 ;
+    yawl:hasMethod yawl:TaskInformation_getAttributes_3 ;
+    yawl:hasMethod yawl:TaskInformation_getAttribute_4 ;
+    yawl:hasMethod yawl:TaskInformation_getParamSchema_5 ;
+    yawl:hasMethod yawl:TaskInformation_getTaskID_6 ;
+    yawl:hasMethod yawl:TaskInformation_getSpecificationID_7 ;
+    yawl:hasMethod yawl:TaskInformation_getTaskDocumentation_8 ;
+    yawl:hasMethod yawl:TaskInformation_getTaskName_9 ;
+    yawl:hasMethod yawl:TaskInformation_getDecompositionID_10 ;
+    yawl:hasField yawl:TaskInformation__paramSchema ;
+    yawl:hasField yawl:TaskInformation__taskID ;
+    yawl:hasField yawl:TaskInformation__specificationID ;
+    yawl:hasField yawl:TaskInformation__taskDocumentation ;
+    yawl:hasField yawl:TaskInformation__taskName ;
+    yawl:hasField yawl:TaskInformation__decompositionID ;
+    yawl:hasField yawl:TaskInformation__attributes ;
+    .
+
+
+# Method: TaskInformation.setAttributes
+yawl:TaskInformation_setAttributes_1 a yawl:Method ;
+    rdfs:label "setAttributes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAttributes(Map map)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskInformation.addAttribute
+yawl:TaskInformation_addAttribute_2 a yawl:Method ;
+    rdfs:label "addAttribute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addAttribute(String key, String value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskInformation.getAttributes
+yawl:TaskInformation_getAttributes_3 a yawl:Method ;
+    rdfs:label "getAttributes" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getAttributes()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskInformation.getAttribute
+yawl:TaskInformation_getAttribute_4 a yawl:Method ;
+    rdfs:label "getAttribute" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAttribute(String key)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskInformation.getParamSchema
+yawl:TaskInformation_getParamSchema_5 a yawl:Method ;
+    rdfs:label "getParamSchema" ;
+    yawl:returnType "YParametersSchema" ;
+    yawl:signature "YParametersSchema getParamSchema()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskInformation.getTaskID
+yawl:TaskInformation_getTaskID_6 a yawl:Method ;
+    rdfs:label "getTaskID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskInformation.getSpecificationID
+yawl:TaskInformation_getSpecificationID_7 a yawl:Method ;
+    rdfs:label "getSpecificationID" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getSpecificationID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskInformation.getTaskDocumentation
+yawl:TaskInformation_getTaskDocumentation_8 a yawl:Method ;
+    rdfs:label "getTaskDocumentation" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskDocumentation()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskInformation.getTaskName
+yawl:TaskInformation_getTaskName_9 a yawl:Method ;
+    rdfs:label "getTaskName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskInformation.getDecompositionID
+yawl:TaskInformation_getDecompositionID_10 a yawl:Method ;
+    rdfs:label "getDecompositionID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDecompositionID()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:TaskInformation__paramSchema a yawl:Field ;
+    rdfs:label "_paramSchema" .
+
+yawl:TaskInformation__taskID a yawl:Field ;
+    rdfs:label "_taskID" .
+
+yawl:TaskInformation__specificationID a yawl:Field ;
+    rdfs:label "_specificationID" .
+
+yawl:TaskInformation__taskDocumentation a yawl:Field ;
+    rdfs:label "_taskDocumentation" .
+
+yawl:TaskInformation__taskName a yawl:Field ;
+    rdfs:label "_taskName" .
+
+yawl:TaskInformation__decompositionID a yawl:Field ;
+    rdfs:label "_decompositionID" .
+
+yawl:TaskInformation__attributes a yawl:Field ;
+    rdfs:label "_attributes" .
+
+
+

@@ -1,0 +1,22 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.interactions.ResourceParseException
+yawl:ResourceParseException a yawl:Class ;
+    rdfs:label "ResourceParseException" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_interactions ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/interactions/ResourceParseException.java"^^xsd:string ;
+    rdfs:comment """ResourceParseException Class. An ResourceParseException is thrown when an attempt is made to parse the resourcing specification for a task and the spec does not match the expected content. @author Michael Adams v2.0, 05/02/2008""" ;
+    yawl:extends yawl:Exception ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+
+

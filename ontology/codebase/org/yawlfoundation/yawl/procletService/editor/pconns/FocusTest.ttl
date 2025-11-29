@@ -1,0 +1,48 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.pconns.FocusTest
+yawl:FocusTest a yawl:Class ;
+    rdfs:label "FocusTest" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor_pconns ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/pconns/FocusTest.java"^^xsd:string ;
+    yawl:extends yawl:JDialog ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:FocusTest_showDialog_1 ;
+    yawl:hasMethod yawl:FocusTest_main_2 ;
+    yawl:hasField yawl:FocusTest_button1 ;
+    yawl:hasField yawl:FocusTest_button2 ;
+    .
+
+
+# Method: FocusTest.showDialog
+yawl:FocusTest_showDialog_1 a yawl:Method ;
+    rdfs:label "showDialog" ;
+    yawl:returnType "String" ;
+    yawl:signature "String showDialog()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FocusTest.main
+yawl:FocusTest_main_2 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String args)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:FocusTest_button1 a yawl:Field ;
+    rdfs:label "button1" .
+
+yawl:FocusTest_button2 a yawl:Field ;
+    rdfs:label "button2" .
+
+
+

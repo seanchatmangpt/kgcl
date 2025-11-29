@@ -1,0 +1,513 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.teamQueues
+yawl:teamQueues a yawl:Class ;
+    rdfs:label "teamQueues" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/teamQueues.java"^^xsd:string ;
+    yawl:extends yawl:AbstractPageBean ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:teamQueues__init_1 ;
+    yawl:hasMethod yawl:teamQueues_getRequestBean_2 ;
+    yawl:hasMethod yawl:teamQueues_getApplicationBean_3 ;
+    yawl:hasMethod yawl:teamQueues_getSessionBean_4 ;
+    yawl:hasMethod yawl:teamQueues_init_5 ;
+    yawl:hasMethod yawl:teamQueues_preprocess_6 ;
+    yawl:hasMethod yawl:teamQueues_destroy_7 ;
+    yawl:hasMethod yawl:teamQueues_getPage1_8 ;
+    yawl:hasMethod yawl:teamQueues_setPage1_9 ;
+    yawl:hasMethod yawl:teamQueues_getHtml1_10 ;
+    yawl:hasMethod yawl:teamQueues_setHtml1_11 ;
+    yawl:hasMethod yawl:teamQueues_getHead1_12 ;
+    yawl:hasMethod yawl:teamQueues_setHead1_13 ;
+    yawl:hasMethod yawl:teamQueues_getLink1_14 ;
+    yawl:hasMethod yawl:teamQueues_setLink1_15 ;
+    yawl:hasMethod yawl:teamQueues_getBody1_16 ;
+    yawl:hasMethod yawl:teamQueues_setBody1_17 ;
+    yawl:hasMethod yawl:teamQueues_getForm1_18 ;
+    yawl:hasMethod yawl:teamQueues_setForm1_19 ;
+    yawl:hasMethod yawl:teamQueues_getLpQueues_20 ;
+    yawl:hasMethod yawl:teamQueues_setLpQueues_21 ;
+    yawl:hasMethod yawl:teamQueues_getLblAssignedTo_22 ;
+    yawl:hasMethod yawl:teamQueues_setLblAssignedTo_23 ;
+    yawl:hasMethod yawl:teamQueues_getLblResourceState_24 ;
+    yawl:hasMethod yawl:teamQueues_setLblResourceState_25 ;
+    yawl:hasMethod yawl:teamQueues_getTxtResourceState_26 ;
+    yawl:hasMethod yawl:teamQueues_setTxtResourceState_27 ;
+    yawl:hasMethod yawl:teamQueues_getCbbAssignedTo_28 ;
+    yawl:hasMethod yawl:teamQueues_setCbbAssignedTo_29 ;
+    yawl:hasMethod yawl:teamQueues_getRbGroup_30 ;
+    yawl:hasMethod yawl:teamQueues_setRbGroup_31 ;
+    yawl:hasMethod yawl:teamQueues_getRbTeam_32 ;
+    yawl:hasMethod yawl:teamQueues_setRbTeam_33 ;
+    yawl:hasMethod yawl:teamQueues_getRbOrgGroup_34 ;
+    yawl:hasMethod yawl:teamQueues_setRbOrgGroup_35 ;
+    yawl:hasMethod yawl:teamQueues_getMetaRefresh_36 ;
+    yawl:hasMethod yawl:teamQueues_setMetaRefresh_37 ;
+    yawl:hasMethod yawl:teamQueues_getPnlContainer_38 ;
+    yawl:hasMethod yawl:teamQueues_setPnlContainer_39 ;
+    yawl:hasMethod yawl:teamQueues_prerender_40 ;
+    yawl:hasMethod yawl:teamQueues_btnRefresh_action_41 ;
+    yawl:hasMethod yawl:teamQueues_buildMembersList_42 ;
+    yawl:hasMethod yawl:teamQueues_forceRefresh_43 ;
+    yawl:hasMethod yawl:teamQueues_setRefreshRate_44 ;
+    yawl:hasMethod yawl:teamQueues_showWorkItem_45 ;
+    yawl:hasMethod yawl:teamQueues_enableRadioButtons_46 ;
+    yawl:hasField yawl:teamQueues___placeholder ;
+    yawl:hasField yawl:teamQueues_page1 ;
+    yawl:hasField yawl:teamQueues_html1 ;
+    yawl:hasField yawl:teamQueues_head1 ;
+    yawl:hasField yawl:teamQueues_link1 ;
+    yawl:hasField yawl:teamQueues_body1 ;
+    yawl:hasField yawl:teamQueues_form1 ;
+    yawl:hasField yawl:teamQueues_lpQueues ;
+    yawl:hasField yawl:teamQueues_lblAssignedTo ;
+    yawl:hasField yawl:teamQueues_lblResourceState ;
+    yawl:hasField yawl:teamQueues_txtResourceState ;
+    yawl:hasField yawl:teamQueues_cbbAssignedTo ;
+    yawl:hasField yawl:teamQueues_rbGroup ;
+    yawl:hasField yawl:teamQueues_rbTeam ;
+    yawl:hasField yawl:teamQueues_rbOrgGroup ;
+    yawl:hasField yawl:teamQueues_metaRefresh ;
+    yawl:hasField yawl:teamQueues_pnlContainer ;
+    yawl:hasField yawl:teamQueues__sb ;
+    yawl:hasField yawl:teamQueues__rm ;
+    .
+
+
+# Method: teamQueues._init
+yawl:teamQueues__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: teamQueues.getRequestBean
+yawl:teamQueues_getRequestBean_2 a yawl:Method ;
+    rdfs:label "getRequestBean" ;
+    yawl:returnType "RequestBean" ;
+    yawl:signature "RequestBean getRequestBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: teamQueues.getApplicationBean
+yawl:teamQueues_getApplicationBean_3 a yawl:Method ;
+    rdfs:label "getApplicationBean" ;
+    yawl:returnType "ApplicationBean" ;
+    yawl:signature "ApplicationBean getApplicationBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: teamQueues.getSessionBean
+yawl:teamQueues_getSessionBean_4 a yawl:Method ;
+    rdfs:label "getSessionBean" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getSessionBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: teamQueues.init
+yawl:teamQueues_init_5 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.preprocess
+yawl:teamQueues_preprocess_6 a yawl:Method ;
+    rdfs:label "preprocess" ;
+    yawl:returnType "void" ;
+    yawl:signature "void preprocess()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.destroy
+yawl:teamQueues_destroy_7 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.getPage1
+yawl:teamQueues_getPage1_8 a yawl:Method ;
+    rdfs:label "getPage1" ;
+    yawl:returnType "Page" ;
+    yawl:signature "Page getPage1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.setPage1
+yawl:teamQueues_setPage1_9 a yawl:Method ;
+    rdfs:label "setPage1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPage1(Page p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.getHtml1
+yawl:teamQueues_getHtml1_10 a yawl:Method ;
+    rdfs:label "getHtml1" ;
+    yawl:returnType "Html" ;
+    yawl:signature "Html getHtml1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.setHtml1
+yawl:teamQueues_setHtml1_11 a yawl:Method ;
+    rdfs:label "setHtml1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHtml1(Html h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.getHead1
+yawl:teamQueues_getHead1_12 a yawl:Method ;
+    rdfs:label "getHead1" ;
+    yawl:returnType "Head" ;
+    yawl:signature "Head getHead1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.setHead1
+yawl:teamQueues_setHead1_13 a yawl:Method ;
+    rdfs:label "setHead1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHead1(Head h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.getLink1
+yawl:teamQueues_getLink1_14 a yawl:Method ;
+    rdfs:label "getLink1" ;
+    yawl:returnType "Link" ;
+    yawl:signature "Link getLink1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.setLink1
+yawl:teamQueues_setLink1_15 a yawl:Method ;
+    rdfs:label "setLink1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLink1(Link l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.getBody1
+yawl:teamQueues_getBody1_16 a yawl:Method ;
+    rdfs:label "getBody1" ;
+    yawl:returnType "Body" ;
+    yawl:signature "Body getBody1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.setBody1
+yawl:teamQueues_setBody1_17 a yawl:Method ;
+    rdfs:label "setBody1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBody1(Body b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.getForm1
+yawl:teamQueues_getForm1_18 a yawl:Method ;
+    rdfs:label "getForm1" ;
+    yawl:returnType "Form" ;
+    yawl:signature "Form getForm1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.setForm1
+yawl:teamQueues_setForm1_19 a yawl:Method ;
+    rdfs:label "setForm1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setForm1(Form f)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.getLpQueues
+yawl:teamQueues_getLpQueues_20 a yawl:Method ;
+    rdfs:label "getLpQueues" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getLpQueues()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.setLpQueues
+yawl:teamQueues_setLpQueues_21 a yawl:Method ;
+    rdfs:label "setLpQueues" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLpQueues(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.getLblAssignedTo
+yawl:teamQueues_getLblAssignedTo_22 a yawl:Method ;
+    rdfs:label "getLblAssignedTo" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblAssignedTo()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.setLblAssignedTo
+yawl:teamQueues_setLblAssignedTo_23 a yawl:Method ;
+    rdfs:label "setLblAssignedTo" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblAssignedTo(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.getLblResourceState
+yawl:teamQueues_getLblResourceState_24 a yawl:Method ;
+    rdfs:label "getLblResourceState" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblResourceState()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.setLblResourceState
+yawl:teamQueues_setLblResourceState_25 a yawl:Method ;
+    rdfs:label "setLblResourceState" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblResourceState(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.getTxtResourceState
+yawl:teamQueues_getTxtResourceState_26 a yawl:Method ;
+    rdfs:label "getTxtResourceState" ;
+    yawl:returnType "TextField" ;
+    yawl:signature "TextField getTxtResourceState()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.setTxtResourceState
+yawl:teamQueues_setTxtResourceState_27 a yawl:Method ;
+    rdfs:label "setTxtResourceState" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtResourceState(TextField t)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.getCbbAssignedTo
+yawl:teamQueues_getCbbAssignedTo_28 a yawl:Method ;
+    rdfs:label "getCbbAssignedTo" ;
+    yawl:returnType "DropDown" ;
+    yawl:signature "DropDown getCbbAssignedTo()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.setCbbAssignedTo
+yawl:teamQueues_setCbbAssignedTo_29 a yawl:Method ;
+    rdfs:label "setCbbAssignedTo" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCbbAssignedTo(DropDown dd)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.getRbGroup
+yawl:teamQueues_getRbGroup_30 a yawl:Method ;
+    rdfs:label "getRbGroup" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getRbGroup()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.setRbGroup
+yawl:teamQueues_setRbGroup_31 a yawl:Method ;
+    rdfs:label "setRbGroup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRbGroup(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.getRbTeam
+yawl:teamQueues_getRbTeam_32 a yawl:Method ;
+    rdfs:label "getRbTeam" ;
+    yawl:returnType "RadioButton" ;
+    yawl:signature "RadioButton getRbTeam()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.setRbTeam
+yawl:teamQueues_setRbTeam_33 a yawl:Method ;
+    rdfs:label "setRbTeam" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRbTeam(RadioButton rb)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.getRbOrgGroup
+yawl:teamQueues_getRbOrgGroup_34 a yawl:Method ;
+    rdfs:label "getRbOrgGroup" ;
+    yawl:returnType "RadioButton" ;
+    yawl:signature "RadioButton getRbOrgGroup()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.setRbOrgGroup
+yawl:teamQueues_setRbOrgGroup_35 a yawl:Method ;
+    rdfs:label "setRbOrgGroup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRbOrgGroup(RadioButton rb)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.getMetaRefresh
+yawl:teamQueues_getMetaRefresh_36 a yawl:Method ;
+    rdfs:label "getMetaRefresh" ;
+    yawl:returnType "Meta" ;
+    yawl:signature "Meta getMetaRefresh()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.setMetaRefresh
+yawl:teamQueues_setMetaRefresh_37 a yawl:Method ;
+    rdfs:label "setMetaRefresh" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMetaRefresh(Meta m)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.getPnlContainer
+yawl:teamQueues_getPnlContainer_38 a yawl:Method ;
+    rdfs:label "getPnlContainer" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlContainer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.setPnlContainer
+yawl:teamQueues_setPnlContainer_39 a yawl:Method ;
+    rdfs:label "setPnlContainer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlContainer(PanelLayout pnl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.prerender
+yawl:teamQueues_prerender_40 a yawl:Method ;
+    rdfs:label "prerender" ;
+    yawl:returnType "void" ;
+    yawl:signature "void prerender()" ;
+    rdfs:comment """Overridden method that is called immediately before the page is rendered""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.btnRefresh_action
+yawl:teamQueues_btnRefresh_action_41 a yawl:Method ;
+    rdfs:label "btnRefresh_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnRefresh_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.buildMembersList
+yawl:teamQueues_buildMembersList_42 a yawl:Method ;
+    rdfs:label "buildMembersList" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord buildMembersList(qSet setType, String selectedID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: teamQueues.forceRefresh
+yawl:teamQueues_forceRefresh_43 a yawl:Method ;
+    rdfs:label "forceRefresh" ;
+    yawl:returnType "void" ;
+    yawl:signature "void forceRefresh()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.setRefreshRate
+yawl:teamQueues_setRefreshRate_44 a yawl:Method ;
+    rdfs:label "setRefreshRate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRefreshRate(int rate)" ;
+    rdfs:comment """Sets the auto refresh rate of the page @param rate if <0, disables page refreshes; if >0, set refresh rate to that number of seconds; if 0, set the rate to the default provided by the resourceService's web.xml""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: teamQueues.showWorkItem
+yawl:teamQueues_showWorkItem_45 a yawl:Method ;
+    rdfs:label "showWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showWorkItem(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: teamQueues.enableRadioButtons
+yawl:teamQueues_enableRadioButtons_46 a yawl:Method ;
+    rdfs:label "enableRadioButtons" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean enableRadioButtons()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:teamQueues___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:teamQueues_page1 a yawl:Field ;
+    rdfs:label "page1" .
+
+yawl:teamQueues_html1 a yawl:Field ;
+    rdfs:label "html1" .
+
+yawl:teamQueues_head1 a yawl:Field ;
+    rdfs:label "head1" .
+
+yawl:teamQueues_link1 a yawl:Field ;
+    rdfs:label "link1" .
+
+yawl:teamQueues_body1 a yawl:Field ;
+    rdfs:label "body1" .
+
+yawl:teamQueues_form1 a yawl:Field ;
+    rdfs:label "form1" .
+
+yawl:teamQueues_lpQueues a yawl:Field ;
+    rdfs:label "lpQueues" .
+
+yawl:teamQueues_lblAssignedTo a yawl:Field ;
+    rdfs:label "lblAssignedTo" .
+
+yawl:teamQueues_lblResourceState a yawl:Field ;
+    rdfs:label "lblResourceState" .
+
+yawl:teamQueues_txtResourceState a yawl:Field ;
+    rdfs:label "txtResourceState" .
+
+yawl:teamQueues_cbbAssignedTo a yawl:Field ;
+    rdfs:label "cbbAssignedTo" .
+
+yawl:teamQueues_rbGroup a yawl:Field ;
+    rdfs:label "rbGroup" .
+
+yawl:teamQueues_rbTeam a yawl:Field ;
+    rdfs:label "rbTeam" .
+
+yawl:teamQueues_rbOrgGroup a yawl:Field ;
+    rdfs:label "rbOrgGroup" .
+
+yawl:teamQueues_metaRefresh a yawl:Field ;
+    rdfs:label "metaRefresh" .
+
+yawl:teamQueues_pnlContainer a yawl:Field ;
+    rdfs:label "pnlContainer" .
+
+yawl:teamQueues__sb a yawl:Field ;
+    rdfs:label "_sb" .
+
+yawl:teamQueues__rm a yawl:Field ;
+    rdfs:label "_rm" .
+
+
+

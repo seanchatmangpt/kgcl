@@ -1,0 +1,87 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.cost.evaluate.TaskCost
+yawl:TaskCost a yawl:Class ;
+    rdfs:label "TaskCost" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_cost_evaluate ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/cost/evaluate/TaskCost.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 5/12/12""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:TaskCost_getTaskID_1 ;
+    yawl:hasMethod yawl:TaskCost_setTaskID_2 ;
+    yawl:hasMethod yawl:TaskCost_getResourceID_3 ;
+    yawl:hasMethod yawl:TaskCost_setResourceID_4 ;
+    yawl:hasMethod yawl:TaskCost_getCost_5 ;
+    yawl:hasMethod yawl:TaskCost_setCost_6 ;
+    yawl:hasField yawl:TaskCost__taskID ;
+    yawl:hasField yawl:TaskCost__resourceID ;
+    yawl:hasField yawl:TaskCost__cost ;
+    .
+
+
+# Method: TaskCost.getTaskID
+yawl:TaskCost_getTaskID_1 a yawl:Method ;
+    rdfs:label "getTaskID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskCost.setTaskID
+yawl:TaskCost_setTaskID_2 a yawl:Method ;
+    rdfs:label "setTaskID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTaskID(String taskID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskCost.getResourceID
+yawl:TaskCost_getResourceID_3 a yawl:Method ;
+    rdfs:label "getResourceID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourceID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskCost.setResourceID
+yawl:TaskCost_setResourceID_4 a yawl:Method ;
+    rdfs:label "setResourceID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setResourceID(String resourceID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskCost.getCost
+yawl:TaskCost_getCost_5 a yawl:Method ;
+    rdfs:label "getCost" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getCost()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskCost.setCost
+yawl:TaskCost_setCost_6 a yawl:Method ;
+    rdfs:label "setCost" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCost(double cost)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:TaskCost__taskID a yawl:Field ;
+    rdfs:label "_taskID" .
+
+yawl:TaskCost__resourceID a yawl:Field ;
+    rdfs:label "_resourceID" .
+
+yawl:TaskCost__cost a yawl:Field ;
+    rdfs:label "_cost" .
+
+
+

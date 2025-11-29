@@ -1,0 +1,246 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.persistence.StoredOptions
+yawl:StoredOptions a yawl:Class ;
+    rdfs:label "StoredOptions" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_persistence ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/persistence/StoredOptions.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 3/02/12""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:StoredOptions_getInternList_1 ;
+    yawl:hasMethod yawl:StoredOptions_getCrList_2 ;
+    yawl:hasMethod yawl:StoredOptions_getFragmentList_3 ;
+    yawl:hasMethod yawl:StoredOptions_getPkey_4 ;
+    yawl:hasMethod yawl:StoredOptions_setPkey_5 ;
+    yawl:hasMethod yawl:StoredOptions_getDestClassID_6 ;
+    yawl:hasMethod yawl:StoredOptions_setDestClassID_7 ;
+    yawl:hasMethod yawl:StoredOptions_getDestProcletID_8 ;
+    yawl:hasMethod yawl:StoredOptions_setDestProcletID_9 ;
+    yawl:hasMethod yawl:StoredOptions_getDestBlockID_10 ;
+    yawl:hasMethod yawl:StoredOptions_setDestBlockID_11 ;
+    yawl:hasMethod yawl:StoredOptions_getSign_12 ;
+    yawl:hasMethod yawl:StoredOptions_setSign_13 ;
+    yawl:hasMethod yawl:StoredOptions_getClassID_14 ;
+    yawl:hasMethod yawl:StoredOptions_setClassID_15 ;
+    yawl:hasMethod yawl:StoredOptions_getProcletID_16 ;
+    yawl:hasMethod yawl:StoredOptions_setProcletID_17 ;
+    yawl:hasMethod yawl:StoredOptions_getBlockID_18 ;
+    yawl:hasMethod yawl:StoredOptions_setBlockID_19 ;
+    yawl:hasMethod yawl:StoredOptions_isCr_20 ;
+    yawl:hasMethod yawl:StoredOptions_setCr_21 ;
+    yawl:hasField yawl:StoredOptions_pkey ;
+    yawl:hasField yawl:StoredOptions_destClassID ;
+    yawl:hasField yawl:StoredOptions_destProcletID ;
+    yawl:hasField yawl:StoredOptions_destBlockID ;
+    yawl:hasField yawl:StoredOptions_sign ;
+    yawl:hasField yawl:StoredOptions_classID ;
+    yawl:hasField yawl:StoredOptions_procletID ;
+    yawl:hasField yawl:StoredOptions_blockID ;
+    yawl:hasField yawl:StoredOptions_cr ;
+    .
+
+
+# Method: StoredOptions.getInternList
+yawl:StoredOptions_getInternList_1 a yawl:Method ;
+    rdfs:label "getInternList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getInternList()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredOptions.getCrList
+yawl:StoredOptions_getCrList_2 a yawl:Method ;
+    rdfs:label "getCrList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getCrList()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredOptions.getFragmentList
+yawl:StoredOptions_getFragmentList_3 a yawl:Method ;
+    rdfs:label "getFragmentList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getFragmentList()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredOptions.getPkey
+yawl:StoredOptions_getPkey_4 a yawl:Method ;
+    rdfs:label "getPkey" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getPkey()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredOptions.setPkey
+yawl:StoredOptions_setPkey_5 a yawl:Method ;
+    rdfs:label "setPkey" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPkey(long pkey)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredOptions.getDestClassID
+yawl:StoredOptions_getDestClassID_6 a yawl:Method ;
+    rdfs:label "getDestClassID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDestClassID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredOptions.setDestClassID
+yawl:StoredOptions_setDestClassID_7 a yawl:Method ;
+    rdfs:label "setDestClassID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDestClassID(String destClassID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredOptions.getDestProcletID
+yawl:StoredOptions_getDestProcletID_8 a yawl:Method ;
+    rdfs:label "getDestProcletID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDestProcletID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredOptions.setDestProcletID
+yawl:StoredOptions_setDestProcletID_9 a yawl:Method ;
+    rdfs:label "setDestProcletID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDestProcletID(String destProcletID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredOptions.getDestBlockID
+yawl:StoredOptions_getDestBlockID_10 a yawl:Method ;
+    rdfs:label "getDestBlockID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDestBlockID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredOptions.setDestBlockID
+yawl:StoredOptions_setDestBlockID_11 a yawl:Method ;
+    rdfs:label "setDestBlockID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDestBlockID(String destBlockID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredOptions.getSign
+yawl:StoredOptions_getSign_12 a yawl:Method ;
+    rdfs:label "getSign" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSign()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredOptions.setSign
+yawl:StoredOptions_setSign_13 a yawl:Method ;
+    rdfs:label "setSign" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSign(String sign)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredOptions.getClassID
+yawl:StoredOptions_getClassID_14 a yawl:Method ;
+    rdfs:label "getClassID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getClassID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredOptions.setClassID
+yawl:StoredOptions_setClassID_15 a yawl:Method ;
+    rdfs:label "setClassID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setClassID(String classID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredOptions.getProcletID
+yawl:StoredOptions_getProcletID_16 a yawl:Method ;
+    rdfs:label "getProcletID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getProcletID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredOptions.setProcletID
+yawl:StoredOptions_setProcletID_17 a yawl:Method ;
+    rdfs:label "setProcletID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setProcletID(String procletID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredOptions.getBlockID
+yawl:StoredOptions_getBlockID_18 a yawl:Method ;
+    rdfs:label "getBlockID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBlockID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredOptions.setBlockID
+yawl:StoredOptions_setBlockID_19 a yawl:Method ;
+    rdfs:label "setBlockID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBlockID(String blockID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredOptions.isCr
+yawl:StoredOptions_isCr_20 a yawl:Method ;
+    rdfs:label "isCr" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isCr()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredOptions.setCr
+yawl:StoredOptions_setCr_21 a yawl:Method ;
+    rdfs:label "setCr" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCr(boolean cr)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:StoredOptions_pkey a yawl:Field ;
+    rdfs:label "pkey" .
+
+yawl:StoredOptions_destClassID a yawl:Field ;
+    rdfs:label "destClassID" .
+
+yawl:StoredOptions_destProcletID a yawl:Field ;
+    rdfs:label "destProcletID" .
+
+yawl:StoredOptions_destBlockID a yawl:Field ;
+    rdfs:label "destBlockID" .
+
+yawl:StoredOptions_sign a yawl:Field ;
+    rdfs:label "sign" .
+
+yawl:StoredOptions_classID a yawl:Field ;
+    rdfs:label "classID" .
+
+yawl:StoredOptions_procletID a yawl:Field ;
+    rdfs:label "procletID" .
+
+yawl:StoredOptions_blockID a yawl:Field ;
+    rdfs:label "blockID" .
+
+yawl:StoredOptions_cr a yawl:Field ;
+    rdfs:label "cr" .
+
+
+

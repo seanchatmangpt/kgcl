@@ -1,0 +1,136 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.calendar.utilisation.StringWithMessage
+yawl:StringWithMessage a yawl:Class ;
+    rdfs:label "StringWithMessage" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_calendar_utilisation ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/calendar/utilisation/StringWithMessage.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 6/10/2010""" ;
+    yawl:extends yawl:StatusMessage ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:StringWithMessage_hasError_1 ;
+    yawl:hasMethod yawl:StringWithMessage_hasData_2 ;
+    yawl:hasMethod yawl:StringWithMessage_getKey_3 ;
+    yawl:hasMethod yawl:StringWithMessage_setKey_4 ;
+    yawl:hasMethod yawl:StringWithMessage_setValue_5 ;
+    yawl:hasMethod yawl:StringWithMessage_setValue_6 ;
+    yawl:hasMethod yawl:StringWithMessage_getValue_7 ;
+    yawl:hasMethod yawl:StringWithMessage_getIntValue_8 ;
+    yawl:hasMethod yawl:StringWithMessage_hasData_9 ;
+    yawl:hasMethod yawl:StringWithMessage_toXNode_10 ;
+    yawl:hasMethod yawl:StringWithMessage_fromXNode_11 ;
+    yawl:hasField yawl:StringWithMessage__key ;
+    yawl:hasField yawl:StringWithMessage__value ;
+    .
+
+
+# Method: StringWithMessage.hasError
+yawl:StringWithMessage_hasError_1 a yawl:Method ;
+    rdfs:label "hasError" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasError(StringWithMessage strMsg)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringWithMessage.hasData
+yawl:StringWithMessage_hasData_2 a yawl:Method ;
+    rdfs:label "hasData" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasData(StringWithMessage strMsg)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringWithMessage.getKey
+yawl:StringWithMessage_getKey_3 a yawl:Method ;
+    rdfs:label "getKey" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getKey()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StringWithMessage.setKey
+yawl:StringWithMessage_setKey_4 a yawl:Method ;
+    rdfs:label "setKey" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setKey(String key)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StringWithMessage.setValue
+yawl:StringWithMessage_setValue_5 a yawl:Method ;
+    rdfs:label "setValue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setValue(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StringWithMessage.setValue
+yawl:StringWithMessage_setValue_6 a yawl:Method ;
+    rdfs:label "setValue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setValue(int i)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StringWithMessage.getValue
+yawl:StringWithMessage_getValue_7 a yawl:Method ;
+    rdfs:label "getValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getValue()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StringWithMessage.getIntValue
+yawl:StringWithMessage_getIntValue_8 a yawl:Method ;
+    rdfs:label "getIntValue" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getIntValue()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StringWithMessage.hasData
+yawl:StringWithMessage_hasData_9 a yawl:Method ;
+    rdfs:label "hasData" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasData()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StringWithMessage.toXNode
+yawl:StringWithMessage_toXNode_10 a yawl:Method ;
+    rdfs:label "toXNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode toXNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StringWithMessage.fromXNode
+yawl:StringWithMessage_fromXNode_11 a yawl:Method ;
+    rdfs:label "fromXNode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXNode(XNode node)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:StringWithMessage__key a yawl:Field ;
+    rdfs:label "_key" .
+
+yawl:StringWithMessage__value a yawl:Field ;
+    rdfs:label "_value" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_resourcing_rsInterface_scheduling a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.rsInterface.scheduling" .
+
+

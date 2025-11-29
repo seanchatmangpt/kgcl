@@ -1,0 +1,802 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.secResourceMgt
+yawl:secResourceMgt a yawl:Class ;
+    rdfs:label "secResourceMgt" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/secResourceMgt.java"^^xsd:string ;
+    rdfs:comment """Backing bean for the secondary resources mgt form @author Michael Adams Date: 31/01/2008 Last Date: 16/03/2008""" ;
+    yawl:extends yawl:AbstractPageBean ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:secResourceMgt__init_1 ;
+    yawl:hasMethod yawl:secResourceMgt_getPage1_2 ;
+    yawl:hasMethod yawl:secResourceMgt_setPage1_3 ;
+    yawl:hasMethod yawl:secResourceMgt_getHtml1_4 ;
+    yawl:hasMethod yawl:secResourceMgt_setHtml1_5 ;
+    yawl:hasMethod yawl:secResourceMgt_getHead1_6 ;
+    yawl:hasMethod yawl:secResourceMgt_setHead1_7 ;
+    yawl:hasMethod yawl:secResourceMgt_getLink1_8 ;
+    yawl:hasMethod yawl:secResourceMgt_setLink1_9 ;
+    yawl:hasMethod yawl:secResourceMgt_getBody1_10 ;
+    yawl:hasMethod yawl:secResourceMgt_setBody1_11 ;
+    yawl:hasMethod yawl:secResourceMgt_getForm1_12 ;
+    yawl:hasMethod yawl:secResourceMgt_setForm1_13 ;
+    yawl:hasMethod yawl:secResourceMgt_getPnlParticipants_14 ;
+    yawl:hasMethod yawl:secResourceMgt_setPnlParticipants_15 ;
+    yawl:hasMethod yawl:secResourceMgt_getPnlRoles_16 ;
+    yawl:hasMethod yawl:secResourceMgt_setPnlRoles_17 ;
+    yawl:hasMethod yawl:secResourceMgt_getPnlNHResources_18 ;
+    yawl:hasMethod yawl:secResourceMgt_setPnlNHResources_19 ;
+    yawl:hasMethod yawl:secResourceMgt_getPnlNHCategories_20 ;
+    yawl:hasMethod yawl:secResourceMgt_setPnlNHCategories_21 ;
+    yawl:hasMethod yawl:secResourceMgt_getPnlSelected_22 ;
+    yawl:hasMethod yawl:secResourceMgt_setPnlSelected_23 ;
+    yawl:hasMethod yawl:secResourceMgt_getSttParticipants_24 ;
+    yawl:hasMethod yawl:secResourceMgt_setSttParticipants_25 ;
+    yawl:hasMethod yawl:secResourceMgt_getSttRoles_26 ;
+    yawl:hasMethod yawl:secResourceMgt_setSttRoles_27 ;
+    yawl:hasMethod yawl:secResourceMgt_getSttNHResources_28 ;
+    yawl:hasMethod yawl:secResourceMgt_setSttNHResources_29 ;
+    yawl:hasMethod yawl:secResourceMgt_getSttNHCategories_30 ;
+    yawl:hasMethod yawl:secResourceMgt_setSttNHCategories_31 ;
+    yawl:hasMethod yawl:secResourceMgt_getSttSelected_32 ;
+    yawl:hasMethod yawl:secResourceMgt_setSttSelected_33 ;
+    yawl:hasMethod yawl:secResourceMgt_getSttTitle_34 ;
+    yawl:hasMethod yawl:secResourceMgt_setSttTitle_35 ;
+    yawl:hasMethod yawl:secResourceMgt_getLbxParticipants_36 ;
+    yawl:hasMethod yawl:secResourceMgt_setLbxParticipants_37 ;
+    yawl:hasMethod yawl:secResourceMgt_getLbxRoles_38 ;
+    yawl:hasMethod yawl:secResourceMgt_setLbxRoles_39 ;
+    yawl:hasMethod yawl:secResourceMgt_getLbxNHResources_40 ;
+    yawl:hasMethod yawl:secResourceMgt_setLbxNHResources_41 ;
+    yawl:hasMethod yawl:secResourceMgt_getLbxNHCategories_42 ;
+    yawl:hasMethod yawl:secResourceMgt_setLbxNHCategories_43 ;
+    yawl:hasMethod yawl:secResourceMgt_getLbxSelected_44 ;
+    yawl:hasMethod yawl:secResourceMgt_setLbxSelected_45 ;
+    yawl:hasMethod yawl:secResourceMgt_getBtnRemove_46 ;
+    yawl:hasMethod yawl:secResourceMgt_setBtnRemove_47 ;
+    yawl:hasMethod yawl:secResourceMgt_getBtnDone_48 ;
+    yawl:hasMethod yawl:secResourceMgt_setBtnDone_49 ;
+    yawl:hasMethod yawl:secResourceMgt_getBtnSave_50 ;
+    yawl:hasMethod yawl:secResourceMgt_setBtnSave_51 ;
+    yawl:hasMethod yawl:secResourceMgt_getBtnCheck_52 ;
+    yawl:hasMethod yawl:secResourceMgt_setBtnCheck_53 ;
+    yawl:hasMethod yawl:secResourceMgt_getPnlContainer_54 ;
+    yawl:hasMethod yawl:secResourceMgt_setPnlContainer_55 ;
+    yawl:hasMethod yawl:secResourceMgt_getApplicationBean_56 ;
+    yawl:hasMethod yawl:secResourceMgt_getSessionBean_57 ;
+    yawl:hasMethod yawl:secResourceMgt_getRequestBean_58 ;
+    yawl:hasMethod yawl:secResourceMgt_init_59 ;
+    yawl:hasMethod yawl:secResourceMgt_preprocess_60 ;
+    yawl:hasMethod yawl:secResourceMgt_destroy_61 ;
+    yawl:hasMethod yawl:secResourceMgt_prerender_62 ;
+    yawl:hasMethod yawl:secResourceMgt_lbxParticipants_processValueChange_63 ;
+    yawl:hasMethod yawl:secResourceMgt_lbxRoles_processValueChange_64 ;
+    yawl:hasMethod yawl:secResourceMgt_lbxNHResources_processValueChange_65 ;
+    yawl:hasMethod yawl:secResourceMgt_lbxNHCategories_processValueChange_66 ;
+    yawl:hasMethod yawl:secResourceMgt_lbxSelected_processValueChange_67 ;
+    yawl:hasMethod yawl:secResourceMgt_btnDone_action_68 ;
+    yawl:hasMethod yawl:secResourceMgt_btnRemove_action_69 ;
+    yawl:hasMethod yawl:secResourceMgt_btnCheck_action_70 ;
+    yawl:hasMethod yawl:secResourceMgt_btnSave_action_71 ;
+    yawl:hasMethod yawl:secResourceMgt_enableButtons_72 ;
+    yawl:hasMethod yawl:secResourceMgt_showMessagePanel_73 ;
+    yawl:hasField yawl:secResourceMgt___placeholder ;
+    yawl:hasField yawl:secResourceMgt_page1 ;
+    yawl:hasField yawl:secResourceMgt_html1 ;
+    yawl:hasField yawl:secResourceMgt_head1 ;
+    yawl:hasField yawl:secResourceMgt_link1 ;
+    yawl:hasField yawl:secResourceMgt_body1 ;
+    yawl:hasField yawl:secResourceMgt_form1 ;
+    yawl:hasField yawl:secResourceMgt_pnlParticipants ;
+    yawl:hasField yawl:secResourceMgt_pnlRoles ;
+    yawl:hasField yawl:secResourceMgt_pnlNHResources ;
+    yawl:hasField yawl:secResourceMgt_pnlNHCategories ;
+    yawl:hasField yawl:secResourceMgt_pnlSelected ;
+    yawl:hasField yawl:secResourceMgt_sttParticipants ;
+    yawl:hasField yawl:secResourceMgt_sttRoles ;
+    yawl:hasField yawl:secResourceMgt_sttNHResources ;
+    yawl:hasField yawl:secResourceMgt_sttNHCategories ;
+    yawl:hasField yawl:secResourceMgt_sttSelected ;
+    yawl:hasField yawl:secResourceMgt_sttTitle ;
+    yawl:hasField yawl:secResourceMgt_lbxParticipants ;
+    yawl:hasField yawl:secResourceMgt_lbxRoles ;
+    yawl:hasField yawl:secResourceMgt_lbxNHResources ;
+    yawl:hasField yawl:secResourceMgt_lbxNHCategories ;
+    yawl:hasField yawl:secResourceMgt_lbxSelected ;
+    yawl:hasField yawl:secResourceMgt_btnRemove ;
+    yawl:hasField yawl:secResourceMgt_btnDone ;
+    yawl:hasField yawl:secResourceMgt_btnSave ;
+    yawl:hasField yawl:secResourceMgt_btnCheck ;
+    yawl:hasField yawl:secResourceMgt_pnlContainer ;
+    yawl:hasField yawl:secResourceMgt__sb ;
+    yawl:hasField yawl:secResourceMgt_msgPanel ;
+    .
+
+
+# Method: secResourceMgt._init
+yawl:secResourceMgt__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: secResourceMgt.getPage1
+yawl:secResourceMgt_getPage1_2 a yawl:Method ;
+    rdfs:label "getPage1" ;
+    yawl:returnType "Page" ;
+    yawl:signature "Page getPage1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.setPage1
+yawl:secResourceMgt_setPage1_3 a yawl:Method ;
+    rdfs:label "setPage1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPage1(Page p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.getHtml1
+yawl:secResourceMgt_getHtml1_4 a yawl:Method ;
+    rdfs:label "getHtml1" ;
+    yawl:returnType "Html" ;
+    yawl:signature "Html getHtml1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.setHtml1
+yawl:secResourceMgt_setHtml1_5 a yawl:Method ;
+    rdfs:label "setHtml1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHtml1(Html h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.getHead1
+yawl:secResourceMgt_getHead1_6 a yawl:Method ;
+    rdfs:label "getHead1" ;
+    yawl:returnType "Head" ;
+    yawl:signature "Head getHead1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.setHead1
+yawl:secResourceMgt_setHead1_7 a yawl:Method ;
+    rdfs:label "setHead1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHead1(Head h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.getLink1
+yawl:secResourceMgt_getLink1_8 a yawl:Method ;
+    rdfs:label "getLink1" ;
+    yawl:returnType "Link" ;
+    yawl:signature "Link getLink1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.setLink1
+yawl:secResourceMgt_setLink1_9 a yawl:Method ;
+    rdfs:label "setLink1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLink1(Link l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.getBody1
+yawl:secResourceMgt_getBody1_10 a yawl:Method ;
+    rdfs:label "getBody1" ;
+    yawl:returnType "Body" ;
+    yawl:signature "Body getBody1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.setBody1
+yawl:secResourceMgt_setBody1_11 a yawl:Method ;
+    rdfs:label "setBody1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBody1(Body b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.getForm1
+yawl:secResourceMgt_getForm1_12 a yawl:Method ;
+    rdfs:label "getForm1" ;
+    yawl:returnType "Form" ;
+    yawl:signature "Form getForm1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.setForm1
+yawl:secResourceMgt_setForm1_13 a yawl:Method ;
+    rdfs:label "setForm1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setForm1(Form f)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.getPnlParticipants
+yawl:secResourceMgt_getPnlParticipants_14 a yawl:Method ;
+    rdfs:label "getPnlParticipants" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlParticipants()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.setPnlParticipants
+yawl:secResourceMgt_setPnlParticipants_15 a yawl:Method ;
+    rdfs:label "setPnlParticipants" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlParticipants(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.getPnlRoles
+yawl:secResourceMgt_getPnlRoles_16 a yawl:Method ;
+    rdfs:label "getPnlRoles" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlRoles()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.setPnlRoles
+yawl:secResourceMgt_setPnlRoles_17 a yawl:Method ;
+    rdfs:label "setPnlRoles" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlRoles(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.getPnlNHResources
+yawl:secResourceMgt_getPnlNHResources_18 a yawl:Method ;
+    rdfs:label "getPnlNHResources" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlNHResources()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.setPnlNHResources
+yawl:secResourceMgt_setPnlNHResources_19 a yawl:Method ;
+    rdfs:label "setPnlNHResources" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlNHResources(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.getPnlNHCategories
+yawl:secResourceMgt_getPnlNHCategories_20 a yawl:Method ;
+    rdfs:label "getPnlNHCategories" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlNHCategories()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.setPnlNHCategories
+yawl:secResourceMgt_setPnlNHCategories_21 a yawl:Method ;
+    rdfs:label "setPnlNHCategories" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlNHCategories(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.getPnlSelected
+yawl:secResourceMgt_getPnlSelected_22 a yawl:Method ;
+    rdfs:label "getPnlSelected" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlSelected()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.setPnlSelected
+yawl:secResourceMgt_setPnlSelected_23 a yawl:Method ;
+    rdfs:label "setPnlSelected" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlSelected(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.getSttParticipants
+yawl:secResourceMgt_getSttParticipants_24 a yawl:Method ;
+    rdfs:label "getSttParticipants" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getSttParticipants()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.setSttParticipants
+yawl:secResourceMgt_setSttParticipants_25 a yawl:Method ;
+    rdfs:label "setSttParticipants" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSttParticipants(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.getSttRoles
+yawl:secResourceMgt_getSttRoles_26 a yawl:Method ;
+    rdfs:label "getSttRoles" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getSttRoles()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.setSttRoles
+yawl:secResourceMgt_setSttRoles_27 a yawl:Method ;
+    rdfs:label "setSttRoles" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSttRoles(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.getSttNHResources
+yawl:secResourceMgt_getSttNHResources_28 a yawl:Method ;
+    rdfs:label "getSttNHResources" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getSttNHResources()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.setSttNHResources
+yawl:secResourceMgt_setSttNHResources_29 a yawl:Method ;
+    rdfs:label "setSttNHResources" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSttNHResources(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.getSttNHCategories
+yawl:secResourceMgt_getSttNHCategories_30 a yawl:Method ;
+    rdfs:label "getSttNHCategories" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getSttNHCategories()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.setSttNHCategories
+yawl:secResourceMgt_setSttNHCategories_31 a yawl:Method ;
+    rdfs:label "setSttNHCategories" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSttNHCategories(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.getSttSelected
+yawl:secResourceMgt_getSttSelected_32 a yawl:Method ;
+    rdfs:label "getSttSelected" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getSttSelected()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.setSttSelected
+yawl:secResourceMgt_setSttSelected_33 a yawl:Method ;
+    rdfs:label "setSttSelected" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSttSelected(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.getSttTitle
+yawl:secResourceMgt_getSttTitle_34 a yawl:Method ;
+    rdfs:label "getSttTitle" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getSttTitle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.setSttTitle
+yawl:secResourceMgt_setSttTitle_35 a yawl:Method ;
+    rdfs:label "setSttTitle" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSttTitle(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.getLbxParticipants
+yawl:secResourceMgt_getLbxParticipants_36 a yawl:Method ;
+    rdfs:label "getLbxParticipants" ;
+    yawl:returnType "Listbox" ;
+    yawl:signature "Listbox getLbxParticipants()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.setLbxParticipants
+yawl:secResourceMgt_setLbxParticipants_37 a yawl:Method ;
+    rdfs:label "setLbxParticipants" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLbxParticipants(Listbox lb)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.getLbxRoles
+yawl:secResourceMgt_getLbxRoles_38 a yawl:Method ;
+    rdfs:label "getLbxRoles" ;
+    yawl:returnType "Listbox" ;
+    yawl:signature "Listbox getLbxRoles()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.setLbxRoles
+yawl:secResourceMgt_setLbxRoles_39 a yawl:Method ;
+    rdfs:label "setLbxRoles" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLbxRoles(Listbox lb)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.getLbxNHResources
+yawl:secResourceMgt_getLbxNHResources_40 a yawl:Method ;
+    rdfs:label "getLbxNHResources" ;
+    yawl:returnType "Listbox" ;
+    yawl:signature "Listbox getLbxNHResources()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.setLbxNHResources
+yawl:secResourceMgt_setLbxNHResources_41 a yawl:Method ;
+    rdfs:label "setLbxNHResources" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLbxNHResources(Listbox lb)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.getLbxNHCategories
+yawl:secResourceMgt_getLbxNHCategories_42 a yawl:Method ;
+    rdfs:label "getLbxNHCategories" ;
+    yawl:returnType "Listbox" ;
+    yawl:signature "Listbox getLbxNHCategories()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.setLbxNHCategories
+yawl:secResourceMgt_setLbxNHCategories_43 a yawl:Method ;
+    rdfs:label "setLbxNHCategories" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLbxNHCategories(Listbox lb)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.getLbxSelected
+yawl:secResourceMgt_getLbxSelected_44 a yawl:Method ;
+    rdfs:label "getLbxSelected" ;
+    yawl:returnType "Listbox" ;
+    yawl:signature "Listbox getLbxSelected()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.setLbxSelected
+yawl:secResourceMgt_setLbxSelected_45 a yawl:Method ;
+    rdfs:label "setLbxSelected" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLbxSelected(Listbox lb)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.getBtnRemove
+yawl:secResourceMgt_getBtnRemove_46 a yawl:Method ;
+    rdfs:label "getBtnRemove" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnRemove()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.setBtnRemove
+yawl:secResourceMgt_setBtnRemove_47 a yawl:Method ;
+    rdfs:label "setBtnRemove" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnRemove(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.getBtnDone
+yawl:secResourceMgt_getBtnDone_48 a yawl:Method ;
+    rdfs:label "getBtnDone" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnDone()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.setBtnDone
+yawl:secResourceMgt_setBtnDone_49 a yawl:Method ;
+    rdfs:label "setBtnDone" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnDone(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.getBtnSave
+yawl:secResourceMgt_getBtnSave_50 a yawl:Method ;
+    rdfs:label "getBtnSave" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnSave()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.setBtnSave
+yawl:secResourceMgt_setBtnSave_51 a yawl:Method ;
+    rdfs:label "setBtnSave" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnSave(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.getBtnCheck
+yawl:secResourceMgt_getBtnCheck_52 a yawl:Method ;
+    rdfs:label "getBtnCheck" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnCheck()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.setBtnCheck
+yawl:secResourceMgt_setBtnCheck_53 a yawl:Method ;
+    rdfs:label "setBtnCheck" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnCheck(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.getPnlContainer
+yawl:secResourceMgt_getPnlContainer_54 a yawl:Method ;
+    rdfs:label "getPnlContainer" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlContainer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.setPnlContainer
+yawl:secResourceMgt_setPnlContainer_55 a yawl:Method ;
+    rdfs:label "setPnlContainer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlContainer(PanelLayout pnl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.getApplicationBean
+yawl:secResourceMgt_getApplicationBean_56 a yawl:Method ;
+    rdfs:label "getApplicationBean" ;
+    yawl:returnType "ApplicationBean" ;
+    yawl:signature "ApplicationBean getApplicationBean()" ;
+    rdfs:comment """<p>Return a reference to the scoped data bean.</p>""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: secResourceMgt.getSessionBean
+yawl:secResourceMgt_getSessionBean_57 a yawl:Method ;
+    rdfs:label "getSessionBean" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getSessionBean()" ;
+    rdfs:comment """<p>Return a reference to the scoped data bean.</p>""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: secResourceMgt.getRequestBean
+yawl:secResourceMgt_getRequestBean_58 a yawl:Method ;
+    rdfs:label "getRequestBean" ;
+    yawl:returnType "RequestBean" ;
+    yawl:signature "RequestBean getRequestBean()" ;
+    rdfs:comment """<p>Return a reference to the scoped data bean.</p>""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: secResourceMgt.init
+yawl:secResourceMgt_init_59 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.preprocess
+yawl:secResourceMgt_preprocess_60 a yawl:Method ;
+    rdfs:label "preprocess" ;
+    yawl:returnType "void" ;
+    yawl:signature "void preprocess()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.destroy
+yawl:secResourceMgt_destroy_61 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.prerender
+yawl:secResourceMgt_prerender_62 a yawl:Method ;
+    rdfs:label "prerender" ;
+    yawl:returnType "void" ;
+    yawl:signature "void prerender()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.lbxParticipants_processValueChange
+yawl:secResourceMgt_lbxParticipants_processValueChange_63 a yawl:Method ;
+    rdfs:label "lbxParticipants_processValueChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void lbxParticipants_processValueChange(ValueChangeEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.lbxRoles_processValueChange
+yawl:secResourceMgt_lbxRoles_processValueChange_64 a yawl:Method ;
+    rdfs:label "lbxRoles_processValueChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void lbxRoles_processValueChange(ValueChangeEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.lbxNHResources_processValueChange
+yawl:secResourceMgt_lbxNHResources_processValueChange_65 a yawl:Method ;
+    rdfs:label "lbxNHResources_processValueChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void lbxNHResources_processValueChange(ValueChangeEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.lbxNHCategories_processValueChange
+yawl:secResourceMgt_lbxNHCategories_processValueChange_66 a yawl:Method ;
+    rdfs:label "lbxNHCategories_processValueChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void lbxNHCategories_processValueChange(ValueChangeEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.lbxSelected_processValueChange
+yawl:secResourceMgt_lbxSelected_processValueChange_67 a yawl:Method ;
+    rdfs:label "lbxSelected_processValueChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void lbxSelected_processValueChange(ValueChangeEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.btnDone_action
+yawl:secResourceMgt_btnDone_action_68 a yawl:Method ;
+    rdfs:label "btnDone_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnDone_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.btnRemove_action
+yawl:secResourceMgt_btnRemove_action_69 a yawl:Method ;
+    rdfs:label "btnRemove_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnRemove_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.btnCheck_action
+yawl:secResourceMgt_btnCheck_action_70 a yawl:Method ;
+    rdfs:label "btnCheck_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnCheck_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.btnSave_action
+yawl:secResourceMgt_btnSave_action_71 a yawl:Method ;
+    rdfs:label "btnSave_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnSave_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: secResourceMgt.enableButtons
+yawl:secResourceMgt_enableButtons_72 a yawl:Method ;
+    rdfs:label "enableButtons" ;
+    yawl:returnType "void" ;
+    yawl:signature "void enableButtons()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: secResourceMgt.showMessagePanel
+yawl:secResourceMgt_showMessagePanel_73 a yawl:Method ;
+    rdfs:label "showMessagePanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showMessagePanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:secResourceMgt___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:secResourceMgt_page1 a yawl:Field ;
+    rdfs:label "page1" .
+
+yawl:secResourceMgt_html1 a yawl:Field ;
+    rdfs:label "html1" .
+
+yawl:secResourceMgt_head1 a yawl:Field ;
+    rdfs:label "head1" .
+
+yawl:secResourceMgt_link1 a yawl:Field ;
+    rdfs:label "link1" .
+
+yawl:secResourceMgt_body1 a yawl:Field ;
+    rdfs:label "body1" .
+
+yawl:secResourceMgt_form1 a yawl:Field ;
+    rdfs:label "form1" .
+
+yawl:secResourceMgt_pnlParticipants a yawl:Field ;
+    rdfs:label "pnlParticipants" .
+
+yawl:secResourceMgt_pnlRoles a yawl:Field ;
+    rdfs:label "pnlRoles" .
+
+yawl:secResourceMgt_pnlNHResources a yawl:Field ;
+    rdfs:label "pnlNHResources" .
+
+yawl:secResourceMgt_pnlNHCategories a yawl:Field ;
+    rdfs:label "pnlNHCategories" .
+
+yawl:secResourceMgt_pnlSelected a yawl:Field ;
+    rdfs:label "pnlSelected" .
+
+yawl:secResourceMgt_sttParticipants a yawl:Field ;
+    rdfs:label "sttParticipants" .
+
+yawl:secResourceMgt_sttRoles a yawl:Field ;
+    rdfs:label "sttRoles" .
+
+yawl:secResourceMgt_sttNHResources a yawl:Field ;
+    rdfs:label "sttNHResources" .
+
+yawl:secResourceMgt_sttNHCategories a yawl:Field ;
+    rdfs:label "sttNHCategories" .
+
+yawl:secResourceMgt_sttSelected a yawl:Field ;
+    rdfs:label "sttSelected" .
+
+yawl:secResourceMgt_sttTitle a yawl:Field ;
+    rdfs:label "sttTitle" .
+
+yawl:secResourceMgt_lbxParticipants a yawl:Field ;
+    rdfs:label "lbxParticipants" .
+
+yawl:secResourceMgt_lbxRoles a yawl:Field ;
+    rdfs:label "lbxRoles" .
+
+yawl:secResourceMgt_lbxNHResources a yawl:Field ;
+    rdfs:label "lbxNHResources" .
+
+yawl:secResourceMgt_lbxNHCategories a yawl:Field ;
+    rdfs:label "lbxNHCategories" .
+
+yawl:secResourceMgt_lbxSelected a yawl:Field ;
+    rdfs:label "lbxSelected" .
+
+yawl:secResourceMgt_btnRemove a yawl:Field ;
+    rdfs:label "btnRemove" .
+
+yawl:secResourceMgt_btnDone a yawl:Field ;
+    rdfs:label "btnDone" .
+
+yawl:secResourceMgt_btnSave a yawl:Field ;
+    rdfs:label "btnSave" .
+
+yawl:secResourceMgt_btnCheck a yawl:Field ;
+    rdfs:label "btnCheck" .
+
+yawl:secResourceMgt_pnlContainer a yawl:Field ;
+    rdfs:label "pnlContainer" .
+
+yawl:secResourceMgt__sb a yawl:Field ;
+    rdfs:label "_sb" .
+
+yawl:secResourceMgt_msgPanel a yawl:Field ;
+    rdfs:label "msgPanel" .
+
+
+

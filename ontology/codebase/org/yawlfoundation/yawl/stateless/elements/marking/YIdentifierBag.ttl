@@ -1,0 +1,83 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.stateless.elements.marking.YIdentifierBag
+yawl:YIdentifierBag a yawl:Class ;
+    rdfs:label "YIdentifierBag" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_elements_marking ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/elements/marking/YIdentifierBag.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred @author Michael Adams (updated for 2.0)""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YIdentifierBag_addIdentifier_1 ;
+    yawl:hasMethod yawl:YIdentifierBag_getAmount_2 ;
+    yawl:hasMethod yawl:YIdentifierBag_contains_3 ;
+    yawl:hasMethod yawl:YIdentifierBag_getIdentifiers_4 ;
+    yawl:hasMethod yawl:YIdentifierBag_remove_5 ;
+    yawl:hasMethod yawl:YIdentifierBag_removeAll_6 ;
+    yawl:hasField yawl:YIdentifierBag__idToQtyMap ;
+    yawl:hasField yawl:YIdentifierBag__condition ;
+    .
+
+
+# Method: YIdentifierBag.addIdentifier
+yawl:YIdentifierBag_addIdentifier_1 a yawl:Method ;
+    rdfs:label "addIdentifier" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addIdentifier(YIdentifier identifier)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YIdentifierBag.getAmount
+yawl:YIdentifierBag_getAmount_2 a yawl:Method ;
+    rdfs:label "getAmount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getAmount(YIdentifier identifier)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YIdentifierBag.contains
+yawl:YIdentifierBag_contains_3 a yawl:Method ;
+    rdfs:label "contains" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean contains(YIdentifier identifier)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YIdentifierBag.getIdentifiers
+yawl:YIdentifierBag_getIdentifiers_4 a yawl:Method ;
+    rdfs:label "getIdentifiers" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getIdentifiers()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YIdentifierBag.remove
+yawl:YIdentifierBag_remove_5 a yawl:Method ;
+    rdfs:label "remove" ;
+    yawl:returnType "void" ;
+    yawl:signature "void remove(YIdentifier identifier, int amountToRemove)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YIdentifierBag.removeAll
+yawl:YIdentifierBag_removeAll_6 a yawl:Method ;
+    rdfs:label "removeAll" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeAll()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YIdentifierBag__idToQtyMap a yawl:Field ;
+    rdfs:label "_idToQtyMap" .
+
+yawl:YIdentifierBag__condition a yawl:Field ;
+    rdfs:label "_condition" .
+
+
+

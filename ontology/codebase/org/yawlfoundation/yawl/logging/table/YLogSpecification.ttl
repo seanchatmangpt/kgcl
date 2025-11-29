@@ -1,0 +1,158 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.logging.table.YLogSpecification
+yawl:YLogSpecification a yawl:Class ;
+    rdfs:label "YLogSpecification" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_logging_table ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/logging/table/YLogSpecification.java"^^xsd:string ;
+    rdfs:comment """One row of the logSpecification table, represents a unique specification. Note that even though specID + version is unique across all rows, field 'key' was used because it greatly simplifies hibernate accesses to have a PK is not composite Author: Michael Adams Creation Date: 6/04/2009""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YLogSpecification_getRowKey_1 ;
+    yawl:hasMethod yawl:YLogSpecification_setRowKey_2 ;
+    yawl:hasMethod yawl:YLogSpecification_getIdentifier_3 ;
+    yawl:hasMethod yawl:YLogSpecification_setIdentifier_4 ;
+    yawl:hasMethod yawl:YLogSpecification_getVersion_5 ;
+    yawl:hasMethod yawl:YLogSpecification_setVersion_6 ;
+    yawl:hasMethod yawl:YLogSpecification_getUri_7 ;
+    yawl:hasMethod yawl:YLogSpecification_setUri_8 ;
+    yawl:hasMethod yawl:YLogSpecification_getRootNetID_9 ;
+    yawl:hasMethod yawl:YLogSpecification_setRootNetID_10 ;
+    yawl:hasMethod yawl:YLogSpecification_equals_11 ;
+    yawl:hasMethod yawl:YLogSpecification_hashCode_12 ;
+    yawl:hasMethod yawl:YLogSpecification_toXML_13 ;
+    yawl:hasField yawl:YLogSpecification_rowKey ;
+    yawl:hasField yawl:YLogSpecification_identifier ;
+    yawl:hasField yawl:YLogSpecification_version ;
+    yawl:hasField yawl:YLogSpecification_uri ;
+    yawl:hasField yawl:YLogSpecification_rootNetID ;
+    .
+
+
+# Method: YLogSpecification.getRowKey
+yawl:YLogSpecification_getRowKey_1 a yawl:Method ;
+    rdfs:label "getRowKey" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getRowKey()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogSpecification.setRowKey
+yawl:YLogSpecification_setRowKey_2 a yawl:Method ;
+    rdfs:label "setRowKey" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRowKey(long rowKey)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogSpecification.getIdentifier
+yawl:YLogSpecification_getIdentifier_3 a yawl:Method ;
+    rdfs:label "getIdentifier" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getIdentifier()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogSpecification.setIdentifier
+yawl:YLogSpecification_setIdentifier_4 a yawl:Method ;
+    rdfs:label "setIdentifier" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setIdentifier(String identifier)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogSpecification.getVersion
+yawl:YLogSpecification_getVersion_5 a yawl:Method ;
+    rdfs:label "getVersion" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getVersion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogSpecification.setVersion
+yawl:YLogSpecification_setVersion_6 a yawl:Method ;
+    rdfs:label "setVersion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setVersion(String version)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogSpecification.getUri
+yawl:YLogSpecification_getUri_7 a yawl:Method ;
+    rdfs:label "getUri" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUri()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogSpecification.setUri
+yawl:YLogSpecification_setUri_8 a yawl:Method ;
+    rdfs:label "setUri" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUri(String uri)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogSpecification.getRootNetID
+yawl:YLogSpecification_getRootNetID_9 a yawl:Method ;
+    rdfs:label "getRootNetID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getRootNetID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogSpecification.setRootNetID
+yawl:YLogSpecification_setRootNetID_10 a yawl:Method ;
+    rdfs:label "setRootNetID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRootNetID(long rootNetID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogSpecification.equals
+yawl:YLogSpecification_equals_11 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogSpecification.hashCode
+yawl:YLogSpecification_hashCode_12 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogSpecification.toXML
+yawl:YLogSpecification_toXML_13 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YLogSpecification_rowKey a yawl:Field ;
+    rdfs:label "rowKey" .
+
+yawl:YLogSpecification_identifier a yawl:Field ;
+    rdfs:label "identifier" .
+
+yawl:YLogSpecification_version a yawl:Field ;
+    rdfs:label "version" .
+
+yawl:YLogSpecification_uri a yawl:Field ;
+    rdfs:label "uri" .
+
+yawl:YLogSpecification_rootNetID a yawl:Field ;
+    rdfs:label "rootNetID" .
+
+
+

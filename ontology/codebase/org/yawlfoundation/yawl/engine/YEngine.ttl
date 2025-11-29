@@ -1,0 +1,1432 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.YEngine
+yawl:YEngine a yawl:Class ;
+    rdfs:label "YEngine" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/YEngine.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 17/06/2003 Time: 13:46:54 @author Michael Adams (refactoring for v2.0-2.1)""" ;
+    yawl:implements yawl:InterfaceADesign ;
+    yawl:implements yawl:InterfaceAManagement ;
+    yawl:implements yawl:InterfaceBClient ;
+    yawl:implements yawl:InterfaceBInterop ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YEngine_getInstance_1 ;
+    yawl:hasMethod yawl:YEngine_getInstance_2 ;
+    yawl:hasMethod yawl:YEngine_getInstance_3 ;
+    yawl:hasMethod yawl:YEngine_getInstance_4 ;
+    yawl:hasMethod yawl:YEngine_initialise_5 ;
+    yawl:hasMethod yawl:YEngine_isRunning_6 ;
+    yawl:hasMethod yawl:YEngine_promote_7 ;
+    yawl:hasMethod yawl:YEngine_demote_8 ;
+    yawl:hasMethod yawl:YEngine_restore_9 ;
+    yawl:hasMethod yawl:YEngine_loadDefaultClients_10 ;
+    yawl:hasMethod yawl:YEngine_setGenerateUIMetaData_11 ;
+    yawl:hasMethod yawl:YEngine_generateUIMetaData_12 ;
+    yawl:hasMethod yawl:YEngine_getInstanceCache_13 ;
+    yawl:hasMethod yawl:YEngine_getParameters_14 ;
+    yawl:hasMethod yawl:YEngine_getEngineClassesRootFilePath_15 ;
+    yawl:hasMethod yawl:YEngine_setEngineClassesRootFilePath_16 ;
+    yawl:hasMethod yawl:YEngine_initialised_17 ;
+    yawl:hasMethod yawl:YEngine_shutdown_18 ;
+    yawl:hasMethod yawl:YEngine_initBuildProperties_19 ;
+    yawl:hasMethod yawl:YEngine_getBuildProperties_20 ;
+    yawl:hasMethod yawl:YEngine_getSessionCache_21 ;
+    yawl:hasMethod yawl:YEngine_checkEngineRunning_22 ;
+    yawl:hasMethod yawl:YEngine_registerInterfaceAClient_23 ;
+    yawl:hasMethod yawl:YEngine_registerInterfaceBObserver_24 ;
+    yawl:hasMethod yawl:YEngine_registerInterfaceBObserverGateway_25 ;
+    yawl:hasMethod yawl:YEngine_getAnnouncer_26 ;
+    yawl:hasMethod yawl:YEngine_setEngineStatus_27 ;
+    yawl:hasMethod yawl:YEngine_getEngineStatus_28 ;
+    yawl:hasMethod yawl:YEngine_getAnnouncementContext_29 ;
+    yawl:hasMethod yawl:YEngine_reannounceEnabledWorkItems_30 ;
+    yawl:hasMethod yawl:YEngine_reannounceExecutingWorkItems_31 ;
+    yawl:hasMethod yawl:YEngine_reannounceFiredWorkItems_32 ;
+    yawl:hasMethod yawl:YEngine_reannounceWorkItem_33 ;
+    yawl:hasMethod yawl:YEngine_addRunner_34 ;
+    yawl:hasMethod yawl:YEngine_addRunner_35 ;
+    yawl:hasMethod yawl:YEngine_getRunnersForPrimaryCase_36 ;
+    yawl:hasMethod yawl:YEngine_getNetRunner_37 ;
+    yawl:hasMethod yawl:YEngine_getNetRunner_38 ;
+    yawl:hasMethod yawl:YEngine_getNetRunnerRepository_39 ;
+    yawl:hasMethod yawl:YEngine_getNetData_40 ;
+    yawl:hasMethod yawl:YEngine_addSpecifications_41 ;
+    yawl:hasMethod yawl:YEngine_loadSpecification_42 ;
+    yawl:hasMethod yawl:YEngine_unloadSpecification_43 ;
+    yawl:hasMethod yawl:YEngine_getLoadedSpecificationIDs_44 ;
+    yawl:hasMethod yawl:YEngine_getLatestSpecification_45 ;
+    yawl:hasMethod yawl:YEngine_getSpecification_46 ;
+    yawl:hasMethod yawl:YEngine_getSpecificationForCase_47 ;
+    yawl:hasMethod yawl:YEngine_getProcessDefinition_48 ;
+    yawl:hasMethod yawl:YEngine_getSpecificationDataSchema_49 ;
+    yawl:hasMethod yawl:YEngine_getLoadStatus_50 ;
+    yawl:hasMethod yawl:YEngine_getCasesForSpecification_51 ;
+    yawl:hasMethod yawl:YEngine_getRunningCaseMap_52 ;
+    yawl:hasMethod yawl:YEngine_startCase_53 ;
+    yawl:hasMethod yawl:YEngine_formatCaseParams_54 ;
+    yawl:hasMethod yawl:YEngine_logCaseStarted_55 ;
+    yawl:hasMethod yawl:YEngine_removeCaseFromCaches_56 ;
+    yawl:hasMethod yawl:YEngine_cancelCase_57 ;
+    yawl:hasMethod yawl:YEngine_cancelCase_58 ;
+    yawl:hasMethod yawl:YEngine_launchCase_59 ;
+    yawl:hasMethod yawl:YEngine_launchCase_60 ;
+    yawl:hasMethod yawl:YEngine_launchCase_61 ;
+    yawl:hasMethod yawl:YEngine_getCaseID_62 ;
+    yawl:hasMethod yawl:YEngine_getCaseLocations_63 ;
+    yawl:hasMethod yawl:YEngine_getStateTextForCase_64 ;
+    yawl:hasMethod yawl:YEngine_getStateForCase_65 ;
+    yawl:hasMethod yawl:YEngine_getCaseData_66 ;
+    yawl:hasMethod yawl:YEngine_getRunningCaseIDs_67 ;
+    yawl:hasMethod yawl:YEngine_getNextCaseNbr_68 ;
+    yawl:hasMethod yawl:YEngine_allocateCaseID_69 ;
+    yawl:hasMethod yawl:YEngine_suspendCase_70 ;
+    yawl:hasMethod yawl:YEngine_suspendCase_71 ;
+    yawl:hasMethod yawl:YEngine_resumeCase_72 ;
+    yawl:hasMethod yawl:YEngine_resumeCase_73 ;
+    yawl:hasMethod yawl:YEngine_progressCaseSuspension_74 ;
+    yawl:hasMethod yawl:YEngine_getCaseData_75 ;
+    yawl:hasMethod yawl:YEngine_updateCaseData_76 ;
+    yawl:hasMethod yawl:YEngine_getCaseDataDocument_77 ;
+    yawl:hasMethod yawl:YEngine_announceEvents_78 ;
+    yawl:hasMethod yawl:YEngine_announceIfTimeServiceTimeout_79 ;
+    yawl:hasMethod yawl:YEngine_getTaskDefinition_80 ;
+    yawl:hasMethod yawl:YEngine_getWorkItemRepository_81 ;
+    yawl:hasMethod yawl:YEngine_getAvailableWorkItems_82 ;
+    yawl:hasMethod yawl:YEngine_getWorkItem_83 ;
+    yawl:hasMethod yawl:YEngine_getAllWorkItems_84 ;
+    yawl:hasMethod yawl:YEngine_startWorkItem_85 ;
+    yawl:hasMethod yawl:YEngine_getStartingDataSnapshot_86 ;
+    yawl:hasMethod yawl:YEngine_startWorkItem_87 ;
+    yawl:hasMethod yawl:YEngine_startEnabledWorkItem_88 ;
+    yawl:hasMethod yawl:YEngine_startFiredWorkItem_89 ;
+    yawl:hasMethod yawl:YEngine_completeWorkItem_90 ;
+    yawl:hasMethod yawl:YEngine_completeExecutingWorkitem_91 ;
+    yawl:hasMethod yawl:YEngine_skipWorkItem_92 ;
+    yawl:hasMethod yawl:YEngine_getDataDocForWorkItemCompletion_93 ;
+    yawl:hasMethod yawl:YEngine_mapOutputDataForSkippedWorkItem_94 ;
+    yawl:hasMethod yawl:YEngine_checkElegibilityToAddInstances_95 ;
+    yawl:hasMethod yawl:YEngine_canAddNewInstances_96 ;
+    yawl:hasMethod yawl:YEngine_createNewInstance_97 ;
+    yawl:hasMethod yawl:YEngine_suspendWorkItem_98 ;
+    yawl:hasMethod yawl:YEngine_unsuspendWorkItem_99 ;
+    yawl:hasMethod yawl:YEngine_rollbackWorkItem_100 ;
+    yawl:hasMethod yawl:YEngine_getChildrenOfWorkItem_101 ;
+    yawl:hasMethod yawl:YEngine_updateWorkItemData_102 ;
+    yawl:hasMethod yawl:YEngine_cancelWorkItem_103 ;
+    yawl:hasMethod yawl:YEngine_cleanupCompletedWorkItem_104 ;
+    yawl:hasMethod yawl:YEngine_cancelTimer_105 ;
+    yawl:hasMethod yawl:YEngine_getRegisteredYawlService_106 ;
+    yawl:hasMethod yawl:YEngine_getYAWLServices_107 ;
+    yawl:hasMethod yawl:YEngine_addYawlService_108 ;
+    yawl:hasMethod yawl:YEngine_removeYawlService_109 ;
+    yawl:hasMethod yawl:YEngine_addExternalClient_110 ;
+    yawl:hasMethod yawl:YEngine_updateExternalClient_111 ;
+    yawl:hasMethod yawl:YEngine_getExternalClient_112 ;
+    yawl:hasMethod yawl:YEngine_getExternalClients_113 ;
+    yawl:hasMethod yawl:YEngine_getUsers_114 ;
+    yawl:hasMethod yawl:YEngine_removeExternalClient_115 ;
+    yawl:hasMethod yawl:YEngine_setDefaultWorklist_116 ;
+    yawl:hasMethod yawl:YEngine_getDefaultWorklist_117 ;
+    yawl:hasMethod yawl:YEngine_setAllowAdminID_118 ;
+    yawl:hasMethod yawl:YEngine_isGenericAdminAllowed_119 ;
+    yawl:hasMethod yawl:YEngine_isPersisting_120 ;
+    yawl:hasMethod yawl:YEngine_setPersisting_121 ;
+    yawl:hasMethod yawl:YEngine_storeObject_122 ;
+    yawl:hasMethod yawl:YEngine_updateObject_123 ;
+    yawl:hasMethod yawl:YEngine_deleteObject_124 ;
+    yawl:hasMethod yawl:YEngine_doPersistAction_125 ;
+    yawl:hasMethod yawl:YEngine_startTransaction_126 ;
+    yawl:hasMethod yawl:YEngine_commitTransaction_127 ;
+    yawl:hasMethod yawl:YEngine_rollbackTransaction_128 ;
+    yawl:hasMethod yawl:YEngine_clearCaseFromPersistence_129 ;
+    yawl:hasMethod yawl:YEngine_getPersistenceManager_130 ;
+    yawl:hasMethod yawl:YEngine_clearWorkItemsFromPersistence_131 ;
+    yawl:hasMethod yawl:YEngine_addInterfaceXListener_132 ;
+    yawl:hasMethod yawl:YEngine_removeInterfaceXListener_133 ;
+    yawl:hasMethod yawl:YEngine_dump_134 ;
+    yawl:hasMethod yawl:YEngine_setHibernateStatisticsEnabled_135 ;
+    yawl:hasMethod yawl:YEngine_isHibernateStatisticsEnabled_136 ;
+    yawl:hasMethod yawl:YEngine_getHibernateStatistics_137 ;
+    yawl:hasMethod yawl:YEngine_disableProcessLogging_138 ;
+    yawl:hasField yawl:YEngine__pmgr ;
+    yawl:hasField yawl:YEngine_ENGINE_PERSISTS_BY_DEFAULT ;
+    yawl:hasField yawl:YEngine__thisInstance ;
+    yawl:hasField yawl:YEngine__yawllog ;
+    yawl:hasField yawl:YEngine__caseNbrStore ;
+    yawl:hasField yawl:YEngine__logger ;
+    yawl:hasField yawl:YEngine__expiredTimers ;
+    yawl:hasField yawl:YEngine__generateUIMetaData ;
+    yawl:hasField yawl:YEngine__persisting ;
+    yawl:hasField yawl:YEngine__restoring ;
+    yawl:hasField yawl:YEngine__workItemRepository ;
+    yawl:hasField yawl:YEngine__netRunnerRepository ;
+    yawl:hasField yawl:YEngine__runningCaseIDToSpecMap ;
+    yawl:hasField yawl:YEngine__yawlServices ;
+    yawl:hasField yawl:YEngine__externalClients ;
+    yawl:hasField yawl:YEngine__specifications ;
+    yawl:hasField yawl:YEngine__interfaceAClient ;
+    yawl:hasField yawl:YEngine__interfaceBClient ;
+    yawl:hasField yawl:YEngine__engineStatus ;
+    yawl:hasField yawl:YEngine__sessionCache ;
+    yawl:hasField yawl:YEngine__announcer ;
+    yawl:hasField yawl:YEngine__defaultWorklist ;
+    yawl:hasField yawl:YEngine__instanceCache ;
+    yawl:hasField yawl:YEngine__buildProps ;
+    yawl:hasField yawl:YEngine__engineClassesRootFilePath ;
+    yawl:hasField yawl:YEngine__allowGenericAdminID ;
+    .
+
+
+# Method: YEngine.getInstance
+yawl:YEngine_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "YEngine" ;
+    yawl:signature "YEngine getInstance(boolean persisting, boolean gatherHbnStats, boolean redundantMode)" ;
+    rdfs:comment """Initialises the engine (if not already initialised) & returns the engine instance. @param persisting true if engine state is to be persisted @return a reference to the initialised engine @throws YPersistenceException if there's a problem restoring from persistence""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YEngine.getInstance
+yawl:YEngine_getInstance_2 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "YEngine" ;
+    yawl:signature "YEngine getInstance(boolean persisting)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YEngine.getInstance
+yawl:YEngine_getInstance_3 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "YEngine" ;
+    yawl:signature "YEngine getInstance(boolean persisting, boolean gatherHbnStats)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YEngine.getInstance
+yawl:YEngine_getInstance_4 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "YEngine" ;
+    yawl:signature "YEngine getInstance()" ;
+    rdfs:comment """Initialises the engine (if not already initialised) & returns the engine instance, using the default persistence flag. @return a reference to the initialised engine""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YEngine.initialise
+yawl:YEngine_initialise_5 a yawl:Method ;
+    rdfs:label "initialise" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initialise(YPersistenceManager pmgr, boolean persisting, boolean gatherHbnStats, boolean redundantMode)" ;
+    yawl:modifiers "protected" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YEngine.isRunning
+yawl:YEngine_isRunning_6 a yawl:Method ;
+    rdfs:label "isRunning" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isRunning()" ;
+    rdfs:comment """Checks if the engine is currently running @return true if running, false otherwise""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YEngine.promote
+yawl:YEngine_promote_7 a yawl:Method ;
+    rdfs:label "promote" ;
+    yawl:returnType "void" ;
+    yawl:signature "void promote()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.demote
+yawl:YEngine_demote_8 a yawl:Method ;
+    rdfs:label "demote" ;
+    yawl:returnType "void" ;
+    yawl:signature "void demote()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.restore
+yawl:YEngine_restore_9 a yawl:Method ;
+    rdfs:label "restore" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restore(boolean redundantMode)" ;
+    rdfs:comment """Restores persisted data when the engine restarts. @throws YPersistenceException when there's a problem with the restore process""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.loadDefaultClients
+yawl:YEngine_loadDefaultClients_10 a yawl:Method ;
+    rdfs:label "loadDefaultClients" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set loadDefaultClients()" ;
+    rdfs:comment """Loads the logon accounts for the standard client apps and services from a properties file on startup when they have not previously been persisted (ie. on first startup) or when persistence is disabled. @return the set of default clients loaded. @throws YPersistenceException A passthrough - since it is only called when restoring or when persistence is disabled, this exception is never thrown.""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngine.setGenerateUIMetaData
+yawl:YEngine_setGenerateUIMetaData_11 a yawl:Method ;
+    rdfs:label "setGenerateUIMetaData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setGenerateUIMetaData(boolean generate)" ;
+    rdfs:comment """Indicate if user interface metadata is to be generated within a task's input XML doclet. @param generate true to generate metadata, false to not generate it""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.generateUIMetaData
+yawl:YEngine_generateUIMetaData_12 a yawl:Method ;
+    rdfs:label "generateUIMetaData" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean generateUIMetaData()" ;
+    rdfs:comment """Indicates if user interface metadata will be generated within a task's input XML doclet. @return true=UIMetaData generated, false=UIMetaData not supported""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getInstanceCache
+yawl:YEngine_getInstanceCache_13 a yawl:Method ;
+    rdfs:label "getInstanceCache" ;
+    yawl:returnType "InstanceCache" ;
+    yawl:signature "InstanceCache getInstanceCache()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getParameters
+yawl:YEngine_getParameters_14 a yawl:Method ;
+    rdfs:label "getParameters" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getParameters(YSpecificationID specID, String taskID, boolean input)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getEngineClassesRootFilePath
+yawl:YEngine_getEngineClassesRootFilePath_15 a yawl:Method ;
+    rdfs:label "getEngineClassesRootFilePath" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEngineClassesRootFilePath()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.setEngineClassesRootFilePath
+yawl:YEngine_setEngineClassesRootFilePath_16 a yawl:Method ;
+    rdfs:label "setEngineClassesRootFilePath" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEngineClassesRootFilePath(String path)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.initialised
+yawl:YEngine_initialised_17 a yawl:Method ;
+    rdfs:label "initialised" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initialised(int maxWaitSeconds)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.shutdown
+yawl:YEngine_shutdown_18 a yawl:Method ;
+    rdfs:label "shutdown" ;
+    yawl:returnType "void" ;
+    yawl:signature "void shutdown()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.initBuildProperties
+yawl:YEngine_initBuildProperties_19 a yawl:Method ;
+    rdfs:label "initBuildProperties" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initBuildProperties(InputStream stream)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getBuildProperties
+yawl:YEngine_getBuildProperties_20 a yawl:Method ;
+    rdfs:label "getBuildProperties" ;
+    yawl:returnType "YBuildProperties" ;
+    yawl:signature "YBuildProperties getBuildProperties()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getSessionCache
+yawl:YEngine_getSessionCache_21 a yawl:Method ;
+    rdfs:label "getSessionCache" ;
+    yawl:returnType "YSessionCache" ;
+    yawl:signature "YSessionCache getSessionCache()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.checkEngineRunning
+yawl:YEngine_checkEngineRunning_22 a yawl:Method ;
+    rdfs:label "checkEngineRunning" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkEngineRunning()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.registerInterfaceAClient
+yawl:YEngine_registerInterfaceAClient_23 a yawl:Method ;
+    rdfs:label "registerInterfaceAClient" ;
+    yawl:returnType "void" ;
+    yawl:signature "void registerInterfaceAClient(InterfaceAManagementObserver observer)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.registerInterfaceBObserver
+yawl:YEngine_registerInterfaceBObserver_24 a yawl:Method ;
+    rdfs:label "registerInterfaceBObserver" ;
+    yawl:returnType "void" ;
+    yawl:signature "void registerInterfaceBObserver(InterfaceBClientObserver observer)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.registerInterfaceBObserverGateway
+yawl:YEngine_registerInterfaceBObserverGateway_25 a yawl:Method ;
+    rdfs:label "registerInterfaceBObserverGateway" ;
+    yawl:returnType "void" ;
+    yawl:signature "void registerInterfaceBObserverGateway(ObserverGateway gateway)" ;
+    rdfs:comment """Registers an InterfaceB Observer Gateway with the engine in order to receive callbacks. @param gateway the gateway to register @throws YAWLException if the observerGateway has a null scheme value.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getAnnouncer
+yawl:YEngine_getAnnouncer_26 a yawl:Method ;
+    rdfs:label "getAnnouncer" ;
+    yawl:returnType "YAnnouncer" ;
+    yawl:signature "YAnnouncer getAnnouncer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.setEngineStatus
+yawl:YEngine_setEngineStatus_27 a yawl:Method ;
+    rdfs:label "setEngineStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEngineStatus(Status status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getEngineStatus
+yawl:YEngine_getEngineStatus_28 a yawl:Method ;
+    rdfs:label "getEngineStatus" ;
+    yawl:returnType "Status" ;
+    yawl:signature "Status getEngineStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getAnnouncementContext
+yawl:YEngine_getAnnouncementContext_29 a yawl:Method ;
+    rdfs:label "getAnnouncementContext" ;
+    yawl:returnType "AnnouncementContext" ;
+    yawl:signature "AnnouncementContext getAnnouncementContext()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.reannounceEnabledWorkItems
+yawl:YEngine_reannounceEnabledWorkItems_30 a yawl:Method ;
+    rdfs:label "reannounceEnabledWorkItems" ;
+    yawl:returnType "int" ;
+    yawl:signature "int reannounceEnabledWorkItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.reannounceExecutingWorkItems
+yawl:YEngine_reannounceExecutingWorkItems_31 a yawl:Method ;
+    rdfs:label "reannounceExecutingWorkItems" ;
+    yawl:returnType "int" ;
+    yawl:signature "int reannounceExecutingWorkItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.reannounceFiredWorkItems
+yawl:YEngine_reannounceFiredWorkItems_32 a yawl:Method ;
+    rdfs:label "reannounceFiredWorkItems" ;
+    yawl:returnType "int" ;
+    yawl:signature "int reannounceFiredWorkItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.reannounceWorkItem
+yawl:YEngine_reannounceWorkItem_33 a yawl:Method ;
+    rdfs:label "reannounceWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reannounceWorkItem(YWorkItem workItem)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.addRunner
+yawl:YEngine_addRunner_34 a yawl:Method ;
+    rdfs:label "addRunner" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addRunner(YNetRunner runner)" ;
+    rdfs:comment """Adds a net runner instance to the engine caches. The specification is derived from the runner instance. @param runner the runner to add""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngine.addRunner
+yawl:YEngine_addRunner_35 a yawl:Method ;
+    rdfs:label "addRunner" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addRunner(YNetRunner runner, YSpecification specification)" ;
+    rdfs:comment """Adds a net runner instance to the engine caches. @param runner the runner to add @param specification its specification""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getRunnersForPrimaryCase
+yawl:YEngine_getRunnersForPrimaryCase_36 a yawl:Method ;
+    rdfs:label "getRunnersForPrimaryCase" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getRunnersForPrimaryCase(YIdentifier primaryCaseID)" ;
+    rdfs:comment """Returns a vector of all net runners for a top level caseID. @param primaryCaseID the id of the case @return Vector of net runners for the case""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getNetRunner
+yawl:YEngine_getNetRunner_37 a yawl:Method ;
+    rdfs:label "getNetRunner" ;
+    yawl:returnType "YNetRunner" ;
+    yawl:signature "YNetRunner getNetRunner(YWorkItem workItem)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getNetRunner
+yawl:YEngine_getNetRunner_38 a yawl:Method ;
+    rdfs:label "getNetRunner" ;
+    yawl:returnType "YNetRunner" ;
+    yawl:signature "YNetRunner getNetRunner(YIdentifier identifier)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getNetRunnerRepository
+yawl:YEngine_getNetRunnerRepository_39 a yawl:Method ;
+    rdfs:label "getNetRunnerRepository" ;
+    yawl:returnType "YNetRunnerRepository" ;
+    yawl:signature "YNetRunnerRepository getNetRunnerRepository()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getNetData
+yawl:YEngine_getNetData_40 a yawl:Method ;
+    rdfs:label "getNetData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNetData(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.addSpecifications
+yawl:YEngine_addSpecifications_41 a yawl:Method ;
+    rdfs:label "addSpecifications" ;
+    yawl:returnType "List" ;
+    yawl:signature "List addSpecifications(String specStr, boolean ignoreErrors, YVerificationHandler verificationHandler)" ;
+    rdfs:comment """Adds the specification(s) (expressed as an xml string) to the engine @param specStr an XML formatted specification @param ignoreErrors ignore verification errors and load the spec anyway. @param verificationHandler an in/out param passing any error messages. @return the specification ids of the successfully loaded specs""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.loadSpecification
+yawl:YEngine_loadSpecification_42 a yawl:Method ;
+    rdfs:label "loadSpecification" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean loadSpecification(YSpecification spec)" ;
+    rdfs:comment """Loads a specification @param spec the specification to load @return true if spec is loaded, false if it was already loaded""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.unloadSpecification
+yawl:YEngine_unloadSpecification_43 a yawl:Method ;
+    rdfs:label "unloadSpecification" ;
+    yawl:returnType "void" ;
+    yawl:signature "void unloadSpecification(YSpecificationID specID)" ;
+    rdfs:comment """Removes a previously loaded specification from the engine @param specID the identifier of the specification to unload @throws YStateException if the spec is still in use (with a live case) @throws YPersistenceException if there's some persistence problem""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getLoadedSpecificationIDs
+yawl:YEngine_getLoadedSpecificationIDs_44 a yawl:Method ;
+    rdfs:label "getLoadedSpecificationIDs" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getLoadedSpecificationIDs()" ;
+    rdfs:comment """Provides the set of specification ids for specs loaded into the engine.  It returns those that were loaded as well as those with running instances that are unloaded. @return  A set of specification ids""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getLatestSpecification
+yawl:YEngine_getLatestSpecification_45 a yawl:Method ;
+    rdfs:label "getLatestSpecification" ;
+    yawl:returnType "YSpecification" ;
+    yawl:signature "YSpecification getLatestSpecification(String key)" ;
+    rdfs:comment """Returns the latest loaded version of a specification identified by 'key' @param key the spec's identifier (v2.0+) or uri (pre-v2.0) @return the matching specification or null if no match found""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getSpecification
+yawl:YEngine_getSpecification_46 a yawl:Method ;
+    rdfs:label "getSpecification" ;
+    yawl:returnType "YSpecification" ;
+    yawl:signature "YSpecification getSpecification(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getSpecificationForCase
+yawl:YEngine_getSpecificationForCase_47 a yawl:Method ;
+    rdfs:label "getSpecificationForCase" ;
+    yawl:returnType "YSpecification" ;
+    yawl:signature "YSpecification getSpecificationForCase(YIdentifier caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getProcessDefinition
+yawl:YEngine_getProcessDefinition_48 a yawl:Method ;
+    rdfs:label "getProcessDefinition" ;
+    yawl:returnType "YSpecification" ;
+    yawl:signature "YSpecification getProcessDefinition(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getSpecificationDataSchema
+yawl:YEngine_getSpecificationDataSchema_49 a yawl:Method ;
+    rdfs:label "getSpecificationDataSchema" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationDataSchema(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getLoadStatus
+yawl:YEngine_getLoadStatus_50 a yawl:Method ;
+    rdfs:label "getLoadStatus" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLoadStatus(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getCasesForSpecification
+yawl:YEngine_getCasesForSpecification_51 a yawl:Method ;
+    rdfs:label "getCasesForSpecification" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getCasesForSpecification(YSpecificationID specID)" ;
+    rdfs:comment """Given a process specification id return the cases that are its running instances. @param specID the process specification id string. @return a set of YIdentifer caseIDs that are run time instances of the process specification with id = specID""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getRunningCaseMap
+yawl:YEngine_getRunningCaseMap_52 a yawl:Method ;
+    rdfs:label "getRunningCaseMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getRunningCaseMap()" ;
+    rdfs:comment """Gets the complete map of all running case ids, grouped by specification id @return a map of [YSpecificationID, List<Yidentifier>]""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.startCase
+yawl:YEngine_startCase_53 a yawl:Method ;
+    rdfs:label "startCase" ;
+    yawl:returnType "YIdentifier" ;
+    yawl:signature "YIdentifier startCase(YSpecificationID specID, String caseParams, URI completionObserver, String caseID, YLogDataItemList logData, String serviceRef, boolean delayed)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngine.formatCaseParams
+yawl:YEngine_formatCaseParams_54 a yawl:Method ;
+    rdfs:label "formatCaseParams" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element formatCaseParams(String paramStr, YSpecification spec)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngine.logCaseStarted
+yawl:YEngine_logCaseStarted_55 a yawl:Method ;
+    rdfs:label "logCaseStarted" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logCaseStarted(YSpecificationID specID, YNetRunner runner, URI completionObserver, String caseParams, YLogDataItemList logData, String serviceRef, boolean delayed)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.removeCaseFromCaches
+yawl:YEngine_removeCaseFromCaches_56 a yawl:Method ;
+    rdfs:label "removeCaseFromCaches" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeCaseFromCaches(YIdentifier caseID)" ;
+    rdfs:comment """Finalises a case completion. @param caseID the id of the completing case @throws YPersistenceException if theres a persistence problem""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngine.cancelCase
+yawl:YEngine_cancelCase_57 a yawl:Method ;
+    rdfs:label "cancelCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancelCase(YIdentifier caseID, String serviceHandle)" ;
+    rdfs:comment """Cancels a running case. @param caseID the identifier of the cancelling case @throws YPersistenceException if there's some persistence problem""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.cancelCase
+yawl:YEngine_cancelCase_58 a yawl:Method ;
+    rdfs:label "cancelCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancelCase(YIdentifier id)" ;
+    rdfs:comment """@deprecated use cancelCase(YIdentifier, String) @param id @throws YPersistenceException @throws YEngineStateException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.launchCase
+yawl:YEngine_launchCase_59 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseParams, URI completionObserver, YLogDataItemList logData)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.launchCase
+yawl:YEngine_launchCase_60 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseParams, URI completionObserver, YLogDataItemList logData, String serviceHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.launchCase
+yawl:YEngine_launchCase_61 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseParams, URI completionObserver, String caseID, YLogDataItemList logData, String serviceHandle, boolean delayed)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getCaseID
+yawl:YEngine_getCaseID_62 a yawl:Method ;
+    rdfs:label "getCaseID" ;
+    yawl:returnType "YIdentifier" ;
+    yawl:signature "YIdentifier getCaseID(String caseIDStr)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getCaseLocations
+yawl:YEngine_getCaseLocations_63 a yawl:Method ;
+    rdfs:label "getCaseLocations" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getCaseLocations(YIdentifier caseID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.getStateTextForCase
+yawl:YEngine_getStateTextForCase_64 a yawl:Method ;
+    rdfs:label "getStateTextForCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStateTextForCase(YIdentifier caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getStateForCase
+yawl:YEngine_getStateForCase_65 a yawl:Method ;
+    rdfs:label "getStateForCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStateForCase(YIdentifier caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getCaseData
+yawl:YEngine_getCaseData_66 a yawl:Method ;
+    rdfs:label "getCaseData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseData(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getRunningCaseIDs
+yawl:YEngine_getRunningCaseIDs_67 a yawl:Method ;
+    rdfs:label "getRunningCaseIDs" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getRunningCaseIDs()" ;
+    rdfs:comment """Returns a list of the YIdentifiers objects for running cases. @return List of running cases""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getNextCaseNbr
+yawl:YEngine_getNextCaseNbr_68 a yawl:Method ;
+    rdfs:label "getNextCaseNbr" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNextCaseNbr()" ;
+    rdfs:comment """@return the next available case number.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.allocateCaseID
+yawl:YEngine_allocateCaseID_69 a yawl:Method ;
+    rdfs:label "allocateCaseID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String allocateCaseID()" ;
+    rdfs:comment """AJH: Public method which returns the next available caseID Note: This is only available with a non-persisting engine and is used to ascertain the case ID prior to launching a case (eg. for an XForms execution framework). @return  A unique case ID @throws YPersistenceException if there's a problem persisting the change""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.suspendCase
+yawl:YEngine_suspendCase_70 a yawl:Method ;
+    rdfs:label "suspendCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void suspendCase(YIdentifier caseID)" ;
+    rdfs:comment """Suspends the execution of a case - currently only called from YAdminGUI. @param caseID the id of the case to suspend @throws YPersistenceException if there's a problem persisting the change @throws YStateException if case cannot be suspended given the current engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.suspendCase
+yawl:YEngine_suspendCase_71 a yawl:Method ;
+    rdfs:label "suspendCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void suspendCase(YPersistenceManager pmgr, YIdentifier id)" ;
+    rdfs:comment """Suspends the execution of a case. @param pmgr the persistence manager object @param id the case id to clear @throws YPersistenceException if there's a problem clearing the case @throws YStateException if case cannot be suspended given the current engine operating state""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.resumeCase
+yawl:YEngine_resumeCase_72 a yawl:Method ;
+    rdfs:label "resumeCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void resumeCase(YIdentifier id)" ;
+    rdfs:comment """Resumes execution of a case. @param id the id of the case to resume @throws YPersistenceException if there's a problem persisting the resumed case @throws YStateException if case cannot be resumed""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.resumeCase
+yawl:YEngine_resumeCase_73 a yawl:Method ;
+    rdfs:label "resumeCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void resumeCase(YPersistenceManager pmgr, YIdentifier id)" ;
+    rdfs:comment """Resumes execution of a case. @param pmgr the persistence manager object @param id the id of the case to resume @throws YPersistenceException if there's a problem persisting the resumed case @throws YStateException if case cannot be resumed @throws YDataStateException @throws YQueryException""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.progressCaseSuspension
+yawl:YEngine_progressCaseSuspension_74 a yawl:Method ;
+    rdfs:label "progressCaseSuspension" ;
+    yawl:returnType "void" ;
+    yawl:signature "void progressCaseSuspension(YPersistenceManager pmgr, YIdentifier caseID)" ;
+    rdfs:comment """Attempts to progress the suspension status of a case. Where a Case is \"suspending\", we scan the workitems associated with all the nets associated with the case, and where no workitems are enabled, executing or fired, we progress the suspension state from \"suspending\" to \"suspended\". @param pmgr the persistence manager object @param caseID the id of the case to progress @throws YPersistenceException if there's a problem getting the case @throws YStateException if case cannot be progressed""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.getCaseData
+yawl:YEngine_getCaseData_75 a yawl:Method ;
+    rdfs:label "getCaseData" ;
+    yawl:returnType "YNetData" ;
+    yawl:signature "YNetData getCaseData(YIdentifier id)" ;
+    rdfs:comment """@param id the id of the case @return the case level data for the case""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.updateCaseData
+yawl:YEngine_updateCaseData_76 a yawl:Method ;
+    rdfs:label "updateCaseData" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean updateCaseData(String idStr, String data)" ;
+    rdfs:comment """updates the case data with the data passed after completion of an exception handler""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getCaseDataDocument
+yawl:YEngine_getCaseDataDocument_77 a yawl:Method ;
+    rdfs:label "getCaseDataDocument" ;
+    yawl:returnType "Document" ;
+    yawl:signature "Document getCaseDataDocument(String id)" ;
+    rdfs:comment """@return the current case data for the case id passed""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.announceEvents
+yawl:YEngine_announceEvents_78 a yawl:Method ;
+    rdfs:label "announceEvents" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceEvents(YIdentifier caseID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.announceIfTimeServiceTimeout
+yawl:YEngine_announceIfTimeServiceTimeout_79 a yawl:Method ;
+    rdfs:label "announceIfTimeServiceTimeout" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceIfTimeServiceTimeout(YNetRunner netRunner, YWorkItem workItem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.getTaskDefinition
+yawl:YEngine_getTaskDefinition_80 a yawl:Method ;
+    rdfs:label "getTaskDefinition" ;
+    yawl:returnType "YTask" ;
+    yawl:signature "YTask getTaskDefinition(YSpecificationID specID, String taskID)" ;
+    rdfs:comment """Returns the task definition, not the task instance. @param specID the specification id @param taskID the task id @return the task definition object.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getWorkItemRepository
+yawl:YEngine_getWorkItemRepository_81 a yawl:Method ;
+    rdfs:label "getWorkItemRepository" ;
+    yawl:returnType "YWorkItemRepository" ;
+    yawl:signature "YWorkItemRepository getWorkItemRepository()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getAvailableWorkItems
+yawl:YEngine_getAvailableWorkItems_82 a yawl:Method ;
+    rdfs:label "getAvailableWorkItems" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getAvailableWorkItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getWorkItem
+yawl:YEngine_getWorkItem_83 a yawl:Method ;
+    rdfs:label "getWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem getWorkItem(String workItemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getAllWorkItems
+yawl:YEngine_getAllWorkItems_84 a yawl:Method ;
+    rdfs:label "getAllWorkItems" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getAllWorkItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.startWorkItem
+yawl:YEngine_startWorkItem_85 a yawl:Method ;
+    rdfs:label "startWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem startWorkItem(String itemID, YClient client, String logPredicate)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getStartingDataSnapshot
+yawl:YEngine_getStartingDataSnapshot_86 a yawl:Method ;
+    rdfs:label "getStartingDataSnapshot" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getStartingDataSnapshot(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.startWorkItem
+yawl:YEngine_startWorkItem_87 a yawl:Method ;
+    rdfs:label "startWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem startWorkItem(YWorkItem workItem, YClient client)" ;
+    rdfs:comment """Starts a work item.  If the workitem param is enabled this method fires the task and returns the first of its child instances in the executing state. Else if the workitem is fired then it moves the state from fired to executing. Either way the method returns the resultant work item. @param workItem the enabled, or fired workitem. @param client the YAWL external client or service starting the workitem @return the resultant work item in the executing state. @throws YStateException     if the worki""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.startEnabledWorkItem
+yawl:YEngine_startEnabledWorkItem_88 a yawl:Method ;
+    rdfs:label "startEnabledWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem startEnabledWorkItem(YNetRunner netRunner, YWorkItem workItem, YClient client)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.startFiredWorkItem
+yawl:YEngine_startFiredWorkItem_89 a yawl:Method ;
+    rdfs:label "startFiredWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem startFiredWorkItem(YNetRunner netRunner, YWorkItem workItem, YClient client)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.completeWorkItem
+yawl:YEngine_completeWorkItem_90 a yawl:Method ;
+    rdfs:label "completeWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void completeWorkItem(YWorkItem workItem, String data, String logPredicate, WorkItemCompletion completionType)" ;
+    rdfs:comment """Completes the work item. @param workItem @param data @param logPredicate - a pre-parse of the completion log predicate for this item @param completionType - one of the completion types 'normal' (ordinary completion) 'force' (forced completion) or 'fail' (forced fail) completion @throws YStateException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.completeExecutingWorkitem
+yawl:YEngine_completeExecutingWorkitem_91 a yawl:Method ;
+    rdfs:label "completeExecutingWorkitem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void completeExecutingWorkitem(YWorkItem workItem, YNetRunner netRunner, String data, String logPredicate, WorkItemCompletion completionType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.skipWorkItem
+yawl:YEngine_skipWorkItem_92 a yawl:Method ;
+    rdfs:label "skipWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem skipWorkItem(YWorkItem workItem, YClient client)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getDataDocForWorkItemCompletion
+yawl:YEngine_getDataDocForWorkItemCompletion_93 a yawl:Method ;
+    rdfs:label "getDataDocForWorkItemCompletion" ;
+    yawl:returnType "Document" ;
+    yawl:signature "Document getDataDocForWorkItemCompletion(YWorkItem workItem, String data, WorkItemCompletion completionType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.mapOutputDataForSkippedWorkItem
+yawl:YEngine_mapOutputDataForSkippedWorkItem_94 a yawl:Method ;
+    rdfs:label "mapOutputDataForSkippedWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String mapOutputDataForSkippedWorkItem(YWorkItem workItem, String data)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.checkElegibilityToAddInstances
+yawl:YEngine_checkElegibilityToAddInstances_95 a yawl:Method ;
+    rdfs:label "checkElegibilityToAddInstances" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkElegibilityToAddInstances(String workItemID)" ;
+    rdfs:comment """Determines whether or not a task will allow a dynamically created new instance to be created.  MultiInstance Task with dynamic instance creation. @param workItemID the workItemID of a sibling work item. @throws YStateException if task is not MultiInstance, or if task does not allow dynamic instance creation, or if current number of instances is not less than the maxInstances for the task.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.canAddNewInstances
+yawl:YEngine_canAddNewInstances_96 a yawl:Method ;
+    rdfs:label "canAddNewInstances" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean canAddNewInstances(String workItemID)" ;
+    rdfs:comment """Checks whether new dynamic workitem instances can be started for a task @pre the workitem is in executing state @param workItemID the id of the workitem to check against @return true if a new workitem can be dynamically spawned""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.createNewInstance
+yawl:YEngine_createNewInstance_97 a yawl:Method ;
+    rdfs:label "createNewInstance" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem createNewInstance(YWorkItem workItem, String paramValueForMICreation)" ;
+    rdfs:comment """Creates a new work item instance when possible. @param workItem the id of a work item inside the task to have a new instance. @param paramValueForMICreation format \"<data>[InputParam]</data> InputParam == <varName>varValue</varName> @return the work item of the new instance. @throws YStateException if the task is not able to create a new instance, due to its state or its design. @throws YPersistenceException if there's a problem with the persistence session""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.suspendWorkItem
+yawl:YEngine_suspendWorkItem_98 a yawl:Method ;
+    rdfs:label "suspendWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem suspendWorkItem(String workItemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.unsuspendWorkItem
+yawl:YEngine_unsuspendWorkItem_99 a yawl:Method ;
+    rdfs:label "unsuspendWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem unsuspendWorkItem(String workItemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.rollbackWorkItem
+yawl:YEngine_rollbackWorkItem_100 a yawl:Method ;
+    rdfs:label "rollbackWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void rollbackWorkItem(String workItemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getChildrenOfWorkItem
+yawl:YEngine_getChildrenOfWorkItem_101 a yawl:Method ;
+    rdfs:label "getChildrenOfWorkItem" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getChildrenOfWorkItem(YWorkItem workItem)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.updateWorkItemData
+yawl:YEngine_updateWorkItemData_102 a yawl:Method ;
+    rdfs:label "updateWorkItemData" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean updateWorkItemData(String workItemID, String data)" ;
+    rdfs:comment """updates the workitem with the data passed after completion of an exception handler""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.cancelWorkItem
+yawl:YEngine_cancelWorkItem_103 a yawl:Method ;
+    rdfs:label "cancelWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancelWorkItem(YWorkItem workItem)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.cleanupCompletedWorkItem
+yawl:YEngine_cleanupCompletedWorkItem_104 a yawl:Method ;
+    rdfs:label "cleanupCompletedWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cleanupCompletedWorkItem(YWorkItem workItem, YNetRunner netRunner, Document data)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.cancelTimer
+yawl:YEngine_cancelTimer_105 a yawl:Method ;
+    rdfs:label "cancelTimer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancelTimer(YWorkItem workItem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.getRegisteredYawlService
+yawl:YEngine_getRegisteredYawlService_106 a yawl:Method ;
+    rdfs:label "getRegisteredYawlService" ;
+    yawl:returnType "YAWLServiceReference" ;
+    yawl:signature "YAWLServiceReference getRegisteredYawlService(String yawlServiceID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getYAWLServices
+yawl:YEngine_getYAWLServices_107 a yawl:Method ;
+    rdfs:label "getYAWLServices" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getYAWLServices()" ;
+    rdfs:comment """Returns a set of YAWL services registered in the engine. @return Set of services""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.addYawlService
+yawl:YEngine_addYawlService_108 a yawl:Method ;
+    rdfs:label "addYawlService" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addYawlService(YAWLServiceReference yawlService)" ;
+    rdfs:comment """Adds a YAWL service to the engine. @param yawlService""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.removeYawlService
+yawl:YEngine_removeYawlService_109 a yawl:Method ;
+    rdfs:label "removeYawlService" ;
+    yawl:returnType "YAWLServiceReference" ;
+    yawl:signature "YAWLServiceReference removeYawlService(String serviceURI)" ;
+    rdfs:comment """@param serviceURI @return the removed service reference @throws YPersistenceException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.addExternalClient
+yawl:YEngine_addExternalClient_110 a yawl:Method ;
+    rdfs:label "addExternalClient" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean addExternalClient(YExternalClient client)" ;
+    rdfs:comment """Adds an external client credentials object to the engine. An external client is an application that connects to the engine (as opposed to a service) @param client the external client to add""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.updateExternalClient
+yawl:YEngine_updateExternalClient_111 a yawl:Method ;
+    rdfs:label "updateExternalClient" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean updateExternalClient(String id, String password, String doco)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getExternalClient
+yawl:YEngine_getExternalClient_112 a yawl:Method ;
+    rdfs:label "getExternalClient" ;
+    yawl:returnType "YExternalClient" ;
+    yawl:signature "YExternalClient getExternalClient(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getExternalClients
+yawl:YEngine_getExternalClients_113 a yawl:Method ;
+    rdfs:label "getExternalClients" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getExternalClients()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getUsers
+yawl:YEngine_getUsers_114 a yawl:Method ;
+    rdfs:label "getUsers" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getUsers()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.removeExternalClient
+yawl:YEngine_removeExternalClient_115 a yawl:Method ;
+    rdfs:label "removeExternalClient" ;
+    yawl:returnType "YExternalClient" ;
+    yawl:signature "YExternalClient removeExternalClient(String clientName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.setDefaultWorklist
+yawl:YEngine_setDefaultWorklist_116 a yawl:Method ;
+    rdfs:label "setDefaultWorklist" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDefaultWorklist(String paramStr)" ;
+    rdfs:comment """Sets the custom service that will serve as the default worklist. Called on startup with values loaded from web.xml @param paramStr the URL and password of the service (separated by a hash) @throws RuntimeException if the parameters read from web.xml are incorrectly formatted""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getDefaultWorklist
+yawl:YEngine_getDefaultWorklist_117 a yawl:Method ;
+    rdfs:label "getDefaultWorklist" ;
+    yawl:returnType "YAWLServiceReference" ;
+    yawl:signature "YAWLServiceReference getDefaultWorklist()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.setAllowAdminID
+yawl:YEngine_setAllowAdminID_118 a yawl:Method ;
+    rdfs:label "setAllowAdminID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAllowAdminID(boolean allow)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.isGenericAdminAllowed
+yawl:YEngine_isGenericAdminAllowed_119 a yawl:Method ;
+    rdfs:label "isGenericAdminAllowed" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isGenericAdminAllowed()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.isPersisting
+yawl:YEngine_isPersisting_120 a yawl:Method ;
+    rdfs:label "isPersisting" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isPersisting()" ;
+    rdfs:comment """Indicates if persistence is enabled. @return True=Persistent, False=Not Persistent""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YEngine.setPersisting
+yawl:YEngine_setPersisting_121 a yawl:Method ;
+    rdfs:label "setPersisting" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPersisting(boolean persist)" ;
+    rdfs:comment """Indicates if persistence should be enabled. @param persist true to persist, false to not persist""" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YEngine.storeObject
+yawl:YEngine_storeObject_122 a yawl:Method ;
+    rdfs:label "storeObject" ;
+    yawl:returnType "void" ;
+    yawl:signature "void storeObject(Object obj)" ;
+    rdfs:comment """Public interface to allow engine clients to ask the engine to store an object reference in its persistent storage. It does this in its own transaction block.<P> @param obj @throws YPersistenceException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.updateObject
+yawl:YEngine_updateObject_123 a yawl:Method ;
+    rdfs:label "updateObject" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateObject(Object obj)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.deleteObject
+yawl:YEngine_deleteObject_124 a yawl:Method ;
+    rdfs:label "deleteObject" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteObject(Object obj)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.doPersistAction
+yawl:YEngine_doPersistAction_125 a yawl:Method ;
+    rdfs:label "doPersistAction" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doPersistAction(Object obj, int action)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.startTransaction
+yawl:YEngine_startTransaction_126 a yawl:Method ;
+    rdfs:label "startTransaction" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean startTransaction()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.commitTransaction
+yawl:YEngine_commitTransaction_127 a yawl:Method ;
+    rdfs:label "commitTransaction" ;
+    yawl:returnType "void" ;
+    yawl:signature "void commitTransaction()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.rollbackTransaction
+yawl:YEngine_rollbackTransaction_128 a yawl:Method ;
+    rdfs:label "rollbackTransaction" ;
+    yawl:returnType "void" ;
+    yawl:signature "void rollbackTransaction()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.clearCaseFromPersistence
+yawl:YEngine_clearCaseFromPersistence_129 a yawl:Method ;
+    rdfs:label "clearCaseFromPersistence" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clearCaseFromPersistence(YIdentifier id)" ;
+    rdfs:comment """Clears a case from persistence @param id the case id to clear @throws YPersistenceException if there's a problem clearing the case""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngine.getPersistenceManager
+yawl:YEngine_getPersistenceManager_130 a yawl:Method ;
+    rdfs:label "getPersistenceManager" ;
+    yawl:returnType "YPersistenceManager" ;
+    yawl:signature "YPersistenceManager getPersistenceManager()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YEngine.clearWorkItemsFromPersistence
+yawl:YEngine_clearWorkItemsFromPersistence_131 a yawl:Method ;
+    rdfs:label "clearWorkItemsFromPersistence" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clearWorkItemsFromPersistence(Set items)" ;
+    rdfs:comment """Removes the workitems of the runner from persistence (after a case cancellation). @param items the set of work items to delete from persistnece @throws YPersistenceException if there's some persistence problem""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.addInterfaceXListener
+yawl:YEngine_addInterfaceXListener_132 a yawl:Method ;
+    rdfs:label "addInterfaceXListener" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean addInterfaceXListener(String observerURI)" ;
+    rdfs:comment """sets the URI passed as an listener for exception events""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.removeInterfaceXListener
+yawl:YEngine_removeInterfaceXListener_133 a yawl:Method ;
+    rdfs:label "removeInterfaceXListener" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeInterfaceXListener(String uri)" ;
+    rdfs:comment """removes an exception event listener""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.dump
+yawl:YEngine_dump_134 a yawl:Method ;
+    rdfs:label "dump" ;
+    yawl:returnType "void" ;
+    yawl:signature "void dump()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.setHibernateStatisticsEnabled
+yawl:YEngine_setHibernateStatisticsEnabled_135 a yawl:Method ;
+    rdfs:label "setHibernateStatisticsEnabled" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHibernateStatisticsEnabled(boolean enabled)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.isHibernateStatisticsEnabled
+yawl:YEngine_isHibernateStatisticsEnabled_136 a yawl:Method ;
+    rdfs:label "isHibernateStatisticsEnabled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isHibernateStatisticsEnabled()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getHibernateStatistics
+yawl:YEngine_getHibernateStatistics_137 a yawl:Method ;
+    rdfs:label "getHibernateStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getHibernateStatistics()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.disableProcessLogging
+yawl:YEngine_disableProcessLogging_138 a yawl:Method ;
+    rdfs:label "disableProcessLogging" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disableProcessLogging()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YEngine__pmgr a yawl:Field ;
+    rdfs:label "_pmgr" .
+
+yawl:YEngine_ENGINE_PERSISTS_BY_DEFAULT a yawl:Field ;
+    rdfs:label "ENGINE_PERSISTS_BY_DEFAULT" .
+
+yawl:YEngine__thisInstance a yawl:Field ;
+    rdfs:label "_thisInstance" .
+
+yawl:YEngine__yawllog a yawl:Field ;
+    rdfs:label "_yawllog" .
+
+yawl:YEngine__caseNbrStore a yawl:Field ;
+    rdfs:label "_caseNbrStore" .
+
+yawl:YEngine__logger a yawl:Field ;
+    rdfs:label "_logger" .
+
+yawl:YEngine__expiredTimers a yawl:Field ;
+    rdfs:label "_expiredTimers" .
+
+yawl:YEngine__generateUIMetaData a yawl:Field ;
+    rdfs:label "_generateUIMetaData" .
+
+yawl:YEngine__persisting a yawl:Field ;
+    rdfs:label "_persisting" .
+
+yawl:YEngine__restoring a yawl:Field ;
+    rdfs:label "_restoring" .
+
+yawl:YEngine__workItemRepository a yawl:Field ;
+    rdfs:label "_workItemRepository" .
+
+yawl:YEngine__netRunnerRepository a yawl:Field ;
+    rdfs:label "_netRunnerRepository" .
+
+yawl:YEngine__runningCaseIDToSpecMap a yawl:Field ;
+    rdfs:label "_runningCaseIDToSpecMap" .
+
+yawl:YEngine__yawlServices a yawl:Field ;
+    rdfs:label "_yawlServices" .
+
+yawl:YEngine__externalClients a yawl:Field ;
+    rdfs:label "_externalClients" .
+
+yawl:YEngine__specifications a yawl:Field ;
+    rdfs:label "_specifications" .
+
+yawl:YEngine__interfaceAClient a yawl:Field ;
+    rdfs:label "_interfaceAClient" .
+
+yawl:YEngine__interfaceBClient a yawl:Field ;
+    rdfs:label "_interfaceBClient" .
+
+yawl:YEngine__engineStatus a yawl:Field ;
+    rdfs:label "_engineStatus" .
+
+yawl:YEngine__sessionCache a yawl:Field ;
+    rdfs:label "_sessionCache" .
+
+yawl:YEngine__announcer a yawl:Field ;
+    rdfs:label "_announcer" .
+
+yawl:YEngine__defaultWorklist a yawl:Field ;
+    rdfs:label "_defaultWorklist" .
+
+yawl:YEngine__instanceCache a yawl:Field ;
+    rdfs:label "_instanceCache" .
+
+yawl:YEngine__buildProps a yawl:Field ;
+    rdfs:label "_buildProps" .
+
+yawl:YEngine__engineClassesRootFilePath a yawl:Field ;
+    rdfs:label "_engineClassesRootFilePath" .
+
+yawl:YEngine__allowGenericAdminID a yawl:Field ;
+    rdfs:label "_allowGenericAdminID" .
+
+
+

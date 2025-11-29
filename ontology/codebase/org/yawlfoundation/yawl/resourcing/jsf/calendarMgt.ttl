@@ -1,0 +1,1842 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.calendarMgt
+yawl:calendarMgt a yawl:Class ;
+    rdfs:label "calendarMgt" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/calendarMgt.java"^^xsd:string ;
+    rdfs:comment """Backing bean for the calendar mgt page. @author Michael Adams BPM Group, QUT Australia""" ;
+    yawl:extends yawl:AbstractPageBean ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:calendarMgt__init_1 ;
+    yawl:hasMethod yawl:calendarMgt_getRequestBean_2 ;
+    yawl:hasMethod yawl:calendarMgt_getSessionBean_3 ;
+    yawl:hasMethod yawl:calendarMgt_getApplicationBean_4 ;
+    yawl:hasMethod yawl:calendarMgt_init_5 ;
+    yawl:hasMethod yawl:calendarMgt_preprocess_6 ;
+    yawl:hasMethod yawl:calendarMgt_destroy_7 ;
+    yawl:hasMethod yawl:calendarMgt_getPage1_8 ;
+    yawl:hasMethod yawl:calendarMgt_setPage1_9 ;
+    yawl:hasMethod yawl:calendarMgt_getHtml1_10 ;
+    yawl:hasMethod yawl:calendarMgt_setHtml1_11 ;
+    yawl:hasMethod yawl:calendarMgt_getHead1_12 ;
+    yawl:hasMethod yawl:calendarMgt_setHead1_13 ;
+    yawl:hasMethod yawl:calendarMgt_getLink1_14 ;
+    yawl:hasMethod yawl:calendarMgt_setLink1_15 ;
+    yawl:hasMethod yawl:calendarMgt_getBody1_16 ;
+    yawl:hasMethod yawl:calendarMgt_setBody1_17 ;
+    yawl:hasMethod yawl:calendarMgt_getForm1_18 ;
+    yawl:hasMethod yawl:calendarMgt_setForm1_19 ;
+    yawl:hasMethod yawl:calendarMgt_getBtnAdd_20 ;
+    yawl:hasMethod yawl:calendarMgt_setBtnAdd_21 ;
+    yawl:hasMethod yawl:calendarMgt_getBtnUpdate_22 ;
+    yawl:hasMethod yawl:calendarMgt_setBtnUpdate_23 ;
+    yawl:hasMethod yawl:calendarMgt_getLayoutPanel2_24 ;
+    yawl:hasMethod yawl:calendarMgt_setLayoutPanel2_25 ;
+    yawl:hasMethod yawl:calendarMgt_getDataTable1_26 ;
+    yawl:hasMethod yawl:calendarMgt_setDataTable1_27 ;
+    yawl:hasMethod yawl:calendarMgt_getColName_28 ;
+    yawl:hasMethod yawl:calendarMgt_setColName_29 ;
+    yawl:hasMethod yawl:calendarMgt_getColNameRows_30 ;
+    yawl:hasMethod yawl:calendarMgt_setColNameRows_31 ;
+    yawl:hasMethod yawl:calendarMgt_getColNameHeader_32 ;
+    yawl:hasMethod yawl:calendarMgt_setColNameHeader_33 ;
+    yawl:hasMethod yawl:calendarMgt_getColStartTime_34 ;
+    yawl:hasMethod yawl:calendarMgt_setColStartTime_35 ;
+    yawl:hasMethod yawl:calendarMgt_getColStartTimeRows_36 ;
+    yawl:hasMethod yawl:calendarMgt_setColStartTimeRows_37 ;
+    yawl:hasMethod yawl:calendarMgt_getColStartTimeHeader_38 ;
+    yawl:hasMethod yawl:calendarMgt_setColStartTimeHeader_39 ;
+    yawl:hasMethod yawl:calendarMgt_getColEndTime_40 ;
+    yawl:hasMethod yawl:calendarMgt_setColEndTime_41 ;
+    yawl:hasMethod yawl:calendarMgt_getColEndTimeRows_42 ;
+    yawl:hasMethod yawl:calendarMgt_setColEndTimeRows_43 ;
+    yawl:hasMethod yawl:calendarMgt_getColEndTimeHeader_44 ;
+    yawl:hasMethod yawl:calendarMgt_setColEndimeHeader_45 ;
+    yawl:hasMethod yawl:calendarMgt_getColStatus_46 ;
+    yawl:hasMethod yawl:calendarMgt_setColStatus_47 ;
+    yawl:hasMethod yawl:calendarMgt_getColStatusRows_48 ;
+    yawl:hasMethod yawl:calendarMgt_setColStatusRows_49 ;
+    yawl:hasMethod yawl:calendarMgt_getColStatusHeader_50 ;
+    yawl:hasMethod yawl:calendarMgt_setColStatusHeader_51 ;
+    yawl:hasMethod yawl:calendarMgt_getColWorkload_52 ;
+    yawl:hasMethod yawl:calendarMgt_setColWorkload_53 ;
+    yawl:hasMethod yawl:calendarMgt_getColWorkloadRows_54 ;
+    yawl:hasMethod yawl:calendarMgt_setColWorkloadRows_55 ;
+    yawl:hasMethod yawl:calendarMgt_getColWorkloadHeader_56 ;
+    yawl:hasMethod yawl:calendarMgt_setColWorkloadHeader_57 ;
+    yawl:hasMethod yawl:calendarMgt_getColComment_58 ;
+    yawl:hasMethod yawl:calendarMgt_setColComment_59 ;
+    yawl:hasMethod yawl:calendarMgt_getColCommentRows_60 ;
+    yawl:hasMethod yawl:calendarMgt_setColCommentRows_61 ;
+    yawl:hasMethod yawl:calendarMgt_getCoCommentHeader_62 ;
+    yawl:hasMethod yawl:calendarMgt_setColCommentHeader_63 ;
+    yawl:hasMethod yawl:calendarMgt_getColSBar_64 ;
+    yawl:hasMethod yawl:calendarMgt_setColSBar_65 ;
+    yawl:hasMethod yawl:calendarMgt_getHdnRowIndex_66 ;
+    yawl:hasMethod yawl:calendarMgt_setHdnRowIndex_67 ;
+    yawl:hasMethod yawl:calendarMgt_getScript1_68 ;
+    yawl:hasMethod yawl:calendarMgt_setScript1_69 ;
+    yawl:hasMethod yawl:calendarMgt_getPnlContainer_70 ;
+    yawl:hasMethod yawl:calendarMgt_setPnlContainer_71 ;
+    yawl:hasMethod yawl:calendarMgt_getPnlGroup_72 ;
+    yawl:hasMethod yawl:calendarMgt_setPnlGroup_73 ;
+    yawl:hasMethod yawl:calendarMgt_getBtnDelete_74 ;
+    yawl:hasMethod yawl:calendarMgt_setBtnDelete_75 ;
+    yawl:hasMethod yawl:calendarMgt_getBtnYesterday_76 ;
+    yawl:hasMethod yawl:calendarMgt_setBtnYesterday_77 ;
+    yawl:hasMethod yawl:calendarMgt_getBtnTomorrow_78 ;
+    yawl:hasMethod yawl:calendarMgt_setBtnTomorrow_79 ;
+    yawl:hasMethod yawl:calendarMgt_getCalComponent_80 ;
+    yawl:hasMethod yawl:calendarMgt_setCalComponent_81 ;
+    yawl:hasMethod yawl:calendarMgt_getLblFilter_82 ;
+    yawl:hasMethod yawl:calendarMgt_setLblFilter_83 ;
+    yawl:hasMethod yawl:calendarMgt_getCbbFilter_84 ;
+    yawl:hasMethod yawl:calendarMgt_setCbbFilter_85 ;
+    yawl:hasMethod yawl:calendarMgt_getLblResource_86 ;
+    yawl:hasMethod yawl:calendarMgt_setLblResource_87 ;
+    yawl:hasMethod yawl:calendarMgt_getCbbResource_88 ;
+    yawl:hasMethod yawl:calendarMgt_setCbbResource_89 ;
+    yawl:hasMethod yawl:calendarMgt_getCalPanel_90 ;
+    yawl:hasMethod yawl:calendarMgt_setCalPanel_91 ;
+    yawl:hasMethod yawl:calendarMgt_getHeadingStart_92 ;
+    yawl:hasMethod yawl:calendarMgt_setHeadingStart_93 ;
+    yawl:hasMethod yawl:calendarMgt_getHeadingEnd_94 ;
+    yawl:hasMethod yawl:calendarMgt_setHeadingEnd_95 ;
+    yawl:hasMethod yawl:calendarMgt_getHeadingName_96 ;
+    yawl:hasMethod yawl:calendarMgt_setHeadingName_97 ;
+    yawl:hasMethod yawl:calendarMgt_getHeadingStatus_98 ;
+    yawl:hasMethod yawl:calendarMgt_setHeadingStatus_99 ;
+    yawl:hasMethod yawl:calendarMgt_getHeadingWorkload_100 ;
+    yawl:hasMethod yawl:calendarMgt_setHeadingWorkload_101 ;
+    yawl:hasMethod yawl:calendarMgt_getHeadingComments_102 ;
+    yawl:hasMethod yawl:calendarMgt_setHeadingComments_103 ;
+    yawl:hasMethod yawl:calendarMgt_getEditPanel_104 ;
+    yawl:hasMethod yawl:calendarMgt_setEditPanel_105 ;
+    yawl:hasMethod yawl:calendarMgt_getUpperPanel_106 ;
+    yawl:hasMethod yawl:calendarMgt_setUpperPanel_107 ;
+    yawl:hasMethod yawl:calendarMgt_getLblStart_108 ;
+    yawl:hasMethod yawl:calendarMgt_setLblStart_109 ;
+    yawl:hasMethod yawl:calendarMgt_getLblEnd_110 ;
+    yawl:hasMethod yawl:calendarMgt_setLblEnd_111 ;
+    yawl:hasMethod yawl:calendarMgt_getLblUntil_112 ;
+    yawl:hasMethod yawl:calendarMgt_setLblUntil_113 ;
+    yawl:hasMethod yawl:calendarMgt_getLblWorkload_114 ;
+    yawl:hasMethod yawl:calendarMgt_setLblWorkload_115 ;
+    yawl:hasMethod yawl:calendarMgt_getLblComments_116 ;
+    yawl:hasMethod yawl:calendarMgt_setLblComments_117 ;
+    yawl:hasMethod yawl:calendarMgt_getCalDuration_118 ;
+    yawl:hasMethod yawl:calendarMgt_setCalDuration_119 ;
+    yawl:hasMethod yawl:calendarMgt_getTxtStartTime_120 ;
+    yawl:hasMethod yawl:calendarMgt_setTxtStartTime_121 ;
+    yawl:hasMethod yawl:calendarMgt_getTxtEndTime_122 ;
+    yawl:hasMethod yawl:calendarMgt_setTxtEndTime_123 ;
+    yawl:hasMethod yawl:calendarMgt_getTxtWorkload_124 ;
+    yawl:hasMethod yawl:calendarMgt_setTxtWorkload_125 ;
+    yawl:hasMethod yawl:calendarMgt_getTxtComments_126 ;
+    yawl:hasMethod yawl:calendarMgt_setTxtComments_127 ;
+    yawl:hasMethod yawl:calendarMgt_getBtnClear_128 ;
+    yawl:hasMethod yawl:calendarMgt_setBtnClear_129 ;
+    yawl:hasMethod yawl:calendarMgt_getBtnAddText_130 ;
+    yawl:hasMethod yawl:calendarMgt_setBtnAddText_131 ;
+    yawl:hasMethod yawl:calendarMgt_getCbxRepeat_132 ;
+    yawl:hasMethod yawl:calendarMgt_setCbxRepeat_133 ;
+    yawl:hasMethod yawl:calendarMgt_getSttResourceName_134 ;
+    yawl:hasMethod yawl:calendarMgt_setSttResourceName_135 ;
+    yawl:hasMethod yawl:calendarMgt_getLblResourceName_136 ;
+    yawl:hasMethod yawl:calendarMgt_setLblResourceName_137 ;
+    yawl:hasMethod yawl:calendarMgt_cbbFilter_processValueChange_138 ;
+    yawl:hasMethod yawl:calendarMgt_cbbResource_processValueChange_139 ;
+    yawl:hasMethod yawl:calendarMgt_prerender_140 ;
+    yawl:hasMethod yawl:calendarMgt_btnRefresh_action_141 ;
+    yawl:hasMethod yawl:calendarMgt_btnAdd_action_142 ;
+    yawl:hasMethod yawl:calendarMgt_btnUpdate_action_143 ;
+    yawl:hasMethod yawl:calendarMgt_btnDelete_action_144 ;
+    yawl:hasMethod yawl:calendarMgt_btnClear_action_145 ;
+    yawl:hasMethod yawl:calendarMgt_btnYesterday_action_146 ;
+    yawl:hasMethod yawl:calendarMgt_btnTomorrow_action_147 ;
+    yawl:hasMethod yawl:calendarMgt_getCalendarMgtFilterComboItems_148 ;
+    yawl:hasMethod yawl:calendarMgt_incDate_149 ;
+    yawl:hasMethod yawl:calendarMgt_incDate_150 ;
+    yawl:hasMethod yawl:calendarMgt_processMode_151 ;
+    yawl:hasMethod yawl:calendarMgt_getSelectedEntry_152 ;
+    yawl:hasMethod yawl:calendarMgt_addCalendarEntry_153 ;
+    yawl:hasMethod yawl:calendarMgt_updateCalendarEntry_154 ;
+    yawl:hasMethod yawl:calendarMgt_setFilter_155 ;
+    yawl:hasMethod yawl:calendarMgt_setResourceName_156 ;
+    yawl:hasMethod yawl:calendarMgt_setResourceName_157 ;
+    yawl:hasMethod yawl:calendarMgt_setAddModeInputs_158 ;
+    yawl:hasMethod yawl:calendarMgt_setActivePage_159 ;
+    yawl:hasMethod yawl:calendarMgt_showMessagePanel_160 ;
+    yawl:hasMethod yawl:calendarMgt_getMode_161 ;
+    yawl:hasMethod yawl:calendarMgt_setMode_162 ;
+    yawl:hasMethod yawl:calendarMgt_validateFields_163 ;
+    yawl:hasMethod yawl:calendarMgt_validateTimeField_164 ;
+    yawl:hasMethod yawl:calendarMgt_validateWorkloadField_165 ;
+    yawl:hasMethod yawl:calendarMgt_setEndTimeFields_166 ;
+    yawl:hasMethod yawl:calendarMgt_nullifyResourceCombo_167 ;
+    yawl:hasMethod yawl:calendarMgt_clearFields_168 ;
+    yawl:hasMethod yawl:calendarMgt_getTime_169 ;
+    yawl:hasMethod yawl:calendarMgt_getTime_170 ;
+    yawl:hasMethod yawl:calendarMgt_getWorkloadValue_171 ;
+    yawl:hasField yawl:calendarMgt___placeholder ;
+    yawl:hasField yawl:calendarMgt_page1 ;
+    yawl:hasField yawl:calendarMgt_html1 ;
+    yawl:hasField yawl:calendarMgt_head1 ;
+    yawl:hasField yawl:calendarMgt_link1 ;
+    yawl:hasField yawl:calendarMgt_body1 ;
+    yawl:hasField yawl:calendarMgt_form1 ;
+    yawl:hasField yawl:calendarMgt_btnAdd ;
+    yawl:hasField yawl:calendarMgt_btnUpdate ;
+    yawl:hasField yawl:calendarMgt_layoutPanel2 ;
+    yawl:hasField yawl:calendarMgt_dataTable1 ;
+    yawl:hasField yawl:calendarMgt_colName ;
+    yawl:hasField yawl:calendarMgt_colNameRows ;
+    yawl:hasField yawl:calendarMgt_colNameHeader ;
+    yawl:hasField yawl:calendarMgt_colStartTime ;
+    yawl:hasField yawl:calendarMgt_colStartTimeRows ;
+    yawl:hasField yawl:calendarMgt_colStartTimeHeader ;
+    yawl:hasField yawl:calendarMgt_colEndTime ;
+    yawl:hasField yawl:calendarMgt_colEndTimeRows ;
+    yawl:hasField yawl:calendarMgt_colEndTimeHeader ;
+    yawl:hasField yawl:calendarMgt_colStatus ;
+    yawl:hasField yawl:calendarMgt_colStatusRows ;
+    yawl:hasField yawl:calendarMgt_colStatusHeader ;
+    yawl:hasField yawl:calendarMgt_colWorkload ;
+    yawl:hasField yawl:calendarMgt_colWorkloadRows ;
+    yawl:hasField yawl:calendarMgt_colWorkloadHeader ;
+    yawl:hasField yawl:calendarMgt_colComment ;
+    yawl:hasField yawl:calendarMgt_colCommentRows ;
+    yawl:hasField yawl:calendarMgt_colCommentHeader ;
+    yawl:hasField yawl:calendarMgt_colSBar ;
+    yawl:hasField yawl:calendarMgt_hdnRowIndex ;
+    yawl:hasField yawl:calendarMgt_script1 ;
+    yawl:hasField yawl:calendarMgt_pnlContainer ;
+    yawl:hasField yawl:calendarMgt_pnlGroup ;
+    yawl:hasField yawl:calendarMgt_btnDelete ;
+    yawl:hasField yawl:calendarMgt_btnYesterday ;
+    yawl:hasField yawl:calendarMgt_btnTomorrow ;
+    yawl:hasField yawl:calendarMgt_calComponent ;
+    yawl:hasField yawl:calendarMgt_lblFilter ;
+    yawl:hasField yawl:calendarMgt_cbbFilter ;
+    yawl:hasField yawl:calendarMgt_lblResource ;
+    yawl:hasField yawl:calendarMgt_cbbResource ;
+    yawl:hasField yawl:calendarMgt_calPanel ;
+    yawl:hasField yawl:calendarMgt_headingStart ;
+    yawl:hasField yawl:calendarMgt_headingEnd ;
+    yawl:hasField yawl:calendarMgt_headingName ;
+    yawl:hasField yawl:calendarMgt_headingStatus ;
+    yawl:hasField yawl:calendarMgt_headingWorkload ;
+    yawl:hasField yawl:calendarMgt_headingComments ;
+    yawl:hasField yawl:calendarMgt_editPanel ;
+    yawl:hasField yawl:calendarMgt_upperPanel ;
+    yawl:hasField yawl:calendarMgt_lblStart ;
+    yawl:hasField yawl:calendarMgt_lblEnd ;
+    yawl:hasField yawl:calendarMgt_lblUntil ;
+    yawl:hasField yawl:calendarMgt_lblWorkload ;
+    yawl:hasField yawl:calendarMgt_lblComments ;
+    yawl:hasField yawl:calendarMgt_calDuration ;
+    yawl:hasField yawl:calendarMgt_txtStartTime ;
+    yawl:hasField yawl:calendarMgt_txtEndTime ;
+    yawl:hasField yawl:calendarMgt_txtWorkload ;
+    yawl:hasField yawl:calendarMgt_txtComments ;
+    yawl:hasField yawl:calendarMgt_btnClear ;
+    yawl:hasField yawl:calendarMgt_btnAddText ;
+    yawl:hasField yawl:calendarMgt_cbxRepeat ;
+    yawl:hasField yawl:calendarMgt_sttResourceName ;
+    yawl:hasField yawl:calendarMgt_lblResourceName ;
+    yawl:hasField yawl:calendarMgt__rm ;
+    yawl:hasField yawl:calendarMgt__sb ;
+    yawl:hasField yawl:calendarMgt__msgPanel ;
+    yawl:hasField yawl:calendarMgt__greg ;
+    .
+
+
+# Method: calendarMgt._init
+yawl:calendarMgt__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: calendarMgt.getRequestBean
+yawl:calendarMgt_getRequestBean_2 a yawl:Method ;
+    rdfs:label "getRequestBean" ;
+    yawl:returnType "RequestBean" ;
+    yawl:signature "RequestBean getRequestBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: calendarMgt.getSessionBean
+yawl:calendarMgt_getSessionBean_3 a yawl:Method ;
+    rdfs:label "getSessionBean" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getSessionBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: calendarMgt.getApplicationBean
+yawl:calendarMgt_getApplicationBean_4 a yawl:Method ;
+    rdfs:label "getApplicationBean" ;
+    yawl:returnType "ApplicationBean" ;
+    yawl:signature "ApplicationBean getApplicationBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: calendarMgt.init
+yawl:calendarMgt_init_5 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.preprocess
+yawl:calendarMgt_preprocess_6 a yawl:Method ;
+    rdfs:label "preprocess" ;
+    yawl:returnType "void" ;
+    yawl:signature "void preprocess()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.destroy
+yawl:calendarMgt_destroy_7 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getPage1
+yawl:calendarMgt_getPage1_8 a yawl:Method ;
+    rdfs:label "getPage1" ;
+    yawl:returnType "Page" ;
+    yawl:signature "Page getPage1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setPage1
+yawl:calendarMgt_setPage1_9 a yawl:Method ;
+    rdfs:label "setPage1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPage1(Page p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getHtml1
+yawl:calendarMgt_getHtml1_10 a yawl:Method ;
+    rdfs:label "getHtml1" ;
+    yawl:returnType "Html" ;
+    yawl:signature "Html getHtml1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setHtml1
+yawl:calendarMgt_setHtml1_11 a yawl:Method ;
+    rdfs:label "setHtml1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHtml1(Html h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getHead1
+yawl:calendarMgt_getHead1_12 a yawl:Method ;
+    rdfs:label "getHead1" ;
+    yawl:returnType "Head" ;
+    yawl:signature "Head getHead1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setHead1
+yawl:calendarMgt_setHead1_13 a yawl:Method ;
+    rdfs:label "setHead1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHead1(Head h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getLink1
+yawl:calendarMgt_getLink1_14 a yawl:Method ;
+    rdfs:label "getLink1" ;
+    yawl:returnType "Link" ;
+    yawl:signature "Link getLink1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setLink1
+yawl:calendarMgt_setLink1_15 a yawl:Method ;
+    rdfs:label "setLink1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLink1(Link l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getBody1
+yawl:calendarMgt_getBody1_16 a yawl:Method ;
+    rdfs:label "getBody1" ;
+    yawl:returnType "Body" ;
+    yawl:signature "Body getBody1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setBody1
+yawl:calendarMgt_setBody1_17 a yawl:Method ;
+    rdfs:label "setBody1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBody1(Body b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getForm1
+yawl:calendarMgt_getForm1_18 a yawl:Method ;
+    rdfs:label "getForm1" ;
+    yawl:returnType "Form" ;
+    yawl:signature "Form getForm1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setForm1
+yawl:calendarMgt_setForm1_19 a yawl:Method ;
+    rdfs:label "setForm1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setForm1(Form f)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getBtnAdd
+yawl:calendarMgt_getBtnAdd_20 a yawl:Method ;
+    rdfs:label "getBtnAdd" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnAdd()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setBtnAdd
+yawl:calendarMgt_setBtnAdd_21 a yawl:Method ;
+    rdfs:label "setBtnAdd" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnAdd(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getBtnUpdate
+yawl:calendarMgt_getBtnUpdate_22 a yawl:Method ;
+    rdfs:label "getBtnUpdate" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnUpdate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setBtnUpdate
+yawl:calendarMgt_setBtnUpdate_23 a yawl:Method ;
+    rdfs:label "setBtnUpdate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnUpdate(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getLayoutPanel2
+yawl:calendarMgt_getLayoutPanel2_24 a yawl:Method ;
+    rdfs:label "getLayoutPanel2" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getLayoutPanel2()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setLayoutPanel2
+yawl:calendarMgt_setLayoutPanel2_25 a yawl:Method ;
+    rdfs:label "setLayoutPanel2" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLayoutPanel2(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getDataTable1
+yawl:calendarMgt_getDataTable1_26 a yawl:Method ;
+    rdfs:label "getDataTable1" ;
+    yawl:returnType "HtmlDataTable" ;
+    yawl:signature "HtmlDataTable getDataTable1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setDataTable1
+yawl:calendarMgt_setDataTable1_27 a yawl:Method ;
+    rdfs:label "setDataTable1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataTable1(HtmlDataTable hdt)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getColName
+yawl:calendarMgt_getColName_28 a yawl:Method ;
+    rdfs:label "getColName" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setColName
+yawl:calendarMgt_setColName_29 a yawl:Method ;
+    rdfs:label "setColName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColName(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getColNameRows
+yawl:calendarMgt_getColNameRows_30 a yawl:Method ;
+    rdfs:label "getColNameRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColNameRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setColNameRows
+yawl:calendarMgt_setColNameRows_31 a yawl:Method ;
+    rdfs:label "setColNameRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColNameRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getColNameHeader
+yawl:calendarMgt_getColNameHeader_32 a yawl:Method ;
+    rdfs:label "getColNameHeader" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColNameHeader()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setColNameHeader
+yawl:calendarMgt_setColNameHeader_33 a yawl:Method ;
+    rdfs:label "setColNameHeader" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColNameHeader(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getColStartTime
+yawl:calendarMgt_getColStartTime_34 a yawl:Method ;
+    rdfs:label "getColStartTime" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColStartTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setColStartTime
+yawl:calendarMgt_setColStartTime_35 a yawl:Method ;
+    rdfs:label "setColStartTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColStartTime(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getColStartTimeRows
+yawl:calendarMgt_getColStartTimeRows_36 a yawl:Method ;
+    rdfs:label "getColStartTimeRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColStartTimeRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setColStartTimeRows
+yawl:calendarMgt_setColStartTimeRows_37 a yawl:Method ;
+    rdfs:label "setColStartTimeRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColStartTimeRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getColStartTimeHeader
+yawl:calendarMgt_getColStartTimeHeader_38 a yawl:Method ;
+    rdfs:label "getColStartTimeHeader" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColStartTimeHeader()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setColStartTimeHeader
+yawl:calendarMgt_setColStartTimeHeader_39 a yawl:Method ;
+    rdfs:label "setColStartTimeHeader" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColStartTimeHeader(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getColEndTime
+yawl:calendarMgt_getColEndTime_40 a yawl:Method ;
+    rdfs:label "getColEndTime" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColEndTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setColEndTime
+yawl:calendarMgt_setColEndTime_41 a yawl:Method ;
+    rdfs:label "setColEndTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColEndTime(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getColEndTimeRows
+yawl:calendarMgt_getColEndTimeRows_42 a yawl:Method ;
+    rdfs:label "getColEndTimeRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColEndTimeRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setColEndTimeRows
+yawl:calendarMgt_setColEndTimeRows_43 a yawl:Method ;
+    rdfs:label "setColEndTimeRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColEndTimeRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getColEndTimeHeader
+yawl:calendarMgt_getColEndTimeHeader_44 a yawl:Method ;
+    rdfs:label "getColEndTimeHeader" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColEndTimeHeader()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setColEndimeHeader
+yawl:calendarMgt_setColEndimeHeader_45 a yawl:Method ;
+    rdfs:label "setColEndimeHeader" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColEndimeHeader(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getColStatus
+yawl:calendarMgt_getColStatus_46 a yawl:Method ;
+    rdfs:label "getColStatus" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setColStatus
+yawl:calendarMgt_setColStatus_47 a yawl:Method ;
+    rdfs:label "setColStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColStatus(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getColStatusRows
+yawl:calendarMgt_getColStatusRows_48 a yawl:Method ;
+    rdfs:label "getColStatusRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColStatusRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setColStatusRows
+yawl:calendarMgt_setColStatusRows_49 a yawl:Method ;
+    rdfs:label "setColStatusRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColStatusRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getColStatusHeader
+yawl:calendarMgt_getColStatusHeader_50 a yawl:Method ;
+    rdfs:label "getColStatusHeader" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColStatusHeader()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setColStatusHeader
+yawl:calendarMgt_setColStatusHeader_51 a yawl:Method ;
+    rdfs:label "setColStatusHeader" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColStatusHeader(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getColWorkload
+yawl:calendarMgt_getColWorkload_52 a yawl:Method ;
+    rdfs:label "getColWorkload" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColWorkload()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setColWorkload
+yawl:calendarMgt_setColWorkload_53 a yawl:Method ;
+    rdfs:label "setColWorkload" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColWorkload(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getColWorkloadRows
+yawl:calendarMgt_getColWorkloadRows_54 a yawl:Method ;
+    rdfs:label "getColWorkloadRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColWorkloadRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setColWorkloadRows
+yawl:calendarMgt_setColWorkloadRows_55 a yawl:Method ;
+    rdfs:label "setColWorkloadRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColWorkloadRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getColWorkloadHeader
+yawl:calendarMgt_getColWorkloadHeader_56 a yawl:Method ;
+    rdfs:label "getColWorkloadHeader" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColWorkloadHeader()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setColWorkloadHeader
+yawl:calendarMgt_setColWorkloadHeader_57 a yawl:Method ;
+    rdfs:label "setColWorkloadHeader" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColWorkloadHeader(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getColComment
+yawl:calendarMgt_getColComment_58 a yawl:Method ;
+    rdfs:label "getColComment" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColComment()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setColComment
+yawl:calendarMgt_setColComment_59 a yawl:Method ;
+    rdfs:label "setColComment" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColComment(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getColCommentRows
+yawl:calendarMgt_getColCommentRows_60 a yawl:Method ;
+    rdfs:label "getColCommentRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColCommentRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setColCommentRows
+yawl:calendarMgt_setColCommentRows_61 a yawl:Method ;
+    rdfs:label "setColCommentRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColCommentRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getCoCommentHeader
+yawl:calendarMgt_getCoCommentHeader_62 a yawl:Method ;
+    rdfs:label "getCoCommentHeader" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getCoCommentHeader()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setColCommentHeader
+yawl:calendarMgt_setColCommentHeader_63 a yawl:Method ;
+    rdfs:label "setColCommentHeader" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColCommentHeader(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getColSBar
+yawl:calendarMgt_getColSBar_64 a yawl:Method ;
+    rdfs:label "getColSBar" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColSBar()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setColSBar
+yawl:calendarMgt_setColSBar_65 a yawl:Method ;
+    rdfs:label "setColSBar" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColSBar(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getHdnRowIndex
+yawl:calendarMgt_getHdnRowIndex_66 a yawl:Method ;
+    rdfs:label "getHdnRowIndex" ;
+    yawl:returnType "HiddenField" ;
+    yawl:signature "HiddenField getHdnRowIndex()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setHdnRowIndex
+yawl:calendarMgt_setHdnRowIndex_67 a yawl:Method ;
+    rdfs:label "setHdnRowIndex" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHdnRowIndex(HiddenField hf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getScript1
+yawl:calendarMgt_getScript1_68 a yawl:Method ;
+    rdfs:label "getScript1" ;
+    yawl:returnType "Script" ;
+    yawl:signature "Script getScript1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setScript1
+yawl:calendarMgt_setScript1_69 a yawl:Method ;
+    rdfs:label "setScript1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setScript1(Script s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getPnlContainer
+yawl:calendarMgt_getPnlContainer_70 a yawl:Method ;
+    rdfs:label "getPnlContainer" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlContainer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setPnlContainer
+yawl:calendarMgt_setPnlContainer_71 a yawl:Method ;
+    rdfs:label "setPnlContainer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlContainer(PanelLayout pnl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getPnlGroup
+yawl:calendarMgt_getPnlGroup_72 a yawl:Method ;
+    rdfs:label "getPnlGroup" ;
+    yawl:returnType "PanelGroup" ;
+    yawl:signature "PanelGroup getPnlGroup()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setPnlGroup
+yawl:calendarMgt_setPnlGroup_73 a yawl:Method ;
+    rdfs:label "setPnlGroup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlGroup(PanelGroup group)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getBtnDelete
+yawl:calendarMgt_getBtnDelete_74 a yawl:Method ;
+    rdfs:label "getBtnDelete" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnDelete()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setBtnDelete
+yawl:calendarMgt_setBtnDelete_75 a yawl:Method ;
+    rdfs:label "setBtnDelete" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnDelete(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getBtnYesterday
+yawl:calendarMgt_getBtnYesterday_76 a yawl:Method ;
+    rdfs:label "getBtnYesterday" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnYesterday()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setBtnYesterday
+yawl:calendarMgt_setBtnYesterday_77 a yawl:Method ;
+    rdfs:label "setBtnYesterday" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnYesterday(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getBtnTomorrow
+yawl:calendarMgt_getBtnTomorrow_78 a yawl:Method ;
+    rdfs:label "getBtnTomorrow" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnTomorrow()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setBtnTomorrow
+yawl:calendarMgt_setBtnTomorrow_79 a yawl:Method ;
+    rdfs:label "setBtnTomorrow" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnTomorrow(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getCalComponent
+yawl:calendarMgt_getCalComponent_80 a yawl:Method ;
+    rdfs:label "getCalComponent" ;
+    yawl:returnType "Calendar" ;
+    yawl:signature "Calendar getCalComponent()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setCalComponent
+yawl:calendarMgt_setCalComponent_81 a yawl:Method ;
+    rdfs:label "setCalComponent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCalComponent(Calendar cal)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getLblFilter
+yawl:calendarMgt_getLblFilter_82 a yawl:Method ;
+    rdfs:label "getLblFilter" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblFilter()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setLblFilter
+yawl:calendarMgt_setLblFilter_83 a yawl:Method ;
+    rdfs:label "setLblFilter" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblFilter(Label lbl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getCbbFilter
+yawl:calendarMgt_getCbbFilter_84 a yawl:Method ;
+    rdfs:label "getCbbFilter" ;
+    yawl:returnType "DropDown" ;
+    yawl:signature "DropDown getCbbFilter()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setCbbFilter
+yawl:calendarMgt_setCbbFilter_85 a yawl:Method ;
+    rdfs:label "setCbbFilter" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCbbFilter(DropDown cbb)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getLblResource
+yawl:calendarMgt_getLblResource_86 a yawl:Method ;
+    rdfs:label "getLblResource" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblResource()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setLblResource
+yawl:calendarMgt_setLblResource_87 a yawl:Method ;
+    rdfs:label "setLblResource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblResource(Label lbl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getCbbResource
+yawl:calendarMgt_getCbbResource_88 a yawl:Method ;
+    rdfs:label "getCbbResource" ;
+    yawl:returnType "DropDown" ;
+    yawl:signature "DropDown getCbbResource()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setCbbResource
+yawl:calendarMgt_setCbbResource_89 a yawl:Method ;
+    rdfs:label "setCbbResource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCbbResource(DropDown cbb)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getCalPanel
+yawl:calendarMgt_getCalPanel_90 a yawl:Method ;
+    rdfs:label "getCalPanel" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getCalPanel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setCalPanel
+yawl:calendarMgt_setCalPanel_91 a yawl:Method ;
+    rdfs:label "setCalPanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCalPanel(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getHeadingStart
+yawl:calendarMgt_getHeadingStart_92 a yawl:Method ;
+    rdfs:label "getHeadingStart" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getHeadingStart()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setHeadingStart
+yawl:calendarMgt_setHeadingStart_93 a yawl:Method ;
+    rdfs:label "setHeadingStart" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHeadingStart(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getHeadingEnd
+yawl:calendarMgt_getHeadingEnd_94 a yawl:Method ;
+    rdfs:label "getHeadingEnd" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getHeadingEnd()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setHeadingEnd
+yawl:calendarMgt_setHeadingEnd_95 a yawl:Method ;
+    rdfs:label "setHeadingEnd" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHeadingEnd(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getHeadingName
+yawl:calendarMgt_getHeadingName_96 a yawl:Method ;
+    rdfs:label "getHeadingName" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getHeadingName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setHeadingName
+yawl:calendarMgt_setHeadingName_97 a yawl:Method ;
+    rdfs:label "setHeadingName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHeadingName(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getHeadingStatus
+yawl:calendarMgt_getHeadingStatus_98 a yawl:Method ;
+    rdfs:label "getHeadingStatus" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getHeadingStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setHeadingStatus
+yawl:calendarMgt_setHeadingStatus_99 a yawl:Method ;
+    rdfs:label "setHeadingStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHeadingStatus(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getHeadingWorkload
+yawl:calendarMgt_getHeadingWorkload_100 a yawl:Method ;
+    rdfs:label "getHeadingWorkload" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getHeadingWorkload()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setHeadingWorkload
+yawl:calendarMgt_setHeadingWorkload_101 a yawl:Method ;
+    rdfs:label "setHeadingWorkload" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHeadingWorkload(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getHeadingComments
+yawl:calendarMgt_getHeadingComments_102 a yawl:Method ;
+    rdfs:label "getHeadingComments" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getHeadingComments()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setHeadingComments
+yawl:calendarMgt_setHeadingComments_103 a yawl:Method ;
+    rdfs:label "setHeadingComments" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHeadingComments(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getEditPanel
+yawl:calendarMgt_getEditPanel_104 a yawl:Method ;
+    rdfs:label "getEditPanel" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getEditPanel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setEditPanel
+yawl:calendarMgt_setEditPanel_105 a yawl:Method ;
+    rdfs:label "setEditPanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEditPanel(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getUpperPanel
+yawl:calendarMgt_getUpperPanel_106 a yawl:Method ;
+    rdfs:label "getUpperPanel" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getUpperPanel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setUpperPanel
+yawl:calendarMgt_setUpperPanel_107 a yawl:Method ;
+    rdfs:label "setUpperPanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUpperPanel(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getLblStart
+yawl:calendarMgt_getLblStart_108 a yawl:Method ;
+    rdfs:label "getLblStart" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblStart()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setLblStart
+yawl:calendarMgt_setLblStart_109 a yawl:Method ;
+    rdfs:label "setLblStart" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblStart(Label lbl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getLblEnd
+yawl:calendarMgt_getLblEnd_110 a yawl:Method ;
+    rdfs:label "getLblEnd" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblEnd()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setLblEnd
+yawl:calendarMgt_setLblEnd_111 a yawl:Method ;
+    rdfs:label "setLblEnd" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblEnd(Label lbl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getLblUntil
+yawl:calendarMgt_getLblUntil_112 a yawl:Method ;
+    rdfs:label "getLblUntil" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblUntil()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setLblUntil
+yawl:calendarMgt_setLblUntil_113 a yawl:Method ;
+    rdfs:label "setLblUntil" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblUntil(Label lbl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getLblWorkload
+yawl:calendarMgt_getLblWorkload_114 a yawl:Method ;
+    rdfs:label "getLblWorkload" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblWorkload()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setLblWorkload
+yawl:calendarMgt_setLblWorkload_115 a yawl:Method ;
+    rdfs:label "setLblWorkload" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblWorkload(Label lbl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getLblComments
+yawl:calendarMgt_getLblComments_116 a yawl:Method ;
+    rdfs:label "getLblComments" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblComments()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setLblComments
+yawl:calendarMgt_setLblComments_117 a yawl:Method ;
+    rdfs:label "setLblComments" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblComments(Label lbl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getCalDuration
+yawl:calendarMgt_getCalDuration_118 a yawl:Method ;
+    rdfs:label "getCalDuration" ;
+    yawl:returnType "Calendar" ;
+    yawl:signature "Calendar getCalDuration()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setCalDuration
+yawl:calendarMgt_setCalDuration_119 a yawl:Method ;
+    rdfs:label "setCalDuration" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCalDuration(Calendar cal)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getTxtStartTime
+yawl:calendarMgt_getTxtStartTime_120 a yawl:Method ;
+    rdfs:label "getTxtStartTime" ;
+    yawl:returnType "TextField" ;
+    yawl:signature "TextField getTxtStartTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setTxtStartTime
+yawl:calendarMgt_setTxtStartTime_121 a yawl:Method ;
+    rdfs:label "setTxtStartTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtStartTime(TextField tf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getTxtEndTime
+yawl:calendarMgt_getTxtEndTime_122 a yawl:Method ;
+    rdfs:label "getTxtEndTime" ;
+    yawl:returnType "TextField" ;
+    yawl:signature "TextField getTxtEndTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setTxtEndTime
+yawl:calendarMgt_setTxtEndTime_123 a yawl:Method ;
+    rdfs:label "setTxtEndTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtEndTime(TextField tf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getTxtWorkload
+yawl:calendarMgt_getTxtWorkload_124 a yawl:Method ;
+    rdfs:label "getTxtWorkload" ;
+    yawl:returnType "TextField" ;
+    yawl:signature "TextField getTxtWorkload()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setTxtWorkload
+yawl:calendarMgt_setTxtWorkload_125 a yawl:Method ;
+    rdfs:label "setTxtWorkload" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtWorkload(TextField tf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getTxtComments
+yawl:calendarMgt_getTxtComments_126 a yawl:Method ;
+    rdfs:label "getTxtComments" ;
+    yawl:returnType "TextField" ;
+    yawl:signature "TextField getTxtComments()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setTxtComments
+yawl:calendarMgt_setTxtComments_127 a yawl:Method ;
+    rdfs:label "setTxtComments" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtComments(TextField tf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getBtnClear
+yawl:calendarMgt_getBtnClear_128 a yawl:Method ;
+    rdfs:label "getBtnClear" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnClear()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setBtnClear
+yawl:calendarMgt_setBtnClear_129 a yawl:Method ;
+    rdfs:label "setBtnClear" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnClear(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getBtnAddText
+yawl:calendarMgt_getBtnAddText_130 a yawl:Method ;
+    rdfs:label "getBtnAddText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBtnAddText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setBtnAddText
+yawl:calendarMgt_setBtnAddText_131 a yawl:Method ;
+    rdfs:label "setBtnAddText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnAddText(String text)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getCbxRepeat
+yawl:calendarMgt_getCbxRepeat_132 a yawl:Method ;
+    rdfs:label "getCbxRepeat" ;
+    yawl:returnType "Checkbox" ;
+    yawl:signature "Checkbox getCbxRepeat()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setCbxRepeat
+yawl:calendarMgt_setCbxRepeat_133 a yawl:Method ;
+    rdfs:label "setCbxRepeat" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCbxRepeat(Checkbox c)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getSttResourceName
+yawl:calendarMgt_getSttResourceName_134 a yawl:Method ;
+    rdfs:label "getSttResourceName" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getSttResourceName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setSttResourceName
+yawl:calendarMgt_setSttResourceName_135 a yawl:Method ;
+    rdfs:label "setSttResourceName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSttResourceName(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getLblResourceName
+yawl:calendarMgt_getLblResourceName_136 a yawl:Method ;
+    rdfs:label "getLblResourceName" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblResourceName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.setLblResourceName
+yawl:calendarMgt_setLblResourceName_137 a yawl:Method ;
+    rdfs:label "setLblResourceName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblResourceName(Label lbl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.cbbFilter_processValueChange
+yawl:calendarMgt_cbbFilter_processValueChange_138 a yawl:Method ;
+    rdfs:label "cbbFilter_processValueChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cbbFilter_processValueChange(ValueChangeEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.cbbResource_processValueChange
+yawl:calendarMgt_cbbResource_processValueChange_139 a yawl:Method ;
+    rdfs:label "cbbResource_processValueChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cbbResource_processValueChange(ValueChangeEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.prerender
+yawl:calendarMgt_prerender_140 a yawl:Method ;
+    rdfs:label "prerender" ;
+    yawl:returnType "void" ;
+    yawl:signature "void prerender()" ;
+    rdfs:comment """Overridden method that is called immediately before the page is rendered""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.btnRefresh_action
+yawl:calendarMgt_btnRefresh_action_141 a yawl:Method ;
+    rdfs:label "btnRefresh_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnRefresh_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.btnAdd_action
+yawl:calendarMgt_btnAdd_action_142 a yawl:Method ;
+    rdfs:label "btnAdd_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnAdd_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.btnUpdate_action
+yawl:calendarMgt_btnUpdate_action_143 a yawl:Method ;
+    rdfs:label "btnUpdate_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnUpdate_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.btnDelete_action
+yawl:calendarMgt_btnDelete_action_144 a yawl:Method ;
+    rdfs:label "btnDelete_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnDelete_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.btnClear_action
+yawl:calendarMgt_btnClear_action_145 a yawl:Method ;
+    rdfs:label "btnClear_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnClear_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.btnYesterday_action
+yawl:calendarMgt_btnYesterday_action_146 a yawl:Method ;
+    rdfs:label "btnYesterday_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnYesterday_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.btnTomorrow_action
+yawl:calendarMgt_btnTomorrow_action_147 a yawl:Method ;
+    rdfs:label "btnTomorrow_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnTomorrow_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.getCalendarMgtFilterComboItems
+yawl:calendarMgt_getCalendarMgtFilterComboItems_148 a yawl:Method ;
+    rdfs:label "getCalendarMgtFilterComboItems" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getCalendarMgtFilterComboItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: calendarMgt.incDate
+yawl:calendarMgt_incDate_149 a yawl:Method ;
+    rdfs:label "incDate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void incDate(int amt)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: calendarMgt.incDate
+yawl:calendarMgt_incDate_150 a yawl:Method ;
+    rdfs:label "incDate" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date incDate(Date date, int amt)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: calendarMgt.processMode
+yawl:calendarMgt_processMode_151 a yawl:Method ;
+    rdfs:label "processMode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processMode()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: calendarMgt.getSelectedEntry
+yawl:calendarMgt_getSelectedEntry_152 a yawl:Method ;
+    rdfs:label "getSelectedEntry" ;
+    yawl:returnType "CalendarEntry" ;
+    yawl:signature "CalendarEntry getSelectedEntry()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: calendarMgt.addCalendarEntry
+yawl:calendarMgt_addCalendarEntry_153 a yawl:Method ;
+    rdfs:label "addCalendarEntry" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean addCalendarEntry(long startTime, long endTime, int workload, String comment)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: calendarMgt.updateCalendarEntry
+yawl:calendarMgt_updateCalendarEntry_154 a yawl:Method ;
+    rdfs:label "updateCalendarEntry" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean updateCalendarEntry(long startTime, long endTime, int workload, String comment)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: calendarMgt.setFilter
+yawl:calendarMgt_setFilter_155 a yawl:Method ;
+    rdfs:label "setFilter" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setFilter()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: calendarMgt.setResourceName
+yawl:calendarMgt_setResourceName_156 a yawl:Method ;
+    rdfs:label "setResourceName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setResourceName()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: calendarMgt.setResourceName
+yawl:calendarMgt_setResourceName_157 a yawl:Method ;
+    rdfs:label "setResourceName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setResourceName(String name)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: calendarMgt.setAddModeInputs
+yawl:calendarMgt_setAddModeInputs_158 a yawl:Method ;
+    rdfs:label "setAddModeInputs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAddModeInputs(boolean disable)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: calendarMgt.setActivePage
+yawl:calendarMgt_setActivePage_159 a yawl:Method ;
+    rdfs:label "setActivePage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setActivePage()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: calendarMgt.showMessagePanel
+yawl:calendarMgt_showMessagePanel_160 a yawl:Method ;
+    rdfs:label "showMessagePanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showMessagePanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: calendarMgt.getMode
+yawl:calendarMgt_getMode_161 a yawl:Method ;
+    rdfs:label "getMode" ;
+    yawl:returnType "Mode" ;
+    yawl:signature "Mode getMode()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: calendarMgt.setMode
+yawl:calendarMgt_setMode_162 a yawl:Method ;
+    rdfs:label "setMode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMode(Mode mode)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: calendarMgt.validateFields
+yawl:calendarMgt_validateFields_163 a yawl:Method ;
+    rdfs:label "validateFields" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validateFields()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: calendarMgt.validateTimeField
+yawl:calendarMgt_validateTimeField_164 a yawl:Method ;
+    rdfs:label "validateTimeField" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validateTimeField(String time, String label)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: calendarMgt.validateWorkloadField
+yawl:calendarMgt_validateWorkloadField_165 a yawl:Method ;
+    rdfs:label "validateWorkloadField" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validateWorkloadField(int load)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: calendarMgt.setEndTimeFields
+yawl:calendarMgt_setEndTimeFields_166 a yawl:Method ;
+    rdfs:label "setEndTimeFields" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEndTimeFields(CalendarRow row)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: calendarMgt.nullifyResourceCombo
+yawl:calendarMgt_nullifyResourceCombo_167 a yawl:Method ;
+    rdfs:label "nullifyResourceCombo" ;
+    yawl:returnType "void" ;
+    yawl:signature "void nullifyResourceCombo()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: calendarMgt.clearFields
+yawl:calendarMgt_clearFields_168 a yawl:Method ;
+    rdfs:label "clearFields" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clearFields()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: calendarMgt.getTime
+yawl:calendarMgt_getTime_169 a yawl:Method ;
+    rdfs:label "getTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getTime(String timeStr, boolean start)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: calendarMgt.getTime
+yawl:calendarMgt_getTime_170 a yawl:Method ;
+    rdfs:label "getTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getTime(String timeStr, long baseDate)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: calendarMgt.getWorkloadValue
+yawl:calendarMgt_getWorkloadValue_171 a yawl:Method ;
+    rdfs:label "getWorkloadValue" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getWorkloadValue()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:calendarMgt___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:calendarMgt_page1 a yawl:Field ;
+    rdfs:label "page1" .
+
+yawl:calendarMgt_html1 a yawl:Field ;
+    rdfs:label "html1" .
+
+yawl:calendarMgt_head1 a yawl:Field ;
+    rdfs:label "head1" .
+
+yawl:calendarMgt_link1 a yawl:Field ;
+    rdfs:label "link1" .
+
+yawl:calendarMgt_body1 a yawl:Field ;
+    rdfs:label "body1" .
+
+yawl:calendarMgt_form1 a yawl:Field ;
+    rdfs:label "form1" .
+
+yawl:calendarMgt_btnAdd a yawl:Field ;
+    rdfs:label "btnAdd" .
+
+yawl:calendarMgt_btnUpdate a yawl:Field ;
+    rdfs:label "btnUpdate" .
+
+yawl:calendarMgt_layoutPanel2 a yawl:Field ;
+    rdfs:label "layoutPanel2" .
+
+yawl:calendarMgt_dataTable1 a yawl:Field ;
+    rdfs:label "dataTable1" .
+
+yawl:calendarMgt_colName a yawl:Field ;
+    rdfs:label "colName" .
+
+yawl:calendarMgt_colNameRows a yawl:Field ;
+    rdfs:label "colNameRows" .
+
+yawl:calendarMgt_colNameHeader a yawl:Field ;
+    rdfs:label "colNameHeader" .
+
+yawl:calendarMgt_colStartTime a yawl:Field ;
+    rdfs:label "colStartTime" .
+
+yawl:calendarMgt_colStartTimeRows a yawl:Field ;
+    rdfs:label "colStartTimeRows" .
+
+yawl:calendarMgt_colStartTimeHeader a yawl:Field ;
+    rdfs:label "colStartTimeHeader" .
+
+yawl:calendarMgt_colEndTime a yawl:Field ;
+    rdfs:label "colEndTime" .
+
+yawl:calendarMgt_colEndTimeRows a yawl:Field ;
+    rdfs:label "colEndTimeRows" .
+
+yawl:calendarMgt_colEndTimeHeader a yawl:Field ;
+    rdfs:label "colEndTimeHeader" .
+
+yawl:calendarMgt_colStatus a yawl:Field ;
+    rdfs:label "colStatus" .
+
+yawl:calendarMgt_colStatusRows a yawl:Field ;
+    rdfs:label "colStatusRows" .
+
+yawl:calendarMgt_colStatusHeader a yawl:Field ;
+    rdfs:label "colStatusHeader" .
+
+yawl:calendarMgt_colWorkload a yawl:Field ;
+    rdfs:label "colWorkload" .
+
+yawl:calendarMgt_colWorkloadRows a yawl:Field ;
+    rdfs:label "colWorkloadRows" .
+
+yawl:calendarMgt_colWorkloadHeader a yawl:Field ;
+    rdfs:label "colWorkloadHeader" .
+
+yawl:calendarMgt_colComment a yawl:Field ;
+    rdfs:label "colComment" .
+
+yawl:calendarMgt_colCommentRows a yawl:Field ;
+    rdfs:label "colCommentRows" .
+
+yawl:calendarMgt_colCommentHeader a yawl:Field ;
+    rdfs:label "colCommentHeader" .
+
+yawl:calendarMgt_colSBar a yawl:Field ;
+    rdfs:label "colSBar" .
+
+yawl:calendarMgt_hdnRowIndex a yawl:Field ;
+    rdfs:label "hdnRowIndex" .
+
+yawl:calendarMgt_script1 a yawl:Field ;
+    rdfs:label "script1" .
+
+yawl:calendarMgt_pnlContainer a yawl:Field ;
+    rdfs:label "pnlContainer" .
+
+yawl:calendarMgt_pnlGroup a yawl:Field ;
+    rdfs:label "pnlGroup" .
+
+yawl:calendarMgt_btnDelete a yawl:Field ;
+    rdfs:label "btnDelete" .
+
+yawl:calendarMgt_btnYesterday a yawl:Field ;
+    rdfs:label "btnYesterday" .
+
+yawl:calendarMgt_btnTomorrow a yawl:Field ;
+    rdfs:label "btnTomorrow" .
+
+yawl:calendarMgt_calComponent a yawl:Field ;
+    rdfs:label "calComponent" .
+
+yawl:calendarMgt_lblFilter a yawl:Field ;
+    rdfs:label "lblFilter" .
+
+yawl:calendarMgt_cbbFilter a yawl:Field ;
+    rdfs:label "cbbFilter" .
+
+yawl:calendarMgt_lblResource a yawl:Field ;
+    rdfs:label "lblResource" .
+
+yawl:calendarMgt_cbbResource a yawl:Field ;
+    rdfs:label "cbbResource" .
+
+yawl:calendarMgt_calPanel a yawl:Field ;
+    rdfs:label "calPanel" .
+
+yawl:calendarMgt_headingStart a yawl:Field ;
+    rdfs:label "headingStart" .
+
+yawl:calendarMgt_headingEnd a yawl:Field ;
+    rdfs:label "headingEnd" .
+
+yawl:calendarMgt_headingName a yawl:Field ;
+    rdfs:label "headingName" .
+
+yawl:calendarMgt_headingStatus a yawl:Field ;
+    rdfs:label "headingStatus" .
+
+yawl:calendarMgt_headingWorkload a yawl:Field ;
+    rdfs:label "headingWorkload" .
+
+yawl:calendarMgt_headingComments a yawl:Field ;
+    rdfs:label "headingComments" .
+
+yawl:calendarMgt_editPanel a yawl:Field ;
+    rdfs:label "editPanel" .
+
+yawl:calendarMgt_upperPanel a yawl:Field ;
+    rdfs:label "upperPanel" .
+
+yawl:calendarMgt_lblStart a yawl:Field ;
+    rdfs:label "lblStart" .
+
+yawl:calendarMgt_lblEnd a yawl:Field ;
+    rdfs:label "lblEnd" .
+
+yawl:calendarMgt_lblUntil a yawl:Field ;
+    rdfs:label "lblUntil" .
+
+yawl:calendarMgt_lblWorkload a yawl:Field ;
+    rdfs:label "lblWorkload" .
+
+yawl:calendarMgt_lblComments a yawl:Field ;
+    rdfs:label "lblComments" .
+
+yawl:calendarMgt_calDuration a yawl:Field ;
+    rdfs:label "calDuration" .
+
+yawl:calendarMgt_txtStartTime a yawl:Field ;
+    rdfs:label "txtStartTime" .
+
+yawl:calendarMgt_txtEndTime a yawl:Field ;
+    rdfs:label "txtEndTime" .
+
+yawl:calendarMgt_txtWorkload a yawl:Field ;
+    rdfs:label "txtWorkload" .
+
+yawl:calendarMgt_txtComments a yawl:Field ;
+    rdfs:label "txtComments" .
+
+yawl:calendarMgt_btnClear a yawl:Field ;
+    rdfs:label "btnClear" .
+
+yawl:calendarMgt_btnAddText a yawl:Field ;
+    rdfs:label "btnAddText" .
+
+yawl:calendarMgt_cbxRepeat a yawl:Field ;
+    rdfs:label "cbxRepeat" .
+
+yawl:calendarMgt_sttResourceName a yawl:Field ;
+    rdfs:label "sttResourceName" .
+
+yawl:calendarMgt_lblResourceName a yawl:Field ;
+    rdfs:label "lblResourceName" .
+
+yawl:calendarMgt__rm a yawl:Field ;
+    rdfs:label "_rm" .
+
+yawl:calendarMgt__sb a yawl:Field ;
+    rdfs:label "_sb" .
+
+yawl:calendarMgt__msgPanel a yawl:Field ;
+    rdfs:label "_msgPanel" .
+
+yawl:calendarMgt__greg a yawl:Field ;
+    rdfs:label "_greg" .
+
+
+

@@ -1,0 +1,41 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.codelets.ExampleCodelet
+yawl:ExampleCodelet a yawl:Class ;
+    rdfs:label "ExampleCodelet" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_codelets ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/codelets/ExampleCodelet.java"^^xsd:string ;
+    rdfs:comment """A simple codelet example demonstrating usage. Much of the work is done in the abstract ancestor, but of course those base classes do not need to be relied upon - all the work my be done in this class if desired. The Element passed back to the caller of the execute method must contain the results of the execution. It should be constructed as: <root> <paramName>paramValue</paramName> <paramName>paramValue</paramName> ...... </root> \"root\" can be called anything; each paramName must be the same a""" ;
+    yawl:extends yawl:AbstractCodelet ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ExampleCodelet_execute_1 ;
+    yawl:hasMethod yawl:ExampleCodelet_getRequiredParams_2 ;
+    .
+
+
+# Method: ExampleCodelet.execute
+yawl:ExampleCodelet_execute_1 a yawl:Method ;
+    rdfs:label "execute" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element execute(Element inData, List inParams, List outParams)" ;
+    rdfs:comment """The implementation of the abstract class that does the work of this codelet. Note that calls to most of the base class methods may throw a CodeletExecutionException which should be passed back to the caller, @param inData The calling workitem's data @param inParams the workitem's input parameters @param outParams the workitem's output parameters @return the result of the codelet's work as a JDOM Element @throws CodeletExecutionException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExampleCodelet.getRequiredParams
+yawl:ExampleCodelet_getRequiredParams_2 a yawl:Method ;
+    rdfs:label "getRequiredParams" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getRequiredParams()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

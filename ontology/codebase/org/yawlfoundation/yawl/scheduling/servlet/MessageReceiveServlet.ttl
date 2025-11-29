@@ -1,0 +1,73 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.scheduling.servlet
+yawl:org_yawlfoundation_yawl_scheduling_servlet a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.scheduling.servlet" .
+# Class: org.yawlfoundation.yawl.scheduling.servlet.MessageReceiveServlet
+yawl:MessageReceiveServlet a yawl:Class ;
+    rdfs:label "MessageReceiveServlet" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_scheduling_servlet ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/scheduling/servlet/MessageReceiveServlet.java"^^xsd:string ;
+    rdfs:comment """receive messages about status change of resources from calendar manager @author tbe @version $Id: MessageReceiveServlet.java 24077 2010-11-22 13:17:30Z tbe $""" ;
+    yawl:extends yawl:HttpServlet ;
+    yawl:implements yawl:Constants ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:MessageReceiveServlet_service_1 ;
+    yawl:hasMethod yawl:MessageReceiveServlet_handleRSRequest_2 ;
+    yawl:hasMethod yawl:MessageReceiveServlet_handleCUIRequest_3 ;
+    yawl:hasMethod yawl:MessageReceiveServlet_destroy_4 ;
+    yawl:hasField yawl:MessageReceiveServlet__log ;
+    .
+
+
+# Method: MessageReceiveServlet.service
+yawl:MessageReceiveServlet_service_1 a yawl:Method ;
+    rdfs:label "service" ;
+    yawl:returnType "void" ;
+    yawl:signature "void service(HttpServletRequest request, HttpServletResponse response)" ;
+    rdfs:comment """service() - accept request and produce response @param request The HTTP request @param response The HTTP response""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MessageReceiveServlet.handleRSRequest
+yawl:MessageReceiveServlet_handleRSRequest_2 a yawl:Method ;
+    rdfs:label "handleRSRequest" ;
+    yawl:returnType "String" ;
+    yawl:signature "String handleRSRequest(HttpServletRequest request)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessageReceiveServlet.handleCUIRequest
+yawl:MessageReceiveServlet_handleCUIRequest_3 a yawl:Method ;
+    rdfs:label "handleCUIRequest" ;
+    yawl:returnType "String" ;
+    yawl:signature "String handleCUIRequest(HttpServletRequest request)" ;
+    rdfs:comment """Handles requests from the OR Schedule user interface @param request @return @throws Exception""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessageReceiveServlet.destroy
+yawl:MessageReceiveServlet_destroy_4 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:MessageReceiveServlet__log a yawl:Field ;
+    rdfs:label "_log" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_scheduling_util a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.scheduling.util" .
+
+

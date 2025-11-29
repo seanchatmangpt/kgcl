@@ -1,0 +1,1401 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.participantData
+yawl:participantData a yawl:Class ;
+    rdfs:label "participantData" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/participantData.java"^^xsd:string ;
+    rdfs:comment """Backing bean for the participant data or 'User Mgt' form. @author Michael Adams Date: 26/01/2008 Last Date: 09/05/2008""" ;
+    yawl:extends yawl:AbstractPageBean ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:participantData__init_1 ;
+    yawl:hasMethod yawl:participantData_init_2 ;
+    yawl:hasMethod yawl:participantData_destroy_3 ;
+    yawl:hasMethod yawl:participantData_preprocess_4 ;
+    yawl:hasMethod yawl:participantData_getApplicationBean_5 ;
+    yawl:hasMethod yawl:participantData_getSessionBean_6 ;
+    yawl:hasMethod yawl:participantData_getRequestBean_7 ;
+    yawl:hasMethod yawl:participantData_getPage1_8 ;
+    yawl:hasMethod yawl:participantData_setPage1_9 ;
+    yawl:hasMethod yawl:participantData_getHtml1_10 ;
+    yawl:hasMethod yawl:participantData_setHtml1_11 ;
+    yawl:hasMethod yawl:participantData_getHead1_12 ;
+    yawl:hasMethod yawl:participantData_setHead1_13 ;
+    yawl:hasMethod yawl:participantData_getLink1_14 ;
+    yawl:hasMethod yawl:participantData_setLink1_15 ;
+    yawl:hasMethod yawl:participantData_getBody1_16 ;
+    yawl:hasMethod yawl:participantData_setBody1_17 ;
+    yawl:hasMethod yawl:participantData_getForm1_18 ;
+    yawl:hasMethod yawl:participantData_setForm1_19 ;
+    yawl:hasMethod yawl:participantData_getPnlPrivileges_20 ;
+    yawl:hasMethod yawl:participantData_setPnlPrivileges_21 ;
+    yawl:hasMethod yawl:participantData_getStaticText1_22 ;
+    yawl:hasMethod yawl:participantData_setStaticText1_23 ;
+    yawl:hasMethod yawl:participantData_getSttPassword_24 ;
+    yawl:hasMethod yawl:participantData_setSttPassword_25 ;
+    yawl:hasMethod yawl:participantData_getTxtNewPassword_26 ;
+    yawl:hasMethod yawl:participantData_setTxtNewPassword_27 ;
+    yawl:hasMethod yawl:participantData_getTxtConfirmPassword_28 ;
+    yawl:hasMethod yawl:participantData_setTxtConfirmPassword_29 ;
+    yawl:hasMethod yawl:participantData_getLblFirstName_30 ;
+    yawl:hasMethod yawl:participantData_setLblFirstName_31 ;
+    yawl:hasMethod yawl:participantData_getLblUserID_32 ;
+    yawl:hasMethod yawl:participantData_setLblUserID_33 ;
+    yawl:hasMethod yawl:participantData_getLblLastName_34 ;
+    yawl:hasMethod yawl:participantData_setLblLastName_35 ;
+    yawl:hasMethod yawl:participantData_getLblDesc_36 ;
+    yawl:hasMethod yawl:participantData_setLblDesc_37 ;
+    yawl:hasMethod yawl:participantData_getLblNotes_38 ;
+    yawl:hasMethod yawl:participantData_setLblNotes_39 ;
+    yawl:hasMethod yawl:participantData_getLblPassword_40 ;
+    yawl:hasMethod yawl:participantData_setLblPassword_41 ;
+    yawl:hasMethod yawl:participantData_getLblConfirm_42 ;
+    yawl:hasMethod yawl:participantData_setLblConfirm_43 ;
+    yawl:hasMethod yawl:participantData_getCbxChooseItemToStart_44 ;
+    yawl:hasMethod yawl:participantData_setCbxChooseItemToStart_45 ;
+    yawl:hasMethod yawl:participantData_getCbxStartConcurrent_46 ;
+    yawl:hasMethod yawl:participantData_setCbxStartConcurrent_47 ;
+    yawl:hasMethod yawl:participantData_getCbxReorderItems_48 ;
+    yawl:hasMethod yawl:participantData_setCbxReorderItems_49 ;
+    yawl:hasMethod yawl:participantData_getCbxViewTeamItems_50 ;
+    yawl:hasMethod yawl:participantData_setCbxViewTeamItems_51 ;
+    yawl:hasMethod yawl:participantData_getCbxViewOrgGroupItems_52 ;
+    yawl:hasMethod yawl:participantData_setCbxViewOrgGroupItems_53 ;
+    yawl:hasMethod yawl:participantData_getCbxChainItems_54 ;
+    yawl:hasMethod yawl:participantData_setCbxChainItems_55 ;
+    yawl:hasMethod yawl:participantData_getCbxManageCases_56 ;
+    yawl:hasMethod yawl:participantData_setCbxManageCases_57 ;
+    yawl:hasMethod yawl:participantData_getPnlUserDetails_58 ;
+    yawl:hasMethod yawl:participantData_setPnlUserDetails_59 ;
+    yawl:hasMethod yawl:participantData_getTxtFirstName_60 ;
+    yawl:hasMethod yawl:participantData_setTxtFirstName_61 ;
+    yawl:hasMethod yawl:participantData_getTxtLastName_62 ;
+    yawl:hasMethod yawl:participantData_setTxtLastName_63 ;
+    yawl:hasMethod yawl:participantData_getTxtUserID_64 ;
+    yawl:hasMethod yawl:participantData_setTxtUserID_65 ;
+    yawl:hasMethod yawl:participantData_getCbxAdmin_66 ;
+    yawl:hasMethod yawl:participantData_setCbxAdmin_67 ;
+    yawl:hasMethod yawl:participantData_getTxtDesc_68 ;
+    yawl:hasMethod yawl:participantData_setTxtDesc_69 ;
+    yawl:hasMethod yawl:participantData_getTxtNotes_70 ;
+    yawl:hasMethod yawl:participantData_setTxtNotes_71 ;
+    yawl:hasMethod yawl:participantData_getTabSetAttributes_72 ;
+    yawl:hasMethod yawl:participantData_setTabSetAttributes_73 ;
+    yawl:hasMethod yawl:participantData_getTabRoles_74 ;
+    yawl:hasMethod yawl:participantData_setTabRoles_75 ;
+    yawl:hasMethod yawl:participantData_getTabPanelRole_76 ;
+    yawl:hasMethod yawl:participantData_setTabPanelRole_77 ;
+    yawl:hasMethod yawl:participantData_getTabPosition_78 ;
+    yawl:hasMethod yawl:participantData_setTabPosition_79 ;
+    yawl:hasMethod yawl:participantData_getTabPanelPosition_80 ;
+    yawl:hasMethod yawl:participantData_setTabPanelPosition_81 ;
+    yawl:hasMethod yawl:participantData_getTabCapability_82 ;
+    yawl:hasMethod yawl:participantData_setTabCapability_83 ;
+    yawl:hasMethod yawl:participantData_getTabPanelCapability_84 ;
+    yawl:hasMethod yawl:participantData_setTabPanelCapability_85 ;
+    yawl:hasMethod yawl:participantData_getPnlSelectUser_86 ;
+    yawl:hasMethod yawl:participantData_setPnlSelectUser_87 ;
+    yawl:hasMethod yawl:participantData_getPnlNewPassword_88 ;
+    yawl:hasMethod yawl:participantData_setPnlNewPassword_89 ;
+    yawl:hasMethod yawl:participantData_getCbbParticipants_90 ;
+    yawl:hasMethod yawl:participantData_setCbbParticipants_91 ;
+    yawl:hasMethod yawl:participantData_getLabel1_92 ;
+    yawl:hasMethod yawl:participantData_setLabel1_93 ;
+    yawl:hasMethod yawl:participantData_getBtnSave_94 ;
+    yawl:hasMethod yawl:participantData_setBtnSave_95 ;
+    yawl:hasMethod yawl:participantData_getBtnReset_96 ;
+    yawl:hasMethod yawl:participantData_setBtnReset_97 ;
+    yawl:hasMethod yawl:participantData_getBtnClose_98 ;
+    yawl:hasMethod yawl:participantData_setBtnClose_99 ;
+    yawl:hasMethod yawl:participantData_getBtnRemove_100 ;
+    yawl:hasMethod yawl:participantData_setBtnRemove_101 ;
+    yawl:hasMethod yawl:participantData_getBtnAdd_102 ;
+    yawl:hasMethod yawl:participantData_setBtnAdd_103 ;
+    yawl:hasMethod yawl:participantData_getPnlContainer_104 ;
+    yawl:hasMethod yawl:participantData_setPnlContainer_105 ;
+    yawl:hasMethod yawl:participantData_prerender_106 ;
+    yawl:hasMethod yawl:participantData_btnSave_action_107 ;
+    yawl:hasMethod yawl:participantData_btnReset_action_108 ;
+    yawl:hasMethod yawl:participantData_btnRemove_action_109 ;
+    yawl:hasMethod yawl:participantData_btnAdd_action_110 ;
+    yawl:hasMethod yawl:participantData_setMode_111 ;
+    yawl:hasMethod yawl:participantData_getCurrentMode_112 ;
+    yawl:hasMethod yawl:participantData_tabRoles_action_113 ;
+    yawl:hasMethod yawl:participantData_tabPosition_action_114 ;
+    yawl:hasMethod yawl:participantData_tabCapability_action_115 ;
+    yawl:hasMethod yawl:participantData_cbbParticipants_processValueChange_116 ;
+    yawl:hasMethod yawl:participantData_populateFields_117 ;
+    yawl:hasMethod yawl:participantData_clearFields_118 ;
+    yawl:hasMethod yawl:participantData_enableFields_119 ;
+    yawl:hasMethod yawl:participantData_saveChanges_120 ;
+    yawl:hasMethod yawl:participantData_checkValidPasswordChange_121 ;
+    yawl:hasMethod yawl:participantData_createParticipant_122 ;
+    yawl:hasMethod yawl:participantData_validateNewData_123 ;
+    yawl:hasMethod yawl:participantData_checkForRequiredValues_124 ;
+    yawl:hasMethod yawl:participantData_hasText_125 ;
+    yawl:hasMethod yawl:participantData_hasText_126 ;
+    yawl:hasMethod yawl:participantData_checkValidUserID_127 ;
+    yawl:hasMethod yawl:participantData_showMessagePanel_128 ;
+    yawl:hasMethod yawl:participantData_checkDataModsEnabled_129 ;
+    yawl:hasMethod yawl:participantData_disableButton_130 ;
+    yawl:hasField yawl:participantData___placeholder ;
+    yawl:hasField yawl:participantData_page1 ;
+    yawl:hasField yawl:participantData_html1 ;
+    yawl:hasField yawl:participantData_head1 ;
+    yawl:hasField yawl:participantData_link1 ;
+    yawl:hasField yawl:participantData_body1 ;
+    yawl:hasField yawl:participantData_form1 ;
+    yawl:hasField yawl:participantData_pnlPrivileges ;
+    yawl:hasField yawl:participantData_staticText1 ;
+    yawl:hasField yawl:participantData_sttPassword ;
+    yawl:hasField yawl:participantData_txtNewPassword ;
+    yawl:hasField yawl:participantData_txtConfirmPassword ;
+    yawl:hasField yawl:participantData_lblFirstName ;
+    yawl:hasField yawl:participantData_lblUserID ;
+    yawl:hasField yawl:participantData_lblLastName ;
+    yawl:hasField yawl:participantData_lblDesc ;
+    yawl:hasField yawl:participantData_lblNotes ;
+    yawl:hasField yawl:participantData_lblPassword ;
+    yawl:hasField yawl:participantData_lblConfirm ;
+    yawl:hasField yawl:participantData_cbxChooseItemToStart ;
+    yawl:hasField yawl:participantData_cbxStartConcurrent ;
+    yawl:hasField yawl:participantData_cbxReorderItems ;
+    yawl:hasField yawl:participantData_cbxViewTeamItems ;
+    yawl:hasField yawl:participantData_cbxViewOrgGroupItems ;
+    yawl:hasField yawl:participantData_cbxChainItems ;
+    yawl:hasField yawl:participantData_cbxManageCases ;
+    yawl:hasField yawl:participantData_pnlUserDetails ;
+    yawl:hasField yawl:participantData_txtFirstName ;
+    yawl:hasField yawl:participantData_txtLastName ;
+    yawl:hasField yawl:participantData_txtUserID ;
+    yawl:hasField yawl:participantData_cbxAdmin ;
+    yawl:hasField yawl:participantData_txtDesc ;
+    yawl:hasField yawl:participantData_txtNotes ;
+    yawl:hasField yawl:participantData_tabSetAttributes ;
+    yawl:hasField yawl:participantData_tabRoles ;
+    yawl:hasField yawl:participantData_tabPanelRole ;
+    yawl:hasField yawl:participantData_tabPosition ;
+    yawl:hasField yawl:participantData_tabPanelPosition ;
+    yawl:hasField yawl:participantData_tabCapability ;
+    yawl:hasField yawl:participantData_tabPanelCapability ;
+    yawl:hasField yawl:participantData_pnlSelectUser ;
+    yawl:hasField yawl:participantData_pnlNewPassword ;
+    yawl:hasField yawl:participantData_cbbParticipants ;
+    yawl:hasField yawl:participantData_label1 ;
+    yawl:hasField yawl:participantData_btnSave ;
+    yawl:hasField yawl:participantData_btnReset ;
+    yawl:hasField yawl:participantData_btnClose ;
+    yawl:hasField yawl:participantData_btnRemove ;
+    yawl:hasField yawl:participantData_btnAdd ;
+    yawl:hasField yawl:participantData_pnlContainer ;
+    yawl:hasField yawl:participantData__sb ;
+    yawl:hasField yawl:participantData_msgPanel ;
+    .
+
+
+# Method: participantData._init
+yawl:participantData__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: participantData.init
+yawl:participantData_init_2 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.destroy
+yawl:participantData_destroy_3 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.preprocess
+yawl:participantData_preprocess_4 a yawl:Method ;
+    rdfs:label "preprocess" ;
+    yawl:returnType "void" ;
+    yawl:signature "void preprocess()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getApplicationBean
+yawl:participantData_getApplicationBean_5 a yawl:Method ;
+    rdfs:label "getApplicationBean" ;
+    yawl:returnType "ApplicationBean" ;
+    yawl:signature "ApplicationBean getApplicationBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: participantData.getSessionBean
+yawl:participantData_getSessionBean_6 a yawl:Method ;
+    rdfs:label "getSessionBean" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getSessionBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: participantData.getRequestBean
+yawl:participantData_getRequestBean_7 a yawl:Method ;
+    rdfs:label "getRequestBean" ;
+    yawl:returnType "RequestBean" ;
+    yawl:signature "RequestBean getRequestBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: participantData.getPage1
+yawl:participantData_getPage1_8 a yawl:Method ;
+    rdfs:label "getPage1" ;
+    yawl:returnType "Page" ;
+    yawl:signature "Page getPage1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setPage1
+yawl:participantData_setPage1_9 a yawl:Method ;
+    rdfs:label "setPage1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPage1(Page p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getHtml1
+yawl:participantData_getHtml1_10 a yawl:Method ;
+    rdfs:label "getHtml1" ;
+    yawl:returnType "Html" ;
+    yawl:signature "Html getHtml1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setHtml1
+yawl:participantData_setHtml1_11 a yawl:Method ;
+    rdfs:label "setHtml1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHtml1(Html h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getHead1
+yawl:participantData_getHead1_12 a yawl:Method ;
+    rdfs:label "getHead1" ;
+    yawl:returnType "Head" ;
+    yawl:signature "Head getHead1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setHead1
+yawl:participantData_setHead1_13 a yawl:Method ;
+    rdfs:label "setHead1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHead1(Head h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getLink1
+yawl:participantData_getLink1_14 a yawl:Method ;
+    rdfs:label "getLink1" ;
+    yawl:returnType "Link" ;
+    yawl:signature "Link getLink1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setLink1
+yawl:participantData_setLink1_15 a yawl:Method ;
+    rdfs:label "setLink1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLink1(Link l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getBody1
+yawl:participantData_getBody1_16 a yawl:Method ;
+    rdfs:label "getBody1" ;
+    yawl:returnType "Body" ;
+    yawl:signature "Body getBody1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setBody1
+yawl:participantData_setBody1_17 a yawl:Method ;
+    rdfs:label "setBody1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBody1(Body b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getForm1
+yawl:participantData_getForm1_18 a yawl:Method ;
+    rdfs:label "getForm1" ;
+    yawl:returnType "Form" ;
+    yawl:signature "Form getForm1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setForm1
+yawl:participantData_setForm1_19 a yawl:Method ;
+    rdfs:label "setForm1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setForm1(Form f)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getPnlPrivileges
+yawl:participantData_getPnlPrivileges_20 a yawl:Method ;
+    rdfs:label "getPnlPrivileges" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlPrivileges()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setPnlPrivileges
+yawl:participantData_setPnlPrivileges_21 a yawl:Method ;
+    rdfs:label "setPnlPrivileges" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlPrivileges(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getStaticText1
+yawl:participantData_getStaticText1_22 a yawl:Method ;
+    rdfs:label "getStaticText1" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getStaticText1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setStaticText1
+yawl:participantData_setStaticText1_23 a yawl:Method ;
+    rdfs:label "setStaticText1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStaticText1(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getSttPassword
+yawl:participantData_getSttPassword_24 a yawl:Method ;
+    rdfs:label "getSttPassword" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getSttPassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setSttPassword
+yawl:participantData_setSttPassword_25 a yawl:Method ;
+    rdfs:label "setSttPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSttPassword(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getTxtNewPassword
+yawl:participantData_getTxtNewPassword_26 a yawl:Method ;
+    rdfs:label "getTxtNewPassword" ;
+    yawl:returnType "PasswordField" ;
+    yawl:signature "PasswordField getTxtNewPassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setTxtNewPassword
+yawl:participantData_setTxtNewPassword_27 a yawl:Method ;
+    rdfs:label "setTxtNewPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtNewPassword(PasswordField pw)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getTxtConfirmPassword
+yawl:participantData_getTxtConfirmPassword_28 a yawl:Method ;
+    rdfs:label "getTxtConfirmPassword" ;
+    yawl:returnType "PasswordField" ;
+    yawl:signature "PasswordField getTxtConfirmPassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setTxtConfirmPassword
+yawl:participantData_setTxtConfirmPassword_29 a yawl:Method ;
+    rdfs:label "setTxtConfirmPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtConfirmPassword(PasswordField pw)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getLblFirstName
+yawl:participantData_getLblFirstName_30 a yawl:Method ;
+    rdfs:label "getLblFirstName" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblFirstName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setLblFirstName
+yawl:participantData_setLblFirstName_31 a yawl:Method ;
+    rdfs:label "setLblFirstName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblFirstName(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getLblUserID
+yawl:participantData_getLblUserID_32 a yawl:Method ;
+    rdfs:label "getLblUserID" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblUserID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setLblUserID
+yawl:participantData_setLblUserID_33 a yawl:Method ;
+    rdfs:label "setLblUserID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblUserID(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getLblLastName
+yawl:participantData_getLblLastName_34 a yawl:Method ;
+    rdfs:label "getLblLastName" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblLastName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setLblLastName
+yawl:participantData_setLblLastName_35 a yawl:Method ;
+    rdfs:label "setLblLastName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblLastName(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getLblDesc
+yawl:participantData_getLblDesc_36 a yawl:Method ;
+    rdfs:label "getLblDesc" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblDesc()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setLblDesc
+yawl:participantData_setLblDesc_37 a yawl:Method ;
+    rdfs:label "setLblDesc" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblDesc(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getLblNotes
+yawl:participantData_getLblNotes_38 a yawl:Method ;
+    rdfs:label "getLblNotes" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblNotes()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setLblNotes
+yawl:participantData_setLblNotes_39 a yawl:Method ;
+    rdfs:label "setLblNotes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblNotes(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getLblPassword
+yawl:participantData_getLblPassword_40 a yawl:Method ;
+    rdfs:label "getLblPassword" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblPassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setLblPassword
+yawl:participantData_setLblPassword_41 a yawl:Method ;
+    rdfs:label "setLblPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblPassword(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getLblConfirm
+yawl:participantData_getLblConfirm_42 a yawl:Method ;
+    rdfs:label "getLblConfirm" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblConfirm()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setLblConfirm
+yawl:participantData_setLblConfirm_43 a yawl:Method ;
+    rdfs:label "setLblConfirm" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblConfirm(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getCbxChooseItemToStart
+yawl:participantData_getCbxChooseItemToStart_44 a yawl:Method ;
+    rdfs:label "getCbxChooseItemToStart" ;
+    yawl:returnType "Checkbox" ;
+    yawl:signature "Checkbox getCbxChooseItemToStart()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setCbxChooseItemToStart
+yawl:participantData_setCbxChooseItemToStart_45 a yawl:Method ;
+    rdfs:label "setCbxChooseItemToStart" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCbxChooseItemToStart(Checkbox c)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getCbxStartConcurrent
+yawl:participantData_getCbxStartConcurrent_46 a yawl:Method ;
+    rdfs:label "getCbxStartConcurrent" ;
+    yawl:returnType "Checkbox" ;
+    yawl:signature "Checkbox getCbxStartConcurrent()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setCbxStartConcurrent
+yawl:participantData_setCbxStartConcurrent_47 a yawl:Method ;
+    rdfs:label "setCbxStartConcurrent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCbxStartConcurrent(Checkbox c)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getCbxReorderItems
+yawl:participantData_getCbxReorderItems_48 a yawl:Method ;
+    rdfs:label "getCbxReorderItems" ;
+    yawl:returnType "Checkbox" ;
+    yawl:signature "Checkbox getCbxReorderItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setCbxReorderItems
+yawl:participantData_setCbxReorderItems_49 a yawl:Method ;
+    rdfs:label "setCbxReorderItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCbxReorderItems(Checkbox c)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getCbxViewTeamItems
+yawl:participantData_getCbxViewTeamItems_50 a yawl:Method ;
+    rdfs:label "getCbxViewTeamItems" ;
+    yawl:returnType "Checkbox" ;
+    yawl:signature "Checkbox getCbxViewTeamItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setCbxViewTeamItems
+yawl:participantData_setCbxViewTeamItems_51 a yawl:Method ;
+    rdfs:label "setCbxViewTeamItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCbxViewTeamItems(Checkbox c)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getCbxViewOrgGroupItems
+yawl:participantData_getCbxViewOrgGroupItems_52 a yawl:Method ;
+    rdfs:label "getCbxViewOrgGroupItems" ;
+    yawl:returnType "Checkbox" ;
+    yawl:signature "Checkbox getCbxViewOrgGroupItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setCbxViewOrgGroupItems
+yawl:participantData_setCbxViewOrgGroupItems_53 a yawl:Method ;
+    rdfs:label "setCbxViewOrgGroupItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCbxViewOrgGroupItems(Checkbox c)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getCbxChainItems
+yawl:participantData_getCbxChainItems_54 a yawl:Method ;
+    rdfs:label "getCbxChainItems" ;
+    yawl:returnType "Checkbox" ;
+    yawl:signature "Checkbox getCbxChainItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setCbxChainItems
+yawl:participantData_setCbxChainItems_55 a yawl:Method ;
+    rdfs:label "setCbxChainItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCbxChainItems(Checkbox c)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getCbxManageCases
+yawl:participantData_getCbxManageCases_56 a yawl:Method ;
+    rdfs:label "getCbxManageCases" ;
+    yawl:returnType "Checkbox" ;
+    yawl:signature "Checkbox getCbxManageCases()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setCbxManageCases
+yawl:participantData_setCbxManageCases_57 a yawl:Method ;
+    rdfs:label "setCbxManageCases" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCbxManageCases(Checkbox c)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getPnlUserDetails
+yawl:participantData_getPnlUserDetails_58 a yawl:Method ;
+    rdfs:label "getPnlUserDetails" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlUserDetails()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setPnlUserDetails
+yawl:participantData_setPnlUserDetails_59 a yawl:Method ;
+    rdfs:label "setPnlUserDetails" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlUserDetails(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getTxtFirstName
+yawl:participantData_getTxtFirstName_60 a yawl:Method ;
+    rdfs:label "getTxtFirstName" ;
+    yawl:returnType "TextField" ;
+    yawl:signature "TextField getTxtFirstName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setTxtFirstName
+yawl:participantData_setTxtFirstName_61 a yawl:Method ;
+    rdfs:label "setTxtFirstName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtFirstName(TextField tf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getTxtLastName
+yawl:participantData_getTxtLastName_62 a yawl:Method ;
+    rdfs:label "getTxtLastName" ;
+    yawl:returnType "TextField" ;
+    yawl:signature "TextField getTxtLastName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setTxtLastName
+yawl:participantData_setTxtLastName_63 a yawl:Method ;
+    rdfs:label "setTxtLastName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtLastName(TextField tf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getTxtUserID
+yawl:participantData_getTxtUserID_64 a yawl:Method ;
+    rdfs:label "getTxtUserID" ;
+    yawl:returnType "TextField" ;
+    yawl:signature "TextField getTxtUserID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setTxtUserID
+yawl:participantData_setTxtUserID_65 a yawl:Method ;
+    rdfs:label "setTxtUserID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtUserID(TextField tf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getCbxAdmin
+yawl:participantData_getCbxAdmin_66 a yawl:Method ;
+    rdfs:label "getCbxAdmin" ;
+    yawl:returnType "Checkbox" ;
+    yawl:signature "Checkbox getCbxAdmin()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setCbxAdmin
+yawl:participantData_setCbxAdmin_67 a yawl:Method ;
+    rdfs:label "setCbxAdmin" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCbxAdmin(Checkbox c)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getTxtDesc
+yawl:participantData_getTxtDesc_68 a yawl:Method ;
+    rdfs:label "getTxtDesc" ;
+    yawl:returnType "TextArea" ;
+    yawl:signature "TextArea getTxtDesc()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setTxtDesc
+yawl:participantData_setTxtDesc_69 a yawl:Method ;
+    rdfs:label "setTxtDesc" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtDesc(TextArea ta)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getTxtNotes
+yawl:participantData_getTxtNotes_70 a yawl:Method ;
+    rdfs:label "getTxtNotes" ;
+    yawl:returnType "TextArea" ;
+    yawl:signature "TextArea getTxtNotes()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setTxtNotes
+yawl:participantData_setTxtNotes_71 a yawl:Method ;
+    rdfs:label "setTxtNotes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtNotes(TextArea ta)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getTabSetAttributes
+yawl:participantData_getTabSetAttributes_72 a yawl:Method ;
+    rdfs:label "getTabSetAttributes" ;
+    yawl:returnType "TabSet" ;
+    yawl:signature "TabSet getTabSetAttributes()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setTabSetAttributes
+yawl:participantData_setTabSetAttributes_73 a yawl:Method ;
+    rdfs:label "setTabSetAttributes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTabSetAttributes(TabSet ts)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getTabRoles
+yawl:participantData_getTabRoles_74 a yawl:Method ;
+    rdfs:label "getTabRoles" ;
+    yawl:returnType "Tab" ;
+    yawl:signature "Tab getTabRoles()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setTabRoles
+yawl:participantData_setTabRoles_75 a yawl:Method ;
+    rdfs:label "setTabRoles" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTabRoles(Tab t)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getTabPanelRole
+yawl:participantData_getTabPanelRole_76 a yawl:Method ;
+    rdfs:label "getTabPanelRole" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getTabPanelRole()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setTabPanelRole
+yawl:participantData_setTabPanelRole_77 a yawl:Method ;
+    rdfs:label "setTabPanelRole" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTabPanelRole(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getTabPosition
+yawl:participantData_getTabPosition_78 a yawl:Method ;
+    rdfs:label "getTabPosition" ;
+    yawl:returnType "Tab" ;
+    yawl:signature "Tab getTabPosition()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setTabPosition
+yawl:participantData_setTabPosition_79 a yawl:Method ;
+    rdfs:label "setTabPosition" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTabPosition(Tab t)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getTabPanelPosition
+yawl:participantData_getTabPanelPosition_80 a yawl:Method ;
+    rdfs:label "getTabPanelPosition" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getTabPanelPosition()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setTabPanelPosition
+yawl:participantData_setTabPanelPosition_81 a yawl:Method ;
+    rdfs:label "setTabPanelPosition" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTabPanelPosition(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getTabCapability
+yawl:participantData_getTabCapability_82 a yawl:Method ;
+    rdfs:label "getTabCapability" ;
+    yawl:returnType "Tab" ;
+    yawl:signature "Tab getTabCapability()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setTabCapability
+yawl:participantData_setTabCapability_83 a yawl:Method ;
+    rdfs:label "setTabCapability" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTabCapability(Tab t)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getTabPanelCapability
+yawl:participantData_getTabPanelCapability_84 a yawl:Method ;
+    rdfs:label "getTabPanelCapability" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getTabPanelCapability()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setTabPanelCapability
+yawl:participantData_setTabPanelCapability_85 a yawl:Method ;
+    rdfs:label "setTabPanelCapability" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTabPanelCapability(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getPnlSelectUser
+yawl:participantData_getPnlSelectUser_86 a yawl:Method ;
+    rdfs:label "getPnlSelectUser" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlSelectUser()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setPnlSelectUser
+yawl:participantData_setPnlSelectUser_87 a yawl:Method ;
+    rdfs:label "setPnlSelectUser" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlSelectUser(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getPnlNewPassword
+yawl:participantData_getPnlNewPassword_88 a yawl:Method ;
+    rdfs:label "getPnlNewPassword" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlNewPassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setPnlNewPassword
+yawl:participantData_setPnlNewPassword_89 a yawl:Method ;
+    rdfs:label "setPnlNewPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlNewPassword(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getCbbParticipants
+yawl:participantData_getCbbParticipants_90 a yawl:Method ;
+    rdfs:label "getCbbParticipants" ;
+    yawl:returnType "DropDown" ;
+    yawl:signature "DropDown getCbbParticipants()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setCbbParticipants
+yawl:participantData_setCbbParticipants_91 a yawl:Method ;
+    rdfs:label "setCbbParticipants" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCbbParticipants(DropDown dd)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getLabel1
+yawl:participantData_getLabel1_92 a yawl:Method ;
+    rdfs:label "getLabel1" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLabel1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setLabel1
+yawl:participantData_setLabel1_93 a yawl:Method ;
+    rdfs:label "setLabel1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLabel1(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getBtnSave
+yawl:participantData_getBtnSave_94 a yawl:Method ;
+    rdfs:label "getBtnSave" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnSave()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setBtnSave
+yawl:participantData_setBtnSave_95 a yawl:Method ;
+    rdfs:label "setBtnSave" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnSave(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getBtnReset
+yawl:participantData_getBtnReset_96 a yawl:Method ;
+    rdfs:label "getBtnReset" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnReset()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setBtnReset
+yawl:participantData_setBtnReset_97 a yawl:Method ;
+    rdfs:label "setBtnReset" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnReset(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getBtnClose
+yawl:participantData_getBtnClose_98 a yawl:Method ;
+    rdfs:label "getBtnClose" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnClose()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setBtnClose
+yawl:participantData_setBtnClose_99 a yawl:Method ;
+    rdfs:label "setBtnClose" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnClose(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getBtnRemove
+yawl:participantData_getBtnRemove_100 a yawl:Method ;
+    rdfs:label "getBtnRemove" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnRemove()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setBtnRemove
+yawl:participantData_setBtnRemove_101 a yawl:Method ;
+    rdfs:label "setBtnRemove" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnRemove(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getBtnAdd
+yawl:participantData_getBtnAdd_102 a yawl:Method ;
+    rdfs:label "getBtnAdd" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnAdd()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setBtnAdd
+yawl:participantData_setBtnAdd_103 a yawl:Method ;
+    rdfs:label "setBtnAdd" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnAdd(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.getPnlContainer
+yawl:participantData_getPnlContainer_104 a yawl:Method ;
+    rdfs:label "getPnlContainer" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlContainer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setPnlContainer
+yawl:participantData_setPnlContainer_105 a yawl:Method ;
+    rdfs:label "setPnlContainer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlContainer(PanelLayout pnl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.prerender
+yawl:participantData_prerender_106 a yawl:Method ;
+    rdfs:label "prerender" ;
+    yawl:returnType "void" ;
+    yawl:signature "void prerender()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.btnSave_action
+yawl:participantData_btnSave_action_107 a yawl:Method ;
+    rdfs:label "btnSave_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnSave_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.btnReset_action
+yawl:participantData_btnReset_action_108 a yawl:Method ;
+    rdfs:label "btnReset_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnReset_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.btnRemove_action
+yawl:participantData_btnRemove_action_109 a yawl:Method ;
+    rdfs:label "btnRemove_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnRemove_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.btnAdd_action
+yawl:participantData_btnAdd_action_110 a yawl:Method ;
+    rdfs:label "btnAdd_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnAdd_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.setMode
+yawl:participantData_setMode_111 a yawl:Method ;
+    rdfs:label "setMode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMode(Mode mode)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: participantData.getCurrentMode
+yawl:participantData_getCurrentMode_112 a yawl:Method ;
+    rdfs:label "getCurrentMode" ;
+    yawl:returnType "Mode" ;
+    yawl:signature "Mode getCurrentMode()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: participantData.tabRoles_action
+yawl:participantData_tabRoles_action_113 a yawl:Method ;
+    rdfs:label "tabRoles_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String tabRoles_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.tabPosition_action
+yawl:participantData_tabPosition_action_114 a yawl:Method ;
+    rdfs:label "tabPosition_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String tabPosition_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.tabCapability_action
+yawl:participantData_tabCapability_action_115 a yawl:Method ;
+    rdfs:label "tabCapability_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String tabCapability_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.cbbParticipants_processValueChange
+yawl:participantData_cbbParticipants_processValueChange_116 a yawl:Method ;
+    rdfs:label "cbbParticipants_processValueChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cbbParticipants_processValueChange(ValueChangeEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: participantData.populateFields
+yawl:participantData_populateFields_117 a yawl:Method ;
+    rdfs:label "populateFields" ;
+    yawl:returnType "void" ;
+    yawl:signature "void populateFields(Participant p)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: participantData.clearFields
+yawl:participantData_clearFields_118 a yawl:Method ;
+    rdfs:label "clearFields" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clearFields()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: participantData.enableFields
+yawl:participantData_enableFields_119 a yawl:Method ;
+    rdfs:label "enableFields" ;
+    yawl:returnType "void" ;
+    yawl:signature "void enableFields(boolean enabled)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: participantData.saveChanges
+yawl:participantData_saveChanges_120 a yawl:Method ;
+    rdfs:label "saveChanges" ;
+    yawl:returnType "void" ;
+    yawl:signature "void saveChanges(Participant p)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: participantData.checkValidPasswordChange
+yawl:participantData_checkValidPasswordChange_121 a yawl:Method ;
+    rdfs:label "checkValidPasswordChange" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean checkValidPasswordChange(boolean updating)" ;
+    rdfs:comment """@return true if the password is valid""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: participantData.createParticipant
+yawl:participantData_createParticipant_122 a yawl:Method ;
+    rdfs:label "createParticipant" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant createParticipant()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: participantData.validateNewData
+yawl:participantData_validateNewData_123 a yawl:Method ;
+    rdfs:label "validateNewData" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validateNewData()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: participantData.checkForRequiredValues
+yawl:participantData_checkForRequiredValues_124 a yawl:Method ;
+    rdfs:label "checkForRequiredValues" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean checkForRequiredValues()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: participantData.hasText
+yawl:participantData_hasText_125 a yawl:Method ;
+    rdfs:label "hasText" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasText(TextField field)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: participantData.hasText
+yawl:participantData_hasText_126 a yawl:Method ;
+    rdfs:label "hasText" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasText(PasswordField field)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: participantData.checkValidUserID
+yawl:participantData_checkValidUserID_127 a yawl:Method ;
+    rdfs:label "checkValidUserID" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean checkValidUserID(Participant p, boolean updating)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: participantData.showMessagePanel
+yawl:participantData_showMessagePanel_128 a yawl:Method ;
+    rdfs:label "showMessagePanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showMessagePanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: participantData.checkDataModsEnabled
+yawl:participantData_checkDataModsEnabled_129 a yawl:Method ;
+    rdfs:label "checkDataModsEnabled" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkDataModsEnabled()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: participantData.disableButton
+yawl:participantData_disableButton_130 a yawl:Method ;
+    rdfs:label "disableButton" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disableButton(Button b)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:participantData___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:participantData_page1 a yawl:Field ;
+    rdfs:label "page1" .
+
+yawl:participantData_html1 a yawl:Field ;
+    rdfs:label "html1" .
+
+yawl:participantData_head1 a yawl:Field ;
+    rdfs:label "head1" .
+
+yawl:participantData_link1 a yawl:Field ;
+    rdfs:label "link1" .
+
+yawl:participantData_body1 a yawl:Field ;
+    rdfs:label "body1" .
+
+yawl:participantData_form1 a yawl:Field ;
+    rdfs:label "form1" .
+
+yawl:participantData_pnlPrivileges a yawl:Field ;
+    rdfs:label "pnlPrivileges" .
+
+yawl:participantData_staticText1 a yawl:Field ;
+    rdfs:label "staticText1" .
+
+yawl:participantData_sttPassword a yawl:Field ;
+    rdfs:label "sttPassword" .
+
+yawl:participantData_txtNewPassword a yawl:Field ;
+    rdfs:label "txtNewPassword" .
+
+yawl:participantData_txtConfirmPassword a yawl:Field ;
+    rdfs:label "txtConfirmPassword" .
+
+yawl:participantData_lblFirstName a yawl:Field ;
+    rdfs:label "lblFirstName" .
+
+yawl:participantData_lblUserID a yawl:Field ;
+    rdfs:label "lblUserID" .
+
+yawl:participantData_lblLastName a yawl:Field ;
+    rdfs:label "lblLastName" .
+
+yawl:participantData_lblDesc a yawl:Field ;
+    rdfs:label "lblDesc" .
+
+yawl:participantData_lblNotes a yawl:Field ;
+    rdfs:label "lblNotes" .
+
+yawl:participantData_lblPassword a yawl:Field ;
+    rdfs:label "lblPassword" .
+
+yawl:participantData_lblConfirm a yawl:Field ;
+    rdfs:label "lblConfirm" .
+
+yawl:participantData_cbxChooseItemToStart a yawl:Field ;
+    rdfs:label "cbxChooseItemToStart" .
+
+yawl:participantData_cbxStartConcurrent a yawl:Field ;
+    rdfs:label "cbxStartConcurrent" .
+
+yawl:participantData_cbxReorderItems a yawl:Field ;
+    rdfs:label "cbxReorderItems" .
+
+yawl:participantData_cbxViewTeamItems a yawl:Field ;
+    rdfs:label "cbxViewTeamItems" .
+
+yawl:participantData_cbxViewOrgGroupItems a yawl:Field ;
+    rdfs:label "cbxViewOrgGroupItems" .
+
+yawl:participantData_cbxChainItems a yawl:Field ;
+    rdfs:label "cbxChainItems" .
+
+yawl:participantData_cbxManageCases a yawl:Field ;
+    rdfs:label "cbxManageCases" .
+
+yawl:participantData_pnlUserDetails a yawl:Field ;
+    rdfs:label "pnlUserDetails" .
+
+yawl:participantData_txtFirstName a yawl:Field ;
+    rdfs:label "txtFirstName" .
+
+yawl:participantData_txtLastName a yawl:Field ;
+    rdfs:label "txtLastName" .
+
+yawl:participantData_txtUserID a yawl:Field ;
+    rdfs:label "txtUserID" .
+
+yawl:participantData_cbxAdmin a yawl:Field ;
+    rdfs:label "cbxAdmin" .
+
+yawl:participantData_txtDesc a yawl:Field ;
+    rdfs:label "txtDesc" .
+
+yawl:participantData_txtNotes a yawl:Field ;
+    rdfs:label "txtNotes" .
+
+yawl:participantData_tabSetAttributes a yawl:Field ;
+    rdfs:label "tabSetAttributes" .
+
+yawl:participantData_tabRoles a yawl:Field ;
+    rdfs:label "tabRoles" .
+
+yawl:participantData_tabPanelRole a yawl:Field ;
+    rdfs:label "tabPanelRole" .
+
+yawl:participantData_tabPosition a yawl:Field ;
+    rdfs:label "tabPosition" .
+
+yawl:participantData_tabPanelPosition a yawl:Field ;
+    rdfs:label "tabPanelPosition" .
+
+yawl:participantData_tabCapability a yawl:Field ;
+    rdfs:label "tabCapability" .
+
+yawl:participantData_tabPanelCapability a yawl:Field ;
+    rdfs:label "tabPanelCapability" .
+
+yawl:participantData_pnlSelectUser a yawl:Field ;
+    rdfs:label "pnlSelectUser" .
+
+yawl:participantData_pnlNewPassword a yawl:Field ;
+    rdfs:label "pnlNewPassword" .
+
+yawl:participantData_cbbParticipants a yawl:Field ;
+    rdfs:label "cbbParticipants" .
+
+yawl:participantData_label1 a yawl:Field ;
+    rdfs:label "label1" .
+
+yawl:participantData_btnSave a yawl:Field ;
+    rdfs:label "btnSave" .
+
+yawl:participantData_btnReset a yawl:Field ;
+    rdfs:label "btnReset" .
+
+yawl:participantData_btnClose a yawl:Field ;
+    rdfs:label "btnClose" .
+
+yawl:participantData_btnRemove a yawl:Field ;
+    rdfs:label "btnRemove" .
+
+yawl:participantData_btnAdd a yawl:Field ;
+    rdfs:label "btnAdd" .
+
+yawl:participantData_pnlContainer a yawl:Field ;
+    rdfs:label "pnlContainer" .
+
+yawl:participantData__sb a yawl:Field ;
+    rdfs:label "_sb" .
+
+yawl:participantData_msgPanel a yawl:Field ;
+    rdfs:label "msgPanel" .
+
+
+

@@ -1,0 +1,79 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.util.YBuildProperties
+yawl:YBuildProperties a yawl:Class ;
+    rdfs:label "YBuildProperties" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/util/YBuildProperties.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 16/04/2010""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YBuildProperties_load_1 ;
+    yawl:hasMethod yawl:YBuildProperties_getBuildNumber_2 ;
+    yawl:hasMethod yawl:YBuildProperties_getVersion_3 ;
+    yawl:hasMethod yawl:YBuildProperties_getBuildDate_4 ;
+    yawl:hasMethod yawl:YBuildProperties_getFullVersion_5 ;
+    yawl:hasMethod yawl:YBuildProperties_toXML_6 ;
+    yawl:hasField yawl:YBuildProperties__buildProps ;
+    .
+
+
+# Method: YBuildProperties.load
+yawl:YBuildProperties_load_1 a yawl:Method ;
+    rdfs:label "load" ;
+    yawl:returnType "void" ;
+    yawl:signature "void load(InputStream inputStream)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YBuildProperties.getBuildNumber
+yawl:YBuildProperties_getBuildNumber_2 a yawl:Method ;
+    rdfs:label "getBuildNumber" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBuildNumber()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YBuildProperties.getVersion
+yawl:YBuildProperties_getVersion_3 a yawl:Method ;
+    rdfs:label "getVersion" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getVersion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YBuildProperties.getBuildDate
+yawl:YBuildProperties_getBuildDate_4 a yawl:Method ;
+    rdfs:label "getBuildDate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBuildDate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YBuildProperties.getFullVersion
+yawl:YBuildProperties_getFullVersion_5 a yawl:Method ;
+    rdfs:label "getFullVersion" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFullVersion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YBuildProperties.toXML
+yawl:YBuildProperties_toXML_6 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YBuildProperties__buildProps a yawl:Field ;
+    rdfs:label "_buildProps" .
+
+
+

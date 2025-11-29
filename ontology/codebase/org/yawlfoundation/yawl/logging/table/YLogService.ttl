@@ -1,0 +1,117 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.logging.table
+yawl:org_yawlfoundation_yawl_logging_table a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.logging.table" .
+# Class: org.yawlfoundation.yawl.logging.table.YLogService
+yawl:YLogService a yawl:Class ;
+    rdfs:label "YLogService" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_logging_table ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/logging/table/YLogService.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 23/04/2009""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YLogService_getServiceID_1 ;
+    yawl:hasMethod yawl:YLogService_setServiceID_2 ;
+    yawl:hasMethod yawl:YLogService_getName_3 ;
+    yawl:hasMethod yawl:YLogService_setName_4 ;
+    yawl:hasMethod yawl:YLogService_getUrl_5 ;
+    yawl:hasMethod yawl:YLogService_setUrl_6 ;
+    yawl:hasMethod yawl:YLogService_equals_7 ;
+    yawl:hasMethod yawl:YLogService_hashCode_8 ;
+    yawl:hasMethod yawl:YLogService_toXML_9 ;
+    yawl:hasField yawl:YLogService_serviceID ;
+    yawl:hasField yawl:YLogService_name ;
+    yawl:hasField yawl:YLogService_url ;
+    .
+
+
+# Method: YLogService.getServiceID
+yawl:YLogService_getServiceID_1 a yawl:Method ;
+    rdfs:label "getServiceID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getServiceID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogService.setServiceID
+yawl:YLogService_setServiceID_2 a yawl:Method ;
+    rdfs:label "setServiceID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setServiceID(long serviceID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogService.getName
+yawl:YLogService_getName_3 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogService.setName
+yawl:YLogService_setName_4 a yawl:Method ;
+    rdfs:label "setName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogService.getUrl
+yawl:YLogService_getUrl_5 a yawl:Method ;
+    rdfs:label "getUrl" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUrl()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogService.setUrl
+yawl:YLogService_setUrl_6 a yawl:Method ;
+    rdfs:label "setUrl" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUrl(String url)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogService.equals
+yawl:YLogService_equals_7 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogService.hashCode
+yawl:YLogService_hashCode_8 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogService.toXML
+yawl:YLogService_toXML_9 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YLogService_serviceID a yawl:Field ;
+    rdfs:label "serviceID" .
+
+yawl:YLogService_name a yawl:Field ;
+    rdfs:label "name" .
+
+yawl:YLogService_url a yawl:Field ;
+    rdfs:label "url" .
+
+
+

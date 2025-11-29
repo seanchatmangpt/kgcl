@@ -1,0 +1,34 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.resourcing.filters
+yawl:org_yawlfoundation_yawl_resourcing_filters a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.filters" .
+# Class: org.yawlfoundation.yawl.resourcing.filters.GenericFilter
+yawl:GenericFilter a yawl:Class ;
+    rdfs:label "GenericFilter" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_filters ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/filters/GenericFilter.java"^^xsd:string ;
+    rdfs:comment """A base or generic filter class which allows external entities such as the Editor the ability to instantiate it as a medium for specification XML generation <p/> Create Date: 14/08/2007. Last Date: 12/11/2007 @author Michael Adams (BPM Group, QUT Australia) @version 2.0""" ;
+    yawl:extends yawl:AbstractFilter ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:GenericFilter_performFilter_1 ;
+    .
+
+
+# Method: GenericFilter.performFilter
+yawl:GenericFilter_performFilter_1 a yawl:Method ;
+    rdfs:label "performFilter" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set performFilter(Set resources, WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

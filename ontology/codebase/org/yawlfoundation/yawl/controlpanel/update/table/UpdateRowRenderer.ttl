@@ -1,0 +1,52 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.update.table.UpdateRowRenderer
+yawl:UpdateRowRenderer a yawl:Class ;
+    rdfs:label "UpdateRowRenderer" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_update_table ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/update/table/UpdateRowRenderer.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 18/08/2014""" ;
+    yawl:extends yawl:DefaultTableCellRenderer ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:UpdateRowRenderer_getTableCellRendererComponent_1 ;
+    yawl:hasMethod yawl:UpdateRowRenderer_paint_2 ;
+    yawl:hasField yawl:UpdateRowRenderer_REMOVING ;
+    yawl:hasField yawl:UpdateRowRenderer_UPDATEABLE ;
+    yawl:hasField yawl:UpdateRowRenderer_ADDING ;
+    .
+
+
+# Method: UpdateRowRenderer.getTableCellRendererComponent
+yawl:UpdateRowRenderer_getTableCellRendererComponent_1 a yawl:Method ;
+    rdfs:label "getTableCellRendererComponent" ;
+    yawl:returnType "Component" ;
+    yawl:signature "Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateRowRenderer.paint
+yawl:UpdateRowRenderer_paint_2 a yawl:Method ;
+    rdfs:label "paint" ;
+    yawl:returnType "void" ;
+    yawl:signature "void paint(Graphics g)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:UpdateRowRenderer_REMOVING a yawl:Field ;
+    rdfs:label "REMOVING" .
+
+yawl:UpdateRowRenderer_UPDATEABLE a yawl:Field ;
+    rdfs:label "UPDATEABLE" .
+
+yawl:UpdateRowRenderer_ADDING a yawl:Field ;
+    rdfs:label "ADDING" .
+
+
+

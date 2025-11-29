@@ -1,0 +1,278 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.pfAddRemove
+yawl:pfAddRemove a yawl:Class ;
+    rdfs:label "pfAddRemove" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/pfAddRemove.java"^^xsd:string ;
+    yawl:extends yawl:AbstractFragmentBean ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:pfAddRemove__init_1 ;
+    yawl:hasMethod yawl:pfAddRemove_getApplicationBean_2 ;
+    yawl:hasMethod yawl:pfAddRemove_getSessionBean_3 ;
+    yawl:hasMethod yawl:pfAddRemove_getRequestBean_4 ;
+    yawl:hasMethod yawl:pfAddRemove_init_5 ;
+    yawl:hasMethod yawl:pfAddRemove_destroy_6 ;
+    yawl:hasMethod yawl:pfAddRemove_getBtnUnselect_7 ;
+    yawl:hasMethod yawl:pfAddRemove_setBtnUnselect_8 ;
+    yawl:hasMethod yawl:pfAddRemove_getBtnSelect_9 ;
+    yawl:hasMethod yawl:pfAddRemove_setBtnSelect_10 ;
+    yawl:hasMethod yawl:pfAddRemove_getLbxOwns_11 ;
+    yawl:hasMethod yawl:pfAddRemove_setLbxOwns_12 ;
+    yawl:hasMethod yawl:pfAddRemove_getLbxAvailable_13 ;
+    yawl:hasMethod yawl:pfAddRemove_setLbxAvailable_14 ;
+    yawl:hasMethod yawl:pfAddRemove_getLabel1_15 ;
+    yawl:hasMethod yawl:pfAddRemove_setLabel1_16 ;
+    yawl:hasMethod yawl:pfAddRemove_getLabel2_17 ;
+    yawl:hasMethod yawl:pfAddRemove_setLabel2_18 ;
+    yawl:hasMethod yawl:pfAddRemove_btnSelect_action_19 ;
+    yawl:hasMethod yawl:pfAddRemove_btnUnselect_action_20 ;
+    yawl:hasMethod yawl:pfAddRemove_populateLists_21 ;
+    yawl:hasMethod yawl:pfAddRemove_clearLists_22 ;
+    yawl:hasMethod yawl:pfAddRemove_clearOwnsList_23 ;
+    yawl:hasMethod yawl:pfAddRemove_enableFields_24 ;
+    yawl:hasMethod yawl:pfAddRemove_populateAvailableList_25 ;
+    yawl:hasField yawl:pfAddRemove___placeholder ;
+    yawl:hasField yawl:pfAddRemove_btnUnselect ;
+    yawl:hasField yawl:pfAddRemove_btnSelect ;
+    yawl:hasField yawl:pfAddRemove_lbxOwns ;
+    yawl:hasField yawl:pfAddRemove_lbxAvailable ;
+    yawl:hasField yawl:pfAddRemove_label1 ;
+    yawl:hasField yawl:pfAddRemove_label2 ;
+    yawl:hasField yawl:pfAddRemove__sb ;
+    .
+
+
+# Method: pfAddRemove._init
+yawl:pfAddRemove__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfAddRemove.getApplicationBean
+yawl:pfAddRemove_getApplicationBean_2 a yawl:Method ;
+    rdfs:label "getApplicationBean" ;
+    yawl:returnType "ApplicationBean" ;
+    yawl:signature "ApplicationBean getApplicationBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: pfAddRemove.getSessionBean
+yawl:pfAddRemove_getSessionBean_3 a yawl:Method ;
+    rdfs:label "getSessionBean" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getSessionBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: pfAddRemove.getRequestBean
+yawl:pfAddRemove_getRequestBean_4 a yawl:Method ;
+    rdfs:label "getRequestBean" ;
+    yawl:returnType "RequestBean" ;
+    yawl:signature "RequestBean getRequestBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: pfAddRemove.init
+yawl:pfAddRemove_init_5 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfAddRemove.destroy
+yawl:pfAddRemove_destroy_6 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfAddRemove.getBtnUnselect
+yawl:pfAddRemove_getBtnUnselect_7 a yawl:Method ;
+    rdfs:label "getBtnUnselect" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnUnselect()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfAddRemove.setBtnUnselect
+yawl:pfAddRemove_setBtnUnselect_8 a yawl:Method ;
+    rdfs:label "setBtnUnselect" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnUnselect(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfAddRemove.getBtnSelect
+yawl:pfAddRemove_getBtnSelect_9 a yawl:Method ;
+    rdfs:label "getBtnSelect" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnSelect()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfAddRemove.setBtnSelect
+yawl:pfAddRemove_setBtnSelect_10 a yawl:Method ;
+    rdfs:label "setBtnSelect" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnSelect(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfAddRemove.getLbxOwns
+yawl:pfAddRemove_getLbxOwns_11 a yawl:Method ;
+    rdfs:label "getLbxOwns" ;
+    yawl:returnType "Listbox" ;
+    yawl:signature "Listbox getLbxOwns()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfAddRemove.setLbxOwns
+yawl:pfAddRemove_setLbxOwns_12 a yawl:Method ;
+    rdfs:label "setLbxOwns" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLbxOwns(Listbox l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfAddRemove.getLbxAvailable
+yawl:pfAddRemove_getLbxAvailable_13 a yawl:Method ;
+    rdfs:label "getLbxAvailable" ;
+    yawl:returnType "Listbox" ;
+    yawl:signature "Listbox getLbxAvailable()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfAddRemove.setLbxAvailable
+yawl:pfAddRemove_setLbxAvailable_14 a yawl:Method ;
+    rdfs:label "setLbxAvailable" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLbxAvailable(Listbox l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfAddRemove.getLabel1
+yawl:pfAddRemove_getLabel1_15 a yawl:Method ;
+    rdfs:label "getLabel1" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLabel1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfAddRemove.setLabel1
+yawl:pfAddRemove_setLabel1_16 a yawl:Method ;
+    rdfs:label "setLabel1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLabel1(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfAddRemove.getLabel2
+yawl:pfAddRemove_getLabel2_17 a yawl:Method ;
+    rdfs:label "getLabel2" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLabel2()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfAddRemove.setLabel2
+yawl:pfAddRemove_setLabel2_18 a yawl:Method ;
+    rdfs:label "setLabel2" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLabel2(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfAddRemove.btnSelect_action
+yawl:pfAddRemove_btnSelect_action_19 a yawl:Method ;
+    rdfs:label "btnSelect_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnSelect_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfAddRemove.btnUnselect_action
+yawl:pfAddRemove_btnUnselect_action_20 a yawl:Method ;
+    rdfs:label "btnUnselect_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnUnselect_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfAddRemove.populateLists
+yawl:pfAddRemove_populateLists_21 a yawl:Method ;
+    rdfs:label "populateLists" ;
+    yawl:returnType "void" ;
+    yawl:signature "void populateLists(String selTab, Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfAddRemove.clearLists
+yawl:pfAddRemove_clearLists_22 a yawl:Method ;
+    rdfs:label "clearLists" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clearLists()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfAddRemove.clearOwnsList
+yawl:pfAddRemove_clearOwnsList_23 a yawl:Method ;
+    rdfs:label "clearOwnsList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clearOwnsList()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfAddRemove.enableFields
+yawl:pfAddRemove_enableFields_24 a yawl:Method ;
+    rdfs:label "enableFields" ;
+    yawl:returnType "void" ;
+    yawl:signature "void enableFields(boolean enabled)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfAddRemove.populateAvailableList
+yawl:pfAddRemove_populateAvailableList_25 a yawl:Method ;
+    rdfs:label "populateAvailableList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void populateAvailableList()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:pfAddRemove___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:pfAddRemove_btnUnselect a yawl:Field ;
+    rdfs:label "btnUnselect" .
+
+yawl:pfAddRemove_btnSelect a yawl:Field ;
+    rdfs:label "btnSelect" .
+
+yawl:pfAddRemove_lbxOwns a yawl:Field ;
+    rdfs:label "lbxOwns" .
+
+yawl:pfAddRemove_lbxAvailable a yawl:Field ;
+    rdfs:label "lbxAvailable" .
+
+yawl:pfAddRemove_label1 a yawl:Field ;
+    rdfs:label "label1" .
+
+yawl:pfAddRemove_label2 a yawl:Field ;
+    rdfs:label "label2" .
+
+yawl:pfAddRemove__sb a yawl:Field ;
+    rdfs:label "_sb" .
+
+
+

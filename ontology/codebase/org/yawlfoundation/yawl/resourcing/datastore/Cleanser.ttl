@@ -1,0 +1,40 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.datastore.Cleanser
+yawl:Cleanser a yawl:Class ;
+    rdfs:label "Cleanser" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_datastore ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/datastore/WorkItemCache.java"^^xsd:string ;
+    yawl:hasMethod yawl:Cleanser_cancel_1 ;
+    yawl:hasField yawl:Cleanser__scheduler ;
+    yawl:hasField yawl:Cleanser__cleanseTask ;
+    yawl:hasField yawl:Cleanser_INTERVAL ;
+    .
+
+
+# Method: Cleanser.cancel
+yawl:Cleanser_cancel_1 a yawl:Method ;
+    rdfs:label "cancel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancel()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:Cleanser__scheduler a yawl:Field ;
+    rdfs:label "_scheduler" .
+
+yawl:Cleanser__cleanseTask a yawl:Field ;
+    rdfs:label "_cleanseTask" .
+
+yawl:Cleanser_INTERVAL a yawl:Field ;
+    rdfs:label "INTERVAL" .
+
+
+

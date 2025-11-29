@@ -1,0 +1,121 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.time.YTimer
+yawl:YTimer a yawl:Class ;
+    rdfs:label "YTimer" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_time ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/time/YTimer.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 31/01/2008""" ;
+    yawl:extends yawl:Timer ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YTimer_getInstance_1 ;
+    yawl:hasMethod yawl:YTimer_hasActiveTimer_2 ;
+    yawl:hasMethod yawl:YTimer_cancelTimerTask_3 ;
+    yawl:hasMethod yawl:YTimer_cancelTimersForCase_4 ;
+    yawl:hasMethod yawl:YTimer_cancelAll_5 ;
+    yawl:hasMethod yawl:YTimer_shutdown_6 ;
+    yawl:hasMethod yawl:YTimer_schedule_7 ;
+    yawl:hasMethod yawl:YTimer_schedule_8 ;
+    yawl:hasMethod yawl:YTimer_schedule_9 ;
+    yawl:hasMethod yawl:YTimer_schedule_10 ;
+    yawl:hasField yawl:YTimer__me ;
+    yawl:hasField yawl:YTimer__runners ;
+    .
+
+
+# Method: YTimer.getInstance
+yawl:YTimer_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "YTimer" ;
+    yawl:signature "YTimer getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YTimer.hasActiveTimer
+yawl:YTimer_hasActiveTimer_2 a yawl:Method ;
+    rdfs:label "hasActiveTimer" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasActiveTimer(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimer.cancelTimerTask
+yawl:YTimer_cancelTimerTask_3 a yawl:Method ;
+    rdfs:label "cancelTimerTask" ;
+    yawl:returnType "YTimedObject" ;
+    yawl:signature "YTimedObject cancelTimerTask(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimer.cancelTimersForCase
+yawl:YTimer_cancelTimersForCase_4 a yawl:Method ;
+    rdfs:label "cancelTimersForCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancelTimersForCase(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimer.cancelAll
+yawl:YTimer_cancelAll_5 a yawl:Method ;
+    rdfs:label "cancelAll" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancelAll()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimer.shutdown
+yawl:YTimer_shutdown_6 a yawl:Method ;
+    rdfs:label "shutdown" ;
+    yawl:returnType "void" ;
+    yawl:signature "void shutdown()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimer.schedule
+yawl:YTimer_schedule_7 a yawl:Method ;
+    rdfs:label "schedule" ;
+    yawl:returnType "long" ;
+    yawl:signature "long schedule(YTimedObject timee, long durationAsMilliseconds)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimer.schedule
+yawl:YTimer_schedule_8 a yawl:Method ;
+    rdfs:label "schedule" ;
+    yawl:returnType "long" ;
+    yawl:signature "long schedule(YTimedObject timee, Date expiryTime)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimer.schedule
+yawl:YTimer_schedule_9 a yawl:Method ;
+    rdfs:label "schedule" ;
+    yawl:returnType "long" ;
+    yawl:signature "long schedule(YTimedObject timee, Duration duration)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimer.schedule
+yawl:YTimer_schedule_10 a yawl:Method ;
+    rdfs:label "schedule" ;
+    yawl:returnType "long" ;
+    yawl:signature "long schedule(YTimedObject timee, long count, TimeUnit unit)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YTimer__me a yawl:Field ;
+    rdfs:label "_me" .
+
+yawl:YTimer__runners a yawl:Field ;
+    rdfs:label "_runners" .
+
+
+

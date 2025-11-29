@@ -1,0 +1,115 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.interactions.AbstractInteraction
+yawl:AbstractInteraction a yawl:Class ;
+    rdfs:label "AbstractInteraction" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_interactions ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/interactions/AbstractInteraction.java"^^xsd:string ;
+    rdfs:comment """Base class for the Offer, Allocate and Start interaction points. @author Michael Adams v0.1, 02/08/2007""" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:AbstractInteraction_getOwnerTaskID_1 ;
+    yawl:hasMethod yawl:AbstractInteraction_setOwnerTaskID_2 ;
+    yawl:hasMethod yawl:AbstractInteraction_setInitiator_3 ;
+    yawl:hasMethod yawl:AbstractInteraction_getInitiator_4 ;
+    yawl:hasMethod yawl:AbstractInteraction_getInitiatorString_5 ;
+    yawl:hasMethod yawl:AbstractInteraction_isSystemInitiated_6 ;
+    yawl:hasMethod yawl:AbstractInteraction_parseInitiator_7 ;
+    yawl:hasMethod yawl:AbstractInteraction_parseParams_8 ;
+    yawl:hasField yawl:AbstractInteraction_USER_INITIATED ;
+    yawl:hasField yawl:AbstractInteraction_SYSTEM_INITIATED ;
+    yawl:hasField yawl:AbstractInteraction__initiator ;
+    yawl:hasField yawl:AbstractInteraction__ownerTaskID ;
+    .
+
+
+# Method: AbstractInteraction.getOwnerTaskID
+yawl:AbstractInteraction_getOwnerTaskID_1 a yawl:Method ;
+    rdfs:label "getOwnerTaskID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOwnerTaskID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractInteraction.setOwnerTaskID
+yawl:AbstractInteraction_setOwnerTaskID_2 a yawl:Method ;
+    rdfs:label "setOwnerTaskID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOwnerTaskID(String ownerTaskID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractInteraction.setInitiator
+yawl:AbstractInteraction_setInitiator_3 a yawl:Method ;
+    rdfs:label "setInitiator" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean setInitiator(int i)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractInteraction.getInitiator
+yawl:AbstractInteraction_getInitiator_4 a yawl:Method ;
+    rdfs:label "getInitiator" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getInitiator()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractInteraction.getInitiatorString
+yawl:AbstractInteraction_getInitiatorString_5 a yawl:Method ;
+    rdfs:label "getInitiatorString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInitiatorString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractInteraction.isSystemInitiated
+yawl:AbstractInteraction_isSystemInitiated_6 a yawl:Method ;
+    rdfs:label "isSystemInitiated" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isSystemInitiated()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractInteraction.parseInitiator
+yawl:AbstractInteraction_parseInitiator_7 a yawl:Method ;
+    rdfs:label "parseInitiator" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseInitiator(Element e, Namespace nsYawl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractInteraction.parseParams
+yawl:AbstractInteraction_parseParams_8 a yawl:Method ;
+    rdfs:label "parseParams" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map parseParams(Element e, Namespace nsYawl)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:AbstractInteraction_USER_INITIATED a yawl:Field ;
+    rdfs:label "USER_INITIATED" .
+
+yawl:AbstractInteraction_SYSTEM_INITIATED a yawl:Field ;
+    rdfs:label "SYSTEM_INITIATED" .
+
+yawl:AbstractInteraction__initiator a yawl:Field ;
+    rdfs:label "_initiator" .
+
+yawl:AbstractInteraction__ownerTaskID a yawl:Field ;
+    rdfs:label "_ownerTaskID" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_resourcing_codelets a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.codelets" .
+
+

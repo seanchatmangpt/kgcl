@@ -1,0 +1,59 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.resourcing.jsf.dynform.dynattributes
+yawl:org_yawlfoundation_yawl_resourcing_jsf_dynform_dynattributes a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.jsf.dynform.dynattributes" .
+# Class: org.yawlfoundation.yawl.resourcing.jsf.dynform.dynattributes.DynAttributeFactory
+yawl:DynAttributeFactory a yawl:Class ;
+    rdfs:label "DynAttributeFactory" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf_dynform_dynattributes ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/dynform/dynattributes/DynAttributeFactory.java"^^xsd:string ;
+    rdfs:comment """This factory class creates and instantiates instances of the various dynamic form attribute classes found in this package or on external classpaths. Create Date: 18/05/2009. @author Michael Adams @version 2.0""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DynAttributeFactory_applyAttributes_1 ;
+    yawl:hasMethod yawl:DynAttributeFactory_adjustFields_2 ;
+    yawl:hasMethod yawl:DynAttributeFactory_getInstances_3 ;
+    yawl:hasField yawl:DynAttributeFactory__instances ;
+    .
+
+
+# Method: DynAttributeFactory.applyAttributes
+yawl:DynAttributeFactory_applyAttributes_1 a yawl:Method ;
+    rdfs:label "applyAttributes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void applyAttributes(PanelLayout parentPanel, WorkItemRecord wir, Participant p)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DynAttributeFactory.adjustFields
+yawl:DynAttributeFactory_adjustFields_2 a yawl:Method ;
+    rdfs:label "adjustFields" ;
+    yawl:returnType "void" ;
+    yawl:signature "void adjustFields(List fieldList, WorkItemRecord wir, Participant p)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DynAttributeFactory.getInstances
+yawl:DynAttributeFactory_getInstances_3 a yawl:Method ;
+    rdfs:label "getInstances" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getInstances()" ;
+    rdfs:comment """Constructs and returns a list of instantiated dynAttribute objects, one for each of the different dynAttribute classes available in this package @return a List of instantiated allocator objects""" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:DynAttributeFactory__instances a yawl:Field ;
+    rdfs:label "_instances" .
+
+
+

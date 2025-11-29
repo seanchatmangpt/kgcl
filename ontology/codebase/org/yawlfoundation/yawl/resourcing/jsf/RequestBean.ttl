@@ -1,0 +1,208 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.RequestBean
+yawl:RequestBean a yawl:Class ;
+    rdfs:label "RequestBean" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/RequestBean.java"^^xsd:string ;
+    rdfs:comment """<p>Request scope data bean for your application.  Create properties here to represent data that should be made available across different pages in the same HTTP request, so that the page bean classes do not have to be directly linked to each other.</p> <p>An instance of this class will be created for you automatically, the first time your application evaluates a value binding expression or method binding expression that references a managed bean using this class.</p>""" ;
+    yawl:extends yawl:AbstractRequestBean ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:RequestBean__init_1 ;
+    yawl:hasMethod yawl:RequestBean_getSessionBean_2 ;
+    yawl:hasMethod yawl:RequestBean_getApplicationBean_3 ;
+    yawl:hasMethod yawl:RequestBean_init_4 ;
+    yawl:hasMethod yawl:RequestBean_destroy_5 ;
+    yawl:hasMethod yawl:RequestBean_getSpecID_6 ;
+    yawl:hasMethod yawl:RequestBean_setSpecID_7 ;
+    yawl:hasMethod yawl:RequestBean_getCaseID_8 ;
+    yawl:hasMethod yawl:RequestBean_setCaseID_9 ;
+    yawl:hasMethod yawl:RequestBean_getTaskID_10 ;
+    yawl:hasMethod yawl:RequestBean_setTaskID_11 ;
+    yawl:hasMethod yawl:RequestBean_getStatus_12 ;
+    yawl:hasMethod yawl:RequestBean_setStatus_13 ;
+    yawl:hasMethod yawl:RequestBean_getCreatedDate_14 ;
+    yawl:hasMethod yawl:RequestBean_setCreatedDate_15 ;
+    yawl:hasMethod yawl:RequestBean_getAge_16 ;
+    yawl:hasMethod yawl:RequestBean_setAge_17 ;
+    yawl:hasField yawl:RequestBean___placeholder ;
+    yawl:hasField yawl:RequestBean_specID ;
+    yawl:hasField yawl:RequestBean_caseID ;
+    yawl:hasField yawl:RequestBean_taskID ;
+    yawl:hasField yawl:RequestBean_status ;
+    yawl:hasField yawl:RequestBean_createdDate ;
+    yawl:hasField yawl:RequestBean_age ;
+    .
+
+
+# Method: RequestBean._init
+yawl:RequestBean__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    rdfs:comment """<p>Automatically managed component initialization.  <strong>WARNING:</strong> This method is automatically generated, so any user-specified code inserted here is subject to being replaced.</p>""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RequestBean.getSessionBean
+yawl:RequestBean_getSessionBean_2 a yawl:Method ;
+    rdfs:label "getSessionBean" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getSessionBean()" ;
+    rdfs:comment """<p>Return a reference to the scoped data bean.</p>""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RequestBean.getApplicationBean
+yawl:RequestBean_getApplicationBean_3 a yawl:Method ;
+    rdfs:label "getApplicationBean" ;
+    yawl:returnType "ApplicationBean" ;
+    yawl:signature "ApplicationBean getApplicationBean()" ;
+    rdfs:comment """<p>Return a reference to the scoped data bean.</p>""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RequestBean.init
+yawl:RequestBean_init_4 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    rdfs:comment """<p>This method is called when this bean is initially added to request scope.  Typically, this occurs as a result of evaluating a value binding or method binding expression, which utilizes the managed bean facility to instantiate this bean and store it into request scope.</p> <p>You may customize this method to allocate resources that are required for the lifetime of the current request.</p>""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RequestBean.destroy
+yawl:RequestBean_destroy_5 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    rdfs:comment """<p>This method is called when this bean is removed from request scope.  This occurs automatically when the corresponding HTTP response has been completed and sent to the client.</p> <p>You may customize this method to clean up resources allocated during the execution of the <code>init()</code> method, or at any later time during the lifetime of the request.</p>""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RequestBean.getSpecID
+yawl:RequestBean_getSpecID_6 a yawl:Method ;
+    rdfs:label "getSpecID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RequestBean.setSpecID
+yawl:RequestBean_setSpecID_7 a yawl:Method ;
+    rdfs:label "setSpecID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSpecID(String specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RequestBean.getCaseID
+yawl:RequestBean_getCaseID_8 a yawl:Method ;
+    rdfs:label "getCaseID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RequestBean.setCaseID
+yawl:RequestBean_setCaseID_9 a yawl:Method ;
+    rdfs:label "setCaseID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCaseID(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RequestBean.getTaskID
+yawl:RequestBean_getTaskID_10 a yawl:Method ;
+    rdfs:label "getTaskID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RequestBean.setTaskID
+yawl:RequestBean_setTaskID_11 a yawl:Method ;
+    rdfs:label "setTaskID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTaskID(String taskID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RequestBean.getStatus
+yawl:RequestBean_getStatus_12 a yawl:Method ;
+    rdfs:label "getStatus" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RequestBean.setStatus
+yawl:RequestBean_setStatus_13 a yawl:Method ;
+    rdfs:label "setStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStatus(String status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RequestBean.getCreatedDate
+yawl:RequestBean_getCreatedDate_14 a yawl:Method ;
+    rdfs:label "getCreatedDate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCreatedDate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RequestBean.setCreatedDate
+yawl:RequestBean_setCreatedDate_15 a yawl:Method ;
+    rdfs:label "setCreatedDate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCreatedDate(String createdDate)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RequestBean.getAge
+yawl:RequestBean_getAge_16 a yawl:Method ;
+    rdfs:label "getAge" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAge()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RequestBean.setAge
+yawl:RequestBean_setAge_17 a yawl:Method ;
+    rdfs:label "setAge" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAge(String age)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:RequestBean___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:RequestBean_specID a yawl:Field ;
+    rdfs:label "specID" .
+
+yawl:RequestBean_caseID a yawl:Field ;
+    rdfs:label "caseID" .
+
+yawl:RequestBean_taskID a yawl:Field ;
+    rdfs:label "taskID" .
+
+yawl:RequestBean_status a yawl:Field ;
+    rdfs:label "status" .
+
+yawl:RequestBean_createdDate a yawl:Field ;
+    rdfs:label "createdDate" .
+
+yawl:RequestBean_age a yawl:Field ;
+    rdfs:label "age" .
+
+
+

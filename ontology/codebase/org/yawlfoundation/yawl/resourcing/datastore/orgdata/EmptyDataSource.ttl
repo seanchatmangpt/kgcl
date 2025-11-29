@@ -1,0 +1,98 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.datastore.orgdata.EmptyDataSource
+yawl:EmptyDataSource a yawl:Class ;
+    rdfs:label "EmptyDataSource" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_datastore_orgdata ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/datastore/orgdata/EmptyDataSource.java"^^xsd:string ;
+    rdfs:comment """This class provides a default DataSource object to the ResourceManager in the event that there is no actual Datasource set and/or initialised. Author: Michael Adams Date: 10/04/2008""" ;
+    yawl:extends yawl:DataSource ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:EmptyDataSource_getDataSource_1 ;
+    yawl:hasMethod yawl:EmptyDataSource_loadResources_2 ;
+    yawl:hasMethod yawl:EmptyDataSource_update_3 ;
+    yawl:hasMethod yawl:EmptyDataSource_delete_4 ;
+    yawl:hasMethod yawl:EmptyDataSource_insert_5 ;
+    yawl:hasMethod yawl:EmptyDataSource_importObj_6 ;
+    yawl:hasMethod yawl:EmptyDataSource_execUpdate_7 ;
+    yawl:hasMethod yawl:EmptyDataSource_authenticate_8 ;
+    yawl:hasField yawl:EmptyDataSource__rds ;
+    .
+
+
+# Method: EmptyDataSource.getDataSource
+yawl:EmptyDataSource_getDataSource_1 a yawl:Method ;
+    rdfs:label "getDataSource" ;
+    yawl:returnType "ResourceDataSet" ;
+    yawl:signature "ResourceDataSet getDataSource()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EmptyDataSource.loadResources
+yawl:EmptyDataSource_loadResources_2 a yawl:Method ;
+    rdfs:label "loadResources" ;
+    yawl:returnType "ResourceDataSet" ;
+    yawl:signature "ResourceDataSet loadResources()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EmptyDataSource.update
+yawl:EmptyDataSource_update_3 a yawl:Method ;
+    rdfs:label "update" ;
+    yawl:returnType "void" ;
+    yawl:signature "void update(Object obj)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EmptyDataSource.delete
+yawl:EmptyDataSource_delete_4 a yawl:Method ;
+    rdfs:label "delete" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean delete(Object obj)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EmptyDataSource.insert
+yawl:EmptyDataSource_insert_5 a yawl:Method ;
+    rdfs:label "insert" ;
+    yawl:returnType "String" ;
+    yawl:signature "String insert(Object obj)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EmptyDataSource.importObj
+yawl:EmptyDataSource_importObj_6 a yawl:Method ;
+    rdfs:label "importObj" ;
+    yawl:returnType "void" ;
+    yawl:signature "void importObj(Object obj)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EmptyDataSource.execUpdate
+yawl:EmptyDataSource_execUpdate_7 a yawl:Method ;
+    rdfs:label "execUpdate" ;
+    yawl:returnType "int" ;
+    yawl:signature "int execUpdate(String query)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EmptyDataSource.authenticate
+yawl:EmptyDataSource_authenticate_8 a yawl:Method ;
+    rdfs:label "authenticate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean authenticate(String userid, String password)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:EmptyDataSource__rds a yawl:Field ;
+    rdfs:label "_rds" .
+
+
+

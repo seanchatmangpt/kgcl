@@ -1,0 +1,176 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.elements.YCondition
+yawl:YCondition a yawl:Class ;
+    rdfs:label "YCondition" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_elements ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/elements/YCondition.java"^^xsd:string ;
+    rdfs:comment """An external condition is equivalent to a condition in the YAWL paper. @author Lachlan Aldred""" ;
+    yawl:extends yawl:YExternalNetElement ;
+    yawl:implements yawl:YConditionInterface ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YCondition_setImplicit_1 ;
+    yawl:hasMethod yawl:YCondition_isImplicit_2 ;
+    yawl:hasMethod yawl:YCondition_verify_3 ;
+    yawl:hasMethod yawl:YCondition_isAnonymous_4 ;
+    yawl:hasMethod yawl:YCondition_add_5 ;
+    yawl:hasMethod yawl:YCondition_contains_6 ;
+    yawl:hasMethod yawl:YCondition_containsIdentifier_7 ;
+    yawl:hasMethod yawl:YCondition_getAmount_8 ;
+    yawl:hasMethod yawl:YCondition_getIdentifiers_9 ;
+    yawl:hasMethod yawl:YCondition_removeOne_10 ;
+    yawl:hasMethod yawl:YCondition_removeOne_11 ;
+    yawl:hasMethod yawl:YCondition_remove_12 ;
+    yawl:hasMethod yawl:YCondition_removeAll_13 ;
+    yawl:hasMethod yawl:YCondition_removeAll_14 ;
+    yawl:hasMethod yawl:YCondition_clone_15 ;
+    yawl:hasMethod yawl:YCondition_toXML_16 ;
+    yawl:hasField yawl:YCondition__bag ;
+    yawl:hasField yawl:YCondition__isImplicit ;
+    .
+
+
+# Method: YCondition.setImplicit
+yawl:YCondition_setImplicit_1 a yawl:Method ;
+    rdfs:label "setImplicit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setImplicit(boolean isImplicit)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCondition.isImplicit
+yawl:YCondition_isImplicit_2 a yawl:Method ;
+    rdfs:label "isImplicit" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isImplicit()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCondition.verify
+yawl:YCondition_verify_3 a yawl:Method ;
+    rdfs:label "verify" ;
+    yawl:returnType "void" ;
+    yawl:signature "void verify(YVerificationHandler handler)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCondition.isAnonymous
+yawl:YCondition_isAnonymous_4 a yawl:Method ;
+    rdfs:label "isAnonymous" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAnonymous()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCondition.add
+yawl:YCondition_add_5 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(YPersistenceManager pmgr, YIdentifier identifier)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCondition.contains
+yawl:YCondition_contains_6 a yawl:Method ;
+    rdfs:label "contains" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean contains(YIdentifier identifier)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCondition.containsIdentifier
+yawl:YCondition_containsIdentifier_7 a yawl:Method ;
+    rdfs:label "containsIdentifier" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean containsIdentifier()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCondition.getAmount
+yawl:YCondition_getAmount_8 a yawl:Method ;
+    rdfs:label "getAmount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getAmount(YIdentifier identifier)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCondition.getIdentifiers
+yawl:YCondition_getIdentifiers_9 a yawl:Method ;
+    rdfs:label "getIdentifiers" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getIdentifiers()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCondition.removeOne
+yawl:YCondition_removeOne_10 a yawl:Method ;
+    rdfs:label "removeOne" ;
+    yawl:returnType "YIdentifier" ;
+    yawl:signature "YIdentifier removeOne(YPersistenceManager pmgr)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCondition.removeOne
+yawl:YCondition_removeOne_11 a yawl:Method ;
+    rdfs:label "removeOne" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeOne(YPersistenceManager pmgr, YIdentifier identifier)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCondition.remove
+yawl:YCondition_remove_12 a yawl:Method ;
+    rdfs:label "remove" ;
+    yawl:returnType "void" ;
+    yawl:signature "void remove(YPersistenceManager pmgr, YIdentifier identifier, int amount)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCondition.removeAll
+yawl:YCondition_removeAll_13 a yawl:Method ;
+    rdfs:label "removeAll" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeAll(YPersistenceManager pmgr, YIdentifier identifier)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCondition.removeAll
+yawl:YCondition_removeAll_14 a yawl:Method ;
+    rdfs:label "removeAll" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeAll(YPersistenceManager pmgr)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCondition.clone
+yawl:YCondition_clone_15 a yawl:Method ;
+    rdfs:label "clone" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object clone()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCondition.toXML
+yawl:YCondition_toXML_16 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YCondition__bag a yawl:Field ;
+    rdfs:label "_bag" .
+
+yawl:YCondition__isImplicit a yawl:Field ;
+    rdfs:label "_isImplicit" .
+
+
+

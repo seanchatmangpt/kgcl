@@ -1,0 +1,197 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.interactionGraph.InteractionGraph
+yawl:InteractionGraph a yawl:Class ;
+    rdfs:label "InteractionGraph" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_interactionGraph ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/interactionGraph/InteractionGraph.java"^^xsd:string ;
+    yawl:extends yawl:DirectedSparseGraph ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:InteractionGraph_getEntityMID_1 ;
+    yawl:hasMethod yawl:InteractionGraph_setEntityMID_2 ;
+    yawl:hasMethod yawl:InteractionGraph_addNode_3 ;
+    yawl:hasMethod yawl:InteractionGraph_deleteNode_4 ;
+    yawl:hasMethod yawl:InteractionGraph_getNodes_5 ;
+    yawl:hasMethod yawl:InteractionGraph_getNode_6 ;
+    yawl:hasMethod yawl:InteractionGraph_nodeExists_7 ;
+    yawl:hasMethod yawl:InteractionGraph_getArc_8 ;
+    yawl:hasMethod yawl:InteractionGraph_arcExists_9 ;
+    yawl:hasMethod yawl:InteractionGraph_addArc_10 ;
+    yawl:hasMethod yawl:InteractionGraph_deleteArc_11 ;
+    yawl:hasMethod yawl:InteractionGraph_getArcs_12 ;
+    yawl:hasMethod yawl:InteractionGraph_getArcsTail_13 ;
+    yawl:hasMethod yawl:InteractionGraph_deleteAllNodes_14 ;
+    yawl:hasMethod yawl:InteractionGraph_deleteAllArcs_15 ;
+    yawl:hasMethod yawl:InteractionGraph_buildFromDB_16 ;
+    yawl:hasMethod yawl:InteractionGraph_deleteGraphFromDB_17 ;
+    yawl:hasMethod yawl:InteractionGraph_persistProcletModel_18 ;
+    yawl:hasMethod yawl:InteractionGraph_main_19 ;
+    yawl:hasField yawl:InteractionGraph_emid ;
+    .
+
+
+# Method: InteractionGraph.getEntityMID
+yawl:InteractionGraph_getEntityMID_1 a yawl:Method ;
+    rdfs:label "getEntityMID" ;
+    yawl:returnType "EntityMID" ;
+    yawl:signature "EntityMID getEntityMID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraph.setEntityMID
+yawl:InteractionGraph_setEntityMID_2 a yawl:Method ;
+    rdfs:label "setEntityMID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEntityMID(EntityMID emid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraph.addNode
+yawl:InteractionGraph_addNode_3 a yawl:Method ;
+    rdfs:label "addNode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addNode(InteractionNode node)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraph.deleteNode
+yawl:InteractionGraph_deleteNode_4 a yawl:Method ;
+    rdfs:label "deleteNode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteNode(InteractionNode node)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraph.getNodes
+yawl:InteractionGraph_getNodes_5 a yawl:Method ;
+    rdfs:label "getNodes" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getNodes()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraph.getNode
+yawl:InteractionGraph_getNode_6 a yawl:Method ;
+    rdfs:label "getNode" ;
+    yawl:returnType "InteractionNode" ;
+    yawl:signature "InteractionNode getNode(String classID, String procletID, String blockID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraph.nodeExists
+yawl:InteractionGraph_nodeExists_7 a yawl:Method ;
+    rdfs:label "nodeExists" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean nodeExists(String classID, String procletID, String blockID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraph.getArc
+yawl:InteractionGraph_getArc_8 a yawl:Method ;
+    rdfs:label "getArc" ;
+    yawl:returnType "InteractionArc" ;
+    yawl:signature "InteractionArc getArc(String tailClassID, String tailProcletID, String tailBlockID, String headClassID, String headProcletID, String headBlockID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraph.arcExists
+yawl:InteractionGraph_arcExists_9 a yawl:Method ;
+    rdfs:label "arcExists" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean arcExists(String tailClassID, String tailProcletID, String tailBlockID, String headClassID, String headProcletID, String headBlockID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraph.addArc
+yawl:InteractionGraph_addArc_10 a yawl:Method ;
+    rdfs:label "addArc" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addArc(InteractionArc arc)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraph.deleteArc
+yawl:InteractionGraph_deleteArc_11 a yawl:Method ;
+    rdfs:label "deleteArc" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteArc(InteractionArc arc)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraph.getArcs
+yawl:InteractionGraph_getArcs_12 a yawl:Method ;
+    rdfs:label "getArcs" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getArcs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraph.getArcsTail
+yawl:InteractionGraph_getArcsTail_13 a yawl:Method ;
+    rdfs:label "getArcsTail" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getArcsTail(String classID, String procletID, String blockID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraph.deleteAllNodes
+yawl:InteractionGraph_deleteAllNodes_14 a yawl:Method ;
+    rdfs:label "deleteAllNodes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteAllNodes()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraph.deleteAllArcs
+yawl:InteractionGraph_deleteAllArcs_15 a yawl:Method ;
+    rdfs:label "deleteAllArcs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteAllArcs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraph.buildFromDB
+yawl:InteractionGraph_buildFromDB_16 a yawl:Method ;
+    rdfs:label "buildFromDB" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean buildFromDB()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraph.deleteGraphFromDB
+yawl:InteractionGraph_deleteGraphFromDB_17 a yawl:Method ;
+    rdfs:label "deleteGraphFromDB" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteGraphFromDB()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraph.persistProcletModel
+yawl:InteractionGraph_persistProcletModel_18 a yawl:Method ;
+    rdfs:label "persistProcletModel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void persistProcletModel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraph.main
+yawl:InteractionGraph_main_19 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String args)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:InteractionGraph_emid a yawl:Field ;
+    rdfs:label "emid" .
+
+
+

@@ -1,0 +1,73 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.authentication.YExternalSession
+yawl:YExternalSession a yawl:Class ;
+    rdfs:label "YExternalSession" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_authentication ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/authentication/YExternalSession.java"^^xsd:string ;
+    rdfs:comment """Maintains an active session belonging to an external application client. @author Michael Adams @since 2.1 @date 24/11/2009""" ;
+    yawl:extends yawl:YSession ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YExternalSession_getName_1 ;
+    yawl:hasMethod yawl:YExternalSession_getPassword_2 ;
+    yawl:hasMethod yawl:YExternalSession_setPassword_3 ;
+    yawl:hasMethod yawl:YExternalSession_setClient_4 ;
+    yawl:hasMethod yawl:YExternalSession_getClient_5 ;
+    yawl:hasField yawl:YExternalSession__client ;
+    .
+
+
+# Method: YExternalSession.getName
+yawl:YExternalSession_getName_1 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalSession.getPassword
+yawl:YExternalSession_getPassword_2 a yawl:Method ;
+    rdfs:label "getPassword" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPassword()" ;
+    rdfs:comment """Gets the client's password. @return the (hashed) password of the client associated with this session.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalSession.setPassword
+yawl:YExternalSession_setPassword_3 a yawl:Method ;
+    rdfs:label "setPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPassword(String password)" ;
+    rdfs:comment """Updates (and persists) the password for an external client. @param password the (hashed) password to set for the external client. @throws YPersistenceException if there's some problem persisting the change.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalSession.setClient
+yawl:YExternalSession_setClient_4 a yawl:Method ;
+    rdfs:label "setClient" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setClient(YExternalClient client)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalSession.getClient
+yawl:YExternalSession_getClient_5 a yawl:Method ;
+    rdfs:label "getClient" ;
+    yawl:returnType "YExternalClient" ;
+    yawl:signature "YExternalClient getClient()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YExternalSession__client a yawl:Field ;
+    rdfs:label "_client" .
+
+
+

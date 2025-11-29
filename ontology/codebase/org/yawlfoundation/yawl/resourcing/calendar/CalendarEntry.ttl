@@ -1,0 +1,277 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.resourcing.calendar
+yawl:org_yawlfoundation_yawl_resourcing_calendar a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.calendar" .
+# Class: org.yawlfoundation.yawl.resourcing.calendar.CalendarEntry
+yawl:CalendarEntry a yawl:Class ;
+    rdfs:label "CalendarEntry" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_calendar ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/calendar/CalendarEntry.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 12/03/2010""" ;
+    yawl:implements yawl:Cloneable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CalendarEntry_getEntryID_1 ;
+    yawl:hasMethod yawl:CalendarEntry_setEntryID_2 ;
+    yawl:hasMethod yawl:CalendarEntry_getResourceID_3 ;
+    yawl:hasMethod yawl:CalendarEntry_setResourceID_4 ;
+    yawl:hasMethod yawl:CalendarEntry_getStartTime_5 ;
+    yawl:hasMethod yawl:CalendarEntry_setStartTime_6 ;
+    yawl:hasMethod yawl:CalendarEntry_getEndTime_7 ;
+    yawl:hasMethod yawl:CalendarEntry_setEndTime_8 ;
+    yawl:hasMethod yawl:CalendarEntry_hasPeriod_9 ;
+    yawl:hasMethod yawl:CalendarEntry_getStatus_10 ;
+    yawl:hasMethod yawl:CalendarEntry_setStatus_11 ;
+    yawl:hasMethod yawl:CalendarEntry_getWorkload_12 ;
+    yawl:hasMethod yawl:CalendarEntry_setWorkload_13 ;
+    yawl:hasMethod yawl:CalendarEntry_getAgent_14 ;
+    yawl:hasMethod yawl:CalendarEntry_setAgent_15 ;
+    yawl:hasMethod yawl:CalendarEntry_getComment_16 ;
+    yawl:hasMethod yawl:CalendarEntry_setComment_17 ;
+    yawl:hasMethod yawl:CalendarEntry_getChainID_18 ;
+    yawl:hasMethod yawl:CalendarEntry_setChainID_19 ;
+    yawl:hasMethod yawl:CalendarEntry_clone_20 ;
+    yawl:hasMethod yawl:CalendarEntry_toXML_21 ;
+    yawl:hasMethod yawl:CalendarEntry_fromXML_22 ;
+    yawl:hasMethod yawl:CalendarEntry_toXNode_23 ;
+    yawl:hasMethod yawl:CalendarEntry_fromXNode_24 ;
+    yawl:hasField yawl:CalendarEntry_entryID ;
+    yawl:hasField yawl:CalendarEntry_resourceID ;
+    yawl:hasField yawl:CalendarEntry_startTime ;
+    yawl:hasField yawl:CalendarEntry_endTime ;
+    yawl:hasField yawl:CalendarEntry_status ;
+    yawl:hasField yawl:CalendarEntry_workload ;
+    yawl:hasField yawl:CalendarEntry_agent ;
+    yawl:hasField yawl:CalendarEntry_chainID ;
+    yawl:hasField yawl:CalendarEntry_comment ;
+    .
+
+
+# Method: CalendarEntry.getEntryID
+yawl:CalendarEntry_getEntryID_1 a yawl:Method ;
+    rdfs:label "getEntryID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getEntryID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarEntry.setEntryID
+yawl:CalendarEntry_setEntryID_2 a yawl:Method ;
+    rdfs:label "setEntryID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEntryID(long id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarEntry.getResourceID
+yawl:CalendarEntry_getResourceID_3 a yawl:Method ;
+    rdfs:label "getResourceID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourceID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarEntry.setResourceID
+yawl:CalendarEntry_setResourceID_4 a yawl:Method ;
+    rdfs:label "setResourceID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setResourceID(String resID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarEntry.getStartTime
+yawl:CalendarEntry_getStartTime_5 a yawl:Method ;
+    rdfs:label "getStartTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getStartTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarEntry.setStartTime
+yawl:CalendarEntry_setStartTime_6 a yawl:Method ;
+    rdfs:label "setStartTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStartTime(long time)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarEntry.getEndTime
+yawl:CalendarEntry_getEndTime_7 a yawl:Method ;
+    rdfs:label "getEndTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getEndTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarEntry.setEndTime
+yawl:CalendarEntry_setEndTime_8 a yawl:Method ;
+    rdfs:label "setEndTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEndTime(long time)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarEntry.hasPeriod
+yawl:CalendarEntry_hasPeriod_9 a yawl:Method ;
+    rdfs:label "hasPeriod" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasPeriod(long start, long end)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarEntry.getStatus
+yawl:CalendarEntry_getStatus_10 a yawl:Method ;
+    rdfs:label "getStatus" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarEntry.setStatus
+yawl:CalendarEntry_setStatus_11 a yawl:Method ;
+    rdfs:label "setStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStatus(String st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarEntry.getWorkload
+yawl:CalendarEntry_getWorkload_12 a yawl:Method ;
+    rdfs:label "getWorkload" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getWorkload()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarEntry.setWorkload
+yawl:CalendarEntry_setWorkload_13 a yawl:Method ;
+    rdfs:label "setWorkload" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setWorkload(int load)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarEntry.getAgent
+yawl:CalendarEntry_getAgent_14 a yawl:Method ;
+    rdfs:label "getAgent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAgent()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarEntry.setAgent
+yawl:CalendarEntry_setAgent_15 a yawl:Method ;
+    rdfs:label "setAgent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAgent(String agt)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarEntry.getComment
+yawl:CalendarEntry_getComment_16 a yawl:Method ;
+    rdfs:label "getComment" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getComment()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarEntry.setComment
+yawl:CalendarEntry_setComment_17 a yawl:Method ;
+    rdfs:label "setComment" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setComment(String cmt)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarEntry.getChainID
+yawl:CalendarEntry_getChainID_18 a yawl:Method ;
+    rdfs:label "getChainID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getChainID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarEntry.setChainID
+yawl:CalendarEntry_setChainID_19 a yawl:Method ;
+    rdfs:label "setChainID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setChainID(long id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarEntry.clone
+yawl:CalendarEntry_clone_20 a yawl:Method ;
+    rdfs:label "clone" ;
+    yawl:returnType "CalendarEntry" ;
+    yawl:signature "CalendarEntry clone()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarEntry.toXML
+yawl:CalendarEntry_toXML_21 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarEntry.fromXML
+yawl:CalendarEntry_fromXML_22 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarEntry.toXNode
+yawl:CalendarEntry_toXNode_23 a yawl:Method ;
+    rdfs:label "toXNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode toXNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarEntry.fromXNode
+yawl:CalendarEntry_fromXNode_24 a yawl:Method ;
+    rdfs:label "fromXNode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXNode(XNode node)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:CalendarEntry_entryID a yawl:Field ;
+    rdfs:label "entryID" .
+
+yawl:CalendarEntry_resourceID a yawl:Field ;
+    rdfs:label "resourceID" .
+
+yawl:CalendarEntry_startTime a yawl:Field ;
+    rdfs:label "startTime" .
+
+yawl:CalendarEntry_endTime a yawl:Field ;
+    rdfs:label "endTime" .
+
+yawl:CalendarEntry_status a yawl:Field ;
+    rdfs:label "status" .
+
+yawl:CalendarEntry_workload a yawl:Field ;
+    rdfs:label "workload" .
+
+yawl:CalendarEntry_agent a yawl:Field ;
+    rdfs:label "agent" .
+
+yawl:CalendarEntry_chainID a yawl:Field ;
+    rdfs:label "chainID" .
+
+yawl:CalendarEntry_comment a yawl:Field ;
+    rdfs:label "comment" .
+
+
+

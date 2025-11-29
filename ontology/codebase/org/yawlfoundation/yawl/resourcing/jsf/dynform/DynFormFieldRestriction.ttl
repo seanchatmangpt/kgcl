@@ -1,0 +1,696 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.dynform.DynFormFieldRestriction
+yawl:DynFormFieldRestriction a yawl:Class ;
+    rdfs:label "DynFormFieldRestriction" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf_dynform ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/dynform/DynFormFieldRestriction.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 15/08/2008""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_parse_1 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getEnumeratedValues_2 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getRestrictionValue_3 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_parseSimpleTypeBase_4 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getBaseType_5 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_setBaseType_6 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getOwner_7 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_setOwner_8 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_setModifiedFlag_9 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getMinLength_10 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getMinLengthValue_11 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_setMinLength_12 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getMaxLength_13 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getMaxLengthValue_14 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_setMaxLength_15 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getPattern_16 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_setPattern_17 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getEnumeration_18 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_setEnumeration_19 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getMinInclusive_20 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getMinInclusiveValue_21 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_setMinInclusive_22 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getMinExclusive_23 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getMinExclusiveValue_24 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_setMinExclusive_25 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getMaxInclusive_26 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getMaxInclusiveValue_27 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_setMaxInclusive_28 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getMaxExclusive_29 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getMaxExclusiveValue_30 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_setMaxExclusive_31 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getLength_32 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getLengthValue_33 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_setLength_34 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getWhitespace_35 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_setWhitespace_36 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getTotalDigits_37 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getTotalDigitsValue_38 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_setTotalDigits_39 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getFractionDigits_40 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getFractionDigitsValue_41 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_setFractionDigits_42 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getBaseTypeUnprefixed_43 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getIntValue_44 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getToolTipExtn_45 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getBaseElement_46 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_rebuildSchema_47 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getSchemaLeadIn_48 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getSchemaFadeOut_49 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_getSchemaTrack_50 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_setRestrictionFacet_51 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_hasLength_52 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_hasMinLength_53 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_hasMaxLength_54 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_hasPattern_55 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_hasWhitespace_56 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_hasMinInclusive_57 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_hasMinExclusive_58 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_hasMaxInclusive_59 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_hasMaxExclusive_60 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_hasTotalDigits_61 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_hasFractionDigits_62 ;
+    yawl:hasMethod yawl:DynFormFieldRestriction_hasEnumeration_63 ;
+    yawl:hasField yawl:DynFormFieldRestriction__owner ;
+    yawl:hasField yawl:DynFormFieldRestriction__baseElement ;
+    yawl:hasField yawl:DynFormFieldRestriction__modified ;
+    yawl:hasField yawl:DynFormFieldRestriction__baseType ;
+    yawl:hasField yawl:DynFormFieldRestriction__length ;
+    yawl:hasField yawl:DynFormFieldRestriction__minLength ;
+    yawl:hasField yawl:DynFormFieldRestriction__maxLength ;
+    yawl:hasField yawl:DynFormFieldRestriction__pattern ;
+    yawl:hasField yawl:DynFormFieldRestriction__whiteSpace ;
+    yawl:hasField yawl:DynFormFieldRestriction__minInclusive ;
+    yawl:hasField yawl:DynFormFieldRestriction__minExclusive ;
+    yawl:hasField yawl:DynFormFieldRestriction__maxInclusive ;
+    yawl:hasField yawl:DynFormFieldRestriction__maxExclusive ;
+    yawl:hasField yawl:DynFormFieldRestriction__totalDigits ;
+    yawl:hasField yawl:DynFormFieldRestriction__fractionDigits ;
+    yawl:hasField yawl:DynFormFieldRestriction__enumeration ;
+    yawl:hasField yawl:DynFormFieldRestriction_LENGTH ;
+    yawl:hasField yawl:DynFormFieldRestriction_MINLENGTH ;
+    yawl:hasField yawl:DynFormFieldRestriction_MAXLENGTH ;
+    yawl:hasField yawl:DynFormFieldRestriction_PATTERN ;
+    yawl:hasField yawl:DynFormFieldRestriction_WHITESPACE ;
+    yawl:hasField yawl:DynFormFieldRestriction_MININCLUSIVE ;
+    yawl:hasField yawl:DynFormFieldRestriction_MINEXCLUSIVE ;
+    yawl:hasField yawl:DynFormFieldRestriction_MAXINCLUSIVE ;
+    yawl:hasField yawl:DynFormFieldRestriction_MAXEXCLUSIVE ;
+    yawl:hasField yawl:DynFormFieldRestriction_TOTALDIGITS ;
+    yawl:hasField yawl:DynFormFieldRestriction_FRACTIONDIGITS ;
+    .
+
+
+# Method: DynFormFieldRestriction.parse
+yawl:DynFormFieldRestriction_parse_1 a yawl:Method ;
+    rdfs:label "parse" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parse(Element restriction, Namespace ns)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldRestriction.getEnumeratedValues
+yawl:DynFormFieldRestriction_getEnumeratedValues_2 a yawl:Method ;
+    rdfs:label "getEnumeratedValues" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getEnumeratedValues(Element restriction, Namespace ns)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldRestriction.getRestrictionValue
+yawl:DynFormFieldRestriction_getRestrictionValue_3 a yawl:Method ;
+    rdfs:label "getRestrictionValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRestrictionValue(Element restriction, Namespace ns, String type)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldRestriction.parseSimpleTypeBase
+yawl:DynFormFieldRestriction_parseSimpleTypeBase_4 a yawl:Method ;
+    rdfs:label "parseSimpleTypeBase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String parseSimpleTypeBase(Element restriction, Namespace ns)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldRestriction.getBaseType
+yawl:DynFormFieldRestriction_getBaseType_5 a yawl:Method ;
+    rdfs:label "getBaseType" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBaseType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.setBaseType
+yawl:DynFormFieldRestriction_setBaseType_6 a yawl:Method ;
+    rdfs:label "setBaseType" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBaseType(String baseType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.getOwner
+yawl:DynFormFieldRestriction_getOwner_7 a yawl:Method ;
+    rdfs:label "getOwner" ;
+    yawl:returnType "DynFormField" ;
+    yawl:signature "DynFormField getOwner()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.setOwner
+yawl:DynFormFieldRestriction_setOwner_8 a yawl:Method ;
+    rdfs:label "setOwner" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOwner(DynFormField owner)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.setModifiedFlag
+yawl:DynFormFieldRestriction_setModifiedFlag_9 a yawl:Method ;
+    rdfs:label "setModifiedFlag" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setModifiedFlag()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.getMinLength
+yawl:DynFormFieldRestriction_getMinLength_10 a yawl:Method ;
+    rdfs:label "getMinLength" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMinLength()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.getMinLengthValue
+yawl:DynFormFieldRestriction_getMinLengthValue_11 a yawl:Method ;
+    rdfs:label "getMinLengthValue" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getMinLengthValue()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.setMinLength
+yawl:DynFormFieldRestriction_setMinLength_12 a yawl:Method ;
+    rdfs:label "setMinLength" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMinLength(String minLength)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.getMaxLength
+yawl:DynFormFieldRestriction_getMaxLength_13 a yawl:Method ;
+    rdfs:label "getMaxLength" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMaxLength()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.getMaxLengthValue
+yawl:DynFormFieldRestriction_getMaxLengthValue_14 a yawl:Method ;
+    rdfs:label "getMaxLengthValue" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getMaxLengthValue()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.setMaxLength
+yawl:DynFormFieldRestriction_setMaxLength_15 a yawl:Method ;
+    rdfs:label "setMaxLength" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMaxLength(String maxLength)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.getPattern
+yawl:DynFormFieldRestriction_getPattern_16 a yawl:Method ;
+    rdfs:label "getPattern" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPattern()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.setPattern
+yawl:DynFormFieldRestriction_setPattern_17 a yawl:Method ;
+    rdfs:label "setPattern" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPattern(String pattern)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.getEnumeration
+yawl:DynFormFieldRestriction_getEnumeration_18 a yawl:Method ;
+    rdfs:label "getEnumeration" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getEnumeration()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.setEnumeration
+yawl:DynFormFieldRestriction_setEnumeration_19 a yawl:Method ;
+    rdfs:label "setEnumeration" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEnumeration(List enumeration)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.getMinInclusive
+yawl:DynFormFieldRestriction_getMinInclusive_20 a yawl:Method ;
+    rdfs:label "getMinInclusive" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMinInclusive()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.getMinInclusiveValue
+yawl:DynFormFieldRestriction_getMinInclusiveValue_21 a yawl:Method ;
+    rdfs:label "getMinInclusiveValue" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getMinInclusiveValue()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.setMinInclusive
+yawl:DynFormFieldRestriction_setMinInclusive_22 a yawl:Method ;
+    rdfs:label "setMinInclusive" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMinInclusive(String minInclusive)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.getMinExclusive
+yawl:DynFormFieldRestriction_getMinExclusive_23 a yawl:Method ;
+    rdfs:label "getMinExclusive" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMinExclusive()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.getMinExclusiveValue
+yawl:DynFormFieldRestriction_getMinExclusiveValue_24 a yawl:Method ;
+    rdfs:label "getMinExclusiveValue" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getMinExclusiveValue()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.setMinExclusive
+yawl:DynFormFieldRestriction_setMinExclusive_25 a yawl:Method ;
+    rdfs:label "setMinExclusive" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMinExclusive(String minExclusive)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.getMaxInclusive
+yawl:DynFormFieldRestriction_getMaxInclusive_26 a yawl:Method ;
+    rdfs:label "getMaxInclusive" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMaxInclusive()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.getMaxInclusiveValue
+yawl:DynFormFieldRestriction_getMaxInclusiveValue_27 a yawl:Method ;
+    rdfs:label "getMaxInclusiveValue" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getMaxInclusiveValue()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.setMaxInclusive
+yawl:DynFormFieldRestriction_setMaxInclusive_28 a yawl:Method ;
+    rdfs:label "setMaxInclusive" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMaxInclusive(String maxInclusive)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.getMaxExclusive
+yawl:DynFormFieldRestriction_getMaxExclusive_29 a yawl:Method ;
+    rdfs:label "getMaxExclusive" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMaxExclusive()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.getMaxExclusiveValue
+yawl:DynFormFieldRestriction_getMaxExclusiveValue_30 a yawl:Method ;
+    rdfs:label "getMaxExclusiveValue" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getMaxExclusiveValue()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.setMaxExclusive
+yawl:DynFormFieldRestriction_setMaxExclusive_31 a yawl:Method ;
+    rdfs:label "setMaxExclusive" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMaxExclusive(String maxExclusive)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.getLength
+yawl:DynFormFieldRestriction_getLength_32 a yawl:Method ;
+    rdfs:label "getLength" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLength()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.getLengthValue
+yawl:DynFormFieldRestriction_getLengthValue_33 a yawl:Method ;
+    rdfs:label "getLengthValue" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getLengthValue()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.setLength
+yawl:DynFormFieldRestriction_setLength_34 a yawl:Method ;
+    rdfs:label "setLength" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLength(String length)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.getWhitespace
+yawl:DynFormFieldRestriction_getWhitespace_35 a yawl:Method ;
+    rdfs:label "getWhitespace" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWhitespace()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.setWhitespace
+yawl:DynFormFieldRestriction_setWhitespace_36 a yawl:Method ;
+    rdfs:label "setWhitespace" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setWhitespace(String whitespace)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.getTotalDigits
+yawl:DynFormFieldRestriction_getTotalDigits_37 a yawl:Method ;
+    rdfs:label "getTotalDigits" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTotalDigits()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.getTotalDigitsValue
+yawl:DynFormFieldRestriction_getTotalDigitsValue_38 a yawl:Method ;
+    rdfs:label "getTotalDigitsValue" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getTotalDigitsValue()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.setTotalDigits
+yawl:DynFormFieldRestriction_setTotalDigits_39 a yawl:Method ;
+    rdfs:label "setTotalDigits" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTotalDigits(String totalDigits)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.getFractionDigits
+yawl:DynFormFieldRestriction_getFractionDigits_40 a yawl:Method ;
+    rdfs:label "getFractionDigits" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFractionDigits()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.getFractionDigitsValue
+yawl:DynFormFieldRestriction_getFractionDigitsValue_41 a yawl:Method ;
+    rdfs:label "getFractionDigitsValue" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getFractionDigitsValue()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.setFractionDigits
+yawl:DynFormFieldRestriction_setFractionDigits_42 a yawl:Method ;
+    rdfs:label "setFractionDigits" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setFractionDigits(String fractionDigits)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.getBaseTypeUnprefixed
+yawl:DynFormFieldRestriction_getBaseTypeUnprefixed_43 a yawl:Method ;
+    rdfs:label "getBaseTypeUnprefixed" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBaseTypeUnprefixed()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldRestriction.getIntValue
+yawl:DynFormFieldRestriction_getIntValue_44 a yawl:Method ;
+    rdfs:label "getIntValue" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getIntValue(String s, int defaultValue)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldRestriction.getToolTipExtn
+yawl:DynFormFieldRestriction_getToolTipExtn_45 a yawl:Method ;
+    rdfs:label "getToolTipExtn" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getToolTipExtn()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.getBaseElement
+yawl:DynFormFieldRestriction_getBaseElement_46 a yawl:Method ;
+    rdfs:label "getBaseElement" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBaseElement()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.rebuildSchema
+yawl:DynFormFieldRestriction_rebuildSchema_47 a yawl:Method ;
+    rdfs:label "rebuildSchema" ;
+    yawl:returnType "String" ;
+    yawl:signature "String rebuildSchema()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.getSchemaLeadIn
+yawl:DynFormFieldRestriction_getSchemaLeadIn_48 a yawl:Method ;
+    rdfs:label "getSchemaLeadIn" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSchemaLeadIn(String prefix)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldRestriction.getSchemaFadeOut
+yawl:DynFormFieldRestriction_getSchemaFadeOut_49 a yawl:Method ;
+    rdfs:label "getSchemaFadeOut" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSchemaFadeOut(String prefix)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldRestriction.getSchemaTrack
+yawl:DynFormFieldRestriction_getSchemaTrack_50 a yawl:Method ;
+    rdfs:label "getSchemaTrack" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSchemaTrack(String prefix, String track, String value)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldRestriction.setRestrictionFacet
+yawl:DynFormFieldRestriction_setRestrictionFacet_51 a yawl:Method ;
+    rdfs:label "setRestrictionFacet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRestrictionFacet(XSDType facet, String value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.hasLength
+yawl:DynFormFieldRestriction_hasLength_52 a yawl:Method ;
+    rdfs:label "hasLength" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasLength()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.hasMinLength
+yawl:DynFormFieldRestriction_hasMinLength_53 a yawl:Method ;
+    rdfs:label "hasMinLength" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasMinLength()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.hasMaxLength
+yawl:DynFormFieldRestriction_hasMaxLength_54 a yawl:Method ;
+    rdfs:label "hasMaxLength" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasMaxLength()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.hasPattern
+yawl:DynFormFieldRestriction_hasPattern_55 a yawl:Method ;
+    rdfs:label "hasPattern" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasPattern()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.hasWhitespace
+yawl:DynFormFieldRestriction_hasWhitespace_56 a yawl:Method ;
+    rdfs:label "hasWhitespace" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasWhitespace()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.hasMinInclusive
+yawl:DynFormFieldRestriction_hasMinInclusive_57 a yawl:Method ;
+    rdfs:label "hasMinInclusive" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasMinInclusive()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.hasMinExclusive
+yawl:DynFormFieldRestriction_hasMinExclusive_58 a yawl:Method ;
+    rdfs:label "hasMinExclusive" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasMinExclusive()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.hasMaxInclusive
+yawl:DynFormFieldRestriction_hasMaxInclusive_59 a yawl:Method ;
+    rdfs:label "hasMaxInclusive" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasMaxInclusive()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.hasMaxExclusive
+yawl:DynFormFieldRestriction_hasMaxExclusive_60 a yawl:Method ;
+    rdfs:label "hasMaxExclusive" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasMaxExclusive()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.hasTotalDigits
+yawl:DynFormFieldRestriction_hasTotalDigits_61 a yawl:Method ;
+    rdfs:label "hasTotalDigits" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasTotalDigits()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.hasFractionDigits
+yawl:DynFormFieldRestriction_hasFractionDigits_62 a yawl:Method ;
+    rdfs:label "hasFractionDigits" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasFractionDigits()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldRestriction.hasEnumeration
+yawl:DynFormFieldRestriction_hasEnumeration_63 a yawl:Method ;
+    rdfs:label "hasEnumeration" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasEnumeration()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:DynFormFieldRestriction__owner a yawl:Field ;
+    rdfs:label "_owner" .
+
+yawl:DynFormFieldRestriction__baseElement a yawl:Field ;
+    rdfs:label "_baseElement" .
+
+yawl:DynFormFieldRestriction__modified a yawl:Field ;
+    rdfs:label "_modified" .
+
+yawl:DynFormFieldRestriction__baseType a yawl:Field ;
+    rdfs:label "_baseType" .
+
+yawl:DynFormFieldRestriction__length a yawl:Field ;
+    rdfs:label "_length" .
+
+yawl:DynFormFieldRestriction__minLength a yawl:Field ;
+    rdfs:label "_minLength" .
+
+yawl:DynFormFieldRestriction__maxLength a yawl:Field ;
+    rdfs:label "_maxLength" .
+
+yawl:DynFormFieldRestriction__pattern a yawl:Field ;
+    rdfs:label "_pattern" .
+
+yawl:DynFormFieldRestriction__whiteSpace a yawl:Field ;
+    rdfs:label "_whiteSpace" .
+
+yawl:DynFormFieldRestriction__minInclusive a yawl:Field ;
+    rdfs:label "_minInclusive" .
+
+yawl:DynFormFieldRestriction__minExclusive a yawl:Field ;
+    rdfs:label "_minExclusive" .
+
+yawl:DynFormFieldRestriction__maxInclusive a yawl:Field ;
+    rdfs:label "_maxInclusive" .
+
+yawl:DynFormFieldRestriction__maxExclusive a yawl:Field ;
+    rdfs:label "_maxExclusive" .
+
+yawl:DynFormFieldRestriction__totalDigits a yawl:Field ;
+    rdfs:label "_totalDigits" .
+
+yawl:DynFormFieldRestriction__fractionDigits a yawl:Field ;
+    rdfs:label "_fractionDigits" .
+
+yawl:DynFormFieldRestriction__enumeration a yawl:Field ;
+    rdfs:label "_enumeration" .
+
+yawl:DynFormFieldRestriction_LENGTH a yawl:Field ;
+    rdfs:label "LENGTH" .
+
+yawl:DynFormFieldRestriction_MINLENGTH a yawl:Field ;
+    rdfs:label "MINLENGTH" .
+
+yawl:DynFormFieldRestriction_MAXLENGTH a yawl:Field ;
+    rdfs:label "MAXLENGTH" .
+
+yawl:DynFormFieldRestriction_PATTERN a yawl:Field ;
+    rdfs:label "PATTERN" .
+
+yawl:DynFormFieldRestriction_WHITESPACE a yawl:Field ;
+    rdfs:label "WHITESPACE" .
+
+yawl:DynFormFieldRestriction_MININCLUSIVE a yawl:Field ;
+    rdfs:label "MININCLUSIVE" .
+
+yawl:DynFormFieldRestriction_MINEXCLUSIVE a yawl:Field ;
+    rdfs:label "MINEXCLUSIVE" .
+
+yawl:DynFormFieldRestriction_MAXINCLUSIVE a yawl:Field ;
+    rdfs:label "MAXINCLUSIVE" .
+
+yawl:DynFormFieldRestriction_MAXEXCLUSIVE a yawl:Field ;
+    rdfs:label "MAXEXCLUSIVE" .
+
+yawl:DynFormFieldRestriction_TOTALDIGITS a yawl:Field ;
+    rdfs:label "TOTALDIGITS" .
+
+yawl:DynFormFieldRestriction_FRACTIONDIGITS a yawl:Field ;
+    rdfs:label "FRACTIONDIGITS" .
+
+
+

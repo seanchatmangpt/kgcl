@@ -1,0 +1,729 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.interfce.interfaceB.InterfaceB_EnvironmentBasedClient
+yawl:InterfaceB_EnvironmentBasedClient a yawl:Class ;
+    rdfs:label "InterfaceB_EnvironmentBasedClient" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_interfce_interfaceB ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/interfce/interfaceB/InterfaceB_EnvironmentBasedClient.java"^^xsd:string ;
+    rdfs:comment """An API for custom services to call Engine functionalities regarding workitem management, process progression and case state. @author Lachlan Aldred @author Michael Adams (refactored for v2.0) @date 27/01/2004""" ;
+    yawl:extends yawl:Interface_Client ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getBackEndURI_1 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_connect_2 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_disconnect_3 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getCompleteListOfLiveWorkItems_4 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getCompleteListOfLiveWorkItemsAsXML_5 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getWorkItem_6 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getWorkItemExpiryTime_7 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getWorkItemsForCase_8 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getWorkItemsForSpecification_9 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getWorkItemsForTask_10 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getLiveWorkItemsForIdentifier_11 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getWorkItemsForService_12 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getLiveWorkItemsForIdentifierAsXML_13 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getSpecificationList_14 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getSpecification_15 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getSpecification_16 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getSpecificationData_17 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getSpecificationForCase_18 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getSpecificationIDForCase_19 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getSpecificationDataSchema_20 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getSpecificationDataSchema_21 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_checkOutWorkItem_22 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_checkOutWorkItem_23 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_rejectAnnouncedEnabledTask_24 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getStartingDataSnapshot_25 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getTaskInformationStr_26 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getTaskInformationStr_27 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_checkConnection_28 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_checkInWorkItem_29 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_checkInWorkItem_30 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_checkPermissionToAddInstances_31 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_createNewInstance_32 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_skipWorkItem_33 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_suspendWorkItem_34 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_unsuspendWorkItem_35 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_rollbackWorkItem_36 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_launchCase_37 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_launchCase_38 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_launchCase_39 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_launchCase_40 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_launchCase_41 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_launchCase_42 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_launchCase_43 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_launchCase_44 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_launchCase_45 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_launchCase_46 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_launchCase_47 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_launchCase_48 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_launchCase_49 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getCases_50 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getCases_51 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getAllRunningCases_52 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getCaseState_53 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_exportCaseState_54 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_exportAllCaseStates_55 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_importCases_56 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getCaseData_57 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_cancelCase_58 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getChildrenOfWorkItem_59 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_parseTaskInformation_60 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_isAdministrator_61 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getMITaskAttributes_62 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getMITaskAttributes_63 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getResourcingSpecs_64 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getCaseInstanceSummary_65 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getWorkItemInstanceSummary_66 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_getParameterInstanceSummary_67 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_postToExternalURL_68 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_pollPerfStats_69 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_stripOuterElement_70 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedClient_unPackWorkItemList_71 ;
+    yawl:hasField yawl:InterfaceB_EnvironmentBasedClient__backEndURIStr ;
+    .
+
+
+# Method: InterfaceB_EnvironmentBasedClient.getBackEndURI
+yawl:InterfaceB_EnvironmentBasedClient_getBackEndURI_1 a yawl:Method ;
+    rdfs:label "getBackEndURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBackEndURI()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.connect
+yawl:InterfaceB_EnvironmentBasedClient_connect_2 a yawl:Method ;
+    rdfs:label "connect" ;
+    yawl:returnType "String" ;
+    yawl:signature "String connect(String userID, String password)" ;
+    rdfs:comment """Connects the user to the engine. @param userID the user id. @param password the user password @return the session handle @throws IOException  if engine cannot be found""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.disconnect
+yawl:InterfaceB_EnvironmentBasedClient_disconnect_3 a yawl:Method ;
+    rdfs:label "disconnect" ;
+    yawl:returnType "String" ;
+    yawl:signature "String disconnect(String handle)" ;
+    rdfs:comment """Disconnects an external entity from the engine @param handle the sessionHandle to disconnect @throws IOException if the engine can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getCompleteListOfLiveWorkItems
+yawl:InterfaceB_EnvironmentBasedClient_getCompleteListOfLiveWorkItems_4 a yawl:Method ;
+    rdfs:label "getCompleteListOfLiveWorkItems" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getCompleteListOfLiveWorkItems(String sessionHandle)" ;
+    rdfs:comment """Returns a list (of WorkItemRecord) of all the work items that are currently active in the engine. @see org.yawlfoundation.yawl.engine.interfce.WorkItemRecord @param sessionHandle the session handle @return the list of WorkItemRecord objects @throws IOException if engine can't be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getCompleteListOfLiveWorkItemsAsXML
+yawl:InterfaceB_EnvironmentBasedClient_getCompleteListOfLiveWorkItemsAsXML_5 a yawl:Method ;
+    rdfs:label "getCompleteListOfLiveWorkItemsAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCompleteListOfLiveWorkItemsAsXML(String sessionHandle)" ;
+    rdfs:comment """Returns an XML string describing all the work items that are currently active in the engine. @param sessionHandle the session handle @return an XML representation of the set of live workitems @throws IOException if engine can't be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getWorkItem
+yawl:InterfaceB_EnvironmentBasedClient_getWorkItem_6 a yawl:Method ;
+    rdfs:label "getWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItem(String itemID, String sessionHandle)" ;
+    rdfs:comment """Returns an XML string describing a current work item. @param itemID the workitem id @param sessionHandle the session handle @return an XML representation of the of workitem @throws IOException if engine can't be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getWorkItemExpiryTime
+yawl:InterfaceB_EnvironmentBasedClient_getWorkItemExpiryTime_7 a yawl:Method ;
+    rdfs:label "getWorkItemExpiryTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getWorkItemExpiryTime(String itemID, String sessionHandle)" ;
+    rdfs:comment """Returns the expiry time of a work item's timer. @param itemID the workitem id @param sessionHandle the session handle @return a long value representing the moment the timer will expire, or 0 if the work item does not have a timer or does not exist @throws IOException if engine can't be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getWorkItemsForCase
+yawl:InterfaceB_EnvironmentBasedClient_getWorkItemsForCase_8 a yawl:Method ;
+    rdfs:label "getWorkItemsForCase" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getWorkItemsForCase(String caseID, String sessionHandle)" ;
+    rdfs:comment """Returns the current set of active workitems for a case @param caseID the case in question @param sessionHandle the session handle @return a list of live workitems (as WorkItemRecords) @throws IOException if engine can't be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getWorkItemsForSpecification
+yawl:InterfaceB_EnvironmentBasedClient_getWorkItemsForSpecification_9 a yawl:Method ;
+    rdfs:label "getWorkItemsForSpecification" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getWorkItemsForSpecification(String specName, String sessionHandle)" ;
+    rdfs:comment """Returns the current set of active workitems for a specification @param specName the specification in question @param sessionHandle the session handle @return a list of live workitems (as WorkItemRecords) @throws IOException if engine can't be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getWorkItemsForTask
+yawl:InterfaceB_EnvironmentBasedClient_getWorkItemsForTask_10 a yawl:Method ;
+    rdfs:label "getWorkItemsForTask" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getWorkItemsForTask(String taskID, String sessionHandle)" ;
+    rdfs:comment """Returns the current set of active workitems that are instances of a specified task @param taskID the task in question @param sessionHandle the session handle @return a list of live workitems (as WorkItemRecords) @throws IOException if engine can't be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getLiveWorkItemsForIdentifier
+yawl:InterfaceB_EnvironmentBasedClient_getLiveWorkItemsForIdentifier_11 a yawl:Method ;
+    rdfs:label "getLiveWorkItemsForIdentifier" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getLiveWorkItemsForIdentifier(String idType, String id, String sessionHandle)" ;
+    rdfs:comment """Retrieves a List of live workitems for the case or spec id passed @param idType : \"case\" for a case's workitems, \"spec\" for a specification's, \"task\" for a specific taskID @param id the identifier for the case/spec/task @param sessionHandle the session handle @return the List of live workitems (as WorkItemRecords) @throws IOException if there's a problem connecting to the engine @throws JDOMException if there's a problem with xml conversions""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getWorkItemsForService
+yawl:InterfaceB_EnvironmentBasedClient_getWorkItemsForService_12 a yawl:Method ;
+    rdfs:label "getWorkItemsForService" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getWorkItemsForService(String serviceURI, String sessionHandle)" ;
+    rdfs:comment """Returns the current set of active workitems that are associated with a specified custom service @param serviceURI the uri of the service in question @param sessionHandle the session handle @return a list of live workitems (as WorkItemRecords) @throws IOException if engine can't be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getLiveWorkItemsForIdentifierAsXML
+yawl:InterfaceB_EnvironmentBasedClient_getLiveWorkItemsForIdentifierAsXML_13 a yawl:Method ;
+    rdfs:label "getLiveWorkItemsForIdentifierAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLiveWorkItemsForIdentifierAsXML(String idType, String id, String sessionHandle)" ;
+    rdfs:comment """Retrieves an XML description of live workitems for the case or spec id passed @param idType : \"case\" for a case's workitems, \"spec\" for a specification's, \"task\" for a specific taskID @param id the identifier for the case/spec/task @param sessionHandle the session handle @return the XML representation of live workitems in the engine @throws IOException if there's a problem connecting to the engine @throws JDOMException if there's a problem with xml conversions""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getSpecificationList
+yawl:InterfaceB_EnvironmentBasedClient_getSpecificationList_14 a yawl:Method ;
+    rdfs:label "getSpecificationList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getSpecificationList(String sessionHandle)" ;
+    rdfs:comment """Creates a list of SpecificationData objects for the specifications currently loaded into the engine. These are brief meta data summary information objects that describe a workflow specification. @param sessionHandle the session handle @return  the list of spec data objects @throws IOException if engine can't be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getSpecification
+yawl:InterfaceB_EnvironmentBasedClient_getSpecification_15 a yawl:Method ;
+    rdfs:label "getSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecification(String specID, String sessionHandle)" ;
+    rdfs:comment """Gets an XML representation of a workflow specification. @deprecated superseded by getSpecification(YSpecificationID, String) @param specID the specid. @param sessionHandle the session handle @return the XML representation, or an XML diagnostic error message. @throws IOException if the engine can't be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getSpecification
+yawl:InterfaceB_EnvironmentBasedClient_getSpecification_16 a yawl:Method ;
+    rdfs:label "getSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecification(YSpecificationID specID, String sessionHandle)" ;
+    rdfs:comment """Gets an XML representation of a workflow specification. @param specID the specid. @param sessionHandle the session handle @return the XML representation, or an XML diagnostic error message. @throws IOException if the engine can't be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getSpecificationData
+yawl:InterfaceB_EnvironmentBasedClient_getSpecificationData_17 a yawl:Method ;
+    rdfs:label "getSpecificationData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationData(YSpecificationID specID, String sessionHandle)" ;
+    rdfs:comment """Gets an XML representation of some summary information of a workflow specification. @param specID the specid. @param sessionHandle the session handle @return the XML representation, or an XML diagnostic error message. @throws IOException if the engine can't be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getSpecificationForCase
+yawl:InterfaceB_EnvironmentBasedClient_getSpecificationForCase_18 a yawl:Method ;
+    rdfs:label "getSpecificationForCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationForCase(String caseID, String sessionHandle)" ;
+    rdfs:comment """Gets an XML representation of a workflow specification for a specified, currently executing case. @param caseID the identifier of a currently executing case. @param sessionHandle the session handle @return the XML representation, or an XML diagnostic error message. @throws IOException if the engine can't be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getSpecificationIDForCase
+yawl:InterfaceB_EnvironmentBasedClient_getSpecificationIDForCase_19 a yawl:Method ;
+    rdfs:label "getSpecificationIDForCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationIDForCase(String caseID, String sessionHandle)" ;
+    rdfs:comment """Gets an XML representation of a workflow specification id for a specified, currently executing case. @param caseID the identifier of a currently executing case. @param sessionHandle the session handle @return the XML representation, or an XML diagnostic error message. @throws IOException if the engine can't be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getSpecificationDataSchema
+yawl:InterfaceB_EnvironmentBasedClient_getSpecificationDataSchema_20 a yawl:Method ;
+    rdfs:label "getSpecificationDataSchema" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationDataSchema(String specID, String sessionHandle)" ;
+    rdfs:comment """Gets the user-defined data schema for a specification @deprecated superseded by getSpecificationDataSchema(YSpecificationID, String) @param specID the specification id @param sessionHandle an active session handle @return an XML representation, or an XML diagnostic error message. @throws IOException if the engine can't be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getSpecificationDataSchema
+yawl:InterfaceB_EnvironmentBasedClient_getSpecificationDataSchema_21 a yawl:Method ;
+    rdfs:label "getSpecificationDataSchema" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationDataSchema(YSpecificationID specID, String sessionHandle)" ;
+    rdfs:comment """Gets the user-defined data schema for a specification @param specID the specification id @param sessionHandle an active session handle @return an XML representation, or an XML diagnostic error message. @throws IOException if the engine can't be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.checkOutWorkItem
+yawl:InterfaceB_EnvironmentBasedClient_checkOutWorkItem_22 a yawl:Method ;
+    rdfs:label "checkOutWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkOutWorkItem(String workItemID, String logPredicate, String sessionHandle)" ;
+    rdfs:comment """Allow a client to obtain ownership of a unit of work. This means that the workitem must be enabled or fired first, and that upon successful checkout the workitem will be executing. @param workItemID the workitem id. @param logPredicate configurable logging string to be logged with the checkout @param sessionHandle the sessionhandle @return in case of success returns a WorkItemRecord object of the created workitem. In case of failure returns a diagnostic XML message. @throws IOException if the en""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.checkOutWorkItem
+yawl:InterfaceB_EnvironmentBasedClient_checkOutWorkItem_23 a yawl:Method ;
+    rdfs:label "checkOutWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkOutWorkItem(String workItemID, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.rejectAnnouncedEnabledTask
+yawl:InterfaceB_EnvironmentBasedClient_rejectAnnouncedEnabledTask_24 a yawl:Method ;
+    rdfs:label "rejectAnnouncedEnabledTask" ;
+    yawl:returnType "String" ;
+    yawl:signature "String rejectAnnouncedEnabledTask(String workItemID, String sessionHandle)" ;
+    rdfs:comment """Rejects the announcement of an enabled work item to a service, and passes the the work item back to the engine for processing by the default work list @param workItemID the workitem id. @param sessionHandle the sessionhandle @return a success or error message @throws IOException if the engine can't be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getStartingDataSnapshot
+yawl:InterfaceB_EnvironmentBasedClient_getStartingDataSnapshot_25 a yawl:Method ;
+    rdfs:label "getStartingDataSnapshot" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStartingDataSnapshot(String workItemID, String sessionHandle)" ;
+    rdfs:comment """Gets a snapshot of data values that would be assigned to an enabled work item IF that work item was started at the moment the method is called. Note that the work item must have Enabled status only. @param workItemID the workitem id @param sessionHandle the sessionhandle @return an XML string of the data snapshot, or an error message. @throws IOException if the engine can't be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getTaskInformationStr
+yawl:InterfaceB_EnvironmentBasedClient_getTaskInformationStr_26 a yawl:Method ;
+    rdfs:label "getTaskInformationStr" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskInformationStr(String specID, String taskID, String sessionHandle)" ;
+    rdfs:comment """Gets an XML representation of information the task declaration. This can be parsed into a copy of a YTask @deprecated superseded by getTaskInformationStr(YSpecificationID, String, String) - this version should be used for pre-2.0 schema-based specifications only @param specID the spec id. @param taskID the task id. @param sessionHandle the session handle @return an XML Representation of the task information @throws IOException if the engine can't be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getTaskInformationStr
+yawl:InterfaceB_EnvironmentBasedClient_getTaskInformationStr_27 a yawl:Method ;
+    rdfs:label "getTaskInformationStr" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskInformationStr(YSpecificationID specID, String taskID, String sessionHandle)" ;
+    rdfs:comment """Gets an XML representation of information the task declaration. This can be parsed into a copy of a YTask @param specID the spec id. @param taskID the task id. @param sessionHandle the session handle @return an XML Representation of the task information @throws IOException if the engine can't be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.checkConnection
+yawl:InterfaceB_EnvironmentBasedClient_checkConnection_28 a yawl:Method ;
+    rdfs:label "checkConnection" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkConnection(String sessionHandle)" ;
+    rdfs:comment """Checks whether the connection with the engine is alive, authenticated properly. @param sessionHandle the session handle @return a diagnostic message indicating connection state. @throws IOException if engine cannot be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.checkInWorkItem
+yawl:InterfaceB_EnvironmentBasedClient_checkInWorkItem_29 a yawl:Method ;
+    rdfs:label "checkInWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkInWorkItem(String workItemID, String data, String logPredicate, String sessionHandle)" ;
+    rdfs:comment """Checks the work item back into the engine once the task is complete. Succesfully doing so will cause the work item to be completed in the engine. @param workItemID the work item id. @param data formated data eg. <data><param1Name>value</param1Name></data> @param logPredicate configurable logging string to be logged with the checkin @param sessionHandle the session handle @return in case success returns the work item as xml. In case of failure returns the reason for failure. @throws IOException i""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.checkInWorkItem
+yawl:InterfaceB_EnvironmentBasedClient_checkInWorkItem_30 a yawl:Method ;
+    rdfs:label "checkInWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkInWorkItem(String workItemID, String data, String sessionHandle)" ;
+    rdfs:comment """@deprecated since 2.1 - use checkInWorkItem(String, String, String, String) instead Checks the work item back into the engine once the task is complete. Succesfully doing so will cause the work item to be completed in the engine. @param workItemID the work item id. @param data formated data eg. <data><param1Name>value</param1Name></data> @param sessionHandle the session handle @return in case success returns the work item as xml. In case of failure returns the reason for failure. @throws IOExcep""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.checkPermissionToAddInstances
+yawl:InterfaceB_EnvironmentBasedClient_checkPermissionToAddInstances_31 a yawl:Method ;
+    rdfs:label "checkPermissionToAddInstances" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkPermissionToAddInstances(String workItemID, String sessionHandle)" ;
+    rdfs:comment """Determines whether or not a task will allow a dynamically created new instance to be created. @pre the 'parent' task is a MultiInstance Task with dynamic instance creation. @param workItemID the workItemID of a sibling work item. @param sessionHandle the session handle @return diagnostic message that should indicate permission if task is MultiInstance, and if task allows dynamic instance creation, and if current number of instances is less than the maxInstances for the task. @throws IOException """ ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.createNewInstance
+yawl:InterfaceB_EnvironmentBasedClient_createNewInstance_32 a yawl:Method ;
+    rdfs:label "createNewInstance" ;
+    yawl:returnType "String" ;
+    yawl:signature "String createNewInstance(String workItemID, String paramValueForMICreation, String sessionHandle)" ;
+    rdfs:comment """Creates a new instance of a multi instance task. @pre the referenced task is multi-instance and allows dynamic creation @param workItemID the work item id of a sibling workitem @param paramValueForMICreation the data needed for creating a new instance. @param sessionHandle the session handle @return diagnostic string indicating result of action @throws IOException if engine cannot be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.skipWorkItem
+yawl:InterfaceB_EnvironmentBasedClient_skipWorkItem_33 a yawl:Method ;
+    rdfs:label "skipWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String skipWorkItem(String workItemID, String sessionHandle)" ;
+    rdfs:comment """Skips a work item. @param workItemID the work item id. @param sessionHandle the sessoin handle @return diagnostic XML message @throws IOException if the engine can't be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.suspendWorkItem
+yawl:InterfaceB_EnvironmentBasedClient_suspendWorkItem_34 a yawl:Method ;
+    rdfs:label "suspendWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String suspendWorkItem(String workItemID, String sessionHandle)" ;
+    rdfs:comment """Suspends a work item. @param workItemID the work item id. @param sessionHandle the sessoin handle @return diagnostic XML message @throws IOException if the engine can't be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.unsuspendWorkItem
+yawl:InterfaceB_EnvironmentBasedClient_unsuspendWorkItem_35 a yawl:Method ;
+    rdfs:label "unsuspendWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String unsuspendWorkItem(String workItemID, String sessionHandle)" ;
+    rdfs:comment """Unuspends a work item. @param workItemID the work item id. @param sessionHandle the sessoin handle @return diagnostic XML message @throws IOException if the engine can't be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.rollbackWorkItem
+yawl:InterfaceB_EnvironmentBasedClient_rollbackWorkItem_36 a yawl:Method ;
+    rdfs:label "rollbackWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String rollbackWorkItem(String workItemID, String sessionHandle)" ;
+    rdfs:comment """Rolls back a work item, from 'executing' to 'fired' status. @param workItemID the work item id. @param sessionHandle the sessoin handle @return diagnostic XML message @throws IOException if the engine can't be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.launchCase
+yawl:InterfaceB_EnvironmentBasedClient_launchCase_37 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(String specID, String caseParams, String sessionHandle)" ;
+    rdfs:comment """Launches a case instance of the latest version of the specification loaded. @deprecated superseded by launchCase(YSpecificationID, String, String) @param specID the specification id (see SpecificationData.getID()) @param caseParams the case params in XML. i.e. <pre> &lt;data&gt; &lt;firstParam&gt;value&lt;/firstParam&gt; &lt;secondParam&gt;value&lt;/secondParam&gt; &lt;/data&gt; </pre> If there are no case params then null should be passed. @param sessionHandle the session handle @return the cas""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.launchCase
+yawl:InterfaceB_EnvironmentBasedClient_launchCase_38 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseParams, YLogDataItemList logData, String sessionHandle)" ;
+    rdfs:comment """Launches a case instance of the latest version of the specification loaded. @param specID the specification id @param caseParams the case params in XML. i.e. <pre> &lt;data&gt; &lt;firstParam&gt;value&lt;/firstParam&gt; &lt;secondParam&gt;value&lt;/secondParam&gt; &lt;/data&gt; </pre> If there are no case params then null should be passed. @param logData a list of log data items for logging when the case starts (can be null) @param sessionHandle the session handle @return the case identifier, or""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.launchCase
+yawl:InterfaceB_EnvironmentBasedClient_launchCase_39 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseParams, YLogDataItemList logData, String caseID, String sessionHandle)" ;
+    rdfs:comment """Launches a case instance. @param specID the specification id (see SpecificationData.getID()) @param caseParams the case params in XML. @param logData a list of log data items for logging when the case starts (can be null) @param caseID a pre-selected, unique case identifier @param sessionHandle the session handle @return the case identifier, or a diagnostic message in case of failure @throws IOException if engine can't be found""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.launchCase
+yawl:InterfaceB_EnvironmentBasedClient_launchCase_40 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(String specID, String caseParams, String sessionHandle, String completionObserverURI)" ;
+    rdfs:comment """Launches a case instance. @deprecated superseded by launchCase(YSpecificationID, String, String) @param specID the specification id (see SpecificationData.getID()) @param caseParams the case params in XML.  @param sessionHandle the session handle @param completionObserverURI the URI of the IB service that will listen for a case-completed event @return the case identifier, or a diagnostic message in case of failure @throws IOException if engine can't be found""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.launchCase
+yawl:InterfaceB_EnvironmentBasedClient_launchCase_41 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseParams, String sessionHandle, YLogDataItemList logData, String completionObserverURI)" ;
+    rdfs:comment """Launches a case instance. @param specID the specification id @param caseParams the case params in XML. @param logData a list of log data items for logging when the case starts (can be null) @param sessionHandle the session handle @param completionObserverURI the URI of the IB service that will listen for a case-completed event @return the case identifier, or a diagnostic message in case of failure @throws IOException if engine can't be found""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.launchCase
+yawl:InterfaceB_EnvironmentBasedClient_launchCase_42 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseParams, String sessionHandle, String caseID, YLogDataItemList logData, String completionObserverURI)" ;
+    rdfs:comment """Launches a case instance. @param specID the specification id @param caseParams the case params in XML. @param caseID the pre-selected, unique case identifier @param logData a list of log data items for logging when the case starts (can be null) @param sessionHandle the session handle @param completionObserverURI the URI of the IB service that will listen for a case-completed event @return the case identifier, or a diagnostic message in case of failure @throws IOException if engine can't be found""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.launchCase
+yawl:InterfaceB_EnvironmentBasedClient_launchCase_43 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseParams, String sessionHandle, YLogDataItemList logData, String completionObserverURI, long mSec)" ;
+    rdfs:comment """Launches a case instance after a delay. @param specID the specification id @param caseParams the case params in XML. @param logData a list of log data items for logging when the case starts (can be null) @param sessionHandle the session handle @param completionObserverURI the URI of the IB service that will listen for a case-completed event @param mSec the number of milliseconds to wait before launching the case @return the case identifier, or a diagnostic message in case of failure @throws IOEx""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.launchCase
+yawl:InterfaceB_EnvironmentBasedClient_launchCase_44 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseParams, String sessionHandle, String caseID, YLogDataItemList logData, String completionObserverURI, long mSec)" ;
+    rdfs:comment """Launches a case instance after a delay. @param specID the specification id @param caseParams the case params in XML. @param logData a list of log data items for logging when the case starts (can be null) @param sessionHandle the session handle @param caseID the pre-selected, unique case identifier @param completionObserverURI the URI of the IB service that will listen for a case-completed event @param mSec the number of milliseconds to wait before launching the case @return the case identifier, """ ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.launchCase
+yawl:InterfaceB_EnvironmentBasedClient_launchCase_45 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseParams, String sessionHandle, YLogDataItemList logData, String completionObserverURI, Date start)" ;
+    rdfs:comment """Launches a case instance after a delay. @param specID the specification id @param caseParams the case params in XML. @param logData a list of log data items for logging when the case starts (can be null) @param sessionHandle the session handle @param completionObserverURI the URI of the IB service that will listen for a case-completed event @param start the date and time when the case is to be launched @return the case identifier, or a diagnostic message in case of failure @throws IOException if""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.launchCase
+yawl:InterfaceB_EnvironmentBasedClient_launchCase_46 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseParams, String sessionHandle, String caseID, YLogDataItemList logData, String completionObserverURI, Date start)" ;
+    rdfs:comment """Launches a case instance after a delay. @param specID the specification id @param caseParams the case params in XML. @param logData a list of log data items for logging when the case starts (can be null) @param sessionHandle the session handle @param caseID the pre-selected, unique case identifier @param completionObserverURI the URI of the IB service that will listen for a case-completed event @param start the date and time when the case is to be launched @return the case identifier, or a diagn""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.launchCase
+yawl:InterfaceB_EnvironmentBasedClient_launchCase_47 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseParams, String sessionHandle, YLogDataItemList logData, String completionObserverURI, Duration wait)" ;
+    rdfs:comment """Launches a case instance after a delay. @param specID the specification id @param caseParams the case params in XML. @param logData a list of log data items for logging when the case starts (can be null) @param sessionHandle the session handle @param completionObserverURI the URI of the IB service that will listen for a case-completed event @param wait a Duration object that specifies a period to to wait before  launching the case @return the case identifier, or a diagnostic message in case of f""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.launchCase
+yawl:InterfaceB_EnvironmentBasedClient_launchCase_48 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseParams, String sessionHandle, String caseID, YLogDataItemList logData, String completionObserverURI, Duration wait)" ;
+    rdfs:comment """Launches a case instance after a delay. @param specID the specification id @param caseParams the case params in XML. @param logData a list of log data items for logging when the case starts (can be null) @param sessionHandle the session handle @param caseID the pre-selected, unique case identifier @param completionObserverURI the URI of the IB service that will listen for a case-completed event @param wait a Duration object that specifies a period to to wait before launching the case @return the""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.launchCase
+yawl:InterfaceB_EnvironmentBasedClient_launchCase_49 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseParams, String sessionHandle, String caseID, YLogDataItemList logData, String completionObserverURI, long mSec, Date start, Duration wait)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getCases
+yawl:InterfaceB_EnvironmentBasedClient_getCases_50 a yawl:Method ;
+    rdfs:label "getCases" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCases(String specID, String sessionHandle)" ;
+    rdfs:comment """Gets the set of active cases in the engine. @deprecated superseded by getCases(YSpecificationID, String) @param specID the specification id. @param sessionHandle the session handle @return an XML list of case ids that are instances of the spec with specid. @throws IOException if engine cannot be found""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getCases
+yawl:InterfaceB_EnvironmentBasedClient_getCases_51 a yawl:Method ;
+    rdfs:label "getCases" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCases(YSpecificationID specID, String sessionHandle)" ;
+    rdfs:comment """Gets the set of active cases in the engine. @param specID the specification id. @param sessionHandle the session handle @return an XML list of case ids that are instances of the spec with specid. @throws IOException if engine cannot be found""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getAllRunningCases
+yawl:InterfaceB_EnvironmentBasedClient_getAllRunningCases_52 a yawl:Method ;
+    rdfs:label "getAllRunningCases" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAllRunningCases(String sessionHandle)" ;
+    rdfs:comment """Gets a complete list of all running case ids from the engine @param sessionHandle the session handle @return an XML list of case ids that are currently executing @throws IOException if engine cannot be found""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getCaseState
+yawl:InterfaceB_EnvironmentBasedClient_getCaseState_53 a yawl:Method ;
+    rdfs:label "getCaseState" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseState(String caseID, String sessionHandle)" ;
+    rdfs:comment """Gets the state description of the case @param caseID the case id. @param sessionHandle the session handle @return An XML representation of the case state, or a diagnostic error message. @throws IOException if engine cannot be found""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.exportCaseState
+yawl:InterfaceB_EnvironmentBasedClient_exportCaseState_54 a yawl:Method ;
+    rdfs:label "exportCaseState" ;
+    yawl:returnType "String" ;
+    yawl:signature "String exportCaseState(String caseID, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.exportAllCaseStates
+yawl:InterfaceB_EnvironmentBasedClient_exportAllCaseStates_55 a yawl:Method ;
+    rdfs:label "exportAllCaseStates" ;
+    yawl:returnType "String" ;
+    yawl:signature "String exportAllCaseStates(String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.importCases
+yawl:InterfaceB_EnvironmentBasedClient_importCases_56 a yawl:Method ;
+    rdfs:label "importCases" ;
+    yawl:returnType "String" ;
+    yawl:signature "String importCases(String xml, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getCaseData
+yawl:InterfaceB_EnvironmentBasedClient_getCaseData_57 a yawl:Method ;
+    rdfs:label "getCaseData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseData(String caseID, String sessionHandle)" ;
+    rdfs:comment """Gets the data of the case @param caseID the case id. @param sessionHandle the session handle @return An XML representation of the case data, or a diagnostic error message. @throws IOException if engine cannot be found""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.cancelCase
+yawl:InterfaceB_EnvironmentBasedClient_cancelCase_58 a yawl:Method ;
+    rdfs:label "cancelCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String cancelCase(String caseID, String sessionHandle)" ;
+    rdfs:comment """Cancels the case with caseID. @param caseID the case id. @param sessionHandle the session handle @return a diagnostic string providing information about the result of cancellation. @throws IOException if the engine cannot be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getChildrenOfWorkItem
+yawl:InterfaceB_EnvironmentBasedClient_getChildrenOfWorkItem_59 a yawl:Method ;
+    rdfs:label "getChildrenOfWorkItem" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getChildrenOfWorkItem(String workItemID, String sessionHandle)" ;
+    rdfs:comment """Finds out the children of a given work item. Only work items that are parents have children. @param workItemID the work item id of the parent workitem. @param sessionHandle the session handle @return a Java.util.List of WorkItemRecord objects. @throws IOException if the engine cannot be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.parseTaskInformation
+yawl:InterfaceB_EnvironmentBasedClient_parseTaskInformation_60 a yawl:Method ;
+    rdfs:label "parseTaskInformation" ;
+    yawl:returnType "TaskInformation" ;
+    yawl:signature "TaskInformation parseTaskInformation(String taskInfoStr)" ;
+    rdfs:comment """Parses the XML string and returns a TaskInfo object (easier to manage). @param taskInfoStr  the task information String @see #getTaskInformationStr(YSpecificationID, String, String) @return the TaskInformation object""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.isAdministrator
+yawl:InterfaceB_EnvironmentBasedClient_isAdministrator_61 a yawl:Method ;
+    rdfs:label "isAdministrator" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAdministrator(String sessionHandle)" ;
+    rdfs:comment """Checks if the session has administrative access @param sessionHandle the session to check @return true if this session has administration privileges @throws IOException if the engine cannot be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getMITaskAttributes
+yawl:InterfaceB_EnvironmentBasedClient_getMITaskAttributes_62 a yawl:Method ;
+    rdfs:label "getMITaskAttributes" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMITaskAttributes(String specID, String taskID, String sessionHandle)" ;
+    rdfs:comment """Gets an XML representation of the attributes of a multi-instance task. @deprecated superseded by getMITaskAttributes(YSpecificationID, String, String) - this version should be used for pre-2.0 schema-based specifications only @param specID the spec id. @param taskID the task id. @param sessionHandle the session handle @return an XML Representation of the task information @throws IOException if the engine cannot be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getMITaskAttributes
+yawl:InterfaceB_EnvironmentBasedClient_getMITaskAttributes_63 a yawl:Method ;
+    rdfs:label "getMITaskAttributes" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMITaskAttributes(YSpecificationID specID, String taskID, String sessionHandle)" ;
+    rdfs:comment """Gets an XML representation of the attributes of a multi-instance task. @param specID the spec id. @param taskID the task id. @param sessionHandle the session handle @return an XML Representation of the task information @throws IOException if the engine cannot be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getResourcingSpecs
+yawl:InterfaceB_EnvironmentBasedClient_getResourcingSpecs_64 a yawl:Method ;
+    rdfs:label "getResourcingSpecs" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourcingSpecs(YSpecificationID specID, String taskID, String sessionHandle)" ;
+    rdfs:comment """Gets the set of resourcing specifications for the specified task of the specified spec @param specID the specification id @param taskID the id of the task to get the resourcing specs for @param sessionHandle the session handle @return an XML Representation of the resourcing information for the task @throws IOException if the engine cannot be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getCaseInstanceSummary
+yawl:InterfaceB_EnvironmentBasedClient_getCaseInstanceSummary_65 a yawl:Method ;
+    rdfs:label "getCaseInstanceSummary" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseInstanceSummary(String sessionHandle)" ;
+    rdfs:comment """Gets a summary table of all currently live process instances @param sessionHandle the session handle @return an XML Representation of live processes @throws IOException if the engine cannot be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getWorkItemInstanceSummary
+yawl:InterfaceB_EnvironmentBasedClient_getWorkItemInstanceSummary_66 a yawl:Method ;
+    rdfs:label "getWorkItemInstanceSummary" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItemInstanceSummary(String caseID, String sessionHandle)" ;
+    rdfs:comment """Gets a summary table of all completed and live workitems for a case @param caseID the case id of the process to get the workitems for @param sessionHandle the session handle @return an XML Representation of workitems for a live case @throws IOException if the engine cannot be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.getParameterInstanceSummary
+yawl:InterfaceB_EnvironmentBasedClient_getParameterInstanceSummary_67 a yawl:Method ;
+    rdfs:label "getParameterInstanceSummary" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParameterInstanceSummary(String caseID, String itemID, String sessionHandle)" ;
+    rdfs:comment """Gets a summary table of all data parameters for the workitem of the case specified @param caseID the case id of the process to get the workitems for @param itemID the id of the workitem to get the data params for @param sessionHandle the session handle @return an XML Representation of parameters for a workitem @throws IOException if the engine cannot be found.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.postToExternalURL
+yawl:InterfaceB_EnvironmentBasedClient_postToExternalURL_68 a yawl:Method ;
+    rdfs:label "postToExternalURL" ;
+    yawl:returnType "String" ;
+    yawl:signature "String postToExternalURL(String url, Map params)" ;
+    rdfs:comment """A generic method for sending a HTTP POST message, with parameters, to a URL external to the standard YAWL environment @param url the external URL to which the message is posted @param params a map of attribute-value pairs to post with the message @return a reply string from the external URL @throws IOException if the external URL is invalid or unresponsive.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.pollPerfStats
+yawl:InterfaceB_EnvironmentBasedClient_pollPerfStats_69 a yawl:Method ;
+    rdfs:label "pollPerfStats" ;
+    yawl:returnType "String" ;
+    yawl:signature "String pollPerfStats(String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.stripOuterElement
+yawl:InterfaceB_EnvironmentBasedClient_stripOuterElement_70 a yawl:Method ;
+    rdfs:label "stripOuterElement" ;
+    yawl:returnType "String" ;
+    yawl:signature "String stripOuterElement(String xml)" ;
+    rdfs:comment """Removes the outermost set of xml tags from a string, if any @param xml the xml string to strip @return the stripped xml string""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedClient.unPackWorkItemList
+yawl:InterfaceB_EnvironmentBasedClient_unPackWorkItemList_71 a yawl:Method ;
+    rdfs:label "unPackWorkItemList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List unPackWorkItemList(String xml)" ;
+    rdfs:comment """Transforms an xml-string set of WorkItemRecords into a list  @param xml the string describing the WorkItemRecords @return a list of WorkItemRecord objects""" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:InterfaceB_EnvironmentBasedClient__backEndURIStr a yawl:Field ;
+    rdfs:label "_backEndURIStr" .
+
+
+

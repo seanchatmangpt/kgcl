@@ -1,0 +1,42 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.allocators.DearestResource
+yawl:DearestResource a yawl:Class ;
+    rdfs:label "DearestResource" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_allocators ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/allocators/DearestResource.java"^^xsd:string ;
+    rdfs:comment """Performs allocation based on most cost @author Michael Adams""" ;
+    yawl:extends yawl:AbstractAllocator ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DearestResource_performAllocation_1 ;
+    yawl:hasMethod yawl:DearestResource_getHighestCost_2 ;
+    .
+
+
+# Method: DearestResource.performAllocation
+yawl:DearestResource_performAllocation_1 a yawl:Method ;
+    rdfs:label "performAllocation" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant performAllocation(Set participants, WorkItemRecord wir)" ;
+    rdfs:comment """Selects a single participant from the list provided that has the lowest cost rate for the work item in question @param participants a distribution set of participants @param wir the work item to allocate @return a single participant, or null if participants is null or empty""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DearestResource.getHighestCost
+yawl:DearestResource_getHighestCost_2 a yawl:Method ;
+    rdfs:label "getHighestCost" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getHighestCost(Map costMap)" ;
+    rdfs:comment """Gets the participant id in the map corresponding to the lowest cost amount @param costMap a map of participant ids and their associated costs @return the participant id with the lowest cost""" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+
+

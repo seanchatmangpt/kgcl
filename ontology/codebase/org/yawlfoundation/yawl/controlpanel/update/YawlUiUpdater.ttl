@@ -1,0 +1,122 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.update.YawlUiUpdater
+yawl:YawlUiUpdater a yawl:Class ;
+    rdfs:label "YawlUiUpdater" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_update ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/update/YawlUiUpdater.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 19/12/2022""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YawlUiUpdater_hasUpdate_1 ;
+    yawl:hasMethod yawl:YawlUiUpdater_getLocalBuildNumber_2 ;
+    yawl:hasMethod yawl:YawlUiUpdater_getRemoteBuildNumber_3 ;
+    yawl:hasMethod yawl:YawlUiUpdater_getAppUpdate_4 ;
+    yawl:hasMethod yawl:YawlUiUpdater_createUpdateFileNode_5 ;
+    yawl:hasMethod yawl:YawlUiUpdater_getLocalBuildNumber_6 ;
+    yawl:hasMethod yawl:YawlUiUpdater_getRemoteBuildNumber_7 ;
+    yawl:hasMethod yawl:YawlUiUpdater_getClassesDir_8 ;
+    yawl:hasMethod yawl:YawlUiUpdater_getLibDir_9 ;
+    yawl:hasField yawl:YawlUiUpdater_LOCAL_PATH ;
+    yawl:hasField yawl:YawlUiUpdater_REMOTE_PATH ;
+    yawl:hasField yawl:YawlUiUpdater_YAWL_LIB_PATH ;
+    yawl:hasField yawl:YawlUiUpdater_YAWL_LIB_JAR_NAME ;
+    yawl:hasField yawl:YawlUiUpdater_UPDATE_JAR_NAME ;
+    .
+
+
+# Method: YawlUiUpdater.hasUpdate
+yawl:YawlUiUpdater_hasUpdate_1 a yawl:Method ;
+    rdfs:label "hasUpdate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasUpdate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YawlUiUpdater.getLocalBuildNumber
+yawl:YawlUiUpdater_getLocalBuildNumber_2 a yawl:Method ;
+    rdfs:label "getLocalBuildNumber" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLocalBuildNumber()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YawlUiUpdater.getRemoteBuildNumber
+yawl:YawlUiUpdater_getRemoteBuildNumber_3 a yawl:Method ;
+    rdfs:label "getRemoteBuildNumber" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRemoteBuildNumber()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YawlUiUpdater.getAppUpdate
+yawl:YawlUiUpdater_getAppUpdate_4 a yawl:Method ;
+    rdfs:label "getAppUpdate" ;
+    yawl:returnType "AppUpdate" ;
+    yawl:signature "AppUpdate getAppUpdate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YawlUiUpdater.createUpdateFileNode
+yawl:YawlUiUpdater_createUpdateFileNode_5 a yawl:Method ;
+    rdfs:label "createUpdateFileNode" ;
+    yawl:returnType "FileNode" ;
+    yawl:signature "FileNode createUpdateFileNode()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YawlUiUpdater.getLocalBuildNumber
+yawl:YawlUiUpdater_getLocalBuildNumber_6 a yawl:Method ;
+    rdfs:label "getLocalBuildNumber" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLocalBuildNumber(String path)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YawlUiUpdater.getRemoteBuildNumber
+yawl:YawlUiUpdater_getRemoteBuildNumber_7 a yawl:Method ;
+    rdfs:label "getRemoteBuildNumber" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRemoteBuildNumber(String path)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YawlUiUpdater.getClassesDir
+yawl:YawlUiUpdater_getClassesDir_8 a yawl:Method ;
+    rdfs:label "getClassesDir" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getClassesDir()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YawlUiUpdater.getLibDir
+yawl:YawlUiUpdater_getLibDir_9 a yawl:Method ;
+    rdfs:label "getLibDir" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLibDir()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YawlUiUpdater_LOCAL_PATH a yawl:Field ;
+    rdfs:label "LOCAL_PATH" .
+
+yawl:YawlUiUpdater_REMOTE_PATH a yawl:Field ;
+    rdfs:label "REMOTE_PATH" .
+
+yawl:YawlUiUpdater_YAWL_LIB_PATH a yawl:Field ;
+    rdfs:label "YAWL_LIB_PATH" .
+
+yawl:YawlUiUpdater_YAWL_LIB_JAR_NAME a yawl:Field ;
+    rdfs:label "YAWL_LIB_JAR_NAME" .
+
+yawl:YawlUiUpdater_UPDATE_JAR_NAME a yawl:Field ;
+    rdfs:label "UPDATE_JAR_NAME" .
+
+
+

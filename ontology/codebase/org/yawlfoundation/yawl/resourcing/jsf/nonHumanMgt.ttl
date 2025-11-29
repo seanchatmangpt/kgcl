@@ -1,0 +1,752 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.nonHumanMgt
+yawl:nonHumanMgt a yawl:Class ;
+    rdfs:label "nonHumanMgt" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/nonHumanMgt.java"^^xsd:string ;
+    yawl:extends yawl:AbstractPageBean ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:nonHumanMgt__init_1 ;
+    yawl:hasMethod yawl:nonHumanMgt_getRequestBean_2 ;
+    yawl:hasMethod yawl:nonHumanMgt_getApplicationBean_3 ;
+    yawl:hasMethod yawl:nonHumanMgt_getSessionBean_4 ;
+    yawl:hasMethod yawl:nonHumanMgt_init_5 ;
+    yawl:hasMethod yawl:nonHumanMgt_preprocess_6 ;
+    yawl:hasMethod yawl:nonHumanMgt_destroy_7 ;
+    yawl:hasMethod yawl:nonHumanMgt_getPage1_8 ;
+    yawl:hasMethod yawl:nonHumanMgt_setPage1_9 ;
+    yawl:hasMethod yawl:nonHumanMgt_getHtml1_10 ;
+    yawl:hasMethod yawl:nonHumanMgt_setHtml1_11 ;
+    yawl:hasMethod yawl:nonHumanMgt_getHead1_12 ;
+    yawl:hasMethod yawl:nonHumanMgt_setHead1_13 ;
+    yawl:hasMethod yawl:nonHumanMgt_getLink1_14 ;
+    yawl:hasMethod yawl:nonHumanMgt_setLink1_15 ;
+    yawl:hasMethod yawl:nonHumanMgt_getBody1_16 ;
+    yawl:hasMethod yawl:nonHumanMgt_setBody1_17 ;
+    yawl:hasMethod yawl:nonHumanMgt_getForm1_18 ;
+    yawl:hasMethod yawl:nonHumanMgt_setForm1_19 ;
+    yawl:hasMethod yawl:nonHumanMgt_getTabSet_20 ;
+    yawl:hasMethod yawl:nonHumanMgt_setTabSet_21 ;
+    yawl:hasMethod yawl:nonHumanMgt_getTabResources_22 ;
+    yawl:hasMethod yawl:nonHumanMgt_setTabResources_23 ;
+    yawl:hasMethod yawl:nonHumanMgt_getLpResources_24 ;
+    yawl:hasMethod yawl:nonHumanMgt_setLpResources_25 ;
+    yawl:hasMethod yawl:nonHumanMgt_getTabCategories_26 ;
+    yawl:hasMethod yawl:nonHumanMgt_setTabCategories_27 ;
+    yawl:hasMethod yawl:nonHumanMgt_getLpCategories_28 ;
+    yawl:hasMethod yawl:nonHumanMgt_setLpCategories_29 ;
+    yawl:hasMethod yawl:nonHumanMgt_getBtnSave_30 ;
+    yawl:hasMethod yawl:nonHumanMgt_setBtnSave_31 ;
+    yawl:hasMethod yawl:nonHumanMgt_getBtnReset_32 ;
+    yawl:hasMethod yawl:nonHumanMgt_setBtnReset_33 ;
+    yawl:hasMethod yawl:nonHumanMgt_getBtnClose_34 ;
+    yawl:hasMethod yawl:nonHumanMgt_setBtnClose_35 ;
+    yawl:hasMethod yawl:nonHumanMgt_getBtnRemove_36 ;
+    yawl:hasMethod yawl:nonHumanMgt_setBtnRemove_37 ;
+    yawl:hasMethod yawl:nonHumanMgt_getBtnAdd_38 ;
+    yawl:hasMethod yawl:nonHumanMgt_setBtnAdd_39 ;
+    yawl:hasMethod yawl:nonHumanMgt_getStaticText1_40 ;
+    yawl:hasMethod yawl:nonHumanMgt_setStaticText1_41 ;
+    yawl:hasMethod yawl:nonHumanMgt_getPnlContainer_42 ;
+    yawl:hasMethod yawl:nonHumanMgt_setPnlContainer_43 ;
+    yawl:hasMethod yawl:nonHumanMgt_getMetaRefresh_44 ;
+    yawl:hasMethod yawl:nonHumanMgt_setMetaRefresh_45 ;
+    yawl:hasMethod yawl:nonHumanMgt_prerender_46 ;
+    yawl:hasMethod yawl:nonHumanMgt_btnRefresh_action_47 ;
+    yawl:hasMethod yawl:nonHumanMgt_btnSave_action_48 ;
+    yawl:hasMethod yawl:nonHumanMgt_btnAdd_action_49 ;
+    yawl:hasMethod yawl:nonHumanMgt_btnReset_action_50 ;
+    yawl:hasMethod yawl:nonHumanMgt_btnRemove_action_51 ;
+    yawl:hasMethod yawl:nonHumanMgt_doTabAction_52 ;
+    yawl:hasMethod yawl:nonHumanMgt_tabResources_action_53 ;
+    yawl:hasMethod yawl:nonHumanMgt_tabCategories_action_54 ;
+    yawl:hasMethod yawl:nonHumanMgt_getMode_55 ;
+    yawl:hasMethod yawl:nonHumanMgt_isAddMode_56 ;
+    yawl:hasMethod yawl:nonHumanMgt_setMode_57 ;
+    yawl:hasMethod yawl:nonHumanMgt_setVisibleComponents_58 ;
+    yawl:hasMethod yawl:nonHumanMgt_nullifyChoices_59 ;
+    yawl:hasMethod yawl:nonHumanMgt_updateTabHeaders_60 ;
+    yawl:hasMethod yawl:nonHumanMgt_disableButtonsOnSubCatAddMode_61 ;
+    yawl:hasMethod yawl:nonHumanMgt_showButtons_62 ;
+    yawl:hasMethod yawl:nonHumanMgt_setRefreshRate_63 ;
+    yawl:hasMethod yawl:nonHumanMgt_populateForm_64 ;
+    yawl:hasMethod yawl:nonHumanMgt_getTabString_65 ;
+    yawl:hasMethod yawl:nonHumanMgt_getAttribType_66 ;
+    yawl:hasMethod yawl:nonHumanMgt_getActiveAttribText_67 ;
+    yawl:hasMethod yawl:nonHumanMgt_getSelTypeForTab_68 ;
+    yawl:hasMethod yawl:nonHumanMgt_getSelTypeForActiveTab_69 ;
+    yawl:hasMethod yawl:nonHumanMgt_showMessagePanel_70 ;
+    yawl:hasField yawl:nonHumanMgt___placeholder ;
+    yawl:hasField yawl:nonHumanMgt_page1 ;
+    yawl:hasField yawl:nonHumanMgt_html1 ;
+    yawl:hasField yawl:nonHumanMgt_head1 ;
+    yawl:hasField yawl:nonHumanMgt_link1 ;
+    yawl:hasField yawl:nonHumanMgt_body1 ;
+    yawl:hasField yawl:nonHumanMgt_form1 ;
+    yawl:hasField yawl:nonHumanMgt_tabSet ;
+    yawl:hasField yawl:nonHumanMgt_tabResources ;
+    yawl:hasField yawl:nonHumanMgt_lpResources ;
+    yawl:hasField yawl:nonHumanMgt_tabCategories ;
+    yawl:hasField yawl:nonHumanMgt_lpCategories ;
+    yawl:hasField yawl:nonHumanMgt_btnSave ;
+    yawl:hasField yawl:nonHumanMgt_btnReset ;
+    yawl:hasField yawl:nonHumanMgt_btnClose ;
+    yawl:hasField yawl:nonHumanMgt_btnRemove ;
+    yawl:hasField yawl:nonHumanMgt_btnAdd ;
+    yawl:hasField yawl:nonHumanMgt_staticText1 ;
+    yawl:hasField yawl:nonHumanMgt_pnlContainer ;
+    yawl:hasField yawl:nonHumanMgt_metaRefresh ;
+    yawl:hasField yawl:nonHumanMgt__sb ;
+    yawl:hasField yawl:nonHumanMgt__rm ;
+    yawl:hasField yawl:nonHumanMgt__orgDataSet ;
+    yawl:hasField yawl:nonHumanMgt__msgPanel ;
+    yawl:hasField yawl:nonHumanMgt__innerForm ;
+    .
+
+
+# Method: nonHumanMgt._init
+yawl:nonHumanMgt__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: nonHumanMgt.getRequestBean
+yawl:nonHumanMgt_getRequestBean_2 a yawl:Method ;
+    rdfs:label "getRequestBean" ;
+    yawl:returnType "RequestBean" ;
+    yawl:signature "RequestBean getRequestBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: nonHumanMgt.getApplicationBean
+yawl:nonHumanMgt_getApplicationBean_3 a yawl:Method ;
+    rdfs:label "getApplicationBean" ;
+    yawl:returnType "ApplicationBean" ;
+    yawl:signature "ApplicationBean getApplicationBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: nonHumanMgt.getSessionBean
+yawl:nonHumanMgt_getSessionBean_4 a yawl:Method ;
+    rdfs:label "getSessionBean" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getSessionBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: nonHumanMgt.init
+yawl:nonHumanMgt_init_5 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.preprocess
+yawl:nonHumanMgt_preprocess_6 a yawl:Method ;
+    rdfs:label "preprocess" ;
+    yawl:returnType "void" ;
+    yawl:signature "void preprocess()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.destroy
+yawl:nonHumanMgt_destroy_7 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.getPage1
+yawl:nonHumanMgt_getPage1_8 a yawl:Method ;
+    rdfs:label "getPage1" ;
+    yawl:returnType "Page" ;
+    yawl:signature "Page getPage1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.setPage1
+yawl:nonHumanMgt_setPage1_9 a yawl:Method ;
+    rdfs:label "setPage1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPage1(Page p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.getHtml1
+yawl:nonHumanMgt_getHtml1_10 a yawl:Method ;
+    rdfs:label "getHtml1" ;
+    yawl:returnType "Html" ;
+    yawl:signature "Html getHtml1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.setHtml1
+yawl:nonHumanMgt_setHtml1_11 a yawl:Method ;
+    rdfs:label "setHtml1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHtml1(Html h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.getHead1
+yawl:nonHumanMgt_getHead1_12 a yawl:Method ;
+    rdfs:label "getHead1" ;
+    yawl:returnType "Head" ;
+    yawl:signature "Head getHead1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.setHead1
+yawl:nonHumanMgt_setHead1_13 a yawl:Method ;
+    rdfs:label "setHead1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHead1(Head h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.getLink1
+yawl:nonHumanMgt_getLink1_14 a yawl:Method ;
+    rdfs:label "getLink1" ;
+    yawl:returnType "Link" ;
+    yawl:signature "Link getLink1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.setLink1
+yawl:nonHumanMgt_setLink1_15 a yawl:Method ;
+    rdfs:label "setLink1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLink1(Link l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.getBody1
+yawl:nonHumanMgt_getBody1_16 a yawl:Method ;
+    rdfs:label "getBody1" ;
+    yawl:returnType "Body" ;
+    yawl:signature "Body getBody1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.setBody1
+yawl:nonHumanMgt_setBody1_17 a yawl:Method ;
+    rdfs:label "setBody1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBody1(Body b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.getForm1
+yawl:nonHumanMgt_getForm1_18 a yawl:Method ;
+    rdfs:label "getForm1" ;
+    yawl:returnType "Form" ;
+    yawl:signature "Form getForm1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.setForm1
+yawl:nonHumanMgt_setForm1_19 a yawl:Method ;
+    rdfs:label "setForm1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setForm1(Form f)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.getTabSet
+yawl:nonHumanMgt_getTabSet_20 a yawl:Method ;
+    rdfs:label "getTabSet" ;
+    yawl:returnType "TabSet" ;
+    yawl:signature "TabSet getTabSet()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.setTabSet
+yawl:nonHumanMgt_setTabSet_21 a yawl:Method ;
+    rdfs:label "setTabSet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTabSet(TabSet ts)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.getTabResources
+yawl:nonHumanMgt_getTabResources_22 a yawl:Method ;
+    rdfs:label "getTabResources" ;
+    yawl:returnType "Tab" ;
+    yawl:signature "Tab getTabResources()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.setTabResources
+yawl:nonHumanMgt_setTabResources_23 a yawl:Method ;
+    rdfs:label "setTabResources" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTabResources(Tab t)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.getLpResources
+yawl:nonHumanMgt_getLpResources_24 a yawl:Method ;
+    rdfs:label "getLpResources" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getLpResources()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.setLpResources
+yawl:nonHumanMgt_setLpResources_25 a yawl:Method ;
+    rdfs:label "setLpResources" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLpResources(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.getTabCategories
+yawl:nonHumanMgt_getTabCategories_26 a yawl:Method ;
+    rdfs:label "getTabCategories" ;
+    yawl:returnType "Tab" ;
+    yawl:signature "Tab getTabCategories()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.setTabCategories
+yawl:nonHumanMgt_setTabCategories_27 a yawl:Method ;
+    rdfs:label "setTabCategories" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTabCategories(Tab t)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.getLpCategories
+yawl:nonHumanMgt_getLpCategories_28 a yawl:Method ;
+    rdfs:label "getLpCategories" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getLpCategories()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.setLpCategories
+yawl:nonHumanMgt_setLpCategories_29 a yawl:Method ;
+    rdfs:label "setLpCategories" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLpCategories(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.getBtnSave
+yawl:nonHumanMgt_getBtnSave_30 a yawl:Method ;
+    rdfs:label "getBtnSave" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnSave()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.setBtnSave
+yawl:nonHumanMgt_setBtnSave_31 a yawl:Method ;
+    rdfs:label "setBtnSave" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnSave(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.getBtnReset
+yawl:nonHumanMgt_getBtnReset_32 a yawl:Method ;
+    rdfs:label "getBtnReset" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnReset()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.setBtnReset
+yawl:nonHumanMgt_setBtnReset_33 a yawl:Method ;
+    rdfs:label "setBtnReset" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnReset(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.getBtnClose
+yawl:nonHumanMgt_getBtnClose_34 a yawl:Method ;
+    rdfs:label "getBtnClose" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnClose()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.setBtnClose
+yawl:nonHumanMgt_setBtnClose_35 a yawl:Method ;
+    rdfs:label "setBtnClose" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnClose(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.getBtnRemove
+yawl:nonHumanMgt_getBtnRemove_36 a yawl:Method ;
+    rdfs:label "getBtnRemove" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnRemove()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.setBtnRemove
+yawl:nonHumanMgt_setBtnRemove_37 a yawl:Method ;
+    rdfs:label "setBtnRemove" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnRemove(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.getBtnAdd
+yawl:nonHumanMgt_getBtnAdd_38 a yawl:Method ;
+    rdfs:label "getBtnAdd" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnAdd()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.setBtnAdd
+yawl:nonHumanMgt_setBtnAdd_39 a yawl:Method ;
+    rdfs:label "setBtnAdd" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnAdd(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.getStaticText1
+yawl:nonHumanMgt_getStaticText1_40 a yawl:Method ;
+    rdfs:label "getStaticText1" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getStaticText1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.setStaticText1
+yawl:nonHumanMgt_setStaticText1_41 a yawl:Method ;
+    rdfs:label "setStaticText1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStaticText1(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.getPnlContainer
+yawl:nonHumanMgt_getPnlContainer_42 a yawl:Method ;
+    rdfs:label "getPnlContainer" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlContainer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.setPnlContainer
+yawl:nonHumanMgt_setPnlContainer_43 a yawl:Method ;
+    rdfs:label "setPnlContainer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlContainer(PanelLayout pnl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.getMetaRefresh
+yawl:nonHumanMgt_getMetaRefresh_44 a yawl:Method ;
+    rdfs:label "getMetaRefresh" ;
+    yawl:returnType "Meta" ;
+    yawl:signature "Meta getMetaRefresh()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.setMetaRefresh
+yawl:nonHumanMgt_setMetaRefresh_45 a yawl:Method ;
+    rdfs:label "setMetaRefresh" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMetaRefresh(Meta m)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.prerender
+yawl:nonHumanMgt_prerender_46 a yawl:Method ;
+    rdfs:label "prerender" ;
+    yawl:returnType "void" ;
+    yawl:signature "void prerender()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.btnRefresh_action
+yawl:nonHumanMgt_btnRefresh_action_47 a yawl:Method ;
+    rdfs:label "btnRefresh_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnRefresh_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.btnSave_action
+yawl:nonHumanMgt_btnSave_action_48 a yawl:Method ;
+    rdfs:label "btnSave_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnSave_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.btnAdd_action
+yawl:nonHumanMgt_btnAdd_action_49 a yawl:Method ;
+    rdfs:label "btnAdd_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnAdd_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.btnReset_action
+yawl:nonHumanMgt_btnReset_action_50 a yawl:Method ;
+    rdfs:label "btnReset_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnReset_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.btnRemove_action
+yawl:nonHumanMgt_btnRemove_action_51 a yawl:Method ;
+    rdfs:label "btnRemove_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnRemove_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.doTabAction
+yawl:nonHumanMgt_doTabAction_52 a yawl:Method ;
+    rdfs:label "doTabAction" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doTabAction(SelType sType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: nonHumanMgt.tabResources_action
+yawl:nonHumanMgt_tabResources_action_53 a yawl:Method ;
+    rdfs:label "tabResources_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String tabResources_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.tabCategories_action
+yawl:nonHumanMgt_tabCategories_action_54 a yawl:Method ;
+    rdfs:label "tabCategories_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String tabCategories_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.getMode
+yawl:nonHumanMgt_getMode_55 a yawl:Method ;
+    rdfs:label "getMode" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getMode()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: nonHumanMgt.isAddMode
+yawl:nonHumanMgt_isAddMode_56 a yawl:Method ;
+    rdfs:label "isAddMode" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAddMode()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: nonHumanMgt.setMode
+yawl:nonHumanMgt_setMode_57 a yawl:Method ;
+    rdfs:label "setMode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMode(SessionBean mode)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: nonHumanMgt.setVisibleComponents
+yawl:nonHumanMgt_setVisibleComponents_58 a yawl:Method ;
+    rdfs:label "setVisibleComponents" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setVisibleComponents(SelType sType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: nonHumanMgt.nullifyChoices
+yawl:nonHumanMgt_nullifyChoices_59 a yawl:Method ;
+    rdfs:label "nullifyChoices" ;
+    yawl:returnType "void" ;
+    yawl:signature "void nullifyChoices()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: nonHumanMgt.updateTabHeaders
+yawl:nonHumanMgt_updateTabHeaders_60 a yawl:Method ;
+    rdfs:label "updateTabHeaders" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateTabHeaders(SelType sType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: nonHumanMgt.disableButtonsOnSubCatAddMode
+yawl:nonHumanMgt_disableButtonsOnSubCatAddMode_61 a yawl:Method ;
+    rdfs:label "disableButtonsOnSubCatAddMode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disableButtonsOnSubCatAddMode(SelType sType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: nonHumanMgt.showButtons
+yawl:nonHumanMgt_showButtons_62 a yawl:Method ;
+    rdfs:label "showButtons" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showButtons()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: nonHumanMgt.setRefreshRate
+yawl:nonHumanMgt_setRefreshRate_63 a yawl:Method ;
+    rdfs:label "setRefreshRate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRefreshRate(int rate)" ;
+    rdfs:comment """Sets the auto refresh rate of the page @param rate if <0, disables page refreshes; if >0, set refresh rate to that number of seconds; if 0, set the rate to the default provided by the resourceService's web.xml""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: nonHumanMgt.populateForm
+yawl:nonHumanMgt_populateForm_64 a yawl:Method ;
+    rdfs:label "populateForm" ;
+    yawl:returnType "int" ;
+    yawl:signature "int populateForm(SelType sType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: nonHumanMgt.getTabString
+yawl:nonHumanMgt_getTabString_65 a yawl:Method ;
+    rdfs:label "getTabString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTabString(SelType type)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: nonHumanMgt.getAttribType
+yawl:nonHumanMgt_getAttribType_66 a yawl:Method ;
+    rdfs:label "getAttribType" ;
+    yawl:returnType "SelType" ;
+    yawl:signature "SelType getAttribType(String tabName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: nonHumanMgt.getActiveAttribText
+yawl:nonHumanMgt_getActiveAttribText_67 a yawl:Method ;
+    rdfs:label "getActiveAttribText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getActiveAttribText()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: nonHumanMgt.getSelTypeForTab
+yawl:nonHumanMgt_getSelTypeForTab_68 a yawl:Method ;
+    rdfs:label "getSelTypeForTab" ;
+    yawl:returnType "SelType" ;
+    yawl:signature "SelType getSelTypeForTab()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: nonHumanMgt.getSelTypeForActiveTab
+yawl:nonHumanMgt_getSelTypeForActiveTab_69 a yawl:Method ;
+    rdfs:label "getSelTypeForActiveTab" ;
+    yawl:returnType "SelType" ;
+    yawl:signature "SelType getSelTypeForActiveTab()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: nonHumanMgt.showMessagePanel
+yawl:nonHumanMgt_showMessagePanel_70 a yawl:Method ;
+    rdfs:label "showMessagePanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showMessagePanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:nonHumanMgt___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:nonHumanMgt_page1 a yawl:Field ;
+    rdfs:label "page1" .
+
+yawl:nonHumanMgt_html1 a yawl:Field ;
+    rdfs:label "html1" .
+
+yawl:nonHumanMgt_head1 a yawl:Field ;
+    rdfs:label "head1" .
+
+yawl:nonHumanMgt_link1 a yawl:Field ;
+    rdfs:label "link1" .
+
+yawl:nonHumanMgt_body1 a yawl:Field ;
+    rdfs:label "body1" .
+
+yawl:nonHumanMgt_form1 a yawl:Field ;
+    rdfs:label "form1" .
+
+yawl:nonHumanMgt_tabSet a yawl:Field ;
+    rdfs:label "tabSet" .
+
+yawl:nonHumanMgt_tabResources a yawl:Field ;
+    rdfs:label "tabResources" .
+
+yawl:nonHumanMgt_lpResources a yawl:Field ;
+    rdfs:label "lpResources" .
+
+yawl:nonHumanMgt_tabCategories a yawl:Field ;
+    rdfs:label "tabCategories" .
+
+yawl:nonHumanMgt_lpCategories a yawl:Field ;
+    rdfs:label "lpCategories" .
+
+yawl:nonHumanMgt_btnSave a yawl:Field ;
+    rdfs:label "btnSave" .
+
+yawl:nonHumanMgt_btnReset a yawl:Field ;
+    rdfs:label "btnReset" .
+
+yawl:nonHumanMgt_btnClose a yawl:Field ;
+    rdfs:label "btnClose" .
+
+yawl:nonHumanMgt_btnRemove a yawl:Field ;
+    rdfs:label "btnRemove" .
+
+yawl:nonHumanMgt_btnAdd a yawl:Field ;
+    rdfs:label "btnAdd" .
+
+yawl:nonHumanMgt_staticText1 a yawl:Field ;
+    rdfs:label "staticText1" .
+
+yawl:nonHumanMgt_pnlContainer a yawl:Field ;
+    rdfs:label "pnlContainer" .
+
+yawl:nonHumanMgt_metaRefresh a yawl:Field ;
+    rdfs:label "metaRefresh" .
+
+yawl:nonHumanMgt__sb a yawl:Field ;
+    rdfs:label "_sb" .
+
+yawl:nonHumanMgt__rm a yawl:Field ;
+    rdfs:label "_rm" .
+
+yawl:nonHumanMgt__orgDataSet a yawl:Field ;
+    rdfs:label "_orgDataSet" .
+
+yawl:nonHumanMgt__msgPanel a yawl:Field ;
+    rdfs:label "_msgPanel" .
+
+yawl:nonHumanMgt__innerForm a yawl:Field ;
+    rdfs:label "_innerForm" .
+
+
+

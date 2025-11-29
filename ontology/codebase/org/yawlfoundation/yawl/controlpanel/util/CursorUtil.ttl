@@ -1,0 +1,61 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.util.CursorUtil
+yawl:CursorUtil a yawl:Class ;
+    rdfs:label "CursorUtil" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/util/CursorUtil.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 11/11/2015""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CursorUtil_showWaitCursor_1 ;
+    yawl:hasMethod yawl:CursorUtil_showDefaultCursor_2 ;
+    yawl:hasMethod yawl:CursorUtil_setContainer_3 ;
+    yawl:hasField yawl:CursorUtil__mouseAdapter ;
+    yawl:hasField yawl:CursorUtil__root ;
+    .
+
+
+# Method: CursorUtil.showWaitCursor
+yawl:CursorUtil_showWaitCursor_1 a yawl:Method ;
+    rdfs:label "showWaitCursor" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showWaitCursor()" ;
+    rdfs:comment """Sets cursor for specified component to Wait cursor""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: CursorUtil.showDefaultCursor
+yawl:CursorUtil_showDefaultCursor_2 a yawl:Method ;
+    rdfs:label "showDefaultCursor" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showDefaultCursor()" ;
+    rdfs:comment """Sets cursor for specified component to normal cursor""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: CursorUtil.setContainer
+yawl:CursorUtil_setContainer_3 a yawl:Method ;
+    rdfs:label "setContainer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setContainer(RootPaneContainer root)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:CursorUtil__mouseAdapter a yawl:Field ;
+    rdfs:label "_mouseAdapter" .
+
+yawl:CursorUtil__root a yawl:Field ;
+    rdfs:label "_root" .
+
+
+

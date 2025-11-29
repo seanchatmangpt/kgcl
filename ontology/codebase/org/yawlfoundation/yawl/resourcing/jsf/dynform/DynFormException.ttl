@@ -1,0 +1,22 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.dynform.DynFormException
+yawl:DynFormException a yawl:Class ;
+    rdfs:label "DynFormException" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf_dynform ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/dynform/DynFormException.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 22/02/2010""" ;
+    yawl:extends yawl:Exception ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+
+

@@ -1,0 +1,162 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.update.table.UpdateTableModel
+yawl:UpdateTableModel a yawl:Class ;
+    rdfs:label "UpdateTableModel" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_update_table ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/update/table/UpdateTableModel.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 17/08/2014""" ;
+    yawl:extends yawl:AbstractTableModel ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:UpdateTableModel_hasUpdates_1 ;
+    yawl:hasMethod yawl:UpdateTableModel_setDiffer_2 ;
+    yawl:hasMethod yawl:UpdateTableModel_getDiffer_3 ;
+    yawl:hasMethod yawl:UpdateTableModel_getRows_4 ;
+    yawl:hasMethod yawl:UpdateTableModel_getRowCount_5 ;
+    yawl:hasMethod yawl:UpdateTableModel_getColumnCount_6 ;
+    yawl:hasMethod yawl:UpdateTableModel_getColumnName_7 ;
+    yawl:hasMethod yawl:UpdateTableModel_isCellEditable_8 ;
+    yawl:hasMethod yawl:UpdateTableModel_getColumnClass_9 ;
+    yawl:hasMethod yawl:UpdateTableModel_getValueAt_10 ;
+    yawl:hasMethod yawl:UpdateTableModel_setValueAt_11 ;
+    yawl:hasMethod yawl:UpdateTableModel_initRows_12 ;
+    yawl:hasField yawl:UpdateTableModel_COLUMN_LABELS ;
+    yawl:hasField yawl:UpdateTableModel_COL_NAME ;
+    yawl:hasField yawl:UpdateTableModel_COL_DESCRIPTION ;
+    yawl:hasField yawl:UpdateTableModel_COL_CURRENT ;
+    yawl:hasField yawl:UpdateTableModel_COL_LATEST ;
+    yawl:hasField yawl:UpdateTableModel_COL_INSTALL ;
+    yawl:hasField yawl:UpdateTableModel__rows ;
+    yawl:hasField yawl:UpdateTableModel__differ ;
+    .
+
+
+# Method: UpdateTableModel.hasUpdates
+yawl:UpdateTableModel_hasUpdates_1 a yawl:Method ;
+    rdfs:label "hasUpdates" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasUpdates()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateTableModel.setDiffer
+yawl:UpdateTableModel_setDiffer_2 a yawl:Method ;
+    rdfs:label "setDiffer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDiffer(Differ differ)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateTableModel.getDiffer
+yawl:UpdateTableModel_getDiffer_3 a yawl:Method ;
+    rdfs:label "getDiffer" ;
+    yawl:returnType "Differ" ;
+    yawl:signature "Differ getDiffer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateTableModel.getRows
+yawl:UpdateTableModel_getRows_4 a yawl:Method ;
+    rdfs:label "getRows" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateTableModel.getRowCount
+yawl:UpdateTableModel_getRowCount_5 a yawl:Method ;
+    rdfs:label "getRowCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getRowCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateTableModel.getColumnCount
+yawl:UpdateTableModel_getColumnCount_6 a yawl:Method ;
+    rdfs:label "getColumnCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getColumnCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateTableModel.getColumnName
+yawl:UpdateTableModel_getColumnName_7 a yawl:Method ;
+    rdfs:label "getColumnName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getColumnName(int column)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateTableModel.isCellEditable
+yawl:UpdateTableModel_isCellEditable_8 a yawl:Method ;
+    rdfs:label "isCellEditable" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isCellEditable(int row, int column)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateTableModel.getColumnClass
+yawl:UpdateTableModel_getColumnClass_9 a yawl:Method ;
+    rdfs:label "getColumnClass" ;
+    yawl:returnType "Class" ;
+    yawl:signature "Class getColumnClass(int column)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateTableModel.getValueAt
+yawl:UpdateTableModel_getValueAt_10 a yawl:Method ;
+    rdfs:label "getValueAt" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object getValueAt(int row, int column)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateTableModel.setValueAt
+yawl:UpdateTableModel_setValueAt_11 a yawl:Method ;
+    rdfs:label "setValueAt" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setValueAt(Object value, int row, int column)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateTableModel.initRows
+yawl:UpdateTableModel_initRows_12 a yawl:Method ;
+    rdfs:label "initRows" ;
+    yawl:returnType "List" ;
+    yawl:signature "List initRows()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:UpdateTableModel_COLUMN_LABELS a yawl:Field ;
+    rdfs:label "COLUMN_LABELS" .
+
+yawl:UpdateTableModel_COL_NAME a yawl:Field ;
+    rdfs:label "COL_NAME" .
+
+yawl:UpdateTableModel_COL_DESCRIPTION a yawl:Field ;
+    rdfs:label "COL_DESCRIPTION" .
+
+yawl:UpdateTableModel_COL_CURRENT a yawl:Field ;
+    rdfs:label "COL_CURRENT" .
+
+yawl:UpdateTableModel_COL_LATEST a yawl:Field ;
+    rdfs:label "COL_LATEST" .
+
+yawl:UpdateTableModel_COL_INSTALL a yawl:Field ;
+    rdfs:label "COL_INSTALL" .
+
+yawl:UpdateTableModel__rows a yawl:Field ;
+    rdfs:label "_rows" .
+
+yawl:UpdateTableModel__differ a yawl:Field ;
+    rdfs:label "_differ" .
+
+
+

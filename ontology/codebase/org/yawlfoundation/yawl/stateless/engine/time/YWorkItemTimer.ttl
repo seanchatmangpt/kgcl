@@ -1,0 +1,133 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.stateless.engine.time.YWorkItemTimer
+yawl:YWorkItemTimer a yawl:Class ;
+    rdfs:label "YWorkItemTimer" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_engine_time ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/engine/time/YWorkItemTimer.java"^^xsd:string ;
+    rdfs:comment """A timer associated with an Atomic Task. Author: Michael Adams Creation Date: 31/01/2008""" ;
+    yawl:implements yawl:YTimedObject ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YWorkItemTimer_getOwnerID_1 ;
+    yawl:hasMethod yawl:YWorkItemTimer_getEndTime_2 ;
+    yawl:hasMethod yawl:YWorkItemTimer_equals_3 ;
+    yawl:hasMethod yawl:YWorkItemTimer_hashCode_4 ;
+    yawl:hasMethod yawl:YWorkItemTimer_handleTimerExpiry_5 ;
+    yawl:hasMethod yawl:YWorkItemTimer_enableAnnouncements_6 ;
+    yawl:hasMethod yawl:YWorkItemTimer_announcementsEnabled_7 ;
+    yawl:hasMethod yawl:YWorkItemTimer_cancel_8 ;
+    yawl:hasMethod yawl:YWorkItemTimer_setExpiredState_9 ;
+    yawl:hasMethod yawl:YWorkItemTimer_getAnnouncer_10 ;
+    yawl:hasField yawl:YWorkItemTimer__owner ;
+    yawl:hasField yawl:YWorkItemTimer__endTime ;
+    yawl:hasField yawl:YWorkItemTimer__state ;
+    yawl:hasField yawl:YWorkItemTimer__announceEvents ;
+    .
+
+
+# Method: YWorkItemTimer.getOwnerID
+yawl:YWorkItemTimer_getOwnerID_1 a yawl:Method ;
+    rdfs:label "getOwnerID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOwnerID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemTimer.getEndTime
+yawl:YWorkItemTimer_getEndTime_2 a yawl:Method ;
+    rdfs:label "getEndTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getEndTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemTimer.equals
+yawl:YWorkItemTimer_equals_3 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemTimer.hashCode
+yawl:YWorkItemTimer_hashCode_4 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemTimer.handleTimerExpiry
+yawl:YWorkItemTimer_handleTimerExpiry_5 a yawl:Method ;
+    rdfs:label "handleTimerExpiry" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleTimerExpiry()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemTimer.enableAnnouncements
+yawl:YWorkItemTimer_enableAnnouncements_6 a yawl:Method ;
+    rdfs:label "enableAnnouncements" ;
+    yawl:returnType "void" ;
+    yawl:signature "void enableAnnouncements(boolean announce)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemTimer.announcementsEnabled
+yawl:YWorkItemTimer_announcementsEnabled_7 a yawl:Method ;
+    rdfs:label "announcementsEnabled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean announcementsEnabled()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemTimer.cancel
+yawl:YWorkItemTimer_cancel_8 a yawl:Method ;
+    rdfs:label "cancel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemTimer.setExpiredState
+yawl:YWorkItemTimer_setExpiredState_9 a yawl:Method ;
+    rdfs:label "setExpiredState" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setExpiredState()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorkItemTimer.getAnnouncer
+yawl:YWorkItemTimer_getAnnouncer_10 a yawl:Method ;
+    rdfs:label "getAnnouncer" ;
+    yawl:returnType "YAnnouncer" ;
+    yawl:signature "YAnnouncer getAnnouncer()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YWorkItemTimer__owner a yawl:Field ;
+    rdfs:label "_owner" .
+
+yawl:YWorkItemTimer__endTime a yawl:Field ;
+    rdfs:label "_endTime" .
+
+yawl:YWorkItemTimer__state a yawl:Field ;
+    rdfs:label "_state" .
+
+yawl:YWorkItemTimer__announceEvents a yawl:Field ;
+    rdfs:label "_announceEvents" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_stateless_elements_predicate a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.stateless.elements.predicate" .
+
+

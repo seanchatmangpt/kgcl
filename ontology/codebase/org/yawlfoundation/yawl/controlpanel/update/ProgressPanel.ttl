@@ -1,0 +1,128 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.update.ProgressPanel
+yawl:ProgressPanel a yawl:Class ;
+    rdfs:label "ProgressPanel" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_update ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/update/ProgressPanel.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 27/08/2014""" ;
+    yawl:extends yawl:JPanel ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ProgressPanel_setText_1 ;
+    yawl:hasMethod yawl:ProgressPanel_setIndeterminate_2 ;
+    yawl:hasMethod yawl:ProgressPanel_update_3 ;
+    yawl:hasMethod yawl:ProgressPanel_setDownloadSize_4 ;
+    yawl:hasMethod yawl:ProgressPanel_build_5 ;
+    yawl:hasMethod yawl:ProgressPanel_createBar_6 ;
+    yawl:hasMethod yawl:ProgressPanel_getProgressString_7 ;
+    yawl:hasMethod yawl:ProgressPanel_getDownloadRatio_8 ;
+    yawl:hasMethod yawl:ProgressPanel_shorten_9 ;
+    yawl:hasMethod yawl:ProgressPanel_getScaledSize_10 ;
+    yawl:hasField yawl:ProgressPanel__prompt ;
+    yawl:hasField yawl:ProgressPanel__bar ;
+    yawl:hasField yawl:ProgressPanel__downloadSize ;
+    yawl:hasField yawl:ProgressPanel__downloadSizeString ;
+    .
+
+
+# Method: ProgressPanel.setText
+yawl:ProgressPanel_setText_1 a yawl:Method ;
+    rdfs:label "setText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setText(String text)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProgressPanel.setIndeterminate
+yawl:ProgressPanel_setIndeterminate_2 a yawl:Method ;
+    rdfs:label "setIndeterminate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setIndeterminate(boolean indeterminate)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProgressPanel.update
+yawl:ProgressPanel_update_3 a yawl:Method ;
+    rdfs:label "update" ;
+    yawl:returnType "void" ;
+    yawl:signature "void update(int progress)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProgressPanel.setDownloadSize
+yawl:ProgressPanel_setDownloadSize_4 a yawl:Method ;
+    rdfs:label "setDownloadSize" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDownloadSize(long size)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProgressPanel.build
+yawl:ProgressPanel_build_5 a yawl:Method ;
+    rdfs:label "build" ;
+    yawl:returnType "void" ;
+    yawl:signature "void build()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ProgressPanel.createBar
+yawl:ProgressPanel_createBar_6 a yawl:Method ;
+    rdfs:label "createBar" ;
+    yawl:returnType "JProgressBar" ;
+    yawl:signature "JProgressBar createBar()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ProgressPanel.getProgressString
+yawl:ProgressPanel_getProgressString_7 a yawl:Method ;
+    rdfs:label "getProgressString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getProgressString(int progress)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ProgressPanel.getDownloadRatio
+yawl:ProgressPanel_getDownloadRatio_8 a yawl:Method ;
+    rdfs:label "getDownloadRatio" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDownloadRatio(int progress)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ProgressPanel.shorten
+yawl:ProgressPanel_shorten_9 a yawl:Method ;
+    rdfs:label "shorten" ;
+    yawl:returnType "String" ;
+    yawl:signature "String shorten(long size)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ProgressPanel.getScaledSize
+yawl:ProgressPanel_getScaledSize_10 a yawl:Method ;
+    rdfs:label "getScaledSize" ;
+    yawl:returnType "BigDecimal" ;
+    yawl:signature "BigDecimal getScaledSize(double size, int scale)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:ProgressPanel__prompt a yawl:Field ;
+    rdfs:label "_prompt" .
+
+yawl:ProgressPanel__bar a yawl:Field ;
+    rdfs:label "_bar" .
+
+yawl:ProgressPanel__downloadSize a yawl:Field ;
+    rdfs:label "_downloadSize" .
+
+yawl:ProgressPanel__downloadSizeString a yawl:Field ;
+    rdfs:label "_downloadSizeString" .
+
+
+

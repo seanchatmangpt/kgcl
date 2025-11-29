@@ -1,0 +1,25 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.cost.evaluate
+yawl:org_yawlfoundation_yawl_cost_evaluate a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.cost.evaluate" .
+# Class: org.yawlfoundation.yawl.cost.evaluate.CostPredicateParseException
+yawl:CostPredicateParseException a yawl:Class ;
+    rdfs:label "CostPredicateParseException" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_cost_evaluate ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/cost/evaluate/CostPredicateParseException.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 3/12/12""" ;
+    yawl:extends yawl:Exception ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+
+

@@ -1,0 +1,94 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.PageFilter
+yawl:PageFilter a yawl:Class ;
+    rdfs:label "PageFilter" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/PageFilter.java"^^xsd:string ;
+    rdfs:comment """This filter prevents users from accessing unauthorised (admin) pages by directly typing the admin page's url into the address bar of a browser.""" ;
+    yawl:implements yawl:Filter ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:PageFilter_init_1 ;
+    yawl:hasMethod yawl:PageFilter_destroy_2 ;
+    yawl:hasMethod yawl:PageFilter_doFilter_3 ;
+    yawl:hasMethod yawl:PageFilter_isAuthorised_4 ;
+    yawl:hasMethod yawl:PageFilter_isAdminSession_5 ;
+    yawl:hasMethod yawl:PageFilter_isPrivilegedSession_6 ;
+    yawl:hasMethod yawl:PageFilter_getSessionBean_7 ;
+    yawl:hasMethod yawl:PageFilter_isAdminPage_8 ;
+    .
+
+
+# Method: PageFilter.init
+yawl:PageFilter_init_1 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init(FilterConfig filterConfig)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PageFilter.destroy
+yawl:PageFilter_destroy_2 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PageFilter.doFilter
+yawl:PageFilter_doFilter_3 a yawl:Method ;
+    rdfs:label "doFilter" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PageFilter.isAuthorised
+yawl:PageFilter_isAuthorised_4 a yawl:Method ;
+    rdfs:label "isAuthorised" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAuthorised(HttpServletRequest request)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PageFilter.isAdminSession
+yawl:PageFilter_isAdminSession_5 a yawl:Method ;
+    rdfs:label "isAdminSession" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAdminSession(HttpServletRequest request)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PageFilter.isPrivilegedSession
+yawl:PageFilter_isPrivilegedSession_6 a yawl:Method ;
+    rdfs:label "isPrivilegedSession" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isPrivilegedSession(HttpServletRequest request)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PageFilter.getSessionBean
+yawl:PageFilter_getSessionBean_7 a yawl:Method ;
+    rdfs:label "getSessionBean" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getSessionBean(HttpServletRequest request)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: PageFilter.isAdminPage
+yawl:PageFilter_isAdminPage_8 a yawl:Method ;
+    rdfs:label "isAdminPage" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAdminPage(HttpServletRequest request)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+
+

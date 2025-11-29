@@ -1,0 +1,729 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.resource.Participant
+yawl:Participant a yawl:Class ;
+    rdfs:label "Participant" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_resource ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/resource/Participant.java"^^xsd:string ;
+    rdfs:comment """Represents a single participant (i.e. human) resource. Also manages the participant's work queues. @author Michael Adams v0.1, 03/08/2007""" ;
+    yawl:extends yawl:AbstractResource ;
+    yawl:implements yawl:Cloneable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Participant_getResourceManager_1 ;
+    yawl:hasMethod yawl:Participant_clone_2 ;
+    yawl:hasMethod yawl:Participant_setValues_3 ;
+    yawl:hasMethod yawl:Participant_save_4 ;
+    yawl:hasMethod yawl:Participant_setPersisting_5 ;
+    yawl:hasMethod yawl:Participant_isPersisting_6 ;
+    yawl:hasMethod yawl:Participant_setID_7 ;
+    yawl:hasMethod yawl:Participant_getName_8 ;
+    yawl:hasMethod yawl:Participant_getFirstName_9 ;
+    yawl:hasMethod yawl:Participant_setFirstName_10 ;
+    yawl:hasMethod yawl:Participant_getLastName_11 ;
+    yawl:hasMethod yawl:Participant_setLastName_12 ;
+    yawl:hasMethod yawl:Participant_getFullName_13 ;
+    yawl:hasMethod yawl:Participant_getEmail_14 ;
+    yawl:hasMethod yawl:Participant_setEmail_15 ;
+    yawl:hasMethod yawl:Participant_isEmailOnAllocation_16 ;
+    yawl:hasMethod yawl:Participant_setEmailOnAllocation_17 ;
+    yawl:hasMethod yawl:Participant_isEmailOnOffer_18 ;
+    yawl:hasMethod yawl:Participant_setEmailOnOffer_19 ;
+    yawl:hasMethod yawl:Participant_getUserID_20 ;
+    yawl:hasMethod yawl:Participant_setUserID_21 ;
+    yawl:hasMethod yawl:Participant_getPassword_22 ;
+    yawl:hasMethod yawl:Participant_setPassword_23 ;
+    yawl:hasMethod yawl:Participant_setPassword_24 ;
+    yawl:hasMethod yawl:Participant_isValidPassword_25 ;
+    yawl:hasMethod yawl:Participant_isAdministrator_26 ;
+    yawl:hasMethod yawl:Participant_setAdministrator_27 ;
+    yawl:hasMethod yawl:Participant_setUserPrivileges_28 ;
+    yawl:hasMethod yawl:Participant_getUserPrivileges_29 ;
+    yawl:hasMethod yawl:Participant_getRoles_30 ;
+    yawl:hasMethod yawl:Participant_setRoles_31 ;
+    yawl:hasMethod yawl:Participant_addRole_32 ;
+    yawl:hasMethod yawl:Participant_addRole_33 ;
+    yawl:hasMethod yawl:Participant_mergeRoles_34 ;
+    yawl:hasMethod yawl:Participant_removeRole_35 ;
+    yawl:hasMethod yawl:Participant_removeRole_36 ;
+    yawl:hasMethod yawl:Participant_removeRoles_37 ;
+    yawl:hasMethod yawl:Participant_hasRole_38 ;
+    yawl:hasMethod yawl:Participant_getCapabilities_39 ;
+    yawl:hasMethod yawl:Participant_setCapabilities_40 ;
+    yawl:hasMethod yawl:Participant_addCapability_41 ;
+    yawl:hasMethod yawl:Participant_addCapability_42 ;
+    yawl:hasMethod yawl:Participant_mergeCapabilities_43 ;
+    yawl:hasMethod yawl:Participant_removeCapability_44 ;
+    yawl:hasMethod yawl:Participant_removeCapability_45 ;
+    yawl:hasMethod yawl:Participant_removeCapabilities_46 ;
+    yawl:hasMethod yawl:Participant_hasCapability_47 ;
+    yawl:hasMethod yawl:Participant_getPositions_48 ;
+    yawl:hasMethod yawl:Participant_setPositions_49 ;
+    yawl:hasMethod yawl:Participant_addPosition_50 ;
+    yawl:hasMethod yawl:Participant_addPosition_51 ;
+    yawl:hasMethod yawl:Participant_removePosition_52 ;
+    yawl:hasMethod yawl:Participant_removePosition_53 ;
+    yawl:hasMethod yawl:Participant_removePositions_54 ;
+    yawl:hasMethod yawl:Participant_mergePositions_55 ;
+    yawl:hasMethod yawl:Participant_hasPosition_56 ;
+    yawl:hasMethod yawl:Participant_removeAttributeReferences_57 ;
+    yawl:hasMethod yawl:Participant_getAttributeReferences_58 ;
+    yawl:hasMethod yawl:Participant_setAttributeReferences_59 ;
+    yawl:hasMethod yawl:Participant_isOrgGroupMember_60 ;
+    yawl:hasMethod yawl:Participant_getWorkQueues_61 ;
+    yawl:hasMethod yawl:Participant_setWorkQueues_62 ;
+    yawl:hasMethod yawl:Participant_getWorkQueues_63 ;
+    yawl:hasMethod yawl:Participant_createQueueSet_64 ;
+    yawl:hasMethod yawl:Participant_attachWorkQueue_65 ;
+    yawl:hasMethod yawl:Participant_toXML_66 ;
+    yawl:hasMethod yawl:Participant_fromXML_67 ;
+    yawl:hasMethod yawl:Participant_reconstitute_68 ;
+    yawl:hasMethod yawl:Participant_set_emailOnAllocation_69 ;
+    yawl:hasMethod yawl:Participant_get_emailOnAllocation_70 ;
+    yawl:hasMethod yawl:Participant_set_emailOnOffer_71 ;
+    yawl:hasMethod yawl:Participant_get_emailOnOffer_72 ;
+    yawl:hasField yawl:Participant__lastname ;
+    yawl:hasField yawl:Participant__firstname ;
+    yawl:hasField yawl:Participant__email ;
+    yawl:hasField yawl:Participant__userID ;
+    yawl:hasField yawl:Participant__password ;
+    yawl:hasField yawl:Participant__isAdministrator ;
+    yawl:hasField yawl:Participant__positions ;
+    yawl:hasField yawl:Participant__roles ;
+    yawl:hasField yawl:Participant__capabilities ;
+    yawl:hasField yawl:Participant__privileges ;
+    yawl:hasField yawl:Participant__emailOnAllocation ;
+    yawl:hasField yawl:Participant__emailOnOffer ;
+    yawl:hasField yawl:Participant__qSet ;
+    yawl:hasField yawl:Participant__persisting ;
+    .
+
+
+# Method: Participant.getResourceManager
+yawl:Participant_getResourceManager_1 a yawl:Method ;
+    rdfs:label "getResourceManager" ;
+    yawl:returnType "ResourceManager" ;
+    yawl:signature "ResourceManager getResourceManager()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Participant.clone
+yawl:Participant_clone_2 a yawl:Method ;
+    rdfs:label "clone" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant clone()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.setValues
+yawl:Participant_setValues_3 a yawl:Method ;
+    rdfs:label "setValues" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setValues(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.save
+yawl:Participant_save_4 a yawl:Method ;
+    rdfs:label "save" ;
+    yawl:returnType "void" ;
+    yawl:signature "void save()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.setPersisting
+yawl:Participant_setPersisting_5 a yawl:Method ;
+    rdfs:label "setPersisting" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPersisting(boolean persisting)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.isPersisting
+yawl:Participant_isPersisting_6 a yawl:Method ;
+    rdfs:label "isPersisting" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isPersisting()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.setID
+yawl:Participant_setID_7 a yawl:Method ;
+    rdfs:label "setID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setID(String id)" ;
+    rdfs:comment """GETTERS & SETTERS""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.getName
+yawl:Participant_getName_8 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.getFirstName
+yawl:Participant_getFirstName_9 a yawl:Method ;
+    rdfs:label "getFirstName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFirstName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.setFirstName
+yawl:Participant_setFirstName_10 a yawl:Method ;
+    rdfs:label "setFirstName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setFirstName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.getLastName
+yawl:Participant_getLastName_11 a yawl:Method ;
+    rdfs:label "getLastName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLastName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.setLastName
+yawl:Participant_setLastName_12 a yawl:Method ;
+    rdfs:label "setLastName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLastName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.getFullName
+yawl:Participant_getFullName_13 a yawl:Method ;
+    rdfs:label "getFullName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFullName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.getEmail
+yawl:Participant_getEmail_14 a yawl:Method ;
+    rdfs:label "getEmail" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEmail()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.setEmail
+yawl:Participant_setEmail_15 a yawl:Method ;
+    rdfs:label "setEmail" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEmail(String email)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.isEmailOnAllocation
+yawl:Participant_isEmailOnAllocation_16 a yawl:Method ;
+    rdfs:label "isEmailOnAllocation" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEmailOnAllocation()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.setEmailOnAllocation
+yawl:Participant_setEmailOnAllocation_17 a yawl:Method ;
+    rdfs:label "setEmailOnAllocation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEmailOnAllocation(boolean b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.isEmailOnOffer
+yawl:Participant_isEmailOnOffer_18 a yawl:Method ;
+    rdfs:label "isEmailOnOffer" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEmailOnOffer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.setEmailOnOffer
+yawl:Participant_setEmailOnOffer_19 a yawl:Method ;
+    rdfs:label "setEmailOnOffer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEmailOnOffer(boolean b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.getUserID
+yawl:Participant_getUserID_20 a yawl:Method ;
+    rdfs:label "getUserID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUserID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.setUserID
+yawl:Participant_setUserID_21 a yawl:Method ;
+    rdfs:label "setUserID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUserID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.getPassword
+yawl:Participant_getPassword_22 a yawl:Method ;
+    rdfs:label "getPassword" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.setPassword
+yawl:Participant_setPassword_23 a yawl:Method ;
+    rdfs:label "setPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPassword(String pw)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.setPassword
+yawl:Participant_setPassword_24 a yawl:Method ;
+    rdfs:label "setPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPassword(String pw, boolean encrypt)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.isValidPassword
+yawl:Participant_isValidPassword_25 a yawl:Method ;
+    rdfs:label "isValidPassword" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isValidPassword(String password)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.isAdministrator
+yawl:Participant_isAdministrator_26 a yawl:Method ;
+    rdfs:label "isAdministrator" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAdministrator()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.setAdministrator
+yawl:Participant_setAdministrator_27 a yawl:Method ;
+    rdfs:label "setAdministrator" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAdministrator(boolean canAdministrate)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.setUserPrivileges
+yawl:Participant_setUserPrivileges_28 a yawl:Method ;
+    rdfs:label "setUserPrivileges" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUserPrivileges(UserPrivileges up)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.getUserPrivileges
+yawl:Participant_getUserPrivileges_29 a yawl:Method ;
+    rdfs:label "getUserPrivileges" ;
+    yawl:returnType "UserPrivileges" ;
+    yawl:signature "UserPrivileges getUserPrivileges()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.getRoles
+yawl:Participant_getRoles_30 a yawl:Method ;
+    rdfs:label "getRoles" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getRoles()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.setRoles
+yawl:Participant_setRoles_31 a yawl:Method ;
+    rdfs:label "setRoles" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRoles(Set roleSet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.addRole
+yawl:Participant_addRole_32 a yawl:Method ;
+    rdfs:label "addRole" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addRole(Role role)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.addRole
+yawl:Participant_addRole_33 a yawl:Method ;
+    rdfs:label "addRole" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addRole(String rid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.mergeRoles
+yawl:Participant_mergeRoles_34 a yawl:Method ;
+    rdfs:label "mergeRoles" ;
+    yawl:returnType "void" ;
+    yawl:signature "void mergeRoles(Set roleSet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.removeRole
+yawl:Participant_removeRole_35 a yawl:Method ;
+    rdfs:label "removeRole" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeRole(Role role)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.removeRole
+yawl:Participant_removeRole_36 a yawl:Method ;
+    rdfs:label "removeRole" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeRole(String rid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.removeRoles
+yawl:Participant_removeRoles_37 a yawl:Method ;
+    rdfs:label "removeRoles" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeRoles()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.hasRole
+yawl:Participant_hasRole_38 a yawl:Method ;
+    rdfs:label "hasRole" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasRole(Role role)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.getCapabilities
+yawl:Participant_getCapabilities_39 a yawl:Method ;
+    rdfs:label "getCapabilities" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getCapabilities()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.setCapabilities
+yawl:Participant_setCapabilities_40 a yawl:Method ;
+    rdfs:label "setCapabilities" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCapabilities(Set capSet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.addCapability
+yawl:Participant_addCapability_41 a yawl:Method ;
+    rdfs:label "addCapability" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addCapability(Capability cap)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.addCapability
+yawl:Participant_addCapability_42 a yawl:Method ;
+    rdfs:label "addCapability" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addCapability(String cid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.mergeCapabilities
+yawl:Participant_mergeCapabilities_43 a yawl:Method ;
+    rdfs:label "mergeCapabilities" ;
+    yawl:returnType "void" ;
+    yawl:signature "void mergeCapabilities(Set capSet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.removeCapability
+yawl:Participant_removeCapability_44 a yawl:Method ;
+    rdfs:label "removeCapability" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeCapability(Capability cap)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.removeCapability
+yawl:Participant_removeCapability_45 a yawl:Method ;
+    rdfs:label "removeCapability" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeCapability(String cid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.removeCapabilities
+yawl:Participant_removeCapabilities_46 a yawl:Method ;
+    rdfs:label "removeCapabilities" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeCapabilities()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.hasCapability
+yawl:Participant_hasCapability_47 a yawl:Method ;
+    rdfs:label "hasCapability" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasCapability(Capability cap)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.getPositions
+yawl:Participant_getPositions_48 a yawl:Method ;
+    rdfs:label "getPositions" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getPositions()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.setPositions
+yawl:Participant_setPositions_49 a yawl:Method ;
+    rdfs:label "setPositions" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPositions(Set posSet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.addPosition
+yawl:Participant_addPosition_50 a yawl:Method ;
+    rdfs:label "addPosition" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addPosition(Position pos)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.addPosition
+yawl:Participant_addPosition_51 a yawl:Method ;
+    rdfs:label "addPosition" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addPosition(String pid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.removePosition
+yawl:Participant_removePosition_52 a yawl:Method ;
+    rdfs:label "removePosition" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removePosition(Position pos)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.removePosition
+yawl:Participant_removePosition_53 a yawl:Method ;
+    rdfs:label "removePosition" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removePosition(String pid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.removePositions
+yawl:Participant_removePositions_54 a yawl:Method ;
+    rdfs:label "removePositions" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removePositions()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.mergePositions
+yawl:Participant_mergePositions_55 a yawl:Method ;
+    rdfs:label "mergePositions" ;
+    yawl:returnType "void" ;
+    yawl:signature "void mergePositions(Set posSet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.hasPosition
+yawl:Participant_hasPosition_56 a yawl:Method ;
+    rdfs:label "hasPosition" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasPosition(Position pos)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.removeAttributeReferences
+yawl:Participant_removeAttributeReferences_57 a yawl:Method ;
+    rdfs:label "removeAttributeReferences" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeAttributeReferences()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.getAttributeReferences
+yawl:Participant_getAttributeReferences_58 a yawl:Method ;
+    rdfs:label "getAttributeReferences" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getAttributeReferences()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.setAttributeReferences
+yawl:Participant_setAttributeReferences_59 a yawl:Method ;
+    rdfs:label "setAttributeReferences" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAttributeReferences(Set attributes)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.isOrgGroupMember
+yawl:Participant_isOrgGroupMember_60 a yawl:Method ;
+    rdfs:label "isOrgGroupMember" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isOrgGroupMember(OrgGroup og)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.getWorkQueues
+yawl:Participant_getWorkQueues_61 a yawl:Method ;
+    rdfs:label "getWorkQueues" ;
+    yawl:returnType "QueueSet" ;
+    yawl:signature "QueueSet getWorkQueues()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.setWorkQueues
+yawl:Participant_setWorkQueues_62 a yawl:Method ;
+    rdfs:label "setWorkQueues" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setWorkQueues(QueueSet q)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.getWorkQueues
+yawl:Participant_getWorkQueues_63 a yawl:Method ;
+    rdfs:label "getWorkQueues" ;
+    yawl:returnType "QueueSet" ;
+    yawl:signature "QueueSet getWorkQueues(boolean init)" ;
+    rdfs:comment """returns an initialised qSet if init is true""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.createQueueSet
+yawl:Participant_createQueueSet_64 a yawl:Method ;
+    rdfs:label "createQueueSet" ;
+    yawl:returnType "QueueSet" ;
+    yawl:signature "QueueSet createQueueSet(boolean persisting)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.attachWorkQueue
+yawl:Participant_attachWorkQueue_65 a yawl:Method ;
+    rdfs:label "attachWorkQueue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void attachWorkQueue(WorkQueue q, boolean persisting)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.toXML
+yawl:Participant_toXML_66 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.fromXML
+yawl:Participant_fromXML_67 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.reconstitute
+yawl:Participant_reconstitute_68 a yawl:Method ;
+    rdfs:label "reconstitute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reconstitute(Element e)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Participant.set_emailOnAllocation
+yawl:Participant_set_emailOnAllocation_69 a yawl:Method ;
+    rdfs:label "set_emailOnAllocation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_emailOnAllocation(Boolean b)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Participant.get_emailOnAllocation
+yawl:Participant_get_emailOnAllocation_70 a yawl:Method ;
+    rdfs:label "get_emailOnAllocation" ;
+    yawl:returnType "Boolean" ;
+    yawl:signature "Boolean get_emailOnAllocation()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Participant.set_emailOnOffer
+yawl:Participant_set_emailOnOffer_71 a yawl:Method ;
+    rdfs:label "set_emailOnOffer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_emailOnOffer(Boolean b)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Participant.get_emailOnOffer
+yawl:Participant_get_emailOnOffer_72 a yawl:Method ;
+    rdfs:label "get_emailOnOffer" ;
+    yawl:returnType "Boolean" ;
+    yawl:signature "Boolean get_emailOnOffer()" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:Participant__lastname a yawl:Field ;
+    rdfs:label "_lastname" .
+
+yawl:Participant__firstname a yawl:Field ;
+    rdfs:label "_firstname" .
+
+yawl:Participant__email a yawl:Field ;
+    rdfs:label "_email" .
+
+yawl:Participant__userID a yawl:Field ;
+    rdfs:label "_userID" .
+
+yawl:Participant__password a yawl:Field ;
+    rdfs:label "_password" .
+
+yawl:Participant__isAdministrator a yawl:Field ;
+    rdfs:label "_isAdministrator" .
+
+yawl:Participant__positions a yawl:Field ;
+    rdfs:label "_positions" .
+
+yawl:Participant__roles a yawl:Field ;
+    rdfs:label "_roles" .
+
+yawl:Participant__capabilities a yawl:Field ;
+    rdfs:label "_capabilities" .
+
+yawl:Participant__privileges a yawl:Field ;
+    rdfs:label "_privileges" .
+
+yawl:Participant__emailOnAllocation a yawl:Field ;
+    rdfs:label "_emailOnAllocation" .
+
+yawl:Participant__emailOnOffer a yawl:Field ;
+    rdfs:label "_emailOnOffer" .
+
+yawl:Participant__qSet a yawl:Field ;
+    rdfs:label "_qSet" .
+
+yawl:Participant__persisting a yawl:Field ;
+    rdfs:label "_persisting" .
+
+
+

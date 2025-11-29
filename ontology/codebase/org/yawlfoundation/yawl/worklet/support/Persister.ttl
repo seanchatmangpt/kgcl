@@ -1,0 +1,121 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.support.Persister
+yawl:Persister a yawl:Class ;
+    rdfs:label "Persister" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_support ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/support/Persister.java"^^xsd:string ;
+    rdfs:comment """The Persister class provides persistence support for the Worklet Service. @author Michael Adams""" ;
+    yawl:extends yawl:HibernateEngine ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Persister_getInstance_1 ;
+    yawl:hasMethod yawl:Persister_insert_2 ;
+    yawl:hasMethod yawl:Persister_update_3 ;
+    yawl:hasMethod yawl:Persister_delete_4 ;
+    yawl:hasMethod yawl:Persister_insert_5 ;
+    yawl:hasMethod yawl:Persister_update_6 ;
+    yawl:hasMethod yawl:Persister_delete_7 ;
+    yawl:hasMethod yawl:Persister_persist_8 ;
+    yawl:hasMethod yawl:Persister_persist_9 ;
+    yawl:hasField yawl:Persister_classes ;
+    yawl:hasField yawl:Persister_INSTANCE ;
+    .
+
+
+# Method: Persister.getInstance
+yawl:Persister_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "Persister" ;
+    yawl:signature "Persister getInstance()" ;
+    rdfs:comment """returns the current Persister instance""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Persister.insert
+yawl:Persister_insert_2 a yawl:Method ;
+    rdfs:label "insert" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean insert(Object o)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Persister.update
+yawl:Persister_update_3 a yawl:Method ;
+    rdfs:label "update" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean update(Object o)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Persister.delete
+yawl:Persister_delete_4 a yawl:Method ;
+    rdfs:label "delete" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean delete(Object o)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Persister.insert
+yawl:Persister_insert_5 a yawl:Method ;
+    rdfs:label "insert" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean insert(Object o, boolean commit)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Persister.update
+yawl:Persister_update_6 a yawl:Method ;
+    rdfs:label "update" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean update(Object o, boolean commit)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Persister.delete
+yawl:Persister_delete_7 a yawl:Method ;
+    rdfs:label "delete" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean delete(Object o, boolean commit)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Persister.persist
+yawl:Persister_persist_8 a yawl:Method ;
+    rdfs:label "persist" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean persist(Object o, int action)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Persister.persist
+yawl:Persister_persist_9 a yawl:Method ;
+    rdfs:label "persist" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean persist(Object o, int action, boolean commit)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:Persister_classes a yawl:Field ;
+    rdfs:label "classes" .
+
+yawl:Persister_INSTANCE a yawl:Field ;
+    rdfs:label "INSTANCE" .
+
+
+

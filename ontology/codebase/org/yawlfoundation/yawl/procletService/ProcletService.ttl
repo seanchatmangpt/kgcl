@@ -1,0 +1,193 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.procletService
+yawl:org_yawlfoundation_yawl_procletService a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.procletService" .
+# Class: org.yawlfoundation.yawl.procletService.ProcletService
+yawl:ProcletService a yawl:Class ;
+    rdfs:label "ProcletService" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/ProcletService.java"^^xsd:string ;
+    yawl:extends yawl:InterfaceBWebsideController ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ProcletService_getInstance_1 ;
+    yawl:hasMethod yawl:ProcletService_destroy_2 ;
+    yawl:hasMethod yawl:ProcletService_handleEnabledWorkItemEvent_3 ;
+    yawl:hasMethod yawl:ProcletService_handleCancelledWorkItemEvent_4 ;
+    yawl:hasMethod yawl:ProcletService_handleCancelledCaseEvent_5 ;
+    yawl:hasMethod yawl:ProcletService_handleCompleteCaseEvent_6 ;
+    yawl:hasMethod yawl:ProcletService_launchCase_7 ;
+    yawl:hasMethod yawl:ProcletService_completeCase_8 ;
+    yawl:hasMethod yawl:ProcletService_connected_9 ;
+    yawl:hasMethod yawl:ProcletService_getOutputData_10 ;
+    yawl:hasMethod yawl:ProcletService_changeTaskID_11 ;
+    yawl:hasMethod yawl:ProcletService_changeCaseID_12 ;
+    yawl:hasMethod yawl:ProcletService_getSpecURIsForRunningCases_13 ;
+    yawl:hasMethod yawl:ProcletService_getRunningCaseIDs_14 ;
+    yawl:hasMethod yawl:ProcletService_getAllRunningCases_15 ;
+    yawl:hasMethod yawl:ProcletService_connect_16 ;
+    yawl:hasMethod yawl:ProcletService_main_17 ;
+    yawl:hasField yawl:ProcletService_INSTANCE ;
+    yawl:hasField yawl:ProcletService_myLog ;
+    yawl:hasField yawl:ProcletService__handle ;
+    .
+
+
+# Method: ProcletService.getInstance
+yawl:ProcletService_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "ProcletService" ;
+    yawl:signature "ProcletService getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ProcletService.destroy
+yawl:ProcletService_destroy_2 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletService.handleEnabledWorkItemEvent
+yawl:ProcletService_handleEnabledWorkItemEvent_3 a yawl:Method ;
+    rdfs:label "handleEnabledWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleEnabledWorkItemEvent(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletService.handleCancelledWorkItemEvent
+yawl:ProcletService_handleCancelledWorkItemEvent_4 a yawl:Method ;
+    rdfs:label "handleCancelledWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCancelledWorkItemEvent(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletService.handleCancelledCaseEvent
+yawl:ProcletService_handleCancelledCaseEvent_5 a yawl:Method ;
+    rdfs:label "handleCancelledCaseEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCancelledCaseEvent(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletService.handleCompleteCaseEvent
+yawl:ProcletService_handleCompleteCaseEvent_6 a yawl:Method ;
+    rdfs:label "handleCompleteCaseEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCompleteCaseEvent(String caseID, String casedata)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletService.launchCase
+yawl:ProcletService_launchCase_7 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(String classID, String data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletService.completeCase
+yawl:ProcletService_completeCase_8 a yawl:Method ;
+    rdfs:label "completeCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void completeCase(String caseID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ProcletService.connected
+yawl:ProcletService_connected_9 a yawl:Method ;
+    rdfs:label "connected" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean connected()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ProcletService.getOutputData
+yawl:ProcletService_getOutputData_10 a yawl:Method ;
+    rdfs:label "getOutputData" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getOutputData(String taskName, String data)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ProcletService.changeTaskID
+yawl:ProcletService_changeTaskID_11 a yawl:Method ;
+    rdfs:label "changeTaskID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String changeTaskID(String taskID)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ProcletService.changeCaseID
+yawl:ProcletService_changeCaseID_12 a yawl:Method ;
+    rdfs:label "changeCaseID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String changeCaseID(String caseID)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ProcletService.getSpecURIsForRunningCases
+yawl:ProcletService_getSpecURIsForRunningCases_13 a yawl:Method ;
+    rdfs:label "getSpecURIsForRunningCases" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getSpecURIsForRunningCases()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletService.getRunningCaseIDs
+yawl:ProcletService_getRunningCaseIDs_14 a yawl:Method ;
+    rdfs:label "getRunningCaseIDs" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getRunningCaseIDs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletService.getAllRunningCases
+yawl:ProcletService_getAllRunningCases_15 a yawl:Method ;
+    rdfs:label "getAllRunningCases" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getAllRunningCases()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ProcletService.connect
+yawl:ProcletService_connect_16 a yawl:Method ;
+    rdfs:label "connect" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean connect()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ProcletService.main
+yawl:ProcletService_main_17 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String args)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:ProcletService_INSTANCE a yawl:Field ;
+    rdfs:label "INSTANCE" .
+
+yawl:ProcletService_myLog a yawl:Field ;
+    rdfs:label "myLog" .
+
+yawl:ProcletService__handle a yawl:Field ;
+    rdfs:label "_handle" .
+
+
+

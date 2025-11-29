@@ -1,0 +1,51 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.stateless.listener.event
+yawl:org_yawlfoundation_yawl_stateless_listener_event a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.stateless.listener.event" .
+# Class: org.yawlfoundation.yawl.stateless.listener.event.YTimerEvent
+yawl:YTimerEvent a yawl:Class ;
+    rdfs:label "YTimerEvent" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_listener_event ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/listener/event/YTimerEvent.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 24/8/20""" ;
+    yawl:extends yawl:YEvent ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YTimerEvent_getItem_1 ;
+    yawl:hasMethod yawl:YTimerEvent_getExpiryTimeString_2 ;
+    yawl:hasField yawl:YTimerEvent__item ;
+    yawl:hasField yawl:YTimerEvent_expiryTimeString ;
+    .
+
+
+# Method: YTimerEvent.getItem
+yawl:YTimerEvent_getItem_1 a yawl:Method ;
+    rdfs:label "getItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem getItem()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerEvent.getExpiryTimeString
+yawl:YTimerEvent_getExpiryTimeString_2 a yawl:Method ;
+    rdfs:label "getExpiryTimeString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getExpiryTimeString()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YTimerEvent__item a yawl:Field ;
+    rdfs:label "_item" .
+
+yawl:YTimerEvent_expiryTimeString a yawl:Field ;
+    rdfs:label "expiryTimeString" .
+
+
+

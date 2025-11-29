@@ -1,0 +1,35 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.BlankButtonGroup
+yawl:BlankButtonGroup a yawl:Class ;
+    rdfs:label "BlankButtonGroup" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/BlankButtonGroup.java"^^xsd:string ;
+    yawl:extends yawl:ButtonGroup ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:BlankButtonGroup_setSelected_1 ;
+    yawl:hasField yawl:BlankButtonGroup_blank ;
+    .
+
+
+# Method: BlankButtonGroup.setSelected
+yawl:BlankButtonGroup_setSelected_1 a yawl:Method ;
+    rdfs:label "setSelected" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSelected(ButtonModel m, boolean b)" ;
+    rdfs:comment """Sets the selected value for the <code>ButtonModel</code>. Only one button in the group may be selected at a time. If a button is unselected, then the hidden button 'blank' becomes selected. @param m the <code>ButtonModel</code> @param b <code>true</code> if this button is to be selected, otherwise <code>false</code>""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:BlankButtonGroup_blank a yawl:Field ;
+    rdfs:label "blank" .
+
+
+

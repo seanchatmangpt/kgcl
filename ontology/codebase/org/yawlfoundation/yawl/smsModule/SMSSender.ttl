@@ -1,0 +1,179 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.smsModule.SMSSender
+yawl:SMSSender a yawl:Class ;
+    rdfs:label "SMSSender" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_smsModule ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/smsModule/SMSSender.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 4/03/2005 Time: 11:48:29""" ;
+    yawl:extends yawl:InterfaceBWebsideController ;
+    yawl:implements yawl:Runnable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:SMSSender_handleEnabledWorkItemEvent_1 ;
+    yawl:hasMethod yawl:SMSSender_describeRequiredParams_2 ;
+    yawl:hasMethod yawl:SMSSender_doGet_3 ;
+    yawl:hasMethod yawl:SMSSender_performSMSSend_4 ;
+    yawl:hasMethod yawl:SMSSender_handleCancelledWorkItemEvent_5 ;
+    yawl:hasMethod yawl:SMSSender_main_6 ;
+    yawl:hasMethod yawl:SMSSender_run_7 ;
+    yawl:hasMethod yawl:SMSSender_getReplies_8 ;
+    yawl:hasMethod yawl:SMSSender_parseReplies_9 ;
+    yawl:hasMethod yawl:SMSSender_parseReplyFromService_10 ;
+    yawl:hasMethod yawl:SMSSender_setSMSUsernameAndPassword_11 ;
+    yawl:hasMethod yawl:SMSSender_getCompletedInteractions_12 ;
+    yawl:hasField yawl:SMSSender__outStandingInteractions ;
+    yawl:hasField yawl:SMSSender__running ;
+    yawl:hasField yawl:SMSSender__archivedInteractions ;
+    yawl:hasField yawl:SMSSender__smsUsername ;
+    yawl:hasField yawl:SMSSender__smsPassword ;
+    yawl:hasField yawl:SMSSender__sessionHandle ;
+    yawl:hasField yawl:SMSSender__sendURI ;
+    yawl:hasField yawl:SMSSender__receiveURI ;
+    yawl:hasField yawl:SMSSender_SMS_MESSAGE_PARAMNAME ;
+    yawl:hasField yawl:SMSSender_SMS_PHONENO_PARAMNAME ;
+    yawl:hasField yawl:SMSSender_SMS_REPLYMESSAGE_PARAMNAME ;
+    .
+
+
+# Method: SMSSender.handleEnabledWorkItemEvent
+yawl:SMSSender_handleEnabledWorkItemEvent_1 a yawl:Method ;
+    rdfs:label "handleEnabledWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleEnabledWorkItemEvent(WorkItemRecord enabledWorkItem)" ;
+    rdfs:comment """Checks the work item out of the engine, sends an sms message, and starts the thread that checks for a reply. @param enabledWorkItem""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SMSSender.describeRequiredParams
+yawl:SMSSender_describeRequiredParams_2 a yawl:Method ;
+    rdfs:label "describeRequiredParams" ;
+    yawl:returnType "YParameter" ;
+    yawl:signature "YParameter describeRequiredParams()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SMSSender.doGet
+yawl:SMSSender_doGet_3 a yawl:Method ;
+    rdfs:label "doGet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doGet(HttpServletRequest req, HttpServletResponse resp)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SMSSender.performSMSSend
+yawl:SMSSender_performSMSSend_4 a yawl:Method ;
+    rdfs:label "performSMSSend" ;
+    yawl:returnType "String" ;
+    yawl:signature "String performSMSSend(String message, String toPhone)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SMSSender.handleCancelledWorkItemEvent
+yawl:SMSSender_handleCancelledWorkItemEvent_5 a yawl:Method ;
+    rdfs:label "handleCancelledWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCancelledWorkItemEvent(WorkItemRecord workItemRecord)" ;
+    rdfs:comment """By implementing this method and deploying a web app containing the implementation the YAWL engine will send events to this method notifying your custom YAWL service that an active work item has been cancelled by the engine. @param workItemRecord a \"snapshot\" of the work item cancelled in the engine.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SMSSender.main
+yawl:SMSSender_main_6 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String args)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: SMSSender.run
+yawl:SMSSender_run_7 a yawl:Method ;
+    rdfs:label "run" ;
+    yawl:returnType "void" ;
+    yawl:signature "void run()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SMSSender.getReplies
+yawl:SMSSender_getReplies_8 a yawl:Method ;
+    rdfs:label "getReplies" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getReplies(String smsJobID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SMSSender.parseReplies
+yawl:SMSSender_parseReplies_9 a yawl:Method ;
+    rdfs:label "parseReplies" ;
+    yawl:returnType "List" ;
+    yawl:signature "List parseReplies(String resultFromSMSService)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SMSSender.parseReplyFromService
+yawl:SMSSender_parseReplyFromService_10 a yawl:Method ;
+    rdfs:label "parseReplyFromService" ;
+    yawl:returnType "String" ;
+    yawl:signature "String parseReplyFromService(String replyFromPhone)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: SMSSender.setSMSUsernameAndPassword
+yawl:SMSSender_setSMSUsernameAndPassword_11 a yawl:Method ;
+    rdfs:label "setSMSUsernameAndPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSMSUsernameAndPassword(String username, String password)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SMSSender.getCompletedInteractions
+yawl:SMSSender_getCompletedInteractions_12 a yawl:Method ;
+    rdfs:label "getCompletedInteractions" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getCompletedInteractions()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:SMSSender__outStandingInteractions a yawl:Field ;
+    rdfs:label "_outStandingInteractions" .
+
+yawl:SMSSender__running a yawl:Field ;
+    rdfs:label "_running" .
+
+yawl:SMSSender__archivedInteractions a yawl:Field ;
+    rdfs:label "_archivedInteractions" .
+
+yawl:SMSSender__smsUsername a yawl:Field ;
+    rdfs:label "_smsUsername" .
+
+yawl:SMSSender__smsPassword a yawl:Field ;
+    rdfs:label "_smsPassword" .
+
+yawl:SMSSender__sessionHandle a yawl:Field ;
+    rdfs:label "_sessionHandle" .
+
+yawl:SMSSender__sendURI a yawl:Field ;
+    rdfs:label "_sendURI" .
+
+yawl:SMSSender__receiveURI a yawl:Field ;
+    rdfs:label "_receiveURI" .
+
+yawl:SMSSender_SMS_MESSAGE_PARAMNAME a yawl:Field ;
+    rdfs:label "SMS_MESSAGE_PARAMNAME" .
+
+yawl:SMSSender_SMS_PHONENO_PARAMNAME a yawl:Field ;
+    rdfs:label "SMS_PHONENO_PARAMNAME" .
+
+yawl:SMSSender_SMS_REPLYMESSAGE_PARAMNAME a yawl:Field ;
+    rdfs:label "SMS_REPLYMESSAGE_PARAMNAME" .
+
+
+

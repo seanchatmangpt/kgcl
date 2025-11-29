@@ -1,0 +1,135 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.util.SaxonUtil
+yawl:SaxonUtil a yawl:Class ;
+    rdfs:label "SaxonUtil" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/util/SaxonUtil.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 10/07/2008""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:SaxonUtil_evaluateQuery_1 ;
+    yawl:hasMethod yawl:SaxonUtil_evaluateTreeQuery_2 ;
+    yawl:hasMethod yawl:SaxonUtil_evaluateListQuery_3 ;
+    yawl:hasMethod yawl:SaxonUtil_compileXQuery_4 ;
+    yawl:hasMethod yawl:SaxonUtil_getCompilerMessages_5 ;
+    yawl:hasMethod yawl:SaxonUtil_initEvaluator_6 ;
+    yawl:hasMethod yawl:SaxonUtil_toDOM_7 ;
+    yawl:hasMethod yawl:SaxonUtil_removeHeader_8 ;
+    yawl:hasMethod yawl:SaxonUtil_log_9 ;
+    yawl:hasField yawl:SaxonUtil__processor ;
+    yawl:hasField yawl:SaxonUtil__output ;
+    yawl:hasField yawl:SaxonUtil__compiler ;
+    yawl:hasField yawl:SaxonUtil__domOutputter ;
+    yawl:hasField yawl:SaxonUtil__log ;
+    .
+
+
+# Method: SaxonUtil.evaluateQuery
+yawl:SaxonUtil_evaluateQuery_1 a yawl:Method ;
+    rdfs:label "evaluateQuery" ;
+    yawl:returnType "String" ;
+    yawl:signature "String evaluateQuery(String query, Document dataDoc)" ;
+    rdfs:comment """Evaluates an XQuery against a data document @param query the XQuery to evaluate @param dataDoc a JDOM Document containing the data tree @return an XML String representing the result of the evaluation @throws SaxonApiException if there's a problem with the XQuery or Document""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: SaxonUtil.evaluateTreeQuery
+yawl:SaxonUtil_evaluateTreeQuery_2 a yawl:Method ;
+    rdfs:label "evaluateTreeQuery" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element evaluateTreeQuery(String query, Document dataDoc)" ;
+    rdfs:comment """Evaluates an XQuery against a data document @param query the XQuery to evaluate @param dataDoc a JDOM Document containing the data tree @return a JDOM Element representing the result of the evaluation @throws SaxonApiException if there's a problem with the XQuery or Document""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: SaxonUtil.evaluateListQuery
+yawl:SaxonUtil_evaluateListQuery_3 a yawl:Method ;
+    rdfs:label "evaluateListQuery" ;
+    yawl:returnType "List" ;
+    yawl:signature "List evaluateListQuery(String query, Element dataElem)" ;
+    rdfs:comment """Evaluates an XQuery against a data document @param query the XQuery to evaluate @param dataElem a JDOM Element containing the data tree @return a List containing the Element(s) resulting from the evaluation @throws SaxonApiException if there's a problem with the XQuery or Element""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: SaxonUtil.compileXQuery
+yawl:SaxonUtil_compileXQuery_4 a yawl:Method ;
+    rdfs:label "compileXQuery" ;
+    yawl:returnType "XQueryExecutable" ;
+    yawl:signature "XQueryExecutable compileXQuery(String query)" ;
+    rdfs:comment """Compiles an XQuery so that it can be executed @param query the XQuery to compile @return the executable query @throws SaxonApiException if there's a problem with the XQuery""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: SaxonUtil.getCompilerMessages
+yawl:SaxonUtil_getCompilerMessages_5 a yawl:Method ;
+    rdfs:label "getCompilerMessages" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getCompilerMessages()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: SaxonUtil.initEvaluator
+yawl:SaxonUtil_initEvaluator_6 a yawl:Method ;
+    rdfs:label "initEvaluator" ;
+    yawl:returnType "XQueryEvaluator" ;
+    yawl:signature "XQueryEvaluator initEvaluator(String query, Document dataDoc)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: SaxonUtil.toDOM
+yawl:SaxonUtil_toDOM_7 a yawl:Method ;
+    rdfs:label "toDOM" ;
+    yawl:returnType "org" ;
+    yawl:signature "org toDOM(Document doc)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: SaxonUtil.removeHeader
+yawl:SaxonUtil_removeHeader_8 a yawl:Method ;
+    rdfs:label "removeHeader" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeHeader(String xml)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: SaxonUtil.log
+yawl:SaxonUtil_log_9 a yawl:Method ;
+    rdfs:label "log" ;
+    yawl:returnType "void" ;
+    yawl:signature "void log(String query, Document doc)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:SaxonUtil__processor a yawl:Field ;
+    rdfs:label "_processor" .
+
+yawl:SaxonUtil__output a yawl:Field ;
+    rdfs:label "_output" .
+
+yawl:SaxonUtil__compiler a yawl:Field ;
+    rdfs:label "_compiler" .
+
+yawl:SaxonUtil__domOutputter a yawl:Field ;
+    rdfs:label "_domOutputter" .
+
+yawl:SaxonUtil__log a yawl:Field ;
+    rdfs:label "_log" .
+
+
+

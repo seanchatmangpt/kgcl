@@ -1,0 +1,573 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.logging.YLogServer
+yawl:YLogServer a yawl:Class ;
+    rdfs:label "YLogServer" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_logging ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/logging/YLogServer.java"^^xsd:string ;
+    rdfs:comment """The server side of interface E. An API to retrieve data from the process event logs and pass it back as XML. <p/> Create Date: 29/10/2007. Last Date: 12/12/2007 Completely revised for the new logging schema in v2.1 11/09 - 6/10 @author Michael Adams @version 2.0""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YLogServer_getInstance_1 ;
+    yawl:hasMethod yawl:YLogServer_startTransaction_2 ;
+    yawl:hasMethod yawl:YLogServer_commitTransaction_3 ;
+    yawl:hasMethod yawl:YLogServer_getPersistenceManager_4 ;
+    yawl:hasMethod yawl:YLogServer_isEnabled_5 ;
+    yawl:hasMethod yawl:YLogServer_getNetInstancesOfSpecification_6 ;
+    yawl:hasMethod yawl:YLogServer_getNetInstancesOfSpecification_7 ;
+    yawl:hasMethod yawl:YLogServer_getCaseEvents_8 ;
+    yawl:hasMethod yawl:YLogServer_getCaseEvents_9 ;
+    yawl:hasMethod yawl:YLogServer_getTaskInstancesForTask_10 ;
+    yawl:hasMethod yawl:YLogServer_getInstanceEvents_11 ;
+    yawl:hasMethod yawl:YLogServer_getDataForEvent_12 ;
+    yawl:hasMethod yawl:YLogServer_getDataTypeForDataItem_13 ;
+    yawl:hasMethod yawl:YLogServer_getTaskInstancesForCase_14 ;
+    yawl:hasMethod yawl:YLogServer_getTaskInstancesForTask_15 ;
+    yawl:hasMethod yawl:YLogServer_getAllSpecifications_16 ;
+    yawl:hasMethod yawl:YLogServer_getCaseEvent_17 ;
+    yawl:hasMethod yawl:YLogServer_getAllCaseEventsByService_18 ;
+    yawl:hasMethod yawl:YLogServer_getAllCasesStartedByService_19 ;
+    yawl:hasMethod yawl:YLogServer_getAllCasesCancelledByService_20 ;
+    yawl:hasMethod yawl:YLogServer_getCompleteCaseLogsForSpecification_21 ;
+    yawl:hasMethod yawl:YLogServer_getSpecificationStatistics_22 ;
+    yawl:hasMethod yawl:YLogServer_getSpecificationStatistics_23 ;
+    yawl:hasMethod yawl:YLogServer_getSpecificationStatistics_24 ;
+    yawl:hasMethod yawl:YLogServer_getSpecificationStatistics_25 ;
+    yawl:hasMethod yawl:YLogServer_getSpecificationCaseIDs_26 ;
+    yawl:hasMethod yawl:YLogServer_getSpecificationCaseIDs_27 ;
+    yawl:hasMethod yawl:YLogServer_getXESLog_28 ;
+    yawl:hasMethod yawl:YLogServer_getCompleteCaseLogsForSpecification_29 ;
+    yawl:hasMethod yawl:YLogServer_getCompleteCaseLog_30 ;
+    yawl:hasMethod yawl:YLogServer_getServiceName_31 ;
+    yawl:hasMethod yawl:YLogServer_getEventsForTaskInstance_32 ;
+    yawl:hasMethod yawl:YLogServer_getSpecificationXESLog_33 ;
+    yawl:hasMethod yawl:YLogServer_getSpecificationXESLog_34 ;
+    yawl:hasMethod yawl:YLogServer_getFullyPopulatedNetInstance_35 ;
+    yawl:hasMethod yawl:YLogServer_getFullyPopulatedTaskInstance_36 ;
+    yawl:hasMethod yawl:YLogServer_getFullyPopulatedEvent_37 ;
+    yawl:hasMethod yawl:YLogServer_getFullyPopulatedDataItem_38 ;
+    yawl:hasMethod yawl:YLogServer_getEventListAsXML_39 ;
+    yawl:hasMethod yawl:YLogServer_getSpecification_40 ;
+    yawl:hasMethod yawl:YLogServer_getSpecification_41 ;
+    yawl:hasMethod yawl:YLogServer_getNet_42 ;
+    yawl:hasMethod yawl:YLogServer_getNets_43 ;
+    yawl:hasMethod yawl:YLogServer_getNetInstance_44 ;
+    yawl:hasMethod yawl:YLogServer_getNetInstance_45 ;
+    yawl:hasMethod yawl:YLogServer_getSubNetInstance_46 ;
+    yawl:hasMethod yawl:YLogServer_getNetInstances_47 ;
+    yawl:hasMethod yawl:YLogServer_getTaskInstance_48 ;
+    yawl:hasMethod yawl:YLogServer_getTaskInstance_49 ;
+    yawl:hasMethod yawl:YLogServer_getTask_50 ;
+    yawl:hasMethod yawl:YLogServer_getService_51 ;
+    yawl:hasMethod yawl:YLogServer_getDataType_52 ;
+    yawl:hasMethod yawl:YLogServer_getInstanceEventObjects_53 ;
+    yawl:hasMethod yawl:YLogServer_getTaskInstanceObjects_54 ;
+    yawl:hasMethod yawl:YLogServer_getNetInstanceObjects_55 ;
+    yawl:hasMethod yawl:YLogServer_getDataItemInstanceObjects_56 ;
+    yawl:hasMethod yawl:YLogServer_getObjects_57 ;
+    yawl:hasMethod yawl:YLogServer_getTaskNameForWorkItem_58 ;
+    yawl:hasField yawl:YLogServer__instance ;
+    yawl:hasField yawl:YLogServer__logDb ;
+    yawl:hasField yawl:YLogServer__log ;
+    yawl:hasField yawl:YLogServer_GENERAL_ERROR ;
+    yawl:hasField yawl:YLogServer_CONNECTION_ERROR ;
+    yawl:hasField yawl:YLogServer_NO_ROWS_ERROR ;
+    yawl:hasField yawl:YLogServer_NO_KEY_ERROR ;
+    .
+
+
+# Method: YLogServer.getInstance
+yawl:YLogServer_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "YLogServer" ;
+    yawl:signature "YLogServer getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YLogServer.startTransaction
+yawl:YLogServer_startTransaction_2 a yawl:Method ;
+    rdfs:label "startTransaction" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean startTransaction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.commitTransaction
+yawl:YLogServer_commitTransaction_3 a yawl:Method ;
+    rdfs:label "commitTransaction" ;
+    yawl:returnType "void" ;
+    yawl:signature "void commitTransaction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getPersistenceManager
+yawl:YLogServer_getPersistenceManager_4 a yawl:Method ;
+    rdfs:label "getPersistenceManager" ;
+    yawl:returnType "HibernateEngine" ;
+    yawl:signature "HibernateEngine getPersistenceManager()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.isEnabled
+yawl:YLogServer_isEnabled_5 a yawl:Method ;
+    rdfs:label "isEnabled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEnabled()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogServer.getNetInstancesOfSpecification
+yawl:YLogServer_getNetInstancesOfSpecification_6 a yawl:Method ;
+    rdfs:label "getNetInstancesOfSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNetInstancesOfSpecification(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getNetInstancesOfSpecification
+yawl:YLogServer_getNetInstancesOfSpecification_7 a yawl:Method ;
+    rdfs:label "getNetInstancesOfSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNetInstancesOfSpecification(long specKey)" ;
+    rdfs:comment """@param specKey the specification PK to get the case instances for @return the set of all case ids for the specID passed""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getCaseEvents
+yawl:YLogServer_getCaseEvents_8 a yawl:Method ;
+    rdfs:label "getCaseEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseEvents(long rootNetInstanceKey)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getCaseEvents
+yawl:YLogServer_getCaseEvents_9 a yawl:Method ;
+    rdfs:label "getCaseEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseEvents(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getTaskInstancesForTask
+yawl:YLogServer_getTaskInstancesForTask_10 a yawl:Method ;
+    rdfs:label "getTaskInstancesForTask" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskInstancesForTask(String caseID, String taskName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getInstanceEvents
+yawl:YLogServer_getInstanceEvents_11 a yawl:Method ;
+    rdfs:label "getInstanceEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInstanceEvents(long instanceKey)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getDataForEvent
+yawl:YLogServer_getDataForEvent_12 a yawl:Method ;
+    rdfs:label "getDataForEvent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataForEvent(long eventKey)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getDataTypeForDataItem
+yawl:YLogServer_getDataTypeForDataItem_13 a yawl:Method ;
+    rdfs:label "getDataTypeForDataItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataTypeForDataItem(long dataTypeKey)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getTaskInstancesForCase
+yawl:YLogServer_getTaskInstancesForCase_14 a yawl:Method ;
+    rdfs:label "getTaskInstancesForCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskInstancesForCase(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getTaskInstancesForTask
+yawl:YLogServer_getTaskInstancesForTask_15 a yawl:Method ;
+    rdfs:label "getTaskInstancesForTask" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskInstancesForTask(long taskKey)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getAllSpecifications
+yawl:YLogServer_getAllSpecifications_16 a yawl:Method ;
+    rdfs:label "getAllSpecifications" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAllSpecifications()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getCaseEvent
+yawl:YLogServer_getCaseEvent_17 a yawl:Method ;
+    rdfs:label "getCaseEvent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseEvent(String caseID, String eventType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getAllCaseEventsByService
+yawl:YLogServer_getAllCaseEventsByService_18 a yawl:Method ;
+    rdfs:label "getAllCaseEventsByService" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAllCaseEventsByService(String serviceName, String eventType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getAllCasesStartedByService
+yawl:YLogServer_getAllCasesStartedByService_19 a yawl:Method ;
+    rdfs:label "getAllCasesStartedByService" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAllCasesStartedByService(String serviceName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getAllCasesCancelledByService
+yawl:YLogServer_getAllCasesCancelledByService_20 a yawl:Method ;
+    rdfs:label "getAllCasesCancelledByService" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAllCasesCancelledByService(String serviceName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getCompleteCaseLogsForSpecification
+yawl:YLogServer_getCompleteCaseLogsForSpecification_21 a yawl:Method ;
+    rdfs:label "getCompleteCaseLogsForSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCompleteCaseLogsForSpecification(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getSpecificationStatistics
+yawl:YLogServer_getSpecificationStatistics_22 a yawl:Method ;
+    rdfs:label "getSpecificationStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationStatistics(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getSpecificationStatistics
+yawl:YLogServer_getSpecificationStatistics_23 a yawl:Method ;
+    rdfs:label "getSpecificationStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationStatistics(YSpecificationID specID, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getSpecificationStatistics
+yawl:YLogServer_getSpecificationStatistics_24 a yawl:Method ;
+    rdfs:label "getSpecificationStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationStatistics(long specKey)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getSpecificationStatistics
+yawl:YLogServer_getSpecificationStatistics_25 a yawl:Method ;
+    rdfs:label "getSpecificationStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationStatistics(long specKey, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getSpecificationCaseIDs
+yawl:YLogServer_getSpecificationCaseIDs_26 a yawl:Method ;
+    rdfs:label "getSpecificationCaseIDs" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationCaseIDs(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getSpecificationCaseIDs
+yawl:YLogServer_getSpecificationCaseIDs_27 a yawl:Method ;
+    rdfs:label "getSpecificationCaseIDs" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationCaseIDs(long specKey)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getXESLog
+yawl:YLogServer_getXESLog_28 a yawl:Method ;
+    rdfs:label "getXESLog" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getXESLog(YSpecificationID specID, boolean withData)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getCompleteCaseLogsForSpecification
+yawl:YLogServer_getCompleteCaseLogsForSpecification_29 a yawl:Method ;
+    rdfs:label "getCompleteCaseLogsForSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCompleteCaseLogsForSpecification(long specKey)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getCompleteCaseLog
+yawl:YLogServer_getCompleteCaseLog_30 a yawl:Method ;
+    rdfs:label "getCompleteCaseLog" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCompleteCaseLog(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getServiceName
+yawl:YLogServer_getServiceName_31 a yawl:Method ;
+    rdfs:label "getServiceName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getServiceName(long key)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getEventsForTaskInstance
+yawl:YLogServer_getEventsForTaskInstance_32 a yawl:Method ;
+    rdfs:label "getEventsForTaskInstance" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEventsForTaskInstance(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getSpecificationXESLog
+yawl:YLogServer_getSpecificationXESLog_33 a yawl:Method ;
+    rdfs:label "getSpecificationXESLog" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationXESLog(YSpecificationID specid, boolean withData)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getSpecificationXESLog
+yawl:YLogServer_getSpecificationXESLog_34 a yawl:Method ;
+    rdfs:label "getSpecificationXESLog" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationXESLog(YSpecificationID specid, boolean withData, boolean ignoreUnknownEventLabels)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogServer.getFullyPopulatedNetInstance
+yawl:YLogServer_getFullyPopulatedNetInstance_35 a yawl:Method ;
+    rdfs:label "getFullyPopulatedNetInstance" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFullyPopulatedNetInstance(YLogNetInstance instance, YLogNet net, boolean root)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogServer.getFullyPopulatedTaskInstance
+yawl:YLogServer_getFullyPopulatedTaskInstance_36 a yawl:Method ;
+    rdfs:label "getFullyPopulatedTaskInstance" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFullyPopulatedTaskInstance(YLogTaskInstance instance)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogServer.getFullyPopulatedEvent
+yawl:YLogServer_getFullyPopulatedEvent_37 a yawl:Method ;
+    rdfs:label "getFullyPopulatedEvent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFullyPopulatedEvent(YLogEvent event)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogServer.getFullyPopulatedDataItem
+yawl:YLogServer_getFullyPopulatedDataItem_38 a yawl:Method ;
+    rdfs:label "getFullyPopulatedDataItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFullyPopulatedDataItem(YLogDataItemInstance instance)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogServer.getEventListAsXML
+yawl:YLogServer_getEventListAsXML_39 a yawl:Method ;
+    rdfs:label "getEventListAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEventListAsXML(long instanceID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogServer.getSpecification
+yawl:YLogServer_getSpecification_40 a yawl:Method ;
+    rdfs:label "getSpecification" ;
+    yawl:returnType "YLogSpecification" ;
+    yawl:signature "YLogSpecification getSpecification(long key)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogServer.getSpecification
+yawl:YLogServer_getSpecification_41 a yawl:Method ;
+    rdfs:label "getSpecification" ;
+    yawl:returnType "YLogSpecification" ;
+    yawl:signature "YLogSpecification getSpecification(YSpecificationID specID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogServer.getNet
+yawl:YLogServer_getNet_42 a yawl:Method ;
+    rdfs:label "getNet" ;
+    yawl:returnType "YLogNet" ;
+    yawl:signature "YLogNet getNet(long key)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogServer.getNets
+yawl:YLogServer_getNets_43 a yawl:Method ;
+    rdfs:label "getNets" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getNets(long specKey)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogServer.getNetInstance
+yawl:YLogServer_getNetInstance_44 a yawl:Method ;
+    rdfs:label "getNetInstance" ;
+    yawl:returnType "YLogNetInstance" ;
+    yawl:signature "YLogNetInstance getNetInstance(String caseID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogServer.getNetInstance
+yawl:YLogServer_getNetInstance_45 a yawl:Method ;
+    rdfs:label "getNetInstance" ;
+    yawl:returnType "YLogNetInstance" ;
+    yawl:signature "YLogNetInstance getNetInstance(long key)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogServer.getSubNetInstance
+yawl:YLogServer_getSubNetInstance_46 a yawl:Method ;
+    rdfs:label "getSubNetInstance" ;
+    yawl:returnType "YLogNetInstance" ;
+    yawl:signature "YLogNetInstance getSubNetInstance(long key)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogServer.getNetInstances
+yawl:YLogServer_getNetInstances_47 a yawl:Method ;
+    rdfs:label "getNetInstances" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getNetInstances(String caseID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogServer.getTaskInstance
+yawl:YLogServer_getTaskInstance_48 a yawl:Method ;
+    rdfs:label "getTaskInstance" ;
+    yawl:returnType "YLogTaskInstance" ;
+    yawl:signature "YLogTaskInstance getTaskInstance(String itemID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogServer.getTaskInstance
+yawl:YLogServer_getTaskInstance_49 a yawl:Method ;
+    rdfs:label "getTaskInstance" ;
+    yawl:returnType "YLogTaskInstance" ;
+    yawl:signature "YLogTaskInstance getTaskInstance(long key)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogServer.getTask
+yawl:YLogServer_getTask_50 a yawl:Method ;
+    rdfs:label "getTask" ;
+    yawl:returnType "YLogTask" ;
+    yawl:signature "YLogTask getTask(long key)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogServer.getService
+yawl:YLogServer_getService_51 a yawl:Method ;
+    rdfs:label "getService" ;
+    yawl:returnType "YLogService" ;
+    yawl:signature "YLogService getService(long key)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogServer.getDataType
+yawl:YLogServer_getDataType_52 a yawl:Method ;
+    rdfs:label "getDataType" ;
+    yawl:returnType "YLogDataType" ;
+    yawl:signature "YLogDataType getDataType(long key)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogServer.getInstanceEventObjects
+yawl:YLogServer_getInstanceEventObjects_53 a yawl:Method ;
+    rdfs:label "getInstanceEventObjects" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getInstanceEventObjects(long key)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogServer.getTaskInstanceObjects
+yawl:YLogServer_getTaskInstanceObjects_54 a yawl:Method ;
+    rdfs:label "getTaskInstanceObjects" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getTaskInstanceObjects(long key)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogServer.getNetInstanceObjects
+yawl:YLogServer_getNetInstanceObjects_55 a yawl:Method ;
+    rdfs:label "getNetInstanceObjects" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getNetInstanceObjects(long key)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogServer.getDataItemInstanceObjects
+yawl:YLogServer_getDataItemInstanceObjects_56 a yawl:Method ;
+    rdfs:label "getDataItemInstanceObjects" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getDataItemInstanceObjects(long key)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogServer.getObjects
+yawl:YLogServer_getObjects_57 a yawl:Method ;
+    rdfs:label "getObjects" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getObjects(String qStr, long key)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogServer.getTaskNameForWorkItem
+yawl:YLogServer_getTaskNameForWorkItem_58 a yawl:Method ;
+    rdfs:label "getTaskNameForWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskNameForWorkItem(String caseID, String itemID)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YLogServer__instance a yawl:Field ;
+    rdfs:label "_instance" .
+
+yawl:YLogServer__logDb a yawl:Field ;
+    rdfs:label "_logDb" .
+
+yawl:YLogServer__log a yawl:Field ;
+    rdfs:label "_log" .
+
+yawl:YLogServer_GENERAL_ERROR a yawl:Field ;
+    rdfs:label "GENERAL_ERROR" .
+
+yawl:YLogServer_CONNECTION_ERROR a yawl:Field ;
+    rdfs:label "CONNECTION_ERROR" .
+
+yawl:YLogServer_NO_ROWS_ERROR a yawl:Field ;
+    rdfs:label "NO_ROWS_ERROR" .
+
+yawl:YLogServer_NO_KEY_ERROR a yawl:Field ;
+    rdfs:label "NO_KEY_ERROR" .
+
+
+

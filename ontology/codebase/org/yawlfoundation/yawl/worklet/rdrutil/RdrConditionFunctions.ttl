@@ -1,0 +1,123 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.rdrutil.RdrConditionFunctions
+yawl:RdrConditionFunctions a yawl:Class ;
+    rdfs:label "RdrConditionFunctions" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_rdrutil ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/rdrutil/RdrConditionFunctions.java"^^xsd:string ;
+    rdfs:comment """A class that will allow developers to define functions that can be called via conditional expressions in rules. To successfully add a function: 1. Add the function (method body) to the 'function definitions' section 2. Ensure the function (method) is declared 'private static' 3. Add the function's name added to the list of '_functionNames'. 4. Add a mapping for the function to the 'execute' method, following the examples 5. Ensure the function returns a String value. Once the function is added, """ ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:RdrConditionFunctions_isRegisteredFunction_1 ;
+    yawl:hasMethod yawl:RdrConditionFunctions_execute_2 ;
+    yawl:hasMethod yawl:RdrConditionFunctions_max_3 ;
+    yawl:hasMethod yawl:RdrConditionFunctions_min_4 ;
+    yawl:hasMethod yawl:RdrConditionFunctions_isNotCompleted_5 ;
+    yawl:hasMethod yawl:RdrConditionFunctions_hasTimerExpired_6 ;
+    yawl:hasMethod yawl:RdrConditionFunctions_today_7 ;
+    yawl:hasMethod yawl:RdrConditionFunctions_isFinishedStatus_8 ;
+    yawl:hasMethod yawl:RdrConditionFunctions_getArgAsInt_9 ;
+    yawl:hasField yawl:RdrConditionFunctions__functionNames ;
+    .
+
+
+# Method: RdrConditionFunctions.isRegisteredFunction
+yawl:RdrConditionFunctions_isRegisteredFunction_1 a yawl:Method ;
+    rdfs:label "isRegisteredFunction" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isRegisteredFunction(String name)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: RdrConditionFunctions.execute
+yawl:RdrConditionFunctions_execute_2 a yawl:Method ;
+    rdfs:label "execute" ;
+    yawl:returnType "String" ;
+    yawl:signature "String execute(String name, Map args)" ;
+    rdfs:comment """Executes the named function, using the supplied arguments @param name the name of the function to execute @param args a map of String key-value pairs. Note that every map will contain a key called 'this' that has as its value an xml String of the workitem being evaluated @return the function's result""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: RdrConditionFunctions.max
+yawl:RdrConditionFunctions_max_3 a yawl:Method ;
+    rdfs:label "max" ;
+    yawl:returnType "String" ;
+    yawl:signature "String max(int x, int y)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: RdrConditionFunctions.min
+yawl:RdrConditionFunctions_min_4 a yawl:Method ;
+    rdfs:label "min" ;
+    yawl:returnType "String" ;
+    yawl:signature "String min(int x, int y)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: RdrConditionFunctions.isNotCompleted
+yawl:RdrConditionFunctions_isNotCompleted_5 a yawl:Method ;
+    rdfs:label "isNotCompleted" ;
+    yawl:returnType "String" ;
+    yawl:signature "String isNotCompleted(String itemInfo)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: RdrConditionFunctions.hasTimerExpired
+yawl:RdrConditionFunctions_hasTimerExpired_6 a yawl:Method ;
+    rdfs:label "hasTimerExpired" ;
+    yawl:returnType "String" ;
+    yawl:signature "String hasTimerExpired(String itemInfo)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: RdrConditionFunctions.today
+yawl:RdrConditionFunctions_today_7 a yawl:Method ;
+    rdfs:label "today" ;
+    yawl:returnType "String" ;
+    yawl:signature "String today()" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: RdrConditionFunctions.isFinishedStatus
+yawl:RdrConditionFunctions_isFinishedStatus_8 a yawl:Method ;
+    rdfs:label "isFinishedStatus" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isFinishedStatus(String status)" ;
+    rdfs:comment """returns true if the status passed is one of the completed statuses""" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: RdrConditionFunctions.getArgAsInt
+yawl:RdrConditionFunctions_getArgAsInt_9 a yawl:Method ;
+    rdfs:label "getArgAsInt" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getArgAsInt(Map args, String var)" ;
+    rdfs:comment """extract the specified argument and returns its integer value""" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:RdrConditionFunctions__functionNames a yawl:Field ;
+    rdfs:label "_functionNames" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_worklet_selection a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.worklet.selection" .
+
+

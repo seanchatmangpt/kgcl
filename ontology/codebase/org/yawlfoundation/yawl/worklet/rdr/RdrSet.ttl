@@ -1,0 +1,251 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.rdr.RdrSet
+yawl:RdrSet a yawl:Class ;
+    rdfs:label "RdrSet" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_rdr ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/rdr/RdrSet.java"^^xsd:string ;
+    rdfs:comment """Maintains a set of RdrTrees for a particular specification, for each of the following purposes (potentially): - selection: set of trees (RdrTreeSet), one for each worklet enabled task - exception: - spec pre-constraints: one RdrTree - spec post-constraints: one RdrTree - task pre-constraints: set of trees, one for each task in the specification - task post-constraints: set of trees, one for each task in the specification - task aborts: set of trees, one for each task in the specification - time-""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:RdrSet_refresh_1 ;
+    yawl:hasMethod yawl:RdrSet_hasRules_2 ;
+    yawl:hasMethod yawl:RdrSet_addTree_3 ;
+    yawl:hasMethod yawl:RdrSet_getTree_4 ;
+    yawl:hasMethod yawl:RdrSet_getTree_5 ;
+    yawl:hasMethod yawl:RdrSet_getRules_6 ;
+    yawl:hasMethod yawl:RdrSet_getTreeSet_7 ;
+    yawl:hasMethod yawl:RdrSet_removeTreeSet_8 ;
+    yawl:hasMethod yawl:RdrSet_equals_9 ;
+    yawl:hasMethod yawl:RdrSet_hashCode_10 ;
+    yawl:hasMethod yawl:RdrSet_toXML_11 ;
+    yawl:hasMethod yawl:RdrSet_toXNode_12 ;
+    yawl:hasMethod yawl:RdrSet_createRootXNode_13 ;
+    yawl:hasMethod yawl:RdrSet_getName_14 ;
+    yawl:hasMethod yawl:RdrSet_getProcessName_15 ;
+    yawl:hasMethod yawl:RdrSet_getSpecificationID_16 ;
+    yawl:hasMethod yawl:RdrSet_treeListToXNode_17 ;
+    yawl:hasMethod yawl:RdrSet_treeToXNode_18 ;
+    yawl:hasMethod yawl:RdrSet_getOrCreateNode_19 ;
+    yawl:hasMethod yawl:RdrSet_toString_20 ;
+    yawl:hasMethod yawl:RdrSet_fromXML_21 ;
+    yawl:hasMethod yawl:RdrSet_setRuleSet_22 ;
+    yawl:hasMethod yawl:RdrSet_getRuleSet_23 ;
+    yawl:hasField yawl:RdrSet_id ;
+    yawl:hasField yawl:RdrSet__specID ;
+    yawl:hasField yawl:RdrSet__processName ;
+    yawl:hasField yawl:RdrSet__ruleSet ;
+    yawl:hasField yawl:RdrSet_CASE_LEVEL_TREE_FLAG ;
+    .
+
+
+# Method: RdrSet.refresh
+yawl:RdrSet_refresh_1 a yawl:Method ;
+    rdfs:label "refresh" ;
+    yawl:returnType "void" ;
+    yawl:signature "void refresh()" ;
+    rdfs:comment """clears and rebuilds the RdrSet""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrSet.hasRules
+yawl:RdrSet_hasRules_2 a yawl:Method ;
+    rdfs:label "hasRules" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasRules()" ;
+    rdfs:comment """@return true if this spec's ruleset is not empty""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrSet.addTree
+yawl:RdrSet_addTree_3 a yawl:Method ;
+    rdfs:label "addTree" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addTree(RdrTree tree, RuleType treeType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrSet.getTree
+yawl:RdrSet_getTree_4 a yawl:Method ;
+    rdfs:label "getTree" ;
+    yawl:returnType "RdrTree" ;
+    yawl:signature "RdrTree getTree(RuleType treeType, String taskId)" ;
+    rdfs:comment """Retrieves a specified RdrTree for the specified task @param treeType - the tree exception type @param taskId - the task the tree represents @return the RDRTree for the specified spec and task""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrSet.getTree
+yawl:RdrSet_getTree_5 a yawl:Method ;
+    rdfs:label "getTree" ;
+    yawl:returnType "RdrTree" ;
+    yawl:signature "RdrTree getTree(RuleType treeType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrSet.getRules
+yawl:RdrSet_getRules_6 a yawl:Method ;
+    rdfs:label "getRules" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getRules()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrSet.getTreeSet
+yawl:RdrSet_getTreeSet_7 a yawl:Method ;
+    rdfs:label "getTreeSet" ;
+    yawl:returnType "RdrTreeSet" ;
+    yawl:signature "RdrTreeSet getTreeSet(RuleType ruleType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrSet.removeTreeSet
+yawl:RdrSet_removeTreeSet_8 a yawl:Method ;
+    rdfs:label "removeTreeSet" ;
+    yawl:returnType "RdrTreeSet" ;
+    yawl:signature "RdrTreeSet removeTreeSet(RuleType ruleType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrSet.equals
+yawl:RdrSet_equals_9 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrSet.hashCode
+yawl:RdrSet_hashCode_10 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrSet.toXML
+yawl:RdrSet_toXML_11 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrSet.toXNode
+yawl:RdrSet_toXNode_12 a yawl:Method ;
+    rdfs:label "toXNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode toXNode()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RdrSet.createRootXNode
+yawl:RdrSet_createRootXNode_13 a yawl:Method ;
+    rdfs:label "createRootXNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode createRootXNode()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RdrSet.getName
+yawl:RdrSet_getName_14 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RdrSet.getProcessName
+yawl:RdrSet_getProcessName_15 a yawl:Method ;
+    rdfs:label "getProcessName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getProcessName()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RdrSet.getSpecificationID
+yawl:RdrSet_getSpecificationID_16 a yawl:Method ;
+    rdfs:label "getSpecificationID" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getSpecificationID()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RdrSet.treeListToXNode
+yawl:RdrSet_treeListToXNode_17 a yawl:Method ;
+    rdfs:label "treeListToXNode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void treeListToXNode(RdrTreeSet treeSet, XNode parent, String names)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RdrSet.treeToXNode
+yawl:RdrSet_treeToXNode_18 a yawl:Method ;
+    rdfs:label "treeToXNode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void treeToXNode(RdrTree tree, XNode parent, String names)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RdrSet.getOrCreateNode
+yawl:RdrSet_getOrCreateNode_19 a yawl:Method ;
+    rdfs:label "getOrCreateNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getOrCreateNode(XNode parent, String names)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RdrSet.toString
+yawl:RdrSet_toString_20 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrSet.fromXML
+yawl:RdrSet_fromXML_21 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(String xml, boolean newSet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrSet.setRuleSet
+yawl:RdrSet_setRuleSet_22 a yawl:Method ;
+    rdfs:label "setRuleSet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRuleSet(Set treeSet)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RdrSet.getRuleSet
+yawl:RdrSet_getRuleSet_23 a yawl:Method ;
+    rdfs:label "getRuleSet" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getRuleSet()" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:RdrSet_id a yawl:Field ;
+    rdfs:label "id" .
+
+yawl:RdrSet__specID a yawl:Field ;
+    rdfs:label "_specID" .
+
+yawl:RdrSet__processName a yawl:Field ;
+    rdfs:label "_processName" .
+
+yawl:RdrSet__ruleSet a yawl:Field ;
+    rdfs:label "_ruleSet" .
+
+yawl:RdrSet_CASE_LEVEL_TREE_FLAG a yawl:Field ;
+    rdfs:label "CASE_LEVEL_TREE_FLAG" .
+
+
+

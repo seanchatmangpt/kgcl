@@ -1,0 +1,145 @@
+# Pre-defined SPARQL Query Templates for Codebase Ontology Index
+# These queries can be used directly or as templates for custom queries
+
+# Find class by name (simple name)
+# Usage: Replace ?className with actual class name
+PREFIX index: <http://yawlfoundation.org/ontology/index#>
+PREFIX yawl: <http://yawlfoundation.org/ontology/>
+
+SELECT ?class ?filePath ?packageName ?fullyQualifiedName WHERE {
+    ?index index:className ?className ;
+           index:indexedClass ?class ;
+           index:filePath ?filePath ;
+           index:packageName ?packageName ;
+           index:fullyQualifiedName ?fullyQualifiedName .
+    # FILTER(?className = "YControlPanel")
+}
+
+# Find all classes in a package
+# Usage: Replace ?packageName with actual package name
+PREFIX index: <http://yawlfoundation.org/ontology/index#>
+
+SELECT ?className ?fullyQualifiedName ?filePath WHERE {
+    ?packageIndex index:packageName ?packageName ;
+                  index:hasClass ?classIndex .
+    ?classIndex index:className ?className ;
+                index:fullyQualifiedName ?fullyQualifiedName ;
+                index:filePath ?filePath .
+    # FILTER(?packageName = "org.yawlfoundation.yawl.controlpanel")
+}
+
+# Find inheritance hierarchy (extends)
+# Usage: Replace ?className with actual class name
+PREFIX index: <http://yawlfoundation.org/ontology/index#>
+PREFIX yawl: <http://yawlfoundation.org/ontology/>
+
+SELECT ?extendsClass WHERE {
+    ?classIndex index:className ?className ;
+                index:extendsClass ?extendsClass .
+    # FILTER(?className = "JMXMemoryStatistics")
+}
+
+# Find all implementers of an interface
+# Usage: Replace ?interfaceName with actual interface name
+PREFIX index: <http://yawlfoundation.org/ontology/index#>
+PREFIX yawl: <http://yawlfoundation.org/ontology/>
+
+SELECT ?className ?fullyQualifiedName WHERE {
+    ?classIndex index:implementsInterface yawl:?interfaceName ;
+                index:className ?className ;
+                index:fullyQualifiedName ?fullyQualifiedName .
+    # Replace ?interfaceName with actual interface name
+}
+
+# Find classes with a specific method
+# Usage: Replace ?methodName with actual method name
+PREFIX index: <http://yawlfoundation.org/ontology/index#>
+
+SELECT ?className ?fullyQualifiedName WHERE {
+    ?methodIndex index:methodName ?methodName ;
+                 index:hasMethodNamed ?classIndex .
+    ?classIndex index:className ?className ;
+                index:fullyQualifiedName ?fullyQualifiedName .
+    # FILTER(?methodName = "toString")
+}
+
+# Find classes with a specific field
+# Usage: Replace ?fieldName with actual field name
+PREFIX index: <http://yawlfoundation.org/ontology/index#>
+
+SELECT ?className ?fullyQualifiedName WHERE {
+    ?fieldIndex index:fieldName ?fieldName ;
+                index:hasFieldNamed ?classIndex .
+    ?classIndex index:className ?className ;
+                index:fullyQualifiedName ?fullyQualifiedName .
+    # FILTER(?fieldName = "heap")
+}
+
+# Find all references to a class
+# Usage: Replace ?className with actual class name
+PREFIX index: <http://yawlfoundation.org/ontology/index#>
+
+SELECT ?referencingClass ?fullyQualifiedName WHERE {
+    ?classIndex index:className ?className .
+    ?refIndex index:referencesClass ?classIndex ;
+              index:referencedBy ?referencingIndex .
+    ?referencingIndex index:className ?referencingClass ;
+                      index:fullyQualifiedName ?fullyQualifiedName .
+    # FILTER(?className = "JMXStatistics")
+}
+
+# Find subclasses of a class
+# Usage: Replace ?className with actual class name
+PREFIX index: <http://yawlfoundation.org/ontology/index#>
+
+SELECT ?subclassName ?fullyQualifiedName WHERE {
+    ?classIndex index:className ?className ;
+                index:hasSubclass ?subclassIndex .
+    ?subclassIndex index:className ?subclassName ;
+                   index:fullyQualifiedName ?fullyQualifiedName .
+    # FILTER(?className = "JMXStatistics")
+}
+
+# Full-text search (case-insensitive substring match)
+# Usage: Replace ?searchText with actual search text
+PREFIX index: <http://yawlfoundation.org/ontology/index#>
+
+SELECT ?className ?fullyQualifiedName ?filePath WHERE {
+    ?searchIndex index:searchableText ?searchableText ;
+                 index:searchableClass ?classIndex .
+    ?classIndex index:className ?className ;
+                index:fullyQualifiedName ?fullyQualifiedName ;
+                index:filePath ?filePath .
+    # FILTER(CONTAINS(LCASE(?searchableText), LCASE("memory statistics")))
+}
+
+# Get all packages with class counts
+PREFIX index: <http://yawlfoundation.org/ontology/index#>
+
+SELECT ?packageName (COUNT(?class) AS ?classCount) WHERE {
+    ?packageIndex index:packageName ?packageName ;
+                  index:hasClass ?class .
+}
+GROUP BY ?packageName
+ORDER BY DESC(?classCount)
+
+# Get all methods with usage counts
+PREFIX index: <http://yawlfoundation.org/ontology/index#>
+
+SELECT ?methodName (COUNT(?class) AS ?usageCount) WHERE {
+    ?methodIndex index:methodName ?methodName ;
+                 index:hasMethodNamed ?class .
+}
+GROUP BY ?methodName
+ORDER BY DESC(?usageCount)
+
+# Get all fields with usage counts
+PREFIX index: <http://yawlfoundation.org/ontology/index#>
+
+SELECT ?fieldName (COUNT(?class) AS ?usageCount) WHERE {
+    ?fieldIndex index:fieldName ?fieldName ;
+                index:hasFieldNamed ?class .
+}
+GROUP BY ?fieldName
+ORDER BY DESC(?usageCount)
+

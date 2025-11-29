@@ -1,0 +1,108 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.engine.gui
+yawl:org_yawlfoundation_yawl_engine_gui a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.engine.gui" .
+# Class: org.yawlfoundation.yawl.engine.gui.TabbedEngineGUI
+yawl:TabbedEngineGUI a yawl:Class ;
+    rdfs:label "TabbedEngineGUI" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_gui ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/gui/TabbedEngineGUI.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 17/01/2005 Time: 19:05:50""" ;
+    yawl:extends yawl:JPanel ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:TabbedEngineGUI_makeAdminPanel_1 ;
+    yawl:hasMethod yawl:TabbedEngineGUI_makeTextPanel_2 ;
+    yawl:hasMethod yawl:TabbedEngineGUI_createImageIcon_3 ;
+    yawl:hasMethod yawl:TabbedEngineGUI_createAndShowGUI_4 ;
+    yawl:hasMethod yawl:TabbedEngineGUI_main_5 ;
+    yawl:hasMethod yawl:TabbedEngineGUI_addWorklistPanel_6 ;
+    yawl:hasField yawl:TabbedEngineGUI__frame ;
+    yawl:hasField yawl:TabbedEngineGUI__splash ;
+    yawl:hasField yawl:TabbedEngineGUI__tabbedPane ;
+    yawl:hasField yawl:TabbedEngineGUI_journalising ;
+    yawl:hasField yawl:TabbedEngineGUI_generateUIMetaData ;
+    yawl:hasField yawl:TabbedEngineGUI_logger ;
+    .
+
+
+# Method: TabbedEngineGUI.makeAdminPanel
+yawl:TabbedEngineGUI_makeAdminPanel_1 a yawl:Method ;
+    rdfs:label "makeAdminPanel" ;
+    yawl:returnType "JComponent" ;
+    yawl:signature "JComponent makeAdminPanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TabbedEngineGUI.makeTextPanel
+yawl:TabbedEngineGUI_makeTextPanel_2 a yawl:Method ;
+    rdfs:label "makeTextPanel" ;
+    yawl:returnType "JComponent" ;
+    yawl:signature "JComponent makeTextPanel(String text)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: TabbedEngineGUI.createImageIcon
+yawl:TabbedEngineGUI_createImageIcon_3 a yawl:Method ;
+    rdfs:label "createImageIcon" ;
+    yawl:returnType "ImageIcon" ;
+    yawl:signature "ImageIcon createImageIcon(String path)" ;
+    rdfs:comment """Returns an ImageIcon, or null if the path was invalid.""" ;
+    yawl:modifiers "protected" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: TabbedEngineGUI.createAndShowGUI
+yawl:TabbedEngineGUI_createAndShowGUI_4 a yawl:Method ;
+    rdfs:label "createAndShowGUI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void createAndShowGUI()" ;
+    rdfs:comment """Create the GUI and show it. For thread safety, this method should be invoked from the  event-dispatching thread.""" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: TabbedEngineGUI.main
+yawl:TabbedEngineGUI_main_5 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String args)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: TabbedEngineGUI.addWorklistPanel
+yawl:TabbedEngineGUI_addWorklistPanel_6 a yawl:Method ;
+    rdfs:label "addWorklistPanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addWorklistPanel(String userName, YWorklistGUI worklist)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:TabbedEngineGUI__frame a yawl:Field ;
+    rdfs:label "_frame" .
+
+yawl:TabbedEngineGUI__splash a yawl:Field ;
+    rdfs:label "_splash" .
+
+yawl:TabbedEngineGUI__tabbedPane a yawl:Field ;
+    rdfs:label "_tabbedPane" .
+
+yawl:TabbedEngineGUI_journalising a yawl:Field ;
+    rdfs:label "journalising" .
+
+yawl:TabbedEngineGUI_generateUIMetaData a yawl:Field ;
+    rdfs:label "generateUIMetaData" .
+
+yawl:TabbedEngineGUI_logger a yawl:Field ;
+    rdfs:label "logger" .
+
+
+

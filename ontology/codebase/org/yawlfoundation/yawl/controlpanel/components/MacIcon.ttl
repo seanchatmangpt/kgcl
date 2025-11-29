@@ -1,0 +1,67 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.components.MacIcon
+yawl:MacIcon a yawl:Class ;
+    rdfs:label "MacIcon" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_components ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/components/MacIcon.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 4/08/2014""" ;
+    yawl:implements yawl:ActionListener ;
+    yawl:implements yawl:EngineStatusListener ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:MacIcon_statusChanged_1 ;
+    yawl:hasMethod yawl:MacIcon_actionPerformed_2 ;
+    yawl:hasMethod yawl:MacIcon_setIcon_3 ;
+    yawl:hasMethod yawl:MacIcon_setWaiting_4 ;
+    yawl:hasField yawl:MacIcon__engineMonitor ;
+    yawl:hasField yawl:MacIcon__waitIndex ;
+    .
+
+
+# Method: MacIcon.statusChanged
+yawl:MacIcon_statusChanged_1 a yawl:Method ;
+    rdfs:label "statusChanged" ;
+    yawl:returnType "void" ;
+    yawl:signature "void statusChanged(EngineStatus status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MacIcon.actionPerformed
+yawl:MacIcon_actionPerformed_2 a yawl:Method ;
+    rdfs:label "actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void actionPerformed(ActionEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MacIcon.setIcon
+yawl:MacIcon_setIcon_3 a yawl:Method ;
+    rdfs:label "setIcon" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setIcon(String name)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MacIcon.setWaiting
+yawl:MacIcon_setWaiting_4 a yawl:Method ;
+    rdfs:label "setWaiting" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setWaiting(boolean start)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:MacIcon__engineMonitor a yawl:Field ;
+    rdfs:label "_engineMonitor" .
+
+yawl:MacIcon__waitIndex a yawl:Field ;
+    rdfs:label "_waitIndex" .
+
+
+

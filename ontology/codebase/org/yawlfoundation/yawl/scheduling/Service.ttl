@@ -1,0 +1,228 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.scheduling.Service
+yawl:Service a yawl:Class ;
+    rdfs:label "Service" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_scheduling ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/scheduling/Service.java"^^xsd:string ;
+    rdfs:comment """Bridge between Service and YAWL, has to be registered with the YAWL engine. @author tbe @date 2010-10-22""" ;
+    yawl:extends yawl:InterfaceBWebsideController ;
+    yawl:implements yawl:Constants ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Service_processMappingChild_1 ;
+    yawl:hasMethod yawl:Service_handleEnabledWorkItemEvent_2 ;
+    yawl:hasMethod yawl:Service_processMapping_3 ;
+    yawl:hasMethod yawl:Service_getDataListFromWorkItem_4 ;
+    yawl:hasMethod yawl:Service_handleCancelledWorkItemEvent_5 ;
+    yawl:hasMethod yawl:Service_handleEngineInitialisationCompletedEvent_6 ;
+    yawl:hasMethod yawl:Service_handleCancelledCaseEvent_7 ;
+    yawl:hasMethod yawl:Service_isCancelledWorkitem_8 ;
+    yawl:hasMethod yawl:Service_handleCompleteCaseEvent_9 ;
+    yawl:hasMethod yawl:Service_checkInWorkItem_10 ;
+    yawl:hasMethod yawl:Service_getChildren_11 ;
+    yawl:hasMethod yawl:Service_checkOutWorkItem_12 ;
+    yawl:hasMethod yawl:Service_getHandle_13 ;
+    yawl:hasMethod yawl:Service_getWorkItemFromCache_14 ;
+    yawl:hasMethod yawl:Service_getOutputData_15 ;
+    yawl:hasMethod yawl:Service_sort_16 ;
+    yawl:hasMethod yawl:Service_isNoWorkItemErrorMsg_17 ;
+    yawl:hasMethod yawl:Service_getSpecificationForCase_18 ;
+    yawl:hasField yawl:Service__log ;
+    yawl:hasField yawl:Service__cancelledWorkitemOrCaseIds ;
+    yawl:hasField yawl:Service__dataMapper ;
+    yawl:hasField yawl:Service__handle ;
+    yawl:hasField yawl:Service__props ;
+    yawl:hasField yawl:Service__config ;
+    yawl:hasField yawl:Service_REMOVE_MAPPING_NOT_IN_YAWL ;
+    .
+
+
+# Method: Service.processMappingChild
+yawl:Service_processMappingChild_1 a yawl:Method ;
+    rdfs:label "processMappingChild" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processMappingChild(Mapping mapping)" ;
+    yawl:modifiers "protected" ;
+    yawl:modifiers "abstract" ;
+    .
+
+# Method: Service.handleEnabledWorkItemEvent
+yawl:Service_handleEnabledWorkItemEvent_2 a yawl:Method ;
+    rdfs:label "handleEnabledWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleEnabledWorkItemEvent(WorkItemRecord wirParent)" ;
+    rdfs:comment """inherited by InterfaceBWebsideController  receives messages and requests from YAWL work items Saves or updates a mapping to the database for recovery of failed YAWL requests""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Service.processMapping
+yawl:Service_processMapping_3 a yawl:Method ;
+    rdfs:label "processMapping" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processMapping(Mapping mapping)" ;
+    rdfs:comment """checkout parent work item from YAWL engine get children work items, cache them, process them check parent back into the engine remove the mapping for successful processed parent work items updates the mapping continuously @param mapping: contained work item is parent""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Service.getDataListFromWorkItem
+yawl:Service_getDataListFromWorkItem_4 a yawl:Method ;
+    rdfs:label "getDataListFromWorkItem" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getDataListFromWorkItem(Mapping mapping)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Service.handleCancelledWorkItemEvent
+yawl:Service_handleCancelledWorkItemEvent_5 a yawl:Method ;
+    rdfs:label "handleCancelledWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCancelledWorkItemEvent(WorkItemRecord workItemRecord)" ;
+    rdfs:comment """inherited by InterfaceBWebsideController   Removes (if necessary) the work items from the YAWL Engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Service.handleEngineInitialisationCompletedEvent
+yawl:Service_handleEngineInitialisationCompletedEvent_6 a yawl:Method ;
+    rdfs:label "handleEngineInitialisationCompletedEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleEngineInitialisationCompletedEvent()" ;
+    rdfs:comment """the SS and the RS will get the event at the same time, so the SS will need to delay the call to the RS by 10 seconds while the RS gets the credentials from the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Service.handleCancelledCaseEvent
+yawl:Service_handleCancelledCaseEvent_7 a yawl:Method ;
+    rdfs:label "handleCancelledCaseEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCancelledCaseEvent(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Service.isCancelledWorkitem
+yawl:Service_isCancelledWorkitem_8 a yawl:Method ;
+    rdfs:label "isCancelledWorkitem" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isCancelledWorkitem(String wirID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Service.handleCompleteCaseEvent
+yawl:Service_handleCompleteCaseEvent_9 a yawl:Method ;
+    rdfs:label "handleCompleteCaseEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCompleteCaseEvent(String caseID, String casedata)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Service.checkInWorkItem
+yawl:Service_checkInWorkItem_10 a yawl:Method ;
+    rdfs:label "checkInWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkInWorkItem(Mapping mapping, String payload)" ;
+    rdfs:comment """TODO@tbe: validate payload before to avoid that work item failed if payload is invalid @param mapping @param payload @throws YAWLException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Service.getChildren
+yawl:Service_getChildren_11 a yawl:Method ;
+    rdfs:label "getChildren" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getChildren(String workItemID)" ;
+    rdfs:comment """ermittelt Children eines Parent-WorkItems, dieses muss dazu bereits ausgecheckt sein @param workItemID @return @throws IOException""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Service.checkOutWorkItem
+yawl:Service_checkOutWorkItem_12 a yawl:Method ;
+    rdfs:label "checkOutWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkOutWorkItem(Mapping mapping)" ;
+    rdfs:comment """Check the work item out of the engine InterfaceBWebsideController.checkOut() adds work item with ID=wirID to workItemCache  @param mapping - contains the work item ID to check out""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Service.getHandle
+yawl:Service_getHandle_13 a yawl:Method ;
+    rdfs:label "getHandle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getHandle()" ;
+    rdfs:comment """checks if there is a valid connection to the engine, and if there isn't, attempts to connect @return true if reconnected""" ;
+    yawl:modifiers "protected" ;
+    yawl:modifiers "synchronized" ;
+    .
+
+# Method: Service.getWorkItemFromCache
+yawl:Service_getWorkItemFromCache_14 a yawl:Method ;
+    rdfs:label "getWorkItemFromCache" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord getWorkItemFromCache(Mapping mapping)" ;
+    rdfs:comment """re-adds checkedout item to local cache after a restore (if required)""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Service.getOutputData
+yawl:Service_getOutputData_15 a yawl:Method ;
+    rdfs:label "getOutputData" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getOutputData(String data)" ;
+    rdfs:comment """@param data @return""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Service.sort
+yawl:Service_sort_16 a yawl:Method ;
+    rdfs:label "sort" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sort(List mappings)" ;
+    rdfs:comment """sort mappings by workItemId ascending @param mappings""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Service.isNoWorkItemErrorMsg
+yawl:Service_isNoWorkItemErrorMsg_17 a yawl:Method ;
+    rdfs:label "isNoWorkItemErrorMsg" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isNoWorkItemErrorMsg(String msg)" ;
+    rdfs:comment """returns true, if string contains error message about no work item exists in YAWL engine @return""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Service.getSpecificationForCase
+yawl:Service_getSpecificationForCase_18 a yawl:Method ;
+    rdfs:label "getSpecificationForCase" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getSpecificationForCase(String caseId)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:Service__log a yawl:Field ;
+    rdfs:label "_log" .
+
+yawl:Service__cancelledWorkitemOrCaseIds a yawl:Field ;
+    rdfs:label "_cancelledWorkitemOrCaseIds" .
+
+yawl:Service__dataMapper a yawl:Field ;
+    rdfs:label "_dataMapper" .
+
+yawl:Service__handle a yawl:Field ;
+    rdfs:label "_handle" .
+
+yawl:Service__props a yawl:Field ;
+    rdfs:label "_props" .
+
+yawl:Service__config a yawl:Field ;
+    rdfs:label "_config" .
+
+yawl:Service_REMOVE_MAPPING_NOT_IN_YAWL a yawl:Field ;
+    rdfs:label "REMOVE_MAPPING_NOT_IN_YAWL" .
+
+
+

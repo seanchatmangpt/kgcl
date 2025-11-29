@@ -1,0 +1,349 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.dynform.DynFormUserAttributes
+yawl:DynFormUserAttributes a yawl:Class ;
+    rdfs:label "DynFormUserAttributes" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf_dynform ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/dynform/DynFormUserAttributes.java"^^xsd:string ;
+    rdfs:comment """This class manages the set of user-defined (at design-time) extended attributes of a workitem, some of which will affect the way the dynamic form is displayed. Author: Michael Adams Date: 24/02/2009""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DynFormUserAttributes_set_1 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_merge_2 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_getValue_3 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_hasValue_4 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_getBooleanValue_5 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_getIntegerValue_6 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_isReadOnly_7 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_isHidden_8 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_isSkipValidation_9 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_isBlackout_10 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_isMandatory_11 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_isOptional_12 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_hasHideIfQuery_13 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_isHideIf_14 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_getAlertText_15 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_getLabelText_16 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_getToolTipText_17 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_isTextArea_18 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_getTextJustify_19 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_getBackgroundColour_20 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_getUserDefinedFontStyle_21 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_getUserDefinedFont_22 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_getUserDefinedFontStyle_23 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_getUserDefinedFont_24 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_getFormHeaderFontStyle_25 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_getFormHeaderFont_26 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_getImageAbove_27 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_getImageBelow_28 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_getImageAboveAlign_29 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_getImageBelowAlign_30 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_isLineAbove_31 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_isLineBelow_32 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_getTextAbove_33 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_getTextBelow_34 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_getMaxFieldWidth_35 ;
+    yawl:hasMethod yawl:DynFormUserAttributes_hasFontAttributes_36 ;
+    yawl:hasField yawl:DynFormUserAttributes__attributeMap ;
+    .
+
+
+# Method: DynFormUserAttributes.set
+yawl:DynFormUserAttributes_set_1 a yawl:Method ;
+    rdfs:label "set" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set(Map attributeMap)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.merge
+yawl:DynFormUserAttributes_merge_2 a yawl:Method ;
+    rdfs:label "merge" ;
+    yawl:returnType "void" ;
+    yawl:signature "void merge(Map mergeMap)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.getValue
+yawl:DynFormUserAttributes_getValue_3 a yawl:Method ;
+    rdfs:label "getValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getValue(String attribute)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.hasValue
+yawl:DynFormUserAttributes_hasValue_4 a yawl:Method ;
+    rdfs:label "hasValue" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasValue(String attribute)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.getBooleanValue
+yawl:DynFormUserAttributes_getBooleanValue_5 a yawl:Method ;
+    rdfs:label "getBooleanValue" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean getBooleanValue(String attribute)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.getIntegerValue
+yawl:DynFormUserAttributes_getIntegerValue_6 a yawl:Method ;
+    rdfs:label "getIntegerValue" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getIntegerValue(String attribute)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.isReadOnly
+yawl:DynFormUserAttributes_isReadOnly_7 a yawl:Method ;
+    rdfs:label "isReadOnly" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isReadOnly()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.isHidden
+yawl:DynFormUserAttributes_isHidden_8 a yawl:Method ;
+    rdfs:label "isHidden" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isHidden()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.isSkipValidation
+yawl:DynFormUserAttributes_isSkipValidation_9 a yawl:Method ;
+    rdfs:label "isSkipValidation" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isSkipValidation()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.isBlackout
+yawl:DynFormUserAttributes_isBlackout_10 a yawl:Method ;
+    rdfs:label "isBlackout" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isBlackout()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.isMandatory
+yawl:DynFormUserAttributes_isMandatory_11 a yawl:Method ;
+    rdfs:label "isMandatory" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isMandatory()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.isOptional
+yawl:DynFormUserAttributes_isOptional_12 a yawl:Method ;
+    rdfs:label "isOptional" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isOptional()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.hasHideIfQuery
+yawl:DynFormUserAttributes_hasHideIfQuery_13 a yawl:Method ;
+    rdfs:label "hasHideIfQuery" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasHideIfQuery()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.isHideIf
+yawl:DynFormUserAttributes_isHideIf_14 a yawl:Method ;
+    rdfs:label "isHideIf" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isHideIf(String data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.getAlertText
+yawl:DynFormUserAttributes_getAlertText_15 a yawl:Method ;
+    rdfs:label "getAlertText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAlertText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.getLabelText
+yawl:DynFormUserAttributes_getLabelText_16 a yawl:Method ;
+    rdfs:label "getLabelText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLabelText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.getToolTipText
+yawl:DynFormUserAttributes_getToolTipText_17 a yawl:Method ;
+    rdfs:label "getToolTipText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getToolTipText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.isTextArea
+yawl:DynFormUserAttributes_isTextArea_18 a yawl:Method ;
+    rdfs:label "isTextArea" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isTextArea()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.getTextJustify
+yawl:DynFormUserAttributes_getTextJustify_19 a yawl:Method ;
+    rdfs:label "getTextJustify" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTextJustify()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.getBackgroundColour
+yawl:DynFormUserAttributes_getBackgroundColour_20 a yawl:Method ;
+    rdfs:label "getBackgroundColour" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBackgroundColour()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.getUserDefinedFontStyle
+yawl:DynFormUserAttributes_getUserDefinedFontStyle_21 a yawl:Method ;
+    rdfs:label "getUserDefinedFontStyle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUserDefinedFontStyle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.getUserDefinedFont
+yawl:DynFormUserAttributes_getUserDefinedFont_22 a yawl:Method ;
+    rdfs:label "getUserDefinedFont" ;
+    yawl:returnType "Font" ;
+    yawl:signature "Font getUserDefinedFont()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.getUserDefinedFontStyle
+yawl:DynFormUserAttributes_getUserDefinedFontStyle_23 a yawl:Method ;
+    rdfs:label "getUserDefinedFontStyle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUserDefinedFontStyle(boolean header)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.getUserDefinedFont
+yawl:DynFormUserAttributes_getUserDefinedFont_24 a yawl:Method ;
+    rdfs:label "getUserDefinedFont" ;
+    yawl:returnType "Font" ;
+    yawl:signature "Font getUserDefinedFont(boolean header)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.getFormHeaderFontStyle
+yawl:DynFormUserAttributes_getFormHeaderFontStyle_25 a yawl:Method ;
+    rdfs:label "getFormHeaderFontStyle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFormHeaderFontStyle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.getFormHeaderFont
+yawl:DynFormUserAttributes_getFormHeaderFont_26 a yawl:Method ;
+    rdfs:label "getFormHeaderFont" ;
+    yawl:returnType "Font" ;
+    yawl:signature "Font getFormHeaderFont()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.getImageAbove
+yawl:DynFormUserAttributes_getImageAbove_27 a yawl:Method ;
+    rdfs:label "getImageAbove" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getImageAbove()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.getImageBelow
+yawl:DynFormUserAttributes_getImageBelow_28 a yawl:Method ;
+    rdfs:label "getImageBelow" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getImageBelow()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.getImageAboveAlign
+yawl:DynFormUserAttributes_getImageAboveAlign_29 a yawl:Method ;
+    rdfs:label "getImageAboveAlign" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getImageAboveAlign()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.getImageBelowAlign
+yawl:DynFormUserAttributes_getImageBelowAlign_30 a yawl:Method ;
+    rdfs:label "getImageBelowAlign" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getImageBelowAlign()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.isLineAbove
+yawl:DynFormUserAttributes_isLineAbove_31 a yawl:Method ;
+    rdfs:label "isLineAbove" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isLineAbove()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.isLineBelow
+yawl:DynFormUserAttributes_isLineBelow_32 a yawl:Method ;
+    rdfs:label "isLineBelow" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isLineBelow()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.getTextAbove
+yawl:DynFormUserAttributes_getTextAbove_33 a yawl:Method ;
+    rdfs:label "getTextAbove" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTextAbove()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.getTextBelow
+yawl:DynFormUserAttributes_getTextBelow_34 a yawl:Method ;
+    rdfs:label "getTextBelow" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTextBelow()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.getMaxFieldWidth
+yawl:DynFormUserAttributes_getMaxFieldWidth_35 a yawl:Method ;
+    rdfs:label "getMaxFieldWidth" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getMaxFieldWidth()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormUserAttributes.hasFontAttributes
+yawl:DynFormUserAttributes_hasFontAttributes_36 a yawl:Method ;
+    rdfs:label "hasFontAttributes" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasFontAttributes(boolean header)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:DynFormUserAttributes__attributeMap a yawl:Field ;
+    rdfs:label "_attributeMap" .
+
+
+

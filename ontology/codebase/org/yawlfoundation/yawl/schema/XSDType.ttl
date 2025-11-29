@@ -1,0 +1,404 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.schema.XSDType
+yawl:XSDType a yawl:Class ;
+    rdfs:label "XSDType" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_schema ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/schema/XSDType.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 14/09/2008""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:XSDType_getString_1 ;
+    yawl:hasMethod yawl:XSDType_isBuiltInType_2 ;
+    yawl:hasMethod yawl:XSDType_getOrdinal_3 ;
+    yawl:hasMethod yawl:XSDType_isNumericType_4 ;
+    yawl:hasMethod yawl:XSDType_isIntegralType_5 ;
+    yawl:hasMethod yawl:XSDType_isFloatType_6 ;
+    yawl:hasMethod yawl:XSDType_isBooleanType_7 ;
+    yawl:hasMethod yawl:XSDType_isDateType_8 ;
+    yawl:hasMethod yawl:XSDType_isListType_9 ;
+    yawl:hasMethod yawl:XSDType_isBinaryType_10 ;
+    yawl:hasMethod yawl:XSDType_isStringForType_11 ;
+    yawl:hasMethod yawl:XSDType_getBuiltInTypeList_12 ;
+    yawl:hasMethod yawl:XSDType_getBuiltInTypeArray_13 ;
+    yawl:hasMethod yawl:XSDType_getSampleValue_14 ;
+    yawl:hasMethod yawl:XSDType_getConstrainingFacetMap_15 ;
+    yawl:hasMethod yawl:XSDType_isValidFacet_16 ;
+    yawl:hasMethod yawl:XSDType_makeYAWLTypeArray_17 ;
+    yawl:hasMethod yawl:XSDType_makeList_18 ;
+    yawl:hasMethod yawl:XSDType_getDateTimeValue_19 ;
+    yawl:hasField yawl:XSDType_INVALID_TYPE ;
+    yawl:hasField yawl:XSDType_ANY_TYPE ;
+    yawl:hasField yawl:XSDType_INTEGER ;
+    yawl:hasField yawl:XSDType_POSITIVE_INTEGER ;
+    yawl:hasField yawl:XSDType_NEGATIVE_INTEGER ;
+    yawl:hasField yawl:XSDType_NON_POSITIVE_INTEGER ;
+    yawl:hasField yawl:XSDType_NON_NEGATIVE_INTEGER ;
+    yawl:hasField yawl:XSDType_INT ;
+    yawl:hasField yawl:XSDType_LONG ;
+    yawl:hasField yawl:XSDType_SHORT ;
+    yawl:hasField yawl:XSDType_BYTE ;
+    yawl:hasField yawl:XSDType_UNSIGNED_LONG ;
+    yawl:hasField yawl:XSDType_UNSIGNED_INT ;
+    yawl:hasField yawl:XSDType_UNSIGNED_SHORT ;
+    yawl:hasField yawl:XSDType_UNSIGNED_BYTE ;
+    yawl:hasField yawl:XSDType_DOUBLE ;
+    yawl:hasField yawl:XSDType_FLOAT ;
+    yawl:hasField yawl:XSDType_DECIMAL ;
+    yawl:hasField yawl:XSDType_STRING ;
+    yawl:hasField yawl:XSDType_NORMALIZED_STRING ;
+    yawl:hasField yawl:XSDType_TOKEN ;
+    yawl:hasField yawl:XSDType_LANGUAGE ;
+    yawl:hasField yawl:XSDType_NMTOKEN ;
+    yawl:hasField yawl:XSDType_NMTOKENS ;
+    yawl:hasField yawl:XSDType_NAME ;
+    yawl:hasField yawl:XSDType_NCNAME ;
+    yawl:hasField yawl:XSDType_DATE ;
+    yawl:hasField yawl:XSDType_TIME ;
+    yawl:hasField yawl:XSDType_DATETIME ;
+    yawl:hasField yawl:XSDType_DURATION ;
+    yawl:hasField yawl:XSDType_GDAY ;
+    yawl:hasField yawl:XSDType_GMONTH ;
+    yawl:hasField yawl:XSDType_GYEAR ;
+    yawl:hasField yawl:XSDType_GMONTHDAY ;
+    yawl:hasField yawl:XSDType_GYEARMONTH ;
+    yawl:hasField yawl:XSDType_ID ;
+    yawl:hasField yawl:XSDType_IDREF ;
+    yawl:hasField yawl:XSDType_IDREFS ;
+    yawl:hasField yawl:XSDType_ENTITY ;
+    yawl:hasField yawl:XSDType_ENTITIES ;
+    yawl:hasField yawl:XSDType_QNAME ;
+    yawl:hasField yawl:XSDType_BOOLEAN ;
+    yawl:hasField yawl:XSDType_HEX_BINARY ;
+    yawl:hasField yawl:XSDType_BASE64_BINARY ;
+    yawl:hasField yawl:XSDType_NOTATION ;
+    yawl:hasField yawl:XSDType_ANY_URI ;
+    yawl:hasField yawl:XSDType__typeList ;
+    .
+
+
+# Method: XSDType.getString
+yawl:XSDType_getString_1 a yawl:Method ;
+    rdfs:label "getString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getString(int type)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XSDType.isBuiltInType
+yawl:XSDType_isBuiltInType_2 a yawl:Method ;
+    rdfs:label "isBuiltInType" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isBuiltInType(String type)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XSDType.getOrdinal
+yawl:XSDType_getOrdinal_3 a yawl:Method ;
+    rdfs:label "getOrdinal" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getOrdinal(String type)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XSDType.isNumericType
+yawl:XSDType_isNumericType_4 a yawl:Method ;
+    rdfs:label "isNumericType" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isNumericType(String type)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XSDType.isIntegralType
+yawl:XSDType_isIntegralType_5 a yawl:Method ;
+    rdfs:label "isIntegralType" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isIntegralType(String type)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XSDType.isFloatType
+yawl:XSDType_isFloatType_6 a yawl:Method ;
+    rdfs:label "isFloatType" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isFloatType(String type)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XSDType.isBooleanType
+yawl:XSDType_isBooleanType_7 a yawl:Method ;
+    rdfs:label "isBooleanType" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isBooleanType(String type)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XSDType.isDateType
+yawl:XSDType_isDateType_8 a yawl:Method ;
+    rdfs:label "isDateType" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isDateType(String type)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XSDType.isListType
+yawl:XSDType_isListType_9 a yawl:Method ;
+    rdfs:label "isListType" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isListType(String type)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XSDType.isBinaryType
+yawl:XSDType_isBinaryType_10 a yawl:Method ;
+    rdfs:label "isBinaryType" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isBinaryType(String type)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XSDType.isStringForType
+yawl:XSDType_isStringForType_11 a yawl:Method ;
+    rdfs:label "isStringForType" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isStringForType(String s, int type)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XSDType.getBuiltInTypeList
+yawl:XSDType_getBuiltInTypeList_12 a yawl:Method ;
+    rdfs:label "getBuiltInTypeList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getBuiltInTypeList()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XSDType.getBuiltInTypeArray
+yawl:XSDType_getBuiltInTypeArray_13 a yawl:Method ;
+    rdfs:label "getBuiltInTypeArray" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBuiltInTypeArray()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XSDType.getSampleValue
+yawl:XSDType_getSampleValue_14 a yawl:Method ;
+    rdfs:label "getSampleValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSampleValue(String type)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XSDType.getConstrainingFacetMap
+yawl:XSDType_getConstrainingFacetMap_15 a yawl:Method ;
+    rdfs:label "getConstrainingFacetMap" ;
+    yawl:returnType "char" ;
+    yawl:signature "char getConstrainingFacetMap(String type)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XSDType.isValidFacet
+yawl:XSDType_isValidFacet_16 a yawl:Method ;
+    rdfs:label "isValidFacet" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isValidFacet(String facetName, String type)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XSDType.makeYAWLTypeArray
+yawl:XSDType_makeYAWLTypeArray_17 a yawl:Method ;
+    rdfs:label "makeYAWLTypeArray" ;
+    yawl:returnType "String" ;
+    yawl:signature "String makeYAWLTypeArray()" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XSDType.makeList
+yawl:XSDType_makeList_18 a yawl:Method ;
+    rdfs:label "makeList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List makeList()" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XSDType.getDateTimeValue
+yawl:XSDType_getDateTimeValue_19 a yawl:Method ;
+    rdfs:label "getDateTimeValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDateTimeValue(String pattern)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:XSDType_INVALID_TYPE a yawl:Field ;
+    rdfs:label "INVALID_TYPE" .
+
+yawl:XSDType_ANY_TYPE a yawl:Field ;
+    rdfs:label "ANY_TYPE" .
+
+yawl:XSDType_INTEGER a yawl:Field ;
+    rdfs:label "INTEGER" .
+
+yawl:XSDType_POSITIVE_INTEGER a yawl:Field ;
+    rdfs:label "POSITIVE_INTEGER" .
+
+yawl:XSDType_NEGATIVE_INTEGER a yawl:Field ;
+    rdfs:label "NEGATIVE_INTEGER" .
+
+yawl:XSDType_NON_POSITIVE_INTEGER a yawl:Field ;
+    rdfs:label "NON_POSITIVE_INTEGER" .
+
+yawl:XSDType_NON_NEGATIVE_INTEGER a yawl:Field ;
+    rdfs:label "NON_NEGATIVE_INTEGER" .
+
+yawl:XSDType_INT a yawl:Field ;
+    rdfs:label "INT" .
+
+yawl:XSDType_LONG a yawl:Field ;
+    rdfs:label "LONG" .
+
+yawl:XSDType_SHORT a yawl:Field ;
+    rdfs:label "SHORT" .
+
+yawl:XSDType_BYTE a yawl:Field ;
+    rdfs:label "BYTE" .
+
+yawl:XSDType_UNSIGNED_LONG a yawl:Field ;
+    rdfs:label "UNSIGNED_LONG" .
+
+yawl:XSDType_UNSIGNED_INT a yawl:Field ;
+    rdfs:label "UNSIGNED_INT" .
+
+yawl:XSDType_UNSIGNED_SHORT a yawl:Field ;
+    rdfs:label "UNSIGNED_SHORT" .
+
+yawl:XSDType_UNSIGNED_BYTE a yawl:Field ;
+    rdfs:label "UNSIGNED_BYTE" .
+
+yawl:XSDType_DOUBLE a yawl:Field ;
+    rdfs:label "DOUBLE" .
+
+yawl:XSDType_FLOAT a yawl:Field ;
+    rdfs:label "FLOAT" .
+
+yawl:XSDType_DECIMAL a yawl:Field ;
+    rdfs:label "DECIMAL" .
+
+yawl:XSDType_STRING a yawl:Field ;
+    rdfs:label "STRING" .
+
+yawl:XSDType_NORMALIZED_STRING a yawl:Field ;
+    rdfs:label "NORMALIZED_STRING" .
+
+yawl:XSDType_TOKEN a yawl:Field ;
+    rdfs:label "TOKEN" .
+
+yawl:XSDType_LANGUAGE a yawl:Field ;
+    rdfs:label "LANGUAGE" .
+
+yawl:XSDType_NMTOKEN a yawl:Field ;
+    rdfs:label "NMTOKEN" .
+
+yawl:XSDType_NMTOKENS a yawl:Field ;
+    rdfs:label "NMTOKENS" .
+
+yawl:XSDType_NAME a yawl:Field ;
+    rdfs:label "NAME" .
+
+yawl:XSDType_NCNAME a yawl:Field ;
+    rdfs:label "NCNAME" .
+
+yawl:XSDType_DATE a yawl:Field ;
+    rdfs:label "DATE" .
+
+yawl:XSDType_TIME a yawl:Field ;
+    rdfs:label "TIME" .
+
+yawl:XSDType_DATETIME a yawl:Field ;
+    rdfs:label "DATETIME" .
+
+yawl:XSDType_DURATION a yawl:Field ;
+    rdfs:label "DURATION" .
+
+yawl:XSDType_GDAY a yawl:Field ;
+    rdfs:label "GDAY" .
+
+yawl:XSDType_GMONTH a yawl:Field ;
+    rdfs:label "GMONTH" .
+
+yawl:XSDType_GYEAR a yawl:Field ;
+    rdfs:label "GYEAR" .
+
+yawl:XSDType_GMONTHDAY a yawl:Field ;
+    rdfs:label "GMONTHDAY" .
+
+yawl:XSDType_GYEARMONTH a yawl:Field ;
+    rdfs:label "GYEARMONTH" .
+
+yawl:XSDType_ID a yawl:Field ;
+    rdfs:label "ID" .
+
+yawl:XSDType_IDREF a yawl:Field ;
+    rdfs:label "IDREF" .
+
+yawl:XSDType_IDREFS a yawl:Field ;
+    rdfs:label "IDREFS" .
+
+yawl:XSDType_ENTITY a yawl:Field ;
+    rdfs:label "ENTITY" .
+
+yawl:XSDType_ENTITIES a yawl:Field ;
+    rdfs:label "ENTITIES" .
+
+yawl:XSDType_QNAME a yawl:Field ;
+    rdfs:label "QNAME" .
+
+yawl:XSDType_BOOLEAN a yawl:Field ;
+    rdfs:label "BOOLEAN" .
+
+yawl:XSDType_HEX_BINARY a yawl:Field ;
+    rdfs:label "HEX_BINARY" .
+
+yawl:XSDType_BASE64_BINARY a yawl:Field ;
+    rdfs:label "BASE64_BINARY" .
+
+yawl:XSDType_NOTATION a yawl:Field ;
+    rdfs:label "NOTATION" .
+
+yawl:XSDType_ANY_URI a yawl:Field ;
+    rdfs:label "ANY_URI" .
+
+yawl:XSDType__typeList a yawl:Field ;
+    rdfs:label "_typeList" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_procletService a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.procletService" .
+
+

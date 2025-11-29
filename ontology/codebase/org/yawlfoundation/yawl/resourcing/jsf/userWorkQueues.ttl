@@ -1,0 +1,1370 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.userWorkQueues
+yawl:userWorkQueues a yawl:Class ;
+    rdfs:label "userWorkQueues" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/userWorkQueues.java"^^xsd:string ;
+    yawl:extends yawl:AbstractPageBean ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:userWorkQueues__init_1 ;
+    yawl:hasMethod yawl:userWorkQueues_init_2 ;
+    yawl:hasMethod yawl:userWorkQueues_preprocess_3 ;
+    yawl:hasMethod yawl:userWorkQueues_destroy_4 ;
+    yawl:hasMethod yawl:userWorkQueues_getRequestBean_5 ;
+    yawl:hasMethod yawl:userWorkQueues_getApplicationBean_6 ;
+    yawl:hasMethod yawl:userWorkQueues_getSessionBean_7 ;
+    yawl:hasMethod yawl:userWorkQueues_getPage1_8 ;
+    yawl:hasMethod yawl:userWorkQueues_setPage1_9 ;
+    yawl:hasMethod yawl:userWorkQueues_getHtml1_10 ;
+    yawl:hasMethod yawl:userWorkQueues_setHtml1_11 ;
+    yawl:hasMethod yawl:userWorkQueues_getHead1_12 ;
+    yawl:hasMethod yawl:userWorkQueues_setHead1_13 ;
+    yawl:hasMethod yawl:userWorkQueues_getLink1_14 ;
+    yawl:hasMethod yawl:userWorkQueues_setLink1_15 ;
+    yawl:hasMethod yawl:userWorkQueues_getBody1_16 ;
+    yawl:hasMethod yawl:userWorkQueues_setBody1_17 ;
+    yawl:hasMethod yawl:userWorkQueues_getForm1_18 ;
+    yawl:hasMethod yawl:userWorkQueues_setForm1_19 ;
+    yawl:hasMethod yawl:userWorkQueues_getTabSet_20 ;
+    yawl:hasMethod yawl:userWorkQueues_setTabSet_21 ;
+    yawl:hasMethod yawl:userWorkQueues_getTabOffered_22 ;
+    yawl:hasMethod yawl:userWorkQueues_setTabOffered_23 ;
+    yawl:hasMethod yawl:userWorkQueues_getLpOffered_24 ;
+    yawl:hasMethod yawl:userWorkQueues_setLpOffered_25 ;
+    yawl:hasMethod yawl:userWorkQueues_getTabAllocated_26 ;
+    yawl:hasMethod yawl:userWorkQueues_setTabAllocated_27 ;
+    yawl:hasMethod yawl:userWorkQueues_getLpAllocated_28 ;
+    yawl:hasMethod yawl:userWorkQueues_setLpAllocated_29 ;
+    yawl:hasMethod yawl:userWorkQueues_getTabStarted_30 ;
+    yawl:hasMethod yawl:userWorkQueues_setTabStarted_31 ;
+    yawl:hasMethod yawl:userWorkQueues_getLpStarted_32 ;
+    yawl:hasMethod yawl:userWorkQueues_setLpStarted_33 ;
+    yawl:hasMethod yawl:userWorkQueues_getBtnAccept_34 ;
+    yawl:hasMethod yawl:userWorkQueues_setBtnAccept_35 ;
+    yawl:hasMethod yawl:userWorkQueues_getTabSuspended_36 ;
+    yawl:hasMethod yawl:userWorkQueues_setTabSuspended_37 ;
+    yawl:hasMethod yawl:userWorkQueues_getLpSuspended_38 ;
+    yawl:hasMethod yawl:userWorkQueues_setLpSuspended_39 ;
+    yawl:hasMethod yawl:userWorkQueues_getBtnStart_40 ;
+    yawl:hasMethod yawl:userWorkQueues_setBtnStart_41 ;
+    yawl:hasMethod yawl:userWorkQueues_getBtnDeallocate_42 ;
+    yawl:hasMethod yawl:userWorkQueues_setBtnDeallocate_43 ;
+    yawl:hasMethod yawl:userWorkQueues_getBtnDelegate_44 ;
+    yawl:hasMethod yawl:userWorkQueues_setBtnDelegate_45 ;
+    yawl:hasMethod yawl:userWorkQueues_getBtnSkip_46 ;
+    yawl:hasMethod yawl:userWorkQueues_setBtnSkip_47 ;
+    yawl:hasMethod yawl:userWorkQueues_getBtnPile_48 ;
+    yawl:hasMethod yawl:userWorkQueues_setBtnPile_49 ;
+    yawl:hasMethod yawl:userWorkQueues_getBtnChain_50 ;
+    yawl:hasMethod yawl:userWorkQueues_setBtnChain_51 ;
+    yawl:hasMethod yawl:userWorkQueues_getBtnSuspend_52 ;
+    yawl:hasMethod yawl:userWorkQueues_setBtnSuspend_53 ;
+    yawl:hasMethod yawl:userWorkQueues_getBtnStateless_54 ;
+    yawl:hasMethod yawl:userWorkQueues_setBtnStateless_55 ;
+    yawl:hasMethod yawl:userWorkQueues_getBtnStateful_56 ;
+    yawl:hasMethod yawl:userWorkQueues_setBtnStateful_57 ;
+    yawl:hasMethod yawl:userWorkQueues_getBtnUnsuspend_58 ;
+    yawl:hasMethod yawl:userWorkQueues_setBtnUnsuspend_59 ;
+    yawl:hasMethod yawl:userWorkQueues_getBtnComplete_60 ;
+    yawl:hasMethod yawl:userWorkQueues_setBtnComplete_61 ;
+    yawl:hasMethod yawl:userWorkQueues_getBtnView_62 ;
+    yawl:hasMethod yawl:userWorkQueues_setBtnView_63 ;
+    yawl:hasMethod yawl:userWorkQueues_getBtnNewInstance_64 ;
+    yawl:hasMethod yawl:userWorkQueues_setBtnNewInstance_65 ;
+    yawl:hasMethod yawl:userWorkQueues_getBtnAcceptStart_66 ;
+    yawl:hasMethod yawl:userWorkQueues_setBtnAcceptStart_67 ;
+    yawl:hasMethod yawl:userWorkQueues_getMetaRefresh_68 ;
+    yawl:hasMethod yawl:userWorkQueues_setMetaRefresh_69 ;
+    yawl:hasMethod yawl:userWorkQueues_getPnlContainer_70 ;
+    yawl:hasMethod yawl:userWorkQueues_setPnlContainer_71 ;
+    yawl:hasMethod yawl:userWorkQueues_getBtnVisualiser_72 ;
+    yawl:hasMethod yawl:userWorkQueues_setBtnVisualiser_73 ;
+    yawl:hasMethod yawl:userWorkQueues_getBtnException_74 ;
+    yawl:hasMethod yawl:userWorkQueues_setBtnException_75 ;
+    yawl:hasMethod yawl:userWorkQueues_getBtnCost_76 ;
+    yawl:hasMethod yawl:userWorkQueues_setBtnCost_77 ;
+    yawl:hasMethod yawl:userWorkQueues_getBtnExceptionStyle_78 ;
+    yawl:hasMethod yawl:userWorkQueues_setBtnExceptionStyle_79 ;
+    yawl:hasMethod yawl:userWorkQueues_getBtnCostStyle_80 ;
+    yawl:hasMethod yawl:userWorkQueues_setBtnCostStyle_81 ;
+    yawl:hasMethod yawl:userWorkQueues_prerender_82 ;
+    yawl:hasMethod yawl:userWorkQueues_initDefaultTab_83 ;
+    yawl:hasMethod yawl:userWorkQueues_tabOffered_action_84 ;
+    yawl:hasMethod yawl:userWorkQueues_tabAllocated_action_85 ;
+    yawl:hasMethod yawl:userWorkQueues_tabStarted_action_86 ;
+    yawl:hasMethod yawl:userWorkQueues_tabSuspended_action_87 ;
+    yawl:hasMethod yawl:userWorkQueues_btnRefresh_action_88 ;
+    yawl:hasMethod yawl:userWorkQueues_btnVisualise_action_89 ;
+    yawl:hasMethod yawl:userWorkQueues_btnNewInstance_action_90 ;
+    yawl:hasMethod yawl:userWorkQueues_btnStart_action_91 ;
+    yawl:hasMethod yawl:userWorkQueues_btnDeallocate_action_92 ;
+    yawl:hasMethod yawl:userWorkQueues_btnSkip_action_93 ;
+    yawl:hasMethod yawl:userWorkQueues_btnPile_action_94 ;
+    yawl:hasMethod yawl:userWorkQueues_btnChain_action_95 ;
+    yawl:hasMethod yawl:userWorkQueues_btnAccept_action_96 ;
+    yawl:hasMethod yawl:userWorkQueues_btnAcceptStart_action_97 ;
+    yawl:hasMethod yawl:userWorkQueues_btnUnsuspend_action_98 ;
+    yawl:hasMethod yawl:userWorkQueues_btnSuspend_action_99 ;
+    yawl:hasMethod yawl:userWorkQueues_btnStateless_action_100 ;
+    yawl:hasMethod yawl:userWorkQueues_btnStateful_action_101 ;
+    yawl:hasMethod yawl:userWorkQueues_btnComplete_action_102 ;
+    yawl:hasMethod yawl:userWorkQueues_btnView_action_103 ;
+    yawl:hasMethod yawl:userWorkQueues_btnDelegate_action_104 ;
+    yawl:hasMethod yawl:userWorkQueues_btnException_action_105 ;
+    yawl:hasMethod yawl:userWorkQueues_btnCost_action_106 ;
+    yawl:hasMethod yawl:userWorkQueues_reallocateItem_107 ;
+    yawl:hasMethod yawl:userWorkQueues_buildSubordinatesList_108 ;
+    yawl:hasMethod yawl:userWorkQueues_doAction_109 ;
+    yawl:hasMethod yawl:userWorkQueues_showNullWIRMessage_110 ;
+    yawl:hasMethod yawl:userWorkQueues_postReallocate_111 ;
+    yawl:hasMethod yawl:userWorkQueues_postDelegate_112 ;
+    yawl:hasMethod yawl:userWorkQueues_postFormDisplay_113 ;
+    yawl:hasMethod yawl:userWorkQueues_postAddInstance_114 ;
+    yawl:hasMethod yawl:userWorkQueues_completeWorkItem_115 ;
+    yawl:hasMethod yawl:userWorkQueues_forceRefresh_116 ;
+    yawl:hasMethod yawl:userWorkQueues_redirect_117 ;
+    yawl:hasMethod yawl:userWorkQueues_updateTabHeaders_118 ;
+    yawl:hasMethod yawl:userWorkQueues_setRefreshRate_119 ;
+    yawl:hasMethod yawl:userWorkQueues_populateQueue_120 ;
+    yawl:hasMethod yawl:userWorkQueues_showWorkItem_121 ;
+    yawl:hasMethod yawl:userWorkQueues_addItemsToListOptions_122 ;
+    yawl:hasMethod yawl:userWorkQueues_isEngineSuspended_123 ;
+    yawl:hasMethod yawl:userWorkQueues_processTaskPrivileges_124 ;
+    yawl:hasMethod yawl:userWorkQueues_validateSavedData_125 ;
+    yawl:hasMethod yawl:userWorkQueues_processUserPrivileges_126 ;
+    yawl:hasMethod yawl:userWorkQueues_isStartDisabled_127 ;
+    yawl:hasMethod yawl:userWorkQueues_processButtonEnablement_128 ;
+    yawl:hasMethod yawl:userWorkQueues_showCostInfo_129 ;
+    yawl:hasMethod yawl:userWorkQueues_showMessagePanel_130 ;
+    yawl:hasField yawl:userWorkQueues___placeholder ;
+    yawl:hasField yawl:userWorkQueues_page1 ;
+    yawl:hasField yawl:userWorkQueues_html1 ;
+    yawl:hasField yawl:userWorkQueues_head1 ;
+    yawl:hasField yawl:userWorkQueues_link1 ;
+    yawl:hasField yawl:userWorkQueues_body1 ;
+    yawl:hasField yawl:userWorkQueues_form1 ;
+    yawl:hasField yawl:userWorkQueues_tabSet ;
+    yawl:hasField yawl:userWorkQueues_tabOffered ;
+    yawl:hasField yawl:userWorkQueues_lpOffered ;
+    yawl:hasField yawl:userWorkQueues_tabAllocated ;
+    yawl:hasField yawl:userWorkQueues_lpAllocated ;
+    yawl:hasField yawl:userWorkQueues_tabStarted ;
+    yawl:hasField yawl:userWorkQueues_lpStarted ;
+    yawl:hasField yawl:userWorkQueues_btnAccept ;
+    yawl:hasField yawl:userWorkQueues_tabSuspended ;
+    yawl:hasField yawl:userWorkQueues_lpSuspended ;
+    yawl:hasField yawl:userWorkQueues_btnStart ;
+    yawl:hasField yawl:userWorkQueues_btnDeallocate ;
+    yawl:hasField yawl:userWorkQueues_btnDelegate ;
+    yawl:hasField yawl:userWorkQueues_btnSkip ;
+    yawl:hasField yawl:userWorkQueues_btnPile ;
+    yawl:hasField yawl:userWorkQueues_btnChain ;
+    yawl:hasField yawl:userWorkQueues_btnSuspend ;
+    yawl:hasField yawl:userWorkQueues_btnStateless ;
+    yawl:hasField yawl:userWorkQueues_btnStateful ;
+    yawl:hasField yawl:userWorkQueues_btnUnsuspend ;
+    yawl:hasField yawl:userWorkQueues_btnComplete ;
+    yawl:hasField yawl:userWorkQueues_btnView ;
+    yawl:hasField yawl:userWorkQueues_btnNewInstance ;
+    yawl:hasField yawl:userWorkQueues_btnAcceptStart ;
+    yawl:hasField yawl:userWorkQueues_metaRefresh ;
+    yawl:hasField yawl:userWorkQueues_pnlContainer ;
+    yawl:hasField yawl:userWorkQueues_btnVisualiser ;
+    yawl:hasField yawl:userWorkQueues_btnException ;
+    yawl:hasField yawl:userWorkQueues_btnCost ;
+    yawl:hasField yawl:userWorkQueues_btnExceptionStyle ;
+    yawl:hasField yawl:userWorkQueues_btnCostStyle ;
+    yawl:hasField yawl:userWorkQueues__sb ;
+    yawl:hasField yawl:userWorkQueues__rm ;
+    yawl:hasField yawl:userWorkQueues_msgPanel ;
+    .
+
+
+# Method: userWorkQueues._init
+yawl:userWorkQueues__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: userWorkQueues.init
+yawl:userWorkQueues_init_2 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.preprocess
+yawl:userWorkQueues_preprocess_3 a yawl:Method ;
+    rdfs:label "preprocess" ;
+    yawl:returnType "void" ;
+    yawl:signature "void preprocess()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.destroy
+yawl:userWorkQueues_destroy_4 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getRequestBean
+yawl:userWorkQueues_getRequestBean_5 a yawl:Method ;
+    rdfs:label "getRequestBean" ;
+    yawl:returnType "RequestBean" ;
+    yawl:signature "RequestBean getRequestBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: userWorkQueues.getApplicationBean
+yawl:userWorkQueues_getApplicationBean_6 a yawl:Method ;
+    rdfs:label "getApplicationBean" ;
+    yawl:returnType "ApplicationBean" ;
+    yawl:signature "ApplicationBean getApplicationBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: userWorkQueues.getSessionBean
+yawl:userWorkQueues_getSessionBean_7 a yawl:Method ;
+    rdfs:label "getSessionBean" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getSessionBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: userWorkQueues.getPage1
+yawl:userWorkQueues_getPage1_8 a yawl:Method ;
+    rdfs:label "getPage1" ;
+    yawl:returnType "Page" ;
+    yawl:signature "Page getPage1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setPage1
+yawl:userWorkQueues_setPage1_9 a yawl:Method ;
+    rdfs:label "setPage1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPage1(Page p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getHtml1
+yawl:userWorkQueues_getHtml1_10 a yawl:Method ;
+    rdfs:label "getHtml1" ;
+    yawl:returnType "Html" ;
+    yawl:signature "Html getHtml1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setHtml1
+yawl:userWorkQueues_setHtml1_11 a yawl:Method ;
+    rdfs:label "setHtml1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHtml1(Html h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getHead1
+yawl:userWorkQueues_getHead1_12 a yawl:Method ;
+    rdfs:label "getHead1" ;
+    yawl:returnType "Head" ;
+    yawl:signature "Head getHead1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setHead1
+yawl:userWorkQueues_setHead1_13 a yawl:Method ;
+    rdfs:label "setHead1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHead1(Head h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getLink1
+yawl:userWorkQueues_getLink1_14 a yawl:Method ;
+    rdfs:label "getLink1" ;
+    yawl:returnType "Link" ;
+    yawl:signature "Link getLink1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setLink1
+yawl:userWorkQueues_setLink1_15 a yawl:Method ;
+    rdfs:label "setLink1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLink1(Link l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getBody1
+yawl:userWorkQueues_getBody1_16 a yawl:Method ;
+    rdfs:label "getBody1" ;
+    yawl:returnType "Body" ;
+    yawl:signature "Body getBody1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setBody1
+yawl:userWorkQueues_setBody1_17 a yawl:Method ;
+    rdfs:label "setBody1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBody1(Body b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getForm1
+yawl:userWorkQueues_getForm1_18 a yawl:Method ;
+    rdfs:label "getForm1" ;
+    yawl:returnType "Form" ;
+    yawl:signature "Form getForm1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setForm1
+yawl:userWorkQueues_setForm1_19 a yawl:Method ;
+    rdfs:label "setForm1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setForm1(Form f)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getTabSet
+yawl:userWorkQueues_getTabSet_20 a yawl:Method ;
+    rdfs:label "getTabSet" ;
+    yawl:returnType "TabSet" ;
+    yawl:signature "TabSet getTabSet()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setTabSet
+yawl:userWorkQueues_setTabSet_21 a yawl:Method ;
+    rdfs:label "setTabSet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTabSet(TabSet ts)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getTabOffered
+yawl:userWorkQueues_getTabOffered_22 a yawl:Method ;
+    rdfs:label "getTabOffered" ;
+    yawl:returnType "Tab" ;
+    yawl:signature "Tab getTabOffered()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setTabOffered
+yawl:userWorkQueues_setTabOffered_23 a yawl:Method ;
+    rdfs:label "setTabOffered" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTabOffered(Tab t)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getLpOffered
+yawl:userWorkQueues_getLpOffered_24 a yawl:Method ;
+    rdfs:label "getLpOffered" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getLpOffered()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setLpOffered
+yawl:userWorkQueues_setLpOffered_25 a yawl:Method ;
+    rdfs:label "setLpOffered" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLpOffered(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getTabAllocated
+yawl:userWorkQueues_getTabAllocated_26 a yawl:Method ;
+    rdfs:label "getTabAllocated" ;
+    yawl:returnType "Tab" ;
+    yawl:signature "Tab getTabAllocated()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setTabAllocated
+yawl:userWorkQueues_setTabAllocated_27 a yawl:Method ;
+    rdfs:label "setTabAllocated" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTabAllocated(Tab t)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getLpAllocated
+yawl:userWorkQueues_getLpAllocated_28 a yawl:Method ;
+    rdfs:label "getLpAllocated" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getLpAllocated()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setLpAllocated
+yawl:userWorkQueues_setLpAllocated_29 a yawl:Method ;
+    rdfs:label "setLpAllocated" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLpAllocated(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getTabStarted
+yawl:userWorkQueues_getTabStarted_30 a yawl:Method ;
+    rdfs:label "getTabStarted" ;
+    yawl:returnType "Tab" ;
+    yawl:signature "Tab getTabStarted()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setTabStarted
+yawl:userWorkQueues_setTabStarted_31 a yawl:Method ;
+    rdfs:label "setTabStarted" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTabStarted(Tab t)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getLpStarted
+yawl:userWorkQueues_getLpStarted_32 a yawl:Method ;
+    rdfs:label "getLpStarted" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getLpStarted()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setLpStarted
+yawl:userWorkQueues_setLpStarted_33 a yawl:Method ;
+    rdfs:label "setLpStarted" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLpStarted(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getBtnAccept
+yawl:userWorkQueues_getBtnAccept_34 a yawl:Method ;
+    rdfs:label "getBtnAccept" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnAccept()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setBtnAccept
+yawl:userWorkQueues_setBtnAccept_35 a yawl:Method ;
+    rdfs:label "setBtnAccept" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnAccept(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getTabSuspended
+yawl:userWorkQueues_getTabSuspended_36 a yawl:Method ;
+    rdfs:label "getTabSuspended" ;
+    yawl:returnType "Tab" ;
+    yawl:signature "Tab getTabSuspended()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setTabSuspended
+yawl:userWorkQueues_setTabSuspended_37 a yawl:Method ;
+    rdfs:label "setTabSuspended" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTabSuspended(Tab t)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getLpSuspended
+yawl:userWorkQueues_getLpSuspended_38 a yawl:Method ;
+    rdfs:label "getLpSuspended" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getLpSuspended()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setLpSuspended
+yawl:userWorkQueues_setLpSuspended_39 a yawl:Method ;
+    rdfs:label "setLpSuspended" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLpSuspended(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getBtnStart
+yawl:userWorkQueues_getBtnStart_40 a yawl:Method ;
+    rdfs:label "getBtnStart" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnStart()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setBtnStart
+yawl:userWorkQueues_setBtnStart_41 a yawl:Method ;
+    rdfs:label "setBtnStart" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnStart(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getBtnDeallocate
+yawl:userWorkQueues_getBtnDeallocate_42 a yawl:Method ;
+    rdfs:label "getBtnDeallocate" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnDeallocate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setBtnDeallocate
+yawl:userWorkQueues_setBtnDeallocate_43 a yawl:Method ;
+    rdfs:label "setBtnDeallocate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnDeallocate(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getBtnDelegate
+yawl:userWorkQueues_getBtnDelegate_44 a yawl:Method ;
+    rdfs:label "getBtnDelegate" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnDelegate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setBtnDelegate
+yawl:userWorkQueues_setBtnDelegate_45 a yawl:Method ;
+    rdfs:label "setBtnDelegate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnDelegate(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getBtnSkip
+yawl:userWorkQueues_getBtnSkip_46 a yawl:Method ;
+    rdfs:label "getBtnSkip" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnSkip()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setBtnSkip
+yawl:userWorkQueues_setBtnSkip_47 a yawl:Method ;
+    rdfs:label "setBtnSkip" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnSkip(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getBtnPile
+yawl:userWorkQueues_getBtnPile_48 a yawl:Method ;
+    rdfs:label "getBtnPile" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnPile()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setBtnPile
+yawl:userWorkQueues_setBtnPile_49 a yawl:Method ;
+    rdfs:label "setBtnPile" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnPile(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getBtnChain
+yawl:userWorkQueues_getBtnChain_50 a yawl:Method ;
+    rdfs:label "getBtnChain" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnChain()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setBtnChain
+yawl:userWorkQueues_setBtnChain_51 a yawl:Method ;
+    rdfs:label "setBtnChain" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnChain(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getBtnSuspend
+yawl:userWorkQueues_getBtnSuspend_52 a yawl:Method ;
+    rdfs:label "getBtnSuspend" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnSuspend()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setBtnSuspend
+yawl:userWorkQueues_setBtnSuspend_53 a yawl:Method ;
+    rdfs:label "setBtnSuspend" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnSuspend(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getBtnStateless
+yawl:userWorkQueues_getBtnStateless_54 a yawl:Method ;
+    rdfs:label "getBtnStateless" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnStateless()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setBtnStateless
+yawl:userWorkQueues_setBtnStateless_55 a yawl:Method ;
+    rdfs:label "setBtnStateless" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnStateless(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getBtnStateful
+yawl:userWorkQueues_getBtnStateful_56 a yawl:Method ;
+    rdfs:label "getBtnStateful" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnStateful()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setBtnStateful
+yawl:userWorkQueues_setBtnStateful_57 a yawl:Method ;
+    rdfs:label "setBtnStateful" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnStateful(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getBtnUnsuspend
+yawl:userWorkQueues_getBtnUnsuspend_58 a yawl:Method ;
+    rdfs:label "getBtnUnsuspend" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnUnsuspend()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setBtnUnsuspend
+yawl:userWorkQueues_setBtnUnsuspend_59 a yawl:Method ;
+    rdfs:label "setBtnUnsuspend" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnUnsuspend(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getBtnComplete
+yawl:userWorkQueues_getBtnComplete_60 a yawl:Method ;
+    rdfs:label "getBtnComplete" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnComplete()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setBtnComplete
+yawl:userWorkQueues_setBtnComplete_61 a yawl:Method ;
+    rdfs:label "setBtnComplete" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnComplete(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getBtnView
+yawl:userWorkQueues_getBtnView_62 a yawl:Method ;
+    rdfs:label "getBtnView" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnView()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setBtnView
+yawl:userWorkQueues_setBtnView_63 a yawl:Method ;
+    rdfs:label "setBtnView" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnView(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getBtnNewInstance
+yawl:userWorkQueues_getBtnNewInstance_64 a yawl:Method ;
+    rdfs:label "getBtnNewInstance" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnNewInstance()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setBtnNewInstance
+yawl:userWorkQueues_setBtnNewInstance_65 a yawl:Method ;
+    rdfs:label "setBtnNewInstance" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnNewInstance(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getBtnAcceptStart
+yawl:userWorkQueues_getBtnAcceptStart_66 a yawl:Method ;
+    rdfs:label "getBtnAcceptStart" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnAcceptStart()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setBtnAcceptStart
+yawl:userWorkQueues_setBtnAcceptStart_67 a yawl:Method ;
+    rdfs:label "setBtnAcceptStart" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnAcceptStart(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getMetaRefresh
+yawl:userWorkQueues_getMetaRefresh_68 a yawl:Method ;
+    rdfs:label "getMetaRefresh" ;
+    yawl:returnType "Meta" ;
+    yawl:signature "Meta getMetaRefresh()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setMetaRefresh
+yawl:userWorkQueues_setMetaRefresh_69 a yawl:Method ;
+    rdfs:label "setMetaRefresh" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMetaRefresh(Meta m)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getPnlContainer
+yawl:userWorkQueues_getPnlContainer_70 a yawl:Method ;
+    rdfs:label "getPnlContainer" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlContainer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setPnlContainer
+yawl:userWorkQueues_setPnlContainer_71 a yawl:Method ;
+    rdfs:label "setPnlContainer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlContainer(PanelLayout pnl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getBtnVisualiser
+yawl:userWorkQueues_getBtnVisualiser_72 a yawl:Method ;
+    rdfs:label "getBtnVisualiser" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnVisualiser()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setBtnVisualiser
+yawl:userWorkQueues_setBtnVisualiser_73 a yawl:Method ;
+    rdfs:label "setBtnVisualiser" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnVisualiser(Button btn)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getBtnException
+yawl:userWorkQueues_getBtnException_74 a yawl:Method ;
+    rdfs:label "getBtnException" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnException()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setBtnException
+yawl:userWorkQueues_setBtnException_75 a yawl:Method ;
+    rdfs:label "setBtnException" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnException(Button btn)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getBtnCost
+yawl:userWorkQueues_getBtnCost_76 a yawl:Method ;
+    rdfs:label "getBtnCost" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnCost()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setBtnCost
+yawl:userWorkQueues_setBtnCost_77 a yawl:Method ;
+    rdfs:label "setBtnCost" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnCost(Button btn)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getBtnExceptionStyle
+yawl:userWorkQueues_getBtnExceptionStyle_78 a yawl:Method ;
+    rdfs:label "getBtnExceptionStyle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBtnExceptionStyle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setBtnExceptionStyle
+yawl:userWorkQueues_setBtnExceptionStyle_79 a yawl:Method ;
+    rdfs:label "setBtnExceptionStyle" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnExceptionStyle(String style)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.getBtnCostStyle
+yawl:userWorkQueues_getBtnCostStyle_80 a yawl:Method ;
+    rdfs:label "getBtnCostStyle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBtnCostStyle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.setBtnCostStyle
+yawl:userWorkQueues_setBtnCostStyle_81 a yawl:Method ;
+    rdfs:label "setBtnCostStyle" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnCostStyle(String style)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.prerender
+yawl:userWorkQueues_prerender_82 a yawl:Method ;
+    rdfs:label "prerender" ;
+    yawl:returnType "void" ;
+    yawl:signature "void prerender()" ;
+    rdfs:comment """Overridden method that is called immediately before the page is rendered""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.initDefaultTab
+yawl:userWorkQueues_initDefaultTab_83 a yawl:Method ;
+    rdfs:label "initDefaultTab" ;
+    yawl:returnType "Tab" ;
+    yawl:signature "Tab initDefaultTab()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: userWorkQueues.tabOffered_action
+yawl:userWorkQueues_tabOffered_action_84 a yawl:Method ;
+    rdfs:label "tabOffered_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String tabOffered_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.tabAllocated_action
+yawl:userWorkQueues_tabAllocated_action_85 a yawl:Method ;
+    rdfs:label "tabAllocated_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String tabAllocated_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.tabStarted_action
+yawl:userWorkQueues_tabStarted_action_86 a yawl:Method ;
+    rdfs:label "tabStarted_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String tabStarted_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.tabSuspended_action
+yawl:userWorkQueues_tabSuspended_action_87 a yawl:Method ;
+    rdfs:label "tabSuspended_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String tabSuspended_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.btnRefresh_action
+yawl:userWorkQueues_btnRefresh_action_88 a yawl:Method ;
+    rdfs:label "btnRefresh_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnRefresh_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.btnVisualise_action
+yawl:userWorkQueues_btnVisualise_action_89 a yawl:Method ;
+    rdfs:label "btnVisualise_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnVisualise_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.btnNewInstance_action
+yawl:userWorkQueues_btnNewInstance_action_90 a yawl:Method ;
+    rdfs:label "btnNewInstance_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnNewInstance_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.btnStart_action
+yawl:userWorkQueues_btnStart_action_91 a yawl:Method ;
+    rdfs:label "btnStart_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnStart_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.btnDeallocate_action
+yawl:userWorkQueues_btnDeallocate_action_92 a yawl:Method ;
+    rdfs:label "btnDeallocate_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnDeallocate_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.btnSkip_action
+yawl:userWorkQueues_btnSkip_action_93 a yawl:Method ;
+    rdfs:label "btnSkip_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnSkip_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.btnPile_action
+yawl:userWorkQueues_btnPile_action_94 a yawl:Method ;
+    rdfs:label "btnPile_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnPile_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.btnChain_action
+yawl:userWorkQueues_btnChain_action_95 a yawl:Method ;
+    rdfs:label "btnChain_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnChain_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.btnAccept_action
+yawl:userWorkQueues_btnAccept_action_96 a yawl:Method ;
+    rdfs:label "btnAccept_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnAccept_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.btnAcceptStart_action
+yawl:userWorkQueues_btnAcceptStart_action_97 a yawl:Method ;
+    rdfs:label "btnAcceptStart_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnAcceptStart_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.btnUnsuspend_action
+yawl:userWorkQueues_btnUnsuspend_action_98 a yawl:Method ;
+    rdfs:label "btnUnsuspend_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnUnsuspend_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.btnSuspend_action
+yawl:userWorkQueues_btnSuspend_action_99 a yawl:Method ;
+    rdfs:label "btnSuspend_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnSuspend_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.btnStateless_action
+yawl:userWorkQueues_btnStateless_action_100 a yawl:Method ;
+    rdfs:label "btnStateless_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnStateless_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.btnStateful_action
+yawl:userWorkQueues_btnStateful_action_101 a yawl:Method ;
+    rdfs:label "btnStateful_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnStateful_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.btnComplete_action
+yawl:userWorkQueues_btnComplete_action_102 a yawl:Method ;
+    rdfs:label "btnComplete_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnComplete_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.btnView_action
+yawl:userWorkQueues_btnView_action_103 a yawl:Method ;
+    rdfs:label "btnView_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnView_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.btnDelegate_action
+yawl:userWorkQueues_btnDelegate_action_104 a yawl:Method ;
+    rdfs:label "btnDelegate_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnDelegate_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.btnException_action
+yawl:userWorkQueues_btnException_action_105 a yawl:Method ;
+    rdfs:label "btnException_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnException_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.btnCost_action
+yawl:userWorkQueues_btnCost_action_106 a yawl:Method ;
+    rdfs:label "btnCost_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnCost_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.reallocateItem
+yawl:userWorkQueues_reallocateItem_107 a yawl:Method ;
+    rdfs:label "reallocateItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String reallocateItem(boolean stateful)" ;
+    rdfs:comment """Reallocate a workitem to the chosen participant @param stateful - if true, reallocate with state preserved @return which form to navigate to""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: userWorkQueues.buildSubordinatesList
+yawl:userWorkQueues_buildSubordinatesList_108 a yawl:Method ;
+    rdfs:label "buildSubordinatesList" ;
+    yawl:returnType "String" ;
+    yawl:signature "String buildSubordinatesList(String action)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: userWorkQueues.doAction
+yawl:userWorkQueues_doAction_109 a yawl:Method ;
+    rdfs:label "doAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String doAction(int queueType, String action)" ;
+    rdfs:comment """Performs the appropriate user action with the specified queue""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: userWorkQueues.showNullWIRMessage
+yawl:userWorkQueues_showNullWIRMessage_110 a yawl:Method ;
+    rdfs:label "showNullWIRMessage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showNullWIRMessage(String action)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: userWorkQueues.postReallocate
+yawl:userWorkQueues_postReallocate_111 a yawl:Method ;
+    rdfs:label "postReallocate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void postReallocate()" ;
+    rdfs:comment """perform reallocation after user selection on secondary screen""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: userWorkQueues.postDelegate
+yawl:userWorkQueues_postDelegate_112 a yawl:Method ;
+    rdfs:label "postDelegate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void postDelegate()" ;
+    rdfs:comment """perform delegation after user selection on secondary screen""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: userWorkQueues.postFormDisplay
+yawl:userWorkQueues_postFormDisplay_113 a yawl:Method ;
+    rdfs:label "postFormDisplay" ;
+    yawl:returnType "void" ;
+    yawl:signature "void postFormDisplay()" ;
+    rdfs:comment """takes necessary action after editing a form""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: userWorkQueues.postAddInstance
+yawl:userWorkQueues_postAddInstance_114 a yawl:Method ;
+    rdfs:label "postAddInstance" ;
+    yawl:returnType "void" ;
+    yawl:signature "void postAddInstance()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: userWorkQueues.completeWorkItem
+yawl:userWorkQueues_completeWorkItem_115 a yawl:Method ;
+    rdfs:label "completeWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void completeWorkItem(WorkItemRecord wir, Participant p)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: userWorkQueues.forceRefresh
+yawl:userWorkQueues_forceRefresh_116 a yawl:Method ;
+    rdfs:label "forceRefresh" ;
+    yawl:returnType "void" ;
+    yawl:signature "void forceRefresh()" ;
+    rdfs:comment """refreshes the page""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.redirect
+yawl:userWorkQueues_redirect_117 a yawl:Method ;
+    rdfs:label "redirect" ;
+    yawl:returnType "void" ;
+    yawl:signature "void redirect(String uri)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: userWorkQueues.updateTabHeaders
+yawl:userWorkQueues_updateTabHeaders_118 a yawl:Method ;
+    rdfs:label "updateTabHeaders" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateTabHeaders(Tab selected)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: userWorkQueues.setRefreshRate
+yawl:userWorkQueues_setRefreshRate_119 a yawl:Method ;
+    rdfs:label "setRefreshRate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRefreshRate(int rate)" ;
+    rdfs:comment """Sets the auto refresh rate of the page @param rate if <0, disables page refreshes; if >0, set refresh rate to that number of seconds; if 0, set the rate to the default provided by the resourceService's web.xml""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: userWorkQueues.populateQueue
+yawl:userWorkQueues_populateQueue_120 a yawl:Method ;
+    rdfs:label "populateQueue" ;
+    yawl:returnType "int" ;
+    yawl:signature "int populateQueue(int queueType)" ;
+    rdfs:comment """Populates the specified queue's workitem list and shows the selected items details @param queueType the queue to populate @return the number of items in the queue""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: userWorkQueues.showWorkItem
+yawl:userWorkQueues_showWorkItem_121 a yawl:Method ;
+    rdfs:label "showWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showWorkItem(WorkItemRecord wir)" ;
+    rdfs:comment """populate the text fields with the details of the workitem""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: userWorkQueues.addItemsToListOptions
+yawl:userWorkQueues_addItemsToListOptions_122 a yawl:Method ;
+    rdfs:label "addItemsToListOptions" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addItemsToListOptions(Set queue, WorkItemRecord selected)" ;
+    rdfs:comment """Create list of queued items and add to listbox (via sessionbean) @param queue the set of items in the queue @return the first item in the list""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: userWorkQueues.isEngineSuspended
+yawl:userWorkQueues_isEngineSuspended_123 a yawl:Method ;
+    rdfs:label "isEngineSuspended" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEngineSuspended(WorkItemRecord wir, String action)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: userWorkQueues.processTaskPrivileges
+yawl:userWorkQueues_processTaskPrivileges_124 a yawl:Method ;
+    rdfs:label "processTaskPrivileges" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processTaskPrivileges(WorkItemRecord wir, int qType)" ;
+    rdfs:comment """Enable/disable buttons depending on user/task privileges Pre: wir != null""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: userWorkQueues.validateSavedData
+yawl:userWorkQueues_validateSavedData_125 a yawl:Method ;
+    rdfs:label "validateSavedData" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validateSavedData(WorkItemRecord wir)" ;
+    rdfs:comment """@return true if the wir has updated data AND it validates against schema""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: userWorkQueues.processUserPrivileges
+yawl:userWorkQueues_processUserPrivileges_126 a yawl:Method ;
+    rdfs:label "processUserPrivileges" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processUserPrivileges(int queue)" ;
+    rdfs:comment """Enable/disable buttons using user privileges""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: userWorkQueues.isStartDisabled
+yawl:userWorkQueues_isStartDisabled_127 a yawl:Method ;
+    rdfs:label "isStartDisabled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isStartDisabled(Participant p)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: userWorkQueues.processButtonEnablement
+yawl:userWorkQueues_processButtonEnablement_128 a yawl:Method ;
+    rdfs:label "processButtonEnablement" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processButtonEnablement(int queueType)" ;
+    rdfs:comment """Disables buttons if queue is empty, enables them if not""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: userWorkQueues.showCostInfo
+yawl:userWorkQueues_showCostInfo_129 a yawl:Method ;
+    rdfs:label "showCostInfo" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showCostInfo()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: userWorkQueues.showMessagePanel
+yawl:userWorkQueues_showMessagePanel_130 a yawl:Method ;
+    rdfs:label "showMessagePanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showMessagePanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:userWorkQueues___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:userWorkQueues_page1 a yawl:Field ;
+    rdfs:label "page1" .
+
+yawl:userWorkQueues_html1 a yawl:Field ;
+    rdfs:label "html1" .
+
+yawl:userWorkQueues_head1 a yawl:Field ;
+    rdfs:label "head1" .
+
+yawl:userWorkQueues_link1 a yawl:Field ;
+    rdfs:label "link1" .
+
+yawl:userWorkQueues_body1 a yawl:Field ;
+    rdfs:label "body1" .
+
+yawl:userWorkQueues_form1 a yawl:Field ;
+    rdfs:label "form1" .
+
+yawl:userWorkQueues_tabSet a yawl:Field ;
+    rdfs:label "tabSet" .
+
+yawl:userWorkQueues_tabOffered a yawl:Field ;
+    rdfs:label "tabOffered" .
+
+yawl:userWorkQueues_lpOffered a yawl:Field ;
+    rdfs:label "lpOffered" .
+
+yawl:userWorkQueues_tabAllocated a yawl:Field ;
+    rdfs:label "tabAllocated" .
+
+yawl:userWorkQueues_lpAllocated a yawl:Field ;
+    rdfs:label "lpAllocated" .
+
+yawl:userWorkQueues_tabStarted a yawl:Field ;
+    rdfs:label "tabStarted" .
+
+yawl:userWorkQueues_lpStarted a yawl:Field ;
+    rdfs:label "lpStarted" .
+
+yawl:userWorkQueues_btnAccept a yawl:Field ;
+    rdfs:label "btnAccept" .
+
+yawl:userWorkQueues_tabSuspended a yawl:Field ;
+    rdfs:label "tabSuspended" .
+
+yawl:userWorkQueues_lpSuspended a yawl:Field ;
+    rdfs:label "lpSuspended" .
+
+yawl:userWorkQueues_btnStart a yawl:Field ;
+    rdfs:label "btnStart" .
+
+yawl:userWorkQueues_btnDeallocate a yawl:Field ;
+    rdfs:label "btnDeallocate" .
+
+yawl:userWorkQueues_btnDelegate a yawl:Field ;
+    rdfs:label "btnDelegate" .
+
+yawl:userWorkQueues_btnSkip a yawl:Field ;
+    rdfs:label "btnSkip" .
+
+yawl:userWorkQueues_btnPile a yawl:Field ;
+    rdfs:label "btnPile" .
+
+yawl:userWorkQueues_btnChain a yawl:Field ;
+    rdfs:label "btnChain" .
+
+yawl:userWorkQueues_btnSuspend a yawl:Field ;
+    rdfs:label "btnSuspend" .
+
+yawl:userWorkQueues_btnStateless a yawl:Field ;
+    rdfs:label "btnStateless" .
+
+yawl:userWorkQueues_btnStateful a yawl:Field ;
+    rdfs:label "btnStateful" .
+
+yawl:userWorkQueues_btnUnsuspend a yawl:Field ;
+    rdfs:label "btnUnsuspend" .
+
+yawl:userWorkQueues_btnComplete a yawl:Field ;
+    rdfs:label "btnComplete" .
+
+yawl:userWorkQueues_btnView a yawl:Field ;
+    rdfs:label "btnView" .
+
+yawl:userWorkQueues_btnNewInstance a yawl:Field ;
+    rdfs:label "btnNewInstance" .
+
+yawl:userWorkQueues_btnAcceptStart a yawl:Field ;
+    rdfs:label "btnAcceptStart" .
+
+yawl:userWorkQueues_metaRefresh a yawl:Field ;
+    rdfs:label "metaRefresh" .
+
+yawl:userWorkQueues_pnlContainer a yawl:Field ;
+    rdfs:label "pnlContainer" .
+
+yawl:userWorkQueues_btnVisualiser a yawl:Field ;
+    rdfs:label "btnVisualiser" .
+
+yawl:userWorkQueues_btnException a yawl:Field ;
+    rdfs:label "btnException" .
+
+yawl:userWorkQueues_btnCost a yawl:Field ;
+    rdfs:label "btnCost" .
+
+yawl:userWorkQueues_btnExceptionStyle a yawl:Field ;
+    rdfs:label "btnExceptionStyle" .
+
+yawl:userWorkQueues_btnCostStyle a yawl:Field ;
+    rdfs:label "btnCostStyle" .
+
+yawl:userWorkQueues__sb a yawl:Field ;
+    rdfs:label "_sb" .
+
+yawl:userWorkQueues__rm a yawl:Field ;
+    rdfs:label "_rm" .
+
+yawl:userWorkQueues_msgPanel a yawl:Field ;
+    rdfs:label "msgPanel" .
+
+
+

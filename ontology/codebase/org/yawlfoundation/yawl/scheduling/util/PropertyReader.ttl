@@ -1,0 +1,112 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.scheduling.util.PropertyReader
+yawl:PropertyReader a yawl:Class ;
+    rdfs:label "PropertyReader" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_scheduling_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/scheduling/util/PropertyReader.java"^^xsd:string ;
+    rdfs:comment """Reads values from .properties files""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:PropertyReader_getInstance_1 ;
+    yawl:hasMethod yawl:PropertyReader_getProperty_2 ;
+    yawl:hasMethod yawl:PropertyReader_getYAWLProperty_3 ;
+    yawl:hasMethod yawl:PropertyReader_getSchedulingProperty_4 ;
+    yawl:hasMethod yawl:PropertyReader_getBooleanProperty_5 ;
+    yawl:hasMethod yawl:PropertyReader_getIntProperty_6 ;
+    yawl:hasMethod yawl:PropertyReader_getLongProperty_7 ;
+    yawl:hasField yawl:PropertyReader__props ;
+    yawl:hasField yawl:PropertyReader_INSTANCE ;
+    yawl:hasField yawl:PropertyReader_YAWL ;
+    yawl:hasField yawl:PropertyReader_SCHEDULING ;
+    .
+
+
+# Method: PropertyReader.getInstance
+yawl:PropertyReader_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "PropertyReader" ;
+    yawl:signature "PropertyReader getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PropertyReader.getProperty
+yawl:PropertyReader_getProperty_2 a yawl:Method ;
+    rdfs:label "getProperty" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getProperty(String propFile, String key)" ;
+    rdfs:comment """Gets a property value from a .properties file @param propFile the name of the .properties file @param key the property key to get the value for @return the value for the requested key @throws java.io.IOException if the file can't be loaded or if it doesn't contain the key""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PropertyReader.getYAWLProperty
+yawl:PropertyReader_getYAWLProperty_3 a yawl:Method ;
+    rdfs:label "getYAWLProperty" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getYAWLProperty(String key)" ;
+    rdfs:comment """Gets a property value from the yawl.properties file @param key the property key to get the value for @return the value for the requested key @throws IOException if the file can't be loaded or if it doesn't contain the key""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PropertyReader.getSchedulingProperty
+yawl:PropertyReader_getSchedulingProperty_4 a yawl:Method ;
+    rdfs:label "getSchedulingProperty" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSchedulingProperty(String key)" ;
+    rdfs:comment """Gets a property value from the yawl.properties file @param key the property key to get the value for @return the value for the requested key @throws IOException if the file can't be loaded or if it doesn't contain the key""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PropertyReader.getBooleanProperty
+yawl:PropertyReader_getBooleanProperty_5 a yawl:Method ;
+    rdfs:label "getBooleanProperty" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean getBooleanProperty(String propFile, String key)" ;
+    rdfs:comment """Gets a boolean type property value from a .properties file @param propFile the name of the .properties file @param key the property key to get the value for @return the value for the requested key @throws IOException if the file can't be loaded or if it doesn't contain the key""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PropertyReader.getIntProperty
+yawl:PropertyReader_getIntProperty_6 a yawl:Method ;
+    rdfs:label "getIntProperty" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getIntProperty(String propFile, String key)" ;
+    rdfs:comment """Gets an integer type property value from a .properties file @param propFile the name of the .properties file @param key the property key to get the value for @return the value for the requested key @throws IOException if the file can't be loaded or if it doesn't contain the key or the value is not a valid integer""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PropertyReader.getLongProperty
+yawl:PropertyReader_getLongProperty_7 a yawl:Method ;
+    rdfs:label "getLongProperty" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getLongProperty(String propFile, String key)" ;
+    rdfs:comment """Gets a long type property value from a .properties file @param propFile the name of the .properties file @param key the property key to get the value for @return the value for the requested key @throws IOException if the file can't be loaded or if it doesn't contain the key or the value is not a valid long""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:PropertyReader__props a yawl:Field ;
+    rdfs:label "_props" .
+
+yawl:PropertyReader_INSTANCE a yawl:Field ;
+    rdfs:label "INSTANCE" .
+
+yawl:PropertyReader_YAWL a yawl:Field ;
+    rdfs:label "YAWL" .
+
+yawl:PropertyReader_SCHEDULING a yawl:Field ;
+    rdfs:label "SCHEDULING" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_scheduling_timer a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.scheduling.timer" .
+
+

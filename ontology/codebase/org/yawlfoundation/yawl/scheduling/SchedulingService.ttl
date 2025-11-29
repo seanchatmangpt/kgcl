@@ -1,0 +1,421 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.scheduling.SchedulingService
+yawl:SchedulingService a yawl:Class ;
+    rdfs:label "SchedulingService" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_scheduling ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/scheduling/SchedulingService.java"^^xsd:string ;
+    rdfs:comment """Bridge between Scheduling Service and the YAWL engine; has to be registered as YAWL service; checks out resource utilisation tasks, i.e. SOU and EOU @author tbe @version $Id: SchedulingService.java 23027 2010-10-22 14:02:53Z tbe $""" ;
+    yawl:extends yawl:Service ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:SchedulingService_getInstance_1 ;
+    yawl:hasMethod yawl:SchedulingService_getLastSaveTime_2 ;
+    yawl:hasMethod yawl:SchedulingService_getLastSaveMsg_3 ;
+    yawl:hasMethod yawl:SchedulingService_processMappingChild_4 ;
+    yawl:hasMethod yawl:SchedulingService_updateRup_5 ;
+    yawl:hasMethod yawl:SchedulingService_handleCancelledCaseEvent_6 ;
+    yawl:hasMethod yawl:SchedulingService_handleCompleteCaseEvent_7 ;
+    yawl:hasMethod yawl:SchedulingService_checkRelations_8 ;
+    yawl:hasMethod yawl:SchedulingService_getTime_9 ;
+    yawl:hasMethod yawl:SchedulingService_checkRelation_10 ;
+    yawl:hasMethod yawl:SchedulingService_saveRupToDatabase_11 ;
+    yawl:hasMethod yawl:SchedulingService_loadCase_12 ;
+    yawl:hasMethod yawl:SchedulingService_extendRUPFromYAWLModel_13 ;
+    yawl:hasMethod yawl:SchedulingService_getDiffActivityNames_14 ;
+    yawl:hasMethod yawl:SchedulingService_completeRupFromHistory_15 ;
+    yawl:hasMethod yawl:SchedulingService_getRupNodes_16 ;
+    yawl:hasMethod yawl:SchedulingService_getRUPNodes_17 ;
+    yawl:hasMethod yawl:SchedulingService_getActiveRups_18 ;
+    yawl:hasMethod yawl:SchedulingService_getRupsByActivity_19 ;
+    yawl:hasMethod yawl:SchedulingService_getRupList_20 ;
+    yawl:hasMethod yawl:SchedulingService_loadReservations_21 ;
+    yawl:hasMethod yawl:SchedulingService_activityStatusChange_22 ;
+    yawl:hasMethod yawl:SchedulingService_resourceUtilisationChange_23 ;
+    yawl:hasMethod yawl:SchedulingService_utilisationPlanChange_24 ;
+    yawl:hasMethod yawl:SchedulingService_reservationStatusChange_25 ;
+    yawl:hasMethod yawl:SchedulingService_updateRunningRups_26 ;
+    yawl:hasMethod yawl:SchedulingService_optimizeAndSaveRup_27 ;
+    yawl:hasMethod yawl:SchedulingService_updateMatchingReservations_28 ;
+    yawl:hasMethod yawl:SchedulingService_sendPushMessage_29 ;
+    yawl:hasMethod yawl:SchedulingService_handleEngineInitialisationCompletedEvent_30 ;
+    yawl:hasMethod yawl:SchedulingService_registerMessageReceiveServlet_31 ;
+    yawl:hasMethod yawl:SchedulingService_getActivityTypes_32 ;
+    yawl:hasMethod yawl:SchedulingService_removeActivityTypes_33 ;
+    yawl:hasMethod yawl:SchedulingService_getOverallTimeInMin_34 ;
+    yawl:hasMethod yawl:SchedulingService_startMessageTransfers_35 ;
+    yawl:hasMethod yawl:SchedulingService_processCachedMappingsTask_36 ;
+    yawl:hasMethod yawl:SchedulingService_handleUtilisationTask_37 ;
+    yawl:hasField yawl:SchedulingService__rs ;
+    yawl:hasField yawl:SchedulingService__scheduler ;
+    yawl:hasField yawl:SchedulingService__pgc ;
+    yawl:hasField yawl:SchedulingService__allActivityTypes ;
+    yawl:hasField yawl:SchedulingService__errorRUPs ;
+    yawl:hasField yawl:SchedulingService__lastSaveInDB ;
+    yawl:hasField yawl:SchedulingService__lastSaveInDBMsg ;
+    yawl:hasField yawl:SchedulingService__log ;
+    yawl:hasField yawl:SchedulingService_INSTANCE ;
+    yawl:hasField yawl:SchedulingService_countProcessCachedWorkItems ;
+    .
+
+
+# Method: SchedulingService.getInstance
+yawl:SchedulingService_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "SchedulingService" ;
+    yawl:signature "SchedulingService getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: SchedulingService.getLastSaveTime
+yawl:SchedulingService_getLastSaveTime_2 a yawl:Method ;
+    rdfs:label "getLastSaveTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getLastSaveTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchedulingService.getLastSaveMsg
+yawl:SchedulingService_getLastSaveMsg_3 a yawl:Method ;
+    rdfs:label "getLastSaveMsg" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLastSaveMsg()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchedulingService.processMappingChild
+yawl:SchedulingService_processMappingChild_4 a yawl:Method ;
+    rdfs:label "processMappingChild" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processMappingChild(Mapping mapping)" ;
+    rdfs:comment """process work item depending on task type check back into the engine remove the mapping for successful processed work items updates the mapping continuously @param mapping : contained work item is child""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: SchedulingService.updateRup
+yawl:SchedulingService_updateRup_5 a yawl:Method ;
+    rdfs:label "updateRup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateRup(String caseID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SchedulingService.handleCancelledCaseEvent
+yawl:SchedulingService_handleCancelledCaseEvent_6 a yawl:Method ;
+    rdfs:label "handleCancelledCaseEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCancelledCaseEvent(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchedulingService.handleCompleteCaseEvent
+yawl:SchedulingService_handleCompleteCaseEvent_7 a yawl:Method ;
+    rdfs:label "handleCompleteCaseEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCompleteCaseEvent(String caseID, String casedata)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchedulingService.checkRelations
+yawl:SchedulingService_checkRelations_8 a yawl:Method ;
+    rdfs:label "checkRelations" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkRelations(Document rup)" ;
+    rdfs:comment """check utilisation relations of rup @param rup @throws JDOMException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchedulingService.getTime
+yawl:SchedulingService_getTime_9 a yawl:Method ;
+    rdfs:label "getTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getTime(Date d)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SchedulingService.checkRelation
+yawl:SchedulingService_checkRelation_10 a yawl:Method ;
+    rdfs:label "checkRelation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkRelation(Date from, Date to, Element utilisation, Document rup)" ;
+    rdfs:comment """Check related utilisation elements @param from @param to @param utilisation @param rup @throws JDOMException""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SchedulingService.saveRupToDatabase
+yawl:SchedulingService_saveRupToDatabase_11 a yawl:Method ;
+    rdfs:label "saveRupToDatabase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void saveRupToDatabase(String caseId, String savedBy, Document rup, String msg)" ;
+    rdfs:comment """@param caseId @param savedBy @param rup @throws JDOMException @throws SQLException @throws IOException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchedulingService.loadCase
+yawl:SchedulingService_loadCase_12 a yawl:Method ;
+    rdfs:label "loadCase" ;
+    yawl:returnType "Case" ;
+    yawl:signature "Case loadCase(String caseId)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchedulingService.extendRUPFromYAWLModel
+yawl:SchedulingService_extendRUPFromYAWLModel_13 a yawl:Method ;
+    rdfs:label "extendRUPFromYAWLModel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void extendRUPFromYAWLModel(Document doc, Set addedActivityNames)" ;
+    rdfs:comment """adds new activities from YAWL model specification to document in right order, e.g. if another worklet with new activities was started update times of all activities beginning at last activity which has a time TODO@tbe: returns false also, if order of activities was changed @param doc @return true, if new activity was added""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchedulingService.getDiffActivityNames
+yawl:SchedulingService_getDiffActivityNames_14 a yawl:Method ;
+    rdfs:label "getDiffActivityNames" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getDiffActivityNames(Element e1, Element e2)" ;
+    rdfs:comment """get activity names of e2 which are not in e1 @param e1 @param e2 @return""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchedulingService.completeRupFromHistory
+yawl:SchedulingService_completeRupFromHistory_15 a yawl:Method ;
+    rdfs:label "completeRupFromHistory" ;
+    yawl:returnType "void" ;
+    yawl:signature "void completeRupFromHistory(Document rup, Set addedActivitiyNames)" ;
+    rdfs:comment """completes a rup with historical data of rups with same ActivityType, but only for new added activities and if data fields are empty yet @param rup @param addedActivitiyNames @return""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchedulingService.getRupNodes
+yawl:SchedulingService_getRupNodes_16 a yawl:Method ;
+    rdfs:label "getRupNodes" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getRupNodes(String activityName, String activityType, String fieldName, HistoricalMode mode)" ;
+    rdfs:comment """gets the most or least used value or the average value of field @param activityName @param fieldName @return""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SchedulingService.getRUPNodes
+yawl:SchedulingService_getRUPNodes_17 a yawl:Method ;
+    rdfs:label "getRUPNodes" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getRUPNodes(Map elementMap, String activity, String type, String nodeName)" ;
+    rdfs:comment """gets field data from case in db @param activity @param nodeName @return""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SchedulingService.getActiveRups
+yawl:SchedulingService_getActiveRups_18 a yawl:Method ;
+    rdfs:label "getActiveRups" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getActiveRups(Date now)" ;
+    rdfs:comment """Get all RUPs that have at least one started activity. (SOU) und endzeit < jetzt @return @throws SQLException @author jku, tbe""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SchedulingService.getRupsByActivity
+yawl:SchedulingService_getRupsByActivity_19 a yawl:Method ;
+    rdfs:label "getRupsByActivity" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getRupsByActivity(String activityName)" ;
+    rdfs:comment """Get all RUP's of the specified activity from the database. @return @throws SQLException""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SchedulingService.getRupList
+yawl:SchedulingService_getRupList_20 a yawl:Method ;
+    rdfs:label "getRupList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getRupList(List cases)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchedulingService.loadReservations
+yawl:SchedulingService_loadReservations_21 a yawl:Method ;
+    rdfs:label "loadReservations" ;
+    yawl:returnType "List" ;
+    yawl:signature "List loadReservations(String caseId, String activityName)" ;
+    rdfs:comment """resource service retrieves reservations for given case and task to utilise them @param caseId @param activityName @return List<Element> @throws SchedulingException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchedulingService.activityStatusChange
+yawl:SchedulingService_activityStatusChange_22 a yawl:Method ;
+    rdfs:label "activityStatusChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void activityStatusChange(String caseId, String activityName, String from, String to)" ;
+    rdfs:comment """call from rescheduling task in yawl engine if rescheduling of an activity was made""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchedulingService.resourceUtilisationChange
+yawl:SchedulingService_resourceUtilisationChange_23 a yawl:Method ;
+    rdfs:label "resourceUtilisationChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void resourceUtilisationChange(String taskID, String caseId, String activityName, String utilisationType, String timeStampXML)" ;
+    rdfs:comment """call from utilisation task in yawl engine if (de)utilisation for all resources of an activity have to made @param timeStampXML yyyy-MM-ddTHH:mm:ss.SSS""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchedulingService.utilisationPlanChange
+yawl:SchedulingService_utilisationPlanChange_24 a yawl:Method ;
+    rdfs:label "utilisationPlanChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void utilisationPlanChange(String taskID, String caseId, String activityName, String utilisationType, String fromXML, String toXML, String savedBy)" ;
+    rdfs:comment """call from scheduling service if (de)utilisation for all resources of an activity have to made @param taskID @param caseId @param activityName @param utilisationType @param fromXML @param toXML @param savedBy @throws SchedulingException""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SchedulingService.reservationStatusChange
+yawl:SchedulingService_reservationStatusChange_25 a yawl:Method ;
+    rdfs:label "reservationStatusChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reservationStatusChange(String caseId, String activityName, Long reservationId, String statusNew)" ;
+    rdfs:comment """call from resource service about unavailabilities of resources (if Admin change availability of resource and PLANNING_STATUS was changed to PLANNING_STATUS_NOTAVAILABLE)""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchedulingService.updateRunningRups
+yawl:SchedulingService_updateRunningRups_26 a yawl:Method ;
+    rdfs:label "updateRunningRups" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateRunningRups(String savedBy)" ;
+    rdfs:comment """call from JobRUPCheck, sets TO time of running activities to actual time and calculate new DURATION value""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchedulingService.optimizeAndSaveRup
+yawl:SchedulingService_optimizeAndSaveRup_27 a yawl:Method ;
+    rdfs:label "optimizeAndSaveRup" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set optimizeAndSaveRup(Document rup, String savedBy, String errorMsg, boolean resourceChange)" ;
+    rdfs:comment """TODO@tbe: was wenn RUP gerade angezeigt/konfiguriert wird? @param rup @param errorMsg @throws Exception""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchedulingService.updateMatchingReservations
+yawl:SchedulingService_updateMatchingReservations_28 a yawl:Method ;
+    rdfs:label "updateMatchingReservations" ;
+    yawl:returnType "List" ;
+    yawl:signature "List updateMatchingReservations(Long reservationIdToMatch, List reservations, String statusNew)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SchedulingService.sendPushMessage
+yawl:SchedulingService_sendPushMessage_29 a yawl:Method ;
+    rdfs:label "sendPushMessage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sendPushMessage(String address, String addressType, String msg, String caseId)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchedulingService.handleEngineInitialisationCompletedEvent
+yawl:SchedulingService_handleEngineInitialisationCompletedEvent_30 a yawl:Method ;
+    rdfs:label "handleEngineInitialisationCompletedEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleEngineInitialisationCompletedEvent()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchedulingService.registerMessageReceiveServlet
+yawl:SchedulingService_registerMessageReceiveServlet_31 a yawl:Method ;
+    rdfs:label "registerMessageReceiveServlet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void registerMessageReceiveServlet()" ;
+    rdfs:comment """Register the MessageReceiveServlet with the Resource Service TODO@tbe: better to use our own IP and figure out the port number""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchedulingService.getActivityTypes
+yawl:SchedulingService_getActivityTypes_32 a yawl:Method ;
+    rdfs:label "getActivityTypes" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getActivityTypes(String activityName, String newValue)" ;
+    rdfs:comment """retrieve a list of all activity types for showing in configuration dropdown boxes of custom form @throws YAWLException""" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchedulingService.removeActivityTypes
+yawl:SchedulingService_removeActivityTypes_33 a yawl:Method ;
+    rdfs:label "removeActivityTypes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeActivityTypes(Document rup)" ;
+    rdfs:comment """cleans activityTypes for these activities, which a new activityType not stored in DB yet forces a reload of activityTypes of related activityNames @param rup""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SchedulingService.getOverallTimeInMin
+yawl:SchedulingService_getOverallTimeInMin_34 a yawl:Method ;
+    rdfs:label "getOverallTimeInMin" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getOverallTimeInMin(Document rup)" ;
+    rdfs:comment """get overall time of activities""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SchedulingService.startMessageTransfers
+yawl:SchedulingService_startMessageTransfers_35 a yawl:Method ;
+    rdfs:label "startMessageTransfers" ;
+    yawl:returnType "void" ;
+    yawl:signature "void startMessageTransfers(String caseId, Document rup)" ;
+    rdfs:comment """extract message transfers from rup and find/create job group for this rup and update/create job for each message transfer item @param rup""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchedulingService.processCachedMappingsTask
+yawl:SchedulingService_processCachedMappingsTask_36 a yawl:Method ;
+    rdfs:label "processCachedMappingsTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processCachedMappingsTask()" ;
+    rdfs:comment """task methods and inner classes""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SchedulingService.handleUtilisationTask
+yawl:SchedulingService_handleUtilisationTask_37 a yawl:Method ;
+    rdfs:label "handleUtilisationTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleUtilisationTask(Mapping mapping, Element msg, boolean asThread)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:SchedulingService__rs a yawl:Field ;
+    rdfs:label "_rs" .
+
+yawl:SchedulingService__scheduler a yawl:Field ;
+    rdfs:label "_scheduler" .
+
+yawl:SchedulingService__pgc a yawl:Field ;
+    rdfs:label "_pgc" .
+
+yawl:SchedulingService__allActivityTypes a yawl:Field ;
+    rdfs:label "_allActivityTypes" .
+
+yawl:SchedulingService__errorRUPs a yawl:Field ;
+    rdfs:label "_errorRUPs" .
+
+yawl:SchedulingService__lastSaveInDB a yawl:Field ;
+    rdfs:label "_lastSaveInDB" .
+
+yawl:SchedulingService__lastSaveInDBMsg a yawl:Field ;
+    rdfs:label "_lastSaveInDBMsg" .
+
+yawl:SchedulingService__log a yawl:Field ;
+    rdfs:label "_log" .
+
+yawl:SchedulingService_INSTANCE a yawl:Field ;
+    rdfs:label "INSTANCE" .
+
+yawl:SchedulingService_countProcessCachedWorkItems a yawl:Field ;
+    rdfs:label "countProcessCachedWorkItems" .
+
+
+

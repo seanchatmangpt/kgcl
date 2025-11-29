@@ -1,0 +1,115 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.schema.YDataValidator
+yawl:YDataValidator a yawl:Class ;
+    rdfs:label "YDataValidator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_schema ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/schema/YDataValidator.java"^^xsd:string ;
+    rdfs:comment """This class serves as a validation mechanism for the specification specific schema and the instance data from either the net or a task. This is performed by taking the data available at the various validation points and converting it into conventional XML which is then validated using a SchemaHandler. @author Mike Fowler Date: 05-Jul-2006""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YDataValidator_validateSchema_1 ;
+    yawl:hasMethod yawl:YDataValidator_validate_2 ;
+    yawl:hasMethod yawl:YDataValidator_validate_3 ;
+    yawl:hasMethod yawl:YDataValidator_getSchema_4 ;
+    yawl:hasMethod yawl:YDataValidator_getSchemaHandler_5 ;
+    yawl:hasMethod yawl:YDataValidator_getMessages_6 ;
+    yawl:hasMethod yawl:YDataValidator_getPrimaryTypeNames_7 ;
+    yawl:hasMethod yawl:YDataValidator_ensureValidPrefix_8 ;
+    yawl:hasMethod yawl:YDataValidator_ensurePrefixedSchema_9 ;
+    yawl:hasField yawl:YDataValidator_handler ;
+    .
+
+
+# Method: YDataValidator.validateSchema
+yawl:YDataValidator_validateSchema_1 a yawl:Method ;
+    rdfs:label "validateSchema" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validateSchema()" ;
+    rdfs:comment """Compiles and determines the validity of the current schema @return true if the schema compiled without error.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDataValidator.validate
+yawl:YDataValidator_validate_2 a yawl:Method ;
+    rdfs:label "validate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void validate(YVariable variable, Element data, String source)" ;
+    rdfs:comment """Validates a single data variable @param variable to be validated @param data XML representation of variable to be validated @param source @throws YDataValidationException if the data is not valid""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDataValidator.validate
+yawl:YDataValidator_validate_3 a yawl:Method ;
+    rdfs:label "validate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void validate(Collection vars, Element data, String source)" ;
+    rdfs:comment """Validates a collection of variables against the schema. This is achieved by temporarily adding a schema element declaration for the data. This avoids attempting to create a new schema containing only the relevant data types. @param vars variables to be validated @param data XML representation fo the variables to be validated @param source @throws YDataValidationException if the data is not valid""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDataValidator.getSchema
+yawl:YDataValidator_getSchema_4 a yawl:Method ;
+    rdfs:label "getSchema" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSchema()" ;
+    rdfs:comment """@return String representation of the schema""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDataValidator.getSchemaHandler
+yawl:YDataValidator_getSchemaHandler_5 a yawl:Method ;
+    rdfs:label "getSchemaHandler" ;
+    yawl:returnType "SchemaHandler" ;
+    yawl:signature "SchemaHandler getSchemaHandler()" ;
+    rdfs:comment """@return the SchemaHandler for this validator""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDataValidator.getMessages
+yawl:YDataValidator_getMessages_6 a yawl:Method ;
+    rdfs:label "getMessages" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getMessages()" ;
+    rdfs:comment """@return All error/warning messages relating to the last validation/compilation""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDataValidator.getPrimaryTypeNames
+yawl:YDataValidator_getPrimaryTypeNames_7 a yawl:Method ;
+    rdfs:label "getPrimaryTypeNames" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getPrimaryTypeNames()" ;
+    rdfs:comment """@return the set of (first-level) type names defined in this schema""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDataValidator.ensureValidPrefix
+yawl:YDataValidator_ensureValidPrefix_8 a yawl:Method ;
+    rdfs:label "ensureValidPrefix" ;
+    yawl:returnType "String" ;
+    yawl:signature "String ensureValidPrefix(String prefix)" ;
+    rdfs:comment """Utility method to ensure the prefix is valid (enforces : and defaults to xs:) @param prefix to validate @return validated prefix""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YDataValidator.ensurePrefixedSchema
+yawl:YDataValidator_ensurePrefixedSchema_9 a yawl:Method ;
+    rdfs:label "ensurePrefixedSchema" ;
+    yawl:returnType "String" ;
+    yawl:signature "String ensurePrefixedSchema(String schema)" ;
+    rdfs:comment """A schema may not have a valid prefix if a spec contains no complex types, so this makes sure it gets one in that case @param schema the schema string to check @return a correctly (or defaultly) prefixed schema string""" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YDataValidator_handler a yawl:Field ;
+    rdfs:label "handler" .
+
+
+

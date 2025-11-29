@@ -1,0 +1,272 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.calendar.CalendarLogEntry
+yawl:CalendarLogEntry a yawl:Class ;
+    rdfs:label "CalendarLogEntry" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_calendar ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/calendar/CalendarLogEntry.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 21/10/2010""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CalendarLogEntry_getEntryID_1 ;
+    yawl:hasMethod yawl:CalendarLogEntry_setEntryID_2 ;
+    yawl:hasMethod yawl:CalendarLogEntry_getCaseID_3 ;
+    yawl:hasMethod yawl:CalendarLogEntry_setCaseID_4 ;
+    yawl:hasMethod yawl:CalendarLogEntry_getActivityName_5 ;
+    yawl:hasMethod yawl:CalendarLogEntry_setActivityName_6 ;
+    yawl:hasMethod yawl:CalendarLogEntry_getResourceID_7 ;
+    yawl:hasMethod yawl:CalendarLogEntry_setResourceID_8 ;
+    yawl:hasMethod yawl:CalendarLogEntry_getTimestamp_9 ;
+    yawl:hasMethod yawl:CalendarLogEntry_setTimestamp_10 ;
+    yawl:hasMethod yawl:CalendarLogEntry_getStatus_11 ;
+    yawl:hasMethod yawl:CalendarLogEntry_setStatus_12 ;
+    yawl:hasMethod yawl:CalendarLogEntry_getCalendarKey_13 ;
+    yawl:hasMethod yawl:CalendarLogEntry_setCalendarKey_14 ;
+    yawl:hasMethod yawl:CalendarLogEntry_getKey_15 ;
+    yawl:hasMethod yawl:CalendarLogEntry_getPhase_16 ;
+    yawl:hasMethod yawl:CalendarLogEntry_setPhase_17 ;
+    yawl:hasMethod yawl:CalendarLogEntry_getAgent_18 ;
+    yawl:hasMethod yawl:CalendarLogEntry_setAgent_19 ;
+    yawl:hasMethod yawl:CalendarLogEntry_getWorkload_20 ;
+    yawl:hasMethod yawl:CalendarLogEntry_setWorkload_21 ;
+    yawl:hasMethod yawl:CalendarLogEntry_getResourceRec_22 ;
+    yawl:hasMethod yawl:CalendarLogEntry_setResourceRec_23 ;
+    yawl:hasField yawl:CalendarLogEntry_entryID ;
+    yawl:hasField yawl:CalendarLogEntry_caseID ;
+    yawl:hasField yawl:CalendarLogEntry_activityName ;
+    yawl:hasField yawl:CalendarLogEntry_resourceID ;
+    yawl:hasField yawl:CalendarLogEntry_resourceRec ;
+    yawl:hasField yawl:CalendarLogEntry_timestamp ;
+    yawl:hasField yawl:CalendarLogEntry_status ;
+    yawl:hasField yawl:CalendarLogEntry_workload ;
+    yawl:hasField yawl:CalendarLogEntry_phase ;
+    yawl:hasField yawl:CalendarLogEntry_agent ;
+    yawl:hasField yawl:CalendarLogEntry_calendarKey ;
+    .
+
+
+# Method: CalendarLogEntry.getEntryID
+yawl:CalendarLogEntry_getEntryID_1 a yawl:Method ;
+    rdfs:label "getEntryID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getEntryID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogEntry.setEntryID
+yawl:CalendarLogEntry_setEntryID_2 a yawl:Method ;
+    rdfs:label "setEntryID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEntryID(long id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogEntry.getCaseID
+yawl:CalendarLogEntry_getCaseID_3 a yawl:Method ;
+    rdfs:label "getCaseID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogEntry.setCaseID
+yawl:CalendarLogEntry_setCaseID_4 a yawl:Method ;
+    rdfs:label "setCaseID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCaseID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogEntry.getActivityName
+yawl:CalendarLogEntry_getActivityName_5 a yawl:Method ;
+    rdfs:label "getActivityName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getActivityName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogEntry.setActivityName
+yawl:CalendarLogEntry_setActivityName_6 a yawl:Method ;
+    rdfs:label "setActivityName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setActivityName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogEntry.getResourceID
+yawl:CalendarLogEntry_getResourceID_7 a yawl:Method ;
+    rdfs:label "getResourceID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourceID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogEntry.setResourceID
+yawl:CalendarLogEntry_setResourceID_8 a yawl:Method ;
+    rdfs:label "setResourceID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setResourceID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogEntry.getTimestamp
+yawl:CalendarLogEntry_getTimestamp_9 a yawl:Method ;
+    rdfs:label "getTimestamp" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getTimestamp()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogEntry.setTimestamp
+yawl:CalendarLogEntry_setTimestamp_10 a yawl:Method ;
+    rdfs:label "setTimestamp" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTimestamp(long time)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogEntry.getStatus
+yawl:CalendarLogEntry_getStatus_11 a yawl:Method ;
+    rdfs:label "getStatus" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogEntry.setStatus
+yawl:CalendarLogEntry_setStatus_12 a yawl:Method ;
+    rdfs:label "setStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStatus(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogEntry.getCalendarKey
+yawl:CalendarLogEntry_getCalendarKey_13 a yawl:Method ;
+    rdfs:label "getCalendarKey" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getCalendarKey()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogEntry.setCalendarKey
+yawl:CalendarLogEntry_setCalendarKey_14 a yawl:Method ;
+    rdfs:label "setCalendarKey" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCalendarKey(long key)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogEntry.getKey
+yawl:CalendarLogEntry_getKey_15 a yawl:Method ;
+    rdfs:label "getKey" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getKey()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogEntry.getPhase
+yawl:CalendarLogEntry_getPhase_16 a yawl:Method ;
+    rdfs:label "getPhase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPhase()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogEntry.setPhase
+yawl:CalendarLogEntry_setPhase_17 a yawl:Method ;
+    rdfs:label "setPhase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPhase(String p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogEntry.getAgent
+yawl:CalendarLogEntry_getAgent_18 a yawl:Method ;
+    rdfs:label "getAgent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAgent()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogEntry.setAgent
+yawl:CalendarLogEntry_setAgent_19 a yawl:Method ;
+    rdfs:label "setAgent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAgent(String agt)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogEntry.getWorkload
+yawl:CalendarLogEntry_getWorkload_20 a yawl:Method ;
+    rdfs:label "getWorkload" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getWorkload()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogEntry.setWorkload
+yawl:CalendarLogEntry_setWorkload_21 a yawl:Method ;
+    rdfs:label "setWorkload" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setWorkload(int load)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogEntry.getResourceRec
+yawl:CalendarLogEntry_getResourceRec_22 a yawl:Method ;
+    rdfs:label "getResourceRec" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourceRec()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogEntry.setResourceRec
+yawl:CalendarLogEntry_setResourceRec_23 a yawl:Method ;
+    rdfs:label "setResourceRec" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setResourceRec(String rec)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:CalendarLogEntry_entryID a yawl:Field ;
+    rdfs:label "entryID" .
+
+yawl:CalendarLogEntry_caseID a yawl:Field ;
+    rdfs:label "caseID" .
+
+yawl:CalendarLogEntry_activityName a yawl:Field ;
+    rdfs:label "activityName" .
+
+yawl:CalendarLogEntry_resourceID a yawl:Field ;
+    rdfs:label "resourceID" .
+
+yawl:CalendarLogEntry_resourceRec a yawl:Field ;
+    rdfs:label "resourceRec" .
+
+yawl:CalendarLogEntry_timestamp a yawl:Field ;
+    rdfs:label "timestamp" .
+
+yawl:CalendarLogEntry_status a yawl:Field ;
+    rdfs:label "status" .
+
+yawl:CalendarLogEntry_workload a yawl:Field ;
+    rdfs:label "workload" .
+
+yawl:CalendarLogEntry_phase a yawl:Field ;
+    rdfs:label "phase" .
+
+yawl:CalendarLogEntry_agent a yawl:Field ;
+    rdfs:label "agent" .
+
+yawl:CalendarLogEntry_calendarKey a yawl:Field ;
+    rdfs:label "calendarKey" .
+
+
+

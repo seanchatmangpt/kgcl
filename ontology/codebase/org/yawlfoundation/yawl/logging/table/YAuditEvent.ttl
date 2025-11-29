@@ -1,0 +1,127 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.logging.table.YAuditEvent
+yawl:YAuditEvent a yawl:Class ;
+    rdfs:label "YAuditEvent" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_logging_table ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/logging/table/YAuditEvent.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 22/10/2009""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YAuditEvent_get_id_1 ;
+    yawl:hasMethod yawl:YAuditEvent_set_id_2 ;
+    yawl:hasMethod yawl:YAuditEvent_get_username_3 ;
+    yawl:hasMethod yawl:YAuditEvent_set_username_4 ;
+    yawl:hasMethod yawl:YAuditEvent_get_event_5 ;
+    yawl:hasMethod yawl:YAuditEvent_set_event_6 ;
+    yawl:hasMethod yawl:YAuditEvent_get_timeStamp_7 ;
+    yawl:hasMethod yawl:YAuditEvent_set_timeStamp_8 ;
+    yawl:hasMethod yawl:YAuditEvent_equals_9 ;
+    yawl:hasMethod yawl:YAuditEvent_hashCode_10 ;
+    yawl:hasField yawl:YAuditEvent__id ;
+    yawl:hasField yawl:YAuditEvent__username ;
+    yawl:hasField yawl:YAuditEvent__event ;
+    yawl:hasField yawl:YAuditEvent__timeStamp ;
+    .
+
+
+# Method: YAuditEvent.get_id
+yawl:YAuditEvent_get_id_1 a yawl:Method ;
+    rdfs:label "get_id" ;
+    yawl:returnType "long" ;
+    yawl:signature "long get_id()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAuditEvent.set_id
+yawl:YAuditEvent_set_id_2 a yawl:Method ;
+    rdfs:label "set_id" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_id(long id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAuditEvent.get_username
+yawl:YAuditEvent_get_username_3 a yawl:Method ;
+    rdfs:label "get_username" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_username()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAuditEvent.set_username
+yawl:YAuditEvent_set_username_4 a yawl:Method ;
+    rdfs:label "set_username" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_username(String userid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAuditEvent.get_event
+yawl:YAuditEvent_get_event_5 a yawl:Method ;
+    rdfs:label "get_event" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_event()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAuditEvent.set_event
+yawl:YAuditEvent_set_event_6 a yawl:Method ;
+    rdfs:label "set_event" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_event(String event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAuditEvent.get_timeStamp
+yawl:YAuditEvent_get_timeStamp_7 a yawl:Method ;
+    rdfs:label "get_timeStamp" ;
+    yawl:returnType "long" ;
+    yawl:signature "long get_timeStamp()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAuditEvent.set_timeStamp
+yawl:YAuditEvent_set_timeStamp_8 a yawl:Method ;
+    rdfs:label "set_timeStamp" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_timeStamp(long timeStamp)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAuditEvent.equals
+yawl:YAuditEvent_equals_9 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAuditEvent.hashCode
+yawl:YAuditEvent_hashCode_10 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YAuditEvent__id a yawl:Field ;
+    rdfs:label "_id" .
+
+yawl:YAuditEvent__username a yawl:Field ;
+    rdfs:label "_username" .
+
+yawl:YAuditEvent__event a yawl:Field ;
+    rdfs:label "_event" .
+
+yawl:YAuditEvent__timeStamp a yawl:Field ;
+    rdfs:label "_timeStamp" .
+
+
+

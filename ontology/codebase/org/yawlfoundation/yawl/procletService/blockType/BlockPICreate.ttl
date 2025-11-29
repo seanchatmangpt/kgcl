@@ -1,0 +1,84 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.blockType.BlockPICreate
+yawl:BlockPICreate a yawl:Class ;
+    rdfs:label "BlockPICreate" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_blockType ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/blockType/BlockPICreate.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:BlockPICreate_getInstance_1 ;
+    yawl:hasMethod yawl:BlockPICreate_checkForCreationProclets_2 ;
+    yawl:hasMethod yawl:BlockPICreate_evalCreateProclets_3 ;
+    yawl:hasMethod yawl:BlockPICreate_createProclets_4 ;
+    yawl:hasMethod yawl:BlockPICreate_removeUnneededData_5 ;
+    yawl:hasMethod yawl:BlockPICreate_main_6 ;
+    yawl:hasField yawl:BlockPICreate_singleInst ;
+    yawl:hasField yawl:BlockPICreate_myLog ;
+    .
+
+
+# Method: BlockPICreate.getInstance
+yawl:BlockPICreate_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "BlockPICreate" ;
+    yawl:signature "BlockPICreate getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockPICreate.checkForCreationProclets
+yawl:BlockPICreate_checkForCreationProclets_2 a yawl:Method ;
+    rdfs:label "checkForCreationProclets" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkForCreationProclets()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockPICreate.evalCreateProclets
+yawl:BlockPICreate_evalCreateProclets_3 a yawl:Method ;
+    rdfs:label "evalCreateProclets" ;
+    yawl:returnType "List" ;
+    yawl:signature "List evalCreateProclets()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: BlockPICreate.createProclets
+yawl:BlockPICreate_createProclets_4 a yawl:Method ;
+    rdfs:label "createProclets" ;
+    yawl:returnType "void" ;
+    yawl:signature "void createProclets(List enabledArcs)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: BlockPICreate.removeUnneededData
+yawl:BlockPICreate_removeUnneededData_5 a yawl:Method ;
+    rdfs:label "removeUnneededData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeUnneededData(String s, List eids)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: BlockPICreate.main
+yawl:BlockPICreate_main_6 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String args)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:BlockPICreate_singleInst a yawl:Field ;
+    rdfs:label "singleInst" .
+
+yawl:BlockPICreate_myLog a yawl:Field ;
+    rdfs:label "myLog" .
+
+
+

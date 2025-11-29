@@ -1,0 +1,161 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.datastore.eventlog.ResourceEvent
+yawl:ResourceEvent a yawl:Class ;
+    rdfs:label "ResourceEvent" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_datastore_eventlog ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/datastore/eventlog/ResourceEvent.java"^^xsd:string ;
+    rdfs:comment """An object representing one resourcing event for logging. @author Michael Adams Date: 23/08/2009""" ;
+    yawl:extends yawl:BaseEvent ;
+    yawl:implements yawl:Cloneable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ResourceEvent_clone_1 ;
+    yawl:hasMethod yawl:ResourceEvent_get_caseID_2 ;
+    yawl:hasMethod yawl:ResourceEvent_set_caseID_3 ;
+    yawl:hasMethod yawl:ResourceEvent_get_taskID_4 ;
+    yawl:hasMethod yawl:ResourceEvent_set_taskID_5 ;
+    yawl:hasMethod yawl:ResourceEvent_get_itemID_6 ;
+    yawl:hasMethod yawl:ResourceEvent_set_itemID_7 ;
+    yawl:hasMethod yawl:ResourceEvent_get_resourceID_8 ;
+    yawl:hasMethod yawl:ResourceEvent_set_resourceID_9 ;
+    yawl:hasMethod yawl:ResourceEvent_get_specKey_10 ;
+    yawl:hasMethod yawl:ResourceEvent_set_specKey_11 ;
+    yawl:hasMethod yawl:ResourceEvent_toXML_12 ;
+    yawl:hasMethod yawl:ResourceEvent_fromXML_13 ;
+    yawl:hasField yawl:ResourceEvent__specKey ;
+    yawl:hasField yawl:ResourceEvent__caseID ;
+    yawl:hasField yawl:ResourceEvent__taskID ;
+    yawl:hasField yawl:ResourceEvent__itemID ;
+    yawl:hasField yawl:ResourceEvent__resourceID ;
+    .
+
+
+# Method: ResourceEvent.clone
+yawl:ResourceEvent_clone_1 a yawl:Method ;
+    rdfs:label "clone" ;
+    yawl:returnType "ResourceEvent" ;
+    yawl:signature "ResourceEvent clone()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "final" ;
+    .
+
+# Method: ResourceEvent.get_caseID
+yawl:ResourceEvent_get_caseID_2 a yawl:Method ;
+    rdfs:label "get_caseID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_caseID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceEvent.set_caseID
+yawl:ResourceEvent_set_caseID_3 a yawl:Method ;
+    rdfs:label "set_caseID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_caseID(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceEvent.get_taskID
+yawl:ResourceEvent_get_taskID_4 a yawl:Method ;
+    rdfs:label "get_taskID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_taskID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceEvent.set_taskID
+yawl:ResourceEvent_set_taskID_5 a yawl:Method ;
+    rdfs:label "set_taskID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_taskID(String taskID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceEvent.get_itemID
+yawl:ResourceEvent_get_itemID_6 a yawl:Method ;
+    rdfs:label "get_itemID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_itemID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceEvent.set_itemID
+yawl:ResourceEvent_set_itemID_7 a yawl:Method ;
+    rdfs:label "set_itemID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_itemID(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceEvent.get_resourceID
+yawl:ResourceEvent_get_resourceID_8 a yawl:Method ;
+    rdfs:label "get_resourceID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_resourceID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceEvent.set_resourceID
+yawl:ResourceEvent_set_resourceID_9 a yawl:Method ;
+    rdfs:label "set_resourceID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_resourceID(String participantID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceEvent.get_specKey
+yawl:ResourceEvent_get_specKey_10 a yawl:Method ;
+    rdfs:label "get_specKey" ;
+    yawl:returnType "long" ;
+    yawl:signature "long get_specKey()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceEvent.set_specKey
+yawl:ResourceEvent_set_specKey_11 a yawl:Method ;
+    rdfs:label "set_specKey" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_specKey(long specKey)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceEvent.toXML
+yawl:ResourceEvent_toXML_12 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceEvent.fromXML
+yawl:ResourceEvent_fromXML_13 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(Element xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:ResourceEvent__specKey a yawl:Field ;
+    rdfs:label "_specKey" .
+
+yawl:ResourceEvent__caseID a yawl:Field ;
+    rdfs:label "_caseID" .
+
+yawl:ResourceEvent__taskID a yawl:Field ;
+    rdfs:label "_taskID" .
+
+yawl:ResourceEvent__itemID a yawl:Field ;
+    rdfs:label "_itemID" .
+
+yawl:ResourceEvent__resourceID a yawl:Field ;
+    rdfs:label "_resourceID" .
+
+
+

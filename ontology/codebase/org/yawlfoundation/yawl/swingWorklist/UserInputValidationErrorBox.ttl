@@ -1,0 +1,79 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.swingWorklist.UserInputValidationErrorBox
+yawl:UserInputValidationErrorBox a yawl:Class ;
+    rdfs:label "UserInputValidationErrorBox" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_swingWorklist ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/swingWorklist/YWorklistModel.java"^^xsd:string ;
+    yawl:extends yawl:JDialog ;
+    yawl:implements yawl:ActionListener ;
+    yawl:hasMethod yawl:UserInputValidationErrorBox_this_windowClosing_1 ;
+    yawl:hasMethod yawl:UserInputValidationErrorBox_storeData_2 ;
+    yawl:hasMethod yawl:UserInputValidationErrorBox_createTopPanel_3 ;
+    yawl:hasMethod yawl:UserInputValidationErrorBox_createCentrePanel_4 ;
+    yawl:hasMethod yawl:UserInputValidationErrorBox_createBottomPanel_5 ;
+    yawl:hasMethod yawl:UserInputValidationErrorBox_actionPerformed_6 ;
+    yawl:hasField yawl:UserInputValidationErrorBox__okCommand ;
+    .
+
+
+# Method: UserInputValidationErrorBox.this_windowClosing
+yawl:UserInputValidationErrorBox_this_windowClosing_1 a yawl:Method ;
+    rdfs:label "this_windowClosing" ;
+    yawl:returnType "void" ;
+    yawl:signature "void this_windowClosing()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: UserInputValidationErrorBox.storeData
+yawl:UserInputValidationErrorBox_storeData_2 a yawl:Method ;
+    rdfs:label "storeData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void storeData()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: UserInputValidationErrorBox.createTopPanel
+yawl:UserInputValidationErrorBox_createTopPanel_3 a yawl:Method ;
+    rdfs:label "createTopPanel" ;
+    yawl:returnType "JPanel" ;
+    yawl:signature "JPanel createTopPanel(YWorkItem item)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: UserInputValidationErrorBox.createCentrePanel
+yawl:UserInputValidationErrorBox_createCentrePanel_4 a yawl:Method ;
+    rdfs:label "createCentrePanel" ;
+    yawl:returnType "JPanel" ;
+    yawl:signature "JPanel createCentrePanel(YDataStateException exception)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: UserInputValidationErrorBox.createBottomPanel
+yawl:UserInputValidationErrorBox_createBottomPanel_5 a yawl:Method ;
+    rdfs:label "createBottomPanel" ;
+    yawl:returnType "JPanel" ;
+    yawl:signature "JPanel createBottomPanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: UserInputValidationErrorBox.actionPerformed
+yawl:UserInputValidationErrorBox_actionPerformed_6 a yawl:Method ;
+    rdfs:label "actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void actionPerformed(ActionEvent e)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:UserInputValidationErrorBox__okCommand a yawl:Field ;
+    rdfs:label "_okCommand" .
+
+
+

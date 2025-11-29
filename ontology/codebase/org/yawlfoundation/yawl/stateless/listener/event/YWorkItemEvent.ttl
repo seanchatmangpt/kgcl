@@ -1,0 +1,53 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.stateless.listener.event.YWorkItemEvent
+yawl:YWorkItemEvent a yawl:Class ;
+    rdfs:label "YWorkItemEvent" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_listener_event ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/listener/event/YWorkItemEvent.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 24/8/20""" ;
+    yawl:extends yawl:YEvent ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YWorkItemEvent_setPreviousStatus_1 ;
+    yawl:hasMethod yawl:YWorkItemEvent_getPreviousStatus_2 ;
+    yawl:hasMethod yawl:YWorkItemEvent_getCurrentStatus_3 ;
+    yawl:hasField yawl:YWorkItemEvent__prevStatus ;
+    .
+
+
+# Method: YWorkItemEvent.setPreviousStatus
+yawl:YWorkItemEvent_setPreviousStatus_1 a yawl:Method ;
+    rdfs:label "setPreviousStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPreviousStatus(YWorkItemStatus status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemEvent.getPreviousStatus
+yawl:YWorkItemEvent_getPreviousStatus_2 a yawl:Method ;
+    rdfs:label "getPreviousStatus" ;
+    yawl:returnType "YWorkItemStatus" ;
+    yawl:signature "YWorkItemStatus getPreviousStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemEvent.getCurrentStatus
+yawl:YWorkItemEvent_getCurrentStatus_3 a yawl:Method ;
+    rdfs:label "getCurrentStatus" ;
+    yawl:returnType "YWorkItemStatus" ;
+    yawl:signature "YWorkItemStatus getCurrentStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YWorkItemEvent__prevStatus a yawl:Field ;
+    rdfs:label "_prevStatus" .
+
+
+

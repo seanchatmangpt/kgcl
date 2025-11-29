@@ -1,0 +1,100 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.scheduling.lanes.LaneProducer
+yawl:LaneProducer a yawl:Class ;
+    rdfs:label "LaneProducer" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_scheduling_lanes ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/scheduling/lanes/LaneProducer.java"^^xsd:string ;
+    yawl:implements yawl:Constants ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:LaneProducer_getLanes_1 ;
+    yawl:hasMethod yawl:LaneProducer_getMatchingLanes_2 ;
+    yawl:hasMethod yawl:LaneProducer_put_3 ;
+    yawl:hasMethod yawl:LaneProducer_getInitials_4 ;
+    yawl:hasField yawl:LaneProducer_logger ;
+    yawl:hasField yawl:LaneProducer_dataMapper ;
+    yawl:hasField yawl:LaneProducer_config ;
+    yawl:hasField yawl:LaneProducer_scheduler ;
+    yawl:hasField yawl:LaneProducer_categoryId ;
+    yawl:hasField yawl:LaneProducer_roleId ;
+    yawl:hasField yawl:LaneProducer_lanes ;
+    yawl:hasField yawl:LaneProducer_titleShortLength ;
+    yawl:hasField yawl:LaneProducer_debug ;
+    .
+
+
+# Method: LaneProducer.getLanes
+yawl:LaneProducer_getLanes_1 a yawl:Method ;
+    rdfs:label "getLanes" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getLanes(String dates)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LaneProducer.getMatchingLanes
+yawl:LaneProducer_getMatchingLanes_2 a yawl:Method ;
+    rdfs:label "getMatchingLanes" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getMatchingLanes(List reservations, List allLanes4Date)" ;
+    rdfs:comment """lanes finden durch pr�fen von rolle bzw. category""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LaneProducer.put
+yawl:LaneProducer_put_3 a yawl:Method ;
+    rdfs:label "put" ;
+    yawl:returnType "void" ;
+    yawl:signature "void put(Map map, String key, Object value)" ;
+    rdfs:comment """replace null values by \"\"""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LaneProducer.getInitials
+yawl:LaneProducer_getInitials_4 a yawl:Method ;
+    rdfs:label "getInitials" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInitials(Participant participant)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:LaneProducer_logger a yawl:Field ;
+    rdfs:label "logger" .
+
+yawl:LaneProducer_dataMapper a yawl:Field ;
+    rdfs:label "dataMapper" .
+
+yawl:LaneProducer_config a yawl:Field ;
+    rdfs:label "config" .
+
+yawl:LaneProducer_scheduler a yawl:Field ;
+    rdfs:label "scheduler" .
+
+yawl:LaneProducer_categoryId a yawl:Field ;
+    rdfs:label "categoryId" .
+
+yawl:LaneProducer_roleId a yawl:Field ;
+    rdfs:label "roleId" .
+
+yawl:LaneProducer_lanes a yawl:Field ;
+    rdfs:label "lanes" .
+
+yawl:LaneProducer_titleShortLength a yawl:Field ;
+    rdfs:label "titleShortLength" .
+
+yawl:LaneProducer_debug a yawl:Field ;
+    rdfs:label "debug" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_scheduling_persistence a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.scheduling.persistence" .
+
+

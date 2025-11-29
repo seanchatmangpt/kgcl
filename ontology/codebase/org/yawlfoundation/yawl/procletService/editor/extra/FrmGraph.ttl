@@ -1,0 +1,206 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.extra.FrmGraph
+yawl:FrmGraph a yawl:Class ;
+    rdfs:label "FrmGraph" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor_extra ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/extra/FrmGraph.java"^^xsd:string ;
+    yawl:extends yawl:DesignInternalFrame ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:FrmGraph_singleton_1 ;
+    yawl:hasMethod yawl:FrmGraph_finish_2 ;
+    yawl:hasMethod yawl:FrmGraph_jbInit_3 ;
+    yawl:hasMethod yawl:FrmGraph_setVisualizationViewer_4 ;
+    yawl:hasMethod yawl:FrmGraph_redrawGraph_5 ;
+    yawl:hasMethod yawl:FrmGraph_initComponents_6 ;
+    yawl:hasMethod yawl:FrmGraph_actionPerformed_7 ;
+    yawl:hasField yawl:FrmGraph_TITLE ;
+    yawl:hasField yawl:FrmGraph_single ;
+    yawl:hasField yawl:FrmGraph_graphCoordinator ;
+    yawl:hasField yawl:FrmGraph_splitPaneMain ;
+    yawl:hasField yawl:FrmGraph_addBlockButton ;
+    yawl:hasField yawl:FrmGraph_addPortButton ;
+    yawl:hasField yawl:FrmGraph_addRelationButton ;
+    yawl:hasField yawl:FrmGraph_adjustBlockButton ;
+    yawl:hasField yawl:FrmGraph_adjustPortButton ;
+    yawl:hasField yawl:FrmGraph_blockRelationsPanel ;
+    yawl:hasField yawl:FrmGraph_blocksPanel ;
+    yawl:hasField yawl:FrmGraph_generalPanel ;
+    yawl:hasField yawl:FrmGraph_graphOptionsPanel ;
+    yawl:hasField yawl:FrmGraph_graphPanel ;
+    yawl:hasField yawl:FrmGraph_labelForName ;
+    yawl:hasField yawl:FrmGraph_nameTextField ;
+    yawl:hasField yawl:FrmGraph_portsPanel ;
+    yawl:hasField yawl:FrmGraph_removeBlockButton ;
+    yawl:hasField yawl:FrmGraph_removePortButton ;
+    yawl:hasField yawl:FrmGraph_removeRelationButton ;
+    yawl:hasField yawl:FrmGraph_rightPanel ;
+    yawl:hasField yawl:FrmGraph_splitPanelLeft ;
+    yawl:hasField yawl:FrmGraph_topOptionsPanel ;
+    yawl:hasField yawl:FrmGraph_bottomOptionsPanel ;
+    yawl:hasField yawl:FrmGraph_layoutBox ;
+    yawl:hasField yawl:FrmGraph_vv ;
+    yawl:hasField yawl:FrmGraph_gm ;
+    yawl:hasField yawl:FrmGraph_vertexPaint ;
+    yawl:hasField yawl:FrmGraph_edgeLabel ;
+    yawl:hasField yawl:FrmGraph_emidSelected ;
+    .
+
+
+# Method: FrmGraph.singleton
+yawl:FrmGraph_singleton_1 a yawl:Method ;
+    rdfs:label "singleton" ;
+    yawl:returnType "FrmGraph" ;
+    yawl:signature "FrmGraph singleton(GraphCoordinator coord, EntityMID emid)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrmGraph.finish
+yawl:FrmGraph_finish_2 a yawl:Method ;
+    rdfs:label "finish" ;
+    yawl:returnType "void" ;
+    yawl:signature "void finish()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrmGraph.jbInit
+yawl:FrmGraph_jbInit_3 a yawl:Method ;
+    rdfs:label "jbInit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void jbInit()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: FrmGraph.setVisualizationViewer
+yawl:FrmGraph_setVisualizationViewer_4 a yawl:Method ;
+    rdfs:label "setVisualizationViewer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setVisualizationViewer(VisualizationViewer vviewer)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmGraph.redrawGraph
+yawl:FrmGraph_redrawGraph_5 a yawl:Method ;
+    rdfs:label "redrawGraph" ;
+    yawl:returnType "void" ;
+    yawl:signature "void redrawGraph()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FrmGraph.initComponents
+yawl:FrmGraph_initComponents_6 a yawl:Method ;
+    rdfs:label "initComponents" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initComponents()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmGraph.actionPerformed
+yawl:FrmGraph_actionPerformed_7 a yawl:Method ;
+    rdfs:label "actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void actionPerformed(ActionEvent e)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:FrmGraph_TITLE a yawl:Field ;
+    rdfs:label "TITLE" .
+
+yawl:FrmGraph_single a yawl:Field ;
+    rdfs:label "single" .
+
+yawl:FrmGraph_graphCoordinator a yawl:Field ;
+    rdfs:label "graphCoordinator" .
+
+yawl:FrmGraph_splitPaneMain a yawl:Field ;
+    rdfs:label "splitPaneMain" .
+
+yawl:FrmGraph_addBlockButton a yawl:Field ;
+    rdfs:label "addBlockButton" .
+
+yawl:FrmGraph_addPortButton a yawl:Field ;
+    rdfs:label "addPortButton" .
+
+yawl:FrmGraph_addRelationButton a yawl:Field ;
+    rdfs:label "addRelationButton" .
+
+yawl:FrmGraph_adjustBlockButton a yawl:Field ;
+    rdfs:label "adjustBlockButton" .
+
+yawl:FrmGraph_adjustPortButton a yawl:Field ;
+    rdfs:label "adjustPortButton" .
+
+yawl:FrmGraph_blockRelationsPanel a yawl:Field ;
+    rdfs:label "blockRelationsPanel" .
+
+yawl:FrmGraph_blocksPanel a yawl:Field ;
+    rdfs:label "blocksPanel" .
+
+yawl:FrmGraph_generalPanel a yawl:Field ;
+    rdfs:label "generalPanel" .
+
+yawl:FrmGraph_graphOptionsPanel a yawl:Field ;
+    rdfs:label "graphOptionsPanel" .
+
+yawl:FrmGraph_graphPanel a yawl:Field ;
+    rdfs:label "graphPanel" .
+
+yawl:FrmGraph_labelForName a yawl:Field ;
+    rdfs:label "labelForName" .
+
+yawl:FrmGraph_nameTextField a yawl:Field ;
+    rdfs:label "nameTextField" .
+
+yawl:FrmGraph_portsPanel a yawl:Field ;
+    rdfs:label "portsPanel" .
+
+yawl:FrmGraph_removeBlockButton a yawl:Field ;
+    rdfs:label "removeBlockButton" .
+
+yawl:FrmGraph_removePortButton a yawl:Field ;
+    rdfs:label "removePortButton" .
+
+yawl:FrmGraph_removeRelationButton a yawl:Field ;
+    rdfs:label "removeRelationButton" .
+
+yawl:FrmGraph_rightPanel a yawl:Field ;
+    rdfs:label "rightPanel" .
+
+yawl:FrmGraph_splitPanelLeft a yawl:Field ;
+    rdfs:label "splitPanelLeft" .
+
+yawl:FrmGraph_topOptionsPanel a yawl:Field ;
+    rdfs:label "topOptionsPanel" .
+
+yawl:FrmGraph_bottomOptionsPanel a yawl:Field ;
+    rdfs:label "bottomOptionsPanel" .
+
+yawl:FrmGraph_layoutBox a yawl:Field ;
+    rdfs:label "layoutBox" .
+
+yawl:FrmGraph_vv a yawl:Field ;
+    rdfs:label "vv" .
+
+yawl:FrmGraph_gm a yawl:Field ;
+    rdfs:label "gm" .
+
+yawl:FrmGraph_vertexPaint a yawl:Field ;
+    rdfs:label "vertexPaint" .
+
+yawl:FrmGraph_edgeLabel a yawl:Field ;
+    rdfs:label "edgeLabel" .
+
+yawl:FrmGraph_emidSelected a yawl:Field ;
+    rdfs:label "emidSelected" .
+
+
+

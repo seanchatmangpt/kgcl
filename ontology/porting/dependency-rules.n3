@@ -1,0 +1,92 @@
+@prefix code: <http://kgcl.dev/ontology/codebase#> .
+@prefix port: <http://kgcl.dev/ontology/porting#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+# Dependency Analysis Rules
+# Rules for analyzing and comparing dependencies
+
+# ============================================================================
+# RULE 1: Missing Dependency Detection
+# ============================================================================
+# Detect Java dependencies not present in Python
+
+{
+    ?javaClass code:hasDependency ?javaDep .
+    ?javaDep code:dependencyClass ?depClass .
+    
+    ?javaClass port:hasPort ?pythonClass .
+    
+    NOT EXISTS {
+        ?pythonClass code:hasDependency ?pythonDep .
+        ?pythonDep code:dependencyClass ?depClass .
+    }
+}
+=>
+{
+    ?javaClass port:missingDependency ?depClass ;
+        port:severity "medium" .
+} .
+
+# ============================================================================
+# RULE 2: New Dependency Detection
+# ============================================================================
+# Detect Python dependencies not present in Java
+
+{
+    ?javaClass port:hasPort ?pythonClass .
+    ?pythonClass code:hasDependency ?pythonDep .
+    ?pythonDep code:dependencyClass ?depClass .
+    
+    NOT EXISTS {
+        ?javaClass code:hasDependency ?javaDep .
+        ?javaDep code:dependencyClass ?depClass .
+    }
+}
+=>
+{
+    ?pythonClass port:newDependency ?depClass ;
+        port:severity "low" .
+} .
+
+# ============================================================================
+# RULE 3: Call Graph Path Matching
+# ============================================================================
+# Match call graph paths between Java and Python
+
+{
+    ?javaMethod port:hasPort ?pythonMethod .
+    ?javaMethod code:hasCallSite ?javaCall .
+    ?javaCall code:calleeName ?calleeName .
+    ?javaCall code:calleeClass ?calleeClass .
+    
+    ?pythonMethod code:hasCallSite ?pythonCall .
+    ?pythonCall code:calleeName ?calleeName .
+}
+=>
+{
+    ?javaCall port:hasPort ?pythonCall ;
+        port:matchType "call_site" .
+} .
+
+# ============================================================================
+# RULE 4: Missing Call Path Detection
+# ============================================================================
+# Detect Java call paths not present in Python
+
+{
+    ?javaMethod port:hasPort ?pythonMethod .
+    ?javaMethod code:hasCallSite ?javaCall .
+    ?javaCall code:calleeName ?calleeName .
+    
+    NOT EXISTS {
+        ?pythonMethod code:hasCallSite ?pythonCall .
+        ?pythonCall code:calleeName ?calleeName .
+    }
+}
+=>
+{
+    ?javaCall port:status "missing" ;
+        port:calleeName ?calleeName ;
+        port:severity "medium" .
+} .
+

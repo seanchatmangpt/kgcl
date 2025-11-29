@@ -1,0 +1,90 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.extra.TreeCollapseDemo
+yawl:TreeCollapseDemo a yawl:Class ;
+    rdfs:label "TreeCollapseDemo" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor_extra ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/extra/TreeCollapseDemo.java"^^xsd:string ;
+    rdfs:comment """Demonstrates \"collapsing\"/\"expanding\" of a tree's subtrees. @author Tom Nelson""" ;
+    yawl:extends yawl:JApplet ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:TreeCollapseDemo_createTree_1 ;
+    yawl:hasMethod yawl:TreeCollapseDemo_main_2 ;
+    yawl:hasField yawl:TreeCollapseDemo_graph ;
+    yawl:hasField yawl:TreeCollapseDemo_graphFactory ;
+    yawl:hasField yawl:TreeCollapseDemo_treeFactory ;
+    yawl:hasField yawl:TreeCollapseDemo_edgeFactory ;
+    yawl:hasField yawl:TreeCollapseDemo_vertexFactory ;
+    yawl:hasField yawl:TreeCollapseDemo_vv ;
+    yawl:hasField yawl:TreeCollapseDemo_rings ;
+    yawl:hasField yawl:TreeCollapseDemo_root ;
+    yawl:hasField yawl:TreeCollapseDemo_layout ;
+    yawl:hasField yawl:TreeCollapseDemo_layout1 ;
+    yawl:hasField yawl:TreeCollapseDemo_collapser ;
+    yawl:hasField yawl:TreeCollapseDemo_radialLayout ;
+    .
+
+
+# Method: TreeCollapseDemo.createTree
+yawl:TreeCollapseDemo_createTree_1 a yawl:Method ;
+    rdfs:label "createTree" ;
+    yawl:returnType "void" ;
+    yawl:signature "void createTree()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TreeCollapseDemo.main
+yawl:TreeCollapseDemo_main_2 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String args)" ;
+    rdfs:comment """a driver for this demo""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:TreeCollapseDemo_graph a yawl:Field ;
+    rdfs:label "graph" .
+
+yawl:TreeCollapseDemo_graphFactory a yawl:Field ;
+    rdfs:label "graphFactory" .
+
+yawl:TreeCollapseDemo_treeFactory a yawl:Field ;
+    rdfs:label "treeFactory" .
+
+yawl:TreeCollapseDemo_edgeFactory a yawl:Field ;
+    rdfs:label "edgeFactory" .
+
+yawl:TreeCollapseDemo_vertexFactory a yawl:Field ;
+    rdfs:label "vertexFactory" .
+
+yawl:TreeCollapseDemo_vv a yawl:Field ;
+    rdfs:label "vv" .
+
+yawl:TreeCollapseDemo_rings a yawl:Field ;
+    rdfs:label "rings" .
+
+yawl:TreeCollapseDemo_root a yawl:Field ;
+    rdfs:label "root" .
+
+yawl:TreeCollapseDemo_layout a yawl:Field ;
+    rdfs:label "layout" .
+
+yawl:TreeCollapseDemo_layout1 a yawl:Field ;
+    rdfs:label "layout1" .
+
+yawl:TreeCollapseDemo_collapser a yawl:Field ;
+    rdfs:label "collapser" .
+
+yawl:TreeCollapseDemo_radialLayout a yawl:Field ;
+    rdfs:label "radialLayout" .
+
+
+

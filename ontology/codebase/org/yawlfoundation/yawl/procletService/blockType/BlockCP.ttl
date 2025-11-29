@@ -1,0 +1,225 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.blockType.BlockCP
+yawl:BlockCP a yawl:Class ;
+    rdfs:label "BlockCP" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_blockType ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/blockType/BlockCP.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:BlockCP_calculateEmids_1 ;
+    yawl:hasMethod yawl:BlockCP_getUniqueID_2 ;
+    yawl:hasMethod yawl:BlockCP_updateUniqueID_3 ;
+    yawl:hasMethod yawl:BlockCP_processWIR_4 ;
+    yawl:hasMethod yawl:BlockCP_pushAvailableEmidsToUser_5 ;
+    yawl:hasMethod yawl:BlockCP_deleteEmidToUser_6 ;
+    yawl:hasMethod yawl:BlockCP_deleteAllEmidsToUser_7 ;
+    yawl:hasMethod yawl:BlockCP_getAvailableEmidsToUser_8 ;
+    yawl:hasMethod yawl:BlockCP_getInteractionNodesUser_9 ;
+    yawl:hasMethod yawl:BlockCP_isWorkItemSelectedUser_10 ;
+    yawl:hasMethod yawl:BlockCP_publishWorkItem_11 ;
+    yawl:hasMethod yawl:BlockCP_setWorkitemSelected_12 ;
+    yawl:hasMethod yawl:BlockCP_getWorkitemSelected_13 ;
+    yawl:hasMethod yawl:BlockCP_deleteWorkitemSelected_14 ;
+    yawl:hasMethod yawl:BlockCP_getSelectedEmidFromUser_15 ;
+    yawl:hasMethod yawl:BlockCP_setEmidSelected_16 ;
+    yawl:hasMethod yawl:BlockCP_deleteAvailableEmidsToUser_17 ;
+    yawl:hasMethod yawl:BlockCP_getEntityMIDsFromData_18 ;
+    yawl:hasMethod yawl:BlockCP_main_19 ;
+    yawl:hasField yawl:BlockCP_wir ;
+    yawl:hasField yawl:BlockCP_block ;
+    yawl:hasField yawl:BlockCP_uniqueidTN ;
+    yawl:hasField yawl:BlockCP_myLog ;
+    .
+
+
+# Method: BlockCP.calculateEmids
+yawl:BlockCP_calculateEmids_1 a yawl:Method ;
+    rdfs:label "calculateEmids" ;
+    yawl:returnType "List" ;
+    yawl:signature "List calculateEmids()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: BlockCP.getUniqueID
+yawl:BlockCP_getUniqueID_2 a yawl:Method ;
+    rdfs:label "getUniqueID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUniqueID()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockCP.updateUniqueID
+yawl:BlockCP_updateUniqueID_3 a yawl:Method ;
+    rdfs:label "updateUniqueID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateUniqueID(String id)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockCP.processWIR
+yawl:BlockCP_processWIR_4 a yawl:Method ;
+    rdfs:label "processWIR" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processWIR()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockCP.pushAvailableEmidsToUser
+yawl:BlockCP_pushAvailableEmidsToUser_5 a yawl:Method ;
+    rdfs:label "pushAvailableEmidsToUser" ;
+    yawl:returnType "void" ;
+    yawl:signature "void pushAvailableEmidsToUser(List emids)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: BlockCP.deleteEmidToUser
+yawl:BlockCP_deleteEmidToUser_6 a yawl:Method ;
+    rdfs:label "deleteEmidToUser" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteEmidToUser(String emidStr)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockCP.deleteAllEmidsToUser
+yawl:BlockCP_deleteAllEmidsToUser_7 a yawl:Method ;
+    rdfs:label "deleteAllEmidsToUser" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteAllEmidsToUser()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockCP.getAvailableEmidsToUser
+yawl:BlockCP_getAvailableEmidsToUser_8 a yawl:Method ;
+    rdfs:label "getAvailableEmidsToUser" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAvailableEmidsToUser()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockCP.getInteractionNodesUser
+yawl:BlockCP_getInteractionNodesUser_9 a yawl:Method ;
+    rdfs:label "getInteractionNodesUser" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getInteractionNodesUser()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockCP.isWorkItemSelectedUser
+yawl:BlockCP_isWorkItemSelectedUser_10 a yawl:Method ;
+    rdfs:label "isWorkItemSelectedUser" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isWorkItemSelectedUser()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: BlockCP.publishWorkItem
+yawl:BlockCP_publishWorkItem_11 a yawl:Method ;
+    rdfs:label "publishWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void publishWorkItem(String classID, String procletID, String blockID)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockCP.setWorkitemSelected
+yawl:BlockCP_setWorkitemSelected_12 a yawl:Method ;
+    rdfs:label "setWorkitemSelected" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setWorkitemSelected(String classID, String procletID, String blockID)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockCP.getWorkitemSelected
+yawl:BlockCP_getWorkitemSelected_13 a yawl:Method ;
+    rdfs:label "getWorkitemSelected" ;
+    yawl:returnType "InteractionNode" ;
+    yawl:signature "InteractionNode getWorkitemSelected()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockCP.deleteWorkitemSelected
+yawl:BlockCP_deleteWorkitemSelected_14 a yawl:Method ;
+    rdfs:label "deleteWorkitemSelected" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteWorkitemSelected(String classID, String procletID, String blockID)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockCP.getSelectedEmidFromUser
+yawl:BlockCP_getSelectedEmidFromUser_15 a yawl:Method ;
+    rdfs:label "getSelectedEmidFromUser" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSelectedEmidFromUser()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockCP.setEmidSelected
+yawl:BlockCP_setEmidSelected_16 a yawl:Method ;
+    rdfs:label "setEmidSelected" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEmidSelected(EntityMID emid)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockCP.deleteAvailableEmidsToUser
+yawl:BlockCP_deleteAvailableEmidsToUser_17 a yawl:Method ;
+    rdfs:label "deleteAvailableEmidsToUser" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteAvailableEmidsToUser()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: BlockCP.getEntityMIDsFromData
+yawl:BlockCP_getEntityMIDsFromData_18 a yawl:Method ;
+    rdfs:label "getEntityMIDsFromData" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getEntityMIDsFromData(Element dataList)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockCP.main
+yawl:BlockCP_main_19 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String args)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:BlockCP_wir a yawl:Field ;
+    rdfs:label "wir" .
+
+yawl:BlockCP_block a yawl:Field ;
+    rdfs:label "block" .
+
+yawl:BlockCP_uniqueidTN a yawl:Field ;
+    rdfs:label "uniqueidTN" .
+
+yawl:BlockCP_myLog a yawl:Field ;
+    rdfs:label "myLog" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_procletService_state a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.procletService.state" .
+
+

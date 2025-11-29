@@ -1,0 +1,1001 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.customServices
+yawl:customServices a yawl:Class ;
+    rdfs:label "customServices" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/customServices.java"^^xsd:string ;
+    rdfs:comment """Backing bean for the case mgt page. @author Michael Adams BPM Group, QUT Australia v0.1, 23/01/2008 Last Date: 09/04/2008""" ;
+    yawl:extends yawl:AbstractPageBean ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:customServices__init_1 ;
+    yawl:hasMethod yawl:customServices_init_2 ;
+    yawl:hasMethod yawl:customServices_preprocess_3 ;
+    yawl:hasMethod yawl:customServices_destroy_4 ;
+    yawl:hasMethod yawl:customServices_getApplicationBean_5 ;
+    yawl:hasMethod yawl:customServices_getSessionBean_6 ;
+    yawl:hasMethod yawl:customServices_getRequestBean_7 ;
+    yawl:hasMethod yawl:customServices_getPage1_8 ;
+    yawl:hasMethod yawl:customServices_setPage1_9 ;
+    yawl:hasMethod yawl:customServices_getHtml1_10 ;
+    yawl:hasMethod yawl:customServices_setHtml1_11 ;
+    yawl:hasMethod yawl:customServices_getHead1_12 ;
+    yawl:hasMethod yawl:customServices_setHead1_13 ;
+    yawl:hasMethod yawl:customServices_getLink1_14 ;
+    yawl:hasMethod yawl:customServices_setLink1_15 ;
+    yawl:hasMethod yawl:customServices_getBody1_16 ;
+    yawl:hasMethod yawl:customServices_setBody1_17 ;
+    yawl:hasMethod yawl:customServices_getForm1_18 ;
+    yawl:hasMethod yawl:customServices_setForm1_19 ;
+    yawl:hasMethod yawl:customServices_getPnlAddService_20 ;
+    yawl:hasMethod yawl:customServices_setPnlAddService_21 ;
+    yawl:hasMethod yawl:customServices_getStaticText1_22 ;
+    yawl:hasMethod yawl:customServices_setStaticText1_23 ;
+    yawl:hasMethod yawl:customServices_getLblName_24 ;
+    yawl:hasMethod yawl:customServices_setLblName_25 ;
+    yawl:hasMethod yawl:customServices_getLblPassword_26 ;
+    yawl:hasMethod yawl:customServices_setLblPassword_27 ;
+    yawl:hasMethod yawl:customServices_getLblConfirmPassword_28 ;
+    yawl:hasMethod yawl:customServices_setLblConfirmPassword_29 ;
+    yawl:hasMethod yawl:customServices_getLblURL_30 ;
+    yawl:hasMethod yawl:customServices_setLblURL_31 ;
+    yawl:hasMethod yawl:customServices_getLblDesc_32 ;
+    yawl:hasMethod yawl:customServices_setLblDesc_33 ;
+    yawl:hasMethod yawl:customServices_getTxtName_34 ;
+    yawl:hasMethod yawl:customServices_setTxtName_35 ;
+    yawl:hasMethod yawl:customServices_getTxtPassword_36 ;
+    yawl:hasMethod yawl:customServices_setTxtPassword_37 ;
+    yawl:hasMethod yawl:customServices_getTxtConfirmPassword_38 ;
+    yawl:hasMethod yawl:customServices_setTxtConfirmPassword_39 ;
+    yawl:hasMethod yawl:customServices_getTxtURL_40 ;
+    yawl:hasMethod yawl:customServices_setTxtURL_41 ;
+    yawl:hasMethod yawl:customServices_getTxtDescription_42 ;
+    yawl:hasMethod yawl:customServices_setTxtDescription_43 ;
+    yawl:hasMethod yawl:customServices_getPnlServices_44 ;
+    yawl:hasMethod yawl:customServices_setPnlServices_45 ;
+    yawl:hasMethod yawl:customServices_getStaticText2_46 ;
+    yawl:hasMethod yawl:customServices_setStaticText2_47 ;
+    yawl:hasMethod yawl:customServices_getDataTable1_48 ;
+    yawl:hasMethod yawl:customServices_setDataTable1_49 ;
+    yawl:hasMethod yawl:customServices_getColName_50 ;
+    yawl:hasMethod yawl:customServices_setColName_51 ;
+    yawl:hasMethod yawl:customServices_getColNameRows_52 ;
+    yawl:hasMethod yawl:customServices_setColNameRows_53 ;
+    yawl:hasMethod yawl:customServices_getColNameHeader_54 ;
+    yawl:hasMethod yawl:customServices_setColNameHeader_55 ;
+    yawl:hasMethod yawl:customServices_getColURI_56 ;
+    yawl:hasMethod yawl:customServices_setColURI_57 ;
+    yawl:hasMethod yawl:customServices_getColURIRows_58 ;
+    yawl:hasMethod yawl:customServices_setColURIRows_59 ;
+    yawl:hasMethod yawl:customServices_getColURIHeader_60 ;
+    yawl:hasMethod yawl:customServices_setColURIHeader_61 ;
+    yawl:hasMethod yawl:customServices_getColDescription_62 ;
+    yawl:hasMethod yawl:customServices_setColDescription_63 ;
+    yawl:hasMethod yawl:customServices_getColDescriptionRows_64 ;
+    yawl:hasMethod yawl:customServices_setColDescriptionRows_65 ;
+    yawl:hasMethod yawl:customServices_getColDescriptionHeader_66 ;
+    yawl:hasMethod yawl:customServices_setColDescriptionHeader_67 ;
+    yawl:hasMethod yawl:customServices_getColSBar_68 ;
+    yawl:hasMethod yawl:customServices_setColSBar_69 ;
+    yawl:hasMethod yawl:customServices_getBtnRemove_70 ;
+    yawl:hasMethod yawl:customServices_setBtnRemove_71 ;
+    yawl:hasMethod yawl:customServices_getBtnAdd_72 ;
+    yawl:hasMethod yawl:customServices_setBtnAdd_73 ;
+    yawl:hasMethod yawl:customServices_getBtnClear_74 ;
+    yawl:hasMethod yawl:customServices_setBtnClear_75 ;
+    yawl:hasMethod yawl:customServices_getHdnRowIndex_76 ;
+    yawl:hasMethod yawl:customServices_setHdnRowIndex_77 ;
+    yawl:hasMethod yawl:customServices_getDataList_78 ;
+    yawl:hasMethod yawl:customServices_setDataList_79 ;
+    yawl:hasMethod yawl:customServices_getPnlContainer_80 ;
+    yawl:hasMethod yawl:customServices_setPnlContainer_81 ;
+    yawl:hasMethod yawl:customServices_getPnlGroup_82 ;
+    yawl:hasMethod yawl:customServices_setPnlGroup_83 ;
+    yawl:hasMethod yawl:customServices_prerender_84 ;
+    yawl:hasMethod yawl:customServices_btnRemove_action_85 ;
+    yawl:hasMethod yawl:customServices_btnAdd_action_86 ;
+    yawl:hasMethod yawl:customServices_isNullOrEmpty_87 ;
+    yawl:hasMethod yawl:customServices_btnClear_action_88 ;
+    yawl:hasMethod yawl:customServices_clearInputs_89 ;
+    yawl:hasMethod yawl:customServices_showMessagePanel_90 ;
+    yawl:hasField yawl:customServices___placeholder ;
+    yawl:hasField yawl:customServices_page1 ;
+    yawl:hasField yawl:customServices_html1 ;
+    yawl:hasField yawl:customServices_head1 ;
+    yawl:hasField yawl:customServices_link1 ;
+    yawl:hasField yawl:customServices_body1 ;
+    yawl:hasField yawl:customServices_form1 ;
+    yawl:hasField yawl:customServices_pnlAddService ;
+    yawl:hasField yawl:customServices_staticText1 ;
+    yawl:hasField yawl:customServices_lblName ;
+    yawl:hasField yawl:customServices_lblPassword ;
+    yawl:hasField yawl:customServices_lblConfirmPassword ;
+    yawl:hasField yawl:customServices_lblURL ;
+    yawl:hasField yawl:customServices_lblDesc ;
+    yawl:hasField yawl:customServices_txtName ;
+    yawl:hasField yawl:customServices_txtPassword ;
+    yawl:hasField yawl:customServices_txtConfirmPassword ;
+    yawl:hasField yawl:customServices_txtURL ;
+    yawl:hasField yawl:customServices_txtDescription ;
+    yawl:hasField yawl:customServices_pnlServices ;
+    yawl:hasField yawl:customServices_staticText2 ;
+    yawl:hasField yawl:customServices_dataTable1 ;
+    yawl:hasField yawl:customServices_colName ;
+    yawl:hasField yawl:customServices_colNameRows ;
+    yawl:hasField yawl:customServices_colNameHeader ;
+    yawl:hasField yawl:customServices_colURI ;
+    yawl:hasField yawl:customServices_colURIRows ;
+    yawl:hasField yawl:customServices_colURIHeader ;
+    yawl:hasField yawl:customServices_colDescription ;
+    yawl:hasField yawl:customServices_colDescriptionRows ;
+    yawl:hasField yawl:customServices_colDescriptionHeader ;
+    yawl:hasField yawl:customServices_colSBar ;
+    yawl:hasField yawl:customServices_btnRemove ;
+    yawl:hasField yawl:customServices_btnAdd ;
+    yawl:hasField yawl:customServices_btnClear ;
+    yawl:hasField yawl:customServices_hdnRowIndex ;
+    yawl:hasField yawl:customServices_dataList ;
+    yawl:hasField yawl:customServices_pnlContainer ;
+    yawl:hasField yawl:customServices_pnlGroup ;
+    yawl:hasField yawl:customServices__appbean ;
+    yawl:hasField yawl:customServices__sb ;
+    yawl:hasField yawl:customServices_msgPanel ;
+    .
+
+
+# Method: customServices._init
+yawl:customServices__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: customServices.init
+yawl:customServices_init_2 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.preprocess
+yawl:customServices_preprocess_3 a yawl:Method ;
+    rdfs:label "preprocess" ;
+    yawl:returnType "void" ;
+    yawl:signature "void preprocess()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.destroy
+yawl:customServices_destroy_4 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getApplicationBean
+yawl:customServices_getApplicationBean_5 a yawl:Method ;
+    rdfs:label "getApplicationBean" ;
+    yawl:returnType "ApplicationBean" ;
+    yawl:signature "ApplicationBean getApplicationBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: customServices.getSessionBean
+yawl:customServices_getSessionBean_6 a yawl:Method ;
+    rdfs:label "getSessionBean" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getSessionBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: customServices.getRequestBean
+yawl:customServices_getRequestBean_7 a yawl:Method ;
+    rdfs:label "getRequestBean" ;
+    yawl:returnType "RequestBean" ;
+    yawl:signature "RequestBean getRequestBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: customServices.getPage1
+yawl:customServices_getPage1_8 a yawl:Method ;
+    rdfs:label "getPage1" ;
+    yawl:returnType "Page" ;
+    yawl:signature "Page getPage1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setPage1
+yawl:customServices_setPage1_9 a yawl:Method ;
+    rdfs:label "setPage1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPage1(Page p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getHtml1
+yawl:customServices_getHtml1_10 a yawl:Method ;
+    rdfs:label "getHtml1" ;
+    yawl:returnType "Html" ;
+    yawl:signature "Html getHtml1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setHtml1
+yawl:customServices_setHtml1_11 a yawl:Method ;
+    rdfs:label "setHtml1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHtml1(Html h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getHead1
+yawl:customServices_getHead1_12 a yawl:Method ;
+    rdfs:label "getHead1" ;
+    yawl:returnType "Head" ;
+    yawl:signature "Head getHead1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setHead1
+yawl:customServices_setHead1_13 a yawl:Method ;
+    rdfs:label "setHead1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHead1(Head h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getLink1
+yawl:customServices_getLink1_14 a yawl:Method ;
+    rdfs:label "getLink1" ;
+    yawl:returnType "Link" ;
+    yawl:signature "Link getLink1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setLink1
+yawl:customServices_setLink1_15 a yawl:Method ;
+    rdfs:label "setLink1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLink1(Link l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getBody1
+yawl:customServices_getBody1_16 a yawl:Method ;
+    rdfs:label "getBody1" ;
+    yawl:returnType "Body" ;
+    yawl:signature "Body getBody1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setBody1
+yawl:customServices_setBody1_17 a yawl:Method ;
+    rdfs:label "setBody1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBody1(Body b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getForm1
+yawl:customServices_getForm1_18 a yawl:Method ;
+    rdfs:label "getForm1" ;
+    yawl:returnType "Form" ;
+    yawl:signature "Form getForm1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setForm1
+yawl:customServices_setForm1_19 a yawl:Method ;
+    rdfs:label "setForm1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setForm1(Form f)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getPnlAddService
+yawl:customServices_getPnlAddService_20 a yawl:Method ;
+    rdfs:label "getPnlAddService" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlAddService()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setPnlAddService
+yawl:customServices_setPnlAddService_21 a yawl:Method ;
+    rdfs:label "setPnlAddService" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlAddService(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getStaticText1
+yawl:customServices_getStaticText1_22 a yawl:Method ;
+    rdfs:label "getStaticText1" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getStaticText1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setStaticText1
+yawl:customServices_setStaticText1_23 a yawl:Method ;
+    rdfs:label "setStaticText1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStaticText1(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getLblName
+yawl:customServices_getLblName_24 a yawl:Method ;
+    rdfs:label "getLblName" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setLblName
+yawl:customServices_setLblName_25 a yawl:Method ;
+    rdfs:label "setLblName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblName(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getLblPassword
+yawl:customServices_getLblPassword_26 a yawl:Method ;
+    rdfs:label "getLblPassword" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblPassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setLblPassword
+yawl:customServices_setLblPassword_27 a yawl:Method ;
+    rdfs:label "setLblPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblPassword(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getLblConfirmPassword
+yawl:customServices_getLblConfirmPassword_28 a yawl:Method ;
+    rdfs:label "getLblConfirmPassword" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblConfirmPassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setLblConfirmPassword
+yawl:customServices_setLblConfirmPassword_29 a yawl:Method ;
+    rdfs:label "setLblConfirmPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblConfirmPassword(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getLblURL
+yawl:customServices_getLblURL_30 a yawl:Method ;
+    rdfs:label "getLblURL" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblURL()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setLblURL
+yawl:customServices_setLblURL_31 a yawl:Method ;
+    rdfs:label "setLblURL" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblURL(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getLblDesc
+yawl:customServices_getLblDesc_32 a yawl:Method ;
+    rdfs:label "getLblDesc" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblDesc()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setLblDesc
+yawl:customServices_setLblDesc_33 a yawl:Method ;
+    rdfs:label "setLblDesc" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblDesc(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getTxtName
+yawl:customServices_getTxtName_34 a yawl:Method ;
+    rdfs:label "getTxtName" ;
+    yawl:returnType "TextField" ;
+    yawl:signature "TextField getTxtName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setTxtName
+yawl:customServices_setTxtName_35 a yawl:Method ;
+    rdfs:label "setTxtName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtName(TextField tf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getTxtPassword
+yawl:customServices_getTxtPassword_36 a yawl:Method ;
+    rdfs:label "getTxtPassword" ;
+    yawl:returnType "PasswordField" ;
+    yawl:signature "PasswordField getTxtPassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setTxtPassword
+yawl:customServices_setTxtPassword_37 a yawl:Method ;
+    rdfs:label "setTxtPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtPassword(PasswordField pw)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getTxtConfirmPassword
+yawl:customServices_getTxtConfirmPassword_38 a yawl:Method ;
+    rdfs:label "getTxtConfirmPassword" ;
+    yawl:returnType "PasswordField" ;
+    yawl:signature "PasswordField getTxtConfirmPassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setTxtConfirmPassword
+yawl:customServices_setTxtConfirmPassword_39 a yawl:Method ;
+    rdfs:label "setTxtConfirmPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtConfirmPassword(PasswordField pw)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getTxtURL
+yawl:customServices_getTxtURL_40 a yawl:Method ;
+    rdfs:label "getTxtURL" ;
+    yawl:returnType "TextField" ;
+    yawl:signature "TextField getTxtURL()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setTxtURL
+yawl:customServices_setTxtURL_41 a yawl:Method ;
+    rdfs:label "setTxtURL" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtURL(TextField tf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getTxtDescription
+yawl:customServices_getTxtDescription_42 a yawl:Method ;
+    rdfs:label "getTxtDescription" ;
+    yawl:returnType "TextArea" ;
+    yawl:signature "TextArea getTxtDescription()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setTxtDescription
+yawl:customServices_setTxtDescription_43 a yawl:Method ;
+    rdfs:label "setTxtDescription" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtDescription(TextArea ta)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getPnlServices
+yawl:customServices_getPnlServices_44 a yawl:Method ;
+    rdfs:label "getPnlServices" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlServices()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setPnlServices
+yawl:customServices_setPnlServices_45 a yawl:Method ;
+    rdfs:label "setPnlServices" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlServices(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getStaticText2
+yawl:customServices_getStaticText2_46 a yawl:Method ;
+    rdfs:label "getStaticText2" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getStaticText2()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setStaticText2
+yawl:customServices_setStaticText2_47 a yawl:Method ;
+    rdfs:label "setStaticText2" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStaticText2(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getDataTable1
+yawl:customServices_getDataTable1_48 a yawl:Method ;
+    rdfs:label "getDataTable1" ;
+    yawl:returnType "HtmlDataTable" ;
+    yawl:signature "HtmlDataTable getDataTable1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setDataTable1
+yawl:customServices_setDataTable1_49 a yawl:Method ;
+    rdfs:label "setDataTable1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataTable1(HtmlDataTable hdt)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getColName
+yawl:customServices_getColName_50 a yawl:Method ;
+    rdfs:label "getColName" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setColName
+yawl:customServices_setColName_51 a yawl:Method ;
+    rdfs:label "setColName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColName(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getColNameRows
+yawl:customServices_getColNameRows_52 a yawl:Method ;
+    rdfs:label "getColNameRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColNameRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setColNameRows
+yawl:customServices_setColNameRows_53 a yawl:Method ;
+    rdfs:label "setColNameRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColNameRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getColNameHeader
+yawl:customServices_getColNameHeader_54 a yawl:Method ;
+    rdfs:label "getColNameHeader" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColNameHeader()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setColNameHeader
+yawl:customServices_setColNameHeader_55 a yawl:Method ;
+    rdfs:label "setColNameHeader" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColNameHeader(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getColURI
+yawl:customServices_getColURI_56 a yawl:Method ;
+    rdfs:label "getColURI" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColURI()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setColURI
+yawl:customServices_setColURI_57 a yawl:Method ;
+    rdfs:label "setColURI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColURI(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getColURIRows
+yawl:customServices_getColURIRows_58 a yawl:Method ;
+    rdfs:label "getColURIRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColURIRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setColURIRows
+yawl:customServices_setColURIRows_59 a yawl:Method ;
+    rdfs:label "setColURIRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColURIRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getColURIHeader
+yawl:customServices_getColURIHeader_60 a yawl:Method ;
+    rdfs:label "getColURIHeader" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColURIHeader()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setColURIHeader
+yawl:customServices_setColURIHeader_61 a yawl:Method ;
+    rdfs:label "setColURIHeader" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColURIHeader(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getColDescription
+yawl:customServices_getColDescription_62 a yawl:Method ;
+    rdfs:label "getColDescription" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColDescription()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setColDescription
+yawl:customServices_setColDescription_63 a yawl:Method ;
+    rdfs:label "setColDescription" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColDescription(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getColDescriptionRows
+yawl:customServices_getColDescriptionRows_64 a yawl:Method ;
+    rdfs:label "getColDescriptionRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColDescriptionRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setColDescriptionRows
+yawl:customServices_setColDescriptionRows_65 a yawl:Method ;
+    rdfs:label "setColDescriptionRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColDescriptionRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getColDescriptionHeader
+yawl:customServices_getColDescriptionHeader_66 a yawl:Method ;
+    rdfs:label "getColDescriptionHeader" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColDescriptionHeader()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setColDescriptionHeader
+yawl:customServices_setColDescriptionHeader_67 a yawl:Method ;
+    rdfs:label "setColDescriptionHeader" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColDescriptionHeader(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getColSBar
+yawl:customServices_getColSBar_68 a yawl:Method ;
+    rdfs:label "getColSBar" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColSBar()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setColSBar
+yawl:customServices_setColSBar_69 a yawl:Method ;
+    rdfs:label "setColSBar" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColSBar(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getBtnRemove
+yawl:customServices_getBtnRemove_70 a yawl:Method ;
+    rdfs:label "getBtnRemove" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnRemove()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setBtnRemove
+yawl:customServices_setBtnRemove_71 a yawl:Method ;
+    rdfs:label "setBtnRemove" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnRemove(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getBtnAdd
+yawl:customServices_getBtnAdd_72 a yawl:Method ;
+    rdfs:label "getBtnAdd" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnAdd()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setBtnAdd
+yawl:customServices_setBtnAdd_73 a yawl:Method ;
+    rdfs:label "setBtnAdd" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnAdd(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getBtnClear
+yawl:customServices_getBtnClear_74 a yawl:Method ;
+    rdfs:label "getBtnClear" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnClear()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setBtnClear
+yawl:customServices_setBtnClear_75 a yawl:Method ;
+    rdfs:label "setBtnClear" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnClear(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getHdnRowIndex
+yawl:customServices_getHdnRowIndex_76 a yawl:Method ;
+    rdfs:label "getHdnRowIndex" ;
+    yawl:returnType "HiddenField" ;
+    yawl:signature "HiddenField getHdnRowIndex()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setHdnRowIndex
+yawl:customServices_setHdnRowIndex_77 a yawl:Method ;
+    rdfs:label "setHdnRowIndex" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHdnRowIndex(HiddenField hf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getDataList
+yawl:customServices_getDataList_78 a yawl:Method ;
+    rdfs:label "getDataList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getDataList()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setDataList
+yawl:customServices_setDataList_79 a yawl:Method ;
+    rdfs:label "setDataList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataList(List d)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getPnlContainer
+yawl:customServices_getPnlContainer_80 a yawl:Method ;
+    rdfs:label "getPnlContainer" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlContainer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setPnlContainer
+yawl:customServices_setPnlContainer_81 a yawl:Method ;
+    rdfs:label "setPnlContainer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlContainer(PanelLayout pnl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.getPnlGroup
+yawl:customServices_getPnlGroup_82 a yawl:Method ;
+    rdfs:label "getPnlGroup" ;
+    yawl:returnType "PanelGroup" ;
+    yawl:signature "PanelGroup getPnlGroup()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.setPnlGroup
+yawl:customServices_setPnlGroup_83 a yawl:Method ;
+    rdfs:label "setPnlGroup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlGroup(PanelGroup group)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.prerender
+yawl:customServices_prerender_84 a yawl:Method ;
+    rdfs:label "prerender" ;
+    yawl:returnType "void" ;
+    yawl:signature "void prerender()" ;
+    rdfs:comment """Overridden method that is called immediately before the page is rendered""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.btnRemove_action
+yawl:customServices_btnRemove_action_85 a yawl:Method ;
+    rdfs:label "btnRemove_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnRemove_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.btnAdd_action
+yawl:customServices_btnAdd_action_86 a yawl:Method ;
+    rdfs:label "btnAdd_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnAdd_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.isNullOrEmpty
+yawl:customServices_isNullOrEmpty_87 a yawl:Method ;
+    rdfs:label "isNullOrEmpty" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isNullOrEmpty(String text)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.btnClear_action
+yawl:customServices_btnClear_action_88 a yawl:Method ;
+    rdfs:label "btnClear_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnClear_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: customServices.clearInputs
+yawl:customServices_clearInputs_89 a yawl:Method ;
+    rdfs:label "clearInputs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clearInputs()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: customServices.showMessagePanel
+yawl:customServices_showMessagePanel_90 a yawl:Method ;
+    rdfs:label "showMessagePanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showMessagePanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:customServices___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:customServices_page1 a yawl:Field ;
+    rdfs:label "page1" .
+
+yawl:customServices_html1 a yawl:Field ;
+    rdfs:label "html1" .
+
+yawl:customServices_head1 a yawl:Field ;
+    rdfs:label "head1" .
+
+yawl:customServices_link1 a yawl:Field ;
+    rdfs:label "link1" .
+
+yawl:customServices_body1 a yawl:Field ;
+    rdfs:label "body1" .
+
+yawl:customServices_form1 a yawl:Field ;
+    rdfs:label "form1" .
+
+yawl:customServices_pnlAddService a yawl:Field ;
+    rdfs:label "pnlAddService" .
+
+yawl:customServices_staticText1 a yawl:Field ;
+    rdfs:label "staticText1" .
+
+yawl:customServices_lblName a yawl:Field ;
+    rdfs:label "lblName" .
+
+yawl:customServices_lblPassword a yawl:Field ;
+    rdfs:label "lblPassword" .
+
+yawl:customServices_lblConfirmPassword a yawl:Field ;
+    rdfs:label "lblConfirmPassword" .
+
+yawl:customServices_lblURL a yawl:Field ;
+    rdfs:label "lblURL" .
+
+yawl:customServices_lblDesc a yawl:Field ;
+    rdfs:label "lblDesc" .
+
+yawl:customServices_txtName a yawl:Field ;
+    rdfs:label "txtName" .
+
+yawl:customServices_txtPassword a yawl:Field ;
+    rdfs:label "txtPassword" .
+
+yawl:customServices_txtConfirmPassword a yawl:Field ;
+    rdfs:label "txtConfirmPassword" .
+
+yawl:customServices_txtURL a yawl:Field ;
+    rdfs:label "txtURL" .
+
+yawl:customServices_txtDescription a yawl:Field ;
+    rdfs:label "txtDescription" .
+
+yawl:customServices_pnlServices a yawl:Field ;
+    rdfs:label "pnlServices" .
+
+yawl:customServices_staticText2 a yawl:Field ;
+    rdfs:label "staticText2" .
+
+yawl:customServices_dataTable1 a yawl:Field ;
+    rdfs:label "dataTable1" .
+
+yawl:customServices_colName a yawl:Field ;
+    rdfs:label "colName" .
+
+yawl:customServices_colNameRows a yawl:Field ;
+    rdfs:label "colNameRows" .
+
+yawl:customServices_colNameHeader a yawl:Field ;
+    rdfs:label "colNameHeader" .
+
+yawl:customServices_colURI a yawl:Field ;
+    rdfs:label "colURI" .
+
+yawl:customServices_colURIRows a yawl:Field ;
+    rdfs:label "colURIRows" .
+
+yawl:customServices_colURIHeader a yawl:Field ;
+    rdfs:label "colURIHeader" .
+
+yawl:customServices_colDescription a yawl:Field ;
+    rdfs:label "colDescription" .
+
+yawl:customServices_colDescriptionRows a yawl:Field ;
+    rdfs:label "colDescriptionRows" .
+
+yawl:customServices_colDescriptionHeader a yawl:Field ;
+    rdfs:label "colDescriptionHeader" .
+
+yawl:customServices_colSBar a yawl:Field ;
+    rdfs:label "colSBar" .
+
+yawl:customServices_btnRemove a yawl:Field ;
+    rdfs:label "btnRemove" .
+
+yawl:customServices_btnAdd a yawl:Field ;
+    rdfs:label "btnAdd" .
+
+yawl:customServices_btnClear a yawl:Field ;
+    rdfs:label "btnClear" .
+
+yawl:customServices_hdnRowIndex a yawl:Field ;
+    rdfs:label "hdnRowIndex" .
+
+yawl:customServices_dataList a yawl:Field ;
+    rdfs:label "dataList" .
+
+yawl:customServices_pnlContainer a yawl:Field ;
+    rdfs:label "pnlContainer" .
+
+yawl:customServices_pnlGroup a yawl:Field ;
+    rdfs:label "pnlGroup" .
+
+yawl:customServices__appbean a yawl:Field ;
+    rdfs:label "_appbean" .
+
+yawl:customServices__sb a yawl:Field ;
+    rdfs:label "_sb" .
+
+yawl:customServices_msgPanel a yawl:Field ;
+    rdfs:label "msgPanel" .
+
+
+

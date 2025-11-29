@@ -1,0 +1,156 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.controlpanel.preferences
+yawl:org_yawlfoundation_yawl_controlpanel_preferences a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.controlpanel.preferences" .
+# Class: org.yawlfoundation.yawl.controlpanel.preferences.UserPreferences
+yawl:UserPreferences a yawl:Class ;
+    rdfs:label "UserPreferences" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_preferences ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/preferences/UserPreferences.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 5/08/2014""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:UserPreferences_startEngineOnStartup_1 ;
+    yawl:hasMethod yawl:UserPreferences_setStartEngineOnStartup_2 ;
+    yawl:hasMethod yawl:UserPreferences_checkForUpdatesOnStartup_3 ;
+    yawl:hasMethod yawl:UserPreferences_setCheckForUpdatesOnStartup_4 ;
+    yawl:hasMethod yawl:UserPreferences_stopEngineOnExit_5 ;
+    yawl:hasMethod yawl:UserPreferences_setStopEngineOnExit_6 ;
+    yawl:hasMethod yawl:UserPreferences_showLogonPageOnEngineStart_7 ;
+    yawl:hasMethod yawl:UserPreferences_setShowLogonPageOnEngineStart_8 ;
+    yawl:hasMethod yawl:UserPreferences_setPostUpdatesCompleted_9 ;
+    yawl:hasMethod yawl:UserPreferences_getPostUpdatesCompleted_10 ;
+    yawl:hasMethod yawl:UserPreferences_getBoolean_11 ;
+    yawl:hasMethod yawl:UserPreferences_setBoolean_12 ;
+    yawl:hasField yawl:UserPreferences__prefs ;
+    yawl:hasField yawl:UserPreferences_START_ENGINE_ON_STARTUP ;
+    yawl:hasField yawl:UserPreferences_CHECK_FOR_UPDATES_ON_STARTUP ;
+    yawl:hasField yawl:UserPreferences_STOP_ENGINE_ON_EXIT ;
+    yawl:hasField yawl:UserPreferences_SHOW_LOGON_PAGE_ON_ENGINE_START ;
+    yawl:hasField yawl:UserPreferences_POST_UPDATES_COMPLETED ;
+    .
+
+
+# Method: UserPreferences.startEngineOnStartup
+yawl:UserPreferences_startEngineOnStartup_1 a yawl:Method ;
+    rdfs:label "startEngineOnStartup" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean startEngineOnStartup()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPreferences.setStartEngineOnStartup
+yawl:UserPreferences_setStartEngineOnStartup_2 a yawl:Method ;
+    rdfs:label "setStartEngineOnStartup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStartEngineOnStartup(boolean b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPreferences.checkForUpdatesOnStartup
+yawl:UserPreferences_checkForUpdatesOnStartup_3 a yawl:Method ;
+    rdfs:label "checkForUpdatesOnStartup" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean checkForUpdatesOnStartup()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPreferences.setCheckForUpdatesOnStartup
+yawl:UserPreferences_setCheckForUpdatesOnStartup_4 a yawl:Method ;
+    rdfs:label "setCheckForUpdatesOnStartup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCheckForUpdatesOnStartup(boolean b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPreferences.stopEngineOnExit
+yawl:UserPreferences_stopEngineOnExit_5 a yawl:Method ;
+    rdfs:label "stopEngineOnExit" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean stopEngineOnExit()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPreferences.setStopEngineOnExit
+yawl:UserPreferences_setStopEngineOnExit_6 a yawl:Method ;
+    rdfs:label "setStopEngineOnExit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStopEngineOnExit(boolean b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPreferences.showLogonPageOnEngineStart
+yawl:UserPreferences_showLogonPageOnEngineStart_7 a yawl:Method ;
+    rdfs:label "showLogonPageOnEngineStart" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean showLogonPageOnEngineStart()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPreferences.setShowLogonPageOnEngineStart
+yawl:UserPreferences_setShowLogonPageOnEngineStart_8 a yawl:Method ;
+    rdfs:label "setShowLogonPageOnEngineStart" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setShowLogonPageOnEngineStart(boolean b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPreferences.setPostUpdatesCompleted
+yawl:UserPreferences_setPostUpdatesCompleted_9 a yawl:Method ;
+    rdfs:label "setPostUpdatesCompleted" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPostUpdatesCompleted(boolean completed)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPreferences.getPostUpdatesCompleted
+yawl:UserPreferences_getPostUpdatesCompleted_10 a yawl:Method ;
+    rdfs:label "getPostUpdatesCompleted" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean getPostUpdatesCompleted()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPreferences.getBoolean
+yawl:UserPreferences_getBoolean_11 a yawl:Method ;
+    rdfs:label "getBoolean" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean getBoolean(String key)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: UserPreferences.setBoolean
+yawl:UserPreferences_setBoolean_12 a yawl:Method ;
+    rdfs:label "setBoolean" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBoolean(String key, boolean value)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:UserPreferences__prefs a yawl:Field ;
+    rdfs:label "_prefs" .
+
+yawl:UserPreferences_START_ENGINE_ON_STARTUP a yawl:Field ;
+    rdfs:label "START_ENGINE_ON_STARTUP" .
+
+yawl:UserPreferences_CHECK_FOR_UPDATES_ON_STARTUP a yawl:Field ;
+    rdfs:label "CHECK_FOR_UPDATES_ON_STARTUP" .
+
+yawl:UserPreferences_STOP_ENGINE_ON_EXIT a yawl:Field ;
+    rdfs:label "STOP_ENGINE_ON_EXIT" .
+
+yawl:UserPreferences_SHOW_LOGON_PAGE_ON_ENGINE_START a yawl:Field ;
+    rdfs:label "SHOW_LOGON_PAGE_ON_ENGINE_START" .
+
+yawl:UserPreferences_POST_UPDATES_COMPLETED a yawl:Field ;
+    rdfs:label "POST_UPDATES_COMPLETED" .
+
+
+

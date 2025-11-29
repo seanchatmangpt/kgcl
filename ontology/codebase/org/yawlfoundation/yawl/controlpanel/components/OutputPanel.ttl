@@ -1,0 +1,62 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.components.OutputPanel
+yawl:OutputPanel a yawl:Class ;
+    rdfs:label "OutputPanel" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_components ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/components/OutputPanel.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 4/08/2014""" ;
+    yawl:extends yawl:JPanel ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:OutputPanel_getPreferredSize_1 ;
+    yawl:hasMethod yawl:OutputPanel_clear_2 ;
+    yawl:hasMethod yawl:OutputPanel_buildUI_3 ;
+    yawl:hasMethod yawl:OutputPanel_redirectSysOut_4 ;
+    yawl:hasField yawl:OutputPanel__textPane ;
+    .
+
+
+# Method: OutputPanel.getPreferredSize
+yawl:OutputPanel_getPreferredSize_1 a yawl:Method ;
+    rdfs:label "getPreferredSize" ;
+    yawl:returnType "Dimension" ;
+    yawl:signature "Dimension getPreferredSize()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OutputPanel.clear
+yawl:OutputPanel_clear_2 a yawl:Method ;
+    rdfs:label "clear" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clear()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OutputPanel.buildUI
+yawl:OutputPanel_buildUI_3 a yawl:Method ;
+    rdfs:label "buildUI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void buildUI()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: OutputPanel.redirectSysOut
+yawl:OutputPanel_redirectSysOut_4 a yawl:Method ;
+    rdfs:label "redirectSysOut" ;
+    yawl:returnType "void" ;
+    yawl:signature "void redirectSysOut()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:OutputPanel__textPane a yawl:Field ;
+    rdfs:label "_textPane" .
+
+
+

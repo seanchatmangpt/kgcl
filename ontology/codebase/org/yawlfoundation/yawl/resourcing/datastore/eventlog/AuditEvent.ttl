@@ -1,0 +1,62 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.datastore.eventlog.AuditEvent
+yawl:AuditEvent a yawl:Class ;
+    rdfs:label "AuditEvent" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_datastore_eventlog ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/datastore/eventlog/AuditEvent.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 22/10/2009""" ;
+    yawl:extends yawl:BaseEvent ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:AuditEvent_get_userid_1 ;
+    yawl:hasMethod yawl:AuditEvent_set_userid_2 ;
+    yawl:hasMethod yawl:AuditEvent_toXML_3 ;
+    yawl:hasMethod yawl:AuditEvent_fromXML_4 ;
+    yawl:hasField yawl:AuditEvent__userid ;
+    .
+
+
+# Method: AuditEvent.get_userid
+yawl:AuditEvent_get_userid_1 a yawl:Method ;
+    rdfs:label "get_userid" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_userid()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AuditEvent.set_userid
+yawl:AuditEvent_set_userid_2 a yawl:Method ;
+    rdfs:label "set_userid" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_userid(String userid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AuditEvent.toXML
+yawl:AuditEvent_toXML_3 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AuditEvent.fromXML
+yawl:AuditEvent_fromXML_4 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(Element xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:AuditEvent__userid a yawl:Field ;
+    rdfs:label "_userid" .
+
+
+

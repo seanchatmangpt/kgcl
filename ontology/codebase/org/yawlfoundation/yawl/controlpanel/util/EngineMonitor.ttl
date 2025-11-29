@@ -1,0 +1,134 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.util.EngineMonitor
+yawl:EngineMonitor a yawl:Class ;
+    rdfs:label "EngineMonitor" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/util/EngineMonitor.java"^^xsd:string ;
+    rdfs:comment """Periodically checks that tomcat is running, and that the engine is available, and announces any changes in those states. @author Michael Adams @date 7/08/2014""" ;
+    yawl:implements yawl:ActionListener ;
+    yawl:implements yawl:EngineStatusListener ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:EngineMonitor_addListener_1 ;
+    yawl:hasMethod yawl:EngineMonitor_removeListener_2 ;
+    yawl:hasMethod yawl:EngineMonitor_setSuspended_3 ;
+    yawl:hasMethod yawl:EngineMonitor_actionPerformed_4 ;
+    yawl:hasMethod yawl:EngineMonitor_statusChanged_5 ;
+    yawl:hasMethod yawl:EngineMonitor_monitorStartingOrStopping_6 ;
+    yawl:hasMethod yawl:EngineMonitor_monitorRunning_7 ;
+    yawl:hasMethod yawl:EngineMonitor_monitorStopping_8 ;
+    yawl:hasMethod yawl:EngineMonitor_handleStop_9 ;
+    yawl:hasMethod yawl:EngineMonitor_ping_10 ;
+    yawl:hasField yawl:EngineMonitor__timer ;
+    yawl:hasField yawl:EngineMonitor__suspended ;
+    yawl:hasField yawl:EngineMonitor__currentStatus ;
+    yawl:hasField yawl:EngineMonitor_STARTUP_SHUTDOWN_PERIOD ;
+    yawl:hasField yawl:EngineMonitor_MONITOR_PERIOD ;
+    .
+
+
+# Method: EngineMonitor.addListener
+yawl:EngineMonitor_addListener_1 a yawl:Method ;
+    rdfs:label "addListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addListener(ActionListener listener)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineMonitor.removeListener
+yawl:EngineMonitor_removeListener_2 a yawl:Method ;
+    rdfs:label "removeListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeListener(ActionListener listener)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineMonitor.setSuspended
+yawl:EngineMonitor_setSuspended_3 a yawl:Method ;
+    rdfs:label "setSuspended" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSuspended(boolean suspend)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EngineMonitor.actionPerformed
+yawl:EngineMonitor_actionPerformed_4 a yawl:Method ;
+    rdfs:label "actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void actionPerformed(ActionEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineMonitor.statusChanged
+yawl:EngineMonitor_statusChanged_5 a yawl:Method ;
+    rdfs:label "statusChanged" ;
+    yawl:returnType "void" ;
+    yawl:signature "void statusChanged(EngineStatus status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineMonitor.monitorStartingOrStopping
+yawl:EngineMonitor_monitorStartingOrStopping_6 a yawl:Method ;
+    rdfs:label "monitorStartingOrStopping" ;
+    yawl:returnType "void" ;
+    yawl:signature "void monitorStartingOrStopping()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: EngineMonitor.monitorRunning
+yawl:EngineMonitor_monitorRunning_7 a yawl:Method ;
+    rdfs:label "monitorRunning" ;
+    yawl:returnType "void" ;
+    yawl:signature "void monitorRunning()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: EngineMonitor.monitorStopping
+yawl:EngineMonitor_monitorStopping_8 a yawl:Method ;
+    rdfs:label "monitorStopping" ;
+    yawl:returnType "void" ;
+    yawl:signature "void monitorStopping()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: EngineMonitor.handleStop
+yawl:EngineMonitor_handleStop_9 a yawl:Method ;
+    rdfs:label "handleStop" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleStop()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: EngineMonitor.ping
+yawl:EngineMonitor_ping_10 a yawl:Method ;
+    rdfs:label "ping" ;
+    yawl:returnType "void" ;
+    yawl:signature "void ping()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:EngineMonitor__timer a yawl:Field ;
+    rdfs:label "_timer" .
+
+yawl:EngineMonitor__suspended a yawl:Field ;
+    rdfs:label "_suspended" .
+
+yawl:EngineMonitor__currentStatus a yawl:Field ;
+    rdfs:label "_currentStatus" .
+
+yawl:EngineMonitor_STARTUP_SHUTDOWN_PERIOD a yawl:Field ;
+    rdfs:label "STARTUP_SHUTDOWN_PERIOD" .
+
+yawl:EngineMonitor_MONITOR_PERIOD a yawl:Field ;
+    rdfs:label "MONITOR_PERIOD" .
+
+
+

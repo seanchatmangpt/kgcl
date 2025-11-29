@@ -1,0 +1,1070 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.viewProfile
+yawl:viewProfile a yawl:Class ;
+    rdfs:label "viewProfile" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/viewProfile.java"^^xsd:string ;
+    rdfs:comment """Backing bean for edit profile form @author Michael Adams Date: 31/01/2008 Last Date: 16/03/2008""" ;
+    yawl:extends yawl:AbstractPageBean ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:viewProfile__init_1 ;
+    yawl:hasMethod yawl:viewProfile_getPage1_2 ;
+    yawl:hasMethod yawl:viewProfile_setPage1_3 ;
+    yawl:hasMethod yawl:viewProfile_getHtml1_4 ;
+    yawl:hasMethod yawl:viewProfile_setHtml1_5 ;
+    yawl:hasMethod yawl:viewProfile_getHead1_6 ;
+    yawl:hasMethod yawl:viewProfile_setHead1_7 ;
+    yawl:hasMethod yawl:viewProfile_getLink1_8 ;
+    yawl:hasMethod yawl:viewProfile_setLink1_9 ;
+    yawl:hasMethod yawl:viewProfile_getBody1_10 ;
+    yawl:hasMethod yawl:viewProfile_setBody1_11 ;
+    yawl:hasMethod yawl:viewProfile_getForm1_12 ;
+    yawl:hasMethod yawl:viewProfile_setForm1_13 ;
+    yawl:hasMethod yawl:viewProfile_getPnlProfile_14 ;
+    yawl:hasMethod yawl:viewProfile_setPnlProfile_15 ;
+    yawl:hasMethod yawl:viewProfile_getPnlPiled_16 ;
+    yawl:hasMethod yawl:viewProfile_setPnlPiled_17 ;
+    yawl:hasMethod yawl:viewProfile_getPnlChained_18 ;
+    yawl:hasMethod yawl:viewProfile_setPnlChained_19 ;
+    yawl:hasMethod yawl:viewProfile_getSttPassword_20 ;
+    yawl:hasMethod yawl:viewProfile_setSttPassword_21 ;
+    yawl:hasMethod yawl:viewProfile_getSttPiled_22 ;
+    yawl:hasMethod yawl:viewProfile_setSttPiled_23 ;
+    yawl:hasMethod yawl:viewProfile_getSttChained_24 ;
+    yawl:hasMethod yawl:viewProfile_setSttChained_25 ;
+    yawl:hasMethod yawl:viewProfile_getLbxPiled_26 ;
+    yawl:hasMethod yawl:viewProfile_setLbxPiled_27 ;
+    yawl:hasMethod yawl:viewProfile_getLbxChained_28 ;
+    yawl:hasMethod yawl:viewProfile_setLbxChained_29 ;
+    yawl:hasMethod yawl:viewProfile_getTxtNewPassword_30 ;
+    yawl:hasMethod yawl:viewProfile_setTxtNewPassword_31 ;
+    yawl:hasMethod yawl:viewProfile_getTxtConfirmPassword_32 ;
+    yawl:hasMethod yawl:viewProfile_setTxtConfirmPassword_33 ;
+    yawl:hasMethod yawl:viewProfile_getTxtName_34 ;
+    yawl:hasMethod yawl:viewProfile_setTxtName_35 ;
+    yawl:hasMethod yawl:viewProfile_getTxtUserID_36 ;
+    yawl:hasMethod yawl:viewProfile_setTxtUserID_37 ;
+    yawl:hasMethod yawl:viewProfile_getCbxAdmin_38 ;
+    yawl:hasMethod yawl:viewProfile_setCbxAdmin_39 ;
+    yawl:hasMethod yawl:viewProfile_getPnlNewPassword_40 ;
+    yawl:hasMethod yawl:viewProfile_setPnlNewPassword_41 ;
+    yawl:hasMethod yawl:viewProfile_getCbbRoles_42 ;
+    yawl:hasMethod yawl:viewProfile_setCbbRoles_43 ;
+    yawl:hasMethod yawl:viewProfile_getCbbPositions_44 ;
+    yawl:hasMethod yawl:viewProfile_setCbbPositions_45 ;
+    yawl:hasMethod yawl:viewProfile_getCbbCapabilities_46 ;
+    yawl:hasMethod yawl:viewProfile_setCbbCapabilities_47 ;
+    yawl:hasMethod yawl:viewProfile_getLblName_48 ;
+    yawl:hasMethod yawl:viewProfile_setLblName_49 ;
+    yawl:hasMethod yawl:viewProfile_getLblUserID_50 ;
+    yawl:hasMethod yawl:viewProfile_setLblUserID_51 ;
+    yawl:hasMethod yawl:viewProfile_getLblRoles_52 ;
+    yawl:hasMethod yawl:viewProfile_setLblRoles_53 ;
+    yawl:hasMethod yawl:viewProfile_getLblPositions_54 ;
+    yawl:hasMethod yawl:viewProfile_setLblPositions_55 ;
+    yawl:hasMethod yawl:viewProfile_getLblCapabilities_56 ;
+    yawl:hasMethod yawl:viewProfile_setLblCapabilities_57 ;
+    yawl:hasMethod yawl:viewProfile_getLblNewPassword_58 ;
+    yawl:hasMethod yawl:viewProfile_setLblNewPassword_59 ;
+    yawl:hasMethod yawl:viewProfile_getLblConfirmPassword_60 ;
+    yawl:hasMethod yawl:viewProfile_setLblConfirmPassword_61 ;
+    yawl:hasMethod yawl:viewProfile_getBtnSave_62 ;
+    yawl:hasMethod yawl:viewProfile_setBtnSave_63 ;
+    yawl:hasMethod yawl:viewProfile_getBtnSavePassword_64 ;
+    yawl:hasMethod yawl:viewProfile_setBtnSavePassword_65 ;
+    yawl:hasMethod yawl:viewProfile_getBtnUnpile_66 ;
+    yawl:hasMethod yawl:viewProfile_setBtnUnpile_67 ;
+    yawl:hasMethod yawl:viewProfile_getBtnUnchain_68 ;
+    yawl:hasMethod yawl:viewProfile_setBtnUnchain_69 ;
+    yawl:hasMethod yawl:viewProfile_getBtnRemove_70 ;
+    yawl:hasMethod yawl:viewProfile_setBtnRemove_71 ;
+    yawl:hasMethod yawl:viewProfile_getBtnAdd_72 ;
+    yawl:hasMethod yawl:viewProfile_setBtnAdd_73 ;
+    yawl:hasMethod yawl:viewProfile_getMsgGroup_74 ;
+    yawl:hasMethod yawl:viewProfile_setMsgGroup_75 ;
+    yawl:hasMethod yawl:viewProfile_getPnlContainer_76 ;
+    yawl:hasMethod yawl:viewProfile_setPnlContainer_77 ;
+    yawl:hasMethod yawl:viewProfile_getApplicationBean_78 ;
+    yawl:hasMethod yawl:viewProfile_getSessionBean_79 ;
+    yawl:hasMethod yawl:viewProfile_getRequestBean_80 ;
+    yawl:hasMethod yawl:viewProfile_init_81 ;
+    yawl:hasMethod yawl:viewProfile_preprocess_82 ;
+    yawl:hasMethod yawl:viewProfile_prerender_83 ;
+    yawl:hasMethod yawl:viewProfile_destroy_84 ;
+    yawl:hasMethod yawl:viewProfile_btnSavePassword_action_85 ;
+    yawl:hasMethod yawl:viewProfile_btnUnchain_action_86 ;
+    yawl:hasMethod yawl:viewProfile_btnUnpile_action_87 ;
+    yawl:hasMethod yawl:viewProfile_populateFields_88 ;
+    yawl:hasMethod yawl:viewProfile_getRolesList_89 ;
+    yawl:hasMethod yawl:viewProfile_getPositionsList_90 ;
+    yawl:hasMethod yawl:viewProfile_getCapabilitiesList_91 ;
+    yawl:hasMethod yawl:viewProfile_clearFields_92 ;
+    yawl:hasMethod yawl:viewProfile_checkValidPasswordChange_93 ;
+    yawl:hasMethod yawl:viewProfile_checkForRequiredValues_94 ;
+    yawl:hasMethod yawl:viewProfile_hasText_95 ;
+    yawl:hasMethod yawl:viewProfile_showResult_96 ;
+    yawl:hasMethod yawl:viewProfile_showMessagePanel_97 ;
+    yawl:hasField yawl:viewProfile___placeholder ;
+    yawl:hasField yawl:viewProfile_page1 ;
+    yawl:hasField yawl:viewProfile_html1 ;
+    yawl:hasField yawl:viewProfile_head1 ;
+    yawl:hasField yawl:viewProfile_link1 ;
+    yawl:hasField yawl:viewProfile_body1 ;
+    yawl:hasField yawl:viewProfile_form1 ;
+    yawl:hasField yawl:viewProfile_pnlProfile ;
+    yawl:hasField yawl:viewProfile_pnlPiled ;
+    yawl:hasField yawl:viewProfile_pnlChained ;
+    yawl:hasField yawl:viewProfile_sttPassword ;
+    yawl:hasField yawl:viewProfile_sttPiled ;
+    yawl:hasField yawl:viewProfile_sttChained ;
+    yawl:hasField yawl:viewProfile_lbxPiled ;
+    yawl:hasField yawl:viewProfile_lbxChained ;
+    yawl:hasField yawl:viewProfile_txtNewPassword ;
+    yawl:hasField yawl:viewProfile_txtConfirmPassword ;
+    yawl:hasField yawl:viewProfile_txtName ;
+    yawl:hasField yawl:viewProfile_txtUserID ;
+    yawl:hasField yawl:viewProfile_cbxAdmin ;
+    yawl:hasField yawl:viewProfile_pnlNewPassword ;
+    yawl:hasField yawl:viewProfile_cbbRoles ;
+    yawl:hasField yawl:viewProfile_cbbPositions ;
+    yawl:hasField yawl:viewProfile_cbbCapabilities ;
+    yawl:hasField yawl:viewProfile_lblName ;
+    yawl:hasField yawl:viewProfile_lblUserID ;
+    yawl:hasField yawl:viewProfile_lblRoles ;
+    yawl:hasField yawl:viewProfile_lblPositions ;
+    yawl:hasField yawl:viewProfile_lblCapabilities ;
+    yawl:hasField yawl:viewProfile_lblNewPassword ;
+    yawl:hasField yawl:viewProfile_lblConfirmPassword ;
+    yawl:hasField yawl:viewProfile_btnSave ;
+    yawl:hasField yawl:viewProfile_btnSavePassword ;
+    yawl:hasField yawl:viewProfile_btnUnpile ;
+    yawl:hasField yawl:viewProfile_btnUnchain ;
+    yawl:hasField yawl:viewProfile_btnRemove ;
+    yawl:hasField yawl:viewProfile_btnAdd ;
+    yawl:hasField yawl:viewProfile_msgGroup ;
+    yawl:hasField yawl:viewProfile_pnlContainer ;
+    yawl:hasField yawl:viewProfile__sb ;
+    yawl:hasField yawl:viewProfile_msgPanel ;
+    yawl:hasField yawl:viewProfile_participant ;
+    yawl:hasField yawl:viewProfile_rm ;
+    .
+
+
+# Method: viewProfile._init
+yawl:viewProfile__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: viewProfile.getPage1
+yawl:viewProfile_getPage1_2 a yawl:Method ;
+    rdfs:label "getPage1" ;
+    yawl:returnType "Page" ;
+    yawl:signature "Page getPage1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setPage1
+yawl:viewProfile_setPage1_3 a yawl:Method ;
+    rdfs:label "setPage1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPage1(Page p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getHtml1
+yawl:viewProfile_getHtml1_4 a yawl:Method ;
+    rdfs:label "getHtml1" ;
+    yawl:returnType "Html" ;
+    yawl:signature "Html getHtml1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setHtml1
+yawl:viewProfile_setHtml1_5 a yawl:Method ;
+    rdfs:label "setHtml1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHtml1(Html h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getHead1
+yawl:viewProfile_getHead1_6 a yawl:Method ;
+    rdfs:label "getHead1" ;
+    yawl:returnType "Head" ;
+    yawl:signature "Head getHead1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setHead1
+yawl:viewProfile_setHead1_7 a yawl:Method ;
+    rdfs:label "setHead1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHead1(Head h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getLink1
+yawl:viewProfile_getLink1_8 a yawl:Method ;
+    rdfs:label "getLink1" ;
+    yawl:returnType "Link" ;
+    yawl:signature "Link getLink1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setLink1
+yawl:viewProfile_setLink1_9 a yawl:Method ;
+    rdfs:label "setLink1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLink1(Link l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getBody1
+yawl:viewProfile_getBody1_10 a yawl:Method ;
+    rdfs:label "getBody1" ;
+    yawl:returnType "Body" ;
+    yawl:signature "Body getBody1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setBody1
+yawl:viewProfile_setBody1_11 a yawl:Method ;
+    rdfs:label "setBody1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBody1(Body b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getForm1
+yawl:viewProfile_getForm1_12 a yawl:Method ;
+    rdfs:label "getForm1" ;
+    yawl:returnType "Form" ;
+    yawl:signature "Form getForm1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setForm1
+yawl:viewProfile_setForm1_13 a yawl:Method ;
+    rdfs:label "setForm1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setForm1(Form f)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getPnlProfile
+yawl:viewProfile_getPnlProfile_14 a yawl:Method ;
+    rdfs:label "getPnlProfile" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlProfile()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setPnlProfile
+yawl:viewProfile_setPnlProfile_15 a yawl:Method ;
+    rdfs:label "setPnlProfile" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlProfile(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getPnlPiled
+yawl:viewProfile_getPnlPiled_16 a yawl:Method ;
+    rdfs:label "getPnlPiled" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlPiled()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setPnlPiled
+yawl:viewProfile_setPnlPiled_17 a yawl:Method ;
+    rdfs:label "setPnlPiled" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlPiled(PanelLayout pnlPiled)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getPnlChained
+yawl:viewProfile_getPnlChained_18 a yawl:Method ;
+    rdfs:label "getPnlChained" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlChained()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setPnlChained
+yawl:viewProfile_setPnlChained_19 a yawl:Method ;
+    rdfs:label "setPnlChained" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlChained(PanelLayout pnlChained)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getSttPassword
+yawl:viewProfile_getSttPassword_20 a yawl:Method ;
+    rdfs:label "getSttPassword" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getSttPassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setSttPassword
+yawl:viewProfile_setSttPassword_21 a yawl:Method ;
+    rdfs:label "setSttPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSttPassword(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getSttPiled
+yawl:viewProfile_getSttPiled_22 a yawl:Method ;
+    rdfs:label "getSttPiled" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getSttPiled()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setSttPiled
+yawl:viewProfile_setSttPiled_23 a yawl:Method ;
+    rdfs:label "setSttPiled" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSttPiled(StaticText sttPiled)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getSttChained
+yawl:viewProfile_getSttChained_24 a yawl:Method ;
+    rdfs:label "getSttChained" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getSttChained()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setSttChained
+yawl:viewProfile_setSttChained_25 a yawl:Method ;
+    rdfs:label "setSttChained" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSttChained(StaticText sttChained)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getLbxPiled
+yawl:viewProfile_getLbxPiled_26 a yawl:Method ;
+    rdfs:label "getLbxPiled" ;
+    yawl:returnType "Listbox" ;
+    yawl:signature "Listbox getLbxPiled()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setLbxPiled
+yawl:viewProfile_setLbxPiled_27 a yawl:Method ;
+    rdfs:label "setLbxPiled" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLbxPiled(Listbox lbxPiled)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getLbxChained
+yawl:viewProfile_getLbxChained_28 a yawl:Method ;
+    rdfs:label "getLbxChained" ;
+    yawl:returnType "Listbox" ;
+    yawl:signature "Listbox getLbxChained()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setLbxChained
+yawl:viewProfile_setLbxChained_29 a yawl:Method ;
+    rdfs:label "setLbxChained" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLbxChained(Listbox lbxChained)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getTxtNewPassword
+yawl:viewProfile_getTxtNewPassword_30 a yawl:Method ;
+    rdfs:label "getTxtNewPassword" ;
+    yawl:returnType "PasswordField" ;
+    yawl:signature "PasswordField getTxtNewPassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setTxtNewPassword
+yawl:viewProfile_setTxtNewPassword_31 a yawl:Method ;
+    rdfs:label "setTxtNewPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtNewPassword(PasswordField txtNewPassword)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getTxtConfirmPassword
+yawl:viewProfile_getTxtConfirmPassword_32 a yawl:Method ;
+    rdfs:label "getTxtConfirmPassword" ;
+    yawl:returnType "PasswordField" ;
+    yawl:signature "PasswordField getTxtConfirmPassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setTxtConfirmPassword
+yawl:viewProfile_setTxtConfirmPassword_33 a yawl:Method ;
+    rdfs:label "setTxtConfirmPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtConfirmPassword(PasswordField txtConfirmPassword)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getTxtName
+yawl:viewProfile_getTxtName_34 a yawl:Method ;
+    rdfs:label "getTxtName" ;
+    yawl:returnType "TextField" ;
+    yawl:signature "TextField getTxtName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setTxtName
+yawl:viewProfile_setTxtName_35 a yawl:Method ;
+    rdfs:label "setTxtName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtName(TextField tf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getTxtUserID
+yawl:viewProfile_getTxtUserID_36 a yawl:Method ;
+    rdfs:label "getTxtUserID" ;
+    yawl:returnType "TextField" ;
+    yawl:signature "TextField getTxtUserID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setTxtUserID
+yawl:viewProfile_setTxtUserID_37 a yawl:Method ;
+    rdfs:label "setTxtUserID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtUserID(TextField tf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getCbxAdmin
+yawl:viewProfile_getCbxAdmin_38 a yawl:Method ;
+    rdfs:label "getCbxAdmin" ;
+    yawl:returnType "Checkbox" ;
+    yawl:signature "Checkbox getCbxAdmin()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setCbxAdmin
+yawl:viewProfile_setCbxAdmin_39 a yawl:Method ;
+    rdfs:label "setCbxAdmin" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCbxAdmin(Checkbox c)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getPnlNewPassword
+yawl:viewProfile_getPnlNewPassword_40 a yawl:Method ;
+    rdfs:label "getPnlNewPassword" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlNewPassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setPnlNewPassword
+yawl:viewProfile_setPnlNewPassword_41 a yawl:Method ;
+    rdfs:label "setPnlNewPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlNewPassword(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getCbbRoles
+yawl:viewProfile_getCbbRoles_42 a yawl:Method ;
+    rdfs:label "getCbbRoles" ;
+    yawl:returnType "DropDown" ;
+    yawl:signature "DropDown getCbbRoles()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setCbbRoles
+yawl:viewProfile_setCbbRoles_43 a yawl:Method ;
+    rdfs:label "setCbbRoles" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCbbRoles(DropDown dd)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getCbbPositions
+yawl:viewProfile_getCbbPositions_44 a yawl:Method ;
+    rdfs:label "getCbbPositions" ;
+    yawl:returnType "DropDown" ;
+    yawl:signature "DropDown getCbbPositions()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setCbbPositions
+yawl:viewProfile_setCbbPositions_45 a yawl:Method ;
+    rdfs:label "setCbbPositions" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCbbPositions(DropDown cbbPositions)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getCbbCapabilities
+yawl:viewProfile_getCbbCapabilities_46 a yawl:Method ;
+    rdfs:label "getCbbCapabilities" ;
+    yawl:returnType "DropDown" ;
+    yawl:signature "DropDown getCbbCapabilities()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setCbbCapabilities
+yawl:viewProfile_setCbbCapabilities_47 a yawl:Method ;
+    rdfs:label "setCbbCapabilities" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCbbCapabilities(DropDown cbbCapabilities)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getLblName
+yawl:viewProfile_getLblName_48 a yawl:Method ;
+    rdfs:label "getLblName" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setLblName
+yawl:viewProfile_setLblName_49 a yawl:Method ;
+    rdfs:label "setLblName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblName(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getLblUserID
+yawl:viewProfile_getLblUserID_50 a yawl:Method ;
+    rdfs:label "getLblUserID" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblUserID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setLblUserID
+yawl:viewProfile_setLblUserID_51 a yawl:Method ;
+    rdfs:label "setLblUserID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblUserID(Label lblUserID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getLblRoles
+yawl:viewProfile_getLblRoles_52 a yawl:Method ;
+    rdfs:label "getLblRoles" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblRoles()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setLblRoles
+yawl:viewProfile_setLblRoles_53 a yawl:Method ;
+    rdfs:label "setLblRoles" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblRoles(Label lblRoles)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getLblPositions
+yawl:viewProfile_getLblPositions_54 a yawl:Method ;
+    rdfs:label "getLblPositions" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblPositions()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setLblPositions
+yawl:viewProfile_setLblPositions_55 a yawl:Method ;
+    rdfs:label "setLblPositions" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblPositions(Label lblPositions)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getLblCapabilities
+yawl:viewProfile_getLblCapabilities_56 a yawl:Method ;
+    rdfs:label "getLblCapabilities" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblCapabilities()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setLblCapabilities
+yawl:viewProfile_setLblCapabilities_57 a yawl:Method ;
+    rdfs:label "setLblCapabilities" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblCapabilities(Label lblCapabilities)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getLblNewPassword
+yawl:viewProfile_getLblNewPassword_58 a yawl:Method ;
+    rdfs:label "getLblNewPassword" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblNewPassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setLblNewPassword
+yawl:viewProfile_setLblNewPassword_59 a yawl:Method ;
+    rdfs:label "setLblNewPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblNewPassword(Label lblNewPassword)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getLblConfirmPassword
+yawl:viewProfile_getLblConfirmPassword_60 a yawl:Method ;
+    rdfs:label "getLblConfirmPassword" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblConfirmPassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setLblConfirmPassword
+yawl:viewProfile_setLblConfirmPassword_61 a yawl:Method ;
+    rdfs:label "setLblConfirmPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblConfirmPassword(Label lblConfirmPassword)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getBtnSave
+yawl:viewProfile_getBtnSave_62 a yawl:Method ;
+    rdfs:label "getBtnSave" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnSave()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setBtnSave
+yawl:viewProfile_setBtnSave_63 a yawl:Method ;
+    rdfs:label "setBtnSave" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnSave(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getBtnSavePassword
+yawl:viewProfile_getBtnSavePassword_64 a yawl:Method ;
+    rdfs:label "getBtnSavePassword" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnSavePassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setBtnSavePassword
+yawl:viewProfile_setBtnSavePassword_65 a yawl:Method ;
+    rdfs:label "setBtnSavePassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnSavePassword(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getBtnUnpile
+yawl:viewProfile_getBtnUnpile_66 a yawl:Method ;
+    rdfs:label "getBtnUnpile" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnUnpile()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setBtnUnpile
+yawl:viewProfile_setBtnUnpile_67 a yawl:Method ;
+    rdfs:label "setBtnUnpile" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnUnpile(Button btnUnpile)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getBtnUnchain
+yawl:viewProfile_getBtnUnchain_68 a yawl:Method ;
+    rdfs:label "getBtnUnchain" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnUnchain()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setBtnUnchain
+yawl:viewProfile_setBtnUnchain_69 a yawl:Method ;
+    rdfs:label "setBtnUnchain" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnUnchain(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getBtnRemove
+yawl:viewProfile_getBtnRemove_70 a yawl:Method ;
+    rdfs:label "getBtnRemove" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnRemove()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setBtnRemove
+yawl:viewProfile_setBtnRemove_71 a yawl:Method ;
+    rdfs:label "setBtnRemove" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnRemove(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getBtnAdd
+yawl:viewProfile_getBtnAdd_72 a yawl:Method ;
+    rdfs:label "getBtnAdd" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnAdd()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setBtnAdd
+yawl:viewProfile_setBtnAdd_73 a yawl:Method ;
+    rdfs:label "setBtnAdd" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnAdd(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getMsgGroup
+yawl:viewProfile_getMsgGroup_74 a yawl:Method ;
+    rdfs:label "getMsgGroup" ;
+    yawl:returnType "MessageGroup" ;
+    yawl:signature "MessageGroup getMsgGroup()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setMsgGroup
+yawl:viewProfile_setMsgGroup_75 a yawl:Method ;
+    rdfs:label "setMsgGroup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMsgGroup(MessageGroup msgGroup)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getPnlContainer
+yawl:viewProfile_getPnlContainer_76 a yawl:Method ;
+    rdfs:label "getPnlContainer" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlContainer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.setPnlContainer
+yawl:viewProfile_setPnlContainer_77 a yawl:Method ;
+    rdfs:label "setPnlContainer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlContainer(PanelLayout pnl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.getApplicationBean
+yawl:viewProfile_getApplicationBean_78 a yawl:Method ;
+    rdfs:label "getApplicationBean" ;
+    yawl:returnType "ApplicationBean" ;
+    yawl:signature "ApplicationBean getApplicationBean()" ;
+    rdfs:comment """<p>Return a reference to the scoped data bean.</p>""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: viewProfile.getSessionBean
+yawl:viewProfile_getSessionBean_79 a yawl:Method ;
+    rdfs:label "getSessionBean" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getSessionBean()" ;
+    rdfs:comment """<p>Return a reference to the scoped data bean.</p>""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: viewProfile.getRequestBean
+yawl:viewProfile_getRequestBean_80 a yawl:Method ;
+    rdfs:label "getRequestBean" ;
+    yawl:returnType "RequestBean" ;
+    yawl:signature "RequestBean getRequestBean()" ;
+    rdfs:comment """<p>Return a reference to the scoped data bean.</p>""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: viewProfile.init
+yawl:viewProfile_init_81 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.preprocess
+yawl:viewProfile_preprocess_82 a yawl:Method ;
+    rdfs:label "preprocess" ;
+    yawl:returnType "void" ;
+    yawl:signature "void preprocess()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.prerender
+yawl:viewProfile_prerender_83 a yawl:Method ;
+    rdfs:label "prerender" ;
+    yawl:returnType "void" ;
+    yawl:signature "void prerender()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.destroy
+yawl:viewProfile_destroy_84 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.btnSavePassword_action
+yawl:viewProfile_btnSavePassword_action_85 a yawl:Method ;
+    rdfs:label "btnSavePassword_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnSavePassword_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.btnUnchain_action
+yawl:viewProfile_btnUnchain_action_86 a yawl:Method ;
+    rdfs:label "btnUnchain_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnUnchain_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.btnUnpile_action
+yawl:viewProfile_btnUnpile_action_87 a yawl:Method ;
+    rdfs:label "btnUnpile_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnUnpile_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: viewProfile.populateFields
+yawl:viewProfile_populateFields_88 a yawl:Method ;
+    rdfs:label "populateFields" ;
+    yawl:returnType "void" ;
+    yawl:signature "void populateFields(Participant p)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: viewProfile.getRolesList
+yawl:viewProfile_getRolesList_89 a yawl:Method ;
+    rdfs:label "getRolesList" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getRolesList(Participant p)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: viewProfile.getPositionsList
+yawl:viewProfile_getPositionsList_90 a yawl:Method ;
+    rdfs:label "getPositionsList" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getPositionsList(Participant p)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: viewProfile.getCapabilitiesList
+yawl:viewProfile_getCapabilitiesList_91 a yawl:Method ;
+    rdfs:label "getCapabilitiesList" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getCapabilitiesList(Participant p)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: viewProfile.clearFields
+yawl:viewProfile_clearFields_92 a yawl:Method ;
+    rdfs:label "clearFields" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clearFields()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: viewProfile.checkValidPasswordChange
+yawl:viewProfile_checkValidPasswordChange_93 a yawl:Method ;
+    rdfs:label "checkValidPasswordChange" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean checkValidPasswordChange()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: viewProfile.checkForRequiredValues
+yawl:viewProfile_checkForRequiredValues_94 a yawl:Method ;
+    rdfs:label "checkForRequiredValues" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean checkForRequiredValues()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: viewProfile.hasText
+yawl:viewProfile_hasText_95 a yawl:Method ;
+    rdfs:label "hasText" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasText(PasswordField field)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: viewProfile.showResult
+yawl:viewProfile_showResult_96 a yawl:Method ;
+    rdfs:label "showResult" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showResult(String result)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: viewProfile.showMessagePanel
+yawl:viewProfile_showMessagePanel_97 a yawl:Method ;
+    rdfs:label "showMessagePanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showMessagePanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:viewProfile___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:viewProfile_page1 a yawl:Field ;
+    rdfs:label "page1" .
+
+yawl:viewProfile_html1 a yawl:Field ;
+    rdfs:label "html1" .
+
+yawl:viewProfile_head1 a yawl:Field ;
+    rdfs:label "head1" .
+
+yawl:viewProfile_link1 a yawl:Field ;
+    rdfs:label "link1" .
+
+yawl:viewProfile_body1 a yawl:Field ;
+    rdfs:label "body1" .
+
+yawl:viewProfile_form1 a yawl:Field ;
+    rdfs:label "form1" .
+
+yawl:viewProfile_pnlProfile a yawl:Field ;
+    rdfs:label "pnlProfile" .
+
+yawl:viewProfile_pnlPiled a yawl:Field ;
+    rdfs:label "pnlPiled" .
+
+yawl:viewProfile_pnlChained a yawl:Field ;
+    rdfs:label "pnlChained" .
+
+yawl:viewProfile_sttPassword a yawl:Field ;
+    rdfs:label "sttPassword" .
+
+yawl:viewProfile_sttPiled a yawl:Field ;
+    rdfs:label "sttPiled" .
+
+yawl:viewProfile_sttChained a yawl:Field ;
+    rdfs:label "sttChained" .
+
+yawl:viewProfile_lbxPiled a yawl:Field ;
+    rdfs:label "lbxPiled" .
+
+yawl:viewProfile_lbxChained a yawl:Field ;
+    rdfs:label "lbxChained" .
+
+yawl:viewProfile_txtNewPassword a yawl:Field ;
+    rdfs:label "txtNewPassword" .
+
+yawl:viewProfile_txtConfirmPassword a yawl:Field ;
+    rdfs:label "txtConfirmPassword" .
+
+yawl:viewProfile_txtName a yawl:Field ;
+    rdfs:label "txtName" .
+
+yawl:viewProfile_txtUserID a yawl:Field ;
+    rdfs:label "txtUserID" .
+
+yawl:viewProfile_cbxAdmin a yawl:Field ;
+    rdfs:label "cbxAdmin" .
+
+yawl:viewProfile_pnlNewPassword a yawl:Field ;
+    rdfs:label "pnlNewPassword" .
+
+yawl:viewProfile_cbbRoles a yawl:Field ;
+    rdfs:label "cbbRoles" .
+
+yawl:viewProfile_cbbPositions a yawl:Field ;
+    rdfs:label "cbbPositions" .
+
+yawl:viewProfile_cbbCapabilities a yawl:Field ;
+    rdfs:label "cbbCapabilities" .
+
+yawl:viewProfile_lblName a yawl:Field ;
+    rdfs:label "lblName" .
+
+yawl:viewProfile_lblUserID a yawl:Field ;
+    rdfs:label "lblUserID" .
+
+yawl:viewProfile_lblRoles a yawl:Field ;
+    rdfs:label "lblRoles" .
+
+yawl:viewProfile_lblPositions a yawl:Field ;
+    rdfs:label "lblPositions" .
+
+yawl:viewProfile_lblCapabilities a yawl:Field ;
+    rdfs:label "lblCapabilities" .
+
+yawl:viewProfile_lblNewPassword a yawl:Field ;
+    rdfs:label "lblNewPassword" .
+
+yawl:viewProfile_lblConfirmPassword a yawl:Field ;
+    rdfs:label "lblConfirmPassword" .
+
+yawl:viewProfile_btnSave a yawl:Field ;
+    rdfs:label "btnSave" .
+
+yawl:viewProfile_btnSavePassword a yawl:Field ;
+    rdfs:label "btnSavePassword" .
+
+yawl:viewProfile_btnUnpile a yawl:Field ;
+    rdfs:label "btnUnpile" .
+
+yawl:viewProfile_btnUnchain a yawl:Field ;
+    rdfs:label "btnUnchain" .
+
+yawl:viewProfile_btnRemove a yawl:Field ;
+    rdfs:label "btnRemove" .
+
+yawl:viewProfile_btnAdd a yawl:Field ;
+    rdfs:label "btnAdd" .
+
+yawl:viewProfile_msgGroup a yawl:Field ;
+    rdfs:label "msgGroup" .
+
+yawl:viewProfile_pnlContainer a yawl:Field ;
+    rdfs:label "pnlContainer" .
+
+yawl:viewProfile__sb a yawl:Field ;
+    rdfs:label "_sb" .
+
+yawl:viewProfile_msgPanel a yawl:Field ;
+    rdfs:label "msgPanel" .
+
+yawl:viewProfile_participant a yawl:Field ;
+    rdfs:label "participant" .
+
+yawl:viewProfile_rm a yawl:Field ;
+    rdfs:label "rm" .
+
+
+

@@ -1,0 +1,58 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.procletService.util
+yawl:org_yawlfoundation_yawl_procletService_util a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.procletService.util" .
+# Class: org.yawlfoundation.yawl.procletService.util.EntityID
+yawl:EntityID a yawl:Class ;
+    rdfs:label "EntityID" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/util/EntityID.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:EntityID_getEmid_1 ;
+    yawl:hasMethod yawl:EntityID_getEsid_2 ;
+    yawl:hasMethod yawl:EntityID_toString_3 ;
+    yawl:hasField yawl:EntityID_emid ;
+    yawl:hasField yawl:EntityID_esid ;
+    .
+
+
+# Method: EntityID.getEmid
+yawl:EntityID_getEmid_1 a yawl:Method ;
+    rdfs:label "getEmid" ;
+    yawl:returnType "EntityMID" ;
+    yawl:signature "EntityMID getEmid()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EntityID.getEsid
+yawl:EntityID_getEsid_2 a yawl:Method ;
+    rdfs:label "getEsid" ;
+    yawl:returnType "EntitySID" ;
+    yawl:signature "EntitySID getEsid()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EntityID.toString
+yawl:EntityID_toString_3 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:EntityID_emid a yawl:Field ;
+    rdfs:label "emid" .
+
+yawl:EntityID_esid a yawl:Field ;
+    rdfs:label "esid" .
+
+
+

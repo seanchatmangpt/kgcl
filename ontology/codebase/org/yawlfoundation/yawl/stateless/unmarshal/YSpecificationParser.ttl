@@ -1,0 +1,138 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.stateless.unmarshal
+yawl:org_yawlfoundation_yawl_stateless_unmarshal a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.stateless.unmarshal" .
+# Class: org.yawlfoundation.yawl.stateless.unmarshal.YSpecificationParser
+yawl:YSpecificationParser a yawl:Class ;
+    rdfs:label "YSpecificationParser" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_unmarshal ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/unmarshal/YSpecificationParser.java"^^xsd:string ;
+    rdfs:comment """Parses, or builds, specification objects from XML doclets. @author Lachlan Aldred""" ;
+    yawl:hasMethod yawl:YSpecificationParser_parseSpecification_1 ;
+    yawl:hasMethod yawl:YSpecificationParser_parseMetaData_2 ;
+    yawl:hasMethod yawl:YSpecificationParser_isBeta2Version_3 ;
+    yawl:hasMethod yawl:YSpecificationParser_addSchema_4 ;
+    yawl:hasMethod yawl:YSpecificationParser_extractEmptyComplexTypeFlagTypeNames_5 ;
+    yawl:hasMethod yawl:YSpecificationParser_getEmptyComplexTypeFlagTypeNames_6 ;
+    yawl:hasMethod yawl:YSpecificationParser_linkDecompositions_7 ;
+    yawl:hasMethod yawl:YSpecificationParser_getSpecification_8 ;
+    yawl:hasMethod yawl:YSpecificationParser_getDecompositionType_9 ;
+    yawl:hasField yawl:YSpecificationParser__specification ;
+    yawl:hasField yawl:YSpecificationParser__decompositionParser ;
+    yawl:hasField yawl:YSpecificationParser__decompAndTypeMap ;
+    yawl:hasField yawl:YSpecificationParser__yawlNS ;
+    yawl:hasField yawl:YSpecificationParser__emptyComplexTypeFlagTypes ;
+    yawl:hasField yawl:YSpecificationParser__schema4SchemaURI ;
+    yawl:hasField yawl:YSpecificationParser__defaultSchema ;
+    yawl:hasField yawl:YSpecificationParser_INITIAL_VERSION ;
+    .
+
+
+# Method: YSpecificationParser.parseSpecification
+yawl:YSpecificationParser_parseSpecification_1 a yawl:Method ;
+    rdfs:label "parseSpecification" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseSpecification(Element specificationElem, YSchemaVersion version)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSpecificationParser.parseMetaData
+yawl:YSpecificationParser_parseMetaData_2 a yawl:Method ;
+    rdfs:label "parseMetaData" ;
+    yawl:returnType "YMetaData" ;
+    yawl:signature "YMetaData parseMetaData(Element specificationElem)" ;
+    .
+
+# Method: YSpecificationParser.isBeta2Version
+yawl:YSpecificationParser_isBeta2Version_3 a yawl:Method ;
+    rdfs:label "isBeta2Version" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isBeta2Version()" ;
+    rdfs:comment """@return whether this is a a beta 2 specification version or not.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSpecificationParser.addSchema
+yawl:YSpecificationParser_addSchema_4 a yawl:Method ;
+    rdfs:label "addSchema" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addSchema(Element specificationElem)" ;
+    rdfs:comment """adds the XML schema library to the specification. @param specificationElem""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSpecificationParser.extractEmptyComplexTypeFlagTypeNames
+yawl:YSpecificationParser_extractEmptyComplexTypeFlagTypeNames_5 a yawl:Method ;
+    rdfs:label "extractEmptyComplexTypeFlagTypeNames" ;
+    yawl:returnType "void" ;
+    yawl:signature "void extractEmptyComplexTypeFlagTypeNames(Element schemaElem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSpecificationParser.getEmptyComplexTypeFlagTypeNames
+yawl:YSpecificationParser_getEmptyComplexTypeFlagTypeNames_6 a yawl:Method ;
+    rdfs:label "getEmptyComplexTypeFlagTypeNames" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getEmptyComplexTypeFlagTypeNames()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YSpecificationParser.linkDecompositions
+yawl:YSpecificationParser_linkDecompositions_7 a yawl:Method ;
+    rdfs:label "linkDecompositions" ;
+    yawl:returnType "void" ;
+    yawl:signature "void linkDecompositions()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSpecificationParser.getSpecification
+yawl:YSpecificationParser_getSpecification_8 a yawl:Method ;
+    rdfs:label "getSpecification" ;
+    yawl:returnType "YSpecification" ;
+    yawl:signature "YSpecification getSpecification()" ;
+    rdfs:comment """Method getSpecification. @return YSpecification""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationParser.getDecompositionType
+yawl:YSpecificationParser_getDecompositionType_9 a yawl:Method ;
+    rdfs:label "getDecompositionType" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDecompositionType(String decomposesToID)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YSpecificationParser__specification a yawl:Field ;
+    rdfs:label "_specification" .
+
+yawl:YSpecificationParser__decompositionParser a yawl:Field ;
+    rdfs:label "_decompositionParser" .
+
+yawl:YSpecificationParser__decompAndTypeMap a yawl:Field ;
+    rdfs:label "_decompAndTypeMap" .
+
+yawl:YSpecificationParser__yawlNS a yawl:Field ;
+    rdfs:label "_yawlNS" .
+
+yawl:YSpecificationParser__emptyComplexTypeFlagTypes a yawl:Field ;
+    rdfs:label "_emptyComplexTypeFlagTypes" .
+
+yawl:YSpecificationParser__schema4SchemaURI a yawl:Field ;
+    rdfs:label "_schema4SchemaURI" .
+
+yawl:YSpecificationParser__defaultSchema a yawl:Field ;
+    rdfs:label "_defaultSchema" .
+
+yawl:YSpecificationParser_INITIAL_VERSION a yawl:Field ;
+    rdfs:label "INITIAL_VERSION" .
+
+
+

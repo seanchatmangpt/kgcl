@@ -1,0 +1,294 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.CaseImporter
+yawl:CaseImporter a yawl:Class ;
+    rdfs:label "CaseImporter" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/CaseImporter.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 2/10/18""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CaseImporter_add_1 ;
+    yawl:hasMethod yawl:CaseImporter_parse_2 ;
+    yawl:hasMethod yawl:CaseImporter_importAndStart_3 ;
+    yawl:hasMethod yawl:CaseImporter_makeRunnerList_4 ;
+    yawl:hasMethod yawl:CaseImporter_makeRunner_5 ;
+    yawl:hasMethod yawl:CaseImporter_makeWorkItemList_6 ;
+    yawl:hasMethod yawl:CaseImporter_makeWorkItem_7 ;
+    yawl:hasMethod yawl:CaseImporter_addChild_8 ;
+    yawl:hasMethod yawl:CaseImporter_reuniteItems_9 ;
+    yawl:hasMethod yawl:CaseImporter_reuniteIdentifiers_10 ;
+    yawl:hasMethod yawl:CaseImporter_makeSpecID_11 ;
+    yawl:hasMethod yawl:CaseImporter_makeNetData_12 ;
+    yawl:hasMethod yawl:CaseImporter_makeTimerStates_13 ;
+    yawl:hasMethod yawl:CaseImporter_makeIdentifier_14 ;
+    yawl:hasMethod yawl:CaseImporter_setSpecID_15 ;
+    yawl:hasMethod yawl:CaseImporter_setTimestamps_16 ;
+    yawl:hasMethod yawl:CaseImporter_setData_17 ;
+    yawl:hasMethod yawl:CaseImporter_makeDate_18 ;
+    yawl:hasMethod yawl:CaseImporter_getBoolean_19 ;
+    yawl:hasMethod yawl:CaseImporter_getLong_20 ;
+    yawl:hasMethod yawl:CaseImporter_toSet_21 ;
+    yawl:hasMethod yawl:CaseImporter_getBusyTaskNames_22 ;
+    yawl:hasMethod yawl:CaseImporter_persistRunners_23 ;
+    yawl:hasMethod yawl:CaseImporter_persistRunner_24 ;
+    yawl:hasMethod yawl:CaseImporter_persistWorkitems_25 ;
+    yawl:hasMethod yawl:CaseImporter_unpersistCompletedItems_26 ;
+    yawl:hasMethod yawl:CaseImporter_persistIdentifiers_27 ;
+    yawl:hasMethod yawl:CaseImporter_persistAll_28 ;
+    yawl:hasMethod yawl:CaseImporter_persist_29 ;
+    yawl:hasField yawl:CaseImporter__engine ;
+    yawl:hasField yawl:CaseImporter__log ;
+    yawl:hasField yawl:CaseImporter__miOutputDataSet ;
+    .
+
+
+# Method: CaseImporter.add
+yawl:CaseImporter_add_1 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "int" ;
+    yawl:signature "int add(String caseListXML)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseImporter.parse
+yawl:CaseImporter_parse_2 a yawl:Method ;
+    rdfs:label "parse" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode parse(String xml)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseImporter.importAndStart
+yawl:CaseImporter_importAndStart_3 a yawl:Method ;
+    rdfs:label "importAndStart" ;
+    yawl:returnType "void" ;
+    yawl:signature "void importAndStart(List runners, List workitems)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseImporter.makeRunnerList
+yawl:CaseImporter_makeRunnerList_4 a yawl:Method ;
+    rdfs:label "makeRunnerList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List makeRunnerList(XNode caseNode)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseImporter.makeRunner
+yawl:CaseImporter_makeRunner_5 a yawl:Method ;
+    rdfs:label "makeRunner" ;
+    yawl:returnType "YNetRunner" ;
+    yawl:signature "YNetRunner makeRunner(XNode nRunner)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseImporter.makeWorkItemList
+yawl:CaseImporter_makeWorkItemList_6 a yawl:Method ;
+    rdfs:label "makeWorkItemList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List makeWorkItemList(XNode caseNode)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseImporter.makeWorkItem
+yawl:CaseImporter_makeWorkItem_7 a yawl:Method ;
+    rdfs:label "makeWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem makeWorkItem(XNode nItem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseImporter.addChild
+yawl:CaseImporter_addChild_8 a yawl:Method ;
+    rdfs:label "addChild" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addChild(Map parentChildMap, String parentID, T child)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseImporter.reuniteItems
+yawl:CaseImporter_reuniteItems_9 a yawl:Method ;
+    rdfs:label "reuniteItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reuniteItems(Set parents, Map parentChildMap)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseImporter.reuniteIdentifiers
+yawl:CaseImporter_reuniteIdentifiers_10 a yawl:Method ;
+    rdfs:label "reuniteIdentifiers" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reuniteIdentifiers(List parents, Map parentChildMap)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseImporter.makeSpecID
+yawl:CaseImporter_makeSpecID_11 a yawl:Method ;
+    rdfs:label "makeSpecID" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID makeSpecID(XNode specNode)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseImporter.makeNetData
+yawl:CaseImporter_makeNetData_12 a yawl:Method ;
+    rdfs:label "makeNetData" ;
+    yawl:returnType "YNetData" ;
+    yawl:signature "YNetData makeNetData(String caseID, XNode dataNode)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseImporter.makeTimerStates
+yawl:CaseImporter_makeTimerStates_13 a yawl:Method ;
+    rdfs:label "makeTimerStates" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map makeTimerStates(XNode nStates)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseImporter.makeIdentifier
+yawl:CaseImporter_makeIdentifier_14 a yawl:Method ;
+    rdfs:label "makeIdentifier" ;
+    yawl:returnType "YIdentifier" ;
+    yawl:signature "YIdentifier makeIdentifier(XNode nIdentifier)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseImporter.setSpecID
+yawl:CaseImporter_setSpecID_15 a yawl:Method ;
+    rdfs:label "setSpecID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSpecID(YWorkItem item, XNode nItem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseImporter.setTimestamps
+yawl:CaseImporter_setTimestamps_16 a yawl:Method ;
+    rdfs:label "setTimestamps" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTimestamps(YWorkItem item, XNode nItem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseImporter.setData
+yawl:CaseImporter_setData_17 a yawl:Method ;
+    rdfs:label "setData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setData(YWorkItem item, XNode nItem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseImporter.makeDate
+yawl:CaseImporter_makeDate_18 a yawl:Method ;
+    rdfs:label "makeDate" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date makeDate(String timeStr)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseImporter.getBoolean
+yawl:CaseImporter_getBoolean_19 a yawl:Method ;
+    rdfs:label "getBoolean" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean getBoolean(String bValue)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseImporter.getLong
+yawl:CaseImporter_getLong_20 a yawl:Method ;
+    rdfs:label "getLong" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getLong(String lvalue)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseImporter.toSet
+yawl:CaseImporter_toSet_21 a yawl:Method ;
+    rdfs:label "toSet" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set toSet(XNode node)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseImporter.getBusyTaskNames
+yawl:CaseImporter_getBusyTaskNames_22 a yawl:Method ;
+    rdfs:label "getBusyTaskNames" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getBusyTaskNames(XNode node)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseImporter.persistRunners
+yawl:CaseImporter_persistRunners_23 a yawl:Method ;
+    rdfs:label "persistRunners" ;
+    yawl:returnType "void" ;
+    yawl:signature "void persistRunners(List runners)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseImporter.persistRunner
+yawl:CaseImporter_persistRunner_24 a yawl:Method ;
+    rdfs:label "persistRunner" ;
+    yawl:returnType "void" ;
+    yawl:signature "void persistRunner(YNetRunner runner)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseImporter.persistWorkitems
+yawl:CaseImporter_persistWorkitems_25 a yawl:Method ;
+    rdfs:label "persistWorkitems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void persistWorkitems(List workitems)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseImporter.unpersistCompletedItems
+yawl:CaseImporter_unpersistCompletedItems_26 a yawl:Method ;
+    rdfs:label "unpersistCompletedItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void unpersistCompletedItems(List workitems)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseImporter.persistIdentifiers
+yawl:CaseImporter_persistIdentifiers_27 a yawl:Method ;
+    rdfs:label "persistIdentifiers" ;
+    yawl:returnType "void" ;
+    yawl:signature "void persistIdentifiers(YNetRunner runner)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseImporter.persistAll
+yawl:CaseImporter_persistAll_28 a yawl:Method ;
+    rdfs:label "persistAll" ;
+    yawl:returnType "void" ;
+    yawl:signature "void persistAll(List runners, List workitems)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseImporter.persist
+yawl:CaseImporter_persist_29 a yawl:Method ;
+    rdfs:label "persist" ;
+    yawl:returnType "void" ;
+    yawl:signature "void persist(Object o)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:CaseImporter__engine a yawl:Field ;
+    rdfs:label "_engine" .
+
+yawl:CaseImporter__log a yawl:Field ;
+    rdfs:label "_log" .
+
+yawl:CaseImporter__miOutputDataSet a yawl:Field ;
+    rdfs:label "_miOutputDataSet" .
+
+
+

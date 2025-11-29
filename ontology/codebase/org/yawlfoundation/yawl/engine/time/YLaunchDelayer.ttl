@@ -1,0 +1,193 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.time.YLaunchDelayer
+yawl:YLaunchDelayer a yawl:Class ;
+    rdfs:label "YLaunchDelayer" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_time ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/time/YLaunchDelayer.java"^^xsd:string ;
+    rdfs:comment """A timer to delay the launching of a process instance. Author: Michael Adams Creation Date: 09/02/2012""" ;
+    yawl:implements yawl:YTimedObject ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YLaunchDelayer_getOwnerID_1 ;
+    yawl:hasMethod yawl:YLaunchDelayer_setOwnerID_2 ;
+    yawl:hasMethod yawl:YLaunchDelayer_getEndTime_3 ;
+    yawl:hasMethod yawl:YLaunchDelayer_setEndTime_4 ;
+    yawl:hasMethod yawl:YLaunchDelayer_setPersisting_5 ;
+    yawl:hasMethod yawl:YLaunchDelayer_persistThis_6 ;
+    yawl:hasMethod yawl:YLaunchDelayer_equals_7 ;
+    yawl:hasMethod yawl:YLaunchDelayer_hashCode_8 ;
+    yawl:hasMethod yawl:YLaunchDelayer_handleTimerExpiry_9 ;
+    yawl:hasMethod yawl:YLaunchDelayer_cancel_10 ;
+    yawl:hasMethod yawl:YLaunchDelayer_handleToURI_11 ;
+    yawl:hasMethod yawl:YLaunchDelayer_get_completionObserver_12 ;
+    yawl:hasMethod yawl:YLaunchDelayer_set_completionObserver_13 ;
+    yawl:hasMethod yawl:YLaunchDelayer_get_logData_14 ;
+    yawl:hasMethod yawl:YLaunchDelayer_set_logData_15 ;
+    yawl:hasField yawl:YLaunchDelayer__ownerID ;
+    yawl:hasField yawl:YLaunchDelayer__endTime ;
+    yawl:hasField yawl:YLaunchDelayer__specID ;
+    yawl:hasField yawl:YLaunchDelayer__caseParams ;
+    yawl:hasField yawl:YLaunchDelayer__completionObserver ;
+    yawl:hasField yawl:YLaunchDelayer__caseID ;
+    yawl:hasField yawl:YLaunchDelayer__logData ;
+    yawl:hasField yawl:YLaunchDelayer__serviceURI ;
+    yawl:hasField yawl:YLaunchDelayer__persisting ;
+    .
+
+
+# Method: YLaunchDelayer.getOwnerID
+yawl:YLaunchDelayer_getOwnerID_1 a yawl:Method ;
+    rdfs:label "getOwnerID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOwnerID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLaunchDelayer.setOwnerID
+yawl:YLaunchDelayer_setOwnerID_2 a yawl:Method ;
+    rdfs:label "setOwnerID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOwnerID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLaunchDelayer.getEndTime
+yawl:YLaunchDelayer_getEndTime_3 a yawl:Method ;
+    rdfs:label "getEndTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getEndTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLaunchDelayer.setEndTime
+yawl:YLaunchDelayer_setEndTime_4 a yawl:Method ;
+    rdfs:label "setEndTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEndTime(long time)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLaunchDelayer.setPersisting
+yawl:YLaunchDelayer_setPersisting_5 a yawl:Method ;
+    rdfs:label "setPersisting" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPersisting(boolean persist)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLaunchDelayer.persistThis
+yawl:YLaunchDelayer_persistThis_6 a yawl:Method ;
+    rdfs:label "persistThis" ;
+    yawl:returnType "void" ;
+    yawl:signature "void persistThis(boolean insert)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLaunchDelayer.equals
+yawl:YLaunchDelayer_equals_7 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLaunchDelayer.hashCode
+yawl:YLaunchDelayer_hashCode_8 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLaunchDelayer.handleTimerExpiry
+yawl:YLaunchDelayer_handleTimerExpiry_9 a yawl:Method ;
+    rdfs:label "handleTimerExpiry" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleTimerExpiry()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLaunchDelayer.cancel
+yawl:YLaunchDelayer_cancel_10 a yawl:Method ;
+    rdfs:label "cancel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLaunchDelayer.handleToURI
+yawl:YLaunchDelayer_handleToURI_11 a yawl:Method ;
+    rdfs:label "handleToURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String handleToURI(String handle)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLaunchDelayer.get_completionObserver
+yawl:YLaunchDelayer_get_completionObserver_12 a yawl:Method ;
+    rdfs:label "get_completionObserver" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_completionObserver()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLaunchDelayer.set_completionObserver
+yawl:YLaunchDelayer_set_completionObserver_13 a yawl:Method ;
+    rdfs:label "set_completionObserver" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_completionObserver(String uriStr)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLaunchDelayer.get_logData
+yawl:YLaunchDelayer_get_logData_14 a yawl:Method ;
+    rdfs:label "get_logData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_logData()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLaunchDelayer.set_logData
+yawl:YLaunchDelayer_set_logData_15 a yawl:Method ;
+    rdfs:label "set_logData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_logData(String data)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YLaunchDelayer__ownerID a yawl:Field ;
+    rdfs:label "_ownerID" .
+
+yawl:YLaunchDelayer__endTime a yawl:Field ;
+    rdfs:label "_endTime" .
+
+yawl:YLaunchDelayer__specID a yawl:Field ;
+    rdfs:label "_specID" .
+
+yawl:YLaunchDelayer__caseParams a yawl:Field ;
+    rdfs:label "_caseParams" .
+
+yawl:YLaunchDelayer__completionObserver a yawl:Field ;
+    rdfs:label "_completionObserver" .
+
+yawl:YLaunchDelayer__caseID a yawl:Field ;
+    rdfs:label "_caseID" .
+
+yawl:YLaunchDelayer__logData a yawl:Field ;
+    rdfs:label "_logData" .
+
+yawl:YLaunchDelayer__serviceURI a yawl:Field ;
+    rdfs:label "_serviceURI" .
+
+yawl:YLaunchDelayer__persisting a yawl:Field ;
+    rdfs:label "_persisting" .
+
+
+

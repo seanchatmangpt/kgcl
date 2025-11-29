@@ -1,0 +1,218 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.datastore.eventlog.TaskStatistics
+yawl:TaskStatistics a yawl:Class ;
+    rdfs:label "TaskStatistics" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_datastore_eventlog ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/datastore/eventlog/TaskStatistics.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 29/09/2010""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:TaskStatistics_generate_1 ;
+    yawl:hasMethod yawl:TaskStatistics_generateXNode_2 ;
+    yawl:hasMethod yawl:TaskStatistics_generateSummaries_3 ;
+    yawl:hasMethod yawl:TaskStatistics_outputXML_4 ;
+    yawl:hasMethod yawl:TaskStatistics_getParticipantName_5 ;
+    yawl:hasMethod yawl:TaskStatistics_accumulateAll_6 ;
+    yawl:hasMethod yawl:TaskStatistics_accumulate_7 ;
+    yawl:hasMethod yawl:TaskStatistics_accumulate_8 ;
+    yawl:hasMethod yawl:TaskStatistics_accumulate_9 ;
+    yawl:hasMethod yawl:TaskStatistics_getStateNode_10 ;
+    yawl:hasMethod yawl:TaskStatistics_getStateNode_11 ;
+    yawl:hasMethod yawl:TaskStatistics_getOfferCounters_12 ;
+    yawl:hasMethod yawl:TaskStatistics_getAllocCounters_13 ;
+    yawl:hasMethod yawl:TaskStatistics_getStartCounters_14 ;
+    yawl:hasMethod yawl:TaskStatistics_getCompleteCounters_15 ;
+    yawl:hasMethod yawl:TaskStatistics_getCancelCounters_16 ;
+    yawl:hasMethod yawl:TaskStatistics_getTimeoutCounters_17 ;
+    yawl:hasMethod yawl:TaskStatistics_getTotalCounter_18 ;
+    yawl:hasMethod yawl:TaskStatistics_getTaskSummary_19 ;
+    yawl:hasMethod yawl:TaskStatistics_getReferenceItemID_20 ;
+    yawl:hasMethod yawl:TaskStatistics_getRootItemID_21 ;
+    yawl:hasField yawl:TaskStatistics__taskEvents ;
+    yawl:hasField yawl:TaskStatistics__taskName ;
+    .
+
+
+# Method: TaskStatistics.generate
+yawl:TaskStatistics_generate_1 a yawl:Method ;
+    rdfs:label "generate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String generate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskStatistics.generateXNode
+yawl:TaskStatistics_generateXNode_2 a yawl:Method ;
+    rdfs:label "generateXNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode generateXNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskStatistics.generateSummaries
+yawl:TaskStatistics_generateSummaries_3 a yawl:Method ;
+    rdfs:label "generateSummaries" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map generateSummaries()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskStatistics.outputXML
+yawl:TaskStatistics_outputXML_4 a yawl:Method ;
+    rdfs:label "outputXML" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode outputXML(Map table)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskStatistics.getParticipantName
+yawl:TaskStatistics_getParticipantName_5 a yawl:Method ;
+    rdfs:label "getParticipantName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParticipantName(String pid)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskStatistics.accumulateAll
+yawl:TaskStatistics_accumulateAll_6 a yawl:Method ;
+    rdfs:label "accumulateAll" ;
+    yawl:returnType "void" ;
+    yawl:signature "void accumulateAll(TaskSummary ts, TaskSubTallyList list)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskStatistics.accumulate
+yawl:TaskStatistics_accumulate_7 a yawl:Method ;
+    rdfs:label "accumulate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void accumulate(TaskSummary ts, TaskSubTally tally, Counter counter)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskStatistics.accumulate
+yawl:TaskStatistics_accumulate_8 a yawl:Method ;
+    rdfs:label "accumulate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void accumulate(TaskSummary ts, TaskSubTallyList list, List counters)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskStatistics.accumulate
+yawl:TaskStatistics_accumulate_9 a yawl:Method ;
+    rdfs:label "accumulate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void accumulate(Map map, TaskSummary ts, String pid, List counters)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskStatistics.getStateNode
+yawl:TaskStatistics_getStateNode_10 a yawl:Method ;
+    rdfs:label "getStateNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getStateNode(Map tallyMap, String name)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskStatistics.getStateNode
+yawl:TaskStatistics_getStateNode_11 a yawl:Method ;
+    rdfs:label "getStateNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getStateNode(TaskSubTallyList list, String tag, String name, int instances)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskStatistics.getOfferCounters
+yawl:TaskStatistics_getOfferCounters_12 a yawl:Method ;
+    rdfs:label "getOfferCounters" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getOfferCounters()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskStatistics.getAllocCounters
+yawl:TaskStatistics_getAllocCounters_13 a yawl:Method ;
+    rdfs:label "getAllocCounters" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAllocCounters()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskStatistics.getStartCounters
+yawl:TaskStatistics_getStartCounters_14 a yawl:Method ;
+    rdfs:label "getStartCounters" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getStartCounters()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskStatistics.getCompleteCounters
+yawl:TaskStatistics_getCompleteCounters_15 a yawl:Method ;
+    rdfs:label "getCompleteCounters" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getCompleteCounters()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskStatistics.getCancelCounters
+yawl:TaskStatistics_getCancelCounters_16 a yawl:Method ;
+    rdfs:label "getCancelCounters" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getCancelCounters()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskStatistics.getTimeoutCounters
+yawl:TaskStatistics_getTimeoutCounters_17 a yawl:Method ;
+    rdfs:label "getTimeoutCounters" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getTimeoutCounters()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskStatistics.getTotalCounter
+yawl:TaskStatistics_getTotalCounter_18 a yawl:Method ;
+    rdfs:label "getTotalCounter" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getTotalCounter()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskStatistics.getTaskSummary
+yawl:TaskStatistics_getTaskSummary_19 a yawl:Method ;
+    rdfs:label "getTaskSummary" ;
+    yawl:returnType "TaskSummary" ;
+    yawl:signature "TaskSummary getTaskSummary(Map table, String key)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskStatistics.getReferenceItemID
+yawl:TaskStatistics_getReferenceItemID_20 a yawl:Method ;
+    rdfs:label "getReferenceItemID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getReferenceItemID(Map table, String id)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskStatistics.getRootItemID
+yawl:TaskStatistics_getRootItemID_21 a yawl:Method ;
+    rdfs:label "getRootItemID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRootItemID(String id)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:TaskStatistics__taskEvents a yawl:Field ;
+    rdfs:label "_taskEvents" .
+
+yawl:TaskStatistics__taskName a yawl:Field ;
+    rdfs:label "_taskName" .
+
+
+

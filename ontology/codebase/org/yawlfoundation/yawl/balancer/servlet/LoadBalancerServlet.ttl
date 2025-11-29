@@ -1,0 +1,339 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.balancer.servlet.LoadBalancerServlet
+yawl:LoadBalancerServlet a yawl:Class ;
+    rdfs:label "LoadBalancerServlet" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer_servlet ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/servlet/LoadBalancerServlet.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 22/6/17""" ;
+    yawl:extends yawl:YHttpServlet ;
+    yawl:implements yawl:ConfigChangeListener ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:LoadBalancerServlet_init_1 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_doGet_2 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_doPost_3 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_destroy_4 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_configChanged_5 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_checkEnginesActive_6 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_processResponse_7 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_handleAction_8 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_handleSessionAction_9 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_handleLaunchAction_10 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_handleItemAction_11 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_handleCaseAction_12 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_handleCaseSpecificAction_13 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_handleSpecAction_14 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_forward_15 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_forward_16 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_getForwardClient_17 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_getEngineSet_18 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_getRootCaseID_19 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_buildParamMap_20 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_restoreCases_21 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_restoreSpecifications_22 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_removeCase_23 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_getSpecIDFromXML_24 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_getSpecIDFromXNode_25 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_getSpecList_26 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_getSpecification_27 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_checkOrAddSpec_28 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_getSpecID_29 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_uploadSpec_30 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_isLoaded_31 ;
+    yawl:hasMethod yawl:LoadBalancerServlet_successful_32 ;
+    yawl:hasField yawl:LoadBalancerServlet__forwardClient ;
+    yawl:hasField yawl:LoadBalancerServlet__resultProcessor ;
+    yawl:hasField yawl:LoadBalancerServlet__engineSet ;
+    yawl:hasField yawl:LoadBalancerServlet__actions ;
+    yawl:hasField yawl:LoadBalancerServlet__specMap ;
+    yawl:hasField yawl:LoadBalancerServlet__specComplexityMap ;
+    yawl:hasField yawl:LoadBalancerServlet__allInitialized ;
+    .
+
+
+# Method: LoadBalancerServlet.init
+yawl:LoadBalancerServlet_init_1 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LoadBalancerServlet.doGet
+yawl:LoadBalancerServlet_doGet_2 a yawl:Method ;
+    rdfs:label "doGet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doGet(HttpServletRequest req, HttpServletResponse resp)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LoadBalancerServlet.doPost
+yawl:LoadBalancerServlet_doPost_3 a yawl:Method ;
+    rdfs:label "doPost" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doPost(HttpServletRequest req, HttpServletResponse resp)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LoadBalancerServlet.destroy
+yawl:LoadBalancerServlet_destroy_4 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LoadBalancerServlet.configChanged
+yawl:LoadBalancerServlet_configChanged_5 a yawl:Method ;
+    rdfs:label "configChanged" ;
+    yawl:returnType "void" ;
+    yawl:signature "void configChanged(Map changedValues)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LoadBalancerServlet.checkEnginesActive
+yawl:LoadBalancerServlet_checkEnginesActive_6 a yawl:Method ;
+    rdfs:label "checkEnginesActive" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkEnginesActive()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LoadBalancerServlet.processResponse
+yawl:LoadBalancerServlet_processResponse_7 a yawl:Method ;
+    rdfs:label "processResponse" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processResponse(HttpServletResponse resp, String result)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LoadBalancerServlet.handleAction
+yawl:LoadBalancerServlet_handleAction_8 a yawl:Method ;
+    rdfs:label "handleAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String handleAction(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LoadBalancerServlet.handleSessionAction
+yawl:LoadBalancerServlet_handleSessionAction_9 a yawl:Method ;
+    rdfs:label "handleSessionAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String handleSessionAction(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LoadBalancerServlet.handleLaunchAction
+yawl:LoadBalancerServlet_handleLaunchAction_10 a yawl:Method ;
+    rdfs:label "handleLaunchAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String handleLaunchAction(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LoadBalancerServlet.handleItemAction
+yawl:LoadBalancerServlet_handleItemAction_11 a yawl:Method ;
+    rdfs:label "handleItemAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String handleItemAction(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LoadBalancerServlet.handleCaseAction
+yawl:LoadBalancerServlet_handleCaseAction_12 a yawl:Method ;
+    rdfs:label "handleCaseAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String handleCaseAction(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LoadBalancerServlet.handleCaseSpecificAction
+yawl:LoadBalancerServlet_handleCaseSpecificAction_13 a yawl:Method ;
+    rdfs:label "handleCaseSpecificAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String handleCaseSpecificAction(HttpServletRequest req, String caseID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LoadBalancerServlet.handleSpecAction
+yawl:LoadBalancerServlet_handleSpecAction_14 a yawl:Method ;
+    rdfs:label "handleSpecAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String handleSpecAction(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LoadBalancerServlet.forward
+yawl:LoadBalancerServlet_forward_15 a yawl:Method ;
+    rdfs:label "forward" ;
+    yawl:returnType "void" ;
+    yawl:signature "void forward(HttpServletRequest req, HttpServletResponse resp)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LoadBalancerServlet.forward
+yawl:LoadBalancerServlet_forward_16 a yawl:Method ;
+    rdfs:label "forward" ;
+    yawl:returnType "String" ;
+    yawl:signature "String forward(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LoadBalancerServlet.getForwardClient
+yawl:LoadBalancerServlet_getForwardClient_17 a yawl:Method ;
+    rdfs:label "getForwardClient" ;
+    yawl:returnType "ForwardClient" ;
+    yawl:signature "ForwardClient getForwardClient()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LoadBalancerServlet.getEngineSet
+yawl:LoadBalancerServlet_getEngineSet_18 a yawl:Method ;
+    rdfs:label "getEngineSet" ;
+    yawl:returnType "EngineSet" ;
+    yawl:signature "EngineSet getEngineSet()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LoadBalancerServlet.getRootCaseID
+yawl:LoadBalancerServlet_getRootCaseID_19 a yawl:Method ;
+    rdfs:label "getRootCaseID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRootCaseID(String itemID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LoadBalancerServlet.buildParamMap
+yawl:LoadBalancerServlet_buildParamMap_20 a yawl:Method ;
+    rdfs:label "buildParamMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map buildParamMap(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LoadBalancerServlet.restoreCases
+yawl:LoadBalancerServlet_restoreCases_21 a yawl:Method ;
+    rdfs:label "restoreCases" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restoreCases()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LoadBalancerServlet.restoreSpecifications
+yawl:LoadBalancerServlet_restoreSpecifications_22 a yawl:Method ;
+    rdfs:label "restoreSpecifications" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restoreSpecifications()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LoadBalancerServlet.removeCase
+yawl:LoadBalancerServlet_removeCase_23 a yawl:Method ;
+    rdfs:label "removeCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeCase(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LoadBalancerServlet.getSpecIDFromXML
+yawl:LoadBalancerServlet_getSpecIDFromXML_24 a yawl:Method ;
+    rdfs:label "getSpecIDFromXML" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getSpecIDFromXML(String specXML)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LoadBalancerServlet.getSpecIDFromXNode
+yawl:LoadBalancerServlet_getSpecIDFromXNode_25 a yawl:Method ;
+    rdfs:label "getSpecIDFromXNode" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getSpecIDFromXNode(XNode node)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LoadBalancerServlet.getSpecList
+yawl:LoadBalancerServlet_getSpecList_26 a yawl:Method ;
+    rdfs:label "getSpecList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getSpecList(EngineInstance instance)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LoadBalancerServlet.getSpecification
+yawl:LoadBalancerServlet_getSpecification_27 a yawl:Method ;
+    rdfs:label "getSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecification(EngineInstance instance, SpecificationData specData)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LoadBalancerServlet.checkOrAddSpec
+yawl:LoadBalancerServlet_checkOrAddSpec_28 a yawl:Method ;
+    rdfs:label "checkOrAddSpec" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean checkOrAddSpec(EngineInstance instance, Map params)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LoadBalancerServlet.getSpecID
+yawl:LoadBalancerServlet_getSpecID_29 a yawl:Method ;
+    rdfs:label "getSpecID" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getSpecID(Map params)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LoadBalancerServlet.uploadSpec
+yawl:LoadBalancerServlet_uploadSpec_30 a yawl:Method ;
+    rdfs:label "uploadSpec" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean uploadSpec(EngineInstance instance, String specXML)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LoadBalancerServlet.isLoaded
+yawl:LoadBalancerServlet_isLoaded_31 a yawl:Method ;
+    rdfs:label "isLoaded" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isLoaded(EngineInstance instance, YSpecificationID specID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LoadBalancerServlet.successful
+yawl:LoadBalancerServlet_successful_32 a yawl:Method ;
+    rdfs:label "successful" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean successful(String xml)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:LoadBalancerServlet__forwardClient a yawl:Field ;
+    rdfs:label "_forwardClient" .
+
+yawl:LoadBalancerServlet__resultProcessor a yawl:Field ;
+    rdfs:label "_resultProcessor" .
+
+yawl:LoadBalancerServlet__engineSet a yawl:Field ;
+    rdfs:label "_engineSet" .
+
+yawl:LoadBalancerServlet__actions a yawl:Field ;
+    rdfs:label "_actions" .
+
+yawl:LoadBalancerServlet__specMap a yawl:Field ;
+    rdfs:label "_specMap" .
+
+yawl:LoadBalancerServlet__specComplexityMap a yawl:Field ;
+    rdfs:label "_specComplexityMap" .
+
+yawl:LoadBalancerServlet__allInitialized a yawl:Field ;
+    rdfs:label "_allInitialized" .
+
+
+

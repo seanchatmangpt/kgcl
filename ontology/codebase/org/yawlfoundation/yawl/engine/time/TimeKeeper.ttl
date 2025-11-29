@@ -1,0 +1,44 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.time.TimeKeeper
+yawl:TimeKeeper a yawl:Class ;
+    rdfs:label "TimeKeeper" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_time ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/time/YTimer.java"^^xsd:string ;
+    yawl:extends yawl:TimerTask ;
+    yawl:modifiers "private" ;
+    yawl:hasMethod yawl:TimeKeeper_getOwner_1 ;
+    yawl:hasMethod yawl:TimeKeeper_run_2 ;
+    yawl:hasField yawl:TimeKeeper__owner ;
+    .
+
+
+# Method: TimeKeeper.getOwner
+yawl:TimeKeeper_getOwner_1 a yawl:Method ;
+    rdfs:label "getOwner" ;
+    yawl:returnType "YTimedObject" ;
+    yawl:signature "YTimedObject getOwner()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TimeKeeper.run
+yawl:TimeKeeper_run_2 a yawl:Method ;
+    rdfs:label "run" ;
+    yawl:returnType "void" ;
+    yawl:signature "void run()" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:TimeKeeper__owner a yawl:Field ;
+    rdfs:label "_owner" .
+
+
+

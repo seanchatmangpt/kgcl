@@ -1,0 +1,134 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.interfce.YHttpServlet
+yawl:YHttpServlet a yawl:Class ;
+    rdfs:label "YHttpServlet" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_interfce ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/interfce/YHttpServlet.java"^^xsd:string ;
+    rdfs:comment """An override of HttpServlet to include a few useful generic methods @author Michael Adams @date 6/10/13""" ;
+    yawl:extends yawl:HttpServlet ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YHttpServlet_destroy_1 ;
+    yawl:hasMethod yawl:YHttpServlet_getBooleanFromContext_2 ;
+    yawl:hasMethod yawl:YHttpServlet_getBooleanFromContext_3 ;
+    yawl:hasMethod yawl:YHttpServlet_getIntFromContext_4 ;
+    yawl:hasMethod yawl:YHttpServlet_getDoubleFromContext_5 ;
+    yawl:hasMethod yawl:YHttpServlet_encryptPassword_6 ;
+    yawl:hasMethod yawl:YHttpServlet_fail_7 ;
+    yawl:hasMethod yawl:YHttpServlet_response_8 ;
+    yawl:hasMethod yawl:YHttpServlet_getManifest_9 ;
+    yawl:hasMethod yawl:YHttpServlet_isAllowedRedundantAction_10 ;
+    yawl:hasMethod yawl:YHttpServlet_deregisterDbDrivers_11 ;
+    yawl:hasMethod yawl:YHttpServlet_interruptTimerThreads_12 ;
+    yawl:hasField yawl:YHttpServlet__log ;
+    .
+
+
+# Method: YHttpServlet.destroy
+yawl:YHttpServlet_destroy_1 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YHttpServlet.getBooleanFromContext
+yawl:YHttpServlet_getBooleanFromContext_2 a yawl:Method ;
+    rdfs:label "getBooleanFromContext" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean getBooleanFromContext(String param)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YHttpServlet.getBooleanFromContext
+yawl:YHttpServlet_getBooleanFromContext_3 a yawl:Method ;
+    rdfs:label "getBooleanFromContext" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean getBooleanFromContext(String param, boolean defValue)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YHttpServlet.getIntFromContext
+yawl:YHttpServlet_getIntFromContext_4 a yawl:Method ;
+    rdfs:label "getIntFromContext" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getIntFromContext(String param)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YHttpServlet.getDoubleFromContext
+yawl:YHttpServlet_getDoubleFromContext_5 a yawl:Method ;
+    rdfs:label "getDoubleFromContext" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getDoubleFromContext(String param)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YHttpServlet.encryptPassword
+yawl:YHttpServlet_encryptPassword_6 a yawl:Method ;
+    rdfs:label "encryptPassword" ;
+    yawl:returnType "String" ;
+    yawl:signature "String encryptPassword(String s)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YHttpServlet.fail
+yawl:YHttpServlet_fail_7 a yawl:Method ;
+    rdfs:label "fail" ;
+    yawl:returnType "String" ;
+    yawl:signature "String fail(String msg)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YHttpServlet.response
+yawl:YHttpServlet_response_8 a yawl:Method ;
+    rdfs:label "response" ;
+    yawl:returnType "String" ;
+    yawl:signature "String response(String result)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YHttpServlet.getManifest
+yawl:YHttpServlet_getManifest_9 a yawl:Method ;
+    rdfs:label "getManifest" ;
+    yawl:returnType "Manifest" ;
+    yawl:signature "Manifest getManifest()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YHttpServlet.isAllowedRedundantAction
+yawl:YHttpServlet_isAllowedRedundantAction_10 a yawl:Method ;
+    rdfs:label "isAllowedRedundantAction" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAllowedRedundantAction(String action)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YHttpServlet.deregisterDbDrivers
+yawl:YHttpServlet_deregisterDbDrivers_11 a yawl:Method ;
+    rdfs:label "deregisterDbDrivers" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deregisterDbDrivers()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YHttpServlet.interruptTimerThreads
+yawl:YHttpServlet_interruptTimerThreads_12 a yawl:Method ;
+    rdfs:label "interruptTimerThreads" ;
+    yawl:returnType "void" ;
+    yawl:signature "void interruptTimerThreads()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YHttpServlet__log a yawl:Field ;
+    rdfs:label "_log" .
+
+
+

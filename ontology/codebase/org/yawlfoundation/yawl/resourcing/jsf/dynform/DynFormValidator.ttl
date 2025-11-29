@@ -1,0 +1,292 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.dynform.DynFormValidator
+yawl:DynFormValidator a yawl:Class ;
+    rdfs:label "DynFormValidator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf_dynform ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/dynform/DynFormValidator.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 7/08/2008""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DynFormValidator_validate_1 ;
+    yawl:hasMethod yawl:DynFormValidator_validateInputs_2 ;
+    yawl:hasMethod yawl:DynFormValidator_validateField_3 ;
+    yawl:hasMethod yawl:DynFormValidator_validateField_4 ;
+    yawl:hasMethod yawl:DynFormValidator_validateCalendarField_5 ;
+    yawl:hasMethod yawl:DynFormValidator_validateExpiry_6 ;
+    yawl:hasMethod yawl:DynFormValidator_validateBase_7 ;
+    yawl:hasMethod yawl:DynFormValidator_validateRequired_8 ;
+    yawl:hasMethod yawl:DynFormValidator_validateLong_9 ;
+    yawl:hasMethod yawl:DynFormValidator_validateInt_10 ;
+    yawl:hasMethod yawl:DynFormValidator_validateDouble_11 ;
+    yawl:hasMethod yawl:DynFormValidator_validateDecimal_12 ;
+    yawl:hasMethod yawl:DynFormValidator_validateTime_13 ;
+    yawl:hasMethod yawl:DynFormValidator_validateDuration_14 ;
+    yawl:hasMethod yawl:DynFormValidator_addRestrictionErrorMessage_15 ;
+    yawl:hasMethod yawl:DynFormValidator_addErrorMessage_16 ;
+    yawl:hasMethod yawl:DynFormValidator_addValidationErrorMessage_17 ;
+    yawl:hasMethod yawl:DynFormValidator_normaliseFieldName_18 ;
+    yawl:hasMethod yawl:DynFormValidator_getStyleClass_19 ;
+    yawl:hasMethod yawl:DynFormValidator_isEmptyValue_20 ;
+    yawl:hasMethod yawl:DynFormValidator_isTimerExpiryField_21 ;
+    yawl:hasMethod yawl:DynFormValidator_validateAgainstSchema_22 ;
+    yawl:hasMethod yawl:DynFormValidator_getInputSchema_23 ;
+    yawl:hasMethod yawl:DynFormValidator_getInputValueAsXML_24 ;
+    yawl:hasMethod yawl:DynFormValidator_createSAXSource_25 ;
+    yawl:hasMethod yawl:DynFormValidator_buildInputSchema_26 ;
+    yawl:hasMethod yawl:DynFormValidator_getSchemaHeader_27 ;
+    yawl:hasField yawl:DynFormValidator__msgPanel ;
+    yawl:hasField yawl:DynFormValidator__componentFieldLookup ;
+    yawl:hasField yawl:DynFormValidator_NS_URI ;
+    yawl:hasField yawl:DynFormValidator_NS_PREFIX ;
+    yawl:hasField yawl:DynFormValidator__ns ;
+    yawl:hasField yawl:DynFormValidator__factory ;
+    yawl:hasField yawl:DynFormValidator__errorHandler ;
+    .
+
+
+# Method: DynFormValidator.validate
+yawl:DynFormValidator_validate_1 a yawl:Method ;
+    rdfs:label "validate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validate(PanelLayout panel, Map componentFieldLookup, MessagePanel msgPanel)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormValidator.validateInputs
+yawl:DynFormValidator_validateInputs_2 a yawl:Method ;
+    rdfs:label "validateInputs" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validateInputs(PanelLayout panel)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormValidator.validateField
+yawl:DynFormValidator_validateField_3 a yawl:Method ;
+    rdfs:label "validateField" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validateField(FieldBase field)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormValidator.validateField
+yawl:DynFormValidator_validateField_4 a yawl:Method ;
+    rdfs:label "validateField" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validateField(DynFormField input, String value)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormValidator.validateCalendarField
+yawl:DynFormValidator_validateCalendarField_5 a yawl:Method ;
+    rdfs:label "validateCalendarField" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validateCalendarField(Calendar field)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormValidator.validateExpiry
+yawl:DynFormValidator_validateExpiry_6 a yawl:Method ;
+    rdfs:label "validateExpiry" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validateExpiry(DynFormField input, String value)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormValidator.validateBase
+yawl:DynFormValidator_validateBase_7 a yawl:Method ;
+    rdfs:label "validateBase" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validateBase(String fieldName, String type, String text, boolean untreated)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormValidator.validateRequired
+yawl:DynFormValidator_validateRequired_8 a yawl:Method ;
+    rdfs:label "validateRequired" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validateRequired(DynFormField input, String value)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormValidator.validateLong
+yawl:DynFormValidator_validateLong_9 a yawl:Method ;
+    rdfs:label "validateLong" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validateLong(String value, String fieldName, boolean untreated)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormValidator.validateInt
+yawl:DynFormValidator_validateInt_10 a yawl:Method ;
+    rdfs:label "validateInt" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validateInt(String value, String fieldName, boolean untreated)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormValidator.validateDouble
+yawl:DynFormValidator_validateDouble_11 a yawl:Method ;
+    rdfs:label "validateDouble" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validateDouble(String value, String fieldName, boolean untreated)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormValidator.validateDecimal
+yawl:DynFormValidator_validateDecimal_12 a yawl:Method ;
+    rdfs:label "validateDecimal" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validateDecimal(String value, String fieldName, boolean untreated)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormValidator.validateTime
+yawl:DynFormValidator_validateTime_13 a yawl:Method ;
+    rdfs:label "validateTime" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validateTime(String value, String fieldName, boolean untreated)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormValidator.validateDuration
+yawl:DynFormValidator_validateDuration_14 a yawl:Method ;
+    rdfs:label "validateDuration" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validateDuration(String value, String fieldName, boolean untreated)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormValidator.addRestrictionErrorMessage
+yawl:DynFormValidator_addRestrictionErrorMessage_15 a yawl:Method ;
+    rdfs:label "addRestrictionErrorMessage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addRestrictionErrorMessage(String type, DynFormField input)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormValidator.addErrorMessage
+yawl:DynFormValidator_addErrorMessage_16 a yawl:Method ;
+    rdfs:label "addErrorMessage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addErrorMessage(DynFormField input, String value)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormValidator.addValidationErrorMessage
+yawl:DynFormValidator_addValidationErrorMessage_17 a yawl:Method ;
+    rdfs:label "addValidationErrorMessage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addValidationErrorMessage(String value, String fieldName, String type, boolean untreated)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormValidator.normaliseFieldName
+yawl:DynFormValidator_normaliseFieldName_18 a yawl:Method ;
+    rdfs:label "normaliseFieldName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String normaliseFieldName(String name)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormValidator.getStyleClass
+yawl:DynFormValidator_getStyleClass_19 a yawl:Method ;
+    rdfs:label "getStyleClass" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStyleClass(DynFormField input, boolean valid)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormValidator.isEmptyValue
+yawl:DynFormValidator_isEmptyValue_20 a yawl:Method ;
+    rdfs:label "isEmptyValue" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEmptyValue(String value)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormValidator.isTimerExpiryField
+yawl:DynFormValidator_isTimerExpiryField_21 a yawl:Method ;
+    rdfs:label "isTimerExpiryField" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isTimerExpiryField(DynFormField input)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormValidator.validateAgainstSchema
+yawl:DynFormValidator_validateAgainstSchema_22 a yawl:Method ;
+    rdfs:label "validateAgainstSchema" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validateAgainstSchema(DynFormField input, String value)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormValidator.getInputSchema
+yawl:DynFormValidator_getInputSchema_23 a yawl:Method ;
+    rdfs:label "getInputSchema" ;
+    yawl:returnType "SAXSource" ;
+    yawl:signature "SAXSource getInputSchema(DynFormField input)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormValidator.getInputValueAsXML
+yawl:DynFormValidator_getInputValueAsXML_24 a yawl:Method ;
+    rdfs:label "getInputValueAsXML" ;
+    yawl:returnType "SAXSource" ;
+    yawl:signature "SAXSource getInputValueAsXML(DynFormField input, String value)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormValidator.createSAXSource
+yawl:DynFormValidator_createSAXSource_25 a yawl:Method ;
+    rdfs:label "createSAXSource" ;
+    yawl:returnType "SAXSource" ;
+    yawl:signature "SAXSource createSAXSource(String xml)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormValidator.buildInputSchema
+yawl:DynFormValidator_buildInputSchema_26 a yawl:Method ;
+    rdfs:label "buildInputSchema" ;
+    yawl:returnType "String" ;
+    yawl:signature "String buildInputSchema(DynFormField input)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormValidator.getSchemaHeader
+yawl:DynFormValidator_getSchemaHeader_27 a yawl:Method ;
+    rdfs:label "getSchemaHeader" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSchemaHeader()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:DynFormValidator__msgPanel a yawl:Field ;
+    rdfs:label "_msgPanel" .
+
+yawl:DynFormValidator__componentFieldLookup a yawl:Field ;
+    rdfs:label "_componentFieldLookup" .
+
+yawl:DynFormValidator_NS_URI a yawl:Field ;
+    rdfs:label "NS_URI" .
+
+yawl:DynFormValidator_NS_PREFIX a yawl:Field ;
+    rdfs:label "NS_PREFIX" .
+
+yawl:DynFormValidator__ns a yawl:Field ;
+    rdfs:label "_ns" .
+
+yawl:DynFormValidator__factory a yawl:Field ;
+    rdfs:label "_factory" .
+
+yawl:DynFormValidator__errorHandler a yawl:Field ;
+    rdfs:label "_errorHandler" .
+
+
+

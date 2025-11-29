@@ -1,0 +1,53 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.util.StartMonitor
+yawl:StartMonitor a yawl:Class ;
+    rdfs:label "StartMonitor" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/util/StartMonitor.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 16/06/15""" ;
+    yawl:extends yawl:SwingWorker ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:StartMonitor_doInBackground_1 ;
+    yawl:hasMethod yawl:StartMonitor_sleep_2 ;
+    yawl:hasMethod yawl:StartMonitor_showError_3 ;
+    yawl:hasField yawl:StartMonitor__totalSecs ;
+    .
+
+
+# Method: StartMonitor.doInBackground
+yawl:StartMonitor_doInBackground_1 a yawl:Method ;
+    rdfs:label "doInBackground" ;
+    yawl:returnType "Void" ;
+    yawl:signature "Void doInBackground()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: StartMonitor.sleep
+yawl:StartMonitor_sleep_2 a yawl:Method ;
+    rdfs:label "sleep" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sleep(long milliseconds)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: StartMonitor.showError
+yawl:StartMonitor_showError_3 a yawl:Method ;
+    rdfs:label "showError" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showError(String msg)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:StartMonitor__totalSecs a yawl:Field ;
+    rdfs:label "_totalSecs" .
+
+
+

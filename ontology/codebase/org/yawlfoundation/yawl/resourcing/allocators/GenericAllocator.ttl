@@ -1,0 +1,31 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.allocators.GenericAllocator
+yawl:GenericAllocator a yawl:Class ;
+    rdfs:label "GenericAllocator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_allocators ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/allocators/GenericAllocator.java"^^xsd:string ;
+    rdfs:comment """A base or generic allocator class which allows external entities such as the Editor the ability to instantiate it as a medium for specification XML generation Create Date: 23/08/2007. Last Date: 09/11/2007 @author Michael Adams (BPM Group, QUT Australia) @version 2.0""" ;
+    yawl:extends yawl:AbstractAllocator ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:GenericAllocator_performAllocation_1 ;
+    .
+
+
+# Method: GenericAllocator.performAllocation
+yawl:GenericAllocator_performAllocation_1 a yawl:Method ;
+    rdfs:label "performAllocation" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant performAllocation(Set resources, WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

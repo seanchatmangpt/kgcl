@@ -1,0 +1,61 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.monitor.sort.CaseOrder
+yawl:CaseOrder a yawl:Class ;
+    rdfs:label "CaseOrder" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_monitor_sort ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/monitor/sort/CaseOrder.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 9/12/2009""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CaseOrder_setOrder_1 ;
+    yawl:hasMethod yawl:CaseOrder_getColumn_2 ;
+    yawl:hasMethod yawl:CaseOrder_isAscending_3 ;
+    yawl:hasField yawl:CaseOrder__column ;
+    yawl:hasField yawl:CaseOrder__ascending ;
+    .
+
+
+# Method: CaseOrder.setOrder
+yawl:CaseOrder_setOrder_1 a yawl:Method ;
+    rdfs:label "setOrder" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOrder(TableSorter column)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseOrder.getColumn
+yawl:CaseOrder_getColumn_2 a yawl:Method ;
+    rdfs:label "getColumn" ;
+    yawl:returnType "TableSorter" ;
+    yawl:signature "TableSorter getColumn()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseOrder.isAscending
+yawl:CaseOrder_isAscending_3 a yawl:Method ;
+    rdfs:label "isAscending" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAscending()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:CaseOrder__column a yawl:Field ;
+    rdfs:label "_column" .
+
+yawl:CaseOrder__ascending a yawl:Field ;
+    rdfs:label "_ascending" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_monitor_jsf a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.monitor.jsf" .
+
+

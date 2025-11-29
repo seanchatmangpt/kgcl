@@ -1,0 +1,39 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.util.WindowUtil
+yawl:WindowUtil a yawl:Class ;
+    rdfs:label "WindowUtil" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/util/WindowUtil.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 19/08/2014""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:WindowUtil_calcLocation_1 ;
+    yawl:hasField yawl:WindowUtil_SCREEN_WIDTH ;
+    yawl:hasField yawl:WindowUtil_SCREEN_HEIGHT ;
+    .
+
+
+# Method: WindowUtil.calcLocation
+yawl:WindowUtil_calcLocation_1 a yawl:Method ;
+    rdfs:label "calcLocation" ;
+    yawl:returnType "Point" ;
+    yawl:signature "Point calcLocation(JFrame main, JDialog dialog)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:WindowUtil_SCREEN_WIDTH a yawl:Field ;
+    rdfs:label "SCREEN_WIDTH" .
+
+yawl:WindowUtil_SCREEN_HEIGHT a yawl:Field ;
+    rdfs:label "SCREEN_HEIGHT" .
+
+
+

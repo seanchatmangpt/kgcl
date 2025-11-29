@@ -1,0 +1,123 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.rdrutil.RdrEvaluator
+yawl:RdrEvaluator a yawl:Class ;
+    rdfs:label "RdrEvaluator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_rdrutil ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/rdrutil/RdrEvaluator.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 7/01/2016""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:RdrEvaluator_getRdrInterface_1 ;
+    yawl:hasMethod yawl:RdrEvaluator_evaluate_2 ;
+    yawl:hasMethod yawl:RdrEvaluator_evaluate_3 ;
+    yawl:hasMethod yawl:RdrEvaluator_search_4 ;
+    yawl:hasMethod yawl:RdrEvaluator_getSearchData_5 ;
+    yawl:hasMethod yawl:RdrEvaluator_appendDataTypes_6 ;
+    yawl:hasMethod yawl:RdrEvaluator_getTree_7 ;
+    yawl:hasMethod yawl:RdrEvaluator_getExternalTriggersForItem_8 ;
+    yawl:hasMethod yawl:RdrEvaluator_getExternalTriggers_9 ;
+    yawl:hasMethod yawl:RdrEvaluator_getConditionValue_10 ;
+    yawl:hasField yawl:RdrEvaluator__rdr ;
+    yawl:hasField yawl:RdrEvaluator__client ;
+    .
+
+
+# Method: RdrEvaluator.getRdrInterface
+yawl:RdrEvaluator_getRdrInterface_1 a yawl:Method ;
+    rdfs:label "getRdrInterface" ;
+    yawl:returnType "Rdr" ;
+    yawl:signature "Rdr getRdrInterface()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrEvaluator.evaluate
+yawl:RdrEvaluator_evaluate_2 a yawl:Method ;
+    rdfs:label "evaluate" ;
+    yawl:returnType "RdrPair" ;
+    yawl:signature "RdrPair evaluate(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrEvaluator.evaluate
+yawl:RdrEvaluator_evaluate_3 a yawl:Method ;
+    rdfs:label "evaluate" ;
+    yawl:returnType "RdrPair" ;
+    yawl:signature "RdrPair evaluate(YSpecificationID specID, String taskID, Element data, RuleType rType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrEvaluator.search
+yawl:RdrEvaluator_search_4 a yawl:Method ;
+    rdfs:label "search" ;
+    yawl:returnType "RdrPair" ;
+    yawl:signature "RdrPair search(YSpecificationID specID, String taskID, Element data)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RdrEvaluator.getSearchData
+yawl:RdrEvaluator_getSearchData_5 a yawl:Method ;
+    rdfs:label "getSearchData" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getSearchData(WorkItemRecord wir, Element data)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RdrEvaluator.appendDataTypes
+yawl:RdrEvaluator_appendDataTypes_6 a yawl:Method ;
+    rdfs:label "appendDataTypes" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element appendDataTypes(WorkItemRecord wir, Element data)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RdrEvaluator.getTree
+yawl:RdrEvaluator_getTree_7 a yawl:Method ;
+    rdfs:label "getTree" ;
+    yawl:returnType "RdrTree" ;
+    yawl:signature "RdrTree getTree(YSpecificationID specID, String taskID, RuleType treeType)" ;
+    rdfs:comment """returns the rule tree (if any) for the parameters passed""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrEvaluator.getExternalTriggersForItem
+yawl:RdrEvaluator_getExternalTriggersForItem_8 a yawl:Method ;
+    rdfs:label "getExternalTriggersForItem" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getExternalTriggersForItem(String itemID)" ;
+    rdfs:comment """retrieves a complete list of external exception triggers from the ruleset for the specified workitem @param itemID - the id of the item to get the triggers for @return the (String) list of triggers""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrEvaluator.getExternalTriggers
+yawl:RdrEvaluator_getExternalTriggers_9 a yawl:Method ;
+    rdfs:label "getExternalTriggers" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getExternalTriggers(RdrTree tree)" ;
+    rdfs:comment """Traverse the extracted conditions from all nodes of the passed RdrTree and return the external exception triggers found within them @param tree - the (external exception) RdrTree containing the triggers @return the (String) list of triggers""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrEvaluator.getConditionValue
+yawl:RdrEvaluator_getConditionValue_10 a yawl:Method ;
+    rdfs:label "getConditionValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getConditionValue(String cond, String var)" ;
+    rdfs:comment """Gets the value for the specified variable in the condition string @param cond - the condition containing the value @param var - the variable to get the value of @return the value of the variable passed""" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:RdrEvaluator__rdr a yawl:Field ;
+    rdfs:label "_rdr" .
+
+yawl:RdrEvaluator__client a yawl:Field ;
+    rdfs:label "_client" .
+
+
+

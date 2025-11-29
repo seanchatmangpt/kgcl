@@ -1,0 +1,227 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.elements.YNetLocalVarVerifier
+yawl:YNetLocalVarVerifier a yawl:Class ;
+    rdfs:label "YNetLocalVarVerifier" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_elements ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/elements/YNetLocalVarVerifier.java"^^xsd:string ;
+    rdfs:comment """Walks the net in reverse to discover any task-level input data variables that map from net-level local variables that have no initial value and won't be assigned a value by a task earlier in the net. @author Michael Adams @date 3/05/2010""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YNetLocalVarVerifier_verify_1 ;
+    yawl:hasMethod yawl:YNetLocalVarVerifier_verify_2 ;
+    yawl:hasMethod yawl:YNetLocalVarVerifier_verify_3 ;
+    yawl:hasMethod yawl:YNetLocalVarVerifier_getUnitialisedLocalVars_4 ;
+    yawl:hasMethod yawl:YNetLocalVarVerifier_populateLocalTaskMaps_5 ;
+    yawl:hasMethod yawl:YNetLocalVarVerifier_populateMapsForTask_6 ;
+    yawl:hasMethod yawl:YNetLocalVarVerifier_resetVisited_7 ;
+    yawl:hasMethod yawl:YNetLocalVarVerifier_addTaskIfQueryHasLocalVar_8 ;
+    yawl:hasMethod yawl:YNetLocalVarVerifier_miTaskOutputsToLocalVar_9 ;
+    yawl:hasMethod yawl:YNetLocalVarVerifier_queryReferencesLocalVar_10 ;
+    yawl:hasMethod yawl:YNetLocalVarVerifier_getVarMask_11 ;
+    yawl:hasMethod yawl:YNetLocalVarVerifier_getParamNamesForTask_12 ;
+    yawl:hasMethod yawl:YNetLocalVarVerifier_getQueryForParam_13 ;
+    yawl:hasMethod yawl:YNetLocalVarVerifier_isInputParamType_14 ;
+    yawl:hasMethod yawl:YNetLocalVarVerifier_isMultiPathXORJoin_15 ;
+    yawl:hasMethod yawl:YNetLocalVarVerifier_unwindOrJoins_16 ;
+    yawl:hasMethod yawl:YNetLocalVarVerifier_updateAndStack_17 ;
+    yawl:hasMethod yawl:YNetLocalVarVerifier_allPathsWalked_18 ;
+    yawl:hasMethod yawl:YNetLocalVarVerifier_addMessage_19 ;
+    yawl:hasField yawl:YNetLocalVarVerifier__net ;
+    yawl:hasField yawl:YNetLocalVarVerifier__uninitialisedLocalVars ;
+    yawl:hasField yawl:YNetLocalVarVerifier__handler ;
+    yawl:hasField yawl:YNetLocalVarVerifier__log ;
+    .
+
+
+# Method: YNetLocalVarVerifier.verify
+yawl:YNetLocalVarVerifier_verify_1 a yawl:Method ;
+    rdfs:label "verify" ;
+    yawl:returnType "void" ;
+    yawl:signature "void verify(YVerificationHandler handler)" ;
+    rdfs:comment """Verifies the net""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetLocalVarVerifier.verify
+yawl:YNetLocalVarVerifier_verify_2 a yawl:Method ;
+    rdfs:label "verify" ;
+    yawl:returnType "void" ;
+    yawl:signature "void verify(LocalTaskMap map)" ;
+    rdfs:comment """Verifies all tasks with variables that reference a particular uninitialised local variable @param map a map of referencing tasks for a local variable""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetLocalVarVerifier.verify
+yawl:YNetLocalVarVerifier_verify_3 a yawl:Method ;
+    rdfs:label "verify" ;
+    yawl:returnType "void" ;
+    yawl:signature "void verify(LocalTaskMap map, YTask subjectTask, YExternalNetElement baseElement, List visited, Stack andStack)" ;
+    rdfs:comment """Called recursively to walks a reverse path from a task that has an input mapping from an uninitialised local variable in an attempt to find a task that has an output mapping to that local variable. If it reaches the Input Condition an verification error message is constructed for that particular path. @param map a map of tasks that reference a particular local variable @param subjectTask the originating task being checked @param baseElement the element we're up to in this traversal (changed each""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetLocalVarVerifier.getUnitialisedLocalVars
+yawl:YNetLocalVarVerifier_getUnitialisedLocalVars_4 a yawl:Method ;
+    rdfs:label "getUnitialisedLocalVars" ;
+    yawl:returnType "void" ;
+    yawl:signature "void getUnitialisedLocalVars()" ;
+    rdfs:comment """Builds the set of uninitialised local variables for this net""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetLocalVarVerifier.populateLocalTaskMaps
+yawl:YNetLocalVarVerifier_populateLocalTaskMaps_5 a yawl:Method ;
+    rdfs:label "populateLocalTaskMaps" ;
+    yawl:returnType "void" ;
+    yawl:signature "void populateLocalTaskMaps()" ;
+    rdfs:comment """Populates the map created for each uninitialised local variable with the set of tasks that reference it""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetLocalVarVerifier.populateMapsForTask
+yawl:YNetLocalVarVerifier_populateMapsForTask_6 a yawl:Method ;
+    rdfs:label "populateMapsForTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void populateMapsForTask(YTask task, int paramType)" ;
+    rdfs:comment """Adds a task to the map for an uninitialised local variable if the task references the local variable @param task the task to check/add @param paramType one of YParameter._INPUT_PARAM_TYPE or YParameter._OUTPUT_PARAM_TYPE""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetLocalVarVerifier.resetVisited
+yawl:YNetLocalVarVerifier_resetVisited_7 a yawl:Method ;
+    rdfs:label "resetVisited" ;
+    yawl:returnType "List" ;
+    yawl:signature "List resetVisited(YExternalNetElement element)" ;
+    rdfs:comment """Reinitialises the List of visited elements, then adds the element passed as its first member @param element the element to add to the newly initialised list @return the reinitialised list""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetLocalVarVerifier.addTaskIfQueryHasLocalVar
+yawl:YNetLocalVarVerifier_addTaskIfQueryHasLocalVar_8 a yawl:Method ;
+    rdfs:label "addTaskIfQueryHasLocalVar" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addTaskIfQueryHasLocalVar(YTask task, String paramName, int paramType)" ;
+    rdfs:comment """Adds a task to the map of tasks referencing an uninitialised local variable if the task parameter references the local variable via a mapping @param task the task to check/add @param paramName the name of the task variable @param paramType one of YParameter._INPUT_PARAM_TYPE or YParameter._OUTPUT_PARAM_TYPE""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetLocalVarVerifier.miTaskOutputsToLocalVar
+yawl:YNetLocalVarVerifier_miTaskOutputsToLocalVar_9 a yawl:Method ;
+    rdfs:label "miTaskOutputsToLocalVar" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean miTaskOutputsToLocalVar(YTask task, String query, String localVarName, int paramType)" ;
+    rdfs:comment """Checks whether the output assignment variable of a multiple instance task maps to a local variable @param task the MI task @param query the output XQuery @param localVarName the local variable name @param paramType one of YParameter._INPUT_PARAM_TYPE or YParameter._OUTPUT_PARAM_TYPE @return true if the output assignment variable of a multiple instance task maps to a local variable""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetLocalVarVerifier.queryReferencesLocalVar
+yawl:YNetLocalVarVerifier_queryReferencesLocalVar_10 a yawl:Method ;
+    rdfs:label "queryReferencesLocalVar" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean queryReferencesLocalVar(String query, String localVarName, int paramType)" ;
+    rdfs:comment """Checks whether an XQuery mapping references a local variable @param query the XQuery mapping @param localVarName the local variable name @param paramType one of YParameter._INPUT_PARAM_TYPE or YParameter._OUTPUT_PARAM_TYPE @return the XQuery mapping references a local variable""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetLocalVarVerifier.getVarMask
+yawl:YNetLocalVarVerifier_getVarMask_11 a yawl:Method ;
+    rdfs:label "getVarMask" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getVarMask(String name, int paramType)" ;
+    rdfs:comment """Builds a template to use to search an XQuery mapping for a local variable name @param name the name of the local variable to search the XQuery for @param paramType one of YParameter._INPUT_PARAM_TYPE or YParameter._OUTPUT_PARAM_TYPE @return the search template""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetLocalVarVerifier.getParamNamesForTask
+yawl:YNetLocalVarVerifier_getParamNamesForTask_12 a yawl:Method ;
+    rdfs:label "getParamNamesForTask" ;
+    yawl:returnType "Collection" ;
+    yawl:signature "Collection getParamNamesForTask(YTask task, int paramType)" ;
+    rdfs:comment """Gets the list of variable names for a task @param task the task @param paramType the type of variables concerned (input or output) @return the list of variables of the task of the type""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetLocalVarVerifier.getQueryForParam
+yawl:YNetLocalVarVerifier_getQueryForParam_13 a yawl:Method ;
+    rdfs:label "getQueryForParam" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getQueryForParam(YTask task, String paramName, int paramType)" ;
+    rdfs:comment """Gets the XQuery mapping for a task variable @param task the task containing the variable @param paramName the name of the variable @param paramType the variable usage type (input or output) @return the XQuery mapping""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetLocalVarVerifier.isInputParamType
+yawl:YNetLocalVarVerifier_isInputParamType_14 a yawl:Method ;
+    rdfs:label "isInputParamType" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isInputParamType(int paramType)" ;
+    rdfs:comment """Checks if the paramType is the input param type @param paramType the type to check @return true if its the input param type""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetLocalVarVerifier.isMultiPathXORJoin
+yawl:YNetLocalVarVerifier_isMultiPathXORJoin_15 a yawl:Method ;
+    rdfs:label "isMultiPathXORJoin" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isMultiPathXORJoin(YExternalNetElement element)" ;
+    rdfs:comment """Checks if an element is an XOR-join task with multiple inflows @param element the element to check @return true if the element is an XOR-join task with multiple inflows""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetLocalVarVerifier.unwindOrJoins
+yawl:YNetLocalVarVerifier_unwindOrJoins_16 a yawl:Method ;
+    rdfs:label "unwindOrJoins" ;
+    yawl:returnType "void" ;
+    yawl:signature "void unwindOrJoins(YTask task, List visited)" ;
+    rdfs:comment """For XOR-join tasks with multiple incoming flows, discard a previously walked path from it @param task the task with the XOR join @param visited the list of visited elements""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetLocalVarVerifier.updateAndStack
+yawl:YNetLocalVarVerifier_updateAndStack_17 a yawl:Method ;
+    rdfs:label "updateAndStack" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateAndStack(YExternalNetElement element, Stack stack)" ;
+    rdfs:comment """Updates the stack of paths walked between an AND split and its corresponding AND join @param element the task or condition to check for an AND decoration @param stack the stack of paths""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetLocalVarVerifier.allPathsWalked
+yawl:YNetLocalVarVerifier_allPathsWalked_18 a yawl:Method ;
+    rdfs:label "allPathsWalked" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean allPathsWalked(Stack stack)" ;
+    rdfs:comment """Checks the stack of paths incoming to an AND join to determine if they have all been walked @param stack the stack of paths leading to an AND join @return true if all paths have been walked""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetLocalVarVerifier.addMessage
+yawl:YNetLocalVarVerifier_addMessage_19 a yawl:Method ;
+    rdfs:label "addMessage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addMessage(LocalTaskMap map, YTask task, List visited)" ;
+    rdfs:comment """Constructs a verification (error) message for a particular path @param map the map of tasks that reference a local variable @param task the originating task of a particular (reverse) path @param visited a list of tasks and conditions met along the (reverse) path from the task to the Input Condition @return the constructed message""" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YNetLocalVarVerifier__net a yawl:Field ;
+    rdfs:label "_net" .
+
+yawl:YNetLocalVarVerifier__uninitialisedLocalVars a yawl:Field ;
+    rdfs:label "_uninitialisedLocalVars" .
+
+yawl:YNetLocalVarVerifier__handler a yawl:Field ;
+    rdfs:label "_handler" .
+
+yawl:YNetLocalVarVerifier__log a yawl:Field ;
+    rdfs:label "_log" .
+
+
+

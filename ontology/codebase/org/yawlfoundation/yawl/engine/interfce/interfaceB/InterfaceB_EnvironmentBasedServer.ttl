@@ -1,0 +1,70 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.interfce.interfaceB.InterfaceB_EnvironmentBasedServer
+yawl:InterfaceB_EnvironmentBasedServer a yawl:Class ;
+    rdfs:label "InterfaceB_EnvironmentBasedServer" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_interfce_interfaceB ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/interfce/interfaceB/InterfaceB_EnvironmentBasedServer.java"^^xsd:string ;
+    rdfs:comment """Receives event announcements from the engine and passes each of them to the custom service's appropriate handling method @author Lachlan Aldred Date: 23/01/2004 Time: 13:26:04 @author Michael Adams (refactored for v2.0, 12/2008)""" ;
+    yawl:extends yawl:HttpServlet ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedServer_init_1 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedServer_destroy_2 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedServer_doGet_3 ;
+    yawl:hasMethod yawl:InterfaceB_EnvironmentBasedServer_doPost_4 ;
+    yawl:hasField yawl:InterfaceB_EnvironmentBasedServer__controller ;
+    yawl:hasField yawl:InterfaceB_EnvironmentBasedServer__logger ;
+    yawl:hasField yawl:InterfaceB_EnvironmentBasedServer__executor ;
+    .
+
+
+# Method: InterfaceB_EnvironmentBasedServer.init
+yawl:InterfaceB_EnvironmentBasedServer_init_1 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init(ServletConfig servletConfig)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedServer.destroy
+yawl:InterfaceB_EnvironmentBasedServer_destroy_2 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedServer.doGet
+yawl:InterfaceB_EnvironmentBasedServer_doGet_3 a yawl:Method ;
+    rdfs:label "doGet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doGet(HttpServletRequest request, HttpServletResponse response)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EnvironmentBasedServer.doPost
+yawl:InterfaceB_EnvironmentBasedServer_doPost_4 a yawl:Method ;
+    rdfs:label "doPost" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doPost(HttpServletRequest request, HttpServletResponse response)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:InterfaceB_EnvironmentBasedServer__controller a yawl:Field ;
+    rdfs:label "_controller" .
+
+yawl:InterfaceB_EnvironmentBasedServer__logger a yawl:Field ;
+    rdfs:label "_logger" .
+
+yawl:InterfaceB_EnvironmentBasedServer__executor a yawl:Field ;
+    rdfs:label "_executor" .
+
+
+

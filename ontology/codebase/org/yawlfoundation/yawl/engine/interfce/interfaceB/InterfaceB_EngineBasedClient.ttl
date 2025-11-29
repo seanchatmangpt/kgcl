@@ -1,0 +1,227 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.interfce.interfaceB.InterfaceB_EngineBasedClient
+yawl:InterfaceB_EngineBasedClient a yawl:Class ;
+    rdfs:label "InterfaceB_EngineBasedClient" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_interfce_interfaceB ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/interfce/interfaceB/InterfaceB_EngineBasedClient.java"^^xsd:string ;
+    rdfs:comment """This interface announces specific Engine events to listening custom services @author Lachlan Aldred Date: 22/01/2004 Time: 17:19:12 @author Michael Adams (refactored for v2.0, 06/2008 - 12/2008)""" ;
+    yawl:extends yawl:Interface_Client ;
+    yawl:implements yawl:ObserverGateway ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedClient_getScheme_1 ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedClient_announceFiredWorkItem_2 ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedClient_announceCancelledWorkItem_3 ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedClient_cancelWorkItem_4 ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedClient_announceTimerExpiry_5 ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedClient_announceCaseSuspended_6 ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedClient_announceCaseSuspending_7 ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedClient_announceCaseResumption_8 ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedClient_announceWorkItemStatusChange_9 ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedClient_announceCaseStarted_10 ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedClient_announceCaseCompletion_11 ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedClient_announceCaseCompletion_12 ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedClient_announceEngineInitialised_13 ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedClient_announceCaseCancellation_14 ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedClient_announceDeadlock_15 ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedClient_shutdown_16 ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedClient_getRequiredParamsForService_17 ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedClient_announceCaseSuspensionState_18 ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedClient_prepareParamMap_19 ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedClient_getServiceExecutor_20 ;
+    yawl:hasField yawl:InterfaceB_EngineBasedClient__logger ;
+    yawl:hasField yawl:InterfaceB_EngineBasedClient__executorMap ;
+    .
+
+
+# Method: InterfaceB_EngineBasedClient.getScheme
+yawl:InterfaceB_EngineBasedClient_getScheme_1 a yawl:Method ;
+    rdfs:label "getScheme" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getScheme()" ;
+    rdfs:comment """Indicates which protocol this shim services. @return the scheme""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EngineBasedClient.announceFiredWorkItem
+yawl:InterfaceB_EngineBasedClient_announceFiredWorkItem_2 a yawl:Method ;
+    rdfs:label "announceFiredWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceFiredWorkItem(YAnnouncement announcement)" ;
+    rdfs:comment """PRE: The work item is enabled. announces a work item to a YAWL Service. @param announcement""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EngineBasedClient.announceCancelledWorkItem
+yawl:InterfaceB_EngineBasedClient_announceCancelledWorkItem_3 a yawl:Method ;
+    rdfs:label "announceCancelledWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCancelledWorkItem(YAnnouncement announcement)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EngineBasedClient.cancelWorkItem
+yawl:InterfaceB_EngineBasedClient_cancelWorkItem_4 a yawl:Method ;
+    rdfs:label "cancelWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancelWorkItem(YAWLServiceReference yawlService, YWorkItem workItem)" ;
+    rdfs:comment """Announces work item cancellation to the YAWL Service. @param yawlService the YAWL service reference. @param workItem the work item to cancel.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EngineBasedClient.announceTimerExpiry
+yawl:InterfaceB_EngineBasedClient_announceTimerExpiry_5 a yawl:Method ;
+    rdfs:label "announceTimerExpiry" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceTimerExpiry(YAnnouncement announcement)" ;
+    rdfs:comment """Announces a workitem timer expiry @param announcement the yawl service reference.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EngineBasedClient.announceCaseSuspended
+yawl:InterfaceB_EngineBasedClient_announceCaseSuspended_6 a yawl:Method ;
+    rdfs:label "announceCaseSuspended" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCaseSuspended(Set services, YIdentifier caseID)" ;
+    rdfs:comment """Called by the engine to announce when a case suspends (i.e. becomes fully suspended) as opposed to entering the 'suspending' state.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EngineBasedClient.announceCaseSuspending
+yawl:InterfaceB_EngineBasedClient_announceCaseSuspending_7 a yawl:Method ;
+    rdfs:label "announceCaseSuspending" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCaseSuspending(Set services, YIdentifier caseID)" ;
+    rdfs:comment """Called by the engine to announce when a case starts to suspends (i.e. enters the suspending state) as opposed to entering the fully 'suspended' state.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EngineBasedClient.announceCaseResumption
+yawl:InterfaceB_EngineBasedClient_announceCaseResumption_8 a yawl:Method ;
+    rdfs:label "announceCaseResumption" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCaseResumption(Set services, YIdentifier caseID)" ;
+    rdfs:comment """Called by the engine to announce when a case resumes from a previous 'suspending' or 'suspended' state.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EngineBasedClient.announceWorkItemStatusChange
+yawl:InterfaceB_EngineBasedClient_announceWorkItemStatusChange_9 a yawl:Method ;
+    rdfs:label "announceWorkItemStatusChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceWorkItemStatusChange(Set services, YWorkItem workItem, YWorkItemStatus oldStatus, YWorkItemStatus newStatus)" ;
+    rdfs:comment """Notify of a change of status for a work item. @param workItem  that has changed @param oldStatus previous status @param newStatus new status""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EngineBasedClient.announceCaseStarted
+yawl:InterfaceB_EngineBasedClient_announceCaseStarted_10 a yawl:Method ;
+    rdfs:label "announceCaseStarted" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCaseStarted(Set services, YSpecificationID specID, YIdentifier caseID, String launchingService, boolean delayed)" ;
+    rdfs:comment """Called by engine to announce when a case has commenced. @param services the set of registered custom services @param specID   the specification id of the started case                 @param caseID   the case that has started @param launchingService the service that started the case @param delayed true if this is a delayed case launch, false if immediate""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EngineBasedClient.announceCaseCompletion
+yawl:InterfaceB_EngineBasedClient_announceCaseCompletion_11 a yawl:Method ;
+    rdfs:label "announceCaseCompletion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCaseCompletion(Set services, YIdentifier caseID, Document caseData)" ;
+    rdfs:comment """Called by engine to announce when a case is complete. @param caseID   the case that completed @param caseData the output data of the case""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EngineBasedClient.announceCaseCompletion
+yawl:InterfaceB_EngineBasedClient_announceCaseCompletion_12 a yawl:Method ;
+    rdfs:label "announceCaseCompletion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCaseCompletion(YAWLServiceReference yawlService, YIdentifier caseID, Document caseData)" ;
+    rdfs:comment """Called by engine to announce when a case is complete. @param yawlService the yawl service @param caseID the case that completed""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EngineBasedClient.announceEngineInitialised
+yawl:InterfaceB_EngineBasedClient_announceEngineInitialised_13 a yawl:Method ;
+    rdfs:label "announceEngineInitialised" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceEngineInitialised(Set services, int maxWaitSeconds)" ;
+    rdfs:comment """Called by the engine when it has completed initialisation and is running @param services a set of custom services to receive the announcement @param maxWaitSeconds the maximum seconds to wait for services to be contactable""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EngineBasedClient.announceCaseCancellation
+yawl:InterfaceB_EngineBasedClient_announceCaseCancellation_14 a yawl:Method ;
+    rdfs:label "announceCaseCancellation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCaseCancellation(Set services, YIdentifier id)" ;
+    rdfs:comment """Called by the engine to announce the cancellation of a case @param services a set of custom services to receive the announcement @param id the case id of the cancelled case""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EngineBasedClient.announceDeadlock
+yawl:InterfaceB_EngineBasedClient_announceDeadlock_15 a yawl:Method ;
+    rdfs:label "announceDeadlock" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceDeadlock(Set services, YIdentifier id, Set tasks)" ;
+    rdfs:comment """Called by the engine to announce the deadlock of a case @param services a set of custom services to receive the announcement @param id the case id of the deadlocked case @param tasks the deadlocked tasks""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EngineBasedClient.shutdown
+yawl:InterfaceB_EngineBasedClient_shutdown_16 a yawl:Method ;
+    rdfs:label "shutdown" ;
+    yawl:returnType "void" ;
+    yawl:signature "void shutdown()" ;
+    rdfs:comment """Called by the engine to announce shutdown of the engine's servlet container""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EngineBasedClient.getRequiredParamsForService
+yawl:InterfaceB_EngineBasedClient_getRequiredParamsForService_17 a yawl:Method ;
+    rdfs:label "getRequiredParamsForService" ;
+    yawl:returnType "YParameter" ;
+    yawl:signature "YParameter getRequiredParamsForService(YAWLServiceReference yawlService)" ;
+    rdfs:comment """Returns an array of YParameter objects that describe the YAWL service being referenced. @param yawlService the YAWL service reference. @return an array of YParameter objects. @throws IOException if connection problem @throws JDOMException if XML content problem.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EngineBasedClient.announceCaseSuspensionState
+yawl:InterfaceB_EngineBasedClient_announceCaseSuspensionState_18 a yawl:Method ;
+    rdfs:label "announceCaseSuspensionState" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCaseSuspensionState(Set services, YIdentifier caseID, YEngineEvent event)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: InterfaceB_EngineBasedClient.prepareParamMap
+yawl:InterfaceB_EngineBasedClient_prepareParamMap_19 a yawl:Method ;
+    rdfs:label "prepareParamMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map prepareParamMap(YEngineEvent event)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: InterfaceB_EngineBasedClient.getServiceExecutor
+yawl:InterfaceB_EngineBasedClient_getServiceExecutor_20 a yawl:Method ;
+    rdfs:label "getServiceExecutor" ;
+    yawl:returnType "ExecutorService" ;
+    yawl:signature "ExecutorService getServiceExecutor(YAWLServiceReference service)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:InterfaceB_EngineBasedClient__logger a yawl:Field ;
+    rdfs:label "_logger" .
+
+yawl:InterfaceB_EngineBasedClient__executorMap a yawl:Field ;
+    rdfs:label "_executorMap" .
+
+
+

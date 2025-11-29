@@ -1,0 +1,420 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.rssFormViewer
+yawl:rssFormViewer a yawl:Class ;
+    rdfs:label "rssFormViewer" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/rssFormViewer.java"^^xsd:string ;
+    yawl:extends yawl:AbstractPageBean ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:rssFormViewer__init_1 ;
+    yawl:hasMethod yawl:rssFormViewer_preprocess_2 ;
+    yawl:hasMethod yawl:rssFormViewer_destroy_3 ;
+    yawl:hasMethod yawl:rssFormViewer_init_4 ;
+    yawl:hasMethod yawl:rssFormViewer_getSessionBean_5 ;
+    yawl:hasMethod yawl:rssFormViewer_getRequestBean_6 ;
+    yawl:hasMethod yawl:rssFormViewer_getApplicationBean_7 ;
+    yawl:hasMethod yawl:rssFormViewer_getPage_8 ;
+    yawl:hasMethod yawl:rssFormViewer_setPage_9 ;
+    yawl:hasMethod yawl:rssFormViewer_getHtml_10 ;
+    yawl:hasMethod yawl:rssFormViewer_setHtml_11 ;
+    yawl:hasMethod yawl:rssFormViewer_getHead_12 ;
+    yawl:hasMethod yawl:rssFormViewer_setHead_13 ;
+    yawl:hasMethod yawl:rssFormViewer_getLink_14 ;
+    yawl:hasMethod yawl:rssFormViewer_setLink_15 ;
+    yawl:hasMethod yawl:rssFormViewer_getBody_16 ;
+    yawl:hasMethod yawl:rssFormViewer_setBody_17 ;
+    yawl:hasMethod yawl:rssFormViewer_getForm_18 ;
+    yawl:hasMethod yawl:rssFormViewer_setForm_19 ;
+    yawl:hasMethod yawl:rssFormViewer_getBtnClose_20 ;
+    yawl:hasMethod yawl:rssFormViewer_setBtnClose_21 ;
+    yawl:hasMethod yawl:rssFormViewer_getStaticText1_22 ;
+    yawl:hasMethod yawl:rssFormViewer_setStaticText1_23 ;
+    yawl:hasMethod yawl:rssFormViewer_getPnlContainer_24 ;
+    yawl:hasMethod yawl:rssFormViewer_setPnlContainer_25 ;
+    yawl:hasMethod yawl:rssFormViewer_prerender_26 ;
+    yawl:hasMethod yawl:rssFormViewer_btnClose_action_27 ;
+    yawl:hasMethod yawl:rssFormViewer_successful_28 ;
+    yawl:hasMethod yawl:rssFormViewer_validateCredentials_29 ;
+    yawl:hasMethod yawl:rssFormViewer_initSession_30 ;
+    yawl:hasMethod yawl:rssFormViewer_startAndShow_31 ;
+    yawl:hasMethod yawl:rssFormViewer_checkParticipantHasQueuedItem_32 ;
+    yawl:hasMethod yawl:rssFormViewer_getRequest_33 ;
+    yawl:hasMethod yawl:rssFormViewer_showMessage_34 ;
+    yawl:hasMethod yawl:rssFormViewer_showForm_35 ;
+    yawl:hasMethod yawl:rssFormViewer_redirect_36 ;
+    yawl:hasMethod yawl:rssFormViewer_unwrap_37 ;
+    yawl:hasMethod yawl:rssFormViewer_logout_38 ;
+    yawl:hasField yawl:rssFormViewer___placeholder ;
+    yawl:hasField yawl:rssFormViewer_page ;
+    yawl:hasField yawl:rssFormViewer_html ;
+    yawl:hasField yawl:rssFormViewer_head ;
+    yawl:hasField yawl:rssFormViewer_link ;
+    yawl:hasField yawl:rssFormViewer_body ;
+    yawl:hasField yawl:rssFormViewer_form ;
+    yawl:hasField yawl:rssFormViewer_btnClose ;
+    yawl:hasField yawl:rssFormViewer_staticText1 ;
+    yawl:hasField yawl:rssFormViewer_pnlContainer ;
+    yawl:hasField yawl:rssFormViewer_rm ;
+    yawl:hasField yawl:rssFormViewer_sb ;
+    yawl:hasField yawl:rssFormViewer_msgPanel ;
+    yawl:hasField yawl:rssFormViewer_success ;
+    .
+
+
+# Method: rssFormViewer._init
+yawl:rssFormViewer__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: rssFormViewer.preprocess
+yawl:rssFormViewer_preprocess_2 a yawl:Method ;
+    rdfs:label "preprocess" ;
+    yawl:returnType "void" ;
+    yawl:signature "void preprocess()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: rssFormViewer.destroy
+yawl:rssFormViewer_destroy_3 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: rssFormViewer.init
+yawl:rssFormViewer_init_4 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: rssFormViewer.getSessionBean
+yawl:rssFormViewer_getSessionBean_5 a yawl:Method ;
+    rdfs:label "getSessionBean" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getSessionBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: rssFormViewer.getRequestBean
+yawl:rssFormViewer_getRequestBean_6 a yawl:Method ;
+    rdfs:label "getRequestBean" ;
+    yawl:returnType "RequestBean" ;
+    yawl:signature "RequestBean getRequestBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: rssFormViewer.getApplicationBean
+yawl:rssFormViewer_getApplicationBean_7 a yawl:Method ;
+    rdfs:label "getApplicationBean" ;
+    yawl:returnType "ApplicationBean" ;
+    yawl:signature "ApplicationBean getApplicationBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: rssFormViewer.getPage
+yawl:rssFormViewer_getPage_8 a yawl:Method ;
+    rdfs:label "getPage" ;
+    yawl:returnType "Page" ;
+    yawl:signature "Page getPage()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: rssFormViewer.setPage
+yawl:rssFormViewer_setPage_9 a yawl:Method ;
+    rdfs:label "setPage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPage(Page p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: rssFormViewer.getHtml
+yawl:rssFormViewer_getHtml_10 a yawl:Method ;
+    rdfs:label "getHtml" ;
+    yawl:returnType "Html" ;
+    yawl:signature "Html getHtml()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: rssFormViewer.setHtml
+yawl:rssFormViewer_setHtml_11 a yawl:Method ;
+    rdfs:label "setHtml" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHtml(Html h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: rssFormViewer.getHead
+yawl:rssFormViewer_getHead_12 a yawl:Method ;
+    rdfs:label "getHead" ;
+    yawl:returnType "Head" ;
+    yawl:signature "Head getHead()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: rssFormViewer.setHead
+yawl:rssFormViewer_setHead_13 a yawl:Method ;
+    rdfs:label "setHead" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHead(Head h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: rssFormViewer.getLink
+yawl:rssFormViewer_getLink_14 a yawl:Method ;
+    rdfs:label "getLink" ;
+    yawl:returnType "Link" ;
+    yawl:signature "Link getLink()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: rssFormViewer.setLink
+yawl:rssFormViewer_setLink_15 a yawl:Method ;
+    rdfs:label "setLink" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLink(Link l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: rssFormViewer.getBody
+yawl:rssFormViewer_getBody_16 a yawl:Method ;
+    rdfs:label "getBody" ;
+    yawl:returnType "Body" ;
+    yawl:signature "Body getBody()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: rssFormViewer.setBody
+yawl:rssFormViewer_setBody_17 a yawl:Method ;
+    rdfs:label "setBody" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBody(Body b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: rssFormViewer.getForm
+yawl:rssFormViewer_getForm_18 a yawl:Method ;
+    rdfs:label "getForm" ;
+    yawl:returnType "Form" ;
+    yawl:signature "Form getForm()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: rssFormViewer.setForm
+yawl:rssFormViewer_setForm_19 a yawl:Method ;
+    rdfs:label "setForm" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setForm(Form f)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: rssFormViewer.getBtnClose
+yawl:rssFormViewer_getBtnClose_20 a yawl:Method ;
+    rdfs:label "getBtnClose" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnClose()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: rssFormViewer.setBtnClose
+yawl:rssFormViewer_setBtnClose_21 a yawl:Method ;
+    rdfs:label "setBtnClose" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnClose(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: rssFormViewer.getStaticText1
+yawl:rssFormViewer_getStaticText1_22 a yawl:Method ;
+    rdfs:label "getStaticText1" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getStaticText1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: rssFormViewer.setStaticText1
+yawl:rssFormViewer_setStaticText1_23 a yawl:Method ;
+    rdfs:label "setStaticText1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStaticText1(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: rssFormViewer.getPnlContainer
+yawl:rssFormViewer_getPnlContainer_24 a yawl:Method ;
+    rdfs:label "getPnlContainer" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlContainer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: rssFormViewer.setPnlContainer
+yawl:rssFormViewer_setPnlContainer_25 a yawl:Method ;
+    rdfs:label "setPnlContainer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlContainer(PanelLayout pnl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: rssFormViewer.prerender
+yawl:rssFormViewer_prerender_26 a yawl:Method ;
+    rdfs:label "prerender" ;
+    yawl:returnType "void" ;
+    yawl:signature "void prerender()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: rssFormViewer.btnClose_action
+yawl:rssFormViewer_btnClose_action_27 a yawl:Method ;
+    rdfs:label "btnClose_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnClose_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: rssFormViewer.successful
+yawl:rssFormViewer_successful_28 a yawl:Method ;
+    rdfs:label "successful" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean successful(String msg)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: rssFormViewer.validateCredentials
+yawl:rssFormViewer_validateCredentials_29 a yawl:Method ;
+    rdfs:label "validateCredentials" ;
+    yawl:returnType "String" ;
+    yawl:signature "String validateCredentials(String userid, String password)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: rssFormViewer.initSession
+yawl:rssFormViewer_initSession_30 a yawl:Method ;
+    rdfs:label "initSession" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initSession(Participant p, String userid, String handle)" ;
+    rdfs:comment """Initialise session data in the session bean @param userid the userid @param handle the session handle supplied by the service""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: rssFormViewer.startAndShow
+yawl:rssFormViewer_startAndShow_31 a yawl:Method ;
+    rdfs:label "startAndShow" ;
+    yawl:returnType "void" ;
+    yawl:signature "void startAndShow(String userid, WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: rssFormViewer.checkParticipantHasQueuedItem
+yawl:rssFormViewer_checkParticipantHasQueuedItem_32 a yawl:Method ;
+    rdfs:label "checkParticipantHasQueuedItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkParticipantHasQueuedItem(Participant p, WorkItemRecord wir, int qType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: rssFormViewer.getRequest
+yawl:rssFormViewer_getRequest_33 a yawl:Method ;
+    rdfs:label "getRequest" ;
+    yawl:returnType "HttpServletRequest" ;
+    yawl:signature "HttpServletRequest getRequest()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: rssFormViewer.showMessage
+yawl:rssFormViewer_showMessage_34 a yawl:Method ;
+    rdfs:label "showMessage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showMessage(String msg)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: rssFormViewer.showForm
+yawl:rssFormViewer_showForm_35 a yawl:Method ;
+    rdfs:label "showForm" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showForm(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: rssFormViewer.redirect
+yawl:rssFormViewer_redirect_36 a yawl:Method ;
+    rdfs:label "redirect" ;
+    yawl:returnType "void" ;
+    yawl:signature "void redirect(String uri)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: rssFormViewer.unwrap
+yawl:rssFormViewer_unwrap_37 a yawl:Method ;
+    rdfs:label "unwrap" ;
+    yawl:returnType "String" ;
+    yawl:signature "String unwrap(String xml)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: rssFormViewer.logout
+yawl:rssFormViewer_logout_38 a yawl:Method ;
+    rdfs:label "logout" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logout()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:rssFormViewer___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:rssFormViewer_page a yawl:Field ;
+    rdfs:label "page" .
+
+yawl:rssFormViewer_html a yawl:Field ;
+    rdfs:label "html" .
+
+yawl:rssFormViewer_head a yawl:Field ;
+    rdfs:label "head" .
+
+yawl:rssFormViewer_link a yawl:Field ;
+    rdfs:label "link" .
+
+yawl:rssFormViewer_body a yawl:Field ;
+    rdfs:label "body" .
+
+yawl:rssFormViewer_form a yawl:Field ;
+    rdfs:label "form" .
+
+yawl:rssFormViewer_btnClose a yawl:Field ;
+    rdfs:label "btnClose" .
+
+yawl:rssFormViewer_staticText1 a yawl:Field ;
+    rdfs:label "staticText1" .
+
+yawl:rssFormViewer_pnlContainer a yawl:Field ;
+    rdfs:label "pnlContainer" .
+
+yawl:rssFormViewer_rm a yawl:Field ;
+    rdfs:label "rm" .
+
+yawl:rssFormViewer_sb a yawl:Field ;
+    rdfs:label "sb" .
+
+yawl:rssFormViewer_msgPanel a yawl:Field ;
+    rdfs:label "msgPanel" .
+
+yawl:rssFormViewer_success a yawl:Field ;
+    rdfs:label "success" .
+
+
+

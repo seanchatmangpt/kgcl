@@ -1,0 +1,122 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.dynform.DynFormFieldUnion
+yawl:DynFormFieldUnion a yawl:Class ;
+    rdfs:label "DynFormFieldUnion" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf_dynform ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/dynform/DynFormFieldUnion.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 23/08/2008""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DynFormFieldUnion_parse_1 ;
+    yawl:hasMethod yawl:DynFormFieldUnion_parseMemberList_2 ;
+    yawl:hasMethod yawl:DynFormFieldUnion_combineEnumeratedValues_3 ;
+    yawl:hasMethod yawl:DynFormFieldUnion_hasEnumeration_4 ;
+    yawl:hasMethod yawl:DynFormFieldUnion_getEnumeration_5 ;
+    yawl:hasMethod yawl:DynFormFieldUnion_getBaseType_6 ;
+    yawl:hasMethod yawl:DynFormFieldUnion_getOwner_7 ;
+    yawl:hasMethod yawl:DynFormFieldUnion_setOwner_8 ;
+    yawl:hasMethod yawl:DynFormFieldUnion_getBaseElement_9 ;
+    yawl:hasField yawl:DynFormFieldUnion__baseElement ;
+    yawl:hasField yawl:DynFormFieldUnion__restrictionList ;
+    yawl:hasField yawl:DynFormFieldUnion__enumeration ;
+    yawl:hasField yawl:DynFormFieldUnion__owner ;
+    yawl:hasField yawl:DynFormFieldUnion__memberTypes ;
+    .
+
+
+# Method: DynFormFieldUnion.parse
+yawl:DynFormFieldUnion_parse_1 a yawl:Method ;
+    rdfs:label "parse" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parse(Element union, Namespace ns)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldUnion.parseMemberList
+yawl:DynFormFieldUnion_parseMemberList_2 a yawl:Method ;
+    rdfs:label "parseMemberList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List parseMemberList(String memberList)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldUnion.combineEnumeratedValues
+yawl:DynFormFieldUnion_combineEnumeratedValues_3 a yawl:Method ;
+    rdfs:label "combineEnumeratedValues" ;
+    yawl:returnType "void" ;
+    yawl:signature "void combineEnumeratedValues()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldUnion.hasEnumeration
+yawl:DynFormFieldUnion_hasEnumeration_4 a yawl:Method ;
+    rdfs:label "hasEnumeration" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasEnumeration()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldUnion.getEnumeration
+yawl:DynFormFieldUnion_getEnumeration_5 a yawl:Method ;
+    rdfs:label "getEnumeration" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getEnumeration()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldUnion.getBaseType
+yawl:DynFormFieldUnion_getBaseType_6 a yawl:Method ;
+    rdfs:label "getBaseType" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBaseType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldUnion.getOwner
+yawl:DynFormFieldUnion_getOwner_7 a yawl:Method ;
+    rdfs:label "getOwner" ;
+    yawl:returnType "DynFormField" ;
+    yawl:signature "DynFormField getOwner()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldUnion.setOwner
+yawl:DynFormFieldUnion_setOwner_8 a yawl:Method ;
+    rdfs:label "setOwner" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOwner(DynFormField owner)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldUnion.getBaseElement
+yawl:DynFormFieldUnion_getBaseElement_9 a yawl:Method ;
+    rdfs:label "getBaseElement" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBaseElement()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:DynFormFieldUnion__baseElement a yawl:Field ;
+    rdfs:label "_baseElement" .
+
+yawl:DynFormFieldUnion__restrictionList a yawl:Field ;
+    rdfs:label "_restrictionList" .
+
+yawl:DynFormFieldUnion__enumeration a yawl:Field ;
+    rdfs:label "_enumeration" .
+
+yawl:DynFormFieldUnion__owner a yawl:Field ;
+    rdfs:label "_owner" .
+
+yawl:DynFormFieldUnion__memberTypes a yawl:Field ;
+    rdfs:label "_memberTypes" .
+
+
+

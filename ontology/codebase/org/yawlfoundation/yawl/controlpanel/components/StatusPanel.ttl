@@ -1,0 +1,118 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.components.StatusPanel
+yawl:StatusPanel a yawl:Class ;
+    rdfs:label "StatusPanel" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_components ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/components/StatusPanel.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 4/08/2014""" ;
+    yawl:extends yawl:JPanel ;
+    yawl:implements yawl:EngineStatusListener ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:StatusPanel_statusChanged_1 ;
+    yawl:hasMethod yawl:StatusPanel_setStatus_2 ;
+    yawl:hasMethod yawl:StatusPanel_setColors_3 ;
+    yawl:hasMethod yawl:StatusPanel_setText_4 ;
+    yawl:hasMethod yawl:StatusPanel_buildUI_5 ;
+    yawl:hasMethod yawl:StatusPanel_buildStatusLabel_6 ;
+    yawl:hasMethod yawl:StatusPanel_enableWaitIcon_7 ;
+    yawl:hasField yawl:StatusPanel__statusLabel ;
+    yawl:hasField yawl:StatusPanel_STOPPED ;
+    yawl:hasField yawl:StatusPanel_WAITING ;
+    yawl:hasField yawl:StatusPanel_RUNNING ;
+    yawl:hasField yawl:StatusPanel_STOPPED_TEXT ;
+    yawl:hasField yawl:StatusPanel_STARTING_TEXT ;
+    yawl:hasField yawl:StatusPanel_STOPPING_TEXT ;
+    yawl:hasField yawl:StatusPanel_RUNNING_TEXT ;
+    .
+
+
+# Method: StatusPanel.statusChanged
+yawl:StatusPanel_statusChanged_1 a yawl:Method ;
+    rdfs:label "statusChanged" ;
+    yawl:returnType "void" ;
+    yawl:signature "void statusChanged(EngineStatus status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StatusPanel.setStatus
+yawl:StatusPanel_setStatus_2 a yawl:Method ;
+    rdfs:label "setStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStatus(Color backColor, String text, boolean showWaiting)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: StatusPanel.setColors
+yawl:StatusPanel_setColors_3 a yawl:Method ;
+    rdfs:label "setColors" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColors(Color backColor)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: StatusPanel.setText
+yawl:StatusPanel_setText_4 a yawl:Method ;
+    rdfs:label "setText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setText(String text)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: StatusPanel.buildUI
+yawl:StatusPanel_buildUI_5 a yawl:Method ;
+    rdfs:label "buildUI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void buildUI()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: StatusPanel.buildStatusLabel
+yawl:StatusPanel_buildStatusLabel_6 a yawl:Method ;
+    rdfs:label "buildStatusLabel" ;
+    yawl:returnType "JLabel" ;
+    yawl:signature "JLabel buildStatusLabel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: StatusPanel.enableWaitIcon
+yawl:StatusPanel_enableWaitIcon_7 a yawl:Method ;
+    rdfs:label "enableWaitIcon" ;
+    yawl:returnType "void" ;
+    yawl:signature "void enableWaitIcon(boolean show)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:StatusPanel__statusLabel a yawl:Field ;
+    rdfs:label "_statusLabel" .
+
+yawl:StatusPanel_STOPPED a yawl:Field ;
+    rdfs:label "STOPPED" .
+
+yawl:StatusPanel_WAITING a yawl:Field ;
+    rdfs:label "WAITING" .
+
+yawl:StatusPanel_RUNNING a yawl:Field ;
+    rdfs:label "RUNNING" .
+
+yawl:StatusPanel_STOPPED_TEXT a yawl:Field ;
+    rdfs:label "STOPPED_TEXT" .
+
+yawl:StatusPanel_STARTING_TEXT a yawl:Field ;
+    rdfs:label "STARTING_TEXT" .
+
+yawl:StatusPanel_STOPPING_TEXT a yawl:Field ;
+    rdfs:label "STOPPING_TEXT" .
+
+yawl:StatusPanel_RUNNING_TEXT a yawl:Field ;
+    rdfs:label "RUNNING_TEXT" .
+
+
+

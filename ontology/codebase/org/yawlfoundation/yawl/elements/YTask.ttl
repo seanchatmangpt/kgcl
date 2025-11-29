@@ -1,0 +1,1356 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.elements.YTask
+yawl:YTask a yawl:Class ;
+    rdfs:label "YTask" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_elements ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/elements/YTask.java"^^xsd:string ;
+    rdfs:comment """A superclass of any type of task in the YAWL language. @author Lachlan Aldred @author Michael Adams (v2.0 and later)""" ;
+    yawl:extends yawl:YExternalNetElement ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YTask_setI_1 ;
+    yawl:hasMethod yawl:YTask_getResetNet_2 ;
+    yawl:hasMethod yawl:YTask_setResetNet_3 ;
+    yawl:hasMethod yawl:YTask_getSplitType_4 ;
+    yawl:hasMethod yawl:YTask_getJoinType_5 ;
+    yawl:hasMethod yawl:YTask_setSplitType_6 ;
+    yawl:hasMethod yawl:YTask_setJoinType_7 ;
+    yawl:hasMethod yawl:YTask_isMultiInstance_8 ;
+    yawl:hasMethod yawl:YTask_setGroupedMultiInstanceOutputData_9 ;
+    yawl:hasMethod yawl:YTask_getMIOutputData_10 ;
+    yawl:hasMethod yawl:YTask_getPredicate_11 ;
+    yawl:hasMethod yawl:YTask_getMultiInstanceAttributes_12 ;
+    yawl:hasMethod yawl:YTask_setUpMultipleInstanceAttributes_13 ;
+    yawl:hasMethod yawl:YTask_setMultiInstanceInputDataMappings_14 ;
+    yawl:hasMethod yawl:YTask_setMultiInstanceOutputDataMappings_15 ;
+    yawl:hasMethod yawl:YTask_getParamNamesForTaskCompletion_16 ;
+    yawl:hasMethod yawl:YTask_checkXQuery_17 ;
+    yawl:hasMethod yawl:YTask_checkExternalMapping_18 ;
+    yawl:hasMethod yawl:YTask_getParamNamesForTaskEnablement_19 ;
+    yawl:hasMethod yawl:YTask_getParamNamesForTaskStarting_20 ;
+    yawl:hasMethod yawl:YTask_getQueriesForTaskCompletion_21 ;
+    yawl:hasMethod yawl:YTask_getDataMappingsForTaskStarting_22 ;
+    yawl:hasMethod yawl:YTask_getDataMappingsForTaskCompletion_23 ;
+    yawl:hasMethod yawl:YTask_getRemoveSet_24 ;
+    yawl:hasMethod yawl:YTask_addRemovesTokensFrom_25 ;
+    yawl:hasMethod yawl:YTask_removeFromRemoveSet_26 ;
+    yawl:hasMethod yawl:YTask_t_fire_27 ;
+    yawl:hasMethod yawl:YTask_prepareDataDocsForTaskOutput_28 ;
+    yawl:hasMethod yawl:YTask_t_add_29 ;
+    yawl:hasMethod yawl:YTask_t_addEnabled_30 ;
+    yawl:hasMethod yawl:YTask_determineHowManyInstancesToCreate_31 ;
+    yawl:hasMethod yawl:YTask_sortMultiInstanceStartingData_32 ;
+    yawl:hasMethod yawl:YTask_splitStartingDataForMultiInstances_33 ;
+    yawl:hasMethod yawl:YTask_generateBeginReport1_34 ;
+    yawl:hasMethod yawl:YTask_getPreSplittingMIQuery_35 ;
+    yawl:hasMethod yawl:YTask_t_isExitEnabled_36 ;
+    yawl:hasMethod yawl:YTask_t_complete_37 ;
+    yawl:hasMethod yawl:YTask_addDefaultValuesAsRequired_38 ;
+    yawl:hasMethod yawl:YTask_handleEmptyComplexTypeFlagOutput_39 ;
+    yawl:hasMethod yawl:YTask_getElementForXQuery_40 ;
+    yawl:hasMethod yawl:YTask_validateOutputs_41 ;
+    yawl:hasMethod yawl:YTask_updateExternalFromTaskCompletion_42 ;
+    yawl:hasMethod yawl:YTask_generateCompletingReport2_43 ;
+    yawl:hasMethod yawl:YTask_generateCompletingReport1_44 ;
+    yawl:hasMethod yawl:YTask_getMIOutputAssignmentVar_45 ;
+    yawl:hasMethod yawl:YTask_getPreJoiningMIQuery_46 ;
+    yawl:hasMethod yawl:YTask_t_start_47 ;
+    yawl:hasMethod yawl:YTask_getI_48 ;
+    yawl:hasMethod yawl:YTask_t_exit_49 ;
+    yawl:hasMethod yawl:YTask_performDataAssignmentsAccordingToOutputExpressions_50 ;
+    yawl:hasMethod yawl:YTask_generateExitReports3_51 ;
+    yawl:hasMethod yawl:YTask_generateExitReports2_52 ;
+    yawl:hasMethod yawl:YTask_generateExitReport1_53 ;
+    yawl:hasMethod yawl:YTask_getLocalVariablesForTaskCompletion_54 ;
+    yawl:hasMethod yawl:YTask_doXORSplit_55 ;
+    yawl:hasMethod yawl:YTask_doOrSplit_56 ;
+    yawl:hasMethod yawl:YTask_doAndSplit_57 ;
+    yawl:hasMethod yawl:YTask_evaluateSplitQuery_58 ;
+    yawl:hasMethod yawl:YTask_isTimerPredicate_59 ;
+    yawl:hasMethod yawl:YTask_evaluateTimerPredicate_60 ;
+    yawl:hasMethod yawl:YTask_getNetRunnerRepository_61 ;
+    yawl:hasMethod yawl:YTask_getWorkItemRepository_62 ;
+    yawl:hasMethod yawl:YTask_t_enabled_63 ;
+    yawl:hasMethod yawl:YTask_clone_64 ;
+    yawl:hasMethod yawl:YTask_startOne_65 ;
+    yawl:hasMethod yawl:YTask_createFiredIdentifier_66 ;
+    yawl:hasMethod yawl:YTask_prepareDataForInstanceStarting_67 ;
+    yawl:hasMethod yawl:YTask_getStartingDataSnapshot_68 ;
+    yawl:hasMethod yawl:YTask_performDataExtraction_69 ;
+    yawl:hasMethod yawl:YTask_isPopulatedEmptyTypeFlag_70 ;
+    yawl:hasMethod yawl:YTask_performExternalDataExtraction_71 ;
+    yawl:hasMethod yawl:YTask_performSchemaValidationOverExtractionResult_72 ;
+    yawl:hasMethod yawl:YTask_produceDataRootElement_73 ;
+    yawl:hasMethod yawl:YTask_evaluateTreeQuery_74 ;
+    yawl:hasMethod yawl:YTask_evaluateListQuery_75 ;
+    yawl:hasMethod yawl:YTask_getData_76 ;
+    yawl:hasMethod yawl:YTask_t_isBusy_77 ;
+    yawl:hasMethod yawl:YTask_cancel_78 ;
+    yawl:hasMethod yawl:YTask_rollbackFired_79 ;
+    yawl:hasMethod yawl:YTask_purgeLocations_80 ;
+    yawl:hasMethod yawl:YTask_getMIActive_81 ;
+    yawl:hasMethod yawl:YTask_getMIEntered_82 ;
+    yawl:hasMethod yawl:YTask_getMIComplete_83 ;
+    yawl:hasMethod yawl:YTask_getMIExecuting_84 ;
+    yawl:hasMethod yawl:YTask_getAllInternalConditions_85 ;
+    yawl:hasMethod yawl:YTask_setDataMappingsForTaskStarting_86 ;
+    yawl:hasMethod yawl:YTask_setDataMappingsForTaskCompletion_87 ;
+    yawl:hasMethod yawl:YTask_toXML_88 ;
+    yawl:hasMethod yawl:YTask_decoratorTypeToString_89 ;
+    yawl:hasMethod yawl:YTask_writeExpressionMapping_90 ;
+    yawl:hasMethod yawl:YTask_getDecompositionPrototype_91 ;
+    yawl:hasMethod yawl:YTask_setDecompositionPrototype_92 ;
+    yawl:hasMethod yawl:YTask_setDataBindingForEnablementParam_93 ;
+    yawl:hasMethod yawl:YTask_getDataBindingForEnablementParam_94 ;
+    yawl:hasMethod yawl:YTask_setDataBindingForInputParam_95 ;
+    yawl:hasMethod yawl:YTask_getDataBindingForInputParam_96 ;
+    yawl:hasMethod yawl:YTask_setDataBindingForOutputExpression_97 ;
+    yawl:hasMethod yawl:YTask_getDataBindingForOutputParam_98 ;
+    yawl:hasMethod yawl:YTask_getInformation_99 ;
+    yawl:hasMethod yawl:YTask_getSpecVersion_100 ;
+    yawl:hasMethod yawl:YTask_get_inputLogDataItems_101 ;
+    yawl:hasMethod yawl:YTask_set_inputLogDataItems_102 ;
+    yawl:hasMethod yawl:YTask_get_outputLogDataItems_103 ;
+    yawl:hasMethod yawl:YTask_set_outputLogDataItems_104 ;
+    yawl:hasMethod yawl:YTask_verify_105 ;
+    yawl:hasMethod yawl:YTask_checkParameterMappings_106 ;
+    yawl:hasMethod yawl:YTask_checkOutputParameterMappings_107 ;
+    yawl:hasMethod yawl:YTask_checkForDuplicateParameterMappings_108 ;
+    yawl:hasMethod yawl:YTask_checkOutputParamsPreBeta4_109 ;
+    yawl:hasMethod yawl:YTask_checkInputParameterMappings_110 ;
+    yawl:hasMethod yawl:YTask_skipOutboundSchemaChecks_111 ;
+    yawl:hasMethod yawl:YTask_setSkipOutboundSchemaChecks_112 ;
+    yawl:hasMethod yawl:YTask_getResourcingXML_113 ;
+    yawl:hasMethod yawl:YTask_setResourcingXML_114 ;
+    yawl:hasMethod yawl:YTask_getResourcingSpecs_115 ;
+    yawl:hasMethod yawl:YTask_setResourcingSpecs_116 ;
+    yawl:hasMethod yawl:YTask_setCustomFormURI_117 ;
+    yawl:hasMethod yawl:YTask_getCustomFormURL_118 ;
+    yawl:hasMethod yawl:YTask_setTimerParameters_119 ;
+    yawl:hasMethod yawl:YTask_getTimerVariable_120 ;
+    yawl:hasMethod yawl:YTask_getTimerParameters_121 ;
+    yawl:hasMethod yawl:YTask_getConfiguration_122 ;
+    yawl:hasMethod yawl:YTask_setConfiguration_123 ;
+    yawl:hasMethod yawl:YTask_getDefaultConfiguration_124 ;
+    yawl:hasMethod yawl:YTask_setDefaultConfiguration_125 ;
+    yawl:hasMethod yawl:YTask_getConfigurationElement_126 ;
+    yawl:hasMethod yawl:YTask_setConfigurationElement_127 ;
+    yawl:hasMethod yawl:YTask_getDefaultConfigurationElement_128 ;
+    yawl:hasMethod yawl:YTask_setDefaultConfigurationElement_129 ;
+    yawl:hasField yawl:YTask__random ;
+    yawl:hasField yawl:YTask__AND ;
+    yawl:hasField yawl:YTask__OR ;
+    yawl:hasField yawl:YTask__XOR ;
+    yawl:hasField yawl:YTask__i ;
+    yawl:hasField yawl:YTask__mi_active ;
+    yawl:hasField yawl:YTask__mi_entered ;
+    yawl:hasField yawl:YTask__mi_complete ;
+    yawl:hasField yawl:YTask__mi_executing ;
+    yawl:hasField yawl:YTask__splitType ;
+    yawl:hasField yawl:YTask__joinType ;
+    yawl:hasField yawl:YTask__multiInstAttr ;
+    yawl:hasField yawl:YTask__removeSet ;
+    yawl:hasField yawl:YTask__dataMappingsForTaskStarting ;
+    yawl:hasField yawl:YTask__dataMappingsForTaskCompletion ;
+    yawl:hasField yawl:YTask__dataMappingsForTaskEnablement ;
+    yawl:hasField yawl:YTask__decompositionPrototype ;
+    yawl:hasField yawl:YTask__caseToDataMap ;
+    yawl:hasField yawl:YTask__multiInstanceSpecificParamsIterator ;
+    yawl:hasField yawl:YTask__localVariableNameToReplaceableOutputData ;
+    yawl:hasField yawl:YTask__groupedMultiInstanceOutputData ;
+    yawl:hasField yawl:YTask__resetNet ;
+    yawl:hasField yawl:YTask_configuration ;
+    yawl:hasField yawl:YTask_defaultConfiguration ;
+    yawl:hasField yawl:YTask_configurationElement ;
+    yawl:hasField yawl:YTask_defaultConfigurationElement ;
+    yawl:hasField yawl:YTask__resourcingXML ;
+    yawl:hasField yawl:YTask__resourcingSpec ;
+    yawl:hasField yawl:YTask__timerParams ;
+    yawl:hasField yawl:YTask__timerVariable ;
+    yawl:hasField yawl:YTask__customFormURL ;
+    yawl:hasField yawl:YTask__inputLogDataItems ;
+    yawl:hasField yawl:YTask__outputLogDataItems ;
+    yawl:hasField yawl:YTask_logger ;
+    yawl:hasField yawl:YTask_STANDARD_TASK_ATTRIBUTES ;
+    yawl:hasField yawl:YTask_PERFORM_OUTBOUND_SCHEMA_VALIDATION ;
+    yawl:hasField yawl:YTask__skipOutboundSchemaChecks ;
+    .
+
+
+# Method: YTask.setI
+yawl:YTask_setI_1 a yawl:Method ;
+    rdfs:label "setI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setI(YIdentifier i)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getResetNet
+yawl:YTask_getResetNet_2 a yawl:Method ;
+    rdfs:label "getResetNet" ;
+    yawl:returnType "E2WFOJNet" ;
+    yawl:signature "E2WFOJNet getResetNet()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.setResetNet
+yawl:YTask_setResetNet_3 a yawl:Method ;
+    rdfs:label "setResetNet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setResetNet(E2WFOJNet net)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getSplitType
+yawl:YTask_getSplitType_4 a yawl:Method ;
+    rdfs:label "getSplitType" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getSplitType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getJoinType
+yawl:YTask_getJoinType_5 a yawl:Method ;
+    rdfs:label "getJoinType" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getJoinType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.setSplitType
+yawl:YTask_setSplitType_6 a yawl:Method ;
+    rdfs:label "setSplitType" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSplitType(int splitType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.setJoinType
+yawl:YTask_setJoinType_7 a yawl:Method ;
+    rdfs:label "setJoinType" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setJoinType(int joinType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.isMultiInstance
+yawl:YTask_isMultiInstance_8 a yawl:Method ;
+    rdfs:label "isMultiInstance" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isMultiInstance()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.setGroupedMultiInstanceOutputData
+yawl:YTask_setGroupedMultiInstanceOutputData_9 a yawl:Method ;
+    rdfs:label "setGroupedMultiInstanceOutputData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setGroupedMultiInstanceOutputData(GroupedMIOutputData data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getMIOutputData
+yawl:YTask_getMIOutputData_10 a yawl:Method ;
+    rdfs:label "getMIOutputData" ;
+    yawl:returnType "GroupedMIOutputData" ;
+    yawl:signature "GroupedMIOutputData getMIOutputData()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getPredicate
+yawl:YTask_getPredicate_11 a yawl:Method ;
+    rdfs:label "getPredicate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPredicate(YExternalNetElement netElement)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getMultiInstanceAttributes
+yawl:YTask_getMultiInstanceAttributes_12 a yawl:Method ;
+    rdfs:label "getMultiInstanceAttributes" ;
+    yawl:returnType "YMultiInstanceAttributes" ;
+    yawl:signature "YMultiInstanceAttributes getMultiInstanceAttributes()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.setUpMultipleInstanceAttributes
+yawl:YTask_setUpMultipleInstanceAttributes_13 a yawl:Method ;
+    rdfs:label "setUpMultipleInstanceAttributes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUpMultipleInstanceAttributes(String minInstanceQuery, String maxInstanceQuery, String thresholdQuery, String creationMode)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.setMultiInstanceInputDataMappings
+yawl:YTask_setMultiInstanceInputDataMappings_14 a yawl:Method ;
+    rdfs:label "setMultiInstanceInputDataMappings" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMultiInstanceInputDataMappings(String remoteVariableName, String inputProcessingExpression)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.setMultiInstanceOutputDataMappings
+yawl:YTask_setMultiInstanceOutputDataMappings_15 a yawl:Method ;
+    rdfs:label "setMultiInstanceOutputDataMappings" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMultiInstanceOutputDataMappings(String remoteOutputQuery, String aggregationQuery)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getParamNamesForTaskCompletion
+yawl:YTask_getParamNamesForTaskCompletion_16 a yawl:Method ;
+    rdfs:label "getParamNamesForTaskCompletion" ;
+    yawl:returnType "Collection" ;
+    yawl:signature "Collection getParamNamesForTaskCompletion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.checkXQuery
+yawl:YTask_checkXQuery_17 a yawl:Method ;
+    rdfs:label "checkXQuery" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkXQuery(String xQuery, String param, YVerificationHandler handler)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YTask.checkExternalMapping
+yawl:YTask_checkExternalMapping_18 a yawl:Method ;
+    rdfs:label "checkExternalMapping" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkExternalMapping(String query, YVerificationHandler handler)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YTask.getParamNamesForTaskEnablement
+yawl:YTask_getParamNamesForTaskEnablement_19 a yawl:Method ;
+    rdfs:label "getParamNamesForTaskEnablement" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getParamNamesForTaskEnablement()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YTask.getParamNamesForTaskStarting
+yawl:YTask_getParamNamesForTaskStarting_20 a yawl:Method ;
+    rdfs:label "getParamNamesForTaskStarting" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getParamNamesForTaskStarting()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YTask.getQueriesForTaskCompletion
+yawl:YTask_getQueriesForTaskCompletion_21 a yawl:Method ;
+    rdfs:label "getQueriesForTaskCompletion" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getQueriesForTaskCompletion()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.getDataMappingsForTaskStarting
+yawl:YTask_getDataMappingsForTaskStarting_22 a yawl:Method ;
+    rdfs:label "getDataMappingsForTaskStarting" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getDataMappingsForTaskStarting()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getDataMappingsForTaskCompletion
+yawl:YTask_getDataMappingsForTaskCompletion_23 a yawl:Method ;
+    rdfs:label "getDataMappingsForTaskCompletion" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getDataMappingsForTaskCompletion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getRemoveSet
+yawl:YTask_getRemoveSet_24 a yawl:Method ;
+    rdfs:label "getRemoveSet" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getRemoveSet()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.addRemovesTokensFrom
+yawl:YTask_addRemovesTokensFrom_25 a yawl:Method ;
+    rdfs:label "addRemovesTokensFrom" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addRemovesTokensFrom(List removeSet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.removeFromRemoveSet
+yawl:YTask_removeFromRemoveSet_26 a yawl:Method ;
+    rdfs:label "removeFromRemoveSet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeFromRemoveSet(YExternalNetElement e)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.t_fire
+yawl:YTask_t_fire_27 a yawl:Method ;
+    rdfs:label "t_fire" ;
+    yawl:returnType "List" ;
+    yawl:signature "List t_fire(YPersistenceManager pmgr)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.prepareDataDocsForTaskOutput
+yawl:YTask_prepareDataDocsForTaskOutput_28 a yawl:Method ;
+    rdfs:label "prepareDataDocsForTaskOutput" ;
+    yawl:returnType "void" ;
+    yawl:signature "void prepareDataDocsForTaskOutput(YPersistenceManager pmgr)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.t_add
+yawl:YTask_t_add_29 a yawl:Method ;
+    rdfs:label "t_add" ;
+    yawl:returnType "YIdentifier" ;
+    yawl:signature "YIdentifier t_add(YPersistenceManager pmgr, YIdentifier siblingWithPermission, Element newInstanceData)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.t_addEnabled
+yawl:YTask_t_addEnabled_30 a yawl:Method ;
+    rdfs:label "t_addEnabled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean t_addEnabled(YIdentifier identifier)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.determineHowManyInstancesToCreate
+yawl:YTask_determineHowManyInstancesToCreate_31 a yawl:Method ;
+    rdfs:label "determineHowManyInstancesToCreate" ;
+    yawl:returnType "long" ;
+    yawl:signature "long determineHowManyInstancesToCreate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.sortMultiInstanceStartingData
+yawl:YTask_sortMultiInstanceStartingData_32 a yawl:Method ;
+    rdfs:label "sortMultiInstanceStartingData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sortMultiInstanceStartingData()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.splitStartingDataForMultiInstances
+yawl:YTask_splitStartingDataForMultiInstances_33 a yawl:Method ;
+    rdfs:label "splitStartingDataForMultiInstances" ;
+    yawl:returnType "List" ;
+    yawl:signature "List splitStartingDataForMultiInstances()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.generateBeginReport1
+yawl:YTask_generateBeginReport1_34 a yawl:Method ;
+    rdfs:label "generateBeginReport1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void generateBeginReport1()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.getPreSplittingMIQuery
+yawl:YTask_getPreSplittingMIQuery_35 a yawl:Method ;
+    rdfs:label "getPreSplittingMIQuery" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPreSplittingMIQuery()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.t_isExitEnabled
+yawl:YTask_t_isExitEnabled_36 a yawl:Method ;
+    rdfs:label "t_isExitEnabled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean t_isExitEnabled()" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.t_complete
+yawl:YTask_t_complete_37 a yawl:Method ;
+    rdfs:label "t_complete" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean t_complete(YPersistenceManager pmgr, YIdentifier childID, Document decompositionOutputData)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.addDefaultValuesAsRequired
+yawl:YTask_addDefaultValuesAsRequired_38 a yawl:Method ;
+    rdfs:label "addDefaultValuesAsRequired" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addDefaultValuesAsRequired(Document dataDoc)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.handleEmptyComplexTypeFlagOutput
+yawl:YTask_handleEmptyComplexTypeFlagOutput_39 a yawl:Method ;
+    rdfs:label "handleEmptyComplexTypeFlagOutput" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleEmptyComplexTypeFlagOutput(Document outputDataDoc, Element queryResult, String query, String localVarName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.getElementForXQuery
+yawl:YTask_getElementForXQuery_40 a yawl:Method ;
+    rdfs:label "getElementForXQuery" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getElementForXQuery(Document outputDataDoc, String query)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.validateOutputs
+yawl:YTask_validateOutputs_41 a yawl:Method ;
+    rdfs:label "validateOutputs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void validateOutputs(YDataValidator validator, Document decompositionOutputData)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.updateExternalFromTaskCompletion
+yawl:YTask_updateExternalFromTaskCompletion_42 a yawl:Method ;
+    rdfs:label "updateExternalFromTaskCompletion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateExternalFromTaskCompletion(ExternalDataGateway gateway, String query, Document outputData)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.generateCompletingReport2
+yawl:YTask_generateCompletingReport2_43 a yawl:Method ;
+    rdfs:label "generateCompletingReport2" ;
+    yawl:returnType "void" ;
+    yawl:signature "void generateCompletingReport2(Element resultElem, String forNetVar, String query, Document data)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YTask.generateCompletingReport1
+yawl:YTask_generateCompletingReport1_44 a yawl:Method ;
+    rdfs:label "generateCompletingReport1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void generateCompletingReport1(String query, Document rawDecompositionData, Element queryResultElement)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.getMIOutputAssignmentVar
+yawl:YTask_getMIOutputAssignmentVar_45 a yawl:Method ;
+    rdfs:label "getMIOutputAssignmentVar" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMIOutputAssignmentVar(String query)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getPreJoiningMIQuery
+yawl:YTask_getPreJoiningMIQuery_46 a yawl:Method ;
+    rdfs:label "getPreJoiningMIQuery" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPreJoiningMIQuery()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.t_start
+yawl:YTask_t_start_47 a yawl:Method ;
+    rdfs:label "t_start" ;
+    yawl:returnType "void" ;
+    yawl:signature "void t_start(YPersistenceManager pmgr, YIdentifier child)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getI
+yawl:YTask_getI_48 a yawl:Method ;
+    rdfs:label "getI" ;
+    yawl:returnType "YIdentifier" ;
+    yawl:signature "YIdentifier getI()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.t_exit
+yawl:YTask_t_exit_49 a yawl:Method ;
+    rdfs:label "t_exit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void t_exit(YPersistenceManager pmgr)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.performDataAssignmentsAccordingToOutputExpressions
+yawl:YTask_performDataAssignmentsAccordingToOutputExpressions_50 a yawl:Method ;
+    rdfs:label "performDataAssignmentsAccordingToOutputExpressions" ;
+    yawl:returnType "void" ;
+    yawl:signature "void performDataAssignmentsAccordingToOutputExpressions(YPersistenceManager pmgr)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.generateExitReports3
+yawl:YTask_generateExitReports3_51 a yawl:Method ;
+    rdfs:label "generateExitReports3" ;
+    yawl:returnType "void" ;
+    yawl:signature "void generateExitReports3()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.generateExitReports2
+yawl:YTask_generateExitReports2_52 a yawl:Method ;
+    rdfs:label "generateExitReports2" ;
+    yawl:returnType "void" ;
+    yawl:signature "void generateExitReports2(String miJoiningQuery, Document groupedOutputData, Element result)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.generateExitReport1
+yawl:YTask_generateExitReport1_53 a yawl:Method ;
+    rdfs:label "generateExitReport1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void generateExitReport1()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.getLocalVariablesForTaskCompletion
+yawl:YTask_getLocalVariablesForTaskCompletion_54 a yawl:Method ;
+    rdfs:label "getLocalVariablesForTaskCompletion" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getLocalVariablesForTaskCompletion()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.doXORSplit
+yawl:YTask_doXORSplit_55 a yawl:Method ;
+    rdfs:label "doXORSplit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doXORSplit(YPersistenceManager pmgr, YIdentifier tokenToSend)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.doOrSplit
+yawl:YTask_doOrSplit_56 a yawl:Method ;
+    rdfs:label "doOrSplit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doOrSplit(YPersistenceManager pmgr, YIdentifier tokenToSend)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.doAndSplit
+yawl:YTask_doAndSplit_57 a yawl:Method ;
+    rdfs:label "doAndSplit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doAndSplit(YPersistenceManager pmgr, YIdentifier tokenToSend)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.evaluateSplitQuery
+yawl:YTask_evaluateSplitQuery_58 a yawl:Method ;
+    rdfs:label "evaluateSplitQuery" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean evaluateSplitQuery(String query, YIdentifier tokenToSend)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.isTimerPredicate
+yawl:YTask_isTimerPredicate_59 a yawl:Method ;
+    rdfs:label "isTimerPredicate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isTimerPredicate(String predicate)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.evaluateTimerPredicate
+yawl:YTask_evaluateTimerPredicate_60 a yawl:Method ;
+    rdfs:label "evaluateTimerPredicate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean evaluateTimerPredicate(String predicate, YIdentifier token)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.getNetRunnerRepository
+yawl:YTask_getNetRunnerRepository_61 a yawl:Method ;
+    rdfs:label "getNetRunnerRepository" ;
+    yawl:returnType "YNetRunnerRepository" ;
+    yawl:signature "YNetRunnerRepository getNetRunnerRepository()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YTask.getWorkItemRepository
+yawl:YTask_getWorkItemRepository_62 a yawl:Method ;
+    rdfs:label "getWorkItemRepository" ;
+    yawl:returnType "YWorkItemRepository" ;
+    yawl:signature "YWorkItemRepository getWorkItemRepository()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YTask.t_enabled
+yawl:YTask_t_enabled_63 a yawl:Method ;
+    rdfs:label "t_enabled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean t_enabled(YIdentifier id)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.clone
+yawl:YTask_clone_64 a yawl:Method ;
+    rdfs:label "clone" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object clone()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.startOne
+yawl:YTask_startOne_65 a yawl:Method ;
+    rdfs:label "startOne" ;
+    yawl:returnType "void" ;
+    yawl:signature "void startOne(YPersistenceManager pmgr, YIdentifier id)" ;
+    yawl:modifiers "protected" ;
+    yawl:modifiers "abstract" ;
+    .
+
+# Method: YTask.createFiredIdentifier
+yawl:YTask_createFiredIdentifier_66 a yawl:Method ;
+    rdfs:label "createFiredIdentifier" ;
+    yawl:returnType "YIdentifier" ;
+    yawl:signature "YIdentifier createFiredIdentifier(YPersistenceManager pmgr)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YTask.prepareDataForInstanceStarting
+yawl:YTask_prepareDataForInstanceStarting_67 a yawl:Method ;
+    rdfs:label "prepareDataForInstanceStarting" ;
+    yawl:returnType "void" ;
+    yawl:signature "void prepareDataForInstanceStarting(YIdentifier childInstanceID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getStartingDataSnapshot
+yawl:YTask_getStartingDataSnapshot_68 a yawl:Method ;
+    rdfs:label "getStartingDataSnapshot" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getStartingDataSnapshot()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.performDataExtraction
+yawl:YTask_performDataExtraction_69 a yawl:Method ;
+    rdfs:label "performDataExtraction" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element performDataExtraction(String expression, YParameter inputParam)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YTask.isPopulatedEmptyTypeFlag
+yawl:YTask_isPopulatedEmptyTypeFlag_70 a yawl:Method ;
+    rdfs:label "isPopulatedEmptyTypeFlag" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isPopulatedEmptyTypeFlag(String expression)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YTask.performExternalDataExtraction
+yawl:YTask_performExternalDataExtraction_71 a yawl:Method ;
+    rdfs:label "performExternalDataExtraction" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element performExternalDataExtraction(String expression, YParameter inputParam)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YTask.performSchemaValidationOverExtractionResult
+yawl:YTask_performSchemaValidationOverExtractionResult_72 a yawl:Method ;
+    rdfs:label "performSchemaValidationOverExtractionResult" ;
+    yawl:returnType "void" ;
+    yawl:signature "void performSchemaValidationOverExtractionResult(String expression, YParameter param, Element result)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YTask.produceDataRootElement
+yawl:YTask_produceDataRootElement_73 a yawl:Method ;
+    rdfs:label "produceDataRootElement" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element produceDataRootElement()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YTask.evaluateTreeQuery
+yawl:YTask_evaluateTreeQuery_74 a yawl:Method ;
+    rdfs:label "evaluateTreeQuery" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element evaluateTreeQuery(String query, Document document)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YTask.evaluateListQuery
+yawl:YTask_evaluateListQuery_75 a yawl:Method ;
+    rdfs:label "evaluateListQuery" ;
+    yawl:returnType "List" ;
+    yawl:signature "List evaluateListQuery(String query, Element element)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.getData
+yawl:YTask_getData_76 a yawl:Method ;
+    rdfs:label "getData" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getData(YIdentifier childInstanceID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.t_isBusy
+yawl:YTask_t_isBusy_77 a yawl:Method ;
+    rdfs:label "t_isBusy" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean t_isBusy()" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.cancel
+yawl:YTask_cancel_78 a yawl:Method ;
+    rdfs:label "cancel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancel(YPersistenceManager pmgr)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.rollbackFired
+yawl:YTask_rollbackFired_79 a yawl:Method ;
+    rdfs:label "rollbackFired" ;
+    yawl:returnType "void" ;
+    yawl:signature "void rollbackFired(YIdentifier childID, YPersistenceManager pmgr)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.purgeLocations
+yawl:YTask_purgeLocations_80 a yawl:Method ;
+    rdfs:label "purgeLocations" ;
+    yawl:returnType "void" ;
+    yawl:signature "void purgeLocations(YPersistenceManager pmgr)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.getMIActive
+yawl:YTask_getMIActive_81 a yawl:Method ;
+    rdfs:label "getMIActive" ;
+    yawl:returnType "YInternalCondition" ;
+    yawl:signature "YInternalCondition getMIActive()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getMIEntered
+yawl:YTask_getMIEntered_82 a yawl:Method ;
+    rdfs:label "getMIEntered" ;
+    yawl:returnType "YInternalCondition" ;
+    yawl:signature "YInternalCondition getMIEntered()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getMIComplete
+yawl:YTask_getMIComplete_83 a yawl:Method ;
+    rdfs:label "getMIComplete" ;
+    yawl:returnType "YInternalCondition" ;
+    yawl:signature "YInternalCondition getMIComplete()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getMIExecuting
+yawl:YTask_getMIExecuting_84 a yawl:Method ;
+    rdfs:label "getMIExecuting" ;
+    yawl:returnType "YInternalCondition" ;
+    yawl:signature "YInternalCondition getMIExecuting()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getAllInternalConditions
+yawl:YTask_getAllInternalConditions_85 a yawl:Method ;
+    rdfs:label "getAllInternalConditions" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAllInternalConditions()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.setDataMappingsForTaskStarting
+yawl:YTask_setDataMappingsForTaskStarting_86 a yawl:Method ;
+    rdfs:label "setDataMappingsForTaskStarting" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataMappingsForTaskStarting(Map map)" ;
+    rdfs:comment """The input must be map of [key=\"variableName\", value=\"expression\"] @param map""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.setDataMappingsForTaskCompletion
+yawl:YTask_setDataMappingsForTaskCompletion_87 a yawl:Method ;
+    rdfs:label "setDataMappingsForTaskCompletion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataMappingsForTaskCompletion(Map map)" ;
+    rdfs:comment """The input must be map of [key=\"expression\", value=\"variableName\"] @param map""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.toXML
+yawl:YTask_toXML_88 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.decoratorTypeToString
+yawl:YTask_decoratorTypeToString_89 a yawl:Method ;
+    rdfs:label "decoratorTypeToString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String decoratorTypeToString(int decType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.writeExpressionMapping
+yawl:YTask_writeExpressionMapping_90 a yawl:Method ;
+    rdfs:label "writeExpressionMapping" ;
+    yawl:returnType "String" ;
+    yawl:signature "String writeExpressionMapping(String expression, String mapsTo)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.getDecompositionPrototype
+yawl:YTask_getDecompositionPrototype_91 a yawl:Method ;
+    rdfs:label "getDecompositionPrototype" ;
+    yawl:returnType "YDecomposition" ;
+    yawl:signature "YDecomposition getDecompositionPrototype()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.setDecompositionPrototype
+yawl:YTask_setDecompositionPrototype_92 a yawl:Method ;
+    rdfs:label "setDecompositionPrototype" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDecompositionPrototype(YDecomposition decomposition)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.setDataBindingForEnablementParam
+yawl:YTask_setDataBindingForEnablementParam_93 a yawl:Method ;
+    rdfs:label "setDataBindingForEnablementParam" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataBindingForEnablementParam(String query, String paramName)" ;
+    rdfs:comment """Connects the query to a decomposition enablement parameter. @param query     a query applied to the net enablement variable in the net containing this task. @param paramName the enablement decomposition parameter to which to apply the result.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getDataBindingForEnablementParam
+yawl:YTask_getDataBindingForEnablementParam_94 a yawl:Method ;
+    rdfs:label "getDataBindingForEnablementParam" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataBindingForEnablementParam(String paramName)" ;
+    rdfs:comment """Returns the query to a decomposition enablement parameter. @param paramName the decomposition enablement variable. @return the data binding query for that parameter.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.setDataBindingForInputParam
+yawl:YTask_setDataBindingForInputParam_95 a yawl:Method ;
+    rdfs:label "setDataBindingForInputParam" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataBindingForInputParam(String query, String paramName)" ;
+    rdfs:comment """Connects the query to a decomposition parameter. @param query     a query applied to the net variables in the net containing this task. @param paramName the decomposition parameter to which to apply the result.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getDataBindingForInputParam
+yawl:YTask_getDataBindingForInputParam_96 a yawl:Method ;
+    rdfs:label "getDataBindingForInputParam" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataBindingForInputParam(String paramName)" ;
+    rdfs:comment """Returns the query to a decomposition input parameter. @param paramName the decomposition input parameter. @return the data binding query for that parameter.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.setDataBindingForOutputExpression
+yawl:YTask_setDataBindingForOutputExpression_97 a yawl:Method ;
+    rdfs:label "setDataBindingForOutputExpression" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataBindingForOutputExpression(String query, String netVarName)" ;
+    rdfs:comment """Binds an output expression of a decomposition to a net variable. @param query      the ouptut expression belonging to the tasks decomposition @param netVarName the net scope variable to which to apply the result.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getDataBindingForOutputParam
+yawl:YTask_getDataBindingForOutputParam_98 a yawl:Method ;
+    rdfs:label "getDataBindingForOutputParam" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataBindingForOutputParam(String paramName)" ;
+    rdfs:comment """Returns the query to a decomposition output parameter. @param paramName the decomposition output parameter. @return the data binding query for that parameter.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getInformation
+yawl:YTask_getInformation_99 a yawl:Method ;
+    rdfs:label "getInformation" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInformation()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getSpecVersion
+yawl:YTask_getSpecVersion_100 a yawl:Method ;
+    rdfs:label "getSpecVersion" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecVersion()" ;
+    rdfs:comment """Gets the version of the specification. @return the specification version.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.get_inputLogDataItems
+yawl:YTask_get_inputLogDataItems_101 a yawl:Method ;
+    rdfs:label "get_inputLogDataItems" ;
+    yawl:returnType "YLogDataItemList" ;
+    yawl:signature "YLogDataItemList get_inputLogDataItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.set_inputLogDataItems
+yawl:YTask_set_inputLogDataItems_102 a yawl:Method ;
+    rdfs:label "set_inputLogDataItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_inputLogDataItems(YLogDataItemList _inputLogDataItems)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.get_outputLogDataItems
+yawl:YTask_get_outputLogDataItems_103 a yawl:Method ;
+    rdfs:label "get_outputLogDataItems" ;
+    yawl:returnType "YLogDataItemList" ;
+    yawl:signature "YLogDataItemList get_outputLogDataItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.set_outputLogDataItems
+yawl:YTask_set_outputLogDataItems_104 a yawl:Method ;
+    rdfs:label "set_outputLogDataItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_outputLogDataItems(YLogDataItemList _outputLogDataItems)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.verify
+yawl:YTask_verify_105 a yawl:Method ;
+    rdfs:label "verify" ;
+    yawl:returnType "void" ;
+    yawl:signature "void verify(YVerificationHandler handler)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.checkParameterMappings
+yawl:YTask_checkParameterMappings_106 a yawl:Method ;
+    rdfs:label "checkParameterMappings" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkParameterMappings(YVerificationHandler handler)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.checkOutputParameterMappings
+yawl:YTask_checkOutputParameterMappings_107 a yawl:Method ;
+    rdfs:label "checkOutputParameterMappings" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkOutputParameterMappings(YVerificationHandler handler)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.checkForDuplicateParameterMappings
+yawl:YTask_checkForDuplicateParameterMappings_108 a yawl:Method ;
+    rdfs:label "checkForDuplicateParameterMappings" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkForDuplicateParameterMappings(YVerificationHandler handler)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.checkOutputParamsPreBeta4
+yawl:YTask_checkOutputParamsPreBeta4_109 a yawl:Method ;
+    rdfs:label "checkOutputParamsPreBeta4" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkOutputParamsPreBeta4(YVerificationHandler handler)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.checkInputParameterMappings
+yawl:YTask_checkInputParameterMappings_110 a yawl:Method ;
+    rdfs:label "checkInputParameterMappings" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkInputParameterMappings(YVerificationHandler handler)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.skipOutboundSchemaChecks
+yawl:YTask_skipOutboundSchemaChecks_111 a yawl:Method ;
+    rdfs:label "skipOutboundSchemaChecks" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean skipOutboundSchemaChecks()" ;
+    rdfs:comment """Indicates if schema validation is to be performed when starting the task. @return whether or not to skip validation on task starting.""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YTask.setSkipOutboundSchemaChecks
+yawl:YTask_setSkipOutboundSchemaChecks_112 a yawl:Method ;
+    rdfs:label "setSkipOutboundSchemaChecks" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSkipOutboundSchemaChecks(boolean performOutboundSchemaChecks)" ;
+    rdfs:comment """Defines if schema validation is to be performed when starting the task. @param performOutboundSchemaChecks""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YTask.getResourcingXML
+yawl:YTask_getResourcingXML_113 a yawl:Method ;
+    rdfs:label "getResourcingXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourcingXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.setResourcingXML
+yawl:YTask_setResourcingXML_114 a yawl:Method ;
+    rdfs:label "setResourcingXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setResourcingXML(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getResourcingSpecs
+yawl:YTask_getResourcingSpecs_115 a yawl:Method ;
+    rdfs:label "getResourcingSpecs" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getResourcingSpecs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.setResourcingSpecs
+yawl:YTask_setResourcingSpecs_116 a yawl:Method ;
+    rdfs:label "setResourcingSpecs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setResourcingSpecs(Element resSpec)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.setCustomFormURI
+yawl:YTask_setCustomFormURI_117 a yawl:Method ;
+    rdfs:label "setCustomFormURI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCustomFormURI(URL formURL)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getCustomFormURL
+yawl:YTask_getCustomFormURL_118 a yawl:Method ;
+    rdfs:label "getCustomFormURL" ;
+    yawl:returnType "URL" ;
+    yawl:signature "URL getCustomFormURL()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.setTimerParameters
+yawl:YTask_setTimerParameters_119 a yawl:Method ;
+    rdfs:label "setTimerParameters" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTimerParameters(YTimerParameters timerParameters)" ;
+    rdfs:comment """TIMER SETTINGS""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getTimerVariable
+yawl:YTask_getTimerVariable_120 a yawl:Method ;
+    rdfs:label "getTimerVariable" ;
+    yawl:returnType "YTimerVariable" ;
+    yawl:signature "YTimerVariable getTimerVariable()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getTimerParameters
+yawl:YTask_getTimerParameters_121 a yawl:Method ;
+    rdfs:label "getTimerParameters" ;
+    yawl:returnType "YTimerParameters" ;
+    yawl:signature "YTimerParameters getTimerParameters()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getConfiguration
+yawl:YTask_getConfiguration_122 a yawl:Method ;
+    rdfs:label "getConfiguration" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getConfiguration()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.setConfiguration
+yawl:YTask_setConfiguration_123 a yawl:Method ;
+    rdfs:label "setConfiguration" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setConfiguration(String config)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getDefaultConfiguration
+yawl:YTask_getDefaultConfiguration_124 a yawl:Method ;
+    rdfs:label "getDefaultConfiguration" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDefaultConfiguration()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.setDefaultConfiguration
+yawl:YTask_setDefaultConfiguration_125 a yawl:Method ;
+    rdfs:label "setDefaultConfiguration" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDefaultConfiguration(String defaultConfig)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getConfigurationElement
+yawl:YTask_getConfigurationElement_126 a yawl:Method ;
+    rdfs:label "getConfigurationElement" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getConfigurationElement()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.setConfigurationElement
+yawl:YTask_setConfigurationElement_127 a yawl:Method ;
+    rdfs:label "setConfigurationElement" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setConfigurationElement(Element configElement)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.getDefaultConfigurationElement
+yawl:YTask_getDefaultConfigurationElement_128 a yawl:Method ;
+    rdfs:label "getDefaultConfigurationElement" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getDefaultConfigurationElement()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTask.setDefaultConfigurationElement
+yawl:YTask_setDefaultConfigurationElement_129 a yawl:Method ;
+    rdfs:label "setDefaultConfigurationElement" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDefaultConfigurationElement(Element defaultConfigElement)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YTask__random a yawl:Field ;
+    rdfs:label "_random" .
+
+yawl:YTask__AND a yawl:Field ;
+    rdfs:label "_AND" .
+
+yawl:YTask__OR a yawl:Field ;
+    rdfs:label "_OR" .
+
+yawl:YTask__XOR a yawl:Field ;
+    rdfs:label "_XOR" .
+
+yawl:YTask__i a yawl:Field ;
+    rdfs:label "_i" .
+
+yawl:YTask__mi_active a yawl:Field ;
+    rdfs:label "_mi_active" .
+
+yawl:YTask__mi_entered a yawl:Field ;
+    rdfs:label "_mi_entered" .
+
+yawl:YTask__mi_complete a yawl:Field ;
+    rdfs:label "_mi_complete" .
+
+yawl:YTask__mi_executing a yawl:Field ;
+    rdfs:label "_mi_executing" .
+
+yawl:YTask__splitType a yawl:Field ;
+    rdfs:label "_splitType" .
+
+yawl:YTask__joinType a yawl:Field ;
+    rdfs:label "_joinType" .
+
+yawl:YTask__multiInstAttr a yawl:Field ;
+    rdfs:label "_multiInstAttr" .
+
+yawl:YTask__removeSet a yawl:Field ;
+    rdfs:label "_removeSet" .
+
+yawl:YTask__dataMappingsForTaskStarting a yawl:Field ;
+    rdfs:label "_dataMappingsForTaskStarting" .
+
+yawl:YTask__dataMappingsForTaskCompletion a yawl:Field ;
+    rdfs:label "_dataMappingsForTaskCompletion" .
+
+yawl:YTask__dataMappingsForTaskEnablement a yawl:Field ;
+    rdfs:label "_dataMappingsForTaskEnablement" .
+
+yawl:YTask__decompositionPrototype a yawl:Field ;
+    rdfs:label "_decompositionPrototype" .
+
+yawl:YTask__caseToDataMap a yawl:Field ;
+    rdfs:label "_caseToDataMap" .
+
+yawl:YTask__multiInstanceSpecificParamsIterator a yawl:Field ;
+    rdfs:label "_multiInstanceSpecificParamsIterator" .
+
+yawl:YTask__localVariableNameToReplaceableOutputData a yawl:Field ;
+    rdfs:label "_localVariableNameToReplaceableOutputData" .
+
+yawl:YTask__groupedMultiInstanceOutputData a yawl:Field ;
+    rdfs:label "_groupedMultiInstanceOutputData" .
+
+yawl:YTask__resetNet a yawl:Field ;
+    rdfs:label "_resetNet" .
+
+yawl:YTask_configuration a yawl:Field ;
+    rdfs:label "configuration" .
+
+yawl:YTask_defaultConfiguration a yawl:Field ;
+    rdfs:label "defaultConfiguration" .
+
+yawl:YTask_configurationElement a yawl:Field ;
+    rdfs:label "configurationElement" .
+
+yawl:YTask_defaultConfigurationElement a yawl:Field ;
+    rdfs:label "defaultConfigurationElement" .
+
+yawl:YTask__resourcingXML a yawl:Field ;
+    rdfs:label "_resourcingXML" .
+
+yawl:YTask__resourcingSpec a yawl:Field ;
+    rdfs:label "_resourcingSpec" .
+
+yawl:YTask__timerParams a yawl:Field ;
+    rdfs:label "_timerParams" .
+
+yawl:YTask__timerVariable a yawl:Field ;
+    rdfs:label "_timerVariable" .
+
+yawl:YTask__customFormURL a yawl:Field ;
+    rdfs:label "_customFormURL" .
+
+yawl:YTask__inputLogDataItems a yawl:Field ;
+    rdfs:label "_inputLogDataItems" .
+
+yawl:YTask__outputLogDataItems a yawl:Field ;
+    rdfs:label "_outputLogDataItems" .
+
+yawl:YTask_logger a yawl:Field ;
+    rdfs:label "logger" .
+
+yawl:YTask_STANDARD_TASK_ATTRIBUTES a yawl:Field ;
+    rdfs:label "STANDARD_TASK_ATTRIBUTES" .
+
+yawl:YTask_PERFORM_OUTBOUND_SCHEMA_VALIDATION a yawl:Field ;
+    rdfs:label "PERFORM_OUTBOUND_SCHEMA_VALIDATION" .
+
+yawl:YTask__skipOutboundSchemaChecks a yawl:Field ;
+    rdfs:label "_skipOutboundSchemaChecks" .
+
+
+

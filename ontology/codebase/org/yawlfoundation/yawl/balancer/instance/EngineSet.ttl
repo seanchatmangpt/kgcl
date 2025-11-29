@@ -1,0 +1,247 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.balancer.instance.EngineSet
+yawl:EngineSet a yawl:Class ;
+    rdfs:label "EngineSet" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer_instance ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/instance/EngineSet.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 22/9/17""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:EngineSet_initialize_1 ;
+    yawl:hasMethod yawl:EngineSet_getAll_2 ;
+    yawl:hasMethod yawl:EngineSet_getAllActive_3 ;
+    yawl:hasMethod yawl:EngineSet_getActiveCount_4 ;
+    yawl:hasMethod yawl:EngineSet_promoteAuthenticator_5 ;
+    yawl:hasMethod yawl:EngineSet_getAuthenticator_6 ;
+    yawl:hasMethod yawl:EngineSet_waitUntilAllInitialized_7 ;
+    yawl:hasMethod yawl:EngineSet_areAllInitialized_8 ;
+    yawl:hasMethod yawl:EngineSet_getNextCaseNbr_9 ;
+    yawl:hasMethod yawl:EngineSet_getEngineForCase_10 ;
+    yawl:hasMethod yawl:EngineSet_getIdlestEngine_11 ;
+    yawl:hasMethod yawl:EngineSet_getRandomInstance_12 ;
+    yawl:hasMethod yawl:EngineSet_getRandomInstance_13 ;
+    yawl:hasMethod yawl:EngineSet_getRandomActiveInstance_14 ;
+    yawl:hasMethod yawl:EngineSet_closeAll_15 ;
+    yawl:hasMethod yawl:EngineSet_removeUninitialized_16 ;
+    yawl:hasMethod yawl:EngineSet_checkBusynessLimit_17 ;
+    yawl:hasMethod yawl:EngineSet_getInactiveInstance_18 ;
+    yawl:hasMethod yawl:EngineSet_activate_19 ;
+    yawl:hasMethod yawl:EngineSet_deactivate_20 ;
+    yawl:hasMethod yawl:EngineSet_setActive_21 ;
+    yawl:hasField yawl:EngineSet__set ;
+    yawl:hasField yawl:EngineSet__random ;
+    yawl:hasField yawl:EngineSet__log ;
+    yawl:hasField yawl:EngineSet__arffWriter ;
+    yawl:hasField yawl:EngineSet__monitor ;
+    yawl:hasField yawl:EngineSet__authenticator ;
+    yawl:hasField yawl:EngineSet__lastCaseNbr ;
+    yawl:hasField yawl:EngineSet__activeCount ;
+    .
+
+
+# Method: EngineSet.initialize
+yawl:EngineSet_initialize_1 a yawl:Method ;
+    rdfs:label "initialize" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initialize()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineSet.getAll
+yawl:EngineSet_getAll_2 a yawl:Method ;
+    rdfs:label "getAll" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getAll()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineSet.getAllActive
+yawl:EngineSet_getAllActive_3 a yawl:Method ;
+    rdfs:label "getAllActive" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getAllActive()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineSet.getActiveCount
+yawl:EngineSet_getActiveCount_4 a yawl:Method ;
+    rdfs:label "getActiveCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getActiveCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineSet.promoteAuthenticator
+yawl:EngineSet_promoteAuthenticator_5 a yawl:Method ;
+    rdfs:label "promoteAuthenticator" ;
+    yawl:returnType "EngineInstance" ;
+    yawl:signature "EngineInstance promoteAuthenticator()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineSet.getAuthenticator
+yawl:EngineSet_getAuthenticator_6 a yawl:Method ;
+    rdfs:label "getAuthenticator" ;
+    yawl:returnType "EngineInstance" ;
+    yawl:signature "EngineInstance getAuthenticator()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineSet.waitUntilAllInitialized
+yawl:EngineSet_waitUntilAllInitialized_7 a yawl:Method ;
+    rdfs:label "waitUntilAllInitialized" ;
+    yawl:returnType "void" ;
+    yawl:signature "void waitUntilAllInitialized()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineSet.areAllInitialized
+yawl:EngineSet_areAllInitialized_8 a yawl:Method ;
+    rdfs:label "areAllInitialized" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean areAllInitialized()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: EngineSet.getNextCaseNbr
+yawl:EngineSet_getNextCaseNbr_9 a yawl:Method ;
+    rdfs:label "getNextCaseNbr" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNextCaseNbr()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineSet.getEngineForCase
+yawl:EngineSet_getEngineForCase_10 a yawl:Method ;
+    rdfs:label "getEngineForCase" ;
+    yawl:returnType "EngineInstance" ;
+    yawl:signature "EngineInstance getEngineForCase(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineSet.getIdlestEngine
+yawl:EngineSet_getIdlestEngine_11 a yawl:Method ;
+    rdfs:label "getIdlestEngine" ;
+    yawl:returnType "EngineInstance" ;
+    yawl:signature "EngineInstance getIdlestEngine()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineSet.getRandomInstance
+yawl:EngineSet_getRandomInstance_12 a yawl:Method ;
+    rdfs:label "getRandomInstance" ;
+    yawl:returnType "EngineInstance" ;
+    yawl:signature "EngineInstance getRandomInstance(Set set)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineSet.getRandomInstance
+yawl:EngineSet_getRandomInstance_13 a yawl:Method ;
+    rdfs:label "getRandomInstance" ;
+    yawl:returnType "EngineInstance" ;
+    yawl:signature "EngineInstance getRandomInstance()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineSet.getRandomActiveInstance
+yawl:EngineSet_getRandomActiveInstance_14 a yawl:Method ;
+    rdfs:label "getRandomActiveInstance" ;
+    yawl:returnType "EngineInstance" ;
+    yawl:signature "EngineInstance getRandomActiveInstance()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineSet.closeAll
+yawl:EngineSet_closeAll_15 a yawl:Method ;
+    rdfs:label "closeAll" ;
+    yawl:returnType "void" ;
+    yawl:signature "void closeAll()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineSet.removeUninitialized
+yawl:EngineSet_removeUninitialized_16 a yawl:Method ;
+    rdfs:label "removeUninitialized" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeUninitialized()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: EngineSet.checkBusynessLimit
+yawl:EngineSet_checkBusynessLimit_17 a yawl:Method ;
+    rdfs:label "checkBusynessLimit" ;
+    yawl:returnType "EngineInstance" ;
+    yawl:signature "EngineInstance checkBusynessLimit(EngineInstance idlest, double score)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: EngineSet.getInactiveInstance
+yawl:EngineSet_getInactiveInstance_18 a yawl:Method ;
+    rdfs:label "getInactiveInstance" ;
+    yawl:returnType "EngineInstance" ;
+    yawl:signature "EngineInstance getInactiveInstance()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: EngineSet.activate
+yawl:EngineSet_activate_19 a yawl:Method ;
+    rdfs:label "activate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean activate(EngineInstance instance)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: EngineSet.deactivate
+yawl:EngineSet_deactivate_20 a yawl:Method ;
+    rdfs:label "deactivate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean deactivate(EngineInstance instance)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineSet.setActive
+yawl:EngineSet_setActive_21 a yawl:Method ;
+    rdfs:label "setActive" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean setActive(EngineInstance instance, boolean activate)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:EngineSet__set a yawl:Field ;
+    rdfs:label "_set" .
+
+yawl:EngineSet__random a yawl:Field ;
+    rdfs:label "_random" .
+
+yawl:EngineSet__log a yawl:Field ;
+    rdfs:label "_log" .
+
+yawl:EngineSet__arffWriter a yawl:Field ;
+    rdfs:label "_arffWriter" .
+
+yawl:EngineSet__monitor a yawl:Field ;
+    rdfs:label "_monitor" .
+
+yawl:EngineSet__authenticator a yawl:Field ;
+    rdfs:label "_authenticator" .
+
+yawl:EngineSet__lastCaseNbr a yawl:Field ;
+    rdfs:label "_lastCaseNbr" .
+
+yawl:EngineSet__activeCount a yawl:Field ;
+    rdfs:label "_activeCount" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_elements_predicate a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.elements.predicate" .
+
+

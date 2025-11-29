@@ -1,0 +1,49 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.SessionListener
+yawl:SessionListener a yawl:Class ;
+    rdfs:label "SessionListener" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/SessionListener.java"^^xsd:string ;
+    rdfs:comment """Takes the necessary steps when a session times out Author: Michael Adams Creation Date: 14/03/2008 Based on code sourced from: http://techieexchange.blogspot.com/2008/02/jsf-session-expiry-timeout-solution.html""" ;
+    yawl:implements yawl:HttpSessionListener ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:SessionListener_sessionCreated_1 ;
+    yawl:hasMethod yawl:SessionListener_sessionDestroyed_2 ;
+    yawl:hasMethod yawl:SessionListener_handleSessionTimeout_3 ;
+    .
+
+
+# Method: SessionListener.sessionCreated
+yawl:SessionListener_sessionCreated_1 a yawl:Method ;
+    rdfs:label "sessionCreated" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sessionCreated(HttpSessionEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionListener.sessionDestroyed
+yawl:SessionListener_sessionDestroyed_2 a yawl:Method ;
+    rdfs:label "sessionDestroyed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sessionDestroyed(HttpSessionEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionListener.handleSessionTimeout
+yawl:SessionListener_handleSessionTimeout_3 a yawl:Method ;
+    rdfs:label "handleSessionTimeout" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleSessionTimeout(HttpSession session)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

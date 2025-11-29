@@ -1,0 +1,221 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.logging.table.YLogEvent
+yawl:YLogEvent a yawl:Class ;
+    rdfs:label "YLogEvent" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_logging_table ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/logging/table/YLogEvent.java"^^xsd:string ;
+    rdfs:comment """One row of the logEvent table, representing a single net or task instance runtime event Author: Michael Adams Creation Date: 6/04/2009""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YLogEvent_getEventID_1 ;
+    yawl:hasMethod yawl:YLogEvent_setEventID_2 ;
+    yawl:hasMethod yawl:YLogEvent_getInstanceID_3 ;
+    yawl:hasMethod yawl:YLogEvent_setInstanceID_4 ;
+    yawl:hasMethod yawl:YLogEvent_getDescriptor_5 ;
+    yawl:hasMethod yawl:YLogEvent_setDescriptor_6 ;
+    yawl:hasMethod yawl:YLogEvent_getTimestamp_7 ;
+    yawl:hasMethod yawl:YLogEvent_getTimestampString_8 ;
+    yawl:hasMethod yawl:YLogEvent_getTimestampMidString_9 ;
+    yawl:hasMethod yawl:YLogEvent_setTimestamp_10 ;
+    yawl:hasMethod yawl:YLogEvent_getServiceID_11 ;
+    yawl:hasMethod yawl:YLogEvent_setServiceID_12 ;
+    yawl:hasMethod yawl:YLogEvent_getRootNetInstanceID_13 ;
+    yawl:hasMethod yawl:YLogEvent_setRootNetInstanceID_14 ;
+    yawl:hasMethod yawl:YLogEvent_equals_15 ;
+    yawl:hasMethod yawl:YLogEvent_hashCode_16 ;
+    yawl:hasMethod yawl:YLogEvent_toXML_17 ;
+    yawl:hasMethod yawl:YLogEvent_fromXML_18 ;
+    yawl:hasMethod yawl:YLogEvent_strToLong_19 ;
+    yawl:hasField yawl:YLogEvent_eventID ;
+    yawl:hasField yawl:YLogEvent_instanceID ;
+    yawl:hasField yawl:YLogEvent_descriptor ;
+    yawl:hasField yawl:YLogEvent_timestamp ;
+    yawl:hasField yawl:YLogEvent_serviceID ;
+    yawl:hasField yawl:YLogEvent_rootNetInstanceID ;
+    .
+
+
+# Method: YLogEvent.getEventID
+yawl:YLogEvent_getEventID_1 a yawl:Method ;
+    rdfs:label "getEventID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getEventID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogEvent.setEventID
+yawl:YLogEvent_setEventID_2 a yawl:Method ;
+    rdfs:label "setEventID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEventID(long eventID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogEvent.getInstanceID
+yawl:YLogEvent_getInstanceID_3 a yawl:Method ;
+    rdfs:label "getInstanceID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getInstanceID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogEvent.setInstanceID
+yawl:YLogEvent_setInstanceID_4 a yawl:Method ;
+    rdfs:label "setInstanceID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setInstanceID(long instanceID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogEvent.getDescriptor
+yawl:YLogEvent_getDescriptor_5 a yawl:Method ;
+    rdfs:label "getDescriptor" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDescriptor()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogEvent.setDescriptor
+yawl:YLogEvent_setDescriptor_6 a yawl:Method ;
+    rdfs:label "setDescriptor" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDescriptor(String descriptor)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogEvent.getTimestamp
+yawl:YLogEvent_getTimestamp_7 a yawl:Method ;
+    rdfs:label "getTimestamp" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getTimestamp()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogEvent.getTimestampString
+yawl:YLogEvent_getTimestampString_8 a yawl:Method ;
+    rdfs:label "getTimestampString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTimestampString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogEvent.getTimestampMidString
+yawl:YLogEvent_getTimestampMidString_9 a yawl:Method ;
+    rdfs:label "getTimestampMidString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTimestampMidString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogEvent.setTimestamp
+yawl:YLogEvent_setTimestamp_10 a yawl:Method ;
+    rdfs:label "setTimestamp" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTimestamp(long timestamp)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogEvent.getServiceID
+yawl:YLogEvent_getServiceID_11 a yawl:Method ;
+    rdfs:label "getServiceID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getServiceID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogEvent.setServiceID
+yawl:YLogEvent_setServiceID_12 a yawl:Method ;
+    rdfs:label "setServiceID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setServiceID(long serviceID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogEvent.getRootNetInstanceID
+yawl:YLogEvent_getRootNetInstanceID_13 a yawl:Method ;
+    rdfs:label "getRootNetInstanceID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getRootNetInstanceID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogEvent.setRootNetInstanceID
+yawl:YLogEvent_setRootNetInstanceID_14 a yawl:Method ;
+    rdfs:label "setRootNetInstanceID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRootNetInstanceID(long rootNetInstanceID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogEvent.equals
+yawl:YLogEvent_equals_15 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogEvent.hashCode
+yawl:YLogEvent_hashCode_16 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogEvent.toXML
+yawl:YLogEvent_toXML_17 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogEvent.fromXML
+yawl:YLogEvent_fromXML_18 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(Element xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogEvent.strToLong
+yawl:YLogEvent_strToLong_19 a yawl:Method ;
+    rdfs:label "strToLong" ;
+    yawl:returnType "long" ;
+    yawl:signature "long strToLong(String value)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YLogEvent_eventID a yawl:Field ;
+    rdfs:label "eventID" .
+
+yawl:YLogEvent_instanceID a yawl:Field ;
+    rdfs:label "instanceID" .
+
+yawl:YLogEvent_descriptor a yawl:Field ;
+    rdfs:label "descriptor" .
+
+yawl:YLogEvent_timestamp a yawl:Field ;
+    rdfs:label "timestamp" .
+
+yawl:YLogEvent_serviceID a yawl:Field ;
+    rdfs:label "serviceID" .
+
+yawl:YLogEvent_rootNetInstanceID a yawl:Field ;
+    rdfs:label "rootNetInstanceID" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_stateless_monitor a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.stateless.monitor" .
+
+

@@ -1,0 +1,199 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.calendar.utilisation.Reservation
+yawl:Reservation a yawl:Class ;
+    rdfs:label "Reservation" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_calendar_utilisation ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/calendar/utilisation/Reservation.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 6/10/2010""" ;
+    yawl:extends yawl:StatusMessage ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Reservation_getReservationID_1 ;
+    yawl:hasMethod yawl:Reservation_isUpdate_2 ;
+    yawl:hasMethod yawl:Reservation_setReservationID_3 ;
+    yawl:hasMethod yawl:Reservation_getReservationIDAsLong_4 ;
+    yawl:hasMethod yawl:Reservation_getStatusToBe_5 ;
+    yawl:hasMethod yawl:Reservation_setStatusToBe_6 ;
+    yawl:hasMethod yawl:Reservation_getStatus_7 ;
+    yawl:hasMethod yawl:Reservation_setStatus_8 ;
+    yawl:hasMethod yawl:Reservation_getResource_9 ;
+    yawl:hasMethod yawl:Reservation_setResource_10 ;
+    yawl:hasMethod yawl:Reservation_hasResource_11 ;
+    yawl:hasMethod yawl:Reservation_getWorkload_12 ;
+    yawl:hasMethod yawl:Reservation_setWorkload_13 ;
+    yawl:hasMethod yawl:Reservation_hasErrors_14 ;
+    yawl:hasMethod yawl:Reservation_toXML_15 ;
+    yawl:hasMethod yawl:Reservation_toXNode_16 ;
+    yawl:hasMethod yawl:Reservation_fromXNode_17 ;
+    yawl:hasField yawl:Reservation__reservationID ;
+    yawl:hasField yawl:Reservation__statusToBe ;
+    yawl:hasField yawl:Reservation__status ;
+    yawl:hasField yawl:Reservation__resource ;
+    yawl:hasField yawl:Reservation__workload ;
+    yawl:hasField yawl:Reservation__hasIdElement ;
+    .
+
+
+# Method: Reservation.getReservationID
+yawl:Reservation_getReservationID_1 a yawl:Method ;
+    rdfs:label "getReservationID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getReservationID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Reservation.isUpdate
+yawl:Reservation_isUpdate_2 a yawl:Method ;
+    rdfs:label "isUpdate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isUpdate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Reservation.setReservationID
+yawl:Reservation_setReservationID_3 a yawl:Method ;
+    rdfs:label "setReservationID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setReservationID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Reservation.getReservationIDAsLong
+yawl:Reservation_getReservationIDAsLong_4 a yawl:Method ;
+    rdfs:label "getReservationIDAsLong" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getReservationIDAsLong()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Reservation.getStatusToBe
+yawl:Reservation_getStatusToBe_5 a yawl:Method ;
+    rdfs:label "getStatusToBe" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStatusToBe()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Reservation.setStatusToBe
+yawl:Reservation_setStatusToBe_6 a yawl:Method ;
+    rdfs:label "setStatusToBe" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStatusToBe(String status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Reservation.getStatus
+yawl:Reservation_getStatus_7 a yawl:Method ;
+    rdfs:label "getStatus" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Reservation.setStatus
+yawl:Reservation_setStatus_8 a yawl:Method ;
+    rdfs:label "setStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStatus(String status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Reservation.getResource
+yawl:Reservation_getResource_9 a yawl:Method ;
+    rdfs:label "getResource" ;
+    yawl:returnType "UtilisationResource" ;
+    yawl:signature "UtilisationResource getResource()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Reservation.setResource
+yawl:Reservation_setResource_10 a yawl:Method ;
+    rdfs:label "setResource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setResource(UtilisationResource resource)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Reservation.hasResource
+yawl:Reservation_hasResource_11 a yawl:Method ;
+    rdfs:label "hasResource" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasResource()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Reservation.getWorkload
+yawl:Reservation_getWorkload_12 a yawl:Method ;
+    rdfs:label "getWorkload" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getWorkload()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Reservation.setWorkload
+yawl:Reservation_setWorkload_13 a yawl:Method ;
+    rdfs:label "setWorkload" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setWorkload(int workload)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Reservation.hasErrors
+yawl:Reservation_hasErrors_14 a yawl:Method ;
+    rdfs:label "hasErrors" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasErrors()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Reservation.toXML
+yawl:Reservation_toXML_15 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Reservation.toXNode
+yawl:Reservation_toXNode_16 a yawl:Method ;
+    rdfs:label "toXNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode toXNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Reservation.fromXNode
+yawl:Reservation_fromXNode_17 a yawl:Method ;
+    rdfs:label "fromXNode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXNode(XNode node)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:Reservation__reservationID a yawl:Field ;
+    rdfs:label "_reservationID" .
+
+yawl:Reservation__statusToBe a yawl:Field ;
+    rdfs:label "_statusToBe" .
+
+yawl:Reservation__status a yawl:Field ;
+    rdfs:label "_status" .
+
+yawl:Reservation__resource a yawl:Field ;
+    rdfs:label "_resource" .
+
+yawl:Reservation__workload a yawl:Field ;
+    rdfs:label "_workload" .
+
+yawl:Reservation__hasIdElement a yawl:Field ;
+    rdfs:label "_hasIdElement" .
+
+
+

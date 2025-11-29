@@ -1,0 +1,211 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.datastore.eventlog.ResourceXESLog
+yawl:ResourceXESLog a yawl:Class ;
+    rdfs:label "ResourceXESLog" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_datastore_eventlog ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/datastore/eventlog/ResourceXESLog.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 30/04/2010""" ;
+    yawl:extends yawl:YXESBuilder ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ResourceXESLog_processEvents_1 ;
+    yawl:hasMethod yawl:ResourceXESLog_translateEvent_2 ;
+    yawl:hasMethod yawl:ResourceXESLog_getComment_3 ;
+    yawl:hasMethod yawl:ResourceXESLog_mergeLogs_4 ;
+    yawl:hasMethod yawl:ResourceXESLog_processCaseEvents_5 ;
+    yawl:hasMethod yawl:ResourceXESLog_eventNode_6 ;
+    yawl:hasMethod yawl:ResourceXESLog_buildLogNode_7 ;
+    yawl:hasMethod yawl:ResourceXESLog_hasEvents_8 ;
+    yawl:hasMethod yawl:ResourceXESLog_mergeLogs_9 ;
+    yawl:hasMethod yawl:ResourceXESLog_buildCaseMap_10 ;
+    yawl:hasMethod yawl:ResourceXESLog_mergeTraces_11 ;
+    yawl:hasMethod yawl:ResourceXESLog_getEventValue_12 ;
+    yawl:hasMethod yawl:ResourceXESLog_getTransition_13 ;
+    yawl:hasMethod yawl:ResourceXESLog_getTaskName_14 ;
+    yawl:hasMethod yawl:ResourceXESLog_getInstanceID_15 ;
+    yawl:hasMethod yawl:ResourceXESLog_getOrgResource_16 ;
+    yawl:hasMethod yawl:ResourceXESLog_mergeableEvent_17 ;
+    yawl:hasMethod yawl:ResourceXESLog_slaveHasPrecedence_18 ;
+    yawl:hasMethod yawl:ResourceXESLog_masterHasPrecedence_19 ;
+    yawl:hasMethod yawl:ResourceXESLog_removeEvent_20 ;
+    yawl:hasMethod yawl:ResourceXESLog_mergeEvent_21 ;
+    .
+
+
+# Method: ResourceXESLog.processEvents
+yawl:ResourceXESLog_processEvents_1 a yawl:Method ;
+    rdfs:label "processEvents" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processEvents(XNode root, XNode yawlCases)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ResourceXESLog.translateEvent
+yawl:ResourceXESLog_translateEvent_2 a yawl:Method ;
+    rdfs:label "translateEvent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String translateEvent(String yEvent)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ResourceXESLog.getComment
+yawl:ResourceXESLog_getComment_3 a yawl:Method ;
+    rdfs:label "getComment" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getComment()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ResourceXESLog.mergeLogs
+yawl:ResourceXESLog_mergeLogs_4 a yawl:Method ;
+    rdfs:label "mergeLogs" ;
+    yawl:returnType "String" ;
+    yawl:signature "String mergeLogs(XNode rsRawCases, String engCasesStr)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceXESLog.processCaseEvents
+yawl:ResourceXESLog_processCaseEvents_5 a yawl:Method ;
+    rdfs:label "processCaseEvents" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processCaseEvents(XNode yawlCase, XNode trace)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceXESLog.eventNode
+yawl:ResourceXESLog_eventNode_6 a yawl:Method ;
+    rdfs:label "eventNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode eventNode(XNode yEvent, String transition)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceXESLog.buildLogNode
+yawl:ResourceXESLog_buildLogNode_7 a yawl:Method ;
+    rdfs:label "buildLogNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode buildLogNode(XNode events)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceXESLog.hasEvents
+yawl:ResourceXESLog_hasEvents_8 a yawl:Method ;
+    rdfs:label "hasEvents" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasEvents(XNode node)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceXESLog.mergeLogs
+yawl:ResourceXESLog_mergeLogs_9 a yawl:Method ;
+    rdfs:label "mergeLogs" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode mergeLogs(XNode engLog, XNode rsLog)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceXESLog.buildCaseMap
+yawl:ResourceXESLog_buildCaseMap_10 a yawl:Method ;
+    rdfs:label "buildCaseMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map buildCaseMap(XNode logNode)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceXESLog.mergeTraces
+yawl:ResourceXESLog_mergeTraces_11 a yawl:Method ;
+    rdfs:label "mergeTraces" ;
+    yawl:returnType "void" ;
+    yawl:signature "void mergeTraces(XNode master, XNode slave)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceXESLog.getEventValue
+yawl:ResourceXESLog_getEventValue_12 a yawl:Method ;
+    rdfs:label "getEventValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEventValue(XNode event, String key)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceXESLog.getTransition
+yawl:ResourceXESLog_getTransition_13 a yawl:Method ;
+    rdfs:label "getTransition" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTransition(XNode event)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceXESLog.getTaskName
+yawl:ResourceXESLog_getTaskName_14 a yawl:Method ;
+    rdfs:label "getTaskName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskName(XNode event)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceXESLog.getInstanceID
+yawl:ResourceXESLog_getInstanceID_15 a yawl:Method ;
+    rdfs:label "getInstanceID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInstanceID(XNode event)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceXESLog.getOrgResource
+yawl:ResourceXESLog_getOrgResource_16 a yawl:Method ;
+    rdfs:label "getOrgResource" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOrgResource(XNode event)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceXESLog.mergeableEvent
+yawl:ResourceXESLog_mergeableEvent_17 a yawl:Method ;
+    rdfs:label "mergeableEvent" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean mergeableEvent(String transition)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceXESLog.slaveHasPrecedence
+yawl:ResourceXESLog_slaveHasPrecedence_18 a yawl:Method ;
+    rdfs:label "slaveHasPrecedence" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean slaveHasPrecedence(String transition)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceXESLog.masterHasPrecedence
+yawl:ResourceXESLog_masterHasPrecedence_19 a yawl:Method ;
+    rdfs:label "masterHasPrecedence" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean masterHasPrecedence(String transition)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceXESLog.removeEvent
+yawl:ResourceXESLog_removeEvent_20 a yawl:Method ;
+    rdfs:label "removeEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeEvent(XNode node, String taskName, String instanceID, String transition)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceXESLog.mergeEvent
+yawl:ResourceXESLog_mergeEvent_21 a yawl:Method ;
+    rdfs:label "mergeEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void mergeEvent(XNode node, XNode rsEvent, String transition)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+
+

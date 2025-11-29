@@ -1,0 +1,116 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.interfce.interfaceX.InterfaceX_ServiceSideClient
+yawl:InterfaceX_ServiceSideClient a yawl:Class ;
+    rdfs:label "InterfaceX_ServiceSideClient" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_interfce_interfaceX ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/interfce/interfaceX/InterfaceX_ServiceSideClient.java"^^xsd:string ;
+    rdfs:comment """InterfaceX_ServiceSideClient posts method calls from an exception service to the YAWL engine. This class is a member class of Interface X, which provides an interface between the YAWL Engine and a Custom YAWL Service that manages exception handling at the process level. InterfaceB_EnvironmentBasedClient was used as a template for this class. Schematic of Interface X: | EXCEPTION      |                              INTERFACE X GATEWAY       |                                SERVICE (implements) | """ ;
+    yawl:extends yawl:Interface_Client ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:InterfaceX_ServiceSideClient_addInterfaceXListener_1 ;
+    yawl:hasMethod yawl:InterfaceX_ServiceSideClient_removeInterfaceXListener_2 ;
+    yawl:hasMethod yawl:InterfaceX_ServiceSideClient_updateWorkItemData_3 ;
+    yawl:hasMethod yawl:InterfaceX_ServiceSideClient_updateCaseData_4 ;
+    yawl:hasMethod yawl:InterfaceX_ServiceSideClient_forceCompleteWorkItem_5 ;
+    yawl:hasMethod yawl:InterfaceX_ServiceSideClient_continueWorkItem_6 ;
+    yawl:hasMethod yawl:InterfaceX_ServiceSideClient_unsuspendWorkItem_7 ;
+    yawl:hasMethod yawl:InterfaceX_ServiceSideClient_restartWorkItem_8 ;
+    yawl:hasMethod yawl:InterfaceX_ServiceSideClient_startWorkItem_9 ;
+    yawl:hasMethod yawl:InterfaceX_ServiceSideClient_cancelWorkItem_10 ;
+    yawl:hasField yawl:InterfaceX_ServiceSideClient__backEndURIStr ;
+    .
+
+
+# Method: InterfaceX_ServiceSideClient.addInterfaceXListener
+yawl:InterfaceX_ServiceSideClient_addInterfaceXListener_1 a yawl:Method ;
+    rdfs:label "addInterfaceXListener" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addInterfaceXListener(String listenerURI)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceX_ServiceSideClient.removeInterfaceXListener
+yawl:InterfaceX_ServiceSideClient_removeInterfaceXListener_2 a yawl:Method ;
+    rdfs:label "removeInterfaceXListener" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeInterfaceXListener(String listenerURI)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceX_ServiceSideClient.updateWorkItemData
+yawl:InterfaceX_ServiceSideClient_updateWorkItemData_3 a yawl:Method ;
+    rdfs:label "updateWorkItemData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateWorkItemData(WorkItemRecord wir, Element data, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceX_ServiceSideClient.updateCaseData
+yawl:InterfaceX_ServiceSideClient_updateCaseData_4 a yawl:Method ;
+    rdfs:label "updateCaseData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateCaseData(String caseID, Element data, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceX_ServiceSideClient.forceCompleteWorkItem
+yawl:InterfaceX_ServiceSideClient_forceCompleteWorkItem_5 a yawl:Method ;
+    rdfs:label "forceCompleteWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String forceCompleteWorkItem(WorkItemRecord wir, Element data, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceX_ServiceSideClient.continueWorkItem
+yawl:InterfaceX_ServiceSideClient_continueWorkItem_6 a yawl:Method ;
+    rdfs:label "continueWorkItem" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord continueWorkItem(String workItemID, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceX_ServiceSideClient.unsuspendWorkItem
+yawl:InterfaceX_ServiceSideClient_unsuspendWorkItem_7 a yawl:Method ;
+    rdfs:label "unsuspendWorkItem" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord unsuspendWorkItem(String workItemID, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceX_ServiceSideClient.restartWorkItem
+yawl:InterfaceX_ServiceSideClient_restartWorkItem_8 a yawl:Method ;
+    rdfs:label "restartWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String restartWorkItem(String workItemID, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceX_ServiceSideClient.startWorkItem
+yawl:InterfaceX_ServiceSideClient_startWorkItem_9 a yawl:Method ;
+    rdfs:label "startWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String startWorkItem(String workItemID, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceX_ServiceSideClient.cancelWorkItem
+yawl:InterfaceX_ServiceSideClient_cancelWorkItem_10 a yawl:Method ;
+    rdfs:label "cancelWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String cancelWorkItem(String workItemID, String data, boolean fail, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:InterfaceX_ServiceSideClient__backEndURIStr a yawl:Field ;
+    rdfs:label "_backEndURIStr" .
+
+
+

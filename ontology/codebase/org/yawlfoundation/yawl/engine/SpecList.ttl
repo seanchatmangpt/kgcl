@@ -1,0 +1,48 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.SpecList
+yawl:SpecList a yawl:Class ;
+    rdfs:label "SpecList" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/YSpecificationTable.java"^^xsd:string ;
+    yawl:extends yawl:ArrayList ;
+    yawl:modifiers "protected" ;
+    yawl:hasMethod yawl:SpecList_getSpecification_1 ;
+    yawl:hasMethod yawl:SpecList_getSpecificationIDs_2 ;
+    yawl:hasMethod yawl:SpecList_getLatestVersion_3 ;
+    .
+
+
+# Method: SpecList.getSpecification
+yawl:SpecList_getSpecification_1 a yawl:Method ;
+    rdfs:label "getSpecification" ;
+    yawl:returnType "YSpecification" ;
+    yawl:signature "YSpecification getSpecification(YSpecVersion version)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecList.getSpecificationIDs
+yawl:SpecList_getSpecificationIDs_2 a yawl:Method ;
+    rdfs:label "getSpecificationIDs" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getSpecificationIDs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecList.getLatestVersion
+yawl:SpecList_getLatestVersion_3 a yawl:Method ;
+    rdfs:label "getLatestVersion" ;
+    yawl:returnType "YSpecification" ;
+    yawl:signature "YSpecification getLatestVersion()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

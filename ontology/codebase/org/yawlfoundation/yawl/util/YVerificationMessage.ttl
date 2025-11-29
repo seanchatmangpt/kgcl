@@ -1,0 +1,56 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.util.YVerificationMessage
+yawl:YVerificationMessage a yawl:Class ;
+    rdfs:label "YVerificationMessage" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/util/YVerificationMessage.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 7/10/2003 Time: 14:21:11""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YVerificationMessage_getSource_1 ;
+    yawl:hasMethod yawl:YVerificationMessage_getMessage_2 ;
+    yawl:hasMethod yawl:YVerificationMessage_setSource_3 ;
+    yawl:hasField yawl:YVerificationMessage__source ;
+    yawl:hasField yawl:YVerificationMessage__message ;
+    .
+
+
+# Method: YVerificationMessage.getSource
+yawl:YVerificationMessage_getSource_1 a yawl:Method ;
+    rdfs:label "getSource" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object getSource()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YVerificationMessage.getMessage
+yawl:YVerificationMessage_getMessage_2 a yawl:Method ;
+    rdfs:label "getMessage" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMessage()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YVerificationMessage.setSource
+yawl:YVerificationMessage_setSource_3 a yawl:Method ;
+    rdfs:label "setSource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSource(Object source)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YVerificationMessage__source a yawl:Field ;
+    rdfs:label "_source" .
+
+yawl:YVerificationMessage__message a yawl:Field ;
+    rdfs:label "_message" .
+
+
+

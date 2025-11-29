@@ -1,0 +1,175 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.stateless.elements.marking.YMarking
+yawl:YMarking a yawl:Class ;
+    rdfs:label "YMarking" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_elements_marking ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/elements/marking/YMarking.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 19/06/2003 Time: 15:14:40""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YMarking_reachableInOneStep_1 ;
+    yawl:hasMethod yawl:YMarking_doPowerSetRecursion_2 ;
+    yawl:hasMethod yawl:YMarking_doPrelimaryMarkingSetBasedOnJoinType_3 ;
+    yawl:hasMethod yawl:YMarking_nonOrJoinEnabled_4 ;
+    yawl:hasMethod yawl:YMarking_getLocations_5 ;
+    yawl:hasMethod yawl:YMarking_hashCode_6 ;
+    yawl:hasMethod yawl:YMarking_equals_7 ;
+    yawl:hasMethod yawl:YMarking_strictlyGreaterThanOrEqualWithSupports_8 ;
+    yawl:hasMethod yawl:YMarking_isBiggerThanOrEqual_9 ;
+    yawl:hasMethod yawl:YMarking_isBiggerThan_10 ;
+    yawl:hasMethod yawl:YMarking_strictlyLessThanWithSupports_11 ;
+    yawl:hasMethod yawl:YMarking_isBiggerEnablingMarkingThan_12 ;
+    yawl:hasMethod yawl:YMarking_deadLock_13 ;
+    yawl:hasMethod yawl:YMarking_getLocationsAsSet_14 ;
+    yawl:hasMethod yawl:YMarking_toString_15 ;
+    yawl:hasMethod yawl:YMarking_equivalentTo_16 ;
+    yawl:hasField yawl:YMarking__locations ;
+    .
+
+
+# Method: YMarking.reachableInOneStep
+yawl:YMarking_reachableInOneStep_1 a yawl:Method ;
+    rdfs:label "reachableInOneStep" ;
+    yawl:returnType "YSetOfMarkings" ;
+    yawl:signature "YSetOfMarkings reachableInOneStep(YTask task, YTask orJoin)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMarking.doPowerSetRecursion
+yawl:YMarking_doPowerSetRecursion_2 a yawl:Method ;
+    rdfs:label "doPowerSetRecursion" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set doPowerSetRecursion(Set aSet)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YMarking.doPrelimaryMarkingSetBasedOnJoinType
+yawl:YMarking_doPrelimaryMarkingSetBasedOnJoinType_3 a yawl:Method ;
+    rdfs:label "doPrelimaryMarkingSetBasedOnJoinType" ;
+    yawl:returnType "YSetOfMarkings" ;
+    yawl:signature "YSetOfMarkings doPrelimaryMarkingSetBasedOnJoinType(YTask task)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YMarking.nonOrJoinEnabled
+yawl:YMarking_nonOrJoinEnabled_4 a yawl:Method ;
+    rdfs:label "nonOrJoinEnabled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean nonOrJoinEnabled(YTask task)" ;
+    rdfs:comment """Checks to see if this marking enables the <task> passed as parameter. This method should never be used for an or-join. @param task @return true iff this marking enables the task.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMarking.getLocations
+yawl:YMarking_getLocations_5 a yawl:Method ;
+    rdfs:label "getLocations" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getLocations()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMarking.hashCode
+yawl:YMarking_hashCode_6 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMarking.equals
+yawl:YMarking_equals_7 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object marking)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMarking.strictlyGreaterThanOrEqualWithSupports
+yawl:YMarking_strictlyGreaterThanOrEqualWithSupports_8 a yawl:Method ;
+    rdfs:label "strictlyGreaterThanOrEqualWithSupports" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean strictlyGreaterThanOrEqualWithSupports(YMarking marking)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMarking.isBiggerThanOrEqual
+yawl:YMarking_isBiggerThanOrEqual_9 a yawl:Method ;
+    rdfs:label "isBiggerThanOrEqual" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isBiggerThanOrEqual(YMarking marking)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMarking.isBiggerThan
+yawl:YMarking_isBiggerThan_10 a yawl:Method ;
+    rdfs:label "isBiggerThan" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isBiggerThan(YMarking marking)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMarking.strictlyLessThanWithSupports
+yawl:YMarking_strictlyLessThanWithSupports_11 a yawl:Method ;
+    rdfs:label "strictlyLessThanWithSupports" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean strictlyLessThanWithSupports(YMarking marking)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMarking.isBiggerEnablingMarkingThan
+yawl:YMarking_isBiggerEnablingMarkingThan_12 a yawl:Method ;
+    rdfs:label "isBiggerEnablingMarkingThan" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isBiggerEnablingMarkingThan(YMarking marking, YTask orJoin)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMarking.deadLock
+yawl:YMarking_deadLock_13 a yawl:Method ;
+    rdfs:label "deadLock" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean deadLock(YTask orJoin)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMarking.getLocationsAsSet
+yawl:YMarking_getLocationsAsSet_14 a yawl:Method ;
+    rdfs:label "getLocationsAsSet" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getLocationsAsSet()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YMarking.toString
+yawl:YMarking_toString_15 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMarking.equivalentTo
+yawl:YMarking_equivalentTo_16 a yawl:Method ;
+    rdfs:label "equivalentTo" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equivalentTo(YMarking marking)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YMarking__locations a yawl:Field ;
+    rdfs:label "_locations" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_stateless_elements_data_external a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.stateless.elements.data.external" .
+
+

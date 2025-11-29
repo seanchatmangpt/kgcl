@@ -1,0 +1,157 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.stateless.monitor.YCaseExporter
+yawl:YCaseExporter a yawl:Class ;
+    rdfs:label "YCaseExporter" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_monitor ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/monitor/YCaseExporter.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 30/6/2022""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YCaseExporter_marshal_1 ;
+    yawl:hasMethod yawl:YCaseExporter_stringToClonedElement_2 ;
+    yawl:hasMethod yawl:YCaseExporter_marshalSpecification_3 ;
+    yawl:hasMethod yawl:YCaseExporter_marshalRunner_4 ;
+    yawl:hasMethod yawl:YCaseExporter_marshalWorkItems_5 ;
+    yawl:hasMethod yawl:YCaseExporter_marshalParent_6 ;
+    yawl:hasMethod yawl:YCaseExporter_marshalIdentifier_7 ;
+    yawl:hasMethod yawl:YCaseExporter_marshalLocations_8 ;
+    yawl:hasMethod yawl:YCaseExporter_marshalNetData_9 ;
+    yawl:hasMethod yawl:YCaseExporter_marshalMarkedTasks_10 ;
+    yawl:hasMethod yawl:YCaseExporter_marshalTimerStates_11 ;
+    yawl:hasMethod yawl:YCaseExporter_marshalWIData_12 ;
+    yawl:hasMethod yawl:YCaseExporter_getTime_13 ;
+    yawl:hasMethod yawl:YCaseExporter_getWIParent_14 ;
+    yawl:hasMethod yawl:YCaseExporter_main_15 ;
+    .
+
+
+# Method: YCaseExporter.marshal
+yawl:YCaseExporter_marshal_1 a yawl:Method ;
+    rdfs:label "marshal" ;
+    yawl:returnType "String" ;
+    yawl:signature "String marshal(YNetRunner runner)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCaseExporter.stringToClonedElement
+yawl:YCaseExporter_stringToClonedElement_2 a yawl:Method ;
+    rdfs:label "stringToClonedElement" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element stringToClonedElement(String xml)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseExporter.marshalSpecification
+yawl:YCaseExporter_marshalSpecification_3 a yawl:Method ;
+    rdfs:label "marshalSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String marshalSpecification(YNetRunner runner)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseExporter.marshalRunner
+yawl:YCaseExporter_marshalRunner_4 a yawl:Method ;
+    rdfs:label "marshalRunner" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode marshalRunner(YNetRunner topRunner)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseExporter.marshalWorkItems
+yawl:YCaseExporter_marshalWorkItems_5 a yawl:Method ;
+    rdfs:label "marshalWorkItems" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode marshalWorkItems(YNetRunner runner)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseExporter.marshalParent
+yawl:YCaseExporter_marshalParent_6 a yawl:Method ;
+    rdfs:label "marshalParent" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode marshalParent(YIdentifier id)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseExporter.marshalIdentifier
+yawl:YCaseExporter_marshalIdentifier_7 a yawl:Method ;
+    rdfs:label "marshalIdentifier" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode marshalIdentifier(YIdentifier id)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseExporter.marshalLocations
+yawl:YCaseExporter_marshalLocations_8 a yawl:Method ;
+    rdfs:label "marshalLocations" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode marshalLocations(YIdentifier id)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseExporter.marshalNetData
+yawl:YCaseExporter_marshalNetData_9 a yawl:Method ;
+    rdfs:label "marshalNetData" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode marshalNetData(YNetRunner runner)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseExporter.marshalMarkedTasks
+yawl:YCaseExporter_marshalMarkedTasks_10 a yawl:Method ;
+    rdfs:label "marshalMarkedTasks" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode marshalMarkedTasks(String tag, Set tasks)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseExporter.marshalTimerStates
+yawl:YCaseExporter_marshalTimerStates_11 a yawl:Method ;
+    rdfs:label "marshalTimerStates" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode marshalTimerStates(Map timerStates)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseExporter.marshalWIData
+yawl:YCaseExporter_marshalWIData_12 a yawl:Method ;
+    rdfs:label "marshalWIData" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode marshalWIData(YWorkItem item)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseExporter.getTime
+yawl:YCaseExporter_getTime_13 a yawl:Method ;
+    rdfs:label "getTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getTime(Date date)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseExporter.getWIParent
+yawl:YCaseExporter_getWIParent_14 a yawl:Method ;
+    rdfs:label "getWIParent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWIParent(YWorkItem item)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseExporter.main
+yawl:YCaseExporter_main_15 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String args)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+
+

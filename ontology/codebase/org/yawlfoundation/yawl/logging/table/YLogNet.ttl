@@ -1,0 +1,114 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.logging.table.YLogNet
+yawl:YLogNet a yawl:Class ;
+    rdfs:label "YLogNet" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_logging_table ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/logging/table/YLogNet.java"^^xsd:string ;
+    rdfs:comment """One row of the logNet table, representing a unique net 'template' of a specification  Author: Michael Adams Creation Date: 9/04/2009""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YLogNet_getSpecKey_1 ;
+    yawl:hasMethod yawl:YLogNet_setSpecKey_2 ;
+    yawl:hasMethod yawl:YLogNet_getNetID_3 ;
+    yawl:hasMethod yawl:YLogNet_setNetID_4 ;
+    yawl:hasMethod yawl:YLogNet_getName_5 ;
+    yawl:hasMethod yawl:YLogNet_setName_6 ;
+    yawl:hasMethod yawl:YLogNet_equals_7 ;
+    yawl:hasMethod yawl:YLogNet_hashCode_8 ;
+    yawl:hasMethod yawl:YLogNet_toXML_9 ;
+    yawl:hasField yawl:YLogNet_netID ;
+    yawl:hasField yawl:YLogNet_name ;
+    yawl:hasField yawl:YLogNet_specKey ;
+    .
+
+
+# Method: YLogNet.getSpecKey
+yawl:YLogNet_getSpecKey_1 a yawl:Method ;
+    rdfs:label "getSpecKey" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getSpecKey()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogNet.setSpecKey
+yawl:YLogNet_setSpecKey_2 a yawl:Method ;
+    rdfs:label "setSpecKey" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSpecKey(long specKey)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogNet.getNetID
+yawl:YLogNet_getNetID_3 a yawl:Method ;
+    rdfs:label "getNetID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getNetID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogNet.setNetID
+yawl:YLogNet_setNetID_4 a yawl:Method ;
+    rdfs:label "setNetID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNetID(long netID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogNet.getName
+yawl:YLogNet_getName_5 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogNet.setName
+yawl:YLogNet_setName_6 a yawl:Method ;
+    rdfs:label "setName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogNet.equals
+yawl:YLogNet_equals_7 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogNet.hashCode
+yawl:YLogNet_hashCode_8 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogNet.toXML
+yawl:YLogNet_toXML_9 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YLogNet_netID a yawl:Field ;
+    rdfs:label "netID" .
+
+yawl:YLogNet_name a yawl:Field ;
+    rdfs:label "name" .
+
+yawl:YLogNet_specKey a yawl:Field ;
+    rdfs:label "specKey" .
+
+
+

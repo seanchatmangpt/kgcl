@@ -1,0 +1,165 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.logging.YEventKeyCache
+yawl:YEventKeyCache a yawl:Class ;
+    rdfs:label "YEventKeyCache" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_logging ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/logging/YEventKeyCache.java"^^xsd:string ;
+    rdfs:comment """A cache of foreign keys for use in event log tables. @author Michael Adams @date 16/06/11""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YEventKeyCache_getNetID_1 ;
+    yawl:hasMethod yawl:YEventKeyCache_putNetID_2 ;
+    yawl:hasMethod yawl:YEventKeyCache_getTaskID_3 ;
+    yawl:hasMethod yawl:YEventKeyCache_putTaskID_4 ;
+    yawl:hasMethod yawl:YEventKeyCache_getTaskInstanceID_5 ;
+    yawl:hasMethod yawl:YEventKeyCache_putTaskInstanceID_6 ;
+    yawl:hasMethod yawl:YEventKeyCache_getDataTypeID_7 ;
+    yawl:hasMethod yawl:YEventKeyCache_putDataTypeID_8 ;
+    yawl:hasMethod yawl:YEventKeyCache_removeCase_9 ;
+    yawl:hasMethod yawl:YEventKeyCache_removeSpecification_10 ;
+    yawl:hasMethod yawl:YEventKeyCache_getID_11 ;
+    yawl:hasMethod yawl:YEventKeyCache_putID_12 ;
+    yawl:hasField yawl:YEventKeyCache_dataSchema ;
+    yawl:hasField yawl:YEventKeyCache_services ;
+    yawl:hasField yawl:YEventKeyCache_dataDefn ;
+    yawl:hasField yawl:YEventKeyCache_specEntries ;
+    yawl:hasField yawl:YEventKeyCache_rootNets ;
+    yawl:hasField yawl:YEventKeyCache_nets ;
+    yawl:hasField yawl:YEventKeyCache_tasks ;
+    yawl:hasField yawl:YEventKeyCache_netInstances ;
+    yawl:hasField yawl:YEventKeyCache_taskInstances ;
+    .
+
+
+# Method: YEventKeyCache.getNetID
+yawl:YEventKeyCache_getNetID_1 a yawl:Method ;
+    rdfs:label "getNetID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getNetID(YSpecificationID specID, String netName)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEventKeyCache.putNetID
+yawl:YEventKeyCache_putNetID_2 a yawl:Method ;
+    rdfs:label "putNetID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long putNetID(YSpecificationID specID, String netName, long key)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEventKeyCache.getTaskID
+yawl:YEventKeyCache_getTaskID_3 a yawl:Method ;
+    rdfs:label "getTaskID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getTaskID(Long netID, String taskName)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEventKeyCache.putTaskID
+yawl:YEventKeyCache_putTaskID_4 a yawl:Method ;
+    rdfs:label "putTaskID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long putTaskID(Long netID, String taskName, long key)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEventKeyCache.getTaskInstanceID
+yawl:YEventKeyCache_getTaskInstanceID_5 a yawl:Method ;
+    rdfs:label "getTaskInstanceID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getTaskInstanceID(YIdentifier caseID, Long taskID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEventKeyCache.putTaskInstanceID
+yawl:YEventKeyCache_putTaskInstanceID_6 a yawl:Method ;
+    rdfs:label "putTaskInstanceID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long putTaskInstanceID(YIdentifier caseID, Long taskID, long key)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEventKeyCache.getDataTypeID
+yawl:YEventKeyCache_getDataTypeID_7 a yawl:Method ;
+    rdfs:label "getDataTypeID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getDataTypeID(String name, String definition)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEventKeyCache.putDataTypeID
+yawl:YEventKeyCache_putDataTypeID_8 a yawl:Method ;
+    rdfs:label "putDataTypeID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long putDataTypeID(String name, String definition, long key)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEventKeyCache.removeCase
+yawl:YEventKeyCache_removeCase_9 a yawl:Method ;
+    rdfs:label "removeCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeCase(YIdentifier caseID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEventKeyCache.removeSpecification
+yawl:YEventKeyCache_removeSpecification_10 a yawl:Method ;
+    rdfs:label "removeSpecification" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeSpecification(YSpecificationID specID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEventKeyCache.getID
+yawl:YEventKeyCache_getID_11 a yawl:Method ;
+    rdfs:label "getID" ;
+    yawl:returnType "V" ;
+    yawl:signature "V getID(Map map, K key, S subKey)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventKeyCache.putID
+yawl:YEventKeyCache_putID_12 a yawl:Method ;
+    rdfs:label "putID" ;
+    yawl:returnType "V" ;
+    yawl:signature "V putID(Map map, K key, S subKey, V value)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YEventKeyCache_dataSchema a yawl:Field ;
+    rdfs:label "dataSchema" .
+
+yawl:YEventKeyCache_services a yawl:Field ;
+    rdfs:label "services" .
+
+yawl:YEventKeyCache_dataDefn a yawl:Field ;
+    rdfs:label "dataDefn" .
+
+yawl:YEventKeyCache_specEntries a yawl:Field ;
+    rdfs:label "specEntries" .
+
+yawl:YEventKeyCache_rootNets a yawl:Field ;
+    rdfs:label "rootNets" .
+
+yawl:YEventKeyCache_nets a yawl:Field ;
+    rdfs:label "nets" .
+
+yawl:YEventKeyCache_tasks a yawl:Field ;
+    rdfs:label "tasks" .
+
+yawl:YEventKeyCache_netInstances a yawl:Field ;
+    rdfs:label "netInstances" .
+
+yawl:YEventKeyCache_taskInstances a yawl:Field ;
+    rdfs:label "taskInstances" .
+
+
+

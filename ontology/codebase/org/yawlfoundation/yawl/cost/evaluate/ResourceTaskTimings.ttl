@@ -1,0 +1,207 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.cost.evaluate.ResourceTaskTimings
+yawl:ResourceTaskTimings a yawl:Class ;
+    rdfs:label "ResourceTaskTimings" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_cost_evaluate ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/cost/evaluate/ResourceTaskTimings.java"^^xsd:string ;
+    rdfs:comment """Stores the set of timestamps for a task (i.e. across a number of event nodes)""" ;
+    yawl:hasMethod yawl:ResourceTaskTimings_update_1 ;
+    yawl:hasMethod yawl:ResourceTaskTimings_getAssignedTime_2 ;
+    yawl:hasMethod yawl:ResourceTaskTimings_getAllocatedTime_3 ;
+    yawl:hasMethod yawl:ResourceTaskTimings_getBusyTime_4 ;
+    yawl:hasMethod yawl:ResourceTaskTimings_getInactiveTime_5 ;
+    yawl:hasMethod yawl:ResourceTaskTimings_getActiveTime_6 ;
+    yawl:hasMethod yawl:ResourceTaskTimings_getSuspendedTime_7 ;
+    yawl:hasMethod yawl:ResourceTaskTimings_setProcessed_8 ;
+    yawl:hasMethod yawl:ResourceTaskTimings_isProcessed_9 ;
+    yawl:hasMethod yawl:ResourceTaskTimings_processIfSuspended_10 ;
+    yawl:hasMethod yawl:ResourceTaskTimings_addSuspendedTime_11 ;
+    yawl:hasMethod yawl:ResourceTaskTimings_isSuspended_12 ;
+    yawl:hasMethod yawl:ResourceTaskTimings_isEventType_13 ;
+    yawl:hasMethod yawl:ResourceTaskTimings_timeDiff_14 ;
+    yawl:hasMethod yawl:ResourceTaskTimings_checkLong_15 ;
+    yawl:hasField yawl:ResourceTaskTimings_sdf ;
+    yawl:hasField yawl:ResourceTaskTimings_taskName ;
+    yawl:hasField yawl:ResourceTaskTimings_instanceID ;
+    yawl:hasField yawl:ResourceTaskTimings_scheduled ;
+    yawl:hasField yawl:ResourceTaskTimings_allocated ;
+    yawl:hasField yawl:ResourceTaskTimings_started ;
+    yawl:hasField yawl:ResourceTaskTimings_completed ;
+    yawl:hasField yawl:ResourceTaskTimings_suspended ;
+    yawl:hasField yawl:ResourceTaskTimings_totalSuspended ;
+    yawl:hasField yawl:ResourceTaskTimings_processed ;
+    .
+
+
+# Method: ResourceTaskTimings.update
+yawl:ResourceTaskTimings_update_1 a yawl:Method ;
+    rdfs:label "update" ;
+    yawl:returnType "void" ;
+    yawl:signature "void update(ResourceEvent event)" ;
+    rdfs:comment """Adds the timestamp for the transition found in an event @param event the event to store the timestamp for""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceTaskTimings.getAssignedTime
+yawl:ResourceTaskTimings_getAssignedTime_2 a yawl:Method ;
+    rdfs:label "getAssignedTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getAssignedTime()" ;
+    rdfs:comment """@return the number of msecs that expired from when the task was offered until when it was allocated to a resource""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceTaskTimings.getAllocatedTime
+yawl:ResourceTaskTimings_getAllocatedTime_3 a yawl:Method ;
+    rdfs:label "getAllocatedTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getAllocatedTime(String instance)" ;
+    rdfs:comment """@param instance the instance id of the work item @return the number of msecs that expired from when the work item was allocated until when it was started by a resource""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceTaskTimings.getBusyTime
+yawl:ResourceTaskTimings_getBusyTime_4 a yawl:Method ;
+    rdfs:label "getBusyTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getBusyTime(String instance)" ;
+    rdfs:comment """@param instance the instance id of the work item @return the number of msecs that expired from when the work item was started until when it was completed or cancelled""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceTaskTimings.getInactiveTime
+yawl:ResourceTaskTimings_getInactiveTime_5 a yawl:Method ;
+    rdfs:label "getInactiveTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getInactiveTime(String instance)" ;
+    rdfs:comment """@param instance the instance id of the work item @return the number of msecs that expired from when the work item was enabled until when it was started""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceTaskTimings.getActiveTime
+yawl:ResourceTaskTimings_getActiveTime_6 a yawl:Method ;
+    rdfs:label "getActiveTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getActiveTime(String instance)" ;
+    rdfs:comment """@param instance the instance id of the work item @return the number of msecs that expired from when the work item was started until when it was completed or cancelled, less any time spent suspended""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceTaskTimings.getSuspendedTime
+yawl:ResourceTaskTimings_getSuspendedTime_7 a yawl:Method ;
+    rdfs:label "getSuspendedTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getSuspendedTime(String instance)" ;
+    rdfs:comment """@param instance the instance id of the work item @return the number of msecs that expired while the work item was suspended""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceTaskTimings.setProcessed
+yawl:ResourceTaskTimings_setProcessed_8 a yawl:Method ;
+    rdfs:label "setProcessed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setProcessed(boolean b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceTaskTimings.isProcessed
+yawl:ResourceTaskTimings_isProcessed_9 a yawl:Method ;
+    rdfs:label "isProcessed" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isProcessed()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceTaskTimings.processIfSuspended
+yawl:ResourceTaskTimings_processIfSuspended_10 a yawl:Method ;
+    rdfs:label "processIfSuspended" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processIfSuspended(ResourceEvent event)" ;
+    rdfs:comment """If the last event processed was a suspend event, calculate and store how long the work item was suspended for @param event the current event""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceTaskTimings.addSuspendedTime
+yawl:ResourceTaskTimings_addSuspendedTime_11 a yawl:Method ;
+    rdfs:label "addSuspendedTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addSuspendedTime(String instance, long time)" ;
+    rdfs:comment """Calculate and store a period of suspension for a work item @param instance the work item instance id @param time     the amount of time to store""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceTaskTimings.isSuspended
+yawl:ResourceTaskTimings_isSuspended_12 a yawl:Method ;
+    rdfs:label "isSuspended" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isSuspended(String instance)" ;
+    rdfs:comment """Checks whether the last processed event was a suspend event @param instance the work item instance @return true if the last event for this work item was a suspend event""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceTaskTimings.isEventType
+yawl:ResourceTaskTimings_isEventType_13 a yawl:Method ;
+    rdfs:label "isEventType" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEventType(ResourceEvent event, String type)" ;
+    rdfs:comment """Checks if this event contains the specified event type @param event the resource event @param type  the type of event to check for @return true if type matches the type within the event""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceTaskTimings.timeDiff
+yawl:ResourceTaskTimings_timeDiff_14 a yawl:Method ;
+    rdfs:label "timeDiff" ;
+    yawl:returnType "long" ;
+    yawl:signature "long timeDiff(long later, long earlier)" ;
+    rdfs:comment """Calculates the number of msecs difference between two times @param later   the later time @param earlier the earlier time @return later-earlier, iff each has a value > -1 and later > earlier, otherwise -1 is returned""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceTaskTimings.checkLong
+yawl:ResourceTaskTimings_checkLong_15 a yawl:Method ;
+    rdfs:label "checkLong" ;
+    yawl:returnType "long" ;
+    yawl:signature "long checkLong(Long time)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:ResourceTaskTimings_sdf a yawl:Field ;
+    rdfs:label "sdf" .
+
+yawl:ResourceTaskTimings_taskName a yawl:Field ;
+    rdfs:label "taskName" .
+
+yawl:ResourceTaskTimings_instanceID a yawl:Field ;
+    rdfs:label "instanceID" .
+
+yawl:ResourceTaskTimings_scheduled a yawl:Field ;
+    rdfs:label "scheduled" .
+
+yawl:ResourceTaskTimings_allocated a yawl:Field ;
+    rdfs:label "allocated" .
+
+yawl:ResourceTaskTimings_started a yawl:Field ;
+    rdfs:label "started" .
+
+yawl:ResourceTaskTimings_completed a yawl:Field ;
+    rdfs:label "completed" .
+
+yawl:ResourceTaskTimings_suspended a yawl:Field ;
+    rdfs:label "suspended" .
+
+yawl:ResourceTaskTimings_totalSuspended a yawl:Field ;
+    rdfs:label "totalSuspended" .
+
+yawl:ResourceTaskTimings_processed a yawl:Field ;
+    rdfs:label "processed" .
+
+
+

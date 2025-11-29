@@ -1,0 +1,196 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.cost.interfce
+yawl:org_yawlfoundation_yawl_cost_interfce a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.cost.interfce" .
+# Class: org.yawlfoundation.yawl.cost.interfce.CostGatewayClient
+yawl:CostGatewayClient a yawl:Class ;
+    rdfs:label "CostGatewayClient" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_cost_interfce ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/cost/interfce/CostGatewayClient.java"^^xsd:string ;
+    rdfs:comment """An API to be used by clients that want to retrieve data from the cost service. @author Michael Adams 11/07/2011""" ;
+    yawl:extends yawl:Interface_Client ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CostGatewayClient_setURI_1 ;
+    yawl:hasMethod yawl:CostGatewayClient_connect_2 ;
+    yawl:hasMethod yawl:CostGatewayClient_checkConnection_3 ;
+    yawl:hasMethod yawl:CostGatewayClient_disconnect_4 ;
+    yawl:hasMethod yawl:CostGatewayClient_importModel_5 ;
+    yawl:hasMethod yawl:CostGatewayClient_importModels_6 ;
+    yawl:hasMethod yawl:CostGatewayClient_exportModels_7 ;
+    yawl:hasMethod yawl:CostGatewayClient_exportModel_8 ;
+    yawl:hasMethod yawl:CostGatewayClient_removeModel_9 ;
+    yawl:hasMethod yawl:CostGatewayClient_clearModels_10 ;
+    yawl:hasMethod yawl:CostGatewayClient_getAnnotatedLog_11 ;
+    yawl:hasMethod yawl:CostGatewayClient_evaluate_12 ;
+    yawl:hasMethod yawl:CostGatewayClient_calculate_13 ;
+    yawl:hasMethod yawl:CostGatewayClient_getFunctionList_14 ;
+    yawl:hasMethod yawl:CostGatewayClient_getFixedCosts_15 ;
+    yawl:hasMethod yawl:CostGatewayClient_getResourceCosts_16 ;
+    yawl:hasMethod yawl:CostGatewayClient_getResourceCosts_17 ;
+    yawl:hasField yawl:CostGatewayClient__costURI ;
+    .
+
+
+# Method: CostGatewayClient.setURI
+yawl:CostGatewayClient_setURI_1 a yawl:Method ;
+    rdfs:label "setURI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setURI(String uri)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostGatewayClient.connect
+yawl:CostGatewayClient_connect_2 a yawl:Method ;
+    rdfs:label "connect" ;
+    yawl:returnType "String" ;
+    yawl:signature "String connect(String userID, String password)" ;
+    rdfs:comment """Connects an external entity to the cost service @param userID   the userid @param password the corresponding password @return a sessionHandle if successful, or a failure message if not @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostGatewayClient.checkConnection
+yawl:CostGatewayClient_checkConnection_3 a yawl:Method ;
+    rdfs:label "checkConnection" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkConnection(String handle)" ;
+    rdfs:comment """Check that a session handle is active @param handle the session handle to check @return \"true\" if the id is valid, \"false\" if otherwise @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostGatewayClient.disconnect
+yawl:CostGatewayClient_disconnect_4 a yawl:Method ;
+    rdfs:label "disconnect" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disconnect(String handle)" ;
+    rdfs:comment """Disconnects an external entity from the cost service @param handle the sessionHandle to disconnect @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostGatewayClient.importModel
+yawl:CostGatewayClient_importModel_5 a yawl:Method ;
+    rdfs:label "importModel" ;
+    yawl:returnType "String" ;
+    yawl:signature "String importModel(String modelXML, String handle)" ;
+    rdfs:comment """Loads a cost model into the service @param modelXML the model to import @param handle   a current sessionHandle to the cost service @return a success or error message @throws IOException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostGatewayClient.importModels
+yawl:CostGatewayClient_importModels_6 a yawl:Method ;
+    rdfs:label "importModels" ;
+    yawl:returnType "String" ;
+    yawl:signature "String importModels(String modelsXML, String handle)" ;
+    rdfs:comment """Loads a number of cost models into the service @param modelsXML the set of models to import, represented as an set of valid cost mode XML child elements contained within an outer element called 'costmodels' @param handle    a current sessionHandle to the cost service @return a success or error message @throws IOException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostGatewayClient.exportModels
+yawl:CostGatewayClient_exportModels_7 a yawl:Method ;
+    rdfs:label "exportModels" ;
+    yawl:returnType "String" ;
+    yawl:signature "String exportModels(YSpecificationID specID, String handle)" ;
+    rdfs:comment """Gets the cost models for a specification from the service @param specID the id of the specification to get the models for @param handle a current sessionHandle to the cost service @return a String XML representation of the models if successful or an error message if not @throws IOException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostGatewayClient.exportModel
+yawl:CostGatewayClient_exportModel_8 a yawl:Method ;
+    rdfs:label "exportModel" ;
+    yawl:returnType "String" ;
+    yawl:signature "String exportModel(YSpecificationID specID, String modelID, String handle)" ;
+    rdfs:comment """Gets a cost model from the service @param specID  the id of the specification to get the model for @param modelID the id of the model to get @param handle  a current sessionHandle to the cost service @return a String XML representation of the model if successful or an error message if not @throws IOException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostGatewayClient.removeModel
+yawl:CostGatewayClient_removeModel_9 a yawl:Method ;
+    rdfs:label "removeModel" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeModel(YSpecificationID specID, String modelID, String handle)" ;
+    rdfs:comment """Removes a cost model from the service @param specID  the id of the specification to remove the model for @param modelID the id of the model to remove @param handle  a current sessionHandle to the cost service @return an XML success or error message @throws IOException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostGatewayClient.clearModels
+yawl:CostGatewayClient_clearModels_10 a yawl:Method ;
+    rdfs:label "clearModels" ;
+    yawl:returnType "String" ;
+    yawl:signature "String clearModels(YSpecificationID specID, String handle)" ;
+    rdfs:comment """Clears all the cost model for a particular specification from the service @param specID the id of the specification to remove the models for @param handle a current sessionHandle to the cost service @return an XML success or error message @throws IOException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostGatewayClient.getAnnotatedLog
+yawl:CostGatewayClient_getAnnotatedLog_11 a yawl:Method ;
+    rdfs:label "getAnnotatedLog" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAnnotatedLog(YSpecificationID specID, boolean withData, String handle)" ;
+    rdfs:comment """@param specID @param withData @param handle   a current sessionhandle to the cost service @return @throws IOException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostGatewayClient.evaluate
+yawl:CostGatewayClient_evaluate_12 a yawl:Method ;
+    rdfs:label "evaluate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean evaluate(YSpecificationID specID, String caseID, String predicate, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostGatewayClient.calculate
+yawl:CostGatewayClient_calculate_13 a yawl:Method ;
+    rdfs:label "calculate" ;
+    yawl:returnType "double" ;
+    yawl:signature "double calculate(YSpecificationID specID, String caseID, String predicate, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostGatewayClient.getFunctionList
+yawl:CostGatewayClient_getFunctionList_14 a yawl:Method ;
+    rdfs:label "getFunctionList" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFunctionList(YSpecificationID specID, String taskName, String handle)" ;
+    rdfs:comment """Gets an XML list of all cost functions for the specified specification - task combination. @param specID   the specification identifier @param taskName the task identifier (may be null, in which case only the case level functions are required) @param handle   a current sessionhandle to the cost service @return an XML list of the cost functions requested, or an appropriate failure message. @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostGatewayClient.getFixedCosts
+yawl:CostGatewayClient_getFixedCosts_15 a yawl:Method ;
+    rdfs:label "getFixedCosts" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFixedCosts(YSpecificationID specID, String taskName, String handle)" ;
+    rdfs:comment """Gets an XML list of all the fixed costs for the specified specification - task combination. @param specID   the specification identifier @param taskName the task identifier (may be null, in which case only the case level costs are required) @param handle   a current sessionhandle to the cost service @return an XML list of the costs requested, or an appropriate failure message. @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostGatewayClient.getResourceCosts
+yawl:CostGatewayClient_getResourceCosts_16 a yawl:Method ;
+    rdfs:label "getResourceCosts" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourceCosts(YSpecificationID specID, String taskName, String resources, String handle)" ;
+    rdfs:comment """Gets the cost of performing an activity for each resource in a Set. @param specID    the specification identifier @param taskName  the task name (may be null, in which case only the case level costs are required) @param resources an XML document containing participant ids @param handle    a current sessionhandle to the cost service @return an XML document containing the actual result of applying the costParams to the relevant cost functions. @throws IOException if there's a problem connecting to""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostGatewayClient.getResourceCosts
+yawl:CostGatewayClient_getResourceCosts_17 a yawl:Method ;
+    rdfs:label "getResourceCosts" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourceCosts(YSpecificationID specID, String taskName, Set resources, String handle)" ;
+    rdfs:comment """@param specID    the specification identifier @param taskName  the task name @param resources the set of participant ids to get costs for @param handle    a current sessionhandle to the cost service @return @throws IOException""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:CostGatewayClient__costURI a yawl:Field ;
+    rdfs:label "_costURI" .
+
+
+

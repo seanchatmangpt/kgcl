@@ -1,0 +1,90 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.scheduling.util.SimpleErrorHandler
+yawl:SimpleErrorHandler a yawl:Class ;
+    rdfs:label "SimpleErrorHandler" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_scheduling_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/scheduling/util/XMLUtils.java"^^xsd:string ;
+    yawl:implements yawl:ErrorHandler ;
+    yawl:hasMethod yawl:SimpleErrorHandler_warning_1 ;
+    yawl:hasMethod yawl:SimpleErrorHandler_error_2 ;
+    yawl:hasMethod yawl:SimpleErrorHandler_fatalError_3 ;
+    yawl:hasMethod yawl:SimpleErrorHandler_hasErrors_4 ;
+    yawl:hasMethod yawl:SimpleErrorHandler_getErrorsFull_5 ;
+    yawl:hasMethod yawl:SimpleErrorHandler_getErrorMsgs_6 ;
+    yawl:hasMethod yawl:SimpleErrorHandler_getErrorMsgsWithoutDatatypeCheck_7 ;
+    yawl:hasField yawl:SimpleErrorHandler_errors ;
+    .
+
+
+# Method: SimpleErrorHandler.warning
+yawl:SimpleErrorHandler_warning_1 a yawl:Method ;
+    rdfs:label "warning" ;
+    yawl:returnType "void" ;
+    yawl:signature "void warning(SAXParseException e)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SimpleErrorHandler.error
+yawl:SimpleErrorHandler_error_2 a yawl:Method ;
+    rdfs:label "error" ;
+    yawl:returnType "void" ;
+    yawl:signature "void error(SAXParseException e)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SimpleErrorHandler.fatalError
+yawl:SimpleErrorHandler_fatalError_3 a yawl:Method ;
+    rdfs:label "fatalError" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fatalError(SAXParseException e)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SimpleErrorHandler.hasErrors
+yawl:SimpleErrorHandler_hasErrors_4 a yawl:Method ;
+    rdfs:label "hasErrors" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasErrors()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SimpleErrorHandler.getErrorsFull
+yawl:SimpleErrorHandler_getErrorsFull_5 a yawl:Method ;
+    rdfs:label "getErrorsFull" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getErrorsFull()" ;
+    rdfs:comment """returns complete xsd error message, e.g. \"cvc-datatype-valid.1.2.1: 'x' is not a valid value for 'integer'.\" @return""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SimpleErrorHandler.getErrorMsgs
+yawl:SimpleErrorHandler_getErrorMsgs_6 a yawl:Method ;
+    rdfs:label "getErrorMsgs" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getErrorMsgs()" ;
+    rdfs:comment """returns only message of xsd error, e.g. \"'x' is not a valid value for 'integer'.\" @return""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SimpleErrorHandler.getErrorMsgsWithoutDatatypeCheck
+yawl:SimpleErrorHandler_getErrorMsgsWithoutDatatypeCheck_7 a yawl:Method ;
+    rdfs:label "getErrorMsgsWithoutDatatypeCheck" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getErrorMsgsWithoutDatatypeCheck()" ;
+    rdfs:comment """returns messages, which are not datatype errors private method, because its experimental. doesn't work because there are any further xsd error prefixes @return""" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:SimpleErrorHandler_errors a yawl:Field ;
+    rdfs:label "errors" .
+
+
+

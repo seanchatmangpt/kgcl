@@ -1,0 +1,106 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.WindowMenu
+yawl:WindowMenu a yawl:Class ;
+    rdfs:label "WindowMenu" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/WindowMenu.java"^^xsd:string ;
+    rdfs:comment """<p>Title: TeamWorkFlow</p> <p>Description: </p> <p>Copyright: Copyright (c) 2006</p> <p>Company: TU/e</p> @author Maja Pesic @version 1.0""" ;
+    yawl:extends yawl:JMenu ;
+    yawl:hasMethod yawl:WindowMenu_setVisibility_1 ;
+    yawl:hasMethod yawl:WindowMenu_add_2 ;
+    yawl:hasMethod yawl:WindowMenu_activate_3 ;
+    yawl:hasMethod yawl:WindowMenu_remove_4 ;
+    yawl:hasMethod yawl:WindowMenu_get_5 ;
+    yawl:hasMethod yawl:WindowMenu_changed_6 ;
+    yawl:hasMethod yawl:WindowMenu_frameChanged_7 ;
+    yawl:hasMethod yawl:WindowMenu_addListener_8 ;
+    yawl:hasField yawl:WindowMenu_frames ;
+    yawl:hasField yawl:WindowMenu_group ;
+    yawl:hasField yawl:WindowMenu_listener ;
+    .
+
+
+# Method: WindowMenu.setVisibility
+yawl:WindowMenu_setVisibility_1 a yawl:Method ;
+    rdfs:label "setVisibility" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setVisibility()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WindowMenu.add
+yawl:WindowMenu_add_2 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(boolean active, JInternalFrame frame)" ;
+    rdfs:comment """@param active boolean @param frame JInternalFrame""" ;
+    .
+
+# Method: WindowMenu.activate
+yawl:WindowMenu_activate_3 a yawl:Method ;
+    rdfs:label "activate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void activate(boolean active, JInternalFrame frame)" ;
+    rdfs:comment """@param active boolean @param frame JInternalFrame""" ;
+    .
+
+# Method: WindowMenu.remove
+yawl:WindowMenu_remove_4 a yawl:Method ;
+    rdfs:label "remove" ;
+    yawl:returnType "void" ;
+    yawl:signature "void remove(JInternalFrame frame)" ;
+    rdfs:comment """@param frame JInternalFrame""" ;
+    .
+
+# Method: WindowMenu.get
+yawl:WindowMenu_get_5 a yawl:Method ;
+    rdfs:label "get" ;
+    yawl:returnType "WindowMenuItem" ;
+    yawl:signature "WindowMenuItem get(JInternalFrame frame)" ;
+    rdfs:comment """@param frame JInternalFrame @return FrameMenuItem""" ;
+    .
+
+# Method: WindowMenu.changed
+yawl:WindowMenu_changed_6 a yawl:Method ;
+    rdfs:label "changed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void changed(WindowMenuItem item)" ;
+    rdfs:comment """@param item ItemEvent""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WindowMenu.frameChanged
+yawl:WindowMenu_frameChanged_7 a yawl:Method ;
+    rdfs:label "frameChanged" ;
+    yawl:returnType "void" ;
+    yawl:signature "void frameChanged(JInternalFrame frame)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WindowMenu.addListener
+yawl:WindowMenu_addListener_8 a yawl:Method ;
+    rdfs:label "addListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addListener(WindowMenuListener l)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:WindowMenu_frames a yawl:Field ;
+    rdfs:label "frames" .
+
+yawl:WindowMenu_group a yawl:Field ;
+    rdfs:label "group" .
+
+yawl:WindowMenu_listener a yawl:Field ;
+    rdfs:label "listener" .
+
+
+

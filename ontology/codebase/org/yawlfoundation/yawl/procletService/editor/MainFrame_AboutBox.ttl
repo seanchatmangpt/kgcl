@@ -1,0 +1,126 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.procletService.editor
+yawl:org_yawlfoundation_yawl_procletService_editor a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.procletService.editor" .
+# Class: org.yawlfoundation.yawl.procletService.editor.MainFrame_AboutBox
+yawl:MainFrame_AboutBox a yawl:Class ;
+    rdfs:label "MainFrame_AboutBox" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/MainFrame_AboutBox.java"^^xsd:string ;
+    rdfs:comment """<p>Title: TeamWorkFlow</p> <p>Description: </p> <p>Copyright: Copyright (c) 2006</p> <p>Company: TU/e</p> @author Maja Pesic @version 1.0""" ;
+    yawl:extends yawl:JDialog ;
+    yawl:implements yawl:ActionListener ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:MainFrame_AboutBox_jbInit_1 ;
+    yawl:hasMethod yawl:MainFrame_AboutBox_actionPerformed_2 ;
+    yawl:hasField yawl:MainFrame_AboutBox_panel1 ;
+    yawl:hasField yawl:MainFrame_AboutBox_panel2 ;
+    yawl:hasField yawl:MainFrame_AboutBox_insetsPanel1 ;
+    yawl:hasField yawl:MainFrame_AboutBox_insetsPanel2 ;
+    yawl:hasField yawl:MainFrame_AboutBox_insetsPanel3 ;
+    yawl:hasField yawl:MainFrame_AboutBox_button1 ;
+    yawl:hasField yawl:MainFrame_AboutBox_imageLabel ;
+    yawl:hasField yawl:MainFrame_AboutBox_label1 ;
+    yawl:hasField yawl:MainFrame_AboutBox_label2 ;
+    yawl:hasField yawl:MainFrame_AboutBox_label3 ;
+    yawl:hasField yawl:MainFrame_AboutBox_label4 ;
+    yawl:hasField yawl:MainFrame_AboutBox_image1 ;
+    yawl:hasField yawl:MainFrame_AboutBox_borderLayout1 ;
+    yawl:hasField yawl:MainFrame_AboutBox_borderLayout2 ;
+    yawl:hasField yawl:MainFrame_AboutBox_flowLayout1 ;
+    yawl:hasField yawl:MainFrame_AboutBox_gridLayout1 ;
+    yawl:hasField yawl:MainFrame_AboutBox_product ;
+    yawl:hasField yawl:MainFrame_AboutBox_version ;
+    yawl:hasField yawl:MainFrame_AboutBox_copyright ;
+    yawl:hasField yawl:MainFrame_AboutBox_comments ;
+    .
+
+
+# Method: MainFrame_AboutBox.jbInit
+yawl:MainFrame_AboutBox_jbInit_1 a yawl:Method ;
+    rdfs:label "jbInit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void jbInit()" ;
+    rdfs:comment """Component initialization. @throws java.lang.Exception""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MainFrame_AboutBox.actionPerformed
+yawl:MainFrame_AboutBox_actionPerformed_2 a yawl:Method ;
+    rdfs:label "actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void actionPerformed(ActionEvent actionEvent)" ;
+    rdfs:comment """Close the dialog on a button event. @param actionEvent ActionEvent""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:MainFrame_AboutBox_panel1 a yawl:Field ;
+    rdfs:label "panel1" .
+
+yawl:MainFrame_AboutBox_panel2 a yawl:Field ;
+    rdfs:label "panel2" .
+
+yawl:MainFrame_AboutBox_insetsPanel1 a yawl:Field ;
+    rdfs:label "insetsPanel1" .
+
+yawl:MainFrame_AboutBox_insetsPanel2 a yawl:Field ;
+    rdfs:label "insetsPanel2" .
+
+yawl:MainFrame_AboutBox_insetsPanel3 a yawl:Field ;
+    rdfs:label "insetsPanel3" .
+
+yawl:MainFrame_AboutBox_button1 a yawl:Field ;
+    rdfs:label "button1" .
+
+yawl:MainFrame_AboutBox_imageLabel a yawl:Field ;
+    rdfs:label "imageLabel" .
+
+yawl:MainFrame_AboutBox_label1 a yawl:Field ;
+    rdfs:label "label1" .
+
+yawl:MainFrame_AboutBox_label2 a yawl:Field ;
+    rdfs:label "label2" .
+
+yawl:MainFrame_AboutBox_label3 a yawl:Field ;
+    rdfs:label "label3" .
+
+yawl:MainFrame_AboutBox_label4 a yawl:Field ;
+    rdfs:label "label4" .
+
+yawl:MainFrame_AboutBox_image1 a yawl:Field ;
+    rdfs:label "image1" .
+
+yawl:MainFrame_AboutBox_borderLayout1 a yawl:Field ;
+    rdfs:label "borderLayout1" .
+
+yawl:MainFrame_AboutBox_borderLayout2 a yawl:Field ;
+    rdfs:label "borderLayout2" .
+
+yawl:MainFrame_AboutBox_flowLayout1 a yawl:Field ;
+    rdfs:label "flowLayout1" .
+
+yawl:MainFrame_AboutBox_gridLayout1 a yawl:Field ;
+    rdfs:label "gridLayout1" .
+
+yawl:MainFrame_AboutBox_product a yawl:Field ;
+    rdfs:label "product" .
+
+yawl:MainFrame_AboutBox_version a yawl:Field ;
+    rdfs:label "version" .
+
+yawl:MainFrame_AboutBox_copyright a yawl:Field ;
+    rdfs:label "copyright" .
+
+yawl:MainFrame_AboutBox_comments a yawl:Field ;
+    rdfs:label "comments" .
+
+
+

@@ -1,0 +1,170 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.exception.ExletRunnerCache
+yawl:ExletRunnerCache a yawl:Class ;
+    rdfs:label "ExletRunnerCache" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_exception ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/exception/ExletRunnerCache.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 8/02/2016""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ExletRunnerCache_add_1 ;
+    yawl:hasMethod yawl:ExletRunnerCache_remove_2 ;
+    yawl:hasMethod yawl:ExletRunnerCache_cancel_3 ;
+    yawl:hasMethod yawl:ExletRunnerCache_getRunnersForCase_4 ;
+    yawl:hasMethod yawl:ExletRunnerCache_getRunnerForItem_5 ;
+    yawl:hasMethod yawl:ExletRunnerCache_getRunner_6 ;
+    yawl:hasMethod yawl:ExletRunnerCache_getRunner_7 ;
+    yawl:hasMethod yawl:ExletRunnerCache_getRunnerForWorklet_8 ;
+    yawl:hasMethod yawl:ExletRunnerCache_getWorkletsForCase_9 ;
+    yawl:hasMethod yawl:ExletRunnerCache_getWorkletsForItem_10 ;
+    yawl:hasMethod yawl:ExletRunnerCache_getAllWorklets_11 ;
+    yawl:hasMethod yawl:ExletRunnerCache_isCompensationWorklet_12 ;
+    yawl:hasMethod yawl:ExletRunnerCache_getWorkletRunner_13 ;
+    yawl:hasMethod yawl:ExletRunnerCache_removeWorkletRunners_14 ;
+    yawl:hasMethod yawl:ExletRunnerCache_restore_15 ;
+    yawl:hasMethod yawl:ExletRunnerCache_getWorklets_16 ;
+    yawl:hasField yawl:ExletRunnerCache__runners ;
+    .
+
+
+# Method: ExletRunnerCache.add
+yawl:ExletRunnerCache_add_1 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(ExletRunner runner)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExletRunnerCache.remove
+yawl:ExletRunnerCache_remove_2 a yawl:Method ;
+    rdfs:label "remove" ;
+    yawl:returnType "void" ;
+    yawl:signature "void remove(ExletRunner runner)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExletRunnerCache.cancel
+yawl:ExletRunnerCache_cancel_3 a yawl:Method ;
+    rdfs:label "cancel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancel(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExletRunnerCache.getRunnersForCase
+yawl:ExletRunnerCache_getRunnersForCase_4 a yawl:Method ;
+    rdfs:label "getRunnersForCase" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getRunnersForCase(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExletRunnerCache.getRunnerForItem
+yawl:ExletRunnerCache_getRunnerForItem_5 a yawl:Method ;
+    rdfs:label "getRunnerForItem" ;
+    yawl:returnType "ExletRunner" ;
+    yawl:signature "ExletRunner getRunnerForItem(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExletRunnerCache.getRunner
+yawl:ExletRunnerCache_getRunner_6 a yawl:Method ;
+    rdfs:label "getRunner" ;
+    yawl:returnType "ExletRunner" ;
+    yawl:signature "ExletRunner getRunner(RuleType xType, String caseID, String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExletRunnerCache.getRunner
+yawl:ExletRunnerCache_getRunner_7 a yawl:Method ;
+    rdfs:label "getRunner" ;
+    yawl:returnType "ExletRunner" ;
+    yawl:signature "ExletRunner getRunner(RuleType xType, String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExletRunnerCache.getRunnerForWorklet
+yawl:ExletRunnerCache_getRunnerForWorklet_8 a yawl:Method ;
+    rdfs:label "getRunnerForWorklet" ;
+    yawl:returnType "ExletRunner" ;
+    yawl:signature "ExletRunner getRunnerForWorklet(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExletRunnerCache.getWorkletsForCase
+yawl:ExletRunnerCache_getWorkletsForCase_9 a yawl:Method ;
+    rdfs:label "getWorkletsForCase" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getWorkletsForCase(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExletRunnerCache.getWorkletsForItem
+yawl:ExletRunnerCache_getWorkletsForItem_10 a yawl:Method ;
+    rdfs:label "getWorkletsForItem" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getWorkletsForItem(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExletRunnerCache.getAllWorklets
+yawl:ExletRunnerCache_getAllWorklets_11 a yawl:Method ;
+    rdfs:label "getAllWorklets" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getAllWorklets()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExletRunnerCache.isCompensationWorklet
+yawl:ExletRunnerCache_isCompensationWorklet_12 a yawl:Method ;
+    rdfs:label "isCompensationWorklet" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isCompensationWorklet(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExletRunnerCache.getWorkletRunner
+yawl:ExletRunnerCache_getWorkletRunner_13 a yawl:Method ;
+    rdfs:label "getWorkletRunner" ;
+    yawl:returnType "WorkletRunner" ;
+    yawl:signature "WorkletRunner getWorkletRunner(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExletRunnerCache.removeWorkletRunners
+yawl:ExletRunnerCache_removeWorkletRunners_14 a yawl:Method ;
+    rdfs:label "removeWorkletRunners" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeWorkletRunners(Set toRemove)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExletRunnerCache.restore
+yawl:ExletRunnerCache_restore_15 a yawl:Method ;
+    rdfs:label "restore" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restore()" ;
+    rdfs:comment """restores active ExletRunner instances from persistence""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExletRunnerCache.getWorklets
+yawl:ExletRunnerCache_getWorklets_16 a yawl:Method ;
+    rdfs:label "getWorklets" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getWorklets(ExletRunner runner)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:ExletRunnerCache__runners a yawl:Field ;
+    rdfs:label "_runners" .
+
+
+

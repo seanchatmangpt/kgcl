@@ -1,0 +1,40 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.cli.CliStarter
+yawl:CliStarter a yawl:Class ;
+    rdfs:label "CliStarter" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_cli ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/cli/CliStarter.java"^^xsd:string ;
+    rdfs:comment """Starts tomcat from the command line @author Michael Adams @date 19/11/2015""" ;
+    yawl:extends yawl:CliEngineController ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CliStarter_run_1 ;
+    yawl:hasMethod yawl:CliStarter_printError_2 ;
+    .
+
+
+# Method: CliStarter.run
+yawl:CliStarter_run_1 a yawl:Method ;
+    rdfs:label "run" ;
+    yawl:returnType "void" ;
+    yawl:signature "void run()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CliStarter.printError
+yawl:CliStarter_printError_2 a yawl:Method ;
+    rdfs:label "printError" ;
+    yawl:returnType "void" ;
+    yawl:signature "void printError(String msg)" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+
+

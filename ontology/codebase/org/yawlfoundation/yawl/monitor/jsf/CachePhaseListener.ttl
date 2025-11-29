@@ -1,0 +1,49 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.monitor.jsf.CachePhaseListener
+yawl:CachePhaseListener a yawl:Class ;
+    rdfs:label "CachePhaseListener" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_monitor_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/monitor/jsf/CachePhaseListener.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 23/01/2008""" ;
+    yawl:implements yawl:PhaseListener ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CachePhaseListener_getPhaseId_1 ;
+    yawl:hasMethod yawl:CachePhaseListener_afterPhase_2 ;
+    yawl:hasMethod yawl:CachePhaseListener_beforePhase_3 ;
+    .
+
+
+# Method: CachePhaseListener.getPhaseId
+yawl:CachePhaseListener_getPhaseId_1 a yawl:Method ;
+    rdfs:label "getPhaseId" ;
+    yawl:returnType "PhaseId" ;
+    yawl:signature "PhaseId getPhaseId()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CachePhaseListener.afterPhase
+yawl:CachePhaseListener_afterPhase_2 a yawl:Method ;
+    rdfs:label "afterPhase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void afterPhase(PhaseEvent phaseEvent)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CachePhaseListener.beforePhase
+yawl:CachePhaseListener_beforePhase_3 a yawl:Method ;
+    rdfs:label "beforePhase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void beforePhase(PhaseEvent phaseEvent)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

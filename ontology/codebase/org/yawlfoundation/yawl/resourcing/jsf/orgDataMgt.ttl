@@ -1,0 +1,1017 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.orgDataMgt
+yawl:orgDataMgt a yawl:Class ;
+    rdfs:label "orgDataMgt" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/orgDataMgt.java"^^xsd:string ;
+    yawl:extends yawl:AbstractPageBean ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:orgDataMgt__init_1 ;
+    yawl:hasMethod yawl:orgDataMgt_getRequestBean_2 ;
+    yawl:hasMethod yawl:orgDataMgt_getApplicationBean_3 ;
+    yawl:hasMethod yawl:orgDataMgt_getSessionBean_4 ;
+    yawl:hasMethod yawl:orgDataMgt_init_5 ;
+    yawl:hasMethod yawl:orgDataMgt_preprocess_6 ;
+    yawl:hasMethod yawl:orgDataMgt_destroy_7 ;
+    yawl:hasMethod yawl:orgDataMgt_getPage1_8 ;
+    yawl:hasMethod yawl:orgDataMgt_setPage1_9 ;
+    yawl:hasMethod yawl:orgDataMgt_getHtml1_10 ;
+    yawl:hasMethod yawl:orgDataMgt_setHtml1_11 ;
+    yawl:hasMethod yawl:orgDataMgt_getHead1_12 ;
+    yawl:hasMethod yawl:orgDataMgt_setHead1_13 ;
+    yawl:hasMethod yawl:orgDataMgt_getLink1_14 ;
+    yawl:hasMethod yawl:orgDataMgt_setLink1_15 ;
+    yawl:hasMethod yawl:orgDataMgt_getBody1_16 ;
+    yawl:hasMethod yawl:orgDataMgt_setBody1_17 ;
+    yawl:hasMethod yawl:orgDataMgt_getForm1_18 ;
+    yawl:hasMethod yawl:orgDataMgt_setForm1_19 ;
+    yawl:hasMethod yawl:orgDataMgt_getTabSet_20 ;
+    yawl:hasMethod yawl:orgDataMgt_setTabSet_21 ;
+    yawl:hasMethod yawl:orgDataMgt_getTabRoles_22 ;
+    yawl:hasMethod yawl:orgDataMgt_setTabRoles_23 ;
+    yawl:hasMethod yawl:orgDataMgt_getLpRoles_24 ;
+    yawl:hasMethod yawl:orgDataMgt_setLpRoles_25 ;
+    yawl:hasMethod yawl:orgDataMgt_getTabCapability_26 ;
+    yawl:hasMethod yawl:orgDataMgt_setTabCapability_27 ;
+    yawl:hasMethod yawl:orgDataMgt_getLpCapabilities_28 ;
+    yawl:hasMethod yawl:orgDataMgt_setLpCapabilities_29 ;
+    yawl:hasMethod yawl:orgDataMgt_getTabPosition_30 ;
+    yawl:hasMethod yawl:orgDataMgt_setTabPosition_31 ;
+    yawl:hasMethod yawl:orgDataMgt_getLpPositions_32 ;
+    yawl:hasMethod yawl:orgDataMgt_setLpPositions_33 ;
+    yawl:hasMethod yawl:orgDataMgt_getTabOrgGroup_34 ;
+    yawl:hasMethod yawl:orgDataMgt_setTabOrgGroup_35 ;
+    yawl:hasMethod yawl:orgDataMgt_getLpOrgGroups_36 ;
+    yawl:hasMethod yawl:orgDataMgt_setLpOrgGroups_37 ;
+    yawl:hasMethod yawl:orgDataMgt_getBtnSave_38 ;
+    yawl:hasMethod yawl:orgDataMgt_setBtnSave_39 ;
+    yawl:hasMethod yawl:orgDataMgt_getBtnReset_40 ;
+    yawl:hasMethod yawl:orgDataMgt_setBtnReset_41 ;
+    yawl:hasMethod yawl:orgDataMgt_getBtnClose_42 ;
+    yawl:hasMethod yawl:orgDataMgt_setBtnClose_43 ;
+    yawl:hasMethod yawl:orgDataMgt_getBtnRemove_44 ;
+    yawl:hasMethod yawl:orgDataMgt_setBtnRemove_45 ;
+    yawl:hasMethod yawl:orgDataMgt_getBtnAdd_46 ;
+    yawl:hasMethod yawl:orgDataMgt_setBtnAdd_47 ;
+    yawl:hasMethod yawl:orgDataMgt_getBtnExport_48 ;
+    yawl:hasMethod yawl:orgDataMgt_setBtnExport_49 ;
+    yawl:hasMethod yawl:orgDataMgt_getBtnImport_50 ;
+    yawl:hasMethod yawl:orgDataMgt_setBtnImport_51 ;
+    yawl:hasMethod yawl:orgDataMgt_getBtnUpload_52 ;
+    yawl:hasMethod yawl:orgDataMgt_setBtnUpload_53 ;
+    yawl:hasMethod yawl:orgDataMgt_getBtnCancelUpload_54 ;
+    yawl:hasMethod yawl:orgDataMgt_setBtnCancelUpload_55 ;
+    yawl:hasMethod yawl:orgDataMgt_getStaticText1_56 ;
+    yawl:hasMethod yawl:orgDataMgt_setStaticText1_57 ;
+    yawl:hasMethod yawl:orgDataMgt_getFileUpload_58 ;
+    yawl:hasMethod yawl:orgDataMgt_setFileUpload_59 ;
+    yawl:hasMethod yawl:orgDataMgt_getPnlContainer_60 ;
+    yawl:hasMethod yawl:orgDataMgt_setPnlContainer_61 ;
+    yawl:hasMethod yawl:orgDataMgt_getMetaRefresh_62 ;
+    yawl:hasMethod yawl:orgDataMgt_setMetaRefresh_63 ;
+    yawl:hasMethod yawl:orgDataMgt_getPnlUpload_64 ;
+    yawl:hasMethod yawl:orgDataMgt_setPnlUpload_65 ;
+    yawl:hasMethod yawl:orgDataMgt_prerender_66 ;
+    yawl:hasMethod yawl:orgDataMgt_btnRefresh_action_67 ;
+    yawl:hasMethod yawl:orgDataMgt_btnExport_action_68 ;
+    yawl:hasMethod yawl:orgDataMgt_btnImport_action_69 ;
+    yawl:hasMethod yawl:orgDataMgt_fileUpload_processValueChange_70 ;
+    yawl:hasMethod yawl:orgDataMgt_btnUpload_action_71 ;
+    yawl:hasMethod yawl:orgDataMgt_btnCancelUpload_action_72 ;
+    yawl:hasMethod yawl:orgDataMgt_btnSave_action_73 ;
+    yawl:hasMethod yawl:orgDataMgt_btnAdd_action_74 ;
+    yawl:hasMethod yawl:orgDataMgt_btnReset_action_75 ;
+    yawl:hasMethod yawl:orgDataMgt_btnRemove_action_76 ;
+    yawl:hasMethod yawl:orgDataMgt_tabRoles_action_77 ;
+    yawl:hasMethod yawl:orgDataMgt_tabCapabilities_action_78 ;
+    yawl:hasMethod yawl:orgDataMgt_tabPositions_action_79 ;
+    yawl:hasMethod yawl:orgDataMgt_tabOrgGroups_action_80 ;
+    yawl:hasMethod yawl:orgDataMgt_getMode_81 ;
+    yawl:hasMethod yawl:orgDataMgt_setMode_82 ;
+    yawl:hasMethod yawl:orgDataMgt_setVisibleComponents_83 ;
+    yawl:hasMethod yawl:orgDataMgt_nullifyChoices_84 ;
+    yawl:hasMethod yawl:orgDataMgt_forceRefresh_85 ;
+    yawl:hasMethod yawl:orgDataMgt_updateTabHeaders_86 ;
+    yawl:hasMethod yawl:orgDataMgt_setRefreshRate_87 ;
+    yawl:hasMethod yawl:orgDataMgt_populateForm_88 ;
+    yawl:hasMethod yawl:orgDataMgt_getTabString_89 ;
+    yawl:hasMethod yawl:orgDataMgt_getAttribType_90 ;
+    yawl:hasMethod yawl:orgDataMgt_getActiveAttribText_91 ;
+    yawl:hasMethod yawl:orgDataMgt_showItem_92 ;
+    yawl:hasMethod yawl:orgDataMgt_showMessagePanel_93 ;
+    yawl:hasMethod yawl:orgDataMgt_checkDataModsEnabled_94 ;
+    yawl:hasMethod yawl:orgDataMgt_disableButton_95 ;
+    yawl:hasField yawl:orgDataMgt___placeholder ;
+    yawl:hasField yawl:orgDataMgt_page1 ;
+    yawl:hasField yawl:orgDataMgt_html1 ;
+    yawl:hasField yawl:orgDataMgt_head1 ;
+    yawl:hasField yawl:orgDataMgt_link1 ;
+    yawl:hasField yawl:orgDataMgt_body1 ;
+    yawl:hasField yawl:orgDataMgt_form1 ;
+    yawl:hasField yawl:orgDataMgt_tabSet ;
+    yawl:hasField yawl:orgDataMgt_tabRoles ;
+    yawl:hasField yawl:orgDataMgt_lpRoles ;
+    yawl:hasField yawl:orgDataMgt_tabCapability ;
+    yawl:hasField yawl:orgDataMgt_lpCapabilities ;
+    yawl:hasField yawl:orgDataMgt_tabPosition ;
+    yawl:hasField yawl:orgDataMgt_lpPositions ;
+    yawl:hasField yawl:orgDataMgt_tabOrgGroup ;
+    yawl:hasField yawl:orgDataMgt_lpOrgGroups ;
+    yawl:hasField yawl:orgDataMgt_btnSave ;
+    yawl:hasField yawl:orgDataMgt_btnReset ;
+    yawl:hasField yawl:orgDataMgt_btnClose ;
+    yawl:hasField yawl:orgDataMgt_btnRemove ;
+    yawl:hasField yawl:orgDataMgt_btnAdd ;
+    yawl:hasField yawl:orgDataMgt_btnExport ;
+    yawl:hasField yawl:orgDataMgt_btnImport ;
+    yawl:hasField yawl:orgDataMgt_btnUpload ;
+    yawl:hasField yawl:orgDataMgt_btnCancelUpload ;
+    yawl:hasField yawl:orgDataMgt_staticText1 ;
+    yawl:hasField yawl:orgDataMgt_fileUpload ;
+    yawl:hasField yawl:orgDataMgt_pnlContainer ;
+    yawl:hasField yawl:orgDataMgt_metaRefresh ;
+    yawl:hasField yawl:orgDataMgt_pnlUpload ;
+    yawl:hasField yawl:orgDataMgt__sb ;
+    yawl:hasField yawl:orgDataMgt__rm ;
+    yawl:hasField yawl:orgDataMgt_orgDataSet ;
+    yawl:hasField yawl:orgDataMgt_msgPanel ;
+    yawl:hasField yawl:orgDataMgt_innerForm ;
+    .
+
+
+# Method: orgDataMgt._init
+yawl:orgDataMgt__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: orgDataMgt.getRequestBean
+yawl:orgDataMgt_getRequestBean_2 a yawl:Method ;
+    rdfs:label "getRequestBean" ;
+    yawl:returnType "RequestBean" ;
+    yawl:signature "RequestBean getRequestBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: orgDataMgt.getApplicationBean
+yawl:orgDataMgt_getApplicationBean_3 a yawl:Method ;
+    rdfs:label "getApplicationBean" ;
+    yawl:returnType "ApplicationBean" ;
+    yawl:signature "ApplicationBean getApplicationBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: orgDataMgt.getSessionBean
+yawl:orgDataMgt_getSessionBean_4 a yawl:Method ;
+    rdfs:label "getSessionBean" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getSessionBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: orgDataMgt.init
+yawl:orgDataMgt_init_5 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.preprocess
+yawl:orgDataMgt_preprocess_6 a yawl:Method ;
+    rdfs:label "preprocess" ;
+    yawl:returnType "void" ;
+    yawl:signature "void preprocess()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.destroy
+yawl:orgDataMgt_destroy_7 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getPage1
+yawl:orgDataMgt_getPage1_8 a yawl:Method ;
+    rdfs:label "getPage1" ;
+    yawl:returnType "Page" ;
+    yawl:signature "Page getPage1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setPage1
+yawl:orgDataMgt_setPage1_9 a yawl:Method ;
+    rdfs:label "setPage1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPage1(Page p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getHtml1
+yawl:orgDataMgt_getHtml1_10 a yawl:Method ;
+    rdfs:label "getHtml1" ;
+    yawl:returnType "Html" ;
+    yawl:signature "Html getHtml1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setHtml1
+yawl:orgDataMgt_setHtml1_11 a yawl:Method ;
+    rdfs:label "setHtml1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHtml1(Html h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getHead1
+yawl:orgDataMgt_getHead1_12 a yawl:Method ;
+    rdfs:label "getHead1" ;
+    yawl:returnType "Head" ;
+    yawl:signature "Head getHead1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setHead1
+yawl:orgDataMgt_setHead1_13 a yawl:Method ;
+    rdfs:label "setHead1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHead1(Head h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getLink1
+yawl:orgDataMgt_getLink1_14 a yawl:Method ;
+    rdfs:label "getLink1" ;
+    yawl:returnType "Link" ;
+    yawl:signature "Link getLink1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setLink1
+yawl:orgDataMgt_setLink1_15 a yawl:Method ;
+    rdfs:label "setLink1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLink1(Link l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getBody1
+yawl:orgDataMgt_getBody1_16 a yawl:Method ;
+    rdfs:label "getBody1" ;
+    yawl:returnType "Body" ;
+    yawl:signature "Body getBody1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setBody1
+yawl:orgDataMgt_setBody1_17 a yawl:Method ;
+    rdfs:label "setBody1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBody1(Body b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getForm1
+yawl:orgDataMgt_getForm1_18 a yawl:Method ;
+    rdfs:label "getForm1" ;
+    yawl:returnType "Form" ;
+    yawl:signature "Form getForm1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setForm1
+yawl:orgDataMgt_setForm1_19 a yawl:Method ;
+    rdfs:label "setForm1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setForm1(Form f)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getTabSet
+yawl:orgDataMgt_getTabSet_20 a yawl:Method ;
+    rdfs:label "getTabSet" ;
+    yawl:returnType "TabSet" ;
+    yawl:signature "TabSet getTabSet()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setTabSet
+yawl:orgDataMgt_setTabSet_21 a yawl:Method ;
+    rdfs:label "setTabSet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTabSet(TabSet ts)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getTabRoles
+yawl:orgDataMgt_getTabRoles_22 a yawl:Method ;
+    rdfs:label "getTabRoles" ;
+    yawl:returnType "Tab" ;
+    yawl:signature "Tab getTabRoles()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setTabRoles
+yawl:orgDataMgt_setTabRoles_23 a yawl:Method ;
+    rdfs:label "setTabRoles" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTabRoles(Tab t)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getLpRoles
+yawl:orgDataMgt_getLpRoles_24 a yawl:Method ;
+    rdfs:label "getLpRoles" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getLpRoles()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setLpRoles
+yawl:orgDataMgt_setLpRoles_25 a yawl:Method ;
+    rdfs:label "setLpRoles" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLpRoles(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getTabCapability
+yawl:orgDataMgt_getTabCapability_26 a yawl:Method ;
+    rdfs:label "getTabCapability" ;
+    yawl:returnType "Tab" ;
+    yawl:signature "Tab getTabCapability()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setTabCapability
+yawl:orgDataMgt_setTabCapability_27 a yawl:Method ;
+    rdfs:label "setTabCapability" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTabCapability(Tab t)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getLpCapabilities
+yawl:orgDataMgt_getLpCapabilities_28 a yawl:Method ;
+    rdfs:label "getLpCapabilities" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getLpCapabilities()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setLpCapabilities
+yawl:orgDataMgt_setLpCapabilities_29 a yawl:Method ;
+    rdfs:label "setLpCapabilities" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLpCapabilities(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getTabPosition
+yawl:orgDataMgt_getTabPosition_30 a yawl:Method ;
+    rdfs:label "getTabPosition" ;
+    yawl:returnType "Tab" ;
+    yawl:signature "Tab getTabPosition()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setTabPosition
+yawl:orgDataMgt_setTabPosition_31 a yawl:Method ;
+    rdfs:label "setTabPosition" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTabPosition(Tab t)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getLpPositions
+yawl:orgDataMgt_getLpPositions_32 a yawl:Method ;
+    rdfs:label "getLpPositions" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getLpPositions()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setLpPositions
+yawl:orgDataMgt_setLpPositions_33 a yawl:Method ;
+    rdfs:label "setLpPositions" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLpPositions(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getTabOrgGroup
+yawl:orgDataMgt_getTabOrgGroup_34 a yawl:Method ;
+    rdfs:label "getTabOrgGroup" ;
+    yawl:returnType "Tab" ;
+    yawl:signature "Tab getTabOrgGroup()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setTabOrgGroup
+yawl:orgDataMgt_setTabOrgGroup_35 a yawl:Method ;
+    rdfs:label "setTabOrgGroup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTabOrgGroup(Tab t)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getLpOrgGroups
+yawl:orgDataMgt_getLpOrgGroups_36 a yawl:Method ;
+    rdfs:label "getLpOrgGroups" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getLpOrgGroups()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setLpOrgGroups
+yawl:orgDataMgt_setLpOrgGroups_37 a yawl:Method ;
+    rdfs:label "setLpOrgGroups" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLpOrgGroups(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getBtnSave
+yawl:orgDataMgt_getBtnSave_38 a yawl:Method ;
+    rdfs:label "getBtnSave" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnSave()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setBtnSave
+yawl:orgDataMgt_setBtnSave_39 a yawl:Method ;
+    rdfs:label "setBtnSave" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnSave(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getBtnReset
+yawl:orgDataMgt_getBtnReset_40 a yawl:Method ;
+    rdfs:label "getBtnReset" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnReset()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setBtnReset
+yawl:orgDataMgt_setBtnReset_41 a yawl:Method ;
+    rdfs:label "setBtnReset" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnReset(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getBtnClose
+yawl:orgDataMgt_getBtnClose_42 a yawl:Method ;
+    rdfs:label "getBtnClose" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnClose()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setBtnClose
+yawl:orgDataMgt_setBtnClose_43 a yawl:Method ;
+    rdfs:label "setBtnClose" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnClose(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getBtnRemove
+yawl:orgDataMgt_getBtnRemove_44 a yawl:Method ;
+    rdfs:label "getBtnRemove" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnRemove()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setBtnRemove
+yawl:orgDataMgt_setBtnRemove_45 a yawl:Method ;
+    rdfs:label "setBtnRemove" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnRemove(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getBtnAdd
+yawl:orgDataMgt_getBtnAdd_46 a yawl:Method ;
+    rdfs:label "getBtnAdd" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnAdd()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setBtnAdd
+yawl:orgDataMgt_setBtnAdd_47 a yawl:Method ;
+    rdfs:label "setBtnAdd" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnAdd(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getBtnExport
+yawl:orgDataMgt_getBtnExport_48 a yawl:Method ;
+    rdfs:label "getBtnExport" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnExport()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setBtnExport
+yawl:orgDataMgt_setBtnExport_49 a yawl:Method ;
+    rdfs:label "setBtnExport" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnExport(Button btn)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getBtnImport
+yawl:orgDataMgt_getBtnImport_50 a yawl:Method ;
+    rdfs:label "getBtnImport" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnImport()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setBtnImport
+yawl:orgDataMgt_setBtnImport_51 a yawl:Method ;
+    rdfs:label "setBtnImport" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnImport(Button btn)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getBtnUpload
+yawl:orgDataMgt_getBtnUpload_52 a yawl:Method ;
+    rdfs:label "getBtnUpload" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnUpload()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setBtnUpload
+yawl:orgDataMgt_setBtnUpload_53 a yawl:Method ;
+    rdfs:label "setBtnUpload" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnUpload(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getBtnCancelUpload
+yawl:orgDataMgt_getBtnCancelUpload_54 a yawl:Method ;
+    rdfs:label "getBtnCancelUpload" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnCancelUpload()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setBtnCancelUpload
+yawl:orgDataMgt_setBtnCancelUpload_55 a yawl:Method ;
+    rdfs:label "setBtnCancelUpload" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnCancelUpload(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getStaticText1
+yawl:orgDataMgt_getStaticText1_56 a yawl:Method ;
+    rdfs:label "getStaticText1" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getStaticText1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setStaticText1
+yawl:orgDataMgt_setStaticText1_57 a yawl:Method ;
+    rdfs:label "setStaticText1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStaticText1(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getFileUpload
+yawl:orgDataMgt_getFileUpload_58 a yawl:Method ;
+    rdfs:label "getFileUpload" ;
+    yawl:returnType "Upload" ;
+    yawl:signature "Upload getFileUpload()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setFileUpload
+yawl:orgDataMgt_setFileUpload_59 a yawl:Method ;
+    rdfs:label "setFileUpload" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setFileUpload(Upload u)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getPnlContainer
+yawl:orgDataMgt_getPnlContainer_60 a yawl:Method ;
+    rdfs:label "getPnlContainer" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlContainer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setPnlContainer
+yawl:orgDataMgt_setPnlContainer_61 a yawl:Method ;
+    rdfs:label "setPnlContainer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlContainer(PanelLayout pnl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getMetaRefresh
+yawl:orgDataMgt_getMetaRefresh_62 a yawl:Method ;
+    rdfs:label "getMetaRefresh" ;
+    yawl:returnType "Meta" ;
+    yawl:signature "Meta getMetaRefresh()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setMetaRefresh
+yawl:orgDataMgt_setMetaRefresh_63 a yawl:Method ;
+    rdfs:label "setMetaRefresh" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMetaRefresh(Meta m)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getPnlUpload
+yawl:orgDataMgt_getPnlUpload_64 a yawl:Method ;
+    rdfs:label "getPnlUpload" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlUpload()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.setPnlUpload
+yawl:orgDataMgt_setPnlUpload_65 a yawl:Method ;
+    rdfs:label "setPnlUpload" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlUpload(PanelLayout pnl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.prerender
+yawl:orgDataMgt_prerender_66 a yawl:Method ;
+    rdfs:label "prerender" ;
+    yawl:returnType "void" ;
+    yawl:signature "void prerender()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.btnRefresh_action
+yawl:orgDataMgt_btnRefresh_action_67 a yawl:Method ;
+    rdfs:label "btnRefresh_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnRefresh_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.btnExport_action
+yawl:orgDataMgt_btnExport_action_68 a yawl:Method ;
+    rdfs:label "btnExport_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnExport_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.btnImport_action
+yawl:orgDataMgt_btnImport_action_69 a yawl:Method ;
+    rdfs:label "btnImport_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnImport_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.fileUpload_processValueChange
+yawl:orgDataMgt_fileUpload_processValueChange_70 a yawl:Method ;
+    rdfs:label "fileUpload_processValueChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fileUpload_processValueChange(ValueChangeEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.btnUpload_action
+yawl:orgDataMgt_btnUpload_action_71 a yawl:Method ;
+    rdfs:label "btnUpload_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnUpload_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.btnCancelUpload_action
+yawl:orgDataMgt_btnCancelUpload_action_72 a yawl:Method ;
+    rdfs:label "btnCancelUpload_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnCancelUpload_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.btnSave_action
+yawl:orgDataMgt_btnSave_action_73 a yawl:Method ;
+    rdfs:label "btnSave_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnSave_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.btnAdd_action
+yawl:orgDataMgt_btnAdd_action_74 a yawl:Method ;
+    rdfs:label "btnAdd_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnAdd_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.btnReset_action
+yawl:orgDataMgt_btnReset_action_75 a yawl:Method ;
+    rdfs:label "btnReset_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnReset_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.btnRemove_action
+yawl:orgDataMgt_btnRemove_action_76 a yawl:Method ;
+    rdfs:label "btnRemove_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnRemove_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.tabRoles_action
+yawl:orgDataMgt_tabRoles_action_77 a yawl:Method ;
+    rdfs:label "tabRoles_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String tabRoles_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.tabCapabilities_action
+yawl:orgDataMgt_tabCapabilities_action_78 a yawl:Method ;
+    rdfs:label "tabCapabilities_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String tabCapabilities_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.tabPositions_action
+yawl:orgDataMgt_tabPositions_action_79 a yawl:Method ;
+    rdfs:label "tabPositions_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String tabPositions_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.tabOrgGroups_action
+yawl:orgDataMgt_tabOrgGroups_action_80 a yawl:Method ;
+    rdfs:label "tabOrgGroups_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String tabOrgGroups_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.getMode
+yawl:orgDataMgt_getMode_81 a yawl:Method ;
+    rdfs:label "getMode" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getMode()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: orgDataMgt.setMode
+yawl:orgDataMgt_setMode_82 a yawl:Method ;
+    rdfs:label "setMode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMode(SessionBean mode)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: orgDataMgt.setVisibleComponents
+yawl:orgDataMgt_setVisibleComponents_83 a yawl:Method ;
+    rdfs:label "setVisibleComponents" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setVisibleComponents(String tabName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: orgDataMgt.nullifyChoices
+yawl:orgDataMgt_nullifyChoices_84 a yawl:Method ;
+    rdfs:label "nullifyChoices" ;
+    yawl:returnType "void" ;
+    yawl:signature "void nullifyChoices()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: orgDataMgt.forceRefresh
+yawl:orgDataMgt_forceRefresh_85 a yawl:Method ;
+    rdfs:label "forceRefresh" ;
+    yawl:returnType "void" ;
+    yawl:signature "void forceRefresh()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.updateTabHeaders
+yawl:orgDataMgt_updateTabHeaders_86 a yawl:Method ;
+    rdfs:label "updateTabHeaders" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateTabHeaders(Tab selected)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: orgDataMgt.setRefreshRate
+yawl:orgDataMgt_setRefreshRate_87 a yawl:Method ;
+    rdfs:label "setRefreshRate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRefreshRate(int rate)" ;
+    rdfs:comment """Sets the auto refresh rate of the page @param rate if <0, disables page refreshes; if >0, set refresh rate to that number of seconds; if 0, set the rate to the default provided by the resourceService's web.xml""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: orgDataMgt.populateForm
+yawl:orgDataMgt_populateForm_88 a yawl:Method ;
+    rdfs:label "populateForm" ;
+    yawl:returnType "int" ;
+    yawl:signature "int populateForm(AttribType aType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: orgDataMgt.getTabString
+yawl:orgDataMgt_getTabString_89 a yawl:Method ;
+    rdfs:label "getTabString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTabString(AttribType type)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: orgDataMgt.getAttribType
+yawl:orgDataMgt_getAttribType_90 a yawl:Method ;
+    rdfs:label "getAttribType" ;
+    yawl:returnType "AttribType" ;
+    yawl:signature "AttribType getAttribType(String tabName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: orgDataMgt.getActiveAttribText
+yawl:orgDataMgt_getActiveAttribText_91 a yawl:Method ;
+    rdfs:label "getActiveAttribText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getActiveAttribText()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: orgDataMgt.showItem
+yawl:orgDataMgt_showItem_92 a yawl:Method ;
+    rdfs:label "showItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showItem(String id, AttribType type)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: orgDataMgt.showMessagePanel
+yawl:orgDataMgt_showMessagePanel_93 a yawl:Method ;
+    rdfs:label "showMessagePanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showMessagePanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: orgDataMgt.checkDataModsEnabled
+yawl:orgDataMgt_checkDataModsEnabled_94 a yawl:Method ;
+    rdfs:label "checkDataModsEnabled" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkDataModsEnabled()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: orgDataMgt.disableButton
+yawl:orgDataMgt_disableButton_95 a yawl:Method ;
+    rdfs:label "disableButton" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disableButton(Button b)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:orgDataMgt___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:orgDataMgt_page1 a yawl:Field ;
+    rdfs:label "page1" .
+
+yawl:orgDataMgt_html1 a yawl:Field ;
+    rdfs:label "html1" .
+
+yawl:orgDataMgt_head1 a yawl:Field ;
+    rdfs:label "head1" .
+
+yawl:orgDataMgt_link1 a yawl:Field ;
+    rdfs:label "link1" .
+
+yawl:orgDataMgt_body1 a yawl:Field ;
+    rdfs:label "body1" .
+
+yawl:orgDataMgt_form1 a yawl:Field ;
+    rdfs:label "form1" .
+
+yawl:orgDataMgt_tabSet a yawl:Field ;
+    rdfs:label "tabSet" .
+
+yawl:orgDataMgt_tabRoles a yawl:Field ;
+    rdfs:label "tabRoles" .
+
+yawl:orgDataMgt_lpRoles a yawl:Field ;
+    rdfs:label "lpRoles" .
+
+yawl:orgDataMgt_tabCapability a yawl:Field ;
+    rdfs:label "tabCapability" .
+
+yawl:orgDataMgt_lpCapabilities a yawl:Field ;
+    rdfs:label "lpCapabilities" .
+
+yawl:orgDataMgt_tabPosition a yawl:Field ;
+    rdfs:label "tabPosition" .
+
+yawl:orgDataMgt_lpPositions a yawl:Field ;
+    rdfs:label "lpPositions" .
+
+yawl:orgDataMgt_tabOrgGroup a yawl:Field ;
+    rdfs:label "tabOrgGroup" .
+
+yawl:orgDataMgt_lpOrgGroups a yawl:Field ;
+    rdfs:label "lpOrgGroups" .
+
+yawl:orgDataMgt_btnSave a yawl:Field ;
+    rdfs:label "btnSave" .
+
+yawl:orgDataMgt_btnReset a yawl:Field ;
+    rdfs:label "btnReset" .
+
+yawl:orgDataMgt_btnClose a yawl:Field ;
+    rdfs:label "btnClose" .
+
+yawl:orgDataMgt_btnRemove a yawl:Field ;
+    rdfs:label "btnRemove" .
+
+yawl:orgDataMgt_btnAdd a yawl:Field ;
+    rdfs:label "btnAdd" .
+
+yawl:orgDataMgt_btnExport a yawl:Field ;
+    rdfs:label "btnExport" .
+
+yawl:orgDataMgt_btnImport a yawl:Field ;
+    rdfs:label "btnImport" .
+
+yawl:orgDataMgt_btnUpload a yawl:Field ;
+    rdfs:label "btnUpload" .
+
+yawl:orgDataMgt_btnCancelUpload a yawl:Field ;
+    rdfs:label "btnCancelUpload" .
+
+yawl:orgDataMgt_staticText1 a yawl:Field ;
+    rdfs:label "staticText1" .
+
+yawl:orgDataMgt_fileUpload a yawl:Field ;
+    rdfs:label "fileUpload" .
+
+yawl:orgDataMgt_pnlContainer a yawl:Field ;
+    rdfs:label "pnlContainer" .
+
+yawl:orgDataMgt_metaRefresh a yawl:Field ;
+    rdfs:label "metaRefresh" .
+
+yawl:orgDataMgt_pnlUpload a yawl:Field ;
+    rdfs:label "pnlUpload" .
+
+yawl:orgDataMgt__sb a yawl:Field ;
+    rdfs:label "_sb" .
+
+yawl:orgDataMgt__rm a yawl:Field ;
+    rdfs:label "_rm" .
+
+yawl:orgDataMgt_orgDataSet a yawl:Field ;
+    rdfs:label "orgDataSet" .
+
+yawl:orgDataMgt_msgPanel a yawl:Field ;
+    rdfs:label "msgPanel" .
+
+yawl:orgDataMgt_innerForm a yawl:Field ;
+    rdfs:label "innerForm" .
+
+
+

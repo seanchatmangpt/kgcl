@@ -1,0 +1,55 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.schema.internal
+yawl:org_yawlfoundation_yawl_schema_internal a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.schema.internal" .
+# Class: org.yawlfoundation.yawl.schema.internal.YTimerType
+yawl:YTimerType a yawl:Class ;
+    rdfs:label "YTimerType" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_schema_internal ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/schema/internal/YTimerType.java"^^xsd:string ;
+    rdfs:comment """Defines a data structure for a timer @author: Michael Adams @date: 16/06/2008""" ;
+    yawl:implements yawl:YDataType ;
+    yawl:hasMethod yawl:YTimerType_getSchemaString_1 ;
+    yawl:hasMethod yawl:YTimerType_getSchema_2 ;
+    yawl:hasMethod yawl:YTimerType_addElement_3 ;
+    yawl:hasField yawl:YTimerType_SCHEMA ;
+    .
+
+
+# Method: YTimerType.getSchemaString
+yawl:YTimerType_getSchemaString_1 a yawl:Method ;
+    rdfs:label "getSchemaString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSchemaString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerType.getSchema
+yawl:YTimerType_getSchema_2 a yawl:Method ;
+    rdfs:label "getSchema" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getSchema(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerType.addElement
+yawl:YTimerType_addElement_3 a yawl:Method ;
+    rdfs:label "addElement" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element addElement(Element parent, String name)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YTimerType_SCHEMA a yawl:Field ;
+    rdfs:label "SCHEMA" .
+
+
+

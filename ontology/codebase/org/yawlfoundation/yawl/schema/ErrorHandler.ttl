@@ -1,0 +1,100 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.schema.ErrorHandler
+yawl:ErrorHandler a yawl:Class ;
+    rdfs:label "ErrorHandler" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_schema ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/schema/ErrorHandler.java"^^xsd:string ;
+    rdfs:comment """This class implements the SAX ErrorHandler interface allowing customised handling of all validation errors in an XML document. This handler only terminates at the end of the document or a fatal error. All other errors are recorded for future retrieval to allow complete parsing of the XML document. @author Mike Fowler Date: 04-Jul-2006""" ;
+    yawl:implements yawl:org ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ErrorHandler_reset_1 ;
+    yawl:hasMethod yawl:ErrorHandler_getWarnings_2 ;
+    yawl:hasMethod yawl:ErrorHandler_getErrors_3 ;
+    yawl:hasMethod yawl:ErrorHandler_isValid_4 ;
+    yawl:hasMethod yawl:ErrorHandler_warning_5 ;
+    yawl:hasMethod yawl:ErrorHandler_error_6 ;
+    yawl:hasMethod yawl:ErrorHandler_fatalError_7 ;
+    yawl:hasField yawl:ErrorHandler_warnings ;
+    yawl:hasField yawl:ErrorHandler_errors ;
+    .
+
+
+# Method: ErrorHandler.reset
+yawl:ErrorHandler_reset_1 a yawl:Method ;
+    rdfs:label "reset" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reset()" ;
+    rdfs:comment """Clear the messages from any previous run""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ErrorHandler.getWarnings
+yawl:ErrorHandler_getWarnings_2 a yawl:Method ;
+    rdfs:label "getWarnings" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getWarnings()" ;
+    rdfs:comment """@return String list of all warnings contained in the parsed document.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ErrorHandler.getErrors
+yawl:ErrorHandler_getErrors_3 a yawl:Method ;
+    rdfs:label "getErrors" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getErrors()" ;
+    rdfs:comment """@return String list of all errors contained in the parsed document.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ErrorHandler.isValid
+yawl:ErrorHandler_isValid_4 a yawl:Method ;
+    rdfs:label "isValid" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isValid()" ;
+    rdfs:comment """@return true if there were no errors, false otherwise""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ErrorHandler.warning
+yawl:ErrorHandler_warning_5 a yawl:Method ;
+    rdfs:label "warning" ;
+    yawl:returnType "void" ;
+    yawl:signature "void warning(SAXParseException e)" ;
+    rdfs:comment """Receive notification of a warning. <p/> <p>SAX parsers will use this method to report conditions that are not errors or fatal errors as defined by the XML recommendation.  The default behaviour is to take no action.</p> <p/> <p>The SAX parser must continue to provide normal parsing events after invoking this method: it should still be possible for the application to process the document through to the end.</p> <p/> <p>Filters may use this method to report other, non-XML warnings as well.</p> @pa""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ErrorHandler.error
+yawl:ErrorHandler_error_6 a yawl:Method ;
+    rdfs:label "error" ;
+    yawl:returnType "void" ;
+    yawl:signature "void error(SAXParseException e)" ;
+    rdfs:comment """Receive notification of a recoverable error. <p/> <p>This corresponds to the definition of \"error\" in section 1.2 of the W3C XML 1.0 Recommendation.  For example, a validating parser would use this callback to report the violation of a validity constraint.  The default behaviour is to take no action.</p> <p/> <p>The SAX parser must continue to provide normal parsing events after invoking this method: it should still be possible for the application to process the document through to the end. If""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ErrorHandler.fatalError
+yawl:ErrorHandler_fatalError_7 a yawl:Method ;
+    rdfs:label "fatalError" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fatalError(SAXParseException e)" ;
+    rdfs:comment """Receive notification of a non-recoverable error. <p/> <p><strong>There is an apparent contradiction between the documentation for this method and the documentation for {@link org.xml.sax.ContentHandler#endDocument}.  Until this ambiguity is resolved in a future major release, clients should make no assumptions about whether endDocument() will or will not be invoked when the parser has reported a fatalError() or thrown an exception.</strong></p> <p/> <p>This corresponds to the definition of \"fat""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:ErrorHandler_warnings a yawl:Field ;
+    rdfs:label "warnings" .
+
+yawl:ErrorHandler_errors a yawl:Field ;
+    rdfs:label "errors" .
+
+
+

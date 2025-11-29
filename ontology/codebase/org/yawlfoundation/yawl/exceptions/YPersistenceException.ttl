@@ -1,0 +1,22 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.exceptions.YPersistenceException
+yawl:YPersistenceException a yawl:Class ;
+    rdfs:label "YPersistenceException" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_exceptions ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/exceptions/YPersistenceException.java"^^xsd:string ;
+    rdfs:comment """Exception which indicates a failure has occured within the persistence layer of the YAWL engine.<P> Notes: This exception should be caught and handled as a fatal exception within the engine code. As it indicates some failure to persist a runtime object to storage, the usual action would be to gracefully terminate the engine without processing any other work.""" ;
+    yawl:extends yawl:YAWLException ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+
+

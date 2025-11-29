@@ -1,0 +1,254 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.util.XNodeParser
+yawl:XNodeParser a yawl:Class ;
+    rdfs:label "XNodeParser" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/util/XNodeParser.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 22/03/2010""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:XNodeParser_parse_1 ;
+    yawl:hasMethod yawl:XNodeParser_parse_2 ;
+    yawl:hasMethod yawl:XNodeParser_parse_3 ;
+    yawl:hasMethod yawl:XNodeParser_suppressMessages_4 ;
+    yawl:hasMethod yawl:XNodeParser_parse_5 ;
+    yawl:hasMethod yawl:XNodeParser_newNode_6 ;
+    yawl:hasMethod yawl:XNodeParser_getFirstWord_7 ;
+    yawl:hasMethod yawl:XNodeParser_strSubtract_8 ;
+    yawl:hasMethod yawl:XNodeParser_parseContent_9 ;
+    yawl:hasMethod yawl:XNodeParser_getSubContent_10 ;
+    yawl:hasMethod yawl:XNodeParser_getIndexList_11 ;
+    yawl:hasMethod yawl:XNodeParser_isBookEndTag_12 ;
+    yawl:hasMethod yawl:XNodeParser_lastCharDelineatesTag_13 ;
+    yawl:hasMethod yawl:XNodeParser_isSelfClosingTag_14 ;
+    yawl:hasMethod yawl:XNodeParser_getCorrespondingCloserPos_15 ;
+    yawl:hasMethod yawl:XNodeParser_init_16 ;
+    yawl:hasMethod yawl:XNodeParser_processOpeningComments_17 ;
+    yawl:hasMethod yawl:XNodeParser_processClosingComments_18 ;
+    yawl:hasMethod yawl:XNodeParser_processOutlyingComments_19 ;
+    yawl:hasMethod yawl:XNodeParser_addOutlyingComments_20 ;
+    yawl:hasMethod yawl:XNodeParser_extractComment_21 ;
+    yawl:hasMethod yawl:XNodeParser_extractTrailingComment_22 ;
+    yawl:hasMethod yawl:XNodeParser_extractCDATA_23 ;
+    yawl:hasField yawl:XNodeParser__check ;
+    yawl:hasField yawl:XNodeParser__suppressMessages ;
+    yawl:hasField yawl:XNodeParser__attributeSplitter ;
+    yawl:hasField yawl:XNodeParser__openingComments ;
+    yawl:hasField yawl:XNodeParser__closingComments ;
+    yawl:hasField yawl:XNodeParser_UTF8_BOM ;
+    .
+
+
+# Method: XNodeParser.parse
+yawl:XNodeParser_parse_1 a yawl:Method ;
+    rdfs:label "parse" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode parse(String s)" ;
+    rdfs:comment """Parses a simple xml string into an XNode structure @param s the string to parse @return the root XNode, with contents""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNodeParser.parse
+yawl:XNodeParser_parse_2 a yawl:Method ;
+    rdfs:label "parse" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode parse(Element e)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNodeParser.parse
+yawl:XNodeParser_parse_3 a yawl:Method ;
+    rdfs:label "parse" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode parse(Document d)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNodeParser.suppressMessages
+yawl:XNodeParser_suppressMessages_4 a yawl:Method ;
+    rdfs:label "suppressMessages" ;
+    yawl:returnType "void" ;
+    yawl:signature "void suppressMessages(boolean suppress)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNodeParser.parse
+yawl:XNodeParser_parse_5 a yawl:Method ;
+    rdfs:label "parse" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode parse(String s, int depth)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNodeParser.newNode
+yawl:XNodeParser_newNode_6 a yawl:Method ;
+    rdfs:label "newNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode newNode(String s, int depth)" ;
+    rdfs:comment """Creates a new XNode from the text provided @param s the inner contents of an opening tag (ie. name + attributes) @return the created node""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNodeParser.getFirstWord
+yawl:XNodeParser_getFirstWord_7 a yawl:Method ;
+    rdfs:label "getFirstWord" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFirstWord(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNodeParser.strSubtract
+yawl:XNodeParser_strSubtract_8 a yawl:Method ;
+    rdfs:label "strSubtract" ;
+    yawl:returnType "String" ;
+    yawl:signature "String strSubtract(String subtractee, String subtractor)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNodeParser.parseContent
+yawl:XNodeParser_parseContent_9 a yawl:Method ;
+    rdfs:label "parseContent" ;
+    yawl:returnType "List" ;
+    yawl:signature "List parseContent(String content)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNodeParser.getSubContent
+yawl:XNodeParser_getSubContent_10 a yawl:Method ;
+    rdfs:label "getSubContent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSubContent(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNodeParser.getIndexList
+yawl:XNodeParser_getIndexList_11 a yawl:Method ;
+    rdfs:label "getIndexList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getIndexList(String s, String sub)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNodeParser.isBookEndTag
+yawl:XNodeParser_isBookEndTag_12 a yawl:Method ;
+    rdfs:label "isBookEndTag" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isBookEndTag(String s, int pos)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNodeParser.lastCharDelineatesTag
+yawl:XNodeParser_lastCharDelineatesTag_13 a yawl:Method ;
+    rdfs:label "lastCharDelineatesTag" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean lastCharDelineatesTag(String s, int pos)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNodeParser.isSelfClosingTag
+yawl:XNodeParser_isSelfClosingTag_14 a yawl:Method ;
+    rdfs:label "isSelfClosingTag" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isSelfClosingTag(String s, int pos)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNodeParser.getCorrespondingCloserPos
+yawl:XNodeParser_getCorrespondingCloserPos_15 a yawl:Method ;
+    rdfs:label "getCorrespondingCloserPos" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getCorrespondingCloserPos(List openers, List closers)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNodeParser.init
+yawl:XNodeParser_init_16 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNodeParser.processOpeningComments
+yawl:XNodeParser_processOpeningComments_17 a yawl:Method ;
+    rdfs:label "processOpeningComments" ;
+    yawl:returnType "String" ;
+    yawl:signature "String processOpeningComments(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNodeParser.processClosingComments
+yawl:XNodeParser_processClosingComments_18 a yawl:Method ;
+    rdfs:label "processClosingComments" ;
+    yawl:returnType "String" ;
+    yawl:signature "String processClosingComments(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNodeParser.processOutlyingComments
+yawl:XNodeParser_processOutlyingComments_19 a yawl:Method ;
+    rdfs:label "processOutlyingComments" ;
+    yawl:returnType "String" ;
+    yawl:signature "String processOutlyingComments(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNodeParser.addOutlyingComments
+yawl:XNodeParser_addOutlyingComments_20 a yawl:Method ;
+    rdfs:label "addOutlyingComments" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addOutlyingComments(XNode node)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNodeParser.extractComment
+yawl:XNodeParser_extractComment_21 a yawl:Method ;
+    rdfs:label "extractComment" ;
+    yawl:returnType "String" ;
+    yawl:signature "String extractComment(String rawComment)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNodeParser.extractTrailingComment
+yawl:XNodeParser_extractTrailingComment_22 a yawl:Method ;
+    rdfs:label "extractTrailingComment" ;
+    yawl:returnType "String" ;
+    yawl:signature "String extractTrailingComment(String rawComment)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNodeParser.extractCDATA
+yawl:XNodeParser_extractCDATA_23 a yawl:Method ;
+    rdfs:label "extractCDATA" ;
+    yawl:returnType "String" ;
+    yawl:signature "String extractCDATA(String rawCDATA)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:XNodeParser__check a yawl:Field ;
+    rdfs:label "_check" .
+
+yawl:XNodeParser__suppressMessages a yawl:Field ;
+    rdfs:label "_suppressMessages" .
+
+yawl:XNodeParser__attributeSplitter a yawl:Field ;
+    rdfs:label "_attributeSplitter" .
+
+yawl:XNodeParser__openingComments a yawl:Field ;
+    rdfs:label "_openingComments" .
+
+yawl:XNodeParser__closingComments a yawl:Field ;
+    rdfs:label "_closingComments" .
+
+yawl:XNodeParser_UTF8_BOM a yawl:Field ;
+    rdfs:label "UTF8_BOM" .
+
+
+

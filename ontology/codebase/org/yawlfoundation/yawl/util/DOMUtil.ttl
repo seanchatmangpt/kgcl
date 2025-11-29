@@ -1,0 +1,286 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.util.DOMUtil
+yawl:DOMUtil a yawl:Class ;
+    rdfs:label "DOMUtil" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/util/DOMUtil.java"^^xsd:string ;
+    rdfs:comment """This class provides helper methods to perform common DOM related tasks. @author Mike Fowler Date: Oct 25, 2005""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DOMUtil_getDocumentFromString_1 ;
+    yawl:hasMethod yawl:DOMUtil_createDocumentInstance_2 ;
+    yawl:hasMethod yawl:DOMUtil_createNamespacelessDocumentInstance_3 ;
+    yawl:hasMethod yawl:DOMUtil_getNamespacelessDocumentFromDocument_4 ;
+    yawl:hasMethod yawl:DOMUtil_getNamespacelessDocumentFromString_5 ;
+    yawl:hasMethod yawl:DOMUtil_getNodeText_6 ;
+    yawl:hasMethod yawl:DOMUtil_getXMLStringFragmentFromNode_7 ;
+    yawl:hasMethod yawl:DOMUtil_getXMLStringFragmentFromNode_8 ;
+    yawl:hasMethod yawl:DOMUtil_getXMLStringFragmentFromNode_9 ;
+    yawl:hasMethod yawl:DOMUtil_getXMLStringFragmentFromNode_10 ;
+    yawl:hasMethod yawl:DOMUtil_getXMLStringFragmentFromNode_11 ;
+    yawl:hasMethod yawl:DOMUtil_getXMLStringFragmentFromNode_12 ;
+    yawl:hasMethod yawl:DOMUtil_removeEmptyNodes_13 ;
+    yawl:hasMethod yawl:DOMUtil_removeEmptyElements_14 ;
+    yawl:hasMethod yawl:DOMUtil_selectSingleNode_15 ;
+    yawl:hasMethod yawl:DOMUtil_selectNodeText_16 ;
+    yawl:hasMethod yawl:DOMUtil_selectNodeList_17 ;
+    yawl:hasMethod yawl:DOMUtil_formatXMLStringForDisplay_18 ;
+    yawl:hasMethod yawl:DOMUtil_formatXMLStringForDisplay_19 ;
+    yawl:hasMethod yawl:DOMUtil_removeAllChildNodes_20 ;
+    yawl:hasMethod yawl:DOMUtil_removeAllAttributes_21 ;
+    yawl:hasMethod yawl:DOMUtil_createUTF8InputSource_22 ;
+    yawl:hasMethod yawl:DOMUtil_createUTF8InputSource_23 ;
+    yawl:hasMethod yawl:DOMUtil_alphabetiseChildNodes_24 ;
+    yawl:hasField yawl:DOMUtil_EMPTY_ELEMENT_REMOVAL_XSLT ;
+    yawl:hasField yawl:DOMUtil_emptyElementXSLT ;
+    .
+
+
+# Method: DOMUtil.getDocumentFromString
+yawl:DOMUtil_getDocumentFromString_1 a yawl:Method ;
+    rdfs:label "getDocumentFromString" ;
+    yawl:returnType "Document" ;
+    yawl:signature "Document getDocumentFromString(String xml)" ;
+    rdfs:comment """Converts a xml String to a DOM Document @param xml to be parsed @return DOM Document representation of XML. @throws ParserConfigurationException @throws SAXException @throws IOException""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DOMUtil.createDocumentInstance
+yawl:DOMUtil_createDocumentInstance_2 a yawl:Method ;
+    rdfs:label "createDocumentInstance" ;
+    yawl:returnType "Document" ;
+    yawl:signature "Document createDocumentInstance()" ;
+    rdfs:comment """Creates a new, namespace aware, Document node @return the created DOM Document, otherwise return null""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DOMUtil.createNamespacelessDocumentInstance
+yawl:DOMUtil_createNamespacelessDocumentInstance_3 a yawl:Method ;
+    rdfs:label "createNamespacelessDocumentInstance" ;
+    yawl:returnType "Document" ;
+    yawl:signature "Document createNamespacelessDocumentInstance()" ;
+    rdfs:comment """Creates a new, namespace aware, Document node @return the created DOM Document, otherwise return null""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DOMUtil.getNamespacelessDocumentFromDocument
+yawl:DOMUtil_getNamespacelessDocumentFromDocument_4 a yawl:Method ;
+    rdfs:label "getNamespacelessDocumentFromDocument" ;
+    yawl:returnType "Document" ;
+    yawl:signature "Document getNamespacelessDocumentFromDocument(Document dom)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DOMUtil.getNamespacelessDocumentFromString
+yawl:DOMUtil_getNamespacelessDocumentFromString_5 a yawl:Method ;
+    rdfs:label "getNamespacelessDocumentFromString" ;
+    yawl:returnType "Document" ;
+    yawl:signature "Document getNamespacelessDocumentFromString(String xml)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DOMUtil.getNodeText
+yawl:DOMUtil_getNodeText_6 a yawl:Method ;
+    rdfs:label "getNodeText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNodeText(Node node)" ;
+    rdfs:comment """Extracts to text from the supplied node and it's children. @param node to extract text from. @return String representation of the node text.""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DOMUtil.getXMLStringFragmentFromNode
+yawl:DOMUtil_getXMLStringFragmentFromNode_7 a yawl:Method ;
+    rdfs:label "getXMLStringFragmentFromNode" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getXMLStringFragmentFromNode(Node node)" ;
+    rdfs:comment """Takes the supplied node as the root of an xml document and converts it to a String representation. The xml header is omitted. @param node to convert to a String @return String XML fragment. @throws TransformerException""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DOMUtil.getXMLStringFragmentFromNode
+yawl:DOMUtil_getXMLStringFragmentFromNode_8 a yawl:Method ;
+    rdfs:label "getXMLStringFragmentFromNode" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getXMLStringFragmentFromNode(Node node, String encoding)" ;
+    rdfs:comment """Takes the supplied node as the root of an xml document and converts it to a String representation. The xml header is omitted. @param node to convert to a String @param encoding Target encoding of output XML @return String XML fragment. @throws TransformerException""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DOMUtil.getXMLStringFragmentFromNode
+yawl:DOMUtil_getXMLStringFragmentFromNode_9 a yawl:Method ;
+    rdfs:label "getXMLStringFragmentFromNode" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getXMLStringFragmentFromNode(Node node, boolean omitDeclaration)" ;
+    rdfs:comment """Takes the supplied node as the root of an xml document and converts it to a String representation. @param node to convert to a String @param omitDeclaration set to false to include the &lt;? xml ?&gt; declaration @return String XML fragment. @throws TransformerException""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DOMUtil.getXMLStringFragmentFromNode
+yawl:DOMUtil_getXMLStringFragmentFromNode_10 a yawl:Method ;
+    rdfs:label "getXMLStringFragmentFromNode" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getXMLStringFragmentFromNode(Node node, boolean omitDeclaration, String encoding)" ;
+    rdfs:comment """Takes the supplied node as the root of an xml document and converts it to a String representation. @param node to convert to a String @param omitDeclaration set to false to include the &lt;? xml ?&gt; declaration @param encoding Target encoding of output XML @return String XML fragment. @throws TransformerException""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DOMUtil.getXMLStringFragmentFromNode
+yawl:DOMUtil_getXMLStringFragmentFromNode_11 a yawl:Method ;
+    rdfs:label "getXMLStringFragmentFromNode" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getXMLStringFragmentFromNode(Node node, boolean omitDeclaration, boolean collapseEmptyTags)" ;
+    rdfs:comment """Takes the supplied node as the root of an xml document and converts it to a String representation. @param node to convert to a String @param omitDeclaration set to false to include the &lt;? xml ?&gt; declaration @param collapseEmptyTags set to false to use the long form of xml tags (ie. &lt;a&gt;&lt;/a&gt;) @return String XML fragment. @throws TransformerException""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DOMUtil.getXMLStringFragmentFromNode
+yawl:DOMUtil_getXMLStringFragmentFromNode_12 a yawl:Method ;
+    rdfs:label "getXMLStringFragmentFromNode" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getXMLStringFragmentFromNode(Node node, boolean omitDeclaration, String encoding, boolean collapseEmptyTags)" ;
+    rdfs:comment """Takes the supplied node as the root of an xml document and converts it to a String representation. @param node to convert to a String @param omitDeclaration set to false to include the &lt;? xml ?&gt; declaration @param encoding Target encoding of output XML @param collapseEmptyTags set to false to use the long form of xml tags (ie. &lt;a&gt;&lt;/a&gt;) @return String XML fragment. @throws TransformerException""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DOMUtil.removeEmptyNodes
+yawl:DOMUtil_removeEmptyNodes_13 a yawl:Method ;
+    rdfs:label "removeEmptyNodes" ;
+    yawl:returnType "Document" ;
+    yawl:signature "Document removeEmptyNodes(Node node)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DOMUtil.removeEmptyElements
+yawl:DOMUtil_removeEmptyElements_14 a yawl:Method ;
+    rdfs:label "removeEmptyElements" ;
+    yawl:returnType "Node" ;
+    yawl:signature "Node removeEmptyElements(Node node)" ;
+    rdfs:comment """Takes the supplied node and recursively removes empty (no content/child nodes) elements @param node to remove all empty elements from @return Trimmed node @deprecated @throws XPathExpressionException""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DOMUtil.selectSingleNode
+yawl:DOMUtil_selectSingleNode_15 a yawl:Method ;
+    rdfs:label "selectSingleNode" ;
+    yawl:returnType "Node" ;
+    yawl:signature "Node selectSingleNode(Node node, String expression)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DOMUtil.selectNodeText
+yawl:DOMUtil_selectNodeText_16 a yawl:Method ;
+    rdfs:label "selectNodeText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String selectNodeText(Node node, String expression)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DOMUtil.selectNodeList
+yawl:DOMUtil_selectNodeList_17 a yawl:Method ;
+    rdfs:label "selectNodeList" ;
+    yawl:returnType "NodeList" ;
+    yawl:signature "NodeList selectNodeList(Node node, String expression)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DOMUtil.formatXMLStringForDisplay
+yawl:DOMUtil_formatXMLStringForDisplay_18 a yawl:Method ;
+    rdfs:label "formatXMLStringForDisplay" ;
+    yawl:returnType "String" ;
+    yawl:signature "String formatXMLStringForDisplay(String xml)" ;
+    rdfs:comment """Formats a string of XML suitable for standard display (ie. no xml directive and idented). If the formatting fails, the original XML string is returned unaltered. @param xml to format for display @return formatted xml if no exceptions occured, otherwise original string.""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DOMUtil.formatXMLStringForDisplay
+yawl:DOMUtil_formatXMLStringForDisplay_19 a yawl:Method ;
+    rdfs:label "formatXMLStringForDisplay" ;
+    yawl:returnType "String" ;
+    yawl:signature "String formatXMLStringForDisplay(String xml, boolean omitDeclaration)" ;
+    rdfs:comment """Formats a string of XML suitable for standard display (ie. no xml directive and idented). If the formatting fails, the original XML string is returned unaltered. @param xml to format for display @return formatted xml if no exceptions occured, otherwise original string.""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DOMUtil.removeAllChildNodes
+yawl:DOMUtil_removeAllChildNodes_20 a yawl:Method ;
+    rdfs:label "removeAllChildNodes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeAllChildNodes(Node node)" ;
+    rdfs:comment """Removes all child nodes from the context Node node. @param node to remove all children from""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DOMUtil.removeAllAttributes
+yawl:DOMUtil_removeAllAttributes_21 a yawl:Method ;
+    rdfs:label "removeAllAttributes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeAllAttributes(Element element)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DOMUtil.createUTF8InputSource
+yawl:DOMUtil_createUTF8InputSource_22 a yawl:Method ;
+    rdfs:label "createUTF8InputSource" ;
+    yawl:returnType "InputSource" ;
+    yawl:signature "InputSource createUTF8InputSource(String xml)" ;
+    rdfs:comment """Converts a XML String into an Input source with UTF-8 encoding @param xml @return an instantiated InputSource @throws UnsupportedEncodingException""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DOMUtil.createUTF8InputSource
+yawl:DOMUtil_createUTF8InputSource_23 a yawl:Method ;
+    rdfs:label "createUTF8InputSource" ;
+    yawl:returnType "InputSource" ;
+    yawl:signature "InputSource createUTF8InputSource(Node node)" ;
+    rdfs:comment """Converts a Document dom into an Input source with UTF-8 encoding @param node @return an instantiated InputSource @throws UnsupportedEncodingException @throws TransformerException""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DOMUtil.alphabetiseChildNodes
+yawl:DOMUtil_alphabetiseChildNodes_24 a yawl:Method ;
+    rdfs:label "alphabetiseChildNodes" ;
+    yawl:returnType "Node" ;
+    yawl:signature "Node alphabetiseChildNodes(Node root)" ;
+    rdfs:comment """Alphabetises the top level children of the node root. @param root @return The alphabetised root node.""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:DOMUtil_EMPTY_ELEMENT_REMOVAL_XSLT a yawl:Field ;
+    rdfs:label "EMPTY_ELEMENT_REMOVAL_XSLT" .
+
+yawl:DOMUtil_emptyElementXSLT a yawl:Field ;
+    rdfs:label "emptyElementXSLT" .
+
+
+

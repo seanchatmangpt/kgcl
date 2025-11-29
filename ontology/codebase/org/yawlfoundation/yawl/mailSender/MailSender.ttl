@@ -1,0 +1,60 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.mailSender
+yawl:org_yawlfoundation_yawl_mailSender a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.mailSender" .
+# Class: org.yawlfoundation.yawl.mailSender.MailSender
+yawl:MailSender a yawl:Class ;
+    rdfs:label "MailSender" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_mailSender ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/mailSender/MailSender.java"^^xsd:string ;
+    yawl:extends yawl:InterfaceBWebsideController ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:MailSender_handleEnabledWorkItemEvent_1 ;
+    yawl:hasMethod yawl:MailSender_handleCancelledWorkItemEvent_2 ;
+    yawl:hasMethod yawl:MailSender_doGet_3 ;
+    yawl:hasMethod yawl:MailSender_SendEmail_4 ;
+    .
+
+
+# Method: MailSender.handleEnabledWorkItemEvent
+yawl:MailSender_handleEnabledWorkItemEvent_1 a yawl:Method ;
+    rdfs:label "handleEnabledWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleEnabledWorkItemEvent(WorkItemRecord enabledWorkItem)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MailSender.handleCancelledWorkItemEvent
+yawl:MailSender_handleCancelledWorkItemEvent_2 a yawl:Method ;
+    rdfs:label "handleCancelledWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCancelledWorkItemEvent(WorkItemRecord workItemRecord)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MailSender.doGet
+yawl:MailSender_doGet_3 a yawl:Method ;
+    rdfs:label "doGet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doGet(HttpServletRequest req, HttpServletResponse resp)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MailSender.SendEmail
+yawl:MailSender_SendEmail_4 a yawl:Method ;
+    rdfs:label "SendEmail" ;
+    yawl:returnType "void" ;
+    yawl:signature "void SendEmail(String SMTP, String Port, String Login, String password, String To, String Alias, String subject, String content, String filename)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

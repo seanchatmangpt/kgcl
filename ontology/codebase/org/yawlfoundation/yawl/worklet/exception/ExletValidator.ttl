@@ -1,0 +1,84 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.exception.ExletValidator
+yawl:ExletValidator a yawl:Class ;
+    rdfs:label "ExletValidator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_exception ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/exception/ExletValidator.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 9/03/15""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ExletValidator_validate_1 ;
+    yawl:hasMethod yawl:ExletValidator_validatePrimitive_2 ;
+    yawl:hasMethod yawl:ExletValidator_validateSelect_3 ;
+    yawl:hasMethod yawl:ExletValidator_validateSequence_4 ;
+    yawl:hasMethod yawl:ExletValidator_validateForRule_5 ;
+    yawl:hasMethod yawl:ExletValidator_isValidPostItemPrimitive_6 ;
+    yawl:hasMethod yawl:ExletValidator_isFinalState_7 ;
+    .
+
+
+# Method: ExletValidator.validate
+yawl:ExletValidator_validate_1 a yawl:Method ;
+    rdfs:label "validate" ;
+    yawl:returnType "List" ;
+    yawl:signature "List validate(RuleType ruleType, RdrConclusion conclusion, Set workletList)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExletValidator.validatePrimitive
+yawl:ExletValidator_validatePrimitive_2 a yawl:Method ;
+    rdfs:label "validatePrimitive" ;
+    yawl:returnType "ExletValidationError" ;
+    yawl:signature "ExletValidationError validatePrimitive(RdrPrimitive primitive, Set workletList, int index)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExletValidator.validateSelect
+yawl:ExletValidator_validateSelect_3 a yawl:Method ;
+    rdfs:label "validateSelect" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validateSelect(RdrConclusion conclusion)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExletValidator.validateSequence
+yawl:ExletValidator_validateSequence_4 a yawl:Method ;
+    rdfs:label "validateSequence" ;
+    yawl:returnType "void" ;
+    yawl:signature "void validateSequence(RdrConclusion conclusion, List errorList)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExletValidator.validateForRule
+yawl:ExletValidator_validateForRule_5 a yawl:Method ;
+    rdfs:label "validateForRule" ;
+    yawl:returnType "void" ;
+    yawl:signature "void validateForRule(RuleType ruleType, RdrConclusion conclusion, List errorList)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExletValidator.isValidPostItemPrimitive
+yawl:ExletValidator_isValidPostItemPrimitive_6 a yawl:Method ;
+    rdfs:label "isValidPostItemPrimitive" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isValidPostItemPrimitive(ExletAction action, ExletTarget target)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExletValidator.isFinalState
+yawl:ExletValidator_isFinalState_7 a yawl:Method ;
+    rdfs:label "isFinalState" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isFinalState(ExletAction action)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+
+

@@ -1,0 +1,52 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.balancer.ResultProcessor
+yawl:ResultProcessor a yawl:Class ;
+    rdfs:label "ResultProcessor" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/ResultProcessor.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 22/9/17""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ResultProcessor_process_1 ;
+    yawl:hasMethod yawl:ResultProcessor_parse_2 ;
+    yawl:hasMethod yawl:ResultProcessor_hasParentTag_3 ;
+    yawl:hasField yawl:ResultProcessor__parser ;
+    .
+
+
+# Method: ResultProcessor.process
+yawl:ResultProcessor_process_1 a yawl:Method ;
+    rdfs:label "process" ;
+    yawl:returnType "String" ;
+    yawl:signature "String process(Set resultSet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResultProcessor.parse
+yawl:ResultProcessor_parse_2 a yawl:Method ;
+    rdfs:label "parse" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode parse(String result)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResultProcessor.hasParentTag
+yawl:ResultProcessor_hasParentTag_3 a yawl:Method ;
+    rdfs:label "hasParentTag" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasParentTag(XNode node)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:ResultProcessor__parser a yawl:Field ;
+    rdfs:label "_parser" .
+
+
+

@@ -1,0 +1,43 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.logging
+yawl:org_yawlfoundation_yawl_logging a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.logging" .
+# Class: org.yawlfoundation.yawl.logging.YLogDataItemList
+yawl:YLogDataItemList a yawl:Class ;
+    rdfs:label "YLogDataItemList" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_logging ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/logging/YLogDataItemList.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 9/04/2009""" ;
+    yawl:extends yawl:ArrayList ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YLogDataItemList_toXML_1 ;
+    yawl:hasMethod yawl:YLogDataItemList_fromXML_2 ;
+    .
+
+
+# Method: YLogDataItemList.toXML
+yawl:YLogDataItemList_toXML_1 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogDataItemList.fromXML
+yawl:YLogDataItemList_fromXML_2 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

@@ -1,0 +1,472 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.cost.evaluate.Predicate
+yawl:Predicate a yawl:Class ;
+    rdfs:label "Predicate" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_cost_evaluate ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/cost/evaluate/Predicate.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 3/12/12""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Predicate_parse_1 ;
+    yawl:hasMethod yawl:Predicate_getTaskList_2 ;
+    yawl:hasMethod yawl:Predicate_setTaskList_3 ;
+    yawl:hasMethod yawl:Predicate_getResourceList_4 ;
+    yawl:hasMethod yawl:Predicate_setResourceList_5 ;
+    yawl:hasMethod yawl:Predicate_getCaseList_6 ;
+    yawl:hasMethod yawl:Predicate_setCaseList_7 ;
+    yawl:hasMethod yawl:Predicate_hasCaseFilter_8 ;
+    yawl:hasMethod yawl:Predicate_hasNamedRange_9 ;
+    yawl:hasMethod yawl:Predicate_getNamedRange_10 ;
+    yawl:hasMethod yawl:Predicate_applyDateFilter_11 ;
+    yawl:hasMethod yawl:Predicate_isAllTasks_12 ;
+    yawl:hasMethod yawl:Predicate_isAllResources_13 ;
+    yawl:hasMethod yawl:Predicate_isAllCases_14 ;
+    yawl:hasMethod yawl:Predicate_isWholeCase_15 ;
+    yawl:hasMethod yawl:Predicate_isCurrentCaseOnly_16 ;
+    yawl:hasMethod yawl:Predicate_isSimpleExpression_17 ;
+    yawl:hasMethod yawl:Predicate_average_18 ;
+    yawl:hasMethod yawl:Predicate_max_19 ;
+    yawl:hasMethod yawl:Predicate_min_20 ;
+    yawl:hasMethod yawl:Predicate_hasFromDate_21 ;
+    yawl:hasMethod yawl:Predicate_hasToDate_22 ;
+    yawl:hasMethod yawl:Predicate_hasDOWFilter_23 ;
+    yawl:hasMethod yawl:Predicate_hasDateFilter_24 ;
+    yawl:hasMethod yawl:Predicate_getFromDate_25 ;
+    yawl:hasMethod yawl:Predicate_getToDate_26 ;
+    yawl:hasMethod yawl:Predicate_getValue_27 ;
+    yawl:hasMethod yawl:Predicate_setValue_28 ;
+    yawl:hasMethod yawl:Predicate_getContent_29 ;
+    yawl:hasMethod yawl:Predicate_parseArgs_30 ;
+    yawl:hasMethod yawl:Predicate_parseTaskArgs_31 ;
+    yawl:hasMethod yawl:Predicate_parseResourceArgs_32 ;
+    yawl:hasMethod yawl:Predicate_parseCaseArgs_33 ;
+    yawl:hasMethod yawl:Predicate_parseCaseRange_34 ;
+    yawl:hasMethod yawl:Predicate_isBlockArg_35 ;
+    yawl:hasMethod yawl:Predicate_meetsDOWCriterion_36 ;
+    yawl:hasMethod yawl:Predicate_parseInt_37 ;
+    yawl:hasMethod yawl:Predicate_parseDate_38 ;
+    yawl:hasMethod yawl:Predicate_getResourceIDs_39 ;
+    yawl:hasMethod yawl:Predicate_hasItems_40 ;
+    yawl:hasMethod yawl:Predicate_parseOpAndValue_41 ;
+    yawl:hasMethod yawl:Predicate_parseOp_42 ;
+    yawl:hasMethod yawl:Predicate_evaluate_43 ;
+    yawl:hasField yawl:Predicate_taskList ;
+    yawl:hasField yawl:Predicate_resourceList ;
+    yawl:hasField yawl:Predicate_caseList ;
+    yawl:hasField yawl:Predicate_firstCases ;
+    yawl:hasField yawl:Predicate_lastCases ;
+    yawl:hasField yawl:Predicate_randomCases ;
+    yawl:hasField yawl:Predicate_fromDate ;
+    yawl:hasField yawl:Predicate_toDate ;
+    yawl:hasField yawl:Predicate_dowList ;
+    yawl:hasField yawl:Predicate_wholeCase ;
+    yawl:hasField yawl:Predicate_averageFlag ;
+    yawl:hasField yawl:Predicate_minFlag ;
+    yawl:hasField yawl:Predicate_maxFlag ;
+    yawl:hasField yawl:Predicate_simpleExpression ;
+    yawl:hasField yawl:Predicate_op ;
+    yawl:hasField yawl:Predicate_rhs ;
+    .
+
+
+# Method: Predicate.parse
+yawl:Predicate_parse_1 a yawl:Method ;
+    rdfs:label "parse" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parse(String predicate)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.getTaskList
+yawl:Predicate_getTaskList_2 a yawl:Method ;
+    rdfs:label "getTaskList" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getTaskList()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.setTaskList
+yawl:Predicate_setTaskList_3 a yawl:Method ;
+    rdfs:label "setTaskList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTaskList(Set list)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.getResourceList
+yawl:Predicate_getResourceList_4 a yawl:Method ;
+    rdfs:label "getResourceList" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getResourceList()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.setResourceList
+yawl:Predicate_setResourceList_5 a yawl:Method ;
+    rdfs:label "setResourceList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setResourceList(Set list)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.getCaseList
+yawl:Predicate_getCaseList_6 a yawl:Method ;
+    rdfs:label "getCaseList" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getCaseList()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.setCaseList
+yawl:Predicate_setCaseList_7 a yawl:Method ;
+    rdfs:label "setCaseList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCaseList(Set caseList)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.hasCaseFilter
+yawl:Predicate_hasCaseFilter_8 a yawl:Method ;
+    rdfs:label "hasCaseFilter" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasCaseFilter()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.hasNamedRange
+yawl:Predicate_hasNamedRange_9 a yawl:Method ;
+    rdfs:label "hasNamedRange" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasNamedRange()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.getNamedRange
+yawl:Predicate_getNamedRange_10 a yawl:Method ;
+    rdfs:label "getNamedRange" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getNamedRange(List allCaseIDs)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.applyDateFilter
+yawl:Predicate_applyDateFilter_11 a yawl:Method ;
+    rdfs:label "applyDateFilter" ;
+    yawl:returnType "List" ;
+    yawl:signature "List applyDateFilter(List events)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.isAllTasks
+yawl:Predicate_isAllTasks_12 a yawl:Method ;
+    rdfs:label "isAllTasks" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAllTasks()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.isAllResources
+yawl:Predicate_isAllResources_13 a yawl:Method ;
+    rdfs:label "isAllResources" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAllResources()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.isAllCases
+yawl:Predicate_isAllCases_14 a yawl:Method ;
+    rdfs:label "isAllCases" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAllCases()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.isWholeCase
+yawl:Predicate_isWholeCase_15 a yawl:Method ;
+    rdfs:label "isWholeCase" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isWholeCase()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.isCurrentCaseOnly
+yawl:Predicate_isCurrentCaseOnly_16 a yawl:Method ;
+    rdfs:label "isCurrentCaseOnly" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isCurrentCaseOnly()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.isSimpleExpression
+yawl:Predicate_isSimpleExpression_17 a yawl:Method ;
+    rdfs:label "isSimpleExpression" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isSimpleExpression()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.average
+yawl:Predicate_average_18 a yawl:Method ;
+    rdfs:label "average" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean average()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.max
+yawl:Predicate_max_19 a yawl:Method ;
+    rdfs:label "max" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean max()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.min
+yawl:Predicate_min_20 a yawl:Method ;
+    rdfs:label "min" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean min()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.hasFromDate
+yawl:Predicate_hasFromDate_21 a yawl:Method ;
+    rdfs:label "hasFromDate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasFromDate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.hasToDate
+yawl:Predicate_hasToDate_22 a yawl:Method ;
+    rdfs:label "hasToDate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasToDate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.hasDOWFilter
+yawl:Predicate_hasDOWFilter_23 a yawl:Method ;
+    rdfs:label "hasDOWFilter" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasDOWFilter()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.hasDateFilter
+yawl:Predicate_hasDateFilter_24 a yawl:Method ;
+    rdfs:label "hasDateFilter" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasDateFilter()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.getFromDate
+yawl:Predicate_getFromDate_25 a yawl:Method ;
+    rdfs:label "getFromDate" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getFromDate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.getToDate
+yawl:Predicate_getToDate_26 a yawl:Method ;
+    rdfs:label "getToDate" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getToDate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.getValue
+yawl:Predicate_getValue_27 a yawl:Method ;
+    rdfs:label "getValue" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getValue()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.setValue
+yawl:Predicate_setValue_28 a yawl:Method ;
+    rdfs:label "setValue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setValue(double value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Predicate.getContent
+yawl:Predicate_getContent_29 a yawl:Method ;
+    rdfs:label "getContent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getContent(String expr, String prefix)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Predicate.parseArgs
+yawl:Predicate_parseArgs_30 a yawl:Method ;
+    rdfs:label "parseArgs" ;
+    yawl:returnType "List" ;
+    yawl:signature "List parseArgs(String args)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Predicate.parseTaskArgs
+yawl:Predicate_parseTaskArgs_31 a yawl:Method ;
+    rdfs:label "parseTaskArgs" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set parseTaskArgs(String args)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Predicate.parseResourceArgs
+yawl:Predicate_parseResourceArgs_32 a yawl:Method ;
+    rdfs:label "parseResourceArgs" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set parseResourceArgs(String args)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Predicate.parseCaseArgs
+yawl:Predicate_parseCaseArgs_33 a yawl:Method ;
+    rdfs:label "parseCaseArgs" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set parseCaseArgs(String args)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Predicate.parseCaseRange
+yawl:Predicate_parseCaseRange_34 a yawl:Method ;
+    rdfs:label "parseCaseRange" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set parseCaseRange(String range)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Predicate.isBlockArg
+yawl:Predicate_isBlockArg_35 a yawl:Method ;
+    rdfs:label "isBlockArg" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isBlockArg(String item)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Predicate.meetsDOWCriterion
+yawl:Predicate_meetsDOWCriterion_36 a yawl:Method ;
+    rdfs:label "meetsDOWCriterion" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean meetsDOWCriterion(long time)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Predicate.parseInt
+yawl:Predicate_parseInt_37 a yawl:Method ;
+    rdfs:label "parseInt" ;
+    yawl:returnType "int" ;
+    yawl:signature "int parseInt(String arg, int offset)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Predicate.parseDate
+yawl:Predicate_parseDate_38 a yawl:Method ;
+    rdfs:label "parseDate" ;
+    yawl:returnType "long" ;
+    yawl:signature "long parseDate(String arg, int offset)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Predicate.getResourceIDs
+yawl:Predicate_getResourceIDs_39 a yawl:Method ;
+    rdfs:label "getResourceIDs" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getResourceIDs(String idOrName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Predicate.hasItems
+yawl:Predicate_hasItems_40 a yawl:Method ;
+    rdfs:label "hasItems" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasItems(Set list)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Predicate.parseOpAndValue
+yawl:Predicate_parseOpAndValue_41 a yawl:Method ;
+    rdfs:label "parseOpAndValue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseOpAndValue(String exprSuffix)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Predicate.parseOp
+yawl:Predicate_parseOp_42 a yawl:Method ;
+    rdfs:label "parseOp" ;
+    yawl:returnType "String" ;
+    yawl:signature "String parseOp(String exprSuffix)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Predicate.evaluate
+yawl:Predicate_evaluate_43 a yawl:Method ;
+    rdfs:label "evaluate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean evaluate(double lhs)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:Predicate_taskList a yawl:Field ;
+    rdfs:label "taskList" .
+
+yawl:Predicate_resourceList a yawl:Field ;
+    rdfs:label "resourceList" .
+
+yawl:Predicate_caseList a yawl:Field ;
+    rdfs:label "caseList" .
+
+yawl:Predicate_firstCases a yawl:Field ;
+    rdfs:label "firstCases" .
+
+yawl:Predicate_lastCases a yawl:Field ;
+    rdfs:label "lastCases" .
+
+yawl:Predicate_randomCases a yawl:Field ;
+    rdfs:label "randomCases" .
+
+yawl:Predicate_fromDate a yawl:Field ;
+    rdfs:label "fromDate" .
+
+yawl:Predicate_toDate a yawl:Field ;
+    rdfs:label "toDate" .
+
+yawl:Predicate_dowList a yawl:Field ;
+    rdfs:label "dowList" .
+
+yawl:Predicate_wholeCase a yawl:Field ;
+    rdfs:label "wholeCase" .
+
+yawl:Predicate_averageFlag a yawl:Field ;
+    rdfs:label "averageFlag" .
+
+yawl:Predicate_minFlag a yawl:Field ;
+    rdfs:label "minFlag" .
+
+yawl:Predicate_maxFlag a yawl:Field ;
+    rdfs:label "maxFlag" .
+
+yawl:Predicate_simpleExpression a yawl:Field ;
+    rdfs:label "simpleExpression" .
+
+yawl:Predicate_op a yawl:Field ;
+    rdfs:label "op" .
+
+yawl:Predicate_rhs a yawl:Field ;
+    rdfs:label "rhs" .
+
+
+

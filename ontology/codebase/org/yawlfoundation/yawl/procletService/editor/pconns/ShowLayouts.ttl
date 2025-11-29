@@ -1,0 +1,74 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.pconns.ShowLayouts
+yawl:ShowLayouts a yawl:Class ;
+    rdfs:label "ShowLayouts" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor_pconns ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/pconns/ShowLayouts.java"^^xsd:string ;
+    rdfs:comment """Demonstrates several of the graph layout algorithms. Allows the user to interactively select one of several graphs, and one of several layouts, and visualizes the combination. @author Danyel Fisher @author Joshua O'Madadhain""" ;
+    yawl:extends yawl:JApplet ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ShowLayouts_getGraphPanel_1 ;
+    yawl:hasMethod yawl:ShowLayouts_start_2 ;
+    yawl:hasMethod yawl:ShowLayouts_getCombos_3 ;
+    yawl:hasMethod yawl:ShowLayouts_main_4 ;
+    yawl:hasField yawl:ShowLayouts_g_array ;
+    yawl:hasField yawl:ShowLayouts_graph_index ;
+    yawl:hasField yawl:ShowLayouts_graph_names ;
+    .
+
+
+# Method: ShowLayouts.getGraphPanel
+yawl:ShowLayouts_getGraphPanel_1 a yawl:Method ;
+    rdfs:label "getGraphPanel" ;
+    yawl:returnType "JPanel" ;
+    yawl:signature "JPanel getGraphPanel()" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ShowLayouts.start
+yawl:ShowLayouts_start_2 a yawl:Method ;
+    rdfs:label "start" ;
+    yawl:returnType "void" ;
+    yawl:signature "void start()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ShowLayouts.getCombos
+yawl:ShowLayouts_getCombos_3 a yawl:Method ;
+    rdfs:label "getCombos" ;
+    yawl:returnType "Class" ;
+    yawl:signature "Class getCombos()" ;
+    rdfs:comment """@return""" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ShowLayouts.main
+yawl:ShowLayouts_main_4 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String args)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:ShowLayouts_g_array a yawl:Field ;
+    rdfs:label "g_array" .
+
+yawl:ShowLayouts_graph_index a yawl:Field ;
+    rdfs:label "graph_index" .
+
+yawl:ShowLayouts_graph_names a yawl:Field ;
+    rdfs:label "graph_names" .
+
+
+

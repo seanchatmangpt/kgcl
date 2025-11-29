@@ -1,0 +1,133 @@
+@prefix code: <http://kgcl.dev/ontology/codebase#> .
+@prefix port: <http://kgcl.dev/ontology/porting#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Structural Porting Rules
+# Rules for matching classes and methods between source and target codebases
+
+# ============================================================================
+# RULE 1: Exact Class Name Match
+# ============================================================================
+# Match classes with identical names (case-sensitive)
+
+{
+    ?javaClass a code:Class ;
+        code:name ?className .
+    
+    ?pythonClass a code:Class ;
+        code:name ?className .
+    
+    FILTER(STRSTARTS(STR(?javaClass), "http://kgcl.dev/codebase/java/"))
+    FILTER(STRSTARTS(STR(?pythonClass), "http://kgcl.dev/codebase/python/"))
+}
+=>
+{
+    ?javaClass port:hasPort ?pythonClass ;
+        port:matchType "exact" ;
+        port:matchConfidence 1.0 .
+} .
+
+# ============================================================================
+# RULE 2: Method Name Match (Exact)
+# ============================================================================
+# Match methods with identical names within matched classes
+
+{
+    ?javaClass port:hasPort ?pythonClass .
+    ?javaClass code:hasMethod ?javaMethod .
+    ?javaMethod code:name ?methodName .
+    
+    ?pythonClass code:hasMethod ?pythonMethod .
+    ?pythonMethod code:name ?methodName .
+}
+=>
+{
+    ?javaMethod port:hasPort ?pythonMethod ;
+        port:matchType "exact" ;
+        port:matchConfidence 1.0 .
+} .
+
+# ============================================================================
+# RULE 3: CamelCase to snake_case Method Matching
+# ============================================================================
+# Match Java camelCase methods to Python snake_case methods
+
+{
+    ?javaClass port:hasPort ?pythonClass .
+    ?javaClass code:hasMethod ?javaMethod .
+    ?javaMethod code:name ?javaMethodName .
+    
+    # Convert camelCase to snake_case
+    port:camelToSnake(?javaMethodName, ?snakeMethodName) .
+    
+    ?pythonClass code:hasMethod ?pythonMethod .
+    ?pythonMethod code:name ?snakeMethodName .
+}
+=>
+{
+    ?javaMethod port:hasPort ?pythonMethod ;
+        port:matchType "naming_convention" ;
+        port:matchConfidence 0.9 .
+} .
+
+# ============================================================================
+# RULE 4: Missing Class Detection
+# ============================================================================
+# Detect Java classes without Python ports
+
+{
+    ?javaClass a code:Class ;
+        code:name ?className .
+    
+    FILTER(STRSTARTS(STR(?javaClass), "http://kgcl.dev/codebase/java/"))
+    
+    NOT EXISTS {
+        ?javaClass port:hasPort ?pythonClass .
+    }
+}
+=>
+{
+    ?javaClass port:status "missing" ;
+        port:severity "high" .
+} .
+
+# ============================================================================
+# RULE 5: Missing Method Detection
+# ============================================================================
+# Detect Java methods without Python ports
+
+{
+    ?javaClass port:hasPort ?pythonClass .
+    ?javaClass code:hasMethod ?javaMethod .
+    
+    NOT EXISTS {
+        ?javaMethod port:hasPort ?pythonMethod .
+    }
+}
+=>
+{
+    ?javaMethod port:status "missing" ;
+        port:severity "medium" .
+} .
+
+# ============================================================================
+# RULE 6: Signature Mismatch Detection
+# ============================================================================
+# Detect methods with different signatures
+
+{
+    ?javaMethod port:hasPort ?pythonMethod .
+    ?javaMethod code:signature ?javaSignature .
+    ?pythonMethod code:signature ?pythonSignature .
+    
+    FILTER(?javaSignature != ?pythonSignature)
+}
+=>
+{
+    ?javaMethod port:signatureMismatch true ;
+        port:javaSignature ?javaSignature ;
+        port:pythonSignature ?pythonSignature ;
+        port:severity "medium" .
+} .
+

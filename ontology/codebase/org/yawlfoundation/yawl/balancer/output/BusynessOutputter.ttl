@@ -1,0 +1,49 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.balancer.output.BusynessOutputter
+yawl:BusynessOutputter a yawl:Class ;
+    rdfs:label "BusynessOutputter" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer_output ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/output/BusynessOutputter.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 21/8/17""" ;
+    yawl:extends yawl:AbstractLoadOutputter ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:BusynessOutputter_writeValues_1 ;
+    yawl:hasMethod yawl:BusynessOutputter_getHeader_2 ;
+    yawl:hasMethod yawl:BusynessOutputter_finalise_3 ;
+    .
+
+
+# Method: BusynessOutputter.writeValues
+yawl:BusynessOutputter_writeValues_1 a yawl:Method ;
+    rdfs:label "writeValues" ;
+    yawl:returnType "void" ;
+    yawl:signature "void writeValues(Map values)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: BusynessOutputter.getHeader
+yawl:BusynessOutputter_getHeader_2 a yawl:Method ;
+    rdfs:label "getHeader" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getHeader()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: BusynessOutputter.finalise
+yawl:BusynessOutputter_finalise_3 a yawl:Method ;
+    rdfs:label "finalise" ;
+    yawl:returnType "void" ;
+    yawl:signature "void finalise()" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+
+

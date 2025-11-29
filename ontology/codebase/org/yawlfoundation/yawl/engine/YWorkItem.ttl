@@ -1,0 +1,1257 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.YWorkItem
+yawl:YWorkItem a yawl:Class ;
+    rdfs:label "YWorkItem" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/YWorkItem.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 28/05/2003 Time: 15:29:33 Refactored for v2.0 by Michael Adams 10/2007 - 12/2009""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YWorkItem_createWorkItem_1 ;
+    yawl:hasMethod yawl:YWorkItem_completePersistence_2 ;
+    yawl:hasMethod yawl:YWorkItem_completeParentPersistence_3 ;
+    yawl:hasMethod yawl:YWorkItem_logAndUnpersist_4 ;
+    yawl:hasMethod yawl:YWorkItem_unpackTimerParams_5 ;
+    yawl:hasMethod yawl:YWorkItem_evaluateParamQuery_6 ;
+    yawl:hasMethod yawl:YWorkItem_setEngine_7 ;
+    yawl:hasMethod yawl:YWorkItem_addToRepository_8 ;
+    yawl:hasMethod yawl:YWorkItem_createChild_9 ;
+    yawl:hasMethod yawl:YWorkItem_setExternalCompletionLogPredicate_10 ;
+    yawl:hasMethod yawl:YWorkItem_setExternalStartingLogPredicate_11 ;
+    yawl:hasMethod yawl:YWorkItem_setData_12 ;
+    yawl:hasMethod yawl:YWorkItem_completeData_13 ;
+    yawl:hasMethod yawl:YWorkItem_assembleLogDataItemList_14 ;
+    yawl:hasMethod yawl:YWorkItem_restoreDataToNet_15 ;
+    yawl:hasMethod yawl:YWorkItem_cancel_16 ;
+    yawl:hasMethod yawl:YWorkItem_deleteWorkItem_17 ;
+    yawl:hasMethod yawl:YWorkItem_checkStartTimer_18 ;
+    yawl:hasMethod yawl:YWorkItem_cancelTimer_19 ;
+    yawl:hasMethod yawl:YWorkItem_setTimerActive_20 ;
+    yawl:hasMethod yawl:YWorkItem_hasLiveStatus_21 ;
+    yawl:hasMethod yawl:YWorkItem_hasFinishedStatus_22 ;
+    yawl:hasMethod yawl:YWorkItem_hasCompletedStatus_23 ;
+    yawl:hasMethod yawl:YWorkItem_isParent_24 ;
+    yawl:hasMethod yawl:YWorkItem_hasUnfinishedStatus_25 ;
+    yawl:hasMethod yawl:YWorkItem_isEnabledSuspended_26 ;
+    yawl:hasMethod yawl:YWorkItem_equals_27 ;
+    yawl:hasMethod yawl:YWorkItem_hashCode_28 ;
+    yawl:hasMethod yawl:YWorkItem_setStatusToStarted_29 ;
+    yawl:hasMethod yawl:YWorkItem_setStatusToComplete_30 ;
+    yawl:hasMethod yawl:YWorkItem_setStatusToDeleted_31 ;
+    yawl:hasMethod yawl:YWorkItem_setStatusToDiscarded_32 ;
+    yawl:hasMethod yawl:YWorkItem_rollBackStatus_33 ;
+    yawl:hasMethod yawl:YWorkItem_setStatusToSuspended_34 ;
+    yawl:hasMethod yawl:YWorkItem_setStatusToUnsuspended_35 ;
+    yawl:hasMethod yawl:YWorkItem_set_parent_36 ;
+    yawl:hasMethod yawl:YWorkItem_get_parent_37 ;
+    yawl:hasMethod yawl:YWorkItem_get_children_38 ;
+    yawl:hasMethod yawl:YWorkItem_hasChildren_39 ;
+    yawl:hasMethod yawl:YWorkItem_add_child_40 ;
+    yawl:hasMethod yawl:YWorkItem_add_children_41 ;
+    yawl:hasMethod yawl:YWorkItem_setChildren_42 ;
+    yawl:hasMethod yawl:YWorkItem_setWorkItemID_43 ;
+    yawl:hasMethod yawl:YWorkItem_get_thisID_44 ;
+    yawl:hasMethod yawl:YWorkItem_set_thisID_45 ;
+    yawl:hasMethod yawl:YWorkItem_get_specIdentifier_46 ;
+    yawl:hasMethod yawl:YWorkItem_get_specVersion_47 ;
+    yawl:hasMethod yawl:YWorkItem_get_specUri_48 ;
+    yawl:hasMethod yawl:YWorkItem_set_specIdentifier_49 ;
+    yawl:hasMethod yawl:YWorkItem_set_specUri_50 ;
+    yawl:hasMethod yawl:YWorkItem_set_specVersion_51 ;
+    yawl:hasMethod yawl:YWorkItem_getAttributes_52 ;
+    yawl:hasMethod yawl:YWorkItem_setAttributes_53 ;
+    yawl:hasMethod yawl:YWorkItem_requiresManualResourcing_54 ;
+    yawl:hasMethod yawl:YWorkItem_setRequiresManualResourcing_55 ;
+    yawl:hasMethod yawl:YWorkItem_getCodelet_56 ;
+    yawl:hasMethod yawl:YWorkItem_setCodelet_57 ;
+    yawl:hasMethod yawl:YWorkItem_getCustomFormURL_58 ;
+    yawl:hasMethod yawl:YWorkItem_setCustomFormURL_59 ;
+    yawl:hasMethod yawl:YWorkItem_get_deferredChoiceGroupID_60 ;
+    yawl:hasMethod yawl:YWorkItem_set_deferredChoiceGroupID_61 ;
+    yawl:hasMethod yawl:YWorkItem_get_enablementTime_62 ;
+    yawl:hasMethod yawl:YWorkItem_set_enablementTime_63 ;
+    yawl:hasMethod yawl:YWorkItem_get_firingTime_64 ;
+    yawl:hasMethod yawl:YWorkItem_set_firingTime_65 ;
+    yawl:hasMethod yawl:YWorkItem_get_startTime_66 ;
+    yawl:hasMethod yawl:YWorkItem_set_startTime_67 ;
+    yawl:hasMethod yawl:YWorkItem_get_status_68 ;
+    yawl:hasMethod yawl:YWorkItem_set_status_69 ;
+    yawl:hasMethod yawl:YWorkItem_get_prevStatus_70 ;
+    yawl:hasMethod yawl:YWorkItem_set_prevStatus_71 ;
+    yawl:hasMethod yawl:YWorkItem_set_status_72 ;
+    yawl:hasMethod yawl:YWorkItem_get_externalClient_73 ;
+    yawl:hasMethod yawl:YWorkItem_set_externalClient_74 ;
+    yawl:hasMethod yawl:YWorkItem_get_allowsDynamicCreation_75 ;
+    yawl:hasMethod yawl:YWorkItem_set_allowsDynamicCreation_76 ;
+    yawl:hasMethod yawl:YWorkItem_get_dataString_77 ;
+    yawl:hasMethod yawl:YWorkItem_set_dataString_78 ;
+    yawl:hasMethod yawl:YWorkItem_setInitData_79 ;
+    yawl:hasMethod yawl:YWorkItem_setStatus_80 ;
+    yawl:hasMethod yawl:YWorkItem_getWorkItemID_81 ;
+    yawl:hasMethod yawl:YWorkItem_getEnablementTime_82 ;
+    yawl:hasMethod yawl:YWorkItem_getEnablementTimeStr_83 ;
+    yawl:hasMethod yawl:YWorkItem_getFiringTime_84 ;
+    yawl:hasMethod yawl:YWorkItem_getFiringTimeStr_85 ;
+    yawl:hasMethod yawl:YWorkItem_getStartTime_86 ;
+    yawl:hasMethod yawl:YWorkItem_getStartTimeStr_87 ;
+    yawl:hasMethod yawl:YWorkItem_getStatus_88 ;
+    yawl:hasMethod yawl:YWorkItem_getParent_89 ;
+    yawl:hasMethod yawl:YWorkItem_getChildren_90 ;
+    yawl:hasMethod yawl:YWorkItem_getCaseID_91 ;
+    yawl:hasMethod yawl:YWorkItem_getTaskID_92 ;
+    yawl:hasMethod yawl:YWorkItem_getIDString_93 ;
+    yawl:hasMethod yawl:YWorkItem_getUniqueID_94 ;
+    yawl:hasMethod yawl:YWorkItem_getDeferredChoiceGroupID_95 ;
+    yawl:hasMethod yawl:YWorkItem_setDeferredChoiceGroupID_96 ;
+    yawl:hasMethod yawl:YWorkItem_getSpecName_97 ;
+    yawl:hasMethod yawl:YWorkItem_getSpecificationID_98 ;
+    yawl:hasMethod yawl:YWorkItem_getTimerParameters_99 ;
+    yawl:hasMethod yawl:YWorkItem_setTimerParameters_100 ;
+    yawl:hasMethod yawl:YWorkItem_hasTimerStarted_101 ;
+    yawl:hasMethod yawl:YWorkItem_setTimerStarted_102 ;
+    yawl:hasMethod yawl:YWorkItem_getTimerExpiry_103 ;
+    yawl:hasMethod yawl:YWorkItem_setTimerExpiry_104 ;
+    yawl:hasMethod yawl:YWorkItem_getTimerStatus_105 ;
+    yawl:hasMethod yawl:YWorkItem_allowsDynamicCreation_106 ;
+    yawl:hasMethod yawl:YWorkItem_toString_107 ;
+    yawl:hasMethod yawl:YWorkItem_getExternalClient_108 ;
+    yawl:hasMethod yawl:YWorkItem_getNetRunner_109 ;
+    yawl:hasMethod yawl:YWorkItem_getDataElement_110 ;
+    yawl:hasMethod yawl:YWorkItem_getDataString_111 ;
+    yawl:hasMethod yawl:YWorkItem_getTask_112 ;
+    yawl:hasMethod yawl:YWorkItem_setTask_113 ;
+    yawl:hasMethod yawl:YWorkItem_getDocumentation_114 ;
+    yawl:hasMethod yawl:YWorkItem_toXML_115 ;
+    yawl:hasMethod yawl:YWorkItem_createLogDataList_116 ;
+    yawl:hasMethod yawl:YWorkItem_getLogPredicates_117 ;
+    yawl:hasMethod yawl:YWorkItem_getStartingPredicates_118 ;
+    yawl:hasMethod yawl:YWorkItem_getCompletionPredicates_119 ;
+    yawl:hasMethod yawl:YWorkItem_getDecompLogPredicate_120 ;
+    yawl:hasMethod yawl:YWorkItem_getDecompLogPredicate_121 ;
+    yawl:hasMethod yawl:YWorkItem_getDataLogPredicate_122 ;
+    yawl:hasField yawl:YWorkItem__df ;
+    yawl:hasField yawl:YWorkItem__engine ;
+    yawl:hasField yawl:YWorkItem__workItemID ;
+    yawl:hasField yawl:YWorkItem__thisID ;
+    yawl:hasField yawl:YWorkItem__specID ;
+    yawl:hasField yawl:YWorkItem__task ;
+    yawl:hasField yawl:YWorkItem__enablementTime ;
+    yawl:hasField yawl:YWorkItem__firingTime ;
+    yawl:hasField yawl:YWorkItem__startTime ;
+    yawl:hasField yawl:YWorkItem__attributes ;
+    yawl:hasField yawl:YWorkItem__status ;
+    yawl:hasField yawl:YWorkItem__prevStatus ;
+    yawl:hasField yawl:YWorkItem__externalClient ;
+    yawl:hasField yawl:YWorkItem__externalClientStr ;
+    yawl:hasField yawl:YWorkItem__allowsDynamicCreation ;
+    yawl:hasField yawl:YWorkItem__requiresManualResourcing ;
+    yawl:hasField yawl:YWorkItem__parent ;
+    yawl:hasField yawl:YWorkItem__children ;
+    yawl:hasField yawl:YWorkItem__dataList ;
+    yawl:hasField yawl:YWorkItem__dataString ;
+    yawl:hasField yawl:YWorkItem__deferredChoiceGroupID ;
+    yawl:hasField yawl:YWorkItem__timerParameters ;
+    yawl:hasField yawl:YWorkItem__timerStarted ;
+    yawl:hasField yawl:YWorkItem__timerExpiry ;
+    yawl:hasField yawl:YWorkItem__customFormURL ;
+    yawl:hasField yawl:YWorkItem__codelet ;
+    yawl:hasField yawl:YWorkItem__documentation ;
+    yawl:hasField yawl:YWorkItem__externalStartingLogPredicate ;
+    yawl:hasField yawl:YWorkItem__externalCompletionLogPredicate ;
+    yawl:hasField yawl:YWorkItem__eventLog ;
+    yawl:hasField yawl:YWorkItem__log ;
+    .
+
+
+# Method: YWorkItem.createWorkItem
+yawl:YWorkItem_createWorkItem_1 a yawl:Method ;
+    rdfs:label "createWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void createWorkItem(YSpecificationID specificationID, YWorkItemID workItemID, YWorkItemStatus status, boolean allowsDynamicInstanceCreation)" ;
+    rdfs:comment """Called from constructors to set some mutual members""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorkItem.completePersistence
+yawl:YWorkItem_completePersistence_2 a yawl:Method ;
+    rdfs:label "completePersistence" ;
+    yawl:returnType "void" ;
+    yawl:signature "void completePersistence(YPersistenceManager pmgr, YWorkItemStatus completionStatus)" ;
+    rdfs:comment """completes persisting and event logging for a workitem""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorkItem.completeParentPersistence
+yawl:YWorkItem_completeParentPersistence_3 a yawl:Method ;
+    rdfs:label "completeParentPersistence" ;
+    yawl:returnType "void" ;
+    yawl:signature "void completeParentPersistence(YPersistenceManager pmgr)" ;
+    rdfs:comment """completes persisting and event logging for a parent workitem if required""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorkItem.logAndUnpersist
+yawl:YWorkItem_logAndUnpersist_4 a yawl:Method ;
+    rdfs:label "logAndUnpersist" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logAndUnpersist(YPersistenceManager pmgr, YWorkItem item)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorkItem.unpackTimerParams
+yawl:YWorkItem_unpackTimerParams_5 a yawl:Method ;
+    rdfs:label "unpackTimerParams" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean unpackTimerParams(String param, YNetData data)" ;
+    rdfs:comment """Finds the net-level param specified, then deconstructs its data to simple timer parameters. The data in the net-level param is a complex type YTimerType consisting of two elements: 'trigger' (either 'OnEnabled' or 'OnExecuting'), and 'expiry': a string that may represent a duration type, a dateTime type, or a long value to be converted to a Date. @param param the name of the YTimerType parameter @param data the case or net-level data object @return true if the param is successfully unpacked.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorkItem.evaluateParamQuery
+yawl:YWorkItem_evaluateParamQuery_6 a yawl:Method ;
+    rdfs:label "evaluateParamQuery" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element evaluateParamQuery(Element timerParams, Document data)" ;
+    rdfs:comment """Evaluates any XQueries embedded in timer parameters @param timerParams the parameters to evaluate @param data the current net data document @return the evaluated element @throws SaxonApiException if queries are malformed""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorkItem.setEngine
+yawl:YWorkItem_setEngine_7 a yawl:Method ;
+    rdfs:label "setEngine" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEngine(YEngine engine)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.addToRepository
+yawl:YWorkItem_addToRepository_8 a yawl:Method ;
+    rdfs:label "addToRepository" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addToRepository()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.createChild
+yawl:YWorkItem_createChild_9 a yawl:Method ;
+    rdfs:label "createChild" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem createChild(YPersistenceManager pmgr, YIdentifier childCaseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.setExternalCompletionLogPredicate
+yawl:YWorkItem_setExternalCompletionLogPredicate_10 a yawl:Method ;
+    rdfs:label "setExternalCompletionLogPredicate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setExternalCompletionLogPredicate(String predicate)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.setExternalStartingLogPredicate
+yawl:YWorkItem_setExternalStartingLogPredicate_11 a yawl:Method ;
+    rdfs:label "setExternalStartingLogPredicate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setExternalStartingLogPredicate(String predicate)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.setData
+yawl:YWorkItem_setData_12 a yawl:Method ;
+    rdfs:label "setData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setData(YPersistenceManager pmgr, Element data)" ;
+    rdfs:comment """write data input values to event log""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.completeData
+yawl:YWorkItem_completeData_13 a yawl:Method ;
+    rdfs:label "completeData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void completeData(Document output)" ;
+    rdfs:comment """write output data values to event log""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.assembleLogDataItemList
+yawl:YWorkItem_assembleLogDataItemList_14 a yawl:Method ;
+    rdfs:label "assembleLogDataItemList" ;
+    yawl:returnType "YLogDataItemList" ;
+    yawl:signature "YLogDataItemList assembleLogDataItemList(Element data, boolean input)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorkItem.restoreDataToNet
+yawl:YWorkItem_restoreDataToNet_15 a yawl:Method ;
+    rdfs:label "restoreDataToNet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restoreDataToNet(Set services)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.cancel
+yawl:YWorkItem_cancel_16 a yawl:Method ;
+    rdfs:label "cancel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancel(YPersistenceManager pmgr)" ;
+    rdfs:comment """removes workitems from persistence when cancelled""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.deleteWorkItem
+yawl:YWorkItem_deleteWorkItem_17 a yawl:Method ;
+    rdfs:label "deleteWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteWorkItem(YPersistenceManager pmgr, YWorkItem item)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorkItem.checkStartTimer
+yawl:YWorkItem_checkStartTimer_18 a yawl:Method ;
+    rdfs:label "checkStartTimer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkStartTimer(YPersistenceManager pmgr, YNetData data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.cancelTimer
+yawl:YWorkItem_cancelTimer_19 a yawl:Method ;
+    rdfs:label "cancelTimer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancelTimer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.setTimerActive
+yawl:YWorkItem_setTimerActive_20 a yawl:Method ;
+    rdfs:label "setTimerActive" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTimerActive()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorkItem.hasLiveStatus
+yawl:YWorkItem_hasLiveStatus_21 a yawl:Method ;
+    rdfs:label "hasLiveStatus" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasLiveStatus()" ;
+    rdfs:comment """@return true if workitem is 'live'""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.hasFinishedStatus
+yawl:YWorkItem_hasFinishedStatus_22 a yawl:Method ;
+    rdfs:label "hasFinishedStatus" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasFinishedStatus()" ;
+    rdfs:comment """@return true if workitem is finished""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.hasCompletedStatus
+yawl:YWorkItem_hasCompletedStatus_23 a yawl:Method ;
+    rdfs:label "hasCompletedStatus" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasCompletedStatus()" ;
+    rdfs:comment """@return true if workitem has completed""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.isParent
+yawl:YWorkItem_isParent_24 a yawl:Method ;
+    rdfs:label "isParent" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isParent()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.hasUnfinishedStatus
+yawl:YWorkItem_hasUnfinishedStatus_25 a yawl:Method ;
+    rdfs:label "hasUnfinishedStatus" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasUnfinishedStatus()" ;
+    rdfs:comment """@return true if workitem is not finished""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.isEnabledSuspended
+yawl:YWorkItem_isEnabledSuspended_26 a yawl:Method ;
+    rdfs:label "isEnabledSuspended" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEnabledSuspended()" ;
+    rdfs:comment """@return true if workitem is suspended from enabled status""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.equals
+yawl:YWorkItem_equals_27 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.hashCode
+yawl:YWorkItem_hashCode_28 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.setStatusToStarted
+yawl:YWorkItem_setStatusToStarted_29 a yawl:Method ;
+    rdfs:label "setStatusToStarted" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStatusToStarted(YPersistenceManager pmgr, YClient client)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.setStatusToComplete
+yawl:YWorkItem_setStatusToComplete_30 a yawl:Method ;
+    rdfs:label "setStatusToComplete" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStatusToComplete(YPersistenceManager pmgr, WorkItemCompletion completionFlag)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.setStatusToDeleted
+yawl:YWorkItem_setStatusToDeleted_31 a yawl:Method ;
+    rdfs:label "setStatusToDeleted" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStatusToDeleted(YPersistenceManager pmgr)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.setStatusToDiscarded
+yawl:YWorkItem_setStatusToDiscarded_32 a yawl:Method ;
+    rdfs:label "setStatusToDiscarded" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStatusToDiscarded()" ;
+    rdfs:comment """announces and logs that this workitem has been discarded - ie. left in the net when the net completed""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.rollBackStatus
+yawl:YWorkItem_rollBackStatus_33 a yawl:Method ;
+    rdfs:label "rollBackStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void rollBackStatus(YPersistenceManager pmgr)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.setStatusToSuspended
+yawl:YWorkItem_setStatusToSuspended_34 a yawl:Method ;
+    rdfs:label "setStatusToSuspended" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStatusToSuspended(YPersistenceManager pmgr)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.setStatusToUnsuspended
+yawl:YWorkItem_setStatusToUnsuspended_35 a yawl:Method ;
+    rdfs:label "setStatusToUnsuspended" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStatusToUnsuspended(YPersistenceManager pmgr)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.set_parent
+yawl:YWorkItem_set_parent_36 a yawl:Method ;
+    rdfs:label "set_parent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_parent(YWorkItem parent)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.get_parent
+yawl:YWorkItem_get_parent_37 a yawl:Method ;
+    rdfs:label "get_parent" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem get_parent()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.get_children
+yawl:YWorkItem_get_children_38 a yawl:Method ;
+    rdfs:label "get_children" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set get_children()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.hasChildren
+yawl:YWorkItem_hasChildren_39 a yawl:Method ;
+    rdfs:label "hasChildren" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasChildren()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.add_child
+yawl:YWorkItem_add_child_40 a yawl:Method ;
+    rdfs:label "add_child" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add_child(YWorkItem child)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.add_children
+yawl:YWorkItem_add_children_41 a yawl:Method ;
+    rdfs:label "add_children" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add_children(Set children)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.setChildren
+yawl:YWorkItem_setChildren_42 a yawl:Method ;
+    rdfs:label "setChildren" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setChildren(Set children)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YWorkItem.setWorkItemID
+yawl:YWorkItem_setWorkItemID_43 a yawl:Method ;
+    rdfs:label "setWorkItemID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setWorkItemID(YWorkItemID workitemid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.get_thisID
+yawl:YWorkItem_get_thisID_44 a yawl:Method ;
+    rdfs:label "get_thisID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_thisID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.set_thisID
+yawl:YWorkItem_set_thisID_45 a yawl:Method ;
+    rdfs:label "set_thisID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_thisID(String thisID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.get_specIdentifier
+yawl:YWorkItem_get_specIdentifier_46 a yawl:Method ;
+    rdfs:label "get_specIdentifier" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_specIdentifier()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.get_specVersion
+yawl:YWorkItem_get_specVersion_47 a yawl:Method ;
+    rdfs:label "get_specVersion" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_specVersion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.get_specUri
+yawl:YWorkItem_get_specUri_48 a yawl:Method ;
+    rdfs:label "get_specUri" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_specUri()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.set_specIdentifier
+yawl:YWorkItem_set_specIdentifier_49 a yawl:Method ;
+    rdfs:label "set_specIdentifier" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_specIdentifier(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.set_specUri
+yawl:YWorkItem_set_specUri_50 a yawl:Method ;
+    rdfs:label "set_specUri" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_specUri(String uri)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.set_specVersion
+yawl:YWorkItem_set_specVersion_51 a yawl:Method ;
+    rdfs:label "set_specVersion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_specVersion(String version)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getAttributes
+yawl:YWorkItem_getAttributes_52 a yawl:Method ;
+    rdfs:label "getAttributes" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getAttributes()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.setAttributes
+yawl:YWorkItem_setAttributes_53 a yawl:Method ;
+    rdfs:label "setAttributes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAttributes(Map attributes)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.requiresManualResourcing
+yawl:YWorkItem_requiresManualResourcing_54 a yawl:Method ;
+    rdfs:label "requiresManualResourcing" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean requiresManualResourcing()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.setRequiresManualResourcing
+yawl:YWorkItem_setRequiresManualResourcing_55 a yawl:Method ;
+    rdfs:label "setRequiresManualResourcing" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRequiresManualResourcing(boolean requires)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getCodelet
+yawl:YWorkItem_getCodelet_56 a yawl:Method ;
+    rdfs:label "getCodelet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCodelet()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.setCodelet
+yawl:YWorkItem_setCodelet_57 a yawl:Method ;
+    rdfs:label "setCodelet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCodelet(String codelet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getCustomFormURL
+yawl:YWorkItem_getCustomFormURL_58 a yawl:Method ;
+    rdfs:label "getCustomFormURL" ;
+    yawl:returnType "URL" ;
+    yawl:signature "URL getCustomFormURL()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.setCustomFormURL
+yawl:YWorkItem_setCustomFormURL_59 a yawl:Method ;
+    rdfs:label "setCustomFormURL" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCustomFormURL(URL formURL)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.get_deferredChoiceGroupID
+yawl:YWorkItem_get_deferredChoiceGroupID_60 a yawl:Method ;
+    rdfs:label "get_deferredChoiceGroupID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_deferredChoiceGroupID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.set_deferredChoiceGroupID
+yawl:YWorkItem_set_deferredChoiceGroupID_61 a yawl:Method ;
+    rdfs:label "set_deferredChoiceGroupID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_deferredChoiceGroupID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.get_enablementTime
+yawl:YWorkItem_get_enablementTime_62 a yawl:Method ;
+    rdfs:label "get_enablementTime" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date get_enablementTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.set_enablementTime
+yawl:YWorkItem_set_enablementTime_63 a yawl:Method ;
+    rdfs:label "set_enablementTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_enablementTime(Date eTime)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.get_firingTime
+yawl:YWorkItem_get_firingTime_64 a yawl:Method ;
+    rdfs:label "get_firingTime" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date get_firingTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.set_firingTime
+yawl:YWorkItem_set_firingTime_65 a yawl:Method ;
+    rdfs:label "set_firingTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_firingTime(Date fTime)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.get_startTime
+yawl:YWorkItem_get_startTime_66 a yawl:Method ;
+    rdfs:label "get_startTime" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date get_startTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.set_startTime
+yawl:YWorkItem_set_startTime_67 a yawl:Method ;
+    rdfs:label "set_startTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_startTime(Date sTime)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.get_status
+yawl:YWorkItem_get_status_68 a yawl:Method ;
+    rdfs:label "get_status" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_status()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.set_status
+yawl:YWorkItem_set_status_69 a yawl:Method ;
+    rdfs:label "set_status" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_status(String status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.get_prevStatus
+yawl:YWorkItem_get_prevStatus_70 a yawl:Method ;
+    rdfs:label "get_prevStatus" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_prevStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.set_prevStatus
+yawl:YWorkItem_set_prevStatus_71 a yawl:Method ;
+    rdfs:label "set_prevStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_prevStatus(String status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.set_status
+yawl:YWorkItem_set_status_72 a yawl:Method ;
+    rdfs:label "set_status" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_status(YPersistenceManager pmgr, YWorkItemStatus status)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorkItem.get_externalClient
+yawl:YWorkItem_get_externalClient_73 a yawl:Method ;
+    rdfs:label "get_externalClient" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_externalClient()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.set_externalClient
+yawl:YWorkItem_set_externalClient_74 a yawl:Method ;
+    rdfs:label "set_externalClient" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_externalClient(String owner)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.get_allowsDynamicCreation
+yawl:YWorkItem_get_allowsDynamicCreation_75 a yawl:Method ;
+    rdfs:label "get_allowsDynamicCreation" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean get_allowsDynamicCreation()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.set_allowsDynamicCreation
+yawl:YWorkItem_set_allowsDynamicCreation_76 a yawl:Method ;
+    rdfs:label "set_allowsDynamicCreation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_allowsDynamicCreation(boolean a)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.get_dataString
+yawl:YWorkItem_get_dataString_77 a yawl:Method ;
+    rdfs:label "get_dataString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_dataString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.set_dataString
+yawl:YWorkItem_set_dataString_78 a yawl:Method ;
+    rdfs:label "set_dataString" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_dataString(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.setInitData
+yawl:YWorkItem_setInitData_79 a yawl:Method ;
+    rdfs:label "setInitData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setInitData(Element data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.setStatus
+yawl:YWorkItem_setStatus_80 a yawl:Method ;
+    rdfs:label "setStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStatus(YWorkItemStatus status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getWorkItemID
+yawl:YWorkItem_getWorkItemID_81 a yawl:Method ;
+    rdfs:label "getWorkItemID" ;
+    yawl:returnType "YWorkItemID" ;
+    yawl:signature "YWorkItemID getWorkItemID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getEnablementTime
+yawl:YWorkItem_getEnablementTime_82 a yawl:Method ;
+    rdfs:label "getEnablementTime" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date getEnablementTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getEnablementTimeStr
+yawl:YWorkItem_getEnablementTimeStr_83 a yawl:Method ;
+    rdfs:label "getEnablementTimeStr" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEnablementTimeStr()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getFiringTime
+yawl:YWorkItem_getFiringTime_84 a yawl:Method ;
+    rdfs:label "getFiringTime" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date getFiringTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getFiringTimeStr
+yawl:YWorkItem_getFiringTimeStr_85 a yawl:Method ;
+    rdfs:label "getFiringTimeStr" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFiringTimeStr()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getStartTime
+yawl:YWorkItem_getStartTime_86 a yawl:Method ;
+    rdfs:label "getStartTime" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date getStartTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getStartTimeStr
+yawl:YWorkItem_getStartTimeStr_87 a yawl:Method ;
+    rdfs:label "getStartTimeStr" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStartTimeStr()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getStatus
+yawl:YWorkItem_getStatus_88 a yawl:Method ;
+    rdfs:label "getStatus" ;
+    yawl:returnType "YWorkItemStatus" ;
+    yawl:signature "YWorkItemStatus getStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getParent
+yawl:YWorkItem_getParent_89 a yawl:Method ;
+    rdfs:label "getParent" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem getParent()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getChildren
+yawl:YWorkItem_getChildren_90 a yawl:Method ;
+    rdfs:label "getChildren" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getChildren()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getCaseID
+yawl:YWorkItem_getCaseID_91 a yawl:Method ;
+    rdfs:label "getCaseID" ;
+    yawl:returnType "YIdentifier" ;
+    yawl:signature "YIdentifier getCaseID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getTaskID
+yawl:YWorkItem_getTaskID_92 a yawl:Method ;
+    rdfs:label "getTaskID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getIDString
+yawl:YWorkItem_getIDString_93 a yawl:Method ;
+    rdfs:label "getIDString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getIDString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getUniqueID
+yawl:YWorkItem_getUniqueID_94 a yawl:Method ;
+    rdfs:label "getUniqueID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUniqueID()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorkItem.getDeferredChoiceGroupID
+yawl:YWorkItem_getDeferredChoiceGroupID_95 a yawl:Method ;
+    rdfs:label "getDeferredChoiceGroupID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDeferredChoiceGroupID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.setDeferredChoiceGroupID
+yawl:YWorkItem_setDeferredChoiceGroupID_96 a yawl:Method ;
+    rdfs:label "setDeferredChoiceGroupID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDeferredChoiceGroupID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getSpecName
+yawl:YWorkItem_getSpecName_97 a yawl:Method ;
+    rdfs:label "getSpecName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getSpecificationID
+yawl:YWorkItem_getSpecificationID_98 a yawl:Method ;
+    rdfs:label "getSpecificationID" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getSpecificationID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getTimerParameters
+yawl:YWorkItem_getTimerParameters_99 a yawl:Method ;
+    rdfs:label "getTimerParameters" ;
+    yawl:returnType "YTimerParameters" ;
+    yawl:signature "YTimerParameters getTimerParameters()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.setTimerParameters
+yawl:YWorkItem_setTimerParameters_100 a yawl:Method ;
+    rdfs:label "setTimerParameters" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTimerParameters(YTimerParameters params)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.hasTimerStarted
+yawl:YWorkItem_hasTimerStarted_101 a yawl:Method ;
+    rdfs:label "hasTimerStarted" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasTimerStarted()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.setTimerStarted
+yawl:YWorkItem_setTimerStarted_102 a yawl:Method ;
+    rdfs:label "setTimerStarted" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTimerStarted(boolean started)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getTimerExpiry
+yawl:YWorkItem_getTimerExpiry_103 a yawl:Method ;
+    rdfs:label "getTimerExpiry" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getTimerExpiry()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.setTimerExpiry
+yawl:YWorkItem_setTimerExpiry_104 a yawl:Method ;
+    rdfs:label "setTimerExpiry" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTimerExpiry(long time)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getTimerStatus
+yawl:YWorkItem_getTimerStatus_105 a yawl:Method ;
+    rdfs:label "getTimerStatus" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTimerStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.allowsDynamicCreation
+yawl:YWorkItem_allowsDynamicCreation_106 a yawl:Method ;
+    rdfs:label "allowsDynamicCreation" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean allowsDynamicCreation()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.toString
+yawl:YWorkItem_toString_107 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getExternalClient
+yawl:YWorkItem_getExternalClient_108 a yawl:Method ;
+    rdfs:label "getExternalClient" ;
+    yawl:returnType "YClient" ;
+    yawl:signature "YClient getExternalClient()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getNetRunner
+yawl:YWorkItem_getNetRunner_109 a yawl:Method ;
+    rdfs:label "getNetRunner" ;
+    yawl:returnType "YNetRunner" ;
+    yawl:signature "YNetRunner getNetRunner()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getDataElement
+yawl:YWorkItem_getDataElement_110 a yawl:Method ;
+    rdfs:label "getDataElement" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getDataElement()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getDataString
+yawl:YWorkItem_getDataString_111 a yawl:Method ;
+    rdfs:label "getDataString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getTask
+yawl:YWorkItem_getTask_112 a yawl:Method ;
+    rdfs:label "getTask" ;
+    yawl:returnType "YTask" ;
+    yawl:signature "YTask getTask()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.setTask
+yawl:YWorkItem_setTask_113 a yawl:Method ;
+    rdfs:label "setTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTask(YTask task)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.getDocumentation
+yawl:YWorkItem_getDocumentation_114 a yawl:Method ;
+    rdfs:label "getDocumentation" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDocumentation()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.toXML
+yawl:YWorkItem_toXML_115 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItem.createLogDataList
+yawl:YWorkItem_createLogDataList_116 a yawl:Method ;
+    rdfs:label "createLogDataList" ;
+    yawl:returnType "YLogDataItemList" ;
+    yawl:signature "YLogDataItemList createLogDataList(String tag)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorkItem.getLogPredicates
+yawl:YWorkItem_getLogPredicates_117 a yawl:Method ;
+    rdfs:label "getLogPredicates" ;
+    yawl:returnType "YLogDataItemList" ;
+    yawl:signature "YLogDataItemList getLogPredicates(String predicate, YWorkItemStatus itemStatus)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorkItem.getStartingPredicates
+yawl:YWorkItem_getStartingPredicates_118 a yawl:Method ;
+    rdfs:label "getStartingPredicates" ;
+    yawl:returnType "YLogDataItemList" ;
+    yawl:signature "YLogDataItemList getStartingPredicates()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorkItem.getCompletionPredicates
+yawl:YWorkItem_getCompletionPredicates_119 a yawl:Method ;
+    rdfs:label "getCompletionPredicates" ;
+    yawl:returnType "YLogDataItemList" ;
+    yawl:signature "YLogDataItemList getCompletionPredicates()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorkItem.getDecompLogPredicate
+yawl:YWorkItem_getDecompLogPredicate_120 a yawl:Method ;
+    rdfs:label "getDecompLogPredicate" ;
+    yawl:returnType "YLogDataItem" ;
+    yawl:signature "YLogDataItem getDecompLogPredicate(YWorkItemStatus itemStatus)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorkItem.getDecompLogPredicate
+yawl:YWorkItem_getDecompLogPredicate_121 a yawl:Method ;
+    rdfs:label "getDecompLogPredicate" ;
+    yawl:returnType "YLogPredicate" ;
+    yawl:signature "YLogPredicate getDecompLogPredicate()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorkItem.getDataLogPredicate
+yawl:YWorkItem_getDataLogPredicate_122 a yawl:Method ;
+    rdfs:label "getDataLogPredicate" ;
+    yawl:returnType "YLogDataItem" ;
+    yawl:signature "YLogDataItem getDataLogPredicate(YParameter param, boolean input)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YWorkItem__df a yawl:Field ;
+    rdfs:label "_df" .
+
+yawl:YWorkItem__engine a yawl:Field ;
+    rdfs:label "_engine" .
+
+yawl:YWorkItem__workItemID a yawl:Field ;
+    rdfs:label "_workItemID" .
+
+yawl:YWorkItem__thisID a yawl:Field ;
+    rdfs:label "_thisID" .
+
+yawl:YWorkItem__specID a yawl:Field ;
+    rdfs:label "_specID" .
+
+yawl:YWorkItem__task a yawl:Field ;
+    rdfs:label "_task" .
+
+yawl:YWorkItem__enablementTime a yawl:Field ;
+    rdfs:label "_enablementTime" .
+
+yawl:YWorkItem__firingTime a yawl:Field ;
+    rdfs:label "_firingTime" .
+
+yawl:YWorkItem__startTime a yawl:Field ;
+    rdfs:label "_startTime" .
+
+yawl:YWorkItem__attributes a yawl:Field ;
+    rdfs:label "_attributes" .
+
+yawl:YWorkItem__status a yawl:Field ;
+    rdfs:label "_status" .
+
+yawl:YWorkItem__prevStatus a yawl:Field ;
+    rdfs:label "_prevStatus" .
+
+yawl:YWorkItem__externalClient a yawl:Field ;
+    rdfs:label "_externalClient" .
+
+yawl:YWorkItem__externalClientStr a yawl:Field ;
+    rdfs:label "_externalClientStr" .
+
+yawl:YWorkItem__allowsDynamicCreation a yawl:Field ;
+    rdfs:label "_allowsDynamicCreation" .
+
+yawl:YWorkItem__requiresManualResourcing a yawl:Field ;
+    rdfs:label "_requiresManualResourcing" .
+
+yawl:YWorkItem__parent a yawl:Field ;
+    rdfs:label "_parent" .
+
+yawl:YWorkItem__children a yawl:Field ;
+    rdfs:label "_children" .
+
+yawl:YWorkItem__dataList a yawl:Field ;
+    rdfs:label "_dataList" .
+
+yawl:YWorkItem__dataString a yawl:Field ;
+    rdfs:label "_dataString" .
+
+yawl:YWorkItem__deferredChoiceGroupID a yawl:Field ;
+    rdfs:label "_deferredChoiceGroupID" .
+
+yawl:YWorkItem__timerParameters a yawl:Field ;
+    rdfs:label "_timerParameters" .
+
+yawl:YWorkItem__timerStarted a yawl:Field ;
+    rdfs:label "_timerStarted" .
+
+yawl:YWorkItem__timerExpiry a yawl:Field ;
+    rdfs:label "_timerExpiry" .
+
+yawl:YWorkItem__customFormURL a yawl:Field ;
+    rdfs:label "_customFormURL" .
+
+yawl:YWorkItem__codelet a yawl:Field ;
+    rdfs:label "_codelet" .
+
+yawl:YWorkItem__documentation a yawl:Field ;
+    rdfs:label "_documentation" .
+
+yawl:YWorkItem__externalStartingLogPredicate a yawl:Field ;
+    rdfs:label "_externalStartingLogPredicate" .
+
+yawl:YWorkItem__externalCompletionLogPredicate a yawl:Field ;
+    rdfs:label "_externalCompletionLogPredicate" .
+
+yawl:YWorkItem__eventLog a yawl:Field ;
+    rdfs:label "_eventLog" .
+
+yawl:YWorkItem__log a yawl:Field ;
+    rdfs:label "_log" .
+
+
+

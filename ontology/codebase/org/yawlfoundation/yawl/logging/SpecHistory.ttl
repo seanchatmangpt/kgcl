@@ -1,0 +1,176 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.logging.SpecHistory
+yawl:SpecHistory a yawl:Class ;
+    rdfs:label "SpecHistory" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_logging ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/logging/SpecHistory.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 4/12/16""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:SpecHistory_get_1 ;
+    yawl:hasMethod yawl:SpecHistory_getEvents_2 ;
+    yawl:hasMethod yawl:SpecHistory_getDataEvents_3 ;
+    yawl:hasMethod yawl:SpecHistory_get_4 ;
+    yawl:hasMethod yawl:SpecHistory_processResults_5 ;
+    yawl:hasMethod yawl:SpecHistory_getOrCreateCaseNode_6 ;
+    yawl:hasMethod yawl:SpecHistory_getOrCreateNetNode_7 ;
+    yawl:hasMethod yawl:SpecHistory_getOrCreateTaskNode_8 ;
+    yawl:hasMethod yawl:SpecHistory_getOrCreateEventNode_9 ;
+    yawl:hasMethod yawl:SpecHistory_addDataNodes_10 ;
+    yawl:hasMethod yawl:SpecHistory_addCasePredicates_11 ;
+    yawl:hasMethod yawl:SpecHistory_addLogPredicates_12 ;
+    yawl:hasMethod yawl:SpecHistory_getOrCreateNode_13 ;
+    yawl:hasMethod yawl:SpecHistory_getChildNode_14 ;
+    yawl:hasMethod yawl:SpecHistory_processDataResults_15 ;
+    yawl:hasField yawl:SpecHistory__dataMap ;
+    yawl:hasField yawl:SpecHistory__casePredicateMap ;
+    yawl:hasField yawl:SpecHistory__log ;
+    yawl:hasField yawl:SpecHistory_EVENT_QUERY ;
+    yawl:hasField yawl:SpecHistory_DATA_QUERY ;
+    .
+
+
+# Method: SpecHistory.get
+yawl:SpecHistory_get_1 a yawl:Method ;
+    rdfs:label "get" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode get(HibernateEngine logDb, long specKey, boolean withData)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecHistory.getEvents
+yawl:SpecHistory_getEvents_2 a yawl:Method ;
+    rdfs:label "getEvents" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getEvents(HibernateEngine logDb, long specKey)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SpecHistory.getDataEvents
+yawl:SpecHistory_getDataEvents_3 a yawl:Method ;
+    rdfs:label "getDataEvents" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getDataEvents(HibernateEngine logDb, long specKey)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SpecHistory.get
+yawl:SpecHistory_get_4 a yawl:Method ;
+    rdfs:label "get" ;
+    yawl:returnType "List" ;
+    yawl:signature "List get(HibernateEngine logDb, long specKey, String query)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SpecHistory.processResults
+yawl:SpecHistory_processResults_5 a yawl:Method ;
+    rdfs:label "processResults" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode processResults(List events, boolean withData)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SpecHistory.getOrCreateCaseNode
+yawl:SpecHistory_getOrCreateCaseNode_6 a yawl:Method ;
+    rdfs:label "getOrCreateCaseNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getOrCreateCaseNode(Map caseMap, YLogNetInstance netInstance)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SpecHistory.getOrCreateNetNode
+yawl:SpecHistory_getOrCreateNetNode_7 a yawl:Method ;
+    rdfs:label "getOrCreateNetNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getOrCreateNetNode(XNode caseNode, long instanceID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SpecHistory.getOrCreateTaskNode
+yawl:SpecHistory_getOrCreateTaskNode_8 a yawl:Method ;
+    rdfs:label "getOrCreateTaskNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getOrCreateTaskNode(XNode netNode, long instanceID, YLogTask task, String engineInstanceID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SpecHistory.getOrCreateEventNode
+yawl:SpecHistory_getOrCreateEventNode_9 a yawl:Method ;
+    rdfs:label "getOrCreateEventNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getOrCreateEventNode(XNode taskNode, long instanceID, String eventDescriptor, String timestamp)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SpecHistory.addDataNodes
+yawl:SpecHistory_addDataNodes_10 a yawl:Method ;
+    rdfs:label "addDataNodes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addDataNodes(XNode eventNode)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SpecHistory.addCasePredicates
+yawl:SpecHistory_addCasePredicates_11 a yawl:Method ;
+    rdfs:label "addCasePredicates" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addCasePredicates(XNode caseNode, long netInstanceID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SpecHistory.addLogPredicates
+yawl:SpecHistory_addLogPredicates_12 a yawl:Method ;
+    rdfs:label "addLogPredicates" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addLogPredicates(XNode eventNode)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SpecHistory.getOrCreateNode
+yawl:SpecHistory_getOrCreateNode_13 a yawl:Method ;
+    rdfs:label "getOrCreateNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getOrCreateNode(XNode parent, long instanceID, String childName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SpecHistory.getChildNode
+yawl:SpecHistory_getChildNode_14 a yawl:Method ;
+    rdfs:label "getChildNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getChildNode(XNode parent, long instanceID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SpecHistory.processDataResults
+yawl:SpecHistory_processDataResults_15 a yawl:Method ;
+    rdfs:label "processDataResults" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processDataResults(List dataValues)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:SpecHistory__dataMap a yawl:Field ;
+    rdfs:label "_dataMap" .
+
+yawl:SpecHistory__casePredicateMap a yawl:Field ;
+    rdfs:label "_casePredicateMap" .
+
+yawl:SpecHistory__log a yawl:Field ;
+    rdfs:label "_log" .
+
+yawl:SpecHistory_EVENT_QUERY a yawl:Field ;
+    rdfs:label "EVENT_QUERY" .
+
+yawl:SpecHistory_DATA_QUERY a yawl:Field ;
+    rdfs:label "DATA_QUERY" .
+
+
+

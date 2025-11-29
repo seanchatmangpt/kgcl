@@ -1,0 +1,413 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.rdr.Rdr
+yawl:Rdr a yawl:Class ;
+    rdfs:label "Rdr" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_rdr ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/rdr/Rdr.java"^^xsd:string ;
+    rdfs:comment """A top-level interface into the Rdr Classes @author Michael Adams @date 28/02/12""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Rdr_evaluate_1 ;
+    yawl:hasMethod yawl:Rdr_evaluate_2 ;
+    yawl:hasMethod yawl:Rdr_evaluate_3 ;
+    yawl:hasMethod yawl:Rdr_evaluate_4 ;
+    yawl:hasMethod yawl:Rdr_evaluate_5 ;
+    yawl:hasMethod yawl:Rdr_addNode_6 ;
+    yawl:hasMethod yawl:Rdr_addNode_7 ;
+    yawl:hasMethod yawl:Rdr_addNode_8 ;
+    yawl:hasMethod yawl:Rdr_addNode_9 ;
+    yawl:hasMethod yawl:Rdr_addNode_10 ;
+    yawl:hasMethod yawl:Rdr_getNode_11 ;
+    yawl:hasMethod yawl:Rdr_getNode_12 ;
+    yawl:hasMethod yawl:Rdr_getNode_13 ;
+    yawl:hasMethod yawl:Rdr_getNode_14 ;
+    yawl:hasMethod yawl:Rdr_getNode_15 ;
+    yawl:hasMethod yawl:Rdr_getNode_16 ;
+    yawl:hasMethod yawl:Rdr_getRdrSet_17 ;
+    yawl:hasMethod yawl:Rdr_getRdrSet_18 ;
+    yawl:hasMethod yawl:Rdr_getRdrSetIDs_19 ;
+    yawl:hasMethod yawl:Rdr_removeRdrSet_20 ;
+    yawl:hasMethod yawl:Rdr_removeRdrSet_21 ;
+    yawl:hasMethod yawl:Rdr_removeNode_22 ;
+    yawl:hasMethod yawl:Rdr_removeNode_23 ;
+    yawl:hasMethod yawl:Rdr_updateTaskIDs_24 ;
+    yawl:hasMethod yawl:Rdr_getRdrTree_25 ;
+    yawl:hasMethod yawl:Rdr_getRdrTree_26 ;
+    yawl:hasMethod yawl:Rdr_getRdrTree_27 ;
+    yawl:hasMethod yawl:Rdr_getRdrTree_28 ;
+    yawl:hasMethod yawl:Rdr_getRdrTree_29 ;
+    yawl:hasMethod yawl:Rdr_updateTaskIDs_30 ;
+    yawl:hasMethod yawl:Rdr_addNode_31 ;
+    yawl:hasMethod yawl:Rdr_addNode_32 ;
+    yawl:hasMethod yawl:Rdr_getNode_33 ;
+    yawl:hasMethod yawl:Rdr_getConclusion_34 ;
+    yawl:hasMethod yawl:Rdr_getConclusion_35 ;
+    yawl:hasMethod yawl:Rdr_evaluate_36 ;
+    yawl:hasMethod yawl:Rdr_getTree_37 ;
+    yawl:hasMethod yawl:Rdr_getTree_38 ;
+    yawl:hasMethod yawl:Rdr_getTree_39 ;
+    yawl:hasMethod yawl:Rdr_removeNode_40 ;
+    yawl:hasMethod yawl:Rdr_removeTree_41 ;
+    yawl:hasMethod yawl:Rdr_removeTreeSet_42 ;
+    yawl:hasMethod yawl:Rdr_updatePersistedTree_43 ;
+    yawl:hasField yawl:Rdr__loader ;
+    .
+
+
+# Method: Rdr.evaluate
+yawl:Rdr_evaluate_1 a yawl:Method ;
+    rdfs:label "evaluate" ;
+    yawl:returnType "RdrPair" ;
+    yawl:signature "RdrPair evaluate(YSpecificationID specID, Element data, RuleType rType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.evaluate
+yawl:Rdr_evaluate_2 a yawl:Method ;
+    rdfs:label "evaluate" ;
+    yawl:returnType "RdrPair" ;
+    yawl:signature "RdrPair evaluate(String processName, Element data, RuleType rType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.evaluate
+yawl:Rdr_evaluate_3 a yawl:Method ;
+    rdfs:label "evaluate" ;
+    yawl:returnType "RdrPair" ;
+    yawl:signature "RdrPair evaluate(WorkItemRecord wir, Element data, RuleType rType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.evaluate
+yawl:Rdr_evaluate_4 a yawl:Method ;
+    rdfs:label "evaluate" ;
+    yawl:returnType "RdrPair" ;
+    yawl:signature "RdrPair evaluate(YSpecificationID specID, String taskID, Element data, RuleType rType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.evaluate
+yawl:Rdr_evaluate_5 a yawl:Method ;
+    rdfs:label "evaluate" ;
+    yawl:returnType "RdrPair" ;
+    yawl:signature "RdrPair evaluate(String processName, String taskID, Element data, RuleType rType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.addNode
+yawl:Rdr_addNode_6 a yawl:Method ;
+    rdfs:label "addNode" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode addNode(YSpecificationID specID, RuleType rType, RdrNode node)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.addNode
+yawl:Rdr_addNode_7 a yawl:Method ;
+    rdfs:label "addNode" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode addNode(String processName, RuleType rType, RdrNode node)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.addNode
+yawl:Rdr_addNode_8 a yawl:Method ;
+    rdfs:label "addNode" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode addNode(WorkItemRecord wir, RuleType rType, RdrNode node)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.addNode
+yawl:Rdr_addNode_9 a yawl:Method ;
+    rdfs:label "addNode" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode addNode(YSpecificationID specID, String taskID, RuleType rType, RdrNode node)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.addNode
+yawl:Rdr_addNode_10 a yawl:Method ;
+    rdfs:label "addNode" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode addNode(String processName, String taskID, RuleType rType, RdrNode node)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.getNode
+yawl:Rdr_getNode_11 a yawl:Method ;
+    rdfs:label "getNode" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode getNode(long nodeID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.getNode
+yawl:Rdr_getNode_12 a yawl:Method ;
+    rdfs:label "getNode" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode getNode(YSpecificationID specID, RuleType rType, long nodeID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.getNode
+yawl:Rdr_getNode_13 a yawl:Method ;
+    rdfs:label "getNode" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode getNode(String processName, RuleType rType, long nodeID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.getNode
+yawl:Rdr_getNode_14 a yawl:Method ;
+    rdfs:label "getNode" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode getNode(WorkItemRecord wir, RuleType rType, long nodeID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.getNode
+yawl:Rdr_getNode_15 a yawl:Method ;
+    rdfs:label "getNode" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode getNode(YSpecificationID specID, String taskID, RuleType rType, long nodeID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.getNode
+yawl:Rdr_getNode_16 a yawl:Method ;
+    rdfs:label "getNode" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode getNode(String processName, String taskID, RuleType rType, long nodeID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.getRdrSet
+yawl:Rdr_getRdrSet_17 a yawl:Method ;
+    rdfs:label "getRdrSet" ;
+    yawl:returnType "RdrSet" ;
+    yawl:signature "RdrSet getRdrSet(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.getRdrSet
+yawl:Rdr_getRdrSet_18 a yawl:Method ;
+    rdfs:label "getRdrSet" ;
+    yawl:returnType "RdrSet" ;
+    yawl:signature "RdrSet getRdrSet(String processName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.getRdrSetIDs
+yawl:Rdr_getRdrSetIDs_19 a yawl:Method ;
+    rdfs:label "getRdrSetIDs" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getRdrSetIDs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.removeRdrSet
+yawl:Rdr_removeRdrSet_20 a yawl:Method ;
+    rdfs:label "removeRdrSet" ;
+    yawl:returnType "RdrSet" ;
+    yawl:signature "RdrSet removeRdrSet(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.removeRdrSet
+yawl:Rdr_removeRdrSet_21 a yawl:Method ;
+    rdfs:label "removeRdrSet" ;
+    yawl:returnType "RdrSet" ;
+    yawl:signature "RdrSet removeRdrSet(String processName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.removeNode
+yawl:Rdr_removeNode_22 a yawl:Method ;
+    rdfs:label "removeNode" ;
+    yawl:returnType "RdrResult" ;
+    yawl:signature "RdrResult removeNode(YSpecificationID specID, String taskID, RuleType rType, long nodeID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.removeNode
+yawl:Rdr_removeNode_23 a yawl:Method ;
+    rdfs:label "removeNode" ;
+    yawl:returnType "RdrResult" ;
+    yawl:signature "RdrResult removeNode(String processName, String taskID, RuleType rType, long nodeID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.updateTaskIDs
+yawl:Rdr_updateTaskIDs_24 a yawl:Method ;
+    rdfs:label "updateTaskIDs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateTaskIDs(YSpecificationID specID, Map updates)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.getRdrTree
+yawl:Rdr_getRdrTree_25 a yawl:Method ;
+    rdfs:label "getRdrTree" ;
+    yawl:returnType "RdrTree" ;
+    yawl:signature "RdrTree getRdrTree(YSpecificationID specID, RuleType rType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.getRdrTree
+yawl:Rdr_getRdrTree_26 a yawl:Method ;
+    rdfs:label "getRdrTree" ;
+    yawl:returnType "RdrTree" ;
+    yawl:signature "RdrTree getRdrTree(String processName, RuleType rType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.getRdrTree
+yawl:Rdr_getRdrTree_27 a yawl:Method ;
+    rdfs:label "getRdrTree" ;
+    yawl:returnType "RdrTree" ;
+    yawl:signature "RdrTree getRdrTree(WorkItemRecord wir, RuleType rType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.getRdrTree
+yawl:Rdr_getRdrTree_28 a yawl:Method ;
+    rdfs:label "getRdrTree" ;
+    yawl:returnType "RdrTree" ;
+    yawl:signature "RdrTree getRdrTree(YSpecificationID specID, String taskID, RuleType rType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.getRdrTree
+yawl:Rdr_getRdrTree_29 a yawl:Method ;
+    rdfs:label "getRdrTree" ;
+    yawl:returnType "RdrTree" ;
+    yawl:signature "RdrTree getRdrTree(String processName, String taskID, RuleType rType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.updateTaskIDs
+yawl:Rdr_updateTaskIDs_30 a yawl:Method ;
+    rdfs:label "updateTaskIDs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateTaskIDs(RdrSet rdrSet, Map updates)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rdr.addNode
+yawl:Rdr_addNode_31 a yawl:Method ;
+    rdfs:label "addNode" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode addNode(RdrSet set, String taskID, RuleType rType, RdrNode node)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Rdr.addNode
+yawl:Rdr_addNode_32 a yawl:Method ;
+    rdfs:label "addNode" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode addNode(RdrTree tree, RdrNode node)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Rdr.getNode
+yawl:Rdr_getNode_33 a yawl:Method ;
+    rdfs:label "getNode" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode getNode(RdrSet set, String taskID, RuleType rType, long nodeID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Rdr.getConclusion
+yawl:Rdr_getConclusion_34 a yawl:Method ;
+    rdfs:label "getConclusion" ;
+    yawl:returnType "RdrPair" ;
+    yawl:signature "RdrPair getConclusion(YSpecificationID specID, String taskID, Element data, RuleType rType)" ;
+    rdfs:comment """Discovers whether this case or item has rules for this exception type, and if so, returns the result of the rule evaluation. Note that if the conclusion returned from the search is empty, no exception has occurred (no rule has been satisfied). @param specID the specification id of the rule set @param taskID item's task id, or null for case-level exception @param data the case data @param rType the type of exception triggered @return an RdrConclusion representing an exception handling process, or""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Rdr.getConclusion
+yawl:Rdr_getConclusion_35 a yawl:Method ;
+    rdfs:label "getConclusion" ;
+    yawl:returnType "RdrPair" ;
+    yawl:signature "RdrPair getConclusion(String processName, String taskID, Element data, RuleType rType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Rdr.evaluate
+yawl:Rdr_evaluate_36 a yawl:Method ;
+    rdfs:label "evaluate" ;
+    yawl:returnType "RdrPair" ;
+    yawl:signature "RdrPair evaluate(RdrTree tree, Element data)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Rdr.getTree
+yawl:Rdr_getTree_37 a yawl:Method ;
+    rdfs:label "getTree" ;
+    yawl:returnType "RdrTree" ;
+    yawl:signature "RdrTree getTree(YSpecificationID specID, String taskID, RuleType rType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Rdr.getTree
+yawl:Rdr_getTree_38 a yawl:Method ;
+    rdfs:label "getTree" ;
+    yawl:returnType "RdrTree" ;
+    yawl:signature "RdrTree getTree(String processName, String taskID, RuleType rType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Rdr.getTree
+yawl:Rdr_getTree_39 a yawl:Method ;
+    rdfs:label "getTree" ;
+    yawl:returnType "RdrTree" ;
+    yawl:signature "RdrTree getTree(RdrSet ruleSet, String taskID, RuleType rType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Rdr.removeNode
+yawl:Rdr_removeNode_40 a yawl:Method ;
+    rdfs:label "removeNode" ;
+    yawl:returnType "RdrResult" ;
+    yawl:signature "RdrResult removeNode(RdrSet ruleSet, String taskID, RuleType rType, long nodeID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Rdr.removeTree
+yawl:Rdr_removeTree_41 a yawl:Method ;
+    rdfs:label "removeTree" ;
+    yawl:returnType "RdrResult" ;
+    yawl:signature "RdrResult removeTree(RdrSet ruleSet, String taskID, RuleType rType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Rdr.removeTreeSet
+yawl:Rdr_removeTreeSet_42 a yawl:Method ;
+    rdfs:label "removeTreeSet" ;
+    yawl:returnType "RdrResult" ;
+    yawl:signature "RdrResult removeTreeSet(RdrSet ruleSet, RuleType rType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Rdr.updatePersistedTree
+yawl:Rdr_updatePersistedTree_43 a yawl:Method ;
+    rdfs:label "updatePersistedTree" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updatePersistedTree(RdrNode node)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:Rdr__loader a yawl:Field ;
+    rdfs:label "_loader" .
+
+
+

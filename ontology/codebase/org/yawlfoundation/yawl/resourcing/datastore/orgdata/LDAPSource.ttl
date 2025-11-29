@@ -1,0 +1,317 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.datastore.orgdata.LDAPSource
+yawl:LDAPSource a yawl:Class ;
+    rdfs:label "LDAPSource" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_datastore_orgdata ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/datastore/orgdata/LDAPSource.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 5/03/2010 Last Date: 15/06/2010""" ;
+    yawl:extends yawl:DataSource ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:LDAPSource_loadProperties_1 ;
+    yawl:hasMethod yawl:LDAPSource_initMaps_2 ;
+    yawl:hasMethod yawl:LDAPSource_getProperty_3 ;
+    yawl:hasMethod yawl:LDAPSource_getAttributeMap_4 ;
+    yawl:hasMethod yawl:LDAPSource_getNameBindingMap_5 ;
+    yawl:hasMethod yawl:LDAPSource_getControlledNameBindingMap_6 ;
+    yawl:hasMethod yawl:LDAPSource_getAttributeIDNames_7 ;
+    yawl:hasMethod yawl:LDAPSource_getEnvironment_8 ;
+    yawl:hasMethod yawl:LDAPSource_matchesObjectClassFilter_9 ;
+    yawl:hasMethod yawl:LDAPSource_loadParticipants_10 ;
+    yawl:hasMethod yawl:LDAPSource_createParticipant_11 ;
+    yawl:hasMethod yawl:LDAPSource_setRoles_12 ;
+    yawl:hasMethod yawl:LDAPSource_setRoles_13 ;
+    yawl:hasMethod yawl:LDAPSource_addToRole_14 ;
+    yawl:hasMethod yawl:LDAPSource_loadUserPassword_15 ;
+    yawl:hasMethod yawl:LDAPSource_getStringValue_16 ;
+    yawl:hasMethod yawl:LDAPSource_getByteValue_17 ;
+    yawl:hasMethod yawl:LDAPSource_getAttribute_18 ;
+    yawl:hasMethod yawl:LDAPSource_isNotNullOrEmpty_19 ;
+    yawl:hasMethod yawl:LDAPSource_allNotNullOrEmpty_20 ;
+    yawl:hasMethod yawl:LDAPSource_hasEnumeratedRoles_21 ;
+    yawl:hasMethod yawl:LDAPSource_getMaxSizeLimit_22 ;
+    yawl:hasMethod yawl:LDAPSource_loadResources_23 ;
+    yawl:hasMethod yawl:LDAPSource_update_24 ;
+    yawl:hasMethod yawl:LDAPSource_delete_25 ;
+    yawl:hasMethod yawl:LDAPSource_insert_26 ;
+    yawl:hasMethod yawl:LDAPSource_importObj_27 ;
+    yawl:hasMethod yawl:LDAPSource_execUpdate_28 ;
+    yawl:hasMethod yawl:LDAPSource_authenticate_29 ;
+    yawl:hasField yawl:LDAPSource__props ;
+    yawl:hasField yawl:LDAPSource__environment ;
+    yawl:hasField yawl:LDAPSource__attributeMap ;
+    yawl:hasField yawl:LDAPSource__user2nameMap ;
+    yawl:hasField yawl:LDAPSource__roles ;
+    yawl:hasField yawl:LDAPSource__log ;
+    .
+
+
+# Method: LDAPSource.loadProperties
+yawl:LDAPSource_loadProperties_1 a yawl:Method ;
+    rdfs:label "loadProperties" ;
+    yawl:returnType "void" ;
+    yawl:signature "void loadProperties()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSource.initMaps
+yawl:LDAPSource_initMaps_2 a yawl:Method ;
+    rdfs:label "initMaps" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initMaps()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSource.getProperty
+yawl:LDAPSource_getProperty_3 a yawl:Method ;
+    rdfs:label "getProperty" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getProperty(String key)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSource.getAttributeMap
+yawl:LDAPSource_getAttributeMap_4 a yawl:Method ;
+    rdfs:label "getAttributeMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getAttributeMap()" ;
+    rdfs:comment """Gets the set of attributes we are interested in retrieving for each user from the LDAP server. The map uses a generic key for each attribute and maps it to the actual corresponding attribute name as read from the properties file. @return a populated map of attribute names""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSource.getNameBindingMap
+yawl:LDAPSource_getNameBindingMap_5 a yawl:Method ;
+    rdfs:label "getNameBindingMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getNameBindingMap()" ;
+    rdfs:comment """Gets the list of all entries from the LDAP server corresponding to the binding read from the properties file. The list is retrieved in a single call to the server. @return a (String, String) map of (name, binding) entries @throws NamingException if something goes wrong when reading from the server""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSource.getControlledNameBindingMap
+yawl:LDAPSource_getControlledNameBindingMap_6 a yawl:Method ;
+    rdfs:label "getControlledNameBindingMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getControlledNameBindingMap(int maxSize)" ;
+    rdfs:comment """Gets the list of all entries from the LDAP server corresponding to the binding read from the properties file. The list is retrieved in multiple calls to the server, each call retrieving maxSize entries (so as not to exceed the max size limit configured on the server). @param maxSize the max size limit configured @return a (String, String) map of (name, binding) entries @throws NamingException if something goes wrong when reading from the server @throws IOException if there's a problem creating t""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSource.getAttributeIDNames
+yawl:LDAPSource_getAttributeIDNames_7 a yawl:Method ;
+    rdfs:label "getAttributeIDNames" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAttributeIDNames()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSource.getEnvironment
+yawl:LDAPSource_getEnvironment_8 a yawl:Method ;
+    rdfs:label "getEnvironment" ;
+    yawl:returnType "Hashtable" ;
+    yawl:signature "Hashtable getEnvironment()" ;
+    rdfs:comment """Gets the environment attribute values for server connections. The value for each attribute is read from the properties file. @return a populated map of environment values.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSource.matchesObjectClassFilter
+yawl:LDAPSource_matchesObjectClassFilter_9 a yawl:Method ;
+    rdfs:label "matchesObjectClassFilter" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean matchesObjectClassFilter(DirContext ctx, String entry)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSource.loadParticipants
+yawl:LDAPSource_loadParticipants_10 a yawl:Method ;
+    rdfs:label "loadParticipants" ;
+    yawl:returnType "HashMap" ;
+    yawl:signature "HashMap loadParticipants()" ;
+    rdfs:comment """Loads org data from LDAP server and uses it to create the corresponding participants. @return a map of ids and Participants @throws NamingException if something goes wrong when reading from the server @throws IOException if there's a problem creating the PagedResultsControl""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSource.createParticipant
+yawl:LDAPSource_createParticipant_11 a yawl:Method ;
+    rdfs:label "createParticipant" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant createParticipant(String name, Attributes attributes)" ;
+    rdfs:comment """Creates a Participant from an entry name and its attributes @param name the LDAP entry name @param attributes the entries attributes @return an instantiated Participant @throws NamingException if something goes wrong when reading role info from the server""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSource.setRoles
+yawl:LDAPSource_setRoles_12 a yawl:Method ;
+    rdfs:label "setRoles" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRoles(Participant p, Attributes attributes)" ;
+    rdfs:comment """Sets the Roles, provided as a set of attributes, for a participant @param p the Participant to set the Roles for @param attributes the names of the roles the Participant is to be given @throws NamingException if something goes wrong when reading role info from the server""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSource.setRoles
+yawl:LDAPSource_setRoles_13 a yawl:Method ;
+    rdfs:label "setRoles" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRoles(Participant p, String rolesCSV)" ;
+    rdfs:comment """Sets the Roles, provided as a comma separated value string, for a participant @param p the Participant to set the Roles for @param rolesCSV the names of the roles the Participant is to be given""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSource.addToRole
+yawl:LDAPSource_addToRole_14 a yawl:Method ;
+    rdfs:label "addToRole" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addToRole(Participant p, String roleName)" ;
+    rdfs:comment """Adds a Participant to a Role, and vice versa @param p the Participant to add to the Role @param roleName the name of the Role to give to the Participant""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSource.loadUserPassword
+yawl:LDAPSource_loadUserPassword_15 a yawl:Method ;
+    rdfs:label "loadUserPassword" ;
+    yawl:returnType "String" ;
+    yawl:signature "String loadUserPassword(Attributes attributes)" ;
+    rdfs:comment """Loads the LDAP server-stored password for a Participant, if specified to do so via the properties file. @param attributes the LDAP attributes for a user entry @return an encypted password, or null if configured not to load password into each Participant object.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSource.getStringValue
+yawl:LDAPSource_getStringValue_16 a yawl:Method ;
+    rdfs:label "getStringValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStringValue(Attributes attributes, String attributeName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSource.getByteValue
+yawl:LDAPSource_getByteValue_17 a yawl:Method ;
+    rdfs:label "getByteValue" ;
+    yawl:returnType "byte" ;
+    yawl:signature "byte getByteValue(Attributes attributes, String attributeName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSource.getAttribute
+yawl:LDAPSource_getAttribute_18 a yawl:Method ;
+    rdfs:label "getAttribute" ;
+    yawl:returnType "Attribute" ;
+    yawl:signature "Attribute getAttribute(Attributes attributes, String attributeName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSource.isNotNullOrEmpty
+yawl:LDAPSource_isNotNullOrEmpty_19 a yawl:Method ;
+    rdfs:label "isNotNullOrEmpty" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isNotNullOrEmpty(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSource.allNotNullOrEmpty
+yawl:LDAPSource_allNotNullOrEmpty_20 a yawl:Method ;
+    rdfs:label "allNotNullOrEmpty" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean allNotNullOrEmpty(String values)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSource.hasEnumeratedRoles
+yawl:LDAPSource_hasEnumeratedRoles_21 a yawl:Method ;
+    rdfs:label "hasEnumeratedRoles" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasEnumeratedRoles()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSource.getMaxSizeLimit
+yawl:LDAPSource_getMaxSizeLimit_22 a yawl:Method ;
+    rdfs:label "getMaxSizeLimit" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getMaxSizeLimit()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSource.loadResources
+yawl:LDAPSource_loadResources_23 a yawl:Method ;
+    rdfs:label "loadResources" ;
+    yawl:returnType "ResourceDataSet" ;
+    yawl:signature "ResourceDataSet loadResources()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LDAPSource.update
+yawl:LDAPSource_update_24 a yawl:Method ;
+    rdfs:label "update" ;
+    yawl:returnType "void" ;
+    yawl:signature "void update(Object obj)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LDAPSource.delete
+yawl:LDAPSource_delete_25 a yawl:Method ;
+    rdfs:label "delete" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean delete(Object obj)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LDAPSource.insert
+yawl:LDAPSource_insert_26 a yawl:Method ;
+    rdfs:label "insert" ;
+    yawl:returnType "String" ;
+    yawl:signature "String insert(Object obj)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LDAPSource.importObj
+yawl:LDAPSource_importObj_27 a yawl:Method ;
+    rdfs:label "importObj" ;
+    yawl:returnType "void" ;
+    yawl:signature "void importObj(Object obj)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LDAPSource.execUpdate
+yawl:LDAPSource_execUpdate_28 a yawl:Method ;
+    rdfs:label "execUpdate" ;
+    yawl:returnType "int" ;
+    yawl:signature "int execUpdate(String query)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LDAPSource.authenticate
+yawl:LDAPSource_authenticate_29 a yawl:Method ;
+    rdfs:label "authenticate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean authenticate(String userid, String password)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:LDAPSource__props a yawl:Field ;
+    rdfs:label "_props" .
+
+yawl:LDAPSource__environment a yawl:Field ;
+    rdfs:label "_environment" .
+
+yawl:LDAPSource__attributeMap a yawl:Field ;
+    rdfs:label "_attributeMap" .
+
+yawl:LDAPSource__user2nameMap a yawl:Field ;
+    rdfs:label "_user2nameMap" .
+
+yawl:LDAPSource__roles a yawl:Field ;
+    rdfs:label "_roles" .
+
+yawl:LDAPSource__log a yawl:Field ;
+    rdfs:label "_log" .
+
+
+

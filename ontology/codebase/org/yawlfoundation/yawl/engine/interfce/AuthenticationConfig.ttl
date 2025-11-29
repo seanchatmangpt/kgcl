@@ -1,0 +1,106 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.interfce.AuthenticationConfig
+yawl:AuthenticationConfig a yawl:Class ;
+    rdfs:label "AuthenticationConfig" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_interfce ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/interfce/AuthenticationConfig.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 15/03/2004 Time: 12:11:08""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:AuthenticationConfig_isSetForAuthentication_1 ;
+    yawl:hasMethod yawl:AuthenticationConfig_getInstance_2 ;
+    yawl:hasMethod yawl:AuthenticationConfig_setProxyAuthentication_3 ;
+    yawl:hasMethod yawl:AuthenticationConfig_getPassword_4 ;
+    yawl:hasMethod yawl:AuthenticationConfig_getProxyHost_5 ;
+    yawl:hasMethod yawl:AuthenticationConfig_getUserName_6 ;
+    yawl:hasMethod yawl:AuthenticationConfig_getProxyPort_7 ;
+    yawl:hasField yawl:AuthenticationConfig_userName ;
+    yawl:hasField yawl:AuthenticationConfig__password ;
+    yawl:hasField yawl:AuthenticationConfig__proxyHost ;
+    yawl:hasField yawl:AuthenticationConfig__proxyPort ;
+    yawl:hasField yawl:AuthenticationConfig__myInstance ;
+    .
+
+
+# Method: AuthenticationConfig.isSetForAuthentication
+yawl:AuthenticationConfig_isSetForAuthentication_1 a yawl:Method ;
+    rdfs:label "isSetForAuthentication" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isSetForAuthentication()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: AuthenticationConfig.getInstance
+yawl:AuthenticationConfig_getInstance_2 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "AuthenticationConfig" ;
+    yawl:signature "AuthenticationConfig getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: AuthenticationConfig.setProxyAuthentication
+yawl:AuthenticationConfig_setProxyAuthentication_3 a yawl:Method ;
+    rdfs:label "setProxyAuthentication" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setProxyAuthentication(String userName, String password, String proxyHost, String proxyPort)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AuthenticationConfig.getPassword
+yawl:AuthenticationConfig_getPassword_4 a yawl:Method ;
+    rdfs:label "getPassword" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AuthenticationConfig.getProxyHost
+yawl:AuthenticationConfig_getProxyHost_5 a yawl:Method ;
+    rdfs:label "getProxyHost" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getProxyHost()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AuthenticationConfig.getUserName
+yawl:AuthenticationConfig_getUserName_6 a yawl:Method ;
+    rdfs:label "getUserName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUserName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AuthenticationConfig.getProxyPort
+yawl:AuthenticationConfig_getProxyPort_7 a yawl:Method ;
+    rdfs:label "getProxyPort" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getProxyPort()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:AuthenticationConfig_userName a yawl:Field ;
+    rdfs:label "userName" .
+
+yawl:AuthenticationConfig__password a yawl:Field ;
+    rdfs:label "_password" .
+
+yawl:AuthenticationConfig__proxyHost a yawl:Field ;
+    rdfs:label "_proxyHost" .
+
+yawl:AuthenticationConfig__proxyPort a yawl:Field ;
+    rdfs:label "_proxyPort" .
+
+yawl:AuthenticationConfig__myInstance a yawl:Field ;
+    rdfs:label "_myInstance" .
+
+
+

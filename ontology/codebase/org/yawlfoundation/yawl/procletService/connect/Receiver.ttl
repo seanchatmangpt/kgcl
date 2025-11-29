@@ -1,0 +1,51 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.connect.Receiver
+yawl:Receiver a yawl:Class ;
+    rdfs:label "Receiver" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_connect ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/connect/Receiver.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Receiver_initiate_1 ;
+    yawl:hasMethod yawl:Receiver_send_2 ;
+    yawl:hasMethod yawl:Receiver_receive_3 ;
+    yawl:hasField yawl:Receiver_conn1 ;
+    .
+
+
+# Method: Receiver.initiate
+yawl:Receiver_initiate_1 a yawl:Method ;
+    rdfs:label "initiate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initiate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Receiver.send
+yawl:Receiver_send_2 a yawl:Method ;
+    rdfs:label "send" ;
+    yawl:returnType "void" ;
+    yawl:signature "void send(String message)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Receiver.receive
+yawl:Receiver_receive_3 a yawl:Method ;
+    rdfs:label "receive" ;
+    yawl:returnType "String" ;
+    yawl:signature "String receive()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:Receiver_conn1 a yawl:Field ;
+    rdfs:label "conn1" .
+
+
+

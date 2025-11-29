@@ -1,0 +1,124 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.cli.CliUpdater
+yawl:CliUpdater a yawl:Class ;
+    rdfs:label "CliUpdater" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_cli ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/cli/CliUpdater.java"^^xsd:string ;
+    rdfs:comment """Overrides the SwingWorker operations in the UI Updater @author Michael Adams @author Joerg Evermann @date 3/11/2015""" ;
+    yawl:extends yawl:Updater ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CliUpdater_download_1 ;
+    yawl:hasMethod yawl:CliUpdater_verify_2 ;
+    yawl:hasMethod yawl:CliUpdater_finalise_3 ;
+    yawl:hasMethod yawl:CliUpdater_isDone_4 ;
+    yawl:hasMethod yawl:CliUpdater_hasErrors_5 ;
+    yawl:hasMethod yawl:CliUpdater_showError_6 ;
+    yawl:hasMethod yawl:CliUpdater_getProgressPanel_7 ;
+    yawl:hasMethod yawl:CliUpdater_getDownloader_8 ;
+    yawl:hasMethod yawl:CliUpdater_resetCursor_9 ;
+    yawl:hasMethod yawl:CliUpdater_setWaitCursor_10 ;
+    yawl:hasField yawl:CliUpdater__progressPanel ;
+    yawl:hasField yawl:CliUpdater__downloader ;
+    yawl:hasField yawl:CliUpdater__done ;
+    .
+
+
+# Method: CliUpdater.download
+yawl:CliUpdater_download_1 a yawl:Method ;
+    rdfs:label "download" ;
+    yawl:returnType "void" ;
+    yawl:signature "void download(List updates)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: CliUpdater.verify
+yawl:CliUpdater_verify_2 a yawl:Method ;
+    rdfs:label "verify" ;
+    yawl:returnType "void" ;
+    yawl:signature "void verify()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: CliUpdater.finalise
+yawl:CliUpdater_finalise_3 a yawl:Method ;
+    rdfs:label "finalise" ;
+    yawl:returnType "void" ;
+    yawl:signature "void finalise()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: CliUpdater.isDone
+yawl:CliUpdater_isDone_4 a yawl:Method ;
+    rdfs:label "isDone" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isDone()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: CliUpdater.hasErrors
+yawl:CliUpdater_hasErrors_5 a yawl:Method ;
+    rdfs:label "hasErrors" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasErrors()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: CliUpdater.showError
+yawl:CliUpdater_showError_6 a yawl:Method ;
+    rdfs:label "showError" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showError(String message)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: CliUpdater.getProgressPanel
+yawl:CliUpdater_getProgressPanel_7 a yawl:Method ;
+    rdfs:label "getProgressPanel" ;
+    yawl:returnType "CliProgressPanel" ;
+    yawl:signature "CliProgressPanel getProgressPanel()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: CliUpdater.getDownloader
+yawl:CliUpdater_getDownloader_8 a yawl:Method ;
+    rdfs:label "getDownloader" ;
+    yawl:returnType "Downloader" ;
+    yawl:signature "Downloader getDownloader()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: CliUpdater.resetCursor
+yawl:CliUpdater_resetCursor_9 a yawl:Method ;
+    rdfs:label "resetCursor" ;
+    yawl:returnType "void" ;
+    yawl:signature "void resetCursor()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: CliUpdater.setWaitCursor
+yawl:CliUpdater_setWaitCursor_10 a yawl:Method ;
+    rdfs:label "setWaitCursor" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setWaitCursor()" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:CliUpdater__progressPanel a yawl:Field ;
+    rdfs:label "_progressPanel" .
+
+yawl:CliUpdater__downloader a yawl:Field ;
+    rdfs:label "_downloader" .
+
+yawl:CliUpdater__done a yawl:Field ;
+    rdfs:label "_done" .
+
+
+

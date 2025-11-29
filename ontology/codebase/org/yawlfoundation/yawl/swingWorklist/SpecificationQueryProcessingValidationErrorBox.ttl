@@ -1,0 +1,75 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.swingWorklist.SpecificationQueryProcessingValidationErrorBox
+yawl:SpecificationQueryProcessingValidationErrorBox a yawl:Class ;
+    rdfs:label "SpecificationQueryProcessingValidationErrorBox" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_swingWorklist ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/swingWorklist/YWorklistModel.java"^^xsd:string ;
+    yawl:extends yawl:JDialog ;
+    yawl:implements yawl:ActionListener ;
+    yawl:hasMethod yawl:SpecificationQueryProcessingValidationErrorBox_this_windowClosing_1 ;
+    yawl:hasMethod yawl:SpecificationQueryProcessingValidationErrorBox_storeData_2 ;
+    yawl:hasMethod yawl:SpecificationQueryProcessingValidationErrorBox_createCentrePanel_3 ;
+    yawl:hasMethod yawl:SpecificationQueryProcessingValidationErrorBox_createBottomPanel_4 ;
+    yawl:hasMethod yawl:SpecificationQueryProcessingValidationErrorBox_actionPerformed_5 ;
+    yawl:hasField yawl:SpecificationQueryProcessingValidationErrorBox__okCommand ;
+    .
+
+
+# Method: SpecificationQueryProcessingValidationErrorBox.this_windowClosing
+yawl:SpecificationQueryProcessingValidationErrorBox_this_windowClosing_1 a yawl:Method ;
+    rdfs:label "this_windowClosing" ;
+    yawl:returnType "void" ;
+    yawl:signature "void this_windowClosing()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SpecificationQueryProcessingValidationErrorBox.storeData
+yawl:SpecificationQueryProcessingValidationErrorBox_storeData_2 a yawl:Method ;
+    rdfs:label "storeData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void storeData()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SpecificationQueryProcessingValidationErrorBox.createCentrePanel
+yawl:SpecificationQueryProcessingValidationErrorBox_createCentrePanel_3 a yawl:Method ;
+    rdfs:label "createCentrePanel" ;
+    yawl:returnType "JPanel" ;
+    yawl:signature "JPanel createCentrePanel(YDataStateException exception)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SpecificationQueryProcessingValidationErrorBox.createBottomPanel
+yawl:SpecificationQueryProcessingValidationErrorBox_createBottomPanel_4 a yawl:Method ;
+    rdfs:label "createBottomPanel" ;
+    yawl:returnType "JPanel" ;
+    yawl:signature "JPanel createBottomPanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SpecificationQueryProcessingValidationErrorBox.actionPerformed
+yawl:SpecificationQueryProcessingValidationErrorBox_actionPerformed_5 a yawl:Method ;
+    rdfs:label "actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void actionPerformed(ActionEvent e)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:SpecificationQueryProcessingValidationErrorBox__okCommand a yawl:Field ;
+    rdfs:label "_okCommand" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_digitalSignature a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.digitalSignature" .
+
+

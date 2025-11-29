@@ -1,0 +1,55 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.models.procletModel.BlockRel
+yawl:BlockRel a yawl:Class ;
+    rdfs:label "BlockRel" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_models_procletModel ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/models/procletModel/BlockRel.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:BlockRel_getIBlock_1 ;
+    yawl:hasMethod yawl:BlockRel_getOBlock_2 ;
+    yawl:hasMethod yawl:BlockRel_toString_3 ;
+    yawl:hasField yawl:BlockRel_iBlock ;
+    yawl:hasField yawl:BlockRel_oBlock ;
+    .
+
+
+# Method: BlockRel.getIBlock
+yawl:BlockRel_getIBlock_1 a yawl:Method ;
+    rdfs:label "getIBlock" ;
+    yawl:returnType "ProcletBlock" ;
+    yawl:signature "ProcletBlock getIBlock()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockRel.getOBlock
+yawl:BlockRel_getOBlock_2 a yawl:Method ;
+    rdfs:label "getOBlock" ;
+    yawl:returnType "ProcletBlock" ;
+    yawl:signature "ProcletBlock getOBlock()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockRel.toString
+yawl:BlockRel_toString_3 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:BlockRel_iBlock a yawl:Field ;
+    rdfs:label "iBlock" .
+
+yawl:BlockRel_oBlock a yawl:Field ;
+    rdfs:label "oBlock" .
+
+
+

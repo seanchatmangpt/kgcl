@@ -1,0 +1,82 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.scheduling.lanes
+yawl:org_yawlfoundation_yawl_scheduling_lanes a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.scheduling.lanes" .
+# Class: org.yawlfoundation.yawl.scheduling.lanes.LaneImporter
+yawl:LaneImporter a yawl:Class ;
+    rdfs:label "LaneImporter" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_scheduling_lanes ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/scheduling/lanes/LaneImporter.java"^^xsd:string ;
+    yawl:implements yawl:Constants ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:LaneImporter_updateRUP_1 ;
+    yawl:hasMethod yawl:LaneImporter_update_2 ;
+    yawl:hasField yawl:LaneImporter_logger ;
+    yawl:hasField yawl:LaneImporter_config ;
+    yawl:hasField yawl:LaneImporter_scheduler ;
+    yawl:hasField yawl:LaneImporter_sessionHandle ;
+    yawl:hasField yawl:LaneImporter_rup ;
+    yawl:hasField yawl:LaneImporter_caseId ;
+    yawl:hasField yawl:LaneImporter_earliestFrom ;
+    yawl:hasField yawl:LaneImporter_hasErrors ;
+    yawl:hasField yawl:LaneImporter_errors ;
+    yawl:hasField yawl:LaneImporter_reload ;
+    .
+
+
+# Method: LaneImporter.updateRUP
+yawl:LaneImporter_updateRUP_1 a yawl:Method ;
+    rdfs:label "updateRUP" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateRUP(String start, String categoryOrRoleId, String resourceId)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LaneImporter.update
+yawl:LaneImporter_update_2 a yawl:Method ;
+    rdfs:label "update" ;
+    yawl:returnType "void" ;
+    yawl:signature "void update(Element resource, String resType, String resourceId, String categoryOrRoleId)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:LaneImporter_logger a yawl:Field ;
+    rdfs:label "logger" .
+
+yawl:LaneImporter_config a yawl:Field ;
+    rdfs:label "config" .
+
+yawl:LaneImporter_scheduler a yawl:Field ;
+    rdfs:label "scheduler" .
+
+yawl:LaneImporter_sessionHandle a yawl:Field ;
+    rdfs:label "sessionHandle" .
+
+yawl:LaneImporter_rup a yawl:Field ;
+    rdfs:label "rup" .
+
+yawl:LaneImporter_caseId a yawl:Field ;
+    rdfs:label "caseId" .
+
+yawl:LaneImporter_earliestFrom a yawl:Field ;
+    rdfs:label "earliestFrom" .
+
+yawl:LaneImporter_hasErrors a yawl:Field ;
+    rdfs:label "hasErrors" .
+
+yawl:LaneImporter_errors a yawl:Field ;
+    rdfs:label "errors" .
+
+yawl:LaneImporter_reload a yawl:Field ;
+    rdfs:label "reload" .
+
+
+

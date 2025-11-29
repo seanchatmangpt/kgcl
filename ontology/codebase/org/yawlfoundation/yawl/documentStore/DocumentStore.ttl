@@ -1,0 +1,161 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.documentStore
+yawl:org_yawlfoundation_yawl_documentStore a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.documentStore" .
+# Class: org.yawlfoundation.yawl.documentStore.DocumentStore
+yawl:DocumentStore a yawl:Class ;
+    rdfs:label "DocumentStore" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_documentStore ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/documentStore/DocumentStore.java"^^xsd:string ;
+    rdfs:comment """A storage cache for binary files passed as work item data. @author Michael Adams @date 18/11/11""" ;
+    yawl:extends yawl:YHttpServlet ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DocumentStore_init_1 ;
+    yawl:hasMethod yawl:DocumentStore_destroy_2 ;
+    yawl:hasMethod yawl:DocumentStore_doGet_3 ;
+    yawl:hasMethod yawl:DocumentStore_doPost_4 ;
+    yawl:hasMethod yawl:DocumentStore_writeDocument_5 ;
+    yawl:hasMethod yawl:DocumentStore_writeString_6 ;
+    yawl:hasMethod yawl:DocumentStore_getDocument_7 ;
+    yawl:hasMethod yawl:DocumentStore_putDocument_8 ;
+    yawl:hasMethod yawl:DocumentStore_removeDocument_9 ;
+    yawl:hasMethod yawl:DocumentStore_addCaseID_10 ;
+    yawl:hasMethod yawl:DocumentStore_clearCase_11 ;
+    yawl:hasMethod yawl:DocumentStore_fixH2BinarySize_12 ;
+    yawl:hasMethod yawl:DocumentStore_loadHibernateProperties_13 ;
+    yawl:hasField yawl:DocumentStore__sessions ;
+    yawl:hasField yawl:DocumentStore__db ;
+    yawl:hasField yawl:DocumentStore__retainWhenCaseCompletes ;
+    .
+
+
+# Method: DocumentStore.init
+yawl:DocumentStore_init_1 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocumentStore.destroy
+yawl:DocumentStore_destroy_2 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocumentStore.doGet
+yawl:DocumentStore_doGet_3 a yawl:Method ;
+    rdfs:label "doGet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doGet(HttpServletRequest req, HttpServletResponse res)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocumentStore.doPost
+yawl:DocumentStore_doPost_4 a yawl:Method ;
+    rdfs:label "doPost" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doPost(HttpServletRequest req, HttpServletResponse res)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocumentStore.writeDocument
+yawl:DocumentStore_writeDocument_5 a yawl:Method ;
+    rdfs:label "writeDocument" ;
+    yawl:returnType "void" ;
+    yawl:signature "void writeDocument(HttpServletResponse res, YDocument doc)" ;
+    rdfs:comment """Writes a binary file to a response's output stream @param res the response @param doc a YDocument wrapper containing the binary file @throws IOException if there's a problem writing to the stream""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DocumentStore.writeString
+yawl:DocumentStore_writeString_6 a yawl:Method ;
+    rdfs:label "writeString" ;
+    yawl:returnType "void" ;
+    yawl:signature "void writeString(HttpServletResponse res, String msg, String tag)" ;
+    rdfs:comment """Writes a UTF-8 String to a response's output stream @param res the response @param msg the message to write @param tag the xml tag to wrap the message in @throws IOException if there's a problem writing to the stream""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DocumentStore.getDocument
+yawl:DocumentStore_getDocument_7 a yawl:Method ;
+    rdfs:label "getDocument" ;
+    yawl:returnType "YDocument" ;
+    yawl:signature "YDocument getDocument(long id)" ;
+    rdfs:comment """Reads a document from the database @param id the id of the document to read @return a YDocument wrapper for the document @throws IOException if no document can be found with the id passed""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DocumentStore.putDocument
+yawl:DocumentStore_putDocument_8 a yawl:Method ;
+    rdfs:label "putDocument" ;
+    yawl:returnType "long" ;
+    yawl:signature "long putDocument(YDocument doc)" ;
+    rdfs:comment """Writes a document to the database @param doc a YDocument wrapper for the document to write @return the id (primary key) of the stored document @throws IOException if the document can't be read from the request stream""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DocumentStore.removeDocument
+yawl:DocumentStore_removeDocument_9 a yawl:Method ;
+    rdfs:label "removeDocument" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeDocument(long id)" ;
+    rdfs:comment """Removes a document from the database @param id the id of the document to remove @return true if successful""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DocumentStore.addCaseID
+yawl:DocumentStore_addCaseID_10 a yawl:Method ;
+    rdfs:label "addCaseID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addCaseID(long id, String caseID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DocumentStore.clearCase
+yawl:DocumentStore_clearCase_11 a yawl:Method ;
+    rdfs:label "clearCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String clearCase(String id)" ;
+    rdfs:comment """Removes all the documents from the database that match the case id passed @param id the case id to remove documents for @return a message indicating success or otherwise""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DocumentStore.fixH2BinarySize
+yawl:DocumentStore_fixH2BinarySize_12 a yawl:Method ;
+    rdfs:label "fixH2BinarySize" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fixH2BinarySize(ServletContext context)" ;
+    rdfs:comment """Increases the maximum column length for stored documents in H2 databases from 255 to 5Mb. <p/> H2 defaults to 255 chars for binary types. This method (1) checks if we are using a H2 database, then, if so, (2) checks the relevant column length, then if it is 255 (3) increases it to 5Mb maximum. @param context the current servlet context""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DocumentStore.loadHibernateProperties
+yawl:DocumentStore_loadHibernateProperties_13 a yawl:Method ;
+    rdfs:label "loadHibernateProperties" ;
+    yawl:returnType "Properties" ;
+    yawl:signature "Properties loadHibernateProperties(ServletContext context)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:DocumentStore__sessions a yawl:Field ;
+    rdfs:label "_sessions" .
+
+yawl:DocumentStore__db a yawl:Field ;
+    rdfs:label "_db" .
+
+yawl:DocumentStore__retainWhenCaseCompletes a yawl:Field ;
+    rdfs:label "_retainWhenCaseCompletes" .
+
+
+

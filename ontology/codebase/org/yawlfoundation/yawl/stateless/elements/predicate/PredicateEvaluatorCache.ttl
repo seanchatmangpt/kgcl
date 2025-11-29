@@ -1,0 +1,68 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.stateless.elements.predicate
+yawl:org_yawlfoundation_yawl_stateless_elements_predicate a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.stateless.elements.predicate" .
+# Class: org.yawlfoundation.yawl.stateless.elements.predicate.PredicateEvaluatorCache
+yawl:PredicateEvaluatorCache a yawl:Class ;
+    rdfs:label "PredicateEvaluatorCache" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_elements_predicate ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/elements/predicate/PredicateEvaluatorCache.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 5/12/12""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:PredicateEvaluatorCache_process_1 ;
+    yawl:hasMethod yawl:PredicateEvaluatorCache_substitute_2 ;
+    yawl:hasMethod yawl:PredicateEvaluatorCache_accept_3 ;
+    yawl:hasMethod yawl:PredicateEvaluatorCache_getEvaluator_4 ;
+    yawl:hasField yawl:PredicateEvaluatorCache__evaluators ;
+    .
+
+
+# Method: PredicateEvaluatorCache.process
+yawl:PredicateEvaluatorCache_process_1 a yawl:Method ;
+    rdfs:label "process" ;
+    yawl:returnType "String" ;
+    yawl:signature "String process(YDecomposition decomposition, String predicate, YIdentifier token)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PredicateEvaluatorCache.substitute
+yawl:PredicateEvaluatorCache_substitute_2 a yawl:Method ;
+    rdfs:label "substitute" ;
+    yawl:returnType "String" ;
+    yawl:signature "String substitute(String predicate)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PredicateEvaluatorCache.accept
+yawl:PredicateEvaluatorCache_accept_3 a yawl:Method ;
+    rdfs:label "accept" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean accept(String predicate)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PredicateEvaluatorCache.getEvaluator
+yawl:PredicateEvaluatorCache_getEvaluator_4 a yawl:Method ;
+    rdfs:label "getEvaluator" ;
+    yawl:returnType "PredicateEvaluator" ;
+    yawl:signature "PredicateEvaluator getEvaluator(String predicate)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:PredicateEvaluatorCache__evaluators a yawl:Field ;
+    rdfs:label "_evaluators" .
+
+
+

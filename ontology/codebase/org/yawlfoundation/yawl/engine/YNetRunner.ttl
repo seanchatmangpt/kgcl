@@ -1,0 +1,1001 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.YNetRunner
+yawl:YNetRunner a yawl:Class ;
+    rdfs:label "YNetRunner" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/YNetRunner.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 16/04/2003 Time: 16:08:01 @author Michael Adams (for v2)""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YNetRunner_init_1 ;
+    yawl:hasMethod yawl:YNetRunner_initialise_2 ;
+    yawl:hasMethod yawl:YNetRunner_prepare_3 ;
+    yawl:hasMethod yawl:YNetRunner_refreshAnnouncements_4 ;
+    yawl:hasMethod yawl:YNetRunner_equals_5 ;
+    yawl:hasMethod yawl:YNetRunner_hashCode_6 ;
+    yawl:hasMethod yawl:YNetRunner_setContainingTask_7 ;
+    yawl:hasMethod yawl:YNetRunner_getContainingTaskID_8 ;
+    yawl:hasMethod yawl:YNetRunner_setContainingTaskID_9 ;
+    yawl:hasMethod yawl:YNetRunner_setNet_10 ;
+    yawl:hasMethod yawl:YNetRunner_getNet_11 ;
+    yawl:hasMethod yawl:YNetRunner_setEngine_12 ;
+    yawl:hasMethod yawl:YNetRunner_getSpecificationID_13 ;
+    yawl:hasMethod yawl:YNetRunner_setSpecificationID_14 ;
+    yawl:hasMethod yawl:YNetRunner_getNetData_15 ;
+    yawl:hasMethod yawl:YNetRunner_setNetData_16 ;
+    yawl:hasMethod yawl:YNetRunner_get_caseIDForNet_17 ;
+    yawl:hasMethod yawl:YNetRunner_set_caseIDForNet_18 ;
+    yawl:hasMethod yawl:YNetRunner_addBusyTask_19 ;
+    yawl:hasMethod yawl:YNetRunner_addEnabledTask_20 ;
+    yawl:hasMethod yawl:YNetRunner_removeActiveTask_21 ;
+    yawl:hasMethod yawl:YNetRunner_get_caseID_22 ;
+    yawl:hasMethod yawl:YNetRunner_set_caseID_23 ;
+    yawl:hasMethod yawl:YNetRunner_getEnabledTaskNames_24 ;
+    yawl:hasMethod yawl:YNetRunner_getBusyTaskNames_25 ;
+    yawl:hasMethod yawl:YNetRunner_setEnabledTaskNames_26 ;
+    yawl:hasMethod yawl:YNetRunner_setBusyTaskNames_27 ;
+    yawl:hasMethod yawl:YNetRunner_getStartTime_28 ;
+    yawl:hasMethod yawl:YNetRunner_setStartTime_29 ;
+    yawl:hasMethod yawl:YNetRunner_start_30 ;
+    yawl:hasMethod yawl:YNetRunner_isAlive_31 ;
+    yawl:hasMethod yawl:YNetRunner_kick_32 ;
+    yawl:hasMethod yawl:YNetRunner_announceCaseCompletion_33 ;
+    yawl:hasMethod yawl:YNetRunner_isRootNet_34 ;
+    yawl:hasMethod yawl:YNetRunner_notifyDeadLock_35 ;
+    yawl:hasMethod yawl:YNetRunner_createDeadlockItem_36 ;
+    yawl:hasMethod yawl:YNetRunner_deadLocked_37 ;
+    yawl:hasMethod yawl:YNetRunner_processCompletedSubnet_38 ;
+    yawl:hasMethod yawl:YNetRunner_attemptToFireAtomicTask_39 ;
+    yawl:hasMethod yawl:YNetRunner_addNewInstance_40 ;
+    yawl:hasMethod yawl:YNetRunner_startWorkItemInTask_41 ;
+    yawl:hasMethod yawl:YNetRunner_startWorkItemInTask_42 ;
+    yawl:hasMethod yawl:YNetRunner_completeWorkItemInTask_43 ;
+    yawl:hasMethod yawl:YNetRunner_completeWorkItemInTask_44 ;
+    yawl:hasMethod yawl:YNetRunner_continueIfPossible_45 ;
+    yawl:hasMethod yawl:YNetRunner_fireTasks_46 ;
+    yawl:hasMethod yawl:YNetRunner_fireAtomicTask_47 ;
+    yawl:hasMethod yawl:YNetRunner_fireCompositeTask_48 ;
+    yawl:hasMethod yawl:YNetRunner_processEmptyTask_49 ;
+    yawl:hasMethod yawl:YNetRunner_withdrawEnabledTask_50 ;
+    yawl:hasMethod yawl:YNetRunner_createEnabledWorkItem_51 ;
+    yawl:hasMethod yawl:YNetRunner_completeTask_52 ;
+    yawl:hasMethod yawl:YNetRunner_cancel_53 ;
+    yawl:hasMethod yawl:YNetRunner_removeFromPersistence_54 ;
+    yawl:hasMethod yawl:YNetRunner_rollbackWorkItem_55 ;
+    yawl:hasMethod yawl:YNetRunner_logCompletingTask_56 ;
+    yawl:hasMethod yawl:YNetRunner_getNetElement_57 ;
+    yawl:hasMethod yawl:YNetRunner_getCaseID_58 ;
+    yawl:hasMethod yawl:YNetRunner_isCompleted_59 ;
+    yawl:hasMethod yawl:YNetRunner_endOfNetReached_60 ;
+    yawl:hasMethod yawl:YNetRunner_isEmpty_61 ;
+    yawl:hasMethod yawl:YNetRunner_getBusyTasks_62 ;
+    yawl:hasMethod yawl:YNetRunner_getEnabledTasks_63 ;
+    yawl:hasMethod yawl:YNetRunner_getActiveTasks_64 ;
+    yawl:hasMethod yawl:YNetRunner_hasActiveTasks_65 ;
+    yawl:hasMethod yawl:YNetRunner_isAddEnabled_66 ;
+    yawl:hasMethod yawl:YNetRunner_setObserver_67 ;
+    yawl:hasMethod yawl:YNetRunner_warnIfNetNotEmpty_68 ;
+    yawl:hasMethod yawl:YNetRunner_toString_69 ;
+    yawl:hasMethod yawl:YNetRunner_dump_70 ;
+    yawl:hasMethod yawl:YNetRunner_dump_71 ;
+    yawl:hasMethod yawl:YNetRunner_restoreObservers_72 ;
+    yawl:hasMethod yawl:YNetRunner_get_caseObserverStr_73 ;
+    yawl:hasMethod yawl:YNetRunner_set_caseObserverStr_74 ;
+    yawl:hasMethod yawl:YNetRunner_cancelTask_75 ;
+    yawl:hasMethod yawl:YNetRunner_isTimeServiceTask_76 ;
+    yawl:hasMethod yawl:YNetRunner_getTimeOutTaskSet_77 ;
+    yawl:hasMethod yawl:YNetRunner_getFlowsIntoTaskID_78 ;
+    yawl:hasMethod yawl:YNetRunner_initTimerStates_79 ;
+    yawl:hasMethod yawl:YNetRunner_restoreTimerStates_80 ;
+    yawl:hasMethod yawl:YNetRunner_updateTimerState_81 ;
+    yawl:hasMethod yawl:YNetRunner_get_timerStates_82 ;
+    yawl:hasMethod yawl:YNetRunner_set_timerStates_83 ;
+    yawl:hasMethod yawl:YNetRunner_evaluateTimerPredicate_84 ;
+    yawl:hasMethod yawl:YNetRunner_getTimerVariable_85 ;
+    yawl:hasMethod yawl:YNetRunner_isSuspending_86 ;
+    yawl:hasMethod yawl:YNetRunner_isSuspended_87 ;
+    yawl:hasMethod yawl:YNetRunner_isResuming_88 ;
+    yawl:hasMethod yawl:YNetRunner_isInSuspense_89 ;
+    yawl:hasMethod yawl:YNetRunner_hasNormalState_90 ;
+    yawl:hasMethod yawl:YNetRunner_setStateSuspending_91 ;
+    yawl:hasMethod yawl:YNetRunner_setStateSuspended_92 ;
+    yawl:hasMethod yawl:YNetRunner_setStateResuming_93 ;
+    yawl:hasMethod yawl:YNetRunner_setStateNormal_94 ;
+    yawl:hasMethod yawl:YNetRunner_setExecutionStatus_95 ;
+    yawl:hasMethod yawl:YNetRunner_getExecutionStatus_96 ;
+    yawl:hasField yawl:YNetRunner__logger ;
+    yawl:hasField yawl:YNetRunner__net ;
+    yawl:hasField yawl:YNetRunner__workItemRepository ;
+    yawl:hasField yawl:YNetRunner__netTasks ;
+    yawl:hasField yawl:YNetRunner__enabledTasks ;
+    yawl:hasField yawl:YNetRunner__busyTasks ;
+    yawl:hasField yawl:YNetRunner__deadlockedTasks ;
+    yawl:hasField yawl:YNetRunner__caseIDForNet ;
+    yawl:hasField yawl:YNetRunner__specID ;
+    yawl:hasField yawl:YNetRunner__containingCompositeTask ;
+    yawl:hasField yawl:YNetRunner__engine ;
+    yawl:hasField yawl:YNetRunner__announcer ;
+    yawl:hasField yawl:YNetRunner__cancelling ;
+    yawl:hasField yawl:YNetRunner__enabledTaskNames ;
+    yawl:hasField yawl:YNetRunner__busyTaskNames ;
+    yawl:hasField yawl:YNetRunner__caseID ;
+    yawl:hasField yawl:YNetRunner__containingTaskID ;
+    yawl:hasField yawl:YNetRunner__netdata ;
+    yawl:hasField yawl:YNetRunner__caseObserver ;
+    yawl:hasField yawl:YNetRunner__startTime ;
+    yawl:hasField yawl:YNetRunner__timerStates ;
+    yawl:hasField yawl:YNetRunner__executionStatus ;
+    yawl:hasField yawl:YNetRunner__announcements ;
+    yawl:hasField yawl:YNetRunner__caseObserverStr ;
+    .
+
+
+# Method: YNetRunner.init
+yawl:YNetRunner_init_1 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetRunner.initialise
+yawl:YNetRunner_initialise_2 a yawl:Method ;
+    rdfs:label "initialise" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initialise(YPersistenceManager pmgr, YNet netPrototype, YIdentifier caseIDForNet, Element incomingData)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetRunner.prepare
+yawl:YNetRunner_prepare_3 a yawl:Method ;
+    rdfs:label "prepare" ;
+    yawl:returnType "void" ;
+    yawl:signature "void prepare(YPersistenceManager pmgr)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetRunner.refreshAnnouncements
+yawl:YNetRunner_refreshAnnouncements_4 a yawl:Method ;
+    rdfs:label "refreshAnnouncements" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set refreshAnnouncements()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.equals
+yawl:YNetRunner_equals_5 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.hashCode
+yawl:YNetRunner_hashCode_6 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.setContainingTask
+yawl:YNetRunner_setContainingTask_7 a yawl:Method ;
+    rdfs:label "setContainingTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setContainingTask(YCompositeTask task)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.getContainingTaskID
+yawl:YNetRunner_getContainingTaskID_8 a yawl:Method ;
+    rdfs:label "getContainingTaskID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getContainingTaskID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.setContainingTaskID
+yawl:YNetRunner_setContainingTaskID_9 a yawl:Method ;
+    rdfs:label "setContainingTaskID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setContainingTaskID(String taskid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.setNet
+yawl:YNetRunner_setNet_10 a yawl:Method ;
+    rdfs:label "setNet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNet(YNet net)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.getNet
+yawl:YNetRunner_getNet_11 a yawl:Method ;
+    rdfs:label "getNet" ;
+    yawl:returnType "YNet" ;
+    yawl:signature "YNet getNet()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.setEngine
+yawl:YNetRunner_setEngine_12 a yawl:Method ;
+    rdfs:label "setEngine" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEngine(YEngine engine)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.getSpecificationID
+yawl:YNetRunner_getSpecificationID_13 a yawl:Method ;
+    rdfs:label "getSpecificationID" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getSpecificationID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.setSpecificationID
+yawl:YNetRunner_setSpecificationID_14 a yawl:Method ;
+    rdfs:label "setSpecificationID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSpecificationID(YSpecificationID id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.getNetData
+yawl:YNetRunner_getNetData_15 a yawl:Method ;
+    rdfs:label "getNetData" ;
+    yawl:returnType "YNetData" ;
+    yawl:signature "YNetData getNetData()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.setNetData
+yawl:YNetRunner_setNetData_16 a yawl:Method ;
+    rdfs:label "setNetData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNetData(YNetData data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.get_caseIDForNet
+yawl:YNetRunner_get_caseIDForNet_17 a yawl:Method ;
+    rdfs:label "get_caseIDForNet" ;
+    yawl:returnType "YIdentifier" ;
+    yawl:signature "YIdentifier get_caseIDForNet()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.set_caseIDForNet
+yawl:YNetRunner_set_caseIDForNet_18 a yawl:Method ;
+    rdfs:label "set_caseIDForNet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_caseIDForNet(YIdentifier id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.addBusyTask
+yawl:YNetRunner_addBusyTask_19 a yawl:Method ;
+    rdfs:label "addBusyTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addBusyTask(YTask ext)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.addEnabledTask
+yawl:YNetRunner_addEnabledTask_20 a yawl:Method ;
+    rdfs:label "addEnabledTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addEnabledTask(YTask ext)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.removeActiveTask
+yawl:YNetRunner_removeActiveTask_21 a yawl:Method ;
+    rdfs:label "removeActiveTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeActiveTask(YPersistenceManager pmgr, YTask task)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.get_caseID
+yawl:YNetRunner_get_caseID_22 a yawl:Method ;
+    rdfs:label "get_caseID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_caseID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.set_caseID
+yawl:YNetRunner_set_caseID_23 a yawl:Method ;
+    rdfs:label "set_caseID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_caseID(String ID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.getEnabledTaskNames
+yawl:YNetRunner_getEnabledTaskNames_24 a yawl:Method ;
+    rdfs:label "getEnabledTaskNames" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getEnabledTaskNames()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.getBusyTaskNames
+yawl:YNetRunner_getBusyTaskNames_25 a yawl:Method ;
+    rdfs:label "getBusyTaskNames" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getBusyTaskNames()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.setEnabledTaskNames
+yawl:YNetRunner_setEnabledTaskNames_26 a yawl:Method ;
+    rdfs:label "setEnabledTaskNames" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEnabledTaskNames(Set names)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YNetRunner.setBusyTaskNames
+yawl:YNetRunner_setBusyTaskNames_27 a yawl:Method ;
+    rdfs:label "setBusyTaskNames" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBusyTaskNames(Set names)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YNetRunner.getStartTime
+yawl:YNetRunner_getStartTime_28 a yawl:Method ;
+    rdfs:label "getStartTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getStartTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.setStartTime
+yawl:YNetRunner_setStartTime_29 a yawl:Method ;
+    rdfs:label "setStartTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStartTime(long time)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.start
+yawl:YNetRunner_start_30 a yawl:Method ;
+    rdfs:label "start" ;
+    yawl:returnType "void" ;
+    yawl:signature "void start(YPersistenceManager pmgr)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.isAlive
+yawl:YNetRunner_isAlive_31 a yawl:Method ;
+    rdfs:label "isAlive" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAlive()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.kick
+yawl:YNetRunner_kick_32 a yawl:Method ;
+    rdfs:label "kick" ;
+    yawl:returnType "void" ;
+    yawl:signature "void kick(YPersistenceManager pmgr)" ;
+    rdfs:comment """Assumption: this will only get called AFTER a workitem has been progressed? Because if it is called any other time then it will cause the case to stop. @param pmgr @throws YPersistenceException""" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.announceCaseCompletion
+yawl:YNetRunner_announceCaseCompletion_33 a yawl:Method ;
+    rdfs:label "announceCaseCompletion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCaseCompletion()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetRunner.isRootNet
+yawl:YNetRunner_isRootNet_34 a yawl:Method ;
+    rdfs:label "isRootNet" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isRootNet()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetRunner.notifyDeadLock
+yawl:YNetRunner_notifyDeadLock_35 a yawl:Method ;
+    rdfs:label "notifyDeadLock" ;
+    yawl:returnType "void" ;
+    yawl:signature "void notifyDeadLock(YPersistenceManager pmgr)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetRunner.createDeadlockItem
+yawl:YNetRunner_createDeadlockItem_36 a yawl:Method ;
+    rdfs:label "createDeadlockItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void createDeadlockItem(YPersistenceManager pmgr, YTask task)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetRunner.deadLocked
+yawl:YNetRunner_deadLocked_37 a yawl:Method ;
+    rdfs:label "deadLocked" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean deadLocked()" ;
+    rdfs:comment """Assumption: there are no enabled tasks @return if deadlocked""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetRunner.processCompletedSubnet
+yawl:YNetRunner_processCompletedSubnet_38 a yawl:Method ;
+    rdfs:label "processCompletedSubnet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processCompletedSubnet(YPersistenceManager pmgr, YIdentifier caseIDForSubnet, YCompositeTask busyCompositeTask, Document rawSubnetData)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetRunner.attemptToFireAtomicTask
+yawl:YNetRunner_attemptToFireAtomicTask_39 a yawl:Method ;
+    rdfs:label "attemptToFireAtomicTask" ;
+    yawl:returnType "List" ;
+    yawl:signature "List attemptToFireAtomicTask(YPersistenceManager pmgr, String taskID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.addNewInstance
+yawl:YNetRunner_addNewInstance_40 a yawl:Method ;
+    rdfs:label "addNewInstance" ;
+    yawl:returnType "YIdentifier" ;
+    yawl:signature "YIdentifier addNewInstance(YPersistenceManager pmgr, String taskID, YIdentifier aSiblingInstance, Element newInstanceData)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.startWorkItemInTask
+yawl:YNetRunner_startWorkItemInTask_41 a yawl:Method ;
+    rdfs:label "startWorkItemInTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void startWorkItemInTask(YPersistenceManager pmgr, YWorkItem workItem)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.startWorkItemInTask
+yawl:YNetRunner_startWorkItemInTask_42 a yawl:Method ;
+    rdfs:label "startWorkItemInTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void startWorkItemInTask(YPersistenceManager pmgr, YIdentifier caseID, String taskID)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.completeWorkItemInTask
+yawl:YNetRunner_completeWorkItemInTask_43 a yawl:Method ;
+    rdfs:label "completeWorkItemInTask" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean completeWorkItemInTask(YPersistenceManager pmgr, YWorkItem workItem, Document outputData)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.completeWorkItemInTask
+yawl:YNetRunner_completeWorkItemInTask_44 a yawl:Method ;
+    rdfs:label "completeWorkItemInTask" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean completeWorkItemInTask(YPersistenceManager pmgr, YWorkItem workItem, YIdentifier caseID, String taskID, Document outputData)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.continueIfPossible
+yawl:YNetRunner_continueIfPossible_45 a yawl:Method ;
+    rdfs:label "continueIfPossible" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean continueIfPossible(YPersistenceManager pmgr)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.fireTasks
+yawl:YNetRunner_fireTasks_46 a yawl:Method ;
+    rdfs:label "fireTasks" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fireTasks(YEnabledTransitionSet enabledSet, YPersistenceManager pmgr)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetRunner.fireAtomicTask
+yawl:YNetRunner_fireAtomicTask_47 a yawl:Method ;
+    rdfs:label "fireAtomicTask" ;
+    yawl:returnType "YAnnouncement" ;
+    yawl:signature "YAnnouncement fireAtomicTask(YAtomicTask task, String groupID, YPersistenceManager pmgr)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetRunner.fireCompositeTask
+yawl:YNetRunner_fireCompositeTask_48 a yawl:Method ;
+    rdfs:label "fireCompositeTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fireCompositeTask(YCompositeTask task, YPersistenceManager pmgr)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetRunner.processEmptyTask
+yawl:YNetRunner_processEmptyTask_49 a yawl:Method ;
+    rdfs:label "processEmptyTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processEmptyTask(YAtomicTask task, YPersistenceManager pmgr)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YNetRunner.withdrawEnabledTask
+yawl:YNetRunner_withdrawEnabledTask_50 a yawl:Method ;
+    rdfs:label "withdrawEnabledTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void withdrawEnabledTask(YTask task, YPersistenceManager pmgr)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetRunner.createEnabledWorkItem
+yawl:YNetRunner_createEnabledWorkItem_51 a yawl:Method ;
+    rdfs:label "createEnabledWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem createEnabledWorkItem(YPersistenceManager pmgr, YIdentifier caseIDForNet, YAtomicTask atomicTask)" ;
+    rdfs:comment """Creates an enabled work item. @param caseIDForNet the caseid for the net @param atomicTask   the atomic task that contains it.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetRunner.completeTask
+yawl:YNetRunner_completeTask_52 a yawl:Method ;
+    rdfs:label "completeTask" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean completeTask(YPersistenceManager pmgr, YWorkItem workItem, YAtomicTask atomicTask, YIdentifier identifier, Document outputData)" ;
+    rdfs:comment """Completes a work item inside an atomic task. @param workItem The work item. If null is supplied, this work item cannot be removed from the work items repository (hack) @param atomicTask the atomic task @param identifier the identifier of the work item @param outputData the document containing output data @return whether or not the task exited @throws YDataStateException""" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetRunner.cancel
+yawl:YNetRunner_cancel_53 a yawl:Method ;
+    rdfs:label "cancel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancel(YPersistenceManager pmgr)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.removeFromPersistence
+yawl:YNetRunner_removeFromPersistence_54 a yawl:Method ;
+    rdfs:label "removeFromPersistence" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeFromPersistence(YPersistenceManager pmgr)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.rollbackWorkItem
+yawl:YNetRunner_rollbackWorkItem_55 a yawl:Method ;
+    rdfs:label "rollbackWorkItem" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean rollbackWorkItem(YPersistenceManager pmgr, YIdentifier caseID, String taskID)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.logCompletingTask
+yawl:YNetRunner_logCompletingTask_56 a yawl:Method ;
+    rdfs:label "logCompletingTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logCompletingTask(YIdentifier caseIDForSubnet, YCompositeTask busyCompositeTask)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetRunner.getNetElement
+yawl:YNetRunner_getNetElement_57 a yawl:Method ;
+    rdfs:label "getNetElement" ;
+    yawl:returnType "YExternalNetElement" ;
+    yawl:signature "YExternalNetElement getNetElement(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.getCaseID
+yawl:YNetRunner_getCaseID_58 a yawl:Method ;
+    rdfs:label "getCaseID" ;
+    yawl:returnType "YIdentifier" ;
+    yawl:signature "YIdentifier getCaseID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.isCompleted
+yawl:YNetRunner_isCompleted_59 a yawl:Method ;
+    rdfs:label "isCompleted" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isCompleted()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.endOfNetReached
+yawl:YNetRunner_endOfNetReached_60 a yawl:Method ;
+    rdfs:label "endOfNetReached" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean endOfNetReached()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.isEmpty
+yawl:YNetRunner_isEmpty_61 a yawl:Method ;
+    rdfs:label "isEmpty" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEmpty()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.getBusyTasks
+yawl:YNetRunner_getBusyTasks_62 a yawl:Method ;
+    rdfs:label "getBusyTasks" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getBusyTasks()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YNetRunner.getEnabledTasks
+yawl:YNetRunner_getEnabledTasks_63 a yawl:Method ;
+    rdfs:label "getEnabledTasks" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getEnabledTasks()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YNetRunner.getActiveTasks
+yawl:YNetRunner_getActiveTasks_64 a yawl:Method ;
+    rdfs:label "getActiveTasks" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getActiveTasks()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YNetRunner.hasActiveTasks
+yawl:YNetRunner_hasActiveTasks_65 a yawl:Method ;
+    rdfs:label "hasActiveTasks" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasActiveTasks()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YNetRunner.isAddEnabled
+yawl:YNetRunner_isAddEnabled_66 a yawl:Method ;
+    rdfs:label "isAddEnabled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAddEnabled(String taskID, YIdentifier childID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.setObserver
+yawl:YNetRunner_setObserver_67 a yawl:Method ;
+    rdfs:label "setObserver" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setObserver(YAWLServiceReference observer)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.warnIfNetNotEmpty
+yawl:YNetRunner_warnIfNetNotEmpty_68 a yawl:Method ;
+    rdfs:label "warnIfNetNotEmpty" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean warnIfNetNotEmpty()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetRunner.toString
+yawl:YNetRunner_toString_69 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.dump
+yawl:YNetRunner_dump_70 a yawl:Method ;
+    rdfs:label "dump" ;
+    yawl:returnType "void" ;
+    yawl:signature "void dump()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.dump
+yawl:YNetRunner_dump_71 a yawl:Method ;
+    rdfs:label "dump" ;
+    yawl:returnType "void" ;
+    yawl:signature "void dump(Set tasks, String label)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetRunner.restoreObservers
+yawl:YNetRunner_restoreObservers_72 a yawl:Method ;
+    rdfs:label "restoreObservers" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restoreObservers()" ;
+    rdfs:comment """restores the IB and IX observers on session startup (via persistence)""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.get_caseObserverStr
+yawl:YNetRunner_get_caseObserverStr_73 a yawl:Method ;
+    rdfs:label "get_caseObserverStr" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_caseObserverStr()" ;
+    rdfs:comment """these two methods are here to support persistence of the IB Observer""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YNetRunner.set_caseObserverStr
+yawl:YNetRunner_set_caseObserverStr_74 a yawl:Method ;
+    rdfs:label "set_caseObserverStr" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_caseObserverStr(String obStr)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YNetRunner.cancelTask
+yawl:YNetRunner_cancelTask_75 a yawl:Method ;
+    rdfs:label "cancelTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancelTask(YPersistenceManager pmgr, String taskID)" ;
+    rdfs:comment """cancels the specified task""" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.isTimeServiceTask
+yawl:YNetRunner_isTimeServiceTask_76 a yawl:Method ;
+    rdfs:label "isTimeServiceTask" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isTimeServiceTask(YWorkItem item)" ;
+    rdfs:comment """returns true if the specified workitem is registered with the Time Service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.getTimeOutTaskSet
+yawl:YNetRunner_getTimeOutTaskSet_77 a yawl:Method ;
+    rdfs:label "getTimeOutTaskSet" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getTimeOutTaskSet(YWorkItem item)" ;
+    rdfs:comment """returns a list of all workitems executing in parallel to the time-out workitem passed (the list includes the time-out task)""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.getFlowsIntoTaskID
+yawl:YNetRunner_getFlowsIntoTaskID_78 a yawl:Method ;
+    rdfs:label "getFlowsIntoTaskID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFlowsIntoTaskID(YTask task)" ;
+    rdfs:comment """returns the task id of the task that the specified task flows into In other words, gets the id of the next task in the process flow""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetRunner.initTimerStates
+yawl:YNetRunner_initTimerStates_79 a yawl:Method ;
+    rdfs:label "initTimerStates" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initTimerStates()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.restoreTimerStates
+yawl:YNetRunner_restoreTimerStates_80 a yawl:Method ;
+    rdfs:label "restoreTimerStates" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restoreTimerStates()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.updateTimerState
+yawl:YNetRunner_updateTimerState_81 a yawl:Method ;
+    rdfs:label "updateTimerState" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateTimerState(YTask task, YWorkItemTimer state)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.get_timerStates
+yawl:YNetRunner_get_timerStates_82 a yawl:Method ;
+    rdfs:label "get_timerStates" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map get_timerStates()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.set_timerStates
+yawl:YNetRunner_set_timerStates_83 a yawl:Method ;
+    rdfs:label "set_timerStates" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_timerStates(Map states)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.evaluateTimerPredicate
+yawl:YNetRunner_evaluateTimerPredicate_84 a yawl:Method ;
+    rdfs:label "evaluateTimerPredicate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean evaluateTimerPredicate(String predicate)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.getTimerVariable
+yawl:YNetRunner_getTimerVariable_85 a yawl:Method ;
+    rdfs:label "getTimerVariable" ;
+    yawl:returnType "YTimerVariable" ;
+    yawl:signature "YTimerVariable getTimerVariable(String taskName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNetRunner.isSuspending
+yawl:YNetRunner_isSuspending_86 a yawl:Method ;
+    rdfs:label "isSuspending" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isSuspending()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.isSuspended
+yawl:YNetRunner_isSuspended_87 a yawl:Method ;
+    rdfs:label "isSuspended" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isSuspended()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.isResuming
+yawl:YNetRunner_isResuming_88 a yawl:Method ;
+    rdfs:label "isResuming" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isResuming()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.isInSuspense
+yawl:YNetRunner_isInSuspense_89 a yawl:Method ;
+    rdfs:label "isInSuspense" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isInSuspense()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.hasNormalState
+yawl:YNetRunner_hasNormalState_90 a yawl:Method ;
+    rdfs:label "hasNormalState" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasNormalState()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.setStateSuspending
+yawl:YNetRunner_setStateSuspending_91 a yawl:Method ;
+    rdfs:label "setStateSuspending" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStateSuspending()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.setStateSuspended
+yawl:YNetRunner_setStateSuspended_92 a yawl:Method ;
+    rdfs:label "setStateSuspended" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStateSuspended()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.setStateResuming
+yawl:YNetRunner_setStateResuming_93 a yawl:Method ;
+    rdfs:label "setStateResuming" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStateResuming()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.setStateNormal
+yawl:YNetRunner_setStateNormal_94 a yawl:Method ;
+    rdfs:label "setStateNormal" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStateNormal()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.setExecutionStatus
+yawl:YNetRunner_setExecutionStatus_95 a yawl:Method ;
+    rdfs:label "setExecutionStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setExecutionStatus(String status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunner.getExecutionStatus
+yawl:YNetRunner_getExecutionStatus_96 a yawl:Method ;
+    rdfs:label "getExecutionStatus" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getExecutionStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YNetRunner__logger a yawl:Field ;
+    rdfs:label "_logger" .
+
+yawl:YNetRunner__net a yawl:Field ;
+    rdfs:label "_net" .
+
+yawl:YNetRunner__workItemRepository a yawl:Field ;
+    rdfs:label "_workItemRepository" .
+
+yawl:YNetRunner__netTasks a yawl:Field ;
+    rdfs:label "_netTasks" .
+
+yawl:YNetRunner__enabledTasks a yawl:Field ;
+    rdfs:label "_enabledTasks" .
+
+yawl:YNetRunner__busyTasks a yawl:Field ;
+    rdfs:label "_busyTasks" .
+
+yawl:YNetRunner__deadlockedTasks a yawl:Field ;
+    rdfs:label "_deadlockedTasks" .
+
+yawl:YNetRunner__caseIDForNet a yawl:Field ;
+    rdfs:label "_caseIDForNet" .
+
+yawl:YNetRunner__specID a yawl:Field ;
+    rdfs:label "_specID" .
+
+yawl:YNetRunner__containingCompositeTask a yawl:Field ;
+    rdfs:label "_containingCompositeTask" .
+
+yawl:YNetRunner__engine a yawl:Field ;
+    rdfs:label "_engine" .
+
+yawl:YNetRunner__announcer a yawl:Field ;
+    rdfs:label "_announcer" .
+
+yawl:YNetRunner__cancelling a yawl:Field ;
+    rdfs:label "_cancelling" .
+
+yawl:YNetRunner__enabledTaskNames a yawl:Field ;
+    rdfs:label "_enabledTaskNames" .
+
+yawl:YNetRunner__busyTaskNames a yawl:Field ;
+    rdfs:label "_busyTaskNames" .
+
+yawl:YNetRunner__caseID a yawl:Field ;
+    rdfs:label "_caseID" .
+
+yawl:YNetRunner__containingTaskID a yawl:Field ;
+    rdfs:label "_containingTaskID" .
+
+yawl:YNetRunner__netdata a yawl:Field ;
+    rdfs:label "_netdata" .
+
+yawl:YNetRunner__caseObserver a yawl:Field ;
+    rdfs:label "_caseObserver" .
+
+yawl:YNetRunner__startTime a yawl:Field ;
+    rdfs:label "_startTime" .
+
+yawl:YNetRunner__timerStates a yawl:Field ;
+    rdfs:label "_timerStates" .
+
+yawl:YNetRunner__executionStatus a yawl:Field ;
+    rdfs:label "_executionStatus" .
+
+yawl:YNetRunner__announcements a yawl:Field ;
+    rdfs:label "_announcements" .
+
+yawl:YNetRunner__caseObserverStr a yawl:Field ;
+    rdfs:label "_caseObserverStr" .
+
+
+

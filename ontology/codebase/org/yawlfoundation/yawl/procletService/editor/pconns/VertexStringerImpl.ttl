@@ -1,0 +1,60 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.pconns.VertexStringerImpl
+yawl:VertexStringerImpl a yawl:Class ;
+    rdfs:label "VertexStringerImpl" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor_pconns ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/pconns/VertexDemo.java"^^xsd:string ;
+    rdfs:comment """A simple implementation of VertexStringer that gets Vertex labels from a Map   @author Tom Nelson""" ;
+    yawl:implements yawl:Transformer ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    yawl:hasMethod yawl:VertexStringerImpl_transform_1 ;
+    yawl:hasMethod yawl:VertexStringerImpl_isEnabled_2 ;
+    yawl:hasMethod yawl:VertexStringerImpl_setEnabled_3 ;
+    yawl:hasField yawl:VertexStringerImpl_map ;
+    yawl:hasField yawl:VertexStringerImpl_enabled ;
+    .
+
+
+# Method: VertexStringerImpl.transform
+yawl:VertexStringerImpl_transform_1 a yawl:Method ;
+    rdfs:label "transform" ;
+    yawl:returnType "String" ;
+    yawl:signature "String transform(V v)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: VertexStringerImpl.isEnabled
+yawl:VertexStringerImpl_isEnabled_2 a yawl:Method ;
+    rdfs:label "isEnabled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEnabled()" ;
+    rdfs:comment """@return Returns the enabled.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: VertexStringerImpl.setEnabled
+yawl:VertexStringerImpl_setEnabled_3 a yawl:Method ;
+    rdfs:label "setEnabled" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEnabled(boolean enabled)" ;
+    rdfs:comment """@param enabled The enabled to set.""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:VertexStringerImpl_map a yawl:Field ;
+    rdfs:label "map" .
+
+yawl:VertexStringerImpl_enabled a yawl:Field ;
+    rdfs:label "enabled" .
+
+
+

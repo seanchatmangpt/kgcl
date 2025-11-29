@@ -1,0 +1,22 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.elements.e2wfoj.RPlace
+yawl:RPlace a yawl:Class ;
+    rdfs:label "RPlace" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_elements_e2wfoj ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/elements/e2wfoj/RPlace.java"^^xsd:string ;
+    rdfs:comment """Representation of a place in a Reset net.""" ;
+    yawl:extends yawl:RElement ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+
+

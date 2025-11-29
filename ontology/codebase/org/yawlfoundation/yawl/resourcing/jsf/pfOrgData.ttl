@@ -1,0 +1,559 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.pfOrgData
+yawl:pfOrgData a yawl:Class ;
+    rdfs:label "pfOrgData" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/pfOrgData.java"^^xsd:string ;
+    yawl:extends yawl:AbstractFragmentBean ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:pfOrgData__init_1 ;
+    yawl:hasMethod yawl:pfOrgData_getLbxItems_2 ;
+    yawl:hasMethod yawl:pfOrgData_setLbxItems_3 ;
+    yawl:hasMethod yawl:pfOrgData_getLblItems_4 ;
+    yawl:hasMethod yawl:pfOrgData_setLblItems_5 ;
+    yawl:hasMethod yawl:pfOrgData_getLblAdd_6 ;
+    yawl:hasMethod yawl:pfOrgData_setLblAdd_7 ;
+    yawl:hasMethod yawl:pfOrgData_getTxtName_8 ;
+    yawl:hasMethod yawl:pfOrgData_setTxtName_9 ;
+    yawl:hasMethod yawl:pfOrgData_getLblBelongs_10 ;
+    yawl:hasMethod yawl:pfOrgData_setLblBelongs_11 ;
+    yawl:hasMethod yawl:pfOrgData_getLblGroup_12 ;
+    yawl:hasMethod yawl:pfOrgData_setLblGroup_13 ;
+    yawl:hasMethod yawl:pfOrgData_getLblNotes_14 ;
+    yawl:hasMethod yawl:pfOrgData_setLblNotes_15 ;
+    yawl:hasMethod yawl:pfOrgData_getTxtDesc_16 ;
+    yawl:hasMethod yawl:pfOrgData_setTxtDesc_17 ;
+    yawl:hasMethod yawl:pfOrgData_getTxtNotes_18 ;
+    yawl:hasMethod yawl:pfOrgData_setTxtNotes_19 ;
+    yawl:hasMethod yawl:pfOrgData_getCbbBelongs_20 ;
+    yawl:hasMethod yawl:pfOrgData_setCbbBelongs_21 ;
+    yawl:hasMethod yawl:pfOrgData_getCbbGroup_22 ;
+    yawl:hasMethod yawl:pfOrgData_setCbbGroup_23 ;
+    yawl:hasMethod yawl:pfOrgData_getLblDesc_24 ;
+    yawl:hasMethod yawl:pfOrgData_setLblDesc_25 ;
+    yawl:hasMethod yawl:pfOrgData_getCbbMembers_26 ;
+    yawl:hasMethod yawl:pfOrgData_setCbbMembers_27 ;
+    yawl:hasMethod yawl:pfOrgData_getLblMembers_28 ;
+    yawl:hasMethod yawl:pfOrgData_setLblMembers_29 ;
+    yawl:hasMethod yawl:pfOrgData_getRequestBean_30 ;
+    yawl:hasMethod yawl:pfOrgData_getSessionBean_31 ;
+    yawl:hasMethod yawl:pfOrgData_getApplicationBean_32 ;
+    yawl:hasMethod yawl:pfOrgData_init_33 ;
+    yawl:hasMethod yawl:pfOrgData_destroy_34 ;
+    yawl:hasMethod yawl:pfOrgData_lbxItems_processValueChange_35 ;
+    yawl:hasMethod yawl:pfOrgData_populateGUI_36 ;
+    yawl:hasMethod yawl:pfOrgData_setVisibleComponents_37 ;
+    yawl:hasMethod yawl:pfOrgData_setAddMode_38 ;
+    yawl:hasMethod yawl:pfOrgData_setCombosToNil_39 ;
+    yawl:hasMethod yawl:pfOrgData_saveChanges_40 ;
+    yawl:hasMethod yawl:pfOrgData_hasCyclicReferences_41 ;
+    yawl:hasMethod yawl:pfOrgData_addNewItem_42 ;
+    yawl:hasMethod yawl:pfOrgData_isValidNameChange_43 ;
+    yawl:hasMethod yawl:pfOrgData_setCommonFields_44 ;
+    yawl:hasMethod yawl:pfOrgData_addDuplicationError_45 ;
+    yawl:hasMethod yawl:pfOrgData_clearTextFields_46 ;
+    yawl:hasMethod yawl:pfOrgData_clearFieldsAfterRemove_47 ;
+    yawl:hasMethod yawl:pfOrgData_clearFields_48 ;
+    yawl:hasMethod yawl:pfOrgData_getFirstListboxItem_49 ;
+    yawl:hasMethod yawl:pfOrgData_getOrgGroupTypeOptions_50 ;
+    yawl:hasMethod yawl:pfOrgData_toUTF8_51 ;
+    yawl:hasField yawl:pfOrgData___placeholder ;
+    yawl:hasField yawl:pfOrgData_lbxItems ;
+    yawl:hasField yawl:pfOrgData_lblItems ;
+    yawl:hasField yawl:pfOrgData_lblAdd ;
+    yawl:hasField yawl:pfOrgData_txtName ;
+    yawl:hasField yawl:pfOrgData_lblBelongs ;
+    yawl:hasField yawl:pfOrgData_lblDesc ;
+    yawl:hasField yawl:pfOrgData_lblNotes ;
+    yawl:hasField yawl:pfOrgData_txtDesc ;
+    yawl:hasField yawl:pfOrgData_txtNotes ;
+    yawl:hasField yawl:pfOrgData_cbbBelongs ;
+    yawl:hasField yawl:pfOrgData_cbbGroup ;
+    yawl:hasField yawl:pfOrgData_lblGroup ;
+    yawl:hasField yawl:pfOrgData_cbbMembers ;
+    yawl:hasField yawl:pfOrgData_lblMembers ;
+    yawl:hasField yawl:pfOrgData__sb ;
+    yawl:hasField yawl:pfOrgData_msgPanel ;
+    yawl:hasField yawl:pfOrgData__rm ;
+    yawl:hasField yawl:pfOrgData_orgDataSet ;
+    .
+
+
+# Method: pfOrgData._init
+yawl:pfOrgData__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfOrgData.getLbxItems
+yawl:pfOrgData_getLbxItems_2 a yawl:Method ;
+    rdfs:label "getLbxItems" ;
+    yawl:returnType "Listbox" ;
+    yawl:signature "Listbox getLbxItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.setLbxItems
+yawl:pfOrgData_setLbxItems_3 a yawl:Method ;
+    rdfs:label "setLbxItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLbxItems(Listbox l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.getLblItems
+yawl:pfOrgData_getLblItems_4 a yawl:Method ;
+    rdfs:label "getLblItems" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.setLblItems
+yawl:pfOrgData_setLblItems_5 a yawl:Method ;
+    rdfs:label "setLblItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblItems(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.getLblAdd
+yawl:pfOrgData_getLblAdd_6 a yawl:Method ;
+    rdfs:label "getLblAdd" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblAdd()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.setLblAdd
+yawl:pfOrgData_setLblAdd_7 a yawl:Method ;
+    rdfs:label "setLblAdd" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblAdd(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.getTxtName
+yawl:pfOrgData_getTxtName_8 a yawl:Method ;
+    rdfs:label "getTxtName" ;
+    yawl:returnType "TextField" ;
+    yawl:signature "TextField getTxtName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.setTxtName
+yawl:pfOrgData_setTxtName_9 a yawl:Method ;
+    rdfs:label "setTxtName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtName(TextField tf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.getLblBelongs
+yawl:pfOrgData_getLblBelongs_10 a yawl:Method ;
+    rdfs:label "getLblBelongs" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblBelongs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.setLblBelongs
+yawl:pfOrgData_setLblBelongs_11 a yawl:Method ;
+    rdfs:label "setLblBelongs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblBelongs(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.getLblGroup
+yawl:pfOrgData_getLblGroup_12 a yawl:Method ;
+    rdfs:label "getLblGroup" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblGroup()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.setLblGroup
+yawl:pfOrgData_setLblGroup_13 a yawl:Method ;
+    rdfs:label "setLblGroup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblGroup(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.getLblNotes
+yawl:pfOrgData_getLblNotes_14 a yawl:Method ;
+    rdfs:label "getLblNotes" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblNotes()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.setLblNotes
+yawl:pfOrgData_setLblNotes_15 a yawl:Method ;
+    rdfs:label "setLblNotes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblNotes(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.getTxtDesc
+yawl:pfOrgData_getTxtDesc_16 a yawl:Method ;
+    rdfs:label "getTxtDesc" ;
+    yawl:returnType "TextArea" ;
+    yawl:signature "TextArea getTxtDesc()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.setTxtDesc
+yawl:pfOrgData_setTxtDesc_17 a yawl:Method ;
+    rdfs:label "setTxtDesc" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtDesc(TextArea ta)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.getTxtNotes
+yawl:pfOrgData_getTxtNotes_18 a yawl:Method ;
+    rdfs:label "getTxtNotes" ;
+    yawl:returnType "TextArea" ;
+    yawl:signature "TextArea getTxtNotes()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.setTxtNotes
+yawl:pfOrgData_setTxtNotes_19 a yawl:Method ;
+    rdfs:label "setTxtNotes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtNotes(TextArea ta)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.getCbbBelongs
+yawl:pfOrgData_getCbbBelongs_20 a yawl:Method ;
+    rdfs:label "getCbbBelongs" ;
+    yawl:returnType "DropDown" ;
+    yawl:signature "DropDown getCbbBelongs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.setCbbBelongs
+yawl:pfOrgData_setCbbBelongs_21 a yawl:Method ;
+    rdfs:label "setCbbBelongs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCbbBelongs(DropDown dd)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.getCbbGroup
+yawl:pfOrgData_getCbbGroup_22 a yawl:Method ;
+    rdfs:label "getCbbGroup" ;
+    yawl:returnType "DropDown" ;
+    yawl:signature "DropDown getCbbGroup()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.setCbbGroup
+yawl:pfOrgData_setCbbGroup_23 a yawl:Method ;
+    rdfs:label "setCbbGroup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCbbGroup(DropDown dd)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.getLblDesc
+yawl:pfOrgData_getLblDesc_24 a yawl:Method ;
+    rdfs:label "getLblDesc" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblDesc()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.setLblDesc
+yawl:pfOrgData_setLblDesc_25 a yawl:Method ;
+    rdfs:label "setLblDesc" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblDesc(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.getCbbMembers
+yawl:pfOrgData_getCbbMembers_26 a yawl:Method ;
+    rdfs:label "getCbbMembers" ;
+    yawl:returnType "DropDown" ;
+    yawl:signature "DropDown getCbbMembers()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.setCbbMembers
+yawl:pfOrgData_setCbbMembers_27 a yawl:Method ;
+    rdfs:label "setCbbMembers" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCbbMembers(DropDown dd)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.getLblMembers
+yawl:pfOrgData_getLblMembers_28 a yawl:Method ;
+    rdfs:label "getLblMembers" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblMembers()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.setLblMembers
+yawl:pfOrgData_setLblMembers_29 a yawl:Method ;
+    rdfs:label "setLblMembers" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblMembers(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.getRequestBean
+yawl:pfOrgData_getRequestBean_30 a yawl:Method ;
+    rdfs:label "getRequestBean" ;
+    yawl:returnType "RequestBean" ;
+    yawl:signature "RequestBean getRequestBean()" ;
+    rdfs:comment """<p>Return a reference to the scoped data bean.</p>""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: pfOrgData.getSessionBean
+yawl:pfOrgData_getSessionBean_31 a yawl:Method ;
+    rdfs:label "getSessionBean" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getSessionBean()" ;
+    rdfs:comment """<p>Return a reference to the scoped data bean.</p>""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: pfOrgData.getApplicationBean
+yawl:pfOrgData_getApplicationBean_32 a yawl:Method ;
+    rdfs:label "getApplicationBean" ;
+    yawl:returnType "ApplicationBean" ;
+    yawl:signature "ApplicationBean getApplicationBean()" ;
+    rdfs:comment """<p>Return a reference to the scoped data bean.</p>""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: pfOrgData.init
+yawl:pfOrgData_init_33 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.destroy
+yawl:pfOrgData_destroy_34 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.lbxItems_processValueChange
+yawl:pfOrgData_lbxItems_processValueChange_35 a yawl:Method ;
+    rdfs:label "lbxItems_processValueChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void lbxItems_processValueChange(ValueChangeEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.populateGUI
+yawl:pfOrgData_populateGUI_36 a yawl:Method ;
+    rdfs:label "populateGUI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void populateGUI(String id, orgDataMgt type)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: pfOrgData.setVisibleComponents
+yawl:pfOrgData_setVisibleComponents_37 a yawl:Method ;
+    rdfs:label "setVisibleComponents" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setVisibleComponents(String tabName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.setAddMode
+yawl:pfOrgData_setAddMode_38 a yawl:Method ;
+    rdfs:label "setAddMode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAddMode(boolean addFlag)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.setCombosToNil
+yawl:pfOrgData_setCombosToNil_39 a yawl:Method ;
+    rdfs:label "setCombosToNil" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCombosToNil()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.saveChanges
+yawl:pfOrgData_saveChanges_40 a yawl:Method ;
+    rdfs:label "saveChanges" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean saveChanges(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.hasCyclicReferences
+yawl:pfOrgData_hasCyclicReferences_41 a yawl:Method ;
+    rdfs:label "hasCyclicReferences" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasCyclicReferences(AbstractResourceAttribute attrib, String belongsID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfOrgData.addNewItem
+yawl:pfOrgData_addNewItem_42 a yawl:Method ;
+    rdfs:label "addNewItem" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean addNewItem(String activeTab)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.isValidNameChange
+yawl:pfOrgData_isValidNameChange_43 a yawl:Method ;
+    rdfs:label "isValidNameChange" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isValidNameChange(AbstractResourceAttribute attrib)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfOrgData.setCommonFields
+yawl:pfOrgData_setCommonFields_44 a yawl:Method ;
+    rdfs:label "setCommonFields" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCommonFields(AbstractResourceAttribute attrib)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfOrgData.addDuplicationError
+yawl:pfOrgData_addDuplicationError_45 a yawl:Method ;
+    rdfs:label "addDuplicationError" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addDuplicationError(String type)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfOrgData.clearTextFields
+yawl:pfOrgData_clearTextFields_46 a yawl:Method ;
+    rdfs:label "clearTextFields" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clearTextFields()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.clearFieldsAfterRemove
+yawl:pfOrgData_clearFieldsAfterRemove_47 a yawl:Method ;
+    rdfs:label "clearFieldsAfterRemove" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clearFieldsAfterRemove()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.clearFields
+yawl:pfOrgData_clearFields_48 a yawl:Method ;
+    rdfs:label "clearFields" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clearFields()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.getFirstListboxItem
+yawl:pfOrgData_getFirstListboxItem_49 a yawl:Method ;
+    rdfs:label "getFirstListboxItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFirstListboxItem()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfOrgData.getOrgGroupTypeOptions
+yawl:pfOrgData_getOrgGroupTypeOptions_50 a yawl:Method ;
+    rdfs:label "getOrgGroupTypeOptions" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getOrgGroupTypeOptions()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfOrgData.toUTF8
+yawl:pfOrgData_toUTF8_51 a yawl:Method ;
+    rdfs:label "toUTF8" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toUTF8(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:pfOrgData___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:pfOrgData_lbxItems a yawl:Field ;
+    rdfs:label "lbxItems" .
+
+yawl:pfOrgData_lblItems a yawl:Field ;
+    rdfs:label "lblItems" .
+
+yawl:pfOrgData_lblAdd a yawl:Field ;
+    rdfs:label "lblAdd" .
+
+yawl:pfOrgData_txtName a yawl:Field ;
+    rdfs:label "txtName" .
+
+yawl:pfOrgData_lblBelongs a yawl:Field ;
+    rdfs:label "lblBelongs" .
+
+yawl:pfOrgData_lblDesc a yawl:Field ;
+    rdfs:label "lblDesc" .
+
+yawl:pfOrgData_lblNotes a yawl:Field ;
+    rdfs:label "lblNotes" .
+
+yawl:pfOrgData_txtDesc a yawl:Field ;
+    rdfs:label "txtDesc" .
+
+yawl:pfOrgData_txtNotes a yawl:Field ;
+    rdfs:label "txtNotes" .
+
+yawl:pfOrgData_cbbBelongs a yawl:Field ;
+    rdfs:label "cbbBelongs" .
+
+yawl:pfOrgData_cbbGroup a yawl:Field ;
+    rdfs:label "cbbGroup" .
+
+yawl:pfOrgData_lblGroup a yawl:Field ;
+    rdfs:label "lblGroup" .
+
+yawl:pfOrgData_cbbMembers a yawl:Field ;
+    rdfs:label "cbbMembers" .
+
+yawl:pfOrgData_lblMembers a yawl:Field ;
+    rdfs:label "lblMembers" .
+
+yawl:pfOrgData__sb a yawl:Field ;
+    rdfs:label "_sb" .
+
+yawl:pfOrgData_msgPanel a yawl:Field ;
+    rdfs:label "msgPanel" .
+
+yawl:pfOrgData__rm a yawl:Field ;
+    rdfs:label "_rm" .
+
+yawl:pfOrgData_orgDataSet a yawl:Field ;
+    rdfs:label "orgDataSet" .
+
+
+

@@ -1,0 +1,48 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.smsModule.Reply
+yawl:Reply a yawl:Class ;
+    rdfs:label "Reply" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_smsModule ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/smsModule/SMSSender.java"^^xsd:string ;
+    yawl:hasField yawl:Reply__jobID ;
+    yawl:hasField yawl:Reply__replyID ;
+    yawl:hasField yawl:Reply__fromPhoneNum ;
+    yawl:hasField yawl:Reply__messageTxt ;
+    yawl:hasField yawl:Reply__dateStr ;
+    yawl:hasField yawl:Reply__timeStr ;
+    .
+
+
+
+
+yawl:Reply__jobID a yawl:Field ;
+    rdfs:label "_jobID" .
+
+yawl:Reply__replyID a yawl:Field ;
+    rdfs:label "_replyID" .
+
+yawl:Reply__fromPhoneNum a yawl:Field ;
+    rdfs:label "_fromPhoneNum" .
+
+yawl:Reply__messageTxt a yawl:Field ;
+    rdfs:label "_messageTxt" .
+
+yawl:Reply__dateStr a yawl:Field ;
+    rdfs:label "_dateStr" .
+
+yawl:Reply__timeStr a yawl:Field ;
+    rdfs:label "_timeStr" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_engine a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.engine" .
+
+

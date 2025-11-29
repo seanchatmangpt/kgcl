@@ -1,0 +1,36 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.filters.CapabilityFilter
+yawl:CapabilityFilter a yawl:Class ;
+    rdfs:label "CapabilityFilter" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_filters ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/filters/CapabilityFilter.java"^^xsd:string ;
+    rdfs:comment """Filters a distribution set based on participant Capabilities Create Date: 23/08/2007. Last Date: 12/11/2007 @author Michael Adams (BPM Group, QUT Australia) @version 2.0""" ;
+    yawl:extends yawl:AbstractFilter ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CapabilityFilter_performFilter_1 ;
+    .
+
+
+# Method: CapabilityFilter.performFilter
+yawl:CapabilityFilter_performFilter_1 a yawl:Method ;
+    rdfs:label "performFilter" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set performFilter(Set distSet, WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+
+
+yawl:org_yawlfoundation_yawl_resourcing_rsInterface a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.rsInterface" .
+
+

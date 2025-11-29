@@ -1,0 +1,124 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.datastore.eventlog.BaseEvent
+yawl:BaseEvent a yawl:Class ;
+    rdfs:label "BaseEvent" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_datastore_eventlog ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/datastore/eventlog/BaseEvent.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 4/02/2010""" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:BaseEvent_get_id_1 ;
+    yawl:hasMethod yawl:BaseEvent_set_id_2 ;
+    yawl:hasMethod yawl:BaseEvent_get_event_3 ;
+    yawl:hasMethod yawl:BaseEvent_set_event_4 ;
+    yawl:hasMethod yawl:BaseEvent_get_timeStamp_5 ;
+    yawl:hasMethod yawl:BaseEvent_set_timeStamp_6 ;
+    yawl:hasMethod yawl:BaseEvent_getTimeStampString_7 ;
+    yawl:hasMethod yawl:BaseEvent_getTimeStampMidString_8 ;
+    yawl:hasMethod yawl:BaseEvent_toXML_9 ;
+    yawl:hasMethod yawl:BaseEvent_fromXML_10 ;
+    yawl:hasField yawl:BaseEvent__id ;
+    yawl:hasField yawl:BaseEvent__event ;
+    yawl:hasField yawl:BaseEvent__timeStamp ;
+    .
+
+
+# Method: BaseEvent.get_id
+yawl:BaseEvent_get_id_1 a yawl:Method ;
+    rdfs:label "get_id" ;
+    yawl:returnType "long" ;
+    yawl:signature "long get_id()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BaseEvent.set_id
+yawl:BaseEvent_set_id_2 a yawl:Method ;
+    rdfs:label "set_id" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_id(long id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BaseEvent.get_event
+yawl:BaseEvent_get_event_3 a yawl:Method ;
+    rdfs:label "get_event" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_event()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BaseEvent.set_event
+yawl:BaseEvent_set_event_4 a yawl:Method ;
+    rdfs:label "set_event" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_event(String event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BaseEvent.get_timeStamp
+yawl:BaseEvent_get_timeStamp_5 a yawl:Method ;
+    rdfs:label "get_timeStamp" ;
+    yawl:returnType "long" ;
+    yawl:signature "long get_timeStamp()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BaseEvent.set_timeStamp
+yawl:BaseEvent_set_timeStamp_6 a yawl:Method ;
+    rdfs:label "set_timeStamp" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_timeStamp(long timeStamp)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BaseEvent.getTimeStampString
+yawl:BaseEvent_getTimeStampString_7 a yawl:Method ;
+    rdfs:label "getTimeStampString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTimeStampString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BaseEvent.getTimeStampMidString
+yawl:BaseEvent_getTimeStampMidString_8 a yawl:Method ;
+    rdfs:label "getTimeStampMidString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTimeStampMidString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BaseEvent.toXML
+yawl:BaseEvent_toXML_9 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BaseEvent.fromXML
+yawl:BaseEvent_fromXML_10 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(Element xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:BaseEvent__id a yawl:Field ;
+    rdfs:label "_id" .
+
+yawl:BaseEvent__event a yawl:Field ;
+    rdfs:label "_event" .
+
+yawl:BaseEvent__timeStamp a yawl:Field ;
+    rdfs:label "_timeStamp" .
+
+
+

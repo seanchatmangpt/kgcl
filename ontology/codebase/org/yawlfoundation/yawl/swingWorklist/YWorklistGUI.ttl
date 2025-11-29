@@ -1,0 +1,182 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.swingWorklist
+yawl:org_yawlfoundation_yawl_swingWorklist a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.swingWorklist" .
+# Class: org.yawlfoundation.yawl.swingWorklist.YWorklistGUI
+yawl:YWorklistGUI a yawl:Class ;
+    rdfs:label "YWorklistGUI" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_swingWorklist ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/swingWorklist/YWorklistGUI.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 15/05/2003 Time: 15:00:22""" ;
+    yawl:extends yawl:JPanel ;
+    yawl:implements yawl:ActionListener ;
+    yawl:implements yawl:ListSelectionListener ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YWorklistGUI_createApplicationXPage_1 ;
+    yawl:hasMethod yawl:YWorklistGUI_actionPerformed_2 ;
+    yawl:hasMethod yawl:YWorklistGUI_completeWorkItem_3 ;
+    yawl:hasMethod yawl:YWorklistGUI_applyForWorkItem_4 ;
+    yawl:hasMethod yawl:YWorklistGUI_valueChanged_5 ;
+    yawl:hasMethod yawl:YWorklistGUI_setNewInstanceData_6 ;
+    yawl:hasMethod yawl:YWorklistGUI_reportGeneralProblem_7 ;
+    yawl:hasMethod yawl:YWorklistGUI_logError_8 ;
+    yawl:hasField yawl:YWorklistGUI__worklistModel ;
+    yawl:hasField yawl:YWorklistGUI__availableTable ;
+    yawl:hasField yawl:YWorklistGUI__activeTable ;
+    yawl:hasField yawl:YWorklistGUI__applyButton ;
+    yawl:hasField yawl:YWorklistGUI__applyCommand ;
+    yawl:hasField yawl:YWorklistGUI__completeButton ;
+    yawl:hasField yawl:YWorklistGUI__completionCommand ;
+    yawl:hasField yawl:YWorklistGUI__newInstanceButton ;
+    yawl:hasField yawl:YWorklistGUI__newInstanceCommand ;
+    yawl:hasField yawl:YWorklistGUI__cancelTaskButton ;
+    yawl:hasField yawl:YWorklistGUI__suspendTaskCommand ;
+    yawl:hasField yawl:YWorklistGUI__viewDataButton ;
+    yawl:hasField yawl:YWorklistGUI__viewDataCommand ;
+    yawl:hasField yawl:YWorklistGUI__updateListsButton ;
+    yawl:hasField yawl:YWorklistGUI__updateListsCommand ;
+    yawl:hasField yawl:YWorklistGUI__rowSelected ;
+    yawl:hasField yawl:YWorklistGUI__userName ;
+    yawl:hasField yawl:YWorklistGUI__newInstanceData ;
+    yawl:hasField yawl:YWorklistGUI__frame ;
+    yawl:hasField yawl:YWorklistGUI_logger ;
+    .
+
+
+# Method: YWorklistGUI.createApplicationXPage
+yawl:YWorklistGUI_createApplicationXPage_1 a yawl:Method ;
+    rdfs:label "createApplicationXPage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void createApplicationXPage(int rowSelected)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorklistGUI.actionPerformed
+yawl:YWorklistGUI_actionPerformed_2 a yawl:Method ;
+    rdfs:label "actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void actionPerformed(ActionEvent e)" ;
+    rdfs:comment """Invoked when an action occurs.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorklistGUI.completeWorkItem
+yawl:YWorklistGUI_completeWorkItem_3 a yawl:Method ;
+    rdfs:label "completeWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void completeWorkItem(String caseID, String taskID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YWorklistGUI.applyForWorkItem
+yawl:YWorklistGUI_applyForWorkItem_4 a yawl:Method ;
+    rdfs:label "applyForWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void applyForWorkItem(int rowSel)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorklistGUI.valueChanged
+yawl:YWorklistGUI_valueChanged_5 a yawl:Method ;
+    rdfs:label "valueChanged" ;
+    yawl:returnType "void" ;
+    yawl:signature "void valueChanged(ListSelectionEvent e)" ;
+    rdfs:comment """Called whenever the value of the selection changes. @param e the event that characterizes the change.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorklistGUI.setNewInstanceData
+yawl:YWorklistGUI_setNewInstanceData_6 a yawl:Method ;
+    rdfs:label "setNewInstanceData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNewInstanceData(String newInstanceData)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorklistGUI.reportGeneralProblem
+yawl:YWorklistGUI_reportGeneralProblem_7 a yawl:Method ;
+    rdfs:label "reportGeneralProblem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reportGeneralProblem(Exception e)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorklistGUI.logError
+yawl:YWorklistGUI_logError_8 a yawl:Method ;
+    rdfs:label "logError" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logError(String message, Exception e)" ;
+    rdfs:comment """Display a MsgBox() style dialog to report a runtime error. @param e The exception to be reported""" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YWorklistGUI__worklistModel a yawl:Field ;
+    rdfs:label "_worklistModel" .
+
+yawl:YWorklistGUI__availableTable a yawl:Field ;
+    rdfs:label "_availableTable" .
+
+yawl:YWorklistGUI__activeTable a yawl:Field ;
+    rdfs:label "_activeTable" .
+
+yawl:YWorklistGUI__applyButton a yawl:Field ;
+    rdfs:label "_applyButton" .
+
+yawl:YWorklistGUI__applyCommand a yawl:Field ;
+    rdfs:label "_applyCommand" .
+
+yawl:YWorklistGUI__completeButton a yawl:Field ;
+    rdfs:label "_completeButton" .
+
+yawl:YWorklistGUI__completionCommand a yawl:Field ;
+    rdfs:label "_completionCommand" .
+
+yawl:YWorklistGUI__newInstanceButton a yawl:Field ;
+    rdfs:label "_newInstanceButton" .
+
+yawl:YWorklistGUI__newInstanceCommand a yawl:Field ;
+    rdfs:label "_newInstanceCommand" .
+
+yawl:YWorklistGUI__cancelTaskButton a yawl:Field ;
+    rdfs:label "_cancelTaskButton" .
+
+yawl:YWorklistGUI__suspendTaskCommand a yawl:Field ;
+    rdfs:label "_suspendTaskCommand" .
+
+yawl:YWorklistGUI__viewDataButton a yawl:Field ;
+    rdfs:label "_viewDataButton" .
+
+yawl:YWorklistGUI__viewDataCommand a yawl:Field ;
+    rdfs:label "_viewDataCommand" .
+
+yawl:YWorklistGUI__updateListsButton a yawl:Field ;
+    rdfs:label "_updateListsButton" .
+
+yawl:YWorklistGUI__updateListsCommand a yawl:Field ;
+    rdfs:label "_updateListsCommand" .
+
+yawl:YWorklistGUI__rowSelected a yawl:Field ;
+    rdfs:label "_rowSelected" .
+
+yawl:YWorklistGUI__userName a yawl:Field ;
+    rdfs:label "_userName" .
+
+yawl:YWorklistGUI__newInstanceData a yawl:Field ;
+    rdfs:label "_newInstanceData" .
+
+yawl:YWorklistGUI__frame a yawl:Field ;
+    rdfs:label "_frame" .
+
+yawl:YWorklistGUI_logger a yawl:Field ;
+    rdfs:label "logger" .
+
+
+

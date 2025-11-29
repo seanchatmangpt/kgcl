@@ -1,0 +1,75 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.pfHeader
+yawl:pfHeader a yawl:Class ;
+    rdfs:label "pfHeader" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/pfHeader.java"^^xsd:string ;
+    rdfs:comment """Fragment bean that inserts header on each page @author Michael Adams Date: 10/12/2007""" ;
+    yawl:extends yawl:AbstractFragmentBean ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:pfHeader__init_1 ;
+    yawl:hasMethod yawl:pfHeader_init_2 ;
+    yawl:hasMethod yawl:pfHeader_destroy_3 ;
+    yawl:hasMethod yawl:pfHeader_getImage1_4 ;
+    yawl:hasMethod yawl:pfHeader_setImage1_5 ;
+    yawl:hasField yawl:pfHeader___placeholder ;
+    yawl:hasField yawl:pfHeader_image1 ;
+    .
+
+
+# Method: pfHeader._init
+yawl:pfHeader__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfHeader.init
+yawl:pfHeader_init_2 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfHeader.destroy
+yawl:pfHeader_destroy_3 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfHeader.getImage1
+yawl:pfHeader_getImage1_4 a yawl:Method ;
+    rdfs:label "getImage1" ;
+    yawl:returnType "ImageComponent" ;
+    yawl:signature "ImageComponent getImage1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfHeader.setImage1
+yawl:pfHeader_setImage1_5 a yawl:Method ;
+    rdfs:label "setImage1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setImage1(ImageComponent ic)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:pfHeader___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:pfHeader_image1 a yawl:Field ;
+    rdfs:label "image1" .
+
+
+

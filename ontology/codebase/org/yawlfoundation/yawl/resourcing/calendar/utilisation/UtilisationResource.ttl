@@ -1,0 +1,203 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.calendar.utilisation.UtilisationResource
+yawl:UtilisationResource a yawl:Class ;
+    rdfs:label "UtilisationResource" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_calendar_utilisation ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/calendar/utilisation/UtilisationResource.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 6/10/2010""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:UtilisationResource_getID_1 ;
+    yawl:hasMethod yawl:UtilisationResource_setID_2 ;
+    yawl:hasMethod yawl:UtilisationResource_hasIDOnly_3 ;
+    yawl:hasMethod yawl:UtilisationResource_getRole_4 ;
+    yawl:hasMethod yawl:UtilisationResource_setRole_5 ;
+    yawl:hasMethod yawl:UtilisationResource_getCapability_6 ;
+    yawl:hasMethod yawl:UtilisationResource_setCapability_7 ;
+    yawl:hasMethod yawl:UtilisationResource_getCategory_8 ;
+    yawl:hasMethod yawl:UtilisationResource_setCategory_9 ;
+    yawl:hasMethod yawl:UtilisationResource_getSubcategory_10 ;
+    yawl:hasMethod yawl:UtilisationResource_setSubcategory_11 ;
+    yawl:hasMethod yawl:UtilisationResource_hasErrors_12 ;
+    yawl:hasMethod yawl:UtilisationResource_hasError_13 ;
+    yawl:hasMethod yawl:UtilisationResource_equals_14 ;
+    yawl:hasMethod yawl:UtilisationResource_hashCode_15 ;
+    yawl:hasMethod yawl:UtilisationResource_toXML_16 ;
+    yawl:hasMethod yawl:UtilisationResource_toXNode_17 ;
+    yawl:hasMethod yawl:UtilisationResource_fromXNode_18 ;
+    yawl:hasField yawl:UtilisationResource__id ;
+    yawl:hasField yawl:UtilisationResource__role ;
+    yawl:hasField yawl:UtilisationResource__capability ;
+    yawl:hasField yawl:UtilisationResource__category ;
+    yawl:hasField yawl:UtilisationResource__subcategory ;
+    .
+
+
+# Method: UtilisationResource.getID
+yawl:UtilisationResource_getID_1 a yawl:Method ;
+    rdfs:label "getID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationResource.setID
+yawl:UtilisationResource_setID_2 a yawl:Method ;
+    rdfs:label "setID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setID(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationResource.hasIDOnly
+yawl:UtilisationResource_hasIDOnly_3 a yawl:Method ;
+    rdfs:label "hasIDOnly" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasIDOnly()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationResource.getRole
+yawl:UtilisationResource_getRole_4 a yawl:Method ;
+    rdfs:label "getRole" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRole()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationResource.setRole
+yawl:UtilisationResource_setRole_5 a yawl:Method ;
+    rdfs:label "setRole" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRole(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationResource.getCapability
+yawl:UtilisationResource_getCapability_6 a yawl:Method ;
+    rdfs:label "getCapability" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCapability()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationResource.setCapability
+yawl:UtilisationResource_setCapability_7 a yawl:Method ;
+    rdfs:label "setCapability" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCapability(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationResource.getCategory
+yawl:UtilisationResource_getCategory_8 a yawl:Method ;
+    rdfs:label "getCategory" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCategory()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationResource.setCategory
+yawl:UtilisationResource_setCategory_9 a yawl:Method ;
+    rdfs:label "setCategory" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCategory(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationResource.getSubcategory
+yawl:UtilisationResource_getSubcategory_10 a yawl:Method ;
+    rdfs:label "getSubcategory" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSubcategory()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationResource.setSubcategory
+yawl:UtilisationResource_setSubcategory_11 a yawl:Method ;
+    rdfs:label "setSubcategory" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSubcategory(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationResource.hasErrors
+yawl:UtilisationResource_hasErrors_12 a yawl:Method ;
+    rdfs:label "hasErrors" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasErrors()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationResource.hasError
+yawl:UtilisationResource_hasError_13 a yawl:Method ;
+    rdfs:label "hasError" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasError(StringWithMessage strMsg)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationResource.equals
+yawl:UtilisationResource_equals_14 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationResource.hashCode
+yawl:UtilisationResource_hashCode_15 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationResource.toXML
+yawl:UtilisationResource_toXML_16 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationResource.toXNode
+yawl:UtilisationResource_toXNode_17 a yawl:Method ;
+    rdfs:label "toXNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode toXNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationResource.fromXNode
+yawl:UtilisationResource_fromXNode_18 a yawl:Method ;
+    rdfs:label "fromXNode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXNode(XNode node)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:UtilisationResource__id a yawl:Field ;
+    rdfs:label "_id" .
+
+yawl:UtilisationResource__role a yawl:Field ;
+    rdfs:label "_role" .
+
+yawl:UtilisationResource__capability a yawl:Field ;
+    rdfs:label "_capability" .
+
+yawl:UtilisationResource__category a yawl:Field ;
+    rdfs:label "_category" .
+
+yawl:UtilisationResource__subcategory a yawl:Field ;
+    rdfs:label "_subcategory" .
+
+
+

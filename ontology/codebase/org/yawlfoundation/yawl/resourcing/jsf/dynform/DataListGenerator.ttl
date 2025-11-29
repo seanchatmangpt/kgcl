@@ -1,0 +1,92 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.dynform.DataListGenerator
+yawl:DataListGenerator a yawl:Class ;
+    rdfs:label "DataListGenerator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf_dynform ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/dynform/DataListGenerator.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 7/08/2008""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DataListGenerator_generate_1 ;
+    yawl:hasMethod yawl:DataListGenerator_generateDataList_2 ;
+    yawl:hasMethod yawl:DataListGenerator_getFieldValue_3 ;
+    yawl:hasMethod yawl:DataListGenerator_getDocValue_4 ;
+    yawl:hasMethod yawl:DataListGenerator_formatField_5 ;
+    yawl:hasMethod yawl:DataListGenerator_headedPanel_6 ;
+    yawl:hasMethod yawl:DataListGenerator_getField_7 ;
+    yawl:hasField yawl:DataListGenerator__factory ;
+    yawl:hasField yawl:DataListGenerator__sdf ;
+    .
+
+
+# Method: DataListGenerator.generate
+yawl:DataListGenerator_generate_1 a yawl:Method ;
+    rdfs:label "generate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String generate(PanelLayout panel, List fieldList)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataListGenerator.generateDataList
+yawl:DataListGenerator_generateDataList_2 a yawl:Method ;
+    rdfs:label "generateDataList" ;
+    yawl:returnType "String" ;
+    yawl:signature "String generateDataList(PanelLayout panel, List fieldList)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataListGenerator.getFieldValue
+yawl:DataListGenerator_getFieldValue_3 a yawl:Method ;
+    rdfs:label "getFieldValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFieldValue(PanelLayout panel, Label label, DynFormField field)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataListGenerator.getDocValue
+yawl:DataListGenerator_getDocValue_4 a yawl:Method ;
+    rdfs:label "getDocValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDocValue(PanelLayout panel, Label label)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataListGenerator.formatField
+yawl:DataListGenerator_formatField_5 a yawl:Method ;
+    rdfs:label "formatField" ;
+    yawl:returnType "String" ;
+    yawl:signature "String formatField(String value, DynFormField field)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataListGenerator.headedPanel
+yawl:DataListGenerator_headedPanel_6 a yawl:Method ;
+    rdfs:label "headedPanel" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean headedPanel(PanelLayout panel)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataListGenerator.getField
+yawl:DataListGenerator_getField_7 a yawl:Method ;
+    rdfs:label "getField" ;
+    yawl:returnType "DynFormField" ;
+    yawl:signature "DynFormField getField(UIComponent component, List fieldList)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:DataListGenerator__factory a yawl:Field ;
+    rdfs:label "_factory" .
+
+yawl:DataListGenerator__sdf a yawl:Field ;
+    rdfs:label "_sdf" .
+
+
+

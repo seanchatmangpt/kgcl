@@ -1,0 +1,46 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.procletService.connect
+yawl:org_yawlfoundation_yawl_procletService_connect a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.procletService.connect" .
+# Class: org.yawlfoundation.yawl.procletService.connect.EncodeDecode
+yawl:EncodeDecode a yawl:Class ;
+    rdfs:label "EncodeDecode" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_connect ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/connect/EncodeDecode.java"^^xsd:string ;
+    rdfs:comment """Class of static methods to convert objects to ByteStream compatible representations and back again @author Guy Gallasch @version 0.6""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:EncodeDecode_encodeString_1 ;
+    yawl:hasMethod yawl:EncodeDecode_decodeString_2 ;
+    .
+
+
+# Method: EncodeDecode.encodeString
+yawl:EncodeDecode_encodeString_1 a yawl:Method ;
+    rdfs:label "encodeString" ;
+    yawl:returnType "ByteArrayInputStream" ;
+    yawl:signature "ByteArrayInputStream encodeString(String toConvert)" ;
+    rdfs:comment """Method to convert a string to a ByteArrayInputStream @param toConvert The string to convert @return A ByteArrayInputStream representing the string""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EncodeDecode.decodeString
+yawl:EncodeDecode_decodeString_2 a yawl:Method ;
+    rdfs:label "decodeString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String decodeString(ByteArrayOutputStream toConvert)" ;
+    rdfs:comment """Method to convert a ByteArrayOutputStream to a string @param toConvert A ByteArrayOutputStream to convert to string @return String decoded from the ByteArrayOutputStream""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+
+

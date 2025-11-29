@@ -1,0 +1,73 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.codelets.ShellExecution
+yawl:ShellExecution a yawl:Class ;
+    rdfs:label "ShellExecution" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_codelets ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/codelets/ShellExecution.java"^^xsd:string ;
+    rdfs:comment """A codelet that executes an external program in the client environment. It expects the following workitem input parameters: - command: the command line (including any arguments) - env: an optional set of attrib-value pairs representing temporary additions to the client environment (requires a user-defined data type that will deliver data like this: <env> <name1>value1</name> <name2>value2</name> ... <env> - dir: an optional working directory @author Michael Adams Date: 18/06/2008""" ;
+    yawl:extends yawl:AbstractCodelet ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ShellExecution_execute_1 ;
+    yawl:hasMethod yawl:ShellExecution_createCommandList_2 ;
+    yawl:hasMethod yawl:ShellExecution_handleOptionalParameters_3 ;
+    yawl:hasMethod yawl:ShellExecution_cancel_4 ;
+    yawl:hasMethod yawl:ShellExecution_getRequiredParams_5 ;
+    yawl:hasField yawl:ShellExecution__proc ;
+    .
+
+
+# Method: ShellExecution.execute
+yawl:ShellExecution_execute_1 a yawl:Method ;
+    rdfs:label "execute" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element execute(Element inData, List inParams, List outParams)" ;
+    rdfs:comment """Base override. Executes the codelet @param inData the input data @param inParams a list of input parameters @param outParams a list of output parameters @return the completed output data for the workitem @throws CodeletExecutionException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ShellExecution.createCommandList
+yawl:ShellExecution_createCommandList_2 a yawl:Method ;
+    rdfs:label "createCommandList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List createCommandList(String cmd)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ShellExecution.handleOptionalParameters
+yawl:ShellExecution_handleOptionalParameters_3 a yawl:Method ;
+    rdfs:label "handleOptionalParameters" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleOptionalParameters(ProcessBuilder pb, Element inData)" ;
+    rdfs:comment """@param pb an instantiated ProcessBuilder object @param inData the input data""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ShellExecution.cancel
+yawl:ShellExecution_cancel_4 a yawl:Method ;
+    rdfs:label "cancel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ShellExecution.getRequiredParams
+yawl:ShellExecution_getRequiredParams_5 a yawl:Method ;
+    rdfs:label "getRequiredParams" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getRequiredParams()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:ShellExecution__proc a yawl:Field ;
+    rdfs:label "_proc" .
+
+
+

@@ -1,0 +1,160 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.stateless.monitor
+yawl:org_yawlfoundation_yawl_stateless_monitor a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.stateless.monitor" .
+# Class: org.yawlfoundation.yawl.stateless.monitor.YCaseMonitor
+yawl:YCaseMonitor a yawl:Class ;
+    rdfs:label "YCaseMonitor" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_monitor ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/monitor/YCaseMonitor.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 29/6/2022""" ;
+    yawl:implements yawl:YCaseEventListener ;
+    yawl:implements yawl:YWorkItemEventListener ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YCaseMonitor_setIdleTimeout_1 ;
+    yawl:hasMethod yawl:YCaseMonitor_handleCaseEvent_2 ;
+    yawl:hasMethod yawl:YCaseMonitor_handleWorkItemEvent_3 ;
+    yawl:hasMethod yawl:YCaseMonitor_hasCase_4 ;
+    yawl:hasMethod yawl:YCaseMonitor_initCase_5 ;
+    yawl:hasMethod yawl:YCaseMonitor_addCase_6 ;
+    yawl:hasMethod yawl:YCaseMonitor_removeCase_7 ;
+    yawl:hasMethod yawl:YCaseMonitor_unloadCase_8 ;
+    yawl:hasMethod yawl:YCaseMonitor_marshalCase_9 ;
+    yawl:hasMethod yawl:YCaseMonitor_cancel_10 ;
+    yawl:hasMethod yawl:YCaseMonitor_pauseIdleTimer_11 ;
+    yawl:hasMethod yawl:YCaseMonitor_resumeIdleTimer_12 ;
+    yawl:hasMethod yawl:YCaseMonitor_isIdleCase_13 ;
+    yawl:hasMethod yawl:YCaseMonitor_isTimerEnabled_14 ;
+    yawl:hasField yawl:YCaseMonitor__caseMap ;
+    yawl:hasField yawl:YCaseMonitor__idleTimeout ;
+    .
+
+
+# Method: YCaseMonitor.setIdleTimeout
+yawl:YCaseMonitor_setIdleTimeout_1 a yawl:Method ;
+    rdfs:label "setIdleTimeout" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setIdleTimeout(long timeout)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCaseMonitor.handleCaseEvent
+yawl:YCaseMonitor_handleCaseEvent_2 a yawl:Method ;
+    rdfs:label "handleCaseEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCaseEvent(YCaseEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCaseMonitor.handleWorkItemEvent
+yawl:YCaseMonitor_handleWorkItemEvent_3 a yawl:Method ;
+    rdfs:label "handleWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleWorkItemEvent(YWorkItemEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCaseMonitor.hasCase
+yawl:YCaseMonitor_hasCase_4 a yawl:Method ;
+    rdfs:label "hasCase" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasCase(YIdentifier caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCaseMonitor.initCase
+yawl:YCaseMonitor_initCase_5 a yawl:Method ;
+    rdfs:label "initCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initCase(YCaseEvent event)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseMonitor.addCase
+yawl:YCaseMonitor_addCase_6 a yawl:Method ;
+    rdfs:label "addCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addCase(YCaseEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCaseMonitor.removeCase
+yawl:YCaseMonitor_removeCase_7 a yawl:Method ;
+    rdfs:label "removeCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeCase(YCaseEvent event)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseMonitor.unloadCase
+yawl:YCaseMonitor_unloadCase_8 a yawl:Method ;
+    rdfs:label "unloadCase" ;
+    yawl:returnType "YCase" ;
+    yawl:signature "YCase unloadCase(YIdentifier caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCaseMonitor.marshalCase
+yawl:YCaseMonitor_marshalCase_9 a yawl:Method ;
+    rdfs:label "marshalCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String marshalCase(YIdentifier caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCaseMonitor.cancel
+yawl:YCaseMonitor_cancel_10 a yawl:Method ;
+    rdfs:label "cancel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCaseMonitor.pauseIdleTimer
+yawl:YCaseMonitor_pauseIdleTimer_11 a yawl:Method ;
+    rdfs:label "pauseIdleTimer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void pauseIdleTimer(YIdentifier caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCaseMonitor.resumeIdleTimer
+yawl:YCaseMonitor_resumeIdleTimer_12 a yawl:Method ;
+    rdfs:label "resumeIdleTimer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void resumeIdleTimer(YIdentifier caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCaseMonitor.isIdleCase
+yawl:YCaseMonitor_isIdleCase_13 a yawl:Method ;
+    rdfs:label "isIdleCase" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isIdleCase(YIdentifier caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCaseMonitor.isTimerEnabled
+yawl:YCaseMonitor_isTimerEnabled_14 a yawl:Method ;
+    rdfs:label "isTimerEnabled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isTimerEnabled()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YCaseMonitor__caseMap a yawl:Field ;
+    rdfs:label "_caseMap" .
+
+yawl:YCaseMonitor__idleTimeout a yawl:Field ;
+    rdfs:label "_idleTimeout" .
+
+
+

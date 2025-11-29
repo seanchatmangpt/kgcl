@@ -1,0 +1,129 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.balancer
+yawl:org_yawlfoundation_yawl_balancer a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.balancer" .
+# Class: org.yawlfoundation.yawl.balancer.LoadReader
+yawl:LoadReader a yawl:Class ;
+    rdfs:label "LoadReader" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/LoadReader.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 22/6/17""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:LoadReader_setJMXReader_1 ;
+    yawl:hasMethod yawl:LoadReader_getBusyNess_2 ;
+    yawl:hasMethod yawl:LoadReader_close_3 ;
+    yawl:hasMethod yawl:LoadReader_setArffWriter_4 ;
+    yawl:hasMethod yawl:LoadReader_getBusyness_5 ;
+    yawl:hasMethod yawl:LoadReader_getOutputter_6 ;
+    yawl:hasMethod yawl:LoadReader_getThreads_7 ;
+    yawl:hasMethod yawl:LoadReader_getRequests_8 ;
+    yawl:hasMethod yawl:LoadReader_getSystem_9 ;
+    yawl:hasField yawl:LoadReader__jmxReader ;
+    yawl:hasField yawl:LoadReader__prevReqCount ;
+    yawl:hasField yawl:LoadReader__prevProcTime ;
+    yawl:hasField yawl:LoadReader__outputter ;
+    yawl:hasField yawl:LoadReader__arffWriter ;
+    yawl:hasField yawl:LoadReader__engineName ;
+    .
+
+
+# Method: LoadReader.setJMXReader
+yawl:LoadReader_setJMXReader_1 a yawl:Method ;
+    rdfs:label "setJMXReader" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setJMXReader(JMXReader reader)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LoadReader.getBusyNess
+yawl:LoadReader_getBusyNess_2 a yawl:Method ;
+    rdfs:label "getBusyNess" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getBusyNess()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LoadReader.close
+yawl:LoadReader_close_3 a yawl:Method ;
+    rdfs:label "close" ;
+    yawl:returnType "void" ;
+    yawl:signature "void close()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LoadReader.setArffWriter
+yawl:LoadReader_setArffWriter_4 a yawl:Method ;
+    rdfs:label "setArffWriter" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setArffWriter(ArffOutputter writer)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LoadReader.getBusyness
+yawl:LoadReader_getBusyness_5 a yawl:Method ;
+    rdfs:label "getBusyness" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getBusyness(boolean verbose)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LoadReader.getOutputter
+yawl:LoadReader_getOutputter_6 a yawl:Method ;
+    rdfs:label "getOutputter" ;
+    yawl:returnType "BusynessOutputter" ;
+    yawl:signature "BusynessOutputter getOutputter()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LoadReader.getThreads
+yawl:LoadReader_getThreads_7 a yawl:Method ;
+    rdfs:label "getThreads" ;
+    yawl:returnType "JMXStatistics" ;
+    yawl:signature "JMXStatistics getThreads()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LoadReader.getRequests
+yawl:LoadReader_getRequests_8 a yawl:Method ;
+    rdfs:label "getRequests" ;
+    yawl:returnType "JMXStatistics" ;
+    yawl:signature "JMXStatistics getRequests()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LoadReader.getSystem
+yawl:LoadReader_getSystem_9 a yawl:Method ;
+    rdfs:label "getSystem" ;
+    yawl:returnType "JMXStatistics" ;
+    yawl:signature "JMXStatistics getSystem()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:LoadReader__jmxReader a yawl:Field ;
+    rdfs:label "_jmxReader" .
+
+yawl:LoadReader__prevReqCount a yawl:Field ;
+    rdfs:label "_prevReqCount" .
+
+yawl:LoadReader__prevProcTime a yawl:Field ;
+    rdfs:label "_prevProcTime" .
+
+yawl:LoadReader__outputter a yawl:Field ;
+    rdfs:label "_outputter" .
+
+yawl:LoadReader__arffWriter a yawl:Field ;
+    rdfs:label "_arffWriter" .
+
+yawl:LoadReader__engineName a yawl:Field ;
+    rdfs:label "_engineName" .
+
+
+

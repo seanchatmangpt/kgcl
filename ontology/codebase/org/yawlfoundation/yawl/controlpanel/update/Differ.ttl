@@ -1,0 +1,383 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.update.Differ
+yawl:Differ a yawl:Class ;
+    rdfs:label "Differ" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_update ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/update/Differ.java"^^xsd:string ;
+    rdfs:comment """Collects the sets of different builds and files between two checksums.xml files @author Michael Adams @date 12/08/2014""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Differ_hasLatestChecksums_1 ;
+    yawl:hasMethod yawl:Differ_getLatestVersion_2 ;
+    yawl:hasMethod yawl:Differ_getCurrentVersion_3 ;
+    yawl:hasMethod yawl:Differ_getLatestTimestamp_4 ;
+    yawl:hasMethod yawl:Differ_getCurrentTimestamp_5 ;
+    yawl:hasMethod yawl:Differ_getLatestBuild_6 ;
+    yawl:hasMethod yawl:Differ_getCurrentBuild_7 ;
+    yawl:hasMethod yawl:Differ_getUIUpdater_8 ;
+    yawl:hasMethod yawl:Differ_isNewVersion_9 ;
+    yawl:hasMethod yawl:Differ_getCurrentVersionInfo_10 ;
+    yawl:hasMethod yawl:Differ_getLatestVersionInfo_11 ;
+    yawl:hasMethod yawl:Differ_hasUpdate_12 ;
+    yawl:hasMethod yawl:Differ_hasLibChange_13 ;
+    yawl:hasMethod yawl:Differ_hasYawlLibChange_14 ;
+    yawl:hasMethod yawl:Differ_hasControlPanelChange_15 ;
+    yawl:hasMethod yawl:Differ_hasMandatoryUpdates_16 ;
+    yawl:hasMethod yawl:Differ_getNewJarName_17 ;
+    yawl:hasMethod yawl:Differ_hasUpdates_18 ;
+    yawl:hasMethod yawl:Differ_getUpdatesList_19 ;
+    yawl:hasMethod yawl:Differ_getWebAppNames_20 ;
+    yawl:hasMethod yawl:Differ_getCurrentWebAppNames_21 ;
+    yawl:hasMethod yawl:Differ_getInstalledWebAppNames_22 ;
+    yawl:hasMethod yawl:Differ_getInstalledLibNames_23 ;
+    yawl:hasMethod yawl:Differ_getAppFiles_24 ;
+    yawl:hasMethod yawl:Differ_getPath_25 ;
+    yawl:hasMethod yawl:Differ_getAppLibs_26 ;
+    yawl:hasMethod yawl:Differ_getRequiredLibNames_27 ;
+    yawl:hasMethod yawl:Differ_diff_28 ;
+    yawl:hasMethod yawl:Differ_compareYAWLLib_29 ;
+    yawl:hasMethod yawl:Differ_compareControlPanel_30 ;
+    yawl:hasMethod yawl:Differ_compareFileNodes_31 ;
+    yawl:hasMethod yawl:Differ_compareWebApps_32 ;
+    yawl:hasMethod yawl:Differ_compareFileLists_33 ;
+    yawl:hasMethod yawl:Differ_getFileMap_34 ;
+    yawl:hasMethod yawl:Differ_compareMaps_35 ;
+    yawl:hasMethod yawl:Differ_isDifferent_36 ;
+    yawl:hasMethod yawl:Differ_checkNotNullOrEmpty_37 ;
+    yawl:hasMethod yawl:Differ_getInfo_38 ;
+    yawl:hasField yawl:Differ__latest ;
+    yawl:hasField yawl:Differ__current ;
+    yawl:hasField yawl:Differ__mandatory ;
+    yawl:hasField yawl:Differ__pathResolver ;
+    yawl:hasField yawl:Differ__uiUpdater ;
+    .
+
+
+# Method: Differ.hasLatestChecksums
+yawl:Differ_hasLatestChecksums_1 a yawl:Method ;
+    rdfs:label "hasLatestChecksums" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasLatestChecksums()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Differ.getLatestVersion
+yawl:Differ_getLatestVersion_2 a yawl:Method ;
+    rdfs:label "getLatestVersion" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLatestVersion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Differ.getCurrentVersion
+yawl:Differ_getCurrentVersion_3 a yawl:Method ;
+    rdfs:label "getCurrentVersion" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCurrentVersion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Differ.getLatestTimestamp
+yawl:Differ_getLatestTimestamp_4 a yawl:Method ;
+    rdfs:label "getLatestTimestamp" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLatestTimestamp()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Differ.getCurrentTimestamp
+yawl:Differ_getCurrentTimestamp_5 a yawl:Method ;
+    rdfs:label "getCurrentTimestamp" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCurrentTimestamp()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Differ.getLatestBuild
+yawl:Differ_getLatestBuild_6 a yawl:Method ;
+    rdfs:label "getLatestBuild" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLatestBuild(String appName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Differ.getCurrentBuild
+yawl:Differ_getCurrentBuild_7 a yawl:Method ;
+    rdfs:label "getCurrentBuild" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCurrentBuild(String appName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Differ.getUIUpdater
+yawl:Differ_getUIUpdater_8 a yawl:Method ;
+    rdfs:label "getUIUpdater" ;
+    yawl:returnType "YawlUiUpdater" ;
+    yawl:signature "YawlUiUpdater getUIUpdater()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Differ.isNewVersion
+yawl:Differ_isNewVersion_9 a yawl:Method ;
+    rdfs:label "isNewVersion" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isNewVersion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Differ.getCurrentVersionInfo
+yawl:Differ_getCurrentVersionInfo_10 a yawl:Method ;
+    rdfs:label "getCurrentVersionInfo" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCurrentVersionInfo()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Differ.getLatestVersionInfo
+yawl:Differ_getLatestVersionInfo_11 a yawl:Method ;
+    rdfs:label "getLatestVersionInfo" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLatestVersionInfo()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Differ.hasUpdate
+yawl:Differ_hasUpdate_12 a yawl:Method ;
+    rdfs:label "hasUpdate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasUpdate(String appName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Differ.hasLibChange
+yawl:Differ_hasLibChange_13 a yawl:Method ;
+    rdfs:label "hasLibChange" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasLibChange()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Differ.hasYawlLibChange
+yawl:Differ_hasYawlLibChange_14 a yawl:Method ;
+    rdfs:label "hasYawlLibChange" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasYawlLibChange()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Differ.hasControlPanelChange
+yawl:Differ_hasControlPanelChange_15 a yawl:Method ;
+    rdfs:label "hasControlPanelChange" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasControlPanelChange()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Differ.hasMandatoryUpdates
+yawl:Differ_hasMandatoryUpdates_16 a yawl:Method ;
+    rdfs:label "hasMandatoryUpdates" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasMandatoryUpdates()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Differ.getNewJarName
+yawl:Differ_getNewJarName_17 a yawl:Method ;
+    rdfs:label "getNewJarName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNewJarName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Differ.hasUpdates
+yawl:Differ_hasUpdates_18 a yawl:Method ;
+    rdfs:label "hasUpdates" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasUpdates()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Differ.getUpdatesList
+yawl:Differ_getUpdatesList_19 a yawl:Method ;
+    rdfs:label "getUpdatesList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getUpdatesList()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Differ.getWebAppNames
+yawl:Differ_getWebAppNames_20 a yawl:Method ;
+    rdfs:label "getWebAppNames" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getWebAppNames()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Differ.getCurrentWebAppNames
+yawl:Differ_getCurrentWebAppNames_21 a yawl:Method ;
+    rdfs:label "getCurrentWebAppNames" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getCurrentWebAppNames()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Differ.getInstalledWebAppNames
+yawl:Differ_getInstalledWebAppNames_22 a yawl:Method ;
+    rdfs:label "getInstalledWebAppNames" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getInstalledWebAppNames()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Differ.getInstalledLibNames
+yawl:Differ_getInstalledLibNames_23 a yawl:Method ;
+    rdfs:label "getInstalledLibNames" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getInstalledLibNames()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Differ.getAppFiles
+yawl:Differ_getAppFiles_24 a yawl:Method ;
+    rdfs:label "getAppFiles" ;
+    yawl:returnType "AppUpdate" ;
+    yawl:signature "AppUpdate getAppFiles(String appName, boolean adding)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Differ.getPath
+yawl:Differ_getPath_25 a yawl:Method ;
+    rdfs:label "getPath" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPath(XNode node)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Differ.getAppLibs
+yawl:Differ_getAppLibs_26 a yawl:Method ;
+    rdfs:label "getAppLibs" ;
+    yawl:returnType "AppUpdate" ;
+    yawl:signature "AppUpdate getAppLibs(String appName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Differ.getRequiredLibNames
+yawl:Differ_getRequiredLibNames_27 a yawl:Method ;
+    rdfs:label "getRequiredLibNames" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getRequiredLibNames()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Differ.diff
+yawl:Differ_diff_28 a yawl:Method ;
+    rdfs:label "diff" ;
+    yawl:returnType "List" ;
+    yawl:signature "List diff()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Differ.compareYAWLLib
+yawl:Differ_compareYAWLLib_29 a yawl:Method ;
+    rdfs:label "compareYAWLLib" ;
+    yawl:returnType "void" ;
+    yawl:signature "void compareYAWLLib(List updates)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Differ.compareControlPanel
+yawl:Differ_compareControlPanel_30 a yawl:Method ;
+    rdfs:label "compareControlPanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void compareControlPanel(List updates)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Differ.compareFileNodes
+yawl:Differ_compareFileNodes_31 a yawl:Method ;
+    rdfs:label "compareFileNodes" ;
+    yawl:returnType "AppUpdate" ;
+    yawl:signature "AppUpdate compareFileNodes(XNode currentNode, XNode latestNode, String appName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Differ.compareWebApps
+yawl:Differ_compareWebApps_32 a yawl:Method ;
+    rdfs:label "compareWebApps" ;
+    yawl:returnType "void" ;
+    yawl:signature "void compareWebApps(List updates)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Differ.compareFileLists
+yawl:Differ_compareFileLists_33 a yawl:Method ;
+    rdfs:label "compareFileLists" ;
+    yawl:returnType "AppUpdate" ;
+    yawl:signature "AppUpdate compareFileLists(List latestList, List currentList, String appName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Differ.getFileMap
+yawl:Differ_getFileMap_34 a yawl:Method ;
+    rdfs:label "getFileMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getFileMap(List fileList)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Differ.compareMaps
+yawl:Differ_compareMaps_35 a yawl:Method ;
+    rdfs:label "compareMaps" ;
+    yawl:returnType "AppUpdate" ;
+    yawl:signature "AppUpdate compareMaps(Map latestMap, Map currentMap, String appName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Differ.isDifferent
+yawl:Differ_isDifferent_36 a yawl:Method ;
+    rdfs:label "isDifferent" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isDifferent(String one, String two)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Differ.checkNotNullOrEmpty
+yawl:Differ_checkNotNullOrEmpty_37 a yawl:Method ;
+    rdfs:label "checkNotNullOrEmpty" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkNotNullOrEmpty(List list)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Differ.getInfo
+yawl:Differ_getInfo_38 a yawl:Method ;
+    rdfs:label "getInfo" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInfo(String label, String version)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:Differ__latest a yawl:Field ;
+    rdfs:label "_latest" .
+
+yawl:Differ__current a yawl:Field ;
+    rdfs:label "_current" .
+
+yawl:Differ__mandatory a yawl:Field ;
+    rdfs:label "_mandatory" .
+
+yawl:Differ__pathResolver a yawl:Field ;
+    rdfs:label "_pathResolver" .
+
+yawl:Differ__uiUpdater a yawl:Field ;
+    rdfs:label "_uiUpdater" .
+
+
+

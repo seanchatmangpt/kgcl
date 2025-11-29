@@ -1,0 +1,49 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.codelets.XQueryEvaluator
+yawl:XQueryEvaluator a yawl:Class ;
+    rdfs:label "XQueryEvaluator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_codelets ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/codelets/XQueryEvaluator.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams Creation Date: 30/04/2008""" ;
+    yawl:extends yawl:AbstractCodelet ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:XQueryEvaluator_execute_1 ;
+    yawl:hasMethod yawl:XQueryEvaluator_evaluateQuery_2 ;
+    yawl:hasMethod yawl:XQueryEvaluator_getRequiredParams_3 ;
+    .
+
+
+# Method: XQueryEvaluator.execute
+yawl:XQueryEvaluator_execute_1 a yawl:Method ;
+    rdfs:label "execute" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element execute(Element inData, List inParams, List outParams)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XQueryEvaluator.evaluateQuery
+yawl:XQueryEvaluator_evaluateQuery_2 a yawl:Method ;
+    rdfs:label "evaluateQuery" ;
+    yawl:returnType "String" ;
+    yawl:signature "String evaluateQuery(String query, Document dataDoc)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XQueryEvaluator.getRequiredParams
+yawl:XQueryEvaluator_getRequiredParams_3 a yawl:Method ;
+    rdfs:label "getRequiredParams" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getRequiredParams()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

@@ -1,0 +1,161 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.resource.Role
+yawl:Role a yawl:Class ;
+    rdfs:label "Role" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_resource ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/resource/Role.java"^^xsd:string ;
+    rdfs:comment """A role that a resource might perform. @author Michael Adams v0.1, 21/08/2007""" ;
+    yawl:extends yawl:AbstractResourceAttribute ;
+    yawl:implements yawl:Comparable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Role_setLabel_1 ;
+    yawl:hasMethod yawl:Role_getName_2 ;
+    yawl:hasMethod yawl:Role_setName_3 ;
+    yawl:hasMethod yawl:Role_getOwnerRole_4 ;
+    yawl:hasMethod yawl:Role_setOwnerRole_5 ;
+    yawl:hasMethod yawl:Role_setOwnerRole_6 ;
+    yawl:hasMethod yawl:Role_belongsTo_7 ;
+    yawl:hasMethod yawl:Role_ultimatelyBelongsTo_8 ;
+    yawl:hasMethod yawl:Role_equals_9 ;
+    yawl:hasMethod yawl:Role_compareTo_10 ;
+    yawl:hasMethod yawl:Role_toXML_11 ;
+    yawl:hasMethod yawl:Role_reconstitute_12 ;
+    yawl:hasMethod yawl:Role_get_belongsToID_13 ;
+    yawl:hasMethod yawl:Role_set_belongsToID_14 ;
+    yawl:hasField yawl:Role__role ;
+    yawl:hasField yawl:Role__belongsTo ;
+    yawl:hasField yawl:Role__belongsToID ;
+    .
+
+
+# Method: Role.setLabel
+yawl:Role_setLabel_1 a yawl:Method ;
+    rdfs:label "setLabel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLabel(String label)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Role.getName
+yawl:Role_getName_2 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Role.setName
+yawl:Role_setName_3 a yawl:Method ;
+    rdfs:label "setName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setName(String role)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Role.getOwnerRole
+yawl:Role_getOwnerRole_4 a yawl:Method ;
+    rdfs:label "getOwnerRole" ;
+    yawl:returnType "Role" ;
+    yawl:signature "Role getOwnerRole()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Role.setOwnerRole
+yawl:Role_setOwnerRole_5 a yawl:Method ;
+    rdfs:label "setOwnerRole" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOwnerRole(Role owner)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Role.setOwnerRole
+yawl:Role_setOwnerRole_6 a yawl:Method ;
+    rdfs:label "setOwnerRole" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean setOwnerRole(String ownerRoleID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Role.belongsTo
+yawl:Role_belongsTo_7 a yawl:Method ;
+    rdfs:label "belongsTo" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean belongsTo(Role owner)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Role.ultimatelyBelongsTo
+yawl:Role_ultimatelyBelongsTo_8 a yawl:Method ;
+    rdfs:label "ultimatelyBelongsTo" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean ultimatelyBelongsTo(Role owner)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Role.equals
+yawl:Role_equals_9 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Role.compareTo
+yawl:Role_compareTo_10 a yawl:Method ;
+    rdfs:label "compareTo" ;
+    yawl:returnType "int" ;
+    yawl:signature "int compareTo(Object o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Role.toXML
+yawl:Role_toXML_11 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Role.reconstitute
+yawl:Role_reconstitute_12 a yawl:Method ;
+    rdfs:label "reconstitute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reconstitute(Element e)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Role.get_belongsToID
+yawl:Role_get_belongsToID_13 a yawl:Method ;
+    rdfs:label "get_belongsToID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_belongsToID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Role.set_belongsToID
+yawl:Role_set_belongsToID_14 a yawl:Method ;
+    rdfs:label "set_belongsToID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_belongsToID(String belongsToID)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:Role__role a yawl:Field ;
+    rdfs:label "_role" .
+
+yawl:Role__belongsTo a yawl:Field ;
+    rdfs:label "_belongsTo" .
+
+yawl:Role__belongsToID a yawl:Field ;
+    rdfs:label "_belongsToID" .
+
+
+

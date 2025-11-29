@@ -1,0 +1,191 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.resourcing.rsInterface
+yawl:org_yawlfoundation_yawl_resourcing_rsInterface a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.rsInterface" .
+# Class: org.yawlfoundation.yawl.resourcing.rsInterface.ResourceCalendarGateway
+yawl:ResourceCalendarGateway a yawl:Class ;
+    rdfs:label "ResourceCalendarGateway" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_rsInterface ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/rsInterface/ResourceCalendarGateway.java"^^xsd:string ;
+    rdfs:comment """The Calendar Gateway class acts as an API gateway between the resource service and its calendar sub-service. @author Michael Adams 31/08/2010""" ;
+    yawl:extends yawl:HttpServlet ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ResourceCalendarGateway_init_1 ;
+    yawl:hasMethod yawl:ResourceCalendarGateway_doPost_2 ;
+    yawl:hasMethod yawl:ResourceCalendarGateway_doGet_3 ;
+    yawl:hasMethod yawl:ResourceCalendarGateway_validConnection_4 ;
+    yawl:hasMethod yawl:ResourceCalendarGateway_getEntries_5 ;
+    yawl:hasMethod yawl:ResourceCalendarGateway_addEntry_6 ;
+    yawl:hasMethod yawl:ResourceCalendarGateway_updateEntry_7 ;
+    yawl:hasMethod yawl:ResourceCalendarGateway_deleteEntry_8 ;
+    yawl:hasMethod yawl:ResourceCalendarGateway_clash_9 ;
+    yawl:hasMethod yawl:ResourceCalendarGateway_logEntry_10 ;
+    yawl:hasMethod yawl:ResourceCalendarGateway_strToLong_11 ;
+    yawl:hasMethod yawl:ResourceCalendarGateway_timeSlotsToXML_12 ;
+    yawl:hasMethod yawl:ResourceCalendarGateway_timeSlotsToXML_13 ;
+    yawl:hasMethod yawl:ResourceCalendarGateway_fail_14 ;
+    yawl:hasField yawl:ResourceCalendarGateway__rm ;
+    yawl:hasField yawl:ResourceCalendarGateway__calendar ;
+    yawl:hasField yawl:ResourceCalendarGateway__scheduler ;
+    yawl:hasField yawl:ResourceCalendarGateway__logger ;
+    yawl:hasField yawl:ResourceCalendarGateway__success ;
+    yawl:hasField yawl:ResourceCalendarGateway__noResource ;
+    yawl:hasField yawl:ResourceCalendarGateway__nullResource ;
+    yawl:hasField yawl:ResourceCalendarGateway__invalidResource ;
+    yawl:hasField yawl:ResourceCalendarGateway__noService ;
+    yawl:hasField yawl:ResourceCalendarGateway__noAction ;
+    .
+
+
+# Method: ResourceCalendarGateway.init
+yawl:ResourceCalendarGateway_init_1 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendarGateway.doPost
+yawl:ResourceCalendarGateway_doPost_2 a yawl:Method ;
+    rdfs:label "doPost" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doPost(HttpServletRequest req, HttpServletResponse res)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendarGateway.doGet
+yawl:ResourceCalendarGateway_doGet_3 a yawl:Method ;
+    rdfs:label "doGet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doGet(HttpServletRequest req, HttpServletResponse res)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendarGateway.validConnection
+yawl:ResourceCalendarGateway_validConnection_4 a yawl:Method ;
+    rdfs:label "validConnection" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validConnection(String handle)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendarGateway.getEntries
+yawl:ResourceCalendarGateway_getEntries_5 a yawl:Method ;
+    rdfs:label "getEntries" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEntries(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendarGateway.addEntry
+yawl:ResourceCalendarGateway_addEntry_6 a yawl:Method ;
+    rdfs:label "addEntry" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addEntry(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendarGateway.updateEntry
+yawl:ResourceCalendarGateway_updateEntry_7 a yawl:Method ;
+    rdfs:label "updateEntry" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateEntry(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendarGateway.deleteEntry
+yawl:ResourceCalendarGateway_deleteEntry_8 a yawl:Method ;
+    rdfs:label "deleteEntry" ;
+    yawl:returnType "String" ;
+    yawl:signature "String deleteEntry(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendarGateway.clash
+yawl:ResourceCalendarGateway_clash_9 a yawl:Method ;
+    rdfs:label "clash" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean clash(CalendarEntry entry, boolean adding)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendarGateway.logEntry
+yawl:ResourceCalendarGateway_logEntry_10 a yawl:Method ;
+    rdfs:label "logEntry" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logEntry(long entryID, String resource, String agent, int workload)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendarGateway.strToLong
+yawl:ResourceCalendarGateway_strToLong_11 a yawl:Method ;
+    rdfs:label "strToLong" ;
+    yawl:returnType "long" ;
+    yawl:signature "long strToLong(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendarGateway.timeSlotsToXML
+yawl:ResourceCalendarGateway_timeSlotsToXML_12 a yawl:Method ;
+    rdfs:label "timeSlotsToXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String timeSlotsToXML(String id, List slots)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendarGateway.timeSlotsToXML
+yawl:ResourceCalendarGateway_timeSlotsToXML_13 a yawl:Method ;
+    rdfs:label "timeSlotsToXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String timeSlotsToXML(XNode node, List slots)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendarGateway.fail
+yawl:ResourceCalendarGateway_fail_14 a yawl:Method ;
+    rdfs:label "fail" ;
+    yawl:returnType "String" ;
+    yawl:signature "String fail(String msg)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:ResourceCalendarGateway__rm a yawl:Field ;
+    rdfs:label "_rm" .
+
+yawl:ResourceCalendarGateway__calendar a yawl:Field ;
+    rdfs:label "_calendar" .
+
+yawl:ResourceCalendarGateway__scheduler a yawl:Field ;
+    rdfs:label "_scheduler" .
+
+yawl:ResourceCalendarGateway__logger a yawl:Field ;
+    rdfs:label "_logger" .
+
+yawl:ResourceCalendarGateway__success a yawl:Field ;
+    rdfs:label "_success" .
+
+yawl:ResourceCalendarGateway__noResource a yawl:Field ;
+    rdfs:label "_noResource" .
+
+yawl:ResourceCalendarGateway__nullResource a yawl:Field ;
+    rdfs:label "_nullResource" .
+
+yawl:ResourceCalendarGateway__invalidResource a yawl:Field ;
+    rdfs:label "_invalidResource" .
+
+yawl:ResourceCalendarGateway__noService a yawl:Field ;
+    rdfs:label "_noService" .
+
+yawl:ResourceCalendarGateway__noAction a yawl:Field ;
+    rdfs:label "_noAction" .
+
+
+

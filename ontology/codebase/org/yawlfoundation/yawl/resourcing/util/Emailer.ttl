@@ -1,0 +1,137 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.util.Emailer
+yawl:Emailer a yawl:Class ;
+    rdfs:label "Emailer" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/util/Emailer.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 14/12/2024""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Emailer_getInstance_1 ;
+    yawl:hasMethod yawl:Emailer_loadProperties_2 ;
+    yawl:hasMethod yawl:Emailer_sendNotification_3 ;
+    yawl:hasMethod yawl:Emailer_sendViaCustom_4 ;
+    yawl:hasMethod yawl:Emailer_setProvider_5 ;
+    yawl:hasMethod yawl:Emailer_getToken_6 ;
+    yawl:hasMethod yawl:Emailer_sendViaCourier_7 ;
+    yawl:hasMethod yawl:Emailer_sendViaMailer_8 ;
+    yawl:hasMethod yawl:Emailer_mapData_9 ;
+    yawl:hasMethod yawl:Emailer_parseContent_10 ;
+    yawl:hasMethod yawl:Emailer_dateTimeString_11 ;
+    yawl:hasField yawl:Emailer__provider ;
+    yawl:hasField yawl:Emailer__uid ;
+    yawl:hasField yawl:Emailer__props ;
+    yawl:hasField yawl:Emailer_INSTANCE ;
+    .
+
+
+# Method: Emailer.getInstance
+yawl:Emailer_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "Emailer" ;
+    yawl:signature "Emailer getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Emailer.loadProperties
+yawl:Emailer_loadProperties_2 a yawl:Method ;
+    rdfs:label "loadProperties" ;
+    yawl:returnType "void" ;
+    yawl:signature "void loadProperties(InputStream stream)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Emailer.sendNotification
+yawl:Emailer_sendNotification_3 a yawl:Method ;
+    rdfs:label "sendNotification" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sendNotification(MailClient mailer, Participant p, WorkItemRecord wir, int queue)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Emailer.sendViaCustom
+yawl:Emailer_sendViaCustom_4 a yawl:Method ;
+    rdfs:label "sendViaCustom" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sendViaCustom(MailClient mailer, Participant p, Map data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Emailer.setProvider
+yawl:Emailer_setProvider_5 a yawl:Method ;
+    rdfs:label "setProvider" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setProvider(String providerStr)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Emailer.getToken
+yawl:Emailer_getToken_6 a yawl:Method ;
+    rdfs:label "getToken" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getToken()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Emailer.sendViaCourier
+yawl:Emailer_sendViaCourier_7 a yawl:Method ;
+    rdfs:label "sendViaCourier" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sendViaCourier(String emailAddr, Map dataMap)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Emailer.sendViaMailer
+yawl:Emailer_sendViaMailer_8 a yawl:Method ;
+    rdfs:label "sendViaMailer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sendViaMailer(String emailAddr, Map dataMap)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Emailer.mapData
+yawl:Emailer_mapData_9 a yawl:Method ;
+    rdfs:label "mapData" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map mapData(Participant p, WorkItemRecord wir, int queue)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Emailer.parseContent
+yawl:Emailer_parseContent_10 a yawl:Method ;
+    rdfs:label "parseContent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String parseContent(Map dataMap)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Emailer.dateTimeString
+yawl:Emailer_dateTimeString_11 a yawl:Method ;
+    rdfs:label "dateTimeString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String dateTimeString(long time)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:Emailer__provider a yawl:Field ;
+    rdfs:label "_provider" .
+
+yawl:Emailer__uid a yawl:Field ;
+    rdfs:label "_uid" .
+
+yawl:Emailer__props a yawl:Field ;
+    rdfs:label "_props" .
+
+yawl:Emailer_INSTANCE a yawl:Field ;
+    rdfs:label "INSTANCE" .
+
+
+

@@ -1,0 +1,117 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.rsInterface.ResourceLogGateway
+yawl:ResourceLogGateway a yawl:Class ;
+    rdfs:label "ResourceLogGateway" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_rsInterface ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/rsInterface/ResourceLogGateway.java"^^xsd:string ;
+    rdfs:comment """The Log Gateway class acts as an API gateway between the resource service and its process logs. @author Michael Adams 03/02/2010""" ;
+    yawl:extends yawl:HttpServlet ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ResourceLogGateway_init_1 ;
+    yawl:hasMethod yawl:ResourceLogGateway_doPost_2 ;
+    yawl:hasMethod yawl:ResourceLogGateway_doGet_3 ;
+    yawl:hasMethod yawl:ResourceLogGateway_validConnection_4 ;
+    yawl:hasMethod yawl:ResourceLogGateway_getLong_5 ;
+    yawl:hasMethod yawl:ResourceLogGateway_constructSpecID_6 ;
+    yawl:hasMethod yawl:ResourceLogGateway_constructSpecificationIDSet_7 ;
+    yawl:hasField yawl:ResourceLogGateway__logDB ;
+    yawl:hasField yawl:ResourceLogGateway__rm ;
+    yawl:hasField yawl:ResourceLogGateway__noService ;
+    yawl:hasField yawl:ResourceLogGateway__badPre ;
+    yawl:hasField yawl:ResourceLogGateway__badAction ;
+    yawl:hasField yawl:ResourceLogGateway__badEvent ;
+    yawl:hasField yawl:ResourceLogGateway__badSpecID ;
+    yawl:hasField yawl:ResourceLogGateway__badTimestamp ;
+    .
+
+
+# Method: ResourceLogGateway.init
+yawl:ResourceLogGateway_init_1 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGateway.doPost
+yawl:ResourceLogGateway_doPost_2 a yawl:Method ;
+    rdfs:label "doPost" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doPost(HttpServletRequest req, HttpServletResponse res)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGateway.doGet
+yawl:ResourceLogGateway_doGet_3 a yawl:Method ;
+    rdfs:label "doGet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doGet(HttpServletRequest req, HttpServletResponse res)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGateway.validConnection
+yawl:ResourceLogGateway_validConnection_4 a yawl:Method ;
+    rdfs:label "validConnection" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validConnection(String handle)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceLogGateway.getLong
+yawl:ResourceLogGateway_getLong_5 a yawl:Method ;
+    rdfs:label "getLong" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getLong(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceLogGateway.constructSpecID
+yawl:ResourceLogGateway_constructSpecID_6 a yawl:Method ;
+    rdfs:label "constructSpecID" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID constructSpecID(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceLogGateway.constructSpecificationIDSet
+yawl:ResourceLogGateway_constructSpecificationIDSet_7 a yawl:Method ;
+    rdfs:label "constructSpecificationIDSet" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set constructSpecificationIDSet(String xml)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:ResourceLogGateway__logDB a yawl:Field ;
+    rdfs:label "_logDB" .
+
+yawl:ResourceLogGateway__rm a yawl:Field ;
+    rdfs:label "_rm" .
+
+yawl:ResourceLogGateway__noService a yawl:Field ;
+    rdfs:label "_noService" .
+
+yawl:ResourceLogGateway__badPre a yawl:Field ;
+    rdfs:label "_badPre" .
+
+yawl:ResourceLogGateway__badAction a yawl:Field ;
+    rdfs:label "_badAction" .
+
+yawl:ResourceLogGateway__badEvent a yawl:Field ;
+    rdfs:label "_badEvent" .
+
+yawl:ResourceLogGateway__badSpecID a yawl:Field ;
+    rdfs:label "_badSpecID" .
+
+yawl:ResourceLogGateway__badTimestamp a yawl:Field ;
+    rdfs:label "_badTimestamp" .
+
+
+

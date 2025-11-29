@@ -1,0 +1,74 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.time.workdays.HolidayRegion
+yawl:HolidayRegion a yawl:Class ;
+    rdfs:label "HolidayRegion" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_time_workdays ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/time/workdays/HolidayRegion.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 5/6/17""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:HolidayRegion_getCountry_1 ;
+    yawl:hasMethod yawl:HolidayRegion_setCountry_2 ;
+    yawl:hasMethod yawl:HolidayRegion_getRegion_3 ;
+    yawl:hasMethod yawl:HolidayRegion_setRegion_4 ;
+    yawl:hasMethod yawl:HolidayRegion_matches_5 ;
+    yawl:hasField yawl:HolidayRegion__country ;
+    yawl:hasField yawl:HolidayRegion__region ;
+    .
+
+
+# Method: HolidayRegion.getCountry
+yawl:HolidayRegion_getCountry_1 a yawl:Method ;
+    rdfs:label "getCountry" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCountry()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HolidayRegion.setCountry
+yawl:HolidayRegion_setCountry_2 a yawl:Method ;
+    rdfs:label "setCountry" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCountry(String country)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HolidayRegion.getRegion
+yawl:HolidayRegion_getRegion_3 a yawl:Method ;
+    rdfs:label "getRegion" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRegion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HolidayRegion.setRegion
+yawl:HolidayRegion_setRegion_4 a yawl:Method ;
+    rdfs:label "setRegion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRegion(String region)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HolidayRegion.matches
+yawl:HolidayRegion_matches_5 a yawl:Method ;
+    rdfs:label "matches" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean matches(String country, String region)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:HolidayRegion__country a yawl:Field ;
+    rdfs:label "_country" .
+
+yawl:HolidayRegion__region a yawl:Field ;
+    rdfs:label "_region" .
+
+
+

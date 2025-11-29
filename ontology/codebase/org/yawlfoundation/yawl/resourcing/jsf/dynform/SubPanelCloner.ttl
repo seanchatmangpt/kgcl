@@ -1,0 +1,146 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.dynform.SubPanelCloner
+yawl:SubPanelCloner a yawl:Class ;
+    rdfs:label "SubPanelCloner" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf_dynform ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/dynform/SubPanelCloner.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 7/08/2008""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:SubPanelCloner_clone_1 ;
+    yawl:hasMethod yawl:SubPanelCloner_cloneSubPanel_2 ;
+    yawl:hasMethod yawl:SubPanelCloner_cloneContent_3 ;
+    yawl:hasMethod yawl:SubPanelCloner_cloneSimpleComponent_4 ;
+    yawl:hasMethod yawl:SubPanelCloner_cloneLabel_5 ;
+    yawl:hasMethod yawl:SubPanelCloner_cloneTextField_6 ;
+    yawl:hasMethod yawl:SubPanelCloner_cloneCalendar_7 ;
+    yawl:hasMethod yawl:SubPanelCloner_cloneCheckbox_8 ;
+    yawl:hasMethod yawl:SubPanelCloner_cloneDropDown_9 ;
+    yawl:hasMethod yawl:SubPanelCloner_cloneRadioButton_10 ;
+    yawl:hasMethod yawl:SubPanelCloner_cloneStaticText_11 ;
+    yawl:hasMethod yawl:SubPanelCloner_resolveChildControllers_12 ;
+    yawl:hasMethod yawl:SubPanelCloner_createUniqueID_13 ;
+    yawl:hasField yawl:SubPanelCloner__factory ;
+    yawl:hasField yawl:SubPanelCloner__rbGroupID ;
+    .
+
+
+# Method: SubPanelCloner.clone
+yawl:SubPanelCloner_clone_1 a yawl:Method ;
+    rdfs:label "clone" ;
+    yawl:returnType "SubPanel" ;
+    yawl:signature "SubPanel clone(SubPanel panel, DynFormFactory factory, String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelCloner.cloneSubPanel
+yawl:SubPanelCloner_cloneSubPanel_2 a yawl:Method ;
+    rdfs:label "cloneSubPanel" ;
+    yawl:returnType "SubPanel" ;
+    yawl:signature "SubPanel cloneSubPanel(SubPanel panel)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SubPanelCloner.cloneContent
+yawl:SubPanelCloner_cloneContent_3 a yawl:Method ;
+    rdfs:label "cloneContent" ;
+    yawl:returnType "List" ;
+    yawl:signature "List cloneContent(SubPanel panel, Hashtable tops)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SubPanelCloner.cloneSimpleComponent
+yawl:SubPanelCloner_cloneSimpleComponent_4 a yawl:Method ;
+    rdfs:label "cloneSimpleComponent" ;
+    yawl:returnType "List" ;
+    yawl:signature "List cloneSimpleComponent(UIComponent component, SubPanel panel)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SubPanelCloner.cloneLabel
+yawl:SubPanelCloner_cloneLabel_5 a yawl:Method ;
+    rdfs:label "cloneLabel" ;
+    yawl:returnType "UIComponent" ;
+    yawl:signature "UIComponent cloneLabel(UIComponent label)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelCloner.cloneTextField
+yawl:SubPanelCloner_cloneTextField_6 a yawl:Method ;
+    rdfs:label "cloneTextField" ;
+    yawl:returnType "UIComponent" ;
+    yawl:signature "UIComponent cloneTextField(UIComponent field)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelCloner.cloneCalendar
+yawl:SubPanelCloner_cloneCalendar_7 a yawl:Method ;
+    rdfs:label "cloneCalendar" ;
+    yawl:returnType "UIComponent" ;
+    yawl:signature "UIComponent cloneCalendar(UIComponent field)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelCloner.cloneCheckbox
+yawl:SubPanelCloner_cloneCheckbox_8 a yawl:Method ;
+    rdfs:label "cloneCheckbox" ;
+    yawl:returnType "UIComponent" ;
+    yawl:signature "UIComponent cloneCheckbox(UIComponent field)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelCloner.cloneDropDown
+yawl:SubPanelCloner_cloneDropDown_9 a yawl:Method ;
+    rdfs:label "cloneDropDown" ;
+    yawl:returnType "UIComponent" ;
+    yawl:signature "UIComponent cloneDropDown(UIComponent field)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelCloner.cloneRadioButton
+yawl:SubPanelCloner_cloneRadioButton_10 a yawl:Method ;
+    rdfs:label "cloneRadioButton" ;
+    yawl:returnType "RadioButton" ;
+    yawl:signature "RadioButton cloneRadioButton(UIComponent field)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelCloner.cloneStaticText
+yawl:SubPanelCloner_cloneStaticText_11 a yawl:Method ;
+    rdfs:label "cloneStaticText" ;
+    yawl:returnType "UIComponent" ;
+    yawl:signature "UIComponent cloneStaticText(UIComponent field)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SubPanelCloner.resolveChildControllers
+yawl:SubPanelCloner_resolveChildControllers_12 a yawl:Method ;
+    rdfs:label "resolveChildControllers" ;
+    yawl:returnType "void" ;
+    yawl:signature "void resolveChildControllers(SubPanel panel)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SubPanelCloner.createUniqueID
+yawl:SubPanelCloner_createUniqueID_13 a yawl:Method ;
+    rdfs:label "createUniqueID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String createUniqueID(String id)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:SubPanelCloner__factory a yawl:Field ;
+    rdfs:label "_factory" .
+
+yawl:SubPanelCloner__rbGroupID a yawl:Field ;
+    rdfs:label "_rbGroupID" .
+
+
+

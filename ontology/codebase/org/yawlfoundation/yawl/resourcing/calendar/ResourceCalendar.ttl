@@ -1,0 +1,904 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.calendar.ResourceCalendar
+yawl:ResourceCalendar a yawl:Class ;
+    rdfs:label "ResourceCalendar" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_calendar ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/calendar/ResourceCalendar.java"^^xsd:string ;
+    rdfs:comment """Maintains the resource calendar. An entry in the calendar denotes that a resource is NOT available between the entry's start and end times. An entry may refer to an individual resource (by id), or all human resources (eg. a public holiday), or all non-human resources (eg. an equipment maintenance run) or all resources (both human and non-human). Author: Michael Adams Creation Date: 12/03/2010""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ResourceCalendar_getInstance_1 ;
+    yawl:hasMethod yawl:ResourceCalendar_beginTransaction_2 ;
+    yawl:hasMethod yawl:ResourceCalendar_commitTransaction_3 ;
+    yawl:hasMethod yawl:ResourceCalendar_rollBackTransaction_4 ;
+    yawl:hasMethod yawl:ResourceCalendar_getCommitFlag_5 ;
+    yawl:hasMethod yawl:ResourceCalendar_addEntry_6 ;
+    yawl:hasMethod yawl:ResourceCalendar_addEntry_7 ;
+    yawl:hasMethod yawl:ResourceCalendar_getEntry_8 ;
+    yawl:hasMethod yawl:ResourceCalendar_getEntries_9 ;
+    yawl:hasMethod yawl:ResourceCalendar_getEntries_10 ;
+    yawl:hasMethod yawl:ResourceCalendar_clean_11 ;
+    yawl:hasMethod yawl:ResourceCalendar_isAvailable_12 ;
+    yawl:hasMethod yawl:ResourceCalendar_isAvailable_13 ;
+    yawl:hasMethod yawl:ResourceCalendar_isAvailable_14 ;
+    yawl:hasMethod yawl:ResourceCalendar_isAvailable_15 ;
+    yawl:hasMethod yawl:ResourceCalendar_isAvailable_16 ;
+    yawl:hasMethod yawl:ResourceCalendar_getTimeSlotEntries_17 ;
+    yawl:hasMethod yawl:ResourceCalendar_getTimeSlotEntries_18 ;
+    yawl:hasMethod yawl:ResourceCalendar_getTimeSlotEntries_19 ;
+    yawl:hasMethod yawl:ResourceCalendar_getEntries_20 ;
+    yawl:hasMethod yawl:ResourceCalendar_getAvailability_21 ;
+    yawl:hasMethod yawl:ResourceCalendar_createEntry_22 ;
+    yawl:hasMethod yawl:ResourceCalendar_createEntry_23 ;
+    yawl:hasMethod yawl:ResourceCalendar_createEntry_24 ;
+    yawl:hasMethod yawl:ResourceCalendar_canCreateEntry_25 ;
+    yawl:hasMethod yawl:ResourceCalendar_canCreateEntry_26 ;
+    yawl:hasMethod yawl:ResourceCalendar_updateEntry_27 ;
+    yawl:hasMethod yawl:ResourceCalendar_updateEntry_28 ;
+    yawl:hasMethod yawl:ResourceCalendar_canUpdateEntry_29 ;
+    yawl:hasMethod yawl:ResourceCalendar_canUpdateEntry_30 ;
+    yawl:hasMethod yawl:ResourceCalendar_reconcileEntry_31 ;
+    yawl:hasMethod yawl:ResourceCalendar_makeAvailable_32 ;
+    yawl:hasMethod yawl:ResourceCalendar_makeAvailable_33 ;
+    yawl:hasMethod yawl:ResourceCalendar_makeUnavailable_34 ;
+    yawl:hasMethod yawl:ResourceCalendar_makeUnavailable_35 ;
+    yawl:hasMethod yawl:ResourceCalendar_makeUnavailable_36 ;
+    yawl:hasMethod yawl:ResourceCalendar_makeUnavailable_37 ;
+    yawl:hasMethod yawl:ResourceCalendar_reserve_38 ;
+    yawl:hasMethod yawl:ResourceCalendar_reserve_39 ;
+    yawl:hasMethod yawl:ResourceCalendar_cancel_40 ;
+    yawl:hasMethod yawl:ResourceCalendar_request_41 ;
+    yawl:hasMethod yawl:ResourceCalendar_request_42 ;
+    yawl:hasMethod yawl:ResourceCalendar_unrequest_43 ;
+    yawl:hasMethod yawl:ResourceCalendar_confirm_44 ;
+    yawl:hasMethod yawl:ResourceCalendar_unconfirm_45 ;
+    yawl:hasMethod yawl:ResourceCalendar_canConfirm_46 ;
+    yawl:hasMethod yawl:ResourceCalendar_canUnconfirm_47 ;
+    yawl:hasMethod yawl:ResourceCalendar_strToStatus_48 ;
+    yawl:hasMethod yawl:ResourceCalendar_addTransientEntry_49 ;
+    yawl:hasMethod yawl:ResourceCalendar_addTransientEntry_50 ;
+    yawl:hasMethod yawl:ResourceCalendar_updateTransientEntry_51 ;
+    yawl:hasMethod yawl:ResourceCalendar_removeTransientEntries_52 ;
+    yawl:hasMethod yawl:ResourceCalendar_freeResourcesForCase_53 ;
+    yawl:hasMethod yawl:ResourceCalendar_addEntry_54 ;
+    yawl:hasMethod yawl:ResourceCalendar_addEntry_55 ;
+    yawl:hasMethod yawl:ResourceCalendar_getEntries_56 ;
+    yawl:hasMethod yawl:ResourceCalendar_getEntries_57 ;
+    yawl:hasMethod yawl:ResourceCalendar_getEntries_58 ;
+    yawl:hasMethod yawl:ResourceCalendar_getEntries_59 ;
+    yawl:hasMethod yawl:ResourceCalendar_getEntries_60 ;
+    yawl:hasMethod yawl:ResourceCalendar_getEntries_61 ;
+    yawl:hasMethod yawl:ResourceCalendar_getEntries_62 ;
+    yawl:hasMethod yawl:ResourceCalendar_updateEntry_63 ;
+    yawl:hasMethod yawl:ResourceCalendar_removeEntry_64 ;
+    yawl:hasMethod yawl:ResourceCalendar_removeEntry_65 ;
+    yawl:hasMethod yawl:ResourceCalendar_removeEntries_66 ;
+    yawl:hasMethod yawl:ResourceCalendar_removeEntries_67 ;
+    yawl:hasMethod yawl:ResourceCalendar_removeEntries_68 ;
+    yawl:hasMethod yawl:ResourceCalendar_removeEntries_69 ;
+    yawl:hasMethod yawl:ResourceCalendar_createIDListForQuery_70 ;
+    yawl:hasMethod yawl:ResourceCalendar_getEntryString_71 ;
+    yawl:hasMethod yawl:ResourceCalendar_entriesToTimeSlots_72 ;
+    yawl:hasMethod yawl:ResourceCalendar_canUpdateStatus_73 ;
+    yawl:hasMethod yawl:ResourceCalendar_hasStatus_74 ;
+    yawl:hasMethod yawl:ResourceCalendar_updateStatus_75 ;
+    yawl:hasMethod yawl:ResourceCalendar_removeEntry_76 ;
+    yawl:hasMethod yawl:ResourceCalendar_removeEntries_77 ;
+    yawl:hasMethod yawl:ResourceCalendar_updateBlockedEntry_78 ;
+    yawl:hasMethod yawl:ResourceCalendar_checkForClashes_79 ;
+    yawl:hasMethod yawl:ResourceCalendar_getEntryWithStatus_80 ;
+    yawl:hasMethod yawl:ResourceCalendar_addEntryIfAvailable_81 ;
+    yawl:hasMethod yawl:ResourceCalendar_addEntryIfAvailable_82 ;
+    yawl:hasMethod yawl:ResourceCalendar_addBlockedEntry_83 ;
+    yawl:hasMethod yawl:ResourceCalendar_removeBlockedEntry_84 ;
+    yawl:hasMethod yawl:ResourceCalendar_removeBlockedEntry_85 ;
+    yawl:hasMethod yawl:ResourceCalendar_hasBlockedStatus_86 ;
+    yawl:hasMethod yawl:ResourceCalendar_hasBlockedStatus_87 ;
+    yawl:hasMethod yawl:ResourceCalendar_hasBlockedStatus_88 ;
+    yawl:hasMethod yawl:ResourceCalendar_reassignOrRemoveEntries_89 ;
+    yawl:hasMethod yawl:ResourceCalendar_reassignEntries_90 ;
+    yawl:hasMethod yawl:ResourceCalendar_reassignEntry_91 ;
+    yawl:hasMethod yawl:ResourceCalendar_notifyStatusChange_92 ;
+    yawl:hasMethod yawl:ResourceCalendar_getLogEntriesForCase_93 ;
+    yawl:hasField yawl:ResourceCalendar_TRANSIENT_FLAG ;
+    yawl:hasField yawl:ResourceCalendar_UNKNOWN_ID_ERR ;
+    yawl:hasField yawl:ResourceCalendar__me ;
+    yawl:hasField yawl:ResourceCalendar__persister ;
+    yawl:hasField yawl:ResourceCalendar__tx ;
+    .
+
+
+# Method: ResourceCalendar.getInstance
+yawl:ResourceCalendar_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "ResourceCalendar" ;
+    yawl:signature "ResourceCalendar getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ResourceCalendar.beginTransaction
+yawl:ResourceCalendar_beginTransaction_2 a yawl:Method ;
+    rdfs:label "beginTransaction" ;
+    yawl:returnType "Transaction" ;
+    yawl:signature "Transaction beginTransaction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.commitTransaction
+yawl:ResourceCalendar_commitTransaction_3 a yawl:Method ;
+    rdfs:label "commitTransaction" ;
+    yawl:returnType "void" ;
+    yawl:signature "void commitTransaction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.rollBackTransaction
+yawl:ResourceCalendar_rollBackTransaction_4 a yawl:Method ;
+    rdfs:label "rollBackTransaction" ;
+    yawl:returnType "void" ;
+    yawl:signature "void rollBackTransaction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.getCommitFlag
+yawl:ResourceCalendar_getCommitFlag_5 a yawl:Method ;
+    rdfs:label "getCommitFlag" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean getCommitFlag()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.addEntry
+yawl:ResourceCalendar_addEntry_6 a yawl:Method ;
+    rdfs:label "addEntry" ;
+    yawl:returnType "long" ;
+    yawl:signature "long addEntry(AbstractResource resource, long startTime, long endTime, Status status, int workload, String agent, String comment)" ;
+    rdfs:comment """Adds an entry to the Calendar table. @param resource the resource to add the entry for  @param startTime the date/time when the resource's unavailability starts @param endTime the date/time when the resource's unavailability ends @param status the resource's schedule status @param workload the percentage workload (1-100) @param agent the id of the user or service that is adding the entry @param comment an optional comment string @return the identifier of the added entry @throws CalendarException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.addEntry
+yawl:ResourceCalendar_addEntry_7 a yawl:Method ;
+    rdfs:label "addEntry" ;
+    yawl:returnType "long" ;
+    yawl:signature "long addEntry(ResourceGroup entry, long startTime, long endTime, Status status, String agent, String comment)" ;
+    rdfs:comment """Adds an entry to the Calendar table. @param entry an Entry value (for multiple resources) @param startTime the date/time when the resource's unavailability starts @param endTime the date/time when the resource's unavailability ends @param status the resource's schedule status @param agent the id of the user or service that is adding the entry @param comment an optional comment string @return the identifier of the added entry @throws CalendarException if invalid parameters are passed, or the addi""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.getEntry
+yawl:ResourceCalendar_getEntry_8 a yawl:Method ;
+    rdfs:label "getEntry" ;
+    yawl:returnType "CalendarEntry" ;
+    yawl:signature "CalendarEntry getEntry(long entryID)" ;
+    rdfs:comment """Gets the calendar entry associated with the entry identifier passed @param entryID the entry identifier @return the matching calendar entry, or null if the entry can't be found""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.getEntries
+yawl:ResourceCalendar_getEntries_9 a yawl:Method ;
+    rdfs:label "getEntries" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getEntries(AbstractResource resource)" ;
+    rdfs:comment """Gets the current list of calendar entries for a resource @param resource the resource to get the entries for @return the list of all entries corresponding to the resource""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.getEntries
+yawl:ResourceCalendar_getEntries_10 a yawl:Method ;
+    rdfs:label "getEntries" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getEntries(ResourceGroup entry)" ;
+    rdfs:comment """Gets the current list of calendar entries for a Resource Entry type @param entry the Entry type @return the list of entries corresponding to the Entry type""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.clean
+yawl:ResourceCalendar_clean_11 a yawl:Method ;
+    rdfs:label "clean" ;
+    yawl:returnType "int" ;
+    yawl:signature "int clean(long priorTo)" ;
+    rdfs:comment """Removes all entries from the Calendar table prior to the timestamp passed. @param priorTo timestamp that marks when to delete entries up to. Note: priorTo must be a timestamp prior to the current time. @return the number of entries deleted""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.isAvailable
+yawl:ResourceCalendar_isAvailable_12 a yawl:Method ;
+    rdfs:label "isAvailable" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAvailable(Set idsToIgnore, AbstractResource resource, long from, long to)" ;
+    rdfs:comment """Checks if the resource is available within the specified period. Will return true if there is not an entry in the calendar table for the resource that covers the period within its duration @param idsToIgnore the primary key(s) of entries to exclude from the check. An empty Set (or null) means exclude none, otherwise the corresponding entry is excluded (used when updating an entry) @param resource the resource to check availability for @param from the start of a time range to search for @param to""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.isAvailable
+yawl:ResourceCalendar_isAvailable_13 a yawl:Method ;
+    rdfs:label "isAvailable" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAvailable(AbstractResource resource)" ;
+    rdfs:comment """Checks if the resource is currently available. Will return true if there is not an entry in the calendar table for the resource that covers the current time within its duration @param resource the resource to check availability for @return true if available, false if not""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.isAvailable
+yawl:ResourceCalendar_isAvailable_14 a yawl:Method ;
+    rdfs:label "isAvailable" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAvailable(Set idsToIgnore, AbstractResource resource, long from, long to, int workload)" ;
+    rdfs:comment """Checks if the resource is available within the specified period. Will return true if the workload total of all the entries in the calendar table for the resource that covers the period within its duration, plus the workload passed, doesn't exceed 100% @param idsToIgnore the primary key(s) of entries to exclude from the check. An empty Set (or null) means exclude none, otherwise the corresponding entry is excluded (used when updating an entry) @param resource the resource to check availability fo""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.isAvailable
+yawl:ResourceCalendar_isAvailable_15 a yawl:Method ;
+    rdfs:label "isAvailable" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAvailable(AbstractResource resource, long from, long to, int workload)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.isAvailable
+yawl:ResourceCalendar_isAvailable_16 a yawl:Method ;
+    rdfs:label "isAvailable" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAvailable(AbstractResource resource, CalendarEntry entry)" ;
+    rdfs:comment """Checks if the resource is available within the specified period. Will return true if the workload total of all the entries in the calendar table for the resource that covers the period within its duration, plus the workload passed, doesn't exceed 100% @param resource the resource to check availability for @param entry a CalendarEntry object containing the required parameters @return true if available, false if not""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.getTimeSlotEntries
+yawl:ResourceCalendar_getTimeSlotEntries_17 a yawl:Method ;
+    rdfs:label "getTimeSlotEntries" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getTimeSlotEntries(AbstractResource resource, long from, long to)" ;
+    rdfs:comment """Gets the list of calendar entries within a specified period for a resource. Covers 4 overlapping possibilities : 1. A record's time range is wholly within start <-> end 2. start <-> end is wholly within a record's time range 3. start is prior to the record's time range, and end falls within it 4. end is after the record's time range, and start falls within it @param resource the resource to get the entries for @param from the start of a time range to search for (-ve value for all start times) @p""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.getTimeSlotEntries
+yawl:ResourceCalendar_getTimeSlotEntries_18 a yawl:Method ;
+    rdfs:label "getTimeSlotEntries" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getTimeSlotEntries(String resourceID, boolean isParticipant, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.getTimeSlotEntries
+yawl:ResourceCalendar_getTimeSlotEntries_19 a yawl:Method ;
+    rdfs:label "getTimeSlotEntries" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getTimeSlotEntries(AbstractResource resource)" ;
+    rdfs:comment """Gets the list of calendar entries for a resource. @param resource the resource to get the entries for @return the matching list of calendar entries (as CalendarEntry objects)""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.getEntries
+yawl:ResourceCalendar_getEntries_20 a yawl:Method ;
+    rdfs:label "getEntries" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getEntries(long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.getAvailability
+yawl:ResourceCalendar_getAvailability_21 a yawl:Method ;
+    rdfs:label "getAvailability" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAvailability(AbstractResource resource, long startTime, long endTime)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.createEntry
+yawl:ResourceCalendar_createEntry_22 a yawl:Method ;
+    rdfs:label "createEntry" ;
+    yawl:returnType "long" ;
+    yawl:signature "long createEntry(AbstractResource resource, long startTime, long endTime, String status, String comment, String agent)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.createEntry
+yawl:ResourceCalendar_createEntry_23 a yawl:Method ;
+    rdfs:label "createEntry" ;
+    yawl:returnType "long" ;
+    yawl:signature "long createEntry(AbstractResource resource, long startTime, long endTime, Status status, String comment, String agent)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.createEntry
+yawl:ResourceCalendar_createEntry_24 a yawl:Method ;
+    rdfs:label "createEntry" ;
+    yawl:returnType "long" ;
+    yawl:signature "long createEntry(AbstractResource resource, CalendarEntry entry)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.canCreateEntry
+yawl:ResourceCalendar_canCreateEntry_25 a yawl:Method ;
+    rdfs:label "canCreateEntry" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean canCreateEntry(AbstractResource resource, long startTime, long endTime, String status, int workload)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.canCreateEntry
+yawl:ResourceCalendar_canCreateEntry_26 a yawl:Method ;
+    rdfs:label "canCreateEntry" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean canCreateEntry(AbstractResource resource, long startTime, long endTime, Status status, int workload)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.updateEntry
+yawl:ResourceCalendar_updateEntry_27 a yawl:Method ;
+    rdfs:label "updateEntry" ;
+    yawl:returnType "Status" ;
+    yawl:signature "Status updateEntry(long entryID, String status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.updateEntry
+yawl:ResourceCalendar_updateEntry_28 a yawl:Method ;
+    rdfs:label "updateEntry" ;
+    yawl:returnType "Status" ;
+    yawl:signature "Status updateEntry(long entryID, Status status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.canUpdateEntry
+yawl:ResourceCalendar_canUpdateEntry_29 a yawl:Method ;
+    rdfs:label "canUpdateEntry" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean canUpdateEntry(long entryID, String status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.canUpdateEntry
+yawl:ResourceCalendar_canUpdateEntry_30 a yawl:Method ;
+    rdfs:label "canUpdateEntry" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean canUpdateEntry(long entryID, Status status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.reconcileEntry
+yawl:ResourceCalendar_reconcileEntry_31 a yawl:Method ;
+    rdfs:label "reconcileEntry" ;
+    yawl:returnType "CalendarEntry" ;
+    yawl:signature "CalendarEntry reconcileEntry(AbstractResource resource, long entryID, long startTime, long endTime)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.makeAvailable
+yawl:ResourceCalendar_makeAvailable_32 a yawl:Method ;
+    rdfs:label "makeAvailable" ;
+    yawl:returnType "List" ;
+    yawl:signature "List makeAvailable(AbstractResource resource, long startTime, long endTime)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.makeAvailable
+yawl:ResourceCalendar_makeAvailable_33 a yawl:Method ;
+    rdfs:label "makeAvailable" ;
+    yawl:returnType "void" ;
+    yawl:signature "void makeAvailable(long entryID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.makeUnavailable
+yawl:ResourceCalendar_makeUnavailable_34 a yawl:Method ;
+    rdfs:label "makeUnavailable" ;
+    yawl:returnType "long" ;
+    yawl:signature "long makeUnavailable(AbstractResource resource, long startTime, long endTime, String agent, String comment)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.makeUnavailable
+yawl:ResourceCalendar_makeUnavailable_35 a yawl:Method ;
+    rdfs:label "makeUnavailable" ;
+    yawl:returnType "long" ;
+    yawl:signature "long makeUnavailable(AbstractResource resource, CalendarEntry calEntry)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.makeUnavailable
+yawl:ResourceCalendar_makeUnavailable_36 a yawl:Method ;
+    rdfs:label "makeUnavailable" ;
+    yawl:returnType "void" ;
+    yawl:signature "void makeUnavailable(CalendarEntry entry)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.makeUnavailable
+yawl:ResourceCalendar_makeUnavailable_37 a yawl:Method ;
+    rdfs:label "makeUnavailable" ;
+    yawl:returnType "void" ;
+    yawl:signature "void makeUnavailable(long entryID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.reserve
+yawl:ResourceCalendar_reserve_38 a yawl:Method ;
+    rdfs:label "reserve" ;
+    yawl:returnType "long" ;
+    yawl:signature "long reserve(AbstractResource resource, long startTime, long endTime, String agent, String comment)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.reserve
+yawl:ResourceCalendar_reserve_39 a yawl:Method ;
+    rdfs:label "reserve" ;
+    yawl:returnType "long" ;
+    yawl:signature "long reserve(AbstractResource resource, CalendarEntry calEntry)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.cancel
+yawl:ResourceCalendar_cancel_40 a yawl:Method ;
+    rdfs:label "cancel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancel(long entryID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.request
+yawl:ResourceCalendar_request_41 a yawl:Method ;
+    rdfs:label "request" ;
+    yawl:returnType "long" ;
+    yawl:signature "long request(AbstractResource resource, long startTime, long endTime, String agent, String comment)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.request
+yawl:ResourceCalendar_request_42 a yawl:Method ;
+    rdfs:label "request" ;
+    yawl:returnType "long" ;
+    yawl:signature "long request(AbstractResource resource, CalendarEntry calEntry)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.unrequest
+yawl:ResourceCalendar_unrequest_43 a yawl:Method ;
+    rdfs:label "unrequest" ;
+    yawl:returnType "void" ;
+    yawl:signature "void unrequest(long entryID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.confirm
+yawl:ResourceCalendar_confirm_44 a yawl:Method ;
+    rdfs:label "confirm" ;
+    yawl:returnType "void" ;
+    yawl:signature "void confirm(long entryID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.unconfirm
+yawl:ResourceCalendar_unconfirm_45 a yawl:Method ;
+    rdfs:label "unconfirm" ;
+    yawl:returnType "void" ;
+    yawl:signature "void unconfirm(long entryID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.canConfirm
+yawl:ResourceCalendar_canConfirm_46 a yawl:Method ;
+    rdfs:label "canConfirm" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean canConfirm(long entryID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.canUnconfirm
+yawl:ResourceCalendar_canUnconfirm_47 a yawl:Method ;
+    rdfs:label "canUnconfirm" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean canUnconfirm(long entryID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.strToStatus
+yawl:ResourceCalendar_strToStatus_48 a yawl:Method ;
+    rdfs:label "strToStatus" ;
+    yawl:returnType "Status" ;
+    yawl:signature "Status strToStatus(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.addTransientEntry
+yawl:ResourceCalendar_addTransientEntry_49 a yawl:Method ;
+    rdfs:label "addTransientEntry" ;
+    yawl:returnType "long" ;
+    yawl:signature "long addTransientEntry(CalendarEntry entry)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.addTransientEntry
+yawl:ResourceCalendar_addTransientEntry_50 a yawl:Method ;
+    rdfs:label "addTransientEntry" ;
+    yawl:returnType "long" ;
+    yawl:signature "long addTransientEntry(String id, long startTime, long endTime, Status status, int workload, String agent)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.updateTransientEntry
+yawl:ResourceCalendar_updateTransientEntry_51 a yawl:Method ;
+    rdfs:label "updateTransientEntry" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateTransientEntry(long entryID, String newStatus)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.removeTransientEntries
+yawl:ResourceCalendar_removeTransientEntries_52 a yawl:Method ;
+    rdfs:label "removeTransientEntries" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeTransientEntries(Map transientMap)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.freeResourcesForCase
+yawl:ResourceCalendar_freeResourcesForCase_53 a yawl:Method ;
+    rdfs:label "freeResourcesForCase" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set freeResourcesForCase(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.addEntry
+yawl:ResourceCalendar_addEntry_54 a yawl:Method ;
+    rdfs:label "addEntry" ;
+    yawl:returnType "long" ;
+    yawl:signature "long addEntry(String id, long startTime, long endTime, Status status, int workload, String agent, String comment)" ;
+    rdfs:comment """Adds an entry to the Calendar table. @param id either the resource's id or an Entry value (for multiple resources) @param startTime the date/time when the resource's unavailability starts @param endTime the date/time when the resource's unavailability ends @param status the resource's schedule status @param workload the percentage workload (1-100) @param agent the id of the user or service that is adding the entry @param comment an optional comment string @return the identifier of the added entr""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.addEntry
+yawl:ResourceCalendar_addEntry_55 a yawl:Method ;
+    rdfs:label "addEntry" ;
+    yawl:returnType "long" ;
+    yawl:signature "long addEntry(CalendarEntry entry)" ;
+    rdfs:comment """Adds an entry to the Calendar table. @param entry the CalendarEntry to add @return the identifier of the added entry @throws CalendarException if invalid parameters are passed, or the addition otherwise fails""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.getEntries
+yawl:ResourceCalendar_getEntries_56 a yawl:Method ;
+    rdfs:label "getEntries" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getEntries(String id)" ;
+    rdfs:comment """Gets the current list of calendar entries for a resource @param id the resource's id or the Entry type to get the entries for @return the list of corresponding entries""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.getEntries
+yawl:ResourceCalendar_getEntries_57 a yawl:Method ;
+    rdfs:label "getEntries" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getEntries(String id, long from, long to, boolean immediateCommit)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.getEntries
+yawl:ResourceCalendar_getEntries_58 a yawl:Method ;
+    rdfs:label "getEntries" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getEntries(String id, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.getEntries
+yawl:ResourceCalendar_getEntries_59 a yawl:Method ;
+    rdfs:label "getEntries" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getEntries(ResourceGroup group, long from, long to, boolean immediateCommit)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.getEntries
+yawl:ResourceCalendar_getEntries_60 a yawl:Method ;
+    rdfs:label "getEntries" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getEntries(ResourceGroup group, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.getEntries
+yawl:ResourceCalendar_getEntries_61 a yawl:Method ;
+    rdfs:label "getEntries" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getEntries(AbstractResource resource, long from, long to, boolean immediateCommit)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.getEntries
+yawl:ResourceCalendar_getEntries_62 a yawl:Method ;
+    rdfs:label "getEntries" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getEntries(AbstractResource resource, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.updateEntry
+yawl:ResourceCalendar_updateEntry_63 a yawl:Method ;
+    rdfs:label "updateEntry" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateEntry(CalendarEntry entry)" ;
+    rdfs:comment """Updates and saves an existing calendar entry @param entry the entry to update""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.removeEntry
+yawl:ResourceCalendar_removeEntry_64 a yawl:Method ;
+    rdfs:label "removeEntry" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeEntry(long entryID)" ;
+    rdfs:comment """Removes an existing calendar entry @param entryID the id of the calendar entry to remove @return true if the removal was successful""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.removeEntry
+yawl:ResourceCalendar_removeEntry_65 a yawl:Method ;
+    rdfs:label "removeEntry" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeEntry(CalendarEntry entry)" ;
+    rdfs:comment """Removes an existing calendar entry @param entry the calendar entry to remove""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.removeEntries
+yawl:ResourceCalendar_removeEntries_66 a yawl:Method ;
+    rdfs:label "removeEntries" ;
+    yawl:returnType "int" ;
+    yawl:signature "int removeEntries(AbstractResource resource)" ;
+    rdfs:comment """Removes all entries for a resource @param resource the resource to remove the entries for @return the number of entries removed""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.removeEntries
+yawl:ResourceCalendar_removeEntries_67 a yawl:Method ;
+    rdfs:label "removeEntries" ;
+    yawl:returnType "int" ;
+    yawl:signature "int removeEntries(String id)" ;
+    rdfs:comment """Removes all entries for a resource @param id the identifier of the resource to remove the entries for @return the number of entries removed""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.removeEntries
+yawl:ResourceCalendar_removeEntries_68 a yawl:Method ;
+    rdfs:label "removeEntries" ;
+    yawl:returnType "int" ;
+    yawl:signature "int removeEntries(AbstractResource resource, long from, long to)" ;
+    rdfs:comment """Removes all entries for a resource within a specified period @param resource the resource to remove the entries for @param from the start of the date/time range @param to the end of the date/time range @return the number of entries removed""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.removeEntries
+yawl:ResourceCalendar_removeEntries_69 a yawl:Method ;
+    rdfs:label "removeEntries" ;
+    yawl:returnType "int" ;
+    yawl:signature "int removeEntries(String id, long from, long to)" ;
+    rdfs:comment """Removes all entries for a resource within a specified period @param id the identifier of the resource to remove the entries for @param from the start of the date/time range @param to the end of the date/time range @return the number of entries removed""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.createIDListForQuery
+yawl:ResourceCalendar_createIDListForQuery_70 a yawl:Method ;
+    rdfs:label "createIDListForQuery" ;
+    yawl:returnType "List" ;
+    yawl:signature "List createIDListForQuery(String resourceID, boolean isParticipant)" ;
+    rdfs:comment """Creates a list of ids to match against for a query. An entry may match the resource's particular id, or 'AllResources' (applies to all) or all resources of its type (human or non-human) @param resourceID the resource to query for @param isParticipant true for human resources, false for non-human resources @return the list of possible id values to match""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.getEntryString
+yawl:ResourceCalendar_getEntryString_71 a yawl:Method ;
+    rdfs:label "getEntryString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEntryString(ResourceGroup entry)" ;
+    rdfs:comment """Returns a string corresponding to the entry type @param entry the entry type @return its matching string @pre entry is a valid Entry type""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.entriesToTimeSlots
+yawl:ResourceCalendar_entriesToTimeSlots_72 a yawl:Method ;
+    rdfs:label "entriesToTimeSlots" ;
+    yawl:returnType "List" ;
+    yawl:signature "List entriesToTimeSlots(List entries)" ;
+    rdfs:comment """Converts a list of CalendarEntry objects to a list of TimeSlot objects @param entries the list of CalendarEntry objects @return the corresponding list of TimeSlot objects""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.canUpdateStatus
+yawl:ResourceCalendar_canUpdateStatus_73 a yawl:Method ;
+    rdfs:label "canUpdateStatus" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean canUpdateStatus(long entryID, Status requiredStatus)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.hasStatus
+yawl:ResourceCalendar_hasStatus_74 a yawl:Method ;
+    rdfs:label "hasStatus" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasStatus(long entryID, String status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendar.updateStatus
+yawl:ResourceCalendar_updateStatus_75 a yawl:Method ;
+    rdfs:label "updateStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateStatus(long entryID, Status oldStatus, Status newStatus)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.removeEntry
+yawl:ResourceCalendar_removeEntry_76 a yawl:Method ;
+    rdfs:label "removeEntry" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeEntry(long entryID, Status status)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.removeEntries
+yawl:ResourceCalendar_removeEntries_77 a yawl:Method ;
+    rdfs:label "removeEntries" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeEntries(List entries)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.updateBlockedEntry
+yawl:ResourceCalendar_updateBlockedEntry_78 a yawl:Method ;
+    rdfs:label "updateBlockedEntry" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateBlockedEntry(CalendarEntry blockedEntry, long time)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.checkForClashes
+yawl:ResourceCalendar_checkForClashes_79 a yawl:Method ;
+    rdfs:label "checkForClashes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkForClashes(AbstractResource resource, CalendarEntry entry)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.getEntryWithStatus
+yawl:ResourceCalendar_getEntryWithStatus_80 a yawl:Method ;
+    rdfs:label "getEntryWithStatus" ;
+    yawl:returnType "CalendarEntry" ;
+    yawl:signature "CalendarEntry getEntryWithStatus(long entryID, Status status)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.addEntryIfAvailable
+yawl:ResourceCalendar_addEntryIfAvailable_81 a yawl:Method ;
+    rdfs:label "addEntryIfAvailable" ;
+    yawl:returnType "long" ;
+    yawl:signature "long addEntryIfAvailable(AbstractResource resource, long startTime, long endTime, Status status, String agent, String comment)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.addEntryIfAvailable
+yawl:ResourceCalendar_addEntryIfAvailable_82 a yawl:Method ;
+    rdfs:label "addEntryIfAvailable" ;
+    yawl:returnType "long" ;
+    yawl:signature "long addEntryIfAvailable(AbstractResource resource, CalendarEntry calEntry)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.addBlockedEntry
+yawl:ResourceCalendar_addBlockedEntry_83 a yawl:Method ;
+    rdfs:label "addBlockedEntry" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addBlockedEntry(AbstractResource resource, CalendarEntry entry)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.removeBlockedEntry
+yawl:ResourceCalendar_removeBlockedEntry_84 a yawl:Method ;
+    rdfs:label "removeBlockedEntry" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeBlockedEntry(CalendarEntry entry)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.removeBlockedEntry
+yawl:ResourceCalendar_removeBlockedEntry_85 a yawl:Method ;
+    rdfs:label "removeBlockedEntry" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeBlockedEntry(long chainID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.hasBlockedStatus
+yawl:ResourceCalendar_hasBlockedStatus_86 a yawl:Method ;
+    rdfs:label "hasBlockedStatus" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasBlockedStatus(CalendarEntry entry)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.hasBlockedStatus
+yawl:ResourceCalendar_hasBlockedStatus_87 a yawl:Method ;
+    rdfs:label "hasBlockedStatus" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasBlockedStatus(String status)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.hasBlockedStatus
+yawl:ResourceCalendar_hasBlockedStatus_88 a yawl:Method ;
+    rdfs:label "hasBlockedStatus" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasBlockedStatus(Status status)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.reassignOrRemoveEntries
+yawl:ResourceCalendar_reassignOrRemoveEntries_89 a yawl:Method ;
+    rdfs:label "reassignOrRemoveEntries" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reassignOrRemoveEntries(AbstractResource resource, long startTime, long endTime)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.reassignEntries
+yawl:ResourceCalendar_reassignEntries_90 a yawl:Method ;
+    rdfs:label "reassignEntries" ;
+    yawl:returnType "List" ;
+    yawl:signature "List reassignEntries(AbstractResource resource, long startTime, long endTime)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.reassignEntry
+yawl:ResourceCalendar_reassignEntry_91 a yawl:Method ;
+    rdfs:label "reassignEntry" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean reassignEntry(CalendarEntry entry)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.notifyStatusChange
+yawl:ResourceCalendar_notifyStatusChange_92 a yawl:Method ;
+    rdfs:label "notifyStatusChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void notifyStatusChange(CalendarEntry entry)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceCalendar.getLogEntriesForCase
+yawl:ResourceCalendar_getLogEntriesForCase_93 a yawl:Method ;
+    rdfs:label "getLogEntriesForCase" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getLogEntriesForCase(String caseID)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:ResourceCalendar_TRANSIENT_FLAG a yawl:Field ;
+    rdfs:label "TRANSIENT_FLAG" .
+
+yawl:ResourceCalendar_UNKNOWN_ID_ERR a yawl:Field ;
+    rdfs:label "UNKNOWN_ID_ERR" .
+
+yawl:ResourceCalendar__me a yawl:Field ;
+    rdfs:label "_me" .
+
+yawl:ResourceCalendar__persister a yawl:Field ;
+    rdfs:label "_persister" .
+
+yawl:ResourceCalendar__tx a yawl:Field ;
+    rdfs:label "_tx" .
+
+
+

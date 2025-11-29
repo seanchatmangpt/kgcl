@@ -1,0 +1,656 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.exception.ExceptionService
+yawl:ExceptionService a yawl:Class ;
+    rdfs:label "ExceptionService" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_exception ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/exception/ExceptionService.java"^^xsd:string ;
+    rdfs:comment """The ExceptionService class manages the handling of exceptions that may occur during the life of a case instance. It receives events from the engine via InterfaceX at various milestones for constraint checking, and when certain exceptional events occur. It runs exception handlers when required, which may involve the running of compensatory worklets. It derives from the WorkletService class and uses many of the same methods as those used in the worklet selection process. @author Michael Adams @ver""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ExceptionService_completeInitialisation_1 ;
+    yawl:hasMethod yawl:ExceptionService_handleCaseCancellationEvent_2 ;
+    yawl:hasMethod yawl:ExceptionService_handleCheckWorkItemConstraintEvent_3 ;
+    yawl:hasMethod yawl:ExceptionService_handleCheckCaseConstraintEvent_4 ;
+    yawl:hasMethod yawl:ExceptionService_handleTimeoutEvent_5 ;
+    yawl:hasMethod yawl:ExceptionService_handleTimeout_6 ;
+    yawl:hasMethod yawl:ExceptionService_handleResourceUnavailableException_7 ;
+    yawl:hasMethod yawl:ExceptionService_handleWorkItemAbortException_8 ;
+    yawl:hasMethod yawl:ExceptionService_handleConstraintViolationException_9 ;
+    yawl:hasMethod yawl:ExceptionService_handleItemException_10 ;
+    yawl:hasMethod yawl:ExceptionService_checkConstraints_11 ;
+    yawl:hasMethod yawl:ExceptionService_checkConstraints_12 ;
+    yawl:hasMethod yawl:ExceptionService_getExceptionHandler_13 ;
+    yawl:hasMethod yawl:ExceptionService_raiseException_14 ;
+    yawl:hasMethod yawl:ExceptionService_raiseException_15 ;
+    yawl:hasMethod yawl:ExceptionService_raiseException_16 ;
+    yawl:hasMethod yawl:ExceptionService_processException_17 ;
+    yawl:hasMethod yawl:ExceptionService_doAction_18 ;
+    yawl:hasMethod yawl:ExceptionService_doContinue_19 ;
+    yawl:hasMethod yawl:ExceptionService_doSuspend_20 ;
+    yawl:hasMethod yawl:ExceptionService_doRemove_21 ;
+    yawl:hasMethod yawl:ExceptionService_doCompensate_22 ;
+    yawl:hasMethod yawl:ExceptionService_handleCompletingExceptionWorklet_23 ;
+    yawl:hasMethod yawl:ExceptionService_updateData_24 ;
+    yawl:hasMethod yawl:ExceptionService_suspendWorkItem_25 ;
+    yawl:hasMethod yawl:ExceptionService_suspendWorkItem_26 ;
+    yawl:hasMethod yawl:ExceptionService_suspendCase_27 ;
+    yawl:hasMethod yawl:ExceptionService_removeWorkItem_28 ;
+    yawl:hasMethod yawl:ExceptionService_removeCase_29 ;
+    yawl:hasMethod yawl:ExceptionService_removeCase_30 ;
+    yawl:hasMethod yawl:ExceptionService_removeAllCases_31 ;
+    yawl:hasMethod yawl:ExceptionService_removeAncestorCases_32 ;
+    yawl:hasMethod yawl:ExceptionService_getFirstAncestorCase_33 ;
+    yawl:hasMethod yawl:ExceptionService_forceCompleteWorkItem_34 ;
+    yawl:hasMethod yawl:ExceptionService_restartWorkItem_35 ;
+    yawl:hasMethod yawl:ExceptionService_failWorkItem_36 ;
+    yawl:hasMethod yawl:ExceptionService_updateWIR_37 ;
+    yawl:hasMethod yawl:ExceptionService_updateItemData_38 ;
+    yawl:hasMethod yawl:ExceptionService_updateCaseData_39 ;
+    yawl:hasMethod yawl:ExceptionService_mergeCompletionData_40 ;
+    yawl:hasMethod yawl:ExceptionService_cancelWorkletsForCase_41 ;
+    yawl:hasMethod yawl:ExceptionService_cancelWorkletsForRunner_42 ;
+    yawl:hasMethod yawl:ExceptionService_moveToExecuting_43 ;
+    yawl:hasMethod yawl:ExceptionService_getRunningWorklets_44 ;
+    yawl:hasMethod yawl:ExceptionService_getExternalTriggersForItem_45 ;
+    yawl:hasMethod yawl:ExceptionService_cleanseWorkletRunners_46 ;
+    yawl:hasMethod yawl:ExceptionService_getWorkItemRecordsForTaskInstance_47 ;
+    yawl:hasMethod yawl:ExceptionService_getIntegralID_48 ;
+    yawl:hasMethod yawl:ExceptionService_getWorkItemRecord_49 ;
+    yawl:hasMethod yawl:ExceptionService_getSpecIDForCaseID_50 ;
+    yawl:hasMethod yawl:ExceptionService_getExternalTriggersForCase_51 ;
+    yawl:hasMethod yawl:ExceptionService_raiseExternalException_52 ;
+    yawl:hasMethod yawl:ExceptionService_getCaseData_53 ;
+    yawl:hasMethod yawl:ExceptionService_raiseException_54 ;
+    yawl:hasMethod yawl:ExceptionService_replaceWorklet_55 ;
+    yawl:hasMethod yawl:ExceptionService_reevaluate_56 ;
+    yawl:hasMethod yawl:ExceptionService_isWorkletCase_57 ;
+    yawl:hasMethod yawl:ExceptionService_getStatus_58 ;
+    yawl:hasMethod yawl:ExceptionService_restoreDataSets_59 ;
+    yawl:hasMethod yawl:ExceptionService_augmentItemData_60 ;
+    yawl:hasMethod yawl:ExceptionService_blendInCaseData_61 ;
+    yawl:hasMethod yawl:ExceptionService_augmentExternalData_62 ;
+    yawl:hasMethod yawl:ExceptionService_raise_63 ;
+    yawl:hasField yawl:ExceptionService__log ;
+    yawl:hasField yawl:ExceptionService__actions ;
+    yawl:hasField yawl:ExceptionService__runners ;
+    yawl:hasField yawl:ExceptionService__wService ;
+    yawl:hasField yawl:ExceptionService__mutex ;
+    .
+
+
+# Method: ExceptionService.completeInitialisation
+yawl:ExceptionService_completeInitialisation_1 a yawl:Method ;
+    rdfs:label "completeInitialisation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void completeInitialisation(boolean persisting)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExceptionService.handleCaseCancellationEvent
+yawl:ExceptionService_handleCaseCancellationEvent_2 a yawl:Method ;
+    rdfs:label "handleCaseCancellationEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCaseCancellationEvent(String caseID)" ;
+    rdfs:comment """Handles a notification from the Engine that a case has been cancelled. If the case passed has any exception handling worklets running for it, they are also cancelled. @param caseID the case cancelled by the Engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExceptionService.handleCheckWorkItemConstraintEvent
+yawl:ExceptionService_handleCheckWorkItemConstraintEvent_3 a yawl:Method ;
+    rdfs:label "handleCheckWorkItemConstraintEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCheckWorkItemConstraintEvent(WorkItemRecord wir, String data, boolean preCheck)" ;
+    rdfs:comment """Handles a notification from the Engine that a workitem is either starting or has completed. Checks the rules for the workitem, and evaluates any pre-constraints or post-constraints (if any), and if a constraint has been violated, raises the appropriate exception. @param wir the workitem that triggered the event @param data the current case data (i.e. immediately prior to item start or after item completion) @param preCheck true for pre-constraints, false for post-constraints""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExceptionService.handleCheckCaseConstraintEvent
+yawl:ExceptionService_handleCheckCaseConstraintEvent_4 a yawl:Method ;
+    rdfs:label "handleCheckCaseConstraintEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCheckCaseConstraintEvent(YSpecificationID specID, String caseID, String data, boolean preCheck)" ;
+    rdfs:comment """Handles a notification from the Engine that a case is either starting or has completed. Checks the rules for the case and evaluates any pre-constraints or post-constraints (if any), and if a constraint has been violated, raises the appropriate exception. @param specID specification id of the case @param caseID the id for the case @param data the case-level data params @param preCheck true for pre-constraints, false for post-constraints""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExceptionService.handleTimeoutEvent
+yawl:ExceptionService_handleTimeoutEvent_5 a yawl:Method ;
+    rdfs:label "handleTimeoutEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleTimeoutEvent(WorkItemRecord wir, String taskList)" ;
+    rdfs:comment """Handles a notification from the Engine that a workitem associated with the timeService has timed out. Checks the rules for timeout for the other items associated with this timeout item and raises thr appropriate exception. @param wir - the item that caused the timeout event @param taskList - a list of taskids of those tasks that were running in parallel with the timeout task""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExceptionService.handleTimeout
+yawl:ExceptionService_handleTimeout_6 a yawl:Method ;
+    rdfs:label "handleTimeout" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleTimeout(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.handleResourceUnavailableException
+yawl:ExceptionService_handleResourceUnavailableException_7 a yawl:Method ;
+    rdfs:label "handleResourceUnavailableException" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleResourceUnavailableException(String resourceID, WorkItemRecord wir, String caseData, boolean primary)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExceptionService.handleWorkItemAbortException
+yawl:ExceptionService_handleWorkItemAbortException_8 a yawl:Method ;
+    rdfs:label "handleWorkItemAbortException" ;
+    yawl:returnType "String" ;
+    yawl:signature "String handleWorkItemAbortException(WorkItemRecord wir, String data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExceptionService.handleConstraintViolationException
+yawl:ExceptionService_handleConstraintViolationException_9 a yawl:Method ;
+    rdfs:label "handleConstraintViolationException" ;
+    yawl:returnType "String" ;
+    yawl:signature "String handleConstraintViolationException(WorkItemRecord wir, String data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExceptionService.handleItemException
+yawl:ExceptionService_handleItemException_10 a yawl:Method ;
+    rdfs:label "handleItemException" ;
+    yawl:returnType "String" ;
+    yawl:signature "String handleItemException(WorkItemRecord wir, String dataStr, RuleType ruleType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.checkConstraints
+yawl:ExceptionService_checkConstraints_11 a yawl:Method ;
+    rdfs:label "checkConstraints" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkConstraints(YSpecificationID specID, String caseID, Element data, boolean pre)" ;
+    rdfs:comment """Checks for case-level constraint violations. @param pre true for pre-constraints, false for post-constraints""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.checkConstraints
+yawl:ExceptionService_checkConstraints_12 a yawl:Method ;
+    rdfs:label "checkConstraints" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkConstraints(WorkItemRecord wir, Element data, boolean pre)" ;
+    rdfs:comment """Checks for item-level constraint violations. @param wir the WorkItemRecord for the workitem @param pre true for pre-constraints, false for post-constraints""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.getExceptionHandler
+yawl:ExceptionService_getExceptionHandler_13 a yawl:Method ;
+    rdfs:label "getExceptionHandler" ;
+    yawl:returnType "RdrPair" ;
+    yawl:signature "RdrPair getExceptionHandler(YSpecificationID specID, String taskID, Element data, RuleType xType)" ;
+    rdfs:comment """Discovers whether this case or item has rules for this exception type, and if so, returns the result of the rule evaluation. Note that if the conclusion returned from the search is empty, no exception has occurred. @param taskID item's task id, or null for case-level exception @param xType the type of exception triggered @return an RdrConclusion representing an exception handling process, or null if no rules are defined for these criteria""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.raiseException
+yawl:ExceptionService_raiseException_14 a yawl:Method ;
+    rdfs:label "raiseException" ;
+    yawl:returnType "void" ;
+    yawl:signature "void raiseException(String caseID, RdrPair pair, Element data, RuleType xType)" ;
+    rdfs:comment """Raises a case-level exception by creating a ExletRunner for the exception process, then starting the processing of it @param pair represents the exception handling process @param xType the int descriptor of the exception type (WorkletService xType)""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.raiseException
+yawl:ExceptionService_raiseException_15 a yawl:Method ;
+    rdfs:label "raiseException" ;
+    yawl:returnType "void" ;
+    yawl:signature "void raiseException(WorkItemRecord wir, RdrPair pair, Element data, RuleType xType)" ;
+    rdfs:comment """Raises an item-level exception - see above for more info @param pair represents the exception handling process @param wir the WorkItemRecord of the item that triggered the event @param xType the int descriptor of the exception type (WorkletService xType)""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.raiseException
+yawl:ExceptionService_raiseException_16 a yawl:Method ;
+    rdfs:label "raiseException" ;
+    yawl:returnType "void" ;
+    yawl:signature "void raiseException(ExletRunner runner, RdrPair pair, Element data)" ;
+    rdfs:comment """Raises an external exception - see above for more info @param pair represents the exception handling process""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.processException
+yawl:ExceptionService_processException_17 a yawl:Method ;
+    rdfs:label "processException" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processException(ExletRunner runner)" ;
+    rdfs:comment """Begin (or continue after a worklet completes) the exception handling process @param runner the HandlerRunner for this handler process""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.doAction
+yawl:ExceptionService_doAction_18 a yawl:Method ;
+    rdfs:label "doAction" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean doAction(ExletRunner runner)" ;
+    rdfs:comment """Perform a single step in an exception handing process @param runner the HandlerRunner for this exception handling process @return true if ok for processing to continue""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.doContinue
+yawl:ExceptionService_doContinue_19 a yawl:Method ;
+    rdfs:label "doContinue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doContinue(ExletRunner runner)" ;
+    rdfs:comment """Calls the appropriate continue method for the exception target scope @param runner the HandlerRunner stepping through this exception process""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.doSuspend
+yawl:ExceptionService_doSuspend_20 a yawl:Method ;
+    rdfs:label "doSuspend" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doSuspend(ExletRunner runner)" ;
+    rdfs:comment """Calls the appropriate suspend method for the exception target scope @param runner the HandlerRunner stepping through this exception process""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.doRemove
+yawl:ExceptionService_doRemove_21 a yawl:Method ;
+    rdfs:label "doRemove" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doRemove(ExletRunner runner)" ;
+    rdfs:comment """Calls the appropriate remove method for the exception target scope @param runner the HandlerRunner stepping through this exception process""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.doCompensate
+yawl:ExceptionService_doCompensate_22 a yawl:Method ;
+    rdfs:label "doCompensate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean doCompensate(ExletRunner runner, String target)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.handleCompletingExceptionWorklet
+yawl:ExceptionService_handleCompletingExceptionWorklet_23 a yawl:Method ;
+    rdfs:label "handleCompletingExceptionWorklet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCompletingExceptionWorklet(String caseId, Element wlCasedata, boolean cancelled)" ;
+    rdfs:comment """Deals with the end of an exception worklet case. @param caseId - the id of the completing case @param wlCasedata - the completing case's datalist Element @param cancelled - true if the worklet has been cancelled, false for a normal completion""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.updateData
+yawl:ExceptionService_updateData_24 a yawl:Method ;
+    rdfs:label "updateData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateData(ExletRunner runner, Element wlCasedata)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.suspendWorkItem
+yawl:ExceptionService_suspendWorkItem_25 a yawl:Method ;
+    rdfs:label "suspendWorkItem" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean suspendWorkItem(ExletRunner hr)" ;
+    rdfs:comment """Suspends the specified workitem @param hr the HandlerRunner instance with the workitem to suspend""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.suspendWorkItem
+yawl:ExceptionService_suspendWorkItem_26 a yawl:Method ;
+    rdfs:label "suspendWorkItem" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean suspendWorkItem(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExceptionService.suspendCase
+yawl:ExceptionService_suspendCase_27 a yawl:Method ;
+    rdfs:label "suspendCase" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set suspendCase(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExceptionService.removeWorkItem
+yawl:ExceptionService_removeWorkItem_28 a yawl:Method ;
+    rdfs:label "removeWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeWorkItem(WorkItemRecord wir)" ;
+    rdfs:comment """Cancels the workitem specified @param wir the workitem (record) to cancel""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.removeCase
+yawl:ExceptionService_removeCase_29 a yawl:Method ;
+    rdfs:label "removeCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeCase(ExletRunner hr)" ;
+    rdfs:comment """Cancels the specified case @param hr the HandlerRunner instance with the case to cancel""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.removeCase
+yawl:ExceptionService_removeCase_30 a yawl:Method ;
+    rdfs:label "removeCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeCase(String caseID)" ;
+    rdfs:comment """Cancels the specified case @param caseID the id of the case to cancel""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.removeAllCases
+yawl:ExceptionService_removeAllCases_31 a yawl:Method ;
+    rdfs:label "removeAllCases" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeAllCases(ExletRunner runner)" ;
+    rdfs:comment """Cancels all running instances of the specification passed""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.removeAncestorCases
+yawl:ExceptionService_removeAncestorCases_32 a yawl:Method ;
+    rdfs:label "removeAncestorCases" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeAncestorCases(ExletRunner runner)" ;
+    rdfs:comment """Cancels all running worklet cases in the hierarchy of handlers @param runner - the runner for the child worklet case""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.getFirstAncestorCase
+yawl:ExceptionService_getFirstAncestorCase_33 a yawl:Method ;
+    rdfs:label "getFirstAncestorCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFirstAncestorCase(ExletRunner runner)" ;
+    rdfs:comment """returns the ultimate ancestor case of the runner passed""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.forceCompleteWorkItem
+yawl:ExceptionService_forceCompleteWorkItem_34 a yawl:Method ;
+    rdfs:label "forceCompleteWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void forceCompleteWorkItem(WorkItemRecord wir, Element out)" ;
+    rdfs:comment """ForceCompletes the specified workitem @param wir the item to ForceComplete @param out the final data params for the workitem""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.restartWorkItem
+yawl:ExceptionService_restartWorkItem_35 a yawl:Method ;
+    rdfs:label "restartWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restartWorkItem(WorkItemRecord wir)" ;
+    rdfs:comment """restarts the specified workitem""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.failWorkItem
+yawl:ExceptionService_failWorkItem_36 a yawl:Method ;
+    rdfs:label "failWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void failWorkItem(WorkItemRecord wir)" ;
+    rdfs:comment """Cancels a workitem and marks it as failed""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.updateWIR
+yawl:ExceptionService_updateWIR_37 a yawl:Method ;
+    rdfs:label "updateWIR" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord updateWIR(WorkItemRecord wir)" ;
+    rdfs:comment """Refreshes a locally cached WorkItemRecord with the Engine stored one @param wir the item to refresh @return the refreshed workitem, or the unchanged workitem on exception""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.updateItemData
+yawl:ExceptionService_updateItemData_38 a yawl:Method ;
+    rdfs:label "updateItemData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateItemData(ExletRunner runner, Element wlData)" ;
+    rdfs:comment """Updates a workitem's data param values with the output data of a completing worklet, then copies the updates to the engine stored workitem @param runner the HandlerRunner containing the exception handling process @param wlData the worklet's output data params""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.updateCaseData
+yawl:ExceptionService_updateCaseData_39 a yawl:Method ;
+    rdfs:label "updateCaseData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateCaseData(ExletRunner runner, Element wlData)" ;
+    rdfs:comment """Updates the case-level data params with the output data of a completing worklet, then copies the updates to the engine stored caseData @param runner the HandlerRunner containing the exception handling process @param wlData the worklet's output data params""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.mergeCompletionData
+yawl:ExceptionService_mergeCompletionData_40 a yawl:Method ;
+    rdfs:label "mergeCompletionData" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element mergeCompletionData(WorkItemRecord wir, Element in, Element out)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.cancelWorkletsForCase
+yawl:ExceptionService_cancelWorkletsForCase_41 a yawl:Method ;
+    rdfs:label "cancelWorkletsForCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancelWorkletsForCase(String caseID)" ;
+    rdfs:comment """cancels all worklets running as exception handlers for a case when that parent case is cancelled""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.cancelWorkletsForRunner
+yawl:ExceptionService_cancelWorkletsForRunner_42 a yawl:Method ;
+    rdfs:label "cancelWorkletsForRunner" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean cancelWorkletsForRunner(ExletRunner runner)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.moveToExecuting
+yawl:ExceptionService_moveToExecuting_43 a yawl:Method ;
+    rdfs:label "moveToExecuting" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord moveToExecuting(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.getRunningWorklets
+yawl:ExceptionService_getRunningWorklets_44 a yawl:Method ;
+    rdfs:label "getRunningWorklets" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getRunningWorklets()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExceptionService.getExternalTriggersForItem
+yawl:ExceptionService_getExternalTriggersForItem_45 a yawl:Method ;
+    rdfs:label "getExternalTriggersForItem" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getExternalTriggersForItem(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExceptionService.cleanseWorkletRunners
+yawl:ExceptionService_cleanseWorkletRunners_46 a yawl:Method ;
+    rdfs:label "cleanseWorkletRunners" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cleanseWorkletRunners(Set toRemove)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExceptionService.getWorkItemRecordsForTaskInstance
+yawl:ExceptionService_getWorkItemRecordsForTaskInstance_47 a yawl:Method ;
+    rdfs:label "getWorkItemRecordsForTaskInstance" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getWorkItemRecordsForTaskInstance(YSpecificationID specID, String taskID)" ;
+    rdfs:comment """Retrieves a list of all workitems that are instances of the specified task within the specified spec @param specID @param taskID @return the list of workitems""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.getIntegralID
+yawl:ExceptionService_getIntegralID_48 a yawl:Method ;
+    rdfs:label "getIntegralID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getIntegralID(String id)" ;
+    rdfs:comment """Strips off the non-integral part of a case id @param id the case id to fix @return the integral part of the caseid passed""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.getWorkItemRecord
+yawl:ExceptionService_getWorkItemRecord_49 a yawl:Method ;
+    rdfs:label "getWorkItemRecord" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord getWorkItemRecord(String itemID)" ;
+    rdfs:comment """returns the specified wir for the id passed""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExceptionService.getSpecIDForCaseID
+yawl:ExceptionService_getSpecIDForCaseID_50 a yawl:Method ;
+    rdfs:label "getSpecIDForCaseID" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getSpecIDForCaseID(String caseID)" ;
+    rdfs:comment """returns the spec id for the specified case id""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExceptionService.getExternalTriggersForCase
+yawl:ExceptionService_getExternalTriggersForCase_51 a yawl:Method ;
+    rdfs:label "getExternalTriggersForCase" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getExternalTriggersForCase(String caseID)" ;
+    rdfs:comment """retrieves a complete list of external exception triggers from the ruleset for the specified case @param caseID - the id of the case to get the triggers for @return the (String) list of triggers""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExceptionService.raiseExternalException
+yawl:ExceptionService_raiseExternalException_52 a yawl:Method ;
+    rdfs:label "raiseExternalException" ;
+    yawl:returnType "void" ;
+    yawl:signature "void raiseExternalException(String level, String id, String trigger)" ;
+    rdfs:comment """Raise an externally triggered exception @param level - the level of the exception (case/item) @param id - the id of the case or item on which the exception is being raised @param trigger - the identifier of (or reason for) the external exception""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExceptionService.getCaseData
+yawl:ExceptionService_getCaseData_53 a yawl:Method ;
+    rdfs:label "getCaseData" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getCaseData(String caseID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.raiseException
+yawl:ExceptionService_raiseException_54 a yawl:Method ;
+    rdfs:label "raiseException" ;
+    yawl:returnType "String" ;
+    yawl:signature "String raiseException(WorkItemRecord wir, RuleType ruleType, RdrConclusion conclusion)" ;
+    rdfs:comment """Raises an exception (triggered via the API) using the conclusion passed in @param wir the wir to raise the exception for @param ruleType the exception rule type @param conclusion a populated conclusion object""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExceptionService.replaceWorklet
+yawl:ExceptionService_replaceWorklet_55 a yawl:Method ;
+    rdfs:label "replaceWorklet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String replaceWorklet(RuleType xType, String caseID, String itemID)" ;
+    rdfs:comment """Replaces a running worklet case with another worklet case after an amendment to the ruleset for this exception. Called by WorkletGateway after a call from the Editor that the ruleset has been updated. Overrides the WorkletService equivalent - This one looks after exceptions, that one looks after selections @param xType - the type of exception that launched the worklet @param caseID - the id of the original checked out case @param itemID - the id of the original checked out workitem @return a str""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExceptionService.reevaluate
+yawl:ExceptionService_reevaluate_56 a yawl:Method ;
+    rdfs:label "reevaluate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reevaluate(ExletRunner runner, RuleType xType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.isWorkletCase
+yawl:ExceptionService_isWorkletCase_57 a yawl:Method ;
+    rdfs:label "isWorkletCase" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isWorkletCase(String caseID)" ;
+    rdfs:comment """returns true if case specified is a worklet instance""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExceptionService.getStatus
+yawl:ExceptionService_getStatus_58 a yawl:Method ;
+    rdfs:label "getStatus" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStatus(String taskID)" ;
+    rdfs:comment """stub method called from RdrConditionFunctions class""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExceptionService.restoreDataSets
+yawl:ExceptionService_restoreDataSets_59 a yawl:Method ;
+    rdfs:label "restoreDataSets" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restoreDataSets()" ;
+    rdfs:comment """restores the contents of the running datasets after a web server restart""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.augmentItemData
+yawl:ExceptionService_augmentItemData_60 a yawl:Method ;
+    rdfs:label "augmentItemData" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element augmentItemData(WorkItemRecord wir, String dataStr)" ;
+    rdfs:comment """Adds the contents of the workitem record to the case data for this case - thus providing information about the workitem to the ruleset @param wir - the wir being tested for an exception""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.blendInCaseData
+yawl:ExceptionService_blendInCaseData_61 a yawl:Method ;
+    rdfs:label "blendInCaseData" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element blendInCaseData(WorkItemRecord wir, Element itemData)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.augmentExternalData
+yawl:ExceptionService_augmentExternalData_62 a yawl:Method ;
+    rdfs:label "augmentExternalData" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element augmentExternalData(Element data, String triggerValue)" ;
+    rdfs:comment """Adds an external exception trigger to the case data so that the correct RDR can be found for it @param triggerValue - the string value of the external trigger""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ExceptionService.raise
+yawl:ExceptionService_raise_63 a yawl:Method ;
+    rdfs:label "raise" ;
+    yawl:returnType "void" ;
+    yawl:signature "void raise(String msg)" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:ExceptionService__log a yawl:Field ;
+    rdfs:label "_log" .
+
+yawl:ExceptionService__actions a yawl:Field ;
+    rdfs:label "_actions" .
+
+yawl:ExceptionService__runners a yawl:Field ;
+    rdfs:label "_runners" .
+
+yawl:ExceptionService__wService a yawl:Field ;
+    rdfs:label "_wService" .
+
+yawl:ExceptionService__mutex a yawl:Field ;
+    rdfs:label "_mutex" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_worklet_rdr a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.worklet.rdr" .
+
+

@@ -1,0 +1,172 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.elements.YFlow
+yawl:YFlow a yawl:Class ;
+    rdfs:label "YFlow" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_elements ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/elements/YFlow.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 25/09/2003 Time: 18:29:10""" ;
+    yawl:implements yawl:Comparable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YFlow_getPriorElement_1 ;
+    yawl:hasMethod yawl:YFlow_getNextElement_2 ;
+    yawl:hasMethod yawl:YFlow_getXpathPredicate_3 ;
+    yawl:hasMethod yawl:YFlow_setXpathPredicate_4 ;
+    yawl:hasMethod yawl:YFlow_getEvalOrdering_5 ;
+    yawl:hasMethod yawl:YFlow_setEvalOrdering_6 ;
+    yawl:hasMethod yawl:YFlow_isDefaultFlow_7 ;
+    yawl:hasMethod yawl:YFlow_setIsDefaultFlow_8 ;
+    yawl:hasMethod yawl:YFlow_getDocumentation_9 ;
+    yawl:hasMethod yawl:YFlow_setDocumentation_10 ;
+    yawl:hasMethod yawl:YFlow_verify_11 ;
+    yawl:hasMethod yawl:YFlow_toString_12 ;
+    yawl:hasMethod yawl:YFlow_toXML_13 ;
+    yawl:hasMethod yawl:YFlow_compareTo_14 ;
+    yawl:hasField yawl:YFlow__priorElement ;
+    yawl:hasField yawl:YFlow__nextElement ;
+    yawl:hasField yawl:YFlow__xpathPredicate ;
+    yawl:hasField yawl:YFlow__evalOrdering ;
+    yawl:hasField yawl:YFlow__isDefaultFlow ;
+    yawl:hasField yawl:YFlow__documentation ;
+    .
+
+
+# Method: YFlow.getPriorElement
+yawl:YFlow_getPriorElement_1 a yawl:Method ;
+    rdfs:label "getPriorElement" ;
+    yawl:returnType "YExternalNetElement" ;
+    yawl:signature "YExternalNetElement getPriorElement()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YFlow.getNextElement
+yawl:YFlow_getNextElement_2 a yawl:Method ;
+    rdfs:label "getNextElement" ;
+    yawl:returnType "YExternalNetElement" ;
+    yawl:signature "YExternalNetElement getNextElement()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YFlow.getXpathPredicate
+yawl:YFlow_getXpathPredicate_3 a yawl:Method ;
+    rdfs:label "getXpathPredicate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getXpathPredicate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YFlow.setXpathPredicate
+yawl:YFlow_setXpathPredicate_4 a yawl:Method ;
+    rdfs:label "setXpathPredicate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setXpathPredicate(String xpathPredicate)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YFlow.getEvalOrdering
+yawl:YFlow_getEvalOrdering_5 a yawl:Method ;
+    rdfs:label "getEvalOrdering" ;
+    yawl:returnType "Integer" ;
+    yawl:signature "Integer getEvalOrdering()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YFlow.setEvalOrdering
+yawl:YFlow_setEvalOrdering_6 a yawl:Method ;
+    rdfs:label "setEvalOrdering" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEvalOrdering(Integer evalOrdering)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YFlow.isDefaultFlow
+yawl:YFlow_isDefaultFlow_7 a yawl:Method ;
+    rdfs:label "isDefaultFlow" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isDefaultFlow()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YFlow.setIsDefaultFlow
+yawl:YFlow_setIsDefaultFlow_8 a yawl:Method ;
+    rdfs:label "setIsDefaultFlow" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setIsDefaultFlow(boolean isDefault)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YFlow.getDocumentation
+yawl:YFlow_getDocumentation_9 a yawl:Method ;
+    rdfs:label "getDocumentation" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDocumentation()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YFlow.setDocumentation
+yawl:YFlow_setDocumentation_10 a yawl:Method ;
+    rdfs:label "setDocumentation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDocumentation(String documentation)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YFlow.verify
+yawl:YFlow_verify_11 a yawl:Method ;
+    rdfs:label "verify" ;
+    yawl:returnType "void" ;
+    yawl:signature "void verify(YExternalNetElement caller, YVerificationHandler handler)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YFlow.toString
+yawl:YFlow_toString_12 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YFlow.toXML
+yawl:YFlow_toXML_13 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YFlow.compareTo
+yawl:YFlow_compareTo_14 a yawl:Method ;
+    rdfs:label "compareTo" ;
+    yawl:returnType "int" ;
+    yawl:signature "int compareTo(YFlow other)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YFlow__priorElement a yawl:Field ;
+    rdfs:label "_priorElement" .
+
+yawl:YFlow__nextElement a yawl:Field ;
+    rdfs:label "_nextElement" .
+
+yawl:YFlow__xpathPredicate a yawl:Field ;
+    rdfs:label "_xpathPredicate" .
+
+yawl:YFlow__evalOrdering a yawl:Field ;
+    rdfs:label "_evalOrdering" .
+
+yawl:YFlow__isDefaultFlow a yawl:Field ;
+    rdfs:label "_isDefaultFlow" .
+
+yawl:YFlow__documentation a yawl:Field ;
+    rdfs:label "_documentation" .
+
+
+

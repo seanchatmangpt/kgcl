@@ -1,0 +1,94 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.engine
+yawl:org_yawlfoundation_yawl_engine a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.engine" .
+# Class: org.yawlfoundation.yawl.engine.YNetData
+yawl:YNetData a yawl:Class ;
+    rdfs:label "YNetData" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/YNetData.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YNetData_getData_1 ;
+    yawl:hasMethod yawl:YNetData_setData_2 ;
+    yawl:hasMethod yawl:YNetData_setId_3 ;
+    yawl:hasMethod yawl:YNetData_getId_4 ;
+    yawl:hasMethod yawl:YNetData_equals_5 ;
+    yawl:hasMethod yawl:YNetData_hashCode_6 ;
+    yawl:hasMethod yawl:YNetData_toString_7 ;
+    yawl:hasField yawl:YNetData__data ;
+    yawl:hasField yawl:YNetData__id ;
+    .
+
+
+# Method: YNetData.getData
+yawl:YNetData_getData_1 a yawl:Method ;
+    rdfs:label "getData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getData()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetData.setData
+yawl:YNetData_setData_2 a yawl:Method ;
+    rdfs:label "setData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setData(String data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetData.setId
+yawl:YNetData_setId_3 a yawl:Method ;
+    rdfs:label "setId" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setId(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetData.getId
+yawl:YNetData_getId_4 a yawl:Method ;
+    rdfs:label "getId" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getId()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetData.equals
+yawl:YNetData_equals_5 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetData.hashCode
+yawl:YNetData_hashCode_6 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetData.toString
+yawl:YNetData_toString_7 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YNetData__data a yawl:Field ;
+    rdfs:label "_data" .
+
+yawl:YNetData__id a yawl:Field ;
+    rdfs:label "_id" .
+
+
+

@@ -1,0 +1,350 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.pfMenubar
+yawl:pfMenubar a yawl:Class ;
+    rdfs:label "pfMenubar" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/pfMenubar.java"^^xsd:string ;
+    yawl:extends yawl:AbstractFragmentBean ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:pfMenubar__init_1 ;
+    yawl:hasMethod yawl:pfMenubar_init_2 ;
+    yawl:hasMethod yawl:pfMenubar_destroy_3 ;
+    yawl:hasMethod yawl:pfMenubar_getMenuPanel_4 ;
+    yawl:hasMethod yawl:pfMenubar_setMenuPanel_5 ;
+    yawl:hasMethod yawl:pfMenubar_construct_6 ;
+    yawl:hasMethod yawl:pfMenubar_constructUserMenu_7 ;
+    yawl:hasMethod yawl:pfMenubar_constructAdminMenu_8 ;
+    yawl:hasMethod yawl:pfMenubar_getMenuWidth_9 ;
+    yawl:hasMethod yawl:pfMenubar_makeBookEnd_10 ;
+    yawl:hasMethod yawl:pfMenubar_makeButton_11 ;
+    yawl:hasMethod yawl:pfMenubar_getButtonLeft_12 ;
+    yawl:hasMethod yawl:pfMenubar_getRightBookEndLeftPos_13 ;
+    yawl:hasMethod yawl:pfMenubar_getButtonText_14 ;
+    yawl:hasMethod yawl:pfMenubar_bindButtonListener_15 ;
+    yawl:hasMethod yawl:pfMenubar_showSelection_16 ;
+    yawl:hasMethod yawl:pfMenubar_canViewTeamQueues_17 ;
+    yawl:hasMethod yawl:pfMenubar_btnWorkQueuesAction_18 ;
+    yawl:hasMethod yawl:pfMenubar_btnUserMgtAction_19 ;
+    yawl:hasMethod yawl:pfMenubar_btnCaseMgtAction_20 ;
+    yawl:hasMethod yawl:pfMenubar_btnLogoutAction_21 ;
+    yawl:hasMethod yawl:pfMenubar_btnProfileAction_22 ;
+    yawl:hasMethod yawl:pfMenubar_btnAdminQueuesAction_23 ;
+    yawl:hasMethod yawl:pfMenubar_btnServiceMgtAction_24 ;
+    yawl:hasMethod yawl:pfMenubar_btnOrgDataMgtAction_25 ;
+    yawl:hasMethod yawl:pfMenubar_btnTeamQueuesAction_26 ;
+    yawl:hasMethod yawl:pfMenubar_btnExternalClientsAction_27 ;
+    yawl:hasMethod yawl:pfMenubar_btnNonHumanResourcesAction_28 ;
+    yawl:hasMethod yawl:pfMenubar_btnCalendarMgtAction_29 ;
+    yawl:hasField yawl:pfMenubar___placeholder ;
+    yawl:hasField yawl:pfMenubar_menuPanel ;
+    yawl:hasField yawl:pfMenubar__sb ;
+    yawl:hasField yawl:pfMenubar_BTN_WORKQUEUES ;
+    yawl:hasField yawl:pfMenubar_BTN_USERMGT ;
+    yawl:hasField yawl:pfMenubar_BTN_CASEMGT ;
+    yawl:hasField yawl:pfMenubar_BTN_LOGOUT ;
+    yawl:hasField yawl:pfMenubar_BTN_PROFILE ;
+    yawl:hasField yawl:pfMenubar_BTN_ADMINQUEUES ;
+    yawl:hasField yawl:pfMenubar_BTN_SERVICEMGT ;
+    yawl:hasField yawl:pfMenubar_BTN_ORGDATAMGT ;
+    yawl:hasField yawl:pfMenubar_BTN_TEAMQUEUES ;
+    yawl:hasField yawl:pfMenubar_BTN_EXTCLIENTS ;
+    yawl:hasField yawl:pfMenubar_BTN_NHRESOURCES ;
+    yawl:hasField yawl:pfMenubar_BTN_CALENDAR ;
+    yawl:hasField yawl:pfMenubar_BTN_WIDTH ;
+    yawl:hasField yawl:pfMenubar_BOOKEND_WIDTH ;
+    .
+
+
+# Method: pfMenubar._init
+yawl:pfMenubar__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfMenubar.init
+yawl:pfMenubar_init_2 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfMenubar.destroy
+yawl:pfMenubar_destroy_3 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfMenubar.getMenuPanel
+yawl:pfMenubar_getMenuPanel_4 a yawl:Method ;
+    rdfs:label "getMenuPanel" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getMenuPanel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfMenubar.setMenuPanel
+yawl:pfMenubar_setMenuPanel_5 a yawl:Method ;
+    rdfs:label "setMenuPanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMenuPanel(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfMenubar.construct
+yawl:pfMenubar_construct_6 a yawl:Method ;
+    rdfs:label "construct" ;
+    yawl:returnType "void" ;
+    yawl:signature "void construct(boolean isAdminID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfMenubar.constructUserMenu
+yawl:pfMenubar_constructUserMenu_7 a yawl:Method ;
+    rdfs:label "constructUserMenu" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout constructUserMenu(Participant p)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfMenubar.constructAdminMenu
+yawl:pfMenubar_constructAdminMenu_8 a yawl:Method ;
+    rdfs:label "constructAdminMenu" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout constructAdminMenu(Participant p)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfMenubar.getMenuWidth
+yawl:pfMenubar_getMenuWidth_9 a yawl:Method ;
+    rdfs:label "getMenuWidth" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getMenuWidth(PanelLayout menu)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfMenubar.makeBookEnd
+yawl:pfMenubar_makeBookEnd_10 a yawl:Method ;
+    rdfs:label "makeBookEnd" ;
+    yawl:returnType "ImageComponent" ;
+    yawl:signature "ImageComponent makeBookEnd(int left, int i)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfMenubar.makeButton
+yawl:pfMenubar_makeButton_11 a yawl:Method ;
+    rdfs:label "makeButton" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button makeButton(String btnType, PanelLayout menu)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfMenubar.getButtonLeft
+yawl:pfMenubar_getButtonLeft_12 a yawl:Method ;
+    rdfs:label "getButtonLeft" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getButtonLeft(PanelLayout menu)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfMenubar.getRightBookEndLeftPos
+yawl:pfMenubar_getRightBookEndLeftPos_13 a yawl:Method ;
+    rdfs:label "getRightBookEndLeftPos" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getRightBookEndLeftPos(PanelLayout menu)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfMenubar.getButtonText
+yawl:pfMenubar_getButtonText_14 a yawl:Method ;
+    rdfs:label "getButtonText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getButtonText(String btnType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfMenubar.bindButtonListener
+yawl:pfMenubar_bindButtonListener_15 a yawl:Method ;
+    rdfs:label "bindButtonListener" ;
+    yawl:returnType "MethodBinding" ;
+    yawl:signature "MethodBinding bindButtonListener(String btnType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfMenubar.showSelection
+yawl:pfMenubar_showSelection_16 a yawl:Method ;
+    rdfs:label "showSelection" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showSelection(String btnType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfMenubar.canViewTeamQueues
+yawl:pfMenubar_canViewTeamQueues_17 a yawl:Method ;
+    rdfs:label "canViewTeamQueues" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean canViewTeamQueues(Participant p)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfMenubar.btnWorkQueuesAction
+yawl:pfMenubar_btnWorkQueuesAction_18 a yawl:Method ;
+    rdfs:label "btnWorkQueuesAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnWorkQueuesAction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfMenubar.btnUserMgtAction
+yawl:pfMenubar_btnUserMgtAction_19 a yawl:Method ;
+    rdfs:label "btnUserMgtAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnUserMgtAction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfMenubar.btnCaseMgtAction
+yawl:pfMenubar_btnCaseMgtAction_20 a yawl:Method ;
+    rdfs:label "btnCaseMgtAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnCaseMgtAction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfMenubar.btnLogoutAction
+yawl:pfMenubar_btnLogoutAction_21 a yawl:Method ;
+    rdfs:label "btnLogoutAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnLogoutAction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfMenubar.btnProfileAction
+yawl:pfMenubar_btnProfileAction_22 a yawl:Method ;
+    rdfs:label "btnProfileAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnProfileAction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfMenubar.btnAdminQueuesAction
+yawl:pfMenubar_btnAdminQueuesAction_23 a yawl:Method ;
+    rdfs:label "btnAdminQueuesAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnAdminQueuesAction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfMenubar.btnServiceMgtAction
+yawl:pfMenubar_btnServiceMgtAction_24 a yawl:Method ;
+    rdfs:label "btnServiceMgtAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnServiceMgtAction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfMenubar.btnOrgDataMgtAction
+yawl:pfMenubar_btnOrgDataMgtAction_25 a yawl:Method ;
+    rdfs:label "btnOrgDataMgtAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnOrgDataMgtAction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfMenubar.btnTeamQueuesAction
+yawl:pfMenubar_btnTeamQueuesAction_26 a yawl:Method ;
+    rdfs:label "btnTeamQueuesAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnTeamQueuesAction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfMenubar.btnExternalClientsAction
+yawl:pfMenubar_btnExternalClientsAction_27 a yawl:Method ;
+    rdfs:label "btnExternalClientsAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnExternalClientsAction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfMenubar.btnNonHumanResourcesAction
+yawl:pfMenubar_btnNonHumanResourcesAction_28 a yawl:Method ;
+    rdfs:label "btnNonHumanResourcesAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnNonHumanResourcesAction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfMenubar.btnCalendarMgtAction
+yawl:pfMenubar_btnCalendarMgtAction_29 a yawl:Method ;
+    rdfs:label "btnCalendarMgtAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnCalendarMgtAction()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:pfMenubar___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:pfMenubar_menuPanel a yawl:Field ;
+    rdfs:label "menuPanel" .
+
+yawl:pfMenubar__sb a yawl:Field ;
+    rdfs:label "_sb" .
+
+yawl:pfMenubar_BTN_WORKQUEUES a yawl:Field ;
+    rdfs:label "BTN_WORKQUEUES" .
+
+yawl:pfMenubar_BTN_USERMGT a yawl:Field ;
+    rdfs:label "BTN_USERMGT" .
+
+yawl:pfMenubar_BTN_CASEMGT a yawl:Field ;
+    rdfs:label "BTN_CASEMGT" .
+
+yawl:pfMenubar_BTN_LOGOUT a yawl:Field ;
+    rdfs:label "BTN_LOGOUT" .
+
+yawl:pfMenubar_BTN_PROFILE a yawl:Field ;
+    rdfs:label "BTN_PROFILE" .
+
+yawl:pfMenubar_BTN_ADMINQUEUES a yawl:Field ;
+    rdfs:label "BTN_ADMINQUEUES" .
+
+yawl:pfMenubar_BTN_SERVICEMGT a yawl:Field ;
+    rdfs:label "BTN_SERVICEMGT" .
+
+yawl:pfMenubar_BTN_ORGDATAMGT a yawl:Field ;
+    rdfs:label "BTN_ORGDATAMGT" .
+
+yawl:pfMenubar_BTN_TEAMQUEUES a yawl:Field ;
+    rdfs:label "BTN_TEAMQUEUES" .
+
+yawl:pfMenubar_BTN_EXTCLIENTS a yawl:Field ;
+    rdfs:label "BTN_EXTCLIENTS" .
+
+yawl:pfMenubar_BTN_NHRESOURCES a yawl:Field ;
+    rdfs:label "BTN_NHRESOURCES" .
+
+yawl:pfMenubar_BTN_CALENDAR a yawl:Field ;
+    rdfs:label "BTN_CALENDAR" .
+
+yawl:pfMenubar_BTN_WIDTH a yawl:Field ;
+    rdfs:label "BTN_WIDTH" .
+
+yawl:pfMenubar_BOOKEND_WIDTH a yawl:Field ;
+    rdfs:label "BOOKEND_WIDTH" .
+
+
+

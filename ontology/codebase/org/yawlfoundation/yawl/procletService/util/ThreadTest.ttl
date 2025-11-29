@@ -1,0 +1,54 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.util.ThreadTest
+yawl:ThreadTest a yawl:Class ;
+    rdfs:label "ThreadTest" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/util/ThreadTest.java"^^xsd:string ;
+    yawl:extends yawl:ThreadNotify ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ThreadTest_press_1 ;
+    yawl:hasMethod yawl:ThreadTest_run_2 ;
+    yawl:hasMethod yawl:ThreadTest_main_3 ;
+    yawl:hasField yawl:ThreadTest_threadSuspended ;
+    .
+
+
+# Method: ThreadTest.press
+yawl:ThreadTest_press_1 a yawl:Method ;
+    rdfs:label "press" ;
+    yawl:returnType "void" ;
+    yawl:signature "void press()" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ThreadTest.run
+yawl:ThreadTest_run_2 a yawl:Method ;
+    rdfs:label "run" ;
+    yawl:returnType "void" ;
+    yawl:signature "void run()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ThreadTest.main
+yawl:ThreadTest_main_3 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String args)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:ThreadTest_threadSuspended a yawl:Field ;
+    rdfs:label "threadSuspended" .
+
+
+

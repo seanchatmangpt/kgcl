@@ -1,0 +1,653 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.util.StringUtil
+yawl:StringUtil a yawl:Class ;
+    rdfs:label "StringUtil" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/util/StringUtil.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:StringUtil_replaceTokens_1 ;
+    yawl:hasMethod yawl:StringUtil_getISOFormattedDate_2 ;
+    yawl:hasMethod yawl:StringUtil_getDebugMessage_3 ;
+    yawl:hasMethod yawl:StringUtil_reverseString_4 ;
+    yawl:hasMethod yawl:StringUtil_removeAllWhiteSpace_5 ;
+    yawl:hasMethod yawl:StringUtil_formatPostCode_6 ;
+    yawl:hasMethod yawl:StringUtil_formatSortCode_7 ;
+    yawl:hasMethod yawl:StringUtil_capitalise_8 ;
+    yawl:hasMethod yawl:StringUtil_formatUIDate_9 ;
+    yawl:hasMethod yawl:StringUtil_formatDecimalCost_10 ;
+    yawl:hasMethod yawl:StringUtil_formatTime_11 ;
+    yawl:hasMethod yawl:StringUtil_convertThrowableToString_12 ;
+    yawl:hasMethod yawl:StringUtil_formatForHTML_13 ;
+    yawl:hasMethod yawl:StringUtil_wrap_14 ;
+    yawl:hasMethod yawl:StringUtil_wrapEscaped_15 ;
+    yawl:hasMethod yawl:StringUtil_unwrap_16 ;
+    yawl:hasMethod yawl:StringUtil_deQuote_17 ;
+    yawl:hasMethod yawl:StringUtil_enQuote_18 ;
+    yawl:hasMethod yawl:StringUtil_xmlEncode_19 ;
+    yawl:hasMethod yawl:StringUtil_xmlDecode_20 ;
+    yawl:hasMethod yawl:StringUtil_isIntegerString_21 ;
+    yawl:hasMethod yawl:StringUtil_stringToFile_22 ;
+    yawl:hasMethod yawl:StringUtil_stringToTempFile_23 ;
+    yawl:hasMethod yawl:StringUtil_stringToFile_24 ;
+    yawl:hasMethod yawl:StringUtil_fileToString_25 ;
+    yawl:hasMethod yawl:StringUtil_streamToString_26 ;
+    yawl:hasMethod yawl:StringUtil_streamToString_27 ;
+    yawl:hasMethod yawl:StringUtil_fileToString_28 ;
+    yawl:hasMethod yawl:StringUtil_replaceInFile_29 ;
+    yawl:hasMethod yawl:StringUtil_replaceInFile_30 ;
+    yawl:hasMethod yawl:StringUtil_extract_31 ;
+    yawl:hasMethod yawl:StringUtil_getRandomString_32 ;
+    yawl:hasMethod yawl:StringUtil_isNullOrEmpty_33 ;
+    yawl:hasMethod yawl:StringUtil_strToInt_34 ;
+    yawl:hasMethod yawl:StringUtil_strToLong_35 ;
+    yawl:hasMethod yawl:StringUtil_strToDouble_36 ;
+    yawl:hasMethod yawl:StringUtil_strToBoolean_37 ;
+    yawl:hasMethod yawl:StringUtil_strToDuration_38 ;
+    yawl:hasMethod yawl:StringUtil_msecsToDuration_39 ;
+    yawl:hasMethod yawl:StringUtil_isValidDurationString_40 ;
+    yawl:hasMethod yawl:StringUtil_durationToMSecs_41 ;
+    yawl:hasMethod yawl:StringUtil_durationToMSecs_42 ;
+    yawl:hasMethod yawl:StringUtil_durationStrToMSecs_43 ;
+    yawl:hasMethod yawl:StringUtil_xmlDateToLong_44 ;
+    yawl:hasMethod yawl:StringUtil_longToDateTime_45 ;
+    yawl:hasMethod yawl:StringUtil_find_46 ;
+    yawl:hasMethod yawl:StringUtil_find_47 ;
+    yawl:hasMethod yawl:StringUtil_find_48 ;
+    yawl:hasMethod yawl:StringUtil_findAll_49 ;
+    yawl:hasMethod yawl:StringUtil_findAll_50 ;
+    yawl:hasMethod yawl:StringUtil_repeat_51 ;
+    yawl:hasMethod yawl:StringUtil_join_52 ;
+    yawl:hasMethod yawl:StringUtil_splitToList_53 ;
+    yawl:hasMethod yawl:StringUtil_insert_54 ;
+    yawl:hasMethod yawl:StringUtil_pad_55 ;
+    yawl:hasMethod yawl:StringUtil_pad_56 ;
+    yawl:hasMethod yawl:StringUtil_firstWord_57 ;
+    yawl:hasMethod yawl:StringUtil_setToXML_58 ;
+    yawl:hasMethod yawl:StringUtil_xmlToSet_59 ;
+    yawl:hasField yawl:StringUtil_TIMESTAMP_DELIMITER ;
+    yawl:hasField yawl:StringUtil_DATE_DELIMITER ;
+    yawl:hasField yawl:StringUtil_TIME_DELIMITER ;
+    yawl:hasField yawl:StringUtil_TIME_FORMAT ;
+    yawl:hasField yawl:StringUtil_DATE_FORMAT ;
+    yawl:hasField yawl:StringUtil_TIMESTAMP_FORMAT ;
+    .
+
+
+# Method: StringUtil.replaceTokens
+yawl:StringUtil_replaceTokens_1 a yawl:Method ;
+    rdfs:label "replaceTokens" ;
+    yawl:returnType "String" ;
+    yawl:signature "String replaceTokens(String buffer, String fromToken, String toToken)" ;
+    rdfs:comment """Utility routine to replace one token with another within a string object. @param buffer    String object to be manipulated @param fromToken Token to be replaced @param toToken   Token used in replacement @return String object holding modified String""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.getISOFormattedDate
+yawl:StringUtil_getISOFormattedDate_2 a yawl:Method ;
+    rdfs:label "getISOFormattedDate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getISOFormattedDate(Date date)" ;
+    rdfs:comment """Utility routine to return the date supplied as an ISO formatted string. @param date Date object to be formatted @return String object holding ISO formatted representation of date supplied""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.getDebugMessage
+yawl:StringUtil_getDebugMessage_3 a yawl:Method ;
+    rdfs:label "getDebugMessage" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDebugMessage(String msg)" ;
+    rdfs:comment """Utility routine to return a debug message suitable for logging. It basically prefixes the supplied message with the current timestamp in ISO format. @param msg Body of debug message to be prefixed with the current timestamp @return String object holding debug message prefixed with ISO formatted current timestamp""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.reverseString
+yawl:StringUtil_reverseString_4 a yawl:Method ;
+    rdfs:label "reverseString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String reverseString(String inputString)" ;
+    rdfs:comment """Utility method to take a string and return the string in revserse sequence. @param inputString String to be reversed @return Reversed string""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.removeAllWhiteSpace
+yawl:StringUtil_removeAllWhiteSpace_5 a yawl:Method ;
+    rdfs:label "removeAllWhiteSpace" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeAllWhiteSpace(String string)" ;
+    rdfs:comment """Removes all white space from a string. @param string String to remove white space from @return Resulting whitespaceless string.""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.formatPostCode
+yawl:StringUtil_formatPostCode_6 a yawl:Method ;
+    rdfs:label "formatPostCode" ;
+    yawl:returnType "String" ;
+    yawl:signature "String formatPostCode(String postcode)" ;
+    rdfs:comment """Formats a postcode into standard Royal Mail format @param postcode @return Postcode correctly formatted""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.formatSortCode
+yawl:StringUtil_formatSortCode_7 a yawl:Method ;
+    rdfs:label "formatSortCode" ;
+    yawl:returnType "String" ;
+    yawl:signature "String formatSortCode(String sortcode)" ;
+    rdfs:comment """Formats a sortcode into the common form nn-nn-nn @param sortcode @return Sortcode correctly formatted""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.capitalise
+yawl:StringUtil_capitalise_8 a yawl:Method ;
+    rdfs:label "capitalise" ;
+    yawl:returnType "String" ;
+    yawl:signature "String capitalise(String s)" ;
+    rdfs:comment """Converts a string to all lower case, and capitalises the first letter of the string @param s unformated string. @return The formated string.""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.formatUIDate
+yawl:StringUtil_formatUIDate_9 a yawl:Method ;
+    rdfs:label "formatUIDate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String formatUIDate(Calendar calendar)" ;
+    rdfs:comment """Utility routine that takes in a Calendar referece and returns a date/time stamp suitable for use in a Portlets environment. @param calendar @return Date/timestamp suitable for display. @deprecated Use TimeUtil.formatUIDate""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.formatDecimalCost
+yawl:StringUtil_formatDecimalCost_10 a yawl:Method ;
+    rdfs:label "formatDecimalCost" ;
+    yawl:returnType "String" ;
+    yawl:signature "String formatDecimalCost(BigDecimal value)" ;
+    rdfs:comment """Utility routine which takes a decimal value as a string (e.g. 0.25 equating to 25p) and returns the value in UI currency format (e.g. £0.25). @return A formatted currency""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.formatTime
+yawl:StringUtil_formatTime_11 a yawl:Method ;
+    rdfs:label "formatTime" ;
+    yawl:returnType "String" ;
+    yawl:signature "String formatTime(long time)" ;
+    rdfs:comment """formats a long time value into a string of the form 'ddd:hh:mm:ss' @param time the time value (in milliseconds) @return the formatted time string""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.convertThrowableToString
+yawl:StringUtil_convertThrowableToString_12 a yawl:Method ;
+    rdfs:label "convertThrowableToString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String convertThrowableToString(Throwable t)" ;
+    rdfs:comment """Converts the throwable object into the standard Java stack trace format. @param t Throwable to convert to a String @return String representation of Throwable t""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.formatForHTML
+yawl:StringUtil_formatForHTML_13 a yawl:Method ;
+    rdfs:label "formatForHTML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String formatForHTML(String string)" ;
+    rdfs:comment """Esacpes all HTML entities and \"funky accents\" into the HTML 4.0 encodings, replacing new lines with \"&lt;br&gt;\", tabs with four \"&amp;nbsp;\" and single spaces with \"&amp;nbsp;\". @param string to escape @return escaped string""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.wrap
+yawl:StringUtil_wrap_14 a yawl:Method ;
+    rdfs:label "wrap" ;
+    yawl:returnType "String" ;
+    yawl:signature "String wrap(String core, String wrapTag)" ;
+    rdfs:comment """encases a string with a pair of xml tags @param core    the text to encase @param wrapTag the name of the tag to encase the text @return the encased string (e.g. \"<wrapTag>core</wrapTag>\")""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.wrapEscaped
+yawl:StringUtil_wrapEscaped_15 a yawl:Method ;
+    rdfs:label "wrapEscaped" ;
+    yawl:returnType "String" ;
+    yawl:signature "String wrapEscaped(String core, String wrapTag)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.unwrap
+yawl:StringUtil_unwrap_16 a yawl:Method ;
+    rdfs:label "unwrap" ;
+    yawl:returnType "String" ;
+    yawl:signature "String unwrap(String xml)" ;
+    rdfs:comment """Removes an outer set of xml tags from an xml string, if possible @param xml the xml string to strip @return the stripped xml string""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.deQuote
+yawl:StringUtil_deQuote_17 a yawl:Method ;
+    rdfs:label "deQuote" ;
+    yawl:returnType "String" ;
+    yawl:signature "String deQuote(String s)" ;
+    rdfs:comment """Removes single or double quotes surrounding a string @param s the string @return the string with the quotes removed""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.enQuote
+yawl:StringUtil_enQuote_18 a yawl:Method ;
+    rdfs:label "enQuote" ;
+    yawl:returnType "String" ;
+    yawl:signature "String enQuote(String s, char quoteMark)" ;
+    rdfs:comment """Wraps a string in the specified quote marks @param s the string to wrap @param quoteMark the quote character to use @return the wrapped sgtring""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.xmlEncode
+yawl:StringUtil_xmlEncode_19 a yawl:Method ;
+    rdfs:label "xmlEncode" ;
+    yawl:returnType "String" ;
+    yawl:signature "String xmlEncode(String s)" ;
+    rdfs:comment """Encodes reserved characters in an xml string @param s the string to encode @return the newly encoded string""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.xmlDecode
+yawl:StringUtil_xmlDecode_20 a yawl:Method ;
+    rdfs:label "xmlDecode" ;
+    yawl:returnType "String" ;
+    yawl:signature "String xmlDecode(String s)" ;
+    rdfs:comment """Decodes reserved characters in an xml string @param s the string to decode @return the newly decoded string""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.isIntegerString
+yawl:StringUtil_isIntegerString_21 a yawl:Method ;
+    rdfs:label "isIntegerString" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isIntegerString(String s)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.stringToFile
+yawl:StringUtil_stringToFile_22 a yawl:Method ;
+    rdfs:label "stringToFile" ;
+    yawl:returnType "File" ;
+    yawl:signature "File stringToFile(String path, String contents)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.stringToTempFile
+yawl:StringUtil_stringToTempFile_23 a yawl:Method ;
+    rdfs:label "stringToTempFile" ;
+    yawl:returnType "File" ;
+    yawl:signature "File stringToTempFile(String contents)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.stringToFile
+yawl:StringUtil_stringToFile_24 a yawl:Method ;
+    rdfs:label "stringToFile" ;
+    yawl:returnType "File" ;
+    yawl:signature "File stringToFile(File f, String contents)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.fileToString
+yawl:StringUtil_fileToString_25 a yawl:Method ;
+    rdfs:label "fileToString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String fileToString(File f)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.streamToString
+yawl:StringUtil_streamToString_26 a yawl:Method ;
+    rdfs:label "streamToString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String streamToString(InputStream is)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.streamToString
+yawl:StringUtil_streamToString_27 a yawl:Method ;
+    rdfs:label "streamToString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String streamToString(InputStream is, int bufSize)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.fileToString
+yawl:StringUtil_fileToString_28 a yawl:Method ;
+    rdfs:label "fileToString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String fileToString(String filename)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.replaceInFile
+yawl:StringUtil_replaceInFile_29 a yawl:Method ;
+    rdfs:label "replaceInFile" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean replaceInFile(File f, CharSequence oldChars, CharSequence newChars)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.replaceInFile
+yawl:StringUtil_replaceInFile_30 a yawl:Method ;
+    rdfs:label "replaceInFile" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean replaceInFile(String fileName, CharSequence oldChars, CharSequence newChars)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.extract
+yawl:StringUtil_extract_31 a yawl:Method ;
+    rdfs:label "extract" ;
+    yawl:returnType "String" ;
+    yawl:signature "String extract(String source, String pattern)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.getRandomString
+yawl:StringUtil_getRandomString_32 a yawl:Method ;
+    rdfs:label "getRandomString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRandomString(int length)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.isNullOrEmpty
+yawl:StringUtil_isNullOrEmpty_33 a yawl:Method ;
+    rdfs:label "isNullOrEmpty" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isNullOrEmpty(String s)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.strToInt
+yawl:StringUtil_strToInt_34 a yawl:Method ;
+    rdfs:label "strToInt" ;
+    yawl:returnType "int" ;
+    yawl:signature "int strToInt(String s, int def)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.strToLong
+yawl:StringUtil_strToLong_35 a yawl:Method ;
+    rdfs:label "strToLong" ;
+    yawl:returnType "long" ;
+    yawl:signature "long strToLong(String s, long def)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.strToDouble
+yawl:StringUtil_strToDouble_36 a yawl:Method ;
+    rdfs:label "strToDouble" ;
+    yawl:returnType "double" ;
+    yawl:signature "double strToDouble(String s, double def)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.strToBoolean
+yawl:StringUtil_strToBoolean_37 a yawl:Method ;
+    rdfs:label "strToBoolean" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean strToBoolean(String s)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.strToDuration
+yawl:StringUtil_strToDuration_38 a yawl:Method ;
+    rdfs:label "strToDuration" ;
+    yawl:returnType "Duration" ;
+    yawl:signature "Duration strToDuration(String s)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.msecsToDuration
+yawl:StringUtil_msecsToDuration_39 a yawl:Method ;
+    rdfs:label "msecsToDuration" ;
+    yawl:returnType "Duration" ;
+    yawl:signature "Duration msecsToDuration(long msecs)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.isValidDurationString
+yawl:StringUtil_isValidDurationString_40 a yawl:Method ;
+    rdfs:label "isValidDurationString" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isValidDurationString(String s)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.durationToMSecs
+yawl:StringUtil_durationToMSecs_41 a yawl:Method ;
+    rdfs:label "durationToMSecs" ;
+    yawl:returnType "long" ;
+    yawl:signature "long durationToMSecs(Duration d, long def)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.durationToMSecs
+yawl:StringUtil_durationToMSecs_42 a yawl:Method ;
+    rdfs:label "durationToMSecs" ;
+    yawl:returnType "long" ;
+    yawl:signature "long durationToMSecs(Duration d)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.durationStrToMSecs
+yawl:StringUtil_durationStrToMSecs_43 a yawl:Method ;
+    rdfs:label "durationStrToMSecs" ;
+    yawl:returnType "long" ;
+    yawl:signature "long durationStrToMSecs(String s)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.xmlDateToLong
+yawl:StringUtil_xmlDateToLong_44 a yawl:Method ;
+    rdfs:label "xmlDateToLong" ;
+    yawl:returnType "long" ;
+    yawl:signature "long xmlDateToLong(String s)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.longToDateTime
+yawl:StringUtil_longToDateTime_45 a yawl:Method ;
+    rdfs:label "longToDateTime" ;
+    yawl:returnType "String" ;
+    yawl:signature "String longToDateTime(long time)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.find
+yawl:StringUtil_find_46 a yawl:Method ;
+    rdfs:label "find" ;
+    yawl:returnType "int" ;
+    yawl:signature "int find(String toSearch, String toFind, int start, boolean ignoreCase)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.find
+yawl:StringUtil_find_47 a yawl:Method ;
+    rdfs:label "find" ;
+    yawl:returnType "int" ;
+    yawl:signature "int find(String toSearch, String toFind, int start)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.find
+yawl:StringUtil_find_48 a yawl:Method ;
+    rdfs:label "find" ;
+    yawl:returnType "int" ;
+    yawl:signature "int find(String toSearch, String toFind)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.findAll
+yawl:StringUtil_findAll_49 a yawl:Method ;
+    rdfs:label "findAll" ;
+    yawl:returnType "List" ;
+    yawl:signature "List findAll(String toSearch, String toFind, boolean ignoreCase)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.findAll
+yawl:StringUtil_findAll_50 a yawl:Method ;
+    rdfs:label "findAll" ;
+    yawl:returnType "List" ;
+    yawl:signature "List findAll(String toSearch, String toFind)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.repeat
+yawl:StringUtil_repeat_51 a yawl:Method ;
+    rdfs:label "repeat" ;
+    yawl:returnType "String" ;
+    yawl:signature "String repeat(char c, int count)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.join
+yawl:StringUtil_join_52 a yawl:Method ;
+    rdfs:label "join" ;
+    yawl:returnType "String" ;
+    yawl:signature "String join(List list, char separator)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.splitToList
+yawl:StringUtil_splitToList_53 a yawl:Method ;
+    rdfs:label "splitToList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List splitToList(String s, String separator)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.insert
+yawl:StringUtil_insert_54 a yawl:Method ;
+    rdfs:label "insert" ;
+    yawl:returnType "String" ;
+    yawl:signature "String insert(String base, String addition, int position)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.pad
+yawl:StringUtil_pad_55 a yawl:Method ;
+    rdfs:label "pad" ;
+    yawl:returnType "String" ;
+    yawl:signature "String pad(String s, int len, char padChar)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.pad
+yawl:StringUtil_pad_56 a yawl:Method ;
+    rdfs:label "pad" ;
+    yawl:returnType "String" ;
+    yawl:signature "String pad(String s, int len, char padChar, boolean left)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.firstWord
+yawl:StringUtil_firstWord_57 a yawl:Method ;
+    rdfs:label "firstWord" ;
+    yawl:returnType "String" ;
+    yawl:signature "String firstWord(String s)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.setToXML
+yawl:StringUtil_setToXML_58 a yawl:Method ;
+    rdfs:label "setToXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String setToXML(Set set)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: StringUtil.xmlToSet
+yawl:StringUtil_xmlToSet_59 a yawl:Method ;
+    rdfs:label "xmlToSet" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set xmlToSet(String xml)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:StringUtil_TIMESTAMP_DELIMITER a yawl:Field ;
+    rdfs:label "TIMESTAMP_DELIMITER" .
+
+yawl:StringUtil_DATE_DELIMITER a yawl:Field ;
+    rdfs:label "DATE_DELIMITER" .
+
+yawl:StringUtil_TIME_DELIMITER a yawl:Field ;
+    rdfs:label "TIME_DELIMITER" .
+
+yawl:StringUtil_TIME_FORMAT a yawl:Field ;
+    rdfs:label "TIME_FORMAT" .
+
+yawl:StringUtil_DATE_FORMAT a yawl:Field ;
+    rdfs:label "DATE_FORMAT" .
+
+yawl:StringUtil_TIMESTAMP_FORMAT a yawl:Field ;
+    rdfs:label "TIMESTAMP_FORMAT" .
+
+
+

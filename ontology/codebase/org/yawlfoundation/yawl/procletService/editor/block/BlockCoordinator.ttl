@@ -1,0 +1,213 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.block.BlockCoordinator
+yawl:BlockCoordinator a yawl:Class ;
+    rdfs:label "BlockCoordinator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor_block ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/block/BlockCoordinator.java"^^xsd:string ;
+    yawl:extends yawl:InternalCoordinator ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:BlockCoordinator_singleton_1 ;
+    yawl:hasMethod yawl:BlockCoordinator_exists_2 ;
+    yawl:hasMethod yawl:BlockCoordinator_finish_3 ;
+    yawl:hasMethod yawl:BlockCoordinator_setCP_4 ;
+    yawl:hasMethod yawl:BlockCoordinator_isCP_5 ;
+    yawl:hasMethod yawl:BlockCoordinator_setCaseException_6 ;
+    yawl:hasMethod yawl:BlockCoordinator_isCaseException_7 ;
+    yawl:hasMethod yawl:BlockCoordinator_setBlockException_8 ;
+    yawl:hasMethod yawl:BlockCoordinator_isBlockException_9 ;
+    yawl:hasMethod yawl:BlockCoordinator_setInteractionNode_10 ;
+    yawl:hasMethod yawl:BlockCoordinator_setSelectedEmid_11 ;
+    yawl:hasMethod yawl:BlockCoordinator_getSelectedEmid_12 ;
+    yawl:hasMethod yawl:BlockCoordinator_start_13 ;
+    yawl:hasMethod yawl:BlockCoordinator_getInternalFrame_14 ;
+    yawl:hasMethod yawl:BlockCoordinator_initiateReceiver_15 ;
+    yawl:hasMethod yawl:BlockCoordinator_getReceiver_16 ;
+    yawl:hasMethod yawl:BlockCoordinator_end_17 ;
+    yawl:hasMethod yawl:BlockCoordinator_getBlockControl_18 ;
+    yawl:hasField yawl:BlockCoordinator_frame ;
+    yawl:hasField yawl:BlockCoordinator_receive ;
+    yawl:hasField yawl:BlockCoordinator_node ;
+    yawl:hasField yawl:BlockCoordinator_emidSelected ;
+    yawl:hasField yawl:BlockCoordinator_option ;
+    yawl:hasField yawl:BlockCoordinator_instance ;
+    .
+
+
+# Method: BlockCoordinator.singleton
+yawl:BlockCoordinator_singleton_1 a yawl:Method ;
+    rdfs:label "singleton" ;
+    yawl:returnType "BlockCoordinator" ;
+    yawl:signature "BlockCoordinator singleton(JFrame aMainFrame, String option)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockCoordinator.exists
+yawl:BlockCoordinator_exists_2 a yawl:Method ;
+    rdfs:label "exists" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean exists()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockCoordinator.finish
+yawl:BlockCoordinator_finish_3 a yawl:Method ;
+    rdfs:label "finish" ;
+    yawl:returnType "void" ;
+    yawl:signature "void finish()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockCoordinator.setCP
+yawl:BlockCoordinator_setCP_4 a yawl:Method ;
+    rdfs:label "setCP" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCP()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockCoordinator.isCP
+yawl:BlockCoordinator_isCP_5 a yawl:Method ;
+    rdfs:label "isCP" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isCP()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockCoordinator.setCaseException
+yawl:BlockCoordinator_setCaseException_6 a yawl:Method ;
+    rdfs:label "setCaseException" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCaseException()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockCoordinator.isCaseException
+yawl:BlockCoordinator_isCaseException_7 a yawl:Method ;
+    rdfs:label "isCaseException" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isCaseException()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockCoordinator.setBlockException
+yawl:BlockCoordinator_setBlockException_8 a yawl:Method ;
+    rdfs:label "setBlockException" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBlockException()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockCoordinator.isBlockException
+yawl:BlockCoordinator_isBlockException_9 a yawl:Method ;
+    rdfs:label "isBlockException" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isBlockException()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockCoordinator.setInteractionNode
+yawl:BlockCoordinator_setInteractionNode_10 a yawl:Method ;
+    rdfs:label "setInteractionNode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setInteractionNode(InteractionNode node)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockCoordinator.setSelectedEmid
+yawl:BlockCoordinator_setSelectedEmid_11 a yawl:Method ;
+    rdfs:label "setSelectedEmid" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSelectedEmid(EntityMID emid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockCoordinator.getSelectedEmid
+yawl:BlockCoordinator_getSelectedEmid_12 a yawl:Method ;
+    rdfs:label "getSelectedEmid" ;
+    yawl:returnType "EntityMID" ;
+    yawl:signature "EntityMID getSelectedEmid()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockCoordinator.start
+yawl:BlockCoordinator_start_13 a yawl:Method ;
+    rdfs:label "start" ;
+    yawl:returnType "void" ;
+    yawl:signature "void start()" ;
+    rdfs:comment """start""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockCoordinator.getInternalFrame
+yawl:BlockCoordinator_getInternalFrame_14 a yawl:Method ;
+    rdfs:label "getInternalFrame" ;
+    yawl:returnType "JInternalFrame" ;
+    yawl:signature "JInternalFrame getInternalFrame()" ;
+    rdfs:comment """getInternalFrame @return JInternalFrame""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockCoordinator.initiateReceiver
+yawl:BlockCoordinator_initiateReceiver_15 a yawl:Method ;
+    rdfs:label "initiateReceiver" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initiateReceiver()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockCoordinator.getReceiver
+yawl:BlockCoordinator_getReceiver_16 a yawl:Method ;
+    rdfs:label "getReceiver" ;
+    yawl:returnType "Receiver" ;
+    yawl:signature "Receiver getReceiver()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockCoordinator.end
+yawl:BlockCoordinator_end_17 a yawl:Method ;
+    rdfs:label "end" ;
+    yawl:returnType "void" ;
+    yawl:signature "void end()" ;
+    rdfs:comment """end""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockCoordinator.getBlockControl
+yawl:BlockCoordinator_getBlockControl_18 a yawl:Method ;
+    rdfs:label "getBlockControl" ;
+    yawl:returnType "BlockControl" ;
+    yawl:signature "BlockControl getBlockControl()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:BlockCoordinator_frame a yawl:Field ;
+    rdfs:label "frame" .
+
+yawl:BlockCoordinator_receive a yawl:Field ;
+    rdfs:label "receive" .
+
+yawl:BlockCoordinator_node a yawl:Field ;
+    rdfs:label "node" .
+
+yawl:BlockCoordinator_emidSelected a yawl:Field ;
+    rdfs:label "emidSelected" .
+
+yawl:BlockCoordinator_option a yawl:Field ;
+    rdfs:label "option" .
+
+yawl:BlockCoordinator_instance a yawl:Field ;
+    rdfs:label "instance" .
+
+
+

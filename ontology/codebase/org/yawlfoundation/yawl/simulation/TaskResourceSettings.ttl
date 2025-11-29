@@ -1,0 +1,67 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.simulation.TaskResourceSettings
+yawl:TaskResourceSettings a yawl:Class ;
+    rdfs:label "TaskResourceSettings" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_simulation ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/simulation/TaskResourceSettings.java"^^xsd:string ;
+    yawl:hasMethod yawl:TaskResourceSettings_addTiming_1 ;
+    yawl:hasMethod yawl:TaskResourceSettings_getTiming_2 ;
+    yawl:hasMethod yawl:TaskResourceSettings_getConcurrent_3 ;
+    yawl:hasMethod yawl:TaskResourceSettings_setConcurrent_4 ;
+    yawl:hasField yawl:TaskResourceSettings_maxTime ;
+    yawl:hasField yawl:TaskResourceSettings_minTime ;
+    yawl:hasField yawl:TaskResourceSettings_concurrent ;
+    yawl:hasField yawl:TaskResourceSettings_RANDOM ;
+    .
+
+
+# Method: TaskResourceSettings.addTiming
+yawl:TaskResourceSettings_addTiming_1 a yawl:Method ;
+    rdfs:label "addTiming" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addTiming(int time, int deviation)" ;
+    .
+
+# Method: TaskResourceSettings.getTiming
+yawl:TaskResourceSettings_getTiming_2 a yawl:Method ;
+    rdfs:label "getTiming" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getTiming()" ;
+    .
+
+# Method: TaskResourceSettings.getConcurrent
+yawl:TaskResourceSettings_getConcurrent_3 a yawl:Method ;
+    rdfs:label "getConcurrent" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getConcurrent()" ;
+    .
+
+# Method: TaskResourceSettings.setConcurrent
+yawl:TaskResourceSettings_setConcurrent_4 a yawl:Method ;
+    rdfs:label "setConcurrent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setConcurrent(int c)" ;
+    .
+
+
+
+yawl:TaskResourceSettings_maxTime a yawl:Field ;
+    rdfs:label "maxTime" .
+
+yawl:TaskResourceSettings_minTime a yawl:Field ;
+    rdfs:label "minTime" .
+
+yawl:TaskResourceSettings_concurrent a yawl:Field ;
+    rdfs:label "concurrent" .
+
+yawl:TaskResourceSettings_RANDOM a yawl:Field ;
+    rdfs:label "RANDOM" .
+
+
+

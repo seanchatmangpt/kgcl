@@ -1,0 +1,97 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.balancer.output
+yawl:org_yawlfoundation_yawl_balancer_output a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.balancer.output" .
+# Class: org.yawlfoundation.yawl.balancer.output.CombinedBusynessOutputter
+yawl:CombinedBusynessOutputter a yawl:Class ;
+    rdfs:label "CombinedBusynessOutputter" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer_output ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/output/CombinedBusynessOutputter.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 13/6/18""" ;
+    yawl:extends yawl:AbstractLoadOutputter ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CombinedBusynessOutputter_writeValues_1 ;
+    yawl:hasMethod yawl:CombinedBusynessOutputter_add_2 ;
+    yawl:hasMethod yawl:CombinedBusynessOutputter_insert_3 ;
+    yawl:hasMethod yawl:CombinedBusynessOutputter_filled_4 ;
+    yawl:hasMethod yawl:CombinedBusynessOutputter_clear_5 ;
+    yawl:hasMethod yawl:CombinedBusynessOutputter_getHeader_6 ;
+    yawl:hasMethod yawl:CombinedBusynessOutputter_finalise_7 ;
+    yawl:hasField yawl:CombinedBusynessOutputter_buffer ;
+    yawl:hasField yawl:CombinedBusynessOutputter_MUTEX ;
+    yawl:hasField yawl:CombinedBusynessOutputter_SDF ;
+    .
+
+
+# Method: CombinedBusynessOutputter.writeValues
+yawl:CombinedBusynessOutputter_writeValues_1 a yawl:Method ;
+    rdfs:label "writeValues" ;
+    yawl:returnType "void" ;
+    yawl:signature "void writeValues(Map values)" ;
+    .
+
+# Method: CombinedBusynessOutputter.add
+yawl:CombinedBusynessOutputter_add_2 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(Map values)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CombinedBusynessOutputter.insert
+yawl:CombinedBusynessOutputter_insert_3 a yawl:Method ;
+    rdfs:label "insert" ;
+    yawl:returnType "void" ;
+    yawl:signature "void insert(Map values)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CombinedBusynessOutputter.filled
+yawl:CombinedBusynessOutputter_filled_4 a yawl:Method ;
+    rdfs:label "filled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean filled()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CombinedBusynessOutputter.clear
+yawl:CombinedBusynessOutputter_clear_5 a yawl:Method ;
+    rdfs:label "clear" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clear()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CombinedBusynessOutputter.getHeader
+yawl:CombinedBusynessOutputter_getHeader_6 a yawl:Method ;
+    rdfs:label "getHeader" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getHeader()" ;
+    .
+
+# Method: CombinedBusynessOutputter.finalise
+yawl:CombinedBusynessOutputter_finalise_7 a yawl:Method ;
+    rdfs:label "finalise" ;
+    yawl:returnType "void" ;
+    yawl:signature "void finalise()" ;
+    .
+
+
+
+yawl:CombinedBusynessOutputter_buffer a yawl:Field ;
+    rdfs:label "buffer" .
+
+yawl:CombinedBusynessOutputter_MUTEX a yawl:Field ;
+    rdfs:label "MUTEX" .
+
+yawl:CombinedBusynessOutputter_SDF a yawl:Field ;
+    rdfs:label "SDF" .
+
+
+

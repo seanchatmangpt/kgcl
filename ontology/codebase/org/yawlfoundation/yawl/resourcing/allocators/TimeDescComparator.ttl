@@ -1,0 +1,30 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.allocators.TimeDescComparator
+yawl:TimeDescComparator a yawl:Class ;
+    rdfs:label "TimeDescComparator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_allocators ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/allocators/AbstractAllocator.java"^^xsd:string ;
+    yawl:implements yawl:Comparator ;
+    yawl:modifiers "static" ;
+    yawl:hasMethod yawl:TimeDescComparator_compare_1 ;
+    .
+
+
+# Method: TimeDescComparator.compare
+yawl:TimeDescComparator_compare_1 a yawl:Method ;
+    rdfs:label "compare" ;
+    yawl:returnType "int" ;
+    yawl:signature "int compare(Object o1, Object o2)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

@@ -1,0 +1,112 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.scheduling.persistence
+yawl:org_yawlfoundation_yawl_scheduling_persistence a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.scheduling.persistence" .
+# Class: org.yawlfoundation.yawl.scheduling.persistence.DataMapperMappingTest
+yawl:DataMapperMappingTest a yawl:Class ;
+    rdfs:label "DataMapperMappingTest" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_scheduling_persistence ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/scheduling/persistence/DataMapperMappingTest.java"^^xsd:string ;
+    rdfs:comment """@author jku""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DataMapperMappingTest_setUpBeforeClass_1 ;
+    yawl:hasMethod yawl:DataMapperMappingTest_tearDownAfterClass_2 ;
+    yawl:hasMethod yawl:DataMapperMappingTest_setUp_3 ;
+    yawl:hasMethod yawl:DataMapperMappingTest_tearDown_4 ;
+    yawl:hasMethod yawl:DataMapperMappingTest_testSaveMapping_5 ;
+    yawl:hasMethod yawl:DataMapperMappingTest_testRemoveMapping_6 ;
+    yawl:hasMethod yawl:DataMapperMappingTest_testGetMappings_7 ;
+    yawl:hasField yawl:DataMapperMappingTest_logger ;
+    yawl:hasField yawl:DataMapperMappingTest_mapping1 ;
+    yawl:hasField yawl:DataMapperMappingTest_mapping2 ;
+    yawl:hasField yawl:DataMapperMappingTest_caseId ;
+    .
+
+
+# Method: DataMapperMappingTest.setUpBeforeClass
+yawl:DataMapperMappingTest_setUpBeforeClass_1 a yawl:Method ;
+    rdfs:label "setUpBeforeClass" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUpBeforeClass()" ;
+    rdfs:comment """@throws java.lang.Exception""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DataMapperMappingTest.tearDownAfterClass
+yawl:DataMapperMappingTest_tearDownAfterClass_2 a yawl:Method ;
+    rdfs:label "tearDownAfterClass" ;
+    yawl:returnType "void" ;
+    yawl:signature "void tearDownAfterClass()" ;
+    rdfs:comment """@throws java.lang.Exception""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DataMapperMappingTest.setUp
+yawl:DataMapperMappingTest_setUp_3 a yawl:Method ;
+    rdfs:label "setUp" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUp()" ;
+    rdfs:comment """@throws java.lang.Exception""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataMapperMappingTest.tearDown
+yawl:DataMapperMappingTest_tearDown_4 a yawl:Method ;
+    rdfs:label "tearDown" ;
+    yawl:returnType "void" ;
+    yawl:signature "void tearDown()" ;
+    rdfs:comment """@throws java.lang.Exception""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataMapperMappingTest.testSaveMapping
+yawl:DataMapperMappingTest_testSaveMapping_5 a yawl:Method ;
+    rdfs:label "testSaveMapping" ;
+    yawl:returnType "void" ;
+    yawl:signature "void testSaveMapping()" ;
+    rdfs:comment """Test method for {@link org.yawlfoundation.yawl.scheduling.persistence.DataMapper#saveMapping(org.yawlfoundation.yawl.scheduling.Mapping)} .""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataMapperMappingTest.testRemoveMapping
+yawl:DataMapperMappingTest_testRemoveMapping_6 a yawl:Method ;
+    rdfs:label "testRemoveMapping" ;
+    yawl:returnType "void" ;
+    yawl:signature "void testRemoveMapping()" ;
+    rdfs:comment """Test method for {@link org.yawlfoundation.yawl.scheduling.persistence.DataMapper#removeMapping(org.yawlfoundation.yawl.scheduling.Mapping)} .""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataMapperMappingTest.testGetMappings
+yawl:DataMapperMappingTest_testGetMappings_7 a yawl:Method ;
+    rdfs:label "testGetMappings" ;
+    yawl:returnType "void" ;
+    yawl:signature "void testGetMappings()" ;
+    rdfs:comment """Test method for {@link org.yawlfoundation.yawl.scheduling.persistence.DataMapper#getMappings()} .""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:DataMapperMappingTest_logger a yawl:Field ;
+    rdfs:label "logger" .
+
+yawl:DataMapperMappingTest_mapping1 a yawl:Field ;
+    rdfs:label "mapping1" .
+
+yawl:DataMapperMappingTest_mapping2 a yawl:Field ;
+    rdfs:label "mapping2" .
+
+yawl:DataMapperMappingTest_caseId a yawl:Field ;
+    rdfs:label "caseId" .
+
+
+

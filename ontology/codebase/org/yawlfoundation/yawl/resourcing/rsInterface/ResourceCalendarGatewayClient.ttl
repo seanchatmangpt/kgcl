@@ -1,0 +1,227 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.rsInterface.ResourceCalendarGatewayClient
+yawl:ResourceCalendarGatewayClient a yawl:Class ;
+    rdfs:label "ResourceCalendarGatewayClient" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_rsInterface ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/rsInterface/ResourceCalendarGatewayClient.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 11/10/2010""" ;
+    yawl:extends yawl:Interface_Client ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ResourceCalendarGatewayClient_connect_1 ;
+    yawl:hasMethod yawl:ResourceCalendarGatewayClient_checkConnection_2 ;
+    yawl:hasMethod yawl:ResourceCalendarGatewayClient_disconnect_3 ;
+    yawl:hasMethod yawl:ResourceCalendarGatewayClient_registerStatusChangeListener_4 ;
+    yawl:hasMethod yawl:ResourceCalendarGatewayClient_removeStatusChangeListener_5 ;
+    yawl:hasMethod yawl:ResourceCalendarGatewayClient_getAvailability_6 ;
+    yawl:hasMethod yawl:ResourceCalendarGatewayClient_getAvailability_7 ;
+    yawl:hasMethod yawl:ResourceCalendarGatewayClient_getResourceAvailability_8 ;
+    yawl:hasMethod yawl:ResourceCalendarGatewayClient_getResourceAvailability_9 ;
+    yawl:hasMethod yawl:ResourceCalendarGatewayClient_getReservations_10 ;
+    yawl:hasMethod yawl:ResourceCalendarGatewayClient_getReservations_11 ;
+    yawl:hasMethod yawl:ResourceCalendarGatewayClient_saveReservations_12 ;
+    yawl:hasMethod yawl:ResourceCalendarGatewayClient_getEntries_13 ;
+    yawl:hasMethod yawl:ResourceCalendarGatewayClient_getEntries_14 ;
+    yawl:hasMethod yawl:ResourceCalendarGatewayClient_addEntry_15 ;
+    yawl:hasMethod yawl:ResourceCalendarGatewayClient_addEntry_16 ;
+    yawl:hasMethod yawl:ResourceCalendarGatewayClient_addEntry_17 ;
+    yawl:hasMethod yawl:ResourceCalendarGatewayClient_updateEntry_18 ;
+    yawl:hasMethod yawl:ResourceCalendarGatewayClient_updateEntry_19 ;
+    yawl:hasMethod yawl:ResourceCalendarGatewayClient_deleteEntry_20 ;
+    yawl:hasMethod yawl:ResourceCalendarGatewayClient_deleteEntry_21 ;
+    yawl:hasField yawl:ResourceCalendarGatewayClient__serviceURI ;
+    .
+
+
+# Method: ResourceCalendarGatewayClient.connect
+yawl:ResourceCalendarGatewayClient_connect_1 a yawl:Method ;
+    rdfs:label "connect" ;
+    yawl:returnType "String" ;
+    yawl:signature "String connect(String userID, String password)" ;
+    rdfs:comment """Connects an external entity to the resource service @param userID the userid @param password the corresponding password @return a sessionHandle if successful, or a failure message if not @throws java.io.IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendarGatewayClient.checkConnection
+yawl:ResourceCalendarGatewayClient_checkConnection_2 a yawl:Method ;
+    rdfs:label "checkConnection" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkConnection(String handle)" ;
+    rdfs:comment """Check that a session handle is active @param handle the session handle to check @return \"true\" if the id is valid, \"false\" if otherwise @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendarGatewayClient.disconnect
+yawl:ResourceCalendarGatewayClient_disconnect_3 a yawl:Method ;
+    rdfs:label "disconnect" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disconnect(String handle)" ;
+    rdfs:comment """Disconnects an external entity from the resource service @param handle the sessionHandle to disconnect @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendarGatewayClient.registerStatusChangeListener
+yawl:ResourceCalendarGatewayClient_registerStatusChangeListener_4 a yawl:Method ;
+    rdfs:label "registerStatusChangeListener" ;
+    yawl:returnType "String" ;
+    yawl:signature "String registerStatusChangeListener(String uri, String handle)" ;
+    rdfs:comment """Registers a URI as a listener for status change events. Note that only changes that affect the owner of the handle will receive events via the URI. @param uri the uri to which status change announcements are made @param handle a valid session handle @return a diagnostic message @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendarGatewayClient.removeStatusChangeListener
+yawl:ResourceCalendarGatewayClient_removeStatusChangeListener_5 a yawl:Method ;
+    rdfs:label "removeStatusChangeListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeStatusChangeListener(String uri, String handle)" ;
+    rdfs:comment """Removes a URI as a listener for status change events. @param uri the uri to remove as a listener for status change announcements @param handle a valid session handle @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendarGatewayClient.getAvailability
+yawl:ResourceCalendarGatewayClient_getAvailability_6 a yawl:Method ;
+    rdfs:label "getAvailability" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAvailability(String resourceXML, long from, long to, String handle)" ;
+    rdfs:comment """Gets the periods (timeslots) between 'from' and 'to' when the resource described by the resource record xml, is available @param resourceXML the resource record to check for availability @param from the start of the date/time range @param to the end of the date/time range @param handle a valid session handle @return an xml string of the resource's available timeslots @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendarGatewayClient.getAvailability
+yawl:ResourceCalendarGatewayClient_getAvailability_7 a yawl:Method ;
+    rdfs:label "getAvailability" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAvailability(String resourceXML, Date fromDate, Date toDate, String handle)" ;
+    rdfs:comment """Gets the periods (timeslots) between 'from' and 'to' when the resource described by the resource record xml, is available @param resourceXML the resource record to check for availability @param fromDate the start of the date/time range @param toDate the end of the date/time range @param handle a valid session handle @return an xml string of the resource's available timeslots @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendarGatewayClient.getResourceAvailability
+yawl:ResourceCalendarGatewayClient_getResourceAvailability_8 a yawl:Method ;
+    rdfs:label "getResourceAvailability" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourceAvailability(String resourceID, long from, long to, String handle)" ;
+    rdfs:comment """Gets the periods (timeslots) between 'from' and 'to' when the resource is available @param resourceID the resource to check for availability @param from the start of the date/time range @param to the end of the date/time range @param handle a valid session handle @return an xml string of the resource's available timeslots @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendarGatewayClient.getResourceAvailability
+yawl:ResourceCalendarGatewayClient_getResourceAvailability_9 a yawl:Method ;
+    rdfs:label "getResourceAvailability" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourceAvailability(String resourceID, Date fromDate, Date toDate, String handle)" ;
+    rdfs:comment """Gets the periods (timeslots) between 'from' and 'to' when the resource is available @param resourceID the resource to check for availability @param fromDate the start of the date/time range @param toDate the end of the date/time range @param handle a valid session handle @return an xml string of the resource's available timeslots @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendarGatewayClient.getReservations
+yawl:ResourceCalendarGatewayClient_getReservations_10 a yawl:Method ;
+    rdfs:label "getReservations" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getReservations(String resourceXML, long from, long to, String handle)" ;
+    rdfs:comment """Gets all the current reservations held for a resource within a time period @param resourceXML the resource(s) to get the reservations for @param from the start of the date/time range @param to the end of the date/time range @param handle a valid session handle @return an xml string of the resource's reservations @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendarGatewayClient.getReservations
+yawl:ResourceCalendarGatewayClient_getReservations_11 a yawl:Method ;
+    rdfs:label "getReservations" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getReservations(String resourceXML, Date fromDate, Date toDate, String handle)" ;
+    rdfs:comment """Gets all the current reservations held for a resource within a time period @param resourceXML the resource(s) to get the reservations for @param fromDate the start of the date/time range @param toDate the end of the date/time range @param handle a valid session handle @return an xml string of the resource's reservations @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendarGatewayClient.saveReservations
+yawl:ResourceCalendarGatewayClient_saveReservations_12 a yawl:Method ;
+    rdfs:label "saveReservations" ;
+    yawl:returnType "String" ;
+    yawl:signature "String saveReservations(String planXML, boolean checkOnly, String handle)" ;
+    rdfs:comment """Saves all the reservations within a UtilisationPlan (where possible) @param planXML the UtilisationPlan containing the reservations @param checkOnly if true, will report on the effects only - won't update the reservations @param handle a valid session handle @return a passed xml plan, updated with messages where appropriate @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendarGatewayClient.getEntries
+yawl:ResourceCalendarGatewayClient_getEntries_13 a yawl:Method ;
+    rdfs:label "getEntries" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEntries(ResourceCalendar group, long from, long to, boolean commit, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendarGatewayClient.getEntries
+yawl:ResourceCalendarGatewayClient_getEntries_14 a yawl:Method ;
+    rdfs:label "getEntries" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEntries(String resourceID, long from, long to, boolean commit, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendarGatewayClient.addEntry
+yawl:ResourceCalendarGatewayClient_addEntry_15 a yawl:Method ;
+    rdfs:label "addEntry" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addEntry(ResourceCalendar group, long from, long to, int workload, String agent, String comment, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendarGatewayClient.addEntry
+yawl:ResourceCalendarGatewayClient_addEntry_16 a yawl:Method ;
+    rdfs:label "addEntry" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addEntry(String resourceID, long from, long to, int workload, String agent, String comment, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendarGatewayClient.addEntry
+yawl:ResourceCalendarGatewayClient_addEntry_17 a yawl:Method ;
+    rdfs:label "addEntry" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addEntry(CalendarEntry entry, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendarGatewayClient.updateEntry
+yawl:ResourceCalendarGatewayClient_updateEntry_18 a yawl:Method ;
+    rdfs:label "updateEntry" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateEntry(long entryID, long from, long to, int workload, String comment, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendarGatewayClient.updateEntry
+yawl:ResourceCalendarGatewayClient_updateEntry_19 a yawl:Method ;
+    rdfs:label "updateEntry" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateEntry(CalendarEntry entry, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendarGatewayClient.deleteEntry
+yawl:ResourceCalendarGatewayClient_deleteEntry_20 a yawl:Method ;
+    rdfs:label "deleteEntry" ;
+    yawl:returnType "String" ;
+    yawl:signature "String deleteEntry(long entryID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceCalendarGatewayClient.deleteEntry
+yawl:ResourceCalendarGatewayClient_deleteEntry_21 a yawl:Method ;
+    rdfs:label "deleteEntry" ;
+    yawl:returnType "String" ;
+    yawl:signature "String deleteEntry(CalendarEntry entry, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:ResourceCalendarGatewayClient__serviceURI a yawl:Field ;
+    rdfs:label "_serviceURI" .
+
+
+

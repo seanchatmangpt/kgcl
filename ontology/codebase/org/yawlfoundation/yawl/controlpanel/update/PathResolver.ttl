@@ -1,0 +1,49 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.update.PathResolver
+yawl:PathResolver a yawl:Class ;
+    rdfs:label "PathResolver" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_update ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/update/PathResolver.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 11/03/2016""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:PathResolver_get_1 ;
+    yawl:hasField yawl:PathResolver_host ;
+    yawl:hasField yawl:PathResolver_base ;
+    yawl:hasField yawl:PathResolver_check ;
+    yawl:hasField yawl:PathResolver_suffix ;
+    yawl:hasField yawl:PathResolver_paths ;
+    .
+
+
+# Method: PathResolver.get
+yawl:PathResolver_get_1 a yawl:Method ;
+    rdfs:label "get" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get(String id)" ;
+    .
+
+
+
+yawl:PathResolver_host a yawl:Field ;
+    rdfs:label "host" .
+
+yawl:PathResolver_base a yawl:Field ;
+    rdfs:label "base" .
+
+yawl:PathResolver_check a yawl:Field ;
+    rdfs:label "check" .
+
+yawl:PathResolver_suffix a yawl:Field ;
+    rdfs:label "suffix" .
+
+yawl:PathResolver_paths a yawl:Field ;
+    rdfs:label "paths" .
+
+
+

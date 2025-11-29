@@ -1,0 +1,448 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.visualiser
+yawl:visualiser a yawl:Class ;
+    rdfs:label "visualiser" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/visualiser.java"^^xsd:string ;
+    yawl:extends yawl:AbstractPageBean ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:visualiser__init_1 ;
+    yawl:hasMethod yawl:visualiser_getPage1_2 ;
+    yawl:hasMethod yawl:visualiser_setPage1_3 ;
+    yawl:hasMethod yawl:visualiser_getHtml1_4 ;
+    yawl:hasMethod yawl:visualiser_setHtml1_5 ;
+    yawl:hasMethod yawl:visualiser_getHead1_6 ;
+    yawl:hasMethod yawl:visualiser_setHead1_7 ;
+    yawl:hasMethod yawl:visualiser_getLink1_8 ;
+    yawl:hasMethod yawl:visualiser_setLink1_9 ;
+    yawl:hasMethod yawl:visualiser_getBody1_10 ;
+    yawl:hasMethod yawl:visualiser_setBody1_11 ;
+    yawl:hasMethod yawl:visualiser_getForm1_12 ;
+    yawl:hasMethod yawl:visualiser_setForm1_13 ;
+    yawl:hasMethod yawl:visualiser_getBtnReturn_14 ;
+    yawl:hasMethod yawl:visualiser_setBtnReturn_15 ;
+    yawl:hasMethod yawl:visualiser_getBtnView_16 ;
+    yawl:hasMethod yawl:visualiser_setBtnView_17 ;
+    yawl:hasMethod yawl:visualiser_getPnlContainer_18 ;
+    yawl:hasMethod yawl:visualiser_setPnlContainer_19 ;
+    yawl:hasMethod yawl:visualiser_getOutputText_20 ;
+    yawl:hasMethod yawl:visualiser_setOutputText_21 ;
+    yawl:hasMethod yawl:visualiser_getHdnSelectedItemID_22 ;
+    yawl:hasMethod yawl:visualiser_setHdnSelectedItemID_23 ;
+    yawl:hasMethod yawl:visualiser_getApplicationBean_24 ;
+    yawl:hasMethod yawl:visualiser_getRequestBean_25 ;
+    yawl:hasMethod yawl:visualiser_getSessionBean_26 ;
+    yawl:hasMethod yawl:visualiser_init_27 ;
+    yawl:hasMethod yawl:visualiser_preprocess_28 ;
+    yawl:hasMethod yawl:visualiser_prerender_29 ;
+    yawl:hasMethod yawl:visualiser_destroy_30 ;
+    yawl:hasMethod yawl:visualiser_btnReturn_action_31 ;
+    yawl:hasMethod yawl:visualiser_btnView_action_32 ;
+    yawl:hasMethod yawl:visualiser_postEditWIR_33 ;
+    yawl:hasMethod yawl:visualiser_completeWorkItem_34 ;
+    yawl:hasMethod yawl:visualiser_getUsername_35 ;
+    yawl:hasMethod yawl:visualiser_getPassword_36 ;
+    yawl:hasMethod yawl:visualiser_forceRefresh_37 ;
+    yawl:hasMethod yawl:visualiser_getAppletHtml_38 ;
+    yawl:hasMethod yawl:visualiser_getSelectedWIR_39 ;
+    yawl:hasMethod yawl:visualiser_getViewSize_40 ;
+    yawl:hasField yawl:visualiser___placeholder ;
+    yawl:hasField yawl:visualiser_page1 ;
+    yawl:hasField yawl:visualiser_html1 ;
+    yawl:hasField yawl:visualiser_head1 ;
+    yawl:hasField yawl:visualiser_link1 ;
+    yawl:hasField yawl:visualiser_body1 ;
+    yawl:hasField yawl:visualiser_form1 ;
+    yawl:hasField yawl:visualiser_btnReturn ;
+    yawl:hasField yawl:visualiser_btnView ;
+    yawl:hasField yawl:visualiser_pnlContainer ;
+    yawl:hasField yawl:visualiser_outputText ;
+    yawl:hasField yawl:visualiser_hdnSelectedItemID ;
+    yawl:hasField yawl:visualiser__sb ;
+    yawl:hasField yawl:visualiser_msgPanel ;
+    yawl:hasField yawl:visualiser__rm ;
+    yawl:hasField yawl:visualiser_DEFAULT_DIMENSION ;
+    .
+
+
+# Method: visualiser._init
+yawl:visualiser__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: visualiser.getPage1
+yawl:visualiser_getPage1_2 a yawl:Method ;
+    rdfs:label "getPage1" ;
+    yawl:returnType "Page" ;
+    yawl:signature "Page getPage1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.setPage1
+yawl:visualiser_setPage1_3 a yawl:Method ;
+    rdfs:label "setPage1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPage1(Page p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.getHtml1
+yawl:visualiser_getHtml1_4 a yawl:Method ;
+    rdfs:label "getHtml1" ;
+    yawl:returnType "Html" ;
+    yawl:signature "Html getHtml1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.setHtml1
+yawl:visualiser_setHtml1_5 a yawl:Method ;
+    rdfs:label "setHtml1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHtml1(Html h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.getHead1
+yawl:visualiser_getHead1_6 a yawl:Method ;
+    rdfs:label "getHead1" ;
+    yawl:returnType "Head" ;
+    yawl:signature "Head getHead1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.setHead1
+yawl:visualiser_setHead1_7 a yawl:Method ;
+    rdfs:label "setHead1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHead1(Head h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.getLink1
+yawl:visualiser_getLink1_8 a yawl:Method ;
+    rdfs:label "getLink1" ;
+    yawl:returnType "Link" ;
+    yawl:signature "Link getLink1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.setLink1
+yawl:visualiser_setLink1_9 a yawl:Method ;
+    rdfs:label "setLink1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLink1(Link l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.getBody1
+yawl:visualiser_getBody1_10 a yawl:Method ;
+    rdfs:label "getBody1" ;
+    yawl:returnType "Body" ;
+    yawl:signature "Body getBody1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.setBody1
+yawl:visualiser_setBody1_11 a yawl:Method ;
+    rdfs:label "setBody1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBody1(Body b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.getForm1
+yawl:visualiser_getForm1_12 a yawl:Method ;
+    rdfs:label "getForm1" ;
+    yawl:returnType "Form" ;
+    yawl:signature "Form getForm1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.setForm1
+yawl:visualiser_setForm1_13 a yawl:Method ;
+    rdfs:label "setForm1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setForm1(Form f)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.getBtnReturn
+yawl:visualiser_getBtnReturn_14 a yawl:Method ;
+    rdfs:label "getBtnReturn" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnReturn()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.setBtnReturn
+yawl:visualiser_setBtnReturn_15 a yawl:Method ;
+    rdfs:label "setBtnReturn" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnReturn(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.getBtnView
+yawl:visualiser_getBtnView_16 a yawl:Method ;
+    rdfs:label "getBtnView" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnView()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.setBtnView
+yawl:visualiser_setBtnView_17 a yawl:Method ;
+    rdfs:label "setBtnView" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnView(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.getPnlContainer
+yawl:visualiser_getPnlContainer_18 a yawl:Method ;
+    rdfs:label "getPnlContainer" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlContainer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.setPnlContainer
+yawl:visualiser_setPnlContainer_19 a yawl:Method ;
+    rdfs:label "setPnlContainer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlContainer(PanelLayout pnl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.getOutputText
+yawl:visualiser_getOutputText_20 a yawl:Method ;
+    rdfs:label "getOutputText" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getOutputText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.setOutputText
+yawl:visualiser_setOutputText_21 a yawl:Method ;
+    rdfs:label "setOutputText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOutputText(HtmlOutputText text)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.getHdnSelectedItemID
+yawl:visualiser_getHdnSelectedItemID_22 a yawl:Method ;
+    rdfs:label "getHdnSelectedItemID" ;
+    yawl:returnType "HiddenField" ;
+    yawl:signature "HiddenField getHdnSelectedItemID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.setHdnSelectedItemID
+yawl:visualiser_setHdnSelectedItemID_23 a yawl:Method ;
+    rdfs:label "setHdnSelectedItemID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHdnSelectedItemID(HiddenField hf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.getApplicationBean
+yawl:visualiser_getApplicationBean_24 a yawl:Method ;
+    rdfs:label "getApplicationBean" ;
+    yawl:returnType "ApplicationBean" ;
+    yawl:signature "ApplicationBean getApplicationBean()" ;
+    rdfs:comment """<p>Return a reference to each scoped bean.</p>""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: visualiser.getRequestBean
+yawl:visualiser_getRequestBean_25 a yawl:Method ;
+    rdfs:label "getRequestBean" ;
+    yawl:returnType "RequestBean" ;
+    yawl:signature "RequestBean getRequestBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: visualiser.getSessionBean
+yawl:visualiser_getSessionBean_26 a yawl:Method ;
+    rdfs:label "getSessionBean" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getSessionBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: visualiser.init
+yawl:visualiser_init_27 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.preprocess
+yawl:visualiser_preprocess_28 a yawl:Method ;
+    rdfs:label "preprocess" ;
+    yawl:returnType "void" ;
+    yawl:signature "void preprocess()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.prerender
+yawl:visualiser_prerender_29 a yawl:Method ;
+    rdfs:label "prerender" ;
+    yawl:returnType "void" ;
+    yawl:signature "void prerender()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.destroy
+yawl:visualiser_destroy_30 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.btnReturn_action
+yawl:visualiser_btnReturn_action_31 a yawl:Method ;
+    rdfs:label "btnReturn_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnReturn_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.btnView_action
+yawl:visualiser_btnView_action_32 a yawl:Method ;
+    rdfs:label "btnView_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnView_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.postEditWIR
+yawl:visualiser_postEditWIR_33 a yawl:Method ;
+    rdfs:label "postEditWIR" ;
+    yawl:returnType "void" ;
+    yawl:signature "void postEditWIR()" ;
+    rdfs:comment """updates a workitem after editing on a dynamic form""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: visualiser.completeWorkItem
+yawl:visualiser_completeWorkItem_34 a yawl:Method ;
+    rdfs:label "completeWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void completeWorkItem(WorkItemRecord wir, Participant p)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: visualiser.getUsername
+yawl:visualiser_getUsername_35 a yawl:Method ;
+    rdfs:label "getUsername" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUsername()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.getPassword
+yawl:visualiser_getPassword_36 a yawl:Method ;
+    rdfs:label "getPassword" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.forceRefresh
+yawl:visualiser_forceRefresh_37 a yawl:Method ;
+    rdfs:label "forceRefresh" ;
+    yawl:returnType "void" ;
+    yawl:signature "void forceRefresh()" ;
+    rdfs:comment """refreshes the page""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.getAppletHtml
+yawl:visualiser_getAppletHtml_38 a yawl:Method ;
+    rdfs:label "getAppletHtml" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAppletHtml()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: visualiser.getSelectedWIR
+yawl:visualiser_getSelectedWIR_39 a yawl:Method ;
+    rdfs:label "getSelectedWIR" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord getSelectedWIR(String itemID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: visualiser.getViewSize
+yawl:visualiser_getViewSize_40 a yawl:Method ;
+    rdfs:label "getViewSize" ;
+    yawl:returnType "Dimension" ;
+    yawl:signature "Dimension getViewSize()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:visualiser___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:visualiser_page1 a yawl:Field ;
+    rdfs:label "page1" .
+
+yawl:visualiser_html1 a yawl:Field ;
+    rdfs:label "html1" .
+
+yawl:visualiser_head1 a yawl:Field ;
+    rdfs:label "head1" .
+
+yawl:visualiser_link1 a yawl:Field ;
+    rdfs:label "link1" .
+
+yawl:visualiser_body1 a yawl:Field ;
+    rdfs:label "body1" .
+
+yawl:visualiser_form1 a yawl:Field ;
+    rdfs:label "form1" .
+
+yawl:visualiser_btnReturn a yawl:Field ;
+    rdfs:label "btnReturn" .
+
+yawl:visualiser_btnView a yawl:Field ;
+    rdfs:label "btnView" .
+
+yawl:visualiser_pnlContainer a yawl:Field ;
+    rdfs:label "pnlContainer" .
+
+yawl:visualiser_outputText a yawl:Field ;
+    rdfs:label "outputText" .
+
+yawl:visualiser_hdnSelectedItemID a yawl:Field ;
+    rdfs:label "hdnSelectedItemID" .
+
+yawl:visualiser__sb a yawl:Field ;
+    rdfs:label "_sb" .
+
+yawl:visualiser_msgPanel a yawl:Field ;
+    rdfs:label "msgPanel" .
+
+yawl:visualiser__rm a yawl:Field ;
+    rdfs:label "_rm" .
+
+yawl:visualiser_DEFAULT_DIMENSION a yawl:Field ;
+    rdfs:label "DEFAULT_DIMENSION" .
+
+
+

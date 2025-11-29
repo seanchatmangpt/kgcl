@@ -1,0 +1,71 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.stateless.engine.MultiThreadEventNotifier
+yawl:MultiThreadEventNotifier a yawl:Class ;
+    rdfs:label "MultiThreadEventNotifier" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_engine ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/engine/MultiThreadEventNotifier.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 18/1/2023""" ;
+    yawl:implements yawl:EventNotifier ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:MultiThreadEventNotifier_announceCaseEvent_1 ;
+    yawl:hasMethod yawl:MultiThreadEventNotifier_announceWorkItemEvent_2 ;
+    yawl:hasMethod yawl:MultiThreadEventNotifier_announceExceptionEvent_3 ;
+    yawl:hasMethod yawl:MultiThreadEventNotifier_announceLogEvent_4 ;
+    yawl:hasMethod yawl:MultiThreadEventNotifier_announceTimerEvent_5 ;
+    yawl:hasField yawl:MultiThreadEventNotifier__executor ;
+    .
+
+
+# Method: MultiThreadEventNotifier.announceCaseEvent
+yawl:MultiThreadEventNotifier_announceCaseEvent_1 a yawl:Method ;
+    rdfs:label "announceCaseEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCaseEvent(Set listeners, YCaseEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MultiThreadEventNotifier.announceWorkItemEvent
+yawl:MultiThreadEventNotifier_announceWorkItemEvent_2 a yawl:Method ;
+    rdfs:label "announceWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceWorkItemEvent(Set listeners, YWorkItemEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MultiThreadEventNotifier.announceExceptionEvent
+yawl:MultiThreadEventNotifier_announceExceptionEvent_3 a yawl:Method ;
+    rdfs:label "announceExceptionEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceExceptionEvent(Set listeners, YExceptionEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MultiThreadEventNotifier.announceLogEvent
+yawl:MultiThreadEventNotifier_announceLogEvent_4 a yawl:Method ;
+    rdfs:label "announceLogEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceLogEvent(Set listeners, YLogEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MultiThreadEventNotifier.announceTimerEvent
+yawl:MultiThreadEventNotifier_announceTimerEvent_5 a yawl:Method ;
+    rdfs:label "announceTimerEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceTimerEvent(Set listeners, YTimerEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:MultiThreadEventNotifier__executor a yawl:Field ;
+    rdfs:label "_executor" .
+
+
+

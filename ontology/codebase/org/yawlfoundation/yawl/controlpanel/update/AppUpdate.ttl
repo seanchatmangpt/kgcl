@@ -1,0 +1,249 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.update.AppUpdate
+yawl:AppUpdate a yawl:Class ;
+    rdfs:label "AppUpdate" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_update ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/update/AppUpdate.java"^^xsd:string ;
+    rdfs:comment """Manages the set of files to download (installs & updates) or delete (uninstalls) for a particular webapp or set of library jars. @author Michael Adams @date 12/08/2014""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:AppUpdate_addDownload_1 ;
+    yawl:hasMethod yawl:AppUpdate_addDownload_2 ;
+    yawl:hasMethod yawl:AppUpdate_addDeletion_3 ;
+    yawl:hasMethod yawl:AppUpdate_addDeletion_4 ;
+    yawl:hasMethod yawl:AppUpdate_getAppName_5 ;
+    yawl:hasMethod yawl:AppUpdate_isAppList_6 ;
+    yawl:hasMethod yawl:AppUpdate_isControlPanelApp_7 ;
+    yawl:hasMethod yawl:AppUpdate_isServiceApp_8 ;
+    yawl:hasMethod yawl:AppUpdate_isUIApp_9 ;
+    yawl:hasMethod yawl:AppUpdate_hasDownloads_10 ;
+    yawl:hasMethod yawl:AppUpdate_hasDeletions_11 ;
+    yawl:hasMethod yawl:AppUpdate_isEmpty_12 ;
+    yawl:hasMethod yawl:AppUpdate_getDownloadNames_13 ;
+    yawl:hasMethod yawl:AppUpdate_getDownloads_14 ;
+    yawl:hasMethod yawl:AppUpdate_getDeletionNames_15 ;
+    yawl:hasMethod yawl:AppUpdate_getDeletes_16 ;
+    yawl:hasMethod yawl:AppUpdate_getTotalUpdateSize_17 ;
+    yawl:hasMethod yawl:AppUpdate_getMd5Map_18 ;
+    yawl:hasMethod yawl:AppUpdate_merge_19 ;
+    yawl:hasMethod yawl:AppUpdate_add_20 ;
+    yawl:hasMethod yawl:AppUpdate_add_21 ;
+    yawl:hasMethod yawl:AppUpdate_getNames_22 ;
+    yawl:hasMethod yawl:AppUpdate_fixPath_23 ;
+    yawl:hasMethod yawl:AppUpdate_toString_24 ;
+    yawl:hasField yawl:AppUpdate__downloads ;
+    yawl:hasField yawl:AppUpdate__deletes ;
+    yawl:hasField yawl:AppUpdate__appName ;
+    .
+
+
+# Method: AppUpdate.addDownload
+yawl:AppUpdate_addDownload_1 a yawl:Method ;
+    rdfs:label "addDownload" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addDownload(FileNode node)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AppUpdate.addDownload
+yawl:AppUpdate_addDownload_2 a yawl:Method ;
+    rdfs:label "addDownload" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addDownload(XNode xNode, String path)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AppUpdate.addDeletion
+yawl:AppUpdate_addDeletion_3 a yawl:Method ;
+    rdfs:label "addDeletion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addDeletion(FileNode node)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AppUpdate.addDeletion
+yawl:AppUpdate_addDeletion_4 a yawl:Method ;
+    rdfs:label "addDeletion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addDeletion(XNode xNode, String path)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AppUpdate.getAppName
+yawl:AppUpdate_getAppName_5 a yawl:Method ;
+    rdfs:label "getAppName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAppName()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AppUpdate.isAppList
+yawl:AppUpdate_isAppList_6 a yawl:Method ;
+    rdfs:label "isAppList" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAppList()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AppUpdate.isControlPanelApp
+yawl:AppUpdate_isControlPanelApp_7 a yawl:Method ;
+    rdfs:label "isControlPanelApp" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isControlPanelApp()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AppUpdate.isServiceApp
+yawl:AppUpdate_isServiceApp_8 a yawl:Method ;
+    rdfs:label "isServiceApp" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isServiceApp()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AppUpdate.isUIApp
+yawl:AppUpdate_isUIApp_9 a yawl:Method ;
+    rdfs:label "isUIApp" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isUIApp()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AppUpdate.hasDownloads
+yawl:AppUpdate_hasDownloads_10 a yawl:Method ;
+    rdfs:label "hasDownloads" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasDownloads()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AppUpdate.hasDeletions
+yawl:AppUpdate_hasDeletions_11 a yawl:Method ;
+    rdfs:label "hasDeletions" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasDeletions()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AppUpdate.isEmpty
+yawl:AppUpdate_isEmpty_12 a yawl:Method ;
+    rdfs:label "isEmpty" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEmpty()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AppUpdate.getDownloadNames
+yawl:AppUpdate_getDownloadNames_13 a yawl:Method ;
+    rdfs:label "getDownloadNames" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getDownloadNames()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AppUpdate.getDownloads
+yawl:AppUpdate_getDownloads_14 a yawl:Method ;
+    rdfs:label "getDownloads" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getDownloads()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AppUpdate.getDeletionNames
+yawl:AppUpdate_getDeletionNames_15 a yawl:Method ;
+    rdfs:label "getDeletionNames" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getDeletionNames()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AppUpdate.getDeletes
+yawl:AppUpdate_getDeletes_16 a yawl:Method ;
+    rdfs:label "getDeletes" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getDeletes()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AppUpdate.getTotalUpdateSize
+yawl:AppUpdate_getTotalUpdateSize_17 a yawl:Method ;
+    rdfs:label "getTotalUpdateSize" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getTotalUpdateSize()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AppUpdate.getMd5Map
+yawl:AppUpdate_getMd5Map_18 a yawl:Method ;
+    rdfs:label "getMd5Map" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getMd5Map()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AppUpdate.merge
+yawl:AppUpdate_merge_19 a yawl:Method ;
+    rdfs:label "merge" ;
+    yawl:returnType "void" ;
+    yawl:signature "void merge(AppUpdate other)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AppUpdate.add
+yawl:AppUpdate_add_20 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(Set list, XNode node, String path)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: AppUpdate.add
+yawl:AppUpdate_add_21 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(Set list, FileNode node)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: AppUpdate.getNames
+yawl:AppUpdate_getNames_22 a yawl:Method ;
+    rdfs:label "getNames" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getNames(Set list)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: AppUpdate.fixPath
+yawl:AppUpdate_fixPath_23 a yawl:Method ;
+    rdfs:label "fixPath" ;
+    yawl:returnType "String" ;
+    yawl:signature "String fixPath(String path)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: AppUpdate.toString
+yawl:AppUpdate_toString_24 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:AppUpdate__downloads a yawl:Field ;
+    rdfs:label "_downloads" .
+
+yawl:AppUpdate__deletes a yawl:Field ;
+    rdfs:label "_deletes" .
+
+yawl:AppUpdate__appName a yawl:Field ;
+    rdfs:label "_appName" .
+
+
+

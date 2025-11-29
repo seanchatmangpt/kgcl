@@ -1,0 +1,112 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.choiceexception.ExceptionChoiceCoordinator
+yawl:ExceptionChoiceCoordinator a yawl:Class ;
+    rdfs:label "ExceptionChoiceCoordinator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor_choiceexception ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/choiceexception/ExceptionChoiceCoordinator.java"^^xsd:string ;
+    yawl:extends yawl:InternalCoordinator ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ExceptionChoiceCoordinator_singleton_1 ;
+    yawl:hasMethod yawl:ExceptionChoiceCoordinator_getInstance_2 ;
+    yawl:hasMethod yawl:ExceptionChoiceCoordinator_exists_3 ;
+    yawl:hasMethod yawl:ExceptionChoiceCoordinator_finish_4 ;
+    yawl:hasMethod yawl:ExceptionChoiceCoordinator_start_5 ;
+    yawl:hasMethod yawl:ExceptionChoiceCoordinator_getInternalFrame_6 ;
+    yawl:hasMethod yawl:ExceptionChoiceCoordinator_end_7 ;
+    yawl:hasMethod yawl:ExceptionChoiceCoordinator_getExceptionChoiceControl_8 ;
+    yawl:hasField yawl:ExceptionChoiceCoordinator_frame ;
+    yawl:hasField yawl:ExceptionChoiceCoordinator_instance ;
+    yawl:hasField yawl:ExceptionChoiceCoordinator_nameTextField ;
+    .
+
+
+# Method: ExceptionChoiceCoordinator.singleton
+yawl:ExceptionChoiceCoordinator_singleton_1 a yawl:Method ;
+    rdfs:label "singleton" ;
+    yawl:returnType "ExceptionChoiceCoordinator" ;
+    yawl:signature "ExceptionChoiceCoordinator singleton(JFrame aMainFrame)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ExceptionChoiceCoordinator.getInstance
+yawl:ExceptionChoiceCoordinator_getInstance_2 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "ExceptionChoiceCoordinator" ;
+    yawl:signature "ExceptionChoiceCoordinator getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ExceptionChoiceCoordinator.exists
+yawl:ExceptionChoiceCoordinator_exists_3 a yawl:Method ;
+    rdfs:label "exists" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean exists()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ExceptionChoiceCoordinator.finish
+yawl:ExceptionChoiceCoordinator_finish_4 a yawl:Method ;
+    rdfs:label "finish" ;
+    yawl:returnType "void" ;
+    yawl:signature "void finish()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ExceptionChoiceCoordinator.start
+yawl:ExceptionChoiceCoordinator_start_5 a yawl:Method ;
+    rdfs:label "start" ;
+    yawl:returnType "void" ;
+    yawl:signature "void start()" ;
+    rdfs:comment """start""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExceptionChoiceCoordinator.getInternalFrame
+yawl:ExceptionChoiceCoordinator_getInternalFrame_6 a yawl:Method ;
+    rdfs:label "getInternalFrame" ;
+    yawl:returnType "JInternalFrame" ;
+    yawl:signature "JInternalFrame getInternalFrame()" ;
+    rdfs:comment """getInternalFrame @return JInternalFrame""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExceptionChoiceCoordinator.end
+yawl:ExceptionChoiceCoordinator_end_7 a yawl:Method ;
+    rdfs:label "end" ;
+    yawl:returnType "void" ;
+    yawl:signature "void end()" ;
+    rdfs:comment """end""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExceptionChoiceCoordinator.getExceptionChoiceControl
+yawl:ExceptionChoiceCoordinator_getExceptionChoiceControl_8 a yawl:Method ;
+    rdfs:label "getExceptionChoiceControl" ;
+    yawl:returnType "ExceptionChoiceControl" ;
+    yawl:signature "ExceptionChoiceControl getExceptionChoiceControl()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:ExceptionChoiceCoordinator_frame a yawl:Field ;
+    rdfs:label "frame" .
+
+yawl:ExceptionChoiceCoordinator_instance a yawl:Field ;
+    rdfs:label "instance" .
+
+yawl:ExceptionChoiceCoordinator_nameTextField a yawl:Field ;
+    rdfs:label "nameTextField" .
+
+
+

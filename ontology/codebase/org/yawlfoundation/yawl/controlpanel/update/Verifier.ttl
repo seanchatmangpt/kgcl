@@ -1,0 +1,44 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.update.Verifier
+yawl:Verifier a yawl:Class ;
+    rdfs:label "Verifier" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_update ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/update/Verifier.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 23/08/2014""" ;
+    yawl:extends yawl:SwingWorker ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Verifier_doInBackground_1 ;
+    yawl:hasMethod yawl:Verifier_verify_2 ;
+    yawl:hasField yawl:Verifier__md5Map ;
+    .
+
+
+# Method: Verifier.doInBackground
+yawl:Verifier_doInBackground_1 a yawl:Method ;
+    rdfs:label "doInBackground" ;
+    yawl:returnType "Boolean" ;
+    yawl:signature "Boolean doInBackground()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Verifier.verify
+yawl:Verifier_verify_2 a yawl:Method ;
+    rdfs:label "verify" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean verify()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:Verifier__md5Map a yawl:Field ;
+    rdfs:label "_md5Map" .
+
+
+

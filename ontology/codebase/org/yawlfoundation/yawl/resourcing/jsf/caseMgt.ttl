@@ -1,0 +1,1576 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.caseMgt
+yawl:caseMgt a yawl:Class ;
+    rdfs:label "caseMgt" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/caseMgt.java"^^xsd:string ;
+    rdfs:comment """Backing bean for the case mgt page. @author Michael Adams BPM Group, QUT Australia v0.1, 19/12/2007 Last Date: 05/01/2008""" ;
+    yawl:extends yawl:AbstractPageBean ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:caseMgt__init_1 ;
+    yawl:hasMethod yawl:caseMgt_getRequestBean_2 ;
+    yawl:hasMethod yawl:caseMgt_getSessionBean_3 ;
+    yawl:hasMethod yawl:caseMgt_getApplicationBean_4 ;
+    yawl:hasMethod yawl:caseMgt_init_5 ;
+    yawl:hasMethod yawl:caseMgt_preprocess_6 ;
+    yawl:hasMethod yawl:caseMgt_destroy_7 ;
+    yawl:hasMethod yawl:caseMgt_getPage1_8 ;
+    yawl:hasMethod yawl:caseMgt_setPage1_9 ;
+    yawl:hasMethod yawl:caseMgt_getHtml1_10 ;
+    yawl:hasMethod yawl:caseMgt_setHtml1_11 ;
+    yawl:hasMethod yawl:caseMgt_getHead1_12 ;
+    yawl:hasMethod yawl:caseMgt_setHead1_13 ;
+    yawl:hasMethod yawl:caseMgt_getLink1_14 ;
+    yawl:hasMethod yawl:caseMgt_setLink1_15 ;
+    yawl:hasMethod yawl:caseMgt_getBody1_16 ;
+    yawl:hasMethod yawl:caseMgt_setBody1_17 ;
+    yawl:hasMethod yawl:caseMgt_getForm1_18 ;
+    yawl:hasMethod yawl:caseMgt_setForm1_19 ;
+    yawl:hasMethod yawl:caseMgt_getFileUpload1_20 ;
+    yawl:hasMethod yawl:caseMgt_setFileUpload1_21 ;
+    yawl:hasMethod yawl:caseMgt_getBtnUpload_22 ;
+    yawl:hasMethod yawl:caseMgt_setBtnUpload_23 ;
+    yawl:hasMethod yawl:caseMgt_getStaticText1_24 ;
+    yawl:hasMethod yawl:caseMgt_setStaticText1_25 ;
+    yawl:hasMethod yawl:caseMgt_getBtnLaunch_26 ;
+    yawl:hasMethod yawl:caseMgt_setBtnLaunch_27 ;
+    yawl:hasMethod yawl:caseMgt_getBtnCancelCase_28 ;
+    yawl:hasMethod yawl:caseMgt_setBtnCancelCase_29 ;
+    yawl:hasMethod yawl:caseMgt_getStaticText2_30 ;
+    yawl:hasMethod yawl:caseMgt_setStaticText2_31 ;
+    yawl:hasMethod yawl:caseMgt_getLbxRunningCases_32 ;
+    yawl:hasMethod yawl:caseMgt_setLbxRunningCases_33 ;
+    yawl:hasMethod yawl:caseMgt_getStaticText3_34 ;
+    yawl:hasMethod yawl:caseMgt_setStaticText3_35 ;
+    yawl:hasMethod yawl:caseMgt_getStDelayedHeader_36 ;
+    yawl:hasMethod yawl:caseMgt_setStDelayedHeader_37 ;
+    yawl:hasMethod yawl:caseMgt_getBtnUnload_38 ;
+    yawl:hasMethod yawl:caseMgt_setBtnUnload_39 ;
+    yawl:hasMethod yawl:caseMgt_getMsgBox_40 ;
+    yawl:hasMethod yawl:caseMgt_setMsgBox_41 ;
+    yawl:hasMethod yawl:caseMgt_getLayoutPanel1_42 ;
+    yawl:hasMethod yawl:caseMgt_setLayoutPanel1_43 ;
+    yawl:hasMethod yawl:caseMgt_getLayoutPanel2_44 ;
+    yawl:hasMethod yawl:caseMgt_setLayoutPanel2_45 ;
+    yawl:hasMethod yawl:caseMgt_getLayoutPanel3_46 ;
+    yawl:hasMethod yawl:caseMgt_setLayoutPanel3_47 ;
+    yawl:hasMethod yawl:caseMgt_getPnlDelayed_48 ;
+    yawl:hasMethod yawl:caseMgt_setPnlDelayed_49 ;
+    yawl:hasMethod yawl:caseMgt_getDataTable1_50 ;
+    yawl:hasMethod yawl:caseMgt_setDataTable1_51 ;
+    yawl:hasMethod yawl:caseMgt_getColName_52 ;
+    yawl:hasMethod yawl:caseMgt_setColName_53 ;
+    yawl:hasMethod yawl:caseMgt_getColNameRows_54 ;
+    yawl:hasMethod yawl:caseMgt_setColNameRows_55 ;
+    yawl:hasMethod yawl:caseMgt_getColNameHeader_56 ;
+    yawl:hasMethod yawl:caseMgt_setColNameHeader_57 ;
+    yawl:hasMethod yawl:caseMgt_getColDescription_58 ;
+    yawl:hasMethod yawl:caseMgt_setColDescription_59 ;
+    yawl:hasMethod yawl:caseMgt_getColDescriptionRows_60 ;
+    yawl:hasMethod yawl:caseMgt_setColDescriptionRows_61 ;
+    yawl:hasMethod yawl:caseMgt_getColDescriptionHeader_62 ;
+    yawl:hasMethod yawl:caseMgt_setColDescriptionHeader_63 ;
+    yawl:hasMethod yawl:caseMgt_getColVersion_64 ;
+    yawl:hasMethod yawl:caseMgt_setColVersion_65 ;
+    yawl:hasMethod yawl:caseMgt_getColVersionRows_66 ;
+    yawl:hasMethod yawl:caseMgt_setColVersionRows_67 ;
+    yawl:hasMethod yawl:caseMgt_getColVersionHeader_68 ;
+    yawl:hasMethod yawl:caseMgt_setColVersionHeader_69 ;
+    yawl:hasMethod yawl:caseMgt_getColSBar_70 ;
+    yawl:hasMethod yawl:caseMgt_setColSBar_71 ;
+    yawl:hasMethod yawl:caseMgt_getHdnRowIndex_72 ;
+    yawl:hasMethod yawl:caseMgt_setHdnRowIndex_73 ;
+    yawl:hasMethod yawl:caseMgt_getScript1_74 ;
+    yawl:hasMethod yawl:caseMgt_setScript1_75 ;
+    yawl:hasMethod yawl:caseMgt_getPnlContainer_76 ;
+    yawl:hasMethod yawl:caseMgt_setPnlContainer_77 ;
+    yawl:hasMethod yawl:caseMgt_getPnlGroup_78 ;
+    yawl:hasMethod yawl:caseMgt_setPnlGroup_79 ;
+    yawl:hasMethod yawl:caseMgt_getRbTime_80 ;
+    yawl:hasMethod yawl:caseMgt_setRbTime_81 ;
+    yawl:hasMethod yawl:caseMgt_getRbDate_82 ;
+    yawl:hasMethod yawl:caseMgt_setRbDate_83 ;
+    yawl:hasMethod yawl:caseMgt_getRbDuration_84 ;
+    yawl:hasMethod yawl:caseMgt_setRbDuration_85 ;
+    yawl:hasMethod yawl:caseMgt_getLblDelayValue_86 ;
+    yawl:hasMethod yawl:caseMgt_setLblDelayValue_87 ;
+    yawl:hasMethod yawl:caseMgt_getLblValueText_88 ;
+    yawl:hasMethod yawl:caseMgt_setLblValueText_89 ;
+    yawl:hasMethod yawl:caseMgt_getTxtDelayValue_90 ;
+    yawl:hasMethod yawl:caseMgt_setTxtDelayValue_91 ;
+    yawl:hasMethod yawl:caseMgt_getLblDelayValueError_92 ;
+    yawl:hasMethod yawl:caseMgt_setLblDelayValueError_93 ;
+    yawl:hasMethod yawl:caseMgt_getBtnDelayOK_94 ;
+    yawl:hasMethod yawl:caseMgt_setBtnDelayOK_95 ;
+    yawl:hasMethod yawl:caseMgt_getBtnDelayCancel_96 ;
+    yawl:hasMethod yawl:caseMgt_setBtnDelayCancel_97 ;
+    yawl:hasMethod yawl:caseMgt_getBtnLaunchDelayed_98 ;
+    yawl:hasMethod yawl:caseMgt_setBtnLaunchDelayed_99 ;
+    yawl:hasMethod yawl:caseMgt_getBtnRaiseException_100 ;
+    yawl:hasMethod yawl:caseMgt_setBtnRaiseException_101 ;
+    yawl:hasMethod yawl:caseMgt_getBtnRejectWorklet_102 ;
+    yawl:hasMethod yawl:caseMgt_setBtnRejectWorklet_103 ;
+    yawl:hasMethod yawl:caseMgt_getBtnWorkletAdmin_104 ;
+    yawl:hasMethod yawl:caseMgt_setBtnWorkletAdmin_105 ;
+    yawl:hasMethod yawl:caseMgt_getBtnGetInfo_106 ;
+    yawl:hasMethod yawl:caseMgt_setBtnGetInfo_107 ;
+    yawl:hasMethod yawl:caseMgt_getBtnDownloadLog_108 ;
+    yawl:hasMethod yawl:caseMgt_setBtnDownloadLog_109 ;
+    yawl:hasMethod yawl:caseMgt_fileUpload1_processValueChange_110 ;
+    yawl:hasMethod yawl:caseMgt_getDynFormFactory_111 ;
+    yawl:hasMethod yawl:caseMgt_prerender_112 ;
+    yawl:hasMethod yawl:caseMgt_stripPath_113 ;
+    yawl:hasMethod yawl:caseMgt_stripPath_114 ;
+    yawl:hasMethod yawl:caseMgt_getDelayedLabel_115 ;
+    yawl:hasMethod yawl:caseMgt_btnRefresh_action_116 ;
+    yawl:hasMethod yawl:caseMgt_btnGetInfo_action_117 ;
+    yawl:hasMethod yawl:caseMgt_btnDownloadLog_action_118 ;
+    yawl:hasMethod yawl:caseMgt_btnDelayOK_action_119 ;
+    yawl:hasMethod yawl:caseMgt_btnDelayCancel_action_120 ;
+    yawl:hasMethod yawl:caseMgt_btnLaunchDelayed_action_121 ;
+    yawl:hasMethod yawl:caseMgt_redirectTo_122 ;
+    yawl:hasMethod yawl:caseMgt_btnRejectWorklet_action_123 ;
+    yawl:hasMethod yawl:caseMgt_btnRaiseException_action_124 ;
+    yawl:hasMethod yawl:caseMgt_btnWorkletAdmin_action_125 ;
+    yawl:hasMethod yawl:caseMgt_btnUpload_action_126 ;
+    yawl:hasMethod yawl:caseMgt_validExtension_127 ;
+    yawl:hasMethod yawl:caseMgt_uploadSpec_128 ;
+    yawl:hasMethod yawl:caseMgt_btnLaunch_action_129 ;
+    yawl:hasMethod yawl:caseMgt_getSelectedSpecIndex_130 ;
+    yawl:hasMethod yawl:caseMgt_hasSpecSelected_131 ;
+    yawl:hasMethod yawl:caseMgt_btnCancelCase_action_132 ;
+    yawl:hasMethod yawl:caseMgt_getSelectedCaseID_133 ;
+    yawl:hasMethod yawl:caseMgt_cancelCase_134 ;
+    yawl:hasMethod yawl:caseMgt_unloadSpec_135 ;
+    yawl:hasMethod yawl:caseMgt_btnUnload_action_136 ;
+    yawl:hasMethod yawl:caseMgt_startCase_137 ;
+    yawl:hasMethod yawl:caseMgt_beginCase_138 ;
+    yawl:hasMethod yawl:caseMgt_updateRunningCaseList_139 ;
+    yawl:hasMethod yawl:caseMgt_handleCaseLevelDocComponents_140 ;
+    yawl:hasMethod yawl:caseMgt_showSpecInfo_141 ;
+    yawl:hasMethod yawl:caseMgt_downloadLog_142 ;
+    yawl:hasMethod yawl:caseMgt_activateButtons_143 ;
+    yawl:hasMethod yawl:caseMgt_hasUniqueDescriptors_144 ;
+    yawl:hasMethod yawl:caseMgt_getDescriptors_145 ;
+    yawl:hasMethod yawl:caseMgt_processErrorMsg_146 ;
+    yawl:hasMethod yawl:caseMgt_validateDelayValue_147 ;
+    yawl:hasMethod yawl:caseMgt_showMessagePanel_148 ;
+    yawl:hasField yawl:caseMgt___placeholder ;
+    yawl:hasField yawl:caseMgt_page1 ;
+    yawl:hasField yawl:caseMgt_html1 ;
+    yawl:hasField yawl:caseMgt_head1 ;
+    yawl:hasField yawl:caseMgt_link1 ;
+    yawl:hasField yawl:caseMgt_body1 ;
+    yawl:hasField yawl:caseMgt_form1 ;
+    yawl:hasField yawl:caseMgt_fileUpload1 ;
+    yawl:hasField yawl:caseMgt_btnUpload ;
+    yawl:hasField yawl:caseMgt_staticText1 ;
+    yawl:hasField yawl:caseMgt_btnLaunch ;
+    yawl:hasField yawl:caseMgt_btnCancelCase ;
+    yawl:hasField yawl:caseMgt_staticText2 ;
+    yawl:hasField yawl:caseMgt_lbxRunningCases ;
+    yawl:hasField yawl:caseMgt_staticText3 ;
+    yawl:hasField yawl:caseMgt_stDelayedHeader ;
+    yawl:hasField yawl:caseMgt_btnUnload ;
+    yawl:hasField yawl:caseMgt_msgBox ;
+    yawl:hasField yawl:caseMgt_layoutPanel1 ;
+    yawl:hasField yawl:caseMgt_layoutPanel2 ;
+    yawl:hasField yawl:caseMgt_layoutPanel3 ;
+    yawl:hasField yawl:caseMgt_pnlDelayed ;
+    yawl:hasField yawl:caseMgt_dataTable1 ;
+    yawl:hasField yawl:caseMgt_colName ;
+    yawl:hasField yawl:caseMgt_colNameRows ;
+    yawl:hasField yawl:caseMgt_colNameHeader ;
+    yawl:hasField yawl:caseMgt_colDescription ;
+    yawl:hasField yawl:caseMgt_colDescriptionRows ;
+    yawl:hasField yawl:caseMgt_colDescriptionHeader ;
+    yawl:hasField yawl:caseMgt_colVersion ;
+    yawl:hasField yawl:caseMgt_colVersionRows ;
+    yawl:hasField yawl:caseMgt_colVersionHeader ;
+    yawl:hasField yawl:caseMgt_colSBar ;
+    yawl:hasField yawl:caseMgt_hdnRowIndex ;
+    yawl:hasField yawl:caseMgt_script1 ;
+    yawl:hasField yawl:caseMgt_pnlContainer ;
+    yawl:hasField yawl:caseMgt_pnlGroup ;
+    yawl:hasField yawl:caseMgt_rbTime ;
+    yawl:hasField yawl:caseMgt_rbDate ;
+    yawl:hasField yawl:caseMgt_rbDuration ;
+    yawl:hasField yawl:caseMgt_lblDelayValue ;
+    yawl:hasField yawl:caseMgt_lblValueText ;
+    yawl:hasField yawl:caseMgt_txtDelayValue ;
+    yawl:hasField yawl:caseMgt_lblDelayValueError ;
+    yawl:hasField yawl:caseMgt_btnDelayOK ;
+    yawl:hasField yawl:caseMgt_btnDelayCancel ;
+    yawl:hasField yawl:caseMgt_btnLaunchDelayed ;
+    yawl:hasField yawl:caseMgt_btnRaiseException ;
+    yawl:hasField yawl:caseMgt_btnRejectWorklet ;
+    yawl:hasField yawl:caseMgt_btnWorkletAdmin ;
+    yawl:hasField yawl:caseMgt_btnGetInfo ;
+    yawl:hasField yawl:caseMgt_btnDownloadLog ;
+    yawl:hasField yawl:caseMgt__rm ;
+    yawl:hasField yawl:caseMgt__sb ;
+    yawl:hasField yawl:caseMgt_msgPanel ;
+    .
+
+
+# Method: caseMgt._init
+yawl:caseMgt__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: caseMgt.getRequestBean
+yawl:caseMgt_getRequestBean_2 a yawl:Method ;
+    rdfs:label "getRequestBean" ;
+    yawl:returnType "RequestBean" ;
+    yawl:signature "RequestBean getRequestBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: caseMgt.getSessionBean
+yawl:caseMgt_getSessionBean_3 a yawl:Method ;
+    rdfs:label "getSessionBean" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getSessionBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: caseMgt.getApplicationBean
+yawl:caseMgt_getApplicationBean_4 a yawl:Method ;
+    rdfs:label "getApplicationBean" ;
+    yawl:returnType "ApplicationBean" ;
+    yawl:signature "ApplicationBean getApplicationBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: caseMgt.init
+yawl:caseMgt_init_5 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.preprocess
+yawl:caseMgt_preprocess_6 a yawl:Method ;
+    rdfs:label "preprocess" ;
+    yawl:returnType "void" ;
+    yawl:signature "void preprocess()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.destroy
+yawl:caseMgt_destroy_7 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getPage1
+yawl:caseMgt_getPage1_8 a yawl:Method ;
+    rdfs:label "getPage1" ;
+    yawl:returnType "Page" ;
+    yawl:signature "Page getPage1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setPage1
+yawl:caseMgt_setPage1_9 a yawl:Method ;
+    rdfs:label "setPage1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPage1(Page p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getHtml1
+yawl:caseMgt_getHtml1_10 a yawl:Method ;
+    rdfs:label "getHtml1" ;
+    yawl:returnType "Html" ;
+    yawl:signature "Html getHtml1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setHtml1
+yawl:caseMgt_setHtml1_11 a yawl:Method ;
+    rdfs:label "setHtml1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHtml1(Html h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getHead1
+yawl:caseMgt_getHead1_12 a yawl:Method ;
+    rdfs:label "getHead1" ;
+    yawl:returnType "Head" ;
+    yawl:signature "Head getHead1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setHead1
+yawl:caseMgt_setHead1_13 a yawl:Method ;
+    rdfs:label "setHead1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHead1(Head h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getLink1
+yawl:caseMgt_getLink1_14 a yawl:Method ;
+    rdfs:label "getLink1" ;
+    yawl:returnType "Link" ;
+    yawl:signature "Link getLink1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setLink1
+yawl:caseMgt_setLink1_15 a yawl:Method ;
+    rdfs:label "setLink1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLink1(Link l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getBody1
+yawl:caseMgt_getBody1_16 a yawl:Method ;
+    rdfs:label "getBody1" ;
+    yawl:returnType "Body" ;
+    yawl:signature "Body getBody1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setBody1
+yawl:caseMgt_setBody1_17 a yawl:Method ;
+    rdfs:label "setBody1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBody1(Body b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getForm1
+yawl:caseMgt_getForm1_18 a yawl:Method ;
+    rdfs:label "getForm1" ;
+    yawl:returnType "Form" ;
+    yawl:signature "Form getForm1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setForm1
+yawl:caseMgt_setForm1_19 a yawl:Method ;
+    rdfs:label "setForm1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setForm1(Form f)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getFileUpload1
+yawl:caseMgt_getFileUpload1_20 a yawl:Method ;
+    rdfs:label "getFileUpload1" ;
+    yawl:returnType "Upload" ;
+    yawl:signature "Upload getFileUpload1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setFileUpload1
+yawl:caseMgt_setFileUpload1_21 a yawl:Method ;
+    rdfs:label "setFileUpload1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setFileUpload1(Upload u)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getBtnUpload
+yawl:caseMgt_getBtnUpload_22 a yawl:Method ;
+    rdfs:label "getBtnUpload" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnUpload()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setBtnUpload
+yawl:caseMgt_setBtnUpload_23 a yawl:Method ;
+    rdfs:label "setBtnUpload" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnUpload(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getStaticText1
+yawl:caseMgt_getStaticText1_24 a yawl:Method ;
+    rdfs:label "getStaticText1" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getStaticText1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setStaticText1
+yawl:caseMgt_setStaticText1_25 a yawl:Method ;
+    rdfs:label "setStaticText1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStaticText1(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getBtnLaunch
+yawl:caseMgt_getBtnLaunch_26 a yawl:Method ;
+    rdfs:label "getBtnLaunch" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnLaunch()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setBtnLaunch
+yawl:caseMgt_setBtnLaunch_27 a yawl:Method ;
+    rdfs:label "setBtnLaunch" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnLaunch(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getBtnCancelCase
+yawl:caseMgt_getBtnCancelCase_28 a yawl:Method ;
+    rdfs:label "getBtnCancelCase" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnCancelCase()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setBtnCancelCase
+yawl:caseMgt_setBtnCancelCase_29 a yawl:Method ;
+    rdfs:label "setBtnCancelCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnCancelCase(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getStaticText2
+yawl:caseMgt_getStaticText2_30 a yawl:Method ;
+    rdfs:label "getStaticText2" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getStaticText2()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setStaticText2
+yawl:caseMgt_setStaticText2_31 a yawl:Method ;
+    rdfs:label "setStaticText2" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStaticText2(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getLbxRunningCases
+yawl:caseMgt_getLbxRunningCases_32 a yawl:Method ;
+    rdfs:label "getLbxRunningCases" ;
+    yawl:returnType "Listbox" ;
+    yawl:signature "Listbox getLbxRunningCases()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setLbxRunningCases
+yawl:caseMgt_setLbxRunningCases_33 a yawl:Method ;
+    rdfs:label "setLbxRunningCases" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLbxRunningCases(Listbox l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getStaticText3
+yawl:caseMgt_getStaticText3_34 a yawl:Method ;
+    rdfs:label "getStaticText3" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getStaticText3()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setStaticText3
+yawl:caseMgt_setStaticText3_35 a yawl:Method ;
+    rdfs:label "setStaticText3" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStaticText3(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getStDelayedHeader
+yawl:caseMgt_getStDelayedHeader_36 a yawl:Method ;
+    rdfs:label "getStDelayedHeader" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getStDelayedHeader()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setStDelayedHeader
+yawl:caseMgt_setStDelayedHeader_37 a yawl:Method ;
+    rdfs:label "setStDelayedHeader" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStDelayedHeader(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getBtnUnload
+yawl:caseMgt_getBtnUnload_38 a yawl:Method ;
+    rdfs:label "getBtnUnload" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnUnload()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setBtnUnload
+yawl:caseMgt_setBtnUnload_39 a yawl:Method ;
+    rdfs:label "setBtnUnload" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnUnload(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getMsgBox
+yawl:caseMgt_getMsgBox_40 a yawl:Method ;
+    rdfs:label "getMsgBox" ;
+    yawl:returnType "MessageGroup" ;
+    yawl:signature "MessageGroup getMsgBox()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setMsgBox
+yawl:caseMgt_setMsgBox_41 a yawl:Method ;
+    rdfs:label "setMsgBox" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMsgBox(MessageGroup mg)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getLayoutPanel1
+yawl:caseMgt_getLayoutPanel1_42 a yawl:Method ;
+    rdfs:label "getLayoutPanel1" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getLayoutPanel1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setLayoutPanel1
+yawl:caseMgt_setLayoutPanel1_43 a yawl:Method ;
+    rdfs:label "setLayoutPanel1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLayoutPanel1(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getLayoutPanel2
+yawl:caseMgt_getLayoutPanel2_44 a yawl:Method ;
+    rdfs:label "getLayoutPanel2" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getLayoutPanel2()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setLayoutPanel2
+yawl:caseMgt_setLayoutPanel2_45 a yawl:Method ;
+    rdfs:label "setLayoutPanel2" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLayoutPanel2(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getLayoutPanel3
+yawl:caseMgt_getLayoutPanel3_46 a yawl:Method ;
+    rdfs:label "getLayoutPanel3" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getLayoutPanel3()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setLayoutPanel3
+yawl:caseMgt_setLayoutPanel3_47 a yawl:Method ;
+    rdfs:label "setLayoutPanel3" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLayoutPanel3(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getPnlDelayed
+yawl:caseMgt_getPnlDelayed_48 a yawl:Method ;
+    rdfs:label "getPnlDelayed" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlDelayed()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setPnlDelayed
+yawl:caseMgt_setPnlDelayed_49 a yawl:Method ;
+    rdfs:label "setPnlDelayed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlDelayed(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getDataTable1
+yawl:caseMgt_getDataTable1_50 a yawl:Method ;
+    rdfs:label "getDataTable1" ;
+    yawl:returnType "HtmlDataTable" ;
+    yawl:signature "HtmlDataTable getDataTable1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setDataTable1
+yawl:caseMgt_setDataTable1_51 a yawl:Method ;
+    rdfs:label "setDataTable1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataTable1(HtmlDataTable hdt)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getColName
+yawl:caseMgt_getColName_52 a yawl:Method ;
+    rdfs:label "getColName" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setColName
+yawl:caseMgt_setColName_53 a yawl:Method ;
+    rdfs:label "setColName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColName(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getColNameRows
+yawl:caseMgt_getColNameRows_54 a yawl:Method ;
+    rdfs:label "getColNameRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColNameRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setColNameRows
+yawl:caseMgt_setColNameRows_55 a yawl:Method ;
+    rdfs:label "setColNameRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColNameRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getColNameHeader
+yawl:caseMgt_getColNameHeader_56 a yawl:Method ;
+    rdfs:label "getColNameHeader" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColNameHeader()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setColNameHeader
+yawl:caseMgt_setColNameHeader_57 a yawl:Method ;
+    rdfs:label "setColNameHeader" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColNameHeader(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getColDescription
+yawl:caseMgt_getColDescription_58 a yawl:Method ;
+    rdfs:label "getColDescription" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColDescription()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setColDescription
+yawl:caseMgt_setColDescription_59 a yawl:Method ;
+    rdfs:label "setColDescription" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColDescription(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getColDescriptionRows
+yawl:caseMgt_getColDescriptionRows_60 a yawl:Method ;
+    rdfs:label "getColDescriptionRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColDescriptionRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setColDescriptionRows
+yawl:caseMgt_setColDescriptionRows_61 a yawl:Method ;
+    rdfs:label "setColDescriptionRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColDescriptionRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getColDescriptionHeader
+yawl:caseMgt_getColDescriptionHeader_62 a yawl:Method ;
+    rdfs:label "getColDescriptionHeader" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColDescriptionHeader()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setColDescriptionHeader
+yawl:caseMgt_setColDescriptionHeader_63 a yawl:Method ;
+    rdfs:label "setColDescriptionHeader" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColDescriptionHeader(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getColVersion
+yawl:caseMgt_getColVersion_64 a yawl:Method ;
+    rdfs:label "getColVersion" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColVersion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setColVersion
+yawl:caseMgt_setColVersion_65 a yawl:Method ;
+    rdfs:label "setColVersion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColVersion(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getColVersionRows
+yawl:caseMgt_getColVersionRows_66 a yawl:Method ;
+    rdfs:label "getColVersionRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColVersionRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setColVersionRows
+yawl:caseMgt_setColVersionRows_67 a yawl:Method ;
+    rdfs:label "setColVersionRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColVersionRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getColVersionHeader
+yawl:caseMgt_getColVersionHeader_68 a yawl:Method ;
+    rdfs:label "getColVersionHeader" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColVersionHeader()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setColVersionHeader
+yawl:caseMgt_setColVersionHeader_69 a yawl:Method ;
+    rdfs:label "setColVersionHeader" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColVersionHeader(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getColSBar
+yawl:caseMgt_getColSBar_70 a yawl:Method ;
+    rdfs:label "getColSBar" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColSBar()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setColSBar
+yawl:caseMgt_setColSBar_71 a yawl:Method ;
+    rdfs:label "setColSBar" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColSBar(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getHdnRowIndex
+yawl:caseMgt_getHdnRowIndex_72 a yawl:Method ;
+    rdfs:label "getHdnRowIndex" ;
+    yawl:returnType "HiddenField" ;
+    yawl:signature "HiddenField getHdnRowIndex()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setHdnRowIndex
+yawl:caseMgt_setHdnRowIndex_73 a yawl:Method ;
+    rdfs:label "setHdnRowIndex" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHdnRowIndex(HiddenField hf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getScript1
+yawl:caseMgt_getScript1_74 a yawl:Method ;
+    rdfs:label "getScript1" ;
+    yawl:returnType "Script" ;
+    yawl:signature "Script getScript1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setScript1
+yawl:caseMgt_setScript1_75 a yawl:Method ;
+    rdfs:label "setScript1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setScript1(Script s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getPnlContainer
+yawl:caseMgt_getPnlContainer_76 a yawl:Method ;
+    rdfs:label "getPnlContainer" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlContainer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setPnlContainer
+yawl:caseMgt_setPnlContainer_77 a yawl:Method ;
+    rdfs:label "setPnlContainer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlContainer(PanelLayout pnl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getPnlGroup
+yawl:caseMgt_getPnlGroup_78 a yawl:Method ;
+    rdfs:label "getPnlGroup" ;
+    yawl:returnType "PanelGroup" ;
+    yawl:signature "PanelGroup getPnlGroup()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setPnlGroup
+yawl:caseMgt_setPnlGroup_79 a yawl:Method ;
+    rdfs:label "setPnlGroup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlGroup(PanelGroup group)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getRbTime
+yawl:caseMgt_getRbTime_80 a yawl:Method ;
+    rdfs:label "getRbTime" ;
+    yawl:returnType "RadioButton" ;
+    yawl:signature "RadioButton getRbTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setRbTime
+yawl:caseMgt_setRbTime_81 a yawl:Method ;
+    rdfs:label "setRbTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRbTime(RadioButton rb)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getRbDate
+yawl:caseMgt_getRbDate_82 a yawl:Method ;
+    rdfs:label "getRbDate" ;
+    yawl:returnType "RadioButton" ;
+    yawl:signature "RadioButton getRbDate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setRbDate
+yawl:caseMgt_setRbDate_83 a yawl:Method ;
+    rdfs:label "setRbDate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRbDate(RadioButton rb)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getRbDuration
+yawl:caseMgt_getRbDuration_84 a yawl:Method ;
+    rdfs:label "getRbDuration" ;
+    yawl:returnType "RadioButton" ;
+    yawl:signature "RadioButton getRbDuration()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setRbDuration
+yawl:caseMgt_setRbDuration_85 a yawl:Method ;
+    rdfs:label "setRbDuration" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRbDuration(RadioButton rb)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getLblDelayValue
+yawl:caseMgt_getLblDelayValue_86 a yawl:Method ;
+    rdfs:label "getLblDelayValue" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblDelayValue()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setLblDelayValue
+yawl:caseMgt_setLblDelayValue_87 a yawl:Method ;
+    rdfs:label "setLblDelayValue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblDelayValue(Label lbl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getLblValueText
+yawl:caseMgt_getLblValueText_88 a yawl:Method ;
+    rdfs:label "getLblValueText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLblValueText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setLblValueText
+yawl:caseMgt_setLblValueText_89 a yawl:Method ;
+    rdfs:label "setLblValueText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblValueText(String text)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getTxtDelayValue
+yawl:caseMgt_getTxtDelayValue_90 a yawl:Method ;
+    rdfs:label "getTxtDelayValue" ;
+    yawl:returnType "TextField" ;
+    yawl:signature "TextField getTxtDelayValue()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setTxtDelayValue
+yawl:caseMgt_setTxtDelayValue_91 a yawl:Method ;
+    rdfs:label "setTxtDelayValue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtDelayValue(TextField lbl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getLblDelayValueError
+yawl:caseMgt_getLblDelayValueError_92 a yawl:Method ;
+    rdfs:label "getLblDelayValueError" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblDelayValueError()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setLblDelayValueError
+yawl:caseMgt_setLblDelayValueError_93 a yawl:Method ;
+    rdfs:label "setLblDelayValueError" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblDelayValueError(Label lbl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getBtnDelayOK
+yawl:caseMgt_getBtnDelayOK_94 a yawl:Method ;
+    rdfs:label "getBtnDelayOK" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnDelayOK()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setBtnDelayOK
+yawl:caseMgt_setBtnDelayOK_95 a yawl:Method ;
+    rdfs:label "setBtnDelayOK" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnDelayOK(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getBtnDelayCancel
+yawl:caseMgt_getBtnDelayCancel_96 a yawl:Method ;
+    rdfs:label "getBtnDelayCancel" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnDelayCancel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setBtnDelayCancel
+yawl:caseMgt_setBtnDelayCancel_97 a yawl:Method ;
+    rdfs:label "setBtnDelayCancel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnDelayCancel(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getBtnLaunchDelayed
+yawl:caseMgt_getBtnLaunchDelayed_98 a yawl:Method ;
+    rdfs:label "getBtnLaunchDelayed" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnLaunchDelayed()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setBtnLaunchDelayed
+yawl:caseMgt_setBtnLaunchDelayed_99 a yawl:Method ;
+    rdfs:label "setBtnLaunchDelayed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnLaunchDelayed(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getBtnRaiseException
+yawl:caseMgt_getBtnRaiseException_100 a yawl:Method ;
+    rdfs:label "getBtnRaiseException" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnRaiseException()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setBtnRaiseException
+yawl:caseMgt_setBtnRaiseException_101 a yawl:Method ;
+    rdfs:label "setBtnRaiseException" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnRaiseException(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getBtnRejectWorklet
+yawl:caseMgt_getBtnRejectWorklet_102 a yawl:Method ;
+    rdfs:label "getBtnRejectWorklet" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnRejectWorklet()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setBtnRejectWorklet
+yawl:caseMgt_setBtnRejectWorklet_103 a yawl:Method ;
+    rdfs:label "setBtnRejectWorklet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnRejectWorklet(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getBtnWorkletAdmin
+yawl:caseMgt_getBtnWorkletAdmin_104 a yawl:Method ;
+    rdfs:label "getBtnWorkletAdmin" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnWorkletAdmin()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setBtnWorkletAdmin
+yawl:caseMgt_setBtnWorkletAdmin_105 a yawl:Method ;
+    rdfs:label "setBtnWorkletAdmin" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnWorkletAdmin(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getBtnGetInfo
+yawl:caseMgt_getBtnGetInfo_106 a yawl:Method ;
+    rdfs:label "getBtnGetInfo" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnGetInfo()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setBtnGetInfo
+yawl:caseMgt_setBtnGetInfo_107 a yawl:Method ;
+    rdfs:label "setBtnGetInfo" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnGetInfo(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getBtnDownloadLog
+yawl:caseMgt_getBtnDownloadLog_108 a yawl:Method ;
+    rdfs:label "getBtnDownloadLog" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnDownloadLog()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.setBtnDownloadLog
+yawl:caseMgt_setBtnDownloadLog_109 a yawl:Method ;
+    rdfs:label "setBtnDownloadLog" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnDownloadLog(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.fileUpload1_processValueChange
+yawl:caseMgt_fileUpload1_processValueChange_110 a yawl:Method ;
+    rdfs:label "fileUpload1_processValueChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fileUpload1_processValueChange(ValueChangeEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getDynFormFactory
+yawl:caseMgt_getDynFormFactory_111 a yawl:Method ;
+    rdfs:label "getDynFormFactory" ;
+    yawl:returnType "DynamicForm" ;
+    yawl:signature "DynamicForm getDynFormFactory()" ;
+    rdfs:comment """@return a reference to the session scoped factory bean.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: caseMgt.prerender
+yawl:caseMgt_prerender_112 a yawl:Method ;
+    rdfs:label "prerender" ;
+    yawl:returnType "void" ;
+    yawl:signature "void prerender()" ;
+    rdfs:comment """Overridden method that is called immediately before the page is rendered""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.stripPath
+yawl:caseMgt_stripPath_113 a yawl:Method ;
+    rdfs:label "stripPath" ;
+    yawl:returnType "String" ;
+    yawl:signature "String stripPath(String fileName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: caseMgt.stripPath
+yawl:caseMgt_stripPath_114 a yawl:Method ;
+    rdfs:label "stripPath" ;
+    yawl:returnType "String" ;
+    yawl:signature "String stripPath(String fileName, char slash)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: caseMgt.getDelayedLabel
+yawl:caseMgt_getDelayedLabel_115 a yawl:Method ;
+    rdfs:label "getDelayedLabel" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDelayedLabel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: caseMgt.btnRefresh_action
+yawl:caseMgt_btnRefresh_action_116 a yawl:Method ;
+    rdfs:label "btnRefresh_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnRefresh_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.btnGetInfo_action
+yawl:caseMgt_btnGetInfo_action_117 a yawl:Method ;
+    rdfs:label "btnGetInfo_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnGetInfo_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.btnDownloadLog_action
+yawl:caseMgt_btnDownloadLog_action_118 a yawl:Method ;
+    rdfs:label "btnDownloadLog_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnDownloadLog_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.btnDelayOK_action
+yawl:caseMgt_btnDelayOK_action_119 a yawl:Method ;
+    rdfs:label "btnDelayOK_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnDelayOK_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.btnDelayCancel_action
+yawl:caseMgt_btnDelayCancel_action_120 a yawl:Method ;
+    rdfs:label "btnDelayCancel_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnDelayCancel_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.btnLaunchDelayed_action
+yawl:caseMgt_btnLaunchDelayed_action_121 a yawl:Method ;
+    rdfs:label "btnLaunchDelayed_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnLaunchDelayed_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.redirectTo
+yawl:caseMgt_redirectTo_122 a yawl:Method ;
+    rdfs:label "redirectTo" ;
+    yawl:returnType "void" ;
+    yawl:signature "void redirectTo(String url)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: caseMgt.btnRejectWorklet_action
+yawl:caseMgt_btnRejectWorklet_action_123 a yawl:Method ;
+    rdfs:label "btnRejectWorklet_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnRejectWorklet_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.btnRaiseException_action
+yawl:caseMgt_btnRaiseException_action_124 a yawl:Method ;
+    rdfs:label "btnRaiseException_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnRaiseException_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.btnWorkletAdmin_action
+yawl:caseMgt_btnWorkletAdmin_action_125 a yawl:Method ;
+    rdfs:label "btnWorkletAdmin_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnWorkletAdmin_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.btnUpload_action
+yawl:caseMgt_btnUpload_action_126 a yawl:Method ;
+    rdfs:label "btnUpload_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnUpload_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.validExtension
+yawl:caseMgt_validExtension_127 a yawl:Method ;
+    rdfs:label "validExtension" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validExtension(String fileName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: caseMgt.uploadSpec
+yawl:caseMgt_uploadSpec_128 a yawl:Method ;
+    rdfs:label "uploadSpec" ;
+    yawl:returnType "void" ;
+    yawl:signature "void uploadSpec(String fileName, String fileContents)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: caseMgt.btnLaunch_action
+yawl:caseMgt_btnLaunch_action_129 a yawl:Method ;
+    rdfs:label "btnLaunch_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnLaunch_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getSelectedSpecIndex
+yawl:caseMgt_getSelectedSpecIndex_130 a yawl:Method ;
+    rdfs:label "getSelectedSpecIndex" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getSelectedSpecIndex()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: caseMgt.hasSpecSelected
+yawl:caseMgt_hasSpecSelected_131 a yawl:Method ;
+    rdfs:label "hasSpecSelected" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasSpecSelected()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: caseMgt.btnCancelCase_action
+yawl:caseMgt_btnCancelCase_action_132 a yawl:Method ;
+    rdfs:label "btnCancelCase_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnCancelCase_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.getSelectedCaseID
+yawl:caseMgt_getSelectedCaseID_133 a yawl:Method ;
+    rdfs:label "getSelectedCaseID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSelectedCaseID()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: caseMgt.cancelCase
+yawl:caseMgt_cancelCase_134 a yawl:Method ;
+    rdfs:label "cancelCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String cancelCase(String caseID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: caseMgt.unloadSpec
+yawl:caseMgt_unloadSpec_135 a yawl:Method ;
+    rdfs:label "unloadSpec" ;
+    yawl:returnType "String" ;
+    yawl:signature "String unloadSpec(SpecificationData spec)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: caseMgt.btnUnload_action
+yawl:caseMgt_btnUnload_action_136 a yawl:Method ;
+    rdfs:label "btnUnload_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnUnload_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: caseMgt.startCase
+yawl:caseMgt_startCase_137 a yawl:Method ;
+    rdfs:label "startCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String startCase(SpecificationData specData)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: caseMgt.beginCase
+yawl:caseMgt_beginCase_138 a yawl:Method ;
+    rdfs:label "beginCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void beginCase(YSpecificationID specID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: caseMgt.updateRunningCaseList
+yawl:caseMgt_updateRunningCaseList_139 a yawl:Method ;
+    rdfs:label "updateRunningCaseList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateRunningCaseList()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: caseMgt.handleCaseLevelDocComponents
+yawl:caseMgt_handleCaseLevelDocComponents_140 a yawl:Method ;
+    rdfs:label "handleCaseLevelDocComponents" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCaseLevelDocComponents(List docIDs, String caseID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: caseMgt.showSpecInfo
+yawl:caseMgt_showSpecInfo_141 a yawl:Method ;
+    rdfs:label "showSpecInfo" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showSpecInfo()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: caseMgt.downloadLog
+yawl:caseMgt_downloadLog_142 a yawl:Method ;
+    rdfs:label "downloadLog" ;
+    yawl:returnType "void" ;
+    yawl:signature "void downloadLog()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: caseMgt.activateButtons
+yawl:caseMgt_activateButtons_143 a yawl:Method ;
+    rdfs:label "activateButtons" ;
+    yawl:returnType "void" ;
+    yawl:signature "void activateButtons()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: caseMgt.hasUniqueDescriptors
+yawl:caseMgt_hasUniqueDescriptors_144 a yawl:Method ;
+    rdfs:label "hasUniqueDescriptors" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasUniqueDescriptors(String specxml)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: caseMgt.getDescriptors
+yawl:caseMgt_getDescriptors_145 a yawl:Method ;
+    rdfs:label "getDescriptors" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getDescriptors(String specxml)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: caseMgt.processErrorMsg
+yawl:caseMgt_processErrorMsg_146 a yawl:Method ;
+    rdfs:label "processErrorMsg" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processErrorMsg(String msg)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: caseMgt.validateDelayValue
+yawl:caseMgt_validateDelayValue_147 a yawl:Method ;
+    rdfs:label "validateDelayValue" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validateDelayValue()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: caseMgt.showMessagePanel
+yawl:caseMgt_showMessagePanel_148 a yawl:Method ;
+    rdfs:label "showMessagePanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showMessagePanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:caseMgt___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:caseMgt_page1 a yawl:Field ;
+    rdfs:label "page1" .
+
+yawl:caseMgt_html1 a yawl:Field ;
+    rdfs:label "html1" .
+
+yawl:caseMgt_head1 a yawl:Field ;
+    rdfs:label "head1" .
+
+yawl:caseMgt_link1 a yawl:Field ;
+    rdfs:label "link1" .
+
+yawl:caseMgt_body1 a yawl:Field ;
+    rdfs:label "body1" .
+
+yawl:caseMgt_form1 a yawl:Field ;
+    rdfs:label "form1" .
+
+yawl:caseMgt_fileUpload1 a yawl:Field ;
+    rdfs:label "fileUpload1" .
+
+yawl:caseMgt_btnUpload a yawl:Field ;
+    rdfs:label "btnUpload" .
+
+yawl:caseMgt_staticText1 a yawl:Field ;
+    rdfs:label "staticText1" .
+
+yawl:caseMgt_btnLaunch a yawl:Field ;
+    rdfs:label "btnLaunch" .
+
+yawl:caseMgt_btnCancelCase a yawl:Field ;
+    rdfs:label "btnCancelCase" .
+
+yawl:caseMgt_staticText2 a yawl:Field ;
+    rdfs:label "staticText2" .
+
+yawl:caseMgt_lbxRunningCases a yawl:Field ;
+    rdfs:label "lbxRunningCases" .
+
+yawl:caseMgt_staticText3 a yawl:Field ;
+    rdfs:label "staticText3" .
+
+yawl:caseMgt_stDelayedHeader a yawl:Field ;
+    rdfs:label "stDelayedHeader" .
+
+yawl:caseMgt_btnUnload a yawl:Field ;
+    rdfs:label "btnUnload" .
+
+yawl:caseMgt_msgBox a yawl:Field ;
+    rdfs:label "msgBox" .
+
+yawl:caseMgt_layoutPanel1 a yawl:Field ;
+    rdfs:label "layoutPanel1" .
+
+yawl:caseMgt_layoutPanel2 a yawl:Field ;
+    rdfs:label "layoutPanel2" .
+
+yawl:caseMgt_layoutPanel3 a yawl:Field ;
+    rdfs:label "layoutPanel3" .
+
+yawl:caseMgt_pnlDelayed a yawl:Field ;
+    rdfs:label "pnlDelayed" .
+
+yawl:caseMgt_dataTable1 a yawl:Field ;
+    rdfs:label "dataTable1" .
+
+yawl:caseMgt_colName a yawl:Field ;
+    rdfs:label "colName" .
+
+yawl:caseMgt_colNameRows a yawl:Field ;
+    rdfs:label "colNameRows" .
+
+yawl:caseMgt_colNameHeader a yawl:Field ;
+    rdfs:label "colNameHeader" .
+
+yawl:caseMgt_colDescription a yawl:Field ;
+    rdfs:label "colDescription" .
+
+yawl:caseMgt_colDescriptionRows a yawl:Field ;
+    rdfs:label "colDescriptionRows" .
+
+yawl:caseMgt_colDescriptionHeader a yawl:Field ;
+    rdfs:label "colDescriptionHeader" .
+
+yawl:caseMgt_colVersion a yawl:Field ;
+    rdfs:label "colVersion" .
+
+yawl:caseMgt_colVersionRows a yawl:Field ;
+    rdfs:label "colVersionRows" .
+
+yawl:caseMgt_colVersionHeader a yawl:Field ;
+    rdfs:label "colVersionHeader" .
+
+yawl:caseMgt_colSBar a yawl:Field ;
+    rdfs:label "colSBar" .
+
+yawl:caseMgt_hdnRowIndex a yawl:Field ;
+    rdfs:label "hdnRowIndex" .
+
+yawl:caseMgt_script1 a yawl:Field ;
+    rdfs:label "script1" .
+
+yawl:caseMgt_pnlContainer a yawl:Field ;
+    rdfs:label "pnlContainer" .
+
+yawl:caseMgt_pnlGroup a yawl:Field ;
+    rdfs:label "pnlGroup" .
+
+yawl:caseMgt_rbTime a yawl:Field ;
+    rdfs:label "rbTime" .
+
+yawl:caseMgt_rbDate a yawl:Field ;
+    rdfs:label "rbDate" .
+
+yawl:caseMgt_rbDuration a yawl:Field ;
+    rdfs:label "rbDuration" .
+
+yawl:caseMgt_lblDelayValue a yawl:Field ;
+    rdfs:label "lblDelayValue" .
+
+yawl:caseMgt_lblValueText a yawl:Field ;
+    rdfs:label "lblValueText" .
+
+yawl:caseMgt_txtDelayValue a yawl:Field ;
+    rdfs:label "txtDelayValue" .
+
+yawl:caseMgt_lblDelayValueError a yawl:Field ;
+    rdfs:label "lblDelayValueError" .
+
+yawl:caseMgt_btnDelayOK a yawl:Field ;
+    rdfs:label "btnDelayOK" .
+
+yawl:caseMgt_btnDelayCancel a yawl:Field ;
+    rdfs:label "btnDelayCancel" .
+
+yawl:caseMgt_btnLaunchDelayed a yawl:Field ;
+    rdfs:label "btnLaunchDelayed" .
+
+yawl:caseMgt_btnRaiseException a yawl:Field ;
+    rdfs:label "btnRaiseException" .
+
+yawl:caseMgt_btnRejectWorklet a yawl:Field ;
+    rdfs:label "btnRejectWorklet" .
+
+yawl:caseMgt_btnWorkletAdmin a yawl:Field ;
+    rdfs:label "btnWorkletAdmin" .
+
+yawl:caseMgt_btnGetInfo a yawl:Field ;
+    rdfs:label "btnGetInfo" .
+
+yawl:caseMgt_btnDownloadLog a yawl:Field ;
+    rdfs:label "btnDownloadLog" .
+
+yawl:caseMgt__rm a yawl:Field ;
+    rdfs:label "_rm" .
+
+yawl:caseMgt__sb a yawl:Field ;
+    rdfs:label "_sb" .
+
+yawl:caseMgt_msgPanel a yawl:Field ;
+    rdfs:label "msgPanel" .
+
+
+

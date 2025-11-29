@@ -1,0 +1,53 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+# YAWL Ontology Schema
+yawl:Package a owl:Class ;
+    rdfs:label "Java Package" .
+
+yawl:Class a owl:Class ;
+    rdfs:label "Java Class" .
+
+yawl:Method a owl:Class ;
+    rdfs:label "Java Method" .
+
+yawl:Field a owl:Class ;
+    rdfs:label "Java Field" .
+
+yawl:inPackage a owl:ObjectProperty ;
+    rdfs:domain yawl:Class ;
+    rdfs:range yawl:Package .
+
+yawl:hasMethod a owl:ObjectProperty ;
+    rdfs:domain yawl:Class ;
+    rdfs:range yawl:Method .
+
+yawl:hasField a owl:ObjectProperty ;
+    rdfs:domain yawl:Class ;
+    rdfs:range yawl:Field .
+
+yawl:extends a owl:ObjectProperty ;
+    rdfs:domain yawl:Class ;
+    rdfs:range yawl:Class .
+
+yawl:implements a owl:ObjectProperty ;
+    rdfs:domain yawl:Class ;
+    rdfs:range yawl:Class .
+
+yawl:filePath a owl:DatatypeProperty ;
+    rdfs:domain yawl:Class ;
+    rdfs:range xsd:string .
+
+yawl:signature a owl:DatatypeProperty ;
+    rdfs:domain yawl:Method ;
+    rdfs:range xsd:string .
+
+yawl:returnType a owl:DatatypeProperty ;
+    rdfs:domain yawl:Method ;
+    rdfs:range xsd:string .
+
+yawl:modifiers a owl:DatatypeProperty ;
+    rdfs:range xsd:string .

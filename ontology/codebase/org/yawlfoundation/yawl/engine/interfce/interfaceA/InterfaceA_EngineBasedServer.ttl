@@ -1,0 +1,78 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.engine.interfce.interfaceA
+yawl:org_yawlfoundation_yawl_engine_interfce_interfaceA a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.engine.interfce.interfaceA" .
+# Class: org.yawlfoundation.yawl.engine.interfce.interfaceA.InterfaceA_EngineBasedServer
+yawl:InterfaceA_EngineBasedServer a yawl:Class ;
+    rdfs:label "InterfaceA_EngineBasedServer" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_interfce_interfaceA ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/interfce/interfaceA/InterfaceA_EngineBasedServer.java"^^xsd:string ;
+    rdfs:comment """An API between the YAWL Engine and custom services for the management of processes and users. @author Lachlan Aldred Date: 22/12/2003 Time: 12:03:41 @author Michael Adams (refactored for v2.0, 06/2008; 12/2008)""" ;
+    yawl:extends yawl:YHttpServlet ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:InterfaceA_EngineBasedServer_init_1 ;
+    yawl:hasMethod yawl:InterfaceA_EngineBasedServer_doGet_2 ;
+    yawl:hasMethod yawl:InterfaceA_EngineBasedServer_doPost_3 ;
+    yawl:hasMethod yawl:InterfaceA_EngineBasedServer_processPostQuery_4 ;
+    yawl:hasMethod yawl:InterfaceA_EngineBasedServer_debug_5 ;
+    yawl:hasField yawl:InterfaceA_EngineBasedServer__engine ;
+    yawl:hasField yawl:InterfaceA_EngineBasedServer_logger ;
+    .
+
+
+# Method: InterfaceA_EngineBasedServer.init
+yawl:InterfaceA_EngineBasedServer_init_1 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EngineBasedServer.doGet
+yawl:InterfaceA_EngineBasedServer_doGet_2 a yawl:Method ;
+    rdfs:label "doGet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doGet(HttpServletRequest request, HttpServletResponse response)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EngineBasedServer.doPost
+yawl:InterfaceA_EngineBasedServer_doPost_3 a yawl:Method ;
+    rdfs:label "doPost" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doPost(HttpServletRequest request, HttpServletResponse response)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EngineBasedServer.processPostQuery
+yawl:InterfaceA_EngineBasedServer_processPostQuery_4 a yawl:Method ;
+    rdfs:label "processPostQuery" ;
+    yawl:returnType "String" ;
+    yawl:signature "String processPostQuery(HttpServletRequest request)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: InterfaceA_EngineBasedServer.debug
+yawl:InterfaceA_EngineBasedServer_debug_5 a yawl:Method ;
+    rdfs:label "debug" ;
+    yawl:returnType "void" ;
+    yawl:signature "void debug(HttpServletRequest request, String service)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:InterfaceA_EngineBasedServer__engine a yawl:Field ;
+    rdfs:label "_engine" .
+
+yawl:InterfaceA_EngineBasedServer_logger a yawl:Field ;
+    rdfs:label "logger" .
+
+
+

@@ -1,0 +1,156 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.calendar.utilisation.UtilisationPlan
+yawl:UtilisationPlan a yawl:Class ;
+    rdfs:label "UtilisationPlan" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_calendar_utilisation ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/calendar/utilisation/UtilisationPlan.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 6/10/2010""" ;
+    yawl:extends yawl:StatusMessage ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:UtilisationPlan_getCaseID_1 ;
+    yawl:hasMethod yawl:UtilisationPlan_setCaseID_2 ;
+    yawl:hasMethod yawl:UtilisationPlan_getActivityList_3 ;
+    yawl:hasMethod yawl:UtilisationPlan_setActivityList_4 ;
+    yawl:hasMethod yawl:UtilisationPlan_addActivity_5 ;
+    yawl:hasMethod yawl:UtilisationPlan_removeActivity_6 ;
+    yawl:hasMethod yawl:UtilisationPlan_getActivity_7 ;
+    yawl:hasMethod yawl:UtilisationPlan_hasActivities_8 ;
+    yawl:hasMethod yawl:UtilisationPlan_hasErrors_9 ;
+    yawl:hasMethod yawl:UtilisationPlan_activitiesHaveErrors_10 ;
+    yawl:hasMethod yawl:UtilisationPlan_toXML_11 ;
+    yawl:hasMethod yawl:UtilisationPlan_fromXML_12 ;
+    yawl:hasMethod yawl:UtilisationPlan_toXNode_13 ;
+    yawl:hasMethod yawl:UtilisationPlan_fromXNode_14 ;
+    yawl:hasField yawl:UtilisationPlan__caseID ;
+    yawl:hasField yawl:UtilisationPlan__activityList ;
+    .
+
+
+# Method: UtilisationPlan.getCaseID
+yawl:UtilisationPlan_getCaseID_1 a yawl:Method ;
+    rdfs:label "getCaseID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationPlan.setCaseID
+yawl:UtilisationPlan_setCaseID_2 a yawl:Method ;
+    rdfs:label "setCaseID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCaseID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationPlan.getActivityList
+yawl:UtilisationPlan_getActivityList_3 a yawl:Method ;
+    rdfs:label "getActivityList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getActivityList()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationPlan.setActivityList
+yawl:UtilisationPlan_setActivityList_4 a yawl:Method ;
+    rdfs:label "setActivityList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setActivityList(List list)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationPlan.addActivity
+yawl:UtilisationPlan_addActivity_5 a yawl:Method ;
+    rdfs:label "addActivity" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean addActivity(Activity a)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationPlan.removeActivity
+yawl:UtilisationPlan_removeActivity_6 a yawl:Method ;
+    rdfs:label "removeActivity" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeActivity(Activity a)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationPlan.getActivity
+yawl:UtilisationPlan_getActivity_7 a yawl:Method ;
+    rdfs:label "getActivity" ;
+    yawl:returnType "Activity" ;
+    yawl:signature "Activity getActivity(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationPlan.hasActivities
+yawl:UtilisationPlan_hasActivities_8 a yawl:Method ;
+    rdfs:label "hasActivities" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasActivities()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationPlan.hasErrors
+yawl:UtilisationPlan_hasErrors_9 a yawl:Method ;
+    rdfs:label "hasErrors" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasErrors()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationPlan.activitiesHaveErrors
+yawl:UtilisationPlan_activitiesHaveErrors_10 a yawl:Method ;
+    rdfs:label "activitiesHaveErrors" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean activitiesHaveErrors()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationPlan.toXML
+yawl:UtilisationPlan_toXML_11 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationPlan.fromXML
+yawl:UtilisationPlan_fromXML_12 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationPlan.toXNode
+yawl:UtilisationPlan_toXNode_13 a yawl:Method ;
+    rdfs:label "toXNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode toXNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UtilisationPlan.fromXNode
+yawl:UtilisationPlan_fromXNode_14 a yawl:Method ;
+    rdfs:label "fromXNode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXNode(XNode node)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:UtilisationPlan__caseID a yawl:Field ;
+    rdfs:label "_caseID" .
+
+yawl:UtilisationPlan__activityList a yawl:Field ;
+    rdfs:label "_activityList" .
+
+
+

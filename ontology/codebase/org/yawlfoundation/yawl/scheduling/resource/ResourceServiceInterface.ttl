@@ -1,0 +1,377 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.scheduling.resource
+yawl:org_yawlfoundation_yawl_scheduling_resource a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.scheduling.resource" .
+# Class: org.yawlfoundation.yawl.scheduling.resource.ResourceServiceInterface
+yawl:ResourceServiceInterface a yawl:Class ;
+    rdfs:label "ResourceServiceInterface" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_scheduling_resource ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/scheduling/resource/ResourceServiceInterface.java"^^xsd:string ;
+    rdfs:comment """implementation of wrapping interface to RS interface methods @author tbe @version $Id$""" ;
+    yawl:implements yawl:Constants ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ResourceServiceInterface_getInstance_1 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_initGateways_2 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_getHandle_3 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_getAvailabilities_4 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_getDropdownContent_5 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_getResources_6 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_getRoles_7 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_getCapabilities_8 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_getCategories_9 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_getSubCategories_10 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_saveReservations_11 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_removeReservations_12 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_addReservations_13 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_getParticipants_14 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_getParticipantRoles_15 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_getParticipantCapabilities_16 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_getNonHumanResources_17 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_getRole_18 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_getParticipant_19 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_getNonHumanResource_20 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_getNonHumanCategory_21 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_getNonHumanCategories_22 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_getRoleIdentifiers_23 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_checkConnection_24 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_registerCalendarStatusChangeListener_25 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_getCaseData_26 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_isValidUserSession_27 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_getWorkItem_28 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_updateWorkItemData_29 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_getFullNameForUserID_30 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_isValidSession_31 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_getUserSessionHandle_32 ;
+    yawl:hasMethod yawl:ResourceServiceInterface_getUserName_33 ;
+    yawl:hasField yawl:ResourceServiceInterface_DEBUG_SAVE_TO_RS ;
+    yawl:hasField yawl:ResourceServiceInterface__log ;
+    yawl:hasField yawl:ResourceServiceInterface_INSTANCE ;
+    yawl:hasField yawl:ResourceServiceInterface__resClient ;
+    yawl:hasField yawl:ResourceServiceInterface__calClient ;
+    yawl:hasField yawl:ResourceServiceInterface__wqClient ;
+    yawl:hasField yawl:ResourceServiceInterface__handle ;
+    yawl:hasField yawl:ResourceServiceInterface__userHandles ;
+    yawl:hasField yawl:ResourceServiceInterface__config ;
+    yawl:hasField yawl:ResourceServiceInterface__props ;
+    .
+
+
+# Method: ResourceServiceInterface.getInstance
+yawl:ResourceServiceInterface_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "ResourceServiceInterface" ;
+    yawl:signature "ResourceServiceInterface getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ResourceServiceInterface.initGateways
+yawl:ResourceServiceInterface_initGateways_2 a yawl:Method ;
+    rdfs:label "initGateways" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initGateways()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceServiceInterface.getHandle
+yawl:ResourceServiceInterface_getHandle_3 a yawl:Method ;
+    rdfs:label "getHandle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getHandle()" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceServiceInterface.getAvailabilities
+yawl:ResourceServiceInterface_getAvailabilities_4 a yawl:Method ;
+    rdfs:label "getAvailabilities" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAvailabilities(Element resource, Date from, Date to)" ;
+    rdfs:comment """return list of available timeslots between given period for each resource, matching given resource string @param resource @param from @param to @return list of timeslots @throws YAWLException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceServiceInterface.getDropdownContent
+yawl:ResourceServiceInterface_getDropdownContent_5 a yawl:Method ;
+    rdfs:label "getDropdownContent" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getDropdownContent(String objectName, String prevFieldValue)" ;
+    rdfs:comment """not used""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceServiceInterface.getResources
+yawl:ResourceServiceInterface_getResources_6 a yawl:Method ;
+    rdfs:label "getResources" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getResources(String resType)" ;
+    rdfs:comment """scheduling service retrieve all existing resources for showing in configuration dropdown boxes of custom form @throws ResourceGatewayException @throws IOException""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceServiceInterface.getRoles
+yawl:ResourceServiceInterface_getRoles_7 a yawl:Method ;
+    rdfs:label "getRoles" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getRoles()" ;
+    rdfs:comment """scheduling service retrieve a list of all existing roles for showing in configuration dropdown boxes of custom form @throws ResourceGatewayException @throws IOException""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceServiceInterface.getCapabilities
+yawl:ResourceServiceInterface_getCapabilities_8 a yawl:Method ;
+    rdfs:label "getCapabilities" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getCapabilities()" ;
+    rdfs:comment """scheduling service retrieve a list of all existing capabilities for showing in configuration dropdown boxes of custom form @throws ResourceGatewayException @throws IOException""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceServiceInterface.getCategories
+yawl:ResourceServiceInterface_getCategories_9 a yawl:Method ;
+    rdfs:label "getCategories" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getCategories()" ;
+    rdfs:comment """scheduling service retrieve a list of all existing categories for showing in configuration dropdown boxes of custom form @throws ResourceGatewayException @throws IOException""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceServiceInterface.getSubCategories
+yawl:ResourceServiceInterface_getSubCategories_10 a yawl:Method ;
+    rdfs:label "getSubCategories" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getSubCategories(String category)" ;
+    rdfs:comment """scheduling service retrieve a list of all existing subcategories of category for showing in configuration dropdown boxes of custom form @throws ResourceGatewayException @throws IOException""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceServiceInterface.saveReservations
+yawl:ResourceServiceInterface_saveReservations_11 a yawl:Method ;
+    rdfs:label "saveReservations" ;
+    yawl:returnType "Document" ;
+    yawl:signature "Document saveReservations(Document rup, boolean checkOnly, boolean resourceChange)" ;
+    rdfs:comment """Saves all reservation XML elements of the ResourceUtilisationPlan, depending on \"reservation.planningStatus\" (see rup.xsd for the XML data model) and removes or updates older reservations for the case and for each activity. Then sets planning status and error or warning values on XML elements (e.g. if a resource cannot be reserved or technical errors occur) and returns the ResourceUtilisationPlan. @param rup @param checkOnly @param resourceChange""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceServiceInterface.removeReservations
+yawl:ResourceServiceInterface_removeReservations_12 a yawl:Method ;
+    rdfs:label "removeReservations" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map removeReservations(Document rup, String statusToBe)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceServiceInterface.addReservations
+yawl:ResourceServiceInterface_addReservations_13 a yawl:Method ;
+    rdfs:label "addReservations" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addReservations(Document rup, Map res)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceServiceInterface.getParticipants
+yawl:ResourceServiceInterface_getParticipants_14 a yawl:Method ;
+    rdfs:label "getParticipants" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getParticipants()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceServiceInterface.getParticipantRoles
+yawl:ResourceServiceInterface_getParticipantRoles_15 a yawl:Method ;
+    rdfs:label "getParticipantRoles" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getParticipantRoles(String pid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceServiceInterface.getParticipantCapabilities
+yawl:ResourceServiceInterface_getParticipantCapabilities_16 a yawl:Method ;
+    rdfs:label "getParticipantCapabilities" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getParticipantCapabilities(String cid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceServiceInterface.getNonHumanResources
+yawl:ResourceServiceInterface_getNonHumanResources_17 a yawl:Method ;
+    rdfs:label "getNonHumanResources" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getNonHumanResources()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceServiceInterface.getRole
+yawl:ResourceServiceInterface_getRole_18 a yawl:Method ;
+    rdfs:label "getRole" ;
+    yawl:returnType "Role" ;
+    yawl:signature "Role getRole(String roleID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceServiceInterface.getParticipant
+yawl:ResourceServiceInterface_getParticipant_19 a yawl:Method ;
+    rdfs:label "getParticipant" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant getParticipant(String pID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceServiceInterface.getNonHumanResource
+yawl:ResourceServiceInterface_getNonHumanResource_20 a yawl:Method ;
+    rdfs:label "getNonHumanResource" ;
+    yawl:returnType "NonHumanResource" ;
+    yawl:signature "NonHumanResource getNonHumanResource(String resID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceServiceInterface.getNonHumanCategory
+yawl:ResourceServiceInterface_getNonHumanCategory_21 a yawl:Method ;
+    rdfs:label "getNonHumanCategory" ;
+    yawl:returnType "NonHumanCategory" ;
+    yawl:signature "NonHumanCategory getNonHumanCategory(String catID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceServiceInterface.getNonHumanCategories
+yawl:ResourceServiceInterface_getNonHumanCategories_22 a yawl:Method ;
+    rdfs:label "getNonHumanCategories" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getNonHumanCategories()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceServiceInterface.getRoleIdentifiers
+yawl:ResourceServiceInterface_getRoleIdentifiers_23 a yawl:Method ;
+    rdfs:label "getRoleIdentifiers" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getRoleIdentifiers()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceServiceInterface.checkConnection
+yawl:ResourceServiceInterface_checkConnection_24 a yawl:Method ;
+    rdfs:label "checkConnection" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean checkConnection(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceServiceInterface.registerCalendarStatusChangeListener
+yawl:ResourceServiceInterface_registerCalendarStatusChangeListener_25 a yawl:Method ;
+    rdfs:label "registerCalendarStatusChangeListener" ;
+    yawl:returnType "String" ;
+    yawl:signature "String registerCalendarStatusChangeListener(String uri)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceServiceInterface.getCaseData
+yawl:ResourceServiceInterface_getCaseData_26 a yawl:Method ;
+    rdfs:label "getCaseData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseData(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceServiceInterface.isValidUserSession
+yawl:ResourceServiceInterface_isValidUserSession_27 a yawl:Method ;
+    rdfs:label "isValidUserSession" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isValidUserSession(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceServiceInterface.getWorkItem
+yawl:ResourceServiceInterface_getWorkItem_28 a yawl:Method ;
+    rdfs:label "getWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItem(String itemID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceServiceInterface.updateWorkItemData
+yawl:ResourceServiceInterface_updateWorkItemData_29 a yawl:Method ;
+    rdfs:label "updateWorkItemData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateWorkItemData(String itemID, String data, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceServiceInterface.getFullNameForUserID
+yawl:ResourceServiceInterface_getFullNameForUserID_30 a yawl:Method ;
+    rdfs:label "getFullNameForUserID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFullNameForUserID(String userID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceServiceInterface.isValidSession
+yawl:ResourceServiceInterface_isValidSession_31 a yawl:Method ;
+    rdfs:label "isValidSession" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isValidSession(String userID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceServiceInterface.getUserSessionHandle
+yawl:ResourceServiceInterface_getUserSessionHandle_32 a yawl:Method ;
+    rdfs:label "getUserSessionHandle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUserSessionHandle(String userID, String password)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceServiceInterface.getUserName
+yawl:ResourceServiceInterface_getUserName_33 a yawl:Method ;
+    rdfs:label "getUserName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUserName(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:ResourceServiceInterface_DEBUG_SAVE_TO_RS a yawl:Field ;
+    rdfs:label "DEBUG_SAVE_TO_RS" .
+
+yawl:ResourceServiceInterface__log a yawl:Field ;
+    rdfs:label "_log" .
+
+yawl:ResourceServiceInterface_INSTANCE a yawl:Field ;
+    rdfs:label "INSTANCE" .
+
+yawl:ResourceServiceInterface__resClient a yawl:Field ;
+    rdfs:label "_resClient" .
+
+yawl:ResourceServiceInterface__calClient a yawl:Field ;
+    rdfs:label "_calClient" .
+
+yawl:ResourceServiceInterface__wqClient a yawl:Field ;
+    rdfs:label "_wqClient" .
+
+yawl:ResourceServiceInterface__handle a yawl:Field ;
+    rdfs:label "_handle" .
+
+yawl:ResourceServiceInterface__userHandles a yawl:Field ;
+    rdfs:label "_userHandles" .
+
+yawl:ResourceServiceInterface__config a yawl:Field ;
+    rdfs:label "_config" .
+
+yawl:ResourceServiceInterface__props a yawl:Field ;
+    rdfs:label "_props" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_resourcing_filters a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.filters" .
+
+

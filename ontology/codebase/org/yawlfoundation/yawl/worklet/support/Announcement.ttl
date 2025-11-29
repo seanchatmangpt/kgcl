@@ -1,0 +1,40 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.support.Announcement
+yawl:Announcement a yawl:Class ;
+    rdfs:label "Announcement" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_support ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/support/WorkletEventServer.java"^^xsd:string ;
+    rdfs:comment """This class does the actual announcing (via http)""" ;
+    yawl:implements yawl:Runnable ;
+    yawl:modifiers "private" ;
+    yawl:hasMethod yawl:Announcement_run_1 ;
+    yawl:hasField yawl:Announcement__params ;
+    yawl:hasField yawl:Announcement__uri ;
+    .
+
+
+# Method: Announcement.run
+yawl:Announcement_run_1 a yawl:Method ;
+    rdfs:label "run" ;
+    yawl:returnType "void" ;
+    yawl:signature "void run()" ;
+    rdfs:comment """Post the announcement""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:Announcement__params a yawl:Field ;
+    rdfs:label "_params" .
+
+yawl:Announcement__uri a yawl:Field ;
+    rdfs:label "_uri" .
+
+
+

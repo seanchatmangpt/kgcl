@@ -1,0 +1,35 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.swingWorklist.YWorkListPanel
+yawl:YWorkListPanel a yawl:Class ;
+    rdfs:label "YWorkListPanel" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_swingWorklist ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/swingWorklist/YWorkListPanel.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 15/05/2003 Time: 10:49:04""" ;
+    yawl:extends yawl:JPanel ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YWorkListPanel_getMyTable_1 ;
+    yawl:hasField yawl:YWorkListPanel__myTable ;
+    .
+
+
+# Method: YWorkListPanel.getMyTable
+yawl:YWorkListPanel_getMyTable_1 a yawl:Method ;
+    rdfs:label "getMyTable" ;
+    yawl:returnType "JTable" ;
+    yawl:signature "JTable getMyTable()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YWorkListPanel__myTable a yawl:Field ;
+    rdfs:label "_myTable" .
+
+
+

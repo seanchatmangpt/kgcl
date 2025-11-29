@@ -1,0 +1,124 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.stateless.elements.marking.YSetOfMarkings
+yawl:YSetOfMarkings a yawl:Class ;
+    rdfs:label "YSetOfMarkings" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_elements_marking ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/elements/marking/YSetOfMarkings.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 19/06/2003 Time: 15:22:56""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YSetOfMarkings_addMarking_1 ;
+    yawl:hasMethod yawl:YSetOfMarkings_addAll_2 ;
+    yawl:hasMethod yawl:YSetOfMarkings_contains_3 ;
+    yawl:hasMethod yawl:YSetOfMarkings_equals_4 ;
+    yawl:hasMethod yawl:YSetOfMarkings_containsAll_5 ;
+    yawl:hasMethod yawl:YSetOfMarkings_removeAll_6 ;
+    yawl:hasMethod yawl:YSetOfMarkings_getMarkings_7 ;
+    yawl:hasMethod yawl:YSetOfMarkings_size_8 ;
+    yawl:hasMethod yawl:YSetOfMarkings_removeAMarking_9 ;
+    yawl:hasMethod yawl:YSetOfMarkings_containsEquivalentMarkingTo_10 ;
+    yawl:hasMethod yawl:YSetOfMarkings_containsBiggerEqual_11 ;
+    yawl:hasField yawl:YSetOfMarkings__markings ;
+    .
+
+
+# Method: YSetOfMarkings.addMarking
+yawl:YSetOfMarkings_addMarking_1 a yawl:Method ;
+    rdfs:label "addMarking" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addMarking(YMarking marking)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSetOfMarkings.addAll
+yawl:YSetOfMarkings_addAll_2 a yawl:Method ;
+    rdfs:label "addAll" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addAll(YSetOfMarkings newMarkings)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSetOfMarkings.contains
+yawl:YSetOfMarkings_contains_3 a yawl:Method ;
+    rdfs:label "contains" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean contains(YMarking marking)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSetOfMarkings.equals
+yawl:YSetOfMarkings_equals_4 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(YSetOfMarkings markings)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSetOfMarkings.containsAll
+yawl:YSetOfMarkings_containsAll_5 a yawl:Method ;
+    rdfs:label "containsAll" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean containsAll(Set markingsToCompare)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSetOfMarkings.removeAll
+yawl:YSetOfMarkings_removeAll_6 a yawl:Method ;
+    rdfs:label "removeAll" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeAll()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSetOfMarkings.getMarkings
+yawl:YSetOfMarkings_getMarkings_7 a yawl:Method ;
+    rdfs:label "getMarkings" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getMarkings()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSetOfMarkings.size
+yawl:YSetOfMarkings_size_8 a yawl:Method ;
+    rdfs:label "size" ;
+    yawl:returnType "int" ;
+    yawl:signature "int size()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSetOfMarkings.removeAMarking
+yawl:YSetOfMarkings_removeAMarking_9 a yawl:Method ;
+    rdfs:label "removeAMarking" ;
+    yawl:returnType "YMarking" ;
+    yawl:signature "YMarking removeAMarking()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSetOfMarkings.containsEquivalentMarkingTo
+yawl:YSetOfMarkings_containsEquivalentMarkingTo_10 a yawl:Method ;
+    rdfs:label "containsEquivalentMarkingTo" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean containsEquivalentMarkingTo(YSetOfMarkings possibleFutureMarkingSet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSetOfMarkings.containsBiggerEqual
+yawl:YSetOfMarkings_containsBiggerEqual_11 a yawl:Method ;
+    rdfs:label "containsBiggerEqual" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean containsBiggerEqual(YMarking m)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YSetOfMarkings__markings a yawl:Field ;
+    rdfs:label "_markings" .
+
+
+

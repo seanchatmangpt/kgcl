@@ -1,0 +1,35 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.scheduling.util.ResourceResolver
+yawl:ResourceResolver a yawl:Class ;
+    rdfs:label "ResourceResolver" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_scheduling_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/scheduling/util/XMLUtils.java"^^xsd:string ;
+    rdfs:comment """Workaround for bug in Xerces, @see https://issues.apache.org/jira/browse/XERCESJ-1130 therefore we cannot include other schemas. Original workaround can be found here: see http ://stackoverflow.com/questions/1094893/validate-an-xml-file-against -multiple-schema-definitions see http://pbin.oogly.co.uk/listings/viewlistingdetail/2 a70d763929ce3053085bfaa1d78e2 @author Jon (oogly.co.uk)""" ;
+    yawl:implements yawl:LSResourceResolver ;
+    yawl:modifiers "private" ;
+    yawl:hasMethod yawl:ResourceResolver_resolveResource_1 ;
+    yawl:hasField yawl:ResourceResolver__path ;
+    .
+
+
+# Method: ResourceResolver.resolveResource
+yawl:ResourceResolver_resolveResource_1 a yawl:Method ;
+    rdfs:label "resolveResource" ;
+    yawl:returnType "LSInput" ;
+    yawl:signature "LSInput resolveResource(String type, String namespaceURI, String publicId, String systemId, String baseURI)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:ResourceResolver__path a yawl:Field ;
+    rdfs:label "_path" .
+
+
+

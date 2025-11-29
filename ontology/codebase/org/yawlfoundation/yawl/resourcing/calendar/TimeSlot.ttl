@@ -1,0 +1,136 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.calendar.TimeSlot
+yawl:TimeSlot a yawl:Class ;
+    rdfs:label "TimeSlot" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_calendar ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/calendar/TimeSlot.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 6/09/2010""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:TimeSlot_getStart_1 ;
+    yawl:hasMethod yawl:TimeSlot_setStart_2 ;
+    yawl:hasMethod yawl:TimeSlot_getEnd_3 ;
+    yawl:hasMethod yawl:TimeSlot_setEnd_4 ;
+    yawl:hasMethod yawl:TimeSlot_getStatus_5 ;
+    yawl:hasMethod yawl:TimeSlot_setStatus_6 ;
+    yawl:hasMethod yawl:TimeSlot_getAvailability_7 ;
+    yawl:hasMethod yawl:TimeSlot_setAvailability_8 ;
+    yawl:hasMethod yawl:TimeSlot_toXML_9 ;
+    yawl:hasMethod yawl:TimeSlot_toXNode_10 ;
+    yawl:hasMethod yawl:TimeSlot_fromXML_11 ;
+    yawl:hasField yawl:TimeSlot__start ;
+    yawl:hasField yawl:TimeSlot__end ;
+    yawl:hasField yawl:TimeSlot__status ;
+    yawl:hasField yawl:TimeSlot__percentAvailable ;
+    .
+
+
+# Method: TimeSlot.getStart
+yawl:TimeSlot_getStart_1 a yawl:Method ;
+    rdfs:label "getStart" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getStart()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TimeSlot.setStart
+yawl:TimeSlot_setStart_2 a yawl:Method ;
+    rdfs:label "setStart" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStart(long start)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TimeSlot.getEnd
+yawl:TimeSlot_getEnd_3 a yawl:Method ;
+    rdfs:label "getEnd" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getEnd()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TimeSlot.setEnd
+yawl:TimeSlot_setEnd_4 a yawl:Method ;
+    rdfs:label "setEnd" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEnd(long end)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TimeSlot.getStatus
+yawl:TimeSlot_getStatus_5 a yawl:Method ;
+    rdfs:label "getStatus" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TimeSlot.setStatus
+yawl:TimeSlot_setStatus_6 a yawl:Method ;
+    rdfs:label "setStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStatus(String status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TimeSlot.getAvailability
+yawl:TimeSlot_getAvailability_7 a yawl:Method ;
+    rdfs:label "getAvailability" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getAvailability()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TimeSlot.setAvailability
+yawl:TimeSlot_setAvailability_8 a yawl:Method ;
+    rdfs:label "setAvailability" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAvailability(int available)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TimeSlot.toXML
+yawl:TimeSlot_toXML_9 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TimeSlot.toXNode
+yawl:TimeSlot_toXNode_10 a yawl:Method ;
+    rdfs:label "toXNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode toXNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TimeSlot.fromXML
+yawl:TimeSlot_fromXML_11 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:TimeSlot__start a yawl:Field ;
+    rdfs:label "_start" .
+
+yawl:TimeSlot__end a yawl:Field ;
+    rdfs:label "_end" .
+
+yawl:TimeSlot__status a yawl:Field ;
+    rdfs:label "_status" .
+
+yawl:TimeSlot__percentAvailable a yawl:Field ;
+    rdfs:label "_percentAvailable" .
+
+
+

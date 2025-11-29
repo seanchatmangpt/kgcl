@@ -1,0 +1,133 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.util
+yawl:org_yawlfoundation_yawl_util a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.util" .
+# Class: org.yawlfoundation.yawl.util.HttpURLValidator
+yawl:HttpURLValidator a yawl:Class ;
+    rdfs:label "HttpURLValidator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/util/HttpURLValidator.java"^^xsd:string ;
+    rdfs:comment """A simple static checker that (1) checks that the url string passed in is a valid URL, and then (2) that the server at the URL is responsive. <p/> Author: Michael Adams Creation Date: 7/05/2009""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:HttpURLValidator_validate_1 ;
+    yawl:hasMethod yawl:HttpURLValidator_validate_2 ;
+    yawl:hasMethod yawl:HttpURLValidator_createURL_3 ;
+    yawl:hasMethod yawl:HttpURLValidator_getErrorMessage_4 ;
+    yawl:hasMethod yawl:HttpURLValidator_cancelAll_5 ;
+    yawl:hasMethod yawl:HttpURLValidator_pingUntilAvailable_6 ;
+    yawl:hasMethod yawl:HttpURLValidator_simplePing_7 ;
+    yawl:hasMethod yawl:HttpURLValidator_isTomcatRunning_8 ;
+    yawl:hasMethod yawl:HttpURLValidator_getTomcatServerPort_9 ;
+    yawl:hasMethod yawl:HttpURLValidator_loadTomcatConfigFile_10 ;
+    yawl:hasField yawl:HttpURLValidator_CONNECT_TIMEOUT ;
+    yawl:hasField yawl:HttpURLValidator__cancelled ;
+    .
+
+
+# Method: HttpURLValidator.validate
+yawl:HttpURLValidator_validate_1 a yawl:Method ;
+    rdfs:label "validate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String validate(String urlStr)" ;
+    rdfs:comment """validates a url passed as a String @param urlStr the url to validate @return a message describing the success of failure of the validation""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: HttpURLValidator.validate
+yawl:HttpURLValidator_validate_2 a yawl:Method ;
+    rdfs:label "validate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String validate(URL url)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: HttpURLValidator.createURL
+yawl:HttpURLValidator_createURL_3 a yawl:Method ;
+    rdfs:label "createURL" ;
+    yawl:returnType "URL" ;
+    yawl:signature "URL createURL(String urlStr)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: HttpURLValidator.getErrorMessage
+yawl:HttpURLValidator_getErrorMessage_4 a yawl:Method ;
+    rdfs:label "getErrorMessage" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getErrorMessage(String msg)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: HttpURLValidator.cancelAll
+yawl:HttpURLValidator_cancelAll_5 a yawl:Method ;
+    rdfs:label "cancelAll" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancelAll()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: HttpURLValidator.pingUntilAvailable
+yawl:HttpURLValidator_pingUntilAvailable_6 a yawl:Method ;
+    rdfs:label "pingUntilAvailable" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean pingUntilAvailable(String urlStr, int timeoutSeconds)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: HttpURLValidator.simplePing
+yawl:HttpURLValidator_simplePing_7 a yawl:Method ;
+    rdfs:label "simplePing" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean simplePing(String host, int port)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: HttpURLValidator.isTomcatRunning
+yawl:HttpURLValidator_isTomcatRunning_8 a yawl:Method ;
+    rdfs:label "isTomcatRunning" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isTomcatRunning(String urlStr)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: HttpURLValidator.getTomcatServerPort
+yawl:HttpURLValidator_getTomcatServerPort_9 a yawl:Method ;
+    rdfs:label "getTomcatServerPort" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getTomcatServerPort()" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: HttpURLValidator.loadTomcatConfigFile
+yawl:HttpURLValidator_loadTomcatConfigFile_10 a yawl:Method ;
+    rdfs:label "loadTomcatConfigFile" ;
+    yawl:returnType "Document" ;
+    yawl:signature "Document loadTomcatConfigFile(String filename)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:HttpURLValidator_CONNECT_TIMEOUT a yawl:Field ;
+    rdfs:label "CONNECT_TIMEOUT" .
+
+yawl:HttpURLValidator__cancelled a yawl:Field ;
+    rdfs:label "_cancelled" .
+
+
+

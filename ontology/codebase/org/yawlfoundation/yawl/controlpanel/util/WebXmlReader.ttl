@@ -1,0 +1,61 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.util.WebXmlReader
+yawl:WebXmlReader a yawl:Class ;
+    rdfs:label "WebXmlReader" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/util/WebXmlReader.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 22/08/2014""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:WebXmlReader_getContextParam_1 ;
+    yawl:hasMethod yawl:WebXmlReader_getIBServletMapping_2 ;
+    yawl:hasMethod yawl:WebXmlReader_getServletMapping_3 ;
+    yawl:hasMethod yawl:WebXmlReader_getInterfaceBServletName_4 ;
+    yawl:hasField yawl:WebXmlReader__root ;
+    .
+
+
+# Method: WebXmlReader.getContextParam
+yawl:WebXmlReader_getContextParam_1 a yawl:Method ;
+    rdfs:label "getContextParam" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getContextParam(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WebXmlReader.getIBServletMapping
+yawl:WebXmlReader_getIBServletMapping_2 a yawl:Method ;
+    rdfs:label "getIBServletMapping" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getIBServletMapping()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WebXmlReader.getServletMapping
+yawl:WebXmlReader_getServletMapping_3 a yawl:Method ;
+    rdfs:label "getServletMapping" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getServletMapping(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WebXmlReader.getInterfaceBServletName
+yawl:WebXmlReader_getInterfaceBServletName_4 a yawl:Method ;
+    rdfs:label "getInterfaceBServletName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInterfaceBServletName()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:WebXmlReader__root a yawl:Field ;
+    rdfs:label "_root" .
+
+
+

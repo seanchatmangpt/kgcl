@@ -1,0 +1,141 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.monitor.sort.TableSorter
+yawl:TableSorter a yawl:Class ;
+    rdfs:label "TableSorter" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_monitor_sort ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/monitor/sort/TableSorter.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 9/12/2009""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:TableSorter_sort_1 ;
+    yawl:hasMethod yawl:TableSorter_applyCaseOrder_2 ;
+    yawl:hasMethod yawl:TableSorter_getCaseOrder_3 ;
+    yawl:hasMethod yawl:TableSorter_getCurrentCaseComparator_4 ;
+    yawl:hasMethod yawl:TableSorter_sort_5 ;
+    yawl:hasMethod yawl:TableSorter_applyItemOrder_6 ;
+    yawl:hasMethod yawl:TableSorter_getItemOrder_7 ;
+    yawl:hasMethod yawl:TableSorter_getCurrentItemComparator_8 ;
+    yawl:hasMethod yawl:TableSorter_sort_9 ;
+    yawl:hasMethod yawl:TableSorter_applyParamOrder_10 ;
+    yawl:hasMethod yawl:TableSorter_getParamOrder_11 ;
+    yawl:hasMethod yawl:TableSorter_getCurrentParamComparator_12 ;
+    yawl:hasField yawl:TableSorter_caseOrder ;
+    yawl:hasField yawl:TableSorter_itemOrder ;
+    yawl:hasField yawl:TableSorter_paramOrder ;
+    .
+
+
+# Method: TableSorter.sort
+yawl:TableSorter_sort_1 a yawl:Method ;
+    rdfs:label "sort" ;
+    yawl:returnType "List" ;
+    yawl:signature "List sort(List caseList, CaseColumn column)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableSorter.applyCaseOrder
+yawl:TableSorter_applyCaseOrder_2 a yawl:Method ;
+    rdfs:label "applyCaseOrder" ;
+    yawl:returnType "List" ;
+    yawl:signature "List applyCaseOrder(List caseList)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableSorter.getCaseOrder
+yawl:TableSorter_getCaseOrder_3 a yawl:Method ;
+    rdfs:label "getCaseOrder" ;
+    yawl:returnType "CaseOrder" ;
+    yawl:signature "CaseOrder getCaseOrder()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableSorter.getCurrentCaseComparator
+yawl:TableSorter_getCurrentCaseComparator_4 a yawl:Method ;
+    rdfs:label "getCurrentCaseComparator" ;
+    yawl:returnType "Comparator" ;
+    yawl:signature "Comparator getCurrentCaseComparator()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TableSorter.sort
+yawl:TableSorter_sort_5 a yawl:Method ;
+    rdfs:label "sort" ;
+    yawl:returnType "List" ;
+    yawl:signature "List sort(List itemList, ItemColumn column)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableSorter.applyItemOrder
+yawl:TableSorter_applyItemOrder_6 a yawl:Method ;
+    rdfs:label "applyItemOrder" ;
+    yawl:returnType "List" ;
+    yawl:signature "List applyItemOrder(List itemList)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableSorter.getItemOrder
+yawl:TableSorter_getItemOrder_7 a yawl:Method ;
+    rdfs:label "getItemOrder" ;
+    yawl:returnType "ItemOrder" ;
+    yawl:signature "ItemOrder getItemOrder()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableSorter.getCurrentItemComparator
+yawl:TableSorter_getCurrentItemComparator_8 a yawl:Method ;
+    rdfs:label "getCurrentItemComparator" ;
+    yawl:returnType "Comparator" ;
+    yawl:signature "Comparator getCurrentItemComparator()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TableSorter.sort
+yawl:TableSorter_sort_9 a yawl:Method ;
+    rdfs:label "sort" ;
+    yawl:returnType "List" ;
+    yawl:signature "List sort(List paramList, ParamColumn column)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableSorter.applyParamOrder
+yawl:TableSorter_applyParamOrder_10 a yawl:Method ;
+    rdfs:label "applyParamOrder" ;
+    yawl:returnType "List" ;
+    yawl:signature "List applyParamOrder(List paramList)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableSorter.getParamOrder
+yawl:TableSorter_getParamOrder_11 a yawl:Method ;
+    rdfs:label "getParamOrder" ;
+    yawl:returnType "ParamOrder" ;
+    yawl:signature "ParamOrder getParamOrder()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableSorter.getCurrentParamComparator
+yawl:TableSorter_getCurrentParamComparator_12 a yawl:Method ;
+    rdfs:label "getCurrentParamComparator" ;
+    yawl:returnType "Comparator" ;
+    yawl:signature "Comparator getCurrentParamComparator()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:TableSorter_caseOrder a yawl:Field ;
+    rdfs:label "caseOrder" .
+
+yawl:TableSorter_itemOrder a yawl:Field ;
+    rdfs:label "itemOrder" .
+
+yawl:TableSorter_paramOrder a yawl:Field ;
+    rdfs:label "paramOrder" .
+
+
+

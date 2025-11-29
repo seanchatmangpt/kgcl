@@ -1,0 +1,121 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.util.SaxonErrorListener
+yawl:SaxonErrorListener a yawl:Class ;
+    rdfs:label "SaxonErrorListener" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/util/SaxonErrorListener.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 19/08/13""" ;
+    yawl:implements yawl:ErrorListener ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:SaxonErrorListener_reset_1 ;
+    yawl:hasMethod yawl:SaxonErrorListener_warning_2 ;
+    yawl:hasMethod yawl:SaxonErrorListener_error_3 ;
+    yawl:hasMethod yawl:SaxonErrorListener_fatalError_4 ;
+    yawl:hasMethod yawl:SaxonErrorListener_getWarningMessages_5 ;
+    yawl:hasMethod yawl:SaxonErrorListener_getErrorMessages_6 ;
+    yawl:hasMethod yawl:SaxonErrorListener_getFatalMessages_7 ;
+    yawl:hasMethod yawl:SaxonErrorListener_getAllMessages_8 ;
+    yawl:hasMethod yawl:SaxonErrorListener_getMessages_9 ;
+    yawl:hasField yawl:SaxonErrorListener_warnings ;
+    yawl:hasField yawl:SaxonErrorListener_errors ;
+    yawl:hasField yawl:SaxonErrorListener_fatals ;
+    .
+
+
+# Method: SaxonErrorListener.reset
+yawl:SaxonErrorListener_reset_1 a yawl:Method ;
+    rdfs:label "reset" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reset()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "final" ;
+    .
+
+# Method: SaxonErrorListener.warning
+yawl:SaxonErrorListener_warning_2 a yawl:Method ;
+    rdfs:label "warning" ;
+    yawl:returnType "void" ;
+    yawl:signature "void warning(TransformerException e)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SaxonErrorListener.error
+yawl:SaxonErrorListener_error_3 a yawl:Method ;
+    rdfs:label "error" ;
+    yawl:returnType "void" ;
+    yawl:signature "void error(TransformerException e)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SaxonErrorListener.fatalError
+yawl:SaxonErrorListener_fatalError_4 a yawl:Method ;
+    rdfs:label "fatalError" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fatalError(TransformerException e)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SaxonErrorListener.getWarningMessages
+yawl:SaxonErrorListener_getWarningMessages_5 a yawl:Method ;
+    rdfs:label "getWarningMessages" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getWarningMessages()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SaxonErrorListener.getErrorMessages
+yawl:SaxonErrorListener_getErrorMessages_6 a yawl:Method ;
+    rdfs:label "getErrorMessages" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getErrorMessages()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SaxonErrorListener.getFatalMessages
+yawl:SaxonErrorListener_getFatalMessages_7 a yawl:Method ;
+    rdfs:label "getFatalMessages" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getFatalMessages()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SaxonErrorListener.getAllMessages
+yawl:SaxonErrorListener_getAllMessages_8 a yawl:Method ;
+    rdfs:label "getAllMessages" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAllMessages()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SaxonErrorListener.getMessages
+yawl:SaxonErrorListener_getMessages_9 a yawl:Method ;
+    rdfs:label "getMessages" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getMessages(List list)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:SaxonErrorListener_warnings a yawl:Field ;
+    rdfs:label "warnings" .
+
+yawl:SaxonErrorListener_errors a yawl:Field ;
+    rdfs:label "errors" .
+
+yawl:SaxonErrorListener_fatals a yawl:Field ;
+    rdfs:label "fatals" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_resourcing a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing" .
+
+

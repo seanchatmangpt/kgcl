@@ -1,0 +1,125 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.engine.interfce
+yawl:org_yawlfoundation_yawl_engine_interfce a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.engine.interfce" .
+# Class: org.yawlfoundation.yawl.engine.interfce.Marshaller
+yawl:Marshaller a yawl:Class ;
+    rdfs:label "Marshaller" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_interfce ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/interfce/Marshaller.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 16/02/2004 Time: 18:41:17""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Marshaller_getOutputParamsInXML_1 ;
+    yawl:hasMethod yawl:Marshaller_presentParam_2 ;
+    yawl:hasMethod yawl:Marshaller_unmarshalTaskInformation_3 ;
+    yawl:hasMethod yawl:Marshaller_unmarshalSpecificationSummary_4 ;
+    yawl:hasMethod yawl:Marshaller_unmarshalWorkItem_5 ;
+    yawl:hasMethod yawl:Marshaller_unmarshalWorkItem_6 ;
+    yawl:hasMethod yawl:Marshaller_unmarshalWorkItemAttributes_7 ;
+    yawl:hasMethod yawl:Marshaller_unmarshalCaseIDs_8 ;
+    yawl:hasMethod yawl:Marshaller_getMergedOutputData_9 ;
+    yawl:hasMethod yawl:Marshaller_filterDataAgainstOutputParams_10 ;
+    .
+
+
+# Method: Marshaller.getOutputParamsInXML
+yawl:Marshaller_getOutputParamsInXML_1 a yawl:Method ;
+    rdfs:label "getOutputParamsInXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOutputParamsInXML(YParametersSchema paramSchema, String dataSpaceRootElementNm)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Marshaller.presentParam
+yawl:Marshaller_presentParam_2 a yawl:Method ;
+    rdfs:label "presentParam" ;
+    yawl:returnType "String" ;
+    yawl:signature "String presentParam(YParameter param)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Marshaller.unmarshalTaskInformation
+yawl:Marshaller_unmarshalTaskInformation_3 a yawl:Method ;
+    rdfs:label "unmarshalTaskInformation" ;
+    yawl:returnType "TaskInformation" ;
+    yawl:signature "TaskInformation unmarshalTaskInformation(String taskInfoAsXML)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Marshaller.unmarshalSpecificationSummary
+yawl:Marshaller_unmarshalSpecificationSummary_4 a yawl:Method ;
+    rdfs:label "unmarshalSpecificationSummary" ;
+    yawl:returnType "List" ;
+    yawl:signature "List unmarshalSpecificationSummary(String specificationSummaryListXML)" ;
+    rdfs:comment """Creates a list of SpecificationDatas from formatted XML. These are brief meta data summary information objects that describe a workflow specification. @param specificationSummaryListXML @return  the list""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Marshaller.unmarshalWorkItem
+yawl:Marshaller_unmarshalWorkItem_5 a yawl:Method ;
+    rdfs:label "unmarshalWorkItem" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord unmarshalWorkItem(String workItemXML)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Marshaller.unmarshalWorkItem
+yawl:Marshaller_unmarshalWorkItem_6 a yawl:Method ;
+    rdfs:label "unmarshalWorkItem" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord unmarshalWorkItem(Element workItemElement)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Marshaller.unmarshalWorkItemAttributes
+yawl:Marshaller_unmarshalWorkItemAttributes_7 a yawl:Method ;
+    rdfs:label "unmarshalWorkItemAttributes" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map unmarshalWorkItemAttributes(Element item)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Marshaller.unmarshalCaseIDs
+yawl:Marshaller_unmarshalCaseIDs_8 a yawl:Method ;
+    rdfs:label "unmarshalCaseIDs" ;
+    yawl:returnType "List" ;
+    yawl:signature "List unmarshalCaseIDs(String casesAsXML)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Marshaller.getMergedOutputData
+yawl:Marshaller_getMergedOutputData_9 a yawl:Method ;
+    rdfs:label "getMergedOutputData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMergedOutputData(Element inputData, Element outputData)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Marshaller.filterDataAgainstOutputParams
+yawl:Marshaller_filterDataAgainstOutputParams_10 a yawl:Method ;
+    rdfs:label "filterDataAgainstOutputParams" ;
+    yawl:returnType "String" ;
+    yawl:signature "String filterDataAgainstOutputParams(String mergedOutputData, List outputParams)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+
+

@@ -1,0 +1,362 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.interfce.SpecificationData
+yawl:SpecificationData a yawl:Class ;
+    rdfs:label "SpecificationData" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_interfce ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/interfce/SpecificationData.java"^^xsd:string ;
+    rdfs:comment """Just some summary data about a workflow specification. @author Lachlan Aldred Date: 8/03/2004 Time: 12:16:02 @author Michael Adams - updated for v2.1""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:SpecificationData_getStatus_1 ;
+    yawl:hasMethod yawl:SpecificationData_getID_2 ;
+    yawl:hasMethod yawl:SpecificationData_getName_3 ;
+    yawl:hasMethod yawl:SpecificationData_getDocumentation_4 ;
+    yawl:hasMethod yawl:SpecificationData_getAsXML_5 ;
+    yawl:hasMethod yawl:SpecificationData_setSpecAsXML_6 ;
+    yawl:hasMethod yawl:SpecificationData_getSchema_7 ;
+    yawl:hasMethod yawl:SpecificationData_setSchema_8 ;
+    yawl:hasMethod yawl:SpecificationData_addInputParam_9 ;
+    yawl:hasMethod yawl:SpecificationData_getInputParams_10 ;
+    yawl:hasMethod yawl:SpecificationData_getInputParamMap_11 ;
+    yawl:hasMethod yawl:SpecificationData_setDataType_12 ;
+    yawl:hasMethod yawl:SpecificationData_getDataType_13 ;
+    yawl:hasMethod yawl:SpecificationData_getSchemaLibrary_14 ;
+    yawl:hasMethod yawl:SpecificationData_getSchemaVersion_15 ;
+    yawl:hasMethod yawl:SpecificationData_isSecondGenSchemaVersion_16 ;
+    yawl:hasMethod yawl:SpecificationData_getSpecURI_17 ;
+    yawl:hasMethod yawl:SpecificationData_getSpecIdentifier_18 ;
+    yawl:hasMethod yawl:SpecificationData_setSchemaVersion_19 ;
+    yawl:hasMethod yawl:SpecificationData_getSpecVersion_20 ;
+    yawl:hasMethod yawl:SpecificationData_setSpecVersion_21 ;
+    yawl:hasMethod yawl:SpecificationData_getRootNetID_22 ;
+    yawl:hasMethod yawl:SpecificationData_setRootNetID_23 ;
+    yawl:hasMethod yawl:SpecificationData_usesSimpleRootData_24 ;
+    yawl:hasMethod yawl:SpecificationData_getMetaTitle_25 ;
+    yawl:hasMethod yawl:SpecificationData_setMetaTitle_26 ;
+    yawl:hasMethod yawl:SpecificationData_getAuthors_27 ;
+    yawl:hasMethod yawl:SpecificationData_setAuthors_28 ;
+    yawl:hasMethod yawl:SpecificationData_addAuthor_29 ;
+    yawl:hasMethod yawl:SpecificationData_getExternalDataGateway_30 ;
+    yawl:hasMethod yawl:SpecificationData_setExternalDataGateway_31 ;
+    yawl:hasMethod yawl:SpecificationData_hasExternalCaseDataGateway_32 ;
+    yawl:hasField yawl:SpecificationData__specificationID ;
+    yawl:hasField yawl:SpecificationData__specificationName ;
+    yawl:hasField yawl:SpecificationData__documentation ;
+    yawl:hasField yawl:SpecificationData__status ;
+    yawl:hasField yawl:SpecificationData__specAsXML ;
+    yawl:hasField yawl:SpecificationData__inputParams ;
+    yawl:hasField yawl:SpecificationData__dataTypes ;
+    yawl:hasField yawl:SpecificationData__schemaVersion ;
+    yawl:hasField yawl:SpecificationData__rootNetID ;
+    yawl:hasField yawl:SpecificationData__schema ;
+    yawl:hasField yawl:SpecificationData__title ;
+    yawl:hasField yawl:SpecificationData__authors ;
+    yawl:hasField yawl:SpecificationData__externalDataGateway ;
+    .
+
+
+# Method: SpecificationData.getStatus
+yawl:SpecificationData_getStatus_1 a yawl:Method ;
+    rdfs:label "getStatus" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.getID
+yawl:SpecificationData_getID_2 a yawl:Method ;
+    rdfs:label "getID" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.getName
+yawl:SpecificationData_getName_3 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.getDocumentation
+yawl:SpecificationData_getDocumentation_4 a yawl:Method ;
+    rdfs:label "getDocumentation" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDocumentation()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.getAsXML
+yawl:SpecificationData_getAsXML_5 a yawl:Method ;
+    rdfs:label "getAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAsXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.setSpecAsXML
+yawl:SpecificationData_setSpecAsXML_6 a yawl:Method ;
+    rdfs:label "setSpecAsXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSpecAsXML(String specAsXML)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.getSchema
+yawl:SpecificationData_getSchema_7 a yawl:Method ;
+    rdfs:label "getSchema" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSchema()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.setSchema
+yawl:SpecificationData_setSchema_8 a yawl:Method ;
+    rdfs:label "setSchema" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSchema(String schema)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.addInputParam
+yawl:SpecificationData_addInputParam_9 a yawl:Method ;
+    rdfs:label "addInputParam" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addInputParam(YParameter parameter)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.getInputParams
+yawl:SpecificationData_getInputParams_10 a yawl:Method ;
+    rdfs:label "getInputParams" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getInputParams()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.getInputParamMap
+yawl:SpecificationData_getInputParamMap_11 a yawl:Method ;
+    rdfs:label "getInputParamMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getInputParamMap()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.setDataType
+yawl:SpecificationData_setDataType_12 a yawl:Method ;
+    rdfs:label "setDataType" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataType(String nameSpaceURI, String typeName, String typeSpecification)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.getDataType
+yawl:SpecificationData_getDataType_13 a yawl:Method ;
+    rdfs:label "getDataType" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataType(String typeName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.getSchemaLibrary
+yawl:SpecificationData_getSchemaLibrary_14 a yawl:Method ;
+    rdfs:label "getSchemaLibrary" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSchemaLibrary()" ;
+    rdfs:comment """If the specification contains a schema library this method returns the schema library as a string (in XML Schema format). @return  schema library as a string.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.getSchemaVersion
+yawl:SpecificationData_getSchemaVersion_15 a yawl:Method ;
+    rdfs:label "getSchemaVersion" ;
+    yawl:returnType "YSchemaVersion" ;
+    yawl:signature "YSchemaVersion getSchemaVersion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.isSecondGenSchemaVersion
+yawl:SpecificationData_isSecondGenSchemaVersion_16 a yawl:Method ;
+    rdfs:label "isSecondGenSchemaVersion" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isSecondGenSchemaVersion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.getSpecURI
+yawl:SpecificationData_getSpecURI_17 a yawl:Method ;
+    rdfs:label "getSpecURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecURI()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.getSpecIdentifier
+yawl:SpecificationData_getSpecIdentifier_18 a yawl:Method ;
+    rdfs:label "getSpecIdentifier" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecIdentifier()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.setSchemaVersion
+yawl:SpecificationData_setSchemaVersion_19 a yawl:Method ;
+    rdfs:label "setSchemaVersion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSchemaVersion(YSchemaVersion version)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.getSpecVersion
+yawl:SpecificationData_getSpecVersion_20 a yawl:Method ;
+    rdfs:label "getSpecVersion" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecVersion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.setSpecVersion
+yawl:SpecificationData_setSpecVersion_21 a yawl:Method ;
+    rdfs:label "setSpecVersion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSpecVersion(String version)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.getRootNetID
+yawl:SpecificationData_getRootNetID_22 a yawl:Method ;
+    rdfs:label "getRootNetID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRootNetID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.setRootNetID
+yawl:SpecificationData_setRootNetID_23 a yawl:Method ;
+    rdfs:label "setRootNetID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRootNetID(String rootNetID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.usesSimpleRootData
+yawl:SpecificationData_usesSimpleRootData_24 a yawl:Method ;
+    rdfs:label "usesSimpleRootData" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean usesSimpleRootData()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.getMetaTitle
+yawl:SpecificationData_getMetaTitle_25 a yawl:Method ;
+    rdfs:label "getMetaTitle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMetaTitle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.setMetaTitle
+yawl:SpecificationData_setMetaTitle_26 a yawl:Method ;
+    rdfs:label "setMetaTitle" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMetaTitle(String title)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.getAuthors
+yawl:SpecificationData_getAuthors_27 a yawl:Method ;
+    rdfs:label "getAuthors" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAuthors()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.setAuthors
+yawl:SpecificationData_setAuthors_28 a yawl:Method ;
+    rdfs:label "setAuthors" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAuthors(String authors)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.addAuthor
+yawl:SpecificationData_addAuthor_29 a yawl:Method ;
+    rdfs:label "addAuthor" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addAuthor(String author)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.getExternalDataGateway
+yawl:SpecificationData_getExternalDataGateway_30 a yawl:Method ;
+    rdfs:label "getExternalDataGateway" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getExternalDataGateway()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.setExternalDataGateway
+yawl:SpecificationData_setExternalDataGateway_31 a yawl:Method ;
+    rdfs:label "setExternalDataGateway" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setExternalDataGateway(String gateway)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecificationData.hasExternalCaseDataGateway
+yawl:SpecificationData_hasExternalCaseDataGateway_32 a yawl:Method ;
+    rdfs:label "hasExternalCaseDataGateway" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasExternalCaseDataGateway()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:SpecificationData__specificationID a yawl:Field ;
+    rdfs:label "_specificationID" .
+
+yawl:SpecificationData__specificationName a yawl:Field ;
+    rdfs:label "_specificationName" .
+
+yawl:SpecificationData__documentation a yawl:Field ;
+    rdfs:label "_documentation" .
+
+yawl:SpecificationData__status a yawl:Field ;
+    rdfs:label "_status" .
+
+yawl:SpecificationData__specAsXML a yawl:Field ;
+    rdfs:label "_specAsXML" .
+
+yawl:SpecificationData__inputParams a yawl:Field ;
+    rdfs:label "_inputParams" .
+
+yawl:SpecificationData__dataTypes a yawl:Field ;
+    rdfs:label "_dataTypes" .
+
+yawl:SpecificationData__schemaVersion a yawl:Field ;
+    rdfs:label "_schemaVersion" .
+
+yawl:SpecificationData__rootNetID a yawl:Field ;
+    rdfs:label "_rootNetID" .
+
+yawl:SpecificationData__schema a yawl:Field ;
+    rdfs:label "_schema" .
+
+yawl:SpecificationData__title a yawl:Field ;
+    rdfs:label "_title" .
+
+yawl:SpecificationData__authors a yawl:Field ;
+    rdfs:label "_authors" .
+
+yawl:SpecificationData__externalDataGateway a yawl:Field ;
+    rdfs:label "_externalDataGateway" .
+
+
+

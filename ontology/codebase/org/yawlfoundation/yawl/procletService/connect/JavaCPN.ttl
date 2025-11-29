@@ -1,0 +1,85 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.connect.JavaCPN
+yawl:JavaCPN a yawl:Class ;
+    rdfs:label "JavaCPN" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_connect ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/connect/JavaCPN.java"^^xsd:string ;
+    rdfs:comment """<p> <h2>JavaCPN</h2> (otherwise known as Comms/Java) - The java implmentation of a peer entity matching the Comms/Java implementation for Design/CPN. (See  http://www.daimi.au.dk/designCPN/libs/commscpn/ for more details.) The purpose of Java/CPN is to allow Java processes to communicate with Design/CPN through Comms/CPN.  The current implementation of Java/CPN is the minimal implementation necessary to enable communication.  It incorporates the equivalent functionality of the Messaging and Comm""" ;
+    yawl:implements yawl:JavaCPNInterface ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:JavaCPN_connect_1 ;
+    yawl:hasMethod yawl:JavaCPN_accept_2 ;
+    yawl:hasMethod yawl:JavaCPN_send_3 ;
+    yawl:hasMethod yawl:JavaCPN_receive_4 ;
+    yawl:hasMethod yawl:JavaCPN_disconnect_5 ;
+    yawl:hasField yawl:JavaCPN_socket ;
+    yawl:hasField yawl:JavaCPN_input ;
+    yawl:hasField yawl:JavaCPN_output ;
+    .
+
+
+# Method: JavaCPN.connect
+yawl:JavaCPN_connect_1 a yawl:Method ;
+    rdfs:label "connect" ;
+    yawl:returnType "void" ;
+    yawl:signature "void connect(String hostName, int port)" ;
+    rdfs:comment """Method to actively establish a connection. It takes a host name and port number as arguments, and attempts to establish a connection as a client to the given port on the given host.  Once the connection has been established (i.e. the socket opened) input and output streams are extracted from the socket to enable the transmission and reception of bytes. @param hostName The host to attempt to connect to @param port The port number to attempt to connect to @throws IOException Thrown when there is a""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: JavaCPN.accept
+yawl:JavaCPN_accept_2 a yawl:Method ;
+    rdfs:label "accept" ;
+    yawl:returnType "void" ;
+    yawl:signature "void accept(int port)" ;
+    rdfs:comment """Method to passively open a connection. It takes a port number as an argument and, acting as a server, listens on the given port number for an incoming connection request.  When received, it establishes the connection.  Again, once the connection has been established, input and output streams are extracted from the socket to enable the transmission and reception of bytes.   The method will block until a connection is established. @param port The port number to attempt to connect to @throws IOExce""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: JavaCPN.send
+yawl:JavaCPN_send_3 a yawl:Method ;
+    rdfs:label "send" ;
+    yawl:returnType "void" ;
+    yawl:signature "void send(ByteArrayInputStream sendBytes)" ;
+    rdfs:comment """Method used to send a ByteArrayInputStream via an established connection. This method takes a ByteArrayInputStream object as the argument.  The segmentation into packets occurs in this method.  Bytes are read from the ByteArrayInputStream object, a maximum of 127 at a time, and a single byte header is added indicating the number of payload bytes (header is 1 to 127) or that there is more data  in a following packet (header is 255). The data packets formed are then transmitted to the external pro""" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: JavaCPN.receive
+yawl:JavaCPN_receive_4 a yawl:Method ;
+    rdfs:label "receive" ;
+    yawl:returnType "ByteArrayOutputStream" ;
+    yawl:signature "ByteArrayOutputStream receive()" ;
+    rdfs:comment """Method used to receive a ByteArrayOutputStream from an established connection. This method has no arguments.  It uses methods that act on the input stream of the socket to firstly receive a header byte, and then receive the number of payload bytes specified in the header, from the external process.  The payload bytes are stored in a ByteArrayOutputStream object as each segment of payload data is received. This process is repeated until all data has been received for the current transmission.  @r""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: JavaCPN.disconnect
+yawl:JavaCPN_disconnect_5 a yawl:Method ;
+    rdfs:label "disconnect" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disconnect()" ;
+    rdfs:comment """Method to disconnect the established connection. This method has no arguments, and returns no value.  It closes the input and output streams from the socket before closing the socket itself. @throws IOException if there is a problem closing the connection""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:JavaCPN_socket a yawl:Field ;
+    rdfs:label "socket" .
+
+yawl:JavaCPN_input a yawl:Field ;
+    rdfs:label "input" .
+
+yawl:JavaCPN_output a yawl:Field ;
+    rdfs:label "output" .
+
+
+

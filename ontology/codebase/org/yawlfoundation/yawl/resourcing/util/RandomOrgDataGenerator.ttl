@@ -1,0 +1,100 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.util.RandomOrgDataGenerator
+yawl:RandomOrgDataGenerator a yawl:Class ;
+    rdfs:label "RandomOrgDataGenerator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/util/RandomOrgDataGenerator.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 7/02/2008""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:RandomOrgDataGenerator_generate_1 ;
+    yawl:hasMethod yawl:RandomOrgDataGenerator_okToGenerate_2 ;
+    yawl:hasMethod yawl:RandomOrgDataGenerator_createRoles_3 ;
+    yawl:hasMethod yawl:RandomOrgDataGenerator_createOrgGroups_4 ;
+    yawl:hasMethod yawl:RandomOrgDataGenerator_createPositions_5 ;
+    yawl:hasMethod yawl:RandomOrgDataGenerator_createCapabilities_6 ;
+    yawl:hasMethod yawl:RandomOrgDataGenerator_createParticipants_7 ;
+    yawl:hasField yawl:RandomOrgDataGenerator__log ;
+    yawl:hasField yawl:RandomOrgDataGenerator__rm ;
+    yawl:hasField yawl:RandomOrgDataGenerator_f ;
+    yawl:hasField yawl:RandomOrgDataGenerator_l ;
+    .
+
+
+# Method: RandomOrgDataGenerator.generate
+yawl:RandomOrgDataGenerator_generate_1 a yawl:Method ;
+    rdfs:label "generate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void generate(int count)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RandomOrgDataGenerator.okToGenerate
+yawl:RandomOrgDataGenerator_okToGenerate_2 a yawl:Method ;
+    rdfs:label "okToGenerate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean okToGenerate()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RandomOrgDataGenerator.createRoles
+yawl:RandomOrgDataGenerator_createRoles_3 a yawl:Method ;
+    rdfs:label "createRoles" ;
+    yawl:returnType "Role" ;
+    yawl:signature "Role createRoles(ResourceDataSet orgDataSet)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RandomOrgDataGenerator.createOrgGroups
+yawl:RandomOrgDataGenerator_createOrgGroups_4 a yawl:Method ;
+    rdfs:label "createOrgGroups" ;
+    yawl:returnType "OrgGroup" ;
+    yawl:signature "OrgGroup createOrgGroups(ResourceDataSet orgDataSet)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RandomOrgDataGenerator.createPositions
+yawl:RandomOrgDataGenerator_createPositions_5 a yawl:Method ;
+    rdfs:label "createPositions" ;
+    yawl:returnType "Position" ;
+    yawl:signature "Position createPositions(ResourceDataSet orgDataSet)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RandomOrgDataGenerator.createCapabilities
+yawl:RandomOrgDataGenerator_createCapabilities_6 a yawl:Method ;
+    rdfs:label "createCapabilities" ;
+    yawl:returnType "Capability" ;
+    yawl:signature "Capability createCapabilities(ResourceDataSet orgDataSet)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RandomOrgDataGenerator.createParticipants
+yawl:RandomOrgDataGenerator_createParticipants_7 a yawl:Method ;
+    rdfs:label "createParticipants" ;
+    yawl:returnType "void" ;
+    yawl:signature "void createParticipants(int howManyToCreate, Role roles, Position positions, Capability capabilities)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:RandomOrgDataGenerator__log a yawl:Field ;
+    rdfs:label "_log" .
+
+yawl:RandomOrgDataGenerator__rm a yawl:Field ;
+    rdfs:label "_rm" .
+
+yawl:RandomOrgDataGenerator_f a yawl:Field ;
+    rdfs:label "f" .
+
+yawl:RandomOrgDataGenerator_l a yawl:Field ;
+    rdfs:label "l" .
+
+
+

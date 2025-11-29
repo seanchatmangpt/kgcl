@@ -1,0 +1,53 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.dynform.DynFormComponentList
+yawl:DynFormComponentList a yawl:Class ;
+    rdfs:label "DynFormComponentList" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf_dynform ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/dynform/DynFormComponentList.java"^^xsd:string ;
+    rdfs:comment """Maintains a list of components and their combined height Author: Michael Adams Creation Date: 25/02/2008""" ;
+    yawl:extends yawl:ArrayList ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DynFormComponentList_getHeight_1 ;
+    yawl:hasMethod yawl:DynFormComponentList_setHeight_2 ;
+    yawl:hasMethod yawl:DynFormComponentList_ensureRadioButtonSelection_3 ;
+    yawl:hasField yawl:DynFormComponentList__height ;
+    .
+
+
+# Method: DynFormComponentList.getHeight
+yawl:DynFormComponentList_getHeight_1 a yawl:Method ;
+    rdfs:label "getHeight" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getHeight()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormComponentList.setHeight
+yawl:DynFormComponentList_setHeight_2 a yawl:Method ;
+    rdfs:label "setHeight" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHeight(int height)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormComponentList.ensureRadioButtonSelection
+yawl:DynFormComponentList_ensureRadioButtonSelection_3 a yawl:Method ;
+    rdfs:label "ensureRadioButtonSelection" ;
+    yawl:returnType "void" ;
+    yawl:signature "void ensureRadioButtonSelection()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:DynFormComponentList__height a yawl:Field ;
+    rdfs:label "_height" .
+
+
+

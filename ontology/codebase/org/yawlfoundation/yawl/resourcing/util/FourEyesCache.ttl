@@ -1,0 +1,74 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.util.FourEyesCache
+yawl:FourEyesCache a yawl:Class ;
+    rdfs:label "FourEyesCache" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/util/FourEyesCache.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 13/02/2009""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:FourEyesCache_getCaseID_1 ;
+    yawl:hasMethod yawl:FourEyesCache_addTask_2 ;
+    yawl:hasMethod yawl:FourEyesCache_addCompleter_3 ;
+    yawl:hasMethod yawl:FourEyesCache_removeCompleter_4 ;
+    yawl:hasMethod yawl:FourEyesCache_getCompleters_5 ;
+    yawl:hasField yawl:FourEyesCache__caseid ;
+    yawl:hasField yawl:FourEyesCache__taskTable ;
+    .
+
+
+# Method: FourEyesCache.getCaseID
+yawl:FourEyesCache_getCaseID_1 a yawl:Method ;
+    rdfs:label "getCaseID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FourEyesCache.addTask
+yawl:FourEyesCache_addTask_2 a yawl:Method ;
+    rdfs:label "addTask" ;
+    yawl:returnType "TaskCompleterSet" ;
+    yawl:signature "TaskCompleterSet addTask(String taskid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FourEyesCache.addCompleter
+yawl:FourEyesCache_addCompleter_3 a yawl:Method ;
+    rdfs:label "addCompleter" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addCompleter(String taskid, Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FourEyesCache.removeCompleter
+yawl:FourEyesCache_removeCompleter_4 a yawl:Method ;
+    rdfs:label "removeCompleter" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeCompleter(String taskid, Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FourEyesCache.getCompleters
+yawl:FourEyesCache_getCompleters_5 a yawl:Method ;
+    rdfs:label "getCompleters" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getCompleters(String taskid)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:FourEyesCache__caseid a yawl:Field ;
+    rdfs:label "_caseid" .
+
+yawl:FourEyesCache__taskTable a yawl:Field ;
+    rdfs:label "_taskTable" .
+
+
+

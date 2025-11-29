@@ -1,0 +1,131 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.dynform.DynFormFileUpload
+yawl:DynFormFileUpload a yawl:Class ;
+    rdfs:label "DynFormFileUpload" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf_dynform ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/dynform/DynFormFileUpload.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 29/11/11""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DynFormFileUpload_getOwner_1 ;
+    yawl:hasMethod yawl:DynFormFileUpload_getPanels_2 ;
+    yawl:hasMethod yawl:DynFormFileUpload_getUploader_3 ;
+    yawl:hasMethod yawl:DynFormFileUpload_getBlockoutPanel_4 ;
+    yawl:hasMethod yawl:DynFormFileUpload_getUploadPanel_5 ;
+    yawl:hasMethod yawl:DynFormFileUpload_makeHeaderText_6 ;
+    yawl:hasMethod yawl:DynFormFileUpload_makeOKButton_7 ;
+    yawl:hasMethod yawl:DynFormFileUpload_makeCancelButton_8 ;
+    yawl:hasMethod yawl:DynFormFileUpload_bindListener_9 ;
+    yawl:hasMethod yawl:DynFormFileUpload_calcUploadPanelLeft_10 ;
+    yawl:hasField yawl:DynFormFileUpload_owner ;
+    yawl:hasField yawl:DynFormFileUpload_uploadPanel ;
+    yawl:hasField yawl:DynFormFileUpload_blockoutPanel ;
+    yawl:hasField yawl:DynFormFileUpload_upload ;
+    yawl:hasField yawl:DynFormFileUpload_PANEL_WIDTH ;
+    .
+
+
+# Method: DynFormFileUpload.getOwner
+yawl:DynFormFileUpload_getOwner_1 a yawl:Method ;
+    rdfs:label "getOwner" ;
+    yawl:returnType "DocComponent" ;
+    yawl:signature "DocComponent getOwner()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFileUpload.getPanels
+yawl:DynFormFileUpload_getPanels_2 a yawl:Method ;
+    rdfs:label "getPanels" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getPanels()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFileUpload.getUploader
+yawl:DynFormFileUpload_getUploader_3 a yawl:Method ;
+    rdfs:label "getUploader" ;
+    yawl:returnType "Upload" ;
+    yawl:signature "Upload getUploader()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFileUpload.getBlockoutPanel
+yawl:DynFormFileUpload_getBlockoutPanel_4 a yawl:Method ;
+    rdfs:label "getBlockoutPanel" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getBlockoutPanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFileUpload.getUploadPanel
+yawl:DynFormFileUpload_getUploadPanel_5 a yawl:Method ;
+    rdfs:label "getUploadPanel" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getUploadPanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFileUpload.makeHeaderText
+yawl:DynFormFileUpload_makeHeaderText_6 a yawl:Method ;
+    rdfs:label "makeHeaderText" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText makeHeaderText()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFileUpload.makeOKButton
+yawl:DynFormFileUpload_makeOKButton_7 a yawl:Method ;
+    rdfs:label "makeOKButton" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button makeOKButton()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFileUpload.makeCancelButton
+yawl:DynFormFileUpload_makeCancelButton_8 a yawl:Method ;
+    rdfs:label "makeCancelButton" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button makeCancelButton()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFileUpload.bindListener
+yawl:DynFormFileUpload_bindListener_9 a yawl:Method ;
+    rdfs:label "bindListener" ;
+    yawl:returnType "MethodBinding" ;
+    yawl:signature "MethodBinding bindListener(String binding)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFileUpload.calcUploadPanelLeft
+yawl:DynFormFileUpload_calcUploadPanelLeft_10 a yawl:Method ;
+    rdfs:label "calcUploadPanelLeft" ;
+    yawl:returnType "int" ;
+    yawl:signature "int calcUploadPanelLeft()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:DynFormFileUpload_owner a yawl:Field ;
+    rdfs:label "owner" .
+
+yawl:DynFormFileUpload_uploadPanel a yawl:Field ;
+    rdfs:label "uploadPanel" .
+
+yawl:DynFormFileUpload_blockoutPanel a yawl:Field ;
+    rdfs:label "blockoutPanel" .
+
+yawl:DynFormFileUpload_upload a yawl:Field ;
+    rdfs:label "upload" .
+
+yawl:DynFormFileUpload_PANEL_WIDTH a yawl:Field ;
+    rdfs:label "PANEL_WIDTH" .
+
+
+

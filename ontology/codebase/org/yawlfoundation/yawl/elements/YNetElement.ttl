@@ -1,0 +1,74 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.elements.YNetElement
+yawl:YNetElement a yawl:Class ;
+    rdfs:label "YNetElement" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_elements ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/elements/YNetElement.java"^^xsd:string ;
+    rdfs:comment """Abstract class. A super class of YExternalNetElement.   Has little relation to the YAWL paper. @author Lachlan Aldred""" ;
+    yawl:implements yawl:Cloneable ;
+    yawl:implements yawl:Comparable ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YNetElement_getID_1 ;
+    yawl:hasMethod yawl:YNetElement_setID_2 ;
+    yawl:hasMethod yawl:YNetElement_toString_3 ;
+    yawl:hasMethod yawl:YNetElement_clone_4 ;
+    yawl:hasMethod yawl:YNetElement_compareTo_5 ;
+    yawl:hasField yawl:YNetElement__id ;
+    .
+
+
+# Method: YNetElement.getID
+yawl:YNetElement_getID_1 a yawl:Method ;
+    rdfs:label "getID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getID()" ;
+    rdfs:comment """@return the id of this YNetElement""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetElement.setID
+yawl:YNetElement_setID_2 a yawl:Method ;
+    rdfs:label "setID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetElement.toString
+yawl:YNetElement_toString_3 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetElement.clone
+yawl:YNetElement_clone_4 a yawl:Method ;
+    rdfs:label "clone" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object clone()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetElement.compareTo
+yawl:YNetElement_compareTo_5 a yawl:Method ;
+    rdfs:label "compareTo" ;
+    yawl:returnType "int" ;
+    yawl:signature "int compareTo(Object o)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YNetElement__id a yawl:Field ;
+    rdfs:label "_id" .
+
+
+

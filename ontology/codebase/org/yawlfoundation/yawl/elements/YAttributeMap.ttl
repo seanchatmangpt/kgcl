@@ -1,0 +1,163 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.elements.YAttributeMap
+yawl:YAttributeMap a yawl:Class ;
+    rdfs:label "YAttributeMap" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_elements ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/elements/YAttributeMap.java"^^xsd:string ;
+    rdfs:comment """An extended map of key=attribute pairs. @author Michael Adams @since 2.1 @date 11/11/2009""" ;
+    yawl:extends yawl:TreeMap ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YAttributeMap_set_1 ;
+    yawl:hasMethod yawl:YAttributeMap_getBoolean_2 ;
+    yawl:hasMethod yawl:YAttributeMap_put_3 ;
+    yawl:hasMethod yawl:YAttributeMap_get_4 ;
+    yawl:hasMethod yawl:YAttributeMap_remove_5 ;
+    yawl:hasMethod yawl:YAttributeMap_toJDOM_6 ;
+    yawl:hasMethod yawl:YAttributeMap_fromJDOM_7 ;
+    yawl:hasMethod yawl:YAttributeMap_transformDynamicValues_8 ;
+    yawl:hasMethod yawl:YAttributeMap_toXML_9 ;
+    yawl:hasMethod yawl:YAttributeMap_toXMLElement_10 ;
+    yawl:hasMethod yawl:YAttributeMap_toXML_11 ;
+    yawl:hasMethod yawl:YAttributeMap_toXMLElements_12 ;
+    yawl:hasMethod yawl:YAttributeMap_fromXMLElements_13 ;
+    yawl:hasMethod yawl:YAttributeMap_getValue_14 ;
+    yawl:hasField yawl:YAttributeMap__dynamics ;
+    .
+
+
+# Method: YAttributeMap.set
+yawl:YAttributeMap_set_1 a yawl:Method ;
+    rdfs:label "set" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set(Map attributes)" ;
+    rdfs:comment """Replace the stored attributes (if any) with those specified. @param attributes a map of key=value pairs to place in this map, replacing any previous contents.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAttributeMap.getBoolean
+yawl:YAttributeMap_getBoolean_2 a yawl:Method ;
+    rdfs:label "getBoolean" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean getBoolean(String key)" ;
+    rdfs:comment """Get the boolean value matching the stored key. @param key the attribute key to retrieve the value of. @return true iff the attribute map contains a key matching the String specified AND that attribute key has a corresponding value that matches the String \"true\" (case-insensitive).""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAttributeMap.put
+yawl:YAttributeMap_put_3 a yawl:Method ;
+    rdfs:label "put" ;
+    yawl:returnType "DynamicValue" ;
+    yawl:signature "DynamicValue put(String key, DynamicValue value)" ;
+    rdfs:comment """Adds a key + DynamicValue to the dynamic map @param key the key @param value the DynamicValue @return the added DynamicValue""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAttributeMap.get
+yawl:YAttributeMap_get_4 a yawl:Method ;
+    rdfs:label "get" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get(String key)" ;
+    rdfs:comment """Gets the stored value for the key (as a String). If the key refers to a DynamicValue object, its value is dynamically evaluated @param key the key @return the stored String value""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAttributeMap.remove
+yawl:YAttributeMap_remove_5 a yawl:Method ;
+    rdfs:label "remove" ;
+    yawl:returnType "void" ;
+    yawl:signature "void remove(String key)" ;
+    rdfs:comment """Removes a value the store @param key the key that refers to a DynamicValue @return""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAttributeMap.toJDOM
+yawl:YAttributeMap_toJDOM_6 a yawl:Method ;
+    rdfs:label "toJDOM" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set toJDOM()" ;
+    rdfs:comment """Get the contents of the attribute map as a set of JDOM attributes. @return a Set of populated JDOM Attribute objects.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAttributeMap.fromJDOM
+yawl:YAttributeMap_fromJDOM_7 a yawl:Method ;
+    rdfs:label "fromJDOM" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromJDOM(List jdomAttributes)" ;
+    rdfs:comment """Replace the stored attributes (if any) with the JDOM attributes specified. @param jdomAttributes a List of JDOM Attribute objects to convert to key=value pairs and place in this map, replacing any previous contents.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAttributeMap.transformDynamicValues
+yawl:YAttributeMap_transformDynamicValues_8 a yawl:Method ;
+    rdfs:label "transformDynamicValues" ;
+    yawl:returnType "void" ;
+    yawl:signature "void transformDynamicValues(Object owner)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAttributeMap.toXML
+yawl:YAttributeMap_toXML_9 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML(String key)" ;
+    rdfs:comment """Write a specified key=value pair in XML attribute format: key=\"value\" @param key the key to write out, with its corresponding value. @return if the key exists in the attribute map, a representation of it in XML attribute format, otherwise an empty String.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAttributeMap.toXMLElement
+yawl:YAttributeMap_toXMLElement_10 a yawl:Method ;
+    rdfs:label "toXMLElement" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXMLElement(String key)" ;
+    rdfs:comment """Write a specified key=value pair in XML element format: &lt;key&gt;value&lt;/key&gt; @param key the key to write out, with its corresponding value. @return if the key exists in the attribute map, a representation of it in XML element format, otherwise an empty String.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAttributeMap.toXML
+yawl:YAttributeMap_toXML_11 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    rdfs:comment """Write the full set of attributes stored in the map, in XML attribute format, for insertion into an XML element. @return a space separated list of this attribute map's key=\"value\" pairs.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAttributeMap.toXMLElements
+yawl:YAttributeMap_toXMLElements_12 a yawl:Method ;
+    rdfs:label "toXMLElements" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXMLElements()" ;
+    rdfs:comment """Write the full set of attributes stored in the map, in XML element format. @return a space separated list of this attribute map's &lt;key&gt;value&lt;/key&gt; pairs.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAttributeMap.fromXMLElements
+yawl:YAttributeMap_fromXMLElements_13 a yawl:Method ;
+    rdfs:label "fromXMLElements" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXMLElements(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAttributeMap.getValue
+yawl:YAttributeMap_getValue_14 a yawl:Method ;
+    rdfs:label "getValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getValue(String key)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YAttributeMap__dynamics a yawl:Field ;
+    rdfs:label "_dynamics" .
+
+
+

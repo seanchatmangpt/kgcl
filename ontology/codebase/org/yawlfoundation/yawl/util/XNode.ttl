@@ -1,0 +1,1008 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.util.XNode
+yawl:XNode a yawl:Class ;
+    rdfs:label "XNode" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/util/XNode.java"^^xsd:string ;
+    rdfs:comment """A utility for building xml strings. Handles elements, attributes, comments, text and CDATA (and that's all - no edge cases). NOTE: To keep things simple, while this class allows a node to have both child nodes and text, where both have values set the child nodes have precedence (ie. the text is ignored). Author: Michael Adams Creation Date: 19/03/2010""" ;
+    yawl:implements yawl:Comparable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:XNode_compareTo_1 ;
+    yawl:hasMethod yawl:XNode_addAttribute_2 ;
+    yawl:hasMethod yawl:XNode_addAttribute_3 ;
+    yawl:hasMethod yawl:XNode_addAttribute_4 ;
+    yawl:hasMethod yawl:XNode_addAttribute_5 ;
+    yawl:hasMethod yawl:XNode_addAttribute_6 ;
+    yawl:hasMethod yawl:XNode_addAttribute_7 ;
+    yawl:hasMethod yawl:XNode_addAttribute_8 ;
+    yawl:hasMethod yawl:XNode_addAttribute_9 ;
+    yawl:hasMethod yawl:XNode_addAttribute_10 ;
+    yawl:hasMethod yawl:XNode_addAttribute_11 ;
+    yawl:hasMethod yawl:XNode_addAttributes_12 ;
+    yawl:hasMethod yawl:XNode_insertChild_13 ;
+    yawl:hasMethod yawl:XNode_addChild_14 ;
+    yawl:hasMethod yawl:XNode_addChild_15 ;
+    yawl:hasMethod yawl:XNode_addChild_16 ;
+    yawl:hasMethod yawl:XNode_addChild_17 ;
+    yawl:hasMethod yawl:XNode_addChild_18 ;
+    yawl:hasMethod yawl:XNode_addChild_19 ;
+    yawl:hasMethod yawl:XNode_addChild_20 ;
+    yawl:hasMethod yawl:XNode_addChild_21 ;
+    yawl:hasMethod yawl:XNode_addChild_22 ;
+    yawl:hasMethod yawl:XNode_addChild_23 ;
+    yawl:hasMethod yawl:XNode_addChild_24 ;
+    yawl:hasMethod yawl:XNode_addChild_25 ;
+    yawl:hasMethod yawl:XNode_addChildren_26 ;
+    yawl:hasMethod yawl:XNode_addChildren_27 ;
+    yawl:hasMethod yawl:XNode_removeChild_28 ;
+    yawl:hasMethod yawl:XNode_removeChildren_29 ;
+    yawl:hasMethod yawl:XNode_addContent_30 ;
+    yawl:hasMethod yawl:XNode_addContent_31 ;
+    yawl:hasMethod yawl:XNode_wrapContent_32 ;
+    yawl:hasMethod yawl:XNode_addCollection_33 ;
+    yawl:hasMethod yawl:XNode_populateCollection_34 ;
+    yawl:hasMethod yawl:XNode_removeDuplicateChildren_35 ;
+    yawl:hasMethod yawl:XNode_addComment_36 ;
+    yawl:hasMethod yawl:XNode_insertComment_37 ;
+    yawl:hasMethod yawl:XNode_isComment_38 ;
+    yawl:hasMethod yawl:XNode_addOpeningComment_39 ;
+    yawl:hasMethod yawl:XNode_addClosingComment_40 ;
+    yawl:hasMethod yawl:XNode_addCDATA_41 ;
+    yawl:hasMethod yawl:XNode_isCDATA_42 ;
+    yawl:hasMethod yawl:XNode_setText_43 ;
+    yawl:hasMethod yawl:XNode_setText_44 ;
+    yawl:hasMethod yawl:XNode_setText_45 ;
+    yawl:hasMethod yawl:XNode_setText_46 ;
+    yawl:hasMethod yawl:XNode_setText_47 ;
+    yawl:hasMethod yawl:XNode_setText_48 ;
+    yawl:hasMethod yawl:XNode_setText_49 ;
+    yawl:hasMethod yawl:XNode_setText_50 ;
+    yawl:hasMethod yawl:XNode_setText_51 ;
+    yawl:hasMethod yawl:XNode_getChild_52 ;
+    yawl:hasMethod yawl:XNode_getOrAddChild_53 ;
+    yawl:hasMethod yawl:XNode_getChild_54 ;
+    yawl:hasMethod yawl:XNode_getChild_55 ;
+    yawl:hasMethod yawl:XNode_getChildren_56 ;
+    yawl:hasMethod yawl:XNode_getChildren_57 ;
+    yawl:hasMethod yawl:XNode_getChildren_58 ;
+    yawl:hasMethod yawl:XNode_getChildText_59 ;
+    yawl:hasMethod yawl:XNode_getChildText_60 ;
+    yawl:hasMethod yawl:XNode_posChildWithName_61 ;
+    yawl:hasMethod yawl:XNode_posChildWithAttribute_62 ;
+    yawl:hasMethod yawl:XNode_getText_63 ;
+    yawl:hasMethod yawl:XNode_getText_64 ;
+    yawl:hasMethod yawl:XNode_getAttributeValue_65 ;
+    yawl:hasMethod yawl:XNode_getAttributes_66 ;
+    yawl:hasMethod yawl:XNode_hasAttribute_67 ;
+    yawl:hasMethod yawl:XNode_setAttributes_68 ;
+    yawl:hasMethod yawl:XNode_getName_69 ;
+    yawl:hasMethod yawl:XNode_setName_70 ;
+    yawl:hasMethod yawl:XNode_setParent_71 ;
+    yawl:hasMethod yawl:XNode_getParent_72 ;
+    yawl:hasMethod yawl:XNode_getDepth_73 ;
+    yawl:hasMethod yawl:XNode_setDepth_74 ;
+    yawl:hasMethod yawl:XNode_hasChildren_75 ;
+    yawl:hasMethod yawl:XNode_hasChildren_76 ;
+    yawl:hasMethod yawl:XNode_hasChild_77 ;
+    yawl:hasMethod yawl:XNode_getAttributeCount_78 ;
+    yawl:hasMethod yawl:XNode_getChildCount_79 ;
+    yawl:hasMethod yawl:XNode_getTextLength_80 ;
+    yawl:hasMethod yawl:XNode_length_81 ;
+    yawl:hasMethod yawl:XNode_sort_82 ;
+    yawl:hasMethod yawl:XNode_sort_83 ;
+    yawl:hasMethod yawl:XNode_toString_84 ;
+    yawl:hasMethod yawl:XNode_toString_85 ;
+    yawl:hasMethod yawl:XNode_toPrettyString_86 ;
+    yawl:hasMethod yawl:XNode_toPrettyString_87 ;
+    yawl:hasMethod yawl:XNode_toPrettyString_88 ;
+    yawl:hasMethod yawl:XNode_toPrettyString_89 ;
+    yawl:hasMethod yawl:XNode_toPrettyString_90 ;
+    yawl:hasMethod yawl:XNode_toElement_91 ;
+    yawl:hasMethod yawl:XNode_toDocument_92 ;
+    yawl:hasMethod yawl:XNode_toString_93 ;
+    yawl:hasMethod yawl:XNode_getInitialToStringSize_94 ;
+    yawl:hasMethod yawl:XNode_getIndent_95 ;
+    yawl:hasMethod yawl:XNode_printSpecialText_96 ;
+    yawl:hasMethod yawl:XNode_printOpeningComments_97 ;
+    yawl:hasMethod yawl:XNode_printClosingComments_98 ;
+    yawl:hasMethod yawl:XNode_printOutlyingComments_99 ;
+    yawl:hasMethod yawl:XNode_printComment_100 ;
+    yawl:hasMethod yawl:XNode_printCDATA_101 ;
+    yawl:hasMethod yawl:XNode_acceptChild_102 ;
+    yawl:hasMethod yawl:XNode_setContentType_103 ;
+    yawl:hasMethod yawl:XNode_getContentType_104 ;
+    yawl:hasField yawl:XNode_newline ;
+    yawl:hasField yawl:XNode__header ;
+    yawl:hasField yawl:XNode__parent ;
+    yawl:hasField yawl:XNode__children ;
+    yawl:hasField yawl:XNode__attributes ;
+    yawl:hasField yawl:XNode__name ;
+    yawl:hasField yawl:XNode__text ;
+    yawl:hasField yawl:XNode__contentType ;
+    yawl:hasField yawl:XNode__openingComments ;
+    yawl:hasField yawl:XNode__closingComments ;
+    yawl:hasField yawl:XNode__depth ;
+    yawl:hasField yawl:XNode__defTabSize ;
+    .
+
+
+# Method: XNode.compareTo
+yawl:XNode_compareTo_1 a yawl:Method ;
+    rdfs:label "compareTo" ;
+    yawl:returnType "int" ;
+    yawl:signature "int compareTo(XNode other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addAttribute
+yawl:XNode_addAttribute_2 a yawl:Method ;
+    rdfs:label "addAttribute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addAttribute(String key, String value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addAttribute
+yawl:XNode_addAttribute_3 a yawl:Method ;
+    rdfs:label "addAttribute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addAttribute(String key, String value, boolean escape)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addAttribute
+yawl:XNode_addAttribute_4 a yawl:Method ;
+    rdfs:label "addAttribute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addAttribute(String key, boolean value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addAttribute
+yawl:XNode_addAttribute_5 a yawl:Method ;
+    rdfs:label "addAttribute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addAttribute(String key, byte value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addAttribute
+yawl:XNode_addAttribute_6 a yawl:Method ;
+    rdfs:label "addAttribute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addAttribute(String key, short value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addAttribute
+yawl:XNode_addAttribute_7 a yawl:Method ;
+    rdfs:label "addAttribute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addAttribute(String key, int value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addAttribute
+yawl:XNode_addAttribute_8 a yawl:Method ;
+    rdfs:label "addAttribute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addAttribute(String key, long value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addAttribute
+yawl:XNode_addAttribute_9 a yawl:Method ;
+    rdfs:label "addAttribute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addAttribute(String key, double value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addAttribute
+yawl:XNode_addAttribute_10 a yawl:Method ;
+    rdfs:label "addAttribute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addAttribute(String key, float value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addAttribute
+yawl:XNode_addAttribute_11 a yawl:Method ;
+    rdfs:label "addAttribute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addAttribute(String key, Object o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addAttributes
+yawl:XNode_addAttributes_12 a yawl:Method ;
+    rdfs:label "addAttributes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addAttributes(Map map)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.insertChild
+yawl:XNode_insertChild_13 a yawl:Method ;
+    rdfs:label "insertChild" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode insertChild(int index, XNode child)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addChild
+yawl:XNode_addChild_14 a yawl:Method ;
+    rdfs:label "addChild" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode addChild(XNode child)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addChild
+yawl:XNode_addChild_15 a yawl:Method ;
+    rdfs:label "addChild" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode addChild(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addChild
+yawl:XNode_addChild_16 a yawl:Method ;
+    rdfs:label "addChild" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode addChild(String name, String text)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addChild
+yawl:XNode_addChild_17 a yawl:Method ;
+    rdfs:label "addChild" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode addChild(String name, boolean b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addChild
+yawl:XNode_addChild_18 a yawl:Method ;
+    rdfs:label "addChild" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode addChild(String name, long l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addChild
+yawl:XNode_addChild_19 a yawl:Method ;
+    rdfs:label "addChild" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode addChild(String name, int i)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addChild
+yawl:XNode_addChild_20 a yawl:Method ;
+    rdfs:label "addChild" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode addChild(String name, byte b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addChild
+yawl:XNode_addChild_21 a yawl:Method ;
+    rdfs:label "addChild" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode addChild(String name, short s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addChild
+yawl:XNode_addChild_22 a yawl:Method ;
+    rdfs:label "addChild" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode addChild(String name, double d)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addChild
+yawl:XNode_addChild_23 a yawl:Method ;
+    rdfs:label "addChild" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode addChild(String name, float f)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addChild
+yawl:XNode_addChild_24 a yawl:Method ;
+    rdfs:label "addChild" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode addChild(String name, Object o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addChild
+yawl:XNode_addChild_25 a yawl:Method ;
+    rdfs:label "addChild" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode addChild(String name, String text, boolean escape)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addChildren
+yawl:XNode_addChildren_26 a yawl:Method ;
+    rdfs:label "addChildren" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addChildren(Collection children)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addChildren
+yawl:XNode_addChildren_27 a yawl:Method ;
+    rdfs:label "addChildren" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addChildren(Map children)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.removeChild
+yawl:XNode_removeChild_28 a yawl:Method ;
+    rdfs:label "removeChild" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeChild(XNode child)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.removeChildren
+yawl:XNode_removeChildren_29 a yawl:Method ;
+    rdfs:label "removeChildren" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeChildren()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addContent
+yawl:XNode_addContent_30 a yawl:Method ;
+    rdfs:label "addContent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addContent(String content)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addContent
+yawl:XNode_addContent_31 a yawl:Method ;
+    rdfs:label "addContent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addContent(String content, String nsPrefix, String nsURI)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.wrapContent
+yawl:XNode_wrapContent_32 a yawl:Method ;
+    rdfs:label "wrapContent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String wrapContent(String content, String nsPrefix, String nsURI)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNode.addCollection
+yawl:XNode_addCollection_33 a yawl:Method ;
+    rdfs:label "addCollection" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addCollection(Collection list)" ;
+    rdfs:comment """Adds a child node to this node for each object in a list @param list the list of objects to create child nodes from @param <E> a type extending the XNodeIO interface""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.populateCollection
+yawl:XNode_populateCollection_34 a yawl:Method ;
+    rdfs:label "populateCollection" ;
+    yawl:returnType "void" ;
+    yawl:signature "void populateCollection(Collection list, E instance)" ;
+    rdfs:comment """Creates and adds an object of type E to a list for each child node. It is assumed that each child of this node represents an object of type E. @param list the list of objects to populate @param instance an instance of an E type object @param <E> a type extending the XNodeIO interface""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.removeDuplicateChildren
+yawl:XNode_removeDuplicateChildren_35 a yawl:Method ;
+    rdfs:label "removeDuplicateChildren" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeDuplicateChildren()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addComment
+yawl:XNode_addComment_36 a yawl:Method ;
+    rdfs:label "addComment" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode addComment(String comment)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.insertComment
+yawl:XNode_insertComment_37 a yawl:Method ;
+    rdfs:label "insertComment" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode insertComment(int index, String comment)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.isComment
+yawl:XNode_isComment_38 a yawl:Method ;
+    rdfs:label "isComment" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isComment()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addOpeningComment
+yawl:XNode_addOpeningComment_39 a yawl:Method ;
+    rdfs:label "addOpeningComment" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addOpeningComment(String comment)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addClosingComment
+yawl:XNode_addClosingComment_40 a yawl:Method ;
+    rdfs:label "addClosingComment" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addClosingComment(String comment)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.addCDATA
+yawl:XNode_addCDATA_41 a yawl:Method ;
+    rdfs:label "addCDATA" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode addCDATA(String cdata)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.isCDATA
+yawl:XNode_isCDATA_42 a yawl:Method ;
+    rdfs:label "isCDATA" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isCDATA()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.setText
+yawl:XNode_setText_43 a yawl:Method ;
+    rdfs:label "setText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setText(String text)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.setText
+yawl:XNode_setText_44 a yawl:Method ;
+    rdfs:label "setText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setText(String text, boolean escape)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.setText
+yawl:XNode_setText_45 a yawl:Method ;
+    rdfs:label "setText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setText(boolean value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.setText
+yawl:XNode_setText_46 a yawl:Method ;
+    rdfs:label "setText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setText(byte value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.setText
+yawl:XNode_setText_47 a yawl:Method ;
+    rdfs:label "setText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setText(short value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.setText
+yawl:XNode_setText_48 a yawl:Method ;
+    rdfs:label "setText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setText(int value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.setText
+yawl:XNode_setText_49 a yawl:Method ;
+    rdfs:label "setText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setText(long value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.setText
+yawl:XNode_setText_50 a yawl:Method ;
+    rdfs:label "setText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setText(double value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.setText
+yawl:XNode_setText_51 a yawl:Method ;
+    rdfs:label "setText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setText(float value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.getChild
+yawl:XNode_getChild_52 a yawl:Method ;
+    rdfs:label "getChild" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getChild(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.getOrAddChild
+yawl:XNode_getOrAddChild_53 a yawl:Method ;
+    rdfs:label "getOrAddChild" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getOrAddChild(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.getChild
+yawl:XNode_getChild_54 a yawl:Method ;
+    rdfs:label "getChild" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getChild()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.getChild
+yawl:XNode_getChild_55 a yawl:Method ;
+    rdfs:label "getChild" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getChild(int index)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.getChildren
+yawl:XNode_getChildren_56 a yawl:Method ;
+    rdfs:label "getChildren" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getChildren()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.getChildren
+yawl:XNode_getChildren_57 a yawl:Method ;
+    rdfs:label "getChildren" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getChildren(ContentType cType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.getChildren
+yawl:XNode_getChildren_58 a yawl:Method ;
+    rdfs:label "getChildren" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getChildren(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.getChildText
+yawl:XNode_getChildText_59 a yawl:Method ;
+    rdfs:label "getChildText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getChildText(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.getChildText
+yawl:XNode_getChildText_60 a yawl:Method ;
+    rdfs:label "getChildText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getChildText(String name, boolean escape)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.posChildWithName
+yawl:XNode_posChildWithName_61 a yawl:Method ;
+    rdfs:label "posChildWithName" ;
+    yawl:returnType "int" ;
+    yawl:signature "int posChildWithName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.posChildWithAttribute
+yawl:XNode_posChildWithAttribute_62 a yawl:Method ;
+    rdfs:label "posChildWithAttribute" ;
+    yawl:returnType "int" ;
+    yawl:signature "int posChildWithAttribute(String key, String value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.getText
+yawl:XNode_getText_63 a yawl:Method ;
+    rdfs:label "getText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.getText
+yawl:XNode_getText_64 a yawl:Method ;
+    rdfs:label "getText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getText(boolean escape)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.getAttributeValue
+yawl:XNode_getAttributeValue_65 a yawl:Method ;
+    rdfs:label "getAttributeValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAttributeValue(String key)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.getAttributes
+yawl:XNode_getAttributes_66 a yawl:Method ;
+    rdfs:label "getAttributes" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getAttributes()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.hasAttribute
+yawl:XNode_hasAttribute_67 a yawl:Method ;
+    rdfs:label "hasAttribute" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasAttribute(String key)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.setAttributes
+yawl:XNode_setAttributes_68 a yawl:Method ;
+    rdfs:label "setAttributes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAttributes(Map attributes)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.getName
+yawl:XNode_getName_69 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.setName
+yawl:XNode_setName_70 a yawl:Method ;
+    rdfs:label "setName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.setParent
+yawl:XNode_setParent_71 a yawl:Method ;
+    rdfs:label "setParent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setParent(XNode parent)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.getParent
+yawl:XNode_getParent_72 a yawl:Method ;
+    rdfs:label "getParent" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getParent()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.getDepth
+yawl:XNode_getDepth_73 a yawl:Method ;
+    rdfs:label "getDepth" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getDepth()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.setDepth
+yawl:XNode_setDepth_74 a yawl:Method ;
+    rdfs:label "setDepth" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDepth(int depth)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.hasChildren
+yawl:XNode_hasChildren_75 a yawl:Method ;
+    rdfs:label "hasChildren" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasChildren()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.hasChildren
+yawl:XNode_hasChildren_76 a yawl:Method ;
+    rdfs:label "hasChildren" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasChildren(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.hasChild
+yawl:XNode_hasChild_77 a yawl:Method ;
+    rdfs:label "hasChild" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasChild(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.getAttributeCount
+yawl:XNode_getAttributeCount_78 a yawl:Method ;
+    rdfs:label "getAttributeCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getAttributeCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.getChildCount
+yawl:XNode_getChildCount_79 a yawl:Method ;
+    rdfs:label "getChildCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getChildCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.getTextLength
+yawl:XNode_getTextLength_80 a yawl:Method ;
+    rdfs:label "getTextLength" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getTextLength()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.length
+yawl:XNode_length_81 a yawl:Method ;
+    rdfs:label "length" ;
+    yawl:returnType "int" ;
+    yawl:signature "int length()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.sort
+yawl:XNode_sort_82 a yawl:Method ;
+    rdfs:label "sort" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sort()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.sort
+yawl:XNode_sort_83 a yawl:Method ;
+    rdfs:label "sort" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sort(Comparator comparator)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.toString
+yawl:XNode_toString_84 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.toString
+yawl:XNode_toString_85 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString(boolean header)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.toPrettyString
+yawl:XNode_toPrettyString_86 a yawl:Method ;
+    rdfs:label "toPrettyString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toPrettyString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.toPrettyString
+yawl:XNode_toPrettyString_87 a yawl:Method ;
+    rdfs:label "toPrettyString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toPrettyString(boolean header)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.toPrettyString
+yawl:XNode_toPrettyString_88 a yawl:Method ;
+    rdfs:label "toPrettyString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toPrettyString(int tabSize)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.toPrettyString
+yawl:XNode_toPrettyString_89 a yawl:Method ;
+    rdfs:label "toPrettyString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toPrettyString(int offset, int tabSize)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.toPrettyString
+yawl:XNode_toPrettyString_90 a yawl:Method ;
+    rdfs:label "toPrettyString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toPrettyString(boolean header, int tabSize)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.toElement
+yawl:XNode_toElement_91 a yawl:Method ;
+    rdfs:label "toElement" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element toElement()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.toDocument
+yawl:XNode_toDocument_92 a yawl:Method ;
+    rdfs:label "toDocument" ;
+    yawl:returnType "Document" ;
+    yawl:signature "Document toDocument()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: XNode.toString
+yawl:XNode_toString_93 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString(boolean pretty, int offset, int tabSize, boolean header)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNode.getInitialToStringSize
+yawl:XNode_getInitialToStringSize_94 a yawl:Method ;
+    rdfs:label "getInitialToStringSize" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getInitialToStringSize()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNode.getIndent
+yawl:XNode_getIndent_95 a yawl:Method ;
+    rdfs:label "getIndent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getIndent(int offset, int tabSize)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNode.printSpecialText
+yawl:XNode_printSpecialText_96 a yawl:Method ;
+    rdfs:label "printSpecialText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String printSpecialText(String head, String foot, boolean pretty, String tabs)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNode.printOpeningComments
+yawl:XNode_printOpeningComments_97 a yawl:Method ;
+    rdfs:label "printOpeningComments" ;
+    yawl:returnType "String" ;
+    yawl:signature "String printOpeningComments(boolean pretty)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNode.printClosingComments
+yawl:XNode_printClosingComments_98 a yawl:Method ;
+    rdfs:label "printClosingComments" ;
+    yawl:returnType "String" ;
+    yawl:signature "String printClosingComments(boolean pretty)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNode.printOutlyingComments
+yawl:XNode_printOutlyingComments_99 a yawl:Method ;
+    rdfs:label "printOutlyingComments" ;
+    yawl:returnType "String" ;
+    yawl:signature "String printOutlyingComments(List commentList, boolean pretty)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNode.printComment
+yawl:XNode_printComment_100 a yawl:Method ;
+    rdfs:label "printComment" ;
+    yawl:returnType "String" ;
+    yawl:signature "String printComment(boolean pretty, String tabs)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNode.printCDATA
+yawl:XNode_printCDATA_101 a yawl:Method ;
+    rdfs:label "printCDATA" ;
+    yawl:returnType "String" ;
+    yawl:signature "String printCDATA(boolean pretty, String tabs)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNode.acceptChild
+yawl:XNode_acceptChild_102 a yawl:Method ;
+    rdfs:label "acceptChild" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode acceptChild(XNode child)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNode.setContentType
+yawl:XNode_setContentType_103 a yawl:Method ;
+    rdfs:label "setContentType" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setContentType(ContentType cType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: XNode.getContentType
+yawl:XNode_getContentType_104 a yawl:Method ;
+    rdfs:label "getContentType" ;
+    yawl:returnType "ContentType" ;
+    yawl:signature "ContentType getContentType()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:XNode_newline a yawl:Field ;
+    rdfs:label "newline" .
+
+yawl:XNode__header a yawl:Field ;
+    rdfs:label "_header" .
+
+yawl:XNode__parent a yawl:Field ;
+    rdfs:label "_parent" .
+
+yawl:XNode__children a yawl:Field ;
+    rdfs:label "_children" .
+
+yawl:XNode__attributes a yawl:Field ;
+    rdfs:label "_attributes" .
+
+yawl:XNode__name a yawl:Field ;
+    rdfs:label "_name" .
+
+yawl:XNode__text a yawl:Field ;
+    rdfs:label "_text" .
+
+yawl:XNode__contentType a yawl:Field ;
+    rdfs:label "_contentType" .
+
+yawl:XNode__openingComments a yawl:Field ;
+    rdfs:label "_openingComments" .
+
+yawl:XNode__closingComments a yawl:Field ;
+    rdfs:label "_closingComments" .
+
+yawl:XNode__depth a yawl:Field ;
+    rdfs:label "_depth" .
+
+yawl:XNode__defTabSize a yawl:Field ;
+    rdfs:label "_defTabSize" .
+
+
+

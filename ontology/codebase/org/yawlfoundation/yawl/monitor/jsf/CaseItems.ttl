@@ -1,0 +1,1329 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.monitor.jsf.CaseItems
+yawl:CaseItems a yawl:Class ;
+    rdfs:label "CaseItems" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_monitor_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/monitor/jsf/CaseItems.java"^^xsd:string ;
+    rdfs:comment """Backing bean for the active cases page. @author Michael Adams 10/12/2009""" ;
+    yawl:extends yawl:AbstractPageBean ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CaseItems__init_1 ;
+    yawl:hasMethod yawl:CaseItems_getSessionBean_2 ;
+    yawl:hasMethod yawl:CaseItems_getApplicationBean_3 ;
+    yawl:hasMethod yawl:CaseItems_init_4 ;
+    yawl:hasMethod yawl:CaseItems_preprocess_5 ;
+    yawl:hasMethod yawl:CaseItems_destroy_6 ;
+    yawl:hasMethod yawl:CaseItems_getPage1_7 ;
+    yawl:hasMethod yawl:CaseItems_setPage1_8 ;
+    yawl:hasMethod yawl:CaseItems_getHtml1_9 ;
+    yawl:hasMethod yawl:CaseItems_setHtml1_10 ;
+    yawl:hasMethod yawl:CaseItems_getHead1_11 ;
+    yawl:hasMethod yawl:CaseItems_setHead1_12 ;
+    yawl:hasMethod yawl:CaseItems_getLink1_13 ;
+    yawl:hasMethod yawl:CaseItems_setLink1_14 ;
+    yawl:hasMethod yawl:CaseItems_getBody1_15 ;
+    yawl:hasMethod yawl:CaseItems_setBody1_16 ;
+    yawl:hasMethod yawl:CaseItems_getForm1_17 ;
+    yawl:hasMethod yawl:CaseItems_setForm1_18 ;
+    yawl:hasMethod yawl:CaseItems_getStaticText_19 ;
+    yawl:hasMethod yawl:CaseItems_setStaticText_20 ;
+    yawl:hasMethod yawl:CaseItems_getStCaseData_21 ;
+    yawl:hasMethod yawl:CaseItems_setStCaseData_22 ;
+    yawl:hasMethod yawl:CaseItems_getStCaseStart_23 ;
+    yawl:hasMethod yawl:CaseItems_setStCaseStart_24 ;
+    yawl:hasMethod yawl:CaseItems_getStCaseStartText_25 ;
+    yawl:hasMethod yawl:CaseItems_setStCaseStartText_26 ;
+    yawl:hasMethod yawl:CaseItems_getStStartedBy_27 ;
+    yawl:hasMethod yawl:CaseItems_setStStartedBy_28 ;
+    yawl:hasMethod yawl:CaseItems_getStStartedByText_29 ;
+    yawl:hasMethod yawl:CaseItems_setStStartedByText_30 ;
+    yawl:hasMethod yawl:CaseItems_getStStartingService_31 ;
+    yawl:hasMethod yawl:CaseItems_setStStartingService_32 ;
+    yawl:hasMethod yawl:CaseItems_getStStartingServiceText_33 ;
+    yawl:hasMethod yawl:CaseItems_setStStartingServiceText_34 ;
+    yawl:hasMethod yawl:CaseItems_getTaCaseData_35 ;
+    yawl:hasMethod yawl:CaseItems_setTaCaseData_36 ;
+    yawl:hasMethod yawl:CaseItems_getLayoutPanel_37 ;
+    yawl:hasMethod yawl:CaseItems_setLayoutPanel_38 ;
+    yawl:hasMethod yawl:CaseItems_getDataTable_39 ;
+    yawl:hasMethod yawl:CaseItems_setDataTable_40 ;
+    yawl:hasMethod yawl:CaseItems_getColItemID_41 ;
+    yawl:hasMethod yawl:CaseItems_setColItemID_42 ;
+    yawl:hasMethod yawl:CaseItems_getColItemIDRows_43 ;
+    yawl:hasMethod yawl:CaseItems_setColItemIDRows_44 ;
+    yawl:hasMethod yawl:CaseItems_getColTaskID_45 ;
+    yawl:hasMethod yawl:CaseItems_setColTaskID_46 ;
+    yawl:hasMethod yawl:CaseItems_getColTaskIDRows_47 ;
+    yawl:hasMethod yawl:CaseItems_setColTaskIDRows_48 ;
+    yawl:hasMethod yawl:CaseItems_getColStatus_49 ;
+    yawl:hasMethod yawl:CaseItems_setColStatus_50 ;
+    yawl:hasMethod yawl:CaseItems_getColStatusRows_51 ;
+    yawl:hasMethod yawl:CaseItems_setColStatusRows_52 ;
+    yawl:hasMethod yawl:CaseItems_getColService_53 ;
+    yawl:hasMethod yawl:CaseItems_setColService_54 ;
+    yawl:hasMethod yawl:CaseItems_getColServiceRows_55 ;
+    yawl:hasMethod yawl:CaseItems_setColServiceRows_56 ;
+    yawl:hasMethod yawl:CaseItems_getColEnabledTime_57 ;
+    yawl:hasMethod yawl:CaseItems_setColEnabledTime_58 ;
+    yawl:hasMethod yawl:CaseItems_getColEnabledTimeRows_59 ;
+    yawl:hasMethod yawl:CaseItems_setColEnabledTimeRows_60 ;
+    yawl:hasMethod yawl:CaseItems_getColStartTime_61 ;
+    yawl:hasMethod yawl:CaseItems_setColStartTime_62 ;
+    yawl:hasMethod yawl:CaseItems_getColStartTimeRows_63 ;
+    yawl:hasMethod yawl:CaseItems_setColStartTimeRows_64 ;
+    yawl:hasMethod yawl:CaseItems_getColCompletionTime_65 ;
+    yawl:hasMethod yawl:CaseItems_setColCompletionTime_66 ;
+    yawl:hasMethod yawl:CaseItems_getColCompletionTimeRows_67 ;
+    yawl:hasMethod yawl:CaseItems_setColCompletionTimeRows_68 ;
+    yawl:hasMethod yawl:CaseItems_getColTimerStatus_69 ;
+    yawl:hasMethod yawl:CaseItems_setColTimerStatus_70 ;
+    yawl:hasMethod yawl:CaseItems_getColTimerStatusRows_71 ;
+    yawl:hasMethod yawl:CaseItems_setColTimerStatusRows_72 ;
+    yawl:hasMethod yawl:CaseItems_getColTimerExpiry_73 ;
+    yawl:hasMethod yawl:CaseItems_setColTimerExpiry_74 ;
+    yawl:hasMethod yawl:CaseItems_getColTimerExpiryRows_75 ;
+    yawl:hasMethod yawl:CaseItems_setColTimerExpiryRows_76 ;
+    yawl:hasMethod yawl:CaseItems_getHdnRowIndex_77 ;
+    yawl:hasMethod yawl:CaseItems_setHdnRowIndex_78 ;
+    yawl:hasMethod yawl:CaseItems_getPnlContainer_79 ;
+    yawl:hasMethod yawl:CaseItems_setPnlContainer_80 ;
+    yawl:hasMethod yawl:CaseItems_getPnlGroup_81 ;
+    yawl:hasMethod yawl:CaseItems_setPnlGroup_82 ;
+    yawl:hasMethod yawl:CaseItems_getPnlGroupCaseData_83 ;
+    yawl:hasMethod yawl:CaseItems_setPnlGroupCaseData_84 ;
+    yawl:hasMethod yawl:CaseItems_getBtnDetails_85 ;
+    yawl:hasMethod yawl:CaseItems_setBtnDetails_86 ;
+    yawl:hasMethod yawl:CaseItems_getCaseIDHeaderText_87 ;
+    yawl:hasMethod yawl:CaseItems_setCaseIDHeaderText_88 ;
+    yawl:hasMethod yawl:CaseItems_getTaskIDHeaderText_89 ;
+    yawl:hasMethod yawl:CaseItems_setTaskIDHeaderText_90 ;
+    yawl:hasMethod yawl:CaseItems_getStatusHeaderText_91 ;
+    yawl:hasMethod yawl:CaseItems_setStatusHeaderText_92 ;
+    yawl:hasMethod yawl:CaseItems_getServiceHeaderText_93 ;
+    yawl:hasMethod yawl:CaseItems_setServiceHeaderText_94 ;
+    yawl:hasMethod yawl:CaseItems_getEnabledTimeHeaderText_95 ;
+    yawl:hasMethod yawl:CaseItems_setEnabledTimeHeaderText_96 ;
+    yawl:hasMethod yawl:CaseItems_getStartTimeHeaderText_97 ;
+    yawl:hasMethod yawl:CaseItems_setStartTimeHeaderText_98 ;
+    yawl:hasMethod yawl:CaseItems_getCompletionTimeHeaderText_99 ;
+    yawl:hasMethod yawl:CaseItems_setCompletionTimeHeaderText_100 ;
+    yawl:hasMethod yawl:CaseItems_getTimerStatusHeaderText_101 ;
+    yawl:hasMethod yawl:CaseItems_setTimerStatusHeaderText_102 ;
+    yawl:hasMethod yawl:CaseItems_getTimerExpiryHeaderText_103 ;
+    yawl:hasMethod yawl:CaseItems_setTimerExpiryHeaderText_104 ;
+    yawl:hasMethod yawl:CaseItems_prerender_105 ;
+    yawl:hasMethod yawl:CaseItems_btnRefresh_action_106 ;
+    yawl:hasMethod yawl:CaseItems_btnLogout_action_107 ;
+    yawl:hasMethod yawl:CaseItems_btnDetails_action_108 ;
+    yawl:hasMethod yawl:CaseItems_btnBack_action_109 ;
+    yawl:hasMethod yawl:CaseItems_caseIDHeaderClick_110 ;
+    yawl:hasMethod yawl:CaseItems_taskIDHeaderClick_111 ;
+    yawl:hasMethod yawl:CaseItems_statusHeaderClick_112 ;
+    yawl:hasMethod yawl:CaseItems_serviceHeaderClick_113 ;
+    yawl:hasMethod yawl:CaseItems_enabledTimeHeaderClick_114 ;
+    yawl:hasMethod yawl:CaseItems_startTimeHeaderClick_115 ;
+    yawl:hasMethod yawl:CaseItems_completionTimeHeaderClick_116 ;
+    yawl:hasMethod yawl:CaseItems_timerStatusHeaderClick_117 ;
+    yawl:hasMethod yawl:CaseItems_timerExpiryHeaderClick_118 ;
+    yawl:hasMethod yawl:CaseItems_sortTable_119 ;
+    yawl:hasMethod yawl:CaseItems_setHeaderButtonText_120 ;
+    yawl:hasMethod yawl:CaseItems_resetHeaderButtons_121 ;
+    yawl:hasMethod yawl:CaseItems_getOrderIndicator_122 ;
+    yawl:hasField yawl:CaseItems___placeholder ;
+    yawl:hasField yawl:CaseItems_page1 ;
+    yawl:hasField yawl:CaseItems_html1 ;
+    yawl:hasField yawl:CaseItems_head1 ;
+    yawl:hasField yawl:CaseItems_link1 ;
+    yawl:hasField yawl:CaseItems_body1 ;
+    yawl:hasField yawl:CaseItems_form1 ;
+    yawl:hasField yawl:CaseItems_staticText ;
+    yawl:hasField yawl:CaseItems_stCaseData ;
+    yawl:hasField yawl:CaseItems_stCaseStart ;
+    yawl:hasField yawl:CaseItems_stCaseStartText ;
+    yawl:hasField yawl:CaseItems_stStartedBy ;
+    yawl:hasField yawl:CaseItems_stStartedByText ;
+    yawl:hasField yawl:CaseItems_stStartingService ;
+    yawl:hasField yawl:CaseItems_stStartingServiceText ;
+    yawl:hasField yawl:CaseItems_taCaseData ;
+    yawl:hasField yawl:CaseItems_layoutPanel ;
+    yawl:hasField yawl:CaseItems_dataTable ;
+    yawl:hasField yawl:CaseItems_colItemID ;
+    yawl:hasField yawl:CaseItems_colItemIDRows ;
+    yawl:hasField yawl:CaseItems_colTaskID ;
+    yawl:hasField yawl:CaseItems_colTaskIDRows ;
+    yawl:hasField yawl:CaseItems_colStatus ;
+    yawl:hasField yawl:CaseItems_colStatusRows ;
+    yawl:hasField yawl:CaseItems_colService ;
+    yawl:hasField yawl:CaseItems_colServiceRows ;
+    yawl:hasField yawl:CaseItems_colEnabledTime ;
+    yawl:hasField yawl:CaseItems_colEnabledTimeRows ;
+    yawl:hasField yawl:CaseItems_colStartTime ;
+    yawl:hasField yawl:CaseItems_colStartTimeRows ;
+    yawl:hasField yawl:CaseItems_colCompletionTime ;
+    yawl:hasField yawl:CaseItems_colCompletionTimeRows ;
+    yawl:hasField yawl:CaseItems_colTimerStatus ;
+    yawl:hasField yawl:CaseItems_colTimerStatusRows ;
+    yawl:hasField yawl:CaseItems_colTimerExpiry ;
+    yawl:hasField yawl:CaseItems_colTimerExpiryRows ;
+    yawl:hasField yawl:CaseItems_hdnRowIndex ;
+    yawl:hasField yawl:CaseItems_pnlContainer ;
+    yawl:hasField yawl:CaseItems_pnlGroup ;
+    yawl:hasField yawl:CaseItems_pnlGroupCaseData ;
+    yawl:hasField yawl:CaseItems_btnDetails ;
+    yawl:hasField yawl:CaseItems_caseIDHeaderText ;
+    yawl:hasField yawl:CaseItems_taskIDHeaderText ;
+    yawl:hasField yawl:CaseItems_statusHeaderText ;
+    yawl:hasField yawl:CaseItems_serviceHeaderText ;
+    yawl:hasField yawl:CaseItems_enabledTimeHeaderText ;
+    yawl:hasField yawl:CaseItems_startTimeHeaderText ;
+    yawl:hasField yawl:CaseItems_completionTimeHeaderText ;
+    yawl:hasField yawl:CaseItems_timerStatusHeaderText ;
+    yawl:hasField yawl:CaseItems_timerExpiryHeaderText ;
+    yawl:hasField yawl:CaseItems__sb ;
+    yawl:hasField yawl:CaseItems_msgPanel ;
+    .
+
+
+# Method: CaseItems._init
+yawl:CaseItems__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseItems.getSessionBean
+yawl:CaseItems_getSessionBean_2 a yawl:Method ;
+    rdfs:label "getSessionBean" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getSessionBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: CaseItems.getApplicationBean
+yawl:CaseItems_getApplicationBean_3 a yawl:Method ;
+    rdfs:label "getApplicationBean" ;
+    yawl:returnType "ApplicationBean" ;
+    yawl:signature "ApplicationBean getApplicationBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: CaseItems.init
+yawl:CaseItems_init_4 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.preprocess
+yawl:CaseItems_preprocess_5 a yawl:Method ;
+    rdfs:label "preprocess" ;
+    yawl:returnType "void" ;
+    yawl:signature "void preprocess()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.destroy
+yawl:CaseItems_destroy_6 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getPage1
+yawl:CaseItems_getPage1_7 a yawl:Method ;
+    rdfs:label "getPage1" ;
+    yawl:returnType "Page" ;
+    yawl:signature "Page getPage1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setPage1
+yawl:CaseItems_setPage1_8 a yawl:Method ;
+    rdfs:label "setPage1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPage1(Page p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getHtml1
+yawl:CaseItems_getHtml1_9 a yawl:Method ;
+    rdfs:label "getHtml1" ;
+    yawl:returnType "Html" ;
+    yawl:signature "Html getHtml1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setHtml1
+yawl:CaseItems_setHtml1_10 a yawl:Method ;
+    rdfs:label "setHtml1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHtml1(Html h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getHead1
+yawl:CaseItems_getHead1_11 a yawl:Method ;
+    rdfs:label "getHead1" ;
+    yawl:returnType "Head" ;
+    yawl:signature "Head getHead1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setHead1
+yawl:CaseItems_setHead1_12 a yawl:Method ;
+    rdfs:label "setHead1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHead1(Head h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getLink1
+yawl:CaseItems_getLink1_13 a yawl:Method ;
+    rdfs:label "getLink1" ;
+    yawl:returnType "Link" ;
+    yawl:signature "Link getLink1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setLink1
+yawl:CaseItems_setLink1_14 a yawl:Method ;
+    rdfs:label "setLink1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLink1(Link l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getBody1
+yawl:CaseItems_getBody1_15 a yawl:Method ;
+    rdfs:label "getBody1" ;
+    yawl:returnType "Body" ;
+    yawl:signature "Body getBody1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setBody1
+yawl:CaseItems_setBody1_16 a yawl:Method ;
+    rdfs:label "setBody1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBody1(Body b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getForm1
+yawl:CaseItems_getForm1_17 a yawl:Method ;
+    rdfs:label "getForm1" ;
+    yawl:returnType "Form" ;
+    yawl:signature "Form getForm1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setForm1
+yawl:CaseItems_setForm1_18 a yawl:Method ;
+    rdfs:label "setForm1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setForm1(Form f)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getStaticText
+yawl:CaseItems_getStaticText_19 a yawl:Method ;
+    rdfs:label "getStaticText" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getStaticText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setStaticText
+yawl:CaseItems_setStaticText_20 a yawl:Method ;
+    rdfs:label "setStaticText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStaticText(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getStCaseData
+yawl:CaseItems_getStCaseData_21 a yawl:Method ;
+    rdfs:label "getStCaseData" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getStCaseData()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setStCaseData
+yawl:CaseItems_setStCaseData_22 a yawl:Method ;
+    rdfs:label "setStCaseData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStCaseData(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getStCaseStart
+yawl:CaseItems_getStCaseStart_23 a yawl:Method ;
+    rdfs:label "getStCaseStart" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getStCaseStart()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setStCaseStart
+yawl:CaseItems_setStCaseStart_24 a yawl:Method ;
+    rdfs:label "setStCaseStart" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStCaseStart(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getStCaseStartText
+yawl:CaseItems_getStCaseStartText_25 a yawl:Method ;
+    rdfs:label "getStCaseStartText" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getStCaseStartText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setStCaseStartText
+yawl:CaseItems_setStCaseStartText_26 a yawl:Method ;
+    rdfs:label "setStCaseStartText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStCaseStartText(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getStStartedBy
+yawl:CaseItems_getStStartedBy_27 a yawl:Method ;
+    rdfs:label "getStStartedBy" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getStStartedBy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setStStartedBy
+yawl:CaseItems_setStStartedBy_28 a yawl:Method ;
+    rdfs:label "setStStartedBy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStStartedBy(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getStStartedByText
+yawl:CaseItems_getStStartedByText_29 a yawl:Method ;
+    rdfs:label "getStStartedByText" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getStStartedByText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setStStartedByText
+yawl:CaseItems_setStStartedByText_30 a yawl:Method ;
+    rdfs:label "setStStartedByText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStStartedByText(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getStStartingService
+yawl:CaseItems_getStStartingService_31 a yawl:Method ;
+    rdfs:label "getStStartingService" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getStStartingService()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setStStartingService
+yawl:CaseItems_setStStartingService_32 a yawl:Method ;
+    rdfs:label "setStStartingService" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStStartingService(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getStStartingServiceText
+yawl:CaseItems_getStStartingServiceText_33 a yawl:Method ;
+    rdfs:label "getStStartingServiceText" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getStStartingServiceText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setStStartingServiceText
+yawl:CaseItems_setStStartingServiceText_34 a yawl:Method ;
+    rdfs:label "setStStartingServiceText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStStartingServiceText(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getTaCaseData
+yawl:CaseItems_getTaCaseData_35 a yawl:Method ;
+    rdfs:label "getTaCaseData" ;
+    yawl:returnType "TextArea" ;
+    yawl:signature "TextArea getTaCaseData()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setTaCaseData
+yawl:CaseItems_setTaCaseData_36 a yawl:Method ;
+    rdfs:label "setTaCaseData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTaCaseData(TextArea ta)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getLayoutPanel
+yawl:CaseItems_getLayoutPanel_37 a yawl:Method ;
+    rdfs:label "getLayoutPanel" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getLayoutPanel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setLayoutPanel
+yawl:CaseItems_setLayoutPanel_38 a yawl:Method ;
+    rdfs:label "setLayoutPanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLayoutPanel(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getDataTable
+yawl:CaseItems_getDataTable_39 a yawl:Method ;
+    rdfs:label "getDataTable" ;
+    yawl:returnType "HtmlDataTable" ;
+    yawl:signature "HtmlDataTable getDataTable()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setDataTable
+yawl:CaseItems_setDataTable_40 a yawl:Method ;
+    rdfs:label "setDataTable" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataTable(HtmlDataTable hdt)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getColItemID
+yawl:CaseItems_getColItemID_41 a yawl:Method ;
+    rdfs:label "getColItemID" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColItemID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setColItemID
+yawl:CaseItems_setColItemID_42 a yawl:Method ;
+    rdfs:label "setColItemID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColItemID(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getColItemIDRows
+yawl:CaseItems_getColItemIDRows_43 a yawl:Method ;
+    rdfs:label "getColItemIDRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColItemIDRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setColItemIDRows
+yawl:CaseItems_setColItemIDRows_44 a yawl:Method ;
+    rdfs:label "setColItemIDRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColItemIDRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getColTaskID
+yawl:CaseItems_getColTaskID_45 a yawl:Method ;
+    rdfs:label "getColTaskID" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColTaskID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setColTaskID
+yawl:CaseItems_setColTaskID_46 a yawl:Method ;
+    rdfs:label "setColTaskID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColTaskID(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getColTaskIDRows
+yawl:CaseItems_getColTaskIDRows_47 a yawl:Method ;
+    rdfs:label "getColTaskIDRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColTaskIDRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setColTaskIDRows
+yawl:CaseItems_setColTaskIDRows_48 a yawl:Method ;
+    rdfs:label "setColTaskIDRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColTaskIDRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getColStatus
+yawl:CaseItems_getColStatus_49 a yawl:Method ;
+    rdfs:label "getColStatus" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setColStatus
+yawl:CaseItems_setColStatus_50 a yawl:Method ;
+    rdfs:label "setColStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColStatus(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getColStatusRows
+yawl:CaseItems_getColStatusRows_51 a yawl:Method ;
+    rdfs:label "getColStatusRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColStatusRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setColStatusRows
+yawl:CaseItems_setColStatusRows_52 a yawl:Method ;
+    rdfs:label "setColStatusRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColStatusRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getColService
+yawl:CaseItems_getColService_53 a yawl:Method ;
+    rdfs:label "getColService" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColService()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setColService
+yawl:CaseItems_setColService_54 a yawl:Method ;
+    rdfs:label "setColService" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColService(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getColServiceRows
+yawl:CaseItems_getColServiceRows_55 a yawl:Method ;
+    rdfs:label "getColServiceRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColServiceRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setColServiceRows
+yawl:CaseItems_setColServiceRows_56 a yawl:Method ;
+    rdfs:label "setColServiceRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColServiceRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getColEnabledTime
+yawl:CaseItems_getColEnabledTime_57 a yawl:Method ;
+    rdfs:label "getColEnabledTime" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColEnabledTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setColEnabledTime
+yawl:CaseItems_setColEnabledTime_58 a yawl:Method ;
+    rdfs:label "setColEnabledTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColEnabledTime(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getColEnabledTimeRows
+yawl:CaseItems_getColEnabledTimeRows_59 a yawl:Method ;
+    rdfs:label "getColEnabledTimeRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColEnabledTimeRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setColEnabledTimeRows
+yawl:CaseItems_setColEnabledTimeRows_60 a yawl:Method ;
+    rdfs:label "setColEnabledTimeRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColEnabledTimeRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getColStartTime
+yawl:CaseItems_getColStartTime_61 a yawl:Method ;
+    rdfs:label "getColStartTime" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColStartTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setColStartTime
+yawl:CaseItems_setColStartTime_62 a yawl:Method ;
+    rdfs:label "setColStartTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColStartTime(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getColStartTimeRows
+yawl:CaseItems_getColStartTimeRows_63 a yawl:Method ;
+    rdfs:label "getColStartTimeRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColStartTimeRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setColStartTimeRows
+yawl:CaseItems_setColStartTimeRows_64 a yawl:Method ;
+    rdfs:label "setColStartTimeRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColStartTimeRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getColCompletionTime
+yawl:CaseItems_getColCompletionTime_65 a yawl:Method ;
+    rdfs:label "getColCompletionTime" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColCompletionTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setColCompletionTime
+yawl:CaseItems_setColCompletionTime_66 a yawl:Method ;
+    rdfs:label "setColCompletionTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColCompletionTime(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getColCompletionTimeRows
+yawl:CaseItems_getColCompletionTimeRows_67 a yawl:Method ;
+    rdfs:label "getColCompletionTimeRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColCompletionTimeRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setColCompletionTimeRows
+yawl:CaseItems_setColCompletionTimeRows_68 a yawl:Method ;
+    rdfs:label "setColCompletionTimeRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColCompletionTimeRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getColTimerStatus
+yawl:CaseItems_getColTimerStatus_69 a yawl:Method ;
+    rdfs:label "getColTimerStatus" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColTimerStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setColTimerStatus
+yawl:CaseItems_setColTimerStatus_70 a yawl:Method ;
+    rdfs:label "setColTimerStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColTimerStatus(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getColTimerStatusRows
+yawl:CaseItems_getColTimerStatusRows_71 a yawl:Method ;
+    rdfs:label "getColTimerStatusRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColTimerStatusRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setColTimerStatusRows
+yawl:CaseItems_setColTimerStatusRows_72 a yawl:Method ;
+    rdfs:label "setColTimerStatusRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColTimerStatusRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getColTimerExpiry
+yawl:CaseItems_getColTimerExpiry_73 a yawl:Method ;
+    rdfs:label "getColTimerExpiry" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColTimerExpiry()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setColTimerExpiry
+yawl:CaseItems_setColTimerExpiry_74 a yawl:Method ;
+    rdfs:label "setColTimerExpiry" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColTimerExpiry(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getColTimerExpiryRows
+yawl:CaseItems_getColTimerExpiryRows_75 a yawl:Method ;
+    rdfs:label "getColTimerExpiryRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColTimerExpiryRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setColTimerExpiryRows
+yawl:CaseItems_setColTimerExpiryRows_76 a yawl:Method ;
+    rdfs:label "setColTimerExpiryRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColTimerExpiryRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getHdnRowIndex
+yawl:CaseItems_getHdnRowIndex_77 a yawl:Method ;
+    rdfs:label "getHdnRowIndex" ;
+    yawl:returnType "HiddenField" ;
+    yawl:signature "HiddenField getHdnRowIndex()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setHdnRowIndex
+yawl:CaseItems_setHdnRowIndex_78 a yawl:Method ;
+    rdfs:label "setHdnRowIndex" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHdnRowIndex(HiddenField hf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getPnlContainer
+yawl:CaseItems_getPnlContainer_79 a yawl:Method ;
+    rdfs:label "getPnlContainer" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlContainer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setPnlContainer
+yawl:CaseItems_setPnlContainer_80 a yawl:Method ;
+    rdfs:label "setPnlContainer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlContainer(PanelLayout pnl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getPnlGroup
+yawl:CaseItems_getPnlGroup_81 a yawl:Method ;
+    rdfs:label "getPnlGroup" ;
+    yawl:returnType "PanelGroup" ;
+    yawl:signature "PanelGroup getPnlGroup()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setPnlGroup
+yawl:CaseItems_setPnlGroup_82 a yawl:Method ;
+    rdfs:label "setPnlGroup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlGroup(PanelGroup group)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getPnlGroupCaseData
+yawl:CaseItems_getPnlGroupCaseData_83 a yawl:Method ;
+    rdfs:label "getPnlGroupCaseData" ;
+    yawl:returnType "PanelGroup" ;
+    yawl:signature "PanelGroup getPnlGroupCaseData()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setPnlGroupCaseData
+yawl:CaseItems_setPnlGroupCaseData_84 a yawl:Method ;
+    rdfs:label "setPnlGroupCaseData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlGroupCaseData(PanelGroup group)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getBtnDetails
+yawl:CaseItems_getBtnDetails_85 a yawl:Method ;
+    rdfs:label "getBtnDetails" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnDetails()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setBtnDetails
+yawl:CaseItems_setBtnDetails_86 a yawl:Method ;
+    rdfs:label "setBtnDetails" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnDetails(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getCaseIDHeaderText
+yawl:CaseItems_getCaseIDHeaderText_87 a yawl:Method ;
+    rdfs:label "getCaseIDHeaderText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseIDHeaderText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setCaseIDHeaderText
+yawl:CaseItems_setCaseIDHeaderText_88 a yawl:Method ;
+    rdfs:label "setCaseIDHeaderText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCaseIDHeaderText(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getTaskIDHeaderText
+yawl:CaseItems_getTaskIDHeaderText_89 a yawl:Method ;
+    rdfs:label "getTaskIDHeaderText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskIDHeaderText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setTaskIDHeaderText
+yawl:CaseItems_setTaskIDHeaderText_90 a yawl:Method ;
+    rdfs:label "setTaskIDHeaderText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTaskIDHeaderText(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getStatusHeaderText
+yawl:CaseItems_getStatusHeaderText_91 a yawl:Method ;
+    rdfs:label "getStatusHeaderText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStatusHeaderText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setStatusHeaderText
+yawl:CaseItems_setStatusHeaderText_92 a yawl:Method ;
+    rdfs:label "setStatusHeaderText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStatusHeaderText(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getServiceHeaderText
+yawl:CaseItems_getServiceHeaderText_93 a yawl:Method ;
+    rdfs:label "getServiceHeaderText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getServiceHeaderText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setServiceHeaderText
+yawl:CaseItems_setServiceHeaderText_94 a yawl:Method ;
+    rdfs:label "setServiceHeaderText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setServiceHeaderText(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getEnabledTimeHeaderText
+yawl:CaseItems_getEnabledTimeHeaderText_95 a yawl:Method ;
+    rdfs:label "getEnabledTimeHeaderText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEnabledTimeHeaderText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setEnabledTimeHeaderText
+yawl:CaseItems_setEnabledTimeHeaderText_96 a yawl:Method ;
+    rdfs:label "setEnabledTimeHeaderText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEnabledTimeHeaderText(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getStartTimeHeaderText
+yawl:CaseItems_getStartTimeHeaderText_97 a yawl:Method ;
+    rdfs:label "getStartTimeHeaderText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStartTimeHeaderText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setStartTimeHeaderText
+yawl:CaseItems_setStartTimeHeaderText_98 a yawl:Method ;
+    rdfs:label "setStartTimeHeaderText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStartTimeHeaderText(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getCompletionTimeHeaderText
+yawl:CaseItems_getCompletionTimeHeaderText_99 a yawl:Method ;
+    rdfs:label "getCompletionTimeHeaderText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCompletionTimeHeaderText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setCompletionTimeHeaderText
+yawl:CaseItems_setCompletionTimeHeaderText_100 a yawl:Method ;
+    rdfs:label "setCompletionTimeHeaderText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCompletionTimeHeaderText(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getTimerStatusHeaderText
+yawl:CaseItems_getTimerStatusHeaderText_101 a yawl:Method ;
+    rdfs:label "getTimerStatusHeaderText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTimerStatusHeaderText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setTimerStatusHeaderText
+yawl:CaseItems_setTimerStatusHeaderText_102 a yawl:Method ;
+    rdfs:label "setTimerStatusHeaderText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTimerStatusHeaderText(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.getTimerExpiryHeaderText
+yawl:CaseItems_getTimerExpiryHeaderText_103 a yawl:Method ;
+    rdfs:label "getTimerExpiryHeaderText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTimerExpiryHeaderText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.setTimerExpiryHeaderText
+yawl:CaseItems_setTimerExpiryHeaderText_104 a yawl:Method ;
+    rdfs:label "setTimerExpiryHeaderText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTimerExpiryHeaderText(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.prerender
+yawl:CaseItems_prerender_105 a yawl:Method ;
+    rdfs:label "prerender" ;
+    yawl:returnType "void" ;
+    yawl:signature "void prerender()" ;
+    rdfs:comment """Overridden method that is called immediately before the page is rendered""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.btnRefresh_action
+yawl:CaseItems_btnRefresh_action_106 a yawl:Method ;
+    rdfs:label "btnRefresh_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnRefresh_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.btnLogout_action
+yawl:CaseItems_btnLogout_action_107 a yawl:Method ;
+    rdfs:label "btnLogout_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnLogout_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.btnDetails_action
+yawl:CaseItems_btnDetails_action_108 a yawl:Method ;
+    rdfs:label "btnDetails_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnDetails_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.btnBack_action
+yawl:CaseItems_btnBack_action_109 a yawl:Method ;
+    rdfs:label "btnBack_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnBack_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.caseIDHeaderClick
+yawl:CaseItems_caseIDHeaderClick_110 a yawl:Method ;
+    rdfs:label "caseIDHeaderClick" ;
+    yawl:returnType "String" ;
+    yawl:signature "String caseIDHeaderClick()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.taskIDHeaderClick
+yawl:CaseItems_taskIDHeaderClick_111 a yawl:Method ;
+    rdfs:label "taskIDHeaderClick" ;
+    yawl:returnType "String" ;
+    yawl:signature "String taskIDHeaderClick()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.statusHeaderClick
+yawl:CaseItems_statusHeaderClick_112 a yawl:Method ;
+    rdfs:label "statusHeaderClick" ;
+    yawl:returnType "String" ;
+    yawl:signature "String statusHeaderClick()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.serviceHeaderClick
+yawl:CaseItems_serviceHeaderClick_113 a yawl:Method ;
+    rdfs:label "serviceHeaderClick" ;
+    yawl:returnType "String" ;
+    yawl:signature "String serviceHeaderClick()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.enabledTimeHeaderClick
+yawl:CaseItems_enabledTimeHeaderClick_114 a yawl:Method ;
+    rdfs:label "enabledTimeHeaderClick" ;
+    yawl:returnType "String" ;
+    yawl:signature "String enabledTimeHeaderClick()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.startTimeHeaderClick
+yawl:CaseItems_startTimeHeaderClick_115 a yawl:Method ;
+    rdfs:label "startTimeHeaderClick" ;
+    yawl:returnType "String" ;
+    yawl:signature "String startTimeHeaderClick()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.completionTimeHeaderClick
+yawl:CaseItems_completionTimeHeaderClick_116 a yawl:Method ;
+    rdfs:label "completionTimeHeaderClick" ;
+    yawl:returnType "String" ;
+    yawl:signature "String completionTimeHeaderClick()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.timerStatusHeaderClick
+yawl:CaseItems_timerStatusHeaderClick_117 a yawl:Method ;
+    rdfs:label "timerStatusHeaderClick" ;
+    yawl:returnType "String" ;
+    yawl:signature "String timerStatusHeaderClick()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.timerExpiryHeaderClick
+yawl:CaseItems_timerExpiryHeaderClick_118 a yawl:Method ;
+    rdfs:label "timerExpiryHeaderClick" ;
+    yawl:returnType "String" ;
+    yawl:signature "String timerExpiryHeaderClick()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseItems.sortTable
+yawl:CaseItems_sortTable_119 a yawl:Method ;
+    rdfs:label "sortTable" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sortTable(TableSorter column)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseItems.setHeaderButtonText
+yawl:CaseItems_setHeaderButtonText_120 a yawl:Method ;
+    rdfs:label "setHeaderButtonText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHeaderButtonText()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseItems.resetHeaderButtons
+yawl:CaseItems_resetHeaderButtons_121 a yawl:Method ;
+    rdfs:label "resetHeaderButtons" ;
+    yawl:returnType "void" ;
+    yawl:signature "void resetHeaderButtons()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseItems.getOrderIndicator
+yawl:CaseItems_getOrderIndicator_122 a yawl:Method ;
+    rdfs:label "getOrderIndicator" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOrderIndicator(boolean ascending)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:CaseItems___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:CaseItems_page1 a yawl:Field ;
+    rdfs:label "page1" .
+
+yawl:CaseItems_html1 a yawl:Field ;
+    rdfs:label "html1" .
+
+yawl:CaseItems_head1 a yawl:Field ;
+    rdfs:label "head1" .
+
+yawl:CaseItems_link1 a yawl:Field ;
+    rdfs:label "link1" .
+
+yawl:CaseItems_body1 a yawl:Field ;
+    rdfs:label "body1" .
+
+yawl:CaseItems_form1 a yawl:Field ;
+    rdfs:label "form1" .
+
+yawl:CaseItems_staticText a yawl:Field ;
+    rdfs:label "staticText" .
+
+yawl:CaseItems_stCaseData a yawl:Field ;
+    rdfs:label "stCaseData" .
+
+yawl:CaseItems_stCaseStart a yawl:Field ;
+    rdfs:label "stCaseStart" .
+
+yawl:CaseItems_stCaseStartText a yawl:Field ;
+    rdfs:label "stCaseStartText" .
+
+yawl:CaseItems_stStartedBy a yawl:Field ;
+    rdfs:label "stStartedBy" .
+
+yawl:CaseItems_stStartedByText a yawl:Field ;
+    rdfs:label "stStartedByText" .
+
+yawl:CaseItems_stStartingService a yawl:Field ;
+    rdfs:label "stStartingService" .
+
+yawl:CaseItems_stStartingServiceText a yawl:Field ;
+    rdfs:label "stStartingServiceText" .
+
+yawl:CaseItems_taCaseData a yawl:Field ;
+    rdfs:label "taCaseData" .
+
+yawl:CaseItems_layoutPanel a yawl:Field ;
+    rdfs:label "layoutPanel" .
+
+yawl:CaseItems_dataTable a yawl:Field ;
+    rdfs:label "dataTable" .
+
+yawl:CaseItems_colItemID a yawl:Field ;
+    rdfs:label "colItemID" .
+
+yawl:CaseItems_colItemIDRows a yawl:Field ;
+    rdfs:label "colItemIDRows" .
+
+yawl:CaseItems_colTaskID a yawl:Field ;
+    rdfs:label "colTaskID" .
+
+yawl:CaseItems_colTaskIDRows a yawl:Field ;
+    rdfs:label "colTaskIDRows" .
+
+yawl:CaseItems_colStatus a yawl:Field ;
+    rdfs:label "colStatus" .
+
+yawl:CaseItems_colStatusRows a yawl:Field ;
+    rdfs:label "colStatusRows" .
+
+yawl:CaseItems_colService a yawl:Field ;
+    rdfs:label "colService" .
+
+yawl:CaseItems_colServiceRows a yawl:Field ;
+    rdfs:label "colServiceRows" .
+
+yawl:CaseItems_colEnabledTime a yawl:Field ;
+    rdfs:label "colEnabledTime" .
+
+yawl:CaseItems_colEnabledTimeRows a yawl:Field ;
+    rdfs:label "colEnabledTimeRows" .
+
+yawl:CaseItems_colStartTime a yawl:Field ;
+    rdfs:label "colStartTime" .
+
+yawl:CaseItems_colStartTimeRows a yawl:Field ;
+    rdfs:label "colStartTimeRows" .
+
+yawl:CaseItems_colCompletionTime a yawl:Field ;
+    rdfs:label "colCompletionTime" .
+
+yawl:CaseItems_colCompletionTimeRows a yawl:Field ;
+    rdfs:label "colCompletionTimeRows" .
+
+yawl:CaseItems_colTimerStatus a yawl:Field ;
+    rdfs:label "colTimerStatus" .
+
+yawl:CaseItems_colTimerStatusRows a yawl:Field ;
+    rdfs:label "colTimerStatusRows" .
+
+yawl:CaseItems_colTimerExpiry a yawl:Field ;
+    rdfs:label "colTimerExpiry" .
+
+yawl:CaseItems_colTimerExpiryRows a yawl:Field ;
+    rdfs:label "colTimerExpiryRows" .
+
+yawl:CaseItems_hdnRowIndex a yawl:Field ;
+    rdfs:label "hdnRowIndex" .
+
+yawl:CaseItems_pnlContainer a yawl:Field ;
+    rdfs:label "pnlContainer" .
+
+yawl:CaseItems_pnlGroup a yawl:Field ;
+    rdfs:label "pnlGroup" .
+
+yawl:CaseItems_pnlGroupCaseData a yawl:Field ;
+    rdfs:label "pnlGroupCaseData" .
+
+yawl:CaseItems_btnDetails a yawl:Field ;
+    rdfs:label "btnDetails" .
+
+yawl:CaseItems_caseIDHeaderText a yawl:Field ;
+    rdfs:label "caseIDHeaderText" .
+
+yawl:CaseItems_taskIDHeaderText a yawl:Field ;
+    rdfs:label "taskIDHeaderText" .
+
+yawl:CaseItems_statusHeaderText a yawl:Field ;
+    rdfs:label "statusHeaderText" .
+
+yawl:CaseItems_serviceHeaderText a yawl:Field ;
+    rdfs:label "serviceHeaderText" .
+
+yawl:CaseItems_enabledTimeHeaderText a yawl:Field ;
+    rdfs:label "enabledTimeHeaderText" .
+
+yawl:CaseItems_startTimeHeaderText a yawl:Field ;
+    rdfs:label "startTimeHeaderText" .
+
+yawl:CaseItems_completionTimeHeaderText a yawl:Field ;
+    rdfs:label "completionTimeHeaderText" .
+
+yawl:CaseItems_timerStatusHeaderText a yawl:Field ;
+    rdfs:label "timerStatusHeaderText" .
+
+yawl:CaseItems_timerExpiryHeaderText a yawl:Field ;
+    rdfs:label "timerExpiryHeaderText" .
+
+yawl:CaseItems__sb a yawl:Field ;
+    rdfs:label "_sb" .
+
+yawl:CaseItems_msgPanel a yawl:Field ;
+    rdfs:label "msgPanel" .
+
+
+

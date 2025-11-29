@@ -1,0 +1,46 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.procletService.editor.block
+yawl:org_yawlfoundation_yawl_procletService_editor_block a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.procletService.editor.block" .
+# Class: org.yawlfoundation.yawl.procletService.editor.block.SelectEmid
+yawl:SelectEmid a yawl:Class ;
+    rdfs:label "SelectEmid" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor_block ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/block/SelectEmid.java"^^xsd:string ;
+    yawl:extends yawl:JPanel ;
+    yawl:implements yawl:ActionListener ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:SelectEmid_actionPerformed_1 ;
+    yawl:hasMethod yawl:SelectEmid_createAndShowGUI_2 ;
+    .
+
+
+# Method: SelectEmid.actionPerformed
+yawl:SelectEmid_actionPerformed_1 a yawl:Method ;
+    rdfs:label "actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void actionPerformed(ActionEvent e)" ;
+    rdfs:comment """Listens to the combo box.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SelectEmid.createAndShowGUI
+yawl:SelectEmid_createAndShowGUI_2 a yawl:Method ;
+    rdfs:label "createAndShowGUI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void createAndShowGUI()" ;
+    rdfs:comment """Create the GUI and show it.  For thread safety, this method should be invoked from the event-dispatching thread.""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+
+

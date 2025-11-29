@@ -1,0 +1,85 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.update.NewVersionDialog
+yawl:NewVersionDialog a yawl:Class ;
+    rdfs:label "NewVersionDialog" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_update ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/update/NewVersionDialog.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 13/10/2015""" ;
+    yawl:extends yawl:JDialog ;
+    yawl:implements yawl:ActionListener ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:NewVersionDialog_actionPerformed_1 ;
+    yawl:hasMethod yawl:NewVersionDialog_getContent_2 ;
+    yawl:hasMethod yawl:NewVersionDialog_getIconPanel_3 ;
+    yawl:hasMethod yawl:NewVersionDialog_getCentrePanel_4 ;
+    yawl:hasMethod yawl:NewVersionDialog_getButtonBar_5 ;
+    yawl:hasMethod yawl:NewVersionDialog_createButton_6 ;
+    yawl:hasField yawl:NewVersionDialog_btnClose ;
+    yawl:hasField yawl:NewVersionDialog_YAWL_URL ;
+    .
+
+
+# Method: NewVersionDialog.actionPerformed
+yawl:NewVersionDialog_actionPerformed_1 a yawl:Method ;
+    rdfs:label "actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void actionPerformed(ActionEvent e)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NewVersionDialog.getContent
+yawl:NewVersionDialog_getContent_2 a yawl:Method ;
+    rdfs:label "getContent" ;
+    yawl:returnType "JPanel" ;
+    yawl:signature "JPanel getContent(Differ differ)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: NewVersionDialog.getIconPanel
+yawl:NewVersionDialog_getIconPanel_3 a yawl:Method ;
+    rdfs:label "getIconPanel" ;
+    yawl:returnType "JPanel" ;
+    yawl:signature "JPanel getIconPanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: NewVersionDialog.getCentrePanel
+yawl:NewVersionDialog_getCentrePanel_4 a yawl:Method ;
+    rdfs:label "getCentrePanel" ;
+    yawl:returnType "JPanel" ;
+    yawl:signature "JPanel getCentrePanel(Differ differ)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: NewVersionDialog.getButtonBar
+yawl:NewVersionDialog_getButtonBar_5 a yawl:Method ;
+    rdfs:label "getButtonBar" ;
+    yawl:returnType "JPanel" ;
+    yawl:signature "JPanel getButtonBar(ActionListener listener)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: NewVersionDialog.createButton
+yawl:NewVersionDialog_createButton_6 a yawl:Method ;
+    rdfs:label "createButton" ;
+    yawl:returnType "JButton" ;
+    yawl:signature "JButton createButton(String caption, ActionListener listener)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:NewVersionDialog_btnClose a yawl:Field ;
+    rdfs:label "btnClose" .
+
+yawl:NewVersionDialog_YAWL_URL a yawl:Field ;
+    rdfs:label "YAWL_URL" .
+
+
+

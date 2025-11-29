@@ -1,0 +1,169 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.stateless.listener.predicate.YLogPredicate
+yawl:YLogPredicate a yawl:Class ;
+    rdfs:label "YLogPredicate" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_listener_predicate ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/listener/predicate/YLogPredicate.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 17/02/2010""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YLogPredicate_getStartPredicate_1 ;
+    yawl:hasMethod yawl:YLogPredicate_getCompletionPredicate_2 ;
+    yawl:hasMethod yawl:YLogPredicate_setStartPredicate_3 ;
+    yawl:hasMethod yawl:YLogPredicate_setCompletionPredicate_4 ;
+    yawl:hasMethod yawl:YLogPredicate_getParsedStartPredicate_5 ;
+    yawl:hasMethod yawl:YLogPredicate_getParsedStartPredicate_6 ;
+    yawl:hasMethod yawl:YLogPredicate_getParsedStartPredicate_7 ;
+    yawl:hasMethod yawl:YLogPredicate_getParsedCompletionPredicate_8 ;
+    yawl:hasMethod yawl:YLogPredicate_getParsedCompletionPredicate_9 ;
+    yawl:hasMethod yawl:YLogPredicate_getParsedCompletionPredicate_10 ;
+    yawl:hasMethod yawl:YLogPredicate_fromXML_11 ;
+    yawl:hasMethod yawl:YLogPredicate_fromXML_12 ;
+    yawl:hasMethod yawl:YLogPredicate_toXML_13 ;
+    yawl:hasMethod yawl:YLogPredicate_equals_14 ;
+    yawl:hasMethod yawl:YLogPredicate_hashCode_15 ;
+    yawl:hasField yawl:YLogPredicate__startPredicate ;
+    yawl:hasField yawl:YLogPredicate__completionPredicate ;
+    .
+
+
+# Method: YLogPredicate.getStartPredicate
+yawl:YLogPredicate_getStartPredicate_1 a yawl:Method ;
+    rdfs:label "getStartPredicate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStartPredicate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogPredicate.getCompletionPredicate
+yawl:YLogPredicate_getCompletionPredicate_2 a yawl:Method ;
+    rdfs:label "getCompletionPredicate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCompletionPredicate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogPredicate.setStartPredicate
+yawl:YLogPredicate_setStartPredicate_3 a yawl:Method ;
+    rdfs:label "setStartPredicate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStartPredicate(String predicate)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogPredicate.setCompletionPredicate
+yawl:YLogPredicate_setCompletionPredicate_4 a yawl:Method ;
+    rdfs:label "setCompletionPredicate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCompletionPredicate(String predicate)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogPredicate.getParsedStartPredicate
+yawl:YLogPredicate_getParsedStartPredicate_5 a yawl:Method ;
+    rdfs:label "getParsedStartPredicate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParsedStartPredicate(YWorkItem workItem)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogPredicate.getParsedStartPredicate
+yawl:YLogPredicate_getParsedStartPredicate_6 a yawl:Method ;
+    rdfs:label "getParsedStartPredicate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParsedStartPredicate(YDecomposition decomp)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogPredicate.getParsedStartPredicate
+yawl:YLogPredicate_getParsedStartPredicate_7 a yawl:Method ;
+    rdfs:label "getParsedStartPredicate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParsedStartPredicate(YParameter param)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogPredicate.getParsedCompletionPredicate
+yawl:YLogPredicate_getParsedCompletionPredicate_8 a yawl:Method ;
+    rdfs:label "getParsedCompletionPredicate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParsedCompletionPredicate(YWorkItem workItem)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogPredicate.getParsedCompletionPredicate
+yawl:YLogPredicate_getParsedCompletionPredicate_9 a yawl:Method ;
+    rdfs:label "getParsedCompletionPredicate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParsedCompletionPredicate(YDecomposition decomp)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogPredicate.getParsedCompletionPredicate
+yawl:YLogPredicate_getParsedCompletionPredicate_10 a yawl:Method ;
+    rdfs:label "getParsedCompletionPredicate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParsedCompletionPredicate(YParameter param)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogPredicate.fromXML
+yawl:YLogPredicate_fromXML_11 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(Element xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogPredicate.fromXML
+yawl:YLogPredicate_fromXML_12 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(Element xml, Namespace ns)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogPredicate.toXML
+yawl:YLogPredicate_toXML_13 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogPredicate.equals
+yawl:YLogPredicate_equals_14 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogPredicate.hashCode
+yawl:YLogPredicate_hashCode_15 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YLogPredicate__startPredicate a yawl:Field ;
+    rdfs:label "_startPredicate" .
+
+yawl:YLogPredicate__completionPredicate a yawl:Field ;
+    rdfs:label "_completionPredicate" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_stateless_listener_event a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.stateless.listener.event" .
+
+

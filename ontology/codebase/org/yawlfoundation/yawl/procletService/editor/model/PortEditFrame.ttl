@@ -1,0 +1,140 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.model.PortEditFrame
+yawl:PortEditFrame a yawl:Class ;
+    rdfs:label "PortEditFrame" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor_model ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/model/PortEditFrame.java"^^xsd:string ;
+    yawl:extends yawl:JDialog ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:PortEditFrame_initComponents_1 ;
+    yawl:hasMethod yawl:PortEditFrame_finishButtonActionPerformed_2 ;
+    yawl:hasMethod yawl:PortEditFrame_invokePortEditFrame_3 ;
+    yawl:hasMethod yawl:PortEditFrame_invokePortEditFrameWithSettings_4 ;
+    yawl:hasField yawl:PortEditFrame_instance ;
+    yawl:hasField yawl:PortEditFrame_blockComboBox ;
+    yawl:hasField yawl:PortEditFrame_cardinalityComboBox ;
+    yawl:hasField yawl:PortEditFrame_directionComboBox ;
+    yawl:hasField yawl:PortEditFrame_finishButton ;
+    yawl:hasField yawl:PortEditFrame_jLabel1 ;
+    yawl:hasField yawl:PortEditFrame_jLabel2 ;
+    yawl:hasField yawl:PortEditFrame_jLabel3 ;
+    yawl:hasField yawl:PortEditFrame_jLabel4 ;
+    yawl:hasField yawl:PortEditFrame_jLabel5 ;
+    yawl:hasField yawl:PortEditFrame_jPanel1 ;
+    yawl:hasField yawl:PortEditFrame_multiplicityComboBox ;
+    yawl:hasField yawl:PortEditFrame_portIDtextField ;
+    yawl:hasField yawl:PortEditFrame_portIDpv ;
+    yawl:hasField yawl:PortEditFrame_blockpv ;
+    yawl:hasField yawl:PortEditFrame_dirpv ;
+    yawl:hasField yawl:PortEditFrame_multpv ;
+    yawl:hasField yawl:PortEditFrame_cardpv ;
+    yawl:hasField yawl:PortEditFrame_frmModel ;
+    .
+
+
+# Method: PortEditFrame.initComponents
+yawl:PortEditFrame_initComponents_1 a yawl:Method ;
+    rdfs:label "initComponents" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initComponents()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PortEditFrame.finishButtonActionPerformed
+yawl:PortEditFrame_finishButtonActionPerformed_2 a yawl:Method ;
+    rdfs:label "finishButtonActionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void finishButtonActionPerformed(java evt)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PortEditFrame.invokePortEditFrame
+yawl:PortEditFrame_invokePortEditFrame_3 a yawl:Method ;
+    rdfs:label "invokePortEditFrame" ;
+    yawl:returnType "void" ;
+    yawl:signature "void invokePortEditFrame(FrmModel frmModel)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PortEditFrame.invokePortEditFrameWithSettings
+yawl:PortEditFrame_invokePortEditFrameWithSettings_4 a yawl:Method ;
+    rdfs:label "invokePortEditFrameWithSettings" ;
+    yawl:returnType "void" ;
+    yawl:signature "void invokePortEditFrameWithSettings(String portID, ProcletBlock block, Direction dir, Signature card, Signature mult, FrmModel frmModel)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:PortEditFrame_instance a yawl:Field ;
+    rdfs:label "instance" .
+
+yawl:PortEditFrame_blockComboBox a yawl:Field ;
+    rdfs:label "blockComboBox" .
+
+yawl:PortEditFrame_cardinalityComboBox a yawl:Field ;
+    rdfs:label "cardinalityComboBox" .
+
+yawl:PortEditFrame_directionComboBox a yawl:Field ;
+    rdfs:label "directionComboBox" .
+
+yawl:PortEditFrame_finishButton a yawl:Field ;
+    rdfs:label "finishButton" .
+
+yawl:PortEditFrame_jLabel1 a yawl:Field ;
+    rdfs:label "jLabel1" .
+
+yawl:PortEditFrame_jLabel2 a yawl:Field ;
+    rdfs:label "jLabel2" .
+
+yawl:PortEditFrame_jLabel3 a yawl:Field ;
+    rdfs:label "jLabel3" .
+
+yawl:PortEditFrame_jLabel4 a yawl:Field ;
+    rdfs:label "jLabel4" .
+
+yawl:PortEditFrame_jLabel5 a yawl:Field ;
+    rdfs:label "jLabel5" .
+
+yawl:PortEditFrame_jPanel1 a yawl:Field ;
+    rdfs:label "jPanel1" .
+
+yawl:PortEditFrame_multiplicityComboBox a yawl:Field ;
+    rdfs:label "multiplicityComboBox" .
+
+yawl:PortEditFrame_portIDtextField a yawl:Field ;
+    rdfs:label "portIDtextField" .
+
+yawl:PortEditFrame_portIDpv a yawl:Field ;
+    rdfs:label "portIDpv" .
+
+yawl:PortEditFrame_blockpv a yawl:Field ;
+    rdfs:label "blockpv" .
+
+yawl:PortEditFrame_dirpv a yawl:Field ;
+    rdfs:label "dirpv" .
+
+yawl:PortEditFrame_multpv a yawl:Field ;
+    rdfs:label "multpv" .
+
+yawl:PortEditFrame_cardpv a yawl:Field ;
+    rdfs:label "cardpv" .
+
+yawl:PortEditFrame_frmModel a yawl:Field ;
+    rdfs:label "frmModel" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_procletService_editor_blockchoiceexception a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.procletService.editor.blockchoiceexception" .
+
+

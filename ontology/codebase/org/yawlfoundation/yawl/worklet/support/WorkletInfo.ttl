@@ -1,0 +1,111 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.support.WorkletInfo
+yawl:WorkletInfo a yawl:Class ;
+    rdfs:label "WorkletInfo" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_support ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/support/WorkletInfo.java"^^xsd:string ;
+    rdfs:comment """An API transport for basic worklet specification descriptors @author Michael Adams @date 2/12/2015""" ;
+    yawl:implements yawl:Comparable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:WorkletInfo_getSpecID_1 ;
+    yawl:hasMethod yawl:WorkletInfo_getDescription_2 ;
+    yawl:hasMethod yawl:WorkletInfo_toXNode_3 ;
+    yawl:hasMethod yawl:WorkletInfo_toXML_4 ;
+    yawl:hasMethod yawl:WorkletInfo_fromXNode_5 ;
+    yawl:hasMethod yawl:WorkletInfo_fromXML_6 ;
+    yawl:hasMethod yawl:WorkletInfo_compareTo_7 ;
+    yawl:hasMethod yawl:WorkletInfo_toString_8 ;
+    yawl:hasMethod yawl:WorkletInfo_extractDescription_9 ;
+    yawl:hasField yawl:WorkletInfo__specID ;
+    yawl:hasField yawl:WorkletInfo__description ;
+    .
+
+
+# Method: WorkletInfo.getSpecID
+yawl:WorkletInfo_getSpecID_1 a yawl:Method ;
+    rdfs:label "getSpecID" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getSpecID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletInfo.getDescription
+yawl:WorkletInfo_getDescription_2 a yawl:Method ;
+    rdfs:label "getDescription" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDescription()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletInfo.toXNode
+yawl:WorkletInfo_toXNode_3 a yawl:Method ;
+    rdfs:label "toXNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode toXNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletInfo.toXML
+yawl:WorkletInfo_toXML_4 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletInfo.fromXNode
+yawl:WorkletInfo_fromXNode_5 a yawl:Method ;
+    rdfs:label "fromXNode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXNode(XNode node)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletInfo.fromXML
+yawl:WorkletInfo_fromXML_6 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletInfo.compareTo
+yawl:WorkletInfo_compareTo_7 a yawl:Method ;
+    rdfs:label "compareTo" ;
+    yawl:returnType "int" ;
+    yawl:signature "int compareTo(WorkletInfo other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletInfo.toString
+yawl:WorkletInfo_toString_8 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletInfo.extractDescription
+yawl:WorkletInfo_extractDescription_9 a yawl:Method ;
+    rdfs:label "extractDescription" ;
+    yawl:returnType "String" ;
+    yawl:signature "String extractDescription(String xml)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:WorkletInfo__specID a yawl:Field ;
+    rdfs:label "_specID" .
+
+yawl:WorkletInfo__description a yawl:Field ;
+    rdfs:label "_description" .
+
+
+

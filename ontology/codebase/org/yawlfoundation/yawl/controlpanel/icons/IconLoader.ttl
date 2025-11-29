@@ -1,0 +1,57 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.controlpanel.icons
+yawl:org_yawlfoundation_yawl_controlpanel_icons a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.controlpanel.icons" .
+# Class: org.yawlfoundation.yawl.controlpanel.icons.IconLoader
+yawl:IconLoader a yawl:Class ;
+    rdfs:label "IconLoader" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_icons ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/icons/IconLoader.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 20/08/2014""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:IconLoader_get_1 ;
+    yawl:hasMethod yawl:IconLoader_load_2 ;
+    yawl:hasField yawl:IconLoader_DEF_EXTN ;
+    yawl:hasField yawl:IconLoader_CACHE ;
+    .
+
+
+# Method: IconLoader.get
+yawl:IconLoader_get_1 a yawl:Method ;
+    rdfs:label "get" ;
+    yawl:returnType "ImageIcon" ;
+    yawl:signature "ImageIcon get(String name)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: IconLoader.load
+yawl:IconLoader_load_2 a yawl:Method ;
+    rdfs:label "load" ;
+    yawl:returnType "ImageIcon" ;
+    yawl:signature "ImageIcon load(String name)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:IconLoader_DEF_EXTN a yawl:Field ;
+    rdfs:label "DEF_EXTN" .
+
+yawl:IconLoader_CACHE a yawl:Field ;
+    rdfs:label "CACHE" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_controlpanel_pubsub a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.controlpanel.pubsub" .
+
+

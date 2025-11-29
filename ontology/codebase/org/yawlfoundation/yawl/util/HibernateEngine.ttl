@@ -1,0 +1,327 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.util.HibernateEngine
+yawl:HibernateEngine a yawl:Class ;
+    rdfs:label "HibernateEngine" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/util/HibernateEngine.java"^^xsd:string ;
+    rdfs:comment """This singleton class provides db & persistence support via Hibernate. @author Michael Adams @date 03/08/2007 last update: 18/09/2014 (for v3.0+)""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:HibernateEngine_initialise_1 ;
+    yawl:hasMethod yawl:HibernateEngine_isAvailable_2 ;
+    yawl:hasMethod yawl:HibernateEngine_setPersisting_3 ;
+    yawl:hasMethod yawl:HibernateEngine_isPersisting_4 ;
+    yawl:hasMethod yawl:HibernateEngine_exec_5 ;
+    yawl:hasMethod yawl:HibernateEngine_exec_6 ;
+    yawl:hasMethod yawl:HibernateEngine_exec_7 ;
+    yawl:hasMethod yawl:HibernateEngine_updateOrMerge_8 ;
+    yawl:hasMethod yawl:HibernateEngine_getOrBeginTransaction_9 ;
+    yawl:hasMethod yawl:HibernateEngine_execQuery_10 ;
+    yawl:hasMethod yawl:HibernateEngine_execSQLQuery_11 ;
+    yawl:hasMethod yawl:HibernateEngine_execUpdate_12 ;
+    yawl:hasMethod yawl:HibernateEngine_execUpdate_13 ;
+    yawl:hasMethod yawl:HibernateEngine_createQuery_14 ;
+    yawl:hasMethod yawl:HibernateEngine_beginTransaction_15 ;
+    yawl:hasMethod yawl:HibernateEngine_load_16 ;
+    yawl:hasMethod yawl:HibernateEngine_load_17 ;
+    yawl:hasMethod yawl:HibernateEngine_get_18 ;
+    yawl:hasMethod yawl:HibernateEngine_get_19 ;
+    yawl:hasMethod yawl:HibernateEngine_getByCriteria_20 ;
+    yawl:hasMethod yawl:HibernateEngine_getByCriteria_21 ;
+    yawl:hasMethod yawl:HibernateEngine_commit_22 ;
+    yawl:hasMethod yawl:HibernateEngine_rollback_23 ;
+    yawl:hasMethod yawl:HibernateEngine_closeFactory_24 ;
+    yawl:hasMethod yawl:HibernateEngine_execJoinQuery_25 ;
+    yawl:hasMethod yawl:HibernateEngine_selectScalar_26 ;
+    yawl:hasMethod yawl:HibernateEngine_getObjectsForClass_27 ;
+    yawl:hasMethod yawl:HibernateEngine_getObjectsForClassWhere_28 ;
+    yawl:hasMethod yawl:HibernateEngine_actionToString_29 ;
+    yawl:hasMethod yawl:HibernateEngine_getSession_30 ;
+    yawl:hasField yawl:HibernateEngine_DB_UPDATE ;
+    yawl:hasField yawl:HibernateEngine_DB_DELETE ;
+    yawl:hasField yawl:HibernateEngine_DB_INSERT ;
+    yawl:hasField yawl:HibernateEngine__factory ;
+    yawl:hasField yawl:HibernateEngine__persistOn ;
+    yawl:hasField yawl:HibernateEngine__log ;
+    .
+
+
+# Method: HibernateEngine.initialise
+yawl:HibernateEngine_initialise_1 a yawl:Method ;
+    rdfs:label "initialise" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initialise(Set classes, Properties props)" ;
+    rdfs:comment """initialises hibernate and the required tables""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: HibernateEngine.isAvailable
+yawl:HibernateEngine_isAvailable_2 a yawl:Method ;
+    rdfs:label "isAvailable" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAvailable(String tableName)" ;
+    rdfs:comment """@return true if a table of 'tableName' currently exists and has at least one row""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateEngine.setPersisting
+yawl:HibernateEngine_setPersisting_3 a yawl:Method ;
+    rdfs:label "setPersisting" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPersisting(boolean persist)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateEngine.isPersisting
+yawl:HibernateEngine_isPersisting_4 a yawl:Method ;
+    rdfs:label "isPersisting" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isPersisting()" ;
+    rdfs:comment """@return true if this instance is persisting""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateEngine.exec
+yawl:HibernateEngine_exec_5 a yawl:Method ;
+    rdfs:label "exec" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean exec(Object obj, int action)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateEngine.exec
+yawl:HibernateEngine_exec_6 a yawl:Method ;
+    rdfs:label "exec" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean exec(Object obj, int action, boolean commit)" ;
+    rdfs:comment """persists the object instance passed @param obj - an instance of the object to persist @param action - type type of action performed @return true if persist was successful, false if otherwise""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateEngine.exec
+yawl:HibernateEngine_exec_7 a yawl:Method ;
+    rdfs:label "exec" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean exec(Object obj, int action, Transaction tx)" ;
+    rdfs:comment """persists the object instance passed @param obj - an instance of the object to persist @param action - type type of action performed @param tx - an active Transaction object. NOTE: Any objects persisted via this method will not be permanently actioned until the transaction is committed via a call to 'commit()'. @return true if persist was successful, false if otherwise""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateEngine.updateOrMerge
+yawl:HibernateEngine_updateOrMerge_8 a yawl:Method ;
+    rdfs:label "updateOrMerge" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateOrMerge(Session session, Object obj)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: HibernateEngine.getOrBeginTransaction
+yawl:HibernateEngine_getOrBeginTransaction_9 a yawl:Method ;
+    rdfs:label "getOrBeginTransaction" ;
+    yawl:returnType "Transaction" ;
+    yawl:signature "Transaction getOrBeginTransaction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateEngine.execQuery
+yawl:HibernateEngine_execQuery_10 a yawl:Method ;
+    rdfs:label "execQuery" ;
+    yawl:returnType "List" ;
+    yawl:signature "List execQuery(String queryString)" ;
+    rdfs:comment """executes a Query object based on the hql string passed @param queryString - the hibernate query to execute @return the List of objects returned, or null if the query has some problem""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateEngine.execSQLQuery
+yawl:HibernateEngine_execSQLQuery_11 a yawl:Method ;
+    rdfs:label "execSQLQuery" ;
+    yawl:returnType "List" ;
+    yawl:signature "List execSQLQuery(String queryString)" ;
+    rdfs:comment """executes a plain SQL Query @param queryString - the SQL query to execute @return the List of objects returned, or null if the query has some problem""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateEngine.execUpdate
+yawl:HibernateEngine_execUpdate_12 a yawl:Method ;
+    rdfs:label "execUpdate" ;
+    yawl:returnType "int" ;
+    yawl:signature "int execUpdate(String queryString)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateEngine.execUpdate
+yawl:HibernateEngine_execUpdate_13 a yawl:Method ;
+    rdfs:label "execUpdate" ;
+    yawl:returnType "int" ;
+    yawl:signature "int execUpdate(String queryString, boolean commit)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateEngine.createQuery
+yawl:HibernateEngine_createQuery_14 a yawl:Method ;
+    rdfs:label "createQuery" ;
+    yawl:returnType "Query" ;
+    yawl:signature "Query createQuery(String queryString)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateEngine.beginTransaction
+yawl:HibernateEngine_beginTransaction_15 a yawl:Method ;
+    rdfs:label "beginTransaction" ;
+    yawl:returnType "Transaction" ;
+    yawl:signature "Transaction beginTransaction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateEngine.load
+yawl:HibernateEngine_load_16 a yawl:Method ;
+    rdfs:label "load" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object load(Class claz, Serializable key)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateEngine.load
+yawl:HibernateEngine_load_17 a yawl:Method ;
+    rdfs:label "load" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object load(Class claz, Serializable key, boolean doCommit)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateEngine.get
+yawl:HibernateEngine_get_18 a yawl:Method ;
+    rdfs:label "get" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object get(Class claz, Serializable key)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateEngine.get
+yawl:HibernateEngine_get_19 a yawl:Method ;
+    rdfs:label "get" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object get(Class claz, Serializable key, boolean doCommit)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateEngine.getByCriteria
+yawl:HibernateEngine_getByCriteria_20 a yawl:Method ;
+    rdfs:label "getByCriteria" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getByCriteria(Class claz, Criterion criteria)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateEngine.getByCriteria
+yawl:HibernateEngine_getByCriteria_21 a yawl:Method ;
+    rdfs:label "getByCriteria" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getByCriteria(Class claz, boolean commit, Criterion criteria)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateEngine.commit
+yawl:HibernateEngine_commit_22 a yawl:Method ;
+    rdfs:label "commit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void commit()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateEngine.rollback
+yawl:HibernateEngine_rollback_23 a yawl:Method ;
+    rdfs:label "rollback" ;
+    yawl:returnType "void" ;
+    yawl:signature "void rollback()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateEngine.closeFactory
+yawl:HibernateEngine_closeFactory_24 a yawl:Method ;
+    rdfs:label "closeFactory" ;
+    yawl:returnType "void" ;
+    yawl:signature "void closeFactory()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateEngine.execJoinQuery
+yawl:HibernateEngine_execJoinQuery_25 a yawl:Method ;
+    rdfs:label "execJoinQuery" ;
+    yawl:returnType "List" ;
+    yawl:signature "List execJoinQuery(String table, String field, String value)" ;
+    rdfs:comment """executes a join query. For example, passing (\"car\", \"part\", \"pid\") will return a list of 'car' objects that have in their 'part' property (a Set) a part with a key id=\"pid\" @param table the parent table - returned objects are of this class @param field the property name of the [Set] column in the parent table @param value the id of the child object in the set to match @return a List of objects of class 'table' that have, in their [Set] property called 'field', an object with an key field""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateEngine.selectScalar
+yawl:HibernateEngine_selectScalar_26 a yawl:Method ;
+    rdfs:label "selectScalar" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object selectScalar(String className, String field, String value)" ;
+    rdfs:comment """gets a scalar value (as an object) based on the sql string passed @param className - the type of object to select @param field - the column name which contains the queried value @param value - the value to find in the 'field' column @return the first (or only) object matching 'where [field] = [value]'""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateEngine.getObjectsForClass
+yawl:HibernateEngine_getObjectsForClass_27 a yawl:Method ;
+    rdfs:label "getObjectsForClass" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getObjectsForClass(String className)" ;
+    rdfs:comment """returns all the instances currently persisted for the class passed @param className - the name of the class to retrieve instances of @return a List of the instances retrieved""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateEngine.getObjectsForClassWhere
+yawl:HibernateEngine_getObjectsForClassWhere_28 a yawl:Method ;
+    rdfs:label "getObjectsForClassWhere" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getObjectsForClassWhere(String className, String whereClause)" ;
+    rdfs:comment """returns all the instances currently persisted for the class passed that match the condition specified in the where clause @param className the name of the class to retrieve instances of @param whereClause the condition (without the 'where' part) e.g. \"age=21\" @return a List of the instances retrieved""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateEngine.actionToString
+yawl:HibernateEngine_actionToString_29 a yawl:Method ;
+    rdfs:label "actionToString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String actionToString(int action)" ;
+    rdfs:comment """returns a String representation of the action passed @param action @return the string equivalent""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: HibernateEngine.getSession
+yawl:HibernateEngine_getSession_30 a yawl:Method ;
+    rdfs:label "getSession" ;
+    yawl:returnType "Session" ;
+    yawl:signature "Session getSession()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:HibernateEngine_DB_UPDATE a yawl:Field ;
+    rdfs:label "DB_UPDATE" .
+
+yawl:HibernateEngine_DB_DELETE a yawl:Field ;
+    rdfs:label "DB_DELETE" .
+
+yawl:HibernateEngine_DB_INSERT a yawl:Field ;
+    rdfs:label "DB_INSERT" .
+
+yawl:HibernateEngine__factory a yawl:Field ;
+    rdfs:label "_factory" .
+
+yawl:HibernateEngine__persistOn a yawl:Field ;
+    rdfs:label "_persistOn" .
+
+yawl:HibernateEngine__log a yawl:Field ;
+    rdfs:label "_log" .
+
+
+

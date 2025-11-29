@@ -1,0 +1,35 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.monitor
+yawl:org_yawlfoundation_yawl_monitor a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.monitor" .
+# Class: org.yawlfoundation.yawl.monitor.MonitorServlet
+yawl:MonitorServlet a yawl:Class ;
+    rdfs:label "MonitorServlet" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_monitor ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/monitor/MonitorServlet.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 1/06/2010""" ;
+    yawl:extends yawl:HttpServlet ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:MonitorServlet_init_1 ;
+    .
+
+
+# Method: MonitorServlet.init
+yawl:MonitorServlet_init_1 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    rdfs:comment """Read settings from web.xml and use them to initialise the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

@@ -1,0 +1,139 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.procletService.interactionGraph
+yawl:org_yawlfoundation_yawl_procletService_interactionGraph a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.procletService.interactionGraph" .
+# Class: org.yawlfoundation.yawl.procletService.interactionGraph.InteractionArc
+yawl:InteractionArc a yawl:Class ;
+    rdfs:label "InteractionArc" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_interactionGraph ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/interactionGraph/InteractionArc.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:InteractionArc_getTail_1 ;
+    yawl:hasMethod yawl:InteractionArc_getHead_2 ;
+    yawl:hasMethod yawl:InteractionArc_getEntityID_3 ;
+    yawl:hasMethod yawl:InteractionArc_getArcState_4 ;
+    yawl:hasMethod yawl:InteractionArc_getArcStateShort_5 ;
+    yawl:hasMethod yawl:InteractionArc_setTail_6 ;
+    yawl:hasMethod yawl:InteractionArc_setHead_7 ;
+    yawl:hasMethod yawl:InteractionArc_setEntityID_8 ;
+    yawl:hasMethod yawl:InteractionArc_setArcState_9 ;
+    yawl:hasMethod yawl:InteractionArc_getArcStateFromString_10 ;
+    yawl:hasMethod yawl:InteractionArc_toString_11 ;
+    yawl:hasField yawl:InteractionArc_tail ;
+    yawl:hasField yawl:InteractionArc_head ;
+    yawl:hasField yawl:InteractionArc_eid ;
+    yawl:hasField yawl:InteractionArc_as ;
+    .
+
+
+# Method: InteractionArc.getTail
+yawl:InteractionArc_getTail_1 a yawl:Method ;
+    rdfs:label "getTail" ;
+    yawl:returnType "InteractionNode" ;
+    yawl:signature "InteractionNode getTail()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionArc.getHead
+yawl:InteractionArc_getHead_2 a yawl:Method ;
+    rdfs:label "getHead" ;
+    yawl:returnType "InteractionNode" ;
+    yawl:signature "InteractionNode getHead()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionArc.getEntityID
+yawl:InteractionArc_getEntityID_3 a yawl:Method ;
+    rdfs:label "getEntityID" ;
+    yawl:returnType "EntityID" ;
+    yawl:signature "EntityID getEntityID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionArc.getArcState
+yawl:InteractionArc_getArcState_4 a yawl:Method ;
+    rdfs:label "getArcState" ;
+    yawl:returnType "ArcState" ;
+    yawl:signature "ArcState getArcState()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionArc.getArcStateShort
+yawl:InteractionArc_getArcStateShort_5 a yawl:Method ;
+    rdfs:label "getArcStateShort" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getArcStateShort()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionArc.setTail
+yawl:InteractionArc_setTail_6 a yawl:Method ;
+    rdfs:label "setTail" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTail(InteractionNode tail)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionArc.setHead
+yawl:InteractionArc_setHead_7 a yawl:Method ;
+    rdfs:label "setHead" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHead(InteractionNode head)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionArc.setEntityID
+yawl:InteractionArc_setEntityID_8 a yawl:Method ;
+    rdfs:label "setEntityID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEntityID(EntityID eid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionArc.setArcState
+yawl:InteractionArc_setArcState_9 a yawl:Method ;
+    rdfs:label "setArcState" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setArcState(ArcState as)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionArc.getArcStateFromString
+yawl:InteractionArc_getArcStateFromString_10 a yawl:Method ;
+    rdfs:label "getArcStateFromString" ;
+    yawl:returnType "ArcState" ;
+    yawl:signature "ArcState getArcStateFromString(String as)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: InteractionArc.toString
+yawl:InteractionArc_toString_11 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:InteractionArc_tail a yawl:Field ;
+    rdfs:label "tail" .
+
+yawl:InteractionArc_head a yawl:Field ;
+    rdfs:label "head" .
+
+yawl:InteractionArc_eid a yawl:Field ;
+    rdfs:label "eid" .
+
+yawl:InteractionArc_as a yawl:Field ;
+    rdfs:label "as" .
+
+
+

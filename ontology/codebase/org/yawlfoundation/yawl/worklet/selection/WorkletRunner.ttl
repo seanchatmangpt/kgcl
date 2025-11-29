@@ -1,0 +1,115 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.selection.WorkletRunner
+yawl:WorkletRunner a yawl:Class ;
+    rdfs:label "WorkletRunner" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_selection ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/selection/WorkletRunner.java"^^xsd:string ;
+    rdfs:comment """Metadata for a currently running worklet instance @author Michael Adams @date 3/09/15""" ;
+    yawl:extends yawl:AbstractRunner ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:WorkletRunner_getWorkletSpecID_1 ;
+    yawl:hasMethod yawl:WorkletRunner_setParentCaseID_2 ;
+    yawl:hasMethod yawl:WorkletRunner_getParentCaseID_3 ;
+    yawl:hasMethod yawl:WorkletRunner_setParentSpecID_4 ;
+    yawl:hasMethod yawl:WorkletRunner_getParentSpecID_5 ;
+    yawl:hasMethod yawl:WorkletRunner_logLaunchEvent_6 ;
+    yawl:hasMethod yawl:WorkletRunner_logLaunchEvent_7 ;
+    yawl:hasMethod yawl:WorkletRunner_toXNode_8 ;
+    yawl:hasMethod yawl:WorkletRunner_fromXNode_9 ;
+    yawl:hasField yawl:WorkletRunner__parentCaseID ;
+    yawl:hasField yawl:WorkletRunner__specID ;
+    yawl:hasField yawl:WorkletRunner__parentSpecID ;
+    .
+
+
+# Method: WorkletRunner.getWorkletSpecID
+yawl:WorkletRunner_getWorkletSpecID_1 a yawl:Method ;
+    rdfs:label "getWorkletSpecID" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getWorkletSpecID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletRunner.setParentCaseID
+yawl:WorkletRunner_setParentCaseID_2 a yawl:Method ;
+    rdfs:label "setParentCaseID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setParentCaseID(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletRunner.getParentCaseID
+yawl:WorkletRunner_getParentCaseID_3 a yawl:Method ;
+    rdfs:label "getParentCaseID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParentCaseID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletRunner.setParentSpecID
+yawl:WorkletRunner_setParentSpecID_4 a yawl:Method ;
+    rdfs:label "setParentSpecID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setParentSpecID(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletRunner.getParentSpecID
+yawl:WorkletRunner_getParentSpecID_5 a yawl:Method ;
+    rdfs:label "getParentSpecID" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getParentSpecID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletRunner.logLaunchEvent
+yawl:WorkletRunner_logLaunchEvent_6 a yawl:Method ;
+    rdfs:label "logLaunchEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logLaunchEvent()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletRunner.logLaunchEvent
+yawl:WorkletRunner_logLaunchEvent_7 a yawl:Method ;
+    rdfs:label "logLaunchEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logLaunchEvent(YSpecificationID specID, String data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletRunner.toXNode
+yawl:WorkletRunner_toXNode_8 a yawl:Method ;
+    rdfs:label "toXNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode toXNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletRunner.fromXNode
+yawl:WorkletRunner_fromXNode_9 a yawl:Method ;
+    rdfs:label "fromXNode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXNode(XNode node)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:WorkletRunner__parentCaseID a yawl:Field ;
+    rdfs:label "_parentCaseID" .
+
+yawl:WorkletRunner__specID a yawl:Field ;
+    rdfs:label "_specID" .
+
+yawl:WorkletRunner__parentSpecID a yawl:Field ;
+    rdfs:label "_parentSpecID" .
+
+
+

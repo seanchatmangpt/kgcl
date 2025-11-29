@@ -1,0 +1,40 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.authentication.YExternalClient
+yawl:YExternalClient a yawl:Class ;
+    rdfs:label "YExternalClient" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_authentication ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/authentication/YExternalClient.java"^^xsd:string ;
+    rdfs:comment """Represents the authentication credentials of an external application that may connect to the Engine via the various interfaces (as opposed to a custom service). <p/> Note that the generic user \"admin\" is represented by an instance of this class. @author Michael Adams @since 2.1 @date 23/11/2009""" ;
+    yawl:extends yawl:YClient ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YExternalClient_get_userid_1 ;
+    yawl:hasMethod yawl:YExternalClient_get_documentation_2 ;
+    .
+
+
+# Method: YExternalClient.get_userid
+yawl:YExternalClient_get_userid_1 a yawl:Method ;
+    rdfs:label "get_userid" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_userid()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalClient.get_documentation
+yawl:YExternalClient_get_documentation_2 a yawl:Method ;
+    rdfs:label "get_documentation" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_documentation()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

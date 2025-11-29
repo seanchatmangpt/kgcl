@@ -1,0 +1,214 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.CaseExporter
+yawl:CaseExporter a yawl:Class ;
+    rdfs:label "CaseExporter" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/CaseExporter.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 28/9/18""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CaseExporter_exportAll_1 ;
+    yawl:hasMethod yawl:CaseExporter_export_2 ;
+    yawl:hasMethod yawl:CaseExporter_export_3 ;
+    yawl:hasMethod yawl:CaseExporter_export_4 ;
+    yawl:hasMethod yawl:CaseExporter_getCaseNode_5 ;
+    yawl:hasMethod yawl:CaseExporter_getNetRunners_6 ;
+    yawl:hasMethod yawl:CaseExporter_getNetData_7 ;
+    yawl:hasMethod yawl:CaseExporter_getTimerStates_8 ;
+    yawl:hasMethod yawl:CaseExporter_getEnabledTasks_9 ;
+    yawl:hasMethod yawl:CaseExporter_getBusyTasks_10 ;
+    yawl:hasMethod yawl:CaseExporter_getIdentifier_11 ;
+    yawl:hasMethod yawl:CaseExporter_getLocations_12 ;
+    yawl:hasMethod yawl:CaseExporter_getParent_13 ;
+    yawl:hasMethod yawl:CaseExporter_getWorkItems_14 ;
+    yawl:hasMethod yawl:CaseExporter_getWIData_15 ;
+    yawl:hasMethod yawl:CaseExporter_addMIDataIfRequired_16 ;
+    yawl:hasMethod yawl:CaseExporter_getWIParent_17 ;
+    yawl:hasMethod yawl:CaseExporter_getTime_18 ;
+    yawl:hasMethod yawl:CaseExporter_csvToIdentifierList_19 ;
+    yawl:hasMethod yawl:CaseExporter_getCasesInRange_20 ;
+    yawl:hasMethod yawl:CaseExporter_addCaseToList_21 ;
+    yawl:hasField yawl:CaseExporter__engine ;
+    .
+
+
+# Method: CaseExporter.exportAll
+yawl:CaseExporter_exportAll_1 a yawl:Method ;
+    rdfs:label "exportAll" ;
+    yawl:returnType "String" ;
+    yawl:signature "String exportAll()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseExporter.export
+yawl:CaseExporter_export_2 a yawl:Method ;
+    rdfs:label "export" ;
+    yawl:returnType "String" ;
+    yawl:signature "String export(YIdentifier caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseExporter.export
+yawl:CaseExporter_export_3 a yawl:Method ;
+    rdfs:label "export" ;
+    yawl:returnType "String" ;
+    yawl:signature "String export(String caseCSV)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CaseExporter.export
+yawl:CaseExporter_export_4 a yawl:Method ;
+    rdfs:label "export" ;
+    yawl:returnType "String" ;
+    yawl:signature "String export(List caseList)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseExporter.getCaseNode
+yawl:CaseExporter_getCaseNode_5 a yawl:Method ;
+    rdfs:label "getCaseNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getCaseNode(YIdentifier caseID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseExporter.getNetRunners
+yawl:CaseExporter_getNetRunners_6 a yawl:Method ;
+    rdfs:label "getNetRunners" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getNetRunners(YIdentifier caseID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseExporter.getNetData
+yawl:CaseExporter_getNetData_7 a yawl:Method ;
+    rdfs:label "getNetData" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getNetData(YNetRunner runner)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseExporter.getTimerStates
+yawl:CaseExporter_getTimerStates_8 a yawl:Method ;
+    rdfs:label "getTimerStates" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getTimerStates(Map timerStates)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseExporter.getEnabledTasks
+yawl:CaseExporter_getEnabledTasks_9 a yawl:Method ;
+    rdfs:label "getEnabledTasks" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getEnabledTasks(YNetRunner runner)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseExporter.getBusyTasks
+yawl:CaseExporter_getBusyTasks_10 a yawl:Method ;
+    rdfs:label "getBusyTasks" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getBusyTasks(YNetRunner runner)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseExporter.getIdentifier
+yawl:CaseExporter_getIdentifier_11 a yawl:Method ;
+    rdfs:label "getIdentifier" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getIdentifier(YIdentifier id)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseExporter.getLocations
+yawl:CaseExporter_getLocations_12 a yawl:Method ;
+    rdfs:label "getLocations" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getLocations(YIdentifier id)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseExporter.getParent
+yawl:CaseExporter_getParent_13 a yawl:Method ;
+    rdfs:label "getParent" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getParent(YIdentifier id)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseExporter.getWorkItems
+yawl:CaseExporter_getWorkItems_14 a yawl:Method ;
+    rdfs:label "getWorkItems" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getWorkItems(YIdentifier id)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseExporter.getWIData
+yawl:CaseExporter_getWIData_15 a yawl:Method ;
+    rdfs:label "getWIData" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getWIData(YWorkItem item)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseExporter.addMIDataIfRequired
+yawl:CaseExporter_addMIDataIfRequired_16 a yawl:Method ;
+    rdfs:label "addMIDataIfRequired" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addMIDataIfRequired(XNode taskNode, YIdentifier runnerID, String taskName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseExporter.getWIParent
+yawl:CaseExporter_getWIParent_17 a yawl:Method ;
+    rdfs:label "getWIParent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWIParent(YWorkItem item)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseExporter.getTime
+yawl:CaseExporter_getTime_18 a yawl:Method ;
+    rdfs:label "getTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getTime(Date date)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseExporter.csvToIdentifierList
+yawl:CaseExporter_csvToIdentifierList_19 a yawl:Method ;
+    rdfs:label "csvToIdentifierList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List csvToIdentifierList(String csv)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseExporter.getCasesInRange
+yawl:CaseExporter_getCasesInRange_20 a yawl:Method ;
+    rdfs:label "getCasesInRange" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getCasesInRange(String caseStr)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CaseExporter.addCaseToList
+yawl:CaseExporter_addCaseToList_21 a yawl:Method ;
+    rdfs:label "addCaseToList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addCaseToList(List caseList, String caseStr)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:CaseExporter__engine a yawl:Field ;
+    rdfs:label "_engine" .
+
+
+

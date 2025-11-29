@@ -1,0 +1,348 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.interfce.interfaceA.InterfaceA_EnvironmentBasedClient
+yawl:InterfaceA_EnvironmentBasedClient a yawl:Class ;
+    rdfs:label "InterfaceA_EnvironmentBasedClient" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_interfce_interfaceA ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/interfce/interfaceA/InterfaceA_EnvironmentBasedClient.java"^^xsd:string ;
+    rdfs:comment """A client side API for the management of processes, services and users @author Lachlan Aldred Date: 16/04/2004 Time: 16:15:02 @author Michael Adams (refactored for v2.0, 06/2008, and v2.1 11/2009)""" ;
+    yawl:extends yawl:Interface_Client ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_getBackEndURI_1 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_connect_2 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_checkConnection_3 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_disconnect_4 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_addYAWLService_5 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_removeYAWLService_6 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_getYAWLService_7 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_getRegisteredYAWLServices_8 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_getRegisteredYAWLServicesAsXML_9 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_uploadSpecification_10 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_uploadSpecification_11 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_uploadSpecification_12 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_unloadSpecification_13 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_unloadSpecification_14 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_addClientAccount_15 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_addClientAccount_16 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_updateClientAccount_17 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_getClientAccounts_18 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_getClientAccount_19 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_removeClientAccount_20 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_changePassword_21 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_getPassword_22 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_reannounceEnabledWorkItems_23 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_reannounceExecutingWorkItems_24 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_reannounceFiredWorkItems_25 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_reannounceWorkItem_26 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_getBuildProperties_27 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_getExternalDBGateways_28 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_setHibernateStatisticsEnabled_29 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_isHibernateStatisticsEnabled_30 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_getHibernateStatistics_31 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_promote_32 ;
+    yawl:hasMethod yawl:InterfaceA_EnvironmentBasedClient_demote_33 ;
+    yawl:hasField yawl:InterfaceA_EnvironmentBasedClient__backEndURIStr ;
+    .
+
+
+# Method: InterfaceA_EnvironmentBasedClient.getBackEndURI
+yawl:InterfaceA_EnvironmentBasedClient_getBackEndURI_1 a yawl:Method ;
+    rdfs:label "getBackEndURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBackEndURI()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.connect
+yawl:InterfaceA_EnvironmentBasedClient_connect_2 a yawl:Method ;
+    rdfs:label "connect" ;
+    yawl:returnType "String" ;
+    yawl:signature "String connect(String userID, String password)" ;
+    rdfs:comment """Creates a user session with the engine. Returns a sessionhandle for use in all other engine access methods. @param userID a valid user ID @param password a valid password @return the sessionHandle - expires after one hour. @throws IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.checkConnection
+yawl:InterfaceA_EnvironmentBasedClient_checkConnection_3 a yawl:Method ;
+    rdfs:label "checkConnection" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkConnection(String sessionHandle)" ;
+    rdfs:comment """Checks that a session handle is active @param sessionHandle the handle to check @return true if the handle is active, false if not @throws IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.disconnect
+yawl:InterfaceA_EnvironmentBasedClient_disconnect_4 a yawl:Method ;
+    rdfs:label "disconnect" ;
+    yawl:returnType "String" ;
+    yawl:signature "String disconnect(String handle)" ;
+    rdfs:comment """Disconnects an external entity from the engine @param handle the sessionHandle to disconnect @throws IOException if the engine can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.addYAWLService
+yawl:InterfaceA_EnvironmentBasedClient_addYAWLService_5 a yawl:Method ;
+    rdfs:label "addYAWLService" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addYAWLService(YAWLServiceReference service, String sessionHandle)" ;
+    rdfs:comment """Registers a new custom YAWL service woth the engine. @param service the service. @param sessionHandle a valid sessionhandle @return a diagnostic XML message. @throws IOException if something goes awry.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.removeYAWLService
+yawl:InterfaceA_EnvironmentBasedClient_removeYAWLService_6 a yawl:Method ;
+    rdfs:label "removeYAWLService" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeYAWLService(String serviceURI, String sessionHandle)" ;
+    rdfs:comment """Removes a YAWL service from the engine. @param serviceURI the service URI. @param sessionHandle a valid sessionhandle. @return a diagnostic XML result message. @throws IOException if bad connection.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.getYAWLService
+yawl:InterfaceA_EnvironmentBasedClient_getYAWLService_7 a yawl:Method ;
+    rdfs:label "getYAWLService" ;
+    yawl:returnType "YAWLServiceReference" ;
+    yawl:signature "YAWLServiceReference getYAWLService(String serviceURI, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.getRegisteredYAWLServices
+yawl:InterfaceA_EnvironmentBasedClient_getRegisteredYAWLServices_8 a yawl:Method ;
+    rdfs:label "getRegisteredYAWLServices" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getRegisteredYAWLServices(String sessionHandle)" ;
+    rdfs:comment """Returns a list of YAWL service objects registered with the engine. @param sessionHandle a valid session handle @return the set of active yawl services""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.getRegisteredYAWLServicesAsXML
+yawl:InterfaceA_EnvironmentBasedClient_getRegisteredYAWLServicesAsXML_9 a yawl:Method ;
+    rdfs:label "getRegisteredYAWLServicesAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRegisteredYAWLServicesAsXML(String sessionHandle)" ;
+    rdfs:comment """Returns an XML string list of YAWL services registered with the engine. @param sessionHandle an active handle @return XML string list of services or a diagnostic error message @throws IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.uploadSpecification
+yawl:InterfaceA_EnvironmentBasedClient_uploadSpecification_10 a yawl:Method ;
+    rdfs:label "uploadSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String uploadSpecification(String specification, String sessionHandle)" ;
+    rdfs:comment """Uploads a specification into the engine. @param specification this is not a file name, this is the entire specification xml file in string format. @param sessionHandle a sessionhandle. @return a diagnostic XML result message. @throws IOException if bad connection.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.uploadSpecification
+yawl:InterfaceA_EnvironmentBasedClient_uploadSpecification_11 a yawl:Method ;
+    rdfs:label "uploadSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String uploadSpecification(String specification, String filename, String sessionHandle)" ;
+    rdfs:comment """Uploads a specification into the engine. @deprecated use uploadSpecification(String, String) instead (since 2.0) @param specification this is not a file name, this is the entire specification xml file in string format. @param filename the file name of the specification xml file (no longer used since 2.0) @param sessionHandle a sessionhandle. @return a diagnostic XML result message. @throws IOException if bad connection.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.uploadSpecification
+yawl:InterfaceA_EnvironmentBasedClient_uploadSpecification_12 a yawl:Method ;
+    rdfs:label "uploadSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String uploadSpecification(File file, String sessionHandle)" ;
+    rdfs:comment """Uploads a specification into the engine. @param file the file name of the specification xml file @param sessionHandle a sessionhandle. @return a diagnostic XML result message. @throws IOException if bad connection.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.unloadSpecification
+yawl:InterfaceA_EnvironmentBasedClient_unloadSpecification_13 a yawl:Method ;
+    rdfs:label "unloadSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String unloadSpecification(String specID, String sessionHandle)" ;
+    rdfs:comment """Unloads a loaded specification from the engine @deprecated superceded by unloadSpecification(YSpecificationID, String) - this version is appropriate for pre-2.0 schema-based specs only @param specID the id of the specification to unload @param sessionHandle a sessionhandle. @return a diagnostic XML result message. @throws IOException if bad connection.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.unloadSpecification
+yawl:InterfaceA_EnvironmentBasedClient_unloadSpecification_14 a yawl:Method ;
+    rdfs:label "unloadSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String unloadSpecification(YSpecificationID specID, String sessionHandle)" ;
+    rdfs:comment """Unloads a loaded specification from the engine @param specID the id of the specification to unload @param sessionHandle a sessionhandle. @return a diagnostic XML result message. @throws IOException if bad connection.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.addClientAccount
+yawl:InterfaceA_EnvironmentBasedClient_addClientAccount_15 a yawl:Method ;
+    rdfs:label "addClientAccount" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addClientAccount(String name, String password, String documentation, String sessionHandle)" ;
+    rdfs:comment """Creates a new user inside the engine. @param name the new username @param password the new password @param documentation some descriptive text about the account @param sessionHandle a current valid sessionhandle @return a diagnostic XML result message. @throws IOException if bad connection.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.addClientAccount
+yawl:InterfaceA_EnvironmentBasedClient_addClientAccount_16 a yawl:Method ;
+    rdfs:label "addClientAccount" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addClientAccount(YExternalClient client, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.updateClientAccount
+yawl:InterfaceA_EnvironmentBasedClient_updateClientAccount_17 a yawl:Method ;
+    rdfs:label "updateClientAccount" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateClientAccount(String name, String password, String documentation, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.getClientAccounts
+yawl:InterfaceA_EnvironmentBasedClient_getClientAccounts_18 a yawl:Method ;
+    rdfs:label "getClientAccounts" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getClientAccounts(String sessionHandle)" ;
+    rdfs:comment """Gets all the client accounts registered in the engine @param sessionHandle a current valid sessionhandle of an admin type user. @return a diagnostic XML result message. @throws IOException if bad connection.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.getClientAccount
+yawl:InterfaceA_EnvironmentBasedClient_getClientAccount_19 a yawl:Method ;
+    rdfs:label "getClientAccount" ;
+    yawl:returnType "YExternalClient" ;
+    yawl:signature "YExternalClient getClientAccount(String userID, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.removeClientAccount
+yawl:InterfaceA_EnvironmentBasedClient_removeClientAccount_20 a yawl:Method ;
+    rdfs:label "removeClientAccount" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeClientAccount(String name, String sessionHandle)" ;
+    rdfs:comment """Delete an external client account PREcondition: cannot delete self @param name the user to delete @param sessionHandle an active handle @return diagnostic string of results from engine. @throws IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.changePassword
+yawl:InterfaceA_EnvironmentBasedClient_changePassword_21 a yawl:Method ;
+    rdfs:label "changePassword" ;
+    yawl:returnType "String" ;
+    yawl:signature "String changePassword(String password, String sessionHandle)" ;
+    rdfs:comment """Change the password of a service or client account on the engine, the account being the owner of the session handle. @param password the new password @param sessionHandle an active handle @return diagnostic string of results from engine. @throws IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.getPassword
+yawl:InterfaceA_EnvironmentBasedClient_getPassword_22 a yawl:Method ;
+    rdfs:label "getPassword" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPassword(String userid, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.reannounceEnabledWorkItems
+yawl:InterfaceA_EnvironmentBasedClient_reannounceEnabledWorkItems_23 a yawl:Method ;
+    rdfs:label "reannounceEnabledWorkItems" ;
+    yawl:returnType "String" ;
+    yawl:signature "String reannounceEnabledWorkItems(String sessionHandle)" ;
+    rdfs:comment """Causes the engine to re-announce all workitems which are in an \"enabled\" state.<P> @return The number of enabled workitems that were reannounced""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.reannounceExecutingWorkItems
+yawl:InterfaceA_EnvironmentBasedClient_reannounceExecutingWorkItems_24 a yawl:Method ;
+    rdfs:label "reannounceExecutingWorkItems" ;
+    yawl:returnType "String" ;
+    yawl:signature "String reannounceExecutingWorkItems(String sessionHandle)" ;
+    rdfs:comment """Causes the engine to re-announce all workitems which are in an \"executing\" state.<P> @return The number of executing workitems that were reannounced""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.reannounceFiredWorkItems
+yawl:InterfaceA_EnvironmentBasedClient_reannounceFiredWorkItems_25 a yawl:Method ;
+    rdfs:label "reannounceFiredWorkItems" ;
+    yawl:returnType "String" ;
+    yawl:signature "String reannounceFiredWorkItems(String sessionHandle)" ;
+    rdfs:comment """Causes the engine to re-announce all workitems which are in an \"fired\" state.<P> @return The number of fired workitems that were reannounced""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.reannounceWorkItem
+yawl:InterfaceA_EnvironmentBasedClient_reannounceWorkItem_26 a yawl:Method ;
+    rdfs:label "reannounceWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String reannounceWorkItem(String itemID, String sessionHandle)" ;
+    rdfs:comment """Causes the engine to re-announce a specific workitem in one of the following states: <li>Enabled <li>Executing <li>Fired""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.getBuildProperties
+yawl:InterfaceA_EnvironmentBasedClient_getBuildProperties_27 a yawl:Method ;
+    rdfs:label "getBuildProperties" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBuildProperties(String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.getExternalDBGateways
+yawl:InterfaceA_EnvironmentBasedClient_getExternalDBGateways_28 a yawl:Method ;
+    rdfs:label "getExternalDBGateways" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getExternalDBGateways(String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.setHibernateStatisticsEnabled
+yawl:InterfaceA_EnvironmentBasedClient_setHibernateStatisticsEnabled_29 a yawl:Method ;
+    rdfs:label "setHibernateStatisticsEnabled" ;
+    yawl:returnType "String" ;
+    yawl:signature "String setHibernateStatisticsEnabled(boolean enabled, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.isHibernateStatisticsEnabled
+yawl:InterfaceA_EnvironmentBasedClient_isHibernateStatisticsEnabled_30 a yawl:Method ;
+    rdfs:label "isHibernateStatisticsEnabled" ;
+    yawl:returnType "String" ;
+    yawl:signature "String isHibernateStatisticsEnabled(String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.getHibernateStatistics
+yawl:InterfaceA_EnvironmentBasedClient_getHibernateStatistics_31 a yawl:Method ;
+    rdfs:label "getHibernateStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getHibernateStatistics(String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.promote
+yawl:InterfaceA_EnvironmentBasedClient_promote_32 a yawl:Method ;
+    rdfs:label "promote" ;
+    yawl:returnType "String" ;
+    yawl:signature "String promote(String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceA_EnvironmentBasedClient.demote
+yawl:InterfaceA_EnvironmentBasedClient_demote_33 a yawl:Method ;
+    rdfs:label "demote" ;
+    yawl:returnType "String" ;
+    yawl:signature "String demote(String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:InterfaceA_EnvironmentBasedClient__backEndURIStr a yawl:Field ;
+    rdfs:label "_backEndURIStr" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_balancer_servlet a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.balancer.servlet" .
+
+

@@ -1,0 +1,150 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix index: <http://yawlfoundation.org/ontology/index#> .
+
+# Codebase Ontology Index Schema
+# Defines the structure for indexing the Java codebase ontology
+
+# Index Classes
+index:ClassIndex a owl:Class ;
+    rdfs:label "Class Index" ;
+    rdfs:comment "Index entry for a Java class" .
+
+index:PackageIndex a owl:Class ;
+    rdfs:label "Package Index" ;
+    rdfs:comment "Index entry for a Java package" .
+
+index:MethodIndex a owl:Class ;
+    rdfs:label "Method Index" ;
+    rdfs:comment "Index entry mapping method names to classes" .
+
+index:FieldIndex a owl:Class ;
+    rdfs:label "Field Index" ;
+    rdfs:comment "Index entry mapping field names to classes" .
+
+index:ReferenceIndex a owl:Class ;
+    rdfs:label "Reference Index" ;
+    rdfs:comment "Index entry for cross-references between classes" .
+
+index:SearchIndex a owl:Class ;
+    rdfs:label "Search Index" ;
+    rdfs:comment "Full-text search index entry" .
+
+# Index Properties - Class Index
+index:indexedClass a owl:ObjectProperty ;
+    rdfs:domain index:ClassIndex ;
+    rdfs:range yawl:Class ;
+    rdfs:label "indexed class" ;
+    rdfs:comment "The class being indexed" .
+
+index:filePath a owl:DatatypeProperty ;
+    rdfs:domain index:ClassIndex ;
+    rdfs:range xsd:string ;
+    rdfs:label "file path" ;
+    rdfs:comment "Path to the class file relative to codebase directory" .
+
+index:packageName a owl:DatatypeProperty ;
+    rdfs:domain index:ClassIndex ;
+    rdfs:range xsd:string ;
+    rdfs:label "package name" ;
+    rdfs:comment "Fully qualified package name" .
+
+index:className a owl:DatatypeProperty ;
+    rdfs:domain index:ClassIndex ;
+    rdfs:range xsd:string ;
+    rdfs:label "class name" ;
+    rdfs:comment "Simple class name (without package)" .
+
+index:fullyQualifiedName a owl:DatatypeProperty ;
+    rdfs:domain index:ClassIndex ;
+    rdfs:range xsd:string ;
+    rdfs:label "fully qualified name" ;
+    rdfs:comment "Fully qualified class name (package.ClassName)" .
+
+# Inheritance Properties
+index:extendsClass a owl:ObjectProperty ;
+    rdfs:domain index:ClassIndex ;
+    rdfs:range yawl:Class ;
+    rdfs:label "extends class" ;
+    rdfs:comment "Parent class that this class extends" .
+
+index:implementsInterface a owl:ObjectProperty ;
+    rdfs:domain index:ClassIndex ;
+    rdfs:range yawl:Class ;
+    rdfs:label "implements interface" ;
+    rdfs:comment "Interface that this class implements" .
+
+index:hasSubclass a owl:ObjectProperty ;
+    rdfs:domain index:ClassIndex ;
+    rdfs:range index:ClassIndex ;
+    rdfs:label "has subclass" ;
+    rdfs:comment "Subclass of this class (inverse of extends)" .
+
+# Method Index Properties
+index:hasMethodNamed a owl:ObjectProperty ;
+    rdfs:domain index:MethodIndex ;
+    rdfs:range index:ClassIndex ;
+    rdfs:label "has method named" ;
+    rdfs:comment "Class that has a method with this name" .
+
+index:methodName a owl:DatatypeProperty ;
+    rdfs:domain index:MethodIndex ;
+    rdfs:range xsd:string ;
+    rdfs:label "method name" ;
+    rdfs:comment "Name of the method" .
+
+# Field Index Properties
+index:hasFieldNamed a owl:ObjectProperty ;
+    rdfs:domain index:FieldIndex ;
+    rdfs:range index:ClassIndex ;
+    rdfs:label "has field named" ;
+    rdfs:comment "Class that has a field with this name" .
+
+index:fieldName a owl:DatatypeProperty ;
+    rdfs:domain index:FieldIndex ;
+    rdfs:range xsd:string ;
+    rdfs:label "field name" ;
+    rdfs:comment "Name of the field" .
+
+# Reference Index Properties
+index:referencedBy a owl:ObjectProperty ;
+    rdfs:domain index:ReferenceIndex ;
+    rdfs:range index:ClassIndex ;
+    rdfs:label "referenced by" ;
+    rdfs:comment "Class that references this class" .
+
+index:referencesClass a owl:ObjectProperty ;
+    rdfs:domain index:ReferenceIndex ;
+    rdfs:range index:ClassIndex ;
+    rdfs:label "references class" ;
+    rdfs:comment "Class that is referenced" .
+
+# Search Index Properties
+index:searchableText a owl:DatatypeProperty ;
+    rdfs:domain index:SearchIndex ;
+    rdfs:range xsd:string ;
+    rdfs:label "searchable text" ;
+    rdfs:comment "Full-text searchable content (labels, comments, signatures)" .
+
+index:searchableClass a owl:ObjectProperty ;
+    rdfs:domain index:SearchIndex ;
+    rdfs:range index:ClassIndex ;
+    rdfs:label "searchable class" ;
+    rdfs:comment "Class associated with this search index entry" .
+
+# Package Index Properties
+index:packageUri a owl:ObjectProperty ;
+    rdfs:domain index:PackageIndex ;
+    rdfs:range yawl:Package ;
+    rdfs:label "package URI" ;
+    rdfs:comment "URI of the package" .
+
+index:hasClass a owl:ObjectProperty ;
+    rdfs:domain index:PackageIndex ;
+    rdfs:range index:ClassIndex ;
+    rdfs:label "has class" ;
+    rdfs:comment "Class that belongs to this package" .
+

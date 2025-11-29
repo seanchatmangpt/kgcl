@@ -1,0 +1,188 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.models.procletModel.PortConnections
+yawl:PortConnections a yawl:Class ;
+    rdfs:label "PortConnections" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_models_procletModel ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/models/procletModel/PortConnections.java"^^xsd:string ;
+    yawl:extends yawl:DirectedSparseGraph ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:PortConnections_getInstance_1 ;
+    yawl:hasMethod yawl:PortConnections_addChannel_2 ;
+    yawl:hasMethod yawl:PortConnections_removeChannel_3 ;
+    yawl:hasMethod yawl:PortConnections_getChannels_4 ;
+    yawl:hasMethod yawl:PortConnections_addPortConnection_5 ;
+    yawl:hasMethod yawl:PortConnections_deletePortConnection_6 ;
+    yawl:hasMethod yawl:PortConnections_getPortConnections_7 ;
+    yawl:hasMethod yawl:PortConnections_getPortConnectionIPort_8 ;
+    yawl:hasMethod yawl:PortConnections_getPortConnectionIPort_9 ;
+    yawl:hasMethod yawl:PortConnections_getPortConnectionOPort_10 ;
+    yawl:hasMethod yawl:PortConnections_getPortConnectionOPort_11 ;
+    yawl:hasMethod yawl:PortConnections_getIPort_12 ;
+    yawl:hasMethod yawl:PortConnections_getOPort_13 ;
+    yawl:hasMethod yawl:PortConnections_buildPConnsFromDB_14 ;
+    yawl:hasMethod yawl:PortConnections_persistPConns_15 ;
+    yawl:hasMethod yawl:PortConnections_deletePConnsFromDB_16 ;
+    yawl:hasMethod yawl:PortConnections_main_17 ;
+    yawl:hasField yawl:PortConnections_pconns ;
+    yawl:hasField yawl:PortConnections_pcs ;
+    yawl:hasField yawl:PortConnections_channels ;
+    .
+
+
+# Method: PortConnections.getInstance
+yawl:PortConnections_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "PortConnections" ;
+    yawl:signature "PortConnections getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PortConnections.addChannel
+yawl:PortConnections_addChannel_2 a yawl:Method ;
+    rdfs:label "addChannel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addChannel(String channel)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PortConnections.removeChannel
+yawl:PortConnections_removeChannel_3 a yawl:Method ;
+    rdfs:label "removeChannel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeChannel(String channel)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PortConnections.getChannels
+yawl:PortConnections_getChannels_4 a yawl:Method ;
+    rdfs:label "getChannels" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getChannels()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PortConnections.addPortConnection
+yawl:PortConnections_addPortConnection_5 a yawl:Method ;
+    rdfs:label "addPortConnection" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addPortConnection(PortConnection conn)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PortConnections.deletePortConnection
+yawl:PortConnections_deletePortConnection_6 a yawl:Method ;
+    rdfs:label "deletePortConnection" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deletePortConnection(PortConnection pc)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PortConnections.getPortConnections
+yawl:PortConnections_getPortConnections_7 a yawl:Method ;
+    rdfs:label "getPortConnections" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getPortConnections()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PortConnections.getPortConnectionIPort
+yawl:PortConnections_getPortConnectionIPort_8 a yawl:Method ;
+    rdfs:label "getPortConnectionIPort" ;
+    yawl:returnType "PortConnection" ;
+    yawl:signature "PortConnection getPortConnectionIPort(PortConnection iPort)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PortConnections.getPortConnectionIPort
+yawl:PortConnections_getPortConnectionIPort_9 a yawl:Method ;
+    rdfs:label "getPortConnectionIPort" ;
+    yawl:returnType "PortConnection" ;
+    yawl:signature "PortConnection getPortConnectionIPort(String iPortID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PortConnections.getPortConnectionOPort
+yawl:PortConnections_getPortConnectionOPort_10 a yawl:Method ;
+    rdfs:label "getPortConnectionOPort" ;
+    yawl:returnType "PortConnection" ;
+    yawl:signature "PortConnection getPortConnectionOPort(PortConnection oPort)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PortConnections.getPortConnectionOPort
+yawl:PortConnections_getPortConnectionOPort_11 a yawl:Method ;
+    rdfs:label "getPortConnectionOPort" ;
+    yawl:returnType "PortConnection" ;
+    yawl:signature "PortConnection getPortConnectionOPort(String oPortID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PortConnections.getIPort
+yawl:PortConnections_getIPort_12 a yawl:Method ;
+    rdfs:label "getIPort" ;
+    yawl:returnType "ProcletPort" ;
+    yawl:signature "ProcletPort getIPort(String portID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PortConnections.getOPort
+yawl:PortConnections_getOPort_13 a yawl:Method ;
+    rdfs:label "getOPort" ;
+    yawl:returnType "ProcletPort" ;
+    yawl:signature "ProcletPort getOPort(String portID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PortConnections.buildPConnsFromDB
+yawl:PortConnections_buildPConnsFromDB_14 a yawl:Method ;
+    rdfs:label "buildPConnsFromDB" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean buildPConnsFromDB()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PortConnections.persistPConns
+yawl:PortConnections_persistPConns_15 a yawl:Method ;
+    rdfs:label "persistPConns" ;
+    yawl:returnType "void" ;
+    yawl:signature "void persistPConns()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PortConnections.deletePConnsFromDB
+yawl:PortConnections_deletePConnsFromDB_16 a yawl:Method ;
+    rdfs:label "deletePConnsFromDB" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deletePConnsFromDB()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PortConnections.main
+yawl:PortConnections_main_17 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String args)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:PortConnections_pconns a yawl:Field ;
+    rdfs:label "pconns" .
+
+yawl:PortConnections_pcs a yawl:Field ;
+    rdfs:label "pcs" .
+
+yawl:PortConnections_channels a yawl:Field ;
+    rdfs:label "channels" .
+
+
+

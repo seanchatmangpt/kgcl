@@ -1,0 +1,195 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.datastore.orgdata.DataBackupEngine
+yawl:DataBackupEngine a yawl:Class ;
+    rdfs:label "DataBackupEngine" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_datastore_orgdata ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/datastore/orgdata/DataBackupEngine.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 14/11/2008, 08/11/10 (non-human resources)""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DataBackupEngine_exportOrgData_1 ;
+    yawl:hasMethod yawl:DataBackupEngine_importOrgData_2 ;
+    yawl:hasMethod yawl:DataBackupEngine_exportParticipants_3 ;
+    yawl:hasMethod yawl:DataBackupEngine_exportRoles_4 ;
+    yawl:hasMethod yawl:DataBackupEngine_exportPositions_5 ;
+    yawl:hasMethod yawl:DataBackupEngine_exportCapabilities_6 ;
+    yawl:hasMethod yawl:DataBackupEngine_exportOrgGroups_7 ;
+    yawl:hasMethod yawl:DataBackupEngine_exportNonHumanResources_8 ;
+    yawl:hasMethod yawl:DataBackupEngine_exportNonHumanCategories_9 ;
+    yawl:hasMethod yawl:DataBackupEngine_importCapabilities_10 ;
+    yawl:hasMethod yawl:DataBackupEngine_importNonHumanCategories_11 ;
+    yawl:hasMethod yawl:DataBackupEngine_importNonHumanResources_12 ;
+    yawl:hasMethod yawl:DataBackupEngine_importRoles_13 ;
+    yawl:hasMethod yawl:DataBackupEngine_importOrgGroups_14 ;
+    yawl:hasMethod yawl:DataBackupEngine_importPositions_15 ;
+    yawl:hasMethod yawl:DataBackupEngine_importParticipants_16 ;
+    yawl:hasMethod yawl:DataBackupEngine_addParticipantToResourceGroup_17 ;
+    yawl:hasMethod yawl:DataBackupEngine_addToCyclicSet_18 ;
+    yawl:hasField yawl:DataBackupEngine__rm ;
+    yawl:hasField yawl:DataBackupEngine_orgDataSet ;
+    yawl:hasField yawl:DataBackupEngine__log ;
+    .
+
+
+# Method: DataBackupEngine.exportOrgData
+yawl:DataBackupEngine_exportOrgData_1 a yawl:Method ;
+    rdfs:label "exportOrgData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String exportOrgData()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataBackupEngine.importOrgData
+yawl:DataBackupEngine_importOrgData_2 a yawl:Method ;
+    rdfs:label "importOrgData" ;
+    yawl:returnType "List" ;
+    yawl:signature "List importOrgData(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataBackupEngine.exportParticipants
+yawl:DataBackupEngine_exportParticipants_3 a yawl:Method ;
+    rdfs:label "exportParticipants" ;
+    yawl:returnType "String" ;
+    yawl:signature "String exportParticipants()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataBackupEngine.exportRoles
+yawl:DataBackupEngine_exportRoles_4 a yawl:Method ;
+    rdfs:label "exportRoles" ;
+    yawl:returnType "String" ;
+    yawl:signature "String exportRoles()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataBackupEngine.exportPositions
+yawl:DataBackupEngine_exportPositions_5 a yawl:Method ;
+    rdfs:label "exportPositions" ;
+    yawl:returnType "String" ;
+    yawl:signature "String exportPositions()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataBackupEngine.exportCapabilities
+yawl:DataBackupEngine_exportCapabilities_6 a yawl:Method ;
+    rdfs:label "exportCapabilities" ;
+    yawl:returnType "String" ;
+    yawl:signature "String exportCapabilities()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataBackupEngine.exportOrgGroups
+yawl:DataBackupEngine_exportOrgGroups_7 a yawl:Method ;
+    rdfs:label "exportOrgGroups" ;
+    yawl:returnType "String" ;
+    yawl:signature "String exportOrgGroups()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataBackupEngine.exportNonHumanResources
+yawl:DataBackupEngine_exportNonHumanResources_8 a yawl:Method ;
+    rdfs:label "exportNonHumanResources" ;
+    yawl:returnType "String" ;
+    yawl:signature "String exportNonHumanResources()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataBackupEngine.exportNonHumanCategories
+yawl:DataBackupEngine_exportNonHumanCategories_9 a yawl:Method ;
+    rdfs:label "exportNonHumanCategories" ;
+    yawl:returnType "String" ;
+    yawl:signature "String exportNonHumanCategories()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataBackupEngine.importCapabilities
+yawl:DataBackupEngine_importCapabilities_10 a yawl:Method ;
+    rdfs:label "importCapabilities" ;
+    yawl:returnType "String" ;
+    yawl:signature "String importCapabilities(Element capElem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataBackupEngine.importNonHumanCategories
+yawl:DataBackupEngine_importNonHumanCategories_11 a yawl:Method ;
+    rdfs:label "importNonHumanCategories" ;
+    yawl:returnType "String" ;
+    yawl:signature "String importNonHumanCategories(Element nhcElem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataBackupEngine.importNonHumanResources
+yawl:DataBackupEngine_importNonHumanResources_12 a yawl:Method ;
+    rdfs:label "importNonHumanResources" ;
+    yawl:returnType "String" ;
+    yawl:signature "String importNonHumanResources(Element nhrElem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataBackupEngine.importRoles
+yawl:DataBackupEngine_importRoles_13 a yawl:Method ;
+    rdfs:label "importRoles" ;
+    yawl:returnType "String" ;
+    yawl:signature "String importRoles(Element roleElem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataBackupEngine.importOrgGroups
+yawl:DataBackupEngine_importOrgGroups_14 a yawl:Method ;
+    rdfs:label "importOrgGroups" ;
+    yawl:returnType "String" ;
+    yawl:signature "String importOrgGroups(Element ogElem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataBackupEngine.importPositions
+yawl:DataBackupEngine_importPositions_15 a yawl:Method ;
+    rdfs:label "importPositions" ;
+    yawl:returnType "String" ;
+    yawl:signature "String importPositions(Element posElem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataBackupEngine.importParticipants
+yawl:DataBackupEngine_importParticipants_16 a yawl:Method ;
+    rdfs:label "importParticipants" ;
+    yawl:returnType "String" ;
+    yawl:signature "String importParticipants(Element pElem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataBackupEngine.addParticipantToResourceGroup
+yawl:DataBackupEngine_addParticipantToResourceGroup_17 a yawl:Method ;
+    rdfs:label "addParticipantToResourceGroup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addParticipantToResourceGroup(Participant p, Element e, String resGroup)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataBackupEngine.addToCyclicSet
+yawl:DataBackupEngine_addToCyclicSet_18 a yawl:Method ;
+    rdfs:label "addToCyclicSet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addToCyclicSet(Map map, String key, T value)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:DataBackupEngine__rm a yawl:Field ;
+    rdfs:label "_rm" .
+
+yawl:DataBackupEngine_orgDataSet a yawl:Field ;
+    rdfs:label "orgDataSet" .
+
+yawl:DataBackupEngine__log a yawl:Field ;
+    rdfs:label "_log" .
+
+
+

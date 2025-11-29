@@ -1,0 +1,65 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.balancer.jmx.Memory
+yawl:Memory a yawl:Class ;
+    rdfs:label "Memory" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer_jmx ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/jmx/JMXMemoryStatistics.java"^^xsd:string ;
+    yawl:hasMethod yawl:Memory_getLong_1 ;
+    yawl:hasMethod yawl:Memory_toString_2 ;
+    yawl:hasMethod yawl:Memory_toXnode_3 ;
+    yawl:hasField yawl:Memory_init ;
+    yawl:hasField yawl:Memory_committed ;
+    yawl:hasField yawl:Memory_max ;
+    yawl:hasField yawl:Memory_used ;
+    yawl:hasField yawl:Memory_type ;
+    .
+
+
+# Method: Memory.getLong
+yawl:Memory_getLong_1 a yawl:Method ;
+    rdfs:label "getLong" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getLong(JSONObject obj, String key)" ;
+    .
+
+# Method: Memory.toString
+yawl:Memory_toString_2 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Memory.toXnode
+yawl:Memory_toXnode_3 a yawl:Method ;
+    rdfs:label "toXnode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode toXnode()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:Memory_init a yawl:Field ;
+    rdfs:label "init" .
+
+yawl:Memory_committed a yawl:Field ;
+    rdfs:label "committed" .
+
+yawl:Memory_max a yawl:Field ;
+    rdfs:label "max" .
+
+yawl:Memory_used a yawl:Field ;
+    rdfs:label "used" .
+
+yawl:Memory_type a yawl:Field ;
+    rdfs:label "type" .
+
+
+

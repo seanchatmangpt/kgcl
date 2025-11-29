@@ -1,0 +1,142 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.procletService.editor.model
+yawl:org_yawlfoundation_yawl_procletService_editor_model a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.procletService.editor.model" .
+# Class: org.yawlfoundation.yawl.procletService.editor.model.ModelCoordinator
+yawl:ModelCoordinator a yawl:Class ;
+    rdfs:label "ModelCoordinator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor_model ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/model/ModelCoordinator.java"^^xsd:string ;
+    yawl:extends yawl:InternalCoordinator ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ModelCoordinator_singleton_1 ;
+    yawl:hasMethod yawl:ModelCoordinator_getInstance_2 ;
+    yawl:hasMethod yawl:ModelCoordinator_exists_3 ;
+    yawl:hasMethod yawl:ModelCoordinator_finish_4 ;
+    yawl:hasMethod yawl:ModelCoordinator_start_5 ;
+    yawl:hasMethod yawl:ModelCoordinator_getInternalFrame_6 ;
+    yawl:hasMethod yawl:ModelCoordinator_end_7 ;
+    yawl:hasMethod yawl:ModelCoordinator_getModelControl_8 ;
+    yawl:hasMethod yawl:ModelCoordinator_setNameTextField_9 ;
+    yawl:hasMethod yawl:ModelCoordinator_getNameTextField_10 ;
+    yawl:hasMethod yawl:ModelCoordinator_getNameModel_11 ;
+    yawl:hasField yawl:ModelCoordinator_frame ;
+    yawl:hasField yawl:ModelCoordinator_instance ;
+    yawl:hasField yawl:ModelCoordinator_nameTextField ;
+    .
+
+
+# Method: ModelCoordinator.singleton
+yawl:ModelCoordinator_singleton_1 a yawl:Method ;
+    rdfs:label "singleton" ;
+    yawl:returnType "ModelCoordinator" ;
+    yawl:signature "ModelCoordinator singleton(JFrame aMainFrame)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ModelCoordinator.getInstance
+yawl:ModelCoordinator_getInstance_2 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "ModelCoordinator" ;
+    yawl:signature "ModelCoordinator getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ModelCoordinator.exists
+yawl:ModelCoordinator_exists_3 a yawl:Method ;
+    rdfs:label "exists" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean exists()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ModelCoordinator.finish
+yawl:ModelCoordinator_finish_4 a yawl:Method ;
+    rdfs:label "finish" ;
+    yawl:returnType "void" ;
+    yawl:signature "void finish()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ModelCoordinator.start
+yawl:ModelCoordinator_start_5 a yawl:Method ;
+    rdfs:label "start" ;
+    yawl:returnType "void" ;
+    yawl:signature "void start()" ;
+    rdfs:comment """start""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ModelCoordinator.getInternalFrame
+yawl:ModelCoordinator_getInternalFrame_6 a yawl:Method ;
+    rdfs:label "getInternalFrame" ;
+    yawl:returnType "JInternalFrame" ;
+    yawl:signature "JInternalFrame getInternalFrame()" ;
+    rdfs:comment """getInternalFrame @return JInternalFrame""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ModelCoordinator.end
+yawl:ModelCoordinator_end_7 a yawl:Method ;
+    rdfs:label "end" ;
+    yawl:returnType "void" ;
+    yawl:signature "void end()" ;
+    rdfs:comment """end""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ModelCoordinator.getModelControl
+yawl:ModelCoordinator_getModelControl_8 a yawl:Method ;
+    rdfs:label "getModelControl" ;
+    yawl:returnType "ModelControl" ;
+    yawl:signature "ModelControl getModelControl()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ModelCoordinator.setNameTextField
+yawl:ModelCoordinator_setNameTextField_9 a yawl:Method ;
+    rdfs:label "setNameTextField" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNameTextField(JTextField nameTextField)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ModelCoordinator.getNameTextField
+yawl:ModelCoordinator_getNameTextField_10 a yawl:Method ;
+    rdfs:label "getNameTextField" ;
+    yawl:returnType "JTextField" ;
+    yawl:signature "JTextField getNameTextField()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ModelCoordinator.getNameModel
+yawl:ModelCoordinator_getNameModel_11 a yawl:Method ;
+    rdfs:label "getNameModel" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNameModel()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:ModelCoordinator_frame a yawl:Field ;
+    rdfs:label "frame" .
+
+yawl:ModelCoordinator_instance a yawl:Field ;
+    rdfs:label "instance" .
+
+yawl:ModelCoordinator_nameTextField a yawl:Field ;
+    rdfs:label "nameTextField" .
+
+
+

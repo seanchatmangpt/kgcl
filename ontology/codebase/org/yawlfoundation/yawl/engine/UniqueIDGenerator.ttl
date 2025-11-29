@@ -1,0 +1,58 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.UniqueIDGenerator
+yawl:UniqueIDGenerator a yawl:Class ;
+    rdfs:label "UniqueIDGenerator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/YWorkItemID.java"^^xsd:string ;
+    yawl:hasMethod yawl:UniqueIDGenerator_newAlphas_1 ;
+    yawl:hasMethod yawl:UniqueIDGenerator_nextInOrder_2 ;
+    yawl:hasMethod yawl:UniqueIDGenerator_inc_3 ;
+    yawl:hasMethod yawl:UniqueIDGenerator_inRange_4 ;
+    .
+
+
+# Method: UniqueIDGenerator.newAlphas
+yawl:UniqueIDGenerator_newAlphas_1 a yawl:Method ;
+    rdfs:label "newAlphas" ;
+    yawl:returnType "char" ;
+    yawl:signature "char newAlphas()" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: UniqueIDGenerator.nextInOrder
+yawl:UniqueIDGenerator_nextInOrder_2 a yawl:Method ;
+    rdfs:label "nextInOrder" ;
+    yawl:returnType "char" ;
+    yawl:signature "char nextInOrder(char chars)" ;
+    rdfs:comment """@param chars @return""" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: UniqueIDGenerator.inc
+yawl:UniqueIDGenerator_inc_3 a yawl:Method ;
+    rdfs:label "inc" ;
+    yawl:returnType "char" ;
+    yawl:signature "char inc(char aChar)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: UniqueIDGenerator.inRange
+yawl:UniqueIDGenerator_inRange_4 a yawl:Method ;
+    rdfs:label "inRange" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean inRange(char aChar)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+
+

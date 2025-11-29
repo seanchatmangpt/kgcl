@@ -1,0 +1,197 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.selection.LaunchEvent
+yawl:LaunchEvent a yawl:Class ;
+    rdfs:label "LaunchEvent" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_selection ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/selection/LaunchEvent.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 26/09/2014""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:LaunchEvent_getId_1 ;
+    yawl:hasMethod yawl:LaunchEvent_setId_2 ;
+    yawl:hasMethod yawl:LaunchEvent_getSpecId_3 ;
+    yawl:hasMethod yawl:LaunchEvent_setSpecId_4 ;
+    yawl:hasMethod yawl:LaunchEvent_getTaskId_5 ;
+    yawl:hasMethod yawl:LaunchEvent_setTaskId_6 ;
+    yawl:hasMethod yawl:LaunchEvent_getItemId_7 ;
+    yawl:hasMethod yawl:LaunchEvent_setItemId_8 ;
+    yawl:hasMethod yawl:LaunchEvent_getRuleType_9 ;
+    yawl:hasMethod yawl:LaunchEvent_setRuleType_10 ;
+    yawl:hasMethod yawl:LaunchEvent_getParentCaseId_11 ;
+    yawl:hasMethod yawl:LaunchEvent_setParentCaseId_12 ;
+    yawl:hasMethod yawl:LaunchEvent_getLaunchedCaseId_13 ;
+    yawl:hasMethod yawl:LaunchEvent_setLaunchedCaseId_14 ;
+    yawl:hasMethod yawl:LaunchEvent_getData_15 ;
+    yawl:hasMethod yawl:LaunchEvent_setData_16 ;
+    yawl:hasField yawl:LaunchEvent_id ;
+    yawl:hasField yawl:LaunchEvent_specId ;
+    yawl:hasField yawl:LaunchEvent_taskId ;
+    yawl:hasField yawl:LaunchEvent_itemId ;
+    yawl:hasField yawl:LaunchEvent_ruleType ;
+    yawl:hasField yawl:LaunchEvent_parentCaseId ;
+    yawl:hasField yawl:LaunchEvent_launchedCaseId ;
+    yawl:hasField yawl:LaunchEvent_data ;
+    .
+
+
+# Method: LaunchEvent.getId
+yawl:LaunchEvent_getId_1 a yawl:Method ;
+    rdfs:label "getId" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getId()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LaunchEvent.setId
+yawl:LaunchEvent_setId_2 a yawl:Method ;
+    rdfs:label "setId" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setId(long id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LaunchEvent.getSpecId
+yawl:LaunchEvent_getSpecId_3 a yawl:Method ;
+    rdfs:label "getSpecId" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getSpecId()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LaunchEvent.setSpecId
+yawl:LaunchEvent_setSpecId_4 a yawl:Method ;
+    rdfs:label "setSpecId" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSpecId(YSpecificationID specId)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LaunchEvent.getTaskId
+yawl:LaunchEvent_getTaskId_5 a yawl:Method ;
+    rdfs:label "getTaskId" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskId()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LaunchEvent.setTaskId
+yawl:LaunchEvent_setTaskId_6 a yawl:Method ;
+    rdfs:label "setTaskId" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTaskId(String taskId)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LaunchEvent.getItemId
+yawl:LaunchEvent_getItemId_7 a yawl:Method ;
+    rdfs:label "getItemId" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getItemId()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LaunchEvent.setItemId
+yawl:LaunchEvent_setItemId_8 a yawl:Method ;
+    rdfs:label "setItemId" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setItemId(String itemId)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LaunchEvent.getRuleType
+yawl:LaunchEvent_getRuleType_9 a yawl:Method ;
+    rdfs:label "getRuleType" ;
+    yawl:returnType "RuleType" ;
+    yawl:signature "RuleType getRuleType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LaunchEvent.setRuleType
+yawl:LaunchEvent_setRuleType_10 a yawl:Method ;
+    rdfs:label "setRuleType" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRuleType(RuleType ruleType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LaunchEvent.getParentCaseId
+yawl:LaunchEvent_getParentCaseId_11 a yawl:Method ;
+    rdfs:label "getParentCaseId" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParentCaseId()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LaunchEvent.setParentCaseId
+yawl:LaunchEvent_setParentCaseId_12 a yawl:Method ;
+    rdfs:label "setParentCaseId" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setParentCaseId(String caseId)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LaunchEvent.getLaunchedCaseId
+yawl:LaunchEvent_getLaunchedCaseId_13 a yawl:Method ;
+    rdfs:label "getLaunchedCaseId" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLaunchedCaseId()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LaunchEvent.setLaunchedCaseId
+yawl:LaunchEvent_setLaunchedCaseId_14 a yawl:Method ;
+    rdfs:label "setLaunchedCaseId" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLaunchedCaseId(String caseId)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LaunchEvent.getData
+yawl:LaunchEvent_getData_15 a yawl:Method ;
+    rdfs:label "getData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getData()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LaunchEvent.setData
+yawl:LaunchEvent_setData_16 a yawl:Method ;
+    rdfs:label "setData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setData(String data)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:LaunchEvent_id a yawl:Field ;
+    rdfs:label "id" .
+
+yawl:LaunchEvent_specId a yawl:Field ;
+    rdfs:label "specId" .
+
+yawl:LaunchEvent_taskId a yawl:Field ;
+    rdfs:label "taskId" .
+
+yawl:LaunchEvent_itemId a yawl:Field ;
+    rdfs:label "itemId" .
+
+yawl:LaunchEvent_ruleType a yawl:Field ;
+    rdfs:label "ruleType" .
+
+yawl:LaunchEvent_parentCaseId a yawl:Field ;
+    rdfs:label "parentCaseId" .
+
+yawl:LaunchEvent_launchedCaseId a yawl:Field ;
+    rdfs:label "launchedCaseId" .
+
+yawl:LaunchEvent_data a yawl:Field ;
+    rdfs:label "data" .
+
+
+

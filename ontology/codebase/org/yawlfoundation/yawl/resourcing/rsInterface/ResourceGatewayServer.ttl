@@ -1,0 +1,185 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.rsInterface.ResourceGatewayServer
+yawl:ResourceGatewayServer a yawl:Class ;
+    rdfs:label "ResourceGatewayServer" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_rsInterface ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/rsInterface/ResourceGatewayServer.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 12/06/2009""" ;
+    yawl:extends yawl:Interface_Client ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ResourceGatewayServer_setExceptionInterfaceURI_1 ;
+    yawl:hasMethod yawl:ResourceGatewayServer_setSchedulingInterfaceURI_2 ;
+    yawl:hasMethod yawl:ResourceGatewayServer_hasExceptionListener_3 ;
+    yawl:hasMethod yawl:ResourceGatewayServer_hasSchedulingListener_4 ;
+    yawl:hasMethod yawl:ResourceGatewayServer_registerSchedulingInterfaceListener_5 ;
+    yawl:hasMethod yawl:ResourceGatewayServer_removeSchedulingInterfaceListener_6 ;
+    yawl:hasMethod yawl:ResourceGatewayServer_removeSchedulingInterfaceListeners_7 ;
+    yawl:hasMethod yawl:ResourceGatewayServer_addEventListener_8 ;
+    yawl:hasMethod yawl:ResourceGatewayServer_removeEventListener_9 ;
+    yawl:hasMethod yawl:ResourceGatewayServer_announceResourceUnavailable_10 ;
+    yawl:hasMethod yawl:ResourceGatewayServer_announceResourceCalendarStatusChange_11 ;
+    yawl:hasMethod yawl:ResourceGatewayServer_announceResourceEvent_12 ;
+    yawl:hasMethod yawl:ResourceGatewayServer_redirectWorkItemToYawlService_13 ;
+    yawl:hasMethod yawl:ResourceGatewayServer_prepareParams_14 ;
+    yawl:hasMethod yawl:ResourceGatewayServer_getSchedulingInterfaceListeners_15 ;
+    yawl:hasField yawl:ResourceGatewayServer_NOTIFY_RESOURCE_UNAVAILABLE ;
+    yawl:hasField yawl:ResourceGatewayServer_NOTIFY_UTILISATION_STATUS_CHANGE ;
+    yawl:hasField yawl:ResourceGatewayServer_NOTIFY_RESOURCE_EVENT ;
+    yawl:hasField yawl:ResourceGatewayServer__ixURI ;
+    yawl:hasField yawl:ResourceGatewayServer__isURI ;
+    yawl:hasField yawl:ResourceGatewayServer__isListeners ;
+    yawl:hasField yawl:ResourceGatewayServer__eventListeners ;
+    .
+
+
+# Method: ResourceGatewayServer.setExceptionInterfaceURI
+yawl:ResourceGatewayServer_setExceptionInterfaceURI_1 a yawl:Method ;
+    rdfs:label "setExceptionInterfaceURI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setExceptionInterfaceURI(String uri)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayServer.setSchedulingInterfaceURI
+yawl:ResourceGatewayServer_setSchedulingInterfaceURI_2 a yawl:Method ;
+    rdfs:label "setSchedulingInterfaceURI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSchedulingInterfaceURI(String uri)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayServer.hasExceptionListener
+yawl:ResourceGatewayServer_hasExceptionListener_3 a yawl:Method ;
+    rdfs:label "hasExceptionListener" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasExceptionListener()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayServer.hasSchedulingListener
+yawl:ResourceGatewayServer_hasSchedulingListener_4 a yawl:Method ;
+    rdfs:label "hasSchedulingListener" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasSchedulingListener(String origOwner)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayServer.registerSchedulingInterfaceListener
+yawl:ResourceGatewayServer_registerSchedulingInterfaceListener_5 a yawl:Method ;
+    rdfs:label "registerSchedulingInterfaceListener" ;
+    yawl:returnType "String" ;
+    yawl:signature "String registerSchedulingInterfaceListener(String logonID, String uri)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayServer.removeSchedulingInterfaceListener
+yawl:ResourceGatewayServer_removeSchedulingInterfaceListener_6 a yawl:Method ;
+    rdfs:label "removeSchedulingInterfaceListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeSchedulingInterfaceListener(String logonID, String uri)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayServer.removeSchedulingInterfaceListeners
+yawl:ResourceGatewayServer_removeSchedulingInterfaceListeners_7 a yawl:Method ;
+    rdfs:label "removeSchedulingInterfaceListeners" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeSchedulingInterfaceListeners(String logonID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayServer.addEventListener
+yawl:ResourceGatewayServer_addEventListener_8 a yawl:Method ;
+    rdfs:label "addEventListener" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addEventListener(String uri)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayServer.removeEventListener
+yawl:ResourceGatewayServer_removeEventListener_9 a yawl:Method ;
+    rdfs:label "removeEventListener" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeEventListener(String uri)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayServer.announceResourceUnavailable
+yawl:ResourceGatewayServer_announceResourceUnavailable_10 a yawl:Method ;
+    rdfs:label "announceResourceUnavailable" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceResourceUnavailable(String resourceID, WorkItemRecord wir, String caseData, boolean primary)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayServer.announceResourceCalendarStatusChange
+yawl:ResourceGatewayServer_announceResourceCalendarStatusChange_11 a yawl:Method ;
+    rdfs:label "announceResourceCalendarStatusChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceResourceCalendarStatusChange(String origOwner, String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayServer.announceResourceEvent
+yawl:ResourceGatewayServer_announceResourceEvent_12 a yawl:Method ;
+    rdfs:label "announceResourceEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceResourceEvent(YSpecificationID specID, ResourceEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayServer.redirectWorkItemToYawlService
+yawl:ResourceGatewayServer_redirectWorkItemToYawlService_13 a yawl:Method ;
+    rdfs:label "redirectWorkItemToYawlService" ;
+    yawl:returnType "void" ;
+    yawl:signature "void redirectWorkItemToYawlService(String wirXML, String serviceURI)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGatewayServer.prepareParams
+yawl:ResourceGatewayServer_prepareParams_14 a yawl:Method ;
+    rdfs:label "prepareParams" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map prepareParams(int action)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceGatewayServer.getSchedulingInterfaceListeners
+yawl:ResourceGatewayServer_getSchedulingInterfaceListeners_15 a yawl:Method ;
+    rdfs:label "getSchedulingInterfaceListeners" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getSchedulingInterfaceListeners(String logonID)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:ResourceGatewayServer_NOTIFY_RESOURCE_UNAVAILABLE a yawl:Field ;
+    rdfs:label "NOTIFY_RESOURCE_UNAVAILABLE" .
+
+yawl:ResourceGatewayServer_NOTIFY_UTILISATION_STATUS_CHANGE a yawl:Field ;
+    rdfs:label "NOTIFY_UTILISATION_STATUS_CHANGE" .
+
+yawl:ResourceGatewayServer_NOTIFY_RESOURCE_EVENT a yawl:Field ;
+    rdfs:label "NOTIFY_RESOURCE_EVENT" .
+
+yawl:ResourceGatewayServer__ixURI a yawl:Field ;
+    rdfs:label "_ixURI" .
+
+yawl:ResourceGatewayServer__isURI a yawl:Field ;
+    rdfs:label "_isURI" .
+
+yawl:ResourceGatewayServer__isListeners a yawl:Field ;
+    rdfs:label "_isListeners" .
+
+yawl:ResourceGatewayServer__eventListeners a yawl:Field ;
+    rdfs:label "_eventListeners" .
+
+
+

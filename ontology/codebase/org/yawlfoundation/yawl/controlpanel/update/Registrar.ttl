@@ -1,0 +1,214 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.update.Registrar
+yawl:Registrar a yawl:Class ;
+    rdfs:label "Registrar" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_update ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/update/Registrar.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 21/08/2014""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Registrar_add_1 ;
+    yawl:hasMethod yawl:Registrar_remove_2 ;
+    yawl:hasMethod yawl:Registrar_disconnect_3 ;
+    yawl:hasMethod yawl:Registrar_addService_4 ;
+    yawl:hasMethod yawl:Registrar_addApp_5 ;
+    yawl:hasMethod yawl:Registrar_removeService_6 ;
+    yawl:hasMethod yawl:Registrar_removeApp_7 ;
+    yawl:hasMethod yawl:Registrar_getServiceUri_8 ;
+    yawl:hasMethod yawl:Registrar_appExists_9 ;
+    yawl:hasMethod yawl:Registrar_connect_10 ;
+    yawl:hasMethod yawl:Registrar_successful_11 ;
+    yawl:hasMethod yawl:Registrar_prepareParamMap_12 ;
+    yawl:hasMethod yawl:Registrar_send_13 ;
+    yawl:hasMethod yawl:Registrar_initPostConnection_14 ;
+    yawl:hasMethod yawl:Registrar_encodeData_15 ;
+    yawl:hasMethod yawl:Registrar_urlEncode_16 ;
+    yawl:hasMethod yawl:Registrar_sendData_17 ;
+    yawl:hasMethod yawl:Registrar_getReply_18 ;
+    yawl:hasMethod yawl:Registrar_isYAWLService_19 ;
+    yawl:hasMethod yawl:Registrar_getServiceTransport_20 ;
+    yawl:hasField yawl:Registrar_URL_STR ;
+    yawl:hasField yawl:Registrar__handle ;
+    .
+
+
+# Method: Registrar.add
+yawl:Registrar_add_1 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean add(String name, String password, String url)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Registrar.remove
+yawl:Registrar_remove_2 a yawl:Method ;
+    rdfs:label "remove" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean remove(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Registrar.disconnect
+yawl:Registrar_disconnect_3 a yawl:Method ;
+    rdfs:label "disconnect" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disconnect()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Registrar.addService
+yawl:Registrar_addService_4 a yawl:Method ;
+    rdfs:label "addService" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean addService(String name, String password, String url)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Registrar.addApp
+yawl:Registrar_addApp_5 a yawl:Method ;
+    rdfs:label "addApp" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean addApp(String name, String password)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Registrar.removeService
+yawl:Registrar_removeService_6 a yawl:Method ;
+    rdfs:label "removeService" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeService(String uri)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Registrar.removeApp
+yawl:Registrar_removeApp_7 a yawl:Method ;
+    rdfs:label "removeApp" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeApp(String name)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Registrar.getServiceUri
+yawl:Registrar_getServiceUri_8 a yawl:Method ;
+    rdfs:label "getServiceUri" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getServiceUri(String name)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Registrar.appExists
+yawl:Registrar_appExists_9 a yawl:Method ;
+    rdfs:label "appExists" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean appExists(String name)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Registrar.connect
+yawl:Registrar_connect_10 a yawl:Method ;
+    rdfs:label "connect" ;
+    yawl:returnType "void" ;
+    yawl:signature "void connect()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Registrar.successful
+yawl:Registrar_successful_11 a yawl:Method ;
+    rdfs:label "successful" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean successful(String message)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Registrar.prepareParamMap
+yawl:Registrar_prepareParamMap_12 a yawl:Method ;
+    rdfs:label "prepareParamMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map prepareParamMap(String action, String handle)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Registrar.send
+yawl:Registrar_send_13 a yawl:Method ;
+    rdfs:label "send" ;
+    yawl:returnType "String" ;
+    yawl:signature "String send(Map paramsMap)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Registrar.initPostConnection
+yawl:Registrar_initPostConnection_14 a yawl:Method ;
+    rdfs:label "initPostConnection" ;
+    yawl:returnType "HttpURLConnection" ;
+    yawl:signature "HttpURLConnection initPostConnection()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Registrar.encodeData
+yawl:Registrar_encodeData_15 a yawl:Method ;
+    rdfs:label "encodeData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String encodeData(Map params)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Registrar.urlEncode
+yawl:Registrar_urlEncode_16 a yawl:Method ;
+    rdfs:label "urlEncode" ;
+    yawl:returnType "String" ;
+    yawl:signature "String urlEncode(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Registrar.sendData
+yawl:Registrar_sendData_17 a yawl:Method ;
+    rdfs:label "sendData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sendData(HttpURLConnection connection, String data)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Registrar.getReply
+yawl:Registrar_getReply_18 a yawl:Method ;
+    rdfs:label "getReply" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getReply(InputStream is)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Registrar.isYAWLService
+yawl:Registrar_isYAWLService_19 a yawl:Method ;
+    rdfs:label "isYAWLService" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isYAWLService(String name)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Registrar.getServiceTransport
+yawl:Registrar_getServiceTransport_20 a yawl:Method ;
+    rdfs:label "getServiceTransport" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getServiceTransport(String name, String password, String url)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:Registrar_URL_STR a yawl:Field ;
+    rdfs:label "URL_STR" .
+
+yawl:Registrar__handle a yawl:Field ;
+    rdfs:label "_handle" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_controlpanel_util a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.controlpanel.util" .
+
+

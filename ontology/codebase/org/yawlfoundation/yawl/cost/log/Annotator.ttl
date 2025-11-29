@@ -1,0 +1,210 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.cost.log
+yawl:org_yawlfoundation_yawl_cost_log a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.cost.log" .
+# Class: org.yawlfoundation.yawl.cost.log.Annotator
+yawl:Annotator a yawl:Class ;
+    rdfs:label "Annotator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_cost_log ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/cost/log/Annotator.java"^^xsd:string ;
+    rdfs:comment """Annotates the events an XES formatted log with corresponding cost information where applicable. @author Michael Adams @date 27/10/11""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Annotator_setUnannotatedLog_1 ;
+    yawl:hasMethod yawl:Annotator_setSpecID_2 ;
+    yawl:hasMethod yawl:Annotator_annotate_3 ;
+    yawl:hasMethod yawl:Annotator_annotate_4 ;
+    yawl:hasMethod yawl:Annotator_annotate_5 ;
+    yawl:hasMethod yawl:Annotator_annotate_6 ;
+    yawl:hasMethod yawl:Annotator_processDrivers_7 ;
+    yawl:hasMethod yawl:Annotator_getModelCacheForLog_8 ;
+    yawl:hasMethod yawl:Annotator_evaluateDrivers_9 ;
+    yawl:hasMethod yawl:Annotator_calcCost_10 ;
+    yawl:hasMethod yawl:Annotator_createCostNode_11 ;
+    yawl:hasMethod yawl:Annotator_floatNode_12 ;
+    yawl:hasMethod yawl:Annotator_stringNode_13 ;
+    yawl:hasMethod yawl:Annotator_addAttributes_14 ;
+    yawl:hasMethod yawl:Annotator_addCostHeaders_15 ;
+    yawl:hasMethod yawl:Annotator_evaluateEntity_16 ;
+    yawl:hasMethod yawl:Annotator_getTaskTimings_17 ;
+    yawl:hasField yawl:Annotator__unannotatedLog ;
+    yawl:hasField yawl:Annotator__specID ;
+    yawl:hasField yawl:Annotator__timings ;
+    yawl:hasField yawl:Annotator_ERROR_PRETEXT ;
+    .
+
+
+# Method: Annotator.setUnannotatedLog
+yawl:Annotator_setUnannotatedLog_1 a yawl:Method ;
+    rdfs:label "setUnannotatedLog" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUnannotatedLog(String unannotatedLog)" ;
+    rdfs:comment """Sets the unannotated log @param unannotatedLog an XES log to annotate with cost data""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Annotator.setSpecID
+yawl:Annotator_setSpecID_2 a yawl:Method ;
+    rdfs:label "setSpecID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSpecID(YSpecificationID id)" ;
+    rdfs:comment """Sets the specification id for this log @param id the specification id""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Annotator.annotate
+yawl:Annotator_annotate_3 a yawl:Method ;
+    rdfs:label "annotate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String annotate(String unannotatedLog)" ;
+    rdfs:comment """Annotates a log with applicable cost data @param unannotatedLog an XES log to annotate with cost data @return the cost-data annotated log @throws IllegalStateException if the unannotatedLog is null or has an invalid format""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Annotator.annotate
+yawl:Annotator_annotate_4 a yawl:Method ;
+    rdfs:label "annotate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String annotate()" ;
+    rdfs:comment """Annotates a log with applicable cost data @return the cost-data annotated log @throws IllegalStateException if the unannotatedLog is null (i.e. has not been previously set via the relevant constructor or mutator) or has an invalid format""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Annotator.annotate
+yawl:Annotator_annotate_5 a yawl:Method ;
+    rdfs:label "annotate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String annotate(XNode head)" ;
+    rdfs:comment """Annotates a log with applicable cost data @param head a root node (hierarchically) containing the entire unannotated log @return the node with (hierarchically) annotated cost data""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Annotator.annotate
+yawl:Annotator_annotate_6 a yawl:Method ;
+    rdfs:label "annotate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void annotate(XNode trace, DriverMatrix driverMatrix)" ;
+    rdfs:comment """Annotates a log trace (i.e. a single case) with applicable cost data @param trace        a node containing all the events for a single case @param driverMatrix a matrix of all cost drivers for the log's specification mapped by task, resource and data""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Annotator.processDrivers
+yawl:Annotator_processDrivers_7 a yawl:Method ;
+    rdfs:label "processDrivers" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processDrivers(DriverMatrix driverMatrix, UnbundledEvent event, TaskTimings timings)" ;
+    rdfs:comment """Find the cost drivers corresponding to this event and use them to calculate the relevant cost data, then annotate the data to the logged event @param driverMatrix a matrix of all cost drivers for the log's specification mapped by task, resource and data @param event        the (unbundled) completed or cancelled event to process @param timings      the set of timestamps for the task referenced by this event""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Annotator.getModelCacheForLog
+yawl:Annotator_getModelCacheForLog_8 a yawl:Method ;
+    rdfs:label "getModelCacheForLog" ;
+    yawl:returnType "CostModelCache" ;
+    yawl:signature "CostModelCache getModelCacheForLog(XNode head)" ;
+    rdfs:comment """Gets the cost models for the log's specification @param head a root node (hierarchically) containing the entire unannotated log @return the Set of CostModels applicable to this log's process specification""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Annotator.evaluateDrivers
+yawl:Annotator_evaluateDrivers_9 a yawl:Method ;
+    rdfs:label "evaluateDrivers" ;
+    yawl:returnType "void" ;
+    yawl:signature "void evaluateDrivers(UnbundledEvent event, Set drivers, TaskTimings timings, DriverMatrix driverMatrix)" ;
+    rdfs:comment """For each driver in a Set, checks that all of its entities are satisfied in an event, and if so, evaluates and annotates the cost data to the event @param event        the event to annotate @param drivers      the set of drivers that relate to this event @param timings      the set of timestamps for the task this event relates to @param driverMatrix a matrix of all cost drivers for the log's specification resource entity""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Annotator.calcCost
+yawl:Annotator_calcCost_10 a yawl:Method ;
+    rdfs:label "calcCost" ;
+    yawl:returnType "double" ;
+    yawl:signature "double calcCost(UnbundledEvent event, CostDriver driver, TaskTimings timings)" ;
+    rdfs:comment """Calculate and return the costs associated with this event @param event   the event to calculate the costs for @param driver  the cost driver to use for the calculation @param timings the set of timestamps for the task this event relates to @return the calculated cost""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Annotator.createCostNode
+yawl:Annotator_createCostNode_11 a yawl:Method ;
+    rdfs:label "createCostNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode createCostNode(CostDriver driver, double cost)" ;
+    rdfs:comment """Creates a properly formatted cost node for insertion into the log @param driver the driver which produced the cost annotation @param cost   the calculated cost amount @return the cost node for insertion into the log""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Annotator.floatNode
+yawl:Annotator_floatNode_12 a yawl:Method ;
+    rdfs:label "floatNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode floatNode(String key, double value)" ;
+    rdfs:comment """Creates a float node to insert into an event log @param key   the value of the 'key' attribute @param value the value of the 'value' attribute @return the constructed node""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Annotator.stringNode
+yawl:Annotator_stringNode_13 a yawl:Method ;
+    rdfs:label "stringNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode stringNode(String key, String value)" ;
+    rdfs:comment """Creates a string node to insert into an event log @param key   the value of the 'key' attribute @param value the value of the 'value' attribute @return the constructed node""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Annotator.addAttributes
+yawl:Annotator_addAttributes_14 a yawl:Method ;
+    rdfs:label "addAttributes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addAttributes(XNode node, String key, String value)" ;
+    rdfs:comment """Adds attributes to a node @param node  the node to add the attributes to @param key   the value of the 'key' attribute @param value the value of the 'value' attribute""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Annotator.addCostHeaders
+yawl:Annotator_addCostHeaders_15 a yawl:Method ;
+    rdfs:label "addCostHeaders" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addCostHeaders(XNode head)" ;
+    rdfs:comment """Adds the extra header information for cost annotations to the log headers @param head a root node (hierarchically) containing the entire unannotated log""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Annotator.evaluateEntity
+yawl:Annotator_evaluateEntity_16 a yawl:Method ;
+    rdfs:label "evaluateEntity" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean evaluateEntity(DriverFacet facet, UnbundledEvent event, DriverMatrix driverMatrix)" ;
+    rdfs:comment """Checks whether an facet is referenced by an event @param facet        the facet to check @param event        the event in question @param driverMatrix a matrix of all cost drivers for the log's specification @return true if the facet matches a value in the event""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Annotator.getTaskTimings
+yawl:Annotator_getTaskTimings_17 a yawl:Method ;
+    rdfs:label "getTaskTimings" ;
+    yawl:returnType "TaskTimings" ;
+    yawl:signature "TaskTimings getTaskTimings(UnbundledEvent event)" ;
+    rdfs:comment """Gets the grouping of task timestamps for an event @param event the event to get the timings object for @return the timings object""" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:Annotator__unannotatedLog a yawl:Field ;
+    rdfs:label "_unannotatedLog" .
+
+yawl:Annotator__specID a yawl:Field ;
+    rdfs:label "_specID" .
+
+yawl:Annotator__timings a yawl:Field ;
+    rdfs:label "_timings" .
+
+yawl:Annotator_ERROR_PRETEXT a yawl:Field ;
+    rdfs:label "ERROR_PRETEXT" .
+
+
+

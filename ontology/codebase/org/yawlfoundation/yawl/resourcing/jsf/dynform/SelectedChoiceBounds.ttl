@@ -1,0 +1,39 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.dynform.SelectedChoiceBounds
+yawl:SelectedChoiceBounds a yawl:Class ;
+    rdfs:label "SelectedChoiceBounds" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf_dynform ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/dynform/DataListGenerator.java"^^xsd:string ;
+    rdfs:comment """Calculates and holds the bounds of the selected field(s) within a choice panel""" ;
+    yawl:modifiers "static" ;
+    yawl:hasMethod yawl:SelectedChoiceBounds_calcBounds_1 ;
+    yawl:hasField yawl:SelectedChoiceBounds_start ;
+    yawl:hasField yawl:SelectedChoiceBounds_stop ;
+    .
+
+
+# Method: SelectedChoiceBounds.calcBounds
+yawl:SelectedChoiceBounds_calcBounds_1 a yawl:Method ;
+    rdfs:label "calcBounds" ;
+    yawl:returnType "void" ;
+    yawl:signature "void calcBounds(List children)" ;
+    rdfs:comment """Works through a choice panel's components, finding the selected radio button then marking the bounds of it and the last component of the selection. @param children the panel's child components""" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:SelectedChoiceBounds_start a yawl:Field ;
+    rdfs:label "start" .
+
+yawl:SelectedChoiceBounds_stop a yawl:Field ;
+    rdfs:label "stop" .
+
+
+

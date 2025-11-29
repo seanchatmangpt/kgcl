@@ -1,0 +1,782 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.monitor.jsf.ActiveCases
+yawl:ActiveCases a yawl:Class ;
+    rdfs:label "ActiveCases" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_monitor_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/monitor/jsf/ActiveCases.java"^^xsd:string ;
+    rdfs:comment """Backing bean for the active cases page. @author Michael Adams 02/12/2008""" ;
+    yawl:extends yawl:AbstractPageBean ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ActiveCases__init_1 ;
+    yawl:hasMethod yawl:ActiveCases_getSessionBean_2 ;
+    yawl:hasMethod yawl:ActiveCases_getApplicationBean_3 ;
+    yawl:hasMethod yawl:ActiveCases_init_4 ;
+    yawl:hasMethod yawl:ActiveCases_preprocess_5 ;
+    yawl:hasMethod yawl:ActiveCases_destroy_6 ;
+    yawl:hasMethod yawl:ActiveCases_getPage1_7 ;
+    yawl:hasMethod yawl:ActiveCases_setPage1_8 ;
+    yawl:hasMethod yawl:ActiveCases_getHtml1_9 ;
+    yawl:hasMethod yawl:ActiveCases_setHtml1_10 ;
+    yawl:hasMethod yawl:ActiveCases_getHead1_11 ;
+    yawl:hasMethod yawl:ActiveCases_setHead1_12 ;
+    yawl:hasMethod yawl:ActiveCases_getLink1_13 ;
+    yawl:hasMethod yawl:ActiveCases_setLink1_14 ;
+    yawl:hasMethod yawl:ActiveCases_getBody1_15 ;
+    yawl:hasMethod yawl:ActiveCases_setBody1_16 ;
+    yawl:hasMethod yawl:ActiveCases_getForm1_17 ;
+    yawl:hasMethod yawl:ActiveCases_setForm1_18 ;
+    yawl:hasMethod yawl:ActiveCases_getStaticText_19 ;
+    yawl:hasMethod yawl:ActiveCases_setStaticText_20 ;
+    yawl:hasMethod yawl:ActiveCases_getStUptime_21 ;
+    yawl:hasMethod yawl:ActiveCases_setStUptime_22 ;
+    yawl:hasMethod yawl:ActiveCases_getLayoutPanel_23 ;
+    yawl:hasMethod yawl:ActiveCases_setLayoutPanel_24 ;
+    yawl:hasMethod yawl:ActiveCases_getDataTable_25 ;
+    yawl:hasMethod yawl:ActiveCases_setDataTable_26 ;
+    yawl:hasMethod yawl:ActiveCases_getColCaseID_27 ;
+    yawl:hasMethod yawl:ActiveCases_setColCaseID_28 ;
+    yawl:hasMethod yawl:ActiveCases_getColCaseIDRows_29 ;
+    yawl:hasMethod yawl:ActiveCases_setColCaseIDRows_30 ;
+    yawl:hasMethod yawl:ActiveCases_getColSpecName_31 ;
+    yawl:hasMethod yawl:ActiveCases_setColSpecName_32 ;
+    yawl:hasMethod yawl:ActiveCases_getColSpecNameRows_33 ;
+    yawl:hasMethod yawl:ActiveCases_setColSpecNameRows_34 ;
+    yawl:hasMethod yawl:ActiveCases_getColVersion_35 ;
+    yawl:hasMethod yawl:ActiveCases_setColVersion_36 ;
+    yawl:hasMethod yawl:ActiveCases_getColVersionRows_37 ;
+    yawl:hasMethod yawl:ActiveCases_setColVersionRows_38 ;
+    yawl:hasMethod yawl:ActiveCases_getColStartTime_39 ;
+    yawl:hasMethod yawl:ActiveCases_setColStartTime_40 ;
+    yawl:hasMethod yawl:ActiveCases_getColStartTimeRows_41 ;
+    yawl:hasMethod yawl:ActiveCases_setColStartTimeRows_42 ;
+    yawl:hasMethod yawl:ActiveCases_getHdnRowIndex_43 ;
+    yawl:hasMethod yawl:ActiveCases_setHdnRowIndex_44 ;
+    yawl:hasMethod yawl:ActiveCases_getPnlContainer_45 ;
+    yawl:hasMethod yawl:ActiveCases_setPnlContainer_46 ;
+    yawl:hasMethod yawl:ActiveCases_getPnlGroup_47 ;
+    yawl:hasMethod yawl:ActiveCases_setPnlGroup_48 ;
+    yawl:hasMethod yawl:ActiveCases_getBtnDetails_49 ;
+    yawl:hasMethod yawl:ActiveCases_setBtnDetails_50 ;
+    yawl:hasMethod yawl:ActiveCases_getCaseIDHeaderText_51 ;
+    yawl:hasMethod yawl:ActiveCases_setCaseIDHeaderText_52 ;
+    yawl:hasMethod yawl:ActiveCases_getSpecNameHeaderText_53 ;
+    yawl:hasMethod yawl:ActiveCases_setSpecNameHeaderText_54 ;
+    yawl:hasMethod yawl:ActiveCases_getSpecVersionHeaderText_55 ;
+    yawl:hasMethod yawl:ActiveCases_setSpecVersionHeaderText_56 ;
+    yawl:hasMethod yawl:ActiveCases_getStartTimeHeaderText_57 ;
+    yawl:hasMethod yawl:ActiveCases_setStartTimeHeaderText_58 ;
+    yawl:hasMethod yawl:ActiveCases_prerender_59 ;
+    yawl:hasMethod yawl:ActiveCases_getStartupTime_60 ;
+    yawl:hasMethod yawl:ActiveCases_btnRefresh_action_61 ;
+    yawl:hasMethod yawl:ActiveCases_btnLogout_action_62 ;
+    yawl:hasMethod yawl:ActiveCases_btnDetails_action_63 ;
+    yawl:hasMethod yawl:ActiveCases_caseIDHeaderClick_64 ;
+    yawl:hasMethod yawl:ActiveCases_specNameHeaderClick_65 ;
+    yawl:hasMethod yawl:ActiveCases_specVersionHeaderClick_66 ;
+    yawl:hasMethod yawl:ActiveCases_startTimeHeaderClick_67 ;
+    yawl:hasMethod yawl:ActiveCases_sortTable_68 ;
+    yawl:hasMethod yawl:ActiveCases_setHeaderButtonText_69 ;
+    yawl:hasMethod yawl:ActiveCases_resetHeaderButtons_70 ;
+    yawl:hasMethod yawl:ActiveCases_getOrderIndicator_71 ;
+    yawl:hasField yawl:ActiveCases___placeholder ;
+    yawl:hasField yawl:ActiveCases_page1 ;
+    yawl:hasField yawl:ActiveCases_html1 ;
+    yawl:hasField yawl:ActiveCases_head1 ;
+    yawl:hasField yawl:ActiveCases_link1 ;
+    yawl:hasField yawl:ActiveCases_body1 ;
+    yawl:hasField yawl:ActiveCases_form1 ;
+    yawl:hasField yawl:ActiveCases_staticText ;
+    yawl:hasField yawl:ActiveCases_stUptime ;
+    yawl:hasField yawl:ActiveCases_layoutPanel ;
+    yawl:hasField yawl:ActiveCases_dataTable ;
+    yawl:hasField yawl:ActiveCases_colCaseID ;
+    yawl:hasField yawl:ActiveCases_colCaseIDRows ;
+    yawl:hasField yawl:ActiveCases_colSpecName ;
+    yawl:hasField yawl:ActiveCases_colSpecNameRows ;
+    yawl:hasField yawl:ActiveCases_colVersion ;
+    yawl:hasField yawl:ActiveCases_colVersionRows ;
+    yawl:hasField yawl:ActiveCases_colStartTime ;
+    yawl:hasField yawl:ActiveCases_colStartTimeRows ;
+    yawl:hasField yawl:ActiveCases_hdnRowIndex ;
+    yawl:hasField yawl:ActiveCases_pnlContainer ;
+    yawl:hasField yawl:ActiveCases_pnlGroup ;
+    yawl:hasField yawl:ActiveCases_btnDetails ;
+    yawl:hasField yawl:ActiveCases_caseIDHeaderText ;
+    yawl:hasField yawl:ActiveCases_specNameHeaderText ;
+    yawl:hasField yawl:ActiveCases_specVersionHeaderText ;
+    yawl:hasField yawl:ActiveCases_startTimeHeaderText ;
+    yawl:hasField yawl:ActiveCases__sb ;
+    yawl:hasField yawl:ActiveCases_msgPanel ;
+    yawl:hasField yawl:ActiveCases_startUpText ;
+    .
+
+
+# Method: ActiveCases._init
+yawl:ActiveCases__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ActiveCases.getSessionBean
+yawl:ActiveCases_getSessionBean_2 a yawl:Method ;
+    rdfs:label "getSessionBean" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getSessionBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ActiveCases.getApplicationBean
+yawl:ActiveCases_getApplicationBean_3 a yawl:Method ;
+    rdfs:label "getApplicationBean" ;
+    yawl:returnType "ApplicationBean" ;
+    yawl:signature "ApplicationBean getApplicationBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ActiveCases.init
+yawl:ActiveCases_init_4 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.preprocess
+yawl:ActiveCases_preprocess_5 a yawl:Method ;
+    rdfs:label "preprocess" ;
+    yawl:returnType "void" ;
+    yawl:signature "void preprocess()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.destroy
+yawl:ActiveCases_destroy_6 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.getPage1
+yawl:ActiveCases_getPage1_7 a yawl:Method ;
+    rdfs:label "getPage1" ;
+    yawl:returnType "Page" ;
+    yawl:signature "Page getPage1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.setPage1
+yawl:ActiveCases_setPage1_8 a yawl:Method ;
+    rdfs:label "setPage1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPage1(Page p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.getHtml1
+yawl:ActiveCases_getHtml1_9 a yawl:Method ;
+    rdfs:label "getHtml1" ;
+    yawl:returnType "Html" ;
+    yawl:signature "Html getHtml1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.setHtml1
+yawl:ActiveCases_setHtml1_10 a yawl:Method ;
+    rdfs:label "setHtml1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHtml1(Html h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.getHead1
+yawl:ActiveCases_getHead1_11 a yawl:Method ;
+    rdfs:label "getHead1" ;
+    yawl:returnType "Head" ;
+    yawl:signature "Head getHead1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.setHead1
+yawl:ActiveCases_setHead1_12 a yawl:Method ;
+    rdfs:label "setHead1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHead1(Head h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.getLink1
+yawl:ActiveCases_getLink1_13 a yawl:Method ;
+    rdfs:label "getLink1" ;
+    yawl:returnType "Link" ;
+    yawl:signature "Link getLink1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.setLink1
+yawl:ActiveCases_setLink1_14 a yawl:Method ;
+    rdfs:label "setLink1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLink1(Link l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.getBody1
+yawl:ActiveCases_getBody1_15 a yawl:Method ;
+    rdfs:label "getBody1" ;
+    yawl:returnType "Body" ;
+    yawl:signature "Body getBody1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.setBody1
+yawl:ActiveCases_setBody1_16 a yawl:Method ;
+    rdfs:label "setBody1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBody1(Body b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.getForm1
+yawl:ActiveCases_getForm1_17 a yawl:Method ;
+    rdfs:label "getForm1" ;
+    yawl:returnType "Form" ;
+    yawl:signature "Form getForm1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.setForm1
+yawl:ActiveCases_setForm1_18 a yawl:Method ;
+    rdfs:label "setForm1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setForm1(Form f)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.getStaticText
+yawl:ActiveCases_getStaticText_19 a yawl:Method ;
+    rdfs:label "getStaticText" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getStaticText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.setStaticText
+yawl:ActiveCases_setStaticText_20 a yawl:Method ;
+    rdfs:label "setStaticText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStaticText(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.getStUptime
+yawl:ActiveCases_getStUptime_21 a yawl:Method ;
+    rdfs:label "getStUptime" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getStUptime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.setStUptime
+yawl:ActiveCases_setStUptime_22 a yawl:Method ;
+    rdfs:label "setStUptime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStUptime(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.getLayoutPanel
+yawl:ActiveCases_getLayoutPanel_23 a yawl:Method ;
+    rdfs:label "getLayoutPanel" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getLayoutPanel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.setLayoutPanel
+yawl:ActiveCases_setLayoutPanel_24 a yawl:Method ;
+    rdfs:label "setLayoutPanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLayoutPanel(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.getDataTable
+yawl:ActiveCases_getDataTable_25 a yawl:Method ;
+    rdfs:label "getDataTable" ;
+    yawl:returnType "HtmlDataTable" ;
+    yawl:signature "HtmlDataTable getDataTable()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.setDataTable
+yawl:ActiveCases_setDataTable_26 a yawl:Method ;
+    rdfs:label "setDataTable" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataTable(HtmlDataTable hdt)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.getColCaseID
+yawl:ActiveCases_getColCaseID_27 a yawl:Method ;
+    rdfs:label "getColCaseID" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColCaseID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.setColCaseID
+yawl:ActiveCases_setColCaseID_28 a yawl:Method ;
+    rdfs:label "setColCaseID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColCaseID(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.getColCaseIDRows
+yawl:ActiveCases_getColCaseIDRows_29 a yawl:Method ;
+    rdfs:label "getColCaseIDRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColCaseIDRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.setColCaseIDRows
+yawl:ActiveCases_setColCaseIDRows_30 a yawl:Method ;
+    rdfs:label "setColCaseIDRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColCaseIDRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.getColSpecName
+yawl:ActiveCases_getColSpecName_31 a yawl:Method ;
+    rdfs:label "getColSpecName" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColSpecName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.setColSpecName
+yawl:ActiveCases_setColSpecName_32 a yawl:Method ;
+    rdfs:label "setColSpecName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColSpecName(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.getColSpecNameRows
+yawl:ActiveCases_getColSpecNameRows_33 a yawl:Method ;
+    rdfs:label "getColSpecNameRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColSpecNameRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.setColSpecNameRows
+yawl:ActiveCases_setColSpecNameRows_34 a yawl:Method ;
+    rdfs:label "setColSpecNameRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColSpecNameRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.getColVersion
+yawl:ActiveCases_getColVersion_35 a yawl:Method ;
+    rdfs:label "getColVersion" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColVersion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.setColVersion
+yawl:ActiveCases_setColVersion_36 a yawl:Method ;
+    rdfs:label "setColVersion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColVersion(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.getColVersionRows
+yawl:ActiveCases_getColVersionRows_37 a yawl:Method ;
+    rdfs:label "getColVersionRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColVersionRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.setColVersionRows
+yawl:ActiveCases_setColVersionRows_38 a yawl:Method ;
+    rdfs:label "setColVersionRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColVersionRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.getColStartTime
+yawl:ActiveCases_getColStartTime_39 a yawl:Method ;
+    rdfs:label "getColStartTime" ;
+    yawl:returnType "UIColumn" ;
+    yawl:signature "UIColumn getColStartTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.setColStartTime
+yawl:ActiveCases_setColStartTime_40 a yawl:Method ;
+    rdfs:label "setColStartTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColStartTime(UIColumn uic)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.getColStartTimeRows
+yawl:ActiveCases_getColStartTimeRows_41 a yawl:Method ;
+    rdfs:label "getColStartTimeRows" ;
+    yawl:returnType "HtmlOutputText" ;
+    yawl:signature "HtmlOutputText getColStartTimeRows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.setColStartTimeRows
+yawl:ActiveCases_setColStartTimeRows_42 a yawl:Method ;
+    rdfs:label "setColStartTimeRows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColStartTimeRows(HtmlOutputText hot)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.getHdnRowIndex
+yawl:ActiveCases_getHdnRowIndex_43 a yawl:Method ;
+    rdfs:label "getHdnRowIndex" ;
+    yawl:returnType "HiddenField" ;
+    yawl:signature "HiddenField getHdnRowIndex()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.setHdnRowIndex
+yawl:ActiveCases_setHdnRowIndex_44 a yawl:Method ;
+    rdfs:label "setHdnRowIndex" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHdnRowIndex(HiddenField hf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.getPnlContainer
+yawl:ActiveCases_getPnlContainer_45 a yawl:Method ;
+    rdfs:label "getPnlContainer" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlContainer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.setPnlContainer
+yawl:ActiveCases_setPnlContainer_46 a yawl:Method ;
+    rdfs:label "setPnlContainer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlContainer(PanelLayout pnl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.getPnlGroup
+yawl:ActiveCases_getPnlGroup_47 a yawl:Method ;
+    rdfs:label "getPnlGroup" ;
+    yawl:returnType "PanelGroup" ;
+    yawl:signature "PanelGroup getPnlGroup()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.setPnlGroup
+yawl:ActiveCases_setPnlGroup_48 a yawl:Method ;
+    rdfs:label "setPnlGroup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlGroup(PanelGroup group)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.getBtnDetails
+yawl:ActiveCases_getBtnDetails_49 a yawl:Method ;
+    rdfs:label "getBtnDetails" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnDetails()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.setBtnDetails
+yawl:ActiveCases_setBtnDetails_50 a yawl:Method ;
+    rdfs:label "setBtnDetails" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnDetails(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.getCaseIDHeaderText
+yawl:ActiveCases_getCaseIDHeaderText_51 a yawl:Method ;
+    rdfs:label "getCaseIDHeaderText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseIDHeaderText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.setCaseIDHeaderText
+yawl:ActiveCases_setCaseIDHeaderText_52 a yawl:Method ;
+    rdfs:label "setCaseIDHeaderText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCaseIDHeaderText(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.getSpecNameHeaderText
+yawl:ActiveCases_getSpecNameHeaderText_53 a yawl:Method ;
+    rdfs:label "getSpecNameHeaderText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecNameHeaderText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.setSpecNameHeaderText
+yawl:ActiveCases_setSpecNameHeaderText_54 a yawl:Method ;
+    rdfs:label "setSpecNameHeaderText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSpecNameHeaderText(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.getSpecVersionHeaderText
+yawl:ActiveCases_getSpecVersionHeaderText_55 a yawl:Method ;
+    rdfs:label "getSpecVersionHeaderText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecVersionHeaderText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.setSpecVersionHeaderText
+yawl:ActiveCases_setSpecVersionHeaderText_56 a yawl:Method ;
+    rdfs:label "setSpecVersionHeaderText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSpecVersionHeaderText(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.getStartTimeHeaderText
+yawl:ActiveCases_getStartTimeHeaderText_57 a yawl:Method ;
+    rdfs:label "getStartTimeHeaderText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStartTimeHeaderText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.setStartTimeHeaderText
+yawl:ActiveCases_setStartTimeHeaderText_58 a yawl:Method ;
+    rdfs:label "setStartTimeHeaderText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStartTimeHeaderText(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.prerender
+yawl:ActiveCases_prerender_59 a yawl:Method ;
+    rdfs:label "prerender" ;
+    yawl:returnType "void" ;
+    yawl:signature "void prerender()" ;
+    rdfs:comment """Overridden method that is called immediately before the page is rendered""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.getStartupTime
+yawl:ActiveCases_getStartupTime_60 a yawl:Method ;
+    rdfs:label "getStartupTime" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStartupTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.btnRefresh_action
+yawl:ActiveCases_btnRefresh_action_61 a yawl:Method ;
+    rdfs:label "btnRefresh_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnRefresh_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.btnLogout_action
+yawl:ActiveCases_btnLogout_action_62 a yawl:Method ;
+    rdfs:label "btnLogout_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnLogout_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.btnDetails_action
+yawl:ActiveCases_btnDetails_action_63 a yawl:Method ;
+    rdfs:label "btnDetails_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnDetails_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.caseIDHeaderClick
+yawl:ActiveCases_caseIDHeaderClick_64 a yawl:Method ;
+    rdfs:label "caseIDHeaderClick" ;
+    yawl:returnType "String" ;
+    yawl:signature "String caseIDHeaderClick()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.specNameHeaderClick
+yawl:ActiveCases_specNameHeaderClick_65 a yawl:Method ;
+    rdfs:label "specNameHeaderClick" ;
+    yawl:returnType "String" ;
+    yawl:signature "String specNameHeaderClick()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.specVersionHeaderClick
+yawl:ActiveCases_specVersionHeaderClick_66 a yawl:Method ;
+    rdfs:label "specVersionHeaderClick" ;
+    yawl:returnType "String" ;
+    yawl:signature "String specVersionHeaderClick()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.startTimeHeaderClick
+yawl:ActiveCases_startTimeHeaderClick_67 a yawl:Method ;
+    rdfs:label "startTimeHeaderClick" ;
+    yawl:returnType "String" ;
+    yawl:signature "String startTimeHeaderClick()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ActiveCases.sortTable
+yawl:ActiveCases_sortTable_68 a yawl:Method ;
+    rdfs:label "sortTable" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sortTable(TableSorter column)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ActiveCases.setHeaderButtonText
+yawl:ActiveCases_setHeaderButtonText_69 a yawl:Method ;
+    rdfs:label "setHeaderButtonText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHeaderButtonText()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ActiveCases.resetHeaderButtons
+yawl:ActiveCases_resetHeaderButtons_70 a yawl:Method ;
+    rdfs:label "resetHeaderButtons" ;
+    yawl:returnType "void" ;
+    yawl:signature "void resetHeaderButtons()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ActiveCases.getOrderIndicator
+yawl:ActiveCases_getOrderIndicator_71 a yawl:Method ;
+    rdfs:label "getOrderIndicator" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOrderIndicator(boolean ascending)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:ActiveCases___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:ActiveCases_page1 a yawl:Field ;
+    rdfs:label "page1" .
+
+yawl:ActiveCases_html1 a yawl:Field ;
+    rdfs:label "html1" .
+
+yawl:ActiveCases_head1 a yawl:Field ;
+    rdfs:label "head1" .
+
+yawl:ActiveCases_link1 a yawl:Field ;
+    rdfs:label "link1" .
+
+yawl:ActiveCases_body1 a yawl:Field ;
+    rdfs:label "body1" .
+
+yawl:ActiveCases_form1 a yawl:Field ;
+    rdfs:label "form1" .
+
+yawl:ActiveCases_staticText a yawl:Field ;
+    rdfs:label "staticText" .
+
+yawl:ActiveCases_stUptime a yawl:Field ;
+    rdfs:label "stUptime" .
+
+yawl:ActiveCases_layoutPanel a yawl:Field ;
+    rdfs:label "layoutPanel" .
+
+yawl:ActiveCases_dataTable a yawl:Field ;
+    rdfs:label "dataTable" .
+
+yawl:ActiveCases_colCaseID a yawl:Field ;
+    rdfs:label "colCaseID" .
+
+yawl:ActiveCases_colCaseIDRows a yawl:Field ;
+    rdfs:label "colCaseIDRows" .
+
+yawl:ActiveCases_colSpecName a yawl:Field ;
+    rdfs:label "colSpecName" .
+
+yawl:ActiveCases_colSpecNameRows a yawl:Field ;
+    rdfs:label "colSpecNameRows" .
+
+yawl:ActiveCases_colVersion a yawl:Field ;
+    rdfs:label "colVersion" .
+
+yawl:ActiveCases_colVersionRows a yawl:Field ;
+    rdfs:label "colVersionRows" .
+
+yawl:ActiveCases_colStartTime a yawl:Field ;
+    rdfs:label "colStartTime" .
+
+yawl:ActiveCases_colStartTimeRows a yawl:Field ;
+    rdfs:label "colStartTimeRows" .
+
+yawl:ActiveCases_hdnRowIndex a yawl:Field ;
+    rdfs:label "hdnRowIndex" .
+
+yawl:ActiveCases_pnlContainer a yawl:Field ;
+    rdfs:label "pnlContainer" .
+
+yawl:ActiveCases_pnlGroup a yawl:Field ;
+    rdfs:label "pnlGroup" .
+
+yawl:ActiveCases_btnDetails a yawl:Field ;
+    rdfs:label "btnDetails" .
+
+yawl:ActiveCases_caseIDHeaderText a yawl:Field ;
+    rdfs:label "caseIDHeaderText" .
+
+yawl:ActiveCases_specNameHeaderText a yawl:Field ;
+    rdfs:label "specNameHeaderText" .
+
+yawl:ActiveCases_specVersionHeaderText a yawl:Field ;
+    rdfs:label "specVersionHeaderText" .
+
+yawl:ActiveCases_startTimeHeaderText a yawl:Field ;
+    rdfs:label "startTimeHeaderText" .
+
+yawl:ActiveCases__sb a yawl:Field ;
+    rdfs:label "_sb" .
+
+yawl:ActiveCases_msgPanel a yawl:Field ;
+    rdfs:label "msgPanel" .
+
+yawl:ActiveCases_startUpText a yawl:Field ;
+    rdfs:label "startUpText" .
+
+
+

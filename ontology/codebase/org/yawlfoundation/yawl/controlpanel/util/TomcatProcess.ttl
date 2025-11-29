@@ -1,0 +1,217 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.util.TomcatProcess
+yawl:TomcatProcess a yawl:Class ;
+    rdfs:label "TomcatProcess" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/util/TomcatProcess.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 21/10/2015""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:TomcatProcess_start_1 ;
+    yawl:hasMethod yawl:TomcatProcess_stop_2 ;
+    yawl:hasMethod yawl:TomcatProcess_isAlive_3 ;
+    yawl:hasMethod yawl:TomcatProcess_isMonitoringShutdown_4 ;
+    yawl:hasMethod yawl:TomcatProcess_kill_5 ;
+    yawl:hasMethod yawl:TomcatProcess_destroy_6 ;
+    yawl:hasMethod yawl:TomcatProcess_getEnvParams_7 ;
+    yawl:hasMethod yawl:TomcatProcess_printEnvParameters_8 ;
+    yawl:hasMethod yawl:TomcatProcess_getStartCommand_9 ;
+    yawl:hasMethod yawl:TomcatProcess_getStopCommand_10 ;
+    yawl:hasMethod yawl:TomcatProcess_getCommand_11 ;
+    yawl:hasMethod yawl:TomcatProcess_buildBaseCmd_12 ;
+    yawl:hasMethod yawl:TomcatProcess_monitorStartup_13 ;
+    yawl:hasMethod yawl:TomcatProcess_monitorShutdown_14 ;
+    yawl:hasMethod yawl:TomcatProcess_getJavaTasks_15 ;
+    yawl:hasMethod yawl:TomcatProcess_extractPID_16 ;
+    yawl:hasMethod yawl:TomcatProcess_writePID_17 ;
+    yawl:hasMethod yawl:TomcatProcess_getPID_18 ;
+    yawl:hasMethod yawl:TomcatProcess_removePidFile_19 ;
+    yawl:hasMethod yawl:TomcatProcess_getPidFile_20 ;
+    yawl:hasField yawl:TomcatProcess__tomcatRunner ;
+    yawl:hasField yawl:TomcatProcess__catalinaHome ;
+    yawl:hasField yawl:TomcatProcess__winPid ;
+    yawl:hasField yawl:TomcatProcess__stopMonitor ;
+    .
+
+
+# Method: TomcatProcess.start
+yawl:TomcatProcess_start_1 a yawl:Method ;
+    rdfs:label "start" ;
+    yawl:returnType "void" ;
+    yawl:signature "void start()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TomcatProcess.stop
+yawl:TomcatProcess_stop_2 a yawl:Method ;
+    rdfs:label "stop" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean stop(PropertyChangeListener listener)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TomcatProcess.isAlive
+yawl:TomcatProcess_isAlive_3 a yawl:Method ;
+    rdfs:label "isAlive" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAlive()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TomcatProcess.isMonitoringShutdown
+yawl:TomcatProcess_isMonitoringShutdown_4 a yawl:Method ;
+    rdfs:label "isMonitoringShutdown" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isMonitoringShutdown()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TomcatProcess.kill
+yawl:TomcatProcess_kill_5 a yawl:Method ;
+    rdfs:label "kill" ;
+    yawl:returnType "void" ;
+    yawl:signature "void kill()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TomcatProcess.destroy
+yawl:TomcatProcess_destroy_6 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TomcatProcess.getEnvParams
+yawl:TomcatProcess_getEnvParams_7 a yawl:Method ;
+    rdfs:label "getEnvParams" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getEnvParams()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TomcatProcess.printEnvParameters
+yawl:TomcatProcess_printEnvParameters_8 a yawl:Method ;
+    rdfs:label "printEnvParameters" ;
+    yawl:returnType "void" ;
+    yawl:signature "void printEnvParameters(Map params)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TomcatProcess.getStartCommand
+yawl:TomcatProcess_getStartCommand_9 a yawl:Method ;
+    rdfs:label "getStartCommand" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getStartCommand()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TomcatProcess.getStopCommand
+yawl:TomcatProcess_getStopCommand_10 a yawl:Method ;
+    rdfs:label "getStopCommand" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getStopCommand()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TomcatProcess.getCommand
+yawl:TomcatProcess_getCommand_11 a yawl:Method ;
+    rdfs:label "getCommand" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getCommand(String arg)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TomcatProcess.buildBaseCmd
+yawl:TomcatProcess_buildBaseCmd_12 a yawl:Method ;
+    rdfs:label "buildBaseCmd" ;
+    yawl:returnType "String" ;
+    yawl:signature "String buildBaseCmd()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TomcatProcess.monitorStartup
+yawl:TomcatProcess_monitorStartup_13 a yawl:Method ;
+    rdfs:label "monitorStartup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void monitorStartup(boolean isWindows, Set preTasks)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TomcatProcess.monitorShutdown
+yawl:TomcatProcess_monitorShutdown_14 a yawl:Method ;
+    rdfs:label "monitorShutdown" ;
+    yawl:returnType "void" ;
+    yawl:signature "void monitorShutdown(PropertyChangeListener listener)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: TomcatProcess.getJavaTasks
+yawl:TomcatProcess_getJavaTasks_15 a yawl:Method ;
+    rdfs:label "getJavaTasks" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getJavaTasks()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TomcatProcess.extractPID
+yawl:TomcatProcess_extractPID_16 a yawl:Method ;
+    rdfs:label "extractPID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String extractPID(Set preTasks, Set postTasks)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TomcatProcess.writePID
+yawl:TomcatProcess_writePID_17 a yawl:Method ;
+    rdfs:label "writePID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void writePID(String pid)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TomcatProcess.getPID
+yawl:TomcatProcess_getPID_18 a yawl:Method ;
+    rdfs:label "getPID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPID()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TomcatProcess.removePidFile
+yawl:TomcatProcess_removePidFile_19 a yawl:Method ;
+    rdfs:label "removePidFile" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removePidFile()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TomcatProcess.getPidFile
+yawl:TomcatProcess_getPidFile_20 a yawl:Method ;
+    rdfs:label "getPidFile" ;
+    yawl:returnType "File" ;
+    yawl:signature "File getPidFile()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:TomcatProcess__tomcatRunner a yawl:Field ;
+    rdfs:label "_tomcatRunner" .
+
+yawl:TomcatProcess__catalinaHome a yawl:Field ;
+    rdfs:label "_catalinaHome" .
+
+yawl:TomcatProcess__winPid a yawl:Field ;
+    rdfs:label "_winPid" .
+
+yawl:TomcatProcess__stopMonitor a yawl:Field ;
+    rdfs:label "_stopMonitor" .
+
+
+

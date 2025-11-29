@@ -1,0 +1,186 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.scheduling.ConfigManager
+yawl:ConfigManager a yawl:Class ;
+    rdfs:label "ConfigManager" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_scheduling ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/scheduling/ConfigManager.java"^^xsd:string ;
+    rdfs:comment """Manages the loading of resource bundles and other properties. Each instance for a specific locale is cached and reused""" ;
+    yawl:implements yawl:Constants ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ConfigManager_getInstance_1 ;
+    yawl:hasMethod yawl:ConfigManager_getInstance_2 ;
+    yawl:hasMethod yawl:ConfigManager_getInstance_3 ;
+    yawl:hasMethod yawl:ConfigManager_getFromRequest_4 ;
+    yawl:hasMethod yawl:ConfigManager_getLocaleFromLanguage_5 ;
+    yawl:hasMethod yawl:ConfigManager_containsLanguage_6 ;
+    yawl:hasMethod yawl:ConfigManager_getLocalesFromRequest_7 ;
+    yawl:hasMethod yawl:ConfigManager_loadBundle_8 ;
+    yawl:hasMethod yawl:ConfigManager_getLocale_9 ;
+    yawl:hasMethod yawl:ConfigManager_getLanguage_10 ;
+    yawl:hasMethod yawl:ConfigManager_getBundleString_11 ;
+    yawl:hasMethod yawl:ConfigManager_getLocalizedString_12 ;
+    yawl:hasMethod yawl:ConfigManager_getLocalizedJSONString_13 ;
+    yawl:hasMethod yawl:ConfigManager_getLocalizedString_14 ;
+    yawl:hasField yawl:ConfigManager_FILENAME_RESOURCES ;
+    yawl:hasField yawl:ConfigManager__bundle ;
+    yawl:hasField yawl:ConfigManager__instances ;
+    yawl:hasField yawl:ConfigManager__log ;
+    .
+
+
+# Method: ConfigManager.getInstance
+yawl:ConfigManager_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "ConfigManager" ;
+    yawl:signature "ConfigManager getInstance()" ;
+    rdfs:comment """Gets a ConfigManager instance using the default language (set in Constants) @return the ConfigManager instance""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ConfigManager.getInstance
+yawl:ConfigManager_getInstance_2 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "ConfigManager" ;
+    yawl:signature "ConfigManager getInstance(String language)" ;
+    rdfs:comment """Gets a ConfigManager instance using the specified language @param language the language to get a ConfigManager instance for @return the ConfigManager instance""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ConfigManager.getInstance
+yawl:ConfigManager_getInstance_3 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "ConfigManager" ;
+    yawl:signature "ConfigManager getInstance(ResourceBundle bundle)" ;
+    rdfs:comment """Gets a ConfigManager instance using the specified ResourceBundle @param bundle the bundle to get a ConfigManager instance for @return the ConfigManager instance""" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ConfigManager.getFromRequest
+yawl:ConfigManager_getFromRequest_4 a yawl:Method ;
+    rdfs:label "getFromRequest" ;
+    yawl:returnType "ConfigManager" ;
+    yawl:signature "ConfigManager getFromRequest(HttpServletRequest request)" ;
+    rdfs:comment """Gets the appropriate ConfigManager, based on a servlet request. @param request the request to use to select the appropriate ConfigManager instance @return the appropriate ConfigManager instance""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ConfigManager.getLocaleFromLanguage
+yawl:ConfigManager_getLocaleFromLanguage_5 a yawl:Method ;
+    rdfs:label "getLocaleFromLanguage" ;
+    yawl:returnType "Locale" ;
+    yawl:signature "Locale getLocaleFromLanguage(String language)" ;
+    rdfs:comment """Creates a new Locale instance using the language specified @param language the locale's language @return the new Locale instance""" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ConfigManager.containsLanguage
+yawl:ConfigManager_containsLanguage_6 a yawl:Method ;
+    rdfs:label "containsLanguage" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean containsLanguage(List locales, String language)" ;
+    rdfs:comment """Checks whether a list of locales contains a specified language @param locales a list of Locale objects @param language the language to check for @return true if a listed Locale contains the specified language""" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ConfigManager.getLocalesFromRequest
+yawl:ConfigManager_getLocalesFromRequest_7 a yawl:Method ;
+    rdfs:label "getLocalesFromRequest" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getLocalesFromRequest(HttpServletRequest request)" ;
+    rdfs:comment """Gets the list of all Locales specified in the request, whether set as Locales or as a request parameter or session attribute @param request the request to parse @return a List of Locales found""" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ConfigManager.loadBundle
+yawl:ConfigManager_loadBundle_8 a yawl:Method ;
+    rdfs:label "loadBundle" ;
+    yawl:returnType "ResourceBundle" ;
+    yawl:signature "ResourceBundle loadBundle(List locales)" ;
+    rdfs:comment """Iterates through the list of Locales passed, checks each for an available ResourceBundle, loads the first one found and sets it as the default bundle @param locales the List to iterate through @return x""" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ConfigManager.getLocale
+yawl:ConfigManager_getLocale_9 a yawl:Method ;
+    rdfs:label "getLocale" ;
+    yawl:returnType "Locale" ;
+    yawl:signature "Locale getLocale()" ;
+    rdfs:comment """Gets the locale of the currently loaded ResourceBundle @return the loaded locale, or null of no locale is loaded""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ConfigManager.getLanguage
+yawl:ConfigManager_getLanguage_10 a yawl:Method ;
+    rdfs:label "getLanguage" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLanguage()" ;
+    rdfs:comment """Gets the language of the locale of the currently loaded ResourceBundle @return the loaded locale's language, or null of no locale is loaded""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ConfigManager.getBundleString
+yawl:ConfigManager_getBundleString_11 a yawl:Method ;
+    rdfs:label "getBundleString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBundleString(String key)" ;
+    rdfs:comment """Gets the matching value for a given key from the loaded ResourceBundle @param key the key to get the value for @return the value matching the key, or the key itself if not found""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConfigManager.getLocalizedString
+yawl:ConfigManager_getLocalizedString_12 a yawl:Method ;
+    rdfs:label "getLocalizedString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLocalizedString(String key, String subKeys)" ;
+    rdfs:comment """Gets the localised value (a string message in the current language) for a key. If the value contains placeholders, replaces each of them recursively with its own localised value for matching subkey specified, where possible. @param key the key to get the value for @param subKeys the set of keys to use as values for corresponding placeholders in the original value @return the fully populated value matching the key passed, or the key itself if there is some problem getting any of the values""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ConfigManager.getLocalizedJSONString
+yawl:ConfigManager_getLocalizedJSONString_13 a yawl:Method ;
+    rdfs:label "getLocalizedJSONString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLocalizedJSONString(String valueAndArgsAsJSON)" ;
+    rdfs:comment """Gets the localised value (a string message in the current language) for a key. If the value contains placeholders, replaces each of them recursively with its own localised value for matching keys specified, where possible. @param valueAndArgsAsJSON a JSON string containing the key to get the value for and the set of keys to use as values for corresponding placeholders in the original value (as an array) @return the fully populated value matching the key passed, or the key itself if there is some""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ConfigManager.getLocalizedString
+yawl:ConfigManager_getLocalizedString_14 a yawl:Method ;
+    rdfs:label "getLocalizedString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLocalizedString(String key)" ;
+    rdfs:comment """Gets the localised value (a string message in the current language) for a key @param key the key to get the value for @return the value matching the key, or the key itself if not found""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:ConfigManager_FILENAME_RESOURCES a yawl:Field ;
+    rdfs:label "FILENAME_RESOURCES" .
+
+yawl:ConfigManager__bundle a yawl:Field ;
+    rdfs:label "_bundle" .
+
+yawl:ConfigManager__instances a yawl:Field ;
+    rdfs:label "_instances" .
+
+yawl:ConfigManager__log a yawl:Field ;
+    rdfs:label "_log" .
+
+
+

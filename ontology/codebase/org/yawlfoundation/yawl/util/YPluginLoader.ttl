@@ -1,0 +1,159 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.util.YPluginLoader
+yawl:YPluginLoader a yawl:Class ;
+    rdfs:label "YPluginLoader" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/util/YPluginLoader.java"^^xsd:string ;
+    rdfs:comment """Loads classes from specified paths that implement or extend a particular class @author Michael Adams @date 16/04/14""" ;
+    yawl:extends yawl:URLClassLoader ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YPluginLoader_load_1 ;
+    yawl:hasMethod yawl:YPluginLoader_loadAsMap_2 ;
+    yawl:hasMethod yawl:YPluginLoader_loadInternal_3 ;
+    yawl:hasMethod yawl:YPluginLoader_getInstance_4 ;
+    yawl:hasMethod yawl:YPluginLoader_processJAR_5 ;
+    yawl:hasMethod yawl:YPluginLoader_processJAR_6 ;
+    yawl:hasMethod yawl:YPluginLoader_processJAR_7 ;
+    yawl:hasMethod yawl:YPluginLoader_addIfMatch_8 ;
+    yawl:hasMethod yawl:YPluginLoader_loadIfMatch_9 ;
+    yawl:hasMethod yawl:YPluginLoader_loadIfImplementer_10 ;
+    yawl:hasMethod yawl:YPluginLoader_fileToQualifiedClassName_11 ;
+    yawl:hasMethod yawl:YPluginLoader_setPath_12 ;
+    yawl:hasMethod yawl:YPluginLoader_getFileSet_13 ;
+    yawl:hasMethod yawl:YPluginLoader_loadPackageMatches_14 ;
+    yawl:hasField yawl:YPluginLoader__pathList ;
+    yawl:hasField yawl:YPluginLoader__log ;
+    .
+
+
+# Method: YPluginLoader.load
+yawl:YPluginLoader_load_1 a yawl:Method ;
+    rdfs:label "load" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set load(Class mask)" ;
+    rdfs:comment """Loads the set of classes found in the search path that implement or subclass a specified class @param mask the interface or super class to use as the basis of the search @param <T> @return the set of matching classes""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YPluginLoader.loadAsMap
+yawl:YPluginLoader_loadAsMap_2 a yawl:Method ;
+    rdfs:label "loadAsMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map loadAsMap(Class mask)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YPluginLoader.loadInternal
+yawl:YPluginLoader_loadInternal_3 a yawl:Method ;
+    rdfs:label "loadInternal" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set loadInternal(Class mask)" ;
+    rdfs:comment """Loads the set of classes that implement or subclass a specified class that are members of the same package as that class @param mask the interface or super class to use as the basis of the load @param <T> @return the set of matching classes""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YPluginLoader.getInstance
+yawl:YPluginLoader_getInstance_4 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "T" ;
+    yawl:signature "T getInstance(Class mask, String instanceName)" ;
+    rdfs:comment """Loads a class that implements or subclasses a specified class and matches a specific name @param mask the interface or super class to use as the basis of the load @param instanceName the name of the class to load an instance of @param <T> @return the loaded instance, or null if a matching class isn't found""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YPluginLoader.processJAR
+yawl:YPluginLoader_processJAR_5 a yawl:Method ;
+    rdfs:label "processJAR" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processJAR(Class mask, Set plugins, File f)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YPluginLoader.processJAR
+yawl:YPluginLoader_processJAR_6 a yawl:Method ;
+    rdfs:label "processJAR" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processJAR(Class mask, Set plugins, JarURLConnection connection)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YPluginLoader.processJAR
+yawl:YPluginLoader_processJAR_7 a yawl:Method ;
+    rdfs:label "processJAR" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processJAR(Class mask, Set plugins, JarFile jar)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YPluginLoader.addIfMatch
+yawl:YPluginLoader_addIfMatch_8 a yawl:Method ;
+    rdfs:label "addIfMatch" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addIfMatch(Class mask, Set plugins, String fileName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YPluginLoader.loadIfMatch
+yawl:YPluginLoader_loadIfMatch_9 a yawl:Method ;
+    rdfs:label "loadIfMatch" ;
+    yawl:returnType "Class" ;
+    yawl:signature "Class loadIfMatch(Class mask, String className)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YPluginLoader.loadIfImplementer
+yawl:YPluginLoader_loadIfImplementer_10 a yawl:Method ;
+    rdfs:label "loadIfImplementer" ;
+    yawl:returnType "Class" ;
+    yawl:signature "Class loadIfImplementer(Class c, Class interfaceToMatch)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YPluginLoader.fileToQualifiedClassName
+yawl:YPluginLoader_fileToQualifiedClassName_11 a yawl:Method ;
+    rdfs:label "fileToQualifiedClassName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String fileToQualifiedClassName(String path)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YPluginLoader.setPath
+yawl:YPluginLoader_setPath_12 a yawl:Method ;
+    rdfs:label "setPath" ;
+    yawl:returnType "List" ;
+    yawl:signature "List setPath(String pathStr)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YPluginLoader.getFileSet
+yawl:YPluginLoader_getFileSet_13 a yawl:Method ;
+    rdfs:label "getFileSet" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getFileSet(File dir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YPluginLoader.loadPackageMatches
+yawl:YPluginLoader_loadPackageMatches_14 a yawl:Method ;
+    rdfs:label "loadPackageMatches" ;
+    yawl:returnType "void" ;
+    yawl:signature "void loadPackageMatches(Class mask, Set plugins)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YPluginLoader__pathList a yawl:Field ;
+    rdfs:label "_pathList" .
+
+yawl:YPluginLoader__log a yawl:Field ;
+    rdfs:label "_log" .
+
+
+

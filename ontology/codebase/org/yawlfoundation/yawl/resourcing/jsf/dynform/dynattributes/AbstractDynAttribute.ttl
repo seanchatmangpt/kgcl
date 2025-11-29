@@ -1,0 +1,49 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.dynform.dynattributes.AbstractDynAttribute
+yawl:AbstractDynAttribute a yawl:Class ;
+    rdfs:label "AbstractDynAttribute" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf_dynform_dynattributes ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/dynform/dynattributes/AbstractDynAttribute.java"^^xsd:string ;
+    rdfs:comment """The base class for all DynAttribute classes. Create Date: 18/05/2009 @author Michael Adams @version 2.0""" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:AbstractDynAttribute_adjustFields_1 ;
+    yawl:hasMethod yawl:AbstractDynAttribute_applyAttributes_2 ;
+    .
+
+
+# Method: AbstractDynAttribute.adjustFields
+yawl:AbstractDynAttribute_adjustFields_1 a yawl:Method ;
+    rdfs:label "adjustFields" ;
+    yawl:returnType "void" ;
+    yawl:signature "void adjustFields(List fieldList, WorkItemRecord wir, Participant p)" ;
+    rdfs:comment """Applies modifications affecting the display of fields @param fieldList the list of DynFormField objects for the form. Note that a DynFormField can have DynFormField children of its own, hierarchically. @param wir the workitem being displayed on the form @param p the participant generating the form""" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractDynAttribute.applyAttributes
+yawl:AbstractDynAttribute_applyAttributes_2 a yawl:Method ;
+    rdfs:label "applyAttributes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void applyAttributes(PanelLayout parentPanel, WorkItemRecord wir, Participant p)" ;
+    rdfs:comment """Applies modifications to the display of dynamic form fields, as required @param parentPanel - the top level container of UIComponent objects for the form. Note that panel may contain other panels, hierarchically @param wir the workitem being displayed on the form @param p the participant generating the form""" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+
+
+yawl:org_yawlfoundation_yawl_resourcing_calendar_utilisation a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.calendar.utilisation" .
+
+

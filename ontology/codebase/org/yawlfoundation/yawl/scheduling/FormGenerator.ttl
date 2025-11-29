@@ -1,0 +1,350 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.scheduling.FormGenerator
+yawl:FormGenerator a yawl:Class ;
+    rdfs:label "FormGenerator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_scheduling ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/scheduling/FormGenerator.java"^^xsd:string ;
+    rdfs:comment """shows custom form for configuring utilisation plan @author tbe @version $Id: FormGenerator.java 30323 2011-05-17 10:50:07Z tbe $""" ;
+    yawl:implements yawl:Constants ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:FormGenerator_getConfig_1 ;
+    yawl:hasMethod yawl:FormGenerator_outForm_2 ;
+    yawl:hasMethod yawl:FormGenerator_outFormPriv_3 ;
+    yawl:hasMethod yawl:FormGenerator_completeWorkitem_4 ;
+    yawl:hasMethod yawl:FormGenerator_updateActivities_5 ;
+    yawl:hasMethod yawl:FormGenerator_updateRUPFromRequest_6 ;
+    yawl:hasMethod yawl:FormGenerator_validateAllElements_7 ;
+    yawl:hasMethod yawl:FormGenerator_validateElement_8 ;
+    yawl:hasMethod yawl:FormGenerator_validateXSD_9 ;
+    yawl:hasMethod yawl:FormGenerator_getForm_10 ;
+    yawl:hasMethod yawl:FormGenerator_getInputColumn_11 ;
+    yawl:hasMethod yawl:FormGenerator_getInputHTML_12 ;
+    yawl:hasMethod yawl:FormGenerator_getListOf_13 ;
+    yawl:hasMethod yawl:FormGenerator_getRow_14 ;
+    yawl:hasMethod yawl:FormGenerator_getErrorRow_15 ;
+    yawl:hasMethod yawl:FormGenerator_getColspan_16 ;
+    yawl:hasMethod yawl:FormGenerator_getAddButton_17 ;
+    yawl:hasMethod yawl:FormGenerator_getAddRemoveButtons_18 ;
+    yawl:hasMethod yawl:FormGenerator_getRequestType_19 ;
+    yawl:hasMethod yawl:FormGenerator_isRequestTypeSOU_20 ;
+    yawl:hasMethod yawl:FormGenerator_isRequestTypeEOU_21 ;
+    yawl:hasMethod yawl:FormGenerator_getTemplate_22 ;
+    yawl:hasMethod yawl:FormGenerator_redirect_23 ;
+    yawl:hasMethod yawl:FormGenerator_redirect_24 ;
+    yawl:hasMethod yawl:FormGenerator_handleError_25 ;
+    yawl:hasField yawl:FormGenerator__log ;
+    yawl:hasField yawl:FormGenerator_request ;
+    yawl:hasField yawl:FormGenerator_response ;
+    yawl:hasField yawl:FormGenerator_session ;
+    yawl:hasField yawl:FormGenerator_buffer ;
+    yawl:hasField yawl:FormGenerator_bufferTop ;
+    yawl:hasField yawl:FormGenerator_bufferBottom ;
+    yawl:hasField yawl:FormGenerator_bufferBottomDebug ;
+    yawl:hasField yawl:FormGenerator_ss ;
+    yawl:hasField yawl:FormGenerator_scheduler ;
+    yawl:hasField yawl:FormGenerator_rs ;
+    yawl:hasField yawl:FormGenerator_config ;
+    yawl:hasField yawl:FormGenerator__props ;
+    yawl:hasField yawl:FormGenerator_source ;
+    yawl:hasField yawl:FormGenerator_wirElement ;
+    yawl:hasField yawl:FormGenerator_userName ;
+    yawl:hasField yawl:FormGenerator_activities ;
+    yawl:hasField yawl:FormGenerator_count ;
+    yawl:hasField yawl:FormGenerator_isShortForm ;
+    yawl:hasField yawl:FormGenerator_canConfirmReservations ;
+    yawl:hasField yawl:FormGenerator_reschedulingRUPAfterEditInCustomForm ;
+    yawl:hasField yawl:FormGenerator_wrapBeforeResource ;
+    .
+
+
+# Method: FormGenerator.getConfig
+yawl:FormGenerator_getConfig_1 a yawl:Method ;
+    rdfs:label "getConfig" ;
+    yawl:returnType "ConfigManager" ;
+    yawl:signature "ConfigManager getConfig()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FormGenerator.outForm
+yawl:FormGenerator_outForm_2 a yawl:Method ;
+    rdfs:label "outForm" ;
+    yawl:returnType "String" ;
+    yawl:signature "String outForm()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FormGenerator.outFormPriv
+yawl:FormGenerator_outFormPriv_3 a yawl:Method ;
+    rdfs:label "outFormPriv" ;
+    yawl:returnType "void" ;
+    yawl:signature "void outFormPriv()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FormGenerator.completeWorkitem
+yawl:FormGenerator_completeWorkitem_4 a yawl:Method ;
+    rdfs:label "completeWorkitem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void completeWorkitem(String taskName, String itemid, String handle)" ;
+    rdfs:comment """@param taskName @param itemid @param handle @throws IOException""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FormGenerator.updateActivities
+yawl:FormGenerator_updateActivities_5 a yawl:Method ;
+    rdfs:label "updateActivities" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateActivities(Document doc)" ;
+    rdfs:comment """- remove empty 'dummy' resOrUtils - set RequestType to POU, but only if SOU or EOU is not set""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FormGenerator.updateRUPFromRequest
+yawl:FormGenerator_updateRUPFromRequest_6 a yawl:Method ;
+    rdfs:label "updateRUPFromRequest" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateRUPFromRequest(Document doc)" ;
+    rdfs:comment """get ResourceUtilisationPlan updated with data from request @return""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FormGenerator.validateAllElements
+yawl:FormGenerator_validateAllElements_7 a yawl:Method ;
+    rdfs:label "validateAllElements" ;
+    yawl:returnType "void" ;
+    yawl:signature "void validateAllElements(Element element)" ;
+    rdfs:comment """validates element and their children recursively @param element @return""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FormGenerator.validateElement
+yawl:FormGenerator_validateElement_8 a yawl:Method ;
+    rdfs:label "validateElement" ;
+    yawl:returnType "String" ;
+    yawl:signature "String validateElement(Element element, List restrictions)" ;
+    rdfs:comment """validates element and return css class and restrictions @param element @param restrictions @return""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FormGenerator.validateXSD
+yawl:FormGenerator_validateXSD_9 a yawl:Method ;
+    rdfs:label "validateXSD" ;
+    yawl:returnType "void" ;
+    yawl:signature "void validateXSD(Document rup)" ;
+    rdfs:comment """validates resource utilisation plan against syntax and data types of schema @param rup @return""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FormGenerator.getForm
+yawl:FormGenerator_getForm_10 a yawl:Method ;
+    rdfs:label "getForm" ;
+    yawl:returnType "StringBuffer" ;
+    yawl:signature "StringBuffer getForm(Case cas, boolean haveTosave)" ;
+    rdfs:comment """parses the ResourceUtilisationPlan and 1) generates HTML form for input of ResourceUtilisationPlan 2) generates list with keys for Reservations and UtilisationRelations to check @param cas @param haveTosave @return""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: FormGenerator.getInputColumn
+yawl:FormGenerator_getInputColumn_11 a yawl:Method ;
+    rdfs:label "getInputColumn" ;
+    yawl:returnType "StringBuffer" ;
+    yawl:signature "StringBuffer getInputColumn(Element field, String name2Show, Element dependingField, String key, boolean visible)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FormGenerator.getInputHTML
+yawl:FormGenerator_getInputHTML_12 a yawl:Method ;
+    rdfs:label "getInputHTML" ;
+    yawl:returnType "StringBuffer" ;
+    yawl:signature "StringBuffer getInputHTML(Element field, Element dependingField, String key)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FormGenerator.getListOf
+yawl:FormGenerator_getListOf_13 a yawl:Method ;
+    rdfs:label "getListOf" ;
+    yawl:returnType "StringBuffer" ;
+    yawl:signature "StringBuffer getListOf(Element activity, String listElementName, boolean visible)" ;
+    rdfs:comment """gets rows for each element of type reservation or utilisationRelation @param listElementName @return""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FormGenerator.getRow
+yawl:FormGenerator_getRow_14 a yawl:Method ;
+    rdfs:label "getRow" ;
+    yawl:returnType "StringBuffer" ;
+    yawl:signature "StringBuffer getRow(Element resOrUtil, String key, boolean disabledButton)" ;
+    rdfs:comment """gets row for a element of type reservation or utilisationRelation @param resOrUtil @param key @param disabledButton @return""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FormGenerator.getErrorRow
+yawl:FormGenerator_getErrorRow_15 a yawl:Method ;
+    rdfs:label "getErrorRow" ;
+    yawl:returnType "StringBuffer" ;
+    yawl:signature "StringBuffer getErrorRow(Element element, String key)" ;
+    rdfs:comment """gets error row for a element of type reservation or utilisationRelation @param element @param key @return""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FormGenerator.getColspan
+yawl:FormGenerator_getColspan_16 a yawl:Method ;
+    rdfs:label "getColspan" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getColspan(Element element)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FormGenerator.getAddButton
+yawl:FormGenerator_getAddButton_17 a yawl:Method ;
+    rdfs:label "getAddButton" ;
+    yawl:returnType "StringBuffer" ;
+    yawl:signature "StringBuffer getAddButton(String templateName, String key, String insertName, boolean disabled)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FormGenerator.getAddRemoveButtons
+yawl:FormGenerator_getAddRemoveButtons_18 a yawl:Method ;
+    rdfs:label "getAddRemoveButtons" ;
+    yawl:returnType "StringBuffer" ;
+    yawl:signature "StringBuffer getAddRemoveButtons(String key, boolean disabled, int levelsUp)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FormGenerator.getRequestType
+yawl:FormGenerator_getRequestType_19 a yawl:Method ;
+    rdfs:label "getRequestType" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRequestType(Element activity)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FormGenerator.isRequestTypeSOU
+yawl:FormGenerator_isRequestTypeSOU_20 a yawl:Method ;
+    rdfs:label "isRequestTypeSOU" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isRequestTypeSOU(Element activity)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FormGenerator.isRequestTypeEOU
+yawl:FormGenerator_isRequestTypeEOU_21 a yawl:Method ;
+    rdfs:label "isRequestTypeEOU" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isRequestTypeEOU(Element activity)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FormGenerator.getTemplate
+yawl:FormGenerator_getTemplate_22 a yawl:Method ;
+    rdfs:label "getTemplate" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getTemplate(String elementName)" ;
+    rdfs:comment """TODO@tbe: can we generate this templates from XSD? @param elementName @return""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FormGenerator.redirect
+yawl:FormGenerator_redirect_23 a yawl:Method ;
+    rdfs:label "redirect" ;
+    yawl:returnType "void" ;
+    yawl:signature "void redirect(String source)" ;
+    rdfs:comment """redirect to source""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FormGenerator.redirect
+yawl:FormGenerator_redirect_24 a yawl:Method ;
+    rdfs:label "redirect" ;
+    yawl:returnType "void" ;
+    yawl:signature "void redirect()" ;
+    rdfs:comment """redirect back to the worklist""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FormGenerator.handleError
+yawl:FormGenerator_handleError_25 a yawl:Method ;
+    rdfs:label "handleError" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleError(Throwable t)" ;
+    rdfs:comment """shows error page""" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:FormGenerator__log a yawl:Field ;
+    rdfs:label "_log" .
+
+yawl:FormGenerator_request a yawl:Field ;
+    rdfs:label "request" .
+
+yawl:FormGenerator_response a yawl:Field ;
+    rdfs:label "response" .
+
+yawl:FormGenerator_session a yawl:Field ;
+    rdfs:label "session" .
+
+yawl:FormGenerator_buffer a yawl:Field ;
+    rdfs:label "buffer" .
+
+yawl:FormGenerator_bufferTop a yawl:Field ;
+    rdfs:label "bufferTop" .
+
+yawl:FormGenerator_bufferBottom a yawl:Field ;
+    rdfs:label "bufferBottom" .
+
+yawl:FormGenerator_bufferBottomDebug a yawl:Field ;
+    rdfs:label "bufferBottomDebug" .
+
+yawl:FormGenerator_ss a yawl:Field ;
+    rdfs:label "ss" .
+
+yawl:FormGenerator_scheduler a yawl:Field ;
+    rdfs:label "scheduler" .
+
+yawl:FormGenerator_rs a yawl:Field ;
+    rdfs:label "rs" .
+
+yawl:FormGenerator_config a yawl:Field ;
+    rdfs:label "config" .
+
+yawl:FormGenerator__props a yawl:Field ;
+    rdfs:label "_props" .
+
+yawl:FormGenerator_source a yawl:Field ;
+    rdfs:label "source" .
+
+yawl:FormGenerator_wirElement a yawl:Field ;
+    rdfs:label "wirElement" .
+
+yawl:FormGenerator_userName a yawl:Field ;
+    rdfs:label "userName" .
+
+yawl:FormGenerator_activities a yawl:Field ;
+    rdfs:label "activities" .
+
+yawl:FormGenerator_count a yawl:Field ;
+    rdfs:label "count" .
+
+yawl:FormGenerator_isShortForm a yawl:Field ;
+    rdfs:label "isShortForm" .
+
+yawl:FormGenerator_canConfirmReservations a yawl:Field ;
+    rdfs:label "canConfirmReservations" .
+
+yawl:FormGenerator_reschedulingRUPAfterEditInCustomForm a yawl:Field ;
+    rdfs:label "reschedulingRUPAfterEditInCustomForm" .
+
+yawl:FormGenerator_wrapBeforeResource a yawl:Field ;
+    rdfs:label "wrapBeforeResource" .
+
+
+

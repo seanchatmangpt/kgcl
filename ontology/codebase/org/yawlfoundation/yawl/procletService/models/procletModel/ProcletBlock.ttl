@@ -1,0 +1,130 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.procletService.models.procletModel
+yawl:org_yawlfoundation_yawl_procletService_models_procletModel a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.procletService.models.procletModel" .
+# Class: org.yawlfoundation.yawl.procletService.models.procletModel.ProcletBlock
+yawl:ProcletBlock a yawl:Class ;
+    rdfs:label "ProcletBlock" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_models_procletModel ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/models/procletModel/ProcletBlock.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ProcletBlock_getBlockID_1 ;
+    yawl:hasMethod yawl:ProcletBlock_setBlockID_2 ;
+    yawl:hasMethod yawl:ProcletBlock_getBlockType_3 ;
+    yawl:hasMethod yawl:ProcletBlock_setBlockType_4 ;
+    yawl:hasMethod yawl:ProcletBlock_isCreate_5 ;
+    yawl:hasMethod yawl:ProcletBlock_setCreate_6 ;
+    yawl:hasMethod yawl:ProcletBlock_getTimeOut_7 ;
+    yawl:hasMethod yawl:ProcletBlock_setTimeOut_8 ;
+    yawl:hasMethod yawl:ProcletBlock_getBlockTypeFromString_9 ;
+    yawl:hasMethod yawl:ProcletBlock_toString_10 ;
+    yawl:hasField yawl:ProcletBlock_blockID ;
+    yawl:hasField yawl:ProcletBlock_blockType ;
+    yawl:hasField yawl:ProcletBlock_create ;
+    yawl:hasField yawl:ProcletBlock_timeOut ;
+    .
+
+
+# Method: ProcletBlock.getBlockID
+yawl:ProcletBlock_getBlockID_1 a yawl:Method ;
+    rdfs:label "getBlockID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBlockID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletBlock.setBlockID
+yawl:ProcletBlock_setBlockID_2 a yawl:Method ;
+    rdfs:label "setBlockID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBlockID(String blockID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletBlock.getBlockType
+yawl:ProcletBlock_getBlockType_3 a yawl:Method ;
+    rdfs:label "getBlockType" ;
+    yawl:returnType "BlockType" ;
+    yawl:signature "BlockType getBlockType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletBlock.setBlockType
+yawl:ProcletBlock_setBlockType_4 a yawl:Method ;
+    rdfs:label "setBlockType" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBlockType(BlockType bt)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletBlock.isCreate
+yawl:ProcletBlock_isCreate_5 a yawl:Method ;
+    rdfs:label "isCreate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isCreate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletBlock.setCreate
+yawl:ProcletBlock_setCreate_6 a yawl:Method ;
+    rdfs:label "setCreate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCreate(boolean c)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletBlock.getTimeOut
+yawl:ProcletBlock_getTimeOut_7 a yawl:Method ;
+    rdfs:label "getTimeOut" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getTimeOut()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletBlock.setTimeOut
+yawl:ProcletBlock_setTimeOut_8 a yawl:Method ;
+    rdfs:label "setTimeOut" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTimeOut(int timeOut)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcletBlock.getBlockTypeFromString
+yawl:ProcletBlock_getBlockTypeFromString_9 a yawl:Method ;
+    rdfs:label "getBlockTypeFromString" ;
+    yawl:returnType "BlockType" ;
+    yawl:signature "BlockType getBlockTypeFromString(String blockType)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ProcletBlock.toString
+yawl:ProcletBlock_toString_10 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:ProcletBlock_blockID a yawl:Field ;
+    rdfs:label "blockID" .
+
+yawl:ProcletBlock_blockType a yawl:Field ;
+    rdfs:label "blockType" .
+
+yawl:ProcletBlock_create a yawl:Field ;
+    rdfs:label "create" .
+
+yawl:ProcletBlock_timeOut a yawl:Field ;
+    rdfs:label "timeOut" .
+
+
+

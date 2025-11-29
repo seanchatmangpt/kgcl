@@ -1,0 +1,313 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.resource.UserPrivileges
+yawl:UserPrivileges a yawl:Class ;
+    rdfs:label "UserPrivileges" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_resource ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/resource/UserPrivileges.java"^^xsd:string ;
+    rdfs:comment """Simple repository for participant privileges @author Michael Adams v0.1, 03/08/2007""" ;
+    yawl:implements yawl:Serializable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:UserPrivileges_clone_1 ;
+    yawl:hasMethod yawl:UserPrivileges_setValues_2 ;
+    yawl:hasMethod yawl:UserPrivileges_allowAll_3 ;
+    yawl:hasMethod yawl:UserPrivileges_disallowAll_4 ;
+    yawl:hasMethod yawl:UserPrivileges_getID_5 ;
+    yawl:hasMethod yawl:UserPrivileges_setID_6 ;
+    yawl:hasMethod yawl:UserPrivileges_canChooseItemToStart_7 ;
+    yawl:hasMethod yawl:UserPrivileges_canStartConcurrent_8 ;
+    yawl:hasMethod yawl:UserPrivileges_canReorder_9 ;
+    yawl:hasMethod yawl:UserPrivileges_canChainExecution_10 ;
+    yawl:hasMethod yawl:UserPrivileges_canViewOrgGroupItems_11 ;
+    yawl:hasMethod yawl:UserPrivileges_canViewTeamItems_12 ;
+    yawl:hasMethod yawl:UserPrivileges_canManageCases_13 ;
+    yawl:hasMethod yawl:UserPrivileges_setCanChooseItemToStart_14 ;
+    yawl:hasMethod yawl:UserPrivileges_setCanStartConcurrent_15 ;
+    yawl:hasMethod yawl:UserPrivileges_setCanReorder_16 ;
+    yawl:hasMethod yawl:UserPrivileges_setCanViewTeamItems_17 ;
+    yawl:hasMethod yawl:UserPrivileges_setCanViewOrgGroupItems_18 ;
+    yawl:hasMethod yawl:UserPrivileges_setCanChainExecution_19 ;
+    yawl:hasMethod yawl:UserPrivileges_setCanManageCases_20 ;
+    yawl:hasMethod yawl:UserPrivileges_toXML_21 ;
+    yawl:hasMethod yawl:UserPrivileges_fromXML_22 ;
+    yawl:hasMethod yawl:UserPrivileges_reconstitute_23 ;
+    yawl:hasMethod yawl:UserPrivileges_wrapPrivilege_24 ;
+    yawl:hasMethod yawl:UserPrivileges_getPrivilegesAsBits_25 ;
+    yawl:hasMethod yawl:UserPrivileges_setPrivilegesFromBits_26 ;
+    yawl:hasField yawl:UserPrivileges__participantID ;
+    yawl:hasField yawl:UserPrivileges_canChooseItemToStart ;
+    yawl:hasField yawl:UserPrivileges_canStartConcurrent ;
+    yawl:hasField yawl:UserPrivileges_canReorder ;
+    yawl:hasField yawl:UserPrivileges_canViewAllOffered ;
+    yawl:hasField yawl:UserPrivileges_canViewAllAllocated ;
+    yawl:hasField yawl:UserPrivileges_canViewAllExecuting ;
+    yawl:hasField yawl:UserPrivileges_canViewTeamItems ;
+    yawl:hasField yawl:UserPrivileges_canViewOrgGroupItems ;
+    yawl:hasField yawl:UserPrivileges_canChainExecution ;
+    yawl:hasField yawl:UserPrivileges_canManageCases ;
+    yawl:hasField yawl:UserPrivileges_carteblanche ;
+    yawl:hasField yawl:UserPrivileges_PRIV_COUNT ;
+    .
+
+
+# Method: UserPrivileges.clone
+yawl:UserPrivileges_clone_1 a yawl:Method ;
+    rdfs:label "clone" ;
+    yawl:returnType "UserPrivileges" ;
+    yawl:signature "UserPrivileges clone()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPrivileges.setValues
+yawl:UserPrivileges_setValues_2 a yawl:Method ;
+    rdfs:label "setValues" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setValues(UserPrivileges up)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPrivileges.allowAll
+yawl:UserPrivileges_allowAll_3 a yawl:Method ;
+    rdfs:label "allowAll" ;
+    yawl:returnType "void" ;
+    yawl:signature "void allowAll()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPrivileges.disallowAll
+yawl:UserPrivileges_disallowAll_4 a yawl:Method ;
+    rdfs:label "disallowAll" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disallowAll()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPrivileges.getID
+yawl:UserPrivileges_getID_5 a yawl:Method ;
+    rdfs:label "getID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPrivileges.setID
+yawl:UserPrivileges_setID_6 a yawl:Method ;
+    rdfs:label "setID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setID(String pid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPrivileges.canChooseItemToStart
+yawl:UserPrivileges_canChooseItemToStart_7 a yawl:Method ;
+    rdfs:label "canChooseItemToStart" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean canChooseItemToStart()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPrivileges.canStartConcurrent
+yawl:UserPrivileges_canStartConcurrent_8 a yawl:Method ;
+    rdfs:label "canStartConcurrent" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean canStartConcurrent()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPrivileges.canReorder
+yawl:UserPrivileges_canReorder_9 a yawl:Method ;
+    rdfs:label "canReorder" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean canReorder()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPrivileges.canChainExecution
+yawl:UserPrivileges_canChainExecution_10 a yawl:Method ;
+    rdfs:label "canChainExecution" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean canChainExecution()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPrivileges.canViewOrgGroupItems
+yawl:UserPrivileges_canViewOrgGroupItems_11 a yawl:Method ;
+    rdfs:label "canViewOrgGroupItems" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean canViewOrgGroupItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPrivileges.canViewTeamItems
+yawl:UserPrivileges_canViewTeamItems_12 a yawl:Method ;
+    rdfs:label "canViewTeamItems" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean canViewTeamItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPrivileges.canManageCases
+yawl:UserPrivileges_canManageCases_13 a yawl:Method ;
+    rdfs:label "canManageCases" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean canManageCases()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPrivileges.setCanChooseItemToStart
+yawl:UserPrivileges_setCanChooseItemToStart_14 a yawl:Method ;
+    rdfs:label "setCanChooseItemToStart" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCanChooseItemToStart(boolean canChooseItemToStart)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPrivileges.setCanStartConcurrent
+yawl:UserPrivileges_setCanStartConcurrent_15 a yawl:Method ;
+    rdfs:label "setCanStartConcurrent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCanStartConcurrent(boolean canStartConcurrent)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPrivileges.setCanReorder
+yawl:UserPrivileges_setCanReorder_16 a yawl:Method ;
+    rdfs:label "setCanReorder" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCanReorder(boolean canReorder)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPrivileges.setCanViewTeamItems
+yawl:UserPrivileges_setCanViewTeamItems_17 a yawl:Method ;
+    rdfs:label "setCanViewTeamItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCanViewTeamItems(boolean canViewTeamItems)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPrivileges.setCanViewOrgGroupItems
+yawl:UserPrivileges_setCanViewOrgGroupItems_18 a yawl:Method ;
+    rdfs:label "setCanViewOrgGroupItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCanViewOrgGroupItems(boolean canViewOrgGroupItems)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPrivileges.setCanChainExecution
+yawl:UserPrivileges_setCanChainExecution_19 a yawl:Method ;
+    rdfs:label "setCanChainExecution" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCanChainExecution(boolean canChainExecution)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPrivileges.setCanManageCases
+yawl:UserPrivileges_setCanManageCases_20 a yawl:Method ;
+    rdfs:label "setCanManageCases" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCanManageCases(boolean canManageCases)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPrivileges.toXML
+yawl:UserPrivileges_toXML_21 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPrivileges.fromXML
+yawl:UserPrivileges_fromXML_22 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPrivileges.reconstitute
+yawl:UserPrivileges_reconstitute_23 a yawl:Method ;
+    rdfs:label "reconstitute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reconstitute(Element e)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPrivileges.wrapPrivilege
+yawl:UserPrivileges_wrapPrivilege_24 a yawl:Method ;
+    rdfs:label "wrapPrivilege" ;
+    yawl:returnType "String" ;
+    yawl:signature "String wrapPrivilege(boolean value, String name)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: UserPrivileges.getPrivilegesAsBits
+yawl:UserPrivileges_getPrivilegesAsBits_25 a yawl:Method ;
+    rdfs:label "getPrivilegesAsBits" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPrivilegesAsBits()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserPrivileges.setPrivilegesFromBits
+yawl:UserPrivileges_setPrivilegesFromBits_26 a yawl:Method ;
+    rdfs:label "setPrivilegesFromBits" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPrivilegesFromBits(String bits)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:UserPrivileges__participantID a yawl:Field ;
+    rdfs:label "_participantID" .
+
+yawl:UserPrivileges_canChooseItemToStart a yawl:Field ;
+    rdfs:label "canChooseItemToStart" .
+
+yawl:UserPrivileges_canStartConcurrent a yawl:Field ;
+    rdfs:label "canStartConcurrent" .
+
+yawl:UserPrivileges_canReorder a yawl:Field ;
+    rdfs:label "canReorder" .
+
+yawl:UserPrivileges_canViewAllOffered a yawl:Field ;
+    rdfs:label "canViewAllOffered" .
+
+yawl:UserPrivileges_canViewAllAllocated a yawl:Field ;
+    rdfs:label "canViewAllAllocated" .
+
+yawl:UserPrivileges_canViewAllExecuting a yawl:Field ;
+    rdfs:label "canViewAllExecuting" .
+
+yawl:UserPrivileges_canViewTeamItems a yawl:Field ;
+    rdfs:label "canViewTeamItems" .
+
+yawl:UserPrivileges_canViewOrgGroupItems a yawl:Field ;
+    rdfs:label "canViewOrgGroupItems" .
+
+yawl:UserPrivileges_canChainExecution a yawl:Field ;
+    rdfs:label "canChainExecution" .
+
+yawl:UserPrivileges_canManageCases a yawl:Field ;
+    rdfs:label "canManageCases" .
+
+yawl:UserPrivileges_carteblanche a yawl:Field ;
+    rdfs:label "carteblanche" .
+
+yawl:UserPrivileges_PRIV_COUNT a yawl:Field ;
+    rdfs:label "PRIV_COUNT" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_resourcing_client a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.client" .
+
+

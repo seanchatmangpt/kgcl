@@ -1,0 +1,50 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.datastore.orgdata.util.RefreshRunnable
+yawl:RefreshRunnable a yawl:Class ;
+    rdfs:label "RefreshRunnable" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_datastore_orgdata_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/datastore/orgdata/util/OrgDataRefresher.java"^^xsd:string ;
+    yawl:implements yawl:Runnable ;
+    yawl:hasMethod yawl:RefreshRunnable_run_1 ;
+    yawl:hasMethod yawl:RefreshRunnable_saveQueueSets_2 ;
+    yawl:hasMethod yawl:RefreshRunnable_reattachQueueSets_3 ;
+    .
+
+
+# Method: RefreshRunnable.run
+yawl:RefreshRunnable_run_1 a yawl:Method ;
+    rdfs:label "run" ;
+    yawl:returnType "void" ;
+    yawl:signature "void run()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RefreshRunnable.saveQueueSets
+yawl:RefreshRunnable_saveQueueSets_2 a yawl:Method ;
+    rdfs:label "saveQueueSets" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map saveQueueSets(ResourceDataSet orgDataSet)" ;
+    .
+
+# Method: RefreshRunnable.reattachQueueSets
+yawl:RefreshRunnable_reattachQueueSets_3 a yawl:Method ;
+    rdfs:label "reattachQueueSets" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reattachQueueSets(ResourceDataSet orgDataSet, Map qMap)" ;
+    .
+
+
+
+
+
+
+yawl:org_yawlfoundation_yawl_resourcing_jsf_comparator a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.jsf.comparator" .
+
+

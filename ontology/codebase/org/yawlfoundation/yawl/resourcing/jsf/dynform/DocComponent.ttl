@@ -1,0 +1,295 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.dynform.DocComponent
+yawl:DocComponent a yawl:Class ;
+    rdfs:label "DocComponent" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf_dynform ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/dynform/DocComponent.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 26/11/11""" ;
+    yawl:extends yawl:PanelLayout ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DocComponent_setName_1 ;
+    yawl:hasMethod yawl:DocComponent_getName_2 ;
+    yawl:hasMethod yawl:DocComponent_setID_3 ;
+    yawl:hasMethod yawl:DocComponent_getID_4 ;
+    yawl:hasMethod yawl:DocComponent_setCaseID_5 ;
+    yawl:hasMethod yawl:DocComponent_getCaseID_6 ;
+    yawl:hasMethod yawl:DocComponent_getLabel_7 ;
+    yawl:hasMethod yawl:DocComponent_setLabel_8 ;
+    yawl:hasMethod yawl:DocComponent_getFormWidth_9 ;
+    yawl:hasMethod yawl:DocComponent_setFormWidth_10 ;
+    yawl:hasMethod yawl:DocComponent_getOutputXML_11 ;
+    yawl:hasMethod yawl:DocComponent_setSubComponentStyles_12 ;
+    yawl:hasMethod yawl:DocComponent_processButtonAction_13 ;
+    yawl:hasMethod yawl:DocComponent_doUpload_14 ;
+    yawl:hasMethod yawl:DocComponent_completeUpload_15 ;
+    yawl:hasMethod yawl:DocComponent_buildComponent_16 ;
+    yawl:hasMethod yawl:DocComponent_makeButton_17 ;
+    yawl:hasMethod yawl:DocComponent_setDownloadButtonToolTip_18 ;
+    yawl:hasMethod yawl:DocComponent_setUploadButtonToolTip_19 ;
+    yawl:hasMethod yawl:DocComponent_bindButtonListener_20 ;
+    yawl:hasMethod yawl:DocComponent_setButtonStyle_21 ;
+    yawl:hasMethod yawl:DocComponent_doDownload_22 ;
+    yawl:hasMethod yawl:DocComponent_prepareUpload_23 ;
+    yawl:hasMethod yawl:DocComponent_getOutermostPanel_24 ;
+    yawl:hasField yawl:DocComponent_docID ;
+    yawl:hasField yawl:DocComponent_docName ;
+    yawl:hasField yawl:DocComponent_caseID ;
+    yawl:hasField yawl:DocComponent_label ;
+    yawl:hasField yawl:DocComponent_textField ;
+    yawl:hasField yawl:DocComponent_btnUp ;
+    yawl:hasField yawl:DocComponent_btnDown ;
+    yawl:hasField yawl:DocComponent_uploader ;
+    yawl:hasField yawl:DocComponent_formWidth ;
+    yawl:hasField yawl:DocComponent_textWidth ;
+    yawl:hasField yawl:DocComponent_UP_TEXT ;
+    yawl:hasField yawl:DocComponent_DOWN_TEXT ;
+    yawl:hasField yawl:DocComponent_BTN_HSPACE ;
+    yawl:hasField yawl:DocComponent_BTN_WIDTH ;
+    .
+
+
+# Method: DocComponent.setName
+yawl:DocComponent_setName_1 a yawl:Method ;
+    rdfs:label "setName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocComponent.getName
+yawl:DocComponent_getName_2 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocComponent.setID
+yawl:DocComponent_setID_3 a yawl:Method ;
+    rdfs:label "setID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setID(long id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocComponent.getID
+yawl:DocComponent_getID_4 a yawl:Method ;
+    rdfs:label "getID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocComponent.setCaseID
+yawl:DocComponent_setCaseID_5 a yawl:Method ;
+    rdfs:label "setCaseID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCaseID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocComponent.getCaseID
+yawl:DocComponent_getCaseID_6 a yawl:Method ;
+    rdfs:label "getCaseID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocComponent.getLabel
+yawl:DocComponent_getLabel_7 a yawl:Method ;
+    rdfs:label "getLabel" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLabel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocComponent.setLabel
+yawl:DocComponent_setLabel_8 a yawl:Method ;
+    rdfs:label "setLabel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLabel(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocComponent.getFormWidth
+yawl:DocComponent_getFormWidth_9 a yawl:Method ;
+    rdfs:label "getFormWidth" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getFormWidth()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocComponent.setFormWidth
+yawl:DocComponent_setFormWidth_10 a yawl:Method ;
+    rdfs:label "setFormWidth" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setFormWidth(int width)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocComponent.getOutputXML
+yawl:DocComponent_getOutputXML_11 a yawl:Method ;
+    rdfs:label "getOutputXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOutputXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocComponent.setSubComponentStyles
+yawl:DocComponent_setSubComponentStyles_12 a yawl:Method ;
+    rdfs:label "setSubComponentStyles" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSubComponentStyles(int width)" ;
+    rdfs:comment """@param width the total width of the component""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocComponent.processButtonAction
+yawl:DocComponent_processButtonAction_13 a yawl:Method ;
+    rdfs:label "processButtonAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String processButtonAction(Button btn)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocComponent.doUpload
+yawl:DocComponent_doUpload_14 a yawl:Method ;
+    rdfs:label "doUpload" ;
+    yawl:returnType "String" ;
+    yawl:signature "String doUpload()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocComponent.completeUpload
+yawl:DocComponent_completeUpload_15 a yawl:Method ;
+    rdfs:label "completeUpload" ;
+    yawl:returnType "void" ;
+    yawl:signature "void completeUpload()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocComponent.buildComponent
+yawl:DocComponent_buildComponent_16 a yawl:Method ;
+    rdfs:label "buildComponent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void buildComponent(String uniqueID, boolean inputOnly)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DocComponent.makeButton
+yawl:DocComponent_makeButton_17 a yawl:Method ;
+    rdfs:label "makeButton" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button makeButton(String name, String text, String uniqueID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DocComponent.setDownloadButtonToolTip
+yawl:DocComponent_setDownloadButtonToolTip_18 a yawl:Method ;
+    rdfs:label "setDownloadButtonToolTip" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDownloadButtonToolTip(Button btn)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DocComponent.setUploadButtonToolTip
+yawl:DocComponent_setUploadButtonToolTip_19 a yawl:Method ;
+    rdfs:label "setUploadButtonToolTip" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUploadButtonToolTip(Button btn, boolean hasDoc)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DocComponent.bindButtonListener
+yawl:DocComponent_bindButtonListener_20 a yawl:Method ;
+    rdfs:label "bindButtonListener" ;
+    yawl:returnType "MethodBinding" ;
+    yawl:signature "MethodBinding bindButtonListener()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DocComponent.setButtonStyle
+yawl:DocComponent_setButtonStyle_21 a yawl:Method ;
+    rdfs:label "setButtonStyle" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setButtonStyle(Button btn, int left)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DocComponent.doDownload
+yawl:DocComponent_doDownload_22 a yawl:Method ;
+    rdfs:label "doDownload" ;
+    yawl:returnType "String" ;
+    yawl:signature "String doDownload()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DocComponent.prepareUpload
+yawl:DocComponent_prepareUpload_23 a yawl:Method ;
+    rdfs:label "prepareUpload" ;
+    yawl:returnType "String" ;
+    yawl:signature "String prepareUpload()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DocComponent.getOutermostPanel
+yawl:DocComponent_getOutermostPanel_24 a yawl:Method ;
+    rdfs:label "getOutermostPanel" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getOutermostPanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:DocComponent_docID a yawl:Field ;
+    rdfs:label "docID" .
+
+yawl:DocComponent_docName a yawl:Field ;
+    rdfs:label "docName" .
+
+yawl:DocComponent_caseID a yawl:Field ;
+    rdfs:label "caseID" .
+
+yawl:DocComponent_label a yawl:Field ;
+    rdfs:label "label" .
+
+yawl:DocComponent_textField a yawl:Field ;
+    rdfs:label "textField" .
+
+yawl:DocComponent_btnUp a yawl:Field ;
+    rdfs:label "btnUp" .
+
+yawl:DocComponent_btnDown a yawl:Field ;
+    rdfs:label "btnDown" .
+
+yawl:DocComponent_uploader a yawl:Field ;
+    rdfs:label "uploader" .
+
+yawl:DocComponent_formWidth a yawl:Field ;
+    rdfs:label "formWidth" .
+
+yawl:DocComponent_textWidth a yawl:Field ;
+    rdfs:label "textWidth" .
+
+yawl:DocComponent_UP_TEXT a yawl:Field ;
+    rdfs:label "UP_TEXT" .
+
+yawl:DocComponent_DOWN_TEXT a yawl:Field ;
+    rdfs:label "DOWN_TEXT" .
+
+yawl:DocComponent_BTN_HSPACE a yawl:Field ;
+    rdfs:label "BTN_HSPACE" .
+
+yawl:DocComponent_BTN_WIDTH a yawl:Field ;
+    rdfs:label "BTN_WIDTH" .
+
+
+

@@ -1,0 +1,309 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.stateless.monitor.YCaseImporter
+yawl:YCaseImporter a yawl:Class ;
+    rdfs:label "YCaseImporter" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_monitor ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/monitor/YCaseImporter.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 30/6/2022""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YCaseImporter_unmarshal_1 ;
+    yawl:hasMethod yawl:YCaseImporter_unmarshalSpecification_2 ;
+    yawl:hasMethod yawl:YCaseImporter_unmarshalRunners_3 ;
+    yawl:hasMethod yawl:YCaseImporter_unmarshalRunner_4 ;
+    yawl:hasMethod yawl:YCaseImporter_unmarshalWorkItems_5 ;
+    yawl:hasMethod yawl:YCaseImporter_unmarshalWorkItem_6 ;
+    yawl:hasMethod yawl:YCaseImporter_addChild_7 ;
+    yawl:hasMethod yawl:YCaseImporter_reuniteRunnerFamilies_8 ;
+    yawl:hasMethod yawl:YCaseImporter_reuniteWorkItemFamilies_9 ;
+    yawl:hasMethod yawl:YCaseImporter_unmarshalIdentifier_10 ;
+    yawl:hasMethod yawl:YCaseImporter_unmarshalNetData_11 ;
+    yawl:hasMethod yawl:YCaseImporter_unmarshalWorkItemData_12 ;
+    yawl:hasMethod yawl:YCaseImporter_unmarshalTimerStates_13 ;
+    yawl:hasMethod yawl:YCaseImporter_unmarshalTimestamps_14 ;
+    yawl:hasMethod yawl:YCaseImporter_toDate_15 ;
+    yawl:hasMethod yawl:YCaseImporter_toSet_16 ;
+    yawl:hasMethod yawl:YCaseImporter_toBoolean_17 ;
+    yawl:hasMethod yawl:YCaseImporter_toLong_18 ;
+    yawl:hasMethod yawl:YCaseImporter_attachRunners_19 ;
+    yawl:hasMethod yawl:YCaseImporter_attachNets_20 ;
+    yawl:hasMethod yawl:YCaseImporter_attachNetIdentifiers_21 ;
+    yawl:hasMethod yawl:YCaseImporter_restoreLocations_22 ;
+    yawl:hasMethod yawl:YCaseImporter_postTaskCondition_23 ;
+    yawl:hasMethod yawl:YCaseImporter_restoreWorkItems_24 ;
+    yawl:hasMethod yawl:YCaseImporter_restartWorkItemTimers_25 ;
+    yawl:hasMethod yawl:YCaseImporter_hasRestoredIdentifier_26 ;
+    yawl:hasMethod yawl:YCaseImporter_checkWorkItemFamiliesIntact_27 ;
+    yawl:hasMethod yawl:YCaseImporter_getTask_28 ;
+    yawl:hasMethod yawl:YCaseImporter_hydrateTimerParameters_29 ;
+    yawl:hasMethod yawl:YCaseImporter_getChildText_30 ;
+    yawl:hasField yawl:YCaseImporter_YAWL_NAMESPACE ;
+    yawl:hasField yawl:YCaseImporter__idLookupTable ;
+    yawl:hasField yawl:YCaseImporter__timedItems ;
+    yawl:hasField yawl:YCaseImporter__spec ;
+    .
+
+
+# Method: YCaseImporter.unmarshal
+yawl:YCaseImporter_unmarshal_1 a yawl:Method ;
+    rdfs:label "unmarshal" ;
+    yawl:returnType "List" ;
+    yawl:signature "List unmarshal(String caseXML, YAnnouncer announcer)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCaseImporter.unmarshalSpecification
+yawl:YCaseImporter_unmarshalSpecification_2 a yawl:Method ;
+    rdfs:label "unmarshalSpecification" ;
+    yawl:returnType "YSpecification" ;
+    yawl:signature "YSpecification unmarshalSpecification(Element root)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseImporter.unmarshalRunners
+yawl:YCaseImporter_unmarshalRunners_3 a yawl:Method ;
+    rdfs:label "unmarshalRunners" ;
+    yawl:returnType "List" ;
+    yawl:signature "List unmarshalRunners(Element caseNode)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseImporter.unmarshalRunner
+yawl:YCaseImporter_unmarshalRunner_4 a yawl:Method ;
+    rdfs:label "unmarshalRunner" ;
+    yawl:returnType "YNetRunner" ;
+    yawl:signature "YNetRunner unmarshalRunner(Element nRunner)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseImporter.unmarshalWorkItems
+yawl:YCaseImporter_unmarshalWorkItems_5 a yawl:Method ;
+    rdfs:label "unmarshalWorkItems" ;
+    yawl:returnType "List" ;
+    yawl:signature "List unmarshalWorkItems(Element caseNode)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseImporter.unmarshalWorkItem
+yawl:YCaseImporter_unmarshalWorkItem_6 a yawl:Method ;
+    rdfs:label "unmarshalWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem unmarshalWorkItem(Element nItem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseImporter.addChild
+yawl:YCaseImporter_addChild_7 a yawl:Method ;
+    rdfs:label "addChild" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addChild(Map parentChildMap, String parentID, T child)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseImporter.reuniteRunnerFamilies
+yawl:YCaseImporter_reuniteRunnerFamilies_8 a yawl:Method ;
+    rdfs:label "reuniteRunnerFamilies" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reuniteRunnerFamilies(List parents, Map parentChildMap)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseImporter.reuniteWorkItemFamilies
+yawl:YCaseImporter_reuniteWorkItemFamilies_9 a yawl:Method ;
+    rdfs:label "reuniteWorkItemFamilies" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reuniteWorkItemFamilies(Set parents, Map parentChildMap)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseImporter.unmarshalIdentifier
+yawl:YCaseImporter_unmarshalIdentifier_10 a yawl:Method ;
+    rdfs:label "unmarshalIdentifier" ;
+    yawl:returnType "YIdentifier" ;
+    yawl:signature "YIdentifier unmarshalIdentifier(Element nIdentifier)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseImporter.unmarshalNetData
+yawl:YCaseImporter_unmarshalNetData_11 a yawl:Method ;
+    rdfs:label "unmarshalNetData" ;
+    yawl:returnType "YNetData" ;
+    yawl:signature "YNetData unmarshalNetData(String caseID, Element dataNode)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseImporter.unmarshalWorkItemData
+yawl:YCaseImporter_unmarshalWorkItemData_12 a yawl:Method ;
+    rdfs:label "unmarshalWorkItemData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void unmarshalWorkItemData(YWorkItem item, Element nItem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseImporter.unmarshalTimerStates
+yawl:YCaseImporter_unmarshalTimerStates_13 a yawl:Method ;
+    rdfs:label "unmarshalTimerStates" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map unmarshalTimerStates(Element nStates)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseImporter.unmarshalTimestamps
+yawl:YCaseImporter_unmarshalTimestamps_14 a yawl:Method ;
+    rdfs:label "unmarshalTimestamps" ;
+    yawl:returnType "void" ;
+    yawl:signature "void unmarshalTimestamps(YWorkItem item, Element nItem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseImporter.toDate
+yawl:YCaseImporter_toDate_15 a yawl:Method ;
+    rdfs:label "toDate" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date toDate(String timeStr)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseImporter.toSet
+yawl:YCaseImporter_toSet_16 a yawl:Method ;
+    rdfs:label "toSet" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set toSet(Element node)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseImporter.toBoolean
+yawl:YCaseImporter_toBoolean_17 a yawl:Method ;
+    rdfs:label "toBoolean" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean toBoolean(String bValue)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseImporter.toLong
+yawl:YCaseImporter_toLong_18 a yawl:Method ;
+    rdfs:label "toLong" ;
+    yawl:returnType "long" ;
+    yawl:signature "long toLong(String lvalue)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseImporter.attachRunners
+yawl:YCaseImporter_attachRunners_19 a yawl:Method ;
+    rdfs:label "attachRunners" ;
+    yawl:returnType "void" ;
+    yawl:signature "void attachRunners(List runners, YAnnouncer announcer)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseImporter.attachNets
+yawl:YCaseImporter_attachNets_20 a yawl:Method ;
+    rdfs:label "attachNets" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map attachNets(List runners)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseImporter.attachNetIdentifiers
+yawl:YCaseImporter_attachNetIdentifiers_21 a yawl:Method ;
+    rdfs:label "attachNetIdentifiers" ;
+    yawl:returnType "YIdentifier" ;
+    yawl:signature "YIdentifier attachNetIdentifiers(Map runnermap, YIdentifier id, YIdentifier parent, YNet net)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YCaseImporter.restoreLocations
+yawl:YCaseImporter_restoreLocations_22 a yawl:Method ;
+    rdfs:label "restoreLocations" ;
+    yawl:returnType "YIdentifier" ;
+    yawl:signature "YIdentifier restoreLocations(Map runnermap, YIdentifier id, YIdentifier parent, YNet net)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YCaseImporter.postTaskCondition
+yawl:YCaseImporter_postTaskCondition_23 a yawl:Method ;
+    rdfs:label "postTaskCondition" ;
+    yawl:returnType "void" ;
+    yawl:signature "void postTaskCondition(YTask task, YNet net, String condName, YIdentifier id)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseImporter.restoreWorkItems
+yawl:YCaseImporter_restoreWorkItems_24 a yawl:Method ;
+    rdfs:label "restoreWorkItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restoreWorkItems(List workItems, List runners)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YCaseImporter.restartWorkItemTimers
+yawl:YCaseImporter_restartWorkItemTimers_25 a yawl:Method ;
+    rdfs:label "restartWorkItemTimers" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restartWorkItemTimers()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseImporter.hasRestoredIdentifier
+yawl:YCaseImporter_hasRestoredIdentifier_26 a yawl:Method ;
+    rdfs:label "hasRestoredIdentifier" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasRestoredIdentifier(YWorkItem item)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseImporter.checkWorkItemFamiliesIntact
+yawl:YCaseImporter_checkWorkItemFamiliesIntact_27 a yawl:Method ;
+    rdfs:label "checkWorkItemFamiliesIntact" ;
+    yawl:returnType "List" ;
+    yawl:signature "List checkWorkItemFamiliesIntact(List itemList)" ;
+    rdfs:comment """When restoring workitems, this method checks (1) if a parent workitem is in the list of items to restore, all of its children are in the list also; and (2) each child workitem in the list has a parent. If either is false, the workitem is put in a list of items to not be restored and to be removed from persistence @param itemList the list of workitems to potentially restore @return the sublist of items not to restore (if any)""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseImporter.getTask
+yawl:YCaseImporter_getTask_28 a yawl:Method ;
+    rdfs:label "getTask" ;
+    yawl:returnType "YTask" ;
+    yawl:signature "YTask getTask(String taskID)" ;
+    rdfs:comment """Gets the YTask task id passed. @param taskID the task ID @return the task reference""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseImporter.hydrateTimerParameters
+yawl:YCaseImporter_hydrateTimerParameters_29 a yawl:Method ;
+    rdfs:label "hydrateTimerParameters" ;
+    yawl:returnType "YTimerParameters" ;
+    yawl:signature "YTimerParameters hydrateTimerParameters(Element node)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseImporter.getChildText
+yawl:YCaseImporter_getChildText_30 a yawl:Method ;
+    rdfs:label "getChildText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getChildText(Element e, String name)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YCaseImporter_YAWL_NAMESPACE a yawl:Field ;
+    rdfs:label "YAWL_NAMESPACE" .
+
+yawl:YCaseImporter__idLookupTable a yawl:Field ;
+    rdfs:label "_idLookupTable" .
+
+yawl:YCaseImporter__timedItems a yawl:Field ;
+    rdfs:label "_timedItems" .
+
+yawl:YCaseImporter__spec a yawl:Field ;
+    rdfs:label "_spec" .
+
+
+

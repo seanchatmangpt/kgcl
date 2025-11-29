@@ -1,0 +1,124 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.cost.interfce.CostGateway
+yawl:CostGateway a yawl:Class ;
+    rdfs:label "CostGateway" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_cost_interfce ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/cost/interfce/CostGateway.java"^^xsd:string ;
+    rdfs:comment """Shell servlet for the cost service. @author Michael Adams @date 11/07/2011""" ;
+    yawl:extends yawl:HttpServlet ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CostGateway_init_1 ;
+    yawl:hasMethod yawl:CostGateway_destroy_2 ;
+    yawl:hasMethod yawl:CostGateway_doGet_3 ;
+    yawl:hasMethod yawl:CostGateway_doPost_4 ;
+    yawl:hasMethod yawl:CostGateway_getFunctionList_5 ;
+    yawl:hasMethod yawl:CostGateway_getFixedCosts_6 ;
+    yawl:hasMethod yawl:CostGateway_getResourceCost_7 ;
+    yawl:hasMethod yawl:CostGateway_constructSpecID_8 ;
+    yawl:hasMethod yawl:CostGateway_failMessage_9 ;
+    yawl:hasField yawl:CostGateway__service ;
+    yawl:hasField yawl:CostGateway__sessions ;
+    yawl:hasField yawl:CostGateway__log ;
+    .
+
+
+# Method: CostGateway.init
+yawl:CostGateway_init_1 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    rdfs:comment """Read settings from web.xml and use them to initialise the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostGateway.destroy
+yawl:CostGateway_destroy_2 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostGateway.doGet
+yawl:CostGateway_doGet_3 a yawl:Method ;
+    rdfs:label "doGet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doGet(HttpServletRequest req, HttpServletResponse res)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostGateway.doPost
+yawl:CostGateway_doPost_4 a yawl:Method ;
+    rdfs:label "doPost" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doPost(HttpServletRequest req, HttpServletResponse res)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostGateway.getFunctionList
+yawl:CostGateway_getFunctionList_5 a yawl:Method ;
+    rdfs:label "getFunctionList" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFunctionList(YSpecificationID specID, String taskID)" ;
+    rdfs:comment """Gets an XML list of all cost functions for the specified specification - task combination. @param specID the specification identifier @param taskID the task identifier (may be null, in which case only the case level functions are required) @return an XML list of the cost functions requested, or an appropriate failure message.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostGateway.getFixedCosts
+yawl:CostGateway_getFixedCosts_6 a yawl:Method ;
+    rdfs:label "getFixedCosts" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFixedCosts(YSpecificationID specID, String taskID)" ;
+    rdfs:comment """Gets an XML list of all the fixed costs for the specified specification - task combination. @param specID the specification identifier @param taskID the task identifier (may be null, in which case only the case level costs are required) @return an XML list of the costs requested, or an appropriate failure message.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostGateway.getResourceCost
+yawl:CostGateway_getResourceCost_7 a yawl:Method ;
+    rdfs:label "getResourceCost" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourceCost(YSpecificationID specID, String taskName, String resources)" ;
+    rdfs:comment """Calculates the cost of an activity. @param specID    the specification identifier @param taskName  the task identifier (may be null, in which case only the case level costs are required) @param resources an XML set of participant ids @return an XML string containing cost data for each listed resource for the task""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostGateway.constructSpecID
+yawl:CostGateway_constructSpecID_8 a yawl:Method ;
+    rdfs:label "constructSpecID" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID constructSpecID(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostGateway.failMessage
+yawl:CostGateway_failMessage_9 a yawl:Method ;
+    rdfs:label "failMessage" ;
+    yawl:returnType "String" ;
+    yawl:signature "String failMessage(String msg)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:CostGateway__service a yawl:Field ;
+    rdfs:label "_service" .
+
+yawl:CostGateway__sessions a yawl:Field ;
+    rdfs:label "_sessions" .
+
+yawl:CostGateway__log a yawl:Field ;
+    rdfs:label "_log" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_cost_evaluate a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.cost.evaluate" .
+
+

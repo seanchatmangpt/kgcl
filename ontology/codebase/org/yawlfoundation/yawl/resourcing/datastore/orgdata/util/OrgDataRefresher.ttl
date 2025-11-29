@@ -1,0 +1,66 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.resourcing.datastore.orgdata.util
+yawl:org_yawlfoundation_yawl_resourcing_datastore_orgdata_util a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.datastore.orgdata.util" .
+# Class: org.yawlfoundation.yawl.resourcing.datastore.orgdata.util.OrgDataRefresher
+yawl:OrgDataRefresher a yawl:Class ;
+    rdfs:label "OrgDataRefresher" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_datastore_orgdata_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/datastore/orgdata/util/OrgDataRefresher.java"^^xsd:string ;
+    rdfs:comment """1. When called directly (by the ResourceManager) will refresh the externally sourced org data. 2. When enabled via context configuration, repeatedly refreshes the externally sourced org data after each specified period. @author Michael Adams @date 20/06/11""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:OrgDataRefresher_refresh_1 ;
+    yawl:hasMethod yawl:OrgDataRefresher_cancel_2 ;
+    yawl:hasMethod yawl:OrgDataRefresher_refresh_3 ;
+    yawl:hasField yawl:OrgDataRefresher__scheduler ;
+    yawl:hasField yawl:OrgDataRefresher__rm ;
+    yawl:hasField yawl:OrgDataRefresher__refresherTask ;
+    .
+
+
+# Method: OrgDataRefresher.refresh
+yawl:OrgDataRefresher_refresh_1 a yawl:Method ;
+    rdfs:label "refresh" ;
+    yawl:returnType "void" ;
+    yawl:signature "void refresh()" ;
+    rdfs:comment """Refreshes the org data""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OrgDataRefresher.cancel
+yawl:OrgDataRefresher_cancel_2 a yawl:Method ;
+    rdfs:label "cancel" ;
+    yawl:returnType "List" ;
+    yawl:signature "List cancel()" ;
+    rdfs:comment """Stop the refresher timer (if it was started) @return a list of the cancelled, scheduled refresh commands (if any)""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OrgDataRefresher.refresh
+yawl:OrgDataRefresher_refresh_3 a yawl:Method ;
+    rdfs:label "refresh" ;
+    yawl:returnType "void" ;
+    yawl:signature "void refresh(long period)" ;
+    rdfs:comment """Started a scheduled task to run every 'period' minutes @param period the number of minutes to wait between refreshes""" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:OrgDataRefresher__scheduler a yawl:Field ;
+    rdfs:label "_scheduler" .
+
+yawl:OrgDataRefresher__rm a yawl:Field ;
+    rdfs:label "_rm" .
+
+yawl:OrgDataRefresher__refresherTask a yawl:Field ;
+    rdfs:label "_refresherTask" .
+
+
+

@@ -1,0 +1,59 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.exception.WorkItemConstraintData
+yawl:WorkItemConstraintData a yawl:Class ;
+    rdfs:label "WorkItemConstraintData" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_exception ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/exception/WorkItemConstraintData.java"^^xsd:string ;
+    rdfs:comment """class/structure used to store and retrieve event data items""" ;
+    yawl:hasMethod yawl:WorkItemConstraintData_getWIR_1 ;
+    yawl:hasMethod yawl:WorkItemConstraintData_getData_2 ;
+    yawl:hasMethod yawl:WorkItemConstraintData_getPreCheck_3 ;
+    yawl:hasField yawl:WorkItemConstraintData__wir ;
+    yawl:hasField yawl:WorkItemConstraintData__data ;
+    yawl:hasField yawl:WorkItemConstraintData__preCheck ;
+    .
+
+
+# Method: WorkItemConstraintData.getWIR
+yawl:WorkItemConstraintData_getWIR_1 a yawl:Method ;
+    rdfs:label "getWIR" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord getWIR()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemConstraintData.getData
+yawl:WorkItemConstraintData_getData_2 a yawl:Method ;
+    rdfs:label "getData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getData()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemConstraintData.getPreCheck
+yawl:WorkItemConstraintData_getPreCheck_3 a yawl:Method ;
+    rdfs:label "getPreCheck" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean getPreCheck()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:WorkItemConstraintData__wir a yawl:Field ;
+    rdfs:label "_wir" .
+
+yawl:WorkItemConstraintData__data a yawl:Field ;
+    rdfs:label "_data" .
+
+yawl:WorkItemConstraintData__preCheck a yawl:Field ;
+    rdfs:label "_preCheck" .
+
+
+

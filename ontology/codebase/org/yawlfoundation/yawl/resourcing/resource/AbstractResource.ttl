@@ -1,0 +1,240 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.resourcing.resource
+yawl:org_yawlfoundation_yawl_resourcing_resource a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.resource" .
+# Class: org.yawlfoundation.yawl.resourcing.resource.AbstractResource
+yawl:AbstractResource a yawl:Class ;
+    rdfs:label "AbstractResource" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_resource ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/resource/AbstractResource.java"^^xsd:string ;
+    rdfs:comment """An abstract class representing a resource entity. @author Michael Adams v0.1, 03/08/2007""" ;
+    yawl:implements yawl:Cloneable ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:AbstractResource_equals_1 ;
+    yawl:hasMethod yawl:AbstractResource_hashCode_2 ;
+    yawl:hasMethod yawl:AbstractResource_clone_3 ;
+    yawl:hasMethod yawl:AbstractResource_merge_4 ;
+    yawl:hasMethod yawl:AbstractResource_getName_5 ;
+    yawl:hasMethod yawl:AbstractResource_getID_6 ;
+    yawl:hasMethod yawl:AbstractResource_setID_7 ;
+    yawl:hasMethod yawl:AbstractResource_isAvailable_8 ;
+    yawl:hasMethod yawl:AbstractResource_isAvailable_9 ;
+    yawl:hasMethod yawl:AbstractResource_getNotes_10 ;
+    yawl:hasMethod yawl:AbstractResource_setNotes_11 ;
+    yawl:hasMethod yawl:AbstractResource_getDescription_12 ;
+    yawl:hasMethod yawl:AbstractResource_setDescription_13 ;
+    yawl:hasMethod yawl:AbstractResource_getBlockedDuration_14 ;
+    yawl:hasMethod yawl:AbstractResource_setBlockedDuration_15 ;
+    yawl:hasMethod yawl:AbstractResource_setBlockedDuration_16 ;
+    yawl:hasMethod yawl:AbstractResource_getBlockType_17 ;
+    yawl:hasMethod yawl:AbstractResource_setBlockType_18 ;
+    yawl:hasMethod yawl:AbstractResource_toString_19 ;
+    yawl:hasMethod yawl:AbstractResource_get_blockType_20 ;
+    yawl:hasMethod yawl:AbstractResource_set_blockType_21 ;
+    yawl:hasField yawl:AbstractResource__resourceID ;
+    yawl:hasField yawl:AbstractResource__isAvailable ;
+    yawl:hasField yawl:AbstractResource__description ;
+    yawl:hasField yawl:AbstractResource__notes ;
+    yawl:hasField yawl:AbstractResource__blockedDuration ;
+    yawl:hasField yawl:AbstractResource__blockType ;
+    .
+
+
+# Method: AbstractResource.equals
+yawl:AbstractResource_equals_1 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResource.hashCode
+yawl:AbstractResource_hashCode_2 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResource.clone
+yawl:AbstractResource_clone_3 a yawl:Method ;
+    rdfs:label "clone" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object clone()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractResource.merge
+yawl:AbstractResource_merge_4 a yawl:Method ;
+    rdfs:label "merge" ;
+    yawl:returnType "void" ;
+    yawl:signature "void merge(AbstractResource resource)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractResource.getName
+yawl:AbstractResource_getName_5 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResource.getID
+yawl:AbstractResource_getID_6 a yawl:Method ;
+    rdfs:label "getID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResource.setID
+yawl:AbstractResource_setID_7 a yawl:Method ;
+    rdfs:label "setID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResource.isAvailable
+yawl:AbstractResource_isAvailable_8 a yawl:Method ;
+    rdfs:label "isAvailable" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAvailable()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResource.isAvailable
+yawl:AbstractResource_isAvailable_9 a yawl:Method ;
+    rdfs:label "isAvailable" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAvailable(long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResource.getNotes
+yawl:AbstractResource_getNotes_10 a yawl:Method ;
+    rdfs:label "getNotes" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNotes()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResource.setNotes
+yawl:AbstractResource_setNotes_11 a yawl:Method ;
+    rdfs:label "setNotes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNotes(String notes)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResource.getDescription
+yawl:AbstractResource_getDescription_12 a yawl:Method ;
+    rdfs:label "getDescription" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDescription()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResource.setDescription
+yawl:AbstractResource_setDescription_13 a yawl:Method ;
+    rdfs:label "setDescription" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDescription(String desc)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResource.getBlockedDuration
+yawl:AbstractResource_getBlockedDuration_14 a yawl:Method ;
+    rdfs:label "getBlockedDuration" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getBlockedDuration()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResource.setBlockedDuration
+yawl:AbstractResource_setBlockedDuration_15 a yawl:Method ;
+    rdfs:label "setBlockedDuration" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBlockedDuration(long duration)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResource.setBlockedDuration
+yawl:AbstractResource_setBlockedDuration_16 a yawl:Method ;
+    rdfs:label "setBlockedDuration" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBlockedDuration(String duration)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResource.getBlockType
+yawl:AbstractResource_getBlockType_17 a yawl:Method ;
+    rdfs:label "getBlockType" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBlockType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResource.setBlockType
+yawl:AbstractResource_setBlockType_18 a yawl:Method ;
+    rdfs:label "setBlockType" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBlockType(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResource.toString
+yawl:AbstractResource_toString_19 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResource.get_blockType
+yawl:AbstractResource_get_blockType_20 a yawl:Method ;
+    rdfs:label "get_blockType" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_blockType()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: AbstractResource.set_blockType
+yawl:AbstractResource_set_blockType_21 a yawl:Method ;
+    rdfs:label "set_blockType" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_blockType(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:AbstractResource__resourceID a yawl:Field ;
+    rdfs:label "_resourceID" .
+
+yawl:AbstractResource__isAvailable a yawl:Field ;
+    rdfs:label "_isAvailable" .
+
+yawl:AbstractResource__description a yawl:Field ;
+    rdfs:label "_description" .
+
+yawl:AbstractResource__notes a yawl:Field ;
+    rdfs:label "_notes" .
+
+yawl:AbstractResource__blockedDuration a yawl:Field ;
+    rdfs:label "_blockedDuration" .
+
+yawl:AbstractResource__blockType a yawl:Field ;
+    rdfs:label "_blockType" .
+
+
+

@@ -1,0 +1,177 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.rsInterface.UserConnectionCache
+yawl:UserConnectionCache a yawl:Class ;
+    rdfs:label "UserConnectionCache" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_rsInterface ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/rsInterface/UserConnectionCache.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 28/04/2010""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:UserConnectionCache_add_1 ;
+    yawl:hasMethod yawl:UserConnectionCache_removeSessionID_2 ;
+    yawl:hasMethod yawl:UserConnectionCache_removeSessionHandle_3 ;
+    yawl:hasMethod yawl:UserConnectionCache_removeParticipantSession_4 ;
+    yawl:hasMethod yawl:UserConnectionCache_getActiveParticipants_5 ;
+    yawl:hasMethod yawl:UserConnectionCache_getAllSessions_6 ;
+    yawl:hasMethod yawl:UserConnectionCache_getSessionCount_7 ;
+    yawl:hasMethod yawl:UserConnectionCache_getUserSessionCount_8 ;
+    yawl:hasMethod yawl:UserConnectionCache_getAdminSessionCount_9 ;
+    yawl:hasMethod yawl:UserConnectionCache_getUserAdminSessionCount_10 ;
+    yawl:hasMethod yawl:UserConnectionCache_getSessionHandle_11 ;
+    yawl:hasMethod yawl:UserConnectionCache_getParticipantWithSessionHandle_12 ;
+    yawl:hasMethod yawl:UserConnectionCache_containsSessionHandle_13 ;
+    yawl:hasMethod yawl:UserConnectionCache_containsSessionID_14 ;
+    yawl:hasMethod yawl:UserConnectionCache_containsParticipant_15 ;
+    yawl:hasMethod yawl:UserConnectionCache_remove_16 ;
+    yawl:hasField yawl:UserConnectionCache__jSessionIDLookup ;
+    yawl:hasField yawl:UserConnectionCache__ySessionHandleLookup ;
+    yawl:hasField yawl:UserConnectionCache__participantLookup ;
+    .
+
+
+# Method: UserConnectionCache.add
+yawl:UserConnectionCache_add_1 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "UserConnection" ;
+    yawl:signature "UserConnection add(String ySessionHandle, Participant p, String jSessionID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserConnectionCache.removeSessionID
+yawl:UserConnectionCache_removeSessionID_2 a yawl:Method ;
+    rdfs:label "removeSessionID" ;
+    yawl:returnType "UserConnection" ;
+    yawl:signature "UserConnection removeSessionID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserConnectionCache.removeSessionHandle
+yawl:UserConnectionCache_removeSessionHandle_3 a yawl:Method ;
+    rdfs:label "removeSessionHandle" ;
+    yawl:returnType "UserConnection" ;
+    yawl:signature "UserConnection removeSessionHandle(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserConnectionCache.removeParticipantSession
+yawl:UserConnectionCache_removeParticipantSession_4 a yawl:Method ;
+    rdfs:label "removeParticipantSession" ;
+    yawl:returnType "UserConnection" ;
+    yawl:signature "UserConnection removeParticipantSession(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserConnectionCache.getActiveParticipants
+yawl:UserConnectionCache_getActiveParticipants_5 a yawl:Method ;
+    rdfs:label "getActiveParticipants" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getActiveParticipants()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserConnectionCache.getAllSessions
+yawl:UserConnectionCache_getAllSessions_6 a yawl:Method ;
+    rdfs:label "getAllSessions" ;
+    yawl:returnType "Collection" ;
+    yawl:signature "Collection getAllSessions()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserConnectionCache.getSessionCount
+yawl:UserConnectionCache_getSessionCount_7 a yawl:Method ;
+    rdfs:label "getSessionCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getSessionCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserConnectionCache.getUserSessionCount
+yawl:UserConnectionCache_getUserSessionCount_8 a yawl:Method ;
+    rdfs:label "getUserSessionCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getUserSessionCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserConnectionCache.getAdminSessionCount
+yawl:UserConnectionCache_getAdminSessionCount_9 a yawl:Method ;
+    rdfs:label "getAdminSessionCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getAdminSessionCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserConnectionCache.getUserAdminSessionCount
+yawl:UserConnectionCache_getUserAdminSessionCount_10 a yawl:Method ;
+    rdfs:label "getUserAdminSessionCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getUserAdminSessionCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserConnectionCache.getSessionHandle
+yawl:UserConnectionCache_getSessionHandle_11 a yawl:Method ;
+    rdfs:label "getSessionHandle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSessionHandle(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserConnectionCache.getParticipantWithSessionHandle
+yawl:UserConnectionCache_getParticipantWithSessionHandle_12 a yawl:Method ;
+    rdfs:label "getParticipantWithSessionHandle" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant getParticipantWithSessionHandle(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserConnectionCache.containsSessionHandle
+yawl:UserConnectionCache_containsSessionHandle_13 a yawl:Method ;
+    rdfs:label "containsSessionHandle" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean containsSessionHandle(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserConnectionCache.containsSessionID
+yawl:UserConnectionCache_containsSessionID_14 a yawl:Method ;
+    rdfs:label "containsSessionID" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean containsSessionID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserConnectionCache.containsParticipant
+yawl:UserConnectionCache_containsParticipant_15 a yawl:Method ;
+    rdfs:label "containsParticipant" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean containsParticipant(String pid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserConnectionCache.remove
+yawl:UserConnectionCache_remove_16 a yawl:Method ;
+    rdfs:label "remove" ;
+    yawl:returnType "void" ;
+    yawl:signature "void remove(UserConnection connection)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:UserConnectionCache__jSessionIDLookup a yawl:Field ;
+    rdfs:label "_jSessionIDLookup" .
+
+yawl:UserConnectionCache__ySessionHandleLookup a yawl:Field ;
+    rdfs:label "_ySessionHandleLookup" .
+
+yawl:UserConnectionCache__participantLookup a yawl:Field ;
+    rdfs:label "_participantLookup" .
+
+
+

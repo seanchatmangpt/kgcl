@@ -1,0 +1,143 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.update.UpdateConstants
+yawl:UpdateConstants a yawl:Class ;
+    rdfs:label "UpdateConstants" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_update ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/update/UpdateConstants.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 17/02/2016""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:UpdateConstants_init_1 ;
+    yawl:hasMethod yawl:UpdateConstants_getCheckUrl_2 ;
+    yawl:hasMethod yawl:UpdateConstants_getBasePath_3 ;
+    yawl:hasMethod yawl:UpdateConstants_resolve_4 ;
+    yawl:hasMethod yawl:UpdateConstants_checkInitSuccess_5 ;
+    yawl:hasMethod yawl:UpdateConstants_initFromChecksums_6 ;
+    yawl:hasMethod yawl:UpdateConstants_anyAreNull_7 ;
+    yawl:hasField yawl:UpdateConstants_BASE_1 ;
+    yawl:hasField yawl:UpdateConstants_PATH_1 ;
+    yawl:hasField yawl:UpdateConstants_CHECK_PATH_1 ;
+    yawl:hasField yawl:UpdateConstants_SUFFIX_1 ;
+    yawl:hasField yawl:UpdateConstants_BASE_2 ;
+    yawl:hasField yawl:UpdateConstants_PATH_2 ;
+    yawl:hasField yawl:UpdateConstants_CHECK_PATH_2 ;
+    yawl:hasField yawl:UpdateConstants_SUFFIX_2 ;
+    yawl:hasField yawl:UpdateConstants_URL_BASE ;
+    yawl:hasField yawl:UpdateConstants_URL_PATH ;
+    yawl:hasField yawl:UpdateConstants_CHECK_PATH ;
+    yawl:hasField yawl:UpdateConstants_URL_SUFFIX ;
+    yawl:hasField yawl:UpdateConstants_CHECK_FILE ;
+    .
+
+
+# Method: UpdateConstants.init
+yawl:UpdateConstants_init_1 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: UpdateConstants.getCheckUrl
+yawl:UpdateConstants_getCheckUrl_2 a yawl:Method ;
+    rdfs:label "getCheckUrl" ;
+    yawl:returnType "URL" ;
+    yawl:signature "URL getCheckUrl()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: UpdateConstants.getBasePath
+yawl:UpdateConstants_getBasePath_3 a yawl:Method ;
+    rdfs:label "getBasePath" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBasePath()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: UpdateConstants.resolve
+yawl:UpdateConstants_resolve_4 a yawl:Method ;
+    rdfs:label "resolve" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean resolve(String base, String path, String checkPath, String suffix)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: UpdateConstants.checkInitSuccess
+yawl:UpdateConstants_checkInitSuccess_5 a yawl:Method ;
+    rdfs:label "checkInitSuccess" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkInitSuccess()" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: UpdateConstants.initFromChecksums
+yawl:UpdateConstants_initFromChecksums_6 a yawl:Method ;
+    rdfs:label "initFromChecksums" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean initFromChecksums()" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: UpdateConstants.anyAreNull
+yawl:UpdateConstants_anyAreNull_7 a yawl:Method ;
+    rdfs:label "anyAreNull" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean anyAreNull(String strings)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:UpdateConstants_BASE_1 a yawl:Field ;
+    rdfs:label "BASE_1" .
+
+yawl:UpdateConstants_PATH_1 a yawl:Field ;
+    rdfs:label "PATH_1" .
+
+yawl:UpdateConstants_CHECK_PATH_1 a yawl:Field ;
+    rdfs:label "CHECK_PATH_1" .
+
+yawl:UpdateConstants_SUFFIX_1 a yawl:Field ;
+    rdfs:label "SUFFIX_1" .
+
+yawl:UpdateConstants_BASE_2 a yawl:Field ;
+    rdfs:label "BASE_2" .
+
+yawl:UpdateConstants_PATH_2 a yawl:Field ;
+    rdfs:label "PATH_2" .
+
+yawl:UpdateConstants_CHECK_PATH_2 a yawl:Field ;
+    rdfs:label "CHECK_PATH_2" .
+
+yawl:UpdateConstants_SUFFIX_2 a yawl:Field ;
+    rdfs:label "SUFFIX_2" .
+
+yawl:UpdateConstants_URL_BASE a yawl:Field ;
+    rdfs:label "URL_BASE" .
+
+yawl:UpdateConstants_URL_PATH a yawl:Field ;
+    rdfs:label "URL_PATH" .
+
+yawl:UpdateConstants_CHECK_PATH a yawl:Field ;
+    rdfs:label "CHECK_PATH" .
+
+yawl:UpdateConstants_URL_SUFFIX a yawl:Field ;
+    rdfs:label "URL_SUFFIX" .
+
+yawl:UpdateConstants_CHECK_FILE a yawl:Field ;
+    rdfs:label "CHECK_FILE" .
+
+
+

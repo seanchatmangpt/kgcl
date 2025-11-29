@@ -1,0 +1,155 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.elements.e2wfoj.RElement
+yawl:RElement a yawl:Class ;
+    rdfs:label "RElement" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_elements_e2wfoj ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/elements/e2wfoj/RElement.java"^^xsd:string ;
+    rdfs:comment """The base class for RTransition and RPlace""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:RElement_getID_1 ;
+    yawl:hasMethod yawl:RElement_setName_2 ;
+    yawl:hasMethod yawl:RElement_getName_3 ;
+    yawl:hasMethod yawl:RElement_getPresetFlows_4 ;
+    yawl:hasMethod yawl:RElement_getPostsetFlows_5 ;
+    yawl:hasMethod yawl:RElement_setPresetFlows_6 ;
+    yawl:hasMethod yawl:RElement_setPostsetFlows_7 ;
+    yawl:hasMethod yawl:RElement_getPostsetElements_8 ;
+    yawl:hasMethod yawl:RElement_getPresetElements_9 ;
+    yawl:hasMethod yawl:RElement_setPreset_10 ;
+    yawl:hasMethod yawl:RElement_setPostset_11 ;
+    yawl:hasMethod yawl:RElement_getPostsetElement_12 ;
+    yawl:hasMethod yawl:RElement_getPresetElement_13 ;
+    yawl:hasField yawl:RElement__name ;
+    yawl:hasField yawl:RElement__presetFlows ;
+    yawl:hasField yawl:RElement__postsetFlows ;
+    yawl:hasField yawl:RElement__id ;
+    .
+
+
+# Method: RElement.getID
+yawl:RElement_getID_1 a yawl:Method ;
+    rdfs:label "getID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RElement.setName
+yawl:RElement_setName_2 a yawl:Method ;
+    rdfs:label "setName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RElement.getName
+yawl:RElement_getName_3 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RElement.getPresetFlows
+yawl:RElement_getPresetFlows_4 a yawl:Method ;
+    rdfs:label "getPresetFlows" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getPresetFlows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RElement.getPostsetFlows
+yawl:RElement_getPostsetFlows_5 a yawl:Method ;
+    rdfs:label "getPostsetFlows" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getPostsetFlows()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RElement.setPresetFlows
+yawl:RElement_setPresetFlows_6 a yawl:Method ;
+    rdfs:label "setPresetFlows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPresetFlows(Map presetFlows)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RElement.setPostsetFlows
+yawl:RElement_setPostsetFlows_7 a yawl:Method ;
+    rdfs:label "setPostsetFlows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPostsetFlows(Map postsetFlows)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RElement.getPostsetElements
+yawl:RElement_getPostsetElements_8 a yawl:Method ;
+    rdfs:label "getPostsetElements" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getPostsetElements()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RElement.getPresetElements
+yawl:RElement_getPresetElements_9 a yawl:Method ;
+    rdfs:label "getPresetElements" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getPresetElements()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RElement.setPreset
+yawl:RElement_setPreset_10 a yawl:Method ;
+    rdfs:label "setPreset" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPreset(RFlow flowsInto)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RElement.setPostset
+yawl:RElement_setPostset_11 a yawl:Method ;
+    rdfs:label "setPostset" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPostset(RFlow flowsInto)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RElement.getPostsetElement
+yawl:RElement_getPostsetElement_12 a yawl:Method ;
+    rdfs:label "getPostsetElement" ;
+    yawl:returnType "RElement" ;
+    yawl:signature "RElement getPostsetElement(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RElement.getPresetElement
+yawl:RElement_getPresetElement_13 a yawl:Method ;
+    rdfs:label "getPresetElement" ;
+    yawl:returnType "RElement" ;
+    yawl:signature "RElement getPresetElement(String id)" ;
+    rdfs:comment """Method getPresetElement. @param id @return YExternalNetElement""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:RElement__name a yawl:Field ;
+    rdfs:label "_name" .
+
+yawl:RElement__presetFlows a yawl:Field ;
+    rdfs:label "_presetFlows" .
+
+yawl:RElement__postsetFlows a yawl:Field ;
+    rdfs:label "_postsetFlows" .
+
+yawl:RElement__id a yawl:Field ;
+    rdfs:label "_id" .
+
+
+

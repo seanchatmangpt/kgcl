@@ -1,0 +1,202 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.support.WorkletEvent
+yawl:WorkletEvent a yawl:Class ;
+    rdfs:label "WorkletEvent" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_support ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/support/WorkletEvent.java"^^xsd:string ;
+    rdfs:comment """The sole purpose of this class is to generate an event log record via Persistence. An instance is created via the constructor (from the EventLogger class), then the object is persisted to create one event log record. @author Michael Adams v0.8, 04-09/2006""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:WorkletEvent_get_event_1 ;
+    yawl:hasMethod yawl:WorkletEvent_get_caseId_2 ;
+    yawl:hasMethod yawl:WorkletEvent_get_specId_3 ;
+    yawl:hasMethod yawl:WorkletEvent_get_taskId_4 ;
+    yawl:hasMethod yawl:WorkletEvent_get_parentCaseId_5 ;
+    yawl:hasMethod yawl:WorkletEvent_get_xType_6 ;
+    yawl:hasMethod yawl:WorkletEvent_get_stamp_7 ;
+    yawl:hasMethod yawl:WorkletEvent_get_id_8 ;
+    yawl:hasMethod yawl:WorkletEvent_set_event_9 ;
+    yawl:hasMethod yawl:WorkletEvent_set_caseId_10 ;
+    yawl:hasMethod yawl:WorkletEvent_set_specId_11 ;
+    yawl:hasMethod yawl:WorkletEvent_set_taskId_12 ;
+    yawl:hasMethod yawl:WorkletEvent_set_parentCaseId_13 ;
+    yawl:hasMethod yawl:WorkletEvent_set_xType_14 ;
+    yawl:hasMethod yawl:WorkletEvent_set_stamp_15 ;
+    yawl:hasMethod yawl:WorkletEvent_set_id_16 ;
+    yawl:hasField yawl:WorkletEvent__specId ;
+    yawl:hasField yawl:WorkletEvent__event ;
+    yawl:hasField yawl:WorkletEvent__caseId ;
+    yawl:hasField yawl:WorkletEvent__taskId ;
+    yawl:hasField yawl:WorkletEvent__parentCaseId ;
+    yawl:hasField yawl:WorkletEvent__stamp ;
+    yawl:hasField yawl:WorkletEvent__xType ;
+    yawl:hasField yawl:WorkletEvent__id ;
+    yawl:hasField yawl:WorkletEvent__sdfe ;
+    .
+
+
+# Method: WorkletEvent.get_event
+yawl:WorkletEvent_get_event_1 a yawl:Method ;
+    rdfs:label "get_event" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_event()" ;
+    rdfs:comment """getters & setters used by persistence""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletEvent.get_caseId
+yawl:WorkletEvent_get_caseId_2 a yawl:Method ;
+    rdfs:label "get_caseId" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_caseId()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletEvent.get_specId
+yawl:WorkletEvent_get_specId_3 a yawl:Method ;
+    rdfs:label "get_specId" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID get_specId()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletEvent.get_taskId
+yawl:WorkletEvent_get_taskId_4 a yawl:Method ;
+    rdfs:label "get_taskId" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_taskId()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletEvent.get_parentCaseId
+yawl:WorkletEvent_get_parentCaseId_5 a yawl:Method ;
+    rdfs:label "get_parentCaseId" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_parentCaseId()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletEvent.get_xType
+yawl:WorkletEvent_get_xType_6 a yawl:Method ;
+    rdfs:label "get_xType" ;
+    yawl:returnType "int" ;
+    yawl:signature "int get_xType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletEvent.get_stamp
+yawl:WorkletEvent_get_stamp_7 a yawl:Method ;
+    rdfs:label "get_stamp" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_stamp()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletEvent.get_id
+yawl:WorkletEvent_get_id_8 a yawl:Method ;
+    rdfs:label "get_id" ;
+    yawl:returnType "long" ;
+    yawl:signature "long get_id()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletEvent.set_event
+yawl:WorkletEvent_set_event_9 a yawl:Method ;
+    rdfs:label "set_event" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_event(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletEvent.set_caseId
+yawl:WorkletEvent_set_caseId_10 a yawl:Method ;
+    rdfs:label "set_caseId" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_caseId(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletEvent.set_specId
+yawl:WorkletEvent_set_specId_11 a yawl:Method ;
+    rdfs:label "set_specId" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_specId(YSpecificationID s)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletEvent.set_taskId
+yawl:WorkletEvent_set_taskId_12 a yawl:Method ;
+    rdfs:label "set_taskId" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_taskId(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletEvent.set_parentCaseId
+yawl:WorkletEvent_set_parentCaseId_13 a yawl:Method ;
+    rdfs:label "set_parentCaseId" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_parentCaseId(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletEvent.set_xType
+yawl:WorkletEvent_set_xType_14 a yawl:Method ;
+    rdfs:label "set_xType" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_xType(int i)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletEvent.set_stamp
+yawl:WorkletEvent_set_stamp_15 a yawl:Method ;
+    rdfs:label "set_stamp" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_stamp(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletEvent.set_id
+yawl:WorkletEvent_set_id_16 a yawl:Method ;
+    rdfs:label "set_id" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_id(long lg)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:WorkletEvent__specId a yawl:Field ;
+    rdfs:label "_specId" .
+
+yawl:WorkletEvent__event a yawl:Field ;
+    rdfs:label "_event" .
+
+yawl:WorkletEvent__caseId a yawl:Field ;
+    rdfs:label "_caseId" .
+
+yawl:WorkletEvent__taskId a yawl:Field ;
+    rdfs:label "_taskId" .
+
+yawl:WorkletEvent__parentCaseId a yawl:Field ;
+    rdfs:label "_parentCaseId" .
+
+yawl:WorkletEvent__stamp a yawl:Field ;
+    rdfs:label "_stamp" .
+
+yawl:WorkletEvent__xType a yawl:Field ;
+    rdfs:label "_xType" .
+
+yawl:WorkletEvent__id a yawl:Field ;
+    rdfs:label "_id" .
+
+yawl:WorkletEvent__sdfe a yawl:Field ;
+    rdfs:label "_sdfe" .
+
+
+

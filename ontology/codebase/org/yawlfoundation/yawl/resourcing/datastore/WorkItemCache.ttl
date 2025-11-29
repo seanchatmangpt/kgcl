@@ -1,0 +1,153 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.resourcing.datastore
+yawl:org_yawlfoundation_yawl_resourcing_datastore a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.datastore" .
+# Class: org.yawlfoundation.yawl.resourcing.datastore.WorkItemCache
+yawl:WorkItemCache a yawl:Class ;
+    rdfs:label "WorkItemCache" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_datastore ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/datastore/WorkItemCache.java"^^xsd:string ;
+    rdfs:comment """A workitem record hashmap with added persistence. @author Michael Adams v0.1, 15/09/2007""" ;
+    yawl:extends yawl:ConcurrentHashMap ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:WorkItemCache_getInstance_1 ;
+    yawl:hasMethod yawl:WorkItemCache_getInstance_2 ;
+    yawl:hasMethod yawl:WorkItemCache_setPersist_3 ;
+    yawl:hasMethod yawl:WorkItemCache_isPersistOn_4 ;
+    yawl:hasMethod yawl:WorkItemCache_add_5 ;
+    yawl:hasMethod yawl:WorkItemCache_update_6 ;
+    yawl:hasMethod yawl:WorkItemCache_updateResourceStatus_7 ;
+    yawl:hasMethod yawl:WorkItemCache_updateStatus_8 ;
+    yawl:hasMethod yawl:WorkItemCache_stopCleanserThread_9 ;
+    yawl:hasMethod yawl:WorkItemCache_restore_10 ;
+    yawl:hasMethod yawl:WorkItemCache_put_11 ;
+    yawl:hasMethod yawl:WorkItemCache_remove_12 ;
+    yawl:hasField yawl:WorkItemCache__persister ;
+    yawl:hasField yawl:WorkItemCache__cleanser ;
+    yawl:hasField yawl:WorkItemCache__persistOn ;
+    yawl:hasField yawl:WorkItemCache_INSTANCE ;
+    .
+
+
+# Method: WorkItemCache.getInstance
+yawl:WorkItemCache_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "WorkItemCache" ;
+    yawl:signature "WorkItemCache getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: WorkItemCache.getInstance
+yawl:WorkItemCache_getInstance_2 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "WorkItemCache" ;
+    yawl:signature "WorkItemCache getInstance(boolean persist)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: WorkItemCache.setPersist
+yawl:WorkItemCache_setPersist_3 a yawl:Method ;
+    rdfs:label "setPersist" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPersist(boolean persist)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemCache.isPersistOn
+yawl:WorkItemCache_isPersistOn_4 a yawl:Method ;
+    rdfs:label "isPersistOn" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isPersistOn()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemCache.add
+yawl:WorkItemCache_add_5 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord add(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemCache.update
+yawl:WorkItemCache_update_6 a yawl:Method ;
+    rdfs:label "update" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord update(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemCache.updateResourceStatus
+yawl:WorkItemCache_updateResourceStatus_7 a yawl:Method ;
+    rdfs:label "updateResourceStatus" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord updateResourceStatus(WorkItemRecord wir, String status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemCache.updateStatus
+yawl:WorkItemCache_updateStatus_8 a yawl:Method ;
+    rdfs:label "updateStatus" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord updateStatus(WorkItemRecord wir, String status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemCache.stopCleanserThread
+yawl:WorkItemCache_stopCleanserThread_9 a yawl:Method ;
+    rdfs:label "stopCleanserThread" ;
+    yawl:returnType "void" ;
+    yawl:signature "void stopCleanserThread()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemCache.restore
+yawl:WorkItemCache_restore_10 a yawl:Method ;
+    rdfs:label "restore" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restore()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemCache.put
+yawl:WorkItemCache_put_11 a yawl:Method ;
+    rdfs:label "put" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord put(String id, WorkItemRecord wir)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemCache.remove
+yawl:WorkItemCache_remove_12 a yawl:Method ;
+    rdfs:label "remove" ;
+    yawl:returnType "void" ;
+    yawl:signature "void remove(Set idSet)" ;
+    yawl:modifiers "protected" ;
+    yawl:modifiers "synchronized" ;
+    .
+
+
+
+yawl:WorkItemCache__persister a yawl:Field ;
+    rdfs:label "_persister" .
+
+yawl:WorkItemCache__cleanser a yawl:Field ;
+    rdfs:label "_cleanser" .
+
+yawl:WorkItemCache__persistOn a yawl:Field ;
+    rdfs:label "_persistOn" .
+
+yawl:WorkItemCache_INSTANCE a yawl:Field ;
+    rdfs:label "INSTANCE" .
+
+
+

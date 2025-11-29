@@ -1,0 +1,80 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.elements.e2wfoj.RMarking
+yawl:RMarking a yawl:Class ;
+    rdfs:label "RMarking" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_elements_e2wfoj ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/elements/e2wfoj/RMarking.java"^^xsd:string ;
+    rdfs:comment """Data structure for Marking Storage;""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:RMarking_getLocations_1 ;
+    yawl:hasMethod yawl:RMarking_equals_2 ;
+    yawl:hasMethod yawl:RMarking_isBiggerThanOrEqual_3 ;
+    yawl:hasMethod yawl:RMarking_isBiggerThan_4 ;
+    yawl:hasMethod yawl:RMarking_getMarkedPlaces_5 ;
+    yawl:hasMethod yawl:RMarking_isLessThanOrEqual_6 ;
+    yawl:hasField yawl:RMarking__markedPlaces ;
+    .
+
+
+# Method: RMarking.getLocations
+yawl:RMarking_getLocations_1 a yawl:Method ;
+    rdfs:label "getLocations" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getLocations()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RMarking.equals
+yawl:RMarking_equals_2 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object omarking)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RMarking.isBiggerThanOrEqual
+yawl:RMarking_isBiggerThanOrEqual_3 a yawl:Method ;
+    rdfs:label "isBiggerThanOrEqual" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isBiggerThanOrEqual(RMarking marking)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RMarking.isBiggerThan
+yawl:RMarking_isBiggerThan_4 a yawl:Method ;
+    rdfs:label "isBiggerThan" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isBiggerThan(RMarking marking)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RMarking.getMarkedPlaces
+yawl:RMarking_getMarkedPlaces_5 a yawl:Method ;
+    rdfs:label "getMarkedPlaces" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getMarkedPlaces()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RMarking.isLessThanOrEqual
+yawl:RMarking_isLessThanOrEqual_6 a yawl:Method ;
+    rdfs:label "isLessThanOrEqual" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isLessThanOrEqual(RMarking marking)" ;
+    rdfs:comment """This is used for coverable check: x' <= x""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:RMarking__markedPlaces a yawl:Field ;
+    rdfs:label "_markedPlaces" .
+
+
+

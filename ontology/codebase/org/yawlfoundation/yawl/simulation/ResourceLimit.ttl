@@ -1,0 +1,44 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.simulation.ResourceLimit
+yawl:ResourceLimit a yawl:Class ;
+    rdfs:label "ResourceLimit" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_simulation ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/simulation/ResourceLimit.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 15/10/12""" ;
+    yawl:hasMethod yawl:ResourceLimit_increment_1 ;
+    yawl:hasMethod yawl:ResourceLimit_hasBeenExceeded_2 ;
+    yawl:hasField yawl:ResourceLimit_limit ;
+    yawl:hasField yawl:ResourceLimit_cumulative ;
+    .
+
+
+# Method: ResourceLimit.increment
+yawl:ResourceLimit_increment_1 a yawl:Method ;
+    rdfs:label "increment" ;
+    yawl:returnType "void" ;
+    yawl:signature "void increment(int time)" ;
+    .
+
+# Method: ResourceLimit.hasBeenExceeded
+yawl:ResourceLimit_hasBeenExceeded_2 a yawl:Method ;
+    rdfs:label "hasBeenExceeded" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasBeenExceeded()" ;
+    .
+
+
+
+yawl:ResourceLimit_limit a yawl:Field ;
+    rdfs:label "limit" .
+
+yawl:ResourceLimit_cumulative a yawl:Field ;
+    rdfs:label "cumulative" .
+
+
+

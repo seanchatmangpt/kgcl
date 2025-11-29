@@ -1,0 +1,145 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.dynform.FormParameter
+yawl:FormParameter a yawl:Class ;
+    rdfs:label "FormParameter" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf_dynform ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/dynform/FormParameter.java"^^xsd:string ;
+    rdfs:comment """Adds a few extra members to a YParameter object, so it can be used to populate JSF pages. @author Michael Adams Date: 9/01/2008 (updated 09/2014)""" ;
+    yawl:implements yawl:Serializable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:FormParameter_getValue_1 ;
+    yawl:hasMethod yawl:FormParameter_setValue_2 ;
+    yawl:hasMethod yawl:FormParameter_isInputOnly_3 ;
+    yawl:hasMethod yawl:FormParameter_setInputOnly_4 ;
+    yawl:hasMethod yawl:FormParameter_isRequired_5 ;
+    yawl:hasMethod yawl:FormParameter_setRequired_6 ;
+    yawl:hasMethod yawl:FormParameter_isReadOnly_7 ;
+    yawl:hasMethod yawl:FormParameter_getName_8 ;
+    yawl:hasMethod yawl:FormParameter_getDataTypeName_9 ;
+    yawl:hasMethod yawl:FormParameter_getAttributes_10 ;
+    yawl:hasMethod yawl:FormParameter_getYVariable_11 ;
+    yawl:hasField yawl:FormParameter__name ;
+    yawl:hasField yawl:FormParameter__dataType ;
+    yawl:hasField yawl:FormParameter__value ;
+    yawl:hasField yawl:FormParameter__inputOnly ;
+    yawl:hasField yawl:FormParameter__required ;
+    yawl:hasField yawl:FormParameter__attributes ;
+    .
+
+
+# Method: FormParameter.getValue
+yawl:FormParameter_getValue_1 a yawl:Method ;
+    rdfs:label "getValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getValue()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FormParameter.setValue
+yawl:FormParameter_setValue_2 a yawl:Method ;
+    rdfs:label "setValue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setValue(String value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FormParameter.isInputOnly
+yawl:FormParameter_isInputOnly_3 a yawl:Method ;
+    rdfs:label "isInputOnly" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isInputOnly()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FormParameter.setInputOnly
+yawl:FormParameter_setInputOnly_4 a yawl:Method ;
+    rdfs:label "setInputOnly" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setInputOnly(boolean inputOnly)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FormParameter.isRequired
+yawl:FormParameter_isRequired_5 a yawl:Method ;
+    rdfs:label "isRequired" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isRequired()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FormParameter.setRequired
+yawl:FormParameter_setRequired_6 a yawl:Method ;
+    rdfs:label "setRequired" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRequired(boolean required)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FormParameter.isReadOnly
+yawl:FormParameter_isReadOnly_7 a yawl:Method ;
+    rdfs:label "isReadOnly" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isReadOnly()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FormParameter.getName
+yawl:FormParameter_getName_8 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FormParameter.getDataTypeName
+yawl:FormParameter_getDataTypeName_9 a yawl:Method ;
+    rdfs:label "getDataTypeName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataTypeName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FormParameter.getAttributes
+yawl:FormParameter_getAttributes_10 a yawl:Method ;
+    rdfs:label "getAttributes" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getAttributes()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FormParameter.getYVariable
+yawl:FormParameter_getYVariable_11 a yawl:Method ;
+    rdfs:label "getYVariable" ;
+    yawl:returnType "YVariable" ;
+    yawl:signature "YVariable getYVariable()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:FormParameter__name a yawl:Field ;
+    rdfs:label "_name" .
+
+yawl:FormParameter__dataType a yawl:Field ;
+    rdfs:label "_dataType" .
+
+yawl:FormParameter__value a yawl:Field ;
+    rdfs:label "_value" .
+
+yawl:FormParameter__inputOnly a yawl:Field ;
+    rdfs:label "_inputOnly" .
+
+yawl:FormParameter__required a yawl:Field ;
+    rdfs:label "_required" .
+
+yawl:FormParameter__attributes a yawl:Field ;
+    rdfs:label "_attributes" .
+
+
+

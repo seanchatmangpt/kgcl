@@ -1,0 +1,309 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.resourcing.datastore.eventlog
+yawl:org_yawlfoundation_yawl_resourcing_datastore_eventlog a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.datastore.eventlog" .
+# Class: org.yawlfoundation.yawl.resourcing.datastore.eventlog.EventLogger
+yawl:EventLogger a yawl:Class ;
+    rdfs:label "EventLogger" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_datastore_eventlog ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/datastore/eventlog/EventLogger.java"^^xsd:string ;
+    rdfs:comment """Handles the logging of resource 'events' @author Michael Adams Date: 27/09/2007""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:EventLogger_setLogging_1 ;
+    yawl:hasMethod yawl:EventLogger_setOfferLogging_2 ;
+    yawl:hasMethod yawl:EventLogger_setEventServer_3 ;
+    yawl:hasMethod yawl:EventLogger_addListeners_4 ;
+    yawl:hasMethod yawl:EventLogger_addListener_5 ;
+    yawl:hasMethod yawl:EventLogger_removeListener_6 ;
+    yawl:hasMethod yawl:EventLogger_shutdown_7 ;
+    yawl:hasMethod yawl:EventLogger_log_8 ;
+    yawl:hasMethod yawl:EventLogger_logAutoTask_9 ;
+    yawl:hasMethod yawl:EventLogger_log_10 ;
+    yawl:hasMethod yawl:EventLogger_log_11 ;
+    yawl:hasMethod yawl:EventLogger_log_12 ;
+    yawl:hasMethod yawl:EventLogger_log_13 ;
+    yawl:hasMethod yawl:EventLogger_audit_14 ;
+    yawl:hasMethod yawl:EventLogger_insertEvent_15 ;
+    yawl:hasMethod yawl:EventLogger_insertEvent_16 ;
+    yawl:hasMethod yawl:EventLogger_insertEvent_17 ;
+    yawl:hasMethod yawl:EventLogger_announceEvent_18 ;
+    yawl:hasMethod yawl:EventLogger_getSpecificationKey_19 ;
+    yawl:hasMethod yawl:EventLogger_getSpecMap_20 ;
+    yawl:hasMethod yawl:EventLogger_addToSpecMap_21 ;
+    yawl:hasMethod yawl:EventLogger_getSpecificationKey_22 ;
+    yawl:hasMethod yawl:EventLogger_getEventByName_23 ;
+    yawl:hasMethod yawl:EventLogger_getAuditEventByName_24 ;
+    yawl:hasMethod yawl:EventLogger_getEnum_25 ;
+    yawl:hasMethod yawl:EventLogger_getListeners_26 ;
+    yawl:hasField yawl:EventLogger__loggingEnabled ;
+    yawl:hasField yawl:EventLogger__logOffers ;
+    yawl:hasField yawl:EventLogger__eventServer ;
+    yawl:hasField yawl:EventLogger__specMap ;
+    yawl:hasField yawl:EventLogger__listeners ;
+    yawl:hasField yawl:EventLogger__executor ;
+    .
+
+
+# Method: EventLogger.setLogging
+yawl:EventLogger_setLogging_1 a yawl:Method ;
+    rdfs:label "setLogging" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLogging(boolean flag)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EventLogger.setOfferLogging
+yawl:EventLogger_setOfferLogging_2 a yawl:Method ;
+    rdfs:label "setOfferLogging" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOfferLogging(boolean flag)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EventLogger.setEventServer
+yawl:EventLogger_setEventServer_3 a yawl:Method ;
+    rdfs:label "setEventServer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEventServer(ResourceGatewayServer server)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EventLogger.addListeners
+yawl:EventLogger_addListeners_4 a yawl:Method ;
+    rdfs:label "addListeners" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addListeners(Set listeners)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EventLogger.addListener
+yawl:EventLogger_addListener_5 a yawl:Method ;
+    rdfs:label "addListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addListener(ResourceEventListener listener)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EventLogger.removeListener
+yawl:EventLogger_removeListener_6 a yawl:Method ;
+    rdfs:label "removeListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeListener(ResourceEventListener listener)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EventLogger.shutdown
+yawl:EventLogger_shutdown_7 a yawl:Method ;
+    rdfs:label "shutdown" ;
+    yawl:returnType "List" ;
+    yawl:signature "List shutdown()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EventLogger.log
+yawl:EventLogger_log_8 a yawl:Method ;
+    rdfs:label "log" ;
+    yawl:returnType "void" ;
+    yawl:signature "void log(WorkItemRecord wir, String pid, event eType)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EventLogger.logAutoTask
+yawl:EventLogger_logAutoTask_9 a yawl:Method ;
+    rdfs:label "logAutoTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logAutoTask(WorkItemRecord wir, boolean start)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EventLogger.log
+yawl:EventLogger_log_10 a yawl:Method ;
+    rdfs:label "log" ;
+    yawl:returnType "void" ;
+    yawl:signature "void log(WorkItemRecord wir, String pid, String eventString)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EventLogger.log
+yawl:EventLogger_log_11 a yawl:Method ;
+    rdfs:label "log" ;
+    yawl:returnType "void" ;
+    yawl:signature "void log(YSpecificationID specID, String caseID, String id, event eType)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EventLogger.log
+yawl:EventLogger_log_12 a yawl:Method ;
+    rdfs:label "log" ;
+    yawl:returnType "void" ;
+    yawl:signature "void log(WorkItemRecord wir, String pid, int eType)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EventLogger.log
+yawl:EventLogger_log_13 a yawl:Method ;
+    rdfs:label "log" ;
+    yawl:returnType "void" ;
+    yawl:signature "void log(YSpecificationID specID, String caseID, String pid, boolean launch)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EventLogger.audit
+yawl:EventLogger_audit_14 a yawl:Method ;
+    rdfs:label "audit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void audit(String userid, audit eType)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EventLogger.insertEvent
+yawl:EventLogger_insertEvent_15 a yawl:Method ;
+    rdfs:label "insertEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void insertEvent(YSpecificationID specID, String caseID, String pid, event eType)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EventLogger.insertEvent
+yawl:EventLogger_insertEvent_16 a yawl:Method ;
+    rdfs:label "insertEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void insertEvent(WorkItemRecord wir, String pid, event eType)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EventLogger.insertEvent
+yawl:EventLogger_insertEvent_17 a yawl:Method ;
+    rdfs:label "insertEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void insertEvent(Object event)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EventLogger.announceEvent
+yawl:EventLogger_announceEvent_18 a yawl:Method ;
+    rdfs:label "announceEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceEvent(YSpecificationID specID, ResourceEvent event)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EventLogger.getSpecificationKey
+yawl:EventLogger_getSpecificationKey_19 a yawl:Method ;
+    rdfs:label "getSpecificationKey" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getSpecificationKey(YSpecificationID specID)" ;
+    rdfs:comment """Gets the primary key for a specification record, or inserts a new entry if it doesn't exist and returns its key. @param specID the identifiers of the specification @return the primary key for the specification""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EventLogger.getSpecMap
+yawl:EventLogger_getSpecMap_20 a yawl:Method ;
+    rdfs:label "getSpecMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getSpecMap()" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EventLogger.addToSpecMap
+yawl:EventLogger_addToSpecMap_21 a yawl:Method ;
+    rdfs:label "addToSpecMap" ;
+    yawl:returnType "long" ;
+    yawl:signature "long addToSpecMap(YSpecificationID specID)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EventLogger.getSpecificationKey
+yawl:EventLogger_getSpecificationKey_22 a yawl:Method ;
+    rdfs:label "getSpecificationKey" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getSpecificationKey(String key)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EventLogger.getEventByName
+yawl:EventLogger_getEventByName_23 a yawl:Method ;
+    rdfs:label "getEventByName" ;
+    yawl:returnType "event" ;
+    yawl:signature "event getEventByName(String eventName)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EventLogger.getAuditEventByName
+yawl:EventLogger_getAuditEventByName_24 a yawl:Method ;
+    rdfs:label "getAuditEventByName" ;
+    yawl:returnType "audit" ;
+    yawl:signature "audit getAuditEventByName(String eventName)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EventLogger.getEnum
+yawl:EventLogger_getEnum_25 a yawl:Method ;
+    rdfs:label "getEnum" ;
+    yawl:returnType "T" ;
+    yawl:signature "T getEnum(Class e, String eventName)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EventLogger.getListeners
+yawl:EventLogger_getListeners_26 a yawl:Method ;
+    rdfs:label "getListeners" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getListeners()" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:EventLogger__loggingEnabled a yawl:Field ;
+    rdfs:label "_loggingEnabled" .
+
+yawl:EventLogger__logOffers a yawl:Field ;
+    rdfs:label "_logOffers" .
+
+yawl:EventLogger__eventServer a yawl:Field ;
+    rdfs:label "_eventServer" .
+
+yawl:EventLogger__specMap a yawl:Field ;
+    rdfs:label "_specMap" .
+
+yawl:EventLogger__listeners a yawl:Field ;
+    rdfs:label "_listeners" .
+
+yawl:EventLogger__executor a yawl:Field ;
+    rdfs:label "_executor" .
+
+
+

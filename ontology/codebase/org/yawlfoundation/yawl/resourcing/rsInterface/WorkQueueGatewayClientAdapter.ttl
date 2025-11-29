@@ -1,0 +1,732 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.rsInterface.WorkQueueGatewayClientAdapter
+yawl:WorkQueueGatewayClientAdapter a yawl:Class ;
+    rdfs:label "WorkQueueGatewayClientAdapter" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_rsInterface ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/rsInterface/WorkQueueGatewayClientAdapter.java"^^xsd:string ;
+    rdfs:comment """This adapter class adds a transformation layer to the resource gateway client, effectively reconstituting the Strings returned from the gateway into java objects. <p/> Author: Michael Adams Date: 26/10/2007 Version: 2.0""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_setClientURI_1 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getClientURI_2 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getClient_3 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_successful_4 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_successCheck_5 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_checkConnection_6 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_connect_7 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_userlogin_8 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_userlogout_9 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_userlogin_10 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_disconnect_11 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_isValidUserSession_12 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getParticipantFromUserID_13 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getFullNameForUserID_14 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getUserPrivileges_15 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getTaskPrivileges_16 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getReportingToParticipant_17 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getOrgGroupMembers_18 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getRoleMembers_19 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getParticipant_20 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getAllParticipants_21 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getDistributionSet_22 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getAdminQueues_23 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getParticipantQueues_24 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getQueuedWorkItems_25 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getWorkItem_26 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getWorkItemChildren_27 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getWorkItemParameters_28 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getWorkItemOutputOnlyParameters_29 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getWorkItemDataSchema_30 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getCaseDataSchema_31 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_synchroniseCaches_32 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_updateWorkItemData_33 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getParticipantsAssignedWorkItem_34 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_acceptOffer_35 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_startItem_36 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_deallocateItem_37 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_delegateItem_38 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_reallocateItem_39 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_skipItem_40 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_pileItem_41 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_chainCase_42 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_suspendItem_43 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_unsuspendItem_44 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_completeItem_45 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_offerItem_46 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_reofferItem_47 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_allocateItem_48 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_reallocateItem_49 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_restartItem_50 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_createWorkItemInstance_51 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_updateWorkQueuedItem_52 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_setWorkItemDocumentation_53 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getChainedCases_54 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getPiledItems_55 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_unchainCase_56 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_unpileTask_57 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_redirectWorkItemToYawlService_58 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getLoadedSpecs_59 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getSpecList_60 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getSpecData_61 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_uploadSpecification_62 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_unloadSpecification_63 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_launchCase_64 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getRunningCases_65 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_cancelCase_66 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_updateWIRCache_67 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getDecompID_68 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getCaseData_69 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getWorkItemDurationsForParticipant_70 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_getRegisteredServices_71 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_removeRegisteredService_72 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_addRegisteredService_73 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_removeExternalClient_74 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_addExternalClient_75 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_addResourceEventListener_76 ;
+    yawl:hasMethod yawl:WorkQueueGatewayClientAdapter_removeResourceEventListener_77 ;
+    yawl:hasField yawl:WorkQueueGatewayClientAdapter__wqclient ;
+    yawl:hasField yawl:WorkQueueGatewayClientAdapter__uri ;
+    yawl:hasField yawl:WorkQueueGatewayClientAdapter__marshaller ;
+    .
+
+
+# Method: WorkQueueGatewayClientAdapter.setClientURI
+yawl:WorkQueueGatewayClientAdapter_setClientURI_1 a yawl:Method ;
+    rdfs:label "setClientURI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setClientURI(String uri)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getClientURI
+yawl:WorkQueueGatewayClientAdapter_getClientURI_2 a yawl:Method ;
+    rdfs:label "getClientURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getClientURI()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getClient
+yawl:WorkQueueGatewayClientAdapter_getClient_3 a yawl:Method ;
+    rdfs:label "getClient" ;
+    yawl:returnType "WorkQueueGatewayClient" ;
+    yawl:signature "WorkQueueGatewayClient getClient()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.successful
+yawl:WorkQueueGatewayClientAdapter_successful_4 a yawl:Method ;
+    rdfs:label "successful" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean successful(String result)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.successCheck
+yawl:WorkQueueGatewayClientAdapter_successCheck_5 a yawl:Method ;
+    rdfs:label "successCheck" ;
+    yawl:returnType "String" ;
+    yawl:signature "String successCheck(String xml)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.checkConnection
+yawl:WorkQueueGatewayClientAdapter_checkConnection_6 a yawl:Method ;
+    rdfs:label "checkConnection" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean checkConnection(String handle)" ;
+    rdfs:comment """Checks that the connection to the service is valid @param handle the current sessionhandle @return true if the connection is valid, false if otherwise""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.connect
+yawl:WorkQueueGatewayClientAdapter_connect_7 a yawl:Method ;
+    rdfs:label "connect" ;
+    yawl:returnType "String" ;
+    yawl:signature "String connect(String userid, String password)" ;
+    rdfs:comment """Attempts to connect to the service (as a service) @param userid   the userid @param password the corresponding password @return a sessionhandle if successful, or a failure message if otherwise""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.userlogin
+yawl:WorkQueueGatewayClientAdapter_userlogin_8 a yawl:Method ;
+    rdfs:label "userlogin" ;
+    yawl:returnType "String" ;
+    yawl:signature "String userlogin(String userid, String password)" ;
+    rdfs:comment """Attempts to connect to the service (as a user/participant) @param userid   the userid @param password the corresponding password @return a sessionhandle if successful, or a failure message if otherwise""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.userlogout
+yawl:WorkQueueGatewayClientAdapter_userlogout_9 a yawl:Method ;
+    rdfs:label "userlogout" ;
+    yawl:returnType "String" ;
+    yawl:signature "String userlogout(String handle)" ;
+    rdfs:comment """Logs out a user session (as opposed to a service connection) @param handle the session handle @return a success message @throws IOException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.userlogin
+yawl:WorkQueueGatewayClientAdapter_userlogin_10 a yawl:Method ;
+    rdfs:label "userlogin" ;
+    yawl:returnType "String" ;
+    yawl:signature "String userlogin(String userid, String password, boolean encrypt)" ;
+    rdfs:comment """Attempts to connect to the service (as a user/participant) @param userid   the userid @param password the corresponding password @param encrypt  true if encryption is required (most cases); false if the password is already encrypted @return a sessionhandle if successful, or a failure message if otherwise""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.disconnect
+yawl:WorkQueueGatewayClientAdapter_disconnect_11 a yawl:Method ;
+    rdfs:label "disconnect" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disconnect(String handle)" ;
+    rdfs:comment """Disconnects a session from the service @param handle the sessionhandle of the session to disconnect""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.isValidUserSession
+yawl:WorkQueueGatewayClientAdapter_isValidUserSession_12 a yawl:Method ;
+    rdfs:label "isValidUserSession" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isValidUserSession(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getParticipantFromUserID
+yawl:WorkQueueGatewayClientAdapter_getParticipantFromUserID_13 a yawl:Method ;
+    rdfs:label "getParticipantFromUserID" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant getParticipantFromUserID(String userid, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getFullNameForUserID
+yawl:WorkQueueGatewayClientAdapter_getFullNameForUserID_14 a yawl:Method ;
+    rdfs:label "getFullNameForUserID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFullNameForUserID(String userid, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getUserPrivileges
+yawl:WorkQueueGatewayClientAdapter_getUserPrivileges_15 a yawl:Method ;
+    rdfs:label "getUserPrivileges" ;
+    yawl:returnType "UserPrivileges" ;
+    yawl:signature "UserPrivileges getUserPrivileges(String pid, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getTaskPrivileges
+yawl:WorkQueueGatewayClientAdapter_getTaskPrivileges_16 a yawl:Method ;
+    rdfs:label "getTaskPrivileges" ;
+    yawl:returnType "TaskPrivileges" ;
+    yawl:signature "TaskPrivileges getTaskPrivileges(String itemid, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getReportingToParticipant
+yawl:WorkQueueGatewayClientAdapter_getReportingToParticipant_17 a yawl:Method ;
+    rdfs:label "getReportingToParticipant" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getReportingToParticipant(String pid, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getOrgGroupMembers
+yawl:WorkQueueGatewayClientAdapter_getOrgGroupMembers_18 a yawl:Method ;
+    rdfs:label "getOrgGroupMembers" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getOrgGroupMembers(String oid, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getRoleMembers
+yawl:WorkQueueGatewayClientAdapter_getRoleMembers_19 a yawl:Method ;
+    rdfs:label "getRoleMembers" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getRoleMembers(String rid, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getParticipant
+yawl:WorkQueueGatewayClientAdapter_getParticipant_20 a yawl:Method ;
+    rdfs:label "getParticipant" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant getParticipant(String pid, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getAllParticipants
+yawl:WorkQueueGatewayClientAdapter_getAllParticipants_21 a yawl:Method ;
+    rdfs:label "getAllParticipants" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getAllParticipants(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getDistributionSet
+yawl:WorkQueueGatewayClientAdapter_getDistributionSet_22 a yawl:Method ;
+    rdfs:label "getDistributionSet" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getDistributionSet(String itemID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getAdminQueues
+yawl:WorkQueueGatewayClientAdapter_getAdminQueues_23 a yawl:Method ;
+    rdfs:label "getAdminQueues" ;
+    yawl:returnType "QueueSet" ;
+    yawl:signature "QueueSet getAdminQueues(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getParticipantQueues
+yawl:WorkQueueGatewayClientAdapter_getParticipantQueues_24 a yawl:Method ;
+    rdfs:label "getParticipantQueues" ;
+    yawl:returnType "QueueSet" ;
+    yawl:signature "QueueSet getParticipantQueues(String pid, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getQueuedWorkItems
+yawl:WorkQueueGatewayClientAdapter_getQueuedWorkItems_25 a yawl:Method ;
+    rdfs:label "getQueuedWorkItems" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getQueuedWorkItems(String pid, int queue, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getWorkItem
+yawl:WorkQueueGatewayClientAdapter_getWorkItem_26 a yawl:Method ;
+    rdfs:label "getWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItem(String itemID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getWorkItemChildren
+yawl:WorkQueueGatewayClientAdapter_getWorkItemChildren_27 a yawl:Method ;
+    rdfs:label "getWorkItemChildren" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getWorkItemChildren(String itemID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getWorkItemParameters
+yawl:WorkQueueGatewayClientAdapter_getWorkItemParameters_28 a yawl:Method ;
+    rdfs:label "getWorkItemParameters" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getWorkItemParameters(String itemID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getWorkItemOutputOnlyParameters
+yawl:WorkQueueGatewayClientAdapter_getWorkItemOutputOnlyParameters_29 a yawl:Method ;
+    rdfs:label "getWorkItemOutputOnlyParameters" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getWorkItemOutputOnlyParameters(String itemID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getWorkItemDataSchema
+yawl:WorkQueueGatewayClientAdapter_getWorkItemDataSchema_30 a yawl:Method ;
+    rdfs:label "getWorkItemDataSchema" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItemDataSchema(String itemID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getCaseDataSchema
+yawl:WorkQueueGatewayClientAdapter_getCaseDataSchema_31 a yawl:Method ;
+    rdfs:label "getCaseDataSchema" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseDataSchema(YSpecificationID specID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.synchroniseCaches
+yawl:WorkQueueGatewayClientAdapter_synchroniseCaches_32 a yawl:Method ;
+    rdfs:label "synchroniseCaches" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean synchroniseCaches(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.updateWorkItemData
+yawl:WorkQueueGatewayClientAdapter_updateWorkItemData_33 a yawl:Method ;
+    rdfs:label "updateWorkItemData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateWorkItemData(String itemID, String data, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getParticipantsAssignedWorkItem
+yawl:WorkQueueGatewayClientAdapter_getParticipantsAssignedWorkItem_34 a yawl:Method ;
+    rdfs:label "getParticipantsAssignedWorkItem" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getParticipantsAssignedWorkItem(String workItemID, int queueType, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.acceptOffer
+yawl:WorkQueueGatewayClientAdapter_acceptOffer_35 a yawl:Method ;
+    rdfs:label "acceptOffer" ;
+    yawl:returnType "String" ;
+    yawl:signature "String acceptOffer(String pid, String itemID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.startItem
+yawl:WorkQueueGatewayClientAdapter_startItem_36 a yawl:Method ;
+    rdfs:label "startItem" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord startItem(String pid, String itemID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.deallocateItem
+yawl:WorkQueueGatewayClientAdapter_deallocateItem_37 a yawl:Method ;
+    rdfs:label "deallocateItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String deallocateItem(String pid, String itemID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.delegateItem
+yawl:WorkQueueGatewayClientAdapter_delegateItem_38 a yawl:Method ;
+    rdfs:label "delegateItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String delegateItem(String pFrom, String pTo, String itemID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.reallocateItem
+yawl:WorkQueueGatewayClientAdapter_reallocateItem_39 a yawl:Method ;
+    rdfs:label "reallocateItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String reallocateItem(String pFrom, String pTo, String itemID, boolean stateful, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.skipItem
+yawl:WorkQueueGatewayClientAdapter_skipItem_40 a yawl:Method ;
+    rdfs:label "skipItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String skipItem(String pid, String itemID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.pileItem
+yawl:WorkQueueGatewayClientAdapter_pileItem_41 a yawl:Method ;
+    rdfs:label "pileItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String pileItem(String pid, String itemID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.chainCase
+yawl:WorkQueueGatewayClientAdapter_chainCase_42 a yawl:Method ;
+    rdfs:label "chainCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String chainCase(String pid, String itemID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.suspendItem
+yawl:WorkQueueGatewayClientAdapter_suspendItem_43 a yawl:Method ;
+    rdfs:label "suspendItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String suspendItem(String pid, String itemID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.unsuspendItem
+yawl:WorkQueueGatewayClientAdapter_unsuspendItem_44 a yawl:Method ;
+    rdfs:label "unsuspendItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String unsuspendItem(String pid, String itemID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.completeItem
+yawl:WorkQueueGatewayClientAdapter_completeItem_45 a yawl:Method ;
+    rdfs:label "completeItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String completeItem(String pid, String itemID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.offerItem
+yawl:WorkQueueGatewayClientAdapter_offerItem_46 a yawl:Method ;
+    rdfs:label "offerItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String offerItem(Set pid, String itemID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.reofferItem
+yawl:WorkQueueGatewayClientAdapter_reofferItem_47 a yawl:Method ;
+    rdfs:label "reofferItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String reofferItem(Set pid, String itemID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.allocateItem
+yawl:WorkQueueGatewayClientAdapter_allocateItem_48 a yawl:Method ;
+    rdfs:label "allocateItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String allocateItem(String pid, String itemID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.reallocateItem
+yawl:WorkQueueGatewayClientAdapter_reallocateItem_49 a yawl:Method ;
+    rdfs:label "reallocateItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String reallocateItem(String pid, String itemID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.restartItem
+yawl:WorkQueueGatewayClientAdapter_restartItem_50 a yawl:Method ;
+    rdfs:label "restartItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String restartItem(String pid, String itemID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.createWorkItemInstance
+yawl:WorkQueueGatewayClientAdapter_createWorkItemInstance_51 a yawl:Method ;
+    rdfs:label "createWorkItemInstance" ;
+    yawl:returnType "String" ;
+    yawl:signature "String createWorkItemInstance(String itemID, String value, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.updateWorkQueuedItem
+yawl:WorkQueueGatewayClientAdapter_updateWorkQueuedItem_52 a yawl:Method ;
+    rdfs:label "updateWorkQueuedItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateWorkQueuedItem(String wirXML, String pid, int queue, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.setWorkItemDocumentation
+yawl:WorkQueueGatewayClientAdapter_setWorkItemDocumentation_53 a yawl:Method ;
+    rdfs:label "setWorkItemDocumentation" ;
+    yawl:returnType "String" ;
+    yawl:signature "String setWorkItemDocumentation(String itemID, String doco, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getChainedCases
+yawl:WorkQueueGatewayClientAdapter_getChainedCases_54 a yawl:Method ;
+    rdfs:label "getChainedCases" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getChainedCases(String pid, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getPiledItems
+yawl:WorkQueueGatewayClientAdapter_getPiledItems_55 a yawl:Method ;
+    rdfs:label "getPiledItems" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPiledItems(String pid, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.unchainCase
+yawl:WorkQueueGatewayClientAdapter_unchainCase_56 a yawl:Method ;
+    rdfs:label "unchainCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String unchainCase(String caseID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.unpileTask
+yawl:WorkQueueGatewayClientAdapter_unpileTask_57 a yawl:Method ;
+    rdfs:label "unpileTask" ;
+    yawl:returnType "String" ;
+    yawl:signature "String unpileTask(YSpecificationID specID, String taskID, String pid, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.redirectWorkItemToYawlService
+yawl:WorkQueueGatewayClientAdapter_redirectWorkItemToYawlService_58 a yawl:Method ;
+    rdfs:label "redirectWorkItemToYawlService" ;
+    yawl:returnType "String" ;
+    yawl:signature "String redirectWorkItemToYawlService(String itemID, String serviceName, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getLoadedSpecs
+yawl:WorkQueueGatewayClientAdapter_getLoadedSpecs_59 a yawl:Method ;
+    rdfs:label "getLoadedSpecs" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getLoadedSpecs(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getSpecList
+yawl:WorkQueueGatewayClientAdapter_getSpecList_60 a yawl:Method ;
+    rdfs:label "getSpecList" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getSpecList(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getSpecData
+yawl:WorkQueueGatewayClientAdapter_getSpecData_61 a yawl:Method ;
+    rdfs:label "getSpecData" ;
+    yawl:returnType "SpecificationData" ;
+    yawl:signature "SpecificationData getSpecData(YSpecificationID specID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.uploadSpecification
+yawl:WorkQueueGatewayClientAdapter_uploadSpecification_62 a yawl:Method ;
+    rdfs:label "uploadSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String uploadSpecification(String fileContents, String fileName, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.unloadSpecification
+yawl:WorkQueueGatewayClientAdapter_unloadSpecification_63 a yawl:Method ;
+    rdfs:label "unloadSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String unloadSpecification(YSpecificationID specID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.launchCase
+yawl:WorkQueueGatewayClientAdapter_launchCase_64 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseData, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getRunningCases
+yawl:WorkQueueGatewayClientAdapter_getRunningCases_65 a yawl:Method ;
+    rdfs:label "getRunningCases" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRunningCases(YSpecificationID specID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.cancelCase
+yawl:WorkQueueGatewayClientAdapter_cancelCase_66 a yawl:Method ;
+    rdfs:label "cancelCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String cancelCase(String caseID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.updateWIRCache
+yawl:WorkQueueGatewayClientAdapter_updateWIRCache_67 a yawl:Method ;
+    rdfs:label "updateWIRCache" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateWIRCache(WorkItemRecord wir, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getDecompID
+yawl:WorkQueueGatewayClientAdapter_getDecompID_68 a yawl:Method ;
+    rdfs:label "getDecompID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDecompID(WorkItemRecord wir, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getCaseData
+yawl:WorkQueueGatewayClientAdapter_getCaseData_69 a yawl:Method ;
+    rdfs:label "getCaseData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseData(String caseID, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getWorkItemDurationsForParticipant
+yawl:WorkQueueGatewayClientAdapter_getWorkItemDurationsForParticipant_70 a yawl:Method ;
+    rdfs:label "getWorkItemDurationsForParticipant" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItemDurationsForParticipant(YSpecificationID specID, String taskName, String pid, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.getRegisteredServices
+yawl:WorkQueueGatewayClientAdapter_getRegisteredServices_71 a yawl:Method ;
+    rdfs:label "getRegisteredServices" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getRegisteredServices(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.removeRegisteredService
+yawl:WorkQueueGatewayClientAdapter_removeRegisteredService_72 a yawl:Method ;
+    rdfs:label "removeRegisteredService" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeRegisteredService(String id, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.addRegisteredService
+yawl:WorkQueueGatewayClientAdapter_addRegisteredService_73 a yawl:Method ;
+    rdfs:label "addRegisteredService" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addRegisteredService(YAWLServiceReference service, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.removeExternalClient
+yawl:WorkQueueGatewayClientAdapter_removeExternalClient_74 a yawl:Method ;
+    rdfs:label "removeExternalClient" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeExternalClient(String id, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.addExternalClient
+yawl:WorkQueueGatewayClientAdapter_addExternalClient_75 a yawl:Method ;
+    rdfs:label "addExternalClient" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addExternalClient(YExternalClient client, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.addResourceEventListener
+yawl:WorkQueueGatewayClientAdapter_addResourceEventListener_76 a yawl:Method ;
+    rdfs:label "addResourceEventListener" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean addResourceEventListener(String uri, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGatewayClientAdapter.removeResourceEventListener
+yawl:WorkQueueGatewayClientAdapter_removeResourceEventListener_77 a yawl:Method ;
+    rdfs:label "removeResourceEventListener" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeResourceEventListener(String uri, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:WorkQueueGatewayClientAdapter__wqclient a yawl:Field ;
+    rdfs:label "_wqclient" .
+
+yawl:WorkQueueGatewayClientAdapter__uri a yawl:Field ;
+    rdfs:label "_uri" .
+
+yawl:WorkQueueGatewayClientAdapter__marshaller a yawl:Field ;
+    rdfs:label "_marshaller" .
+
+
+

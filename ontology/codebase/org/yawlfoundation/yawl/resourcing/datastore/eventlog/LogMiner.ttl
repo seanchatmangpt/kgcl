@@ -1,0 +1,946 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.datastore.eventlog.LogMiner
+yawl:LogMiner a yawl:Class ;
+    rdfs:label "LogMiner" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_datastore_eventlog ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/datastore/eventlog/LogMiner.java"^^xsd:string ;
+    rdfs:comment """An API to retrieve data from the resource service's event logs and pass it back as XML. Create Date: 16/12/2008 @author Michael Adams @version 2.0""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:LogMiner_getInstance_1 ;
+    yawl:hasMethod yawl:LogMiner_setReplaceResourceIdsWithUserIds_2 ;
+    yawl:hasMethod yawl:LogMiner_setIgnoreUnknownEventsInXesLogs_3 ;
+    yawl:hasMethod yawl:LogMiner_getWorkItemDurationsForParticipant_4 ;
+    yawl:hasMethod yawl:LogMiner_getAllResourceEvents_5 ;
+    yawl:hasMethod yawl:LogMiner_getCaseEvents_6 ;
+    yawl:hasMethod yawl:LogMiner_getCaseEvents_7 ;
+    yawl:hasMethod yawl:LogMiner_getCaseEvent_8 ;
+    yawl:hasMethod yawl:LogMiner_getTaskEvents_9 ;
+    yawl:hasMethod yawl:LogMiner_getTaskEvents_10 ;
+    yawl:hasMethod yawl:LogMiner_getTaskEvents_11 ;
+    yawl:hasMethod yawl:LogMiner_getTaskEvents_12 ;
+    yawl:hasMethod yawl:LogMiner_getWorkItemEvents_13 ;
+    yawl:hasMethod yawl:LogMiner_getWorkItemEvents_14 ;
+    yawl:hasMethod yawl:LogMiner_getCaseStartedBy_15 ;
+    yawl:hasMethod yawl:LogMiner_getParticipantHistory_16 ;
+    yawl:hasMethod yawl:LogMiner_getParticipantHistory_17 ;
+    yawl:hasMethod yawl:LogMiner_getParticipantHistoryForEvent_18 ;
+    yawl:hasMethod yawl:LogMiner_getParticipantHistoryForEvent_19 ;
+    yawl:hasMethod yawl:LogMiner_getResourceHistory_20 ;
+    yawl:hasMethod yawl:LogMiner_getResourceHistory_21 ;
+    yawl:hasMethod yawl:LogMiner_getResourceHistoryForEvent_22 ;
+    yawl:hasMethod yawl:LogMiner_getResourceHistoryForEvent_23 ;
+    yawl:hasMethod yawl:LogMiner_getWorkItemOffered_24 ;
+    yawl:hasMethod yawl:LogMiner_getWorkItemAllocated_25 ;
+    yawl:hasMethod yawl:LogMiner_getWorkItemStarted_26 ;
+    yawl:hasMethod yawl:LogMiner_getCaseHistoryInvolvingParticipant_27 ;
+    yawl:hasMethod yawl:LogMiner_getCaseHistoryInvolvingParticipant_28 ;
+    yawl:hasMethod yawl:LogMiner_getSpecificationEventsByURI_29 ;
+    yawl:hasMethod yawl:LogMiner_getSpecificationEventsByID_30 ;
+    yawl:hasMethod yawl:LogMiner_getSpecificationEvents_31 ;
+    yawl:hasMethod yawl:LogMiner_getSpecificationEvents_32 ;
+    yawl:hasMethod yawl:LogMiner_getSpecificationEvents_33 ;
+    yawl:hasMethod yawl:LogMiner_getSpecificationEvents_34 ;
+    yawl:hasMethod yawl:LogMiner_getSpecificationIdentifiers_35 ;
+    yawl:hasMethod yawl:LogMiner_getSpecificationXESLog_36 ;
+    yawl:hasMethod yawl:LogMiner_getMergedXESLog_37 ;
+    yawl:hasMethod yawl:LogMiner_getMergedXESLog_38 ;
+    yawl:hasMethod yawl:LogMiner_getSpecificationStatistics_39 ;
+    yawl:hasMethod yawl:LogMiner_getSpecificationStatistics_40 ;
+    yawl:hasMethod yawl:LogMiner_getTaskStatistics_41 ;
+    yawl:hasMethod yawl:LogMiner_getTaskStatistics_42 ;
+    yawl:hasMethod yawl:LogMiner_getTaskStatistics_43 ;
+    yawl:hasMethod yawl:LogMiner_getTaskStatistics_44 ;
+    yawl:hasMethod yawl:LogMiner_getTaskStatisticsForCase_45 ;
+    yawl:hasMethod yawl:LogMiner_getTaskStatisticsForCase_46 ;
+    yawl:hasMethod yawl:LogMiner_getTaskStatisticsForSpecification_47 ;
+    yawl:hasMethod yawl:LogMiner_getTaskStatisticsForSpecification_48 ;
+    yawl:hasMethod yawl:LogMiner_getTaskStatisticsForSpecificationURI_49 ;
+    yawl:hasMethod yawl:LogMiner_getTaskStatisticsForSpecificationUID_50 ;
+    yawl:hasMethod yawl:LogMiner_getTaskStatisticsForSpecificationSet_51 ;
+    yawl:hasMethod yawl:LogMiner_getTaskStatisticsForSpecificationSet_52 ;
+    yawl:hasMethod yawl:LogMiner_getLastBusyOrReleaseEvents_53 ;
+    yawl:hasMethod yawl:LogMiner_getBusyResources_54 ;
+    yawl:hasMethod yawl:LogMiner_getBusyResourcesForCase_55 ;
+    yawl:hasMethod yawl:LogMiner_getBusyItemIDsForCase_56 ;
+    yawl:hasMethod yawl:LogMiner_execQuery_57 ;
+    yawl:hasMethod yawl:LogMiner_getWhereQuery_58 ;
+    yawl:hasMethod yawl:LogMiner_getWhereQuery_59 ;
+    yawl:hasMethod yawl:LogMiner_getWorkItemEventsList_60 ;
+    yawl:hasMethod yawl:LogMiner_getWorkItemEventsList_61 ;
+    yawl:hasMethod yawl:LogMiner_getTaskEventsList_62 ;
+    yawl:hasMethod yawl:LogMiner_getTaskEventsList_63 ;
+    yawl:hasMethod yawl:LogMiner_getSpecificationEvents_64 ;
+    yawl:hasMethod yawl:LogMiner_getSpecificationEvents_65 ;
+    yawl:hasMethod yawl:LogMiner_getCaseEventsList_66 ;
+    yawl:hasMethod yawl:LogMiner_getAllEvents_67 ;
+    yawl:hasMethod yawl:LogMiner_getCaseEventsList_68 ;
+    yawl:hasMethod yawl:LogMiner_getResourceEventsList_69 ;
+    yawl:hasMethod yawl:LogMiner_getResourceEventsList_70 ;
+    yawl:hasMethod yawl:LogMiner_getSpecLogRecord_71 ;
+    yawl:hasMethod yawl:LogMiner_getTimeRangeSubclause_72 ;
+    yawl:hasMethod yawl:LogMiner_containsStartEvent_73 ;
+    yawl:hasMethod yawl:LogMiner_containsEvent_74 ;
+    yawl:hasMethod yawl:LogMiner_extractEvents_75 ;
+    yawl:hasMethod yawl:LogMiner_getCaseHistoryForParticipantEvents_76 ;
+    yawl:hasMethod yawl:LogMiner_formatSpecificationEvents_77 ;
+    yawl:hasMethod yawl:LogMiner_getExtractedEvents_78 ;
+    yawl:hasMethod yawl:LogMiner_getTaskStatisticsForCase_79 ;
+    yawl:hasMethod yawl:LogMiner_getTaskStatisticsForSpecification_80 ;
+    yawl:hasMethod yawl:LogMiner_getTaskStatisticsSet_81 ;
+    yawl:hasMethod yawl:LogMiner_collateTaskEvents_82 ;
+    yawl:hasMethod yawl:LogMiner_getCaseEvent_83 ;
+    yawl:hasMethod yawl:LogMiner_getWorkItemEvent_84 ;
+    yawl:hasMethod yawl:LogMiner_getLastUseEvents_85 ;
+    yawl:hasMethod yawl:LogMiner_execScalarQuery_86 ;
+    yawl:hasMethod yawl:LogMiner_deriveParentID_87 ;
+    yawl:hasMethod yawl:LogMiner_replaceParticipantIDsWithNames_88 ;
+    yawl:hasMethod yawl:LogMiner_getParticipantName_89 ;
+    yawl:hasMethod yawl:LogMiner_eventListToXML_90 ;
+    yawl:hasMethod yawl:LogMiner_getFieldValue_91 ;
+    yawl:hasMethod yawl:LogMiner_getSpecificationKey_92 ;
+    yawl:hasMethod yawl:LogMiner_getSpecIDs_93 ;
+    yawl:hasMethod yawl:LogMiner_getXESLog_94 ;
+    yawl:hasMethod yawl:LogMiner_massageTaskName_95 ;
+    yawl:hasMethod yawl:LogMiner_sameCase_96 ;
+    yawl:hasMethod yawl:LogMiner_getRootCaseID_97 ;
+    yawl:hasMethod yawl:LogMiner_successful_98 ;
+    yawl:hasField yawl:LogMiner__me ;
+    yawl:hasField yawl:LogMiner__reader ;
+    yawl:hasField yawl:LogMiner__replaceResourceIdsWithUserIds ;
+    yawl:hasField yawl:LogMiner__ignoreUnknownXesEvents ;
+    yawl:hasField yawl:LogMiner__mutex ;
+    yawl:hasField yawl:LogMiner__exErrStr ;
+    yawl:hasField yawl:LogMiner__pmErrStr ;
+    yawl:hasField yawl:LogMiner__noRowsStr ;
+    yawl:hasField yawl:LogMiner__badKeyStr ;
+    yawl:hasField yawl:LogMiner__baseQuery ;
+    .
+
+
+# Method: LogMiner.getInstance
+yawl:LogMiner_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "LogMiner" ;
+    yawl:signature "LogMiner getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: LogMiner.setReplaceResourceIdsWithUserIds
+yawl:LogMiner_setReplaceResourceIdsWithUserIds_2 a yawl:Method ;
+    rdfs:label "setReplaceResourceIdsWithUserIds" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setReplaceResourceIdsWithUserIds(boolean b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.setIgnoreUnknownEventsInXesLogs
+yawl:LogMiner_setIgnoreUnknownEventsInXesLogs_3 a yawl:Method ;
+    rdfs:label "setIgnoreUnknownEventsInXesLogs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setIgnoreUnknownEventsInXesLogs(boolean b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getWorkItemDurationsForParticipant
+yawl:LogMiner_getWorkItemDurationsForParticipant_4 a yawl:Method ;
+    rdfs:label "getWorkItemDurationsForParticipant" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItemDurationsForParticipant(YSpecificationID specID, String taskName, String participantID)" ;
+    rdfs:comment """@param specID the specification id to get the case eventids for @return the set of all case ids for the specID passed""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getAllResourceEvents
+yawl:LogMiner_getAllResourceEvents_5 a yawl:Method ;
+    rdfs:label "getAllResourceEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAllResourceEvents()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getCaseEvents
+yawl:LogMiner_getCaseEvents_6 a yawl:Method ;
+    rdfs:label "getCaseEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseEvents(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getCaseEvents
+yawl:LogMiner_getCaseEvents_7 a yawl:Method ;
+    rdfs:label "getCaseEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseEvents(String caseID, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getCaseEvent
+yawl:LogMiner_getCaseEvent_8 a yawl:Method ;
+    rdfs:label "getCaseEvent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseEvent(String caseID, boolean launch)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getTaskEvents
+yawl:LogMiner_getTaskEvents_9 a yawl:Method ;
+    rdfs:label "getTaskEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskEvents(long specKey, String taskName, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getTaskEvents
+yawl:LogMiner_getTaskEvents_10 a yawl:Method ;
+    rdfs:label "getTaskEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskEvents(long specKey, String taskName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getTaskEvents
+yawl:LogMiner_getTaskEvents_11 a yawl:Method ;
+    rdfs:label "getTaskEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskEvents(YSpecificationID specID, String taskName, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getTaskEvents
+yawl:LogMiner_getTaskEvents_12 a yawl:Method ;
+    rdfs:label "getTaskEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskEvents(YSpecificationID specID, String taskName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getWorkItemEvents
+yawl:LogMiner_getWorkItemEvents_13 a yawl:Method ;
+    rdfs:label "getWorkItemEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItemEvents(String itemID, boolean fullName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getWorkItemEvents
+yawl:LogMiner_getWorkItemEvents_14 a yawl:Method ;
+    rdfs:label "getWorkItemEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItemEvents(String itemID, boolean fullName, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getCaseStartedBy
+yawl:LogMiner_getCaseStartedBy_15 a yawl:Method ;
+    rdfs:label "getCaseStartedBy" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseStartedBy(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getParticipantHistory
+yawl:LogMiner_getParticipantHistory_16 a yawl:Method ;
+    rdfs:label "getParticipantHistory" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParticipantHistory(String pid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getParticipantHistory
+yawl:LogMiner_getParticipantHistory_17 a yawl:Method ;
+    rdfs:label "getParticipantHistory" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParticipantHistory(String pid, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getParticipantHistoryForEvent
+yawl:LogMiner_getParticipantHistoryForEvent_18 a yawl:Method ;
+    rdfs:label "getParticipantHistoryForEvent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParticipantHistoryForEvent(String pid, EventLogger eventType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getParticipantHistoryForEvent
+yawl:LogMiner_getParticipantHistoryForEvent_19 a yawl:Method ;
+    rdfs:label "getParticipantHistoryForEvent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParticipantHistoryForEvent(String pid, EventLogger eventType, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getResourceHistory
+yawl:LogMiner_getResourceHistory_20 a yawl:Method ;
+    rdfs:label "getResourceHistory" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourceHistory(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getResourceHistory
+yawl:LogMiner_getResourceHistory_21 a yawl:Method ;
+    rdfs:label "getResourceHistory" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourceHistory(String id, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getResourceHistoryForEvent
+yawl:LogMiner_getResourceHistoryForEvent_22 a yawl:Method ;
+    rdfs:label "getResourceHistoryForEvent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourceHistoryForEvent(String id, EventLogger eventType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getResourceHistoryForEvent
+yawl:LogMiner_getResourceHistoryForEvent_23 a yawl:Method ;
+    rdfs:label "getResourceHistoryForEvent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourceHistoryForEvent(String id, EventLogger eventType, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getWorkItemOffered
+yawl:LogMiner_getWorkItemOffered_24 a yawl:Method ;
+    rdfs:label "getWorkItemOffered" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItemOffered(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getWorkItemAllocated
+yawl:LogMiner_getWorkItemAllocated_25 a yawl:Method ;
+    rdfs:label "getWorkItemAllocated" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItemAllocated(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getWorkItemStarted
+yawl:LogMiner_getWorkItemStarted_26 a yawl:Method ;
+    rdfs:label "getWorkItemStarted" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItemStarted(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getCaseHistoryInvolvingParticipant
+yawl:LogMiner_getCaseHistoryInvolvingParticipant_27 a yawl:Method ;
+    rdfs:label "getCaseHistoryInvolvingParticipant" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseHistoryInvolvingParticipant(String pid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getCaseHistoryInvolvingParticipant
+yawl:LogMiner_getCaseHistoryInvolvingParticipant_28 a yawl:Method ;
+    rdfs:label "getCaseHistoryInvolvingParticipant" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseHistoryInvolvingParticipant(String pid, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getSpecificationEventsByURI
+yawl:LogMiner_getSpecificationEventsByURI_29 a yawl:Method ;
+    rdfs:label "getSpecificationEventsByURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationEventsByURI(String uri, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getSpecificationEventsByID
+yawl:LogMiner_getSpecificationEventsByID_30 a yawl:Method ;
+    rdfs:label "getSpecificationEventsByID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationEventsByID(String id, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getSpecificationEvents
+yawl:LogMiner_getSpecificationEvents_31 a yawl:Method ;
+    rdfs:label "getSpecificationEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationEvents(Set specIDs)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getSpecificationEvents
+yawl:LogMiner_getSpecificationEvents_32 a yawl:Method ;
+    rdfs:label "getSpecificationEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationEvents(Set specIDs, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getSpecificationEvents
+yawl:LogMiner_getSpecificationEvents_33 a yawl:Method ;
+    rdfs:label "getSpecificationEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationEvents(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getSpecificationEvents
+yawl:LogMiner_getSpecificationEvents_34 a yawl:Method ;
+    rdfs:label "getSpecificationEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationEvents(YSpecificationID specID, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getSpecificationIdentifiers
+yawl:LogMiner_getSpecificationIdentifiers_35 a yawl:Method ;
+    rdfs:label "getSpecificationIdentifiers" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationIdentifiers(String keyStr)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getSpecificationXESLog
+yawl:LogMiner_getSpecificationXESLog_36 a yawl:Method ;
+    rdfs:label "getSpecificationXESLog" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationXESLog(YSpecificationID specid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getMergedXESLog
+yawl:LogMiner_getMergedXESLog_37 a yawl:Method ;
+    rdfs:label "getMergedXESLog" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMergedXESLog(YSpecificationID specid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getMergedXESLog
+yawl:LogMiner_getMergedXESLog_38 a yawl:Method ;
+    rdfs:label "getMergedXESLog" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMergedXESLog(YSpecificationID specid, boolean withData)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getSpecificationStatistics
+yawl:LogMiner_getSpecificationStatistics_39 a yawl:Method ;
+    rdfs:label "getSpecificationStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationStatistics(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getSpecificationStatistics
+yawl:LogMiner_getSpecificationStatistics_40 a yawl:Method ;
+    rdfs:label "getSpecificationStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationStatistics(YSpecificationID specID, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getTaskStatistics
+yawl:LogMiner_getTaskStatistics_41 a yawl:Method ;
+    rdfs:label "getTaskStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatistics(long specKey, String taskName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getTaskStatistics
+yawl:LogMiner_getTaskStatistics_42 a yawl:Method ;
+    rdfs:label "getTaskStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatistics(long specKey, String taskName, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getTaskStatistics
+yawl:LogMiner_getTaskStatistics_43 a yawl:Method ;
+    rdfs:label "getTaskStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatistics(YSpecificationID specID, String taskName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getTaskStatistics
+yawl:LogMiner_getTaskStatistics_44 a yawl:Method ;
+    rdfs:label "getTaskStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatistics(YSpecificationID specID, String taskName, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getTaskStatisticsForCase
+yawl:LogMiner_getTaskStatisticsForCase_45 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForCase(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getTaskStatisticsForCase
+yawl:LogMiner_getTaskStatisticsForCase_46 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForCase(String caseID, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getTaskStatisticsForSpecification
+yawl:LogMiner_getTaskStatisticsForSpecification_47 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForSpecification(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getTaskStatisticsForSpecification
+yawl:LogMiner_getTaskStatisticsForSpecification_48 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForSpecification(YSpecificationID specID, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getTaskStatisticsForSpecificationURI
+yawl:LogMiner_getTaskStatisticsForSpecificationURI_49 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForSpecificationURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForSpecificationURI(String uri, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getTaskStatisticsForSpecificationUID
+yawl:LogMiner_getTaskStatisticsForSpecificationUID_50 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForSpecificationUID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForSpecificationUID(String id, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getTaskStatisticsForSpecificationSet
+yawl:LogMiner_getTaskStatisticsForSpecificationSet_51 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForSpecificationSet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForSpecificationSet(Set specIDs, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getTaskStatisticsForSpecificationSet
+yawl:LogMiner_getTaskStatisticsForSpecificationSet_52 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForSpecificationSet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForSpecificationSet(Set specIDs)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getLastBusyOrReleaseEvents
+yawl:LogMiner_getLastBusyOrReleaseEvents_53 a yawl:Method ;
+    rdfs:label "getLastBusyOrReleaseEvents" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getLastBusyOrReleaseEvents(String resourceID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getBusyResources
+yawl:LogMiner_getBusyResources_54 a yawl:Method ;
+    rdfs:label "getBusyResources" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getBusyResources(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getBusyResourcesForCase
+yawl:LogMiner_getBusyResourcesForCase_55 a yawl:Method ;
+    rdfs:label "getBusyResourcesForCase" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getBusyResourcesForCase(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.getBusyItemIDsForCase
+yawl:LogMiner_getBusyItemIDsForCase_56 a yawl:Method ;
+    rdfs:label "getBusyItemIDsForCase" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getBusyItemIDsForCase(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LogMiner.execQuery
+yawl:LogMiner_execQuery_57 a yawl:Method ;
+    rdfs:label "execQuery" ;
+    yawl:returnType "List" ;
+    yawl:signature "List execQuery(String query)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getWhereQuery
+yawl:LogMiner_getWhereQuery_58 a yawl:Method ;
+    rdfs:label "getWhereQuery" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWhereQuery(String field, String value)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getWhereQuery
+yawl:LogMiner_getWhereQuery_59 a yawl:Method ;
+    rdfs:label "getWhereQuery" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWhereQuery(String field, long value)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getWorkItemEventsList
+yawl:LogMiner_getWorkItemEventsList_60 a yawl:Method ;
+    rdfs:label "getWorkItemEventsList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getWorkItemEventsList(String itemID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getWorkItemEventsList
+yawl:LogMiner_getWorkItemEventsList_61 a yawl:Method ;
+    rdfs:label "getWorkItemEventsList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getWorkItemEventsList(String itemID, long from, long to)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getTaskEventsList
+yawl:LogMiner_getTaskEventsList_62 a yawl:Method ;
+    rdfs:label "getTaskEventsList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getTaskEventsList(long specKey, String taskName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getTaskEventsList
+yawl:LogMiner_getTaskEventsList_63 a yawl:Method ;
+    rdfs:label "getTaskEventsList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getTaskEventsList(long specKey, String taskName, long from, long to)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getSpecificationEvents
+yawl:LogMiner_getSpecificationEvents_64 a yawl:Method ;
+    rdfs:label "getSpecificationEvents" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getSpecificationEvents(long specKey)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getSpecificationEvents
+yawl:LogMiner_getSpecificationEvents_65 a yawl:Method ;
+    rdfs:label "getSpecificationEvents" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getSpecificationEvents(long specKey, long from, long to)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getCaseEventsList
+yawl:LogMiner_getCaseEventsList_66 a yawl:Method ;
+    rdfs:label "getCaseEventsList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getCaseEventsList(String caseID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getAllEvents
+yawl:LogMiner_getAllEvents_67 a yawl:Method ;
+    rdfs:label "getAllEvents" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAllEvents()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getCaseEventsList
+yawl:LogMiner_getCaseEventsList_68 a yawl:Method ;
+    rdfs:label "getCaseEventsList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getCaseEventsList(String caseID, long from, long to)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getResourceEventsList
+yawl:LogMiner_getResourceEventsList_69 a yawl:Method ;
+    rdfs:label "getResourceEventsList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getResourceEventsList(String resourceID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getResourceEventsList
+yawl:LogMiner_getResourceEventsList_70 a yawl:Method ;
+    rdfs:label "getResourceEventsList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getResourceEventsList(String resourceID, long from, long to)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getSpecLogRecord
+yawl:LogMiner_getSpecLogRecord_71 a yawl:Method ;
+    rdfs:label "getSpecLogRecord" ;
+    yawl:returnType "SpecLog" ;
+    yawl:signature "SpecLog getSpecLogRecord(long key)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getTimeRangeSubclause
+yawl:LogMiner_getTimeRangeSubclause_72 a yawl:Method ;
+    rdfs:label "getTimeRangeSubclause" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTimeRangeSubclause(long from, long to)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.containsStartEvent
+yawl:LogMiner_containsStartEvent_73 a yawl:Method ;
+    rdfs:label "containsStartEvent" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean containsStartEvent(List events)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.containsEvent
+yawl:LogMiner_containsEvent_74 a yawl:Method ;
+    rdfs:label "containsEvent" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean containsEvent(List events, EventLogger eventType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.extractEvents
+yawl:LogMiner_extractEvents_75 a yawl:Method ;
+    rdfs:label "extractEvents" ;
+    yawl:returnType "List" ;
+    yawl:signature "List extractEvents(List events, EventLogger eventType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getCaseHistoryForParticipantEvents
+yawl:LogMiner_getCaseHistoryForParticipantEvents_76 a yawl:Method ;
+    rdfs:label "getCaseHistoryForParticipantEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseHistoryForParticipantEvents(List participantEvents)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.formatSpecificationEvents
+yawl:LogMiner_formatSpecificationEvents_77 a yawl:Method ;
+    rdfs:label "formatSpecificationEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String formatSpecificationEvents(YSpecificationID specID, List events)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getExtractedEvents
+yawl:LogMiner_getExtractedEvents_78 a yawl:Method ;
+    rdfs:label "getExtractedEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getExtractedEvents(List events, EventLogger eventType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getTaskStatisticsForCase
+yawl:LogMiner_getTaskStatisticsForCase_79 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForCase(String caseID, List events)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getTaskStatisticsForSpecification
+yawl:LogMiner_getTaskStatisticsForSpecification_80 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForSpecification(YSpecificationID specID, List events)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getTaskStatisticsSet
+yawl:LogMiner_getTaskStatisticsSet_81 a yawl:Method ;
+    rdfs:label "getTaskStatisticsSet" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getTaskStatisticsSet(Map taskLists)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.collateTaskEvents
+yawl:LogMiner_collateTaskEvents_82 a yawl:Method ;
+    rdfs:label "collateTaskEvents" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map collateTaskEvents(List events)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getCaseEvent
+yawl:LogMiner_getCaseEvent_83 a yawl:Method ;
+    rdfs:label "getCaseEvent" ;
+    yawl:returnType "ResourceEvent" ;
+    yawl:signature "ResourceEvent getCaseEvent(String caseID, EventLogger eventType)" ;
+    rdfs:comment """@param caseID the case id to get the event for @param eventType which event to get @return the case event""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getWorkItemEvent
+yawl:LogMiner_getWorkItemEvent_84 a yawl:Method ;
+    rdfs:label "getWorkItemEvent" ;
+    yawl:returnType "ResourceEvent" ;
+    yawl:signature "ResourceEvent getWorkItemEvent(String itemID, EventLogger eventType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getLastUseEvents
+yawl:LogMiner_getLastUseEvents_85 a yawl:Method ;
+    rdfs:label "getLastUseEvents" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getLastUseEvents(String resourceID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.execScalarQuery
+yawl:LogMiner_execScalarQuery_86 a yawl:Method ;
+    rdfs:label "execScalarQuery" ;
+    yawl:returnType "ResourceEvent" ;
+    yawl:signature "ResourceEvent execScalarQuery(String query)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.deriveParentID
+yawl:LogMiner_deriveParentID_87 a yawl:Method ;
+    rdfs:label "deriveParentID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String deriveParentID(String itemID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.replaceParticipantIDsWithNames
+yawl:LogMiner_replaceParticipantIDsWithNames_88 a yawl:Method ;
+    rdfs:label "replaceParticipantIDsWithNames" ;
+    yawl:returnType "List" ;
+    yawl:signature "List replaceParticipantIDsWithNames(List events)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getParticipantName
+yawl:LogMiner_getParticipantName_89 a yawl:Method ;
+    rdfs:label "getParticipantName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParticipantName(String pid)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.eventListToXML
+yawl:LogMiner_eventListToXML_90 a yawl:Method ;
+    rdfs:label "eventListToXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String eventListToXML(List rows)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getFieldValue
+yawl:LogMiner_getFieldValue_91 a yawl:Method ;
+    rdfs:label "getFieldValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFieldValue(String caseEventXML, String fieldname)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getSpecificationKey
+yawl:LogMiner_getSpecificationKey_92 a yawl:Method ;
+    rdfs:label "getSpecificationKey" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getSpecificationKey(YSpecificationID specID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getSpecIDs
+yawl:LogMiner_getSpecIDs_93 a yawl:Method ;
+    rdfs:label "getSpecIDs" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getSpecIDs(String s, boolean uri)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getXESLog
+yawl:LogMiner_getXESLog_94 a yawl:Method ;
+    rdfs:label "getXESLog" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getXESLog(YSpecificationID specID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.massageTaskName
+yawl:LogMiner_massageTaskName_95 a yawl:Method ;
+    rdfs:label "massageTaskName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String massageTaskName(String taskName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.sameCase
+yawl:LogMiner_sameCase_96 a yawl:Method ;
+    rdfs:label "sameCase" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean sameCase(String eventCaseID, String currentCaseID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.getRootCaseID
+yawl:LogMiner_getRootCaseID_97 a yawl:Method ;
+    rdfs:label "getRootCaseID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRootCaseID(String caseID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LogMiner.successful
+yawl:LogMiner_successful_98 a yawl:Method ;
+    rdfs:label "successful" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean successful(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:LogMiner__me a yawl:Field ;
+    rdfs:label "_me" .
+
+yawl:LogMiner__reader a yawl:Field ;
+    rdfs:label "_reader" .
+
+yawl:LogMiner__replaceResourceIdsWithUserIds a yawl:Field ;
+    rdfs:label "_replaceResourceIdsWithUserIds" .
+
+yawl:LogMiner__ignoreUnknownXesEvents a yawl:Field ;
+    rdfs:label "_ignoreUnknownXesEvents" .
+
+yawl:LogMiner__mutex a yawl:Field ;
+    rdfs:label "_mutex" .
+
+yawl:LogMiner__exErrStr a yawl:Field ;
+    rdfs:label "_exErrStr" .
+
+yawl:LogMiner__pmErrStr a yawl:Field ;
+    rdfs:label "_pmErrStr" .
+
+yawl:LogMiner__noRowsStr a yawl:Field ;
+    rdfs:label "_noRowsStr" .
+
+yawl:LogMiner__badKeyStr a yawl:Field ;
+    rdfs:label "_badKeyStr" .
+
+yawl:LogMiner__baseQuery a yawl:Field ;
+    rdfs:label "_baseQuery" .
+
+
+

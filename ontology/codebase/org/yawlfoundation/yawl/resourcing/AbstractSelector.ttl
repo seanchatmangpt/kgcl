@@ -1,0 +1,345 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.AbstractSelector
+yawl:AbstractSelector a yawl:Class ;
+    rdfs:label "AbstractSelector" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/AbstractSelector.java"^^xsd:string ;
+    rdfs:comment """The base class inherited by all of the 'selector' classes :- filters, constraints and allocators. <p/> As well as giving an inherited class a meaningful class name, extending classes need to provide values for: _name --> the class name _displayName --> a 'pretty' name to show to designers/users when required _description --> a user-oriented description of what the extending class does _params --> a set of parameters needed when applying the extending class's 'perform...' method  (the param value""" ;
+    yawl:implements yawl:Comparable ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:AbstractSelector_getParamKeys_1 ;
+    yawl:hasMethod yawl:AbstractSelector_getName_2 ;
+    yawl:hasMethod yawl:AbstractSelector_getDisplayName_3 ;
+    yawl:hasMethod yawl:AbstractSelector_getDescription_4 ;
+    yawl:hasMethod yawl:AbstractSelector_getKeys_5 ;
+    yawl:hasMethod yawl:AbstractSelector_getParams_6 ;
+    yawl:hasMethod yawl:AbstractSelector_getClassName_7 ;
+    yawl:hasMethod yawl:AbstractSelector_getCanonicalName_8 ;
+    yawl:hasMethod yawl:AbstractSelector_getParamValue_9 ;
+    yawl:hasMethod yawl:AbstractSelector_setName_10 ;
+    yawl:hasMethod yawl:AbstractSelector_setCanonicalName_11 ;
+    yawl:hasMethod yawl:AbstractSelector_setDisplayName_12 ;
+    yawl:hasMethod yawl:AbstractSelector_setDescription_13 ;
+    yawl:hasMethod yawl:AbstractSelector_setParams_14 ;
+    yawl:hasMethod yawl:AbstractSelector_addParams_15 ;
+    yawl:hasMethod yawl:AbstractSelector_addParam_16 ;
+    yawl:hasMethod yawl:AbstractSelector_addKey_17 ;
+    yawl:hasMethod yawl:AbstractSelector_setKeyValue_18 ;
+    yawl:hasMethod yawl:AbstractSelector_equals_19 ;
+    yawl:hasMethod yawl:AbstractSelector_hashCode_20 ;
+    yawl:hasMethod yawl:AbstractSelector_compareTo_21 ;
+    yawl:hasMethod yawl:AbstractSelector_evaluate_22 ;
+    yawl:hasMethod yawl:AbstractSelector_intersection_23 ;
+    yawl:hasMethod yawl:AbstractSelector_union_24 ;
+    yawl:hasMethod yawl:AbstractSelector_toString_25 ;
+    yawl:hasMethod yawl:AbstractSelector_toXML_26 ;
+    yawl:hasMethod yawl:AbstractSelector_isExternalClass_27 ;
+    yawl:hasMethod yawl:AbstractSelector_unmarshalParams_28 ;
+    yawl:hasMethod yawl:AbstractSelector_getInformation_29 ;
+    yawl:hasMethod yawl:AbstractSelector_reconstitute_30 ;
+    yawl:hasField yawl:AbstractSelector__name ;
+    yawl:hasField yawl:AbstractSelector__canonicalName ;
+    yawl:hasField yawl:AbstractSelector__displayName ;
+    yawl:hasField yawl:AbstractSelector__description ;
+    yawl:hasField yawl:AbstractSelector__params ;
+    .
+
+
+# Method: AbstractSelector.getParamKeys
+yawl:AbstractSelector_getParamKeys_1 a yawl:Method ;
+    rdfs:label "getParamKeys" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getParamKeys()" ;
+    rdfs:comment """@return a Set of parameter names needing values to be used in the performance of the selection""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractSelector.getName
+yawl:AbstractSelector_getName_2 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    rdfs:comment """@return the name of this selector""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractSelector.getDisplayName
+yawl:AbstractSelector_getDisplayName_3 a yawl:Method ;
+    rdfs:label "getDisplayName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDisplayName()" ;
+    rdfs:comment """@return the display name of this selector""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractSelector.getDescription
+yawl:AbstractSelector_getDescription_4 a yawl:Method ;
+    rdfs:label "getDescription" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDescription()" ;
+    rdfs:comment """@return how this selector is described""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractSelector.getKeys
+yawl:AbstractSelector_getKeys_5 a yawl:Method ;
+    rdfs:label "getKeys" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getKeys()" ;
+    rdfs:comment """@return a Set of keys (ie. attribute names) for the expected params""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractSelector.getParams
+yawl:AbstractSelector_getParams_6 a yawl:Method ;
+    rdfs:label "getParams" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getParams()" ;
+    rdfs:comment """@return a HashMap of parameters of the form [name, value]""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractSelector.getClassName
+yawl:AbstractSelector_getClassName_7 a yawl:Method ;
+    rdfs:label "getClassName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getClassName()" ;
+    rdfs:comment """@return the name of this selector class""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractSelector.getCanonicalName
+yawl:AbstractSelector_getCanonicalName_8 a yawl:Method ;
+    rdfs:label "getCanonicalName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCanonicalName()" ;
+    rdfs:comment """@return the full name of this selector class""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractSelector.getParamValue
+yawl:AbstractSelector_getParamValue_9 a yawl:Method ;
+    rdfs:label "getParamValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParamValue(String key)" ;
+    rdfs:comment """Retrieves the value of the specified parameter @param key the name of the parameter @return the specified parameter's value""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractSelector.setName
+yawl:AbstractSelector_setName_10 a yawl:Method ;
+    rdfs:label "setName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setName(String name)" ;
+    rdfs:comment """Stores the class name of this 'selector' @param name the name to set""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractSelector.setCanonicalName
+yawl:AbstractSelector_setCanonicalName_11 a yawl:Method ;
+    rdfs:label "setCanonicalName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCanonicalName(String name)" ;
+    rdfs:comment """Stores the full class name of this 'selector' @param name the name to set""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractSelector.setDisplayName
+yawl:AbstractSelector_setDisplayName_12 a yawl:Method ;
+    rdfs:label "setDisplayName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDisplayName(String name)" ;
+    rdfs:comment """Sets the user-friendly display name of this 'selector' @param name the name to set""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractSelector.setDescription
+yawl:AbstractSelector_setDescription_13 a yawl:Method ;
+    rdfs:label "setDescription" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDescription(String desc)" ;
+    rdfs:comment """Sets the description of this 'selector' @param desc the description value to set""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractSelector.setParams
+yawl:AbstractSelector_setParams_14 a yawl:Method ;
+    rdfs:label "setParams" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setParams(Map paramsMap)" ;
+    rdfs:comment """Sets (replaces) the parameters with the map passed @param paramsMap the new parameter map of the form [name, value] (both Strings)""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractSelector.addParams
+yawl:AbstractSelector_addParams_15 a yawl:Method ;
+    rdfs:label "addParams" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addParams(Map paramMap)" ;
+    rdfs:comment """Adds (does not replace) the parameters in the map passed to the selectors parameters @param paramMap the new parameter map of the form [name, value] (both Strings)""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractSelector.addParam
+yawl:AbstractSelector_addParam_16 a yawl:Method ;
+    rdfs:label "addParam" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addParam(String key, String value)" ;
+    rdfs:comment """Adds a single parameter passed to the selector's parameters @param key   the name of the parameter @param value the value of the parameter""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractSelector.addKey
+yawl:AbstractSelector_addKey_17 a yawl:Method ;
+    rdfs:label "addKey" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addKey(String key)" ;
+    rdfs:comment """Adds a key - ie. an attribute which needs to be assigned a value at design time @param key the attribute name""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractSelector.setKeyValue
+yawl:AbstractSelector_setKeyValue_18 a yawl:Method ;
+    rdfs:label "setKeyValue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setKeyValue(String key, String value)" ;
+    rdfs:comment """Sets the value of a key (at specification design time) @param key   the attribute name @param value the value to set""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractSelector.equals
+yawl:AbstractSelector_equals_19 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object other)" ;
+    rdfs:comment """AbstractSelectors are considered equal if their canonical names and name fields are equal @param other the object to compare to this @return true if equal""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractSelector.hashCode
+yawl:AbstractSelector_hashCode_20 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractSelector.compareTo
+yawl:AbstractSelector_compareTo_21 a yawl:Method ;
+    rdfs:label "compareTo" ;
+    yawl:returnType "int" ;
+    yawl:signature "int compareTo(AbstractSelector other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractSelector.evaluate
+yawl:AbstractSelector_evaluate_22 a yawl:Method ;
+    rdfs:label "evaluate" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set evaluate(List setList, String expression)" ;
+    rdfs:comment """Evaluates a list of Sets against an expression. Sets may be unioned (when the expression operator is '|') or intersected (when '&'). Operator precedence is strictly left to right. The number of operators in the expression should be one less than the number of Sets in the List @param setList    the list of sets @param expression the expression containing the operators @param <T>        the object type contained in each set @return the resultant final set""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractSelector.intersection
+yawl:AbstractSelector_intersection_23 a yawl:Method ;
+    rdfs:label "intersection" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set intersection(Set set1, Set set2)" ;
+    rdfs:comment """Performs an intersection over two Sets @param set1 Set A @param set2 Set B @param <T>  the object type contained in each set @return A Set containing only those members that are present in both A and B""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractSelector.union
+yawl:AbstractSelector_union_24 a yawl:Method ;
+    rdfs:label "union" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set union(Set set1, Set set2)" ;
+    rdfs:comment """Performs an union over two Sets @param set1 Set A @param set2 Set B @param <T>  the object type contained in each set @return A Set containing all the members of A and all the members of B""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractSelector.toString
+yawl:AbstractSelector_toString_25 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractSelector.toXML
+yawl:AbstractSelector_toXML_26 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    rdfs:comment """@return an xml representation of this object's parameters (if any). Used to build the specification xml""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractSelector.isExternalClass
+yawl:AbstractSelector_isExternalClass_27 a yawl:Method ;
+    rdfs:label "isExternalClass" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isExternalClass()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: AbstractSelector.unmarshalParams
+yawl:AbstractSelector_unmarshalParams_28 a yawl:Method ;
+    rdfs:label "unmarshalParams" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map unmarshalParams(Element eParams)" ;
+    rdfs:comment """Unpacks the xml describing the parameters to a HashMap object @param eParams @return a [key, value] map of the parameters described by the {@code Element}""" ;
+    yawl:modifiers "protected" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: AbstractSelector.getInformation
+yawl:AbstractSelector_getInformation_29 a yawl:Method ;
+    rdfs:label "getInformation" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInformation(String outerTag)" ;
+    rdfs:comment """Gets a 'dump' of this selector object as an XML'd String @param outerTag a value for the surrounding tag (one of the extended classes) @return an XML String describing this object @see #reconstitute(Element)""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractSelector.reconstitute
+yawl:AbstractSelector_reconstitute_30 a yawl:Method ;
+    rdfs:label "reconstitute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reconstitute(Element e)" ;
+    rdfs:comment """Fills the members of this object with values found in an XML description @param e a JDOM Element containing the values @see #getInformation(String)""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:AbstractSelector__name a yawl:Field ;
+    rdfs:label "_name" .
+
+yawl:AbstractSelector__canonicalName a yawl:Field ;
+    rdfs:label "_canonicalName" .
+
+yawl:AbstractSelector__displayName a yawl:Field ;
+    rdfs:label "_displayName" .
+
+yawl:AbstractSelector__description a yawl:Field ;
+    rdfs:label "_description" .
+
+yawl:AbstractSelector__params a yawl:Field ;
+    rdfs:label "_params" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_scheduling a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.scheduling" .
+
+

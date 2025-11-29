@@ -1,0 +1,39 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.scheduling.UtilisationHandler
+yawl:UtilisationHandler a yawl:Class ;
+    rdfs:label "UtilisationHandler" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_scheduling ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/scheduling/SchedulingService.java"^^xsd:string ;
+    rdfs:comment """Handle message-task work items @author tbe""" ;
+    yawl:extends yawl:Thread ;
+    yawl:modifiers "private" ;
+    yawl:hasMethod yawl:UtilisationHandler_run_1 ;
+    yawl:hasField yawl:UtilisationHandler_mapping ;
+    yawl:hasField yawl:UtilisationHandler_msg ;
+    .
+
+
+# Method: UtilisationHandler.run
+yawl:UtilisationHandler_run_1 a yawl:Method ;
+    rdfs:label "run" ;
+    yawl:returnType "void" ;
+    yawl:signature "void run()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:UtilisationHandler_mapping a yawl:Field ;
+    rdfs:label "mapping" .
+
+yawl:UtilisationHandler_msg a yawl:Field ;
+    rdfs:label "msg" .
+
+
+

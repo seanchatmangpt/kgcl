@@ -1,0 +1,83 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.authentication.YServiceSession
+yawl:YServiceSession a yawl:Class ;
+    rdfs:label "YServiceSession" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_authentication ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/authentication/YServiceSession.java"^^xsd:string ;
+    rdfs:comment """Maintains an active session belonging to a custom service. @author Michael Adams @since 2.1""" ;
+    yawl:extends yawl:YSession ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YServiceSession_getURI_1 ;
+    yawl:hasMethod yawl:YServiceSession_getName_2 ;
+    yawl:hasMethod yawl:YServiceSession_getPassword_3 ;
+    yawl:hasMethod yawl:YServiceSession_setPassword_4 ;
+    yawl:hasMethod yawl:YServiceSession_setService_5 ;
+    yawl:hasMethod yawl:YServiceSession_getClient_6 ;
+    yawl:hasField yawl:YServiceSession__service ;
+    .
+
+
+# Method: YServiceSession.getURI
+yawl:YServiceSession_getURI_1 a yawl:Method ;
+    rdfs:label "getURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getURI()" ;
+    rdfs:comment """Get's the service's URI. @return the URI of the service associated with this session.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YServiceSession.getName
+yawl:YServiceSession_getName_2 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YServiceSession.getPassword
+yawl:YServiceSession_getPassword_3 a yawl:Method ;
+    rdfs:label "getPassword" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPassword()" ;
+    rdfs:comment """Gets the services's password. @return the (hashed) password of the client associated with this session.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YServiceSession.setPassword
+yawl:YServiceSession_setPassword_4 a yawl:Method ;
+    rdfs:label "setPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPassword(String password)" ;
+    rdfs:comment """Updates (and persists) the password for the custom service. @param password the (hashed) password to set for the service. @throws YPersistenceException if there's some problem persisting the change.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YServiceSession.setService
+yawl:YServiceSession_setService_5 a yawl:Method ;
+    rdfs:label "setService" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setService(YAWLServiceReference service)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YServiceSession.getClient
+yawl:YServiceSession_getClient_6 a yawl:Method ;
+    rdfs:label "getClient" ;
+    yawl:returnType "YAWLServiceReference" ;
+    yawl:signature "YAWLServiceReference getClient()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YServiceSession__service a yawl:Field ;
+    rdfs:label "_service" .
+
+
+

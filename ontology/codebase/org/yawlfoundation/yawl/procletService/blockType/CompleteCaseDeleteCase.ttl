@@ -1,0 +1,248 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.blockType.CompleteCaseDeleteCase
+yawl:CompleteCaseDeleteCase a yawl:Class ;
+    rdfs:label "CompleteCaseDeleteCase" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_blockType ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/blockType/CompleteCaseDeleteCase.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CompleteCaseDeleteCase_getClassIDfromGraphs_1 ;
+    yawl:hasMethod yawl:CompleteCaseDeleteCase_removeFromGraphs_2 ;
+    yawl:hasMethod yawl:CompleteCaseDeleteCase_calcFailingArcs_3 ;
+    yawl:hasMethod yawl:CompleteCaseDeleteCase_emidsFromArcsNoDupl_4 ;
+    yawl:hasMethod yawl:CompleteCaseDeleteCase_exceptionCase_5 ;
+    yawl:hasMethod yawl:CompleteCaseDeleteCase_removalCaseCompletionCase_6 ;
+    yawl:hasMethod yawl:CompleteCaseDeleteCase_handleException_7 ;
+    yawl:hasMethod yawl:CompleteCaseDeleteCase_publishException_8 ;
+    yawl:hasMethod yawl:CompleteCaseDeleteCase_deleteException_9 ;
+    yawl:hasMethod yawl:CompleteCaseDeleteCase_getExceptions_10 ;
+    yawl:hasMethod yawl:CompleteCaseDeleteCase_getExceptionCasesSelected_11 ;
+    yawl:hasMethod yawl:CompleteCaseDeleteCase_publishExceptionCase_12 ;
+    yawl:hasMethod yawl:CompleteCaseDeleteCase_isExceptionCaseSelectedUser_13 ;
+    yawl:hasMethod yawl:CompleteCaseDeleteCase_setExceptionCaseSelected_14 ;
+    yawl:hasMethod yawl:CompleteCaseDeleteCase_getExceptionCaseSelected_15 ;
+    yawl:hasMethod yawl:CompleteCaseDeleteCase_deleteExceptionCaseSelected_16 ;
+    yawl:hasMethod yawl:CompleteCaseDeleteCase_pushAvailableEmidsCaseExceptionToUser_17 ;
+    yawl:hasMethod yawl:CompleteCaseDeleteCase_deleteEmidCaseExceptionToUser_18 ;
+    yawl:hasMethod yawl:CompleteCaseDeleteCase_deleteAllEmidsCaseExceptionToUser_19 ;
+    yawl:hasMethod yawl:CompleteCaseDeleteCase_deleteAvailableEmidsCaseExceptionToUser_20 ;
+    yawl:hasMethod yawl:CompleteCaseDeleteCase_getAvailableEmidsCaseExceptionToUser_21 ;
+    yawl:hasMethod yawl:CompleteCaseDeleteCase_setEmidSelectedCaseException_22 ;
+    yawl:hasMethod yawl:CompleteCaseDeleteCase_main_23 ;
+    yawl:hasField yawl:CompleteCaseDeleteCase_procletID ;
+    yawl:hasField yawl:CompleteCaseDeleteCase_myLog ;
+    .
+
+
+# Method: CompleteCaseDeleteCase.getClassIDfromGraphs
+yawl:CompleteCaseDeleteCase_getClassIDfromGraphs_1 a yawl:Method ;
+    rdfs:label "getClassIDfromGraphs" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getClassIDfromGraphs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CompleteCaseDeleteCase.removeFromGraphs
+yawl:CompleteCaseDeleteCase_removeFromGraphs_2 a yawl:Method ;
+    rdfs:label "removeFromGraphs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeFromGraphs(String procletID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CompleteCaseDeleteCase.calcFailingArcs
+yawl:CompleteCaseDeleteCase_calcFailingArcs_3 a yawl:Method ;
+    rdfs:label "calcFailingArcs" ;
+    yawl:returnType "List" ;
+    yawl:signature "List calcFailingArcs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CompleteCaseDeleteCase.emidsFromArcsNoDupl
+yawl:CompleteCaseDeleteCase_emidsFromArcsNoDupl_4 a yawl:Method ;
+    rdfs:label "emidsFromArcsNoDupl" ;
+    yawl:returnType "List" ;
+    yawl:signature "List emidsFromArcsNoDupl(List arcs)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CompleteCaseDeleteCase.exceptionCase
+yawl:CompleteCaseDeleteCase_exceptionCase_5 a yawl:Method ;
+    rdfs:label "exceptionCase" ;
+    yawl:returnType "List" ;
+    yawl:signature "List exceptionCase(List emids, String classID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CompleteCaseDeleteCase.removalCaseCompletionCase
+yawl:CompleteCaseDeleteCase_removalCaseCompletionCase_6 a yawl:Method ;
+    rdfs:label "removalCaseCompletionCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removalCaseCompletionCase()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CompleteCaseDeleteCase.handleException
+yawl:CompleteCaseDeleteCase_handleException_7 a yawl:Method ;
+    rdfs:label "handleException" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleException(String classID, String procletID, String blockID, List emids)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CompleteCaseDeleteCase.publishException
+yawl:CompleteCaseDeleteCase_publishException_8 a yawl:Method ;
+    rdfs:label "publishException" ;
+    yawl:returnType "void" ;
+    yawl:signature "void publishException(List ec)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: CompleteCaseDeleteCase.deleteException
+yawl:CompleteCaseDeleteCase_deleteException_9 a yawl:Method ;
+    rdfs:label "deleteException" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteException(String classID, String procletID, String blockID)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: CompleteCaseDeleteCase.getExceptions
+yawl:CompleteCaseDeleteCase_getExceptions_10 a yawl:Method ;
+    rdfs:label "getExceptions" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getExceptions()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: CompleteCaseDeleteCase.getExceptionCasesSelected
+yawl:CompleteCaseDeleteCase_getExceptionCasesSelected_11 a yawl:Method ;
+    rdfs:label "getExceptionCasesSelected" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getExceptionCasesSelected()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: CompleteCaseDeleteCase.publishExceptionCase
+yawl:CompleteCaseDeleteCase_publishExceptionCase_12 a yawl:Method ;
+    rdfs:label "publishExceptionCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void publishExceptionCase(String classID, String procletID, String blockID)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: CompleteCaseDeleteCase.isExceptionCaseSelectedUser
+yawl:CompleteCaseDeleteCase_isExceptionCaseSelectedUser_13 a yawl:Method ;
+    rdfs:label "isExceptionCaseSelectedUser" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isExceptionCaseSelectedUser(String classID, String procletID, String blockID)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: CompleteCaseDeleteCase.setExceptionCaseSelected
+yawl:CompleteCaseDeleteCase_setExceptionCaseSelected_14 a yawl:Method ;
+    rdfs:label "setExceptionCaseSelected" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setExceptionCaseSelected(String classID, String procletID, String blockID)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: CompleteCaseDeleteCase.getExceptionCaseSelected
+yawl:CompleteCaseDeleteCase_getExceptionCaseSelected_15 a yawl:Method ;
+    rdfs:label "getExceptionCaseSelected" ;
+    yawl:returnType "InteractionNode" ;
+    yawl:signature "InteractionNode getExceptionCaseSelected()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: CompleteCaseDeleteCase.deleteExceptionCaseSelected
+yawl:CompleteCaseDeleteCase_deleteExceptionCaseSelected_16 a yawl:Method ;
+    rdfs:label "deleteExceptionCaseSelected" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteExceptionCaseSelected(String classID, String procletID, String blockID)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: CompleteCaseDeleteCase.pushAvailableEmidsCaseExceptionToUser
+yawl:CompleteCaseDeleteCase_pushAvailableEmidsCaseExceptionToUser_17 a yawl:Method ;
+    rdfs:label "pushAvailableEmidsCaseExceptionToUser" ;
+    yawl:returnType "void" ;
+    yawl:signature "void pushAvailableEmidsCaseExceptionToUser(String classID, String procletID, String blockID, List emids)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CompleteCaseDeleteCase.deleteEmidCaseExceptionToUser
+yawl:CompleteCaseDeleteCase_deleteEmidCaseExceptionToUser_18 a yawl:Method ;
+    rdfs:label "deleteEmidCaseExceptionToUser" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteEmidCaseExceptionToUser(String emidStr)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CompleteCaseDeleteCase.deleteAllEmidsCaseExceptionToUser
+yawl:CompleteCaseDeleteCase_deleteAllEmidsCaseExceptionToUser_19 a yawl:Method ;
+    rdfs:label "deleteAllEmidsCaseExceptionToUser" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteAllEmidsCaseExceptionToUser()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: CompleteCaseDeleteCase.deleteAvailableEmidsCaseExceptionToUser
+yawl:CompleteCaseDeleteCase_deleteAvailableEmidsCaseExceptionToUser_20 a yawl:Method ;
+    rdfs:label "deleteAvailableEmidsCaseExceptionToUser" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteAvailableEmidsCaseExceptionToUser(String classID, String procletID, String blockID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CompleteCaseDeleteCase.getAvailableEmidsCaseExceptionToUser
+yawl:CompleteCaseDeleteCase_getAvailableEmidsCaseExceptionToUser_21 a yawl:Method ;
+    rdfs:label "getAvailableEmidsCaseExceptionToUser" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAvailableEmidsCaseExceptionToUser()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: CompleteCaseDeleteCase.setEmidSelectedCaseException
+yawl:CompleteCaseDeleteCase_setEmidSelectedCaseException_22 a yawl:Method ;
+    rdfs:label "setEmidSelectedCaseException" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEmidSelectedCaseException(EntityMID emid)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: CompleteCaseDeleteCase.main
+yawl:CompleteCaseDeleteCase_main_23 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String args)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:CompleteCaseDeleteCase_procletID a yawl:Field ;
+    rdfs:label "procletID" .
+
+yawl:CompleteCaseDeleteCase_myLog a yawl:Field ;
+    rdfs:label "myLog" .
+
+
+

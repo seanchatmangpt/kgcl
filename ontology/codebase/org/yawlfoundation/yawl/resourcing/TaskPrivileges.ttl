@@ -1,0 +1,738 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.TaskPrivileges
+yawl:TaskPrivileges a yawl:Class ;
+    rdfs:label "TaskPrivileges" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/TaskPrivileges.java"^^xsd:string ;
+    rdfs:comment """Maps each of a set of User-Task Privileges to a set of Participants (if any) for one particular task. The mappings are listed in the specification file, and may map a privilege to individual participants and/or all the participants that fulfil a certain Role or Roles. @author Michael Adams v0.1, 13/08/2007 <p/> Last Date: 20/09/2007""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:TaskPrivileges_getSpecID_1 ;
+    yawl:hasMethod yawl:TaskPrivileges_setSpecID_2 ;
+    yawl:hasMethod yawl:TaskPrivileges_getTaskID_3 ;
+    yawl:hasMethod yawl:TaskPrivileges_setTaskID_4 ;
+    yawl:hasMethod yawl:TaskPrivileges_contains_5 ;
+    yawl:hasMethod yawl:TaskPrivileges_allAllowed_6 ;
+    yawl:hasMethod yawl:TaskPrivileges_validPrivilege_7 ;
+    yawl:hasMethod yawl:TaskPrivileges_hasRoles_8 ;
+    yawl:hasMethod yawl:TaskPrivileges_add_9 ;
+    yawl:hasMethod yawl:TaskPrivileges_add_10 ;
+    yawl:hasMethod yawl:TaskPrivileges_addSet_11 ;
+    yawl:hasMethod yawl:TaskPrivileges_getPrivSet_12 ;
+    yawl:hasMethod yawl:TaskPrivileges_getPrivSet_13 ;
+    yawl:hasMethod yawl:TaskPrivileges_getPrivString_14 ;
+    yawl:hasMethod yawl:TaskPrivileges_getPrivilegeType_15 ;
+    yawl:hasMethod yawl:TaskPrivileges_grant_16 ;
+    yawl:hasMethod yawl:TaskPrivileges_grant_17 ;
+    yawl:hasMethod yawl:TaskPrivileges_grant_18 ;
+    yawl:hasMethod yawl:TaskPrivileges_grant_19 ;
+    yawl:hasMethod yawl:TaskPrivileges_grant_20 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantByID_21 ;
+    yawl:hasMethod yawl:TaskPrivileges_allowAll_22 ;
+    yawl:hasMethod yawl:TaskPrivileges_allowAll_23 ;
+    yawl:hasMethod yawl:TaskPrivileges_disallowAll_24 ;
+    yawl:hasMethod yawl:TaskPrivileges_disallowAll_25 ;
+    yawl:hasMethod yawl:TaskPrivileges_addParticipantToPrivilegeUnchecked_26 ;
+    yawl:hasMethod yawl:TaskPrivileges_addRoleToPrivilegeUnchecked_27 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantSuspend_28 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantReallocateStateless_29 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantReallocateStateful_30 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantDeallocate_31 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantDelegate_32 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantSkip_33 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantPile_34 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantSuspend_35 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantReallocateStateless_36 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantReallocateStateful_37 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantDeallocate_38 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantDelegate_39 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantSkip_40 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantPile_41 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantSuspendByID_42 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantReallocateStatelessByID_43 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantReallocateStatefulByID_44 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantDeallocateByID_45 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantDelegateByID_46 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantSkipByID_47 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantPileByID_48 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantSuspendByID_49 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantReallocateStatelessByID_50 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantReallocateStatefulByID_51 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantDeallocateByID_52 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantDelegateByID_53 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantSkipByID_54 ;
+    yawl:hasMethod yawl:TaskPrivileges_grantPileByID_55 ;
+    yawl:hasMethod yawl:TaskPrivileges_canSuspend_56 ;
+    yawl:hasMethod yawl:TaskPrivileges_canReallocateStateless_57 ;
+    yawl:hasMethod yawl:TaskPrivileges_canReallocateStateful_58 ;
+    yawl:hasMethod yawl:TaskPrivileges_canDeallocate_59 ;
+    yawl:hasMethod yawl:TaskPrivileges_canDelegate_60 ;
+    yawl:hasMethod yawl:TaskPrivileges_canSkip_61 ;
+    yawl:hasMethod yawl:TaskPrivileges_canPile_62 ;
+    yawl:hasMethod yawl:TaskPrivileges_hasPrivilege_63 ;
+    yawl:hasMethod yawl:TaskPrivileges_hasParticipants_64 ;
+    yawl:hasMethod yawl:TaskPrivileges_parse_65 ;
+    yawl:hasMethod yawl:TaskPrivileges_toXML_66 ;
+    yawl:hasMethod yawl:TaskPrivileges_toXML_67 ;
+    yawl:hasMethod yawl:TaskPrivileges_buildPrivilegesNode_68 ;
+    yawl:hasMethod yawl:TaskPrivileges_buildXMLForPrivilege_69 ;
+    yawl:hasField yawl:TaskPrivileges__canSuspend ;
+    yawl:hasField yawl:TaskPrivileges__canReallocateStateless ;
+    yawl:hasField yawl:TaskPrivileges__canReallocateStateful ;
+    yawl:hasField yawl:TaskPrivileges__canDeallocate ;
+    yawl:hasField yawl:TaskPrivileges__canDelegate ;
+    yawl:hasField yawl:TaskPrivileges__canSkip ;
+    yawl:hasField yawl:TaskPrivileges__canPile ;
+    yawl:hasField yawl:TaskPrivileges_CAN_SUSPEND ;
+    yawl:hasField yawl:TaskPrivileges_CAN_REALLOCATE_STATELESS ;
+    yawl:hasField yawl:TaskPrivileges_CAN_REALLOCATE_STATEFUL ;
+    yawl:hasField yawl:TaskPrivileges_CAN_DEALLOCATE ;
+    yawl:hasField yawl:TaskPrivileges_CAN_DELEGATE ;
+    yawl:hasField yawl:TaskPrivileges_CAN_SKIP ;
+    yawl:hasField yawl:TaskPrivileges_CAN_PILE ;
+    yawl:hasField yawl:TaskPrivileges__specID ;
+    yawl:hasField yawl:TaskPrivileges__taskID ;
+    yawl:hasField yawl:TaskPrivileges__allowAll ;
+    yawl:hasField yawl:TaskPrivileges__roleSet ;
+    .
+
+
+# Method: TaskPrivileges.getSpecID
+yawl:TaskPrivileges_getSpecID_1 a yawl:Method ;
+    rdfs:label "getSpecID" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getSpecID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.setSpecID
+yawl:TaskPrivileges_setSpecID_2 a yawl:Method ;
+    rdfs:label "setSpecID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSpecID(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.getTaskID
+yawl:TaskPrivileges_getTaskID_3 a yawl:Method ;
+    rdfs:label "getTaskID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.setTaskID
+yawl:TaskPrivileges_setTaskID_4 a yawl:Method ;
+    rdfs:label "setTaskID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTaskID(String taskID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.contains
+yawl:TaskPrivileges_contains_5 a yawl:Method ;
+    rdfs:label "contains" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean contains(HashSet set, Participant p)" ;
+    rdfs:comment """@return true if the Participant p is a member of the set""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskPrivileges.allAllowed
+yawl:TaskPrivileges_allAllowed_6 a yawl:Method ;
+    rdfs:label "allAllowed" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean allAllowed(int privilege)" ;
+    rdfs:comment """@return true if all participants have been granted the specified privilege""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskPrivileges.validPrivilege
+yawl:TaskPrivileges_validPrivilege_7 a yawl:Method ;
+    rdfs:label "validPrivilege" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validPrivilege(int priv)" ;
+    rdfs:comment """@return true if priv is a valid privilege type""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskPrivileges.hasRoles
+yawl:TaskPrivileges_hasRoles_8 a yawl:Method ;
+    rdfs:label "hasRoles" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasRoles(int priv)" ;
+    rdfs:comment """returns true if the privilege has been granted to one or more Roles""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskPrivileges.add
+yawl:TaskPrivileges_add_9 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(HashSet set, Participant p)" ;
+    rdfs:comment """these 3 add methods adds to a privilege set a Participant, a Participant by ID, and a Set of Particpants respectively""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskPrivileges.add
+yawl:TaskPrivileges_add_10 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(HashSet set, String pid)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskPrivileges.addSet
+yawl:TaskPrivileges_addSet_11 a yawl:Method ;
+    rdfs:label "addSet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addSet(HashSet set, Set participants)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskPrivileges.getPrivSet
+yawl:TaskPrivileges_getPrivSet_12 a yawl:Method ;
+    rdfs:label "getPrivSet" ;
+    yawl:returnType "HashSet" ;
+    yawl:signature "HashSet getPrivSet(int priv)" ;
+    rdfs:comment """returns the relevant privilege set for the privilege type passed""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskPrivileges.getPrivSet
+yawl:TaskPrivileges_getPrivSet_13 a yawl:Method ;
+    rdfs:label "getPrivSet" ;
+    yawl:returnType "HashSet" ;
+    yawl:signature "HashSet getPrivSet(String privStr)" ;
+    rdfs:comment """returns the relevant privilege set for the privilege string passed""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskPrivileges.getPrivString
+yawl:TaskPrivileges_getPrivString_14 a yawl:Method ;
+    rdfs:label "getPrivString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPrivString(int priv)" ;
+    rdfs:comment """returns the string version of the privilege type""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskPrivileges.getPrivilegeType
+yawl:TaskPrivileges_getPrivilegeType_15 a yawl:Method ;
+    rdfs:label "getPrivilegeType" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getPrivilegeType(String privStr)" ;
+    rdfs:comment """returns the privilege type for the string version passed""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grant
+yawl:TaskPrivileges_grant_16 a yawl:Method ;
+    rdfs:label "grant" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grant(int priv, String id)" ;
+    rdfs:comment """Grants the privilege the Participant with id passed @param priv the privilege to grant @param id   the id of the Participant (must be a known Participant id)""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grant
+yawl:TaskPrivileges_grant_17 a yawl:Method ;
+    rdfs:label "grant" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grant(int priv, Participant p)" ;
+    rdfs:comment """Grants a privilege to a Participant @param priv the privilege to grant @param p    the Participant""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grant
+yawl:TaskPrivileges_grant_18 a yawl:Method ;
+    rdfs:label "grant" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grant(String privName, Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grant
+yawl:TaskPrivileges_grant_19 a yawl:Method ;
+    rdfs:label "grant" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grant(int priv, Set pSet)" ;
+    rdfs:comment """Grants a privilege to set of Participant @param priv the privilege to grant @param pSet the Participant Set""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grant
+yawl:TaskPrivileges_grant_20 a yawl:Method ;
+    rdfs:label "grant" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grant(String privName, Set pSet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantByID
+yawl:TaskPrivileges_grantByID_21 a yawl:Method ;
+    rdfs:label "grantByID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantByID(int priv, Set pSet)" ;
+    rdfs:comment """Grants a privilege to set of Participant using a set of ids @param priv the privilege to grant @param pSet the Set of Participant ids""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.allowAll
+yawl:TaskPrivileges_allowAll_22 a yawl:Method ;
+    rdfs:label "allowAll" ;
+    yawl:returnType "void" ;
+    yawl:signature "void allowAll(int privilege)" ;
+    rdfs:comment """grant a privilege to all Participants""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.allowAll
+yawl:TaskPrivileges_allowAll_23 a yawl:Method ;
+    rdfs:label "allowAll" ;
+    yawl:returnType "void" ;
+    yawl:signature "void allowAll(String privilegeStr)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.disallowAll
+yawl:TaskPrivileges_disallowAll_24 a yawl:Method ;
+    rdfs:label "disallowAll" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disallowAll(int privilege)" ;
+    rdfs:comment """disallow a privilege for all Participants""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.disallowAll
+yawl:TaskPrivileges_disallowAll_25 a yawl:Method ;
+    rdfs:label "disallowAll" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disallowAll(String privilegeStr)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.addParticipantToPrivilegeUnchecked
+yawl:TaskPrivileges_addParticipantToPrivilegeUnchecked_26 a yawl:Method ;
+    rdfs:label "addParticipantToPrivilegeUnchecked" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addParticipantToPrivilegeUnchecked(String pid, int priv)" ;
+    rdfs:comment """grant the privilege to the Participant without checking the validity of the id. Written to allow the editor to generate specification xml""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.addRoleToPrivilegeUnchecked
+yawl:TaskPrivileges_addRoleToPrivilegeUnchecked_27 a yawl:Method ;
+    rdfs:label "addRoleToPrivilegeUnchecked" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addRoleToPrivilegeUnchecked(String rid, int priv)" ;
+    rdfs:comment """grant the privilege to the Role without checking the validity of the id. Written to allow the editor to generate specification xml""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantSuspend
+yawl:TaskPrivileges_grantSuspend_28 a yawl:Method ;
+    rdfs:label "grantSuspend" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantSuspend(Participant p)" ;
+    rdfs:comment """Convenience grant methods (by Participant, id, Participant set, id Set)""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantReallocateStateless
+yawl:TaskPrivileges_grantReallocateStateless_29 a yawl:Method ;
+    rdfs:label "grantReallocateStateless" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantReallocateStateless(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantReallocateStateful
+yawl:TaskPrivileges_grantReallocateStateful_30 a yawl:Method ;
+    rdfs:label "grantReallocateStateful" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantReallocateStateful(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantDeallocate
+yawl:TaskPrivileges_grantDeallocate_31 a yawl:Method ;
+    rdfs:label "grantDeallocate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantDeallocate(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantDelegate
+yawl:TaskPrivileges_grantDelegate_32 a yawl:Method ;
+    rdfs:label "grantDelegate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantDelegate(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantSkip
+yawl:TaskPrivileges_grantSkip_33 a yawl:Method ;
+    rdfs:label "grantSkip" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantSkip(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantPile
+yawl:TaskPrivileges_grantPile_34 a yawl:Method ;
+    rdfs:label "grantPile" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantPile(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantSuspend
+yawl:TaskPrivileges_grantSuspend_35 a yawl:Method ;
+    rdfs:label "grantSuspend" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantSuspend(Set p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantReallocateStateless
+yawl:TaskPrivileges_grantReallocateStateless_36 a yawl:Method ;
+    rdfs:label "grantReallocateStateless" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantReallocateStateless(Set p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantReallocateStateful
+yawl:TaskPrivileges_grantReallocateStateful_37 a yawl:Method ;
+    rdfs:label "grantReallocateStateful" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantReallocateStateful(Set p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantDeallocate
+yawl:TaskPrivileges_grantDeallocate_38 a yawl:Method ;
+    rdfs:label "grantDeallocate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantDeallocate(Set p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantDelegate
+yawl:TaskPrivileges_grantDelegate_39 a yawl:Method ;
+    rdfs:label "grantDelegate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantDelegate(Set p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantSkip
+yawl:TaskPrivileges_grantSkip_40 a yawl:Method ;
+    rdfs:label "grantSkip" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantSkip(Set p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantPile
+yawl:TaskPrivileges_grantPile_41 a yawl:Method ;
+    rdfs:label "grantPile" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantPile(Set p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantSuspendByID
+yawl:TaskPrivileges_grantSuspendByID_42 a yawl:Method ;
+    rdfs:label "grantSuspendByID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantSuspendByID(String userid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantReallocateStatelessByID
+yawl:TaskPrivileges_grantReallocateStatelessByID_43 a yawl:Method ;
+    rdfs:label "grantReallocateStatelessByID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantReallocateStatelessByID(String userid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantReallocateStatefulByID
+yawl:TaskPrivileges_grantReallocateStatefulByID_44 a yawl:Method ;
+    rdfs:label "grantReallocateStatefulByID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantReallocateStatefulByID(String userid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantDeallocateByID
+yawl:TaskPrivileges_grantDeallocateByID_45 a yawl:Method ;
+    rdfs:label "grantDeallocateByID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantDeallocateByID(String userid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantDelegateByID
+yawl:TaskPrivileges_grantDelegateByID_46 a yawl:Method ;
+    rdfs:label "grantDelegateByID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantDelegateByID(String userid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantSkipByID
+yawl:TaskPrivileges_grantSkipByID_47 a yawl:Method ;
+    rdfs:label "grantSkipByID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantSkipByID(String userid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantPileByID
+yawl:TaskPrivileges_grantPileByID_48 a yawl:Method ;
+    rdfs:label "grantPileByID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantPileByID(String userid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantSuspendByID
+yawl:TaskPrivileges_grantSuspendByID_49 a yawl:Method ;
+    rdfs:label "grantSuspendByID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantSuspendByID(Set userids)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantReallocateStatelessByID
+yawl:TaskPrivileges_grantReallocateStatelessByID_50 a yawl:Method ;
+    rdfs:label "grantReallocateStatelessByID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantReallocateStatelessByID(Set userids)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantReallocateStatefulByID
+yawl:TaskPrivileges_grantReallocateStatefulByID_51 a yawl:Method ;
+    rdfs:label "grantReallocateStatefulByID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantReallocateStatefulByID(Set userids)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantDeallocateByID
+yawl:TaskPrivileges_grantDeallocateByID_52 a yawl:Method ;
+    rdfs:label "grantDeallocateByID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantDeallocateByID(Set userids)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantDelegateByID
+yawl:TaskPrivileges_grantDelegateByID_53 a yawl:Method ;
+    rdfs:label "grantDelegateByID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantDelegateByID(Set userids)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantSkipByID
+yawl:TaskPrivileges_grantSkipByID_54 a yawl:Method ;
+    rdfs:label "grantSkipByID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantSkipByID(Set userids)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.grantPileByID
+yawl:TaskPrivileges_grantPileByID_55 a yawl:Method ;
+    rdfs:label "grantPileByID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void grantPileByID(Set userids)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.canSuspend
+yawl:TaskPrivileges_canSuspend_56 a yawl:Method ;
+    rdfs:label "canSuspend" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean canSuspend(Participant p)" ;
+    rdfs:comment """Convenience boolean methods - return true if the Particpant passed has been granted the privilege""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.canReallocateStateless
+yawl:TaskPrivileges_canReallocateStateless_57 a yawl:Method ;
+    rdfs:label "canReallocateStateless" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean canReallocateStateless(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.canReallocateStateful
+yawl:TaskPrivileges_canReallocateStateful_58 a yawl:Method ;
+    rdfs:label "canReallocateStateful" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean canReallocateStateful(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.canDeallocate
+yawl:TaskPrivileges_canDeallocate_59 a yawl:Method ;
+    rdfs:label "canDeallocate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean canDeallocate(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.canDelegate
+yawl:TaskPrivileges_canDelegate_60 a yawl:Method ;
+    rdfs:label "canDelegate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean canDelegate(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.canSkip
+yawl:TaskPrivileges_canSkip_61 a yawl:Method ;
+    rdfs:label "canSkip" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean canSkip(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.canPile
+yawl:TaskPrivileges_canPile_62 a yawl:Method ;
+    rdfs:label "canPile" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean canPile(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.hasPrivilege
+yawl:TaskPrivileges_hasPrivilege_63 a yawl:Method ;
+    rdfs:label "hasPrivilege" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasPrivilege(Participant p, int privilege)" ;
+    rdfs:comment """returns true if the Participant has been granted the Privilege""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.hasParticipants
+yawl:TaskPrivileges_hasParticipants_64 a yawl:Method ;
+    rdfs:label "hasParticipants" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasParticipants(int priv)" ;
+    rdfs:comment """returns true if at least one Participant has been granted the Privilege""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.parse
+yawl:TaskPrivileges_parse_65 a yawl:Method ;
+    rdfs:label "parse" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parse(Element e, Namespace nsYawl)" ;
+    rdfs:comment """Parses the xml element passed into a set of privileges and who has them @param e the element containing the privileges from the spec xml""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.toXML
+yawl:TaskPrivileges_toXML_66 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    rdfs:comment """creates xml to describe the entire object""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.toXML
+yawl:TaskPrivileges_toXML_67 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML(boolean full)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskPrivileges.buildPrivilegesNode
+yawl:TaskPrivileges_buildPrivilegesNode_68 a yawl:Method ;
+    rdfs:label "buildPrivilegesNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode buildPrivilegesNode()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TaskPrivileges.buildXMLForPrivilege
+yawl:TaskPrivileges_buildXMLForPrivilege_69 a yawl:Method ;
+    rdfs:label "buildXMLForPrivilege" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode buildXMLForPrivilege(int priv)" ;
+    rdfs:comment """creates xml to describe a single privilege""" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:TaskPrivileges__canSuspend a yawl:Field ;
+    rdfs:label "_canSuspend" .
+
+yawl:TaskPrivileges__canReallocateStateless a yawl:Field ;
+    rdfs:label "_canReallocateStateless" .
+
+yawl:TaskPrivileges__canReallocateStateful a yawl:Field ;
+    rdfs:label "_canReallocateStateful" .
+
+yawl:TaskPrivileges__canDeallocate a yawl:Field ;
+    rdfs:label "_canDeallocate" .
+
+yawl:TaskPrivileges__canDelegate a yawl:Field ;
+    rdfs:label "_canDelegate" .
+
+yawl:TaskPrivileges__canSkip a yawl:Field ;
+    rdfs:label "_canSkip" .
+
+yawl:TaskPrivileges__canPile a yawl:Field ;
+    rdfs:label "_canPile" .
+
+yawl:TaskPrivileges_CAN_SUSPEND a yawl:Field ;
+    rdfs:label "CAN_SUSPEND" .
+
+yawl:TaskPrivileges_CAN_REALLOCATE_STATELESS a yawl:Field ;
+    rdfs:label "CAN_REALLOCATE_STATELESS" .
+
+yawl:TaskPrivileges_CAN_REALLOCATE_STATEFUL a yawl:Field ;
+    rdfs:label "CAN_REALLOCATE_STATEFUL" .
+
+yawl:TaskPrivileges_CAN_DEALLOCATE a yawl:Field ;
+    rdfs:label "CAN_DEALLOCATE" .
+
+yawl:TaskPrivileges_CAN_DELEGATE a yawl:Field ;
+    rdfs:label "CAN_DELEGATE" .
+
+yawl:TaskPrivileges_CAN_SKIP a yawl:Field ;
+    rdfs:label "CAN_SKIP" .
+
+yawl:TaskPrivileges_CAN_PILE a yawl:Field ;
+    rdfs:label "CAN_PILE" .
+
+yawl:TaskPrivileges__specID a yawl:Field ;
+    rdfs:label "_specID" .
+
+yawl:TaskPrivileges__taskID a yawl:Field ;
+    rdfs:label "_taskID" .
+
+yawl:TaskPrivileges__allowAll a yawl:Field ;
+    rdfs:label "_allowAll" .
+
+yawl:TaskPrivileges__roleSet a yawl:Field ;
+    rdfs:label "_roleSet" .
+
+
+

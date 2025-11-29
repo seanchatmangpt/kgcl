@@ -1,0 +1,136 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.balancer.RequestCollator
+yawl:RequestCollator a yawl:Class ;
+    rdfs:label "RequestCollator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/RequestCollator.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 16/6/17""" ;
+    yawl:implements yawl:Pollable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:RequestCollator_scheduledEvent_1 ;
+    yawl:hasMethod yawl:RequestCollator_getStatisics_2 ;
+    yawl:hasMethod yawl:RequestCollator_getItemsPerSec_3 ;
+    yawl:hasMethod yawl:RequestCollator_getResponsesPerSec_4 ;
+    yawl:hasMethod yawl:RequestCollator_dump_5 ;
+    yawl:hasMethod yawl:RequestCollator_pollRequests_6 ;
+    yawl:hasMethod yawl:RequestCollator_getResponseStats_7 ;
+    yawl:hasMethod yawl:RequestCollator_parse_8 ;
+    yawl:hasMethod yawl:RequestCollator_parseRequests_9 ;
+    yawl:hasMethod yawl:RequestCollator_getOutputter_10 ;
+    yawl:hasField yawl:RequestCollator_YAWL_URL_TEMPLATE ;
+    yawl:hasField yawl:RequestCollator_client ;
+    yawl:hasField yawl:RequestCollator_statMap ;
+    yawl:hasField yawl:RequestCollator_handle ;
+    yawl:hasField yawl:RequestCollator__outputter ;
+    yawl:hasField yawl:RequestCollator__engineName ;
+    .
+
+
+# Method: RequestCollator.scheduledEvent
+yawl:RequestCollator_scheduledEvent_1 a yawl:Method ;
+    rdfs:label "scheduledEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void scheduledEvent()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RequestCollator.getStatisics
+yawl:RequestCollator_getStatisics_2 a yawl:Method ;
+    rdfs:label "getStatisics" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getStatisics()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RequestCollator.getItemsPerSec
+yawl:RequestCollator_getItemsPerSec_3 a yawl:Method ;
+    rdfs:label "getItemsPerSec" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getItemsPerSec()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RequestCollator.getResponsesPerSec
+yawl:RequestCollator_getResponsesPerSec_4 a yawl:Method ;
+    rdfs:label "getResponsesPerSec" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getResponsesPerSec(String request)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RequestCollator.dump
+yawl:RequestCollator_dump_5 a yawl:Method ;
+    rdfs:label "dump" ;
+    yawl:returnType "void" ;
+    yawl:signature "void dump()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RequestCollator.pollRequests
+yawl:RequestCollator_pollRequests_6 a yawl:Method ;
+    rdfs:label "pollRequests" ;
+    yawl:returnType "String" ;
+    yawl:signature "String pollRequests()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RequestCollator.getResponseStats
+yawl:RequestCollator_getResponseStats_7 a yawl:Method ;
+    rdfs:label "getResponseStats" ;
+    yawl:returnType "ResponseStats" ;
+    yawl:signature "ResponseStats getResponseStats(String name)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RequestCollator.parse
+yawl:RequestCollator_parse_8 a yawl:Method ;
+    rdfs:label "parse" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parse(String resp)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RequestCollator.parseRequests
+yawl:RequestCollator_parseRequests_9 a yawl:Method ;
+    rdfs:label "parseRequests" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseRequests(XNode reqs, long timestamp, long previous)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RequestCollator.getOutputter
+yawl:RequestCollator_getOutputter_10 a yawl:Method ;
+    rdfs:label "getOutputter" ;
+    yawl:returnType "RequestStatOutputter" ;
+    yawl:signature "RequestStatOutputter getOutputter()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:RequestCollator_YAWL_URL_TEMPLATE a yawl:Field ;
+    rdfs:label "YAWL_URL_TEMPLATE" .
+
+yawl:RequestCollator_client a yawl:Field ;
+    rdfs:label "client" .
+
+yawl:RequestCollator_statMap a yawl:Field ;
+    rdfs:label "statMap" .
+
+yawl:RequestCollator_handle a yawl:Field ;
+    rdfs:label "handle" .
+
+yawl:RequestCollator__outputter a yawl:Field ;
+    rdfs:label "_outputter" .
+
+yawl:RequestCollator__engineName a yawl:Field ;
+    rdfs:label "_engineName" .
+
+
+

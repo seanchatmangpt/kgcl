@@ -1,0 +1,351 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.unmarshal.YMetaData
+yawl:YMetaData a yawl:Class ;
+    rdfs:label "YMetaData" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_unmarshal ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/unmarshal/YMetaData.java"^^xsd:string ;
+    rdfs:comment """Holds the Specification Metadata @author Lachlan Aldred Date: 3/08/2005 Time: 18:47:47""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YMetaData_getTitle_1 ;
+    yawl:hasMethod yawl:YMetaData_setTitle_2 ;
+    yawl:hasMethod yawl:YMetaData_getDescription_3 ;
+    yawl:hasMethod yawl:YMetaData_setDescription_4 ;
+    yawl:hasMethod yawl:YMetaData_getCoverage_5 ;
+    yawl:hasMethod yawl:YMetaData_setCoverage_6 ;
+    yawl:hasMethod yawl:YMetaData_getValidFrom_7 ;
+    yawl:hasMethod yawl:YMetaData_setValidFrom_8 ;
+    yawl:hasMethod yawl:YMetaData_getValidUntil_9 ;
+    yawl:hasMethod yawl:YMetaData_setValidUntil_10 ;
+    yawl:hasMethod yawl:YMetaData_getCreated_11 ;
+    yawl:hasMethod yawl:YMetaData_setCreated_12 ;
+    yawl:hasMethod yawl:YMetaData_getVersion_13 ;
+    yawl:hasMethod yawl:YMetaData_setVersion_14 ;
+    yawl:hasMethod yawl:YMetaData_getStatus_15 ;
+    yawl:hasMethod yawl:YMetaData_setStatus_16 ;
+    yawl:hasMethod yawl:YMetaData_getCreators_17 ;
+    yawl:hasMethod yawl:YMetaData_getSubjects_18 ;
+    yawl:hasMethod yawl:YMetaData_getContributors_19 ;
+    yawl:hasMethod yawl:YMetaData_setCreators_20 ;
+    yawl:hasMethod yawl:YMetaData_setSubjects_21 ;
+    yawl:hasMethod yawl:YMetaData_setContributors_22 ;
+    yawl:hasMethod yawl:YMetaData_addCreator_23 ;
+    yawl:hasMethod yawl:YMetaData_addSubject_24 ;
+    yawl:hasMethod yawl:YMetaData_addContributor_25 ;
+    yawl:hasMethod yawl:YMetaData_isPersistent_26 ;
+    yawl:hasMethod yawl:YMetaData_setPersistent_27 ;
+    yawl:hasMethod yawl:YMetaData_getUniqueID_28 ;
+    yawl:hasMethod yawl:YMetaData_setUniqueID_29 ;
+    yawl:hasMethod yawl:YMetaData_toXML_30 ;
+    yawl:hasField yawl:YMetaData_INITIAL_VERSION ;
+    yawl:hasField yawl:YMetaData_dateFormat ;
+    yawl:hasField yawl:YMetaData_title ;
+    yawl:hasField yawl:YMetaData_creators ;
+    yawl:hasField yawl:YMetaData_subjects ;
+    yawl:hasField yawl:YMetaData_description ;
+    yawl:hasField yawl:YMetaData_contributors ;
+    yawl:hasField yawl:YMetaData_coverage ;
+    yawl:hasField yawl:YMetaData_validFrom ;
+    yawl:hasField yawl:YMetaData_validUntil ;
+    yawl:hasField yawl:YMetaData_created ;
+    yawl:hasField yawl:YMetaData_version ;
+    yawl:hasField yawl:YMetaData_status ;
+    yawl:hasField yawl:YMetaData_persistent ;
+    yawl:hasField yawl:YMetaData_uniqueID ;
+    .
+
+
+# Method: YMetaData.getTitle
+yawl:YMetaData_getTitle_1 a yawl:Method ;
+    rdfs:label "getTitle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTitle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.setTitle
+yawl:YMetaData_setTitle_2 a yawl:Method ;
+    rdfs:label "setTitle" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTitle(String title)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.getDescription
+yawl:YMetaData_getDescription_3 a yawl:Method ;
+    rdfs:label "getDescription" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDescription()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.setDescription
+yawl:YMetaData_setDescription_4 a yawl:Method ;
+    rdfs:label "setDescription" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDescription(String description)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.getCoverage
+yawl:YMetaData_getCoverage_5 a yawl:Method ;
+    rdfs:label "getCoverage" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCoverage()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.setCoverage
+yawl:YMetaData_setCoverage_6 a yawl:Method ;
+    rdfs:label "setCoverage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCoverage(String coverage)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.getValidFrom
+yawl:YMetaData_getValidFrom_7 a yawl:Method ;
+    rdfs:label "getValidFrom" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date getValidFrom()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.setValidFrom
+yawl:YMetaData_setValidFrom_8 a yawl:Method ;
+    rdfs:label "setValidFrom" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setValidFrom(Date validFrom)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.getValidUntil
+yawl:YMetaData_getValidUntil_9 a yawl:Method ;
+    rdfs:label "getValidUntil" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date getValidUntil()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.setValidUntil
+yawl:YMetaData_setValidUntil_10 a yawl:Method ;
+    rdfs:label "setValidUntil" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setValidUntil(Date validUntil)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.getCreated
+yawl:YMetaData_getCreated_11 a yawl:Method ;
+    rdfs:label "getCreated" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date getCreated()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.setCreated
+yawl:YMetaData_setCreated_12 a yawl:Method ;
+    rdfs:label "setCreated" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCreated(Date created)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.getVersion
+yawl:YMetaData_getVersion_13 a yawl:Method ;
+    rdfs:label "getVersion" ;
+    yawl:returnType "YSpecVersion" ;
+    yawl:signature "YSpecVersion getVersion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.setVersion
+yawl:YMetaData_setVersion_14 a yawl:Method ;
+    rdfs:label "setVersion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setVersion(YSpecVersion version)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.getStatus
+yawl:YMetaData_getStatus_15 a yawl:Method ;
+    rdfs:label "getStatus" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.setStatus
+yawl:YMetaData_setStatus_16 a yawl:Method ;
+    rdfs:label "setStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStatus(String status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.getCreators
+yawl:YMetaData_getCreators_17 a yawl:Method ;
+    rdfs:label "getCreators" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getCreators()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.getSubjects
+yawl:YMetaData_getSubjects_18 a yawl:Method ;
+    rdfs:label "getSubjects" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getSubjects()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.getContributors
+yawl:YMetaData_getContributors_19 a yawl:Method ;
+    rdfs:label "getContributors" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getContributors()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.setCreators
+yawl:YMetaData_setCreators_20 a yawl:Method ;
+    rdfs:label "setCreators" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCreators(List creators)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.setSubjects
+yawl:YMetaData_setSubjects_21 a yawl:Method ;
+    rdfs:label "setSubjects" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSubjects(List subjects)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.setContributors
+yawl:YMetaData_setContributors_22 a yawl:Method ;
+    rdfs:label "setContributors" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setContributors(List contributors)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.addCreator
+yawl:YMetaData_addCreator_23 a yawl:Method ;
+    rdfs:label "addCreator" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addCreator(String creator)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.addSubject
+yawl:YMetaData_addSubject_24 a yawl:Method ;
+    rdfs:label "addSubject" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addSubject(String subject)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.addContributor
+yawl:YMetaData_addContributor_25 a yawl:Method ;
+    rdfs:label "addContributor" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addContributor(String contributor)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.isPersistent
+yawl:YMetaData_isPersistent_26 a yawl:Method ;
+    rdfs:label "isPersistent" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isPersistent()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.setPersistent
+yawl:YMetaData_setPersistent_27 a yawl:Method ;
+    rdfs:label "setPersistent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPersistent(boolean persistent)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.getUniqueID
+yawl:YMetaData_getUniqueID_28 a yawl:Method ;
+    rdfs:label "getUniqueID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUniqueID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.setUniqueID
+yawl:YMetaData_setUniqueID_29 a yawl:Method ;
+    rdfs:label "setUniqueID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUniqueID(String uniqueID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMetaData.toXML
+yawl:YMetaData_toXML_30 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YMetaData_INITIAL_VERSION a yawl:Field ;
+    rdfs:label "INITIAL_VERSION" .
+
+yawl:YMetaData_dateFormat a yawl:Field ;
+    rdfs:label "dateFormat" .
+
+yawl:YMetaData_title a yawl:Field ;
+    rdfs:label "title" .
+
+yawl:YMetaData_creators a yawl:Field ;
+    rdfs:label "creators" .
+
+yawl:YMetaData_subjects a yawl:Field ;
+    rdfs:label "subjects" .
+
+yawl:YMetaData_description a yawl:Field ;
+    rdfs:label "description" .
+
+yawl:YMetaData_contributors a yawl:Field ;
+    rdfs:label "contributors" .
+
+yawl:YMetaData_coverage a yawl:Field ;
+    rdfs:label "coverage" .
+
+yawl:YMetaData_validFrom a yawl:Field ;
+    rdfs:label "validFrom" .
+
+yawl:YMetaData_validUntil a yawl:Field ;
+    rdfs:label "validUntil" .
+
+yawl:YMetaData_created a yawl:Field ;
+    rdfs:label "created" .
+
+yawl:YMetaData_version a yawl:Field ;
+    rdfs:label "version" .
+
+yawl:YMetaData_status a yawl:Field ;
+    rdfs:label "status" .
+
+yawl:YMetaData_persistent a yawl:Field ;
+    rdfs:label "persistent" .
+
+yawl:YMetaData_uniqueID a yawl:Field ;
+    rdfs:label "uniqueID" .
+
+
+

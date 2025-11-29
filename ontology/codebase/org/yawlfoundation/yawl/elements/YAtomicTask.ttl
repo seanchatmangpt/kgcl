@@ -1,0 +1,152 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.elements.YAtomicTask
+yawl:YAtomicTask a yawl:Class ;
+    rdfs:label "YAtomicTask" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_elements ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/elements/YAtomicTask.java"^^xsd:string ;
+    rdfs:comment """A YAtomicTask object is the executable equivalent of the Atomic Task in the YAWL language. They have the same properties and behaviour. @author Lachlan Aldred @author Michael Adams (v2.0 and later) @since 0.1""" ;
+    yawl:extends yawl:YTask ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YAtomicTask_setDataMappingsForEnablement_1 ;
+    yawl:hasMethod yawl:YAtomicTask_startOne_2 ;
+    yawl:hasMethod yawl:YAtomicTask_isRunning_3 ;
+    yawl:hasMethod yawl:YAtomicTask_cancel_4 ;
+    yawl:hasMethod yawl:YAtomicTask_cancel_5 ;
+    yawl:hasMethod yawl:YAtomicTask_cancelBusyWorkItem_6 ;
+    yawl:hasMethod yawl:YAtomicTask_cancelWorkItem_7 ;
+    yawl:hasMethod yawl:YAtomicTask_t_rollBackToFired_8 ;
+    yawl:hasMethod yawl:YAtomicTask_clone_9 ;
+    yawl:hasMethod yawl:YAtomicTask_getDataMappingsForEnablement_10 ;
+    yawl:hasMethod yawl:YAtomicTask_prepareEnablementData_11 ;
+    yawl:hasMethod yawl:YAtomicTask_verify_12 ;
+    yawl:hasMethod yawl:YAtomicTask_checkEnablementParameterMappings_13 ;
+    .
+
+
+# Method: YAtomicTask.setDataMappingsForEnablement
+yawl:YAtomicTask_setDataMappingsForEnablement_1 a yawl:Method ;
+    rdfs:label "setDataMappingsForEnablement" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataMappingsForEnablement(Map map)" ;
+    rdfs:comment """Sets the enablement data mappings for an atomic task to those specified. @param map a map of [variable name, query] pairs. @deprecated Since 2.0, enablement mappings have no function.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAtomicTask.startOne
+yawl:YAtomicTask_startOne_2 a yawl:Method ;
+    rdfs:label "startOne" ;
+    yawl:returnType "void" ;
+    yawl:signature "void startOne(YPersistenceManager pmgr, YIdentifier id)" ;
+    rdfs:comment """Changes the inner state of an atomic task from entered to executing. @param pmgr an instantiated persistence manager object. @param id the identifier to move from inner marking 'entered' to inner marking 'executing'. @throws YPersistenceException if there's a problem persisting the change.""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAtomicTask.isRunning
+yawl:YAtomicTask_isRunning_3 a yawl:Method ;
+    rdfs:label "isRunning" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isRunning()" ;
+    rdfs:comment """Checks that a task is currently executing. @return true if the task has 'executing' state.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAtomicTask.cancel
+yawl:YAtomicTask_cancel_4 a yawl:Method ;
+    rdfs:label "cancel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancel(YPersistenceManager pmgr)" ;
+    rdfs:comment """Cancels a task. @param pmgr an instantiated persistence manager object. @throws YPersistenceException if there's a problem persisting the change.""" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAtomicTask.cancel
+yawl:YAtomicTask_cancel_5 a yawl:Method ;
+    rdfs:label "cancel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancel(YPersistenceManager pmgr, YIdentifier caseID)" ;
+    rdfs:comment """Cancels the task. If the task is not currently executing, first check that the workitem is still referenced by the engine before attempting the cancellation. @param pmgr an instantiated persistence manager object. @param caseID the case identifier of this atomic task. @throws YPersistenceException if there's a problem persisting the change.""" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAtomicTask.cancelBusyWorkItem
+yawl:YAtomicTask_cancelBusyWorkItem_6 a yawl:Method ;
+    rdfs:label "cancelBusyWorkItem" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean cancelBusyWorkItem(YPersistenceManager pmgr)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YAtomicTask.cancelWorkItem
+yawl:YAtomicTask_cancelWorkItem_7 a yawl:Method ;
+    rdfs:label "cancelWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancelWorkItem(YPersistenceManager pmgr, YWorkItem workItem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YAtomicTask.t_rollBackToFired
+yawl:YAtomicTask_t_rollBackToFired_8 a yawl:Method ;
+    rdfs:label "t_rollBackToFired" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean t_rollBackToFired(YPersistenceManager pmgr, YIdentifier caseID)" ;
+    rdfs:comment """Rolls back a task's inner state from 'executing' to 'entered'. <p/> The roll back will only occur if the task's inner 'executing' marking contains the identifier specified. @param pmgr an instantiated persistence manager object. @param caseID the case identifier of this atomic task. @return true if the rollback occurs, false if the rollback request could not be actioned because the task's inner 'executing' marking does not contain  the identifier specified. @throws YPersistenceException if there""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAtomicTask.clone
+yawl:YAtomicTask_clone_9 a yawl:Method ;
+    rdfs:label "clone" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object clone()" ;
+    rdfs:comment """Clones this atomic task. @return a (Object) clone of the task. @throws CloneNotSupportedException if there's a problem cloning the task.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAtomicTask.getDataMappingsForEnablement
+yawl:YAtomicTask_getDataMappingsForEnablement_10 a yawl:Method ;
+    rdfs:label "getDataMappingsForEnablement" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getDataMappingsForEnablement()" ;
+    rdfs:comment """Gets the map of enablement mappings for the task. @return the map of enablement mappings. @deprecated Since 2.0, enablement mappings have no function.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAtomicTask.prepareEnablementData
+yawl:YAtomicTask_prepareEnablementData_11 a yawl:Method ;
+    rdfs:label "prepareEnablementData" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element prepareEnablementData()" ;
+    rdfs:comment """Builds the enablement data set for the task. @return the enablement data set; that is, a set of data variables and corresponding values that were populated after evaluating their mapping expressions. @throws YQueryException if there's a problem with a query evaluation. @throws YDataStateException if there's a problem with the evaluated data. @throws YStateException if there's a problem setting the task state. @deprecated Since 2.0, enablement mappings have no function.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAtomicTask.verify
+yawl:YAtomicTask_verify_12 a yawl:Method ;
+    rdfs:label "verify" ;
+    yawl:returnType "void" ;
+    yawl:signature "void verify(YVerificationHandler handler)" ;
+    rdfs:comment """Verifies this atomic task definition against YAWL semantics. @return a List of error and/or warning messages. An empty list is returned if the atomic task verifies successfully.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAtomicTask.checkEnablementParameterMappings
+yawl:YAtomicTask_checkEnablementParameterMappings_13 a yawl:Method ;
+    rdfs:label "checkEnablementParameterMappings" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkEnablementParameterMappings(YVerificationHandler handler)" ;
+    rdfs:comment """Verify this atomic task's enablement mappings. @return a List of error and/or warning messages. An empty list is returned if the atomic task's enablement mappings verify successfully. @deprecated Since 2.0, enablement mappings have no function.""" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+
+

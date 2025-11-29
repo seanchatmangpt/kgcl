@@ -1,0 +1,247 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.rsInterface.ResourceGateway
+yawl:ResourceGateway a yawl:Class ;
+    rdfs:label "ResourceGateway" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_rsInterface ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/rsInterface/ResourceGateway.java"^^xsd:string ;
+    rdfs:comment """The Resource Gateway class acts as a gateway between the Resource Service and the external world for resource (org data) maintenance. It also initialises the service with values from 'web.xml'. @author Michael Adams @date 13/08/2007""" ;
+    yawl:extends yawl:YHttpServlet ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ResourceGateway_init_1 ;
+    yawl:hasMethod yawl:ResourceGateway_destroy_2 ;
+    yawl:hasMethod yawl:ResourceGateway_doPost_3 ;
+    yawl:hasMethod yawl:ResourceGateway_doGet_4 ;
+    yawl:hasMethod yawl:ResourceGateway_doAddResourceAction_5 ;
+    yawl:hasMethod yawl:ResourceGateway_doUpdateResourceAction_6 ;
+    yawl:hasMethod yawl:ResourceGateway_doRemoveResourceAction_7 ;
+    yawl:hasMethod yawl:ResourceGateway_doGetResourceAction_8 ;
+    yawl:hasMethod yawl:ResourceGateway_doSetResourceAction_9 ;
+    yawl:hasMethod yawl:ResourceGateway_doIsKnownResourceAction_10 ;
+    yawl:hasMethod yawl:ResourceGateway_doCheckResourceAction_11 ;
+    yawl:hasMethod yawl:ResourceGateway_getOrgDataSet_12 ;
+    yawl:hasMethod yawl:ResourceGateway_updateCommonFields_13 ;
+    yawl:hasMethod yawl:ResourceGateway_addParticipantToResource_14 ;
+    yawl:hasMethod yawl:ResourceGateway_removeParticipantFromResource_15 ;
+    yawl:hasMethod yawl:ResourceGateway_fail_16 ;
+    yawl:hasMethod yawl:ResourceGateway_fail_17 ;
+    yawl:hasMethod yawl:ResourceGateway_reformatMap_18 ;
+    yawl:hasMethod yawl:ResourceGateway_stringListToXML_19 ;
+    yawl:hasMethod yawl:ResourceGateway_stringMapToXML_20 ;
+    yawl:hasMethod yawl:ResourceGateway_stringMapToJSON_21 ;
+    yawl:hasMethod yawl:ResourceGateway_stringSetToJSON_22 ;
+    yawl:hasMethod yawl:ResourceGateway_jsonPair_23 ;
+    yawl:hasMethod yawl:ResourceGateway_debug_24 ;
+    yawl:hasField yawl:ResourceGateway__rm ;
+    yawl:hasField yawl:ResourceGateway_SUCCESS ;
+    .
+
+
+# Method: ResourceGateway.init
+yawl:ResourceGateway_init_1 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    rdfs:comment """Read settings from web.xml and use them to initialise the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGateway.destroy
+yawl:ResourceGateway_destroy_2 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGateway.doPost
+yawl:ResourceGateway_doPost_3 a yawl:Method ;
+    rdfs:label "doPost" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doPost(HttpServletRequest req, HttpServletResponse res)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGateway.doGet
+yawl:ResourceGateway_doGet_4 a yawl:Method ;
+    rdfs:label "doGet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doGet(HttpServletRequest req, HttpServletResponse res)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGateway.doAddResourceAction
+yawl:ResourceGateway_doAddResourceAction_5 a yawl:Method ;
+    rdfs:label "doAddResourceAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String doAddResourceAction(HttpServletRequest req, String action)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGateway.doUpdateResourceAction
+yawl:ResourceGateway_doUpdateResourceAction_6 a yawl:Method ;
+    rdfs:label "doUpdateResourceAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String doUpdateResourceAction(HttpServletRequest req, String action)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGateway.doRemoveResourceAction
+yawl:ResourceGateway_doRemoveResourceAction_7 a yawl:Method ;
+    rdfs:label "doRemoveResourceAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String doRemoveResourceAction(HttpServletRequest req, String action)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGateway.doGetResourceAction
+yawl:ResourceGateway_doGetResourceAction_8 a yawl:Method ;
+    rdfs:label "doGetResourceAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String doGetResourceAction(HttpServletRequest req, String action)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGateway.doSetResourceAction
+yawl:ResourceGateway_doSetResourceAction_9 a yawl:Method ;
+    rdfs:label "doSetResourceAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String doSetResourceAction(HttpServletRequest req, String action)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGateway.doIsKnownResourceAction
+yawl:ResourceGateway_doIsKnownResourceAction_10 a yawl:Method ;
+    rdfs:label "doIsKnownResourceAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String doIsKnownResourceAction(HttpServletRequest req, String action)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGateway.doCheckResourceAction
+yawl:ResourceGateway_doCheckResourceAction_11 a yawl:Method ;
+    rdfs:label "doCheckResourceAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String doCheckResourceAction(HttpServletRequest req, String action)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceGateway.getOrgDataSet
+yawl:ResourceGateway_getOrgDataSet_12 a yawl:Method ;
+    rdfs:label "getOrgDataSet" ;
+    yawl:returnType "ResourceDataSet" ;
+    yawl:signature "ResourceDataSet getOrgDataSet()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceGateway.updateCommonFields
+yawl:ResourceGateway_updateCommonFields_13 a yawl:Method ;
+    rdfs:label "updateCommonFields" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateCommonFields(AbstractResourceAttribute resource, HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceGateway.addParticipantToResource
+yawl:ResourceGateway_addParticipantToResource_14 a yawl:Method ;
+    rdfs:label "addParticipantToResource" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addParticipantToResource(HttpServletRequest req, String attributeType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceGateway.removeParticipantFromResource
+yawl:ResourceGateway_removeParticipantFromResource_15 a yawl:Method ;
+    rdfs:label "removeParticipantFromResource" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeParticipantFromResource(HttpServletRequest req, String attributeType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceGateway.fail
+yawl:ResourceGateway_fail_16 a yawl:Method ;
+    rdfs:label "fail" ;
+    yawl:returnType "String" ;
+    yawl:signature "String fail(String action, String className, String name)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceGateway.fail
+yawl:ResourceGateway_fail_17 a yawl:Method ;
+    rdfs:label "fail" ;
+    yawl:returnType "String" ;
+    yawl:signature "String fail(String name, String id)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceGateway.reformatMap
+yawl:ResourceGateway_reformatMap_18 a yawl:Method ;
+    rdfs:label "reformatMap" ;
+    yawl:returnType "String" ;
+    yawl:signature "String reformatMap(Map map, HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceGateway.stringListToXML
+yawl:ResourceGateway_stringListToXML_19 a yawl:Method ;
+    rdfs:label "stringListToXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String stringListToXML(List list)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceGateway.stringMapToXML
+yawl:ResourceGateway_stringMapToXML_20 a yawl:Method ;
+    rdfs:label "stringMapToXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String stringMapToXML(Map map)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceGateway.stringMapToJSON
+yawl:ResourceGateway_stringMapToJSON_21 a yawl:Method ;
+    rdfs:label "stringMapToJSON" ;
+    yawl:returnType "String" ;
+    yawl:signature "String stringMapToJSON(Map map, String callback)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceGateway.stringSetToJSON
+yawl:ResourceGateway_stringSetToJSON_22 a yawl:Method ;
+    rdfs:label "stringSetToJSON" ;
+    yawl:returnType "String" ;
+    yawl:signature "String stringSetToJSON(Collection set, String callback)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceGateway.jsonPair
+yawl:ResourceGateway_jsonPair_23 a yawl:Method ;
+    rdfs:label "jsonPair" ;
+    yawl:returnType "String" ;
+    yawl:signature "String jsonPair(String key, String value)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceGateway.debug
+yawl:ResourceGateway_debug_24 a yawl:Method ;
+    rdfs:label "debug" ;
+    yawl:returnType "long" ;
+    yawl:signature "long debug(long start, String msgs)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:ResourceGateway__rm a yawl:Field ;
+    rdfs:label "_rm" .
+
+yawl:ResourceGateway_SUCCESS a yawl:Field ;
+    rdfs:label "SUCCESS" .
+
+
+

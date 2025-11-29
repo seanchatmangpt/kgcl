@@ -1,0 +1,166 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.rsInterface.ResourceMarshaller
+yawl:ResourceMarshaller a yawl:Class ;
+    rdfs:label "ResourceMarshaller" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_rsInterface ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/rsInterface/ResourceMarshaller.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 9/03/2008""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ResourceMarshaller_getChildren_1 ;
+    yawl:hasMethod yawl:ResourceMarshaller_marshallParticipants_2 ;
+    yawl:hasMethod yawl:ResourceMarshaller_unmarshallParticipants_3 ;
+    yawl:hasMethod yawl:ResourceMarshaller_unmarshallParticipant_4 ;
+    yawl:hasMethod yawl:ResourceMarshaller_unmarshallParticipant_5 ;
+    yawl:hasMethod yawl:ResourceMarshaller_marshallWorkItemRecords_6 ;
+    yawl:hasMethod yawl:ResourceMarshaller_marshallWorkItemRecords_7 ;
+    yawl:hasMethod yawl:ResourceMarshaller_unmarshallWorkItemRecords_8 ;
+    yawl:hasMethod yawl:ResourceMarshaller_unmarshallWorkItemRecord_9 ;
+    yawl:hasMethod yawl:ResourceMarshaller_marshallSpecificationDataSet_10 ;
+    yawl:hasMethod yawl:ResourceMarshaller_marshallSpecificationData_11 ;
+    yawl:hasMethod yawl:ResourceMarshaller_unmarshallSpecificationDataSet_12 ;
+    yawl:hasMethod yawl:ResourceMarshaller_unmarshallSpecificationData_13 ;
+    yawl:hasMethod yawl:ResourceMarshaller_unmarshallServices_14 ;
+    yawl:hasMethod yawl:ResourceMarshaller_parseWorkItemParams_15 ;
+    yawl:hasField yawl:ResourceMarshaller_SPEC_HEADER ;
+    .
+
+
+# Method: ResourceMarshaller.getChildren
+yawl:ResourceMarshaller_getChildren_1 a yawl:Method ;
+    rdfs:label "getChildren" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getChildren(String s)" ;
+    rdfs:comment """Converts the string passed to a JDOM Element and returns its child Elements @param s the xml string to be converted @return a list of child elements of the converted element passed""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceMarshaller.marshallParticipants
+yawl:ResourceMarshaller_marshallParticipants_2 a yawl:Method ;
+    rdfs:label "marshallParticipants" ;
+    yawl:returnType "String" ;
+    yawl:signature "String marshallParticipants(Set set)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMarshaller.unmarshallParticipants
+yawl:ResourceMarshaller_unmarshallParticipants_3 a yawl:Method ;
+    rdfs:label "unmarshallParticipants" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set unmarshallParticipants(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMarshaller.unmarshallParticipant
+yawl:ResourceMarshaller_unmarshallParticipant_4 a yawl:Method ;
+    rdfs:label "unmarshallParticipant" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant unmarshallParticipant(Element e)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMarshaller.unmarshallParticipant
+yawl:ResourceMarshaller_unmarshallParticipant_5 a yawl:Method ;
+    rdfs:label "unmarshallParticipant" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant unmarshallParticipant(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMarshaller.marshallWorkItemRecords
+yawl:ResourceMarshaller_marshallWorkItemRecords_6 a yawl:Method ;
+    rdfs:label "marshallWorkItemRecords" ;
+    yawl:returnType "String" ;
+    yawl:signature "String marshallWorkItemRecords(Set set)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMarshaller.marshallWorkItemRecords
+yawl:ResourceMarshaller_marshallWorkItemRecords_7 a yawl:Method ;
+    rdfs:label "marshallWorkItemRecords" ;
+    yawl:returnType "String" ;
+    yawl:signature "String marshallWorkItemRecords(List list)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMarshaller.unmarshallWorkItemRecords
+yawl:ResourceMarshaller_unmarshallWorkItemRecords_8 a yawl:Method ;
+    rdfs:label "unmarshallWorkItemRecords" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set unmarshallWorkItemRecords(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMarshaller.unmarshallWorkItemRecord
+yawl:ResourceMarshaller_unmarshallWorkItemRecord_9 a yawl:Method ;
+    rdfs:label "unmarshallWorkItemRecord" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord unmarshallWorkItemRecord(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMarshaller.marshallSpecificationDataSet
+yawl:ResourceMarshaller_marshallSpecificationDataSet_10 a yawl:Method ;
+    rdfs:label "marshallSpecificationDataSet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String marshallSpecificationDataSet(Set set)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMarshaller.marshallSpecificationData
+yawl:ResourceMarshaller_marshallSpecificationData_11 a yawl:Method ;
+    rdfs:label "marshallSpecificationData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String marshallSpecificationData(SpecificationData specData)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMarshaller.unmarshallSpecificationDataSet
+yawl:ResourceMarshaller_unmarshallSpecificationDataSet_12 a yawl:Method ;
+    rdfs:label "unmarshallSpecificationDataSet" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set unmarshallSpecificationDataSet(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMarshaller.unmarshallSpecificationData
+yawl:ResourceMarshaller_unmarshallSpecificationData_13 a yawl:Method ;
+    rdfs:label "unmarshallSpecificationData" ;
+    yawl:returnType "SpecificationData" ;
+    yawl:signature "SpecificationData unmarshallSpecificationData(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMarshaller.unmarshallServices
+yawl:ResourceMarshaller_unmarshallServices_14 a yawl:Method ;
+    rdfs:label "unmarshallServices" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set unmarshallServices(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMarshaller.parseWorkItemParams
+yawl:ResourceMarshaller_parseWorkItemParams_15 a yawl:Method ;
+    rdfs:label "parseWorkItemParams" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set parseWorkItemParams(String paramStr)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:ResourceMarshaller_SPEC_HEADER a yawl:Field ;
+    rdfs:label "SPEC_HEADER" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_resourcing_interactions a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.interactions" .
+
+

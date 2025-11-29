@@ -1,0 +1,114 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.support.WorkletSpecification
+yawl:WorkletSpecification a yawl:Class ;
+    rdfs:label "WorkletSpecification" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_support ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/support/WorkletSpecification.java"^^xsd:string ;
+    rdfs:comment """Persistence transport for a worklet specification @author Michael Adams @date 10/09/15""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:WorkletSpecification_getSpecID_1 ;
+    yawl:hasMethod yawl:WorkletSpecification_setSpecID_2 ;
+    yawl:hasMethod yawl:WorkletSpecification_getXML_3 ;
+    yawl:hasMethod yawl:WorkletSpecification_setXML_4 ;
+    yawl:hasMethod yawl:WorkletSpecification_getName_5 ;
+    yawl:hasMethod yawl:WorkletSpecification_toString_6 ;
+    yawl:hasMethod yawl:WorkletSpecification_getKey_7 ;
+    yawl:hasMethod yawl:WorkletSpecification_setKey_8 ;
+    yawl:hasMethod yawl:WorkletSpecification_extractSpecID_9 ;
+    yawl:hasField yawl:WorkletSpecification__key ;
+    yawl:hasField yawl:WorkletSpecification__specID ;
+    yawl:hasField yawl:WorkletSpecification__xml ;
+    .
+
+
+# Method: WorkletSpecification.getSpecID
+yawl:WorkletSpecification_getSpecID_1 a yawl:Method ;
+    rdfs:label "getSpecID" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getSpecID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletSpecification.setSpecID
+yawl:WorkletSpecification_setSpecID_2 a yawl:Method ;
+    rdfs:label "setSpecID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSpecID(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletSpecification.getXML
+yawl:WorkletSpecification_getXML_3 a yawl:Method ;
+    rdfs:label "getXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletSpecification.setXML
+yawl:WorkletSpecification_setXML_4 a yawl:Method ;
+    rdfs:label "setXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setXML(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletSpecification.getName
+yawl:WorkletSpecification_getName_5 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletSpecification.toString
+yawl:WorkletSpecification_toString_6 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletSpecification.getKey
+yawl:WorkletSpecification_getKey_7 a yawl:Method ;
+    rdfs:label "getKey" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getKey()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletSpecification.setKey
+yawl:WorkletSpecification_setKey_8 a yawl:Method ;
+    rdfs:label "setKey" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setKey(String key)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletSpecification.extractSpecID
+yawl:WorkletSpecification_extractSpecID_9 a yawl:Method ;
+    rdfs:label "extractSpecID" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID extractSpecID(String xml)" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:WorkletSpecification__key a yawl:Field ;
+    rdfs:label "_key" .
+
+yawl:WorkletSpecification__specID a yawl:Field ;
+    rdfs:label "_specID" .
+
+yawl:WorkletSpecification__xml a yawl:Field ;
+    rdfs:label "_xml" .
+
+
+

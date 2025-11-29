@@ -1,0 +1,697 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.support.ConditionEvaluator
+yawl:ConditionEvaluator a yawl:Class ;
+    rdfs:label "ConditionEvaluator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_support ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/support/ConditionEvaluator.java"^^xsd:string ;
+    rdfs:comment """ConditionEvaluator is a member class of the Worklet Dynamic Selection Service. It is used here by the RdrNode class to evaluate the its condition  and thus allow the rule traversal to occur. It takes an expression (provided as a String) and evaluates it to a boolean value. The datalist member is a JDOM Element that, if  supplied, will be used to retrieve values for any variable names used  in the expression. The expression may contain the following operators: - Arithmetic:  / + - - Comparison: =""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ConditionEvaluator_evaluate_1 ;
+    yawl:hasMethod yawl:ConditionEvaluator_evaluate_2 ;
+    yawl:hasMethod yawl:ConditionEvaluator_getMessage_3 ;
+    yawl:hasMethod yawl:ConditionEvaluator_isBoolean_4 ;
+    yawl:hasMethod yawl:ConditionEvaluator_isString_5 ;
+    yawl:hasMethod yawl:ConditionEvaluator_isNumber_6 ;
+    yawl:hasMethod yawl:ConditionEvaluator_isInteger_7 ;
+    yawl:hasMethod yawl:ConditionEvaluator_isDouble_8 ;
+    yawl:hasMethod yawl:ConditionEvaluator_getType_9 ;
+    yawl:hasMethod yawl:ConditionEvaluator_isUnaryOperator_10 ;
+    yawl:hasMethod yawl:ConditionEvaluator_isLiteralValue_11 ;
+    yawl:hasMethod yawl:ConditionEvaluator_isVarName_12 ;
+    yawl:hasMethod yawl:ConditionEvaluator_isFunctionName_13 ;
+    yawl:hasMethod yawl:ConditionEvaluator_isFunctionCall_14 ;
+    yawl:hasMethod yawl:ConditionEvaluator_isCostExpression_15 ;
+    yawl:hasMethod yawl:ConditionEvaluator_isCostFunctionName_16 ;
+    yawl:hasMethod yawl:ConditionEvaluator_isSimpleExpression_17 ;
+    yawl:hasMethod yawl:ConditionEvaluator_isNumericOp_18 ;
+    yawl:hasMethod yawl:ConditionEvaluator_isBooleanOp_19 ;
+    yawl:hasMethod yawl:ConditionEvaluator_isOperator_20 ;
+    yawl:hasMethod yawl:ConditionEvaluator_isInArray_21 ;
+    yawl:hasMethod yawl:ConditionEvaluator_isDigitOrDot_22 ;
+    yawl:hasMethod yawl:ConditionEvaluator_isNumeric_23 ;
+    yawl:hasMethod yawl:ConditionEvaluator_isLetterOrUScore_24 ;
+    yawl:hasMethod yawl:ConditionEvaluator_isValidVarNameChar_25 ;
+    yawl:hasMethod yawl:ConditionEvaluator_isOperator_26 ;
+    yawl:hasMethod yawl:ConditionEvaluator_isFunctionArgumentDelimiter_27 ;
+    yawl:hasMethod yawl:ConditionEvaluator_maskArgumentDelimiters_28 ;
+    yawl:hasMethod yawl:ConditionEvaluator_deQuote_29 ;
+    yawl:hasMethod yawl:ConditionEvaluator_maskUnaryOps_30 ;
+    yawl:hasMethod yawl:ConditionEvaluator_extractSubExpr_31 ;
+    yawl:hasMethod yawl:ConditionEvaluator_extractString_32 ;
+    yawl:hasMethod yawl:ConditionEvaluator_replaceStr_33 ;
+    yawl:hasMethod yawl:ConditionEvaluator_evaluateXQuery_34 ;
+    yawl:hasMethod yawl:ConditionEvaluator_Pos_35 ;
+    yawl:hasMethod yawl:ConditionEvaluator_indexOfArray_36 ;
+    yawl:hasMethod yawl:ConditionEvaluator_findLeftMostOp_37 ;
+    yawl:hasMethod yawl:ConditionEvaluator_findNextOperator_38 ;
+    yawl:hasMethod yawl:ConditionEvaluator_reduceTokens_39 ;
+    yawl:hasMethod yawl:ConditionEvaluator_tokenize_40 ;
+    yawl:hasMethod yawl:ConditionEvaluator_skipWhitespace_41 ;
+    yawl:hasMethod yawl:ConditionEvaluator_getLiteralString_42 ;
+    yawl:hasMethod yawl:ConditionEvaluator_getLiteralNumber_43 ;
+    yawl:hasMethod yawl:ConditionEvaluator_getVarName_44 ;
+    yawl:hasMethod yawl:ConditionEvaluator_findCloserIndex_45 ;
+    yawl:hasMethod yawl:ConditionEvaluator_getOperator_46 ;
+    yawl:hasMethod yawl:ConditionEvaluator_validateTokenization_47 ;
+    yawl:hasMethod yawl:ConditionEvaluator_parseAndEvaluate_48 ;
+    yawl:hasMethod yawl:ConditionEvaluator_evalExpression_49 ;
+    yawl:hasMethod yawl:ConditionEvaluator_evalFunction_50 ;
+    yawl:hasMethod yawl:ConditionEvaluator_getFunctionResult_51 ;
+    yawl:hasMethod yawl:ConditionEvaluator_compatibleDataTypes_52 ;
+    yawl:hasMethod yawl:ConditionEvaluator_getVarValue_53 ;
+    yawl:hasMethod yawl:ConditionEvaluator_clarifyResult_54 ;
+    yawl:hasMethod yawl:ConditionEvaluator_parseArgsList_55 ;
+    yawl:hasMethod yawl:ConditionEvaluator_getThisData_56 ;
+    yawl:hasMethod yawl:ConditionEvaluator_formatVarValue_57 ;
+    yawl:hasMethod yawl:ConditionEvaluator_doNumericOperation_58 ;
+    yawl:hasMethod yawl:ConditionEvaluator_doNumericComparison_59 ;
+    yawl:hasMethod yawl:ConditionEvaluator_doArithmeticOperation_60 ;
+    yawl:hasMethod yawl:ConditionEvaluator_doBooleanOperation_61 ;
+    yawl:hasMethod yawl:ConditionEvaluator_doStringOperation_62 ;
+    yawl:hasMethod yawl:ConditionEvaluator_setLogLevel_63 ;
+    yawl:hasMethod yawl:ConditionEvaluator_main_64 ;
+    yawl:hasMethod yawl:ConditionEvaluator_p_65 ;
+    yawl:hasMethod yawl:ConditionEvaluator_p_66 ;
+    yawl:hasField yawl:ConditionEvaluator__NumericOps ;
+    yawl:hasField yawl:ConditionEvaluator__CompareOps ;
+    yawl:hasField yawl:ConditionEvaluator__BooleanOps ;
+    yawl:hasField yawl:ConditionEvaluator__UnaryOps ;
+    yawl:hasField yawl:ConditionEvaluator__AllOps ;
+    yawl:hasField yawl:ConditionEvaluator__isDesignTime ;
+    yawl:hasField yawl:ConditionEvaluator__log ;
+    .
+
+
+# Method: ConditionEvaluator.evaluate
+yawl:ConditionEvaluator_evaluate_1 a yawl:Method ;
+    rdfs:label "evaluate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean evaluate(String cond, Element data, boolean isDesignTime)" ;
+    rdfs:comment """Evaluate the condition using the datalist of variables and values. @param cond - the condition to evaluate @param data - the datalist of variables and values @return the boolean result of the evaluation""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ConditionEvaluator.evaluate
+yawl:ConditionEvaluator_evaluate_2 a yawl:Method ;
+    rdfs:label "evaluate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean evaluate(String cond, Element data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ConditionEvaluator.getMessage
+yawl:ConditionEvaluator_getMessage_3 a yawl:Method ;
+    rdfs:label "getMessage" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMessage(int ix)" ;
+    rdfs:comment """ERROR MESSAGE LIST""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.isBoolean
+yawl:ConditionEvaluator_isBoolean_4 a yawl:Method ;
+    rdfs:label "isBoolean" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isBoolean(String s)" ;
+    rdfs:comment """@return true if string = \"true\" or \"false\" (case insensitive)""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.isString
+yawl:ConditionEvaluator_isString_5 a yawl:Method ;
+    rdfs:label "isString" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isString(String s)" ;
+    rdfs:comment """@return true if whole expression is a single string surrounded by \"\"""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.isNumber
+yawl:ConditionEvaluator_isNumber_6 a yawl:Method ;
+    rdfs:label "isNumber" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isNumber(String s)" ;
+    rdfs:comment """@return true if whole string represents a valid number""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.isInteger
+yawl:ConditionEvaluator_isInteger_7 a yawl:Method ;
+    rdfs:label "isInteger" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isInteger(String s)" ;
+    rdfs:comment """@return true if whole string represents a valid integer""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.isDouble
+yawl:ConditionEvaluator_isDouble_8 a yawl:Method ;
+    rdfs:label "isDouble" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isDouble(String s)" ;
+    rdfs:comment """@return true if whole string represents a valid double""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.getType
+yawl:ConditionEvaluator_getType_9 a yawl:Method ;
+    rdfs:label "getType" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getType(String value)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.isUnaryOperator
+yawl:ConditionEvaluator_isUnaryOperator_10 a yawl:Method ;
+    rdfs:label "isUnaryOperator" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isUnaryOperator(String s)" ;
+    rdfs:comment """@return true if operator is a unary""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.isLiteralValue
+yawl:ConditionEvaluator_isLiteralValue_11 a yawl:Method ;
+    rdfs:label "isLiteralValue" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isLiteralValue(String s, Element data)" ;
+    rdfs:comment """@return true if expression is a literal value (string or numeric)""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.isVarName
+yawl:ConditionEvaluator_isVarName_12 a yawl:Method ;
+    rdfs:label "isVarName" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isVarName(String s, Element data)" ;
+    rdfs:comment """@return true if expression is the name of a child of the _datalist Element (i.e. is the name of an item of data)""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.isFunctionName
+yawl:ConditionEvaluator_isFunctionName_13 a yawl:Method ;
+    rdfs:label "isFunctionName" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isFunctionName(String s)" ;
+    rdfs:comment """@return true if expression is a registered function name in the RdrConditionFunctions class""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.isFunctionCall
+yawl:ConditionEvaluator_isFunctionCall_14 a yawl:Method ;
+    rdfs:label "isFunctionCall" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isFunctionCall(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.isCostExpression
+yawl:ConditionEvaluator_isCostExpression_15 a yawl:Method ;
+    rdfs:label "isCostExpression" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isCostExpression(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.isCostFunctionName
+yawl:ConditionEvaluator_isCostFunctionName_16 a yawl:Method ;
+    rdfs:label "isCostFunctionName" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isCostFunctionName(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.isSimpleExpression
+yawl:ConditionEvaluator_isSimpleExpression_17 a yawl:Method ;
+    rdfs:label "isSimpleExpression" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isSimpleExpression(String s)" ;
+    rdfs:comment """@return true if expression is of the leftop/operator/rightop kind""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.isNumericOp
+yawl:ConditionEvaluator_isNumericOp_18 a yawl:Method ;
+    rdfs:label "isNumericOp" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isNumericOp(String op)" ;
+    rdfs:comment """@return true if 'op' is a valid numeric operator""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.isBooleanOp
+yawl:ConditionEvaluator_isBooleanOp_19 a yawl:Method ;
+    rdfs:label "isBooleanOp" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isBooleanOp(String op)" ;
+    rdfs:comment """@return true if 'op' is a valid boolean operator""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.isOperator
+yawl:ConditionEvaluator_isOperator_20 a yawl:Method ;
+    rdfs:label "isOperator" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isOperator(String op)" ;
+    rdfs:comment """@return true if 'op' is a valid operator""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.isInArray
+yawl:ConditionEvaluator_isInArray_21 a yawl:Method ;
+    rdfs:label "isInArray" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isInArray(String s, String a)" ;
+    rdfs:comment """@return true if 's' is a member element of array 'a'""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.isDigitOrDot
+yawl:ConditionEvaluator_isDigitOrDot_22 a yawl:Method ;
+    rdfs:label "isDigitOrDot" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isDigitOrDot(char c)" ;
+    rdfs:comment """@return true if 'c' is one of '0'-'9' or '.'""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.isNumeric
+yawl:ConditionEvaluator_isNumeric_23 a yawl:Method ;
+    rdfs:label "isNumeric" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isNumeric(char c)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.isLetterOrUScore
+yawl:ConditionEvaluator_isLetterOrUScore_24 a yawl:Method ;
+    rdfs:label "isLetterOrUScore" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isLetterOrUScore(char c)" ;
+    rdfs:comment """@return true if 'c' is one of 'a'-'z' or 'A'-'Z' or '_'""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.isValidVarNameChar
+yawl:ConditionEvaluator_isValidVarNameChar_25 a yawl:Method ;
+    rdfs:label "isValidVarNameChar" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isValidVarNameChar(char c)" ;
+    rdfs:comment """@return true if 'c' is one of 'a'-'z', 'A'-'Z', '_', '0'-'9' or '.'""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.isOperator
+yawl:ConditionEvaluator_isOperator_26 a yawl:Method ;
+    rdfs:label "isOperator" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isOperator(char c)" ;
+    rdfs:comment """@return true if 'c' is a valid operator character""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.isFunctionArgumentDelimiter
+yawl:ConditionEvaluator_isFunctionArgumentDelimiter_27 a yawl:Method ;
+    rdfs:label "isFunctionArgumentDelimiter" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isFunctionArgumentDelimiter(String s, int fadPos)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.maskArgumentDelimiters
+yawl:ConditionEvaluator_maskArgumentDelimiters_28 a yawl:Method ;
+    rdfs:label "maskArgumentDelimiters" ;
+    yawl:returnType "String" ;
+    yawl:signature "String maskArgumentDelimiters(String s, int fadPos)" ;
+    rdfs:comment """replace ()'s with []'s where they represent function argument delimiters""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.deQuote
+yawl:ConditionEvaluator_deQuote_29 a yawl:Method ;
+    rdfs:label "deQuote" ;
+    yawl:returnType "String" ;
+    yawl:signature "String deQuote(String s)" ;
+    rdfs:comment """removes the double quotes or parentheses from around a string""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.maskUnaryOps
+yawl:ConditionEvaluator_maskUnaryOps_30 a yawl:Method ;
+    rdfs:label "maskUnaryOps" ;
+    yawl:returnType "String" ;
+    yawl:signature "String maskUnaryOps(String s)" ;
+    rdfs:comment """replaces all signs fronting numeric values with placeholding '@' 's""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.extractSubExpr
+yawl:ConditionEvaluator_extractSubExpr_31 a yawl:Method ;
+    rdfs:label "extractSubExpr" ;
+    yawl:returnType "String" ;
+    yawl:signature "String extractSubExpr(String s)" ;
+    rdfs:comment """returns a parenthesised sub expression within a string expression""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.extractString
+yawl:ConditionEvaluator_extractString_32 a yawl:Method ;
+    rdfs:label "extractString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String extractString(String s)" ;
+    rdfs:comment """removes and returns an embedded string literal from an expression""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.replaceStr
+yawl:ConditionEvaluator_replaceStr_33 a yawl:Method ;
+    rdfs:label "replaceStr" ;
+    yawl:returnType "String" ;
+    yawl:signature "String replaceStr(String s, String cut, String paste)" ;
+    rdfs:comment """replaces the first instance of \"cut\" in \"s\" with \"paste\"""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.evaluateXQuery
+yawl:ConditionEvaluator_evaluateXQuery_34 a yawl:Method ;
+    rdfs:label "evaluateXQuery" ;
+    yawl:returnType "String" ;
+    yawl:signature "String evaluateXQuery(String expr, Element data)" ;
+    rdfs:comment """PARSING METHODS""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.Pos
+yawl:ConditionEvaluator_Pos_35 a yawl:Method ;
+    rdfs:label "Pos" ;
+    yawl:returnType "int" ;
+    yawl:signature "int Pos(char c, String s)" ;
+    rdfs:comment """returns the index position of 'c' in 's', or -1 if not found""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.indexOfArray
+yawl:ConditionEvaluator_indexOfArray_36 a yawl:Method ;
+    rdfs:label "indexOfArray" ;
+    yawl:returnType "int" ;
+    yawl:signature "int indexOfArray(String a, String s)" ;
+    rdfs:comment """returns the index in 'a' of string 's', or -1 if not found""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.findLeftMostOp
+yawl:ConditionEvaluator_findLeftMostOp_37 a yawl:Method ;
+    rdfs:label "findLeftMostOp" ;
+    yawl:returnType "int" ;
+    yawl:signature "int findLeftMostOp(int lowerBound, int upperBound, String s)" ;
+    rdfs:comment """finds the position of the left most operator for a level of precedence @param lowerBound, upperBound - the range of ops to search for""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.findNextOperator
+yawl:ConditionEvaluator_findNextOperator_38 a yawl:Method ;
+    rdfs:label "findNextOperator" ;
+    yawl:returnType "int" ;
+    yawl:signature "int findNextOperator(String s)" ;
+    rdfs:comment """finds the position of next operator in an expression, in order of precedence""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.reduceTokens
+yawl:ConditionEvaluator_reduceTokens_39 a yawl:Method ;
+    rdfs:label "reduceTokens" ;
+    yawl:returnType "String" ;
+    yawl:signature "String reduceTokens(String a, int ix, String val)" ;
+    rdfs:comment """replaces a subexpression with its evaluated result @param a - the array of tokens for the whole expression @param ix - the index of the operator token @param val - the evaluated value of the subexpression""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.tokenize
+yawl:ConditionEvaluator_tokenize_40 a yawl:Method ;
+    rdfs:label "tokenize" ;
+    yawl:returnType "String" ;
+    yawl:signature "String tokenize(String s)" ;
+    rdfs:comment """Splits an expression into its token parts  pre: any parenthesised sub expressions have been evaluated to  simple values""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.skipWhitespace
+yawl:ConditionEvaluator_skipWhitespace_41 a yawl:Method ;
+    rdfs:label "skipWhitespace" ;
+    yawl:returnType "int" ;
+    yawl:signature "int skipWhitespace(String s, int start)" ;
+    rdfs:comment """skip any whitespace by incrementing the start char over it""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.getLiteralString
+yawl:ConditionEvaluator_getLiteralString_42 a yawl:Method ;
+    rdfs:label "getLiteralString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLiteralString(String s, int start)" ;
+    rdfs:comment """returns an embedded literal string of the form \"abc\" pre: s[start] == quote char""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.getLiteralNumber
+yawl:ConditionEvaluator_getLiteralNumber_43 a yawl:Method ;
+    rdfs:label "getLiteralNumber" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLiteralNumber(String s, int start)" ;
+    rdfs:comment """returns a literal number from start position in s""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.getVarName
+yawl:ConditionEvaluator_getVarName_44 a yawl:Method ;
+    rdfs:label "getVarName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getVarName(String s, int start)" ;
+    rdfs:comment """returns a variable or function name from start position in expression""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.findCloserIndex
+yawl:ConditionEvaluator_findCloserIndex_45 a yawl:Method ;
+    rdfs:label "findCloserIndex" ;
+    yawl:returnType "int" ;
+    yawl:signature "int findCloserIndex(String s, int from, char left, char right)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.getOperator
+yawl:ConditionEvaluator_getOperator_46 a yawl:Method ;
+    rdfs:label "getOperator" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOperator(String s, int start)" ;
+    rdfs:comment """returns an operator from start position in expression""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.validateTokenization
+yawl:ConditionEvaluator_validateTokenization_47 a yawl:Method ;
+    rdfs:label "validateTokenization" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validateTokenization(String a)" ;
+    rdfs:comment """@return true if alltokens are in a valid order (term op term ...)""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.parseAndEvaluate
+yawl:ConditionEvaluator_parseAndEvaluate_48 a yawl:Method ;
+    rdfs:label "parseAndEvaluate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String parseAndEvaluate(String s, Element data)" ;
+    rdfs:comment """parses and evaluates expression 's' using operator precedence""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.evalExpression
+yawl:ConditionEvaluator_evalExpression_49 a yawl:Method ;
+    rdfs:label "evalExpression" ;
+    yawl:returnType "String" ;
+    yawl:signature "String evalExpression(String lOp, String operator, String rOp, Element data)" ;
+    rdfs:comment """evaluates an expression and returns the result @param lOp - the left operand @param operator - as the name implies @param rOp - the right operand""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.evalFunction
+yawl:ConditionEvaluator_evalFunction_50 a yawl:Method ;
+    rdfs:label "evalFunction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String evalFunction(String func, Element data)" ;
+    rdfs:comment """Evaluates a function embedded in a condition PRE: the function is a member of the ceFunctions class @param func the function to call @return the result of the function""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.getFunctionResult
+yawl:ConditionEvaluator_getFunctionResult_51 a yawl:Method ;
+    rdfs:label "getFunctionResult" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFunctionResult(String func, Element data)" ;
+    rdfs:comment """translates a bad result to 'undefined'""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.compatibleDataTypes
+yawl:ConditionEvaluator_compatibleDataTypes_52 a yawl:Method ;
+    rdfs:label "compatibleDataTypes" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean compatibleDataTypes(String lOp, String rOp)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.getVarValue
+yawl:ConditionEvaluator_getVarValue_53 a yawl:Method ;
+    rdfs:label "getVarValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getVarValue(String var, Element data)" ;
+    rdfs:comment """retrieves the value for a variable or function from the datalist Element""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.clarifyResult
+yawl:ConditionEvaluator_clarifyResult_54 a yawl:Method ;
+    rdfs:label "clarifyResult" ;
+    yawl:returnType "String" ;
+    yawl:signature "String clarifyResult(String result, String type)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.parseArgsList
+yawl:ConditionEvaluator_parseArgsList_55 a yawl:Method ;
+    rdfs:label "parseArgsList" ;
+    yawl:returnType "String" ;
+    yawl:signature "String parseArgsList(String list)" ;
+    rdfs:comment """extracts the names of arguments from a function call""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.getThisData
+yawl:ConditionEvaluator_getThisData_56 a yawl:Method ;
+    rdfs:label "getThisData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getThisData(Element data)" ;
+    rdfs:comment """get the value of the 'this' argument""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.formatVarValue
+yawl:ConditionEvaluator_formatVarValue_57 a yawl:Method ;
+    rdfs:label "formatVarValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String formatVarValue(String val)" ;
+    rdfs:comment """If the value is a string, en-quote it At this level, a value can be either a number, boolean or string""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.doNumericOperation
+yawl:ConditionEvaluator_doNumericOperation_58 a yawl:Method ;
+    rdfs:label "doNumericOperation" ;
+    yawl:returnType "String" ;
+    yawl:signature "String doNumericOperation(String l, String op, String r)" ;
+    rdfs:comment """Convert operands to numbers and perform operation""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.doNumericComparison
+yawl:ConditionEvaluator_doNumericComparison_59 a yawl:Method ;
+    rdfs:label "doNumericComparison" ;
+    yawl:returnType "String" ;
+    yawl:signature "String doNumericComparison(double l, String op, double r)" ;
+    rdfs:comment """performs the comparison and returns \"true\" or \"false\"""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.doArithmeticOperation
+yawl:ConditionEvaluator_doArithmeticOperation_60 a yawl:Method ;
+    rdfs:label "doArithmeticOperation" ;
+    yawl:returnType "String" ;
+    yawl:signature "String doArithmeticOperation(double l, String op, double r)" ;
+    rdfs:comment """performs the operation and returns result as a string""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.doBooleanOperation
+yawl:ConditionEvaluator_doBooleanOperation_61 a yawl:Method ;
+    rdfs:label "doBooleanOperation" ;
+    yawl:returnType "String" ;
+    yawl:signature "String doBooleanOperation(String l, String op, String r)" ;
+    rdfs:comment """performs the operation and returns \"true\" or \"false\"""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.doStringOperation
+yawl:ConditionEvaluator_doStringOperation_62 a yawl:Method ;
+    rdfs:label "doStringOperation" ;
+    yawl:returnType "String" ;
+    yawl:signature "String doStringOperation(String l, String op, String r)" ;
+    rdfs:comment """performs the comparison and returns \"true\" or \"false\"""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.setLogLevel
+yawl:ConditionEvaluator_setLogLevel_63 a yawl:Method ;
+    rdfs:label "setLogLevel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLogLevel(Logger logger, Level level)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ConditionEvaluator.main
+yawl:ConditionEvaluator_main_64 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String args)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ConditionEvaluator.p
+yawl:ConditionEvaluator_p_65 a yawl:Method ;
+    rdfs:label "p" ;
+    yawl:returnType "void" ;
+    yawl:signature "void p(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConditionEvaluator.p
+yawl:ConditionEvaluator_p_66 a yawl:Method ;
+    rdfs:label "p" ;
+    yawl:returnType "void" ;
+    yawl:signature "void p(boolean b)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:ConditionEvaluator__NumericOps a yawl:Field ;
+    rdfs:label "_NumericOps" .
+
+yawl:ConditionEvaluator__CompareOps a yawl:Field ;
+    rdfs:label "_CompareOps" .
+
+yawl:ConditionEvaluator__BooleanOps a yawl:Field ;
+    rdfs:label "_BooleanOps" .
+
+yawl:ConditionEvaluator__UnaryOps a yawl:Field ;
+    rdfs:label "_UnaryOps" .
+
+yawl:ConditionEvaluator__AllOps a yawl:Field ;
+    rdfs:label "_AllOps" .
+
+yawl:ConditionEvaluator__isDesignTime a yawl:Field ;
+    rdfs:label "_isDesignTime" .
+
+yawl:ConditionEvaluator__log a yawl:Field ;
+    rdfs:label "_log" .
+
+
+

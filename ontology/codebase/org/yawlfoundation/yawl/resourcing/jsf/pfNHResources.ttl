@@ -1,0 +1,907 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.pfNHResources
+yawl:pfNHResources a yawl:Class ;
+    rdfs:label "pfNHResources" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/pfNHResources.java"^^xsd:string ;
+    yawl:extends yawl:AbstractFragmentBean ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:pfNHResources__init_1 ;
+    yawl:hasMethod yawl:pfNHResources_getLbxItems_2 ;
+    yawl:hasMethod yawl:pfNHResources_setLbxItems_3 ;
+    yawl:hasMethod yawl:pfNHResources_getLblItems_4 ;
+    yawl:hasMethod yawl:pfNHResources_setLblItems_5 ;
+    yawl:hasMethod yawl:pfNHResources_getLblName_6 ;
+    yawl:hasMethod yawl:pfNHResources_setLblName_7 ;
+    yawl:hasMethod yawl:pfNHResources_getTxtName_8 ;
+    yawl:hasMethod yawl:pfNHResources_setTxtName_9 ;
+    yawl:hasMethod yawl:pfNHResources_getLblCategory_10 ;
+    yawl:hasMethod yawl:pfNHResources_setLblCategory_11 ;
+    yawl:hasMethod yawl:pfNHResources_getLblDesc_12 ;
+    yawl:hasMethod yawl:pfNHResources_setLblDesc_13 ;
+    yawl:hasMethod yawl:pfNHResources_getLblNotes_14 ;
+    yawl:hasMethod yawl:pfNHResources_setLblNotes_15 ;
+    yawl:hasMethod yawl:pfNHResources_getTxtDesc_16 ;
+    yawl:hasMethod yawl:pfNHResources_setTxtDesc_17 ;
+    yawl:hasMethod yawl:pfNHResources_getTxtNotes_18 ;
+    yawl:hasMethod yawl:pfNHResources_setTxtNotes_19 ;
+    yawl:hasMethod yawl:pfNHResources_getCbbCategory_20 ;
+    yawl:hasMethod yawl:pfNHResources_setCbbCategory_21 ;
+    yawl:hasMethod yawl:pfNHResources_getCbbSubCategory_22 ;
+    yawl:hasMethod yawl:pfNHResources_setCbbSubCategory_23 ;
+    yawl:hasMethod yawl:pfNHResources_getLblSubCategory_24 ;
+    yawl:hasMethod yawl:pfNHResources_setLblSubCategory_25 ;
+    yawl:hasMethod yawl:pfNHResources_getCbbMembers_26 ;
+    yawl:hasMethod yawl:pfNHResources_setCbbMembers_27 ;
+    yawl:hasMethod yawl:pfNHResources_getLblMembers_28 ;
+    yawl:hasMethod yawl:pfNHResources_setLblMembers_29 ;
+    yawl:hasMethod yawl:pfNHResources_getLbxSubCatItems_30 ;
+    yawl:hasMethod yawl:pfNHResources_setLbxSubCatItems_31 ;
+    yawl:hasMethod yawl:pfNHResources_getTxtSubCat_32 ;
+    yawl:hasMethod yawl:pfNHResources_setTxtSubCat_33 ;
+    yawl:hasMethod yawl:pfNHResources_getBtnRemoveSubCat_34 ;
+    yawl:hasMethod yawl:pfNHResources_setBtnRemoveSubCat_35 ;
+    yawl:hasMethod yawl:pfNHResources_getBtnAddSubCat_36 ;
+    yawl:hasMethod yawl:pfNHResources_setBtnAddSubCat_37 ;
+    yawl:hasMethod yawl:pfNHResources_getBtnConfirmAddSubCat_38 ;
+    yawl:hasMethod yawl:pfNHResources_setBtnConfirmAddSubCat_39 ;
+    yawl:hasMethod yawl:pfNHResources_getBtnCancelAddSubCat_40 ;
+    yawl:hasMethod yawl:pfNHResources_setBtnCancelAddSubCat_41 ;
+    yawl:hasMethod yawl:pfNHResources_getRequestBean_42 ;
+    yawl:hasMethod yawl:pfNHResources_getSessionBean_43 ;
+    yawl:hasMethod yawl:pfNHResources_getApplicationBean_44 ;
+    yawl:hasMethod yawl:pfNHResources_init_45 ;
+    yawl:hasMethod yawl:pfNHResources_destroy_46 ;
+    yawl:hasMethod yawl:pfNHResources_lbxItems_processValueChange_47 ;
+    yawl:hasMethod yawl:pfNHResources_lbxSubCatItems_processValueChange_48 ;
+    yawl:hasMethod yawl:pfNHResources_cbbCategory_processValueChange_49 ;
+    yawl:hasMethod yawl:pfNHResources_cbbSubCategory_processValueChange_50 ;
+    yawl:hasMethod yawl:pfNHResources_btnAddSubCat_action_51 ;
+    yawl:hasMethod yawl:pfNHResources_btnRemoveSubCat_action_52 ;
+    yawl:hasMethod yawl:pfNHResources_btnConfirmAddSubCat_action_53 ;
+    yawl:hasMethod yawl:pfNHResources_btnCancelAddSubCat_action_54 ;
+    yawl:hasMethod yawl:pfNHResources_populateGUI_55 ;
+    yawl:hasMethod yawl:pfNHResources_populateGUI_56 ;
+    yawl:hasMethod yawl:pfNHResources_populateGUI_57 ;
+    yawl:hasMethod yawl:pfNHResources_setVisibleComponents_58 ;
+    yawl:hasMethod yawl:pfNHResources_setAddMode_59 ;
+    yawl:hasMethod yawl:pfNHResources_saveChanges_60 ;
+    yawl:hasMethod yawl:pfNHResources_saveResourceChanges_61 ;
+    yawl:hasMethod yawl:pfNHResources_saveCategoryChanges_62 ;
+    yawl:hasMethod yawl:pfNHResources_addNewItem_63 ;
+    yawl:hasMethod yawl:pfNHResources_addResource_64 ;
+    yawl:hasMethod yawl:pfNHResources_addCategory_65 ;
+    yawl:hasMethod yawl:pfNHResources_addDuplicationError_66 ;
+    yawl:hasMethod yawl:pfNHResources_clearTextFields_67 ;
+    yawl:hasMethod yawl:pfNHResources_clearFieldsAfterRemove_68 ;
+    yawl:hasMethod yawl:pfNHResources_clearAllFieldsAndLists_69 ;
+    yawl:hasMethod yawl:pfNHResources_clearCombos_70 ;
+    yawl:hasMethod yawl:pfNHResources_getFirstListboxItem_71 ;
+    yawl:hasMethod yawl:pfNHResources_getFirstListedCategory_72 ;
+    yawl:hasMethod yawl:pfNHResources_storeSimpleFieldValues_73 ;
+    yawl:hasMethod yawl:pfNHResources_storeSimpleFieldValues_74 ;
+    yawl:hasMethod yawl:pfNHResources_populateSimpleFields_75 ;
+    yawl:hasMethod yawl:pfNHResources_populateSimpleFields_76 ;
+    yawl:hasMethod yawl:pfNHResources_populateSimpleFields_77 ;
+    yawl:hasMethod yawl:pfNHResources_getSubCategoryList_78 ;
+    yawl:hasMethod yawl:pfNHResources_subCatUnremovable_79 ;
+    yawl:hasMethod yawl:pfNHResources_setSubCatAddMode_80 ;
+    yawl:hasMethod yawl:pfNHResources_disableInputFields_81 ;
+    yawl:hasMethod yawl:pfNHResources_disableSubCatButtons_82 ;
+    yawl:hasMethod yawl:pfNHResources_showSubCatAddFields_83 ;
+    yawl:hasMethod yawl:pfNHResources_updateSelectedResource_84 ;
+    yawl:hasMethod yawl:pfNHResources_updateSelectedResource_85 ;
+    yawl:hasMethod yawl:pfNHResources_createNewResource_86 ;
+    yawl:hasMethod yawl:pfNHResources_getCurrentlySelectedCategory_87 ;
+    yawl:hasField yawl:pfNHResources___placeholder ;
+    yawl:hasField yawl:pfNHResources_lbxItems ;
+    yawl:hasField yawl:pfNHResources_lblItems ;
+    yawl:hasField yawl:pfNHResources_lblName ;
+    yawl:hasField yawl:pfNHResources_txtName ;
+    yawl:hasField yawl:pfNHResources_lblCategory ;
+    yawl:hasField yawl:pfNHResources_lblDesc ;
+    yawl:hasField yawl:pfNHResources_lblNotes ;
+    yawl:hasField yawl:pfNHResources_txtDesc ;
+    yawl:hasField yawl:pfNHResources_txtNotes ;
+    yawl:hasField yawl:pfNHResources_cbbCategory ;
+    yawl:hasField yawl:pfNHResources_cbbSubCategory ;
+    yawl:hasField yawl:pfNHResources_lblSubCategory ;
+    yawl:hasField yawl:pfNHResources_cbbMembers ;
+    yawl:hasField yawl:pfNHResources_lblMembers ;
+    yawl:hasField yawl:pfNHResources_lbxSubCatItems ;
+    yawl:hasField yawl:pfNHResources_txtSubCat ;
+    yawl:hasField yawl:pfNHResources_btnRemoveSubCat ;
+    yawl:hasField yawl:pfNHResources_btnAddSubCat ;
+    yawl:hasField yawl:pfNHResources_btnConfirmAddSubCat ;
+    yawl:hasField yawl:pfNHResources_btnCancelAddSubCat ;
+    yawl:hasField yawl:pfNHResources__sb ;
+    yawl:hasField yawl:pfNHResources__msgPanel ;
+    yawl:hasField yawl:pfNHResources__rm ;
+    yawl:hasField yawl:pfNHResources__orgDataSet ;
+    .
+
+
+# Method: pfNHResources._init
+yawl:pfNHResources__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfNHResources.getLbxItems
+yawl:pfNHResources_getLbxItems_2 a yawl:Method ;
+    rdfs:label "getLbxItems" ;
+    yawl:returnType "Listbox" ;
+    yawl:signature "Listbox getLbxItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.setLbxItems
+yawl:pfNHResources_setLbxItems_3 a yawl:Method ;
+    rdfs:label "setLbxItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLbxItems(Listbox l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.getLblItems
+yawl:pfNHResources_getLblItems_4 a yawl:Method ;
+    rdfs:label "getLblItems" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.setLblItems
+yawl:pfNHResources_setLblItems_5 a yawl:Method ;
+    rdfs:label "setLblItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblItems(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.getLblName
+yawl:pfNHResources_getLblName_6 a yawl:Method ;
+    rdfs:label "getLblName" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.setLblName
+yawl:pfNHResources_setLblName_7 a yawl:Method ;
+    rdfs:label "setLblName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblName(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.getTxtName
+yawl:pfNHResources_getTxtName_8 a yawl:Method ;
+    rdfs:label "getTxtName" ;
+    yawl:returnType "TextField" ;
+    yawl:signature "TextField getTxtName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.setTxtName
+yawl:pfNHResources_setTxtName_9 a yawl:Method ;
+    rdfs:label "setTxtName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtName(TextField tf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.getLblCategory
+yawl:pfNHResources_getLblCategory_10 a yawl:Method ;
+    rdfs:label "getLblCategory" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblCategory()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.setLblCategory
+yawl:pfNHResources_setLblCategory_11 a yawl:Method ;
+    rdfs:label "setLblCategory" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblCategory(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.getLblDesc
+yawl:pfNHResources_getLblDesc_12 a yawl:Method ;
+    rdfs:label "getLblDesc" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblDesc()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.setLblDesc
+yawl:pfNHResources_setLblDesc_13 a yawl:Method ;
+    rdfs:label "setLblDesc" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblDesc(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.getLblNotes
+yawl:pfNHResources_getLblNotes_14 a yawl:Method ;
+    rdfs:label "getLblNotes" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblNotes()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.setLblNotes
+yawl:pfNHResources_setLblNotes_15 a yawl:Method ;
+    rdfs:label "setLblNotes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblNotes(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.getTxtDesc
+yawl:pfNHResources_getTxtDesc_16 a yawl:Method ;
+    rdfs:label "getTxtDesc" ;
+    yawl:returnType "TextArea" ;
+    yawl:signature "TextArea getTxtDesc()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.setTxtDesc
+yawl:pfNHResources_setTxtDesc_17 a yawl:Method ;
+    rdfs:label "setTxtDesc" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtDesc(TextArea ta)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.getTxtNotes
+yawl:pfNHResources_getTxtNotes_18 a yawl:Method ;
+    rdfs:label "getTxtNotes" ;
+    yawl:returnType "TextArea" ;
+    yawl:signature "TextArea getTxtNotes()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.setTxtNotes
+yawl:pfNHResources_setTxtNotes_19 a yawl:Method ;
+    rdfs:label "setTxtNotes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtNotes(TextArea ta)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.getCbbCategory
+yawl:pfNHResources_getCbbCategory_20 a yawl:Method ;
+    rdfs:label "getCbbCategory" ;
+    yawl:returnType "DropDown" ;
+    yawl:signature "DropDown getCbbCategory()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.setCbbCategory
+yawl:pfNHResources_setCbbCategory_21 a yawl:Method ;
+    rdfs:label "setCbbCategory" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCbbCategory(DropDown dd)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.getCbbSubCategory
+yawl:pfNHResources_getCbbSubCategory_22 a yawl:Method ;
+    rdfs:label "getCbbSubCategory" ;
+    yawl:returnType "DropDown" ;
+    yawl:signature "DropDown getCbbSubCategory()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.setCbbSubCategory
+yawl:pfNHResources_setCbbSubCategory_23 a yawl:Method ;
+    rdfs:label "setCbbSubCategory" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCbbSubCategory(DropDown dd)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.getLblSubCategory
+yawl:pfNHResources_getLblSubCategory_24 a yawl:Method ;
+    rdfs:label "getLblSubCategory" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblSubCategory()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.setLblSubCategory
+yawl:pfNHResources_setLblSubCategory_25 a yawl:Method ;
+    rdfs:label "setLblSubCategory" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblSubCategory(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.getCbbMembers
+yawl:pfNHResources_getCbbMembers_26 a yawl:Method ;
+    rdfs:label "getCbbMembers" ;
+    yawl:returnType "DropDown" ;
+    yawl:signature "DropDown getCbbMembers()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.setCbbMembers
+yawl:pfNHResources_setCbbMembers_27 a yawl:Method ;
+    rdfs:label "setCbbMembers" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCbbMembers(DropDown dd)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.getLblMembers
+yawl:pfNHResources_getLblMembers_28 a yawl:Method ;
+    rdfs:label "getLblMembers" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblMembers()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.setLblMembers
+yawl:pfNHResources_setLblMembers_29 a yawl:Method ;
+    rdfs:label "setLblMembers" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblMembers(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.getLbxSubCatItems
+yawl:pfNHResources_getLbxSubCatItems_30 a yawl:Method ;
+    rdfs:label "getLbxSubCatItems" ;
+    yawl:returnType "Listbox" ;
+    yawl:signature "Listbox getLbxSubCatItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.setLbxSubCatItems
+yawl:pfNHResources_setLbxSubCatItems_31 a yawl:Method ;
+    rdfs:label "setLbxSubCatItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLbxSubCatItems(Listbox l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.getTxtSubCat
+yawl:pfNHResources_getTxtSubCat_32 a yawl:Method ;
+    rdfs:label "getTxtSubCat" ;
+    yawl:returnType "TextField" ;
+    yawl:signature "TextField getTxtSubCat()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.setTxtSubCat
+yawl:pfNHResources_setTxtSubCat_33 a yawl:Method ;
+    rdfs:label "setTxtSubCat" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtSubCat(TextField tf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.getBtnRemoveSubCat
+yawl:pfNHResources_getBtnRemoveSubCat_34 a yawl:Method ;
+    rdfs:label "getBtnRemoveSubCat" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnRemoveSubCat()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.setBtnRemoveSubCat
+yawl:pfNHResources_setBtnRemoveSubCat_35 a yawl:Method ;
+    rdfs:label "setBtnRemoveSubCat" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnRemoveSubCat(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.getBtnAddSubCat
+yawl:pfNHResources_getBtnAddSubCat_36 a yawl:Method ;
+    rdfs:label "getBtnAddSubCat" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnAddSubCat()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.setBtnAddSubCat
+yawl:pfNHResources_setBtnAddSubCat_37 a yawl:Method ;
+    rdfs:label "setBtnAddSubCat" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnAddSubCat(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.getBtnConfirmAddSubCat
+yawl:pfNHResources_getBtnConfirmAddSubCat_38 a yawl:Method ;
+    rdfs:label "getBtnConfirmAddSubCat" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnConfirmAddSubCat()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.setBtnConfirmAddSubCat
+yawl:pfNHResources_setBtnConfirmAddSubCat_39 a yawl:Method ;
+    rdfs:label "setBtnConfirmAddSubCat" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnConfirmAddSubCat(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.getBtnCancelAddSubCat
+yawl:pfNHResources_getBtnCancelAddSubCat_40 a yawl:Method ;
+    rdfs:label "getBtnCancelAddSubCat" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnCancelAddSubCat()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.setBtnCancelAddSubCat
+yawl:pfNHResources_setBtnCancelAddSubCat_41 a yawl:Method ;
+    rdfs:label "setBtnCancelAddSubCat" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnCancelAddSubCat(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.getRequestBean
+yawl:pfNHResources_getRequestBean_42 a yawl:Method ;
+    rdfs:label "getRequestBean" ;
+    yawl:returnType "RequestBean" ;
+    yawl:signature "RequestBean getRequestBean()" ;
+    rdfs:comment """<p>Return a reference to the scoped data bean.</p>""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: pfNHResources.getSessionBean
+yawl:pfNHResources_getSessionBean_43 a yawl:Method ;
+    rdfs:label "getSessionBean" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getSessionBean()" ;
+    rdfs:comment """<p>Return a reference to the scoped data bean.</p>""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: pfNHResources.getApplicationBean
+yawl:pfNHResources_getApplicationBean_44 a yawl:Method ;
+    rdfs:label "getApplicationBean" ;
+    yawl:returnType "ApplicationBean" ;
+    yawl:signature "ApplicationBean getApplicationBean()" ;
+    rdfs:comment """<p>Return a reference to the scoped data bean.</p>""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: pfNHResources.init
+yawl:pfNHResources_init_45 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.destroy
+yawl:pfNHResources_destroy_46 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.lbxItems_processValueChange
+yawl:pfNHResources_lbxItems_processValueChange_47 a yawl:Method ;
+    rdfs:label "lbxItems_processValueChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void lbxItems_processValueChange(ValueChangeEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.lbxSubCatItems_processValueChange
+yawl:pfNHResources_lbxSubCatItems_processValueChange_48 a yawl:Method ;
+    rdfs:label "lbxSubCatItems_processValueChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void lbxSubCatItems_processValueChange(ValueChangeEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.cbbCategory_processValueChange
+yawl:pfNHResources_cbbCategory_processValueChange_49 a yawl:Method ;
+    rdfs:label "cbbCategory_processValueChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cbbCategory_processValueChange(ValueChangeEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.cbbSubCategory_processValueChange
+yawl:pfNHResources_cbbSubCategory_processValueChange_50 a yawl:Method ;
+    rdfs:label "cbbSubCategory_processValueChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cbbSubCategory_processValueChange(ValueChangeEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.btnAddSubCat_action
+yawl:pfNHResources_btnAddSubCat_action_51 a yawl:Method ;
+    rdfs:label "btnAddSubCat_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnAddSubCat_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.btnRemoveSubCat_action
+yawl:pfNHResources_btnRemoveSubCat_action_52 a yawl:Method ;
+    rdfs:label "btnRemoveSubCat_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnRemoveSubCat_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.btnConfirmAddSubCat_action
+yawl:pfNHResources_btnConfirmAddSubCat_action_53 a yawl:Method ;
+    rdfs:label "btnConfirmAddSubCat_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnConfirmAddSubCat_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.btnCancelAddSubCat_action
+yawl:pfNHResources_btnCancelAddSubCat_action_54 a yawl:Method ;
+    rdfs:label "btnCancelAddSubCat_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnCancelAddSubCat_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.populateGUI
+yawl:pfNHResources_populateGUI_55 a yawl:Method ;
+    rdfs:label "populateGUI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void populateGUI(String id, nonHumanMgt type)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: pfNHResources.populateGUI
+yawl:pfNHResources_populateGUI_56 a yawl:Method ;
+    rdfs:label "populateGUI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void populateGUI(NonHumanResource resource, String id)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfNHResources.populateGUI
+yawl:pfNHResources_populateGUI_57 a yawl:Method ;
+    rdfs:label "populateGUI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void populateGUI(NonHumanCategory category)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfNHResources.setVisibleComponents
+yawl:pfNHResources_setVisibleComponents_58 a yawl:Method ;
+    rdfs:label "setVisibleComponents" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setVisibleComponents(nonHumanMgt sType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.setAddMode
+yawl:pfNHResources_setAddMode_59 a yawl:Method ;
+    rdfs:label "setAddMode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAddMode(boolean adding, String selectedTab)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.saveChanges
+yawl:pfNHResources_saveChanges_60 a yawl:Method ;
+    rdfs:label "saveChanges" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean saveChanges(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.saveResourceChanges
+yawl:pfNHResources_saveResourceChanges_61 a yawl:Method ;
+    rdfs:label "saveResourceChanges" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean saveResourceChanges(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.saveCategoryChanges
+yawl:pfNHResources_saveCategoryChanges_62 a yawl:Method ;
+    rdfs:label "saveCategoryChanges" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean saveCategoryChanges(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.addNewItem
+yawl:pfNHResources_addNewItem_63 a yawl:Method ;
+    rdfs:label "addNewItem" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean addNewItem(nonHumanMgt sType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.addResource
+yawl:pfNHResources_addResource_64 a yawl:Method ;
+    rdfs:label "addResource" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean addResource(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.addCategory
+yawl:pfNHResources_addCategory_65 a yawl:Method ;
+    rdfs:label "addCategory" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean addCategory(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.addDuplicationError
+yawl:pfNHResources_addDuplicationError_66 a yawl:Method ;
+    rdfs:label "addDuplicationError" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addDuplicationError(String type)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfNHResources.clearTextFields
+yawl:pfNHResources_clearTextFields_67 a yawl:Method ;
+    rdfs:label "clearTextFields" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clearTextFields()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.clearFieldsAfterRemove
+yawl:pfNHResources_clearFieldsAfterRemove_68 a yawl:Method ;
+    rdfs:label "clearFieldsAfterRemove" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clearFieldsAfterRemove()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.clearAllFieldsAndLists
+yawl:pfNHResources_clearAllFieldsAndLists_69 a yawl:Method ;
+    rdfs:label "clearAllFieldsAndLists" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clearAllFieldsAndLists()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfNHResources.clearCombos
+yawl:pfNHResources_clearCombos_70 a yawl:Method ;
+    rdfs:label "clearCombos" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clearCombos()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: pfNHResources.getFirstListboxItem
+yawl:pfNHResources_getFirstListboxItem_71 a yawl:Method ;
+    rdfs:label "getFirstListboxItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFirstListboxItem()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfNHResources.getFirstListedCategory
+yawl:pfNHResources_getFirstListedCategory_72 a yawl:Method ;
+    rdfs:label "getFirstListedCategory" ;
+    yawl:returnType "NonHumanCategory" ;
+    yawl:signature "NonHumanCategory getFirstListedCategory()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfNHResources.storeSimpleFieldValues
+yawl:pfNHResources_storeSimpleFieldValues_73 a yawl:Method ;
+    rdfs:label "storeSimpleFieldValues" ;
+    yawl:returnType "void" ;
+    yawl:signature "void storeSimpleFieldValues(NonHumanResource resource)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfNHResources.storeSimpleFieldValues
+yawl:pfNHResources_storeSimpleFieldValues_74 a yawl:Method ;
+    rdfs:label "storeSimpleFieldValues" ;
+    yawl:returnType "void" ;
+    yawl:signature "void storeSimpleFieldValues(NonHumanCategory category)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfNHResources.populateSimpleFields
+yawl:pfNHResources_populateSimpleFields_75 a yawl:Method ;
+    rdfs:label "populateSimpleFields" ;
+    yawl:returnType "void" ;
+    yawl:signature "void populateSimpleFields(NonHumanResource resource)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfNHResources.populateSimpleFields
+yawl:pfNHResources_populateSimpleFields_76 a yawl:Method ;
+    rdfs:label "populateSimpleFields" ;
+    yawl:returnType "void" ;
+    yawl:signature "void populateSimpleFields(NonHumanCategory category)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfNHResources.populateSimpleFields
+yawl:pfNHResources_populateSimpleFields_77 a yawl:Method ;
+    rdfs:label "populateSimpleFields" ;
+    yawl:returnType "void" ;
+    yawl:signature "void populateSimpleFields(String name, String desc, String notes)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfNHResources.getSubCategoryList
+yawl:pfNHResources_getSubCategoryList_78 a yawl:Method ;
+    rdfs:label "getSubCategoryList" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getSubCategoryList(NonHumanCategory category)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfNHResources.subCatUnremovable
+yawl:pfNHResources_subCatUnremovable_79 a yawl:Method ;
+    rdfs:label "subCatUnremovable" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean subCatUnremovable()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfNHResources.setSubCatAddMode
+yawl:pfNHResources_setSubCatAddMode_80 a yawl:Method ;
+    rdfs:label "setSubCatAddMode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSubCatAddMode(boolean adding)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: pfNHResources.disableInputFields
+yawl:pfNHResources_disableInputFields_81 a yawl:Method ;
+    rdfs:label "disableInputFields" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disableInputFields(boolean disable)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: pfNHResources.disableSubCatButtons
+yawl:pfNHResources_disableSubCatButtons_82 a yawl:Method ;
+    rdfs:label "disableSubCatButtons" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disableSubCatButtons(boolean disable)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: pfNHResources.showSubCatAddFields
+yawl:pfNHResources_showSubCatAddFields_83 a yawl:Method ;
+    rdfs:label "showSubCatAddFields" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showSubCatAddFields(boolean adding)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: pfNHResources.updateSelectedResource
+yawl:pfNHResources_updateSelectedResource_84 a yawl:Method ;
+    rdfs:label "updateSelectedResource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateSelectedResource(NonHumanResource resource)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: pfNHResources.updateSelectedResource
+yawl:pfNHResources_updateSelectedResource_85 a yawl:Method ;
+    rdfs:label "updateSelectedResource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateSelectedResource(NonHumanResource resource, boolean editing)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: pfNHResources.createNewResource
+yawl:pfNHResources_createNewResource_86 a yawl:Method ;
+    rdfs:label "createNewResource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void createNewResource()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: pfNHResources.getCurrentlySelectedCategory
+yawl:pfNHResources_getCurrentlySelectedCategory_87 a yawl:Method ;
+    rdfs:label "getCurrentlySelectedCategory" ;
+    yawl:returnType "NonHumanCategory" ;
+    yawl:signature "NonHumanCategory getCurrentlySelectedCategory()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:pfNHResources___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:pfNHResources_lbxItems a yawl:Field ;
+    rdfs:label "lbxItems" .
+
+yawl:pfNHResources_lblItems a yawl:Field ;
+    rdfs:label "lblItems" .
+
+yawl:pfNHResources_lblName a yawl:Field ;
+    rdfs:label "lblName" .
+
+yawl:pfNHResources_txtName a yawl:Field ;
+    rdfs:label "txtName" .
+
+yawl:pfNHResources_lblCategory a yawl:Field ;
+    rdfs:label "lblCategory" .
+
+yawl:pfNHResources_lblDesc a yawl:Field ;
+    rdfs:label "lblDesc" .
+
+yawl:pfNHResources_lblNotes a yawl:Field ;
+    rdfs:label "lblNotes" .
+
+yawl:pfNHResources_txtDesc a yawl:Field ;
+    rdfs:label "txtDesc" .
+
+yawl:pfNHResources_txtNotes a yawl:Field ;
+    rdfs:label "txtNotes" .
+
+yawl:pfNHResources_cbbCategory a yawl:Field ;
+    rdfs:label "cbbCategory" .
+
+yawl:pfNHResources_cbbSubCategory a yawl:Field ;
+    rdfs:label "cbbSubCategory" .
+
+yawl:pfNHResources_lblSubCategory a yawl:Field ;
+    rdfs:label "lblSubCategory" .
+
+yawl:pfNHResources_cbbMembers a yawl:Field ;
+    rdfs:label "cbbMembers" .
+
+yawl:pfNHResources_lblMembers a yawl:Field ;
+    rdfs:label "lblMembers" .
+
+yawl:pfNHResources_lbxSubCatItems a yawl:Field ;
+    rdfs:label "lbxSubCatItems" .
+
+yawl:pfNHResources_txtSubCat a yawl:Field ;
+    rdfs:label "txtSubCat" .
+
+yawl:pfNHResources_btnRemoveSubCat a yawl:Field ;
+    rdfs:label "btnRemoveSubCat" .
+
+yawl:pfNHResources_btnAddSubCat a yawl:Field ;
+    rdfs:label "btnAddSubCat" .
+
+yawl:pfNHResources_btnConfirmAddSubCat a yawl:Field ;
+    rdfs:label "btnConfirmAddSubCat" .
+
+yawl:pfNHResources_btnCancelAddSubCat a yawl:Field ;
+    rdfs:label "btnCancelAddSubCat" .
+
+yawl:pfNHResources__sb a yawl:Field ;
+    rdfs:label "_sb" .
+
+yawl:pfNHResources__msgPanel a yawl:Field ;
+    rdfs:label "_msgPanel" .
+
+yawl:pfNHResources__rm a yawl:Field ;
+    rdfs:label "_rm" .
+
+yawl:pfNHResources__orgDataSet a yawl:Field ;
+    rdfs:label "_orgDataSet" .
+
+
+

@@ -1,0 +1,97 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.datastore.eventlog.SpecLog
+yawl:SpecLog a yawl:Class ;
+    rdfs:label "SpecLog" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_datastore_eventlog ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/datastore/eventlog/SpecLog.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 29/04/2010""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:SpecLog_getSpecID_1 ;
+    yawl:hasMethod yawl:SpecLog_setSpecID_2 ;
+    yawl:hasMethod yawl:SpecLog_getLogID_3 ;
+    yawl:hasMethod yawl:SpecLog_setLogID_4 ;
+    yawl:hasMethod yawl:SpecLog_getIdentifier_5 ;
+    yawl:hasMethod yawl:SpecLog_getVersion_6 ;
+    yawl:hasMethod yawl:SpecLog_getURI_7 ;
+    yawl:hasField yawl:SpecLog_specID ;
+    yawl:hasField yawl:SpecLog_logID ;
+    .
+
+
+# Method: SpecLog.getSpecID
+yawl:SpecLog_getSpecID_1 a yawl:Method ;
+    rdfs:label "getSpecID" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getSpecID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecLog.setSpecID
+yawl:SpecLog_setSpecID_2 a yawl:Method ;
+    rdfs:label "setSpecID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSpecID(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecLog.getLogID
+yawl:SpecLog_getLogID_3 a yawl:Method ;
+    rdfs:label "getLogID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getLogID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecLog.setLogID
+yawl:SpecLog_setLogID_4 a yawl:Method ;
+    rdfs:label "setLogID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLogID(long logid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecLog.getIdentifier
+yawl:SpecLog_getIdentifier_5 a yawl:Method ;
+    rdfs:label "getIdentifier" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getIdentifier()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecLog.getVersion
+yawl:SpecLog_getVersion_6 a yawl:Method ;
+    rdfs:label "getVersion" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getVersion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecLog.getURI
+yawl:SpecLog_getURI_7 a yawl:Method ;
+    rdfs:label "getURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getURI()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:SpecLog_specID a yawl:Field ;
+    rdfs:label "specID" .
+
+yawl:SpecLog_logID a yawl:Field ;
+    rdfs:label "logID" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_resourcing_datastore_orgdata_util a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.datastore.orgdata.util" .
+
+

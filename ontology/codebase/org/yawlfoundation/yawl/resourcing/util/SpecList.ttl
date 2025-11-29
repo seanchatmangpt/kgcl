@@ -1,0 +1,61 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.util.SpecList
+yawl:SpecList a yawl:Class ;
+    rdfs:label "SpecList" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/util/SpecDataCache.java"^^xsd:string ;
+    yawl:extends yawl:ArrayList ;
+    yawl:modifiers "private" ;
+    yawl:hasMethod yawl:SpecList_getSpecID_1 ;
+    yawl:hasMethod yawl:SpecList_getSpecData_2 ;
+    yawl:hasMethod yawl:SpecList_getLatestVersion_3 ;
+    yawl:hasMethod yawl:SpecList_removeVersion_4 ;
+    yawl:hasField yawl:SpecList__specID ;
+    .
+
+
+# Method: SpecList.getSpecID
+yawl:SpecList_getSpecID_1 a yawl:Method ;
+    rdfs:label "getSpecID" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getSpecID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecList.getSpecData
+yawl:SpecList_getSpecData_2 a yawl:Method ;
+    rdfs:label "getSpecData" ;
+    yawl:returnType "SpecificationData" ;
+    yawl:signature "SpecificationData getSpecData(String version)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecList.getLatestVersion
+yawl:SpecList_getLatestVersion_3 a yawl:Method ;
+    rdfs:label "getLatestVersion" ;
+    yawl:returnType "SpecificationData" ;
+    yawl:signature "SpecificationData getLatestVersion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecList.removeVersion
+yawl:SpecList_removeVersion_4 a yawl:Method ;
+    rdfs:label "removeVersion" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeVersion(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:SpecList__specID a yawl:Field ;
+    rdfs:label "_specID" .
+
+
+

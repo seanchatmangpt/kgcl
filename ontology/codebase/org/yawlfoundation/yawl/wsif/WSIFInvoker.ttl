@@ -1,0 +1,65 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.wsif
+yawl:org_yawlfoundation_yawl_wsif a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.wsif" .
+# Class: org.yawlfoundation.yawl.wsif.WSIFInvoker
+yawl:WSIFInvoker a yawl:Class ;
+    rdfs:label "WSIFInvoker" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_wsif ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/wsif/WSIFInvoker.java"^^xsd:string ;
+    rdfs:comment """@author Sanjiva Weerawarana @author Alekander Slominski @author Lachlan Aldred""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:WSIFInvoker_invokeMethod_1 ;
+    yawl:hasMethod yawl:WSIFInvoker_invokeMethod_2 ;
+    yawl:hasMethod yawl:WSIFInvoker_retrieveSignature_3 ;
+    yawl:hasMethod yawl:WSIFInvoker_unWrapIfWrappedDocLit_4 ;
+    .
+
+
+# Method: WSIFInvoker.invokeMethod
+yawl:WSIFInvoker_invokeMethod_1 a yawl:Method ;
+    rdfs:label "invokeMethod" ;
+    yawl:returnType "HashMap" ;
+    yawl:signature "HashMap invokeMethod(String wsdlLocation, String portName, String operationName, Element inputDataDoc, AuthenticationConfig authconfig)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: WSIFInvoker.invokeMethod
+yawl:WSIFInvoker_invokeMethod_2 a yawl:Method ;
+    rdfs:label "invokeMethod" ;
+    yawl:returnType "HashMap" ;
+    yawl:signature "HashMap invokeMethod(String wsdlLocation, String operationName, String inputName, String outputName, String portName, String protocol, String args, int argShift, AuthenticationConfig authconfig)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: WSIFInvoker.retrieveSignature
+yawl:WSIFInvoker_retrieveSignature_3 a yawl:Method ;
+    rdfs:label "retrieveSignature" ;
+    yawl:returnType "void" ;
+    yawl:signature "void retrieveSignature(List parts, String names, Class types)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: WSIFInvoker.unWrapIfWrappedDocLit
+yawl:WSIFInvoker_unWrapIfWrappedDocLit_4 a yawl:Method ;
+    rdfs:label "unWrapIfWrappedDocLit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void unWrapIfWrappedDocLit(List parts, String operationName, Definition def)" ;
+    rdfs:comment """Unwraps the top level part if this a wrapped DocLit message.""" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+
+

@@ -1,0 +1,419 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.WorkQueue
+yawl:WorkQueue a yawl:Class ;
+    rdfs:label "WorkQueue" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/WorkQueue.java"^^xsd:string ;
+    rdfs:comment """Convenience class that encapsulates the various work queues for a Participant and/or Administrator - each instance representing a single queue @author Michael Adams v0.1, 03/08/2007""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:WorkQueue_persistThis_1 ;
+    yawl:hasMethod yawl:WorkQueue_logEvent_2 ;
+    yawl:hasMethod yawl:WorkQueue_logEvent_3 ;
+    yawl:hasMethod yawl:WorkQueue_setOwnerID_4 ;
+    yawl:hasMethod yawl:WorkQueue_getOwnerID_5 ;
+    yawl:hasMethod yawl:WorkQueue_getID_6 ;
+    yawl:hasMethod yawl:WorkQueue_getQueueType_7 ;
+    yawl:hasMethod yawl:WorkQueue_setQueueType_8 ;
+    yawl:hasMethod yawl:WorkQueue_isPersisting_9 ;
+    yawl:hasMethod yawl:WorkQueue_setPersisting_10 ;
+    yawl:hasMethod yawl:WorkQueue_add_11 ;
+    yawl:hasMethod yawl:WorkQueue_addQueue_12 ;
+    yawl:hasMethod yawl:WorkQueue_addQueue_13 ;
+    yawl:hasMethod yawl:WorkQueue_setQueue_14 ;
+    yawl:hasMethod yawl:WorkQueue_get_15 ;
+    yawl:hasMethod yawl:WorkQueue_getAll_16 ;
+    yawl:hasMethod yawl:WorkQueue_getQueueAsMap_17 ;
+    yawl:hasMethod yawl:WorkQueue_remove_18 ;
+    yawl:hasMethod yawl:WorkQueue_removeQueue_19 ;
+    yawl:hasMethod yawl:WorkQueue_clear_20 ;
+    yawl:hasMethod yawl:WorkQueue_refresh_21 ;
+    yawl:hasMethod yawl:WorkQueue_cleanse_22 ;
+    yawl:hasMethod yawl:WorkQueue_removeCase_23 ;
+    yawl:hasMethod yawl:WorkQueue_isEmpty_24 ;
+    yawl:hasMethod yawl:WorkQueue_getQueueSize_25 ;
+    yawl:hasMethod yawl:WorkQueue_getQueueName_26 ;
+    yawl:hasMethod yawl:WorkQueue_isValidQueueType_27 ;
+    yawl:hasMethod yawl:WorkQueue_getQueueName_28 ;
+    yawl:hasMethod yawl:WorkQueue_toXML_29 ;
+    yawl:hasMethod yawl:WorkQueue_fromXML_30 ;
+    yawl:hasMethod yawl:WorkQueue_fromXML_31 ;
+    yawl:hasMethod yawl:WorkQueue_get_ownerID_32 ;
+    yawl:hasMethod yawl:WorkQueue_set_ownerID_33 ;
+    yawl:hasMethod yawl:WorkQueue_get_queueType_34 ;
+    yawl:hasMethod yawl:WorkQueue_set_queueType_35 ;
+    yawl:hasMethod yawl:WorkQueue_get_id_36 ;
+    yawl:hasMethod yawl:WorkQueue_set_id_37 ;
+    yawl:hasField yawl:WorkQueue_UNDEFINED ;
+    yawl:hasField yawl:WorkQueue_OFFERED ;
+    yawl:hasField yawl:WorkQueue_ALLOCATED ;
+    yawl:hasField yawl:WorkQueue_STARTED ;
+    yawl:hasField yawl:WorkQueue_SUSPENDED ;
+    yawl:hasField yawl:WorkQueue_UNOFFERED ;
+    yawl:hasField yawl:WorkQueue_WORKLISTED ;
+    yawl:hasField yawl:WorkQueue__workitems ;
+    yawl:hasField yawl:WorkQueue__id ;
+    yawl:hasField yawl:WorkQueue__ownerID ;
+    yawl:hasField yawl:WorkQueue__queueType ;
+    yawl:hasField yawl:WorkQueue__persisting ;
+    .
+
+
+# Method: WorkQueue.persistThis
+yawl:WorkQueue_persistThis_1 a yawl:Method ;
+    rdfs:label "persistThis" ;
+    yawl:returnType "void" ;
+    yawl:signature "void persistThis()" ;
+    rdfs:comment """Called when this workqueue's contents have changed. Note that the admin worklisted queue is dynamically constructed from the union of all participant queues and thus does not need to be persisted""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkQueue.logEvent
+yawl:WorkQueue_logEvent_2 a yawl:Method ;
+    rdfs:label "logEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logEvent(WorkItemRecord wir)" ;
+    rdfs:comment """adds an entry in the process log when a workitem is added to a queue (since that signifies a resourcing status change). Additions to the admin worklisted queue is ignored. @param wir the workitem effecting the change""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkQueue.logEvent
+yawl:WorkQueue_logEvent_3 a yawl:Method ;
+    rdfs:label "logEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logEvent(Map map)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkQueue.setOwnerID
+yawl:WorkQueue_setOwnerID_4 a yawl:Method ;
+    rdfs:label "setOwnerID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOwnerID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueue.getOwnerID
+yawl:WorkQueue_getOwnerID_5 a yawl:Method ;
+    rdfs:label "getOwnerID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOwnerID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueue.getID
+yawl:WorkQueue_getID_6 a yawl:Method ;
+    rdfs:label "getID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueue.getQueueType
+yawl:WorkQueue_getQueueType_7 a yawl:Method ;
+    rdfs:label "getQueueType" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getQueueType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueue.setQueueType
+yawl:WorkQueue_setQueueType_8 a yawl:Method ;
+    rdfs:label "setQueueType" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setQueueType(int qType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueue.isPersisting
+yawl:WorkQueue_isPersisting_9 a yawl:Method ;
+    rdfs:label "isPersisting" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isPersisting()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueue.setPersisting
+yawl:WorkQueue_setPersisting_10 a yawl:Method ;
+    rdfs:label "setPersisting" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPersisting(boolean persist)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueue.add
+yawl:WorkQueue_add_11 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(WorkItemRecord item, boolean log)" ;
+    rdfs:comment """Adds a workitem to the queue @param item the workitem to add""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueue.addQueue
+yawl:WorkQueue_addQueue_12 a yawl:Method ;
+    rdfs:label "addQueue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addQueue(Map queueMap)" ;
+    rdfs:comment """Adds all members of the Map passed to the queue @param queueMap the Map of [item id, YWorkItem] to add""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueue.addQueue
+yawl:WorkQueue_addQueue_13 a yawl:Method ;
+    rdfs:label "addQueue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addQueue(WorkQueue queue)" ;
+    rdfs:comment """Adds all the items in the queue passed to this work queue (i.e. does not replace the queue) @param queue the queue of items to add""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueue.setQueue
+yawl:WorkQueue_setQueue_14 a yawl:Method ;
+    rdfs:label "setQueue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setQueue(WorkQueue queue)" ;
+    rdfs:comment """Sets (replaces) this work queue's members with the members of the queue passed @param queue the new queue""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueue.get
+yawl:WorkQueue_get_15 a yawl:Method ;
+    rdfs:label "get" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord get(String itemID)" ;
+    rdfs:comment """Retrieves a workitem from the queue (but does not remove it) @param itemID the ID of the workitem to retrieve @return the retrieved workitem""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueue.getAll
+yawl:WorkQueue_getAll_16 a yawl:Method ;
+    rdfs:label "getAll" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getAll()" ;
+    rdfs:comment """Retrieves a Set of all workitems in the queue @return a Set of all WorkItemRecord objects in the work queue""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueue.getQueueAsMap
+yawl:WorkQueue_getQueueAsMap_17 a yawl:Method ;
+    rdfs:label "getQueueAsMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getQueueAsMap()" ;
+    rdfs:comment """Retrieves a HashMap of all workitems in the queue @return all members of the queue as a HashMap of [item id, YWorkItem]""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueue.remove
+yawl:WorkQueue_remove_18 a yawl:Method ;
+    rdfs:label "remove" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean remove(WorkItemRecord item)" ;
+    rdfs:comment """Removes a workitem from the queue @param item the workitem to remove""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueue.removeQueue
+yawl:WorkQueue_removeQueue_19 a yawl:Method ;
+    rdfs:label "removeQueue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeQueue(WorkQueue queue)" ;
+    rdfs:comment """Removes all the items in the queue passed from this work queue (i.e. does not replace the queue) @param queue the queue of items to remove""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueue.clear
+yawl:WorkQueue_clear_20 a yawl:Method ;
+    rdfs:label "clear" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clear()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueue.refresh
+yawl:WorkQueue_refresh_21 a yawl:Method ;
+    rdfs:label "refresh" ;
+    yawl:returnType "void" ;
+    yawl:signature "void refresh(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueue.cleanse
+yawl:WorkQueue_cleanse_22 a yawl:Method ;
+    rdfs:label "cleanse" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cleanse(WorkItemCache cache)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueue.removeCase
+yawl:WorkQueue_removeCase_23 a yawl:Method ;
+    rdfs:label "removeCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeCase(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueue.isEmpty
+yawl:WorkQueue_isEmpty_24 a yawl:Method ;
+    rdfs:label "isEmpty" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEmpty()" ;
+    rdfs:comment """@return true if the work queue contains no work items""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueue.getQueueSize
+yawl:WorkQueue_getQueueSize_25 a yawl:Method ;
+    rdfs:label "getQueueSize" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getQueueSize()" ;
+    rdfs:comment """returns the number of workitems in this queue""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueue.getQueueName
+yawl:WorkQueue_getQueueName_26 a yawl:Method ;
+    rdfs:label "getQueueName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getQueueName(int qType)" ;
+    rdfs:comment """returns the appropriate String identifier for the queue type passed""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: WorkQueue.isValidQueueType
+yawl:WorkQueue_isValidQueueType_27 a yawl:Method ;
+    rdfs:label "isValidQueueType" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isValidQueueType(int queueType)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: WorkQueue.getQueueName
+yawl:WorkQueue_getQueueName_28 a yawl:Method ;
+    rdfs:label "getQueueName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getQueueName()" ;
+    rdfs:comment """returns the name of this queue""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueue.toXML
+yawl:WorkQueue_toXML_29 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueue.fromXML
+yawl:WorkQueue_fromXML_30 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueue.fromXML
+yawl:WorkQueue_fromXML_31 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(Element element)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueue.get_ownerID
+yawl:WorkQueue_get_ownerID_32 a yawl:Method ;
+    rdfs:label "get_ownerID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_ownerID()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkQueue.set_ownerID
+yawl:WorkQueue_set_ownerID_33 a yawl:Method ;
+    rdfs:label "set_ownerID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_ownerID(String ownerID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkQueue.get_queueType
+yawl:WorkQueue_get_queueType_34 a yawl:Method ;
+    rdfs:label "get_queueType" ;
+    yawl:returnType "int" ;
+    yawl:signature "int get_queueType()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkQueue.set_queueType
+yawl:WorkQueue_set_queueType_35 a yawl:Method ;
+    rdfs:label "set_queueType" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_queueType(int queueType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkQueue.get_id
+yawl:WorkQueue_get_id_36 a yawl:Method ;
+    rdfs:label "get_id" ;
+    yawl:returnType "long" ;
+    yawl:signature "long get_id()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkQueue.set_id
+yawl:WorkQueue_set_id_37 a yawl:Method ;
+    rdfs:label "set_id" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_id(long id)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:WorkQueue_UNDEFINED a yawl:Field ;
+    rdfs:label "UNDEFINED" .
+
+yawl:WorkQueue_OFFERED a yawl:Field ;
+    rdfs:label "OFFERED" .
+
+yawl:WorkQueue_ALLOCATED a yawl:Field ;
+    rdfs:label "ALLOCATED" .
+
+yawl:WorkQueue_STARTED a yawl:Field ;
+    rdfs:label "STARTED" .
+
+yawl:WorkQueue_SUSPENDED a yawl:Field ;
+    rdfs:label "SUSPENDED" .
+
+yawl:WorkQueue_UNOFFERED a yawl:Field ;
+    rdfs:label "UNOFFERED" .
+
+yawl:WorkQueue_WORKLISTED a yawl:Field ;
+    rdfs:label "WORKLISTED" .
+
+yawl:WorkQueue__workitems a yawl:Field ;
+    rdfs:label "_workitems" .
+
+yawl:WorkQueue__id a yawl:Field ;
+    rdfs:label "_id" .
+
+yawl:WorkQueue__ownerID a yawl:Field ;
+    rdfs:label "_ownerID" .
+
+yawl:WorkQueue__queueType a yawl:Field ;
+    rdfs:label "_queueType" .
+
+yawl:WorkQueue__persisting a yawl:Field ;
+    rdfs:label "_persisting" .
+
+
+

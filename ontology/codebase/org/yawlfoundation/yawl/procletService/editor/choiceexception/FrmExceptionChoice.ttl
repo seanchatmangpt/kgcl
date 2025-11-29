@@ -1,0 +1,174 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.choiceexception.FrmExceptionChoice
+yawl:FrmExceptionChoice a yawl:Class ;
+    rdfs:label "FrmExceptionChoice" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor_choiceexception ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/choiceexception/FrmExceptionChoice.java"^^xsd:string ;
+    yawl:extends yawl:DesignInternalFrame ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:FrmExceptionChoice_singleton_1 ;
+    yawl:hasMethod yawl:FrmExceptionChoice_finish_2 ;
+    yawl:hasMethod yawl:FrmExceptionChoice_jbInit_3 ;
+    yawl:hasMethod yawl:FrmExceptionChoice_initializeFields_4 ;
+    yawl:hasMethod yawl:FrmExceptionChoice_initComponents_5 ;
+    yawl:hasMethod yawl:FrmExceptionChoice_exceptionComboBoxActionPerformed_6 ;
+    yawl:hasMethod yawl:FrmExceptionChoice_selectButtonActionPerformed_7 ;
+    yawl:hasMethod yawl:FrmExceptionChoice_handleButtonActionPerformed_8 ;
+    yawl:hasMethod yawl:FrmExceptionChoice_ignoreButtonActionPerformed_9 ;
+    yawl:hasMethod yawl:FrmExceptionChoice_actionPerformed_10 ;
+    yawl:hasField yawl:FrmExceptionChoice_TITLE ;
+    yawl:hasField yawl:FrmExceptionChoice_single ;
+    yawl:hasField yawl:FrmExceptionChoice_exceptionChoiceCoordinator ;
+    yawl:hasField yawl:FrmExceptionChoice_decisionPanel ;
+    yawl:hasField yawl:FrmExceptionChoice_emidsPanel ;
+    yawl:hasField yawl:FrmExceptionChoice_emidsTextField ;
+    yawl:hasField yawl:FrmExceptionChoice_exceptionComboBox ;
+    yawl:hasField yawl:FrmExceptionChoice_handleButton ;
+    yawl:hasField yawl:FrmExceptionChoice_ignoreButton ;
+    yawl:hasField yawl:FrmExceptionChoice_jLabel1 ;
+    yawl:hasField yawl:FrmExceptionChoice_jScrollPane1 ;
+    yawl:hasField yawl:FrmExceptionChoice_mainPanel ;
+    yawl:hasField yawl:FrmExceptionChoice_selectButton ;
+    yawl:hasField yawl:FrmExceptionChoice_selectionPanel ;
+    .
+
+
+# Method: FrmExceptionChoice.singleton
+yawl:FrmExceptionChoice_singleton_1 a yawl:Method ;
+    rdfs:label "singleton" ;
+    yawl:returnType "FrmExceptionChoice" ;
+    yawl:signature "FrmExceptionChoice singleton(ExceptionChoiceCoordinator coord)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrmExceptionChoice.finish
+yawl:FrmExceptionChoice_finish_2 a yawl:Method ;
+    rdfs:label "finish" ;
+    yawl:returnType "void" ;
+    yawl:signature "void finish()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrmExceptionChoice.jbInit
+yawl:FrmExceptionChoice_jbInit_3 a yawl:Method ;
+    rdfs:label "jbInit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void jbInit()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: FrmExceptionChoice.initializeFields
+yawl:FrmExceptionChoice_initializeFields_4 a yawl:Method ;
+    rdfs:label "initializeFields" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initializeFields()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmExceptionChoice.initComponents
+yawl:FrmExceptionChoice_initComponents_5 a yawl:Method ;
+    rdfs:label "initComponents" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initComponents()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmExceptionChoice.exceptionComboBoxActionPerformed
+yawl:FrmExceptionChoice_exceptionComboBoxActionPerformed_6 a yawl:Method ;
+    rdfs:label "exceptionComboBoxActionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void exceptionComboBoxActionPerformed(java evt)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmExceptionChoice.selectButtonActionPerformed
+yawl:FrmExceptionChoice_selectButtonActionPerformed_7 a yawl:Method ;
+    rdfs:label "selectButtonActionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void selectButtonActionPerformed(java evt)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmExceptionChoice.handleButtonActionPerformed
+yawl:FrmExceptionChoice_handleButtonActionPerformed_8 a yawl:Method ;
+    rdfs:label "handleButtonActionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleButtonActionPerformed(java evt)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmExceptionChoice.ignoreButtonActionPerformed
+yawl:FrmExceptionChoice_ignoreButtonActionPerformed_9 a yawl:Method ;
+    rdfs:label "ignoreButtonActionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void ignoreButtonActionPerformed(java evt)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmExceptionChoice.actionPerformed
+yawl:FrmExceptionChoice_actionPerformed_10 a yawl:Method ;
+    rdfs:label "actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void actionPerformed(ActionEvent e)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:FrmExceptionChoice_TITLE a yawl:Field ;
+    rdfs:label "TITLE" .
+
+yawl:FrmExceptionChoice_single a yawl:Field ;
+    rdfs:label "single" .
+
+yawl:FrmExceptionChoice_exceptionChoiceCoordinator a yawl:Field ;
+    rdfs:label "exceptionChoiceCoordinator" .
+
+yawl:FrmExceptionChoice_decisionPanel a yawl:Field ;
+    rdfs:label "decisionPanel" .
+
+yawl:FrmExceptionChoice_emidsPanel a yawl:Field ;
+    rdfs:label "emidsPanel" .
+
+yawl:FrmExceptionChoice_emidsTextField a yawl:Field ;
+    rdfs:label "emidsTextField" .
+
+yawl:FrmExceptionChoice_exceptionComboBox a yawl:Field ;
+    rdfs:label "exceptionComboBox" .
+
+yawl:FrmExceptionChoice_handleButton a yawl:Field ;
+    rdfs:label "handleButton" .
+
+yawl:FrmExceptionChoice_ignoreButton a yawl:Field ;
+    rdfs:label "ignoreButton" .
+
+yawl:FrmExceptionChoice_jLabel1 a yawl:Field ;
+    rdfs:label "jLabel1" .
+
+yawl:FrmExceptionChoice_jScrollPane1 a yawl:Field ;
+    rdfs:label "jScrollPane1" .
+
+yawl:FrmExceptionChoice_mainPanel a yawl:Field ;
+    rdfs:label "mainPanel" .
+
+yawl:FrmExceptionChoice_selectButton a yawl:Field ;
+    rdfs:label "selectButton" .
+
+yawl:FrmExceptionChoice_selectionPanel a yawl:Field ;
+    rdfs:label "selectionPanel" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_procletService_editor_block a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.procletService.editor.block" .
+
+

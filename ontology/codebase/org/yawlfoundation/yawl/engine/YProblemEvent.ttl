@@ -1,0 +1,88 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.YProblemEvent
+yawl:YProblemEvent a yawl:Class ;
+    rdfs:label "YProblemEvent" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/YProblemEvent.java"^^xsd:string ;
+    rdfs:comment """A problem event describes the nature of a runtime execution problem. @author Lachlan Aldred Date: 15/10/2004 Time: 11:50:00""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YProblemEvent_getMessage_1 ;
+    yawl:hasMethod yawl:YProblemEvent_getSource_2 ;
+    yawl:hasMethod yawl:YProblemEvent_getEventType_3 ;
+    yawl:hasMethod yawl:YProblemEvent_logProblem_4 ;
+    yawl:hasField yawl:YProblemEvent_EXECUTION_ERROR_STR ;
+    yawl:hasField yawl:YProblemEvent_logger ;
+    yawl:hasField yawl:YProblemEvent__source ;
+    yawl:hasField yawl:YProblemEvent__message ;
+    yawl:hasField yawl:YProblemEvent__eventType ;
+    yawl:hasField yawl:YProblemEvent_RuntimeError ;
+    yawl:hasField yawl:YProblemEvent_RuntimeWarning ;
+    .
+
+
+# Method: YProblemEvent.getMessage
+yawl:YProblemEvent_getMessage_1 a yawl:Method ;
+    rdfs:label "getMessage" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMessage()" ;
+    rdfs:comment """Gets the message of the event, if any. @return message""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YProblemEvent.getSource
+yawl:YProblemEvent_getSource_2 a yawl:Method ;
+    rdfs:label "getSource" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object getSource()" ;
+    rdfs:comment """Gets the source of the event. @return event source object.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YProblemEvent.getEventType
+yawl:YProblemEvent_getEventType_3 a yawl:Method ;
+    rdfs:label "getEventType" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getEventType()" ;
+    rdfs:comment """Gets the event type. @return event ype.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YProblemEvent.logProblem
+yawl:YProblemEvent_logProblem_4 a yawl:Method ;
+    rdfs:label "logProblem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logProblem(YPersistenceManager pmgr)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YProblemEvent_EXECUTION_ERROR_STR a yawl:Field ;
+    rdfs:label "EXECUTION_ERROR_STR" .
+
+yawl:YProblemEvent_logger a yawl:Field ;
+    rdfs:label "logger" .
+
+yawl:YProblemEvent__source a yawl:Field ;
+    rdfs:label "_source" .
+
+yawl:YProblemEvent__message a yawl:Field ;
+    rdfs:label "_message" .
+
+yawl:YProblemEvent__eventType a yawl:Field ;
+    rdfs:label "_eventType" .
+
+yawl:YProblemEvent_RuntimeError a yawl:Field ;
+    rdfs:label "RuntimeError" .
+
+yawl:YProblemEvent_RuntimeWarning a yawl:Field ;
+    rdfs:label "RuntimeWarning" .
+
+
+

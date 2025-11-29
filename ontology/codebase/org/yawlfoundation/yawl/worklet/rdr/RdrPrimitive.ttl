@@ -1,0 +1,181 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.rdr.RdrPrimitive
+yawl:RdrPrimitive a yawl:Class ;
+    rdfs:label "RdrPrimitive" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_rdr ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/rdr/RdrPrimitive.java"^^xsd:string ;
+    yawl:implements yawl:Comparable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:RdrPrimitive_getIndex_1 ;
+    yawl:hasMethod yawl:RdrPrimitive_getAction_2 ;
+    yawl:hasMethod yawl:RdrPrimitive_getTarget_3 ;
+    yawl:hasMethod yawl:RdrPrimitive_getWorkletTarget_4 ;
+    yawl:hasMethod yawl:RdrPrimitive_getExletAction_5 ;
+    yawl:hasMethod yawl:RdrPrimitive_getExletTarget_6 ;
+    yawl:hasMethod yawl:RdrPrimitive_setIndex_7 ;
+    yawl:hasMethod yawl:RdrPrimitive_setAction_8 ;
+    yawl:hasMethod yawl:RdrPrimitive_setTarget_9 ;
+    yawl:hasMethod yawl:RdrPrimitive_setExletAction_10 ;
+    yawl:hasMethod yawl:RdrPrimitive_setExletTarget_11 ;
+    yawl:hasMethod yawl:RdrPrimitive_isValid_12 ;
+    yawl:hasMethod yawl:RdrPrimitive_compareTo_13 ;
+    yawl:hasMethod yawl:RdrPrimitive_equals_14 ;
+    yawl:hasMethod yawl:RdrPrimitive_hashCode_15 ;
+    yawl:hasMethod yawl:RdrPrimitive_toString_16 ;
+    yawl:hasField yawl:RdrPrimitive_index ;
+    yawl:hasField yawl:RdrPrimitive_action ;
+    yawl:hasField yawl:RdrPrimitive_target ;
+    yawl:hasField yawl:RdrPrimitive_worklet ;
+    .
+
+
+# Method: RdrPrimitive.getIndex
+yawl:RdrPrimitive_getIndex_1 a yawl:Method ;
+    rdfs:label "getIndex" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getIndex()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrPrimitive.getAction
+yawl:RdrPrimitive_getAction_2 a yawl:Method ;
+    rdfs:label "getAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrPrimitive.getTarget
+yawl:RdrPrimitive_getTarget_3 a yawl:Method ;
+    rdfs:label "getTarget" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTarget()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrPrimitive.getWorkletTarget
+yawl:RdrPrimitive_getWorkletTarget_4 a yawl:Method ;
+    rdfs:label "getWorkletTarget" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkletTarget()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrPrimitive.getExletAction
+yawl:RdrPrimitive_getExletAction_5 a yawl:Method ;
+    rdfs:label "getExletAction" ;
+    yawl:returnType "ExletAction" ;
+    yawl:signature "ExletAction getExletAction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrPrimitive.getExletTarget
+yawl:RdrPrimitive_getExletTarget_6 a yawl:Method ;
+    rdfs:label "getExletTarget" ;
+    yawl:returnType "ExletTarget" ;
+    yawl:signature "ExletTarget getExletTarget()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrPrimitive.setIndex
+yawl:RdrPrimitive_setIndex_7 a yawl:Method ;
+    rdfs:label "setIndex" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setIndex(int index)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrPrimitive.setAction
+yawl:RdrPrimitive_setAction_8 a yawl:Method ;
+    rdfs:label "setAction" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAction(String action)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrPrimitive.setTarget
+yawl:RdrPrimitive_setTarget_9 a yawl:Method ;
+    rdfs:label "setTarget" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTarget(String target)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrPrimitive.setExletAction
+yawl:RdrPrimitive_setExletAction_10 a yawl:Method ;
+    rdfs:label "setExletAction" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setExletAction(ExletAction action)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrPrimitive.setExletTarget
+yawl:RdrPrimitive_setExletTarget_11 a yawl:Method ;
+    rdfs:label "setExletTarget" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setExletTarget(ExletTarget target)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrPrimitive.isValid
+yawl:RdrPrimitive_isValid_12 a yawl:Method ;
+    rdfs:label "isValid" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isValid()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrPrimitive.compareTo
+yawl:RdrPrimitive_compareTo_13 a yawl:Method ;
+    rdfs:label "compareTo" ;
+    yawl:returnType "int" ;
+    yawl:signature "int compareTo(RdrPrimitive other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrPrimitive.equals
+yawl:RdrPrimitive_equals_14 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrPrimitive.hashCode
+yawl:RdrPrimitive_hashCode_15 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrPrimitive.toString
+yawl:RdrPrimitive_toString_16 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:RdrPrimitive_index a yawl:Field ;
+    rdfs:label "index" .
+
+yawl:RdrPrimitive_action a yawl:Field ;
+    rdfs:label "action" .
+
+yawl:RdrPrimitive_target a yawl:Field ;
+    rdfs:label "target" .
+
+yawl:RdrPrimitive_worklet a yawl:Field ;
+    rdfs:label "worklet" .
+
+
+

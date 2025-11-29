@@ -1,0 +1,119 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.calendar.utilisation.StatusMessage
+yawl:StatusMessage a yawl:Class ;
+    rdfs:label "StatusMessage" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_calendar_utilisation ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/calendar/utilisation/StatusMessage.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 6/10/2010""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:StatusMessage_getWarning_1 ;
+    yawl:hasMethod yawl:StatusMessage_setWarning_2 ;
+    yawl:hasMethod yawl:StatusMessage_hasWarning_3 ;
+    yawl:hasMethod yawl:StatusMessage_getError_4 ;
+    yawl:hasMethod yawl:StatusMessage_setError_5 ;
+    yawl:hasMethod yawl:StatusMessage_hasError_6 ;
+    yawl:hasMethod yawl:StatusMessage_hasMessage_7 ;
+    yawl:hasMethod yawl:StatusMessage_addAttributes_8 ;
+    yawl:hasMethod yawl:StatusMessage_fromXNode_9 ;
+    yawl:hasMethod yawl:StatusMessage_toXNode_10 ;
+    yawl:hasField yawl:StatusMessage_warning ;
+    yawl:hasField yawl:StatusMessage_error ;
+    .
+
+
+# Method: StatusMessage.getWarning
+yawl:StatusMessage_getWarning_1 a yawl:Method ;
+    rdfs:label "getWarning" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWarning()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StatusMessage.setWarning
+yawl:StatusMessage_setWarning_2 a yawl:Method ;
+    rdfs:label "setWarning" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setWarning(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StatusMessage.hasWarning
+yawl:StatusMessage_hasWarning_3 a yawl:Method ;
+    rdfs:label "hasWarning" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasWarning()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StatusMessage.getError
+yawl:StatusMessage_getError_4 a yawl:Method ;
+    rdfs:label "getError" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getError()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StatusMessage.setError
+yawl:StatusMessage_setError_5 a yawl:Method ;
+    rdfs:label "setError" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setError(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StatusMessage.hasError
+yawl:StatusMessage_hasError_6 a yawl:Method ;
+    rdfs:label "hasError" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasError()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StatusMessage.hasMessage
+yawl:StatusMessage_hasMessage_7 a yawl:Method ;
+    rdfs:label "hasMessage" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasMessage()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StatusMessage.addAttributes
+yawl:StatusMessage_addAttributes_8 a yawl:Method ;
+    rdfs:label "addAttributes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addAttributes(XNode node)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StatusMessage.fromXNode
+yawl:StatusMessage_fromXNode_9 a yawl:Method ;
+    rdfs:label "fromXNode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXNode(XNode node)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StatusMessage.toXNode
+yawl:StatusMessage_toXNode_10 a yawl:Method ;
+    rdfs:label "toXNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode toXNode(String tag)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:StatusMessage_warning a yawl:Field ;
+    rdfs:label "warning" .
+
+yawl:StatusMessage_error a yawl:Field ;
+    rdfs:label "error" .
+
+
+

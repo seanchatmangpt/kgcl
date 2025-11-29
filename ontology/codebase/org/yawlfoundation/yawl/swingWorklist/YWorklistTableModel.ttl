@@ -1,0 +1,140 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.swingWorklist.YWorklistTableModel
+yawl:YWorklistTableModel a yawl:Class ;
+    rdfs:label "YWorklistTableModel" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_swingWorklist ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/swingWorklist/YWorklistTableModel.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 15/05/2003 Time: 13:51:11""" ;
+    yawl:extends yawl:AbstractTableModel ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YWorklistTableModel_getRowCount_1 ;
+    yawl:hasMethod yawl:YWorklistTableModel_getColumnCount_2 ;
+    yawl:hasMethod yawl:YWorklistTableModel_getValueAt_3 ;
+    yawl:hasMethod yawl:YWorklistTableModel_addRow_4 ;
+    yawl:hasMethod yawl:YWorklistTableModel_getColumnName_5 ;
+    yawl:hasMethod yawl:YWorklistTableModel_removeRow_6 ;
+    yawl:hasMethod yawl:YWorklistTableModel_getColumnClass_7 ;
+    yawl:hasMethod yawl:YWorklistTableModel_getRowIndex_8 ;
+    yawl:hasMethod yawl:YWorklistTableModel_getColumnNames_9 ;
+    yawl:hasMethod yawl:YWorklistTableModel_getRowMap_10 ;
+    yawl:hasMethod yawl:YWorklistTableModel_getOutputData_11 ;
+    yawl:hasField yawl:YWorklistTableModel__rows ;
+    yawl:hasField yawl:YWorklistTableModel__colNames ;
+    .
+
+
+# Method: YWorklistTableModel.getRowCount
+yawl:YWorklistTableModel_getRowCount_1 a yawl:Method ;
+    rdfs:label "getRowCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getRowCount()" ;
+    rdfs:comment """Returns the number of rows in the model. A <code>JTable</code> uses this method to determine how many rows it should display.  This method should be quick, as it is called frequently during rendering. @return the number of rows in the model @see #getColumnCount""" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorklistTableModel.getColumnCount
+yawl:YWorklistTableModel_getColumnCount_2 a yawl:Method ;
+    rdfs:label "getColumnCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getColumnCount()" ;
+    rdfs:comment """Returns the number of columns in the model. A <code>JTable</code> uses this method to determine how many columns it should create and display by default. @return the number of columns in the model @see #getRowCount""" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorklistTableModel.getValueAt
+yawl:YWorklistTableModel_getValueAt_3 a yawl:Method ;
+    rdfs:label "getValueAt" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object getValueAt(int rowIndex, int columnIndex)" ;
+    rdfs:comment """Returns the value for the cell at <code>columnIndex</code> and <code>rowIndex</code>. @param	rowIndex	the row whose value is to be queried @param	columnIndex 	the column whose value is to be queried @return	the value Object at the specified cell""" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorklistTableModel.addRow
+yawl:YWorklistTableModel_addRow_4 a yawl:Method ;
+    rdfs:label "addRow" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addRow(Object key, Object rowValues)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorklistTableModel.getColumnName
+yawl:YWorklistTableModel_getColumnName_5 a yawl:Method ;
+    rdfs:label "getColumnName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getColumnName(int columnIndex)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorklistTableModel.removeRow
+yawl:YWorklistTableModel_removeRow_6 a yawl:Method ;
+    rdfs:label "removeRow" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeRow(Object caseAndTaskID)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorklistTableModel.getColumnClass
+yawl:YWorklistTableModel_getColumnClass_7 a yawl:Method ;
+    rdfs:label "getColumnClass" ;
+    yawl:returnType "Class" ;
+    yawl:signature "Class getColumnClass(int c)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorklistTableModel.getRowIndex
+yawl:YWorklistTableModel_getRowIndex_8 a yawl:Method ;
+    rdfs:label "getRowIndex" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getRowIndex(Object caseAndTaskID)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorklistTableModel.getColumnNames
+yawl:YWorklistTableModel_getColumnNames_9 a yawl:Method ;
+    rdfs:label "getColumnNames" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getColumnNames()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorklistTableModel.getRowMap
+yawl:YWorklistTableModel_getRowMap_10 a yawl:Method ;
+    rdfs:label "getRowMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getRowMap()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorklistTableModel.getOutputData
+yawl:YWorklistTableModel_getOutputData_11 a yawl:Method ;
+    rdfs:label "getOutputData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOutputData(String caseIDStr, String taskID)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YWorklistTableModel__rows a yawl:Field ;
+    rdfs:label "_rows" .
+
+yawl:YWorklistTableModel__colNames a yawl:Field ;
+    rdfs:label "_colNames" .
+
+
+

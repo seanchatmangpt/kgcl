@@ -1,0 +1,90 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.authentication
+yawl:org_yawlfoundation_yawl_authentication a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.authentication" .
+# Class: org.yawlfoundation.yawl.authentication.YSessionTimer
+yawl:YSessionTimer a yawl:Class ;
+    rdfs:label "YSessionTimer" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_authentication ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/authentication/YSessionTimer.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 13/10/13""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YSessionTimer_getCache_1 ;
+    yawl:hasMethod yawl:YSessionTimer_add_2 ;
+    yawl:hasMethod yawl:YSessionTimer_reset_3 ;
+    yawl:hasMethod yawl:YSessionTimer_expire_4 ;
+    yawl:hasMethod yawl:YSessionTimer_shutdown_5 ;
+    yawl:hasMethod yawl:YSessionTimer_scheduleTimeout_6 ;
+    yawl:hasField yawl:YSessionTimer_TIMER ;
+    yawl:hasField yawl:YSessionTimer__sessionMap ;
+    yawl:hasField yawl:YSessionTimer__cache ;
+    .
+
+
+# Method: YSessionTimer.getCache
+yawl:YSessionTimer_getCache_1 a yawl:Method ;
+    rdfs:label "getCache" ;
+    yawl:returnType "ISessionCache" ;
+    yawl:signature "ISessionCache getCache()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSessionTimer.add
+yawl:YSessionTimer_add_2 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean add(YAbstractSession session)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSessionTimer.reset
+yawl:YSessionTimer_reset_3 a yawl:Method ;
+    rdfs:label "reset" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean reset(YAbstractSession session)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSessionTimer.expire
+yawl:YSessionTimer_expire_4 a yawl:Method ;
+    rdfs:label "expire" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean expire(YAbstractSession session)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSessionTimer.shutdown
+yawl:YSessionTimer_shutdown_5 a yawl:Method ;
+    rdfs:label "shutdown" ;
+    yawl:returnType "void" ;
+    yawl:signature "void shutdown()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSessionTimer.scheduleTimeout
+yawl:YSessionTimer_scheduleTimeout_6 a yawl:Method ;
+    rdfs:label "scheduleTimeout" ;
+    yawl:returnType "TimerTask" ;
+    yawl:signature "TimerTask scheduleTimeout(YAbstractSession session)" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:YSessionTimer_TIMER a yawl:Field ;
+    rdfs:label "TIMER" .
+
+yawl:YSessionTimer__sessionMap a yawl:Field ;
+    rdfs:label "_sessionMap" .
+
+yawl:YSessionTimer__cache a yawl:Field ;
+    rdfs:label "_cache" .
+
+
+

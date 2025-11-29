@@ -1,0 +1,298 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.gui.YAdminGUI
+yawl:YAdminGUI a yawl:Class ;
+    rdfs:label "YAdminGUI" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_gui ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/gui/YAdminGUI.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 16/06/2003 Time: 12:29:13""" ;
+    yawl:extends yawl:JPanel ;
+    yawl:implements yawl:InterfaceBClientObserver ;
+    yawl:implements yawl:ActionListener ;
+    yawl:implements yawl:ItemListener ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YAdminGUI_loadWorklists_1 ;
+    yawl:hasMethod yawl:YAdminGUI_logError_2 ;
+    yawl:hasMethod yawl:YAdminGUI_actionPerformed_3 ;
+    yawl:hasMethod yawl:YAdminGUI_attemptToLoadSpecificationFile_4 ;
+    yawl:hasMethod yawl:YAdminGUI_getSpecTestDataDirectory_5 ;
+    yawl:hasMethod yawl:YAdminGUI_attemptToCreateWorklist_6 ;
+    yawl:hasMethod yawl:YAdminGUI_saveXML_7 ;
+    yawl:hasMethod yawl:YAdminGUI_startCase_8 ;
+    yawl:hasMethod yawl:YAdminGUI_addCase_9 ;
+    yawl:hasMethod yawl:YAdminGUI_setUpChooser_10 ;
+    yawl:hasMethod yawl:YAdminGUI_removeCase_11 ;
+    yawl:hasMethod yawl:YAdminGUI_addWorkItem_12 ;
+    yawl:hasMethod yawl:YAdminGUI_removeWorkItem_13 ;
+    yawl:hasMethod yawl:YAdminGUI_itemStateChanged_14 ;
+    yawl:hasMethod yawl:YAdminGUI_quickyLoad_15 ;
+    yawl:hasMethod yawl:YAdminGUI_main_16 ;
+    yawl:hasField yawl:YAdminGUI__loadWorkflowCommand ;
+    yawl:hasField yawl:YAdminGUI__unloadWorkflowCommand ;
+    yawl:hasField yawl:YAdminGUI__exportToXMLCommand ;
+    yawl:hasField yawl:YAdminGUI__createWorklistCommand ;
+    yawl:hasField yawl:YAdminGUI__reannounceEnabledWorkItems ;
+    yawl:hasField yawl:YAdminGUI__startCaseCommand ;
+    yawl:hasField yawl:YAdminGUI__cancelCaseCommand ;
+    yawl:hasField yawl:YAdminGUI__inspectStateCommand ;
+    yawl:hasField yawl:YAdminGUI__suspendCaseCommand ;
+    yawl:hasField yawl:YAdminGUI__resumeCaseCommand ;
+    yawl:hasField yawl:YAdminGUI__dumpCommand ;
+    yawl:hasField yawl:YAdminGUI__loadedSpecificationsTable ;
+    yawl:hasField yawl:YAdminGUI__loadedSpecificationsTableModel ;
+    yawl:hasField yawl:YAdminGUI__activeWorklistsTable ;
+    yawl:hasField yawl:YAdminGUI__activeWorklistsTableModel ;
+    yawl:hasField yawl:YAdminGUI__quickyLoad ;
+    yawl:hasField yawl:YAdminGUI__activeCasesTableModel ;
+    yawl:hasField yawl:YAdminGUI__activeCasesTable ;
+    yawl:hasField yawl:YAdminGUI__fileChooser ;
+    yawl:hasField yawl:YAdminGUI__apiColour ;
+    yawl:hasField yawl:YAdminGUI__ignoreErrors ;
+    yawl:hasField yawl:YAdminGUI__oldFormat ;
+    yawl:hasField yawl:YAdminGUI__frame ;
+    yawl:hasField yawl:YAdminGUI__tabbedGUI ;
+    yawl:hasField yawl:YAdminGUI_logger ;
+    yawl:hasField yawl:YAdminGUI__engineDesign ;
+    yawl:hasField yawl:YAdminGUI__engineManagement ;
+    yawl:hasField yawl:YAdminGUI__engineClient ;
+    yawl:hasField yawl:YAdminGUI__engineClientObserver ;
+    yawl:hasField yawl:YAdminGUI__engineInterop ;
+    yawl:hasField yawl:YAdminGUI_specTestDataDirs ;
+    .
+
+
+# Method: YAdminGUI.loadWorklists
+yawl:YAdminGUI_loadWorklists_1 a yawl:Method ;
+    rdfs:label "loadWorklists" ;
+    yawl:returnType "void" ;
+    yawl:signature "void loadWorklists()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAdminGUI.logError
+yawl:YAdminGUI_logError_2 a yawl:Method ;
+    rdfs:label "logError" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logError(String message, Exception e)" ;
+    rdfs:comment """Display a MsgBox() style dialog to report a runtime error. @param e The exception to be reported""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YAdminGUI.actionPerformed
+yawl:YAdminGUI_actionPerformed_3 a yawl:Method ;
+    rdfs:label "actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void actionPerformed(ActionEvent e)" ;
+    rdfs:comment """Invoked when an action occurs.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAdminGUI.attemptToLoadSpecificationFile
+yawl:YAdminGUI_attemptToLoadSpecificationFile_4 a yawl:Method ;
+    rdfs:label "attemptToLoadSpecificationFile" ;
+    yawl:returnType "void" ;
+    yawl:signature "void attemptToLoadSpecificationFile(File selectedFile)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YAdminGUI.getSpecTestDataDirectory
+yawl:YAdminGUI_getSpecTestDataDirectory_5 a yawl:Method ;
+    rdfs:label "getSpecTestDataDirectory" ;
+    yawl:returnType "File" ;
+    yawl:signature "File getSpecTestDataDirectory(String specID)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YAdminGUI.attemptToCreateWorklist
+yawl:YAdminGUI_attemptToCreateWorklist_6 a yawl:Method ;
+    rdfs:label "attemptToCreateWorklist" ;
+    yawl:returnType "void" ;
+    yawl:signature "void attemptToCreateWorklist(String userName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YAdminGUI.saveXML
+yawl:YAdminGUI_saveXML_7 a yawl:Method ;
+    rdfs:label "saveXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void saveXML(int selectedRow)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YAdminGUI.startCase
+yawl:YAdminGUI_startCase_8 a yawl:Method ;
+    rdfs:label "startCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void startCase(int selectedRow)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YAdminGUI.addCase
+yawl:YAdminGUI_addCase_9 a yawl:Method ;
+    rdfs:label "addCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addCase(YSpecificationID specID, String caseIDStr)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAdminGUI.setUpChooser
+yawl:YAdminGUI_setUpChooser_10 a yawl:Method ;
+    rdfs:label "setUpChooser" ;
+    yawl:returnType "JFileChooser" ;
+    yawl:signature "JFileChooser setUpChooser()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YAdminGUI.removeCase
+yawl:YAdminGUI_removeCase_11 a yawl:Method ;
+    rdfs:label "removeCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeCase(String caseIDStr)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAdminGUI.addWorkItem
+yawl:YAdminGUI_addWorkItem_12 a yawl:Method ;
+    rdfs:label "addWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addWorkItem(YAWLServiceReference yawlService, YWorkItem item)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAdminGUI.removeWorkItem
+yawl:YAdminGUI_removeWorkItem_13 a yawl:Method ;
+    rdfs:label "removeWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeWorkItem(YAWLServiceReference yawlService, YWorkItem item)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAdminGUI.itemStateChanged
+yawl:YAdminGUI_itemStateChanged_14 a yawl:Method ;
+    rdfs:label "itemStateChanged" ;
+    yawl:returnType "void" ;
+    yawl:signature "void itemStateChanged(ItemEvent e)" ;
+    rdfs:comment """Invoked when an item has been selected or deselected by the user. The code written for this method performs the operations that need to occur when an item is selected (or deselected).""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAdminGUI.quickyLoad
+yawl:YAdminGUI_quickyLoad_15 a yawl:Method ;
+    rdfs:label "quickyLoad" ;
+    yawl:returnType "void" ;
+    yawl:signature "void quickyLoad()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YAdminGUI.main
+yawl:YAdminGUI_main_16 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String args)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:YAdminGUI__loadWorkflowCommand a yawl:Field ;
+    rdfs:label "_loadWorkflowCommand" .
+
+yawl:YAdminGUI__unloadWorkflowCommand a yawl:Field ;
+    rdfs:label "_unloadWorkflowCommand" .
+
+yawl:YAdminGUI__exportToXMLCommand a yawl:Field ;
+    rdfs:label "_exportToXMLCommand" .
+
+yawl:YAdminGUI__createWorklistCommand a yawl:Field ;
+    rdfs:label "_createWorklistCommand" .
+
+yawl:YAdminGUI__reannounceEnabledWorkItems a yawl:Field ;
+    rdfs:label "_reannounceEnabledWorkItems" .
+
+yawl:YAdminGUI__startCaseCommand a yawl:Field ;
+    rdfs:label "_startCaseCommand" .
+
+yawl:YAdminGUI__cancelCaseCommand a yawl:Field ;
+    rdfs:label "_cancelCaseCommand" .
+
+yawl:YAdminGUI__inspectStateCommand a yawl:Field ;
+    rdfs:label "_inspectStateCommand" .
+
+yawl:YAdminGUI__suspendCaseCommand a yawl:Field ;
+    rdfs:label "_suspendCaseCommand" .
+
+yawl:YAdminGUI__resumeCaseCommand a yawl:Field ;
+    rdfs:label "_resumeCaseCommand" .
+
+yawl:YAdminGUI__dumpCommand a yawl:Field ;
+    rdfs:label "_dumpCommand" .
+
+yawl:YAdminGUI__loadedSpecificationsTable a yawl:Field ;
+    rdfs:label "_loadedSpecificationsTable" .
+
+yawl:YAdminGUI__loadedSpecificationsTableModel a yawl:Field ;
+    rdfs:label "_loadedSpecificationsTableModel" .
+
+yawl:YAdminGUI__activeWorklistsTable a yawl:Field ;
+    rdfs:label "_activeWorklistsTable" .
+
+yawl:YAdminGUI__activeWorklistsTableModel a yawl:Field ;
+    rdfs:label "_activeWorklistsTableModel" .
+
+yawl:YAdminGUI__quickyLoad a yawl:Field ;
+    rdfs:label "_quickyLoad" .
+
+yawl:YAdminGUI__activeCasesTableModel a yawl:Field ;
+    rdfs:label "_activeCasesTableModel" .
+
+yawl:YAdminGUI__activeCasesTable a yawl:Field ;
+    rdfs:label "_activeCasesTable" .
+
+yawl:YAdminGUI__fileChooser a yawl:Field ;
+    rdfs:label "_fileChooser" .
+
+yawl:YAdminGUI__apiColour a yawl:Field ;
+    rdfs:label "_apiColour" .
+
+yawl:YAdminGUI__ignoreErrors a yawl:Field ;
+    rdfs:label "_ignoreErrors" .
+
+yawl:YAdminGUI__oldFormat a yawl:Field ;
+    rdfs:label "_oldFormat" .
+
+yawl:YAdminGUI__frame a yawl:Field ;
+    rdfs:label "_frame" .
+
+yawl:YAdminGUI__tabbedGUI a yawl:Field ;
+    rdfs:label "_tabbedGUI" .
+
+yawl:YAdminGUI_logger a yawl:Field ;
+    rdfs:label "logger" .
+
+yawl:YAdminGUI__engineDesign a yawl:Field ;
+    rdfs:label "_engineDesign" .
+
+yawl:YAdminGUI__engineManagement a yawl:Field ;
+    rdfs:label "_engineManagement" .
+
+yawl:YAdminGUI__engineClient a yawl:Field ;
+    rdfs:label "_engineClient" .
+
+yawl:YAdminGUI__engineClientObserver a yawl:Field ;
+    rdfs:label "_engineClientObserver" .
+
+yawl:YAdminGUI__engineInterop a yawl:Field ;
+    rdfs:label "_engineInterop" .
+
+yawl:YAdminGUI_specTestDataDirs a yawl:Field ;
+    rdfs:label "specTestDataDirs" .
+
+
+

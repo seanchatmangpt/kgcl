@@ -1,0 +1,198 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.persistence.StoredItem
+yawl:StoredItem a yawl:Class ;
+    rdfs:label "StoredItem" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_persistence ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/persistence/StoredItem.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 1/02/12""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:StoredItem_newInteractionNode_1 ;
+    yawl:hasMethod yawl:StoredItem_newEntityMID_2 ;
+    yawl:hasMethod yawl:StoredItem_getClassID_3 ;
+    yawl:hasMethod yawl:StoredItem_setClassID_4 ;
+    yawl:hasMethod yawl:StoredItem_getProcletID_5 ;
+    yawl:hasMethod yawl:StoredItem_setProcletID_6 ;
+    yawl:hasMethod yawl:StoredItem_getBlockID_7 ;
+    yawl:hasMethod yawl:StoredItem_setBlockID_8 ;
+    yawl:hasMethod yawl:StoredItem_getEmid_9 ;
+    yawl:hasMethod yawl:StoredItem_setEmid_10 ;
+    yawl:hasMethod yawl:StoredItem_isSelected_11 ;
+    yawl:hasMethod yawl:StoredItem_setSelected_12 ;
+    yawl:hasMethod yawl:StoredItem_getItemType_13 ;
+    yawl:hasMethod yawl:StoredItem_setItemType_14 ;
+    yawl:hasMethod yawl:StoredItem_getPkey_15 ;
+    yawl:hasMethod yawl:StoredItem_setPkey_16 ;
+    yawl:hasField yawl:StoredItem_pkey ;
+    yawl:hasField yawl:StoredItem_classID ;
+    yawl:hasField yawl:StoredItem_procletID ;
+    yawl:hasField yawl:StoredItem_blockID ;
+    yawl:hasField yawl:StoredItem_emid ;
+    yawl:hasField yawl:StoredItem_selected ;
+    yawl:hasField yawl:StoredItem_itemType ;
+    .
+
+
+# Method: StoredItem.newInteractionNode
+yawl:StoredItem_newInteractionNode_1 a yawl:Method ;
+    rdfs:label "newInteractionNode" ;
+    yawl:returnType "InteractionNode" ;
+    yawl:signature "InteractionNode newInteractionNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredItem.newEntityMID
+yawl:StoredItem_newEntityMID_2 a yawl:Method ;
+    rdfs:label "newEntityMID" ;
+    yawl:returnType "EntityMID" ;
+    yawl:signature "EntityMID newEntityMID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredItem.getClassID
+yawl:StoredItem_getClassID_3 a yawl:Method ;
+    rdfs:label "getClassID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getClassID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredItem.setClassID
+yawl:StoredItem_setClassID_4 a yawl:Method ;
+    rdfs:label "setClassID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setClassID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredItem.getProcletID
+yawl:StoredItem_getProcletID_5 a yawl:Method ;
+    rdfs:label "getProcletID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getProcletID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredItem.setProcletID
+yawl:StoredItem_setProcletID_6 a yawl:Method ;
+    rdfs:label "setProcletID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setProcletID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredItem.getBlockID
+yawl:StoredItem_getBlockID_7 a yawl:Method ;
+    rdfs:label "getBlockID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBlockID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredItem.setBlockID
+yawl:StoredItem_setBlockID_8 a yawl:Method ;
+    rdfs:label "setBlockID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBlockID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredItem.getEmid
+yawl:StoredItem_getEmid_9 a yawl:Method ;
+    rdfs:label "getEmid" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEmid()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredItem.setEmid
+yawl:StoredItem_setEmid_10 a yawl:Method ;
+    rdfs:label "setEmid" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEmid(String emid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredItem.isSelected
+yawl:StoredItem_isSelected_11 a yawl:Method ;
+    rdfs:label "isSelected" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isSelected()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredItem.setSelected
+yawl:StoredItem_setSelected_12 a yawl:Method ;
+    rdfs:label "setSelected" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSelected(boolean selected)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredItem.getItemType
+yawl:StoredItem_getItemType_13 a yawl:Method ;
+    rdfs:label "getItemType" ;
+    yawl:returnType "Item" ;
+    yawl:signature "Item getItemType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredItem.setItemType
+yawl:StoredItem_setItemType_14 a yawl:Method ;
+    rdfs:label "setItemType" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setItemType(Item itemType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredItem.getPkey
+yawl:StoredItem_getPkey_15 a yawl:Method ;
+    rdfs:label "getPkey" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getPkey()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredItem.setPkey
+yawl:StoredItem_setPkey_16 a yawl:Method ;
+    rdfs:label "setPkey" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPkey(long pkey)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:StoredItem_pkey a yawl:Field ;
+    rdfs:label "pkey" .
+
+yawl:StoredItem_classID a yawl:Field ;
+    rdfs:label "classID" .
+
+yawl:StoredItem_procletID a yawl:Field ;
+    rdfs:label "procletID" .
+
+yawl:StoredItem_blockID a yawl:Field ;
+    rdfs:label "blockID" .
+
+yawl:StoredItem_emid a yawl:Field ;
+    rdfs:label "emid" .
+
+yawl:StoredItem_selected a yawl:Field ;
+    rdfs:label "selected" .
+
+yawl:StoredItem_itemType a yawl:Field ;
+    rdfs:label "itemType" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_procletService_connect a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.procletService.connect" .
+
+

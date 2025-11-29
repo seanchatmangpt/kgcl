@@ -1,0 +1,57 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.datastore.eventlog.TaskSubTally
+yawl:TaskSubTally a yawl:Class ;
+    rdfs:label "TaskSubTally" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_datastore_eventlog ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/datastore/eventlog/TaskStatistics.java"^^xsd:string ;
+    yawl:hasMethod yawl:TaskSubTally_add_1 ;
+    yawl:hasMethod yawl:TaskSubTally_getNode_2 ;
+    yawl:hasField yawl:TaskSubTally_max ;
+    yawl:hasField yawl:TaskSubTally_min ;
+    yawl:hasField yawl:TaskSubTally_total ;
+    yawl:hasField yawl:TaskSubTally_count ;
+    yawl:hasField yawl:TaskSubTally_counter ;
+    .
+
+
+# Method: TaskSubTally.add
+yawl:TaskSubTally_add_1 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(long period)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSubTally.getNode
+yawl:TaskSubTally_getNode_2 a yawl:Method ;
+    rdfs:label "getNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:TaskSubTally_max a yawl:Field ;
+    rdfs:label "max" .
+
+yawl:TaskSubTally_min a yawl:Field ;
+    rdfs:label "min" .
+
+yawl:TaskSubTally_total a yawl:Field ;
+    rdfs:label "total" .
+
+yawl:TaskSubTally_count a yawl:Field ;
+    rdfs:label "count" .
+
+yawl:TaskSubTally_counter a yawl:Field ;
+    rdfs:label "counter" .
+
+
+

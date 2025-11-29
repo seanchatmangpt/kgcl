@@ -1,0 +1,309 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.elements.YMultiInstanceAttributes
+yawl:YMultiInstanceAttributes a yawl:Class ;
+    rdfs:label "YMultiInstanceAttributes" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_elements ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/elements/YMultiInstanceAttributes.java"^^xsd:string ;
+    rdfs:comment """A collection of attributes that apply to multiple instance tasks.  Used as a property of YTask. Date: 15/04/2003 Time: 12:06:19""" ;
+    yawl:implements yawl:Cloneable ;
+    yawl:implements yawl:YVerifiable ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "final" ;
+    yawl:hasMethod yawl:YMultiInstanceAttributes_getTask_1 ;
+    yawl:hasMethod yawl:YMultiInstanceAttributes_setTask_2 ;
+    yawl:hasMethod yawl:YMultiInstanceAttributes_getMinInstances_3 ;
+    yawl:hasMethod yawl:YMultiInstanceAttributes_getMinInstancesQuery_4 ;
+    yawl:hasMethod yawl:YMultiInstanceAttributes_getMaxInstances_5 ;
+    yawl:hasMethod yawl:YMultiInstanceAttributes_getMaxInstancesQuery_6 ;
+    yawl:hasMethod yawl:YMultiInstanceAttributes_getThreshold_7 ;
+    yawl:hasMethod yawl:YMultiInstanceAttributes_getThresholdQuery_8 ;
+    yawl:hasMethod yawl:YMultiInstanceAttributes_getCreationMode_9 ;
+    yawl:hasMethod yawl:YMultiInstanceAttributes_isDynamicCreationMode_10 ;
+    yawl:hasMethod yawl:YMultiInstanceAttributes_setProperties_11 ;
+    yawl:hasMethod yawl:YMultiInstanceAttributes_verify_12 ;
+    yawl:hasMethod yawl:YMultiInstanceAttributes_setUniqueInputMISplittingQuery_13 ;
+    yawl:hasMethod yawl:YMultiInstanceAttributes_getMISplittingQuery_14 ;
+    yawl:hasMethod yawl:YMultiInstanceAttributes_getMIFormalInputParam_15 ;
+    yawl:hasMethod yawl:YMultiInstanceAttributes_setMIFormalInputParam_16 ;
+    yawl:hasMethod yawl:YMultiInstanceAttributes_getMIOutputAssignmentVar_17 ;
+    yawl:hasMethod yawl:YMultiInstanceAttributes_getMIFormalOutputQuery_18 ;
+    yawl:hasMethod yawl:YMultiInstanceAttributes_setMIFormalOutputQuery_19 ;
+    yawl:hasMethod yawl:YMultiInstanceAttributes_getMIJoiningQuery_20 ;
+    yawl:hasMethod yawl:YMultiInstanceAttributes_setUniqueOutputMIJoiningQuery_21 ;
+    yawl:hasMethod yawl:YMultiInstanceAttributes_toXML_22 ;
+    yawl:hasMethod yawl:YMultiInstanceAttributes_isMultiInstance_23 ;
+    yawl:hasMethod yawl:YMultiInstanceAttributes_clone_24 ;
+    yawl:hasMethod yawl:YMultiInstanceAttributes_getQueryValue_25 ;
+    yawl:hasField yawl:YMultiInstanceAttributes_CREATION_MODE_DYNAMIC ;
+    yawl:hasField yawl:YMultiInstanceAttributes_CREATION_MODE_STATIC ;
+    yawl:hasField yawl:YMultiInstanceAttributes__log ;
+    yawl:hasField yawl:YMultiInstanceAttributes__task ;
+    yawl:hasField yawl:YMultiInstanceAttributes__minInstances ;
+    yawl:hasField yawl:YMultiInstanceAttributes__maxInstances ;
+    yawl:hasField yawl:YMultiInstanceAttributes__threshold ;
+    yawl:hasField yawl:YMultiInstanceAttributes__minInstancesQuery ;
+    yawl:hasField yawl:YMultiInstanceAttributes__maxInstancesQuery ;
+    yawl:hasField yawl:YMultiInstanceAttributes__thresholdQuery ;
+    yawl:hasField yawl:YMultiInstanceAttributes__creationMode ;
+    yawl:hasField yawl:YMultiInstanceAttributes__inputVarName ;
+    yawl:hasField yawl:YMultiInstanceAttributes__inputSplittingQuery ;
+    yawl:hasField yawl:YMultiInstanceAttributes__remoteOutputQuery ;
+    yawl:hasField yawl:YMultiInstanceAttributes__outputProcessingQuery ;
+    .
+
+
+# Method: YMultiInstanceAttributes.getTask
+yawl:YMultiInstanceAttributes_getTask_1 a yawl:Method ;
+    rdfs:label "getTask" ;
+    yawl:returnType "YTask" ;
+    yawl:signature "YTask getTask()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YMultiInstanceAttributes.setTask
+yawl:YMultiInstanceAttributes_setTask_2 a yawl:Method ;
+    rdfs:label "setTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTask(YTask task)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YMultiInstanceAttributes.getMinInstances
+yawl:YMultiInstanceAttributes_getMinInstances_3 a yawl:Method ;
+    rdfs:label "getMinInstances" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getMinInstances()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMultiInstanceAttributes.getMinInstancesQuery
+yawl:YMultiInstanceAttributes_getMinInstancesQuery_4 a yawl:Method ;
+    rdfs:label "getMinInstancesQuery" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMinInstancesQuery()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMultiInstanceAttributes.getMaxInstances
+yawl:YMultiInstanceAttributes_getMaxInstances_5 a yawl:Method ;
+    rdfs:label "getMaxInstances" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getMaxInstances()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMultiInstanceAttributes.getMaxInstancesQuery
+yawl:YMultiInstanceAttributes_getMaxInstancesQuery_6 a yawl:Method ;
+    rdfs:label "getMaxInstancesQuery" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMaxInstancesQuery()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMultiInstanceAttributes.getThreshold
+yawl:YMultiInstanceAttributes_getThreshold_7 a yawl:Method ;
+    rdfs:label "getThreshold" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getThreshold()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMultiInstanceAttributes.getThresholdQuery
+yawl:YMultiInstanceAttributes_getThresholdQuery_8 a yawl:Method ;
+    rdfs:label "getThresholdQuery" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getThresholdQuery()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMultiInstanceAttributes.getCreationMode
+yawl:YMultiInstanceAttributes_getCreationMode_9 a yawl:Method ;
+    rdfs:label "getCreationMode" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCreationMode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMultiInstanceAttributes.isDynamicCreationMode
+yawl:YMultiInstanceAttributes_isDynamicCreationMode_10 a yawl:Method ;
+    rdfs:label "isDynamicCreationMode" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isDynamicCreationMode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMultiInstanceAttributes.setProperties
+yawl:YMultiInstanceAttributes_setProperties_11 a yawl:Method ;
+    rdfs:label "setProperties" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setProperties(String minInstancesQuery, String maxInstancesQuery, String thresholdQuery, String creationMode)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMultiInstanceAttributes.verify
+yawl:YMultiInstanceAttributes_verify_12 a yawl:Method ;
+    rdfs:label "verify" ;
+    yawl:returnType "void" ;
+    yawl:signature "void verify(YVerificationHandler handler)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMultiInstanceAttributes.setUniqueInputMISplittingQuery
+yawl:YMultiInstanceAttributes_setUniqueInputMISplittingQuery_13 a yawl:Method ;
+    rdfs:label "setUniqueInputMISplittingQuery" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUniqueInputMISplittingQuery(String inputQuery)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMultiInstanceAttributes.getMISplittingQuery
+yawl:YMultiInstanceAttributes_getMISplittingQuery_14 a yawl:Method ;
+    rdfs:label "getMISplittingQuery" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMISplittingQuery()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMultiInstanceAttributes.getMIFormalInputParam
+yawl:YMultiInstanceAttributes_getMIFormalInputParam_15 a yawl:Method ;
+    rdfs:label "getMIFormalInputParam" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMIFormalInputParam()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMultiInstanceAttributes.setMIFormalInputParam
+yawl:YMultiInstanceAttributes_setMIFormalInputParam_16 a yawl:Method ;
+    rdfs:label "setMIFormalInputParam" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMIFormalInputParam(String variableName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMultiInstanceAttributes.getMIOutputAssignmentVar
+yawl:YMultiInstanceAttributes_getMIOutputAssignmentVar_17 a yawl:Method ;
+    rdfs:label "getMIOutputAssignmentVar" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMIOutputAssignmentVar()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMultiInstanceAttributes.getMIFormalOutputQuery
+yawl:YMultiInstanceAttributes_getMIFormalOutputQuery_18 a yawl:Method ;
+    rdfs:label "getMIFormalOutputQuery" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMIFormalOutputQuery()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMultiInstanceAttributes.setMIFormalOutputQuery
+yawl:YMultiInstanceAttributes_setMIFormalOutputQuery_19 a yawl:Method ;
+    rdfs:label "setMIFormalOutputQuery" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMIFormalOutputQuery(String remoteOutputQuery)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMultiInstanceAttributes.getMIJoiningQuery
+yawl:YMultiInstanceAttributes_getMIJoiningQuery_20 a yawl:Method ;
+    rdfs:label "getMIJoiningQuery" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMIJoiningQuery()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMultiInstanceAttributes.setUniqueOutputMIJoiningQuery
+yawl:YMultiInstanceAttributes_setUniqueOutputMIJoiningQuery_21 a yawl:Method ;
+    rdfs:label "setUniqueOutputMIJoiningQuery" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUniqueOutputMIJoiningQuery(String outputProcessingQuery)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMultiInstanceAttributes.toXML
+yawl:YMultiInstanceAttributes_toXML_22 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMultiInstanceAttributes.isMultiInstance
+yawl:YMultiInstanceAttributes_isMultiInstance_23 a yawl:Method ;
+    rdfs:label "isMultiInstance" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isMultiInstance()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMultiInstanceAttributes.clone
+yawl:YMultiInstanceAttributes_clone_24 a yawl:Method ;
+    rdfs:label "clone" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object clone()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YMultiInstanceAttributes.getQueryValue
+yawl:YMultiInstanceAttributes_getQueryValue_25 a yawl:Method ;
+    rdfs:label "getQueryValue" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getQueryValue(String query)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YMultiInstanceAttributes_CREATION_MODE_DYNAMIC a yawl:Field ;
+    rdfs:label "CREATION_MODE_DYNAMIC" .
+
+yawl:YMultiInstanceAttributes_CREATION_MODE_STATIC a yawl:Field ;
+    rdfs:label "CREATION_MODE_STATIC" .
+
+yawl:YMultiInstanceAttributes__log a yawl:Field ;
+    rdfs:label "_log" .
+
+yawl:YMultiInstanceAttributes__task a yawl:Field ;
+    rdfs:label "_task" .
+
+yawl:YMultiInstanceAttributes__minInstances a yawl:Field ;
+    rdfs:label "_minInstances" .
+
+yawl:YMultiInstanceAttributes__maxInstances a yawl:Field ;
+    rdfs:label "_maxInstances" .
+
+yawl:YMultiInstanceAttributes__threshold a yawl:Field ;
+    rdfs:label "_threshold" .
+
+yawl:YMultiInstanceAttributes__minInstancesQuery a yawl:Field ;
+    rdfs:label "_minInstancesQuery" .
+
+yawl:YMultiInstanceAttributes__maxInstancesQuery a yawl:Field ;
+    rdfs:label "_maxInstancesQuery" .
+
+yawl:YMultiInstanceAttributes__thresholdQuery a yawl:Field ;
+    rdfs:label "_thresholdQuery" .
+
+yawl:YMultiInstanceAttributes__creationMode a yawl:Field ;
+    rdfs:label "_creationMode" .
+
+yawl:YMultiInstanceAttributes__inputVarName a yawl:Field ;
+    rdfs:label "_inputVarName" .
+
+yawl:YMultiInstanceAttributes__inputSplittingQuery a yawl:Field ;
+    rdfs:label "_inputSplittingQuery" .
+
+yawl:YMultiInstanceAttributes__remoteOutputQuery a yawl:Field ;
+    rdfs:label "_remoteOutputQuery" .
+
+yawl:YMultiInstanceAttributes__outputProcessingQuery a yawl:Field ;
+    rdfs:label "_outputProcessingQuery" .
+
+
+

@@ -1,0 +1,854 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.rsInterface.ResourceLogGatewayClient
+yawl:ResourceLogGatewayClient a yawl:Class ;
+    rdfs:label "ResourceLogGatewayClient" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_rsInterface ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/rsInterface/ResourceLogGatewayClient.java"^^xsd:string ;
+    rdfs:comment """An API to be used by clients that want to retrieve data from the resource service process logs. @author Michael Adams 03/02/2010""" ;
+    yawl:extends yawl:Interface_Client ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_performGet_1 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_performGet_2 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_performGet_3 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_addTimeRange_4 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_specIDsToXML_5 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getAllResourceEvents_6 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getCaseStartedBy_7 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getCaseEvents_8 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getCaseEvents_9 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getCaseEvents_10 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getCaseEvent_11 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getWorkItemEvents_12 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getWorkItemEvents_13 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getWorkItemEvents_14 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getParticipantHistory_15 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getParticipantHistory_16 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getParticipantHistory_17 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getResourceHistory_18 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getResourceHistory_19 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getResourceHistory_20 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getParticipantHistoryForEvent_21 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getParticipantHistoryForEvent_22 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getParticipantHistoryForEvent_23 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getResourceHistoryForEvent_24 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getResourceHistoryForEvent_25 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getResourceHistoryForEvent_26 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getWorkItemOffered_27 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getWorkItemAllocated_28 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getWorkItemStarted_29 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getCaseHistoryInvolvingParticipant_30 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getCaseHistoryInvolvingParticipant_31 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getCaseHistoryInvolvingParticipant_32 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getSpecificationEvents_33 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getSpecificationEvents_34 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getSpecificationEvents_35 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getSpecificationEvents_36 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getSpecificationEvents_37 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getSpecificationEvents_38 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getSpecificationEvents_39 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getSpecificationEvents_40 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getSpecificationEvents_41 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getSpecificationEventsByURI_42 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getSpecificationEventsByURI_43 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getSpecificationEventsByURI_44 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getSpecificationEventsByID_45 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getSpecificationEventsByID_46 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getSpecificationEventsByID_47 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getTaskStatistics_48 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getTaskStatistics_49 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getTaskStatistics_50 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getTaskStatistics_51 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getTaskStatistics_52 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getTaskStatistics_53 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getTaskStatisticsForCase_54 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getTaskStatisticsForCase_55 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getTaskStatisticsForCase_56 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecification_57 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecification_58 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecification_59 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecification_60 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecification_61 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecification_62 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecification_63 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecification_64 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecification_65 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecificationURI_66 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecificationURI_67 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecificationURI_68 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecificationUID_69 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecificationUID_70 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecificationUID_71 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getSpecificationStatistics_72 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getSpecificationStatistics_73 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getSpecificationStatistics_74 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getSpecificationStatistics_75 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getSpecificationStatistics_76 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getSpecificationStatistics_77 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getSpecificationIdentifiers_78 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getSpecificationXESLog_79 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getMergedXESLog_80 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_getMergedXESLog_81 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_connect_82 ;
+    yawl:hasMethod yawl:ResourceLogGatewayClient_checkConnection_83 ;
+    yawl:hasField yawl:ResourceLogGatewayClient__logURI ;
+    .
+
+
+# Method: ResourceLogGatewayClient.performGet
+yawl:ResourceLogGatewayClient_performGet_1 a yawl:Method ;
+    rdfs:label "performGet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String performGet(String action, String pName, String pValue, String handle)" ;
+    rdfs:comment """a wrapper for the executeGet method - accepts a String value @param action the name of the gateway method to call @param pName the name of the parameter passed @param pValue the parameter's value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceLogGatewayClient.performGet
+yawl:ResourceLogGatewayClient_performGet_2 a yawl:Method ;
+    rdfs:label "performGet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String performGet(String action, String pName, long pValue, String handle)" ;
+    rdfs:comment """a wrapper for the executeGet method - accepts a long value @param action the name of the gateway method to call @param pName the name of the parameter passed @param pValue the parameter's value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceLogGatewayClient.performGet
+yawl:ResourceLogGatewayClient_performGet_3 a yawl:Method ;
+    rdfs:label "performGet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String performGet(String action, String id, long from, long to, String handle)" ;
+    rdfs:comment """A wrapper for the executeGet method - accepts an id value and a time range @param action the name of the gateway method to call @param id the identifier @param from the lower time range value @param to the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceLogGatewayClient.addTimeRange
+yawl:ResourceLogGatewayClient_addTimeRange_4 a yawl:Method ;
+    rdfs:label "addTimeRange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addTimeRange(Map params, long from, long to)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceLogGatewayClient.specIDsToXML
+yawl:ResourceLogGatewayClient_specIDsToXML_5 a yawl:Method ;
+    rdfs:label "specIDsToXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String specIDsToXML(Set specIDs)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceLogGatewayClient.getAllResourceEvents
+yawl:ResourceLogGatewayClient_getAllResourceEvents_6 a yawl:Method ;
+    rdfs:label "getAllResourceEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAllResourceEvents(String handle)" ;
+    rdfs:comment """Gets an xml list of all the resource events logged @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getCaseStartedBy
+yawl:ResourceLogGatewayClient_getCaseStartedBy_7 a yawl:Method ;
+    rdfs:label "getCaseStartedBy" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseStartedBy(String caseID, String handle)" ;
+    rdfs:comment """Gets an summary xml list of all the specifications logged @param caseID the case id @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getCaseEvents
+yawl:ResourceLogGatewayClient_getCaseEvents_8 a yawl:Method ;
+    rdfs:label "getCaseEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseEvents(String caseID, String handle)" ;
+    rdfs:comment """Gets an summary xml list of all the logged events for a case @param caseID the case id @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getCaseEvents
+yawl:ResourceLogGatewayClient_getCaseEvents_9 a yawl:Method ;
+    rdfs:label "getCaseEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseEvents(String caseID, long from, long to, String handle)" ;
+    rdfs:comment """Gets an summary xml list of all the logged events for a case within the time range specified @param caseID the case id @param from the lower time range value @param to the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getCaseEvents
+yawl:ResourceLogGatewayClient_getCaseEvents_10 a yawl:Method ;
+    rdfs:label "getCaseEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseEvents(String caseID, Date dateFrom, Date dateTo, String handle)" ;
+    rdfs:comment """Gets an summary xml list of all the logged events for a case within the time range specified @param caseID the case id @param dateFrom the lower time range value @param dateTo the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getCaseEvent
+yawl:ResourceLogGatewayClient_getCaseEvent_11 a yawl:Method ;
+    rdfs:label "getCaseEvent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseEvent(String caseID, boolean launch, String handle)" ;
+    rdfs:comment """Gets an xml record of the logged case launch or cancel event @param caseID the case id @param launch true for the launch_case event, false for the cancel_case event @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getWorkItemEvents
+yawl:ResourceLogGatewayClient_getWorkItemEvents_12 a yawl:Method ;
+    rdfs:label "getWorkItemEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItemEvents(String itemID, boolean fullName, String handle)" ;
+    rdfs:comment """Gets an summary xml list of all logged events for a workitem @param itemID the workitem's id string @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getWorkItemEvents
+yawl:ResourceLogGatewayClient_getWorkItemEvents_13 a yawl:Method ;
+    rdfs:label "getWorkItemEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItemEvents(String itemID, boolean fullName, long from, long to, String handle)" ;
+    rdfs:comment """Gets an summary xml list of all logged events for a workitem within the time range specified @param itemID the workitem's id string @param from the lower time range value @param to the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getWorkItemEvents
+yawl:ResourceLogGatewayClient_getWorkItemEvents_14 a yawl:Method ;
+    rdfs:label "getWorkItemEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItemEvents(String itemID, boolean fullName, Date dateFrom, Date dateTo, String handle)" ;
+    rdfs:comment """Gets an summary xml list of all logged events for a workitem within the time range specified @param itemID the workitem's id string @param dateFrom the lower time range value @param dateTo the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getParticipantHistory
+yawl:ResourceLogGatewayClient_getParticipantHistory_15 a yawl:Method ;
+    rdfs:label "getParticipantHistory" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParticipantHistory(String pid, String handle)" ;
+    rdfs:comment """Gets an xml list of all work item events involving the specified participant @param pid the participant identifier @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getParticipantHistory
+yawl:ResourceLogGatewayClient_getParticipantHistory_16 a yawl:Method ;
+    rdfs:label "getParticipantHistory" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParticipantHistory(String pid, long from, long to, String handle)" ;
+    rdfs:comment """Gets an xml list of all work item events involving the specified participant within the time range specified @param pid the participant identifier @param from the lower time range value @param to the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getParticipantHistory
+yawl:ResourceLogGatewayClient_getParticipantHistory_17 a yawl:Method ;
+    rdfs:label "getParticipantHistory" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParticipantHistory(String pid, Date dateFrom, Date dateTo, String handle)" ;
+    rdfs:comment """Gets an xml list of all work item events involving the specified participant within the time range specified @param pid the participant identifier @param dateFrom the lower time range value @param dateTo the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getResourceHistory
+yawl:ResourceLogGatewayClient_getResourceHistory_18 a yawl:Method ;
+    rdfs:label "getResourceHistory" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourceHistory(String id, String handle)" ;
+    rdfs:comment """Gets an xml list of all work item events involving the specified resource (can be a Participant or a NonHumanResource) @param id the resource identifier @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getResourceHistory
+yawl:ResourceLogGatewayClient_getResourceHistory_19 a yawl:Method ;
+    rdfs:label "getResourceHistory" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourceHistory(String id, long from, long to, String handle)" ;
+    rdfs:comment """Gets an xml list of all work item events involving the specified resource within the time range specified (can be a Participant or a NonHumanResource) @param id the resource identifier @param from the lower time range value @param to the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getResourceHistory
+yawl:ResourceLogGatewayClient_getResourceHistory_20 a yawl:Method ;
+    rdfs:label "getResourceHistory" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourceHistory(String id, Date dateFrom, Date dateTo, String handle)" ;
+    rdfs:comment """Gets an xml list of all work item events involving the specified resource within the time range specified (can be a Participant or a NonHumanResource) @param id the resource identifier @param dateFrom the lower time range value @param dateTo the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getParticipantHistoryForEvent
+yawl:ResourceLogGatewayClient_getParticipantHistoryForEvent_21 a yawl:Method ;
+    rdfs:label "getParticipantHistoryForEvent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParticipantHistoryForEvent(String pid, String eventName, String handle)" ;
+    rdfs:comment """Gets an xml list of all instances of the specified event involving the specified participant @param pid the participant identifier @param eventName a String matching one of the EventLogger events (offer, allocate, start, reallocate and so on) @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getParticipantHistoryForEvent
+yawl:ResourceLogGatewayClient_getParticipantHistoryForEvent_22 a yawl:Method ;
+    rdfs:label "getParticipantHistoryForEvent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParticipantHistoryForEvent(String pid, String eventName, long from, long to, String handle)" ;
+    rdfs:comment """Gets an xml list of all instances of the specified event involving the specified participant within the time range specified @param pid the participant identifier @param eventName a String matching one of the EventLogger events (offer, allocate, start, reallocate and so on) @param from the lower time range value @param to the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a prob""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getParticipantHistoryForEvent
+yawl:ResourceLogGatewayClient_getParticipantHistoryForEvent_23 a yawl:Method ;
+    rdfs:label "getParticipantHistoryForEvent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParticipantHistoryForEvent(String pid, String eventName, Date dateFrom, Date dateTo, String handle)" ;
+    rdfs:comment """Gets an xml list of all instances of the specified event involving the specified participant within the time range specified @param pid the participant identifier @param eventName a String matching one of the EventLogger events (offer, allocate, start, reallocate and so on) @param dateFrom the lower time range value @param dateTo the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there'""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getResourceHistoryForEvent
+yawl:ResourceLogGatewayClient_getResourceHistoryForEvent_24 a yawl:Method ;
+    rdfs:label "getResourceHistoryForEvent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourceHistoryForEvent(String id, String eventName, String handle)" ;
+    rdfs:comment """Gets an xml list of all instances of the specified event involving the specified resource (can be a Participant or a NonHumanResource) @param id the resource identifier @param eventName a String matching one of the EventLogger events (offer, allocate, start, reallocate and so on) @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getResourceHistoryForEvent
+yawl:ResourceLogGatewayClient_getResourceHistoryForEvent_25 a yawl:Method ;
+    rdfs:label "getResourceHistoryForEvent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourceHistoryForEvent(String id, String eventName, long from, long to, String handle)" ;
+    rdfs:comment """Gets an xml list of all instances of the specified event involving the specified resource within the time range specified (can be a Participant or a NonHumanResource) @param id the resource identifier @param eventName a String matching one of the EventLogger events (offer, allocate, start, reallocate and so on) @param from the lower time range value @param to the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getResourceHistoryForEvent
+yawl:ResourceLogGatewayClient_getResourceHistoryForEvent_26 a yawl:Method ;
+    rdfs:label "getResourceHistoryForEvent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourceHistoryForEvent(String id, String eventName, Date dateFrom, Date dateTo, String handle)" ;
+    rdfs:comment """Gets an xml list of all instances of the specified event involving the specified participant within the time range specified @param id the participant identifier @param eventName a String matching one of the EventLogger events (offer, allocate, start, reallocate and so on) @param dateFrom the lower time range value @param dateTo the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getWorkItemOffered
+yawl:ResourceLogGatewayClient_getWorkItemOffered_27 a yawl:Method ;
+    rdfs:label "getWorkItemOffered" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItemOffered(String itemID, String handle)" ;
+    rdfs:comment """Gets an xml list of all 'offer' events for the specified work item @param itemID the work item identifier @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getWorkItemAllocated
+yawl:ResourceLogGatewayClient_getWorkItemAllocated_28 a yawl:Method ;
+    rdfs:label "getWorkItemAllocated" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItemAllocated(String itemID, String handle)" ;
+    rdfs:comment """Gets an xml string of the 'allocate' event for the specified work item @param itemID the work item identifier @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getWorkItemStarted
+yawl:ResourceLogGatewayClient_getWorkItemStarted_29 a yawl:Method ;
+    rdfs:label "getWorkItemStarted" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItemStarted(String itemID, String handle)" ;
+    rdfs:comment """Gets an xml string of the 'start' event for the specified work item @param itemID the work item identifier @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getCaseHistoryInvolvingParticipant
+yawl:ResourceLogGatewayClient_getCaseHistoryInvolvingParticipant_30 a yawl:Method ;
+    rdfs:label "getCaseHistoryInvolvingParticipant" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseHistoryInvolvingParticipant(String pid, String handle)" ;
+    rdfs:comment """Gets an xml list of all case events for all cases in which the specified participant had some involvement @param pid the identifier of the participant @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getCaseHistoryInvolvingParticipant
+yawl:ResourceLogGatewayClient_getCaseHistoryInvolvingParticipant_31 a yawl:Method ;
+    rdfs:label "getCaseHistoryInvolvingParticipant" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseHistoryInvolvingParticipant(String pid, long from, long to, String handle)" ;
+    rdfs:comment """Gets an xml list of all case events for all cases in which the specified participant had some involvement within the time range specified @param pid the identifier of the participant @param from the lower time range value @param to the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getCaseHistoryInvolvingParticipant
+yawl:ResourceLogGatewayClient_getCaseHistoryInvolvingParticipant_32 a yawl:Method ;
+    rdfs:label "getCaseHistoryInvolvingParticipant" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseHistoryInvolvingParticipant(String pid, Date dateFrom, Date dateTo, String handle)" ;
+    rdfs:comment """Gets an xml list of all case events for all cases in which the specified participant had some involvement within the time range specified @param pid the identifier of the participant @param dateFrom the lower time range value @param dateTo the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getSpecificationEvents
+yawl:ResourceLogGatewayClient_getSpecificationEvents_33 a yawl:Method ;
+    rdfs:label "getSpecificationEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationEvents(String identifier, String version, String uri, String handle)" ;
+    rdfs:comment """Gets an xml list of all case events for all case instances of a specification @param identifier the unique specification identifier @param version the specification version @param uri the specification uri @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getSpecificationEvents
+yawl:ResourceLogGatewayClient_getSpecificationEvents_34 a yawl:Method ;
+    rdfs:label "getSpecificationEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationEvents(String identifier, String version, String uri, long from, long to, String handle)" ;
+    rdfs:comment """Gets an xml list of all case events for all case instances of a specification @param identifier the unique specification identifier @param version the specification version @param uri the specification uri @param from the lower time range value @param to the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getSpecificationEvents
+yawl:ResourceLogGatewayClient_getSpecificationEvents_35 a yawl:Method ;
+    rdfs:label "getSpecificationEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationEvents(String identifier, String version, String uri, Date dateFrom, Date dateTo, String handle)" ;
+    rdfs:comment """Gets an xml list of all case events for all case instances of a specification @param identifier the unique specification identifier @param version the specification version @param uri the specification uri @param dateFrom the lower time range value @param dateTo the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getSpecificationEvents
+yawl:ResourceLogGatewayClient_getSpecificationEvents_36 a yawl:Method ;
+    rdfs:label "getSpecificationEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationEvents(YSpecificationID specID, String handle)" ;
+    rdfs:comment """Gets an xml list of all case events for all case instances of a specification @param specID the specification identifier @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getSpecificationEvents
+yawl:ResourceLogGatewayClient_getSpecificationEvents_37 a yawl:Method ;
+    rdfs:label "getSpecificationEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationEvents(YSpecificationID specID, long from, long to, String handle)" ;
+    rdfs:comment """Gets an xml list of all case events for all case instances of a specification @param specID the specification identifier @param from the lower time range value @param to the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getSpecificationEvents
+yawl:ResourceLogGatewayClient_getSpecificationEvents_38 a yawl:Method ;
+    rdfs:label "getSpecificationEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationEvents(YSpecificationID specID, Date dateFrom, Date dateTo, String handle)" ;
+    rdfs:comment """Gets an xml list of all case events for all case instances of a specification @param specID the specification identifier @param dateFrom the lower time range value @param dateTo the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getSpecificationEvents
+yawl:ResourceLogGatewayClient_getSpecificationEvents_39 a yawl:Method ;
+    rdfs:label "getSpecificationEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationEvents(Set specIDs, String handle)" ;
+    rdfs:comment """Gets an xml list of all case events for all case instances of all the specifications in a Set @param specIDs the set of specification identifiers @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getSpecificationEvents
+yawl:ResourceLogGatewayClient_getSpecificationEvents_40 a yawl:Method ;
+    rdfs:label "getSpecificationEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationEvents(Set specIDs, long from, long to, String handle)" ;
+    rdfs:comment """Gets an xml list of all case events for all case instances of all the specifications in a Set @param specIDs the set of specification identifiers @param from the lower time range value @param to the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getSpecificationEvents
+yawl:ResourceLogGatewayClient_getSpecificationEvents_41 a yawl:Method ;
+    rdfs:label "getSpecificationEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationEvents(Set specIDs, Date dateFrom, Date dateTo, String handle)" ;
+    rdfs:comment """Gets an xml list of all case events for all case instances of all the specifications in a Set @param specIDs the set of specification identifiers @param dateFrom the lower time range value @param dateTo the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getSpecificationEventsByURI
+yawl:ResourceLogGatewayClient_getSpecificationEventsByURI_42 a yawl:Method ;
+    rdfs:label "getSpecificationEventsByURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationEventsByURI(String uri, String handle)" ;
+    rdfs:comment """Gets an xml list of all case events for all case instances of all the specifications with a matching URI (name) @param uri the uri or name of the specification @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getSpecificationEventsByURI
+yawl:ResourceLogGatewayClient_getSpecificationEventsByURI_43 a yawl:Method ;
+    rdfs:label "getSpecificationEventsByURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationEventsByURI(String uri, long from, long to, String handle)" ;
+    rdfs:comment """Gets an xml list of all case events for all case instances of all the specifications with a matching URI (name) @param uri the uri or name of the specification @param from the lower time range value @param to the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getSpecificationEventsByURI
+yawl:ResourceLogGatewayClient_getSpecificationEventsByURI_44 a yawl:Method ;
+    rdfs:label "getSpecificationEventsByURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationEventsByURI(String uri, Date dateFrom, Date dateTo, String handle)" ;
+    rdfs:comment """Gets an xml list of all case events for all case instances of all the specifications with a matching URI (name) @param uri the uri or name of the specification @param dateFrom the lower time range value @param dateTo the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getSpecificationEventsByID
+yawl:ResourceLogGatewayClient_getSpecificationEventsByID_45 a yawl:Method ;
+    rdfs:label "getSpecificationEventsByID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationEventsByID(String id, String handle)" ;
+    rdfs:comment """Gets an xml list of all case events for all case instances of all the specifications with a matching identifier @param id the unique identifier of the specification @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getSpecificationEventsByID
+yawl:ResourceLogGatewayClient_getSpecificationEventsByID_46 a yawl:Method ;
+    rdfs:label "getSpecificationEventsByID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationEventsByID(String id, long from, long to, String handle)" ;
+    rdfs:comment """Gets an xml list of all case events for all case instances of all the specifications with a matching identifier @param id the unique identifier of the specification @param from the lower time range value @param to the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getSpecificationEventsByID
+yawl:ResourceLogGatewayClient_getSpecificationEventsByID_47 a yawl:Method ;
+    rdfs:label "getSpecificationEventsByID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationEventsByID(String id, Date dateFrom, Date dateTo, String handle)" ;
+    rdfs:comment """Gets an xml list of all case events for all case instances of all the specifications with a matching identifier @param id the unique identifier of the specification @param dateFrom the lower time range value @param dateTo the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getTaskStatistics
+yawl:ResourceLogGatewayClient_getTaskStatistics_48 a yawl:Method ;
+    rdfs:label "getTaskStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatistics(YSpecificationID specID, String taskName, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all instances of a specified task @param specID the specification identifier that contains the task @param taskName the name of the task @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getTaskStatistics
+yawl:ResourceLogGatewayClient_getTaskStatistics_49 a yawl:Method ;
+    rdfs:label "getTaskStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatistics(YSpecificationID specID, String taskName, long from, long to, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all instances of a specified task @param specID the specification identifier that contains the task @param taskName the name of the task @param from the lower time range value @param to the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getTaskStatistics
+yawl:ResourceLogGatewayClient_getTaskStatistics_50 a yawl:Method ;
+    rdfs:label "getTaskStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatistics(YSpecificationID specID, String taskName, Date dateFrom, Date dateTo, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all instances of a specified task @param specID the specification identifier that contains the task @param taskName the name of the task @param dateFrom the lower time range value @param dateTo the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getTaskStatistics
+yawl:ResourceLogGatewayClient_getTaskStatistics_51 a yawl:Method ;
+    rdfs:label "getTaskStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatistics(String identifier, String version, String uri, String taskName, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all instances of a specified task @param identifier the unique specification identifier @param version the specification version @param uri the specification uri @param taskName the name of the task @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getTaskStatistics
+yawl:ResourceLogGatewayClient_getTaskStatistics_52 a yawl:Method ;
+    rdfs:label "getTaskStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatistics(String identifier, String version, String uri, String taskName, Date dateFrom, Date dateTo, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all instances of a specified task @param identifier the unique specification identifier @param version the specification version @param uri the specification uri @param taskName the name of the task @param dateFrom the lower time range value @param dateTo the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getTaskStatistics
+yawl:ResourceLogGatewayClient_getTaskStatistics_53 a yawl:Method ;
+    rdfs:label "getTaskStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatistics(String identifier, String version, String uri, String taskName, long from, long to, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all instances of a specified task @param identifier the unique specification identifier @param version the specification version @param uri the specification uri @param taskName the name of the task @param from the lower time range value @param to the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getTaskStatisticsForCase
+yawl:ResourceLogGatewayClient_getTaskStatisticsForCase_54 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForCase(String caseID, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all task instances of a specified case @param caseID the id of the case @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getTaskStatisticsForCase
+yawl:ResourceLogGatewayClient_getTaskStatisticsForCase_55 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForCase(String caseID, Date dateFrom, Date dateTo, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all task instances of a specified case @param caseID the id of the case @param dateFrom the lower time range value @param dateTo the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getTaskStatisticsForCase
+yawl:ResourceLogGatewayClient_getTaskStatisticsForCase_56 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForCase(String caseID, long from, long to, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all task instances of a specified case @param caseID the id of the case @param from the lower time range value @param to the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getTaskStatisticsForSpecification
+yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecification_57 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForSpecification(YSpecificationID specID, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all task instances of a specified specification @param specID the specification identifier that contains the task @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getTaskStatisticsForSpecification
+yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecification_58 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForSpecification(YSpecificationID specID, long from, long to, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all task instances of a specified specification @param specID the specification identifier that contains the task @param from the lower time range value @param to the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getTaskStatisticsForSpecification
+yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecification_59 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForSpecification(YSpecificationID specID, Date dateFrom, Date dateTo, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all task instances of a specified specification @param specID the specification identifier that contains the task @param dateFrom the lower time range value @param dateTo the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getTaskStatisticsForSpecification
+yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecification_60 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForSpecification(String identifier, String version, String uri, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all task instances of a specified specification @param identifier the unique specification identifier @param version the specification version @param uri the specification uri @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getTaskStatisticsForSpecification
+yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecification_61 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForSpecification(String identifier, String version, String uri, Date dateFrom, Date dateTo, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all task instances of a specified specification @param identifier the unique specification identifier @param version the specification version @param uri the specification uri @param dateFrom the lower time range value @param dateTo the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getTaskStatisticsForSpecification
+yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecification_62 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForSpecification(String identifier, String version, String uri, long from, long to, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all task instances of a specified specification @param identifier the unique specification identifier @param version the specification version @param uri the specification uri @param from the lower time range value @param to the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getTaskStatisticsForSpecification
+yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecification_63 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForSpecification(Set specIDs, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all task instances of all the specifications in a Set @param specIDs the set of specification identifiers @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getTaskStatisticsForSpecification
+yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecification_64 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForSpecification(Set specIDs, long from, long to, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all task instances of all the specifications in a Set @param specIDs the set of specification identifiers @param from the lower time range value @param to the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getTaskStatisticsForSpecification
+yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecification_65 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForSpecification(Set specIDs, Date dateFrom, Date dateTo, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all task instances of all the specifications in a Set @param specIDs the set of specification identifiers @param dateFrom the lower time range value @param dateTo the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getTaskStatisticsForSpecificationURI
+yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecificationURI_66 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForSpecificationURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForSpecificationURI(String uri, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all task instances of all the specifications with a matching URI (name) @param uri the uri or name of the specification @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getTaskStatisticsForSpecificationURI
+yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecificationURI_67 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForSpecificationURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForSpecificationURI(String uri, long from, long to, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all task instances of all the specifications with a matching URI (name) @param uri the uri or name of the specification @param from the lower time range value @param to the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getTaskStatisticsForSpecificationURI
+yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecificationURI_68 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForSpecificationURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForSpecificationURI(String uri, Date dateFrom, Date dateTo, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all task instances of all the specifications with a matching URI (name) @param uri the uri or name of the specification @param dateFrom the lower time range value @param dateTo the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getTaskStatisticsForSpecificationUID
+yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecificationUID_69 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForSpecificationUID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForSpecificationUID(String id, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all task instances of all the specifications with a matching identifier @param id the unique identifier of the specification @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getTaskStatisticsForSpecificationUID
+yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecificationUID_70 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForSpecificationUID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForSpecificationUID(String id, long from, long to, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all task instances of all the specifications with a matching identifier @param id the unique identifier of the specification @param from the lower time range value @param to the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getTaskStatisticsForSpecificationUID
+yawl:ResourceLogGatewayClient_getTaskStatisticsForSpecificationUID_71 a yawl:Method ;
+    rdfs:label "getTaskStatisticsForSpecificationUID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskStatisticsForSpecificationUID(String id, Date dateFrom, Date dateTo, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all task instances of all the specifications with a matching identifier @param id the unique identifier of the specification @param dateFrom the lower time range value @param dateTo the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getSpecificationStatistics
+yawl:ResourceLogGatewayClient_getSpecificationStatistics_72 a yawl:Method ;
+    rdfs:label "getSpecificationStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationStatistics(YSpecificationID specID, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all case instances of a specification @param specID the specification identifier @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getSpecificationStatistics
+yawl:ResourceLogGatewayClient_getSpecificationStatistics_73 a yawl:Method ;
+    rdfs:label "getSpecificationStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationStatistics(YSpecificationID specID, long from, long to, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all case instances of a specification @param specID the specification identifier @param from the lower time range value @param to the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getSpecificationStatistics
+yawl:ResourceLogGatewayClient_getSpecificationStatistics_74 a yawl:Method ;
+    rdfs:label "getSpecificationStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationStatistics(YSpecificationID specID, Date dateFrom, Date dateTo, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all case instances of a specification @param specID the specification identifier @param dateFrom the lower time range value @param dateTo the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getSpecificationStatistics
+yawl:ResourceLogGatewayClient_getSpecificationStatistics_75 a yawl:Method ;
+    rdfs:label "getSpecificationStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationStatistics(String identifier, String version, String uri, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all case instances of a specification @param identifier the unique specification identifier @param version the specification version @param uri the specification uri @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getSpecificationStatistics
+yawl:ResourceLogGatewayClient_getSpecificationStatistics_76 a yawl:Method ;
+    rdfs:label "getSpecificationStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationStatistics(String identifier, String version, String uri, long from, long to, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all case instances of a specification @param identifier the unique specification identifier @param version the specification version @param uri the specification uri @param from the lower time range value @param to the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getSpecificationStatistics
+yawl:ResourceLogGatewayClient_getSpecificationStatistics_77 a yawl:Method ;
+    rdfs:label "getSpecificationStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationStatistics(String identifier, String version, String uri, Date dateFrom, Date dateTo, String handle)" ;
+    rdfs:comment """Gets a summary set of statistics for all case instances of a specification @param identifier the unique specification identifier @param version the specification version @param uri the specification uri @param dateFrom the lower time range value @param dateTo the upper time range value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getSpecificationIdentifiers
+yawl:ResourceLogGatewayClient_getSpecificationIdentifiers_78 a yawl:Method ;
+    rdfs:label "getSpecificationIdentifiers" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationIdentifiers(long key, String handle)" ;
+    rdfs:comment """Gets an xml string of the YSpecificationID for a specification key (returned in the xml of one of the other log methods) @param key the specification key value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getSpecificationXESLog
+yawl:ResourceLogGatewayClient_getSpecificationXESLog_79 a yawl:Method ;
+    rdfs:label "getSpecificationXESLog" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationXESLog(String identifier, String version, String uri, String handle)" ;
+    rdfs:comment """Gets all events for all cases of the specification passed @param identifier the unique identifier of the specification @param version the specification's version number @param uri the specification's uri @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getMergedXESLog
+yawl:ResourceLogGatewayClient_getMergedXESLog_80 a yawl:Method ;
+    rdfs:label "getMergedXESLog" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMergedXESLog(String identifier, String version, String uri, String handle)" ;
+    rdfs:comment """Gets all events for all cases of the specification passed, from both the resource service and the engine, merged together @param identifier the unique identifier of the specification @param version the specification's version number @param uri the specification's uri @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.getMergedXESLog
+yawl:ResourceLogGatewayClient_getMergedXESLog_81 a yawl:Method ;
+    rdfs:label "getMergedXESLog" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMergedXESLog(String identifier, String version, String uri, boolean withData, String handle)" ;
+    rdfs:comment """Gets all events for all cases of the specification passed, from both the resource service and the engine, merged together, optionally including the data value changes from the engine's log @param identifier the unique identifier of the specification @param version the specification's version number @param uri the specification's uri @param withData if true, the data value changes in the engine log are included @param handle an active sessionhandle @return the resultant String response (log data """ ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.connect
+yawl:ResourceLogGatewayClient_connect_82 a yawl:Method ;
+    rdfs:label "connect" ;
+    yawl:returnType "String" ;
+    yawl:signature "String connect(String userID, String password)" ;
+    rdfs:comment """Connects an external entity to the resource service @param userID the userid @param password the password @return a sessionHandle if successful, or a failure message if not @throws java.io.IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceLogGatewayClient.checkConnection
+yawl:ResourceLogGatewayClient_checkConnection_83 a yawl:Method ;
+    rdfs:label "checkConnection" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkConnection(String handle)" ;
+    rdfs:comment """Checks if a sessionhandle is active @param handle the sessionhandle to check @return true if the session is alive, false if otherwise @throws java.io.IOException if there's a problem connecting to the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:ResourceLogGatewayClient__logURI a yawl:Field ;
+    rdfs:label "_logURI" .
+
+
+

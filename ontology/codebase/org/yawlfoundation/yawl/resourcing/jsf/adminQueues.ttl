@@ -1,0 +1,945 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.adminQueues
+yawl:adminQueues a yawl:Class ;
+    rdfs:label "adminQueues" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/adminQueues.java"^^xsd:string ;
+    yawl:extends yawl:AbstractPageBean ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:adminQueues__init_1 ;
+    yawl:hasMethod yawl:adminQueues_getRequestBean_2 ;
+    yawl:hasMethod yawl:adminQueues_getApplicationBean_3 ;
+    yawl:hasMethod yawl:adminQueues_getSessionBean_4 ;
+    yawl:hasMethod yawl:adminQueues_init_5 ;
+    yawl:hasMethod yawl:adminQueues_preprocess_6 ;
+    yawl:hasMethod yawl:adminQueues_destroy_7 ;
+    yawl:hasMethod yawl:adminQueues_getPage1_8 ;
+    yawl:hasMethod yawl:adminQueues_setPage1_9 ;
+    yawl:hasMethod yawl:adminQueues_getHtml1_10 ;
+    yawl:hasMethod yawl:adminQueues_setHtml1_11 ;
+    yawl:hasMethod yawl:adminQueues_getHead1_12 ;
+    yawl:hasMethod yawl:adminQueues_setHead1_13 ;
+    yawl:hasMethod yawl:adminQueues_getLink1_14 ;
+    yawl:hasMethod yawl:adminQueues_setLink1_15 ;
+    yawl:hasMethod yawl:adminQueues_getBody1_16 ;
+    yawl:hasMethod yawl:adminQueues_setBody1_17 ;
+    yawl:hasMethod yawl:adminQueues_getForm1_18 ;
+    yawl:hasMethod yawl:adminQueues_setForm1_19 ;
+    yawl:hasMethod yawl:adminQueues_getTabSet_20 ;
+    yawl:hasMethod yawl:adminQueues_setTabSet_21 ;
+    yawl:hasMethod yawl:adminQueues_getTabUnOffered_22 ;
+    yawl:hasMethod yawl:adminQueues_setTabUnOffered_23 ;
+    yawl:hasMethod yawl:adminQueues_getLpUnOffered_24 ;
+    yawl:hasMethod yawl:adminQueues_setLpUnOffered_25 ;
+    yawl:hasMethod yawl:adminQueues_getTabWorklisted_26 ;
+    yawl:hasMethod yawl:adminQueues_setTabWorklisted_27 ;
+    yawl:hasMethod yawl:adminQueues_getLpWorklisted_28 ;
+    yawl:hasMethod yawl:adminQueues_setLpWorklisted_29 ;
+    yawl:hasMethod yawl:adminQueues_getBtnOffer_30 ;
+    yawl:hasMethod yawl:adminQueues_setBtnOffer_31 ;
+    yawl:hasMethod yawl:adminQueues_getBtnStart_32 ;
+    yawl:hasMethod yawl:adminQueues_setBtnStart_33 ;
+    yawl:hasMethod yawl:adminQueues_getBtnReallocate_34 ;
+    yawl:hasMethod yawl:adminQueues_setBtnReallocate_35 ;
+    yawl:hasMethod yawl:adminQueues_getBtnAllocate_36 ;
+    yawl:hasMethod yawl:adminQueues_setBtnAllocate_37 ;
+    yawl:hasMethod yawl:adminQueues_getBtnReoffer_38 ;
+    yawl:hasMethod yawl:adminQueues_setBtnReoffer_39 ;
+    yawl:hasMethod yawl:adminQueues_getBtnRestart_40 ;
+    yawl:hasMethod yawl:adminQueues_setBtnRestart_41 ;
+    yawl:hasMethod yawl:adminQueues_getLblAssignedTo_42 ;
+    yawl:hasMethod yawl:adminQueues_setLblAssignedTo_43 ;
+    yawl:hasMethod yawl:adminQueues_getLblResourceState_44 ;
+    yawl:hasMethod yawl:adminQueues_setLblResourceState_45 ;
+    yawl:hasMethod yawl:adminQueues_getTxtResourceState_46 ;
+    yawl:hasMethod yawl:adminQueues_setTxtResourceState_47 ;
+    yawl:hasMethod yawl:adminQueues_getCbbAssignedTo_48 ;
+    yawl:hasMethod yawl:adminQueues_setCbbAssignedTo_49 ;
+    yawl:hasMethod yawl:adminQueues_getCbxDirectToMe_50 ;
+    yawl:hasMethod yawl:adminQueues_setCbxDirectToMe_51 ;
+    yawl:hasMethod yawl:adminQueues_getBtnSynch_52 ;
+    yawl:hasMethod yawl:adminQueues_setBtnSynch_53 ;
+    yawl:hasMethod yawl:adminQueues_getBtnSecRes_54 ;
+    yawl:hasMethod yawl:adminQueues_setBtnSecRes_55 ;
+    yawl:hasMethod yawl:adminQueues_getBtnUsers_56 ;
+    yawl:hasMethod yawl:adminQueues_setBtnUsers_57 ;
+    yawl:hasMethod yawl:adminQueues_getMetaRefresh_58 ;
+    yawl:hasMethod yawl:adminQueues_setMetaRefresh_59 ;
+    yawl:hasMethod yawl:adminQueues_getPnlContainer_60 ;
+    yawl:hasMethod yawl:adminQueues_setPnlContainer_61 ;
+    yawl:hasMethod yawl:adminQueues_prerender_62 ;
+    yawl:hasMethod yawl:adminQueues_initDefaultTab_63 ;
+    yawl:hasMethod yawl:adminQueues_btnRefresh_action_64 ;
+    yawl:hasMethod yawl:adminQueues_btnSynch_action_65 ;
+    yawl:hasMethod yawl:adminQueues_btnSecRes_action_66 ;
+    yawl:hasMethod yawl:adminQueues_btnUsers_action_67 ;
+    yawl:hasMethod yawl:adminQueues_btnOffer_action_68 ;
+    yawl:hasMethod yawl:adminQueues_btnAllocate_action_69 ;
+    yawl:hasMethod yawl:adminQueues_btnStart_action_70 ;
+    yawl:hasMethod yawl:adminQueues_btnReoffer_action_71 ;
+    yawl:hasMethod yawl:adminQueues_btnReallocate_action_72 ;
+    yawl:hasMethod yawl:adminQueues_btnRestart_action_73 ;
+    yawl:hasMethod yawl:adminQueues_tabUnOffered_action_74 ;
+    yawl:hasMethod yawl:adminQueues_tabWorklisted_action_75 ;
+    yawl:hasMethod yawl:adminQueues_selectParticipant_76 ;
+    yawl:hasMethod yawl:adminQueues_forceRefresh_77 ;
+    yawl:hasMethod yawl:adminQueues_updateTabHeaders_78 ;
+    yawl:hasMethod yawl:adminQueues_setRefreshRate_79 ;
+    yawl:hasMethod yawl:adminQueues_populateQueue_80 ;
+    yawl:hasMethod yawl:adminQueues_showWorkItem_81 ;
+    yawl:hasMethod yawl:adminQueues_addItemsToListOptions_82 ;
+    yawl:hasMethod yawl:adminQueues_processButtonEnablement_83 ;
+    yawl:hasMethod yawl:adminQueues_isBetaVersion_84 ;
+    yawl:hasMethod yawl:adminQueues_disableAllButtons_85 ;
+    yawl:hasMethod yawl:adminQueues_enableUnofferedButtons_86 ;
+    yawl:hasMethod yawl:adminQueues_clearWorklistedFields_87 ;
+    yawl:hasMethod yawl:adminQueues_showMessagePanel_88 ;
+    yawl:hasMethod yawl:adminQueues_showUserCount_89 ;
+    yawl:hasField yawl:adminQueues___placeholder ;
+    yawl:hasField yawl:adminQueues_page1 ;
+    yawl:hasField yawl:adminQueues_html1 ;
+    yawl:hasField yawl:adminQueues_head1 ;
+    yawl:hasField yawl:adminQueues_link1 ;
+    yawl:hasField yawl:adminQueues_body1 ;
+    yawl:hasField yawl:adminQueues_form1 ;
+    yawl:hasField yawl:adminQueues_tabSet ;
+    yawl:hasField yawl:adminQueues_tabUnOffered ;
+    yawl:hasField yawl:adminQueues_lpUnOffered ;
+    yawl:hasField yawl:adminQueues_tabWorklisted ;
+    yawl:hasField yawl:adminQueues_lpWorklisted ;
+    yawl:hasField yawl:adminQueues_btnOffer ;
+    yawl:hasField yawl:adminQueues_btnStart ;
+    yawl:hasField yawl:adminQueues_btnReallocate ;
+    yawl:hasField yawl:adminQueues_btnAllocate ;
+    yawl:hasField yawl:adminQueues_btnReoffer ;
+    yawl:hasField yawl:adminQueues_btnRestart ;
+    yawl:hasField yawl:adminQueues_lblAssignedTo ;
+    yawl:hasField yawl:adminQueues_lblResourceState ;
+    yawl:hasField yawl:adminQueues_txtResourceState ;
+    yawl:hasField yawl:adminQueues_cbbAssignedTo ;
+    yawl:hasField yawl:adminQueues_cbxDirectToMe ;
+    yawl:hasField yawl:adminQueues_btnSynch ;
+    yawl:hasField yawl:adminQueues_btnSecRes ;
+    yawl:hasField yawl:adminQueues_btnUsers ;
+    yawl:hasField yawl:adminQueues_metaRefresh ;
+    yawl:hasField yawl:adminQueues_pnlContainer ;
+    yawl:hasField yawl:adminQueues__sb ;
+    yawl:hasField yawl:adminQueues__msgPanel ;
+    .
+
+
+# Method: adminQueues._init
+yawl:adminQueues__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: adminQueues.getRequestBean
+yawl:adminQueues_getRequestBean_2 a yawl:Method ;
+    rdfs:label "getRequestBean" ;
+    yawl:returnType "RequestBean" ;
+    yawl:signature "RequestBean getRequestBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: adminQueues.getApplicationBean
+yawl:adminQueues_getApplicationBean_3 a yawl:Method ;
+    rdfs:label "getApplicationBean" ;
+    yawl:returnType "ApplicationBean" ;
+    yawl:signature "ApplicationBean getApplicationBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: adminQueues.getSessionBean
+yawl:adminQueues_getSessionBean_4 a yawl:Method ;
+    rdfs:label "getSessionBean" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getSessionBean()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: adminQueues.init
+yawl:adminQueues_init_5 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.preprocess
+yawl:adminQueues_preprocess_6 a yawl:Method ;
+    rdfs:label "preprocess" ;
+    yawl:returnType "void" ;
+    yawl:signature "void preprocess()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.destroy
+yawl:adminQueues_destroy_7 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.getPage1
+yawl:adminQueues_getPage1_8 a yawl:Method ;
+    rdfs:label "getPage1" ;
+    yawl:returnType "Page" ;
+    yawl:signature "Page getPage1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.setPage1
+yawl:adminQueues_setPage1_9 a yawl:Method ;
+    rdfs:label "setPage1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPage1(Page p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.getHtml1
+yawl:adminQueues_getHtml1_10 a yawl:Method ;
+    rdfs:label "getHtml1" ;
+    yawl:returnType "Html" ;
+    yawl:signature "Html getHtml1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.setHtml1
+yawl:adminQueues_setHtml1_11 a yawl:Method ;
+    rdfs:label "setHtml1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHtml1(Html h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.getHead1
+yawl:adminQueues_getHead1_12 a yawl:Method ;
+    rdfs:label "getHead1" ;
+    yawl:returnType "Head" ;
+    yawl:signature "Head getHead1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.setHead1
+yawl:adminQueues_setHead1_13 a yawl:Method ;
+    rdfs:label "setHead1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHead1(Head h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.getLink1
+yawl:adminQueues_getLink1_14 a yawl:Method ;
+    rdfs:label "getLink1" ;
+    yawl:returnType "Link" ;
+    yawl:signature "Link getLink1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.setLink1
+yawl:adminQueues_setLink1_15 a yawl:Method ;
+    rdfs:label "setLink1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLink1(Link l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.getBody1
+yawl:adminQueues_getBody1_16 a yawl:Method ;
+    rdfs:label "getBody1" ;
+    yawl:returnType "Body" ;
+    yawl:signature "Body getBody1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.setBody1
+yawl:adminQueues_setBody1_17 a yawl:Method ;
+    rdfs:label "setBody1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBody1(Body b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.getForm1
+yawl:adminQueues_getForm1_18 a yawl:Method ;
+    rdfs:label "getForm1" ;
+    yawl:returnType "Form" ;
+    yawl:signature "Form getForm1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.setForm1
+yawl:adminQueues_setForm1_19 a yawl:Method ;
+    rdfs:label "setForm1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setForm1(Form f)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.getTabSet
+yawl:adminQueues_getTabSet_20 a yawl:Method ;
+    rdfs:label "getTabSet" ;
+    yawl:returnType "TabSet" ;
+    yawl:signature "TabSet getTabSet()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.setTabSet
+yawl:adminQueues_setTabSet_21 a yawl:Method ;
+    rdfs:label "setTabSet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTabSet(TabSet ts)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.getTabUnOffered
+yawl:adminQueues_getTabUnOffered_22 a yawl:Method ;
+    rdfs:label "getTabUnOffered" ;
+    yawl:returnType "Tab" ;
+    yawl:signature "Tab getTabUnOffered()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.setTabUnOffered
+yawl:adminQueues_setTabUnOffered_23 a yawl:Method ;
+    rdfs:label "setTabUnOffered" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTabUnOffered(Tab t)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.getLpUnOffered
+yawl:adminQueues_getLpUnOffered_24 a yawl:Method ;
+    rdfs:label "getLpUnOffered" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getLpUnOffered()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.setLpUnOffered
+yawl:adminQueues_setLpUnOffered_25 a yawl:Method ;
+    rdfs:label "setLpUnOffered" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLpUnOffered(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.getTabWorklisted
+yawl:adminQueues_getTabWorklisted_26 a yawl:Method ;
+    rdfs:label "getTabWorklisted" ;
+    yawl:returnType "Tab" ;
+    yawl:signature "Tab getTabWorklisted()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.setTabWorklisted
+yawl:adminQueues_setTabWorklisted_27 a yawl:Method ;
+    rdfs:label "setTabWorklisted" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTabWorklisted(Tab t)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.getLpWorklisted
+yawl:adminQueues_getLpWorklisted_28 a yawl:Method ;
+    rdfs:label "getLpWorklisted" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getLpWorklisted()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.setLpWorklisted
+yawl:adminQueues_setLpWorklisted_29 a yawl:Method ;
+    rdfs:label "setLpWorklisted" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLpWorklisted(PanelLayout pl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.getBtnOffer
+yawl:adminQueues_getBtnOffer_30 a yawl:Method ;
+    rdfs:label "getBtnOffer" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnOffer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.setBtnOffer
+yawl:adminQueues_setBtnOffer_31 a yawl:Method ;
+    rdfs:label "setBtnOffer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnOffer(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.getBtnStart
+yawl:adminQueues_getBtnStart_32 a yawl:Method ;
+    rdfs:label "getBtnStart" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnStart()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.setBtnStart
+yawl:adminQueues_setBtnStart_33 a yawl:Method ;
+    rdfs:label "setBtnStart" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnStart(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.getBtnReallocate
+yawl:adminQueues_getBtnReallocate_34 a yawl:Method ;
+    rdfs:label "getBtnReallocate" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnReallocate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.setBtnReallocate
+yawl:adminQueues_setBtnReallocate_35 a yawl:Method ;
+    rdfs:label "setBtnReallocate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnReallocate(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.getBtnAllocate
+yawl:adminQueues_getBtnAllocate_36 a yawl:Method ;
+    rdfs:label "getBtnAllocate" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnAllocate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.setBtnAllocate
+yawl:adminQueues_setBtnAllocate_37 a yawl:Method ;
+    rdfs:label "setBtnAllocate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnAllocate(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.getBtnReoffer
+yawl:adminQueues_getBtnReoffer_38 a yawl:Method ;
+    rdfs:label "getBtnReoffer" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnReoffer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.setBtnReoffer
+yawl:adminQueues_setBtnReoffer_39 a yawl:Method ;
+    rdfs:label "setBtnReoffer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnReoffer(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.getBtnRestart
+yawl:adminQueues_getBtnRestart_40 a yawl:Method ;
+    rdfs:label "getBtnRestart" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnRestart()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.setBtnRestart
+yawl:adminQueues_setBtnRestart_41 a yawl:Method ;
+    rdfs:label "setBtnRestart" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnRestart(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.getLblAssignedTo
+yawl:adminQueues_getLblAssignedTo_42 a yawl:Method ;
+    rdfs:label "getLblAssignedTo" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblAssignedTo()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.setLblAssignedTo
+yawl:adminQueues_setLblAssignedTo_43 a yawl:Method ;
+    rdfs:label "setLblAssignedTo" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblAssignedTo(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.getLblResourceState
+yawl:adminQueues_getLblResourceState_44 a yawl:Method ;
+    rdfs:label "getLblResourceState" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblResourceState()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.setLblResourceState
+yawl:adminQueues_setLblResourceState_45 a yawl:Method ;
+    rdfs:label "setLblResourceState" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblResourceState(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.getTxtResourceState
+yawl:adminQueues_getTxtResourceState_46 a yawl:Method ;
+    rdfs:label "getTxtResourceState" ;
+    yawl:returnType "TextField" ;
+    yawl:signature "TextField getTxtResourceState()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.setTxtResourceState
+yawl:adminQueues_setTxtResourceState_47 a yawl:Method ;
+    rdfs:label "setTxtResourceState" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtResourceState(TextField t)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.getCbbAssignedTo
+yawl:adminQueues_getCbbAssignedTo_48 a yawl:Method ;
+    rdfs:label "getCbbAssignedTo" ;
+    yawl:returnType "DropDown" ;
+    yawl:signature "DropDown getCbbAssignedTo()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.setCbbAssignedTo
+yawl:adminQueues_setCbbAssignedTo_49 a yawl:Method ;
+    rdfs:label "setCbbAssignedTo" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCbbAssignedTo(DropDown dd)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.getCbxDirectToMe
+yawl:adminQueues_getCbxDirectToMe_50 a yawl:Method ;
+    rdfs:label "getCbxDirectToMe" ;
+    yawl:returnType "Checkbox" ;
+    yawl:signature "Checkbox getCbxDirectToMe()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.setCbxDirectToMe
+yawl:adminQueues_setCbxDirectToMe_51 a yawl:Method ;
+    rdfs:label "setCbxDirectToMe" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCbxDirectToMe(Checkbox c)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.getBtnSynch
+yawl:adminQueues_getBtnSynch_52 a yawl:Method ;
+    rdfs:label "getBtnSynch" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnSynch()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.setBtnSynch
+yawl:adminQueues_setBtnSynch_53 a yawl:Method ;
+    rdfs:label "setBtnSynch" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnSynch(Button btn)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.getBtnSecRes
+yawl:adminQueues_getBtnSecRes_54 a yawl:Method ;
+    rdfs:label "getBtnSecRes" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnSecRes()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.setBtnSecRes
+yawl:adminQueues_setBtnSecRes_55 a yawl:Method ;
+    rdfs:label "setBtnSecRes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnSecRes(Button btn)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.getBtnUsers
+yawl:adminQueues_getBtnUsers_56 a yawl:Method ;
+    rdfs:label "getBtnUsers" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnUsers()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.setBtnUsers
+yawl:adminQueues_setBtnUsers_57 a yawl:Method ;
+    rdfs:label "setBtnUsers" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnUsers(Button btn)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.getMetaRefresh
+yawl:adminQueues_getMetaRefresh_58 a yawl:Method ;
+    rdfs:label "getMetaRefresh" ;
+    yawl:returnType "Meta" ;
+    yawl:signature "Meta getMetaRefresh()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.setMetaRefresh
+yawl:adminQueues_setMetaRefresh_59 a yawl:Method ;
+    rdfs:label "setMetaRefresh" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMetaRefresh(Meta m)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.getPnlContainer
+yawl:adminQueues_getPnlContainer_60 a yawl:Method ;
+    rdfs:label "getPnlContainer" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlContainer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.setPnlContainer
+yawl:adminQueues_setPnlContainer_61 a yawl:Method ;
+    rdfs:label "setPnlContainer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlContainer(PanelLayout pnl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.prerender
+yawl:adminQueues_prerender_62 a yawl:Method ;
+    rdfs:label "prerender" ;
+    yawl:returnType "void" ;
+    yawl:signature "void prerender()" ;
+    rdfs:comment """Overridden method that is called immediately before the page is rendered""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.initDefaultTab
+yawl:adminQueues_initDefaultTab_63 a yawl:Method ;
+    rdfs:label "initDefaultTab" ;
+    yawl:returnType "Tab" ;
+    yawl:signature "Tab initDefaultTab()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: adminQueues.btnRefresh_action
+yawl:adminQueues_btnRefresh_action_64 a yawl:Method ;
+    rdfs:label "btnRefresh_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnRefresh_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.btnSynch_action
+yawl:adminQueues_btnSynch_action_65 a yawl:Method ;
+    rdfs:label "btnSynch_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnSynch_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.btnSecRes_action
+yawl:adminQueues_btnSecRes_action_66 a yawl:Method ;
+    rdfs:label "btnSecRes_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnSecRes_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.btnUsers_action
+yawl:adminQueues_btnUsers_action_67 a yawl:Method ;
+    rdfs:label "btnUsers_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnUsers_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.btnOffer_action
+yawl:adminQueues_btnOffer_action_68 a yawl:Method ;
+    rdfs:label "btnOffer_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnOffer_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.btnAllocate_action
+yawl:adminQueues_btnAllocate_action_69 a yawl:Method ;
+    rdfs:label "btnAllocate_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnAllocate_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.btnStart_action
+yawl:adminQueues_btnStart_action_70 a yawl:Method ;
+    rdfs:label "btnStart_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnStart_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.btnReoffer_action
+yawl:adminQueues_btnReoffer_action_71 a yawl:Method ;
+    rdfs:label "btnReoffer_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnReoffer_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.btnReallocate_action
+yawl:adminQueues_btnReallocate_action_72 a yawl:Method ;
+    rdfs:label "btnReallocate_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnReallocate_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.btnRestart_action
+yawl:adminQueues_btnRestart_action_73 a yawl:Method ;
+    rdfs:label "btnRestart_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnRestart_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.tabUnOffered_action
+yawl:adminQueues_tabUnOffered_action_74 a yawl:Method ;
+    rdfs:label "tabUnOffered_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String tabUnOffered_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.tabWorklisted_action
+yawl:adminQueues_tabWorklisted_action_75 a yawl:Method ;
+    rdfs:label "tabWorklisted_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String tabWorklisted_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.selectParticipant
+yawl:adminQueues_selectParticipant_76 a yawl:Method ;
+    rdfs:label "selectParticipant" ;
+    yawl:returnType "String" ;
+    yawl:signature "String selectParticipant(String action)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.forceRefresh
+yawl:adminQueues_forceRefresh_77 a yawl:Method ;
+    rdfs:label "forceRefresh" ;
+    yawl:returnType "void" ;
+    yawl:signature "void forceRefresh()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.updateTabHeaders
+yawl:adminQueues_updateTabHeaders_78 a yawl:Method ;
+    rdfs:label "updateTabHeaders" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateTabHeaders(Tab selected)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: adminQueues.setRefreshRate
+yawl:adminQueues_setRefreshRate_79 a yawl:Method ;
+    rdfs:label "setRefreshRate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRefreshRate(int rate)" ;
+    rdfs:comment """Sets the auto refresh rate of the page @param rate if <0, disables page refreshes; if >0, set refresh rate to that number of seconds; if 0, set the rate to the default provided by the resourceService's web.xml""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: adminQueues.populateQueue
+yawl:adminQueues_populateQueue_80 a yawl:Method ;
+    rdfs:label "populateQueue" ;
+    yawl:returnType "int" ;
+    yawl:signature "int populateQueue(int queueType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: adminQueues.showWorkItem
+yawl:adminQueues_showWorkItem_81 a yawl:Method ;
+    rdfs:label "showWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showWorkItem(WorkItemRecord wir, int queueType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: adminQueues.addItemsToListOptions
+yawl:adminQueues_addItemsToListOptions_82 a yawl:Method ;
+    rdfs:label "addItemsToListOptions" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addItemsToListOptions(Set queue, WorkItemRecord selected)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: adminQueues.processButtonEnablement
+yawl:adminQueues_processButtonEnablement_83 a yawl:Method ;
+    rdfs:label "processButtonEnablement" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processButtonEnablement(WorkItemRecord wir)" ;
+    rdfs:comment """Enable or disable buttons based on the status of the selected workitem pre: workitem is worklisted (i.e. not unoffered) @param wir the selected workitem""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: adminQueues.isBetaVersion
+yawl:adminQueues_isBetaVersion_84 a yawl:Method ;
+    rdfs:label "isBetaVersion" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isBetaVersion(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: adminQueues.disableAllButtons
+yawl:adminQueues_disableAllButtons_85 a yawl:Method ;
+    rdfs:label "disableAllButtons" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disableAllButtons(int queueType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: adminQueues.enableUnofferedButtons
+yawl:adminQueues_enableUnofferedButtons_86 a yawl:Method ;
+    rdfs:label "enableUnofferedButtons" ;
+    yawl:returnType "void" ;
+    yawl:signature "void enableUnofferedButtons(boolean liveStatus)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: adminQueues.clearWorklistedFields
+yawl:adminQueues_clearWorklistedFields_87 a yawl:Method ;
+    rdfs:label "clearWorklistedFields" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clearWorklistedFields()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: adminQueues.showMessagePanel
+yawl:adminQueues_showMessagePanel_88 a yawl:Method ;
+    rdfs:label "showMessagePanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showMessagePanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: adminQueues.showUserCount
+yawl:adminQueues_showUserCount_89 a yawl:Method ;
+    rdfs:label "showUserCount" ;
+    yawl:returnType "String" ;
+    yawl:signature "String showUserCount()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:adminQueues___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:adminQueues_page1 a yawl:Field ;
+    rdfs:label "page1" .
+
+yawl:adminQueues_html1 a yawl:Field ;
+    rdfs:label "html1" .
+
+yawl:adminQueues_head1 a yawl:Field ;
+    rdfs:label "head1" .
+
+yawl:adminQueues_link1 a yawl:Field ;
+    rdfs:label "link1" .
+
+yawl:adminQueues_body1 a yawl:Field ;
+    rdfs:label "body1" .
+
+yawl:adminQueues_form1 a yawl:Field ;
+    rdfs:label "form1" .
+
+yawl:adminQueues_tabSet a yawl:Field ;
+    rdfs:label "tabSet" .
+
+yawl:adminQueues_tabUnOffered a yawl:Field ;
+    rdfs:label "tabUnOffered" .
+
+yawl:adminQueues_lpUnOffered a yawl:Field ;
+    rdfs:label "lpUnOffered" .
+
+yawl:adminQueues_tabWorklisted a yawl:Field ;
+    rdfs:label "tabWorklisted" .
+
+yawl:adminQueues_lpWorklisted a yawl:Field ;
+    rdfs:label "lpWorklisted" .
+
+yawl:adminQueues_btnOffer a yawl:Field ;
+    rdfs:label "btnOffer" .
+
+yawl:adminQueues_btnStart a yawl:Field ;
+    rdfs:label "btnStart" .
+
+yawl:adminQueues_btnReallocate a yawl:Field ;
+    rdfs:label "btnReallocate" .
+
+yawl:adminQueues_btnAllocate a yawl:Field ;
+    rdfs:label "btnAllocate" .
+
+yawl:adminQueues_btnReoffer a yawl:Field ;
+    rdfs:label "btnReoffer" .
+
+yawl:adminQueues_btnRestart a yawl:Field ;
+    rdfs:label "btnRestart" .
+
+yawl:adminQueues_lblAssignedTo a yawl:Field ;
+    rdfs:label "lblAssignedTo" .
+
+yawl:adminQueues_lblResourceState a yawl:Field ;
+    rdfs:label "lblResourceState" .
+
+yawl:adminQueues_txtResourceState a yawl:Field ;
+    rdfs:label "txtResourceState" .
+
+yawl:adminQueues_cbbAssignedTo a yawl:Field ;
+    rdfs:label "cbbAssignedTo" .
+
+yawl:adminQueues_cbxDirectToMe a yawl:Field ;
+    rdfs:label "cbxDirectToMe" .
+
+yawl:adminQueues_btnSynch a yawl:Field ;
+    rdfs:label "btnSynch" .
+
+yawl:adminQueues_btnSecRes a yawl:Field ;
+    rdfs:label "btnSecRes" .
+
+yawl:adminQueues_btnUsers a yawl:Field ;
+    rdfs:label "btnUsers" .
+
+yawl:adminQueues_metaRefresh a yawl:Field ;
+    rdfs:label "metaRefresh" .
+
+yawl:adminQueues_pnlContainer a yawl:Field ;
+    rdfs:label "pnlContainer" .
+
+yawl:adminQueues__sb a yawl:Field ;
+    rdfs:label "_sb" .
+
+yawl:adminQueues__msgPanel a yawl:Field ;
+    rdfs:label "_msgPanel" .
+
+
+

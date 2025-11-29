@@ -1,0 +1,39 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.swingWorklist.MIUniqueInputDialog
+yawl:MIUniqueInputDialog a yawl:Class ;
+    rdfs:label "MIUniqueInputDialog" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_swingWorklist ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/swingWorklist/YWorklistGUI.java"^^xsd:string ;
+    yawl:extends yawl:JDialog ;
+    yawl:implements yawl:ActionListener ;
+    yawl:hasMethod yawl:MIUniqueInputDialog_actionPerformed_1 ;
+    yawl:hasField yawl:MIUniqueInputDialog__worklistGui ;
+    yawl:hasField yawl:MIUniqueInputDialog_dataPane ;
+    .
+
+
+# Method: MIUniqueInputDialog.actionPerformed
+yawl:MIUniqueInputDialog_actionPerformed_1 a yawl:Method ;
+    rdfs:label "actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void actionPerformed(ActionEvent e)" ;
+    rdfs:comment """Invoked when an action occurs.""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:MIUniqueInputDialog__worklistGui a yawl:Field ;
+    rdfs:label "_worklistGui" .
+
+yawl:MIUniqueInputDialog_dataPane a yawl:Field ;
+    rdfs:label "dataPane" .
+
+
+

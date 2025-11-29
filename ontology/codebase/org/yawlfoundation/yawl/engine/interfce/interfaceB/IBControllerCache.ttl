@@ -1,0 +1,156 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.interfce.interfaceB.IBControllerCache
+yawl:IBControllerCache a yawl:Class ;
+    rdfs:label "IBControllerCache" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_interfce_interfaceB ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/interfce/interfaceB/IBControllerCache.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 27/01/2004 Time: 18:56:15 @author Michael Adams (renamed/refactored/relocated for v2.0 07/2008 & 04/2009)""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:IBControllerCache_updateWorkItems_1 ;
+    yawl:hasMethod yawl:IBControllerCache_getWorkItem_2 ;
+    yawl:hasMethod yawl:IBControllerCache_getTaskInformation_3 ;
+    yawl:hasMethod yawl:IBControllerCache_setTaskInformation_4 ;
+    yawl:hasMethod yawl:IBControllerCache_unloadTaskInformation_5 ;
+    yawl:hasMethod yawl:IBControllerCache_setDataForWorkItemID_6 ;
+    yawl:hasMethod yawl:IBControllerCache_getDataForWorkItemID_7 ;
+    yawl:hasMethod yawl:IBControllerCache_unsaveWorkItem_8 ;
+    yawl:hasMethod yawl:IBControllerCache_addSpecificationData_9 ;
+    yawl:hasMethod yawl:IBControllerCache_getSpecificationData_10 ;
+    yawl:hasMethod yawl:IBControllerCache_unloadSpecificationData_11 ;
+    yawl:hasMethod yawl:IBControllerCache_addWorkItem_12 ;
+    yawl:hasMethod yawl:IBControllerCache_removeRemotelyCachedWorkItem_13 ;
+    yawl:hasField yawl:IBControllerCache__workItemCache ;
+    yawl:hasField yawl:IBControllerCache__taskInfoCache ;
+    yawl:hasField yawl:IBControllerCache__itemIDToDataMap ;
+    yawl:hasField yawl:IBControllerCache__specDataCache ;
+    .
+
+
+# Method: IBControllerCache.updateWorkItems
+yawl:IBControllerCache_updateWorkItems_1 a yawl:Method ;
+    rdfs:label "updateWorkItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateWorkItems(List items)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: IBControllerCache.getWorkItem
+yawl:IBControllerCache_getWorkItem_2 a yawl:Method ;
+    rdfs:label "getWorkItem" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord getWorkItem(String workItemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: IBControllerCache.getTaskInformation
+yawl:IBControllerCache_getTaskInformation_3 a yawl:Method ;
+    rdfs:label "getTaskInformation" ;
+    yawl:returnType "TaskInformation" ;
+    yawl:signature "TaskInformation getTaskInformation(YSpecificationID specID, String taskID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: IBControllerCache.setTaskInformation
+yawl:IBControllerCache_setTaskInformation_4 a yawl:Method ;
+    rdfs:label "setTaskInformation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTaskInformation(YSpecificationID specID, String taskID, TaskInformation taskInfo)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: IBControllerCache.unloadTaskInformation
+yawl:IBControllerCache_unloadTaskInformation_5 a yawl:Method ;
+    rdfs:label "unloadTaskInformation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void unloadTaskInformation(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: IBControllerCache.setDataForWorkItemID
+yawl:IBControllerCache_setDataForWorkItemID_6 a yawl:Method ;
+    rdfs:label "setDataForWorkItemID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataForWorkItemID(String workItemID, String data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: IBControllerCache.getDataForWorkItemID
+yawl:IBControllerCache_getDataForWorkItemID_7 a yawl:Method ;
+    rdfs:label "getDataForWorkItemID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataForWorkItemID(String workItemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: IBControllerCache.unsaveWorkItem
+yawl:IBControllerCache_unsaveWorkItem_8 a yawl:Method ;
+    rdfs:label "unsaveWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void unsaveWorkItem(String workItemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: IBControllerCache.addSpecificationData
+yawl:IBControllerCache_addSpecificationData_9 a yawl:Method ;
+    rdfs:label "addSpecificationData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addSpecificationData(SpecificationData specData)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: IBControllerCache.getSpecificationData
+yawl:IBControllerCache_getSpecificationData_10 a yawl:Method ;
+    rdfs:label "getSpecificationData" ;
+    yawl:returnType "SpecificationData" ;
+    yawl:signature "SpecificationData getSpecificationData(YSpecificationID specID)" ;
+    rdfs:comment """Gets a data object describing the specification.  This is cached in the worklist application to reduce unnecessary communication between messaging tiers, and to improve performance. @param specID @return the specification data""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: IBControllerCache.unloadSpecificationData
+yawl:IBControllerCache_unloadSpecificationData_11 a yawl:Method ;
+    rdfs:label "unloadSpecificationData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void unloadSpecificationData(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: IBControllerCache.addWorkItem
+yawl:IBControllerCache_addWorkItem_12 a yawl:Method ;
+    rdfs:label "addWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addWorkItem(WorkItemRecord itemRecord)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: IBControllerCache.removeRemotelyCachedWorkItem
+yawl:IBControllerCache_removeRemotelyCachedWorkItem_13 a yawl:Method ;
+    rdfs:label "removeRemotelyCachedWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeRemotelyCachedWorkItem(String workItemID)" ;
+    rdfs:comment """Removes any cached copy of a work item from the custom yawl service. @param workItemID the work item id.""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:IBControllerCache__workItemCache a yawl:Field ;
+    rdfs:label "_workItemCache" .
+
+yawl:IBControllerCache__taskInfoCache a yawl:Field ;
+    rdfs:label "_taskInfoCache" .
+
+yawl:IBControllerCache__itemIDToDataMap a yawl:Field ;
+    rdfs:label "_itemIDToDataMap" .
+
+yawl:IBControllerCache__specDataCache a yawl:Field ;
+    rdfs:label "_specDataCache" .
+
+
+

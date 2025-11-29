@@ -1,0 +1,279 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.util.AbstractCheckSumTask
+yawl:AbstractCheckSumTask a yawl:Class ;
+    rdfs:label "AbstractCheckSumTask" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/util/AbstractCheckSumTask.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 5/07/2014""" ;
+    yawl:extends yawl:Task ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:AbstractCheckSumTask_setRootDir_1 ;
+    yawl:hasMethod yawl:AbstractCheckSumTask_setToDir_2 ;
+    yawl:hasMethod yawl:AbstractCheckSumTask_setFile_3 ;
+    yawl:hasMethod yawl:AbstractCheckSumTask_setAppName_4 ;
+    yawl:hasMethod yawl:AbstractCheckSumTask_setIncludes_5 ;
+    yawl:hasMethod yawl:AbstractCheckSumTask_setExcludes_6 ;
+    yawl:hasMethod yawl:AbstractCheckSumTask_setLocations_7 ;
+    yawl:hasMethod yawl:AbstractCheckSumTask_getAppName_8 ;
+    yawl:hasMethod yawl:AbstractCheckSumTask_execute_9 ;
+    yawl:hasMethod yawl:AbstractCheckSumTask_toXML_10 ;
+    yawl:hasMethod yawl:AbstractCheckSumTask_getProjectProperty_11 ;
+    yawl:hasMethod yawl:AbstractCheckSumTask_now_12 ;
+    yawl:hasMethod yawl:AbstractCheckSumTask_formatTimestamp_13 ;
+    yawl:hasMethod yawl:AbstractCheckSumTask_toList_14 ;
+    yawl:hasMethod yawl:AbstractCheckSumTask_getFileList_15 ;
+    yawl:hasMethod yawl:AbstractCheckSumTask_shouldBeIncluded_16 ;
+    yawl:hasMethod yawl:AbstractCheckSumTask_shouldBeExcluded_17 ;
+    yawl:hasMethod yawl:AbstractCheckSumTask_getRelativePath_18 ;
+    yawl:hasMethod yawl:AbstractCheckSumTask_writeToFile_19 ;
+    yawl:hasMethod yawl:AbstractCheckSumTask_createOutputXML_20 ;
+    yawl:hasMethod yawl:AbstractCheckSumTask_containsMatch_21 ;
+    yawl:hasMethod yawl:AbstractCheckSumTask_containsDir_22 ;
+    yawl:hasMethod yawl:AbstractCheckSumTask_removeLastChar_23 ;
+    yawl:hasField yawl:AbstractCheckSumTask__antRootDir ;
+    yawl:hasField yawl:AbstractCheckSumTask__antToDir ;
+    yawl:hasField yawl:AbstractCheckSumTask__antToFile ;
+    yawl:hasField yawl:AbstractCheckSumTask__antAppName ;
+    yawl:hasField yawl:AbstractCheckSumTask__antLocations ;
+    yawl:hasField yawl:AbstractCheckSumTask__antIncludes ;
+    yawl:hasField yawl:AbstractCheckSumTask__antExcludes ;
+    yawl:hasField yawl:AbstractCheckSumTask__project ;
+    yawl:hasField yawl:AbstractCheckSumTask_DEFAULT_ROOT_DIR ;
+    yawl:hasField yawl:AbstractCheckSumTask_DEFAULT_TO_FILE ;
+    yawl:hasField yawl:AbstractCheckSumTask_DATE_FORMAT ;
+    yawl:hasField yawl:AbstractCheckSumTask_COMMENT ;
+    .
+
+
+# Method: AbstractCheckSumTask.setRootDir
+yawl:AbstractCheckSumTask_setRootDir_1 a yawl:Method ;
+    rdfs:label "setRootDir" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRootDir(String dir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractCheckSumTask.setToDir
+yawl:AbstractCheckSumTask_setToDir_2 a yawl:Method ;
+    rdfs:label "setToDir" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setToDir(String dir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractCheckSumTask.setFile
+yawl:AbstractCheckSumTask_setFile_3 a yawl:Method ;
+    rdfs:label "setFile" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setFile(String file)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractCheckSumTask.setAppName
+yawl:AbstractCheckSumTask_setAppName_4 a yawl:Method ;
+    rdfs:label "setAppName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAppName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractCheckSumTask.setIncludes
+yawl:AbstractCheckSumTask_setIncludes_5 a yawl:Method ;
+    rdfs:label "setIncludes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setIncludes(String includes)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractCheckSumTask.setExcludes
+yawl:AbstractCheckSumTask_setExcludes_6 a yawl:Method ;
+    rdfs:label "setExcludes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setExcludes(String excludes)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractCheckSumTask.setLocations
+yawl:AbstractCheckSumTask_setLocations_7 a yawl:Method ;
+    rdfs:label "setLocations" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLocations(String locations)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractCheckSumTask.getAppName
+yawl:AbstractCheckSumTask_getAppName_8 a yawl:Method ;
+    rdfs:label "getAppName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAppName()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractCheckSumTask.execute
+yawl:AbstractCheckSumTask_execute_9 a yawl:Method ;
+    rdfs:label "execute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void execute()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractCheckSumTask.toXML
+yawl:AbstractCheckSumTask_toXML_10 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML(File checkDir, CheckSummer summer)" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractCheckSumTask.getProjectProperty
+yawl:AbstractCheckSumTask_getProjectProperty_11 a yawl:Method ;
+    rdfs:label "getProjectProperty" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getProjectProperty(String key)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractCheckSumTask.now
+yawl:AbstractCheckSumTask_now_12 a yawl:Method ;
+    rdfs:label "now" ;
+    yawl:returnType "String" ;
+    yawl:signature "String now()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractCheckSumTask.formatTimestamp
+yawl:AbstractCheckSumTask_formatTimestamp_13 a yawl:Method ;
+    rdfs:label "formatTimestamp" ;
+    yawl:returnType "String" ;
+    yawl:signature "String formatTimestamp(long time)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractCheckSumTask.toList
+yawl:AbstractCheckSumTask_toList_14 a yawl:Method ;
+    rdfs:label "toList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List toList(String expressions)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractCheckSumTask.getFileList
+yawl:AbstractCheckSumTask_getFileList_15 a yawl:Method ;
+    rdfs:label "getFileList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getFileList(File f)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractCheckSumTask.shouldBeIncluded
+yawl:AbstractCheckSumTask_shouldBeIncluded_16 a yawl:Method ;
+    rdfs:label "shouldBeIncluded" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean shouldBeIncluded(File f)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractCheckSumTask.shouldBeExcluded
+yawl:AbstractCheckSumTask_shouldBeExcluded_17 a yawl:Method ;
+    rdfs:label "shouldBeExcluded" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean shouldBeExcluded(File file)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractCheckSumTask.getRelativePath
+yawl:AbstractCheckSumTask_getRelativePath_18 a yawl:Method ;
+    rdfs:label "getRelativePath" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRelativePath(File absoluteDir, String fileName)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractCheckSumTask.writeToFile
+yawl:AbstractCheckSumTask_writeToFile_19 a yawl:Method ;
+    rdfs:label "writeToFile" ;
+    yawl:returnType "void" ;
+    yawl:signature "void writeToFile(File f, String content)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractCheckSumTask.createOutputXML
+yawl:AbstractCheckSumTask_createOutputXML_20 a yawl:Method ;
+    rdfs:label "createOutputXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void createOutputXML(String rootDir, String toDir, String file)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: AbstractCheckSumTask.containsMatch
+yawl:AbstractCheckSumTask_containsMatch_21 a yawl:Method ;
+    rdfs:label "containsMatch" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean containsMatch(File file, List maskList)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractCheckSumTask.containsDir
+yawl:AbstractCheckSumTask_containsDir_22 a yawl:Method ;
+    rdfs:label "containsDir" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean containsDir(File f, String mask)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: AbstractCheckSumTask.removeLastChar
+yawl:AbstractCheckSumTask_removeLastChar_23 a yawl:Method ;
+    rdfs:label "removeLastChar" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeLastChar(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:AbstractCheckSumTask__antRootDir a yawl:Field ;
+    rdfs:label "_antRootDir" .
+
+yawl:AbstractCheckSumTask__antToDir a yawl:Field ;
+    rdfs:label "_antToDir" .
+
+yawl:AbstractCheckSumTask__antToFile a yawl:Field ;
+    rdfs:label "_antToFile" .
+
+yawl:AbstractCheckSumTask__antAppName a yawl:Field ;
+    rdfs:label "_antAppName" .
+
+yawl:AbstractCheckSumTask__antLocations a yawl:Field ;
+    rdfs:label "_antLocations" .
+
+yawl:AbstractCheckSumTask__antIncludes a yawl:Field ;
+    rdfs:label "_antIncludes" .
+
+yawl:AbstractCheckSumTask__antExcludes a yawl:Field ;
+    rdfs:label "_antExcludes" .
+
+yawl:AbstractCheckSumTask__project a yawl:Field ;
+    rdfs:label "_project" .
+
+yawl:AbstractCheckSumTask_DEFAULT_ROOT_DIR a yawl:Field ;
+    rdfs:label "DEFAULT_ROOT_DIR" .
+
+yawl:AbstractCheckSumTask_DEFAULT_TO_FILE a yawl:Field ;
+    rdfs:label "DEFAULT_TO_FILE" .
+
+yawl:AbstractCheckSumTask_DATE_FORMAT a yawl:Field ;
+    rdfs:label "DATE_FORMAT" .
+
+yawl:AbstractCheckSumTask_COMMENT a yawl:Field ;
+    rdfs:label "COMMENT" .
+
+
+

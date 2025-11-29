@@ -1,0 +1,42 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.scheduling.CachedMappingsHandler
+yawl:CachedMappingsHandler a yawl:Class ;
+    rdfs:label "CachedMappingsHandler" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_scheduling ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/scheduling/SchedulingService.java"^^xsd:string ;
+    rdfs:comment """@author tbe""" ;
+    yawl:extends yawl:Thread ;
+    yawl:modifiers "private" ;
+    yawl:hasMethod yawl:CachedMappingsHandler_run_1 ;
+    yawl:hasMethod yawl:CachedMappingsHandler_process_2 ;
+    .
+
+
+# Method: CachedMappingsHandler.run
+yawl:CachedMappingsHandler_run_1 a yawl:Method ;
+    rdfs:label "run" ;
+    yawl:returnType "void" ;
+    yawl:signature "void run()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CachedMappingsHandler.process
+yawl:CachedMappingsHandler_process_2 a yawl:Method ;
+    rdfs:label "process" ;
+    yawl:returnType "void" ;
+    yawl:signature "void process()" ;
+    rdfs:comment """only serial access to table MAPPING, otherwise: ORA-06550: PLS-00201: identifier 'PKG_MAPPING.GET_MAPPINGS' must be declared""" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+
+

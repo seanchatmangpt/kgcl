@@ -1,0 +1,427 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.QueueSet
+yawl:QueueSet a yawl:Class ;
+    rdfs:label "QueueSet" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/QueueSet.java"^^xsd:string ;
+    rdfs:comment """A repository of work queues belonging to a participant @author Michael Adams v0.1, 23/08/2007""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:QueueSet_getID_1 ;
+    yawl:hasMethod yawl:QueueSet_setID_2 ;
+    yawl:hasMethod yawl:QueueSet_setPersisting_3 ;
+    yawl:hasMethod yawl:QueueSet_getPersisting_4 ;
+    yawl:hasMethod yawl:QueueSet_getQueueSize_5 ;
+    yawl:hasMethod yawl:QueueSet_movetoSuspend_6 ;
+    yawl:hasMethod yawl:QueueSet_movetoStarted_7 ;
+    yawl:hasMethod yawl:QueueSet_movetoStarted_8 ;
+    yawl:hasMethod yawl:QueueSet_movetoUnsuspend_9 ;
+    yawl:hasMethod yawl:QueueSet_isNullQueue_10 ;
+    yawl:hasMethod yawl:QueueSet_checkQueueExists_11 ;
+    yawl:hasMethod yawl:QueueSet_getQueue_12 ;
+    yawl:hasMethod yawl:QueueSet_setQueue_13 ;
+    yawl:hasMethod yawl:QueueSet_addToQueue_14 ;
+    yawl:hasMethod yawl:QueueSet_addToQueue_15 ;
+    yawl:hasMethod yawl:QueueSet_addToQueue_16 ;
+    yawl:hasMethod yawl:QueueSet_removeFromQueue_17 ;
+    yawl:hasMethod yawl:QueueSet_removeFromQueue_18 ;
+    yawl:hasMethod yawl:QueueSet_removeCaseFromQueue_19 ;
+    yawl:hasMethod yawl:QueueSet_cleanseQueue_20 ;
+    yawl:hasMethod yawl:QueueSet_getQueuedWorkItems_21 ;
+    yawl:hasMethod yawl:QueueSet_getWorklistedQueues_22 ;
+    yawl:hasMethod yawl:QueueSet_getActiveQueues_23 ;
+    yawl:hasMethod yawl:QueueSet_refresh_24 ;
+    yawl:hasMethod yawl:QueueSet_hasWorkItemInQueue_25 ;
+    yawl:hasMethod yawl:QueueSet_hasWorkItemInAnyQueue_26 ;
+    yawl:hasMethod yawl:QueueSet_removeFromAllQueues_27 ;
+    yawl:hasMethod yawl:QueueSet_removeCaseFromAllQueues_28 ;
+    yawl:hasMethod yawl:QueueSet_cleanseAllQueues_29 ;
+    yawl:hasMethod yawl:QueueSet_purgeQueue_30 ;
+    yawl:hasMethod yawl:QueueSet_purgeAllQueues_31 ;
+    yawl:hasMethod yawl:QueueSet_getStartQueue_32 ;
+    yawl:hasMethod yawl:QueueSet_getEndQueue_33 ;
+    yawl:hasMethod yawl:QueueSet_toXML_34 ;
+    yawl:hasMethod yawl:QueueSet_fromXML_35 ;
+    yawl:hasMethod yawl:QueueSet_fromXML_36 ;
+    yawl:hasMethod yawl:QueueSet_notifyIfRequired_37 ;
+    yawl:hasMethod yawl:QueueSet_get_ownerID_38 ;
+    yawl:hasMethod yawl:QueueSet_set_ownerID_39 ;
+    yawl:hasMethod yawl:QueueSet_get_type_40 ;
+    yawl:hasMethod yawl:QueueSet_set_type_41 ;
+    yawl:hasField yawl:QueueSet__qOffered ;
+    yawl:hasField yawl:QueueSet__qAllocated ;
+    yawl:hasField yawl:QueueSet__qStarted ;
+    yawl:hasField yawl:QueueSet__qSuspended ;
+    yawl:hasField yawl:QueueSet__qUnoffered ;
+    yawl:hasField yawl:QueueSet__qWorklisted ;
+    yawl:hasField yawl:QueueSet__ownerID ;
+    yawl:hasField yawl:QueueSet__type ;
+    yawl:hasField yawl:QueueSet__persisting ;
+    .
+
+
+# Method: QueueSet.getID
+yawl:QueueSet_getID_1 a yawl:Method ;
+    rdfs:label "getID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.setID
+yawl:QueueSet_setID_2 a yawl:Method ;
+    rdfs:label "setID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.setPersisting
+yawl:QueueSet_setPersisting_3 a yawl:Method ;
+    rdfs:label "setPersisting" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPersisting(boolean persisting)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.getPersisting
+yawl:QueueSet_getPersisting_4 a yawl:Method ;
+    rdfs:label "getPersisting" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean getPersisting()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.getQueueSize
+yawl:QueueSet_getQueueSize_5 a yawl:Method ;
+    rdfs:label "getQueueSize" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getQueueSize(int queue)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.movetoSuspend
+yawl:QueueSet_movetoSuspend_6 a yawl:Method ;
+    rdfs:label "movetoSuspend" ;
+    yawl:returnType "void" ;
+    yawl:signature "void movetoSuspend(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.movetoStarted
+yawl:QueueSet_movetoStarted_7 a yawl:Method ;
+    rdfs:label "movetoStarted" ;
+    yawl:returnType "void" ;
+    yawl:signature "void movetoStarted(WorkItemRecord parent, WorkItemRecord child)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.movetoStarted
+yawl:QueueSet_movetoStarted_8 a yawl:Method ;
+    rdfs:label "movetoStarted" ;
+    yawl:returnType "void" ;
+    yawl:signature "void movetoStarted(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.movetoUnsuspend
+yawl:QueueSet_movetoUnsuspend_9 a yawl:Method ;
+    rdfs:label "movetoUnsuspend" ;
+    yawl:returnType "void" ;
+    yawl:signature "void movetoUnsuspend(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.isNullQueue
+yawl:QueueSet_isNullQueue_10 a yawl:Method ;
+    rdfs:label "isNullQueue" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isNullQueue(int queue)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: QueueSet.checkQueueExists
+yawl:QueueSet_checkQueueExists_11 a yawl:Method ;
+    rdfs:label "checkQueueExists" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkQueueExists(int queue)" ;
+    rdfs:comment """instantiates the queue if it is not yet instantiated""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: QueueSet.getQueue
+yawl:QueueSet_getQueue_12 a yawl:Method ;
+    rdfs:label "getQueue" ;
+    yawl:returnType "WorkQueue" ;
+    yawl:signature "WorkQueue getQueue(int queue)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.setQueue
+yawl:QueueSet_setQueue_13 a yawl:Method ;
+    rdfs:label "setQueue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setQueue(WorkQueue queue)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.addToQueue
+yawl:QueueSet_addToQueue_14 a yawl:Method ;
+    rdfs:label "addToQueue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addToQueue(WorkItemRecord wir, int queue)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.addToQueue
+yawl:QueueSet_addToQueue_15 a yawl:Method ;
+    rdfs:label "addToQueue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addToQueue(WorkItemRecord wir, int queue, boolean log)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.addToQueue
+yawl:QueueSet_addToQueue_16 a yawl:Method ;
+    rdfs:label "addToQueue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addToQueue(int queue, WorkQueue queueToAdd)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.removeFromQueue
+yawl:QueueSet_removeFromQueue_17 a yawl:Method ;
+    rdfs:label "removeFromQueue" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeFromQueue(WorkItemRecord wir, int queue)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.removeFromQueue
+yawl:QueueSet_removeFromQueue_18 a yawl:Method ;
+    rdfs:label "removeFromQueue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeFromQueue(WorkQueue queueToRemove, int queue)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.removeCaseFromQueue
+yawl:QueueSet_removeCaseFromQueue_19 a yawl:Method ;
+    rdfs:label "removeCaseFromQueue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeCaseFromQueue(String caseID, int queue)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.cleanseQueue
+yawl:QueueSet_cleanseQueue_20 a yawl:Method ;
+    rdfs:label "cleanseQueue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cleanseQueue(WorkItemCache cache, int queue)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.getQueuedWorkItems
+yawl:QueueSet_getQueuedWorkItems_21 a yawl:Method ;
+    rdfs:label "getQueuedWorkItems" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getQueuedWorkItems(int queue)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.getWorklistedQueues
+yawl:QueueSet_getWorklistedQueues_22 a yawl:Method ;
+    rdfs:label "getWorklistedQueues" ;
+    yawl:returnType "WorkQueue" ;
+    yawl:signature "WorkQueue getWorklistedQueues()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.getActiveQueues
+yawl:QueueSet_getActiveQueues_23 a yawl:Method ;
+    rdfs:label "getActiveQueues" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getActiveQueues()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.refresh
+yawl:QueueSet_refresh_24 a yawl:Method ;
+    rdfs:label "refresh" ;
+    yawl:returnType "void" ;
+    yawl:signature "void refresh(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.hasWorkItemInQueue
+yawl:QueueSet_hasWorkItemInQueue_25 a yawl:Method ;
+    rdfs:label "hasWorkItemInQueue" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasWorkItemInQueue(String itemID, int queue)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.hasWorkItemInAnyQueue
+yawl:QueueSet_hasWorkItemInAnyQueue_26 a yawl:Method ;
+    rdfs:label "hasWorkItemInAnyQueue" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasWorkItemInAnyQueue(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.removeFromAllQueues
+yawl:QueueSet_removeFromAllQueues_27 a yawl:Method ;
+    rdfs:label "removeFromAllQueues" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeFromAllQueues(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.removeCaseFromAllQueues
+yawl:QueueSet_removeCaseFromAllQueues_28 a yawl:Method ;
+    rdfs:label "removeCaseFromAllQueues" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeCaseFromAllQueues(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.cleanseAllQueues
+yawl:QueueSet_cleanseAllQueues_29 a yawl:Method ;
+    rdfs:label "cleanseAllQueues" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cleanseAllQueues(WorkItemCache cache)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.purgeQueue
+yawl:QueueSet_purgeQueue_30 a yawl:Method ;
+    rdfs:label "purgeQueue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void purgeQueue(int queue)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.purgeAllQueues
+yawl:QueueSet_purgeAllQueues_31 a yawl:Method ;
+    rdfs:label "purgeAllQueues" ;
+    yawl:returnType "void" ;
+    yawl:signature "void purgeAllQueues()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.getStartQueue
+yawl:QueueSet_getStartQueue_32 a yawl:Method ;
+    rdfs:label "getStartQueue" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getStartQueue()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: QueueSet.getEndQueue
+yawl:QueueSet_getEndQueue_33 a yawl:Method ;
+    rdfs:label "getEndQueue" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getEndQueue()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: QueueSet.toXML
+yawl:QueueSet_toXML_34 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.fromXML
+yawl:QueueSet_fromXML_35 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.fromXML
+yawl:QueueSet_fromXML_36 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(Element element)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: QueueSet.notifyIfRequired
+yawl:QueueSet_notifyIfRequired_37 a yawl:Method ;
+    rdfs:label "notifyIfRequired" ;
+    yawl:returnType "void" ;
+    yawl:signature "void notifyIfRequired(WorkItemRecord wir, int queue)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: QueueSet.get_ownerID
+yawl:QueueSet_get_ownerID_38 a yawl:Method ;
+    rdfs:label "get_ownerID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_ownerID()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: QueueSet.set_ownerID
+yawl:QueueSet_set_ownerID_39 a yawl:Method ;
+    rdfs:label "set_ownerID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_ownerID(String ownerID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: QueueSet.get_type
+yawl:QueueSet_get_type_40 a yawl:Method ;
+    rdfs:label "get_type" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_type()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: QueueSet.set_type
+yawl:QueueSet_set_type_41 a yawl:Method ;
+    rdfs:label "set_type" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_type(String type)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:QueueSet__qOffered a yawl:Field ;
+    rdfs:label "_qOffered" .
+
+yawl:QueueSet__qAllocated a yawl:Field ;
+    rdfs:label "_qAllocated" .
+
+yawl:QueueSet__qStarted a yawl:Field ;
+    rdfs:label "_qStarted" .
+
+yawl:QueueSet__qSuspended a yawl:Field ;
+    rdfs:label "_qSuspended" .
+
+yawl:QueueSet__qUnoffered a yawl:Field ;
+    rdfs:label "_qUnoffered" .
+
+yawl:QueueSet__qWorklisted a yawl:Field ;
+    rdfs:label "_qWorklisted" .
+
+yawl:QueueSet__ownerID a yawl:Field ;
+    rdfs:label "_ownerID" .
+
+yawl:QueueSet__type a yawl:Field ;
+    rdfs:label "_type" .
+
+yawl:QueueSet__persisting a yawl:Field ;
+    rdfs:label "_persisting" .
+
+
+

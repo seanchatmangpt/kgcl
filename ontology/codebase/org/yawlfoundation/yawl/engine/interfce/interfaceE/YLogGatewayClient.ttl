@@ -1,0 +1,398 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.engine.interfce.interfaceE
+yawl:org_yawlfoundation_yawl_engine_interfce_interfaceE a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.engine.interfce.interfaceE" .
+# Class: org.yawlfoundation.yawl.engine.interfce.interfaceE.YLogGatewayClient
+yawl:YLogGatewayClient a yawl:Class ;
+    rdfs:label "YLogGatewayClient" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_interfce_interfaceE ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/interfce/interfaceE/YLogGatewayClient.java"^^xsd:string ;
+    rdfs:comment """An API to be used by clients that want to retrieve data from the YAWL process logs. @author Michael Adams 29/10/2007 Last Date: 02/12/2009 (for v2.1)""" ;
+    yawl:extends yawl:Interface_Client ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YLogGatewayClient_getBackEndURI_1 ;
+    yawl:hasMethod yawl:YLogGatewayClient_performGet_2 ;
+    yawl:hasMethod yawl:YLogGatewayClient_performGet_3 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getAllSpecifications_4 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getNetInstancesOfSpecification_5 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getNetInstancesOfSpecification_6 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getCompleteCaseLogsForSpecification_7 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getCompleteCaseLogsForSpecification_8 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getSpecificationStatistics_9 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getSpecificationStatistics_10 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getSpecificationStatistics_11 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getSpecificationStatistics_12 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getSpecificationStatistics_13 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getSpecificationCaseIDs_14 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getSpecificationCaseIDs_15 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getCaseEvents_16 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getCaseEvents_17 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getDataForEvent_18 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getInstanceEvents_19 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getDataTypeForDataItem_20 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getCompleteCaseLog_21 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getTaskInstancesForCase_22 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getTaskInstancesForTask_23 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getTaskInstancesForTask_24 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getCaseEvent_25 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getAllCasesStartedByService_26 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getAllCasesCancelledByService_27 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getServiceName_28 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getEventsForTaskInstance_29 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getSpecificationXESLog_30 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getSpecificationXESLog_31 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getSpecificationXESLog_32 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getSpecificationXESLog_33 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getSpecificationXESLog_34 ;
+    yawl:hasMethod yawl:YLogGatewayClient_getSpecificationXESLog_35 ;
+    yawl:hasMethod yawl:YLogGatewayClient_connect_36 ;
+    yawl:hasMethod yawl:YLogGatewayClient_checkConnection_37 ;
+    yawl:hasField yawl:YLogGatewayClient__logURI ;
+    .
+
+
+# Method: YLogGatewayClient.getBackEndURI
+yawl:YLogGatewayClient_getBackEndURI_1 a yawl:Method ;
+    rdfs:label "getBackEndURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBackEndURI()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.performGet
+yawl:YLogGatewayClient_performGet_2 a yawl:Method ;
+    rdfs:label "performGet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String performGet(String action, String pName, String pValue, String handle)" ;
+    rdfs:comment """a wrapper for the executeGet method - accepts a String value @param action the name of the gateway method to call @param pName the name of the parameter passed @param pValue the parameter's value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogGatewayClient.performGet
+yawl:YLogGatewayClient_performGet_3 a yawl:Method ;
+    rdfs:label "performGet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String performGet(String action, String pName, long pValue, String handle)" ;
+    rdfs:comment """a wrapper for the executeGet method - accepts a long value @param action the name of the gateway method to call @param pName the name of the parameter passed @param pValue the parameter's value @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YLogGatewayClient.getAllSpecifications
+yawl:YLogGatewayClient_getAllSpecifications_4 a yawl:Method ;
+    rdfs:label "getAllSpecifications" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAllSpecifications(String handle)" ;
+    rdfs:comment """Gets an summary xml list of all the specifications logged @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getNetInstancesOfSpecification
+yawl:YLogGatewayClient_getNetInstancesOfSpecification_5 a yawl:Method ;
+    rdfs:label "getNetInstancesOfSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNetInstancesOfSpecification(String identifier, String version, String uri, String handle)" ;
+    rdfs:comment """Gets all of the net instances (root and sub-net) of all the logged cases based on the specification details passed @param identifier the unique identifier of the specification @param version the specification's version number @param uri the specification's uri @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getNetInstancesOfSpecification
+yawl:YLogGatewayClient_getNetInstancesOfSpecification_6 a yawl:Method ;
+    rdfs:label "getNetInstancesOfSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNetInstancesOfSpecification(long specKey, String handle)" ;
+    rdfs:comment """Gets all of the net instances (root and sub-net) of all the logged cases based on the specification key passed @param specKey the primary key identifier of the specification in its log table @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getCompleteCaseLogsForSpecification
+yawl:YLogGatewayClient_getCompleteCaseLogsForSpecification_7 a yawl:Method ;
+    rdfs:label "getCompleteCaseLogsForSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCompleteCaseLogsForSpecification(String identifier, String version, String uri, String handle)" ;
+    rdfs:comment """Gets a complete listing of all the cases launched from the specification data passed, including all net & task instances, events and data items @param identifier the unique identifier of the specification @param version the specification's version number @param uri the specification's uri @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getCompleteCaseLogsForSpecification
+yawl:YLogGatewayClient_getCompleteCaseLogsForSpecification_8 a yawl:Method ;
+    rdfs:label "getCompleteCaseLogsForSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCompleteCaseLogsForSpecification(long specKey, String handle)" ;
+    rdfs:comment """Gets a complete listing  of all the cases launched from the specification key passed, including all net & task instances, events and data items @param specKey the primary key identifier of the specification in its log table @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getSpecificationStatistics
+yawl:YLogGatewayClient_getSpecificationStatistics_9 a yawl:Method ;
+    rdfs:label "getSpecificationStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationStatistics(String identifier, String version, String uri, long from, long to, String handle)" ;
+    rdfs:comment """Gets a set of summary statistics for executed instances of the specification data passed @param identifier the unique identifier of the specification @param version the specification's version number @param uri the specification's uri @param from the start of the range of timestamps to include @param to the end of the range of timestamps to include @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a prob""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getSpecificationStatistics
+yawl:YLogGatewayClient_getSpecificationStatistics_10 a yawl:Method ;
+    rdfs:label "getSpecificationStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationStatistics(String identifier, String version, String uri, String handle)" ;
+    rdfs:comment """Gets a set of summary statistics for executed instances of the specification data passed @param identifier the unique identifier of the specification @param version the specification's version number @param uri the specification's uri @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getSpecificationStatistics
+yawl:YLogGatewayClient_getSpecificationStatistics_11 a yawl:Method ;
+    rdfs:label "getSpecificationStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationStatistics(YSpecificationID specID, String handle)" ;
+    rdfs:comment """Gets a set of summary statistics for executed instances of the specification data passed @param specID the unique identifier of the specification @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getSpecificationStatistics
+yawl:YLogGatewayClient_getSpecificationStatistics_12 a yawl:Method ;
+    rdfs:label "getSpecificationStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationStatistics(YSpecificationID specID, long from, long to, String handle)" ;
+    rdfs:comment """Gets a set of summary statistics for executed instances of the specification data passed @param specID the unique identifier of the specification @param from the start of the range of timestamps to include @param to the end of the range of timestamps to include @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getSpecificationStatistics
+yawl:YLogGatewayClient_getSpecificationStatistics_13 a yawl:Method ;
+    rdfs:label "getSpecificationStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationStatistics(long specKey, String handle)" ;
+    rdfs:comment """Gets a set of summary statistics for executed instances of the specification key passed @param specKey the primary key identifier of the specification in its log table @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getSpecificationCaseIDs
+yawl:YLogGatewayClient_getSpecificationCaseIDs_14 a yawl:Method ;
+    rdfs:label "getSpecificationCaseIDs" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationCaseIDs(YSpecificationID specID, String handle)" ;
+    rdfs:comment """Gets the set of case ids for executed instances of the specification data passed @param specID the unique identifier of the specification @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getSpecificationCaseIDs
+yawl:YLogGatewayClient_getSpecificationCaseIDs_15 a yawl:Method ;
+    rdfs:label "getSpecificationCaseIDs" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationCaseIDs(long specKey, String handle)" ;
+    rdfs:comment """Gets a set of case ids for executed instances of the specification key passed @param specKey the primary key identifier of the specification in its log table @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getCaseEvents
+yawl:YLogGatewayClient_getCaseEvents_16 a yawl:Method ;
+    rdfs:label "getCaseEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseEvents(long rootNetInstanceKey, String handle)" ;
+    rdfs:comment """Gets all the case level events for the root net key passed @param rootNetInstanceKey the primary key identifier of the root net instance of the case @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getCaseEvents
+yawl:YLogGatewayClient_getCaseEvents_17 a yawl:Method ;
+    rdfs:label "getCaseEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseEvents(String caseID, String handle)" ;
+    rdfs:comment """Gets all the case level events for the case id passed @param caseID the case id of the case to get the events for @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getDataForEvent
+yawl:YLogGatewayClient_getDataForEvent_18 a yawl:Method ;
+    rdfs:label "getDataForEvent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataForEvent(long eventKey, String handle)" ;
+    rdfs:comment """Gets all of the data items logged with the event requested @param eventKey the primary key identifier of the event @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getInstanceEvents
+yawl:YLogGatewayClient_getInstanceEvents_19 a yawl:Method ;
+    rdfs:label "getInstanceEvents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInstanceEvents(long instanceKey, String handle)" ;
+    rdfs:comment """Gets all of the net or task instances for the instance key passed @param instanceKey the primary key identifier of the net or task instance @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getDataTypeForDataItem
+yawl:YLogGatewayClient_getDataTypeForDataItem_20 a yawl:Method ;
+    rdfs:label "getDataTypeForDataItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataTypeForDataItem(long dataTypeKey, String handle)" ;
+    rdfs:comment """Gets the data type for the key passed @param dataTypeKey the primary key identifier of the data type @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getCompleteCaseLog
+yawl:YLogGatewayClient_getCompleteCaseLog_21 a yawl:Method ;
+    rdfs:label "getCompleteCaseLog" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCompleteCaseLog(String caseID, String handle)" ;
+    rdfs:comment """Gets a comprehensive listing of all of the data logged for the case passed, including all net & task instances, events and data items @param caseID the case id to get the log data for @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getTaskInstancesForCase
+yawl:YLogGatewayClient_getTaskInstancesForCase_22 a yawl:Method ;
+    rdfs:label "getTaskInstancesForCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskInstancesForCase(String caseID, String handle)" ;
+    rdfs:comment """Gets a listing of all the task instances (ie work items) created for the case @param caseID the case id to get the log data for @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getTaskInstancesForTask
+yawl:YLogGatewayClient_getTaskInstancesForTask_23 a yawl:Method ;
+    rdfs:label "getTaskInstancesForTask" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskInstancesForTask(long taskKey, String handle)" ;
+    rdfs:comment """Gets a listing of all the task instances (ie work items) created for the task @param taskKey the primary key identifier of the task definition @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getTaskInstancesForTask
+yawl:YLogGatewayClient_getTaskInstancesForTask_24 a yawl:Method ;
+    rdfs:label "getTaskInstancesForTask" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskInstancesForTask(String rootCaseID, String taskName, String handle)" ;
+    rdfs:comment """Gets a listing of all the task instances (ie work items) created for the task within a specified case @param rootCaseID the root case id of the case to get the task instances for @param taskName the primary key identifier of the task definition @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getCaseEvent
+yawl:YLogGatewayClient_getCaseEvent_25 a yawl:Method ;
+    rdfs:label "getCaseEvent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseEvent(String caseID, String eventType, String handle)" ;
+    rdfs:comment """Gets the log record of a particular case-level event @param caseID the case id to get the event for @param eventType the 'name' of the event (eg 'CaseStart') @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getAllCasesStartedByService
+yawl:YLogGatewayClient_getAllCasesStartedByService_26 a yawl:Method ;
+    rdfs:label "getAllCasesStartedByService" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAllCasesStartedByService(String serviceName, String handle)" ;
+    rdfs:comment """Gets a list of all of the 'CaseStart' events triggered by the service @param serviceName the name of the registered service @param handle an active sessionhandle @return an XML'd String list of Case Start events triggered by the service @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getAllCasesCancelledByService
+yawl:YLogGatewayClient_getAllCasesCancelledByService_27 a yawl:Method ;
+    rdfs:label "getAllCasesCancelledByService" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAllCasesCancelledByService(String serviceName, String handle)" ;
+    rdfs:comment """Gets a list of all of the 'CaseCancel' events triggered by the service  @param serviceName the name of the registered service @param handle an active sessionhandle @return an XML'd String list of Case Cancellation events triggered by the service @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getServiceName
+yawl:YLogGatewayClient_getServiceName_28 a yawl:Method ;
+    rdfs:label "getServiceName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getServiceName(long serviceKey, String handle)" ;
+    rdfs:comment """Gets the name of the service referenced by the key passed @param serviceKey the primary key identifier of the service @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getEventsForTaskInstance
+yawl:YLogGatewayClient_getEventsForTaskInstance_29 a yawl:Method ;
+    rdfs:label "getEventsForTaskInstance" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEventsForTaskInstance(String itemID, String handle)" ;
+    rdfs:comment """Gets the set of events for a task instance (workitem) @param itemID the id of the workitem @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getSpecificationXESLog
+yawl:YLogGatewayClient_getSpecificationXESLog_30 a yawl:Method ;
+    rdfs:label "getSpecificationXESLog" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationXESLog(String identifier, String version, String uri, boolean withData, boolean ignoreUnknownEventLabels, String handle)" ;
+    rdfs:comment """Gets a complete listing of all the cases launched from the specification data passed, in OpenXES format @param identifier the unique identifier of the specification @param version the specification's version number @param uri the specification's uri @param withData if true, all data change events will be included @param ignoreUnknownEventLabels if true, all data events with descriptor 'unknown' will NOT be included @param handle an active sessionhandle @return the resultant String response (log """ ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getSpecificationXESLog
+yawl:YLogGatewayClient_getSpecificationXESLog_31 a yawl:Method ;
+    rdfs:label "getSpecificationXESLog" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationXESLog(String identifier, String version, String uri, boolean withData, String handle)" ;
+    rdfs:comment """Gets a complete listing of all the cases launched from the specification data passed, in OpenXES format @param identifier the unique identifier of the specification @param version the specification's version number @param uri the specification's uri @param withData if true, all data change events will be included @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine @see #g""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getSpecificationXESLog
+yawl:YLogGatewayClient_getSpecificationXESLog_32 a yawl:Method ;
+    rdfs:label "getSpecificationXESLog" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationXESLog(String identifier, String version, String uri, String handle)" ;
+    rdfs:comment """Gets a complete listing of all the cases launched from the specification data passed, in OpenXES format @param identifier the unique identifier of the specification @param version the specification's version number @param uri the specification's uri @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine @see #getSpecificationXESLog(YSpecificationID, String)""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getSpecificationXESLog
+yawl:YLogGatewayClient_getSpecificationXESLog_33 a yawl:Method ;
+    rdfs:label "getSpecificationXESLog" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationXESLog(YSpecificationID specID, String handle)" ;
+    rdfs:comment """Gets a complete listing of all the cases launched from the specification data passed, in OpenXES format @param specID the unique identifier of the specification @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine @see #getSpecificationXESLog(String, String, String, String)""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getSpecificationXESLog
+yawl:YLogGatewayClient_getSpecificationXESLog_34 a yawl:Method ;
+    rdfs:label "getSpecificationXESLog" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationXESLog(YSpecificationID specID, boolean withData, String handle)" ;
+    rdfs:comment """Gets a complete listing of all the cases launched from the specification data passed, in OpenXES format @param specID the unique identifier of the specification @param withData if true, all data change events will be included @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine @see #getSpecificationXESLog(String, String, String, String)""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.getSpecificationXESLog
+yawl:YLogGatewayClient_getSpecificationXESLog_35 a yawl:Method ;
+    rdfs:label "getSpecificationXESLog" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationXESLog(YSpecificationID specID, boolean withData, boolean ignoreUnknown, String handle)" ;
+    rdfs:comment """Gets a complete listing of all the cases launched from the specification data passed, in OpenXES format @param specID the unique identifier of the specification @param withData if true, all data change events will be included @param ignoreUnknown if true, all events with 'unknown' labels will be ignored @param handle an active sessionhandle @return the resultant String response (log data or error message) @throws java.io.IOException if there's a problem connecting to the engine @see #getSpecific""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.connect
+yawl:YLogGatewayClient_connect_36 a yawl:Method ;
+    rdfs:label "connect" ;
+    yawl:returnType "String" ;
+    yawl:signature "String connect(String userID, String password)" ;
+    rdfs:comment """Connects an external entity to the engine @param userID the userid @param password the password @return a sessionHandle if successful, or a failure message if not @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogGatewayClient.checkConnection
+yawl:YLogGatewayClient_checkConnection_37 a yawl:Method ;
+    rdfs:label "checkConnection" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkConnection(String handle)" ;
+    rdfs:comment """Checks if a sessionhandle is active @param handle the sessionhandle to check @return true if the session is alive, false if otherwise @throws java.io.IOException if there's a problem connecting to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YLogGatewayClient__logURI a yawl:Field ;
+    rdfs:label "_logURI" .
+
+
+

@@ -1,0 +1,515 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.scheduling.util.Utils
+yawl:Utils a yawl:Class ;
+    rdfs:label "Utils" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_scheduling_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/scheduling/util/Utils.java"^^xsd:string ;
+    yawl:implements yawl:Constants ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Utils_getCSV_1 ;
+    yawl:hasMethod yawl:Utils_getCSV_2 ;
+    yawl:hasMethod yawl:Utils_truncate_3 ;
+    yawl:hasMethod yawl:Utils_copy_4 ;
+    yawl:hasMethod yawl:Utils_getMedian_5 ;
+    yawl:hasMethod yawl:Utils_enum2String_6 ;
+    yawl:hasMethod yawl:Utils_array2String_7 ;
+    yawl:hasMethod yawl:Utils_collection2String_8 ;
+    yawl:hasMethod yawl:Utils_map2String_9 ;
+    yawl:hasMethod yawl:Utils_toString_10 ;
+    yawl:hasMethod yawl:Utils_date2String_11 ;
+    yawl:hasMethod yawl:Utils_date2String_12 ;
+    yawl:hasMethod yawl:Utils_string2Date_13 ;
+    yawl:hasMethod yawl:Utils_stringMinutes2stringXMLDuration_14 ;
+    yawl:hasMethod yawl:Utils_stringXMLDuration2stringMinutes_15 ;
+    yawl:hasMethod yawl:Utils_duration2Minutes_16 ;
+    yawl:hasMethod yawl:Utils_stringXML2Duration_17 ;
+    yawl:hasMethod yawl:Utils_elements2String_18 ;
+    yawl:hasMethod yawl:Utils_document2String_19 ;
+    yawl:hasMethod yawl:Utils_element2String_20 ;
+    yawl:hasMethod yawl:Utils_attribute2String_21 ;
+    yawl:hasMethod yawl:Utils_string2Document_22 ;
+    yawl:hasMethod yawl:Utils_string2Element_23 ;
+    yawl:hasMethod yawl:Utils_string2Elements_24 ;
+    yawl:hasMethod yawl:Utils_addString2Map_25 ;
+    yawl:hasMethod yawl:Utils_getJSON_26 ;
+    yawl:hasMethod yawl:Utils_getJSON_27 ;
+    yawl:hasMethod yawl:Utils_getJSON_28 ;
+    yawl:hasMethod yawl:Utils_getJSON_29 ;
+    yawl:hasMethod yawl:Utils_jsonObject2Array_30 ;
+    yawl:hasMethod yawl:Utils_parseJSON2Array_31 ;
+    yawl:hasMethod yawl:Utils_parseJSON2Map_32 ;
+    yawl:hasMethod yawl:Utils_parseCSV_33 ;
+    yawl:hasMethod yawl:Utils_parseCSV_34 ;
+    yawl:hasMethod yawl:Utils_encodeData_35 ;
+    yawl:hasMethod yawl:Utils_capitalize_36 ;
+    yawl:hasMethod yawl:Utils_isEqual_37 ;
+    yawl:hasMethod yawl:Utils_getLogRequestParameters_38 ;
+    yawl:hasMethod yawl:Utils_getLogSessionAttributes_39 ;
+    yawl:hasMethod yawl:Utils_sendRequest_40 ;
+    yawl:hasMethod yawl:Utils_getJsCalendarFormat_41 ;
+    yawl:hasMethod yawl:Utils_equals_42 ;
+    yawl:hasMethod yawl:Utils_extractCaseId_43 ;
+    yawl:hasMethod yawl:Utils_deepCopy_44 ;
+    yawl:hasField yawl:Utils_format ;
+    yawl:hasField yawl:Utils_compact ;
+    yawl:hasField yawl:Utils_TIME_PATTERN_XML ;
+    yawl:hasField yawl:Utils_DATE_PATTERN_XML ;
+    yawl:hasField yawl:Utils_DATETIME_PATTERN_XML ;
+    yawl:hasField yawl:Utils_TIME_PATTERN ;
+    yawl:hasField yawl:Utils_DATE_PATTERN ;
+    yawl:hasField yawl:Utils_DATETIME_PATTERN ;
+    .
+
+
+# Method: Utils.getCSV
+yawl:Utils_getCSV_1 a yawl:Method ;
+    rdfs:label "getCSV" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCSV(Collection list)" ;
+    rdfs:comment """returns comma separated list of objects @param list @return""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.getCSV
+yawl:Utils_getCSV_2 a yawl:Method ;
+    rdfs:label "getCSV" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCSV(Collection list, int maxLength)" ;
+    rdfs:comment """returns comma separated list of objects @param list @param maxLength @return""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.truncate
+yawl:Utils_truncate_3 a yawl:Method ;
+    rdfs:label "truncate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String truncate(String s, int i)" ;
+    rdfs:comment """truncate String s to length i, if s > i, the last 3 characters will be replace by ... @param s @param i @return""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.copy
+yawl:Utils_copy_4 a yawl:Method ;
+    rdfs:label "copy" ;
+    yawl:returnType "String" ;
+    yawl:signature "String copy(String s, int n)" ;
+    rdfs:comment """copy String n times @param s @param n @return""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.getMedian
+yawl:Utils_getMedian_5 a yawl:Method ;
+    rdfs:label "getMedian" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getMedian(List values)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.enum2String
+yawl:Utils_enum2String_6 a yawl:Method ;
+    rdfs:label "enum2String" ;
+    yawl:returnType "String" ;
+    yawl:signature "String enum2String(Enumeration e)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.array2String
+yawl:Utils_array2String_7 a yawl:Method ;
+    rdfs:label "array2String" ;
+    yawl:returnType "String" ;
+    yawl:signature "String array2String(Object o)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.collection2String
+yawl:Utils_collection2String_8 a yawl:Method ;
+    rdfs:label "collection2String" ;
+    yawl:returnType "String" ;
+    yawl:signature "String collection2String(Collection o)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.map2String
+yawl:Utils_map2String_9 a yawl:Method ;
+    rdfs:label "map2String" ;
+    yawl:returnType "String" ;
+    yawl:signature "String map2String(Map o)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.toString
+yawl:Utils_toString_10 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString(Object o)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.date2String
+yawl:Utils_date2String_11 a yawl:Method ;
+    rdfs:label "date2String" ;
+    yawl:returnType "String" ;
+    yawl:signature "String date2String(Date date, String pattern, TimeZone timeZone)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.date2String
+yawl:Utils_date2String_12 a yawl:Method ;
+    rdfs:label "date2String" ;
+    yawl:returnType "String" ;
+    yawl:signature "String date2String(Date date, String pattern)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.string2Date
+yawl:Utils_string2Date_13 a yawl:Method ;
+    rdfs:label "string2Date" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date string2Date(String date, String pattern)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.stringMinutes2stringXMLDuration
+yawl:Utils_stringMinutes2stringXMLDuration_14 a yawl:Method ;
+    rdfs:label "stringMinutes2stringXMLDuration" ;
+    yawl:returnType "String" ;
+    yawl:signature "String stringMinutes2stringXMLDuration(String minutes)" ;
+    rdfs:comment """converts minute string x to lexical representation of duration @param minutes @return""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.stringXMLDuration2stringMinutes
+yawl:Utils_stringXMLDuration2stringMinutes_15 a yawl:Method ;
+    rdfs:label "stringXMLDuration2stringMinutes" ;
+    yawl:returnType "String" ;
+    yawl:signature "String stringXMLDuration2stringMinutes(String value)" ;
+    rdfs:comment """converts duration, e.g. PTxxxM to minute string xxx @param value @return""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.duration2Minutes
+yawl:Utils_duration2Minutes_16 a yawl:Method ;
+    rdfs:label "duration2Minutes" ;
+    yawl:returnType "int" ;
+    yawl:signature "int duration2Minutes(Duration d)" ;
+    rdfs:comment """converts duration, e.g. PTxxxM to minute int xxx @param d @return""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.stringXML2Duration
+yawl:Utils_stringXML2Duration_17 a yawl:Method ;
+    rdfs:label "stringXML2Duration" ;
+    yawl:returnType "Duration" ;
+    yawl:signature "Duration stringXML2Duration(String lexicalRepresentation)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.elements2String
+yawl:Utils_elements2String_18 a yawl:Method ;
+    rdfs:label "elements2String" ;
+    yawl:returnType "String" ;
+    yawl:signature "String elements2String(List elems, boolean formatted)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.document2String
+yawl:Utils_document2String_19 a yawl:Method ;
+    rdfs:label "document2String" ;
+    yawl:returnType "String" ;
+    yawl:signature "String document2String(Document doc, boolean formatted)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.element2String
+yawl:Utils_element2String_20 a yawl:Method ;
+    rdfs:label "element2String" ;
+    yawl:returnType "String" ;
+    yawl:signature "String element2String(Element elem, boolean formatted)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.attribute2String
+yawl:Utils_attribute2String_21 a yawl:Method ;
+    rdfs:label "attribute2String" ;
+    yawl:returnType "String" ;
+    yawl:signature "String attribute2String(Attribute a)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.string2Document
+yawl:Utils_string2Document_22 a yawl:Method ;
+    rdfs:label "string2Document" ;
+    yawl:returnType "Document" ;
+    yawl:signature "Document string2Document(String s)" ;
+    rdfs:comment """@param s @return""" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.string2Element
+yawl:Utils_string2Element_23 a yawl:Method ;
+    rdfs:label "string2Element" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element string2Element(String s)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.string2Elements
+yawl:Utils_string2Elements_24 a yawl:Method ;
+    rdfs:label "string2Elements" ;
+    yawl:returnType "List" ;
+    yawl:signature "List string2Elements(String s)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.addString2Map
+yawl:Utils_addString2Map_25 a yawl:Method ;
+    rdfs:label "addString2Map" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addString2Map(String key, String value, Map map, String separator)" ;
+    rdfs:comment """adds a value to a map at given key if a previous value at given key already exists, a separator and the new value will be added @param key @param value @param map @param separator""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.getJSON
+yawl:Utils_getJSON_26 a yawl:Method ;
+    rdfs:label "getJSON" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getJSON(List list)" ;
+    rdfs:comment """serialize String values in JSON format @param list @return""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.getJSON
+yawl:Utils_getJSON_27 a yawl:Method ;
+    rdfs:label "getJSON" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getJSON(Map map)" ;
+    rdfs:comment """serialize String keys and String values in JSON format @param map @return""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.getJSON
+yawl:Utils_getJSON_28 a yawl:Method ;
+    rdfs:label "getJSON" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getJSON(List sortedList, Map map)" ;
+    rdfs:comment """serialize String keys and String values in JSON format, sort keys according to order in sortedList @param map @return""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.getJSON
+yawl:Utils_getJSON_29 a yawl:Method ;
+    rdfs:label "getJSON" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getJSON(String array)" ;
+    rdfs:comment """serialize String values in JSON format @param array @return""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.jsonObject2Array
+yawl:Utils_jsonObject2Array_30 a yawl:Method ;
+    rdfs:label "jsonObject2Array" ;
+    yawl:returnType "String" ;
+    yawl:signature "String jsonObject2Array(Object json)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.parseJSON2Array
+yawl:Utils_parseJSON2Array_31 a yawl:Method ;
+    rdfs:label "parseJSON2Array" ;
+    yawl:returnType "String" ;
+    yawl:signature "String parseJSON2Array(String json)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.parseJSON2Map
+yawl:Utils_parseJSON2Map_32 a yawl:Method ;
+    rdfs:label "parseJSON2Map" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map parseJSON2Map(String json)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.parseCSV
+yawl:Utils_parseCSV_33 a yawl:Method ;
+    rdfs:label "parseCSV" ;
+    yawl:returnType "List" ;
+    yawl:signature "List parseCSV(String csv)" ;
+    rdfs:comment """@param csv @return""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.parseCSV
+yawl:Utils_parseCSV_34 a yawl:Method ;
+    rdfs:label "parseCSV" ;
+    yawl:returnType "List" ;
+    yawl:signature "List parseCSV(String csv, String delimiters)" ;
+    rdfs:comment """@param csv @return""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.encodeData
+yawl:Utils_encodeData_35 a yawl:Method ;
+    rdfs:label "encodeData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String encodeData(Map params)" ;
+    rdfs:comment """Encodes parameter values for HTTP transport copy of @see org.yawlfoundation.yawl.engine.interfce.Interface_Client.encodeData @param params a map of the data parameter values, of the form [param1=value1],[param2=value2]... @return a formatted http data string with the data values encoded""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.capitalize
+yawl:Utils_capitalize_36 a yawl:Method ;
+    rdfs:label "capitalize" ;
+    yawl:returnType "String" ;
+    yawl:signature "String capitalize(String word)" ;
+    rdfs:comment """Transforms a string's first character to upper case @param word @return capitalized word""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.isEqual
+yawl:Utils_isEqual_37 a yawl:Method ;
+    rdfs:label "isEqual" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEqual(Object o1, Object o2)" ;
+    rdfs:comment """compares two objects @param o1 @param o2 @return""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.getLogRequestParameters
+yawl:Utils_getLogRequestParameters_38 a yawl:Method ;
+    rdfs:label "getLogRequestParameters" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLogRequestParameters(Map parameterMap)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.getLogSessionAttributes
+yawl:Utils_getLogSessionAttributes_39 a yawl:Method ;
+    rdfs:label "getLogSessionAttributes" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLogSessionAttributes(HttpSession session)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.sendRequest
+yawl:Utils_sendRequest_40 a yawl:Method ;
+    rdfs:label "sendRequest" ;
+    yawl:returnType "String" ;
+    yawl:signature "String sendRequest(String urlStr, Map parameters)" ;
+    rdfs:comment """possible charsets: UTF-8, ISO-8859-1, US-ASCII, UTF-16, UTF-16BE, UTF-16LE @param urlStr @param parameters @return @throws Exception""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.getJsCalendarFormat
+yawl:Utils_getJsCalendarFormat_41 a yawl:Method ;
+    rdfs:label "getJsCalendarFormat" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object getJsCalendarFormat(String localizedString)" ;
+    rdfs:comment """calendar format for JS_Calendar in javascript format @param localizedString @return""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.equals
+yawl:Utils_equals_42 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object o1, Object o2)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.extractCaseId
+yawl:Utils_extractCaseId_43 a yawl:Method ;
+    rdfs:label "extractCaseId" ;
+    yawl:returnType "String" ;
+    yawl:signature "String extractCaseId(String input)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Utils.deepCopy
+yawl:Utils_deepCopy_44 a yawl:Method ;
+    rdfs:label "deepCopy" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object deepCopy(Object o)" ;
+    rdfs:comment """creates deep copy of serializable object see http://www.tutego.de/java/articles/Tiefe-Objektkopien-Java.html @param o @return @throws Exception""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:Utils_format a yawl:Field ;
+    rdfs:label "format" .
+
+yawl:Utils_compact a yawl:Field ;
+    rdfs:label "compact" .
+
+yawl:Utils_TIME_PATTERN_XML a yawl:Field ;
+    rdfs:label "TIME_PATTERN_XML" .
+
+yawl:Utils_DATE_PATTERN_XML a yawl:Field ;
+    rdfs:label "DATE_PATTERN_XML" .
+
+yawl:Utils_DATETIME_PATTERN_XML a yawl:Field ;
+    rdfs:label "DATETIME_PATTERN_XML" .
+
+yawl:Utils_TIME_PATTERN a yawl:Field ;
+    rdfs:label "TIME_PATTERN" .
+
+yawl:Utils_DATE_PATTERN a yawl:Field ;
+    rdfs:label "DATE_PATTERN" .
+
+yawl:Utils_DATETIME_PATTERN a yawl:Field ;
+    rdfs:label "DATETIME_PATTERN" .
+
+
+

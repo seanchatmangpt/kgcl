@@ -1,0 +1,81 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.resource.CategoryStack
+yawl:CategoryStack a yawl:Class ;
+    rdfs:label "CategoryStack" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_resource ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/resource/SecondaryResources.java"^^xsd:string ;
+    yawl:hasMethod yawl:CategoryStack_add_1 ;
+    yawl:hasMethod yawl:CategoryStack_removeOne_2 ;
+    yawl:hasMethod yawl:CategoryStack_isEmpty_3 ;
+    yawl:hasMethod yawl:CategoryStack_getCounter_4 ;
+    yawl:hasMethod yawl:CategoryStack_get_5 ;
+    yawl:hasMethod yawl:CategoryStack_copy_6 ;
+    yawl:hasField yawl:CategoryStack_category ;
+    yawl:hasField yawl:CategoryStack_counter ;
+    .
+
+
+# Method: CategoryStack.add
+yawl:CategoryStack_add_1 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(NonHumanCategory o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CategoryStack.removeOne
+yawl:CategoryStack_removeOne_2 a yawl:Method ;
+    rdfs:label "removeOne" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeOne()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CategoryStack.isEmpty
+yawl:CategoryStack_isEmpty_3 a yawl:Method ;
+    rdfs:label "isEmpty" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEmpty()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CategoryStack.getCounter
+yawl:CategoryStack_getCounter_4 a yawl:Method ;
+    rdfs:label "getCounter" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getCounter()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CategoryStack.get
+yawl:CategoryStack_get_5 a yawl:Method ;
+    rdfs:label "get" ;
+    yawl:returnType "NonHumanCategory" ;
+    yawl:signature "NonHumanCategory get()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CategoryStack.copy
+yawl:CategoryStack_copy_6 a yawl:Method ;
+    rdfs:label "copy" ;
+    yawl:returnType "CategoryStack" ;
+    yawl:signature "CategoryStack copy()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:CategoryStack_category a yawl:Field ;
+    rdfs:label "category" .
+
+yawl:CategoryStack_counter a yawl:Field ;
+    rdfs:label "counter" .
+
+
+

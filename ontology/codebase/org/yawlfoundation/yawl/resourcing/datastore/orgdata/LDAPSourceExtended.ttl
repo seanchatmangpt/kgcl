@@ -1,0 +1,293 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.datastore.orgdata.LDAPSourceExtended
+yawl:LDAPSourceExtended a yawl:Class ;
+    rdfs:label "LDAPSourceExtended" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_datastore_orgdata ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/datastore/orgdata/LDAPSourceExtended.java"^^xsd:string ;
+    rdfs:comment """openLDAP DataSource connecting to an openLDAP server using the YAWL LDAP schema. This class requires the YAWL openLDAP schema to be active in the openLDAP  server to be used.  @author florian.quadt@rheni.de @author felix.mannhardt@rheni.de""" ;
+    yawl:extends yawl:DataSource ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:LDAPSourceExtended_initMaps_1 ;
+    yawl:hasMethod yawl:LDAPSourceExtended_fillInputMapFromLDAP_2 ;
+    yawl:hasMethod yawl:LDAPSourceExtended_firstPass_3 ;
+    yawl:hasMethod yawl:LDAPSourceExtended_secondPass_4 ;
+    yawl:hasMethod yawl:LDAPSourceExtended_createParticipant_5 ;
+    yawl:hasMethod yawl:LDAPSourceExtended_createOrgGroup_6 ;
+    yawl:hasMethod yawl:LDAPSourceExtended_createCapability_7 ;
+    yawl:hasMethod yawl:LDAPSourceExtended_createPosition_8 ;
+    yawl:hasMethod yawl:LDAPSourceExtended_createRole_9 ;
+    yawl:hasMethod yawl:LDAPSourceExtended_getAttributeAsBoolean_10 ;
+    yawl:hasMethod yawl:LDAPSourceExtended_getAttributeAsString_11 ;
+    yawl:hasMethod yawl:LDAPSourceExtended_isNotNullOrEmpty_12 ;
+    yawl:hasMethod yawl:LDAPSourceExtended_getProperty_13 ;
+    yawl:hasMethod yawl:LDAPSourceExtended_getDirContext_14 ;
+    yawl:hasMethod yawl:LDAPSourceExtended_loadProperties_15 ;
+    yawl:hasMethod yawl:LDAPSourceExtended_getEnvironment_16 ;
+    yawl:hasMethod yawl:LDAPSourceExtended_loadResources_17 ;
+    yawl:hasMethod yawl:LDAPSourceExtended_update_18 ;
+    yawl:hasMethod yawl:LDAPSourceExtended_delete_19 ;
+    yawl:hasMethod yawl:LDAPSourceExtended_insert_20 ;
+    yawl:hasMethod yawl:LDAPSourceExtended_importObj_21 ;
+    yawl:hasMethod yawl:LDAPSourceExtended_execUpdate_22 ;
+    yawl:hasMethod yawl:LDAPSourceExtended_authenticate_23 ;
+    yawl:hasField yawl:LDAPSourceExtended__log ;
+    yawl:hasField yawl:LDAPSourceExtended__props ;
+    yawl:hasField yawl:LDAPSourceExtended__environment ;
+    yawl:hasField yawl:LDAPSourceExtended__inputMap ;
+    yawl:hasField yawl:LDAPSourceExtended__participantsWithDNasKey ;
+    yawl:hasField yawl:LDAPSourceExtended__participantsWithIDasKey ;
+    yawl:hasField yawl:LDAPSourceExtended__rolesWithDNasKey ;
+    yawl:hasField yawl:LDAPSourceExtended__rolesWithIDasKey ;
+    yawl:hasField yawl:LDAPSourceExtended__orgGroupsWithDNasKey ;
+    yawl:hasField yawl:LDAPSourceExtended__orgGroupsWithIDasKey ;
+    yawl:hasField yawl:LDAPSourceExtended__positionsWithDNasKey ;
+    yawl:hasField yawl:LDAPSourceExtended__positionsWithIDasKey ;
+    yawl:hasField yawl:LDAPSourceExtended__capabilitiesWithDNasKey ;
+    yawl:hasField yawl:LDAPSourceExtended__capabilitiesWithIDasKey ;
+    yawl:hasField yawl:LDAPSourceExtended__uid2dnMap ;
+    .
+
+
+# Method: LDAPSourceExtended.initMaps
+yawl:LDAPSourceExtended_initMaps_1 a yawl:Method ;
+    rdfs:label "initMaps" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initMaps()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSourceExtended.fillInputMapFromLDAP
+yawl:LDAPSourceExtended_fillInputMapFromLDAP_2 a yawl:Method ;
+    rdfs:label "fillInputMapFromLDAP" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fillInputMapFromLDAP()" ;
+    rdfs:comment """Search LDAP recursively for all relevant object class DNs starting from  binding(s) as root. Then store the DNs and the attribute set for the  according node in the _inputMap.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSourceExtended.firstPass
+yawl:LDAPSourceExtended_firstPass_3 a yawl:Method ;
+    rdfs:label "firstPass" ;
+    yawl:returnType "void" ;
+    yawl:signature "void firstPass()" ;
+    rdfs:comment """In the first pass a loop iterates over the _inputMap and creates object instances like Participant, OrgGroup etc.  No relations (belongsTo, reportsTo) are set here. @throws NamingException""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSourceExtended.secondPass
+yawl:LDAPSourceExtended_secondPass_4 a yawl:Method ;
+    rdfs:label "secondPass" ;
+    yawl:returnType "void" ;
+    yawl:signature "void secondPass()" ;
+    rdfs:comment """In the second pass the relations are set (roles, capabilities, positions, belongsTo, reportsTo etc.) @throws InvalidNameException @throws NamingException""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSourceExtended.createParticipant
+yawl:LDAPSourceExtended_createParticipant_5 a yawl:Method ;
+    rdfs:label "createParticipant" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant createParticipant(LdapName dn, Attributes attr)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSourceExtended.createOrgGroup
+yawl:LDAPSourceExtended_createOrgGroup_6 a yawl:Method ;
+    rdfs:label "createOrgGroup" ;
+    yawl:returnType "OrgGroup" ;
+    yawl:signature "OrgGroup createOrgGroup(LdapName dn, Attributes attr)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSourceExtended.createCapability
+yawl:LDAPSourceExtended_createCapability_7 a yawl:Method ;
+    rdfs:label "createCapability" ;
+    yawl:returnType "Capability" ;
+    yawl:signature "Capability createCapability(LdapName dn, Attributes attr)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSourceExtended.createPosition
+yawl:LDAPSourceExtended_createPosition_8 a yawl:Method ;
+    rdfs:label "createPosition" ;
+    yawl:returnType "Position" ;
+    yawl:signature "Position createPosition(LdapName dn, Attributes attr)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSourceExtended.createRole
+yawl:LDAPSourceExtended_createRole_9 a yawl:Method ;
+    rdfs:label "createRole" ;
+    yawl:returnType "Role" ;
+    yawl:signature "Role createRole(LdapName dn, Attributes attr)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSourceExtended.getAttributeAsBoolean
+yawl:LDAPSourceExtended_getAttributeAsBoolean_10 a yawl:Method ;
+    rdfs:label "getAttributeAsBoolean" ;
+    yawl:returnType "Boolean" ;
+    yawl:signature "Boolean getAttributeAsBoolean(Attributes attr, String attributeName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSourceExtended.getAttributeAsString
+yawl:LDAPSourceExtended_getAttributeAsString_11 a yawl:Method ;
+    rdfs:label "getAttributeAsString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAttributeAsString(Attributes attr, String attributeName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSourceExtended.isNotNullOrEmpty
+yawl:LDAPSourceExtended_isNotNullOrEmpty_12 a yawl:Method ;
+    rdfs:label "isNotNullOrEmpty" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isNotNullOrEmpty(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSourceExtended.getProperty
+yawl:LDAPSourceExtended_getProperty_13 a yawl:Method ;
+    rdfs:label "getProperty" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getProperty(String key)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSourceExtended.getDirContext
+yawl:LDAPSourceExtended_getDirContext_14 a yawl:Method ;
+    rdfs:label "getDirContext" ;
+    yawl:returnType "DirContext" ;
+    yawl:signature "DirContext getDirContext()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSourceExtended.loadProperties
+yawl:LDAPSourceExtended_loadProperties_15 a yawl:Method ;
+    rdfs:label "loadProperties" ;
+    yawl:returnType "void" ;
+    yawl:signature "void loadProperties()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSourceExtended.getEnvironment
+yawl:LDAPSourceExtended_getEnvironment_16 a yawl:Method ;
+    rdfs:label "getEnvironment" ;
+    yawl:returnType "Hashtable" ;
+    yawl:signature "Hashtable getEnvironment()" ;
+    rdfs:comment """Gets the environment attribute values for server connections. The value for each attribute is read from the properties file. @return a populated map of environment values.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: LDAPSourceExtended.loadResources
+yawl:LDAPSourceExtended_loadResources_17 a yawl:Method ;
+    rdfs:label "loadResources" ;
+    yawl:returnType "ResourceDataSet" ;
+    yawl:signature "ResourceDataSet loadResources()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LDAPSourceExtended.update
+yawl:LDAPSourceExtended_update_18 a yawl:Method ;
+    rdfs:label "update" ;
+    yawl:returnType "void" ;
+    yawl:signature "void update(Object obj)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LDAPSourceExtended.delete
+yawl:LDAPSourceExtended_delete_19 a yawl:Method ;
+    rdfs:label "delete" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean delete(Object obj)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LDAPSourceExtended.insert
+yawl:LDAPSourceExtended_insert_20 a yawl:Method ;
+    rdfs:label "insert" ;
+    yawl:returnType "String" ;
+    yawl:signature "String insert(Object obj)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LDAPSourceExtended.importObj
+yawl:LDAPSourceExtended_importObj_21 a yawl:Method ;
+    rdfs:label "importObj" ;
+    yawl:returnType "void" ;
+    yawl:signature "void importObj(Object obj)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LDAPSourceExtended.execUpdate
+yawl:LDAPSourceExtended_execUpdate_22 a yawl:Method ;
+    rdfs:label "execUpdate" ;
+    yawl:returnType "int" ;
+    yawl:signature "int execUpdate(String query)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LDAPSourceExtended.authenticate
+yawl:LDAPSourceExtended_authenticate_23 a yawl:Method ;
+    rdfs:label "authenticate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean authenticate(String userid, String password)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:LDAPSourceExtended__log a yawl:Field ;
+    rdfs:label "_log" .
+
+yawl:LDAPSourceExtended__props a yawl:Field ;
+    rdfs:label "_props" .
+
+yawl:LDAPSourceExtended__environment a yawl:Field ;
+    rdfs:label "_environment" .
+
+yawl:LDAPSourceExtended__inputMap a yawl:Field ;
+    rdfs:label "_inputMap" .
+
+yawl:LDAPSourceExtended__participantsWithDNasKey a yawl:Field ;
+    rdfs:label "_participantsWithDNasKey" .
+
+yawl:LDAPSourceExtended__participantsWithIDasKey a yawl:Field ;
+    rdfs:label "_participantsWithIDasKey" .
+
+yawl:LDAPSourceExtended__rolesWithDNasKey a yawl:Field ;
+    rdfs:label "_rolesWithDNasKey" .
+
+yawl:LDAPSourceExtended__rolesWithIDasKey a yawl:Field ;
+    rdfs:label "_rolesWithIDasKey" .
+
+yawl:LDAPSourceExtended__orgGroupsWithDNasKey a yawl:Field ;
+    rdfs:label "_orgGroupsWithDNasKey" .
+
+yawl:LDAPSourceExtended__orgGroupsWithIDasKey a yawl:Field ;
+    rdfs:label "_orgGroupsWithIDasKey" .
+
+yawl:LDAPSourceExtended__positionsWithDNasKey a yawl:Field ;
+    rdfs:label "_positionsWithDNasKey" .
+
+yawl:LDAPSourceExtended__positionsWithIDasKey a yawl:Field ;
+    rdfs:label "_positionsWithIDasKey" .
+
+yawl:LDAPSourceExtended__capabilitiesWithDNasKey a yawl:Field ;
+    rdfs:label "_capabilitiesWithDNasKey" .
+
+yawl:LDAPSourceExtended__capabilitiesWithIDasKey a yawl:Field ;
+    rdfs:label "_capabilitiesWithIDasKey" .
+
+yawl:LDAPSourceExtended__uid2dnMap a yawl:Field ;
+    rdfs:label "_uid2dnMap" .
+
+
+

@@ -1,0 +1,113 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.update.FileNode
+yawl:FileNode a yawl:Class ;
+    rdfs:label "FileNode" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_update ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/update/FileNode.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 12/08/2014""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:FileNode_getURLFilePath_1 ;
+    yawl:hasMethod yawl:FileNode_getSize_2 ;
+    yawl:hasMethod yawl:FileNode_getMd5_3 ;
+    yawl:hasMethod yawl:FileNode_setDiskFilePath_4 ;
+    yawl:hasMethod yawl:FileNode_getDiskFilePath_5 ;
+    yawl:hasMethod yawl:FileNode_matches_6 ;
+    yawl:hasMethod yawl:FileNode_toString_7 ;
+    yawl:hasMethod yawl:FileNode_getAbsoluteURL_8 ;
+    yawl:hasField yawl:FileNode_urlFilePath ;
+    yawl:hasField yawl:FileNode_diskFilePath ;
+    yawl:hasField yawl:FileNode_md5 ;
+    yawl:hasField yawl:FileNode_size ;
+    yawl:hasField yawl:FileNode_urlBase ;
+    .
+
+
+# Method: FileNode.getURLFilePath
+yawl:FileNode_getURLFilePath_1 a yawl:Method ;
+    rdfs:label "getURLFilePath" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getURLFilePath()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FileNode.getSize
+yawl:FileNode_getSize_2 a yawl:Method ;
+    rdfs:label "getSize" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getSize()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FileNode.getMd5
+yawl:FileNode_getMd5_3 a yawl:Method ;
+    rdfs:label "getMd5" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMd5()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FileNode.setDiskFilePath
+yawl:FileNode_setDiskFilePath_4 a yawl:Method ;
+    rdfs:label "setDiskFilePath" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDiskFilePath(String n)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FileNode.getDiskFilePath
+yawl:FileNode_getDiskFilePath_5 a yawl:Method ;
+    rdfs:label "getDiskFilePath" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDiskFilePath()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FileNode.matches
+yawl:FileNode_matches_6 a yawl:Method ;
+    rdfs:label "matches" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean matches(FileNode other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FileNode.toString
+yawl:FileNode_toString_7 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FileNode.getAbsoluteURL
+yawl:FileNode_getAbsoluteURL_8 a yawl:Method ;
+    rdfs:label "getAbsoluteURL" ;
+    yawl:returnType "URL" ;
+    yawl:signature "URL getAbsoluteURL()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:FileNode_urlFilePath a yawl:Field ;
+    rdfs:label "urlFilePath" .
+
+yawl:FileNode_diskFilePath a yawl:Field ;
+    rdfs:label "diskFilePath" .
+
+yawl:FileNode_md5 a yawl:Field ;
+    rdfs:label "md5" .
+
+yawl:FileNode_size a yawl:Field ;
+    rdfs:label "size" .
+
+yawl:FileNode_urlBase a yawl:Field ;
+    rdfs:label "urlBase" .
+
+
+

@@ -1,0 +1,38 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.editor.ProcessMonitor
+yawl:ProcessMonitor a yawl:Class ;
+    rdfs:label "ProcessMonitor" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_editor ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/editor/EditorLauncher.java"^^xsd:string ;
+    yawl:implements yawl:Runnable ;
+    yawl:hasMethod yawl:ProcessMonitor_run_1 ;
+    yawl:hasField yawl:ProcessMonitor__proc ;
+    .
+
+
+# Method: ProcessMonitor.run
+yawl:ProcessMonitor_run_1 a yawl:Method ;
+    rdfs:label "run" ;
+    yawl:returnType "void" ;
+    yawl:signature "void run()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:ProcessMonitor__proc a yawl:Field ;
+    rdfs:label "_proc" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_controlpanel_update_table a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.controlpanel.update.table" .
+
+

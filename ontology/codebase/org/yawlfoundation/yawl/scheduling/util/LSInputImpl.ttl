@@ -1,0 +1,195 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.scheduling.util.LSInputImpl
+yawl:LSInputImpl a yawl:Class ;
+    rdfs:label "LSInputImpl" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_scheduling_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/scheduling/util/XMLUtils.java"^^xsd:string ;
+    yawl:implements yawl:LSInput ;
+    yawl:modifiers "protected" ;
+    yawl:hasMethod yawl:LSInputImpl_getPublicId_1 ;
+    yawl:hasMethod yawl:LSInputImpl_setPublicId_2 ;
+    yawl:hasMethod yawl:LSInputImpl_getSystemId_3 ;
+    yawl:hasMethod yawl:LSInputImpl_setSystemId_4 ;
+    yawl:hasMethod yawl:LSInputImpl_getInputStream_5 ;
+    yawl:hasMethod yawl:LSInputImpl_setInputStream_6 ;
+    yawl:hasMethod yawl:LSInputImpl_getStringData_7 ;
+    yawl:hasMethod yawl:LSInputImpl_getBaseURI_8 ;
+    yawl:hasMethod yawl:LSInputImpl_getByteStream_9 ;
+    yawl:hasMethod yawl:LSInputImpl_getCertifiedText_10 ;
+    yawl:hasMethod yawl:LSInputImpl_getCharacterStream_11 ;
+    yawl:hasMethod yawl:LSInputImpl_getEncoding_12 ;
+    yawl:hasMethod yawl:LSInputImpl_setBaseURI_13 ;
+    yawl:hasMethod yawl:LSInputImpl_setByteStream_14 ;
+    yawl:hasMethod yawl:LSInputImpl_setCertifiedText_15 ;
+    yawl:hasMethod yawl:LSInputImpl_setCharacterStream_16 ;
+    yawl:hasMethod yawl:LSInputImpl_setEncoding_17 ;
+    yawl:hasMethod yawl:LSInputImpl_setStringData_18 ;
+    yawl:hasField yawl:LSInputImpl__publicId ;
+    yawl:hasField yawl:LSInputImpl__systemId ;
+    yawl:hasField yawl:LSInputImpl__inputStream ;
+    .
+
+
+# Method: LSInputImpl.getPublicId
+yawl:LSInputImpl_getPublicId_1 a yawl:Method ;
+    rdfs:label "getPublicId" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPublicId()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LSInputImpl.setPublicId
+yawl:LSInputImpl_setPublicId_2 a yawl:Method ;
+    rdfs:label "setPublicId" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPublicId(String publicId)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LSInputImpl.getSystemId
+yawl:LSInputImpl_getSystemId_3 a yawl:Method ;
+    rdfs:label "getSystemId" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSystemId()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LSInputImpl.setSystemId
+yawl:LSInputImpl_setSystemId_4 a yawl:Method ;
+    rdfs:label "setSystemId" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSystemId(String systemId)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LSInputImpl.getInputStream
+yawl:LSInputImpl_getInputStream_5 a yawl:Method ;
+    rdfs:label "getInputStream" ;
+    yawl:returnType "BufferedInputStream" ;
+    yawl:signature "BufferedInputStream getInputStream()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LSInputImpl.setInputStream
+yawl:LSInputImpl_setInputStream_6 a yawl:Method ;
+    rdfs:label "setInputStream" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setInputStream(BufferedInputStream inputStream)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LSInputImpl.getStringData
+yawl:LSInputImpl_getStringData_7 a yawl:Method ;
+    rdfs:label "getStringData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStringData()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LSInputImpl.getBaseURI
+yawl:LSInputImpl_getBaseURI_8 a yawl:Method ;
+    rdfs:label "getBaseURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBaseURI()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LSInputImpl.getByteStream
+yawl:LSInputImpl_getByteStream_9 a yawl:Method ;
+    rdfs:label "getByteStream" ;
+    yawl:returnType "InputStream" ;
+    yawl:signature "InputStream getByteStream()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LSInputImpl.getCertifiedText
+yawl:LSInputImpl_getCertifiedText_10 a yawl:Method ;
+    rdfs:label "getCertifiedText" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean getCertifiedText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LSInputImpl.getCharacterStream
+yawl:LSInputImpl_getCharacterStream_11 a yawl:Method ;
+    rdfs:label "getCharacterStream" ;
+    yawl:returnType "Reader" ;
+    yawl:signature "Reader getCharacterStream()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LSInputImpl.getEncoding
+yawl:LSInputImpl_getEncoding_12 a yawl:Method ;
+    rdfs:label "getEncoding" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEncoding()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LSInputImpl.setBaseURI
+yawl:LSInputImpl_setBaseURI_13 a yawl:Method ;
+    rdfs:label "setBaseURI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBaseURI(String baseURI)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LSInputImpl.setByteStream
+yawl:LSInputImpl_setByteStream_14 a yawl:Method ;
+    rdfs:label "setByteStream" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setByteStream(InputStream byteStream)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LSInputImpl.setCertifiedText
+yawl:LSInputImpl_setCertifiedText_15 a yawl:Method ;
+    rdfs:label "setCertifiedText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCertifiedText(boolean certifiedText)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LSInputImpl.setCharacterStream
+yawl:LSInputImpl_setCharacterStream_16 a yawl:Method ;
+    rdfs:label "setCharacterStream" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCharacterStream(Reader characterStream)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LSInputImpl.setEncoding
+yawl:LSInputImpl_setEncoding_17 a yawl:Method ;
+    rdfs:label "setEncoding" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEncoding(String encoding)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: LSInputImpl.setStringData
+yawl:LSInputImpl_setStringData_18 a yawl:Method ;
+    rdfs:label "setStringData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStringData(String stringData)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:LSInputImpl__publicId a yawl:Field ;
+    rdfs:label "_publicId" .
+
+yawl:LSInputImpl__systemId a yawl:Field ;
+    rdfs:label "_systemId" .
+
+yawl:LSInputImpl__inputStream a yawl:Field ;
+    rdfs:label "_inputStream" .
+
+
+

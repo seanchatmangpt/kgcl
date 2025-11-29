@@ -1,0 +1,60 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.interfce.interfaceB.Handler
+yawl:Handler a yawl:Class ;
+    rdfs:label "Handler" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_interfce_interfaceB ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/interfce/interfaceB/InterfaceB_EngineBasedClient.java"^^xsd:string ;
+    yawl:implements yawl:Runnable ;
+    yawl:modifiers "private" ;
+    yawl:hasMethod yawl:Handler_setWorkItem_1 ;
+    yawl:hasMethod yawl:Handler_run_2 ;
+    yawl:hasMethod yawl:Handler_redirectWorkItem_3 ;
+    yawl:hasField yawl:Handler__yawlService ;
+    yawl:hasField yawl:Handler__paramsMap ;
+    yawl:hasField yawl:Handler__workItem ;
+    .
+
+
+# Method: Handler.setWorkItem
+yawl:Handler_setWorkItem_1 a yawl:Method ;
+    rdfs:label "setWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setWorkItem(YWorkItem item)" ;
+    .
+
+# Method: Handler.run
+yawl:Handler_run_2 a yawl:Method ;
+    rdfs:label "run" ;
+    yawl:returnType "void" ;
+    yawl:signature "void run()" ;
+    rdfs:comment """POST the message to the custom service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Handler.redirectWorkItem
+yawl:Handler_redirectWorkItem_3 a yawl:Method ;
+    rdfs:label "redirectWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void redirectWorkItem(boolean connect)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:Handler__yawlService a yawl:Field ;
+    rdfs:label "_yawlService" .
+
+yawl:Handler__paramsMap a yawl:Field ;
+    rdfs:label "_paramsMap" .
+
+yawl:Handler__workItem a yawl:Field ;
+    rdfs:label "_workItem" .
+
+
+

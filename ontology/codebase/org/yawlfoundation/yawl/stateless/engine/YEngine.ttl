@@ -1,0 +1,360 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.stateless.engine.YEngine
+yawl:YEngine a yawl:Class ;
+    rdfs:label "YEngine" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_engine ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/engine/YEngine.java"^^xsd:string ;
+    rdfs:comment """A stateless version of the YAWL engine @author Michael Adams""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YEngine_isRunning_1 ;
+    yawl:hasMethod yawl:YEngine_getEngineNbr_2 ;
+    yawl:hasMethod yawl:YEngine_shutdown_3 ;
+    yawl:hasMethod yawl:YEngine_initBuildProperties_4 ;
+    yawl:hasMethod yawl:YEngine_getBuildProperties_5 ;
+    yawl:hasMethod yawl:YEngine_checkEngineRunning_6 ;
+    yawl:hasMethod yawl:YEngine_getAnnouncer_7 ;
+    yawl:hasMethod yawl:YEngine_setEngineStatus_8 ;
+    yawl:hasMethod yawl:YEngine_getEngineStatus_9 ;
+    yawl:hasMethod yawl:YEngine_formatCaseParams_10 ;
+    yawl:hasMethod yawl:YEngine_logCaseStarted_11 ;
+    yawl:hasMethod yawl:YEngine_cancelCase_12 ;
+    yawl:hasMethod yawl:YEngine_launchCase_13 ;
+    yawl:hasMethod yawl:YEngine_suspendCase_14 ;
+    yawl:hasMethod yawl:YEngine_resumeCase_15 ;
+    yawl:hasMethod yawl:YEngine_progressCaseSuspension_16 ;
+    yawl:hasMethod yawl:YEngine_announceEvents_17 ;
+    yawl:hasMethod yawl:YEngine_startWorkItem_18 ;
+    yawl:hasMethod yawl:YEngine_announceItemStarted_19 ;
+    yawl:hasMethod yawl:YEngine_startEnabledWorkItem_20 ;
+    yawl:hasMethod yawl:YEngine_startFiredWorkItem_21 ;
+    yawl:hasMethod yawl:YEngine_completeWorkItem_22 ;
+    yawl:hasMethod yawl:YEngine_completeExecutingWorkitem_23 ;
+    yawl:hasMethod yawl:YEngine_completeWorkItemLogging_24 ;
+    yawl:hasMethod yawl:YEngine_skipWorkItem_25 ;
+    yawl:hasMethod yawl:YEngine_getDataDocForWorkItemCompletion_26 ;
+    yawl:hasMethod yawl:YEngine_mapOutputDataForSkippedWorkItem_27 ;
+    yawl:hasMethod yawl:YEngine_checkEligibilityToAddInstances_28 ;
+    yawl:hasMethod yawl:YEngine_createNewInstance_29 ;
+    yawl:hasMethod yawl:YEngine_suspendWorkItem_30 ;
+    yawl:hasMethod yawl:YEngine_unsuspendWorkItem_31 ;
+    yawl:hasMethod yawl:YEngine_rollbackWorkItem_32 ;
+    yawl:hasMethod yawl:YEngine_cancelWorkItem_33 ;
+    yawl:hasMethod yawl:YEngine_cancelTimer_34 ;
+    yawl:hasField yawl:YEngine__logger ;
+    yawl:hasField yawl:YEngine__engineStatus ;
+    yawl:hasField yawl:YEngine__announcer ;
+    yawl:hasField yawl:YEngine__buildProps ;
+    yawl:hasField yawl:YEngine_ENGINE_COUNTER ;
+    yawl:hasField yawl:YEngine__engineNbr ;
+    .
+
+
+# Method: YEngine.isRunning
+yawl:YEngine_isRunning_1 a yawl:Method ;
+    rdfs:label "isRunning" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isRunning()" ;
+    rdfs:comment """Checks if the engine is currently running @return true if running, false otherwise""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getEngineNbr
+yawl:YEngine_getEngineNbr_2 a yawl:Method ;
+    rdfs:label "getEngineNbr" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getEngineNbr()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.shutdown
+yawl:YEngine_shutdown_3 a yawl:Method ;
+    rdfs:label "shutdown" ;
+    yawl:returnType "void" ;
+    yawl:signature "void shutdown()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.initBuildProperties
+yawl:YEngine_initBuildProperties_4 a yawl:Method ;
+    rdfs:label "initBuildProperties" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initBuildProperties(InputStream stream)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getBuildProperties
+yawl:YEngine_getBuildProperties_5 a yawl:Method ;
+    rdfs:label "getBuildProperties" ;
+    yawl:returnType "YBuildProperties" ;
+    yawl:signature "YBuildProperties getBuildProperties()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.checkEngineRunning
+yawl:YEngine_checkEngineRunning_6 a yawl:Method ;
+    rdfs:label "checkEngineRunning" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkEngineRunning()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getAnnouncer
+yawl:YEngine_getAnnouncer_7 a yawl:Method ;
+    rdfs:label "getAnnouncer" ;
+    yawl:returnType "YAnnouncer" ;
+    yawl:signature "YAnnouncer getAnnouncer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.setEngineStatus
+yawl:YEngine_setEngineStatus_8 a yawl:Method ;
+    rdfs:label "setEngineStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEngineStatus(Status status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getEngineStatus
+yawl:YEngine_getEngineStatus_9 a yawl:Method ;
+    rdfs:label "getEngineStatus" ;
+    yawl:returnType "Status" ;
+    yawl:signature "Status getEngineStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.formatCaseParams
+yawl:YEngine_formatCaseParams_10 a yawl:Method ;
+    rdfs:label "formatCaseParams" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element formatCaseParams(String paramStr, YSpecification spec)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngine.logCaseStarted
+yawl:YEngine_logCaseStarted_11 a yawl:Method ;
+    rdfs:label "logCaseStarted" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logCaseStarted(YSpecification spec, YNetRunner runner, String caseParams, YLogDataItemList logData)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.cancelCase
+yawl:YEngine_cancelCase_12 a yawl:Method ;
+    rdfs:label "cancelCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancelCase(YNetRunner runner)" ;
+    rdfs:comment """Cancels a running case. @throws YEngineStateException if there's some persistence problem""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.launchCase
+yawl:YEngine_launchCase_13 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "YNetRunner" ;
+    yawl:signature "YNetRunner launchCase(YSpecification spec, String caseID, String caseParams, YLogDataItemList logData)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.suspendCase
+yawl:YEngine_suspendCase_14 a yawl:Method ;
+    rdfs:label "suspendCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void suspendCase(YNetRunner runner)" ;
+    rdfs:comment """Suspends the execution of a case. @throws YStateException if case cannot be suspended given the current engine operating state""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.resumeCase
+yawl:YEngine_resumeCase_15 a yawl:Method ;
+    rdfs:label "resumeCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void resumeCase(YNetRunner runner)" ;
+    rdfs:comment """Resumes execution of a case. @throws YStateException if case cannot be resumed @throws YDataStateException @throws YQueryException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.progressCaseSuspension
+yawl:YEngine_progressCaseSuspension_16 a yawl:Method ;
+    rdfs:label "progressCaseSuspension" ;
+    yawl:returnType "void" ;
+    yawl:signature "void progressCaseSuspension(YNetRunner runner)" ;
+    rdfs:comment """Attempts to progress the suspension status of a case. Where a Case is \"suspending\", we scan the workitems associated with all the nets associated with the case, and where no workitems are enabled, executing or fired, we progress the suspension state from \"suspending\" to \"suspended\". @throws YStateException if case cannot be progressed""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.announceEvents
+yawl:YEngine_announceEvents_17 a yawl:Method ;
+    rdfs:label "announceEvents" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceEvents(YNetRunner parent)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.startWorkItem
+yawl:YEngine_startWorkItem_18 a yawl:Method ;
+    rdfs:label "startWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem startWorkItem(YWorkItem workItem)" ;
+    rdfs:comment """Starts a work item.  If the workitem param is enabled this method fires the task and returns the first of its child instances in the executing state. Else if the workitem is fired then it moves the state from fired to executing. Either way the method returns the resultant work item. @param workItem the enabled, or fired workitem. @return the resultant work item in the executing state. @throws YStateException     if the workitem is not in either of these states. @throws YDataStateException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.announceItemStarted
+yawl:YEngine_announceItemStarted_19 a yawl:Method ;
+    rdfs:label "announceItemStarted" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceItemStarted(YWorkItem item)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.startEnabledWorkItem
+yawl:YEngine_startEnabledWorkItem_20 a yawl:Method ;
+    rdfs:label "startEnabledWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem startEnabledWorkItem(YNetRunner netRunner, YWorkItem workItem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.startFiredWorkItem
+yawl:YEngine_startFiredWorkItem_21 a yawl:Method ;
+    rdfs:label "startFiredWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem startFiredWorkItem(YNetRunner netRunner, YWorkItem workItem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.completeWorkItem
+yawl:YEngine_completeWorkItem_22 a yawl:Method ;
+    rdfs:label "completeWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem completeWorkItem(YWorkItem workItem, String data, String logPredicate, WorkItemCompletion completionType)" ;
+    rdfs:comment """Completes the work item. @param workItem @param data @param logPredicate - a pre-parse of the completion log predicate for this item @param completionType - one of the completion types 'normal' (ordinary completion) 'force' (forced completion) or 'fail' (forced fail) completion @throws YStateException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.completeExecutingWorkitem
+yawl:YEngine_completeExecutingWorkitem_23 a yawl:Method ;
+    rdfs:label "completeExecutingWorkitem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void completeExecutingWorkitem(YWorkItem workItem, YNetRunner netRunner, String data, String logPredicate, WorkItemCompletion completionType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.completeWorkItemLogging
+yawl:YEngine_completeWorkItemLogging_24 a yawl:Method ;
+    rdfs:label "completeWorkItemLogging" ;
+    yawl:returnType "void" ;
+    yawl:signature "void completeWorkItemLogging(YWorkItem workItem, String logPredicate, WorkItemCompletion completionType, Document doc)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.skipWorkItem
+yawl:YEngine_skipWorkItem_25 a yawl:Method ;
+    rdfs:label "skipWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem skipWorkItem(YWorkItem workItem)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.getDataDocForWorkItemCompletion
+yawl:YEngine_getDataDocForWorkItemCompletion_26 a yawl:Method ;
+    rdfs:label "getDataDocForWorkItemCompletion" ;
+    yawl:returnType "Document" ;
+    yawl:signature "Document getDataDocForWorkItemCompletion(YWorkItem workItem, String data, WorkItemCompletion completionType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.mapOutputDataForSkippedWorkItem
+yawl:YEngine_mapOutputDataForSkippedWorkItem_27 a yawl:Method ;
+    rdfs:label "mapOutputDataForSkippedWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String mapOutputDataForSkippedWorkItem(YWorkItem workItem, String data)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngine.checkEligibilityToAddInstances
+yawl:YEngine_checkEligibilityToAddInstances_28 a yawl:Method ;
+    rdfs:label "checkEligibilityToAddInstances" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkEligibilityToAddInstances(YWorkItem item)" ;
+    rdfs:comment """Determines whether or not a task will allow a dynamically created new instance to be created.  MultiInstance Task with dynamic instance creation. @throws YStateException if task is not MultiInstance, or if task does not allow dynamic instance creation, or if current number of instances is not less than the maxInstances for the task.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.createNewInstance
+yawl:YEngine_createNewInstance_29 a yawl:Method ;
+    rdfs:label "createNewInstance" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem createNewInstance(YWorkItem workItem, String paramValueForMICreation)" ;
+    rdfs:comment """Creates a new work item instance when possible. @param workItem the id of a work item inside the task to have a new instance. @param paramValueForMICreation format \"<data>[InputParam]</data> InputParam == <varName>varValue</varName> @return the work item of the new instance. @throws YStateException if the task is not able to create a new instance, due to its state or its design.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.suspendWorkItem
+yawl:YEngine_suspendWorkItem_30 a yawl:Method ;
+    rdfs:label "suspendWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem suspendWorkItem(YWorkItem workItem)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.unsuspendWorkItem
+yawl:YEngine_unsuspendWorkItem_31 a yawl:Method ;
+    rdfs:label "unsuspendWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem unsuspendWorkItem(YWorkItem workItem)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.rollbackWorkItem
+yawl:YEngine_rollbackWorkItem_32 a yawl:Method ;
+    rdfs:label "rollbackWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem rollbackWorkItem(YWorkItem workItem)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.cancelWorkItem
+yawl:YEngine_cancelWorkItem_33 a yawl:Method ;
+    rdfs:label "cancelWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem cancelWorkItem(YNetRunner caseRunner, YWorkItem workItem)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEngine.cancelTimer
+yawl:YEngine_cancelTimer_34 a yawl:Method ;
+    rdfs:label "cancelTimer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancelTimer(YWorkItem workItem)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YEngine__logger a yawl:Field ;
+    rdfs:label "_logger" .
+
+yawl:YEngine__engineStatus a yawl:Field ;
+    rdfs:label "_engineStatus" .
+
+yawl:YEngine__announcer a yawl:Field ;
+    rdfs:label "_announcer" .
+
+yawl:YEngine__buildProps a yawl:Field ;
+    rdfs:label "_buildProps" .
+
+yawl:YEngine_ENGINE_COUNTER a yawl:Field ;
+    rdfs:label "ENGINE_COUNTER" .
+
+yawl:YEngine__engineNbr a yawl:Field ;
+    rdfs:label "_engineNbr" .
+
+
+

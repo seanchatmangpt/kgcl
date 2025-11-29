@@ -1,0 +1,105 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.filters.AbstractFilter
+yawl:AbstractFilter a yawl:Class ;
+    rdfs:label "AbstractFilter" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_filters ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/filters/AbstractFilter.java"^^xsd:string ;
+    rdfs:comment """The base class for all filters. <p/> Create Date: 03/08/2007. Last Date: 12/11/2007 @author Michael Adams (BPM Group, QUT Australia) @version 2.0""" ;
+    yawl:extends yawl:AbstractSelector ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:AbstractFilter_getFilterType_1 ;
+    yawl:hasMethod yawl:AbstractFilter_setFilterType_2 ;
+    yawl:hasMethod yawl:AbstractFilter_toXML_3 ;
+    yawl:hasMethod yawl:AbstractFilter_parse_4 ;
+    yawl:hasMethod yawl:AbstractFilter_getRuntimeValue_5 ;
+    yawl:hasMethod yawl:AbstractFilter_getByLabel_6 ;
+    yawl:hasMethod yawl:AbstractFilter_performFilter_7 ;
+    yawl:hasField yawl:AbstractFilter_ORGANISATIONAL_FILTER ;
+    yawl:hasField yawl:AbstractFilter_CAPABILITY_FILTER ;
+    yawl:hasField yawl:AbstractFilter_HISTORICAL_FILTER ;
+    yawl:hasField yawl:AbstractFilter__filterType ;
+    .
+
+
+# Method: AbstractFilter.getFilterType
+yawl:AbstractFilter_getFilterType_1 a yawl:Method ;
+    rdfs:label "getFilterType" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getFilterType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractFilter.setFilterType
+yawl:AbstractFilter_setFilterType_2 a yawl:Method ;
+    rdfs:label "setFilterType" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setFilterType(int fType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractFilter.toXML
+yawl:AbstractFilter_toXML_3 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    rdfs:comment """@return an XML string describing this filter - used by the editor to build the specification XML""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractFilter.parse
+yawl:AbstractFilter_parse_4 a yawl:Method ;
+    rdfs:label "parse" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set parse(String key, WorkItemRecord wir)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractFilter.getRuntimeValue
+yawl:AbstractFilter_getRuntimeValue_5 a yawl:Method ;
+    rdfs:label "getRuntimeValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRuntimeValue(String expression, WorkItemRecord wir)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractFilter.getByLabel
+yawl:AbstractFilter_getByLabel_6 a yawl:Method ;
+    rdfs:label "getByLabel" ;
+    yawl:returnType "AbstractResourceAttribute" ;
+    yawl:signature "AbstractResourceAttribute getByLabel(String key, String label)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractFilter.performFilter
+yawl:AbstractFilter_performFilter_7 a yawl:Method ;
+    rdfs:label "performFilter" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set performFilter(Set resources, WorkItemRecord wir)" ;
+    rdfs:comment """Abstract method, to be implemented by all child classes, which carries out whatever filtering the class has been created to do. @param resources a distribution set of Participant objects @param wir the item to be allocated @return the resultant filtered distribution set""" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:AbstractFilter_ORGANISATIONAL_FILTER a yawl:Field ;
+    rdfs:label "ORGANISATIONAL_FILTER" .
+
+yawl:AbstractFilter_CAPABILITY_FILTER a yawl:Field ;
+    rdfs:label "CAPABILITY_FILTER" .
+
+yawl:AbstractFilter_HISTORICAL_FILTER a yawl:Field ;
+    rdfs:label "HISTORICAL_FILTER" .
+
+yawl:AbstractFilter__filterType a yawl:Field ;
+    rdfs:label "_filterType" .
+
+
+

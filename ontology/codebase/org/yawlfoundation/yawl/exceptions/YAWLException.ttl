@@ -1,0 +1,100 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.exceptions.YAWLException
+yawl:YAWLException a yawl:Class ;
+    rdfs:label "YAWLException" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_exceptions ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/exceptions/YAWLException.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 26/11/2004 Time: 15:26:54""" ;
+    yawl:extends yawl:Exception ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YAWLException_getMessage_1 ;
+    yawl:hasMethod yawl:YAWLException_toXML_2 ;
+    yawl:hasMethod yawl:YAWLException_toXMLGuts_3 ;
+    yawl:hasMethod yawl:YAWLException_unmarshal_4 ;
+    yawl:hasMethod yawl:YAWLException_parseMessage_5 ;
+    yawl:hasMethod yawl:YAWLException_setMessage_6 ;
+    yawl:hasMethod yawl:YAWLException_rethrow_7 ;
+    yawl:hasField yawl:YAWLException__builder ;
+    yawl:hasField yawl:YAWLException__message ;
+    yawl:hasField yawl:YAWLException_MESSAGE_NM ;
+    .
+
+
+# Method: YAWLException.getMessage
+yawl:YAWLException_getMessage_1 a yawl:Method ;
+    rdfs:label "getMessage" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMessage()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLException.toXML
+yawl:YAWLException_toXML_2 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLException.toXMLGuts
+yawl:YAWLException_toXMLGuts_3 a yawl:Method ;
+    rdfs:label "toXMLGuts" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXMLGuts()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YAWLException.unmarshal
+yawl:YAWLException_unmarshal_4 a yawl:Method ;
+    rdfs:label "unmarshal" ;
+    yawl:returnType "YAWLException" ;
+    yawl:signature "YAWLException unmarshal(Document exceptionDoc)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YAWLException.parseMessage
+yawl:YAWLException_parseMessage_5 a yawl:Method ;
+    rdfs:label "parseMessage" ;
+    yawl:returnType "String" ;
+    yawl:signature "String parseMessage(Document exceptionDoc)" ;
+    yawl:modifiers "protected" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YAWLException.setMessage
+yawl:YAWLException_setMessage_6 a yawl:Method ;
+    rdfs:label "setMessage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMessage(String message)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLException.rethrow
+yawl:YAWLException_rethrow_7 a yawl:Method ;
+    rdfs:label "rethrow" ;
+    yawl:returnType "void" ;
+    yawl:signature "void rethrow()" ;
+    rdfs:comment """A convenience method that effectively rethrows the exceptions listed. Caveat: ALL 4 exceptions must appear in the throws clause of any methods that call this method. @throws YStateException @throws YDataStateException @throws YQueryException @throws YPersistenceException""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YAWLException__builder a yawl:Field ;
+    rdfs:label "_builder" .
+
+yawl:YAWLException__message a yawl:Field ;
+    rdfs:label "_message" .
+
+yawl:YAWLException_MESSAGE_NM a yawl:Field ;
+    rdfs:label "MESSAGE_NM" .
+
+
+

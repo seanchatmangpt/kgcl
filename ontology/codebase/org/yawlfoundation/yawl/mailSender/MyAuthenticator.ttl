@@ -1,0 +1,42 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.mailSender.MyAuthenticator
+yawl:MyAuthenticator a yawl:Class ;
+    rdfs:label "MyAuthenticator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_mailSender ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/mailSender/MailSender.java"^^xsd:string ;
+    yawl:extends yawl:Authenticator ;
+    yawl:hasMethod yawl:MyAuthenticator_getPasswordAuthentication_1 ;
+    yawl:hasField yawl:MyAuthenticator_smtpUsername ;
+    yawl:hasField yawl:MyAuthenticator_smtpPassword ;
+    .
+
+
+# Method: MyAuthenticator.getPasswordAuthentication
+yawl:MyAuthenticator_getPasswordAuthentication_1 a yawl:Method ;
+    rdfs:label "getPasswordAuthentication" ;
+    yawl:returnType "PasswordAuthentication" ;
+    yawl:signature "PasswordAuthentication getPasswordAuthentication()" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:MyAuthenticator_smtpUsername a yawl:Field ;
+    rdfs:label "smtpUsername" .
+
+yawl:MyAuthenticator_smtpPassword a yawl:Field ;
+    rdfs:label "smtpPassword" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_logging_table a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.logging.table" .
+
+

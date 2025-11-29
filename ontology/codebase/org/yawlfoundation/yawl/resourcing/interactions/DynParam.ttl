@@ -1,0 +1,111 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.interactions.DynParam
+yawl:DynParam a yawl:Class ;
+    rdfs:label "DynParam" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_interactions ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/interactions/OfferInteraction.java"^^xsd:string ;
+    rdfs:comment """A class that encapsulates one dynamic parameter - i.e. a data variable that at runtime will contain a value corresponding to a participant or role that the task is to be offered to.""" ;
+    yawl:modifiers "private" ;
+    yawl:hasMethod yawl:DynParam_getName_1 ;
+    yawl:hasMethod yawl:DynParam_getRefers_2 ;
+    yawl:hasMethod yawl:DynParam_setName_3 ;
+    yawl:hasMethod yawl:DynParam_setRefers_4 ;
+    yawl:hasMethod yawl:DynParam_getRefersString_5 ;
+    yawl:hasMethod yawl:DynParam_evaluate_6 ;
+    yawl:hasMethod yawl:DynParam_getNetParamValue_7 ;
+    yawl:hasMethod yawl:DynParam_getVarIDList_8 ;
+    yawl:hasMethod yawl:DynParam_toXML_9 ;
+    yawl:hasField yawl:DynParam__name ;
+    yawl:hasField yawl:DynParam__refers ;
+    .
+
+
+# Method: DynParam.getName
+yawl:DynParam_getName_1 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynParam.getRefers
+yawl:DynParam_getRefers_2 a yawl:Method ;
+    rdfs:label "getRefers" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getRefers()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynParam.setName
+yawl:DynParam_setName_3 a yawl:Method ;
+    rdfs:label "setName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynParam.setRefers
+yawl:DynParam_setRefers_4 a yawl:Method ;
+    rdfs:label "setRefers" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRefers(int refers)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynParam.getRefersString
+yawl:DynParam_getRefersString_5 a yawl:Method ;
+    rdfs:label "getRefersString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRefersString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynParam.evaluate
+yawl:DynParam_evaluate_6 a yawl:Method ;
+    rdfs:label "evaluate" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set evaluate(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynParam.getNetParamValue
+yawl:DynParam_getNetParamValue_7 a yawl:Method ;
+    rdfs:label "getNetParamValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNetParamValue(WorkItemRecord wir, String name)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynParam.getVarIDList
+yawl:DynParam_getVarIDList_8 a yawl:Method ;
+    rdfs:label "getVarIDList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getVarIDList(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynParam.toXML
+yawl:DynParam_toXML_9 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    rdfs:comment """this is for the spec file""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:DynParam__name a yawl:Field ;
+    rdfs:label "_name" .
+
+yawl:DynParam__refers a yawl:Field ;
+    rdfs:label "_refers" .
+
+
+

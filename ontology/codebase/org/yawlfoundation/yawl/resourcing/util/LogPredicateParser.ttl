@@ -1,0 +1,43 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.util.LogPredicateParser
+yawl:LogPredicateParser a yawl:Class ;
+    rdfs:label "LogPredicateParser" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/util/LogPredicateParser.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 1/03/2010""" ;
+    yawl:extends yawl:YPredicateParser ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:LogPredicateParser_valueOf_1 ;
+    yawl:hasField yawl:LogPredicateParser__wir ;
+    yawl:hasField yawl:LogPredicateParser__participant ;
+    yawl:hasField yawl:LogPredicateParser__resMap ;
+    .
+
+
+# Method: LogPredicateParser.valueOf
+yawl:LogPredicateParser_valueOf_1 a yawl:Method ;
+    rdfs:label "valueOf" ;
+    yawl:returnType "String" ;
+    yawl:signature "String valueOf(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:LogPredicateParser__wir a yawl:Field ;
+    rdfs:label "_wir" .
+
+yawl:LogPredicateParser__participant a yawl:Field ;
+    rdfs:label "_participant" .
+
+yawl:LogPredicateParser__resMap a yawl:Field ;
+    rdfs:label "_resMap" .
+
+
+

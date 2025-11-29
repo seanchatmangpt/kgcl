@@ -1,0 +1,384 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.support.WorkletGateway
+yawl:WorkletGateway a yawl:Class ;
+    rdfs:label "WorkletGateway" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_support ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/support/WorkletGateway.java"^^xsd:string ;
+    rdfs:comment """The WorkletGateway class acts as a gateway between the Worklet Selection Service and the external RDREditor. It initialises the service with values from 'web.xml' and provides functionality to trigger a running worklet replacement due to an addition to the ruleset (by the editor). Future implementations may extend this gateway for other purposes. @author Michael Adams v0.8, 13/08/2006""" ;
+    yawl:extends yawl:YHttpServlet ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:WorkletGateway_init_1 ;
+    yawl:hasMethod yawl:WorkletGateway_destroy_2 ;
+    yawl:hasMethod yawl:WorkletGateway_doPost_3 ;
+    yawl:hasMethod yawl:WorkletGateway_doGet_4 ;
+    yawl:hasMethod yawl:WorkletGateway_initBuildProperties_5 ;
+    yawl:hasMethod yawl:WorkletGateway_makeSpecID_6 ;
+    yawl:hasMethod yawl:WorkletGateway_getAdminTasksMgr_7 ;
+    yawl:hasMethod yawl:WorkletGateway_addNode_8 ;
+    yawl:hasMethod yawl:WorkletGateway_evaluate_9 ;
+    yawl:hasMethod yawl:WorkletGateway_process_10 ;
+    yawl:hasMethod yawl:WorkletGateway_execute_11 ;
+    yawl:hasMethod yawl:WorkletGateway_replace_12 ;
+    yawl:hasMethod yawl:WorkletGateway_getNode_13 ;
+    yawl:hasMethod yawl:WorkletGateway_removeNode_14 ;
+    yawl:hasMethod yawl:WorkletGateway_getRdrTree_15 ;
+    yawl:hasMethod yawl:WorkletGateway_getRdrSet_16 ;
+    yawl:hasMethod yawl:WorkletGateway_getRdrSetIDs_17 ;
+    yawl:hasMethod yawl:WorkletGateway_addRdrSet_18 ;
+    yawl:hasMethod yawl:WorkletGateway_addRdrSet_19 ;
+    yawl:hasMethod yawl:WorkletGateway_addRdrSet_20 ;
+    yawl:hasMethod yawl:WorkletGateway_addRdrSet_21 ;
+    yawl:hasMethod yawl:WorkletGateway_removeRdrSet_22 ;
+    yawl:hasMethod yawl:WorkletGateway_updateRdrSetTaskIDs_23 ;
+    yawl:hasMethod yawl:WorkletGateway_loadWorklets_24 ;
+    yawl:hasMethod yawl:WorkletGateway_addWorklet_25 ;
+    yawl:hasMethod yawl:WorkletGateway_getWorklet_26 ;
+    yawl:hasMethod yawl:WorkletGateway_removeWorklet_27 ;
+    yawl:hasMethod yawl:WorkletGateway_getWorkletNames_28 ;
+    yawl:hasMethod yawl:WorkletGateway_getWorkletInfoList_29 ;
+    yawl:hasMethod yawl:WorkletGateway_getRunningWorklets_30 ;
+    yawl:hasMethod yawl:WorkletGateway_getOrphanedWorklets_31 ;
+    yawl:hasMethod yawl:WorkletGateway_getWIR_32 ;
+    yawl:hasMethod yawl:WorkletGateway_getAdministrationTask_33 ;
+    yawl:hasMethod yawl:WorkletGateway_getAdministrationTasks_34 ;
+    yawl:hasMethod yawl:WorkletGateway_addAdministrationTask_35 ;
+    yawl:hasMethod yawl:WorkletGateway_removeAdministrationTask_36 ;
+    yawl:hasMethod yawl:WorkletGateway_raiseExternalException_37 ;
+    yawl:hasMethod yawl:WorkletGateway_getExternalTriggers_38 ;
+    yawl:hasField yawl:WorkletGateway__ws ;
+    yawl:hasField yawl:WorkletGateway__rdr ;
+    yawl:hasField yawl:WorkletGateway__adminTasksMgr ;
+    yawl:hasField yawl:WorkletGateway__buildProps ;
+    yawl:hasField yawl:WorkletGateway__sessions ;
+    .
+
+
+# Method: WorkletGateway.init
+yawl:WorkletGateway_init_1 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGateway.destroy
+yawl:WorkletGateway_destroy_2 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGateway.doPost
+yawl:WorkletGateway_doPost_3 a yawl:Method ;
+    rdfs:label "doPost" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doPost(HttpServletRequest req, HttpServletResponse res)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGateway.doGet
+yawl:WorkletGateway_doGet_4 a yawl:Method ;
+    rdfs:label "doGet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doGet(HttpServletRequest req, HttpServletResponse res)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGateway.initBuildProperties
+yawl:WorkletGateway_initBuildProperties_5 a yawl:Method ;
+    rdfs:label "initBuildProperties" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initBuildProperties(InputStream stream)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletGateway.makeSpecID
+yawl:WorkletGateway_makeSpecID_6 a yawl:Method ;
+    rdfs:label "makeSpecID" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID makeSpecID(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.getAdminTasksMgr
+yawl:WorkletGateway_getAdminTasksMgr_7 a yawl:Method ;
+    rdfs:label "getAdminTasksMgr" ;
+    yawl:returnType "AdminTasksManager" ;
+    yawl:signature "AdminTasksManager getAdminTasksMgr()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.addNode
+yawl:WorkletGateway_addNode_8 a yawl:Method ;
+    rdfs:label "addNode" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addNode(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.evaluate
+yawl:WorkletGateway_evaluate_9 a yawl:Method ;
+    rdfs:label "evaluate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String evaluate(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.process
+yawl:WorkletGateway_process_10 a yawl:Method ;
+    rdfs:label "process" ;
+    yawl:returnType "String" ;
+    yawl:signature "String process(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.execute
+yawl:WorkletGateway_execute_11 a yawl:Method ;
+    rdfs:label "execute" ;
+    yawl:returnType "String" ;
+    yawl:signature "String execute(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.replace
+yawl:WorkletGateway_replace_12 a yawl:Method ;
+    rdfs:label "replace" ;
+    yawl:returnType "String" ;
+    yawl:signature "String replace(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.getNode
+yawl:WorkletGateway_getNode_13 a yawl:Method ;
+    rdfs:label "getNode" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNode(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.removeNode
+yawl:WorkletGateway_removeNode_14 a yawl:Method ;
+    rdfs:label "removeNode" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeNode(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.getRdrTree
+yawl:WorkletGateway_getRdrTree_15 a yawl:Method ;
+    rdfs:label "getRdrTree" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRdrTree(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.getRdrSet
+yawl:WorkletGateway_getRdrSet_16 a yawl:Method ;
+    rdfs:label "getRdrSet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRdrSet(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.getRdrSetIDs
+yawl:WorkletGateway_getRdrSetIDs_17 a yawl:Method ;
+    rdfs:label "getRdrSetIDs" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRdrSetIDs()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.addRdrSet
+yawl:WorkletGateway_addRdrSet_18 a yawl:Method ;
+    rdfs:label "addRdrSet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addRdrSet(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.addRdrSet
+yawl:WorkletGateway_addRdrSet_19 a yawl:Method ;
+    rdfs:label "addRdrSet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addRdrSet(YSpecificationID specID, String xml)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.addRdrSet
+yawl:WorkletGateway_addRdrSet_20 a yawl:Method ;
+    rdfs:label "addRdrSet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addRdrSet(String processName, String xml)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.addRdrSet
+yawl:WorkletGateway_addRdrSet_21 a yawl:Method ;
+    rdfs:label "addRdrSet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addRdrSet(RdrSet rdrSet, String xml)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.removeRdrSet
+yawl:WorkletGateway_removeRdrSet_22 a yawl:Method ;
+    rdfs:label "removeRdrSet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeRdrSet(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.updateRdrSetTaskIDs
+yawl:WorkletGateway_updateRdrSetTaskIDs_23 a yawl:Method ;
+    rdfs:label "updateRdrSetTaskIDs" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateRdrSetTaskIDs(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.loadWorklets
+yawl:WorkletGateway_loadWorklets_24 a yawl:Method ;
+    rdfs:label "loadWorklets" ;
+    yawl:returnType "void" ;
+    yawl:signature "void loadWorklets(String worklets)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.addWorklet
+yawl:WorkletGateway_addWorklet_25 a yawl:Method ;
+    rdfs:label "addWorklet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addWorklet(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.getWorklet
+yawl:WorkletGateway_getWorklet_26 a yawl:Method ;
+    rdfs:label "getWorklet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorklet(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.removeWorklet
+yawl:WorkletGateway_removeWorklet_27 a yawl:Method ;
+    rdfs:label "removeWorklet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeWorklet(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.getWorkletNames
+yawl:WorkletGateway_getWorkletNames_28 a yawl:Method ;
+    rdfs:label "getWorkletNames" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkletNames()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.getWorkletInfoList
+yawl:WorkletGateway_getWorkletInfoList_29 a yawl:Method ;
+    rdfs:label "getWorkletInfoList" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkletInfoList()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.getRunningWorklets
+yawl:WorkletGateway_getRunningWorklets_30 a yawl:Method ;
+    rdfs:label "getRunningWorklets" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRunningWorklets()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.getOrphanedWorklets
+yawl:WorkletGateway_getOrphanedWorklets_31 a yawl:Method ;
+    rdfs:label "getOrphanedWorklets" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOrphanedWorklets()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.getWIR
+yawl:WorkletGateway_getWIR_32 a yawl:Method ;
+    rdfs:label "getWIR" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord getWIR(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.getAdministrationTask
+yawl:WorkletGateway_getAdministrationTask_33 a yawl:Method ;
+    rdfs:label "getAdministrationTask" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAdministrationTask(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.getAdministrationTasks
+yawl:WorkletGateway_getAdministrationTasks_34 a yawl:Method ;
+    rdfs:label "getAdministrationTasks" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAdministrationTasks()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.addAdministrationTask
+yawl:WorkletGateway_addAdministrationTask_35 a yawl:Method ;
+    rdfs:label "addAdministrationTask" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addAdministrationTask(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.removeAdministrationTask
+yawl:WorkletGateway_removeAdministrationTask_36 a yawl:Method ;
+    rdfs:label "removeAdministrationTask" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeAdministrationTask(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.raiseExternalException
+yawl:WorkletGateway_raiseExternalException_37 a yawl:Method ;
+    rdfs:label "raiseExternalException" ;
+    yawl:returnType "String" ;
+    yawl:signature "String raiseExternalException(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletGateway.getExternalTriggers
+yawl:WorkletGateway_getExternalTriggers_38 a yawl:Method ;
+    rdfs:label "getExternalTriggers" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getExternalTriggers(HttpServletRequest req)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:WorkletGateway__ws a yawl:Field ;
+    rdfs:label "_ws" .
+
+yawl:WorkletGateway__rdr a yawl:Field ;
+    rdfs:label "_rdr" .
+
+yawl:WorkletGateway__adminTasksMgr a yawl:Field ;
+    rdfs:label "_adminTasksMgr" .
+
+yawl:WorkletGateway__buildProps a yawl:Field ;
+    rdfs:label "_buildProps" .
+
+yawl:WorkletGateway__sessions a yawl:Field ;
+    rdfs:label "_sessions" .
+
+
+

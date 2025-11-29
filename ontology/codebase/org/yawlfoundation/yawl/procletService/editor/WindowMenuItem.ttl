@@ -1,0 +1,56 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.WindowMenuItem
+yawl:WindowMenuItem a yawl:Class ;
+    rdfs:label "WindowMenuItem" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/WindowMenu.java"^^xsd:string ;
+    yawl:extends yawl:JCheckBoxMenuItem ;
+    yawl:hasMethod yawl:WindowMenuItem_frame_1 ;
+    yawl:hasMethod yawl:WindowMenuItem_activate_2 ;
+    yawl:hasMethod yawl:WindowMenuItem_frameChanged_3 ;
+    yawl:hasMethod yawl:WindowMenuItem_getFrame_4 ;
+    yawl:hasField yawl:WindowMenuItem_frame ;
+    .
+
+
+# Method: WindowMenuItem.frame
+yawl:WindowMenuItem_frame_1 a yawl:Method ;
+    rdfs:label "frame" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean frame(JInternalFrame frame)" ;
+    .
+
+# Method: WindowMenuItem.activate
+yawl:WindowMenuItem_activate_2 a yawl:Method ;
+    rdfs:label "activate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void activate(boolean active)" ;
+    .
+
+# Method: WindowMenuItem.frameChanged
+yawl:WindowMenuItem_frameChanged_3 a yawl:Method ;
+    rdfs:label "frameChanged" ;
+    yawl:returnType "void" ;
+    yawl:signature "void frameChanged()" ;
+    .
+
+# Method: WindowMenuItem.getFrame
+yawl:WindowMenuItem_getFrame_4 a yawl:Method ;
+    rdfs:label "getFrame" ;
+    yawl:returnType "JInternalFrame" ;
+    yawl:signature "JInternalFrame getFrame()" ;
+    .
+
+
+
+yawl:WindowMenuItem_frame a yawl:Field ;
+    rdfs:label "frame" .
+
+
+

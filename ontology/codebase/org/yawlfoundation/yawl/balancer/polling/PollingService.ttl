@@ -1,0 +1,111 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.balancer.polling
+yawl:org_yawlfoundation_yawl_balancer_polling a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.balancer.polling" .
+# Class: org.yawlfoundation.yawl.balancer.polling.PollingService
+yawl:PollingService a yawl:Class ;
+    rdfs:label "PollingService" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer_polling ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/polling/PollingService.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 18/9/17""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:PollingService_add_1 ;
+    yawl:hasMethod yawl:PollingService_remove_2 ;
+    yawl:hasMethod yawl:PollingService_schedule_3 ;
+    yawl:hasMethod yawl:PollingService_reschedule_4 ;
+    yawl:hasMethod yawl:PollingService_shutdown_5 ;
+    yawl:hasMethod yawl:PollingService_schedule_6 ;
+    yawl:hasMethod yawl:PollingService_clearSchedule_7 ;
+    yawl:hasField yawl:PollingService_EXECUTOR ;
+    yawl:hasField yawl:PollingService_POLLABLE_SET ;
+    yawl:hasField yawl:PollingService_SCHEDULED_FUTURES ;
+    .
+
+
+# Method: PollingService.add
+yawl:PollingService_add_1 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(Pollable pollable)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PollingService.remove
+yawl:PollingService_remove_2 a yawl:Method ;
+    rdfs:label "remove" ;
+    yawl:returnType "void" ;
+    yawl:signature "void remove(Pollable pollable)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PollingService.schedule
+yawl:PollingService_schedule_3 a yawl:Method ;
+    rdfs:label "schedule" ;
+    yawl:returnType "void" ;
+    yawl:signature "void schedule()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PollingService.reschedule
+yawl:PollingService_reschedule_4 a yawl:Method ;
+    rdfs:label "reschedule" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reschedule()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PollingService.shutdown
+yawl:PollingService_shutdown_5 a yawl:Method ;
+    rdfs:label "shutdown" ;
+    yawl:returnType "void" ;
+    yawl:signature "void shutdown()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PollingService.schedule
+yawl:PollingService_schedule_6 a yawl:Method ;
+    rdfs:label "schedule" ;
+    yawl:returnType "void" ;
+    yawl:signature "void schedule(int pollPeriodAsSeconds)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PollingService.clearSchedule
+yawl:PollingService_clearSchedule_7 a yawl:Method ;
+    rdfs:label "clearSchedule" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clearSchedule()" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:PollingService_EXECUTOR a yawl:Field ;
+    rdfs:label "EXECUTOR" .
+
+yawl:PollingService_POLLABLE_SET a yawl:Field ;
+    rdfs:label "POLLABLE_SET" .
+
+yawl:PollingService_SCHEDULED_FUTURES a yawl:Field ;
+    rdfs:label "SCHEDULED_FUTURES" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_balancer_config a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.balancer.config" .
+
+

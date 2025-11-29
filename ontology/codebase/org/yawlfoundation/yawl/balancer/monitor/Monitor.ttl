@@ -1,0 +1,191 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.balancer.monitor
+yawl:org_yawlfoundation_yawl_balancer_monitor a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.balancer.monitor" .
+# Class: org.yawlfoundation.yawl.balancer.monitor.Monitor
+yawl:Monitor a yawl:Class ;
+    rdfs:label "Monitor" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer_monitor ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/monitor/Monitor.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 18/10/18""" ;
+    yawl:implements yawl:BusynessListener ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Monitor_busynessEvent_1 ;
+    yawl:hasMethod yawl:Monitor_hasInitialised_2 ;
+    yawl:hasMethod yawl:Monitor_scaleDown_3 ;
+    yawl:hasMethod yawl:Monitor_getRunningCases_4 ;
+    yawl:hasMethod yawl:Monitor_exportCases_5 ;
+    yawl:hasMethod yawl:Monitor_cancelCases_6 ;
+    yawl:hasMethod yawl:Monitor_cancelCase_7 ;
+    yawl:hasMethod yawl:Monitor_redistributeCases_8 ;
+    yawl:hasMethod yawl:Monitor_getParams_9 ;
+    yawl:hasMethod yawl:Monitor_post_10 ;
+    yawl:hasMethod yawl:Monitor_shouldScaleDown_11 ;
+    yawl:hasMethod yawl:Monitor_getActiveEngineCount_12 ;
+    yawl:hasMethod yawl:Monitor_deactivateEngine_13 ;
+    yawl:hasMethod yawl:Monitor_redistributeCases_14 ;
+    yawl:hasMethod yawl:Monitor_getEngineSet_15 ;
+    yawl:hasMethod yawl:Monitor_getForwardClient_16 ;
+    yawl:hasMethod yawl:Monitor_successful_17 ;
+    yawl:hasField yawl:Monitor__initCounter ;
+    yawl:hasField yawl:Monitor__servlet ;
+    .
+
+
+# Method: Monitor.busynessEvent
+yawl:Monitor_busynessEvent_1 a yawl:Method ;
+    rdfs:label "busynessEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void busynessEvent(EngineInstance instance, double load)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Monitor.hasInitialised
+yawl:Monitor_hasInitialised_2 a yawl:Method ;
+    rdfs:label "hasInitialised" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasInitialised(EngineInstance instance)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Monitor.scaleDown
+yawl:Monitor_scaleDown_3 a yawl:Method ;
+    rdfs:label "scaleDown" ;
+    yawl:returnType "void" ;
+    yawl:signature "void scaleDown(EngineInstance instance)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Monitor.getRunningCases
+yawl:Monitor_getRunningCases_4 a yawl:Method ;
+    rdfs:label "getRunningCases" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getRunningCases(EngineInstance instance)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Monitor.exportCases
+yawl:Monitor_exportCases_5 a yawl:Method ;
+    rdfs:label "exportCases" ;
+    yawl:returnType "String" ;
+    yawl:signature "String exportCases(EngineInstance instance)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Monitor.cancelCases
+yawl:Monitor_cancelCases_6 a yawl:Method ;
+    rdfs:label "cancelCases" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancelCases(EngineInstance instance, Set caseIDs)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Monitor.cancelCase
+yawl:Monitor_cancelCase_7 a yawl:Method ;
+    rdfs:label "cancelCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancelCase(EngineInstance instance, String caseID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Monitor.redistributeCases
+yawl:Monitor_redistributeCases_8 a yawl:Method ;
+    rdfs:label "redistributeCases" ;
+    yawl:returnType "String" ;
+    yawl:signature "String redistributeCases(EngineInstance instance, String caseXML)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Monitor.getParams
+yawl:Monitor_getParams_9 a yawl:Method ;
+    rdfs:label "getParams" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getParams(String action)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Monitor.post
+yawl:Monitor_post_10 a yawl:Method ;
+    rdfs:label "post" ;
+    yawl:returnType "String" ;
+    yawl:signature "String post(EngineInstance instance, Map params)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Monitor.shouldScaleDown
+yawl:Monitor_shouldScaleDown_11 a yawl:Method ;
+    rdfs:label "shouldScaleDown" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean shouldScaleDown(EngineInstance instance, double load)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Monitor.getActiveEngineCount
+yawl:Monitor_getActiveEngineCount_12 a yawl:Method ;
+    rdfs:label "getActiveEngineCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getActiveEngineCount()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Monitor.deactivateEngine
+yawl:Monitor_deactivateEngine_13 a yawl:Method ;
+    rdfs:label "deactivateEngine" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean deactivateEngine(EngineInstance instance)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Monitor.redistributeCases
+yawl:Monitor_redistributeCases_14 a yawl:Method ;
+    rdfs:label "redistributeCases" ;
+    yawl:returnType "String" ;
+    yawl:signature "String redistributeCases(String caseXML)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Monitor.getEngineSet
+yawl:Monitor_getEngineSet_15 a yawl:Method ;
+    rdfs:label "getEngineSet" ;
+    yawl:returnType "EngineSet" ;
+    yawl:signature "EngineSet getEngineSet()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Monitor.getForwardClient
+yawl:Monitor_getForwardClient_16 a yawl:Method ;
+    rdfs:label "getForwardClient" ;
+    yawl:returnType "ForwardClient" ;
+    yawl:signature "ForwardClient getForwardClient()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Monitor.successful
+yawl:Monitor_successful_17 a yawl:Method ;
+    rdfs:label "successful" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean successful(String xml)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:Monitor__initCounter a yawl:Field ;
+    rdfs:label "_initCounter" .
+
+yawl:Monitor__servlet a yawl:Field ;
+    rdfs:label "_servlet" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_balancer_polling a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.balancer.polling" .
+
+

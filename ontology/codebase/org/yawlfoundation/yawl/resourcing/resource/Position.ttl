@@ -1,0 +1,245 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.resource.Position
+yawl:Position a yawl:Class ;
+    rdfs:label "Position" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_resource ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/resource/Position.java"^^xsd:string ;
+    rdfs:comment """Represents an organisational position that may be held by a participant. @author Michael Adams v0.1, 09/08/2007""" ;
+    yawl:extends yawl:AbstractResourceAttribute ;
+    yawl:implements yawl:Comparable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Position_setLabel_1 ;
+    yawl:hasMethod yawl:Position_getPositionID_2 ;
+    yawl:hasMethod yawl:Position_setPositionID_3 ;
+    yawl:hasMethod yawl:Position_getTitle_4 ;
+    yawl:hasMethod yawl:Position_setTitle_5 ;
+    yawl:hasMethod yawl:Position_getName_6 ;
+    yawl:hasMethod yawl:Position_getReportsTo_7 ;
+    yawl:hasMethod yawl:Position_setReportsTo_8 ;
+    yawl:hasMethod yawl:Position_setReportsTo_9 ;
+    yawl:hasMethod yawl:Position_getOrgGroup_10 ;
+    yawl:hasMethod yawl:Position_setOrgGroup_11 ;
+    yawl:hasMethod yawl:Position_setOrgGroup_12 ;
+    yawl:hasMethod yawl:Position_reportsTo_13 ;
+    yawl:hasMethod yawl:Position_ultimatelyReportsTo_14 ;
+    yawl:hasMethod yawl:Position_equals_15 ;
+    yawl:hasMethod yawl:Position_compareTo_16 ;
+    yawl:hasMethod yawl:Position_toXML_17 ;
+    yawl:hasMethod yawl:Position_reconstitute_18 ;
+    yawl:hasMethod yawl:Position_get_orgGroupID_19 ;
+    yawl:hasMethod yawl:Position_set_orgGroupID_20 ;
+    yawl:hasMethod yawl:Position_get_reportsToID_21 ;
+    yawl:hasMethod yawl:Position_set_reportsToID_22 ;
+    yawl:hasField yawl:Position__positionID ;
+    yawl:hasField yawl:Position__title ;
+    yawl:hasField yawl:Position__orgGroup ;
+    yawl:hasField yawl:Position__reportsTo ;
+    yawl:hasField yawl:Position__orgGroupID ;
+    yawl:hasField yawl:Position__reportsToID ;
+    .
+
+
+# Method: Position.setLabel
+yawl:Position_setLabel_1 a yawl:Method ;
+    rdfs:label "setLabel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLabel(String label)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Position.getPositionID
+yawl:Position_getPositionID_2 a yawl:Method ;
+    rdfs:label "getPositionID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPositionID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Position.setPositionID
+yawl:Position_setPositionID_3 a yawl:Method ;
+    rdfs:label "setPositionID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPositionID(String positionID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Position.getTitle
+yawl:Position_getTitle_4 a yawl:Method ;
+    rdfs:label "getTitle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTitle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Position.setTitle
+yawl:Position_setTitle_5 a yawl:Method ;
+    rdfs:label "setTitle" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTitle(String title)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Position.getName
+yawl:Position_getName_6 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Position.getReportsTo
+yawl:Position_getReportsTo_7 a yawl:Method ;
+    rdfs:label "getReportsTo" ;
+    yawl:returnType "Position" ;
+    yawl:signature "Position getReportsTo()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Position.setReportsTo
+yawl:Position_setReportsTo_8 a yawl:Method ;
+    rdfs:label "setReportsTo" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setReportsTo(Position reportsTo)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Position.setReportsTo
+yawl:Position_setReportsTo_9 a yawl:Method ;
+    rdfs:label "setReportsTo" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean setReportsTo(String reportsToID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Position.getOrgGroup
+yawl:Position_getOrgGroup_10 a yawl:Method ;
+    rdfs:label "getOrgGroup" ;
+    yawl:returnType "OrgGroup" ;
+    yawl:signature "OrgGroup getOrgGroup()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Position.setOrgGroup
+yawl:Position_setOrgGroup_11 a yawl:Method ;
+    rdfs:label "setOrgGroup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOrgGroup(OrgGroup orgGroup)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Position.setOrgGroup
+yawl:Position_setOrgGroup_12 a yawl:Method ;
+    rdfs:label "setOrgGroup" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean setOrgGroup(String groupID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Position.reportsTo
+yawl:Position_reportsTo_13 a yawl:Method ;
+    rdfs:label "reportsTo" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean reportsTo(Position boss)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Position.ultimatelyReportsTo
+yawl:Position_ultimatelyReportsTo_14 a yawl:Method ;
+    rdfs:label "ultimatelyReportsTo" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean ultimatelyReportsTo(Position manager)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Position.equals
+yawl:Position_equals_15 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Position.compareTo
+yawl:Position_compareTo_16 a yawl:Method ;
+    rdfs:label "compareTo" ;
+    yawl:returnType "int" ;
+    yawl:signature "int compareTo(Object o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Position.toXML
+yawl:Position_toXML_17 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Position.reconstitute
+yawl:Position_reconstitute_18 a yawl:Method ;
+    rdfs:label "reconstitute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reconstitute(Element e)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Position.get_orgGroupID
+yawl:Position_get_orgGroupID_19 a yawl:Method ;
+    rdfs:label "get_orgGroupID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_orgGroupID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Position.set_orgGroupID
+yawl:Position_set_orgGroupID_20 a yawl:Method ;
+    rdfs:label "set_orgGroupID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_orgGroupID(String orgGroupID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Position.get_reportsToID
+yawl:Position_get_reportsToID_21 a yawl:Method ;
+    rdfs:label "get_reportsToID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_reportsToID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Position.set_reportsToID
+yawl:Position_set_reportsToID_22 a yawl:Method ;
+    rdfs:label "set_reportsToID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_reportsToID(String reportsToID)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:Position__positionID a yawl:Field ;
+    rdfs:label "_positionID" .
+
+yawl:Position__title a yawl:Field ;
+    rdfs:label "_title" .
+
+yawl:Position__orgGroup a yawl:Field ;
+    rdfs:label "_orgGroup" .
+
+yawl:Position__reportsTo a yawl:Field ;
+    rdfs:label "_reportsTo" .
+
+yawl:Position__orgGroupID a yawl:Field ;
+    rdfs:label "_orgGroupID" .
+
+yawl:Position__reportsToID a yawl:Field ;
+    rdfs:label "_reportsToID" .
+
+
+

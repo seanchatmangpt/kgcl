@@ -1,0 +1,46 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.resourcing.client
+yawl:org_yawlfoundation_yawl_resourcing_client a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.client" .
+# Class: org.yawlfoundation.yawl.resourcing.client.CostClient
+yawl:CostClient a yawl:Class ;
+    rdfs:label "CostClient" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_client ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/client/CostClient.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 9/11/11""" ;
+    yawl:extends yawl:CostGatewayClient ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CostClient_getHandle_1 ;
+    yawl:hasField yawl:CostClient_engineLogonName ;
+    yawl:hasField yawl:CostClient_engineLogonPassword ;
+    yawl:hasField yawl:CostClient_handle ;
+    .
+
+
+# Method: CostClient.getHandle
+yawl:CostClient_getHandle_1 a yawl:Method ;
+    rdfs:label "getHandle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getHandle()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:CostClient_engineLogonName a yawl:Field ;
+    rdfs:label "engineLogonName" .
+
+yawl:CostClient_engineLogonPassword a yawl:Field ;
+    rdfs:label "engineLogonPassword" .
+
+yawl:CostClient_handle a yawl:Field ;
+    rdfs:label "handle" .
+
+
+

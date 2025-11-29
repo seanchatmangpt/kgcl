@@ -1,0 +1,70 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.util.SpecDataCache
+yawl:SpecDataCache a yawl:Class ;
+    rdfs:label "SpecDataCache" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/util/SpecDataCache.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams (modelled on YSpecificationTable) Date: 01/09/2008""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:SpecDataCache_add_1 ;
+    yawl:hasMethod yawl:SpecDataCache_remove_2 ;
+    yawl:hasMethod yawl:SpecDataCache_remove_3 ;
+    yawl:hasMethod yawl:SpecDataCache_get_4 ;
+    yawl:hasMethod yawl:SpecDataCache_getSpecIDs_5 ;
+    yawl:hasField yawl:SpecDataCache__specs ;
+    .
+
+
+# Method: SpecDataCache.add
+yawl:SpecDataCache_add_1 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean add(SpecificationData spec)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecDataCache.remove
+yawl:SpecDataCache_remove_2 a yawl:Method ;
+    rdfs:label "remove" ;
+    yawl:returnType "void" ;
+    yawl:signature "void remove(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecDataCache.remove
+yawl:SpecDataCache_remove_3 a yawl:Method ;
+    rdfs:label "remove" ;
+    yawl:returnType "void" ;
+    yawl:signature "void remove(SpecificationData spec)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecDataCache.get
+yawl:SpecDataCache_get_4 a yawl:Method ;
+    rdfs:label "get" ;
+    yawl:returnType "SpecificationData" ;
+    yawl:signature "SpecificationData get(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SpecDataCache.getSpecIDs
+yawl:SpecDataCache_getSpecIDs_5 a yawl:Method ;
+    rdfs:label "getSpecIDs" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getSpecIDs()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:SpecDataCache__specs a yawl:Field ;
+    rdfs:label "_specs" .
+
+
+

@@ -1,0 +1,79 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.balancer.RequestDumpUtil
+yawl:RequestDumpUtil a yawl:Class ;
+    rdfs:label "RequestDumpUtil" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/RequestDumpUtil.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 14/8/17""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:RequestDumpUtil_dump_1 ;
+    yawl:hasMethod yawl:RequestDumpUtil_dumpRequest_2 ;
+    yawl:hasMethod yawl:RequestDumpUtil_dumpRequestHeader_3 ;
+    yawl:hasMethod yawl:RequestDumpUtil_dumpRequestParameter_4 ;
+    yawl:hasMethod yawl:RequestDumpUtil_dumpRequestSessionAttribute_5 ;
+    yawl:hasField yawl:RequestDumpUtil_INDENT ;
+    yawl:hasField yawl:RequestDumpUtil_LF ;
+    .
+
+
+# Method: RequestDumpUtil.dump
+yawl:RequestDumpUtil_dump_1 a yawl:Method ;
+    rdfs:label "dump" ;
+    yawl:returnType "String" ;
+    yawl:signature "String dump(HttpServletRequest request)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: RequestDumpUtil.dumpRequest
+yawl:RequestDumpUtil_dumpRequest_2 a yawl:Method ;
+    rdfs:label "dumpRequest" ;
+    yawl:returnType "void" ;
+    yawl:signature "void dumpRequest(StringBuilder sb, HttpServletRequest request)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: RequestDumpUtil.dumpRequestHeader
+yawl:RequestDumpUtil_dumpRequestHeader_3 a yawl:Method ;
+    rdfs:label "dumpRequestHeader" ;
+    yawl:returnType "void" ;
+    yawl:signature "void dumpRequestHeader(StringBuilder sb, HttpServletRequest request)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: RequestDumpUtil.dumpRequestParameter
+yawl:RequestDumpUtil_dumpRequestParameter_4 a yawl:Method ;
+    rdfs:label "dumpRequestParameter" ;
+    yawl:returnType "void" ;
+    yawl:signature "void dumpRequestParameter(StringBuilder sb, HttpServletRequest request)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: RequestDumpUtil.dumpRequestSessionAttribute
+yawl:RequestDumpUtil_dumpRequestSessionAttribute_5 a yawl:Method ;
+    rdfs:label "dumpRequestSessionAttribute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void dumpRequestSessionAttribute(StringBuilder sb, HttpServletRequest request)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:RequestDumpUtil_INDENT a yawl:Field ;
+    rdfs:label "INDENT" .
+
+yawl:RequestDumpUtil_LF a yawl:Field ;
+    rdfs:label "LF" .
+
+
+

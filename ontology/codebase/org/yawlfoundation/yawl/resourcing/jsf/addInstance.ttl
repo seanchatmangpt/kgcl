@@ -1,0 +1,426 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.addInstance
+yawl:addInstance a yawl:Class ;
+    rdfs:label "addInstance" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/addInstance.java"^^xsd:string ;
+    yawl:extends yawl:AbstractPageBean ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:addInstance__init_1 ;
+    yawl:hasMethod yawl:addInstance_getPage1_2 ;
+    yawl:hasMethod yawl:addInstance_setPage1_3 ;
+    yawl:hasMethod yawl:addInstance_getHtml1_4 ;
+    yawl:hasMethod yawl:addInstance_setHtml1_5 ;
+    yawl:hasMethod yawl:addInstance_getHead1_6 ;
+    yawl:hasMethod yawl:addInstance_setHead1_7 ;
+    yawl:hasMethod yawl:addInstance_getLink1_8 ;
+    yawl:hasMethod yawl:addInstance_setLink1_9 ;
+    yawl:hasMethod yawl:addInstance_getBody1_10 ;
+    yawl:hasMethod yawl:addInstance_setBody1_11 ;
+    yawl:hasMethod yawl:addInstance_getForm1_12 ;
+    yawl:hasMethod yawl:addInstance_setForm1_13 ;
+    yawl:hasMethod yawl:addInstance_getStaticHeader_14 ;
+    yawl:hasMethod yawl:addInstance_setStaticHeader_15 ;
+    yawl:hasMethod yawl:addInstance_getStaticText1_16 ;
+    yawl:hasMethod yawl:addInstance_setStaticText1_17 ;
+    yawl:hasMethod yawl:addInstance_getBtnOK_18 ;
+    yawl:hasMethod yawl:addInstance_setBtnOK_19 ;
+    yawl:hasMethod yawl:addInstance_getBtnCancel_20 ;
+    yawl:hasMethod yawl:addInstance_setBtnCancel_21 ;
+    yawl:hasMethod yawl:addInstance_getTxtParamVal_22 ;
+    yawl:hasMethod yawl:addInstance_setTxtParamVal_23 ;
+    yawl:hasMethod yawl:addInstance_getLblParam_24 ;
+    yawl:hasMethod yawl:addInstance_setLblParam_25 ;
+    yawl:hasMethod yawl:addInstance_getPnlContainer_26 ;
+    yawl:hasMethod yawl:addInstance_setPnlContainer_27 ;
+    yawl:hasMethod yawl:addInstance_getPnlAddInstance_28 ;
+    yawl:hasMethod yawl:addInstance_setPnlAddInstance_29 ;
+    yawl:hasMethod yawl:addInstance_getApplicationBean_30 ;
+    yawl:hasMethod yawl:addInstance_getRequestBean_31 ;
+    yawl:hasMethod yawl:addInstance_getSessionBean_32 ;
+    yawl:hasMethod yawl:addInstance_init_33 ;
+    yawl:hasMethod yawl:addInstance_preprocess_34 ;
+    yawl:hasMethod yawl:addInstance_destroy_35 ;
+    yawl:hasMethod yawl:addInstance_prerender_36 ;
+    yawl:hasMethod yawl:addInstance_btnOK_action_37 ;
+    yawl:hasMethod yawl:addInstance_btnCancel_action_38 ;
+    yawl:hasField yawl:addInstance___placeholder ;
+    yawl:hasField yawl:addInstance_page1 ;
+    yawl:hasField yawl:addInstance_html1 ;
+    yawl:hasField yawl:addInstance_head1 ;
+    yawl:hasField yawl:addInstance_link1 ;
+    yawl:hasField yawl:addInstance_body1 ;
+    yawl:hasField yawl:addInstance_form1 ;
+    yawl:hasField yawl:addInstance_staticHeader ;
+    yawl:hasField yawl:addInstance_staticText1 ;
+    yawl:hasField yawl:addInstance_btnOK ;
+    yawl:hasField yawl:addInstance_btnCancel ;
+    yawl:hasField yawl:addInstance_txtParamVal ;
+    yawl:hasField yawl:addInstance_lblParam ;
+    yawl:hasField yawl:addInstance_pnlContainer ;
+    yawl:hasField yawl:addInstance_pnlAddInstance ;
+    .
+
+
+# Method: addInstance._init
+yawl:addInstance__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: addInstance.getPage1
+yawl:addInstance_getPage1_2 a yawl:Method ;
+    rdfs:label "getPage1" ;
+    yawl:returnType "Page" ;
+    yawl:signature "Page getPage1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.setPage1
+yawl:addInstance_setPage1_3 a yawl:Method ;
+    rdfs:label "setPage1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPage1(Page p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.getHtml1
+yawl:addInstance_getHtml1_4 a yawl:Method ;
+    rdfs:label "getHtml1" ;
+    yawl:returnType "Html" ;
+    yawl:signature "Html getHtml1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.setHtml1
+yawl:addInstance_setHtml1_5 a yawl:Method ;
+    rdfs:label "setHtml1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHtml1(Html h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.getHead1
+yawl:addInstance_getHead1_6 a yawl:Method ;
+    rdfs:label "getHead1" ;
+    yawl:returnType "Head" ;
+    yawl:signature "Head getHead1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.setHead1
+yawl:addInstance_setHead1_7 a yawl:Method ;
+    rdfs:label "setHead1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHead1(Head h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.getLink1
+yawl:addInstance_getLink1_8 a yawl:Method ;
+    rdfs:label "getLink1" ;
+    yawl:returnType "Link" ;
+    yawl:signature "Link getLink1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.setLink1
+yawl:addInstance_setLink1_9 a yawl:Method ;
+    rdfs:label "setLink1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLink1(Link l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.getBody1
+yawl:addInstance_getBody1_10 a yawl:Method ;
+    rdfs:label "getBody1" ;
+    yawl:returnType "Body" ;
+    yawl:signature "Body getBody1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.setBody1
+yawl:addInstance_setBody1_11 a yawl:Method ;
+    rdfs:label "setBody1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBody1(Body b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.getForm1
+yawl:addInstance_getForm1_12 a yawl:Method ;
+    rdfs:label "getForm1" ;
+    yawl:returnType "Form" ;
+    yawl:signature "Form getForm1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.setForm1
+yawl:addInstance_setForm1_13 a yawl:Method ;
+    rdfs:label "setForm1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setForm1(Form f)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.getStaticHeader
+yawl:addInstance_getStaticHeader_14 a yawl:Method ;
+    rdfs:label "getStaticHeader" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getStaticHeader()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.setStaticHeader
+yawl:addInstance_setStaticHeader_15 a yawl:Method ;
+    rdfs:label "setStaticHeader" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStaticHeader(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.getStaticText1
+yawl:addInstance_getStaticText1_16 a yawl:Method ;
+    rdfs:label "getStaticText1" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getStaticText1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.setStaticText1
+yawl:addInstance_setStaticText1_17 a yawl:Method ;
+    rdfs:label "setStaticText1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStaticText1(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.getBtnOK
+yawl:addInstance_getBtnOK_18 a yawl:Method ;
+    rdfs:label "getBtnOK" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnOK()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.setBtnOK
+yawl:addInstance_setBtnOK_19 a yawl:Method ;
+    rdfs:label "setBtnOK" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnOK(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.getBtnCancel
+yawl:addInstance_getBtnCancel_20 a yawl:Method ;
+    rdfs:label "getBtnCancel" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnCancel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.setBtnCancel
+yawl:addInstance_setBtnCancel_21 a yawl:Method ;
+    rdfs:label "setBtnCancel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnCancel(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.getTxtParamVal
+yawl:addInstance_getTxtParamVal_22 a yawl:Method ;
+    rdfs:label "getTxtParamVal" ;
+    yawl:returnType "TextArea" ;
+    yawl:signature "TextArea getTxtParamVal()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.setTxtParamVal
+yawl:addInstance_setTxtParamVal_23 a yawl:Method ;
+    rdfs:label "setTxtParamVal" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtParamVal(TextArea ta)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.getLblParam
+yawl:addInstance_getLblParam_24 a yawl:Method ;
+    rdfs:label "getLblParam" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblParam()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.setLblParam
+yawl:addInstance_setLblParam_25 a yawl:Method ;
+    rdfs:label "setLblParam" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblParam(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.getPnlContainer
+yawl:addInstance_getPnlContainer_26 a yawl:Method ;
+    rdfs:label "getPnlContainer" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlContainer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.setPnlContainer
+yawl:addInstance_setPnlContainer_27 a yawl:Method ;
+    rdfs:label "setPnlContainer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlContainer(PanelLayout pnl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.getPnlAddInstance
+yawl:addInstance_getPnlAddInstance_28 a yawl:Method ;
+    rdfs:label "getPnlAddInstance" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlAddInstance()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.setPnlAddInstance
+yawl:addInstance_setPnlAddInstance_29 a yawl:Method ;
+    rdfs:label "setPnlAddInstance" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlAddInstance(PanelLayout pnl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.getApplicationBean
+yawl:addInstance_getApplicationBean_30 a yawl:Method ;
+    rdfs:label "getApplicationBean" ;
+    yawl:returnType "ApplicationBean" ;
+    yawl:signature "ApplicationBean getApplicationBean()" ;
+    rdfs:comment """<p>Return a reference to the scoped data bean.</p>""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: addInstance.getRequestBean
+yawl:addInstance_getRequestBean_31 a yawl:Method ;
+    rdfs:label "getRequestBean" ;
+    yawl:returnType "RequestBean" ;
+    yawl:signature "RequestBean getRequestBean()" ;
+    rdfs:comment """<p>Return a reference to the scoped data bean.</p>""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: addInstance.getSessionBean
+yawl:addInstance_getSessionBean_32 a yawl:Method ;
+    rdfs:label "getSessionBean" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getSessionBean()" ;
+    rdfs:comment """<p>Return a reference to the scoped data bean.</p>""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: addInstance.init
+yawl:addInstance_init_33 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.preprocess
+yawl:addInstance_preprocess_34 a yawl:Method ;
+    rdfs:label "preprocess" ;
+    yawl:returnType "void" ;
+    yawl:signature "void preprocess()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.destroy
+yawl:addInstance_destroy_35 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.prerender
+yawl:addInstance_prerender_36 a yawl:Method ;
+    rdfs:label "prerender" ;
+    yawl:returnType "void" ;
+    yawl:signature "void prerender()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.btnOK_action
+yawl:addInstance_btnOK_action_37 a yawl:Method ;
+    rdfs:label "btnOK_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnOK_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: addInstance.btnCancel_action
+yawl:addInstance_btnCancel_action_38 a yawl:Method ;
+    rdfs:label "btnCancel_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnCancel_action()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:addInstance___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:addInstance_page1 a yawl:Field ;
+    rdfs:label "page1" .
+
+yawl:addInstance_html1 a yawl:Field ;
+    rdfs:label "html1" .
+
+yawl:addInstance_head1 a yawl:Field ;
+    rdfs:label "head1" .
+
+yawl:addInstance_link1 a yawl:Field ;
+    rdfs:label "link1" .
+
+yawl:addInstance_body1 a yawl:Field ;
+    rdfs:label "body1" .
+
+yawl:addInstance_form1 a yawl:Field ;
+    rdfs:label "form1" .
+
+yawl:addInstance_staticHeader a yawl:Field ;
+    rdfs:label "staticHeader" .
+
+yawl:addInstance_staticText1 a yawl:Field ;
+    rdfs:label "staticText1" .
+
+yawl:addInstance_btnOK a yawl:Field ;
+    rdfs:label "btnOK" .
+
+yawl:addInstance_btnCancel a yawl:Field ;
+    rdfs:label "btnCancel" .
+
+yawl:addInstance_txtParamVal a yawl:Field ;
+    rdfs:label "txtParamVal" .
+
+yawl:addInstance_lblParam a yawl:Field ;
+    rdfs:label "lblParam" .
+
+yawl:addInstance_pnlContainer a yawl:Field ;
+    rdfs:label "pnlContainer" .
+
+yawl:addInstance_pnlAddInstance a yawl:Field ;
+    rdfs:label "pnlAddInstance" .
+
+
+

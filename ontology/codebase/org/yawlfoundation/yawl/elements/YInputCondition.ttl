@@ -1,0 +1,42 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.elements.YInputCondition
+yawl:YInputCondition a yawl:Class ;
+    rdfs:label "YInputCondition" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_elements ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/elements/YInputCondition.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 22/04/2003 Time: 13:43:54""" ;
+    yawl:extends yawl:YCondition ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "final" ;
+    yawl:hasMethod yawl:YInputCondition_verify_1 ;
+    yawl:hasMethod yawl:YInputCondition_clone_2 ;
+    .
+
+
+# Method: YInputCondition.verify
+yawl:YInputCondition_verify_1 a yawl:Method ;
+    rdfs:label "verify" ;
+    yawl:returnType "void" ;
+    yawl:signature "void verify(YVerificationHandler handler)" ;
+    rdfs:comment """This is one of those few cases where the sub-class has tighter constraints than the parent class on one of the supertype members (preset).  ie. an InputCondition must always have an empty preset.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YInputCondition.clone
+yawl:YInputCondition_clone_2 a yawl:Method ;
+    rdfs:label "clone" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object clone()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

@@ -1,0 +1,52 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.smsModule.Interaction
+yawl:Interaction a yawl:Class ;
+    rdfs:label "Interaction" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_smsModule ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/smsModule/SMSSender.java"^^xsd:string ;
+    yawl:hasMethod yawl:Interaction_toString_1 ;
+    yawl:hasField yawl:Interaction__timeOfSend ;
+    yawl:hasField yawl:Interaction__smsJobID ;
+    yawl:hasField yawl:Interaction__replyMessage ;
+    yawl:hasField yawl:Interaction__archivable ;
+    yawl:hasField yawl:Interaction__workItemRecord ;
+    yawl:hasField yawl:Interaction__caseDataBoundForEngine ;
+    .
+
+
+# Method: Interaction.toString
+yawl:Interaction_toString_1 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:Interaction__timeOfSend a yawl:Field ;
+    rdfs:label "_timeOfSend" .
+
+yawl:Interaction__smsJobID a yawl:Field ;
+    rdfs:label "_smsJobID" .
+
+yawl:Interaction__replyMessage a yawl:Field ;
+    rdfs:label "_replyMessage" .
+
+yawl:Interaction__archivable a yawl:Field ;
+    rdfs:label "_archivable" .
+
+yawl:Interaction__workItemRecord a yawl:Field ;
+    rdfs:label "_workItemRecord" .
+
+yawl:Interaction__caseDataBoundForEngine a yawl:Field ;
+    rdfs:label "_caseDataBoundForEngine" .
+
+
+

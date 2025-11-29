@@ -1,0 +1,196 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.schema.Input
+yawl:Input a yawl:Class ;
+    rdfs:label "Input" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_schema ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/schema/Input.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 8/12/14""" ;
+    yawl:implements yawl:LSInput ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Input_getPublicId_1 ;
+    yawl:hasMethod yawl:Input_setPublicId_2 ;
+    yawl:hasMethod yawl:Input_getBaseURI_3 ;
+    yawl:hasMethod yawl:Input_getByteStream_4 ;
+    yawl:hasMethod yawl:Input_getCertifiedText_5 ;
+    yawl:hasMethod yawl:Input_getCharacterStream_6 ;
+    yawl:hasMethod yawl:Input_getEncoding_7 ;
+    yawl:hasMethod yawl:Input_getStringData_8 ;
+    yawl:hasMethod yawl:Input_setBaseURI_9 ;
+    yawl:hasMethod yawl:Input_setByteStream_10 ;
+    yawl:hasMethod yawl:Input_setCertifiedText_11 ;
+    yawl:hasMethod yawl:Input_setCharacterStream_12 ;
+    yawl:hasMethod yawl:Input_setEncoding_13 ;
+    yawl:hasMethod yawl:Input_setStringData_14 ;
+    yawl:hasMethod yawl:Input_getSystemId_15 ;
+    yawl:hasMethod yawl:Input_setSystemId_16 ;
+    yawl:hasMethod yawl:Input_getInputStream_17 ;
+    yawl:hasMethod yawl:Input_setInputStream_18 ;
+    yawl:hasField yawl:Input_publicId ;
+    yawl:hasField yawl:Input_systemId ;
+    yawl:hasField yawl:Input_inputStream ;
+    .
+
+
+# Method: Input.getPublicId
+yawl:Input_getPublicId_1 a yawl:Method ;
+    rdfs:label "getPublicId" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPublicId()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Input.setPublicId
+yawl:Input_setPublicId_2 a yawl:Method ;
+    rdfs:label "setPublicId" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPublicId(String publicId)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Input.getBaseURI
+yawl:Input_getBaseURI_3 a yawl:Method ;
+    rdfs:label "getBaseURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBaseURI()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Input.getByteStream
+yawl:Input_getByteStream_4 a yawl:Method ;
+    rdfs:label "getByteStream" ;
+    yawl:returnType "InputStream" ;
+    yawl:signature "InputStream getByteStream()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Input.getCertifiedText
+yawl:Input_getCertifiedText_5 a yawl:Method ;
+    rdfs:label "getCertifiedText" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean getCertifiedText()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Input.getCharacterStream
+yawl:Input_getCharacterStream_6 a yawl:Method ;
+    rdfs:label "getCharacterStream" ;
+    yawl:returnType "Reader" ;
+    yawl:signature "Reader getCharacterStream()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Input.getEncoding
+yawl:Input_getEncoding_7 a yawl:Method ;
+    rdfs:label "getEncoding" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEncoding()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Input.getStringData
+yawl:Input_getStringData_8 a yawl:Method ;
+    rdfs:label "getStringData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStringData()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Input.setBaseURI
+yawl:Input_setBaseURI_9 a yawl:Method ;
+    rdfs:label "setBaseURI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBaseURI(String baseURI)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Input.setByteStream
+yawl:Input_setByteStream_10 a yawl:Method ;
+    rdfs:label "setByteStream" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setByteStream(InputStream byteStream)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Input.setCertifiedText
+yawl:Input_setCertifiedText_11 a yawl:Method ;
+    rdfs:label "setCertifiedText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCertifiedText(boolean certifiedText)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Input.setCharacterStream
+yawl:Input_setCharacterStream_12 a yawl:Method ;
+    rdfs:label "setCharacterStream" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCharacterStream(Reader characterStream)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Input.setEncoding
+yawl:Input_setEncoding_13 a yawl:Method ;
+    rdfs:label "setEncoding" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEncoding(String encoding)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Input.setStringData
+yawl:Input_setStringData_14 a yawl:Method ;
+    rdfs:label "setStringData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStringData(String stringData)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Input.getSystemId
+yawl:Input_getSystemId_15 a yawl:Method ;
+    rdfs:label "getSystemId" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSystemId()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Input.setSystemId
+yawl:Input_setSystemId_16 a yawl:Method ;
+    rdfs:label "setSystemId" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSystemId(String systemId)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Input.getInputStream
+yawl:Input_getInputStream_17 a yawl:Method ;
+    rdfs:label "getInputStream" ;
+    yawl:returnType "BufferedInputStream" ;
+    yawl:signature "BufferedInputStream getInputStream()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Input.setInputStream
+yawl:Input_setInputStream_18 a yawl:Method ;
+    rdfs:label "setInputStream" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setInputStream(BufferedInputStream inputStream)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:Input_publicId a yawl:Field ;
+    rdfs:label "publicId" .
+
+yawl:Input_systemId a yawl:Field ;
+    rdfs:label "systemId" .
+
+yawl:Input_inputStream a yawl:Field ;
+    rdfs:label "inputStream" .
+
+
+

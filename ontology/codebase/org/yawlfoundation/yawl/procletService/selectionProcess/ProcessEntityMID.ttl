@@ -1,0 +1,226 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.procletService.selectionProcess
+yawl:org_yawlfoundation_yawl_procletService_selectionProcess a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.procletService.selectionProcess" .
+# Class: org.yawlfoundation.yawl.procletService.selectionProcess.ProcessEntityMID
+yawl:ProcessEntityMID a yawl:Class ;
+    rdfs:label "ProcessEntityMID" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_selectionProcess ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/selectionProcess/ProcessEntityMID.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ProcessEntityMID_getUID_1 ;
+    yawl:hasMethod yawl:ProcessEntityMID_initialGraphs_2 ;
+    yawl:hasMethod yawl:ProcessEntityMID_doChecks_3 ;
+    yawl:hasMethod yawl:ProcessEntityMID_testDuplicates_4 ;
+    yawl:hasMethod yawl:ProcessEntityMID_danglingArcs_5 ;
+    yawl:hasMethod yawl:ProcessEntityMID_checkOneOrQuestGraphsOut_6 ;
+    yawl:hasMethod yawl:ProcessEntityMID_checkOneOrQuestGraphsIn_7 ;
+    yawl:hasMethod yawl:ProcessEntityMID_commitGraphs_8 ;
+    yawl:hasMethod yawl:ProcessEntityMID_sendPerformatives_9 ;
+    yawl:hasMethod yawl:ProcessEntityMID_maxSubIDInteractionGraphs_10 ;
+    yawl:hasMethod yawl:ProcessEntityMID_generateNextOptions_11 ;
+    yawl:hasMethod yawl:ProcessEntityMID_determineOptionsNonCrBlocks_12 ;
+    yawl:hasMethod yawl:ProcessEntityMID_sendOptionsToDB_13 ;
+    yawl:hasMethod yawl:ProcessEntityMID_getOptionsFromDB_14 ;
+    yawl:hasMethod yawl:ProcessEntityMID_deleteOptionsFromDB_15 ;
+    yawl:hasMethod yawl:ProcessEntityMID_sendDecisionsToDB_16 ;
+    yawl:hasMethod yawl:ProcessEntityMID_getDecisionsFromDB_17 ;
+    yawl:hasMethod yawl:ProcessEntityMID_deleteDecisionsFromDB_18 ;
+    yawl:hasMethod yawl:ProcessEntityMID_extendGraph_19 ;
+    yawl:hasField yawl:ProcessEntityMID_wir ;
+    yawl:hasField yawl:ProcessEntityMID_block ;
+    yawl:hasField yawl:ProcessEntityMID_emid ;
+    yawl:hasField yawl:ProcessEntityMID_uniqueID ;
+    yawl:hasField yawl:ProcessEntityMID_myLog ;
+    .
+
+
+# Method: ProcessEntityMID.getUID
+yawl:ProcessEntityMID_getUID_1 a yawl:Method ;
+    rdfs:label "getUID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcessEntityMID.initialGraphs
+yawl:ProcessEntityMID_initialGraphs_2 a yawl:Method ;
+    rdfs:label "initialGraphs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initialGraphs(boolean exception)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcessEntityMID.doChecks
+yawl:ProcessEntityMID_doChecks_3 a yawl:Method ;
+    rdfs:label "doChecks" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean doChecks()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcessEntityMID.testDuplicates
+yawl:ProcessEntityMID_testDuplicates_4 a yawl:Method ;
+    rdfs:label "testDuplicates" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean testDuplicates()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ProcessEntityMID.danglingArcs
+yawl:ProcessEntityMID_danglingArcs_5 a yawl:Method ;
+    rdfs:label "danglingArcs" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean danglingArcs()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ProcessEntityMID.checkOneOrQuestGraphsOut
+yawl:ProcessEntityMID_checkOneOrQuestGraphsOut_6 a yawl:Method ;
+    rdfs:label "checkOneOrQuestGraphsOut" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean checkOneOrQuestGraphsOut()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ProcessEntityMID.checkOneOrQuestGraphsIn
+yawl:ProcessEntityMID_checkOneOrQuestGraphsIn_7 a yawl:Method ;
+    rdfs:label "checkOneOrQuestGraphsIn" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean checkOneOrQuestGraphsIn()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ProcessEntityMID.commitGraphs
+yawl:ProcessEntityMID_commitGraphs_8 a yawl:Method ;
+    rdfs:label "commitGraphs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void commitGraphs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcessEntityMID.sendPerformatives
+yawl:ProcessEntityMID_sendPerformatives_9 a yawl:Method ;
+    rdfs:label "sendPerformatives" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sendPerformatives(boolean exception, WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ProcessEntityMID.maxSubIDInteractionGraphs
+yawl:ProcessEntityMID_maxSubIDInteractionGraphs_10 a yawl:Method ;
+    rdfs:label "maxSubIDInteractionGraphs" ;
+    yawl:returnType "int" ;
+    yawl:signature "int maxSubIDInteractionGraphs()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ProcessEntityMID.generateNextOptions
+yawl:ProcessEntityMID_generateNextOptions_11 a yawl:Method ;
+    rdfs:label "generateNextOptions" ;
+    yawl:returnType "List" ;
+    yawl:signature "List generateNextOptions(boolean exception)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcessEntityMID.determineOptionsNonCrBlocks
+yawl:ProcessEntityMID_determineOptionsNonCrBlocks_12 a yawl:Method ;
+    rdfs:label "determineOptionsNonCrBlocks" ;
+    yawl:returnType "List" ;
+    yawl:signature "List determineOptionsNonCrBlocks(List options)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcessEntityMID.sendOptionsToDB
+yawl:ProcessEntityMID_sendOptionsToDB_13 a yawl:Method ;
+    rdfs:label "sendOptionsToDB" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sendOptionsToDB(List options)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ProcessEntityMID.getOptionsFromDB
+yawl:ProcessEntityMID_getOptionsFromDB_14 a yawl:Method ;
+    rdfs:label "getOptionsFromDB" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getOptionsFromDB()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ProcessEntityMID.deleteOptionsFromDB
+yawl:ProcessEntityMID_deleteOptionsFromDB_15 a yawl:Method ;
+    rdfs:label "deleteOptionsFromDB" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteOptionsFromDB()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ProcessEntityMID.sendDecisionsToDB
+yawl:ProcessEntityMID_sendDecisionsToDB_16 a yawl:Method ;
+    rdfs:label "sendDecisionsToDB" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sendDecisionsToDB(List decisions)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ProcessEntityMID.getDecisionsFromDB
+yawl:ProcessEntityMID_getDecisionsFromDB_17 a yawl:Method ;
+    rdfs:label "getDecisionsFromDB" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getDecisionsFromDB()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ProcessEntityMID.deleteDecisionsFromDB
+yawl:ProcessEntityMID_deleteDecisionsFromDB_18 a yawl:Method ;
+    rdfs:label "deleteDecisionsFromDB" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteDecisionsFromDB()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ProcessEntityMID.extendGraph
+yawl:ProcessEntityMID_extendGraph_19 a yawl:Method ;
+    rdfs:label "extendGraph" ;
+    yawl:returnType "void" ;
+    yawl:signature "void extendGraph(List choices)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:ProcessEntityMID_wir a yawl:Field ;
+    rdfs:label "wir" .
+
+yawl:ProcessEntityMID_block a yawl:Field ;
+    rdfs:label "block" .
+
+yawl:ProcessEntityMID_emid a yawl:Field ;
+    rdfs:label "emid" .
+
+yawl:ProcessEntityMID_uniqueID a yawl:Field ;
+    rdfs:label "uniqueID" .
+
+yawl:ProcessEntityMID_myLog a yawl:Field ;
+    rdfs:label "myLog" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_procletService_persistence a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.procletService.persistence" .
+
+

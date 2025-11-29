@@ -1,0 +1,259 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.InterfaceClients
+yawl:InterfaceClients a yawl:Class ;
+    rdfs:label "InterfaceClients" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/InterfaceClients.java"^^xsd:string ;
+    rdfs:comment """Handles all of the interface connections and calls for the Resource Service to the Engine and other services as needed, besides those that go through InterfaceBWebsideController @author Michael Adams @date 22/02/12""" ;
+    yawl:extends yawl:AbstractEngineClient ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:InterfaceClients_initClients_1 ;
+    yawl:hasMethod yawl:InterfaceClients_reestablishClients_2 ;
+    yawl:hasMethod yawl:InterfaceClients_announceResourceUnavailable_3 ;
+    yawl:hasMethod yawl:InterfaceClients_announceResourceUnavailable_4 ;
+    yawl:hasMethod yawl:InterfaceClients_announceResourceCalendarStatusChange_5 ;
+    yawl:hasMethod yawl:InterfaceClients_registerCalendarStatusChangeListener_6 ;
+    yawl:hasMethod yawl:InterfaceClients_removeCalendarStatusChangeListener_7 ;
+    yawl:hasMethod yawl:InterfaceClients_removeCalendarStatusChangeListeners_8 ;
+    yawl:hasMethod yawl:InterfaceClients_addEventListener_9 ;
+    yawl:hasMethod yawl:InterfaceClients_removeEventListener_10 ;
+    yawl:hasMethod yawl:InterfaceClients_redirectWorkItemToYawlService_11 ;
+    yawl:hasMethod yawl:InterfaceClients_getEngineXESLog_12 ;
+    yawl:hasMethod yawl:InterfaceClients_getEngineSpecificationStatistics_13 ;
+    yawl:hasMethod yawl:InterfaceClients_hasCostClient_14 ;
+    yawl:hasMethod yawl:InterfaceClients_getCostClient_15 ;
+    yawl:hasMethod yawl:InterfaceClients_hasDocStoreClient_16 ;
+    yawl:hasMethod yawl:InterfaceClients_getDocStoreClient_17 ;
+    yawl:hasMethod yawl:InterfaceClients_hasMailClient_18 ;
+    yawl:hasMethod yawl:InterfaceClients_getMailClient_19 ;
+    yawl:hasMethod yawl:InterfaceClients_hasExceptionServiceEnabled_20 ;
+    yawl:hasMethod yawl:InterfaceClients_getExceptionServiceURI_21 ;
+    yawl:hasMethod yawl:InterfaceClients_removeCaseFromDocStore_22 ;
+    yawl:hasField yawl:InterfaceClients__exceptionServiceURI ;
+    yawl:hasField yawl:InterfaceClients__schedulingServiceURI ;
+    yawl:hasField yawl:InterfaceClients__interfaceEClient ;
+    yawl:hasField yawl:InterfaceClients__gatewayServer ;
+    yawl:hasField yawl:InterfaceClients__costServiceClient ;
+    yawl:hasField yawl:InterfaceClients__docStoreClient ;
+    yawl:hasField yawl:InterfaceClients__mailServiceClient ;
+    yawl:hasField yawl:InterfaceClients_DEF_URI ;
+    yawl:hasField yawl:InterfaceClients_SERVICE_NAME ;
+    .
+
+
+# Method: InterfaceClients.initClients
+yawl:InterfaceClients_initClients_1 a yawl:Method ;
+    rdfs:label "initClients" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initClients(String engineURI, String exceptionURI, String schedulingURI, String costServiceURI, String docStoreURI, String mailServiceURI)" ;
+    rdfs:comment """Called on servlet startup with the various uris needed to initialise the various clients @param engineURI the URI of the Engine's Interface B @param exceptionURI the URI of the Worklet Exception Service @param schedulingURI the URI of the Scheduling Service @param costServiceURI the URI of the Cost Service @param docStoreURI the URI of the Document Store""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceClients.reestablishClients
+yawl:InterfaceClients_reestablishClients_2 a yawl:Method ;
+    rdfs:label "reestablishClients" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reestablishClients(InterfaceB_EnvironmentBasedClient client)" ;
+    rdfs:comment """Reestablishes clients when the resource service restarts @param client the Interface B client from InterfaceBWebsideController""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceClients.announceResourceUnavailable
+yawl:InterfaceClients_announceResourceUnavailable_3 a yawl:Method ;
+    rdfs:label "announceResourceUnavailable" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceResourceUnavailable(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceClients.announceResourceUnavailable
+yawl:InterfaceClients_announceResourceUnavailable_4 a yawl:Method ;
+    rdfs:label "announceResourceUnavailable" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceResourceUnavailable(AbstractResource resource, WorkItemRecord wir, boolean primary)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceClients.announceResourceCalendarStatusChange
+yawl:InterfaceClients_announceResourceCalendarStatusChange_5 a yawl:Method ;
+    rdfs:label "announceResourceCalendarStatusChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceResourceCalendarStatusChange(String origAgent, String changeXML)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceClients.registerCalendarStatusChangeListener
+yawl:InterfaceClients_registerCalendarStatusChangeListener_6 a yawl:Method ;
+    rdfs:label "registerCalendarStatusChangeListener" ;
+    yawl:returnType "String" ;
+    yawl:signature "String registerCalendarStatusChangeListener(String uri, String userID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceClients.removeCalendarStatusChangeListener
+yawl:InterfaceClients_removeCalendarStatusChangeListener_7 a yawl:Method ;
+    rdfs:label "removeCalendarStatusChangeListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeCalendarStatusChangeListener(String uri, String userID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceClients.removeCalendarStatusChangeListeners
+yawl:InterfaceClients_removeCalendarStatusChangeListeners_8 a yawl:Method ;
+    rdfs:label "removeCalendarStatusChangeListeners" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeCalendarStatusChangeListeners(String userID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceClients.addEventListener
+yawl:InterfaceClients_addEventListener_9 a yawl:Method ;
+    rdfs:label "addEventListener" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addEventListener(String uri)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceClients.removeEventListener
+yawl:InterfaceClients_removeEventListener_10 a yawl:Method ;
+    rdfs:label "removeEventListener" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeEventListener(String uri)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceClients.redirectWorkItemToYawlService
+yawl:InterfaceClients_redirectWorkItemToYawlService_11 a yawl:Method ;
+    rdfs:label "redirectWorkItemToYawlService" ;
+    yawl:returnType "String" ;
+    yawl:signature "String redirectWorkItemToYawlService(WorkItemRecord wir, String serviceName)" ;
+    rdfs:comment """Dispatches a work item to a YAWL Custom Service for handling. @param wir the work item to be redirected. @param serviceName the name of the service to redirect it to @pre The item id refers to a work item that is currently in the list of items known to the Resource Service, and the work item has enabled or fired status @pre The service name refers to a service registered in the engine @pre The service is up and running @return a success or diagnostic error message""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: InterfaceClients.getEngineXESLog
+yawl:InterfaceClients_getEngineXESLog_12 a yawl:Method ;
+    rdfs:label "getEngineXESLog" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEngineXESLog(YSpecificationID specID, boolean withData, boolean ignoreUnknownLabels)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceClients.getEngineSpecificationStatistics
+yawl:InterfaceClients_getEngineSpecificationStatistics_13 a yawl:Method ;
+    rdfs:label "getEngineSpecificationStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEngineSpecificationStatistics(YSpecificationID specID, long from, long to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceClients.hasCostClient
+yawl:InterfaceClients_hasCostClient_14 a yawl:Method ;
+    rdfs:label "hasCostClient" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasCostClient()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceClients.getCostClient
+yawl:InterfaceClients_getCostClient_15 a yawl:Method ;
+    rdfs:label "getCostClient" ;
+    yawl:returnType "CostClient" ;
+    yawl:signature "CostClient getCostClient()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceClients.hasDocStoreClient
+yawl:InterfaceClients_hasDocStoreClient_16 a yawl:Method ;
+    rdfs:label "hasDocStoreClient" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasDocStoreClient()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceClients.getDocStoreClient
+yawl:InterfaceClients_getDocStoreClient_17 a yawl:Method ;
+    rdfs:label "getDocStoreClient" ;
+    yawl:returnType "DocStoreClient" ;
+    yawl:signature "DocStoreClient getDocStoreClient()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceClients.hasMailClient
+yawl:InterfaceClients_hasMailClient_18 a yawl:Method ;
+    rdfs:label "hasMailClient" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasMailClient()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceClients.getMailClient
+yawl:InterfaceClients_getMailClient_19 a yawl:Method ;
+    rdfs:label "getMailClient" ;
+    yawl:returnType "MailClient" ;
+    yawl:signature "MailClient getMailClient()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceClients.hasExceptionServiceEnabled
+yawl:InterfaceClients_hasExceptionServiceEnabled_20 a yawl:Method ;
+    rdfs:label "hasExceptionServiceEnabled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasExceptionServiceEnabled()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceClients.getExceptionServiceURI
+yawl:InterfaceClients_getExceptionServiceURI_21 a yawl:Method ;
+    rdfs:label "getExceptionServiceURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getExceptionServiceURI()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceClients.removeCaseFromDocStore
+yawl:InterfaceClients_removeCaseFromDocStore_22 a yawl:Method ;
+    rdfs:label "removeCaseFromDocStore" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeCaseFromDocStore(String caseID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:InterfaceClients__exceptionServiceURI a yawl:Field ;
+    rdfs:label "_exceptionServiceURI" .
+
+yawl:InterfaceClients__schedulingServiceURI a yawl:Field ;
+    rdfs:label "_schedulingServiceURI" .
+
+yawl:InterfaceClients__interfaceEClient a yawl:Field ;
+    rdfs:label "_interfaceEClient" .
+
+yawl:InterfaceClients__gatewayServer a yawl:Field ;
+    rdfs:label "_gatewayServer" .
+
+yawl:InterfaceClients__costServiceClient a yawl:Field ;
+    rdfs:label "_costServiceClient" .
+
+yawl:InterfaceClients__docStoreClient a yawl:Field ;
+    rdfs:label "_docStoreClient" .
+
+yawl:InterfaceClients__mailServiceClient a yawl:Field ;
+    rdfs:label "_mailServiceClient" .
+
+yawl:InterfaceClients_DEF_URI a yawl:Field ;
+    rdfs:label "DEF_URI" .
+
+yawl:InterfaceClients_SERVICE_NAME a yawl:Field ;
+    rdfs:label "SERVICE_NAME" .
+
+
+

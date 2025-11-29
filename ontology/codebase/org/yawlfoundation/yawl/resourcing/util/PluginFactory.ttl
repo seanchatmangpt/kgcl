@@ -1,0 +1,285 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.util.PluginFactory
+yawl:PluginFactory a yawl:Class ;
+    rdfs:label "PluginFactory" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/util/PluginFactory.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 19/04/2014""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:PluginFactory_setExternalPaths_1 ;
+    yawl:hasMethod yawl:PluginFactory_getConstraints_2 ;
+    yawl:hasMethod yawl:PluginFactory_getFilters_3 ;
+    yawl:hasMethod yawl:PluginFactory_getAllocators_4 ;
+    yawl:hasMethod yawl:PluginFactory_getCodelets_5 ;
+    yawl:hasMethod yawl:PluginFactory_getDynAttributes_6 ;
+    yawl:hasMethod yawl:PluginFactory_getEventListeners_7 ;
+    yawl:hasMethod yawl:PluginFactory_newConstraintInstance_8 ;
+    yawl:hasMethod yawl:PluginFactory_newFilterInstance_9 ;
+    yawl:hasMethod yawl:PluginFactory_newAllocatorInstance_10 ;
+    yawl:hasMethod yawl:PluginFactory_newCodeletInstance_11 ;
+    yawl:hasMethod yawl:PluginFactory_newDataSourceInstance_12 ;
+    yawl:hasMethod yawl:PluginFactory_getConstraintsAsXML_13 ;
+    yawl:hasMethod yawl:PluginFactory_getFiltersAsXML_14 ;
+    yawl:hasMethod yawl:PluginFactory_getAllocatorsAsXML_15 ;
+    yawl:hasMethod yawl:PluginFactory_getAllSelectors_16 ;
+    yawl:hasMethod yawl:PluginFactory_getCodeletsAsXML_17 ;
+    yawl:hasMethod yawl:PluginFactory_getCodeletParameters_18 ;
+    yawl:hasMethod yawl:PluginFactory_getCodeletParametersAsXML_19 ;
+    yawl:hasMethod yawl:PluginFactory_getCodeletMap_20 ;
+    yawl:hasMethod yawl:PluginFactory_getConstraintMap_21 ;
+    yawl:hasMethod yawl:PluginFactory_getFilterMap_22 ;
+    yawl:hasMethod yawl:PluginFactory_getAllocatorMap_23 ;
+    yawl:hasMethod yawl:PluginFactory_qualify_24 ;
+    yawl:hasField yawl:PluginFactory__filters ;
+    yawl:hasField yawl:PluginFactory__constraints ;
+    yawl:hasField yawl:PluginFactory__allocators ;
+    yawl:hasField yawl:PluginFactory__codelets ;
+    yawl:hasField yawl:PluginFactory_BASE_PACKAGE ;
+    yawl:hasField yawl:PluginFactory__loader ;
+    .
+
+
+# Method: PluginFactory.setExternalPaths
+yawl:PluginFactory_setExternalPaths_1 a yawl:Method ;
+    rdfs:label "setExternalPaths" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setExternalPaths(String externalPaths)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PluginFactory.getConstraints
+yawl:PluginFactory_getConstraints_2 a yawl:Method ;
+    rdfs:label "getConstraints" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getConstraints()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PluginFactory.getFilters
+yawl:PluginFactory_getFilters_3 a yawl:Method ;
+    rdfs:label "getFilters" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getFilters()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PluginFactory.getAllocators
+yawl:PluginFactory_getAllocators_4 a yawl:Method ;
+    rdfs:label "getAllocators" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getAllocators()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PluginFactory.getCodelets
+yawl:PluginFactory_getCodelets_5 a yawl:Method ;
+    rdfs:label "getCodelets" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getCodelets()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PluginFactory.getDynAttributes
+yawl:PluginFactory_getDynAttributes_6 a yawl:Method ;
+    rdfs:label "getDynAttributes" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getDynAttributes()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PluginFactory.getEventListeners
+yawl:PluginFactory_getEventListeners_7 a yawl:Method ;
+    rdfs:label "getEventListeners" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getEventListeners()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PluginFactory.newConstraintInstance
+yawl:PluginFactory_newConstraintInstance_8 a yawl:Method ;
+    rdfs:label "newConstraintInstance" ;
+    yawl:returnType "AbstractConstraint" ;
+    yawl:signature "AbstractConstraint newConstraintInstance(String name)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PluginFactory.newFilterInstance
+yawl:PluginFactory_newFilterInstance_9 a yawl:Method ;
+    rdfs:label "newFilterInstance" ;
+    yawl:returnType "AbstractFilter" ;
+    yawl:signature "AbstractFilter newFilterInstance(String name)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PluginFactory.newAllocatorInstance
+yawl:PluginFactory_newAllocatorInstance_10 a yawl:Method ;
+    rdfs:label "newAllocatorInstance" ;
+    yawl:returnType "AbstractAllocator" ;
+    yawl:signature "AbstractAllocator newAllocatorInstance(String name)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PluginFactory.newCodeletInstance
+yawl:PluginFactory_newCodeletInstance_11 a yawl:Method ;
+    rdfs:label "newCodeletInstance" ;
+    yawl:returnType "AbstractCodelet" ;
+    yawl:signature "AbstractCodelet newCodeletInstance(String name)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PluginFactory.newDataSourceInstance
+yawl:PluginFactory_newDataSourceInstance_12 a yawl:Method ;
+    rdfs:label "newDataSourceInstance" ;
+    yawl:returnType "DataSource" ;
+    yawl:signature "DataSource newDataSourceInstance(String name)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PluginFactory.getConstraintsAsXML
+yawl:PluginFactory_getConstraintsAsXML_13 a yawl:Method ;
+    rdfs:label "getConstraintsAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getConstraintsAsXML()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PluginFactory.getFiltersAsXML
+yawl:PluginFactory_getFiltersAsXML_14 a yawl:Method ;
+    rdfs:label "getFiltersAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFiltersAsXML()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PluginFactory.getAllocatorsAsXML
+yawl:PluginFactory_getAllocatorsAsXML_15 a yawl:Method ;
+    rdfs:label "getAllocatorsAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAllocatorsAsXML()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PluginFactory.getAllSelectors
+yawl:PluginFactory_getAllSelectors_16 a yawl:Method ;
+    rdfs:label "getAllSelectors" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAllSelectors()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PluginFactory.getCodeletsAsXML
+yawl:PluginFactory_getCodeletsAsXML_17 a yawl:Method ;
+    rdfs:label "getCodeletsAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCodeletsAsXML()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PluginFactory.getCodeletParameters
+yawl:PluginFactory_getCodeletParameters_18 a yawl:Method ;
+    rdfs:label "getCodeletParameters" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getCodeletParameters(String codeletName)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PluginFactory.getCodeletParametersAsXML
+yawl:PluginFactory_getCodeletParametersAsXML_19 a yawl:Method ;
+    rdfs:label "getCodeletParametersAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCodeletParametersAsXML(String codeletName)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PluginFactory.getCodeletMap
+yawl:PluginFactory_getCodeletMap_20 a yawl:Method ;
+    rdfs:label "getCodeletMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getCodeletMap()" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PluginFactory.getConstraintMap
+yawl:PluginFactory_getConstraintMap_21 a yawl:Method ;
+    rdfs:label "getConstraintMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getConstraintMap()" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PluginFactory.getFilterMap
+yawl:PluginFactory_getFilterMap_22 a yawl:Method ;
+    rdfs:label "getFilterMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getFilterMap()" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PluginFactory.getAllocatorMap
+yawl:PluginFactory_getAllocatorMap_23 a yawl:Method ;
+    rdfs:label "getAllocatorMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getAllocatorMap()" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PluginFactory.qualify
+yawl:PluginFactory_qualify_24 a yawl:Method ;
+    rdfs:label "qualify" ;
+    yawl:returnType "String" ;
+    yawl:signature "String qualify(String className, String pkg)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:PluginFactory__filters a yawl:Field ;
+    rdfs:label "_filters" .
+
+yawl:PluginFactory__constraints a yawl:Field ;
+    rdfs:label "_constraints" .
+
+yawl:PluginFactory__allocators a yawl:Field ;
+    rdfs:label "_allocators" .
+
+yawl:PluginFactory__codelets a yawl:Field ;
+    rdfs:label "_codelets" .
+
+yawl:PluginFactory_BASE_PACKAGE a yawl:Field ;
+    rdfs:label "BASE_PACKAGE" .
+
+yawl:PluginFactory__loader a yawl:Field ;
+    rdfs:label "_loader" .
+
+
+

@@ -1,0 +1,113 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.interfce.ServletUtils
+yawl:ServletUtils a yawl:Class ;
+    rdfs:label "ServletUtils" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_interfce ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/interfce/ServletUtils.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 22/01/2004 Time: 14:14:02""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ServletUtils_sendResponse_1 ;
+    yawl:hasMethod yawl:ServletUtils_prepareResponse_2 ;
+    yawl:hasMethod yawl:ServletUtils_finalizeResponse_3 ;
+    yawl:hasMethod yawl:ServletUtils_finalizeResponse_4 ;
+    yawl:hasMethod yawl:ServletUtils_validURL_5 ;
+    yawl:hasMethod yawl:ServletUtils_doNotFound_6 ;
+    yawl:hasMethod yawl:ServletUtils_urlEncode_7 ;
+    yawl:hasMethod yawl:ServletUtils_urlDecode_8 ;
+    yawl:hasMethod yawl:ServletUtils_getRequestParams_9 ;
+    .
+
+
+# Method: ServletUtils.sendResponse
+yawl:ServletUtils_sendResponse_1 a yawl:Method ;
+    rdfs:label "sendResponse" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sendResponse(HttpServletResponse resp, String result)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ServletUtils.prepareResponse
+yawl:ServletUtils_prepareResponse_2 a yawl:Method ;
+    rdfs:label "prepareResponse" ;
+    yawl:returnType "OutputStreamWriter" ;
+    yawl:signature "OutputStreamWriter prepareResponse(HttpServletResponse response)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ServletUtils.finalizeResponse
+yawl:ServletUtils_finalizeResponse_3 a yawl:Method ;
+    rdfs:label "finalizeResponse" ;
+    yawl:returnType "void" ;
+    yawl:signature "void finalizeResponse(OutputStreamWriter outputWriter, String output)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ServletUtils.finalizeResponse
+yawl:ServletUtils_finalizeResponse_4 a yawl:Method ;
+    rdfs:label "finalizeResponse" ;
+    yawl:returnType "void" ;
+    yawl:signature "void finalizeResponse(OutputStreamWriter outputWriter, StringBuilder output)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ServletUtils.validURL
+yawl:ServletUtils_validURL_5 a yawl:Method ;
+    rdfs:label "validURL" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validURL(HttpServletRequest request)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ServletUtils.doNotFound
+yawl:ServletUtils_doNotFound_6 a yawl:Method ;
+    rdfs:label "doNotFound" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doNotFound(HttpServletRequest request, HttpServletResponse response)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ServletUtils.urlEncode
+yawl:ServletUtils_urlEncode_7 a yawl:Method ;
+    rdfs:label "urlEncode" ;
+    yawl:returnType "String" ;
+    yawl:signature "String urlEncode(String s)" ;
+    rdfs:comment """Url-encodes data to make it safe for HTTP transport @param   s    data to be encoded for HTTP transport @return  encoded data""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ServletUtils.urlDecode
+yawl:ServletUtils_urlDecode_8 a yawl:Method ;
+    rdfs:label "urlDecode" ;
+    yawl:returnType "String" ;
+    yawl:signature "String urlDecode(String s)" ;
+    rdfs:comment """Url-decodes data after possible encoding for transport @param   s    data to be decoded from HTTP request @return  decoded data""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ServletUtils.getRequestParams
+yawl:ServletUtils_getRequestParams_9 a yawl:Method ;
+    rdfs:label "getRequestParams" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getRequestParams(HttpServletRequest request)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+
+

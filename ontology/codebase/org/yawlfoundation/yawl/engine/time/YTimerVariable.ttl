@@ -1,0 +1,131 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.engine.time
+yawl:org_yawlfoundation_yawl_engine_time a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.engine.time" .
+# Class: org.yawlfoundation.yawl.engine.time.YTimerVariable
+yawl:YTimerVariable a yawl:Class ;
+    rdfs:label "YTimerVariable" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_time ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/time/YTimerVariable.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 25/05/2010""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YTimerVariable_getTaskName_1 ;
+    yawl:hasMethod yawl:YTimerVariable_getTask_2 ;
+    yawl:hasMethod yawl:YTimerVariable_getState_3 ;
+    yawl:hasMethod yawl:YTimerVariable_getStateString_4 ;
+    yawl:hasMethod yawl:YTimerVariable_setState_5 ;
+    yawl:hasMethod yawl:YTimerVariable_setState_6 ;
+    yawl:hasMethod yawl:YTimerVariable_setStateActive_7 ;
+    yawl:hasMethod yawl:YTimerVariable_setStateClosed_8 ;
+    yawl:hasMethod yawl:YTimerVariable_setStateExpired_9 ;
+    yawl:hasMethod yawl:YTimerVariable_evaluatePredicate_10 ;
+    yawl:hasMethod yawl:YTimerVariable_isValidTransition_11 ;
+    yawl:hasField yawl:YTimerVariable__state ;
+    yawl:hasField yawl:YTimerVariable__ownerTask ;
+    .
+
+
+# Method: YTimerVariable.getTaskName
+yawl:YTimerVariable_getTaskName_1 a yawl:Method ;
+    rdfs:label "getTaskName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerVariable.getTask
+yawl:YTimerVariable_getTask_2 a yawl:Method ;
+    rdfs:label "getTask" ;
+    yawl:returnType "YTask" ;
+    yawl:signature "YTask getTask()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerVariable.getState
+yawl:YTimerVariable_getState_3 a yawl:Method ;
+    rdfs:label "getState" ;
+    yawl:returnType "YWorkItemTimer" ;
+    yawl:signature "YWorkItemTimer getState()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerVariable.getStateString
+yawl:YTimerVariable_getStateString_4 a yawl:Method ;
+    rdfs:label "getStateString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStateString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerVariable.setState
+yawl:YTimerVariable_setState_5 a yawl:Method ;
+    rdfs:label "setState" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setState(YWorkItemTimer state)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerVariable.setState
+yawl:YTimerVariable_setState_6 a yawl:Method ;
+    rdfs:label "setState" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setState(YWorkItemTimer state, boolean restoring)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerVariable.setStateActive
+yawl:YTimerVariable_setStateActive_7 a yawl:Method ;
+    rdfs:label "setStateActive" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStateActive()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerVariable.setStateClosed
+yawl:YTimerVariable_setStateClosed_8 a yawl:Method ;
+    rdfs:label "setStateClosed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStateClosed()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerVariable.setStateExpired
+yawl:YTimerVariable_setStateExpired_9 a yawl:Method ;
+    rdfs:label "setStateExpired" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStateExpired()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerVariable.evaluatePredicate
+yawl:YTimerVariable_evaluatePredicate_10 a yawl:Method ;
+    rdfs:label "evaluatePredicate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean evaluatePredicate(String predicate)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YTimerVariable.isValidTransition
+yawl:YTimerVariable_isValidTransition_11 a yawl:Method ;
+    rdfs:label "isValidTransition" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isValidTransition(YWorkItemTimer state)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YTimerVariable__state a yawl:Field ;
+    rdfs:label "_state" .
+
+yawl:YTimerVariable__ownerTask a yawl:Field ;
+    rdfs:label "_ownerTask" .
+
+
+

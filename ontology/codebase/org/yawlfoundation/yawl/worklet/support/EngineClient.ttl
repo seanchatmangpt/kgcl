@@ -1,0 +1,378 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.support.EngineClient
+yawl:EngineClient a yawl:Class ;
+    rdfs:label "EngineClient" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_support ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/support/EngineClient.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 5/01/2016""" ;
+    yawl:extends yawl:AbstractEngineClient ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:EngineClient_setupIXClient_1 ;
+    yawl:hasMethod yawl:EngineClient_addIXListener_2 ;
+    yawl:hasMethod yawl:EngineClient_uploadWorklet_3 ;
+    yawl:hasMethod yawl:EngineClient_getServer_4 ;
+    yawl:hasMethod yawl:EngineClient_rejectAnnouncedEnabledTask_5 ;
+    yawl:hasMethod yawl:EngineClient_getStartingData_6 ;
+    yawl:hasMethod yawl:EngineClient_cancelWorkItem_7 ;
+    yawl:hasMethod yawl:EngineClient_failWorkItem_8 ;
+    yawl:hasMethod yawl:EngineClient_forceCompleteWorkItem_9 ;
+    yawl:hasMethod yawl:EngineClient_restartWorkItem_10 ;
+    yawl:hasMethod yawl:EngineClient_continueWorkItem_11 ;
+    yawl:hasMethod yawl:EngineClient_updateWorkItemData_12 ;
+    yawl:hasMethod yawl:EngineClient_updateCaseData_13 ;
+    yawl:hasMethod yawl:EngineClient_getLiveWorkItemsForSpec_14 ;
+    yawl:hasMethod yawl:EngineClient_getLiveWorkItemsForIdentifier_15 ;
+    yawl:hasMethod yawl:EngineClient_declineWorkItem_16 ;
+    yawl:hasMethod yawl:EngineClient_undoCheckOutWorkItem_17 ;
+    yawl:hasMethod yawl:EngineClient_cancelWorkletCase_18 ;
+    yawl:hasMethod yawl:EngineClient_checkOutItem_19 ;
+    yawl:hasMethod yawl:EngineClient_getChildren_20 ;
+    yawl:hasMethod yawl:EngineClient_checkOutChildren_21 ;
+    yawl:hasMethod yawl:EngineClient_checkOutWorkItem_22 ;
+    yawl:hasMethod yawl:EngineClient_checkOutFiredWorkItem_23 ;
+    yawl:hasMethod yawl:EngineClient_getEngineStoredWorkItem_24 ;
+    yawl:hasMethod yawl:EngineClient_getEngineStoredWorkItem_25 ;
+    yawl:hasMethod yawl:EngineClient_getSpecData_26 ;
+    yawl:hasMethod yawl:EngineClient_getSpecificationIDForCase_27 ;
+    yawl:hasMethod yawl:EngineClient_getTaskInputParams_28 ;
+    yawl:hasMethod yawl:EngineClient_getInputParams_29 ;
+    yawl:hasMethod yawl:EngineClient_uploadWorklet_30 ;
+    yawl:hasMethod yawl:EngineClient_isUploaded_31 ;
+    yawl:hasMethod yawl:EngineClient_mapItemParamsToWorkletCaseParams_32 ;
+    yawl:hasMethod yawl:EngineClient_launchWorklet_33 ;
+    yawl:hasMethod yawl:EngineClient_launchCase_34 ;
+    yawl:hasMethod yawl:EngineClient_launchWorkletList_35 ;
+    yawl:hasMethod yawl:EngineClient_checkCacheForWorkItem_36 ;
+    yawl:hasField yawl:EngineClient__server ;
+    yawl:hasField yawl:EngineClient__controller ;
+    yawl:hasField yawl:EngineClient__ixClient ;
+    yawl:hasField yawl:EngineClient_DEF_URI ;
+    yawl:hasField yawl:EngineClient_SERVICE_NAME ;
+    .
+
+
+# Method: EngineClient.setupIXClient
+yawl:EngineClient_setupIXClient_1 a yawl:Method ;
+    rdfs:label "setupIXClient" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setupIXClient()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.addIXListener
+yawl:EngineClient_addIXListener_2 a yawl:Method ;
+    rdfs:label "addIXListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addIXListener()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.uploadWorklet
+yawl:EngineClient_uploadWorklet_3 a yawl:Method ;
+    rdfs:label "uploadWorklet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String uploadWorklet(String workletXML)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.getServer
+yawl:EngineClient_getServer_4 a yawl:Method ;
+    rdfs:label "getServer" ;
+    yawl:returnType "WorkletEventServer" ;
+    yawl:signature "WorkletEventServer getServer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.rejectAnnouncedEnabledTask
+yawl:EngineClient_rejectAnnouncedEnabledTask_5 a yawl:Method ;
+    rdfs:label "rejectAnnouncedEnabledTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void rejectAnnouncedEnabledTask(String wirID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.getStartingData
+yawl:EngineClient_getStartingData_6 a yawl:Method ;
+    rdfs:label "getStartingData" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getStartingData(String wirID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.cancelWorkItem
+yawl:EngineClient_cancelWorkItem_7 a yawl:Method ;
+    rdfs:label "cancelWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String cancelWorkItem(String wirID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.failWorkItem
+yawl:EngineClient_failWorkItem_8 a yawl:Method ;
+    rdfs:label "failWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String failWorkItem(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.forceCompleteWorkItem
+yawl:EngineClient_forceCompleteWorkItem_9 a yawl:Method ;
+    rdfs:label "forceCompleteWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String forceCompleteWorkItem(WorkItemRecord wir, Element data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.restartWorkItem
+yawl:EngineClient_restartWorkItem_10 a yawl:Method ;
+    rdfs:label "restartWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String restartWorkItem(String wirID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.continueWorkItem
+yawl:EngineClient_continueWorkItem_11 a yawl:Method ;
+    rdfs:label "continueWorkItem" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord continueWorkItem(String wirID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.updateWorkItemData
+yawl:EngineClient_updateWorkItemData_12 a yawl:Method ;
+    rdfs:label "updateWorkItemData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateWorkItemData(WorkItemRecord wir, Element data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.updateCaseData
+yawl:EngineClient_updateCaseData_13 a yawl:Method ;
+    rdfs:label "updateCaseData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateCaseData(String caseID, Element data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.getLiveWorkItemsForSpec
+yawl:EngineClient_getLiveWorkItemsForSpec_14 a yawl:Method ;
+    rdfs:label "getLiveWorkItemsForSpec" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getLiveWorkItemsForSpec(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.getLiveWorkItemsForIdentifier
+yawl:EngineClient_getLiveWorkItemsForIdentifier_15 a yawl:Method ;
+    rdfs:label "getLiveWorkItemsForIdentifier" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getLiveWorkItemsForIdentifier(String idType, String id)" ;
+    rdfs:comment """Retrieves a List of live workitems for the case or spec id passed @param idType \"case\" for a case's workitems, \"spec\" for a specification's, \"task\" for a specific taskID @param id the identifier for the case/spec/task @return the List of live workitems""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.declineWorkItem
+yawl:EngineClient_declineWorkItem_16 a yawl:Method ;
+    rdfs:label "declineWorkItem" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean declineWorkItem(WorkItemRecord wir, String eventType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.undoCheckOutWorkItem
+yawl:EngineClient_undoCheckOutWorkItem_17 a yawl:Method ;
+    rdfs:label "undoCheckOutWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void undoCheckOutWorkItem(WorkItemRecord child)" ;
+    rdfs:comment """Returns control of a workitem back to the engine for processing, in the event that there is no matching rule found in the ruleset, given the context of the item. @param child - the record for the child to undo the checkout for""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.cancelWorkletCase
+yawl:EngineClient_cancelWorkletCase_18 a yawl:Method ;
+    rdfs:label "cancelWorkletCase" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean cancelWorkletCase(WorkletRunner runner)" ;
+    rdfs:comment """Cancels an executing worklet process @param runner - the id of the case to cancel @return true if case is successfully cancelled""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.checkOutItem
+yawl:EngineClient_checkOutItem_19 a yawl:Method ;
+    rdfs:label "checkOutItem" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set checkOutItem(WorkItemRecord wir)" ;
+    rdfs:comment """Manages the checking out of a workitem and its children @param wir - the WorkItemRecord of the workitem to check out @return a Set of checked out child workitem.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.getChildren
+yawl:EngineClient_getChildren_20 a yawl:Method ;
+    rdfs:label "getChildren" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getChildren(String parentID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: EngineClient.checkOutChildren
+yawl:EngineClient_checkOutChildren_21 a yawl:Method ;
+    rdfs:label "checkOutChildren" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set checkOutChildren(WorkItemRecord wir)" ;
+    rdfs:comment """Checks out all the child workitems of the parent item specified @param wir - the parent work item""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: EngineClient.checkOutWorkItem
+yawl:EngineClient_checkOutWorkItem_22 a yawl:Method ;
+    rdfs:label "checkOutWorkItem" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean checkOutWorkItem(WorkItemRecord wir)" ;
+    rdfs:comment """Check the workitem out of the engine @param wir - the workitem to check out @return true if checkout was successful""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: EngineClient.checkOutFiredWorkItem
+yawl:EngineClient_checkOutFiredWorkItem_23 a yawl:Method ;
+    rdfs:label "checkOutFiredWorkItem" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord checkOutFiredWorkItem(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.getEngineStoredWorkItem
+yawl:EngineClient_getEngineStoredWorkItem_24 a yawl:Method ;
+    rdfs:label "getEngineStoredWorkItem" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord getEngineStoredWorkItem(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.getEngineStoredWorkItem
+yawl:EngineClient_getEngineStoredWorkItem_25 a yawl:Method ;
+    rdfs:label "getEngineStoredWorkItem" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord getEngineStoredWorkItem(String wirID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.getSpecData
+yawl:EngineClient_getSpecData_26 a yawl:Method ;
+    rdfs:label "getSpecData" ;
+    yawl:returnType "SpecificationData" ;
+    yawl:signature "SpecificationData getSpecData(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.getSpecificationIDForCase
+yawl:EngineClient_getSpecificationIDForCase_27 a yawl:Method ;
+    rdfs:label "getSpecificationIDForCase" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getSpecificationIDForCase(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.getTaskInputParams
+yawl:EngineClient_getTaskInputParams_28 a yawl:Method ;
+    rdfs:label "getTaskInputParams" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getTaskInputParams(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.getInputParams
+yawl:EngineClient_getInputParams_29 a yawl:Method ;
+    rdfs:label "getInputParams" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getInputParams(YSpecificationID specId)" ;
+    rdfs:comment """get the list of input params for a specified specification""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.uploadWorklet
+yawl:EngineClient_uploadWorklet_30 a yawl:Method ;
+    rdfs:label "uploadWorklet" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean uploadWorklet(WorkletSpecification worklet)" ;
+    rdfs:comment """Uploads a worklet specification into the engine @param worklet - the id of the worklet specification to upload @return true if upload is successful or spec is already loaded in engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.isUploaded
+yawl:EngineClient_isUploaded_31 a yawl:Method ;
+    rdfs:label "isUploaded" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isUploaded(YSpecificationID workletSpec)" ;
+    rdfs:comment """Checks if a worklet spec has already been loaded into engine @param workletSpec the specification id to check @return true if the specification is already loaded in the engine""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: EngineClient.mapItemParamsToWorkletCaseParams
+yawl:EngineClient_mapItemParamsToWorkletCaseParams_32 a yawl:Method ;
+    rdfs:label "mapItemParamsToWorkletCaseParams" ;
+    yawl:returnType "String" ;
+    yawl:signature "String mapItemParamsToWorkletCaseParams(WorkItemRecord wir, Element itemData, YSpecificationID workletSpecID)" ;
+    rdfs:comment """Maps the values of the data attributes in the datalist of a checked out workitem to the input params of the worklet case that will run as a substitute for the checked out workitem. The input params for the worklet case are required by the interface's launchcase() method. @param wir the checked out work item @return the loaded input params of the new worklet case (launchCase() requires the input params as a String)""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.launchWorklet
+yawl:EngineClient_launchWorklet_33 a yawl:Method ;
+    rdfs:label "launchWorklet" ;
+    yawl:returnType "WorkletRunner" ;
+    yawl:signature "WorkletRunner launchWorklet(WorkItemRecord wir, YSpecificationID specID, Element data, RuleType ruleType)" ;
+    rdfs:comment """Starts a worklet case executing in the engine @param wir - the checked out child item to start the worklet for @return - the case id of the started worklet case""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: EngineClient.launchCase
+yawl:EngineClient_launchCase_34 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseParams)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: EngineClient.launchWorkletList
+yawl:EngineClient_launchWorkletList_35 a yawl:Method ;
+    rdfs:label "launchWorkletList" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set launchWorkletList(WorkItemRecord wir, Element data, Set specs, RuleType ruleType)" ;
+    rdfs:comment """Launches each of the worklets listed in the wr for starting @param wir   - the child workitem to launch worklets for @param specs - the ids of the worklets to launch @return the set of worklets runners successfully launched""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineClient.checkCacheForWorkItem
+yawl:EngineClient_checkCacheForWorkItem_36 a yawl:Method ;
+    rdfs:label "checkCacheForWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkCacheForWorkItem(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:EngineClient__server a yawl:Field ;
+    rdfs:label "_server" .
+
+yawl:EngineClient__controller a yawl:Field ;
+    rdfs:label "_controller" .
+
+yawl:EngineClient__ixClient a yawl:Field ;
+    rdfs:label "_ixClient" .
+
+yawl:EngineClient_DEF_URI a yawl:Field ;
+    rdfs:label "DEF_URI" .
+
+yawl:EngineClient_SERVICE_NAME a yawl:Field ;
+    rdfs:label "SERVICE_NAME" .
+
+
+

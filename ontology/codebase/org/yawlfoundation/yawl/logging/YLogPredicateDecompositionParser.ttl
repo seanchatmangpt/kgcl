@@ -1,0 +1,35 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.logging.YLogPredicateDecompositionParser
+yawl:YLogPredicateDecompositionParser a yawl:Class ;
+    rdfs:label "YLogPredicateDecompositionParser" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_logging ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/logging/YLogPredicateDecompositionParser.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 1/03/2010""" ;
+    yawl:extends yawl:YPredicateParser ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YLogPredicateDecompositionParser_valueOf_1 ;
+    yawl:hasField yawl:YLogPredicateDecompositionParser__decomp ;
+    .
+
+
+# Method: YLogPredicateDecompositionParser.valueOf
+yawl:YLogPredicateDecompositionParser_valueOf_1 a yawl:Method ;
+    rdfs:label "valueOf" ;
+    yawl:returnType "String" ;
+    yawl:signature "String valueOf(String predicate)" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:YLogPredicateDecompositionParser__decomp a yawl:Field ;
+    rdfs:label "_decomp" .
+
+
+

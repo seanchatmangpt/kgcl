@@ -1,0 +1,484 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.instance.WorkItemInstance
+yawl:WorkItemInstance a yawl:Class ;
+    rdfs:label "WorkItemInstance" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_instance ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/instance/WorkItemInstance.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 11/11/2008""" ;
+    yawl:implements yawl:YInstance ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:WorkItemInstance_close_1 ;
+    yawl:hasMethod yawl:WorkItemInstance_getTaskID_2 ;
+    yawl:hasMethod yawl:WorkItemInstance_setTaskID_3 ;
+    yawl:hasMethod yawl:WorkItemInstance_getTaskName_4 ;
+    yawl:hasMethod yawl:WorkItemInstance_setTaskName_5 ;
+    yawl:hasMethod yawl:WorkItemInstance_getID_6 ;
+    yawl:hasMethod yawl:WorkItemInstance_setID_7 ;
+    yawl:hasMethod yawl:WorkItemInstance_getCaseID_8 ;
+    yawl:hasMethod yawl:WorkItemInstance_getStatus_9 ;
+    yawl:hasMethod yawl:WorkItemInstance_getPlainStatus_10 ;
+    yawl:hasMethod yawl:WorkItemInstance_setStatus_11 ;
+    yawl:hasMethod yawl:WorkItemInstance_getResourceName_12 ;
+    yawl:hasMethod yawl:WorkItemInstance_setResourceName_13 ;
+    yawl:hasMethod yawl:WorkItemInstance_getTimerStatus_14 ;
+    yawl:hasMethod yawl:WorkItemInstance_setTimerExpired_15 ;
+    yawl:hasMethod yawl:WorkItemInstance_setTimerStatus_16 ;
+    yawl:hasMethod yawl:WorkItemInstance_getEnabledTime_17 ;
+    yawl:hasMethod yawl:WorkItemInstance_getEnabledTimeAsDateString_18 ;
+    yawl:hasMethod yawl:WorkItemInstance_setEnabledTime_19 ;
+    yawl:hasMethod yawl:WorkItemInstance_getStartTime_20 ;
+    yawl:hasMethod yawl:WorkItemInstance_getStartTimeAsDateString_21 ;
+    yawl:hasMethod yawl:WorkItemInstance_setStartTime_22 ;
+    yawl:hasMethod yawl:WorkItemInstance_getCompletionTime_23 ;
+    yawl:hasMethod yawl:WorkItemInstance_getCompletionTimeAsDateString_24 ;
+    yawl:hasMethod yawl:WorkItemInstance_setCompletionTime_25 ;
+    yawl:hasMethod yawl:WorkItemInstance_getTimerExpiry_26 ;
+    yawl:hasMethod yawl:WorkItemInstance_setTimerExpiry_27 ;
+    yawl:hasMethod yawl:WorkItemInstance_getTimerExpiryAsCountdown_28 ;
+    yawl:hasMethod yawl:WorkItemInstance_formatAge_29 ;
+    yawl:hasMethod yawl:WorkItemInstance_getParameterMap_30 ;
+    yawl:hasMethod yawl:WorkItemInstance_setParameterMap_31 ;
+    yawl:hasMethod yawl:WorkItemInstance_getParameters_32 ;
+    yawl:hasMethod yawl:WorkItemInstance_addParameterInstance_33 ;
+    yawl:hasMethod yawl:WorkItemInstance_addParameterInstance_34 ;
+    yawl:hasMethod yawl:WorkItemInstance_addParameters_35 ;
+    yawl:hasMethod yawl:WorkItemInstance_addParameterSets_36 ;
+    yawl:hasMethod yawl:WorkItemInstance_updateParameterValues_37 ;
+    yawl:hasMethod yawl:WorkItemInstance_updateParameterValues_38 ;
+    yawl:hasMethod yawl:WorkItemInstance_getParameterInstance_39 ;
+    yawl:hasMethod yawl:WorkItemInstance_getDateAsLong_40 ;
+    yawl:hasMethod yawl:WorkItemInstance_marshalParameters_41 ;
+    yawl:hasMethod yawl:WorkItemInstance_toXML_42 ;
+    yawl:hasMethod yawl:WorkItemInstance_fromXML_43 ;
+    yawl:hasMethod yawl:WorkItemInstance_fromXML_44 ;
+    yawl:hasMethod yawl:WorkItemInstance_strToLong_45 ;
+    yawl:hasField yawl:WorkItemInstance_workItem ;
+    yawl:hasField yawl:WorkItemInstance_taskID ;
+    yawl:hasField yawl:WorkItemInstance_taskName ;
+    yawl:hasField yawl:WorkItemInstance_caseID ;
+    yawl:hasField yawl:WorkItemInstance_id ;
+    yawl:hasField yawl:WorkItemInstance_status ;
+    yawl:hasField yawl:WorkItemInstance_resourceName ;
+    yawl:hasField yawl:WorkItemInstance_timerStatus ;
+    yawl:hasField yawl:WorkItemInstance_enabledTime ;
+    yawl:hasField yawl:WorkItemInstance_startTime ;
+    yawl:hasField yawl:WorkItemInstance_completionTime ;
+    yawl:hasField yawl:WorkItemInstance_timerExpiry ;
+    yawl:hasField yawl:WorkItemInstance_dateFormatter ;
+    yawl:hasField yawl:WorkItemInstance_parameters ;
+    .
+
+
+# Method: WorkItemInstance.close
+yawl:WorkItemInstance_close_1 a yawl:Method ;
+    rdfs:label "close" ;
+    yawl:returnType "void" ;
+    yawl:signature "void close(Document completionData)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.getTaskID
+yawl:WorkItemInstance_getTaskID_2 a yawl:Method ;
+    rdfs:label "getTaskID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.setTaskID
+yawl:WorkItemInstance_setTaskID_3 a yawl:Method ;
+    rdfs:label "setTaskID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTaskID(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.getTaskName
+yawl:WorkItemInstance_getTaskName_4 a yawl:Method ;
+    rdfs:label "getTaskName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.setTaskName
+yawl:WorkItemInstance_setTaskName_5 a yawl:Method ;
+    rdfs:label "setTaskName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTaskName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.getID
+yawl:WorkItemInstance_getID_6 a yawl:Method ;
+    rdfs:label "getID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.setID
+yawl:WorkItemInstance_setID_7 a yawl:Method ;
+    rdfs:label "setID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setID(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.getCaseID
+yawl:WorkItemInstance_getCaseID_8 a yawl:Method ;
+    rdfs:label "getCaseID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.getStatus
+yawl:WorkItemInstance_getStatus_9 a yawl:Method ;
+    rdfs:label "getStatus" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.getPlainStatus
+yawl:WorkItemInstance_getPlainStatus_10 a yawl:Method ;
+    rdfs:label "getPlainStatus" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPlainStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.setStatus
+yawl:WorkItemInstance_setStatus_11 a yawl:Method ;
+    rdfs:label "setStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStatus(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.getResourceName
+yawl:WorkItemInstance_getResourceName_12 a yawl:Method ;
+    rdfs:label "getResourceName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourceName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.setResourceName
+yawl:WorkItemInstance_setResourceName_13 a yawl:Method ;
+    rdfs:label "setResourceName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setResourceName(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.getTimerStatus
+yawl:WorkItemInstance_getTimerStatus_14 a yawl:Method ;
+    rdfs:label "getTimerStatus" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTimerStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.setTimerExpired
+yawl:WorkItemInstance_setTimerExpired_15 a yawl:Method ;
+    rdfs:label "setTimerExpired" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTimerExpired()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.setTimerStatus
+yawl:WorkItemInstance_setTimerStatus_16 a yawl:Method ;
+    rdfs:label "setTimerStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTimerStatus(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.getEnabledTime
+yawl:WorkItemInstance_getEnabledTime_17 a yawl:Method ;
+    rdfs:label "getEnabledTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getEnabledTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.getEnabledTimeAsDateString
+yawl:WorkItemInstance_getEnabledTimeAsDateString_18 a yawl:Method ;
+    rdfs:label "getEnabledTimeAsDateString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEnabledTimeAsDateString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.setEnabledTime
+yawl:WorkItemInstance_setEnabledTime_19 a yawl:Method ;
+    rdfs:label "setEnabledTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEnabledTime(long time)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.getStartTime
+yawl:WorkItemInstance_getStartTime_20 a yawl:Method ;
+    rdfs:label "getStartTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getStartTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.getStartTimeAsDateString
+yawl:WorkItemInstance_getStartTimeAsDateString_21 a yawl:Method ;
+    rdfs:label "getStartTimeAsDateString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStartTimeAsDateString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.setStartTime
+yawl:WorkItemInstance_setStartTime_22 a yawl:Method ;
+    rdfs:label "setStartTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStartTime(long time)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.getCompletionTime
+yawl:WorkItemInstance_getCompletionTime_23 a yawl:Method ;
+    rdfs:label "getCompletionTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getCompletionTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.getCompletionTimeAsDateString
+yawl:WorkItemInstance_getCompletionTimeAsDateString_24 a yawl:Method ;
+    rdfs:label "getCompletionTimeAsDateString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCompletionTimeAsDateString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.setCompletionTime
+yawl:WorkItemInstance_setCompletionTime_25 a yawl:Method ;
+    rdfs:label "setCompletionTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCompletionTime(long time)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.getTimerExpiry
+yawl:WorkItemInstance_getTimerExpiry_26 a yawl:Method ;
+    rdfs:label "getTimerExpiry" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getTimerExpiry()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.setTimerExpiry
+yawl:WorkItemInstance_setTimerExpiry_27 a yawl:Method ;
+    rdfs:label "setTimerExpiry" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTimerExpiry(long expiry)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.getTimerExpiryAsCountdown
+yawl:WorkItemInstance_getTimerExpiryAsCountdown_28 a yawl:Method ;
+    rdfs:label "getTimerExpiryAsCountdown" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTimerExpiryAsCountdown()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.formatAge
+yawl:WorkItemInstance_formatAge_29 a yawl:Method ;
+    rdfs:label "formatAge" ;
+    yawl:returnType "String" ;
+    yawl:signature "String formatAge(long age)" ;
+    rdfs:comment """formats a long time value into a string of the form 'ddd:hh:mm:ss' @param age the time value (in milliseconds) @return the formatted time string""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.getParameterMap
+yawl:WorkItemInstance_getParameterMap_30 a yawl:Method ;
+    rdfs:label "getParameterMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getParameterMap()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.setParameterMap
+yawl:WorkItemInstance_setParameterMap_31 a yawl:Method ;
+    rdfs:label "setParameterMap" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setParameterMap(Map params)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.getParameters
+yawl:WorkItemInstance_getParameters_32 a yawl:Method ;
+    rdfs:label "getParameters" ;
+    yawl:returnType "Collection" ;
+    yawl:signature "Collection getParameters()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.addParameterInstance
+yawl:WorkItemInstance_addParameterInstance_33 a yawl:Method ;
+    rdfs:label "addParameterInstance" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addParameterInstance(ParameterInstance param)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.addParameterInstance
+yawl:WorkItemInstance_addParameterInstance_34 a yawl:Method ;
+    rdfs:label "addParameterInstance" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addParameterInstance(YParameter parameter, YTask task, ParameterInstance usage, Element data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.addParameters
+yawl:WorkItemInstance_addParameters_35 a yawl:Method ;
+    rdfs:label "addParameters" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addParameters(YTask task, Element data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.addParameterSets
+yawl:WorkItemInstance_addParameterSets_36 a yawl:Method ;
+    rdfs:label "addParameterSets" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addParameterSets(Map inputParams, Map outputParams, YTask task, Element data)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkItemInstance.updateParameterValues
+yawl:WorkItemInstance_updateParameterValues_37 a yawl:Method ;
+    rdfs:label "updateParameterValues" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateParameterValues(Element data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.updateParameterValues
+yawl:WorkItemInstance_updateParameterValues_38 a yawl:Method ;
+    rdfs:label "updateParameterValues" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateParameterValues(Document dataDoc)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkItemInstance.getParameterInstance
+yawl:WorkItemInstance_getParameterInstance_39 a yawl:Method ;
+    rdfs:label "getParameterInstance" ;
+    yawl:returnType "ParameterInstance" ;
+    yawl:signature "ParameterInstance getParameterInstance(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.getDateAsLong
+yawl:WorkItemInstance_getDateAsLong_40 a yawl:Method ;
+    rdfs:label "getDateAsLong" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getDateAsLong(Date date)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkItemInstance.marshalParameters
+yawl:WorkItemInstance_marshalParameters_41 a yawl:Method ;
+    rdfs:label "marshalParameters" ;
+    yawl:returnType "String" ;
+    yawl:signature "String marshalParameters()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.toXML
+yawl:WorkItemInstance_toXML_42 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.fromXML
+yawl:WorkItemInstance_fromXML_43 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.fromXML
+yawl:WorkItemInstance_fromXML_44 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(Element instance)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkItemInstance.strToLong
+yawl:WorkItemInstance_strToLong_45 a yawl:Method ;
+    rdfs:label "strToLong" ;
+    yawl:returnType "long" ;
+    yawl:signature "long strToLong(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:WorkItemInstance_workItem a yawl:Field ;
+    rdfs:label "workItem" .
+
+yawl:WorkItemInstance_taskID a yawl:Field ;
+    rdfs:label "taskID" .
+
+yawl:WorkItemInstance_taskName a yawl:Field ;
+    rdfs:label "taskName" .
+
+yawl:WorkItemInstance_caseID a yawl:Field ;
+    rdfs:label "caseID" .
+
+yawl:WorkItemInstance_id a yawl:Field ;
+    rdfs:label "id" .
+
+yawl:WorkItemInstance_status a yawl:Field ;
+    rdfs:label "status" .
+
+yawl:WorkItemInstance_resourceName a yawl:Field ;
+    rdfs:label "resourceName" .
+
+yawl:WorkItemInstance_timerStatus a yawl:Field ;
+    rdfs:label "timerStatus" .
+
+yawl:WorkItemInstance_enabledTime a yawl:Field ;
+    rdfs:label "enabledTime" .
+
+yawl:WorkItemInstance_startTime a yawl:Field ;
+    rdfs:label "startTime" .
+
+yawl:WorkItemInstance_completionTime a yawl:Field ;
+    rdfs:label "completionTime" .
+
+yawl:WorkItemInstance_timerExpiry a yawl:Field ;
+    rdfs:label "timerExpiry" .
+
+yawl:WorkItemInstance_dateFormatter a yawl:Field ;
+    rdfs:label "dateFormatter" .
+
+yawl:WorkItemInstance_parameters a yawl:Field ;
+    rdfs:label "parameters" .
+
+
+

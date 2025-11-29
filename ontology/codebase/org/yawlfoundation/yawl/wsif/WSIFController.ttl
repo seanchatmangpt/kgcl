@@ -1,0 +1,102 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.wsif.WSIFController
+yawl:WSIFController a yawl:Class ;
+    rdfs:label "WSIFController" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_wsif ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/wsif/WSIFController.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 19/03/2004 Time: 11:40:59""" ;
+    yawl:extends yawl:InterfaceBWebsideController ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:WSIFController_handleEnabledWorkItemEvent_1 ;
+    yawl:hasMethod yawl:WSIFController_getOutputDataTypes_2 ;
+    yawl:hasMethod yawl:WSIFController_validateValue_3 ;
+    yawl:hasMethod yawl:WSIFController_handleCancelledWorkItemEvent_4 ;
+    yawl:hasMethod yawl:WSIFController_describeRequiredParams_5 ;
+    yawl:hasMethod yawl:WSIFController_doGet_6 ;
+    yawl:hasField yawl:WSIFController__sessionHandle ;
+    yawl:hasField yawl:WSIFController__log ;
+    yawl:hasField yawl:WSIFController_WSDL_LOCATION_PARAMNAME ;
+    yawl:hasField yawl:WSIFController_WSDL_PORTNAME_PARAMNAME ;
+    yawl:hasField yawl:WSIFController_WSDL_OPERATIONNAME_PARAMNAME ;
+    .
+
+
+# Method: WSIFController.handleEnabledWorkItemEvent
+yawl:WSIFController_handleEnabledWorkItemEvent_1 a yawl:Method ;
+    rdfs:label "handleEnabledWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleEnabledWorkItemEvent(WorkItemRecord enabledWorkItem)" ;
+    rdfs:comment """Implements InterfaceBWebsideController.  It receives messages from the engine notifying an enabled task and acts accordingly.  In this case it takes the message, tries to check out the work item, and if successful it begins to start up a web service invocation. @param enabledWorkItem""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WSIFController.getOutputDataTypes
+yawl:WSIFController_getOutputDataTypes_2 a yawl:Method ;
+    rdfs:label "getOutputDataTypes" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getOutputDataTypes(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WSIFController.validateValue
+yawl:WSIFController_validateValue_3 a yawl:Method ;
+    rdfs:label "validateValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String validateValue(String type, String value)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WSIFController.handleCancelledWorkItemEvent
+yawl:WSIFController_handleCancelledWorkItemEvent_4 a yawl:Method ;
+    rdfs:label "handleCancelledWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCancelledWorkItemEvent(WorkItemRecord workItemRecord)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WSIFController.describeRequiredParams
+yawl:WSIFController_describeRequiredParams_5 a yawl:Method ;
+    rdfs:label "describeRequiredParams" ;
+    yawl:returnType "YParameter" ;
+    yawl:signature "YParameter describeRequiredParams()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WSIFController.doGet
+yawl:WSIFController_doGet_6 a yawl:Method ;
+    rdfs:label "doGet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doGet(HttpServletRequest request, HttpServletResponse response)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:WSIFController__sessionHandle a yawl:Field ;
+    rdfs:label "_sessionHandle" .
+
+yawl:WSIFController__log a yawl:Field ;
+    rdfs:label "_log" .
+
+yawl:WSIFController_WSDL_LOCATION_PARAMNAME a yawl:Field ;
+    rdfs:label "WSDL_LOCATION_PARAMNAME" .
+
+yawl:WSIFController_WSDL_PORTNAME_PARAMNAME a yawl:Field ;
+    rdfs:label "WSDL_PORTNAME_PARAMNAME" .
+
+yawl:WSIFController_WSDL_OPERATIONNAME_PARAMNAME a yawl:Field ;
+    rdfs:label "WSDL_OPERATIONNAME_PARAMNAME" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_reporter a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.reporter" .
+
+

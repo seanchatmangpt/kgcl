@@ -1,0 +1,79 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.interfce.PerfReporter
+yawl:PerfReporter a yawl:Class ;
+    rdfs:label "PerfReporter" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_interfce ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/interfce/PerfReporter.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 11/6/17""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:PerfReporter_add_1 ;
+    yawl:hasMethod yawl:PerfReporter_poll_2 ;
+    yawl:hasMethod yawl:PerfReporter_read_3 ;
+    yawl:hasMethod yawl:PerfReporter_getRequests_4 ;
+    yawl:hasMethod yawl:PerfReporter_getOrAdd_5 ;
+    yawl:hasField yawl:PerfReporter__requestMap ;
+    yawl:hasField yawl:PerfReporter__previousTimestamp ;
+    .
+
+
+# Method: PerfReporter.add
+yawl:PerfReporter_add_1 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(String request, long start)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PerfReporter.poll
+yawl:PerfReporter_poll_2 a yawl:Method ;
+    rdfs:label "poll" ;
+    yawl:returnType "String" ;
+    yawl:signature "String poll()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PerfReporter.read
+yawl:PerfReporter_read_3 a yawl:Method ;
+    rdfs:label "read" ;
+    yawl:returnType "String" ;
+    yawl:signature "String read()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PerfReporter.getRequests
+yawl:PerfReporter_getRequests_4 a yawl:Method ;
+    rdfs:label "getRequests" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getRequests()" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PerfReporter.getOrAdd
+yawl:PerfReporter_getOrAdd_5 a yawl:Method ;
+    rdfs:label "getOrAdd" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getOrAdd(String action)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:PerfReporter__requestMap a yawl:Field ;
+    rdfs:label "_requestMap" .
+
+yawl:PerfReporter__previousTimestamp a yawl:Field ;
+    rdfs:label "_previousTimestamp" .
+
+
+

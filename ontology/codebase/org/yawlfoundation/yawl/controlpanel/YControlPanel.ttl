@@ -1,0 +1,181 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.controlpanel
+yawl:org_yawlfoundation_yawl_controlpanel a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.controlpanel" .
+# Class: org.yawlfoundation.yawl.controlpanel.YControlPanel
+yawl:YControlPanel a yawl:Class ;
+    rdfs:label "YControlPanel" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/YControlPanel.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 4/08/2014""" ;
+    yawl:extends yawl:JFrame ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YControlPanel_main_1 ;
+    yawl:hasMethod yawl:YControlPanel_getComponentsPane_2 ;
+    yawl:hasMethod yawl:YControlPanel_showComponentsPane_3 ;
+    yawl:hasMethod yawl:YControlPanel_showOutputPane_4 ;
+    yawl:hasMethod yawl:YControlPanel_clearOutputPane_5 ;
+    yawl:hasMethod yawl:YControlPanel_getAppTitle_6 ;
+    yawl:hasMethod yawl:YControlPanel_buildUI_7 ;
+    yawl:hasMethod yawl:YControlPanel_createComponentsPanel_8 ;
+    yawl:hasMethod yawl:YControlPanel_doOnExit_9 ;
+    yawl:hasMethod yawl:YControlPanel_getFrameIcon_10 ;
+    yawl:hasMethod yawl:YControlPanel_setMacIcon_11 ;
+    yawl:hasMethod yawl:YControlPanel_setMinimumSize_12 ;
+    yawl:hasMethod yawl:YControlPanel_getVersion_13 ;
+    yawl:hasMethod yawl:YControlPanel_showUpdateSuccess_14 ;
+    yawl:hasMethod yawl:YControlPanel_shutdownTomcat_15 ;
+    yawl:hasField yawl:YControlPanel__engineMonitor ;
+    yawl:hasField yawl:YControlPanel__tabbedPane ;
+    yawl:hasField yawl:YControlPanel__componentsPane ;
+    yawl:hasField yawl:YControlPanel__outputPanel ;
+    yawl:hasField yawl:YControlPanel_VERSION ;
+    .
+
+
+# Method: YControlPanel.main
+yawl:YControlPanel_main_1 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String args)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YControlPanel.getComponentsPane
+yawl:YControlPanel_getComponentsPane_2 a yawl:Method ;
+    rdfs:label "getComponentsPane" ;
+    yawl:returnType "ComponentsPane" ;
+    yawl:signature "ComponentsPane getComponentsPane()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YControlPanel.showComponentsPane
+yawl:YControlPanel_showComponentsPane_3 a yawl:Method ;
+    rdfs:label "showComponentsPane" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showComponentsPane()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YControlPanel.showOutputPane
+yawl:YControlPanel_showOutputPane_4 a yawl:Method ;
+    rdfs:label "showOutputPane" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showOutputPane()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YControlPanel.clearOutputPane
+yawl:YControlPanel_clearOutputPane_5 a yawl:Method ;
+    rdfs:label "clearOutputPane" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clearOutputPane()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YControlPanel.getAppTitle
+yawl:YControlPanel_getAppTitle_6 a yawl:Method ;
+    rdfs:label "getAppTitle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAppTitle()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YControlPanel.buildUI
+yawl:YControlPanel_buildUI_7 a yawl:Method ;
+    rdfs:label "buildUI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void buildUI()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YControlPanel.createComponentsPanel
+yawl:YControlPanel_createComponentsPanel_8 a yawl:Method ;
+    rdfs:label "createComponentsPanel" ;
+    yawl:returnType "JPanel" ;
+    yawl:signature "JPanel createComponentsPanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YControlPanel.doOnExit
+yawl:YControlPanel_doOnExit_9 a yawl:Method ;
+    rdfs:label "doOnExit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doOnExit()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YControlPanel.getFrameIcon
+yawl:YControlPanel_getFrameIcon_10 a yawl:Method ;
+    rdfs:label "getFrameIcon" ;
+    yawl:returnType "Image" ;
+    yawl:signature "Image getFrameIcon()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YControlPanel.setMacIcon
+yawl:YControlPanel_setMacIcon_11 a yawl:Method ;
+    rdfs:label "setMacIcon" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMacIcon()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YControlPanel.setMinimumSize
+yawl:YControlPanel_setMinimumSize_12 a yawl:Method ;
+    rdfs:label "setMinimumSize" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMinimumSize()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YControlPanel.getVersion
+yawl:YControlPanel_getVersion_13 a yawl:Method ;
+    rdfs:label "getVersion" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getVersion()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YControlPanel.showUpdateSuccess
+yawl:YControlPanel_showUpdateSuccess_14 a yawl:Method ;
+    rdfs:label "showUpdateSuccess" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showUpdateSuccess()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YControlPanel.shutdownTomcat
+yawl:YControlPanel_shutdownTomcat_15 a yawl:Method ;
+    rdfs:label "shutdownTomcat" ;
+    yawl:returnType "void" ;
+    yawl:signature "void shutdownTomcat()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YControlPanel__engineMonitor a yawl:Field ;
+    rdfs:label "_engineMonitor" .
+
+yawl:YControlPanel__tabbedPane a yawl:Field ;
+    rdfs:label "_tabbedPane" .
+
+yawl:YControlPanel__componentsPane a yawl:Field ;
+    rdfs:label "_componentsPane" .
+
+yawl:YControlPanel__outputPanel a yawl:Field ;
+    rdfs:label "_outputPanel" .
+
+yawl:YControlPanel_VERSION a yawl:Field ;
+    rdfs:label "VERSION" .
+
+
+

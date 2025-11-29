@@ -1,0 +1,146 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.stateless.YSRestoreTest
+yawl:YSRestoreTest a yawl:Class ;
+    rdfs:label "YSRestoreTest" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/YSRestoreTest.java"^^xsd:string ;
+    rdfs:comment """This class tests the unloading (marshaling) or a case running in one engine, and restoring it to a different engine. @author Michael Adams""" ;
+    yawl:implements yawl:YCaseEventListener ;
+    yawl:implements yawl:YWorkItemEventListener ;
+    yawl:implements yawl:YTimerEventListener ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YSRestoreTest_initEngine_1 ;
+    yawl:hasMethod yawl:YSRestoreTest_runOneCase_2 ;
+    yawl:hasMethod yawl:YSRestoreTest_handleCaseEvent_3 ;
+    yawl:hasMethod yawl:YSRestoreTest_handleTimerEvent_4 ;
+    yawl:hasMethod yawl:YSRestoreTest_handleWorkItemEvent_5 ;
+    yawl:hasMethod yawl:YSRestoreTest_processWorkItem_6 ;
+    yawl:hasMethod yawl:YSRestoreTest_print_7 ;
+    yawl:hasMethod yawl:YSRestoreTest_getDataValue_8 ;
+    yawl:hasMethod yawl:YSRestoreTest_setDataValue_9 ;
+    yawl:hasMethod yawl:YSRestoreTest_dataItemToString_10 ;
+    yawl:hasMethod yawl:YSRestoreTest_main_11 ;
+    yawl:hasField yawl:YSRestoreTest__engine1 ;
+    yawl:hasField yawl:YSRestoreTest__engine2 ;
+    yawl:hasField yawl:YSRestoreTest__caseRunner ;
+    .
+
+
+# Method: YSRestoreTest.initEngine
+yawl:YSRestoreTest_initEngine_1 a yawl:Method ;
+    rdfs:label "initEngine" ;
+    yawl:returnType "YStatelessEngine" ;
+    yawl:signature "YStatelessEngine initEngine(long idleTimeMSecs)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSRestoreTest.runOneCase
+yawl:YSRestoreTest_runOneCase_2 a yawl:Method ;
+    rdfs:label "runOneCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void runOneCase(String specxml)" ;
+    rdfs:comment """Runs a single case of the specification supplied @param specxml the XML of the specification""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSRestoreTest.handleCaseEvent
+yawl:YSRestoreTest_handleCaseEvent_3 a yawl:Method ;
+    rdfs:label "handleCaseEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCaseEvent(YCaseEvent event)" ;
+    rdfs:comment """Respond to a case level events @param event the event object, with certain data describing the event""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSRestoreTest.handleTimerEvent
+yawl:YSRestoreTest_handleTimerEvent_4 a yawl:Method ;
+    rdfs:label "handleTimerEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleTimerEvent(YTimerEvent event)" ;
+    rdfs:comment """Respond to any timer events @param event the event object, with certain data describing the event""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSRestoreTest.handleWorkItemEvent
+yawl:YSRestoreTest_handleWorkItemEvent_5 a yawl:Method ;
+    rdfs:label "handleWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleWorkItemEvent(YWorkItemEvent event)" ;
+    rdfs:comment """Respond to work item events: ITEM_ENABLED, ITEM_STARTED, ITEM_COMPLETED, ITEM_STATUS_CHANGE, ITEM_CANCEL, ITEM_DATA_VALUE_CHANGE, ITEM_CHECK_PRECONSTRAINTS, ITEM_CHECK_POSTCONSTRAINTS @param event the event object, with certain data describing the event""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSRestoreTest.processWorkItem
+yawl:YSRestoreTest_processWorkItem_6 a yawl:Method ;
+    rdfs:label "processWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processWorkItem(YWorkItem item, YStatelessEngine engine)" ;
+    rdfs:comment """Simulates the processing of a work item: extracts the work item data, does a simple update, then completes the work item @param item   the work item to work on and then complete @param engine @throws YQueryException       if the data assignments are malformed @throws YEngineStateException if the engine isn't in running state (it will be) @throws YStateException       if the state object is out-of-date @throws YDataStateException   if the data string is malformed""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSRestoreTest.print
+yawl:YSRestoreTest_print_7 a yawl:Method ;
+    rdfs:label "print" ;
+    yawl:returnType "void" ;
+    yawl:signature "void print(YEvent event, String args)" ;
+    rdfs:comment """A simple print method @param event the event to print @param args the sequence of strings to print""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSRestoreTest.getDataValue
+yawl:YSRestoreTest_getDataValue_8 a yawl:Method ;
+    rdfs:label "getDataValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataValue(Element data, String varName)" ;
+    rdfs:comment """Extracts the value of a simple work item variable @param data the work item data element @param varName the name of the variable @return the variable's value""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSRestoreTest.setDataValue
+yawl:YSRestoreTest_setDataValue_9 a yawl:Method ;
+    rdfs:label "setDataValue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataValue(Element data, String varName, String value)" ;
+    rdfs:comment """Assigns a value to a simple work item variable @param data the work item data element @param varName the name of the variable @param value the value to assign""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSRestoreTest.dataItemToString
+yawl:YSRestoreTest_dataItemToString_10 a yawl:Method ;
+    rdfs:label "dataItemToString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String dataItemToString(YLogDataItem item)" ;
+    rdfs:comment """This one just converts a log item to a string so we can print it @param item the log item, containing some logged info @return the flattened string""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSRestoreTest.main
+yawl:YSRestoreTest_main_11 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String args)" ;
+    rdfs:comment """This runs the example above @param args there are none""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:YSRestoreTest__engine1 a yawl:Field ;
+    rdfs:label "_engine1" .
+
+yawl:YSRestoreTest__engine2 a yawl:Field ;
+    rdfs:label "_engine2" .
+
+yawl:YSRestoreTest__caseRunner a yawl:Field ;
+    rdfs:label "_caseRunner" .
+
+
+

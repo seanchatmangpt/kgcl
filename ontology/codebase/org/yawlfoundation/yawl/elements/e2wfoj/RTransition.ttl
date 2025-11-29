@@ -1,0 +1,61 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.elements.e2wfoj.RTransition
+yawl:RTransition a yawl:Class ;
+    rdfs:label "RTransition" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_elements_e2wfoj ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/elements/e2wfoj/RTransition.java"^^xsd:string ;
+    yawl:extends yawl:RElement ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:RTransition_setRemoveSet_1 ;
+    yawl:hasMethod yawl:RTransition_setRemoveSet_2 ;
+    yawl:hasMethod yawl:RTransition_getRemoveSet_3 ;
+    yawl:hasMethod yawl:RTransition_isCancelTransition_4 ;
+    yawl:hasField yawl:RTransition__removeSet ;
+    .
+
+
+# Method: RTransition.setRemoveSet
+yawl:RTransition_setRemoveSet_1 a yawl:Method ;
+    rdfs:label "setRemoveSet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRemoveSet(Set removeSet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RTransition.setRemoveSet
+yawl:RTransition_setRemoveSet_2 a yawl:Method ;
+    rdfs:label "setRemoveSet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRemoveSet(RPlace p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RTransition.getRemoveSet
+yawl:RTransition_getRemoveSet_3 a yawl:Method ;
+    rdfs:label "getRemoveSet" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getRemoveSet()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RTransition.isCancelTransition
+yawl:RTransition_isCancelTransition_4 a yawl:Method ;
+    rdfs:label "isCancelTransition" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isCancelTransition()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:RTransition__removeSet a yawl:Field ;
+    rdfs:label "_removeSet" .
+
+
+

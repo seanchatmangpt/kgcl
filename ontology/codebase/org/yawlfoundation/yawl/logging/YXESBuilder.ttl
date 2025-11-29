@@ -1,0 +1,326 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.logging.YXESBuilder
+yawl:YXESBuilder a yawl:Class ;
+    rdfs:label "YXESBuilder" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_logging ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/logging/YXESBuilder.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 21/04/2010""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YXESBuilder_buildLog_1 ;
+    yawl:hasMethod yawl:YXESBuilder_processEvents_2 ;
+    yawl:hasMethod yawl:YXESBuilder_translateEvent_3 ;
+    yawl:hasMethod yawl:YXESBuilder_traceNode_4 ;
+    yawl:hasMethod yawl:YXESBuilder_stringNode_5 ;
+    yawl:hasMethod yawl:YXESBuilder_dateNode_6 ;
+    yawl:hasMethod yawl:YXESBuilder_floatNode_7 ;
+    yawl:hasMethod yawl:YXESBuilder_intNode_8 ;
+    yawl:hasMethod yawl:YXESBuilder_booleanNode_9 ;
+    yawl:hasMethod yawl:YXESBuilder_getComment_10 ;
+    yawl:hasMethod yawl:YXESBuilder_beginLogOutput_11 ;
+    yawl:hasMethod yawl:YXESBuilder_classifierNode_12 ;
+    yawl:hasMethod yawl:YXESBuilder_extensionNode_13 ;
+    yawl:hasMethod yawl:YXESBuilder_globalNode_14 ;
+    yawl:hasMethod yawl:YXESBuilder_entryNode_15 ;
+    yawl:hasMethod yawl:YXESBuilder_eventNode_16 ;
+    yawl:hasMethod yawl:YXESBuilder_addDataEvents_17 ;
+    yawl:hasMethod yawl:YXESBuilder_processComplexTypeDataEvent_18 ;
+    yawl:hasMethod yawl:YXESBuilder_processComplexTypeDataValues_19 ;
+    yawl:hasMethod yawl:YXESBuilder_concatName_20 ;
+    yawl:hasMethod yawl:YXESBuilder_parseComplexTypeDefinition_21 ;
+    yawl:hasMethod yawl:YXESBuilder_parseComplexTypeDefinition_22 ;
+    yawl:hasMethod yawl:YXESBuilder_formatDataNode_23 ;
+    yawl:hasMethod yawl:YXESBuilder_formatDataNode_24 ;
+    yawl:hasMethod yawl:YXESBuilder_formatDateValue_25 ;
+    yawl:hasMethod yawl:YXESBuilder_cdataIfComplex_26 ;
+    yawl:hasMethod yawl:YXESBuilder_getTagType_27 ;
+    yawl:hasMethod yawl:YXESBuilder_processCasePredicates_28 ;
+    yawl:hasMethod yawl:YXESBuilder_processCaseEvents_29 ;
+    yawl:hasMethod yawl:YXESBuilder_processTaskEvents_30 ;
+    yawl:hasMethod yawl:YXESBuilder_addLogPredicates_31 ;
+    yawl:hasMethod yawl:YXESBuilder_extractDataChangeEvents_32 ;
+    yawl:hasMethod yawl:YXESBuilder_getDescriptor_33 ;
+    yawl:hasField yawl:YXESBuilder__ignoreUnknownEvents ;
+    yawl:hasField yawl:YXESBuilder__log ;
+    .
+
+
+# Method: YXESBuilder.buildLog
+yawl:YXESBuilder_buildLog_1 a yawl:Method ;
+    rdfs:label "buildLog" ;
+    yawl:returnType "String" ;
+    yawl:signature "String buildLog(YSpecificationID specid, XNode events)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YXESBuilder.processEvents
+yawl:YXESBuilder_processEvents_2 a yawl:Method ;
+    rdfs:label "processEvents" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processEvents(XNode root, XNode yawlEvents)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YXESBuilder.translateEvent
+yawl:YXESBuilder_translateEvent_3 a yawl:Method ;
+    rdfs:label "translateEvent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String translateEvent(String yawlEvent)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YXESBuilder.traceNode
+yawl:YXESBuilder_traceNode_4 a yawl:Method ;
+    rdfs:label "traceNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode traceNode(String id)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YXESBuilder.stringNode
+yawl:YXESBuilder_stringNode_5 a yawl:Method ;
+    rdfs:label "stringNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode stringNode(String key, String value)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YXESBuilder.dateNode
+yawl:YXESBuilder_dateNode_6 a yawl:Method ;
+    rdfs:label "dateNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode dateNode(String key, String value)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YXESBuilder.floatNode
+yawl:YXESBuilder_floatNode_7 a yawl:Method ;
+    rdfs:label "floatNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode floatNode(String key, String value)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YXESBuilder.intNode
+yawl:YXESBuilder_intNode_8 a yawl:Method ;
+    rdfs:label "intNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode intNode(String key, String value)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YXESBuilder.booleanNode
+yawl:YXESBuilder_booleanNode_9 a yawl:Method ;
+    rdfs:label "booleanNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode booleanNode(String key, String value)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YXESBuilder.getComment
+yawl:YXESBuilder_getComment_10 a yawl:Method ;
+    rdfs:label "getComment" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getComment()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YXESBuilder.beginLogOutput
+yawl:YXESBuilder_beginLogOutput_11 a yawl:Method ;
+    rdfs:label "beginLogOutput" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode beginLogOutput(YSpecificationID specid)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YXESBuilder.classifierNode
+yawl:YXESBuilder_classifierNode_12 a yawl:Method ;
+    rdfs:label "classifierNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode classifierNode(String name, String keys)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YXESBuilder.extensionNode
+yawl:YXESBuilder_extensionNode_13 a yawl:Method ;
+    rdfs:label "extensionNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode extensionNode(String name, String prefix, String uri)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YXESBuilder.globalNode
+yawl:YXESBuilder_globalNode_14 a yawl:Method ;
+    rdfs:label "globalNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode globalNode(String scope)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YXESBuilder.entryNode
+yawl:YXESBuilder_entryNode_15 a yawl:Method ;
+    rdfs:label "entryNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode entryNode(String name, String key, String value)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YXESBuilder.eventNode
+yawl:YXESBuilder_eventNode_16 a yawl:Method ;
+    rdfs:label "eventNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode eventNode(String timestamp, String taskName, String transition, String instanceID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YXESBuilder.addDataEvents
+yawl:YXESBuilder_addDataEvents_17 a yawl:Method ;
+    rdfs:label "addDataEvents" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addDataEvents(XNode eventNode, XNode dataItems)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YXESBuilder.processComplexTypeDataEvent
+yawl:YXESBuilder_processComplexTypeDataEvent_18 a yawl:Method ;
+    rdfs:label "processComplexTypeDataEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processComplexTypeDataEvent(XNode dataItem, XNode eventNode)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YXESBuilder.processComplexTypeDataValues
+yawl:YXESBuilder_processComplexTypeDataValues_19 a yawl:Method ;
+    rdfs:label "processComplexTypeDataValues" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processComplexTypeDataValues(XNode eventNode, XNode valueNode, Map typeMap, String rootName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YXESBuilder.concatName
+yawl:YXESBuilder_concatName_20 a yawl:Method ;
+    rdfs:label "concatName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String concatName(String rootName, String subName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YXESBuilder.parseComplexTypeDefinition
+yawl:YXESBuilder_parseComplexTypeDefinition_21 a yawl:Method ;
+    rdfs:label "parseComplexTypeDefinition" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map parseComplexTypeDefinition(String typeDef)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YXESBuilder.parseComplexTypeDefinition
+yawl:YXESBuilder_parseComplexTypeDefinition_22 a yawl:Method ;
+    rdfs:label "parseComplexTypeDefinition" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map parseComplexTypeDefinition(XNode typeNode)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YXESBuilder.formatDataNode
+yawl:YXESBuilder_formatDataNode_23 a yawl:Method ;
+    rdfs:label "formatDataNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode formatDataNode(XNode node)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YXESBuilder.formatDataNode
+yawl:YXESBuilder_formatDataNode_24 a yawl:Method ;
+    rdfs:label "formatDataNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode formatDataNode(String name, String value, String typeDefinition)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YXESBuilder.formatDateValue
+yawl:YXESBuilder_formatDateValue_25 a yawl:Method ;
+    rdfs:label "formatDateValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String formatDateValue(String type, String value)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YXESBuilder.cdataIfComplex
+yawl:YXESBuilder_cdataIfComplex_26 a yawl:Method ;
+    rdfs:label "cdataIfComplex" ;
+    yawl:returnType "String" ;
+    yawl:signature "String cdataIfComplex(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YXESBuilder.getTagType
+yawl:YXESBuilder_getTagType_27 a yawl:Method ;
+    rdfs:label "getTagType" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTagType(String typeDef)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YXESBuilder.processCasePredicates
+yawl:YXESBuilder_processCasePredicates_28 a yawl:Method ;
+    rdfs:label "processCasePredicates" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processCasePredicates(XNode yawlEvent, XNode trace)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YXESBuilder.processCaseEvents
+yawl:YXESBuilder_processCaseEvents_29 a yawl:Method ;
+    rdfs:label "processCaseEvents" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processCaseEvents(XNode yawlEvent, XNode trace)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YXESBuilder.processTaskEvents
+yawl:YXESBuilder_processTaskEvents_30 a yawl:Method ;
+    rdfs:label "processTaskEvents" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processTaskEvents(XNode taskInstance, XNode trace)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YXESBuilder.addLogPredicates
+yawl:YXESBuilder_addLogPredicates_31 a yawl:Method ;
+    rdfs:label "addLogPredicates" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addLogPredicates(XNode eventNode, XNode dataItems)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YXESBuilder.extractDataChangeEvents
+yawl:YXESBuilder_extractDataChangeEvents_32 a yawl:Method ;
+    rdfs:label "extractDataChangeEvents" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode extractDataChangeEvents(XNode taskInstance)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YXESBuilder.getDescriptor
+yawl:YXESBuilder_getDescriptor_33 a yawl:Method ;
+    rdfs:label "getDescriptor" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDescriptor(XNode node)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YXESBuilder__ignoreUnknownEvents a yawl:Field ;
+    rdfs:label "_ignoreUnknownEvents" .
+
+yawl:YXESBuilder__log a yawl:Field ;
+    rdfs:label "_log" .
+
+
+

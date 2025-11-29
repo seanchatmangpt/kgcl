@@ -1,0 +1,99 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.util.SoapClient
+yawl:SoapClient a yawl:Class ;
+    rdfs:label "SoapClient" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/util/SoapClient.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 24/5/17""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:SoapClient_send_1 ;
+    yawl:hasMethod yawl:SoapClient_createEnvelope_2 ;
+    yawl:hasMethod yawl:SoapClient_createMessage_3 ;
+    yawl:hasMethod yawl:SoapClient_call_4 ;
+    yawl:hasMethod yawl:SoapClient_getResponseValue_5 ;
+    yawl:hasMethod yawl:SoapClient_getSize_6 ;
+    yawl:hasMethod yawl:SoapClient_main_7 ;
+    yawl:hasField yawl:SoapClient_NS_PREFIX ;
+    yawl:hasField yawl:SoapClient__endpoint ;
+    .
+
+
+# Method: SoapClient.send
+yawl:SoapClient_send_1 a yawl:Method ;
+    rdfs:label "send" ;
+    yawl:returnType "String" ;
+    yawl:signature "String send(String ns, String action, List argKeys, List argValues)" ;
+    rdfs:comment """Sends a request to a web service via SOAP and returns the result @return the response from the web service @throws SOAPException if there's a problem connecting to the target web service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SoapClient.createEnvelope
+yawl:SoapClient_createEnvelope_2 a yawl:Method ;
+    rdfs:label "createEnvelope" ;
+    yawl:returnType "String" ;
+    yawl:signature "String createEnvelope(String ns, String action, List argKeys, List argValues)" ;
+    rdfs:comment """Creates an envelope with the required attributes for a service call @param ns the namespace @param action the action @param argKeys argument names (may be null) @param argValues argument values @return the created envelope @throws SOAPException""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SoapClient.createMessage
+yawl:SoapClient_createMessage_3 a yawl:Method ;
+    rdfs:label "createMessage" ;
+    yawl:returnType "SOAPMessage" ;
+    yawl:signature "SOAPMessage createMessage(String envelope)" ;
+    rdfs:comment """Creates a new SOAP message containing the envelope provided @param envelope the envelope to send @return the created message @throws SOAPException @throws IOException""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SoapClient.call
+yawl:SoapClient_call_4 a yawl:Method ;
+    rdfs:label "call" ;
+    yawl:returnType "SOAPMessage" ;
+    yawl:signature "SOAPMessage call(SOAPMessage message)" ;
+    rdfs:comment """Calls the target web service @param message the message to send @return the response message from the service @throws SOAPException if the call fails""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SoapClient.getResponseValue
+yawl:SoapClient_getResponseValue_5 a yawl:Method ;
+    rdfs:label "getResponseValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResponseValue(SOAPMessage response)" ;
+    rdfs:comment """Extracts the return String from the response message @param response the response message received from a target web service call @return the String value within the response message @throws SOAPException if the message is malformed""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SoapClient.getSize
+yawl:SoapClient_getSize_6 a yawl:Method ;
+    rdfs:label "getSize" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getSize(List l)" ;
+    rdfs:comment """@param l a list @return the list's size, or 0 if the list is null""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SoapClient.main
+yawl:SoapClient_main_7 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String argsv)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:SoapClient_NS_PREFIX a yawl:Field ;
+    rdfs:label "NS_PREFIX" .
+
+yawl:SoapClient__endpoint a yawl:Field ;
+    rdfs:label "_endpoint" .
+
+
+

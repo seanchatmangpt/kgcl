@@ -1,0 +1,485 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.datastore.eventlog.TaskSummary
+yawl:TaskSummary a yawl:Class ;
+    rdfs:label "TaskSummary" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_datastore_eventlog ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/datastore/eventlog/TaskStatistics.java"^^xsd:string ;
+    yawl:hasMethod yawl:TaskSummary_getOfferTime_1 ;
+    yawl:hasMethod yawl:TaskSummary_setOfferTime_2 ;
+    yawl:hasMethod yawl:TaskSummary_getUnofferTime_3 ;
+    yawl:hasMethod yawl:TaskSummary_setUnofferTime_4 ;
+    yawl:hasMethod yawl:TaskSummary_getAllocTime_5 ;
+    yawl:hasMethod yawl:TaskSummary_setAllocTime_6 ;
+    yawl:hasMethod yawl:TaskSummary_getStartTime_7 ;
+    yawl:hasMethod yawl:TaskSummary_setStartTime_8 ;
+    yawl:hasMethod yawl:TaskSummary_getCompleteTime_9 ;
+    yawl:hasMethod yawl:TaskSummary_setCompleteTime_10 ;
+    yawl:hasMethod yawl:TaskSummary_getCancelTime_11 ;
+    yawl:hasMethod yawl:TaskSummary_setCancelTime_12 ;
+    yawl:hasMethod yawl:TaskSummary_getReallocTime_13 ;
+    yawl:hasMethod yawl:TaskSummary_setReallocTime_14 ;
+    yawl:hasMethod yawl:TaskSummary_getOfferSet_15 ;
+    yawl:hasMethod yawl:TaskSummary_setOfferSet_16 ;
+    yawl:hasMethod yawl:TaskSummary_getOfferCount_17 ;
+    yawl:hasMethod yawl:TaskSummary_addOffer_18 ;
+    yawl:hasMethod yawl:TaskSummary_getAllocateID_19 ;
+    yawl:hasMethod yawl:TaskSummary_setAllocateID_20 ;
+    yawl:hasMethod yawl:TaskSummary_getStartID_21 ;
+    yawl:hasMethod yawl:TaskSummary_setStartID_22 ;
+    yawl:hasMethod yawl:TaskSummary_getCompleteID_23 ;
+    yawl:hasMethod yawl:TaskSummary_setCompleteID_24 ;
+    yawl:hasMethod yawl:TaskSummary_getTimeout_25 ;
+    yawl:hasMethod yawl:TaskSummary_setTimeout_26 ;
+    yawl:hasMethod yawl:TaskSummary_getOfferToAlloc_27 ;
+    yawl:hasMethod yawl:TaskSummary_getAllocToStart_28 ;
+    yawl:hasMethod yawl:TaskSummary_getOfferToStart_29 ;
+    yawl:hasMethod yawl:TaskSummary_getStartToComplete_30 ;
+    yawl:hasMethod yawl:TaskSummary_getStartToCancel_31 ;
+    yawl:hasMethod yawl:TaskSummary_getStartToRealloc_32 ;
+    yawl:hasMethod yawl:TaskSummary_getAllocToCancel_33 ;
+    yawl:hasMethod yawl:TaskSummary_getOfferToCancel_34 ;
+    yawl:hasMethod yawl:TaskSummary_getUnofferToCancel_35 ;
+    yawl:hasMethod yawl:TaskSummary_getUnofferToOffer_36 ;
+    yawl:hasMethod yawl:TaskSummary_getUnofferToAlloc_37 ;
+    yawl:hasMethod yawl:TaskSummary_getUnofferToStart_38 ;
+    yawl:hasMethod yawl:TaskSummary_getTotalTime_39 ;
+    yawl:hasMethod yawl:TaskSummary_getUnofferToTimeout_40 ;
+    yawl:hasMethod yawl:TaskSummary_getOfferToTimeout_41 ;
+    yawl:hasMethod yawl:TaskSummary_getAllocToTimeout_42 ;
+    yawl:hasMethod yawl:TaskSummary_getStartToTimeout_43 ;
+    yawl:hasMethod yawl:TaskSummary_getTimeoutOwner_44 ;
+    yawl:hasMethod yawl:TaskSummary_getPeriod_45 ;
+    yawl:hasMethod yawl:TaskSummary_getDiff_46 ;
+    yawl:hasField yawl:TaskSummary_offerTime ;
+    yawl:hasField yawl:TaskSummary_unofferTime ;
+    yawl:hasField yawl:TaskSummary_allocTime ;
+    yawl:hasField yawl:TaskSummary_startTime ;
+    yawl:hasField yawl:TaskSummary_reallocTime ;
+    yawl:hasField yawl:TaskSummary_completeTime ;
+    yawl:hasField yawl:TaskSummary_cancelTime ;
+    yawl:hasField yawl:TaskSummary_timeout ;
+    yawl:hasField yawl:TaskSummary_id ;
+    yawl:hasField yawl:TaskSummary_allocateID ;
+    yawl:hasField yawl:TaskSummary_startID ;
+    yawl:hasField yawl:TaskSummary_completeID ;
+    yawl:hasField yawl:TaskSummary_offerSet ;
+    .
+
+
+# Method: TaskSummary.getOfferTime
+yawl:TaskSummary_getOfferTime_1 a yawl:Method ;
+    rdfs:label "getOfferTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getOfferTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.setOfferTime
+yawl:TaskSummary_setOfferTime_2 a yawl:Method ;
+    rdfs:label "setOfferTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOfferTime(long time)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getUnofferTime
+yawl:TaskSummary_getUnofferTime_3 a yawl:Method ;
+    rdfs:label "getUnofferTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getUnofferTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.setUnofferTime
+yawl:TaskSummary_setUnofferTime_4 a yawl:Method ;
+    rdfs:label "setUnofferTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUnofferTime(long time)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getAllocTime
+yawl:TaskSummary_getAllocTime_5 a yawl:Method ;
+    rdfs:label "getAllocTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getAllocTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.setAllocTime
+yawl:TaskSummary_setAllocTime_6 a yawl:Method ;
+    rdfs:label "setAllocTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAllocTime(long time)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getStartTime
+yawl:TaskSummary_getStartTime_7 a yawl:Method ;
+    rdfs:label "getStartTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getStartTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.setStartTime
+yawl:TaskSummary_setStartTime_8 a yawl:Method ;
+    rdfs:label "setStartTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStartTime(long time)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getCompleteTime
+yawl:TaskSummary_getCompleteTime_9 a yawl:Method ;
+    rdfs:label "getCompleteTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getCompleteTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.setCompleteTime
+yawl:TaskSummary_setCompleteTime_10 a yawl:Method ;
+    rdfs:label "setCompleteTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCompleteTime(long time)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getCancelTime
+yawl:TaskSummary_getCancelTime_11 a yawl:Method ;
+    rdfs:label "getCancelTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getCancelTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.setCancelTime
+yawl:TaskSummary_setCancelTime_12 a yawl:Method ;
+    rdfs:label "setCancelTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCancelTime(long time)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getReallocTime
+yawl:TaskSummary_getReallocTime_13 a yawl:Method ;
+    rdfs:label "getReallocTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getReallocTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.setReallocTime
+yawl:TaskSummary_setReallocTime_14 a yawl:Method ;
+    rdfs:label "setReallocTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setReallocTime(long time)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getOfferSet
+yawl:TaskSummary_getOfferSet_15 a yawl:Method ;
+    rdfs:label "getOfferSet" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getOfferSet()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.setOfferSet
+yawl:TaskSummary_setOfferSet_16 a yawl:Method ;
+    rdfs:label "setOfferSet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOfferSet(Set set)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getOfferCount
+yawl:TaskSummary_getOfferCount_17 a yawl:Method ;
+    rdfs:label "getOfferCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getOfferCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.addOffer
+yawl:TaskSummary_addOffer_18 a yawl:Method ;
+    rdfs:label "addOffer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addOffer(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getAllocateID
+yawl:TaskSummary_getAllocateID_19 a yawl:Method ;
+    rdfs:label "getAllocateID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAllocateID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.setAllocateID
+yawl:TaskSummary_setAllocateID_20 a yawl:Method ;
+    rdfs:label "setAllocateID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAllocateID(String aID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getStartID
+yawl:TaskSummary_getStartID_21 a yawl:Method ;
+    rdfs:label "getStartID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStartID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.setStartID
+yawl:TaskSummary_setStartID_22 a yawl:Method ;
+    rdfs:label "setStartID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStartID(String sID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getCompleteID
+yawl:TaskSummary_getCompleteID_23 a yawl:Method ;
+    rdfs:label "getCompleteID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCompleteID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.setCompleteID
+yawl:TaskSummary_setCompleteID_24 a yawl:Method ;
+    rdfs:label "setCompleteID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCompleteID(String cID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getTimeout
+yawl:TaskSummary_getTimeout_25 a yawl:Method ;
+    rdfs:label "getTimeout" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getTimeout()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.setTimeout
+yawl:TaskSummary_setTimeout_26 a yawl:Method ;
+    rdfs:label "setTimeout" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTimeout(long time)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getOfferToAlloc
+yawl:TaskSummary_getOfferToAlloc_27 a yawl:Method ;
+    rdfs:label "getOfferToAlloc" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getOfferToAlloc()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getAllocToStart
+yawl:TaskSummary_getAllocToStart_28 a yawl:Method ;
+    rdfs:label "getAllocToStart" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getAllocToStart()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getOfferToStart
+yawl:TaskSummary_getOfferToStart_29 a yawl:Method ;
+    rdfs:label "getOfferToStart" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getOfferToStart()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getStartToComplete
+yawl:TaskSummary_getStartToComplete_30 a yawl:Method ;
+    rdfs:label "getStartToComplete" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getStartToComplete()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getStartToCancel
+yawl:TaskSummary_getStartToCancel_31 a yawl:Method ;
+    rdfs:label "getStartToCancel" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getStartToCancel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getStartToRealloc
+yawl:TaskSummary_getStartToRealloc_32 a yawl:Method ;
+    rdfs:label "getStartToRealloc" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getStartToRealloc()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getAllocToCancel
+yawl:TaskSummary_getAllocToCancel_33 a yawl:Method ;
+    rdfs:label "getAllocToCancel" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getAllocToCancel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getOfferToCancel
+yawl:TaskSummary_getOfferToCancel_34 a yawl:Method ;
+    rdfs:label "getOfferToCancel" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getOfferToCancel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getUnofferToCancel
+yawl:TaskSummary_getUnofferToCancel_35 a yawl:Method ;
+    rdfs:label "getUnofferToCancel" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getUnofferToCancel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getUnofferToOffer
+yawl:TaskSummary_getUnofferToOffer_36 a yawl:Method ;
+    rdfs:label "getUnofferToOffer" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getUnofferToOffer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getUnofferToAlloc
+yawl:TaskSummary_getUnofferToAlloc_37 a yawl:Method ;
+    rdfs:label "getUnofferToAlloc" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getUnofferToAlloc()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getUnofferToStart
+yawl:TaskSummary_getUnofferToStart_38 a yawl:Method ;
+    rdfs:label "getUnofferToStart" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getUnofferToStart()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getTotalTime
+yawl:TaskSummary_getTotalTime_39 a yawl:Method ;
+    rdfs:label "getTotalTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getTotalTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getUnofferToTimeout
+yawl:TaskSummary_getUnofferToTimeout_40 a yawl:Method ;
+    rdfs:label "getUnofferToTimeout" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getUnofferToTimeout()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getOfferToTimeout
+yawl:TaskSummary_getOfferToTimeout_41 a yawl:Method ;
+    rdfs:label "getOfferToTimeout" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getOfferToTimeout()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getAllocToTimeout
+yawl:TaskSummary_getAllocToTimeout_42 a yawl:Method ;
+    rdfs:label "getAllocToTimeout" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getAllocToTimeout()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getStartToTimeout
+yawl:TaskSummary_getStartToTimeout_43 a yawl:Method ;
+    rdfs:label "getStartToTimeout" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getStartToTimeout()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getTimeoutOwner
+yawl:TaskSummary_getTimeoutOwner_44 a yawl:Method ;
+    rdfs:label "getTimeoutOwner" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTimeoutOwner()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getPeriod
+yawl:TaskSummary_getPeriod_45 a yawl:Method ;
+    rdfs:label "getPeriod" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getPeriod(Counter counter)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSummary.getDiff
+yawl:TaskSummary_getDiff_46 a yawl:Method ;
+    rdfs:label "getDiff" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getDiff(long from, long to)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:TaskSummary_offerTime a yawl:Field ;
+    rdfs:label "offerTime" .
+
+yawl:TaskSummary_unofferTime a yawl:Field ;
+    rdfs:label "unofferTime" .
+
+yawl:TaskSummary_allocTime a yawl:Field ;
+    rdfs:label "allocTime" .
+
+yawl:TaskSummary_startTime a yawl:Field ;
+    rdfs:label "startTime" .
+
+yawl:TaskSummary_reallocTime a yawl:Field ;
+    rdfs:label "reallocTime" .
+
+yawl:TaskSummary_completeTime a yawl:Field ;
+    rdfs:label "completeTime" .
+
+yawl:TaskSummary_cancelTime a yawl:Field ;
+    rdfs:label "cancelTime" .
+
+yawl:TaskSummary_timeout a yawl:Field ;
+    rdfs:label "timeout" .
+
+yawl:TaskSummary_id a yawl:Field ;
+    rdfs:label "id" .
+
+yawl:TaskSummary_allocateID a yawl:Field ;
+    rdfs:label "allocateID" .
+
+yawl:TaskSummary_startID a yawl:Field ;
+    rdfs:label "startID" .
+
+yawl:TaskSummary_completeID a yawl:Field ;
+    rdfs:label "completeID" .
+
+yawl:TaskSummary_offerSet a yawl:Field ;
+    rdfs:label "offerSet" .
+
+
+

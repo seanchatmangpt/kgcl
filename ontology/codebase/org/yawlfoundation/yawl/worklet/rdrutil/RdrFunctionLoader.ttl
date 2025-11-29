@@ -1,0 +1,41 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.rdrutil.RdrFunctionLoader
+yawl:RdrFunctionLoader a yawl:Class ;
+    rdfs:label "RdrFunctionLoader" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_rdrutil ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/rdrutil/RdrFunctionLoader.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 4/04/12""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:RdrFunctionLoader_getNames_1 ;
+    yawl:hasMethod yawl:RdrFunctionLoader_execute_2 ;
+    .
+
+
+# Method: RdrFunctionLoader.getNames
+yawl:RdrFunctionLoader_getNames_1 a yawl:Method ;
+    rdfs:label "getNames" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getNames()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: RdrFunctionLoader.execute
+yawl:RdrFunctionLoader_execute_2 a yawl:Method ;
+    rdfs:label "execute" ;
+    yawl:returnType "String" ;
+    yawl:signature "String execute(String functionName, Map args)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+
+

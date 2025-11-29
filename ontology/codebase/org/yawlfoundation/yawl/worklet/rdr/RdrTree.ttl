@@ -1,0 +1,296 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.rdr.RdrTree
+yawl:RdrTree a yawl:Class ;
+    rdfs:label "RdrTree" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_rdr ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/rdr/RdrTree.java"^^xsd:string ;
+    rdfs:comment """A Ripple Down Rule tree implementation. @author Michael Adams v0.8, 04-09/2006""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:RdrTree_getRootNode_1 ;
+    yawl:hasMethod yawl:RdrTree_getTaskId_2 ;
+    yawl:hasMethod yawl:RdrTree_getNode_3 ;
+    yawl:hasMethod yawl:RdrTree_getNode_4 ;
+    yawl:hasMethod yawl:RdrTree_getAllConditions_5 ;
+    yawl:hasMethod yawl:RdrTree_getAllConditions_6 ;
+    yawl:hasMethod yawl:RdrTree_getAttributes_7 ;
+    yawl:hasMethod yawl:RdrTree_setRootNode_8 ;
+    yawl:hasMethod yawl:RdrTree_setTaskId_9 ;
+    yawl:hasMethod yawl:RdrTree_setAttributes_10 ;
+    yawl:hasMethod yawl:RdrTree_setAttributes_11 ;
+    yawl:hasMethod yawl:RdrTree_search_12 ;
+    yawl:hasMethod yawl:RdrTree_createRootNode_13 ;
+    yawl:hasMethod yawl:RdrTree_addNode_14 ;
+    yawl:hasMethod yawl:RdrTree_removeNode_15 ;
+    yawl:hasMethod yawl:RdrTree_equals_16 ;
+    yawl:hasMethod yawl:RdrTree_hashCode_17 ;
+    yawl:hasMethod yawl:RdrTree_prune_18 ;
+    yawl:hasMethod yawl:RdrTree_graft_19 ;
+    yawl:hasMethod yawl:RdrTree_countNodes_20 ;
+    yawl:hasMethod yawl:RdrTree_nodeCount_21 ;
+    yawl:hasMethod yawl:RdrTree_toString_22 ;
+    yawl:hasMethod yawl:RdrTree_toXML_23 ;
+    yawl:hasMethod yawl:RdrTree_toXNode_24 ;
+    yawl:hasMethod yawl:RdrTree_toXNode_25 ;
+    yawl:hasMethod yawl:RdrTree_toXNodeList_26 ;
+    yawl:hasMethod yawl:RdrTree_fromXML_27 ;
+    yawl:hasMethod yawl:RdrTree_fromXNode_28 ;
+    yawl:hasField yawl:RdrTree_id ;
+    yawl:hasField yawl:RdrTree_taskId ;
+    yawl:hasField yawl:RdrTree_rootNode ;
+    yawl:hasField yawl:RdrTree_attributes ;
+    .
+
+
+# Method: RdrTree.getRootNode
+yawl:RdrTree_getRootNode_1 a yawl:Method ;
+    rdfs:label "getRootNode" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode getRootNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrTree.getTaskId
+yawl:RdrTree_getTaskId_2 a yawl:Method ;
+    rdfs:label "getTaskId" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskId()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrTree.getNode
+yawl:RdrTree_getNode_3 a yawl:Method ;
+    rdfs:label "getNode" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode getNode(long id)" ;
+    rdfs:comment """Gets the RdrNode for the id passed @param id - the node id of the node to find @return the node identified by the id, or null if this tree has no matching node""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrTree.getNode
+yawl:RdrTree_getNode_4 a yawl:Method ;
+    rdfs:label "getNode" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode getNode(RdrNode root, long id)" ;
+    rdfs:comment """Recursively searches the tree for the node with the id passed @param root the root node of the (sub)-tree @param id - the node id of the node to find @return the node identified by the id, or null if this tree has no matching node""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RdrTree.getAllConditions
+yawl:RdrTree_getAllConditions_5 a yawl:Method ;
+    rdfs:label "getAllConditions" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAllConditions()" ;
+    rdfs:comment """Gets the condition of each node in this tree @return a List of all node conditions""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrTree.getAllConditions
+yawl:RdrTree_getAllConditions_6 a yawl:Method ;
+    rdfs:label "getAllConditions" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAllConditions(RdrNode node)" ;
+    rdfs:comment """Recurses the tree, collecting the condition from each node @param node the root node of this (sub)-tree @return a List of all node conditions""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrTree.getAttributes
+yawl:RdrTree_getAttributes_7 a yawl:Method ;
+    rdfs:label "getAttributes" ;
+    yawl:returnType "YAttributeMap" ;
+    yawl:signature "YAttributeMap getAttributes()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RdrTree.setRootNode
+yawl:RdrTree_setRootNode_8 a yawl:Method ;
+    rdfs:label "setRootNode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRootNode(RdrNode root)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrTree.setTaskId
+yawl:RdrTree_setTaskId_9 a yawl:Method ;
+    rdfs:label "setTaskId" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTaskId(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrTree.setAttributes
+yawl:RdrTree_setAttributes_10 a yawl:Method ;
+    rdfs:label "setAttributes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAttributes(String processName, RuleType rType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrTree.setAttributes
+yawl:RdrTree_setAttributes_11 a yawl:Method ;
+    rdfs:label "setAttributes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAttributes(YSpecificationID specID, RuleType rType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrTree.search
+yawl:RdrTree_search_12 a yawl:Method ;
+    rdfs:label "search" ;
+    yawl:returnType "RdrPair" ;
+    yawl:signature "RdrPair search(Element caseData)" ;
+    rdfs:comment """evaluates the conditions of each transversed node in this tree @param caseData - a JDOM Element that contains the set of data attributes and values that are used to evaluate the conditional expressions @return the pair of nodes resulting from the rule evaluation""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrTree.createRootNode
+yawl:RdrTree_createRootNode_13 a yawl:Method ;
+    rdfs:label "createRootNode" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode createRootNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrTree.addNode
+yawl:RdrTree_addNode_14 a yawl:Method ;
+    rdfs:label "addNode" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode addNode(RdrNode newNode, RdrNode parentNode, boolean trueBranch)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrTree.removeNode
+yawl:RdrTree_removeNode_15 a yawl:Method ;
+    rdfs:label "removeNode" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode removeNode(long nodeID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrTree.equals
+yawl:RdrTree_equals_16 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrTree.hashCode
+yawl:RdrTree_hashCode_17 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrTree.prune
+yawl:RdrTree_prune_18 a yawl:Method ;
+    rdfs:label "prune" ;
+    yawl:returnType "void" ;
+    yawl:signature "void prune(RdrNode node)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RdrTree.graft
+yawl:RdrTree_graft_19 a yawl:Method ;
+    rdfs:label "graft" ;
+    yawl:returnType "void" ;
+    yawl:signature "void graft(RdrNode node)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RdrTree.countNodes
+yawl:RdrTree_countNodes_20 a yawl:Method ;
+    rdfs:label "countNodes" ;
+    yawl:returnType "int" ;
+    yawl:signature "int countNodes(RdrNode root)" ;
+    rdfs:comment """Gets the number of nodes in the tree @param root the root node of this (sub)-tree @return the number of nodes in this (sub)-tree, inclusive of the root node""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RdrTree.nodeCount
+yawl:RdrTree_nodeCount_21 a yawl:Method ;
+    rdfs:label "nodeCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int nodeCount()" ;
+    rdfs:comment """@return the number of nodes in the tree""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrTree.toString
+yawl:RdrTree_toString_22 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrTree.toXML
+yawl:RdrTree_toXML_23 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrTree.toXNode
+yawl:RdrTree_toXNode_24 a yawl:Method ;
+    rdfs:label "toXNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode toXNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrTree.toXNode
+yawl:RdrTree_toXNode_25 a yawl:Method ;
+    rdfs:label "toXNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode toXNode(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrTree.toXNodeList
+yawl:RdrTree_toXNodeList_26 a yawl:Method ;
+    rdfs:label "toXNodeList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List toXNodeList(RdrNode rdrNode)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RdrTree.fromXML
+yawl:RdrTree_fromXML_27 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrTree.fromXNode
+yawl:RdrTree_fromXNode_28 a yawl:Method ;
+    rdfs:label "fromXNode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXNode(XNode node)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:RdrTree_id a yawl:Field ;
+    rdfs:label "id" .
+
+yawl:RdrTree_taskId a yawl:Field ;
+    rdfs:label "taskId" .
+
+yawl:RdrTree_rootNode a yawl:Field ;
+    rdfs:label "rootNode" .
+
+yawl:RdrTree_attributes a yawl:Field ;
+    rdfs:label "attributes" .
+
+
+

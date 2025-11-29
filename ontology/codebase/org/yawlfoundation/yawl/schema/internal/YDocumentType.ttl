@@ -1,0 +1,52 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.schema.internal.YDocumentType
+yawl:YDocumentType a yawl:Class ;
+    rdfs:label "YDocumentType" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_schema_internal ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/schema/internal/YDocumentType.java"^^xsd:string ;
+    rdfs:comment """Defines a data type for a document (id and string) @author: Michael Adams @date: 04/2012""" ;
+    yawl:implements yawl:YDataType ;
+    yawl:hasMethod yawl:YDocumentType_getSchemaString_1 ;
+    yawl:hasMethod yawl:YDocumentType_getSchema_2 ;
+    yawl:hasMethod yawl:YDocumentType_addElement_3 ;
+    yawl:hasField yawl:YDocumentType_SCHEMA ;
+    .
+
+
+# Method: YDocumentType.getSchemaString
+yawl:YDocumentType_getSchemaString_1 a yawl:Method ;
+    rdfs:label "getSchemaString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSchemaString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDocumentType.getSchema
+yawl:YDocumentType_getSchema_2 a yawl:Method ;
+    rdfs:label "getSchema" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getSchema(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDocumentType.addElement
+yawl:YDocumentType_addElement_3 a yawl:Method ;
+    rdfs:label "addElement" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element addElement(Element parent, String name)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YDocumentType_SCHEMA a yawl:Field ;
+    rdfs:label "SCHEMA" .
+
+
+

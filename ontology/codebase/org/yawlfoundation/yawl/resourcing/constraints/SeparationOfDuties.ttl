@@ -1,0 +1,32 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.constraints.SeparationOfDuties
+yawl:SeparationOfDuties a yawl:Class ;
+    rdfs:label "SeparationOfDuties" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_constraints ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/constraints/SeparationOfDuties.java"^^xsd:string ;
+    rdfs:comment """Separation of Duties - a constraint that disallows a participant who has completed a 'familiar task' in the current case from being allocated a task applying this constraint. Create Date: 03/08/2007. Last Date: 12/11/2007 @author Michael Adams (BPM Group, QUT Australia) @version 2.0""" ;
+    yawl:extends yawl:AbstractConstraint ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:SeparationOfDuties_performConstraint_1 ;
+    .
+
+
+# Method: SeparationOfDuties.performConstraint
+yawl:SeparationOfDuties_performConstraint_1 a yawl:Method ;
+    rdfs:label "performConstraint" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set performConstraint(Set resources, WorkItemRecord wir)" ;
+    rdfs:comment """Ensures that any participants who completed the 'familiar task' in the current case are removed from the distribution set @param resources the distribution set of participants @param wir the workitem to be resourced @return the constrained distribution set""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

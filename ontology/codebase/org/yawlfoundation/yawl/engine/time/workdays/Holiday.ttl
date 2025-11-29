@@ -1,0 +1,134 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.time.workdays.Holiday
+yawl:Holiday a yawl:Class ;
+    rdfs:label "Holiday" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_time_workdays ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/time/workdays/Holiday.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 26/5/17""" ;
+    yawl:implements yawl:Comparable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Holiday_matches_1 ;
+    yawl:hasMethod yawl:Holiday_isAfter_2 ;
+    yawl:hasMethod yawl:Holiday_getYear_3 ;
+    yawl:hasMethod yawl:Holiday_getName_4 ;
+    yawl:hasMethod yawl:Holiday_setName_5 ;
+    yawl:hasMethod yawl:Holiday_getTime_6 ;
+    yawl:hasMethod yawl:Holiday_setTime_7 ;
+    yawl:hasMethod yawl:Holiday_toString_8 ;
+    yawl:hasMethod yawl:Holiday_compareTo_9 ;
+    yawl:hasMethod yawl:Holiday_fromXNode_10 ;
+    yawl:hasMethod yawl:Holiday_getIntValue_11 ;
+    yawl:hasField yawl:Holiday__date ;
+    yawl:hasField yawl:Holiday__name ;
+    .
+
+
+# Method: Holiday.matches
+yawl:Holiday_matches_1 a yawl:Method ;
+    rdfs:label "matches" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean matches(Calendar other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Holiday.isAfter
+yawl:Holiday_isAfter_2 a yawl:Method ;
+    rdfs:label "isAfter" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAfter(Calendar date)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Holiday.getYear
+yawl:Holiday_getYear_3 a yawl:Method ;
+    rdfs:label "getYear" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getYear()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Holiday.getName
+yawl:Holiday_getName_4 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Holiday.setName
+yawl:Holiday_setName_5 a yawl:Method ;
+    rdfs:label "setName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Holiday.getTime
+yawl:Holiday_getTime_6 a yawl:Method ;
+    rdfs:label "getTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Holiday.setTime
+yawl:Holiday_setTime_7 a yawl:Method ;
+    rdfs:label "setTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTime(long time)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Holiday.toString
+yawl:Holiday_toString_8 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Holiday.compareTo
+yawl:Holiday_compareTo_9 a yawl:Method ;
+    rdfs:label "compareTo" ;
+    yawl:returnType "int" ;
+    yawl:signature "int compareTo(Holiday other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Holiday.fromXNode
+yawl:Holiday_fromXNode_10 a yawl:Method ;
+    rdfs:label "fromXNode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXNode(XNode node)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Holiday.getIntValue
+yawl:Holiday_getIntValue_11 a yawl:Method ;
+    rdfs:label "getIntValue" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getIntValue(XNode dateNode, String name)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:Holiday__date a yawl:Field ;
+    rdfs:label "_date" .
+
+yawl:Holiday__name a yawl:Field ;
+    rdfs:label "_name" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_engine_interfce_interfaceX a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.engine.interfce.interfaceX" .
+
+

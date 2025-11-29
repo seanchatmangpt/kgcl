@@ -1,0 +1,88 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.util.ProcessRunner
+yawl:ProcessRunner a yawl:Class ;
+    rdfs:label "ProcessRunner" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/util/ProcessRunner.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 29/10/2015""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ProcessRunner_run_1 ;
+    yawl:hasMethod yawl:ProcessRunner_stop_2 ;
+    yawl:hasMethod yawl:ProcessRunner_isAlive_3 ;
+    yawl:hasMethod yawl:ProcessRunner_waitFor_4 ;
+    yawl:hasMethod yawl:ProcessRunner_handleOutput_5 ;
+    yawl:hasMethod yawl:ProcessRunner_notifyCompletion_6 ;
+    yawl:hasMethod yawl:ProcessRunner_getProcess_7 ;
+    yawl:hasField yawl:ProcessRunner__process ;
+    .
+
+
+# Method: ProcessRunner.run
+yawl:ProcessRunner_run_1 a yawl:Method ;
+    rdfs:label "run" ;
+    yawl:returnType "void" ;
+    yawl:signature "void run(List cmdList, Map envParams)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcessRunner.stop
+yawl:ProcessRunner_stop_2 a yawl:Method ;
+    rdfs:label "stop" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean stop()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcessRunner.isAlive
+yawl:ProcessRunner_isAlive_3 a yawl:Method ;
+    rdfs:label "isAlive" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAlive()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcessRunner.waitFor
+yawl:ProcessRunner_waitFor_4 a yawl:Method ;
+    rdfs:label "waitFor" ;
+    yawl:returnType "int" ;
+    yawl:signature "int waitFor()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ProcessRunner.handleOutput
+yawl:ProcessRunner_handleOutput_5 a yawl:Method ;
+    rdfs:label "handleOutput" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleOutput(String line)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ProcessRunner.notifyCompletion
+yawl:ProcessRunner_notifyCompletion_6 a yawl:Method ;
+    rdfs:label "notifyCompletion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void notifyCompletion()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ProcessRunner.getProcess
+yawl:ProcessRunner_getProcess_7 a yawl:Method ;
+    rdfs:label "getProcess" ;
+    yawl:returnType "Process" ;
+    yawl:signature "Process getProcess()" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:ProcessRunner__process a yawl:Field ;
+    rdfs:label "_process" .
+
+
+

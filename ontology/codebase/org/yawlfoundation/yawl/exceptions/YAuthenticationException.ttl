@@ -1,0 +1,25 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.exceptions
+yawl:org_yawlfoundation_yawl_exceptions a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.exceptions" .
+# Class: org.yawlfoundation.yawl.exceptions.YAuthenticationException
+yawl:YAuthenticationException a yawl:Class ;
+    rdfs:label "YAuthenticationException" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_exceptions ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/exceptions/YAuthenticationException.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 26/11/2004 Time: 10:22:49""" ;
+    yawl:extends yawl:YAWLException ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+
+

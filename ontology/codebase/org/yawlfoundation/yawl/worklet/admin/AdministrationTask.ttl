@@ -1,0 +1,343 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.worklet.admin
+yawl:org_yawlfoundation_yawl_worklet_admin a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.worklet.admin" .
+# Class: org.yawlfoundation.yawl.worklet.admin.AdministrationTask
+yawl:AdministrationTask a yawl:Class ;
+    rdfs:label "AdministrationTask" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_admin ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/admin/AdministrationTask.java"^^xsd:string ;
+    rdfs:comment """This class stores the details of a pending administration task, viewed via the worklet admin screens. The AdminTasksManager maintains a set of these AdministrationTask instances. @author Michael Adams @version 0.8, 04-09/2006""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:AdministrationTask_toXML_1 ;
+    yawl:hasMethod yawl:AdministrationTask_fromXNode_2 ;
+    yawl:hasMethod yawl:AdministrationTask_getCaseID_3 ;
+    yawl:hasMethod yawl:AdministrationTask_getItemID_4 ;
+    yawl:hasMethod yawl:AdministrationTask_getID_5 ;
+    yawl:hasMethod yawl:AdministrationTask_getTaskType_6 ;
+    yawl:hasMethod yawl:AdministrationTask_getTitle_7 ;
+    yawl:hasMethod yawl:AdministrationTask_getScenario_8 ;
+    yawl:hasMethod yawl:AdministrationTask_getProcess_9 ;
+    yawl:hasMethod yawl:AdministrationTask_setCaseID_10 ;
+    yawl:hasMethod yawl:AdministrationTask_setItemID_11 ;
+    yawl:hasMethod yawl:AdministrationTask_setID_12 ;
+    yawl:hasMethod yawl:AdministrationTask_setTaskType_13 ;
+    yawl:hasMethod yawl:AdministrationTask_setTitle_14 ;
+    yawl:hasMethod yawl:AdministrationTask_setScenario_15 ;
+    yawl:hasMethod yawl:AdministrationTask_setProcess_16 ;
+    yawl:hasMethod yawl:AdministrationTask_toString_17 ;
+    yawl:hasMethod yawl:AdministrationTask_get_caseID_18 ;
+    yawl:hasMethod yawl:AdministrationTask_get_itemID_19 ;
+    yawl:hasMethod yawl:AdministrationTask_get_wsTaskID_20 ;
+    yawl:hasMethod yawl:AdministrationTask_get_taskType_21 ;
+    yawl:hasMethod yawl:AdministrationTask_get_title_22 ;
+    yawl:hasMethod yawl:AdministrationTask_get_scenario_23 ;
+    yawl:hasMethod yawl:AdministrationTask_get_process_24 ;
+    yawl:hasMethod yawl:AdministrationTask_set_caseID_25 ;
+    yawl:hasMethod yawl:AdministrationTask_set_itemID_26 ;
+    yawl:hasMethod yawl:AdministrationTask_set_wsTaskID_27 ;
+    yawl:hasMethod yawl:AdministrationTask_set_taskType_28 ;
+    yawl:hasMethod yawl:AdministrationTask_set_title_29 ;
+    yawl:hasMethod yawl:AdministrationTask_set_scenario_30 ;
+    yawl:hasMethod yawl:AdministrationTask_set_process_31 ;
+    yawl:hasField yawl:AdministrationTask__caseID ;
+    yawl:hasField yawl:AdministrationTask__itemID ;
+    yawl:hasField yawl:AdministrationTask__wsTaskID ;
+    yawl:hasField yawl:AdministrationTask__taskType ;
+    yawl:hasField yawl:AdministrationTask__title ;
+    yawl:hasField yawl:AdministrationTask__scenario ;
+    yawl:hasField yawl:AdministrationTask__process ;
+    yawl:hasField yawl:AdministrationTask_TASKTYPE_REJECTED_SELECTION ;
+    yawl:hasField yawl:AdministrationTask_TASKTYPE_CASE_EXTERNAL_EXCEPTION ;
+    yawl:hasField yawl:AdministrationTask_TASKTYPE_ITEM_EXTERNAL_EXCEPTION ;
+    .
+
+
+# Method: AdministrationTask.toXML
+yawl:AdministrationTask_toXML_1 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.fromXNode
+yawl:AdministrationTask_fromXNode_2 a yawl:Method ;
+    rdfs:label "fromXNode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXNode(XNode node)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.getCaseID
+yawl:AdministrationTask_getCaseID_3 a yawl:Method ;
+    rdfs:label "getCaseID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.getItemID
+yawl:AdministrationTask_getItemID_4 a yawl:Method ;
+    rdfs:label "getItemID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getItemID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.getID
+yawl:AdministrationTask_getID_5 a yawl:Method ;
+    rdfs:label "getID" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.getTaskType
+yawl:AdministrationTask_getTaskType_6 a yawl:Method ;
+    rdfs:label "getTaskType" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getTaskType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.getTitle
+yawl:AdministrationTask_getTitle_7 a yawl:Method ;
+    rdfs:label "getTitle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTitle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.getScenario
+yawl:AdministrationTask_getScenario_8 a yawl:Method ;
+    rdfs:label "getScenario" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getScenario()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.getProcess
+yawl:AdministrationTask_getProcess_9 a yawl:Method ;
+    rdfs:label "getProcess" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getProcess()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.setCaseID
+yawl:AdministrationTask_setCaseID_10 a yawl:Method ;
+    rdfs:label "setCaseID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCaseID(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.setItemID
+yawl:AdministrationTask_setItemID_11 a yawl:Method ;
+    rdfs:label "setItemID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setItemID(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.setID
+yawl:AdministrationTask_setID_12 a yawl:Method ;
+    rdfs:label "setID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setID(int id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.setTaskType
+yawl:AdministrationTask_setTaskType_13 a yawl:Method ;
+    rdfs:label "setTaskType" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTaskType(int taskType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.setTitle
+yawl:AdministrationTask_setTitle_14 a yawl:Method ;
+    rdfs:label "setTitle" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTitle(String title)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.setScenario
+yawl:AdministrationTask_setScenario_15 a yawl:Method ;
+    rdfs:label "setScenario" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setScenario(String scenario)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.setProcess
+yawl:AdministrationTask_setProcess_16 a yawl:Method ;
+    rdfs:label "setProcess" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setProcess(String process)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.toString
+yawl:AdministrationTask_toString_17 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.get_caseID
+yawl:AdministrationTask_get_caseID_18 a yawl:Method ;
+    rdfs:label "get_caseID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_caseID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.get_itemID
+yawl:AdministrationTask_get_itemID_19 a yawl:Method ;
+    rdfs:label "get_itemID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_itemID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.get_wsTaskID
+yawl:AdministrationTask_get_wsTaskID_20 a yawl:Method ;
+    rdfs:label "get_wsTaskID" ;
+    yawl:returnType "int" ;
+    yawl:signature "int get_wsTaskID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.get_taskType
+yawl:AdministrationTask_get_taskType_21 a yawl:Method ;
+    rdfs:label "get_taskType" ;
+    yawl:returnType "int" ;
+    yawl:signature "int get_taskType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.get_title
+yawl:AdministrationTask_get_title_22 a yawl:Method ;
+    rdfs:label "get_title" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_title()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.get_scenario
+yawl:AdministrationTask_get_scenario_23 a yawl:Method ;
+    rdfs:label "get_scenario" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_scenario()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.get_process
+yawl:AdministrationTask_get_process_24 a yawl:Method ;
+    rdfs:label "get_process" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_process()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.set_caseID
+yawl:AdministrationTask_set_caseID_25 a yawl:Method ;
+    rdfs:label "set_caseID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_caseID(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.set_itemID
+yawl:AdministrationTask_set_itemID_26 a yawl:Method ;
+    rdfs:label "set_itemID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_itemID(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.set_wsTaskID
+yawl:AdministrationTask_set_wsTaskID_27 a yawl:Method ;
+    rdfs:label "set_wsTaskID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_wsTaskID(int i)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.set_taskType
+yawl:AdministrationTask_set_taskType_28 a yawl:Method ;
+    rdfs:label "set_taskType" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_taskType(int i)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.set_title
+yawl:AdministrationTask_set_title_29 a yawl:Method ;
+    rdfs:label "set_title" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_title(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.set_scenario
+yawl:AdministrationTask_set_scenario_30 a yawl:Method ;
+    rdfs:label "set_scenario" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_scenario(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdministrationTask.set_process
+yawl:AdministrationTask_set_process_31 a yawl:Method ;
+    rdfs:label "set_process" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_process(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:AdministrationTask__caseID a yawl:Field ;
+    rdfs:label "_caseID" .
+
+yawl:AdministrationTask__itemID a yawl:Field ;
+    rdfs:label "_itemID" .
+
+yawl:AdministrationTask__wsTaskID a yawl:Field ;
+    rdfs:label "_wsTaskID" .
+
+yawl:AdministrationTask__taskType a yawl:Field ;
+    rdfs:label "_taskType" .
+
+yawl:AdministrationTask__title a yawl:Field ;
+    rdfs:label "_title" .
+
+yawl:AdministrationTask__scenario a yawl:Field ;
+    rdfs:label "_scenario" .
+
+yawl:AdministrationTask__process a yawl:Field ;
+    rdfs:label "_process" .
+
+yawl:AdministrationTask_TASKTYPE_REJECTED_SELECTION a yawl:Field ;
+    rdfs:label "TASKTYPE_REJECTED_SELECTION" .
+
+yawl:AdministrationTask_TASKTYPE_CASE_EXTERNAL_EXCEPTION a yawl:Field ;
+    rdfs:label "TASKTYPE_CASE_EXTERNAL_EXCEPTION" .
+
+yawl:AdministrationTask_TASKTYPE_ITEM_EXTERNAL_EXCEPTION a yawl:Field ;
+    rdfs:label "TASKTYPE_ITEM_EXTERNAL_EXCEPTION" .
+
+
+

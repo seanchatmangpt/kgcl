@@ -1,0 +1,292 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.resourcing.datastore.persistence
+yawl:org_yawlfoundation_yawl_resourcing_datastore_persistence a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.datastore.persistence" .
+# Class: org.yawlfoundation.yawl.resourcing.datastore.persistence.Persister
+yawl:Persister a yawl:Class ;
+    rdfs:label "Persister" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_datastore_persistence ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/datastore/persistence/Persister.java"^^xsd:string ;
+    rdfs:comment """This class is a thin client of HibernateEngine that implements methods for  Organisational Data CRUD. @author Michael Adams v0.1, 03/08/2007""" ;
+    yawl:implements yawl:Serializable ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "final" ;
+    yawl:hasMethod yawl:Persister_getInstance_1 ;
+    yawl:hasMethod yawl:Persister_selectMap_2 ;
+    yawl:hasMethod yawl:Persister_select_3 ;
+    yawl:hasMethod yawl:Persister_select_4 ;
+    yawl:hasMethod yawl:Persister_selectWhere_5 ;
+    yawl:hasMethod yawl:Persister_execQuery_6 ;
+    yawl:hasMethod yawl:Persister_execSQLQuery_7 ;
+    yawl:hasMethod yawl:Persister_execUpdate_8 ;
+    yawl:hasMethod yawl:Persister_execUpdate_9 ;
+    yawl:hasMethod yawl:Persister_createQuery_10 ;
+    yawl:hasMethod yawl:Persister_beginTransaction_11 ;
+    yawl:hasMethod yawl:Persister_getOrBeginTransaction_12 ;
+    yawl:hasMethod yawl:Persister_load_13 ;
+    yawl:hasMethod yawl:Persister_get_14 ;
+    yawl:hasMethod yawl:Persister_commit_15 ;
+    yawl:hasMethod yawl:Persister_rollback_16 ;
+    yawl:hasMethod yawl:Persister_closeDB_17 ;
+    yawl:hasMethod yawl:Persister_selectScalar_18 ;
+    yawl:hasMethod yawl:Persister_update_19 ;
+    yawl:hasMethod yawl:Persister_delete_20 ;
+    yawl:hasMethod yawl:Persister_insert_21 ;
+    yawl:hasMethod yawl:Persister_update_22 ;
+    yawl:hasMethod yawl:Persister_delete_23 ;
+    yawl:hasMethod yawl:Persister_insert_24 ;
+    yawl:hasMethod yawl:Persister_update_25 ;
+    yawl:hasMethod yawl:Persister_delete_26 ;
+    yawl:hasMethod yawl:Persister_insert_27 ;
+    yawl:hasField yawl:Persister__db ;
+    yawl:hasField yawl:Persister_INSTANCE ;
+    .
+
+
+# Method: Persister.getInstance
+yawl:Persister_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "Persister" ;
+    yawl:signature "Persister getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Persister.selectMap
+yawl:Persister_selectMap_2 a yawl:Method ;
+    rdfs:label "selectMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map selectMap(String className)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Persister.select
+yawl:Persister_select_3 a yawl:Method ;
+    rdfs:label "select" ;
+    yawl:returnType "List" ;
+    yawl:signature "List select(Object obj)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Persister.select
+yawl:Persister_select_4 a yawl:Method ;
+    rdfs:label "select" ;
+    yawl:returnType "List" ;
+    yawl:signature "List select(String className)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Persister.selectWhere
+yawl:Persister_selectWhere_5 a yawl:Method ;
+    rdfs:label "selectWhere" ;
+    yawl:returnType "List" ;
+    yawl:signature "List selectWhere(String className, String whereClause)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Persister.execQuery
+yawl:Persister_execQuery_6 a yawl:Method ;
+    rdfs:label "execQuery" ;
+    yawl:returnType "List" ;
+    yawl:signature "List execQuery(String query)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Persister.execSQLQuery
+yawl:Persister_execSQLQuery_7 a yawl:Method ;
+    rdfs:label "execSQLQuery" ;
+    yawl:returnType "List" ;
+    yawl:signature "List execSQLQuery(String query)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Persister.execUpdate
+yawl:Persister_execUpdate_8 a yawl:Method ;
+    rdfs:label "execUpdate" ;
+    yawl:returnType "int" ;
+    yawl:signature "int execUpdate(String statement)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Persister.execUpdate
+yawl:Persister_execUpdate_9 a yawl:Method ;
+    rdfs:label "execUpdate" ;
+    yawl:returnType "int" ;
+    yawl:signature "int execUpdate(String statement, boolean commit)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Persister.createQuery
+yawl:Persister_createQuery_10 a yawl:Method ;
+    rdfs:label "createQuery" ;
+    yawl:returnType "Query" ;
+    yawl:signature "Query createQuery(String query)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Persister.beginTransaction
+yawl:Persister_beginTransaction_11 a yawl:Method ;
+    rdfs:label "beginTransaction" ;
+    yawl:returnType "Transaction" ;
+    yawl:signature "Transaction beginTransaction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Persister.getOrBeginTransaction
+yawl:Persister_getOrBeginTransaction_12 a yawl:Method ;
+    rdfs:label "getOrBeginTransaction" ;
+    yawl:returnType "Transaction" ;
+    yawl:signature "Transaction getOrBeginTransaction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Persister.load
+yawl:Persister_load_13 a yawl:Method ;
+    rdfs:label "load" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object load(Class claz, Serializable key)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Persister.get
+yawl:Persister_get_14 a yawl:Method ;
+    rdfs:label "get" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object get(Class claz, Serializable key)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Persister.commit
+yawl:Persister_commit_15 a yawl:Method ;
+    rdfs:label "commit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void commit()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Persister.rollback
+yawl:Persister_rollback_16 a yawl:Method ;
+    rdfs:label "rollback" ;
+    yawl:returnType "void" ;
+    yawl:signature "void rollback()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Persister.closeDB
+yawl:Persister_closeDB_17 a yawl:Method ;
+    rdfs:label "closeDB" ;
+    yawl:returnType "void" ;
+    yawl:signature "void closeDB()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Persister.selectScalar
+yawl:Persister_selectScalar_18 a yawl:Method ;
+    rdfs:label "selectScalar" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object selectScalar(String className, String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Persister.update
+yawl:Persister_update_19 a yawl:Method ;
+    rdfs:label "update" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean update(Object obj)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Persister.delete
+yawl:Persister_delete_20 a yawl:Method ;
+    rdfs:label "delete" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean delete(Object obj)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Persister.insert
+yawl:Persister_insert_21 a yawl:Method ;
+    rdfs:label "insert" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean insert(Object obj)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Persister.update
+yawl:Persister_update_22 a yawl:Method ;
+    rdfs:label "update" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean update(Object obj, Transaction tx)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Persister.delete
+yawl:Persister_delete_23 a yawl:Method ;
+    rdfs:label "delete" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean delete(Object obj, Transaction tx)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Persister.insert
+yawl:Persister_insert_24 a yawl:Method ;
+    rdfs:label "insert" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean insert(Object obj, Transaction tx)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Persister.update
+yawl:Persister_update_25 a yawl:Method ;
+    rdfs:label "update" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean update(Object obj, boolean commit)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Persister.delete
+yawl:Persister_delete_26 a yawl:Method ;
+    rdfs:label "delete" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean delete(Object obj, boolean commit)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Persister.insert
+yawl:Persister_insert_27 a yawl:Method ;
+    rdfs:label "insert" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean insert(Object obj, boolean commit)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:Persister__db a yawl:Field ;
+    rdfs:label "_db" .
+
+yawl:Persister_INSTANCE a yawl:Field ;
+    rdfs:label "INSTANCE" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_resourcing_datastore_eventlog a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.datastore.eventlog" .
+
+

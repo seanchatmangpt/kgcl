@@ -1,0 +1,394 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.YEngineRestorer
+yawl:YEngineRestorer a yawl:Class ;
+    rdfs:label "YEngineRestorer" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/YEngineRestorer.java"^^xsd:string ;
+    rdfs:comment """Handles the restoration of persisted objects and data pertaining to the Engine. @author Michael Adams Creation Date: 25/06/2008""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YEngineRestorer_restoreServicesAndClients_1 ;
+    yawl:hasMethod yawl:YEngineRestorer_restoreInstances_2 ;
+    yawl:hasMethod yawl:YEngineRestorer_restoreYAWLServices_3 ;
+    yawl:hasMethod yawl:YEngineRestorer_restoreExternalClients_4 ;
+    yawl:hasMethod yawl:YEngineRestorer_restoreSpecifications_5 ;
+    yawl:hasMethod yawl:YEngineRestorer_restoreNextAvailableCaseNumber_6 ;
+    yawl:hasMethod yawl:YEngineRestorer_restoreProcessInstances_7 ;
+    yawl:hasMethod yawl:YEngineRestorer_restoreProcessInstances_8 ;
+    yawl:hasMethod yawl:YEngineRestorer_restoreWorkItems_9 ;
+    yawl:hasMethod yawl:YEngineRestorer_restoreWorkItems_10 ;
+    yawl:hasMethod yawl:YEngineRestorer_restoreGroupedMIOutputData_11 ;
+    yawl:hasMethod yawl:YEngineRestorer_setGroupedMIOutputData_12 ;
+    yawl:hasMethod yawl:YEngineRestorer_restoreTimedObjects_13 ;
+    yawl:hasMethod yawl:YEngineRestorer_restoreWorkItemTimers_14 ;
+    yawl:hasMethod yawl:YEngineRestorer_restoreDelayedLaunches_15 ;
+    yawl:hasMethod yawl:YEngineRestorer_restartRestoredProcessInstances_16 ;
+    yawl:hasMethod yawl:YEngineRestorer_persistDefaultClients_17 ;
+    yawl:hasMethod yawl:YEngineRestorer_getSpecification_18 ;
+    yawl:hasMethod yawl:YEngineRestorer_loadSpecification_19 ;
+    yawl:hasMethod yawl:YEngineRestorer_removeDeadRunners_20 ;
+    yawl:hasMethod yawl:YEngineRestorer_restoreNets_21 ;
+    yawl:hasMethod yawl:YEngineRestorer_restoreRunners_22 ;
+    yawl:hasMethod yawl:YEngineRestorer_restoreYIdentifiers_23 ;
+    yawl:hasMethod yawl:YEngineRestorer_restoreLocations_24 ;
+    yawl:hasMethod yawl:YEngineRestorer_resortMultiInstanceStartingData_25 ;
+    yawl:hasMethod yawl:YEngineRestorer_postTaskCondition_26 ;
+    yawl:hasMethod yawl:YEngineRestorer_hasRestoredIdentifier_27 ;
+    yawl:hasMethod yawl:YEngineRestorer_checkWorkItemFamiliesIntact_28 ;
+    yawl:hasMethod yawl:YEngineRestorer_removeWorkItems_29 ;
+    yawl:hasMethod yawl:YEngineRestorer_removeOrphanedIdentifiers_30 ;
+    yawl:hasMethod yawl:YEngineRestorer_getTaskReference_31 ;
+    yawl:hasMethod yawl:YEngineRestorer_setImportingCases_32 ;
+    yawl:hasMethod yawl:YEngineRestorer_restoreObjects_33 ;
+    yawl:hasMethod yawl:YEngineRestorer_restoreObjects_34 ;
+    yawl:hasMethod yawl:YEngineRestorer_unpersistObjects_35 ;
+    yawl:hasField yawl:YEngineRestorer__engine ;
+    yawl:hasField yawl:YEngineRestorer__pmgr ;
+    yawl:hasField yawl:YEngineRestorer__idLookupTable ;
+    yawl:hasField yawl:YEngineRestorer__runners ;
+    yawl:hasField yawl:YEngineRestorer__taskLookupTable ;
+    yawl:hasField yawl:YEngineRestorer__miOutputDataLookupTable ;
+    yawl:hasField yawl:YEngineRestorer__miTasks ;
+    yawl:hasField yawl:YEngineRestorer__hasServices ;
+    yawl:hasField yawl:YEngineRestorer__importingCases ;
+    yawl:hasField yawl:YEngineRestorer__addedDefaultClients ;
+    yawl:hasField yawl:YEngineRestorer__log ;
+    .
+
+
+# Method: YEngineRestorer.restoreServicesAndClients
+yawl:YEngineRestorer_restoreServicesAndClients_1 a yawl:Method ;
+    rdfs:label "restoreServicesAndClients" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restoreServicesAndClients()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngineRestorer.restoreInstances
+yawl:YEngineRestorer_restoreInstances_2 a yawl:Method ;
+    rdfs:label "restoreInstances" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restoreInstances()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngineRestorer.restoreYAWLServices
+yawl:YEngineRestorer_restoreYAWLServices_3 a yawl:Method ;
+    rdfs:label "restoreYAWLServices" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restoreYAWLServices()" ;
+    rdfs:comment """Restores YAWL Services from persistence @throws YPersistenceException if there's a problem reading from the tables""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngineRestorer.restoreExternalClients
+yawl:YEngineRestorer_restoreExternalClients_4 a yawl:Method ;
+    rdfs:label "restoreExternalClients" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restoreExternalClients()" ;
+    rdfs:comment """Restores registered external client credentials (eg the editor logon) @throws YPersistenceException if there's a problem reading from the tables""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngineRestorer.restoreSpecifications
+yawl:YEngineRestorer_restoreSpecifications_5 a yawl:Method ;
+    rdfs:label "restoreSpecifications" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restoreSpecifications()" ;
+    rdfs:comment """Restores Specifications from persistence @throws YPersistenceException if there's a problem reading from the tables""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngineRestorer.restoreNextAvailableCaseNumber
+yawl:YEngineRestorer_restoreNextAvailableCaseNumber_6 a yawl:Method ;
+    rdfs:label "restoreNextAvailableCaseNumber" ;
+    yawl:returnType "YCaseNbrStore" ;
+    yawl:signature "YCaseNbrStore restoreNextAvailableCaseNumber()" ;
+    rdfs:comment """Restores the next available case number from persistence @return a YCaseNbrStore object initialised to the next available case number @throws YPersistenceException if there's a problem reading from the tables""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngineRestorer.restoreProcessInstances
+yawl:YEngineRestorer_restoreProcessInstances_7 a yawl:Method ;
+    rdfs:label "restoreProcessInstances" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restoreProcessInstances()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngineRestorer.restoreProcessInstances
+yawl:YEngineRestorer_restoreProcessInstances_8 a yawl:Method ;
+    rdfs:label "restoreProcessInstances" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restoreProcessInstances(List runners)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngineRestorer.restoreWorkItems
+yawl:YEngineRestorer_restoreWorkItems_9 a yawl:Method ;
+    rdfs:label "restoreWorkItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restoreWorkItems()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngineRestorer.restoreWorkItems
+yawl:YEngineRestorer_restoreWorkItems_10 a yawl:Method ;
+    rdfs:label "restoreWorkItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restoreWorkItems(List workItems)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngineRestorer.restoreGroupedMIOutputData
+yawl:YEngineRestorer_restoreGroupedMIOutputData_11 a yawl:Method ;
+    rdfs:label "restoreGroupedMIOutputData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restoreGroupedMIOutputData()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngineRestorer.setGroupedMIOutputData
+yawl:YEngineRestorer_setGroupedMIOutputData_12 a yawl:Method ;
+    rdfs:label "setGroupedMIOutputData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setGroupedMIOutputData(Set miOutputDataSet)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngineRestorer.restoreTimedObjects
+yawl:YEngineRestorer_restoreTimedObjects_13 a yawl:Method ;
+    rdfs:label "restoreTimedObjects" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set restoreTimedObjects()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngineRestorer.restoreWorkItemTimers
+yawl:YEngineRestorer_restoreWorkItemTimers_14 a yawl:Method ;
+    rdfs:label "restoreWorkItemTimers" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set restoreWorkItemTimers()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngineRestorer.restoreDelayedLaunches
+yawl:YEngineRestorer_restoreDelayedLaunches_15 a yawl:Method ;
+    rdfs:label "restoreDelayedLaunches" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set restoreDelayedLaunches()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngineRestorer.restartRestoredProcessInstances
+yawl:YEngineRestorer_restartRestoredProcessInstances_16 a yawl:Method ;
+    rdfs:label "restartRestoredProcessInstances" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restartRestoredProcessInstances()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngineRestorer.persistDefaultClients
+yawl:YEngineRestorer_persistDefaultClients_17 a yawl:Method ;
+    rdfs:label "persistDefaultClients" ;
+    yawl:returnType "void" ;
+    yawl:signature "void persistDefaultClients()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngineRestorer.getSpecification
+yawl:YEngineRestorer_getSpecification_18 a yawl:Method ;
+    rdfs:label "getSpecification" ;
+    yawl:returnType "YSpecification" ;
+    yawl:signature "YSpecification getSpecification(YNetRunner runner)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngineRestorer.loadSpecification
+yawl:YEngineRestorer_loadSpecification_19 a yawl:Method ;
+    rdfs:label "loadSpecification" ;
+    yawl:returnType "void" ;
+    yawl:signature "void loadSpecification(YSpecification spec)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngineRestorer.removeDeadRunners
+yawl:YEngineRestorer_removeDeadRunners_20 a yawl:Method ;
+    rdfs:label "removeDeadRunners" ;
+    yawl:returnType "List" ;
+    yawl:signature "List removeDeadRunners(List runners)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngineRestorer.restoreNets
+yawl:YEngineRestorer_restoreNets_21 a yawl:Method ;
+    rdfs:label "restoreNets" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map restoreNets(List runners)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngineRestorer.restoreRunners
+yawl:YEngineRestorer_restoreRunners_22 a yawl:Method ;
+    rdfs:label "restoreRunners" ;
+    yawl:returnType "List" ;
+    yawl:signature "List restoreRunners(List runners)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngineRestorer.restoreYIdentifiers
+yawl:YEngineRestorer_restoreYIdentifiers_23 a yawl:Method ;
+    rdfs:label "restoreYIdentifiers" ;
+    yawl:returnType "YIdentifier" ;
+    yawl:signature "YIdentifier restoreYIdentifiers(Map runnermap, YIdentifier id, YIdentifier parent, YNet net)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngineRestorer.restoreLocations
+yawl:YEngineRestorer_restoreLocations_24 a yawl:Method ;
+    rdfs:label "restoreLocations" ;
+    yawl:returnType "YIdentifier" ;
+    yawl:signature "YIdentifier restoreLocations(Map runnermap, YIdentifier id, YIdentifier parent, YNet net)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngineRestorer.resortMultiInstanceStartingData
+yawl:YEngineRestorer_resortMultiInstanceStartingData_25 a yawl:Method ;
+    rdfs:label "resortMultiInstanceStartingData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void resortMultiInstanceStartingData()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngineRestorer.postTaskCondition
+yawl:YEngineRestorer_postTaskCondition_26 a yawl:Method ;
+    rdfs:label "postTaskCondition" ;
+    yawl:returnType "void" ;
+    yawl:signature "void postTaskCondition(YTask task, YNet net, String condName, YIdentifier id)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngineRestorer.hasRestoredIdentifier
+yawl:YEngineRestorer_hasRestoredIdentifier_27 a yawl:Method ;
+    rdfs:label "hasRestoredIdentifier" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasRestoredIdentifier(YWorkItem item)" ;
+    rdfs:comment """Checks if a workitem restored from persistence has had its YIdentifier previously restored. @param item the workitem to check @return true if there has been a YIdentifier restored for the workitem""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngineRestorer.checkWorkItemFamiliesIntact
+yawl:YEngineRestorer_checkWorkItemFamiliesIntact_28 a yawl:Method ;
+    rdfs:label "checkWorkItemFamiliesIntact" ;
+    yawl:returnType "List" ;
+    yawl:signature "List checkWorkItemFamiliesIntact(List itemList)" ;
+    rdfs:comment """When restoring workitems, this method checks (1) if a parent workitem is in the list of items to restore, all of its children are in the list also; and (2) each child workitem in the list has a parent. If either is false, the workitem is put in a list of items to not be restored and to be removed from persistence @param itemList the list of workitems to potentially restore @return the sublist of items not to restore (if any)""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngineRestorer.removeWorkItems
+yawl:YEngineRestorer_removeWorkItems_29 a yawl:Method ;
+    rdfs:label "removeWorkItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeWorkItems(List items)" ;
+    rdfs:comment """Removes the workitems in the list from persistence @param items the workitems to remove""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngineRestorer.removeOrphanedIdentifiers
+yawl:YEngineRestorer_removeOrphanedIdentifiers_30 a yawl:Method ;
+    rdfs:label "removeOrphanedIdentifiers" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeOrphanedIdentifiers()" ;
+    rdfs:comment """Finds and removes any persisted YIdentifiers that refer to cases that are no longer executing""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngineRestorer.getTaskReference
+yawl:YEngineRestorer_getTaskReference_31 a yawl:Method ;
+    rdfs:label "getTaskReference" ;
+    yawl:returnType "YTask" ;
+    yawl:signature "YTask getTaskReference(YSpecificationID specID, String taskID)" ;
+    rdfs:comment """Gets the YTask for the specification and task id passed. Any new requests are stored in a lookup table to minimise engine calls for subsequent identical requests (where many workitems are active for a spec/task combination) @param specID the spec ID @param taskID the task ID @return the task reference""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngineRestorer.setImportingCases
+yawl:YEngineRestorer_setImportingCases_32 a yawl:Method ;
+    rdfs:label "setImportingCases" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setImportingCases(boolean b)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YEngineRestorer.restoreObjects
+yawl:YEngineRestorer_restoreObjects_33 a yawl:Method ;
+    rdfs:label "restoreObjects" ;
+    yawl:returnType "List" ;
+    yawl:signature "List restoreObjects(Class clazz)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngineRestorer.restoreObjects
+yawl:YEngineRestorer_restoreObjects_34 a yawl:Method ;
+    rdfs:label "restoreObjects" ;
+    yawl:returnType "List" ;
+    yawl:signature "List restoreObjects(Class clazz, String queryString)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEngineRestorer.unpersistObjects
+yawl:YEngineRestorer_unpersistObjects_35 a yawl:Method ;
+    rdfs:label "unpersistObjects" ;
+    yawl:returnType "void" ;
+    yawl:signature "void unpersistObjects(Set objects)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YEngineRestorer__engine a yawl:Field ;
+    rdfs:label "_engine" .
+
+yawl:YEngineRestorer__pmgr a yawl:Field ;
+    rdfs:label "_pmgr" .
+
+yawl:YEngineRestorer__idLookupTable a yawl:Field ;
+    rdfs:label "_idLookupTable" .
+
+yawl:YEngineRestorer__runners a yawl:Field ;
+    rdfs:label "_runners" .
+
+yawl:YEngineRestorer__taskLookupTable a yawl:Field ;
+    rdfs:label "_taskLookupTable" .
+
+yawl:YEngineRestorer__miOutputDataLookupTable a yawl:Field ;
+    rdfs:label "_miOutputDataLookupTable" .
+
+yawl:YEngineRestorer__miTasks a yawl:Field ;
+    rdfs:label "_miTasks" .
+
+yawl:YEngineRestorer__hasServices a yawl:Field ;
+    rdfs:label "_hasServices" .
+
+yawl:YEngineRestorer__importingCases a yawl:Field ;
+    rdfs:label "_importingCases" .
+
+yawl:YEngineRestorer__addedDefaultClients a yawl:Field ;
+    rdfs:label "_addedDefaultClients" .
+
+yawl:YEngineRestorer__log a yawl:Field ;
+    rdfs:label "_log" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_stateless a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.stateless" .
+
+

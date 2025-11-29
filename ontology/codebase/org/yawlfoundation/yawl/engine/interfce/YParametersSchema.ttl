@@ -1,0 +1,137 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.interfce.YParametersSchema
+yawl:YParametersSchema a yawl:Class ;
+    rdfs:label "YParametersSchema" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_interfce ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/interfce/YParametersSchema.java"^^xsd:string ;
+    rdfs:comment """A container for the parameters of a task or net. @author Lachlan Aldred Date: 5/11/2003 Time: 12:18:37 updated for v2.0 by Michael Adams last date: 14/02/2008""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YParametersSchema_getInputParams_1 ;
+    yawl:hasMethod yawl:YParametersSchema_getOutputParams_2 ;
+    yawl:hasMethod yawl:YParametersSchema_getInputOnlyParams_3 ;
+    yawl:hasMethod yawl:YParametersSchema_getOutputOnlyParams_4 ;
+    yawl:hasMethod yawl:YParametersSchema_getInputOutputParams_5 ;
+    yawl:hasMethod yawl:YParametersSchema_getCombinedParams_6 ;
+    yawl:hasMethod yawl:YParametersSchema_setInputParam_7 ;
+    yawl:hasMethod yawl:YParametersSchema_setOutputParam_8 ;
+    yawl:hasMethod yawl:YParametersSchema_toString_9 ;
+    yawl:hasMethod yawl:YParametersSchema_setFormalInputParam_10 ;
+    yawl:hasMethod yawl:YParametersSchema_getFormalInputParam_11 ;
+    yawl:hasField yawl:YParametersSchema__inputParams ;
+    yawl:hasField yawl:YParametersSchema__outputParams ;
+    yawl:hasField yawl:YParametersSchema__formalInputParam ;
+    .
+
+
+# Method: YParametersSchema.getInputParams
+yawl:YParametersSchema_getInputParams_1 a yawl:Method ;
+    rdfs:label "getInputParams" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getInputParams()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YParametersSchema.getOutputParams
+yawl:YParametersSchema_getOutputParams_2 a yawl:Method ;
+    rdfs:label "getOutputParams" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getOutputParams()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YParametersSchema.getInputOnlyParams
+yawl:YParametersSchema_getInputOnlyParams_3 a yawl:Method ;
+    rdfs:label "getInputOnlyParams" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getInputOnlyParams()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YParametersSchema.getOutputOnlyParams
+yawl:YParametersSchema_getOutputOnlyParams_4 a yawl:Method ;
+    rdfs:label "getOutputOnlyParams" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getOutputOnlyParams()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YParametersSchema.getInputOutputParams
+yawl:YParametersSchema_getInputOutputParams_5 a yawl:Method ;
+    rdfs:label "getInputOutputParams" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getInputOutputParams()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YParametersSchema.getCombinedParams
+yawl:YParametersSchema_getCombinedParams_6 a yawl:Method ;
+    rdfs:label "getCombinedParams" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getCombinedParams()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YParametersSchema.setInputParam
+yawl:YParametersSchema_setInputParam_7 a yawl:Method ;
+    rdfs:label "setInputParam" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setInputParam(YParameter parameter)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YParametersSchema.setOutputParam
+yawl:YParametersSchema_setOutputParam_8 a yawl:Method ;
+    rdfs:label "setOutputParam" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOutputParam(YParameter parameter)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YParametersSchema.toString
+yawl:YParametersSchema_toString_9 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YParametersSchema.setFormalInputParam
+yawl:YParametersSchema_setFormalInputParam_10 a yawl:Method ;
+    rdfs:label "setFormalInputParam" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setFormalInputParam(String formalInputParam)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YParametersSchema.getFormalInputParam
+yawl:YParametersSchema_getFormalInputParam_11 a yawl:Method ;
+    rdfs:label "getFormalInputParam" ;
+    yawl:returnType "YParameter" ;
+    yawl:signature "YParameter getFormalInputParam()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YParametersSchema__inputParams a yawl:Field ;
+    rdfs:label "_inputParams" .
+
+yawl:YParametersSchema__outputParams a yawl:Field ;
+    rdfs:label "_outputParams" .
+
+yawl:YParametersSchema__formalInputParam a yawl:Field ;
+    rdfs:label "_formalInputParam" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_engine_time a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.engine.time" .
+
+

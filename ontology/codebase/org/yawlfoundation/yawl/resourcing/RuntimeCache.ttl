@@ -1,0 +1,690 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.RuntimeCache
+yawl:RuntimeCache a yawl:Class ;
+    rdfs:label "RuntimeCache" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/RuntimeCache.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 22/02/12""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:RuntimeCache_getOrgDataSet_1 ;
+    yawl:hasMethod yawl:RuntimeCache_setOrgDataSet_2 ;
+    yawl:hasMethod yawl:RuntimeCache_removeCase_3 ;
+    yawl:hasMethod yawl:RuntimeCache_addUserKey_4 ;
+    yawl:hasMethod yawl:RuntimeCache_removeUserKey_5 ;
+    yawl:hasMethod yawl:RuntimeCache_removeUserKey_6 ;
+    yawl:hasMethod yawl:RuntimeCache_isKnownUserID_7 ;
+    yawl:hasMethod yawl:RuntimeCache_getParticipantIDFromUserID_8 ;
+    yawl:hasMethod yawl:RuntimeCache_addDeferredItemGroup_9 ;
+    yawl:hasMethod yawl:RuntimeCache_removeDeferredItemGroup_10 ;
+    yawl:hasMethod yawl:RuntimeCache_getDeferredItemGroup_11 ;
+    yawl:hasMethod yawl:RuntimeCache_setDeferredGroupHandled_12 ;
+    yawl:hasMethod yawl:RuntimeCache_unsetDeferredGroupHandled_13 ;
+    yawl:hasMethod yawl:RuntimeCache_isDeferredGroupHandled_14 ;
+    yawl:hasMethod yawl:RuntimeCache_removeDeferredGroupForCase_15 ;
+    yawl:hasMethod yawl:RuntimeCache_addChainedCase_16 ;
+    yawl:hasMethod yawl:RuntimeCache_isChainedCase_17 ;
+    yawl:hasMethod yawl:RuntimeCache_isChainedParticipant_18 ;
+    yawl:hasMethod yawl:RuntimeCache_getChainedParticipant_19 ;
+    yawl:hasMethod yawl:RuntimeCache_getChainedCaseIDsForParticipant_20 ;
+    yawl:hasMethod yawl:RuntimeCache_getChainedCaseIDs_21 ;
+    yawl:hasMethod yawl:RuntimeCache_removeChainedCase_22 ;
+    yawl:hasMethod yawl:RuntimeCache_removeChainedCasesForParticpant_23 ;
+    yawl:hasMethod yawl:RuntimeCache_addTaskCompleter_24 ;
+    yawl:hasMethod yawl:RuntimeCache_getTaskCompleters_25 ;
+    yawl:hasMethod yawl:RuntimeCache_removeTaskCompleter_26 ;
+    yawl:hasMethod yawl:RuntimeCache_removeCaseFromTaskCompleters_27 ;
+    yawl:hasMethod yawl:RuntimeCache_addCodeletRunner_28 ;
+    yawl:hasMethod yawl:RuntimeCache_removeCodeletRunner_29 ;
+    yawl:hasMethod yawl:RuntimeCache_cancelCodeletRunner_30 ;
+    yawl:hasMethod yawl:RuntimeCache_cancelCodeletRunnersForCase_31 ;
+    yawl:hasMethod yawl:RuntimeCache_shutdownCodeletRunners_32 ;
+    yawl:hasMethod yawl:RuntimeCache_addOrphanedItem_33 ;
+    yawl:hasMethod yawl:RuntimeCache_getOrphanedItems_34 ;
+    yawl:hasMethod yawl:RuntimeCache_clearOrphanedItems_35 ;
+    yawl:hasMethod yawl:RuntimeCache_addDelayedCaseLaunch_36 ;
+    yawl:hasMethod yawl:RuntimeCache_logDelayedCaseLaunch_37 ;
+    yawl:hasMethod yawl:RuntimeCache_addSpecificationData_38 ;
+    yawl:hasMethod yawl:RuntimeCache_getSpecificationData_39 ;
+    yawl:hasMethod yawl:RuntimeCache_removeSpecificationData_40 ;
+    yawl:hasMethod yawl:RuntimeCache_addDataSchema_41 ;
+    yawl:hasMethod yawl:RuntimeCache_getDataSchemaMap_42 ;
+    yawl:hasMethod yawl:RuntimeCache_removeDataSchema_43 ;
+    yawl:hasMethod yawl:RuntimeCache_removeSpecification_44 ;
+    yawl:hasMethod yawl:RuntimeCache_getParticipantWithSessionHandle_45 ;
+    yawl:hasMethod yawl:RuntimeCache_getWhoLaunchedCase_46 ;
+    yawl:hasMethod yawl:RuntimeCache_shutdown_47 ;
+    yawl:hasMethod yawl:RuntimeCache_isActiveSession_48 ;
+    yawl:hasMethod yawl:RuntimeCache_expireSession_49 ;
+    yawl:hasMethod yawl:RuntimeCache_isValidUserSession_50 ;
+    yawl:hasMethod yawl:RuntimeCache_logout_51 ;
+    yawl:hasMethod yawl:RuntimeCache_addSession_52 ;
+    yawl:hasMethod yawl:RuntimeCache_addSession_53 ;
+    yawl:hasMethod yawl:RuntimeCache_getSessionHandle_54 ;
+    yawl:hasMethod yawl:RuntimeCache_getActiveParticipantsAsXML_55 ;
+    yawl:hasMethod yawl:RuntimeCache_getSessionCount_56 ;
+    yawl:hasMethod yawl:RuntimeCache_getUserSessionCount_57 ;
+    yawl:hasMethod yawl:RuntimeCache_getAdminSessionCount_58 ;
+    yawl:hasMethod yawl:RuntimeCache_getUserAdminSessionCount_59 ;
+    yawl:hasMethod yawl:RuntimeCache_refreshClientCredentials_60 ;
+    yawl:hasMethod yawl:RuntimeCache_addClientCredentials_61 ;
+    yawl:hasMethod yawl:RuntimeCache_updateClientCredentials_62 ;
+    yawl:hasMethod yawl:RuntimeCache_deleteClientCredentials_63 ;
+    yawl:hasMethod yawl:RuntimeCache_hasClientCredentials_64 ;
+    yawl:hasMethod yawl:RuntimeCache_connectClient_65 ;
+    yawl:hasMethod yawl:RuntimeCache_getClientPassword_66 ;
+    yawl:hasMethod yawl:RuntimeCache_checkServiceConnection_67 ;
+    yawl:hasMethod yawl:RuntimeCache_serviceDisconnect_68 ;
+    yawl:hasMethod yawl:RuntimeCache_getUserIDForSessionHandle_69 ;
+    yawl:hasField yawl:RuntimeCache__orgDataSet ;
+    yawl:hasField yawl:RuntimeCache__userKeys ;
+    yawl:hasField yawl:RuntimeCache__connections ;
+    yawl:hasField yawl:RuntimeCache__liveSessions ;
+    yawl:hasField yawl:RuntimeCache__specCache ;
+    yawl:hasField yawl:RuntimeCache__dataSchemaCache ;
+    yawl:hasField yawl:RuntimeCache__deferredItemGroups ;
+    yawl:hasField yawl:RuntimeCache__chainedCases ;
+    yawl:hasField yawl:RuntimeCache__taskCompleters ;
+    yawl:hasField yawl:RuntimeCache__codeletRunners ;
+    yawl:hasField yawl:RuntimeCache__orphanedStartedItems ;
+    yawl:hasField yawl:RuntimeCache__delayedLaunches ;
+    .
+
+
+# Method: RuntimeCache.getOrgDataSet
+yawl:RuntimeCache_getOrgDataSet_1 a yawl:Method ;
+    rdfs:label "getOrgDataSet" ;
+    yawl:returnType "ResourceDataSet" ;
+    yawl:signature "ResourceDataSet getOrgDataSet()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.setOrgDataSet
+yawl:RuntimeCache_setOrgDataSet_2 a yawl:Method ;
+    rdfs:label "setOrgDataSet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOrgDataSet(ResourceDataSet dataSet)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.removeCase
+yawl:RuntimeCache_removeCase_3 a yawl:Method ;
+    rdfs:label "removeCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeCase(String caseID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.addUserKey
+yawl:RuntimeCache_addUserKey_4 a yawl:Method ;
+    rdfs:label "addUserKey" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addUserKey(Participant p)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.removeUserKey
+yawl:RuntimeCache_removeUserKey_5 a yawl:Method ;
+    rdfs:label "removeUserKey" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeUserKey(Participant p)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.removeUserKey
+yawl:RuntimeCache_removeUserKey_6 a yawl:Method ;
+    rdfs:label "removeUserKey" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeUserKey(String userKey)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.isKnownUserID
+yawl:RuntimeCache_isKnownUserID_7 a yawl:Method ;
+    rdfs:label "isKnownUserID" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isKnownUserID(String userid)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.getParticipantIDFromUserID
+yawl:RuntimeCache_getParticipantIDFromUserID_8 a yawl:Method ;
+    rdfs:label "getParticipantIDFromUserID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParticipantIDFromUserID(String userID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.addDeferredItemGroup
+yawl:RuntimeCache_addDeferredItemGroup_9 a yawl:Method ;
+    rdfs:label "addDeferredItemGroup" ;
+    yawl:returnType "TaggedStringList" ;
+    yawl:signature "TaggedStringList addDeferredItemGroup(TaggedStringList group)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.removeDeferredItemGroup
+yawl:RuntimeCache_removeDeferredItemGroup_10 a yawl:Method ;
+    rdfs:label "removeDeferredItemGroup" ;
+    yawl:returnType "TaggedStringList" ;
+    yawl:signature "TaggedStringList removeDeferredItemGroup(TaggedStringList group)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.getDeferredItemGroup
+yawl:RuntimeCache_getDeferredItemGroup_11 a yawl:Method ;
+    rdfs:label "getDeferredItemGroup" ;
+    yawl:returnType "TaggedStringList" ;
+    yawl:signature "TaggedStringList getDeferredItemGroup(String groupID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.setDeferredGroupHandled
+yawl:RuntimeCache_setDeferredGroupHandled_12 a yawl:Method ;
+    rdfs:label "setDeferredGroupHandled" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDeferredGroupHandled(String caseID, String groupID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.unsetDeferredGroupHandled
+yawl:RuntimeCache_unsetDeferredGroupHandled_13 a yawl:Method ;
+    rdfs:label "unsetDeferredGroupHandled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean unsetDeferredGroupHandled(String caseID, String groupID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.isDeferredGroupHandled
+yawl:RuntimeCache_isDeferredGroupHandled_14 a yawl:Method ;
+    rdfs:label "isDeferredGroupHandled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isDeferredGroupHandled(String caseID, String groupID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.removeDeferredGroupForCase
+yawl:RuntimeCache_removeDeferredGroupForCase_15 a yawl:Method ;
+    rdfs:label "removeDeferredGroupForCase" ;
+    yawl:returnType "TaggedStringList" ;
+    yawl:signature "TaggedStringList removeDeferredGroupForCase(String caseID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.addChainedCase
+yawl:RuntimeCache_addChainedCase_16 a yawl:Method ;
+    rdfs:label "addChainedCase" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant addChainedCase(String caseID, Participant p)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.isChainedCase
+yawl:RuntimeCache_isChainedCase_17 a yawl:Method ;
+    rdfs:label "isChainedCase" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isChainedCase(String caseID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.isChainedParticipant
+yawl:RuntimeCache_isChainedParticipant_18 a yawl:Method ;
+    rdfs:label "isChainedParticipant" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isChainedParticipant(Participant p)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.getChainedParticipant
+yawl:RuntimeCache_getChainedParticipant_19 a yawl:Method ;
+    rdfs:label "getChainedParticipant" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant getChainedParticipant(String caseID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.getChainedCaseIDsForParticipant
+yawl:RuntimeCache_getChainedCaseIDsForParticipant_20 a yawl:Method ;
+    rdfs:label "getChainedCaseIDsForParticipant" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getChainedCaseIDsForParticipant(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RuntimeCache.getChainedCaseIDs
+yawl:RuntimeCache_getChainedCaseIDs_21 a yawl:Method ;
+    rdfs:label "getChainedCaseIDs" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getChainedCaseIDs()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.removeChainedCase
+yawl:RuntimeCache_removeChainedCase_22 a yawl:Method ;
+    rdfs:label "removeChainedCase" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant removeChainedCase(String caseID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.removeChainedCasesForParticpant
+yawl:RuntimeCache_removeChainedCasesForParticpant_23 a yawl:Method ;
+    rdfs:label "removeChainedCasesForParticpant" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeChainedCasesForParticpant(Participant p)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.addTaskCompleter
+yawl:RuntimeCache_addTaskCompleter_24 a yawl:Method ;
+    rdfs:label "addTaskCompleter" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addTaskCompleter(Participant p, WorkItemRecord wir)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.getTaskCompleters
+yawl:RuntimeCache_getTaskCompleters_25 a yawl:Method ;
+    rdfs:label "getTaskCompleters" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getTaskCompleters(String taskID, String caseID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.removeTaskCompleter
+yawl:RuntimeCache_removeTaskCompleter_26 a yawl:Method ;
+    rdfs:label "removeTaskCompleter" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeTaskCompleter(Participant p, WorkItemRecord wir)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.removeCaseFromTaskCompleters
+yawl:RuntimeCache_removeCaseFromTaskCompleters_27 a yawl:Method ;
+    rdfs:label "removeCaseFromTaskCompleters" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeCaseFromTaskCompleters(String caseid)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.addCodeletRunner
+yawl:RuntimeCache_addCodeletRunner_28 a yawl:Method ;
+    rdfs:label "addCodeletRunner" ;
+    yawl:returnType "CodeletRunner" ;
+    yawl:signature "CodeletRunner addCodeletRunner(String itemID, CodeletRunner runner)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.removeCodeletRunner
+yawl:RuntimeCache_removeCodeletRunner_29 a yawl:Method ;
+    rdfs:label "removeCodeletRunner" ;
+    yawl:returnType "CodeletRunner" ;
+    yawl:signature "CodeletRunner removeCodeletRunner(String itemID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.cancelCodeletRunner
+yawl:RuntimeCache_cancelCodeletRunner_30 a yawl:Method ;
+    rdfs:label "cancelCodeletRunner" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancelCodeletRunner(String itemID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.cancelCodeletRunnersForCase
+yawl:RuntimeCache_cancelCodeletRunnersForCase_31 a yawl:Method ;
+    rdfs:label "cancelCodeletRunnersForCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancelCodeletRunnersForCase(String caseID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.shutdownCodeletRunners
+yawl:RuntimeCache_shutdownCodeletRunners_32 a yawl:Method ;
+    rdfs:label "shutdownCodeletRunners" ;
+    yawl:returnType "void" ;
+    yawl:signature "void shutdownCodeletRunners()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.addOrphanedItem
+yawl:RuntimeCache_addOrphanedItem_33 a yawl:Method ;
+    rdfs:label "addOrphanedItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addOrphanedItem(WorkItemRecord wir)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.getOrphanedItems
+yawl:RuntimeCache_getOrphanedItems_34 a yawl:Method ;
+    rdfs:label "getOrphanedItems" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getOrphanedItems()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.clearOrphanedItems
+yawl:RuntimeCache_clearOrphanedItems_35 a yawl:Method ;
+    rdfs:label "clearOrphanedItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clearOrphanedItems()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.addDelayedCaseLaunch
+yawl:RuntimeCache_addDelayedCaseLaunch_36 a yawl:Method ;
+    rdfs:label "addDelayedCaseLaunch" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addDelayedCaseLaunch(DelayedLaunchRecord record)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.logDelayedCaseLaunch
+yawl:RuntimeCache_logDelayedCaseLaunch_37 a yawl:Method ;
+    rdfs:label "logDelayedCaseLaunch" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean logDelayedCaseLaunch(YSpecificationID specID, String caseID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.addSpecificationData
+yawl:RuntimeCache_addSpecificationData_38 a yawl:Method ;
+    rdfs:label "addSpecificationData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addSpecificationData(SpecificationData specData)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.getSpecificationData
+yawl:RuntimeCache_getSpecificationData_39 a yawl:Method ;
+    rdfs:label "getSpecificationData" ;
+    yawl:returnType "SpecificationData" ;
+    yawl:signature "SpecificationData getSpecificationData(YSpecificationID specID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.removeSpecificationData
+yawl:RuntimeCache_removeSpecificationData_40 a yawl:Method ;
+    rdfs:label "removeSpecificationData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeSpecificationData(YSpecificationID specID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.addDataSchema
+yawl:RuntimeCache_addDataSchema_41 a yawl:Method ;
+    rdfs:label "addDataSchema" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map addDataSchema(YSpecificationID specID, String schema)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.getDataSchemaMap
+yawl:RuntimeCache_getDataSchemaMap_42 a yawl:Method ;
+    rdfs:label "getDataSchemaMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getDataSchemaMap(YSpecificationID specID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.removeDataSchema
+yawl:RuntimeCache_removeDataSchema_43 a yawl:Method ;
+    rdfs:label "removeDataSchema" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeDataSchema(YSpecificationID specID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.removeSpecification
+yawl:RuntimeCache_removeSpecification_44 a yawl:Method ;
+    rdfs:label "removeSpecification" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeSpecification(YSpecificationID specID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.getParticipantWithSessionHandle
+yawl:RuntimeCache_getParticipantWithSessionHandle_45 a yawl:Method ;
+    rdfs:label "getParticipantWithSessionHandle" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant getParticipantWithSessionHandle(String handle)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.getWhoLaunchedCase
+yawl:RuntimeCache_getWhoLaunchedCase_46 a yawl:Method ;
+    rdfs:label "getWhoLaunchedCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWhoLaunchedCase(String handle)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.shutdown
+yawl:RuntimeCache_shutdown_47 a yawl:Method ;
+    rdfs:label "shutdown" ;
+    yawl:returnType "void" ;
+    yawl:signature "void shutdown()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.isActiveSession
+yawl:RuntimeCache_isActiveSession_48 a yawl:Method ;
+    rdfs:label "isActiveSession" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isActiveSession(String jSessionID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.expireSession
+yawl:RuntimeCache_expireSession_49 a yawl:Method ;
+    rdfs:label "expireSession" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant expireSession(String jSessionID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.isValidUserSession
+yawl:RuntimeCache_isValidUserSession_50 a yawl:Method ;
+    rdfs:label "isValidUserSession" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isValidUserSession(String handle)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.logout
+yawl:RuntimeCache_logout_51 a yawl:Method ;
+    rdfs:label "logout" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logout(String handle)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.addSession
+yawl:RuntimeCache_addSession_52 a yawl:Method ;
+    rdfs:label "addSession" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addSession(String handle, String jSessionID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.addSession
+yawl:RuntimeCache_addSession_53 a yawl:Method ;
+    rdfs:label "addSession" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addSession(String handle, Participant p, String jSessionID)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.getSessionHandle
+yawl:RuntimeCache_getSessionHandle_54 a yawl:Method ;
+    rdfs:label "getSessionHandle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSessionHandle(Participant p)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.getActiveParticipantsAsXML
+yawl:RuntimeCache_getActiveParticipantsAsXML_55 a yawl:Method ;
+    rdfs:label "getActiveParticipantsAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getActiveParticipantsAsXML()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.getSessionCount
+yawl:RuntimeCache_getSessionCount_56 a yawl:Method ;
+    rdfs:label "getSessionCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getSessionCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RuntimeCache.getUserSessionCount
+yawl:RuntimeCache_getUserSessionCount_57 a yawl:Method ;
+    rdfs:label "getUserSessionCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getUserSessionCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RuntimeCache.getAdminSessionCount
+yawl:RuntimeCache_getAdminSessionCount_58 a yawl:Method ;
+    rdfs:label "getAdminSessionCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getAdminSessionCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RuntimeCache.getUserAdminSessionCount
+yawl:RuntimeCache_getUserAdminSessionCount_59 a yawl:Method ;
+    rdfs:label "getUserAdminSessionCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getUserAdminSessionCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RuntimeCache.refreshClientCredentials
+yawl:RuntimeCache_refreshClientCredentials_60 a yawl:Method ;
+    rdfs:label "refreshClientCredentials" ;
+    yawl:returnType "void" ;
+    yawl:signature "void refreshClientCredentials(Map users)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.addClientCredentials
+yawl:RuntimeCache_addClientCredentials_61 a yawl:Method ;
+    rdfs:label "addClientCredentials" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addClientCredentials(String id, String password)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.updateClientCredentials
+yawl:RuntimeCache_updateClientCredentials_62 a yawl:Method ;
+    rdfs:label "updateClientCredentials" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateClientCredentials(String id, String password)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.deleteClientCredentials
+yawl:RuntimeCache_deleteClientCredentials_63 a yawl:Method ;
+    rdfs:label "deleteClientCredentials" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteClientCredentials(String id)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.hasClientCredentials
+yawl:RuntimeCache_hasClientCredentials_64 a yawl:Method ;
+    rdfs:label "hasClientCredentials" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasClientCredentials()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.connectClient
+yawl:RuntimeCache_connectClient_65 a yawl:Method ;
+    rdfs:label "connectClient" ;
+    yawl:returnType "String" ;
+    yawl:signature "String connectClient(String userid, String password, long timeOutSeconds)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.getClientPassword
+yawl:RuntimeCache_getClientPassword_66 a yawl:Method ;
+    rdfs:label "getClientPassword" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getClientPassword(String id)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.checkServiceConnection
+yawl:RuntimeCache_checkServiceConnection_67 a yawl:Method ;
+    rdfs:label "checkServiceConnection" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean checkServiceConnection(String handle)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.serviceDisconnect
+yawl:RuntimeCache_serviceDisconnect_68 a yawl:Method ;
+    rdfs:label "serviceDisconnect" ;
+    yawl:returnType "void" ;
+    yawl:signature "void serviceDisconnect(String handle)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RuntimeCache.getUserIDForSessionHandle
+yawl:RuntimeCache_getUserIDForSessionHandle_69 a yawl:Method ;
+    rdfs:label "getUserIDForSessionHandle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUserIDForSessionHandle(String handle)" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:RuntimeCache__orgDataSet a yawl:Field ;
+    rdfs:label "_orgDataSet" .
+
+yawl:RuntimeCache__userKeys a yawl:Field ;
+    rdfs:label "_userKeys" .
+
+yawl:RuntimeCache__connections a yawl:Field ;
+    rdfs:label "_connections" .
+
+yawl:RuntimeCache__liveSessions a yawl:Field ;
+    rdfs:label "_liveSessions" .
+
+yawl:RuntimeCache__specCache a yawl:Field ;
+    rdfs:label "_specCache" .
+
+yawl:RuntimeCache__dataSchemaCache a yawl:Field ;
+    rdfs:label "_dataSchemaCache" .
+
+yawl:RuntimeCache__deferredItemGroups a yawl:Field ;
+    rdfs:label "_deferredItemGroups" .
+
+yawl:RuntimeCache__chainedCases a yawl:Field ;
+    rdfs:label "_chainedCases" .
+
+yawl:RuntimeCache__taskCompleters a yawl:Field ;
+    rdfs:label "_taskCompleters" .
+
+yawl:RuntimeCache__codeletRunners a yawl:Field ;
+    rdfs:label "_codeletRunners" .
+
+yawl:RuntimeCache__orphanedStartedItems a yawl:Field ;
+    rdfs:label "_orphanedStartedItems" .
+
+yawl:RuntimeCache__delayedLaunches a yawl:Field ;
+    rdfs:label "_delayedLaunches" .
+
+
+

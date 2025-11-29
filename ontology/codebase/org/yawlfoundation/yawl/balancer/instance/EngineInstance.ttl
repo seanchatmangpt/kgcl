@@ -1,0 +1,369 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.balancer.instance
+yawl:org_yawlfoundation_yawl_balancer_instance a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.balancer.instance" .
+# Class: org.yawlfoundation.yawl.balancer.instance.EngineInstance
+yawl:EngineInstance a yawl:Class ;
+    rdfs:label "EngineInstance" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer_instance ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/instance/EngineInstance.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 20/7/17""" ;
+    yawl:implements yawl:ConfigChangeListener ;
+    yawl:implements yawl:Pollable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:EngineInstance_configChanged_1 ;
+    yawl:hasMethod yawl:EngineInstance_scheduledEvent_2 ;
+    yawl:hasMethod yawl:EngineInstance_addBusynessListener_3 ;
+    yawl:hasMethod yawl:EngineInstance_setArffWriter_4 ;
+    yawl:hasMethod yawl:EngineInstance_setCombinedOutputter_5 ;
+    yawl:hasMethod yawl:EngineInstance_writeCombinedValues_6 ;
+    yawl:hasMethod yawl:EngineInstance_getURL_7 ;
+    yawl:hasMethod yawl:EngineInstance_getName_8 ;
+    yawl:hasMethod yawl:EngineInstance_getPort_9 ;
+    yawl:hasMethod yawl:EngineInstance_close_10 ;
+    yawl:hasMethod yawl:EngineInstance_isInitialized_11 ;
+    yawl:hasMethod yawl:EngineInstance_isActive_12 ;
+    yawl:hasMethod yawl:EngineInstance_setActive_13 ;
+    yawl:hasMethod yawl:EngineInstance_isRestored_14 ;
+    yawl:hasMethod yawl:EngineInstance_setRestored_15 ;
+    yawl:hasMethod yawl:EngineInstance_isAuthenticator_16 ;
+    yawl:hasMethod yawl:EngineInstance_setAuthenticator_17 ;
+    yawl:hasMethod yawl:EngineInstance_getSessionHandle_18 ;
+    yawl:hasMethod yawl:EngineInstance_setSessionHandle_19 ;
+    yawl:hasMethod yawl:EngineInstance_addCase_20 ;
+    yawl:hasMethod yawl:EngineInstance_addCases_21 ;
+    yawl:hasMethod yawl:EngineInstance_removeCase_22 ;
+    yawl:hasMethod yawl:EngineInstance_hasCase_23 ;
+    yawl:hasMethod yawl:EngineInstance_addComplexityMetric_24 ;
+    yawl:hasMethod yawl:EngineInstance_removeComplexityMetric_25 ;
+    yawl:hasMethod yawl:EngineInstance_getRunningCasesComplexityMetric_26 ;
+    yawl:hasMethod yawl:EngineInstance_getLastCaseNbr_27 ;
+    yawl:hasMethod yawl:EngineInstance_pingUntilActive_28 ;
+    yawl:hasMethod yawl:EngineInstance_getBusyness_29 ;
+    yawl:hasMethod yawl:EngineInstance_getBusyRule_30 ;
+    yawl:hasMethod yawl:EngineInstance_getIndexFromPort_31 ;
+    yawl:hasField yawl:EngineInstance__host ;
+    yawl:hasField yawl:EngineInstance__port ;
+    yawl:hasField yawl:EngineInstance__loadReader ;
+    yawl:hasField yawl:EngineInstance__busyRule ;
+    yawl:hasField yawl:EngineInstance__reqCollator ;
+    yawl:hasField yawl:EngineInstance__combinedOutputter ;
+    yawl:hasField yawl:EngineInstance__combinedOutputterMap ;
+    yawl:hasField yawl:EngineInstance__sessionHandle ;
+    yawl:hasField yawl:EngineInstance__active ;
+    yawl:hasField yawl:EngineInstance__initialized ;
+    yawl:hasField yawl:EngineInstance__restored ;
+    yawl:hasField yawl:EngineInstance__authenticator ;
+    yawl:hasField yawl:EngineInstance__runningCases ;
+    yawl:hasField yawl:EngineInstance__busynessListeners ;
+    yawl:hasField yawl:EngineInstance__runningCasesComplexityMetric ;
+    yawl:hasField yawl:EngineInstance_YAWL_URL_TEMPLATE ;
+    .
+
+
+# Method: EngineInstance.configChanged
+yawl:EngineInstance_configChanged_1 a yawl:Method ;
+    rdfs:label "configChanged" ;
+    yawl:returnType "void" ;
+    yawl:signature "void configChanged(Map changedValues)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.scheduledEvent
+yawl:EngineInstance_scheduledEvent_2 a yawl:Method ;
+    rdfs:label "scheduledEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void scheduledEvent()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.addBusynessListener
+yawl:EngineInstance_addBusynessListener_3 a yawl:Method ;
+    rdfs:label "addBusynessListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addBusynessListener(BusynessListener listener)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.setArffWriter
+yawl:EngineInstance_setArffWriter_4 a yawl:Method ;
+    rdfs:label "setArffWriter" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setArffWriter(ArffOutputter writer)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.setCombinedOutputter
+yawl:EngineInstance_setCombinedOutputter_5 a yawl:Method ;
+    rdfs:label "setCombinedOutputter" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCombinedOutputter(CombinedBusynessOutputter outputter)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.writeCombinedValues
+yawl:EngineInstance_writeCombinedValues_6 a yawl:Method ;
+    rdfs:label "writeCombinedValues" ;
+    yawl:returnType "void" ;
+    yawl:signature "void writeCombinedValues(double busyness)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: EngineInstance.getURL
+yawl:EngineInstance_getURL_7 a yawl:Method ;
+    rdfs:label "getURL" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getURL(String path)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.getName
+yawl:EngineInstance_getName_8 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.getPort
+yawl:EngineInstance_getPort_9 a yawl:Method ;
+    rdfs:label "getPort" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getPort()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.close
+yawl:EngineInstance_close_10 a yawl:Method ;
+    rdfs:label "close" ;
+    yawl:returnType "void" ;
+    yawl:signature "void close()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.isInitialized
+yawl:EngineInstance_isInitialized_11 a yawl:Method ;
+    rdfs:label "isInitialized" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isInitialized()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.isActive
+yawl:EngineInstance_isActive_12 a yawl:Method ;
+    rdfs:label "isActive" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isActive()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.setActive
+yawl:EngineInstance_setActive_13 a yawl:Method ;
+    rdfs:label "setActive" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setActive(boolean active)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.isRestored
+yawl:EngineInstance_isRestored_14 a yawl:Method ;
+    rdfs:label "isRestored" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isRestored()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.setRestored
+yawl:EngineInstance_setRestored_15 a yawl:Method ;
+    rdfs:label "setRestored" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRestored(boolean restored)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.isAuthenticator
+yawl:EngineInstance_isAuthenticator_16 a yawl:Method ;
+    rdfs:label "isAuthenticator" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAuthenticator()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.setAuthenticator
+yawl:EngineInstance_setAuthenticator_17 a yawl:Method ;
+    rdfs:label "setAuthenticator" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAuthenticator(boolean authenticator)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.getSessionHandle
+yawl:EngineInstance_getSessionHandle_18 a yawl:Method ;
+    rdfs:label "getSessionHandle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSessionHandle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.setSessionHandle
+yawl:EngineInstance_setSessionHandle_19 a yawl:Method ;
+    rdfs:label "setSessionHandle" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSessionHandle(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.addCase
+yawl:EngineInstance_addCase_20 a yawl:Method ;
+    rdfs:label "addCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addCase(String caseid, YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.addCases
+yawl:EngineInstance_addCases_21 a yawl:Method ;
+    rdfs:label "addCases" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addCases(Map caseMap)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.removeCase
+yawl:EngineInstance_removeCase_22 a yawl:Method ;
+    rdfs:label "removeCase" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID removeCase(String caseid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.hasCase
+yawl:EngineInstance_hasCase_23 a yawl:Method ;
+    rdfs:label "hasCase" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasCase(String caseid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.addComplexityMetric
+yawl:EngineInstance_addComplexityMetric_24 a yawl:Method ;
+    rdfs:label "addComplexityMetric" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addComplexityMetric(double metric)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.removeComplexityMetric
+yawl:EngineInstance_removeComplexityMetric_25 a yawl:Method ;
+    rdfs:label "removeComplexityMetric" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeComplexityMetric(double metric)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.getRunningCasesComplexityMetric
+yawl:EngineInstance_getRunningCasesComplexityMetric_26 a yawl:Method ;
+    rdfs:label "getRunningCasesComplexityMetric" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getRunningCasesComplexityMetric()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.getLastCaseNbr
+yawl:EngineInstance_getLastCaseNbr_27 a yawl:Method ;
+    rdfs:label "getLastCaseNbr" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getLastCaseNbr()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.pingUntilActive
+yawl:EngineInstance_pingUntilActive_28 a yawl:Method ;
+    rdfs:label "pingUntilActive" ;
+    yawl:returnType "void" ;
+    yawl:signature "void pingUntilActive()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.getBusyness
+yawl:EngineInstance_getBusyness_29 a yawl:Method ;
+    rdfs:label "getBusyness" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getBusyness(boolean verbose)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineInstance.getBusyRule
+yawl:EngineInstance_getBusyRule_30 a yawl:Method ;
+    rdfs:label "getBusyRule" ;
+    yawl:returnType "BusynessRule" ;
+    yawl:signature "BusynessRule getBusyRule()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: EngineInstance.getIndexFromPort
+yawl:EngineInstance_getIndexFromPort_31 a yawl:Method ;
+    rdfs:label "getIndexFromPort" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getIndexFromPort(int port)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:EngineInstance__host a yawl:Field ;
+    rdfs:label "_host" .
+
+yawl:EngineInstance__port a yawl:Field ;
+    rdfs:label "_port" .
+
+yawl:EngineInstance__loadReader a yawl:Field ;
+    rdfs:label "_loadReader" .
+
+yawl:EngineInstance__busyRule a yawl:Field ;
+    rdfs:label "_busyRule" .
+
+yawl:EngineInstance__reqCollator a yawl:Field ;
+    rdfs:label "_reqCollator" .
+
+yawl:EngineInstance__combinedOutputter a yawl:Field ;
+    rdfs:label "_combinedOutputter" .
+
+yawl:EngineInstance__combinedOutputterMap a yawl:Field ;
+    rdfs:label "_combinedOutputterMap" .
+
+yawl:EngineInstance__sessionHandle a yawl:Field ;
+    rdfs:label "_sessionHandle" .
+
+yawl:EngineInstance__active a yawl:Field ;
+    rdfs:label "_active" .
+
+yawl:EngineInstance__initialized a yawl:Field ;
+    rdfs:label "_initialized" .
+
+yawl:EngineInstance__restored a yawl:Field ;
+    rdfs:label "_restored" .
+
+yawl:EngineInstance__authenticator a yawl:Field ;
+    rdfs:label "_authenticator" .
+
+yawl:EngineInstance__runningCases a yawl:Field ;
+    rdfs:label "_runningCases" .
+
+yawl:EngineInstance__busynessListeners a yawl:Field ;
+    rdfs:label "_busynessListeners" .
+
+yawl:EngineInstance__runningCasesComplexityMetric a yawl:Field ;
+    rdfs:label "_runningCasesComplexityMetric" .
+
+yawl:EngineInstance_YAWL_URL_TEMPLATE a yawl:Field ;
+    rdfs:label "YAWL_URL_TEMPLATE" .
+
+
+

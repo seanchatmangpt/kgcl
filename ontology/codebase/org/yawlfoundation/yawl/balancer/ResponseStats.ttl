@@ -1,0 +1,77 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.balancer.ResponseStats
+yawl:ResponseStats a yawl:Class ;
+    rdfs:label "ResponseStats" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/ResponseStats.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 17/6/17""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ResponseStats_add_1 ;
+    yawl:hasMethod yawl:ResponseStats_add_2 ;
+    yawl:hasMethod yawl:ResponseStats_updateOverall_3 ;
+    yawl:hasMethod yawl:ResponseStats_updateOverallMean_4 ;
+    yawl:hasMethod yawl:ResponseStats_report_5 ;
+    yawl:hasField yawl:ResponseStats__overall ;
+    yawl:hasField yawl:ResponseStats__previous ;
+    yawl:hasField yawl:ResponseStats__current ;
+    yawl:hasField yawl:ResponseStats__timestamp ;
+    .
+
+
+# Method: ResponseStats.add
+yawl:ResponseStats_add_1 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(double min, double max, double mean, int count, long timestamp, double timespan, List timings)" ;
+    .
+
+# Method: ResponseStats.add
+yawl:ResponseStats_add_2 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(List timings, long timestamp, long previous)" ;
+    .
+
+# Method: ResponseStats.updateOverall
+yawl:ResponseStats_updateOverall_3 a yawl:Method ;
+    rdfs:label "updateOverall" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateOverall(StatSet update)" ;
+    .
+
+# Method: ResponseStats.updateOverallMean
+yawl:ResponseStats_updateOverallMean_4 a yawl:Method ;
+    rdfs:label "updateOverallMean" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateOverallMean(StatSet update)" ;
+    .
+
+# Method: ResponseStats.report
+yawl:ResponseStats_report_5 a yawl:Method ;
+    rdfs:label "report" ;
+    yawl:returnType "String" ;
+    yawl:signature "String report(String name)" ;
+    .
+
+
+
+yawl:ResponseStats__overall a yawl:Field ;
+    rdfs:label "_overall" .
+
+yawl:ResponseStats__previous a yawl:Field ;
+    rdfs:label "_previous" .
+
+yawl:ResponseStats__current a yawl:Field ;
+    rdfs:label "_current" .
+
+yawl:ResponseStats__timestamp a yawl:Field ;
+    rdfs:label "_timestamp" .
+
+
+

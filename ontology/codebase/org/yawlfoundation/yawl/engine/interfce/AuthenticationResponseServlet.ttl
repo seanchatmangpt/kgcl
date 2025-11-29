@@ -1,0 +1,53 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.interfce.AuthenticationResponseServlet
+yawl:AuthenticationResponseServlet a yawl:Class ;
+    rdfs:label "AuthenticationResponseServlet" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_interfce ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/interfce/AuthenticationResponseServlet.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 18/03/2005 Time: 15:36:44""" ;
+    yawl:extends yawl:HttpServlet ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:AuthenticationResponseServlet_init_1 ;
+    yawl:hasMethod yawl:AuthenticationResponseServlet_doGet_2 ;
+    yawl:hasMethod yawl:AuthenticationResponseServlet_doPost_3 ;
+    yawl:hasField yawl:AuthenticationResponseServlet__controller ;
+    .
+
+
+# Method: AuthenticationResponseServlet.init
+yawl:AuthenticationResponseServlet_init_1 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init(ServletConfig servletConfig)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AuthenticationResponseServlet.doGet
+yawl:AuthenticationResponseServlet_doGet_2 a yawl:Method ;
+    rdfs:label "doGet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doGet(HttpServletRequest request, HttpServletResponse response)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AuthenticationResponseServlet.doPost
+yawl:AuthenticationResponseServlet_doPost_3 a yawl:Method ;
+    rdfs:label "doPost" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doPost(HttpServletRequest request, HttpServletResponse response)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:AuthenticationResponseServlet__controller a yawl:Field ;
+    rdfs:label "_controller" .
+
+
+

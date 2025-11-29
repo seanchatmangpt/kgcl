@@ -1,0 +1,60 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.rsInterface.UserConnection
+yawl:UserConnection a yawl:Class ;
+    rdfs:label "UserConnection" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_rsInterface ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/rsInterface/UserConnection.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 28/04/2010""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:UserConnection_getSessionID_1 ;
+    yawl:hasMethod yawl:UserConnection_getSessionHandle_2 ;
+    yawl:hasMethod yawl:UserConnection_getParticipant_3 ;
+    yawl:hasField yawl:UserConnection__jSessionID ;
+    yawl:hasField yawl:UserConnection__ySessionHandle ;
+    yawl:hasField yawl:UserConnection__participant ;
+    .
+
+
+# Method: UserConnection.getSessionID
+yawl:UserConnection_getSessionID_1 a yawl:Method ;
+    rdfs:label "getSessionID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSessionID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserConnection.getSessionHandle
+yawl:UserConnection_getSessionHandle_2 a yawl:Method ;
+    rdfs:label "getSessionHandle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSessionHandle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UserConnection.getParticipant
+yawl:UserConnection_getParticipant_3 a yawl:Method ;
+    rdfs:label "getParticipant" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant getParticipant()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:UserConnection__jSessionID a yawl:Field ;
+    rdfs:label "_jSessionID" .
+
+yawl:UserConnection__ySessionHandle a yawl:Field ;
+    rdfs:label "_ySessionHandle" .
+
+yawl:UserConnection__participant a yawl:Field ;
+    rdfs:label "_participant" .
+
+
+

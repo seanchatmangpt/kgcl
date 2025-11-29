@@ -1,0 +1,155 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.resourcing.jsf
+yawl:org_yawlfoundation_yawl_resourcing_jsf a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.jsf" .
+# Class: org.yawlfoundation.yawl.resourcing.jsf.FormViewer
+yawl:FormViewer a yawl:Class ;
+    rdfs:label "FormViewer" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/FormViewer.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 1/09/2009""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:FormViewer_getSessionBean_1 ;
+    yawl:hasMethod yawl:FormViewer_setSessionBean_2 ;
+    yawl:hasMethod yawl:FormViewer_display_3 ;
+    yawl:hasMethod yawl:FormViewer_postDisplay_4 ;
+    yawl:hasMethod yawl:FormViewer_showCustomForm_5 ;
+    yawl:hasMethod yawl:FormViewer_buildURI_6 ;
+    yawl:hasMethod yawl:FormViewer_adjustSessionTimeout_7 ;
+    yawl:hasMethod yawl:FormViewer_parseCustomFormURI_8 ;
+    yawl:hasMethod yawl:FormViewer_getSourceURI_9 ;
+    yawl:hasMethod yawl:FormViewer_postEditWIR_10 ;
+    yawl:hasMethod yawl:FormViewer_postCustomForm_11 ;
+    yawl:hasMethod yawl:FormViewer_completeWorkItem_12 ;
+    yawl:hasMethod yawl:FormViewer_evaluateXQuery_13 ;
+    yawl:hasField yawl:FormViewer__sb ;
+    yawl:hasField yawl:FormViewer__rm ;
+    yawl:hasField yawl:FormViewer__log ;
+    .
+
+
+# Method: FormViewer.getSessionBean
+yawl:FormViewer_getSessionBean_1 a yawl:Method ;
+    rdfs:label "getSessionBean" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getSessionBean()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FormViewer.setSessionBean
+yawl:FormViewer_setSessionBean_2 a yawl:Method ;
+    rdfs:label "setSessionBean" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSessionBean(SessionBean sb)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FormViewer.display
+yawl:FormViewer_display_3 a yawl:Method ;
+    rdfs:label "display" ;
+    yawl:returnType "String" ;
+    yawl:signature "String display(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FormViewer.postDisplay
+yawl:FormViewer_postDisplay_4 a yawl:Method ;
+    rdfs:label "postDisplay" ;
+    yawl:returnType "String" ;
+    yawl:signature "String postDisplay(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FormViewer.showCustomForm
+yawl:FormViewer_showCustomForm_5 a yawl:Method ;
+    rdfs:label "showCustomForm" ;
+    yawl:returnType "String" ;
+    yawl:signature "String showCustomForm(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FormViewer.buildURI
+yawl:FormViewer_buildURI_6 a yawl:Method ;
+    rdfs:label "buildURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String buildURI(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FormViewer.adjustSessionTimeout
+yawl:FormViewer_adjustSessionTimeout_7 a yawl:Method ;
+    rdfs:label "adjustSessionTimeout" ;
+    yawl:returnType "void" ;
+    yawl:signature "void adjustSessionTimeout(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FormViewer.parseCustomFormURI
+yawl:FormViewer_parseCustomFormURI_8 a yawl:Method ;
+    rdfs:label "parseCustomFormURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String parseCustomFormURI(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FormViewer.getSourceURI
+yawl:FormViewer_getSourceURI_9 a yawl:Method ;
+    rdfs:label "getSourceURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSourceURI()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FormViewer.postEditWIR
+yawl:FormViewer_postEditWIR_10 a yawl:Method ;
+    rdfs:label "postEditWIR" ;
+    yawl:returnType "String" ;
+    yawl:signature "String postEditWIR(WorkItemRecord wir)" ;
+    rdfs:comment """updates a workitem after editing on a dynamic form""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FormViewer.postCustomForm
+yawl:FormViewer_postCustomForm_11 a yawl:Method ;
+    rdfs:label "postCustomForm" ;
+    yawl:returnType "String" ;
+    yawl:signature "String postCustomForm(WorkItemRecord wir)" ;
+    rdfs:comment """takes necessary action after editing a custom form""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FormViewer.completeWorkItem
+yawl:FormViewer_completeWorkItem_12 a yawl:Method ;
+    rdfs:label "completeWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String completeWorkItem(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FormViewer.evaluateXQuery
+yawl:FormViewer_evaluateXQuery_13 a yawl:Method ;
+    rdfs:label "evaluateXQuery" ;
+    yawl:returnType "String" ;
+    yawl:signature "String evaluateXQuery(String s, Document dataDoc)" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:FormViewer__sb a yawl:Field ;
+    rdfs:label "_sb" .
+
+yawl:FormViewer__rm a yawl:Field ;
+    rdfs:label "_rm" .
+
+yawl:FormViewer__log a yawl:Field ;
+    rdfs:label "_log" .
+
+
+

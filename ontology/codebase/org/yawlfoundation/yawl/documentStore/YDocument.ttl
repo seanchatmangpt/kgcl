@@ -1,0 +1,163 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.documentStore.YDocument
+yawl:YDocument a yawl:Class ;
+    rdfs:label "YDocument" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_documentStore ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/documentStore/YDocument.java"^^xsd:string ;
+    rdfs:comment """Holds a binary file (of any type) to be passed as work item data. Note that the file itself is located in the 'Document Store' service, only its name and id are passed to and from the engine @author Michael Adams @date 18/11/11""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YDocument_getId_1 ;
+    yawl:hasMethod yawl:YDocument_setId_2 ;
+    yawl:hasMethod yawl:YDocument_hasValidId_3 ;
+    yawl:hasMethod yawl:YDocument_getCaseId_4 ;
+    yawl:hasMethod yawl:YDocument_setCaseId_5 ;
+    yawl:hasMethod yawl:YDocument_getDocument_6 ;
+    yawl:hasMethod yawl:YDocument_getDocumentSize_7 ;
+    yawl:hasMethod yawl:YDocument_setDocument_8 ;
+    yawl:hasMethod yawl:YDocument_setDocument_9 ;
+    yawl:hasMethod yawl:YDocument_setDocument_10 ;
+    yawl:hasMethod yawl:YDocument_setDocument_11 ;
+    yawl:hasMethod yawl:YDocument_writeToFile_12 ;
+    yawl:hasMethod yawl:YDocument_writeToFile_13 ;
+    yawl:hasField yawl:YDocument_id ;
+    yawl:hasField yawl:YDocument_caseId ;
+    yawl:hasField yawl:YDocument_document ;
+    .
+
+
+# Method: YDocument.getId
+yawl:YDocument_getId_1 a yawl:Method ;
+    rdfs:label "getId" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getId()" ;
+    rdfs:comment """Gets the document identifier @return the current document identifier""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDocument.setId
+yawl:YDocument_setId_2 a yawl:Method ;
+    rdfs:label "setId" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setId(long id)" ;
+    rdfs:comment """Sets the document identifier @param id the document identifier to set""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDocument.hasValidId
+yawl:YDocument_hasValidId_3 a yawl:Method ;
+    rdfs:label "hasValidId" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasValidId()" ;
+    rdfs:comment """Checks that the document identifier has a valid value @return true if the identifier is set and valid""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDocument.getCaseId
+yawl:YDocument_getCaseId_4 a yawl:Method ;
+    rdfs:label "getCaseId" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseId()" ;
+    rdfs:comment """Gets the case id for this document @return the case id, or an empty String id it has not been set""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDocument.setCaseId
+yawl:YDocument_setCaseId_5 a yawl:Method ;
+    rdfs:label "setCaseId" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCaseId(String id)" ;
+    rdfs:comment """Sets the case id for this document @param id the case id to set for this document""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDocument.getDocument
+yawl:YDocument_getDocument_6 a yawl:Method ;
+    rdfs:label "getDocument" ;
+    yawl:returnType "byte" ;
+    yawl:signature "byte getDocument()" ;
+    rdfs:comment """Gets the binary file stored in this document @return the store binary file, as a byte array""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDocument.getDocumentSize
+yawl:YDocument_getDocumentSize_7 a yawl:Method ;
+    rdfs:label "getDocumentSize" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getDocumentSize()" ;
+    rdfs:comment """Gets the size of the store binary file @return the size of the file as a number of bytes""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDocument.setDocument
+yawl:YDocument_setDocument_8 a yawl:Method ;
+    rdfs:label "setDocument" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDocument(byte doc)" ;
+    rdfs:comment """Sets the binary file to be stored in this document @param doc a byte array representing the contents of a binary file""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDocument.setDocument
+yawl:YDocument_setDocument_9 a yawl:Method ;
+    rdfs:label "setDocument" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDocument(File file)" ;
+    rdfs:comment """Sets the binary file to be stored in this document @param file a File object containing a reference to a disk file to be read into this document @throws IOException if there's a problem loading the file""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDocument.setDocument
+yawl:YDocument_setDocument_10 a yawl:Method ;
+    rdfs:label "setDocument" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDocument(String fileName)" ;
+    rdfs:comment """Sets the binary file to be stored in this document @param fileName a fully qualified path and file name of a disk file to be read into this document @throws IOException if there's a problem loading the file""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDocument.setDocument
+yawl:YDocument_setDocument_11 a yawl:Method ;
+    rdfs:label "setDocument" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDocument(InputStream in)" ;
+    rdfs:comment """Sets the binary file to be stored in this document @param in a stream from which the contents of the binary file may be read @throws IOException if there's a problem loading the file""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDocument.writeToFile
+yawl:YDocument_writeToFile_12 a yawl:Method ;
+    rdfs:label "writeToFile" ;
+    yawl:returnType "void" ;
+    yawl:signature "void writeToFile(String fileName)" ;
+    rdfs:comment """Writes the binary file stored in this document to a disk file @param fileName a fully qualified path and file name of a disk file to write @throws IOException if there's a problem writing the file""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDocument.writeToFile
+yawl:YDocument_writeToFile_13 a yawl:Method ;
+    rdfs:label "writeToFile" ;
+    yawl:returnType "void" ;
+    yawl:signature "void writeToFile(File file)" ;
+    rdfs:comment """Writes the binary file stored in this document to a disk file @param file a File object containing a reference to a disk file to be written to @throws IOException if there's a problem writing the file""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YDocument_id a yawl:Field ;
+    rdfs:label "id" .
+
+yawl:YDocument_caseId a yawl:Field ;
+    rdfs:label "caseId" .
+
+yawl:YDocument_document a yawl:Field ;
+    rdfs:label "document" .
+
+
+

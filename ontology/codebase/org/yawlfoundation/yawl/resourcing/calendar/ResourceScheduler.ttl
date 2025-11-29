@@ -1,0 +1,558 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.calendar.ResourceScheduler
+yawl:ResourceScheduler a yawl:Class ;
+    rdfs:label "ResourceScheduler" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_calendar ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/calendar/ResourceScheduler.java"^^xsd:string ;
+    rdfs:comment """The implementation of server side of the calendar gateway (Interface S). @author Michael Adams @date 2/11/2010""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ResourceScheduler_getInstance_1 ;
+    yawl:hasMethod yawl:ResourceScheduler_saveReservations_2 ;
+    yawl:hasMethod yawl:ResourceScheduler_saveReservations_3 ;
+    yawl:hasMethod yawl:ResourceScheduler_getReservations_4 ;
+    yawl:hasMethod yawl:ResourceScheduler_getReservations_5 ;
+    yawl:hasMethod yawl:ResourceScheduler_getAvailability_6 ;
+    yawl:hasMethod yawl:ResourceScheduler_getAvailability_7 ;
+    yawl:hasMethod yawl:ResourceScheduler_reassignEntryIfPossible_8 ;
+    yawl:hasMethod yawl:ResourceScheduler_getCalendarEntryIDsForCase_9 ;
+    yawl:hasMethod yawl:ResourceScheduler_getCalendarEntriesForCase_10 ;
+    yawl:hasMethod yawl:ResourceScheduler_notifyStatusChange_11 ;
+    yawl:hasMethod yawl:ResourceScheduler_validatePlan_12 ;
+    yawl:hasMethod yawl:ResourceScheduler_validateActivity_13 ;
+    yawl:hasMethod yawl:ResourceScheduler_checkReservations_14 ;
+    yawl:hasMethod yawl:ResourceScheduler_saveReservations_15 ;
+    yawl:hasMethod yawl:ResourceScheduler_checkReservation_16 ;
+    yawl:hasMethod yawl:ResourceScheduler_saveReservation_17 ;
+    yawl:hasMethod yawl:ResourceScheduler_getActualResourceIfAvailable_18 ;
+    yawl:hasMethod yawl:ResourceScheduler_getRandomAvailableResource_19 ;
+    yawl:hasMethod yawl:ResourceScheduler_getRandomAvailableResource_20 ;
+    yawl:hasMethod yawl:ResourceScheduler_getActualResourceList_21 ;
+    yawl:hasMethod yawl:ResourceScheduler_getActualResource_22 ;
+    yawl:hasMethod yawl:ResourceScheduler_removeResourceFromList_23 ;
+    yawl:hasMethod yawl:ResourceScheduler_updateReservation_24 ;
+    yawl:hasMethod yawl:ResourceScheduler_makeReservation_25 ;
+    yawl:hasMethod yawl:ResourceScheduler_checkMakeReservation_26 ;
+    yawl:hasMethod yawl:ResourceScheduler_checkUpdateReservation_27 ;
+    yawl:hasMethod yawl:ResourceScheduler_reconcileReservation_28 ;
+    yawl:hasMethod yawl:ResourceScheduler_handleCancellations_29 ;
+    yawl:hasMethod yawl:ResourceScheduler_updateEntry_30 ;
+    yawl:hasMethod yawl:ResourceScheduler_checkTimeUpdatesForClashes_31 ;
+    yawl:hasMethod yawl:ResourceScheduler_convertReservationID_32 ;
+    yawl:hasMethod yawl:ResourceScheduler_logCancellation_33 ;
+    yawl:hasMethod yawl:ResourceScheduler_getCalendarEntry_34 ;
+    yawl:hasMethod yawl:ResourceScheduler_createCalendarEntry_35 ;
+    yawl:hasMethod yawl:ResourceScheduler_addTransientCalendarEntry_36 ;
+    yawl:hasMethod yawl:ResourceScheduler_updateTransientCalendarEntry_37 ;
+    yawl:hasMethod yawl:ResourceScheduler_compareStatuses_38 ;
+    yawl:hasMethod yawl:ResourceScheduler_clearCaches_39 ;
+    yawl:hasMethod yawl:ResourceScheduler_setResourceRecord_40 ;
+    yawl:hasMethod yawl:ResourceScheduler_setResourceBusy_41 ;
+    yawl:hasMethod yawl:ResourceScheduler_commitOrRollback_42 ;
+    yawl:hasMethod yawl:ResourceScheduler_reassignEntry_43 ;
+    yawl:hasMethod yawl:ResourceScheduler_shuffleEntryIfPossible_44 ;
+    yawl:hasMethod yawl:ResourceScheduler_shuffleEntry_45 ;
+    yawl:hasMethod yawl:ResourceScheduler_reconstituteResourceRecord_46 ;
+    yawl:hasMethod yawl:ResourceScheduler_isPhase_47 ;
+    yawl:hasMethod yawl:ResourceScheduler_getAvailabilityStatus_48 ;
+    yawl:hasMethod yawl:ResourceScheduler_checkRequestedStatusToBe_49 ;
+    yawl:hasMethod yawl:ResourceScheduler_checkIfPreviouslySaved_50 ;
+    yawl:hasMethod yawl:ResourceScheduler_unchangedReservation_51 ;
+    yawl:hasField yawl:ResourceScheduler__me ;
+    yawl:hasField yawl:ResourceScheduler__calendar ;
+    yawl:hasField yawl:ResourceScheduler__rm ;
+    yawl:hasField yawl:ResourceScheduler__uLogger ;
+    yawl:hasField yawl:ResourceScheduler__reassignedIDs ;
+    yawl:hasField yawl:ResourceScheduler__timeUpdates ;
+    .
+
+
+# Method: ResourceScheduler.getInstance
+yawl:ResourceScheduler_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "ResourceScheduler" ;
+    yawl:signature "ResourceScheduler getInstance()" ;
+    rdfs:comment """Gets an instance of this ResourceScheduler object @return this ResourceScheduler instance""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ResourceScheduler.saveReservations
+yawl:ResourceScheduler_saveReservations_2 a yawl:Method ;
+    rdfs:label "saveReservations" ;
+    yawl:returnType "String" ;
+    yawl:signature "String saveReservations(String planXML, String agent, boolean checkOnly)" ;
+    rdfs:comment """Saves and/or updates the reservations contained in a utilisation plan @param planXML an XML reresentation of a utilisation plan @param agent the user id of the user or service that generated the plan @param checkOnly if true, checks if the reservations would succeed only, makes no changes @return an XML representation of the updated plan""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceScheduler.saveReservations
+yawl:ResourceScheduler_saveReservations_3 a yawl:Method ;
+    rdfs:label "saveReservations" ;
+    yawl:returnType "UtilisationPlan" ;
+    yawl:signature "UtilisationPlan saveReservations(UtilisationPlan plan, String agent, boolean checkOnly)" ;
+    rdfs:comment """Saves and/or updates the reservations contained in a utilisation plan @param plan the utilisation plan @param agent the user id of the user or service that generated the plan @param checkOnly if true, checks if the reservations would succeed only, makes no changes @return the updated plan""" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceScheduler.getReservations
+yawl:ResourceScheduler_getReservations_4 a yawl:Method ;
+    rdfs:label "getReservations" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getReservations(String resourceXML, long from, long to)" ;
+    rdfs:comment """Gets all the utilisation plans in which a resource is involved for the specified period @param resourceXML an XML representation of a utilisation resource object, containing reference(s) to the resources to get plans for @param from the start of the date/time range @param to the end of the date/time range @return an XML representation of the matching utilisation plans""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceScheduler.getReservations
+yawl:ResourceScheduler_getReservations_5 a yawl:Method ;
+    rdfs:label "getReservations" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getReservations(UtilisationResource uResource, long from, long to)" ;
+    rdfs:comment """Gets the set of utilisation plans in which a resource is involved for the specified period @param uResource a utilisation resource object, containing references to the resource(s) to get plans for @param from the start of the date/time range @param to the end of the date/time range @return the set of matching utilisation plans""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceScheduler.getAvailability
+yawl:ResourceScheduler_getAvailability_6 a yawl:Method ;
+    rdfs:label "getAvailability" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAvailability(String resourceXML, long from, long to)" ;
+    rdfs:comment """Gets the available time slots for a datetime range for each resource referenced within the given resource XML record. @param resourceXML an XML String equivalent of a UtilisationResource record @param from the start of the date/time range @param to the end of the date/time range @return a consolidated list of timeslots when the resources are available""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceScheduler.getAvailability
+yawl:ResourceScheduler_getAvailability_7 a yawl:Method ;
+    rdfs:label "getAvailability" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAvailability(UtilisationResource uResource, long from, long to)" ;
+    rdfs:comment """Gets the available time slots for a datetime range for each resource referenced within the given resource XML record. @param uResource a UtilisationResource record referencing resource(s) @param from the start of the date/time range @param to the end of the date/time range @return a consolidated list of timeslots when the resources are available""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceScheduler.reassignEntryIfPossible
+yawl:ResourceScheduler_reassignEntryIfPossible_8 a yawl:Method ;
+    rdfs:label "reassignEntryIfPossible" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean reassignEntryIfPossible(CalendarEntry entry, boolean updating)" ;
+    rdfs:comment """Seeks another AbstractResource that meets the original UtilisationResource parameters and is available, and if found reassigns the calendar entry to the found resource. @param entry the CalendarEntry containing a reference to a resource that is no longer available, but may be replaced by another resource of the same role, capability or category @param updating true if the caller is updating an existing calendar entry, false if it is a new entry @return true if the resource has been reassigned""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ResourceScheduler.getCalendarEntryIDsForCase
+yawl:ResourceScheduler_getCalendarEntryIDsForCase_9 a yawl:Method ;
+    rdfs:label "getCalendarEntryIDsForCase" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getCalendarEntryIDsForCase(String caseID)" ;
+    rdfs:comment """Gets the set of all calendar entry ids for a case @param caseID the id of case to get the entry ids for @return the set of ids""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ResourceScheduler.getCalendarEntriesForCase
+yawl:ResourceScheduler_getCalendarEntriesForCase_10 a yawl:Method ;
+    rdfs:label "getCalendarEntriesForCase" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getCalendarEntriesForCase(String caseID)" ;
+    rdfs:comment """Gets a list of all calendar entries for a case @param caseID the id of case to get the entry ids for @return the list of calendar entries""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ResourceScheduler.notifyStatusChange
+yawl:ResourceScheduler_notifyStatusChange_11 a yawl:Method ;
+    rdfs:label "notifyStatusChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void notifyStatusChange(CalendarEntry calEntry)" ;
+    rdfs:comment """Builds an appropriate data set and announces a status change for a calendar record. @param calEntry the calendar record that has had a status change""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ResourceScheduler.validatePlan
+yawl:ResourceScheduler_validatePlan_12 a yawl:Method ;
+    rdfs:label "validatePlan" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validatePlan(UtilisationPlan plan)" ;
+    rdfs:comment """Validates Plan values. @param plan the plan to validate @return true if the validation passed, false if failed""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.validateActivity
+yawl:ResourceScheduler_validateActivity_13 a yawl:Method ;
+    rdfs:label "validateActivity" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validateActivity(Activity activity)" ;
+    rdfs:comment """Validates Activity values. @param activity the activity to validate @return true if the validation passed, false if failed""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.checkReservations
+yawl:ResourceScheduler_checkReservations_14 a yawl:Method ;
+    rdfs:label "checkReservations" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkReservations(UtilisationPlan plan)" ;
+    rdfs:comment """Checks whether the reservations for the resources contained in the plan would succeed against the current state of the calendar @param plan the plan to check""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.saveReservations
+yawl:ResourceScheduler_saveReservations_15 a yawl:Method ;
+    rdfs:label "saveReservations" ;
+    yawl:returnType "void" ;
+    yawl:signature "void saveReservations(UtilisationPlan plan, String agent)" ;
+    rdfs:comment """Attempts to save the reservations for the resources contained in the plan to the calendar @param plan the plan to save @param agent the service instigating the save""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.checkReservation
+yawl:ResourceScheduler_checkReservation_16 a yawl:Method ;
+    rdfs:label "checkReservation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkReservation(Reservation reservation, long from, long to)" ;
+    rdfs:comment """Checks if a reservation for a period would succeed. If it would not, the check will raise an exception that results in an error message being added to the reservation. @param reservation the reservation to check @param from the start of the period @param to the end of the period""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.saveReservation
+yawl:ResourceScheduler_saveReservation_17 a yawl:Method ;
+    rdfs:label "saveReservation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void saveReservation(Reservation reservation, long from, long to, CalendarLogEntry logEntry)" ;
+    rdfs:comment """Attempts to save a reservation to the calendar. If the save doesn't succeed, an exception will be raised that results in an error message being added to the reservation. @param reservation the reservation to save @param from the start of the period @param to the end of the period @param logEntry a partially populated log entry""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.getActualResourceIfAvailable
+yawl:ResourceScheduler_getActualResourceIfAvailable_18 a yawl:Method ;
+    rdfs:label "getActualResourceIfAvailable" ;
+    yawl:returnType "AbstractResource" ;
+    yawl:signature "AbstractResource getActualResourceIfAvailable(Reservation reservation, long from, long to)" ;
+    rdfs:comment """Derives one resource from the resource specified in a reservation that is available for the period requested. @param reservation the reservation to save @param from the start of the period @param to the end of the period @return the available resource, if possible @throws CalendarException if a resource could not be resolved from the ids in the reservation, or if no resource is available for the period, or if the status-to-be in the reservation is invalid""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.getRandomAvailableResource
+yawl:ResourceScheduler_getRandomAvailableResource_19 a yawl:Method ;
+    rdfs:label "getRandomAvailableResource" ;
+    yawl:returnType "AbstractResource" ;
+    yawl:signature "AbstractResource getRandomAvailableResource(List resourceList, long from, long to, String status, int workload)" ;
+    rdfs:comment """Extracts a single resource from the list passed that is available for the specified period @param resourceList the list of resources to choose from @param from the start of the period @param to the end of the period @param status the desired booking status @param workload the percentage workload required from the resource @return an available resource from the list, if any @throws CalendarException if the list is null or empty, or none of the resources in the list is available""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.getRandomAvailableResource
+yawl:ResourceScheduler_getRandomAvailableResource_20 a yawl:Method ;
+    rdfs:label "getRandomAvailableResource" ;
+    yawl:returnType "AbstractResource" ;
+    yawl:signature "AbstractResource getRandomAvailableResource(List resourceList, CalendarEntry calEntry)" ;
+    rdfs:comment """Extracts a single resource from the list passed that is available for the specified potential calendar entry @param resourceList the list of resources to choose from @param calEntry the potential calendar entry @return an available resource from the list, if any @throws CalendarException if the list is null or empty, or none of the resources in the list is available""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.getActualResourceList
+yawl:ResourceScheduler_getActualResourceList_21 a yawl:Method ;
+    rdfs:label "getActualResourceList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getActualResourceList(UtilisationResource resource)" ;
+    rdfs:comment """Builds a list of resources from the ids specified in a reservation's resource data. @param resource the resource data set of a reservation. May contain a single id, OR a Role and (optional) Capability pair OR a Capability (and no Role) OR a Category and (optional) Subcategory of a non-human resource. @return a list of resources matching the ids specified""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.getActualResource
+yawl:ResourceScheduler_getActualResource_22 a yawl:Method ;
+    rdfs:label "getActualResource" ;
+    yawl:returnType "AbstractResource" ;
+    yawl:signature "AbstractResource getActualResource(String resourceID)" ;
+    rdfs:comment """Gets the resource (participant or non-human) matching the specified id. @param resourceID the id of the resource @return the matching resource""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.removeResourceFromList
+yawl:ResourceScheduler_removeResourceFromList_23 a yawl:Method ;
+    rdfs:label "removeResourceFromList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeResourceFromList(List resourceList, String id)" ;
+    rdfs:comment """removes a resource from a list of resources, if a match is found @param resourceList the list of resources @param id the id of the resource to remove""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.updateReservation
+yawl:ResourceScheduler_updateReservation_24 a yawl:Method ;
+    rdfs:label "updateReservation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateReservation(Reservation reservation, long from, long to, CalendarLogEntry logEntry)" ;
+    rdfs:comment """Updates the status of a reservation stored in the calendar. @param reservation the updated reservation @param logEntry the matching log entry of the update @param from the reservation start time @param to the reservation end time @throws CalendarException if there's a problem locating the record or saving the update @throws ScheduleStateException if the status transition is invalid""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.makeReservation
+yawl:ResourceScheduler_makeReservation_25 a yawl:Method ;
+    rdfs:label "makeReservation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void makeReservation(Reservation reservation, AbstractResource resource, CalendarEntry calEntry, CalendarLogEntry logEntry)" ;
+    rdfs:comment """Stores a reservation in the calendar. @param reservation the reservation to store @param resource the resource to make the reservation for @param calEntry the calendar entry to save, representing the resource @param logEntry the entry to save to the calendar log @throws CalendarException if there's a problem saving the reservation @throws ScheduleStateException if the status transition is invlaid""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.checkMakeReservation
+yawl:ResourceScheduler_checkMakeReservation_26 a yawl:Method ;
+    rdfs:label "checkMakeReservation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkMakeReservation(Reservation reservation, long from, long to)" ;
+    rdfs:comment """Checks whether a new reservation can by made for the specified resource and period (i.e. there are no conflicts with existing reservations). @param reservation the reservation to store @param from the start of the period @param to the end of the period @throws CalendarException if the reservation's 'statusToBe' is invalid""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.checkUpdateReservation
+yawl:ResourceScheduler_checkUpdateReservation_27 a yawl:Method ;
+    rdfs:label "checkUpdateReservation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkUpdateReservation(Reservation reservation)" ;
+    rdfs:comment """Checks whether updating the reservation in the calendar will succeed. @param reservation the reservation to check @throws CalendarException if the reservation's 'statusToBe' is invalid @throws ScheduleStateException if the update involves an invalid status transition""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.reconcileReservation
+yawl:ResourceScheduler_reconcileReservation_28 a yawl:Method ;
+    rdfs:label "reconcileReservation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reconcileReservation(Reservation reservation, long from, long to, CalendarLogEntry logEntry)" ;
+    rdfs:comment """Reconciles and updates an EOU (end-of-utilisation) plan with the stored SOU (start-of-utilisation) plan. @param reservation the reservation to reconcile @param from the start of the period @param to actual end of the period @throws CalendarException if the reservation's 'statusToBe' is invalid @param logEntry the log entry associated with the reservation @throws CalendarException if the reconciliation causes a clash in the calendar""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.handleCancellations
+yawl:ResourceScheduler_handleCancellations_29 a yawl:Method ;
+    rdfs:label "handleCancellations" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCancellations(String caseID, String activityName, Set entryIDs)" ;
+    rdfs:comment """Removes any reservations made in an earlier version of the plan that are no longer included in the current plan @param caseID the case id of the plan @param activityName the name of the activity @param entryIDs the ids of all the reservations for the activity""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.updateEntry
+yawl:ResourceScheduler_updateEntry_30 a yawl:Method ;
+    rdfs:label "updateEntry" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateEntry(CalendarEntry entry, long from, long to, int workload)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.checkTimeUpdatesForClashes
+yawl:ResourceScheduler_checkTimeUpdatesForClashes_31 a yawl:Method ;
+    rdfs:label "checkTimeUpdatesForClashes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkTimeUpdatesForClashes()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.convertReservationID
+yawl:ResourceScheduler_convertReservationID_32 a yawl:Method ;
+    rdfs:label "convertReservationID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long convertReservationID(Reservation reservation)" ;
+    rdfs:comment """Converts the reservation id stored in a reservation record to its original 'long' type @param reservation the reservation with the id @return the id as a long value @throws CalendarException if the conversion is unsuccessful""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.logCancellation
+yawl:ResourceScheduler_logCancellation_33 a yawl:Method ;
+    rdfs:label "logCancellation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logCancellation(long entryID, String caseID, String activityName)" ;
+    rdfs:comment """Adds a record to the calendar log for a reservation cancellation @param entryID the id of the reservation that has been cancelled @param caseID the reservation's case id @param activityName the name of the activity that contained the reservation""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.getCalendarEntry
+yawl:ResourceScheduler_getCalendarEntry_34 a yawl:Method ;
+    rdfs:label "getCalendarEntry" ;
+    yawl:returnType "CalendarEntry" ;
+    yawl:signature "CalendarEntry getCalendarEntry(long entryID)" ;
+    rdfs:comment """Gets a Calendar entry matching the specified id @param entryID the id to search for @return the matching calendar entry @throws CalendarException if no match is found""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.createCalendarEntry
+yawl:ResourceScheduler_createCalendarEntry_35 a yawl:Method ;
+    rdfs:label "createCalendarEntry" ;
+    yawl:returnType "CalendarEntry" ;
+    yawl:signature "CalendarEntry createCalendarEntry(Reservation reservation, AbstractResource resource, long from, long to, String agent)" ;
+    rdfs:comment """Creates a new CalendarEntry object, ready for storing in the calendar. @param reservation a Reservation record @param resource the resource associated with the reservation @param from the start of the period @param to the end of the period @param agent the userid of the user or service creating the entry @return the newly constructed calendar entry @throws CalendarException if the reservation's 'statusToBe' is invalid""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.addTransientCalendarEntry
+yawl:ResourceScheduler_addTransientCalendarEntry_36 a yawl:Method ;
+    rdfs:label "addTransientCalendarEntry" ;
+    yawl:returnType "long" ;
+    yawl:signature "long addTransientCalendarEntry(AbstractResource resource, long from, long to, Reservation reservation)" ;
+    rdfs:comment """Adds a calendar entry temporarily, to allow reservation checking to proceed @param resource the resource to add @param from the start of the period @param to the end of the period @param reservation the reservation containing the resource to add @return the entry id of the newly constructed calendar entry @throws CalendarException if the reservation's 'statusToBe' is invalid""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.updateTransientCalendarEntry
+yawl:ResourceScheduler_updateTransientCalendarEntry_37 a yawl:Method ;
+    rdfs:label "updateTransientCalendarEntry" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateTransientCalendarEntry(long entryID, String statusToBe)" ;
+    rdfs:comment """Updates  a calendar entry temporarily, to allow reservation checking to proceed @param entryID the entry to update @param statusToBe the new status to check @return the pre-update status of the entry @throws CalendarException if the reservation's 'statusToBe' is invalid @throws ScheduleStateException if the status change is invalid""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.compareStatuses
+yawl:ResourceScheduler_compareStatuses_38 a yawl:Method ;
+    rdfs:label "compareStatuses" ;
+    yawl:returnType "void" ;
+    yawl:signature "void compareStatuses(String current, String toBe)" ;
+    rdfs:comment """Checks that the status-to-be of an update reservation request is not the same as its current status. @param current the current status @param toBe the requested status-to-be @throws ScheduleStateException if the current and requested statuses are identical""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.clearCaches
+yawl:ResourceScheduler_clearCaches_39 a yawl:Method ;
+    rdfs:label "clearCaches" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clearCaches()" ;
+    rdfs:comment """Clears the reassigned id cache""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.setResourceRecord
+yawl:ResourceScheduler_setResourceRecord_40 a yawl:Method ;
+    rdfs:label "setResourceRecord" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setResourceRecord(CalendarLogEntry logEntry)" ;
+    rdfs:comment """Sets the relevant resource xml for a log entry @param logEntry""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.setResourceBusy
+yawl:ResourceScheduler_setResourceBusy_41 a yawl:Method ;
+    rdfs:label "setResourceBusy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setResourceBusy(String caseID, String id, boolean busy)" ;
+    rdfs:comment """Marks a resource as being in use @param id the id of the resource @param busy true if 'busy', false if 'released'""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.commitOrRollback
+yawl:ResourceScheduler_commitOrRollback_42 a yawl:Method ;
+    rdfs:label "commitOrRollback" ;
+    yawl:returnType "void" ;
+    yawl:signature "void commitOrRollback(boolean commit)" ;
+    rdfs:comment """Do a final commit or rollback of all the additions and updates made to the calendar and log for a complete actioning of a plan @param commit if true, all changes are committed; if false, all changes are rolled back""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.reassignEntry
+yawl:ResourceScheduler_reassignEntry_43 a yawl:Method ;
+    rdfs:label "reassignEntry" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean reassignEntry(CalendarEntry entry, CalendarLogEntry logEntry, UtilisationResource uResource, boolean updating)" ;
+    rdfs:comment """Reassign a calendar entry to another resource in the same grouping (role, capability or category/subcategory) @param entry the calendar entry to reassign @param logEntry the matching log entry for the calendar entry @param uResource the resource xml specifying the group object @param updating true if this is an plan update, false if it is a new plan @return true if the entry was able to be reassigned to a different resource""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.shuffleEntryIfPossible
+yawl:ResourceScheduler_shuffleEntryIfPossible_44 a yawl:Method ;
+    rdfs:label "shuffleEntryIfPossible" ;
+    yawl:returnType "AbstractResource" ;
+    yawl:signature "AbstractResource shuffleEntryIfPossible(UtilisationResource origResource, List origResourceList, long from, long to)" ;
+    rdfs:comment """Find a resource that is currently booked for a period as the member of a grouping (role, capability, category/subcategory), that can be replaced by another member of that group, so that the resource can be used to satisfy another booking for which no free resource could be found. For example, if role X contains resources R1 and R2, and role Y also contains R1, and R1 has been chosen to satisfy an entry E1 for X, and a request for an entry E2 of Y is received, then an attempt is made in this meth""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.shuffleEntry
+yawl:ResourceScheduler_shuffleEntry_45 a yawl:Method ;
+    rdfs:label "shuffleEntry" ;
+    yawl:returnType "AbstractResource" ;
+    yawl:signature "AbstractResource shuffleEntry(CalendarEntry entry, List resourceList, UtilisationResource origResource)" ;
+    rdfs:comment """Find a resource that is currently booked for a period as the member of a grouping (role, capability, category/subcategory), that can be replaced by another member of that group, so that the resource can be used to satisfy another booking for which no free resource could be found. For example, if role X contains resources R1 and R2, and role Y also contains R1, and R1 has been chosen to satisfy an entry E1 for X, and a request for an entry E2 of Y is received, then an attempt is made in this meth""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.reconstituteResourceRecord
+yawl:ResourceScheduler_reconstituteResourceRecord_46 a yawl:Method ;
+    rdfs:label "reconstituteResourceRecord" ;
+    yawl:returnType "UtilisationResource" ;
+    yawl:signature "UtilisationResource reconstituteResourceRecord(String resourceRec)" ;
+    rdfs:comment """Creates a UtilisationResource object from its xml equivalent @param resourceRec the xml string @return a populated resource record""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.isPhase
+yawl:ResourceScheduler_isPhase_47 a yawl:Method ;
+    rdfs:label "isPhase" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isPhase(long calendarKey, Activity phase)" ;
+    rdfs:comment """Checks if a log entry has the specified phase @param calendarKey the id of the log entry to check @param phase the phase to check for @return true if the log entry matches the phase""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.getAvailabilityStatus
+yawl:ResourceScheduler_getAvailabilityStatus_48 a yawl:Method ;
+    rdfs:label "getAvailabilityStatus" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAvailabilityStatus(String statusStr, boolean checkOnly)" ;
+    rdfs:comment """Consolidates a status into a simpler one in these cases: - if checkonly is true, status is one of unknown/available/unavailable - else, status is one of unknown/available/requested/reserved/unavailable @param statusStr the status to consolidate @param checkOnly true if the call is a check, false if it is a save @return the consolidated status @throws CalendarException if statusStr is not a valid status""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.checkRequestedStatusToBe
+yawl:ResourceScheduler_checkRequestedStatusToBe_49 a yawl:Method ;
+    rdfs:label "checkRequestedStatusToBe" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkRequestedStatusToBe(String statusStr)" ;
+    rdfs:comment """Checks that a supplied updated status for a save reservation request is one of the four valid values: available, unavailable, requested, reserved @param statusStr the status string to check @throws CalendarException if the status string is invalid""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.checkIfPreviouslySaved
+yawl:ResourceScheduler_checkIfPreviouslySaved_50 a yawl:Method ;
+    rdfs:label "checkIfPreviouslySaved" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkIfPreviouslySaved(CalendarLogEntry logEntry, long from, long to)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceScheduler.unchangedReservation
+yawl:ResourceScheduler_unchangedReservation_51 a yawl:Method ;
+    rdfs:label "unchangedReservation" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean unchangedReservation(CalendarEntry calEntry, String statusToBe, long from, long to, int workload)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:ResourceScheduler__me a yawl:Field ;
+    rdfs:label "_me" .
+
+yawl:ResourceScheduler__calendar a yawl:Field ;
+    rdfs:label "_calendar" .
+
+yawl:ResourceScheduler__rm a yawl:Field ;
+    rdfs:label "_rm" .
+
+yawl:ResourceScheduler__uLogger a yawl:Field ;
+    rdfs:label "_uLogger" .
+
+yawl:ResourceScheduler__reassignedIDs a yawl:Field ;
+    rdfs:label "_reassignedIDs" .
+
+yawl:ResourceScheduler__timeUpdates a yawl:Field ;
+    rdfs:label "_timeUpdates" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_resourcing_constraints a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.constraints" .
+
+

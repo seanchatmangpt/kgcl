@@ -1,0 +1,75 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.cli.CliDownloader
+yawl:CliDownloader a yawl:Class ;
+    rdfs:label "CliDownloader" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_cli ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/cli/CliDownloader.java"^^xsd:string ;
+    rdfs:comment """Override of GUI-based Downloader for CLI @author Michael Adams @author Joerg Evermann @date 3/11/2015""" ;
+    yawl:extends yawl:Downloader ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CliDownloader_setProgressPanel_1 ;
+    yawl:hasMethod yawl:CliDownloader_download_2 ;
+    yawl:hasMethod yawl:CliDownloader_cancel_3 ;
+    yawl:hasMethod yawl:CliDownloader_isComplete_4 ;
+    yawl:hasMethod yawl:CliDownloader_getTotalProgress_5 ;
+    yawl:hasField yawl:CliDownloader__progressPanel ;
+    .
+
+
+# Method: CliDownloader.setProgressPanel
+yawl:CliDownloader_setProgressPanel_1 a yawl:Method ;
+    rdfs:label "setProgressPanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setProgressPanel(CliProgressPanel panel)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CliDownloader.download
+yawl:CliDownloader_download_2 a yawl:Method ;
+    rdfs:label "download" ;
+    yawl:returnType "void" ;
+    yawl:signature "void download()" ;
+    rdfs:comment """Performs the downloading of the required files (each on a separate thread)""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CliDownloader.cancel
+yawl:CliDownloader_cancel_3 a yawl:Method ;
+    rdfs:label "cancel" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean cancel()" ;
+    rdfs:comment """Cancels all workers if one reports an error @return true""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CliDownloader.isComplete
+yawl:CliDownloader_isComplete_4 a yawl:Method ;
+    rdfs:label "isComplete" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isComplete()" ;
+    rdfs:comment """@return true if all workers have completed""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CliDownloader.getTotalProgress
+yawl:CliDownloader_getTotalProgress_5 a yawl:Method ;
+    rdfs:label "getTotalProgress" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getTotalProgress()" ;
+    rdfs:comment """@return the summed progress of all download workers""" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:CliDownloader__progressPanel a yawl:Field ;
+    rdfs:label "_progressPanel" .
+
+
+

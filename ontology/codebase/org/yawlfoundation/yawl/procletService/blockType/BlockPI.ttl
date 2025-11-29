@@ -1,0 +1,272 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.procletService.blockType
+yawl:org_yawlfoundation_yawl_procletService_blockType a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.procletService.blockType" .
+# Class: org.yawlfoundation.yawl.procletService.blockType.BlockPI
+yawl:BlockPI a yawl:Class ;
+    rdfs:label "BlockPI" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_blockType ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/blockType/BlockPI.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:BlockPI_processWIR_1 ;
+    yawl:hasMethod yawl:BlockPI_handleException_2 ;
+    yawl:hasMethod yawl:BlockPI_getRequiredEntityIDsForFiring_3 ;
+    yawl:hasMethod yawl:BlockPI_getRelevantPerformatives_4 ;
+    yawl:hasMethod yawl:BlockPI_calculateUnreceivedEids_5 ;
+    yawl:hasMethod yawl:BlockPI_evalWI_6 ;
+    yawl:hasMethod yawl:BlockPI_calculateDataPassing_7 ;
+    yawl:hasMethod yawl:BlockPI_processSuccessfulPI_8 ;
+    yawl:hasMethod yawl:BlockPI_determineFailingEmidsWIR_9 ;
+    yawl:hasMethod yawl:BlockPI_timeOutAction_10 ;
+    yawl:hasMethod yawl:BlockPI_doNotWaitlongerAction_11 ;
+    yawl:hasMethod yawl:BlockPI_publishException_12 ;
+    yawl:hasMethod yawl:BlockPI_getExceptions_13 ;
+    yawl:hasMethod yawl:BlockPI_deleteException_14 ;
+    yawl:hasMethod yawl:BlockPI_deleteExceptionCaseSelected_15 ;
+    yawl:hasMethod yawl:BlockPI_publishExceptionCase_16 ;
+    yawl:hasMethod yawl:BlockPI_isExceptionCaseSelectedUser_17 ;
+    yawl:hasMethod yawl:BlockPI_deleteAvailableEmidsBlockExceptionToUser_18 ;
+    yawl:hasMethod yawl:BlockPI_deleteAllAvailableEmidsBlockExceptionToUser_19 ;
+    yawl:hasMethod yawl:BlockPI_pushAvailableEmidsBlockExceptionToUser_20 ;
+    yawl:hasMethod yawl:BlockPI_deleteEmidBlockExceptionToUser_21 ;
+    yawl:hasMethod yawl:BlockPI_getAvailableEmidsBlockExceptionToUser_22 ;
+    yawl:hasMethod yawl:BlockPI_setEmidSelectedBlockException_23 ;
+    yawl:hasMethod yawl:BlockPI_getExceptionBlockSelected_24 ;
+    yawl:hasMethod yawl:BlockPI_setExceptionBlockSelected_25 ;
+    yawl:hasField yawl:BlockPI_wir ;
+    yawl:hasField yawl:BlockPI_block ;
+    yawl:hasField yawl:BlockPI_myLog ;
+    .
+
+
+# Method: BlockPI.processWIR
+yawl:BlockPI_processWIR_1 a yawl:Method ;
+    rdfs:label "processWIR" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processWIR()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockPI.handleException
+yawl:BlockPI_handleException_2 a yawl:Method ;
+    rdfs:label "handleException" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleException(String classID, String procletID, String blockID, List emids)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: BlockPI.getRequiredEntityIDsForFiring
+yawl:BlockPI_getRequiredEntityIDsForFiring_3 a yawl:Method ;
+    rdfs:label "getRequiredEntityIDsForFiring" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getRequiredEntityIDsForFiring()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: BlockPI.getRelevantPerformatives
+yawl:BlockPI_getRelevantPerformatives_4 a yawl:Method ;
+    rdfs:label "getRelevantPerformatives" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getRelevantPerformatives()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: BlockPI.calculateUnreceivedEids
+yawl:BlockPI_calculateUnreceivedEids_5 a yawl:Method ;
+    rdfs:label "calculateUnreceivedEids" ;
+    yawl:returnType "List" ;
+    yawl:signature "List calculateUnreceivedEids(List perfs, List eids)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: BlockPI.evalWI
+yawl:BlockPI_evalWI_6 a yawl:Method ;
+    rdfs:label "evalWI" ;
+    yawl:returnType "List" ;
+    yawl:signature "List evalWI()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockPI.calculateDataPassing
+yawl:BlockPI_calculateDataPassing_7 a yawl:Method ;
+    rdfs:label "calculateDataPassing" ;
+    yawl:returnType "void" ;
+    yawl:signature "void calculateDataPassing(List eids, WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockPI.processSuccessfulPI
+yawl:BlockPI_processSuccessfulPI_8 a yawl:Method ;
+    rdfs:label "processSuccessfulPI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processSuccessfulPI()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockPI.determineFailingEmidsWIR
+yawl:BlockPI_determineFailingEmidsWIR_9 a yawl:Method ;
+    rdfs:label "determineFailingEmidsWIR" ;
+    yawl:returnType "List" ;
+    yawl:signature "List determineFailingEmidsWIR(List eids)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: BlockPI.timeOutAction
+yawl:BlockPI_timeOutAction_10 a yawl:Method ;
+    rdfs:label "timeOutAction" ;
+    yawl:returnType "List" ;
+    yawl:signature "List timeOutAction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockPI.doNotWaitlongerAction
+yawl:BlockPI_doNotWaitlongerAction_11 a yawl:Method ;
+    rdfs:label "doNotWaitlongerAction" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doNotWaitlongerAction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockPI.publishException
+yawl:BlockPI_publishException_12 a yawl:Method ;
+    rdfs:label "publishException" ;
+    yawl:returnType "void" ;
+    yawl:signature "void publishException(List ec)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockPI.getExceptions
+yawl:BlockPI_getExceptions_13 a yawl:Method ;
+    rdfs:label "getExceptions" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getExceptions()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockPI.deleteException
+yawl:BlockPI_deleteException_14 a yawl:Method ;
+    rdfs:label "deleteException" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteException(String classID, String procletID, String blockID)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockPI.deleteExceptionCaseSelected
+yawl:BlockPI_deleteExceptionCaseSelected_15 a yawl:Method ;
+    rdfs:label "deleteExceptionCaseSelected" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteExceptionCaseSelected(String classID, String procletID, String blockID)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockPI.publishExceptionCase
+yawl:BlockPI_publishExceptionCase_16 a yawl:Method ;
+    rdfs:label "publishExceptionCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void publishExceptionCase(String classID, String procletID, String blockID)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockPI.isExceptionCaseSelectedUser
+yawl:BlockPI_isExceptionCaseSelectedUser_17 a yawl:Method ;
+    rdfs:label "isExceptionCaseSelectedUser" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isExceptionCaseSelectedUser(String classID, String procletID, String blockID)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockPI.deleteAvailableEmidsBlockExceptionToUser
+yawl:BlockPI_deleteAvailableEmidsBlockExceptionToUser_18 a yawl:Method ;
+    rdfs:label "deleteAvailableEmidsBlockExceptionToUser" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteAvailableEmidsBlockExceptionToUser(String classID, String procletID, String blockID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: BlockPI.deleteAllAvailableEmidsBlockExceptionToUser
+yawl:BlockPI_deleteAllAvailableEmidsBlockExceptionToUser_19 a yawl:Method ;
+    rdfs:label "deleteAllAvailableEmidsBlockExceptionToUser" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteAllAvailableEmidsBlockExceptionToUser()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockPI.pushAvailableEmidsBlockExceptionToUser
+yawl:BlockPI_pushAvailableEmidsBlockExceptionToUser_20 a yawl:Method ;
+    rdfs:label "pushAvailableEmidsBlockExceptionToUser" ;
+    yawl:returnType "void" ;
+    yawl:signature "void pushAvailableEmidsBlockExceptionToUser(String classID, String procletID, String blockID, List emids)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: BlockPI.deleteEmidBlockExceptionToUser
+yawl:BlockPI_deleteEmidBlockExceptionToUser_21 a yawl:Method ;
+    rdfs:label "deleteEmidBlockExceptionToUser" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteEmidBlockExceptionToUser(String emidStr)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: BlockPI.getAvailableEmidsBlockExceptionToUser
+yawl:BlockPI_getAvailableEmidsBlockExceptionToUser_22 a yawl:Method ;
+    rdfs:label "getAvailableEmidsBlockExceptionToUser" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAvailableEmidsBlockExceptionToUser()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockPI.setEmidSelectedBlockException
+yawl:BlockPI_setEmidSelectedBlockException_23 a yawl:Method ;
+    rdfs:label "setEmidSelectedBlockException" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEmidSelectedBlockException(EntityMID emid)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockPI.getExceptionBlockSelected
+yawl:BlockPI_getExceptionBlockSelected_24 a yawl:Method ;
+    rdfs:label "getExceptionBlockSelected" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getExceptionBlockSelected()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockPI.setExceptionBlockSelected
+yawl:BlockPI_setExceptionBlockSelected_25 a yawl:Method ;
+    rdfs:label "setExceptionBlockSelected" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setExceptionBlockSelected(String classID, String procletID, String blockID)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:BlockPI_wir a yawl:Field ;
+    rdfs:label "wir" .
+
+yawl:BlockPI_block a yawl:Field ;
+    rdfs:label "block" .
+
+yawl:BlockPI_myLog a yawl:Field ;
+    rdfs:label "myLog" .
+
+
+

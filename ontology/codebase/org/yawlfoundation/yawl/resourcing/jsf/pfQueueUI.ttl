@@ -1,0 +1,541 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.pfQueueUI
+yawl:pfQueueUI a yawl:Class ;
+    rdfs:label "pfQueueUI" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/pfQueueUI.java"^^xsd:string ;
+    yawl:extends yawl:AbstractFragmentBean ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:pfQueueUI__init_1 ;
+    yawl:hasMethod yawl:pfQueueUI_getLbxItems_2 ;
+    yawl:hasMethod yawl:pfQueueUI_setLbxItems_3 ;
+    yawl:hasMethod yawl:pfQueueUI_getLbxItemsDefaultOptions_4 ;
+    yawl:hasMethod yawl:pfQueueUI_setLbxItemsDefaultOptions_5 ;
+    yawl:hasMethod yawl:pfQueueUI_getLblSpecID_6 ;
+    yawl:hasMethod yawl:pfQueueUI_setLblSpecID_7 ;
+    yawl:hasMethod yawl:pfQueueUI_getTxtSpecID_8 ;
+    yawl:hasMethod yawl:pfQueueUI_setTxtSpecID_9 ;
+    yawl:hasMethod yawl:pfQueueUI_getLblCaseID_10 ;
+    yawl:hasMethod yawl:pfQueueUI_setLblCaseID_11 ;
+    yawl:hasMethod yawl:pfQueueUI_getLblCreated_12 ;
+    yawl:hasMethod yawl:pfQueueUI_setLblCreated_13 ;
+    yawl:hasMethod yawl:pfQueueUI_getTxtCreated_14 ;
+    yawl:hasMethod yawl:pfQueueUI_setTxtCreated_15 ;
+    yawl:hasMethod yawl:pfQueueUI_getTxtCaseID_16 ;
+    yawl:hasMethod yawl:pfQueueUI_setTxtCaseID_17 ;
+    yawl:hasMethod yawl:pfQueueUI_getTxtAge_18 ;
+    yawl:hasMethod yawl:pfQueueUI_setTxtAge_19 ;
+    yawl:hasMethod yawl:pfQueueUI_getTxtStatus_20 ;
+    yawl:hasMethod yawl:pfQueueUI_setTxtStatus_21 ;
+    yawl:hasMethod yawl:pfQueueUI_getTxtTaskID_22 ;
+    yawl:hasMethod yawl:pfQueueUI_setTxtTaskID_23 ;
+    yawl:hasMethod yawl:pfQueueUI_getLblTaskID_24 ;
+    yawl:hasMethod yawl:pfQueueUI_setLblTaskID_25 ;
+    yawl:hasMethod yawl:pfQueueUI_getLblAge_26 ;
+    yawl:hasMethod yawl:pfQueueUI_setLblAge_27 ;
+    yawl:hasMethod yawl:pfQueueUI_getLblStatus_28 ;
+    yawl:hasMethod yawl:pfQueueUI_setLblStatus_29 ;
+    yawl:hasMethod yawl:pfQueueUI_getLblItems_30 ;
+    yawl:hasMethod yawl:pfQueueUI_setLblItems_31 ;
+    yawl:hasMethod yawl:pfQueueUI_getLblDocumentation_32 ;
+    yawl:hasMethod yawl:pfQueueUI_setLblDocumentation_33 ;
+    yawl:hasMethod yawl:pfQueueUI_getTxtDocumentation_34 ;
+    yawl:hasMethod yawl:pfQueueUI_setTxtDocumentation_35 ;
+    yawl:hasMethod yawl:pfQueueUI_getPnlGroup_36 ;
+    yawl:hasMethod yawl:pfQueueUI_setPnlGroup_37 ;
+    yawl:hasMethod yawl:pfQueueUI_getRequestBean_38 ;
+    yawl:hasMethod yawl:pfQueueUI_getSessionBean_39 ;
+    yawl:hasMethod yawl:pfQueueUI_getApplicationBean_40 ;
+    yawl:hasMethod yawl:pfQueueUI_init_41 ;
+    yawl:hasMethod yawl:pfQueueUI_destroy_42 ;
+    yawl:hasMethod yawl:pfQueueUI_lbxItems_processValueChange_43 ;
+    yawl:hasMethod yawl:pfQueueUI_txtDocumentation_processValueChange_44 ;
+    yawl:hasMethod yawl:pfQueueUI_populateTextBoxes_45 ;
+    yawl:hasMethod yawl:pfQueueUI_getSpecStr_46 ;
+    yawl:hasMethod yawl:pfQueueUI_clearQueueGUI_47 ;
+    yawl:hasMethod yawl:pfQueueUI_wordWrap_48 ;
+    yawl:hasMethod yawl:pfQueueUI_setAgeField_49 ;
+    yawl:hasField yawl:pfQueueUI___placeholder ;
+    yawl:hasField yawl:pfQueueUI_lbxItems ;
+    yawl:hasField yawl:pfQueueUI_lbxItemsDefaultOptions ;
+    yawl:hasField yawl:pfQueueUI_lblSpecID ;
+    yawl:hasField yawl:pfQueueUI_txtSpecID ;
+    yawl:hasField yawl:pfQueueUI_lblCaseID ;
+    yawl:hasField yawl:pfQueueUI_lblCreated ;
+    yawl:hasField yawl:pfQueueUI_txtCreated ;
+    yawl:hasField yawl:pfQueueUI_txtCaseID ;
+    yawl:hasField yawl:pfQueueUI_txtAge ;
+    yawl:hasField yawl:pfQueueUI_txtStatus ;
+    yawl:hasField yawl:pfQueueUI_txtTaskID ;
+    yawl:hasField yawl:pfQueueUI_lblTaskID ;
+    yawl:hasField yawl:pfQueueUI_lblAge ;
+    yawl:hasField yawl:pfQueueUI_lblStatus ;
+    yawl:hasField yawl:pfQueueUI_lblItems ;
+    yawl:hasField yawl:pfQueueUI_lblDocumentation ;
+    yawl:hasField yawl:pfQueueUI_txtDocumentation ;
+    yawl:hasField yawl:pfQueueUI_pnlGroup ;
+    .
+
+
+# Method: pfQueueUI._init
+yawl:pfQueueUI__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfQueueUI.getLbxItems
+yawl:pfQueueUI_getLbxItems_2 a yawl:Method ;
+    rdfs:label "getLbxItems" ;
+    yawl:returnType "Listbox" ;
+    yawl:signature "Listbox getLbxItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.setLbxItems
+yawl:pfQueueUI_setLbxItems_3 a yawl:Method ;
+    rdfs:label "setLbxItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLbxItems(Listbox l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.getLbxItemsDefaultOptions
+yawl:pfQueueUI_getLbxItemsDefaultOptions_4 a yawl:Method ;
+    rdfs:label "getLbxItemsDefaultOptions" ;
+    yawl:returnType "DefaultOptionsList" ;
+    yawl:signature "DefaultOptionsList getLbxItemsDefaultOptions()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.setLbxItemsDefaultOptions
+yawl:pfQueueUI_setLbxItemsDefaultOptions_5 a yawl:Method ;
+    rdfs:label "setLbxItemsDefaultOptions" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLbxItemsDefaultOptions(DefaultOptionsList dol)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.getLblSpecID
+yawl:pfQueueUI_getLblSpecID_6 a yawl:Method ;
+    rdfs:label "getLblSpecID" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblSpecID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.setLblSpecID
+yawl:pfQueueUI_setLblSpecID_7 a yawl:Method ;
+    rdfs:label "setLblSpecID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblSpecID(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.getTxtSpecID
+yawl:pfQueueUI_getTxtSpecID_8 a yawl:Method ;
+    rdfs:label "getTxtSpecID" ;
+    yawl:returnType "TextField" ;
+    yawl:signature "TextField getTxtSpecID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.setTxtSpecID
+yawl:pfQueueUI_setTxtSpecID_9 a yawl:Method ;
+    rdfs:label "setTxtSpecID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtSpecID(TextField tf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.getLblCaseID
+yawl:pfQueueUI_getLblCaseID_10 a yawl:Method ;
+    rdfs:label "getLblCaseID" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblCaseID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.setLblCaseID
+yawl:pfQueueUI_setLblCaseID_11 a yawl:Method ;
+    rdfs:label "setLblCaseID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblCaseID(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.getLblCreated
+yawl:pfQueueUI_getLblCreated_12 a yawl:Method ;
+    rdfs:label "getLblCreated" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblCreated()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.setLblCreated
+yawl:pfQueueUI_setLblCreated_13 a yawl:Method ;
+    rdfs:label "setLblCreated" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblCreated(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.getTxtCreated
+yawl:pfQueueUI_getTxtCreated_14 a yawl:Method ;
+    rdfs:label "getTxtCreated" ;
+    yawl:returnType "TextField" ;
+    yawl:signature "TextField getTxtCreated()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.setTxtCreated
+yawl:pfQueueUI_setTxtCreated_15 a yawl:Method ;
+    rdfs:label "setTxtCreated" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtCreated(TextField tf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.getTxtCaseID
+yawl:pfQueueUI_getTxtCaseID_16 a yawl:Method ;
+    rdfs:label "getTxtCaseID" ;
+    yawl:returnType "TextField" ;
+    yawl:signature "TextField getTxtCaseID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.setTxtCaseID
+yawl:pfQueueUI_setTxtCaseID_17 a yawl:Method ;
+    rdfs:label "setTxtCaseID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtCaseID(TextField tf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.getTxtAge
+yawl:pfQueueUI_getTxtAge_18 a yawl:Method ;
+    rdfs:label "getTxtAge" ;
+    yawl:returnType "TextField" ;
+    yawl:signature "TextField getTxtAge()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.setTxtAge
+yawl:pfQueueUI_setTxtAge_19 a yawl:Method ;
+    rdfs:label "setTxtAge" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtAge(TextField tf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.getTxtStatus
+yawl:pfQueueUI_getTxtStatus_20 a yawl:Method ;
+    rdfs:label "getTxtStatus" ;
+    yawl:returnType "TextField" ;
+    yawl:signature "TextField getTxtStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.setTxtStatus
+yawl:pfQueueUI_setTxtStatus_21 a yawl:Method ;
+    rdfs:label "setTxtStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtStatus(TextField tf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.getTxtTaskID
+yawl:pfQueueUI_getTxtTaskID_22 a yawl:Method ;
+    rdfs:label "getTxtTaskID" ;
+    yawl:returnType "TextField" ;
+    yawl:signature "TextField getTxtTaskID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.setTxtTaskID
+yawl:pfQueueUI_setTxtTaskID_23 a yawl:Method ;
+    rdfs:label "setTxtTaskID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtTaskID(TextField tf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.getLblTaskID
+yawl:pfQueueUI_getLblTaskID_24 a yawl:Method ;
+    rdfs:label "getLblTaskID" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblTaskID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.setLblTaskID
+yawl:pfQueueUI_setLblTaskID_25 a yawl:Method ;
+    rdfs:label "setLblTaskID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblTaskID(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.getLblAge
+yawl:pfQueueUI_getLblAge_26 a yawl:Method ;
+    rdfs:label "getLblAge" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblAge()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.setLblAge
+yawl:pfQueueUI_setLblAge_27 a yawl:Method ;
+    rdfs:label "setLblAge" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblAge(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.getLblStatus
+yawl:pfQueueUI_getLblStatus_28 a yawl:Method ;
+    rdfs:label "getLblStatus" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.setLblStatus
+yawl:pfQueueUI_setLblStatus_29 a yawl:Method ;
+    rdfs:label "setLblStatus" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblStatus(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.getLblItems
+yawl:pfQueueUI_getLblItems_30 a yawl:Method ;
+    rdfs:label "getLblItems" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.setLblItems
+yawl:pfQueueUI_setLblItems_31 a yawl:Method ;
+    rdfs:label "setLblItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblItems(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.getLblDocumentation
+yawl:pfQueueUI_getLblDocumentation_32 a yawl:Method ;
+    rdfs:label "getLblDocumentation" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label getLblDocumentation()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.setLblDocumentation
+yawl:pfQueueUI_setLblDocumentation_33 a yawl:Method ;
+    rdfs:label "setLblDocumentation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLblDocumentation(Label l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.getTxtDocumentation
+yawl:pfQueueUI_getTxtDocumentation_34 a yawl:Method ;
+    rdfs:label "getTxtDocumentation" ;
+    yawl:returnType "TextArea" ;
+    yawl:signature "TextArea getTxtDocumentation()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.setTxtDocumentation
+yawl:pfQueueUI_setTxtDocumentation_35 a yawl:Method ;
+    rdfs:label "setTxtDocumentation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtDocumentation(TextArea ta)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.getPnlGroup
+yawl:pfQueueUI_getPnlGroup_36 a yawl:Method ;
+    rdfs:label "getPnlGroup" ;
+    yawl:returnType "PanelGroup" ;
+    yawl:signature "PanelGroup getPnlGroup()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.setPnlGroup
+yawl:pfQueueUI_setPnlGroup_37 a yawl:Method ;
+    rdfs:label "setPnlGroup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlGroup(PanelGroup group)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.getRequestBean
+yawl:pfQueueUI_getRequestBean_38 a yawl:Method ;
+    rdfs:label "getRequestBean" ;
+    yawl:returnType "RequestBean" ;
+    yawl:signature "RequestBean getRequestBean()" ;
+    rdfs:comment """<p>Return a reference to the scoped data bean.</p>""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: pfQueueUI.getSessionBean
+yawl:pfQueueUI_getSessionBean_39 a yawl:Method ;
+    rdfs:label "getSessionBean" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getSessionBean()" ;
+    rdfs:comment """<p>Return a reference to the scoped data bean.</p>""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: pfQueueUI.getApplicationBean
+yawl:pfQueueUI_getApplicationBean_40 a yawl:Method ;
+    rdfs:label "getApplicationBean" ;
+    yawl:returnType "ApplicationBean" ;
+    yawl:signature "ApplicationBean getApplicationBean()" ;
+    rdfs:comment """<p>Return a reference to the scoped data bean.</p>""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: pfQueueUI.init
+yawl:pfQueueUI_init_41 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.destroy
+yawl:pfQueueUI_destroy_42 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.lbxItems_processValueChange
+yawl:pfQueueUI_lbxItems_processValueChange_43 a yawl:Method ;
+    rdfs:label "lbxItems_processValueChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void lbxItems_processValueChange(ValueChangeEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.txtDocumentation_processValueChange
+yawl:pfQueueUI_txtDocumentation_processValueChange_44 a yawl:Method ;
+    rdfs:label "txtDocumentation_processValueChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void txtDocumentation_processValueChange(ValueChangeEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: pfQueueUI.populateTextBoxes
+yawl:pfQueueUI_populateTextBoxes_45 a yawl:Method ;
+    rdfs:label "populateTextBoxes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void populateTextBoxes(WorkItemRecord wir)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: pfQueueUI.getSpecStr
+yawl:pfQueueUI_getSpecStr_46 a yawl:Method ;
+    rdfs:label "getSpecStr" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecStr(WorkItemRecord wir)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: pfQueueUI.clearQueueGUI
+yawl:pfQueueUI_clearQueueGUI_47 a yawl:Method ;
+    rdfs:label "clearQueueGUI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clearQueueGUI()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: pfQueueUI.wordWrap
+yawl:pfQueueUI_wordWrap_48 a yawl:Method ;
+    rdfs:label "wordWrap" ;
+    yawl:returnType "String" ;
+    yawl:signature "String wordWrap(String s, int maxLen)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: pfQueueUI.setAgeField
+yawl:pfQueueUI_setAgeField_49 a yawl:Method ;
+    rdfs:label "setAgeField" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAgeField(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:pfQueueUI___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:pfQueueUI_lbxItems a yawl:Field ;
+    rdfs:label "lbxItems" .
+
+yawl:pfQueueUI_lbxItemsDefaultOptions a yawl:Field ;
+    rdfs:label "lbxItemsDefaultOptions" .
+
+yawl:pfQueueUI_lblSpecID a yawl:Field ;
+    rdfs:label "lblSpecID" .
+
+yawl:pfQueueUI_txtSpecID a yawl:Field ;
+    rdfs:label "txtSpecID" .
+
+yawl:pfQueueUI_lblCaseID a yawl:Field ;
+    rdfs:label "lblCaseID" .
+
+yawl:pfQueueUI_lblCreated a yawl:Field ;
+    rdfs:label "lblCreated" .
+
+yawl:pfQueueUI_txtCreated a yawl:Field ;
+    rdfs:label "txtCreated" .
+
+yawl:pfQueueUI_txtCaseID a yawl:Field ;
+    rdfs:label "txtCaseID" .
+
+yawl:pfQueueUI_txtAge a yawl:Field ;
+    rdfs:label "txtAge" .
+
+yawl:pfQueueUI_txtStatus a yawl:Field ;
+    rdfs:label "txtStatus" .
+
+yawl:pfQueueUI_txtTaskID a yawl:Field ;
+    rdfs:label "txtTaskID" .
+
+yawl:pfQueueUI_lblTaskID a yawl:Field ;
+    rdfs:label "lblTaskID" .
+
+yawl:pfQueueUI_lblAge a yawl:Field ;
+    rdfs:label "lblAge" .
+
+yawl:pfQueueUI_lblStatus a yawl:Field ;
+    rdfs:label "lblStatus" .
+
+yawl:pfQueueUI_lblItems a yawl:Field ;
+    rdfs:label "lblItems" .
+
+yawl:pfQueueUI_lblDocumentation a yawl:Field ;
+    rdfs:label "lblDocumentation" .
+
+yawl:pfQueueUI_txtDocumentation a yawl:Field ;
+    rdfs:label "txtDocumentation" .
+
+yawl:pfQueueUI_pnlGroup a yawl:Field ;
+    rdfs:label "pnlGroup" .
+
+
+

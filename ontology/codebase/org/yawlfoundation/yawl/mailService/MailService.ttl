@@ -1,0 +1,287 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.mailService.MailService
+yawl:MailService a yawl:Class ;
+    rdfs:label "MailService" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_mailService ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/mailService/MailService.java"^^xsd:string ;
+    rdfs:comment """A service that provides for emails to be sent by tasks @author Michael Adams @date 25/07/2009""" ;
+    yawl:extends yawl:InterfaceBWebsideController ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:MailService_getInstance_1 ;
+    yawl:hasMethod yawl:MailService_handleEnabledWorkItemEvent_2 ;
+    yawl:hasMethod yawl:MailService_handleCancelledWorkItemEvent_3 ;
+    yawl:hasMethod yawl:MailService_describeRequiredParams_4 ;
+    yawl:hasMethod yawl:MailService_setHost_5 ;
+    yawl:hasMethod yawl:MailService_setPort_6 ;
+    yawl:hasMethod yawl:MailService_setTransportStrategy_7 ;
+    yawl:hasMethod yawl:MailService_setUser_8 ;
+    yawl:hasMethod yawl:MailService_setPassword_9 ;
+    yawl:hasMethod yawl:MailService_setFromName_10 ;
+    yawl:hasMethod yawl:MailService_setFromAddress_11 ;
+    yawl:hasMethod yawl:MailService_sendMail_12 ;
+    yawl:hasMethod yawl:MailService_sendMail_13 ;
+    yawl:hasMethod yawl:MailService_sendMail_14 ;
+    yawl:hasMethod yawl:MailService_sendMail_15 ;
+    yawl:hasMethod yawl:MailService_sendMail_16 ;
+    yawl:hasMethod yawl:MailService_buildSettings_17 ;
+    yawl:hasMethod yawl:MailService_buildEmail_18 ;
+    yawl:hasMethod yawl:MailService_getSetting_19 ;
+    yawl:hasMethod yawl:MailService_getSetting_20 ;
+    yawl:hasMethod yawl:MailService_getPort_21 ;
+    yawl:hasMethod yawl:MailService_getTransportStrategy_22 ;
+    yawl:hasMethod yawl:MailService_getTransportStrategy_23 ;
+    yawl:hasMethod yawl:MailService_getDataValue_24 ;
+    yawl:hasMethod yawl:MailService_getOutputData_25 ;
+    yawl:hasMethod yawl:MailService_asRecipientList_26 ;
+    yawl:hasMethod yawl:MailService_connected_27 ;
+    yawl:hasMethod yawl:MailService_createParameter_28 ;
+    yawl:hasField yawl:MailService__handle ;
+    yawl:hasField yawl:MailService__instance ;
+    yawl:hasField yawl:MailService__defaults ;
+    .
+
+
+# Method: MailService.getInstance
+yawl:MailService_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "MailService" ;
+    yawl:signature "MailService getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: MailService.handleEnabledWorkItemEvent
+yawl:MailService_handleEnabledWorkItemEvent_2 a yawl:Method ;
+    rdfs:label "handleEnabledWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleEnabledWorkItemEvent(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MailService.handleCancelledWorkItemEvent
+yawl:MailService_handleCancelledWorkItemEvent_3 a yawl:Method ;
+    rdfs:label "handleCancelledWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCancelledWorkItemEvent(WorkItemRecord workItemRecord)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MailService.describeRequiredParams
+yawl:MailService_describeRequiredParams_4 a yawl:Method ;
+    rdfs:label "describeRequiredParams" ;
+    yawl:returnType "YParameter" ;
+    yawl:signature "YParameter describeRequiredParams()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MailService.setHost
+yawl:MailService_setHost_5 a yawl:Method ;
+    rdfs:label "setHost" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHost(String host)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: MailService.setPort
+yawl:MailService_setPort_6 a yawl:Method ;
+    rdfs:label "setPort" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPort(int port)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: MailService.setTransportStrategy
+yawl:MailService_setTransportStrategy_7 a yawl:Method ;
+    rdfs:label "setTransportStrategy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTransportStrategy(String strategy)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: MailService.setUser
+yawl:MailService_setUser_8 a yawl:Method ;
+    rdfs:label "setUser" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUser(String user)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: MailService.setPassword
+yawl:MailService_setPassword_9 a yawl:Method ;
+    rdfs:label "setPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPassword(String password)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: MailService.setFromName
+yawl:MailService_setFromName_10 a yawl:Method ;
+    rdfs:label "setFromName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setFromName(String name)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: MailService.setFromAddress
+yawl:MailService_setFromAddress_11 a yawl:Method ;
+    rdfs:label "setFromAddress" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setFromAddress(String address)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: MailService.sendMail
+yawl:MailService_sendMail_12 a yawl:Method ;
+    rdfs:label "sendMail" ;
+    yawl:returnType "String" ;
+    yawl:signature "String sendMail(String toName, String toAddress, String ccAddress, String bccAddress, String subject, String content)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: MailService.sendMail
+yawl:MailService_sendMail_13 a yawl:Method ;
+    rdfs:label "sendMail" ;
+    yawl:returnType "String" ;
+    yawl:signature "String sendMail(String settingsAsXml)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: MailService.sendMail
+yawl:MailService_sendMail_14 a yawl:Method ;
+    rdfs:label "sendMail" ;
+    yawl:returnType "String" ;
+    yawl:signature "String sendMail(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MailService.sendMail
+yawl:MailService_sendMail_15 a yawl:Method ;
+    rdfs:label "sendMail" ;
+    yawl:returnType "String" ;
+    yawl:signature "String sendMail(MailSettings settings)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MailService.sendMail
+yawl:MailService_sendMail_16 a yawl:Method ;
+    rdfs:label "sendMail" ;
+    yawl:returnType "String" ;
+    yawl:signature "String sendMail(Email email, MailSettings settings)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MailService.buildSettings
+yawl:MailService_buildSettings_17 a yawl:Method ;
+    rdfs:label "buildSettings" ;
+    yawl:returnType "MailSettings" ;
+    yawl:signature "MailSettings buildSettings(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MailService.buildEmail
+yawl:MailService_buildEmail_18 a yawl:Method ;
+    rdfs:label "buildEmail" ;
+    yawl:returnType "Email" ;
+    yawl:signature "Email buildEmail(MailSettings settings)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MailService.getSetting
+yawl:MailService_getSetting_19 a yawl:Method ;
+    rdfs:label "getSetting" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSetting(Element data, String name)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MailService.getSetting
+yawl:MailService_getSetting_20 a yawl:Method ;
+    rdfs:label "getSetting" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSetting(Element data, String name, boolean optional)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MailService.getPort
+yawl:MailService_getPort_21 a yawl:Method ;
+    rdfs:label "getPort" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getPort(Element data)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MailService.getTransportStrategy
+yawl:MailService_getTransportStrategy_22 a yawl:Method ;
+    rdfs:label "getTransportStrategy" ;
+    yawl:returnType "TransportStrategy" ;
+    yawl:signature "TransportStrategy getTransportStrategy(String strategyString)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MailService.getTransportStrategy
+yawl:MailService_getTransportStrategy_23 a yawl:Method ;
+    rdfs:label "getTransportStrategy" ;
+    yawl:returnType "TransportStrategy" ;
+    yawl:signature "TransportStrategy getTransportStrategy(Element data)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MailService.getDataValue
+yawl:MailService_getDataValue_24 a yawl:Method ;
+    rdfs:label "getDataValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataValue(Element data, String name)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MailService.getOutputData
+yawl:MailService_getOutputData_25 a yawl:Method ;
+    rdfs:label "getOutputData" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getOutputData(String taskName, String data)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MailService.asRecipientList
+yawl:MailService_asRecipientList_26 a yawl:Method ;
+    rdfs:label "asRecipientList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List asRecipientList(String recipients, Message recipientType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MailService.connected
+yawl:MailService_connected_27 a yawl:Method ;
+    rdfs:label "connected" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean connected()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MailService.createParameter
+yawl:MailService_createParameter_28 a yawl:Method ;
+    rdfs:label "createParameter" ;
+    yawl:returnType "YParameter" ;
+    yawl:signature "YParameter createParameter(int IorO, String type, String name, String doco, boolean optional)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:MailService__handle a yawl:Field ;
+    rdfs:label "_handle" .
+
+yawl:MailService__instance a yawl:Field ;
+    rdfs:label "_instance" .
+
+yawl:MailService__defaults a yawl:Field ;
+    rdfs:label "_defaults" .
+
+
+

@@ -1,0 +1,1778 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.datastore.orgdata.ResourceDataSet
+yawl:ResourceDataSet a yawl:Class ;
+    rdfs:label "ResourceDataSet" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_datastore_orgdata ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/datastore/orgdata/ResourceDataSet.java"^^xsd:string ;
+    rdfs:comment """Handles the loading, mapping and runtime management of resources from data source. @author Michael Adams @date 4/11/2009 (originally extracted from ResourceManager class)""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ResourceDataSet_initUnitMaps_1 ;
+    yawl:hasMethod yawl:ResourceDataSet_setChangeStamp_2 ;
+    yawl:hasMethod yawl:ResourceDataSet_disconnectResources_3 ;
+    yawl:hasMethod yawl:ResourceDataSet_sortFullParticipantListByName_4 ;
+    yawl:hasMethod yawl:ResourceDataSet_participantSetToXML_5 ;
+    yawl:hasMethod yawl:ResourceDataSet_fail_6 ;
+    yawl:hasMethod yawl:ResourceDataSet_setAllowExternalOrgDataMods_7 ;
+    yawl:hasMethod yawl:ResourceDataSet_isExternalOrgDataModsAllowed_8 ;
+    yawl:hasMethod yawl:ResourceDataSet_isDataEditable_9 ;
+    yawl:hasMethod yawl:ResourceDataSet_isDataEditable_10 ;
+    yawl:hasMethod yawl:ResourceDataSet_setExternalUserAuthentication_11 ;
+    yawl:hasMethod yawl:ResourceDataSet_isUserAuthenticationExternal_12 ;
+    yawl:hasMethod yawl:ResourceDataSet_setDataSource_13 ;
+    yawl:hasMethod yawl:ResourceDataSet_getDataSource_14 ;
+    yawl:hasMethod yawl:ResourceDataSet_hasDefaultDataSource_15 ;
+    yawl:hasMethod yawl:ResourceDataSet_getResUnit_16 ;
+    yawl:hasMethod yawl:ResourceDataSet_getChangeStamp_17 ;
+    yawl:hasMethod yawl:ResourceDataSet_getLastChangeStamp_18 ;
+    yawl:hasMethod yawl:ResourceDataSet_setParticipants_19 ;
+    yawl:hasMethod yawl:ResourceDataSet_setRoles_20 ;
+    yawl:hasMethod yawl:ResourceDataSet_setCapabilities_21 ;
+    yawl:hasMethod yawl:ResourceDataSet_setPositions_22 ;
+    yawl:hasMethod yawl:ResourceDataSet_setOrgGroups_23 ;
+    yawl:hasMethod yawl:ResourceDataSet_setNonHumanResources_24 ;
+    yawl:hasMethod yawl:ResourceDataSet_setNonHumanCategories_25 ;
+    yawl:hasMethod yawl:ResourceDataSet_augmentDataSourceAsRequired_26 ;
+    yawl:hasMethod yawl:ResourceDataSet_putParticipant_27 ;
+    yawl:hasMethod yawl:ResourceDataSet_putCapability_28 ;
+    yawl:hasMethod yawl:ResourceDataSet_putRole_29 ;
+    yawl:hasMethod yawl:ResourceDataSet_putPosition_30 ;
+    yawl:hasMethod yawl:ResourceDataSet_putOrgGroup_31 ;
+    yawl:hasMethod yawl:ResourceDataSet_putNonHumanResource_32 ;
+    yawl:hasMethod yawl:ResourceDataSet_putNonHumanCategory_33 ;
+    yawl:hasMethod yawl:ResourceDataSet_delParticipant_34 ;
+    yawl:hasMethod yawl:ResourceDataSet_delRole_35 ;
+    yawl:hasMethod yawl:ResourceDataSet_delCapability_36 ;
+    yawl:hasMethod yawl:ResourceDataSet_delPosition_37 ;
+    yawl:hasMethod yawl:ResourceDataSet_delOrgGroup_38 ;
+    yawl:hasMethod yawl:ResourceDataSet_delNonHumanResource_39 ;
+    yawl:hasMethod yawl:ResourceDataSet_delNonHumanCategory_40 ;
+    yawl:hasMethod yawl:ResourceDataSet_addParticipant_41 ;
+    yawl:hasMethod yawl:ResourceDataSet_addRole_42 ;
+    yawl:hasMethod yawl:ResourceDataSet_addCapability_43 ;
+    yawl:hasMethod yawl:ResourceDataSet_addPosition_44 ;
+    yawl:hasMethod yawl:ResourceDataSet_addOrgGroup_45 ;
+    yawl:hasMethod yawl:ResourceDataSet_addNonHumanResource_46 ;
+    yawl:hasMethod yawl:ResourceDataSet_addNonHumanCategory_47 ;
+    yawl:hasMethod yawl:ResourceDataSet_importParticipant_48 ;
+    yawl:hasMethod yawl:ResourceDataSet_importRole_49 ;
+    yawl:hasMethod yawl:ResourceDataSet_importCapability_50 ;
+    yawl:hasMethod yawl:ResourceDataSet_importPosition_51 ;
+    yawl:hasMethod yawl:ResourceDataSet_importOrgGroup_52 ;
+    yawl:hasMethod yawl:ResourceDataSet_importNonHumanResource_53 ;
+    yawl:hasMethod yawl:ResourceDataSet_importNonHumanCategory_54 ;
+    yawl:hasMethod yawl:ResourceDataSet_updateResource_55 ;
+    yawl:hasMethod yawl:ResourceDataSet_updateParticipant_56 ;
+    yawl:hasMethod yawl:ResourceDataSet_updateResourceAttribute_57 ;
+    yawl:hasMethod yawl:ResourceDataSet_updateRole_58 ;
+    yawl:hasMethod yawl:ResourceDataSet_updateCapability_59 ;
+    yawl:hasMethod yawl:ResourceDataSet_updatePosition_60 ;
+    yawl:hasMethod yawl:ResourceDataSet_updateOrgGroup_61 ;
+    yawl:hasMethod yawl:ResourceDataSet_updateNonHumanResource_62 ;
+    yawl:hasMethod yawl:ResourceDataSet_updateNonHumanCategory_63 ;
+    yawl:hasMethod yawl:ResourceDataSet_removeParticipant_64 ;
+    yawl:hasMethod yawl:ResourceDataSet_removeRole_65 ;
+    yawl:hasMethod yawl:ResourceDataSet_removeCapability_66 ;
+    yawl:hasMethod yawl:ResourceDataSet_removePosition_67 ;
+    yawl:hasMethod yawl:ResourceDataSet_removeOrgGroup_68 ;
+    yawl:hasMethod yawl:ResourceDataSet_removeNonHumanResource_69 ;
+    yawl:hasMethod yawl:ResourceDataSet_removeNonHumanCategory_70 ;
+    yawl:hasMethod yawl:ResourceDataSet_removeRole_71 ;
+    yawl:hasMethod yawl:ResourceDataSet_removeCapability_72 ;
+    yawl:hasMethod yawl:ResourceDataSet_removePosition_73 ;
+    yawl:hasMethod yawl:ResourceDataSet_removeOrgGroup_74 ;
+    yawl:hasMethod yawl:ResourceDataSet_removeNonHumanResource_75 ;
+    yawl:hasMethod yawl:ResourceDataSet_removeNonHumanCategory_76 ;
+    yawl:hasMethod yawl:ResourceDataSet_getResource_77 ;
+    yawl:hasMethod yawl:ResourceDataSet_getParticipant_78 ;
+    yawl:hasMethod yawl:ResourceDataSet_getRole_79 ;
+    yawl:hasMethod yawl:ResourceDataSet_getCapability_80 ;
+    yawl:hasMethod yawl:ResourceDataSet_getPosition_81 ;
+    yawl:hasMethod yawl:ResourceDataSet_getOrgGroup_82 ;
+    yawl:hasMethod yawl:ResourceDataSet_getNonHumanResource_83 ;
+    yawl:hasMethod yawl:ResourceDataSet_getNonHumanCategory_84 ;
+    yawl:hasMethod yawl:ResourceDataSet_getParticipants_85 ;
+    yawl:hasMethod yawl:ResourceDataSet_getRoles_86 ;
+    yawl:hasMethod yawl:ResourceDataSet_getPositions_87 ;
+    yawl:hasMethod yawl:ResourceDataSet_getCapabilities_88 ;
+    yawl:hasMethod yawl:ResourceDataSet_getOrgGroups_89 ;
+    yawl:hasMethod yawl:ResourceDataSet_getNonHumanResources_90 ;
+    yawl:hasMethod yawl:ResourceDataSet_getNonHumanCategories_91 ;
+    yawl:hasMethod yawl:ResourceDataSet_getNonHumanSubCategories_92 ;
+    yawl:hasMethod yawl:ResourceDataSet_getParticipantMap_93 ;
+    yawl:hasMethod yawl:ResourceDataSet_getRoleMap_94 ;
+    yawl:hasMethod yawl:ResourceDataSet_getPositionMap_95 ;
+    yawl:hasMethod yawl:ResourceDataSet_getCapabilityMap_96 ;
+    yawl:hasMethod yawl:ResourceDataSet_getOrgGroupMap_97 ;
+    yawl:hasMethod yawl:ResourceDataSet_getNonHumanResourceMap_98 ;
+    yawl:hasMethod yawl:ResourceDataSet_getNonHumanCategoryMap_99 ;
+    yawl:hasMethod yawl:ResourceDataSet_getParticipantIdentifiers_100 ;
+    yawl:hasMethod yawl:ResourceDataSet_getParticipantIdentifiers_101 ;
+    yawl:hasMethod yawl:ResourceDataSet_getParticipantIdentifiers_102 ;
+    yawl:hasMethod yawl:ResourceDataSet_getRoleIdentifiers_103 ;
+    yawl:hasMethod yawl:ResourceDataSet_getPositionIdentifiers_104 ;
+    yawl:hasMethod yawl:ResourceDataSet_getCapabilityIdentifiers_105 ;
+    yawl:hasMethod yawl:ResourceDataSet_getOrgGroupIdentifiers_106 ;
+    yawl:hasMethod yawl:ResourceDataSet_getNonHumanResourceIdentifiers_107 ;
+    yawl:hasMethod yawl:ResourceDataSet_getNonHumanCategoryIdentifiers_108 ;
+    yawl:hasMethod yawl:ResourceDataSet_getNonHumanSubCategoriesAsXML_109 ;
+    yawl:hasMethod yawl:ResourceDataSet_getNonHumanCategorySet_110 ;
+    yawl:hasMethod yawl:ResourceDataSet_getParticipantCount_111 ;
+    yawl:hasMethod yawl:ResourceDataSet_getRoleByName_112 ;
+    yawl:hasMethod yawl:ResourceDataSet_getPositionByLabel_113 ;
+    yawl:hasMethod yawl:ResourceDataSet_getOrgGroupByLabel_114 ;
+    yawl:hasMethod yawl:ResourceDataSet_getCapabilityByLabel_115 ;
+    yawl:hasMethod yawl:ResourceDataSet_getNonHumanResourceByName_116 ;
+    yawl:hasMethod yawl:ResourceDataSet_getNonHumanCategoryByName_117 ;
+    yawl:hasMethod yawl:ResourceDataSet_getNonHumanResources_118 ;
+    yawl:hasMethod yawl:ResourceDataSet_getNonHumanResources_119 ;
+    yawl:hasMethod yawl:ResourceDataSet_getNonHumanResourcesByName_120 ;
+    yawl:hasMethod yawl:ResourceDataSet_isKnownRoleName_121 ;
+    yawl:hasMethod yawl:ResourceDataSet_isKnownCapabilityName_122 ;
+    yawl:hasMethod yawl:ResourceDataSet_isKnownPositionName_123 ;
+    yawl:hasMethod yawl:ResourceDataSet_isKnownOrgGroupName_124 ;
+    yawl:hasMethod yawl:ResourceDataSet_isKnownNonHumanResourceName_125 ;
+    yawl:hasMethod yawl:ResourceDataSet_isKnownNonHumanCategoryName_126 ;
+    yawl:hasMethod yawl:ResourceDataSet_isKnownParticipant_127 ;
+    yawl:hasMethod yawl:ResourceDataSet_isKnownParticipant_128 ;
+    yawl:hasMethod yawl:ResourceDataSet_isKnownRole_129 ;
+    yawl:hasMethod yawl:ResourceDataSet_isKnownRole_130 ;
+    yawl:hasMethod yawl:ResourceDataSet_isKnownCapability_131 ;
+    yawl:hasMethod yawl:ResourceDataSet_isKnownPosition_132 ;
+    yawl:hasMethod yawl:ResourceDataSet_isKnownOrgGroup_133 ;
+    yawl:hasMethod yawl:ResourceDataSet_isKnownNonHumanResource_134 ;
+    yawl:hasMethod yawl:ResourceDataSet_isKnownNonHumanResource_135 ;
+    yawl:hasMethod yawl:ResourceDataSet_isKnownNonHumanCategory_136 ;
+    yawl:hasMethod yawl:ResourceDataSet_isKnownNonHumanCategory_137 ;
+    yawl:hasMethod yawl:ResourceDataSet_getParticipantNames_138 ;
+    yawl:hasMethod yawl:ResourceDataSet_getRoleNames_139 ;
+    yawl:hasMethod yawl:ResourceDataSet_getNonHumanResourceNames_140 ;
+    yawl:hasMethod yawl:ResourceDataSet_getNonHumanCategoryNames_141 ;
+    yawl:hasMethod yawl:ResourceDataSet_getParticipantRoles_142 ;
+    yawl:hasMethod yawl:ResourceDataSet_getParticipantPositions_143 ;
+    yawl:hasMethod yawl:ResourceDataSet_getParticipantCapabilities_144 ;
+    yawl:hasMethod yawl:ResourceDataSet_getRoleParticipants_145 ;
+    yawl:hasMethod yawl:ResourceDataSet_getOrgGroupParticipants_146 ;
+    yawl:hasMethod yawl:ResourceDataSet_getRoleParticipantsWithCapability_147 ;
+    yawl:hasMethod yawl:ResourceDataSet_getCapabilityParticipants_148 ;
+    yawl:hasMethod yawl:ResourceDataSet_getPositionParticipants_149 ;
+    yawl:hasMethod yawl:ResourceDataSet_getParticipantsWithRole_150 ;
+    yawl:hasMethod yawl:ResourceDataSet_getParticipantsWithPosition_151 ;
+    yawl:hasMethod yawl:ResourceDataSet_getParticipantsWithCapability_152 ;
+    yawl:hasMethod yawl:ResourceDataSet_getOrgGroupMembers_153 ;
+    yawl:hasMethod yawl:ResourceDataSet_resolveParticipants_154 ;
+    yawl:hasMethod yawl:ResourceDataSet_resolveParticipantsFromResourceName_155 ;
+    yawl:hasMethod yawl:ResourceDataSet_getParticipantFromUserID_156 ;
+    yawl:hasMethod yawl:ResourceDataSet_resolveParticipantIds_157 ;
+    yawl:hasMethod yawl:ResourceDataSet_resolveParticipantIdsAsXML_158 ;
+    yawl:hasMethod yawl:ResourceDataSet_getParticipantsReportingTo_159 ;
+    yawl:hasMethod yawl:ResourceDataSet_getParticipantsReportingToPosition_160 ;
+    yawl:hasMethod yawl:ResourceDataSet_getImmediateSupervisor_161 ;
+    yawl:hasMethod yawl:ResourceDataSet_getImmediateSupervisor_162 ;
+    yawl:hasMethod yawl:ResourceDataSet_getParticipantsInDescendantRoles_163 ;
+    yawl:hasMethod yawl:ResourceDataSet_getParticipantsAsXML_164 ;
+    yawl:hasMethod yawl:ResourceDataSet_getRolesAsXML_165 ;
+    yawl:hasMethod yawl:ResourceDataSet_getCapabilitiesAsXML_166 ;
+    yawl:hasMethod yawl:ResourceDataSet_getPositionsAsXML_167 ;
+    yawl:hasMethod yawl:ResourceDataSet_getOrgGroupsAsXML_168 ;
+    yawl:hasMethod yawl:ResourceDataSet_getNonHumanResourcesAsXML_169 ;
+    yawl:hasMethod yawl:ResourceDataSet_getNonHumanSubCategoriesAsXML_170 ;
+    yawl:hasMethod yawl:ResourceDataSet_getNonHumanCategoriesAsXML_171 ;
+    yawl:hasMethod yawl:ResourceDataSet_getParticipantRolesAsXML_172 ;
+    yawl:hasMethod yawl:ResourceDataSet_getParticipantPositionsAsXML_173 ;
+    yawl:hasMethod yawl:ResourceDataSet_getParticipantCapabilitiesAsXML_174 ;
+    yawl:hasMethod yawl:ResourceDataSet_getParticpantsWithRoleAsXML_175 ;
+    yawl:hasMethod yawl:ResourceDataSet_getRoleParticipantsAsXML_176 ;
+    yawl:hasMethod yawl:ResourceDataSet_getParticpantsWithPositionAsXML_177 ;
+    yawl:hasMethod yawl:ResourceDataSet_getPositionParticipantsAsXML_178 ;
+    yawl:hasMethod yawl:ResourceDataSet_getParticpantsWithCapabilityAsXML_179 ;
+    yawl:hasMethod yawl:ResourceDataSet_getCapabilityParticipantsAsXML_180 ;
+    yawl:hasMethod yawl:ResourceDataSet_castToParticipantSet_181 ;
+    yawl:hasMethod yawl:ResourceDataSet_checkCyclicAttributeReference_182 ;
+    yawl:hasMethod yawl:ResourceDataSet_checkCyclicRoleReference_183 ;
+    yawl:hasMethod yawl:ResourceDataSet_checkCyclicPositionReference_184 ;
+    yawl:hasMethod yawl:ResourceDataSet_checkCyclicOrgGroupReference_185 ;
+    yawl:hasMethod yawl:ResourceDataSet_constructCyclicAttributeErrorMessage_186 ;
+    yawl:hasMethod yawl:ResourceDataSet_removeOrphanedSubCategories_187 ;
+    yawl:hasMethod yawl:ResourceDataSet_logResourceBusy_188 ;
+    yawl:hasMethod yawl:ResourceDataSet_freeResource_189 ;
+    yawl:hasField yawl:ResourceDataSet_participantMap ;
+    yawl:hasField yawl:ResourceDataSet_roleMap ;
+    yawl:hasField yawl:ResourceDataSet_capabilityMap ;
+    yawl:hasField yawl:ResourceDataSet_positionMap ;
+    yawl:hasField yawl:ResourceDataSet_orgGroupMap ;
+    yawl:hasField yawl:ResourceDataSet_nonHumanMap ;
+    yawl:hasField yawl:ResourceDataSet_nonHumanCategoryMap ;
+    yawl:hasField yawl:ResourceDataSet__allowExternalOrgDataMods ;
+    yawl:hasField yawl:ResourceDataSet__externalUserAuthentication ;
+    yawl:hasField yawl:ResourceDataSet__sources ;
+    yawl:hasField yawl:ResourceDataSet__changeStamp ;
+    .
+
+
+# Method: ResourceDataSet.initUnitMaps
+yawl:ResourceDataSet_initUnitMaps_1 a yawl:Method ;
+    rdfs:label "initUnitMaps" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initUnitMaps(DataSource source)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceDataSet.setChangeStamp
+yawl:ResourceDataSet_setChangeStamp_2 a yawl:Method ;
+    rdfs:label "setChangeStamp" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setChangeStamp(ResUnit unit)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceDataSet.disconnectResources
+yawl:ResourceDataSet_disconnectResources_3 a yawl:Method ;
+    rdfs:label "disconnectResources" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disconnectResources(AbstractResourceAttribute attrib)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceDataSet.sortFullParticipantListByName
+yawl:ResourceDataSet_sortFullParticipantListByName_4 a yawl:Method ;
+    rdfs:label "sortFullParticipantListByName" ;
+    yawl:returnType "List" ;
+    yawl:signature "List sortFullParticipantListByName()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceDataSet.participantSetToXML
+yawl:ResourceDataSet_participantSetToXML_5 a yawl:Method ;
+    rdfs:label "participantSetToXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String participantSetToXML(Set pSet, String header)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceDataSet.fail
+yawl:ResourceDataSet_fail_6 a yawl:Method ;
+    rdfs:label "fail" ;
+    yawl:returnType "String" ;
+    yawl:signature "String fail(String msg)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceDataSet.setAllowExternalOrgDataMods
+yawl:ResourceDataSet_setAllowExternalOrgDataMods_7 a yawl:Method ;
+    rdfs:label "setAllowExternalOrgDataMods" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAllowExternalOrgDataMods(boolean allow)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.isExternalOrgDataModsAllowed
+yawl:ResourceDataSet_isExternalOrgDataModsAllowed_8 a yawl:Method ;
+    rdfs:label "isExternalOrgDataModsAllowed" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isExternalOrgDataModsAllowed()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.isDataEditable
+yawl:ResourceDataSet_isDataEditable_9 a yawl:Method ;
+    rdfs:label "isDataEditable" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isDataEditable(ResUnit resource)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.isDataEditable
+yawl:ResourceDataSet_isDataEditable_10 a yawl:Method ;
+    rdfs:label "isDataEditable" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isDataEditable(String resName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.setExternalUserAuthentication
+yawl:ResourceDataSet_setExternalUserAuthentication_11 a yawl:Method ;
+    rdfs:label "setExternalUserAuthentication" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setExternalUserAuthentication(boolean externalAuth)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.isUserAuthenticationExternal
+yawl:ResourceDataSet_isUserAuthenticationExternal_12 a yawl:Method ;
+    rdfs:label "isUserAuthenticationExternal" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isUserAuthenticationExternal()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.setDataSource
+yawl:ResourceDataSet_setDataSource_13 a yawl:Method ;
+    rdfs:label "setDataSource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataSource(ResUnit resource, DataSource source)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getDataSource
+yawl:ResourceDataSet_getDataSource_14 a yawl:Method ;
+    rdfs:label "getDataSource" ;
+    yawl:returnType "DataSource" ;
+    yawl:signature "DataSource getDataSource(ResUnit resource)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.hasDefaultDataSource
+yawl:ResourceDataSet_hasDefaultDataSource_15 a yawl:Method ;
+    rdfs:label "hasDefaultDataSource" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasDefaultDataSource(ResUnit resource)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getResUnit
+yawl:ResourceDataSet_getResUnit_16 a yawl:Method ;
+    rdfs:label "getResUnit" ;
+    yawl:returnType "ResUnit" ;
+    yawl:signature "ResUnit getResUnit(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getChangeStamp
+yawl:ResourceDataSet_getChangeStamp_17 a yawl:Method ;
+    rdfs:label "getChangeStamp" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getChangeStamp(ResUnit unit)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getLastChangeStamp
+yawl:ResourceDataSet_getLastChangeStamp_18 a yawl:Method ;
+    rdfs:label "getLastChangeStamp" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getLastChangeStamp()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.setParticipants
+yawl:ResourceDataSet_setParticipants_19 a yawl:Method ;
+    rdfs:label "setParticipants" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setParticipants(Map participants, DataSource source)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.setRoles
+yawl:ResourceDataSet_setRoles_20 a yawl:Method ;
+    rdfs:label "setRoles" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRoles(Map roles, DataSource source)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.setCapabilities
+yawl:ResourceDataSet_setCapabilities_21 a yawl:Method ;
+    rdfs:label "setCapabilities" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCapabilities(Map capabilities, DataSource source)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.setPositions
+yawl:ResourceDataSet_setPositions_22 a yawl:Method ;
+    rdfs:label "setPositions" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPositions(Map positions, DataSource source)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.setOrgGroups
+yawl:ResourceDataSet_setOrgGroups_23 a yawl:Method ;
+    rdfs:label "setOrgGroups" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOrgGroups(Map groups, DataSource source)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.setNonHumanResources
+yawl:ResourceDataSet_setNonHumanResources_24 a yawl:Method ;
+    rdfs:label "setNonHumanResources" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNonHumanResources(Map resources, DataSource source)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.setNonHumanCategories
+yawl:ResourceDataSet_setNonHumanCategories_25 a yawl:Method ;
+    rdfs:label "setNonHumanCategories" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNonHumanCategories(Map resources, DataSource source)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.augmentDataSourceAsRequired
+yawl:ResourceDataSet_augmentDataSourceAsRequired_26 a yawl:Method ;
+    rdfs:label "augmentDataSourceAsRequired" ;
+    yawl:returnType "void" ;
+    yawl:signature "void augmentDataSourceAsRequired()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.putParticipant
+yawl:ResourceDataSet_putParticipant_27 a yawl:Method ;
+    rdfs:label "putParticipant" ;
+    yawl:returnType "void" ;
+    yawl:signature "void putParticipant(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.putCapability
+yawl:ResourceDataSet_putCapability_28 a yawl:Method ;
+    rdfs:label "putCapability" ;
+    yawl:returnType "void" ;
+    yawl:signature "void putCapability(Capability c)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.putRole
+yawl:ResourceDataSet_putRole_29 a yawl:Method ;
+    rdfs:label "putRole" ;
+    yawl:returnType "void" ;
+    yawl:signature "void putRole(Role r)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.putPosition
+yawl:ResourceDataSet_putPosition_30 a yawl:Method ;
+    rdfs:label "putPosition" ;
+    yawl:returnType "void" ;
+    yawl:signature "void putPosition(Position p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.putOrgGroup
+yawl:ResourceDataSet_putOrgGroup_31 a yawl:Method ;
+    rdfs:label "putOrgGroup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void putOrgGroup(OrgGroup o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.putNonHumanResource
+yawl:ResourceDataSet_putNonHumanResource_32 a yawl:Method ;
+    rdfs:label "putNonHumanResource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void putNonHumanResource(NonHumanResource r)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.putNonHumanCategory
+yawl:ResourceDataSet_putNonHumanCategory_33 a yawl:Method ;
+    rdfs:label "putNonHumanCategory" ;
+    yawl:returnType "void" ;
+    yawl:signature "void putNonHumanCategory(NonHumanCategory r)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.delParticipant
+yawl:ResourceDataSet_delParticipant_34 a yawl:Method ;
+    rdfs:label "delParticipant" ;
+    yawl:returnType "void" ;
+    yawl:signature "void delParticipant(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.delRole
+yawl:ResourceDataSet_delRole_35 a yawl:Method ;
+    rdfs:label "delRole" ;
+    yawl:returnType "void" ;
+    yawl:signature "void delRole(Role r)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.delCapability
+yawl:ResourceDataSet_delCapability_36 a yawl:Method ;
+    rdfs:label "delCapability" ;
+    yawl:returnType "void" ;
+    yawl:signature "void delCapability(Capability c)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.delPosition
+yawl:ResourceDataSet_delPosition_37 a yawl:Method ;
+    rdfs:label "delPosition" ;
+    yawl:returnType "void" ;
+    yawl:signature "void delPosition(Position p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.delOrgGroup
+yawl:ResourceDataSet_delOrgGroup_38 a yawl:Method ;
+    rdfs:label "delOrgGroup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void delOrgGroup(OrgGroup o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.delNonHumanResource
+yawl:ResourceDataSet_delNonHumanResource_39 a yawl:Method ;
+    rdfs:label "delNonHumanResource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void delNonHumanResource(NonHumanResource r)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.delNonHumanCategory
+yawl:ResourceDataSet_delNonHumanCategory_40 a yawl:Method ;
+    rdfs:label "delNonHumanCategory" ;
+    yawl:returnType "void" ;
+    yawl:signature "void delNonHumanCategory(NonHumanCategory r)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.addParticipant
+yawl:ResourceDataSet_addParticipant_41 a yawl:Method ;
+    rdfs:label "addParticipant" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addParticipant(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.addRole
+yawl:ResourceDataSet_addRole_42 a yawl:Method ;
+    rdfs:label "addRole" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addRole(Role r)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.addCapability
+yawl:ResourceDataSet_addCapability_43 a yawl:Method ;
+    rdfs:label "addCapability" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addCapability(Capability c)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.addPosition
+yawl:ResourceDataSet_addPosition_44 a yawl:Method ;
+    rdfs:label "addPosition" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addPosition(Position p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.addOrgGroup
+yawl:ResourceDataSet_addOrgGroup_45 a yawl:Method ;
+    rdfs:label "addOrgGroup" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addOrgGroup(OrgGroup o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.addNonHumanResource
+yawl:ResourceDataSet_addNonHumanResource_46 a yawl:Method ;
+    rdfs:label "addNonHumanResource" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addNonHumanResource(NonHumanResource r)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.addNonHumanCategory
+yawl:ResourceDataSet_addNonHumanCategory_47 a yawl:Method ;
+    rdfs:label "addNonHumanCategory" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addNonHumanCategory(NonHumanCategory c)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.importParticipant
+yawl:ResourceDataSet_importParticipant_48 a yawl:Method ;
+    rdfs:label "importParticipant" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean importParticipant(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.importRole
+yawl:ResourceDataSet_importRole_49 a yawl:Method ;
+    rdfs:label "importRole" ;
+    yawl:returnType "void" ;
+    yawl:signature "void importRole(Role r)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.importCapability
+yawl:ResourceDataSet_importCapability_50 a yawl:Method ;
+    rdfs:label "importCapability" ;
+    yawl:returnType "void" ;
+    yawl:signature "void importCapability(Capability c)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.importPosition
+yawl:ResourceDataSet_importPosition_51 a yawl:Method ;
+    rdfs:label "importPosition" ;
+    yawl:returnType "void" ;
+    yawl:signature "void importPosition(Position p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.importOrgGroup
+yawl:ResourceDataSet_importOrgGroup_52 a yawl:Method ;
+    rdfs:label "importOrgGroup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void importOrgGroup(OrgGroup o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.importNonHumanResource
+yawl:ResourceDataSet_importNonHumanResource_53 a yawl:Method ;
+    rdfs:label "importNonHumanResource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void importNonHumanResource(NonHumanResource r)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.importNonHumanCategory
+yawl:ResourceDataSet_importNonHumanCategory_54 a yawl:Method ;
+    rdfs:label "importNonHumanCategory" ;
+    yawl:returnType "void" ;
+    yawl:signature "void importNonHumanCategory(NonHumanCategory r)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.updateResource
+yawl:ResourceDataSet_updateResource_55 a yawl:Method ;
+    rdfs:label "updateResource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateResource(AbstractResource r)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.updateParticipant
+yawl:ResourceDataSet_updateParticipant_56 a yawl:Method ;
+    rdfs:label "updateParticipant" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean updateParticipant(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.updateResourceAttribute
+yawl:ResourceDataSet_updateResourceAttribute_57 a yawl:Method ;
+    rdfs:label "updateResourceAttribute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateResourceAttribute(Object obj)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.updateRole
+yawl:ResourceDataSet_updateRole_58 a yawl:Method ;
+    rdfs:label "updateRole" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateRole(Role r)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.updateCapability
+yawl:ResourceDataSet_updateCapability_59 a yawl:Method ;
+    rdfs:label "updateCapability" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateCapability(Capability c)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.updatePosition
+yawl:ResourceDataSet_updatePosition_60 a yawl:Method ;
+    rdfs:label "updatePosition" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updatePosition(Position p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.updateOrgGroup
+yawl:ResourceDataSet_updateOrgGroup_61 a yawl:Method ;
+    rdfs:label "updateOrgGroup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateOrgGroup(OrgGroup o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.updateNonHumanResource
+yawl:ResourceDataSet_updateNonHumanResource_62 a yawl:Method ;
+    rdfs:label "updateNonHumanResource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateNonHumanResource(NonHumanResource r)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.updateNonHumanCategory
+yawl:ResourceDataSet_updateNonHumanCategory_63 a yawl:Method ;
+    rdfs:label "updateNonHumanCategory" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateNonHumanCategory(NonHumanCategory r)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.removeParticipant
+yawl:ResourceDataSet_removeParticipant_64 a yawl:Method ;
+    rdfs:label "removeParticipant" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeParticipant(Participant p)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.removeRole
+yawl:ResourceDataSet_removeRole_65 a yawl:Method ;
+    rdfs:label "removeRole" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeRole(Role r)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.removeCapability
+yawl:ResourceDataSet_removeCapability_66 a yawl:Method ;
+    rdfs:label "removeCapability" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeCapability(Capability c)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.removePosition
+yawl:ResourceDataSet_removePosition_67 a yawl:Method ;
+    rdfs:label "removePosition" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removePosition(Position p)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.removeOrgGroup
+yawl:ResourceDataSet_removeOrgGroup_68 a yawl:Method ;
+    rdfs:label "removeOrgGroup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeOrgGroup(OrgGroup o)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.removeNonHumanResource
+yawl:ResourceDataSet_removeNonHumanResource_69 a yawl:Method ;
+    rdfs:label "removeNonHumanResource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeNonHumanResource(NonHumanResource r)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.removeNonHumanCategory
+yawl:ResourceDataSet_removeNonHumanCategory_70 a yawl:Method ;
+    rdfs:label "removeNonHumanCategory" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeNonHumanCategory(NonHumanCategory r)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.removeRole
+yawl:ResourceDataSet_removeRole_71 a yawl:Method ;
+    rdfs:label "removeRole" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeRole(String rid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.removeCapability
+yawl:ResourceDataSet_removeCapability_72 a yawl:Method ;
+    rdfs:label "removeCapability" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeCapability(String cid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.removePosition
+yawl:ResourceDataSet_removePosition_73 a yawl:Method ;
+    rdfs:label "removePosition" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removePosition(String pid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.removeOrgGroup
+yawl:ResourceDataSet_removeOrgGroup_74 a yawl:Method ;
+    rdfs:label "removeOrgGroup" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeOrgGroup(String oid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.removeNonHumanResource
+yawl:ResourceDataSet_removeNonHumanResource_75 a yawl:Method ;
+    rdfs:label "removeNonHumanResource" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeNonHumanResource(String rid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.removeNonHumanCategory
+yawl:ResourceDataSet_removeNonHumanCategory_76 a yawl:Method ;
+    rdfs:label "removeNonHumanCategory" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeNonHumanCategory(String rid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getResource
+yawl:ResourceDataSet_getResource_77 a yawl:Method ;
+    rdfs:label "getResource" ;
+    yawl:returnType "AbstractResource" ;
+    yawl:signature "AbstractResource getResource(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getParticipant
+yawl:ResourceDataSet_getParticipant_78 a yawl:Method ;
+    rdfs:label "getParticipant" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant getParticipant(String pid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getRole
+yawl:ResourceDataSet_getRole_79 a yawl:Method ;
+    rdfs:label "getRole" ;
+    yawl:returnType "Role" ;
+    yawl:signature "Role getRole(String rid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getCapability
+yawl:ResourceDataSet_getCapability_80 a yawl:Method ;
+    rdfs:label "getCapability" ;
+    yawl:returnType "Capability" ;
+    yawl:signature "Capability getCapability(String cid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getPosition
+yawl:ResourceDataSet_getPosition_81 a yawl:Method ;
+    rdfs:label "getPosition" ;
+    yawl:returnType "Position" ;
+    yawl:signature "Position getPosition(String pid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getOrgGroup
+yawl:ResourceDataSet_getOrgGroup_82 a yawl:Method ;
+    rdfs:label "getOrgGroup" ;
+    yawl:returnType "OrgGroup" ;
+    yawl:signature "OrgGroup getOrgGroup(String oid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getNonHumanResource
+yawl:ResourceDataSet_getNonHumanResource_83 a yawl:Method ;
+    rdfs:label "getNonHumanResource" ;
+    yawl:returnType "NonHumanResource" ;
+    yawl:signature "NonHumanResource getNonHumanResource(String rid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getNonHumanCategory
+yawl:ResourceDataSet_getNonHumanCategory_84 a yawl:Method ;
+    rdfs:label "getNonHumanCategory" ;
+    yawl:returnType "NonHumanCategory" ;
+    yawl:signature "NonHumanCategory getNonHumanCategory(String cid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getParticipants
+yawl:ResourceDataSet_getParticipants_85 a yawl:Method ;
+    rdfs:label "getParticipants" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getParticipants()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getRoles
+yawl:ResourceDataSet_getRoles_86 a yawl:Method ;
+    rdfs:label "getRoles" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getRoles()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getPositions
+yawl:ResourceDataSet_getPositions_87 a yawl:Method ;
+    rdfs:label "getPositions" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getPositions()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getCapabilities
+yawl:ResourceDataSet_getCapabilities_88 a yawl:Method ;
+    rdfs:label "getCapabilities" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getCapabilities()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getOrgGroups
+yawl:ResourceDataSet_getOrgGroups_89 a yawl:Method ;
+    rdfs:label "getOrgGroups" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getOrgGroups()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getNonHumanResources
+yawl:ResourceDataSet_getNonHumanResources_90 a yawl:Method ;
+    rdfs:label "getNonHumanResources" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getNonHumanResources()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getNonHumanCategories
+yawl:ResourceDataSet_getNonHumanCategories_91 a yawl:Method ;
+    rdfs:label "getNonHumanCategories" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getNonHumanCategories()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getNonHumanSubCategories
+yawl:ResourceDataSet_getNonHumanSubCategories_92 a yawl:Method ;
+    rdfs:label "getNonHumanSubCategories" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getNonHumanSubCategories()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getParticipantMap
+yawl:ResourceDataSet_getParticipantMap_93 a yawl:Method ;
+    rdfs:label "getParticipantMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getParticipantMap()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getRoleMap
+yawl:ResourceDataSet_getRoleMap_94 a yawl:Method ;
+    rdfs:label "getRoleMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getRoleMap()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getPositionMap
+yawl:ResourceDataSet_getPositionMap_95 a yawl:Method ;
+    rdfs:label "getPositionMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getPositionMap()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getCapabilityMap
+yawl:ResourceDataSet_getCapabilityMap_96 a yawl:Method ;
+    rdfs:label "getCapabilityMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getCapabilityMap()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getOrgGroupMap
+yawl:ResourceDataSet_getOrgGroupMap_97 a yawl:Method ;
+    rdfs:label "getOrgGroupMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getOrgGroupMap()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getNonHumanResourceMap
+yawl:ResourceDataSet_getNonHumanResourceMap_98 a yawl:Method ;
+    rdfs:label "getNonHumanResourceMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getNonHumanResourceMap()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getNonHumanCategoryMap
+yawl:ResourceDataSet_getNonHumanCategoryMap_99 a yawl:Method ;
+    rdfs:label "getNonHumanCategoryMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getNonHumanCategoryMap()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getParticipantIdentifiers
+yawl:ResourceDataSet_getParticipantIdentifiers_100 a yawl:Method ;
+    rdfs:label "getParticipantIdentifiers" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getParticipantIdentifiers()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getParticipantIdentifiers
+yawl:ResourceDataSet_getParticipantIdentifiers_101 a yawl:Method ;
+    rdfs:label "getParticipantIdentifiers" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getParticipantIdentifiers(String idStr)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getParticipantIdentifiers
+yawl:ResourceDataSet_getParticipantIdentifiers_102 a yawl:Method ;
+    rdfs:label "getParticipantIdentifiers" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getParticipantIdentifiers(Identifier idType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getRoleIdentifiers
+yawl:ResourceDataSet_getRoleIdentifiers_103 a yawl:Method ;
+    rdfs:label "getRoleIdentifiers" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getRoleIdentifiers()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getPositionIdentifiers
+yawl:ResourceDataSet_getPositionIdentifiers_104 a yawl:Method ;
+    rdfs:label "getPositionIdentifiers" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getPositionIdentifiers()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getCapabilityIdentifiers
+yawl:ResourceDataSet_getCapabilityIdentifiers_105 a yawl:Method ;
+    rdfs:label "getCapabilityIdentifiers" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getCapabilityIdentifiers()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getOrgGroupIdentifiers
+yawl:ResourceDataSet_getOrgGroupIdentifiers_106 a yawl:Method ;
+    rdfs:label "getOrgGroupIdentifiers" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getOrgGroupIdentifiers()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getNonHumanResourceIdentifiers
+yawl:ResourceDataSet_getNonHumanResourceIdentifiers_107 a yawl:Method ;
+    rdfs:label "getNonHumanResourceIdentifiers" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getNonHumanResourceIdentifiers()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getNonHumanCategoryIdentifiers
+yawl:ResourceDataSet_getNonHumanCategoryIdentifiers_108 a yawl:Method ;
+    rdfs:label "getNonHumanCategoryIdentifiers" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getNonHumanCategoryIdentifiers()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getNonHumanSubCategoriesAsXML
+yawl:ResourceDataSet_getNonHumanSubCategoriesAsXML_109 a yawl:Method ;
+    rdfs:label "getNonHumanSubCategoriesAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNonHumanSubCategoriesAsXML(String categoryID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getNonHumanCategorySet
+yawl:ResourceDataSet_getNonHumanCategorySet_110 a yawl:Method ;
+    rdfs:label "getNonHumanCategorySet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNonHumanCategorySet()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getParticipantCount
+yawl:ResourceDataSet_getParticipantCount_111 a yawl:Method ;
+    rdfs:label "getParticipantCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getParticipantCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getRoleByName
+yawl:ResourceDataSet_getRoleByName_112 a yawl:Method ;
+    rdfs:label "getRoleByName" ;
+    yawl:returnType "Role" ;
+    yawl:signature "Role getRoleByName(String roleName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getPositionByLabel
+yawl:ResourceDataSet_getPositionByLabel_113 a yawl:Method ;
+    rdfs:label "getPositionByLabel" ;
+    yawl:returnType "Position" ;
+    yawl:signature "Position getPositionByLabel(String label)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getOrgGroupByLabel
+yawl:ResourceDataSet_getOrgGroupByLabel_114 a yawl:Method ;
+    rdfs:label "getOrgGroupByLabel" ;
+    yawl:returnType "OrgGroup" ;
+    yawl:signature "OrgGroup getOrgGroupByLabel(String label)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getCapabilityByLabel
+yawl:ResourceDataSet_getCapabilityByLabel_115 a yawl:Method ;
+    rdfs:label "getCapabilityByLabel" ;
+    yawl:returnType "Capability" ;
+    yawl:signature "Capability getCapabilityByLabel(String label)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getNonHumanResourceByName
+yawl:ResourceDataSet_getNonHumanResourceByName_116 a yawl:Method ;
+    rdfs:label "getNonHumanResourceByName" ;
+    yawl:returnType "NonHumanResource" ;
+    yawl:signature "NonHumanResource getNonHumanResourceByName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getNonHumanCategoryByName
+yawl:ResourceDataSet_getNonHumanCategoryByName_117 a yawl:Method ;
+    rdfs:label "getNonHumanCategoryByName" ;
+    yawl:returnType "NonHumanCategory" ;
+    yawl:signature "NonHumanCategory getNonHumanCategoryByName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getNonHumanResources
+yawl:ResourceDataSet_getNonHumanResources_118 a yawl:Method ;
+    rdfs:label "getNonHumanResources" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getNonHumanResources(NonHumanCategory category, String subcategory)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getNonHumanResources
+yawl:ResourceDataSet_getNonHumanResources_119 a yawl:Method ;
+    rdfs:label "getNonHumanResources" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getNonHumanResources(String id, String subcategory)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getNonHumanResourcesByName
+yawl:ResourceDataSet_getNonHumanResourcesByName_120 a yawl:Method ;
+    rdfs:label "getNonHumanResourcesByName" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getNonHumanResourcesByName(String category, String subcategory)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.isKnownRoleName
+yawl:ResourceDataSet_isKnownRoleName_121 a yawl:Method ;
+    rdfs:label "isKnownRoleName" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isKnownRoleName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.isKnownCapabilityName
+yawl:ResourceDataSet_isKnownCapabilityName_122 a yawl:Method ;
+    rdfs:label "isKnownCapabilityName" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isKnownCapabilityName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.isKnownPositionName
+yawl:ResourceDataSet_isKnownPositionName_123 a yawl:Method ;
+    rdfs:label "isKnownPositionName" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isKnownPositionName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.isKnownOrgGroupName
+yawl:ResourceDataSet_isKnownOrgGroupName_124 a yawl:Method ;
+    rdfs:label "isKnownOrgGroupName" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isKnownOrgGroupName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.isKnownNonHumanResourceName
+yawl:ResourceDataSet_isKnownNonHumanResourceName_125 a yawl:Method ;
+    rdfs:label "isKnownNonHumanResourceName" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isKnownNonHumanResourceName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.isKnownNonHumanCategoryName
+yawl:ResourceDataSet_isKnownNonHumanCategoryName_126 a yawl:Method ;
+    rdfs:label "isKnownNonHumanCategoryName" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isKnownNonHumanCategoryName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.isKnownParticipant
+yawl:ResourceDataSet_isKnownParticipant_127 a yawl:Method ;
+    rdfs:label "isKnownParticipant" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isKnownParticipant(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.isKnownParticipant
+yawl:ResourceDataSet_isKnownParticipant_128 a yawl:Method ;
+    rdfs:label "isKnownParticipant" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isKnownParticipant(String pid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.isKnownRole
+yawl:ResourceDataSet_isKnownRole_129 a yawl:Method ;
+    rdfs:label "isKnownRole" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isKnownRole(Role r)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.isKnownRole
+yawl:ResourceDataSet_isKnownRole_130 a yawl:Method ;
+    rdfs:label "isKnownRole" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isKnownRole(String rid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.isKnownCapability
+yawl:ResourceDataSet_isKnownCapability_131 a yawl:Method ;
+    rdfs:label "isKnownCapability" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isKnownCapability(String cid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.isKnownPosition
+yawl:ResourceDataSet_isKnownPosition_132 a yawl:Method ;
+    rdfs:label "isKnownPosition" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isKnownPosition(String pid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.isKnownOrgGroup
+yawl:ResourceDataSet_isKnownOrgGroup_133 a yawl:Method ;
+    rdfs:label "isKnownOrgGroup" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isKnownOrgGroup(String oid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.isKnownNonHumanResource
+yawl:ResourceDataSet_isKnownNonHumanResource_134 a yawl:Method ;
+    rdfs:label "isKnownNonHumanResource" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isKnownNonHumanResource(NonHumanResource r)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.isKnownNonHumanResource
+yawl:ResourceDataSet_isKnownNonHumanResource_135 a yawl:Method ;
+    rdfs:label "isKnownNonHumanResource" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isKnownNonHumanResource(String rid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.isKnownNonHumanCategory
+yawl:ResourceDataSet_isKnownNonHumanCategory_136 a yawl:Method ;
+    rdfs:label "isKnownNonHumanCategory" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isKnownNonHumanCategory(NonHumanCategory c)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.isKnownNonHumanCategory
+yawl:ResourceDataSet_isKnownNonHumanCategory_137 a yawl:Method ;
+    rdfs:label "isKnownNonHumanCategory" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isKnownNonHumanCategory(String rid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getParticipantNames
+yawl:ResourceDataSet_getParticipantNames_138 a yawl:Method ;
+    rdfs:label "getParticipantNames" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParticipantNames()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getRoleNames
+yawl:ResourceDataSet_getRoleNames_139 a yawl:Method ;
+    rdfs:label "getRoleNames" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRoleNames()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getNonHumanResourceNames
+yawl:ResourceDataSet_getNonHumanResourceNames_140 a yawl:Method ;
+    rdfs:label "getNonHumanResourceNames" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNonHumanResourceNames()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getNonHumanCategoryNames
+yawl:ResourceDataSet_getNonHumanCategoryNames_141 a yawl:Method ;
+    rdfs:label "getNonHumanCategoryNames" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNonHumanCategoryNames()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getParticipantRoles
+yawl:ResourceDataSet_getParticipantRoles_142 a yawl:Method ;
+    rdfs:label "getParticipantRoles" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getParticipantRoles(String pid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getParticipantPositions
+yawl:ResourceDataSet_getParticipantPositions_143 a yawl:Method ;
+    rdfs:label "getParticipantPositions" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getParticipantPositions(String pid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getParticipantCapabilities
+yawl:ResourceDataSet_getParticipantCapabilities_144 a yawl:Method ;
+    rdfs:label "getParticipantCapabilities" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getParticipantCapabilities(String pid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getRoleParticipants
+yawl:ResourceDataSet_getRoleParticipants_145 a yawl:Method ;
+    rdfs:label "getRoleParticipants" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getRoleParticipants(String rid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getOrgGroupParticipants
+yawl:ResourceDataSet_getOrgGroupParticipants_146 a yawl:Method ;
+    rdfs:label "getOrgGroupParticipants" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getOrgGroupParticipants(String oid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getRoleParticipantsWithCapability
+yawl:ResourceDataSet_getRoleParticipantsWithCapability_147 a yawl:Method ;
+    rdfs:label "getRoleParticipantsWithCapability" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getRoleParticipantsWithCapability(String rid, String cid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getCapabilityParticipants
+yawl:ResourceDataSet_getCapabilityParticipants_148 a yawl:Method ;
+    rdfs:label "getCapabilityParticipants" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getCapabilityParticipants(String cid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getPositionParticipants
+yawl:ResourceDataSet_getPositionParticipants_149 a yawl:Method ;
+    rdfs:label "getPositionParticipants" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getPositionParticipants(String pid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getParticipantsWithRole
+yawl:ResourceDataSet_getParticipantsWithRole_150 a yawl:Method ;
+    rdfs:label "getParticipantsWithRole" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getParticipantsWithRole(String roleName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getParticipantsWithPosition
+yawl:ResourceDataSet_getParticipantsWithPosition_151 a yawl:Method ;
+    rdfs:label "getParticipantsWithPosition" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getParticipantsWithPosition(String positionName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getParticipantsWithCapability
+yawl:ResourceDataSet_getParticipantsWithCapability_152 a yawl:Method ;
+    rdfs:label "getParticipantsWithCapability" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getParticipantsWithCapability(String capabilityName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getOrgGroupMembers
+yawl:ResourceDataSet_getOrgGroupMembers_153 a yawl:Method ;
+    rdfs:label "getOrgGroupMembers" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getOrgGroupMembers(OrgGroup o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.resolveParticipants
+yawl:ResourceDataSet_resolveParticipants_154 a yawl:Method ;
+    rdfs:label "resolveParticipants" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set resolveParticipants(String anyID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.resolveParticipantsFromResourceName
+yawl:ResourceDataSet_resolveParticipantsFromResourceName_155 a yawl:Method ;
+    rdfs:label "resolveParticipantsFromResourceName" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set resolveParticipantsFromResourceName(String anyName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getParticipantFromUserID
+yawl:ResourceDataSet_getParticipantFromUserID_156 a yawl:Method ;
+    rdfs:label "getParticipantFromUserID" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant getParticipantFromUserID(String userID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.resolveParticipantIds
+yawl:ResourceDataSet_resolveParticipantIds_157 a yawl:Method ;
+    rdfs:label "resolveParticipantIds" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set resolveParticipantIds(String anyID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.resolveParticipantIdsAsXML
+yawl:ResourceDataSet_resolveParticipantIdsAsXML_158 a yawl:Method ;
+    rdfs:label "resolveParticipantIdsAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String resolveParticipantIdsAsXML(String anyID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getParticipantsReportingTo
+yawl:ResourceDataSet_getParticipantsReportingTo_159 a yawl:Method ;
+    rdfs:label "getParticipantsReportingTo" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getParticipantsReportingTo(String pid)" ;
+    rdfs:comment """Gets the complete set of Participants that ultimately report to the position(s) held by a Participant @param pid the id of the 'manager' Participant @return the set of Participants 'managed' by this Participant""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getParticipantsReportingToPosition
+yawl:ResourceDataSet_getParticipantsReportingToPosition_160 a yawl:Method ;
+    rdfs:label "getParticipantsReportingToPosition" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getParticipantsReportingToPosition(Position manager)" ;
+    rdfs:comment """Gets the set of Participants that ultimately report to the Position passed @param manager the 'manager' Position @return the set of Participants 'managed' by this Position""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getImmediateSupervisor
+yawl:ResourceDataSet_getImmediateSupervisor_161 a yawl:Method ;
+    rdfs:label "getImmediateSupervisor" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant getImmediateSupervisor(String pid)" ;
+    rdfs:comment """Gets the immediate supervisor of a participant. If the participant holds multiple positions, and therefore has multiple supervisors, one is returned as a random selection. @param pid the id of the participant to get the supervisor of @return the Participant who is the supervisor of the pid passed, or null if there is no supervisor.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getImmediateSupervisor
+yawl:ResourceDataSet_getImmediateSupervisor_162 a yawl:Method ;
+    rdfs:label "getImmediateSupervisor" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant getImmediateSupervisor(Participant p)" ;
+    rdfs:comment """Gets the immediate supervisor of a participant. If the participant holds multiple positions, and therefore has multiple supervisors, one is returned as a random selection. @param p the participant to get the supervisor of @return the Participant who is the supervisor of the pid passed, or null if there is no supervisor.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getParticipantsInDescendantRoles
+yawl:ResourceDataSet_getParticipantsInDescendantRoles_163 a yawl:Method ;
+    rdfs:label "getParticipantsInDescendantRoles" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getParticipantsInDescendantRoles(Role owner)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getParticipantsAsXML
+yawl:ResourceDataSet_getParticipantsAsXML_164 a yawl:Method ;
+    rdfs:label "getParticipantsAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParticipantsAsXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getRolesAsXML
+yawl:ResourceDataSet_getRolesAsXML_165 a yawl:Method ;
+    rdfs:label "getRolesAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRolesAsXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getCapabilitiesAsXML
+yawl:ResourceDataSet_getCapabilitiesAsXML_166 a yawl:Method ;
+    rdfs:label "getCapabilitiesAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCapabilitiesAsXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getPositionsAsXML
+yawl:ResourceDataSet_getPositionsAsXML_167 a yawl:Method ;
+    rdfs:label "getPositionsAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPositionsAsXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getOrgGroupsAsXML
+yawl:ResourceDataSet_getOrgGroupsAsXML_168 a yawl:Method ;
+    rdfs:label "getOrgGroupsAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOrgGroupsAsXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getNonHumanResourcesAsXML
+yawl:ResourceDataSet_getNonHumanResourcesAsXML_169 a yawl:Method ;
+    rdfs:label "getNonHumanResourcesAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNonHumanResourcesAsXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getNonHumanSubCategoriesAsXML
+yawl:ResourceDataSet_getNonHumanSubCategoriesAsXML_170 a yawl:Method ;
+    rdfs:label "getNonHumanSubCategoriesAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNonHumanSubCategoriesAsXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getNonHumanCategoriesAsXML
+yawl:ResourceDataSet_getNonHumanCategoriesAsXML_171 a yawl:Method ;
+    rdfs:label "getNonHumanCategoriesAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNonHumanCategoriesAsXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getParticipantRolesAsXML
+yawl:ResourceDataSet_getParticipantRolesAsXML_172 a yawl:Method ;
+    rdfs:label "getParticipantRolesAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParticipantRolesAsXML(String pid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getParticipantPositionsAsXML
+yawl:ResourceDataSet_getParticipantPositionsAsXML_173 a yawl:Method ;
+    rdfs:label "getParticipantPositionsAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParticipantPositionsAsXML(String pid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getParticipantCapabilitiesAsXML
+yawl:ResourceDataSet_getParticipantCapabilitiesAsXML_174 a yawl:Method ;
+    rdfs:label "getParticipantCapabilitiesAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParticipantCapabilitiesAsXML(String pid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getParticpantsWithRoleAsXML
+yawl:ResourceDataSet_getParticpantsWithRoleAsXML_175 a yawl:Method ;
+    rdfs:label "getParticpantsWithRoleAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParticpantsWithRoleAsXML(String roleName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getRoleParticipantsAsXML
+yawl:ResourceDataSet_getRoleParticipantsAsXML_176 a yawl:Method ;
+    rdfs:label "getRoleParticipantsAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRoleParticipantsAsXML(String rid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getParticpantsWithPositionAsXML
+yawl:ResourceDataSet_getParticpantsWithPositionAsXML_177 a yawl:Method ;
+    rdfs:label "getParticpantsWithPositionAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParticpantsWithPositionAsXML(String positionName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getPositionParticipantsAsXML
+yawl:ResourceDataSet_getPositionParticipantsAsXML_178 a yawl:Method ;
+    rdfs:label "getPositionParticipantsAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPositionParticipantsAsXML(String posid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getParticpantsWithCapabilityAsXML
+yawl:ResourceDataSet_getParticpantsWithCapabilityAsXML_179 a yawl:Method ;
+    rdfs:label "getParticpantsWithCapabilityAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParticpantsWithCapabilityAsXML(String capabilityName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.getCapabilityParticipantsAsXML
+yawl:ResourceDataSet_getCapabilityParticipantsAsXML_180 a yawl:Method ;
+    rdfs:label "getCapabilityParticipantsAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCapabilityParticipantsAsXML(String cid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.castToParticipantSet
+yawl:ResourceDataSet_castToParticipantSet_181 a yawl:Method ;
+    rdfs:label "castToParticipantSet" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set castToParticipantSet(Set resources)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.checkCyclicAttributeReference
+yawl:ResourceDataSet_checkCyclicAttributeReference_182 a yawl:Method ;
+    rdfs:label "checkCyclicAttributeReference" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkCyclicAttributeReference(AbstractResourceAttribute resource, String parentID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.checkCyclicRoleReference
+yawl:ResourceDataSet_checkCyclicRoleReference_183 a yawl:Method ;
+    rdfs:label "checkCyclicRoleReference" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkCyclicRoleReference(Role role, String refID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.checkCyclicPositionReference
+yawl:ResourceDataSet_checkCyclicPositionReference_184 a yawl:Method ;
+    rdfs:label "checkCyclicPositionReference" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkCyclicPositionReference(Position position, String refID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.checkCyclicOrgGroupReference
+yawl:ResourceDataSet_checkCyclicOrgGroupReference_185 a yawl:Method ;
+    rdfs:label "checkCyclicOrgGroupReference" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkCyclicOrgGroupReference(OrgGroup orgGroup, String refID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.constructCyclicAttributeErrorMessage
+yawl:ResourceDataSet_constructCyclicAttributeErrorMessage_186 a yawl:Method ;
+    rdfs:label "constructCyclicAttributeErrorMessage" ;
+    yawl:returnType "String" ;
+    yawl:signature "String constructCyclicAttributeErrorMessage(List chain, String type, String refName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceDataSet.removeOrphanedSubCategories
+yawl:ResourceDataSet_removeOrphanedSubCategories_187 a yawl:Method ;
+    rdfs:label "removeOrphanedSubCategories" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeOrphanedSubCategories()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceDataSet.logResourceBusy
+yawl:ResourceDataSet_logResourceBusy_188 a yawl:Method ;
+    rdfs:label "logResourceBusy" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean logResourceBusy(String caseID, String id, boolean isBusy)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceDataSet.freeResource
+yawl:ResourceDataSet_freeResource_189 a yawl:Method ;
+    rdfs:label "freeResource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void freeResource(String caseID, String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:ResourceDataSet_participantMap a yawl:Field ;
+    rdfs:label "participantMap" .
+
+yawl:ResourceDataSet_roleMap a yawl:Field ;
+    rdfs:label "roleMap" .
+
+yawl:ResourceDataSet_capabilityMap a yawl:Field ;
+    rdfs:label "capabilityMap" .
+
+yawl:ResourceDataSet_positionMap a yawl:Field ;
+    rdfs:label "positionMap" .
+
+yawl:ResourceDataSet_orgGroupMap a yawl:Field ;
+    rdfs:label "orgGroupMap" .
+
+yawl:ResourceDataSet_nonHumanMap a yawl:Field ;
+    rdfs:label "nonHumanMap" .
+
+yawl:ResourceDataSet_nonHumanCategoryMap a yawl:Field ;
+    rdfs:label "nonHumanCategoryMap" .
+
+yawl:ResourceDataSet__allowExternalOrgDataMods a yawl:Field ;
+    rdfs:label "_allowExternalOrgDataMods" .
+
+yawl:ResourceDataSet__externalUserAuthentication a yawl:Field ;
+    rdfs:label "_externalUserAuthentication" .
+
+yawl:ResourceDataSet__sources a yawl:Field ;
+    rdfs:label "_sources" .
+
+yawl:ResourceDataSet__changeStamp a yawl:Field ;
+    rdfs:label "_changeStamp" .
+
+
+

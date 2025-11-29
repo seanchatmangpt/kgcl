@@ -1,0 +1,89 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.pconns.PConnEditFrame
+yawl:PConnEditFrame a yawl:Class ;
+    rdfs:label "PConnEditFrame" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor_pconns ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/pconns/PConnEditFrame.java"^^xsd:string ;
+    yawl:extends yawl:JDialog ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:PConnEditFrame_initComponents_1 ;
+    yawl:hasMethod yawl:PConnEditFrame_finishButtonActionPerformed_2 ;
+    yawl:hasMethod yawl:PConnEditFrame_invokePConnEditFrame_3 ;
+    yawl:hasField yawl:PConnEditFrame_instance ;
+    yawl:hasField yawl:PConnEditFrame_frmPConns ;
+    yawl:hasField yawl:PConnEditFrame_channelComboBox ;
+    yawl:hasField yawl:PConnEditFrame_destPortComboBox ;
+    yawl:hasField yawl:PConnEditFrame_finishButton ;
+    yawl:hasField yawl:PConnEditFrame_jLabel1 ;
+    yawl:hasField yawl:PConnEditFrame_jLabel2 ;
+    yawl:hasField yawl:PConnEditFrame_jLabel3 ;
+    yawl:hasField yawl:PConnEditFrame_jPanel1 ;
+    yawl:hasField yawl:PConnEditFrame_sourcePortComboBox ;
+    .
+
+
+# Method: PConnEditFrame.initComponents
+yawl:PConnEditFrame_initComponents_1 a yawl:Method ;
+    rdfs:label "initComponents" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initComponents()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PConnEditFrame.finishButtonActionPerformed
+yawl:PConnEditFrame_finishButtonActionPerformed_2 a yawl:Method ;
+    rdfs:label "finishButtonActionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void finishButtonActionPerformed(java evt)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PConnEditFrame.invokePConnEditFrame
+yawl:PConnEditFrame_invokePConnEditFrame_3 a yawl:Method ;
+    rdfs:label "invokePConnEditFrame" ;
+    yawl:returnType "void" ;
+    yawl:signature "void invokePConnEditFrame(FrmPConns frmPConns)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:PConnEditFrame_instance a yawl:Field ;
+    rdfs:label "instance" .
+
+yawl:PConnEditFrame_frmPConns a yawl:Field ;
+    rdfs:label "frmPConns" .
+
+yawl:PConnEditFrame_channelComboBox a yawl:Field ;
+    rdfs:label "channelComboBox" .
+
+yawl:PConnEditFrame_destPortComboBox a yawl:Field ;
+    rdfs:label "destPortComboBox" .
+
+yawl:PConnEditFrame_finishButton a yawl:Field ;
+    rdfs:label "finishButton" .
+
+yawl:PConnEditFrame_jLabel1 a yawl:Field ;
+    rdfs:label "jLabel1" .
+
+yawl:PConnEditFrame_jLabel2 a yawl:Field ;
+    rdfs:label "jLabel2" .
+
+yawl:PConnEditFrame_jLabel3 a yawl:Field ;
+    rdfs:label "jLabel3" .
+
+yawl:PConnEditFrame_jPanel1 a yawl:Field ;
+    rdfs:label "jPanel1" .
+
+yawl:PConnEditFrame_sourcePortComboBox a yawl:Field ;
+    rdfs:label "sourcePortComboBox" .
+
+
+

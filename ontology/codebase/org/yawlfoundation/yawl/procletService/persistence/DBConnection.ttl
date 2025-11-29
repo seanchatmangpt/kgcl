@@ -1,0 +1,244 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.persistence.DBConnection
+yawl:DBConnection a yawl:Class ;
+    rdfs:label "DBConnection" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_persistence ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/persistence/DBConnection.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DBConnection_init_1 ;
+    yawl:hasMethod yawl:DBConnection_configure_2 ;
+    yawl:hasMethod yawl:DBConnection_close_3 ;
+    yawl:hasMethod yawl:DBConnection_insert_4 ;
+    yawl:hasMethod yawl:DBConnection_update_5 ;
+    yawl:hasMethod yawl:DBConnection_delete_6 ;
+    yawl:hasMethod yawl:DBConnection_getObjectsForClass_7 ;
+    yawl:hasMethod yawl:DBConnection_getObjectsForClassWhere_8 ;
+    yawl:hasMethod yawl:DBConnection_deleteAll_9 ;
+    yawl:hasMethod yawl:DBConnection_deleteAll_10 ;
+    yawl:hasMethod yawl:DBConnection_execQuery_11 ;
+    yawl:hasMethod yawl:DBConnection_execUpdate_12 ;
+    yawl:hasMethod yawl:DBConnection_getStoredItems_13 ;
+    yawl:hasMethod yawl:DBConnection_getStoredItem_14 ;
+    yawl:hasMethod yawl:DBConnection_getStoredItems_15 ;
+    yawl:hasMethod yawl:DBConnection_getSelectedStoredItem_16 ;
+    yawl:hasMethod yawl:DBConnection_getSelectedStoredItems_17 ;
+    yawl:hasMethod yawl:DBConnection_setStoredItemSelected_18 ;
+    yawl:hasMethod yawl:DBConnection_setStoredItemsSelected_19 ;
+    yawl:hasMethod yawl:DBConnection_setStoredItemSelected_20 ;
+    yawl:hasMethod yawl:DBConnection_setStoredItemsSelected_21 ;
+    yawl:hasMethod yawl:DBConnection_setLogLevel_22 ;
+    yawl:hasField yawl:DBConnection__db ;
+    .
+
+
+# Method: DBConnection.init
+yawl:DBConnection_init_1 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "HibernateEngine" ;
+    yawl:signature "HibernateEngine init(Properties props)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DBConnection.configure
+yawl:DBConnection_configure_2 a yawl:Method ;
+    rdfs:label "configure" ;
+    yawl:returnType "Properties" ;
+    yawl:signature "Properties configure(String dialect, String driver, String url, String username, String password)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DBConnection.close
+yawl:DBConnection_close_3 a yawl:Method ;
+    rdfs:label "close" ;
+    yawl:returnType "void" ;
+    yawl:signature "void close()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DBConnection.insert
+yawl:DBConnection_insert_4 a yawl:Method ;
+    rdfs:label "insert" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean insert(Object obj)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DBConnection.update
+yawl:DBConnection_update_5 a yawl:Method ;
+    rdfs:label "update" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean update(Object obj)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DBConnection.delete
+yawl:DBConnection_delete_6 a yawl:Method ;
+    rdfs:label "delete" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean delete(Object obj)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DBConnection.getObjectsForClass
+yawl:DBConnection_getObjectsForClass_7 a yawl:Method ;
+    rdfs:label "getObjectsForClass" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getObjectsForClass(String className)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DBConnection.getObjectsForClassWhere
+yawl:DBConnection_getObjectsForClassWhere_8 a yawl:Method ;
+    rdfs:label "getObjectsForClassWhere" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getObjectsForClassWhere(String className, String whereClause)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DBConnection.deleteAll
+yawl:DBConnection_deleteAll_9 a yawl:Method ;
+    rdfs:label "deleteAll" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteAll(String className)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DBConnection.deleteAll
+yawl:DBConnection_deleteAll_10 a yawl:Method ;
+    rdfs:label "deleteAll" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteAll(Item itemType)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DBConnection.execQuery
+yawl:DBConnection_execQuery_11 a yawl:Method ;
+    rdfs:label "execQuery" ;
+    yawl:returnType "List" ;
+    yawl:signature "List execQuery(String query)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DBConnection.execUpdate
+yawl:DBConnection_execUpdate_12 a yawl:Method ;
+    rdfs:label "execUpdate" ;
+    yawl:returnType "int" ;
+    yawl:signature "int execUpdate(String query)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DBConnection.getStoredItems
+yawl:DBConnection_getStoredItems_13 a yawl:Method ;
+    rdfs:label "getStoredItems" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getStoredItems(Item itemType)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DBConnection.getStoredItem
+yawl:DBConnection_getStoredItem_14 a yawl:Method ;
+    rdfs:label "getStoredItem" ;
+    yawl:returnType "StoredItem" ;
+    yawl:signature "StoredItem getStoredItem(String classID, String procletID, String blockID, Item itemType)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DBConnection.getStoredItems
+yawl:DBConnection_getStoredItems_15 a yawl:Method ;
+    rdfs:label "getStoredItems" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getStoredItems(String classID, String procletID, String blockID, Item itemType)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DBConnection.getSelectedStoredItem
+yawl:DBConnection_getSelectedStoredItem_16 a yawl:Method ;
+    rdfs:label "getSelectedStoredItem" ;
+    yawl:returnType "StoredItem" ;
+    yawl:signature "StoredItem getSelectedStoredItem(String classID, String procletID, String blockID, Item itemType)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DBConnection.getSelectedStoredItems
+yawl:DBConnection_getSelectedStoredItems_17 a yawl:Method ;
+    rdfs:label "getSelectedStoredItems" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getSelectedStoredItems(String classID, String procletID, String blockID, Item itemType)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DBConnection.setStoredItemSelected
+yawl:DBConnection_setStoredItemSelected_18 a yawl:Method ;
+    rdfs:label "setStoredItemSelected" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStoredItemSelected(String classID, String procletID, String blockID, Item itemType)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DBConnection.setStoredItemsSelected
+yawl:DBConnection_setStoredItemsSelected_19 a yawl:Method ;
+    rdfs:label "setStoredItemsSelected" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStoredItemsSelected(String classID, String procletID, String blockID, Item itemType)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DBConnection.setStoredItemSelected
+yawl:DBConnection_setStoredItemSelected_20 a yawl:Method ;
+    rdfs:label "setStoredItemSelected" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStoredItemSelected(StoredItem item)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DBConnection.setStoredItemsSelected
+yawl:DBConnection_setStoredItemsSelected_21 a yawl:Method ;
+    rdfs:label "setStoredItemsSelected" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStoredItemsSelected(List items)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DBConnection.setLogLevel
+yawl:DBConnection_setLogLevel_22 a yawl:Method ;
+    rdfs:label "setLogLevel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLogLevel(Logger logger, Level level)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:DBConnection__db a yawl:Field ;
+    rdfs:label "_db" .
+
+
+

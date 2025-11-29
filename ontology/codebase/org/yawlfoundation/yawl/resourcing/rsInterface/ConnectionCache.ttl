@@ -1,0 +1,234 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.rsInterface.ConnectionCache
+yawl:ConnectionCache a yawl:Class ;
+    rdfs:label "ConnectionCache" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_rsInterface ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/rsInterface/ConnectionCache.java"^^xsd:string ;
+    rdfs:comment """An extended HashMap to handle connections from external entities (such as the YAWL Editor) and the resource service. The map is of the form [sessionHandle, connection]. @author Michael Adams @since 2.0 @date Oct 24, 2007""" ;
+    yawl:extends yawl:ConcurrentHashMap ;
+    yawl:implements yawl:ISessionCache ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ConnectionCache_getInstance_1 ;
+    yawl:hasMethod yawl:ConnectionCache_addUsers_2 ;
+    yawl:hasMethod yawl:ConnectionCache_addUser_3 ;
+    yawl:hasMethod yawl:ConnectionCache_updateUser_4 ;
+    yawl:hasMethod yawl:ConnectionCache_deleteUser_5 ;
+    yawl:hasMethod yawl:ConnectionCache_clearUsers_6 ;
+    yawl:hasMethod yawl:ConnectionCache_connect_7 ;
+    yawl:hasMethod yawl:ConnectionCache_disconnect_8 ;
+    yawl:hasMethod yawl:ConnectionCache_expire_9 ;
+    yawl:hasMethod yawl:ConnectionCache_getSession_10 ;
+    yawl:hasMethod yawl:ConnectionCache_checkConnection_11 ;
+    yawl:hasMethod yawl:ConnectionCache_shutdown_12 ;
+    yawl:hasMethod yawl:ConnectionCache_hasUser_13 ;
+    yawl:hasMethod yawl:ConnectionCache_hasUsers_14 ;
+    yawl:hasMethod yawl:ConnectionCache_getPassword_15 ;
+    yawl:hasMethod yawl:ConnectionCache_connected_16 ;
+    yawl:hasMethod yawl:ConnectionCache_removeConnection_17 ;
+    yawl:hasMethod yawl:ConnectionCache_validPassword_18 ;
+    yawl:hasMethod yawl:ConnectionCache_validUser_19 ;
+    yawl:hasMethod yawl:ConnectionCache_initUserDB_20 ;
+    yawl:hasMethod yawl:ConnectionCache_failMsg_21 ;
+    yawl:hasMethod yawl:ConnectionCache_storeSession_22 ;
+    yawl:hasField yawl:ConnectionCache__me ;
+    yawl:hasField yawl:ConnectionCache__userdb ;
+    yawl:hasField yawl:ConnectionCache__timer ;
+    .
+
+
+# Method: ConnectionCache.getInstance
+yawl:ConnectionCache_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "ConnectionCache" ;
+    yawl:signature "ConnectionCache getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ConnectionCache.addUsers
+yawl:ConnectionCache_addUsers_2 a yawl:Method ;
+    rdfs:label "addUsers" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addUsers(Map users)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ConnectionCache.addUser
+yawl:ConnectionCache_addUser_3 a yawl:Method ;
+    rdfs:label "addUser" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addUser(String userid, String password)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ConnectionCache.updateUser
+yawl:ConnectionCache_updateUser_4 a yawl:Method ;
+    rdfs:label "updateUser" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateUser(String userid, String password)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ConnectionCache.deleteUser
+yawl:ConnectionCache_deleteUser_5 a yawl:Method ;
+    rdfs:label "deleteUser" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteUser(String userid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ConnectionCache.clearUsers
+yawl:ConnectionCache_clearUsers_6 a yawl:Method ;
+    rdfs:label "clearUsers" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clearUsers()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ConnectionCache.connect
+yawl:ConnectionCache_connect_7 a yawl:Method ;
+    rdfs:label "connect" ;
+    yawl:returnType "String" ;
+    yawl:signature "String connect(String userid, String password, long timeOutSeconds)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ConnectionCache.disconnect
+yawl:ConnectionCache_disconnect_8 a yawl:Method ;
+    rdfs:label "disconnect" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disconnect(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ConnectionCache.expire
+yawl:ConnectionCache_expire_9 a yawl:Method ;
+    rdfs:label "expire" ;
+    yawl:returnType "void" ;
+    yawl:signature "void expire(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ConnectionCache.getSession
+yawl:ConnectionCache_getSession_10 a yawl:Method ;
+    rdfs:label "getSession" ;
+    yawl:returnType "ServiceConnection" ;
+    yawl:signature "ServiceConnection getSession(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ConnectionCache.checkConnection
+yawl:ConnectionCache_checkConnection_11 a yawl:Method ;
+    rdfs:label "checkConnection" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean checkConnection(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ConnectionCache.shutdown
+yawl:ConnectionCache_shutdown_12 a yawl:Method ;
+    rdfs:label "shutdown" ;
+    yawl:returnType "void" ;
+    yawl:signature "void shutdown()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ConnectionCache.hasUser
+yawl:ConnectionCache_hasUser_13 a yawl:Method ;
+    rdfs:label "hasUser" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasUser(String userid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ConnectionCache.hasUsers
+yawl:ConnectionCache_hasUsers_14 a yawl:Method ;
+    rdfs:label "hasUsers" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasUsers()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ConnectionCache.getPassword
+yawl:ConnectionCache_getPassword_15 a yawl:Method ;
+    rdfs:label "getPassword" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPassword(String userid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ConnectionCache.connected
+yawl:ConnectionCache_connected_16 a yawl:Method ;
+    rdfs:label "connected" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean connected(String userid)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConnectionCache.removeConnection
+yawl:ConnectionCache_removeConnection_17 a yawl:Method ;
+    rdfs:label "removeConnection" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeConnection(String handle, EventLogger auditType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConnectionCache.validPassword
+yawl:ConnectionCache_validPassword_18 a yawl:Method ;
+    rdfs:label "validPassword" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validPassword(String userid, String password)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConnectionCache.validUser
+yawl:ConnectionCache_validUser_19 a yawl:Method ;
+    rdfs:label "validUser" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean validUser(String userid)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConnectionCache.initUserDB
+yawl:ConnectionCache_initUserDB_20 a yawl:Method ;
+    rdfs:label "initUserDB" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initUserDB()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConnectionCache.failMsg
+yawl:ConnectionCache_failMsg_21 a yawl:Method ;
+    rdfs:label "failMsg" ;
+    yawl:returnType "String" ;
+    yawl:signature "String failMsg(String msg)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ConnectionCache.storeSession
+yawl:ConnectionCache_storeSession_22 a yawl:Method ;
+    rdfs:label "storeSession" ;
+    yawl:returnType "String" ;
+    yawl:signature "String storeSession(ServiceConnection session)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:ConnectionCache__me a yawl:Field ;
+    rdfs:label "_me" .
+
+yawl:ConnectionCache__userdb a yawl:Field ;
+    rdfs:label "_userdb" .
+
+yawl:ConnectionCache__timer a yawl:Field ;
+    rdfs:label "_timer" .
+
+
+

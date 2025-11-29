@@ -1,0 +1,174 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.cost.evaluate.PredicateEvaluator
+yawl:PredicateEvaluator a yawl:Class ;
+    rdfs:label "PredicateEvaluator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_cost_evaluate ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/cost/evaluate/PredicateEvaluator.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 3/12/12""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:PredicateEvaluator_evaluate_1 ;
+    yawl:hasMethod yawl:PredicateEvaluator_calculate_2 ;
+    yawl:hasMethod yawl:PredicateEvaluator_calculate_3 ;
+    yawl:hasMethod yawl:PredicateEvaluator_groupAndCalculate_4 ;
+    yawl:hasMethod yawl:PredicateEvaluator_getTaskCosts_5 ;
+    yawl:hasMethod yawl:PredicateEvaluator_meetsCriteria_6 ;
+    yawl:hasMethod yawl:PredicateEvaluator_processDrivers_7 ;
+    yawl:hasMethod yawl:PredicateEvaluator_evaluateDrivers_8 ;
+    yawl:hasMethod yawl:PredicateEvaluator_addTaskCost_9 ;
+    yawl:hasMethod yawl:PredicateEvaluator_calcCost_10 ;
+    yawl:hasMethod yawl:PredicateEvaluator_evaluateEntity_11 ;
+    yawl:hasMethod yawl:PredicateEvaluator_getTaskTimings_12 ;
+    yawl:hasMethod yawl:PredicateEvaluator_isConcludingEvent_13 ;
+    yawl:hasMethod yawl:PredicateEvaluator_getRootCaseID_14 ;
+    yawl:hasMethod yawl:PredicateEvaluator_getCostPerCase_15 ;
+    yawl:hasField yawl:PredicateEvaluator__timings ;
+    yawl:hasField yawl:PredicateEvaluator__taskCosts ;
+    .
+
+
+# Method: PredicateEvaluator.evaluate
+yawl:PredicateEvaluator_evaluate_1 a yawl:Method ;
+    rdfs:label "evaluate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean evaluate(Predicate predicate, List events, DriverMatrix matrix)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PredicateEvaluator.calculate
+yawl:PredicateEvaluator_calculate_2 a yawl:Method ;
+    rdfs:label "calculate" ;
+    yawl:returnType "double" ;
+    yawl:signature "double calculate(Predicate predicate, List events, DriverMatrix matrix)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PredicateEvaluator.calculate
+yawl:PredicateEvaluator_calculate_3 a yawl:Method ;
+    rdfs:label "calculate" ;
+    yawl:returnType "double" ;
+    yawl:signature "double calculate(Predicate predicate)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PredicateEvaluator.groupAndCalculate
+yawl:PredicateEvaluator_groupAndCalculate_4 a yawl:Method ;
+    rdfs:label "groupAndCalculate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void groupAndCalculate(List events, DriverMatrix matrix)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PredicateEvaluator.getTaskCosts
+yawl:PredicateEvaluator_getTaskCosts_5 a yawl:Method ;
+    rdfs:label "getTaskCosts" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getTaskCosts(Collection taskCosts, Predicate predicate)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PredicateEvaluator.meetsCriteria
+yawl:PredicateEvaluator_meetsCriteria_6 a yawl:Method ;
+    rdfs:label "meetsCriteria" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean meetsCriteria(TaskCost taskCost, Predicate predicate)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PredicateEvaluator.processDrivers
+yawl:PredicateEvaluator_processDrivers_7 a yawl:Method ;
+    rdfs:label "processDrivers" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processDrivers(DriverMatrix driverMatrix, ResourceEvent event, ResourceTaskTimings timings)" ;
+    rdfs:comment """Find the cost drivers corresponding to this event and use them to calculate the relevant cost data @param driverMatrix a matrix of all cost drivers for the log's specification mapped by task, resource and data @param event        the completed or cancelled event to process @param timings      the set of timestamps for the task referenced by this event""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PredicateEvaluator.evaluateDrivers
+yawl:PredicateEvaluator_evaluateDrivers_8 a yawl:Method ;
+    rdfs:label "evaluateDrivers" ;
+    yawl:returnType "void" ;
+    yawl:signature "void evaluateDrivers(ResourceEvent event, Set drivers, ResourceTaskTimings timings, DriverMatrix driverMatrix)" ;
+    rdfs:comment """For each driver in a Set, checks that all of its entities are satisfied in an event, and if so, evaluates and saves the cost data to the event @param event        the event to annotate @param drivers      the set of drivers that relate to this event @param timings      the set of timestamps for the task this event relates to @param driverMatrix a matrix of all cost drivers for the log's specification resource entity""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PredicateEvaluator.addTaskCost
+yawl:PredicateEvaluator_addTaskCost_9 a yawl:Method ;
+    rdfs:label "addTaskCost" ;
+    yawl:returnType "TaskCost" ;
+    yawl:signature "TaskCost addTaskCost(ResourceEvent event, double cost)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PredicateEvaluator.calcCost
+yawl:PredicateEvaluator_calcCost_10 a yawl:Method ;
+    rdfs:label "calcCost" ;
+    yawl:returnType "double" ;
+    yawl:signature "double calcCost(ResourceEvent event, CostDriver driver, ResourceTaskTimings timings)" ;
+    rdfs:comment """Calculate and return the costs associated with this event @param event   the event to calculate the costs for @param driver  the cost driver to use for the calculation @param timings the set of timestamps for the task this event relates to @return the calculated cost""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PredicateEvaluator.evaluateEntity
+yawl:PredicateEvaluator_evaluateEntity_11 a yawl:Method ;
+    rdfs:label "evaluateEntity" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean evaluateEntity(DriverFacet facet, ResourceEvent event, DriverMatrix driverMatrix)" ;
+    rdfs:comment """Checks whether an facet is referenced by an event @param facet        the facet to check @param event        the event in question @param driverMatrix a matrix of all cost drivers for the log's specification @return true if the facet matches a value in the event""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PredicateEvaluator.getTaskTimings
+yawl:PredicateEvaluator_getTaskTimings_12 a yawl:Method ;
+    rdfs:label "getTaskTimings" ;
+    yawl:returnType "ResourceTaskTimings" ;
+    yawl:signature "ResourceTaskTimings getTaskTimings(ResourceEvent event)" ;
+    rdfs:comment """Gets the grouping of task timestamps for an event @param event the event to get the timings object for @return the timings object""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PredicateEvaluator.isConcludingEvent
+yawl:PredicateEvaluator_isConcludingEvent_13 a yawl:Method ;
+    rdfs:label "isConcludingEvent" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isConcludingEvent(ResourceEvent event)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PredicateEvaluator.getRootCaseID
+yawl:PredicateEvaluator_getRootCaseID_14 a yawl:Method ;
+    rdfs:label "getRootCaseID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRootCaseID(String caseID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: PredicateEvaluator.getCostPerCase
+yawl:PredicateEvaluator_getCostPerCase_15 a yawl:Method ;
+    rdfs:label "getCostPerCase" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getCostPerCase(Predicate predicate)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:PredicateEvaluator__timings a yawl:Field ;
+    rdfs:label "_timings" .
+
+yawl:PredicateEvaluator__taskCosts a yawl:Field ;
+    rdfs:label "_taskCosts" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_cost_log a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.cost.log" .
+
+

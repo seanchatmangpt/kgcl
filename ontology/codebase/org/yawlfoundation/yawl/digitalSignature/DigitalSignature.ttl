@@ -1,0 +1,174 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.digitalSignature
+yawl:org_yawlfoundation_yawl_digitalSignature a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.digitalSignature" .
+# Class: org.yawlfoundation.yawl.digitalSignature.DigitalSignature
+yawl:DigitalSignature a yawl:Class ;
+    rdfs:label "DigitalSignature" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_digitalSignature ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/digitalSignature/DigitalSignature.java"^^xsd:string ;
+    rdfs:comment """The main class of the Digital Signature Service. @author Sebastien Vincente @since 2.0""" ;
+    yawl:extends yawl:InterfaceBWebsideController ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DigitalSignature_handleEnabledWorkItemEvent_1 ;
+    yawl:hasMethod yawl:DigitalSignature_describeRequiredParams_2 ;
+    yawl:hasMethod yawl:DigitalSignature_handleCancelledWorkItemEvent_3 ;
+    yawl:hasMethod yawl:DigitalSignature_checkSignature_4 ;
+    yawl:hasMethod yawl:DigitalSignature_ConvertStringToDocument_5 ;
+    yawl:hasMethod yawl:DigitalSignature_getCertificate_6 ;
+    yawl:hasMethod yawl:DigitalSignature_getPrivateKey_7 ;
+    yawl:hasMethod yawl:DigitalSignature_PrepareDocumentToBeSign_8 ;
+    yawl:hasMethod yawl:DigitalSignature_SignedData_9 ;
+    yawl:hasMethod yawl:DigitalSignature_setP12AndPassword_10 ;
+    yawl:hasMethod yawl:DigitalSignature_ProgMain_11 ;
+    yawl:hasField yawl:DigitalSignature__Document ;
+    yawl:hasField yawl:DigitalSignature__Signature ;
+    yawl:hasField yawl:DigitalSignature__CheckSignature ;
+    yawl:hasField yawl:DigitalSignature__Alias ;
+    yawl:hasField yawl:DigitalSignature__Certificate ;
+    yawl:hasField yawl:DigitalSignature__P12 ;
+    yawl:hasField yawl:DigitalSignature__Password ;
+    yawl:hasField yawl:DigitalSignature__Pathway ;
+    yawl:hasField yawl:DigitalSignature__Name ;
+    yawl:hasField yawl:DigitalSignature__sessionHandle ;
+    yawl:hasField yawl:DigitalSignature_Doc ;
+    .
+
+
+# Method: DigitalSignature.handleEnabledWorkItemEvent
+yawl:DigitalSignature_handleEnabledWorkItemEvent_1 a yawl:Method ;
+    rdfs:label "handleEnabledWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleEnabledWorkItemEvent(WorkItemRecord enabledWorkItem)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DigitalSignature.describeRequiredParams
+yawl:DigitalSignature_describeRequiredParams_2 a yawl:Method ;
+    rdfs:label "describeRequiredParams" ;
+    yawl:returnType "YParameter" ;
+    yawl:signature "YParameter describeRequiredParams()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DigitalSignature.handleCancelledWorkItemEvent
+yawl:DigitalSignature_handleCancelledWorkItemEvent_3 a yawl:Method ;
+    rdfs:label "handleCancelledWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCancelledWorkItemEvent(WorkItemRecord workItemRecord)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DigitalSignature.checkSignature
+yawl:DigitalSignature_checkSignature_4 a yawl:Method ;
+    rdfs:label "checkSignature" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean checkSignature(byte Document)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DigitalSignature.ConvertStringToDocument
+yawl:DigitalSignature_ConvertStringToDocument_5 a yawl:Method ;
+    rdfs:label "ConvertStringToDocument" ;
+    yawl:returnType "org" ;
+    yawl:signature "org ConvertStringToDocument(String Doc)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DigitalSignature.getCertificate
+yawl:DigitalSignature_getCertificate_6 a yawl:Method ;
+    rdfs:label "getCertificate" ;
+    yawl:returnType "X509Certificate" ;
+    yawl:signature "X509Certificate getCertificate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DigitalSignature.getPrivateKey
+yawl:DigitalSignature_getPrivateKey_7 a yawl:Method ;
+    rdfs:label "getPrivateKey" ;
+    yawl:returnType "PrivateKey" ;
+    yawl:signature "PrivateKey getPrivateKey()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DigitalSignature.PrepareDocumentToBeSign
+yawl:DigitalSignature_PrepareDocumentToBeSign_8 a yawl:Method ;
+    rdfs:label "PrepareDocumentToBeSign" ;
+    yawl:returnType "String" ;
+    yawl:signature "String PrepareDocumentToBeSign(Element element)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DigitalSignature.SignedData
+yawl:DigitalSignature_SignedData_9 a yawl:Method ;
+    rdfs:label "SignedData" ;
+    yawl:returnType "CMSSignedData" ;
+    yawl:signature "CMSSignedData SignedData(Element InputDocument)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DigitalSignature.setP12AndPassword
+yawl:DigitalSignature_setP12AndPassword_10 a yawl:Method ;
+    rdfs:label "setP12AndPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setP12AndPassword(String P12, String password, String Certificate)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DigitalSignature.ProgMain
+yawl:DigitalSignature_ProgMain_11 a yawl:Method ;
+    rdfs:label "ProgMain" ;
+    yawl:returnType "String" ;
+    yawl:signature "String ProgMain(Element Document)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:DigitalSignature__Document a yawl:Field ;
+    rdfs:label "_Document" .
+
+yawl:DigitalSignature__Signature a yawl:Field ;
+    rdfs:label "_Signature" .
+
+yawl:DigitalSignature__CheckSignature a yawl:Field ;
+    rdfs:label "_CheckSignature" .
+
+yawl:DigitalSignature__Alias a yawl:Field ;
+    rdfs:label "_Alias" .
+
+yawl:DigitalSignature__Certificate a yawl:Field ;
+    rdfs:label "_Certificate" .
+
+yawl:DigitalSignature__P12 a yawl:Field ;
+    rdfs:label "_P12" .
+
+yawl:DigitalSignature__Password a yawl:Field ;
+    rdfs:label "_Password" .
+
+yawl:DigitalSignature__Pathway a yawl:Field ;
+    rdfs:label "_Pathway" .
+
+yawl:DigitalSignature__Name a yawl:Field ;
+    rdfs:label "_Name" .
+
+yawl:DigitalSignature__sessionHandle a yawl:Field ;
+    rdfs:label "_sessionHandle" .
+
+yawl:DigitalSignature_Doc a yawl:Field ;
+    rdfs:label "Doc" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_simulation a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.simulation" .
+
+

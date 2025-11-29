@@ -1,0 +1,87 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.dynform.DynFormFieldListFacet
+yawl:DynFormFieldListFacet a yawl:Class ;
+    rdfs:label "DynFormFieldListFacet" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf_dynform ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/dynform/DynFormFieldListFacet.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 23/08/2008""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DynFormFieldListFacet_getItemType_1 ;
+    yawl:hasMethod yawl:DynFormFieldListFacet_getItemTypeUnprefixed_2 ;
+    yawl:hasMethod yawl:DynFormFieldListFacet_getOwner_3 ;
+    yawl:hasMethod yawl:DynFormFieldListFacet_setOwner_4 ;
+    yawl:hasMethod yawl:DynFormFieldListFacet_getBaseElement_5 ;
+    yawl:hasMethod yawl:DynFormFieldListFacet_getToolTipExtn_6 ;
+    yawl:hasField yawl:DynFormFieldListFacet__baseElement ;
+    yawl:hasField yawl:DynFormFieldListFacet__itemType ;
+    yawl:hasField yawl:DynFormFieldListFacet__owner ;
+    .
+
+
+# Method: DynFormFieldListFacet.getItemType
+yawl:DynFormFieldListFacet_getItemType_1 a yawl:Method ;
+    rdfs:label "getItemType" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getItemType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldListFacet.getItemTypeUnprefixed
+yawl:DynFormFieldListFacet_getItemTypeUnprefixed_2 a yawl:Method ;
+    rdfs:label "getItemTypeUnprefixed" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getItemTypeUnprefixed()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldListFacet.getOwner
+yawl:DynFormFieldListFacet_getOwner_3 a yawl:Method ;
+    rdfs:label "getOwner" ;
+    yawl:returnType "DynFormField" ;
+    yawl:signature "DynFormField getOwner()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldListFacet.setOwner
+yawl:DynFormFieldListFacet_setOwner_4 a yawl:Method ;
+    rdfs:label "setOwner" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOwner(DynFormField owner)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldListFacet.getBaseElement
+yawl:DynFormFieldListFacet_getBaseElement_5 a yawl:Method ;
+    rdfs:label "getBaseElement" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBaseElement()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldListFacet.getToolTipExtn
+yawl:DynFormFieldListFacet_getToolTipExtn_6 a yawl:Method ;
+    rdfs:label "getToolTipExtn" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getToolTipExtn()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:DynFormFieldListFacet__baseElement a yawl:Field ;
+    rdfs:label "_baseElement" .
+
+yawl:DynFormFieldListFacet__itemType a yawl:Field ;
+    rdfs:label "_itemType" .
+
+yawl:DynFormFieldListFacet__owner a yawl:Field ;
+    rdfs:label "_owner" .
+
+
+

@@ -1,0 +1,78 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.stateless.unmarshal.Postset
+yawl:Postset a yawl:Class ;
+    rdfs:label "Postset" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_unmarshal ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/unmarshal/YDecompositionParser.java"^^xsd:string ;
+    yawl:modifiers "private" ;
+    yawl:hasMethod yawl:Postset_add_1 ;
+    yawl:hasMethod yawl:Postset_getQPostset_2 ;
+    yawl:hasMethod yawl:Postset_getPostset_3 ;
+    yawl:hasMethod yawl:Postset_addImplicitConditions_4 ;
+    yawl:hasMethod yawl:Postset_getNetElement_5 ;
+    yawl:hasMethod yawl:Postset_makeAnonID_6 ;
+    yawl:hasField yawl:Postset__postsetMap ;
+    .
+
+
+# Method: Postset.add
+yawl:Postset_add_1 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(String id, List postsetStruct)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Postset.getQPostset
+yawl:Postset_getQPostset_2 a yawl:Method ;
+    rdfs:label "getQPostset" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getQPostset(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Postset.getPostset
+yawl:Postset_getPostset_3 a yawl:Method ;
+    rdfs:label "getPostset" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getPostset(List ids)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Postset.addImplicitConditions
+yawl:Postset_addImplicitConditions_4 a yawl:Method ;
+    rdfs:label "addImplicitConditions" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addImplicitConditions()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Postset.getNetElement
+yawl:Postset_getNetElement_5 a yawl:Method ;
+    rdfs:label "getNetElement" ;
+    yawl:returnType "YExternalNetElement" ;
+    yawl:signature "YExternalNetElement getNetElement(String id)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Postset.makeAnonID
+yawl:Postset_makeAnonID_6 a yawl:Method ;
+    rdfs:label "makeAnonID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String makeAnonID(String current, String next)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:Postset__postsetMap a yawl:Field ;
+    rdfs:label "_postsetMap" .
+
+
+

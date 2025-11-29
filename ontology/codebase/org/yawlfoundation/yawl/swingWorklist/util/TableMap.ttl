@@ -1,0 +1,116 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.swingWorklist.util.TableMap
+yawl:TableMap a yawl:Class ;
+    rdfs:label "TableMap" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_swingWorklist_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/swingWorklist/util/TableMap.java"^^xsd:string ;
+    yawl:extends yawl:AbstractTableModel ;
+    yawl:implements yawl:TableModelListener ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:TableMap_getModel_1 ;
+    yawl:hasMethod yawl:TableMap_setModel_2 ;
+    yawl:hasMethod yawl:TableMap_getValueAt_3 ;
+    yawl:hasMethod yawl:TableMap_setValueAt_4 ;
+    yawl:hasMethod yawl:TableMap_getRowCount_5 ;
+    yawl:hasMethod yawl:TableMap_getColumnCount_6 ;
+    yawl:hasMethod yawl:TableMap_getColumnName_7 ;
+    yawl:hasMethod yawl:TableMap_getColumnClass_8 ;
+    yawl:hasMethod yawl:TableMap_isCellEditable_9 ;
+    yawl:hasMethod yawl:TableMap_tableChanged_10 ;
+    yawl:hasField yawl:TableMap_model ;
+    .
+
+
+# Method: TableMap.getModel
+yawl:TableMap_getModel_1 a yawl:Method ;
+    rdfs:label "getModel" ;
+    yawl:returnType "TableModel" ;
+    yawl:signature "TableModel getModel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableMap.setModel
+yawl:TableMap_setModel_2 a yawl:Method ;
+    rdfs:label "setModel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setModel(TableModel model)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableMap.getValueAt
+yawl:TableMap_getValueAt_3 a yawl:Method ;
+    rdfs:label "getValueAt" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object getValueAt(int aRow, int aColumn)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableMap.setValueAt
+yawl:TableMap_setValueAt_4 a yawl:Method ;
+    rdfs:label "setValueAt" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setValueAt(Object aValue, int aRow, int aColumn)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableMap.getRowCount
+yawl:TableMap_getRowCount_5 a yawl:Method ;
+    rdfs:label "getRowCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getRowCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableMap.getColumnCount
+yawl:TableMap_getColumnCount_6 a yawl:Method ;
+    rdfs:label "getColumnCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getColumnCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableMap.getColumnName
+yawl:TableMap_getColumnName_7 a yawl:Method ;
+    rdfs:label "getColumnName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getColumnName(int aColumn)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableMap.getColumnClass
+yawl:TableMap_getColumnClass_8 a yawl:Method ;
+    rdfs:label "getColumnClass" ;
+    yawl:returnType "Class" ;
+    yawl:signature "Class getColumnClass(int aColumn)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableMap.isCellEditable
+yawl:TableMap_isCellEditable_9 a yawl:Method ;
+    rdfs:label "isCellEditable" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isCellEditable(int row, int column)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableMap.tableChanged
+yawl:TableMap_tableChanged_10 a yawl:Method ;
+    rdfs:label "tableChanged" ;
+    yawl:returnType "void" ;
+    yawl:signature "void tableChanged(TableModelEvent e)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:TableMap_model a yawl:Field ;
+    rdfs:label "model" .
+
+
+

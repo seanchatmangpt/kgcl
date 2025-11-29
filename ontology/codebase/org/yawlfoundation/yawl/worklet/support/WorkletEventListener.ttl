@@ -1,0 +1,112 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.support.WorkletEventListener
+yawl:WorkletEventListener a yawl:Class ;
+    rdfs:label "WorkletEventListener" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_support ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/support/WorkletEventListener.java"^^xsd:string ;
+    rdfs:comment """An abstract class to be extend by classes that wish to be notified of worklet service events. A class must first be registered as a listener (see WorkletGatewayClient#addListener) to receive events via this class. @author Michael Adams @date 27/03/12""" ;
+    yawl:extends yawl:HttpServlet ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:WorkletEventListener_destroy_1 ;
+    yawl:hasMethod yawl:WorkletEventListener_doPost_2 ;
+    yawl:hasMethod yawl:WorkletEventListener_doGet_3 ;
+    yawl:hasMethod yawl:WorkletEventListener_selectionEvent_4 ;
+    yawl:hasMethod yawl:WorkletEventListener_constraintSuccessEvent_5 ;
+    yawl:hasMethod yawl:WorkletEventListener_caseLevelExceptionEvent_6 ;
+    yawl:hasMethod yawl:WorkletEventListener_itemLevelExceptionEvent_7 ;
+    yawl:hasMethod yawl:WorkletEventListener_shutdown_8 ;
+    .
+
+
+# Method: WorkletEventListener.destroy
+yawl:WorkletEventListener_destroy_1 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletEventListener.doPost
+yawl:WorkletEventListener_doPost_2 a yawl:Method ;
+    rdfs:label "doPost" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doPost(HttpServletRequest req, HttpServletResponse res)" ;
+    rdfs:comment """Receives event notifications from the Worklet Service and passes them on to extending classes via the appropriate method calls @param req the http request @param res the http response @throws IOException @throws ServletException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletEventListener.doGet
+yawl:WorkletEventListener_doGet_3 a yawl:Method ;
+    rdfs:label "doGet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doGet(HttpServletRequest req, HttpServletResponse res)" ;
+    rdfs:comment """Replies to browsers with a simple message @param req the http request @param res the http response @throws IOException @throws ServletException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletEventListener.selectionEvent
+yawl:WorkletEventListener_selectionEvent_4 a yawl:Method ;
+    rdfs:label "selectionEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void selectionEvent(WorkItemRecord wir, Map caseMap, RdrNode node)" ;
+    rdfs:comment """Receives notification of a selection (substitution) by the worklet service @param wir the workitem that has been replaced by a worklet @param caseMap a map of [caseID, worklet name] pairs, each one representing a a worklet case launched for the workitem (one for single-instance tasks, several for multiple-instance tasks) @param node the RdrNode that evaluated to true""" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletEventListener.constraintSuccessEvent
+yawl:WorkletEventListener_constraintSuccessEvent_5 a yawl:Method ;
+    rdfs:label "constraintSuccessEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void constraintSuccessEvent(String caseID, WorkItemRecord wir, Element caseData, RuleType ruleType)" ;
+    rdfs:comment """Receives notification of a case or workitem that has passed pre or post constraints @param caseID the case that passed constraints. @param wir the workitem that passed constraints. Will be null for case level constraints. @param caseData the current caseData, used for evaluation @param ruleType the type of constraint rule passed""" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletEventListener.caseLevelExceptionEvent
+yawl:WorkletEventListener_caseLevelExceptionEvent_6 a yawl:Method ;
+    rdfs:label "caseLevelExceptionEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void caseLevelExceptionEvent(String caseID, Element caseData, RdrNode node, RuleType ruleType)" ;
+    rdfs:comment """Receives notification of a case level exception being raised by the worklet service @param caseID the case on which the exception has been raised @param caseData the current caseData, used to evaluate the exception @param node the RdrNode that evaluated to true @param ruleType the type of exception raised""" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletEventListener.itemLevelExceptionEvent
+yawl:WorkletEventListener_itemLevelExceptionEvent_7 a yawl:Method ;
+    rdfs:label "itemLevelExceptionEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void itemLevelExceptionEvent(WorkItemRecord wir, Element caseData, RdrNode node, RuleType ruleType)" ;
+    rdfs:comment """Receives notification of a item level exception being raised by the worklet service @param wir the workitem for which the exception has been raised @param caseData the current caseData, used to evaluate the exception @param node the RdrNode that evaluated to true @param ruleType the type of exception raised""" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletEventListener.shutdown
+yawl:WorkletEventListener_shutdown_8 a yawl:Method ;
+    rdfs:label "shutdown" ;
+    yawl:returnType "void" ;
+    yawl:signature "void shutdown()" ;
+    rdfs:comment """Receives notification that the worklet service is shutting down""" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+
+
+yawl:org_yawlfoundation_yawl_worklet_rdrutil a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.worklet.rdrutil" .
+
+

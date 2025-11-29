@@ -1,0 +1,52 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.balancer.config
+yawl:org_yawlfoundation_yawl_balancer_config a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.balancer.config" .
+# Class: org.yawlfoundation.yawl.balancer.config.FileChangeListener
+yawl:FileChangeListener a yawl:Class ;
+    rdfs:label "FileChangeListener" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer_config ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/config/FileChangeListener.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 12/9/17""" ;
+    yawl:implements yawl:FileListener ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:FileChangeListener_fileCreated_1 ;
+    yawl:hasMethod yawl:FileChangeListener_fileDeleted_2 ;
+    yawl:hasMethod yawl:FileChangeListener_fileChanged_3 ;
+    .
+
+
+# Method: FileChangeListener.fileCreated
+yawl:FileChangeListener_fileCreated_1 a yawl:Method ;
+    rdfs:label "fileCreated" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fileCreated(FileChangeEvent fileChangeEvent)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FileChangeListener.fileDeleted
+yawl:FileChangeListener_fileDeleted_2 a yawl:Method ;
+    rdfs:label "fileDeleted" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fileDeleted(FileChangeEvent fileChangeEvent)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FileChangeListener.fileChanged
+yawl:FileChangeListener_fileChanged_3 a yawl:Method ;
+    rdfs:label "fileChanged" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fileChanged(FileChangeEvent fileChangeEvent)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

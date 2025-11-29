@@ -1,0 +1,505 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.resourcing
+yawl:org_yawlfoundation_yawl_resourcing a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing" .
+# Class: org.yawlfoundation.yawl.resourcing.ResourceMap
+yawl:ResourceMap a yawl:Class ;
+    rdfs:label "ResourceMap" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/ResourceMap.java"^^xsd:string ;
+    rdfs:comment """Manages all of the resourcing requirements and distribution strategies for one task. @author Michael Adams v0.1, 03/08/2007""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ResourceMap_setOfferInteraction_1 ;
+    yawl:hasMethod yawl:ResourceMap_setAllocateInteraction_2 ;
+    yawl:hasMethod yawl:ResourceMap_setStartInteraction_3 ;
+    yawl:hasMethod yawl:ResourceMap_setSecondaryResources_4 ;
+    yawl:hasMethod yawl:ResourceMap_setTaskPrivileges_5 ;
+    yawl:hasMethod yawl:ResourceMap_getOfferInteraction_6 ;
+    yawl:hasMethod yawl:ResourceMap_getAllocateInteraction_7 ;
+    yawl:hasMethod yawl:ResourceMap_getStartInteraction_8 ;
+    yawl:hasMethod yawl:ResourceMap_getSecondaryResources_9 ;
+    yawl:hasMethod yawl:ResourceMap_getTaskPrivileges_10 ;
+    yawl:hasMethod yawl:ResourceMap_getDistributionSet_11 ;
+    yawl:hasMethod yawl:ResourceMap_getTaskID_12 ;
+    yawl:hasMethod yawl:ResourceMap_setTaskID_13 ;
+    yawl:hasMethod yawl:ResourceMap_getSpecName_14 ;
+    yawl:hasMethod yawl:ResourceMap_getSpecID_15 ;
+    yawl:hasMethod yawl:ResourceMap_setSpecID_16 ;
+    yawl:hasMethod yawl:ResourceMap_getPiledResourceID_17 ;
+    yawl:hasMethod yawl:ResourceMap_setPiledResourceID_18 ;
+    yawl:hasMethod yawl:ResourceMap_getPiledResource_19 ;
+    yawl:hasMethod yawl:ResourceMap_setPiledResource_20 ;
+    yawl:hasMethod yawl:ResourceMap_removePiledResource_21 ;
+    yawl:hasMethod yawl:ResourceMap_getPersistedMap_22 ;
+    yawl:hasMethod yawl:ResourceMap_hasPiledResource_23 ;
+    yawl:hasMethod yawl:ResourceMap_restorePiledResource_24 ;
+    yawl:hasMethod yawl:ResourceMap_setPersisting_25 ;
+    yawl:hasMethod yawl:ResourceMap_isPersisting_26 ;
+    yawl:hasMethod yawl:ResourceMap_ignore_27 ;
+    yawl:hasMethod yawl:ResourceMap_getIgnoredList_28 ;
+    yawl:hasMethod yawl:ResourceMap_getOfferedParticipants_29 ;
+    yawl:hasMethod yawl:ResourceMap_hasOffers_30 ;
+    yawl:hasMethod yawl:ResourceMap_equals_31 ;
+    yawl:hasMethod yawl:ResourceMap_hashCode_32 ;
+    yawl:hasMethod yawl:ResourceMap_distribute_33 ;
+    yawl:hasMethod yawl:ResourceMap_withdrawOffer_34 ;
+    yawl:hasMethod yawl:ResourceMap_addToAdminUnofferedQueue_35 ;
+    yawl:hasMethod yawl:ResourceMap_doOffer_36 ;
+    yawl:hasMethod yawl:ResourceMap_doAllocate_37 ;
+    yawl:hasMethod yawl:ResourceMap_doStart_38 ;
+    yawl:hasMethod yawl:ResourceMap_removeIgnoredParticipants_39 ;
+    yawl:hasMethod yawl:ResourceMap_removeUnavailableParticipants_40 ;
+    yawl:hasMethod yawl:ResourceMap_getRM_41 ;
+    yawl:hasMethod yawl:ResourceMap_removeIgnoreList_42 ;
+    yawl:hasMethod yawl:ResourceMap_addToOfferedSet_43 ;
+    yawl:hasMethod yawl:ResourceMap_parse_44 ;
+    yawl:hasMethod yawl:ResourceMap_toXML_45 ;
+    yawl:hasMethod yawl:ResourceMap_get_id_46 ;
+    yawl:hasMethod yawl:ResourceMap_set_id_47 ;
+    yawl:hasField yawl:ResourceMap__offer ;
+    yawl:hasField yawl:ResourceMap__allocate ;
+    yawl:hasField yawl:ResourceMap__start ;
+    yawl:hasField yawl:ResourceMap__privileges ;
+    yawl:hasField yawl:ResourceMap__secondary ;
+    yawl:hasField yawl:ResourceMap__id ;
+    yawl:hasField yawl:ResourceMap__taskID ;
+    yawl:hasField yawl:ResourceMap__specID ;
+    yawl:hasField yawl:ResourceMap__piledResource ;
+    yawl:hasField yawl:ResourceMap__piledResourceID ;
+    yawl:hasField yawl:ResourceMap__persister ;
+    yawl:hasField yawl:ResourceMap__ignoreSet ;
+    yawl:hasField yawl:ResourceMap__offered ;
+    yawl:hasField yawl:ResourceMap__log ;
+    .
+
+
+# Method: ResourceMap.setOfferInteraction
+yawl:ResourceMap_setOfferInteraction_1 a yawl:Method ;
+    rdfs:label "setOfferInteraction" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOfferInteraction(OfferInteraction oi)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.setAllocateInteraction
+yawl:ResourceMap_setAllocateInteraction_2 a yawl:Method ;
+    rdfs:label "setAllocateInteraction" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAllocateInteraction(AllocateInteraction ai)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.setStartInteraction
+yawl:ResourceMap_setStartInteraction_3 a yawl:Method ;
+    rdfs:label "setStartInteraction" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStartInteraction(StartInteraction si)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.setSecondaryResources
+yawl:ResourceMap_setSecondaryResources_4 a yawl:Method ;
+    rdfs:label "setSecondaryResources" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSecondaryResources(SecondaryResources sr)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.setTaskPrivileges
+yawl:ResourceMap_setTaskPrivileges_5 a yawl:Method ;
+    rdfs:label "setTaskPrivileges" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTaskPrivileges(TaskPrivileges tp)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.getOfferInteraction
+yawl:ResourceMap_getOfferInteraction_6 a yawl:Method ;
+    rdfs:label "getOfferInteraction" ;
+    yawl:returnType "OfferInteraction" ;
+    yawl:signature "OfferInteraction getOfferInteraction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.getAllocateInteraction
+yawl:ResourceMap_getAllocateInteraction_7 a yawl:Method ;
+    rdfs:label "getAllocateInteraction" ;
+    yawl:returnType "AllocateInteraction" ;
+    yawl:signature "AllocateInteraction getAllocateInteraction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.getStartInteraction
+yawl:ResourceMap_getStartInteraction_8 a yawl:Method ;
+    rdfs:label "getStartInteraction" ;
+    yawl:returnType "StartInteraction" ;
+    yawl:signature "StartInteraction getStartInteraction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.getSecondaryResources
+yawl:ResourceMap_getSecondaryResources_9 a yawl:Method ;
+    rdfs:label "getSecondaryResources" ;
+    yawl:returnType "SecondaryResources" ;
+    yawl:signature "SecondaryResources getSecondaryResources()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.getTaskPrivileges
+yawl:ResourceMap_getTaskPrivileges_10 a yawl:Method ;
+    rdfs:label "getTaskPrivileges" ;
+    yawl:returnType "TaskPrivileges" ;
+    yawl:signature "TaskPrivileges getTaskPrivileges()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.getDistributionSet
+yawl:ResourceMap_getDistributionSet_11 a yawl:Method ;
+    rdfs:label "getDistributionSet" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getDistributionSet()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.getTaskID
+yawl:ResourceMap_getTaskID_12 a yawl:Method ;
+    rdfs:label "getTaskID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.setTaskID
+yawl:ResourceMap_setTaskID_13 a yawl:Method ;
+    rdfs:label "setTaskID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTaskID(String taskID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.getSpecName
+yawl:ResourceMap_getSpecName_14 a yawl:Method ;
+    rdfs:label "getSpecName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.getSpecID
+yawl:ResourceMap_getSpecID_15 a yawl:Method ;
+    rdfs:label "getSpecID" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getSpecID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.setSpecID
+yawl:ResourceMap_setSpecID_16 a yawl:Method ;
+    rdfs:label "setSpecID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSpecID(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.getPiledResourceID
+yawl:ResourceMap_getPiledResourceID_17 a yawl:Method ;
+    rdfs:label "getPiledResourceID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPiledResourceID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.setPiledResourceID
+yawl:ResourceMap_setPiledResourceID_18 a yawl:Method ;
+    rdfs:label "setPiledResourceID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPiledResourceID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.getPiledResource
+yawl:ResourceMap_getPiledResource_19 a yawl:Method ;
+    rdfs:label "getPiledResource" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant getPiledResource()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.setPiledResource
+yawl:ResourceMap_setPiledResource_20 a yawl:Method ;
+    rdfs:label "setPiledResource" ;
+    yawl:returnType "String" ;
+    yawl:signature "String setPiledResource(Participant p, WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.removePiledResource
+yawl:ResourceMap_removePiledResource_21 a yawl:Method ;
+    rdfs:label "removePiledResource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removePiledResource()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.getPersistedMap
+yawl:ResourceMap_getPersistedMap_22 a yawl:Method ;
+    rdfs:label "getPersistedMap" ;
+    yawl:returnType "ResourceMap" ;
+    yawl:signature "ResourceMap getPersistedMap()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceMap.hasPiledResource
+yawl:ResourceMap_hasPiledResource_23 a yawl:Method ;
+    rdfs:label "hasPiledResource" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasPiledResource()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.restorePiledResource
+yawl:ResourceMap_restorePiledResource_24 a yawl:Method ;
+    rdfs:label "restorePiledResource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restorePiledResource()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceMap.setPersisting
+yawl:ResourceMap_setPersisting_25 a yawl:Method ;
+    rdfs:label "setPersisting" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPersisting(boolean persist)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.isPersisting
+yawl:ResourceMap_isPersisting_26 a yawl:Method ;
+    rdfs:label "isPersisting" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isPersisting()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.ignore
+yawl:ResourceMap_ignore_27 a yawl:Method ;
+    rdfs:label "ignore" ;
+    yawl:returnType "void" ;
+    yawl:signature "void ignore(WorkItemRecord wir, Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.getIgnoredList
+yawl:ResourceMap_getIgnoredList_28 a yawl:Method ;
+    rdfs:label "getIgnoredList" ;
+    yawl:returnType "TaggedStringList" ;
+    yawl:signature "TaggedStringList getIgnoredList(String key)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.getOfferedParticipants
+yawl:ResourceMap_getOfferedParticipants_29 a yawl:Method ;
+    rdfs:label "getOfferedParticipants" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getOfferedParticipants(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.hasOffers
+yawl:ResourceMap_hasOffers_30 a yawl:Method ;
+    rdfs:label "hasOffers" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasOffers(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.equals
+yawl:ResourceMap_equals_31 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.hashCode
+yawl:ResourceMap_hashCode_32 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.distribute
+yawl:ResourceMap_distribute_33 a yawl:Method ;
+    rdfs:label "distribute" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord distribute(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.withdrawOffer
+yawl:ResourceMap_withdrawOffer_34 a yawl:Method ;
+    rdfs:label "withdrawOffer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void withdrawOffer(WorkItemRecord wir)" ;
+    rdfs:comment """removes the workitem from all offer queues""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.addToAdminUnofferedQueue
+yawl:ResourceMap_addToAdminUnofferedQueue_35 a yawl:Method ;
+    rdfs:label "addToAdminUnofferedQueue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addToAdminUnofferedQueue(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceMap.doOffer
+yawl:ResourceMap_doOffer_36 a yawl:Method ;
+    rdfs:label "doOffer" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set doOffer(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceMap.doAllocate
+yawl:ResourceMap_doAllocate_37 a yawl:Method ;
+    rdfs:label "doAllocate" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant doAllocate(Set distributionSet, WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceMap.doStart
+yawl:ResourceMap_doStart_38 a yawl:Method ;
+    rdfs:label "doStart" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doStart(Participant p, WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceMap.removeIgnoredParticipants
+yawl:ResourceMap_removeIgnoredParticipants_39 a yawl:Method ;
+    rdfs:label "removeIgnoredParticipants" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeIgnoredParticipants(WorkItemRecord wir, Set distributionSet)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceMap.removeUnavailableParticipants
+yawl:ResourceMap_removeUnavailableParticipants_40 a yawl:Method ;
+    rdfs:label "removeUnavailableParticipants" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeUnavailableParticipants(Set distributionSet)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceMap.getRM
+yawl:ResourceMap_getRM_41 a yawl:Method ;
+    rdfs:label "getRM" ;
+    yawl:returnType "ResourceManager" ;
+    yawl:signature "ResourceManager getRM()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceMap.removeIgnoreList
+yawl:ResourceMap_removeIgnoreList_42 a yawl:Method ;
+    rdfs:label "removeIgnoreList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeIgnoreList(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.addToOfferedSet
+yawl:ResourceMap_addToOfferedSet_43 a yawl:Method ;
+    rdfs:label "addToOfferedSet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addToOfferedSet(WorkItemRecord wir, Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.parse
+yawl:ResourceMap_parse_44 a yawl:Method ;
+    rdfs:label "parse" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parse(Element eleSpec)" ;
+    rdfs:comment """Parse the Element passed for task resourcing info and build the appropriate objects. @param eleSpec the [resourcing] section from a particular task definition within a specification file.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.toXML
+yawl:ResourceMap_toXML_45 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.get_id
+yawl:ResourceMap_get_id_46 a yawl:Method ;
+    rdfs:label "get_id" ;
+    yawl:returnType "long" ;
+    yawl:signature "long get_id()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMap.set_id
+yawl:ResourceMap_set_id_47 a yawl:Method ;
+    rdfs:label "set_id" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_id(long id)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:ResourceMap__offer a yawl:Field ;
+    rdfs:label "_offer" .
+
+yawl:ResourceMap__allocate a yawl:Field ;
+    rdfs:label "_allocate" .
+
+yawl:ResourceMap__start a yawl:Field ;
+    rdfs:label "_start" .
+
+yawl:ResourceMap__privileges a yawl:Field ;
+    rdfs:label "_privileges" .
+
+yawl:ResourceMap__secondary a yawl:Field ;
+    rdfs:label "_secondary" .
+
+yawl:ResourceMap__id a yawl:Field ;
+    rdfs:label "_id" .
+
+yawl:ResourceMap__taskID a yawl:Field ;
+    rdfs:label "_taskID" .
+
+yawl:ResourceMap__specID a yawl:Field ;
+    rdfs:label "_specID" .
+
+yawl:ResourceMap__piledResource a yawl:Field ;
+    rdfs:label "_piledResource" .
+
+yawl:ResourceMap__piledResourceID a yawl:Field ;
+    rdfs:label "_piledResourceID" .
+
+yawl:ResourceMap__persister a yawl:Field ;
+    rdfs:label "_persister" .
+
+yawl:ResourceMap__ignoreSet a yawl:Field ;
+    rdfs:label "_ignoreSet" .
+
+yawl:ResourceMap__offered a yawl:Field ;
+    rdfs:label "_offered" .
+
+yawl:ResourceMap__log a yawl:Field ;
+    rdfs:label "_log" .
+
+
+

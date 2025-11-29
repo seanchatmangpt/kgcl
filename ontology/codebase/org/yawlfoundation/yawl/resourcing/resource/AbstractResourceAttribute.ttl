@@ -1,0 +1,242 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.resource.AbstractResourceAttribute
+yawl:AbstractResourceAttribute a yawl:Class ;
+    rdfs:label "AbstractResourceAttribute" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_resource ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/resource/AbstractResourceAttribute.java"^^xsd:string ;
+    rdfs:comment """An abstract class representing a resource attribute. Extended by Role, Capability, Position and OrgGroup classes. @author Michael Adams v0.1, 21/08/2007""" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:AbstractResourceAttribute_setLabel_1 ;
+    yawl:hasMethod yawl:AbstractResourceAttribute_save_2 ;
+    yawl:hasMethod yawl:AbstractResourceAttribute_setPersisting_3 ;
+    yawl:hasMethod yawl:AbstractResourceAttribute_isPersisting_4 ;
+    yawl:hasMethod yawl:AbstractResourceAttribute_getID_5 ;
+    yawl:hasMethod yawl:AbstractResourceAttribute_setID_6 ;
+    yawl:hasMethod yawl:AbstractResourceAttribute_getNotes_7 ;
+    yawl:hasMethod yawl:AbstractResourceAttribute_setNotes_8 ;
+    yawl:hasMethod yawl:AbstractResourceAttribute_getDescription_9 ;
+    yawl:hasMethod yawl:AbstractResourceAttribute_setDescription_10 ;
+    yawl:hasMethod yawl:AbstractResourceAttribute_addResource_11 ;
+    yawl:hasMethod yawl:AbstractResourceAttribute_removeResource_12 ;
+    yawl:hasMethod yawl:AbstractResourceAttribute_hasResource_13 ;
+    yawl:hasMethod yawl:AbstractResourceAttribute_getResources_14 ;
+    yawl:hasMethod yawl:AbstractResourceAttribute_getOrgDataSet_15 ;
+    yawl:hasMethod yawl:AbstractResourceAttribute_fromXML_16 ;
+    yawl:hasMethod yawl:AbstractResourceAttribute_reconstitute_17 ;
+    yawl:hasMethod yawl:AbstractResourceAttribute_hashCode_18 ;
+    yawl:hasMethod yawl:AbstractResourceAttribute_toString_19 ;
+    yawl:hasMethod yawl:AbstractResourceAttribute_getName_20 ;
+    yawl:hasMethod yawl:AbstractResourceAttribute_get_resources_21 ;
+    yawl:hasMethod yawl:AbstractResourceAttribute_set_resources_22 ;
+    yawl:hasField yawl:AbstractResourceAttribute__id ;
+    yawl:hasField yawl:AbstractResourceAttribute__description ;
+    yawl:hasField yawl:AbstractResourceAttribute__notes ;
+    yawl:hasField yawl:AbstractResourceAttribute__resources ;
+    yawl:hasField yawl:AbstractResourceAttribute__persisting ;
+    .
+
+
+# Method: AbstractResourceAttribute.setLabel
+yawl:AbstractResourceAttribute_setLabel_1 a yawl:Method ;
+    rdfs:label "setLabel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLabel(String label)" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResourceAttribute.save
+yawl:AbstractResourceAttribute_save_2 a yawl:Method ;
+    rdfs:label "save" ;
+    yawl:returnType "void" ;
+    yawl:signature "void save()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResourceAttribute.setPersisting
+yawl:AbstractResourceAttribute_setPersisting_3 a yawl:Method ;
+    rdfs:label "setPersisting" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPersisting(boolean persisting)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResourceAttribute.isPersisting
+yawl:AbstractResourceAttribute_isPersisting_4 a yawl:Method ;
+    rdfs:label "isPersisting" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isPersisting()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResourceAttribute.getID
+yawl:AbstractResourceAttribute_getID_5 a yawl:Method ;
+    rdfs:label "getID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResourceAttribute.setID
+yawl:AbstractResourceAttribute_setID_6 a yawl:Method ;
+    rdfs:label "setID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResourceAttribute.getNotes
+yawl:AbstractResourceAttribute_getNotes_7 a yawl:Method ;
+    rdfs:label "getNotes" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNotes()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResourceAttribute.setNotes
+yawl:AbstractResourceAttribute_setNotes_8 a yawl:Method ;
+    rdfs:label "setNotes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNotes(String notes)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResourceAttribute.getDescription
+yawl:AbstractResourceAttribute_getDescription_9 a yawl:Method ;
+    rdfs:label "getDescription" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDescription()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResourceAttribute.setDescription
+yawl:AbstractResourceAttribute_setDescription_10 a yawl:Method ;
+    rdfs:label "setDescription" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDescription(String desc)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResourceAttribute.addResource
+yawl:AbstractResourceAttribute_addResource_11 a yawl:Method ;
+    rdfs:label "addResource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addResource(AbstractResource resource)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResourceAttribute.removeResource
+yawl:AbstractResourceAttribute_removeResource_12 a yawl:Method ;
+    rdfs:label "removeResource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeResource(AbstractResource resource)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResourceAttribute.hasResource
+yawl:AbstractResourceAttribute_hasResource_13 a yawl:Method ;
+    rdfs:label "hasResource" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasResource(AbstractResource resource)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResourceAttribute.getResources
+yawl:AbstractResourceAttribute_getResources_14 a yawl:Method ;
+    rdfs:label "getResources" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getResources()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResourceAttribute.getOrgDataSet
+yawl:AbstractResourceAttribute_getOrgDataSet_15 a yawl:Method ;
+    rdfs:label "getOrgDataSet" ;
+    yawl:returnType "ResourceDataSet" ;
+    yawl:signature "ResourceDataSet getOrgDataSet()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResourceAttribute.fromXML
+yawl:AbstractResourceAttribute_fromXML_16 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResourceAttribute.reconstitute
+yawl:AbstractResourceAttribute_reconstitute_17 a yawl:Method ;
+    rdfs:label "reconstitute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reconstitute(Element e)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResourceAttribute.hashCode
+yawl:AbstractResourceAttribute_hashCode_18 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResourceAttribute.toString
+yawl:AbstractResourceAttribute_toString_19 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResourceAttribute.getName
+yawl:AbstractResourceAttribute_getName_20 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractResourceAttribute.get_resources
+yawl:AbstractResourceAttribute_get_resources_21 a yawl:Method ;
+    rdfs:label "get_resources" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set get_resources()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: AbstractResourceAttribute.set_resources
+yawl:AbstractResourceAttribute_set_resources_22 a yawl:Method ;
+    rdfs:label "set_resources" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_resources(Set resources)" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:AbstractResourceAttribute__id a yawl:Field ;
+    rdfs:label "_id" .
+
+yawl:AbstractResourceAttribute__description a yawl:Field ;
+    rdfs:label "_description" .
+
+yawl:AbstractResourceAttribute__notes a yawl:Field ;
+    rdfs:label "_notes" .
+
+yawl:AbstractResourceAttribute__resources a yawl:Field ;
+    rdfs:label "_resources" .
+
+yawl:AbstractResourceAttribute__persisting a yawl:Field ;
+    rdfs:label "_persisting" .
+
+
+

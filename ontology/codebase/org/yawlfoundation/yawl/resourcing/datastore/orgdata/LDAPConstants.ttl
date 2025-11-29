@@ -1,0 +1,147 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.resourcing.datastore.orgdata
+yawl:org_yawlfoundation_yawl_resourcing_datastore_orgdata a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.datastore.orgdata" .
+# Class: org.yawlfoundation.yawl.resourcing.datastore.orgdata.LDAPConstants
+yawl:LDAPConstants a yawl:Class ;
+    rdfs:label "LDAPConstants" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_datastore_orgdata ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/datastore/orgdata/LDAPConstants.java"^^xsd:string ;
+    rdfs:comment """Constants for the LDAPSourceExtended class. This class contains constants like LDAP attribute and object class names from the YAWL openLDAP schema.  @author florian.quadt@rheni.de""" ;
+    yawl:hasField yawl:LDAPConstants_ATTR_NOTES ;
+    yawl:hasField yawl:LDAPConstants_ATTR_POSITION_REPORTS_TO ;
+    yawl:hasField yawl:LDAPConstants_ATTR_POSITION_ORG_GROUP ;
+    yawl:hasField yawl:LDAPConstants_ATTR_ORGGROUP_TYPE ;
+    yawl:hasField yawl:LDAPConstants_ATTR_PRIVILEGE_ADMINISTRATOR ;
+    yawl:hasField yawl:LDAPConstants_ATTR_PRIVILEGE_CAN_CHOOSE_ITEM_TO_START ;
+    yawl:hasField yawl:LDAPConstants_ATTR_PRIVILEGE_CAN_START_CONCURRENT ;
+    yawl:hasField yawl:LDAPConstants_ATTR_PRIVILEGE_CAN_REORDER ;
+    yawl:hasField yawl:LDAPConstants_ATTR_PRIVILEGE_CAN_VIEW_TEAM_ITEMS ;
+    yawl:hasField yawl:LDAPConstants_ATTR_PRIVILEGE_CAN_VIEW_ORG_GROUP_ITEMS ;
+    yawl:hasField yawl:LDAPConstants_ATTR_PRIVILEGE_CAN_CHAIN_EXECUTION ;
+    yawl:hasField yawl:LDAPConstants_ATTR_PRIVILEGE_CAN_MANAGE_CASES ;
+    yawl:hasField yawl:LDAPConstants_ATTR_UID ;
+    yawl:hasField yawl:LDAPConstants_ATTR_COMMON_NAME ;
+    yawl:hasField yawl:LDAPConstants_ATTR_SURNAME ;
+    yawl:hasField yawl:LDAPConstants_ATTR_GIVENNAME ;
+    yawl:hasField yawl:LDAPConstants_ATTR_DISPLAYNAME ;
+    yawl:hasField yawl:LDAPConstants_ATTR_MAIL ;
+    yawl:hasField yawl:LDAPConstants_ATTR_DESCRIPTION ;
+    yawl:hasField yawl:LDAPConstants_ATTR_UNIQUE_MEMBER ;
+    yawl:hasField yawl:LDAPConstants_ATTR_PASSWORD ;
+    yawl:hasField yawl:LDAPConstants_ATTR_YAWL_INTERNAL_ID ;
+    yawl:hasField yawl:LDAPConstants_OC_ROLE_UNIQUE_NAMES ;
+    yawl:hasField yawl:LDAPConstants_OC_CAPABILITY_UNIQUE_NAMES ;
+    yawl:hasField yawl:LDAPConstants_OC_POSITION_UNIQUE_NAMES ;
+    yawl:hasField yawl:LDAPConstants_OC_PARTICIPANT ;
+    yawl:hasField yawl:LDAPConstants_OC_ORG_GROUP ;
+    yawl:hasField yawl:LDAPConstants_ORG_GROUP_TYPES ;
+    yawl:hasField yawl:LDAPConstants_OC_FILTER ;
+    yawl:hasField yawl:LDAPConstants_SUBTREE_SCOPE ;
+    yawl:hasField yawl:LDAPConstants_ONE_LEVEL_SCOPE ;
+    .
+
+
+
+
+yawl:LDAPConstants_ATTR_NOTES a yawl:Field ;
+    rdfs:label "ATTR_NOTES" .
+
+yawl:LDAPConstants_ATTR_POSITION_REPORTS_TO a yawl:Field ;
+    rdfs:label "ATTR_POSITION_REPORTS_TO" .
+
+yawl:LDAPConstants_ATTR_POSITION_ORG_GROUP a yawl:Field ;
+    rdfs:label "ATTR_POSITION_ORG_GROUP" .
+
+yawl:LDAPConstants_ATTR_ORGGROUP_TYPE a yawl:Field ;
+    rdfs:label "ATTR_ORGGROUP_TYPE" .
+
+yawl:LDAPConstants_ATTR_PRIVILEGE_ADMINISTRATOR a yawl:Field ;
+    rdfs:label "ATTR_PRIVILEGE_ADMINISTRATOR" .
+
+yawl:LDAPConstants_ATTR_PRIVILEGE_CAN_CHOOSE_ITEM_TO_START a yawl:Field ;
+    rdfs:label "ATTR_PRIVILEGE_CAN_CHOOSE_ITEM_TO_START" .
+
+yawl:LDAPConstants_ATTR_PRIVILEGE_CAN_START_CONCURRENT a yawl:Field ;
+    rdfs:label "ATTR_PRIVILEGE_CAN_START_CONCURRENT" .
+
+yawl:LDAPConstants_ATTR_PRIVILEGE_CAN_REORDER a yawl:Field ;
+    rdfs:label "ATTR_PRIVILEGE_CAN_REORDER" .
+
+yawl:LDAPConstants_ATTR_PRIVILEGE_CAN_VIEW_TEAM_ITEMS a yawl:Field ;
+    rdfs:label "ATTR_PRIVILEGE_CAN_VIEW_TEAM_ITEMS" .
+
+yawl:LDAPConstants_ATTR_PRIVILEGE_CAN_VIEW_ORG_GROUP_ITEMS a yawl:Field ;
+    rdfs:label "ATTR_PRIVILEGE_CAN_VIEW_ORG_GROUP_ITEMS" .
+
+yawl:LDAPConstants_ATTR_PRIVILEGE_CAN_CHAIN_EXECUTION a yawl:Field ;
+    rdfs:label "ATTR_PRIVILEGE_CAN_CHAIN_EXECUTION" .
+
+yawl:LDAPConstants_ATTR_PRIVILEGE_CAN_MANAGE_CASES a yawl:Field ;
+    rdfs:label "ATTR_PRIVILEGE_CAN_MANAGE_CASES" .
+
+yawl:LDAPConstants_ATTR_UID a yawl:Field ;
+    rdfs:label "ATTR_UID" .
+
+yawl:LDAPConstants_ATTR_COMMON_NAME a yawl:Field ;
+    rdfs:label "ATTR_COMMON_NAME" .
+
+yawl:LDAPConstants_ATTR_SURNAME a yawl:Field ;
+    rdfs:label "ATTR_SURNAME" .
+
+yawl:LDAPConstants_ATTR_GIVENNAME a yawl:Field ;
+    rdfs:label "ATTR_GIVENNAME" .
+
+yawl:LDAPConstants_ATTR_DISPLAYNAME a yawl:Field ;
+    rdfs:label "ATTR_DISPLAYNAME" .
+
+yawl:LDAPConstants_ATTR_MAIL a yawl:Field ;
+    rdfs:label "ATTR_MAIL" .
+
+yawl:LDAPConstants_ATTR_DESCRIPTION a yawl:Field ;
+    rdfs:label "ATTR_DESCRIPTION" .
+
+yawl:LDAPConstants_ATTR_UNIQUE_MEMBER a yawl:Field ;
+    rdfs:label "ATTR_UNIQUE_MEMBER" .
+
+yawl:LDAPConstants_ATTR_PASSWORD a yawl:Field ;
+    rdfs:label "ATTR_PASSWORD" .
+
+yawl:LDAPConstants_ATTR_YAWL_INTERNAL_ID a yawl:Field ;
+    rdfs:label "ATTR_YAWL_INTERNAL_ID" .
+
+yawl:LDAPConstants_OC_ROLE_UNIQUE_NAMES a yawl:Field ;
+    rdfs:label "OC_ROLE_UNIQUE_NAMES" .
+
+yawl:LDAPConstants_OC_CAPABILITY_UNIQUE_NAMES a yawl:Field ;
+    rdfs:label "OC_CAPABILITY_UNIQUE_NAMES" .
+
+yawl:LDAPConstants_OC_POSITION_UNIQUE_NAMES a yawl:Field ;
+    rdfs:label "OC_POSITION_UNIQUE_NAMES" .
+
+yawl:LDAPConstants_OC_PARTICIPANT a yawl:Field ;
+    rdfs:label "OC_PARTICIPANT" .
+
+yawl:LDAPConstants_OC_ORG_GROUP a yawl:Field ;
+    rdfs:label "OC_ORG_GROUP" .
+
+yawl:LDAPConstants_ORG_GROUP_TYPES a yawl:Field ;
+    rdfs:label "ORG_GROUP_TYPES" .
+
+yawl:LDAPConstants_OC_FILTER a yawl:Field ;
+    rdfs:label "OC_FILTER" .
+
+yawl:LDAPConstants_SUBTREE_SCOPE a yawl:Field ;
+    rdfs:label "SUBTREE_SCOPE" .
+
+yawl:LDAPConstants_ONE_LEVEL_SCOPE a yawl:Field ;
+    rdfs:label "ONE_LEVEL_SCOPE" .
+
+
+

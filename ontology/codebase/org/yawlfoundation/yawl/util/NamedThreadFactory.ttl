@@ -1,0 +1,39 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.util.NamedThreadFactory
+yawl:NamedThreadFactory a yawl:Class ;
+    rdfs:label "NamedThreadFactory" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/util/NamedThreadFactory.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 5/5/20""" ;
+    yawl:implements yawl:ThreadFactory ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:NamedThreadFactory_newThread_1 ;
+    yawl:hasField yawl:NamedThreadFactory__index ;
+    yawl:hasField yawl:NamedThreadFactory__prefix ;
+    .
+
+
+# Method: NamedThreadFactory.newThread
+yawl:NamedThreadFactory_newThread_1 a yawl:Method ;
+    rdfs:label "newThread" ;
+    yawl:returnType "Thread" ;
+    yawl:signature "Thread newThread(Runnable runnable)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:NamedThreadFactory__index a yawl:Field ;
+    rdfs:label "_index" .
+
+yawl:NamedThreadFactory__prefix a yawl:Field ;
+    rdfs:label "_prefix" .
+
+
+

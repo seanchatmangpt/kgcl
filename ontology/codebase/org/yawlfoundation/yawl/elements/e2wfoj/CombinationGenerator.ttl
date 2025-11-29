@@ -1,0 +1,96 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.elements.e2wfoj.CombinationGenerator
+yawl:CombinationGenerator a yawl:Class ;
+    rdfs:label "CombinationGenerator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_elements_e2wfoj ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/elements/e2wfoj/CombinationGenerator.java"^^xsd:string ;
+    rdfs:comment """http://www.merriampark.com/comb.htm#Source Combination Generator by Michael Gilleland, Merriam Park Software""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CombinationGenerator_reset_1 ;
+    yawl:hasMethod yawl:CombinationGenerator_getNumLeft_2 ;
+    yawl:hasMethod yawl:CombinationGenerator_hasMore_3 ;
+    yawl:hasMethod yawl:CombinationGenerator_getTotal_4 ;
+    yawl:hasMethod yawl:CombinationGenerator_getFactorial_5 ;
+    yawl:hasMethod yawl:CombinationGenerator_getNext_6 ;
+    yawl:hasField yawl:CombinationGenerator_a ;
+    yawl:hasField yawl:CombinationGenerator_n ;
+    yawl:hasField yawl:CombinationGenerator_r ;
+    yawl:hasField yawl:CombinationGenerator_numLeft ;
+    yawl:hasField yawl:CombinationGenerator_total ;
+    .
+
+
+# Method: CombinationGenerator.reset
+yawl:CombinationGenerator_reset_1 a yawl:Method ;
+    rdfs:label "reset" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reset()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CombinationGenerator.getNumLeft
+yawl:CombinationGenerator_getNumLeft_2 a yawl:Method ;
+    rdfs:label "getNumLeft" ;
+    yawl:returnType "BigInteger" ;
+    yawl:signature "BigInteger getNumLeft()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CombinationGenerator.hasMore
+yawl:CombinationGenerator_hasMore_3 a yawl:Method ;
+    rdfs:label "hasMore" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasMore()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CombinationGenerator.getTotal
+yawl:CombinationGenerator_getTotal_4 a yawl:Method ;
+    rdfs:label "getTotal" ;
+    yawl:returnType "BigInteger" ;
+    yawl:signature "BigInteger getTotal()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CombinationGenerator.getFactorial
+yawl:CombinationGenerator_getFactorial_5 a yawl:Method ;
+    rdfs:label "getFactorial" ;
+    yawl:returnType "BigInteger" ;
+    yawl:signature "BigInteger getFactorial(int n)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: CombinationGenerator.getNext
+yawl:CombinationGenerator_getNext_6 a yawl:Method ;
+    rdfs:label "getNext" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getNext()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:CombinationGenerator_a a yawl:Field ;
+    rdfs:label "a" .
+
+yawl:CombinationGenerator_n a yawl:Field ;
+    rdfs:label "n" .
+
+yawl:CombinationGenerator_r a yawl:Field ;
+    rdfs:label "r" .
+
+yawl:CombinationGenerator_numLeft a yawl:Field ;
+    rdfs:label "numLeft" .
+
+yawl:CombinationGenerator_total a yawl:Field ;
+    rdfs:label "total" .
+
+
+

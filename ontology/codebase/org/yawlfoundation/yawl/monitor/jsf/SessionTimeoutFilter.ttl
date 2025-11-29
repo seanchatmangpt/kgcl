@@ -1,0 +1,80 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.monitor.jsf.SessionTimeoutFilter
+yawl:SessionTimeoutFilter a yawl:Class ;
+    rdfs:label "SessionTimeoutFilter" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_monitor_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/monitor/jsf/SessionTimeoutFilter.java"^^xsd:string ;
+    rdfs:comment """Redirects a user action to the login page after a session timeout Author: Michael Adams Date: 14/03/2008 Based on code sourced from: http://techieexchange.blogspot.com/2008/02/jsf-session-expiry-timeout-solution.html""" ;
+    yawl:implements yawl:Filter ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:SessionTimeoutFilter_init_1 ;
+    yawl:hasMethod yawl:SessionTimeoutFilter_destroy_2 ;
+    yawl:hasMethod yawl:SessionTimeoutFilter_doFilter_3 ;
+    yawl:hasMethod yawl:SessionTimeoutFilter_isLoginPageRequest_4 ;
+    yawl:hasMethod yawl:SessionTimeoutFilter_isInvalidSession_5 ;
+    yawl:hasField yawl:SessionTimeoutFilter__timeoutPage ;
+    yawl:hasField yawl:SessionTimeoutFilter__log ;
+    .
+
+
+# Method: SessionTimeoutFilter.init
+yawl:SessionTimeoutFilter_init_1 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init(FilterConfig filterConfig)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionTimeoutFilter.destroy
+yawl:SessionTimeoutFilter_destroy_2 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionTimeoutFilter.doFilter
+yawl:SessionTimeoutFilter_doFilter_3 a yawl:Method ;
+    rdfs:label "doFilter" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SessionTimeoutFilter.isLoginPageRequest
+yawl:SessionTimeoutFilter_isLoginPageRequest_4 a yawl:Method ;
+    rdfs:label "isLoginPageRequest" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isLoginPageRequest(HttpServletRequest request)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SessionTimeoutFilter.isInvalidSession
+yawl:SessionTimeoutFilter_isInvalidSession_5 a yawl:Method ;
+    rdfs:label "isInvalidSession" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isInvalidSession(HttpServletRequest httpServletRequest)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:SessionTimeoutFilter__timeoutPage a yawl:Field ;
+    rdfs:label "_timeoutPage" .
+
+yawl:SessionTimeoutFilter__log a yawl:Field ;
+    rdfs:label "_log" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_controlpanel_preferences a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.controlpanel.preferences" .
+
+

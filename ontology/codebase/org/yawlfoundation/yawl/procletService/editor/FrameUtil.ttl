@@ -1,0 +1,281 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.FrameUtil
+yawl:FrameUtil a yawl:Class ;
+    rdfs:label "FrameUtil" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/FrameUtil.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:FrameUtil_fillList_1 ;
+    yawl:hasMethod yawl:FrameUtil_iniList_2 ;
+    yawl:hasMethod yawl:FrameUtil_addToList_3 ;
+    yawl:hasMethod yawl:FrameUtil_removeFromList_4 ;
+    yawl:hasMethod yawl:FrameUtil_removeFromList_5 ;
+    yawl:hasMethod yawl:FrameUtil_getSelecetdList_6 ;
+    yawl:hasMethod yawl:FrameUtil_getSelecetdAllList_7 ;
+    yawl:hasMethod yawl:FrameUtil_indexList_8 ;
+    yawl:hasMethod yawl:FrameUtil_readOnly_9 ;
+    yawl:hasMethod yawl:FrameUtil_getItemList_10 ;
+    yawl:hasMethod yawl:FrameUtil_setSelectedList_11 ;
+    yawl:hasMethod yawl:FrameUtil_getSelectedMultipleList_12 ;
+    yawl:hasMethod yawl:FrameUtil_addToComboBox_13 ;
+    yawl:hasMethod yawl:FrameUtil_fillComboBox_14 ;
+    yawl:hasMethod yawl:FrameUtil_setButtonOk_15 ;
+    yawl:hasMethod yawl:FrameUtil_setButtonCancel_16 ;
+    yawl:hasMethod yawl:FrameUtil_setButtonYes_17 ;
+    yawl:hasMethod yawl:FrameUtil_setButtonNo_18 ;
+    yawl:hasMethod yawl:FrameUtil_setButtonAdd_19 ;
+    yawl:hasMethod yawl:FrameUtil_setButtonEdit_20 ;
+    yawl:hasMethod yawl:FrameUtil_setButtonDelete_21 ;
+    yawl:hasMethod yawl:FrameUtil_setSize_22 ;
+    yawl:hasField yawl:FrameUtil_BUTTON_OK ;
+    yawl:hasField yawl:FrameUtil_BUTTON_CANCEL ;
+    yawl:hasField yawl:FrameUtil_BUTTON_YES ;
+    yawl:hasField yawl:FrameUtil_BUTTON_NO ;
+    yawl:hasField yawl:FrameUtil_BUTTON_ADD ;
+    yawl:hasField yawl:FrameUtil_BUTTON_EDIT ;
+    yawl:hasField yawl:FrameUtil_BUTTON_DELETE ;
+    .
+
+
+# Method: FrameUtil.fillList
+yawl:FrameUtil_fillList_1 a yawl:Method ;
+    rdfs:label "fillList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fillList(Collection anList, JList anJList)" ;
+    rdfs:comment """fillList @param anList List @param anJList JList""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrameUtil.iniList
+yawl:FrameUtil_iniList_2 a yawl:Method ;
+    rdfs:label "iniList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void iniList(JList anJList)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrameUtil.addToList
+yawl:FrameUtil_addToList_3 a yawl:Method ;
+    rdfs:label "addToList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addToList(JList list, Object object)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrameUtil.removeFromList
+yawl:FrameUtil_removeFromList_4 a yawl:Method ;
+    rdfs:label "removeFromList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeFromList(JList list, Object object)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrameUtil.removeFromList
+yawl:FrameUtil_removeFromList_5 a yawl:Method ;
+    rdfs:label "removeFromList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeFromList(JList list, int index)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrameUtil.getSelecetdList
+yawl:FrameUtil_getSelecetdList_6 a yawl:Method ;
+    rdfs:label "getSelecetdList" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object getSelecetdList(JList anJList)" ;
+    rdfs:comment """getSelecetdList @param anJList JList @return Object""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrameUtil.getSelecetdAllList
+yawl:FrameUtil_getSelecetdAllList_7 a yawl:Method ;
+    rdfs:label "getSelecetdAllList" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object getSelecetdAllList(JList anJList)" ;
+    rdfs:comment """getSelecetdList @param anJList JList @return Object""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrameUtil.indexList
+yawl:FrameUtil_indexList_8 a yawl:Method ;
+    rdfs:label "indexList" ;
+    yawl:returnType "int" ;
+    yawl:signature "int indexList(JList list, Object object)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrameUtil.readOnly
+yawl:FrameUtil_readOnly_9 a yawl:Method ;
+    rdfs:label "readOnly" ;
+    yawl:returnType "void" ;
+    yawl:signature "void readOnly(JTextComponent c, JComponent parent)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrameUtil.getItemList
+yawl:FrameUtil_getItemList_10 a yawl:Method ;
+    rdfs:label "getItemList" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object getItemList(JList anJList, int index)" ;
+    rdfs:comment """getSelecetdList @param anJList JList @return Object""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrameUtil.setSelectedList
+yawl:FrameUtil_setSelectedList_11 a yawl:Method ;
+    rdfs:label "setSelectedList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSelectedList(JList list, Object selected)" ;
+    rdfs:comment """@param list JList @param selected Object""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrameUtil.getSelectedMultipleList
+yawl:FrameUtil_getSelectedMultipleList_12 a yawl:Method ;
+    rdfs:label "getSelectedMultipleList" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object getSelectedMultipleList(JList anJList)" ;
+    rdfs:comment """fillList @param anJList JList @return Object""" ;
+    yawl:modifiers "protected" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrameUtil.addToComboBox
+yawl:FrameUtil_addToComboBox_13 a yawl:Method ;
+    rdfs:label "addToComboBox" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addToComboBox(JComboBox list, Object object)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrameUtil.fillComboBox
+yawl:FrameUtil_fillComboBox_14 a yawl:Method ;
+    rdfs:label "fillComboBox" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fillComboBox(JComboBox combo, List list)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrameUtil.setButtonOk
+yawl:FrameUtil_setButtonOk_15 a yawl:Method ;
+    rdfs:label "setButtonOk" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setButtonOk(JButton anButton)" ;
+    rdfs:comment """setButtonOk @param anButton JButton""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrameUtil.setButtonCancel
+yawl:FrameUtil_setButtonCancel_16 a yawl:Method ;
+    rdfs:label "setButtonCancel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setButtonCancel(JButton anButton)" ;
+    rdfs:comment """setButtonOk @param anButton JButton""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrameUtil.setButtonYes
+yawl:FrameUtil_setButtonYes_17 a yawl:Method ;
+    rdfs:label "setButtonYes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setButtonYes(JButton anButton)" ;
+    rdfs:comment """setButtonOk @param anButton JButton""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrameUtil.setButtonNo
+yawl:FrameUtil_setButtonNo_18 a yawl:Method ;
+    rdfs:label "setButtonNo" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setButtonNo(JButton anButton)" ;
+    rdfs:comment """setButtonOk @param anButton JButton""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrameUtil.setButtonAdd
+yawl:FrameUtil_setButtonAdd_19 a yawl:Method ;
+    rdfs:label "setButtonAdd" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setButtonAdd(JButton anButton)" ;
+    rdfs:comment """setButtonOk @param anButton JButton""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrameUtil.setButtonEdit
+yawl:FrameUtil_setButtonEdit_20 a yawl:Method ;
+    rdfs:label "setButtonEdit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setButtonEdit(JButton anButton)" ;
+    rdfs:comment """setButtonOk @param anButton JButton""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrameUtil.setButtonDelete
+yawl:FrameUtil_setButtonDelete_21 a yawl:Method ;
+    rdfs:label "setButtonDelete" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setButtonDelete(JButton anButton)" ;
+    rdfs:comment """setButtonOk @param anButton JButton""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrameUtil.setSize
+yawl:FrameUtil_setSize_22 a yawl:Method ;
+    rdfs:label "setSize" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSize(JComponent componenet, Dimension dimension)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:FrameUtil_BUTTON_OK a yawl:Field ;
+    rdfs:label "BUTTON_OK" .
+
+yawl:FrameUtil_BUTTON_CANCEL a yawl:Field ;
+    rdfs:label "BUTTON_CANCEL" .
+
+yawl:FrameUtil_BUTTON_YES a yawl:Field ;
+    rdfs:label "BUTTON_YES" .
+
+yawl:FrameUtil_BUTTON_NO a yawl:Field ;
+    rdfs:label "BUTTON_NO" .
+
+yawl:FrameUtil_BUTTON_ADD a yawl:Field ;
+    rdfs:label "BUTTON_ADD" .
+
+yawl:FrameUtil_BUTTON_EDIT a yawl:Field ;
+    rdfs:label "BUTTON_EDIT" .
+
+yawl:FrameUtil_BUTTON_DELETE a yawl:Field ;
+    rdfs:label "BUTTON_DELETE" .
+
+
+

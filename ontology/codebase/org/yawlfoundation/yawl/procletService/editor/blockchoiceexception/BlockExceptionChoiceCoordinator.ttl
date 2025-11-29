@@ -1,0 +1,112 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.blockchoiceexception.BlockExceptionChoiceCoordinator
+yawl:BlockExceptionChoiceCoordinator a yawl:Class ;
+    rdfs:label "BlockExceptionChoiceCoordinator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor_blockchoiceexception ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/blockchoiceexception/BlockExceptionChoiceCoordinator.java"^^xsd:string ;
+    yawl:extends yawl:InternalCoordinator ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:BlockExceptionChoiceCoordinator_singleton_1 ;
+    yawl:hasMethod yawl:BlockExceptionChoiceCoordinator_getInstance_2 ;
+    yawl:hasMethod yawl:BlockExceptionChoiceCoordinator_exists_3 ;
+    yawl:hasMethod yawl:BlockExceptionChoiceCoordinator_finish_4 ;
+    yawl:hasMethod yawl:BlockExceptionChoiceCoordinator_start_5 ;
+    yawl:hasMethod yawl:BlockExceptionChoiceCoordinator_getInternalFrame_6 ;
+    yawl:hasMethod yawl:BlockExceptionChoiceCoordinator_end_7 ;
+    yawl:hasMethod yawl:BlockExceptionChoiceCoordinator_getBlockExceptionChoiceControl_8 ;
+    yawl:hasField yawl:BlockExceptionChoiceCoordinator_frame ;
+    yawl:hasField yawl:BlockExceptionChoiceCoordinator_instance ;
+    yawl:hasField yawl:BlockExceptionChoiceCoordinator_nameTextField ;
+    .
+
+
+# Method: BlockExceptionChoiceCoordinator.singleton
+yawl:BlockExceptionChoiceCoordinator_singleton_1 a yawl:Method ;
+    rdfs:label "singleton" ;
+    yawl:returnType "BlockExceptionChoiceCoordinator" ;
+    yawl:signature "BlockExceptionChoiceCoordinator singleton(JFrame aMainFrame)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockExceptionChoiceCoordinator.getInstance
+yawl:BlockExceptionChoiceCoordinator_getInstance_2 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "BlockExceptionChoiceCoordinator" ;
+    yawl:signature "BlockExceptionChoiceCoordinator getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockExceptionChoiceCoordinator.exists
+yawl:BlockExceptionChoiceCoordinator_exists_3 a yawl:Method ;
+    rdfs:label "exists" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean exists()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockExceptionChoiceCoordinator.finish
+yawl:BlockExceptionChoiceCoordinator_finish_4 a yawl:Method ;
+    rdfs:label "finish" ;
+    yawl:returnType "void" ;
+    yawl:signature "void finish()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockExceptionChoiceCoordinator.start
+yawl:BlockExceptionChoiceCoordinator_start_5 a yawl:Method ;
+    rdfs:label "start" ;
+    yawl:returnType "void" ;
+    yawl:signature "void start()" ;
+    rdfs:comment """start""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockExceptionChoiceCoordinator.getInternalFrame
+yawl:BlockExceptionChoiceCoordinator_getInternalFrame_6 a yawl:Method ;
+    rdfs:label "getInternalFrame" ;
+    yawl:returnType "JInternalFrame" ;
+    yawl:signature "JInternalFrame getInternalFrame()" ;
+    rdfs:comment """getInternalFrame @return JInternalFrame""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockExceptionChoiceCoordinator.end
+yawl:BlockExceptionChoiceCoordinator_end_7 a yawl:Method ;
+    rdfs:label "end" ;
+    yawl:returnType "void" ;
+    yawl:signature "void end()" ;
+    rdfs:comment """end""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockExceptionChoiceCoordinator.getBlockExceptionChoiceControl
+yawl:BlockExceptionChoiceCoordinator_getBlockExceptionChoiceControl_8 a yawl:Method ;
+    rdfs:label "getBlockExceptionChoiceControl" ;
+    yawl:returnType "BlockExceptionChoiceControl" ;
+    yawl:signature "BlockExceptionChoiceControl getBlockExceptionChoiceControl()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:BlockExceptionChoiceCoordinator_frame a yawl:Field ;
+    rdfs:label "frame" .
+
+yawl:BlockExceptionChoiceCoordinator_instance a yawl:Field ;
+    rdfs:label "instance" .
+
+yawl:BlockExceptionChoiceCoordinator_nameTextField a yawl:Field ;
+    rdfs:label "nameTextField" .
+
+
+

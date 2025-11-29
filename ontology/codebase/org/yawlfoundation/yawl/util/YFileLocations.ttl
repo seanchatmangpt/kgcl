@@ -1,0 +1,51 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.util.YFileLocations
+yawl:YFileLocations a yawl:Class ;
+    rdfs:label "YFileLocations" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/util/CheckSumTask.java"^^xsd:string ;
+    yawl:extends yawl:FileLocations ;
+    yawl:hasMethod yawl:YFileLocations_loadLocations_1 ;
+    yawl:hasMethod yawl:YFileLocations_get_2 ;
+    yawl:hasMethod yawl:YFileLocations_loadSubList_3 ;
+    yawl:hasField yawl:YFileLocations__subMap ;
+    .
+
+
+# Method: YFileLocations.loadLocations
+yawl:YFileLocations_loadLocations_1 a yawl:Method ;
+    rdfs:label "loadLocations" ;
+    yawl:returnType "void" ;
+    yawl:signature "void loadLocations(XNode root)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YFileLocations.get
+yawl:YFileLocations_get_2 a yawl:Method ;
+    rdfs:label "get" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get(String subName, String fileName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YFileLocations.loadSubList
+yawl:YFileLocations_loadSubList_3 a yawl:Method ;
+    rdfs:label "loadSubList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void loadSubList(XNode subList)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YFileLocations__subMap a yawl:Field ;
+    rdfs:label "_subMap" .
+
+
+

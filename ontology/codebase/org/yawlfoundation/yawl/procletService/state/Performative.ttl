@@ -1,0 +1,230 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.procletService.state
+yawl:org_yawlfoundation_yawl_procletService_state a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.procletService.state" .
+# Class: org.yawlfoundation.yawl.procletService.state.Performative
+yawl:Performative a yawl:Class ;
+    rdfs:label "Performative" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_state ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/state/Performative.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Performative_getTime_1 ;
+    yawl:hasMethod yawl:Performative_setTime_2 ;
+    yawl:hasMethod yawl:Performative_getChannel_3 ;
+    yawl:hasMethod yawl:Performative_setSender_4 ;
+    yawl:hasMethod yawl:Performative_getSender_5 ;
+    yawl:hasMethod yawl:Performative_setReceiver_6 ;
+    yawl:hasMethod yawl:Performative_getReceivers_7 ;
+    yawl:hasMethod yawl:Performative_setAction_8 ;
+    yawl:hasMethod yawl:Performative_getAction_9 ;
+    yawl:hasMethod yawl:Performative_setContent_10 ;
+    yawl:hasMethod yawl:Performative_getContent_11 ;
+    yawl:hasMethod yawl:Performative_setScope_12 ;
+    yawl:hasMethod yawl:Performative_getScope_13 ;
+    yawl:hasMethod yawl:Performative_getDirection_14 ;
+    yawl:hasMethod yawl:Performative_setDirection_15 ;
+    yawl:hasMethod yawl:Performative_setEntityIDs_16 ;
+    yawl:hasMethod yawl:Performative_getEntityIDs_17 ;
+    yawl:hasMethod yawl:Performative_equalContent_18 ;
+    yawl:hasMethod yawl:Performative_toString_19 ;
+    yawl:hasField yawl:Performative_time ;
+    yawl:hasField yawl:Performative_channel ;
+    yawl:hasField yawl:Performative_sender ;
+    yawl:hasField yawl:Performative_receivers ;
+    yawl:hasField yawl:Performative_action ;
+    yawl:hasField yawl:Performative_content ;
+    yawl:hasField yawl:Performative_scope ;
+    yawl:hasField yawl:Performative_direction ;
+    yawl:hasField yawl:Performative_eids ;
+    .
+
+
+# Method: Performative.getTime
+yawl:Performative_getTime_1 a yawl:Method ;
+    rdfs:label "getTime" ;
+    yawl:returnType "Timestamp" ;
+    yawl:signature "Timestamp getTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Performative.setTime
+yawl:Performative_setTime_2 a yawl:Method ;
+    rdfs:label "setTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTime(Timestamp time)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Performative.getChannel
+yawl:Performative_getChannel_3 a yawl:Method ;
+    rdfs:label "getChannel" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getChannel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Performative.setSender
+yawl:Performative_setSender_4 a yawl:Method ;
+    rdfs:label "setSender" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSender(String sender)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Performative.getSender
+yawl:Performative_getSender_5 a yawl:Method ;
+    rdfs:label "getSender" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSender()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Performative.setReceiver
+yawl:Performative_setReceiver_6 a yawl:Method ;
+    rdfs:label "setReceiver" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setReceiver(List receivers)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Performative.getReceivers
+yawl:Performative_getReceivers_7 a yawl:Method ;
+    rdfs:label "getReceivers" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getReceivers()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Performative.setAction
+yawl:Performative_setAction_8 a yawl:Method ;
+    rdfs:label "setAction" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAction(String action)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Performative.getAction
+yawl:Performative_getAction_9 a yawl:Method ;
+    rdfs:label "getAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Performative.setContent
+yawl:Performative_setContent_10 a yawl:Method ;
+    rdfs:label "setContent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setContent(String cont)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Performative.getContent
+yawl:Performative_getContent_11 a yawl:Method ;
+    rdfs:label "getContent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getContent()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Performative.setScope
+yawl:Performative_setScope_12 a yawl:Method ;
+    rdfs:label "setScope" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setScope(String scope)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Performative.getScope
+yawl:Performative_getScope_13 a yawl:Method ;
+    rdfs:label "getScope" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getScope()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Performative.getDirection
+yawl:Performative_getDirection_14 a yawl:Method ;
+    rdfs:label "getDirection" ;
+    yawl:returnType "ProcletPort" ;
+    yawl:signature "ProcletPort getDirection()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Performative.setDirection
+yawl:Performative_setDirection_15 a yawl:Method ;
+    rdfs:label "setDirection" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDirection(ProcletPort dir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Performative.setEntityIDs
+yawl:Performative_setEntityIDs_16 a yawl:Method ;
+    rdfs:label "setEntityIDs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEntityIDs(List eids)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Performative.getEntityIDs
+yawl:Performative_getEntityIDs_17 a yawl:Method ;
+    rdfs:label "getEntityIDs" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getEntityIDs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Performative.equalContent
+yawl:Performative_equalContent_18 a yawl:Method ;
+    rdfs:label "equalContent" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equalContent(Object o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Performative.toString
+yawl:Performative_toString_19 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:Performative_time a yawl:Field ;
+    rdfs:label "time" .
+
+yawl:Performative_channel a yawl:Field ;
+    rdfs:label "channel" .
+
+yawl:Performative_sender a yawl:Field ;
+    rdfs:label "sender" .
+
+yawl:Performative_receivers a yawl:Field ;
+    rdfs:label "receivers" .
+
+yawl:Performative_action a yawl:Field ;
+    rdfs:label "action" .
+
+yawl:Performative_content a yawl:Field ;
+    rdfs:label "content" .
+
+yawl:Performative_scope a yawl:Field ;
+    rdfs:label "scope" .
+
+yawl:Performative_direction a yawl:Field ;
+    rdfs:label "direction" .
+
+yawl:Performative_eids a yawl:Field ;
+    rdfs:label "eids" .
+
+
+

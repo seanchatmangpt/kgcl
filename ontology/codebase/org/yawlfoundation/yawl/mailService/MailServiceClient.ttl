@@ -1,0 +1,174 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.mailService.MailServiceClient
+yawl:MailServiceClient a yawl:Class ;
+    rdfs:label "MailServiceClient" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_mailService ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/mailService/MailServiceClient.java"^^xsd:string ;
+    rdfs:comment """An API to be used by clients that want to send email via the mail service. @author Michael Adams 11/12/2024""" ;
+    yawl:extends yawl:Interface_Client ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:MailServiceClient_setURI_1 ;
+    yawl:hasMethod yawl:MailServiceClient_connect_2 ;
+    yawl:hasMethod yawl:MailServiceClient_checkConnection_3 ;
+    yawl:hasMethod yawl:MailServiceClient_disconnect_4 ;
+    yawl:hasMethod yawl:MailServiceClient_sendMail_5 ;
+    yawl:hasMethod yawl:MailServiceClient_sendMail_6 ;
+    yawl:hasMethod yawl:MailServiceClient_sendMail_7 ;
+    yawl:hasMethod yawl:MailServiceClient_sendMail_8 ;
+    yawl:hasMethod yawl:MailServiceClient_setHost_9 ;
+    yawl:hasMethod yawl:MailServiceClient_setPort_10 ;
+    yawl:hasMethod yawl:MailServiceClient_setSenderUserid_11 ;
+    yawl:hasMethod yawl:MailServiceClient_setSenderPassword_12 ;
+    yawl:hasMethod yawl:MailServiceClient_setSenderName_13 ;
+    yawl:hasMethod yawl:MailServiceClient_setSenderAddress_14 ;
+    yawl:hasMethod yawl:MailServiceClient_setTransportStrategy_15 ;
+    yawl:hasField yawl:MailServiceClient_DEFAULT_URI ;
+    yawl:hasField yawl:MailServiceClient__msURI ;
+    .
+
+
+# Method: MailServiceClient.setURI
+yawl:MailServiceClient_setURI_1 a yawl:Method ;
+    rdfs:label "setURI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setURI(String uri)" ;
+    rdfs:comment """Sets the uri of the Mail Service Gateway @param uri the uri to set""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MailServiceClient.connect
+yawl:MailServiceClient_connect_2 a yawl:Method ;
+    rdfs:label "connect" ;
+    yawl:returnType "String" ;
+    yawl:signature "String connect(String userID, String password)" ;
+    rdfs:comment """Connects an external entity to the mail service @param userID the userid @param password the corresponding password @return a session handle if successful, or a failure message if not @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MailServiceClient.checkConnection
+yawl:MailServiceClient_checkConnection_3 a yawl:Method ;
+    rdfs:label "checkConnection" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkConnection(String handle)" ;
+    rdfs:comment """Check that a session handle is active @param handle the session handle to check @return \"true\" if the id is valid, \"false\" if otherwise @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MailServiceClient.disconnect
+yawl:MailServiceClient_disconnect_4 a yawl:Method ;
+    rdfs:label "disconnect" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disconnect(String handle)" ;
+    rdfs:comment """Disconnects an external entity from the Mail service @param handle the session handle to disconnect @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MailServiceClient.sendMail
+yawl:MailServiceClient_sendMail_5 a yawl:Method ;
+    rdfs:label "sendMail" ;
+    yawl:returnType "String" ;
+    yawl:signature "String sendMail(String toAddress, String subject, String content, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MailServiceClient.sendMail
+yawl:MailServiceClient_sendMail_6 a yawl:Method ;
+    rdfs:label "sendMail" ;
+    yawl:returnType "String" ;
+    yawl:signature "String sendMail(String toAddress, String subject, String content, String toName, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MailServiceClient.sendMail
+yawl:MailServiceClient_sendMail_7 a yawl:Method ;
+    rdfs:label "sendMail" ;
+    yawl:returnType "String" ;
+    yawl:signature "String sendMail(String toAddress, String subject, String content, String toName, String ccAddress, String bccAddress, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MailServiceClient.sendMail
+yawl:MailServiceClient_sendMail_8 a yawl:Method ;
+    rdfs:label "sendMail" ;
+    yawl:returnType "String" ;
+    yawl:signature "String sendMail(MailSettings settings, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MailServiceClient.setHost
+yawl:MailServiceClient_setHost_9 a yawl:Method ;
+    rdfs:label "setHost" ;
+    yawl:returnType "String" ;
+    yawl:signature "String setHost(String host, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MailServiceClient.setPort
+yawl:MailServiceClient_setPort_10 a yawl:Method ;
+    rdfs:label "setPort" ;
+    yawl:returnType "String" ;
+    yawl:signature "String setPort(int port, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MailServiceClient.setSenderUserid
+yawl:MailServiceClient_setSenderUserid_11 a yawl:Method ;
+    rdfs:label "setSenderUserid" ;
+    yawl:returnType "String" ;
+    yawl:signature "String setSenderUserid(String userid, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MailServiceClient.setSenderPassword
+yawl:MailServiceClient_setSenderPassword_12 a yawl:Method ;
+    rdfs:label "setSenderPassword" ;
+    yawl:returnType "String" ;
+    yawl:signature "String setSenderPassword(String password, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MailServiceClient.setSenderName
+yawl:MailServiceClient_setSenderName_13 a yawl:Method ;
+    rdfs:label "setSenderName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String setSenderName(String name, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MailServiceClient.setSenderAddress
+yawl:MailServiceClient_setSenderAddress_14 a yawl:Method ;
+    rdfs:label "setSenderAddress" ;
+    yawl:returnType "String" ;
+    yawl:signature "String setSenderAddress(String address, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MailServiceClient.setTransportStrategy
+yawl:MailServiceClient_setTransportStrategy_15 a yawl:Method ;
+    rdfs:label "setTransportStrategy" ;
+    yawl:returnType "String" ;
+    yawl:signature "String setTransportStrategy(String strategy, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:MailServiceClient_DEFAULT_URI a yawl:Field ;
+    rdfs:label "DEFAULT_URI" .
+
+yawl:MailServiceClient__msURI a yawl:Field ;
+    rdfs:label "_msURI" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_exceptions a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.exceptions" .
+
+

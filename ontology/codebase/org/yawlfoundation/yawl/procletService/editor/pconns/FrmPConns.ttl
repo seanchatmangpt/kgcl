@@ -1,0 +1,216 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.pconns.FrmPConns
+yawl:FrmPConns a yawl:Class ;
+    rdfs:label "FrmPConns" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor_pconns ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/pconns/FrmPConns.java"^^xsd:string ;
+    yawl:extends yawl:DesignInternalFrame ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:FrmPConns_singleton_1 ;
+    yawl:hasMethod yawl:FrmPConns_finish_2 ;
+    yawl:hasMethod yawl:FrmPConns_jbInit_3 ;
+    yawl:hasMethod yawl:FrmPConns_setVisualizationViewer_4 ;
+    yawl:hasMethod yawl:FrmPConns_drawGraph_5 ;
+    yawl:hasMethod yawl:FrmPConns_redrawGraph_6 ;
+    yawl:hasMethod yawl:FrmPConns_initComponents_7 ;
+    yawl:hasMethod yawl:FrmPConns_addPConnButtonActionPerformed_8 ;
+    yawl:hasMethod yawl:FrmPConns_removePConnButtonActionPerformed_9 ;
+    yawl:hasMethod yawl:FrmPConns_addChannelButtonActionPerformed_10 ;
+    yawl:hasMethod yawl:FrmPConns_removeChannelButtonActionPerformed_11 ;
+    yawl:hasMethod yawl:FrmPConns_actionPerformed_12 ;
+    yawl:hasField yawl:FrmPConns_TITLE ;
+    yawl:hasField yawl:FrmPConns_single ;
+    yawl:hasField yawl:FrmPConns_pconnsCoordinator ;
+    yawl:hasField yawl:FrmPConns_addChannelButton ;
+    yawl:hasField yawl:FrmPConns_addPConnButton ;
+    yawl:hasField yawl:FrmPConns_channelPanel ;
+    yawl:hasField yawl:FrmPConns_graphOptionsPanel ;
+    yawl:hasField yawl:FrmPConns_graphPanel ;
+    yawl:hasField yawl:FrmPConns_pconnsPanel ;
+    yawl:hasField yawl:FrmPConns_removeChannelButton ;
+    yawl:hasField yawl:FrmPConns_removePConnButton ;
+    yawl:hasField yawl:FrmPConns_rightPanel ;
+    yawl:hasField yawl:FrmPConns_splitPaneMain ;
+    yawl:hasField yawl:FrmPConns_splitPanelLeft ;
+    yawl:hasField yawl:FrmPConns_topOptionsPanel ;
+    yawl:hasField yawl:FrmPConns_bottomOptionsPanel ;
+    yawl:hasField yawl:FrmPConns_layoutBox ;
+    yawl:hasField yawl:FrmPConns_vv ;
+    yawl:hasField yawl:FrmPConns_gm ;
+    yawl:hasField yawl:FrmPConns_vertexPaint ;
+    .
+
+
+# Method: FrmPConns.singleton
+yawl:FrmPConns_singleton_1 a yawl:Method ;
+    rdfs:label "singleton" ;
+    yawl:returnType "FrmPConns" ;
+    yawl:signature "FrmPConns singleton(PConnsCoordinator coord)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrmPConns.finish
+yawl:FrmPConns_finish_2 a yawl:Method ;
+    rdfs:label "finish" ;
+    yawl:returnType "void" ;
+    yawl:signature "void finish()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrmPConns.jbInit
+yawl:FrmPConns_jbInit_3 a yawl:Method ;
+    rdfs:label "jbInit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void jbInit()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: FrmPConns.setVisualizationViewer
+yawl:FrmPConns_setVisualizationViewer_4 a yawl:Method ;
+    rdfs:label "setVisualizationViewer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setVisualizationViewer(VisualizationViewer vviewer)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmPConns.drawGraph
+yawl:FrmPConns_drawGraph_5 a yawl:Method ;
+    rdfs:label "drawGraph" ;
+    yawl:returnType "void" ;
+    yawl:signature "void drawGraph()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmPConns.redrawGraph
+yawl:FrmPConns_redrawGraph_6 a yawl:Method ;
+    rdfs:label "redrawGraph" ;
+    yawl:returnType "void" ;
+    yawl:signature "void redrawGraph()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FrmPConns.initComponents
+yawl:FrmPConns_initComponents_7 a yawl:Method ;
+    rdfs:label "initComponents" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initComponents()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmPConns.addPConnButtonActionPerformed
+yawl:FrmPConns_addPConnButtonActionPerformed_8 a yawl:Method ;
+    rdfs:label "addPConnButtonActionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addPConnButtonActionPerformed(java evt)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmPConns.removePConnButtonActionPerformed
+yawl:FrmPConns_removePConnButtonActionPerformed_9 a yawl:Method ;
+    rdfs:label "removePConnButtonActionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removePConnButtonActionPerformed(java evt)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmPConns.addChannelButtonActionPerformed
+yawl:FrmPConns_addChannelButtonActionPerformed_10 a yawl:Method ;
+    rdfs:label "addChannelButtonActionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addChannelButtonActionPerformed(java evt)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmPConns.removeChannelButtonActionPerformed
+yawl:FrmPConns_removeChannelButtonActionPerformed_11 a yawl:Method ;
+    rdfs:label "removeChannelButtonActionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeChannelButtonActionPerformed(java evt)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmPConns.actionPerformed
+yawl:FrmPConns_actionPerformed_12 a yawl:Method ;
+    rdfs:label "actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void actionPerformed(ActionEvent e)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:FrmPConns_TITLE a yawl:Field ;
+    rdfs:label "TITLE" .
+
+yawl:FrmPConns_single a yawl:Field ;
+    rdfs:label "single" .
+
+yawl:FrmPConns_pconnsCoordinator a yawl:Field ;
+    rdfs:label "pconnsCoordinator" .
+
+yawl:FrmPConns_addChannelButton a yawl:Field ;
+    rdfs:label "addChannelButton" .
+
+yawl:FrmPConns_addPConnButton a yawl:Field ;
+    rdfs:label "addPConnButton" .
+
+yawl:FrmPConns_channelPanel a yawl:Field ;
+    rdfs:label "channelPanel" .
+
+yawl:FrmPConns_graphOptionsPanel a yawl:Field ;
+    rdfs:label "graphOptionsPanel" .
+
+yawl:FrmPConns_graphPanel a yawl:Field ;
+    rdfs:label "graphPanel" .
+
+yawl:FrmPConns_pconnsPanel a yawl:Field ;
+    rdfs:label "pconnsPanel" .
+
+yawl:FrmPConns_removeChannelButton a yawl:Field ;
+    rdfs:label "removeChannelButton" .
+
+yawl:FrmPConns_removePConnButton a yawl:Field ;
+    rdfs:label "removePConnButton" .
+
+yawl:FrmPConns_rightPanel a yawl:Field ;
+    rdfs:label "rightPanel" .
+
+yawl:FrmPConns_splitPaneMain a yawl:Field ;
+    rdfs:label "splitPaneMain" .
+
+yawl:FrmPConns_splitPanelLeft a yawl:Field ;
+    rdfs:label "splitPanelLeft" .
+
+yawl:FrmPConns_topOptionsPanel a yawl:Field ;
+    rdfs:label "topOptionsPanel" .
+
+yawl:FrmPConns_bottomOptionsPanel a yawl:Field ;
+    rdfs:label "bottomOptionsPanel" .
+
+yawl:FrmPConns_layoutBox a yawl:Field ;
+    rdfs:label "layoutBox" .
+
+yawl:FrmPConns_vv a yawl:Field ;
+    rdfs:label "vv" .
+
+yawl:FrmPConns_gm a yawl:Field ;
+    rdfs:label "gm" .
+
+yawl:FrmPConns_vertexPaint a yawl:Field ;
+    rdfs:label "vertexPaint" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_procletService_editor_extra a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.procletService.editor.extra" .
+
+

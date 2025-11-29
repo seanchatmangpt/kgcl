@@ -1,0 +1,174 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.elements.YSpecVersion
+yawl:YSpecVersion a yawl:Class ;
+    rdfs:label "YSpecVersion" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_elements ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/elements/YSpecVersion.java"^^xsd:string ;
+    rdfs:comment """A simple version numbering implementation stored as a major part and a minor part (both int) but represented externally as a dotted String (eg 5.12) @author Michael Adams Date: 18/10/2007 Last Date: 05/06/08""" ;
+    yawl:implements yawl:Comparable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YSpecVersion_setVersion_1 ;
+    yawl:hasMethod yawl:YSpecVersion_setVersion_2 ;
+    yawl:hasMethod yawl:YSpecVersion_getVersion_3 ;
+    yawl:hasMethod yawl:YSpecVersion_toDouble_4 ;
+    yawl:hasMethod yawl:YSpecVersion_toString_5 ;
+    yawl:hasMethod yawl:YSpecVersion_getMajorVersion_6 ;
+    yawl:hasMethod yawl:YSpecVersion_getMinorVersion_7 ;
+    yawl:hasMethod yawl:YSpecVersion_minorIncrement_8 ;
+    yawl:hasMethod yawl:YSpecVersion_majorIncrement_9 ;
+    yawl:hasMethod yawl:YSpecVersion_minorRollback_10 ;
+    yawl:hasMethod yawl:YSpecVersion_majorRollback_11 ;
+    yawl:hasMethod yawl:YSpecVersion_compareTo_12 ;
+    yawl:hasMethod yawl:YSpecVersion_equalsMajorVersion_13 ;
+    yawl:hasMethod yawl:YSpecVersion_equalsMinorVersion_14 ;
+    yawl:hasMethod yawl:YSpecVersion_equals_15 ;
+    yawl:hasMethod yawl:YSpecVersion_hashCode_16 ;
+    yawl:hasField yawl:YSpecVersion__major ;
+    yawl:hasField yawl:YSpecVersion__minor ;
+    .
+
+
+# Method: YSpecVersion.setVersion
+yawl:YSpecVersion_setVersion_1 a yawl:Method ;
+    rdfs:label "setVersion" ;
+    yawl:returnType "String" ;
+    yawl:signature "String setVersion(int major, int minor)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecVersion.setVersion
+yawl:YSpecVersion_setVersion_2 a yawl:Method ;
+    rdfs:label "setVersion" ;
+    yawl:returnType "String" ;
+    yawl:signature "String setVersion(String version)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecVersion.getVersion
+yawl:YSpecVersion_getVersion_3 a yawl:Method ;
+    rdfs:label "getVersion" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getVersion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecVersion.toDouble
+yawl:YSpecVersion_toDouble_4 a yawl:Method ;
+    rdfs:label "toDouble" ;
+    yawl:returnType "double" ;
+    yawl:signature "double toDouble()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecVersion.toString
+yawl:YSpecVersion_toString_5 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecVersion.getMajorVersion
+yawl:YSpecVersion_getMajorVersion_6 a yawl:Method ;
+    rdfs:label "getMajorVersion" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getMajorVersion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecVersion.getMinorVersion
+yawl:YSpecVersion_getMinorVersion_7 a yawl:Method ;
+    rdfs:label "getMinorVersion" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getMinorVersion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecVersion.minorIncrement
+yawl:YSpecVersion_minorIncrement_8 a yawl:Method ;
+    rdfs:label "minorIncrement" ;
+    yawl:returnType "String" ;
+    yawl:signature "String minorIncrement()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecVersion.majorIncrement
+yawl:YSpecVersion_majorIncrement_9 a yawl:Method ;
+    rdfs:label "majorIncrement" ;
+    yawl:returnType "String" ;
+    yawl:signature "String majorIncrement()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecVersion.minorRollback
+yawl:YSpecVersion_minorRollback_10 a yawl:Method ;
+    rdfs:label "minorRollback" ;
+    yawl:returnType "String" ;
+    yawl:signature "String minorRollback()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecVersion.majorRollback
+yawl:YSpecVersion_majorRollback_11 a yawl:Method ;
+    rdfs:label "majorRollback" ;
+    yawl:returnType "String" ;
+    yawl:signature "String majorRollback()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecVersion.compareTo
+yawl:YSpecVersion_compareTo_12 a yawl:Method ;
+    rdfs:label "compareTo" ;
+    yawl:returnType "int" ;
+    yawl:signature "int compareTo(YSpecVersion other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecVersion.equalsMajorVersion
+yawl:YSpecVersion_equalsMajorVersion_13 a yawl:Method ;
+    rdfs:label "equalsMajorVersion" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equalsMajorVersion(YSpecVersion other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecVersion.equalsMinorVersion
+yawl:YSpecVersion_equalsMinorVersion_14 a yawl:Method ;
+    rdfs:label "equalsMinorVersion" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equalsMinorVersion(YSpecVersion other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecVersion.equals
+yawl:YSpecVersion_equals_15 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecVersion.hashCode
+yawl:YSpecVersion_hashCode_16 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YSpecVersion__major a yawl:Field ;
+    rdfs:label "_major" .
+
+yawl:YSpecVersion__minor a yawl:Field ;
+    rdfs:label "_minor" .
+
+
+

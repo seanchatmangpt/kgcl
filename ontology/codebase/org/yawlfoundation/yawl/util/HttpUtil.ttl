@@ -1,0 +1,95 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.util.HttpUtil
+yawl:HttpUtil a yawl:Class ;
+    rdfs:label "HttpUtil" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/util/HttpUtil.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 4/08/2014""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:HttpUtil_isResponsive_1 ;
+    yawl:hasMethod yawl:HttpUtil_resolveURL_2 ;
+    yawl:hasMethod yawl:HttpUtil_resolveURL_3 ;
+    yawl:hasMethod yawl:HttpUtil_isPortActive_4 ;
+    yawl:hasMethod yawl:HttpUtil_download_5 ;
+    yawl:hasMethod yawl:HttpUtil_download_6 ;
+    yawl:hasMethod yawl:HttpUtil_simplePing_7 ;
+    yawl:hasField yawl:HttpUtil_TIMEOUT_MSECS ;
+    .
+
+
+# Method: HttpUtil.isResponsive
+yawl:HttpUtil_isResponsive_1 a yawl:Method ;
+    rdfs:label "isResponsive" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isResponsive(URL url)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: HttpUtil.resolveURL
+yawl:HttpUtil_resolveURL_2 a yawl:Method ;
+    rdfs:label "resolveURL" ;
+    yawl:returnType "URL" ;
+    yawl:signature "URL resolveURL(String urlString)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: HttpUtil.resolveURL
+yawl:HttpUtil_resolveURL_3 a yawl:Method ;
+    rdfs:label "resolveURL" ;
+    yawl:returnType "URL" ;
+    yawl:signature "URL resolveURL(URL url)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: HttpUtil.isPortActive
+yawl:HttpUtil_isPortActive_4 a yawl:Method ;
+    rdfs:label "isPortActive" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isPortActive(String host, int port)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: HttpUtil.download
+yawl:HttpUtil_download_5 a yawl:Method ;
+    rdfs:label "download" ;
+    yawl:returnType "void" ;
+    yawl:signature "void download(String fromURL, File toFile)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: HttpUtil.download
+yawl:HttpUtil_download_6 a yawl:Method ;
+    rdfs:label "download" ;
+    yawl:returnType "void" ;
+    yawl:signature "void download(URL fromURL, File toFile)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: HttpUtil.simplePing
+yawl:HttpUtil_simplePing_7 a yawl:Method ;
+    rdfs:label "simplePing" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean simplePing(String host, int port)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:HttpUtil_TIMEOUT_MSECS a yawl:Field ;
+    rdfs:label "TIMEOUT_MSECS" .
+
+
+

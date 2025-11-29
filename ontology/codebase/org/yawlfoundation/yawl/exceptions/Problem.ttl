@@ -1,0 +1,132 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.exceptions.Problem
+yawl:Problem a yawl:Class ;
+    rdfs:label "Problem" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_exceptions ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/exceptions/Problem.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 10/10/2005 Time: 19:47:43""" ;
+    yawl:implements yawl:Serializable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Problem_getSource_1 ;
+    yawl:hasMethod yawl:Problem_setSource_2 ;
+    yawl:hasMethod yawl:Problem_getProblemTime_3 ;
+    yawl:hasMethod yawl:Problem_setProblemTime_4 ;
+    yawl:hasMethod yawl:Problem_getMessageType_5 ;
+    yawl:hasMethod yawl:Problem_setMessageType_6 ;
+    yawl:hasMethod yawl:Problem_getMessage_7 ;
+    yawl:hasMethod yawl:Problem_setMessage_8 ;
+    yawl:hasMethod yawl:Problem_equals_9 ;
+    yawl:hasMethod yawl:Problem_hashCode_10 ;
+    yawl:hasField yawl:Problem__source ;
+    yawl:hasField yawl:Problem__problemTime ;
+    yawl:hasField yawl:Problem__messageType ;
+    yawl:hasField yawl:Problem__message ;
+    yawl:hasField yawl:Problem_EMPTY_RESOURCE_SET_MESSAGETYPE ;
+    .
+
+
+# Method: Problem.getSource
+yawl:Problem_getSource_1 a yawl:Method ;
+    rdfs:label "getSource" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSource()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Problem.setSource
+yawl:Problem_setSource_2 a yawl:Method ;
+    rdfs:label "setSource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSource(String source)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Problem.getProblemTime
+yawl:Problem_getProblemTime_3 a yawl:Method ;
+    rdfs:label "getProblemTime" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date getProblemTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Problem.setProblemTime
+yawl:Problem_setProblemTime_4 a yawl:Method ;
+    rdfs:label "setProblemTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setProblemTime(Date timeStamp)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Problem.getMessageType
+yawl:Problem_getMessageType_5 a yawl:Method ;
+    rdfs:label "getMessageType" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMessageType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Problem.setMessageType
+yawl:Problem_setMessageType_6 a yawl:Method ;
+    rdfs:label "setMessageType" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMessageType(String messageType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Problem.getMessage
+yawl:Problem_getMessage_7 a yawl:Method ;
+    rdfs:label "getMessage" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMessage()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Problem.setMessage
+yawl:Problem_setMessage_8 a yawl:Method ;
+    rdfs:label "setMessage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMessage(String message)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Problem.equals
+yawl:Problem_equals_9 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Problem.hashCode
+yawl:Problem_hashCode_10 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:Problem__source a yawl:Field ;
+    rdfs:label "_source" .
+
+yawl:Problem__problemTime a yawl:Field ;
+    rdfs:label "_problemTime" .
+
+yawl:Problem__messageType a yawl:Field ;
+    rdfs:label "_messageType" .
+
+yawl:Problem__message a yawl:Field ;
+    rdfs:label "_message" .
+
+yawl:Problem_EMPTY_RESOURCE_SET_MESSAGETYPE a yawl:Field ;
+    rdfs:label "EMPTY_RESOURCE_SET_MESSAGETYPE" .
+
+
+

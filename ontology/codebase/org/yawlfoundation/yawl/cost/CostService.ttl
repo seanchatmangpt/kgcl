@@ -1,0 +1,538 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.cost
+yawl:org_yawlfoundation_yawl_cost a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.cost" .
+# Class: org.yawlfoundation.yawl.cost.CostService
+yawl:CostService a yawl:Class ;
+    rdfs:label "CostService" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_cost ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/cost/CostService.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 3/10/11""" ;
+    yawl:implements yawl:InterfaceX_Service ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CostService_getInstance_1 ;
+    yawl:hasMethod yawl:CostService_shutdown_2 ;
+    yawl:hasMethod yawl:CostService_setInterfaceXBackend_3 ;
+    yawl:hasMethod yawl:CostService_setEngineLogURI_4 ;
+    yawl:hasMethod yawl:CostService_setResourceLogURI_5 ;
+    yawl:hasMethod yawl:CostService_setResourceOrgDataURI_6 ;
+    yawl:hasMethod yawl:CostService_setEngineLogonName_7 ;
+    yawl:hasMethod yawl:CostService_setEngineLogonPassword_8 ;
+    yawl:hasMethod yawl:CostService_setXSDPath_9 ;
+    yawl:hasMethod yawl:CostService_importModel_10 ;
+    yawl:hasMethod yawl:CostService_importModels_11 ;
+    yawl:hasMethod yawl:CostService_importModel_12 ;
+    yawl:hasMethod yawl:CostService_importModels_13 ;
+    yawl:hasMethod yawl:CostService_exportModels_14 ;
+    yawl:hasMethod yawl:CostService_exportModel_15 ;
+    yawl:hasMethod yawl:CostService_getModelCache_16 ;
+    yawl:hasMethod yawl:CostService_getModelCache_17 ;
+    yawl:hasMethod yawl:CostService_getModels_18 ;
+    yawl:hasMethod yawl:CostService_getModel_19 ;
+    yawl:hasMethod yawl:CostService_removeModel_20 ;
+    yawl:hasMethod yawl:CostService_clearModels_21 ;
+    yawl:hasMethod yawl:CostService_removeModel_22 ;
+    yawl:hasMethod yawl:CostService_removeModel_23 ;
+    yawl:hasMethod yawl:CostService_removeModel_24 ;
+    yawl:hasMethod yawl:CostService_getModels_25 ;
+    yawl:hasMethod yawl:CostService_getAnnotatedLog_26 ;
+    yawl:hasMethod yawl:CostService_evaluate_27 ;
+    yawl:hasMethod yawl:CostService_calculate_28 ;
+    yawl:hasMethod yawl:CostService_resolveResources_29 ;
+    yawl:hasMethod yawl:CostService_getRSHandle_30 ;
+    yawl:hasMethod yawl:CostService_getEngineHandle_31 ;
+    yawl:hasMethod yawl:CostService_failMsg_32 ;
+    yawl:hasMethod yawl:CostService_successMsg_33 ;
+    yawl:hasMethod yawl:CostService_isValidModel_34 ;
+    yawl:hasMethod yawl:CostService_addToCache_35 ;
+    yawl:hasMethod yawl:CostService_removePrevVersion_36 ;
+    yawl:hasMethod yawl:CostService_restore_37 ;
+    yawl:hasMethod yawl:CostService_getLogEvents_38 ;
+    yawl:hasMethod yawl:CostService_getCaseIDs_39 ;
+    yawl:hasMethod yawl:CostService_parseEventLog_40 ;
+    yawl:hasMethod yawl:CostService_appendEvents_41 ;
+    yawl:hasMethod yawl:CostService_getPersistingClasses_42 ;
+    yawl:hasMethod yawl:CostService_handleCheckCaseConstraintEvent_43 ;
+    yawl:hasMethod yawl:CostService_handleCheckWorkItemConstraintEvent_44 ;
+    yawl:hasMethod yawl:CostService_doGet_45 ;
+    yawl:hasMethod yawl:CostService_handleWorkItemAbortException_46 ;
+    yawl:hasMethod yawl:CostService_handleTimeoutEvent_47 ;
+    yawl:hasMethod yawl:CostService_handleConstraintViolationException_48 ;
+    yawl:hasMethod yawl:CostService_handleCaseCancellationEvent_49 ;
+    yawl:hasMethod yawl:CostService_handleResourceUnavailableException_50 ;
+    yawl:hasField yawl:CostService__models ;
+    yawl:hasField yawl:CostService__dataEngine ;
+    yawl:hasField yawl:CostService__evaluator ;
+    yawl:hasField yawl:CostService__engineLogClient ;
+    yawl:hasField yawl:CostService__ixClient ;
+    yawl:hasField yawl:CostService__rsLogClient ;
+    yawl:hasField yawl:CostService__rsOrgDataClient ;
+    yawl:hasField yawl:CostService__xsdPath ;
+    yawl:hasField yawl:CostService__rsHandle ;
+    yawl:hasField yawl:CostService__engineHandle ;
+    yawl:hasField yawl:CostService__engineLogonName ;
+    yawl:hasField yawl:CostService__engineLogonPassword ;
+    yawl:hasField yawl:CostService_INSTANCE ;
+    yawl:hasField yawl:CostService__log ;
+    .
+
+
+# Method: CostService.getInstance
+yawl:CostService_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "CostService" ;
+    yawl:signature "CostService getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: CostService.shutdown
+yawl:CostService_shutdown_2 a yawl:Method ;
+    rdfs:label "shutdown" ;
+    yawl:returnType "void" ;
+    yawl:signature "void shutdown()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.setInterfaceXBackend
+yawl:CostService_setInterfaceXBackend_3 a yawl:Method ;
+    rdfs:label "setInterfaceXBackend" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setInterfaceXBackend(String uri)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.setEngineLogURI
+yawl:CostService_setEngineLogURI_4 a yawl:Method ;
+    rdfs:label "setEngineLogURI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEngineLogURI(String uri)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.setResourceLogURI
+yawl:CostService_setResourceLogURI_5 a yawl:Method ;
+    rdfs:label "setResourceLogURI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setResourceLogURI(String uri)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.setResourceOrgDataURI
+yawl:CostService_setResourceOrgDataURI_6 a yawl:Method ;
+    rdfs:label "setResourceOrgDataURI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setResourceOrgDataURI(String uri)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.setEngineLogonName
+yawl:CostService_setEngineLogonName_7 a yawl:Method ;
+    rdfs:label "setEngineLogonName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEngineLogonName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.setEngineLogonPassword
+yawl:CostService_setEngineLogonPassword_8 a yawl:Method ;
+    rdfs:label "setEngineLogonPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEngineLogonPassword(String password)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.setXSDPath
+yawl:CostService_setXSDPath_9 a yawl:Method ;
+    rdfs:label "setXSDPath" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setXSDPath(URL xsdPath)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.importModel
+yawl:CostService_importModel_10 a yawl:Method ;
+    rdfs:label "importModel" ;
+    yawl:returnType "String" ;
+    yawl:signature "String importModel(String costModel)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.importModels
+yawl:CostService_importModels_11 a yawl:Method ;
+    rdfs:label "importModels" ;
+    yawl:returnType "String" ;
+    yawl:signature "String importModels(String costModels)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.importModel
+yawl:CostService_importModel_12 a yawl:Method ;
+    rdfs:label "importModel" ;
+    yawl:returnType "String" ;
+    yawl:signature "String importModel(XNode costModel)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.importModels
+yawl:CostService_importModels_13 a yawl:Method ;
+    rdfs:label "importModels" ;
+    yawl:returnType "String" ;
+    yawl:signature "String importModels(XNode costModels)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.exportModels
+yawl:CostService_exportModels_14 a yawl:Method ;
+    rdfs:label "exportModels" ;
+    yawl:returnType "String" ;
+    yawl:signature "String exportModels(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.exportModel
+yawl:CostService_exportModel_15 a yawl:Method ;
+    rdfs:label "exportModel" ;
+    yawl:returnType "String" ;
+    yawl:signature "String exportModel(YSpecificationID specID, String modelID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.getModelCache
+yawl:CostService_getModelCache_16 a yawl:Method ;
+    rdfs:label "getModelCache" ;
+    yawl:returnType "CostModelCache" ;
+    yawl:signature "CostModelCache getModelCache(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.getModelCache
+yawl:CostService_getModelCache_17 a yawl:Method ;
+    rdfs:label "getModelCache" ;
+    yawl:returnType "CostModelCache" ;
+    yawl:signature "CostModelCache getModelCache(String specURI, String version)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.getModels
+yawl:CostService_getModels_18 a yawl:Method ;
+    rdfs:label "getModels" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getModels(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.getModel
+yawl:CostService_getModel_19 a yawl:Method ;
+    rdfs:label "getModel" ;
+    yawl:returnType "CostModel" ;
+    yawl:signature "CostModel getModel(YSpecificationID specID, String modelID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.removeModel
+yawl:CostService_removeModel_20 a yawl:Method ;
+    rdfs:label "removeModel" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeModel(YSpecificationID specID, String modelID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.clearModels
+yawl:CostService_clearModels_21 a yawl:Method ;
+    rdfs:label "clearModels" ;
+    yawl:returnType "String" ;
+    yawl:signature "String clearModels(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.removeModel
+yawl:CostService_removeModel_22 a yawl:Method ;
+    rdfs:label "removeModel" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeModel(CostModel model)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.removeModel
+yawl:CostService_removeModel_23 a yawl:Method ;
+    rdfs:label "removeModel" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeModel(CostModel model, CostModelCache cache)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.removeModel
+yawl:CostService_removeModel_24 a yawl:Method ;
+    rdfs:label "removeModel" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeModel(CostModel model, CostModelCache cache, boolean commit)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostService.getModels
+yawl:CostService_getModels_25 a yawl:Method ;
+    rdfs:label "getModels" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getModels(String specURI, String version)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.getAnnotatedLog
+yawl:CostService_getAnnotatedLog_26 a yawl:Method ;
+    rdfs:label "getAnnotatedLog" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAnnotatedLog(YSpecificationID specID, boolean withData)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.evaluate
+yawl:CostService_evaluate_27 a yawl:Method ;
+    rdfs:label "evaluate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean evaluate(YSpecificationID specID, String caseID, String predicate)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.calculate
+yawl:CostService_calculate_28 a yawl:Method ;
+    rdfs:label "calculate" ;
+    yawl:returnType "double" ;
+    yawl:signature "double calculate(YSpecificationID specID, String caseID, String predicate)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.resolveResources
+yawl:CostService_resolveResources_29 a yawl:Method ;
+    rdfs:label "resolveResources" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set resolveResources(String resourceID)" ;
+    rdfs:comment """Resolves an id to a set of participant ids @param resourceID can be the id of a Participant, Role, Position, Capability or OrgGroup @return the set of Participant ID's referenced""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.getRSHandle
+yawl:CostService_getRSHandle_30 a yawl:Method ;
+    rdfs:label "getRSHandle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRSHandle()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostService.getEngineHandle
+yawl:CostService_getEngineHandle_31 a yawl:Method ;
+    rdfs:label "getEngineHandle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEngineHandle()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostService.failMsg
+yawl:CostService_failMsg_32 a yawl:Method ;
+    rdfs:label "failMsg" ;
+    yawl:returnType "String" ;
+    yawl:signature "String failMsg(String msg)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostService.successMsg
+yawl:CostService_successMsg_33 a yawl:Method ;
+    rdfs:label "successMsg" ;
+    yawl:returnType "String" ;
+    yawl:signature "String successMsg(String msg)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostService.isValidModel
+yawl:CostService_isValidModel_34 a yawl:Method ;
+    rdfs:label "isValidModel" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isValidModel(XNode costModel)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostService.addToCache
+yawl:CostService_addToCache_35 a yawl:Method ;
+    rdfs:label "addToCache" ;
+    yawl:returnType "CostModelCache" ;
+    yawl:signature "CostModelCache addToCache(CostModel model, boolean restoring, boolean commit)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostService.removePrevVersion
+yawl:CostService_removePrevVersion_36 a yawl:Method ;
+    rdfs:label "removePrevVersion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removePrevVersion(CostModelCache cache, CostModel model)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostService.restore
+yawl:CostService_restore_37 a yawl:Method ;
+    rdfs:label "restore" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restore()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostService.getLogEvents
+yawl:CostService_getLogEvents_38 a yawl:Method ;
+    rdfs:label "getLogEvents" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getLogEvents(YSpecificationID specID, String caseID, Predicate predicate)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostService.getCaseIDs
+yawl:CostService_getCaseIDs_39 a yawl:Method ;
+    rdfs:label "getCaseIDs" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getCaseIDs(YSpecificationID specID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostService.parseEventLog
+yawl:CostService_parseEventLog_40 a yawl:Method ;
+    rdfs:label "parseEventLog" ;
+    yawl:returnType "List" ;
+    yawl:signature "List parseEventLog(String log)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostService.appendEvents
+yawl:CostService_appendEvents_41 a yawl:Method ;
+    rdfs:label "appendEvents" ;
+    yawl:returnType "void" ;
+    yawl:signature "void appendEvents(List eventList, String log)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostService.getPersistingClasses
+yawl:CostService_getPersistingClasses_42 a yawl:Method ;
+    rdfs:label "getPersistingClasses" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getPersistingClasses()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostService.handleCheckCaseConstraintEvent
+yawl:CostService_handleCheckCaseConstraintEvent_43 a yawl:Method ;
+    rdfs:label "handleCheckCaseConstraintEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCheckCaseConstraintEvent(YSpecificationID specID, String caseID, String data, boolean precheck)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.handleCheckWorkItemConstraintEvent
+yawl:CostService_handleCheckWorkItemConstraintEvent_44 a yawl:Method ;
+    rdfs:label "handleCheckWorkItemConstraintEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCheckWorkItemConstraintEvent(WorkItemRecord wir, String data, boolean precheck)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.doGet
+yawl:CostService_doGet_45 a yawl:Method ;
+    rdfs:label "doGet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doGet(HttpServletRequest request, HttpServletResponse response)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.handleWorkItemAbortException
+yawl:CostService_handleWorkItemAbortException_46 a yawl:Method ;
+    rdfs:label "handleWorkItemAbortException" ;
+    yawl:returnType "String" ;
+    yawl:signature "String handleWorkItemAbortException(WorkItemRecord wir, String caseData)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.handleTimeoutEvent
+yawl:CostService_handleTimeoutEvent_47 a yawl:Method ;
+    rdfs:label "handleTimeoutEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleTimeoutEvent(WorkItemRecord wir, String taskList)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.handleConstraintViolationException
+yawl:CostService_handleConstraintViolationException_48 a yawl:Method ;
+    rdfs:label "handleConstraintViolationException" ;
+    yawl:returnType "String" ;
+    yawl:signature "String handleConstraintViolationException(WorkItemRecord wir, String caseData)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.handleCaseCancellationEvent
+yawl:CostService_handleCaseCancellationEvent_49 a yawl:Method ;
+    rdfs:label "handleCaseCancellationEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCaseCancellationEvent(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostService.handleResourceUnavailableException
+yawl:CostService_handleResourceUnavailableException_50 a yawl:Method ;
+    rdfs:label "handleResourceUnavailableException" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleResourceUnavailableException(String resourceID, WorkItemRecord wir, String caseData, boolean primary)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:CostService__models a yawl:Field ;
+    rdfs:label "_models" .
+
+yawl:CostService__dataEngine a yawl:Field ;
+    rdfs:label "_dataEngine" .
+
+yawl:CostService__evaluator a yawl:Field ;
+    rdfs:label "_evaluator" .
+
+yawl:CostService__engineLogClient a yawl:Field ;
+    rdfs:label "_engineLogClient" .
+
+yawl:CostService__ixClient a yawl:Field ;
+    rdfs:label "_ixClient" .
+
+yawl:CostService__rsLogClient a yawl:Field ;
+    rdfs:label "_rsLogClient" .
+
+yawl:CostService__rsOrgDataClient a yawl:Field ;
+    rdfs:label "_rsOrgDataClient" .
+
+yawl:CostService__xsdPath a yawl:Field ;
+    rdfs:label "_xsdPath" .
+
+yawl:CostService__rsHandle a yawl:Field ;
+    rdfs:label "_rsHandle" .
+
+yawl:CostService__engineHandle a yawl:Field ;
+    rdfs:label "_engineHandle" .
+
+yawl:CostService__engineLogonName a yawl:Field ;
+    rdfs:label "_engineLogonName" .
+
+yawl:CostService__engineLogonPassword a yawl:Field ;
+    rdfs:label "_engineLogonPassword" .
+
+yawl:CostService_INSTANCE a yawl:Field ;
+    rdfs:label "INSTANCE" .
+
+yawl:CostService__log a yawl:Field ;
+    rdfs:label "_log" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_demoService a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.demoService" .
+
+

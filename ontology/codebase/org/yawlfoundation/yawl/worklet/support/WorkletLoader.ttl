@@ -1,0 +1,178 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.support.WorkletLoader
+yawl:WorkletLoader a yawl:Class ;
+    rdfs:label "WorkletLoader" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_support ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/support/WorkletLoader.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 15/09/15""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:WorkletLoader_add_1 ;
+    yawl:hasMethod yawl:WorkletLoader_add_2 ;
+    yawl:hasMethod yawl:WorkletLoader_remove_3 ;
+    yawl:hasMethod yawl:WorkletLoader_remove_4 ;
+    yawl:hasMethod yawl:WorkletLoader_remove_5 ;
+    yawl:hasMethod yawl:WorkletLoader_get_6 ;
+    yawl:hasMethod yawl:WorkletLoader_get_7 ;
+    yawl:hasMethod yawl:WorkletLoader_parseTarget_8 ;
+    yawl:hasMethod yawl:WorkletLoader_getAllWorkletKeys_9 ;
+    yawl:hasMethod yawl:WorkletLoader_getOrphanedWorklets_10 ;
+    yawl:hasMethod yawl:WorkletLoader_getPersistedWorkletsMap_11 ;
+    yawl:hasMethod yawl:WorkletLoader_getTargettedWorkletKeys_12 ;
+    yawl:hasMethod yawl:WorkletLoader_loadAllWorkletSpecifications_13 ;
+    yawl:hasMethod yawl:WorkletLoader_loadAllPersistedWorkletSpecifications_14 ;
+    yawl:hasMethod yawl:WorkletLoader_getPersistedWorkletSpecification_15 ;
+    yawl:hasMethod yawl:WorkletLoader_getPersistedWorkletSpecification_16 ;
+    yawl:hasMethod yawl:WorkletLoader_extractKeysFromTarget_17 ;
+    yawl:hasField yawl:WorkletLoader__log ;
+    .
+
+
+# Method: WorkletLoader.add
+yawl:WorkletLoader_add_1 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean add(YSpecificationID specID, String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletLoader.add
+yawl:WorkletLoader_add_2 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean add(WorkletSpecification wSpec)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletLoader.remove
+yawl:WorkletLoader_remove_3 a yawl:Method ;
+    rdfs:label "remove" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean remove(WorkletSpecification wSpec)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletLoader.remove
+yawl:WorkletLoader_remove_4 a yawl:Method ;
+    rdfs:label "remove" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean remove(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletLoader.remove
+yawl:WorkletLoader_remove_5 a yawl:Method ;
+    rdfs:label "remove" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean remove(String specKey)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletLoader.get
+yawl:WorkletLoader_get_6 a yawl:Method ;
+    rdfs:label "get" ;
+    yawl:returnType "WorkletSpecification" ;
+    yawl:signature "WorkletSpecification get(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletLoader.get
+yawl:WorkletLoader_get_7 a yawl:Method ;
+    rdfs:label "get" ;
+    yawl:returnType "WorkletSpecification" ;
+    yawl:signature "WorkletSpecification get(String key)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletLoader.parseTarget
+yawl:WorkletLoader_parseTarget_8 a yawl:Method ;
+    rdfs:label "parseTarget" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set parseTarget(String target)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletLoader.getAllWorkletKeys
+yawl:WorkletLoader_getAllWorkletKeys_9 a yawl:Method ;
+    rdfs:label "getAllWorkletKeys" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getAllWorkletKeys()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletLoader.getOrphanedWorklets
+yawl:WorkletLoader_getOrphanedWorklets_10 a yawl:Method ;
+    rdfs:label "getOrphanedWorklets" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getOrphanedWorklets()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletLoader.getPersistedWorkletsMap
+yawl:WorkletLoader_getPersistedWorkletsMap_11 a yawl:Method ;
+    rdfs:label "getPersistedWorkletsMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getPersistedWorkletsMap()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletLoader.getTargettedWorkletKeys
+yawl:WorkletLoader_getTargettedWorkletKeys_12 a yawl:Method ;
+    rdfs:label "getTargettedWorkletKeys" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getTargettedWorkletKeys()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletLoader.loadAllWorkletSpecifications
+yawl:WorkletLoader_loadAllWorkletSpecifications_13 a yawl:Method ;
+    rdfs:label "loadAllWorkletSpecifications" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set loadAllWorkletSpecifications()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkletLoader.loadAllPersistedWorkletSpecifications
+yawl:WorkletLoader_loadAllPersistedWorkletSpecifications_14 a yawl:Method ;
+    rdfs:label "loadAllPersistedWorkletSpecifications" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set loadAllPersistedWorkletSpecifications()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletLoader.getPersistedWorkletSpecification
+yawl:WorkletLoader_getPersistedWorkletSpecification_15 a yawl:Method ;
+    rdfs:label "getPersistedWorkletSpecification" ;
+    yawl:returnType "WorkletSpecification" ;
+    yawl:signature "WorkletSpecification getPersistedWorkletSpecification(YSpecificationID specID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletLoader.getPersistedWorkletSpecification
+yawl:WorkletLoader_getPersistedWorkletSpecification_16 a yawl:Method ;
+    rdfs:label "getPersistedWorkletSpecification" ;
+    yawl:returnType "WorkletSpecification" ;
+    yawl:signature "WorkletSpecification getPersistedWorkletSpecification(String key)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkletLoader.extractKeysFromTarget
+yawl:WorkletLoader_extractKeysFromTarget_17 a yawl:Method ;
+    rdfs:label "extractKeysFromTarget" ;
+    yawl:returnType "List" ;
+    yawl:signature "List extractKeysFromTarget(String target)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:WorkletLoader__log a yawl:Field ;
+    rdfs:label "_log" .
+
+
+

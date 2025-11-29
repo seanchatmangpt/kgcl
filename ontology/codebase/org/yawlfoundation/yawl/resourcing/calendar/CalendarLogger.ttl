@@ -1,0 +1,124 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.calendar.CalendarLogger
+yawl:CalendarLogger a yawl:Class ;
+    rdfs:label "CalendarLogger" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_calendar ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/calendar/CalendarLogger.java"^^xsd:string ;
+    rdfs:comment """Manages the Calendar Log - an archive of calendar entry and change activity. NOTE: The caller is responsible for committing all db transactions performed by any methods of this class. @author Michael Adams @date 18/10/2010""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CalendarLogger_log_1 ;
+    yawl:hasMethod yawl:CalendarLogger_log_2 ;
+    yawl:hasMethod yawl:CalendarLogger_getLogEntry_3 ;
+    yawl:hasMethod yawl:CalendarLogger_getLogEntryForCalendarKey_4 ;
+    yawl:hasMethod yawl:CalendarLogger_getLogEntriesForCalendarKey_5 ;
+    yawl:hasMethod yawl:CalendarLogger_getLogEntriesForReservation_6 ;
+    yawl:hasMethod yawl:CalendarLogger_getLogEntriesForActivity_7 ;
+    yawl:hasMethod yawl:CalendarLogger_getLogEntriesForCase_8 ;
+    yawl:hasMethod yawl:CalendarLogger_getEntryIDsForActivity_9 ;
+    yawl:hasMethod yawl:CalendarLogger_getEntryIDsForCase_10 ;
+    yawl:hasMethod yawl:CalendarLogger_getResourceRecord_11 ;
+    yawl:hasField yawl:CalendarLogger__persister ;
+    .
+
+
+# Method: CalendarLogger.log
+yawl:CalendarLogger_log_1 a yawl:Method ;
+    rdfs:label "log" ;
+    yawl:returnType "void" ;
+    yawl:signature "void log(CalendarLogEntry logEntry, CalendarEntry calEntry, boolean commit)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogger.log
+yawl:CalendarLogger_log_2 a yawl:Method ;
+    rdfs:label "log" ;
+    yawl:returnType "void" ;
+    yawl:signature "void log(CalendarLogEntry logEntry, boolean commit)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogger.getLogEntry
+yawl:CalendarLogger_getLogEntry_3 a yawl:Method ;
+    rdfs:label "getLogEntry" ;
+    yawl:returnType "CalendarLogEntry" ;
+    yawl:signature "CalendarLogEntry getLogEntry(long entryID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogger.getLogEntryForCalendarKey
+yawl:CalendarLogger_getLogEntryForCalendarKey_4 a yawl:Method ;
+    rdfs:label "getLogEntryForCalendarKey" ;
+    yawl:returnType "CalendarLogEntry" ;
+    yawl:signature "CalendarLogEntry getLogEntryForCalendarKey(long calEntryID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogger.getLogEntriesForCalendarKey
+yawl:CalendarLogger_getLogEntriesForCalendarKey_5 a yawl:Method ;
+    rdfs:label "getLogEntriesForCalendarKey" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getLogEntriesForCalendarKey(long calEntryID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogger.getLogEntriesForReservation
+yawl:CalendarLogger_getLogEntriesForReservation_6 a yawl:Method ;
+    rdfs:label "getLogEntriesForReservation" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getLogEntriesForReservation(String caseID, String activityName, String resourceRec)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogger.getLogEntriesForActivity
+yawl:CalendarLogger_getLogEntriesForActivity_7 a yawl:Method ;
+    rdfs:label "getLogEntriesForActivity" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getLogEntriesForActivity(String caseID, String activityName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogger.getLogEntriesForCase
+yawl:CalendarLogger_getLogEntriesForCase_8 a yawl:Method ;
+    rdfs:label "getLogEntriesForCase" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getLogEntriesForCase(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogger.getEntryIDsForActivity
+yawl:CalendarLogger_getEntryIDsForActivity_9 a yawl:Method ;
+    rdfs:label "getEntryIDsForActivity" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getEntryIDsForActivity(String caseID, String activityName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogger.getEntryIDsForCase
+yawl:CalendarLogger_getEntryIDsForCase_10 a yawl:Method ;
+    rdfs:label "getEntryIDsForCase" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getEntryIDsForCase(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarLogger.getResourceRecord
+yawl:CalendarLogger_getResourceRecord_11 a yawl:Method ;
+    rdfs:label "getResourceRecord" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourceRecord(long calendarKey)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:CalendarLogger__persister a yawl:Field ;
+    rdfs:label "_persister" .
+
+
+

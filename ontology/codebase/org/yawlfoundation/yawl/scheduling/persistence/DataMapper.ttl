@@ -1,0 +1,171 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.scheduling.persistence.DataMapper
+yawl:DataMapper a yawl:Class ;
+    rdfs:label "DataMapper" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_scheduling_persistence ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/scheduling/persistence/DataMapper.java"^^xsd:string ;
+    rdfs:comment """This class encapsulates the database. It exclusively uses stored procedures to access the persistence layer, thereby maintaining the concept of logical data independence. As long as the signature of the stored procedure and their semantics do not change, data source and application code may be developed independently from each other. Specifically, DataMapper facilitates the persistence of resource utilisation plans (RUPs) and of mappings. A mapping is a bijective function that assigns to every Y""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DataMapper_saveMapping_1 ;
+    yawl:hasMethod yawl:DataMapper_removeMapping_2 ;
+    yawl:hasMethod yawl:DataMapper_removeMapping_3 ;
+    yawl:hasMethod yawl:DataMapper_getMappings_4 ;
+    yawl:hasMethod yawl:DataMapper_saveRup_5 ;
+    yawl:hasMethod yawl:DataMapper_getRupsByInterval_6 ;
+    yawl:hasMethod yawl:DataMapper_getRupByCaseId_7 ;
+    yawl:hasMethod yawl:DataMapper_getAllRups_8 ;
+    yawl:hasMethod yawl:DataMapper_getActiveRups_9 ;
+    yawl:hasMethod yawl:DataMapper_getRupNodes_10 ;
+    yawl:hasMethod yawl:DataMapper_getRupsByActivity_11 ;
+    yawl:hasMethod yawl:DataMapper_getRupActivityTypes_12 ;
+    yawl:hasMethod yawl:DataMapper_updateRup_13 ;
+    yawl:hasMethod yawl:DataMapper_getTime_14 ;
+    yawl:hasMethod yawl:DataMapper_getTime_15 ;
+    yawl:hasField yawl:DataMapper__db ;
+    .
+
+
+# Method: DataMapper.saveMapping
+yawl:DataMapper_saveMapping_1 a yawl:Method ;
+    rdfs:label "saveMapping" ;
+    yawl:returnType "void" ;
+    yawl:signature "void saveMapping(Mapping mapping)" ;
+    rdfs:comment """Saves or updates a mapping to the database for recovery of failed YAWL requests @param mapping object""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataMapper.removeMapping
+yawl:DataMapper_removeMapping_2 a yawl:Method ;
+    rdfs:label "removeMapping" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeMapping(Mapping mapping)" ;
+    rdfs:comment """removes a mapping from database @param mapping Object""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataMapper.removeMapping
+yawl:DataMapper_removeMapping_3 a yawl:Method ;
+    rdfs:label "removeMapping" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeMapping(String workItemId)" ;
+    rdfs:comment """Removes all mappings with specified \"workItemId\" @author tbe, jku @param workItemId - YAWL's unique work item identifier""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataMapper.getMappings
+yawl:DataMapper_getMappings_4 a yawl:Method ;
+    rdfs:label "getMappings" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getMappings()" ;
+    rdfs:comment """Get all mappings from the database @return ArrayList<Mapping>""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataMapper.saveRup
+yawl:DataMapper_saveRup_5 a yawl:Method ;
+    rdfs:label "saveRup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void saveRup(Case theCase)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataMapper.getRupsByInterval
+yawl:DataMapper_getRupsByInterval_6 a yawl:Method ;
+    rdfs:label "getRupsByInterval" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getRupsByInterval(Date from, Date to, List yCaseIdsToExclude, boolean activeOnly)" ;
+    rdfs:comment """Get all RUPs from the database that start after \"from\" and end before \"to\". Allow for specifying a set of Yawl case Ids that are to be excluded from the result. Also, it is possible to select only RUPs that are active. @author jku, tbe @param from @param to @param yCaseIdsToExclude @param activeOnly @return List<Case> all cases with RUPs that meet the selection criteria""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataMapper.getRupByCaseId
+yawl:DataMapper_getRupByCaseId_7 a yawl:Method ;
+    rdfs:label "getRupByCaseId" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getRupByCaseId(String caseId)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataMapper.getAllRups
+yawl:DataMapper_getAllRups_8 a yawl:Method ;
+    rdfs:label "getAllRups" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAllRups()" ;
+    rdfs:comment """@author jku, tbe @param @return""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataMapper.getActiveRups
+yawl:DataMapper_getActiveRups_9 a yawl:Method ;
+    rdfs:label "getActiveRups" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getActiveRups(String timestamp)" ;
+    rdfs:comment """@author jku, tbe @param timestamp @return""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataMapper.getRupNodes
+yawl:DataMapper_getRupNodes_10 a yawl:Method ;
+    rdfs:label "getRupNodes" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getRupNodes(String activityName, String activityType, String nodeName)" ;
+    rdfs:comment """@author jku, tbe @param activityName @param activityType @param nodeName @return""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataMapper.getRupsByActivity
+yawl:DataMapper_getRupsByActivity_11 a yawl:Method ;
+    rdfs:label "getRupsByActivity" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getRupsByActivity(String activityName)" ;
+    rdfs:comment """@author jku, tbe @param activityName @return""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataMapper.getRupActivityTypes
+yawl:DataMapper_getRupActivityTypes_12 a yawl:Method ;
+    rdfs:label "getRupActivityTypes" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getRupActivityTypes(String activityName)" ;
+    rdfs:comment """@param activityName @return""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataMapper.updateRup
+yawl:DataMapper_updateRup_13 a yawl:Method ;
+    rdfs:label "updateRup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateRup(String caseId, boolean active)" ;
+    rdfs:comment """Update RUP, set \"active status\" @param caseId @param active @return""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataMapper.getTime
+yawl:DataMapper_getTime_14 a yawl:Method ;
+    rdfs:label "getTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getTime(Document rup, String xpath)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DataMapper.getTime
+yawl:DataMapper_getTime_15 a yawl:Method ;
+    rdfs:label "getTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getTime(String dateText)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:DataMapper__db a yawl:Field ;
+    rdfs:label "_db" .
+
+
+

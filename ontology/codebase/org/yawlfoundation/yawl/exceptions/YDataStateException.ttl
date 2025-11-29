@@ -1,0 +1,142 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.exceptions.YDataStateException
+yawl:YDataStateException a yawl:Class ;
+    rdfs:label "YDataStateException" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_exceptions ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/exceptions/YDataStateException.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 3/11/2003 Time: 15:33:18""" ;
+    yawl:extends yawl:YAWLException ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YDataStateException_getMessage_1 ;
+    yawl:hasMethod yawl:YDataStateException_get_dataInput_2 ;
+    yawl:hasMethod yawl:YDataStateException_getSource_3 ;
+    yawl:hasMethod yawl:YDataStateException_getErrors_4 ;
+    yawl:hasMethod yawl:YDataStateException_toXMLGuts_5 ;
+    yawl:hasMethod yawl:YDataStateException_unmarshall_6 ;
+    yawl:hasMethod yawl:YDataStateException_getSchema_7 ;
+    yawl:hasField yawl:YDataStateException__queryString ;
+    yawl:hasField yawl:YDataStateException__queriedData ;
+    yawl:hasField yawl:YDataStateException__schema ;
+    yawl:hasField yawl:YDataStateException__dataInput ;
+    yawl:hasField yawl:YDataStateException__xercesErrors ;
+    yawl:hasField yawl:YDataStateException__source ;
+    yawl:hasField yawl:YDataStateException__machineout ;
+    yawl:hasField yawl:YDataStateException__out ;
+    yawl:hasField yawl:YDataStateException_QUERYSTRING_NM ;
+    yawl:hasField yawl:YDataStateException_QUERIEDDATA_NM ;
+    yawl:hasField yawl:YDataStateException_SCHEMA_NM ;
+    yawl:hasField yawl:YDataStateException_DATAINPUT_NM ;
+    yawl:hasField yawl:YDataStateException_XERCESERRORS_NM ;
+    yawl:hasField yawl:YDataStateException_SOURCE_NM ;
+    .
+
+
+# Method: YDataStateException.getMessage
+yawl:YDataStateException_getMessage_1 a yawl:Method ;
+    rdfs:label "getMessage" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMessage()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDataStateException.get_dataInput
+yawl:YDataStateException_get_dataInput_2 a yawl:Method ;
+    rdfs:label "get_dataInput" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element get_dataInput()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDataStateException.getSource
+yawl:YDataStateException_getSource_3 a yawl:Method ;
+    rdfs:label "getSource" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object getSource()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDataStateException.getErrors
+yawl:YDataStateException_getErrors_4 a yawl:Method ;
+    rdfs:label "getErrors" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getErrors()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDataStateException.toXMLGuts
+yawl:YDataStateException_toXMLGuts_5 a yawl:Method ;
+    rdfs:label "toXMLGuts" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXMLGuts()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YDataStateException.unmarshall
+yawl:YDataStateException_unmarshall_6 a yawl:Method ;
+    rdfs:label "unmarshall" ;
+    yawl:returnType "YDataStateException" ;
+    yawl:signature "YDataStateException unmarshall(Document exceptionDoc)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YDataStateException.getSchema
+yawl:YDataStateException_getSchema_7 a yawl:Method ;
+    rdfs:label "getSchema" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getSchema()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YDataStateException__queryString a yawl:Field ;
+    rdfs:label "_queryString" .
+
+yawl:YDataStateException__queriedData a yawl:Field ;
+    rdfs:label "_queriedData" .
+
+yawl:YDataStateException__schema a yawl:Field ;
+    rdfs:label "_schema" .
+
+yawl:YDataStateException__dataInput a yawl:Field ;
+    rdfs:label "_dataInput" .
+
+yawl:YDataStateException__xercesErrors a yawl:Field ;
+    rdfs:label "_xercesErrors" .
+
+yawl:YDataStateException__source a yawl:Field ;
+    rdfs:label "_source" .
+
+yawl:YDataStateException__machineout a yawl:Field ;
+    rdfs:label "_machineout" .
+
+yawl:YDataStateException__out a yawl:Field ;
+    rdfs:label "_out" .
+
+yawl:YDataStateException_QUERYSTRING_NM a yawl:Field ;
+    rdfs:label "QUERYSTRING_NM" .
+
+yawl:YDataStateException_QUERIEDDATA_NM a yawl:Field ;
+    rdfs:label "QUERIEDDATA_NM" .
+
+yawl:YDataStateException_SCHEMA_NM a yawl:Field ;
+    rdfs:label "SCHEMA_NM" .
+
+yawl:YDataStateException_DATAINPUT_NM a yawl:Field ;
+    rdfs:label "DATAINPUT_NM" .
+
+yawl:YDataStateException_XERCESERRORS_NM a yawl:Field ;
+    rdfs:label "XERCESERRORS_NM" .
+
+yawl:YDataStateException_SOURCE_NM a yawl:Field ;
+    rdfs:label "SOURCE_NM" .
+
+
+

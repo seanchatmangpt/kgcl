@@ -1,0 +1,116 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.YNetRunnerRepository
+yawl:YNetRunnerRepository a yawl:Class ;
+    rdfs:label "YNetRunnerRepository" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/YNetRunnerRepository.java"^^xsd:string ;
+    rdfs:comment """A cache of active net runners. @author Michael Adams (split from YWorkItemRepository for v2.2)""" ;
+    yawl:extends yawl:ConcurrentHashMap ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YNetRunnerRepository_add_1 ;
+    yawl:hasMethod yawl:YNetRunnerRepository_add_2 ;
+    yawl:hasMethod yawl:YNetRunnerRepository_get_3 ;
+    yawl:hasMethod yawl:YNetRunnerRepository_get_4 ;
+    yawl:hasMethod yawl:YNetRunnerRepository_getAllRunnersForCase_5 ;
+    yawl:hasMethod yawl:YNetRunnerRepository_getCaseIdentifier_6 ;
+    yawl:hasMethod yawl:YNetRunnerRepository_remove_7 ;
+    yawl:hasMethod yawl:YNetRunnerRepository_remove_8 ;
+    yawl:hasMethod yawl:YNetRunnerRepository_remove_9 ;
+    yawl:hasMethod yawl:YNetRunnerRepository_dump_10 ;
+    yawl:hasField yawl:YNetRunnerRepository__idMap ;
+    .
+
+
+# Method: YNetRunnerRepository.add
+yawl:YNetRunnerRepository_add_1 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "YNetRunner" ;
+    yawl:signature "YNetRunner add(YNetRunner runner)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunnerRepository.add
+yawl:YNetRunnerRepository_add_2 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "YNetRunner" ;
+    yawl:signature "YNetRunner add(YNetRunner netRunner, YIdentifier caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunnerRepository.get
+yawl:YNetRunnerRepository_get_3 a yawl:Method ;
+    rdfs:label "get" ;
+    yawl:returnType "YNetRunner" ;
+    yawl:signature "YNetRunner get(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunnerRepository.get
+yawl:YNetRunnerRepository_get_4 a yawl:Method ;
+    rdfs:label "get" ;
+    yawl:returnType "YNetRunner" ;
+    yawl:signature "YNetRunner get(YWorkItem workitem)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunnerRepository.getAllRunnersForCase
+yawl:YNetRunnerRepository_getAllRunnersForCase_5 a yawl:Method ;
+    rdfs:label "getAllRunnersForCase" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAllRunnersForCase(YIdentifier primaryCaseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunnerRepository.getCaseIdentifier
+yawl:YNetRunnerRepository_getCaseIdentifier_6 a yawl:Method ;
+    rdfs:label "getCaseIdentifier" ;
+    yawl:returnType "YIdentifier" ;
+    yawl:signature "YIdentifier getCaseIdentifier(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunnerRepository.remove
+yawl:YNetRunnerRepository_remove_7 a yawl:Method ;
+    rdfs:label "remove" ;
+    yawl:returnType "YNetRunner" ;
+    yawl:signature "YNetRunner remove(YNetRunner runner)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunnerRepository.remove
+yawl:YNetRunnerRepository_remove_8 a yawl:Method ;
+    rdfs:label "remove" ;
+    yawl:returnType "YNetRunner" ;
+    yawl:signature "YNetRunner remove(YIdentifier id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunnerRepository.remove
+yawl:YNetRunnerRepository_remove_9 a yawl:Method ;
+    rdfs:label "remove" ;
+    yawl:returnType "YNetRunner" ;
+    yawl:signature "YNetRunner remove(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNetRunnerRepository.dump
+yawl:YNetRunnerRepository_dump_10 a yawl:Method ;
+    rdfs:label "dump" ;
+    yawl:returnType "void" ;
+    yawl:signature "void dump(Logger logger)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YNetRunnerRepository__idMap a yawl:Field ;
+    rdfs:label "_idMap" .
+
+
+

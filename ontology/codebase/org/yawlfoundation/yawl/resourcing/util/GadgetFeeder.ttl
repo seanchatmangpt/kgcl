@@ -1,0 +1,203 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.util.GadgetFeeder
+yawl:GadgetFeeder a yawl:Class ;
+    rdfs:label "GadgetFeeder" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/util/GadgetFeeder.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 27/08/2009""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:GadgetFeeder_getParam_1 ;
+    yawl:hasMethod yawl:GadgetFeeder_getFeed_2 ;
+    yawl:hasMethod yawl:GadgetFeeder_getHead_3 ;
+    yawl:hasMethod yawl:GadgetFeeder_getBody_4 ;
+    yawl:hasMethod yawl:GadgetFeeder_checkCredentials_5 ;
+    yawl:hasMethod yawl:GadgetFeeder_getErrBody_6 ;
+    yawl:hasMethod yawl:GadgetFeeder_getLibs_7 ;
+    yawl:hasMethod yawl:GadgetFeeder_getTitleScript_8 ;
+    yawl:hasMethod yawl:GadgetFeeder_getWorkLists_9 ;
+    yawl:hasMethod yawl:GadgetFeeder_getQueueContents_10 ;
+    yawl:hasMethod yawl:GadgetFeeder_getTabName_11 ;
+    yawl:hasMethod yawl:GadgetFeeder_getParams_12 ;
+    yawl:hasMethod yawl:GadgetFeeder_getLastTab_13 ;
+    yawl:hasField yawl:GadgetFeeder__preamble ;
+    yawl:hasField yawl:GadgetFeeder__css ;
+    yawl:hasField yawl:GadgetFeeder__script ;
+    yawl:hasField yawl:GadgetFeeder__bodyPreamble ;
+    yawl:hasField yawl:GadgetFeeder__bodyPostfix ;
+    yawl:hasField yawl:GadgetFeeder__userid ;
+    yawl:hasField yawl:GadgetFeeder__password ;
+    yawl:hasField yawl:GadgetFeeder__rootURI ;
+    yawl:hasField yawl:GadgetFeeder__parentURI ;
+    yawl:hasField yawl:GadgetFeeder__encryptedPassword ;
+    yawl:hasField yawl:GadgetFeeder__libs ;
+    yawl:hasField yawl:GadgetFeeder__view ;
+    yawl:hasField yawl:GadgetFeeder__altTabNames ;
+    yawl:hasField yawl:GadgetFeeder__showSuspended ;
+    yawl:hasField yawl:GadgetFeeder__participant ;
+    .
+
+
+# Method: GadgetFeeder.getParam
+yawl:GadgetFeeder_getParam_1 a yawl:Method ;
+    rdfs:label "getParam" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParam(Map req, String name)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: GadgetFeeder.getFeed
+yawl:GadgetFeeder_getFeed_2 a yawl:Method ;
+    rdfs:label "getFeed" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFeed()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: GadgetFeeder.getHead
+yawl:GadgetFeeder_getHead_3 a yawl:Method ;
+    rdfs:label "getHead" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getHead()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: GadgetFeeder.getBody
+yawl:GadgetFeeder_getBody_4 a yawl:Method ;
+    rdfs:label "getBody" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBody(String errMsg)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: GadgetFeeder.checkCredentials
+yawl:GadgetFeeder_checkCredentials_5 a yawl:Method ;
+    rdfs:label "checkCredentials" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkCredentials(Participant p)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: GadgetFeeder.getErrBody
+yawl:GadgetFeeder_getErrBody_6 a yawl:Method ;
+    rdfs:label "getErrBody" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getErrBody(String msg)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: GadgetFeeder.getLibs
+yawl:GadgetFeeder_getLibs_7 a yawl:Method ;
+    rdfs:label "getLibs" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLibs()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: GadgetFeeder.getTitleScript
+yawl:GadgetFeeder_getTitleScript_8 a yawl:Method ;
+    rdfs:label "getTitleScript" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTitleScript(Participant p)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: GadgetFeeder.getWorkLists
+yawl:GadgetFeeder_getWorkLists_9 a yawl:Method ;
+    rdfs:label "getWorkLists" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkLists(Participant p)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: GadgetFeeder.getQueueContents
+yawl:GadgetFeeder_getQueueContents_10 a yawl:Method ;
+    rdfs:label "getQueueContents" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getQueueContents(WorkQueue queue, int qType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: GadgetFeeder.getTabName
+yawl:GadgetFeeder_getTabName_11 a yawl:Method ;
+    rdfs:label "getTabName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTabName(int qType, WorkQueue queue)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: GadgetFeeder.getParams
+yawl:GadgetFeeder_getParams_12 a yawl:Method ;
+    rdfs:label "getParams" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParams(String itemid)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: GadgetFeeder.getLastTab
+yawl:GadgetFeeder_getLastTab_13 a yawl:Method ;
+    rdfs:label "getLastTab" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getLastTab()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:GadgetFeeder__preamble a yawl:Field ;
+    rdfs:label "_preamble" .
+
+yawl:GadgetFeeder__css a yawl:Field ;
+    rdfs:label "_css" .
+
+yawl:GadgetFeeder__script a yawl:Field ;
+    rdfs:label "_script" .
+
+yawl:GadgetFeeder__bodyPreamble a yawl:Field ;
+    rdfs:label "_bodyPreamble" .
+
+yawl:GadgetFeeder__bodyPostfix a yawl:Field ;
+    rdfs:label "_bodyPostfix" .
+
+yawl:GadgetFeeder__userid a yawl:Field ;
+    rdfs:label "_userid" .
+
+yawl:GadgetFeeder__password a yawl:Field ;
+    rdfs:label "_password" .
+
+yawl:GadgetFeeder__rootURI a yawl:Field ;
+    rdfs:label "_rootURI" .
+
+yawl:GadgetFeeder__parentURI a yawl:Field ;
+    rdfs:label "_parentURI" .
+
+yawl:GadgetFeeder__encryptedPassword a yawl:Field ;
+    rdfs:label "_encryptedPassword" .
+
+yawl:GadgetFeeder__libs a yawl:Field ;
+    rdfs:label "_libs" .
+
+yawl:GadgetFeeder__view a yawl:Field ;
+    rdfs:label "_view" .
+
+yawl:GadgetFeeder__altTabNames a yawl:Field ;
+    rdfs:label "_altTabNames" .
+
+yawl:GadgetFeeder__showSuspended a yawl:Field ;
+    rdfs:label "_showSuspended" .
+
+yawl:GadgetFeeder__participant a yawl:Field ;
+    rdfs:label "_participant" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_resourcing_jsf a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.jsf" .
+
+

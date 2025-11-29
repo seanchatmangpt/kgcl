@@ -1,0 +1,169 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.state.Performatives
+yawl:Performatives a yawl:Class ;
+    rdfs:label "Performatives" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_state ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/state/Performatives.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Performatives_getInstance_1 ;
+    yawl:hasMethod yawl:Performatives_addPerformative_2 ;
+    yawl:hasMethod yawl:Performatives_getPerformatives_3 ;
+    yawl:hasMethod yawl:Performatives_deletePerformative_4 ;
+    yawl:hasMethod yawl:Performatives_deletePerformativeContent_5 ;
+    yawl:hasMethod yawl:Performatives_deleteAllPerformatives_6 ;
+    yawl:hasMethod yawl:Performatives_createPerformatives_7 ;
+    yawl:hasMethod yawl:Performatives_parseEntityIDsStr_8 ;
+    yawl:hasMethod yawl:Performatives_calculateContent_9 ;
+    yawl:hasMethod yawl:Performatives_parseEntityIDs_10 ;
+    yawl:hasMethod yawl:Performatives_buildFromDB_11 ;
+    yawl:hasMethod yawl:Performatives_deletePerfsFromDB_12 ;
+    yawl:hasMethod yawl:Performatives_persistPerformatives_13 ;
+    yawl:hasMethod yawl:Performatives_main_14 ;
+    yawl:hasField yawl:Performatives_perfsSingle ;
+    yawl:hasField yawl:Performatives_perfs ;
+    yawl:hasField yawl:Performatives_myLog ;
+    .
+
+
+# Method: Performatives.getInstance
+yawl:Performatives_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "Performatives" ;
+    yawl:signature "Performatives getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Performatives.addPerformative
+yawl:Performatives_addPerformative_2 a yawl:Method ;
+    rdfs:label "addPerformative" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addPerformative(Performative perf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Performatives.getPerformatives
+yawl:Performatives_getPerformatives_3 a yawl:Method ;
+    rdfs:label "getPerformatives" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getPerformatives()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Performatives.deletePerformative
+yawl:Performatives_deletePerformative_4 a yawl:Method ;
+    rdfs:label "deletePerformative" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deletePerformative(Performative perf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Performatives.deletePerformativeContent
+yawl:Performatives_deletePerformativeContent_5 a yawl:Method ;
+    rdfs:label "deletePerformativeContent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deletePerformativeContent(Performative perf)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Performatives.deleteAllPerformatives
+yawl:Performatives_deleteAllPerformatives_6 a yawl:Method ;
+    rdfs:label "deleteAllPerformatives" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteAllPerformatives()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Performatives.createPerformatives
+yawl:Performatives_createPerformatives_7 a yawl:Method ;
+    rdfs:label "createPerformatives" ;
+    yawl:returnType "List" ;
+    yawl:signature "List createPerformatives(List relationExtsList, List dataRels, WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Performatives.parseEntityIDsStr
+yawl:Performatives_parseEntityIDsStr_8 a yawl:Method ;
+    rdfs:label "parseEntityIDsStr" ;
+    yawl:returnType "List" ;
+    yawl:signature "List parseEntityIDsStr(String eidsStr)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Performatives.calculateContent
+yawl:Performatives_calculateContent_9 a yawl:Method ;
+    rdfs:label "calculateContent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String calculateContent(List eids, WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Performatives.parseEntityIDs
+yawl:Performatives_parseEntityIDs_10 a yawl:Method ;
+    rdfs:label "parseEntityIDs" ;
+    yawl:returnType "String" ;
+    yawl:signature "String parseEntityIDs(List eids)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Performatives.buildFromDB
+yawl:Performatives_buildFromDB_11 a yawl:Method ;
+    rdfs:label "buildFromDB" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean buildFromDB()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Performatives.deletePerfsFromDB
+yawl:Performatives_deletePerfsFromDB_12 a yawl:Method ;
+    rdfs:label "deletePerfsFromDB" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deletePerfsFromDB()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Performatives.persistPerformatives
+yawl:Performatives_persistPerformatives_13 a yawl:Method ;
+    rdfs:label "persistPerformatives" ;
+    yawl:returnType "void" ;
+    yawl:signature "void persistPerformatives()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Performatives.main
+yawl:Performatives_main_14 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String args)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:Performatives_perfsSingle a yawl:Field ;
+    rdfs:label "perfsSingle" .
+
+yawl:Performatives_perfs a yawl:Field ;
+    rdfs:label "perfs" .
+
+yawl:Performatives_myLog a yawl:Field ;
+    rdfs:label "myLog" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_procletService_selectionProcess a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.procletService.selectionProcess" .
+
+

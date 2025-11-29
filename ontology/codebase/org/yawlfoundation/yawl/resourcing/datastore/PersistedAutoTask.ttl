@@ -1,0 +1,105 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.datastore.PersistedAutoTask
+yawl:PersistedAutoTask a yawl:Class ;
+    rdfs:label "PersistedAutoTask" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_datastore ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/datastore/PersistedAutoTask.java"^^xsd:string ;
+    rdfs:comment """Simple class to facilitate the persistence of a checkedout automated task. Author: Michael Adams Creation Date: 2/09/2008""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:PersistedAutoTask_unpersist_1 ;
+    yawl:hasMethod yawl:PersistedAutoTask_getWIR_2 ;
+    yawl:hasMethod yawl:PersistedAutoTask_get_wirStr_3 ;
+    yawl:hasMethod yawl:PersistedAutoTask_set_wirStr_4 ;
+    yawl:hasMethod yawl:PersistedAutoTask_get_id_5 ;
+    yawl:hasMethod yawl:PersistedAutoTask_set_id_6 ;
+    yawl:hasMethod yawl:PersistedAutoTask_get_wirID_7 ;
+    yawl:hasMethod yawl:PersistedAutoTask_set_wirID_8 ;
+    yawl:hasField yawl:PersistedAutoTask__id ;
+    yawl:hasField yawl:PersistedAutoTask__wirStr ;
+    yawl:hasField yawl:PersistedAutoTask__wirID ;
+    .
+
+
+# Method: PersistedAutoTask.unpersist
+yawl:PersistedAutoTask_unpersist_1 a yawl:Method ;
+    rdfs:label "unpersist" ;
+    yawl:returnType "void" ;
+    yawl:signature "void unpersist()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PersistedAutoTask.getWIR
+yawl:PersistedAutoTask_getWIR_2 a yawl:Method ;
+    rdfs:label "getWIR" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord getWIR()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PersistedAutoTask.get_wirStr
+yawl:PersistedAutoTask_get_wirStr_3 a yawl:Method ;
+    rdfs:label "get_wirStr" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_wirStr()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PersistedAutoTask.set_wirStr
+yawl:PersistedAutoTask_set_wirStr_4 a yawl:Method ;
+    rdfs:label "set_wirStr" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_wirStr(String wirStr)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PersistedAutoTask.get_id
+yawl:PersistedAutoTask_get_id_5 a yawl:Method ;
+    rdfs:label "get_id" ;
+    yawl:returnType "long" ;
+    yawl:signature "long get_id()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PersistedAutoTask.set_id
+yawl:PersistedAutoTask_set_id_6 a yawl:Method ;
+    rdfs:label "set_id" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_id(long id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PersistedAutoTask.get_wirID
+yawl:PersistedAutoTask_get_wirID_7 a yawl:Method ;
+    rdfs:label "get_wirID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_wirID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PersistedAutoTask.set_wirID
+yawl:PersistedAutoTask_set_wirID_8 a yawl:Method ;
+    rdfs:label "set_wirID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_wirID(String wirID)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:PersistedAutoTask__id a yawl:Field ;
+    rdfs:label "_id" .
+
+yawl:PersistedAutoTask__wirStr a yawl:Field ;
+    rdfs:label "_wirStr" .
+
+yawl:PersistedAutoTask__wirID a yawl:Field ;
+    rdfs:label "_wirID" .
+
+
+

@@ -1,0 +1,206 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.persistence.StoredDecisions
+yawl:StoredDecisions a yawl:Class ;
+    rdfs:label "StoredDecisions" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_persistence ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/persistence/StoredDecisions.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 3/02/12""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:StoredDecisions_getDecisionsAsList_1 ;
+    yawl:hasMethod yawl:StoredDecisions_getPkey_2 ;
+    yawl:hasMethod yawl:StoredDecisions_setPkey_3 ;
+    yawl:hasMethod yawl:StoredDecisions_getDecision0_4 ;
+    yawl:hasMethod yawl:StoredDecisions_setDecision0_5 ;
+    yawl:hasMethod yawl:StoredDecisions_getDecision1_6 ;
+    yawl:hasMethod yawl:StoredDecisions_setDecision1_7 ;
+    yawl:hasMethod yawl:StoredDecisions_getDecision2_8 ;
+    yawl:hasMethod yawl:StoredDecisions_setDecision2_9 ;
+    yawl:hasMethod yawl:StoredDecisions_getDecision3_10 ;
+    yawl:hasMethod yawl:StoredDecisions_setDecision3_11 ;
+    yawl:hasMethod yawl:StoredDecisions_getDecision4_12 ;
+    yawl:hasMethod yawl:StoredDecisions_setDecision4_13 ;
+    yawl:hasMethod yawl:StoredDecisions_getDecision5_14 ;
+    yawl:hasMethod yawl:StoredDecisions_setDecision5_15 ;
+    yawl:hasMethod yawl:StoredDecisions_getDecision6_16 ;
+    yawl:hasMethod yawl:StoredDecisions_setDecision6_17 ;
+    yawl:hasField yawl:StoredDecisions_pkey ;
+    yawl:hasField yawl:StoredDecisions_decision0 ;
+    yawl:hasField yawl:StoredDecisions_decision1 ;
+    yawl:hasField yawl:StoredDecisions_decision2 ;
+    yawl:hasField yawl:StoredDecisions_decision3 ;
+    yawl:hasField yawl:StoredDecisions_decision4 ;
+    yawl:hasField yawl:StoredDecisions_decision5 ;
+    yawl:hasField yawl:StoredDecisions_decision6 ;
+    .
+
+
+# Method: StoredDecisions.getDecisionsAsList
+yawl:StoredDecisions_getDecisionsAsList_1 a yawl:Method ;
+    rdfs:label "getDecisionsAsList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getDecisionsAsList()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredDecisions.getPkey
+yawl:StoredDecisions_getPkey_2 a yawl:Method ;
+    rdfs:label "getPkey" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getPkey()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredDecisions.setPkey
+yawl:StoredDecisions_setPkey_3 a yawl:Method ;
+    rdfs:label "setPkey" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPkey(long pkey)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredDecisions.getDecision0
+yawl:StoredDecisions_getDecision0_4 a yawl:Method ;
+    rdfs:label "getDecision0" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDecision0()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredDecisions.setDecision0
+yawl:StoredDecisions_setDecision0_5 a yawl:Method ;
+    rdfs:label "setDecision0" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDecision0(String decision0)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredDecisions.getDecision1
+yawl:StoredDecisions_getDecision1_6 a yawl:Method ;
+    rdfs:label "getDecision1" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDecision1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredDecisions.setDecision1
+yawl:StoredDecisions_setDecision1_7 a yawl:Method ;
+    rdfs:label "setDecision1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDecision1(String decision1)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredDecisions.getDecision2
+yawl:StoredDecisions_getDecision2_8 a yawl:Method ;
+    rdfs:label "getDecision2" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDecision2()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredDecisions.setDecision2
+yawl:StoredDecisions_setDecision2_9 a yawl:Method ;
+    rdfs:label "setDecision2" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDecision2(String decision2)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredDecisions.getDecision3
+yawl:StoredDecisions_getDecision3_10 a yawl:Method ;
+    rdfs:label "getDecision3" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDecision3()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredDecisions.setDecision3
+yawl:StoredDecisions_setDecision3_11 a yawl:Method ;
+    rdfs:label "setDecision3" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDecision3(String decision3)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredDecisions.getDecision4
+yawl:StoredDecisions_getDecision4_12 a yawl:Method ;
+    rdfs:label "getDecision4" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDecision4()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredDecisions.setDecision4
+yawl:StoredDecisions_setDecision4_13 a yawl:Method ;
+    rdfs:label "setDecision4" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDecision4(String decision4)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredDecisions.getDecision5
+yawl:StoredDecisions_getDecision5_14 a yawl:Method ;
+    rdfs:label "getDecision5" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDecision5()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredDecisions.setDecision5
+yawl:StoredDecisions_setDecision5_15 a yawl:Method ;
+    rdfs:label "setDecision5" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDecision5(String decision5)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredDecisions.getDecision6
+yawl:StoredDecisions_getDecision6_16 a yawl:Method ;
+    rdfs:label "getDecision6" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getDecision6()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredDecisions.setDecision6
+yawl:StoredDecisions_setDecision6_17 a yawl:Method ;
+    rdfs:label "setDecision6" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDecision6(int decision6)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:StoredDecisions_pkey a yawl:Field ;
+    rdfs:label "pkey" .
+
+yawl:StoredDecisions_decision0 a yawl:Field ;
+    rdfs:label "decision0" .
+
+yawl:StoredDecisions_decision1 a yawl:Field ;
+    rdfs:label "decision1" .
+
+yawl:StoredDecisions_decision2 a yawl:Field ;
+    rdfs:label "decision2" .
+
+yawl:StoredDecisions_decision3 a yawl:Field ;
+    rdfs:label "decision3" .
+
+yawl:StoredDecisions_decision4 a yawl:Field ;
+    rdfs:label "decision4" .
+
+yawl:StoredDecisions_decision5 a yawl:Field ;
+    rdfs:label "decision5" .
+
+yawl:StoredDecisions_decision6 a yawl:Field ;
+    rdfs:label "decision6" .
+
+
+

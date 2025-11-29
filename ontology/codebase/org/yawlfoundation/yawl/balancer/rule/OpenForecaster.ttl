@@ -1,0 +1,82 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.balancer.rule
+yawl:org_yawlfoundation_yawl_balancer_rule a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.balancer.rule" .
+# Class: org.yawlfoundation.yawl.balancer.rule.OpenForecaster
+yawl:OpenForecaster a yawl:Class ;
+    rdfs:label "OpenForecaster" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer_rule ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/rule/OpenForecaster.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 9/10/17""" ;
+    yawl:implements yawl:BusynessRule ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:OpenForecaster_add_1 ;
+    yawl:hasMethod yawl:OpenForecaster_get_2 ;
+    yawl:hasMethod yawl:OpenForecaster_getForecastTransport_3 ;
+    yawl:hasMethod yawl:OpenForecaster_getLastValue_4 ;
+    yawl:hasMethod yawl:OpenForecaster_checkSize_5 ;
+    yawl:hasField yawl:OpenForecaster__series ;
+    yawl:hasField yawl:OpenForecaster__log ;
+    yawl:hasField yawl:OpenForecaster_MIN_MEANINGFUL_QUEUE_SIZE ;
+    .
+
+
+# Method: OpenForecaster.add
+yawl:OpenForecaster_add_1 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(double value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OpenForecaster.get
+yawl:OpenForecaster_get_2 a yawl:Method ;
+    rdfs:label "get" ;
+    yawl:returnType "double" ;
+    yawl:signature "double get()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: OpenForecaster.getForecastTransport
+yawl:OpenForecaster_getForecastTransport_3 a yawl:Method ;
+    rdfs:label "getForecastTransport" ;
+    yawl:returnType "DataSet" ;
+    yawl:signature "DataSet getForecastTransport()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: OpenForecaster.getLastValue
+yawl:OpenForecaster_getLastValue_4 a yawl:Method ;
+    rdfs:label "getLastValue" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getLastValue(DataSet forecasted)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: OpenForecaster.checkSize
+yawl:OpenForecaster_checkSize_5 a yawl:Method ;
+    rdfs:label "checkSize" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkSize()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:OpenForecaster__series a yawl:Field ;
+    rdfs:label "_series" .
+
+yawl:OpenForecaster__log a yawl:Field ;
+    rdfs:label "_log" .
+
+yawl:OpenForecaster_MIN_MEANINGFUL_QUEUE_SIZE a yawl:Field ;
+    rdfs:label "MIN_MEANINGFUL_QUEUE_SIZE" .
+
+
+

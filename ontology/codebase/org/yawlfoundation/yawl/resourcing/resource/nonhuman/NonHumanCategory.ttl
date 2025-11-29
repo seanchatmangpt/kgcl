@@ -1,0 +1,317 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.resource.nonhuman.NonHumanCategory
+yawl:NonHumanCategory a yawl:Class ;
+    rdfs:label "NonHumanCategory" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_resource_nonhuman ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/resource/nonhuman/NonHumanCategory.java"^^xsd:string ;
+    rdfs:comment """A NHR Category is a grouping class for a set of NHR (much like a Role groups a set of participants) @author Michael Adams @date 25/11/2010""" ;
+    yawl:implements yawl:Comparable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:NonHumanCategory_compareTo_1 ;
+    yawl:hasMethod yawl:NonHumanCategory_getID_2 ;
+    yawl:hasMethod yawl:NonHumanCategory_setID_3 ;
+    yawl:hasMethod yawl:NonHumanCategory_getName_4 ;
+    yawl:hasMethod yawl:NonHumanCategory_setName_5 ;
+    yawl:hasMethod yawl:NonHumanCategory_getDescription_6 ;
+    yawl:hasMethod yawl:NonHumanCategory_setDescription_7 ;
+    yawl:hasMethod yawl:NonHumanCategory_getNotes_8 ;
+    yawl:hasMethod yawl:NonHumanCategory_setNotes_9 ;
+    yawl:hasMethod yawl:NonHumanCategory_getSubCategories_10 ;
+    yawl:hasMethod yawl:NonHumanCategory_getSubCategoryNames_11 ;
+    yawl:hasMethod yawl:NonHumanCategory_getSubCategoryCount_12 ;
+    yawl:hasMethod yawl:NonHumanCategory_addSubCategory_13 ;
+    yawl:hasMethod yawl:NonHumanCategory_addSubCategory_14 ;
+    yawl:hasMethod yawl:NonHumanCategory_hasSubCategory_15 ;
+    yawl:hasMethod yawl:NonHumanCategory_removeSubCategory_16 ;
+    yawl:hasMethod yawl:NonHumanCategory_getSubCategory_17 ;
+    yawl:hasMethod yawl:NonHumanCategory_getResourceSubCategory_18 ;
+    yawl:hasMethod yawl:NonHumanCategory_getSubCategoryResources_19 ;
+    yawl:hasMethod yawl:NonHumanCategory_moveToSubCategory_20 ;
+    yawl:hasMethod yawl:NonHumanCategory_getResources_21 ;
+    yawl:hasMethod yawl:NonHumanCategory_addResource_22 ;
+    yawl:hasMethod yawl:NonHumanCategory_removeResource_23 ;
+    yawl:hasMethod yawl:NonHumanCategory_removeFromAll_24 ;
+    yawl:hasMethod yawl:NonHumanCategory_hasResource_25 ;
+    yawl:hasMethod yawl:NonHumanCategory_toString_26 ;
+    yawl:hasMethod yawl:NonHumanCategory_toXNode_27 ;
+    yawl:hasMethod yawl:NonHumanCategory_toXML_28 ;
+    yawl:hasMethod yawl:NonHumanCategory_fromXML_29 ;
+    yawl:hasMethod yawl:NonHumanCategory_fromXNode_30 ;
+    yawl:hasField yawl:NonHumanCategory__id ;
+    yawl:hasField yawl:NonHumanCategory__categoryName ;
+    yawl:hasField yawl:NonHumanCategory__description ;
+    yawl:hasField yawl:NonHumanCategory__notes ;
+    yawl:hasField yawl:NonHumanCategory__subcategories ;
+    .
+
+
+# Method: NonHumanCategory.compareTo
+yawl:NonHumanCategory_compareTo_1 a yawl:Method ;
+    rdfs:label "compareTo" ;
+    yawl:returnType "int" ;
+    yawl:signature "int compareTo(NonHumanCategory other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.getID
+yawl:NonHumanCategory_getID_2 a yawl:Method ;
+    rdfs:label "getID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.setID
+yawl:NonHumanCategory_setID_3 a yawl:Method ;
+    rdfs:label "setID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.getName
+yawl:NonHumanCategory_getName_4 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.setName
+yawl:NonHumanCategory_setName_5 a yawl:Method ;
+    rdfs:label "setName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.getDescription
+yawl:NonHumanCategory_getDescription_6 a yawl:Method ;
+    rdfs:label "getDescription" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDescription()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.setDescription
+yawl:NonHumanCategory_setDescription_7 a yawl:Method ;
+    rdfs:label "setDescription" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDescription(String description)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.getNotes
+yawl:NonHumanCategory_getNotes_8 a yawl:Method ;
+    rdfs:label "getNotes" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNotes()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.setNotes
+yawl:NonHumanCategory_setNotes_9 a yawl:Method ;
+    rdfs:label "setNotes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNotes(String notes)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.getSubCategories
+yawl:NonHumanCategory_getSubCategories_10 a yawl:Method ;
+    rdfs:label "getSubCategories" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getSubCategories()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.getSubCategoryNames
+yawl:NonHumanCategory_getSubCategoryNames_11 a yawl:Method ;
+    rdfs:label "getSubCategoryNames" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getSubCategoryNames()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.getSubCategoryCount
+yawl:NonHumanCategory_getSubCategoryCount_12 a yawl:Method ;
+    rdfs:label "getSubCategoryCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getSubCategoryCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.addSubCategory
+yawl:NonHumanCategory_addSubCategory_13 a yawl:Method ;
+    rdfs:label "addSubCategory" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean addSubCategory(String subCategory)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.addSubCategory
+yawl:NonHumanCategory_addSubCategory_14 a yawl:Method ;
+    rdfs:label "addSubCategory" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean addSubCategory(NonHumanSubCategory subCategory)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.hasSubCategory
+yawl:NonHumanCategory_hasSubCategory_15 a yawl:Method ;
+    rdfs:label "hasSubCategory" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasSubCategory(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.removeSubCategory
+yawl:NonHumanCategory_removeSubCategory_16 a yawl:Method ;
+    rdfs:label "removeSubCategory" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeSubCategory(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.getSubCategory
+yawl:NonHumanCategory_getSubCategory_17 a yawl:Method ;
+    rdfs:label "getSubCategory" ;
+    yawl:returnType "NonHumanSubCategory" ;
+    yawl:signature "NonHumanSubCategory getSubCategory(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.getResourceSubCategory
+yawl:NonHumanCategory_getResourceSubCategory_18 a yawl:Method ;
+    rdfs:label "getResourceSubCategory" ;
+    yawl:returnType "NonHumanSubCategory" ;
+    yawl:signature "NonHumanSubCategory getResourceSubCategory(NonHumanResource resource)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.getSubCategoryResources
+yawl:NonHumanCategory_getSubCategoryResources_19 a yawl:Method ;
+    rdfs:label "getSubCategoryResources" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getSubCategoryResources(String subCategoryName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.moveToSubCategory
+yawl:NonHumanCategory_moveToSubCategory_20 a yawl:Method ;
+    rdfs:label "moveToSubCategory" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean moveToSubCategory(NonHumanResource resource, String subCategory)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.getResources
+yawl:NonHumanCategory_getResources_21 a yawl:Method ;
+    rdfs:label "getResources" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getResources()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.addResource
+yawl:NonHumanCategory_addResource_22 a yawl:Method ;
+    rdfs:label "addResource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addResource(NonHumanResource resource, String subCategoryName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.removeResource
+yawl:NonHumanCategory_removeResource_23 a yawl:Method ;
+    rdfs:label "removeResource" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeResource(NonHumanResource resource, String subCategoryName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.removeFromAll
+yawl:NonHumanCategory_removeFromAll_24 a yawl:Method ;
+    rdfs:label "removeFromAll" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeFromAll(NonHumanResource resource)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.hasResource
+yawl:NonHumanCategory_hasResource_25 a yawl:Method ;
+    rdfs:label "hasResource" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasResource(NonHumanResource resource, String subCategoryName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.toString
+yawl:NonHumanCategory_toString_26 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.toXNode
+yawl:NonHumanCategory_toXNode_27 a yawl:Method ;
+    rdfs:label "toXNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode toXNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.toXML
+yawl:NonHumanCategory_toXML_28 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.fromXML
+yawl:NonHumanCategory_fromXML_29 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: NonHumanCategory.fromXNode
+yawl:NonHumanCategory_fromXNode_30 a yawl:Method ;
+    rdfs:label "fromXNode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXNode(XNode node)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:NonHumanCategory__id a yawl:Field ;
+    rdfs:label "_id" .
+
+yawl:NonHumanCategory__categoryName a yawl:Field ;
+    rdfs:label "_categoryName" .
+
+yawl:NonHumanCategory__description a yawl:Field ;
+    rdfs:label "_description" .
+
+yawl:NonHumanCategory__notes a yawl:Field ;
+    rdfs:label "_notes" .
+
+yawl:NonHumanCategory__subcategories a yawl:Field ;
+    rdfs:label "_subcategories" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_resourcing_datastore_orgdata a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.datastore.orgdata" .
+
+

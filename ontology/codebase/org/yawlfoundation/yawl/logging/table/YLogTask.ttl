@@ -1,0 +1,145 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.logging.table.YLogTask
+yawl:YLogTask a yawl:Class ;
+    rdfs:label "YLogTask" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_logging_table ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/logging/table/YLogTask.java"^^xsd:string ;
+    rdfs:comment """One row of the logTask table, representing a unique task 'template' of a parent net <p/> Author: Michael Adams Creation Date: 6/04/2009""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YLogTask_getTaskID_1 ;
+    yawl:hasMethod yawl:YLogTask_setTaskID_2 ;
+    yawl:hasMethod yawl:YLogTask_getName_3 ;
+    yawl:hasMethod yawl:YLogTask_setName_4 ;
+    yawl:hasMethod yawl:YLogTask_getUnqualifiedName_5 ;
+    yawl:hasMethod yawl:YLogTask_getParentNetID_6 ;
+    yawl:hasMethod yawl:YLogTask_setParentNetID_7 ;
+    yawl:hasMethod yawl:YLogTask_getChildNetID_8 ;
+    yawl:hasMethod yawl:YLogTask_setChildNetID_9 ;
+    yawl:hasMethod yawl:YLogTask_equals_10 ;
+    yawl:hasMethod yawl:YLogTask_hashCode_11 ;
+    yawl:hasMethod yawl:YLogTask_toXML_12 ;
+    yawl:hasField yawl:YLogTask_taskID ;
+    yawl:hasField yawl:YLogTask_name ;
+    yawl:hasField yawl:YLogTask_parentNetID ;
+    yawl:hasField yawl:YLogTask_childNetID ;
+    .
+
+
+# Method: YLogTask.getTaskID
+yawl:YLogTask_getTaskID_1 a yawl:Method ;
+    rdfs:label "getTaskID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getTaskID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogTask.setTaskID
+yawl:YLogTask_setTaskID_2 a yawl:Method ;
+    rdfs:label "setTaskID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTaskID(long taskID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogTask.getName
+yawl:YLogTask_getName_3 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogTask.setName
+yawl:YLogTask_setName_4 a yawl:Method ;
+    rdfs:label "setName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogTask.getUnqualifiedName
+yawl:YLogTask_getUnqualifiedName_5 a yawl:Method ;
+    rdfs:label "getUnqualifiedName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUnqualifiedName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogTask.getParentNetID
+yawl:YLogTask_getParentNetID_6 a yawl:Method ;
+    rdfs:label "getParentNetID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getParentNetID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogTask.setParentNetID
+yawl:YLogTask_setParentNetID_7 a yawl:Method ;
+    rdfs:label "setParentNetID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setParentNetID(long parentNetID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogTask.getChildNetID
+yawl:YLogTask_getChildNetID_8 a yawl:Method ;
+    rdfs:label "getChildNetID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getChildNetID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogTask.setChildNetID
+yawl:YLogTask_setChildNetID_9 a yawl:Method ;
+    rdfs:label "setChildNetID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setChildNetID(long childNetID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogTask.equals
+yawl:YLogTask_equals_10 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogTask.hashCode
+yawl:YLogTask_hashCode_11 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogTask.toXML
+yawl:YLogTask_toXML_12 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YLogTask_taskID a yawl:Field ;
+    rdfs:label "taskID" .
+
+yawl:YLogTask_name a yawl:Field ;
+    rdfs:label "name" .
+
+yawl:YLogTask_parentNetID a yawl:Field ;
+    rdfs:label "parentNetID" .
+
+yawl:YLogTask_childNetID a yawl:Field ;
+    rdfs:label "childNetID" .
+
+
+

@@ -1,0 +1,66 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.stateless.listener.event.YCaseEvent
+yawl:YCaseEvent a yawl:Class ;
+    rdfs:label "YCaseEvent" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_listener_event ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/listener/event/YCaseEvent.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 24/8/20""" ;
+    yawl:extends yawl:YEvent ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YCaseEvent_setRunner_1 ;
+    yawl:hasMethod yawl:YCaseEvent_getRunner_2 ;
+    yawl:hasMethod yawl:YCaseEvent_setDeadlockedTasks_3 ;
+    yawl:hasMethod yawl:YCaseEvent_getDeadlockedTasks_4 ;
+    yawl:hasField yawl:YCaseEvent__deadlockedTasks ;
+    yawl:hasField yawl:YCaseEvent__runner ;
+    .
+
+
+# Method: YCaseEvent.setRunner
+yawl:YCaseEvent_setRunner_1 a yawl:Method ;
+    rdfs:label "setRunner" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRunner(YNetRunner runner)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseEvent.getRunner
+yawl:YCaseEvent_getRunner_2 a yawl:Method ;
+    rdfs:label "getRunner" ;
+    yawl:returnType "YNetRunner" ;
+    yawl:signature "YNetRunner getRunner()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCaseEvent.setDeadlockedTasks
+yawl:YCaseEvent_setDeadlockedTasks_3 a yawl:Method ;
+    rdfs:label "setDeadlockedTasks" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDeadlockedTasks(Set tasks)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseEvent.getDeadlockedTasks
+yawl:YCaseEvent_getDeadlockedTasks_4 a yawl:Method ;
+    rdfs:label "getDeadlockedTasks" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getDeadlockedTasks()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YCaseEvent__deadlockedTasks a yawl:Field ;
+    rdfs:label "_deadlockedTasks" .
+
+yawl:YCaseEvent__runner a yawl:Field ;
+    rdfs:label "_runner" .
+
+
+

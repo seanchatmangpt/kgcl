@@ -1,0 +1,287 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.interactionGraph.InteractionGraphs
+yawl:InteractionGraphs a yawl:Class ;
+    rdfs:label "InteractionGraphs" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_interactionGraph ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/interactionGraph/InteractionGraphs.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:InteractionGraphs_getInstance_1 ;
+    yawl:hasMethod yawl:InteractionGraphs_getNewInstance_2 ;
+    yawl:hasMethod yawl:InteractionGraphs_reset_3 ;
+    yawl:hasMethod yawl:InteractionGraphs_addGraph_4 ;
+    yawl:hasMethod yawl:InteractionGraphs_removeGraph_5 ;
+    yawl:hasMethod yawl:InteractionGraphs_getGraphs_6 ;
+    yawl:hasMethod yawl:InteractionGraphs_getTempGraphs_7 ;
+    yawl:hasMethod yawl:InteractionGraphs_getGraph_8 ;
+    yawl:hasMethod yawl:InteractionGraphs_getTempGraph_9 ;
+    yawl:hasMethod yawl:InteractionGraphs_createTempGraphs_10 ;
+    yawl:hasMethod yawl:InteractionGraphs_deleteTempGraphs_11 ;
+    yawl:hasMethod yawl:InteractionGraphs_createTempGraph_12 ;
+    yawl:hasMethod yawl:InteractionGraphs_getAllArcs_13 ;
+    yawl:hasMethod yawl:InteractionGraphs_updateGraphPI_14 ;
+    yawl:hasMethod yawl:InteractionGraphs_updateGraphFO_15 ;
+    yawl:hasMethod yawl:InteractionGraphs_updateGraphPerfOut_16 ;
+    yawl:hasMethod yawl:InteractionGraphs_updateGraphPerfIn_17 ;
+    yawl:hasMethod yawl:InteractionGraphs_updateGraphPerfInFailed_18 ;
+    yawl:hasMethod yawl:InteractionGraphs_updateGraphCaseID_19 ;
+    yawl:hasMethod yawl:InteractionGraphs_buildFromDB_20 ;
+    yawl:hasMethod yawl:InteractionGraphs_commitTempGraphs_21 ;
+    yawl:hasMethod yawl:InteractionGraphs_commitTempGraphEmid_22 ;
+    yawl:hasMethod yawl:InteractionGraphs_persistGraphs_23 ;
+    yawl:hasMethod yawl:InteractionGraphs_deleteGraphsFromDB_24 ;
+    yawl:hasMethod yawl:InteractionGraphs_deleteTempGraphsFromDB_25 ;
+    yawl:hasMethod yawl:InteractionGraphs_main_26 ;
+    yawl:hasField yawl:InteractionGraphs_interactionGraphTN ;
+    yawl:hasField yawl:InteractionGraphs_interactionGraphTNfieldEmid ;
+    yawl:hasField yawl:InteractionGraphs_interactionArcTN ;
+    yawl:hasField yawl:InteractionGraphs_igraphs ;
+    yawl:hasField yawl:InteractionGraphs_igraphsList ;
+    yawl:hasField yawl:InteractionGraphs_myLog ;
+    .
+
+
+# Method: InteractionGraphs.getInstance
+yawl:InteractionGraphs_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "InteractionGraphs" ;
+    yawl:signature "InteractionGraphs getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: InteractionGraphs.getNewInstance
+yawl:InteractionGraphs_getNewInstance_2 a yawl:Method ;
+    rdfs:label "getNewInstance" ;
+    yawl:returnType "InteractionGraphs" ;
+    yawl:signature "InteractionGraphs getNewInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: InteractionGraphs.reset
+yawl:InteractionGraphs_reset_3 a yawl:Method ;
+    rdfs:label "reset" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reset()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraphs.addGraph
+yawl:InteractionGraphs_addGraph_4 a yawl:Method ;
+    rdfs:label "addGraph" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addGraph(InteractionGraph graph)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraphs.removeGraph
+yawl:InteractionGraphs_removeGraph_5 a yawl:Method ;
+    rdfs:label "removeGraph" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeGraph(InteractionGraph graph)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraphs.getGraphs
+yawl:InteractionGraphs_getGraphs_6 a yawl:Method ;
+    rdfs:label "getGraphs" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getGraphs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraphs.getTempGraphs
+yawl:InteractionGraphs_getTempGraphs_7 a yawl:Method ;
+    rdfs:label "getTempGraphs" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getTempGraphs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraphs.getGraph
+yawl:InteractionGraphs_getGraph_8 a yawl:Method ;
+    rdfs:label "getGraph" ;
+    yawl:returnType "InteractionGraph" ;
+    yawl:signature "InteractionGraph getGraph(EntityMID emid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraphs.getTempGraph
+yawl:InteractionGraphs_getTempGraph_9 a yawl:Method ;
+    rdfs:label "getTempGraph" ;
+    yawl:returnType "InteractionGraph" ;
+    yawl:signature "InteractionGraph getTempGraph(EntityMID emid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraphs.createTempGraphs
+yawl:InteractionGraphs_createTempGraphs_10 a yawl:Method ;
+    rdfs:label "createTempGraphs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void createTempGraphs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraphs.deleteTempGraphs
+yawl:InteractionGraphs_deleteTempGraphs_11 a yawl:Method ;
+    rdfs:label "deleteTempGraphs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteTempGraphs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraphs.createTempGraph
+yawl:InteractionGraphs_createTempGraph_12 a yawl:Method ;
+    rdfs:label "createTempGraph" ;
+    yawl:returnType "void" ;
+    yawl:signature "void createTempGraph(EntityMID emid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraphs.getAllArcs
+yawl:InteractionGraphs_getAllArcs_13 a yawl:Method ;
+    rdfs:label "getAllArcs" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAllArcs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraphs.updateGraphPI
+yawl:InteractionGraphs_updateGraphPI_14 a yawl:Method ;
+    rdfs:label "updateGraphPI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateGraphPI(String classID, String procletID, String blockID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraphs.updateGraphFO
+yawl:InteractionGraphs_updateGraphFO_15 a yawl:Method ;
+    rdfs:label "updateGraphFO" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateGraphFO(String classID, String procletID, String blockID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraphs.updateGraphPerfOut
+yawl:InteractionGraphs_updateGraphPerfOut_16 a yawl:Method ;
+    rdfs:label "updateGraphPerfOut" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateGraphPerfOut(List relationExts)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraphs.updateGraphPerfIn
+yawl:InteractionGraphs_updateGraphPerfIn_17 a yawl:Method ;
+    rdfs:label "updateGraphPerfIn" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateGraphPerfIn(List eids)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraphs.updateGraphPerfInFailed
+yawl:InteractionGraphs_updateGraphPerfInFailed_18 a yawl:Method ;
+    rdfs:label "updateGraphPerfInFailed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateGraphPerfInFailed(List eids)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraphs.updateGraphCaseID
+yawl:InteractionGraphs_updateGraphCaseID_19 a yawl:Method ;
+    rdfs:label "updateGraphCaseID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateGraphCaseID(EntityID eid, String newVal, String oldVal)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraphs.buildFromDB
+yawl:InteractionGraphs_buildFromDB_20 a yawl:Method ;
+    rdfs:label "buildFromDB" ;
+    yawl:returnType "void" ;
+    yawl:signature "void buildFromDB()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraphs.commitTempGraphs
+yawl:InteractionGraphs_commitTempGraphs_21 a yawl:Method ;
+    rdfs:label "commitTempGraphs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void commitTempGraphs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraphs.commitTempGraphEmid
+yawl:InteractionGraphs_commitTempGraphEmid_22 a yawl:Method ;
+    rdfs:label "commitTempGraphEmid" ;
+    yawl:returnType "void" ;
+    yawl:signature "void commitTempGraphEmid(String emid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraphs.persistGraphs
+yawl:InteractionGraphs_persistGraphs_23 a yawl:Method ;
+    rdfs:label "persistGraphs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void persistGraphs()" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraphs.deleteGraphsFromDB
+yawl:InteractionGraphs_deleteGraphsFromDB_24 a yawl:Method ;
+    rdfs:label "deleteGraphsFromDB" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteGraphsFromDB()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraphs.deleteTempGraphsFromDB
+yawl:InteractionGraphs_deleteTempGraphsFromDB_25 a yawl:Method ;
+    rdfs:label "deleteTempGraphsFromDB" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteTempGraphsFromDB()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionGraphs.main
+yawl:InteractionGraphs_main_26 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String args)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:InteractionGraphs_interactionGraphTN a yawl:Field ;
+    rdfs:label "interactionGraphTN" .
+
+yawl:InteractionGraphs_interactionGraphTNfieldEmid a yawl:Field ;
+    rdfs:label "interactionGraphTNfieldEmid" .
+
+yawl:InteractionGraphs_interactionArcTN a yawl:Field ;
+    rdfs:label "interactionArcTN" .
+
+yawl:InteractionGraphs_igraphs a yawl:Field ;
+    rdfs:label "igraphs" .
+
+yawl:InteractionGraphs_igraphsList a yawl:Field ;
+    rdfs:label "igraphsList" .
+
+yawl:InteractionGraphs_myLog a yawl:Field ;
+    rdfs:label "myLog" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_procletService_util a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.procletService.util" .
+
+

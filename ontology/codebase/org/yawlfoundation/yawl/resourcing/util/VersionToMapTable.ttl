@@ -1,0 +1,29 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.util.VersionToMapTable
+yawl:VersionToMapTable a yawl:Class ;
+    rdfs:label "VersionToMapTable" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/util/ResourceMapCache.java"^^xsd:string ;
+    yawl:extends yawl:Hashtable ;
+    yawl:hasMethod yawl:VersionToMapTable_add_1 ;
+    .
+
+
+# Method: VersionToMapTable.add
+yawl:VersionToMapTable_add_1 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(YSpecificationID specID, String taskID, ResourceMap map)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

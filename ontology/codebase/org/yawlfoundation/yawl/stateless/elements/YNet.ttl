@@ -1,0 +1,374 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.stateless.elements
+yawl:org_yawlfoundation_yawl_stateless_elements a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.stateless.elements" .
+# Class: org.yawlfoundation.yawl.stateless.elements.YNet
+yawl:YNet a yawl:Class ;
+    rdfs:label "YNet" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_elements ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/elements/YNet.java"^^xsd:string ;
+    rdfs:comment """The implementation of a net in the YAWL semantics - A container for tasks and conditions. @author Lachlan Aldred""" ;
+    yawl:extends yawl:YDecomposition ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "final" ;
+    yawl:hasMethod yawl:YNet_setInputCondition_1 ;
+    yawl:hasMethod yawl:YNet_setOutputCondition_2 ;
+    yawl:hasMethod yawl:YNet_removeNetElement_3 ;
+    yawl:hasMethod yawl:YNet_addNetElement_4 ;
+    yawl:hasMethod yawl:YNet_refreshNetElementIdentifier_5 ;
+    yawl:hasMethod yawl:YNet_getNetElements_6 ;
+    yawl:hasMethod yawl:YNet_getNetTasks_7 ;
+    yawl:hasMethod yawl:YNet_getInputCondition_8 ;
+    yawl:hasMethod yawl:YNet_getOutputCondition_9 ;
+    yawl:hasMethod yawl:YNet_getNetElement_10 ;
+    yawl:hasMethod yawl:YNet_setExternalDataGateway_11 ;
+    yawl:hasMethod yawl:YNet_getExternalDataGateway_12 ;
+    yawl:hasMethod yawl:YNet_verify_13 ;
+    yawl:hasMethod yawl:YNet_verifyDirectedPath_14 ;
+    yawl:hasMethod yawl:YNet_getPostset_15 ;
+    yawl:hasMethod yawl:YNet_getPreset_16 ;
+    yawl:hasMethod yawl:YNet_clone_17 ;
+    yawl:hasMethod yawl:YNet_getCloneContainer_18 ;
+    yawl:hasMethod yawl:YNet_orJoinEnabled_19 ;
+    yawl:hasMethod yawl:YNet_setLocalVariable_20 ;
+    yawl:hasMethod yawl:YNet_getLocalVariables_21 ;
+    yawl:hasMethod yawl:YNet_removeLocalVariable_22 ;
+    yawl:hasMethod yawl:YNet_getLocalOrInputVariable_23 ;
+    yawl:hasMethod yawl:YNet_toXML_24 ;
+    yawl:hasMethod yawl:YNet_produceXMLStringForSet_25 ;
+    yawl:hasMethod yawl:YNet_getLocalVarsSorted_26 ;
+    yawl:hasMethod yawl:YNet_initialise_27 ;
+    yawl:hasMethod yawl:YNet_setIncomingData_28 ;
+    yawl:hasMethod yawl:YNet_getBusyTasks_29 ;
+    yawl:hasMethod yawl:YNet_getEnabledTasks_30 ;
+    yawl:hasMethod yawl:YNet_getActiveTasks_31 ;
+    yawl:hasMethod yawl:YNet_postCaseDataToExternal_32 ;
+    yawl:hasMethod yawl:YNet_getCaseDataFromExternal_33 ;
+    yawl:hasMethod yawl:YNet_getInstantiatedExternalDataGateway_34 ;
+    yawl:hasMethod yawl:YNet_usesSimpleRootData_35 ;
+    yawl:hasField yawl:YNet__inputCondition ;
+    yawl:hasField yawl:YNet__outputCondition ;
+    yawl:hasField yawl:YNet__netElements ;
+    yawl:hasField yawl:YNet__localVariables ;
+    yawl:hasField yawl:YNet__externalDataGateway ;
+    yawl:hasField yawl:YNet__clone ;
+    .
+
+
+# Method: YNet.setInputCondition
+yawl:YNet_setInputCondition_1 a yawl:Method ;
+    rdfs:label "setInputCondition" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setInputCondition(YInputCondition inputCondition)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNet.setOutputCondition
+yawl:YNet_setOutputCondition_2 a yawl:Method ;
+    rdfs:label "setOutputCondition" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOutputCondition(YOutputCondition outputCondition)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNet.removeNetElement
+yawl:YNet_removeNetElement_3 a yawl:Method ;
+    rdfs:label "removeNetElement" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeNetElement(YExternalNetElement netElement)" ;
+    rdfs:comment """This method removes a net element together with preSet, postSet, reset, cancelledBy sets.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNet.addNetElement
+yawl:YNet_addNetElement_4 a yawl:Method ;
+    rdfs:label "addNetElement" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addNetElement(YExternalNetElement netElement)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNet.refreshNetElementIdentifier
+yawl:YNet_refreshNetElementIdentifier_5 a yawl:Method ;
+    rdfs:label "refreshNetElementIdentifier" ;
+    yawl:returnType "void" ;
+    yawl:signature "void refreshNetElementIdentifier(String oldIdentifier)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNet.getNetElements
+yawl:YNet_getNetElements_6 a yawl:Method ;
+    rdfs:label "getNetElements" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getNetElements()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNet.getNetTasks
+yawl:YNet_getNetTasks_7 a yawl:Method ;
+    rdfs:label "getNetTasks" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getNetTasks()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNet.getInputCondition
+yawl:YNet_getInputCondition_8 a yawl:Method ;
+    rdfs:label "getInputCondition" ;
+    yawl:returnType "YInputCondition" ;
+    yawl:signature "YInputCondition getInputCondition()" ;
+    rdfs:comment """Method getInputCondition. @return YConditionInterface""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNet.getOutputCondition
+yawl:YNet_getOutputCondition_9 a yawl:Method ;
+    rdfs:label "getOutputCondition" ;
+    yawl:returnType "YOutputCondition" ;
+    yawl:signature "YOutputCondition getOutputCondition()" ;
+    rdfs:comment """Method getOutputCondition. @return YCondition""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNet.getNetElement
+yawl:YNet_getNetElement_10 a yawl:Method ;
+    rdfs:label "getNetElement" ;
+    yawl:returnType "YExternalNetElement" ;
+    yawl:signature "YExternalNetElement getNetElement(String id)" ;
+    rdfs:comment """@param id @return YExternalNetElement""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNet.setExternalDataGateway
+yawl:YNet_setExternalDataGateway_11 a yawl:Method ;
+    rdfs:label "setExternalDataGateway" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setExternalDataGateway(String gateway)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNet.getExternalDataGateway
+yawl:YNet_getExternalDataGateway_12 a yawl:Method ;
+    rdfs:label "getExternalDataGateway" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getExternalDataGateway()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNet.verify
+yawl:YNet_verify_13 a yawl:Method ;
+    rdfs:label "verify" ;
+    yawl:returnType "void" ;
+    yawl:signature "void verify(YVerificationHandler handler)" ;
+    rdfs:comment """Used to verify that the net conforms to syntax of YAWL.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNet.verifyDirectedPath
+yawl:YNet_verifyDirectedPath_14 a yawl:Method ;
+    rdfs:label "verifyDirectedPath" ;
+    yawl:returnType "void" ;
+    yawl:signature "void verifyDirectedPath(YVerificationHandler handler)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNet.getPostset
+yawl:YNet_getPostset_15 a yawl:Method ;
+    rdfs:label "getPostset" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getPostset(Set elements)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YNet.getPreset
+yawl:YNet_getPreset_16 a yawl:Method ;
+    rdfs:label "getPreset" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getPreset(Set elements)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YNet.clone
+yawl:YNet_clone_17 a yawl:Method ;
+    rdfs:label "clone" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object clone()" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNet.getCloneContainer
+yawl:YNet_getCloneContainer_18 a yawl:Method ;
+    rdfs:label "getCloneContainer" ;
+    yawl:returnType "YNet" ;
+    yawl:signature "YNet getCloneContainer()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YNet.orJoinEnabled
+yawl:YNet_orJoinEnabled_19 a yawl:Method ;
+    rdfs:label "orJoinEnabled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean orJoinEnabled(YTask orJoinTask, YIdentifier caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNet.setLocalVariable
+yawl:YNet_setLocalVariable_20 a yawl:Method ;
+    rdfs:label "setLocalVariable" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLocalVariable(YVariable variable)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNet.getLocalVariables
+yawl:YNet_getLocalVariables_21 a yawl:Method ;
+    rdfs:label "getLocalVariables" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getLocalVariables()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNet.removeLocalVariable
+yawl:YNet_removeLocalVariable_22 a yawl:Method ;
+    rdfs:label "removeLocalVariable" ;
+    yawl:returnType "YVariable" ;
+    yawl:signature "YVariable removeLocalVariable(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNet.getLocalOrInputVariable
+yawl:YNet_getLocalOrInputVariable_23 a yawl:Method ;
+    rdfs:label "getLocalOrInputVariable" ;
+    yawl:returnType "YVariable" ;
+    yawl:signature "YVariable getLocalOrInputVariable(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNet.toXML
+yawl:YNet_toXML_24 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNet.produceXMLStringForSet
+yawl:YNet_produceXMLStringForSet_25 a yawl:Method ;
+    rdfs:label "produceXMLStringForSet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String produceXMLStringForSet(Set elements)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNet.getLocalVarsSorted
+yawl:YNet_getLocalVarsSorted_26 a yawl:Method ;
+    rdfs:label "getLocalVarsSorted" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getLocalVarsSorted()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNet.initialise
+yawl:YNet_initialise_27 a yawl:Method ;
+    rdfs:label "initialise" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initialise()" ;
+    rdfs:comment """Initialises the variable/parameter declarations so that the net may execute.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNet.setIncomingData
+yawl:YNet_setIncomingData_28 a yawl:Method ;
+    rdfs:label "setIncomingData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setIncomingData(Element incomingData)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNet.getBusyTasks
+yawl:YNet_getBusyTasks_29 a yawl:Method ;
+    rdfs:label "getBusyTasks" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getBusyTasks()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNet.getEnabledTasks
+yawl:YNet_getEnabledTasks_30 a yawl:Method ;
+    rdfs:label "getEnabledTasks" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getEnabledTasks(YIdentifier id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNet.getActiveTasks
+yawl:YNet_getActiveTasks_31 a yawl:Method ;
+    rdfs:label "getActiveTasks" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getActiveTasks(YIdentifier id, String taskType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNet.postCaseDataToExternal
+yawl:YNet_postCaseDataToExternal_32 a yawl:Method ;
+    rdfs:label "postCaseDataToExternal" ;
+    yawl:returnType "void" ;
+    yawl:signature "void postCaseDataToExternal(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNet.getCaseDataFromExternal
+yawl:YNet_getCaseDataFromExternal_33 a yawl:Method ;
+    rdfs:label "getCaseDataFromExternal" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getCaseDataFromExternal(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YNet.getInstantiatedExternalDataGateway
+yawl:YNet_getInstantiatedExternalDataGateway_34 a yawl:Method ;
+    rdfs:label "getInstantiatedExternalDataGateway" ;
+    yawl:returnType "ExternalDataGateway" ;
+    yawl:signature "ExternalDataGateway getInstantiatedExternalDataGateway()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YNet.usesSimpleRootData
+yawl:YNet_usesSimpleRootData_35 a yawl:Method ;
+    rdfs:label "usesSimpleRootData" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean usesSimpleRootData()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YNet__inputCondition a yawl:Field ;
+    rdfs:label "_inputCondition" .
+
+yawl:YNet__outputCondition a yawl:Field ;
+    rdfs:label "_outputCondition" .
+
+yawl:YNet__netElements a yawl:Field ;
+    rdfs:label "_netElements" .
+
+yawl:YNet__localVariables a yawl:Field ;
+    rdfs:label "_localVariables" .
+
+yawl:YNet__externalDataGateway a yawl:Field ;
+    rdfs:label "_externalDataGateway" .
+
+yawl:YNet__clone a yawl:Field ;
+    rdfs:label "_clone" .
+
+
+

@@ -1,0 +1,175 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.YCaseNbrStore
+yawl:YCaseNbrStore a yawl:Class ;
+    rdfs:label "YCaseNbrStore" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/YCaseNbrStore.java"^^xsd:string ;
+    rdfs:comment """Provides for the persistence of the last allocated case id, and the generation of new case ids. Author: Michael Adams Date: 1/03/2008""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YCaseNbrStore_getInstance_1 ;
+    yawl:hasMethod yawl:YCaseNbrStore_getCaseNbr_2 ;
+    yawl:hasMethod yawl:YCaseNbrStore_setCaseNbr_3 ;
+    yawl:hasMethod yawl:YCaseNbrStore_getPkey_4 ;
+    yawl:hasMethod yawl:YCaseNbrStore_setPkey_5 ;
+    yawl:hasMethod yawl:YCaseNbrStore_isPersisted_6 ;
+    yawl:hasMethod yawl:YCaseNbrStore_setPersisted_7 ;
+    yawl:hasMethod yawl:YCaseNbrStore_isPersisting_8 ;
+    yawl:hasMethod yawl:YCaseNbrStore_setPersisting_9 ;
+    yawl:hasMethod yawl:YCaseNbrStore_toString_10 ;
+    yawl:hasMethod yawl:YCaseNbrStore_getNextCaseNbr_11 ;
+    yawl:hasMethod yawl:YCaseNbrStore_persistThis_12 ;
+    yawl:hasMethod yawl:YCaseNbrStore_updateThis_13 ;
+    yawl:hasMethod yawl:YCaseNbrStore_storeThis_14 ;
+    yawl:hasField yawl:YCaseNbrStore_pkey ;
+    yawl:hasField yawl:YCaseNbrStore_caseNbr ;
+    yawl:hasField yawl:YCaseNbrStore_persisted ;
+    yawl:hasField yawl:YCaseNbrStore_persisting ;
+    yawl:hasField yawl:YCaseNbrStore__instance ;
+    yawl:hasField yawl:YCaseNbrStore_log ;
+    .
+
+
+# Method: YCaseNbrStore.getInstance
+yawl:YCaseNbrStore_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "YCaseNbrStore" ;
+    yawl:signature "YCaseNbrStore getInstance()" ;
+    rdfs:comment """@return an instance of ths class""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YCaseNbrStore.getCaseNbr
+yawl:YCaseNbrStore_getCaseNbr_2 a yawl:Method ;
+    rdfs:label "getCaseNbr" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getCaseNbr()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCaseNbrStore.setCaseNbr
+yawl:YCaseNbrStore_setCaseNbr_3 a yawl:Method ;
+    rdfs:label "setCaseNbr" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCaseNbr(int nbr)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCaseNbrStore.getPkey
+yawl:YCaseNbrStore_getPkey_4 a yawl:Method ;
+    rdfs:label "getPkey" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getPkey()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCaseNbrStore.setPkey
+yawl:YCaseNbrStore_setPkey_5 a yawl:Method ;
+    rdfs:label "setPkey" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPkey(int key)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCaseNbrStore.isPersisted
+yawl:YCaseNbrStore_isPersisted_6 a yawl:Method ;
+    rdfs:label "isPersisted" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isPersisted()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCaseNbrStore.setPersisted
+yawl:YCaseNbrStore_setPersisted_7 a yawl:Method ;
+    rdfs:label "setPersisted" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPersisted(boolean bool)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCaseNbrStore.isPersisting
+yawl:YCaseNbrStore_isPersisting_8 a yawl:Method ;
+    rdfs:label "isPersisting" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isPersisting()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCaseNbrStore.setPersisting
+yawl:YCaseNbrStore_setPersisting_9 a yawl:Method ;
+    rdfs:label "setPersisting" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPersisting(boolean persist)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCaseNbrStore.toString
+yawl:YCaseNbrStore_toString_10 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCaseNbrStore.getNextCaseNbr
+yawl:YCaseNbrStore_getNextCaseNbr_11 a yawl:Method ;
+    rdfs:label "getNextCaseNbr" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNextCaseNbr(YPersistenceManager pmgr)" ;
+    rdfs:comment """@return the next available case number (as a String)""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCaseNbrStore.persistThis
+yawl:YCaseNbrStore_persistThis_12 a yawl:Method ;
+    rdfs:label "persistThis" ;
+    yawl:returnType "void" ;
+    yawl:signature "void persistThis(YPersistenceManager pmgr)" ;
+    rdfs:comment """persist the current case number""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseNbrStore.updateThis
+yawl:YCaseNbrStore_updateThis_13 a yawl:Method ;
+    rdfs:label "updateThis" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateThis(YPersistenceManager pmgr)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCaseNbrStore.storeThis
+yawl:YCaseNbrStore_storeThis_14 a yawl:Method ;
+    rdfs:label "storeThis" ;
+    yawl:returnType "void" ;
+    yawl:signature "void storeThis(YPersistenceManager pmgr)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YCaseNbrStore_pkey a yawl:Field ;
+    rdfs:label "pkey" .
+
+yawl:YCaseNbrStore_caseNbr a yawl:Field ;
+    rdfs:label "caseNbr" .
+
+yawl:YCaseNbrStore_persisted a yawl:Field ;
+    rdfs:label "persisted" .
+
+yawl:YCaseNbrStore_persisting a yawl:Field ;
+    rdfs:label "persisting" .
+
+yawl:YCaseNbrStore__instance a yawl:Field ;
+    rdfs:label "_instance" .
+
+yawl:YCaseNbrStore_log a yawl:Field ;
+    rdfs:label "log" .
+
+
+

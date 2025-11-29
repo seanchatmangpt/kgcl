@@ -1,0 +1,192 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.selection.RunnerMap
+yawl:RunnerMap a yawl:Class ;
+    rdfs:label "RunnerMap" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_selection ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/selection/RunnerMap.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 4/09/15""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:RunnerMap_add_1 ;
+    yawl:hasMethod yawl:RunnerMap_addAll_2 ;
+    yawl:hasMethod yawl:RunnerMap_remove_3 ;
+    yawl:hasMethod yawl:RunnerMap_remove_4 ;
+    yawl:hasMethod yawl:RunnerMap_isWorklet_5 ;
+    yawl:hasMethod yawl:RunnerMap_isEmpty_6 ;
+    yawl:hasMethod yawl:RunnerMap_getWorkletRunner_7 ;
+    yawl:hasMethod yawl:RunnerMap_getRunnersForWorkItem_8 ;
+    yawl:hasMethod yawl:RunnerMap_getRunnersForParentWorkItem_9 ;
+    yawl:hasMethod yawl:RunnerMap_getCheckedOutWorkItemsForParent_10 ;
+    yawl:hasMethod yawl:RunnerMap_removeRunners_11 ;
+    yawl:hasMethod yawl:RunnerMap_hasRunnersForWorkItem_12 ;
+    yawl:hasMethod yawl:RunnerMap_hasRunnersForParentWorkItem_13 ;
+    yawl:hasMethod yawl:RunnerMap_getRunnersForCase_14 ;
+    yawl:hasMethod yawl:RunnerMap_getRunnersForAncestorCase_15 ;
+    yawl:hasMethod yawl:RunnerMap_getChildRunners_16 ;
+    yawl:hasMethod yawl:RunnerMap_getAll_17 ;
+    yawl:hasMethod yawl:RunnerMap_restore_18 ;
+    yawl:hasField yawl:RunnerMap__runners ;
+    .
+
+
+# Method: RunnerMap.add
+yawl:RunnerMap_add_1 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "WorkletRunner" ;
+    yawl:signature "WorkletRunner add(WorkletRunner runner)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RunnerMap.addAll
+yawl:RunnerMap_addAll_2 a yawl:Method ;
+    rdfs:label "addAll" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean addAll(Set runners)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RunnerMap.remove
+yawl:RunnerMap_remove_3 a yawl:Method ;
+    rdfs:label "remove" ;
+    yawl:returnType "WorkletRunner" ;
+    yawl:signature "WorkletRunner remove(WorkletRunner runner)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RunnerMap.remove
+yawl:RunnerMap_remove_4 a yawl:Method ;
+    rdfs:label "remove" ;
+    yawl:returnType "WorkletRunner" ;
+    yawl:signature "WorkletRunner remove(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RunnerMap.isWorklet
+yawl:RunnerMap_isWorklet_5 a yawl:Method ;
+    rdfs:label "isWorklet" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isWorklet(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RunnerMap.isEmpty
+yawl:RunnerMap_isEmpty_6 a yawl:Method ;
+    rdfs:label "isEmpty" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEmpty()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RunnerMap.getWorkletRunner
+yawl:RunnerMap_getWorkletRunner_7 a yawl:Method ;
+    rdfs:label "getWorkletRunner" ;
+    yawl:returnType "WorkletRunner" ;
+    yawl:signature "WorkletRunner getWorkletRunner(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RunnerMap.getRunnersForWorkItem
+yawl:RunnerMap_getRunnersForWorkItem_8 a yawl:Method ;
+    rdfs:label "getRunnersForWorkItem" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getRunnersForWorkItem(String wirID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RunnerMap.getRunnersForParentWorkItem
+yawl:RunnerMap_getRunnersForParentWorkItem_9 a yawl:Method ;
+    rdfs:label "getRunnersForParentWorkItem" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getRunnersForParentWorkItem(String parentID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RunnerMap.getCheckedOutWorkItemsForParent
+yawl:RunnerMap_getCheckedOutWorkItemsForParent_10 a yawl:Method ;
+    rdfs:label "getCheckedOutWorkItemsForParent" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getCheckedOutWorkItemsForParent(String parentID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RunnerMap.removeRunners
+yawl:RunnerMap_removeRunners_11 a yawl:Method ;
+    rdfs:label "removeRunners" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeRunners(Set runners)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RunnerMap.hasRunnersForWorkItem
+yawl:RunnerMap_hasRunnersForWorkItem_12 a yawl:Method ;
+    rdfs:label "hasRunnersForWorkItem" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasRunnersForWorkItem(String wirID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RunnerMap.hasRunnersForParentWorkItem
+yawl:RunnerMap_hasRunnersForParentWorkItem_13 a yawl:Method ;
+    rdfs:label "hasRunnersForParentWorkItem" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasRunnersForParentWorkItem(String parentID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RunnerMap.getRunnersForCase
+yawl:RunnerMap_getRunnersForCase_14 a yawl:Method ;
+    rdfs:label "getRunnersForCase" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getRunnersForCase(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RunnerMap.getRunnersForAncestorCase
+yawl:RunnerMap_getRunnersForAncestorCase_15 a yawl:Method ;
+    rdfs:label "getRunnersForAncestorCase" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getRunnersForAncestorCase(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RunnerMap.getChildRunners
+yawl:RunnerMap_getChildRunners_16 a yawl:Method ;
+    rdfs:label "getChildRunners" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getChildRunners(Set runners)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RunnerMap.getAll
+yawl:RunnerMap_getAll_17 a yawl:Method ;
+    rdfs:label "getAll" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getAll()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RunnerMap.restore
+yawl:RunnerMap_restore_18 a yawl:Method ;
+    rdfs:label "restore" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restore(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:RunnerMap__runners a yawl:Field ;
+    rdfs:label "_runners" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_worklet_exception a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.worklet.exception" .
+
+

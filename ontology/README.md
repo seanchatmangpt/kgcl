@@ -6,7 +6,13 @@ This directory contains all RDF/Turtle ontology files used by the KGCL system.
 
 ```
 ontology/
-├── core/                    # Core ontology definitions
+├── codebase/                # Java codebase structure (code-centric)
+│   ├── yawl-java-schema.ttl # Meta-model definitions (JavaClass, JavaMethod, etc.)
+│   └── org/
+│       └── yawlfoundation/
+│           └── yawl/
+│               └── ...      # Individual class files organized by package
+├── core/                    # Core ontology definitions (domain-centric)
 │   ├── kgc_physics.ttl      # Main physics ontology (WCP patterns)
 │   ├── kgc_physics_execution_templates.ttl
 │   ├── sparql_templates_wcp16_27.ttl
@@ -28,6 +34,18 @@ ontology/
     ├── financial/           # Financial domain workflows
     └── reference/           # Reference implementations
 ```
+
+## Codebase Ontology
+
+The `codebase/` directory contains the Java codebase structure extracted from the YAWL Java implementation:
+
+- **yawl-java-schema.ttl**: Meta-model definitions (yawl:Package, yawl:Class, yawl:Method, yawl:Field, etc.)
+- **org/yawlfoundation/yawl/...**: Individual class files organized by Java package structure
+- Contains 863 Java classes across 133 packages
+
+This is code-centric knowledge (mirroring the Java source structure), separate from the domain-centric ontologies in `core/`.
+
+See `codebase/README.md` for detailed documentation.
 
 ## Core Ontologies
 

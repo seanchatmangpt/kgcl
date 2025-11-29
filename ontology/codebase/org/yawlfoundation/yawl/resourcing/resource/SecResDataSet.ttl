@@ -1,0 +1,441 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.resource.SecResDataSet
+yawl:SecResDataSet a yawl:Class ;
+    rdfs:label "SecResDataSet" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_resource ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/resource/SecondaryResources.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:SecResDataSet_addParticipant_1 ;
+    yawl:hasMethod yawl:SecResDataSet_addParticipant_2 ;
+    yawl:hasMethod yawl:SecResDataSet_addParticipantUnchecked_3 ;
+    yawl:hasMethod yawl:SecResDataSet_addRole_4 ;
+    yawl:hasMethod yawl:SecResDataSet_addRole_5 ;
+    yawl:hasMethod yawl:SecResDataSet_addRoleUnchecked_6 ;
+    yawl:hasMethod yawl:SecResDataSet_addNonHumanResource_7 ;
+    yawl:hasMethod yawl:SecResDataSet_addNonHumanResource_8 ;
+    yawl:hasMethod yawl:SecResDataSet_addNonHumanResourceUnchecked_9 ;
+    yawl:hasMethod yawl:SecResDataSet_addNonHumanCategory_10 ;
+    yawl:hasMethod yawl:SecResDataSet_addNonHumanCategory_11 ;
+    yawl:hasMethod yawl:SecResDataSet_addNonHumanCategoryUnchecked_12 ;
+    yawl:hasMethod yawl:SecResDataSet_addNonHumanCategory_13 ;
+    yawl:hasMethod yawl:SecResDataSet_addNonHumanCategory_14 ;
+    yawl:hasMethod yawl:SecResDataSet_addNonHumanCategoryUnchecked_15 ;
+    yawl:hasMethod yawl:SecResDataSet_remove_16 ;
+    yawl:hasMethod yawl:SecResDataSet_getParticipants_17 ;
+    yawl:hasMethod yawl:SecResDataSet_getRoles_18 ;
+    yawl:hasMethod yawl:SecResDataSet_getNonHumanResources_19 ;
+    yawl:hasMethod yawl:SecResDataSet_getNonHumanCategories_20 ;
+    yawl:hasMethod yawl:SecResDataSet_copy_21 ;
+    yawl:hasMethod yawl:SecResDataSet_hasResources_22 ;
+    yawl:hasMethod yawl:SecResDataSet_getResourcesCount_23 ;
+    yawl:hasMethod yawl:SecResDataSet_available_24 ;
+    yawl:hasMethod yawl:SecResDataSet_checkAvailability_25 ;
+    yawl:hasMethod yawl:SecResDataSet_getNonHumanCategoryDisplayLabel_26 ;
+    yawl:hasMethod yawl:SecResDataSet_getCategoryLabelList_27 ;
+    yawl:hasMethod yawl:SecResDataSet_clear_28 ;
+    yawl:hasMethod yawl:SecResDataSet_toXML_29 ;
+    yawl:hasMethod yawl:SecResDataSet_fromXML_30 ;
+    yawl:hasMethod yawl:SecResDataSet_parse_31 ;
+    yawl:hasMethod yawl:SecResDataSet_engage_32 ;
+    yawl:hasMethod yawl:SecResDataSet_disengage_33 ;
+    yawl:hasMethod yawl:SecResDataSet_selectResources_34 ;
+    yawl:hasMethod yawl:SecResDataSet_getCategoryByID_35 ;
+    yawl:hasMethod yawl:SecResDataSet_addNonHumanCategory_36 ;
+    yawl:hasMethod yawl:SecResDataSet_putNonHumanCategory_37 ;
+    yawl:hasMethod yawl:SecResDataSet_copyNonHumanCategories_38 ;
+    yawl:hasMethod yawl:SecResDataSet_getCategoryCount_39 ;
+    yawl:hasMethod yawl:SecResDataSet_selectOneFromRole_40 ;
+    yawl:hasMethod yawl:SecResDataSet_selectOneFromCategory_41 ;
+    yawl:hasMethod yawl:SecResDataSet_getSubcatFromID_42 ;
+    yawl:hasMethod yawl:SecResDataSet_isMultiSelection_43 ;
+    yawl:hasMethod yawl:SecResDataSet_problemMsg_44 ;
+    yawl:hasMethod yawl:SecResDataSet_problemMsg_45 ;
+    yawl:hasField yawl:SecResDataSet_participants ;
+    yawl:hasField yawl:SecResDataSet_nonHumanResources ;
+    yawl:hasField yawl:SecResDataSet_roles ;
+    yawl:hasField yawl:SecResDataSet_nonHumanCategories ;
+    .
+
+
+# Method: SecResDataSet.addParticipant
+yawl:SecResDataSet_addParticipant_1 a yawl:Method ;
+    rdfs:label "addParticipant" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addParticipant(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.addParticipant
+yawl:SecResDataSet_addParticipant_2 a yawl:Method ;
+    rdfs:label "addParticipant" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addParticipant(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.addParticipantUnchecked
+yawl:SecResDataSet_addParticipantUnchecked_3 a yawl:Method ;
+    rdfs:label "addParticipantUnchecked" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addParticipantUnchecked(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.addRole
+yawl:SecResDataSet_addRole_4 a yawl:Method ;
+    rdfs:label "addRole" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addRole(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.addRole
+yawl:SecResDataSet_addRole_5 a yawl:Method ;
+    rdfs:label "addRole" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addRole(Role role)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.addRoleUnchecked
+yawl:SecResDataSet_addRoleUnchecked_6 a yawl:Method ;
+    rdfs:label "addRoleUnchecked" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addRoleUnchecked(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.addNonHumanResource
+yawl:SecResDataSet_addNonHumanResource_7 a yawl:Method ;
+    rdfs:label "addNonHumanResource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addNonHumanResource(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.addNonHumanResource
+yawl:SecResDataSet_addNonHumanResource_8 a yawl:Method ;
+    rdfs:label "addNonHumanResource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addNonHumanResource(NonHumanResource resource)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.addNonHumanResourceUnchecked
+yawl:SecResDataSet_addNonHumanResourceUnchecked_9 a yawl:Method ;
+    rdfs:label "addNonHumanResourceUnchecked" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addNonHumanResourceUnchecked(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.addNonHumanCategory
+yawl:SecResDataSet_addNonHumanCategory_10 a yawl:Method ;
+    rdfs:label "addNonHumanCategory" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean addNonHumanCategory(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.addNonHumanCategory
+yawl:SecResDataSet_addNonHumanCategory_11 a yawl:Method ;
+    rdfs:label "addNonHumanCategory" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean addNonHumanCategory(NonHumanCategory category)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.addNonHumanCategoryUnchecked
+yawl:SecResDataSet_addNonHumanCategoryUnchecked_12 a yawl:Method ;
+    rdfs:label "addNonHumanCategoryUnchecked" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean addNonHumanCategoryUnchecked(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.addNonHumanCategory
+yawl:SecResDataSet_addNonHumanCategory_13 a yawl:Method ;
+    rdfs:label "addNonHumanCategory" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean addNonHumanCategory(String id, String subcat)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.addNonHumanCategory
+yawl:SecResDataSet_addNonHumanCategory_14 a yawl:Method ;
+    rdfs:label "addNonHumanCategory" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean addNonHumanCategory(NonHumanCategory category, String subcat)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.addNonHumanCategoryUnchecked
+yawl:SecResDataSet_addNonHumanCategoryUnchecked_15 a yawl:Method ;
+    rdfs:label "addNonHumanCategoryUnchecked" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean addNonHumanCategoryUnchecked(String id, String subcat)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.remove
+yawl:SecResDataSet_remove_16 a yawl:Method ;
+    rdfs:label "remove" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean remove(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.getParticipants
+yawl:SecResDataSet_getParticipants_17 a yawl:Method ;
+    rdfs:label "getParticipants" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getParticipants()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.getRoles
+yawl:SecResDataSet_getRoles_18 a yawl:Method ;
+    rdfs:label "getRoles" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getRoles()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.getNonHumanResources
+yawl:SecResDataSet_getNonHumanResources_19 a yawl:Method ;
+    rdfs:label "getNonHumanResources" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getNonHumanResources()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.getNonHumanCategories
+yawl:SecResDataSet_getNonHumanCategories_20 a yawl:Method ;
+    rdfs:label "getNonHumanCategories" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getNonHumanCategories()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.copy
+yawl:SecResDataSet_copy_21 a yawl:Method ;
+    rdfs:label "copy" ;
+    yawl:returnType "SecResDataSet" ;
+    yawl:signature "SecResDataSet copy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.hasResources
+yawl:SecResDataSet_hasResources_22 a yawl:Method ;
+    rdfs:label "hasResources" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasResources()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.getResourcesCount
+yawl:SecResDataSet_getResourcesCount_23 a yawl:Method ;
+    rdfs:label "getResourcesCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getResourcesCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.available
+yawl:SecResDataSet_available_24 a yawl:Method ;
+    rdfs:label "available" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean available(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.checkAvailability
+yawl:SecResDataSet_checkAvailability_25 a yawl:Method ;
+    rdfs:label "checkAvailability" ;
+    yawl:returnType "List" ;
+    yawl:signature "List checkAvailability()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.getNonHumanCategoryDisplayLabel
+yawl:SecResDataSet_getNonHumanCategoryDisplayLabel_26 a yawl:Method ;
+    rdfs:label "getNonHumanCategoryDisplayLabel" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNonHumanCategoryDisplayLabel(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.getCategoryLabelList
+yawl:SecResDataSet_getCategoryLabelList_27 a yawl:Method ;
+    rdfs:label "getCategoryLabelList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getCategoryLabelList(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.clear
+yawl:SecResDataSet_clear_28 a yawl:Method ;
+    rdfs:label "clear" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clear()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SecResDataSet.toXML
+yawl:SecResDataSet_toXML_29 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: SecResDataSet.fromXML
+yawl:SecResDataSet_fromXML_30 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(String xml)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: SecResDataSet.parse
+yawl:SecResDataSet_parse_31 a yawl:Method ;
+    rdfs:label "parse" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parse(Element e, Namespace nsYawl)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: SecResDataSet.engage
+yawl:SecResDataSet_engage_32 a yawl:Method ;
+    rdfs:label "engage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void engage(WorkItemRecord wir)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: SecResDataSet.disengage
+yawl:SecResDataSet_disengage_33 a yawl:Method ;
+    rdfs:label "disengage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disengage(WorkItemRecord wir)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: SecResDataSet.selectResources
+yawl:SecResDataSet_selectResources_34 a yawl:Method ;
+    rdfs:label "selectResources" ;
+    yawl:returnType "List" ;
+    yawl:signature "List selectResources(WorkItemRecord wir)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: SecResDataSet.getCategoryByID
+yawl:SecResDataSet_getCategoryByID_35 a yawl:Method ;
+    rdfs:label "getCategoryByID" ;
+    yawl:returnType "NonHumanCategory" ;
+    yawl:signature "NonHumanCategory getCategoryByID(String id)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SecResDataSet.addNonHumanCategory
+yawl:SecResDataSet_addNonHumanCategory_36 a yawl:Method ;
+    rdfs:label "addNonHumanCategory" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean addNonHumanCategory(String id, NonHumanCategory category)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SecResDataSet.putNonHumanCategory
+yawl:SecResDataSet_putNonHumanCategory_37 a yawl:Method ;
+    rdfs:label "putNonHumanCategory" ;
+    yawl:returnType "void" ;
+    yawl:signature "void putNonHumanCategory(String id, NonHumanCategory category)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SecResDataSet.copyNonHumanCategories
+yawl:SecResDataSet_copyNonHumanCategories_38 a yawl:Method ;
+    rdfs:label "copyNonHumanCategories" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map copyNonHumanCategories()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SecResDataSet.getCategoryCount
+yawl:SecResDataSet_getCategoryCount_39 a yawl:Method ;
+    rdfs:label "getCategoryCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getCategoryCount()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SecResDataSet.selectOneFromRole
+yawl:SecResDataSet_selectOneFromRole_40 a yawl:Method ;
+    rdfs:label "selectOneFromRole" ;
+    yawl:returnType "AbstractResource" ;
+    yawl:signature "AbstractResource selectOneFromRole(Role r, List selected)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SecResDataSet.selectOneFromCategory
+yawl:SecResDataSet_selectOneFromCategory_41 a yawl:Method ;
+    rdfs:label "selectOneFromCategory" ;
+    yawl:returnType "AbstractResource" ;
+    yawl:signature "AbstractResource selectOneFromCategory(NonHumanCategory c, String subcat, List selected)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SecResDataSet.getSubcatFromID
+yawl:SecResDataSet_getSubcatFromID_42 a yawl:Method ;
+    rdfs:label "getSubcatFromID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSubcatFromID(String id)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SecResDataSet.isMultiSelection
+yawl:SecResDataSet_isMultiSelection_43 a yawl:Method ;
+    rdfs:label "isMultiSelection" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isMultiSelection(T selection, List list)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SecResDataSet.problemMsg
+yawl:SecResDataSet_problemMsg_44 a yawl:Method ;
+    rdfs:label "problemMsg" ;
+    yawl:returnType "String" ;
+    yawl:signature "String problemMsg(String name)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SecResDataSet.problemMsg
+yawl:SecResDataSet_problemMsg_45 a yawl:Method ;
+    rdfs:label "problemMsg" ;
+    yawl:returnType "String" ;
+    yawl:signature "String problemMsg(String type, String name, boolean multi)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:SecResDataSet_participants a yawl:Field ;
+    rdfs:label "participants" .
+
+yawl:SecResDataSet_nonHumanResources a yawl:Field ;
+    rdfs:label "nonHumanResources" .
+
+yawl:SecResDataSet_roles a yawl:Field ;
+    rdfs:label "roles" .
+
+yawl:SecResDataSet_nonHumanCategories a yawl:Field ;
+    rdfs:label "nonHumanCategories" .
+
+
+

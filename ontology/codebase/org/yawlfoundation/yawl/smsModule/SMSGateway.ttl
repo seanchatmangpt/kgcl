@@ -1,0 +1,34 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.smsModule
+yawl:org_yawlfoundation_yawl_smsModule a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.smsModule" .
+# Class: org.yawlfoundation.yawl.smsModule.SMSGateway
+yawl:SMSGateway a yawl:Class ;
+    rdfs:label "SMSGateway" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_smsModule ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/smsModule/SMSGateway.java"^^xsd:string ;
+    rdfs:comment """The sole use of this servlet is to load the sms server's url from web.xml Author: Michael Adams Creation Date: 10/12/2008""" ;
+    yawl:extends yawl:HttpServlet ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:SMSGateway_init_1 ;
+    .
+
+
+# Method: SMSGateway.init
+yawl:SMSGateway_init_1 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

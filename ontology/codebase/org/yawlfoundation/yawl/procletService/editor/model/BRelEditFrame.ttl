@@ -1,0 +1,99 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.model.BRelEditFrame
+yawl:BRelEditFrame a yawl:Class ;
+    rdfs:label "BRelEditFrame" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor_model ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/model/BRelEditFrame.java"^^xsd:string ;
+    yawl:extends yawl:JDialog ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:BRelEditFrame_initComponents_1 ;
+    yawl:hasMethod yawl:BRelEditFrame_finishButtonActionPerformed_2 ;
+    yawl:hasMethod yawl:BRelEditFrame_invokeBRelEditFrame_3 ;
+    yawl:hasMethod yawl:BRelEditFrame_invokeBRelEditFrameWithSettings_4 ;
+    yawl:hasField yawl:BRelEditFrame_instance ;
+    yawl:hasField yawl:BRelEditFrame_sourceBlockComboBox ;
+    yawl:hasField yawl:BRelEditFrame_finishButton ;
+    yawl:hasField yawl:BRelEditFrame_destBlockComboBox ;
+    yawl:hasField yawl:BRelEditFrame_jLabel1 ;
+    yawl:hasField yawl:BRelEditFrame_jLabel2 ;
+    yawl:hasField yawl:BRelEditFrame_jPanel1 ;
+    yawl:hasField yawl:BRelEditFrame_sourceBlockID ;
+    yawl:hasField yawl:BRelEditFrame_destBlockID ;
+    yawl:hasField yawl:BRelEditFrame_frmModel ;
+    .
+
+
+# Method: BRelEditFrame.initComponents
+yawl:BRelEditFrame_initComponents_1 a yawl:Method ;
+    rdfs:label "initComponents" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initComponents()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: BRelEditFrame.finishButtonActionPerformed
+yawl:BRelEditFrame_finishButtonActionPerformed_2 a yawl:Method ;
+    rdfs:label "finishButtonActionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void finishButtonActionPerformed(java evt)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: BRelEditFrame.invokeBRelEditFrame
+yawl:BRelEditFrame_invokeBRelEditFrame_3 a yawl:Method ;
+    rdfs:label "invokeBRelEditFrame" ;
+    yawl:returnType "void" ;
+    yawl:signature "void invokeBRelEditFrame(FrmModel frmModel)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BRelEditFrame.invokeBRelEditFrameWithSettings
+yawl:BRelEditFrame_invokeBRelEditFrameWithSettings_4 a yawl:Method ;
+    rdfs:label "invokeBRelEditFrameWithSettings" ;
+    yawl:returnType "void" ;
+    yawl:signature "void invokeBRelEditFrameWithSettings(String sourceBlockID, String destBlockID, FrmModel frmModel)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:BRelEditFrame_instance a yawl:Field ;
+    rdfs:label "instance" .
+
+yawl:BRelEditFrame_sourceBlockComboBox a yawl:Field ;
+    rdfs:label "sourceBlockComboBox" .
+
+yawl:BRelEditFrame_finishButton a yawl:Field ;
+    rdfs:label "finishButton" .
+
+yawl:BRelEditFrame_destBlockComboBox a yawl:Field ;
+    rdfs:label "destBlockComboBox" .
+
+yawl:BRelEditFrame_jLabel1 a yawl:Field ;
+    rdfs:label "jLabel1" .
+
+yawl:BRelEditFrame_jLabel2 a yawl:Field ;
+    rdfs:label "jLabel2" .
+
+yawl:BRelEditFrame_jPanel1 a yawl:Field ;
+    rdfs:label "jPanel1" .
+
+yawl:BRelEditFrame_sourceBlockID a yawl:Field ;
+    rdfs:label "sourceBlockID" .
+
+yawl:BRelEditFrame_destBlockID a yawl:Field ;
+    rdfs:label "destBlockID" .
+
+yawl:BRelEditFrame_frmModel a yawl:Field ;
+    rdfs:label "frmModel" .
+
+
+

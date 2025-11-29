@@ -1,0 +1,521 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.elements.YDecomposition
+yawl:YDecomposition a yawl:Class ;
+    rdfs:label "YDecomposition" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_elements ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/elements/YDecomposition.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 25/09/2003 Time: 16:04:21 Refactored for 2.0 by Michael Adams""" ;
+    yawl:implements yawl:Cloneable ;
+    yawl:implements yawl:YVerifiable ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YDecomposition_initializeDataStore_1 ;
+    yawl:hasMethod yawl:YDecomposition_restoreData_2 ;
+    yawl:hasMethod yawl:YDecomposition_getNetDataDocument_3 ;
+    yawl:hasMethod yawl:YDecomposition_getID_4 ;
+    yawl:hasMethod yawl:YDecomposition_setID_5 ;
+    yawl:hasMethod yawl:YDecomposition_getAttributes_6 ;
+    yawl:hasMethod yawl:YDecomposition_setAttributes_7 ;
+    yawl:hasMethod yawl:YDecomposition_getAttribute_8 ;
+    yawl:hasMethod yawl:YDecomposition_setAttribute_9 ;
+    yawl:hasMethod yawl:YDecomposition_setAttribute_10 ;
+    yawl:hasMethod yawl:YDecomposition_getDocumentation_11 ;
+    yawl:hasMethod yawl:YDecomposition_setDocumentation_12 ;
+    yawl:hasMethod yawl:YDecomposition_getName_13 ;
+    yawl:hasMethod yawl:YDecomposition_setName_14 ;
+    yawl:hasMethod yawl:YDecomposition_getInputParameters_15 ;
+    yawl:hasMethod yawl:YDecomposition_getOutputParameters_16 ;
+    yawl:hasMethod yawl:YDecomposition_addInputParameter_17 ;
+    yawl:hasMethod yawl:YDecomposition_removeInputParameter_18 ;
+    yawl:hasMethod yawl:YDecomposition_removeInputParameter_19 ;
+    yawl:hasMethod yawl:YDecomposition_addOutputParameter_20 ;
+    yawl:hasMethod yawl:YDecomposition_removeOutputParameter_21 ;
+    yawl:hasMethod yawl:YDecomposition_removeOutputParameter_22 ;
+    yawl:hasMethod yawl:YDecomposition_setEnablementParameter_23 ;
+    yawl:hasMethod yawl:YDecomposition_setOutputExpression_24 ;
+    yawl:hasMethod yawl:YDecomposition_getOutputQueries_25 ;
+    yawl:hasMethod yawl:YDecomposition_setExternalInteraction_26 ;
+    yawl:hasMethod yawl:YDecomposition_requiresResourcingDecisions_27 ;
+    yawl:hasMethod yawl:YDecomposition_getCodelet_28 ;
+    yawl:hasMethod yawl:YDecomposition_setCodelet_29 ;
+    yawl:hasMethod yawl:YDecomposition_getLogPredicate_30 ;
+    yawl:hasMethod yawl:YDecomposition_setLogPredicate_31 ;
+    yawl:hasMethod yawl:YDecomposition_toXML_32 ;
+    yawl:hasMethod yawl:YDecomposition_paramMapToXML_33 ;
+    yawl:hasMethod yawl:YDecomposition_verify_34 ;
+    yawl:hasMethod yawl:YDecomposition_getInputParameterNames_35 ;
+    yawl:hasMethod yawl:YDecomposition_getOutputParameterNames_36 ;
+    yawl:hasMethod yawl:YDecomposition_getSpecification_37 ;
+    yawl:hasMethod yawl:YDecomposition_setSpecification_38 ;
+    yawl:hasMethod yawl:YDecomposition_getStateSpaceBypassParams_39 ;
+    yawl:hasMethod yawl:YDecomposition_toString_40 ;
+    yawl:hasMethod yawl:YDecomposition_clone_41 ;
+    yawl:hasMethod yawl:YDecomposition_getInternalDataDocument_42 ;
+    yawl:hasMethod yawl:YDecomposition_getOutputData_43 ;
+    yawl:hasMethod yawl:YDecomposition_getVariableDataByName_44 ;
+    yawl:hasMethod yawl:YDecomposition_assignData_45 ;
+    yawl:hasMethod yawl:YDecomposition_addData_46 ;
+    yawl:hasMethod yawl:YDecomposition_initialise_47 ;
+    yawl:hasMethod yawl:YDecomposition_getRootDataElementName_48 ;
+    yawl:hasField yawl:YDecomposition__id ;
+    yawl:hasField yawl:YDecomposition__specification ;
+    yawl:hasField yawl:YDecomposition__name ;
+    yawl:hasField yawl:YDecomposition__documentation ;
+    yawl:hasField yawl:YDecomposition__inputParameters ;
+    yawl:hasField yawl:YDecomposition__outputParameters ;
+    yawl:hasField yawl:YDecomposition__enablementParameters ;
+    yawl:hasField yawl:YDecomposition__outputExpressions ;
+    yawl:hasField yawl:YDecomposition__data ;
+    yawl:hasField yawl:YDecomposition__casedata ;
+    yawl:hasField yawl:YDecomposition__attributes ;
+    yawl:hasField yawl:YDecomposition__logPredicate ;
+    yawl:hasField yawl:YDecomposition__manualInteraction ;
+    yawl:hasField yawl:YDecomposition__codelet ;
+    .
+
+
+# Method: YDecomposition.initializeDataStore
+yawl:YDecomposition_initializeDataStore_1 a yawl:Method ;
+    rdfs:label "initializeDataStore" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initializeDataStore(YPersistenceManager pmgr, YNetData casedata)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.restoreData
+yawl:YDecomposition_restoreData_2 a yawl:Method ;
+    rdfs:label "restoreData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restoreData(YNetData casedata)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.getNetDataDocument
+yawl:YDecomposition_getNetDataDocument_3 a yawl:Method ;
+    rdfs:label "getNetDataDocument" ;
+    yawl:returnType "Document" ;
+    yawl:signature "Document getNetDataDocument(String netData)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.getID
+yawl:YDecomposition_getID_4 a yawl:Method ;
+    rdfs:label "getID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.setID
+yawl:YDecomposition_setID_5 a yawl:Method ;
+    rdfs:label "setID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.getAttributes
+yawl:YDecomposition_getAttributes_6 a yawl:Method ;
+    rdfs:label "getAttributes" ;
+    yawl:returnType "YAttributeMap" ;
+    yawl:signature "YAttributeMap getAttributes()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.setAttributes
+yawl:YDecomposition_setAttributes_7 a yawl:Method ;
+    rdfs:label "setAttributes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAttributes(Map attributes)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.getAttribute
+yawl:YDecomposition_getAttribute_8 a yawl:Method ;
+    rdfs:label "getAttribute" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAttribute(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.setAttribute
+yawl:YDecomposition_setAttribute_9 a yawl:Method ;
+    rdfs:label "setAttribute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAttribute(String name, String value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.setAttribute
+yawl:YDecomposition_setAttribute_10 a yawl:Method ;
+    rdfs:label "setAttribute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAttribute(String name, DynamicValue value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.getDocumentation
+yawl:YDecomposition_getDocumentation_11 a yawl:Method ;
+    rdfs:label "getDocumentation" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDocumentation()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.setDocumentation
+yawl:YDecomposition_setDocumentation_12 a yawl:Method ;
+    rdfs:label "setDocumentation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDocumentation(String documentation)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.getName
+yawl:YDecomposition_getName_13 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.setName
+yawl:YDecomposition_setName_14 a yawl:Method ;
+    rdfs:label "setName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.getInputParameters
+yawl:YDecomposition_getInputParameters_15 a yawl:Method ;
+    rdfs:label "getInputParameters" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getInputParameters()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.getOutputParameters
+yawl:YDecomposition_getOutputParameters_16 a yawl:Method ;
+    rdfs:label "getOutputParameters" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getOutputParameters()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.addInputParameter
+yawl:YDecomposition_addInputParameter_17 a yawl:Method ;
+    rdfs:label "addInputParameter" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addInputParameter(YParameter parameter)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.removeInputParameter
+yawl:YDecomposition_removeInputParameter_18 a yawl:Method ;
+    rdfs:label "removeInputParameter" ;
+    yawl:returnType "YParameter" ;
+    yawl:signature "YParameter removeInputParameter(YParameter parameter)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.removeInputParameter
+yawl:YDecomposition_removeInputParameter_19 a yawl:Method ;
+    rdfs:label "removeInputParameter" ;
+    yawl:returnType "YParameter" ;
+    yawl:signature "YParameter removeInputParameter(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.addOutputParameter
+yawl:YDecomposition_addOutputParameter_20 a yawl:Method ;
+    rdfs:label "addOutputParameter" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addOutputParameter(YParameter parameter)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.removeOutputParameter
+yawl:YDecomposition_removeOutputParameter_21 a yawl:Method ;
+    rdfs:label "removeOutputParameter" ;
+    yawl:returnType "YParameter" ;
+    yawl:signature "YParameter removeOutputParameter(YParameter parameter)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.removeOutputParameter
+yawl:YDecomposition_removeOutputParameter_22 a yawl:Method ;
+    rdfs:label "removeOutputParameter" ;
+    yawl:returnType "YParameter" ;
+    yawl:signature "YParameter removeOutputParameter(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.setEnablementParameter
+yawl:YDecomposition_setEnablementParameter_23 a yawl:Method ;
+    rdfs:label "setEnablementParameter" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEnablementParameter(YParameter parameter)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.setOutputExpression
+yawl:YDecomposition_setOutputExpression_24 a yawl:Method ;
+    rdfs:label "setOutputExpression" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOutputExpression(String query)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.getOutputQueries
+yawl:YDecomposition_getOutputQueries_25 a yawl:Method ;
+    rdfs:label "getOutputQueries" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getOutputQueries()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.setExternalInteraction
+yawl:YDecomposition_setExternalInteraction_26 a yawl:Method ;
+    rdfs:label "setExternalInteraction" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setExternalInteraction(boolean interaction)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.requiresResourcingDecisions
+yawl:YDecomposition_requiresResourcingDecisions_27 a yawl:Method ;
+    rdfs:label "requiresResourcingDecisions" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean requiresResourcingDecisions()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.getCodelet
+yawl:YDecomposition_getCodelet_28 a yawl:Method ;
+    rdfs:label "getCodelet" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCodelet()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.setCodelet
+yawl:YDecomposition_setCodelet_29 a yawl:Method ;
+    rdfs:label "setCodelet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCodelet(String codelet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.getLogPredicate
+yawl:YDecomposition_getLogPredicate_30 a yawl:Method ;
+    rdfs:label "getLogPredicate" ;
+    yawl:returnType "YLogPredicate" ;
+    yawl:signature "YLogPredicate getLogPredicate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.setLogPredicate
+yawl:YDecomposition_setLogPredicate_31 a yawl:Method ;
+    rdfs:label "setLogPredicate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLogPredicate(YLogPredicate predicate)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.toXML
+yawl:YDecomposition_toXML_32 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.paramMapToXML
+yawl:YDecomposition_paramMapToXML_33 a yawl:Method ;
+    rdfs:label "paramMapToXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String paramMapToXML(Map paramMap)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YDecomposition.verify
+yawl:YDecomposition_verify_34 a yawl:Method ;
+    rdfs:label "verify" ;
+    yawl:returnType "void" ;
+    yawl:signature "void verify(YVerificationHandler handler)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.getInputParameterNames
+yawl:YDecomposition_getInputParameterNames_35 a yawl:Method ;
+    rdfs:label "getInputParameterNames" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getInputParameterNames()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.getOutputParameterNames
+yawl:YDecomposition_getOutputParameterNames_36 a yawl:Method ;
+    rdfs:label "getOutputParameterNames" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getOutputParameterNames()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.getSpecification
+yawl:YDecomposition_getSpecification_37 a yawl:Method ;
+    rdfs:label "getSpecification" ;
+    yawl:returnType "YSpecification" ;
+    yawl:signature "YSpecification getSpecification()" ;
+    rdfs:comment """Returns a link to the containing specification. @return the specification containing this decomposition.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.setSpecification
+yawl:YDecomposition_setSpecification_38 a yawl:Method ;
+    rdfs:label "setSpecification" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSpecification(YSpecification specification)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.getStateSpaceBypassParams
+yawl:YDecomposition_getStateSpaceBypassParams_39 a yawl:Method ;
+    rdfs:label "getStateSpaceBypassParams" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getStateSpaceBypassParams()" ;
+    rdfs:comment """Gets those params that bypass the decomposition state space. @return a map of them.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.toString
+yawl:YDecomposition_toString_40 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.clone
+yawl:YDecomposition_clone_41 a yawl:Method ;
+    rdfs:label "clone" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object clone()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.getInternalDataDocument
+yawl:YDecomposition_getInternalDataDocument_42 a yawl:Method ;
+    rdfs:label "getInternalDataDocument" ;
+    yawl:returnType "Document" ;
+    yawl:signature "Document getInternalDataDocument()" ;
+    rdfs:comment """@return the document containing runtime variable values""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.getOutputData
+yawl:YDecomposition_getOutputData_43 a yawl:Method ;
+    rdfs:label "getOutputData" ;
+    yawl:returnType "Document" ;
+    yawl:signature "Document getOutputData()" ;
+    rdfs:comment """This method returns the list of data from a decomposition. According to its declared output parameters.  Only useful for Beta 4 and above. The data inside this decomposition is groomed so to speak so that the output data is returned in sequence.  Furthermore no internal variables, \\ or input only parameters are returned. @return a JDom Document of the output data.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.getVariableDataByName
+yawl:YDecomposition_getVariableDataByName_44 a yawl:Method ;
+    rdfs:label "getVariableDataByName" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getVariableDataByName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.assignData
+yawl:YDecomposition_assignData_45 a yawl:Method ;
+    rdfs:label "assignData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void assignData(YPersistenceManager pmgr, Element variable)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.addData
+yawl:YDecomposition_addData_46 a yawl:Method ;
+    rdfs:label "addData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addData(YPersistenceManager pmgr, Element element)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YDecomposition.initialise
+yawl:YDecomposition_initialise_47 a yawl:Method ;
+    rdfs:label "initialise" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initialise(YPersistenceManager pmgr)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDecomposition.getRootDataElementName
+yawl:YDecomposition_getRootDataElementName_48 a yawl:Method ;
+    rdfs:label "getRootDataElementName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRootDataElementName()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YDecomposition__id a yawl:Field ;
+    rdfs:label "_id" .
+
+yawl:YDecomposition__specification a yawl:Field ;
+    rdfs:label "_specification" .
+
+yawl:YDecomposition__name a yawl:Field ;
+    rdfs:label "_name" .
+
+yawl:YDecomposition__documentation a yawl:Field ;
+    rdfs:label "_documentation" .
+
+yawl:YDecomposition__inputParameters a yawl:Field ;
+    rdfs:label "_inputParameters" .
+
+yawl:YDecomposition__outputParameters a yawl:Field ;
+    rdfs:label "_outputParameters" .
+
+yawl:YDecomposition__enablementParameters a yawl:Field ;
+    rdfs:label "_enablementParameters" .
+
+yawl:YDecomposition__outputExpressions a yawl:Field ;
+    rdfs:label "_outputExpressions" .
+
+yawl:YDecomposition__data a yawl:Field ;
+    rdfs:label "_data" .
+
+yawl:YDecomposition__casedata a yawl:Field ;
+    rdfs:label "_casedata" .
+
+yawl:YDecomposition__attributes a yawl:Field ;
+    rdfs:label "_attributes" .
+
+yawl:YDecomposition__logPredicate a yawl:Field ;
+    rdfs:label "_logPredicate" .
+
+yawl:YDecomposition__manualInteraction a yawl:Field ;
+    rdfs:label "_manualInteraction" .
+
+yawl:YDecomposition__codelet a yawl:Field ;
+    rdfs:label "_codelet" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_unmarshal a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.unmarshal" .
+
+

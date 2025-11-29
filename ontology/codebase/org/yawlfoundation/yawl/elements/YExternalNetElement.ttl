@@ -1,0 +1,371 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.elements.YExternalNetElement
+yawl:YExternalNetElement a yawl:Class ;
+    rdfs:label "YExternalNetElement" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_elements ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/elements/YExternalNetElement.java"^^xsd:string ;
+    rdfs:comment """A superclass for any type of task or condition in the YAWL paper. @author Lachlan Aldred @author Michael Adams (updated/refactored for v2 2009)""" ;
+    yawl:extends yawl:YNetElement ;
+    yawl:implements yawl:YVerifiable ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YExternalNetElement_setID_1 ;
+    yawl:hasMethod yawl:YExternalNetElement_getName_2 ;
+    yawl:hasMethod yawl:YExternalNetElement_setName_3 ;
+    yawl:hasMethod yawl:YExternalNetElement_getDocumentation_4 ;
+    yawl:hasMethod yawl:YExternalNetElement_getDocumentationPreParsed_5 ;
+    yawl:hasMethod yawl:YExternalNetElement_setDocumentation_6 ;
+    yawl:hasMethod yawl:YExternalNetElement_getNet_7 ;
+    yawl:hasMethod yawl:YExternalNetElement_getProperID_8 ;
+    yawl:hasMethod yawl:YExternalNetElement_addPreset_9 ;
+    yawl:hasMethod yawl:YExternalNetElement_addPostset_10 ;
+    yawl:hasMethod yawl:YExternalNetElement_removePresetFlow_11 ;
+    yawl:hasMethod yawl:YExternalNetElement_removePostsetFlow_12 ;
+    yawl:hasMethod yawl:YExternalNetElement_getPostsetElements_13 ;
+    yawl:hasMethod yawl:YExternalNetElement_getPresetElements_14 ;
+    yawl:hasMethod yawl:YExternalNetElement_getPostsetFlow_15 ;
+    yawl:hasMethod yawl:YExternalNetElement_getPresetFlow_16 ;
+    yawl:hasMethod yawl:YExternalNetElement_getPostsetFlows_17 ;
+    yawl:hasMethod yawl:YExternalNetElement_getPresetFlows_18 ;
+    yawl:hasMethod yawl:YExternalNetElement_getPostsetElement_19 ;
+    yawl:hasMethod yawl:YExternalNetElement_getPresetElement_20 ;
+    yawl:hasMethod yawl:YExternalNetElement_getCancelledBySet_21 ;
+    yawl:hasMethod yawl:YExternalNetElement_addToCancelledBySet_22 ;
+    yawl:hasMethod yawl:YExternalNetElement_removeFromCancelledBySet_23 ;
+    yawl:hasMethod yawl:YExternalNetElement_getYawlMappings_24 ;
+    yawl:hasMethod yawl:YExternalNetElement_addToYawlMappings_25 ;
+    yawl:hasMethod yawl:YExternalNetElement_addToYawlMappings_26 ;
+    yawl:hasMethod yawl:YExternalNetElement_preparseDocumentation_27 ;
+    yawl:hasMethod yawl:YExternalNetElement_updateFlowMapsOnIdChange_28 ;
+    yawl:hasMethod yawl:YExternalNetElement_updateImplicitConditionID_29 ;
+    yawl:hasMethod yawl:YExternalNetElement_verify_30 ;
+    yawl:hasMethod yawl:YExternalNetElement_verifyPostsetFlows_31 ;
+    yawl:hasMethod yawl:YExternalNetElement_verifyPresetFlows_32 ;
+    yawl:hasMethod yawl:YExternalNetElement_clone_33 ;
+    yawl:hasMethod yawl:YExternalNetElement_toXML_34 ;
+    yawl:hasField yawl:YExternalNetElement__name ;
+    yawl:hasField yawl:YExternalNetElement__documentation ;
+    yawl:hasField yawl:YExternalNetElement__net ;
+    yawl:hasField yawl:YExternalNetElement__presetFlows ;
+    yawl:hasField yawl:YExternalNetElement__postsetFlows ;
+    yawl:hasField yawl:YExternalNetElement__cancelledBySet ;
+    yawl:hasField yawl:YExternalNetElement__yawlMappingSet ;
+    .
+
+
+# Method: YExternalNetElement.setID
+yawl:YExternalNetElement_setID_1 a yawl:Method ;
+    rdfs:label "setID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.getName
+yawl:YExternalNetElement_getName_2 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.setName
+yawl:YExternalNetElement_setName_3 a yawl:Method ;
+    rdfs:label "setName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.getDocumentation
+yawl:YExternalNetElement_getDocumentation_4 a yawl:Method ;
+    rdfs:label "getDocumentation" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDocumentation()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.getDocumentationPreParsed
+yawl:YExternalNetElement_getDocumentationPreParsed_5 a yawl:Method ;
+    rdfs:label "getDocumentationPreParsed" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDocumentationPreParsed()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.setDocumentation
+yawl:YExternalNetElement_setDocumentation_6 a yawl:Method ;
+    rdfs:label "setDocumentation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDocumentation(String doco)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.getNet
+yawl:YExternalNetElement_getNet_7 a yawl:Method ;
+    rdfs:label "getNet" ;
+    yawl:returnType "YNet" ;
+    yawl:signature "YNet getNet()" ;
+    rdfs:comment """Gets the net that contains this atomic task. @return the containing net.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.getProperID
+yawl:YExternalNetElement_getProperID_8 a yawl:Method ;
+    rdfs:label "getProperID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getProperID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.addPreset
+yawl:YExternalNetElement_addPreset_9 a yawl:Method ;
+    rdfs:label "addPreset" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addPreset(YFlow flow)" ;
+    rdfs:comment """adds a flow to the set of incoming flows for this element @param flow the incoming flow""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.addPostset
+yawl:YExternalNetElement_addPostset_10 a yawl:Method ;
+    rdfs:label "addPostset" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addPostset(YFlow flow)" ;
+    rdfs:comment """adds a flow to the set of outgoing flows for this element @param flow the outgoing flow""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.removePresetFlow
+yawl:YExternalNetElement_removePresetFlow_11 a yawl:Method ;
+    rdfs:label "removePresetFlow" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removePresetFlow(YFlow flow)" ;
+    rdfs:comment """removes a flow from the set of incoming flows for this element @param flow the incoming flow""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.removePostsetFlow
+yawl:YExternalNetElement_removePostsetFlow_12 a yawl:Method ;
+    rdfs:label "removePostsetFlow" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removePostsetFlow(YFlow flow)" ;
+    rdfs:comment """removes a flow from the set of outgoing flows for this element @param flow the outgoing flow""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.getPostsetElements
+yawl:YExternalNetElement_getPostsetElements_13 a yawl:Method ;
+    rdfs:label "getPostsetElements" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getPostsetElements()" ;
+    rdfs:comment """gets the set of elements that succeed this element directly via flows between them @return the set of succeeding elements""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.getPresetElements
+yawl:YExternalNetElement_getPresetElements_14 a yawl:Method ;
+    rdfs:label "getPresetElements" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getPresetElements()" ;
+    rdfs:comment """gets the set of elements that precede this element directly via flows between them @return the set of preceding elements""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.getPostsetFlow
+yawl:YExternalNetElement_getPostsetFlow_15 a yawl:Method ;
+    rdfs:label "getPostsetFlow" ;
+    yawl:returnType "YFlow" ;
+    yawl:signature "YFlow getPostsetFlow(YExternalNetElement netElement)" ;
+    rdfs:comment """gets the flow between this and the succeeding netElement passed (if any) @param netElement an element that follows this via a flow @return the flow connecting the elements""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.getPresetFlow
+yawl:YExternalNetElement_getPresetFlow_16 a yawl:Method ;
+    rdfs:label "getPresetFlow" ;
+    yawl:returnType "YFlow" ;
+    yawl:signature "YFlow getPresetFlow(YExternalNetElement netElement)" ;
+    rdfs:comment """gets the flow between this and the preceding netElement passed (if any) @param netElement an element that precedes this via a flow @return the flow connecting the elements""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.getPostsetFlows
+yawl:YExternalNetElement_getPostsetFlows_17 a yawl:Method ;
+    rdfs:label "getPostsetFlows" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getPostsetFlows()" ;
+    rdfs:comment """gets the set of outgoing flows from this element @return the set of outgoing flows""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.getPresetFlows
+yawl:YExternalNetElement_getPresetFlows_18 a yawl:Method ;
+    rdfs:label "getPresetFlows" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getPresetFlows()" ;
+    rdfs:comment """gets the set of incoming flows to this element @return the set of incoming flows""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.getPostsetElement
+yawl:YExternalNetElement_getPostsetElement_19 a yawl:Method ;
+    rdfs:label "getPostsetElement" ;
+    yawl:returnType "YExternalNetElement" ;
+    yawl:signature "YExternalNetElement getPostsetElement(String id)" ;
+    rdfs:comment """gets an element on an outgoing flow from this element @param id the id of the element on the outgoing flow @return the element if found, or null if not""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.getPresetElement
+yawl:YExternalNetElement_getPresetElement_20 a yawl:Method ;
+    rdfs:label "getPresetElement" ;
+    yawl:returnType "YExternalNetElement" ;
+    yawl:signature "YExternalNetElement getPresetElement(String id)" ;
+    rdfs:comment """gets an element on an incoming flow to this element @param id the id of the element on the incoming flow @return the element if found, or null if not""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.getCancelledBySet
+yawl:YExternalNetElement_getCancelledBySet_21 a yawl:Method ;
+    rdfs:label "getCancelledBySet" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getCancelledBySet()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.addToCancelledBySet
+yawl:YExternalNetElement_addToCancelledBySet_22 a yawl:Method ;
+    rdfs:label "addToCancelledBySet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addToCancelledBySet(YTask t)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.removeFromCancelledBySet
+yawl:YExternalNetElement_removeFromCancelledBySet_23 a yawl:Method ;
+    rdfs:label "removeFromCancelledBySet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeFromCancelledBySet(YTask t)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.getYawlMappings
+yawl:YExternalNetElement_getYawlMappings_24 a yawl:Method ;
+    rdfs:label "getYawlMappings" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getYawlMappings()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.addToYawlMappings
+yawl:YExternalNetElement_addToYawlMappings_25 a yawl:Method ;
+    rdfs:label "addToYawlMappings" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addToYawlMappings(YExternalNetElement e)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.addToYawlMappings
+yawl:YExternalNetElement_addToYawlMappings_26 a yawl:Method ;
+    rdfs:label "addToYawlMappings" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addToYawlMappings(Set elements)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.preparseDocumentation
+yawl:YExternalNetElement_preparseDocumentation_27 a yawl:Method ;
+    rdfs:label "preparseDocumentation" ;
+    yawl:returnType "String" ;
+    yawl:signature "String preparseDocumentation()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YExternalNetElement.updateFlowMapsOnIdChange
+yawl:YExternalNetElement_updateFlowMapsOnIdChange_28 a yawl:Method ;
+    rdfs:label "updateFlowMapsOnIdChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateFlowMapsOnIdChange(String oldID, String newID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YExternalNetElement.updateImplicitConditionID
+yawl:YExternalNetElement_updateImplicitConditionID_29 a yawl:Method ;
+    rdfs:label "updateImplicitConditionID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateImplicitConditionID(YExternalNetElement element, String newID, boolean prior)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YExternalNetElement.verify
+yawl:YExternalNetElement_verify_30 a yawl:Method ;
+    rdfs:label "verify" ;
+    yawl:returnType "void" ;
+    yawl:signature "void verify(YVerificationHandler handler)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.verifyPostsetFlows
+yawl:YExternalNetElement_verifyPostsetFlows_31 a yawl:Method ;
+    rdfs:label "verifyPostsetFlows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void verifyPostsetFlows(YVerificationHandler handler)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YExternalNetElement.verifyPresetFlows
+yawl:YExternalNetElement_verifyPresetFlows_32 a yawl:Method ;
+    rdfs:label "verifyPresetFlows" ;
+    yawl:returnType "void" ;
+    yawl:signature "void verifyPresetFlows(YVerificationHandler handler)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YExternalNetElement.clone
+yawl:YExternalNetElement_clone_33 a yawl:Method ;
+    rdfs:label "clone" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object clone()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YExternalNetElement.toXML
+yawl:YExternalNetElement_toXML_34 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YExternalNetElement__name a yawl:Field ;
+    rdfs:label "_name" .
+
+yawl:YExternalNetElement__documentation a yawl:Field ;
+    rdfs:label "_documentation" .
+
+yawl:YExternalNetElement__net a yawl:Field ;
+    rdfs:label "_net" .
+
+yawl:YExternalNetElement__presetFlows a yawl:Field ;
+    rdfs:label "_presetFlows" .
+
+yawl:YExternalNetElement__postsetFlows a yawl:Field ;
+    rdfs:label "_postsetFlows" .
+
+yawl:YExternalNetElement__cancelledBySet a yawl:Field ;
+    rdfs:label "_cancelledBySet" .
+
+yawl:YExternalNetElement__yawlMappingSet a yawl:Field ;
+    rdfs:label "_yawlMappingSet" .
+
+
+

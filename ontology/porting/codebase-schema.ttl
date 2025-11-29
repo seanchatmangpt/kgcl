@@ -1,0 +1,253 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix code: <http://kgcl.dev/ontology/codebase#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+# Language-Agnostic Codebase Ontology Schema
+# Extends YAWL-specific schema to support multiple languages
+
+code:Ontology a owl:Ontology ;
+    rdfs:label "Codebase Ontology" ;
+    rdfs:comment "Language-agnostic representation of code structures" .
+
+# ============================================================================
+# LANGUAGE AND SOURCE FILE
+# ============================================================================
+
+code:Language a owl:Class ;
+    rdfs:label "Programming Language" ;
+    rdfs:comment "Programming language (Java, Python, TypeScript, etc.)" .
+
+code:SourceFile a owl:Class ;
+    rdfs:label "Source File" ;
+    rdfs:comment "Source code file" .
+
+code:language a owl:DatatypeProperty ;
+    rdfs:domain code:SourceFile ;
+    rdfs:range xsd:string ;
+    rdfs:label "language" ;
+    rdfs:comment "Programming language of the source file" .
+
+code:filePath a owl:DatatypeProperty ;
+    rdfs:domain code:SourceFile ;
+    rdfs:range xsd:string ;
+    rdfs:label "file path" ;
+    rdfs:comment "Path to source file" .
+
+# ============================================================================
+# PACKAGE/MODULE
+# ============================================================================
+
+code:Package a owl:Class ;
+    rdfs:label "Package/Module" ;
+    rdfs:comment "Package (Java) or module (Python) namespace" .
+
+code:name a owl:DatatypeProperty ;
+    rdfs:range xsd:string ;
+    rdfs:label "name" ;
+    rdfs:comment "Name of the entity" .
+
+code:inPackage a owl:ObjectProperty ;
+    rdfs:domain code:Class ;
+    rdfs:range code:Package ;
+    rdfs:label "in package" ;
+    rdfs:comment "Package/module containing the class" .
+
+# ============================================================================
+# CLASS/TYPE
+# ============================================================================
+
+code:Class a owl:Class ;
+    rdfs:label "Class/Type" ;
+    rdfs:comment "Class (Java) or class/type (Python)" .
+
+code:extends a owl:ObjectProperty ;
+    rdfs:domain code:Class ;
+    rdfs:range code:Class ;
+    rdfs:label "extends" ;
+    rdfs:comment "Inheritance relationship" .
+
+code:implements a owl:ObjectProperty ;
+    rdfs:domain code:Class ;
+    rdfs:range code:Class ;
+    rdfs:label "implements" ;
+    rdfs:comment "Interface implementation" .
+
+code:modifiers a owl:DatatypeProperty ;
+    rdfs:range xsd:string ;
+    rdfs:label "modifiers" ;
+    rdfs:comment "Access modifiers (public, private, static, etc.)" .
+
+# ============================================================================
+# METHOD/FUNCTION
+# ============================================================================
+
+code:Method a owl:Class ;
+    rdfs:label "Method/Function" ;
+    rdfs:comment "Method (Java) or function (Python)" .
+
+code:hasMethod a owl:ObjectProperty ;
+    rdfs:domain code:Class ;
+    rdfs:range code:Method ;
+    rdfs:label "has method" ;
+    rdfs:comment "Class has method" .
+
+code:signature a owl:DatatypeProperty ;
+    rdfs:domain code:Method ;
+    rdfs:range xsd:string ;
+    rdfs:label "signature" ;
+    rdfs:comment "Method signature" .
+
+code:returnType a owl:DatatypeProperty ;
+    rdfs:domain code:Method ;
+    rdfs:range xsd:string ;
+    rdfs:label "return type" ;
+    rdfs:comment "Return type of method" .
+
+code:parameters a owl:DatatypeProperty ;
+    rdfs:domain code:Method ;
+    rdfs:range xsd:string ;
+    rdfs:label "parameters" ;
+    rdfs:comment "Method parameters" .
+
+code:bodyText a owl:DatatypeProperty ;
+    rdfs:domain code:Method ;
+    rdfs:range xsd:string ;
+    rdfs:label "body text" ;
+    rdfs:comment "Method body source code" .
+
+code:hasFingerprint a owl:DatatypeProperty ;
+    rdfs:domain code:Method ;
+    rdfs:range xsd:string ;
+    rdfs:label "has fingerprint" ;
+    rdfs:comment "Semantic fingerprint hash" .
+
+code:complexity a owl:DatatypeProperty ;
+    rdfs:domain code:Method ;
+    rdfs:range xsd:integer ;
+    rdfs:label "complexity" ;
+    rdfs:comment "Cyclomatic complexity" .
+
+code:hasLoops a owl:DatatypeProperty ;
+    rdfs:domain code:Method ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "has loops" ;
+    rdfs:comment "Method contains loops" .
+
+code:hasRecursion a owl:DatatypeProperty ;
+    rdfs:domain code:Method ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "has recursion" ;
+    rdfs:comment "Method contains recursive calls" .
+
+# ============================================================================
+# FIELD/VARIABLE
+# ============================================================================
+
+code:Field a owl:Class ;
+    rdfs:label "Field/Variable" ;
+    rdfs:comment "Class field (Java) or attribute (Python)" .
+
+code:hasField a owl:ObjectProperty ;
+    rdfs:domain code:Class ;
+    rdfs:range code:Field ;
+    rdfs:label "has field" ;
+    rdfs:comment "Class has field" .
+
+code:fieldType a owl:DatatypeProperty ;
+    rdfs:domain code:Field ;
+    rdfs:range xsd:string ;
+    rdfs:label "field type" ;
+    rdfs:comment "Type of the field" .
+
+# ============================================================================
+# CALL SITES
+# ============================================================================
+
+code:CallSite a owl:Class ;
+    rdfs:label "Call Site" ;
+    rdfs:comment "Method/function call site" .
+
+code:hasCallSite a owl:ObjectProperty ;
+    rdfs:domain code:Method ;
+    rdfs:range code:CallSite ;
+    rdfs:label "has call site" ;
+    rdfs:comment "Method contains call site" .
+
+code:calleeName a owl:DatatypeProperty ;
+    rdfs:domain code:CallSite ;
+    rdfs:range xsd:string ;
+    rdfs:label "callee name" ;
+    rdfs:comment "Name of called method/function" .
+
+code:calleeClass a owl:DatatypeProperty ;
+    rdfs:domain code:CallSite ;
+    rdfs:range xsd:string ;
+    rdfs:label "callee class" ;
+    rdfs:comment "Class of called method" .
+
+code:lineNumber a owl:DatatypeProperty ;
+    rdfs:domain code:CallSite ;
+    rdfs:range xsd:integer ;
+    rdfs:label "line number" ;
+    rdfs:comment "Line number of call site" .
+
+# ============================================================================
+# EXCEPTIONS
+# ============================================================================
+
+code:ExceptionPattern a owl:Class ;
+    rdfs:label "Exception Pattern" ;
+    rdfs:comment "Exception throwing or catching pattern" .
+
+code:hasException a owl:ObjectProperty ;
+    rdfs:domain code:Method ;
+    rdfs:range code:ExceptionPattern ;
+    rdfs:label "has exception" ;
+    rdfs:comment "Method has exception pattern" .
+
+code:exceptionType a owl:DatatypeProperty ;
+    rdfs:domain code:ExceptionPattern ;
+    rdfs:range xsd:string ;
+    rdfs:label "exception type" ;
+    rdfs:comment "Type of exception" .
+
+code:isThrown a owl:DatatypeProperty ;
+    rdfs:domain code:ExceptionPattern ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "is thrown" ;
+    rdfs:comment "Exception is thrown" .
+
+code:isCaught a owl:DatatypeProperty ;
+    rdfs:domain code:ExceptionPattern ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "is caught" ;
+    rdfs:comment "Exception is caught" .
+
+# ============================================================================
+# DEPENDENCIES
+# ============================================================================
+
+code:Dependency a owl:Class ;
+    rdfs:label "Dependency" ;
+    rdfs:comment "Class or module dependency" .
+
+code:hasDependency a owl:ObjectProperty ;
+    rdfs:domain code:Class ;
+    rdfs:range code:Dependency ;
+    rdfs:label "has dependency" ;
+    rdfs:comment "Class depends on another class/module" .
+
+code:dependencyType a owl:DatatypeProperty ;
+    rdfs:domain code:Dependency ;
+    rdfs:range xsd:string ;
+    rdfs:label "dependency type" ;
+    rdfs:comment "Type of dependency (import, field, parameter, return)" .
+
+code:dependencyClass a owl:DatatypeProperty ;
+    rdfs:domain code:Dependency ;
+    rdfs:range xsd:string ;
+    rdfs:label "dependency class" ;
+    rdfs:comment "Name of dependent class/module" .
+

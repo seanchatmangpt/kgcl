@@ -1,0 +1,167 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.time.workdays.WorkDayAdjuster
+yawl:WorkDayAdjuster a yawl:Class ;
+    rdfs:label "WorkDayAdjuster" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_time_workdays ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/time/workdays/WorkDayAdjuster.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 2/6/17""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:WorkDayAdjuster_adjust_1 ;
+    yawl:hasMethod yawl:WorkDayAdjuster_adjust_2 ;
+    yawl:hasMethod yawl:WorkDayAdjuster_adjust_3 ;
+    yawl:hasMethod yawl:WorkDayAdjuster_adjust_4 ;
+    yawl:hasMethod yawl:WorkDayAdjuster_adjust_5 ;
+    yawl:hasMethod yawl:WorkDayAdjuster_adjust_6 ;
+    yawl:hasMethod yawl:WorkDayAdjuster_createCalendar_7 ;
+    yawl:hasMethod yawl:WorkDayAdjuster_createCalendar_8 ;
+    yawl:hasMethod yawl:WorkDayAdjuster_addDuration_9 ;
+    yawl:hasMethod yawl:WorkDayAdjuster_calcAdjustedEndDate_10 ;
+    yawl:hasMethod yawl:WorkDayAdjuster_spanAsDuration_11 ;
+    yawl:hasMethod yawl:WorkDayAdjuster_isWeekend_12 ;
+    yawl:hasMethod yawl:WorkDayAdjuster_isHoliday_13 ;
+    yawl:hasMethod yawl:WorkDayAdjuster_getHolidayLoader_14 ;
+    yawl:hasMethod yawl:WorkDayAdjuster_main_15 ;
+    yawl:hasField yawl:WorkDayAdjuster__loader ;
+    .
+
+
+# Method: WorkDayAdjuster.adjust
+yawl:WorkDayAdjuster_adjust_1 a yawl:Method ;
+    rdfs:label "adjust" ;
+    yawl:returnType "Duration" ;
+    yawl:signature "Duration adjust(Duration duration)" ;
+    rdfs:comment """Adjust a Duration value so that it will apply only to working days, taking the current moment as a starting date @param duration the value to be adjusted @return the adjusted Duration value""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkDayAdjuster.adjust
+yawl:WorkDayAdjuster_adjust_2 a yawl:Method ;
+    rdfs:label "adjust" ;
+    yawl:returnType "Duration" ;
+    yawl:signature "Duration adjust(Calendar startDate, Duration duration)" ;
+    rdfs:comment """Adjust a Duration value so that it will apply only to working days @param startDate the moment to start the adjustment from @param duration the value to be adjusted @return the adjusted Duration value""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkDayAdjuster.adjust
+yawl:WorkDayAdjuster_adjust_3 a yawl:Method ;
+    rdfs:label "adjust" ;
+    yawl:returnType "Calendar" ;
+    yawl:signature "Calendar adjust(Calendar calendar)" ;
+    rdfs:comment """Adjust a Calendar value so that it will apply only to working days, taking the current moment as a starting date @param calendar the value to be adjusted @return the adjusted Calendar value""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkDayAdjuster.adjust
+yawl:WorkDayAdjuster_adjust_4 a yawl:Method ;
+    rdfs:label "adjust" ;
+    yawl:returnType "Calendar" ;
+    yawl:signature "Calendar adjust(Calendar startDate, Calendar endDate)" ;
+    rdfs:comment """Adjust a Calendar value so that it will apply only to working days @param startDate the moment to start the adjustment from @param endDate the value to be adjusted @return the adjusted Calendar value""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkDayAdjuster.adjust
+yawl:WorkDayAdjuster_adjust_5 a yawl:Method ;
+    rdfs:label "adjust" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date adjust(Date date)" ;
+    rdfs:comment """Adjust a Date value so that it will apply only to working days, taking the current moment as a starting date @param date the value to be adjusted @return the adjusted Date value""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkDayAdjuster.adjust
+yawl:WorkDayAdjuster_adjust_6 a yawl:Method ;
+    rdfs:label "adjust" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date adjust(Date start, Date end)" ;
+    rdfs:comment """Adjust a Date value so that it will apply only to working days @param start the moment to start the adjustment from @param end the value to be adjusted @return the adjusted Date value""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkDayAdjuster.createCalendar
+yawl:WorkDayAdjuster_createCalendar_7 a yawl:Method ;
+    rdfs:label "createCalendar" ;
+    yawl:returnType "Calendar" ;
+    yawl:signature "Calendar createCalendar()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkDayAdjuster.createCalendar
+yawl:WorkDayAdjuster_createCalendar_8 a yawl:Method ;
+    rdfs:label "createCalendar" ;
+    yawl:returnType "Calendar" ;
+    yawl:signature "Calendar createCalendar(Date date)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkDayAdjuster.addDuration
+yawl:WorkDayAdjuster_addDuration_9 a yawl:Method ;
+    rdfs:label "addDuration" ;
+    yawl:returnType "Calendar" ;
+    yawl:signature "Calendar addDuration(Calendar start, Duration duration)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkDayAdjuster.calcAdjustedEndDate
+yawl:WorkDayAdjuster_calcAdjustedEndDate_10 a yawl:Method ;
+    rdfs:label "calcAdjustedEndDate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void calcAdjustedEndDate(Calendar step, Calendar end)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkDayAdjuster.spanAsDuration
+yawl:WorkDayAdjuster_spanAsDuration_11 a yawl:Method ;
+    rdfs:label "spanAsDuration" ;
+    yawl:returnType "Duration" ;
+    yawl:signature "Duration spanAsDuration(Calendar start, Calendar end)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkDayAdjuster.isWeekend
+yawl:WorkDayAdjuster_isWeekend_12 a yawl:Method ;
+    rdfs:label "isWeekend" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isWeekend(Calendar date)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkDayAdjuster.isHoliday
+yawl:WorkDayAdjuster_isHoliday_13 a yawl:Method ;
+    rdfs:label "isHoliday" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isHoliday(Calendar date)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkDayAdjuster.getHolidayLoader
+yawl:WorkDayAdjuster_getHolidayLoader_14 a yawl:Method ;
+    rdfs:label "getHolidayLoader" ;
+    yawl:returnType "HolidayLoader" ;
+    yawl:signature "HolidayLoader getHolidayLoader()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkDayAdjuster.main
+yawl:WorkDayAdjuster_main_15 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String a)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:WorkDayAdjuster__loader a yawl:Field ;
+    rdfs:label "_loader" .
+
+
+

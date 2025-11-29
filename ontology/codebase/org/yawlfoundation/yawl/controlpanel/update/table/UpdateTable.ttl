@@ -1,0 +1,87 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.controlpanel.update.table
+yawl:org_yawlfoundation_yawl_controlpanel_update_table a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.controlpanel.update.table" .
+# Class: org.yawlfoundation.yawl.controlpanel.update.table.UpdateTable
+yawl:UpdateTable a yawl:Class ;
+    rdfs:label "UpdateTable" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_update_table ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/update/table/UpdateTable.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 17/08/2014""" ;
+    yawl:extends yawl:JTable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:UpdateTable_hasUpdates_1 ;
+    yawl:hasMethod yawl:UpdateTable_refresh_2 ;
+    yawl:hasMethod yawl:UpdateTable_init_3 ;
+    yawl:hasMethod yawl:UpdateTable_prepareRenderer_4 ;
+    yawl:hasMethod yawl:UpdateTable_setColumnWidths_5 ;
+    yawl:hasMethod yawl:UpdateTable_getTableModel_6 ;
+    yawl:hasField yawl:UpdateTable_EVEN_ROW_COLOR ;
+    yawl:hasField yawl:UpdateTable_ODD_ROW_COLOR ;
+    .
+
+
+# Method: UpdateTable.hasUpdates
+yawl:UpdateTable_hasUpdates_1 a yawl:Method ;
+    rdfs:label "hasUpdates" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasUpdates()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateTable.refresh
+yawl:UpdateTable_refresh_2 a yawl:Method ;
+    rdfs:label "refresh" ;
+    yawl:returnType "void" ;
+    yawl:signature "void refresh(Differ differ)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateTable.init
+yawl:UpdateTable_init_3 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init(Differ differ)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: UpdateTable.prepareRenderer
+yawl:UpdateTable_prepareRenderer_4 a yawl:Method ;
+    rdfs:label "prepareRenderer" ;
+    yawl:returnType "Component" ;
+    yawl:signature "Component prepareRenderer(TableCellRenderer renderer, int row, int col)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateTable.setColumnWidths
+yawl:UpdateTable_setColumnWidths_5 a yawl:Method ;
+    rdfs:label "setColumnWidths" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setColumnWidths()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: UpdateTable.getTableModel
+yawl:UpdateTable_getTableModel_6 a yawl:Method ;
+    rdfs:label "getTableModel" ;
+    yawl:returnType "UpdateTableModel" ;
+    yawl:signature "UpdateTableModel getTableModel()" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:UpdateTable_EVEN_ROW_COLOR a yawl:Field ;
+    rdfs:label "EVEN_ROW_COLOR" .
+
+yawl:UpdateTable_ODD_ROW_COLOR a yawl:Field ;
+    rdfs:label "ODD_ROW_COLOR" .
+
+
+

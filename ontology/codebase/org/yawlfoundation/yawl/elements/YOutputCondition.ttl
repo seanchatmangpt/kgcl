@@ -1,0 +1,41 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.elements.YOutputCondition
+yawl:YOutputCondition a yawl:Class ;
+    rdfs:label "YOutputCondition" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_elements ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/elements/YOutputCondition.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 22/04/2003 Time: 13:45:29""" ;
+    yawl:extends yawl:YCondition ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "final" ;
+    yawl:hasMethod yawl:YOutputCondition_verify_1 ;
+    yawl:hasMethod yawl:YOutputCondition_clone_2 ;
+    .
+
+
+# Method: YOutputCondition.verify
+yawl:YOutputCondition_verify_1 a yawl:Method ;
+    rdfs:label "verify" ;
+    yawl:returnType "void" ;
+    yawl:signature "void verify(YVerificationHandler handler)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YOutputCondition.clone
+yawl:YOutputCondition_clone_2 a yawl:Method ;
+    rdfs:label "clone" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object clone()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

@@ -1,0 +1,58 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.scheduling.timer.JobCreateTestRUPs4Today
+yawl:JobCreateTestRUPs4Today a yawl:Class ;
+    rdfs:label "JobCreateTestRUPs4Today" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_scheduling_timer ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/scheduling/timer/JobCreateTestRUPs4Today.java"^^xsd:string ;
+    rdfs:comment """Utility class, may be used for test and presentation purposes.  Updates the schedule daily in that all time windows are shifted to sysdate. @author tbe @version $Id$""" ;
+    yawl:implements yawl:Runnable ;
+    yawl:implements yawl:Constants ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:JobCreateTestRUPs4Today_run_1 ;
+    yawl:hasField yawl:JobCreateTestRUPs4Today_logger ;
+    yawl:hasField yawl:JobCreateTestRUPs4Today_service ;
+    yawl:hasField yawl:JobCreateTestRUPs4Today_scheduler ;
+    yawl:hasField yawl:JobCreateTestRUPs4Today_dataMapper ;
+    yawl:hasField yawl:JobCreateTestRUPs4Today_context ;
+    .
+
+
+# Method: JobCreateTestRUPs4Today.run
+yawl:JobCreateTestRUPs4Today_run_1 a yawl:Method ;
+    rdfs:label "run" ;
+    yawl:returnType "void" ;
+    yawl:signature "void run()" ;
+    rdfs:comment """sets TO time of running activities to actual time""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:JobCreateTestRUPs4Today_logger a yawl:Field ;
+    rdfs:label "logger" .
+
+yawl:JobCreateTestRUPs4Today_service a yawl:Field ;
+    rdfs:label "service" .
+
+yawl:JobCreateTestRUPs4Today_scheduler a yawl:Field ;
+    rdfs:label "scheduler" .
+
+yawl:JobCreateTestRUPs4Today_dataMapper a yawl:Field ;
+    rdfs:label "dataMapper" .
+
+yawl:JobCreateTestRUPs4Today_context a yawl:Field ;
+    rdfs:label "context" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_scheduling_lanes a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.scheduling.lanes" .
+
+

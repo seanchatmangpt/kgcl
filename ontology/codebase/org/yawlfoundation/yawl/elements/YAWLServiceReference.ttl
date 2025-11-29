@@ -1,0 +1,290 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.elements.YAWLServiceReference
+yawl:YAWLServiceReference a yawl:Class ;
+    rdfs:label "YAWLServiceReference" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_elements ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/elements/YAWLServiceReference.java"^^xsd:string ;
+    rdfs:comment """Represents a server-side reference to a YAWL Custom Service. @author Lachlan Aldred @author Michael Adams (for 2.0-2.1) @since 0.1 @date 18/03/2004""" ;
+    yawl:extends yawl:YClient ;
+    yawl:implements yawl:YVerifiable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YAWLServiceReference_getServiceID_1 ;
+    yawl:hasMethod yawl:YAWLServiceReference_getServiceName_2 ;
+    yawl:hasMethod yawl:YAWLServiceReference_setServiceName_3 ;
+    yawl:hasMethod yawl:YAWLServiceReference_getServicePassword_4 ;
+    yawl:hasMethod yawl:YAWLServiceReference_setServicePassword_5 ;
+    yawl:hasMethod yawl:YAWLServiceReference_setAssignable_6 ;
+    yawl:hasMethod yawl:YAWLServiceReference_isAssignable_7 ;
+    yawl:hasMethod yawl:YAWLServiceReference_canBeAssignedToTask_8 ;
+    yawl:hasMethod yawl:YAWLServiceReference_getURI_9 ;
+    yawl:hasMethod yawl:YAWLServiceReference_set_yawlServiceID_10 ;
+    yawl:hasMethod yawl:YAWLServiceReference_get_yawlServiceID_11 ;
+    yawl:hasMethod yawl:YAWLServiceReference_set_documentation_12 ;
+    yawl:hasMethod yawl:YAWLServiceReference_get_documentation_13 ;
+    yawl:hasMethod yawl:YAWLServiceReference_get_serviceName_14 ;
+    yawl:hasMethod yawl:YAWLServiceReference_set_serviceName_15 ;
+    yawl:hasMethod yawl:YAWLServiceReference_get_servicePassword_16 ;
+    yawl:hasMethod yawl:YAWLServiceReference_set_servicePassword_17 ;
+    yawl:hasMethod yawl:YAWLServiceReference_set_assignable_18 ;
+    yawl:hasMethod yawl:YAWLServiceReference_get_assignable_19 ;
+    yawl:hasMethod yawl:YAWLServiceReference_equals_20 ;
+    yawl:hasMethod yawl:YAWLServiceReference_hashCode_21 ;
+    yawl:hasMethod yawl:YAWLServiceReference_verify_22 ;
+    yawl:hasMethod yawl:YAWLServiceReference_toXML_23 ;
+    yawl:hasMethod yawl:YAWLServiceReference_toXMLComplete_24 ;
+    yawl:hasMethod yawl:YAWLServiceReference_fromXML_25 ;
+    yawl:hasMethod yawl:YAWLServiceReference_toBasicXNode_26 ;
+    yawl:hasMethod yawl:YAWLServiceReference_unmarshal_27 ;
+    yawl:hasMethod yawl:YAWLServiceReference_getScheme_28 ;
+    yawl:hasField yawl:YAWLServiceReference__yawlServiceID ;
+    yawl:hasField yawl:YAWLServiceReference__webServiceGateway ;
+    yawl:hasField yawl:YAWLServiceReference__assignable ;
+    .
+
+
+# Method: YAWLServiceReference.getServiceID
+yawl:YAWLServiceReference_getServiceID_1 a yawl:Method ;
+    rdfs:label "getServiceID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getServiceID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceReference.getServiceName
+yawl:YAWLServiceReference_getServiceName_2 a yawl:Method ;
+    rdfs:label "getServiceName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getServiceName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceReference.setServiceName
+yawl:YAWLServiceReference_setServiceName_3 a yawl:Method ;
+    rdfs:label "setServiceName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setServiceName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceReference.getServicePassword
+yawl:YAWLServiceReference_getServicePassword_4 a yawl:Method ;
+    rdfs:label "getServicePassword" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getServicePassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceReference.setServicePassword
+yawl:YAWLServiceReference_setServicePassword_5 a yawl:Method ;
+    rdfs:label "setServicePassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setServicePassword(String password)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceReference.setAssignable
+yawl:YAWLServiceReference_setAssignable_6 a yawl:Method ;
+    rdfs:label "setAssignable" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAssignable(boolean b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceReference.isAssignable
+yawl:YAWLServiceReference_isAssignable_7 a yawl:Method ;
+    rdfs:label "isAssignable" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAssignable()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceReference.canBeAssignedToTask
+yawl:YAWLServiceReference_canBeAssignedToTask_8 a yawl:Method ;
+    rdfs:label "canBeAssignedToTask" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean canBeAssignedToTask()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceReference.getURI
+yawl:YAWLServiceReference_getURI_9 a yawl:Method ;
+    rdfs:label "getURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getURI()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceReference.set_yawlServiceID
+yawl:YAWLServiceReference_set_yawlServiceID_10 a yawl:Method ;
+    rdfs:label "set_yawlServiceID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_yawlServiceID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceReference.get_yawlServiceID
+yawl:YAWLServiceReference_get_yawlServiceID_11 a yawl:Method ;
+    rdfs:label "get_yawlServiceID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_yawlServiceID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceReference.set_documentation
+yawl:YAWLServiceReference_set_documentation_12 a yawl:Method ;
+    rdfs:label "set_documentation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_documentation(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceReference.get_documentation
+yawl:YAWLServiceReference_get_documentation_13 a yawl:Method ;
+    rdfs:label "get_documentation" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_documentation()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceReference.get_serviceName
+yawl:YAWLServiceReference_get_serviceName_14 a yawl:Method ;
+    rdfs:label "get_serviceName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_serviceName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceReference.set_serviceName
+yawl:YAWLServiceReference_set_serviceName_15 a yawl:Method ;
+    rdfs:label "set_serviceName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_serviceName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceReference.get_servicePassword
+yawl:YAWLServiceReference_get_servicePassword_16 a yawl:Method ;
+    rdfs:label "get_servicePassword" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get_servicePassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceReference.set_servicePassword
+yawl:YAWLServiceReference_set_servicePassword_17 a yawl:Method ;
+    rdfs:label "set_servicePassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_servicePassword(String password)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceReference.set_assignable
+yawl:YAWLServiceReference_set_assignable_18 a yawl:Method ;
+    rdfs:label "set_assignable" ;
+    yawl:returnType "void" ;
+    yawl:signature "void set_assignable(boolean b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceReference.get_assignable
+yawl:YAWLServiceReference_get_assignable_19 a yawl:Method ;
+    rdfs:label "get_assignable" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean get_assignable()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceReference.equals
+yawl:YAWLServiceReference_equals_20 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceReference.hashCode
+yawl:YAWLServiceReference_hashCode_21 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceReference.verify
+yawl:YAWLServiceReference_verify_22 a yawl:Method ;
+    rdfs:label "verify" ;
+    yawl:returnType "void" ;
+    yawl:signature "void verify(YVerificationHandler handler)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceReference.toXML
+yawl:YAWLServiceReference_toXML_23 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceReference.toXMLComplete
+yawl:YAWLServiceReference_toXMLComplete_24 a yawl:Method ;
+    rdfs:label "toXMLComplete" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXMLComplete()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceReference.fromXML
+yawl:YAWLServiceReference_fromXML_25 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAWLServiceReference.toBasicXNode
+yawl:YAWLServiceReference_toBasicXNode_26 a yawl:Method ;
+    rdfs:label "toBasicXNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode toBasicXNode()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YAWLServiceReference.unmarshal
+yawl:YAWLServiceReference_unmarshal_27 a yawl:Method ;
+    rdfs:label "unmarshal" ;
+    yawl:returnType "YAWLServiceReference" ;
+    yawl:signature "YAWLServiceReference unmarshal(String serialisedService)" ;
+    rdfs:comment """Returns a YAWL service from XML (if valid). @param serialisedService @return an instantiated YAWL Service, or null if the XML was invalid""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YAWLServiceReference.getScheme
+yawl:YAWLServiceReference_getScheme_28 a yawl:Method ;
+    rdfs:label "getScheme" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getScheme()" ;
+    rdfs:comment """Returns the scheme (i.e. the protocol) component of the URI (assuming standard URI format). If no protocol defined, null is returned.<P> @return  The scheme component of the URI""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YAWLServiceReference__yawlServiceID a yawl:Field ;
+    rdfs:label "_yawlServiceID" .
+
+yawl:YAWLServiceReference__webServiceGateway a yawl:Field ;
+    rdfs:label "_webServiceGateway" .
+
+yawl:YAWLServiceReference__assignable a yawl:Field ;
+    rdfs:label "_assignable" .
+
+
+

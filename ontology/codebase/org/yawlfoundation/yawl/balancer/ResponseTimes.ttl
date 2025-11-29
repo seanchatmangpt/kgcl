@@ -1,0 +1,53 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.balancer.ResponseTimes
+yawl:ResponseTimes a yawl:Class ;
+    rdfs:label "ResponseTimes" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/ResponseTimes.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 19/6/17""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ResponseTimes_getStartTime_1 ;
+    yawl:hasMethod yawl:ResponseTimes_getEndTime_2 ;
+    yawl:hasMethod yawl:ResponseTimes_getDurationMsecs_3 ;
+    yawl:hasField yawl:ResponseTimes_start ;
+    yawl:hasField yawl:ResponseTimes_end ;
+    .
+
+
+# Method: ResponseTimes.getStartTime
+yawl:ResponseTimes_getStartTime_1 a yawl:Method ;
+    rdfs:label "getStartTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getStartTime()" ;
+    .
+
+# Method: ResponseTimes.getEndTime
+yawl:ResponseTimes_getEndTime_2 a yawl:Method ;
+    rdfs:label "getEndTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getEndTime()" ;
+    .
+
+# Method: ResponseTimes.getDurationMsecs
+yawl:ResponseTimes_getDurationMsecs_3 a yawl:Method ;
+    rdfs:label "getDurationMsecs" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getDurationMsecs()" ;
+    .
+
+
+
+yawl:ResponseTimes_start a yawl:Field ;
+    rdfs:label "start" .
+
+yawl:ResponseTimes_end a yawl:Field ;
+    rdfs:label "end" .
+
+
+

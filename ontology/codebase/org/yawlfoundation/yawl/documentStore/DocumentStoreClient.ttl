@@ -1,0 +1,207 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.documentStore.DocumentStoreClient
+yawl:DocumentStoreClient a yawl:Class ;
+    rdfs:label "DocumentStoreClient" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_documentStore ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/documentStore/DocumentStoreClient.java"^^xsd:string ;
+    rdfs:comment """An client-side interface to communicate with the YAWL Document Store @author Michael Adams @date 21/11/11""" ;
+    yawl:extends yawl:Interface_Client ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DocumentStoreClient_setURI_1 ;
+    yawl:hasMethod yawl:DocumentStoreClient_connect_2 ;
+    yawl:hasMethod yawl:DocumentStoreClient_checkConnection_3 ;
+    yawl:hasMethod yawl:DocumentStoreClient_disconnect_4 ;
+    yawl:hasMethod yawl:DocumentStoreClient_putDocument_5 ;
+    yawl:hasMethod yawl:DocumentStoreClient_getDocument_6 ;
+    yawl:hasMethod yawl:DocumentStoreClient_getDocument_7 ;
+    yawl:hasMethod yawl:DocumentStoreClient_removeDocument_8 ;
+    yawl:hasMethod yawl:DocumentStoreClient_removeDocument_9 ;
+    yawl:hasMethod yawl:DocumentStoreClient_addCaseID_10 ;
+    yawl:hasMethod yawl:DocumentStoreClient_clearCase_11 ;
+    yawl:hasMethod yawl:DocumentStoreClient_clearCase_12 ;
+    yawl:hasMethod yawl:DocumentStoreClient_completeCase_13 ;
+    yawl:hasMethod yawl:DocumentStoreClient_completeCase_14 ;
+    yawl:hasMethod yawl:DocumentStoreClient_toByteArray_15 ;
+    yawl:hasMethod yawl:DocumentStoreClient_toByteArray_16 ;
+    yawl:hasMethod yawl:DocumentStoreClient_executePost_17 ;
+    yawl:hasMethod yawl:DocumentStoreClient_getOutStream_18 ;
+    yawl:hasField yawl:DocumentStoreClient__storeURI ;
+    .
+
+
+# Method: DocumentStoreClient.setURI
+yawl:DocumentStoreClient_setURI_1 a yawl:Method ;
+    rdfs:label "setURI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setURI(String uri)" ;
+    rdfs:comment """Sets the document store URI for this client @param uri the uri of the YAWL document store""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocumentStoreClient.connect
+yawl:DocumentStoreClient_connect_2 a yawl:Method ;
+    rdfs:label "connect" ;
+    yawl:returnType "String" ;
+    yawl:signature "String connect(String userID, String password)" ;
+    rdfs:comment """Connects an external entity to the document store @param userID the userid @param password the corresponding password @return a sessionHandle if successful, or a failure message if not @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocumentStoreClient.checkConnection
+yawl:DocumentStoreClient_checkConnection_3 a yawl:Method ;
+    rdfs:label "checkConnection" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean checkConnection(String handle)" ;
+    rdfs:comment """Check that a session handle is active @param handle the session handle to check @return \"true\" if the handle is valid and active, \"false\" if otherwise @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocumentStoreClient.disconnect
+yawl:DocumentStoreClient_disconnect_4 a yawl:Method ;
+    rdfs:label "disconnect" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disconnect(String handle)" ;
+    rdfs:comment """Disconnects an external entity from the document store @param handle the sessionHandle to disconnect @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocumentStoreClient.putDocument
+yawl:DocumentStoreClient_putDocument_5 a yawl:Method ;
+    rdfs:label "putDocument" ;
+    yawl:returnType "String" ;
+    yawl:signature "String putDocument(YDocument doc, String handle)" ;
+    rdfs:comment """Stores a document in the Document Store @param doc the YDocument to store. If the YDocument's id matches an existing document in the Store, this 'put' is treated as an update rather that a new document insertion @param handle a valid session handle @return the document id (as a String) if successful, otherwise an error message @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocumentStoreClient.getDocument
+yawl:DocumentStoreClient_getDocument_6 a yawl:Method ;
+    rdfs:label "getDocument" ;
+    yawl:returnType "YDocument" ;
+    yawl:signature "YDocument getDocument(YDocument doc, String handle)" ;
+    rdfs:comment """Gets a document from the Document Store @param doc the YDocument to get. The YDocument's id must match an existing document @param handle a valid session handle @return the YDocument with the document (i.e. the binary file) inserted, if successful @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocumentStoreClient.getDocument
+yawl:DocumentStoreClient_getDocument_7 a yawl:Method ;
+    rdfs:label "getDocument" ;
+    yawl:returnType "YDocument" ;
+    yawl:signature "YDocument getDocument(long docID, String handle)" ;
+    rdfs:comment """Gets a document from the Document Store @param docID the id of the document to get. The id must match an existing document @param handle a valid session handle @return the YDocument with the document (i.e. the binary file) inserted, if successful @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocumentStoreClient.removeDocument
+yawl:DocumentStoreClient_removeDocument_8 a yawl:Method ;
+    rdfs:label "removeDocument" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeDocument(YDocument doc, String handle)" ;
+    rdfs:comment """Removes a document from the Document Store @param doc the YDocument to remove. The YDocument's id must match an existing document @param handle a valid session handle @return a success or error message @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocumentStoreClient.removeDocument
+yawl:DocumentStoreClient_removeDocument_9 a yawl:Method ;
+    rdfs:label "removeDocument" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeDocument(long docID, String handle)" ;
+    rdfs:comment """Removes a document from the Document Store @param docID the id of the document to remove. The id must match an existing document @param handle a valid session handle @return a success or error message @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocumentStoreClient.addCaseID
+yawl:DocumentStoreClient_addCaseID_10 a yawl:Method ;
+    rdfs:label "addCaseID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addCaseID(long docID, String caseID, String handle)" ;
+    rdfs:comment """Updates a stored document with its case id. When a document is uploaded at case start, it occurs before the case has been launched and thus there is not yet a case id allocated. Once the case launch is successful, this method is called to associate the case id with the already uploaded document. @param docID the id of the already uploaded document @param caseID the case id of the case launched with the document as a case param @param handle a valid session handle @return a success or error messa""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocumentStoreClient.clearCase
+yawl:DocumentStoreClient_clearCase_11 a yawl:Method ;
+    rdfs:label "clearCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String clearCase(YDocument doc, String handle)" ;
+    rdfs:comment """Removes all documents from the Document Store matching a case id @param doc a YDocument containing the case id of the documents to remove @param handle a valid session handle @return a success or error message @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocumentStoreClient.clearCase
+yawl:DocumentStoreClient_clearCase_12 a yawl:Method ;
+    rdfs:label "clearCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String clearCase(String caseID, String handle)" ;
+    rdfs:comment """Removes all documents from the Document Store matching a case id @param caseID the case id of the documents to remove @param handle a valid session handle @return a success or error message @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocumentStoreClient.completeCase
+yawl:DocumentStoreClient_completeCase_13 a yawl:Method ;
+    rdfs:label "completeCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String completeCase(YDocument doc, String handle)" ;
+    rdfs:comment """Removes all documents from the Document Store matching a case id @param doc a YDocument containing the case id of the documents to remove @param handle a valid session handle @return a success or error message @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocumentStoreClient.completeCase
+yawl:DocumentStoreClient_completeCase_14 a yawl:Method ;
+    rdfs:label "completeCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String completeCase(String caseID, String handle)" ;
+    rdfs:comment """Removes all documents from the Document Store matching a case id @param caseID the case id of the documents to remove @param handle a valid session handle @return a success or error message @throws IOException if the service can't be reached""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DocumentStoreClient.toByteArray
+yawl:DocumentStoreClient_toByteArray_15 a yawl:Method ;
+    rdfs:label "toByteArray" ;
+    yawl:returnType "byte" ;
+    yawl:signature "byte toByteArray(YDocument doc, String action, String handle)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DocumentStoreClient.toByteArray
+yawl:DocumentStoreClient_toByteArray_16 a yawl:Method ;
+    rdfs:label "toByteArray" ;
+    yawl:returnType "byte" ;
+    yawl:signature "byte toByteArray(String action, String handle, String args)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DocumentStoreClient.executePost
+yawl:DocumentStoreClient_executePost_17 a yawl:Method ;
+    rdfs:label "executePost" ;
+    yawl:returnType "ByteArrayOutputStream" ;
+    yawl:signature "ByteArrayOutputStream executePost(byte bytes)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DocumentStoreClient.getOutStream
+yawl:DocumentStoreClient_getOutStream_18 a yawl:Method ;
+    rdfs:label "getOutStream" ;
+    yawl:returnType "ByteArrayOutputStream" ;
+    yawl:signature "ByteArrayOutputStream getOutStream(InputStream is)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:DocumentStoreClient__storeURI a yawl:Field ;
+    rdfs:label "_storeURI" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_balancer a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.balancer" .
+
+

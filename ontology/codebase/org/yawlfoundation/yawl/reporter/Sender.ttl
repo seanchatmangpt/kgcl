@@ -1,0 +1,74 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.reporter
+yawl:org_yawlfoundation_yawl_reporter a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.reporter" .
+# Class: org.yawlfoundation.yawl.reporter.Sender
+yawl:Sender a yawl:Class ;
+    rdfs:label "Sender" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_reporter ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/reporter/Sender.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 1/10/15""" ;
+    yawl:extends yawl:Interface_Client ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Sender_send_1 ;
+    yawl:hasMethod yawl:Sender_send_2 ;
+    yawl:hasMethod yawl:Sender_encodeCredentials_3 ;
+    yawl:hasMethod yawl:Sender_loadProperties_4 ;
+    yawl:hasMethod yawl:Sender_get_5 ;
+    yawl:hasField yawl:Sender__props ;
+    .
+
+
+# Method: Sender.send
+yawl:Sender_send_1 a yawl:Method ;
+    rdfs:label "send" ;
+    yawl:returnType "String" ;
+    yawl:signature "String send(String subject, String text)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Sender.send
+yawl:Sender_send_2 a yawl:Method ;
+    rdfs:label "send" ;
+    yawl:returnType "String" ;
+    yawl:signature "String send(Map params)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Sender.encodeCredentials
+yawl:Sender_encodeCredentials_3 a yawl:Method ;
+    rdfs:label "encodeCredentials" ;
+    yawl:returnType "String" ;
+    yawl:signature "String encodeCredentials()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Sender.loadProperties
+yawl:Sender_loadProperties_4 a yawl:Method ;
+    rdfs:label "loadProperties" ;
+    yawl:returnType "void" ;
+    yawl:signature "void loadProperties(InputStream inputStream)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Sender.get
+yawl:Sender_get_5 a yawl:Method ;
+    rdfs:label "get" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get(String key)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:Sender__props a yawl:Field ;
+    rdfs:label "_props" .
+
+
+

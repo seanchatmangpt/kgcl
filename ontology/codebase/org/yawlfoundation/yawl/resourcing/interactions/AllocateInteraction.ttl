@@ -1,0 +1,80 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.interactions.AllocateInteraction
+yawl:AllocateInteraction a yawl:Class ;
+    rdfs:label "AllocateInteraction" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_interactions ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/interactions/AllocateInteraction.java"^^xsd:string ;
+    rdfs:comment """This class describes the requirements of a task at the allocate phase of allocating resources. @author Michael Adams v0.1, 02/08/2007""" ;
+    yawl:extends yawl:AbstractInteraction ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:AllocateInteraction_setAllocator_1 ;
+    yawl:hasMethod yawl:AllocateInteraction_getAllocator_2 ;
+    yawl:hasMethod yawl:AllocateInteraction_clearAllocator_3 ;
+    yawl:hasMethod yawl:AllocateInteraction_performAllocation_4 ;
+    yawl:hasMethod yawl:AllocateInteraction_parse_5 ;
+    yawl:hasMethod yawl:AllocateInteraction_toXML_6 ;
+    yawl:hasField yawl:AllocateInteraction__allocator ;
+    .
+
+
+# Method: AllocateInteraction.setAllocator
+yawl:AllocateInteraction_setAllocator_1 a yawl:Method ;
+    rdfs:label "setAllocator" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAllocator(AbstractAllocator allocator)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AllocateInteraction.getAllocator
+yawl:AllocateInteraction_getAllocator_2 a yawl:Method ;
+    rdfs:label "getAllocator" ;
+    yawl:returnType "AbstractAllocator" ;
+    yawl:signature "AbstractAllocator getAllocator()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AllocateInteraction.clearAllocator
+yawl:AllocateInteraction_clearAllocator_3 a yawl:Method ;
+    rdfs:label "clearAllocator" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clearAllocator()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AllocateInteraction.performAllocation
+yawl:AllocateInteraction_performAllocation_4 a yawl:Method ;
+    rdfs:label "performAllocation" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant performAllocation(Set offerSet, WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AllocateInteraction.parse
+yawl:AllocateInteraction_parse_5 a yawl:Method ;
+    rdfs:label "parse" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parse(Element e, Namespace nsYawl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AllocateInteraction.toXML
+yawl:AllocateInteraction_toXML_6 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:AllocateInteraction__allocator a yawl:Field ;
+    rdfs:label "_allocator" .
+
+
+

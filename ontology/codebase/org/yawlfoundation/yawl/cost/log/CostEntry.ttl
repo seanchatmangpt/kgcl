@@ -1,0 +1,157 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.cost.log.CostEntry
+yawl:CostEntry a yawl:Class ;
+    rdfs:label "CostEntry" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_cost_log ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/cost/log/CostEntry.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 25/10/11""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CostEntry_getSpecID_1 ;
+    yawl:hasMethod yawl:CostEntry_setSpecID_2 ;
+    yawl:hasMethod yawl:CostEntry_getWorkItemID_3 ;
+    yawl:hasMethod yawl:CostEntry_setWorkItemID_4 ;
+    yawl:hasMethod yawl:CostEntry_getDriverID_5 ;
+    yawl:hasMethod yawl:CostEntry_setDriverID_6 ;
+    yawl:hasMethod yawl:CostEntry_getMeasure_7 ;
+    yawl:hasMethod yawl:CostEntry_setMeasure_8 ;
+    yawl:hasMethod yawl:CostEntry_getCurrency_9 ;
+    yawl:hasMethod yawl:CostEntry_setCurrency_10 ;
+    yawl:hasMethod yawl:CostEntry_getAmount_11 ;
+    yawl:hasMethod yawl:CostEntry_setAmount_12 ;
+    yawl:hasField yawl:CostEntry_timestamp ;
+    yawl:hasField yawl:CostEntry_specID ;
+    yawl:hasField yawl:CostEntry_workItemID ;
+    yawl:hasField yawl:CostEntry_driverID ;
+    yawl:hasField yawl:CostEntry_measure ;
+    yawl:hasField yawl:CostEntry_currency ;
+    yawl:hasField yawl:CostEntry_amount ;
+    .
+
+
+# Method: CostEntry.getSpecID
+yawl:CostEntry_getSpecID_1 a yawl:Method ;
+    rdfs:label "getSpecID" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getSpecID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostEntry.setSpecID
+yawl:CostEntry_setSpecID_2 a yawl:Method ;
+    rdfs:label "setSpecID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSpecID(YSpecificationID id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostEntry.getWorkItemID
+yawl:CostEntry_getWorkItemID_3 a yawl:Method ;
+    rdfs:label "getWorkItemID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItemID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostEntry.setWorkItemID
+yawl:CostEntry_setWorkItemID_4 a yawl:Method ;
+    rdfs:label "setWorkItemID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setWorkItemID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostEntry.getDriverID
+yawl:CostEntry_getDriverID_5 a yawl:Method ;
+    rdfs:label "getDriverID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDriverID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostEntry.setDriverID
+yawl:CostEntry_setDriverID_6 a yawl:Method ;
+    rdfs:label "setDriverID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDriverID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostEntry.getMeasure
+yawl:CostEntry_getMeasure_7 a yawl:Method ;
+    rdfs:label "getMeasure" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMeasure()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostEntry.setMeasure
+yawl:CostEntry_setMeasure_8 a yawl:Method ;
+    rdfs:label "setMeasure" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMeasure(String m)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostEntry.getCurrency
+yawl:CostEntry_getCurrency_9 a yawl:Method ;
+    rdfs:label "getCurrency" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCurrency()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostEntry.setCurrency
+yawl:CostEntry_setCurrency_10 a yawl:Method ;
+    rdfs:label "setCurrency" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCurrency(String curr)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostEntry.getAmount
+yawl:CostEntry_getAmount_11 a yawl:Method ;
+    rdfs:label "getAmount" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAmount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostEntry.setAmount
+yawl:CostEntry_setAmount_12 a yawl:Method ;
+    rdfs:label "setAmount" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAmount(String amt)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:CostEntry_timestamp a yawl:Field ;
+    rdfs:label "timestamp" .
+
+yawl:CostEntry_specID a yawl:Field ;
+    rdfs:label "specID" .
+
+yawl:CostEntry_workItemID a yawl:Field ;
+    rdfs:label "workItemID" .
+
+yawl:CostEntry_driverID a yawl:Field ;
+    rdfs:label "driverID" .
+
+yawl:CostEntry_measure a yawl:Field ;
+    rdfs:label "measure" .
+
+yawl:CostEntry_currency a yawl:Field ;
+    rdfs:label "currency" .
+
+yawl:CostEntry_amount a yawl:Field ;
+    rdfs:label "amount" .
+
+
+

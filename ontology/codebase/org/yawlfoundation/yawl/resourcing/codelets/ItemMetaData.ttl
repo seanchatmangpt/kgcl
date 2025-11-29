@@ -1,0 +1,42 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.codelets.ItemMetaData
+yawl:ItemMetaData a yawl:Class ;
+    rdfs:label "ItemMetaData" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_codelets ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/codelets/ItemMetaData.java"^^xsd:string ;
+    rdfs:comment """Example codelet for extracting workitem metadata. @author Michael Adams""" ;
+    yawl:extends yawl:AbstractCodelet ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ItemMetaData_execute_1 ;
+    yawl:hasMethod yawl:ItemMetaData_getRequiredParams_2 ;
+    .
+
+
+# Method: ItemMetaData.execute
+yawl:ItemMetaData_execute_1 a yawl:Method ;
+    rdfs:label "execute" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element execute(Element inData, List inParams, List outParams)" ;
+    rdfs:comment """The implementation of the abstract class that does the work of this codelet. Note that calls to most of the base class methods may throw a CodeletExecutionException which should be passed back to the caller, @param inData The calling workitem's data @param inParams the workitem's input parameters @param outParams the workitem's output parameters @return the result of the codelet's work as a JDOM Element @throws CodeletExecutionException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ItemMetaData.getRequiredParams
+yawl:ItemMetaData_getRequiredParams_2 a yawl:Method ;
+    rdfs:label "getRequiredParams" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getRequiredParams()" ;
+    rdfs:comment """This method is called by the YAWL editor to get the list of parameters required by the codelet.""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

@@ -1,0 +1,592 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.balancer.config.Config
+yawl:Config a yawl:Class ;
+    rdfs:label "Config" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer_config ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/config/Config.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 8/9/17""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Config_load_1 ;
+    yawl:hasMethod yawl:Config_reload_2 ;
+    yawl:hasMethod yawl:Config_addChangeListener_3 ;
+    yawl:hasMethod yawl:Config_removeChangeListener_4 ;
+    yawl:hasMethod yawl:Config_getLocations_5 ;
+    yawl:hasMethod yawl:Config_getOperatingMode_6 ;
+    yawl:hasMethod yawl:Config_getEngineInitWait_7 ;
+    yawl:hasMethod yawl:Config_getEngineInitWaitMSecs_8 ;
+    yawl:hasMethod yawl:Config_getPollInterval_9 ;
+    yawl:hasMethod yawl:Config_getRequestLimit_10 ;
+    yawl:hasMethod yawl:Config_getRequestLimitPerPollInterval_11 ;
+    yawl:hasMethod yawl:Config_getProcessTimeLimit_12 ;
+    yawl:hasMethod yawl:Config_getThreadsLimit_13 ;
+    yawl:hasMethod yawl:Config_getRequestWeight_14 ;
+    yawl:hasMethod yawl:Config_getProcessTimeWeight_15 ;
+    yawl:hasMethod yawl:Config_getThreadsWeight_16 ;
+    yawl:hasMethod yawl:Config_getCardusoComplexityWeight_17 ;
+    yawl:hasMethod yawl:Config_getTaskCardinalityComplexityWeight_18 ;
+    yawl:hasMethod yawl:Config_getUDTComplexityWeight_19 ;
+    yawl:hasMethod yawl:Config_getDataMappingsComplexityWeight_20 ;
+    yawl:hasMethod yawl:Config_getResourcingComplexityWeight_21 ;
+    yawl:hasMethod yawl:Config_getWeightedRequestLimitPerPollInterval_22 ;
+    yawl:hasMethod yawl:Config_getWeightedProcessTimeLimit_23 ;
+    yawl:hasMethod yawl:Config_getWeightedThreadsLimit_24 ;
+    yawl:hasMethod yawl:Config_isWriteLog_25 ;
+    yawl:hasMethod yawl:Config_getForgetFactor_26 ;
+    yawl:hasMethod yawl:Config_getForecastQueueSize_27 ;
+    yawl:hasMethod yawl:Config_getForecastLookahead_28 ;
+    yawl:hasMethod yawl:Config_getBusynessLimit_29 ;
+    yawl:hasMethod yawl:Config_getPreferredForecastModeller_30 ;
+    yawl:hasMethod yawl:Config_getMinLoadThreshold_31 ;
+    yawl:hasMethod yawl:Config_getMonitorInitCount_32 ;
+    yawl:hasMethod yawl:Config_getMinEngineCount_33 ;
+    yawl:hasMethod yawl:Config_getMaxEngineCount_34 ;
+    yawl:hasMethod yawl:Config_get_35 ;
+    yawl:hasMethod yawl:Config_get_36 ;
+    yawl:hasMethod yawl:Config_getInt_37 ;
+    yawl:hasMethod yawl:Config_getInt_38 ;
+    yawl:hasMethod yawl:Config_getDouble_39 ;
+    yawl:hasMethod yawl:Config_getDouble_40 ;
+    yawl:hasMethod yawl:Config_stopConfigMonitoring_41 ;
+    yawl:hasMethod yawl:Config_startConfigMonitoring_42 ;
+    yawl:hasMethod yawl:Config_announceChange_43 ;
+    yawl:hasMethod yawl:Config_enumerateProperties_44 ;
+    yawl:hasMethod yawl:Config_getChangedProperties_45 ;
+    yawl:hasField yawl:Config__fullPath ;
+    yawl:hasField yawl:Config_FM ;
+    yawl:hasField yawl:Config_CHANGE_LISTENERS ;
+    yawl:hasField yawl:Config_PROPS ;
+    yawl:hasField yawl:Config_LOG ;
+    yawl:hasField yawl:Config_FILE_PATH ;
+    yawl:hasField yawl:Config_DEFAULT_MODE ;
+    yawl:hasField yawl:Config_DEFAULT_INIT_WAIT ;
+    yawl:hasField yawl:Config_DEFAULT_POLL_INTERVAL ;
+    yawl:hasField yawl:Config_DEFAULT_REQUEST_LIMIT ;
+    yawl:hasField yawl:Config_DEFAULT_PROC_TIME_LIMIT ;
+    yawl:hasField yawl:Config_DEFAULT_THREADS_LIMIT ;
+    yawl:hasField yawl:Config_DEFAULT_REQUEST_WEIGHT ;
+    yawl:hasField yawl:Config_DEFAULT_PROC_TIME_WEIGHT ;
+    yawl:hasField yawl:Config_DEFAULT_THREADS_WEIGHT ;
+    yawl:hasField yawl:Config_DEFAULT_CARDUSO_COMPLEXITY_WEIGHT ;
+    yawl:hasField yawl:Config_DEFAULT_TASKCOUNT_COMPLEXITY_WEIGHT ;
+    yawl:hasField yawl:Config_DEFAULT_UDT_COMPLEXITY_WEIGHT ;
+    yawl:hasField yawl:Config_DEFAULT_DATA_MAPPINGS_COMPLEXIY_WEIGHT ;
+    yawl:hasField yawl:Config_DEFAULT_RESOURCING_COMPLEXITY_WEIGHT ;
+    yawl:hasField yawl:Config_DEFAULT_FORGET_FACTOR ;
+    yawl:hasField yawl:Config_DEFAULT_FORECAST_QUEUE_SIZE ;
+    yawl:hasField yawl:Config_DEFAULT_FORECAST_LOOKAHEAD ;
+    yawl:hasField yawl:Config_DEFAULT_MAX_BUSYNESS ;
+    yawl:hasField yawl:Config_DEFAULT_FORECAST_MODELLER ;
+    yawl:hasField yawl:Config_DEFAULT_MONITOR_INIT_COUNT ;
+    yawl:hasField yawl:Config_DEFAULT_MIN_LOAD_THRESHOLD ;
+    yawl:hasField yawl:Config_DEFAULT_MIN_ENGINE_COUNT ;
+    yawl:hasField yawl:Config_DEFAULT_MAX_ENGINE_COUNT ;
+    .
+
+
+# Method: Config.load
+yawl:Config_load_1 a yawl:Method ;
+    rdfs:label "load" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean load(ServletContext context)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.reload
+yawl:Config_reload_2 a yawl:Method ;
+    rdfs:label "reload" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reload()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.addChangeListener
+yawl:Config_addChangeListener_3 a yawl:Method ;
+    rdfs:label "addChangeListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addChangeListener(ConfigChangeListener listener)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.removeChangeListener
+yawl:Config_removeChangeListener_4 a yawl:Method ;
+    rdfs:label "removeChangeListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeChangeListener(ConfigChangeListener listener)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getLocations
+yawl:Config_getLocations_5 a yawl:Method ;
+    rdfs:label "getLocations" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getLocations()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getOperatingMode
+yawl:Config_getOperatingMode_6 a yawl:Method ;
+    rdfs:label "getOperatingMode" ;
+    yawl:returnType "OperatingMode" ;
+    yawl:signature "OperatingMode getOperatingMode()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getEngineInitWait
+yawl:Config_getEngineInitWait_7 a yawl:Method ;
+    rdfs:label "getEngineInitWait" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getEngineInitWait()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getEngineInitWaitMSecs
+yawl:Config_getEngineInitWaitMSecs_8 a yawl:Method ;
+    rdfs:label "getEngineInitWaitMSecs" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getEngineInitWaitMSecs()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getPollInterval
+yawl:Config_getPollInterval_9 a yawl:Method ;
+    rdfs:label "getPollInterval" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getPollInterval()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getRequestLimit
+yawl:Config_getRequestLimit_10 a yawl:Method ;
+    rdfs:label "getRequestLimit" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getRequestLimit()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getRequestLimitPerPollInterval
+yawl:Config_getRequestLimitPerPollInterval_11 a yawl:Method ;
+    rdfs:label "getRequestLimitPerPollInterval" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getRequestLimitPerPollInterval()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getProcessTimeLimit
+yawl:Config_getProcessTimeLimit_12 a yawl:Method ;
+    rdfs:label "getProcessTimeLimit" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getProcessTimeLimit()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getThreadsLimit
+yawl:Config_getThreadsLimit_13 a yawl:Method ;
+    rdfs:label "getThreadsLimit" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getThreadsLimit()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getRequestWeight
+yawl:Config_getRequestWeight_14 a yawl:Method ;
+    rdfs:label "getRequestWeight" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getRequestWeight()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getProcessTimeWeight
+yawl:Config_getProcessTimeWeight_15 a yawl:Method ;
+    rdfs:label "getProcessTimeWeight" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getProcessTimeWeight()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getThreadsWeight
+yawl:Config_getThreadsWeight_16 a yawl:Method ;
+    rdfs:label "getThreadsWeight" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getThreadsWeight()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getCardusoComplexityWeight
+yawl:Config_getCardusoComplexityWeight_17 a yawl:Method ;
+    rdfs:label "getCardusoComplexityWeight" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getCardusoComplexityWeight()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getTaskCardinalityComplexityWeight
+yawl:Config_getTaskCardinalityComplexityWeight_18 a yawl:Method ;
+    rdfs:label "getTaskCardinalityComplexityWeight" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getTaskCardinalityComplexityWeight()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getUDTComplexityWeight
+yawl:Config_getUDTComplexityWeight_19 a yawl:Method ;
+    rdfs:label "getUDTComplexityWeight" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getUDTComplexityWeight()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getDataMappingsComplexityWeight
+yawl:Config_getDataMappingsComplexityWeight_20 a yawl:Method ;
+    rdfs:label "getDataMappingsComplexityWeight" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getDataMappingsComplexityWeight()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getResourcingComplexityWeight
+yawl:Config_getResourcingComplexityWeight_21 a yawl:Method ;
+    rdfs:label "getResourcingComplexityWeight" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getResourcingComplexityWeight()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getWeightedRequestLimitPerPollInterval
+yawl:Config_getWeightedRequestLimitPerPollInterval_22 a yawl:Method ;
+    rdfs:label "getWeightedRequestLimitPerPollInterval" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getWeightedRequestLimitPerPollInterval()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getWeightedProcessTimeLimit
+yawl:Config_getWeightedProcessTimeLimit_23 a yawl:Method ;
+    rdfs:label "getWeightedProcessTimeLimit" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getWeightedProcessTimeLimit()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getWeightedThreadsLimit
+yawl:Config_getWeightedThreadsLimit_24 a yawl:Method ;
+    rdfs:label "getWeightedThreadsLimit" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getWeightedThreadsLimit()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.isWriteLog
+yawl:Config_isWriteLog_25 a yawl:Method ;
+    rdfs:label "isWriteLog" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isWriteLog()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getForgetFactor
+yawl:Config_getForgetFactor_26 a yawl:Method ;
+    rdfs:label "getForgetFactor" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getForgetFactor()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getForecastQueueSize
+yawl:Config_getForecastQueueSize_27 a yawl:Method ;
+    rdfs:label "getForecastQueueSize" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getForecastQueueSize()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getForecastLookahead
+yawl:Config_getForecastLookahead_28 a yawl:Method ;
+    rdfs:label "getForecastLookahead" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getForecastLookahead()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getBusynessLimit
+yawl:Config_getBusynessLimit_29 a yawl:Method ;
+    rdfs:label "getBusynessLimit" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getBusynessLimit()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getPreferredForecastModeller
+yawl:Config_getPreferredForecastModeller_30 a yawl:Method ;
+    rdfs:label "getPreferredForecastModeller" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getPreferredForecastModeller()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getMinLoadThreshold
+yawl:Config_getMinLoadThreshold_31 a yawl:Method ;
+    rdfs:label "getMinLoadThreshold" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getMinLoadThreshold()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getMonitorInitCount
+yawl:Config_getMonitorInitCount_32 a yawl:Method ;
+    rdfs:label "getMonitorInitCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getMonitorInitCount()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getMinEngineCount
+yawl:Config_getMinEngineCount_33 a yawl:Method ;
+    rdfs:label "getMinEngineCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getMinEngineCount()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getMaxEngineCount
+yawl:Config_getMaxEngineCount_34 a yawl:Method ;
+    rdfs:label "getMaxEngineCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getMaxEngineCount()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.get
+yawl:Config_get_35 a yawl:Method ;
+    rdfs:label "get" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get(String key)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.get
+yawl:Config_get_36 a yawl:Method ;
+    rdfs:label "get" ;
+    yawl:returnType "String" ;
+    yawl:signature "String get(String key, String def)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getInt
+yawl:Config_getInt_37 a yawl:Method ;
+    rdfs:label "getInt" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getInt(String key)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getInt
+yawl:Config_getInt_38 a yawl:Method ;
+    rdfs:label "getInt" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getInt(String key, int def)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getDouble
+yawl:Config_getDouble_39 a yawl:Method ;
+    rdfs:label "getDouble" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getDouble(String key)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getDouble
+yawl:Config_getDouble_40 a yawl:Method ;
+    rdfs:label "getDouble" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getDouble(String key, double def)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.stopConfigMonitoring
+yawl:Config_stopConfigMonitoring_41 a yawl:Method ;
+    rdfs:label "stopConfigMonitoring" ;
+    yawl:returnType "void" ;
+    yawl:signature "void stopConfigMonitoring()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.startConfigMonitoring
+yawl:Config_startConfigMonitoring_42 a yawl:Method ;
+    rdfs:label "startConfigMonitoring" ;
+    yawl:returnType "void" ;
+    yawl:signature "void startConfigMonitoring(String filePath)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.announceChange
+yawl:Config_announceChange_43 a yawl:Method ;
+    rdfs:label "announceChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceChange(Map changedValues)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.enumerateProperties
+yawl:Config_enumerateProperties_44 a yawl:Method ;
+    rdfs:label "enumerateProperties" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map enumerateProperties()" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: Config.getChangedProperties
+yawl:Config_getChangedProperties_45 a yawl:Method ;
+    rdfs:label "getChangedProperties" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getChangedProperties(Map old)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:Config__fullPath a yawl:Field ;
+    rdfs:label "_fullPath" .
+
+yawl:Config_FM a yawl:Field ;
+    rdfs:label "FM" .
+
+yawl:Config_CHANGE_LISTENERS a yawl:Field ;
+    rdfs:label "CHANGE_LISTENERS" .
+
+yawl:Config_PROPS a yawl:Field ;
+    rdfs:label "PROPS" .
+
+yawl:Config_LOG a yawl:Field ;
+    rdfs:label "LOG" .
+
+yawl:Config_FILE_PATH a yawl:Field ;
+    rdfs:label "FILE_PATH" .
+
+yawl:Config_DEFAULT_MODE a yawl:Field ;
+    rdfs:label "DEFAULT_MODE" .
+
+yawl:Config_DEFAULT_INIT_WAIT a yawl:Field ;
+    rdfs:label "DEFAULT_INIT_WAIT" .
+
+yawl:Config_DEFAULT_POLL_INTERVAL a yawl:Field ;
+    rdfs:label "DEFAULT_POLL_INTERVAL" .
+
+yawl:Config_DEFAULT_REQUEST_LIMIT a yawl:Field ;
+    rdfs:label "DEFAULT_REQUEST_LIMIT" .
+
+yawl:Config_DEFAULT_PROC_TIME_LIMIT a yawl:Field ;
+    rdfs:label "DEFAULT_PROC_TIME_LIMIT" .
+
+yawl:Config_DEFAULT_THREADS_LIMIT a yawl:Field ;
+    rdfs:label "DEFAULT_THREADS_LIMIT" .
+
+yawl:Config_DEFAULT_REQUEST_WEIGHT a yawl:Field ;
+    rdfs:label "DEFAULT_REQUEST_WEIGHT" .
+
+yawl:Config_DEFAULT_PROC_TIME_WEIGHT a yawl:Field ;
+    rdfs:label "DEFAULT_PROC_TIME_WEIGHT" .
+
+yawl:Config_DEFAULT_THREADS_WEIGHT a yawl:Field ;
+    rdfs:label "DEFAULT_THREADS_WEIGHT" .
+
+yawl:Config_DEFAULT_CARDUSO_COMPLEXITY_WEIGHT a yawl:Field ;
+    rdfs:label "DEFAULT_CARDUSO_COMPLEXITY_WEIGHT" .
+
+yawl:Config_DEFAULT_TASKCOUNT_COMPLEXITY_WEIGHT a yawl:Field ;
+    rdfs:label "DEFAULT_TASKCOUNT_COMPLEXITY_WEIGHT" .
+
+yawl:Config_DEFAULT_UDT_COMPLEXITY_WEIGHT a yawl:Field ;
+    rdfs:label "DEFAULT_UDT_COMPLEXITY_WEIGHT" .
+
+yawl:Config_DEFAULT_DATA_MAPPINGS_COMPLEXIY_WEIGHT a yawl:Field ;
+    rdfs:label "DEFAULT_DATA_MAPPINGS_COMPLEXIY_WEIGHT" .
+
+yawl:Config_DEFAULT_RESOURCING_COMPLEXITY_WEIGHT a yawl:Field ;
+    rdfs:label "DEFAULT_RESOURCING_COMPLEXITY_WEIGHT" .
+
+yawl:Config_DEFAULT_FORGET_FACTOR a yawl:Field ;
+    rdfs:label "DEFAULT_FORGET_FACTOR" .
+
+yawl:Config_DEFAULT_FORECAST_QUEUE_SIZE a yawl:Field ;
+    rdfs:label "DEFAULT_FORECAST_QUEUE_SIZE" .
+
+yawl:Config_DEFAULT_FORECAST_LOOKAHEAD a yawl:Field ;
+    rdfs:label "DEFAULT_FORECAST_LOOKAHEAD" .
+
+yawl:Config_DEFAULT_MAX_BUSYNESS a yawl:Field ;
+    rdfs:label "DEFAULT_MAX_BUSYNESS" .
+
+yawl:Config_DEFAULT_FORECAST_MODELLER a yawl:Field ;
+    rdfs:label "DEFAULT_FORECAST_MODELLER" .
+
+yawl:Config_DEFAULT_MONITOR_INIT_COUNT a yawl:Field ;
+    rdfs:label "DEFAULT_MONITOR_INIT_COUNT" .
+
+yawl:Config_DEFAULT_MIN_LOAD_THRESHOLD a yawl:Field ;
+    rdfs:label "DEFAULT_MIN_LOAD_THRESHOLD" .
+
+yawl:Config_DEFAULT_MIN_ENGINE_COUNT a yawl:Field ;
+    rdfs:label "DEFAULT_MIN_ENGINE_COUNT" .
+
+yawl:Config_DEFAULT_MAX_ENGINE_COUNT a yawl:Field ;
+    rdfs:label "DEFAULT_MAX_ENGINE_COUNT" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_balancer_jmx a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.balancer.jmx" .
+
+

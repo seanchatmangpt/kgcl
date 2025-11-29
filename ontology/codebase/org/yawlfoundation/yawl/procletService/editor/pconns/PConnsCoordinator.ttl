@@ -1,0 +1,115 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.procletService.editor.pconns
+yawl:org_yawlfoundation_yawl_procletService_editor_pconns a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.procletService.editor.pconns" .
+# Class: org.yawlfoundation.yawl.procletService.editor.pconns.PConnsCoordinator
+yawl:PConnsCoordinator a yawl:Class ;
+    rdfs:label "PConnsCoordinator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor_pconns ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/pconns/PConnsCoordinator.java"^^xsd:string ;
+    yawl:extends yawl:InternalCoordinator ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:PConnsCoordinator_singleton_1 ;
+    yawl:hasMethod yawl:PConnsCoordinator_getInstance_2 ;
+    yawl:hasMethod yawl:PConnsCoordinator_exists_3 ;
+    yawl:hasMethod yawl:PConnsCoordinator_finish_4 ;
+    yawl:hasMethod yawl:PConnsCoordinator_start_5 ;
+    yawl:hasMethod yawl:PConnsCoordinator_getInternalFrame_6 ;
+    yawl:hasMethod yawl:PConnsCoordinator_end_7 ;
+    yawl:hasMethod yawl:PConnsCoordinator_getModelControl_8 ;
+    yawl:hasField yawl:PConnsCoordinator_frame ;
+    yawl:hasField yawl:PConnsCoordinator_instance ;
+    yawl:hasField yawl:PConnsCoordinator_nameTextField ;
+    .
+
+
+# Method: PConnsCoordinator.singleton
+yawl:PConnsCoordinator_singleton_1 a yawl:Method ;
+    rdfs:label "singleton" ;
+    yawl:returnType "PConnsCoordinator" ;
+    yawl:signature "PConnsCoordinator singleton(JFrame aMainFrame)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PConnsCoordinator.getInstance
+yawl:PConnsCoordinator_getInstance_2 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "PConnsCoordinator" ;
+    yawl:signature "PConnsCoordinator getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PConnsCoordinator.exists
+yawl:PConnsCoordinator_exists_3 a yawl:Method ;
+    rdfs:label "exists" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean exists()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PConnsCoordinator.finish
+yawl:PConnsCoordinator_finish_4 a yawl:Method ;
+    rdfs:label "finish" ;
+    yawl:returnType "void" ;
+    yawl:signature "void finish()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PConnsCoordinator.start
+yawl:PConnsCoordinator_start_5 a yawl:Method ;
+    rdfs:label "start" ;
+    yawl:returnType "void" ;
+    yawl:signature "void start()" ;
+    rdfs:comment """start""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PConnsCoordinator.getInternalFrame
+yawl:PConnsCoordinator_getInternalFrame_6 a yawl:Method ;
+    rdfs:label "getInternalFrame" ;
+    yawl:returnType "JInternalFrame" ;
+    yawl:signature "JInternalFrame getInternalFrame()" ;
+    rdfs:comment """getInternalFrame @return JInternalFrame""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PConnsCoordinator.end
+yawl:PConnsCoordinator_end_7 a yawl:Method ;
+    rdfs:label "end" ;
+    yawl:returnType "void" ;
+    yawl:signature "void end()" ;
+    rdfs:comment """end""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: PConnsCoordinator.getModelControl
+yawl:PConnsCoordinator_getModelControl_8 a yawl:Method ;
+    rdfs:label "getModelControl" ;
+    yawl:returnType "PConnsControl" ;
+    yawl:signature "PConnsControl getModelControl()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:PConnsCoordinator_frame a yawl:Field ;
+    rdfs:label "frame" .
+
+yawl:PConnsCoordinator_instance a yawl:Field ;
+    rdfs:label "instance" .
+
+yawl:PConnsCoordinator_nameTextField a yawl:Field ;
+    rdfs:label "nameTextField" .
+
+
+

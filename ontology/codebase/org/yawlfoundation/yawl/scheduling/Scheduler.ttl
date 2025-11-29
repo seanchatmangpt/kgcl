@@ -1,0 +1,78 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.scheduling.Scheduler
+yawl:Scheduler a yawl:Class ;
+    rdfs:label "Scheduler" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_scheduling ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/scheduling/Scheduler.java"^^xsd:string ;
+    rdfs:comment """(re)schedules RUPs automatically @author tbe @version $Id$""" ;
+    yawl:implements yawl:Constants ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Scheduler_setTimes_1 ;
+    yawl:hasMethod yawl:Scheduler_setTimes_2 ;
+    yawl:hasMethod yawl:Scheduler_findTimeSlot_3 ;
+    yawl:hasMethod yawl:Scheduler_getCollidingRups_4 ;
+    yawl:hasField yawl:Scheduler_logger ;
+    yawl:hasField yawl:Scheduler_dataMapper ;
+    yawl:hasField yawl:Scheduler_rs ;
+    yawl:hasField yawl:Scheduler_debug ;
+    .
+
+
+# Method: Scheduler.setTimes
+yawl:Scheduler_setTimes_1 a yawl:Method ;
+    rdfs:label "setTimes" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean setTimes(Document rup, Element activity, boolean withValidation, boolean rescheduleCollidingRUPs, Duration defaultDuration)" ;
+    rdfs:comment """set times of activities if FROM and DURATION are given Rescheduling kollidierender RUPs, welche definiert sind als: alle RUPs welche die selben Ressourcen zur gleichen Zeit definieren wie der vorhergehend RUP. als selbe Ressourcen werden nur nicht austauschbare Ressourcen betrachtet, das sind Ressourcen mit Reservierung by Id (TODO@tbe: Reservierungen by Role oder Category k�nnten auch kollidieren, hier aber erstmal weglassen) TODO@tbe: Rescheduling von RUPs die Leerlaufzeiten haben, z.B. durch """ ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Scheduler.setTimes
+yawl:Scheduler_setTimes_2 a yawl:Method ;
+    rdfs:label "setTimes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTimes(Document rup, Element activity, boolean withValidation, List activityNamesProcessed, Duration defaultDuration)" ;
+    rdfs:comment """set TO time of an activity depending on FROM and DURATION set FROM time of previous and following activities and recurses to set their TO times also TODO@tbe: erstmal ohne Beachtung von Max und ohne Ausnutzung des �Gummibandes� zwischen Min und Max, d.h. es wird Min als fester Wert angenommen, ausserdem wird nur von einer Relation pro Aktivit�t ausgegangen @param activity""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Scheduler.findTimeSlot
+yawl:Scheduler_findTimeSlot_3 a yawl:Method ;
+    rdfs:label "findTimeSlot" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean findTimeSlot(Document rup, boolean withValidation)" ;
+    rdfs:comment """find time slot for rup @param rup""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Scheduler.getCollidingRups
+yawl:Scheduler_getCollidingRups_4 a yawl:Method ;
+    rdfs:label "getCollidingRups" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getCollidingRups(Document rup, List excludedCaseIds)" ;
+    rdfs:comment """findet potentiell kollidierende RUPs, welche definiert sind als: alle RUPs welche die selben Ressourcen zur gleichen Zeit definieren wie der vorhergehend RUP. als selbe Ressourcen werden nur nicht austauschbare Ressourcen betrachtet, das sind Ressourcen mit Reservierung by Id (TODO@tbe: Reservierungen by Role oder Category k�nnten auch kollidieren, hier aber erstmal weglassen) TODO@tbe: nur Aktivit�ten beachten, welche Reservierungen haben @param rup @return""" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:Scheduler_logger a yawl:Field ;
+    rdfs:label "logger" .
+
+yawl:Scheduler_dataMapper a yawl:Field ;
+    rdfs:label "dataMapper" .
+
+yawl:Scheduler_rs a yawl:Field ;
+    rdfs:label "rs" .
+
+yawl:Scheduler_debug a yawl:Field ;
+    rdfs:label "debug" .
+
+
+

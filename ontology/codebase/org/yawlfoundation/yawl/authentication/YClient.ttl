@@ -1,0 +1,114 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.authentication.YClient
+yawl:YClient a yawl:Class ;
+    rdfs:label "YClient" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_authentication ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/authentication/YClient.java"^^xsd:string ;
+    rdfs:comment """Base class that defines a custom service or external client application, in particular their session authentication credentials. <p/> Known child classes: YExternalClient, YAWLServiceReference @author Michael Adams @since 2.1 @date 11/05/2010""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YClient_getUserName_1 ;
+    yawl:hasMethod yawl:YClient_setUserName_2 ;
+    yawl:hasMethod yawl:YClient_getPassword_3 ;
+    yawl:hasMethod yawl:YClient_setPassword_4 ;
+    yawl:hasMethod yawl:YClient_getDocumentation_5 ;
+    yawl:hasMethod yawl:YClient_setDocumentation_6 ;
+    yawl:hasMethod yawl:YClient_equals_7 ;
+    yawl:hasMethod yawl:YClient_hashCode_8 ;
+    yawl:hasMethod yawl:YClient_toXML_9 ;
+    yawl:hasField yawl:YClient__userName ;
+    yawl:hasField yawl:YClient__password ;
+    yawl:hasField yawl:YClient__documentation ;
+    .
+
+
+# Method: YClient.getUserName
+yawl:YClient_getUserName_1 a yawl:Method ;
+    rdfs:label "getUserName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUserName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YClient.setUserName
+yawl:YClient_setUserName_2 a yawl:Method ;
+    rdfs:label "setUserName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUserName(String userID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YClient.getPassword
+yawl:YClient_getPassword_3 a yawl:Method ;
+    rdfs:label "getPassword" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPassword()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YClient.setPassword
+yawl:YClient_setPassword_4 a yawl:Method ;
+    rdfs:label "setPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPassword(String password)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YClient.getDocumentation
+yawl:YClient_getDocumentation_5 a yawl:Method ;
+    rdfs:label "getDocumentation" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDocumentation()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YClient.setDocumentation
+yawl:YClient_setDocumentation_6 a yawl:Method ;
+    rdfs:label "setDocumentation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDocumentation(String documentation)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YClient.equals
+yawl:YClient_equals_7 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YClient.hashCode
+yawl:YClient_hashCode_8 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YClient.toXML
+yawl:YClient_toXML_9 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YClient__userName a yawl:Field ;
+    rdfs:label "_userName" .
+
+yawl:YClient__password a yawl:Field ;
+    rdfs:label "_password" .
+
+yawl:YClient__documentation a yawl:Field ;
+    rdfs:label "_documentation" .
+
+
+

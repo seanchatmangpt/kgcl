@@ -1,0 +1,106 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.stateless.listener.event.YLogEvent
+yawl:YLogEvent a yawl:Class ;
+    rdfs:label "YLogEvent" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_listener_event ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/listener/event/YLogEvent.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 24/8/20""" ;
+    yawl:extends yawl:YEvent ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YLogEvent_setLogData_1 ;
+    yawl:hasMethod yawl:YLogEvent_getLogData_2 ;
+    yawl:hasMethod yawl:YLogEvent_setWorkItem_3 ;
+    yawl:hasMethod yawl:YLogEvent_getWorkItem_4 ;
+    yawl:hasMethod yawl:YLogEvent_setNetRunner_5 ;
+    yawl:hasMethod yawl:YLogEvent_getNetRunner_6 ;
+    yawl:hasMethod yawl:YLogEvent_getItemStatus_7 ;
+    yawl:hasField yawl:YLogEvent__logData ;
+    yawl:hasField yawl:YLogEvent__workItem ;
+    yawl:hasField yawl:YLogEvent__netRunner ;
+    yawl:hasField yawl:YLogEvent__workItemStatus ;
+    .
+
+
+# Method: YLogEvent.setLogData
+yawl:YLogEvent_setLogData_1 a yawl:Method ;
+    rdfs:label "setLogData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLogData(YLogDataItemList logData)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogEvent.getLogData
+yawl:YLogEvent_getLogData_2 a yawl:Method ;
+    rdfs:label "getLogData" ;
+    yawl:returnType "YLogDataItemList" ;
+    yawl:signature "YLogDataItemList getLogData()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogEvent.setWorkItem
+yawl:YLogEvent_setWorkItem_3 a yawl:Method ;
+    rdfs:label "setWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setWorkItem(YWorkItem item)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogEvent.getWorkItem
+yawl:YLogEvent_getWorkItem_4 a yawl:Method ;
+    rdfs:label "getWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem getWorkItem()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogEvent.setNetRunner
+yawl:YLogEvent_setNetRunner_5 a yawl:Method ;
+    rdfs:label "setNetRunner" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNetRunner(YNetRunner runner)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogEvent.getNetRunner
+yawl:YLogEvent_getNetRunner_6 a yawl:Method ;
+    rdfs:label "getNetRunner" ;
+    yawl:returnType "YNetRunner" ;
+    yawl:signature "YNetRunner getNetRunner()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogEvent.getItemStatus
+yawl:YLogEvent_getItemStatus_7 a yawl:Method ;
+    rdfs:label "getItemStatus" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getItemStatus()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YLogEvent__logData a yawl:Field ;
+    rdfs:label "_logData" .
+
+yawl:YLogEvent__workItem a yawl:Field ;
+    rdfs:label "_workItem" .
+
+yawl:YLogEvent__netRunner a yawl:Field ;
+    rdfs:label "_netRunner" .
+
+yawl:YLogEvent__workItemStatus a yawl:Field ;
+    rdfs:label "_workItemStatus" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_engine_interfce a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.engine.interfce" .
+
+

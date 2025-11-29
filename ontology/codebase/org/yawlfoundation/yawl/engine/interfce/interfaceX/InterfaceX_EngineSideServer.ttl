@@ -1,0 +1,71 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.interfce.interfaceX.InterfaceX_EngineSideServer
+yawl:InterfaceX_EngineSideServer a yawl:Class ;
+    rdfs:label "InterfaceX_EngineSideServer" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_interfce_interfaceX ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/interfce/interfaceX/InterfaceX_EngineSideServer.java"^^xsd:string ;
+    rdfs:comment """InterfaceX_EngineSideServer receives posts from the exception service and passes them as method calls to the Engine. This class is a member class of Interface X, which provides an interface between the YAWL Engine and a Custom YAWL Service that manages exception handling at the process level. InterfaceB_EngineBasedServer was used as a template for this class. Schematic of Interface X: | EXCEPTION      |                              INTERFACE X GATEWAY       |                                SERVI""" ;
+    yawl:extends yawl:HttpServlet ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:InterfaceX_EngineSideServer_init_1 ;
+    yawl:hasMethod yawl:InterfaceX_EngineSideServer_doGet_2 ;
+    yawl:hasMethod yawl:InterfaceX_EngineSideServer_doPost_3 ;
+    yawl:hasMethod yawl:InterfaceX_EngineSideServer_processPostQuery_4 ;
+    yawl:hasField yawl:InterfaceX_EngineSideServer__engine ;
+    yawl:hasField yawl:InterfaceX_EngineSideServer_logger ;
+    .
+
+
+# Method: InterfaceX_EngineSideServer.init
+yawl:InterfaceX_EngineSideServer_init_1 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceX_EngineSideServer.doGet
+yawl:InterfaceX_EngineSideServer_doGet_2 a yawl:Method ;
+    rdfs:label "doGet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doGet(HttpServletRequest request, HttpServletResponse response)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceX_EngineSideServer.doPost
+yawl:InterfaceX_EngineSideServer_doPost_3 a yawl:Method ;
+    rdfs:label "doPost" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doPost(HttpServletRequest request, HttpServletResponse response)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceX_EngineSideServer.processPostQuery
+yawl:InterfaceX_EngineSideServer_processPostQuery_4 a yawl:Method ;
+    rdfs:label "processPostQuery" ;
+    yawl:returnType "String" ;
+    yawl:signature "String processPostQuery(HttpServletRequest request)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:InterfaceX_EngineSideServer__engine a yawl:Field ;
+    rdfs:label "_engine" .
+
+yawl:InterfaceX_EngineSideServer_logger a yawl:Field ;
+    rdfs:label "logger" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_engine_interfce_interfaceB a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.engine.interfce.interfaceB" .
+
+

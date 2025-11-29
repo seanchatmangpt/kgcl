@@ -1,0 +1,183 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.rsInterface.WorkQueueGateway
+yawl:WorkQueueGateway a yawl:Class ;
+    rdfs:label "WorkQueueGateway" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_rsInterface ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/rsInterface/WorkQueueGateway.java"^^xsd:string ;
+    rdfs:comment """The WorkQueue Gateway provides a gateway (or a set of API) between the Resource Service and the participant workqueue jsps. @author Michael Adams v0.1, 13/08/2007 <p/> Last Date: 20/09/2007""" ;
+    yawl:extends yawl:YHttpServlet ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:WorkQueueGateway_getInstance_1 ;
+    yawl:hasMethod yawl:WorkQueueGateway_doPost_2 ;
+    yawl:hasMethod yawl:WorkQueueGateway_doGet_3 ;
+    yawl:hasMethod yawl:WorkQueueGateway_doAction_4 ;
+    yawl:hasMethod yawl:WorkQueueGateway_authorisedCustomFormAction_5 ;
+    yawl:hasMethod yawl:WorkQueueGateway_doResourceAction_6 ;
+    yawl:hasMethod yawl:WorkQueueGateway_doAdminQueueAction_7 ;
+    yawl:hasMethod yawl:WorkQueueGateway_doResourceMoveAction_8 ;
+    yawl:hasMethod yawl:WorkQueueGateway_doResourceAction_9 ;
+    yawl:hasMethod yawl:WorkQueueGateway_doResourceAction_10 ;
+    yawl:hasMethod yawl:WorkQueueGateway_getOrgDataSet_11 ;
+    yawl:hasMethod yawl:WorkQueueGateway_getQueueType_12 ;
+    yawl:hasMethod yawl:WorkQueueGateway_xmlToArray_13 ;
+    yawl:hasMethod yawl:WorkQueueGateway_fail_14 ;
+    yawl:hasMethod yawl:WorkQueueGateway_fail_15 ;
+    yawl:hasField yawl:WorkQueueGateway__rm ;
+    yawl:hasField yawl:WorkQueueGateway__marshaller ;
+    yawl:hasField yawl:WorkQueueGateway__me ;
+    yawl:hasField yawl:WorkQueueGateway_success ;
+    yawl:hasField yawl:WorkQueueGateway_gadgetPostback ;
+    yawl:hasField yawl:WorkQueueGateway_gadgetParamMap ;
+    .
+
+
+# Method: WorkQueueGateway.getInstance
+yawl:WorkQueueGateway_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "WorkQueueGateway" ;
+    yawl:signature "WorkQueueGateway getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: WorkQueueGateway.doPost
+yawl:WorkQueueGateway_doPost_2 a yawl:Method ;
+    rdfs:label "doPost" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doPost(HttpServletRequest req, HttpServletResponse res)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGateway.doGet
+yawl:WorkQueueGateway_doGet_3 a yawl:Method ;
+    rdfs:label "doGet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doGet(HttpServletRequest req, HttpServletResponse res)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: WorkQueueGateway.doAction
+yawl:WorkQueueGateway_doAction_4 a yawl:Method ;
+    rdfs:label "doAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String doAction(String action, HttpServletRequest req)" ;
+    rdfs:comment """Private Methods""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkQueueGateway.authorisedCustomFormAction
+yawl:WorkQueueGateway_authorisedCustomFormAction_5 a yawl:Method ;
+    rdfs:label "authorisedCustomFormAction" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean authorisedCustomFormAction(String action, String handle)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkQueueGateway.doResourceAction
+yawl:WorkQueueGateway_doResourceAction_6 a yawl:Method ;
+    rdfs:label "doResourceAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String doResourceAction(HttpServletRequest req, String action)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkQueueGateway.doAdminQueueAction
+yawl:WorkQueueGateway_doAdminQueueAction_7 a yawl:Method ;
+    rdfs:label "doAdminQueueAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String doAdminQueueAction(HttpServletRequest req, String action)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkQueueGateway.doResourceMoveAction
+yawl:WorkQueueGateway_doResourceMoveAction_8 a yawl:Method ;
+    rdfs:label "doResourceMoveAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String doResourceMoveAction(HttpServletRequest req, String action)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkQueueGateway.doResourceAction
+yawl:WorkQueueGateway_doResourceAction_9 a yawl:Method ;
+    rdfs:label "doResourceAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String doResourceAction(Participant p, WorkItemRecord wir, HttpServletRequest req, String action)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkQueueGateway.doResourceAction
+yawl:WorkQueueGateway_doResourceAction_10 a yawl:Method ;
+    rdfs:label "doResourceAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String doResourceAction(Participant pOrig, Participant pDest, WorkItemRecord wir, String action)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkQueueGateway.getOrgDataSet
+yawl:WorkQueueGateway_getOrgDataSet_11 a yawl:Method ;
+    rdfs:label "getOrgDataSet" ;
+    yawl:returnType "ResourceDataSet" ;
+    yawl:signature "ResourceDataSet getOrgDataSet()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkQueueGateway.getQueueType
+yawl:WorkQueueGateway_getQueueType_12 a yawl:Method ;
+    rdfs:label "getQueueType" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getQueueType(String queue)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkQueueGateway.xmlToArray
+yawl:WorkQueueGateway_xmlToArray_13 a yawl:Method ;
+    rdfs:label "xmlToArray" ;
+    yawl:returnType "String" ;
+    yawl:signature "String xmlToArray(String xml)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkQueueGateway.fail
+yawl:WorkQueueGateway_fail_14 a yawl:Method ;
+    rdfs:label "fail" ;
+    yawl:returnType "String" ;
+    yawl:signature "String fail(String reqStatus, String action, WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: WorkQueueGateway.fail
+yawl:WorkQueueGateway_fail_15 a yawl:Method ;
+    rdfs:label "fail" ;
+    yawl:returnType "String" ;
+    yawl:signature "String fail(String reqStatus, String action, String itemid, String hasStatus)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:WorkQueueGateway__rm a yawl:Field ;
+    rdfs:label "_rm" .
+
+yawl:WorkQueueGateway__marshaller a yawl:Field ;
+    rdfs:label "_marshaller" .
+
+yawl:WorkQueueGateway__me a yawl:Field ;
+    rdfs:label "_me" .
+
+yawl:WorkQueueGateway_success a yawl:Field ;
+    rdfs:label "success" .
+
+yawl:WorkQueueGateway_gadgetPostback a yawl:Field ;
+    rdfs:label "gadgetPostback" .
+
+yawl:WorkQueueGateway_gadgetParamMap a yawl:Field ;
+    rdfs:label "gadgetParamMap" .
+
+
+

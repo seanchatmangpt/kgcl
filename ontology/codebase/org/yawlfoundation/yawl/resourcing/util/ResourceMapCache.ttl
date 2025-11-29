@@ -1,0 +1,76 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.util.ResourceMapCache
+yawl:ResourceMapCache a yawl:Class ;
+    rdfs:label "ResourceMapCache" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/util/ResourceMapCache.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams  Date: 01/09/2008""" ;
+    yawl:extends yawl:Hashtable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ResourceMapCache_add_1 ;
+    yawl:hasMethod yawl:ResourceMapCache_get_2 ;
+    yawl:hasMethod yawl:ResourceMapCache_remove_3 ;
+    yawl:hasMethod yawl:ResourceMapCache_contains_4 ;
+    yawl:hasMethod yawl:ResourceMapCache_getAll_5 ;
+    yawl:hasMethod yawl:ResourceMapCache_getAll_6 ;
+    .
+
+
+# Method: ResourceMapCache.add
+yawl:ResourceMapCache_add_1 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "VersionToMapTable" ;
+    yawl:signature "VersionToMapTable add(YSpecificationID specID, String taskID, ResourceMap map)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMapCache.get
+yawl:ResourceMapCache_get_2 a yawl:Method ;
+    rdfs:label "get" ;
+    yawl:returnType "ResourceMap" ;
+    yawl:signature "ResourceMap get(YSpecificationID specID, String taskID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMapCache.remove
+yawl:ResourceMapCache_remove_3 a yawl:Method ;
+    rdfs:label "remove" ;
+    yawl:returnType "VersionToMapTable" ;
+    yawl:signature "VersionToMapTable remove(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMapCache.contains
+yawl:ResourceMapCache_contains_4 a yawl:Method ;
+    rdfs:label "contains" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean contains(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMapCache.getAll
+yawl:ResourceMapCache_getAll_5 a yawl:Method ;
+    rdfs:label "getAll" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getAll()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceMapCache.getAll
+yawl:ResourceMapCache_getAll_6 a yawl:Method ;
+    rdfs:label "getAll" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getAll(String key, String taskID)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

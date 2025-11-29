@@ -1,0 +1,162 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.persistence.StoredProcletBlock
+yawl:StoredProcletBlock a yawl:Class ;
+    rdfs:label "StoredProcletBlock" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_persistence ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/persistence/StoredProcletBlock.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 2/02/12""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:StoredProcletBlock_newProcletBlock_1 ;
+    yawl:hasMethod yawl:StoredProcletBlock_getClassID_2 ;
+    yawl:hasMethod yawl:StoredProcletBlock_setClassID_3 ;
+    yawl:hasMethod yawl:StoredProcletBlock_getBlockID_4 ;
+    yawl:hasMethod yawl:StoredProcletBlock_setBlockID_5 ;
+    yawl:hasMethod yawl:StoredProcletBlock_getBlockType_6 ;
+    yawl:hasMethod yawl:StoredProcletBlock_setBlockType_7 ;
+    yawl:hasMethod yawl:StoredProcletBlock_isCreate_8 ;
+    yawl:hasMethod yawl:StoredProcletBlock_setCreate_9 ;
+    yawl:hasMethod yawl:StoredProcletBlock_getTimeOut_10 ;
+    yawl:hasMethod yawl:StoredProcletBlock_setTimeOut_11 ;
+    yawl:hasMethod yawl:StoredProcletBlock_getPkey_12 ;
+    yawl:hasMethod yawl:StoredProcletBlock_setPkey_13 ;
+    yawl:hasField yawl:StoredProcletBlock_pkey ;
+    yawl:hasField yawl:StoredProcletBlock_classID ;
+    yawl:hasField yawl:StoredProcletBlock_blockID ;
+    yawl:hasField yawl:StoredProcletBlock_blockType ;
+    yawl:hasField yawl:StoredProcletBlock_create ;
+    yawl:hasField yawl:StoredProcletBlock_timeOut ;
+    .
+
+
+# Method: StoredProcletBlock.newProcletBlock
+yawl:StoredProcletBlock_newProcletBlock_1 a yawl:Method ;
+    rdfs:label "newProcletBlock" ;
+    yawl:returnType "ProcletBlock" ;
+    yawl:signature "ProcletBlock newProcletBlock()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredProcletBlock.getClassID
+yawl:StoredProcletBlock_getClassID_2 a yawl:Method ;
+    rdfs:label "getClassID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getClassID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredProcletBlock.setClassID
+yawl:StoredProcletBlock_setClassID_3 a yawl:Method ;
+    rdfs:label "setClassID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setClassID(String classID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredProcletBlock.getBlockID
+yawl:StoredProcletBlock_getBlockID_4 a yawl:Method ;
+    rdfs:label "getBlockID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBlockID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredProcletBlock.setBlockID
+yawl:StoredProcletBlock_setBlockID_5 a yawl:Method ;
+    rdfs:label "setBlockID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBlockID(String blockID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredProcletBlock.getBlockType
+yawl:StoredProcletBlock_getBlockType_6 a yawl:Method ;
+    rdfs:label "getBlockType" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBlockType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredProcletBlock.setBlockType
+yawl:StoredProcletBlock_setBlockType_7 a yawl:Method ;
+    rdfs:label "setBlockType" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBlockType(String blockType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredProcletBlock.isCreate
+yawl:StoredProcletBlock_isCreate_8 a yawl:Method ;
+    rdfs:label "isCreate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isCreate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredProcletBlock.setCreate
+yawl:StoredProcletBlock_setCreate_9 a yawl:Method ;
+    rdfs:label "setCreate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCreate(boolean create)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredProcletBlock.getTimeOut
+yawl:StoredProcletBlock_getTimeOut_10 a yawl:Method ;
+    rdfs:label "getTimeOut" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getTimeOut()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredProcletBlock.setTimeOut
+yawl:StoredProcletBlock_setTimeOut_11 a yawl:Method ;
+    rdfs:label "setTimeOut" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTimeOut(int timeOut)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredProcletBlock.getPkey
+yawl:StoredProcletBlock_getPkey_12 a yawl:Method ;
+    rdfs:label "getPkey" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getPkey()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredProcletBlock.setPkey
+yawl:StoredProcletBlock_setPkey_13 a yawl:Method ;
+    rdfs:label "setPkey" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPkey(long pkey)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:StoredProcletBlock_pkey a yawl:Field ;
+    rdfs:label "pkey" .
+
+yawl:StoredProcletBlock_classID a yawl:Field ;
+    rdfs:label "classID" .
+
+yawl:StoredProcletBlock_blockID a yawl:Field ;
+    rdfs:label "blockID" .
+
+yawl:StoredProcletBlock_blockType a yawl:Field ;
+    rdfs:label "blockType" .
+
+yawl:StoredProcletBlock_create a yawl:Field ;
+    rdfs:label "create" .
+
+yawl:StoredProcletBlock_timeOut a yawl:Field ;
+    rdfs:label "timeOut" .
+
+
+

@@ -1,0 +1,114 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.logging.table.YLogDataType
+yawl:YLogDataType a yawl:Class ;
+    rdfs:label "YLogDataType" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_logging_table ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/logging/table/YLogDataType.java"^^xsd:string ;
+    rdfs:comment """One row of the logDataType table, representing a unique data type definition Author: Michael Adams Creation Date: 6/04/2009""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YLogDataType_getDataTypeID_1 ;
+    yawl:hasMethod yawl:YLogDataType_setDataTypeID_2 ;
+    yawl:hasMethod yawl:YLogDataType_getDefinition_3 ;
+    yawl:hasMethod yawl:YLogDataType_setDefinition_4 ;
+    yawl:hasMethod yawl:YLogDataType_getName_5 ;
+    yawl:hasMethod yawl:YLogDataType_setName_6 ;
+    yawl:hasMethod yawl:YLogDataType_equals_7 ;
+    yawl:hasMethod yawl:YLogDataType_hashCode_8 ;
+    yawl:hasMethod yawl:YLogDataType_toXML_9 ;
+    yawl:hasField yawl:YLogDataType_dataTypeID ;
+    yawl:hasField yawl:YLogDataType_definition ;
+    yawl:hasField yawl:YLogDataType_name ;
+    .
+
+
+# Method: YLogDataType.getDataTypeID
+yawl:YLogDataType_getDataTypeID_1 a yawl:Method ;
+    rdfs:label "getDataTypeID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getDataTypeID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogDataType.setDataTypeID
+yawl:YLogDataType_setDataTypeID_2 a yawl:Method ;
+    rdfs:label "setDataTypeID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataTypeID(long dataTypeID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogDataType.getDefinition
+yawl:YLogDataType_getDefinition_3 a yawl:Method ;
+    rdfs:label "getDefinition" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDefinition()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogDataType.setDefinition
+yawl:YLogDataType_setDefinition_4 a yawl:Method ;
+    rdfs:label "setDefinition" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDefinition(String definition)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogDataType.getName
+yawl:YLogDataType_getName_5 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogDataType.setName
+yawl:YLogDataType_setName_6 a yawl:Method ;
+    rdfs:label "setName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogDataType.equals
+yawl:YLogDataType_equals_7 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogDataType.hashCode
+yawl:YLogDataType_hashCode_8 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogDataType.toXML
+yawl:YLogDataType_toXML_9 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YLogDataType_dataTypeID a yawl:Field ;
+    rdfs:label "dataTypeID" .
+
+yawl:YLogDataType_definition a yawl:Field ;
+    rdfs:label "definition" .
+
+yawl:YLogDataType_name a yawl:Field ;
+    rdfs:label "name" .
+
+
+

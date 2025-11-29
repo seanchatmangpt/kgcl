@@ -1,0 +1,147 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.engine.time.workdays
+yawl:org_yawlfoundation_yawl_engine_time_workdays a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.engine.time.workdays" .
+# Class: org.yawlfoundation.yawl.engine.time.workdays.HolidayLoader
+yawl:HolidayLoader a yawl:Class ;
+    rdfs:label "HolidayLoader" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_time_workdays ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/time/workdays/HolidayLoader.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 1/6/17""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:HolidayLoader_startupCheck_1 ;
+    yawl:hasMethod yawl:HolidayLoader_isHoliday_2 ;
+    yawl:hasMethod yawl:HolidayLoader_getHolidays_3 ;
+    yawl:hasMethod yawl:HolidayLoader_load_4 ;
+    yawl:hasMethod yawl:HolidayLoader_getResponse_5 ;
+    yawl:hasMethod yawl:HolidayLoader_parseResponse_6 ;
+    yawl:hasMethod yawl:HolidayLoader_persist_7 ;
+    yawl:hasMethod yawl:HolidayLoader_restore_8 ;
+    yawl:hasMethod yawl:HolidayLoader_updateLocation_9 ;
+    yawl:hasMethod yawl:HolidayLoader_getLocation_10 ;
+    yawl:hasMethod yawl:HolidayLoader_getPersister_11 ;
+    yawl:hasField yawl:HolidayLoader_ENDPOINT ;
+    yawl:hasField yawl:HolidayLoader_NAMESPACE ;
+    yawl:hasField yawl:HolidayLoader_OPERATION ;
+    yawl:hasField yawl:HolidayLoader_KEYS ;
+    yawl:hasField yawl:HolidayLoader__log ;
+    yawl:hasField yawl:HolidayLoader__yearHolidayMap ;
+    .
+
+
+# Method: HolidayLoader.startupCheck
+yawl:HolidayLoader_startupCheck_1 a yawl:Method ;
+    rdfs:label "startupCheck" ;
+    yawl:returnType "void" ;
+    yawl:signature "void startupCheck(String codes)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HolidayLoader.isHoliday
+yawl:HolidayLoader_isHoliday_2 a yawl:Method ;
+    rdfs:label "isHoliday" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isHoliday(Calendar date)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HolidayLoader.getHolidays
+yawl:HolidayLoader_getHolidays_3 a yawl:Method ;
+    rdfs:label "getHolidays" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getHolidays(int year)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HolidayLoader.load
+yawl:HolidayLoader_load_4 a yawl:Method ;
+    rdfs:label "load" ;
+    yawl:returnType "List" ;
+    yawl:signature "List load(String year)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HolidayLoader.getResponse
+yawl:HolidayLoader_getResponse_5 a yawl:Method ;
+    rdfs:label "getResponse" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResponse(List argValues)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: HolidayLoader.parseResponse
+yawl:HolidayLoader_parseResponse_6 a yawl:Method ;
+    rdfs:label "parseResponse" ;
+    yawl:returnType "List" ;
+    yawl:signature "List parseResponse(String response)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: HolidayLoader.persist
+yawl:HolidayLoader_persist_7 a yawl:Method ;
+    rdfs:label "persist" ;
+    yawl:returnType "void" ;
+    yawl:signature "void persist(HibernateEngine persister, List holidays)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: HolidayLoader.restore
+yawl:HolidayLoader_restore_8 a yawl:Method ;
+    rdfs:label "restore" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map restore()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: HolidayLoader.updateLocation
+yawl:HolidayLoader_updateLocation_9 a yawl:Method ;
+    rdfs:label "updateLocation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateLocation(String country, String region)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: HolidayLoader.getLocation
+yawl:HolidayLoader_getLocation_10 a yawl:Method ;
+    rdfs:label "getLocation" ;
+    yawl:returnType "HolidayRegion" ;
+    yawl:signature "HolidayRegion getLocation(HibernateEngine persister)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: HolidayLoader.getPersister
+yawl:HolidayLoader_getPersister_11 a yawl:Method ;
+    rdfs:label "getPersister" ;
+    yawl:returnType "HibernateEngine" ;
+    yawl:signature "HibernateEngine getPersister()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:HolidayLoader_ENDPOINT a yawl:Field ;
+    rdfs:label "ENDPOINT" .
+
+yawl:HolidayLoader_NAMESPACE a yawl:Field ;
+    rdfs:label "NAMESPACE" .
+
+yawl:HolidayLoader_OPERATION a yawl:Field ;
+    rdfs:label "OPERATION" .
+
+yawl:HolidayLoader_KEYS a yawl:Field ;
+    rdfs:label "KEYS" .
+
+yawl:HolidayLoader__log a yawl:Field ;
+    rdfs:label "_log" .
+
+yawl:HolidayLoader__yearHolidayMap a yawl:Field ;
+    rdfs:label "_yearHolidayMap" .
+
+
+

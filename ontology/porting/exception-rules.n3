@@ -1,0 +1,77 @@
+@prefix code: <http://kgcl.dev/ontology/codebase#> .
+@prefix port: <http://kgcl.dev/ontology/porting#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+# Exception Mapping Rules
+# Rules for mapping Java exceptions to Python exceptions
+
+# ============================================================================
+# RULE 1: Exception Type Mapping
+# ============================================================================
+# Map Java exceptions to expected Python exceptions
+
+{
+    ?javaMethod code:hasException ?javaException .
+    ?javaException code:exceptionType ?javaExceptionType .
+    ?javaException code:isThrown true .
+    
+    port:mapExceptionType(?javaExceptionType, ?expectedPythonType) .
+}
+=>
+{
+    ?javaException port:expectedPythonType ?expectedPythonType .
+} .
+
+# ============================================================================
+# RULE 2: Missing Exception Handling
+# ============================================================================
+# Detect Java methods that throw exceptions but Python doesn't handle
+
+{
+    ?javaMethod port:hasPort ?pythonMethod .
+    ?javaMethod code:hasException ?javaException .
+    ?javaException code:isThrown true .
+    ?javaException code:exceptionType ?javaExceptionType .
+    
+    port:mapExceptionType(?javaExceptionType, ?expectedPythonType) .
+    
+    NOT EXISTS {
+        ?pythonMethod code:hasException ?pythonException .
+        ?pythonException code:exceptionType ?expectedPythonType .
+        ?pythonException code:isCaught true .
+    }
+}
+=>
+{
+    ?javaMethod port:missingExceptionHandling true ;
+        port:missingExceptionType ?expectedPythonType ;
+        port:severity "high" .
+} .
+
+# ============================================================================
+# RULE 3: Exception Type Mismatch
+# ============================================================================
+# Detect when Python uses different exception type than expected
+
+{
+    ?javaMethod port:hasPort ?pythonMethod .
+    ?javaMethod code:hasException ?javaException .
+    ?javaException code:exceptionType ?javaExceptionType .
+    ?javaException code:isThrown true .
+    
+    port:mapExceptionType(?javaExceptionType, ?expectedPythonType) .
+    
+    ?pythonMethod code:hasException ?pythonException .
+    ?pythonException code:exceptionType ?actualPythonType .
+    ?pythonException code:isThrown true .
+    
+    FILTER(?actualPythonType != ?expectedPythonType)
+}
+=>
+{
+    ?javaMethod port:exceptionTypeMismatch true ;
+        port:expectedException ?expectedPythonType ;
+        port:actualException ?actualPythonType ;
+        port:severity "medium" .
+} .
+

@@ -1,0 +1,111 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.interfce.interfaceB.InterfaceB_EngineBasedServer
+yawl:InterfaceB_EngineBasedServer a yawl:Class ;
+    rdfs:label "InterfaceB_EngineBasedServer" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_interfce_interfaceB ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/interfce/interfaceB/InterfaceB_EngineBasedServer.java"^^xsd:string ;
+    rdfs:comment """Receives & responds to POST messages from custom services @author Lachlan Aldred Date: 22/12/2003 Time: 12:03:41 @author Michael Adams (refactored for v2.0, 06/2008; 12/2008)""" ;
+    yawl:extends yawl:YHttpServlet ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedServer_init_1 ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedServer_registerObserverGateway_2 ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedServer_getEngineImplClass_3 ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedServer_destroy_4 ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedServer_doGet_5 ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedServer_doPost_6 ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedServer_processPostQuery_7 ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedServer_getCompletionObserver_8 ;
+    yawl:hasMethod yawl:InterfaceB_EngineBasedServer_debug_9 ;
+    yawl:hasField yawl:InterfaceB_EngineBasedServer__engine ;
+    yawl:hasField yawl:InterfaceB_EngineBasedServer__gatherPerfStats ;
+    .
+
+
+# Method: InterfaceB_EngineBasedServer.init
+yawl:InterfaceB_EngineBasedServer_init_1 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EngineBasedServer.registerObserverGateway
+yawl:InterfaceB_EngineBasedServer_registerObserverGateway_2 a yawl:Method ;
+    rdfs:label "registerObserverGateway" ;
+    yawl:returnType "void" ;
+    yawl:signature "void registerObserverGateway(String gatewayClassName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: InterfaceB_EngineBasedServer.getEngineImplClass
+yawl:InterfaceB_EngineBasedServer_getEngineImplClass_3 a yawl:Method ;
+    rdfs:label "getEngineImplClass" ;
+    yawl:returnType "Class" ;
+    yawl:signature "Class getEngineImplClass()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: InterfaceB_EngineBasedServer.destroy
+yawl:InterfaceB_EngineBasedServer_destroy_4 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EngineBasedServer.doGet
+yawl:InterfaceB_EngineBasedServer_doGet_5 a yawl:Method ;
+    rdfs:label "doGet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doGet(HttpServletRequest request, HttpServletResponse response)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EngineBasedServer.doPost
+yawl:InterfaceB_EngineBasedServer_doPost_6 a yawl:Method ;
+    rdfs:label "doPost" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doPost(HttpServletRequest request, HttpServletResponse response)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceB_EngineBasedServer.processPostQuery
+yawl:InterfaceB_EngineBasedServer_processPostQuery_7 a yawl:Method ;
+    rdfs:label "processPostQuery" ;
+    yawl:returnType "String" ;
+    yawl:signature "String processPostQuery(HttpServletRequest request)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: InterfaceB_EngineBasedServer.getCompletionObserver
+yawl:InterfaceB_EngineBasedServer_getCompletionObserver_8 a yawl:Method ;
+    rdfs:label "getCompletionObserver" ;
+    yawl:returnType "URI" ;
+    yawl:signature "URI getCompletionObserver(HttpServletRequest request)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: InterfaceB_EngineBasedServer.debug
+yawl:InterfaceB_EngineBasedServer_debug_9 a yawl:Method ;
+    rdfs:label "debug" ;
+    yawl:returnType "void" ;
+    yawl:signature "void debug(HttpServletRequest request, String service)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:InterfaceB_EngineBasedServer__engine a yawl:Field ;
+    rdfs:label "_engine" .
+
+yawl:InterfaceB_EngineBasedServer__gatherPerfStats a yawl:Field ;
+    rdfs:label "_gatherPerfStats" .
+
+
+

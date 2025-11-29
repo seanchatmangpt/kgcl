@@ -1,0 +1,58 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.scheduling.PlanningGraphCreator
+yawl:PlanningGraphCreator a yawl:Class ;
+    rdfs:label "PlanningGraphCreator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_scheduling ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/scheduling/PlanningGraphCreator.java"^^xsd:string ;
+    rdfs:comment """get list of activities from a process model actually loaded in engine @author tbe""" ;
+    yawl:implements yawl:Constants ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:PlanningGraphCreator_getInstance_1 ;
+    yawl:hasMethod yawl:PlanningGraphCreator_getActivityElements_2 ;
+    yawl:hasField yawl:PlanningGraphCreator_INSTANCE ;
+    yawl:hasField yawl:PlanningGraphCreator_lenActName ;
+    yawl:hasField yawl:PlanningGraphCreator_logger ;
+    .
+
+
+# Method: PlanningGraphCreator.getInstance
+yawl:PlanningGraphCreator_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "PlanningGraphCreator" ;
+    yawl:signature "PlanningGraphCreator getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PlanningGraphCreator.getActivityElements
+yawl:PlanningGraphCreator_getActivityElements_2 a yawl:Method ;
+    rdfs:label "getActivityElements" ;
+    yawl:returnType "Collection" ;
+    yawl:signature "Collection getActivityElements(String caseId)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:PlanningGraphCreator_INSTANCE a yawl:Field ;
+    rdfs:label "INSTANCE" .
+
+yawl:PlanningGraphCreator_lenActName a yawl:Field ;
+    rdfs:label "lenActName" .
+
+yawl:PlanningGraphCreator_logger a yawl:Field ;
+    rdfs:label "logger" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_wsif a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.wsif" .
+
+

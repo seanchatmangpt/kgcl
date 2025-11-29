@@ -1,0 +1,38 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.util.Pinger
+yawl:Pinger a yawl:Class ;
+    rdfs:label "Pinger" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/util/EngineMonitor.java"^^xsd:string ;
+    yawl:extends yawl:SwingWorker ;
+    yawl:hasMethod yawl:Pinger_doInBackground_1 ;
+    yawl:hasMethod yawl:Pinger_announce_2 ;
+    .
+
+
+# Method: Pinger.doInBackground
+yawl:Pinger_doInBackground_1 a yawl:Method ;
+    rdfs:label "doInBackground" ;
+    yawl:returnType "Void" ;
+    yawl:signature "Void doInBackground()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: Pinger.announce
+yawl:Pinger_announce_2 a yawl:Method ;
+    rdfs:label "announce" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announce(EngineStatus status)" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+
+

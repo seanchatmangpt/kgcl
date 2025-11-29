@@ -1,0 +1,109 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.balancer.jmx.JMXStatistics
+yawl:JMXStatistics a yawl:Class ;
+    rdfs:label "JMXStatistics" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer_jmx ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/jmx/JMXStatistics.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 13/6/17""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:JMXStatistics_getTimestamp_1 ;
+    yawl:hasMethod yawl:JMXStatistics_getTimestampFormatted_2 ;
+    yawl:hasMethod yawl:JMXStatistics_getValue_3 ;
+    yawl:hasMethod yawl:JMXStatistics_getIntValue_4 ;
+    yawl:hasMethod yawl:JMXStatistics_getDoubleValue_5 ;
+    yawl:hasMethod yawl:JMXStatistics_jsonToMap_6 ;
+    yawl:hasMethod yawl:JMXStatistics_toString_7 ;
+    yawl:hasMethod yawl:JMXStatistics_toXNode_8 ;
+    yawl:hasField yawl:JMXStatistics__title ;
+    yawl:hasField yawl:JMXStatistics__timestamp ;
+    yawl:hasField yawl:JMXStatistics__statMap ;
+    yawl:hasField yawl:JMXStatistics_DATE_FORMAT ;
+    .
+
+
+# Method: JMXStatistics.getTimestamp
+yawl:JMXStatistics_getTimestamp_1 a yawl:Method ;
+    rdfs:label "getTimestamp" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getTimestamp()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: JMXStatistics.getTimestampFormatted
+yawl:JMXStatistics_getTimestampFormatted_2 a yawl:Method ;
+    rdfs:label "getTimestampFormatted" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTimestampFormatted()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: JMXStatistics.getValue
+yawl:JMXStatistics_getValue_3 a yawl:Method ;
+    rdfs:label "getValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getValue(String key)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: JMXStatistics.getIntValue
+yawl:JMXStatistics_getIntValue_4 a yawl:Method ;
+    rdfs:label "getIntValue" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getIntValue(String key)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: JMXStatistics.getDoubleValue
+yawl:JMXStatistics_getDoubleValue_5 a yawl:Method ;
+    rdfs:label "getDoubleValue" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getDoubleValue(String key)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: JMXStatistics.jsonToMap
+yawl:JMXStatistics_jsonToMap_6 a yawl:Method ;
+    rdfs:label "jsonToMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map jsonToMap(JSONObject obj)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: JMXStatistics.toString
+yawl:JMXStatistics_toString_7 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: JMXStatistics.toXNode
+yawl:JMXStatistics_toXNode_8 a yawl:Method ;
+    rdfs:label "toXNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode toXNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:JMXStatistics__title a yawl:Field ;
+    rdfs:label "_title" .
+
+yawl:JMXStatistics__timestamp a yawl:Field ;
+    rdfs:label "_timestamp" .
+
+yawl:JMXStatistics__statMap a yawl:Field ;
+    rdfs:label "_statMap" .
+
+yawl:JMXStatistics_DATE_FORMAT a yawl:Field ;
+    rdfs:label "DATE_FORMAT" .
+
+
+

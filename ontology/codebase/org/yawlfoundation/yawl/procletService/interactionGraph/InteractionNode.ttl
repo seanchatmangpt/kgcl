@@ -1,0 +1,95 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.interactionGraph.InteractionNode
+yawl:InteractionNode a yawl:Class ;
+    rdfs:label "InteractionNode" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_interactionGraph ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/interactionGraph/InteractionNode.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:InteractionNode_getClassID_1 ;
+    yawl:hasMethod yawl:InteractionNode_getProcletID_2 ;
+    yawl:hasMethod yawl:InteractionNode_getBlockID_3 ;
+    yawl:hasMethod yawl:InteractionNode_setClassID_4 ;
+    yawl:hasMethod yawl:InteractionNode_setProcletID_5 ;
+    yawl:hasMethod yawl:InteractionNode_setBlockID_6 ;
+    yawl:hasMethod yawl:InteractionNode_toString_7 ;
+    yawl:hasField yawl:InteractionNode_classID ;
+    yawl:hasField yawl:InteractionNode_procletID ;
+    yawl:hasField yawl:InteractionNode_blockID ;
+    .
+
+
+# Method: InteractionNode.getClassID
+yawl:InteractionNode_getClassID_1 a yawl:Method ;
+    rdfs:label "getClassID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getClassID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionNode.getProcletID
+yawl:InteractionNode_getProcletID_2 a yawl:Method ;
+    rdfs:label "getProcletID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getProcletID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionNode.getBlockID
+yawl:InteractionNode_getBlockID_3 a yawl:Method ;
+    rdfs:label "getBlockID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBlockID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionNode.setClassID
+yawl:InteractionNode_setClassID_4 a yawl:Method ;
+    rdfs:label "setClassID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setClassID(String classID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionNode.setProcletID
+yawl:InteractionNode_setProcletID_5 a yawl:Method ;
+    rdfs:label "setProcletID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setProcletID(String procletID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionNode.setBlockID
+yawl:InteractionNode_setBlockID_6 a yawl:Method ;
+    rdfs:label "setBlockID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBlockID(String blockID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InteractionNode.toString
+yawl:InteractionNode_toString_7 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:InteractionNode_classID a yawl:Field ;
+    rdfs:label "classID" .
+
+yawl:InteractionNode_procletID a yawl:Field ;
+    rdfs:label "procletID" .
+
+yawl:InteractionNode_blockID a yawl:Field ;
+    rdfs:label "blockID" .
+
+
+

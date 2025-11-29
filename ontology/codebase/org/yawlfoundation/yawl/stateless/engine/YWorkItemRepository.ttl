@@ -1,0 +1,220 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.stateless.engine.YWorkItemRepository
+yawl:YWorkItemRepository a yawl:Class ;
+    rdfs:label "YWorkItemRepository" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_engine ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/engine/YWorkItemRepository.java"^^xsd:string ;
+    rdfs:comment """A cache of active workitems. @author Lachlan Aldred Date: 30/05/2003 Time: 14:04:39 @author Michael Adams (refactored for v2.1, 2.2)""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YWorkItemRepository_add_1 ;
+    yawl:hasMethod yawl:YWorkItemRepository_addAll_2 ;
+    yawl:hasMethod yawl:YWorkItemRepository_get_3 ;
+    yawl:hasMethod yawl:YWorkItemRepository_get_4 ;
+    yawl:hasMethod yawl:YWorkItemRepository_remove_5 ;
+    yawl:hasMethod yawl:YWorkItemRepository_clear_6 ;
+    yawl:hasMethod yawl:YWorkItemRepository_removeWorkItemFamily_7 ;
+    yawl:hasMethod yawl:YWorkItemRepository_cancelNet_8 ;
+    yawl:hasMethod yawl:YWorkItemRepository_removeItems_9 ;
+    yawl:hasMethod yawl:YWorkItemRepository_getParentWorkItems_10 ;
+    yawl:hasMethod yawl:YWorkItemRepository_getEnabledWorkItems_11 ;
+    yawl:hasMethod yawl:YWorkItemRepository_getFiredWorkItems_12 ;
+    yawl:hasMethod yawl:YWorkItemRepository_getExecutingWorkItems_13 ;
+    yawl:hasMethod yawl:YWorkItemRepository_getCompletedWorkItems_14 ;
+    yawl:hasMethod yawl:YWorkItemRepository_getWorkItems_15 ;
+    yawl:hasMethod yawl:YWorkItemRepository_getWorkItems_16 ;
+    yawl:hasMethod yawl:YWorkItemRepository_getChildrenOf_17 ;
+    yawl:hasMethod yawl:YWorkItemRepository_removeWorkItemsForCase_18 ;
+    yawl:hasMethod yawl:YWorkItemRepository_getWorkItemsForCase_19 ;
+    yawl:hasMethod yawl:YWorkItemRepository_getWorkItemsWithIdentifier_20 ;
+    yawl:hasMethod yawl:YWorkItemRepository_dump_21 ;
+    yawl:hasField yawl:YWorkItemRepository__itemMap ;
+    yawl:hasField yawl:YWorkItemRepository__logger ;
+    .
+
+
+# Method: YWorkItemRepository.add
+yawl:YWorkItemRepository_add_1 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem add(YWorkItem workItem)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YWorkItemRepository.addAll
+yawl:YWorkItemRepository_addAll_2 a yawl:Method ;
+    rdfs:label "addAll" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addAll(List itemList)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemRepository.get
+yawl:YWorkItemRepository_get_3 a yawl:Method ;
+    rdfs:label "get" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem get(String caseIDStr, String taskID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemRepository.get
+yawl:YWorkItemRepository_get_4 a yawl:Method ;
+    rdfs:label "get" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem get(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemRepository.remove
+yawl:YWorkItemRepository_remove_5 a yawl:Method ;
+    rdfs:label "remove" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem remove(YWorkItem workItem)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemRepository.clear
+yawl:YWorkItemRepository_clear_6 a yawl:Method ;
+    rdfs:label "clear" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clear()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemRepository.removeWorkItemFamily
+yawl:YWorkItemRepository_removeWorkItemFamily_7 a yawl:Method ;
+    rdfs:label "removeWorkItemFamily" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set removeWorkItemFamily(YWorkItem workItem)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemRepository.cancelNet
+yawl:YWorkItemRepository_cancelNet_8 a yawl:Method ;
+    rdfs:label "cancelNet" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set cancelNet(YIdentifier caseIDForNet)" ;
+    rdfs:comment """Removes all workitems that belong to a net. @param caseIDForNet""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemRepository.removeItems
+yawl:YWorkItemRepository_removeItems_9 a yawl:Method ;
+    rdfs:label "removeItems" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set removeItems(Set itemsToRemove)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorkItemRepository.getParentWorkItems
+yawl:YWorkItemRepository_getParentWorkItems_10 a yawl:Method ;
+    rdfs:label "getParentWorkItems" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getParentWorkItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemRepository.getEnabledWorkItems
+yawl:YWorkItemRepository_getEnabledWorkItems_11 a yawl:Method ;
+    rdfs:label "getEnabledWorkItems" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getEnabledWorkItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemRepository.getFiredWorkItems
+yawl:YWorkItemRepository_getFiredWorkItems_12 a yawl:Method ;
+    rdfs:label "getFiredWorkItems" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getFiredWorkItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemRepository.getExecutingWorkItems
+yawl:YWorkItemRepository_getExecutingWorkItems_13 a yawl:Method ;
+    rdfs:label "getExecutingWorkItems" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getExecutingWorkItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemRepository.getCompletedWorkItems
+yawl:YWorkItemRepository_getCompletedWorkItems_14 a yawl:Method ;
+    rdfs:label "getCompletedWorkItems" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getCompletedWorkItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemRepository.getWorkItems
+yawl:YWorkItemRepository_getWorkItems_15 a yawl:Method ;
+    rdfs:label "getWorkItems" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getWorkItems(YWorkItemStatus status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemRepository.getWorkItems
+yawl:YWorkItemRepository_getWorkItems_16 a yawl:Method ;
+    rdfs:label "getWorkItems" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getWorkItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemRepository.getChildrenOf
+yawl:YWorkItemRepository_getChildrenOf_17 a yawl:Method ;
+    rdfs:label "getChildrenOf" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getChildrenOf(String workItemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemRepository.removeWorkItemsForCase
+yawl:YWorkItemRepository_removeWorkItemsForCase_18 a yawl:Method ;
+    rdfs:label "removeWorkItemsForCase" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set removeWorkItemsForCase(YIdentifier caseID)" ;
+    rdfs:comment """Removes all work items for a given case id.  Searches through the work items for ones that are related to the case id and removes them. Called by YEngine.cancelCase() @param caseID must be a case id (not a child of a caseid). @return the set of removed work items""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemRepository.getWorkItemsForCase
+yawl:YWorkItemRepository_getWorkItemsForCase_19 a yawl:Method ;
+    rdfs:label "getWorkItemsForCase" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getWorkItemsForCase(YIdentifier caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemRepository.getWorkItemsWithIdentifier
+yawl:YWorkItemRepository_getWorkItemsWithIdentifier_20 a yawl:Method ;
+    rdfs:label "getWorkItemsWithIdentifier" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getWorkItemsWithIdentifier(String idType, String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemRepository.dump
+yawl:YWorkItemRepository_dump_21 a yawl:Method ;
+    rdfs:label "dump" ;
+    yawl:returnType "void" ;
+    yawl:signature "void dump(Logger logger)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YWorkItemRepository__itemMap a yawl:Field ;
+    rdfs:label "_itemMap" .
+
+yawl:YWorkItemRepository__logger a yawl:Field ;
+    rdfs:label "_logger" .
+
+
+

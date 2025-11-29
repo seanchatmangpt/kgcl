@@ -1,0 +1,115 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.twitterService
+yawl:org_yawlfoundation_yawl_twitterService a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.twitterService" .
+# Class: org.yawlfoundation.yawl.twitterService.TwitterService
+yawl:TwitterService a yawl:Class ;
+    rdfs:label "TwitterService" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_twitterService ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/twitterService/TwitterService.java"^^xsd:string ;
+    rdfs:comment """A simple service that provides for status updates to the YAWL Twitter account @author Michael Adams @date 25/07/2009""" ;
+    yawl:extends yawl:InterfaceBWebsideController ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:TwitterService_handleEnabledWorkItemEvent_1 ;
+    yawl:hasMethod yawl:TwitterService_handleCancelledWorkItemEvent_2 ;
+    yawl:hasMethod yawl:TwitterService_describeRequiredParams_3 ;
+    yawl:hasMethod yawl:TwitterService_updateStatus_4 ;
+    yawl:hasMethod yawl:TwitterService_updateStatus_5 ;
+    yawl:hasMethod yawl:TwitterService_getStatusMsg_6 ;
+    yawl:hasMethod yawl:TwitterService_getDataValue_7 ;
+    yawl:hasMethod yawl:TwitterService_getOutputData_8 ;
+    yawl:hasMethod yawl:TwitterService_connected_9 ;
+    yawl:hasField yawl:TwitterService__handle ;
+    .
+
+
+# Method: TwitterService.handleEnabledWorkItemEvent
+yawl:TwitterService_handleEnabledWorkItemEvent_1 a yawl:Method ;
+    rdfs:label "handleEnabledWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleEnabledWorkItemEvent(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TwitterService.handleCancelledWorkItemEvent
+yawl:TwitterService_handleCancelledWorkItemEvent_2 a yawl:Method ;
+    rdfs:label "handleCancelledWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCancelledWorkItemEvent(WorkItemRecord workItemRecord)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TwitterService.describeRequiredParams
+yawl:TwitterService_describeRequiredParams_3 a yawl:Method ;
+    rdfs:label "describeRequiredParams" ;
+    yawl:returnType "YParameter" ;
+    yawl:signature "YParameter describeRequiredParams()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TwitterService.updateStatus
+yawl:TwitterService_updateStatus_4 a yawl:Method ;
+    rdfs:label "updateStatus" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateStatus(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TwitterService.updateStatus
+yawl:TwitterService_updateStatus_5 a yawl:Method ;
+    rdfs:label "updateStatus" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateStatus(String msg)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TwitterService.getStatusMsg
+yawl:TwitterService_getStatusMsg_6 a yawl:Method ;
+    rdfs:label "getStatusMsg" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStatusMsg(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TwitterService.getDataValue
+yawl:TwitterService_getDataValue_7 a yawl:Method ;
+    rdfs:label "getDataValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataValue(Element data, String name)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TwitterService.getOutputData
+yawl:TwitterService_getOutputData_8 a yawl:Method ;
+    rdfs:label "getOutputData" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getOutputData(String taskName, String data)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TwitterService.connected
+yawl:TwitterService_connected_9 a yawl:Method ;
+    rdfs:label "connected" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean connected()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:TwitterService__handle a yawl:Field ;
+    rdfs:label "_handle" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_util a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.util" .
+
+

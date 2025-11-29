@@ -1,0 +1,197 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.controlpanel.components
+yawl:org_yawlfoundation_yawl_controlpanel_components a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.controlpanel.components" .
+# Class: org.yawlfoundation.yawl.controlpanel.components.ComponentsPane
+yawl:ComponentsPane a yawl:Class ;
+    rdfs:label "ComponentsPane" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_components ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/components/ComponentsPane.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 23/11/2015""" ;
+    yawl:extends yawl:JLayeredPane ;
+    yawl:implements yawl:ActionListener ;
+    yawl:implements yawl:PropertyChangeListener ;
+    yawl:implements yawl:EngineStatusListener ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ComponentsPane_actionPerformed_1 ;
+    yawl:hasMethod yawl:ComponentsPane_propertyChange_2 ;
+    yawl:hasMethod yawl:ComponentsPane_statusChanged_3 ;
+    yawl:hasMethod yawl:ComponentsPane_refresh_4 ;
+    yawl:hasMethod yawl:ComponentsPane_getTable_5 ;
+    yawl:hasMethod yawl:ComponentsPane_getProgressPanel_6 ;
+    yawl:hasMethod yawl:ComponentsPane_getTablePanel_7 ;
+    yawl:hasMethod yawl:ComponentsPane_getDiffer_8 ;
+    yawl:hasMethod yawl:ComponentsPane_getCurrentCheckSumFile_9 ;
+    yawl:hasMethod yawl:ComponentsPane_buildUI_10 ;
+    yawl:hasMethod yawl:ComponentsPane_getButtonBar_11 ;
+    yawl:hasMethod yawl:ComponentsPane_createButton_12 ;
+    yawl:hasMethod yawl:ComponentsPane_enableButton_13 ;
+    yawl:hasMethod yawl:ComponentsPane_setButtonTip_14 ;
+    yawl:hasMethod yawl:ComponentsPane_showUpdateDoneMessage_15 ;
+    yawl:hasMethod yawl:ComponentsPane_showNoUpdatesMessage_16 ;
+    yawl:hasMethod yawl:ComponentsPane_showMessage_17 ;
+    yawl:hasField yawl:ComponentsPane__table ;
+    yawl:hasField yawl:ComponentsPane__btnUpdate ;
+    yawl:hasField yawl:ComponentsPane__progressPanel ;
+    yawl:hasField yawl:ComponentsPane__tablePanel ;
+    .
+
+
+# Method: ComponentsPane.actionPerformed
+yawl:ComponentsPane_actionPerformed_1 a yawl:Method ;
+    rdfs:label "actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void actionPerformed(ActionEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ComponentsPane.propertyChange
+yawl:ComponentsPane_propertyChange_2 a yawl:Method ;
+    rdfs:label "propertyChange" ;
+    yawl:returnType "void" ;
+    yawl:signature "void propertyChange(PropertyChangeEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ComponentsPane.statusChanged
+yawl:ComponentsPane_statusChanged_3 a yawl:Method ;
+    rdfs:label "statusChanged" ;
+    yawl:returnType "void" ;
+    yawl:signature "void statusChanged(EngineStatus status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ComponentsPane.refresh
+yawl:ComponentsPane_refresh_4 a yawl:Method ;
+    rdfs:label "refresh" ;
+    yawl:returnType "void" ;
+    yawl:signature "void refresh(Differ differ, boolean afterUpdate)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ComponentsPane.getTable
+yawl:ComponentsPane_getTable_5 a yawl:Method ;
+    rdfs:label "getTable" ;
+    yawl:returnType "UpdateTable" ;
+    yawl:signature "UpdateTable getTable()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ComponentsPane.getProgressPanel
+yawl:ComponentsPane_getProgressPanel_6 a yawl:Method ;
+    rdfs:label "getProgressPanel" ;
+    yawl:returnType "ProgressPanel" ;
+    yawl:signature "ProgressPanel getProgressPanel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ComponentsPane.getTablePanel
+yawl:ComponentsPane_getTablePanel_7 a yawl:Method ;
+    rdfs:label "getTablePanel" ;
+    yawl:returnType "JPanel" ;
+    yawl:signature "JPanel getTablePanel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ComponentsPane.getDiffer
+yawl:ComponentsPane_getDiffer_8 a yawl:Method ;
+    rdfs:label "getDiffer" ;
+    yawl:returnType "Differ" ;
+    yawl:signature "Differ getDiffer()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ComponentsPane.getCurrentCheckSumFile
+yawl:ComponentsPane_getCurrentCheckSumFile_9 a yawl:Method ;
+    rdfs:label "getCurrentCheckSumFile" ;
+    yawl:returnType "File" ;
+    yawl:signature "File getCurrentCheckSumFile()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ComponentsPane.buildUI
+yawl:ComponentsPane_buildUI_10 a yawl:Method ;
+    rdfs:label "buildUI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void buildUI(Differ differ)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ComponentsPane.getButtonBar
+yawl:ComponentsPane_getButtonBar_11 a yawl:Method ;
+    rdfs:label "getButtonBar" ;
+    yawl:returnType "JPanel" ;
+    yawl:signature "JPanel getButtonBar()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ComponentsPane.createButton
+yawl:ComponentsPane_createButton_12 a yawl:Method ;
+    rdfs:label "createButton" ;
+    yawl:returnType "JButton" ;
+    yawl:signature "JButton createButton(String label, String tip)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ComponentsPane.enableButton
+yawl:ComponentsPane_enableButton_13 a yawl:Method ;
+    rdfs:label "enableButton" ;
+    yawl:returnType "void" ;
+    yawl:signature "void enableButton()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ComponentsPane.setButtonTip
+yawl:ComponentsPane_setButtonTip_14 a yawl:Method ;
+    rdfs:label "setButtonTip" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setButtonTip()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ComponentsPane.showUpdateDoneMessage
+yawl:ComponentsPane_showUpdateDoneMessage_15 a yawl:Method ;
+    rdfs:label "showUpdateDoneMessage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showUpdateDoneMessage()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ComponentsPane.showNoUpdatesMessage
+yawl:ComponentsPane_showNoUpdatesMessage_16 a yawl:Method ;
+    rdfs:label "showNoUpdatesMessage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showNoUpdatesMessage()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ComponentsPane.showMessage
+yawl:ComponentsPane_showMessage_17 a yawl:Method ;
+    rdfs:label "showMessage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showMessage(String msg)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:ComponentsPane__table a yawl:Field ;
+    rdfs:label "_table" .
+
+yawl:ComponentsPane__btnUpdate a yawl:Field ;
+    rdfs:label "_btnUpdate" .
+
+yawl:ComponentsPane__progressPanel a yawl:Field ;
+    rdfs:label "_progressPanel" .
+
+yawl:ComponentsPane__tablePanel a yawl:Field ;
+    rdfs:label "_tablePanel" .
+
+
+

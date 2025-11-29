@@ -1,0 +1,22 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.stateless.listener.event.YExceptionEvent
+yawl:YExceptionEvent a yawl:Class ;
+    rdfs:label "YExceptionEvent" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_listener_event ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/listener/event/YExceptionEvent.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 24/8/20""" ;
+    yawl:extends yawl:YEvent ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+
+

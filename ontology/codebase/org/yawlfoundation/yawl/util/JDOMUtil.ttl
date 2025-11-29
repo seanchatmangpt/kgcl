@@ -1,0 +1,287 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.util.JDOMUtil
+yawl:JDOMUtil a yawl:Class ;
+    rdfs:label "JDOMUtil" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/util/JDOMUtil.java"^^xsd:string ;
+    rdfs:comment """Some static utility methods for converting JDOM Documents and Elements to Strings and files & vice versa. @author Michael Adams 04/07/2006 Last date: 22/06/08""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:JDOMUtil_documentToString_1 ;
+    yawl:hasMethod yawl:JDOMUtil_documentToStringDump_2 ;
+    yawl:hasMethod yawl:JDOMUtil_elementToString_3 ;
+    yawl:hasMethod yawl:JDOMUtil_elementToStringDump_4 ;
+    yawl:hasMethod yawl:JDOMUtil_stringToDocument_5 ;
+    yawl:hasMethod yawl:JDOMUtil_stringToDocumentUncaught_6 ;
+    yawl:hasMethod yawl:JDOMUtil_stringToElement_7 ;
+    yawl:hasMethod yawl:JDOMUtil_fileToDocument_8 ;
+    yawl:hasMethod yawl:JDOMUtil_fileToDocument_9 ;
+    yawl:hasMethod yawl:JDOMUtil_documentToFile_10 ;
+    yawl:hasMethod yawl:JDOMUtil_getDefaultValueForType_11 ;
+    yawl:hasMethod yawl:JDOMUtil_encodeEscapes_12 ;
+    yawl:hasMethod yawl:JDOMUtil_encodeAttributeEscapes_13 ;
+    yawl:hasMethod yawl:JDOMUtil_decodeAttributeEscapes_14 ;
+    yawl:hasMethod yawl:JDOMUtil_decodeEscapes_15 ;
+    yawl:hasMethod yawl:JDOMUtil_selectElement_16 ;
+    yawl:hasMethod yawl:JDOMUtil_selectElement_17 ;
+    yawl:hasMethod yawl:JDOMUtil_selectElementList_18 ;
+    yawl:hasMethod yawl:JDOMUtil_selectElementList_19 ;
+    yawl:hasMethod yawl:JDOMUtil_getXPathExpression_20 ;
+    yawl:hasMethod yawl:JDOMUtil_formatXMLString_21 ;
+    yawl:hasMethod yawl:JDOMUtil_formatXMLStringAsDocument_22 ;
+    yawl:hasMethod yawl:JDOMUtil_formatXMLStringAsElement_23 ;
+    yawl:hasMethod yawl:JDOMUtil_strip_24 ;
+    yawl:hasMethod yawl:JDOMUtil_stripAttributes_25 ;
+    yawl:hasField yawl:JDOMUtil__log ;
+    yawl:hasField yawl:JDOMUtil__builder ;
+    yawl:hasField yawl:JDOMUtil_UTF8_BOM ;
+    .
+
+
+# Method: JDOMUtil.documentToString
+yawl:JDOMUtil_documentToString_1 a yawl:Method ;
+    rdfs:label "documentToString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String documentToString(Document doc)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JDOMUtil.documentToStringDump
+yawl:JDOMUtil_documentToStringDump_2 a yawl:Method ;
+    rdfs:label "documentToStringDump" ;
+    yawl:returnType "String" ;
+    yawl:signature "String documentToStringDump(Document doc)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JDOMUtil.elementToString
+yawl:JDOMUtil_elementToString_3 a yawl:Method ;
+    rdfs:label "elementToString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String elementToString(Element e)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JDOMUtil.elementToStringDump
+yawl:JDOMUtil_elementToStringDump_4 a yawl:Method ;
+    rdfs:label "elementToStringDump" ;
+    yawl:returnType "String" ;
+    yawl:signature "String elementToStringDump(Element e)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JDOMUtil.stringToDocument
+yawl:JDOMUtil_stringToDocument_5 a yawl:Method ;
+    rdfs:label "stringToDocument" ;
+    yawl:returnType "Document" ;
+    yawl:signature "Document stringToDocument(String s)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JDOMUtil.stringToDocumentUncaught
+yawl:JDOMUtil_stringToDocumentUncaught_6 a yawl:Method ;
+    rdfs:label "stringToDocumentUncaught" ;
+    yawl:returnType "Document" ;
+    yawl:signature "Document stringToDocumentUncaught(String s)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JDOMUtil.stringToElement
+yawl:JDOMUtil_stringToElement_7 a yawl:Method ;
+    rdfs:label "stringToElement" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element stringToElement(String s)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JDOMUtil.fileToDocument
+yawl:JDOMUtil_fileToDocument_8 a yawl:Method ;
+    rdfs:label "fileToDocument" ;
+    yawl:returnType "Document" ;
+    yawl:signature "Document fileToDocument(String path)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JDOMUtil.fileToDocument
+yawl:JDOMUtil_fileToDocument_9 a yawl:Method ;
+    rdfs:label "fileToDocument" ;
+    yawl:returnType "Document" ;
+    yawl:signature "Document fileToDocument(File file)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JDOMUtil.documentToFile
+yawl:JDOMUtil_documentToFile_10 a yawl:Method ;
+    rdfs:label "documentToFile" ;
+    yawl:returnType "void" ;
+    yawl:signature "void documentToFile(Document doc, String path)" ;
+    rdfs:comment """saves a JDOM Document to a file""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JDOMUtil.getDefaultValueForType
+yawl:JDOMUtil_getDefaultValueForType_11 a yawl:Method ;
+    rdfs:label "getDefaultValueForType" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDefaultValueForType(String dataType)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JDOMUtil.encodeEscapes
+yawl:JDOMUtil_encodeEscapes_12 a yawl:Method ;
+    rdfs:label "encodeEscapes" ;
+    yawl:returnType "String" ;
+    yawl:signature "String encodeEscapes(String s)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JDOMUtil.encodeAttributeEscapes
+yawl:JDOMUtil_encodeAttributeEscapes_13 a yawl:Method ;
+    rdfs:label "encodeAttributeEscapes" ;
+    yawl:returnType "String" ;
+    yawl:signature "String encodeAttributeEscapes(String attrValue)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JDOMUtil.decodeAttributeEscapes
+yawl:JDOMUtil_decodeAttributeEscapes_14 a yawl:Method ;
+    rdfs:label "decodeAttributeEscapes" ;
+    yawl:returnType "String" ;
+    yawl:signature "String decodeAttributeEscapes(String attrValue)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JDOMUtil.decodeEscapes
+yawl:JDOMUtil_decodeEscapes_15 a yawl:Method ;
+    rdfs:label "decodeEscapes" ;
+    yawl:returnType "String" ;
+    yawl:signature "String decodeEscapes(String s)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JDOMUtil.selectElement
+yawl:JDOMUtil_selectElement_16 a yawl:Method ;
+    rdfs:label "selectElement" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element selectElement(Document doc, String path)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JDOMUtil.selectElement
+yawl:JDOMUtil_selectElement_17 a yawl:Method ;
+    rdfs:label "selectElement" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element selectElement(Document doc, String path, Namespace ns)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JDOMUtil.selectElementList
+yawl:JDOMUtil_selectElementList_18 a yawl:Method ;
+    rdfs:label "selectElementList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List selectElementList(Document doc, String path)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JDOMUtil.selectElementList
+yawl:JDOMUtil_selectElementList_19 a yawl:Method ;
+    rdfs:label "selectElementList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List selectElementList(Document doc, String path, Namespace ns)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JDOMUtil.getXPathExpression
+yawl:JDOMUtil_getXPathExpression_20 a yawl:Method ;
+    rdfs:label "getXPathExpression" ;
+    yawl:returnType "XPathExpression" ;
+    yawl:signature "XPathExpression getXPathExpression(String path, Namespace ns)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JDOMUtil.formatXMLString
+yawl:JDOMUtil_formatXMLString_21 a yawl:Method ;
+    rdfs:label "formatXMLString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String formatXMLString(String s)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JDOMUtil.formatXMLStringAsDocument
+yawl:JDOMUtil_formatXMLStringAsDocument_22 a yawl:Method ;
+    rdfs:label "formatXMLStringAsDocument" ;
+    yawl:returnType "String" ;
+    yawl:signature "String formatXMLStringAsDocument(String s)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JDOMUtil.formatXMLStringAsElement
+yawl:JDOMUtil_formatXMLStringAsElement_23 a yawl:Method ;
+    rdfs:label "formatXMLStringAsElement" ;
+    yawl:returnType "String" ;
+    yawl:signature "String formatXMLStringAsElement(String s)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JDOMUtil.strip
+yawl:JDOMUtil_strip_24 a yawl:Method ;
+    rdfs:label "strip" ;
+    yawl:returnType "String" ;
+    yawl:signature "String strip(String s)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JDOMUtil.stripAttributes
+yawl:JDOMUtil_stripAttributes_25 a yawl:Method ;
+    rdfs:label "stripAttributes" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element stripAttributes(Element e)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:JDOMUtil__log a yawl:Field ;
+    rdfs:label "_log" .
+
+yawl:JDOMUtil__builder a yawl:Field ;
+    rdfs:label "_builder" .
+
+yawl:JDOMUtil_UTF8_BOM a yawl:Field ;
+    rdfs:label "UTF8_BOM" .
+
+
+

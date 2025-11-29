@@ -1,0 +1,465 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.dynform.DynFormComponentBuilder
+yawl:DynFormComponentBuilder a yawl:Class ;
+    rdfs:label "DynFormComponentBuilder" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf_dynform ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/dynform/DynFormComponentBuilder.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 10/08/2008""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_makeSubPanel_1 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_makeInputField_2 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_makePeripheralComponents_3 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_makeStyle_4 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_mergeFontStyles_5 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_makeLabel_6 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_makeSimpleLabel_7 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_makeHeaderText_8 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_makeCheckbox_9 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_makeCalendar_10 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_makeTime_11 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_getAdjustedDate_12 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_getMinDate_13 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_getMaxDate_14 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_makeEnumeratedList_15 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_getEnumeratedList_16 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_getEnumeratedListValue_17 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_makeTextArea_18 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_makeTextField_19 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_makeDocumentField_20 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_makeRadioButton_21 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_makeStaticTextBlock_22 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_makeFlatPanel_23 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_makeImageComponent_24 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_getImageSize_25 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_setFocus_26 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_isVisible_27 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_isDisabled_28 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_parseText_29 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_createDate_30 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_getInputStyleClass_31 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_setMaxLabelWidth_32 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_getMaxLabelWidth_33 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_setMaxDropDownWidth_34 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_getMaxDropDownWidth_35 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_setMaxTextValueWidth_36 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_getMaxTextValueWidth_37 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_setMaxImageWidth_38 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_getMaxImageWidth_39 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_hasOnlyCheckboxes_40 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_getMaxFieldWidth_41 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_getComponentFieldMap_42 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_getTextWidth_43 ;
+    yawl:hasMethod yawl:DynFormComponentBuilder_createUniqueID_44 ;
+    yawl:hasField yawl:DynFormComponentBuilder_focusSet ;
+    yawl:hasField yawl:DynFormComponentBuilder__factory ;
+    yawl:hasField yawl:DynFormComponentBuilder__textParser ;
+    yawl:hasField yawl:DynFormComponentBuilder__componentFieldTable ;
+    yawl:hasField yawl:DynFormComponentBuilder__maxDropDownWidth ;
+    yawl:hasField yawl:DynFormComponentBuilder__maxLabelWidth ;
+    yawl:hasField yawl:DynFormComponentBuilder__maxTextValueWidth ;
+    yawl:hasField yawl:DynFormComponentBuilder__maxImageWidth ;
+    yawl:hasField yawl:DynFormComponentBuilder__hasCheckboxOnly ;
+    yawl:hasField yawl:DynFormComponentBuilder_DROPDOWN_BUTTON_WIDTH ;
+    yawl:hasField yawl:DynFormComponentBuilder_TEXTAREA_ROWS ;
+    yawl:hasField yawl:DynFormComponentBuilder__sdf ;
+    .
+
+
+# Method: DynFormComponentBuilder.makeSubPanel
+yawl:DynFormComponentBuilder_makeSubPanel_1 a yawl:Method ;
+    rdfs:label "makeSubPanel" ;
+    yawl:returnType "SubPanel" ;
+    yawl:signature "SubPanel makeSubPanel(DynFormField field, SubPanelController spc)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormComponentBuilder.makeInputField
+yawl:DynFormComponentBuilder_makeInputField_2 a yawl:Method ;
+    rdfs:label "makeInputField" ;
+    yawl:returnType "DynFormComponentList" ;
+    yawl:signature "DynFormComponentList makeInputField(DynFormField input)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormComponentBuilder.makePeripheralComponents
+yawl:DynFormComponentBuilder_makePeripheralComponents_3 a yawl:Method ;
+    rdfs:label "makePeripheralComponents" ;
+    yawl:returnType "DynFormComponentList" ;
+    yawl:signature "DynFormComponentList makePeripheralComponents(DynFormField input, boolean above)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormComponentBuilder.makeStyle
+yawl:DynFormComponentBuilder_makeStyle_4 a yawl:Method ;
+    rdfs:label "makeStyle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String makeStyle(UIComponent field, DynFormField input)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormComponentBuilder.mergeFontStyles
+yawl:DynFormComponentBuilder_mergeFontStyles_5 a yawl:Method ;
+    rdfs:label "mergeFontStyles" ;
+    yawl:returnType "String" ;
+    yawl:signature "String mergeFontStyles(String fieldStyle)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormComponentBuilder.makeLabel
+yawl:DynFormComponentBuilder_makeLabel_6 a yawl:Method ;
+    rdfs:label "makeLabel" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label makeLabel(DynFormField input)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormComponentBuilder.makeSimpleLabel
+yawl:DynFormComponentBuilder_makeSimpleLabel_7 a yawl:Method ;
+    rdfs:label "makeSimpleLabel" ;
+    yawl:returnType "Label" ;
+    yawl:signature "Label makeSimpleLabel(String text)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormComponentBuilder.makeHeaderText
+yawl:DynFormComponentBuilder_makeHeaderText_8 a yawl:Method ;
+    rdfs:label "makeHeaderText" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText makeHeaderText(String text, String defText)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormComponentBuilder.makeCheckbox
+yawl:DynFormComponentBuilder_makeCheckbox_9 a yawl:Method ;
+    rdfs:label "makeCheckbox" ;
+    yawl:returnType "Checkbox" ;
+    yawl:signature "Checkbox makeCheckbox(DynFormField input)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormComponentBuilder.makeCalendar
+yawl:DynFormComponentBuilder_makeCalendar_10 a yawl:Method ;
+    rdfs:label "makeCalendar" ;
+    yawl:returnType "Calendar" ;
+    yawl:signature "Calendar makeCalendar(DynFormField input)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormComponentBuilder.makeTime
+yawl:DynFormComponentBuilder_makeTime_11 a yawl:Method ;
+    rdfs:label "makeTime" ;
+    yawl:returnType "Time" ;
+    yawl:signature "Time makeTime(DynFormField input)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormComponentBuilder.getAdjustedDate
+yawl:DynFormComponentBuilder_getAdjustedDate_12 a yawl:Method ;
+    rdfs:label "getAdjustedDate" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date getAdjustedDate(int period, int adjustment, Date startDate)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormComponentBuilder.getMinDate
+yawl:DynFormComponentBuilder_getMinDate_13 a yawl:Method ;
+    rdfs:label "getMinDate" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date getMinDate(DynFormField input)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormComponentBuilder.getMaxDate
+yawl:DynFormComponentBuilder_getMaxDate_14 a yawl:Method ;
+    rdfs:label "getMaxDate" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date getMaxDate(DynFormField input)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormComponentBuilder.makeEnumeratedList
+yawl:DynFormComponentBuilder_makeEnumeratedList_15 a yawl:Method ;
+    rdfs:label "makeEnumeratedList" ;
+    yawl:returnType "DropDown" ;
+    yawl:signature "DropDown makeEnumeratedList(DynFormField input)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormComponentBuilder.getEnumeratedList
+yawl:DynFormComponentBuilder_getEnumeratedList_16 a yawl:Method ;
+    rdfs:label "getEnumeratedList" ;
+    yawl:returnType "Option" ;
+    yawl:signature "Option getEnumeratedList(DynFormField input)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormComponentBuilder.getEnumeratedListValue
+yawl:DynFormComponentBuilder_getEnumeratedListValue_17 a yawl:Method ;
+    rdfs:label "getEnumeratedListValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEnumeratedListValue(DynFormField input)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormComponentBuilder.makeTextArea
+yawl:DynFormComponentBuilder_makeTextArea_18 a yawl:Method ;
+    rdfs:label "makeTextArea" ;
+    yawl:returnType "TextArea" ;
+    yawl:signature "TextArea makeTextArea(DynFormField input)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormComponentBuilder.makeTextField
+yawl:DynFormComponentBuilder_makeTextField_19 a yawl:Method ;
+    rdfs:label "makeTextField" ;
+    yawl:returnType "TextField" ;
+    yawl:signature "TextField makeTextField(DynFormField input)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormComponentBuilder.makeDocumentField
+yawl:DynFormComponentBuilder_makeDocumentField_20 a yawl:Method ;
+    rdfs:label "makeDocumentField" ;
+    yawl:returnType "DocComponent" ;
+    yawl:signature "DocComponent makeDocumentField(DynFormField input, Label label)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormComponentBuilder.makeRadioButton
+yawl:DynFormComponentBuilder_makeRadioButton_21 a yawl:Method ;
+    rdfs:label "makeRadioButton" ;
+    yawl:returnType "RadioButton" ;
+    yawl:signature "RadioButton makeRadioButton(DynFormField input)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormComponentBuilder.makeStaticTextBlock
+yawl:DynFormComponentBuilder_makeStaticTextBlock_22 a yawl:Method ;
+    rdfs:label "makeStaticTextBlock" ;
+    yawl:returnType "StaticTextBlock" ;
+    yawl:signature "StaticTextBlock makeStaticTextBlock(DynFormField input, String text)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormComponentBuilder.makeFlatPanel
+yawl:DynFormComponentBuilder_makeFlatPanel_23 a yawl:Method ;
+    rdfs:label "makeFlatPanel" ;
+    yawl:returnType "FlatPanel" ;
+    yawl:signature "FlatPanel makeFlatPanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormComponentBuilder.makeImageComponent
+yawl:DynFormComponentBuilder_makeImageComponent_24 a yawl:Method ;
+    rdfs:label "makeImageComponent" ;
+    yawl:returnType "ImageComponent" ;
+    yawl:signature "ImageComponent makeImageComponent(String imagePath)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormComponentBuilder.getImageSize
+yawl:DynFormComponentBuilder_getImageSize_25 a yawl:Method ;
+    rdfs:label "getImageSize" ;
+    yawl:returnType "Dimension" ;
+    yawl:signature "Dimension getImageSize(String imagePath)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormComponentBuilder.setFocus
+yawl:DynFormComponentBuilder_setFocus_26 a yawl:Method ;
+    rdfs:label "setFocus" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean setFocus(UIComponent component)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormComponentBuilder.isVisible
+yawl:DynFormComponentBuilder_isVisible_27 a yawl:Method ;
+    rdfs:label "isVisible" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isVisible(DynFormField input)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormComponentBuilder.isDisabled
+yawl:DynFormComponentBuilder_isDisabled_28 a yawl:Method ;
+    rdfs:label "isDisabled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isDisabled(DynFormField input)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormComponentBuilder.parseText
+yawl:DynFormComponentBuilder_parseText_29 a yawl:Method ;
+    rdfs:label "parseText" ;
+    yawl:returnType "String" ;
+    yawl:signature "String parseText(String text)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormComponentBuilder.createDate
+yawl:DynFormComponentBuilder_createDate_30 a yawl:Method ;
+    rdfs:label "createDate" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date createDate(String dateStr, long defaultDate)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormComponentBuilder.getInputStyleClass
+yawl:DynFormComponentBuilder_getInputStyleClass_31 a yawl:Method ;
+    rdfs:label "getInputStyleClass" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInputStyleClass(DynFormField input)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormComponentBuilder.setMaxLabelWidth
+yawl:DynFormComponentBuilder_setMaxLabelWidth_32 a yawl:Method ;
+    rdfs:label "setMaxLabelWidth" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMaxLabelWidth(DynFormField input)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormComponentBuilder.getMaxLabelWidth
+yawl:DynFormComponentBuilder_getMaxLabelWidth_33 a yawl:Method ;
+    rdfs:label "getMaxLabelWidth" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getMaxLabelWidth()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormComponentBuilder.setMaxDropDownWidth
+yawl:DynFormComponentBuilder_setMaxDropDownWidth_34 a yawl:Method ;
+    rdfs:label "setMaxDropDownWidth" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMaxDropDownWidth(DynFormField input, String text)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormComponentBuilder.getMaxDropDownWidth
+yawl:DynFormComponentBuilder_getMaxDropDownWidth_35 a yawl:Method ;
+    rdfs:label "getMaxDropDownWidth" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getMaxDropDownWidth()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormComponentBuilder.setMaxTextValueWidth
+yawl:DynFormComponentBuilder_setMaxTextValueWidth_36 a yawl:Method ;
+    rdfs:label "setMaxTextValueWidth" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMaxTextValueWidth(DynFormField input, String text, int buffer)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormComponentBuilder.getMaxTextValueWidth
+yawl:DynFormComponentBuilder_getMaxTextValueWidth_37 a yawl:Method ;
+    rdfs:label "getMaxTextValueWidth" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getMaxTextValueWidth()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormComponentBuilder.setMaxImageWidth
+yawl:DynFormComponentBuilder_setMaxImageWidth_38 a yawl:Method ;
+    rdfs:label "setMaxImageWidth" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMaxImageWidth(int width)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormComponentBuilder.getMaxImageWidth
+yawl:DynFormComponentBuilder_getMaxImageWidth_39 a yawl:Method ;
+    rdfs:label "getMaxImageWidth" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getMaxImageWidth()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormComponentBuilder.hasOnlyCheckboxes
+yawl:DynFormComponentBuilder_hasOnlyCheckboxes_40 a yawl:Method ;
+    rdfs:label "hasOnlyCheckboxes" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasOnlyCheckboxes()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormComponentBuilder.getMaxFieldWidth
+yawl:DynFormComponentBuilder_getMaxFieldWidth_41 a yawl:Method ;
+    rdfs:label "getMaxFieldWidth" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getMaxFieldWidth()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormComponentBuilder.getComponentFieldMap
+yawl:DynFormComponentBuilder_getComponentFieldMap_42 a yawl:Method ;
+    rdfs:label "getComponentFieldMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getComponentFieldMap()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormComponentBuilder.getTextWidth
+yawl:DynFormComponentBuilder_getTextWidth_43 a yawl:Method ;
+    rdfs:label "getTextWidth" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getTextWidth(DynFormField input, String text)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormComponentBuilder.createUniqueID
+yawl:DynFormComponentBuilder_createUniqueID_44 a yawl:Method ;
+    rdfs:label "createUniqueID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String createUniqueID(String id)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:DynFormComponentBuilder_focusSet a yawl:Field ;
+    rdfs:label "focusSet" .
+
+yawl:DynFormComponentBuilder__factory a yawl:Field ;
+    rdfs:label "_factory" .
+
+yawl:DynFormComponentBuilder__textParser a yawl:Field ;
+    rdfs:label "_textParser" .
+
+yawl:DynFormComponentBuilder__componentFieldTable a yawl:Field ;
+    rdfs:label "_componentFieldTable" .
+
+yawl:DynFormComponentBuilder__maxDropDownWidth a yawl:Field ;
+    rdfs:label "_maxDropDownWidth" .
+
+yawl:DynFormComponentBuilder__maxLabelWidth a yawl:Field ;
+    rdfs:label "_maxLabelWidth" .
+
+yawl:DynFormComponentBuilder__maxTextValueWidth a yawl:Field ;
+    rdfs:label "_maxTextValueWidth" .
+
+yawl:DynFormComponentBuilder__maxImageWidth a yawl:Field ;
+    rdfs:label "_maxImageWidth" .
+
+yawl:DynFormComponentBuilder__hasCheckboxOnly a yawl:Field ;
+    rdfs:label "_hasCheckboxOnly" .
+
+yawl:DynFormComponentBuilder_DROPDOWN_BUTTON_WIDTH a yawl:Field ;
+    rdfs:label "DROPDOWN_BUTTON_WIDTH" .
+
+yawl:DynFormComponentBuilder_TEXTAREA_ROWS a yawl:Field ;
+    rdfs:label "TEXTAREA_ROWS" .
+
+yawl:DynFormComponentBuilder__sdf a yawl:Field ;
+    rdfs:label "_sdf" .
+
+
+

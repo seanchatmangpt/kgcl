@@ -1,0 +1,93 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.mailService
+yawl:org_yawlfoundation_yawl_mailService a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.mailService" .
+# Class: org.yawlfoundation.yawl.mailService.MailServiceGateway
+yawl:MailServiceGateway a yawl:Class ;
+    rdfs:label "MailServiceGateway" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_mailService ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/mailService/MailServiceGateway.java"^^xsd:string ;
+    rdfs:comment """Initialises the Simple Mail Service with values from 'web.xml'. @author Michael Adams @date 24/06/2011""" ;
+    yawl:extends yawl:YHttpServlet ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:MailServiceGateway_init_1 ;
+    yawl:hasMethod yawl:MailServiceGateway_destroy_2 ;
+    yawl:hasMethod yawl:MailServiceGateway_doPost_3 ;
+    yawl:hasMethod yawl:MailServiceGateway_doGet_4 ;
+    yawl:hasMethod yawl:MailServiceGateway_getSetting_5 ;
+    yawl:hasMethod yawl:MailServiceGateway_nullMsg_6 ;
+    yawl:hasMethod yawl:MailServiceGateway_errMsg_7 ;
+    yawl:hasField yawl:MailServiceGateway__sessions ;
+    .
+
+
+# Method: MailServiceGateway.init
+yawl:MailServiceGateway_init_1 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    rdfs:comment """Read settings from web.xml and use them to initialise the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MailServiceGateway.destroy
+yawl:MailServiceGateway_destroy_2 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MailServiceGateway.doPost
+yawl:MailServiceGateway_doPost_3 a yawl:Method ;
+    rdfs:label "doPost" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doPost(HttpServletRequest req, HttpServletResponse res)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MailServiceGateway.doGet
+yawl:MailServiceGateway_doGet_4 a yawl:Method ;
+    rdfs:label "doGet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doGet(HttpServletRequest req, HttpServletResponse res)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MailServiceGateway.getSetting
+yawl:MailServiceGateway_getSetting_5 a yawl:Method ;
+    rdfs:label "getSetting" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSetting(String name)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MailServiceGateway.nullMsg
+yawl:MailServiceGateway_nullMsg_6 a yawl:Method ;
+    rdfs:label "nullMsg" ;
+    yawl:returnType "String" ;
+    yawl:signature "String nullMsg(String param)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MailServiceGateway.errMsg
+yawl:MailServiceGateway_errMsg_7 a yawl:Method ;
+    rdfs:label "errMsg" ;
+    yawl:returnType "String" ;
+    yawl:signature "String errMsg(String msg)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:MailServiceGateway__sessions a yawl:Field ;
+    rdfs:label "_sessions" .
+
+
+

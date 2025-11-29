@@ -1,0 +1,65 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.InternalRunner
+yawl:InternalRunner a yawl:Class ;
+    rdfs:label "InternalRunner" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/SingleInstanceClass.java"^^xsd:string ;
+    yawl:extends yawl:Thread ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:InternalRunner_setThreadNotify_1 ;
+    yawl:hasMethod yawl:InternalRunner_run_2 ;
+    yawl:hasMethod yawl:InternalRunner_leftOver_3 ;
+    yawl:hasField yawl:InternalRunner_started ;
+    yawl:hasField yawl:InternalRunner_interval ;
+    yawl:hasField yawl:InternalRunner_tn ;
+    .
+
+
+# Method: InternalRunner.setThreadNotify
+yawl:InternalRunner_setThreadNotify_1 a yawl:Method ;
+    rdfs:label "setThreadNotify" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setThreadNotify(ThreadNotify tn)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InternalRunner.run
+yawl:InternalRunner_run_2 a yawl:Method ;
+    rdfs:label "run" ;
+    yawl:returnType "void" ;
+    yawl:signature "void run()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InternalRunner.leftOver
+yawl:InternalRunner_leftOver_3 a yawl:Method ;
+    rdfs:label "leftOver" ;
+    yawl:returnType "long" ;
+    yawl:signature "long leftOver()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:InternalRunner_started a yawl:Field ;
+    rdfs:label "started" .
+
+yawl:InternalRunner_interval a yawl:Field ;
+    rdfs:label "interval" .
+
+yawl:InternalRunner_tn a yawl:Field ;
+    rdfs:label "tn" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_elements a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.elements" .
+
+

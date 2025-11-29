@@ -1,0 +1,296 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.model.FrmModel
+yawl:FrmModel a yawl:Class ;
+    rdfs:label "FrmModel" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor_model ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/model/FrmModel.java"^^xsd:string ;
+    yawl:extends yawl:DesignInternalFrame ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:FrmModel_singleton_1 ;
+    yawl:hasMethod yawl:FrmModel_finish_2 ;
+    yawl:hasMethod yawl:FrmModel_jbInit_3 ;
+    yawl:hasMethod yawl:FrmModel_setVisualizationViewer_4 ;
+    yawl:hasMethod yawl:FrmModel_drawGraph_5 ;
+    yawl:hasMethod yawl:FrmModel_redrawGraph_6 ;
+    yawl:hasMethod yawl:FrmModel_initModel_7 ;
+    yawl:hasMethod yawl:FrmModel_initComponents_8 ;
+    yawl:hasMethod yawl:FrmModel_addBlockButtonActionPerformed_9 ;
+    yawl:hasMethod yawl:FrmModel_removeBlockButtonActionPerformed_10 ;
+    yawl:hasMethod yawl:FrmModel_adjustBlockButtonActionPerformed_11 ;
+    yawl:hasMethod yawl:FrmModel_addPortButtonActionPerformed_12 ;
+    yawl:hasMethod yawl:FrmModel_removePortButtonActionPerformed_13 ;
+    yawl:hasMethod yawl:FrmModel_adjustPortButtonActionPerformed_14 ;
+    yawl:hasMethod yawl:FrmModel_addRelationButtonActionPerformed_15 ;
+    yawl:hasMethod yawl:FrmModel_removeRelationButtonActionPerformed_16 ;
+    yawl:hasMethod yawl:FrmModel_actionPerformed_17 ;
+    yawl:hasField yawl:FrmModel_TITLE ;
+    yawl:hasField yawl:FrmModel_single ;
+    yawl:hasField yawl:FrmModel_modelCoordinator ;
+    yawl:hasField yawl:FrmModel_splitPaneMain ;
+    yawl:hasField yawl:FrmModel_addBlockButton ;
+    yawl:hasField yawl:FrmModel_addPortButton ;
+    yawl:hasField yawl:FrmModel_addRelationButton ;
+    yawl:hasField yawl:FrmModel_adjustBlockButton ;
+    yawl:hasField yawl:FrmModel_adjustPortButton ;
+    yawl:hasField yawl:FrmModel_blockRelationsPanel ;
+    yawl:hasField yawl:FrmModel_blocksPanel ;
+    yawl:hasField yawl:FrmModel_generalPanel ;
+    yawl:hasField yawl:FrmModel_graphOptionsPanel ;
+    yawl:hasField yawl:FrmModel_graphPanel ;
+    yawl:hasField yawl:FrmModel_labelForName ;
+    yawl:hasField yawl:FrmModel_nameTextField ;
+    yawl:hasField yawl:FrmModel_portsPanel ;
+    yawl:hasField yawl:FrmModel_removeBlockButton ;
+    yawl:hasField yawl:FrmModel_removePortButton ;
+    yawl:hasField yawl:FrmModel_removeRelationButton ;
+    yawl:hasField yawl:FrmModel_rightPanel ;
+    yawl:hasField yawl:FrmModel_splitPanelLeft ;
+    yawl:hasField yawl:FrmModel_topOptionsPanel ;
+    yawl:hasField yawl:FrmModel_bottomOptionsPanel ;
+    yawl:hasField yawl:FrmModel_layoutBox ;
+    yawl:hasField yawl:FrmModel_vv ;
+    yawl:hasField yawl:FrmModel_gm ;
+    yawl:hasField yawl:FrmModel_vertexPaint ;
+    yawl:hasField yawl:FrmModel_vertexLabelTransformer ;
+    yawl:hasField yawl:FrmModel_edgeStrokeTransformer ;
+    .
+
+
+# Method: FrmModel.singleton
+yawl:FrmModel_singleton_1 a yawl:Method ;
+    rdfs:label "singleton" ;
+    yawl:returnType "FrmModel" ;
+    yawl:signature "FrmModel singleton(ModelCoordinator coord)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrmModel.finish
+yawl:FrmModel_finish_2 a yawl:Method ;
+    rdfs:label "finish" ;
+    yawl:returnType "void" ;
+    yawl:signature "void finish()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrmModel.jbInit
+yawl:FrmModel_jbInit_3 a yawl:Method ;
+    rdfs:label "jbInit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void jbInit()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: FrmModel.setVisualizationViewer
+yawl:FrmModel_setVisualizationViewer_4 a yawl:Method ;
+    rdfs:label "setVisualizationViewer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setVisualizationViewer(VisualizationViewer vviewer)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmModel.drawGraph
+yawl:FrmModel_drawGraph_5 a yawl:Method ;
+    rdfs:label "drawGraph" ;
+    yawl:returnType "void" ;
+    yawl:signature "void drawGraph()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmModel.redrawGraph
+yawl:FrmModel_redrawGraph_6 a yawl:Method ;
+    rdfs:label "redrawGraph" ;
+    yawl:returnType "void" ;
+    yawl:signature "void redrawGraph()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FrmModel.initModel
+yawl:FrmModel_initModel_7 a yawl:Method ;
+    rdfs:label "initModel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initModel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmModel.initComponents
+yawl:FrmModel_initComponents_8 a yawl:Method ;
+    rdfs:label "initComponents" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initComponents()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmModel.addBlockButtonActionPerformed
+yawl:FrmModel_addBlockButtonActionPerformed_9 a yawl:Method ;
+    rdfs:label "addBlockButtonActionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addBlockButtonActionPerformed(java evt)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmModel.removeBlockButtonActionPerformed
+yawl:FrmModel_removeBlockButtonActionPerformed_10 a yawl:Method ;
+    rdfs:label "removeBlockButtonActionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeBlockButtonActionPerformed(java evt)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmModel.adjustBlockButtonActionPerformed
+yawl:FrmModel_adjustBlockButtonActionPerformed_11 a yawl:Method ;
+    rdfs:label "adjustBlockButtonActionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void adjustBlockButtonActionPerformed(java evt)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmModel.addPortButtonActionPerformed
+yawl:FrmModel_addPortButtonActionPerformed_12 a yawl:Method ;
+    rdfs:label "addPortButtonActionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addPortButtonActionPerformed(java evt)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmModel.removePortButtonActionPerformed
+yawl:FrmModel_removePortButtonActionPerformed_13 a yawl:Method ;
+    rdfs:label "removePortButtonActionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removePortButtonActionPerformed(java evt)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmModel.adjustPortButtonActionPerformed
+yawl:FrmModel_adjustPortButtonActionPerformed_14 a yawl:Method ;
+    rdfs:label "adjustPortButtonActionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void adjustPortButtonActionPerformed(java evt)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmModel.addRelationButtonActionPerformed
+yawl:FrmModel_addRelationButtonActionPerformed_15 a yawl:Method ;
+    rdfs:label "addRelationButtonActionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addRelationButtonActionPerformed(java evt)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmModel.removeRelationButtonActionPerformed
+yawl:FrmModel_removeRelationButtonActionPerformed_16 a yawl:Method ;
+    rdfs:label "removeRelationButtonActionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeRelationButtonActionPerformed(java evt)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmModel.actionPerformed
+yawl:FrmModel_actionPerformed_17 a yawl:Method ;
+    rdfs:label "actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void actionPerformed(ActionEvent e)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:FrmModel_TITLE a yawl:Field ;
+    rdfs:label "TITLE" .
+
+yawl:FrmModel_single a yawl:Field ;
+    rdfs:label "single" .
+
+yawl:FrmModel_modelCoordinator a yawl:Field ;
+    rdfs:label "modelCoordinator" .
+
+yawl:FrmModel_splitPaneMain a yawl:Field ;
+    rdfs:label "splitPaneMain" .
+
+yawl:FrmModel_addBlockButton a yawl:Field ;
+    rdfs:label "addBlockButton" .
+
+yawl:FrmModel_addPortButton a yawl:Field ;
+    rdfs:label "addPortButton" .
+
+yawl:FrmModel_addRelationButton a yawl:Field ;
+    rdfs:label "addRelationButton" .
+
+yawl:FrmModel_adjustBlockButton a yawl:Field ;
+    rdfs:label "adjustBlockButton" .
+
+yawl:FrmModel_adjustPortButton a yawl:Field ;
+    rdfs:label "adjustPortButton" .
+
+yawl:FrmModel_blockRelationsPanel a yawl:Field ;
+    rdfs:label "blockRelationsPanel" .
+
+yawl:FrmModel_blocksPanel a yawl:Field ;
+    rdfs:label "blocksPanel" .
+
+yawl:FrmModel_generalPanel a yawl:Field ;
+    rdfs:label "generalPanel" .
+
+yawl:FrmModel_graphOptionsPanel a yawl:Field ;
+    rdfs:label "graphOptionsPanel" .
+
+yawl:FrmModel_graphPanel a yawl:Field ;
+    rdfs:label "graphPanel" .
+
+yawl:FrmModel_labelForName a yawl:Field ;
+    rdfs:label "labelForName" .
+
+yawl:FrmModel_nameTextField a yawl:Field ;
+    rdfs:label "nameTextField" .
+
+yawl:FrmModel_portsPanel a yawl:Field ;
+    rdfs:label "portsPanel" .
+
+yawl:FrmModel_removeBlockButton a yawl:Field ;
+    rdfs:label "removeBlockButton" .
+
+yawl:FrmModel_removePortButton a yawl:Field ;
+    rdfs:label "removePortButton" .
+
+yawl:FrmModel_removeRelationButton a yawl:Field ;
+    rdfs:label "removeRelationButton" .
+
+yawl:FrmModel_rightPanel a yawl:Field ;
+    rdfs:label "rightPanel" .
+
+yawl:FrmModel_splitPanelLeft a yawl:Field ;
+    rdfs:label "splitPanelLeft" .
+
+yawl:FrmModel_topOptionsPanel a yawl:Field ;
+    rdfs:label "topOptionsPanel" .
+
+yawl:FrmModel_bottomOptionsPanel a yawl:Field ;
+    rdfs:label "bottomOptionsPanel" .
+
+yawl:FrmModel_layoutBox a yawl:Field ;
+    rdfs:label "layoutBox" .
+
+yawl:FrmModel_vv a yawl:Field ;
+    rdfs:label "vv" .
+
+yawl:FrmModel_gm a yawl:Field ;
+    rdfs:label "gm" .
+
+yawl:FrmModel_vertexPaint a yawl:Field ;
+    rdfs:label "vertexPaint" .
+
+yawl:FrmModel_vertexLabelTransformer a yawl:Field ;
+    rdfs:label "vertexLabelTransformer" .
+
+yawl:FrmModel_edgeStrokeTransformer a yawl:Field ;
+    rdfs:label "edgeStrokeTransformer" .
+
+
+

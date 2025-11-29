@@ -1,0 +1,492 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.dynForm
+yawl:dynForm a yawl:Class ;
+    rdfs:label "dynForm" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/dynForm.java"^^xsd:string ;
+    rdfs:comment """Backing bean for the dynamic forms. @author Michael Adams BPM Group, QUT Australia v0.1, 08/01/2008 Last Date: 16/03/2008""" ;
+    yawl:extends yawl:AbstractPageBean ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:dynForm__init_1 ;
+    yawl:hasMethod yawl:dynForm_getApplicationBean_2 ;
+    yawl:hasMethod yawl:dynForm_getSessionBean_3 ;
+    yawl:hasMethod yawl:dynForm_getDynFormFactory_4 ;
+    yawl:hasMethod yawl:dynForm_init_5 ;
+    yawl:hasMethod yawl:dynForm_preprocess_6 ;
+    yawl:hasMethod yawl:dynForm_destroy_7 ;
+    yawl:hasMethod yawl:dynForm_getPage1_8 ;
+    yawl:hasMethod yawl:dynForm_setPage1_9 ;
+    yawl:hasMethod yawl:dynForm_getHtml1_10 ;
+    yawl:hasMethod yawl:dynForm_setHtml1_11 ;
+    yawl:hasMethod yawl:dynForm_getHead1_12 ;
+    yawl:hasMethod yawl:dynForm_setHead1_13 ;
+    yawl:hasMethod yawl:dynForm_getLink1_14 ;
+    yawl:hasMethod yawl:dynForm_setLink1_15 ;
+    yawl:hasMethod yawl:dynForm_getBody1_16 ;
+    yawl:hasMethod yawl:dynForm_setBody1_17 ;
+    yawl:hasMethod yawl:dynForm_getForm1_18 ;
+    yawl:hasMethod yawl:dynForm_setForm1_19 ;
+    yawl:hasMethod yawl:dynForm_getTxtHeader_20 ;
+    yawl:hasMethod yawl:dynForm_setTxtHeader_21 ;
+    yawl:hasMethod yawl:dynForm_getBtnOK_22 ;
+    yawl:hasMethod yawl:dynForm_setBtnOK_23 ;
+    yawl:hasMethod yawl:dynForm_getBtnCancel_24 ;
+    yawl:hasMethod yawl:dynForm_setBtnCancel_25 ;
+    yawl:hasMethod yawl:dynForm_getBtnComplete_26 ;
+    yawl:hasMethod yawl:dynForm_setBtnComplete_27 ;
+    yawl:hasMethod yawl:dynForm_getPnlContainer_28 ;
+    yawl:hasMethod yawl:dynForm_setPnlContainer_29 ;
+    yawl:hasMethod yawl:dynForm_getBottomPanel_30 ;
+    yawl:hasMethod yawl:dynForm_setBottomPanel_31 ;
+    yawl:hasMethod yawl:dynForm_prerender_32 ;
+    yawl:hasMethod yawl:dynForm_btnOK_action_33 ;
+    yawl:hasMethod yawl:dynForm_btnComplete_action_34 ;
+    yawl:hasMethod yawl:dynForm_btnCancel_action_35 ;
+    yawl:hasMethod yawl:dynForm_saveForm_36 ;
+    yawl:hasMethod yawl:dynForm_getReferringPage_37 ;
+    yawl:hasMethod yawl:dynForm_setupButtons_38 ;
+    yawl:hasMethod yawl:dynForm_loadBackgroundImage_39 ;
+    yawl:hasMethod yawl:dynForm_btnOccursAction_40 ;
+    yawl:hasMethod yawl:dynForm_btnDocumentAction_41 ;
+    yawl:hasMethod yawl:dynForm_btnUploadAction_42 ;
+    yawl:hasMethod yawl:dynForm_btnCancelUploadAction_43 ;
+    yawl:hasMethod yawl:dynForm_getDocComponentForEvent_44 ;
+    yawl:hasMethod yawl:dynForm_cleanUpAnyDocs_45 ;
+    yawl:hasField yawl:dynForm___placeholder ;
+    yawl:hasField yawl:dynForm_page1 ;
+    yawl:hasField yawl:dynForm_html1 ;
+    yawl:hasField yawl:dynForm_head1 ;
+    yawl:hasField yawl:dynForm_link1 ;
+    yawl:hasField yawl:dynForm_body1 ;
+    yawl:hasField yawl:dynForm_form1 ;
+    yawl:hasField yawl:dynForm_txtHeader ;
+    yawl:hasField yawl:dynForm_btnOK ;
+    yawl:hasField yawl:dynForm_btnCancel ;
+    yawl:hasField yawl:dynForm_btnComplete ;
+    yawl:hasField yawl:dynForm_pnlContainer ;
+    yawl:hasField yawl:dynForm_bottomPanel ;
+    yawl:hasField yawl:dynForm__sb ;
+    .
+
+
+# Method: dynForm._init
+yawl:dynForm__init_1 a yawl:Method ;
+    rdfs:label "_init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void _init()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: dynForm.getApplicationBean
+yawl:dynForm_getApplicationBean_2 a yawl:Method ;
+    rdfs:label "getApplicationBean" ;
+    yawl:returnType "ApplicationBean" ;
+    yawl:signature "ApplicationBean getApplicationBean()" ;
+    rdfs:comment """@return a reference to the application scoped data bean.""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: dynForm.getSessionBean
+yawl:dynForm_getSessionBean_3 a yawl:Method ;
+    rdfs:label "getSessionBean" ;
+    yawl:returnType "SessionBean" ;
+    yawl:signature "SessionBean getSessionBean()" ;
+    rdfs:comment """@return a reference to the session scoped data bean.""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: dynForm.getDynFormFactory
+yawl:dynForm_getDynFormFactory_4 a yawl:Method ;
+    rdfs:label "getDynFormFactory" ;
+    yawl:returnType "DynFormFactory" ;
+    yawl:signature "DynFormFactory getDynFormFactory()" ;
+    rdfs:comment """@return a reference to the session scoped factory bean.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: dynForm.init
+yawl:dynForm_init_5 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.preprocess
+yawl:dynForm_preprocess_6 a yawl:Method ;
+    rdfs:label "preprocess" ;
+    yawl:returnType "void" ;
+    yawl:signature "void preprocess()" ;
+    rdfs:comment """Abstract Method Implementations""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.destroy
+yawl:dynForm_destroy_7 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.getPage1
+yawl:dynForm_getPage1_8 a yawl:Method ;
+    rdfs:label "getPage1" ;
+    yawl:returnType "Page" ;
+    yawl:signature "Page getPage1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.setPage1
+yawl:dynForm_setPage1_9 a yawl:Method ;
+    rdfs:label "setPage1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPage1(Page p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.getHtml1
+yawl:dynForm_getHtml1_10 a yawl:Method ;
+    rdfs:label "getHtml1" ;
+    yawl:returnType "Html" ;
+    yawl:signature "Html getHtml1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.setHtml1
+yawl:dynForm_setHtml1_11 a yawl:Method ;
+    rdfs:label "setHtml1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHtml1(Html h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.getHead1
+yawl:dynForm_getHead1_12 a yawl:Method ;
+    rdfs:label "getHead1" ;
+    yawl:returnType "Head" ;
+    yawl:signature "Head getHead1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.setHead1
+yawl:dynForm_setHead1_13 a yawl:Method ;
+    rdfs:label "setHead1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHead1(Head h)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.getLink1
+yawl:dynForm_getLink1_14 a yawl:Method ;
+    rdfs:label "getLink1" ;
+    yawl:returnType "Link" ;
+    yawl:signature "Link getLink1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.setLink1
+yawl:dynForm_setLink1_15 a yawl:Method ;
+    rdfs:label "setLink1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLink1(Link l)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.getBody1
+yawl:dynForm_getBody1_16 a yawl:Method ;
+    rdfs:label "getBody1" ;
+    yawl:returnType "Body" ;
+    yawl:signature "Body getBody1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.setBody1
+yawl:dynForm_setBody1_17 a yawl:Method ;
+    rdfs:label "setBody1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBody1(Body b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.getForm1
+yawl:dynForm_getForm1_18 a yawl:Method ;
+    rdfs:label "getForm1" ;
+    yawl:returnType "Form" ;
+    yawl:signature "Form getForm1()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.setForm1
+yawl:dynForm_setForm1_19 a yawl:Method ;
+    rdfs:label "setForm1" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setForm1(Form f)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.getTxtHeader
+yawl:dynForm_getTxtHeader_20 a yawl:Method ;
+    rdfs:label "getTxtHeader" ;
+    yawl:returnType "StaticText" ;
+    yawl:signature "StaticText getTxtHeader()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.setTxtHeader
+yawl:dynForm_setTxtHeader_21 a yawl:Method ;
+    rdfs:label "setTxtHeader" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTxtHeader(StaticText st)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.getBtnOK
+yawl:dynForm_getBtnOK_22 a yawl:Method ;
+    rdfs:label "getBtnOK" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnOK()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.setBtnOK
+yawl:dynForm_setBtnOK_23 a yawl:Method ;
+    rdfs:label "setBtnOK" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnOK(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.getBtnCancel
+yawl:dynForm_getBtnCancel_24 a yawl:Method ;
+    rdfs:label "getBtnCancel" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnCancel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.setBtnCancel
+yawl:dynForm_setBtnCancel_25 a yawl:Method ;
+    rdfs:label "setBtnCancel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnCancel(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.getBtnComplete
+yawl:dynForm_getBtnComplete_26 a yawl:Method ;
+    rdfs:label "getBtnComplete" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button getBtnComplete()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.setBtnComplete
+yawl:dynForm_setBtnComplete_27 a yawl:Method ;
+    rdfs:label "setBtnComplete" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBtnComplete(Button b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.getPnlContainer
+yawl:dynForm_getPnlContainer_28 a yawl:Method ;
+    rdfs:label "getPnlContainer" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getPnlContainer()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.setPnlContainer
+yawl:dynForm_setPnlContainer_29 a yawl:Method ;
+    rdfs:label "setPnlContainer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPnlContainer(PanelLayout pnl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.getBottomPanel
+yawl:dynForm_getBottomPanel_30 a yawl:Method ;
+    rdfs:label "getBottomPanel" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout getBottomPanel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.setBottomPanel
+yawl:dynForm_setBottomPanel_31 a yawl:Method ;
+    rdfs:label "setBottomPanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBottomPanel(PanelLayout pnl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.prerender
+yawl:dynForm_prerender_32 a yawl:Method ;
+    rdfs:label "prerender" ;
+    yawl:returnType "void" ;
+    yawl:signature "void prerender()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.btnOK_action
+yawl:dynForm_btnOK_action_33 a yawl:Method ;
+    rdfs:label "btnOK_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnOK_action()" ;
+    rdfs:comment """Updates workitem parameters with values added by user @return a reference to the referring page""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.btnComplete_action
+yawl:dynForm_btnComplete_action_34 a yawl:Method ;
+    rdfs:label "btnComplete_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnComplete_action()" ;
+    rdfs:comment """Same as btnOK, but also sets a flag to complete the item directly. Note: this button is only visible for item edits, and not for case starts @return a reference to the referring page""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.btnCancel_action
+yawl:dynForm_btnCancel_action_35 a yawl:Method ;
+    rdfs:label "btnCancel_action" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnCancel_action()" ;
+    rdfs:comment """Returns to referring page without saving changed values @return a reference to the referring page""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.saveForm
+yawl:dynForm_saveForm_36 a yawl:Method ;
+    rdfs:label "saveForm" ;
+    yawl:returnType "String" ;
+    yawl:signature "String saveForm()" ;
+    rdfs:comment """Sets flags in sessionBean to action the form save @return the name of the page that called this dynform""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: dynForm.getReferringPage
+yawl:dynForm_getReferringPage_37 a yawl:Method ;
+    rdfs:label "getReferringPage" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getReferringPage()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: dynForm.setupButtons
+yawl:dynForm_setupButtons_38 a yawl:Method ;
+    rdfs:label "setupButtons" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setupButtons()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: dynForm.loadBackgroundImage
+yawl:dynForm_loadBackgroundImage_39 a yawl:Method ;
+    rdfs:label "loadBackgroundImage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void loadBackgroundImage()" ;
+    rdfs:comment """Loads the background image or colour for the entire page (not the form within)""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: dynForm.btnOccursAction
+yawl:dynForm_btnOccursAction_40 a yawl:Method ;
+    rdfs:label "btnOccursAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnOccursAction(ActionEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.btnDocumentAction
+yawl:dynForm_btnDocumentAction_41 a yawl:Method ;
+    rdfs:label "btnDocumentAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnDocumentAction(ActionEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.btnUploadAction
+yawl:dynForm_btnUploadAction_42 a yawl:Method ;
+    rdfs:label "btnUploadAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnUploadAction(ActionEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.btnCancelUploadAction
+yawl:dynForm_btnCancelUploadAction_43 a yawl:Method ;
+    rdfs:label "btnCancelUploadAction" ;
+    yawl:returnType "String" ;
+    yawl:signature "String btnCancelUploadAction(ActionEvent event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: dynForm.getDocComponentForEvent
+yawl:dynForm_getDocComponentForEvent_44 a yawl:Method ;
+    rdfs:label "getDocComponentForEvent" ;
+    yawl:returnType "DocComponent" ;
+    yawl:signature "DocComponent getDocComponentForEvent(ActionEvent event)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: dynForm.cleanUpAnyDocs
+yawl:dynForm_cleanUpAnyDocs_45 a yawl:Method ;
+    rdfs:label "cleanUpAnyDocs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cleanUpAnyDocs()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:dynForm___placeholder a yawl:Field ;
+    rdfs:label "__placeholder" .
+
+yawl:dynForm_page1 a yawl:Field ;
+    rdfs:label "page1" .
+
+yawl:dynForm_html1 a yawl:Field ;
+    rdfs:label "html1" .
+
+yawl:dynForm_head1 a yawl:Field ;
+    rdfs:label "head1" .
+
+yawl:dynForm_link1 a yawl:Field ;
+    rdfs:label "link1" .
+
+yawl:dynForm_body1 a yawl:Field ;
+    rdfs:label "body1" .
+
+yawl:dynForm_form1 a yawl:Field ;
+    rdfs:label "form1" .
+
+yawl:dynForm_txtHeader a yawl:Field ;
+    rdfs:label "txtHeader" .
+
+yawl:dynForm_btnOK a yawl:Field ;
+    rdfs:label "btnOK" .
+
+yawl:dynForm_btnCancel a yawl:Field ;
+    rdfs:label "btnCancel" .
+
+yawl:dynForm_btnComplete a yawl:Field ;
+    rdfs:label "btnComplete" .
+
+yawl:dynForm_pnlContainer a yawl:Field ;
+    rdfs:label "pnlContainer" .
+
+yawl:dynForm_bottomPanel a yawl:Field ;
+    rdfs:label "bottomPanel" .
+
+yawl:dynForm__sb a yawl:Field ;
+    rdfs:label "_sb" .
+
+
+

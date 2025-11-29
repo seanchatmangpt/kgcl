@@ -1,0 +1,70 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.cli.CliDownloadWorker
+yawl:CliDownloadWorker a yawl:Class ;
+    rdfs:label "CliDownloadWorker" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_cli ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/cli/CliDownloadWorker.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @author Joerg Evermann @date 3/11/2015""" ;
+    yawl:extends yawl:DownloadWorker ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CliDownloadWorker_getProgressValue_1 ;
+    yawl:hasMethod yawl:CliDownloadWorker_start_2 ;
+    yawl:hasMethod yawl:CliDownloadWorker_isAlive_3 ;
+    yawl:hasMethod yawl:CliDownloadWorker_setCancelled_4 ;
+    yawl:hasField yawl:CliDownloadWorker_progressPercent ;
+    yawl:hasField yawl:CliDownloadWorker_cancelled ;
+    yawl:hasField yawl:CliDownloadWorker_runner ;
+    .
+
+
+# Method: CliDownloadWorker.getProgressValue
+yawl:CliDownloadWorker_getProgressValue_1 a yawl:Method ;
+    rdfs:label "getProgressValue" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getProgressValue()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CliDownloadWorker.start
+yawl:CliDownloadWorker_start_2 a yawl:Method ;
+    rdfs:label "start" ;
+    yawl:returnType "void" ;
+    yawl:signature "void start()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CliDownloadWorker.isAlive
+yawl:CliDownloadWorker_isAlive_3 a yawl:Method ;
+    rdfs:label "isAlive" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAlive()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CliDownloadWorker.setCancelled
+yawl:CliDownloadWorker_setCancelled_4 a yawl:Method ;
+    rdfs:label "setCancelled" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCancelled()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:CliDownloadWorker_progressPercent a yawl:Field ;
+    rdfs:label "progressPercent" .
+
+yawl:CliDownloadWorker_cancelled a yawl:Field ;
+    rdfs:label "cancelled" .
+
+yawl:CliDownloadWorker_runner a yawl:Field ;
+    rdfs:label "runner" .
+
+
+

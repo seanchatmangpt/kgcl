@@ -1,0 +1,73 @@
+@prefix code: <http://kgcl.dev/ontology/codebase#> .
+@prefix port: <http://kgcl.dev/ontology/porting#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+# Type Mapping Rules
+# Rules for mapping Java types to Python types and detecting incompatibilities
+
+# ============================================================================
+# RULE 1: Type Compatibility Check
+# ============================================================================
+# Check if Java and Python return types are compatible
+
+{
+    ?javaMethod port:hasPort ?pythonMethod .
+    ?javaMethod code:returnType ?javaReturn .
+    ?pythonMethod code:returnType ?pythonReturn .
+    
+    port:typeCompatible(?javaReturn, ?pythonReturn, ?compatible) .
+    
+    FILTER(?compatible = false)
+}
+=>
+{
+    ?javaMethod port:typeIncompatible true ;
+        port:javaType ?javaReturn ;
+        port:pythonType ?pythonReturn ;
+        port:severity "high" .
+} .
+
+# ============================================================================
+# RULE 2: Type Mapping Validation
+# ============================================================================
+# Validate that Python types match expected Java→Python mappings
+
+{
+    ?javaMethod port:hasPort ?pythonMethod .
+    ?javaMethod code:returnType ?javaReturn .
+    ?pythonMethod code:returnType ?pythonReturn .
+    
+    port:expectedPythonType(?javaReturn, ?expectedPython) .
+    
+    FILTER(?pythonReturn != ?expectedPython)
+}
+=>
+{
+    ?javaMethod port:typeMappingMismatch true ;
+        port:expectedType ?expectedPython ;
+        port:actualType ?pythonReturn ;
+        port:severity "medium" .
+} .
+
+# ============================================================================
+# RULE 3: Missing Type Hints
+# ============================================================================
+# Detect Python methods without type hints (when Java has types)
+
+{
+    ?javaMethod port:hasPort ?pythonMethod .
+    ?javaMethod code:returnType ?javaReturn .
+    
+    FILTER(?javaReturn != "void")
+    
+    NOT EXISTS {
+        ?pythonMethod code:returnType ?pythonReturn .
+    }
+}
+=>
+{
+    ?pythonMethod port:missingTypeHint true ;
+        port:expectedType ?javaReturn ;
+        port:severity "low" .
+} .
+

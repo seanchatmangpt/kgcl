@@ -1,0 +1,96 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.components.TextAreaOutputStream
+yawl:TextAreaOutputStream a yawl:Class ;
+    rdfs:label "TextAreaOutputStream" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_components ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/components/TextAreaOutputStream.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 20/10/2015""" ;
+    yawl:extends yawl:OutputStream ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:TextAreaOutputStream_write_1 ;
+    yawl:hasMethod yawl:TextAreaOutputStream_write_2 ;
+    yawl:hasMethod yawl:TextAreaOutputStream_handleSpecialCases_3 ;
+    yawl:hasMethod yawl:TextAreaOutputStream_append_4 ;
+    yawl:hasMethod yawl:TextAreaOutputStream_append_5 ;
+    yawl:hasMethod yawl:TextAreaOutputStream_mayIgnore_6 ;
+    yawl:hasField yawl:TextAreaOutputStream__textPane ;
+    yawl:hasField yawl:TextAreaOutputStream_DEFAULT_COLOR ;
+    yawl:hasField yawl:TextAreaOutputStream_ERROR_COLOR ;
+    yawl:hasField yawl:TextAreaOutputStream_WARN_COLOR ;
+    yawl:hasField yawl:TextAreaOutputStream_SUCCESS_COLOR ;
+    .
+
+
+# Method: TextAreaOutputStream.write
+yawl:TextAreaOutputStream_write_1 a yawl:Method ;
+    rdfs:label "write" ;
+    yawl:returnType "void" ;
+    yawl:signature "void write(byte buffer, int offset, int length)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TextAreaOutputStream.write
+yawl:TextAreaOutputStream_write_2 a yawl:Method ;
+    rdfs:label "write" ;
+    yawl:returnType "void" ;
+    yawl:signature "void write(int b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TextAreaOutputStream.handleSpecialCases
+yawl:TextAreaOutputStream_handleSpecialCases_3 a yawl:Method ;
+    rdfs:label "handleSpecialCases" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleSpecialCases(String text)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TextAreaOutputStream.append
+yawl:TextAreaOutputStream_append_4 a yawl:Method ;
+    rdfs:label "append" ;
+    yawl:returnType "void" ;
+    yawl:signature "void append(String text)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TextAreaOutputStream.append
+yawl:TextAreaOutputStream_append_5 a yawl:Method ;
+    rdfs:label "append" ;
+    yawl:returnType "void" ;
+    yawl:signature "void append(String text, Color color)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: TextAreaOutputStream.mayIgnore
+yawl:TextAreaOutputStream_mayIgnore_6 a yawl:Method ;
+    rdfs:label "mayIgnore" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean mayIgnore(String text)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:TextAreaOutputStream__textPane a yawl:Field ;
+    rdfs:label "_textPane" .
+
+yawl:TextAreaOutputStream_DEFAULT_COLOR a yawl:Field ;
+    rdfs:label "DEFAULT_COLOR" .
+
+yawl:TextAreaOutputStream_ERROR_COLOR a yawl:Field ;
+    rdfs:label "ERROR_COLOR" .
+
+yawl:TextAreaOutputStream_WARN_COLOR a yawl:Field ;
+    rdfs:label "WARN_COLOR" .
+
+yawl:TextAreaOutputStream_SUCCESS_COLOR a yawl:Field ;
+    rdfs:label "SUCCESS_COLOR" .
+
+
+

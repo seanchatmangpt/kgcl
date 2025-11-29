@@ -1,0 +1,176 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.stateless.elements.marking
+yawl:org_yawlfoundation_yawl_stateless_elements_marking a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.stateless.elements.marking" .
+# Class: org.yawlfoundation.yawl.stateless.elements.marking.YInternalCondition
+yawl:YInternalCondition a yawl:Class ;
+    rdfs:label "YInternalCondition" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_elements_marking ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/elements/marking/YInternalCondition.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 24/04/2003 Time: 10:17:37""" ;
+    yawl:extends yawl:YNetElement ;
+    yawl:implements yawl:YConditionInterface ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YInternalCondition_add_1 ;
+    yawl:hasMethod yawl:YInternalCondition_contains_2 ;
+    yawl:hasMethod yawl:YInternalCondition_containsIdentifier_3 ;
+    yawl:hasMethod yawl:YInternalCondition_getAmount_4 ;
+    yawl:hasMethod yawl:YInternalCondition_getIdentifiers_5 ;
+    yawl:hasMethod yawl:YInternalCondition_removeOne_6 ;
+    yawl:hasMethod yawl:YInternalCondition_removeOne_7 ;
+    yawl:hasMethod yawl:YInternalCondition_remove_8 ;
+    yawl:hasMethod yawl:YInternalCondition_removeAll_9 ;
+    yawl:hasMethod yawl:YInternalCondition_removeAll_10 ;
+    yawl:hasMethod yawl:YInternalCondition_toString_11 ;
+    yawl:hasMethod yawl:YInternalCondition_toXML_12 ;
+    yawl:hasMethod yawl:YInternalCondition_toXNode_13 ;
+    yawl:hasField yawl:YInternalCondition__bag ;
+    yawl:hasField yawl:YInternalCondition__myTask ;
+    yawl:hasField yawl:YInternalCondition__mi_active ;
+    yawl:hasField yawl:YInternalCondition__mi_entered ;
+    yawl:hasField yawl:YInternalCondition__mi_executing ;
+    yawl:hasField yawl:YInternalCondition__mi_complete ;
+    .
+
+
+# Method: YInternalCondition.add
+yawl:YInternalCondition_add_1 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(YIdentifier identifier)" ;
+    rdfs:comment """Adds an identifier to the collection. @param identifier""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YInternalCondition.contains
+yawl:YInternalCondition_contains_2 a yawl:Method ;
+    rdfs:label "contains" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean contains(YIdentifier identifier)" ;
+    rdfs:comment """@param identifier @return true iff this contains identifier.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YInternalCondition.containsIdentifier
+yawl:YInternalCondition_containsIdentifier_3 a yawl:Method ;
+    rdfs:label "containsIdentifier" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean containsIdentifier()" ;
+    rdfs:comment """@return true iff this contains one or more identifier.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YInternalCondition.getAmount
+yawl:YInternalCondition_getAmount_4 a yawl:Method ;
+    rdfs:label "getAmount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getAmount(YIdentifier identifier)" ;
+    rdfs:comment """Get the number of identifier matching the the one passed in. @param identifier @return the number of equal identifiers in this.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YInternalCondition.getIdentifiers
+yawl:YInternalCondition_getIdentifiers_5 a yawl:Method ;
+    rdfs:label "getIdentifiers" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getIdentifiers()" ;
+    rdfs:comment """@return a List of the identifiers in the condition numbering 1 or more.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YInternalCondition.removeOne
+yawl:YInternalCondition_removeOne_6 a yawl:Method ;
+    rdfs:label "removeOne" ;
+    yawl:returnType "YIdentifier" ;
+    yawl:signature "YIdentifier removeOne()" ;
+    rdfs:comment """Removes one YIdentifier from this condition.  If there are none inside then make no change to the state of this.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YInternalCondition.removeOne
+yawl:YInternalCondition_removeOne_7 a yawl:Method ;
+    rdfs:label "removeOne" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeOne(YIdentifier identifier)" ;
+    rdfs:comment """Removes one YIdentifier equal to identifier from the condition. If there are none inside then make no change to the state of this. @param identifier""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YInternalCondition.remove
+yawl:YInternalCondition_remove_8 a yawl:Method ;
+    rdfs:label "remove" ;
+    yawl:returnType "void" ;
+    yawl:signature "void remove(YIdentifier identifier, int amount)" ;
+    rdfs:comment """Remove from this amount YIdentifiers equal to identifier. @param identifier @param amount the amount to remove. @throws YStateException iff amount is greater than the number of YIdentifiers held inside this, and further more no change will be made to the state of this.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YInternalCondition.removeAll
+yawl:YInternalCondition_removeAll_9 a yawl:Method ;
+    rdfs:label "removeAll" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeAll(YIdentifier identifier)" ;
+    rdfs:comment """Removes all the YIdentifiers equal to identifier. @param identifier""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YInternalCondition.removeAll
+yawl:YInternalCondition_removeAll_10 a yawl:Method ;
+    rdfs:label "removeAll" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeAll()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YInternalCondition.toString
+yawl:YInternalCondition_toString_11 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YInternalCondition.toXML
+yawl:YInternalCondition_toXML_12 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YInternalCondition.toXNode
+yawl:YInternalCondition_toXNode_13 a yawl:Method ;
+    rdfs:label "toXNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode toXNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YInternalCondition__bag a yawl:Field ;
+    rdfs:label "_bag" .
+
+yawl:YInternalCondition__myTask a yawl:Field ;
+    rdfs:label "_myTask" .
+
+yawl:YInternalCondition__mi_active a yawl:Field ;
+    rdfs:label "_mi_active" .
+
+yawl:YInternalCondition__mi_entered a yawl:Field ;
+    rdfs:label "_mi_entered" .
+
+yawl:YInternalCondition__mi_executing a yawl:Field ;
+    rdfs:label "_mi_executing" .
+
+yawl:YInternalCondition__mi_complete a yawl:Field ;
+    rdfs:label "_mi_complete" .
+
+
+

@@ -1,0 +1,40 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.scheduling.util.ValueComparer
+yawl:ValueComparer a yawl:Class ;
+    rdfs:label "ValueComparer" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_scheduling_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/scheduling/util/Utils.java"^^xsd:string ;
+    rdfs:comment """@author http://paaloliver.wordpress.com/2006/01/24/sorting-maps-in-java/""" ;
+    yawl:implements yawl:Comparator ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    yawl:hasMethod yawl:ValueComparer_compare_1 ;
+    yawl:hasField yawl:ValueComparer_data ;
+    yawl:hasField yawl:ValueComparer_descending ;
+    .
+
+
+# Method: ValueComparer.compare
+yawl:ValueComparer_compare_1 a yawl:Method ;
+    rdfs:label "compare" ;
+    yawl:returnType "int" ;
+    yawl:signature "int compare(Object o1, Object o2)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:ValueComparer_data a yawl:Field ;
+    rdfs:label "data" .
+
+yawl:ValueComparer_descending a yawl:Field ;
+    rdfs:label "descending" .
+
+
+

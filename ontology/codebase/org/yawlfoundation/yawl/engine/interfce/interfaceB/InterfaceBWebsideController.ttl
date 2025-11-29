@@ -1,0 +1,488 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.engine.interfce.interfaceB
+yawl:org_yawlfoundation_yawl_engine_interfce_interfaceB a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.engine.interfce.interfaceB" .
+# Class: org.yawlfoundation.yawl.engine.interfce.interfaceB.InterfaceBWebsideController
+yawl:InterfaceBWebsideController a yawl:Class ;
+    rdfs:label "InterfaceBWebsideController" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_interfce_interfaceB ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/interfce/interfaceB/InterfaceBWebsideController.java"^^xsd:string ;
+    rdfs:comment """An abstract class designed to be implemented by YAWL custom services. It provides access to, and receives event notifications from, the Engine via Interface B. @author Lachlan Aldred Date: 19/03/2004 Time: 11:44:49 @author Michael Adams (refactored and enhanced for v2.0 2008-09)""" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_setUpInterfaceBClient_1 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_handleEnabledWorkItemEvent_2 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_handleCancelledWorkItemEvent_3 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_handleCancelledCaseEvent_4 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_handleDeadlockedCaseEvent_5 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_handleStartCaseEvent_6 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_handleCompleteCaseEvent_7 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_handleTimerExpiryEvent_8 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_handleEngineInitialisationCompletedEvent_9 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_handleWorkItemStatusChangeEvent_10 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_handleCaseSuspendingEvent_11 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_handleCaseSuspendedEvent_12 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_handleCaseResumedEvent_13 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_destroy_14 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_describeRequiredParams_15 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_setRemoteAuthenticationDetails_16 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_setEngineLogonName_17 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_setEngineLogonPassword_18 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_doGet_19 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_checkConnection_20 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_connect_21 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_checkOut_22 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_checkOut_23 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_checkInWorkItem_24 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_checkInWorkItem_25 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_checkInWorkItem_26 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_getCachedWorkItem_27 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_getEngineStoredWorkItem_28 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_getTaskInformation_29 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_getTaskInformation_30 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_getModel_31 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_getIBCache_32 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_getAuthenticationConfig_33 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_getChildren_34 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_logContactError_35 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_successful_36 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_getSpecificationPrototypesList_37 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_getSpecificationData_38 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_getSpecificationData_39 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_checkOutAllInstancesOfThisTask_40 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_prepareReplyRootElement_41 ;
+    yawl:hasMethod yawl:InterfaceBWebsideController_getResourcingSpecs_42 ;
+    yawl:hasField yawl:InterfaceBWebsideController__interfaceBClient ;
+    yawl:hasField yawl:InterfaceBWebsideController__ibCache ;
+    yawl:hasField yawl:InterfaceBWebsideController__authConfig4WS ;
+    yawl:hasField yawl:InterfaceBWebsideController__report ;
+    yawl:hasField yawl:InterfaceBWebsideController_XSD_STRINGTYPE ;
+    yawl:hasField yawl:InterfaceBWebsideController_XSD_ANYURI_TYPE ;
+    yawl:hasField yawl:InterfaceBWebsideController_XSD_NCNAME_TYPE ;
+    yawl:hasField yawl:InterfaceBWebsideController_XSD_NAMESPACE ;
+    yawl:hasField yawl:InterfaceBWebsideController_engineLogonName ;
+    yawl:hasField yawl:InterfaceBWebsideController_engineLogonPassword ;
+    yawl:hasField yawl:InterfaceBWebsideController__logger ;
+    .
+
+
+# Method: InterfaceBWebsideController.setUpInterfaceBClient
+yawl:InterfaceBWebsideController_setUpInterfaceBClient_1 a yawl:Method ;
+    rdfs:label "setUpInterfaceBClient" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUpInterfaceBClient(String backEndURI)" ;
+    rdfs:comment """Provided that you set up the web.xml file according to the YAWL documentation you do not need to call this method.  It allows implementers to set up their webapp so that it has the right objects, and correctly addressed pointers to the engine. @param backEndURI the uri of the engine.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.handleEnabledWorkItemEvent
+yawl:InterfaceBWebsideController_handleEnabledWorkItemEvent_2 a yawl:Method ;
+    rdfs:label "handleEnabledWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleEnabledWorkItemEvent(WorkItemRecord enabledWorkItem)" ;
+    rdfs:comment """Receives notification from the engine of an enabled workitem. Typically, a custom service will implement this method to check out the work item, and process it as appropriate for the service. @param enabledWorkItem the enabled work item""" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.handleCancelledWorkItemEvent
+yawl:InterfaceBWebsideController_handleCancelledWorkItemEvent_3 a yawl:Method ;
+    rdfs:label "handleCancelledWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCancelledWorkItemEvent(WorkItemRecord workItemRecord)" ;
+    rdfs:comment """Receives notification from the engine that an active workitem has been cancelled. A custom service will implement this method to take any cleanup action on a previously checked out workitem. @param workItemRecord the cancelled work item""" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.handleCancelledCaseEvent
+yawl:InterfaceBWebsideController_handleCancelledCaseEvent_4 a yawl:Method ;
+    rdfs:label "handleCancelledCaseEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCancelledCaseEvent(String caseID)" ;
+    rdfs:comment """Receives notification from the engine that an active case has been cancelled.  Override this method to take any necessary action. @param caseID the id of the case that has been cancelled""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.handleDeadlockedCaseEvent
+yawl:InterfaceBWebsideController_handleDeadlockedCaseEvent_5 a yawl:Method ;
+    rdfs:label "handleDeadlockedCaseEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleDeadlockedCaseEvent(String caseID, String tasks)" ;
+    rdfs:comment """Receives notification from the engine that an active case has become deadlocked.  Override this method to take any necessary action. @param caseID the id of the case that has been cancelled @param tasks the list of deadlocked task ids""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.handleStartCaseEvent
+yawl:InterfaceBWebsideController_handleStartCaseEvent_6 a yawl:Method ;
+    rdfs:label "handleStartCaseEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleStartCaseEvent(YSpecificationID specID, String caseID, String launchingService, boolean delayed)" ;
+    rdfs:comment """Receives notification from the engine that a case has been started. By overriding this method a service can process case start events as required. @param specID the specification id of the started case @param caseID the id of the case @param launchingService the uri (String) of the service that started the case @param delayed true if this is a delayed case start, false if immediate""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.handleCompleteCaseEvent
+yawl:InterfaceBWebsideController_handleCompleteCaseEvent_7 a yawl:Method ;
+    rdfs:label "handleCompleteCaseEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCompleteCaseEvent(String caseID, String casedata)" ;
+    rdfs:comment """Receives notification from the engine that an active case has been completed. By overriding this method a service can process case completion events as required. @param caseID the id of the completed case. @param casedata the set of net-level data for the case when it completes""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.handleTimerExpiryEvent
+yawl:InterfaceBWebsideController_handleTimerExpiryEvent_8 a yawl:Method ;
+    rdfs:label "handleTimerExpiryEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleTimerExpiryEvent(WorkItemRecord expiredWorkItem)" ;
+    rdfs:comment """Receives notification from the engine that an active workitem's timer has expired. Override this method to handle timer expiries on timed workitems. @param expiredWorkItem the workitem that has an expired timer""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.handleEngineInitialisationCompletedEvent
+yawl:InterfaceBWebsideController_handleEngineInitialisationCompletedEvent_9 a yawl:Method ;
+    rdfs:label "handleEngineInitialisationCompletedEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleEngineInitialisationCompletedEvent()" ;
+    rdfs:comment """Receives notification from the engine that it has finished startup initialisation and is now in a running state. Override this method to handle final service initialisation tasks that require a running engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.handleWorkItemStatusChangeEvent
+yawl:InterfaceBWebsideController_handleWorkItemStatusChangeEvent_10 a yawl:Method ;
+    rdfs:label "handleWorkItemStatusChangeEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleWorkItemStatusChangeEvent(WorkItemRecord workItem, String oldStatus, String newStatus)" ;
+    rdfs:comment """Receives notification from the engine that the status of a workitem has been modified. Override this method to handle any effects a status change might have on a custom service @param workItem the work item that has had its status modified @param oldStatus the work item's previous status @param newStatus the work item's new status""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.handleCaseSuspendingEvent
+yawl:InterfaceBWebsideController_handleCaseSuspendingEvent_11 a yawl:Method ;
+    rdfs:label "handleCaseSuspendingEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCaseSuspendingEvent(String caseID)" ;
+    rdfs:comment """Receives notification from the engine that an active case has been cancelled.  Override this method to take any necessary action. @param caseID the id of the case that has been cancelled""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.handleCaseSuspendedEvent
+yawl:InterfaceBWebsideController_handleCaseSuspendedEvent_12 a yawl:Method ;
+    rdfs:label "handleCaseSuspendedEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCaseSuspendedEvent(String caseID)" ;
+    rdfs:comment """Receives notification from the engine that an active case has been cancelled.  Override this method to take any necessary action. @param caseID the id of the case that has been cancelled""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.handleCaseResumedEvent
+yawl:InterfaceBWebsideController_handleCaseResumedEvent_13 a yawl:Method ;
+    rdfs:label "handleCaseResumedEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCaseResumedEvent(String caseID)" ;
+    rdfs:comment """Receives notification from the engine that an active case has been cancelled.  Override this method to take any necessary action. @param caseID the id of the case that has been cancelled""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.destroy
+yawl:InterfaceBWebsideController_destroy_14 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    rdfs:comment """Receives notification when the environment is being shutdown. Override this method to take any necessary finalisation action.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.describeRequiredParams
+yawl:InterfaceBWebsideController_describeRequiredParams_15 a yawl:Method ;
+    rdfs:label "describeRequiredParams" ;
+    yawl:returnType "YParameter" ;
+    yawl:signature "YParameter describeRequiredParams()" ;
+    rdfs:comment """Override this method if you wish to allow other tools to find out what input parameters are required for your custom YAWL service to work. @return an array of input parameters.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.setRemoteAuthenticationDetails
+yawl:InterfaceBWebsideController_setRemoteAuthenticationDetails_16 a yawl:Method ;
+    rdfs:label "setRemoteAuthenticationDetails" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRemoteAuthenticationDetails(String userName, String password, String httpProxyHost, String proxyPort)" ;
+    rdfs:comment """If a custom service is installed outside of a firewall then you will need to set this method once.  Doing so will allow the WSIF code to access Web services outside your organisation's firewall (http authenticating proxy). NOTE:  If your custom YAWL service doesn't need to negotiate a a firewall this method can be ignored @param userName mandatory @param password mandatory @param httpProxyHost optional (if using a non authenticating proxy firewall). @param proxyPort optional (if using a non auth""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.setEngineLogonName
+yawl:InterfaceBWebsideController_setEngineLogonName_17 a yawl:Method ;
+    rdfs:label "setEngineLogonName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEngineLogonName(String logonName)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: InterfaceBWebsideController.setEngineLogonPassword
+yawl:InterfaceBWebsideController_setEngineLogonPassword_18 a yawl:Method ;
+    rdfs:label "setEngineLogonPassword" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEngineLogonPassword(String logonPassword)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: InterfaceBWebsideController.doGet
+yawl:InterfaceBWebsideController_doGet_19 a yawl:Method ;
+    rdfs:label "doGet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doGet(HttpServletRequest request, HttpServletResponse response)" ;
+    rdfs:comment """Override this method to provide a welcome screen for your Custom YAWL Service For instance you could redirect to a JSP or just write typical servlet doGet() code inside your subclass. @param request the request @param response the response. @throws IOException if an error is detected when the servlet handles the GET request @throws ServletException if the request for the GET could not be handled""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.checkConnection
+yawl:InterfaceBWebsideController_checkConnection_20 a yawl:Method ;
+    rdfs:label "checkConnection" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean checkConnection(String sessionHandle)" ;
+    rdfs:comment """Checks if the sessionhandle with the engine is currently active. @param sessionHandle the session handle @return true if the session handle is valid and active; else false. @throws IOException if a connection with the engine cannot be established.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.connect
+yawl:InterfaceBWebsideController_connect_21 a yawl:Method ;
+    rdfs:label "connect" ;
+    yawl:returnType "String" ;
+    yawl:signature "String connect(String userID, String password)" ;
+    rdfs:comment """Creates a session with the engine.  A session is automatically disconnected after 60 minutes of inactivity (although this value can be changed via config value in the web.xml file). @param userID the userID @param password the password. @return a sessionhandle string @throws IOException if a connection with the engine cannot be established.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.checkOut
+yawl:InterfaceBWebsideController_checkOut_22 a yawl:Method ;
+    rdfs:label "checkOut" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord checkOut(String workItemID, String logPredicate, String sessionHandle)" ;
+    rdfs:comment """Checks a work item out of the engine. Also stores a local copy of the active item. @param workItemID the work item id. @param logPredicate a configurable logging string to be logged when the item starts. May be a simple string or an xml'd YLogDataItemList object. @param sessionHandle a valid session handle @return the resultant checked-out workitem. @throws IOException if a connection with the engine cannot be established. @throws YAWLException if the checkout was unsuccessful""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.checkOut
+yawl:InterfaceBWebsideController_checkOut_23 a yawl:Method ;
+    rdfs:label "checkOut" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord checkOut(String workItemID, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.checkInWorkItem
+yawl:InterfaceBWebsideController_checkInWorkItem_24 a yawl:Method ;
+    rdfs:label "checkInWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkInWorkItem(String workItemID, String inputData, String outputData, String sessionHandle)" ;
+    rdfs:comment """@deprecated since 2.1 - use checkInWorkItem(String, Element, Element, String, String) Checks a work item back into the engine. @param workItemID the work item id. @param inputData the input data. @param outputData the output data. @param sessionHandle the session handle. @return a diagnostic result of the action - in XML. @throws IOException if there is a problem contacting the engine. @throws JDOMException if there is a problem parsing XML of input or output data""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.checkInWorkItem
+yawl:InterfaceBWebsideController_checkInWorkItem_25 a yawl:Method ;
+    rdfs:label "checkInWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkInWorkItem(String workItemID, Element inputData, Element outputData, String sessionHandle)" ;
+    rdfs:comment """@deprecated since 2.1 - use checkInWorkItem(String, Element, Element, String, String) Checks a work item into the engine. @param workItemID the work item id. @param inputData the input data as an XML String. @param outputData the output data as an XML String @param sessionHandle a valid session handle @return a diagnostic result of the action - in XML. @throws IOException if there is a problem contacting the engine. @throws JDOMException if there is a problem parsing XML of input or output data""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.checkInWorkItem
+yawl:InterfaceBWebsideController_checkInWorkItem_26 a yawl:Method ;
+    rdfs:label "checkInWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkInWorkItem(String workItemID, Element inputData, Element outputData, String logPredicate, String sessionHandle)" ;
+    rdfs:comment """Checks a work item into the engine. @param workItemID the work item id. @param inputData the input data as an XML String. @param outputData the output data as an XML String @param logPredicate a configurable logging string to be logged when the item completes. May be a simple string or an xml'd YLogDataItemList object. @param sessionHandle a valid session handle @return a diagnostic result of the action - in XML. @throws IOException if there is a problem contacting the engine. @throws JDOMExcept""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.getCachedWorkItem
+yawl:InterfaceBWebsideController_getCachedWorkItem_27 a yawl:Method ;
+    rdfs:label "getCachedWorkItem" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord getCachedWorkItem(String workItemID)" ;
+    rdfs:comment """Gets a locally stored copy of a work item. @param workItemID the id of the workitem to retrieve @return a local (to the custom service) cached copy of the workitem.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.getEngineStoredWorkItem
+yawl:InterfaceBWebsideController_getEngineStoredWorkItem_28 a yawl:Method ;
+    rdfs:label "getEngineStoredWorkItem" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord getEngineStoredWorkItem(String workItemID, String sessionHandle)" ;
+    rdfs:comment """Gets a copy of a workitem form the engine's cache @param workItemID the id of the workitem to retrieve @param sessionHandle a valid sesion handle @return a remote (to the custom service) cached copy of the workitem. @throws IOException if there is a problem contacting the engine.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.getTaskInformation
+yawl:InterfaceBWebsideController_getTaskInformation_29 a yawl:Method ;
+    rdfs:label "getTaskInformation" ;
+    yawl:returnType "TaskInformation" ;
+    yawl:signature "TaskInformation getTaskInformation(String specID, String taskID, String sessionHandle)" ;
+    rdfs:comment """Gets metadata of a task. @deprecated superseded by getTaskInformation(YSpecificationID, String, String) @param specID the specification id @param taskID the task id @param sessionHandle a valid session handle @return a task metadata description @throws IOException if there is a problem contacting the engine.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.getTaskInformation
+yawl:InterfaceBWebsideController_getTaskInformation_30 a yawl:Method ;
+    rdfs:label "getTaskInformation" ;
+    yawl:returnType "TaskInformation" ;
+    yawl:signature "TaskInformation getTaskInformation(YSpecificationID specID, String taskID, String sessionHandle)" ;
+    rdfs:comment """Gets metadata of a task. @param specID the specification id @param taskID the task id @param sessionHandle a valid session handle @return a task metadata description @throws IOException if there is a problem contacting the engine.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.getModel
+yawl:InterfaceBWebsideController_getModel_31 a yawl:Method ;
+    rdfs:label "getModel" ;
+    yawl:returnType "IBControllerCache" ;
+    yawl:signature "IBControllerCache getModel()" ;
+    rdfs:comment """Gets a reference to the local cache @return a reference to the cache @deprecated use getIBCache() instead""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.getIBCache
+yawl:InterfaceBWebsideController_getIBCache_32 a yawl:Method ;
+    rdfs:label "getIBCache" ;
+    yawl:returnType "IBControllerCache" ;
+    yawl:signature "IBControllerCache getIBCache()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.getAuthenticationConfig
+yawl:InterfaceBWebsideController_getAuthenticationConfig_33 a yawl:Method ;
+    rdfs:label "getAuthenticationConfig" ;
+    yawl:returnType "AuthenticationConfig" ;
+    yawl:signature "AuthenticationConfig getAuthenticationConfig()" ;
+    rdfs:comment """Gets a reference to the authentication configuration for the local service (if any) @return the authentication object for this instantiation""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.getChildren
+yawl:InterfaceBWebsideController_getChildren_34 a yawl:Method ;
+    rdfs:label "getChildren" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getChildren(String workItemID, String sessionHandle)" ;
+    rdfs:comment """Retrieve a list of all the child work items for a given parent work item @param workItemID the id of the parent workitem @param sessionHandle a valid session handle @return the list of child workitems @throws IOException if there is a problem contacting the engine.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.logContactError
+yawl:InterfaceBWebsideController_logContactError_35 a yawl:Method ;
+    rdfs:label "logContactError" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logContactError(IOException e, String backEndURIStr)" ;
+    rdfs:comment """Logs the failure of a client to contact the YAWL engine. gives some suggestion of why? @param e the thrown exception @param backEndURIStr the uri of the engine""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: InterfaceBWebsideController.successful
+yawl:InterfaceBWebsideController_successful_36 a yawl:Method ;
+    rdfs:label "successful" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean successful(String input)" ;
+    rdfs:comment """Checks an interface return message for success . @param input the return message @return true if the message indicates success; false if otherwise""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.getSpecificationPrototypesList
+yawl:InterfaceBWebsideController_getSpecificationPrototypesList_37 a yawl:Method ;
+    rdfs:label "getSpecificationPrototypesList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getSpecificationPrototypesList(String sessionHandle)" ;
+    rdfs:comment """Gets a list of all specifications currently loaded in the engine @param sessionHandle a valid session handle @return the full list of specifications @throws IOException if there is a problem contacting the engine.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.getSpecificationData
+yawl:InterfaceBWebsideController_getSpecificationData_38 a yawl:Method ;
+    rdfs:label "getSpecificationData" ;
+    yawl:returnType "SpecificationData" ;
+    yawl:signature "SpecificationData getSpecificationData(String specID, String sessionHandle)" ;
+    rdfs:comment """Gets the specification data object with the spec id.  If called it will return the specdata object and the entire XML representation of the specification. @deprecated superseded by getSpecificationData(YSpecificationID, String) @param specID the specification id @param sessionHandle a valid session handle @return a specification data object @throws IOException if there is a problem contacting the engine.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.getSpecificationData
+yawl:InterfaceBWebsideController_getSpecificationData_39 a yawl:Method ;
+    rdfs:label "getSpecificationData" ;
+    yawl:returnType "SpecificationData" ;
+    yawl:signature "SpecificationData getSpecificationData(YSpecificationID specID, String sessionHandle)" ;
+    rdfs:comment """Gets the specification data object with the spec id.  If called it will return the specdata object including the entire XML representation of the specification. @param specID the specification id @param sessionHandle a valid session handle @return a specification data object @throws IOException if there is a problem contacting the engine.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceBWebsideController.checkOutAllInstancesOfThisTask
+yawl:InterfaceBWebsideController_checkOutAllInstancesOfThisTask_40 a yawl:Method ;
+    rdfs:label "checkOutAllInstancesOfThisTask" ;
+    yawl:returnType "List" ;
+    yawl:signature "List checkOutAllInstancesOfThisTask(WorkItemRecord enabledWorkItem, String sessionHandle)" ;
+    rdfs:comment """Utility method for implementers to use for helping to check all instances of a given task out of the engine. @param enabledWorkItem an enabled WorkItemRecord. @param sessionHandle a valid session handle with the engine. @return a list of work item records that correspond to the executing work-items that should be checked back into the engine when the task is complete. @throws IOException if there is a problem communicating with the engine. @throws YAWLException if the checkout is unsuccessful""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: InterfaceBWebsideController.prepareReplyRootElement
+yawl:InterfaceBWebsideController_prepareReplyRootElement_41 a yawl:Method ;
+    rdfs:label "prepareReplyRootElement" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element prepareReplyRootElement(WorkItemRecord enabledWorkItem, String sessionHandle)" ;
+    rdfs:comment """Utility method to prepare the reply element for checking a work item back into the engine. @param enabledWorkItem the enabled work item. @param sessionHandle the session handle @return an empty root element correctly named according to the version of the process specification. @throws IOException if there is a problem communicating with the engine.""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: InterfaceBWebsideController.getResourcingSpecs
+yawl:InterfaceBWebsideController_getResourcingSpecs_42 a yawl:Method ;
+    rdfs:label "getResourcingSpecs" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getResourcingSpecs(YSpecificationID specID, String taskID, String sessionHandle)" ;
+    rdfs:comment """Retrieve the resourcing specifications for a given task @param specID the specification id @param taskID the task id @param sessionHandle a valid sessionhandle @return the task's resourcing specification, or null if it doesn't have one (pre v2.0) @throws IOException if there is a problem communicating with the engine.""" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:InterfaceBWebsideController__interfaceBClient a yawl:Field ;
+    rdfs:label "_interfaceBClient" .
+
+yawl:InterfaceBWebsideController__ibCache a yawl:Field ;
+    rdfs:label "_ibCache" .
+
+yawl:InterfaceBWebsideController__authConfig4WS a yawl:Field ;
+    rdfs:label "_authConfig4WS" .
+
+yawl:InterfaceBWebsideController__report a yawl:Field ;
+    rdfs:label "_report" .
+
+yawl:InterfaceBWebsideController_XSD_STRINGTYPE a yawl:Field ;
+    rdfs:label "XSD_STRINGTYPE" .
+
+yawl:InterfaceBWebsideController_XSD_ANYURI_TYPE a yawl:Field ;
+    rdfs:label "XSD_ANYURI_TYPE" .
+
+yawl:InterfaceBWebsideController_XSD_NCNAME_TYPE a yawl:Field ;
+    rdfs:label "XSD_NCNAME_TYPE" .
+
+yawl:InterfaceBWebsideController_XSD_NAMESPACE a yawl:Field ;
+    rdfs:label "XSD_NAMESPACE" .
+
+yawl:InterfaceBWebsideController_engineLogonName a yawl:Field ;
+    rdfs:label "engineLogonName" .
+
+yawl:InterfaceBWebsideController_engineLogonPassword a yawl:Field ;
+    rdfs:label "engineLogonPassword" .
+
+yawl:InterfaceBWebsideController__logger a yawl:Field ;
+    rdfs:label "_logger" .
+
+
+

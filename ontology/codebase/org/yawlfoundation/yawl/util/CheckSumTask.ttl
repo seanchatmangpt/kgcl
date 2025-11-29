@@ -1,0 +1,242 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.util.CheckSumTask
+yawl:CheckSumTask a yawl:Class ;
+    rdfs:label "CheckSumTask" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/util/CheckSumTask.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 5/07/2014""" ;
+    yawl:extends yawl:AbstractCheckSumTask ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CheckSumTask_toXML_1 ;
+    yawl:hasMethod yawl:CheckSumTask_addPaths_2 ;
+    yawl:hasMethod yawl:CheckSumTask_addLibs_3 ;
+    yawl:hasMethod yawl:CheckSumTask_addApp_4 ;
+    yawl:hasMethod yawl:CheckSumTask_addControlPanel_5 ;
+    yawl:hasMethod yawl:CheckSumTask_getAppNode_6 ;
+    yawl:hasMethod yawl:CheckSumTask_addAppFiles_7 ;
+    yawl:hasMethod yawl:CheckSumTask_addAppLibs_8 ;
+    yawl:hasMethod yawl:CheckSumTask_addYAWLLib_9 ;
+    yawl:hasMethod yawl:CheckSumTask_addFile_10 ;
+    yawl:hasMethod yawl:CheckSumTask_getLocationGroup_11 ;
+    yawl:hasMethod yawl:CheckSumTask_getMD5Hex_12 ;
+    yawl:hasMethod yawl:CheckSumTask_getMD5Hex_13 ;
+    yawl:hasMethod yawl:CheckSumTask_getPropertyList_14 ;
+    yawl:hasMethod yawl:CheckSumTask_getBuildNumber_15 ;
+    yawl:hasMethod yawl:CheckSumTask_getVersion_16 ;
+    yawl:hasMethod yawl:CheckSumTask_getDir_17 ;
+    yawl:hasMethod yawl:CheckSumTask_getLibDir_18 ;
+    yawl:hasMethod yawl:CheckSumTask_getTempDir_19 ;
+    yawl:hasMethod yawl:CheckSumTask_getOutputDir_20 ;
+    yawl:hasMethod yawl:CheckSumTask_getChecksumsDir_21 ;
+    yawl:hasMethod yawl:CheckSumTask_getAppDir_22 ;
+    yawl:hasMethod yawl:CheckSumTask_getChecksumsFile_23 ;
+    yawl:hasMethod yawl:CheckSumTask_parse_24 ;
+    yawl:hasField yawl:CheckSumTask__locations ;
+    .
+
+
+# Method: CheckSumTask.toXML
+yawl:CheckSumTask_toXML_1 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML(File baseDir, CheckSummer summer)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CheckSumTask.addPaths
+yawl:CheckSumTask_addPaths_2 a yawl:Method ;
+    rdfs:label "addPaths" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addPaths(XNode root)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CheckSumTask.addLibs
+yawl:CheckSumTask_addLibs_3 a yawl:Method ;
+    rdfs:label "addLibs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addLibs(XNode root, File baseDir, CheckSummer summer)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CheckSumTask.addApp
+yawl:CheckSumTask_addApp_4 a yawl:Method ;
+    rdfs:label "addApp" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addApp(XNode root, File baseDir, CheckSummer summer)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CheckSumTask.addControlPanel
+yawl:CheckSumTask_addControlPanel_5 a yawl:Method ;
+    rdfs:label "addControlPanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addControlPanel(XNode root, File baseDir, CheckSummer summer)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CheckSumTask.getAppNode
+yawl:CheckSumTask_getAppNode_6 a yawl:Method ;
+    rdfs:label "getAppNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getAppNode(XNode webappsNode, String appName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CheckSumTask.addAppFiles
+yawl:CheckSumTask_addAppFiles_7 a yawl:Method ;
+    rdfs:label "addAppFiles" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addAppFiles(XNode node, String appName, File baseDir, CheckSummer summer)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CheckSumTask.addAppLibs
+yawl:CheckSumTask_addAppLibs_8 a yawl:Method ;
+    rdfs:label "addAppLibs" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addAppLibs(XNode node, String appName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CheckSumTask.addYAWLLib
+yawl:CheckSumTask_addYAWLLib_9 a yawl:Method ;
+    rdfs:label "addYAWLLib" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addYAWLLib(XNode root, File baseDir, CheckSummer summer)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CheckSumTask.addFile
+yawl:CheckSumTask_addFile_10 a yawl:Method ;
+    rdfs:label "addFile" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addFile(XNode node, File file, CheckSummer summer, File dir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CheckSumTask.getLocationGroup
+yawl:CheckSumTask_getLocationGroup_11 a yawl:Method ;
+    rdfs:label "getLocationGroup" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLocationGroup(XNode node)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CheckSumTask.getMD5Hex
+yawl:CheckSumTask_getMD5Hex_12 a yawl:Method ;
+    rdfs:label "getMD5Hex" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMD5Hex(File file, CheckSummer summer)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CheckSumTask.getMD5Hex
+yawl:CheckSumTask_getMD5Hex_13 a yawl:Method ;
+    rdfs:label "getMD5Hex" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMD5Hex(String s, CheckSummer summer)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CheckSumTask.getPropertyList
+yawl:CheckSumTask_getPropertyList_14 a yawl:Method ;
+    rdfs:label "getPropertyList" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPropertyList(String group)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CheckSumTask.getBuildNumber
+yawl:CheckSumTask_getBuildNumber_15 a yawl:Method ;
+    rdfs:label "getBuildNumber" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getBuildNumber(String appName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CheckSumTask.getVersion
+yawl:CheckSumTask_getVersion_16 a yawl:Method ;
+    rdfs:label "getVersion" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getVersion()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CheckSumTask.getDir
+yawl:CheckSumTask_getDir_17 a yawl:Method ;
+    rdfs:label "getDir" ;
+    yawl:returnType "File" ;
+    yawl:signature "File getDir(File baseDir, String subdir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CheckSumTask.getLibDir
+yawl:CheckSumTask_getLibDir_18 a yawl:Method ;
+    rdfs:label "getLibDir" ;
+    yawl:returnType "File" ;
+    yawl:signature "File getLibDir(File baseDir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CheckSumTask.getTempDir
+yawl:CheckSumTask_getTempDir_19 a yawl:Method ;
+    rdfs:label "getTempDir" ;
+    yawl:returnType "File" ;
+    yawl:signature "File getTempDir(File baseDir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CheckSumTask.getOutputDir
+yawl:CheckSumTask_getOutputDir_20 a yawl:Method ;
+    rdfs:label "getOutputDir" ;
+    yawl:returnType "File" ;
+    yawl:signature "File getOutputDir(File baseDir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CheckSumTask.getChecksumsDir
+yawl:CheckSumTask_getChecksumsDir_21 a yawl:Method ;
+    rdfs:label "getChecksumsDir" ;
+    yawl:returnType "File" ;
+    yawl:signature "File getChecksumsDir(File baseDir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CheckSumTask.getAppDir
+yawl:CheckSumTask_getAppDir_22 a yawl:Method ;
+    rdfs:label "getAppDir" ;
+    yawl:returnType "File" ;
+    yawl:signature "File getAppDir(File baseDir, String appName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CheckSumTask.getChecksumsFile
+yawl:CheckSumTask_getChecksumsFile_23 a yawl:Method ;
+    rdfs:label "getChecksumsFile" ;
+    yawl:returnType "File" ;
+    yawl:signature "File getChecksumsFile(File baseDir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CheckSumTask.parse
+yawl:CheckSumTask_parse_24 a yawl:Method ;
+    rdfs:label "parse" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode parse(File f)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:CheckSumTask__locations a yawl:Field ;
+    rdfs:label "_locations" .
+
+
+

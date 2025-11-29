@@ -1,0 +1,136 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.logging.table.YLogNetInstance
+yawl:YLogNetInstance a yawl:Class ;
+    rdfs:label "YLogNetInstance" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_logging_table ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/logging/table/YLogNetInstance.java"^^xsd:string ;
+    rdfs:comment """One row of the logNetInstance table, representing a runtime instance of a net. Note that the engineInstanceID of a root net = the case id of the running case instance Author: Michael Adams Creation Date: 6/04/2009""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YLogNetInstance_getNetInstanceID_1 ;
+    yawl:hasMethod yawl:YLogNetInstance_setNetInstanceID_2 ;
+    yawl:hasMethod yawl:YLogNetInstance_getEngineInstanceID_3 ;
+    yawl:hasMethod yawl:YLogNetInstance_setEngineInstanceID_4 ;
+    yawl:hasMethod yawl:YLogNetInstance_getNetID_5 ;
+    yawl:hasMethod yawl:YLogNetInstance_setNetID_6 ;
+    yawl:hasMethod yawl:YLogNetInstance_getParentTaskInstanceID_7 ;
+    yawl:hasMethod yawl:YLogNetInstance_setParentTaskInstanceID_8 ;
+    yawl:hasMethod yawl:YLogNetInstance_equals_9 ;
+    yawl:hasMethod yawl:YLogNetInstance_hashCode_10 ;
+    yawl:hasMethod yawl:YLogNetInstance_toXML_11 ;
+    yawl:hasField yawl:YLogNetInstance_netInstanceID ;
+    yawl:hasField yawl:YLogNetInstance_engineInstanceID ;
+    yawl:hasField yawl:YLogNetInstance_netID ;
+    yawl:hasField yawl:YLogNetInstance_parentTaskInstanceID ;
+    .
+
+
+# Method: YLogNetInstance.getNetInstanceID
+yawl:YLogNetInstance_getNetInstanceID_1 a yawl:Method ;
+    rdfs:label "getNetInstanceID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getNetInstanceID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogNetInstance.setNetInstanceID
+yawl:YLogNetInstance_setNetInstanceID_2 a yawl:Method ;
+    rdfs:label "setNetInstanceID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNetInstanceID(long netInstanceID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogNetInstance.getEngineInstanceID
+yawl:YLogNetInstance_getEngineInstanceID_3 a yawl:Method ;
+    rdfs:label "getEngineInstanceID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEngineInstanceID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogNetInstance.setEngineInstanceID
+yawl:YLogNetInstance_setEngineInstanceID_4 a yawl:Method ;
+    rdfs:label "setEngineInstanceID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEngineInstanceID(String engineInstanceID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogNetInstance.getNetID
+yawl:YLogNetInstance_getNetID_5 a yawl:Method ;
+    rdfs:label "getNetID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getNetID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogNetInstance.setNetID
+yawl:YLogNetInstance_setNetID_6 a yawl:Method ;
+    rdfs:label "setNetID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNetID(long netID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogNetInstance.getParentTaskInstanceID
+yawl:YLogNetInstance_getParentTaskInstanceID_7 a yawl:Method ;
+    rdfs:label "getParentTaskInstanceID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getParentTaskInstanceID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogNetInstance.setParentTaskInstanceID
+yawl:YLogNetInstance_setParentTaskInstanceID_8 a yawl:Method ;
+    rdfs:label "setParentTaskInstanceID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setParentTaskInstanceID(long parentTaskInstanceID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogNetInstance.equals
+yawl:YLogNetInstance_equals_9 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogNetInstance.hashCode
+yawl:YLogNetInstance_hashCode_10 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogNetInstance.toXML
+yawl:YLogNetInstance_toXML_11 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YLogNetInstance_netInstanceID a yawl:Field ;
+    rdfs:label "netInstanceID" .
+
+yawl:YLogNetInstance_engineInstanceID a yawl:Field ;
+    rdfs:label "engineInstanceID" .
+
+yawl:YLogNetInstance_netID a yawl:Field ;
+    rdfs:label "netID" .
+
+yawl:YLogNetInstance_parentTaskInstanceID a yawl:Field ;
+    rdfs:label "parentTaskInstanceID" .
+
+
+

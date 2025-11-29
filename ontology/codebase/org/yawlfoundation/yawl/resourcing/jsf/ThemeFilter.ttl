@@ -1,0 +1,58 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.ThemeFilter
+yawl:ThemeFilter a yawl:Class ;
+    rdfs:label "ThemeFilter" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/ThemeFilter.java"^^xsd:string ;
+    rdfs:comment """The jsf ThemeServlet class makes all files on the classpath available via the 'theme' uri. This filter prevents certain files from being accessed via that method.""" ;
+    yawl:implements yawl:Filter ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ThemeFilter_init_1 ;
+    yawl:hasMethod yawl:ThemeFilter_destroy_2 ;
+    yawl:hasMethod yawl:ThemeFilter_doFilter_3 ;
+    yawl:hasMethod yawl:ThemeFilter_isBlackListed_4 ;
+    .
+
+
+# Method: ThemeFilter.init
+yawl:ThemeFilter_init_1 a yawl:Method ;
+    rdfs:label "init" ;
+    yawl:returnType "void" ;
+    yawl:signature "void init(FilterConfig filterConfig)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ThemeFilter.destroy
+yawl:ThemeFilter_destroy_2 a yawl:Method ;
+    rdfs:label "destroy" ;
+    yawl:returnType "void" ;
+    yawl:signature "void destroy()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ThemeFilter.doFilter
+yawl:ThemeFilter_doFilter_3 a yawl:Method ;
+    rdfs:label "doFilter" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ThemeFilter.isBlackListed
+yawl:ThemeFilter_isBlackListed_4 a yawl:Method ;
+    rdfs:label "isBlackListed" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isBlackListed(HttpServletRequest request)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+
+

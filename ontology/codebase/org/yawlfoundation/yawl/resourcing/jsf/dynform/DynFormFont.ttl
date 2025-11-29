@@ -1,0 +1,166 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.dynform.DynFormFont
+yawl:DynFormFont a yawl:Class ;
+    rdfs:label "DynFormFont" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf_dynform ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/dynform/DynFormFont.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 7/04/2010""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DynFormFont_getUserDefinedFormFont_1 ;
+    yawl:hasMethod yawl:DynFormFont_setUserDefinedFormFont_2 ;
+    yawl:hasMethod yawl:DynFormFont_getUserDefinedFormFontStyle_3 ;
+    yawl:hasMethod yawl:DynFormFont_setUserDefinedFormFontStyle_4 ;
+    yawl:hasMethod yawl:DynFormFont_getUserDefinedFormHeaderFont_5 ;
+    yawl:hasMethod yawl:DynFormFont_setUserDefinedFormHeaderFont_6 ;
+    yawl:hasMethod yawl:DynFormFont_getUserDefinedFormHeaderFontStyle_7 ;
+    yawl:hasMethod yawl:DynFormFont_setUserDefinedFormHeaderFontStyle_8 ;
+    yawl:hasMethod yawl:DynFormFont_getDefaultFormHeaderFont_9 ;
+    yawl:hasMethod yawl:DynFormFont_getDefaultFormFont_10 ;
+    yawl:hasMethod yawl:DynFormFont_getFormFont_11 ;
+    yawl:hasMethod yawl:DynFormFont_getFormHeaderFont_12 ;
+    yawl:hasMethod yawl:DynFormFont_getFormTitleFont_13 ;
+    yawl:hasField yawl:DynFormFont__defFormFont ;
+    yawl:hasField yawl:DynFormFont__defFormHeaderFont ;
+    yawl:hasField yawl:DynFormFont__formTitleFont ;
+    yawl:hasField yawl:DynFormFont__udFormFont ;
+    yawl:hasField yawl:DynFormFont__udFormFontStyle ;
+    yawl:hasField yawl:DynFormFont__udFormHeaderFont ;
+    yawl:hasField yawl:DynFormFont__udFormHeaderFontStyle ;
+    .
+
+
+# Method: DynFormFont.getUserDefinedFormFont
+yawl:DynFormFont_getUserDefinedFormFont_1 a yawl:Method ;
+    rdfs:label "getUserDefinedFormFont" ;
+    yawl:returnType "Font" ;
+    yawl:signature "Font getUserDefinedFormFont()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFont.setUserDefinedFormFont
+yawl:DynFormFont_setUserDefinedFormFont_2 a yawl:Method ;
+    rdfs:label "setUserDefinedFormFont" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUserDefinedFormFont(Font font)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFont.getUserDefinedFormFontStyle
+yawl:DynFormFont_getUserDefinedFormFontStyle_3 a yawl:Method ;
+    rdfs:label "getUserDefinedFormFontStyle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUserDefinedFormFontStyle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFont.setUserDefinedFormFontStyle
+yawl:DynFormFont_setUserDefinedFormFontStyle_4 a yawl:Method ;
+    rdfs:label "setUserDefinedFormFontStyle" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUserDefinedFormFontStyle(String fontStyle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFont.getUserDefinedFormHeaderFont
+yawl:DynFormFont_getUserDefinedFormHeaderFont_5 a yawl:Method ;
+    rdfs:label "getUserDefinedFormHeaderFont" ;
+    yawl:returnType "Font" ;
+    yawl:signature "Font getUserDefinedFormHeaderFont()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFont.setUserDefinedFormHeaderFont
+yawl:DynFormFont_setUserDefinedFormHeaderFont_6 a yawl:Method ;
+    rdfs:label "setUserDefinedFormHeaderFont" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUserDefinedFormHeaderFont(Font font)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFont.getUserDefinedFormHeaderFontStyle
+yawl:DynFormFont_getUserDefinedFormHeaderFontStyle_7 a yawl:Method ;
+    rdfs:label "getUserDefinedFormHeaderFontStyle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUserDefinedFormHeaderFontStyle()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFont.setUserDefinedFormHeaderFontStyle
+yawl:DynFormFont_setUserDefinedFormHeaderFontStyle_8 a yawl:Method ;
+    rdfs:label "setUserDefinedFormHeaderFontStyle" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUserDefinedFormHeaderFontStyle(String fontStyle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFont.getDefaultFormHeaderFont
+yawl:DynFormFont_getDefaultFormHeaderFont_9 a yawl:Method ;
+    rdfs:label "getDefaultFormHeaderFont" ;
+    yawl:returnType "Font" ;
+    yawl:signature "Font getDefaultFormHeaderFont()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFont.getDefaultFormFont
+yawl:DynFormFont_getDefaultFormFont_10 a yawl:Method ;
+    rdfs:label "getDefaultFormFont" ;
+    yawl:returnType "Font" ;
+    yawl:signature "Font getDefaultFormFont()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFont.getFormFont
+yawl:DynFormFont_getFormFont_11 a yawl:Method ;
+    rdfs:label "getFormFont" ;
+    yawl:returnType "Font" ;
+    yawl:signature "Font getFormFont()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFont.getFormHeaderFont
+yawl:DynFormFont_getFormHeaderFont_12 a yawl:Method ;
+    rdfs:label "getFormHeaderFont" ;
+    yawl:returnType "Font" ;
+    yawl:signature "Font getFormHeaderFont()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFont.getFormTitleFont
+yawl:DynFormFont_getFormTitleFont_13 a yawl:Method ;
+    rdfs:label "getFormTitleFont" ;
+    yawl:returnType "Font" ;
+    yawl:signature "Font getFormTitleFont()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:DynFormFont__defFormFont a yawl:Field ;
+    rdfs:label "_defFormFont" .
+
+yawl:DynFormFont__defFormHeaderFont a yawl:Field ;
+    rdfs:label "_defFormHeaderFont" .
+
+yawl:DynFormFont__formTitleFont a yawl:Field ;
+    rdfs:label "_formTitleFont" .
+
+yawl:DynFormFont__udFormFont a yawl:Field ;
+    rdfs:label "_udFormFont" .
+
+yawl:DynFormFont__udFormFontStyle a yawl:Field ;
+    rdfs:label "_udFormFontStyle" .
+
+yawl:DynFormFont__udFormHeaderFont a yawl:Field ;
+    rdfs:label "_udFormHeaderFont" .
+
+yawl:DynFormFont__udFormHeaderFontStyle a yawl:Field ;
+    rdfs:label "_udFormHeaderFontStyle" .
+
+
+

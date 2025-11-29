@@ -1,0 +1,23 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.procletService.editor.choiceexception
+yawl:org_yawlfoundation_yawl_procletService_editor_choiceexception a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.procletService.editor.choiceexception" .
+# Class: org.yawlfoundation.yawl.procletService.editor.choiceexception.ExceptionChoiceControl
+yawl:ExceptionChoiceControl a yawl:Class ;
+    rdfs:label "ExceptionChoiceControl" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor_choiceexception ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/choiceexception/ExceptionChoiceControl.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+
+

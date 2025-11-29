@@ -1,0 +1,37 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.interfce.interfaceB.InterfaceB_HttpsEngineBasedClient
+yawl:InterfaceB_HttpsEngineBasedClient a yawl:Class ;
+    rdfs:label "InterfaceB_HttpsEngineBasedClient" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_interfce_interfaceB ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/interfce/interfaceB/InterfaceB_HttpsEngineBasedClient.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 6/7/17""" ;
+    yawl:extends yawl:InterfaceB_EngineBasedClient ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:InterfaceB_HttpsEngineBasedClient_getScheme_1 ;
+    .
+
+
+# Method: InterfaceB_HttpsEngineBasedClient.getScheme
+yawl:InterfaceB_HttpsEngineBasedClient_getScheme_1 a yawl:Method ;
+    rdfs:label "getScheme" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getScheme()" ;
+    rdfs:comment """Indicates which protocol this shim services. @return the scheme""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+
+
+yawl:org_yawlfoundation_yawl_engine_interfce_interfaceE a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.engine.interfce.interfaceE" .
+
+

@@ -1,0 +1,106 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.util.HibernateStatistics
+yawl:HibernateStatistics a yawl:Class ;
+    rdfs:label "HibernateStatistics" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/util/HibernateStatistics.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 16/03/2011""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:HibernateStatistics_get_1 ;
+    yawl:hasMethod yawl:HibernateStatistics_toXML_2 ;
+    yawl:hasMethod yawl:HibernateStatistics_getTransaction_3 ;
+    yawl:hasMethod yawl:HibernateStatistics_getSession_4 ;
+    yawl:hasMethod yawl:HibernateStatistics_getSecondLevelCache_5 ;
+    yawl:hasMethod yawl:HibernateStatistics_getCollections_6 ;
+    yawl:hasMethod yawl:HibernateStatistics_getQueries_7 ;
+    yawl:hasMethod yawl:HibernateStatistics_getEntities_8 ;
+    yawl:hasMethod yawl:HibernateStatistics_getTimeString_9 ;
+    yawl:hasField yawl:HibernateStatistics__factory ;
+    .
+
+
+# Method: HibernateStatistics.get
+yawl:HibernateStatistics_get_1 a yawl:Method ;
+    rdfs:label "get" ;
+    yawl:returnType "Statistics" ;
+    yawl:signature "Statistics get()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateStatistics.toXML
+yawl:HibernateStatistics_toXML_2 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateStatistics.getTransaction
+yawl:HibernateStatistics_getTransaction_3 a yawl:Method ;
+    rdfs:label "getTransaction" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getTransaction(Statistics stats)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: HibernateStatistics.getSession
+yawl:HibernateStatistics_getSession_4 a yawl:Method ;
+    rdfs:label "getSession" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getSession(Statistics stats)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: HibernateStatistics.getSecondLevelCache
+yawl:HibernateStatistics_getSecondLevelCache_5 a yawl:Method ;
+    rdfs:label "getSecondLevelCache" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getSecondLevelCache(Statistics stats)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: HibernateStatistics.getCollections
+yawl:HibernateStatistics_getCollections_6 a yawl:Method ;
+    rdfs:label "getCollections" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getCollections(Statistics stats)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: HibernateStatistics.getQueries
+yawl:HibernateStatistics_getQueries_7 a yawl:Method ;
+    rdfs:label "getQueries" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getQueries(Statistics stats)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: HibernateStatistics.getEntities
+yawl:HibernateStatistics_getEntities_8 a yawl:Method ;
+    rdfs:label "getEntities" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getEntities(Statistics stats)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: HibernateStatistics.getTimeString
+yawl:HibernateStatistics_getTimeString_9 a yawl:Method ;
+    rdfs:label "getTimeString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTimeString(long time)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:HibernateStatistics__factory a yawl:Field ;
+    rdfs:label "_factory" .
+
+
+

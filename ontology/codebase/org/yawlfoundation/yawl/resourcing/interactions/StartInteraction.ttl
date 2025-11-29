@@ -1,0 +1,40 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.interactions.StartInteraction
+yawl:StartInteraction a yawl:Class ;
+    rdfs:label "StartInteraction" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_interactions ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/interactions/StartInteraction.java"^^xsd:string ;
+    rdfs:comment """This class describes the requirements of a task at the start phase of allocating resources. @author Michael Adams v0.1, 02/08/2007""" ;
+    yawl:extends yawl:AbstractInteraction ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:StartInteraction_parse_1 ;
+    yawl:hasMethod yawl:StartInteraction_toXML_2 ;
+    .
+
+
+# Method: StartInteraction.parse
+yawl:StartInteraction_parse_1 a yawl:Method ;
+    rdfs:label "parse" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parse(Element e, Namespace nsYawl)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StartInteraction.toXML
+yawl:StartInteraction_toXML_2 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

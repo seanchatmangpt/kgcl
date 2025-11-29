@@ -1,0 +1,175 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.stateless
+yawl:org_yawlfoundation_yawl_stateless a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.stateless" .
+# Class: org.yawlfoundation.yawl.stateless.YSExample
+yawl:YSExample a yawl:Class ;
+    rdfs:label "YSExample" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/YSExample.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 30/9/20""" ;
+    yawl:implements yawl:YCaseEventListener ;
+    yawl:implements yawl:YWorkItemEventListener ;
+    yawl:implements yawl:YLogEventListener ;
+    yawl:implements yawl:YTimerEventListener ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YSExample_runOneCase_1 ;
+    yawl:hasMethod yawl:YSExample_runMany_2 ;
+    yawl:hasMethod yawl:YSExample_handleCaseEvent_3 ;
+    yawl:hasMethod yawl:YSExample_handleLogEvent_4 ;
+    yawl:hasMethod yawl:YSExample_handleTimerEvent_5 ;
+    yawl:hasMethod yawl:YSExample_handleWorkItemEvent_6 ;
+    yawl:hasMethod yawl:YSExample_processWorkItem_7 ;
+    yawl:hasMethod yawl:YSExample_print_8 ;
+    yawl:hasMethod yawl:YSExample_getDataValue_9 ;
+    yawl:hasMethod yawl:YSExample_setDataValue_10 ;
+    yawl:hasMethod yawl:YSExample_dataItemToString_11 ;
+    yawl:hasMethod yawl:YSExample_elapsed_12 ;
+    yawl:hasMethod yawl:YSExample_main_13 ;
+    yawl:hasField yawl:YSExample__engine ;
+    yawl:hasField yawl:YSExample__caseCount ;
+    yawl:hasField yawl:YSExample__startTime ;
+    yawl:hasField yawl:YSExample__caseRunner ;
+    .
+
+
+# Method: YSExample.runOneCase
+yawl:YSExample_runOneCase_1 a yawl:Method ;
+    rdfs:label "runOneCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void runOneCase(String specxml)" ;
+    rdfs:comment """Runs a single case of the specification supplied @param specxml the XML of the specification""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSExample.runMany
+yawl:YSExample_runMany_2 a yawl:Method ;
+    rdfs:label "runMany" ;
+    yawl:returnType "void" ;
+    yawl:signature "void runMany(String specxml, int count)" ;
+    rdfs:comment """Launches a specified number of cases of a specification @param specxml the XML of the specification @param count the number of instances to launch""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSExample.handleCaseEvent
+yawl:YSExample_handleCaseEvent_3 a yawl:Method ;
+    rdfs:label "handleCaseEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCaseEvent(YCaseEvent event)" ;
+    rdfs:comment """Respond to case level events: CASE_START, CASE_COMPLETE, CASE_CANCELLED, CASE_DEADLOCKED, CASE_SUSPENDING, CASE_SUSPENDED, CASE_RESUMED, CASE_CHECK_PRECONSTRAINTS, CASE_CHECK_POSTCONSTRAINTS @param event the event object, with certain data describing the event""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSExample.handleLogEvent
+yawl:YSExample_handleLogEvent_4 a yawl:Method ;
+    rdfs:label "handleLogEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleLogEvent(YLogEvent event)" ;
+    rdfs:comment """Respond to logging events @param event the event object, with certain data describing the event""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSExample.handleTimerEvent
+yawl:YSExample_handleTimerEvent_5 a yawl:Method ;
+    rdfs:label "handleTimerEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleTimerEvent(YTimerEvent event)" ;
+    rdfs:comment """Respond to any timer events @param event the event object, with certain data describing the event""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSExample.handleWorkItemEvent
+yawl:YSExample_handleWorkItemEvent_6 a yawl:Method ;
+    rdfs:label "handleWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleWorkItemEvent(YWorkItemEvent event)" ;
+    rdfs:comment """Respond to work item events: ITEM_ENABLED, ITEM_STARTED, ITEM_COMPLETED, ITEM_STATUS_CHANGE, ITEM_CANCEL, ITEM_DATA_VALUE_CHANGE, ITEM_CHECK_PRECONSTRAINTS, ITEM_CHECK_POSTCONSTRAINTS @param event the event object, with certain data describing the event""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSExample.processWorkItem
+yawl:YSExample_processWorkItem_7 a yawl:Method ;
+    rdfs:label "processWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processWorkItem(YWorkItem item)" ;
+    rdfs:comment """Simulates the processing of a work item: extracts the work item data, does a simple update, then completes the work item @param item the work item to work on and then complete @throws YQueryException if the data assignments are malformed @throws YEngineStateException if the engine isn't in running state (it will be) @throws YStateException if the state object is out-of-date @throws YDataStateException if the data string is malformed""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSExample.print
+yawl:YSExample_print_8 a yawl:Method ;
+    rdfs:label "print" ;
+    yawl:returnType "void" ;
+    yawl:signature "void print(YEvent event, String args)" ;
+    rdfs:comment """A simple print method @param event the event to print @param args the sequence of strings to print""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSExample.getDataValue
+yawl:YSExample_getDataValue_9 a yawl:Method ;
+    rdfs:label "getDataValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataValue(Element data, String varName)" ;
+    rdfs:comment """Extracts the value of a simple work item variable @param data the work item data element @param varName the name of the variable @return the variable's value""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSExample.setDataValue
+yawl:YSExample_setDataValue_10 a yawl:Method ;
+    rdfs:label "setDataValue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataValue(Element data, String varName, String value)" ;
+    rdfs:comment """Assigns a value to a simple work item variable @param data the work item data element @param varName the name of the variable @param value the value to assign""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSExample.dataItemToString
+yawl:YSExample_dataItemToString_11 a yawl:Method ;
+    rdfs:label "dataItemToString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String dataItemToString(YLogDataItem item)" ;
+    rdfs:comment """This one just converts a log item to a string so we can print it @param item the log item, containing some logged info @return the flattened string""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSExample.elapsed
+yawl:YSExample_elapsed_12 a yawl:Method ;
+    rdfs:label "elapsed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void elapsed(String msg)" ;
+    rdfs:comment """Prints a message with the difference between the start time and now @param msg the message to print""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSExample.main
+yawl:YSExample_main_13 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String args)" ;
+    rdfs:comment """This runs the example above @param args there are none""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:YSExample__engine a yawl:Field ;
+    rdfs:label "_engine" .
+
+yawl:YSExample__caseCount a yawl:Field ;
+    rdfs:label "_caseCount" .
+
+yawl:YSExample__startTime a yawl:Field ;
+    rdfs:label "_startTime" .
+
+yawl:YSExample__caseRunner a yawl:Field ;
+    rdfs:label "_caseRunner" .
+
+
+

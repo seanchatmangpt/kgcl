@@ -1,0 +1,749 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.scheduling.util
+yawl:org_yawlfoundation_yawl_scheduling_util a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.scheduling.util" .
+# Class: org.yawlfoundation.yawl.scheduling.util.XMLUtils
+yawl:XMLUtils a yawl:Class ;
+    rdfs:label "XMLUtils" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_scheduling_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/scheduling/util/XMLUtils.java"^^xsd:string ;
+    rdfs:comment """@author tbe @version $Id: java 18313 2010-04-30 10:14:09Z tbe $""" ;
+    yawl:implements yawl:Constants ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:XMLUtils_getValidator_1 ;
+    yawl:hasMethod yawl:XMLUtils_getSchemaDocs_2 ;
+    yawl:hasMethod yawl:XMLUtils_getEnumerationFromSchema_3 ;
+    yawl:hasMethod yawl:XMLUtils_getDefaultFromSchema_4 ;
+    yawl:hasMethod yawl:XMLUtils_getUnitFromSchema_5 ;
+    yawl:hasMethod yawl:XMLUtils_isVisibleFromSchema_6 ;
+    yawl:hasMethod yawl:XMLUtils_isReadonlyFromSchema_7 ;
+    yawl:hasMethod yawl:XMLUtils_isEnumerationFromSchema_8 ;
+    yawl:hasMethod yawl:XMLUtils_isRequiredFromSchema_9 ;
+    yawl:hasMethod yawl:XMLUtils_getAttributeFromSchema_10 ;
+    yawl:hasMethod yawl:XMLUtils_setDefaults_11 ;
+    yawl:hasMethod yawl:XMLUtils_convertSchemaToString_12 ;
+    yawl:hasMethod yawl:XMLUtils_validate_13 ;
+    yawl:hasMethod yawl:XMLUtils_validate_14 ;
+    yawl:hasMethod yawl:XMLUtils_validateType_15 ;
+    yawl:hasMethod yawl:XMLUtils_validateElement_16 ;
+    yawl:hasMethod yawl:XMLUtils_isDatatypeXSD_17 ;
+    yawl:hasMethod yawl:XMLUtils_validateRestrictions_18 ;
+    yawl:hasMethod yawl:XMLUtils_getIntegerInterpretation_19 ;
+    yawl:hasMethod yawl:XMLUtils_getErrorValue_20 ;
+    yawl:hasMethod yawl:XMLUtils_getWarningValue_21 ;
+    yawl:hasMethod yawl:XMLUtils_getAttributeValue_22 ;
+    yawl:hasMethod yawl:XMLUtils_addErrorValue_23 ;
+    yawl:hasMethod yawl:XMLUtils_addWarningValue_24 ;
+    yawl:hasMethod yawl:XMLUtils_addAttributeValue_25 ;
+    yawl:hasMethod yawl:XMLUtils_removeAttributes_26 ;
+    yawl:hasMethod yawl:XMLUtils_removeAttribute_27 ;
+    yawl:hasMethod yawl:XMLUtils_hasErrors_28 ;
+    yawl:hasMethod yawl:XMLUtils_hasWarnings_29 ;
+    yawl:hasMethod yawl:XMLUtils_hasAttributeValues_30 ;
+    yawl:hasMethod yawl:XMLUtils_getErrors_31 ;
+    yawl:hasMethod yawl:XMLUtils_getAttributeValues_32 ;
+    yawl:hasMethod yawl:XMLUtils_getDateValue_33 ;
+    yawl:hasMethod yawl:XMLUtils_setDateValue_34 ;
+    yawl:hasMethod yawl:XMLUtils_setDurationValue_35 ;
+    yawl:hasMethod yawl:XMLUtils_setLongValue_36 ;
+    yawl:hasMethod yawl:XMLUtils_getStringValue_37 ;
+    yawl:hasMethod yawl:XMLUtils_setStringValue_38 ;
+    yawl:hasMethod yawl:XMLUtils_getDurationValue_39 ;
+    yawl:hasMethod yawl:XMLUtils_getDurationValueInMinutes_40 ;
+    yawl:hasMethod yawl:XMLUtils_getDoubleValue_41 ;
+    yawl:hasMethod yawl:XMLUtils_getIntegerValue_42 ;
+    yawl:hasMethod yawl:XMLUtils_getLongValue_43 ;
+    yawl:hasMethod yawl:XMLUtils_getBooleanValue_44 ;
+    yawl:hasMethod yawl:XMLUtils_getXPATH_RUP_45 ;
+    yawl:hasMethod yawl:XMLUtils_getXPATH_Activities_46 ;
+    yawl:hasMethod yawl:XMLUtils_getXPATH_ActivitiesElement_47 ;
+    yawl:hasMethod yawl:XMLUtils_getXPATH_ActivityElement_48 ;
+    yawl:hasMethod yawl:XMLUtils_getXPATH_ResOrUtilElement_49 ;
+    yawl:hasMethod yawl:XMLUtils_getXPATH_Resource_50 ;
+    yawl:hasMethod yawl:XMLUtils_getXPATH_ResourceElement_51 ;
+    yawl:hasMethod yawl:XMLUtils_getXPATH_ResourceElement_52 ;
+    yawl:hasMethod yawl:XMLUtils_different_53 ;
+    yawl:hasMethod yawl:XMLUtils_isEqualXMLText_54 ;
+    yawl:hasMethod yawl:XMLUtils_getXMLObjects_55 ;
+    yawl:hasMethod yawl:XMLUtils_getFirstXMLObject_56 ;
+    yawl:hasMethod yawl:XMLUtils_getElements_57 ;
+    yawl:hasMethod yawl:XMLUtils_getElement_58 ;
+    yawl:hasMethod yawl:XMLUtils_getAttribute_59 ;
+    yawl:hasMethod yawl:XMLUtils_setChildText_60 ;
+    yawl:hasMethod yawl:XMLUtils_mergeElements_61 ;
+    yawl:hasMethod yawl:XMLUtils_getActivityNames_62 ;
+    yawl:hasMethod yawl:XMLUtils_getCaseId_63 ;
+    yawl:hasMethod yawl:XMLUtils_getEarliestBeginElement_64 ;
+    yawl:hasMethod yawl:XMLUtils_getEarliestBeginDate_65 ;
+    yawl:hasMethod yawl:XMLUtils_getLatestEndElement_66 ;
+    yawl:hasMethod yawl:XMLUtils_getLatestEndDate_67 ;
+    yawl:hasMethod yawl:XMLUtils_existInList_68 ;
+    yawl:hasMethod yawl:XMLUtils_elementsEqual_69 ;
+    yawl:hasField yawl:XMLUtils_logger ;
+    yawl:hasField yawl:XMLUtils_schemaFilePathName ;
+    yawl:hasField yawl:XMLUtils_schemaDocs ;
+    yawl:hasField yawl:XMLUtils_validator ;
+    .
+
+
+# Method: XMLUtils.getValidator
+yawl:XMLUtils_getValidator_1 a yawl:Method ;
+    rdfs:label "getValidator" ;
+    yawl:returnType "Validator" ;
+    yawl:signature "Validator getValidator()" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getSchemaDocs
+yawl:XMLUtils_getSchemaDocs_2 a yawl:Method ;
+    rdfs:label "getSchemaDocs" ;
+    yawl:returnType "Collection" ;
+    yawl:signature "Collection getSchemaDocs()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getEnumerationFromSchema
+yawl:XMLUtils_getEnumerationFromSchema_3 a yawl:Method ;
+    rdfs:label "getEnumerationFromSchema" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getEnumerationFromSchema(String name)" ;
+    rdfs:comment """return constants defined in XSD enumerations sind als simpleType definiert @return""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getDefaultFromSchema
+yawl:XMLUtils_getDefaultFromSchema_4 a yawl:Method ;
+    rdfs:label "getDefaultFromSchema" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDefaultFromSchema(String elementName)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getUnitFromSchema
+yawl:XMLUtils_getUnitFromSchema_5 a yawl:Method ;
+    rdfs:label "getUnitFromSchema" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUnitFromSchema(String elementName)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.isVisibleFromSchema
+yawl:XMLUtils_isVisibleFromSchema_6 a yawl:Method ;
+    rdfs:label "isVisibleFromSchema" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isVisibleFromSchema(String elementName)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.isReadonlyFromSchema
+yawl:XMLUtils_isReadonlyFromSchema_7 a yawl:Method ;
+    rdfs:label "isReadonlyFromSchema" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isReadonlyFromSchema(String elementName)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.isEnumerationFromSchema
+yawl:XMLUtils_isEnumerationFromSchema_8 a yawl:Method ;
+    rdfs:label "isEnumerationFromSchema" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEnumerationFromSchema(String elementName)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.isRequiredFromSchema
+yawl:XMLUtils_isRequiredFromSchema_9 a yawl:Method ;
+    rdfs:label "isRequiredFromSchema" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isRequiredFromSchema(String elementName)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getAttributeFromSchema
+yawl:XMLUtils_getAttributeFromSchema_10 a yawl:Method ;
+    rdfs:label "getAttributeFromSchema" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAttributeFromSchema(String elementName, String attributeXPath)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.setDefaults
+yawl:XMLUtils_setDefaults_11 a yawl:Method ;
+    rdfs:label "setDefaults" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDefaults(Element elem)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.convertSchemaToString
+yawl:XMLUtils_convertSchemaToString_12 a yawl:Method ;
+    rdfs:label "convertSchemaToString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String convertSchemaToString(String schemaFileName)" ;
+    rdfs:comment """Internal method that helps to read an XSD file from the file system; location: where the Java classes are located @param schemaFileName - name of the XML Schema file @return String representation of the XML Schema data model @throws IOException""" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.validate
+yawl:XMLUtils_validate_13 a yawl:Method ;
+    rdfs:label "validate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void validate(String msgText)" ;
+    rdfs:comment """Datentyp�berpr�fung und angabe des betroffenen elements, es werden alle gefundenen Fehler ausgegeben Xerces DocumentBuilder method, called by validator.validate(), isn't thread safe @param msgText @return @throws IOException @throws SAXException""" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.validate
+yawl:XMLUtils_validate_14 a yawl:Method ;
+    rdfs:label "validate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void validate(Element msg)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.validateType
+yawl:XMLUtils_validateType_15 a yawl:Method ;
+    rdfs:label "validateType" ;
+    yawl:returnType "String" ;
+    yawl:signature "String validateType(Element element, String schemaName, List restrictions, boolean withValidation)" ;
+    rdfs:comment """validates type of resource utilisation plan against schema element name TODO@tbe: name of schema element must be unique! Activity.SurgicalProcedure.Reservation.#1.Resource.Type""" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.validateElement
+yawl:XMLUtils_validateElement_16 a yawl:Method ;
+    rdfs:label "validateElement" ;
+    yawl:returnType "String" ;
+    yawl:signature "String validateElement(Element element, Element typeElement, List restrictions, boolean withValidation)" ;
+    rdfs:comment """validates element of resource utilisation plan against type element from schema return cs class for element""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.isDatatypeXSD
+yawl:XMLUtils_isDatatypeXSD_17 a yawl:Method ;
+    rdfs:label "isDatatypeXSD" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isDatatypeXSD(String type, String xsdDatatypes)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.validateRestrictions
+yawl:XMLUtils_validateRestrictions_18 a yawl:Method ;
+    rdfs:label "validateRestrictions" ;
+    yawl:returnType "void" ;
+    yawl:signature "void validateRestrictions(Element element, String type, Object o, List restrictions, boolean withValidation)" ;
+    rdfs:comment """check restrictions given in XSD @param o @param restrictions""" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getIntegerInterpretation
+yawl:XMLUtils_getIntegerInterpretation_19 a yawl:Method ;
+    rdfs:label "getIntegerInterpretation" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getIntegerInterpretation(String value, String type)" ;
+    rdfs:comment """interpretes value as Integer, depending of type @param value @param type @return""" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getErrorValue
+yawl:XMLUtils_getErrorValue_20 a yawl:Method ;
+    rdfs:label "getErrorValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getErrorValue(Element e)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getWarningValue
+yawl:XMLUtils_getWarningValue_21 a yawl:Method ;
+    rdfs:label "getWarningValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWarningValue(Element e)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getAttributeValue
+yawl:XMLUtils_getAttributeValue_22 a yawl:Method ;
+    rdfs:label "getAttributeValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAttributeValue(Element e, String attr)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.addErrorValue
+yawl:XMLUtils_addErrorValue_23 a yawl:Method ;
+    rdfs:label "addErrorValue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addErrorValue(Element e, boolean withValidation, String value, String args)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.addWarningValue
+yawl:XMLUtils_addWarningValue_24 a yawl:Method ;
+    rdfs:label "addWarningValue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addWarningValue(Element e, String value, String args)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.addAttributeValue
+yawl:XMLUtils_addAttributeValue_25 a yawl:Method ;
+    rdfs:label "addAttributeValue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addAttributeValue(Element e, String attr, String value, String args)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.removeAttributes
+yawl:XMLUtils_removeAttributes_26 a yawl:Method ;
+    rdfs:label "removeAttributes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeAttributes(Element element, String attr)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.removeAttribute
+yawl:XMLUtils_removeAttribute_27 a yawl:Method ;
+    rdfs:label "removeAttribute" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeAttribute(Element e, String attr)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.hasErrors
+yawl:XMLUtils_hasErrors_28 a yawl:Method ;
+    rdfs:label "hasErrors" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasErrors(Element element)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.hasWarnings
+yawl:XMLUtils_hasWarnings_29 a yawl:Method ;
+    rdfs:label "hasWarnings" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasWarnings(Element element)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.hasAttributeValues
+yawl:XMLUtils_hasAttributeValues_30 a yawl:Method ;
+    rdfs:label "hasAttributeValues" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasAttributeValues(Element element, String attr)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getErrors
+yawl:XMLUtils_getErrors_31 a yawl:Method ;
+    rdfs:label "getErrors" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getErrors(Element element)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getAttributeValues
+yawl:XMLUtils_getAttributeValues_32 a yawl:Method ;
+    rdfs:label "getAttributeValues" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getAttributeValues(Element element, String attr)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getDateValue
+yawl:XMLUtils_getDateValue_33 a yawl:Method ;
+    rdfs:label "getDateValue" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date getDateValue(Element element, boolean withValidation)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.setDateValue
+yawl:XMLUtils_setDateValue_34 a yawl:Method ;
+    rdfs:label "setDateValue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDateValue(Element element, Date value)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.setDurationValue
+yawl:XMLUtils_setDurationValue_35 a yawl:Method ;
+    rdfs:label "setDurationValue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDurationValue(Element element, long value)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.setLongValue
+yawl:XMLUtils_setLongValue_36 a yawl:Method ;
+    rdfs:label "setLongValue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setLongValue(Element element, Long value)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getStringValue
+yawl:XMLUtils_getStringValue_37 a yawl:Method ;
+    rdfs:label "getStringValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStringValue(Element element, boolean withValidation)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.setStringValue
+yawl:XMLUtils_setStringValue_38 a yawl:Method ;
+    rdfs:label "setStringValue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStringValue(Element element, String value)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getDurationValue
+yawl:XMLUtils_getDurationValue_39 a yawl:Method ;
+    rdfs:label "getDurationValue" ;
+    yawl:returnType "Duration" ;
+    yawl:signature "Duration getDurationValue(Element element, boolean withValidation)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getDurationValueInMinutes
+yawl:XMLUtils_getDurationValueInMinutes_40 a yawl:Method ;
+    rdfs:label "getDurationValueInMinutes" ;
+    yawl:returnType "Integer" ;
+    yawl:signature "Integer getDurationValueInMinutes(Element element, boolean withValidation)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getDoubleValue
+yawl:XMLUtils_getDoubleValue_41 a yawl:Method ;
+    rdfs:label "getDoubleValue" ;
+    yawl:returnType "Double" ;
+    yawl:signature "Double getDoubleValue(Element element, boolean withValidation)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getIntegerValue
+yawl:XMLUtils_getIntegerValue_42 a yawl:Method ;
+    rdfs:label "getIntegerValue" ;
+    yawl:returnType "Integer" ;
+    yawl:signature "Integer getIntegerValue(Element element, boolean withValidation)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getLongValue
+yawl:XMLUtils_getLongValue_43 a yawl:Method ;
+    rdfs:label "getLongValue" ;
+    yawl:returnType "Long" ;
+    yawl:signature "Long getLongValue(Element element, boolean withValidation)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getBooleanValue
+yawl:XMLUtils_getBooleanValue_44 a yawl:Method ;
+    rdfs:label "getBooleanValue" ;
+    yawl:returnType "Boolean" ;
+    yawl:signature "Boolean getBooleanValue(Element element, boolean withValidation)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getXPATH_RUP
+yawl:XMLUtils_getXPATH_RUP_45 a yawl:Method ;
+    rdfs:label "getXPATH_RUP" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getXPATH_RUP()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getXPATH_Activities
+yawl:XMLUtils_getXPATH_Activities_46 a yawl:Method ;
+    rdfs:label "getXPATH_Activities" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getXPATH_Activities(String activityNames)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getXPATH_ActivitiesElement
+yawl:XMLUtils_getXPATH_ActivitiesElement_47 a yawl:Method ;
+    rdfs:label "getXPATH_ActivitiesElement" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getXPATH_ActivitiesElement(String activityNames, String elementName, Integer index)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getXPATH_ActivityElement
+yawl:XMLUtils_getXPATH_ActivityElement_48 a yawl:Method ;
+    rdfs:label "getXPATH_ActivityElement" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getXPATH_ActivityElement(String activityName, String elementName, Integer index)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getXPATH_ResOrUtilElement
+yawl:XMLUtils_getXPATH_ResOrUtilElement_49 a yawl:Method ;
+    rdfs:label "getXPATH_ResOrUtilElement" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getXPATH_ResOrUtilElement(String activityName, String resOrUtilName, Integer resOrUtilIdx, String elementName)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getXPATH_Resource
+yawl:XMLUtils_getXPATH_Resource_50 a yawl:Method ;
+    rdfs:label "getXPATH_Resource" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getXPATH_Resource(String activityName, Integer resIdx)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getXPATH_ResourceElement
+yawl:XMLUtils_getXPATH_ResourceElement_51 a yawl:Method ;
+    rdfs:label "getXPATH_ResourceElement" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getXPATH_ResourceElement(String activityName, Integer resIdx, String elementName)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getXPATH_ResourceElement
+yawl:XMLUtils_getXPATH_ResourceElement_52 a yawl:Method ;
+    rdfs:label "getXPATH_ResourceElement" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getXPATH_ResourceElement(String activityName, Integer resIdx, String elementName, String elementText)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.different
+yawl:XMLUtils_different_53 a yawl:Method ;
+    rdfs:label "different" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean different(Element e1, Element e2)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.isEqualXMLText
+yawl:XMLUtils_isEqualXMLText_54 a yawl:Method ;
+    rdfs:label "isEqualXMLText" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEqualXMLText(String t1, String t2)" ;
+    rdfs:comment """compares textual content of two elements which are get with element.getChildText() content of a non-existing element is equal to content of an element without text @param t1 @param t2 @return""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getXMLObjects
+yawl:XMLUtils_getXMLObjects_55 a yawl:Method ;
+    rdfs:label "getXMLObjects" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getXMLObjects(Document doc, String xpath)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getFirstXMLObject
+yawl:XMLUtils_getFirstXMLObject_56 a yawl:Method ;
+    rdfs:label "getFirstXMLObject" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object getFirstXMLObject(Document doc, String xpath)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getElements
+yawl:XMLUtils_getElements_57 a yawl:Method ;
+    rdfs:label "getElements" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getElements(Document doc, String xpath)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getElement
+yawl:XMLUtils_getElement_58 a yawl:Method ;
+    rdfs:label "getElement" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getElement(Document doc, String xpath)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getAttribute
+yawl:XMLUtils_getAttribute_59 a yawl:Method ;
+    rdfs:label "getAttribute" ;
+    yawl:returnType "Attribute" ;
+    yawl:signature "Attribute getAttribute(Document doc, String xpath)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.setChildText
+yawl:XMLUtils_setChildText_60 a yawl:Method ;
+    rdfs:label "setChildText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setChildText(Element elem, String childName, String childText)" ;
+    rdfs:comment """set childText on elem's child, if child doesn't exist, it will be created @param elem @param childName @param childText""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.mergeElements
+yawl:XMLUtils_mergeElements_61 a yawl:Method ;
+    rdfs:label "mergeElements" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean mergeElements(Element minor, Element major)" ;
+    rdfs:comment """merges content of two elements recursively into element minor following content will be copied: Text, Element, Attribute if conflicts, minor will be overwrite with content of major @param minor @param major""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getActivityNames
+yawl:XMLUtils_getActivityNames_62 a yawl:Method ;
+    rdfs:label "getActivityNames" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getActivityNames(Element e)" ;
+    rdfs:comment """returns all activity names from element e recursively @param e @return""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getCaseId
+yawl:XMLUtils_getCaseId_63 a yawl:Method ;
+    rdfs:label "getCaseId" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseId(Document rup)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getEarliestBeginElement
+yawl:XMLUtils_getEarliestBeginElement_64 a yawl:Method ;
+    rdfs:label "getEarliestBeginElement" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getEarliestBeginElement(Document rup, String possibleActivities)" ;
+    rdfs:comment """find earliest FROM element of rup""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getEarliestBeginDate
+yawl:XMLUtils_getEarliestBeginDate_65 a yawl:Method ;
+    rdfs:label "getEarliestBeginDate" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date getEarliestBeginDate(Document rup)" ;
+    rdfs:comment """find earliest FROM date of rup""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getLatestEndElement
+yawl:XMLUtils_getLatestEndElement_66 a yawl:Method ;
+    rdfs:label "getLatestEndElement" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getLatestEndElement(Document rup, String possibleActivities)" ;
+    rdfs:comment """find latest TO element of rup""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.getLatestEndDate
+yawl:XMLUtils_getLatestEndDate_67 a yawl:Method ;
+    rdfs:label "getLatestEndDate" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date getLatestEndDate(Document rup)" ;
+    rdfs:comment """find latest TO date of rup""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.existInList
+yawl:XMLUtils_existInList_68 a yawl:Method ;
+    rdfs:label "existInList" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element existInList(List list, Element e)" ;
+    rdfs:comment """return first element from list which is equal (in context of perikles) to e @param list @param e @return""" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: XMLUtils.elementsEqual
+yawl:XMLUtils_elementsEqual_69 a yawl:Method ;
+    rdfs:label "elementsEqual" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean elementsEqual(Element e1, Element e2)" ;
+    rdfs:comment """return true if e1 is equal (in context of perikles) to element e2 @param e1 @param e2 @return""" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:XMLUtils_logger a yawl:Field ;
+    rdfs:label "logger" .
+
+yawl:XMLUtils_schemaFilePathName a yawl:Field ;
+    rdfs:label "schemaFilePathName" .
+
+yawl:XMLUtils_schemaDocs a yawl:Field ;
+    rdfs:label "schemaDocs" .
+
+yawl:XMLUtils_validator a yawl:Field ;
+    rdfs:label "validator" .
+
+
+

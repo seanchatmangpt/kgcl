@@ -1,0 +1,2170 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.ResourceManager
+yawl:ResourceManager a yawl:Class ;
+    rdfs:label "ResourceManager" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/ResourceManager.java"^^xsd:string ;
+    rdfs:comment """The ResourceManager singleton manages all aspects of the resource perspective, including the loading & maintenance of the org model, and overseeing the distribution of tasks to participants. @author Michael Adams @date 03/08/2007""" ;
+    yawl:extends yawl:InterfaceBWebsideController ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "final" ;
+    yawl:hasMethod yawl:ResourceManager_getInstance_1 ;
+    yawl:hasMethod yawl:ResourceManager_initServices_2 ;
+    yawl:hasMethod yawl:ResourceManager_initOrgDataSource_3 ;
+    yawl:hasMethod yawl:ResourceManager_getClients_4 ;
+    yawl:hasMethod yawl:ResourceManager_getEngineSessionHandle_5 ;
+    yawl:hasMethod yawl:ResourceManager_initBuildProperties_6 ;
+    yawl:hasMethod yawl:ResourceManager_initEmailer_7 ;
+    yawl:hasMethod yawl:ResourceManager_getBuildProperties_8 ;
+    yawl:hasMethod yawl:ResourceManager_getEngineBuildProperties_9 ;
+    yawl:hasMethod yawl:ResourceManager_finaliseInitialisation_10 ;
+    yawl:hasMethod yawl:ResourceManager_setAllowExternalOrgDataMods_11 ;
+    yawl:hasMethod yawl:ResourceManager_setExternalUserAuthentication_12 ;
+    yawl:hasMethod yawl:ResourceManager_setVisualiserDimension_13 ;
+    yawl:hasMethod yawl:ResourceManager_setVisualiserDimension_14 ;
+    yawl:hasMethod yawl:ResourceManager_getVisualiserDimension_15 ;
+    yawl:hasMethod yawl:ResourceManager_initRandomOrgDataGeneration_16 ;
+    yawl:hasMethod yawl:ResourceManager_setVisualiserEnabled_17 ;
+    yawl:hasMethod yawl:ResourceManager_isVisualiserEnabled_18 ;
+    yawl:hasMethod yawl:ResourceManager_getWorkItemCache_19 ;
+    yawl:hasMethod yawl:ResourceManager_hasOrgDataSource_20 ;
+    yawl:hasMethod yawl:ResourceManager_setOrgDataRefreshing_21 ;
+    yawl:hasMethod yawl:ResourceManager_isOrgDataRefreshing_22 ;
+    yawl:hasMethod yawl:ResourceManager_getLogger_23 ;
+    yawl:hasMethod yawl:ResourceManager_getCalendar_24 ;
+    yawl:hasMethod yawl:ResourceManager_registerCalendarStatusChangeListener_25 ;
+    yawl:hasMethod yawl:ResourceManager_removeCalendarStatusChangeListener_26 ;
+    yawl:hasMethod yawl:ResourceManager_removeCalendarStatusChangeListeners_27 ;
+    yawl:hasMethod yawl:ResourceManager_addEventListener_28 ;
+    yawl:hasMethod yawl:ResourceManager_removeEventListener_29 ;
+    yawl:hasMethod yawl:ResourceManager_handleEnabledWorkItemEvent_30 ;
+    yawl:hasMethod yawl:ResourceManager_handleCancelledWorkItemEvent_31 ;
+    yawl:hasMethod yawl:ResourceManager_handleTimerExpiryEvent_32 ;
+    yawl:hasMethod yawl:ResourceManager_handleCancelledCaseEvent_33 ;
+    yawl:hasMethod yawl:ResourceManager_handleDeadlockedCaseEvent_34 ;
+    yawl:hasMethod yawl:ResourceManager_handleCompleteCaseEvent_35 ;
+    yawl:hasMethod yawl:ResourceManager_handleEngineInitialisationCompletedEvent_36 ;
+    yawl:hasMethod yawl:ResourceManager_handleWorkItemStatusChangeEvent_37 ;
+    yawl:hasMethod yawl:ResourceManager_handleStartCaseEvent_38 ;
+    yawl:hasMethod yawl:ResourceManager_doGet_39 ;
+    yawl:hasMethod yawl:ResourceManager_doFinalServiceToEngineInitialisation_40 ;
+    yawl:hasMethod yawl:ResourceManager_cleanupWorkItemReferences_41 ;
+    yawl:hasMethod yawl:ResourceManager_isDefaultOrgDB_42 ;
+    yawl:hasMethod yawl:ResourceManager_getOrgDataSet_43 ;
+    yawl:hasMethod yawl:ResourceManager_loadResources_44 ;
+    yawl:hasMethod yawl:ResourceManager_refreshOrgData_45 ;
+    yawl:hasMethod yawl:ResourceManager_sanitiseCaches_46 ;
+    yawl:hasMethod yawl:ResourceManager_syncCacheWithEngineItems_47 ;
+    yawl:hasMethod yawl:ResourceManager_removeOrphanedItemsFromCache_48 ;
+    yawl:hasMethod yawl:ResourceManager_cleanseQueues_49 ;
+    yawl:hasMethod yawl:ResourceManager_finaliseNonDefaultLoad_50 ;
+    yawl:hasMethod yawl:ResourceManager_restoreWorkQueues_51 ;
+    yawl:hasMethod yawl:ResourceManager_removeOrphanedQueues_52 ;
+    yawl:hasMethod yawl:ResourceManager_isKnownUserID_53 ;
+    yawl:hasMethod yawl:ResourceManager_fail_54 ;
+    yawl:hasMethod yawl:ResourceManager_addParticipant_55 ;
+    yawl:hasMethod yawl:ResourceManager_importParticipant_56 ;
+    yawl:hasMethod yawl:ResourceManager_updateParticipant_57 ;
+    yawl:hasMethod yawl:ResourceManager_removeParticipant_58 ;
+    yawl:hasMethod yawl:ResourceManager_removeParticipant_59 ;
+    yawl:hasMethod yawl:ResourceManager_getActiveParticipantsAsXML_60 ;
+    yawl:hasMethod yawl:ResourceManager_getParticipantFromUserID_61 ;
+    yawl:hasMethod yawl:ResourceManager_getUserQueueSet_62 ;
+    yawl:hasMethod yawl:ResourceManager_getParticipantsAssignedWorkItem_63 ;
+    yawl:hasMethod yawl:ResourceManager_getParticipantsAssignedWorkItem_64 ;
+    yawl:hasMethod yawl:ResourceManager_getParticipantAssignedWorkItem_65 ;
+    yawl:hasMethod yawl:ResourceManager_getFullNameForUserID_66 ;
+    yawl:hasMethod yawl:ResourceManager_offerToAll_67 ;
+    yawl:hasMethod yawl:ResourceManager_withdrawOffer_68 ;
+    yawl:hasMethod yawl:ResourceManager_withdrawOfferFromAll_69 ;
+    yawl:hasMethod yawl:ResourceManager_removeFromAll_70 ;
+    yawl:hasMethod yawl:ResourceManager_removeCaseFromAllQueues_71 ;
+    yawl:hasMethod yawl:ResourceManager_getAdminQueues_72 ;
+    yawl:hasMethod yawl:ResourceManager_acceptOffer_73 ;
+    yawl:hasMethod yawl:ResourceManager_setDeferredChoiceHandled_74 ;
+    yawl:hasMethod yawl:ResourceManager_unsetDeferredChoiceHandled_75 ;
+    yawl:hasMethod yawl:ResourceManager_isDeferredChoiceHandled_76 ;
+    yawl:hasMethod yawl:ResourceManager_handleWorkQueuesOnRemoval_77 ;
+    yawl:hasMethod yawl:ResourceManager_handleWorkQueuesOnRemoval_78 ;
+    yawl:hasMethod yawl:ResourceManager_handleWorkQueueOnRemoval_79 ;
+    yawl:hasMethod yawl:ResourceManager_handleOfferedQueueOnRemoval_80 ;
+    yawl:hasMethod yawl:ResourceManager_handleNonOfferedQueueOnRemoval_81 ;
+    yawl:hasMethod yawl:ResourceManager_handleStartedQueuesOnRemoval_82 ;
+    yawl:hasMethod yawl:ResourceManager_start_83 ;
+    yawl:hasMethod yawl:ResourceManager_getStartedChild_84 ;
+    yawl:hasMethod yawl:ResourceManager_distributeChildren_85 ;
+    yawl:hasMethod yawl:ResourceManager_secondaryResourcesAvailable_86 ;
+    yawl:hasMethod yawl:ResourceManager_suspendWorkItem_87 ;
+    yawl:hasMethod yawl:ResourceManager_unsuspendWorkItem_88 ;
+    yawl:hasMethod yawl:ResourceManager_reallocateStatelessWorkItem_89 ;
+    yawl:hasMethod yawl:ResourceManager_reallocateStatefulWorkItem_90 ;
+    yawl:hasMethod yawl:ResourceManager_reallocateWorkItem_91 ;
+    yawl:hasMethod yawl:ResourceManager_deallocateWorkItem_92 ;
+    yawl:hasMethod yawl:ResourceManager_delegateWorkItem_93 ;
+    yawl:hasMethod yawl:ResourceManager_skipWorkItem_94 ;
+    yawl:hasMethod yawl:ResourceManager_pileWorkItem_95 ;
+    yawl:hasMethod yawl:ResourceManager_unpileTask_96 ;
+    yawl:hasMethod yawl:ResourceManager_routePiledWorkItem_97 ;
+    yawl:hasMethod yawl:ResourceManager_startImmediate_98 ;
+    yawl:hasMethod yawl:ResourceManager_routeWorkItem_99 ;
+    yawl:hasMethod yawl:ResourceManager_hasUserTaskPrivilege_100 ;
+    yawl:hasMethod yawl:ResourceManager_getTaskPrivileges_101 ;
+    yawl:hasMethod yawl:ResourceManager_getTaskPrivileges_102 ;
+    yawl:hasMethod yawl:ResourceManager_getWorkItem_103 ;
+    yawl:hasMethod yawl:ResourceManager_getWorkItemRecord_104 ;
+    yawl:hasMethod yawl:ResourceManager_updateWorkItemData_105 ;
+    yawl:hasMethod yawl:ResourceManager_checkWorkItemDataAgainstSchema_106 ;
+    yawl:hasMethod yawl:ResourceManager_isValidDataName_107 ;
+    yawl:hasMethod yawl:ResourceManager_chainCase_108 ;
+    yawl:hasMethod yawl:ResourceManager_routeChainedWorkItem_109 ;
+    yawl:hasMethod yawl:ResourceManager_addChain_110 ;
+    yawl:hasMethod yawl:ResourceManager_removeChain_111 ;
+    yawl:hasMethod yawl:ResourceManager_getChainedCases_112 ;
+    yawl:hasMethod yawl:ResourceManager_routeIfChained_113 ;
+    yawl:hasMethod yawl:ResourceManager_removeActiveCalendarEntriesForCase_114 ;
+    yawl:hasMethod yawl:ResourceManager_getSpecIdentifierForCase_115 ;
+    yawl:hasMethod yawl:ResourceManager_cleanCaches_116 ;
+    yawl:hasMethod yawl:ResourceManager_getPiledTaskMaps_117 ;
+    yawl:hasMethod yawl:ResourceManager_getUnpersistedPiledTasks_118 ;
+    yawl:hasMethod yawl:ResourceManager_getPersistedPiledTasks_119 ;
+    yawl:hasMethod yawl:ResourceManager_getPersistedPiledTask_120 ;
+    yawl:hasMethod yawl:ResourceManager_deletePersistedPiledTasks_121 ;
+    yawl:hasMethod yawl:ResourceManager_mapSetContains_122 ;
+    yawl:hasMethod yawl:ResourceManager_getAllResourceMaps_123 ;
+    yawl:hasMethod yawl:ResourceManager_getOrgDataSource_124 ;
+    yawl:hasMethod yawl:ResourceManager_setPersisting_125 ;
+    yawl:hasMethod yawl:ResourceManager_isPersisting_126 ;
+    yawl:hasMethod yawl:ResourceManager_startOrgDataRefreshTimer_127 ;
+    yawl:hasMethod yawl:ResourceManager_setPersistPiling_128 ;
+    yawl:hasMethod yawl:ResourceManager_isPersistPiling_129 ;
+    yawl:hasMethod yawl:ResourceManager_setBlockOnUnavailableSecondaryResources_130 ;
+    yawl:hasMethod yawl:ResourceManager_getDistributionSet_131 ;
+    yawl:hasMethod yawl:ResourceManager_getResourceMap_132 ;
+    yawl:hasMethod yawl:ResourceManager_getCachedResourceMap_133 ;
+    yawl:hasMethod yawl:ResourceManager_getCachedResourceMap_134 ;
+    yawl:hasMethod yawl:ResourceManager_getResourceMap_135 ;
+    yawl:hasMethod yawl:ResourceManager_setServiceInitialised_136 ;
+    yawl:hasMethod yawl:ResourceManager_getWhoCompletedTask_137 ;
+    yawl:hasMethod yawl:ResourceManager_getDecompID_138 ;
+    yawl:hasMethod yawl:ResourceManager_getDecompID_139 ;
+    yawl:hasMethod yawl:ResourceManager_checkOutWorkItem_140 ;
+    yawl:hasMethod yawl:ResourceManager_checkCacheForWorkItem_141 ;
+    yawl:hasMethod yawl:ResourceManager_checkinItem_142 ;
+    yawl:hasMethod yawl:ResourceManager_freeSecondaryResources_143 ;
+    yawl:hasMethod yawl:ResourceManager_freeSecondaryResourcesForCase_144 ;
+    yawl:hasMethod yawl:ResourceManager_getSecondaryResources_145 ;
+    yawl:hasMethod yawl:ResourceManager_trimCheckinErrorMessage_146 ;
+    yawl:hasMethod yawl:ResourceManager_getCompletionLogPredicate_147 ;
+    yawl:hasMethod yawl:ResourceManager_getStartingLogPredicate_148 ;
+    yawl:hasMethod yawl:ResourceManager_parseCompletionLogPredicate_149 ;
+    yawl:hasMethod yawl:ResourceManager_parseLogPredicate_150 ;
+    yawl:hasMethod yawl:ResourceManager_checkOutChildren_151 ;
+    yawl:hasMethod yawl:ResourceManager_getExecutingChild_152 ;
+    yawl:hasMethod yawl:ResourceManager_getEngineStoredWorkItem_153 ;
+    yawl:hasMethod yawl:ResourceManager_getExecutingChild_154 ;
+    yawl:hasMethod yawl:ResourceManager_login_155 ;
+    yawl:hasMethod yawl:ResourceManager_newSessionHandle_156 ;
+    yawl:hasMethod yawl:ResourceManager_loginAdmin_157 ;
+    yawl:hasMethod yawl:ResourceManager_logout_158 ;
+    yawl:hasMethod yawl:ResourceManager_isValidUserSession_159 ;
+    yawl:hasMethod yawl:ResourceManager_isAdminSession_160 ;
+    yawl:hasMethod yawl:ResourceManager_getSessionPrivileges_161 ;
+    yawl:hasMethod yawl:ResourceManager_validateUserCredentials_162 ;
+    yawl:hasMethod yawl:ResourceManager_expireSession_163 ;
+    yawl:hasMethod yawl:ResourceManager_isActiveSession_164 ;
+    yawl:hasMethod yawl:ResourceManager_getUserSessionCount_165 ;
+    yawl:hasMethod yawl:ResourceManager_getAdminSessionCount_166 ;
+    yawl:hasMethod yawl:ResourceManager_getUserAdminSessionCount_167 ;
+    yawl:hasMethod yawl:ResourceManager_shutdown_168 ;
+    yawl:hasMethod yawl:ResourceManager_serviceConnect_169 ;
+    yawl:hasMethod yawl:ResourceManager_serviceDisconnect_170 ;
+    yawl:hasMethod yawl:ResourceManager_checkServiceConnection_171 ;
+    yawl:hasMethod yawl:ResourceManager_getUserIDForSessionHandle_172 ;
+    yawl:hasMethod yawl:ResourceManager_getLoadedSpecs_173 ;
+    yawl:hasMethod yawl:ResourceManager_getSpecList_174 ;
+    yawl:hasMethod yawl:ResourceManager_getSpecData_175 ;
+    yawl:hasMethod yawl:ResourceManager_isSpecBetaVersion_176 ;
+    yawl:hasMethod yawl:ResourceManager_cancelCase_177 ;
+    yawl:hasMethod yawl:ResourceManager_getChildren_178 ;
+    yawl:hasMethod yawl:ResourceManager_getChildrenFromCache_179 ;
+    yawl:hasMethod yawl:ResourceManager_unloadSpecification_180 ;
+    yawl:hasMethod yawl:ResourceManager_launchCase_181 ;
+    yawl:hasMethod yawl:ResourceManager_launchCase_182 ;
+    yawl:hasMethod yawl:ResourceManager_launchCase_183 ;
+    yawl:hasMethod yawl:ResourceManager_launchCase_184 ;
+    yawl:hasMethod yawl:ResourceManager_getLaunchLogData_185 ;
+    yawl:hasMethod yawl:ResourceManager_getTaskParamsAsXML_186 ;
+    yawl:hasMethod yawl:ResourceManager_getOutputOnlyTaskParamsAsXML_187 ;
+    yawl:hasMethod yawl:ResourceManager_getWorkItemParamsInfo_188 ;
+    yawl:hasMethod yawl:ResourceManager_mapParamList_189 ;
+    yawl:hasMethod yawl:ResourceManager_refreshWIRFromEngine_190 ;
+    yawl:hasMethod yawl:ResourceManager_announceModifiedQueue_191 ;
+    yawl:hasMethod yawl:ResourceManager_addRegisteredService_192 ;
+    yawl:hasMethod yawl:ResourceManager_removeRegisteredService_193 ;
+    yawl:hasMethod yawl:ResourceManager_addExternalClient_194 ;
+    yawl:hasMethod yawl:ResourceManager_removeExternalClient_195 ;
+    yawl:hasMethod yawl:ResourceManager_updateExternalClient_196 ;
+    yawl:hasMethod yawl:ResourceManager_setAuthorisedServiceConnections_197 ;
+    yawl:hasMethod yawl:ResourceManager_getNetParamValue_198 ;
+    yawl:hasMethod yawl:ResourceManager_getDataSchema_199 ;
+    yawl:hasMethod yawl:ResourceManager_getDataSchema_200 ;
+    yawl:hasMethod yawl:ResourceManager_getDataSchema_201 ;
+    yawl:hasMethod yawl:ResourceManager_getSpecificationDataSchema_202 ;
+    yawl:hasMethod yawl:ResourceManager_assignUnofferedItem_203 ;
+    yawl:hasMethod yawl:ResourceManager_isSystemAllocated_204 ;
+    yawl:hasMethod yawl:ResourceManager_pidListToSet_205 ;
+    yawl:hasMethod yawl:ResourceManager_allocateUnofferedItem_206 ;
+    yawl:hasMethod yawl:ResourceManager_addToOfferedSet_207 ;
+    yawl:hasMethod yawl:ResourceManager_reassignWorklistedItem_208 ;
+    yawl:hasMethod yawl:ResourceManager_handleAutoTask_209 ;
+    yawl:hasMethod yawl:ResourceManager_processAutoTask_210 ;
+    yawl:hasMethod yawl:ResourceManager_unpersistAutoTask_211 ;
+    yawl:hasMethod yawl:ResourceManager_restoreAutoTasks_212 ;
+    yawl:hasMethod yawl:ResourceManager_handleCodeletCompletion_213 ;
+    yawl:hasMethod yawl:ResourceManager_checkInAutoTask_214 ;
+    yawl:hasMethod yawl:ResourceManager_updateOutputDataList_215 ;
+    yawl:hasMethod yawl:ResourceManager_getMIFormalInputParamName_216 ;
+    yawl:hasMethod yawl:ResourceManager_getTaskInformation_217 ;
+    yawl:hasMethod yawl:ResourceManager_getTaskInformation_218 ;
+    yawl:hasMethod yawl:ResourceManager_canAddNewInstance_219 ;
+    yawl:hasMethod yawl:ResourceManager_createNewWorkItemInstance_220 ;
+    yawl:hasMethod yawl:ResourceManager_getWorkItemDurationsForParticipant_221 ;
+    yawl:hasMethod yawl:ResourceManager_redirectWorkItemToYawlService_222 ;
+    yawl:hasMethod yawl:ResourceManager_sendMailNotification_223 ;
+    yawl:hasField yawl:ResourceManager__cache ;
+    yawl:hasField yawl:ResourceManager__services ;
+    yawl:hasField yawl:ResourceManager__orgDataSet ;
+    yawl:hasField yawl:ResourceManager__workItemCache ;
+    yawl:hasField yawl:ResourceManager_ADMIN_STR ;
+    yawl:hasField yawl:ResourceManager_FAIL_STR ;
+    yawl:hasField yawl:ResourceManager_INVALID_LOGON_ERR ;
+    yawl:hasField yawl:ResourceManager_WORKITEM_ERR ;
+    yawl:hasField yawl:ResourceManager__me ;
+    yawl:hasField yawl:ResourceManager__resAdmin ;
+    yawl:hasField yawl:ResourceManager__orgdb ;
+    yawl:hasField yawl:ResourceManager__persister ;
+    yawl:hasField yawl:ResourceManager__log ;
+    yawl:hasField yawl:ResourceManager__calendar ;
+    yawl:hasField yawl:ResourceManager__buildProps ;
+    yawl:hasField yawl:ResourceManager__persisting ;
+    yawl:hasField yawl:ResourceManager__isNonDefaultOrgDB ;
+    yawl:hasField yawl:ResourceManager__autoTaskMutex ;
+    yawl:hasField yawl:ResourceManager__ibEventMutex ;
+    yawl:hasField yawl:ResourceManager__removalMutex ;
+    yawl:hasField yawl:ResourceManager__orgDataRefresher ;
+    yawl:hasField yawl:ResourceManager__serviceEnabled ;
+    yawl:hasField yawl:ResourceManager__initCompleted ;
+    yawl:hasField yawl:ResourceManager__orgDataRefreshing ;
+    yawl:hasField yawl:ResourceManager_serviceInitialised ;
+    yawl:hasField yawl:ResourceManager__blockIfSecondaryResourcesUnavailable ;
+    yawl:hasField yawl:ResourceManager__persistPiling ;
+    yawl:hasField yawl:ResourceManager__visualiserEnabled ;
+    yawl:hasField yawl:ResourceManager__visualiserDimension ;
+    yawl:hasField yawl:ResourceManager__resMapCache ;
+    .
+
+
+# Method: ResourceManager.getInstance
+yawl:ResourceManager_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "ResourceManager" ;
+    yawl:signature "ResourceManager getInstance()" ;
+    rdfs:comment """@return the instantiated ResourceManager reference""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ResourceManager.initServices
+yawl:ResourceManager_initServices_2 a yawl:Method ;
+    rdfs:label "initServices" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initServices()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.initOrgDataSource
+yawl:ResourceManager_initOrgDataSource_3 a yawl:Method ;
+    rdfs:label "initOrgDataSource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initOrgDataSource(String dataSourceClassName, int refreshRate)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getClients
+yawl:ResourceManager_getClients_4 a yawl:Method ;
+    rdfs:label "getClients" ;
+    yawl:returnType "InterfaceClients" ;
+    yawl:signature "InterfaceClients getClients()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getEngineSessionHandle
+yawl:ResourceManager_getEngineSessionHandle_5 a yawl:Method ;
+    rdfs:label "getEngineSessionHandle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEngineSessionHandle()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.initBuildProperties
+yawl:ResourceManager_initBuildProperties_6 a yawl:Method ;
+    rdfs:label "initBuildProperties" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initBuildProperties(InputStream stream)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.initEmailer
+yawl:ResourceManager_initEmailer_7 a yawl:Method ;
+    rdfs:label "initEmailer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initEmailer(InputStream stream)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getBuildProperties
+yawl:ResourceManager_getBuildProperties_8 a yawl:Method ;
+    rdfs:label "getBuildProperties" ;
+    yawl:returnType "YBuildProperties" ;
+    yawl:signature "YBuildProperties getBuildProperties()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getEngineBuildProperties
+yawl:ResourceManager_getEngineBuildProperties_9 a yawl:Method ;
+    rdfs:label "getEngineBuildProperties" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEngineBuildProperties()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.finaliseInitialisation
+yawl:ResourceManager_finaliseInitialisation_10 a yawl:Method ;
+    rdfs:label "finaliseInitialisation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void finaliseInitialisation()" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.setAllowExternalOrgDataMods
+yawl:ResourceManager_setAllowExternalOrgDataMods_11 a yawl:Method ;
+    rdfs:label "setAllowExternalOrgDataMods" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAllowExternalOrgDataMods(boolean allow)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.setExternalUserAuthentication
+yawl:ResourceManager_setExternalUserAuthentication_12 a yawl:Method ;
+    rdfs:label "setExternalUserAuthentication" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setExternalUserAuthentication(boolean externalAuth)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.setVisualiserDimension
+yawl:ResourceManager_setVisualiserDimension_13 a yawl:Method ;
+    rdfs:label "setVisualiserDimension" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setVisualiserDimension(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.setVisualiserDimension
+yawl:ResourceManager_setVisualiserDimension_14 a yawl:Method ;
+    rdfs:label "setVisualiserDimension" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setVisualiserDimension(Dimension d)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getVisualiserDimension
+yawl:ResourceManager_getVisualiserDimension_15 a yawl:Method ;
+    rdfs:label "getVisualiserDimension" ;
+    yawl:returnType "Dimension" ;
+    yawl:signature "Dimension getVisualiserDimension()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.initRandomOrgDataGeneration
+yawl:ResourceManager_initRandomOrgDataGeneration_16 a yawl:Method ;
+    rdfs:label "initRandomOrgDataGeneration" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initRandomOrgDataGeneration(int count)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.setVisualiserEnabled
+yawl:ResourceManager_setVisualiserEnabled_17 a yawl:Method ;
+    rdfs:label "setVisualiserEnabled" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setVisualiserEnabled(boolean enable)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.isVisualiserEnabled
+yawl:ResourceManager_isVisualiserEnabled_18 a yawl:Method ;
+    rdfs:label "isVisualiserEnabled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isVisualiserEnabled()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getWorkItemCache
+yawl:ResourceManager_getWorkItemCache_19 a yawl:Method ;
+    rdfs:label "getWorkItemCache" ;
+    yawl:returnType "WorkItemCache" ;
+    yawl:signature "WorkItemCache getWorkItemCache()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.hasOrgDataSource
+yawl:ResourceManager_hasOrgDataSource_20 a yawl:Method ;
+    rdfs:label "hasOrgDataSource" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasOrgDataSource()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.setOrgDataRefreshing
+yawl:ResourceManager_setOrgDataRefreshing_21 a yawl:Method ;
+    rdfs:label "setOrgDataRefreshing" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOrgDataRefreshing(boolean refreshing)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.isOrgDataRefreshing
+yawl:ResourceManager_isOrgDataRefreshing_22 a yawl:Method ;
+    rdfs:label "isOrgDataRefreshing" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isOrgDataRefreshing()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getLogger
+yawl:ResourceManager_getLogger_23 a yawl:Method ;
+    rdfs:label "getLogger" ;
+    yawl:returnType "Logger" ;
+    yawl:signature "Logger getLogger()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getCalendar
+yawl:ResourceManager_getCalendar_24 a yawl:Method ;
+    rdfs:label "getCalendar" ;
+    yawl:returnType "ResourceCalendar" ;
+    yawl:signature "ResourceCalendar getCalendar()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.registerCalendarStatusChangeListener
+yawl:ResourceManager_registerCalendarStatusChangeListener_25 a yawl:Method ;
+    rdfs:label "registerCalendarStatusChangeListener" ;
+    yawl:returnType "String" ;
+    yawl:signature "String registerCalendarStatusChangeListener(String uri, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.removeCalendarStatusChangeListener
+yawl:ResourceManager_removeCalendarStatusChangeListener_26 a yawl:Method ;
+    rdfs:label "removeCalendarStatusChangeListener" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeCalendarStatusChangeListener(String uri, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.removeCalendarStatusChangeListeners
+yawl:ResourceManager_removeCalendarStatusChangeListeners_27 a yawl:Method ;
+    rdfs:label "removeCalendarStatusChangeListeners" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeCalendarStatusChangeListeners(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.addEventListener
+yawl:ResourceManager_addEventListener_28 a yawl:Method ;
+    rdfs:label "addEventListener" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addEventListener(String uri)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.removeEventListener
+yawl:ResourceManager_removeEventListener_29 a yawl:Method ;
+    rdfs:label "removeEventListener" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeEventListener(String uri)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.handleEnabledWorkItemEvent
+yawl:ResourceManager_handleEnabledWorkItemEvent_30 a yawl:Method ;
+    rdfs:label "handleEnabledWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleEnabledWorkItemEvent(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.handleCancelledWorkItemEvent
+yawl:ResourceManager_handleCancelledWorkItemEvent_31 a yawl:Method ;
+    rdfs:label "handleCancelledWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCancelledWorkItemEvent(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.handleTimerExpiryEvent
+yawl:ResourceManager_handleTimerExpiryEvent_32 a yawl:Method ;
+    rdfs:label "handleTimerExpiryEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleTimerExpiryEvent(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.handleCancelledCaseEvent
+yawl:ResourceManager_handleCancelledCaseEvent_33 a yawl:Method ;
+    rdfs:label "handleCancelledCaseEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCancelledCaseEvent(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.handleDeadlockedCaseEvent
+yawl:ResourceManager_handleDeadlockedCaseEvent_34 a yawl:Method ;
+    rdfs:label "handleDeadlockedCaseEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleDeadlockedCaseEvent(String caseID, String tasks)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.handleCompleteCaseEvent
+yawl:ResourceManager_handleCompleteCaseEvent_35 a yawl:Method ;
+    rdfs:label "handleCompleteCaseEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCompleteCaseEvent(String caseID, String casedata)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.handleEngineInitialisationCompletedEvent
+yawl:ResourceManager_handleEngineInitialisationCompletedEvent_36 a yawl:Method ;
+    rdfs:label "handleEngineInitialisationCompletedEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleEngineInitialisationCompletedEvent()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.handleWorkItemStatusChangeEvent
+yawl:ResourceManager_handleWorkItemStatusChangeEvent_37 a yawl:Method ;
+    rdfs:label "handleWorkItemStatusChangeEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleWorkItemStatusChangeEvent(WorkItemRecord wir, String oldStatus, String newStatus)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.handleStartCaseEvent
+yawl:ResourceManager_handleStartCaseEvent_38 a yawl:Method ;
+    rdfs:label "handleStartCaseEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleStartCaseEvent(YSpecificationID specID, String caseID, String launchingService, boolean delayed)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.doGet
+yawl:ResourceManager_doGet_39 a yawl:Method ;
+    rdfs:label "doGet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doGet(HttpServletRequest request, HttpServletResponse response)" ;
+    rdfs:comment """displays a web page describing the service""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.doFinalServiceToEngineInitialisation
+yawl:ResourceManager_doFinalServiceToEngineInitialisation_40 a yawl:Method ;
+    rdfs:label "doFinalServiceToEngineInitialisation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doFinalServiceToEngineInitialisation(boolean reloaded)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.cleanupWorkItemReferences
+yawl:ResourceManager_cleanupWorkItemReferences_41 a yawl:Method ;
+    rdfs:label "cleanupWorkItemReferences" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean cleanupWorkItemReferences(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.isDefaultOrgDB
+yawl:ResourceManager_isDefaultOrgDB_42 a yawl:Method ;
+    rdfs:label "isDefaultOrgDB" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isDefaultOrgDB()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getOrgDataSet
+yawl:ResourceManager_getOrgDataSet_43 a yawl:Method ;
+    rdfs:label "getOrgDataSet" ;
+    yawl:returnType "ResourceDataSet" ;
+    yawl:signature "ResourceDataSet getOrgDataSet()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.loadResources
+yawl:ResourceManager_loadResources_44 a yawl:Method ;
+    rdfs:label "loadResources" ;
+    yawl:returnType "void" ;
+    yawl:signature "void loadResources()" ;
+    rdfs:comment """Loads all the org data from db into the ResourceDataSet mappings""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.refreshOrgData
+yawl:ResourceManager_refreshOrgData_45 a yawl:Method ;
+    rdfs:label "refreshOrgData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void refreshOrgData()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.sanitiseCaches
+yawl:ResourceManager_sanitiseCaches_46 a yawl:Method ;
+    rdfs:label "sanitiseCaches" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sanitiseCaches()" ;
+    rdfs:comment """This does final initialisation tasks involved in ensuring the caches match the engine's known work. It is called via the EngineInitialisationCompleted event, because it needs the engine to be completely initialised first. It may also be executed via the 'synch' button on the admin queues.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.syncCacheWithEngineItems
+yawl:ResourceManager_syncCacheWithEngineItems_47 a yawl:Method ;
+    rdfs:label "syncCacheWithEngineItems" ;
+    yawl:returnType "List" ;
+    yawl:signature "List syncCacheWithEngineItems()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.removeOrphanedItemsFromCache
+yawl:ResourceManager_removeOrphanedItemsFromCache_48 a yawl:Method ;
+    rdfs:label "removeOrphanedItemsFromCache" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeOrphanedItemsFromCache(List engineIDs)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.cleanseQueues
+yawl:ResourceManager_cleanseQueues_49 a yawl:Method ;
+    rdfs:label "cleanseQueues" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cleanseQueues()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.finaliseNonDefaultLoad
+yawl:ResourceManager_finaliseNonDefaultLoad_50 a yawl:Method ;
+    rdfs:label "finaliseNonDefaultLoad" ;
+    yawl:returnType "void" ;
+    yawl:signature "void finaliseNonDefaultLoad()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.restoreWorkQueues
+yawl:ResourceManager_restoreWorkQueues_51 a yawl:Method ;
+    rdfs:label "restoreWorkQueues" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restoreWorkQueues()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.removeOrphanedQueues
+yawl:ResourceManager_removeOrphanedQueues_52 a yawl:Method ;
+    rdfs:label "removeOrphanedQueues" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeOrphanedQueues(List orphanedQueues)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.isKnownUserID
+yawl:ResourceManager_isKnownUserID_53 a yawl:Method ;
+    rdfs:label "isKnownUserID" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isKnownUserID(String userid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.fail
+yawl:ResourceManager_fail_54 a yawl:Method ;
+    rdfs:label "fail" ;
+    yawl:returnType "String" ;
+    yawl:signature "String fail(String msg)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.addParticipant
+yawl:ResourceManager_addParticipant_55 a yawl:Method ;
+    rdfs:label "addParticipant" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addParticipant(Participant p)" ;
+    rdfs:comment """Adds a new participant to the Resource DataSet, and persists it also @param p the new Participant""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.importParticipant
+yawl:ResourceManager_importParticipant_56 a yawl:Method ;
+    rdfs:label "importParticipant" ;
+    yawl:returnType "void" ;
+    yawl:signature "void importParticipant(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.updateParticipant
+yawl:ResourceManager_updateParticipant_57 a yawl:Method ;
+    rdfs:label "updateParticipant" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateParticipant(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.removeParticipant
+yawl:ResourceManager_removeParticipant_58 a yawl:Method ;
+    rdfs:label "removeParticipant" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeParticipant(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.removeParticipant
+yawl:ResourceManager_removeParticipant_59 a yawl:Method ;
+    rdfs:label "removeParticipant" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeParticipant(String pid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getActiveParticipantsAsXML
+yawl:ResourceManager_getActiveParticipantsAsXML_60 a yawl:Method ;
+    rdfs:label "getActiveParticipantsAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getActiveParticipantsAsXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getParticipantFromUserID
+yawl:ResourceManager_getParticipantFromUserID_61 a yawl:Method ;
+    rdfs:label "getParticipantFromUserID" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant getParticipantFromUserID(String userID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getUserQueueSet
+yawl:ResourceManager_getUserQueueSet_62 a yawl:Method ;
+    rdfs:label "getUserQueueSet" ;
+    yawl:returnType "QueueSet" ;
+    yawl:signature "QueueSet getUserQueueSet(String userID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getParticipantsAssignedWorkItem
+yawl:ResourceManager_getParticipantsAssignedWorkItem_63 a yawl:Method ;
+    rdfs:label "getParticipantsAssignedWorkItem" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getParticipantsAssignedWorkItem(String workItemID, int queueType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getParticipantsAssignedWorkItem
+yawl:ResourceManager_getParticipantsAssignedWorkItem_64 a yawl:Method ;
+    rdfs:label "getParticipantsAssignedWorkItem" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getParticipantsAssignedWorkItem(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getParticipantAssignedWorkItem
+yawl:ResourceManager_getParticipantAssignedWorkItem_65 a yawl:Method ;
+    rdfs:label "getParticipantAssignedWorkItem" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant getParticipantAssignedWorkItem(WorkItemRecord wir, int qType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getFullNameForUserID
+yawl:ResourceManager_getFullNameForUserID_66 a yawl:Method ;
+    rdfs:label "getFullNameForUserID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFullNameForUserID(String userID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.offerToAll
+yawl:ResourceManager_offerToAll_67 a yawl:Method ;
+    rdfs:label "offerToAll" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord offerToAll(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.withdrawOffer
+yawl:ResourceManager_withdrawOffer_68 a yawl:Method ;
+    rdfs:label "withdrawOffer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void withdrawOffer(ResourceMap rMap, WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.withdrawOfferFromAll
+yawl:ResourceManager_withdrawOfferFromAll_69 a yawl:Method ;
+    rdfs:label "withdrawOfferFromAll" ;
+    yawl:returnType "void" ;
+    yawl:signature "void withdrawOfferFromAll(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.removeFromAll
+yawl:ResourceManager_removeFromAll_70 a yawl:Method ;
+    rdfs:label "removeFromAll" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeFromAll(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.removeCaseFromAllQueues
+yawl:ResourceManager_removeCaseFromAllQueues_71 a yawl:Method ;
+    rdfs:label "removeCaseFromAllQueues" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeCaseFromAllQueues(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getAdminQueues
+yawl:ResourceManager_getAdminQueues_72 a yawl:Method ;
+    rdfs:label "getAdminQueues" ;
+    yawl:returnType "QueueSet" ;
+    yawl:signature "QueueSet getAdminQueues()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.acceptOffer
+yawl:ResourceManager_acceptOffer_73 a yawl:Method ;
+    rdfs:label "acceptOffer" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord acceptOffer(Participant p, WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.setDeferredChoiceHandled
+yawl:ResourceManager_setDeferredChoiceHandled_74 a yawl:Method ;
+    rdfs:label "setDeferredChoiceHandled" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDeferredChoiceHandled(WorkItemRecord wir)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ResourceManager.unsetDeferredChoiceHandled
+yawl:ResourceManager_unsetDeferredChoiceHandled_75 a yawl:Method ;
+    rdfs:label "unsetDeferredChoiceHandled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean unsetDeferredChoiceHandled(WorkItemRecord wir)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ResourceManager.isDeferredChoiceHandled
+yawl:ResourceManager_isDeferredChoiceHandled_76 a yawl:Method ;
+    rdfs:label "isDeferredChoiceHandled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isDeferredChoiceHandled(WorkItemRecord wir)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ResourceManager.handleWorkQueuesOnRemoval
+yawl:ResourceManager_handleWorkQueuesOnRemoval_77 a yawl:Method ;
+    rdfs:label "handleWorkQueuesOnRemoval" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleWorkQueuesOnRemoval(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.handleWorkQueuesOnRemoval
+yawl:ResourceManager_handleWorkQueuesOnRemoval_78 a yawl:Method ;
+    rdfs:label "handleWorkQueuesOnRemoval" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleWorkQueuesOnRemoval(Participant p, QueueSet qs)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.handleWorkQueueOnRemoval
+yawl:ResourceManager_handleWorkQueueOnRemoval_79 a yawl:Method ;
+    rdfs:label "handleWorkQueueOnRemoval" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleWorkQueueOnRemoval(WorkQueue wq)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.handleOfferedQueueOnRemoval
+yawl:ResourceManager_handleOfferedQueueOnRemoval_80 a yawl:Method ;
+    rdfs:label "handleOfferedQueueOnRemoval" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleOfferedQueueOnRemoval(Participant p, WorkQueue qOffer)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.handleNonOfferedQueueOnRemoval
+yawl:ResourceManager_handleNonOfferedQueueOnRemoval_81 a yawl:Method ;
+    rdfs:label "handleNonOfferedQueueOnRemoval" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleNonOfferedQueueOnRemoval(WorkQueue queue)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.handleStartedQueuesOnRemoval
+yawl:ResourceManager_handleStartedQueuesOnRemoval_82 a yawl:Method ;
+    rdfs:label "handleStartedQueuesOnRemoval" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleStartedQueuesOnRemoval(Participant p, WorkQueue qStart)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.start
+yawl:ResourceManager_start_83 a yawl:Method ;
+    rdfs:label "start" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean start(Participant p, WorkItemRecord wir)" ;
+    rdfs:comment """moves the workitem to executing for the participant. <p/> Note that when an item is checked out of the engine, at least one child item is spawned, and that is the item that executes (i.e. not the parent). @param p   the participant starting the workitem @param wir the item to start @return true for a successful workitem start""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getStartedChild
+yawl:ResourceManager_getStartedChild_84 a yawl:Method ;
+    rdfs:label "getStartedChild" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord getStartedChild(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.distributeChildren
+yawl:ResourceManager_distributeChildren_85 a yawl:Method ;
+    rdfs:label "distributeChildren" ;
+    yawl:returnType "void" ;
+    yawl:signature "void distributeChildren(WorkItemRecord started, List children)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.secondaryResourcesAvailable
+yawl:ResourceManager_secondaryResourcesAvailable_86 a yawl:Method ;
+    rdfs:label "secondaryResourcesAvailable" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean secondaryResourcesAvailable(WorkItemRecord wir, Participant p)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.suspendWorkItem
+yawl:ResourceManager_suspendWorkItem_87 a yawl:Method ;
+    rdfs:label "suspendWorkItem" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean suspendWorkItem(Participant p, WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.unsuspendWorkItem
+yawl:ResourceManager_unsuspendWorkItem_88 a yawl:Method ;
+    rdfs:label "unsuspendWorkItem" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean unsuspendWorkItem(Participant p, WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.reallocateStatelessWorkItem
+yawl:ResourceManager_reallocateStatelessWorkItem_89 a yawl:Method ;
+    rdfs:label "reallocateStatelessWorkItem" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean reallocateStatelessWorkItem(Participant pFrom, Participant pTo, WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.reallocateStatefulWorkItem
+yawl:ResourceManager_reallocateStatefulWorkItem_90 a yawl:Method ;
+    rdfs:label "reallocateStatefulWorkItem" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean reallocateStatefulWorkItem(Participant pFrom, Participant pTo, WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.reallocateWorkItem
+yawl:ResourceManager_reallocateWorkItem_91 a yawl:Method ;
+    rdfs:label "reallocateWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reallocateWorkItem(Participant pFrom, Participant pTo, WorkItemRecord wir, EventLogger event)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.deallocateWorkItem
+yawl:ResourceManager_deallocateWorkItem_92 a yawl:Method ;
+    rdfs:label "deallocateWorkItem" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean deallocateWorkItem(Participant p, WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.delegateWorkItem
+yawl:ResourceManager_delegateWorkItem_93 a yawl:Method ;
+    rdfs:label "delegateWorkItem" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean delegateWorkItem(Participant pFrom, Participant pTo, WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.skipWorkItem
+yawl:ResourceManager_skipWorkItem_94 a yawl:Method ;
+    rdfs:label "skipWorkItem" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean skipWorkItem(Participant p, WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.pileWorkItem
+yawl:ResourceManager_pileWorkItem_95 a yawl:Method ;
+    rdfs:label "pileWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String pileWorkItem(Participant p, WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.unpileTask
+yawl:ResourceManager_unpileTask_96 a yawl:Method ;
+    rdfs:label "unpileTask" ;
+    yawl:returnType "String" ;
+    yawl:signature "String unpileTask(ResourceMap resMap, Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.routePiledWorkItem
+yawl:ResourceManager_routePiledWorkItem_97 a yawl:Method ;
+    rdfs:label "routePiledWorkItem" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean routePiledWorkItem(Participant p, WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.startImmediate
+yawl:ResourceManager_startImmediate_98 a yawl:Method ;
+    rdfs:label "startImmediate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean startImmediate(Participant p, WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.routeWorkItem
+yawl:ResourceManager_routeWorkItem_99 a yawl:Method ;
+    rdfs:label "routeWorkItem" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean routeWorkItem(Participant p, WorkItemRecord wir, String handle)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.hasUserTaskPrivilege
+yawl:ResourceManager_hasUserTaskPrivilege_100 a yawl:Method ;
+    rdfs:label "hasUserTaskPrivilege" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasUserTaskPrivilege(Participant p, WorkItemRecord wir, int privilege)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getTaskPrivileges
+yawl:ResourceManager_getTaskPrivileges_101 a yawl:Method ;
+    rdfs:label "getTaskPrivileges" ;
+    yawl:returnType "TaskPrivileges" ;
+    yawl:signature "TaskPrivileges getTaskPrivileges(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getTaskPrivileges
+yawl:ResourceManager_getTaskPrivileges_102 a yawl:Method ;
+    rdfs:label "getTaskPrivileges" ;
+    yawl:returnType "TaskPrivileges" ;
+    yawl:signature "TaskPrivileges getTaskPrivileges(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getWorkItem
+yawl:ResourceManager_getWorkItem_103 a yawl:Method ;
+    rdfs:label "getWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItem(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getWorkItemRecord
+yawl:ResourceManager_getWorkItemRecord_104 a yawl:Method ;
+    rdfs:label "getWorkItemRecord" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord getWorkItemRecord(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.updateWorkItemData
+yawl:ResourceManager_updateWorkItemData_105 a yawl:Method ;
+    rdfs:label "updateWorkItemData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateWorkItemData(String itemID, String data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.checkWorkItemDataAgainstSchema
+yawl:ResourceManager_checkWorkItemDataAgainstSchema_106 a yawl:Method ;
+    rdfs:label "checkWorkItemDataAgainstSchema" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkWorkItemDataAgainstSchema(WorkItemRecord wir, Element data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.isValidDataName
+yawl:ResourceManager_isValidDataName_107 a yawl:Method ;
+    rdfs:label "isValidDataName" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isValidDataName(WorkItemRecord wir, Element data, String decompID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.chainCase
+yawl:ResourceManager_chainCase_108 a yawl:Method ;
+    rdfs:label "chainCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String chainCase(Participant p, WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.routeChainedWorkItem
+yawl:ResourceManager_routeChainedWorkItem_109 a yawl:Method ;
+    rdfs:label "routeChainedWorkItem" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean routeChainedWorkItem(Participant p, WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.addChain
+yawl:ResourceManager_addChain_110 a yawl:Method ;
+    rdfs:label "addChain" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addChain(Participant p, WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.removeChain
+yawl:ResourceManager_removeChain_111 a yawl:Method ;
+    rdfs:label "removeChain" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeChain(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getChainedCases
+yawl:ResourceManager_getChainedCases_112 a yawl:Method ;
+    rdfs:label "getChainedCases" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getChainedCases(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.routeIfChained
+yawl:ResourceManager_routeIfChained_113 a yawl:Method ;
+    rdfs:label "routeIfChained" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean routeIfChained(WorkItemRecord wir, Set distributionSet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.removeActiveCalendarEntriesForCase
+yawl:ResourceManager_removeActiveCalendarEntriesForCase_114 a yawl:Method ;
+    rdfs:label "removeActiveCalendarEntriesForCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeActiveCalendarEntriesForCase(String caseID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.getSpecIdentifierForCase
+yawl:ResourceManager_getSpecIdentifierForCase_115 a yawl:Method ;
+    rdfs:label "getSpecIdentifierForCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecIdentifierForCase(String caseID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.cleanCaches
+yawl:ResourceManager_cleanCaches_116 a yawl:Method ;
+    rdfs:label "cleanCaches" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cleanCaches()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.getPiledTaskMaps
+yawl:ResourceManager_getPiledTaskMaps_117 a yawl:Method ;
+    rdfs:label "getPiledTaskMaps" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getPiledTaskMaps(Participant p)" ;
+    rdfs:comment """@return the union of persisted and unpersisted maps""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getUnpersistedPiledTasks
+yawl:ResourceManager_getUnpersistedPiledTasks_118 a yawl:Method ;
+    rdfs:label "getUnpersistedPiledTasks" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getUnpersistedPiledTasks(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getPersistedPiledTasks
+yawl:ResourceManager_getPersistedPiledTasks_119 a yawl:Method ;
+    rdfs:label "getPersistedPiledTasks" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getPersistedPiledTasks(Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getPersistedPiledTask
+yawl:ResourceManager_getPersistedPiledTask_120 a yawl:Method ;
+    rdfs:label "getPersistedPiledTask" ;
+    yawl:returnType "ResourceMap" ;
+    yawl:signature "ResourceMap getPersistedPiledTask(YSpecificationID specID, String taskID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.deletePersistedPiledTasks
+yawl:ResourceManager_deletePersistedPiledTasks_121 a yawl:Method ;
+    rdfs:label "deletePersistedPiledTasks" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deletePersistedPiledTasks(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.mapSetContains
+yawl:ResourceManager_mapSetContains_122 a yawl:Method ;
+    rdfs:label "mapSetContains" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean mapSetContains(Set mapSet, ResourceMap other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getAllResourceMaps
+yawl:ResourceManager_getAllResourceMaps_123 a yawl:Method ;
+    rdfs:label "getAllResourceMaps" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getAllResourceMaps()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getOrgDataSource
+yawl:ResourceManager_getOrgDataSource_124 a yawl:Method ;
+    rdfs:label "getOrgDataSource" ;
+    yawl:returnType "DataSource" ;
+    yawl:signature "DataSource getOrgDataSource()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.setPersisting
+yawl:ResourceManager_setPersisting_125 a yawl:Method ;
+    rdfs:label "setPersisting" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPersisting(boolean flag)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.isPersisting
+yawl:ResourceManager_isPersisting_126 a yawl:Method ;
+    rdfs:label "isPersisting" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isPersisting()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.startOrgDataRefreshTimer
+yawl:ResourceManager_startOrgDataRefreshTimer_127 a yawl:Method ;
+    rdfs:label "startOrgDataRefreshTimer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void startOrgDataRefreshTimer(long interval)" ;
+    rdfs:comment """Starts a timer task to refresh the org data dataset at regular intervals, or turns an existing timer off if interval < 0 @param interval the number of minutes between each refresh""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.setPersistPiling
+yawl:ResourceManager_setPersistPiling_128 a yawl:Method ;
+    rdfs:label "setPersistPiling" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPersistPiling(boolean persist)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.isPersistPiling
+yawl:ResourceManager_isPersistPiling_129 a yawl:Method ;
+    rdfs:label "isPersistPiling" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isPersistPiling()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.setBlockOnUnavailableSecondaryResources
+yawl:ResourceManager_setBlockOnUnavailableSecondaryResources_130 a yawl:Method ;
+    rdfs:label "setBlockOnUnavailableSecondaryResources" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBlockOnUnavailableSecondaryResources(boolean block)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getDistributionSet
+yawl:ResourceManager_getDistributionSet_131 a yawl:Method ;
+    rdfs:label "getDistributionSet" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getDistributionSet(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getResourceMap
+yawl:ResourceManager_getResourceMap_132 a yawl:Method ;
+    rdfs:label "getResourceMap" ;
+    yawl:returnType "ResourceMap" ;
+    yawl:signature "ResourceMap getResourceMap(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getCachedResourceMap
+yawl:ResourceManager_getCachedResourceMap_133 a yawl:Method ;
+    rdfs:label "getCachedResourceMap" ;
+    yawl:returnType "ResourceMap" ;
+    yawl:signature "ResourceMap getCachedResourceMap(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getCachedResourceMap
+yawl:ResourceManager_getCachedResourceMap_134 a yawl:Method ;
+    rdfs:label "getCachedResourceMap" ;
+    yawl:returnType "ResourceMap" ;
+    yawl:signature "ResourceMap getCachedResourceMap(YSpecificationID specID, String taskID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getResourceMap
+yawl:ResourceManager_getResourceMap_135 a yawl:Method ;
+    rdfs:label "getResourceMap" ;
+    yawl:returnType "ResourceMap" ;
+    yawl:signature "ResourceMap getResourceMap(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.setServiceInitialised
+yawl:ResourceManager_setServiceInitialised_136 a yawl:Method ;
+    rdfs:label "setServiceInitialised" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setServiceInitialised()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ResourceManager.getWhoCompletedTask
+yawl:ResourceManager_getWhoCompletedTask_137 a yawl:Method ;
+    rdfs:label "getWhoCompletedTask" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getWhoCompletedTask(String taskID, WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getDecompID
+yawl:ResourceManager_getDecompID_138 a yawl:Method ;
+    rdfs:label "getDecompID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDecompID(WorkItemRecord wir)" ;
+    rdfs:comment """get the workitem's (task) decomposition id @param wir - the workitem to get the decomp id for""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getDecompID
+yawl:ResourceManager_getDecompID_139 a yawl:Method ;
+    rdfs:label "getDecompID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDecompID(YSpecificationID specID, String taskID)" ;
+    rdfs:comment """gets a task's decomposition id @param specID the specification id @param taskID the task's id""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.checkOutWorkItem
+yawl:ResourceManager_checkOutWorkItem_140 a yawl:Method ;
+    rdfs:label "checkOutWorkItem" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean checkOutWorkItem(WorkItemRecord wir, String logPredicate)" ;
+    rdfs:comment """Check the workitem out of the engine @param wir - the workitem to check out @return true if checkout was successful""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ResourceManager.checkCacheForWorkItem
+yawl:ResourceManager_checkCacheForWorkItem_141 a yawl:Method ;
+    rdfs:label "checkCacheForWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkCacheForWorkItem(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.checkinItem
+yawl:ResourceManager_checkinItem_142 a yawl:Method ;
+    rdfs:label "checkinItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkinItem(Participant p, WorkItemRecord wir)" ;
+    rdfs:comment """Checks a (checked out) workitem back into the engine @param p   - the participant checking in the item @param wir - workitem to check into the engine @return true if checkin is successful""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.freeSecondaryResources
+yawl:ResourceManager_freeSecondaryResources_143 a yawl:Method ;
+    rdfs:label "freeSecondaryResources" ;
+    yawl:returnType "void" ;
+    yawl:signature "void freeSecondaryResources(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.freeSecondaryResourcesForCase
+yawl:ResourceManager_freeSecondaryResourcesForCase_144 a yawl:Method ;
+    rdfs:label "freeSecondaryResourcesForCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void freeSecondaryResourcesForCase(String caseID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.getSecondaryResources
+yawl:ResourceManager_getSecondaryResources_145 a yawl:Method ;
+    rdfs:label "getSecondaryResources" ;
+    yawl:returnType "SecondaryResources" ;
+    yawl:signature "SecondaryResources getSecondaryResources(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.trimCheckinErrorMessage
+yawl:ResourceManager_trimCheckinErrorMessage_146 a yawl:Method ;
+    rdfs:label "trimCheckinErrorMessage" ;
+    yawl:returnType "String" ;
+    yawl:signature "String trimCheckinErrorMessage(String msg)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.getCompletionLogPredicate
+yawl:ResourceManager_getCompletionLogPredicate_147 a yawl:Method ;
+    rdfs:label "getCompletionLogPredicate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCompletionLogPredicate(Participant p, WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.getStartingLogPredicate
+yawl:ResourceManager_getStartingLogPredicate_148 a yawl:Method ;
+    rdfs:label "getStartingLogPredicate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStartingLogPredicate(Participant p, WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.parseCompletionLogPredicate
+yawl:ResourceManager_parseCompletionLogPredicate_149 a yawl:Method ;
+    rdfs:label "parseCompletionLogPredicate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String parseCompletionLogPredicate(Participant p, WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.parseLogPredicate
+yawl:ResourceManager_parseLogPredicate_150 a yawl:Method ;
+    rdfs:label "parseLogPredicate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String parseLogPredicate(Participant p, WorkItemRecord wir, String predicate)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.checkOutChildren
+yawl:ResourceManager_checkOutChildren_151 a yawl:Method ;
+    rdfs:label "checkOutChildren" ;
+    yawl:returnType "List" ;
+    yawl:signature "List checkOutChildren(WorkItemRecord wir, List children)" ;
+    rdfs:comment """Checks out all the child workitems of the parent item specified @param wir - the parent wir object""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ResourceManager.getExecutingChild
+yawl:ResourceManager_getExecutingChild_152 a yawl:Method ;
+    rdfs:label "getExecutingChild" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord getExecutingChild(WorkItemRecord parent)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getEngineStoredWorkItem
+yawl:ResourceManager_getEngineStoredWorkItem_153 a yawl:Method ;
+    rdfs:label "getEngineStoredWorkItem" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord getEngineStoredWorkItem(String wirID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getExecutingChild
+yawl:ResourceManager_getExecutingChild_154 a yawl:Method ;
+    rdfs:label "getExecutingChild" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord getExecutingChild(List children)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.login
+yawl:ResourceManager_login_155 a yawl:Method ;
+    rdfs:label "login" ;
+    yawl:returnType "String" ;
+    yawl:signature "String login(String userid, String password, String jSessionID)" ;
+    rdfs:comment """9. CONNECTION METHODS""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.newSessionHandle
+yawl:ResourceManager_newSessionHandle_156 a yawl:Method ;
+    rdfs:label "newSessionHandle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String newSessionHandle()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.loginAdmin
+yawl:ResourceManager_loginAdmin_157 a yawl:Method ;
+    rdfs:label "loginAdmin" ;
+    yawl:returnType "String" ;
+    yawl:signature "String loginAdmin(String password, String jSessionID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.logout
+yawl:ResourceManager_logout_158 a yawl:Method ;
+    rdfs:label "logout" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logout(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.isValidUserSession
+yawl:ResourceManager_isValidUserSession_159 a yawl:Method ;
+    rdfs:label "isValidUserSession" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isValidUserSession(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.isAdminSession
+yawl:ResourceManager_isAdminSession_160 a yawl:Method ;
+    rdfs:label "isAdminSession" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAdminSession(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getSessionPrivileges
+yawl:ResourceManager_getSessionPrivileges_161 a yawl:Method ;
+    rdfs:label "getSessionPrivileges" ;
+    yawl:returnType "UserPrivileges" ;
+    yawl:signature "UserPrivileges getSessionPrivileges(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.validateUserCredentials
+yawl:ResourceManager_validateUserCredentials_162 a yawl:Method ;
+    rdfs:label "validateUserCredentials" ;
+    yawl:returnType "String" ;
+    yawl:signature "String validateUserCredentials(String userid, String password, boolean admin)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.expireSession
+yawl:ResourceManager_expireSession_163 a yawl:Method ;
+    rdfs:label "expireSession" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant expireSession(String jSessionID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.isActiveSession
+yawl:ResourceManager_isActiveSession_164 a yawl:Method ;
+    rdfs:label "isActiveSession" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isActiveSession(String jSessionID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getUserSessionCount
+yawl:ResourceManager_getUserSessionCount_165 a yawl:Method ;
+    rdfs:label "getUserSessionCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getUserSessionCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getAdminSessionCount
+yawl:ResourceManager_getAdminSessionCount_166 a yawl:Method ;
+    rdfs:label "getAdminSessionCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getAdminSessionCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getUserAdminSessionCount
+yawl:ResourceManager_getUserAdminSessionCount_167 a yawl:Method ;
+    rdfs:label "getUserAdminSessionCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getUserAdminSessionCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.shutdown
+yawl:ResourceManager_shutdown_168 a yawl:Method ;
+    rdfs:label "shutdown" ;
+    yawl:returnType "void" ;
+    yawl:signature "void shutdown()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.serviceConnect
+yawl:ResourceManager_serviceConnect_169 a yawl:Method ;
+    rdfs:label "serviceConnect" ;
+    yawl:returnType "String" ;
+    yawl:signature "String serviceConnect(String userid, String password, long timeOutSeconds)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.serviceDisconnect
+yawl:ResourceManager_serviceDisconnect_170 a yawl:Method ;
+    rdfs:label "serviceDisconnect" ;
+    yawl:returnType "void" ;
+    yawl:signature "void serviceDisconnect(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.checkServiceConnection
+yawl:ResourceManager_checkServiceConnection_171 a yawl:Method ;
+    rdfs:label "checkServiceConnection" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean checkServiceConnection(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getUserIDForSessionHandle
+yawl:ResourceManager_getUserIDForSessionHandle_172 a yawl:Method ;
+    rdfs:label "getUserIDForSessionHandle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUserIDForSessionHandle(String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getLoadedSpecs
+yawl:ResourceManager_getLoadedSpecs_173 a yawl:Method ;
+    rdfs:label "getLoadedSpecs" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getLoadedSpecs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getSpecList
+yawl:ResourceManager_getSpecList_174 a yawl:Method ;
+    rdfs:label "getSpecList" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getSpecList()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getSpecData
+yawl:ResourceManager_getSpecData_175 a yawl:Method ;
+    rdfs:label "getSpecData" ;
+    yawl:returnType "SpecificationData" ;
+    yawl:signature "SpecificationData getSpecData(YSpecificationID spec)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.isSpecBetaVersion
+yawl:ResourceManager_isSpecBetaVersion_176 a yawl:Method ;
+    rdfs:label "isSpecBetaVersion" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isSpecBetaVersion(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.cancelCase
+yawl:ResourceManager_cancelCase_177 a yawl:Method ;
+    rdfs:label "cancelCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String cancelCase(String caseID, String userHandle)" ;
+    rdfs:comment """Cancels the case & removes its workitems (if any) from the service's queues & caches. Note: this method is synchronised to prevent any clash with 'handleCancelledCaseEvent', which is triggered by the call to cancelCase in this method. @param caseID the case to cancel @return a message from the engine indicating success or otherwise @throws IOException if there's trouble talking to the engine""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getChildren
+yawl:ResourceManager_getChildren_178 a yawl:Method ;
+    rdfs:label "getChildren" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getChildren(String parentID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getChildrenFromCache
+yawl:ResourceManager_getChildrenFromCache_179 a yawl:Method ;
+    rdfs:label "getChildrenFromCache" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getChildrenFromCache(String parentID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.unloadSpecification
+yawl:ResourceManager_unloadSpecification_180 a yawl:Method ;
+    rdfs:label "unloadSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String unloadSpecification(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.launchCase
+yawl:ResourceManager_launchCase_181 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseData, String handle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.launchCase
+yawl:ResourceManager_launchCase_182 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseData, String handle, long delay)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.launchCase
+yawl:ResourceManager_launchCase_183 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseData, String handle, Date delay)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.launchCase
+yawl:ResourceManager_launchCase_184 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseData, String handle, Duration delay)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getLaunchLogData
+yawl:ResourceManager_getLaunchLogData_185 a yawl:Method ;
+    rdfs:label "getLaunchLogData" ;
+    yawl:returnType "YLogDataItemList" ;
+    yawl:signature "YLogDataItemList getLaunchLogData()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.getTaskParamsAsXML
+yawl:ResourceManager_getTaskParamsAsXML_186 a yawl:Method ;
+    rdfs:label "getTaskParamsAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskParamsAsXML(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getOutputOnlyTaskParamsAsXML
+yawl:ResourceManager_getOutputOnlyTaskParamsAsXML_187 a yawl:Method ;
+    rdfs:label "getOutputOnlyTaskParamsAsXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOutputOnlyTaskParamsAsXML(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getWorkItemParamsInfo
+yawl:ResourceManager_getWorkItemParamsInfo_188 a yawl:Method ;
+    rdfs:label "getWorkItemParamsInfo" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getWorkItemParamsInfo(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.mapParamList
+yawl:ResourceManager_mapParamList_189 a yawl:Method ;
+    rdfs:label "mapParamList" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map mapParamList(List params)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.refreshWIRFromEngine
+yawl:ResourceManager_refreshWIRFromEngine_190 a yawl:Method ;
+    rdfs:label "refreshWIRFromEngine" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord refreshWIRFromEngine(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.announceModifiedQueue
+yawl:ResourceManager_announceModifiedQueue_191 a yawl:Method ;
+    rdfs:label "announceModifiedQueue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceModifiedQueue(String pid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.addRegisteredService
+yawl:ResourceManager_addRegisteredService_192 a yawl:Method ;
+    rdfs:label "addRegisteredService" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addRegisteredService(YAWLServiceReference service)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.removeRegisteredService
+yawl:ResourceManager_removeRegisteredService_193 a yawl:Method ;
+    rdfs:label "removeRegisteredService" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeRegisteredService(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.addExternalClient
+yawl:ResourceManager_addExternalClient_194 a yawl:Method ;
+    rdfs:label "addExternalClient" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addExternalClient(YExternalClient client)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.removeExternalClient
+yawl:ResourceManager_removeExternalClient_195 a yawl:Method ;
+    rdfs:label "removeExternalClient" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeExternalClient(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.updateExternalClient
+yawl:ResourceManager_updateExternalClient_196 a yawl:Method ;
+    rdfs:label "updateExternalClient" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateExternalClient(String id, String password, String doco)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.setAuthorisedServiceConnections
+yawl:ResourceManager_setAuthorisedServiceConnections_197 a yawl:Method ;
+    rdfs:label "setAuthorisedServiceConnections" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAuthorisedServiceConnections()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.getNetParamValue
+yawl:ResourceManager_getNetParamValue_198 a yawl:Method ;
+    rdfs:label "getNetParamValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNetParamValue(String caseID, String paramName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getDataSchema
+yawl:ResourceManager_getDataSchema_199 a yawl:Method ;
+    rdfs:label "getDataSchema" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataSchema(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getDataSchema
+yawl:ResourceManager_getDataSchema_200 a yawl:Method ;
+    rdfs:label "getDataSchema" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataSchema(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getDataSchema
+yawl:ResourceManager_getDataSchema_201 a yawl:Method ;
+    rdfs:label "getDataSchema" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataSchema(WorkItemRecord wir, YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getSpecificationDataSchema
+yawl:ResourceManager_getSpecificationDataSchema_202 a yawl:Method ;
+    rdfs:label "getSpecificationDataSchema" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getSpecificationDataSchema(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.assignUnofferedItem
+yawl:ResourceManager_assignUnofferedItem_203 a yawl:Method ;
+    rdfs:label "assignUnofferedItem" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean assignUnofferedItem(WorkItemRecord wir, String pidList, String action)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.isSystemAllocated
+yawl:ResourceManager_isSystemAllocated_204 a yawl:Method ;
+    rdfs:label "isSystemAllocated" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isSystemAllocated(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.pidListToSet
+yawl:ResourceManager_pidListToSet_205 a yawl:Method ;
+    rdfs:label "pidListToSet" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set pidListToSet(String pidList)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.allocateUnofferedItem
+yawl:ResourceManager_allocateUnofferedItem_206 a yawl:Method ;
+    rdfs:label "allocateUnofferedItem" ;
+    yawl:returnType "Participant" ;
+    yawl:signature "Participant allocateUnofferedItem(Set pSet, WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.addToOfferedSet
+yawl:ResourceManager_addToOfferedSet_207 a yawl:Method ;
+    rdfs:label "addToOfferedSet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addToOfferedSet(WorkItemRecord wir, Participant p)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.reassignWorklistedItem
+yawl:ResourceManager_reassignWorklistedItem_208 a yawl:Method ;
+    rdfs:label "reassignWorklistedItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reassignWorklistedItem(WorkItemRecord wir, String pidList, String action)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.handleAutoTask
+yawl:ResourceManager_handleAutoTask_209 a yawl:Method ;
+    rdfs:label "handleAutoTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleAutoTask(WorkItemRecord wir, boolean timedOut)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.processAutoTask
+yawl:ResourceManager_processAutoTask_210 a yawl:Method ;
+    rdfs:label "processAutoTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void processAutoTask(WorkItemRecord wir, boolean init)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.unpersistAutoTask
+yawl:ResourceManager_unpersistAutoTask_211 a yawl:Method ;
+    rdfs:label "unpersistAutoTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void unpersistAutoTask(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.restoreAutoTasks
+yawl:ResourceManager_restoreAutoTasks_212 a yawl:Method ;
+    rdfs:label "restoreAutoTasks" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restoreAutoTasks()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.handleCodeletCompletion
+yawl:ResourceManager_handleCodeletCompletion_213 a yawl:Method ;
+    rdfs:label "handleCodeletCompletion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCodeletCompletion(WorkItemRecord wir, Element codeletResult)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.checkInAutoTask
+yawl:ResourceManager_checkInAutoTask_214 a yawl:Method ;
+    rdfs:label "checkInAutoTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkInAutoTask(WorkItemRecord wir, Element outData)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.updateOutputDataList
+yawl:ResourceManager_updateOutputDataList_215 a yawl:Method ;
+    rdfs:label "updateOutputDataList" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element updateOutputDataList(Element in, Element out)" ;
+    rdfs:comment """updates the input datalist with the changed data in the output datalist @param in  - the JDOM Element containing the input params @param out - the JDOM Element containing the output params @return a JDOM Element with the data updated""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.getMIFormalInputParamName
+yawl:ResourceManager_getMIFormalInputParamName_216 a yawl:Method ;
+    rdfs:label "getMIFormalInputParamName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMIFormalInputParamName(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getTaskInformation
+yawl:ResourceManager_getTaskInformation_217 a yawl:Method ;
+    rdfs:label "getTaskInformation" ;
+    yawl:returnType "TaskInformation" ;
+    yawl:signature "TaskInformation getTaskInformation(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.getTaskInformation
+yawl:ResourceManager_getTaskInformation_218 a yawl:Method ;
+    rdfs:label "getTaskInformation" ;
+    yawl:returnType "TaskInformation" ;
+    yawl:signature "TaskInformation getTaskInformation(YSpecificationID specID, String taskID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ResourceManager.canAddNewInstance
+yawl:ResourceManager_canAddNewInstance_219 a yawl:Method ;
+    rdfs:label "canAddNewInstance" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean canAddNewInstance(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.createNewWorkItemInstance
+yawl:ResourceManager_createNewWorkItemInstance_220 a yawl:Method ;
+    rdfs:label "createNewWorkItemInstance" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord createNewWorkItemInstance(String id, String value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.getWorkItemDurationsForParticipant
+yawl:ResourceManager_getWorkItemDurationsForParticipant_221 a yawl:Method ;
+    rdfs:label "getWorkItemDurationsForParticipant" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItemDurationsForParticipant(YSpecificationID specID, String taskName, String pid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.redirectWorkItemToYawlService
+yawl:ResourceManager_redirectWorkItemToYawlService_222 a yawl:Method ;
+    rdfs:label "redirectWorkItemToYawlService" ;
+    yawl:returnType "String" ;
+    yawl:signature "String redirectWorkItemToYawlService(String itemID, String serviceName)" ;
+    rdfs:comment """Dispatches a work item to a YAWL Custom Service for handling. @param itemID      the id of the work to be redirected. @param serviceName the name of the service to redirect it to @return a success or diagnostic error message @pre The item id refers to a work item that is currently in the list of items known to the Resource Service, and the work item has enabled or fired status @pre The service name refers to a service registered in the engine @pre The service is up and running""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ResourceManager.sendMailNotification
+yawl:ResourceManager_sendMailNotification_223 a yawl:Method ;
+    rdfs:label "sendMailNotification" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sendMailNotification(Participant p, WorkItemRecord wir, int queue)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:ResourceManager__cache a yawl:Field ;
+    rdfs:label "_cache" .
+
+yawl:ResourceManager__services a yawl:Field ;
+    rdfs:label "_services" .
+
+yawl:ResourceManager__orgDataSet a yawl:Field ;
+    rdfs:label "_orgDataSet" .
+
+yawl:ResourceManager__workItemCache a yawl:Field ;
+    rdfs:label "_workItemCache" .
+
+yawl:ResourceManager_ADMIN_STR a yawl:Field ;
+    rdfs:label "ADMIN_STR" .
+
+yawl:ResourceManager_FAIL_STR a yawl:Field ;
+    rdfs:label "FAIL_STR" .
+
+yawl:ResourceManager_INVALID_LOGON_ERR a yawl:Field ;
+    rdfs:label "INVALID_LOGON_ERR" .
+
+yawl:ResourceManager_WORKITEM_ERR a yawl:Field ;
+    rdfs:label "WORKITEM_ERR" .
+
+yawl:ResourceManager__me a yawl:Field ;
+    rdfs:label "_me" .
+
+yawl:ResourceManager__resAdmin a yawl:Field ;
+    rdfs:label "_resAdmin" .
+
+yawl:ResourceManager__orgdb a yawl:Field ;
+    rdfs:label "_orgdb" .
+
+yawl:ResourceManager__persister a yawl:Field ;
+    rdfs:label "_persister" .
+
+yawl:ResourceManager__log a yawl:Field ;
+    rdfs:label "_log" .
+
+yawl:ResourceManager__calendar a yawl:Field ;
+    rdfs:label "_calendar" .
+
+yawl:ResourceManager__buildProps a yawl:Field ;
+    rdfs:label "_buildProps" .
+
+yawl:ResourceManager__persisting a yawl:Field ;
+    rdfs:label "_persisting" .
+
+yawl:ResourceManager__isNonDefaultOrgDB a yawl:Field ;
+    rdfs:label "_isNonDefaultOrgDB" .
+
+yawl:ResourceManager__autoTaskMutex a yawl:Field ;
+    rdfs:label "_autoTaskMutex" .
+
+yawl:ResourceManager__ibEventMutex a yawl:Field ;
+    rdfs:label "_ibEventMutex" .
+
+yawl:ResourceManager__removalMutex a yawl:Field ;
+    rdfs:label "_removalMutex" .
+
+yawl:ResourceManager__orgDataRefresher a yawl:Field ;
+    rdfs:label "_orgDataRefresher" .
+
+yawl:ResourceManager__serviceEnabled a yawl:Field ;
+    rdfs:label "_serviceEnabled" .
+
+yawl:ResourceManager__initCompleted a yawl:Field ;
+    rdfs:label "_initCompleted" .
+
+yawl:ResourceManager__orgDataRefreshing a yawl:Field ;
+    rdfs:label "_orgDataRefreshing" .
+
+yawl:ResourceManager_serviceInitialised a yawl:Field ;
+    rdfs:label "serviceInitialised" .
+
+yawl:ResourceManager__blockIfSecondaryResourcesUnavailable a yawl:Field ;
+    rdfs:label "_blockIfSecondaryResourcesUnavailable" .
+
+yawl:ResourceManager__persistPiling a yawl:Field ;
+    rdfs:label "_persistPiling" .
+
+yawl:ResourceManager__visualiserEnabled a yawl:Field ;
+    rdfs:label "_visualiserEnabled" .
+
+yawl:ResourceManager__visualiserDimension a yawl:Field ;
+    rdfs:label "_visualiserDimension" .
+
+yawl:ResourceManager__resMapCache a yawl:Field ;
+    rdfs:label "_resMapCache" .
+
+
+

@@ -1,0 +1,102 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.cli.CliProgressPanel
+yawl:CliProgressPanel a yawl:Class ;
+    rdfs:label "CliProgressPanel" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_cli ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/cli/CliProgressPanel.java"^^xsd:string ;
+    rdfs:comment """@author Joerg Evermann @author Michael Adams @date 3/11/2015""" ;
+    yawl:extends yawl:ProgressPanel ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CliProgressPanel_setText_1 ;
+    yawl:hasMethod yawl:CliProgressPanel_update_2 ;
+    yawl:hasMethod yawl:CliProgressPanel_setVisible_3 ;
+    yawl:hasMethod yawl:CliProgressPanel_setIndeterminate_4 ;
+    yawl:hasMethod yawl:CliProgressPanel_complete_5 ;
+    yawl:hasMethod yawl:CliProgressPanel_build_6 ;
+    yawl:hasMethod yawl:CliProgressPanel_getProgressBar_7 ;
+    yawl:hasMethod yawl:CliProgressPanel_write_8 ;
+    yawl:hasField yawl:CliProgressPanel_INCREMENTS ;
+    yawl:hasField yawl:CliProgressPanel__bar ;
+    .
+
+
+# Method: CliProgressPanel.setText
+yawl:CliProgressPanel_setText_1 a yawl:Method ;
+    rdfs:label "setText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setText(String text)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CliProgressPanel.update
+yawl:CliProgressPanel_update_2 a yawl:Method ;
+    rdfs:label "update" ;
+    yawl:returnType "void" ;
+    yawl:signature "void update(int progress)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CliProgressPanel.setVisible
+yawl:CliProgressPanel_setVisible_3 a yawl:Method ;
+    rdfs:label "setVisible" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setVisible(boolean b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CliProgressPanel.setIndeterminate
+yawl:CliProgressPanel_setIndeterminate_4 a yawl:Method ;
+    rdfs:label "setIndeterminate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setIndeterminate(boolean b)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CliProgressPanel.complete
+yawl:CliProgressPanel_complete_5 a yawl:Method ;
+    rdfs:label "complete" ;
+    yawl:returnType "void" ;
+    yawl:signature "void complete(boolean cancelled)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CliProgressPanel.build
+yawl:CliProgressPanel_build_6 a yawl:Method ;
+    rdfs:label "build" ;
+    yawl:returnType "void" ;
+    yawl:signature "void build()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: CliProgressPanel.getProgressBar
+yawl:CliProgressPanel_getProgressBar_7 a yawl:Method ;
+    rdfs:label "getProgressBar" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getProgressBar(int progress)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CliProgressPanel.write
+yawl:CliProgressPanel_write_8 a yawl:Method ;
+    rdfs:label "write" ;
+    yawl:returnType "void" ;
+    yawl:signature "void write(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:CliProgressPanel_INCREMENTS a yawl:Field ;
+    rdfs:label "INCREMENTS" .
+
+yawl:CliProgressPanel__bar a yawl:Field ;
+    rdfs:label "_bar" .
+
+
+

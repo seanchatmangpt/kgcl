@@ -1,0 +1,51 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.extra.Rings
+yawl:Rings a yawl:Class ;
+    rdfs:label "Rings" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor_extra ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/extra/TreeCollapseDemo.java"^^xsd:string ;
+    yawl:implements yawl:VisualizationServer ;
+    yawl:hasMethod yawl:Rings_getDepths_1 ;
+    yawl:hasMethod yawl:Rings_paint_2 ;
+    yawl:hasMethod yawl:Rings_useTransform_3 ;
+    yawl:hasField yawl:Rings_depths ;
+    .
+
+
+# Method: Rings.getDepths
+yawl:Rings_getDepths_1 a yawl:Method ;
+    rdfs:label "getDepths" ;
+    yawl:returnType "Collection" ;
+    yawl:signature "Collection getDepths()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Rings.paint
+yawl:Rings_paint_2 a yawl:Method ;
+    rdfs:label "paint" ;
+    yawl:returnType "void" ;
+    yawl:signature "void paint(Graphics g)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Rings.useTransform
+yawl:Rings_useTransform_3 a yawl:Method ;
+    rdfs:label "useTransform" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean useTransform()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:Rings_depths a yawl:Field ;
+    rdfs:label "depths" .
+
+
+

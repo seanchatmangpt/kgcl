@@ -1,0 +1,22 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.rdrutil.RdrParseException
+yawl:RdrParseException a yawl:Class ;
+    rdfs:label "RdrParseException" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_rdrutil ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/rdrutil/RdrParseException.java"^^xsd:string ;
+    rdfs:comment """RdrConditionException Class. An RdrConditionException is thrown when an attempt is made to evaluate a rule's condition and is found to be malformed or does not evaluate to a boolean result. @author Michael Adams v0.7, 10/12/2005""" ;
+    yawl:extends yawl:Exception ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+
+

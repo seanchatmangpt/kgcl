@@ -1,0 +1,350 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.rdr.RdrNode
+yawl:RdrNode a yawl:Class ;
+    rdfs:label "RdrNode" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_rdr ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/rdr/RdrNode.java"^^xsd:string ;
+    rdfs:comment """A Ripple Down Rule Node implementation. Each RdrNode contains an individual rule. The RdrTree class maintains a set of these nodes. @author Michael Adams v0.8, 04-09/2006""" ;
+    yawl:implements yawl:Cloneable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:RdrNode_clone_1 ;
+    yawl:hasMethod yawl:RdrNode_getNodeId_2 ;
+    yawl:hasMethod yawl:RdrNode_getCondition_3 ;
+    yawl:hasMethod yawl:RdrNode_getConclusion_4 ;
+    yawl:hasMethod yawl:RdrNode_getCornerStone_5 ;
+    yawl:hasMethod yawl:RdrNode_getFalseChild_6 ;
+    yawl:hasMethod yawl:RdrNode_getTrueChild_7 ;
+    yawl:hasMethod yawl:RdrNode_getParent_8 ;
+    yawl:hasMethod yawl:RdrNode_getDescription_9 ;
+    yawl:hasMethod yawl:RdrNode_isLeaf_10 ;
+    yawl:hasMethod yawl:RdrNode_setNodeID_11 ;
+    yawl:hasMethod yawl:RdrNode_setCondition_12 ;
+    yawl:hasMethod yawl:RdrNode_setConclusion_13 ;
+    yawl:hasMethod yawl:RdrNode_setCornerStone_14 ;
+    yawl:hasMethod yawl:RdrNode_setFalseChild_15 ;
+    yawl:hasMethod yawl:RdrNode_setTrueChild_16 ;
+    yawl:hasMethod yawl:RdrNode_setParent_17 ;
+    yawl:hasMethod yawl:RdrNode_setDescription_18 ;
+    yawl:hasMethod yawl:RdrNode_setAttributes_19 ;
+    yawl:hasMethod yawl:RdrNode_hasIdenticalContent_20 ;
+    yawl:hasMethod yawl:RdrNode_equalContent_21 ;
+    yawl:hasMethod yawl:RdrNode_equals_22 ;
+    yawl:hasMethod yawl:RdrNode_hashCode_23 ;
+    yawl:hasMethod yawl:RdrNode_search_24 ;
+    yawl:hasMethod yawl:RdrNode_toString_25 ;
+    yawl:hasMethod yawl:RdrNode_toXML_26 ;
+    yawl:hasMethod yawl:RdrNode_toXNode_27 ;
+    yawl:hasMethod yawl:RdrNode_fromXML_28 ;
+    yawl:hasMethod yawl:RdrNode_fromXNode_29 ;
+    yawl:hasMethod yawl:RdrNode_getCornerstoneString_30 ;
+    yawl:hasMethod yawl:RdrNode_setCornerstoneString_31 ;
+    yawl:hasField yawl:RdrNode_id ;
+    yawl:hasField yawl:RdrNode_parent ;
+    yawl:hasField yawl:RdrNode_trueChild ;
+    yawl:hasField yawl:RdrNode_falseChild ;
+    yawl:hasField yawl:RdrNode_condition ;
+    yawl:hasField yawl:RdrNode_conclusion ;
+    yawl:hasField yawl:RdrNode_cornerstone ;
+    yawl:hasField yawl:RdrNode_description ;
+    yawl:hasField yawl:RdrNode__attributes ;
+    yawl:hasField yawl:RdrNode_EVALUATOR ;
+    .
+
+
+# Method: RdrNode.clone
+yawl:RdrNode_clone_1 a yawl:Method ;
+    rdfs:label "clone" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode clone()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrNode.getNodeId
+yawl:RdrNode_getNodeId_2 a yawl:Method ;
+    rdfs:label "getNodeId" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getNodeId()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrNode.getCondition
+yawl:RdrNode_getCondition_3 a yawl:Method ;
+    rdfs:label "getCondition" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCondition()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrNode.getConclusion
+yawl:RdrNode_getConclusion_4 a yawl:Method ;
+    rdfs:label "getConclusion" ;
+    yawl:returnType "RdrConclusion" ;
+    yawl:signature "RdrConclusion getConclusion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrNode.getCornerStone
+yawl:RdrNode_getCornerStone_5 a yawl:Method ;
+    rdfs:label "getCornerStone" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getCornerStone()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrNode.getFalseChild
+yawl:RdrNode_getFalseChild_6 a yawl:Method ;
+    rdfs:label "getFalseChild" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode getFalseChild()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrNode.getTrueChild
+yawl:RdrNode_getTrueChild_7 a yawl:Method ;
+    rdfs:label "getTrueChild" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode getTrueChild()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrNode.getParent
+yawl:RdrNode_getParent_8 a yawl:Method ;
+    rdfs:label "getParent" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode getParent()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrNode.getDescription
+yawl:RdrNode_getDescription_9 a yawl:Method ;
+    rdfs:label "getDescription" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDescription()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrNode.isLeaf
+yawl:RdrNode_isLeaf_10 a yawl:Method ;
+    rdfs:label "isLeaf" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isLeaf()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrNode.setNodeID
+yawl:RdrNode_setNodeID_11 a yawl:Method ;
+    rdfs:label "setNodeID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setNodeID(long nodeID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrNode.setCondition
+yawl:RdrNode_setCondition_12 a yawl:Method ;
+    rdfs:label "setCondition" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCondition(String newCondition)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrNode.setConclusion
+yawl:RdrNode_setConclusion_13 a yawl:Method ;
+    rdfs:label "setConclusion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setConclusion(RdrConclusion newConclusion)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrNode.setCornerStone
+yawl:RdrNode_setCornerStone_14 a yawl:Method ;
+    rdfs:label "setCornerStone" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCornerStone(Element newCorner)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrNode.setFalseChild
+yawl:RdrNode_setFalseChild_15 a yawl:Method ;
+    rdfs:label "setFalseChild" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setFalseChild(RdrNode childNode)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrNode.setTrueChild
+yawl:RdrNode_setTrueChild_16 a yawl:Method ;
+    rdfs:label "setTrueChild" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTrueChild(RdrNode childNode)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrNode.setParent
+yawl:RdrNode_setParent_17 a yawl:Method ;
+    rdfs:label "setParent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setParent(RdrNode parentNode)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrNode.setDescription
+yawl:RdrNode_setDescription_18 a yawl:Method ;
+    rdfs:label "setDescription" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDescription(String desc)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrNode.setAttributes
+yawl:RdrNode_setAttributes_19 a yawl:Method ;
+    rdfs:label "setAttributes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAttributes(YAttributeMap map, String taskName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrNode.hasIdenticalContent
+yawl:RdrNode_hasIdenticalContent_20 a yawl:Method ;
+    rdfs:label "hasIdenticalContent" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasIdenticalContent(RdrNode other)" ;
+    rdfs:comment """Compares another node to this for equality in condition, conclusion and cornerstone values @param other the other node @return true if they match on the 3 c's""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrNode.equalContent
+yawl:RdrNode_equalContent_21 a yawl:Method ;
+    rdfs:label "equalContent" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equalContent(Element e, Element eOther)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RdrNode.equals
+yawl:RdrNode_equals_22 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrNode.hashCode
+yawl:RdrNode_hashCode_23 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrNode.search
+yawl:RdrNode_search_24 a yawl:Method ;
+    rdfs:label "search" ;
+    yawl:returnType "RdrPair" ;
+    yawl:signature "RdrPair search(Element caseData, RdrNode lastTrueNode)" ;
+    rdfs:comment """Recursively search each node using the condition of each to determine the path to take through the tree of which this node is a member. @param caseData - a JDOM Element that contains the set of data attributes and values that are used to evaluate the conditional expressions @param lastTrueNode - the RdrNode that contains the last satisfied  condition @return an RdrPair with two nodes: [0] the last satisfied node [1] the last node searched""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrNode.toString
+yawl:RdrNode_toString_25 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    rdfs:comment """returns a String representation of this node""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrNode.toXML
+yawl:RdrNode_toXML_26 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrNode.toXNode
+yawl:RdrNode_toXNode_27 a yawl:Method ;
+    rdfs:label "toXNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode toXNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrNode.fromXML
+yawl:RdrNode_fromXML_28 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrNode.fromXNode
+yawl:RdrNode_fromXNode_29 a yawl:Method ;
+    rdfs:label "fromXNode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXNode(XNode xNode)" ;
+    rdfs:comment """Only called when adding a new node, so it will have no id, parent or children, or for WorkletRunner transport, where connected nodes are not required @param xNode""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: RdrNode.getCornerstoneString
+yawl:RdrNode_getCornerstoneString_30 a yawl:Method ;
+    rdfs:label "getCornerstoneString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCornerstoneString()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RdrNode.setCornerstoneString
+yawl:RdrNode_setCornerstoneString_31 a yawl:Method ;
+    rdfs:label "setCornerstoneString" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCornerstoneString(String css)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:RdrNode_id a yawl:Field ;
+    rdfs:label "id" .
+
+yawl:RdrNode_parent a yawl:Field ;
+    rdfs:label "parent" .
+
+yawl:RdrNode_trueChild a yawl:Field ;
+    rdfs:label "trueChild" .
+
+yawl:RdrNode_falseChild a yawl:Field ;
+    rdfs:label "falseChild" .
+
+yawl:RdrNode_condition a yawl:Field ;
+    rdfs:label "condition" .
+
+yawl:RdrNode_conclusion a yawl:Field ;
+    rdfs:label "conclusion" .
+
+yawl:RdrNode_cornerstone a yawl:Field ;
+    rdfs:label "cornerstone" .
+
+yawl:RdrNode_description a yawl:Field ;
+    rdfs:label "description" .
+
+yawl:RdrNode__attributes a yawl:Field ;
+    rdfs:label "_attributes" .
+
+yawl:RdrNode_EVALUATOR a yawl:Field ;
+    rdfs:label "EVALUATOR" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_worklet_rdr_xsd a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.worklet.rdr.xsd" .
+
+

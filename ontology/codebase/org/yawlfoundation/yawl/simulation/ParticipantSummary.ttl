@@ -1,0 +1,64 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.simulation.ParticipantSummary
+yawl:ParticipantSummary a yawl:Class ;
+    rdfs:label "ParticipantSummary" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_simulation ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/simulation/YSimulator.java"^^xsd:string ;
+    yawl:hasMethod yawl:ParticipantSummary_addWork_1 ;
+    yawl:hasMethod yawl:ParticipantSummary_reportLimitReached_2 ;
+    yawl:hasMethod yawl:ParticipantSummary_getSummary_3 ;
+    yawl:hasMethod yawl:ParticipantSummary_sumTimes_4 ;
+    yawl:hasField yawl:ParticipantSummary_p ;
+    yawl:hasField yawl:ParticipantSummary_taskMap ;
+    yawl:hasField yawl:ParticipantSummary_reported ;
+    .
+
+
+# Method: ParticipantSummary.addWork
+yawl:ParticipantSummary_addWork_1 a yawl:Method ;
+    rdfs:label "addWork" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addWork(String task, int time)" ;
+    .
+
+# Method: ParticipantSummary.reportLimitReached
+yawl:ParticipantSummary_reportLimitReached_2 a yawl:Method ;
+    rdfs:label "reportLimitReached" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reportLimitReached()" ;
+    .
+
+# Method: ParticipantSummary.getSummary
+yawl:ParticipantSummary_getSummary_3 a yawl:Method ;
+    rdfs:label "getSummary" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSummary()" ;
+    .
+
+# Method: ParticipantSummary.sumTimes
+yawl:ParticipantSummary_sumTimes_4 a yawl:Method ;
+    rdfs:label "sumTimes" ;
+    yawl:returnType "long" ;
+    yawl:signature "long sumTimes(List times)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:ParticipantSummary_p a yawl:Field ;
+    rdfs:label "p" .
+
+yawl:ParticipantSummary_taskMap a yawl:Field ;
+    rdfs:label "taskMap" .
+
+yawl:ParticipantSummary_reported a yawl:Field ;
+    rdfs:label "reported" .
+
+
+

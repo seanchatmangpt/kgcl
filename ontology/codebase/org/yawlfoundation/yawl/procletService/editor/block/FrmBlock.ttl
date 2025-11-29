@@ -1,0 +1,404 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.block.FrmBlock
+yawl:FrmBlock a yawl:Class ;
+    rdfs:label "FrmBlock" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor_block ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/block/FrmBlock.java"^^xsd:string ;
+    yawl:extends yawl:DesignInternalFrame ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:FrmBlock_singleton_1 ;
+    yawl:hasMethod yawl:FrmBlock_finish_2 ;
+    yawl:hasMethod yawl:FrmBlock_jbInit_3 ;
+    yawl:hasMethod yawl:FrmBlock_setVisualizationViewer_4 ;
+    yawl:hasMethod yawl:FrmBlock_drawGraph_5 ;
+    yawl:hasMethod yawl:FrmBlock_addCreateItemPanels_6 ;
+    yawl:hasMethod yawl:FrmBlock_addFragmentItemPanels_7 ;
+    yawl:hasMethod yawl:FrmBlock_addNonCreateItemPanels_8 ;
+    yawl:hasMethod yawl:FrmBlock_buildCreatePanel_9 ;
+    yawl:hasMethod yawl:FrmBlock_buildFragmentPanel_10 ;
+    yawl:hasMethod yawl:FrmBlock_buildNonCreatePanel_11 ;
+    yawl:hasMethod yawl:FrmBlock_getVisualizationViewerForString_12 ;
+    yawl:hasMethod yawl:FrmBlock_initComponents_13 ;
+    yawl:hasMethod yawl:FrmBlock_initPanel_14 ;
+    yawl:hasMethod yawl:FrmBlock_buttonCommitActionPerformed_15 ;
+    yawl:hasMethod yawl:FrmBlock_rebuildLeftPart_16 ;
+    yawl:hasMethod yawl:FrmBlock_finishSelButtonActionPerformed_17 ;
+    yawl:hasMethod yawl:FrmBlock_comboBoxAvEmidsActionPerformed_18 ;
+    yawl:hasMethod yawl:FrmBlock_selectButtonActionPerformed_19 ;
+    yawl:hasMethod yawl:FrmBlock_doneButtonActionPerformed_20 ;
+    yawl:hasMethod yawl:FrmBlock_actionPerformed_21 ;
+    yawl:hasField yawl:FrmBlock_TITLE ;
+    yawl:hasField yawl:FrmBlock_single ;
+    yawl:hasField yawl:FrmBlock_blockCoordinator ;
+    yawl:hasField yawl:FrmBlock_bottomPanel ;
+    yawl:hasField yawl:FrmBlock_buttonCommit ;
+    yawl:hasField yawl:FrmBlock_comboBoxAvEmids ;
+    yawl:hasField yawl:FrmBlock_createItemPanelList ;
+    yawl:hasField yawl:FrmBlock_nonCreateItemPanelList ;
+    yawl:hasField yawl:FrmBlock_fragmentItemPanelList ;
+    yawl:hasField yawl:FrmBlock_createItemSpinnerList ;
+    yawl:hasField yawl:FrmBlock_fragmentItemCheckBoxList ;
+    yawl:hasField yawl:FrmBlock_nonCreateItemCheckBoxList ;
+    yawl:hasField yawl:FrmBlock_createItemItemList ;
+    yawl:hasField yawl:FrmBlock_fragmentItemItemList ;
+    yawl:hasField yawl:FrmBlock_nonCreateItemItemList ;
+    yawl:hasField yawl:FrmBlock_finishSelButton ;
+    yawl:hasField yawl:FrmBlock_labelCreatePanel ;
+    yawl:hasField yawl:FrmBlock_labelFragmentPanel ;
+    yawl:hasField yawl:FrmBlock_labelNonCreatePanel ;
+    yawl:hasField yawl:FrmBlock_labelTopPanel ;
+    yawl:hasField yawl:FrmBlock_panelCreate ;
+    yawl:hasField yawl:FrmBlock_panelCreateScroll ;
+    yawl:hasField yawl:FrmBlock_panelForCommitButton ;
+    yawl:hasField yawl:FrmBlock_panelNcreateScroll ;
+    yawl:hasField yawl:FrmBlock_panelNcreate ;
+    yawl:hasField yawl:FrmBlock_panelFragmentScroll ;
+    yawl:hasField yawl:FrmBlock_panelFragment ;
+    yawl:hasField yawl:FrmBlock_panelRight ;
+    yawl:hasField yawl:FrmBlock_panelTop ;
+    yawl:hasField yawl:FrmBlock_splitPaneMain ;
+    yawl:hasField yawl:FrmBlock_splitPanelLeft ;
+    yawl:hasField yawl:FrmBlock_graphOptionsPanel ;
+    yawl:hasField yawl:FrmBlock_topOptionsPanel ;
+    yawl:hasField yawl:FrmBlock_bottomOptionsPanel ;
+    yawl:hasField yawl:FrmBlock_layoutBox ;
+    yawl:hasField yawl:FrmBlock_vv ;
+    yawl:hasField yawl:FrmBlock_gm ;
+    yawl:hasField yawl:FrmBlock_vertexPaint ;
+    yawl:hasField yawl:FrmBlock_edgeLabel ;
+    yawl:hasField yawl:FrmBlock_selectButton ;
+    yawl:hasField yawl:FrmBlock_initRadioButtons ;
+    yawl:hasField yawl:FrmBlock_initRadioButtonMapping ;
+    yawl:hasField yawl:FrmBlock_selectedNode ;
+    yawl:hasField yawl:FrmBlock_initMessage ;
+    yawl:hasField yawl:FrmBlock_initMessagePanel ;
+    yawl:hasField yawl:FrmBlock_initNodesPanel ;
+    yawl:hasField yawl:FrmBlock_initPanel ;
+    yawl:hasField yawl:FrmBlock_donePanel ;
+    .
+
+
+# Method: FrmBlock.singleton
+yawl:FrmBlock_singleton_1 a yawl:Method ;
+    rdfs:label "singleton" ;
+    yawl:returnType "FrmBlock" ;
+    yawl:signature "FrmBlock singleton(BlockCoordinator anOrganizationCoordinator)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrmBlock.finish
+yawl:FrmBlock_finish_2 a yawl:Method ;
+    rdfs:label "finish" ;
+    yawl:returnType "void" ;
+    yawl:signature "void finish()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: FrmBlock.jbInit
+yawl:FrmBlock_jbInit_3 a yawl:Method ;
+    rdfs:label "jbInit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void jbInit()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: FrmBlock.setVisualizationViewer
+yawl:FrmBlock_setVisualizationViewer_4 a yawl:Method ;
+    rdfs:label "setVisualizationViewer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setVisualizationViewer(VisualizationViewer vviewer)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmBlock.drawGraph
+yawl:FrmBlock_drawGraph_5 a yawl:Method ;
+    rdfs:label "drawGraph" ;
+    yawl:returnType "void" ;
+    yawl:signature "void drawGraph()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmBlock.addCreateItemPanels
+yawl:FrmBlock_addCreateItemPanels_6 a yawl:Method ;
+    rdfs:label "addCreateItemPanels" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addCreateItemPanels()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmBlock.addFragmentItemPanels
+yawl:FrmBlock_addFragmentItemPanels_7 a yawl:Method ;
+    rdfs:label "addFragmentItemPanels" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addFragmentItemPanels()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FrmBlock.addNonCreateItemPanels
+yawl:FrmBlock_addNonCreateItemPanels_8 a yawl:Method ;
+    rdfs:label "addNonCreateItemPanels" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addNonCreateItemPanels()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: FrmBlock.buildCreatePanel
+yawl:FrmBlock_buildCreatePanel_9 a yawl:Method ;
+    rdfs:label "buildCreatePanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void buildCreatePanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmBlock.buildFragmentPanel
+yawl:FrmBlock_buildFragmentPanel_10 a yawl:Method ;
+    rdfs:label "buildFragmentPanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void buildFragmentPanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmBlock.buildNonCreatePanel
+yawl:FrmBlock_buildNonCreatePanel_11 a yawl:Method ;
+    rdfs:label "buildNonCreatePanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void buildNonCreatePanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmBlock.getVisualizationViewerForString
+yawl:FrmBlock_getVisualizationViewerForString_12 a yawl:Method ;
+    rdfs:label "getVisualizationViewerForString" ;
+    yawl:returnType "VisualizationViewer" ;
+    yawl:signature "VisualizationViewer getVisualizationViewerForString(String layout, Graph graph)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmBlock.initComponents
+yawl:FrmBlock_initComponents_13 a yawl:Method ;
+    rdfs:label "initComponents" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initComponents()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmBlock.initPanel
+yawl:FrmBlock_initPanel_14 a yawl:Method ;
+    rdfs:label "initPanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initPanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmBlock.buttonCommitActionPerformed
+yawl:FrmBlock_buttonCommitActionPerformed_15 a yawl:Method ;
+    rdfs:label "buttonCommitActionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void buttonCommitActionPerformed(java evt)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmBlock.rebuildLeftPart
+yawl:FrmBlock_rebuildLeftPart_16 a yawl:Method ;
+    rdfs:label "rebuildLeftPart" ;
+    yawl:returnType "void" ;
+    yawl:signature "void rebuildLeftPart(boolean initPanel)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmBlock.finishSelButtonActionPerformed
+yawl:FrmBlock_finishSelButtonActionPerformed_17 a yawl:Method ;
+    rdfs:label "finishSelButtonActionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void finishSelButtonActionPerformed(java evt)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmBlock.comboBoxAvEmidsActionPerformed
+yawl:FrmBlock_comboBoxAvEmidsActionPerformed_18 a yawl:Method ;
+    rdfs:label "comboBoxAvEmidsActionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void comboBoxAvEmidsActionPerformed(java evt)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmBlock.selectButtonActionPerformed
+yawl:FrmBlock_selectButtonActionPerformed_19 a yawl:Method ;
+    rdfs:label "selectButtonActionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void selectButtonActionPerformed(java evt)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmBlock.doneButtonActionPerformed
+yawl:FrmBlock_doneButtonActionPerformed_20 a yawl:Method ;
+    rdfs:label "doneButtonActionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doneButtonActionPerformed(java evt)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: FrmBlock.actionPerformed
+yawl:FrmBlock_actionPerformed_21 a yawl:Method ;
+    rdfs:label "actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void actionPerformed(ActionEvent e)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:FrmBlock_TITLE a yawl:Field ;
+    rdfs:label "TITLE" .
+
+yawl:FrmBlock_single a yawl:Field ;
+    rdfs:label "single" .
+
+yawl:FrmBlock_blockCoordinator a yawl:Field ;
+    rdfs:label "blockCoordinator" .
+
+yawl:FrmBlock_bottomPanel a yawl:Field ;
+    rdfs:label "bottomPanel" .
+
+yawl:FrmBlock_buttonCommit a yawl:Field ;
+    rdfs:label "buttonCommit" .
+
+yawl:FrmBlock_comboBoxAvEmids a yawl:Field ;
+    rdfs:label "comboBoxAvEmids" .
+
+yawl:FrmBlock_createItemPanelList a yawl:Field ;
+    rdfs:label "createItemPanelList" .
+
+yawl:FrmBlock_nonCreateItemPanelList a yawl:Field ;
+    rdfs:label "nonCreateItemPanelList" .
+
+yawl:FrmBlock_fragmentItemPanelList a yawl:Field ;
+    rdfs:label "fragmentItemPanelList" .
+
+yawl:FrmBlock_createItemSpinnerList a yawl:Field ;
+    rdfs:label "createItemSpinnerList" .
+
+yawl:FrmBlock_fragmentItemCheckBoxList a yawl:Field ;
+    rdfs:label "fragmentItemCheckBoxList" .
+
+yawl:FrmBlock_nonCreateItemCheckBoxList a yawl:Field ;
+    rdfs:label "nonCreateItemCheckBoxList" .
+
+yawl:FrmBlock_createItemItemList a yawl:Field ;
+    rdfs:label "createItemItemList" .
+
+yawl:FrmBlock_fragmentItemItemList a yawl:Field ;
+    rdfs:label "fragmentItemItemList" .
+
+yawl:FrmBlock_nonCreateItemItemList a yawl:Field ;
+    rdfs:label "nonCreateItemItemList" .
+
+yawl:FrmBlock_finishSelButton a yawl:Field ;
+    rdfs:label "finishSelButton" .
+
+yawl:FrmBlock_labelCreatePanel a yawl:Field ;
+    rdfs:label "labelCreatePanel" .
+
+yawl:FrmBlock_labelFragmentPanel a yawl:Field ;
+    rdfs:label "labelFragmentPanel" .
+
+yawl:FrmBlock_labelNonCreatePanel a yawl:Field ;
+    rdfs:label "labelNonCreatePanel" .
+
+yawl:FrmBlock_labelTopPanel a yawl:Field ;
+    rdfs:label "labelTopPanel" .
+
+yawl:FrmBlock_panelCreate a yawl:Field ;
+    rdfs:label "panelCreate" .
+
+yawl:FrmBlock_panelCreateScroll a yawl:Field ;
+    rdfs:label "panelCreateScroll" .
+
+yawl:FrmBlock_panelForCommitButton a yawl:Field ;
+    rdfs:label "panelForCommitButton" .
+
+yawl:FrmBlock_panelNcreateScroll a yawl:Field ;
+    rdfs:label "panelNcreateScroll" .
+
+yawl:FrmBlock_panelNcreate a yawl:Field ;
+    rdfs:label "panelNcreate" .
+
+yawl:FrmBlock_panelFragmentScroll a yawl:Field ;
+    rdfs:label "panelFragmentScroll" .
+
+yawl:FrmBlock_panelFragment a yawl:Field ;
+    rdfs:label "panelFragment" .
+
+yawl:FrmBlock_panelRight a yawl:Field ;
+    rdfs:label "panelRight" .
+
+yawl:FrmBlock_panelTop a yawl:Field ;
+    rdfs:label "panelTop" .
+
+yawl:FrmBlock_splitPaneMain a yawl:Field ;
+    rdfs:label "splitPaneMain" .
+
+yawl:FrmBlock_splitPanelLeft a yawl:Field ;
+    rdfs:label "splitPanelLeft" .
+
+yawl:FrmBlock_graphOptionsPanel a yawl:Field ;
+    rdfs:label "graphOptionsPanel" .
+
+yawl:FrmBlock_topOptionsPanel a yawl:Field ;
+    rdfs:label "topOptionsPanel" .
+
+yawl:FrmBlock_bottomOptionsPanel a yawl:Field ;
+    rdfs:label "bottomOptionsPanel" .
+
+yawl:FrmBlock_layoutBox a yawl:Field ;
+    rdfs:label "layoutBox" .
+
+yawl:FrmBlock_vv a yawl:Field ;
+    rdfs:label "vv" .
+
+yawl:FrmBlock_gm a yawl:Field ;
+    rdfs:label "gm" .
+
+yawl:FrmBlock_vertexPaint a yawl:Field ;
+    rdfs:label "vertexPaint" .
+
+yawl:FrmBlock_edgeLabel a yawl:Field ;
+    rdfs:label "edgeLabel" .
+
+yawl:FrmBlock_selectButton a yawl:Field ;
+    rdfs:label "selectButton" .
+
+yawl:FrmBlock_initRadioButtons a yawl:Field ;
+    rdfs:label "initRadioButtons" .
+
+yawl:FrmBlock_initRadioButtonMapping a yawl:Field ;
+    rdfs:label "initRadioButtonMapping" .
+
+yawl:FrmBlock_selectedNode a yawl:Field ;
+    rdfs:label "selectedNode" .
+
+yawl:FrmBlock_initMessage a yawl:Field ;
+    rdfs:label "initMessage" .
+
+yawl:FrmBlock_initMessagePanel a yawl:Field ;
+    rdfs:label "initMessagePanel" .
+
+yawl:FrmBlock_initNodesPanel a yawl:Field ;
+    rdfs:label "initNodesPanel" .
+
+yawl:FrmBlock_initPanel a yawl:Field ;
+    rdfs:label "initPanel" .
+
+yawl:FrmBlock_donePanel a yawl:Field ;
+    rdfs:label "donePanel" .
+
+
+

@@ -1,0 +1,128 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.balancer.output.AbstractLoadOutputter
+yawl:AbstractLoadOutputter a yawl:Class ;
+    rdfs:label "AbstractLoadOutputter" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer_output ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/output/AbstractLoadOutputter.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 21/8/17""" ;
+    yawl:modifiers "abstract" ;
+    yawl:hasMethod yawl:AbstractLoadOutputter_writeValues_1 ;
+    yawl:hasMethod yawl:AbstractLoadOutputter_getHeader_2 ;
+    yawl:hasMethod yawl:AbstractLoadOutputter_finalise_3 ;
+    yawl:hasMethod yawl:AbstractLoadOutputter_setWriteTime_4 ;
+    yawl:hasMethod yawl:AbstractLoadOutputter_closeFile_5 ;
+    yawl:hasMethod yawl:AbstractLoadOutputter_add_6 ;
+    yawl:hasMethod yawl:AbstractLoadOutputter_add_7 ;
+    yawl:hasMethod yawl:AbstractLoadOutputter_writeHeader_8 ;
+    yawl:hasMethod yawl:AbstractLoadOutputter_writeTime_9 ;
+    yawl:hasMethod yawl:AbstractLoadOutputter_openFile_10 ;
+    yawl:hasMethod yawl:AbstractLoadOutputter_getFile_11 ;
+    yawl:hasField yawl:AbstractLoadOutputter__out ;
+    yawl:hasField yawl:AbstractLoadOutputter__writeTime ;
+    .
+
+
+# Method: AbstractLoadOutputter.writeValues
+yawl:AbstractLoadOutputter_writeValues_1 a yawl:Method ;
+    rdfs:label "writeValues" ;
+    yawl:returnType "void" ;
+    yawl:signature "void writeValues(Map values)" ;
+    yawl:modifiers "abstract" ;
+    .
+
+# Method: AbstractLoadOutputter.getHeader
+yawl:AbstractLoadOutputter_getHeader_2 a yawl:Method ;
+    rdfs:label "getHeader" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getHeader()" ;
+    yawl:modifiers "abstract" ;
+    .
+
+# Method: AbstractLoadOutputter.finalise
+yawl:AbstractLoadOutputter_finalise_3 a yawl:Method ;
+    rdfs:label "finalise" ;
+    yawl:returnType "void" ;
+    yawl:signature "void finalise()" ;
+    yawl:modifiers "abstract" ;
+    .
+
+# Method: AbstractLoadOutputter.setWriteTime
+yawl:AbstractLoadOutputter_setWriteTime_4 a yawl:Method ;
+    rdfs:label "setWriteTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setWriteTime(boolean write)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractLoadOutputter.closeFile
+yawl:AbstractLoadOutputter_closeFile_5 a yawl:Method ;
+    rdfs:label "closeFile" ;
+    yawl:returnType "void" ;
+    yawl:signature "void closeFile()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractLoadOutputter.add
+yawl:AbstractLoadOutputter_add_6 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(String line)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractLoadOutputter.add
+yawl:AbstractLoadOutputter_add_7 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(Map values)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractLoadOutputter.writeHeader
+yawl:AbstractLoadOutputter_writeHeader_8 a yawl:Method ;
+    rdfs:label "writeHeader" ;
+    yawl:returnType "void" ;
+    yawl:signature "void writeHeader()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: AbstractLoadOutputter.writeTime
+yawl:AbstractLoadOutputter_writeTime_9 a yawl:Method ;
+    rdfs:label "writeTime" ;
+    yawl:returnType "void" ;
+    yawl:signature "void writeTime()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: AbstractLoadOutputter.openFile
+yawl:AbstractLoadOutputter_openFile_10 a yawl:Method ;
+    rdfs:label "openFile" ;
+    yawl:returnType "FileWriter" ;
+    yawl:signature "FileWriter openFile(String baseFileName, String engineName, String extn)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: AbstractLoadOutputter.getFile
+yawl:AbstractLoadOutputter_getFile_11 a yawl:Method ;
+    rdfs:label "getFile" ;
+    yawl:returnType "File" ;
+    yawl:signature "File getFile(String baseFileName, String engineName, String extn)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:AbstractLoadOutputter__out a yawl:Field ;
+    rdfs:label "_out" .
+
+yawl:AbstractLoadOutputter__writeTime a yawl:Field ;
+    rdfs:label "_writeTime" .
+
+
+

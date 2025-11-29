@@ -1,0 +1,109 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.persistence.StoredPortConnection
+yawl:StoredPortConnection a yawl:Class ;
+    rdfs:label "StoredPortConnection" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_persistence ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/persistence/StoredPortConnection.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 2/02/12""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:StoredPortConnection_getInput_1 ;
+    yawl:hasMethod yawl:StoredPortConnection_setInput_2 ;
+    yawl:hasMethod yawl:StoredPortConnection_getChannel_3 ;
+    yawl:hasMethod yawl:StoredPortConnection_setChannel_4 ;
+    yawl:hasMethod yawl:StoredPortConnection_getOutput_5 ;
+    yawl:hasMethod yawl:StoredPortConnection_setOutput_6 ;
+    yawl:hasMethod yawl:StoredPortConnection_getPkey_7 ;
+    yawl:hasMethod yawl:StoredPortConnection_setPkey_8 ;
+    yawl:hasField yawl:StoredPortConnection_pkey ;
+    yawl:hasField yawl:StoredPortConnection_input ;
+    yawl:hasField yawl:StoredPortConnection_channel ;
+    yawl:hasField yawl:StoredPortConnection_output ;
+    .
+
+
+# Method: StoredPortConnection.getInput
+yawl:StoredPortConnection_getInput_1 a yawl:Method ;
+    rdfs:label "getInput" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInput()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredPortConnection.setInput
+yawl:StoredPortConnection_setInput_2 a yawl:Method ;
+    rdfs:label "setInput" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setInput(String input)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredPortConnection.getChannel
+yawl:StoredPortConnection_getChannel_3 a yawl:Method ;
+    rdfs:label "getChannel" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getChannel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredPortConnection.setChannel
+yawl:StoredPortConnection_setChannel_4 a yawl:Method ;
+    rdfs:label "setChannel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setChannel(String channel)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredPortConnection.getOutput
+yawl:StoredPortConnection_getOutput_5 a yawl:Method ;
+    rdfs:label "getOutput" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOutput()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredPortConnection.setOutput
+yawl:StoredPortConnection_setOutput_6 a yawl:Method ;
+    rdfs:label "setOutput" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOutput(String output)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredPortConnection.getPkey
+yawl:StoredPortConnection_getPkey_7 a yawl:Method ;
+    rdfs:label "getPkey" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getPkey()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredPortConnection.setPkey
+yawl:StoredPortConnection_setPkey_8 a yawl:Method ;
+    rdfs:label "setPkey" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPkey(long pkey)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:StoredPortConnection_pkey a yawl:Field ;
+    rdfs:label "pkey" .
+
+yawl:StoredPortConnection_input a yawl:Field ;
+    rdfs:label "input" .
+
+yawl:StoredPortConnection_channel a yawl:Field ;
+    rdfs:label "channel" .
+
+yawl:StoredPortConnection_output a yawl:Field ;
+    rdfs:label "output" .
+
+
+

@@ -1,0 +1,594 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.logging.YEventLogger
+yawl:YEventLogger a yawl:Class ;
+    rdfs:label "YEventLogger" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_logging ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/logging/YEventLogger.java"^^xsd:string ;
+    rdfs:comment """Handles all process logging of case, subnet, workitem and workitem data events. Log objects are instantiated and then written as a row to the appropriate table via hibernate. Some tables store 'definition' information, others instantiation information. All table rows are identified with auto-generated primary keys (not mentioned in the summaries below). The log objects are: - YLogSpecification: spec id, version, name, root net key - YLogNet: name, FK to YLogSpecification - YLogNetInstance: case """ ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YEventLogger_getInstance_1 ;
+    yawl:hasMethod yawl:YEventLogger_getInstance_2 ;
+    yawl:hasMethod yawl:YEventLogger_enable_3 ;
+    yawl:hasMethod yawl:YEventLogger_disable_4 ;
+    yawl:hasMethod yawl:YEventLogger_isEnabled_5 ;
+    yawl:hasMethod yawl:YEventLogger_getDataSchema_6 ;
+    yawl:hasMethod yawl:YEventLogger_removeSpecificationFromCache_7 ;
+    yawl:hasMethod yawl:YEventLogger_logCaseCreated_8 ;
+    yawl:hasMethod yawl:YEventLogger_logSubNetCreated_9 ;
+    yawl:hasMethod yawl:YEventLogger_logCaseCancelled_10 ;
+    yawl:hasMethod yawl:YEventLogger_logNetCompleted_11 ;
+    yawl:hasMethod yawl:YEventLogger_logNetCancelled_12 ;
+    yawl:hasMethod yawl:YEventLogger_logWorkItemEvent_13 ;
+    yawl:hasMethod yawl:YEventLogger_logWorkItemEvent_14 ;
+    yawl:hasMethod yawl:YEventLogger_logDataEvent_15 ;
+    yawl:hasMethod yawl:YEventLogger_getMaxCaseNbr_16 ;
+    yawl:hasMethod yawl:YEventLogger_now_17 ;
+    yawl:hasMethod yawl:YEventLogger_loggingEnabled_18 ;
+    yawl:hasMethod yawl:YEventLogger_getWarnMsg_19 ;
+    yawl:hasMethod yawl:YEventLogger_getSpecificationEntry_20 ;
+    yawl:hasMethod yawl:YEventLogger_getSpecificationKey_21 ;
+    yawl:hasMethod yawl:YEventLogger_getRootNetID_22 ;
+    yawl:hasMethod yawl:YEventLogger_getNetID_23 ;
+    yawl:hasMethod yawl:YEventLogger_getTaskID_24 ;
+    yawl:hasMethod yawl:YEventLogger_getTaskID_25 ;
+    yawl:hasMethod yawl:YEventLogger_getRootNetInstanceID_26 ;
+    yawl:hasMethod yawl:YEventLogger_getNetInstanceID_27 ;
+    yawl:hasMethod yawl:YEventLogger_getOrCreateTaskInstanceID_28 ;
+    yawl:hasMethod yawl:YEventLogger_getTaskInstanceID_29 ;
+    yawl:hasMethod yawl:YEventLogger_getTaskInstanceID_30 ;
+    yawl:hasMethod yawl:YEventLogger_getServiceID_31 ;
+    yawl:hasMethod yawl:YEventLogger_getServiceID_32 ;
+    yawl:hasMethod yawl:YEventLogger_getServiceID_33 ;
+    yawl:hasMethod yawl:YEventLogger_getServiceID_34 ;
+    yawl:hasMethod yawl:YEventLogger_getDataTypeID_35 ;
+    yawl:hasMethod yawl:YEventLogger_getRootNetName_36 ;
+    yawl:hasMethod yawl:YEventLogger_insertSpecification_37 ;
+    yawl:hasMethod yawl:YEventLogger_insertNet_38 ;
+    yawl:hasMethod yawl:YEventLogger_insertNetInstance_39 ;
+    yawl:hasMethod yawl:YEventLogger_insertTask_40 ;
+    yawl:hasMethod yawl:YEventLogger_insertTaskInstance_41 ;
+    yawl:hasMethod yawl:YEventLogger_insertTaskInstance_42 ;
+    yawl:hasMethod yawl:YEventLogger_logEvent_43 ;
+    yawl:hasMethod yawl:YEventLogger_insertEvent_44 ;
+    yawl:hasMethod yawl:YEventLogger_insertService_45 ;
+    yawl:hasMethod yawl:YEventLogger_insertDataItems_46 ;
+    yawl:hasMethod yawl:YEventLogger_insertDataType_47 ;
+    yawl:hasMethod yawl:YEventLogger_populateDataListSchemas_48 ;
+    yawl:hasMethod yawl:YEventLogger_selectScalarWhere_49 ;
+    yawl:hasMethod yawl:YEventLogger_insertRow_50 ;
+    yawl:hasMethod yawl:YEventLogger_updateRow_51 ;
+    yawl:hasMethod yawl:YEventLogger_getDb_52 ;
+    yawl:hasField yawl:YEventLogger_CASE_START ;
+    yawl:hasField yawl:YEventLogger_CASE_COMPLETE ;
+    yawl:hasField yawl:YEventLogger_CASE_CANCEL ;
+    yawl:hasField yawl:YEventLogger_NET_UNFOLD ;
+    yawl:hasField yawl:YEventLogger_NET_START ;
+    yawl:hasField yawl:YEventLogger_NET_COMPLETE ;
+    yawl:hasField yawl:YEventLogger_NET_CANCEL ;
+    yawl:hasField yawl:YEventLogger__log ;
+    yawl:hasField yawl:YEventLogger__enabled ;
+    yawl:hasField yawl:YEventLogger_INSTANCE ;
+    yawl:hasField yawl:YEventLogger__engine ;
+    yawl:hasField yawl:YEventLogger__db ;
+    yawl:hasField yawl:YEventLogger_TASK_INST_MUTEX ;
+    yawl:hasField yawl:YEventLogger__keyCache ;
+    yawl:hasField yawl:YEventLogger_LOG_CLASSES ;
+    yawl:hasField yawl:YEventLogger__executor ;
+    .
+
+
+# Method: YEventLogger.getInstance
+yawl:YEventLogger_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "YEventLogger" ;
+    yawl:signature "YEventLogger getInstance(YEngine engine)" ;
+    rdfs:comment """Get a reference to the event logger object. This one is called by the engine on startup. @param engine a reference to the running engine @return an instantiated event logger""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YEventLogger.getInstance
+yawl:YEventLogger_getInstance_2 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "YEventLogger" ;
+    yawl:signature "YEventLogger getInstance()" ;
+    rdfs:comment """@return an instantiated event logger""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YEventLogger.enable
+yawl:YEventLogger_enable_3 a yawl:Method ;
+    rdfs:label "enable" ;
+    yawl:returnType "void" ;
+    yawl:signature "void enable()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEventLogger.disable
+yawl:YEventLogger_disable_4 a yawl:Method ;
+    rdfs:label "disable" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disable()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEventLogger.isEnabled
+yawl:YEventLogger_isEnabled_5 a yawl:Method ;
+    rdfs:label "isEnabled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEnabled()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEventLogger.getDataSchema
+yawl:YEventLogger_getDataSchema_6 a yawl:Method ;
+    rdfs:label "getDataSchema" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataSchema(YSpecificationID specID, String dataTypeName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEventLogger.removeSpecificationFromCache
+yawl:YEventLogger_removeSpecificationFromCache_7 a yawl:Method ;
+    rdfs:label "removeSpecificationFromCache" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeSpecificationFromCache(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEventLogger.logCaseCreated
+yawl:YEventLogger_logCaseCreated_8 a yawl:Method ;
+    rdfs:label "logCaseCreated" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logCaseCreated(YSpecificationID ySpecID, YIdentifier caseID, YLogDataItemList datalist, String serviceRef)" ;
+    rdfs:comment """Logs the launching of a new process instance. @param ySpecID the id of the process specification @param caseID the id of the case @param datalist a list of data entries to log with this event @param serviceRef a reference to the client service that launched the case""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEventLogger.logSubNetCreated
+yawl:YEventLogger_logSubNetCreated_9 a yawl:Method ;
+    rdfs:label "logSubNetCreated" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logSubNetCreated(YSpecificationID ySpecID, YNetRunner runner, String engineTaskID, YLogDataItemList datalist)" ;
+    rdfs:comment """Logs the launching of a sub-net (ie. the enablement of a composite task). @param ySpecID the id of the process specification @param runner the net runner launching this sub-net @param engineTaskID the task id assigned by the engine @param datalist a list of data entries to log with this event""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEventLogger.logCaseCancelled
+yawl:YEventLogger_logCaseCancelled_10 a yawl:Method ;
+    rdfs:label "logCaseCancelled" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logCaseCancelled(YIdentifier caseID, YLogDataItemList datalist, String serviceRef)" ;
+    rdfs:comment """Logs a case cancellation. @param caseID the id of the case @param datalist a list of data entries to log with this event @param serviceRef a reference to the client service that launched the case""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEventLogger.logNetCompleted
+yawl:YEventLogger_logNetCompleted_11 a yawl:Method ;
+    rdfs:label "logNetCompleted" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logNetCompleted(YIdentifier engineNetID, YLogDataItemList datalist)" ;
+    rdfs:comment """Logs the normal completion of a net. If the net is a root net, it means the case has completed. @param engineNetID the id of the net @param datalist a list of data entries to log with this event""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEventLogger.logNetCancelled
+yawl:YEventLogger_logNetCancelled_12 a yawl:Method ;
+    rdfs:label "logNetCancelled" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logNetCancelled(YSpecificationID ySpecID, YNetRunner runner, String engineTaskID, YLogDataItemList datalist)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEventLogger.logWorkItemEvent
+yawl:YEventLogger_logWorkItemEvent_13 a yawl:Method ;
+    rdfs:label "logWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logWorkItemEvent(YWorkItem workItem, String eventName, YLogDataItemList datalist)" ;
+    rdfs:comment """Logs a workitem event (change of status). @param workItem the workitem that triggered the event @param eventName the event that has occurred @param datalist a list of data entries to log with this event""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEventLogger.logWorkItemEvent
+yawl:YEventLogger_logWorkItemEvent_14 a yawl:Method ;
+    rdfs:label "logWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logWorkItemEvent(YWorkItem workItem, YWorkItemStatus event, YLogDataItemList datalist)" ;
+    rdfs:comment """Logs a workitem event (change of status). @param workItem the workitem that triggered the event @param event the event that has occurred @param datalist a list of data entries to log with this event""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEventLogger.logDataEvent
+yawl:YEventLogger_logDataEvent_15 a yawl:Method ;
+    rdfs:label "logDataEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logDataEvent(YWorkItem workitem, String descriptor, YLogDataItemList datalist)" ;
+    rdfs:comment """Logs data variables and values when mapped between net and workitem @param workitem the workitem starting or completing @param descriptor a label for the kind of data it is @param datalist a list of data entries to log with this event""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEventLogger.getMaxCaseNbr
+yawl:YEventLogger_getMaxCaseNbr_16 a yawl:Method ;
+    rdfs:label "getMaxCaseNbr" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getMaxCaseNbr()" ;
+    rdfs:comment """Gets the last allocated case number from the logs (called as secondary source on engine startup) @return the last allocated case number""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEventLogger.now
+yawl:YEventLogger_now_17 a yawl:Method ;
+    rdfs:label "now" ;
+    yawl:returnType "long" ;
+    yawl:signature "long now()" ;
+    rdfs:comment """@return the current system time""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.loggingEnabled
+yawl:YEventLogger_loggingEnabled_18 a yawl:Method ;
+    rdfs:label "loggingEnabled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean loggingEnabled()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.getWarnMsg
+yawl:YEventLogger_getWarnMsg_19 a yawl:Method ;
+    rdfs:label "getWarnMsg" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWarnMsg(String value)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.getSpecificationEntry
+yawl:YEventLogger_getSpecificationEntry_20 a yawl:Method ;
+    rdfs:label "getSpecificationEntry" ;
+    yawl:returnType "YLogSpecification" ;
+    yawl:signature "YLogSpecification getSpecificationEntry(YSpecificationID ySpecID)" ;
+    rdfs:comment """Gets the row of the YLogSpecification table matching the spec data passed @param ySpecID the identifiers of the specification @return the matching table row as a YLogSpecification object, or null if no match""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.getSpecificationKey
+yawl:YEventLogger_getSpecificationKey_21 a yawl:Method ;
+    rdfs:label "getSpecificationKey" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getSpecificationKey(YSpecificationID ySpecID)" ;
+    rdfs:comment """Gets the primary key for a specification record. @param ySpecID the identifiers of the specification @return the primary key for the specification""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.getRootNetID
+yawl:YEventLogger_getRootNetID_22 a yawl:Method ;
+    rdfs:label "getRootNetID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getRootNetID(YSpecificationID ySpecID)" ;
+    rdfs:comment """Gets the (primary key) id for the root net of a specification, creating new specification and root net records if they have never been logged. @param ySpecID the identifiers of the specification @return the primary key for the root net entry for the specification""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.getNetID
+yawl:YEventLogger_getNetID_23 a yawl:Method ;
+    rdfs:label "getNetID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getNetID(YSpecificationID ySpecID, String netName)" ;
+    rdfs:comment """Gets the (primary key) id for the net of the specification with the name specified, and creates a new net record if the net has not yet been recorded. Assumption: all (sub-)net names are unique within a specification. @param ySpecID the identifiers of the specification @param netName the name of the net or sub-net @return the primary key for the net entry""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.getTaskID
+yawl:YEventLogger_getTaskID_24 a yawl:Method ;
+    rdfs:label "getTaskID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getTaskID(YWorkItem workItem)" ;
+    rdfs:comment """Gets the (primary key) id for a task @param workItem a workitem instantiated from the task @return the primary key for the task record @see this.getTaskID(YSpecificationID, String, long)""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.getTaskID
+yawl:YEventLogger_getTaskID_25 a yawl:Method ;
+    rdfs:label "getTaskID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getTaskID(YSpecificationID ySpecID, String engineTaskID, long childNetID)" ;
+    rdfs:comment """Gets the (primary key) id for a task, and creates a new task record if the task has not yet been recorded. @param ySpecID the identifiers of the specification @param engineTaskID the task id assigned by the engine @param childNetID the FK to the unfolded net of this task (composite tasks only) @return the primary key for the task record""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.getRootNetInstanceID
+yawl:YEventLogger_getRootNetInstanceID_26 a yawl:Method ;
+    rdfs:label "getRootNetInstanceID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getRootNetInstanceID(YIdentifier caseID)" ;
+    rdfs:comment """Gets the primary key for the root net of a process instance @param caseID the case id @return the primary key for the root net record""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.getNetInstanceID
+yawl:YEventLogger_getNetInstanceID_27 a yawl:Method ;
+    rdfs:label "getNetInstanceID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getNetInstanceID(YIdentifier engineID)" ;
+    rdfs:comment """Gets the primary key of a net instance @param engineID the 'case id' of the net instance @return the primary key of a net instance record""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.getOrCreateTaskInstanceID
+yawl:YEventLogger_getOrCreateTaskInstanceID_28 a yawl:Method ;
+    rdfs:label "getOrCreateTaskInstanceID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getOrCreateTaskInstanceID(YWorkItem workItem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.getTaskInstanceID
+yawl:YEventLogger_getTaskInstanceID_29 a yawl:Method ;
+    rdfs:label "getTaskInstanceID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getTaskInstanceID(YWorkItem workItem)" ;
+    rdfs:comment """Gets the (primary key) id for a task instance @param workItem a workitem instantiated from the task @return the primary key for the task record @see this.getTaskInstanceID(YIdentifier, long)""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.getTaskInstanceID
+yawl:YEventLogger_getTaskInstanceID_30 a yawl:Method ;
+    rdfs:label "getTaskInstanceID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getTaskInstanceID(YIdentifier engineID, long taskID)" ;
+    rdfs:comment """Gets the primary key of a net instance @param engineID the 'case id' of the task instance @param taskID a foreign key to the corresponding YLogTask record @return the primary key of a task instance record""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.getServiceID
+yawl:YEventLogger_getServiceID_31 a yawl:Method ;
+    rdfs:label "getServiceID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getServiceID(YWorkItem item)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.getServiceID
+yawl:YEventLogger_getServiceID_32 a yawl:Method ;
+    rdfs:label "getServiceID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getServiceID(String serviceHandle)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.getServiceID
+yawl:YEventLogger_getServiceID_33 a yawl:Method ;
+    rdfs:label "getServiceID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getServiceID(YClient client)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.getServiceID
+yawl:YEventLogger_getServiceID_34 a yawl:Method ;
+    rdfs:label "getServiceID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getServiceID(String name, String url)" ;
+    rdfs:comment """Gets the primary key of a service record @param name the name of the service @param url the url of the service @return the primary key""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.getDataTypeID
+yawl:YEventLogger_getDataTypeID_35 a yawl:Method ;
+    rdfs:label "getDataTypeID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getDataTypeID(YLogDataItem item)" ;
+    rdfs:comment """Gets the primary key of a data type definition record @param item the data item with the data type to get the id for @return the primary key of a dataType record""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.getRootNetName
+yawl:YEventLogger_getRootNetName_36 a yawl:Method ;
+    rdfs:label "getRootNetName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRootNetName(YSpecificationID ySpecID)" ;
+    rdfs:comment """Gets the name of the root net for the given specification @param ySpecID the id of the specification @return the name of its root net""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.insertSpecification
+yawl:YEventLogger_insertSpecification_37 a yawl:Method ;
+    rdfs:label "insertSpecification" ;
+    yawl:returnType "YLogSpecification" ;
+    yawl:signature "YLogSpecification insertSpecification(YSpecificationID ySpecID)" ;
+    rdfs:comment """Inserts a new specification record @param ySpecID the id of the specification to insert @return the inserted record""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.insertNet
+yawl:YEventLogger_insertNet_38 a yawl:Method ;
+    rdfs:label "insertNet" ;
+    yawl:returnType "long" ;
+    yawl:signature "long insertNet(String netName, long specKey)" ;
+    rdfs:comment """Inserts a new net record @param netName the name of the net @param specKey a foreign key to the parent specification @return the primary key of the inserted record""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.insertNetInstance
+yawl:YEventLogger_insertNetInstance_39 a yawl:Method ;
+    rdfs:label "insertNetInstance" ;
+    yawl:returnType "long" ;
+    yawl:signature "long insertNetInstance(YIdentifier engineID, long netID, long parentTaskInstanceID)" ;
+    rdfs:comment """Inserts a new net instance record @param engineID the 'case id' of the net instance @param netID a foreign key to the net record of which this is an instance @param parentTaskInstanceID a foreign key to the parent task record that 'unfolded' to this net instance (composite tasks only) - atomic tasks should have a value of -1 for this parameter @return the primary key of the inserted record""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.insertTask
+yawl:YEventLogger_insertTask_40 a yawl:Method ;
+    rdfs:label "insertTask" ;
+    yawl:returnType "long" ;
+    yawl:signature "long insertTask(String taskName, long netID, long childNetID)" ;
+    rdfs:comment """Inserts a new task record @param taskName the name of the task @param netID a foreign key to the encapsulating net @param childNetID a foreign key to the child net this task unfolds to (composite tasks only) - atomic tasks should have a value of -1 for this parameter @return the primary key of the inserted record""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.insertTaskInstance
+yawl:YEventLogger_insertTaskInstance_41 a yawl:Method ;
+    rdfs:label "insertTaskInstance" ;
+    yawl:returnType "long" ;
+    yawl:signature "long insertTaskInstance(YWorkItem workItem)" ;
+    rdfs:comment """Inserts a new task instance record @param workItem the task instance @return the primary key of the inserted record @see this.insertTaskInstance(String, long, long, long)""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.insertTaskInstance
+yawl:YEventLogger_insertTaskInstance_42 a yawl:Method ;
+    rdfs:label "insertTaskInstance" ;
+    yawl:returnType "long" ;
+    yawl:signature "long insertTaskInstance(String engineInstanceID, long taskID, long parentTaskInstanceID, long parentNetInstanceID)" ;
+    rdfs:comment """Inserts a new task instance record @param engineInstanceID the 'case id' of this task instance @param taskID a foreign key to the task of which this is an instance @param parentTaskInstanceID a foreign key to the parent task instance (child workitems only, composite and parent workitem instances should have -1 for this parameter) @param parentNetInstanceID a foreign key to the encapsulating net instance @return the primary key of the inserted record""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.logEvent
+yawl:YEventLogger_logEvent_43 a yawl:Method ;
+    rdfs:label "logEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logEvent(long instanceID, String descriptor, YLogDataItemList datalist, long serviceID, long rootNetInstanceID)" ;
+    rdfs:comment """Logs an event and its associated data items @param instanceID a foreign key to either the net instance or the task instance that generated the event @param descriptor a label that describes the kind of event @param datalist the list of data items to insert @param serviceID a foreign key to the client service initiating the event @param rootNetInstanceID a foreign key to the root net instance that (eventually) encapsulates this event""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.insertEvent
+yawl:YEventLogger_insertEvent_44 a yawl:Method ;
+    rdfs:label "insertEvent" ;
+    yawl:returnType "long" ;
+    yawl:signature "long insertEvent(long instanceID, String descriptor, long serviceID, long rootNetInstanceID)" ;
+    rdfs:comment """Inserts a new event record @param instanceID a foreign key to either the net instance or the task instance that generated the event @param descriptor a label that describes the kind of event @param serviceID a foreign key to the service that triggered the event @param rootNetInstanceID a foreign key to the root net instance that (eventually) encapsulates this event @return the primary key of the inserted record""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.insertService
+yawl:YEventLogger_insertService_45 a yawl:Method ;
+    rdfs:label "insertService" ;
+    yawl:returnType "long" ;
+    yawl:signature "long insertService(String name, String url)" ;
+    rdfs:comment """Inserts a new service record @param name the name of the service @param url the url of the service @return the primary key of the inserted record""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.insertDataItems
+yawl:YEventLogger_insertDataItems_46 a yawl:Method ;
+    rdfs:label "insertDataItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void insertDataItems(long eventID, YLogDataItemList datalist)" ;
+    rdfs:comment """Inserts a list of data items records for an event @param eventID a foreign key to the event record associated with the data items @param datalist the list of data items to insert""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.insertDataType
+yawl:YEventLogger_insertDataType_47 a yawl:Method ;
+    rdfs:label "insertDataType" ;
+    yawl:returnType "long" ;
+    yawl:signature "long insertDataType(YLogDataItem item)" ;
+    rdfs:comment """Inserts a new data type record @param item the data item that contains the datatype to insert @return the primary key of the inserted record""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.populateDataListSchemas
+yawl:YEventLogger_populateDataListSchemas_48 a yawl:Method ;
+    rdfs:label "populateDataListSchemas" ;
+    yawl:returnType "void" ;
+    yawl:signature "void populateDataListSchemas(YSpecificationID specID, YLogDataItemList datalist)" ;
+    rdfs:comment """Populates the data definition for each data item in the list, for data items originating from net and task instances (as opposed to externally supplied data items which are assumed to come with their own data type definitions) @param specID the specification identifier from which to get the data schemas @param datalist the list of data items""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.selectScalarWhere
+yawl:YEventLogger_selectScalarWhere_49 a yawl:Method ;
+    rdfs:label "selectScalarWhere" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object selectScalarWhere(String objName, String whereClause)" ;
+    rdfs:comment """Performs a scalar selection for a specified table and constraint @param objName the name of the object table to select from @param whereClause the constraint clause @return the first or only matching record, or null if there's no match""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.insertRow
+yawl:YEventLogger_insertRow_50 a yawl:Method ;
+    rdfs:label "insertRow" ;
+    yawl:returnType "void" ;
+    yawl:signature "void insertRow(Object o)" ;
+    rdfs:comment """Inserts a row in the appropriate log table @param o the object representing the contents of the row to insert""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.updateRow
+yawl:YEventLogger_updateRow_51 a yawl:Method ;
+    rdfs:label "updateRow" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateRow(Object o)" ;
+    rdfs:comment """Updates a row in the appropriate log table @param o the object representing the contents of the row to update""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEventLogger.getDb
+yawl:YEventLogger_getDb_52 a yawl:Method ;
+    rdfs:label "getDb" ;
+    yawl:returnType "HibernateEngine" ;
+    yawl:signature "HibernateEngine getDb()" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:YEventLogger_CASE_START a yawl:Field ;
+    rdfs:label "CASE_START" .
+
+yawl:YEventLogger_CASE_COMPLETE a yawl:Field ;
+    rdfs:label "CASE_COMPLETE" .
+
+yawl:YEventLogger_CASE_CANCEL a yawl:Field ;
+    rdfs:label "CASE_CANCEL" .
+
+yawl:YEventLogger_NET_UNFOLD a yawl:Field ;
+    rdfs:label "NET_UNFOLD" .
+
+yawl:YEventLogger_NET_START a yawl:Field ;
+    rdfs:label "NET_START" .
+
+yawl:YEventLogger_NET_COMPLETE a yawl:Field ;
+    rdfs:label "NET_COMPLETE" .
+
+yawl:YEventLogger_NET_CANCEL a yawl:Field ;
+    rdfs:label "NET_CANCEL" .
+
+yawl:YEventLogger__log a yawl:Field ;
+    rdfs:label "_log" .
+
+yawl:YEventLogger__enabled a yawl:Field ;
+    rdfs:label "_enabled" .
+
+yawl:YEventLogger_INSTANCE a yawl:Field ;
+    rdfs:label "INSTANCE" .
+
+yawl:YEventLogger__engine a yawl:Field ;
+    rdfs:label "_engine" .
+
+yawl:YEventLogger__db a yawl:Field ;
+    rdfs:label "_db" .
+
+yawl:YEventLogger_TASK_INST_MUTEX a yawl:Field ;
+    rdfs:label "TASK_INST_MUTEX" .
+
+yawl:YEventLogger__keyCache a yawl:Field ;
+    rdfs:label "_keyCache" .
+
+yawl:YEventLogger_LOG_CLASSES a yawl:Field ;
+    rdfs:label "LOG_CLASSES" .
+
+yawl:YEventLogger__executor a yawl:Field ;
+    rdfs:label "_executor" .
+
+
+

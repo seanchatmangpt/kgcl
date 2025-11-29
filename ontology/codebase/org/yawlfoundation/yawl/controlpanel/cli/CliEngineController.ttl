@@ -1,0 +1,67 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.controlpanel.cli
+yawl:org_yawlfoundation_yawl_controlpanel_cli a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.controlpanel.cli" .
+# Class: org.yawlfoundation.yawl.controlpanel.cli.CliEngineController
+yawl:CliEngineController a yawl:Class ;
+    rdfs:label "CliEngineController" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_cli ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/cli/CliEngineController.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 19/11/2015""" ;
+    yawl:implements yawl:EngineStatusListener ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CliEngineController_run_1 ;
+    yawl:hasMethod yawl:CliEngineController_statusChanged_2 ;
+    yawl:hasMethod yawl:CliEngineController_printError_3 ;
+    yawl:hasMethod yawl:CliEngineController_pause_4 ;
+    yawl:hasField yawl:CliEngineController__engineStatus ;
+    .
+
+
+# Method: CliEngineController.run
+yawl:CliEngineController_run_1 a yawl:Method ;
+    rdfs:label "run" ;
+    yawl:returnType "void" ;
+    yawl:signature "void run()" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CliEngineController.statusChanged
+yawl:CliEngineController_statusChanged_2 a yawl:Method ;
+    rdfs:label "statusChanged" ;
+    yawl:returnType "void" ;
+    yawl:signature "void statusChanged(EngineStatus status)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CliEngineController.printError
+yawl:CliEngineController_printError_3 a yawl:Method ;
+    rdfs:label "printError" ;
+    yawl:returnType "void" ;
+    yawl:signature "void printError(String msg)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: CliEngineController.pause
+yawl:CliEngineController_pause_4 a yawl:Method ;
+    rdfs:label "pause" ;
+    yawl:returnType "void" ;
+    yawl:signature "void pause(int mSecs)" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:CliEngineController__engineStatus a yawl:Field ;
+    rdfs:label "_engineStatus" .
+
+
+

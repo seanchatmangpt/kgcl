@@ -1,0 +1,146 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.scheduling.persistence.DataMapperRupTest
+yawl:DataMapperRupTest a yawl:Class ;
+    rdfs:label "DataMapperRupTest" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_scheduling_persistence ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/scheduling/persistence/DataMapperRupTest.java"^^xsd:string ;
+    rdfs:comment """@author jku""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DataMapperRupTest_setUpBeforeClass_1 ;
+    yawl:hasMethod yawl:DataMapperRupTest_tearDownAfterClass_2 ;
+    yawl:hasMethod yawl:DataMapperRupTest_setUp_3 ;
+    yawl:hasMethod yawl:DataMapperRupTest_tearDown_4 ;
+    yawl:hasMethod yawl:DataMapperRupTest_testSaveRup__5 ;
+    yawl:hasMethod yawl:DataMapperRupTest_testGetRupActivityTypes_6 ;
+    yawl:hasMethod yawl:DataMapperRupTest_testGetRupNodes_7 ;
+    yawl:hasMethod yawl:DataMapperRupTest_testGetRupByCaseId_8 ;
+    yawl:hasMethod yawl:DataMapperRupTest_testUpdateRup_9 ;
+    yawl:hasMethod yawl:DataMapperRupTest_testGetRupsByActivityl_10 ;
+    yawl:hasMethod yawl:DataMapperRupTest_testGetRupsByInterval_11 ;
+    yawl:hasField yawl:DataMapperRupTest_logger ;
+    yawl:hasField yawl:DataMapperRupTest_caseId ;
+    .
+
+
+# Method: DataMapperRupTest.setUpBeforeClass
+yawl:DataMapperRupTest_setUpBeforeClass_1 a yawl:Method ;
+    rdfs:label "setUpBeforeClass" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUpBeforeClass()" ;
+    rdfs:comment """@throws java.lang.Exception""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DataMapperRupTest.tearDownAfterClass
+yawl:DataMapperRupTest_tearDownAfterClass_2 a yawl:Method ;
+    rdfs:label "tearDownAfterClass" ;
+    yawl:returnType "void" ;
+    yawl:signature "void tearDownAfterClass()" ;
+    rdfs:comment """@throws java.lang.Exception""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: DataMapperRupTest.setUp
+yawl:DataMapperRupTest_setUp_3 a yawl:Method ;
+    rdfs:label "setUp" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUp()" ;
+    rdfs:comment """@throws java.lang.Exception""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataMapperRupTest.tearDown
+yawl:DataMapperRupTest_tearDown_4 a yawl:Method ;
+    rdfs:label "tearDown" ;
+    yawl:returnType "void" ;
+    yawl:signature "void tearDown()" ;
+    rdfs:comment """@throws java.lang.Exception""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataMapperRupTest.testSaveRup_
+yawl:DataMapperRupTest_testSaveRup__5 a yawl:Method ;
+    rdfs:label "testSaveRup_" ;
+    yawl:returnType "void" ;
+    yawl:signature "void testSaveRup_()" ;
+    rdfs:comment """Test method for {@link DataMapper#saveRup(Case)} .""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataMapperRupTest.testGetRupActivityTypes
+yawl:DataMapperRupTest_testGetRupActivityTypes_6 a yawl:Method ;
+    rdfs:label "testGetRupActivityTypes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void testGetRupActivityTypes()" ;
+    rdfs:comment """Test method for {@link DataMapper#getRupActivityTypes} .""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataMapperRupTest.testGetRupNodes
+yawl:DataMapperRupTest_testGetRupNodes_7 a yawl:Method ;
+    rdfs:label "testGetRupNodes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void testGetRupNodes()" ;
+    rdfs:comment """Test method for {@link DataMapper#getRupNodes} .""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataMapperRupTest.testGetRupByCaseId
+yawl:DataMapperRupTest_testGetRupByCaseId_8 a yawl:Method ;
+    rdfs:label "testGetRupByCaseId" ;
+    yawl:returnType "void" ;
+    yawl:signature "void testGetRupByCaseId()" ;
+    rdfs:comment """Test method for {@link DataMapper#getRupByCaseId} .""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataMapperRupTest.testUpdateRup
+yawl:DataMapperRupTest_testUpdateRup_9 a yawl:Method ;
+    rdfs:label "testUpdateRup" ;
+    yawl:returnType "void" ;
+    yawl:signature "void testUpdateRup()" ;
+    rdfs:comment """Test method for {@link DataMapper#updateRup} .""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataMapperRupTest.testGetRupsByActivityl
+yawl:DataMapperRupTest_testGetRupsByActivityl_10 a yawl:Method ;
+    rdfs:label "testGetRupsByActivityl" ;
+    yawl:returnType "void" ;
+    yawl:signature "void testGetRupsByActivityl()" ;
+    rdfs:comment """Test method for {@link DataMapper#getRupsByActivity} .""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DataMapperRupTest.testGetRupsByInterval
+yawl:DataMapperRupTest_testGetRupsByInterval_11 a yawl:Method ;
+    rdfs:label "testGetRupsByInterval" ;
+    yawl:returnType "void" ;
+    yawl:signature "void testGetRupsByInterval()" ;
+    rdfs:comment """Test method for {@link DataMapper#getRupsByInterval} .""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:DataMapperRupTest_logger a yawl:Field ;
+    rdfs:label "logger" .
+
+yawl:DataMapperRupTest_caseId a yawl:Field ;
+    rdfs:label "caseId" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_scheduling_resource a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.scheduling.resource" .
+
+

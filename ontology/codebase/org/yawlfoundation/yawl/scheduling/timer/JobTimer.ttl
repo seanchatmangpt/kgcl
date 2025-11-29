@@ -1,0 +1,141 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.scheduling.timer.JobTimer
+yawl:JobTimer a yawl:Class ;
+    rdfs:label "JobTimer" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_scheduling_timer ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/scheduling/timer/JobTimer.java"^^xsd:string ;
+    yawl:implements yawl:Constants ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:JobTimer_initialize_1 ;
+    yawl:hasMethod yawl:JobTimer_shutdown_2 ;
+    yawl:hasMethod yawl:JobTimer_startJobMsgTransfer_3 ;
+    yawl:hasMethod yawl:JobTimer_startJobRUPCheck_4 ;
+    yawl:hasMethod yawl:JobTimer_startTestRUPs4Today_5 ;
+    yawl:hasMethod yawl:JobTimer_scheduleMsgTransfer_6 ;
+    yawl:hasMethod yawl:JobTimer_calcMsgTransferStartTime_7 ;
+    yawl:hasMethod yawl:JobTimer_getNextMidnight_8 ;
+    yawl:hasMethod yawl:JobTimer_addTransferJob_9 ;
+    yawl:hasMethod yawl:JobTimer_removeTransferJobs_10 ;
+    yawl:hasField yawl:JobTimer__log ;
+    yawl:hasField yawl:JobTimer__executor ;
+    yawl:hasField yawl:JobTimer__props ;
+    yawl:hasField yawl:JobTimer__msgTransferJobs ;
+    yawl:hasField yawl:JobTimer__initialised ;
+    .
+
+
+# Method: JobTimer.initialize
+yawl:JobTimer_initialize_1 a yawl:Method ;
+    rdfs:label "initialize" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initialize()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JobTimer.shutdown
+yawl:JobTimer_shutdown_2 a yawl:Method ;
+    rdfs:label "shutdown" ;
+    yawl:returnType "void" ;
+    yawl:signature "void shutdown()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JobTimer.startJobMsgTransfer
+yawl:JobTimer_startJobMsgTransfer_3 a yawl:Method ;
+    rdfs:label "startJobMsgTransfer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void startJobMsgTransfer(String caseId, Document rup)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JobTimer.startJobRUPCheck
+yawl:JobTimer_startJobRUPCheck_4 a yawl:Method ;
+    rdfs:label "startJobRUPCheck" ;
+    yawl:returnType "void" ;
+    yawl:signature "void startJobRUPCheck()" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JobTimer.startTestRUPs4Today
+yawl:JobTimer_startTestRUPs4Today_5 a yawl:Method ;
+    rdfs:label "startTestRUPs4Today" ;
+    yawl:returnType "void" ;
+    yawl:signature "void startTestRUPs4Today()" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JobTimer.scheduleMsgTransfer
+yawl:JobTimer_scheduleMsgTransfer_6 a yawl:Method ;
+    rdfs:label "scheduleMsgTransfer" ;
+    yawl:returnType "int" ;
+    yawl:signature "int scheduleMsgTransfer(Element msgTransfer, String caseId, int i)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JobTimer.calcMsgTransferStartTime
+yawl:JobTimer_calcMsgTransferStartTime_7 a yawl:Method ;
+    rdfs:label "calcMsgTransferStartTime" ;
+    yawl:returnType "Calendar" ;
+    yawl:signature "Calendar calcMsgTransferStartTime(Element msgTransfer)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JobTimer.getNextMidnight
+yawl:JobTimer_getNextMidnight_8 a yawl:Method ;
+    rdfs:label "getNextMidnight" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getNextMidnight()" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JobTimer.addTransferJob
+yawl:JobTimer_addTransferJob_9 a yawl:Method ;
+    rdfs:label "addTransferJob" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addTransferJob(String caseID, ScheduledFuture scheduledFuture)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JobTimer.removeTransferJobs
+yawl:JobTimer_removeTransferJobs_10 a yawl:Method ;
+    rdfs:label "removeTransferJobs" ;
+    yawl:returnType "int" ;
+    yawl:signature "int removeTransferJobs(String caseID)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:JobTimer__log a yawl:Field ;
+    rdfs:label "_log" .
+
+yawl:JobTimer__executor a yawl:Field ;
+    rdfs:label "_executor" .
+
+yawl:JobTimer__props a yawl:Field ;
+    rdfs:label "_props" .
+
+yawl:JobTimer__msgTransferJobs a yawl:Field ;
+    rdfs:label "_msgTransferJobs" .
+
+yawl:JobTimer__initialised a yawl:Field ;
+    rdfs:label "_initialised" .
+
+
+

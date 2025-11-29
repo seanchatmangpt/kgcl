@@ -1,0 +1,126 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.DesignInternalFrame
+yawl:DesignInternalFrame a yawl:Class ;
+    rdfs:label "DesignInternalFrame" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/DesignInternalFrame.java"^^xsd:string ;
+    yawl:extends yawl:JInternalFrame ;
+    yawl:implements yawl:ActionListener ;
+    yawl:implements yawl:MouseListener ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DesignInternalFrame_actionPerformed_1 ;
+    yawl:hasMethod yawl:DesignInternalFrame_mouseClicked_2 ;
+    yawl:hasMethod yawl:DesignInternalFrame_mouseEntered_3 ;
+    yawl:hasMethod yawl:DesignInternalFrame_mouseExited_4 ;
+    yawl:hasMethod yawl:DesignInternalFrame_mousePressed_5 ;
+    yawl:hasMethod yawl:DesignInternalFrame_mouseReleased_6 ;
+    yawl:hasMethod yawl:DesignInternalFrame_fillList_7 ;
+    yawl:hasMethod yawl:DesignInternalFrame_getSelecetdList_8 ;
+    yawl:hasMethod yawl:DesignInternalFrame_maximize_9 ;
+    yawl:hasField yawl:DesignInternalFrame_xOffset ;
+    yawl:hasField yawl:DesignInternalFrame_yOffset ;
+    .
+
+
+# Method: DesignInternalFrame.actionPerformed
+yawl:DesignInternalFrame_actionPerformed_1 a yawl:Method ;
+    rdfs:label "actionPerformed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void actionPerformed(ActionEvent e)" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DesignInternalFrame.mouseClicked
+yawl:DesignInternalFrame_mouseClicked_2 a yawl:Method ;
+    rdfs:label "mouseClicked" ;
+    yawl:returnType "void" ;
+    yawl:signature "void mouseClicked(MouseEvent e)" ;
+    rdfs:comment """Invoked when the mouse button has been clicked (pressed and released) on a component. @param e MouseEvent @todo Implement this java.awt.event.MouseListener method""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DesignInternalFrame.mouseEntered
+yawl:DesignInternalFrame_mouseEntered_3 a yawl:Method ;
+    rdfs:label "mouseEntered" ;
+    yawl:returnType "void" ;
+    yawl:signature "void mouseEntered(MouseEvent e)" ;
+    rdfs:comment """Invoked when the mouse enters a component. @param e MouseEvent @todo Implement this java.awt.event.MouseListener method""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DesignInternalFrame.mouseExited
+yawl:DesignInternalFrame_mouseExited_4 a yawl:Method ;
+    rdfs:label "mouseExited" ;
+    yawl:returnType "void" ;
+    yawl:signature "void mouseExited(MouseEvent e)" ;
+    rdfs:comment """Invoked when the mouse exits a component. @param e MouseEvent @todo Implement this java.awt.event.MouseListener method""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DesignInternalFrame.mousePressed
+yawl:DesignInternalFrame_mousePressed_5 a yawl:Method ;
+    rdfs:label "mousePressed" ;
+    yawl:returnType "void" ;
+    yawl:signature "void mousePressed(MouseEvent e)" ;
+    rdfs:comment """Invoked when a mouse button has been pressed on a component. @param e MouseEvent @todo Implement this java.awt.event.MouseListener method""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DesignInternalFrame.mouseReleased
+yawl:DesignInternalFrame_mouseReleased_6 a yawl:Method ;
+    rdfs:label "mouseReleased" ;
+    yawl:returnType "void" ;
+    yawl:signature "void mouseReleased(MouseEvent e)" ;
+    rdfs:comment """Invoked when a mouse button has been released on a component. @param e MouseEvent @todo Implement this java.awt.event.MouseListener method""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DesignInternalFrame.fillList
+yawl:DesignInternalFrame_fillList_7 a yawl:Method ;
+    rdfs:label "fillList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fillList(Collection anList, JList anJList)" ;
+    rdfs:comment """fillList @param anList List @param anJList JList""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: DesignInternalFrame.getSelecetdList
+yawl:DesignInternalFrame_getSelecetdList_8 a yawl:Method ;
+    rdfs:label "getSelecetdList" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object getSelecetdList(JList anJList)" ;
+    rdfs:comment """fillList @param anJList JList @return Object""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: DesignInternalFrame.maximize
+yawl:DesignInternalFrame_maximize_9 a yawl:Method ;
+    rdfs:label "maximize" ;
+    yawl:returnType "void" ;
+    yawl:signature "void maximize()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:DesignInternalFrame_xOffset a yawl:Field ;
+    rdfs:label "xOffset" .
+
+yawl:DesignInternalFrame_yOffset a yawl:Field ;
+    rdfs:label "yOffset" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_procletService_editor_pconns a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.procletService.editor.pconns" .
+
+

@@ -1,0 +1,129 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.worklet.rdrutil
+yawl:org_yawlfoundation_yawl_worklet_rdrutil a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.worklet.rdrutil" .
+# Class: org.yawlfoundation.yawl.worklet.rdrutil.RdrSetParser
+yawl:RdrSetParser a yawl:Class ;
+    rdfs:label "RdrSetParser" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_rdrutil ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/rdrutil/RdrSetParser.java"^^xsd:string ;
+    rdfs:comment """Parses a rule set expressed as an XML doc @author Michael Adams @date 22/01/2016""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:RdrSetParser_parse_1 ;
+    yawl:hasMethod yawl:RdrSetParser_parseSet_2 ;
+    yawl:hasMethod yawl:RdrSetParser_parse_3 ;
+    yawl:hasMethod yawl:RdrSetParser_getConstraintRules_4 ;
+    yawl:hasMethod yawl:RdrSetParser_getExternalRules_5 ;
+    yawl:hasMethod yawl:RdrSetParser_buildItemLevelTree_6 ;
+    yawl:hasMethod yawl:RdrSetParser_buildCaseLevelTree_7 ;
+    yawl:hasMethod yawl:RdrSetParser_buildTree_8 ;
+    yawl:hasMethod yawl:RdrSetParser_buildFromNode_9 ;
+    yawl:hasMethod yawl:RdrSetParser_getNodeWithId_10 ;
+    yawl:hasMethod yawl:RdrSetParser_convertCaseLevelTree_11 ;
+    .
+
+
+# Method: RdrSetParser.parse
+yawl:RdrSetParser_parse_1 a yawl:Method ;
+    rdfs:label "parse" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map parse(String xml, boolean newSet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrSetParser.parseSet
+yawl:RdrSetParser_parseSet_2 a yawl:Method ;
+    rdfs:label "parseSet" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set parseSet(String xml, boolean newSet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrSetParser.parse
+yawl:RdrSetParser_parse_3 a yawl:Method ;
+    rdfs:label "parse" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map parse(Document doc, boolean newSet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: RdrSetParser.getConstraintRules
+yawl:RdrSetParser_getConstraintRules_4 a yawl:Method ;
+    rdfs:label "getConstraintRules" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean getConstraintRules(Map treeMap, Element e, boolean newSet)" ;
+    rdfs:comment """Constructs a rule tree for each set of constraint rules in the rules file i.e. pre & post constraint rule sets at the case and task levels @param e the JDOM Element representation of the rule tree @return true if the rules were loaded successfully""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RdrSetParser.getExternalRules
+yawl:RdrSetParser_getExternalRules_5 a yawl:Method ;
+    rdfs:label "getExternalRules" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean getExternalRules(Map treeMap, Element e, boolean newSet)" ;
+    rdfs:comment """Constructs a rule tree for each set of external rules in the rules file i.e. pre & post constraint rule sets at the case and task levels @param e the JDOM Element representation of the rule tree @return true if the rules were loaded successfully""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RdrSetParser.buildItemLevelTree
+yawl:RdrSetParser_buildItemLevelTree_6 a yawl:Method ;
+    rdfs:label "buildItemLevelTree" ;
+    yawl:returnType "void" ;
+    yawl:signature "void buildItemLevelTree(Map treeMap, RuleType ruleType, Element e, boolean newSet)" ;
+    rdfs:comment """Construct a tree for each task specified in the rules file @param e - the Element containing the rules of each task""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RdrSetParser.buildCaseLevelTree
+yawl:RdrSetParser_buildCaseLevelTree_7 a yawl:Method ;
+    rdfs:label "buildCaseLevelTree" ;
+    yawl:returnType "void" ;
+    yawl:signature "void buildCaseLevelTree(Map treeMap, RuleType ruleType, Element e, boolean newSet)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RdrSetParser.buildTree
+yawl:RdrSetParser_buildTree_8 a yawl:Method ;
+    rdfs:label "buildTree" ;
+    yawl:returnType "RdrTree" ;
+    yawl:signature "RdrTree buildTree(Element task, boolean newSet)" ;
+    rdfs:comment """Constructs an RdrTree from the JDOM Element passed @param task - the Element containing a representation of the tree @return the list of trees constructed""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RdrSetParser.buildFromNode
+yawl:RdrSetParser_buildFromNode_9 a yawl:Method ;
+    rdfs:label "buildFromNode" ;
+    yawl:returnType "RdrNode" ;
+    yawl:signature "RdrNode buildFromNode(Element xNode, List nodeList, boolean newSet)" ;
+    rdfs:comment """recursively build a tree from the node and list passed @param xNode contains the xml elements for a single RDR node definition @param nodeList is the list of all xNodes for a single task @return the root node of the constructed tree""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RdrSetParser.getNodeWithId
+yawl:RdrSetParser_getNodeWithId_10 a yawl:Method ;
+    rdfs:label "getNodeWithId" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getNodeWithId(String id, List nodeList)" ;
+    rdfs:comment """find the node with the id passed in the List of xml nodes""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: RdrSetParser.convertCaseLevelTree
+yawl:RdrSetParser_convertCaseLevelTree_11 a yawl:Method ;
+    rdfs:label "convertCaseLevelTree" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element convertCaseLevelTree(Element caseElem)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+
+

@@ -1,0 +1,67 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.balancer.StatSet
+yawl:StatSet a yawl:Class ;
+    rdfs:label "StatSet" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/ResponseStats.java"^^xsd:string ;
+    yawl:hasMethod yawl:StatSet_copyFrom_1 ;
+    yawl:hasMethod yawl:StatSet_getResponsesPerSec_2 ;
+    yawl:hasMethod yawl:StatSet_report_3 ;
+    yawl:hasField yawl:StatSet_rawTimes ;
+    yawl:hasField yawl:StatSet_min ;
+    yawl:hasField yawl:StatSet_max ;
+    yawl:hasField yawl:StatSet_mean ;
+    yawl:hasField yawl:StatSet_count ;
+    yawl:hasField yawl:StatSet_timespan ;
+    .
+
+
+# Method: StatSet.copyFrom
+yawl:StatSet_copyFrom_1 a yawl:Method ;
+    rdfs:label "copyFrom" ;
+    yawl:returnType "void" ;
+    yawl:signature "void copyFrom(StatSet set)" ;
+    .
+
+# Method: StatSet.getResponsesPerSec
+yawl:StatSet_getResponsesPerSec_2 a yawl:Method ;
+    rdfs:label "getResponsesPerSec" ;
+    yawl:returnType "double" ;
+    yawl:signature "double getResponsesPerSec()" ;
+    .
+
+# Method: StatSet.report
+yawl:StatSet_report_3 a yawl:Method ;
+    rdfs:label "report" ;
+    yawl:returnType "String" ;
+    yawl:signature "String report()" ;
+    .
+
+
+
+yawl:StatSet_rawTimes a yawl:Field ;
+    rdfs:label "rawTimes" .
+
+yawl:StatSet_min a yawl:Field ;
+    rdfs:label "min" .
+
+yawl:StatSet_max a yawl:Field ;
+    rdfs:label "max" .
+
+yawl:StatSet_mean a yawl:Field ;
+    rdfs:label "mean" .
+
+yawl:StatSet_count a yawl:Field ;
+    rdfs:label "count" .
+
+yawl:StatSet_timespan a yawl:Field ;
+    rdfs:label "timespan" .
+
+
+

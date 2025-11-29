@@ -1,0 +1,62 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.util.StopMonitor
+yawl:StopMonitor a yawl:Class ;
+    rdfs:label "StopMonitor" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/util/StopMonitor.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 16/06/15""" ;
+    yawl:extends yawl:SwingWorker ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:StopMonitor_doInBackground_1 ;
+    yawl:hasMethod yawl:StopMonitor_done_2 ;
+    yawl:hasMethod yawl:StopMonitor_sleep_3 ;
+    yawl:hasField yawl:StopMonitor__totalSecs ;
+    yawl:hasField yawl:StopMonitor__tomcatProcess ;
+    .
+
+
+# Method: StopMonitor.doInBackground
+yawl:StopMonitor_doInBackground_1 a yawl:Method ;
+    rdfs:label "doInBackground" ;
+    yawl:returnType "Void" ;
+    yawl:signature "Void doInBackground()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: StopMonitor.done
+yawl:StopMonitor_done_2 a yawl:Method ;
+    rdfs:label "done" ;
+    yawl:returnType "void" ;
+    yawl:signature "void done()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: StopMonitor.sleep
+yawl:StopMonitor_sleep_3 a yawl:Method ;
+    rdfs:label "sleep" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sleep(long milliseconds)" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:StopMonitor__totalSecs a yawl:Field ;
+    rdfs:label "_totalSecs" .
+
+yawl:StopMonitor__tomcatProcess a yawl:Field ;
+    rdfs:label "_tomcatProcess" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_controlpanel_cli a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.controlpanel.cli" .
+
+

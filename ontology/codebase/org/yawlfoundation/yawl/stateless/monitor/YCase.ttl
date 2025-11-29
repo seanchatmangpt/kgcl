@@ -1,0 +1,145 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.stateless.monitor.YCase
+yawl:YCase a yawl:Class ;
+    rdfs:label "YCase" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_monitor ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/monitor/YCase.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 21/8/20""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YCase_setIdleTimeout_1 ;
+    yawl:hasMethod yawl:YCase_ping_2 ;
+    yawl:hasMethod yawl:YCase_marshal_3 ;
+    yawl:hasMethod yawl:YCase_getRunner_4 ;
+    yawl:hasMethod yawl:YCase_removeWorkItemTimers_5 ;
+    yawl:hasMethod yawl:YCase_isIdleTimerEnabled_6 ;
+    yawl:hasMethod yawl:YCase_startIdleTimer_7 ;
+    yawl:hasMethod yawl:YCase_resetIdleTimer_8 ;
+    yawl:hasMethod yawl:YCase_restartIdleTimer_9 ;
+    yawl:hasMethod yawl:YCase_cancelIdleTimer_10 ;
+    yawl:hasMethod yawl:YCase_isIdle_11 ;
+    yawl:hasField yawl:YCase_IDLE_TIMER ;
+    yawl:hasField yawl:YCase_DEFAULT_IDLE_TIMEOUT ;
+    yawl:hasField yawl:YCase__idleTimeout ;
+    yawl:hasField yawl:YCase__idleTimerTask ;
+    yawl:hasField yawl:YCase__runner ;
+    .
+
+
+# Method: YCase.setIdleTimeout
+yawl:YCase_setIdleTimeout_1 a yawl:Method ;
+    rdfs:label "setIdleTimeout" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setIdleTimeout(long timeout)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YCase.ping
+yawl:YCase_ping_2 a yawl:Method ;
+    rdfs:label "ping" ;
+    yawl:returnType "void" ;
+    yawl:signature "void ping()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YCase.marshal
+yawl:YCase_marshal_3 a yawl:Method ;
+    rdfs:label "marshal" ;
+    yawl:returnType "String" ;
+    yawl:signature "String marshal()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCase.getRunner
+yawl:YCase_getRunner_4 a yawl:Method ;
+    rdfs:label "getRunner" ;
+    yawl:returnType "YNetRunner" ;
+    yawl:signature "YNetRunner getRunner()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCase.removeWorkItemTimers
+yawl:YCase_removeWorkItemTimers_5 a yawl:Method ;
+    rdfs:label "removeWorkItemTimers" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeWorkItemTimers()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCase.isIdleTimerEnabled
+yawl:YCase_isIdleTimerEnabled_6 a yawl:Method ;
+    rdfs:label "isIdleTimerEnabled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isIdleTimerEnabled()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCase.startIdleTimer
+yawl:YCase_startIdleTimer_7 a yawl:Method ;
+    rdfs:label "startIdleTimer" ;
+    yawl:returnType "TimerTask" ;
+    yawl:signature "TimerTask startIdleTimer()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCase.resetIdleTimer
+yawl:YCase_resetIdleTimer_8 a yawl:Method ;
+    rdfs:label "resetIdleTimer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void resetIdleTimer()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YCase.restartIdleTimer
+yawl:YCase_restartIdleTimer_9 a yawl:Method ;
+    rdfs:label "restartIdleTimer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restartIdleTimer()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YCase.cancelIdleTimer
+yawl:YCase_cancelIdleTimer_10 a yawl:Method ;
+    rdfs:label "cancelIdleTimer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancelIdleTimer()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YCase.isIdle
+yawl:YCase_isIdle_11 a yawl:Method ;
+    rdfs:label "isIdle" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isIdle()" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:YCase_IDLE_TIMER a yawl:Field ;
+    rdfs:label "IDLE_TIMER" .
+
+yawl:YCase_DEFAULT_IDLE_TIMEOUT a yawl:Field ;
+    rdfs:label "DEFAULT_IDLE_TIMEOUT" .
+
+yawl:YCase__idleTimeout a yawl:Field ;
+    rdfs:label "_idleTimeout" .
+
+yawl:YCase__idleTimerTask a yawl:Field ;
+    rdfs:label "_idleTimerTask" .
+
+yawl:YCase__runner a yawl:Field ;
+    rdfs:label "_runner" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_stateless_util a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.stateless.util" .
+
+

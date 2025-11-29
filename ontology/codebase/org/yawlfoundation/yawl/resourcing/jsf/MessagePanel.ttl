@@ -1,0 +1,520 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.MessagePanel
+yawl:MessagePanel a yawl:Class ;
+    rdfs:label "MessagePanel" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/MessagePanel.java"^^xsd:string ;
+    rdfs:comment """A JSF component that is used to display messages to users Author: Michael Adams Creation Date: 28/02/2008 Last Date: 17/04/2010""" ;
+    yawl:extends yawl:PanelLayout ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:MessagePanel_error_1 ;
+    yawl:hasMethod yawl:MessagePanel_error_2 ;
+    yawl:hasMethod yawl:MessagePanel_warn_3 ;
+    yawl:hasMethod yawl:MessagePanel_warn_4 ;
+    yawl:hasMethod yawl:MessagePanel_info_5 ;
+    yawl:hasMethod yawl:MessagePanel_info_6 ;
+    yawl:hasMethod yawl:MessagePanel_success_7 ;
+    yawl:hasMethod yawl:MessagePanel_success_8 ;
+    yawl:hasMethod yawl:MessagePanel_clear_9 ;
+    yawl:hasMethod yawl:MessagePanel_setTitleText_10 ;
+    yawl:hasMethod yawl:MessagePanel_hasMessage_11 ;
+    yawl:hasMethod yawl:MessagePanel_show_12 ;
+    yawl:hasMethod yawl:MessagePanel_show_13 ;
+    yawl:hasMethod yawl:MessagePanel_show_14 ;
+    yawl:hasMethod yawl:MessagePanel_show_15 ;
+    yawl:hasMethod yawl:MessagePanel_format_16 ;
+    yawl:hasMethod yawl:MessagePanel_getHeight_17 ;
+    yawl:hasMethod yawl:MessagePanel_showPanel_18 ;
+    yawl:hasMethod yawl:MessagePanel_setupPanel_19 ;
+    yawl:hasMethod yawl:MessagePanel_unwrap_20 ;
+    yawl:hasMethod yawl:MessagePanel_getPosStyle_21 ;
+    yawl:hasMethod yawl:MessagePanel_composeContents_22 ;
+    yawl:hasMethod yawl:MessagePanel_constructImage_23 ;
+    yawl:hasMethod yawl:MessagePanel_getImageURL_24 ;
+    yawl:hasMethod yawl:MessagePanel_constructTitleBar_25 ;
+    yawl:hasMethod yawl:MessagePanel_constructButtonPanel_26 ;
+    yawl:hasMethod yawl:MessagePanel_constructOKButton_27 ;
+    yawl:hasMethod yawl:MessagePanel_bindButtonListener_28 ;
+    yawl:hasMethod yawl:MessagePanel_constructMessagesPanel_29 ;
+    yawl:hasMethod yawl:MessagePanel_constructInnerPanel_30 ;
+    yawl:hasMethod yawl:MessagePanel_getDominantType_31 ;
+    yawl:hasMethod yawl:MessagePanel_getTitle_32 ;
+    yawl:hasMethod yawl:MessagePanel_setTitle_33 ;
+    yawl:hasMethod yawl:MessagePanel_hasMixedMessages_34 ;
+    yawl:hasMethod yawl:MessagePanel_listMessages_35 ;
+    yawl:hasMethod yawl:MessagePanel_listMessage_36 ;
+    yawl:hasMethod yawl:MessagePanel_addVSpace_37 ;
+    yawl:hasMethod yawl:MessagePanel_getNextIDSuffix_38 ;
+    yawl:hasMethod yawl:MessagePanel_setButtonPanelStyle_39 ;
+    yawl:hasMethod yawl:MessagePanel_setStyle_40 ;
+    yawl:hasMethod yawl:MessagePanel_getLongestWord_41 ;
+    yawl:hasMethod yawl:MessagePanel_getLongestWord_42 ;
+    yawl:hasMethod yawl:MessagePanel_getMessagesHeight_43 ;
+    yawl:hasMethod yawl:MessagePanel_sizeAndPositionContent_44 ;
+    yawl:hasMethod yawl:MessagePanel_sizeAndPositionContent_45 ;
+    yawl:hasField yawl:MessagePanel_errorIconURL ;
+    yawl:hasField yawl:MessagePanel_infoIconURL ;
+    yawl:hasField yawl:MessagePanel_warnIconURL ;
+    yawl:hasField yawl:MessagePanel_successIconURL ;
+    yawl:hasField yawl:MessagePanel_TITLEBAR_HEIGHT ;
+    yawl:hasField yawl:MessagePanel_BTNPANEL_HEIGHT ;
+    yawl:hasField yawl:MessagePanel_MIN_MESSAGES_WIDTH ;
+    yawl:hasField yawl:MessagePanel_MIN_PANEL_HEIGHT ;
+    yawl:hasField yawl:MessagePanel_NON_MESSAGE_WIDTH ;
+    yawl:hasField yawl:MessagePanel_PANEL_VSPACE ;
+    yawl:hasField yawl:MessagePanel_MESSAGE_VSPACE ;
+    yawl:hasField yawl:MessagePanel__msgFont ;
+    yawl:hasField yawl:MessagePanel__messages ;
+    yawl:hasField yawl:MessagePanel_idSuffix ;
+    yawl:hasField yawl:MessagePanel__style ;
+    yawl:hasField yawl:MessagePanel__parentWidth ;
+    yawl:hasField yawl:MessagePanel__parentHeight ;
+    yawl:hasField yawl:MessagePanel__titleText ;
+    yawl:hasField yawl:MessagePanel__height ;
+    yawl:hasField yawl:MessagePanel__pnlMessages ;
+    yawl:hasField yawl:MessagePanel__title ;
+    yawl:hasField yawl:MessagePanel__imgIcon ;
+    yawl:hasField yawl:MessagePanel__btnPanel ;
+    .
+
+
+# Method: MessagePanel.error
+yawl:MessagePanel_error_1 a yawl:Method ;
+    rdfs:label "error" ;
+    yawl:returnType "void" ;
+    yawl:signature "void error(String message)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MessagePanel.error
+yawl:MessagePanel_error_2 a yawl:Method ;
+    rdfs:label "error" ;
+    yawl:returnType "void" ;
+    yawl:signature "void error(List msgList)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MessagePanel.warn
+yawl:MessagePanel_warn_3 a yawl:Method ;
+    rdfs:label "warn" ;
+    yawl:returnType "void" ;
+    yawl:signature "void warn(String message)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MessagePanel.warn
+yawl:MessagePanel_warn_4 a yawl:Method ;
+    rdfs:label "warn" ;
+    yawl:returnType "void" ;
+    yawl:signature "void warn(List msgList)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MessagePanel.info
+yawl:MessagePanel_info_5 a yawl:Method ;
+    rdfs:label "info" ;
+    yawl:returnType "void" ;
+    yawl:signature "void info(String message)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MessagePanel.info
+yawl:MessagePanel_info_6 a yawl:Method ;
+    rdfs:label "info" ;
+    yawl:returnType "void" ;
+    yawl:signature "void info(List msgList)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MessagePanel.success
+yawl:MessagePanel_success_7 a yawl:Method ;
+    rdfs:label "success" ;
+    yawl:returnType "void" ;
+    yawl:signature "void success(String message)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MessagePanel.success
+yawl:MessagePanel_success_8 a yawl:Method ;
+    rdfs:label "success" ;
+    yawl:returnType "void" ;
+    yawl:signature "void success(List msgList)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MessagePanel.clear
+yawl:MessagePanel_clear_9 a yawl:Method ;
+    rdfs:label "clear" ;
+    yawl:returnType "void" ;
+    yawl:signature "void clear()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MessagePanel.setTitleText
+yawl:MessagePanel_setTitleText_10 a yawl:Method ;
+    rdfs:label "setTitleText" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTitleText(String text)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MessagePanel.hasMessage
+yawl:MessagePanel_hasMessage_11 a yawl:Method ;
+    rdfs:label "hasMessage" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasMessage()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MessagePanel.show
+yawl:MessagePanel_show_12 a yawl:Method ;
+    rdfs:label "show" ;
+    yawl:returnType "void" ;
+    yawl:signature "void show(int top, int left, String position)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MessagePanel.show
+yawl:MessagePanel_show_13 a yawl:Method ;
+    rdfs:label "show" ;
+    yawl:returnType "void" ;
+    yawl:signature "void show()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MessagePanel.show
+yawl:MessagePanel_show_14 a yawl:Method ;
+    rdfs:label "show" ;
+    yawl:returnType "void" ;
+    yawl:signature "void show(int width)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MessagePanel.show
+yawl:MessagePanel_show_15 a yawl:Method ;
+    rdfs:label "show" ;
+    yawl:returnType "void" ;
+    yawl:signature "void show(int width, int height)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MessagePanel.format
+yawl:MessagePanel_format_16 a yawl:Method ;
+    rdfs:label "format" ;
+    yawl:returnType "String" ;
+    yawl:signature "String format(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MessagePanel.getHeight
+yawl:MessagePanel_getHeight_17 a yawl:Method ;
+    rdfs:label "getHeight" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getHeight()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MessagePanel.showPanel
+yawl:MessagePanel_showPanel_18 a yawl:Method ;
+    rdfs:label "showPanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void showPanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessagePanel.setupPanel
+yawl:MessagePanel_setupPanel_19 a yawl:Method ;
+    rdfs:label "setupPanel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setupPanel(MsgType msgType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessagePanel.unwrap
+yawl:MessagePanel_unwrap_20 a yawl:Method ;
+    rdfs:label "unwrap" ;
+    yawl:returnType "String" ;
+    yawl:signature "String unwrap(String xml)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessagePanel.getPosStyle
+yawl:MessagePanel_getPosStyle_21 a yawl:Method ;
+    rdfs:label "getPosStyle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPosStyle(int left, int top)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessagePanel.composeContents
+yawl:MessagePanel_composeContents_22 a yawl:Method ;
+    rdfs:label "composeContents" ;
+    yawl:returnType "void" ;
+    yawl:signature "void composeContents()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessagePanel.constructImage
+yawl:MessagePanel_constructImage_23 a yawl:Method ;
+    rdfs:label "constructImage" ;
+    yawl:returnType "ImageComponent" ;
+    yawl:signature "ImageComponent constructImage()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessagePanel.getImageURL
+yawl:MessagePanel_getImageURL_24 a yawl:Method ;
+    rdfs:label "getImageURL" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getImageURL(MsgType msgType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessagePanel.constructTitleBar
+yawl:MessagePanel_constructTitleBar_25 a yawl:Method ;
+    rdfs:label "constructTitleBar" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout constructTitleBar()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessagePanel.constructButtonPanel
+yawl:MessagePanel_constructButtonPanel_26 a yawl:Method ;
+    rdfs:label "constructButtonPanel" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout constructButtonPanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessagePanel.constructOKButton
+yawl:MessagePanel_constructOKButton_27 a yawl:Method ;
+    rdfs:label "constructOKButton" ;
+    yawl:returnType "Button" ;
+    yawl:signature "Button constructOKButton()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessagePanel.bindButtonListener
+yawl:MessagePanel_bindButtonListener_28 a yawl:Method ;
+    rdfs:label "bindButtonListener" ;
+    yawl:returnType "MethodBinding" ;
+    yawl:signature "MethodBinding bindButtonListener()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessagePanel.constructMessagesPanel
+yawl:MessagePanel_constructMessagesPanel_29 a yawl:Method ;
+    rdfs:label "constructMessagesPanel" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout constructMessagesPanel()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessagePanel.constructInnerPanel
+yawl:MessagePanel_constructInnerPanel_30 a yawl:Method ;
+    rdfs:label "constructInnerPanel" ;
+    yawl:returnType "PanelLayout" ;
+    yawl:signature "PanelLayout constructInnerPanel()" ;
+    rdfs:comment """Each message goes inside its own panel, which in turn goes inside _pnlMessages @return the child panel with a message in it""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessagePanel.getDominantType
+yawl:MessagePanel_getDominantType_31 a yawl:Method ;
+    rdfs:label "getDominantType" ;
+    yawl:returnType "MsgType" ;
+    yawl:signature "MsgType getDominantType()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessagePanel.getTitle
+yawl:MessagePanel_getTitle_32 a yawl:Method ;
+    rdfs:label "getTitle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTitle(MsgType msgType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessagePanel.setTitle
+yawl:MessagePanel_setTitle_33 a yawl:Method ;
+    rdfs:label "setTitle" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTitle(MsgType msgType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessagePanel.hasMixedMessages
+yawl:MessagePanel_hasMixedMessages_34 a yawl:Method ;
+    rdfs:label "hasMixedMessages" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasMixedMessages()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessagePanel.listMessages
+yawl:MessagePanel_listMessages_35 a yawl:Method ;
+    rdfs:label "listMessages" ;
+    yawl:returnType "void" ;
+    yawl:signature "void listMessages()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessagePanel.listMessage
+yawl:MessagePanel_listMessage_36 a yawl:Method ;
+    rdfs:label "listMessage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void listMessage(String message, MsgType msgType)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessagePanel.addVSpace
+yawl:MessagePanel_addVSpace_37 a yawl:Method ;
+    rdfs:label "addVSpace" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addVSpace()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessagePanel.getNextIDSuffix
+yawl:MessagePanel_getNextIDSuffix_38 a yawl:Method ;
+    rdfs:label "getNextIDSuffix" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getNextIDSuffix()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessagePanel.setButtonPanelStyle
+yawl:MessagePanel_setButtonPanelStyle_39 a yawl:Method ;
+    rdfs:label "setButtonPanelStyle" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setButtonPanelStyle(int height)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessagePanel.setStyle
+yawl:MessagePanel_setStyle_40 a yawl:Method ;
+    rdfs:label "setStyle" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStyle(int width, int height)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessagePanel.getLongestWord
+yawl:MessagePanel_getLongestWord_41 a yawl:Method ;
+    rdfs:label "getLongestWord" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLongestWord()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessagePanel.getLongestWord
+yawl:MessagePanel_getLongestWord_42 a yawl:Method ;
+    rdfs:label "getLongestWord" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLongestWord(String msg)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessagePanel.getMessagesHeight
+yawl:MessagePanel_getMessagesHeight_43 a yawl:Method ;
+    rdfs:label "getMessagesHeight" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getMessagesHeight(int width)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessagePanel.sizeAndPositionContent
+yawl:MessagePanel_sizeAndPositionContent_44 a yawl:Method ;
+    rdfs:label "sizeAndPositionContent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sizeAndPositionContent()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MessagePanel.sizeAndPositionContent
+yawl:MessagePanel_sizeAndPositionContent_45 a yawl:Method ;
+    rdfs:label "sizeAndPositionContent" ;
+    yawl:returnType "int" ;
+    yawl:signature "int sizeAndPositionContent(int minWidth)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:MessagePanel_errorIconURL a yawl:Field ;
+    rdfs:label "errorIconURL" .
+
+yawl:MessagePanel_infoIconURL a yawl:Field ;
+    rdfs:label "infoIconURL" .
+
+yawl:MessagePanel_warnIconURL a yawl:Field ;
+    rdfs:label "warnIconURL" .
+
+yawl:MessagePanel_successIconURL a yawl:Field ;
+    rdfs:label "successIconURL" .
+
+yawl:MessagePanel_TITLEBAR_HEIGHT a yawl:Field ;
+    rdfs:label "TITLEBAR_HEIGHT" .
+
+yawl:MessagePanel_BTNPANEL_HEIGHT a yawl:Field ;
+    rdfs:label "BTNPANEL_HEIGHT" .
+
+yawl:MessagePanel_MIN_MESSAGES_WIDTH a yawl:Field ;
+    rdfs:label "MIN_MESSAGES_WIDTH" .
+
+yawl:MessagePanel_MIN_PANEL_HEIGHT a yawl:Field ;
+    rdfs:label "MIN_PANEL_HEIGHT" .
+
+yawl:MessagePanel_NON_MESSAGE_WIDTH a yawl:Field ;
+    rdfs:label "NON_MESSAGE_WIDTH" .
+
+yawl:MessagePanel_PANEL_VSPACE a yawl:Field ;
+    rdfs:label "PANEL_VSPACE" .
+
+yawl:MessagePanel_MESSAGE_VSPACE a yawl:Field ;
+    rdfs:label "MESSAGE_VSPACE" .
+
+yawl:MessagePanel__msgFont a yawl:Field ;
+    rdfs:label "_msgFont" .
+
+yawl:MessagePanel__messages a yawl:Field ;
+    rdfs:label "_messages" .
+
+yawl:MessagePanel_idSuffix a yawl:Field ;
+    rdfs:label "idSuffix" .
+
+yawl:MessagePanel__style a yawl:Field ;
+    rdfs:label "_style" .
+
+yawl:MessagePanel__parentWidth a yawl:Field ;
+    rdfs:label "_parentWidth" .
+
+yawl:MessagePanel__parentHeight a yawl:Field ;
+    rdfs:label "_parentHeight" .
+
+yawl:MessagePanel__titleText a yawl:Field ;
+    rdfs:label "_titleText" .
+
+yawl:MessagePanel__height a yawl:Field ;
+    rdfs:label "_height" .
+
+yawl:MessagePanel__pnlMessages a yawl:Field ;
+    rdfs:label "_pnlMessages" .
+
+yawl:MessagePanel__title a yawl:Field ;
+    rdfs:label "_title" .
+
+yawl:MessagePanel__imgIcon a yawl:Field ;
+    rdfs:label "_imgIcon" .
+
+yawl:MessagePanel__btnPanel a yawl:Field ;
+    rdfs:label "_btnPanel" .
+
+
+

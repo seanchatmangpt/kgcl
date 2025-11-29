@@ -1,0 +1,49 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.exceptions.YDataQueryException
+yawl:YDataQueryException a yawl:Class ;
+    rdfs:label "YDataQueryException" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_exceptions ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/exceptions/YDataQueryException.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 1/09/2005 Time: 08:39:16""" ;
+    yawl:extends yawl:YDataStateException ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YDataQueryException_getMessage_1 ;
+    yawl:hasMethod yawl:YDataQueryException_getQueryString_2 ;
+    yawl:hasMethod yawl:YDataQueryException_getData_3 ;
+    .
+
+
+# Method: YDataQueryException.getMessage
+yawl:YDataQueryException_getMessage_1 a yawl:Method ;
+    rdfs:label "getMessage" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMessage()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDataQueryException.getQueryString
+yawl:YDataQueryException_getQueryString_2 a yawl:Method ;
+    rdfs:label "getQueryString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getQueryString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YDataQueryException.getData
+yawl:YDataQueryException_getData_3 a yawl:Method ;
+    rdfs:label "getData" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getData()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

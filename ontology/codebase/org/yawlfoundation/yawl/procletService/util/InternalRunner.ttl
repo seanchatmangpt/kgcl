@@ -1,0 +1,66 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.util.InternalRunner
+yawl:InternalRunner a yawl:Class ;
+    rdfs:label "InternalRunner" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/util/TimeService.java"^^xsd:string ;
+    yawl:extends yawl:Thread ;
+    yawl:hasMethod yawl:InternalRunner_stopThread_1 ;
+    yawl:hasMethod yawl:InternalRunner_run_2 ;
+    yawl:hasField yawl:InternalRunner_time ;
+    yawl:hasField yawl:InternalRunner_t ;
+    yawl:hasField yawl:InternalRunner_id ;
+    yawl:hasField yawl:InternalRunner__sessionHandle ;
+    yawl:hasField yawl:InternalRunner_taskinfo ;
+    yawl:hasField yawl:InternalRunner_itemRecord ;
+    yawl:hasField yawl:InternalRunner_stopping ;
+    .
+
+
+# Method: InternalRunner.stopThread
+yawl:InternalRunner_stopThread_1 a yawl:Method ;
+    rdfs:label "stopThread" ;
+    yawl:returnType "void" ;
+    yawl:signature "void stopThread()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InternalRunner.run
+yawl:InternalRunner_run_2 a yawl:Method ;
+    rdfs:label "run" ;
+    yawl:returnType "void" ;
+    yawl:signature "void run()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:InternalRunner_time a yawl:Field ;
+    rdfs:label "time" .
+
+yawl:InternalRunner_t a yawl:Field ;
+    rdfs:label "t" .
+
+yawl:InternalRunner_id a yawl:Field ;
+    rdfs:label "id" .
+
+yawl:InternalRunner__sessionHandle a yawl:Field ;
+    rdfs:label "_sessionHandle" .
+
+yawl:InternalRunner_taskinfo a yawl:Field ;
+    rdfs:label "taskinfo" .
+
+yawl:InternalRunner_itemRecord a yawl:Field ;
+    rdfs:label "itemRecord" .
+
+yawl:InternalRunner_stopping a yawl:Field ;
+    rdfs:label "stopping" .
+
+
+

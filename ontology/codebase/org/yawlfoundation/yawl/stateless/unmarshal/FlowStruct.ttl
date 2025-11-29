@@ -1,0 +1,41 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.stateless.unmarshal.FlowStruct
+yawl:FlowStruct a yawl:Class ;
+    rdfs:label "FlowStruct" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_unmarshal ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/unmarshal/YDecompositionParser.java"^^xsd:string ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    yawl:hasField yawl:FlowStruct__flowInto ;
+    yawl:hasField yawl:FlowStruct__flowPredicate ;
+    yawl:hasField yawl:FlowStruct__predicateOrdering ;
+    yawl:hasField yawl:FlowStruct__isDefaultFlow ;
+    yawl:hasField yawl:FlowStruct__label ;
+    .
+
+
+
+
+yawl:FlowStruct__flowInto a yawl:Field ;
+    rdfs:label "_flowInto" .
+
+yawl:FlowStruct__flowPredicate a yawl:Field ;
+    rdfs:label "_flowPredicate" .
+
+yawl:FlowStruct__predicateOrdering a yawl:Field ;
+    rdfs:label "_predicateOrdering" .
+
+yawl:FlowStruct__isDefaultFlow a yawl:Field ;
+    rdfs:label "_isDefaultFlow" .
+
+yawl:FlowStruct__label a yawl:Field ;
+    rdfs:label "_label" .
+
+
+

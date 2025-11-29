@@ -1,0 +1,44 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.dynform.StaticTextBlock
+yawl:StaticTextBlock a yawl:Class ;
+    rdfs:label "StaticTextBlock" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf_dynform ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/dynform/StaticTextBlock.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 16/03/2010""" ;
+    yawl:extends yawl:StaticText ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:StaticTextBlock_getFont_1 ;
+    yawl:hasMethod yawl:StaticTextBlock_setFont_2 ;
+    yawl:hasField yawl:StaticTextBlock__font ;
+    .
+
+
+# Method: StaticTextBlock.getFont
+yawl:StaticTextBlock_getFont_1 a yawl:Method ;
+    rdfs:label "getFont" ;
+    yawl:returnType "Font" ;
+    yawl:signature "Font getFont()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StaticTextBlock.setFont
+yawl:StaticTextBlock_setFont_2 a yawl:Method ;
+    rdfs:label "setFont" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setFont(Font font)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:StaticTextBlock__font a yawl:Field ;
+    rdfs:label "_font" .
+
+
+

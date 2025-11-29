@@ -1,0 +1,101 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.stateless.engine.YWorkItemID
+yawl:YWorkItemID a yawl:Class ;
+    rdfs:label "YWorkItemID" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_engine ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/engine/YWorkItemID.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred @date 23/05/2003""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YWorkItemID_toString_1 ;
+    yawl:hasMethod yawl:YWorkItemID_getCaseID_2 ;
+    yawl:hasMethod yawl:YWorkItemID_getTaskID_3 ;
+    yawl:hasMethod yawl:YWorkItemID_getUniqueID_4 ;
+    yawl:hasMethod yawl:YWorkItemID_compare_5 ;
+    yawl:hasMethod yawl:YWorkItemID_equals_6 ;
+    yawl:hasMethod yawl:YWorkItemID_hashCode_7 ;
+    yawl:hasField yawl:YWorkItemID__uniqifier ;
+    yawl:hasField yawl:YWorkItemID__uniqueID ;
+    yawl:hasField yawl:YWorkItemID__caseID ;
+    yawl:hasField yawl:YWorkItemID__taskID ;
+    .
+
+
+# Method: YWorkItemID.toString
+yawl:YWorkItemID_toString_1 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemID.getCaseID
+yawl:YWorkItemID_getCaseID_2 a yawl:Method ;
+    rdfs:label "getCaseID" ;
+    yawl:returnType "YIdentifier" ;
+    yawl:signature "YIdentifier getCaseID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemID.getTaskID
+yawl:YWorkItemID_getTaskID_3 a yawl:Method ;
+    rdfs:label "getTaskID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemID.getUniqueID
+yawl:YWorkItemID_getUniqueID_4 a yawl:Method ;
+    rdfs:label "getUniqueID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUniqueID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemID.compare
+yawl:YWorkItemID_compare_5 a yawl:Method ;
+    rdfs:label "compare" ;
+    yawl:returnType "int" ;
+    yawl:signature "int compare(char first, char second)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YWorkItemID.equals
+yawl:YWorkItemID_equals_6 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorkItemID.hashCode
+yawl:YWorkItemID_hashCode_7 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YWorkItemID__uniqifier a yawl:Field ;
+    rdfs:label "_uniqifier" .
+
+yawl:YWorkItemID__uniqueID a yawl:Field ;
+    rdfs:label "_uniqueID" .
+
+yawl:YWorkItemID__caseID a yawl:Field ;
+    rdfs:label "_caseID" .
+
+yawl:YWorkItemID__taskID a yawl:Field ;
+    rdfs:label "_taskID" .
+
+
+

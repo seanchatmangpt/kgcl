@@ -1,0 +1,109 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.persistence.StoredBlockRel
+yawl:StoredBlockRel a yawl:Class ;
+    rdfs:label "StoredBlockRel" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_persistence ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/persistence/StoredBlockRel.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 2/02/12""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:StoredBlockRel_getClassID_1 ;
+    yawl:hasMethod yawl:StoredBlockRel_setClassID_2 ;
+    yawl:hasMethod yawl:StoredBlockRel_getInput_3 ;
+    yawl:hasMethod yawl:StoredBlockRel_setInput_4 ;
+    yawl:hasMethod yawl:StoredBlockRel_getOutput_5 ;
+    yawl:hasMethod yawl:StoredBlockRel_setOutput_6 ;
+    yawl:hasMethod yawl:StoredBlockRel_getPkey_7 ;
+    yawl:hasMethod yawl:StoredBlockRel_setPkey_8 ;
+    yawl:hasField yawl:StoredBlockRel_pkey ;
+    yawl:hasField yawl:StoredBlockRel_classID ;
+    yawl:hasField yawl:StoredBlockRel_input ;
+    yawl:hasField yawl:StoredBlockRel_output ;
+    .
+
+
+# Method: StoredBlockRel.getClassID
+yawl:StoredBlockRel_getClassID_1 a yawl:Method ;
+    rdfs:label "getClassID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getClassID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredBlockRel.setClassID
+yawl:StoredBlockRel_setClassID_2 a yawl:Method ;
+    rdfs:label "setClassID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setClassID(String classID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredBlockRel.getInput
+yawl:StoredBlockRel_getInput_3 a yawl:Method ;
+    rdfs:label "getInput" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInput()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredBlockRel.setInput
+yawl:StoredBlockRel_setInput_4 a yawl:Method ;
+    rdfs:label "setInput" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setInput(String input)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredBlockRel.getOutput
+yawl:StoredBlockRel_getOutput_5 a yawl:Method ;
+    rdfs:label "getOutput" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOutput()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredBlockRel.setOutput
+yawl:StoredBlockRel_setOutput_6 a yawl:Method ;
+    rdfs:label "setOutput" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOutput(String output)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredBlockRel.getPkey
+yawl:StoredBlockRel_getPkey_7 a yawl:Method ;
+    rdfs:label "getPkey" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getPkey()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: StoredBlockRel.setPkey
+yawl:StoredBlockRel_setPkey_8 a yawl:Method ;
+    rdfs:label "setPkey" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPkey(long pkey)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:StoredBlockRel_pkey a yawl:Field ;
+    rdfs:label "pkey" .
+
+yawl:StoredBlockRel_classID a yawl:Field ;
+    rdfs:label "classID" .
+
+yawl:StoredBlockRel_input a yawl:Field ;
+    rdfs:label "input" .
+
+yawl:StoredBlockRel_output a yawl:Field ;
+    rdfs:label "output" .
+
+
+

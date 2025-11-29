@@ -1,0 +1,73 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.controlpanel.editor
+yawl:org_yawlfoundation_yawl_controlpanel_editor a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.controlpanel.editor" .
+# Class: org.yawlfoundation.yawl.controlpanel.editor.EditorLauncher
+yawl:EditorLauncher a yawl:Class ;
+    rdfs:label "EditorLauncher" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_editor ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/editor/EditorLauncher.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 14/05/15""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:EditorLauncher_launch_1 ;
+    yawl:hasMethod yawl:EditorLauncher_getEditorPath_2 ;
+    yawl:hasMethod yawl:EditorLauncher_getJarFile_3 ;
+    yawl:hasMethod yawl:EditorLauncher_getJavaPath_4 ;
+    yawl:hasMethod yawl:EditorLauncher_monitor_5 ;
+    yawl:hasField yawl:EditorLauncher__btnPanel ;
+    .
+
+
+# Method: EditorLauncher.launch
+yawl:EditorLauncher_launch_1 a yawl:Method ;
+    rdfs:label "launch" ;
+    yawl:returnType "void" ;
+    yawl:signature "void launch()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EditorLauncher.getEditorPath
+yawl:EditorLauncher_getEditorPath_2 a yawl:Method ;
+    rdfs:label "getEditorPath" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEditorPath()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: EditorLauncher.getJarFile
+yawl:EditorLauncher_getJarFile_3 a yawl:Method ;
+    rdfs:label "getJarFile" ;
+    yawl:returnType "File" ;
+    yawl:signature "File getJarFile()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: EditorLauncher.getJavaPath
+yawl:EditorLauncher_getJavaPath_4 a yawl:Method ;
+    rdfs:label "getJavaPath" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getJavaPath()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: EditorLauncher.monitor
+yawl:EditorLauncher_monitor_5 a yawl:Method ;
+    rdfs:label "monitor" ;
+    yawl:returnType "void" ;
+    yawl:signature "void monitor(Process proc)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:EditorLauncher__btnPanel a yawl:Field ;
+    rdfs:label "_btnPanel" .
+
+
+

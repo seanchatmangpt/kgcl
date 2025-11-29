@@ -1,0 +1,84 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.stateless.elements.YEnabledTransitionSet
+yawl:YEnabledTransitionSet a yawl:Class ;
+    rdfs:label "YEnabledTransitionSet" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_elements ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/elements/YEnabledTransitionSet.java"^^xsd:string ;
+    rdfs:comment """This class collects the set of all currently enabled transitions (ie. tasks) of a net. It is designed to provide a completely correct implementation of the YAWL deferred choice semantics. Enabled transitions are grouped by the id of the enabling place (condition). For  each place: if there is one or more composite tasks enabled, one of the composite tasks is chosen (randomly if more than one) and all other tasks are not fired; otherwise, all the atomic tasks are enabled, allowing a choice to be """ ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YEnabledTransitionSet_add_1 ;
+    yawl:hasMethod yawl:YEnabledTransitionSet_getAllTaskGroups_2 ;
+    yawl:hasMethod yawl:YEnabledTransitionSet_isEmpty_3 ;
+    yawl:hasMethod yawl:YEnabledTransitionSet_add_4 ;
+    yawl:hasMethod yawl:YEnabledTransitionSet_getFlowsFromIDs_5 ;
+    yawl:hasMethod yawl:YEnabledTransitionSet_isEnablingCondition_6 ;
+    yawl:hasField yawl:YEnabledTransitionSet_transitions ;
+    .
+
+
+# Method: YEnabledTransitionSet.add
+yawl:YEnabledTransitionSet_add_1 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(YTask task)" ;
+    rdfs:comment """Adds an enabled task to the relevant task group @param task the enabled task""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEnabledTransitionSet.getAllTaskGroups
+yawl:YEnabledTransitionSet_getAllTaskGroups_2 a yawl:Method ;
+    rdfs:label "getAllTaskGroups" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getAllTaskGroups()" ;
+    rdfs:comment """Gets the final set(s) of enabled transitions (one for each enabling place) @return the set of groups""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEnabledTransitionSet.isEmpty
+yawl:YEnabledTransitionSet_isEmpty_3 a yawl:Method ;
+    rdfs:label "isEmpty" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEmpty()" ;
+    rdfs:comment """@return true if there are no enabled transitions in this set""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEnabledTransitionSet.add
+yawl:YEnabledTransitionSet_add_4 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(String id, YTask task)" ;
+    rdfs:comment """Adds a task to the group with the id passed @param id the id of the enabling condition @param task the enabled task""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEnabledTransitionSet.getFlowsFromIDs
+yawl:YEnabledTransitionSet_getFlowsFromIDs_5 a yawl:Method ;
+    rdfs:label "getFlowsFromIDs" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getFlowsFromIDs(YTask task)" ;
+    rdfs:comment """Gets the list of condition ids that are enabling this task @param task the enabled task @return a set of condition ids""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YEnabledTransitionSet.isEnablingCondition
+yawl:YEnabledTransitionSet_isEnablingCondition_6 a yawl:Method ;
+    rdfs:label "isEnablingCondition" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEnablingCondition(YNetElement element)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YEnabledTransitionSet_transitions a yawl:Field ;
+    rdfs:label "transitions" .
+
+
+

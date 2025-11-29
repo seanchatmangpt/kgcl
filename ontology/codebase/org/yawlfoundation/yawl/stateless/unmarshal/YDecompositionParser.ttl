@@ -1,0 +1,306 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.stateless.unmarshal.YDecompositionParser
+yawl:YDecompositionParser a yawl:Class ;
+    rdfs:label "YDecompositionParser" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_unmarshal ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/unmarshal/YDecompositionParser.java"^^xsd:string ;
+    rdfs:comment """Builds decomposition objects from XML doclets. @author Lachlan Aldred @author Michael Adams refactored for version 2""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YDecompositionParser_getDecomposition_1 ;
+    yawl:hasMethod yawl:YDecompositionParser_createDecomposition_2 ;
+    yawl:hasMethod yawl:YDecompositionParser_parseDecompositionRoles_3 ;
+    yawl:hasMethod yawl:YDecompositionParser_parseWebServiceGateway_4 ;
+    yawl:hasMethod yawl:YDecompositionParser_parseProcessControlElements_5 ;
+    yawl:hasMethod yawl:YDecompositionParser_parseTask_6 ;
+    yawl:hasMethod yawl:YDecompositionParser_parseSplitJoinTypes_7 ;
+    yawl:hasMethod yawl:YDecompositionParser_parseExternalTaskRoles_8 ;
+    yawl:hasMethod yawl:YDecompositionParser_parseRemoveSetFromFlow_9 ;
+    yawl:hasMethod yawl:YDecompositionParser_parseMappings_10 ;
+    yawl:hasMethod yawl:YDecompositionParser_parseRemoveSet_11 ;
+    yawl:hasMethod yawl:YDecompositionParser_parseCondition_12 ;
+    yawl:hasMethod yawl:YDecompositionParser_parseNameAndDocumentation_13 ;
+    yawl:hasMethod yawl:YDecompositionParser_parseCustomFormURL_14 ;
+    yawl:hasMethod yawl:YDecompositionParser_parseConfiguration_15 ;
+    yawl:hasMethod yawl:YDecompositionParser_parseTimerParameters_16 ;
+    yawl:hasMethod yawl:YDecompositionParser_parsePostset_17 ;
+    yawl:hasMethod yawl:YDecompositionParser_parseNet_18 ;
+    yawl:hasMethod yawl:YDecompositionParser_markEmptyComplexTypeVariables_19 ;
+    yawl:hasMethod yawl:YDecompositionParser_parseLocalVariable_20 ;
+    yawl:hasMethod yawl:YDecompositionParser_isBeta2Version_21 ;
+    yawl:hasMethod yawl:YDecompositionParser_parseParameter_22 ;
+    yawl:hasMethod yawl:YDecompositionParser_parseExternalInteraction_23 ;
+    yawl:hasMethod yawl:YDecompositionParser_parseCodelet_24 ;
+    yawl:hasMethod yawl:YDecompositionParser_parseLogPredicate_25 ;
+    yawl:hasMethod yawl:YDecompositionParser_getDecomposesToIDs_26 ;
+    yawl:hasMethod yawl:YDecompositionParser_linkElements_27 ;
+    yawl:hasField yawl:YDecompositionParser__decompElem ;
+    yawl:hasField yawl:YDecompositionParser__postsetIDs ;
+    yawl:hasField yawl:YDecompositionParser__removeSetIDs ;
+    yawl:hasField yawl:YDecompositionParser__yawlNS ;
+    yawl:hasField yawl:YDecompositionParser__decomposition ;
+    yawl:hasField yawl:YDecompositionParser__decomposesToIDs ;
+    yawl:hasField yawl:YDecompositionParser__specificationParser ;
+    yawl:hasField yawl:YDecompositionParser__removeSetForFlows ;
+    yawl:hasField yawl:YDecompositionParser__version ;
+    .
+
+
+# Method: YDecompositionParser.getDecomposition
+yawl:YDecompositionParser_getDecomposition_1 a yawl:Method ;
+    rdfs:label "getDecomposition" ;
+    yawl:returnType "YDecomposition" ;
+    yawl:signature "YDecomposition getDecomposition()" ;
+    rdfs:comment """gets the built decomposition. @return the decomposition""" ;
+    .
+
+# Method: YDecompositionParser.createDecomposition
+yawl:YDecompositionParser_createDecomposition_2 a yawl:Method ;
+    rdfs:label "createDecomposition" ;
+    yawl:returnType "YDecomposition" ;
+    yawl:signature "YDecomposition createDecomposition(Element decompElem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YDecompositionParser.parseDecompositionRoles
+yawl:YDecompositionParser_parseDecompositionRoles_3 a yawl:Method ;
+    rdfs:label "parseDecompositionRoles" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseDecompositionRoles(YDecomposition decomposition, Element decompElem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YDecompositionParser.parseWebServiceGateway
+yawl:YDecompositionParser_parseWebServiceGateway_4 a yawl:Method ;
+    rdfs:label "parseWebServiceGateway" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseWebServiceGateway(YAWLServiceGateway webServiceGateway, Element decompositionElem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YDecompositionParser.parseProcessControlElements
+yawl:YDecompositionParser_parseProcessControlElements_5 a yawl:Method ;
+    rdfs:label "parseProcessControlElements" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseProcessControlElements(YNet aNet, Element processControlElementsElem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YDecompositionParser.parseTask
+yawl:YDecompositionParser_parseTask_6 a yawl:Method ;
+    rdfs:label "parseTask" ;
+    yawl:returnType "YTask" ;
+    yawl:signature "YTask parseTask(Element taskElem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YDecompositionParser.parseSplitJoinTypes
+yawl:YDecompositionParser_parseSplitJoinTypes_7 a yawl:Method ;
+    rdfs:label "parseSplitJoinTypes" ;
+    yawl:returnType "short" ;
+    yawl:signature "short parseSplitJoinTypes(Element externalTaskElem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YDecompositionParser.parseExternalTaskRoles
+yawl:YDecompositionParser_parseExternalTaskRoles_8 a yawl:Method ;
+    rdfs:label "parseExternalTaskRoles" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseExternalTaskRoles(Element externalTaskElem, YTask externalTask)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YDecompositionParser.parseRemoveSetFromFlow
+yawl:YDecompositionParser_parseRemoveSetFromFlow_9 a yawl:Method ;
+    rdfs:label "parseRemoveSetFromFlow" ;
+    yawl:returnType "List" ;
+    yawl:signature "List parseRemoveSetFromFlow(Element externalTaskElem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YDecompositionParser.parseMappings
+yawl:YDecompositionParser_parseMappings_10 a yawl:Method ;
+    rdfs:label "parseMappings" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map parseMappings(Element mappingsElem, boolean isStartMappings)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YDecompositionParser.parseRemoveSet
+yawl:YDecompositionParser_parseRemoveSet_11 a yawl:Method ;
+    rdfs:label "parseRemoveSet" ;
+    yawl:returnType "List" ;
+    yawl:signature "List parseRemoveSet(Element externalTaskElem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YDecompositionParser.parseCondition
+yawl:YDecompositionParser_parseCondition_12 a yawl:Method ;
+    rdfs:label "parseCondition" ;
+    yawl:returnType "YCondition" ;
+    yawl:signature "YCondition parseCondition(YNet aNet, Element conditionElem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YDecompositionParser.parseNameAndDocumentation
+yawl:YDecompositionParser_parseNameAndDocumentation_13 a yawl:Method ;
+    rdfs:label "parseNameAndDocumentation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseNameAndDocumentation(YExternalNetElement element, Element netElementElem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YDecompositionParser.parseCustomFormURL
+yawl:YDecompositionParser_parseCustomFormURL_14 a yawl:Method ;
+    rdfs:label "parseCustomFormURL" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseCustomFormURL(YTask task, Element taskElem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YDecompositionParser.parseConfiguration
+yawl:YDecompositionParser_parseConfiguration_15 a yawl:Method ;
+    rdfs:label "parseConfiguration" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseConfiguration(YTask task, Element taskElem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YDecompositionParser.parseTimerParameters
+yawl:YDecompositionParser_parseTimerParameters_16 a yawl:Method ;
+    rdfs:label "parseTimerParameters" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseTimerParameters(YTask task, Element taskElem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YDecompositionParser.parsePostset
+yawl:YDecompositionParser_parsePostset_17 a yawl:Method ;
+    rdfs:label "parsePostset" ;
+    yawl:returnType "List" ;
+    yawl:signature "List parsePostset(Element netElementElem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YDecompositionParser.parseNet
+yawl:YDecompositionParser_parseNet_18 a yawl:Method ;
+    rdfs:label "parseNet" ;
+    yawl:returnType "YNet" ;
+    yawl:signature "YNet parseNet(YNet net, Element netElem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YDecompositionParser.markEmptyComplexTypeVariables
+yawl:YDecompositionParser_markEmptyComplexTypeVariables_19 a yawl:Method ;
+    rdfs:label "markEmptyComplexTypeVariables" ;
+    yawl:returnType "void" ;
+    yawl:signature "void markEmptyComplexTypeVariables(YDecomposition decomposition)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YDecompositionParser.parseLocalVariable
+yawl:YDecompositionParser_parseLocalVariable_20 a yawl:Method ;
+    rdfs:label "parseLocalVariable" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseLocalVariable(Element localVariableElem, YVariable variable, Namespace ns, boolean version2)" ;
+    rdfs:comment """Adds variable specific information to the YParameter argument (in &amp; out var). @param localVariableElem @param variable""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YDecompositionParser.isBeta2Version
+yawl:YDecompositionParser_isBeta2Version_21 a yawl:Method ;
+    rdfs:label "isBeta2Version" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isBeta2Version()" ;
+    rdfs:comment """@return whether this is a a beta 2 specification version or not.""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YDecompositionParser.parseParameter
+yawl:YDecompositionParser_parseParameter_22 a yawl:Method ;
+    rdfs:label "parseParameter" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseParameter(Element paramElem, YParameter parameter, Namespace ns, boolean version2)" ;
+    rdfs:comment """Adds parameter specific information to the YParameter argument (in &amp; out var). @param paramElem the XML data @param parameter the in &amp; out var.""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YDecompositionParser.parseExternalInteraction
+yawl:YDecompositionParser_parseExternalInteraction_23 a yawl:Method ;
+    rdfs:label "parseExternalInteraction" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseExternalInteraction(YDecomposition decomposition, Element decompElem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YDecompositionParser.parseCodelet
+yawl:YDecompositionParser_parseCodelet_24 a yawl:Method ;
+    rdfs:label "parseCodelet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseCodelet(YDecomposition decomposition, Element decompElem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YDecompositionParser.parseLogPredicate
+yawl:YDecompositionParser_parseLogPredicate_25 a yawl:Method ;
+    rdfs:label "parseLogPredicate" ;
+    yawl:returnType "YLogPredicate" ;
+    yawl:signature "YLogPredicate parseLogPredicate(Element decompElem, Namespace ns)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: YDecompositionParser.getDecomposesToIDs
+yawl:YDecompositionParser_getDecomposesToIDs_26 a yawl:Method ;
+    rdfs:label "getDecomposesToIDs" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getDecomposesToIDs()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YDecompositionParser.linkElements
+yawl:YDecompositionParser_linkElements_27 a yawl:Method ;
+    rdfs:label "linkElements" ;
+    yawl:returnType "void" ;
+    yawl:signature "void linkElements()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YDecompositionParser__decompElem a yawl:Field ;
+    rdfs:label "_decompElem" .
+
+yawl:YDecompositionParser__postsetIDs a yawl:Field ;
+    rdfs:label "_postsetIDs" .
+
+yawl:YDecompositionParser__removeSetIDs a yawl:Field ;
+    rdfs:label "_removeSetIDs" .
+
+yawl:YDecompositionParser__yawlNS a yawl:Field ;
+    rdfs:label "_yawlNS" .
+
+yawl:YDecompositionParser__decomposition a yawl:Field ;
+    rdfs:label "_decomposition" .
+
+yawl:YDecompositionParser__decomposesToIDs a yawl:Field ;
+    rdfs:label "_decomposesToIDs" .
+
+yawl:YDecompositionParser__specificationParser a yawl:Field ;
+    rdfs:label "_specificationParser" .
+
+yawl:YDecompositionParser__removeSetForFlows a yawl:Field ;
+    rdfs:label "_removeSetForFlows" .
+
+yawl:YDecompositionParser__version a yawl:Field ;
+    rdfs:label "_version" .
+
+
+

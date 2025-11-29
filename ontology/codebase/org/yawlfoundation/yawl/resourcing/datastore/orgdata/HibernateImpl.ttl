@@ -1,0 +1,194 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.datastore.orgdata.HibernateImpl
+yawl:HibernateImpl a yawl:Class ;
+    rdfs:label "HibernateImpl" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_datastore_orgdata ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/datastore/orgdata/HibernateImpl.java"^^xsd:string ;
+    rdfs:comment """This class implements methods for Organisational Data CRUD. @author Michael Adams v0.1, 03/08/2007""" ;
+    yawl:extends yawl:DataSource ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:HibernateImpl_getNextID_1 ;
+    yawl:hasMethod yawl:HibernateImpl_loadCapabilities_2 ;
+    yawl:hasMethod yawl:HibernateImpl_loadRoles_3 ;
+    yawl:hasMethod yawl:HibernateImpl_loadPositions_4 ;
+    yawl:hasMethod yawl:HibernateImpl_loadOrgGroups_5 ;
+    yawl:hasMethod yawl:HibernateImpl_loadNonHumanResources_6 ;
+    yawl:hasMethod yawl:HibernateImpl_loadNonHumanCategories_7 ;
+    yawl:hasMethod yawl:HibernateImpl_loadResources_8 ;
+    yawl:hasMethod yawl:HibernateImpl_update_9 ;
+    yawl:hasMethod yawl:HibernateImpl_delete_10 ;
+    yawl:hasMethod yawl:HibernateImpl_insert_11 ;
+    yawl:hasMethod yawl:HibernateImpl_importObj_12 ;
+    yawl:hasMethod yawl:HibernateImpl_execUpdate_13 ;
+    yawl:hasMethod yawl:HibernateImpl_authenticate_14 ;
+    yawl:hasField yawl:HibernateImpl__db ;
+    yawl:hasField yawl:HibernateImpl__UPDATE ;
+    yawl:hasField yawl:HibernateImpl__DELETE ;
+    yawl:hasField yawl:HibernateImpl__INSERT ;
+    yawl:hasField yawl:HibernateImpl__participant ;
+    yawl:hasField yawl:HibernateImpl__role ;
+    yawl:hasField yawl:HibernateImpl__capability ;
+    yawl:hasField yawl:HibernateImpl__position ;
+    yawl:hasField yawl:HibernateImpl__orgGroup ;
+    yawl:hasField yawl:HibernateImpl__nonHumanResource ;
+    yawl:hasField yawl:HibernateImpl__nonHumanResourceCategory ;
+    .
+
+
+# Method: HibernateImpl.getNextID
+yawl:HibernateImpl_getNextID_1 a yawl:Method ;
+    rdfs:label "getNextID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNextID(Object obj)" ;
+    rdfs:comment """Override of super.getNextID() to apply an appropriate prefix to the id @param obj the object to generate a unique id for @return a unique identifier appropriately prefixed""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: HibernateImpl.loadCapabilities
+yawl:HibernateImpl_loadCapabilities_2 a yawl:Method ;
+    rdfs:label "loadCapabilities" ;
+    yawl:returnType "HashMap" ;
+    yawl:signature "HashMap loadCapabilities()" ;
+    rdfs:comment """these methods load resource entity sets individually""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateImpl.loadRoles
+yawl:HibernateImpl_loadRoles_3 a yawl:Method ;
+    rdfs:label "loadRoles" ;
+    yawl:returnType "HashMap" ;
+    yawl:signature "HashMap loadRoles()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateImpl.loadPositions
+yawl:HibernateImpl_loadPositions_4 a yawl:Method ;
+    rdfs:label "loadPositions" ;
+    yawl:returnType "HashMap" ;
+    yawl:signature "HashMap loadPositions()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateImpl.loadOrgGroups
+yawl:HibernateImpl_loadOrgGroups_5 a yawl:Method ;
+    rdfs:label "loadOrgGroups" ;
+    yawl:returnType "HashMap" ;
+    yawl:signature "HashMap loadOrgGroups()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateImpl.loadNonHumanResources
+yawl:HibernateImpl_loadNonHumanResources_6 a yawl:Method ;
+    rdfs:label "loadNonHumanResources" ;
+    yawl:returnType "HashMap" ;
+    yawl:signature "HashMap loadNonHumanResources()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateImpl.loadNonHumanCategories
+yawl:HibernateImpl_loadNonHumanCategories_7 a yawl:Method ;
+    rdfs:label "loadNonHumanCategories" ;
+    yawl:returnType "HashMap" ;
+    yawl:signature "HashMap loadNonHumanCategories()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateImpl.loadResources
+yawl:HibernateImpl_loadResources_8 a yawl:Method ;
+    rdfs:label "loadResources" ;
+    yawl:returnType "ResourceDataSet" ;
+    yawl:signature "ResourceDataSet loadResources()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateImpl.update
+yawl:HibernateImpl_update_9 a yawl:Method ;
+    rdfs:label "update" ;
+    yawl:returnType "void" ;
+    yawl:signature "void update(Object obj)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateImpl.delete
+yawl:HibernateImpl_delete_10 a yawl:Method ;
+    rdfs:label "delete" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean delete(Object obj)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateImpl.insert
+yawl:HibernateImpl_insert_11 a yawl:Method ;
+    rdfs:label "insert" ;
+    yawl:returnType "String" ;
+    yawl:signature "String insert(Object obj)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateImpl.importObj
+yawl:HibernateImpl_importObj_12 a yawl:Method ;
+    rdfs:label "importObj" ;
+    yawl:returnType "void" ;
+    yawl:signature "void importObj(Object obj)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateImpl.execUpdate
+yawl:HibernateImpl_execUpdate_13 a yawl:Method ;
+    rdfs:label "execUpdate" ;
+    yawl:returnType "int" ;
+    yawl:signature "int execUpdate(String query)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: HibernateImpl.authenticate
+yawl:HibernateImpl_authenticate_14 a yawl:Method ;
+    rdfs:label "authenticate" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean authenticate(String userid, String password)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:HibernateImpl__db a yawl:Field ;
+    rdfs:label "_db" .
+
+yawl:HibernateImpl__UPDATE a yawl:Field ;
+    rdfs:label "_UPDATE" .
+
+yawl:HibernateImpl__DELETE a yawl:Field ;
+    rdfs:label "_DELETE" .
+
+yawl:HibernateImpl__INSERT a yawl:Field ;
+    rdfs:label "_INSERT" .
+
+yawl:HibernateImpl__participant a yawl:Field ;
+    rdfs:label "_participant" .
+
+yawl:HibernateImpl__role a yawl:Field ;
+    rdfs:label "_role" .
+
+yawl:HibernateImpl__capability a yawl:Field ;
+    rdfs:label "_capability" .
+
+yawl:HibernateImpl__position a yawl:Field ;
+    rdfs:label "_position" .
+
+yawl:HibernateImpl__orgGroup a yawl:Field ;
+    rdfs:label "_orgGroup" .
+
+yawl:HibernateImpl__nonHumanResource a yawl:Field ;
+    rdfs:label "_nonHumanResource" .
+
+yawl:HibernateImpl__nonHumanResourceCategory a yawl:Field ;
+    rdfs:label "_nonHumanResourceCategory" .
+
+
+

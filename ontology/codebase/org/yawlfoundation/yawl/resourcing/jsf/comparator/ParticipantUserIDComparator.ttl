@@ -1,0 +1,31 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.comparator.ParticipantUserIDComparator
+yawl:ParticipantUserIDComparator a yawl:Class ;
+    rdfs:label "ParticipantUserIDComparator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf_comparator ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/comparator/ParticipantUserIDComparator.java"^^xsd:string ;
+    rdfs:comment """Allows Participant objects to be sorted on userid for display in 'Edit Org Data' form Author: Michael Adams Creation Date: 08/02/2008""" ;
+    yawl:implements yawl:Comparator ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ParticipantUserIDComparator_compare_1 ;
+    .
+
+
+# Method: ParticipantUserIDComparator.compare
+yawl:ParticipantUserIDComparator_compare_1 a yawl:Method ;
+    rdfs:label "compare" ;
+    yawl:returnType "int" ;
+    yawl:signature "int compare(Participant p1, Participant p2)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

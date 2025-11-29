@@ -1,0 +1,51 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.datastore.eventlog.TaskSubTallyList
+yawl:TaskSubTallyList a yawl:Class ;
+    rdfs:label "TaskSubTallyList" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_datastore_eventlog ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/datastore/eventlog/TaskStatistics.java"^^xsd:string ;
+    yawl:extends yawl:LinkedHashMap ;
+    yawl:hasMethod yawl:TaskSubTallyList_add_1 ;
+    yawl:hasMethod yawl:TaskSubTallyList_sort_2 ;
+    yawl:hasMethod yawl:TaskSubTallyList_getSubCount_3 ;
+    yawl:hasField yawl:TaskSubTallyList_count ;
+    .
+
+
+# Method: TaskSubTallyList.add
+yawl:TaskSubTallyList_add_1 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(Counter counter, long period)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSubTallyList.sort
+yawl:TaskSubTallyList_sort_2 a yawl:Method ;
+    rdfs:label "sort" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sort()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TaskSubTallyList.getSubCount
+yawl:TaskSubTallyList_getSubCount_3 a yawl:Method ;
+    rdfs:label "getSubCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getSubCount()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:TaskSubTallyList_count a yawl:Field ;
+    rdfs:label "count" .
+
+
+

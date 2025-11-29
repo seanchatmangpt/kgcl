@@ -1,0 +1,215 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.worklet.selection
+yawl:org_yawlfoundation_yawl_worklet_selection a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.worklet.selection" .
+# Class: org.yawlfoundation.yawl.worklet.selection.AbstractRunner
+yawl:AbstractRunner a yawl:Class ;
+    rdfs:label "AbstractRunner" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_selection ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/selection/AbstractRunner.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 3/09/15""" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:AbstractRunner_getID_1 ;
+    yawl:hasMethod yawl:AbstractRunner_getCaseID_2 ;
+    yawl:hasMethod yawl:AbstractRunner_getWorkItemID_3 ;
+    yawl:hasMethod yawl:AbstractRunner_getRuleType_4 ;
+    yawl:hasMethod yawl:AbstractRunner_getTaskID_5 ;
+    yawl:hasMethod yawl:AbstractRunner_setRuleNodeID_6 ;
+    yawl:hasMethod yawl:AbstractRunner_getRuleNodeID_7 ;
+    yawl:hasMethod yawl:AbstractRunner_getParentWorkItemID_8 ;
+    yawl:hasMethod yawl:AbstractRunner_getWorkItemData_9 ;
+    yawl:hasMethod yawl:AbstractRunner_getDataListString_10 ;
+    yawl:hasMethod yawl:AbstractRunner_getWir_11 ;
+    yawl:hasMethod yawl:AbstractRunner_toXNode_12 ;
+    yawl:hasMethod yawl:AbstractRunner_fromXNode_13 ;
+    yawl:hasMethod yawl:AbstractRunner_toString_14 ;
+    yawl:hasMethod yawl:AbstractRunner_setCaseID_15 ;
+    yawl:hasMethod yawl:AbstractRunner_setID_16 ;
+    yawl:hasMethod yawl:AbstractRunner_setWirString_17 ;
+    yawl:hasMethod yawl:AbstractRunner_getWirString_18 ;
+    yawl:hasField yawl:AbstractRunner__id ;
+    yawl:hasField yawl:AbstractRunner__wirID ;
+    yawl:hasField yawl:AbstractRunner__caseID ;
+    yawl:hasField yawl:AbstractRunner__ruleType ;
+    yawl:hasField yawl:AbstractRunner__wir ;
+    yawl:hasField yawl:AbstractRunner__ruleNodeId ;
+    yawl:hasField yawl:AbstractRunner__dataString ;
+    .
+
+
+# Method: AbstractRunner.getID
+yawl:AbstractRunner_getID_1 a yawl:Method ;
+    rdfs:label "getID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractRunner.getCaseID
+yawl:AbstractRunner_getCaseID_2 a yawl:Method ;
+    rdfs:label "getCaseID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractRunner.getWorkItemID
+yawl:AbstractRunner_getWorkItemID_3 a yawl:Method ;
+    rdfs:label "getWorkItemID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItemID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractRunner.getRuleType
+yawl:AbstractRunner_getRuleType_4 a yawl:Method ;
+    rdfs:label "getRuleType" ;
+    yawl:returnType "RuleType" ;
+    yawl:signature "RuleType getRuleType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractRunner.getTaskID
+yawl:AbstractRunner_getTaskID_5 a yawl:Method ;
+    rdfs:label "getTaskID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractRunner.setRuleNodeID
+yawl:AbstractRunner_setRuleNodeID_6 a yawl:Method ;
+    rdfs:label "setRuleNodeID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRuleNodeID(long nodeId)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractRunner.getRuleNodeID
+yawl:AbstractRunner_getRuleNodeID_7 a yawl:Method ;
+    rdfs:label "getRuleNodeID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getRuleNodeID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractRunner.getParentWorkItemID
+yawl:AbstractRunner_getParentWorkItemID_8 a yawl:Method ;
+    rdfs:label "getParentWorkItemID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParentWorkItemID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractRunner.getWorkItemData
+yawl:AbstractRunner_getWorkItemData_9 a yawl:Method ;
+    rdfs:label "getWorkItemData" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getWorkItemData()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractRunner.getDataListString
+yawl:AbstractRunner_getDataListString_10 a yawl:Method ;
+    rdfs:label "getDataListString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataListString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractRunner.getWir
+yawl:AbstractRunner_getWir_11 a yawl:Method ;
+    rdfs:label "getWir" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord getWir()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractRunner.toXNode
+yawl:AbstractRunner_toXNode_12 a yawl:Method ;
+    rdfs:label "toXNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode toXNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractRunner.fromXNode
+yawl:AbstractRunner_fromXNode_13 a yawl:Method ;
+    rdfs:label "fromXNode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXNode(XNode node)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractRunner.toString
+yawl:AbstractRunner_toString_14 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AbstractRunner.setCaseID
+yawl:AbstractRunner_setCaseID_15 a yawl:Method ;
+    rdfs:label "setCaseID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCaseID(String id)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: AbstractRunner.setID
+yawl:AbstractRunner_setID_16 a yawl:Method ;
+    rdfs:label "setID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setID(long id)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: AbstractRunner.setWirString
+yawl:AbstractRunner_setWirString_17 a yawl:Method ;
+    rdfs:label "setWirString" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setWirString(String xml)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: AbstractRunner.getWirString
+yawl:AbstractRunner_getWirString_18 a yawl:Method ;
+    rdfs:label "getWirString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWirString()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:AbstractRunner__id a yawl:Field ;
+    rdfs:label "_id" .
+
+yawl:AbstractRunner__wirID a yawl:Field ;
+    rdfs:label "_wirID" .
+
+yawl:AbstractRunner__caseID a yawl:Field ;
+    rdfs:label "_caseID" .
+
+yawl:AbstractRunner__ruleType a yawl:Field ;
+    rdfs:label "_ruleType" .
+
+yawl:AbstractRunner__wir a yawl:Field ;
+    rdfs:label "_wir" .
+
+yawl:AbstractRunner__ruleNodeId a yawl:Field ;
+    rdfs:label "_ruleNodeId" .
+
+yawl:AbstractRunner__dataString a yawl:Field ;
+    rdfs:label "_dataString" .
+
+
+

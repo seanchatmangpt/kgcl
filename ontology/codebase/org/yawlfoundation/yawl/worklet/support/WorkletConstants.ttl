@@ -1,0 +1,81 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.support.WorkletConstants
+yawl:WorkletConstants a yawl:Class ;
+    rdfs:label "WorkletConstants" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_support ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/support/WorkletConstants.java"^^xsd:string ;
+    rdfs:comment """The support library class of static methods for the worklet service @author Michael Adams v0.8, 04-09/2006""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:WorkletConstants_setPersist_1 ;
+    yawl:hasMethod yawl:WorkletConstants_setHomeDir_2 ;
+    yawl:hasMethod yawl:WorkletConstants_setResourceServiceURL_3 ;
+    yawl:hasMethod yawl:WorkletConstants_setServicetInitialised_4 ;
+    yawl:hasField yawl:WorkletConstants_wsHomeDir ;
+    yawl:hasField yawl:WorkletConstants_resourceServiceURL ;
+    yawl:hasField yawl:WorkletConstants_wsPersistOn ;
+    yawl:hasField yawl:WorkletConstants_wsInitialised ;
+    .
+
+
+# Method: WorkletConstants.setPersist
+yawl:WorkletConstants_setPersist_1 a yawl:Method ;
+    rdfs:label "setPersist" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPersist(boolean setting)" ;
+    rdfs:comment """Called by the WorkletGateway servlet to set the persistence value read in from web.xml @param setting - true or false as specified in web.xml""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: WorkletConstants.setHomeDir
+yawl:WorkletConstants_setHomeDir_2 a yawl:Method ;
+    rdfs:label "setHomeDir" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHomeDir(String dir)" ;
+    rdfs:comment """Called by the WorkletGateway servlet to set the actual local file path to the worklet service (as read from the servlet context) @param dir - the local path value to the root of the worklet service""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: WorkletConstants.setResourceServiceURL
+yawl:WorkletConstants_setResourceServiceURL_3 a yawl:Method ;
+    rdfs:label "setResourceServiceURL" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setResourceServiceURL(String url)" ;
+    rdfs:comment """Called by the WorkletGateway servlet to set the root url of the resource service. Used by the Exception Service to interact with the resource service's admin pages. @param url the base URL of the resource service (as read from the servlet context)""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: WorkletConstants.setServicetInitialised
+yawl:WorkletConstants_setServicetInitialised_4 a yawl:Method ;
+    rdfs:label "setServicetInitialised" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setServicetInitialised()" ;
+    rdfs:comment """Called by the WorkletGateway servlet to set a flag when the service has completed initialisation (to prevent multi-initialisations)""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:WorkletConstants_wsHomeDir a yawl:Field ;
+    rdfs:label "wsHomeDir" .
+
+yawl:WorkletConstants_resourceServiceURL a yawl:Field ;
+    rdfs:label "resourceServiceURL" .
+
+yawl:WorkletConstants_wsPersistOn a yawl:Field ;
+    rdfs:label "wsPersistOn" .
+
+yawl:WorkletConstants_wsInitialised a yawl:Field ;
+    rdfs:label "wsInitialised" .
+
+
+

@@ -1,0 +1,86 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.support.EventLogger
+yawl:EventLogger a yawl:Class ;
+    rdfs:label "EventLogger" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_support ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/support/EventLogger.java"^^xsd:string ;
+    rdfs:comment """An event log file implementation. @author Michael Adams v0.8, 04-09/2006""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:EventLogger_log_1 ;
+    yawl:hasMethod yawl:EventLogger_log_2 ;
+    yawl:hasMethod yawl:EventLogger_getNextID_3 ;
+    yawl:hasField yawl:EventLogger_lastID ;
+    yawl:hasField yawl:EventLogger_eCheckOut ;
+    yawl:hasField yawl:EventLogger_eDecline ;
+    yawl:hasField yawl:EventLogger_eUndoCheckOut ;
+    yawl:hasField yawl:EventLogger_eLaunch ;
+    yawl:hasField yawl:EventLogger_eCheckIn ;
+    yawl:hasField yawl:EventLogger_eCancel ;
+    yawl:hasField yawl:EventLogger_eComplete ;
+    .
+
+
+# Method: EventLogger.log
+yawl:EventLogger_log_1 a yawl:Method ;
+    rdfs:label "log" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean log(String event, String caseId, YSpecificationID specId, String taskId, String parentCaseId, int xType)" ;
+    rdfs:comment """writes an event to the event log @param event - the type of event to log @param caseId - the case that caused the event @param specId - the specification id of the case @param taskId - the id of the task the worklet was subbed for @param parentCaseId - the case id of the original workitem @param xType - the reason for raising a worklet case (maps to WorkletService.XTYPE)""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EventLogger.log
+yawl:EventLogger_log_2 a yawl:Method ;
+    rdfs:label "log" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean log(String event, WorkItemRecord wir, int xType)" ;
+    rdfs:comment """writes an event to the event log @param event - the type of event to log @param wir - the workitem that triggered the event""" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: EventLogger.getNextID
+yawl:EventLogger_getNextID_3 a yawl:Method ;
+    rdfs:label "getNextID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getNextID()" ;
+    rdfs:comment """This non-native private key generation method is required because: - on recursive calls, the original implementation (using currentTimeMillis) was producing duplicate keys; and - H2 databases do not respond well to changing hibernate's key method from assigned to native @return a id key unique to the eventlog table""" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:EventLogger_lastID a yawl:Field ;
+    rdfs:label "lastID" .
+
+yawl:EventLogger_eCheckOut a yawl:Field ;
+    rdfs:label "eCheckOut" .
+
+yawl:EventLogger_eDecline a yawl:Field ;
+    rdfs:label "eDecline" .
+
+yawl:EventLogger_eUndoCheckOut a yawl:Field ;
+    rdfs:label "eUndoCheckOut" .
+
+yawl:EventLogger_eLaunch a yawl:Field ;
+    rdfs:label "eLaunch" .
+
+yawl:EventLogger_eCheckIn a yawl:Field ;
+    rdfs:label "eCheckIn" .
+
+yawl:EventLogger_eCancel a yawl:Field ;
+    rdfs:label "eCancel" .
+
+yawl:EventLogger_eComplete a yawl:Field ;
+    rdfs:label "eComplete" .
+
+
+

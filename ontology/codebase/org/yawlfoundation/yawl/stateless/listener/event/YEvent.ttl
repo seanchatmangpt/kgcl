@@ -1,0 +1,149 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.stateless.listener.event.YEvent
+yawl:YEvent a yawl:Class ;
+    rdfs:label "YEvent" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_stateless_listener_event ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/stateless/listener/event/YEvent.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 24/8/20""" ;
+    yawl:modifiers "abstract" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YEvent_getTimeStamp_1 ;
+    yawl:hasMethod yawl:YEvent_getEventType_2 ;
+    yawl:hasMethod yawl:YEvent_getCaseID_3 ;
+    yawl:hasMethod yawl:YEvent_setSpecID_4 ;
+    yawl:hasMethod yawl:YEvent_getSpecID_5 ;
+    yawl:hasMethod yawl:YEvent_setWorkItem_6 ;
+    yawl:hasMethod yawl:YEvent_getWorkItem_7 ;
+    yawl:hasMethod yawl:YEvent_setData_8 ;
+    yawl:hasMethod yawl:YEvent_getData_9 ;
+    yawl:hasMethod yawl:YEvent_getEngineNbr_10 ;
+    yawl:hasMethod yawl:YEvent_setEngineNbr_11 ;
+    yawl:hasField yawl:YEvent__timeStamp ;
+    yawl:hasField yawl:YEvent__caseID ;
+    yawl:hasField yawl:YEvent__eType ;
+    yawl:hasField yawl:YEvent__specID ;
+    yawl:hasField yawl:YEvent__item ;
+    yawl:hasField yawl:YEvent__dataDoc ;
+    yawl:hasField yawl:YEvent__engineNbr ;
+    .
+
+
+# Method: YEvent.getTimeStamp
+yawl:YEvent_getTimeStamp_1 a yawl:Method ;
+    rdfs:label "getTimeStamp" ;
+    yawl:returnType "Instant" ;
+    yawl:signature "Instant getTimeStamp()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEvent.getEventType
+yawl:YEvent_getEventType_2 a yawl:Method ;
+    rdfs:label "getEventType" ;
+    yawl:returnType "YEventType" ;
+    yawl:signature "YEventType getEventType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEvent.getCaseID
+yawl:YEvent_getCaseID_3 a yawl:Method ;
+    rdfs:label "getCaseID" ;
+    yawl:returnType "YIdentifier" ;
+    yawl:signature "YIdentifier getCaseID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEvent.setSpecID
+yawl:YEvent_setSpecID_4 a yawl:Method ;
+    rdfs:label "setSpecID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSpecID(YSpecificationID specID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEvent.getSpecID
+yawl:YEvent_getSpecID_5 a yawl:Method ;
+    rdfs:label "getSpecID" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getSpecID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEvent.setWorkItem
+yawl:YEvent_setWorkItem_6 a yawl:Method ;
+    rdfs:label "setWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setWorkItem(YWorkItem item)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEvent.getWorkItem
+yawl:YEvent_getWorkItem_7 a yawl:Method ;
+    rdfs:label "getWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem getWorkItem()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEvent.setData
+yawl:YEvent_setData_8 a yawl:Method ;
+    rdfs:label "setData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setData(Document doc)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEvent.getData
+yawl:YEvent_getData_9 a yawl:Method ;
+    rdfs:label "getData" ;
+    yawl:returnType "Document" ;
+    yawl:signature "Document getData()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEvent.getEngineNbr
+yawl:YEvent_getEngineNbr_10 a yawl:Method ;
+    rdfs:label "getEngineNbr" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getEngineNbr()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YEvent.setEngineNbr
+yawl:YEvent_setEngineNbr_11 a yawl:Method ;
+    rdfs:label "setEngineNbr" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEngineNbr(int engineNbr)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YEvent__timeStamp a yawl:Field ;
+    rdfs:label "_timeStamp" .
+
+yawl:YEvent__caseID a yawl:Field ;
+    rdfs:label "_caseID" .
+
+yawl:YEvent__eType a yawl:Field ;
+    rdfs:label "_eType" .
+
+yawl:YEvent__specID a yawl:Field ;
+    rdfs:label "_specID" .
+
+yawl:YEvent__item a yawl:Field ;
+    rdfs:label "_item" .
+
+yawl:YEvent__dataDoc a yawl:Field ;
+    rdfs:label "_dataDoc" .
+
+yawl:YEvent__engineNbr a yawl:Field ;
+    rdfs:label "_engineNbr" .
+
+
+

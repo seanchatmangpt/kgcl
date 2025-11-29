@@ -1,0 +1,266 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.swingWorklist.YWorklistModel
+yawl:YWorklistModel a yawl:Class ;
+    rdfs:label "YWorklistModel" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_swingWorklist ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/swingWorklist/YWorklistModel.java"^^xsd:string ;
+    rdfs:comment """@author Lachlan Aldred Date: 15/05/2003 Time: 16:32:43""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YWorklistModel_removeUnstartedWorkItem_1 ;
+    yawl:hasMethod yawl:YWorklistModel_addEnabledWorkItem_2 ;
+    yawl:hasMethod yawl:YWorklistModel_addFiredWorkItem_3 ;
+    yawl:hasMethod yawl:YWorklistModel_removeStartedItem_4 ;
+    yawl:hasMethod yawl:YWorklistModel_addStartedWorkItem_5 ;
+    yawl:hasMethod yawl:YWorklistModel_getActiveTableData_6 ;
+    yawl:hasMethod yawl:YWorklistModel_setActiveTableData_7 ;
+    yawl:hasMethod yawl:YWorklistModel_applyForWorkItem_8 ;
+    yawl:hasMethod yawl:YWorklistModel_createNewInstance_9 ;
+    yawl:hasMethod yawl:YWorklistModel_allowsDynamicInstanceCreation_10 ;
+    yawl:hasMethod yawl:YWorklistModel_attemptToFinishActiveJob_11 ;
+    yawl:hasMethod yawl:YWorklistModel_getTaskTestData_12 ;
+    yawl:hasMethod yawl:YWorklistModel_reportGeneralProblem_13 ;
+    yawl:hasMethod yawl:YWorklistModel_rollBackActiveTask_14 ;
+    yawl:hasMethod yawl:YWorklistModel_refreshLists_15 ;
+    yawl:hasMethod yawl:YWorklistModel_updateSelf_16 ;
+    yawl:hasMethod yawl:YWorklistModel_getAvaliableModel_17 ;
+    yawl:hasMethod yawl:YWorklistModel_getActiveTasksModel_18 ;
+    yawl:hasMethod yawl:YWorklistModel_getOutputSkeletonXML_19 ;
+    yawl:hasMethod yawl:YWorklistModel_validateData_20 ;
+    yawl:hasMethod yawl:YWorklistModel_getMIUniqueParam_21 ;
+    yawl:hasMethod yawl:YWorklistModel_getGUI_22 ;
+    yawl:hasField yawl:YWorklistModel_logger ;
+    yawl:hasField yawl:YWorklistModel__availableWork ;
+    yawl:hasField yawl:YWorklistModel__myActiveTasks ;
+    yawl:hasField yawl:YWorklistModel_inSequenceWorkitemIDs ;
+    yawl:hasField yawl:YWorklistModel__formatter ;
+    yawl:hasField yawl:YWorklistModel__paramsDefinitions ;
+    yawl:hasField yawl:YWorklistModel__engineManagement ;
+    yawl:hasField yawl:YWorklistModel__engineClient ;
+    yawl:hasField yawl:YWorklistModel_xmlCommentHeader ;
+    yawl:hasField yawl:YWorklistModel__username ;
+    yawl:hasField yawl:YWorklistModel__gui ;
+    yawl:hasField yawl:YWorklistModel__frame ;
+    .
+
+
+# Method: YWorklistModel.removeUnstartedWorkItem
+yawl:YWorklistModel_removeUnstartedWorkItem_1 a yawl:Method ;
+    rdfs:label "removeUnstartedWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeUnstartedWorkItem(String caseIDStr, String taskID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorklistModel.addEnabledWorkItem
+yawl:YWorklistModel_addEnabledWorkItem_2 a yawl:Method ;
+    rdfs:label "addEnabledWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addEnabledWorkItem(YWorkItem workItem, boolean inSequence)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorklistModel.addFiredWorkItem
+yawl:YWorklistModel_addFiredWorkItem_3 a yawl:Method ;
+    rdfs:label "addFiredWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addFiredWorkItem(YWorkItem workItem, boolean inSequence)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorklistModel.removeStartedItem
+yawl:YWorklistModel_removeStartedItem_4 a yawl:Method ;
+    rdfs:label "removeStartedItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeStartedItem(String caseIDStr, String taskID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorklistModel.addStartedWorkItem
+yawl:YWorklistModel_addStartedWorkItem_5 a yawl:Method ;
+    rdfs:label "addStartedWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addStartedWorkItem(YWorkItem item, boolean inSequence)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorklistModel.getActiveTableData
+yawl:YWorklistModel_getActiveTableData_6 a yawl:Method ;
+    rdfs:label "getActiveTableData" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object getActiveTableData(String caseIDStr, String taskIDStr)" ;
+    .
+
+# Method: YWorklistModel.setActiveTableData
+yawl:YWorklistModel_setActiveTableData_7 a yawl:Method ;
+    rdfs:label "setActiveTableData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setActiveTableData(Object data)" ;
+    .
+
+# Method: YWorklistModel.applyForWorkItem
+yawl:YWorklistModel_applyForWorkItem_8 a yawl:Method ;
+    rdfs:label "applyForWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void applyForWorkItem(String caseID, String taskID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorklistModel.createNewInstance
+yawl:YWorklistModel_createNewInstance_9 a yawl:Method ;
+    rdfs:label "createNewInstance" ;
+    yawl:returnType "void" ;
+    yawl:signature "void createNewInstance(String caseID, String taskID, String newInstanceData)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorklistModel.allowsDynamicInstanceCreation
+yawl:YWorklistModel_allowsDynamicInstanceCreation_10 a yawl:Method ;
+    rdfs:label "allowsDynamicInstanceCreation" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean allowsDynamicInstanceCreation(String caseID, String taskID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorklistModel.attemptToFinishActiveJob
+yawl:YWorklistModel_attemptToFinishActiveJob_11 a yawl:Method ;
+    rdfs:label "attemptToFinishActiveJob" ;
+    yawl:returnType "void" ;
+    yawl:signature "void attemptToFinishActiveJob(String caseID, String taskID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorklistModel.getTaskTestData
+yawl:YWorklistModel_getTaskTestData_12 a yawl:Method ;
+    rdfs:label "getTaskTestData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskTestData(String caseID, String taskID)" ;
+    rdfs:comment """Return the XML test data for a specified task @param caseID @param taskID @return testData""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorklistModel.reportGeneralProblem
+yawl:YWorklistModel_reportGeneralProblem_13 a yawl:Method ;
+    rdfs:label "reportGeneralProblem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reportGeneralProblem(Exception e)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorklistModel.rollBackActiveTask
+yawl:YWorklistModel_rollBackActiveTask_14 a yawl:Method ;
+    rdfs:label "rollBackActiveTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void rollBackActiveTask(String caseID, String taskID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorklistModel.refreshLists
+yawl:YWorklistModel_refreshLists_15 a yawl:Method ;
+    rdfs:label "refreshLists" ;
+    yawl:returnType "void" ;
+    yawl:signature "void refreshLists(String userName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorklistModel.updateSelf
+yawl:YWorklistModel_updateSelf_16 a yawl:Method ;
+    rdfs:label "updateSelf" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateSelf()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YWorklistModel.getAvaliableModel
+yawl:YWorklistModel_getAvaliableModel_17 a yawl:Method ;
+    rdfs:label "getAvaliableModel" ;
+    yawl:returnType "YWorklistTableModel" ;
+    yawl:signature "YWorklistTableModel getAvaliableModel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorklistModel.getActiveTasksModel
+yawl:YWorklistModel_getActiveTasksModel_18 a yawl:Method ;
+    rdfs:label "getActiveTasksModel" ;
+    yawl:returnType "YWorklistTableModel" ;
+    yawl:signature "YWorklistTableModel getActiveTasksModel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorklistModel.getOutputSkeletonXML
+yawl:YWorklistModel_getOutputSkeletonXML_19 a yawl:Method ;
+    rdfs:label "getOutputSkeletonXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getOutputSkeletonXML(String caseID, String taskID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorklistModel.validateData
+yawl:YWorklistModel_validateData_20 a yawl:Method ;
+    rdfs:label "validateData" ;
+    yawl:returnType "List" ;
+    yawl:signature "List validateData()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorklistModel.getMIUniqueParam
+yawl:YWorklistModel_getMIUniqueParam_21 a yawl:Method ;
+    rdfs:label "getMIUniqueParam" ;
+    yawl:returnType "YParameter" ;
+    yawl:signature "YParameter getMIUniqueParam(String taskID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YWorklistModel.getGUI
+yawl:YWorklistModel_getGUI_22 a yawl:Method ;
+    rdfs:label "getGUI" ;
+    yawl:returnType "YWorklistGUI" ;
+    yawl:signature "YWorklistGUI getGUI()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YWorklistModel_logger a yawl:Field ;
+    rdfs:label "logger" .
+
+yawl:YWorklistModel__availableWork a yawl:Field ;
+    rdfs:label "_availableWork" .
+
+yawl:YWorklistModel__myActiveTasks a yawl:Field ;
+    rdfs:label "_myActiveTasks" .
+
+yawl:YWorklistModel_inSequenceWorkitemIDs a yawl:Field ;
+    rdfs:label "inSequenceWorkitemIDs" .
+
+yawl:YWorklistModel__formatter a yawl:Field ;
+    rdfs:label "_formatter" .
+
+yawl:YWorklistModel__paramsDefinitions a yawl:Field ;
+    rdfs:label "_paramsDefinitions" .
+
+yawl:YWorklistModel__engineManagement a yawl:Field ;
+    rdfs:label "_engineManagement" .
+
+yawl:YWorklistModel__engineClient a yawl:Field ;
+    rdfs:label "_engineClient" .
+
+yawl:YWorklistModel_xmlCommentHeader a yawl:Field ;
+    rdfs:label "xmlCommentHeader" .
+
+yawl:YWorklistModel__username a yawl:Field ;
+    rdfs:label "_username" .
+
+yawl:YWorklistModel__gui a yawl:Field ;
+    rdfs:label "_gui" .
+
+yawl:YWorklistModel__frame a yawl:Field ;
+    rdfs:label "_frame" .
+
+
+

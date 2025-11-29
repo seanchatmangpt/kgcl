@@ -1,0 +1,176 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.engine.interfce.interfaceX
+yawl:org_yawlfoundation_yawl_engine_interfce_interfaceX a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.engine.interfce.interfaceX" .
+# Class: org.yawlfoundation.yawl.engine.interfce.interfaceX.InterfaceX_EngineSideClient
+yawl:InterfaceX_EngineSideClient a yawl:Class ;
+    rdfs:label "InterfaceX_EngineSideClient" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_interfce_interfaceX ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/interfce/interfaceX/InterfaceX_EngineSideClient.java"^^xsd:string ;
+    rdfs:comment """InterfaceX_EngineSideClient passes exception event calls from the engine to the exception service. This class is a member class of Interface X, which provides an interface between the YAWL Engine and a Custom YAWL Service that manages exception handling at the process level. InterfaceB_EngineBasedClient was used as a template for this class. Schematic of Interface X: | EXCEPTION      |                              INTERFACE X GATEWAY       |                                SERVICE (implements) | """ ;
+    yawl:extends yawl:Interface_Client ;
+    yawl:implements yawl:ExceptionGateway ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:InterfaceX_EngineSideClient_getScheme_1 ;
+    yawl:hasMethod yawl:InterfaceX_EngineSideClient_setURI_2 ;
+    yawl:hasMethod yawl:InterfaceX_EngineSideClient_getURI_3 ;
+    yawl:hasMethod yawl:InterfaceX_EngineSideClient_equals_4 ;
+    yawl:hasMethod yawl:InterfaceX_EngineSideClient_hashCode_5 ;
+    yawl:hasMethod yawl:InterfaceX_EngineSideClient_announceCheckWorkItemConstraints_6 ;
+    yawl:hasMethod yawl:InterfaceX_EngineSideClient_announceCheckCaseConstraints_7 ;
+    yawl:hasMethod yawl:InterfaceX_EngineSideClient_announceWorkitemAbort_8 ;
+    yawl:hasMethod yawl:InterfaceX_EngineSideClient_announceTimeOut_9 ;
+    yawl:hasMethod yawl:InterfaceX_EngineSideClient_announceConstraintViolation_10 ;
+    yawl:hasMethod yawl:InterfaceX_EngineSideClient_announceCaseCancellation_11 ;
+    yawl:hasMethod yawl:InterfaceX_EngineSideClient_shutdown_12 ;
+    yawl:hasField yawl:InterfaceX_EngineSideClient_THREADPOOL_SIZE ;
+    yawl:hasField yawl:InterfaceX_EngineSideClient_executor ;
+    yawl:hasField yawl:InterfaceX_EngineSideClient_NOTIFY_CHECK_CASE_CONSTRAINTS ;
+    yawl:hasField yawl:InterfaceX_EngineSideClient_NOTIFY_CHECK_ITEM_CONSTRAINTS ;
+    yawl:hasField yawl:InterfaceX_EngineSideClient_NOTIFY_WORKITEM_ABORT ;
+    yawl:hasField yawl:InterfaceX_EngineSideClient_NOTIFY_TIMEOUT ;
+    yawl:hasField yawl:InterfaceX_EngineSideClient_NOTIFY_RESOURCE_UNAVAILABLE ;
+    yawl:hasField yawl:InterfaceX_EngineSideClient_NOTIFY_CONSTRAINT_VIOLATION ;
+    yawl:hasField yawl:InterfaceX_EngineSideClient_NOTIFY_CANCELLED_CASE ;
+    yawl:hasField yawl:InterfaceX_EngineSideClient__observerURI ;
+    .
+
+
+# Method: InterfaceX_EngineSideClient.getScheme
+yawl:InterfaceX_EngineSideClient_getScheme_1 a yawl:Method ;
+    rdfs:label "getScheme" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getScheme()" ;
+    rdfs:comment """Indicates which protocol this shim services @return the scheme""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceX_EngineSideClient.setURI
+yawl:InterfaceX_EngineSideClient_setURI_2 a yawl:Method ;
+    rdfs:label "setURI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setURI(String uri)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceX_EngineSideClient.getURI
+yawl:InterfaceX_EngineSideClient_getURI_3 a yawl:Method ;
+    rdfs:label "getURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getURI()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceX_EngineSideClient.equals
+yawl:InterfaceX_EngineSideClient_equals_4 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceX_EngineSideClient.hashCode
+yawl:InterfaceX_EngineSideClient_hashCode_5 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceX_EngineSideClient.announceCheckWorkItemConstraints
+yawl:InterfaceX_EngineSideClient_announceCheckWorkItemConstraints_6 a yawl:Method ;
+    rdfs:label "announceCheckWorkItemConstraints" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCheckWorkItemConstraints(YWorkItem item, Document data, boolean preCheck)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceX_EngineSideClient.announceCheckCaseConstraints
+yawl:InterfaceX_EngineSideClient_announceCheckCaseConstraints_7 a yawl:Method ;
+    rdfs:label "announceCheckCaseConstraints" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCheckCaseConstraints(YSpecificationID specID, String caseID, String data, boolean preCheck)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceX_EngineSideClient.announceWorkitemAbort
+yawl:InterfaceX_EngineSideClient_announceWorkitemAbort_8 a yawl:Method ;
+    rdfs:label "announceWorkitemAbort" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceWorkitemAbort(YWorkItem item)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceX_EngineSideClient.announceTimeOut
+yawl:InterfaceX_EngineSideClient_announceTimeOut_9 a yawl:Method ;
+    rdfs:label "announceTimeOut" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceTimeOut(YWorkItem item, List taskList)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceX_EngineSideClient.announceConstraintViolation
+yawl:InterfaceX_EngineSideClient_announceConstraintViolation_10 a yawl:Method ;
+    rdfs:label "announceConstraintViolation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceConstraintViolation(YWorkItem item)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceX_EngineSideClient.announceCaseCancellation
+yawl:InterfaceX_EngineSideClient_announceCaseCancellation_11 a yawl:Method ;
+    rdfs:label "announceCaseCancellation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void announceCaseCancellation(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InterfaceX_EngineSideClient.shutdown
+yawl:InterfaceX_EngineSideClient_shutdown_12 a yawl:Method ;
+    rdfs:label "shutdown" ;
+    yawl:returnType "void" ;
+    yawl:signature "void shutdown()" ;
+    rdfs:comment """Called when the Engine is shutdown (servlet destroyed); the listener should to do its own finalisation processing""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:InterfaceX_EngineSideClient_THREADPOOL_SIZE a yawl:Field ;
+    rdfs:label "THREADPOOL_SIZE" .
+
+yawl:InterfaceX_EngineSideClient_executor a yawl:Field ;
+    rdfs:label "executor" .
+
+yawl:InterfaceX_EngineSideClient_NOTIFY_CHECK_CASE_CONSTRAINTS a yawl:Field ;
+    rdfs:label "NOTIFY_CHECK_CASE_CONSTRAINTS" .
+
+yawl:InterfaceX_EngineSideClient_NOTIFY_CHECK_ITEM_CONSTRAINTS a yawl:Field ;
+    rdfs:label "NOTIFY_CHECK_ITEM_CONSTRAINTS" .
+
+yawl:InterfaceX_EngineSideClient_NOTIFY_WORKITEM_ABORT a yawl:Field ;
+    rdfs:label "NOTIFY_WORKITEM_ABORT" .
+
+yawl:InterfaceX_EngineSideClient_NOTIFY_TIMEOUT a yawl:Field ;
+    rdfs:label "NOTIFY_TIMEOUT" .
+
+yawl:InterfaceX_EngineSideClient_NOTIFY_RESOURCE_UNAVAILABLE a yawl:Field ;
+    rdfs:label "NOTIFY_RESOURCE_UNAVAILABLE" .
+
+yawl:InterfaceX_EngineSideClient_NOTIFY_CONSTRAINT_VIOLATION a yawl:Field ;
+    rdfs:label "NOTIFY_CONSTRAINT_VIOLATION" .
+
+yawl:InterfaceX_EngineSideClient_NOTIFY_CANCELLED_CASE a yawl:Field ;
+    rdfs:label "NOTIFY_CANCELLED_CASE" .
+
+yawl:InterfaceX_EngineSideClient__observerURI a yawl:Field ;
+    rdfs:label "_observerURI" .
+
+
+

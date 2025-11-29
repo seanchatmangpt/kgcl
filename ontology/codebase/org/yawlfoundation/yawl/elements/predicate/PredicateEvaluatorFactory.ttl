@@ -1,0 +1,63 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.elements.predicate.PredicateEvaluatorFactory
+yawl:PredicateEvaluatorFactory a yawl:Class ;
+    rdfs:label "PredicateEvaluatorFactory" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_elements_predicate ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/elements/predicate/PredicateEvaluatorFactory.java"^^xsd:string ;
+    rdfs:comment """This factory class creates and instantiates instances of classes in this package that implement the PredicateEvaluator interface. @author Michael Adams @date 05/12/2012""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:PredicateEvaluatorFactory_setExternalPaths_1 ;
+    yawl:hasMethod yawl:PredicateEvaluatorFactory_getInstances_2 ;
+    yawl:hasMethod yawl:PredicateEvaluatorFactory_getClassMap_3 ;
+    yawl:hasField yawl:PredicateEvaluatorFactory__classMap ;
+    yawl:hasField yawl:PredicateEvaluatorFactory_BASE_PACKAGE ;
+    yawl:hasField yawl:PredicateEvaluatorFactory__loader ;
+    .
+
+
+# Method: PredicateEvaluatorFactory.setExternalPaths
+yawl:PredicateEvaluatorFactory_setExternalPaths_1 a yawl:Method ;
+    rdfs:label "setExternalPaths" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setExternalPaths(String externalPaths)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PredicateEvaluatorFactory.getInstances
+yawl:PredicateEvaluatorFactory_getInstances_2 a yawl:Method ;
+    rdfs:label "getInstances" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getInstances()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: PredicateEvaluatorFactory.getClassMap
+yawl:PredicateEvaluatorFactory_getClassMap_3 a yawl:Method ;
+    rdfs:label "getClassMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getClassMap()" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:PredicateEvaluatorFactory__classMap a yawl:Field ;
+    rdfs:label "_classMap" .
+
+yawl:PredicateEvaluatorFactory_BASE_PACKAGE a yawl:Field ;
+    rdfs:label "BASE_PACKAGE" .
+
+yawl:PredicateEvaluatorFactory__loader a yawl:Field ;
+    rdfs:label "_loader" .
+
+
+

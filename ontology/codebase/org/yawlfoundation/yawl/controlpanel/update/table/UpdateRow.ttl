@@ -1,0 +1,166 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.update.table.UpdateRow
+yawl:UpdateRow a yawl:Class ;
+    rdfs:label "UpdateRow" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_update_table ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/update/table/UpdateRow.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 17/08/2014""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:UpdateRow_getName_1 ;
+    yawl:hasMethod yawl:UpdateRow_getDescription_2 ;
+    yawl:hasMethod yawl:UpdateRow_getCurrentBuild_3 ;
+    yawl:hasMethod yawl:UpdateRow_getLatestBuild_4 ;
+    yawl:hasMethod yawl:UpdateRow_hasNewVersion_5 ;
+    yawl:hasMethod yawl:UpdateRow_isRemoving_6 ;
+    yawl:hasMethod yawl:UpdateRow_isAdding_7 ;
+    yawl:hasMethod yawl:UpdateRow_isInstalled_8 ;
+    yawl:hasMethod yawl:UpdateRow_getInstallAction_9 ;
+    yawl:hasMethod yawl:UpdateRow_setInstallAction_10 ;
+    yawl:hasMethod yawl:UpdateRow_isInstallable_11 ;
+    yawl:hasMethod yawl:UpdateRow_setInstallable_12 ;
+    yawl:hasMethod yawl:UpdateRow_hasUpdates_13 ;
+    yawl:hasField yawl:UpdateRow__appName ;
+    yawl:hasField yawl:UpdateRow__description ;
+    yawl:hasField yawl:UpdateRow__currentBuild ;
+    yawl:hasField yawl:UpdateRow__latestBuild ;
+    yawl:hasField yawl:UpdateRow__isInstalled ;
+    yawl:hasField yawl:UpdateRow__installAction ;
+    yawl:hasField yawl:UpdateRow__installable ;
+    .
+
+
+# Method: UpdateRow.getName
+yawl:UpdateRow_getName_1 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateRow.getDescription
+yawl:UpdateRow_getDescription_2 a yawl:Method ;
+    rdfs:label "getDescription" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDescription()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateRow.getCurrentBuild
+yawl:UpdateRow_getCurrentBuild_3 a yawl:Method ;
+    rdfs:label "getCurrentBuild" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCurrentBuild()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateRow.getLatestBuild
+yawl:UpdateRow_getLatestBuild_4 a yawl:Method ;
+    rdfs:label "getLatestBuild" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLatestBuild()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateRow.hasNewVersion
+yawl:UpdateRow_hasNewVersion_5 a yawl:Method ;
+    rdfs:label "hasNewVersion" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasNewVersion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateRow.isRemoving
+yawl:UpdateRow_isRemoving_6 a yawl:Method ;
+    rdfs:label "isRemoving" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isRemoving()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateRow.isAdding
+yawl:UpdateRow_isAdding_7 a yawl:Method ;
+    rdfs:label "isAdding" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isAdding()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateRow.isInstalled
+yawl:UpdateRow_isInstalled_8 a yawl:Method ;
+    rdfs:label "isInstalled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isInstalled()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateRow.getInstallAction
+yawl:UpdateRow_getInstallAction_9 a yawl:Method ;
+    rdfs:label "getInstallAction" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean getInstallAction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateRow.setInstallAction
+yawl:UpdateRow_setInstallAction_10 a yawl:Method ;
+    rdfs:label "setInstallAction" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setInstallAction(boolean action)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateRow.isInstallable
+yawl:UpdateRow_isInstallable_11 a yawl:Method ;
+    rdfs:label "isInstallable" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isInstallable()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateRow.setInstallable
+yawl:UpdateRow_setInstallable_12 a yawl:Method ;
+    rdfs:label "setInstallable" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setInstallable(boolean installable)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UpdateRow.hasUpdates
+yawl:UpdateRow_hasUpdates_13 a yawl:Method ;
+    rdfs:label "hasUpdates" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasUpdates()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:UpdateRow__appName a yawl:Field ;
+    rdfs:label "_appName" .
+
+yawl:UpdateRow__description a yawl:Field ;
+    rdfs:label "_description" .
+
+yawl:UpdateRow__currentBuild a yawl:Field ;
+    rdfs:label "_currentBuild" .
+
+yawl:UpdateRow__latestBuild a yawl:Field ;
+    rdfs:label "_latestBuild" .
+
+yawl:UpdateRow__isInstalled a yawl:Field ;
+    rdfs:label "_isInstalled" .
+
+yawl:UpdateRow__installAction a yawl:Field ;
+    rdfs:label "_installAction" .
+
+yawl:UpdateRow__installable a yawl:Field ;
+    rdfs:label "_installable" .
+
+
+

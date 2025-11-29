@@ -1,0 +1,235 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.cost.interfce.ModelUpload
+yawl:ModelUpload a yawl:Class ;
+    rdfs:label "ModelUpload" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_cost_interfce ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/cost/interfce/ModelUpload.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 11/02/12""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ModelUpload_add_1 ;
+    yawl:hasMethod yawl:ModelUpload_getLog_2 ;
+    yawl:hasMethod yawl:ModelUpload_loadModel_3 ;
+    yawl:hasMethod yawl:ModelUpload_getLog_4 ;
+    yawl:hasMethod yawl:ModelUpload_getSession_5 ;
+    yawl:hasMethod yawl:ModelUpload_upload_6 ;
+    yawl:hasMethod yawl:ModelUpload_disconnect_7 ;
+    yawl:hasMethod yawl:ModelUpload_post_8 ;
+    yawl:hasMethod yawl:ModelUpload_abort_9 ;
+    yawl:hasMethod yawl:ModelUpload_send_10 ;
+    yawl:hasMethod yawl:ModelUpload_initPostConnection_11 ;
+    yawl:hasMethod yawl:ModelUpload_encodeData_12 ;
+    yawl:hasMethod yawl:ModelUpload_urlEncode_13 ;
+    yawl:hasMethod yawl:ModelUpload_sendData_14 ;
+    yawl:hasMethod yawl:ModelUpload_readStream_15 ;
+    yawl:hasMethod yawl:ModelUpload_stringToFile_16 ;
+    yawl:hasMethod yawl:ModelUpload_stripOuterElement_17 ;
+    yawl:hasMethod yawl:ModelUpload_successful_18 ;
+    yawl:hasMethod yawl:ModelUpload_fileToString_19 ;
+    yawl:hasMethod yawl:ModelUpload_fileToString_20 ;
+    yawl:hasMethod yawl:ModelUpload_usage_21 ;
+    yawl:hasMethod yawl:ModelUpload_main_22 ;
+    yawl:hasField yawl:ModelUpload_url ;
+    yawl:hasField yawl:ModelUpload_params ;
+    .
+
+
+# Method: ModelUpload.add
+yawl:ModelUpload_add_1 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "String" ;
+    yawl:signature "String add(String fileName)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ModelUpload.getLog
+yawl:ModelUpload_getLog_2 a yawl:Method ;
+    rdfs:label "getLog" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLog(String id, String version, String uri)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ModelUpload.loadModel
+yawl:ModelUpload_loadModel_3 a yawl:Method ;
+    rdfs:label "loadModel" ;
+    yawl:returnType "String" ;
+    yawl:signature "String loadModel(String fileName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ModelUpload.getLog
+yawl:ModelUpload_getLog_4 a yawl:Method ;
+    rdfs:label "getLog" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLog(String id, String version, String uri, String handle)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ModelUpload.getSession
+yawl:ModelUpload_getSession_5 a yawl:Method ;
+    rdfs:label "getSession" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSession()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ModelUpload.upload
+yawl:ModelUpload_upload_6 a yawl:Method ;
+    rdfs:label "upload" ;
+    yawl:returnType "String" ;
+    yawl:signature "String upload(String model, String handle)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ModelUpload.disconnect
+yawl:ModelUpload_disconnect_7 a yawl:Method ;
+    rdfs:label "disconnect" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disconnect(String handle)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ModelUpload.post
+yawl:ModelUpload_post_8 a yawl:Method ;
+    rdfs:label "post" ;
+    yawl:returnType "String" ;
+    yawl:signature "String post()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ModelUpload.abort
+yawl:ModelUpload_abort_9 a yawl:Method ;
+    rdfs:label "abort" ;
+    yawl:returnType "void" ;
+    yawl:signature "void abort(String msg)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ModelUpload.send
+yawl:ModelUpload_send_10 a yawl:Method ;
+    rdfs:label "send" ;
+    yawl:returnType "String" ;
+    yawl:signature "String send(String urlStr, Map paramsMap)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ModelUpload.initPostConnection
+yawl:ModelUpload_initPostConnection_11 a yawl:Method ;
+    rdfs:label "initPostConnection" ;
+    yawl:returnType "HttpURLConnection" ;
+    yawl:signature "HttpURLConnection initPostConnection(String urlStr)" ;
+    rdfs:comment """Initialises a HTTP POST connection @param urlStr the url to connect to @return an initialised POST connection @throws IOException when there's some kind of communication problem""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ModelUpload.encodeData
+yawl:ModelUpload_encodeData_12 a yawl:Method ;
+    rdfs:label "encodeData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String encodeData(Map params)" ;
+    rdfs:comment """Encodes parameter values for HTTP transport @param params a map of the data parameter values, of the form [param1=value1],[param2=value2]... @return a formatted http data string with the data values encoded""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ModelUpload.urlEncode
+yawl:ModelUpload_urlEncode_13 a yawl:Method ;
+    rdfs:label "urlEncode" ;
+    yawl:returnType "String" ;
+    yawl:signature "String urlEncode(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ModelUpload.sendData
+yawl:ModelUpload_sendData_14 a yawl:Method ;
+    rdfs:label "sendData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sendData(HttpURLConnection connection, String data)" ;
+    rdfs:comment """Submits data on a HTTP connection @param connection a valid, open HTTP connection @param data       the data to submit @throws IOException when there's some kind of communication problem""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ModelUpload.readStream
+yawl:ModelUpload_readStream_15 a yawl:Method ;
+    rdfs:label "readStream" ;
+    yawl:returnType "String" ;
+    yawl:signature "String readStream(InputStream is, int size)" ;
+    rdfs:comment """Receives a reply from a HTTP submission @param is the InputStream of a URL or Connection object @return the stream's contents (ie. the HTTP reply) @throws IOException when there's some kind of communication problem""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ModelUpload.stringToFile
+yawl:ModelUpload_stringToFile_16 a yawl:Method ;
+    rdfs:label "stringToFile" ;
+    yawl:returnType "void" ;
+    yawl:signature "void stringToFile(String fileName, String contents)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ModelUpload.stripOuterElement
+yawl:ModelUpload_stripOuterElement_17 a yawl:Method ;
+    rdfs:label "stripOuterElement" ;
+    yawl:returnType "String" ;
+    yawl:signature "String stripOuterElement(String xml)" ;
+    rdfs:comment """Removes the outermost set of xml tags from a string, if any @param xml the xml string to strip @return the stripped xml string""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ModelUpload.successful
+yawl:ModelUpload_successful_18 a yawl:Method ;
+    rdfs:label "successful" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean successful(String message)" ;
+    rdfs:comment """Tests a response message for success or failure @param message the response message to test @return true if the response represents success""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ModelUpload.fileToString
+yawl:ModelUpload_fileToString_19 a yawl:Method ;
+    rdfs:label "fileToString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String fileToString(File f)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ModelUpload.fileToString
+yawl:ModelUpload_fileToString_20 a yawl:Method ;
+    rdfs:label "fileToString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String fileToString(String filename)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ModelUpload.usage
+yawl:ModelUpload_usage_21 a yawl:Method ;
+    rdfs:label "usage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void usage()" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: ModelUpload.main
+yawl:ModelUpload_main_22 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String args)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:ModelUpload_url a yawl:Field ;
+    rdfs:label "url" .
+
+yawl:ModelUpload_params a yawl:Field ;
+    rdfs:label "params" .
+
+
+

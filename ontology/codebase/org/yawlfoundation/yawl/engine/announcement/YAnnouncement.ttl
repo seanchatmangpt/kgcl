@@ -1,0 +1,108 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.engine.announcement
+yawl:org_yawlfoundation_yawl_engine_announcement a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.engine.announcement" .
+# Class: org.yawlfoundation.yawl.engine.announcement.YAnnouncement
+yawl:YAnnouncement a yawl:Class ;
+    rdfs:label "YAnnouncement" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_announcement ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/announcement/YAnnouncement.java"^^xsd:string ;
+    rdfs:comment """A container of objects that represent an engine generated event for notification to observer gateways and services. @author Michael Adams @date June 14, 2011""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YAnnouncement_getYawlService_1 ;
+    yawl:hasMethod yawl:YAnnouncement_getScheme_2 ;
+    yawl:hasMethod yawl:YAnnouncement_getItem_3 ;
+    yawl:hasMethod yawl:YAnnouncement_getContext_4 ;
+    yawl:hasMethod yawl:YAnnouncement_getEvent_5 ;
+    yawl:hasMethod yawl:YAnnouncement_equals_6 ;
+    yawl:hasMethod yawl:YAnnouncement_hashCode_7 ;
+    yawl:hasField yawl:YAnnouncement__yawlService ;
+    yawl:hasField yawl:YAnnouncement__item ;
+    yawl:hasField yawl:YAnnouncement__context ;
+    yawl:hasField yawl:YAnnouncement__event ;
+    .
+
+
+# Method: YAnnouncement.getYawlService
+yawl:YAnnouncement_getYawlService_1 a yawl:Method ;
+    rdfs:label "getYawlService" ;
+    yawl:returnType "YAWLServiceReference" ;
+    yawl:signature "YAWLServiceReference getYawlService()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAnnouncement.getScheme
+yawl:YAnnouncement_getScheme_2 a yawl:Method ;
+    rdfs:label "getScheme" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getScheme()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAnnouncement.getItem
+yawl:YAnnouncement_getItem_3 a yawl:Method ;
+    rdfs:label "getItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem getItem()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAnnouncement.getContext
+yawl:YAnnouncement_getContext_4 a yawl:Method ;
+    rdfs:label "getContext" ;
+    yawl:returnType "AnnouncementContext" ;
+    yawl:signature "AnnouncementContext getContext()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAnnouncement.getEvent
+yawl:YAnnouncement_getEvent_5 a yawl:Method ;
+    rdfs:label "getEvent" ;
+    yawl:returnType "YEngineEvent" ;
+    yawl:signature "YEngineEvent getEvent()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAnnouncement.equals
+yawl:YAnnouncement_equals_6 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object o)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YAnnouncement.hashCode
+yawl:YAnnouncement_hashCode_7 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YAnnouncement__yawlService a yawl:Field ;
+    rdfs:label "_yawlService" .
+
+yawl:YAnnouncement__item a yawl:Field ;
+    rdfs:label "_item" .
+
+yawl:YAnnouncement__context a yawl:Field ;
+    rdfs:label "_context" .
+
+yawl:YAnnouncement__event a yawl:Field ;
+    rdfs:label "_event" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_engine_time_workdays a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.engine.time.workdays" .
+
+

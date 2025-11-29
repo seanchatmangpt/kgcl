@@ -1,0 +1,140 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.util.Sessions
+yawl:Sessions a yawl:Class ;
+    rdfs:label "Sessions" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/util/Sessions.java"^^xsd:string ;
+    rdfs:comment """A generic session manager utility that can be used by custom services to allow connections from any service or client application that has been registered in the engine. @author Michael Adams @date 9/11/11""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Sessions_setupInterfaceA_1 ;
+    yawl:hasMethod yawl:Sessions_shutdown_2 ;
+    yawl:hasMethod yawl:Sessions_connect_3 ;
+    yawl:hasMethod yawl:Sessions_checkConnection_4 ;
+    yawl:hasMethod yawl:Sessions_disconnect_5 ;
+    yawl:hasMethod yawl:Sessions_getHandle_6 ;
+    yawl:hasMethod yawl:Sessions_refreshActivityTimer_7 ;
+    yawl:hasMethod yawl:Sessions_startActivityTimer_8 ;
+    yawl:hasMethod yawl:Sessions_removeActivityTimer_9 ;
+    yawl:hasMethod yawl:Sessions_failMsg_10 ;
+    yawl:hasField yawl:Sessions_idToHandle ;
+    yawl:hasField yawl:Sessions_handleToTimer ;
+    yawl:hasField yawl:Sessions_iaClient ;
+    yawl:hasField yawl:Sessions_scheduler ;
+    yawl:hasField yawl:Sessions_INVALID_CREDENTIALS ;
+    .
+
+
+# Method: Sessions.setupInterfaceA
+yawl:Sessions_setupInterfaceA_1 a yawl:Method ;
+    rdfs:label "setupInterfaceA" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setupInterfaceA(String iaURI, String iaUserid, String iaPassword)" ;
+    rdfs:comment """Uses the parameters passed to connect to the engine via Interface A so that the registered services' and client applications' credentials can be retrieved. Note this method must be called before any sessions can be authenticated @param iaURI The URI of the engine's Interface A @param iaUserid the userid of the registered service or client app calling this method @param iaPassword the password of the registered service or client app calling this method""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Sessions.shutdown
+yawl:Sessions_shutdown_2 a yawl:Method ;
+    rdfs:label "shutdown" ;
+    yawl:returnType "void" ;
+    yawl:signature "void shutdown()" ;
+    rdfs:comment """Cancels all current sessions and their inactivity timers. Usually called from Servlet#destroy""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Sessions.connect
+yawl:Sessions_connect_3 a yawl:Method ;
+    rdfs:label "connect" ;
+    yawl:returnType "String" ;
+    yawl:signature "String connect(String userid, String password)" ;
+    rdfs:comment """Attempts to establish a session using the credentials passed @param userid the userid of a registered service or client application @param password the corresponding password @return a session handle if successful, or a diagnostic error if not (incl. unknown userid, invalid password, invalid or missing Interface A credentials, or other problems connecting to the engine or retrieving registered credentials)""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Sessions.checkConnection
+yawl:Sessions_checkConnection_4 a yawl:Method ;
+    rdfs:label "checkConnection" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean checkConnection(String handle)" ;
+    rdfs:comment """Checks that a session handle is valid and active (i.e. has not timed out through inactivity) @param handle the session handle to check @return true if the session handle is known and active, false otherwise""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Sessions.disconnect
+yawl:Sessions_disconnect_5 a yawl:Method ;
+    rdfs:label "disconnect" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean disconnect(String handle)" ;
+    rdfs:comment """Ends a session @param handle the session handle to cancel @return true if the session handle was known and valid, and has now been disconnected, false if the handle was already disconnected""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Sessions.getHandle
+yawl:Sessions_getHandle_6 a yawl:Method ;
+    rdfs:label "getHandle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getHandle(String userid)" ;
+    rdfs:comment """Create and store a new session handle for a userid @param userid the userid the create the handle for. It is assumed that the userid has already been authenticated @return a newly created session handle""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Sessions.refreshActivityTimer
+yawl:Sessions_refreshActivityTimer_7 a yawl:Method ;
+    rdfs:label "refreshActivityTimer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void refreshActivityTimer(String handle)" ;
+    rdfs:comment """Restarts an inactivity timer for a session handle @param handle the session handle to restart the timer for""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Sessions.startActivityTimer
+yawl:Sessions_startActivityTimer_8 a yawl:Method ;
+    rdfs:label "startActivityTimer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void startActivityTimer(String handle)" ;
+    rdfs:comment """Starts an inactivity timer for a session handle. The handle will expire after 60 minutes of inactivity @param handle the session handle to start the timer for""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Sessions.removeActivityTimer
+yawl:Sessions_removeActivityTimer_9 a yawl:Method ;
+    rdfs:label "removeActivityTimer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removeActivityTimer(String handle)" ;
+    rdfs:comment """Cancels an inactivity timer for a session handle. @param handle the session handle to cancel the timer for""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: Sessions.failMsg
+yawl:Sessions_failMsg_10 a yawl:Method ;
+    rdfs:label "failMsg" ;
+    yawl:returnType "String" ;
+    yawl:signature "String failMsg(String msg)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:Sessions_idToHandle a yawl:Field ;
+    rdfs:label "idToHandle" .
+
+yawl:Sessions_handleToTimer a yawl:Field ;
+    rdfs:label "handleToTimer" .
+
+yawl:Sessions_iaClient a yawl:Field ;
+    rdfs:label "iaClient" .
+
+yawl:Sessions_scheduler a yawl:Field ;
+    rdfs:label "scheduler" .
+
+yawl:Sessions_INVALID_CREDENTIALS a yawl:Field ;
+    rdfs:label "INVALID_CREDENTIALS" .
+
+
+

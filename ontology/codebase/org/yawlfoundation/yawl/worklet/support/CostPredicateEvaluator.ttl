@@ -1,0 +1,119 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.support.CostPredicateEvaluator
+yawl:CostPredicateEvaluator a yawl:Class ;
+    rdfs:label "CostPredicateEvaluator" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_support ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/support/CostPredicateEvaluator.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 14/12/2013""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CostPredicateEvaluator_evaluate_1 ;
+    yawl:hasMethod yawl:CostPredicateEvaluator_getCheapestVariant_2 ;
+    yawl:hasMethod yawl:CostPredicateEvaluator_getDearestVariant_3 ;
+    yawl:hasMethod yawl:CostPredicateEvaluator_getVariantMeetingCriterion_4 ;
+    yawl:hasMethod yawl:CostPredicateEvaluator_calculate_5 ;
+    yawl:hasMethod yawl:CostPredicateEvaluator_transformData_6 ;
+    yawl:hasMethod yawl:CostPredicateEvaluator_getHandle_7 ;
+    yawl:hasMethod yawl:CostPredicateEvaluator_extractCostPredicate_8 ;
+    yawl:hasMethod yawl:CostPredicateEvaluator_getVariants_9 ;
+    yawl:hasMethod yawl:CostPredicateEvaluator_costServiceUnavailable_10 ;
+    yawl:hasField yawl:CostPredicateEvaluator_CHEAPEST ;
+    yawl:hasField yawl:CostPredicateEvaluator_DEAREST ;
+    .
+
+
+# Method: CostPredicateEvaluator.evaluate
+yawl:CostPredicateEvaluator_evaluate_1 a yawl:Method ;
+    rdfs:label "evaluate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String evaluate(String predicate, Element data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CostPredicateEvaluator.getCheapestVariant
+yawl:CostPredicateEvaluator_getCheapestVariant_2 a yawl:Method ;
+    rdfs:label "getCheapestVariant" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCheapestVariant(String predicate, WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostPredicateEvaluator.getDearestVariant
+yawl:CostPredicateEvaluator_getDearestVariant_3 a yawl:Method ;
+    rdfs:label "getDearestVariant" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDearestVariant(String predicate, WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostPredicateEvaluator.getVariantMeetingCriterion
+yawl:CostPredicateEvaluator_getVariantMeetingCriterion_4 a yawl:Method ;
+    rdfs:label "getVariantMeetingCriterion" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getVariantMeetingCriterion(String predicate, WorkItemRecord wir, char criterion)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostPredicateEvaluator.calculate
+yawl:CostPredicateEvaluator_calculate_5 a yawl:Method ;
+    rdfs:label "calculate" ;
+    yawl:returnType "double" ;
+    yawl:signature "double calculate(String predicate, YSpecificationID specID, String caseID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostPredicateEvaluator.transformData
+yawl:CostPredicateEvaluator_transformData_6 a yawl:Method ;
+    rdfs:label "transformData" ;
+    yawl:returnType "WorkItemRecord" ;
+    yawl:signature "WorkItemRecord transformData(Element data)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostPredicateEvaluator.getHandle
+yawl:CostPredicateEvaluator_getHandle_7 a yawl:Method ;
+    rdfs:label "getHandle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getHandle(CostGatewayClient client)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostPredicateEvaluator.extractCostPredicate
+yawl:CostPredicateEvaluator_extractCostPredicate_8 a yawl:Method ;
+    rdfs:label "extractCostPredicate" ;
+    yawl:returnType "String" ;
+    yawl:signature "String extractCostPredicate(String predicate)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostPredicateEvaluator.getVariants
+yawl:CostPredicateEvaluator_getVariants_9 a yawl:Method ;
+    rdfs:label "getVariants" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getVariants(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CostPredicateEvaluator.costServiceUnavailable
+yawl:CostPredicateEvaluator_costServiceUnavailable_10 a yawl:Method ;
+    rdfs:label "costServiceUnavailable" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean costServiceUnavailable()" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:CostPredicateEvaluator_CHEAPEST a yawl:Field ;
+    rdfs:label "CHEAPEST" .
+
+yawl:CostPredicateEvaluator_DEAREST a yawl:Field ;
+    rdfs:label "DEAREST" .
+
+
+

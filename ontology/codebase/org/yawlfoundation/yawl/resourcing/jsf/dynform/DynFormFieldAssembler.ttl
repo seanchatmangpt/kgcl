@@ -1,0 +1,258 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.jsf.dynform.DynFormFieldAssembler
+yawl:DynFormFieldAssembler a yawl:Class ;
+    rdfs:label "DynFormFieldAssembler" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_jsf_dynform ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/jsf/dynform/DynFormFieldAssembler.java"^^xsd:string ;
+    rdfs:comment """Author: Michael Adams Creation Date: 5/07/2008""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DynFormFieldAssembler_buildMap_1 ;
+    yawl:hasMethod yawl:DynFormFieldAssembler_createFieldList_2 ;
+    yawl:hasMethod yawl:DynFormFieldAssembler_createSequence_3 ;
+    yawl:hasMethod yawl:DynFormFieldAssembler_createChoice_4 ;
+    yawl:hasMethod yawl:DynFormFieldAssembler_createField_5 ;
+    yawl:hasMethod yawl:DynFormFieldAssembler_getElementDataType_6 ;
+    yawl:hasMethod yawl:DynFormFieldAssembler_addGroupField_7 ;
+    yawl:hasMethod yawl:DynFormFieldAssembler_addElementField_8 ;
+    yawl:hasMethod yawl:DynFormFieldAssembler_addField_9 ;
+    yawl:hasMethod yawl:DynFormFieldAssembler_addField_10 ;
+    yawl:hasMethod yawl:DynFormFieldAssembler_populateField_11 ;
+    yawl:hasMethod yawl:DynFormFieldAssembler_addContainingField_12 ;
+    yawl:hasMethod yawl:DynFormFieldAssembler_applySimpleTypeFacets_13 ;
+    yawl:hasMethod yawl:DynFormFieldAssembler_addSimpleContents_14 ;
+    yawl:hasMethod yawl:DynFormFieldAssembler_getInitialInstanceCount_15 ;
+    yawl:hasMethod yawl:DynFormFieldAssembler_getIteratedContent_16 ;
+    yawl:hasMethod yawl:DynFormFieldAssembler_setOrderForListItems_17 ;
+    yawl:hasMethod yawl:DynFormFieldAssembler_isCloneableField_18 ;
+    yawl:hasMethod yawl:DynFormFieldAssembler_getNextGroupID_19 ;
+    yawl:hasMethod yawl:DynFormFieldAssembler_getNextChoiceID_20 ;
+    yawl:hasMethod yawl:DynFormFieldAssembler_getAttributeMap_21 ;
+    yawl:hasMethod yawl:DynFormFieldAssembler_getAppInfo_22 ;
+    yawl:hasMethod yawl:DynFormFieldAssembler_getFormName_23 ;
+    yawl:hasMethod yawl:DynFormFieldAssembler_getFieldList_24 ;
+    yawl:hasField yawl:DynFormFieldAssembler__formName ;
+    yawl:hasField yawl:DynFormFieldAssembler__params ;
+    yawl:hasField yawl:DynFormFieldAssembler__currentParam ;
+    yawl:hasField yawl:DynFormFieldAssembler__fieldList ;
+    yawl:hasField yawl:DynFormFieldAssembler__uniqueSuffix ;
+    .
+
+
+# Method: DynFormFieldAssembler.buildMap
+yawl:DynFormFieldAssembler_buildMap_1 a yawl:Method ;
+    rdfs:label "buildMap" ;
+    yawl:returnType "void" ;
+    yawl:signature "void buildMap(String schemaStr, String dataStr)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldAssembler.createFieldList
+yawl:DynFormFieldAssembler_createFieldList_2 a yawl:Method ;
+    rdfs:label "createFieldList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List createFieldList(Element schema, Element data, Namespace ns, int level)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldAssembler.createSequence
+yawl:DynFormFieldAssembler_createSequence_3 a yawl:Method ;
+    rdfs:label "createSequence" ;
+    yawl:returnType "List" ;
+    yawl:signature "List createSequence(Element sequence, Element data, Namespace ns, int level)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldAssembler.createChoice
+yawl:DynFormFieldAssembler_createChoice_4 a yawl:Method ;
+    rdfs:label "createChoice" ;
+    yawl:returnType "List" ;
+    yawl:signature "List createChoice(Element parent, Element data, Namespace ns, int level)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldAssembler.createField
+yawl:DynFormFieldAssembler_createField_5 a yawl:Method ;
+    rdfs:label "createField" ;
+    yawl:returnType "List" ;
+    yawl:signature "List createField(Element eField, Element data, Namespace ns, int level)" ;
+    rdfs:comment """@param eField @param data @param ns @param level @return a list of 'DynFormField'""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldAssembler.getElementDataType
+yawl:DynFormFieldAssembler_getElementDataType_6 a yawl:Method ;
+    rdfs:label "getElementDataType" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getElementDataType(Element eField, Namespace ns)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldAssembler.addGroupField
+yawl:DynFormFieldAssembler_addGroupField_7 a yawl:Method ;
+    rdfs:label "addGroupField" ;
+    yawl:returnType "DynFormField" ;
+    yawl:signature "DynFormField addGroupField(String name, Element eField, Namespace ns, Element data, String minOccurs, String maxOccurs, int level, Map appInfo)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldAssembler.addElementField
+yawl:DynFormFieldAssembler_addElementField_8 a yawl:Method ;
+    rdfs:label "addElementField" ;
+    yawl:returnType "List" ;
+    yawl:signature "List addElementField(String name, String type, Element data, String minOccurs, String maxOccurs, int level, Map appInfo)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldAssembler.addField
+yawl:DynFormFieldAssembler_addField_9 a yawl:Method ;
+    rdfs:label "addField" ;
+    yawl:returnType "DynFormField" ;
+    yawl:signature "DynFormField addField(String name, String type, Element data, String minOccurs, String maxOccurs, int level, Map appInfo)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldAssembler.addField
+yawl:DynFormFieldAssembler_addField_10 a yawl:Method ;
+    rdfs:label "addField" ;
+    yawl:returnType "DynFormField" ;
+    yawl:signature "DynFormField addField(String name, List subFieldList, String minOccurs, String maxOccurs, int level, Map appInfo)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldAssembler.populateField
+yawl:DynFormFieldAssembler_populateField_11 a yawl:Method ;
+    rdfs:label "populateField" ;
+    yawl:returnType "void" ;
+    yawl:signature "void populateField(DynFormField input, String name, String minOccurs, String maxOccurs, int level, Map appInfo)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldAssembler.addContainingField
+yawl:DynFormFieldAssembler_addContainingField_12 a yawl:Method ;
+    rdfs:label "addContainingField" ;
+    yawl:returnType "DynFormField" ;
+    yawl:signature "DynFormField addContainingField(String name, String minOccurs, String maxOccurs, int level, Map appInfo)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldAssembler.applySimpleTypeFacets
+yawl:DynFormFieldAssembler_applySimpleTypeFacets_13 a yawl:Method ;
+    rdfs:label "applySimpleTypeFacets" ;
+    yawl:returnType "void" ;
+    yawl:signature "void applySimpleTypeFacets(Element simple, Namespace ns, DynFormField field)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldAssembler.addSimpleContents
+yawl:DynFormFieldAssembler_addSimpleContents_14 a yawl:Method ;
+    rdfs:label "addSimpleContents" ;
+    yawl:returnType "List" ;
+    yawl:signature "List addSimpleContents(List simpleContents, List subFieldList)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldAssembler.getInitialInstanceCount
+yawl:DynFormFieldAssembler_getInitialInstanceCount_15 a yawl:Method ;
+    rdfs:label "getInitialInstanceCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getInitialInstanceCount(String min, Element data, String dataName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldAssembler.getIteratedContent
+yawl:DynFormFieldAssembler_getIteratedContent_16 a yawl:Method ;
+    rdfs:label "getIteratedContent" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getIteratedContent(Element data, int index, String name)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldAssembler.setOrderForListItems
+yawl:DynFormFieldAssembler_setOrderForListItems_17 a yawl:Method ;
+    rdfs:label "setOrderForListItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setOrderForListItems(List list, int order)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldAssembler.isCloneableField
+yawl:DynFormFieldAssembler_isCloneableField_18 a yawl:Method ;
+    rdfs:label "isCloneableField" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isCloneableField(String minoccurs, String maxoccurs)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldAssembler.getNextGroupID
+yawl:DynFormFieldAssembler_getNextGroupID_19 a yawl:Method ;
+    rdfs:label "getNextGroupID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNextGroupID()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldAssembler.getNextChoiceID
+yawl:DynFormFieldAssembler_getNextChoiceID_20 a yawl:Method ;
+    rdfs:label "getNextChoiceID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getNextChoiceID()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldAssembler.getAttributeMap
+yawl:DynFormFieldAssembler_getAttributeMap_21 a yawl:Method ;
+    rdfs:label "getAttributeMap" ;
+    yawl:returnType "YAttributeMap" ;
+    yawl:signature "YAttributeMap getAttributeMap(String name)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldAssembler.getAppInfo
+yawl:DynFormFieldAssembler_getAppInfo_22 a yawl:Method ;
+    rdfs:label "getAppInfo" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getAppInfo(Element eField)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DynFormFieldAssembler.getFormName
+yawl:DynFormFieldAssembler_getFormName_23 a yawl:Method ;
+    rdfs:label "getFormName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFormName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DynFormFieldAssembler.getFieldList
+yawl:DynFormFieldAssembler_getFieldList_24 a yawl:Method ;
+    rdfs:label "getFieldList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getFieldList()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:DynFormFieldAssembler__formName a yawl:Field ;
+    rdfs:label "_formName" .
+
+yawl:DynFormFieldAssembler__params a yawl:Field ;
+    rdfs:label "_params" .
+
+yawl:DynFormFieldAssembler__currentParam a yawl:Field ;
+    rdfs:label "_currentParam" .
+
+yawl:DynFormFieldAssembler__fieldList a yawl:Field ;
+    rdfs:label "_fieldList" .
+
+yawl:DynFormFieldAssembler__uniqueSuffix a yawl:Field ;
+    rdfs:label "_uniqueSuffix" .
+
+
+

@@ -1,0 +1,263 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.update.ChecksumsReader
+yawl:ChecksumsReader a yawl:Class ;
+    rdfs:label "ChecksumsReader" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_update ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/update/ChecksumsReader.java"^^xsd:string ;
+    rdfs:comment """Read methods for checksums.xml @author Michael Adams @date 12/08/2014""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ChecksumsReader_getVersion_1 ;
+    yawl:hasMethod yawl:ChecksumsReader_getNode_2 ;
+    yawl:hasMethod yawl:ChecksumsReader_getTimestamp_3 ;
+    yawl:hasMethod yawl:ChecksumsReader_getLibNode_4 ;
+    yawl:hasMethod yawl:ChecksumsReader_getWebAppsNode_5 ;
+    yawl:hasMethod yawl:ChecksumsReader_getAppNode_6 ;
+    yawl:hasMethod yawl:ChecksumsReader_getControlPanelNode_7 ;
+    yawl:hasMethod yawl:ChecksumsReader_getControlPanelFileNode_8 ;
+    yawl:hasMethod yawl:ChecksumsReader_getAppFileList_9 ;
+    yawl:hasMethod yawl:ChecksumsReader_getAppLibList_10 ;
+    yawl:hasMethod yawl:ChecksumsReader_getLibHash_11 ;
+    yawl:hasMethod yawl:ChecksumsReader_getLibList_12 ;
+    yawl:hasMethod yawl:ChecksumsReader_getLibMap_13 ;
+    yawl:hasMethod yawl:ChecksumsReader_getWebappsList_14 ;
+    yawl:hasMethod yawl:ChecksumsReader_getWebAppNames_15 ;
+    yawl:hasMethod yawl:ChecksumsReader_getRequiredLibs_16 ;
+    yawl:hasMethod yawl:ChecksumsReader_getBuildNumber_17 ;
+    yawl:hasMethod yawl:ChecksumsReader_getYawlLibNode_18 ;
+    yawl:hasMethod yawl:ChecksumsReader_getYawlLibHash_19 ;
+    yawl:hasMethod yawl:ChecksumsReader_getControlPanelHash_20 ;
+    yawl:hasMethod yawl:ChecksumsReader_getAppList_21 ;
+    yawl:hasMethod yawl:ChecksumsReader_getRequiredLibNames_22 ;
+    yawl:hasMethod yawl:ChecksumsReader_load_23 ;
+    yawl:hasMethod yawl:ChecksumsReader_getValue_24 ;
+    yawl:hasMethod yawl:ChecksumsReader_getChildren_25 ;
+    yawl:hasMethod yawl:ChecksumsReader_isIgnoredApp_26 ;
+    yawl:hasField yawl:ChecksumsReader__ignoredApps ;
+    yawl:hasField yawl:ChecksumsReader__root ;
+    .
+
+
+# Method: ChecksumsReader.getVersion
+yawl:ChecksumsReader_getVersion_1 a yawl:Method ;
+    rdfs:label "getVersion" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getVersion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ChecksumsReader.getNode
+yawl:ChecksumsReader_getNode_2 a yawl:Method ;
+    rdfs:label "getNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getNode(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ChecksumsReader.getTimestamp
+yawl:ChecksumsReader_getTimestamp_3 a yawl:Method ;
+    rdfs:label "getTimestamp" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTimestamp()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ChecksumsReader.getLibNode
+yawl:ChecksumsReader_getLibNode_4 a yawl:Method ;
+    rdfs:label "getLibNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getLibNode()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ChecksumsReader.getWebAppsNode
+yawl:ChecksumsReader_getWebAppsNode_5 a yawl:Method ;
+    rdfs:label "getWebAppsNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getWebAppsNode()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ChecksumsReader.getAppNode
+yawl:ChecksumsReader_getAppNode_6 a yawl:Method ;
+    rdfs:label "getAppNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getAppNode(String appName)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ChecksumsReader.getControlPanelNode
+yawl:ChecksumsReader_getControlPanelNode_7 a yawl:Method ;
+    rdfs:label "getControlPanelNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getControlPanelNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ChecksumsReader.getControlPanelFileNode
+yawl:ChecksumsReader_getControlPanelFileNode_8 a yawl:Method ;
+    rdfs:label "getControlPanelFileNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getControlPanelFileNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ChecksumsReader.getAppFileList
+yawl:ChecksumsReader_getAppFileList_9 a yawl:Method ;
+    rdfs:label "getAppFileList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAppFileList(String appName)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ChecksumsReader.getAppLibList
+yawl:ChecksumsReader_getAppLibList_10 a yawl:Method ;
+    rdfs:label "getAppLibList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAppLibList(String appName)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ChecksumsReader.getLibHash
+yawl:ChecksumsReader_getLibHash_11 a yawl:Method ;
+    rdfs:label "getLibHash" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLibHash()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ChecksumsReader.getLibList
+yawl:ChecksumsReader_getLibList_12 a yawl:Method ;
+    rdfs:label "getLibList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getLibList()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ChecksumsReader.getLibMap
+yawl:ChecksumsReader_getLibMap_13 a yawl:Method ;
+    rdfs:label "getLibMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getLibMap(PathResolver pathResolver)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ChecksumsReader.getWebappsList
+yawl:ChecksumsReader_getWebappsList_14 a yawl:Method ;
+    rdfs:label "getWebappsList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getWebappsList()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ChecksumsReader.getWebAppNames
+yawl:ChecksumsReader_getWebAppNames_15 a yawl:Method ;
+    rdfs:label "getWebAppNames" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getWebAppNames()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ChecksumsReader.getRequiredLibs
+yawl:ChecksumsReader_getRequiredLibs_16 a yawl:Method ;
+    rdfs:label "getRequiredLibs" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getRequiredLibs(List appNames)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ChecksumsReader.getBuildNumber
+yawl:ChecksumsReader_getBuildNumber_17 a yawl:Method ;
+    rdfs:label "getBuildNumber" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBuildNumber(String appName)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ChecksumsReader.getYawlLibNode
+yawl:ChecksumsReader_getYawlLibNode_18 a yawl:Method ;
+    rdfs:label "getYawlLibNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getYawlLibNode()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ChecksumsReader.getYawlLibHash
+yawl:ChecksumsReader_getYawlLibHash_19 a yawl:Method ;
+    rdfs:label "getYawlLibHash" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getYawlLibHash()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ChecksumsReader.getControlPanelHash
+yawl:ChecksumsReader_getControlPanelHash_20 a yawl:Method ;
+    rdfs:label "getControlPanelHash" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getControlPanelHash()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: ChecksumsReader.getAppList
+yawl:ChecksumsReader_getAppList_21 a yawl:Method ;
+    rdfs:label "getAppList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAppList(String appName, String childName)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ChecksumsReader.getRequiredLibNames
+yawl:ChecksumsReader_getRequiredLibNames_22 a yawl:Method ;
+    rdfs:label "getRequiredLibNames" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getRequiredLibNames(List appNames)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ChecksumsReader.load
+yawl:ChecksumsReader_load_23 a yawl:Method ;
+    rdfs:label "load" ;
+    yawl:returnType "void" ;
+    yawl:signature "void load(File checkSumsFile)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ChecksumsReader.getValue
+yawl:ChecksumsReader_getValue_24 a yawl:Method ;
+    rdfs:label "getValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getValue(XNode node, String key)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ChecksumsReader.getChildren
+yawl:ChecksumsReader_getChildren_25 a yawl:Method ;
+    rdfs:label "getChildren" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getChildren(XNode node)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: ChecksumsReader.isIgnoredApp
+yawl:ChecksumsReader_isIgnoredApp_26 a yawl:Method ;
+    rdfs:label "isIgnoredApp" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isIgnoredApp(String appName)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:ChecksumsReader__ignoredApps a yawl:Field ;
+    rdfs:label "_ignoredApps" .
+
+yawl:ChecksumsReader__root a yawl:Field ;
+    rdfs:label "_root" .
+
+
+

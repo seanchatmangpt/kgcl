@@ -1,0 +1,241 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.YSpecificationID
+yawl:YSpecificationID a yawl:Class ;
+    rdfs:label "YSpecificationID" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/YSpecificationID.java"^^xsd:string ;
+    rdfs:comment """The unique identifier of a specification. <p/> NOTE: For schema versions prior to 2.0, the spec's uri was used as its identifier, but since a user-defined uri cannot guarantee uniqueness, the identifier field was introduced for v2.0 (which will theoretically always be unique). Specification versioning was also introduced in v2.0. Therefore, to handle specifications of different schema versions: - all pre-2.0 schema based specifications are given a default version of '0.1' - all pre-2.0 schema ba""" ;
+    yawl:implements yawl:Comparable ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YSpecificationID_getIdentifier_1 ;
+    yawl:hasMethod yawl:YSpecificationID_getVersionAsString_2 ;
+    yawl:hasMethod yawl:YSpecificationID_getVersion_3 ;
+    yawl:hasMethod yawl:YSpecificationID_getUri_4 ;
+    yawl:hasMethod yawl:YSpecificationID_getKey_5 ;
+    yawl:hasMethod yawl:YSpecificationID_setIdentifier_6 ;
+    yawl:hasMethod yawl:YSpecificationID_setVersion_7 ;
+    yawl:hasMethod yawl:YSpecificationID_setVersion_8 ;
+    yawl:hasMethod yawl:YSpecificationID_setUri_9 ;
+    yawl:hasMethod yawl:YSpecificationID_isValid_10 ;
+    yawl:hasMethod yawl:YSpecificationID_isPreviousVersionOf_11 ;
+    yawl:hasMethod yawl:YSpecificationID_hasMatchingIdentifier_12 ;
+    yawl:hasMethod yawl:YSpecificationID_equals_13 ;
+    yawl:hasMethod yawl:YSpecificationID_hashCode_14 ;
+    yawl:hasMethod yawl:YSpecificationID_toString_15 ;
+    yawl:hasMethod yawl:YSpecificationID_toKeyString_16 ;
+    yawl:hasMethod yawl:YSpecificationID_toFullString_17 ;
+    yawl:hasMethod yawl:YSpecificationID_fromFullString_18 ;
+    yawl:hasMethod yawl:YSpecificationID_compareTo_19 ;
+    yawl:hasMethod yawl:YSpecificationID_toMap_20 ;
+    yawl:hasMethod yawl:YSpecificationID_toXNode_21 ;
+    yawl:hasMethod yawl:YSpecificationID_fromXNode_22 ;
+    yawl:hasMethod yawl:YSpecificationID_toXML_23 ;
+    yawl:hasField yawl:YSpecificationID_identifier ;
+    yawl:hasField yawl:YSpecificationID_version ;
+    yawl:hasField yawl:YSpecificationID_uri ;
+    .
+
+
+# Method: YSpecificationID.getIdentifier
+yawl:YSpecificationID_getIdentifier_1 a yawl:Method ;
+    rdfs:label "getIdentifier" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getIdentifier()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationID.getVersionAsString
+yawl:YSpecificationID_getVersionAsString_2 a yawl:Method ;
+    rdfs:label "getVersionAsString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getVersionAsString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationID.getVersion
+yawl:YSpecificationID_getVersion_3 a yawl:Method ;
+    rdfs:label "getVersion" ;
+    yawl:returnType "YSpecVersion" ;
+    yawl:signature "YSpecVersion getVersion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationID.getUri
+yawl:YSpecificationID_getUri_4 a yawl:Method ;
+    rdfs:label "getUri" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUri()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationID.getKey
+yawl:YSpecificationID_getKey_5 a yawl:Method ;
+    rdfs:label "getKey" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getKey()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationID.setIdentifier
+yawl:YSpecificationID_setIdentifier_6 a yawl:Method ;
+    rdfs:label "setIdentifier" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setIdentifier(String identifier)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationID.setVersion
+yawl:YSpecificationID_setVersion_7 a yawl:Method ;
+    rdfs:label "setVersion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setVersion(String ver)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationID.setVersion
+yawl:YSpecificationID_setVersion_8 a yawl:Method ;
+    rdfs:label "setVersion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setVersion(YSpecVersion ver)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationID.setUri
+yawl:YSpecificationID_setUri_9 a yawl:Method ;
+    rdfs:label "setUri" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUri(String n)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationID.isValid
+yawl:YSpecificationID_isValid_10 a yawl:Method ;
+    rdfs:label "isValid" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isValid()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationID.isPreviousVersionOf
+yawl:YSpecificationID_isPreviousVersionOf_11 a yawl:Method ;
+    rdfs:label "isPreviousVersionOf" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isPreviousVersionOf(YSpecificationID other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationID.hasMatchingIdentifier
+yawl:YSpecificationID_hasMatchingIdentifier_12 a yawl:Method ;
+    rdfs:label "hasMatchingIdentifier" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasMatchingIdentifier(YSpecificationID other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationID.equals
+yawl:YSpecificationID_equals_13 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object obj)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationID.hashCode
+yawl:YSpecificationID_hashCode_14 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationID.toString
+yawl:YSpecificationID_toString_15 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationID.toKeyString
+yawl:YSpecificationID_toKeyString_16 a yawl:Method ;
+    rdfs:label "toKeyString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toKeyString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationID.toFullString
+yawl:YSpecificationID_toFullString_17 a yawl:Method ;
+    rdfs:label "toFullString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toFullString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationID.fromFullString
+yawl:YSpecificationID_fromFullString_18 a yawl:Method ;
+    rdfs:label "fromFullString" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID fromFullString(String s)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationID.compareTo
+yawl:YSpecificationID_compareTo_19 a yawl:Method ;
+    rdfs:label "compareTo" ;
+    yawl:returnType "int" ;
+    yawl:signature "int compareTo(YSpecificationID other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationID.toMap
+yawl:YSpecificationID_toMap_20 a yawl:Method ;
+    rdfs:label "toMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map toMap()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationID.toXNode
+yawl:YSpecificationID_toXNode_21 a yawl:Method ;
+    rdfs:label "toXNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode toXNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationID.fromXNode
+yawl:YSpecificationID_fromXNode_22 a yawl:Method ;
+    rdfs:label "fromXNode" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID fromXNode(XNode node)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecificationID.toXML
+yawl:YSpecificationID_toXML_23 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YSpecificationID_identifier a yawl:Field ;
+    rdfs:label "identifier" .
+
+yawl:YSpecificationID_version a yawl:Field ;
+    rdfs:label "version" .
+
+yawl:YSpecificationID_uri a yawl:Field ;
+    rdfs:label "uri" .
+
+
+

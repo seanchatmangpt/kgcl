@@ -1,0 +1,71 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.blockType.BlockFO
+yawl:BlockFO a yawl:Class ;
+    rdfs:label "BlockFO" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_blockType ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/blockType/BlockFO.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:BlockFO_calculateRelations_1 ;
+    yawl:hasMethod yawl:BlockFO_checkSourceNodeExecuted_2 ;
+    yawl:hasMethod yawl:BlockFO_calcPerformativesOut_3 ;
+    yawl:hasMethod yawl:BlockFO_main_4 ;
+    yawl:hasField yawl:BlockFO_wir ;
+    yawl:hasField yawl:BlockFO_block ;
+    yawl:hasField yawl:BlockFO_myLog ;
+    .
+
+
+# Method: BlockFO.calculateRelations
+yawl:BlockFO_calculateRelations_1 a yawl:Method ;
+    rdfs:label "calculateRelations" ;
+    yawl:returnType "List" ;
+    yawl:signature "List calculateRelations(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockFO.checkSourceNodeExecuted
+yawl:BlockFO_checkSourceNodeExecuted_2 a yawl:Method ;
+    rdfs:label "checkSourceNodeExecuted" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkSourceNodeExecuted(String classID, String procletID, String blockID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: BlockFO.calcPerformativesOut
+yawl:BlockFO_calcPerformativesOut_3 a yawl:Method ;
+    rdfs:label "calcPerformativesOut" ;
+    yawl:returnType "List" ;
+    yawl:signature "List calcPerformativesOut(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: BlockFO.main
+yawl:BlockFO_main_4 a yawl:Method ;
+    rdfs:label "main" ;
+    yawl:returnType "void" ;
+    yawl:signature "void main(String args)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:BlockFO_wir a yawl:Field ;
+    rdfs:label "wir" .
+
+yawl:BlockFO_block a yawl:Field ;
+    rdfs:label "block" .
+
+yawl:BlockFO_myLog a yawl:Field ;
+    rdfs:label "myLog" .
+
+
+

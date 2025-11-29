@@ -1,0 +1,45 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.swingWorklist.WorkListPopupMenu
+yawl:WorkListPopupMenu a yawl:Class ;
+    rdfs:label "WorkListPopupMenu" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_swingWorklist ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/swingWorklist/YWorklistGUI.java"^^xsd:string ;
+    yawl:extends yawl:JPopupMenu ;
+    yawl:hasMethod yawl:WorkListPopupMenu_setVisibityOfMenuItems_1 ;
+    yawl:hasField yawl:WorkListPopupMenu__completionItem ;
+    yawl:hasField yawl:WorkListPopupMenu__viewDataItem ;
+    yawl:hasField yawl:WorkListPopupMenu__newInstanceItem ;
+    yawl:hasField yawl:WorkListPopupMenu__cancelItem ;
+    .
+
+
+# Method: WorkListPopupMenu.setVisibityOfMenuItems
+yawl:WorkListPopupMenu_setVisibityOfMenuItems_1 a yawl:Method ;
+    rdfs:label "setVisibityOfMenuItems" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setVisibityOfMenuItems(int rowSelected)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:WorkListPopupMenu__completionItem a yawl:Field ;
+    rdfs:label "_completionItem" .
+
+yawl:WorkListPopupMenu__viewDataItem a yawl:Field ;
+    rdfs:label "_viewDataItem" .
+
+yawl:WorkListPopupMenu__newInstanceItem a yawl:Field ;
+    rdfs:label "_newInstanceItem" .
+
+yawl:WorkListPopupMenu__cancelItem a yawl:Field ;
+    rdfs:label "_cancelItem" .
+
+
+

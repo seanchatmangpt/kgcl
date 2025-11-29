@@ -1,0 +1,208 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.logging.table.YLogDataItemInstance
+yawl:YLogDataItemInstance a yawl:Class ;
+    rdfs:label "YLogDataItemInstance" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_logging_table ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/logging/table/YLogDataItemInstance.java"^^xsd:string ;
+    rdfs:comment """One row of the logDataItem table, representing a data item associated with an event. Note that an event may have a number of data items associated with it. Author: Michael Adams Creation Date: 6/04/2009""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YLogDataItemInstance_getDataItemID_1 ;
+    yawl:hasMethod yawl:YLogDataItemInstance_setDataItemID_2 ;
+    yawl:hasMethod yawl:YLogDataItemInstance_getEventID_3 ;
+    yawl:hasMethod yawl:YLogDataItemInstance_setEventID_4 ;
+    yawl:hasMethod yawl:YLogDataItemInstance_getDataItem_5 ;
+    yawl:hasMethod yawl:YLogDataItemInstance_setDataItem_6 ;
+    yawl:hasMethod yawl:YLogDataItemInstance_getDataTypeID_7 ;
+    yawl:hasMethod yawl:YLogDataItemInstance_setDataTypeID_8 ;
+    yawl:hasMethod yawl:YLogDataItemInstance_getName_9 ;
+    yawl:hasMethod yawl:YLogDataItemInstance_setName_10 ;
+    yawl:hasMethod yawl:YLogDataItemInstance_getValue_11 ;
+    yawl:hasMethod yawl:YLogDataItemInstance_setValue_12 ;
+    yawl:hasMethod yawl:YLogDataItemInstance_getDataType_13 ;
+    yawl:hasMethod yawl:YLogDataItemInstance_setDataType_14 ;
+    yawl:hasMethod yawl:YLogDataItemInstance_getDescriptor_15 ;
+    yawl:hasMethod yawl:YLogDataItemInstance_setDescriptor_16 ;
+    yawl:hasMethod yawl:YLogDataItemInstance_equals_17 ;
+    yawl:hasMethod yawl:YLogDataItemInstance_hashCode_18 ;
+    yawl:hasMethod yawl:YLogDataItemInstance_toXML_19 ;
+    yawl:hasField yawl:YLogDataItemInstance_dataItemID ;
+    yawl:hasField yawl:YLogDataItemInstance_eventID ;
+    yawl:hasField yawl:YLogDataItemInstance_dataItem ;
+    yawl:hasField yawl:YLogDataItemInstance_dataTypeID ;
+    .
+
+
+# Method: YLogDataItemInstance.getDataItemID
+yawl:YLogDataItemInstance_getDataItemID_1 a yawl:Method ;
+    rdfs:label "getDataItemID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getDataItemID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogDataItemInstance.setDataItemID
+yawl:YLogDataItemInstance_setDataItemID_2 a yawl:Method ;
+    rdfs:label "setDataItemID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataItemID(long dataItemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogDataItemInstance.getEventID
+yawl:YLogDataItemInstance_getEventID_3 a yawl:Method ;
+    rdfs:label "getEventID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getEventID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogDataItemInstance.setEventID
+yawl:YLogDataItemInstance_setEventID_4 a yawl:Method ;
+    rdfs:label "setEventID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEventID(long eventID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogDataItemInstance.getDataItem
+yawl:YLogDataItemInstance_getDataItem_5 a yawl:Method ;
+    rdfs:label "getDataItem" ;
+    yawl:returnType "YLogDataItem" ;
+    yawl:signature "YLogDataItem getDataItem()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogDataItemInstance.setDataItem
+yawl:YLogDataItemInstance_setDataItem_6 a yawl:Method ;
+    rdfs:label "setDataItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataItem(YLogDataItem dataItem)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogDataItemInstance.getDataTypeID
+yawl:YLogDataItemInstance_getDataTypeID_7 a yawl:Method ;
+    rdfs:label "getDataTypeID" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getDataTypeID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogDataItemInstance.setDataTypeID
+yawl:YLogDataItemInstance_setDataTypeID_8 a yawl:Method ;
+    rdfs:label "setDataTypeID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataTypeID(long dataTypeID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogDataItemInstance.getName
+yawl:YLogDataItemInstance_getName_9 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogDataItemInstance.setName
+yawl:YLogDataItemInstance_setName_10 a yawl:Method ;
+    rdfs:label "setName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogDataItemInstance.getValue
+yawl:YLogDataItemInstance_getValue_11 a yawl:Method ;
+    rdfs:label "getValue" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getValue()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogDataItemInstance.setValue
+yawl:YLogDataItemInstance_setValue_12 a yawl:Method ;
+    rdfs:label "setValue" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setValue(String value)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogDataItemInstance.getDataType
+yawl:YLogDataItemInstance_getDataType_13 a yawl:Method ;
+    rdfs:label "getDataType" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogDataItemInstance.setDataType
+yawl:YLogDataItemInstance_setDataType_14 a yawl:Method ;
+    rdfs:label "setDataType" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataType(String dataType)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogDataItemInstance.getDescriptor
+yawl:YLogDataItemInstance_getDescriptor_15 a yawl:Method ;
+    rdfs:label "getDescriptor" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDescriptor()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogDataItemInstance.setDescriptor
+yawl:YLogDataItemInstance_setDescriptor_16 a yawl:Method ;
+    rdfs:label "setDescriptor" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDescriptor(String descriptor)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogDataItemInstance.equals
+yawl:YLogDataItemInstance_equals_17 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogDataItemInstance.hashCode
+yawl:YLogDataItemInstance_hashCode_18 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YLogDataItemInstance.toXML
+yawl:YLogDataItemInstance_toXML_19 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YLogDataItemInstance_dataItemID a yawl:Field ;
+    rdfs:label "dataItemID" .
+
+yawl:YLogDataItemInstance_eventID a yawl:Field ;
+    rdfs:label "eventID" .
+
+yawl:YLogDataItemInstance_dataItem a yawl:Field ;
+    rdfs:label "dataItem" .
+
+yawl:YLogDataItemInstance_dataTypeID a yawl:Field ;
+    rdfs:label "dataTypeID" .
+
+
+

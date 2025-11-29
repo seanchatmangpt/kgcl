@@ -1,0 +1,34 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.extra.ClusterVertexSizeFunction
+yawl:ClusterVertexSizeFunction a yawl:Class ;
+    rdfs:label "ClusterVertexSizeFunction" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor_extra ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/extra/TreeCollapseDemo.java"^^xsd:string ;
+    rdfs:comment """A demo class that will make vertices larger if they represent a collapsed collection of original vertices @author Tom Nelson @param <V>""" ;
+    yawl:implements yawl:Transformer ;
+    yawl:hasMethod yawl:ClusterVertexSizeFunction_transform_1 ;
+    yawl:hasField yawl:ClusterVertexSizeFunction_size ;
+    .
+
+
+# Method: ClusterVertexSizeFunction.transform
+yawl:ClusterVertexSizeFunction_transform_1 a yawl:Method ;
+    rdfs:label "transform" ;
+    yawl:returnType "Integer" ;
+    yawl:signature "Integer transform(V v)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:ClusterVertexSizeFunction_size a yawl:Field ;
+    rdfs:label "size" .
+
+
+

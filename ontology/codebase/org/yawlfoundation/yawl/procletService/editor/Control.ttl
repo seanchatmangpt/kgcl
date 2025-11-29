@@ -1,0 +1,112 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.Control
+yawl:Control a yawl:Class ;
+    rdfs:label "Control" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/Control.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Control_getBlockControl_1 ;
+    yawl:hasMethod yawl:Control_getModelControl_2 ;
+    yawl:hasMethod yawl:Control_getPConnsControl_3 ;
+    yawl:hasMethod yawl:Control_getExceptionChoiceControl_4 ;
+    yawl:hasMethod yawl:Control_getBlockExceptionChoiceControl_5 ;
+    yawl:hasMethod yawl:Control_getGraphControl_6 ;
+    yawl:hasMethod yawl:Control_singleton_7 ;
+    yawl:hasField yawl:Control_instance ;
+    yawl:hasField yawl:Control_block ;
+    yawl:hasField yawl:Control_model ;
+    yawl:hasField yawl:Control_pconns ;
+    yawl:hasField yawl:Control_excChoice ;
+    yawl:hasField yawl:Control_blockExcChoice ;
+    yawl:hasField yawl:Control_graphControl ;
+    .
+
+
+# Method: Control.getBlockControl
+yawl:Control_getBlockControl_1 a yawl:Method ;
+    rdfs:label "getBlockControl" ;
+    yawl:returnType "BlockControl" ;
+    yawl:signature "BlockControl getBlockControl()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Control.getModelControl
+yawl:Control_getModelControl_2 a yawl:Method ;
+    rdfs:label "getModelControl" ;
+    yawl:returnType "ModelControl" ;
+    yawl:signature "ModelControl getModelControl()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Control.getPConnsControl
+yawl:Control_getPConnsControl_3 a yawl:Method ;
+    rdfs:label "getPConnsControl" ;
+    yawl:returnType "PConnsControl" ;
+    yawl:signature "PConnsControl getPConnsControl()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Control.getExceptionChoiceControl
+yawl:Control_getExceptionChoiceControl_4 a yawl:Method ;
+    rdfs:label "getExceptionChoiceControl" ;
+    yawl:returnType "ExceptionChoiceControl" ;
+    yawl:signature "ExceptionChoiceControl getExceptionChoiceControl()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Control.getBlockExceptionChoiceControl
+yawl:Control_getBlockExceptionChoiceControl_5 a yawl:Method ;
+    rdfs:label "getBlockExceptionChoiceControl" ;
+    yawl:returnType "BlockExceptionChoiceControl" ;
+    yawl:signature "BlockExceptionChoiceControl getBlockExceptionChoiceControl()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Control.getGraphControl
+yawl:Control_getGraphControl_6 a yawl:Method ;
+    rdfs:label "getGraphControl" ;
+    yawl:returnType "GraphControl" ;
+    yawl:signature "GraphControl getGraphControl()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Control.singleton
+yawl:Control_singleton_7 a yawl:Method ;
+    rdfs:label "singleton" ;
+    yawl:returnType "Control" ;
+    yawl:signature "Control singleton()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:Control_instance a yawl:Field ;
+    rdfs:label "instance" .
+
+yawl:Control_block a yawl:Field ;
+    rdfs:label "block" .
+
+yawl:Control_model a yawl:Field ;
+    rdfs:label "model" .
+
+yawl:Control_pconns a yawl:Field ;
+    rdfs:label "pconns" .
+
+yawl:Control_excChoice a yawl:Field ;
+    rdfs:label "excChoice" .
+
+yawl:Control_blockExcChoice a yawl:Field ;
+    rdfs:label "blockExcChoice" .
+
+yawl:Control_graphControl a yawl:Field ;
+    rdfs:label "graphControl" .
+
+
+

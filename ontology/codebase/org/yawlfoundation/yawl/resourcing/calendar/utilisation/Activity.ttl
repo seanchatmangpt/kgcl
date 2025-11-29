@@ -1,0 +1,399 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.calendar.utilisation.Activity
+yawl:Activity a yawl:Class ;
+    rdfs:label "Activity" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_calendar_utilisation ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/calendar/utilisation/Activity.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 6/10/2010""" ;
+    yawl:extends yawl:StatusMessage ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Activity_getName_1 ;
+    yawl:hasMethod yawl:Activity_setName_2 ;
+    yawl:hasMethod yawl:Activity_getType_3 ;
+    yawl:hasMethod yawl:Activity_setType_4 ;
+    yawl:hasMethod yawl:Activity_getStartTaskID_5 ;
+    yawl:hasMethod yawl:Activity_setStartTaskID_6 ;
+    yawl:hasMethod yawl:Activity_getEndTaskID_7 ;
+    yawl:hasMethod yawl:Activity_setEndTaskID_8 ;
+    yawl:hasMethod yawl:Activity_getPhase_9 ;
+    yawl:hasMethod yawl:Activity_setPhase_10 ;
+    yawl:hasMethod yawl:Activity_hasValidPhase_11 ;
+    yawl:hasMethod yawl:Activity_isSOU_12 ;
+    yawl:hasMethod yawl:Activity_isEOU_13 ;
+    yawl:hasMethod yawl:Activity_getFrom_14 ;
+    yawl:hasMethod yawl:Activity_setFrom_15 ;
+    yawl:hasMethod yawl:Activity_getFromAsLong_16 ;
+    yawl:hasMethod yawl:Activity_getTo_17 ;
+    yawl:hasMethod yawl:Activity_setTo_18 ;
+    yawl:hasMethod yawl:Activity_getToAsLong_19 ;
+    yawl:hasMethod yawl:Activity_getDuration_20 ;
+    yawl:hasMethod yawl:Activity_setDuration_21 ;
+    yawl:hasMethod yawl:Activity_getDurationMSecs_22 ;
+    yawl:hasMethod yawl:Activity_getReservationList_23 ;
+    yawl:hasMethod yawl:Activity_setReservationList_24 ;
+    yawl:hasMethod yawl:Activity_addReservation_25 ;
+    yawl:hasMethod yawl:Activity_removeReservation_26 ;
+    yawl:hasMethod yawl:Activity_hasReservation_27 ;
+    yawl:hasMethod yawl:Activity_getRelationList_28 ;
+    yawl:hasMethod yawl:Activity_setRelationList_29 ;
+    yawl:hasMethod yawl:Activity_getTransferList_30 ;
+    yawl:hasMethod yawl:Activity_setTransferList_31 ;
+    yawl:hasMethod yawl:Activity_hasErrors_32 ;
+    yawl:hasMethod yawl:Activity_reservationsHaveErrors_33 ;
+    yawl:hasMethod yawl:Activity_toXML_34 ;
+    yawl:hasMethod yawl:Activity_toXNode_35 ;
+    yawl:hasMethod yawl:Activity_fromXNode_36 ;
+    yawl:hasMethod yawl:Activity_getTime_37 ;
+    yawl:hasField yawl:Activity__name ;
+    yawl:hasField yawl:Activity__type ;
+    yawl:hasField yawl:Activity__startTaskID ;
+    yawl:hasField yawl:Activity__endTaskID ;
+    yawl:hasField yawl:Activity__phase ;
+    yawl:hasField yawl:Activity__from ;
+    yawl:hasField yawl:Activity__to ;
+    yawl:hasField yawl:Activity__duration ;
+    yawl:hasField yawl:Activity__reservationList ;
+    yawl:hasField yawl:Activity__relationList ;
+    yawl:hasField yawl:Activity__transferList ;
+    .
+
+
+# Method: Activity.getName
+yawl:Activity_getName_1 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.setName
+yawl:Activity_setName_2 a yawl:Method ;
+    rdfs:label "setName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.getType
+yawl:Activity_getType_3 a yawl:Method ;
+    rdfs:label "getType" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getType()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.setType
+yawl:Activity_setType_4 a yawl:Method ;
+    rdfs:label "setType" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setType(String type)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.getStartTaskID
+yawl:Activity_getStartTaskID_5 a yawl:Method ;
+    rdfs:label "getStartTaskID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStartTaskID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.setStartTaskID
+yawl:Activity_setStartTaskID_6 a yawl:Method ;
+    rdfs:label "setStartTaskID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStartTaskID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.getEndTaskID
+yawl:Activity_getEndTaskID_7 a yawl:Method ;
+    rdfs:label "getEndTaskID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEndTaskID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.setEndTaskID
+yawl:Activity_setEndTaskID_8 a yawl:Method ;
+    rdfs:label "setEndTaskID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEndTaskID(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.getPhase
+yawl:Activity_getPhase_9 a yawl:Method ;
+    rdfs:label "getPhase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPhase()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.setPhase
+yawl:Activity_setPhase_10 a yawl:Method ;
+    rdfs:label "setPhase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPhase(String phase)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.hasValidPhase
+yawl:Activity_hasValidPhase_11 a yawl:Method ;
+    rdfs:label "hasValidPhase" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasValidPhase()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.isSOU
+yawl:Activity_isSOU_12 a yawl:Method ;
+    rdfs:label "isSOU" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isSOU()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.isEOU
+yawl:Activity_isEOU_13 a yawl:Method ;
+    rdfs:label "isEOU" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEOU()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.getFrom
+yawl:Activity_getFrom_14 a yawl:Method ;
+    rdfs:label "getFrom" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getFrom()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.setFrom
+yawl:Activity_setFrom_15 a yawl:Method ;
+    rdfs:label "setFrom" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setFrom(String from)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.getFromAsLong
+yawl:Activity_getFromAsLong_16 a yawl:Method ;
+    rdfs:label "getFromAsLong" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getFromAsLong()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.getTo
+yawl:Activity_getTo_17 a yawl:Method ;
+    rdfs:label "getTo" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTo()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.setTo
+yawl:Activity_setTo_18 a yawl:Method ;
+    rdfs:label "setTo" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTo(String to)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.getToAsLong
+yawl:Activity_getToAsLong_19 a yawl:Method ;
+    rdfs:label "getToAsLong" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getToAsLong()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.getDuration
+yawl:Activity_getDuration_20 a yawl:Method ;
+    rdfs:label "getDuration" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDuration()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.setDuration
+yawl:Activity_setDuration_21 a yawl:Method ;
+    rdfs:label "setDuration" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDuration(String duration)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.getDurationMSecs
+yawl:Activity_getDurationMSecs_22 a yawl:Method ;
+    rdfs:label "getDurationMSecs" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getDurationMSecs()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.getReservationList
+yawl:Activity_getReservationList_23 a yawl:Method ;
+    rdfs:label "getReservationList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getReservationList()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.setReservationList
+yawl:Activity_setReservationList_24 a yawl:Method ;
+    rdfs:label "setReservationList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setReservationList(List list)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.addReservation
+yawl:Activity_addReservation_25 a yawl:Method ;
+    rdfs:label "addReservation" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean addReservation(Reservation r)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.removeReservation
+yawl:Activity_removeReservation_26 a yawl:Method ;
+    rdfs:label "removeReservation" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean removeReservation(Reservation r)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.hasReservation
+yawl:Activity_hasReservation_27 a yawl:Method ;
+    rdfs:label "hasReservation" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasReservation()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.getRelationList
+yawl:Activity_getRelationList_28 a yawl:Method ;
+    rdfs:label "getRelationList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getRelationList()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.setRelationList
+yawl:Activity_setRelationList_29 a yawl:Method ;
+    rdfs:label "setRelationList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRelationList(List list)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.getTransferList
+yawl:Activity_getTransferList_30 a yawl:Method ;
+    rdfs:label "getTransferList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getTransferList()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.setTransferList
+yawl:Activity_setTransferList_31 a yawl:Method ;
+    rdfs:label "setTransferList" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTransferList(List list)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.hasErrors
+yawl:Activity_hasErrors_32 a yawl:Method ;
+    rdfs:label "hasErrors" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasErrors()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.reservationsHaveErrors
+yawl:Activity_reservationsHaveErrors_33 a yawl:Method ;
+    rdfs:label "reservationsHaveErrors" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean reservationsHaveErrors()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.toXML
+yawl:Activity_toXML_34 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.toXNode
+yawl:Activity_toXNode_35 a yawl:Method ;
+    rdfs:label "toXNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode toXNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.fromXNode
+yawl:Activity_fromXNode_36 a yawl:Method ;
+    rdfs:label "fromXNode" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXNode(XNode node)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Activity.getTime
+yawl:Activity_getTime_37 a yawl:Method ;
+    rdfs:label "getTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getTime(StringWithMessage smTime)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:Activity__name a yawl:Field ;
+    rdfs:label "_name" .
+
+yawl:Activity__type a yawl:Field ;
+    rdfs:label "_type" .
+
+yawl:Activity__startTaskID a yawl:Field ;
+    rdfs:label "_startTaskID" .
+
+yawl:Activity__endTaskID a yawl:Field ;
+    rdfs:label "_endTaskID" .
+
+yawl:Activity__phase a yawl:Field ;
+    rdfs:label "_phase" .
+
+yawl:Activity__from a yawl:Field ;
+    rdfs:label "_from" .
+
+yawl:Activity__to a yawl:Field ;
+    rdfs:label "_to" .
+
+yawl:Activity__duration a yawl:Field ;
+    rdfs:label "_duration" .
+
+yawl:Activity__reservationList a yawl:Field ;
+    rdfs:label "_reservationList" .
+
+yawl:Activity__relationList a yawl:Field ;
+    rdfs:label "_relationList" .
+
+yawl:Activity__transferList a yawl:Field ;
+    rdfs:label "_transferList" .
+
+
+

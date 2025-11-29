@@ -1,0 +1,164 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.admin.AdminTasksManager
+yawl:AdminTasksManager a yawl:Class ;
+    rdfs:label "AdminTasksManager" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_admin ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/admin/AdminTasksManager.java"^^xsd:string ;
+    rdfs:comment """This class maintains a set of AdministrationTask instances - outstanding tasks for the Worklet Administrator to attend to. @author Michael Adams @version 0.8, 04-09/2006""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:AdminTasksManager_addTask_1 ;
+    yawl:hasMethod yawl:AdminTasksManager_addTask_2 ;
+    yawl:hasMethod yawl:AdminTasksManager_addTask_3 ;
+    yawl:hasMethod yawl:AdminTasksManager_removeTask_4 ;
+    yawl:hasMethod yawl:AdminTasksManager_getAllTasks_5 ;
+    yawl:hasMethod yawl:AdminTasksManager_getAllTasksAsList_6 ;
+    yawl:hasMethod yawl:AdminTasksManager_getTask_7 ;
+    yawl:hasMethod yawl:AdminTasksManager_getAdminTasksForType_8 ;
+    yawl:hasMethod yawl:AdminTasksManager_getAdminTaskByTitle_9 ;
+    yawl:hasMethod yawl:AdminTasksManager_getTaskTitlesForType_10 ;
+    yawl:hasMethod yawl:AdminTasksManager_getAllTaskTitles_11 ;
+    yawl:hasMethod yawl:AdminTasksManager_getTitlesFromList_12 ;
+    yawl:hasMethod yawl:AdminTasksManager_restore_13 ;
+    yawl:hasField yawl:AdminTasksManager__tasks ;
+    yawl:hasField yawl:AdminTasksManager__log ;
+    .
+
+
+# Method: AdminTasksManager.addTask
+yawl:AdminTasksManager_addTask_1 a yawl:Method ;
+    rdfs:label "addTask" ;
+    yawl:returnType "AdministrationTask" ;
+    yawl:signature "AdministrationTask addTask(String caseID, String title, String scenario, String process, int taskType)" ;
+    rdfs:comment """Creates a new tasks and adds it to the set of outstanding tasks @param caseID - id of the case that caused the task to be raised @param title - user supplied title for the task @param scenario - user supplied scenario describing the task @param process - user described suggestion of what the new process should do @param taskType - rejected selection or external exception @return the new AdministrationTask""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdminTasksManager.addTask
+yawl:AdminTasksManager_addTask_2 a yawl:Method ;
+    rdfs:label "addTask" ;
+    yawl:returnType "AdministrationTask" ;
+    yawl:signature "AdministrationTask addTask(String caseID, String itemID, String title, String scenario, String process, int taskType)" ;
+    rdfs:comment """this version is for item level tasks""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdminTasksManager.addTask
+yawl:AdminTasksManager_addTask_3 a yawl:Method ;
+    rdfs:label "addTask" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addTask(AdministrationTask task)" ;
+    rdfs:comment """Adds a task to the set of outstanding tasks @param task - the task to add""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdminTasksManager.removeTask
+yawl:AdminTasksManager_removeTask_4 a yawl:Method ;
+    rdfs:label "removeTask" ;
+    yawl:returnType "AdministrationTask" ;
+    yawl:signature "AdministrationTask removeTask(int id)" ;
+    rdfs:comment """Removes a task from the set of outstanding tasks @param id - the id number of the task to remove @return the removed task""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdminTasksManager.getAllTasks
+yawl:AdminTasksManager_getAllTasks_5 a yawl:Method ;
+    rdfs:label "getAllTasks" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getAllTasks()" ;
+    rdfs:comment """@return the set of outstanding tasks""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdminTasksManager.getAllTasksAsList
+yawl:AdminTasksManager_getAllTasksAsList_6 a yawl:Method ;
+    rdfs:label "getAllTasksAsList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAllTasksAsList()" ;
+    rdfs:comment """@return the set of outstanding tasks as an ArrayList""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdminTasksManager.getTask
+yawl:AdminTasksManager_getTask_7 a yawl:Method ;
+    rdfs:label "getTask" ;
+    yawl:returnType "AdministrationTask" ;
+    yawl:signature "AdministrationTask getTask(int id)" ;
+    rdfs:comment """Retrieves a task by its id number @param id - the id to retrieve @return the task the owns that id""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdminTasksManager.getAdminTasksForType
+yawl:AdminTasksManager_getAdminTasksForType_8 a yawl:Method ;
+    rdfs:label "getAdminTasksForType" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAdminTasksForType(int taskType)" ;
+    rdfs:comment """Retrieves a list of all outstanding tasks of the specified type @param taskType - the type of task to retrieve @return a list of all those tasks of the type specified""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdminTasksManager.getAdminTaskByTitle
+yawl:AdminTasksManager_getAdminTaskByTitle_9 a yawl:Method ;
+    rdfs:label "getAdminTaskByTitle" ;
+    yawl:returnType "AdministrationTask" ;
+    yawl:signature "AdministrationTask getAdminTaskByTitle(String taskTitle)" ;
+    rdfs:comment """Retrieves a task by its title @param taskTitle - the title of the task required @return the task that has that title""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdminTasksManager.getTaskTitlesForType
+yawl:AdminTasksManager_getTaskTitlesForType_10 a yawl:Method ;
+    rdfs:label "getTaskTitlesForType" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getTaskTitlesForType(int taskType)" ;
+    rdfs:comment """Retrieves a list of task titles for all tasks of the specified type @param taskType - the type of task to get the titles for @return a list of titles for that type""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdminTasksManager.getAllTaskTitles
+yawl:AdminTasksManager_getAllTaskTitles_11 a yawl:Method ;
+    rdfs:label "getAllTaskTitles" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAllTaskTitles()" ;
+    rdfs:comment """@return a list of all titles from all outstanding tasks""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: AdminTasksManager.getTitlesFromList
+yawl:AdminTasksManager_getTitlesFromList_12 a yawl:Method ;
+    rdfs:label "getTitlesFromList" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getTitlesFromList(Collection list)" ;
+    rdfs:comment """Retrieves a list of titles from the list of tasks passed @param list - a list of AdministrationTasks @return the list of titles of those tasks""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: AdminTasksManager.restore
+yawl:AdminTasksManager_restore_13 a yawl:Method ;
+    rdfs:label "restore" ;
+    yawl:returnType "void" ;
+    yawl:signature "void restore()" ;
+    rdfs:comment """rebuilds admin tasks from persistence""" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:AdminTasksManager__tasks a yawl:Field ;
+    rdfs:label "_tasks" .
+
+yawl:AdminTasksManager__log a yawl:Field ;
+    rdfs:label "_log" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_worklet_support a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.worklet.support" .
+
+

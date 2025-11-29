@@ -1,0 +1,134 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.SingleInstanceClass
+yawl:SingleInstanceClass a yawl:Class ;
+    rdfs:label "SingleInstanceClass" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/SingleInstanceClass.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:SingleInstanceClass_blockCase_1 ;
+    yawl:hasMethod yawl:SingleInstanceClass_isCaseBlocked_2 ;
+    yawl:hasMethod yawl:SingleInstanceClass_unblockCase_3 ;
+    yawl:hasMethod yawl:SingleInstanceClass_registerAndWait_4 ;
+    yawl:hasMethod yawl:SingleInstanceClass_registerAndWaitDuringNotify_5 ;
+    yawl:hasMethod yawl:SingleInstanceClass_notifyPerformativeListeners_6 ;
+    yawl:hasMethod yawl:SingleInstanceClass_done_7 ;
+    yawl:hasMethod yawl:SingleInstanceClass_unregister_8 ;
+    yawl:hasMethod yawl:SingleInstanceClass_getInstance_9 ;
+    yawl:hasField yawl:SingleInstanceClass_singleInstance ;
+    yawl:hasField yawl:SingleInstanceClass_registeredClasses ;
+    yawl:hasField yawl:SingleInstanceClass_mapping ;
+    yawl:hasField yawl:SingleInstanceClass_mappingDone ;
+    yawl:hasField yawl:SingleInstanceClass_mutex ;
+    yawl:hasField yawl:SingleInstanceClass_mutex2 ;
+    yawl:hasField yawl:SingleInstanceClass_mutex3 ;
+    yawl:hasField yawl:SingleInstanceClass_blockedCases ;
+    .
+
+
+# Method: SingleInstanceClass.blockCase
+yawl:SingleInstanceClass_blockCase_1 a yawl:Method ;
+    rdfs:label "blockCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void blockCase(String caseid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SingleInstanceClass.isCaseBlocked
+yawl:SingleInstanceClass_isCaseBlocked_2 a yawl:Method ;
+    rdfs:label "isCaseBlocked" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isCaseBlocked(String caseid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SingleInstanceClass.unblockCase
+yawl:SingleInstanceClass_unblockCase_3 a yawl:Method ;
+    rdfs:label "unblockCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void unblockCase(String caseid)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SingleInstanceClass.registerAndWait
+yawl:SingleInstanceClass_registerAndWait_4 a yawl:Method ;
+    rdfs:label "registerAndWait" ;
+    yawl:returnType "InternalRunner" ;
+    yawl:signature "InternalRunner registerAndWait(ThreadNotify thread, long w)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SingleInstanceClass.registerAndWaitDuringNotify
+yawl:SingleInstanceClass_registerAndWaitDuringNotify_5 a yawl:Method ;
+    rdfs:label "registerAndWaitDuringNotify" ;
+    yawl:returnType "InternalRunner" ;
+    yawl:signature "InternalRunner registerAndWaitDuringNotify(ThreadNotify thread, long w)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SingleInstanceClass.notifyPerformativeListeners
+yawl:SingleInstanceClass_notifyPerformativeListeners_6 a yawl:Method ;
+    rdfs:label "notifyPerformativeListeners" ;
+    yawl:returnType "void" ;
+    yawl:signature "void notifyPerformativeListeners(List perfs)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SingleInstanceClass.done
+yawl:SingleInstanceClass_done_7 a yawl:Method ;
+    rdfs:label "done" ;
+    yawl:returnType "void" ;
+    yawl:signature "void done(ThreadNotify notify)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SingleInstanceClass.unregister
+yawl:SingleInstanceClass_unregister_8 a yawl:Method ;
+    rdfs:label "unregister" ;
+    yawl:returnType "void" ;
+    yawl:signature "void unregister(ThreadNotify thread)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: SingleInstanceClass.getInstance
+yawl:SingleInstanceClass_getInstance_9 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "SingleInstanceClass" ;
+    yawl:signature "SingleInstanceClass getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:SingleInstanceClass_singleInstance a yawl:Field ;
+    rdfs:label "singleInstance" .
+
+yawl:SingleInstanceClass_registeredClasses a yawl:Field ;
+    rdfs:label "registeredClasses" .
+
+yawl:SingleInstanceClass_mapping a yawl:Field ;
+    rdfs:label "mapping" .
+
+yawl:SingleInstanceClass_mappingDone a yawl:Field ;
+    rdfs:label "mappingDone" .
+
+yawl:SingleInstanceClass_mutex a yawl:Field ;
+    rdfs:label "mutex" .
+
+yawl:SingleInstanceClass_mutex2 a yawl:Field ;
+    rdfs:label "mutex2" .
+
+yawl:SingleInstanceClass_mutex3 a yawl:Field ;
+    rdfs:label "mutex3" .
+
+yawl:SingleInstanceClass_blockedCases a yawl:Field ;
+    rdfs:label "blockedCases" .
+
+
+

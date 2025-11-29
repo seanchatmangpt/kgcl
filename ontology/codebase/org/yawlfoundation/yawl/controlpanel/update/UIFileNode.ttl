@@ -1,0 +1,29 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.update.UIFileNode
+yawl:UIFileNode a yawl:Class ;
+    rdfs:label "UIFileNode" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_update ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/update/YawlUiUpdater.java"^^xsd:string ;
+    yawl:extends yawl:FileNode ;
+    yawl:hasMethod yawl:UIFileNode_doUpdate_1 ;
+    .
+
+
+# Method: UIFileNode.doUpdate
+yawl:UIFileNode_doUpdate_1 a yawl:Method ;
+    rdfs:label "doUpdate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doUpdate(File tmpDir)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

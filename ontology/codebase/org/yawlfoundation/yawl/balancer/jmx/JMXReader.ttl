@@ -1,0 +1,172 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.balancer.jmx.JMXReader
+yawl:JMXReader a yawl:Class ;
+    rdfs:label "JMXReader" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer_jmx ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/jmx/JMXReader.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 21/6/17""" ;
+    yawl:extends yawl:Interface_Client ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:JMXReader_getAll_1 ;
+    yawl:hasMethod yawl:JMXReader_getAllToXML_2 ;
+    yawl:hasMethod yawl:JMXReader_getMemory_3 ;
+    yawl:hasMethod yawl:JMXReader_getThreads_4 ;
+    yawl:hasMethod yawl:JMXReader_getRequests_5 ;
+    yawl:hasMethod yawl:JMXReader_getExecutor_6 ;
+    yawl:hasMethod yawl:JMXReader_getSystem_7 ;
+    yawl:hasMethod yawl:JMXReader_getStatistics_8 ;
+    yawl:hasMethod yawl:JMXReader_execute_9 ;
+    yawl:hasMethod yawl:JMXReader_addIfNotNull_10 ;
+    yawl:hasMethod yawl:JMXReader_buildParams_11 ;
+    yawl:hasMethod yawl:JMXReader_parse_12 ;
+    yawl:hasField yawl:JMXReader_JOLOKIA_URL_TEMPLATE ;
+    yawl:hasField yawl:JMXReader_THREAD_BODY_TEMPLATE ;
+    yawl:hasField yawl:JMXReader_MEM_BODY ;
+    yawl:hasField yawl:JMXReader_REQ_BODY_TEMPLATE ;
+    yawl:hasField yawl:JMXReader_EXEC_BODY ;
+    yawl:hasField yawl:JMXReader_SYS_BODY ;
+    yawl:hasField yawl:JMXReader__jolokiaURL ;
+    yawl:hasField yawl:JMXReader__threadBody ;
+    yawl:hasField yawl:JMXReader__reqBody ;
+    .
+
+
+# Method: JMXReader.getAll
+yawl:JMXReader_getAll_1 a yawl:Method ;
+    rdfs:label "getAll" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getAll()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: JMXReader.getAllToXML
+yawl:JMXReader_getAllToXML_2 a yawl:Method ;
+    rdfs:label "getAllToXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAllToXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: JMXReader.getMemory
+yawl:JMXReader_getMemory_3 a yawl:Method ;
+    rdfs:label "getMemory" ;
+    yawl:returnType "JMXMemoryStatistics" ;
+    yawl:signature "JMXMemoryStatistics getMemory()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: JMXReader.getThreads
+yawl:JMXReader_getThreads_4 a yawl:Method ;
+    rdfs:label "getThreads" ;
+    yawl:returnType "JMXStatistics" ;
+    yawl:signature "JMXStatistics getThreads()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: JMXReader.getRequests
+yawl:JMXReader_getRequests_5 a yawl:Method ;
+    rdfs:label "getRequests" ;
+    yawl:returnType "JMXStatistics" ;
+    yawl:signature "JMXStatistics getRequests()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: JMXReader.getExecutor
+yawl:JMXReader_getExecutor_6 a yawl:Method ;
+    rdfs:label "getExecutor" ;
+    yawl:returnType "JMXStatistics" ;
+    yawl:signature "JMXStatistics getExecutor()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: JMXReader.getSystem
+yawl:JMXReader_getSystem_7 a yawl:Method ;
+    rdfs:label "getSystem" ;
+    yawl:returnType "JMXStatistics" ;
+    yawl:signature "JMXStatistics getSystem()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: JMXReader.getStatistics
+yawl:JMXReader_getStatistics_8 a yawl:Method ;
+    rdfs:label "getStatistics" ;
+    yawl:returnType "JMXStatistics" ;
+    yawl:signature "JMXStatistics getStatistics(String title, String body)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: JMXReader.execute
+yawl:JMXReader_execute_9 a yawl:Method ;
+    rdfs:label "execute" ;
+    yawl:returnType "String" ;
+    yawl:signature "String execute(String body)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: JMXReader.addIfNotNull
+yawl:JMXReader_addIfNotNull_10 a yawl:Method ;
+    rdfs:label "addIfNotNull" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addIfNotNull(List statsList, JMXStatistics stats)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: JMXReader.buildParams
+yawl:JMXReader_buildParams_11 a yawl:Method ;
+    rdfs:label "buildParams" ;
+    yawl:returnType "String" ;
+    yawl:signature "String buildParams(String mbean, List attributes)" ;
+    yawl:modifiers "protected" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: JMXReader.parse
+yawl:JMXReader_parse_12 a yawl:Method ;
+    rdfs:label "parse" ;
+    yawl:returnType "JSONObject" ;
+    yawl:signature "JSONObject parse(String s)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:JMXReader_JOLOKIA_URL_TEMPLATE a yawl:Field ;
+    rdfs:label "JOLOKIA_URL_TEMPLATE" .
+
+yawl:JMXReader_THREAD_BODY_TEMPLATE a yawl:Field ;
+    rdfs:label "THREAD_BODY_TEMPLATE" .
+
+yawl:JMXReader_MEM_BODY a yawl:Field ;
+    rdfs:label "MEM_BODY" .
+
+yawl:JMXReader_REQ_BODY_TEMPLATE a yawl:Field ;
+    rdfs:label "REQ_BODY_TEMPLATE" .
+
+yawl:JMXReader_EXEC_BODY a yawl:Field ;
+    rdfs:label "EXEC_BODY" .
+
+yawl:JMXReader_SYS_BODY a yawl:Field ;
+    rdfs:label "SYS_BODY" .
+
+yawl:JMXReader__jolokiaURL a yawl:Field ;
+    rdfs:label "_jolokiaURL" .
+
+yawl:JMXReader__threadBody a yawl:Field ;
+    rdfs:label "_threadBody" .
+
+yawl:JMXReader__reqBody a yawl:Field ;
+    rdfs:label "_reqBody" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_balancer_output a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.balancer.output" .
+
+

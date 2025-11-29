@@ -1,0 +1,246 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.monitor.MonitorClient
+yawl:MonitorClient a yawl:Class ;
+    rdfs:label "MonitorClient" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_monitor ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/monitor/MonitorClient.java"^^xsd:string ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:MonitorClient_getInstance_1 ;
+    yawl:hasMethod yawl:MonitorClient_initInterfaces_2 ;
+    yawl:hasMethod yawl:MonitorClient_getCases_3 ;
+    yawl:hasMethod yawl:MonitorClient_getWorkItems_4 ;
+    yawl:hasMethod yawl:MonitorClient_getParameters_5 ;
+    yawl:hasMethod yawl:MonitorClient_getStartupTime_6 ;
+    yawl:hasMethod yawl:MonitorClient_getCaseFromItemID_7 ;
+    yawl:hasMethod yawl:MonitorClient_connected_8 ;
+    yawl:hasMethod yawl:MonitorClient_getEngineHandle_9 ;
+    yawl:hasMethod yawl:MonitorClient_getResourceHandle_10 ;
+    yawl:hasMethod yawl:MonitorClient_validateUserCredentials_11 ;
+    yawl:hasMethod yawl:MonitorClient_checkForItemStarted_12 ;
+    yawl:hasMethod yawl:MonitorClient_login_13 ;
+    yawl:hasMethod yawl:MonitorClient_successful_14 ;
+    yawl:hasMethod yawl:MonitorClient_getCaseData_15 ;
+    yawl:hasMethod yawl:MonitorClient_getCaseEvent_16 ;
+    yawl:hasMethod yawl:MonitorClient_getServiceName_17 ;
+    yawl:hasMethod yawl:MonitorClient_getEventsForWorkItem_18 ;
+    yawl:hasMethod yawl:MonitorClient_getResourceEventsForWorkItem_19 ;
+    yawl:hasMethod yawl:MonitorClient_getCaseStartedBy_20 ;
+    yawl:hasField yawl:MonitorClient__engineHandle ;
+    yawl:hasField yawl:MonitorClient__resourceHandle ;
+    yawl:hasField yawl:MonitorClient__me ;
+    yawl:hasField yawl:MonitorClient__logClient ;
+    yawl:hasField yawl:MonitorClient__resLogClient ;
+    yawl:hasField yawl:MonitorClient__resClient ;
+    yawl:hasField yawl:MonitorClient__interfaceBClient ;
+    yawl:hasField yawl:MonitorClient__startupTime ;
+    yawl:hasField yawl:MonitorClient__engineUser ;
+    yawl:hasField yawl:MonitorClient__enginePassword ;
+    .
+
+
+# Method: MonitorClient.getInstance
+yawl:MonitorClient_getInstance_1 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "MonitorClient" ;
+    yawl:signature "MonitorClient getInstance()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: MonitorClient.initInterfaces
+yawl:MonitorClient_initInterfaces_2 a yawl:Method ;
+    rdfs:label "initInterfaces" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initInterfaces(Map urlMap)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: MonitorClient.getCases
+yawl:MonitorClient_getCases_3 a yawl:Method ;
+    rdfs:label "getCases" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getCases()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MonitorClient.getWorkItems
+yawl:MonitorClient_getWorkItems_4 a yawl:Method ;
+    rdfs:label "getWorkItems" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getWorkItems(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MonitorClient.getParameters
+yawl:MonitorClient_getParameters_5 a yawl:Method ;
+    rdfs:label "getParameters" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getParameters(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MonitorClient.getStartupTime
+yawl:MonitorClient_getStartupTime_6 a yawl:Method ;
+    rdfs:label "getStartupTime" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getStartupTime()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MonitorClient.getCaseFromItemID
+yawl:MonitorClient_getCaseFromItemID_7 a yawl:Method ;
+    rdfs:label "getCaseFromItemID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseFromItemID(String itemID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MonitorClient.connected
+yawl:MonitorClient_connected_8 a yawl:Method ;
+    rdfs:label "connected" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean connected(String handle)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MonitorClient.getEngineHandle
+yawl:MonitorClient_getEngineHandle_9 a yawl:Method ;
+    rdfs:label "getEngineHandle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEngineHandle()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MonitorClient.getResourceHandle
+yawl:MonitorClient_getResourceHandle_10 a yawl:Method ;
+    rdfs:label "getResourceHandle" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourceHandle()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MonitorClient.validateUserCredentials
+yawl:MonitorClient_validateUserCredentials_11 a yawl:Method ;
+    rdfs:label "validateUserCredentials" ;
+    yawl:returnType "String" ;
+    yawl:signature "String validateUserCredentials(String userid, String password)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MonitorClient.checkForItemStarted
+yawl:MonitorClient_checkForItemStarted_12 a yawl:Method ;
+    rdfs:label "checkForItemStarted" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkForItemStarted(String itemID, String caseID)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: MonitorClient.login
+yawl:MonitorClient_login_13 a yawl:Method ;
+    rdfs:label "login" ;
+    yawl:returnType "String" ;
+    yawl:signature "String login(String userid, String password)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MonitorClient.successful
+yawl:MonitorClient_successful_14 a yawl:Method ;
+    rdfs:label "successful" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean successful(String msg)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MonitorClient.getCaseData
+yawl:MonitorClient_getCaseData_15 a yawl:Method ;
+    rdfs:label "getCaseData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseData(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MonitorClient.getCaseEvent
+yawl:MonitorClient_getCaseEvent_16 a yawl:Method ;
+    rdfs:label "getCaseEvent" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseEvent(String caseID, String event)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MonitorClient.getServiceName
+yawl:MonitorClient_getServiceName_17 a yawl:Method ;
+    rdfs:label "getServiceName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getServiceName(long key)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MonitorClient.getEventsForWorkItem
+yawl:MonitorClient_getEventsForWorkItem_18 a yawl:Method ;
+    rdfs:label "getEventsForWorkItem" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getEventsForWorkItem(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MonitorClient.getResourceEventsForWorkItem
+yawl:MonitorClient_getResourceEventsForWorkItem_19 a yawl:Method ;
+    rdfs:label "getResourceEventsForWorkItem" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getResourceEventsForWorkItem(String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: MonitorClient.getCaseStartedBy
+yawl:MonitorClient_getCaseStartedBy_20 a yawl:Method ;
+    rdfs:label "getCaseStartedBy" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseStartedBy(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:MonitorClient__engineHandle a yawl:Field ;
+    rdfs:label "_engineHandle" .
+
+yawl:MonitorClient__resourceHandle a yawl:Field ;
+    rdfs:label "_resourceHandle" .
+
+yawl:MonitorClient__me a yawl:Field ;
+    rdfs:label "_me" .
+
+yawl:MonitorClient__logClient a yawl:Field ;
+    rdfs:label "_logClient" .
+
+yawl:MonitorClient__resLogClient a yawl:Field ;
+    rdfs:label "_resLogClient" .
+
+yawl:MonitorClient__resClient a yawl:Field ;
+    rdfs:label "_resClient" .
+
+yawl:MonitorClient__interfaceBClient a yawl:Field ;
+    rdfs:label "_interfaceBClient" .
+
+yawl:MonitorClient__startupTime a yawl:Field ;
+    rdfs:label "_startupTime" .
+
+yawl:MonitorClient__engineUser a yawl:Field ;
+    rdfs:label "_engineUser" .
+
+yawl:MonitorClient__enginePassword a yawl:Field ;
+    rdfs:label "_enginePassword" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_twitterService a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.twitterService" .
+
+

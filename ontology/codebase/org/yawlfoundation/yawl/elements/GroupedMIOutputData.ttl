@@ -1,0 +1,235 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.elements.GroupedMIOutputData
+yawl:GroupedMIOutputData a yawl:Class ;
+    rdfs:label "GroupedMIOutputData" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_elements ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/elements/GroupedMIOutputData.java"^^xsd:string ;
+    rdfs:comment """Provides for the persistence of in-progress multiple instance task output data - i.e. stores the output data of completed child work items of an MI task, until the entire task completes @author Michael Adams @date 7/10/2024""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:GroupedMIOutputData_addStaticContent_1 ;
+    yawl:hasMethod yawl:GroupedMIOutputData_addDynamicContent_2 ;
+    yawl:hasMethod yawl:GroupedMIOutputData_addCompletedWorkItem_3 ;
+    yawl:hasMethod yawl:GroupedMIOutputData_addContent_4 ;
+    yawl:hasMethod yawl:GroupedMIOutputData_getUniqueIdentifier_5 ;
+    yawl:hasMethod yawl:GroupedMIOutputData_getCaseID_6 ;
+    yawl:hasMethod yawl:GroupedMIOutputData_getCompletedWorkItems_7 ;
+    yawl:hasMethod yawl:GroupedMIOutputData_getDataDoc_8 ;
+    yawl:hasMethod yawl:GroupedMIOutputData_getDynamicDataDoc_9 ;
+    yawl:hasMethod yawl:GroupedMIOutputData_makeWorkItem_10 ;
+    yawl:hasMethod yawl:GroupedMIOutputData_setTimestamps_11 ;
+    yawl:hasMethod yawl:GroupedMIOutputData_setData_12 ;
+    yawl:hasMethod yawl:GroupedMIOutputData_makeDate_13 ;
+    yawl:hasMethod yawl:GroupedMIOutputData_getBoolean_14 ;
+    yawl:hasMethod yawl:GroupedMIOutputData_getLong_15 ;
+    yawl:hasMethod yawl:GroupedMIOutputData_getDataDocString_16 ;
+    yawl:hasMethod yawl:GroupedMIOutputData_setDataDocString_17 ;
+    yawl:hasMethod yawl:GroupedMIOutputData_getDynamicDataDocString_18 ;
+    yawl:hasMethod yawl:GroupedMIOutputData_setDynamicDataDocString_19 ;
+    yawl:hasMethod yawl:GroupedMIOutputData_getCompletedItemsString_20 ;
+    yawl:hasMethod yawl:GroupedMIOutputData_setCompletedItemsString_21 ;
+    yawl:hasMethod yawl:GroupedMIOutputData_setUniqueIdentifier_22 ;
+    yawl:hasField yawl:GroupedMIOutputData__uniqueID ;
+    yawl:hasField yawl:GroupedMIOutputData__dataDoc ;
+    yawl:hasField yawl:GroupedMIOutputData__dynamicDataDoc ;
+    yawl:hasField yawl:GroupedMIOutputData__completedWorkitems ;
+    .
+
+
+# Method: GroupedMIOutputData.addStaticContent
+yawl:GroupedMIOutputData_addStaticContent_1 a yawl:Method ;
+    rdfs:label "addStaticContent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addStaticContent(Element content)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: GroupedMIOutputData.addDynamicContent
+yawl:GroupedMIOutputData_addDynamicContent_2 a yawl:Method ;
+    rdfs:label "addDynamicContent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addDynamicContent(Element content)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: GroupedMIOutputData.addCompletedWorkItem
+yawl:GroupedMIOutputData_addCompletedWorkItem_3 a yawl:Method ;
+    rdfs:label "addCompletedWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addCompletedWorkItem(YWorkItem item)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: GroupedMIOutputData.addContent
+yawl:GroupedMIOutputData_addContent_4 a yawl:Method ;
+    rdfs:label "addContent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addContent(Document doc, Element content)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: GroupedMIOutputData.getUniqueIdentifier
+yawl:GroupedMIOutputData_getUniqueIdentifier_5 a yawl:Method ;
+    rdfs:label "getUniqueIdentifier" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getUniqueIdentifier()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: GroupedMIOutputData.getCaseID
+yawl:GroupedMIOutputData_getCaseID_6 a yawl:Method ;
+    rdfs:label "getCaseID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: GroupedMIOutputData.getCompletedWorkItems
+yawl:GroupedMIOutputData_getCompletedWorkItems_7 a yawl:Method ;
+    rdfs:label "getCompletedWorkItems" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getCompletedWorkItems()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: GroupedMIOutputData.getDataDoc
+yawl:GroupedMIOutputData_getDataDoc_8 a yawl:Method ;
+    rdfs:label "getDataDoc" ;
+    yawl:returnType "Document" ;
+    yawl:signature "Document getDataDoc()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: GroupedMIOutputData.getDynamicDataDoc
+yawl:GroupedMIOutputData_getDynamicDataDoc_9 a yawl:Method ;
+    rdfs:label "getDynamicDataDoc" ;
+    yawl:returnType "Document" ;
+    yawl:signature "Document getDynamicDataDoc()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: GroupedMIOutputData.makeWorkItem
+yawl:GroupedMIOutputData_makeWorkItem_10 a yawl:Method ;
+    rdfs:label "makeWorkItem" ;
+    yawl:returnType "YWorkItem" ;
+    yawl:signature "YWorkItem makeWorkItem(Element nItem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: GroupedMIOutputData.setTimestamps
+yawl:GroupedMIOutputData_setTimestamps_11 a yawl:Method ;
+    rdfs:label "setTimestamps" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTimestamps(YWorkItem item, Element nItem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: GroupedMIOutputData.setData
+yawl:GroupedMIOutputData_setData_12 a yawl:Method ;
+    rdfs:label "setData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setData(YWorkItem item, Element nItem)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: GroupedMIOutputData.makeDate
+yawl:GroupedMIOutputData_makeDate_13 a yawl:Method ;
+    rdfs:label "makeDate" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date makeDate(String timeStr)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: GroupedMIOutputData.getBoolean
+yawl:GroupedMIOutputData_getBoolean_14 a yawl:Method ;
+    rdfs:label "getBoolean" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean getBoolean(String bValue)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: GroupedMIOutputData.getLong
+yawl:GroupedMIOutputData_getLong_15 a yawl:Method ;
+    rdfs:label "getLong" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getLong(String lvalue)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: GroupedMIOutputData.getDataDocString
+yawl:GroupedMIOutputData_getDataDocString_16 a yawl:Method ;
+    rdfs:label "getDataDocString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataDocString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: GroupedMIOutputData.setDataDocString
+yawl:GroupedMIOutputData_setDataDocString_17 a yawl:Method ;
+    rdfs:label "setDataDocString" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDataDocString(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: GroupedMIOutputData.getDynamicDataDocString
+yawl:GroupedMIOutputData_getDynamicDataDocString_18 a yawl:Method ;
+    rdfs:label "getDynamicDataDocString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDynamicDataDocString()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: GroupedMIOutputData.setDynamicDataDocString
+yawl:GroupedMIOutputData_setDynamicDataDocString_19 a yawl:Method ;
+    rdfs:label "setDynamicDataDocString" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDynamicDataDocString(String xml)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: GroupedMIOutputData.getCompletedItemsString
+yawl:GroupedMIOutputData_getCompletedItemsString_20 a yawl:Method ;
+    rdfs:label "getCompletedItemsString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCompletedItemsString()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: GroupedMIOutputData.setCompletedItemsString
+yawl:GroupedMIOutputData_setCompletedItemsString_21 a yawl:Method ;
+    rdfs:label "setCompletedItemsString" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCompletedItemsString(String xml)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: GroupedMIOutputData.setUniqueIdentifier
+yawl:GroupedMIOutputData_setUniqueIdentifier_22 a yawl:Method ;
+    rdfs:label "setUniqueIdentifier" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setUniqueIdentifier(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:GroupedMIOutputData__uniqueID a yawl:Field ;
+    rdfs:label "_uniqueID" .
+
+yawl:GroupedMIOutputData__dataDoc a yawl:Field ;
+    rdfs:label "_dataDoc" .
+
+yawl:GroupedMIOutputData__dynamicDataDoc a yawl:Field ;
+    rdfs:label "_dynamicDataDoc" .
+
+yawl:GroupedMIOutputData__completedWorkitems a yawl:Field ;
+    rdfs:label "_completedWorkitems" .
+
+
+

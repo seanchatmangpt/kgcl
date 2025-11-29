@@ -1,0 +1,130 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.demoService
+yawl:org_yawlfoundation_yawl_demoService a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.demoService" .
+# Class: org.yawlfoundation.yawl.demoService.DemoService
+yawl:DemoService a yawl:Class ;
+    rdfs:label "DemoService" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_demoService ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/demoService/DemoService.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 6/11/19""" ;
+    yawl:extends yawl:InterfaceBWebsideController ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:DemoService_handleEnabledWorkItemEvent_1 ;
+    yawl:hasMethod yawl:DemoService_handleCancelledWorkItemEvent_2 ;
+    yawl:hasMethod yawl:DemoService_handleCompleteCaseEvent_3 ;
+    yawl:hasMethod yawl:DemoService_describeRequiredParams_4 ;
+    yawl:hasMethod yawl:DemoService_connected_5 ;
+    yawl:hasMethod yawl:DemoService_getOutputData_6 ;
+    yawl:hasMethod yawl:DemoService_process_7 ;
+    yawl:hasMethod yawl:DemoService_getInputValue_8 ;
+    yawl:hasField yawl:DemoService__handle ;
+    yawl:hasField yawl:DemoService__count ;
+    yawl:hasField yawl:DemoService_started ;
+    yawl:hasField yawl:DemoService_startTime ;
+    yawl:hasField yawl:DemoService__log ;
+    yawl:hasField yawl:DemoService_MAX_WAIT_DEFAULT ;
+    yawl:hasField yawl:DemoService__DF ;
+    .
+
+
+# Method: DemoService.handleEnabledWorkItemEvent
+yawl:DemoService_handleEnabledWorkItemEvent_1 a yawl:Method ;
+    rdfs:label "handleEnabledWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleEnabledWorkItemEvent(WorkItemRecord wir)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DemoService.handleCancelledWorkItemEvent
+yawl:DemoService_handleCancelledWorkItemEvent_2 a yawl:Method ;
+    rdfs:label "handleCancelledWorkItemEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCancelledWorkItemEvent(WorkItemRecord workItemRecord)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DemoService.handleCompleteCaseEvent
+yawl:DemoService_handleCompleteCaseEvent_3 a yawl:Method ;
+    rdfs:label "handleCompleteCaseEvent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void handleCompleteCaseEvent(String caseID, String casedata)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DemoService.describeRequiredParams
+yawl:DemoService_describeRequiredParams_4 a yawl:Method ;
+    rdfs:label "describeRequiredParams" ;
+    yawl:returnType "YParameter" ;
+    yawl:signature "YParameter describeRequiredParams()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: DemoService.connected
+yawl:DemoService_connected_5 a yawl:Method ;
+    rdfs:label "connected" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean connected()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DemoService.getOutputData
+yawl:DemoService_getOutputData_6 a yawl:Method ;
+    rdfs:label "getOutputData" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element getOutputData(String taskName, int value)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DemoService.process
+yawl:DemoService_process_7 a yawl:Method ;
+    rdfs:label "process" ;
+    yawl:returnType "void" ;
+    yawl:signature "void process(WorkItemRecord wir)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: DemoService.getInputValue
+yawl:DemoService_getInputValue_8 a yawl:Method ;
+    rdfs:label "getInputValue" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getInputValue(Element data, String varName)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:DemoService__handle a yawl:Field ;
+    rdfs:label "_handle" .
+
+yawl:DemoService__count a yawl:Field ;
+    rdfs:label "_count" .
+
+yawl:DemoService_started a yawl:Field ;
+    rdfs:label "started" .
+
+yawl:DemoService_startTime a yawl:Field ;
+    rdfs:label "startTime" .
+
+yawl:DemoService__log a yawl:Field ;
+    rdfs:label "_log" .
+
+yawl:DemoService_MAX_WAIT_DEFAULT a yawl:Field ;
+    rdfs:label "MAX_WAIT_DEFAULT" .
+
+yawl:DemoService__DF a yawl:Field ;
+    rdfs:label "_DF" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_swingWorklist a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.swingWorklist" .
+
+

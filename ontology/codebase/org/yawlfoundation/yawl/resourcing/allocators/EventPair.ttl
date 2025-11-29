@@ -1,0 +1,44 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.allocators.EventPair
+yawl:EventPair a yawl:Class ;
+    rdfs:label "EventPair" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_allocators ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/allocators/AbstractAllocator.java"^^xsd:string ;
+    yawl:modifiers "protected" ;
+    yawl:hasMethod yawl:EventPair_hasPair_1 ;
+    yawl:hasMethod yawl:EventPair_getDuration_2 ;
+    yawl:hasField yawl:EventPair_fromEvent ;
+    yawl:hasField yawl:EventPair_toEvent ;
+    .
+
+
+# Method: EventPair.hasPair
+yawl:EventPair_hasPair_1 a yawl:Method ;
+    rdfs:label "hasPair" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasPair()" ;
+    .
+
+# Method: EventPair.getDuration
+yawl:EventPair_getDuration_2 a yawl:Method ;
+    rdfs:label "getDuration" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getDuration()" ;
+    .
+
+
+
+yawl:EventPair_fromEvent a yawl:Field ;
+    rdfs:label "fromEvent" .
+
+yawl:EventPair_toEvent a yawl:Field ;
+    rdfs:label "toEvent" .
+
+
+

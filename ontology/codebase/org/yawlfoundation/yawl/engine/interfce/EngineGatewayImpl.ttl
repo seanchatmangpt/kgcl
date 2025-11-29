@@ -1,0 +1,960 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.interfce.EngineGatewayImpl
+yawl:EngineGatewayImpl a yawl:Class ;
+    rdfs:label "EngineGatewayImpl" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_interfce ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/interfce/EngineGatewayImpl.java"^^xsd:string ;
+    rdfs:comment """This class allows access to all of the engines capabilities using Strings and XML interface to pass information. @author Lachlan Aldred Date: 21/01/2004 Time: 11:58:18 @author Michael Adams (for v2)""" ;
+    yawl:implements yawl:EngineGateway ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:EngineGatewayImpl_failureMessage_1 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_successMessage_2 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_checkSession_3 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_isFailureMessage_4 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_enginePersistenceFailure_5 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_registerObserverGateway_6 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_setDefaultWorklist_7 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_setAllowAdminID_8 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_disableLogging_9 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_setHibernateStatisticsEnabled_10 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_initBuildProperties_11 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_shutdown_12 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_notifyServletInitialisationComplete_13 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_setActualFilePath_14 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getAvailableWorkItemIDs_15 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getWorkItem_16 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getWorkItemExpiryTime_17 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getProcessDefinition_18 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getSpecificationDataSchema_19 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_suspendWorkItem_20 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_unsuspendWorkItem_21 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_rollbackWorkItem_22 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_completeWorkItem_23 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_startWorkItem_24 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getStartingDataSnapshot_25 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_skipWorkItem_26 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_createNewInstance_27 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_describeAllWorkItems_28 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getWorkItemsWithIdentifier_29 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getWorkItemsForService_30 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_connect_31 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_checkConnection_32 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_disconnect_33 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_checkConnectionForAdmin_34 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getTaskInformation_35 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_checkElegibilityToAddInstances_36 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getSpecificationList_37 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getSpecificationData_38 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_launchCase_39 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_launchCase_40 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_launchCase_41 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_launchCase_42 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_launchCase_43 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getCasesForSpecification_44 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getSpecificationIDForCase_45 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getSpecificationForCase_46 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getAllRunningCases_47 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getCaseState_48 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_cancelCase_49 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getBuildProperties_50 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getChildrenOfWorkItem_51 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getWorkItemOptions_52 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_loadSpecification_53 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_unloadSpecification_54 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_createAccount_55 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_updateAccount_56 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getAccounts_57 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getYAWLServices_58 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getYAWLServiceDocumentation_59 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_addYAWLService_60 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_removeYAWLService_61 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_deleteAccount_62 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_changePassword_63 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getClientPassword_64 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getClientAccount_65 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_describeWorkItems_66 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getDataForSpecifications_67 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_addInterfaceXListener_68 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_removeInterfaceXListener_69 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_updateWorkItemData_70 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_updateCaseData_71 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_restartWorkItem_72 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_cancelWorkItem_73 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getLatestSpecVersion_74 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getClient_75 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getMITaskAttributes_76 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getResourcingSpecs_77 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getCaseData_78 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getCaseInstanceSummary_79 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getWorkItemInstanceSummary_80 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getParameterInstanceSummary_81 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_rejectAnnouncedEnabledTask_82 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getExternalDBGateways_83 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_setHibernateStatisticsEnabled_84 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_isHibernateStatisticsEnabled_85 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_getHibernateStatistics_86 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_promote_87 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_demote_88 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_isRedundantMode_89 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_exportCaseState_90 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_exportAllCaseStates_91 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_importCases_92 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_reannounceEnabledWorkItems_93 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_reannounceExecutingWorkItems_94 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_reannounceFiredWorkItems_95 ;
+    yawl:hasMethod yawl:EngineGatewayImpl_reannounceWorkItem_96 ;
+    yawl:hasField yawl:EngineGatewayImpl__engine ;
+    yawl:hasField yawl:EngineGatewayImpl__sessionCache ;
+    yawl:hasField yawl:EngineGatewayImpl__redundantMode ;
+    yawl:hasField yawl:EngineGatewayImpl__logger ;
+    yawl:hasField yawl:EngineGatewayImpl_enginePersistenceFailure ;
+    yawl:hasField yawl:EngineGatewayImpl_SUCCESS ;
+    .
+
+
+# Method: EngineGatewayImpl.failureMessage
+yawl:EngineGatewayImpl_failureMessage_1 a yawl:Method ;
+    rdfs:label "failureMessage" ;
+    yawl:returnType "String" ;
+    yawl:signature "String failureMessage(String msg)" ;
+    rdfs:comment """Encases a message in \"<failure><reason>...</reason></failure>\" @param msg the text to encase @return the encased message""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: EngineGatewayImpl.successMessage
+yawl:EngineGatewayImpl_successMessage_2 a yawl:Method ;
+    rdfs:label "successMessage" ;
+    yawl:returnType "String" ;
+    yawl:signature "String successMessage(String msg)" ;
+    rdfs:comment """Encases a message in \"<success>...</success>\" @param msg the text to encase @return the encased message""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: EngineGatewayImpl.checkSession
+yawl:EngineGatewayImpl_checkSession_3 a yawl:Method ;
+    rdfs:label "checkSession" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkSession(String sessionHandle)" ;
+    rdfs:comment """Checks that a session handle is currently active @param sessionHandle the handle to check @return true if the handle is valid and active""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: EngineGatewayImpl.isFailureMessage
+yawl:EngineGatewayImpl_isFailureMessage_4 a yawl:Method ;
+    rdfs:label "isFailureMessage" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isFailureMessage(String msg)" ;
+    rdfs:comment """Checks whether a message is a failure message @param msg the message to check @return true if its a failure message""" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: EngineGatewayImpl.enginePersistenceFailure
+yawl:EngineGatewayImpl_enginePersistenceFailure_5 a yawl:Method ;
+    rdfs:label "enginePersistenceFailure" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean enginePersistenceFailure()" ;
+    rdfs:comment """Indicates if the engine has encountered some form of persistence failure in its lifetime. @return whether or not the engine has failed to achieve persistence""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.registerObserverGateway
+yawl:EngineGatewayImpl_registerObserverGateway_6 a yawl:Method ;
+    rdfs:label "registerObserverGateway" ;
+    yawl:returnType "void" ;
+    yawl:signature "void registerObserverGateway(ObserverGateway gateway)" ;
+    rdfs:comment """Registers an external observer gateway with the engine @param gateway the gateway to register @throws YAWLException if the observerGateway has a null scheme value.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.setDefaultWorklist
+yawl:EngineGatewayImpl_setDefaultWorklist_7 a yawl:Method ;
+    rdfs:label "setDefaultWorklist" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDefaultWorklist(String url)" ;
+    rdfs:comment """Sets the URL for the 'default' worklist - i.e. the service that will receive task enabled notifications for those tasks that are not explicitly associated with a custom service @param url the URL of the service that will serve as the default worklist""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.setAllowAdminID
+yawl:EngineGatewayImpl_setAllowAdminID_8 a yawl:Method ;
+    rdfs:label "setAllowAdminID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setAllowAdminID(boolean allow)" ;
+    rdfs:comment """Enables or disables the use of the generic 'admin' user @param allow true to enable, false to disable""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.disableLogging
+yawl:EngineGatewayImpl_disableLogging_9 a yawl:Method ;
+    rdfs:label "disableLogging" ;
+    yawl:returnType "void" ;
+    yawl:signature "void disableLogging()" ;
+    rdfs:comment """Disables the recording of events in the process logs""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.setHibernateStatisticsEnabled
+yawl:EngineGatewayImpl_setHibernateStatisticsEnabled_10 a yawl:Method ;
+    rdfs:label "setHibernateStatisticsEnabled" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setHibernateStatisticsEnabled(boolean enabled)" ;
+    rdfs:comment """Enables or disables the gathering of hibernate statistics @param enabled true to enable, false to disable""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.initBuildProperties
+yawl:EngineGatewayImpl_initBuildProperties_11 a yawl:Method ;
+    rdfs:label "initBuildProperties" ;
+    yawl:returnType "void" ;
+    yawl:signature "void initBuildProperties(InputStream stream)" ;
+    rdfs:comment """Loads build properties from the stream (build number, date, version) @param stream a stream of the file containing the build properties""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.shutdown
+yawl:EngineGatewayImpl_shutdown_12 a yawl:Method ;
+    rdfs:label "shutdown" ;
+    yawl:returnType "void" ;
+    yawl:signature "void shutdown()" ;
+    rdfs:comment """Notifies the engine that its servlet is shutting down""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.notifyServletInitialisationComplete
+yawl:EngineGatewayImpl_notifyServletInitialisationComplete_13 a yawl:Method ;
+    rdfs:label "notifyServletInitialisationComplete" ;
+    yawl:returnType "void" ;
+    yawl:signature "void notifyServletInitialisationComplete(int maxWaitSeconds)" ;
+    rdfs:comment """Triggers the announcement that engine startup is complete. Should only be called from InterfaceB_EngineBasedServer.init() @param maxWaitSeconds the maximum seconds to wait for services to be contactable""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.setActualFilePath
+yawl:EngineGatewayImpl_setActualFilePath_14 a yawl:Method ;
+    rdfs:label "setActualFilePath" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setActualFilePath(String path)" ;
+    rdfs:comment """Sets the actual absolute file location which contains the engine's class file root @param path the file path""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getAvailableWorkItemIDs
+yawl:EngineGatewayImpl_getAvailableWorkItemIDs_15 a yawl:Method ;
+    rdfs:label "getAvailableWorkItemIDs" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAvailableWorkItemIDs(String sessionHandle)" ;
+    rdfs:comment """Gets a list of the ids of all currently active workitems @param sessionHandle a valid session handle @return a list of the ids @throws RemoteException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getWorkItem
+yawl:EngineGatewayImpl_getWorkItem_16 a yawl:Method ;
+    rdfs:label "getWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItem(String workItemID, String sessionHandle)" ;
+    rdfs:comment """@param workItemID @param sessionHandle @return the full work item record of the workitem with the id passed @throws RemoteException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getWorkItemExpiryTime
+yawl:EngineGatewayImpl_getWorkItemExpiryTime_17 a yawl:Method ;
+    rdfs:label "getWorkItemExpiryTime" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItemExpiryTime(String workItemID, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getProcessDefinition
+yawl:EngineGatewayImpl_getProcessDefinition_18 a yawl:Method ;
+    rdfs:label "getProcessDefinition" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getProcessDefinition(YSpecificationID specID, String sessionHandle)" ;
+    rdfs:comment """@param specID the specification (process definition id) @param sessionHandle the sessionhandle @return a string version of the process definition @throws RemoteException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getSpecificationDataSchema
+yawl:EngineGatewayImpl_getSpecificationDataSchema_19 a yawl:Method ;
+    rdfs:label "getSpecificationDataSchema" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationDataSchema(YSpecificationID specID, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.suspendWorkItem
+yawl:EngineGatewayImpl_suspendWorkItem_20 a yawl:Method ;
+    rdfs:label "suspendWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String suspendWorkItem(String workItemID, String sessionHandle)" ;
+    rdfs:comment """@param workItemID @param sessionHandle @return the suspended workitem record @throws RemoteException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.unsuspendWorkItem
+yawl:EngineGatewayImpl_unsuspendWorkItem_21 a yawl:Method ;
+    rdfs:label "unsuspendWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String unsuspendWorkItem(String workItemID, String sessionHandle)" ;
+    rdfs:comment """@param workItemID @param sessionHandle @return the resumed workitem record @throws RemoteException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.rollbackWorkItem
+yawl:EngineGatewayImpl_rollbackWorkItem_22 a yawl:Method ;
+    rdfs:label "rollbackWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String rollbackWorkItem(String workItemID, String sessionHandle)" ;
+    rdfs:comment """@param workItemID @param sessionHandle @return the rooled back work item record @throws RemoteException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.completeWorkItem
+yawl:EngineGatewayImpl_completeWorkItem_23 a yawl:Method ;
+    rdfs:label "completeWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String completeWorkItem(String workItemID, String data, String logPredicate, boolean force, String sessionHandle)" ;
+    rdfs:comment """@param workItemID work item id @param data data @param logPredicate a pre-parsed configurable logging string @param force true if this is a forded completion @param sessionHandle sessionhandle @return result XML message. @throws RemoteException if used in RMI mode""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.startWorkItem
+yawl:EngineGatewayImpl_startWorkItem_24 a yawl:Method ;
+    rdfs:label "startWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String startWorkItem(String workItemID, String logPredicate, String sessionHandle)" ;
+    rdfs:comment """@param workItemID @param sessionHandle @return the started child workitem @throws RemoteException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getStartingDataSnapshot
+yawl:EngineGatewayImpl_getStartingDataSnapshot_25 a yawl:Method ;
+    rdfs:label "getStartingDataSnapshot" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStartingDataSnapshot(String workItemID, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.skipWorkItem
+yawl:EngineGatewayImpl_skipWorkItem_26 a yawl:Method ;
+    rdfs:label "skipWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String skipWorkItem(String workItemID, String sessionHandle)" ;
+    rdfs:comment """@param workItemID @param sessionHandle @return the skipped work item record @throws RemoteException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.createNewInstance
+yawl:EngineGatewayImpl_createNewInstance_27 a yawl:Method ;
+    rdfs:label "createNewInstance" ;
+    yawl:returnType "String" ;
+    yawl:signature "String createNewInstance(String workItemID, String paramValueForMICreation, String sessionHandle)" ;
+    rdfs:comment """Creates a workitem sibling of of the workitemid param.  It will only do this if: 1) the task for workItemID is multi-instance, 2) and if the task for workItemID is busy 2) and if the task for workItemID allows dynamic instance creation, 3) and if the number of instances has no yet reached max instances. @param workItemID the id of an existing instance to which to add a new instance @param paramValueForMICreation the data needed to create the new instance @param sessionHandle session handle @retu""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.describeAllWorkItems
+yawl:EngineGatewayImpl_describeAllWorkItems_28 a yawl:Method ;
+    rdfs:label "describeAllWorkItems" ;
+    yawl:returnType "String" ;
+    yawl:signature "String describeAllWorkItems(String sessionHandle)" ;
+    rdfs:comment """@param sessionHandle @return a description (record) of all currently active workitems @throws RemoteException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getWorkItemsWithIdentifier
+yawl:EngineGatewayImpl_getWorkItemsWithIdentifier_29 a yawl:Method ;
+    rdfs:label "getWorkItemsWithIdentifier" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItemsWithIdentifier(String idType, String itemID, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getWorkItemsForService
+yawl:EngineGatewayImpl_getWorkItemsForService_30 a yawl:Method ;
+    rdfs:label "getWorkItemsForService" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItemsForService(String serviceURI, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.connect
+yawl:EngineGatewayImpl_connect_31 a yawl:Method ;
+    rdfs:label "connect" ;
+    yawl:returnType "String" ;
+    yawl:signature "String connect(String userID, String password, long timeOutSeconds)" ;
+    rdfs:comment """@param userID @param password @return a sessionhandle @throws RemoteException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.checkConnection
+yawl:EngineGatewayImpl_checkConnection_32 a yawl:Method ;
+    rdfs:label "checkConnection" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkConnection(String sessionHandle)" ;
+    rdfs:comment """@param sessionHandle @return 'true' if the connection is valid @throws RemoteException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.disconnect
+yawl:EngineGatewayImpl_disconnect_33 a yawl:Method ;
+    rdfs:label "disconnect" ;
+    yawl:returnType "String" ;
+    yawl:signature "String disconnect(String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.checkConnectionForAdmin
+yawl:EngineGatewayImpl_checkConnectionForAdmin_34 a yawl:Method ;
+    rdfs:label "checkConnectionForAdmin" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkConnectionForAdmin(String sessionHandle)" ;
+    rdfs:comment """@deprecated no longer valid - performs same function as 'checkConnection' @param sessionHandle @return either \"<success/>\" or \"<failure><reason>...</...>\"""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getTaskInformation
+yawl:EngineGatewayImpl_getTaskInformation_35 a yawl:Method ;
+    rdfs:label "getTaskInformation" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTaskInformation(YSpecificationID specificationID, String taskID, String sessionHandle)" ;
+    rdfs:comment """@param specificationID @param taskID @param sessionHandle @return a task information record @throws RemoteException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.checkElegibilityToAddInstances
+yawl:EngineGatewayImpl_checkElegibilityToAddInstances_36 a yawl:Method ;
+    rdfs:label "checkElegibilityToAddInstances" ;
+    yawl:returnType "String" ;
+    yawl:signature "String checkElegibilityToAddInstances(String workItemID, String sessionHandle)" ;
+    rdfs:comment """@param workItemID @param sessionHandle @return either \"&lt;success/&gt;\" or &lt;failure&gt;&lt;reason&gt;...&lt;/...&gt;""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getSpecificationList
+yawl:EngineGatewayImpl_getSpecificationList_37 a yawl:Method ;
+    rdfs:label "getSpecificationList" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationList(String sessionHandle)" ;
+    rdfs:comment """Gets a listing of @param sessionHandle @return a list of currently loaded specifications @throws RemoteException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getSpecificationData
+yawl:EngineGatewayImpl_getSpecificationData_38 a yawl:Method ;
+    rdfs:label "getSpecificationData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationData(YSpecificationID specID, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.launchCase
+yawl:EngineGatewayImpl_launchCase_39 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseParams, URI caseCompletionURI, String caseID, String logDataStr, String sessionHandle)" ;
+    rdfs:comment """@param specID specID @param caseParams format &lt;data&gt;[InputParam]&lt;/data&gt; where InputParam == &lt;varName&gt;var value&lt;/varName&gt; @param caseID caseID @param sessionHandle @return the case id of the launched case, or a diagnostic <failure/> msg.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.launchCase
+yawl:EngineGatewayImpl_launchCase_40 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseParams, URI caseCompletionURI, String logDataStr, String sessionHandle)" ;
+    rdfs:comment """@param specID specID @param caseParams format &lt;data&gt;[InputParam]&lt;/data&gt; where InputParam == &lt;varName&gt;var value&lt;/varName&gt; @param sessionHandle @return the case id of the launched case, or a diagnostic <failure/> msg.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.launchCase
+yawl:EngineGatewayImpl_launchCase_41 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseParams, URI caseCompletionURI, String logDataStr, long mSec, String sessionHandle)" ;
+    rdfs:comment """@param specID specID @param caseParams format &lt;data&gt;[InputParam]&lt;/data&gt; where InputParam == &lt;varName&gt;var value&lt;/varName&gt; @param sessionHandle @return success""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.launchCase
+yawl:EngineGatewayImpl_launchCase_42 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseParams, URI caseCompletionURI, String logDataStr, Date expiry, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.launchCase
+yawl:EngineGatewayImpl_launchCase_43 a yawl:Method ;
+    rdfs:label "launchCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String launchCase(YSpecificationID specID, String caseParams, URI caseCompletionURI, String logDataStr, Duration duration, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getCasesForSpecification
+yawl:EngineGatewayImpl_getCasesForSpecification_44 a yawl:Method ;
+    rdfs:label "getCasesForSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCasesForSpecification(YSpecificationID specID, String sessionHandle)" ;
+    rdfs:comment """Given a process specification id return the cases that are its running instances. @param specID the process specification id string. @param sessionHandle the sessionhandle @return a XML message containing a set of caseID elements that are run time instances of the process specification with id = specID""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getSpecificationIDForCase
+yawl:EngineGatewayImpl_getSpecificationIDForCase_45 a yawl:Method ;
+    rdfs:label "getSpecificationIDForCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationIDForCase(String caseIDStr, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getSpecificationForCase
+yawl:EngineGatewayImpl_getSpecificationForCase_46 a yawl:Method ;
+    rdfs:label "getSpecificationForCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecificationForCase(String caseIDStr, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getAllRunningCases
+yawl:EngineGatewayImpl_getAllRunningCases_47 a yawl:Method ;
+    rdfs:label "getAllRunningCases" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAllRunningCases(String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getCaseState
+yawl:EngineGatewayImpl_getCaseState_48 a yawl:Method ;
+    rdfs:label "getCaseState" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseState(String caseID, String sessionHandle)" ;
+    rdfs:comment """This method returns a complex XML message containing the state of a particular case.  i.e. every token (identifier) and its position in every condition/ task/ and internal condition. @param caseID case id string @param sessionHandle sessionHandle @return XML state Message @throws RemoteException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.cancelCase
+yawl:EngineGatewayImpl_cancelCase_49 a yawl:Method ;
+    rdfs:label "cancelCase" ;
+    yawl:returnType "String" ;
+    yawl:signature "String cancelCase(String caseID, String sessionHandle)" ;
+    rdfs:comment """Cancels a running case. @param caseID the caseID string @param sessionHandle sessionHandle @return a diagnostic XML message indicating the result of method call.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getBuildProperties
+yawl:EngineGatewayImpl_getBuildProperties_50 a yawl:Method ;
+    rdfs:label "getBuildProperties" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBuildProperties(String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getChildrenOfWorkItem
+yawl:EngineGatewayImpl_getChildrenOfWorkItem_51 a yawl:Method ;
+    rdfs:label "getChildrenOfWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getChildrenOfWorkItem(String workItemID, String sessionHandle)" ;
+    rdfs:comment """Gets the child work items of a given work item id string. @param workItemID @param sessionHandle @return an XML list of elements that describe each child work item. @throws RemoteException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getWorkItemOptions
+yawl:EngineGatewayImpl_getWorkItemOptions_52 a yawl:Method ;
+    rdfs:label "getWorkItemOptions" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItemOptions(String workItemID, String thisURL, String sessionHandle)" ;
+    rdfs:comment """Provides an XML list of options for manipulating a work item.  Uses the REST philosophy of showing what you can do with a work item and provides some links to further manipulate the work item. @param workItemID work item id string @param thisURL the url of the engine interface B server (i think). @param sessionHandle the sesssion handle @return a REST style list of options to change the work item under question.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.loadSpecification
+yawl:EngineGatewayImpl_loadSpecification_53 a yawl:Method ;
+    rdfs:label "loadSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String loadSpecification(String specificationStr, String sessionHandle)" ;
+    rdfs:comment """Allows the user to load a specificationStr. @param specificationStr a YAWL schema compliant process specificationStr in its entirety, in string format. @param sessionHandle a session handle @return a diagnostic XML message indicating the result of loading the specificationStr.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.unloadSpecification
+yawl:EngineGatewayImpl_unloadSpecification_54 a yawl:Method ;
+    rdfs:label "unloadSpecification" ;
+    yawl:returnType "String" ;
+    yawl:signature "String unloadSpecification(YSpecificationID specID, String sessionHandle)" ;
+    rdfs:comment """Unloads the specification. @param specID the specification id string @param sessionHandle session handle @return an XML message indicating the result of the operation.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.createAccount
+yawl:EngineGatewayImpl_createAccount_55 a yawl:Method ;
+    rdfs:label "createAccount" ;
+    yawl:returnType "String" ;
+    yawl:signature "String createAccount(String userName, String password, String doco, String sessionHandle)" ;
+    rdfs:comment """Creates a new external client account in the system. @param userName the name of the user @param password the users elected password. @param doco some descriptive text about the account @param sessionHandle @return diagnostic XML message.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.updateAccount
+yawl:EngineGatewayImpl_updateAccount_56 a yawl:Method ;
+    rdfs:label "updateAccount" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateAccount(String userName, String password, String doco, String sessionHandle)" ;
+    rdfs:comment """Creates a new external client account in the system. @param userName the name of the user @param password the users elected password. @param doco some descriptive text about the account @param sessionHandle @return diagnostic XML message.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getAccounts
+yawl:EngineGatewayImpl_getAccounts_57 a yawl:Method ;
+    rdfs:label "getAccounts" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getAccounts(String sessionHandle)" ;
+    rdfs:comment """Gets the list of external accounts in the system. @param sessionHandle session handle @return an XML message showing each user in the system.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getYAWLServices
+yawl:EngineGatewayImpl_getYAWLServices_58 a yawl:Method ;
+    rdfs:label "getYAWLServices" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getYAWLServices(String sessionHandle)" ;
+    rdfs:comment """Returns an XML list (unrooted) of yawlService elements. @param sessionHandle @return either \"<success/>\" or \"<failure><reason>...</...>\"""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getYAWLServiceDocumentation
+yawl:EngineGatewayImpl_getYAWLServiceDocumentation_59 a yawl:Method ;
+    rdfs:label "getYAWLServiceDocumentation" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getYAWLServiceDocumentation(String yawlServiceURI, String sessionHandle)" ;
+    rdfs:comment """Gets the documentation associated with the yawl service @param yawlServiceURI @param sessionHandle @return doco as xml (if any) else failure message""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.addYAWLService
+yawl:EngineGatewayImpl_addYAWLService_60 a yawl:Method ;
+    rdfs:label "addYAWLService" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addYAWLService(String serviceStr, String sessionHandle)" ;
+    rdfs:comment """Adds a new YAWL service to the engine @param serviceStr an XML message containing the YAWL service details. @param sessionHandle the session handle @return diagnostic XML message.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.removeYAWLService
+yawl:EngineGatewayImpl_removeYAWLService_61 a yawl:Method ;
+    rdfs:label "removeYAWLService" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeYAWLService(String serviceURI, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.deleteAccount
+yawl:EngineGatewayImpl_deleteAccount_62 a yawl:Method ;
+    rdfs:label "deleteAccount" ;
+    yawl:returnType "String" ;
+    yawl:signature "String deleteAccount(String client, String sessionHandle)" ;
+    rdfs:comment """@deprecated The YAWL Engine no longer maintains users directly @param client @param sessionHandle @return a success or failure message @throws RemoteException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.changePassword
+yawl:EngineGatewayImpl_changePassword_63 a yawl:Method ;
+    rdfs:label "changePassword" ;
+    yawl:returnType "String" ;
+    yawl:signature "String changePassword(String password, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getClientPassword
+yawl:EngineGatewayImpl_getClientPassword_64 a yawl:Method ;
+    rdfs:label "getClientPassword" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getClientPassword(String userID, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getClientAccount
+yawl:EngineGatewayImpl_getClientAccount_65 a yawl:Method ;
+    rdfs:label "getClientAccount" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getClientAccount(String userID, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.describeWorkItems
+yawl:EngineGatewayImpl_describeWorkItems_66 a yawl:Method ;
+    rdfs:label "describeWorkItems" ;
+    yawl:returnType "String" ;
+    yawl:signature "String describeWorkItems(Set workItems)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: EngineGatewayImpl.getDataForSpecifications
+yawl:EngineGatewayImpl_getDataForSpecifications_67 a yawl:Method ;
+    rdfs:label "getDataForSpecifications" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataForSpecifications(Set specSet)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: EngineGatewayImpl.addInterfaceXListener
+yawl:EngineGatewayImpl_addInterfaceXListener_68 a yawl:Method ;
+    rdfs:label "addInterfaceXListener" ;
+    yawl:returnType "String" ;
+    yawl:signature "String addInterfaceXListener(String listenerURI)" ;
+    rdfs:comment """The following methods are called by an Exception Service via Interface_X""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.removeInterfaceXListener
+yawl:EngineGatewayImpl_removeInterfaceXListener_69 a yawl:Method ;
+    rdfs:label "removeInterfaceXListener" ;
+    yawl:returnType "String" ;
+    yawl:signature "String removeInterfaceXListener(String listenerURI)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.updateWorkItemData
+yawl:EngineGatewayImpl_updateWorkItemData_70 a yawl:Method ;
+    rdfs:label "updateWorkItemData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateWorkItemData(String workItemID, String data, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.updateCaseData
+yawl:EngineGatewayImpl_updateCaseData_71 a yawl:Method ;
+    rdfs:label "updateCaseData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String updateCaseData(String caseID, String data, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.restartWorkItem
+yawl:EngineGatewayImpl_restartWorkItem_72 a yawl:Method ;
+    rdfs:label "restartWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String restartWorkItem(String workItemID, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.cancelWorkItem
+yawl:EngineGatewayImpl_cancelWorkItem_73 a yawl:Method ;
+    rdfs:label "cancelWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String cancelWorkItem(String workItemID, String data, String fail, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getLatestSpecVersion
+yawl:EngineGatewayImpl_getLatestSpecVersion_74 a yawl:Method ;
+    rdfs:label "getLatestSpecVersion" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getLatestSpecVersion(String id, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getClient
+yawl:EngineGatewayImpl_getClient_75 a yawl:Method ;
+    rdfs:label "getClient" ;
+    yawl:returnType "YClient" ;
+    yawl:signature "YClient getClient(String sessionHandle)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: EngineGatewayImpl.getMITaskAttributes
+yawl:EngineGatewayImpl_getMITaskAttributes_76 a yawl:Method ;
+    rdfs:label "getMITaskAttributes" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMITaskAttributes(YSpecificationID specificationID, String taskID, String sessionHandle)" ;
+    rdfs:comment """@param specificationID @param taskID @param sessionHandle @return the multiple instance task attributes for the taskid passed @throws RemoteException""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getResourcingSpecs
+yawl:EngineGatewayImpl_getResourcingSpecs_77 a yawl:Method ;
+    rdfs:label "getResourcingSpecs" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResourcingSpecs(YSpecificationID specificationID, String taskID, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getCaseData
+yawl:EngineGatewayImpl_getCaseData_78 a yawl:Method ;
+    rdfs:label "getCaseData" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseData(String caseID, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getCaseInstanceSummary
+yawl:EngineGatewayImpl_getCaseInstanceSummary_79 a yawl:Method ;
+    rdfs:label "getCaseInstanceSummary" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCaseInstanceSummary(String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getWorkItemInstanceSummary
+yawl:EngineGatewayImpl_getWorkItemInstanceSummary_80 a yawl:Method ;
+    rdfs:label "getWorkItemInstanceSummary" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getWorkItemInstanceSummary(String caseID, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getParameterInstanceSummary
+yawl:EngineGatewayImpl_getParameterInstanceSummary_81 a yawl:Method ;
+    rdfs:label "getParameterInstanceSummary" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getParameterInstanceSummary(String caseID, String itemID, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.rejectAnnouncedEnabledTask
+yawl:EngineGatewayImpl_rejectAnnouncedEnabledTask_82 a yawl:Method ;
+    rdfs:label "rejectAnnouncedEnabledTask" ;
+    yawl:returnType "String" ;
+    yawl:signature "String rejectAnnouncedEnabledTask(String itemID, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getExternalDBGateways
+yawl:EngineGatewayImpl_getExternalDBGateways_83 a yawl:Method ;
+    rdfs:label "getExternalDBGateways" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getExternalDBGateways(String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.setHibernateStatisticsEnabled
+yawl:EngineGatewayImpl_setHibernateStatisticsEnabled_84 a yawl:Method ;
+    rdfs:label "setHibernateStatisticsEnabled" ;
+    yawl:returnType "String" ;
+    yawl:signature "String setHibernateStatisticsEnabled(boolean enabled, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.isHibernateStatisticsEnabled
+yawl:EngineGatewayImpl_isHibernateStatisticsEnabled_85 a yawl:Method ;
+    rdfs:label "isHibernateStatisticsEnabled" ;
+    yawl:returnType "String" ;
+    yawl:signature "String isHibernateStatisticsEnabled(String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.getHibernateStatistics
+yawl:EngineGatewayImpl_getHibernateStatistics_86 a yawl:Method ;
+    rdfs:label "getHibernateStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getHibernateStatistics(String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.promote
+yawl:EngineGatewayImpl_promote_87 a yawl:Method ;
+    rdfs:label "promote" ;
+    yawl:returnType "String" ;
+    yawl:signature "String promote(String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.demote
+yawl:EngineGatewayImpl_demote_88 a yawl:Method ;
+    rdfs:label "demote" ;
+    yawl:returnType "String" ;
+    yawl:signature "String demote(String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.isRedundantMode
+yawl:EngineGatewayImpl_isRedundantMode_89 a yawl:Method ;
+    rdfs:label "isRedundantMode" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isRedundantMode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.exportCaseState
+yawl:EngineGatewayImpl_exportCaseState_90 a yawl:Method ;
+    rdfs:label "exportCaseState" ;
+    yawl:returnType "String" ;
+    yawl:signature "String exportCaseState(String caseID, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.exportAllCaseStates
+yawl:EngineGatewayImpl_exportAllCaseStates_91 a yawl:Method ;
+    rdfs:label "exportAllCaseStates" ;
+    yawl:returnType "String" ;
+    yawl:signature "String exportAllCaseStates(String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.importCases
+yawl:EngineGatewayImpl_importCases_92 a yawl:Method ;
+    rdfs:label "importCases" ;
+    yawl:returnType "String" ;
+    yawl:signature "String importCases(String caseXML, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.reannounceEnabledWorkItems
+yawl:EngineGatewayImpl_reannounceEnabledWorkItems_93 a yawl:Method ;
+    rdfs:label "reannounceEnabledWorkItems" ;
+    yawl:returnType "String" ;
+    yawl:signature "String reannounceEnabledWorkItems(String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.reannounceExecutingWorkItems
+yawl:EngineGatewayImpl_reannounceExecutingWorkItems_94 a yawl:Method ;
+    rdfs:label "reannounceExecutingWorkItems" ;
+    yawl:returnType "String" ;
+    yawl:signature "String reannounceExecutingWorkItems(String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.reannounceFiredWorkItems
+yawl:EngineGatewayImpl_reannounceFiredWorkItems_95 a yawl:Method ;
+    rdfs:label "reannounceFiredWorkItems" ;
+    yawl:returnType "String" ;
+    yawl:signature "String reannounceFiredWorkItems(String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: EngineGatewayImpl.reannounceWorkItem
+yawl:EngineGatewayImpl_reannounceWorkItem_96 a yawl:Method ;
+    rdfs:label "reannounceWorkItem" ;
+    yawl:returnType "String" ;
+    yawl:signature "String reannounceWorkItem(String itemID, String sessionHandle)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:EngineGatewayImpl__engine a yawl:Field ;
+    rdfs:label "_engine" .
+
+yawl:EngineGatewayImpl__sessionCache a yawl:Field ;
+    rdfs:label "_sessionCache" .
+
+yawl:EngineGatewayImpl__redundantMode a yawl:Field ;
+    rdfs:label "_redundantMode" .
+
+yawl:EngineGatewayImpl__logger a yawl:Field ;
+    rdfs:label "_logger" .
+
+yawl:EngineGatewayImpl_enginePersistenceFailure a yawl:Field ;
+    rdfs:label "enginePersistenceFailure" .
+
+yawl:EngineGatewayImpl_SUCCESS a yawl:Field ;
+    rdfs:label "SUCCESS" .
+
+
+

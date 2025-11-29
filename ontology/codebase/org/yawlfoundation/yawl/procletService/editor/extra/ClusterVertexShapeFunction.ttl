@@ -1,0 +1,30 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.procletService.editor.extra.ClusterVertexShapeFunction
+yawl:ClusterVertexShapeFunction a yawl:Class ;
+    rdfs:label "ClusterVertexShapeFunction" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_procletService_editor_extra ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/procletService/editor/extra/TreeCollapseDemo.java"^^xsd:string ;
+    rdfs:comment """a demo class that will create a vertex shape that is either a polygon or star. The number of sides corresponds to the number of vertices that were collapsed into the vertex represented by this shape. @author Tom Nelson @param <V>""" ;
+    yawl:extends yawl:EllipseVertexShapeTransformer ;
+    yawl:hasMethod yawl:ClusterVertexShapeFunction_transform_1 ;
+    .
+
+
+# Method: ClusterVertexShapeFunction.transform
+yawl:ClusterVertexShapeFunction_transform_1 a yawl:Method ;
+    rdfs:label "transform" ;
+    yawl:returnType "Shape" ;
+    yawl:signature "Shape transform(V v)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

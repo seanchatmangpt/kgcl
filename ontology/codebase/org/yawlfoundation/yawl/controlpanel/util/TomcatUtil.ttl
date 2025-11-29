@@ -1,0 +1,244 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.controlpanel.util
+yawl:org_yawlfoundation_yawl_controlpanel_util a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.controlpanel.util" .
+# Class: org.yawlfoundation.yawl.controlpanel.util.TomcatUtil
+yawl:TomcatUtil a yawl:Class ;
+    rdfs:label "TomcatUtil" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/util/TomcatUtil.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 4/08/2014""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:TomcatUtil_start_1 ;
+    yawl:hasMethod yawl:TomcatUtil_stop_2 ;
+    yawl:hasMethod yawl:TomcatUtil_stop_3 ;
+    yawl:hasMethod yawl:TomcatUtil_isPortActive_4 ;
+    yawl:hasMethod yawl:TomcatUtil_isPortActive_5 ;
+    yawl:hasMethod yawl:TomcatUtil_isTomcatRunning_6 ;
+    yawl:hasMethod yawl:TomcatUtil_getCatalinaHome_7 ;
+    yawl:hasMethod yawl:TomcatUtil_getTomcatServerPort_8 ;
+    yawl:hasMethod yawl:TomcatUtil_setTomcatServerPort_9 ;
+    yawl:hasMethod yawl:TomcatUtil_isEngineRunning_10 ;
+    yawl:hasMethod yawl:TomcatUtil_killTomcatProcess_11 ;
+    yawl:hasMethod yawl:TomcatUtil_monitorShutdown_12 ;
+    yawl:hasMethod yawl:TomcatUtil_loadTomcatServerPort_13 ;
+    yawl:hasMethod yawl:TomcatUtil_loadTomcatConfigFile_14 ;
+    yawl:hasMethod yawl:TomcatUtil_writeTomcatConfigFile_15 ;
+    yawl:hasMethod yawl:TomcatUtil_getTomcatConfigFile_16 ;
+    yawl:hasMethod yawl:TomcatUtil_checkSizeOfLog_17 ;
+    yawl:hasMethod yawl:TomcatUtil_removePidFile_18 ;
+    yawl:hasMethod yawl:TomcatUtil_deriveCatalinaHome_19 ;
+    yawl:hasMethod yawl:TomcatUtil_updateServiceConfigs_20 ;
+    yawl:hasField yawl:TomcatUtil_SERVER_PORT ;
+    yawl:hasField yawl:TomcatUtil_ENGINE_URL ;
+    yawl:hasField yawl:TomcatUtil_TOMCAT_VERSION ;
+    yawl:hasField yawl:TomcatUtil_CATALINA_HOME ;
+    yawl:hasField yawl:TomcatUtil__process ;
+    .
+
+
+# Method: TomcatUtil.start
+yawl:TomcatUtil_start_1 a yawl:Method ;
+    rdfs:label "start" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean start()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: TomcatUtil.stop
+yawl:TomcatUtil_stop_2 a yawl:Method ;
+    rdfs:label "stop" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean stop()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: TomcatUtil.stop
+yawl:TomcatUtil_stop_3 a yawl:Method ;
+    rdfs:label "stop" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean stop(PropertyChangeListener listener)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: TomcatUtil.isPortActive
+yawl:TomcatUtil_isPortActive_4 a yawl:Method ;
+    rdfs:label "isPortActive" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isPortActive()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: TomcatUtil.isPortActive
+yawl:TomcatUtil_isPortActive_5 a yawl:Method ;
+    rdfs:label "isPortActive" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isPortActive(int port)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: TomcatUtil.isTomcatRunning
+yawl:TomcatUtil_isTomcatRunning_6 a yawl:Method ;
+    rdfs:label "isTomcatRunning" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isTomcatRunning()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: TomcatUtil.getCatalinaHome
+yawl:TomcatUtil_getCatalinaHome_7 a yawl:Method ;
+    rdfs:label "getCatalinaHome" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCatalinaHome()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: TomcatUtil.getTomcatServerPort
+yawl:TomcatUtil_getTomcatServerPort_8 a yawl:Method ;
+    rdfs:label "getTomcatServerPort" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getTomcatServerPort()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: TomcatUtil.setTomcatServerPort
+yawl:TomcatUtil_setTomcatServerPort_9 a yawl:Method ;
+    rdfs:label "setTomcatServerPort" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean setTomcatServerPort(int port)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: TomcatUtil.isEngineRunning
+yawl:TomcatUtil_isEngineRunning_10 a yawl:Method ;
+    rdfs:label "isEngineRunning" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEngineRunning()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: TomcatUtil.killTomcatProcess
+yawl:TomcatUtil_killTomcatProcess_11 a yawl:Method ;
+    rdfs:label "killTomcatProcess" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean killTomcatProcess()" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: TomcatUtil.monitorShutdown
+yawl:TomcatUtil_monitorShutdown_12 a yawl:Method ;
+    rdfs:label "monitorShutdown" ;
+    yawl:returnType "void" ;
+    yawl:signature "void monitorShutdown(PropertyChangeListener listener)" ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: TomcatUtil.loadTomcatServerPort
+yawl:TomcatUtil_loadTomcatServerPort_13 a yawl:Method ;
+    rdfs:label "loadTomcatServerPort" ;
+    yawl:returnType "int" ;
+    yawl:signature "int loadTomcatServerPort()" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: TomcatUtil.loadTomcatConfigFile
+yawl:TomcatUtil_loadTomcatConfigFile_14 a yawl:Method ;
+    rdfs:label "loadTomcatConfigFile" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode loadTomcatConfigFile(String filename)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: TomcatUtil.writeTomcatConfigFile
+yawl:TomcatUtil_writeTomcatConfigFile_15 a yawl:Method ;
+    rdfs:label "writeTomcatConfigFile" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean writeTomcatConfigFile(String filename, String content)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: TomcatUtil.getTomcatConfigFile
+yawl:TomcatUtil_getTomcatConfigFile_16 a yawl:Method ;
+    rdfs:label "getTomcatConfigFile" ;
+    yawl:returnType "File" ;
+    yawl:signature "File getTomcatConfigFile(String filename)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: TomcatUtil.checkSizeOfLog
+yawl:TomcatUtil_checkSizeOfLog_17 a yawl:Method ;
+    rdfs:label "checkSizeOfLog" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkSizeOfLog()" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: TomcatUtil.removePidFile
+yawl:TomcatUtil_removePidFile_18 a yawl:Method ;
+    rdfs:label "removePidFile" ;
+    yawl:returnType "void" ;
+    yawl:signature "void removePidFile()" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: TomcatUtil.deriveCatalinaHome
+yawl:TomcatUtil_deriveCatalinaHome_19 a yawl:Method ;
+    rdfs:label "deriveCatalinaHome" ;
+    yawl:returnType "String" ;
+    yawl:signature "String deriveCatalinaHome()" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+# Method: TomcatUtil.updateServiceConfigs
+yawl:TomcatUtil_updateServiceConfigs_20 a yawl:Method ;
+    rdfs:label "updateServiceConfigs" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean updateServiceConfigs(int oldPort, int newPort)" ;
+    yawl:modifiers "private" ;
+    yawl:modifiers "static" ;
+    .
+
+
+
+yawl:TomcatUtil_SERVER_PORT a yawl:Field ;
+    rdfs:label "SERVER_PORT" .
+
+yawl:TomcatUtil_ENGINE_URL a yawl:Field ;
+    rdfs:label "ENGINE_URL" .
+
+yawl:TomcatUtil_TOMCAT_VERSION a yawl:Field ;
+    rdfs:label "TOMCAT_VERSION" .
+
+yawl:TomcatUtil_CATALINA_HOME a yawl:Field ;
+    rdfs:label "CATALINA_HOME" .
+
+yawl:TomcatUtil__process a yawl:Field ;
+    rdfs:label "_process" .
+
+
+

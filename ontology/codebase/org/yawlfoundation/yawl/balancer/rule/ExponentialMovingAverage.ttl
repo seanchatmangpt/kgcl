@@ -1,0 +1,48 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.balancer.rule.ExponentialMovingAverage
+yawl:ExponentialMovingAverage a yawl:Class ;
+    rdfs:label "ExponentialMovingAverage" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer_rule ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/rule/ExponentialMovingAverage.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 8/8/17""" ;
+    yawl:implements yawl:BusynessRule ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ExponentialMovingAverage_get_1 ;
+    yawl:hasMethod yawl:ExponentialMovingAverage_add_2 ;
+    yawl:hasField yawl:ExponentialMovingAverage__alpha ;
+    yawl:hasField yawl:ExponentialMovingAverage__average ;
+    .
+
+
+# Method: ExponentialMovingAverage.get
+yawl:ExponentialMovingAverage_get_1 a yawl:Method ;
+    rdfs:label "get" ;
+    yawl:returnType "double" ;
+    yawl:signature "double get()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExponentialMovingAverage.add
+yawl:ExponentialMovingAverage_add_2 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(double value)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:ExponentialMovingAverage__alpha a yawl:Field ;
+    rdfs:label "_alpha" .
+
+yawl:ExponentialMovingAverage__average a yawl:Field ;
+    rdfs:label "_average" .
+
+
+

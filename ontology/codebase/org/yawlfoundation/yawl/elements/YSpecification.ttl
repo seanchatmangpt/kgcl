@@ -1,0 +1,472 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.elements.YSpecification
+yawl:YSpecification a yawl:Class ;
+    rdfs:label "YSpecification" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_elements ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/elements/YSpecification.java"^^xsd:string ;
+    rdfs:comment """Objects of this type are a specification of a Workflow checkSchema model in YAWL. @author Lachlan Aldred""" ;
+    yawl:implements yawl:Cloneable ;
+    yawl:implements yawl:YVerifiable ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "final" ;
+    yawl:hasMethod yawl:YSpecification_getRootNet_1 ;
+    yawl:hasMethod yawl:YSpecification_setRootNet_2 ;
+    yawl:hasMethod yawl:YSpecification_getBetaVersion_3 ;
+    yawl:hasMethod yawl:YSpecification_getSchemaVersion_4 ;
+    yawl:hasMethod yawl:YSpecification_getSpecVersion_5 ;
+    yawl:hasMethod yawl:YSpecification_setBetaVersion_6 ;
+    yawl:hasMethod yawl:YSpecification_setVersion_7 ;
+    yawl:hasMethod yawl:YSpecification_setVersion_8 ;
+    yawl:hasMethod yawl:YSpecification_setSchema_9 ;
+    yawl:hasMethod yawl:YSpecification_getDataValidator_10 ;
+    yawl:hasMethod yawl:YSpecification_getDataSchema_11 ;
+    yawl:hasMethod yawl:YSpecification_toXML_12 ;
+    yawl:hasMethod yawl:YSpecification_getName_13 ;
+    yawl:hasMethod yawl:YSpecification_setName_14 ;
+    yawl:hasMethod yawl:YSpecification_getDocumentation_15 ;
+    yawl:hasMethod yawl:YSpecification_setDocumentation_16 ;
+    yawl:hasMethod yawl:YSpecification_getDecomposition_17 ;
+    yawl:hasMethod yawl:YSpecification_addDecomposition_18 ;
+    yawl:hasMethod yawl:YSpecification_getDecompositions_19 ;
+    yawl:hasMethod yawl:YSpecification_removeDecomposition_20 ;
+    yawl:hasMethod yawl:YSpecification_getURI_21 ;
+    yawl:hasMethod yawl:YSpecification_setURI_22 ;
+    yawl:hasMethod yawl:YSpecification_getID_23 ;
+    yawl:hasMethod yawl:YSpecification_getSpecificationID_24 ;
+    yawl:hasMethod yawl:YSpecification_setMetaData_25 ;
+    yawl:hasMethod yawl:YSpecification_getMetaData_26 ;
+    yawl:hasMethod yawl:YSpecification_equals_27 ;
+    yawl:hasMethod yawl:YSpecification_hashCode_28 ;
+    yawl:hasMethod yawl:YSpecification_getPersistedXML_29 ;
+    yawl:hasMethod yawl:YSpecification_setPersistedXML_30 ;
+    yawl:hasMethod yawl:YSpecification_getRowKey_31 ;
+    yawl:hasMethod yawl:YSpecification_setRowKey_32 ;
+    yawl:hasMethod yawl:YSpecification_getRestoredXML_33 ;
+    yawl:hasMethod yawl:YSpecification_verify_34 ;
+    yawl:hasMethod yawl:YSpecification_checkDataTypesValidity_35 ;
+    yawl:hasMethod yawl:YSpecification_checkForEmptyExecutionPaths_36 ;
+    yawl:hasMethod yawl:YSpecification_getEmptyPostsetAtThisLevel_37 ;
+    yawl:hasMethod yawl:YSpecification_checkForInfiniteLoops_38 ;
+    yawl:hasMethod yawl:YSpecification_checkTheseTasksForInfiniteLoops_39 ;
+    yawl:hasMethod yawl:YSpecification_checkForEmptyTasksWithTimerParams_40 ;
+    yawl:hasMethod yawl:YSpecification_selectEmptyAndDecomposedTasks_41 ;
+    yawl:hasMethod yawl:YSpecification_getEmptyTasksPostset_42 ;
+    yawl:hasMethod yawl:YSpecification_checkDecompositionUsage_43 ;
+    yawl:hasMethod yawl:YSpecification_unfoldNetChildren_44 ;
+    yawl:hasField yawl:YSpecification__specURI ;
+    yawl:hasField yawl:YSpecification__rootNet ;
+    yawl:hasField yawl:YSpecification__decompositions ;
+    yawl:hasField yawl:YSpecification__name ;
+    yawl:hasField yawl:YSpecification__documentation ;
+    yawl:hasField yawl:YSpecification__version ;
+    yawl:hasField yawl:YSpecification__dataValidator ;
+    yawl:hasField yawl:YSpecification__metaData ;
+    yawl:hasField yawl:YSpecification__loaded ;
+    yawl:hasField yawl:YSpecification__unloaded ;
+    yawl:hasField yawl:YSpecification_rowKey ;
+    yawl:hasField yawl:YSpecification_persistedXML ;
+    .
+
+
+# Method: YSpecification.getRootNet
+yawl:YSpecification_getRootNet_1 a yawl:Method ;
+    rdfs:label "getRootNet" ;
+    yawl:returnType "YNet" ;
+    yawl:signature "YNet getRootNet()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.setRootNet
+yawl:YSpecification_setRootNet_2 a yawl:Method ;
+    rdfs:label "setRootNet" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRootNet(YNet rootNet)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.getBetaVersion
+yawl:YSpecification_getBetaVersion_3 a yawl:Method ;
+    rdfs:label "getBetaVersion" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getBetaVersion()" ;
+    rdfs:comment """@deprecated since v2.0: use getSchemaVersion() instead Gets the version number of this specification's schema (as opposed to the version number of the specification itself). @return the version of the engine that this specification was first designed for.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.getSchemaVersion
+yawl:YSpecification_getSchemaVersion_4 a yawl:Method ;
+    rdfs:label "getSchemaVersion" ;
+    yawl:returnType "YSchemaVersion" ;
+    yawl:signature "YSchemaVersion getSchemaVersion()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.getSpecVersion
+yawl:YSpecification_getSpecVersion_5 a yawl:Method ;
+    rdfs:label "getSpecVersion" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSpecVersion()" ;
+    rdfs:comment """Gets the version number of this specification (as opposed to the version number of the specification's schema). @return the version of this specification.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.setBetaVersion
+yawl:YSpecification_setBetaVersion_6 a yawl:Method ;
+    rdfs:label "setBetaVersion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBetaVersion(String version)" ;
+    rdfs:comment """Sets the version number of the specification. @param version @deprecated since v2.0: use setVersion() instead.""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.setVersion
+yawl:YSpecification_setVersion_7 a yawl:Method ;
+    rdfs:label "setVersion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setVersion(String version)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.setVersion
+yawl:YSpecification_setVersion_8 a yawl:Method ;
+    rdfs:label "setVersion" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setVersion(YSchemaVersion version)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.setSchema
+yawl:YSpecification_setSchema_9 a yawl:Method ;
+    rdfs:label "setSchema" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSchema(String schemaString)" ;
+    rdfs:comment """Sets the data schema for this specification. @param schemaString""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.getDataValidator
+yawl:YSpecification_getDataValidator_10 a yawl:Method ;
+    rdfs:label "getDataValidator" ;
+    yawl:returnType "YDataValidator" ;
+    yawl:signature "YDataValidator getDataValidator()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.getDataSchema
+yawl:YSpecification_getDataSchema_11 a yawl:Method ;
+    rdfs:label "getDataSchema" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDataSchema()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.toXML
+yawl:YSpecification_toXML_12 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.getName
+yawl:YSpecification_getName_13 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.setName
+yawl:YSpecification_setName_14 a yawl:Method ;
+    rdfs:label "setName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.getDocumentation
+yawl:YSpecification_getDocumentation_15 a yawl:Method ;
+    rdfs:label "getDocumentation" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDocumentation()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.setDocumentation
+yawl:YSpecification_setDocumentation_16 a yawl:Method ;
+    rdfs:label "setDocumentation" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDocumentation(String documentation)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.getDecomposition
+yawl:YSpecification_getDecomposition_17 a yawl:Method ;
+    rdfs:label "getDecomposition" ;
+    yawl:returnType "YDecomposition" ;
+    yawl:signature "YDecomposition getDecomposition(String id)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.addDecomposition
+yawl:YSpecification_addDecomposition_18 a yawl:Method ;
+    rdfs:label "addDecomposition" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addDecomposition(YDecomposition decomposition)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.getDecompositions
+yawl:YSpecification_getDecompositions_19 a yawl:Method ;
+    rdfs:label "getDecompositions" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getDecompositions()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.removeDecomposition
+yawl:YSpecification_removeDecomposition_20 a yawl:Method ;
+    rdfs:label "removeDecomposition" ;
+    yawl:returnType "YDecomposition" ;
+    yawl:signature "YDecomposition removeDecomposition(String decompositionID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.getURI
+yawl:YSpecification_getURI_21 a yawl:Method ;
+    rdfs:label "getURI" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getURI()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.setURI
+yawl:YSpecification_setURI_22 a yawl:Method ;
+    rdfs:label "setURI" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setURI(String uri)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.getID
+yawl:YSpecification_getID_23 a yawl:Method ;
+    rdfs:label "getID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.getSpecificationID
+yawl:YSpecification_getSpecificationID_24 a yawl:Method ;
+    rdfs:label "getSpecificationID" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getSpecificationID()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.setMetaData
+yawl:YSpecification_setMetaData_25 a yawl:Method ;
+    rdfs:label "setMetaData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setMetaData(YMetaData metaData)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.getMetaData
+yawl:YSpecification_getMetaData_26 a yawl:Method ;
+    rdfs:label "getMetaData" ;
+    yawl:returnType "YMetaData" ;
+    yawl:signature "YMetaData getMetaData()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.equals
+yawl:YSpecification_equals_27 a yawl:Method ;
+    rdfs:label "equals" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean equals(Object other)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.hashCode
+yawl:YSpecification_hashCode_28 a yawl:Method ;
+    rdfs:label "hashCode" ;
+    yawl:returnType "int" ;
+    yawl:signature "int hashCode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.getPersistedXML
+yawl:YSpecification_getPersistedXML_29 a yawl:Method ;
+    rdfs:label "getPersistedXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getPersistedXML()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSpecification.setPersistedXML
+yawl:YSpecification_setPersistedXML_30 a yawl:Method ;
+    rdfs:label "setPersistedXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setPersistedXML(String xml)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSpecification.getRowKey
+yawl:YSpecification_getRowKey_31 a yawl:Method ;
+    rdfs:label "getRowKey" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getRowKey()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.setRowKey
+yawl:YSpecification_setRowKey_32 a yawl:Method ;
+    rdfs:label "setRowKey" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRowKey(long key)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.getRestoredXML
+yawl:YSpecification_getRestoredXML_33 a yawl:Method ;
+    rdfs:label "getRestoredXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRestoredXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.verify
+yawl:YSpecification_verify_34 a yawl:Method ;
+    rdfs:label "verify" ;
+    yawl:returnType "void" ;
+    yawl:signature "void verify(YVerificationHandler handler)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YSpecification.checkDataTypesValidity
+yawl:YSpecification_checkDataTypesValidity_35 a yawl:Method ;
+    rdfs:label "checkDataTypesValidity" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkDataTypesValidity(YVerificationHandler handler)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSpecification.checkForEmptyExecutionPaths
+yawl:YSpecification_checkForEmptyExecutionPaths_36 a yawl:Method ;
+    rdfs:label "checkForEmptyExecutionPaths" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkForEmptyExecutionPaths(YVerificationHandler handler)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSpecification.getEmptyPostsetAtThisLevel
+yawl:YSpecification_getEmptyPostsetAtThisLevel_37 a yawl:Method ;
+    rdfs:label "getEmptyPostsetAtThisLevel" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getEmptyPostsetAtThisLevel(Set aSet)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSpecification.checkForInfiniteLoops
+yawl:YSpecification_checkForInfiniteLoops_38 a yawl:Method ;
+    rdfs:label "checkForInfiniteLoops" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkForInfiniteLoops(YVerificationHandler handler)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSpecification.checkTheseTasksForInfiniteLoops
+yawl:YSpecification_checkTheseTasksForInfiniteLoops_39 a yawl:Method ;
+    rdfs:label "checkTheseTasksForInfiniteLoops" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkTheseTasksForInfiniteLoops(Set relevantTasks, boolean generateWarnings, YVerificationHandler handler)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSpecification.checkForEmptyTasksWithTimerParams
+yawl:YSpecification_checkForEmptyTasksWithTimerParams_40 a yawl:Method ;
+    rdfs:label "checkForEmptyTasksWithTimerParams" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkForEmptyTasksWithTimerParams(Set relevantTasks, YVerificationHandler handler)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSpecification.selectEmptyAndDecomposedTasks
+yawl:YSpecification_selectEmptyAndDecomposedTasks_41 a yawl:Method ;
+    rdfs:label "selectEmptyAndDecomposedTasks" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set selectEmptyAndDecomposedTasks(Set relevantNets)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSpecification.getEmptyTasksPostset
+yawl:YSpecification_getEmptyTasksPostset_42 a yawl:Method ;
+    rdfs:label "getEmptyTasksPostset" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getEmptyTasksPostset(Set set)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSpecification.checkDecompositionUsage
+yawl:YSpecification_checkDecompositionUsage_43 a yawl:Method ;
+    rdfs:label "checkDecompositionUsage" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkDecompositionUsage(YVerificationHandler handler)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YSpecification.unfoldNetChildren
+yawl:YSpecification_unfoldNetChildren_44 a yawl:Method ;
+    rdfs:label "unfoldNetChildren" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set unfoldNetChildren(YDecomposition decomposition, Set netsAlreadyExplored, String criterion)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:YSpecification__specURI a yawl:Field ;
+    rdfs:label "_specURI" .
+
+yawl:YSpecification__rootNet a yawl:Field ;
+    rdfs:label "_rootNet" .
+
+yawl:YSpecification__decompositions a yawl:Field ;
+    rdfs:label "_decompositions" .
+
+yawl:YSpecification__name a yawl:Field ;
+    rdfs:label "_name" .
+
+yawl:YSpecification__documentation a yawl:Field ;
+    rdfs:label "_documentation" .
+
+yawl:YSpecification__version a yawl:Field ;
+    rdfs:label "_version" .
+
+yawl:YSpecification__dataValidator a yawl:Field ;
+    rdfs:label "_dataValidator" .
+
+yawl:YSpecification__metaData a yawl:Field ;
+    rdfs:label "_metaData" .
+
+yawl:YSpecification__loaded a yawl:Field ;
+    rdfs:label "_loaded" .
+
+yawl:YSpecification__unloaded a yawl:Field ;
+    rdfs:label "_unloaded" .
+
+yawl:YSpecification_rowKey a yawl:Field ;
+    rdfs:label "rowKey" .
+
+yawl:YSpecification_persistedXML a yawl:Field ;
+    rdfs:label "persistedXML" .
+
+
+

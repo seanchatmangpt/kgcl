@@ -1,0 +1,60 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.balancer.jmx
+yawl:org_yawlfoundation_yawl_balancer_jmx a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.balancer.jmx" .
+# Class: org.yawlfoundation.yawl.balancer.jmx.JMXMemoryStatistics
+yawl:JMXMemoryStatistics a yawl:Class ;
+    rdfs:label "JMXMemoryStatistics" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer_jmx ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/jmx/JMXMemoryStatistics.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 13/6/17""" ;
+    yawl:extends yawl:JMXStatistics ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:JMXMemoryStatistics_toString_1 ;
+    yawl:hasMethod yawl:JMXMemoryStatistics_toXNode_2 ;
+    yawl:hasMethod yawl:JMXMemoryStatistics_parse_3 ;
+    yawl:hasField yawl:JMXMemoryStatistics_heap ;
+    yawl:hasField yawl:JMXMemoryStatistics_nonHeap ;
+    .
+
+
+# Method: JMXMemoryStatistics.toString
+yawl:JMXMemoryStatistics_toString_1 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: JMXMemoryStatistics.toXNode
+yawl:JMXMemoryStatistics_toXNode_2 a yawl:Method ;
+    rdfs:label "toXNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode toXNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: JMXMemoryStatistics.parse
+yawl:JMXMemoryStatistics_parse_3 a yawl:Method ;
+    rdfs:label "parse" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parse(JSONObject obj)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:JMXMemoryStatistics_heap a yawl:Field ;
+    rdfs:label "heap" .
+
+yawl:JMXMemoryStatistics_nonHeap a yawl:Field ;
+    rdfs:label "nonHeap" .
+
+
+

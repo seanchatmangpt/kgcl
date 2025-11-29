@@ -1,0 +1,114 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.resourcing.calendar.CalendarRow
+yawl:CalendarRow a yawl:Class ;
+    rdfs:label "CalendarRow" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_calendar ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/calendar/CalendarRow.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 12/04/2011""" ;
+    yawl:extends yawl:CalendarEntry ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CalendarRow_getName_1 ;
+    yawl:hasMethod yawl:CalendarRow_setName_2 ;
+    yawl:hasMethod yawl:CalendarRow_getBaseDate_3 ;
+    yawl:hasMethod yawl:CalendarRow_setBaseDate_4 ;
+    yawl:hasMethod yawl:CalendarRow_getStartTimeAsString_5 ;
+    yawl:hasMethod yawl:CalendarRow_getEndTimeAsString_6 ;
+    yawl:hasMethod yawl:CalendarRow_getTimeAsString_7 ;
+    yawl:hasMethod yawl:CalendarRow_toCalendarEntry_8 ;
+    yawl:hasField yawl:CalendarRow_timeFormat ;
+    yawl:hasField yawl:CalendarRow_extdFormat ;
+    yawl:hasField yawl:CalendarRow_MSECS_IN_ONE_DAY ;
+    yawl:hasField yawl:CalendarRow_name ;
+    yawl:hasField yawl:CalendarRow_baseDate ;
+    .
+
+
+# Method: CalendarRow.getName
+yawl:CalendarRow_getName_1 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarRow.setName
+yawl:CalendarRow_setName_2 a yawl:Method ;
+    rdfs:label "setName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setName(String n)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarRow.getBaseDate
+yawl:CalendarRow_getBaseDate_3 a yawl:Method ;
+    rdfs:label "getBaseDate" ;
+    yawl:returnType "Date" ;
+    yawl:signature "Date getBaseDate()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarRow.setBaseDate
+yawl:CalendarRow_setBaseDate_4 a yawl:Method ;
+    rdfs:label "setBaseDate" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setBaseDate(Date date)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarRow.getStartTimeAsString
+yawl:CalendarRow_getStartTimeAsString_5 a yawl:Method ;
+    rdfs:label "getStartTimeAsString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStartTimeAsString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarRow.getEndTimeAsString
+yawl:CalendarRow_getEndTimeAsString_6 a yawl:Method ;
+    rdfs:label "getEndTimeAsString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getEndTimeAsString()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CalendarRow.getTimeAsString
+yawl:CalendarRow_getTimeAsString_7 a yawl:Method ;
+    rdfs:label "getTimeAsString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTimeAsString(long time)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CalendarRow.toCalendarEntry
+yawl:CalendarRow_toCalendarEntry_8 a yawl:Method ;
+    rdfs:label "toCalendarEntry" ;
+    yawl:returnType "CalendarEntry" ;
+    yawl:signature "CalendarEntry toCalendarEntry()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:CalendarRow_timeFormat a yawl:Field ;
+    rdfs:label "timeFormat" .
+
+yawl:CalendarRow_extdFormat a yawl:Field ;
+    rdfs:label "extdFormat" .
+
+yawl:CalendarRow_MSECS_IN_ONE_DAY a yawl:Field ;
+    rdfs:label "MSECS_IN_ONE_DAY" .
+
+yawl:CalendarRow_name a yawl:Field ;
+    rdfs:label "name" .
+
+yawl:CalendarRow_baseDate a yawl:Field ;
+    rdfs:label "baseDate" .
+
+
+

@@ -1,0 +1,47 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.worklet.exception.ExletValidationError
+yawl:ExletValidationError a yawl:Class ;
+    rdfs:label "ExletValidationError" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_worklet_exception ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/worklet/exception/ExletValidationError.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 27/08/15""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:ExletValidationError_getIndex_1 ;
+    yawl:hasMethod yawl:ExletValidationError_getMessage_2 ;
+    yawl:hasField yawl:ExletValidationError__index ;
+    yawl:hasField yawl:ExletValidationError__msg ;
+    .
+
+
+# Method: ExletValidationError.getIndex
+yawl:ExletValidationError_getIndex_1 a yawl:Method ;
+    rdfs:label "getIndex" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getIndex()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: ExletValidationError.getMessage
+yawl:ExletValidationError_getMessage_2 a yawl:Method ;
+    rdfs:label "getMessage" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getMessage()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:ExletValidationError__index a yawl:Field ;
+    rdfs:label "_index" .
+
+yawl:ExletValidationError__msg a yawl:Field ;
+    rdfs:label "_msg" .
+
+
+

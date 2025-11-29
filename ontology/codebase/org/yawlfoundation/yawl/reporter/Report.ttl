@@ -1,0 +1,97 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.reporter.Report
+yawl:Report a yawl:Class ;
+    rdfs:label "Report" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_reporter ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/reporter/Report.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 1/10/15""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Report_add_1 ;
+    yawl:hasMethod yawl:Report_setSubject_2 ;
+    yawl:hasMethod yawl:Report_getSubject_3 ;
+    yawl:hasMethod yawl:Report_addContent_4 ;
+    yawl:hasMethod yawl:Report_getHTML_5 ;
+    yawl:hasMethod yawl:Report_toXML_6 ;
+    yawl:hasMethod yawl:Report_fromXML_7 ;
+    yawl:hasField yawl:Report__subject ;
+    yawl:hasField yawl:Report__content ;
+    .
+
+
+# Method: Report.add
+yawl:Report_add_1 a yawl:Method ;
+    rdfs:label "add" ;
+    yawl:returnType "void" ;
+    yawl:signature "void add(String heading, String text)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Report.setSubject
+yawl:Report_setSubject_2 a yawl:Method ;
+    rdfs:label "setSubject" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setSubject(String subject)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Report.getSubject
+yawl:Report_getSubject_3 a yawl:Method ;
+    rdfs:label "getSubject" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getSubject()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Report.addContent
+yawl:Report_addContent_4 a yawl:Method ;
+    rdfs:label "addContent" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addContent(String heading, String text)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Report.getHTML
+yawl:Report_getHTML_5 a yawl:Method ;
+    rdfs:label "getHTML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getHTML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Report.toXML
+yawl:Report_toXML_6 a yawl:Method ;
+    rdfs:label "toXML" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toXML()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Report.fromXML
+yawl:Report_fromXML_7 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:Report__subject a yawl:Field ;
+    rdfs:label "_subject" .
+
+yawl:Report__content a yawl:Field ;
+    rdfs:label "_content" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_worklet a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.worklet" .
+
+

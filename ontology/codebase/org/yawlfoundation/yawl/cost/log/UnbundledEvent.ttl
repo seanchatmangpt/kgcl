@@ -1,0 +1,179 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.cost.log.UnbundledEvent
+yawl:UnbundledEvent a yawl:Class ;
+    rdfs:label "UnbundledEvent" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_cost_log ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/cost/log/UnbundledEvent.java"^^xsd:string ;
+    rdfs:comment """Unbundles the information in a log event node into its composite parts""" ;
+    yawl:hasMethod yawl:UnbundledEvent_hasDataMatch_1 ;
+    yawl:hasMethod yawl:UnbundledEvent_isPreStart_2 ;
+    yawl:hasMethod yawl:UnbundledEvent_isCompletedTransition_3 ;
+    yawl:hasMethod yawl:UnbundledEvent_getDataMap_4 ;
+    yawl:hasMethod yawl:UnbundledEvent_getKey_5 ;
+    yawl:hasMethod yawl:UnbundledEvent_hasTransition_6 ;
+    yawl:hasMethod yawl:UnbundledEvent_hasData_7 ;
+    yawl:hasMethod yawl:UnbundledEvent_getName_8 ;
+    yawl:hasMethod yawl:UnbundledEvent_getResource_9 ;
+    yawl:hasMethod yawl:UnbundledEvent_getNode_10 ;
+    yawl:hasMethod yawl:UnbundledEvent_getInstance_11 ;
+    yawl:hasMethod yawl:UnbundledEvent_getTimestamp_12 ;
+    yawl:hasMethod yawl:UnbundledEvent_getTransition_13 ;
+    yawl:hasField yawl:UnbundledEvent_xnode ;
+    yawl:hasField yawl:UnbundledEvent_timestamp ;
+    yawl:hasField yawl:UnbundledEvent_name ;
+    yawl:hasField yawl:UnbundledEvent_transition ;
+    yawl:hasField yawl:UnbundledEvent_instance ;
+    yawl:hasField yawl:UnbundledEvent_resource ;
+    yawl:hasField yawl:UnbundledEvent_hasData ;
+    yawl:hasField yawl:UnbundledEvent_dataMap ;
+    .
+
+
+# Method: UnbundledEvent.hasDataMatch
+yawl:UnbundledEvent_hasDataMatch_1 a yawl:Method ;
+    rdfs:label "hasDataMatch" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasDataMatch(String key, String value)" ;
+    rdfs:comment """Checks if there is a matching data variable AND value in this event @param key the name of the variable @param value its value @return true iff a data variable of the same name as 'key' exists in this event, and its 'value' matches the value logged for it""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UnbundledEvent.isPreStart
+yawl:UnbundledEvent_isPreStart_2 a yawl:Method ;
+    rdfs:label "isPreStart" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isPreStart()" ;
+    rdfs:comment """Checks if this event's transition come before the 'start' event @return true if this event precedes the starting of the work item""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UnbundledEvent.isCompletedTransition
+yawl:UnbundledEvent_isCompletedTransition_3 a yawl:Method ;
+    rdfs:label "isCompletedTransition" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isCompletedTransition()" ;
+    rdfs:comment """Checks if this event's transition is a completion @return true if this event represents the completion of the work item""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UnbundledEvent.getDataMap
+yawl:UnbundledEvent_getDataMap_4 a yawl:Method ;
+    rdfs:label "getDataMap" ;
+    yawl:returnType "Map" ;
+    yawl:signature "Map getDataMap()" ;
+    rdfs:comment """Gets the map of data variables and values for this event, if any. (Note: only 'start' and 'complete' events contain data values) @return the data map (which will be empty if there are no data values associated with this event)""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UnbundledEvent.getKey
+yawl:UnbundledEvent_getKey_5 a yawl:Method ;
+    rdfs:label "getKey" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getKey()" ;
+    rdfs:comment """Gets the key used to index this event in higher level maps @return the appropriate key""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UnbundledEvent.hasTransition
+yawl:UnbundledEvent_hasTransition_6 a yawl:Method ;
+    rdfs:label "hasTransition" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasTransition(String t)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UnbundledEvent.hasData
+yawl:UnbundledEvent_hasData_7 a yawl:Method ;
+    rdfs:label "hasData" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean hasData()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UnbundledEvent.getName
+yawl:UnbundledEvent_getName_8 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UnbundledEvent.getResource
+yawl:UnbundledEvent_getResource_9 a yawl:Method ;
+    rdfs:label "getResource" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getResource()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UnbundledEvent.getNode
+yawl:UnbundledEvent_getNode_10 a yawl:Method ;
+    rdfs:label "getNode" ;
+    yawl:returnType "XNode" ;
+    yawl:signature "XNode getNode()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UnbundledEvent.getInstance
+yawl:UnbundledEvent_getInstance_11 a yawl:Method ;
+    rdfs:label "getInstance" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getInstance()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UnbundledEvent.getTimestamp
+yawl:UnbundledEvent_getTimestamp_12 a yawl:Method ;
+    rdfs:label "getTimestamp" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTimestamp()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: UnbundledEvent.getTransition
+yawl:UnbundledEvent_getTransition_13 a yawl:Method ;
+    rdfs:label "getTransition" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getTransition()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:UnbundledEvent_xnode a yawl:Field ;
+    rdfs:label "xnode" .
+
+yawl:UnbundledEvent_timestamp a yawl:Field ;
+    rdfs:label "timestamp" .
+
+yawl:UnbundledEvent_name a yawl:Field ;
+    rdfs:label "name" .
+
+yawl:UnbundledEvent_transition a yawl:Field ;
+    rdfs:label "transition" .
+
+yawl:UnbundledEvent_instance a yawl:Field ;
+    rdfs:label "instance" .
+
+yawl:UnbundledEvent_resource a yawl:Field ;
+    rdfs:label "resource" .
+
+yawl:UnbundledEvent_hasData a yawl:Field ;
+    rdfs:label "hasData" .
+
+yawl:UnbundledEvent_dataMap a yawl:Field ;
+    rdfs:label "dataMap" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_cost_data a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.cost.data" .
+
+

@@ -1,0 +1,236 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.simulation.SimulatorProperties
+yawl:SimulatorProperties a yawl:Class ;
+    rdfs:label "SimulatorProperties" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_simulation ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/simulation/SimulatorProperties.java"^^xsd:string ;
+    yawl:hasMethod yawl:SimulatorProperties_getSpecID_1 ;
+    yawl:hasMethod yawl:SimulatorProperties_getSimType_2 ;
+    yawl:hasMethod yawl:SimulatorProperties_getResources_3 ;
+    yawl:hasMethod yawl:SimulatorProperties_getCaseCount_4 ;
+    yawl:hasMethod yawl:SimulatorProperties_getInterval_5 ;
+    yawl:hasMethod yawl:SimulatorProperties_getLimit_6 ;
+    yawl:hasMethod yawl:SimulatorProperties_getProcessingTime_7 ;
+    yawl:hasMethod yawl:SimulatorProperties_getConcurrent_8 ;
+    yawl:hasMethod yawl:SimulatorProperties_parse_9 ;
+    yawl:hasMethod yawl:SimulatorProperties_parseSimType_10 ;
+    yawl:hasMethod yawl:SimulatorProperties_parseInterval_11 ;
+    yawl:hasMethod yawl:SimulatorProperties_parseCaseCount_12 ;
+    yawl:hasMethod yawl:SimulatorProperties_parseSpecID_13 ;
+    yawl:hasMethod yawl:SimulatorProperties_parseServer_14 ;
+    yawl:hasMethod yawl:SimulatorProperties_parseTasks_15 ;
+    yawl:hasMethod yawl:SimulatorProperties_parseLimits_16 ;
+    yawl:hasMethod yawl:SimulatorProperties_addLimit_17 ;
+    yawl:hasMethod yawl:SimulatorProperties_setDefaultLimits_18 ;
+    yawl:hasMethod yawl:SimulatorProperties_addTaskResource_19 ;
+    yawl:hasMethod yawl:SimulatorProperties_getResourceSettings_20 ;
+    yawl:hasField yawl:SimulatorProperties_specID ;
+    yawl:hasField yawl:SimulatorProperties_simType ;
+    yawl:hasField yawl:SimulatorProperties_caseCount ;
+    yawl:hasField yawl:SimulatorProperties_interval ;
+    yawl:hasField yawl:SimulatorProperties_tasks ;
+    yawl:hasField yawl:SimulatorProperties_resources ;
+    yawl:hasField yawl:SimulatorProperties_DEFAULT_PROCESSING_TIME ;
+    yawl:hasField yawl:SimulatorProperties_ySimulator ;
+    .
+
+
+# Method: SimulatorProperties.getSpecID
+yawl:SimulatorProperties_getSpecID_1 a yawl:Method ;
+    rdfs:label "getSpecID" ;
+    yawl:returnType "YSpecificationID" ;
+    yawl:signature "YSpecificationID getSpecID()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: SimulatorProperties.getSimType
+yawl:SimulatorProperties_getSimType_2 a yawl:Method ;
+    rdfs:label "getSimType" ;
+    yawl:returnType "YSimulator" ;
+    yawl:signature "YSimulator getSimType()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: SimulatorProperties.getResources
+yawl:SimulatorProperties_getResources_3 a yawl:Method ;
+    rdfs:label "getResources" ;
+    yawl:returnType "Set" ;
+    yawl:signature "Set getResources()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: SimulatorProperties.getCaseCount
+yawl:SimulatorProperties_getCaseCount_4 a yawl:Method ;
+    rdfs:label "getCaseCount" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getCaseCount()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: SimulatorProperties.getInterval
+yawl:SimulatorProperties_getInterval_5 a yawl:Method ;
+    rdfs:label "getInterval" ;
+    yawl:returnType "long" ;
+    yawl:signature "long getInterval()" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: SimulatorProperties.getLimit
+yawl:SimulatorProperties_getLimit_6 a yawl:Method ;
+    rdfs:label "getLimit" ;
+    yawl:returnType "ResourceLimit" ;
+    yawl:signature "ResourceLimit getLimit(String pid)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: SimulatorProperties.getProcessingTime
+yawl:SimulatorProperties_getProcessingTime_7 a yawl:Method ;
+    rdfs:label "getProcessingTime" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getProcessingTime(String task, String pid)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: SimulatorProperties.getConcurrent
+yawl:SimulatorProperties_getConcurrent_8 a yawl:Method ;
+    rdfs:label "getConcurrent" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getConcurrent(String task, String pid)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: SimulatorProperties.parse
+yawl:SimulatorProperties_parse_9 a yawl:Method ;
+    rdfs:label "parse" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parse(String configFile)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: SimulatorProperties.parseSimType
+yawl:SimulatorProperties_parseSimType_10 a yawl:Method ;
+    rdfs:label "parseSimType" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseSimType(XNode node)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SimulatorProperties.parseInterval
+yawl:SimulatorProperties_parseInterval_11 a yawl:Method ;
+    rdfs:label "parseInterval" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseInterval(XNode node)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SimulatorProperties.parseCaseCount
+yawl:SimulatorProperties_parseCaseCount_12 a yawl:Method ;
+    rdfs:label "parseCaseCount" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseCaseCount(XNode node)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SimulatorProperties.parseSpecID
+yawl:SimulatorProperties_parseSpecID_13 a yawl:Method ;
+    rdfs:label "parseSpecID" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseSpecID(XNode node)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SimulatorProperties.parseServer
+yawl:SimulatorProperties_parseServer_14 a yawl:Method ;
+    rdfs:label "parseServer" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseServer(XNode node)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SimulatorProperties.parseTasks
+yawl:SimulatorProperties_parseTasks_15 a yawl:Method ;
+    rdfs:label "parseTasks" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseTasks(XNode node)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SimulatorProperties.parseLimits
+yawl:SimulatorProperties_parseLimits_16 a yawl:Method ;
+    rdfs:label "parseLimits" ;
+    yawl:returnType "void" ;
+    yawl:signature "void parseLimits(XNode node)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SimulatorProperties.addLimit
+yawl:SimulatorProperties_addLimit_17 a yawl:Method ;
+    rdfs:label "addLimit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addLimit(String pid, int limit)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SimulatorProperties.setDefaultLimits
+yawl:SimulatorProperties_setDefaultLimits_18 a yawl:Method ;
+    rdfs:label "setDefaultLimits" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDefaultLimits(int defaultLimit)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SimulatorProperties.addTaskResource
+yawl:SimulatorProperties_addTaskResource_19 a yawl:Method ;
+    rdfs:label "addTaskResource" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addTaskResource(String taskID, String pid, String time, String deviation, int concurrent)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: SimulatorProperties.getResourceSettings
+yawl:SimulatorProperties_getResourceSettings_20 a yawl:Method ;
+    rdfs:label "getResourceSettings" ;
+    yawl:returnType "TaskResourceSettings" ;
+    yawl:signature "TaskResourceSettings getResourceSettings(String task, String pid)" ;
+    yawl:modifiers "protected" ;
+    .
+
+
+
+yawl:SimulatorProperties_specID a yawl:Field ;
+    rdfs:label "specID" .
+
+yawl:SimulatorProperties_simType a yawl:Field ;
+    rdfs:label "simType" .
+
+yawl:SimulatorProperties_caseCount a yawl:Field ;
+    rdfs:label "caseCount" .
+
+yawl:SimulatorProperties_interval a yawl:Field ;
+    rdfs:label "interval" .
+
+yawl:SimulatorProperties_tasks a yawl:Field ;
+    rdfs:label "tasks" .
+
+yawl:SimulatorProperties_resources a yawl:Field ;
+    rdfs:label "resources" .
+
+yawl:SimulatorProperties_DEFAULT_PROCESSING_TIME a yawl:Field ;
+    rdfs:label "DEFAULT_PROCESSING_TIME" .
+
+yawl:SimulatorProperties_ySimulator a yawl:Field ;
+    rdfs:label "ySimulator" .
+
+
+
+
+yawl:org_yawlfoundation_yawl_mailService a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.mailService" .
+
+

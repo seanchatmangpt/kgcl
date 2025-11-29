@@ -1,0 +1,148 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.resourcing.codelets
+yawl:org_yawlfoundation_yawl_resourcing_codelets a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.resourcing.codelets" .
+# Class: org.yawlfoundation.yawl.resourcing.codelets.CodeletInfo
+yawl:CodeletInfo a yawl:Class ;
+    rdfs:label "CodeletInfo" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_resourcing_codelets ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/resourcing/codelets/CodeletInfo.java"^^xsd:string ;
+    rdfs:comment """Stores some information about a codelet class for transporting across the API. @author Michael Adams @date 7/09/2010""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CodeletInfo_getName_1 ;
+    yawl:hasMethod yawl:CodeletInfo_setName_2 ;
+    yawl:hasMethod yawl:CodeletInfo_getCanonicalName_3 ;
+    yawl:hasMethod yawl:CodeletInfo_setCanonicalName_4 ;
+    yawl:hasMethod yawl:CodeletInfo_getDescription_5 ;
+    yawl:hasMethod yawl:CodeletInfo_setDescription_6 ;
+    yawl:hasMethod yawl:CodeletInfo_getRequiredParams_7 ;
+    yawl:hasMethod yawl:CodeletInfo_setRequiredParams_8 ;
+    yawl:hasMethod yawl:CodeletInfo_fromXML_9 ;
+    yawl:hasMethod yawl:CodeletInfo_getRequiredParametersFromXML_10 ;
+    yawl:hasMethod yawl:CodeletInfo_getRequiredParametersFromXML_11 ;
+    yawl:hasMethod yawl:CodeletInfo_toString_12 ;
+    yawl:hasField yawl:CodeletInfo__name ;
+    yawl:hasField yawl:CodeletInfo__description ;
+    yawl:hasField yawl:CodeletInfo__canonicalName ;
+    yawl:hasField yawl:CodeletInfo__requiredParams ;
+    .
+
+
+# Method: CodeletInfo.getName
+yawl:CodeletInfo_getName_1 a yawl:Method ;
+    rdfs:label "getName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CodeletInfo.setName
+yawl:CodeletInfo_setName_2 a yawl:Method ;
+    rdfs:label "setName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CodeletInfo.getCanonicalName
+yawl:CodeletInfo_getCanonicalName_3 a yawl:Method ;
+    rdfs:label "getCanonicalName" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getCanonicalName()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CodeletInfo.setCanonicalName
+yawl:CodeletInfo_setCanonicalName_4 a yawl:Method ;
+    rdfs:label "setCanonicalName" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setCanonicalName(String name)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CodeletInfo.getDescription
+yawl:CodeletInfo_getDescription_5 a yawl:Method ;
+    rdfs:label "getDescription" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getDescription()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CodeletInfo.setDescription
+yawl:CodeletInfo_setDescription_6 a yawl:Method ;
+    rdfs:label "setDescription" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setDescription(String description)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CodeletInfo.getRequiredParams
+yawl:CodeletInfo_getRequiredParams_7 a yawl:Method ;
+    rdfs:label "getRequiredParams" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getRequiredParams()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CodeletInfo.setRequiredParams
+yawl:CodeletInfo_setRequiredParams_8 a yawl:Method ;
+    rdfs:label "setRequiredParams" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRequiredParams(List requiredParams)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CodeletInfo.fromXML
+yawl:CodeletInfo_fromXML_9 a yawl:Method ;
+    rdfs:label "fromXML" ;
+    yawl:returnType "void" ;
+    yawl:signature "void fromXML(XNode node)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CodeletInfo.getRequiredParametersFromXML
+yawl:CodeletInfo_getRequiredParametersFromXML_10 a yawl:Method ;
+    rdfs:label "getRequiredParametersFromXML" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getRequiredParametersFromXML(String xml)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CodeletInfo.getRequiredParametersFromXML
+yawl:CodeletInfo_getRequiredParametersFromXML_11 a yawl:Method ;
+    rdfs:label "getRequiredParametersFromXML" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getRequiredParametersFromXML(XNode node)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CodeletInfo.toString
+yawl:CodeletInfo_toString_12 a yawl:Method ;
+    rdfs:label "toString" ;
+    yawl:returnType "String" ;
+    yawl:signature "String toString()" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:CodeletInfo__name a yawl:Field ;
+    rdfs:label "_name" .
+
+yawl:CodeletInfo__description a yawl:Field ;
+    rdfs:label "_description" .
+
+yawl:CodeletInfo__canonicalName a yawl:Field ;
+    rdfs:label "_canonicalName" .
+
+yawl:CodeletInfo__requiredParams a yawl:Field ;
+    rdfs:label "_requiredParams" .
+
+
+

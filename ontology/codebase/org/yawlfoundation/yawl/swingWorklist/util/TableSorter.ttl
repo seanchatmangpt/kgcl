@@ -1,0 +1,175 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.swingWorklist.util
+yawl:org_yawlfoundation_yawl_swingWorklist_util a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.swingWorklist.util" .
+# Class: org.yawlfoundation.yawl.swingWorklist.util.TableSorter
+yawl:TableSorter a yawl:Class ;
+    rdfs:label "TableSorter" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_swingWorklist_util ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/swingWorklist/util/TableSorter.java"^^xsd:string ;
+    yawl:extends yawl:TableMap ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:TableSorter_setModel_1 ;
+    yawl:hasMethod yawl:TableSorter_compareRowsByColumn_2 ;
+    yawl:hasMethod yawl:TableSorter_compare_3 ;
+    yawl:hasMethod yawl:TableSorter_reallocateIndexes_4 ;
+    yawl:hasMethod yawl:TableSorter_tableChanged_5 ;
+    yawl:hasMethod yawl:TableSorter_checkModel_6 ;
+    yawl:hasMethod yawl:TableSorter_sort_7 ;
+    yawl:hasMethod yawl:TableSorter_n2sort_8 ;
+    yawl:hasMethod yawl:TableSorter_shuttlesort_9 ;
+    yawl:hasMethod yawl:TableSorter_swap_10 ;
+    yawl:hasMethod yawl:TableSorter_getValueAt_11 ;
+    yawl:hasMethod yawl:TableSorter_setValueAt_12 ;
+    yawl:hasMethod yawl:TableSorter_sortByColumn_13 ;
+    yawl:hasMethod yawl:TableSorter_sortByColumn_14 ;
+    yawl:hasMethod yawl:TableSorter_addMouseListenerToHeaderInTable_15 ;
+    yawl:hasField yawl:TableSorter_indexes ;
+    yawl:hasField yawl:TableSorter_sortingColumns ;
+    yawl:hasField yawl:TableSorter_ascending ;
+    yawl:hasField yawl:TableSorter_compares ;
+    .
+
+
+# Method: TableSorter.setModel
+yawl:TableSorter_setModel_1 a yawl:Method ;
+    rdfs:label "setModel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setModel(TableModel model)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableSorter.compareRowsByColumn
+yawl:TableSorter_compareRowsByColumn_2 a yawl:Method ;
+    rdfs:label "compareRowsByColumn" ;
+    yawl:returnType "int" ;
+    yawl:signature "int compareRowsByColumn(int row1, int row2, int column)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableSorter.compare
+yawl:TableSorter_compare_3 a yawl:Method ;
+    rdfs:label "compare" ;
+    yawl:returnType "int" ;
+    yawl:signature "int compare(int row1, int row2)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableSorter.reallocateIndexes
+yawl:TableSorter_reallocateIndexes_4 a yawl:Method ;
+    rdfs:label "reallocateIndexes" ;
+    yawl:returnType "void" ;
+    yawl:signature "void reallocateIndexes()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableSorter.tableChanged
+yawl:TableSorter_tableChanged_5 a yawl:Method ;
+    rdfs:label "tableChanged" ;
+    yawl:returnType "void" ;
+    yawl:signature "void tableChanged(TableModelEvent e)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableSorter.checkModel
+yawl:TableSorter_checkModel_6 a yawl:Method ;
+    rdfs:label "checkModel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void checkModel()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableSorter.sort
+yawl:TableSorter_sort_7 a yawl:Method ;
+    rdfs:label "sort" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sort(Object sender)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableSorter.n2sort
+yawl:TableSorter_n2sort_8 a yawl:Method ;
+    rdfs:label "n2sort" ;
+    yawl:returnType "void" ;
+    yawl:signature "void n2sort()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableSorter.shuttlesort
+yawl:TableSorter_shuttlesort_9 a yawl:Method ;
+    rdfs:label "shuttlesort" ;
+    yawl:returnType "void" ;
+    yawl:signature "void shuttlesort(int from, int to, int low, int high)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableSorter.swap
+yawl:TableSorter_swap_10 a yawl:Method ;
+    rdfs:label "swap" ;
+    yawl:returnType "void" ;
+    yawl:signature "void swap(int i, int j)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableSorter.getValueAt
+yawl:TableSorter_getValueAt_11 a yawl:Method ;
+    rdfs:label "getValueAt" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object getValueAt(int aRow, int aColumn)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableSorter.setValueAt
+yawl:TableSorter_setValueAt_12 a yawl:Method ;
+    rdfs:label "setValueAt" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setValueAt(Object aValue, int aRow, int aColumn)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableSorter.sortByColumn
+yawl:TableSorter_sortByColumn_13 a yawl:Method ;
+    rdfs:label "sortByColumn" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sortByColumn(int column)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableSorter.sortByColumn
+yawl:TableSorter_sortByColumn_14 a yawl:Method ;
+    rdfs:label "sortByColumn" ;
+    yawl:returnType "void" ;
+    yawl:signature "void sortByColumn(int column, boolean ascending)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: TableSorter.addMouseListenerToHeaderInTable
+yawl:TableSorter_addMouseListenerToHeaderInTable_15 a yawl:Method ;
+    rdfs:label "addMouseListenerToHeaderInTable" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addMouseListenerToHeaderInTable(JTable table)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:TableSorter_indexes a yawl:Field ;
+    rdfs:label "indexes" .
+
+yawl:TableSorter_sortingColumns a yawl:Field ;
+    rdfs:label "sortingColumns" .
+
+yawl:TableSorter_ascending a yawl:Field ;
+    rdfs:label "ascending" .
+
+yawl:TableSorter_compares a yawl:Field ;
+    rdfs:label "compares" .
+
+
+

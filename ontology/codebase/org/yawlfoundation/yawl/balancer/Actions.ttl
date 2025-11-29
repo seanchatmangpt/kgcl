@@ -1,0 +1,82 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.balancer.Actions
+yawl:Actions a yawl:Class ;
+    rdfs:label "Actions" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_balancer ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/balancer/Actions.java"^^xsd:string ;
+    rdfs:comment """@author Michael Adams @date 22/9/17""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:Actions_isSessionAction_1 ;
+    yawl:hasMethod yawl:Actions_isItemAction_2 ;
+    yawl:hasMethod yawl:Actions_isLaunchAction_3 ;
+    yawl:hasMethod yawl:Actions_isCaseAction_4 ;
+    yawl:hasMethod yawl:Actions_isSpecAction_5 ;
+    yawl:hasField yawl:Actions_SESSION_ACTIONS ;
+    yawl:hasField yawl:Actions_ITEM_ACTIONS ;
+    yawl:hasField yawl:Actions_CASE_ACTIONS ;
+    yawl:hasField yawl:Actions_SPEC_ACTIONS ;
+    .
+
+
+# Method: Actions.isSessionAction
+yawl:Actions_isSessionAction_1 a yawl:Method ;
+    rdfs:label "isSessionAction" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isSessionAction(String action)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Actions.isItemAction
+yawl:Actions_isItemAction_2 a yawl:Method ;
+    rdfs:label "isItemAction" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isItemAction(String action)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Actions.isLaunchAction
+yawl:Actions_isLaunchAction_3 a yawl:Method ;
+    rdfs:label "isLaunchAction" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isLaunchAction(String action)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Actions.isCaseAction
+yawl:Actions_isCaseAction_4 a yawl:Method ;
+    rdfs:label "isCaseAction" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isCaseAction(String action)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: Actions.isSpecAction
+yawl:Actions_isSpecAction_5 a yawl:Method ;
+    rdfs:label "isSpecAction" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isSpecAction(String action)" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:Actions_SESSION_ACTIONS a yawl:Field ;
+    rdfs:label "SESSION_ACTIONS" .
+
+yawl:Actions_ITEM_ACTIONS a yawl:Field ;
+    rdfs:label "ITEM_ACTIONS" .
+
+yawl:Actions_CASE_ACTIONS a yawl:Field ;
+    rdfs:label "CASE_ACTIONS" .
+
+yawl:Actions_SPEC_ACTIONS a yawl:Field ;
+    rdfs:label "SPEC_ACTIONS" .
+
+
+

@@ -1,0 +1,81 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.elements.YCompositeTask
+yawl:YCompositeTask a yawl:Class ;
+    rdfs:label "YCompositeTask" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_elements ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/elements/YCompositeTask.java"^^xsd:string ;
+    rdfs:comment """A YCompositeTask object is the executable equivalent of the YCompositeTask in the YAWL paper.   It has the same properties and behaviour. @author Lachlan Aldred""" ;
+    yawl:extends yawl:YTask ;
+    yawl:modifiers "public" ;
+    yawl:modifiers "final" ;
+    yawl:hasMethod yawl:YCompositeTask_clone_1 ;
+    yawl:hasMethod yawl:YCompositeTask_startOne_2 ;
+    yawl:hasMethod yawl:YCompositeTask_cancel_3 ;
+    yawl:hasMethod yawl:YCompositeTask_performDataExtraction_4 ;
+    yawl:hasMethod yawl:YCompositeTask_logTaskStart_5 ;
+    yawl:hasMethod yawl:YCompositeTask_verify_6 ;
+    .
+
+
+# Method: YCompositeTask.clone
+yawl:YCompositeTask_clone_1 a yawl:Method ;
+    rdfs:label "clone" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object clone()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCompositeTask.startOne
+yawl:YCompositeTask_startOne_2 a yawl:Method ;
+    rdfs:label "startOne" ;
+    yawl:returnType "void" ;
+    yawl:signature "void startOne(YPersistenceManager pmgr, YIdentifier id)" ;
+    rdfs:comment """Starts this composite task. @param pmgr a valid persistence manager instance @param id the task identifier @throws YDataStateException""" ;
+    yawl:modifiers "protected" ;
+    yawl:modifiers "synchronized" ;
+    .
+
+# Method: YCompositeTask.cancel
+yawl:YCompositeTask_cancel_3 a yawl:Method ;
+    rdfs:label "cancel" ;
+    yawl:returnType "void" ;
+    yawl:signature "void cancel(YPersistenceManager pmgr)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YCompositeTask.performDataExtraction
+yawl:YCompositeTask_performDataExtraction_4 a yawl:Method ;
+    rdfs:label "performDataExtraction" ;
+    yawl:returnType "Element" ;
+    yawl:signature "Element performDataExtraction(String expression, YParameter inputParam)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YCompositeTask.logTaskStart
+yawl:YCompositeTask_logTaskStart_5 a yawl:Method ;
+    rdfs:label "logTaskStart" ;
+    yawl:returnType "void" ;
+    yawl:signature "void logTaskStart(YNetRunner netRunner)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YCompositeTask.verify
+yawl:YCompositeTask_verify_6 a yawl:Method ;
+    rdfs:label "verify" ;
+    yawl:returnType "void" ;
+    yawl:signature "void verify(YVerificationHandler handler)" ;
+    rdfs:comment """VERIFICATION""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+
+

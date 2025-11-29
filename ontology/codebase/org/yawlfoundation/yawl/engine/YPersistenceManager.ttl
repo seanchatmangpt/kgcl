@@ -1,0 +1,363 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.engine.YPersistenceManager
+yawl:YPersistenceManager a yawl:Class ;
+    rdfs:label "YPersistenceManager" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/YPersistenceManager.java"^^xsd:string ;
+    rdfs:comment """This class acts as a handler for transactional persistence within the engine. @author Andrew Hastie (M2 Investments) Date: 21/06/2005 Time: 13:46:54 @author Michael Adams - updated for v2.1 11/2009""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:YPersistenceManager_initialise_1 ;
+    yawl:hasMethod yawl:YPersistenceManager_setEnabled_2 ;
+    yawl:hasMethod yawl:YPersistenceManager_isEnabled_3 ;
+    yawl:hasMethod yawl:YPersistenceManager_getFactory_4 ;
+    yawl:hasMethod yawl:YPersistenceManager_isRestoring_5 ;
+    yawl:hasMethod yawl:YPersistenceManager_setRestoring_6 ;
+    yawl:hasMethod yawl:YPersistenceManager_getSession_7 ;
+    yawl:hasMethod yawl:YPersistenceManager_getTransaction_8 ;
+    yawl:hasMethod yawl:YPersistenceManager_closeSession_9 ;
+    yawl:hasMethod yawl:YPersistenceManager_closeFactory_10 ;
+    yawl:hasMethod yawl:YPersistenceManager_getStatistics_11 ;
+    yawl:hasMethod yawl:YPersistenceManager_setStatisticsEnabled_12 ;
+    yawl:hasMethod yawl:YPersistenceManager_isStatisticsEnabled_13 ;
+    yawl:hasMethod yawl:YPersistenceManager_startTransaction_14 ;
+    yawl:hasMethod yawl:YPersistenceManager_storeObject_15 ;
+    yawl:hasMethod yawl:YPersistenceManager_updateObject_16 ;
+    yawl:hasMethod yawl:YPersistenceManager_deleteObject_17 ;
+    yawl:hasMethod yawl:YPersistenceManager_updateOrMerge_18 ;
+    yawl:hasMethod yawl:YPersistenceManager_isActiveTransaction_19 ;
+    yawl:hasMethod yawl:YPersistenceManager_storeObjectFromExternal_20 ;
+    yawl:hasMethod yawl:YPersistenceManager_updateObjectExternal_21 ;
+    yawl:hasMethod yawl:YPersistenceManager_deleteObjectFromExternal_22 ;
+    yawl:hasMethod yawl:YPersistenceManager_doPersistAction_23 ;
+    yawl:hasMethod yawl:YPersistenceManager_commit_24 ;
+    yawl:hasMethod yawl:YPersistenceManager_rollbackTransaction_25 ;
+    yawl:hasMethod yawl:YPersistenceManager_createQuery_26 ;
+    yawl:hasMethod yawl:YPersistenceManager_execQuery_27 ;
+    yawl:hasMethod yawl:YPersistenceManager_execQuery_28 ;
+    yawl:hasMethod yawl:YPersistenceManager_getObjectsForClass_29 ;
+    yawl:hasMethod yawl:YPersistenceManager_getObjectsForClassWhere_30 ;
+    yawl:hasMethod yawl:YPersistenceManager_selectScalar_31 ;
+    yawl:hasMethod yawl:YPersistenceManager_selectScalar_32 ;
+    yawl:hasField yawl:YPersistenceManager_DB_UPDATE ;
+    yawl:hasField yawl:YPersistenceManager_DB_DELETE ;
+    yawl:hasField yawl:YPersistenceManager_DB_INSERT ;
+    yawl:hasField yawl:YPersistenceManager_persistedClasses ;
+    yawl:hasField yawl:YPersistenceManager_INSERT ;
+    yawl:hasField yawl:YPersistenceManager_UPDATE ;
+    yawl:hasField yawl:YPersistenceManager_logger ;
+    yawl:hasField yawl:YPersistenceManager_factory ;
+    yawl:hasField yawl:YPersistenceManager_restoring ;
+    yawl:hasField yawl:YPersistenceManager_enabled ;
+    .
+
+
+# Method: YPersistenceManager.initialise
+yawl:YPersistenceManager_initialise_1 a yawl:Method ;
+    rdfs:label "initialise" ;
+    yawl:returnType "SessionFactory" ;
+    yawl:signature "SessionFactory initialise(boolean journalising)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YPersistenceManager.setEnabled
+yawl:YPersistenceManager_setEnabled_2 a yawl:Method ;
+    rdfs:label "setEnabled" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setEnabled(boolean enable)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YPersistenceManager.isEnabled
+yawl:YPersistenceManager_isEnabled_3 a yawl:Method ;
+    rdfs:label "isEnabled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isEnabled()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YPersistenceManager.getFactory
+yawl:YPersistenceManager_getFactory_4 a yawl:Method ;
+    rdfs:label "getFactory" ;
+    yawl:returnType "SessionFactory" ;
+    yawl:signature "SessionFactory getFactory()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YPersistenceManager.isRestoring
+yawl:YPersistenceManager_isRestoring_5 a yawl:Method ;
+    rdfs:label "isRestoring" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isRestoring()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YPersistenceManager.setRestoring
+yawl:YPersistenceManager_setRestoring_6 a yawl:Method ;
+    rdfs:label "setRestoring" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setRestoring(boolean restoring)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YPersistenceManager.getSession
+yawl:YPersistenceManager_getSession_7 a yawl:Method ;
+    rdfs:label "getSession" ;
+    yawl:returnType "Session" ;
+    yawl:signature "Session getSession()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YPersistenceManager.getTransaction
+yawl:YPersistenceManager_getTransaction_8 a yawl:Method ;
+    rdfs:label "getTransaction" ;
+    yawl:returnType "Transaction" ;
+    yawl:signature "Transaction getTransaction()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YPersistenceManager.closeSession
+yawl:YPersistenceManager_closeSession_9 a yawl:Method ;
+    rdfs:label "closeSession" ;
+    yawl:returnType "void" ;
+    yawl:signature "void closeSession()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YPersistenceManager.closeFactory
+yawl:YPersistenceManager_closeFactory_10 a yawl:Method ;
+    rdfs:label "closeFactory" ;
+    yawl:returnType "void" ;
+    yawl:signature "void closeFactory()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YPersistenceManager.getStatistics
+yawl:YPersistenceManager_getStatistics_11 a yawl:Method ;
+    rdfs:label "getStatistics" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getStatistics()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YPersistenceManager.setStatisticsEnabled
+yawl:YPersistenceManager_setStatisticsEnabled_12 a yawl:Method ;
+    rdfs:label "setStatisticsEnabled" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setStatisticsEnabled(boolean enabled)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YPersistenceManager.isStatisticsEnabled
+yawl:YPersistenceManager_isStatisticsEnabled_13 a yawl:Method ;
+    rdfs:label "isStatisticsEnabled" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isStatisticsEnabled()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YPersistenceManager.startTransaction
+yawl:YPersistenceManager_startTransaction_14 a yawl:Method ;
+    rdfs:label "startTransaction" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean startTransaction()" ;
+    rdfs:comment """Start a new Hibernate transaction. @return true if a transaction is started successfully, false if the session already has an active transaction @throws YPersistenceException if there's a problem starting a transaction""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YPersistenceManager.storeObject
+yawl:YPersistenceManager_storeObject_15 a yawl:Method ;
+    rdfs:label "storeObject" ;
+    yawl:returnType "void" ;
+    yawl:signature "void storeObject(Object obj)" ;
+    rdfs:comment """Persists an object. @param obj The object to be persisted""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YPersistenceManager.updateObject
+yawl:YPersistenceManager_updateObject_16 a yawl:Method ;
+    rdfs:label "updateObject" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateObject(Object obj)" ;
+    rdfs:comment """Causes the supplied object to be updated when the current transaction is committed. @param obj The object to be persisted""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YPersistenceManager.deleteObject
+yawl:YPersistenceManager_deleteObject_17 a yawl:Method ;
+    rdfs:label "deleteObject" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteObject(Object obj)" ;
+    rdfs:comment """Causes the supplied object to be removed from the persistence cache when the current transaction is committed. @param obj The object to be persisted @throws YPersistenceException""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YPersistenceManager.updateOrMerge
+yawl:YPersistenceManager_updateOrMerge_18 a yawl:Method ;
+    rdfs:label "updateOrMerge" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateOrMerge(Object obj)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YPersistenceManager.isActiveTransaction
+yawl:YPersistenceManager_isActiveTransaction_19 a yawl:Method ;
+    rdfs:label "isActiveTransaction" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean isActiveTransaction()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YPersistenceManager.storeObjectFromExternal
+yawl:YPersistenceManager_storeObjectFromExternal_20 a yawl:Method ;
+    rdfs:label "storeObjectFromExternal" ;
+    yawl:returnType "void" ;
+    yawl:signature "void storeObjectFromExternal(Object obj)" ;
+    rdfs:comment """Causes the supplied object to be persisted when the current transaction is committed. This method simply calls {@link #storeObject(Object)} but is public in scope. @param obj The object to be persisted""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YPersistenceManager.updateObjectExternal
+yawl:YPersistenceManager_updateObjectExternal_21 a yawl:Method ;
+    rdfs:label "updateObjectExternal" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateObjectExternal(Object obj)" ;
+    rdfs:comment """Causes the supplied object to be updated within the persistence cache when the current transaction is committed. This method simply calls {@link #updateObject(Object)} but is public in scope. @param obj The object to be persisted""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YPersistenceManager.deleteObjectFromExternal
+yawl:YPersistenceManager_deleteObjectFromExternal_22 a yawl:Method ;
+    rdfs:label "deleteObjectFromExternal" ;
+    yawl:returnType "void" ;
+    yawl:signature "void deleteObjectFromExternal(Object obj)" ;
+    rdfs:comment """Causes the supplied object to be unpersisted when the current transaction is committed. This method simply calls {@link #deleteObject(Object)} but is public in scope. @param obj The object to be unpersisted""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YPersistenceManager.doPersistAction
+yawl:YPersistenceManager_doPersistAction_23 a yawl:Method ;
+    rdfs:label "doPersistAction" ;
+    yawl:returnType "void" ;
+    yawl:signature "void doPersistAction(Object obj, boolean update)" ;
+    yawl:modifiers "synchronized" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: YPersistenceManager.commit
+yawl:YPersistenceManager_commit_24 a yawl:Method ;
+    rdfs:label "commit" ;
+    yawl:returnType "void" ;
+    yawl:signature "void commit()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YPersistenceManager.rollbackTransaction
+yawl:YPersistenceManager_rollbackTransaction_25 a yawl:Method ;
+    rdfs:label "rollbackTransaction" ;
+    yawl:returnType "void" ;
+    yawl:signature "void rollbackTransaction()" ;
+    rdfs:comment """Forces a rollback of the current transaction,<P>""" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: YPersistenceManager.createQuery
+yawl:YPersistenceManager_createQuery_26 a yawl:Method ;
+    rdfs:label "createQuery" ;
+    yawl:returnType "Query" ;
+    yawl:signature "Query createQuery(String queryString)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YPersistenceManager.execQuery
+yawl:YPersistenceManager_execQuery_27 a yawl:Method ;
+    rdfs:label "execQuery" ;
+    yawl:returnType "List" ;
+    yawl:signature "List execQuery(String queryString)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YPersistenceManager.execQuery
+yawl:YPersistenceManager_execQuery_28 a yawl:Method ;
+    rdfs:label "execQuery" ;
+    yawl:returnType "List" ;
+    yawl:signature "List execQuery(Query query)" ;
+    rdfs:comment """executes a Query object based on the sql string passed @param query - the sql query to execute @return the List of objects returned @throws YPersistenceException if there's a problem reading the db""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YPersistenceManager.getObjectsForClass
+yawl:YPersistenceManager_getObjectsForClass_29 a yawl:Method ;
+    rdfs:label "getObjectsForClass" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getObjectsForClass(String className)" ;
+    rdfs:comment """returns all the instances currently persisted for the class passed @param className - the name of the class to retrieve instances of @return a List of the instances retrieved @throws YPersistenceException if there's a problem reading the db""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YPersistenceManager.getObjectsForClassWhere
+yawl:YPersistenceManager_getObjectsForClassWhere_30 a yawl:Method ;
+    rdfs:label "getObjectsForClassWhere" ;
+    yawl:returnType "List" ;
+    yawl:signature "List getObjectsForClassWhere(String className, String whereClause)" ;
+    rdfs:comment """returns all the instances currently persisted for the class passed that match the condition specified in the where clause @param className   the name of the class to retrieve instances of @param whereClause the condition (without the 'where' part) e.g. \"age=21\" @return a List of the instances retrieved @throws YPersistenceException if there's a problem reading the db""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YPersistenceManager.selectScalar
+yawl:YPersistenceManager_selectScalar_31 a yawl:Method ;
+    rdfs:label "selectScalar" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object selectScalar(String className, String field, String value)" ;
+    rdfs:comment """gets a scalar value (as an object) based on the values passed @param className - the type of object to select @param field     - the column name which contains the queried value @param value     - the value to find in the 'field' column @return the first (or only) object matching 'where [field] = [value]'""" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: YPersistenceManager.selectScalar
+yawl:YPersistenceManager_selectScalar_32 a yawl:Method ;
+    rdfs:label "selectScalar" ;
+    yawl:returnType "Object" ;
+    yawl:signature "Object selectScalar(String className, String field, long value)" ;
+    rdfs:comment """same as above but takes a long value instead""" ;
+    yawl:modifiers "public" ;
+    .
+
+
+
+yawl:YPersistenceManager_DB_UPDATE a yawl:Field ;
+    rdfs:label "DB_UPDATE" .
+
+yawl:YPersistenceManager_DB_DELETE a yawl:Field ;
+    rdfs:label "DB_DELETE" .
+
+yawl:YPersistenceManager_DB_INSERT a yawl:Field ;
+    rdfs:label "DB_INSERT" .
+
+yawl:YPersistenceManager_persistedClasses a yawl:Field ;
+    rdfs:label "persistedClasses" .
+
+yawl:YPersistenceManager_INSERT a yawl:Field ;
+    rdfs:label "INSERT" .
+
+yawl:YPersistenceManager_UPDATE a yawl:Field ;
+    rdfs:label "UPDATE" .
+
+yawl:YPersistenceManager_logger a yawl:Field ;
+    rdfs:label "logger" .
+
+yawl:YPersistenceManager_factory a yawl:Field ;
+    rdfs:label "factory" .
+
+yawl:YPersistenceManager_restoring a yawl:Field ;
+    rdfs:label "restoring" .
+
+yawl:YPersistenceManager_enabled a yawl:Field ;
+    rdfs:label "enabled" .
+
+
+

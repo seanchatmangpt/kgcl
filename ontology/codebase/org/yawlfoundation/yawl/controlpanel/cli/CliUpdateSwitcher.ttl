@@ -1,0 +1,192 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Class: org.yawlfoundation.yawl.controlpanel.cli.CliUpdateSwitcher
+yawl:CliUpdateSwitcher a yawl:Class ;
+    rdfs:label "CliUpdateSwitcher" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_controlpanel_cli ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/controlpanel/cli/CliUpdateSwitcher.java"^^xsd:string ;
+    rdfs:comment """Provides a CLI interface into the control panel update facility @author Michael Adams @author Joerg Evermann @date 3/11/2015""" ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:CliUpdateSwitcher_handle_1 ;
+    yawl:hasMethod yawl:CliUpdateSwitcher_getStatus_2 ;
+    yawl:hasMethod yawl:CliUpdateSwitcher_doStart_3 ;
+    yawl:hasMethod yawl:CliUpdateSwitcher_doStop_4 ;
+    yawl:hasMethod yawl:CliUpdateSwitcher_doRestart_5 ;
+    yawl:hasMethod yawl:CliUpdateSwitcher_doUpdates_6 ;
+    yawl:hasMethod yawl:CliUpdateSwitcher_doVersions_7 ;
+    yawl:hasMethod yawl:CliUpdateSwitcher_doAdd_8 ;
+    yawl:hasMethod yawl:CliUpdateSwitcher_doRemove_9 ;
+    yawl:hasMethod yawl:CliUpdateSwitcher_printTable_10 ;
+    yawl:hasMethod yawl:CliUpdateSwitcher_check_11 ;
+    yawl:hasMethod yawl:CliUpdateSwitcher_noErrors_12 ;
+    yawl:hasMethod yawl:CliUpdateSwitcher_setInstallAction_13 ;
+    yawl:hasMethod yawl:CliUpdateSwitcher_doAddOrRemove_14 ;
+    yawl:hasMethod yawl:CliUpdateSwitcher_writeAddRemoveError_15 ;
+    yawl:hasMethod yawl:CliUpdateSwitcher_update_16 ;
+    yawl:hasMethod yawl:CliUpdateSwitcher_getPortArg_17 ;
+    yawl:hasMethod yawl:CliUpdateSwitcher_updatePort_18 ;
+    yawl:hasMethod yawl:CliUpdateSwitcher_pause_19 ;
+    .
+
+
+# Method: CliUpdateSwitcher.handle
+yawl:CliUpdateSwitcher_handle_1 a yawl:Method ;
+    rdfs:label "handle" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean handle(String args)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: CliUpdateSwitcher.getStatus
+yawl:CliUpdateSwitcher_getStatus_2 a yawl:Method ;
+    rdfs:label "getStatus" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean getStatus()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CliUpdateSwitcher.doStart
+yawl:CliUpdateSwitcher_doStart_3 a yawl:Method ;
+    rdfs:label "doStart" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean doStart(int port)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CliUpdateSwitcher.doStop
+yawl:CliUpdateSwitcher_doStop_4 a yawl:Method ;
+    rdfs:label "doStop" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean doStop()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CliUpdateSwitcher.doRestart
+yawl:CliUpdateSwitcher_doRestart_5 a yawl:Method ;
+    rdfs:label "doRestart" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean doRestart(int port)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CliUpdateSwitcher.doUpdates
+yawl:CliUpdateSwitcher_doUpdates_6 a yawl:Method ;
+    rdfs:label "doUpdates" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean doUpdates()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CliUpdateSwitcher.doVersions
+yawl:CliUpdateSwitcher_doVersions_7 a yawl:Method ;
+    rdfs:label "doVersions" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean doVersions()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CliUpdateSwitcher.doAdd
+yawl:CliUpdateSwitcher_doAdd_8 a yawl:Method ;
+    rdfs:label "doAdd" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean doAdd(String component)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CliUpdateSwitcher.doRemove
+yawl:CliUpdateSwitcher_doRemove_9 a yawl:Method ;
+    rdfs:label "doRemove" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean doRemove(String component)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CliUpdateSwitcher.printTable
+yawl:CliUpdateSwitcher_printTable_10 a yawl:Method ;
+    rdfs:label "printTable" ;
+    yawl:returnType "CliUpdateTableModel" ;
+    yawl:signature "CliUpdateTableModel printTable(UpdateChecker checker)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CliUpdateSwitcher.check
+yawl:CliUpdateSwitcher_check_11 a yawl:Method ;
+    rdfs:label "check" ;
+    yawl:returnType "UpdateChecker" ;
+    yawl:signature "UpdateChecker check()" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CliUpdateSwitcher.noErrors
+yawl:CliUpdateSwitcher_noErrors_12 a yawl:Method ;
+    rdfs:label "noErrors" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean noErrors(UpdateChecker checker)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CliUpdateSwitcher.setInstallAction
+yawl:CliUpdateSwitcher_setInstallAction_13 a yawl:Method ;
+    rdfs:label "setInstallAction" ;
+    yawl:returnType "CliUpdateTableModel" ;
+    yawl:signature "CliUpdateTableModel setInstallAction(Differ differ, String component, boolean installAction)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CliUpdateSwitcher.doAddOrRemove
+yawl:CliUpdateSwitcher_doAddOrRemove_14 a yawl:Method ;
+    rdfs:label "doAddOrRemove" ;
+    yawl:returnType "boolean" ;
+    yawl:signature "boolean doAddOrRemove(String component, Differ differ, boolean adding)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CliUpdateSwitcher.writeAddRemoveError
+yawl:CliUpdateSwitcher_writeAddRemoveError_15 a yawl:Method ;
+    rdfs:label "writeAddRemoveError" ;
+    yawl:returnType "void" ;
+    yawl:signature "void writeAddRemoveError(String component, boolean adding)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CliUpdateSwitcher.update
+yawl:CliUpdateSwitcher_update_16 a yawl:Method ;
+    rdfs:label "update" ;
+    yawl:returnType "void" ;
+    yawl:signature "void update(CliUpdateTableModel model, String msg)" ;
+    yawl:modifiers "protected" ;
+    .
+
+# Method: CliUpdateSwitcher.getPortArg
+yawl:CliUpdateSwitcher_getPortArg_17 a yawl:Method ;
+    rdfs:label "getPortArg" ;
+    yawl:returnType "int" ;
+    yawl:signature "int getPortArg(String args)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CliUpdateSwitcher.updatePort
+yawl:CliUpdateSwitcher_updatePort_18 a yawl:Method ;
+    rdfs:label "updatePort" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updatePort(int port)" ;
+    yawl:modifiers "private" ;
+    .
+
+# Method: CliUpdateSwitcher.pause
+yawl:CliUpdateSwitcher_pause_19 a yawl:Method ;
+    rdfs:label "pause" ;
+    yawl:returnType "void" ;
+    yawl:signature "void pause(int mSecs)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+
+

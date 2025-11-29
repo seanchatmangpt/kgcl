@@ -1,0 +1,191 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yawl: <http://yawlfoundation.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+# Package: org.yawlfoundation.yawl.engine.instance
+yawl:org_yawlfoundation_yawl_engine_instance a yawl:Package ;
+    rdfs:label "org.yawlfoundation.yawl.engine.instance" .
+# Class: org.yawlfoundation.yawl.engine.instance.InstanceCache
+yawl:InstanceCache a yawl:Class ;
+    rdfs:label "InstanceCache" ;
+    yawl:inPackage yawl:org_yawlfoundation_yawl_engine_instance ;
+    yawl:filePath "vendors/yawl-v5.2/src/org/yawlfoundation/yawl/engine/instance/InstanceCache.java"^^xsd:string ;
+    rdfs:comment """Manages a dataset of all 'live' case instances, including their workitems (live and completed) and the data parameters of those workitems. Author: Michael Adams Creation Date: 11/11/2008""" ;
+    yawl:extends yawl:ConcurrentHashMap ;
+    yawl:modifiers "public" ;
+    yawl:hasMethod yawl:InstanceCache_addCase_1 ;
+    yawl:hasMethod yawl:InstanceCache_addCase_2 ;
+    yawl:hasMethod yawl:InstanceCache_getCase_3 ;
+    yawl:hasMethod yawl:InstanceCache_getCases_4 ;
+    yawl:hasMethod yawl:InstanceCache_removeCase_5 ;
+    yawl:hasMethod yawl:InstanceCache_addWorkItem_6 ;
+    yawl:hasMethod yawl:InstanceCache_closeWorkItem_7 ;
+    yawl:hasMethod yawl:InstanceCache_updateWorkItemData_8 ;
+    yawl:hasMethod yawl:InstanceCache_setTimerExpired_9 ;
+    yawl:hasMethod yawl:InstanceCache_getWorkitems_10 ;
+    yawl:hasMethod yawl:InstanceCache_getWorkItemInstance_11 ;
+    yawl:hasMethod yawl:InstanceCache_getWorkItemInstance_12 ;
+    yawl:hasMethod yawl:InstanceCache_addParameters_13 ;
+    yawl:hasMethod yawl:InstanceCache_getParameters_14 ;
+    yawl:hasMethod yawl:InstanceCache_marshalCases_15 ;
+    yawl:hasMethod yawl:InstanceCache_marshalWorkItems_16 ;
+    yawl:hasMethod yawl:InstanceCache_marshalParameters_17 ;
+    yawl:hasMethod yawl:InstanceCache_getRootCaseID_18 ;
+    yawl:hasField yawl:InstanceCache__startupTime ;
+    .
+
+
+# Method: InstanceCache.addCase
+yawl:InstanceCache_addCase_1 a yawl:Method ;
+    rdfs:label "addCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addCase(CaseInstance instance)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InstanceCache.addCase
+yawl:InstanceCache_addCase_2 a yawl:Method ;
+    rdfs:label "addCase" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addCase(String caseID, YSpecificationID specID, String caseParams, YLogDataItemList logData, long startTime)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InstanceCache.getCase
+yawl:InstanceCache_getCase_3 a yawl:Method ;
+    rdfs:label "getCase" ;
+    yawl:returnType "CaseInstance" ;
+    yawl:signature "CaseInstance getCase(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InstanceCache.getCases
+yawl:InstanceCache_getCases_4 a yawl:Method ;
+    rdfs:label "getCases" ;
+    yawl:returnType "Collection" ;
+    yawl:signature "Collection getCases()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InstanceCache.removeCase
+yawl:InstanceCache_removeCase_5 a yawl:Method ;
+    rdfs:label "removeCase" ;
+    yawl:returnType "CaseInstance" ;
+    yawl:signature "CaseInstance removeCase(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InstanceCache.addWorkItem
+yawl:InstanceCache_addWorkItem_6 a yawl:Method ;
+    rdfs:label "addWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addWorkItem(YWorkItem item)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InstanceCache.closeWorkItem
+yawl:InstanceCache_closeWorkItem_7 a yawl:Method ;
+    rdfs:label "closeWorkItem" ;
+    yawl:returnType "void" ;
+    yawl:signature "void closeWorkItem(YWorkItem item, Document data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InstanceCache.updateWorkItemData
+yawl:InstanceCache_updateWorkItemData_8 a yawl:Method ;
+    rdfs:label "updateWorkItemData" ;
+    yawl:returnType "void" ;
+    yawl:signature "void updateWorkItemData(YWorkItem item, Element data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InstanceCache.setTimerExpired
+yawl:InstanceCache_setTimerExpired_9 a yawl:Method ;
+    rdfs:label "setTimerExpired" ;
+    yawl:returnType "void" ;
+    yawl:signature "void setTimerExpired(YWorkItem item)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InstanceCache.getWorkitems
+yawl:InstanceCache_getWorkitems_10 a yawl:Method ;
+    rdfs:label "getWorkitems" ;
+    yawl:returnType "Collection" ;
+    yawl:signature "Collection getWorkitems(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InstanceCache.getWorkItemInstance
+yawl:InstanceCache_getWorkItemInstance_11 a yawl:Method ;
+    rdfs:label "getWorkItemInstance" ;
+    yawl:returnType "WorkItemInstance" ;
+    yawl:signature "WorkItemInstance getWorkItemInstance(String caseID, String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InstanceCache.getWorkItemInstance
+yawl:InstanceCache_getWorkItemInstance_12 a yawl:Method ;
+    rdfs:label "getWorkItemInstance" ;
+    yawl:returnType "WorkItemInstance" ;
+    yawl:signature "WorkItemInstance getWorkItemInstance(YWorkItem item)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InstanceCache.addParameters
+yawl:InstanceCache_addParameters_13 a yawl:Method ;
+    rdfs:label "addParameters" ;
+    yawl:returnType "void" ;
+    yawl:signature "void addParameters(YWorkItem workitem, YTask task, Element data)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InstanceCache.getParameters
+yawl:InstanceCache_getParameters_14 a yawl:Method ;
+    rdfs:label "getParameters" ;
+    yawl:returnType "Collection" ;
+    yawl:signature "Collection getParameters(String caseID, String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InstanceCache.marshalCases
+yawl:InstanceCache_marshalCases_15 a yawl:Method ;
+    rdfs:label "marshalCases" ;
+    yawl:returnType "String" ;
+    yawl:signature "String marshalCases()" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InstanceCache.marshalWorkItems
+yawl:InstanceCache_marshalWorkItems_16 a yawl:Method ;
+    rdfs:label "marshalWorkItems" ;
+    yawl:returnType "String" ;
+    yawl:signature "String marshalWorkItems(String caseID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InstanceCache.marshalParameters
+yawl:InstanceCache_marshalParameters_17 a yawl:Method ;
+    rdfs:label "marshalParameters" ;
+    yawl:returnType "String" ;
+    yawl:signature "String marshalParameters(String caseID, String itemID)" ;
+    yawl:modifiers "public" ;
+    .
+
+# Method: InstanceCache.getRootCaseID
+yawl:InstanceCache_getRootCaseID_18 a yawl:Method ;
+    rdfs:label "getRootCaseID" ;
+    yawl:returnType "String" ;
+    yawl:signature "String getRootCaseID(YWorkItem item)" ;
+    yawl:modifiers "private" ;
+    .
+
+
+
+yawl:InstanceCache__startupTime a yawl:Field ;
+    rdfs:label "_startupTime" .
+
+
+

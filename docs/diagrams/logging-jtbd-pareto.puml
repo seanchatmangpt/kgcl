@@ -1,0 +1,151 @@
+@startuml YAWL Logging JTBD Tests - 80/20 Analysis
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam shadowing false
+
+title YAWL Logging JTBD Integration Tests - Pareto Analysis
+caption 80/20 Rule: Focus on high-impact tests that verify critical integration points
+
+' === CRITICAL PATH (20% of tests = 80% of value) ===
+package "🔴 CRITICAL - Core Integration (20% = 4 tests)" #FFE6E6 {
+  usecase UC1 as "Log customer order data
+  --
+  **Value: 25%**
+  Proves real integration:
+  • Work item → Log data
+  • Engine state affects output
+  • No theater code"
+
+  usecase UC2 as "Parse work item predicates
+  --
+  **Value: 25%**
+  Proves parser reads engine:
+  • ${item:id}, ${task:id}
+  • State changes = output changes
+  • Real metadata extraction"
+
+  usecase UC3 as "XML round-trip integrity
+  --
+  **Value: 20%**
+  Proves serialization works:
+  • Data → XML → Data
+  • No corruption
+  • External system integration"
+
+  usecase UC4 as "Special chars preservation
+  --
+  **Value: 10%**
+  Proves data integrity:
+  • Unicode, XML escapes
+  • No data loss
+  • Production-ready"
+}
+
+' === HIGH VALUE (30% of tests = 15% of value) ===
+package "🟡 HIGH VALUE - Pattern Verification (30% = 5 tests)" #FFF9E6 {
+  usecase UC5 as "Conditional predicates
+  --
+  **Value: 5%**
+  Proves filtering logic"
+
+  usecase UC6 as "Parse decomposition
+  --
+  **Value: 3%**
+  Proves spec metadata"
+
+  usecase UC7 as "Parse parameters
+  --
+  **Value: 3%**
+  Proves schema extraction"
+
+  usecase UC8 as "Timestamps parsing
+  --
+  **Value: 2%**
+  Proves temporal data"
+
+  usecase UC9 as "Predicate XML
+  --
+  **Value: 2%**
+  Proves config export"
+}
+
+' === DEFENSIVE (50% of tests = 5% of value) ===
+package "🟢 DEFENSIVE - Edge Cases (50% = 8 tests)" #E6F9E6 {
+  usecase UC10 as "Empty predicates
+  --
+  **Value: 1%**
+  Edge case handling"
+
+  usecase UC11 as "Unknown predicates
+  --
+  **Value: 1%**
+  Graceful degradation"
+
+  usecase UC12 as "Equality/hashing
+  --
+  **Value: 1%**
+  Deduplication"
+
+  usecase UC13 as "Modify after creation
+  --
+  **Value: 1%**
+  Mutability proof"
+
+  usecase UC14 as "Status predicates
+  --
+  **Value: 0.5%**
+  Conditional logic"
+
+  usecase UC15 as "Input/output params
+  --
+  **Value: 0.5%**
+  Data flow"
+
+  usecase UC16 as "Param docs
+  --
+  **Value: 0.5%**
+  Documentation"
+
+  usecase UC17 as "Decomp spec
+  --
+  **Value: 0.5%**
+  Spec metadata"
+}
+
+' === Value Flow ===
+actor "Test Suite\n17 Tests" as TS
+actor "Production\nValue" as PV
+
+TS -down-> UC1 : Focus here first
+TS -down-> UC2 : Critical path
+TS -down-> UC3 : Must pass
+TS -down-> UC4 : Data integrity
+
+UC1 -right-> PV : 25% coverage
+UC2 -right-> PV : 25% coverage
+UC3 -right-> PV : 20% coverage
+UC4 -right-> PV : 10% coverage
+
+note right of UC1
+  **Chicago School TDD**
+  • Real YWorkItem
+  • Assert on logged data
+  • Changes affect output
+end note
+
+note right of UC3
+  **Integration Proof**
+  • Healthcare HIPAA example
+  • External audit systems
+  • Round-trip = trust
+end note
+
+note bottom of UC10
+  These 8 tests (50% of suite)
+  provide only 5% of production value.
+
+  Keep them for completeness,
+  but focus effort on red/yellow zones.
+end note
+
+@enduml

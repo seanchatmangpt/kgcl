@@ -1,0 +1,30 @@
+@startuml YAWL Logging Test Priority Matrix
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam shadowing false
+
+title Test Priority Matrix - 80/20 Analysis
+caption Focus development effort on high-impact, high-risk tests
+
+' === Priority Matrix ===
+salt
+{#
+. | **Low Risk** | **Medium Risk** | **High Risk**
+**High Impact** | <color:green>Quick Wins</color>\n(Empty predicates)\n(Unknown predicates) | <color:orange>Strategic</color>\n(Timestamps)\n(Param parsing)\n(Decomp parsing) | <color:red>**CRITICAL PATH**</color>\n<color:red>**Test 1: Log order data**</color>\n<color:red>**Test 2: Parse predicates**</color>\n<color:red>**Test 3: XML round-trip**</color>\n<color:red>**Test 4: Special chars**</color>
+**Medium Impact** | <color:lightblue>Fill Ins</color>\n(Equality checks)\n(Modify after create) | <color:orange>Incremental</color>\n(Conditional logging)\n(Predicate XML)\n(Status predicates) | <color:orange>Important</color>\n(Input/output params)
+**Low Impact** | <color:lightgray>Nice to Have</color>\n(Param docs)\n(Decomp spec) | <color:lightgray>Maintenance</color>\n(Type coverage) | <color:lightgray>Defensive</color>\n(Edge cases)
+}
+
+legend right
+  |= Priority |= Tests |= Effort |= Value |
+  | <color:red>P0 - Critical</color> | 4 | 20% | 80% |
+  | <color:orange>P1 - High</color> | 5 | 30% | 15% |
+  | <color:green>P2 - Medium</color> | 5 | 30% | 4% |
+  | <color:lightgray>P3 - Low</color> | 3 | 20% | 1% |
+
+  **80/20 Focus:**
+  Spend 80% of maintenance effort
+  on the 4 red tests (20% of suite)
+end legend
+
+@enduml

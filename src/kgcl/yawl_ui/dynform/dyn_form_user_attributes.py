@@ -227,7 +227,7 @@ class DynFormUserAttributes:
             query_result = evaluate_query(query, data_elem)
             return query_result.lower() == "true"
         except Exception:
-            return False
+        return False
 
     # String attributes
 

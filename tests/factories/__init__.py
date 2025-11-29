@@ -13,12 +13,7 @@ Usage
 from tests.factories.conditions import ConditionFactory, ConditionResultFactory
 from tests.factories.hooks import HookFactory, HookReceiptFactory
 from tests.factories.receipts import ChainAnchorFactory, ReceiptFactory
-from tests.factories.yawl import (
-    YCaseFactory,
-    YSpecificationFactory,
-    YTaskFactory,
-    YWorkItemFactory,
-)
+from tests.factories.yawl import YCaseFactory, YSpecificationFactory, YTaskFactory, YWorkItemFactory
 
 __all__ = [
     # Hooks
@@ -36,5 +31,3 @@ __all__ = [
     "YTaskFactory",
     "YSpecificationFactory",
 ]
-
-

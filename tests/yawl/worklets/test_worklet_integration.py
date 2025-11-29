@@ -20,13 +20,13 @@ from typing import Any
 
 import pytest
 
+from kgcl.yawl.worklets.exceptions import WorkletExecutionError
+
 # Import directly from submodules to avoid broken kgcl.yawl.__init__.py
 from kgcl.yawl.worklets.executor import WorkletExecutor, WorkletResult
-from kgcl.yawl.worklets.exceptions import WorkletExecutionError
 from kgcl.yawl.worklets.models import RDRNode, RDRTree, Worklet, WorkletCase, WorkletStatus, WorkletType
 from kgcl.yawl.worklets.repository import WorkletRepository
 from kgcl.yawl.worklets.rules import RDREngine, RuleContext
-
 
 # --- Test Fixtures ---
 
@@ -91,9 +91,7 @@ def item_error_worklet() -> Worklet:
 class TestCaseLevelExceptionHandling:
     """Test complete case-level exception handling workflow."""
 
-    def test_simple_timeout_exception_handling(
-        self, executor: WorkletExecutor, timeout_worklet: Worklet
-    ) -> None:
+    def test_simple_timeout_exception_handling(self, executor: WorkletExecutor, timeout_worklet: Worklet) -> None:
         """JTBD: Handle a timeout exception with worklet selection and execution.
 
         Proves the ENGINE can:
@@ -106,11 +104,7 @@ class TestCaseLevelExceptionHandling:
         executor.register_worklet(timeout_worklet)
         tree_id = executor.register_tree(task_id=None, exception_type="TIMEOUT")
         executor.add_rule(
-            tree_id=tree_id,
-            parent_node_id="root",
-            is_true_branch=True,
-            condition="true",
-            worklet_id=timeout_worklet.id,
+            tree_id=tree_id, parent_node_id="root", is_true_branch=True, condition="true", worklet_id=timeout_worklet.id
         )
 
         # Act: Handle timeout exception
@@ -143,9 +137,7 @@ class TestCaseLevelExceptionHandling:
         """
         # Act: Handle exception with no registered worklets
         result = executor.handle_case_exception(
-            case_id="case-002",
-            exception_type="UNKNOWN_ERROR",
-            exception_message="Something went wrong",
+            case_id="case-002", exception_type="UNKNOWN_ERROR", exception_message="Something went wrong"
         )
 
         # Assert: Result indicates failure
@@ -185,16 +177,12 @@ class TestCaseLevelExceptionHandling:
 
         # Act: Handle high-priority timeout
         high_priority_result = executor.handle_case_exception(
-            case_id="case-003",
-            exception_type="TIMEOUT",
-            case_data={"priority": "high"},
+            case_id="case-003", exception_type="TIMEOUT", case_data={"priority": "high"}
         )
 
         # Act: Handle normal-priority timeout
         normal_priority_result = executor.handle_case_exception(
-            case_id="case-004",
-            exception_type="TIMEOUT",
-            case_data={"priority": "normal"},
+            case_id="case-004", exception_type="TIMEOUT", case_data={"priority": "normal"}
         )
 
         # Assert: High priority uses priority handler
@@ -214,9 +202,7 @@ class TestCaseLevelExceptionHandling:
 class TestItemLevelExceptionHandling:
     """Test complete work item exception handling workflow."""
 
-    def test_work_item_error_handling(
-        self, executor: WorkletExecutor, item_error_worklet: Worklet
-    ) -> None:
+    def test_work_item_error_handling(self, executor: WorkletExecutor, item_error_worklet: Worklet) -> None:
         """JTBD: Handle a work item exception with task-specific worklet.
 
         Proves the ENGINE can handle item-level exceptions separately
@@ -266,11 +252,7 @@ class TestItemLevelExceptionHandling:
         executor.register_worklet(timeout_worklet)
         tree_id = executor.register_tree(task_id=None, exception_type="TIMEOUT")
         executor.add_rule(
-            tree_id=tree_id,
-            parent_node_id="root",
-            is_true_branch=True,
-            condition="true",
-            worklet_id=timeout_worklet.id,
+            tree_id=tree_id, parent_node_id="root", is_true_branch=True, condition="true", worklet_id=timeout_worklet.id
         )
 
         # Act: Handle item exception (no task-specific rule exists)
@@ -339,16 +321,12 @@ class TestRDRTreeTraversal:
 
         # Act: High load case
         high_result = executor.handle_case_exception(
-            case_id="case-007",
-            exception_type="RESOURCE_LIMIT",
-            case_data={"load": 95},
+            case_id="case-007", exception_type="RESOURCE_LIMIT", case_data={"load": 95}
         )
 
         # Act: Medium load case
         medium_result = executor.handle_case_exception(
-            case_id="case-008",
-            exception_type="RESOURCE_LIMIT",
-            case_data={"load": 65},
+            case_id="case-008", exception_type="RESOURCE_LIMIT", case_data={"load": 65}
         )
 
         # Assert: High load triggers scale up
@@ -393,25 +371,17 @@ class TestRDRTreeTraversal:
 
         # False branch: Use development handler
         executor.add_rule(
-            tree_id=tree_id,
-            parent_node_id="root",
-            is_true_branch=False,
-            condition="true",
-            worklet_id=dev_worklet.id,
+            tree_id=tree_id, parent_node_id="root", is_true_branch=False, condition="true", worklet_id=dev_worklet.id
         )
 
         # Act: Production error
         prod_result = executor.handle_case_exception(
-            case_id="case-009",
-            exception_type="ERROR",
-            case_data={"environment": "production"},
+            case_id="case-009", exception_type="ERROR", case_data={"environment": "production"}
         )
 
         # Act: Development error
         dev_result = executor.handle_case_exception(
-            case_id="case-010",
-            exception_type="ERROR",
-            case_data={"environment": "development"},
+            case_id="case-010", exception_type="ERROR", case_data={"environment": "development"}
         )
 
         # Assert: Production triggers oncall alert
@@ -470,16 +440,12 @@ class TestRDRTreeTraversal:
 
         # Act: Critical timeout
         critical_result = executor.handle_case_exception(
-            case_id="case-011",
-            exception_type="TIMEOUT",
-            case_data={"timeout_seconds": 120, "priority": "critical"},
+            case_id="case-011", exception_type="TIMEOUT", case_data={"timeout_seconds": 120, "priority": "critical"}
         )
 
         # Act: Standard timeout
         standard_result = executor.handle_case_exception(
-            case_id="case-012",
-            exception_type="TIMEOUT",
-            case_data={"timeout_seconds": 90, "priority": "normal"},
+            case_id="case-012", exception_type="TIMEOUT", case_data={"timeout_seconds": 90, "priority": "normal"}
         )
 
         # Assert: Critical timeout gets escalated
@@ -515,18 +481,11 @@ class TestWorkletLifecycle:
         executor.register_worklet(worklet)
         tree_id = executor.register_tree(task_id=None, exception_type="TEST")
         executor.add_rule(
-            tree_id=tree_id,
-            parent_node_id="root",
-            is_true_branch=True,
-            condition="true",
-            worklet_id=worklet.id,
+            tree_id=tree_id, parent_node_id="root", is_true_branch=True, condition="true", worklet_id=worklet.id
         )
 
         # Act: Execute worklet
-        result = executor.handle_case_exception(
-            case_id="case-013",
-            exception_type="TEST",
-        )
+        result = executor.handle_case_exception(case_id="case-013", exception_type="TEST")
 
         # Assert: Case reached COMPLETED state
         case = executor.repository.get_case(result.case_id)
@@ -542,18 +501,11 @@ class TestWorkletLifecycle:
         Proves the ENGINE can cancel worklets that are no longer needed.
         """
         # Arrange: Create a worklet case manually
-        worklet = Worklet(
-            id="wl-cancel-test",
-            name="Cancellation Test",
-            worklet_type=WorkletType.CASE_EXCEPTION,
-        )
+        worklet = Worklet(id="wl-cancel-test", name="Cancellation Test", worklet_type=WorkletType.CASE_EXCEPTION)
         executor.register_worklet(worklet)
 
         case = WorkletCase(
-            id="case-cancel-001",
-            worklet_id=worklet.id,
-            parent_case_id="case-014",
-            status=WorkletStatus.PENDING,
+            id="case-cancel-001", worklet_id=worklet.id, parent_case_id="case-014", status=WorkletStatus.PENDING
         )
         executor.repository.add_case(case)
 
@@ -573,31 +525,18 @@ class TestWorkletLifecycle:
         active for a given case.
         """
         # Arrange: Create multiple worklet cases
-        worklet = Worklet(
-            id="wl-query-test",
-            name="Query Test",
-            worklet_type=WorkletType.CASE_EXCEPTION,
-        )
+        worklet = Worklet(id="wl-query-test", name="Query Test", worklet_type=WorkletType.CASE_EXCEPTION)
         executor.register_worklet(worklet)
 
         # Create cases in different states
         pending_case = WorkletCase(
-            id="case-pending",
-            worklet_id=worklet.id,
-            parent_case_id="case-015",
-            status=WorkletStatus.PENDING,
+            id="case-pending", worklet_id=worklet.id, parent_case_id="case-015", status=WorkletStatus.PENDING
         )
         running_case = WorkletCase(
-            id="case-running",
-            worklet_id=worklet.id,
-            parent_case_id="case-015",
-            status=WorkletStatus.RUNNING,
+            id="case-running", worklet_id=worklet.id, parent_case_id="case-015", status=WorkletStatus.RUNNING
         )
         completed_case = WorkletCase(
-            id="case-completed",
-            worklet_id=worklet.id,
-            parent_case_id="case-015",
-            status=WorkletStatus.COMPLETED,
+            id="case-completed", worklet_id=worklet.id, parent_case_id="case-015", status=WorkletStatus.COMPLETED
         )
 
         executor.repository.add_case(pending_case)
@@ -632,11 +571,7 @@ class TestEngineCallbacks:
             callback_events.append({"type": event_type, "data": data})
 
         # Create executor with callback
-        executor = WorkletExecutor(
-            repository=repository,
-            rdr_engine=rdr_engine,
-            engine_callback=engine_callback,
-        )
+        executor = WorkletExecutor(repository=repository, rdr_engine=rdr_engine, engine_callback=engine_callback)
 
         # Register worklet
         worklet = Worklet(
@@ -648,18 +583,11 @@ class TestEngineCallbacks:
         executor.register_worklet(worklet)
         tree_id = executor.register_tree(task_id=None, exception_type="TEST")
         executor.add_rule(
-            tree_id=tree_id,
-            parent_node_id="root",
-            is_true_branch=True,
-            condition="true",
-            worklet_id=worklet.id,
+            tree_id=tree_id, parent_node_id="root", is_true_branch=True, condition="true", worklet_id=worklet.id
         )
 
         # Act: Execute worklet
-        result = executor.handle_case_exception(
-            case_id="case-016",
-            exception_type="TEST",
-        )
+        result = executor.handle_case_exception(case_id="case-016", exception_type="TEST")
 
         # Assert: Callback was invoked
         assert len(callback_events) == 1
@@ -719,14 +647,8 @@ class TestComplexScenarios:
         )
 
         # Act: Trigger both exceptions for same case
-        timeout_result = executor.handle_case_exception(
-            case_id="case-017",
-            exception_type="TIMEOUT",
-        )
-        validation_result = executor.handle_case_exception(
-            case_id="case-017",
-            exception_type="VALIDATION_ERROR",
-        )
+        timeout_result = executor.handle_case_exception(case_id="case-017", exception_type="TIMEOUT")
+        validation_result = executor.handle_case_exception(case_id="case-017", exception_type="VALIDATION_ERROR")
 
         # Assert: Both worklets executed
         assert timeout_result.success
@@ -757,18 +679,11 @@ class TestComplexScenarios:
         # Set up default tree
         tree_id = executor.register_tree(task_id=None, exception_type="default")
         executor.add_rule(
-            tree_id=tree_id,
-            parent_node_id="root",
-            is_true_branch=True,
-            condition="true",
-            worklet_id=default_worklet.id,
+            tree_id=tree_id, parent_node_id="root", is_true_branch=True, condition="true", worklet_id=default_worklet.id
         )
 
         # Act: Trigger unknown exception type
-        result = executor.handle_case_exception(
-            case_id="case-018",
-            exception_type="UNKNOWN_CUSTOM_ERROR",
-        )
+        result = executor.handle_case_exception(case_id="case-018", exception_type="UNKNOWN_CUSTOM_ERROR")
 
         # Assert: Falls back to default handler
         assert result.success
@@ -805,10 +720,7 @@ class TestEdgeCases:
         )
 
         # Act: Try to execute
-        result = executor.handle_case_exception(
-            case_id="case-020",
-            exception_type="ERROR",
-        )
+        result = executor.handle_case_exception(case_id="case-020", exception_type="ERROR")
 
         # Assert: Execution fails with honest error
         assert not result.success
@@ -824,10 +736,7 @@ class TestEdgeCases:
 
         # Arrange: Create old completed case
         old_case = WorkletCase(
-            id="case-old",
-            worklet_id="wl-old",
-            parent_case_id="case-parent",
-            status=WorkletStatus.COMPLETED,
+            id="case-old", worklet_id="wl-old", parent_case_id="case-parent", status=WorkletStatus.COMPLETED
         )
         # Manually set completion time to 48 hours ago
         old_case.completed = datetime.now() - timedelta(hours=48)
@@ -835,10 +744,7 @@ class TestEdgeCases:
 
         # Create recent completed case
         recent_case = WorkletCase(
-            id="case-recent",
-            worklet_id="wl-recent",
-            parent_case_id="case-parent",
-            status=WorkletStatus.COMPLETED,
+            id="case-recent", worklet_id="wl-recent", parent_case_id="case-parent", status=WorkletStatus.COMPLETED
         )
         recent_case.completed = datetime.now() - timedelta(hours=12)
         repository.add_case(recent_case)

@@ -150,5 +150,3 @@ class YMarshal:
 
         xml_str = "".join(xml_parts)
         return jdom_util.format_xml_string_as_document(xml_str)
-
-

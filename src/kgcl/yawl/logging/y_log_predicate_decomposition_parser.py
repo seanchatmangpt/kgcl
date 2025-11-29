@@ -92,5 +92,3 @@ class YLogPredicateDecompositionParser(YPredicateParser):
             resolved = "n/a"
 
         return resolved
-
-

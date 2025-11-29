@@ -59,22 +59,14 @@ class TestLogWorkflowDataItemsJTBD:
             specification_id="OrderProcessing",
             net_id="OrderNet",
             status=WorkItemStatus.STARTED,
-            data_input={
-                "customerId": "CUST-789",
-                "orderAmount": "299.99",
-                "paymentMethod": "credit_card",
-            },
+            data_input={"customerId": "CUST-789", "orderAmount": "299.99", "paymentMethod": "credit_card"},
         )
         work_item.started_time = datetime(2025, 1, 15, 10, 30, 0)
 
         # Act: Log order data items
         logged_items = YLogDataItemList()
-        logged_items.append(
-            YLogDataItem(descriptor="input", name="customerId", value="CUST-789", data_type="string")
-        )
-        logged_items.append(
-            YLogDataItem(descriptor="input", name="orderAmount", value="299.99", data_type="decimal")
-        )
+        logged_items.append(YLogDataItem(descriptor="input", name="customerId", value="CUST-789", data_type="string"))
+        logged_items.append(YLogDataItem(descriptor="input", name="orderAmount", value="299.99", data_type="decimal"))
         logged_items.append(
             YLogDataItem(descriptor="input", name="paymentMethod", value="credit_card", data_type="string")
         )
@@ -85,27 +77,35 @@ class TestLogWorkflowDataItemsJTBD:
         # Verify customer ID logged correctly
         customer_item = logged_items[0]
         assert customer_item.get_name() == "customerId", "Customer ID name should match"
-        assert customer_item.get_value() == work_item.data_input["customerId"], "Customer ID value should match work item"
+        assert customer_item.get_value() == work_item.data_input["customerId"], (
+            "Customer ID value should match work item"
+        )
         assert customer_item.get_descriptor() == "input", "Should mark as input data"
         assert customer_item.get_data_type_name() == "string", "Customer ID should be string type"
 
         # Verify order amount logged correctly
         amount_item = logged_items[1]
         assert amount_item.get_name() == "orderAmount", "Order amount name should match"
-        assert amount_item.get_value() == work_item.data_input["orderAmount"], "Order amount value should match work item"
+        assert amount_item.get_value() == work_item.data_input["orderAmount"], (
+            "Order amount value should match work item"
+        )
         assert amount_item.get_data_type_name() == "decimal", "Order amount should be decimal type"
 
         # Verify payment method logged correctly
         payment_item = logged_items[2]
         assert payment_item.get_name() == "paymentMethod", "Payment method name should match"
-        assert payment_item.get_value() == work_item.data_input["paymentMethod"], "Payment method value should match work item"
+        assert payment_item.get_value() == work_item.data_input["paymentMethod"], (
+            "Payment method value should match work item"
+        )
 
         # CRITICAL: Prove engine integration - modifying work item affects logging
         work_item.data_input["customerId"] = "CUST-999"
         new_log_item = YLogDataItem(
             descriptor="input", name="customerId", value=work_item.data_input["customerId"], data_type="string"
         )
-        assert new_log_item.get_value() == "CUST-999", "Logging should reflect work item changes (proves real integration)"
+        assert new_log_item.get_value() == "CUST-999", (
+            "Logging should reflect work item changes (proves real integration)"
+        )
 
     def test_log_data_preserves_special_characters_and_encoding(self) -> None:
         """Job: When logging data with special characters, I want them preserved so that audit data is accurate.
@@ -125,9 +125,15 @@ class TestLogWorkflowDataItemsJTBD:
 
         # Act: Log special data
         logged_items = YLogDataItemList()
-        logged_items.append(YLogDataItem(descriptor="output", name="xmlChars", value=special_data["xmlChars"], data_type="string"))
-        logged_items.append(YLogDataItem(descriptor="output", name="unicode", value=special_data["unicode"], data_type="string"))
-        logged_items.append(YLogDataItem(descriptor="output", name="mixed", value=special_data["mixed"], data_type="string"))
+        logged_items.append(
+            YLogDataItem(descriptor="output", name="xmlChars", value=special_data["xmlChars"], data_type="string")
+        )
+        logged_items.append(
+            YLogDataItem(descriptor="output", name="unicode", value=special_data["unicode"], data_type="string")
+        )
+        logged_items.append(
+            YLogDataItem(descriptor="output", name="mixed", value=special_data["mixed"], data_type="string")
+        )
 
         # Assert: Verify special characters preserved
         assert logged_items[0].get_value() == special_data["xmlChars"], "XML special characters should be preserved"
@@ -163,17 +169,22 @@ class TestConditionalLoggingWithPredicatesJTBD:
         # Arrange: Log predicate for high-value orders
         # In real YAWL, this would evaluate against work item data
         predicate = YLogPredicate(
-            start_predicate="orderAmount > 1000",
-            completion_predicate="orderAmount > 1000 and status = 'completed'",
+            start_predicate="orderAmount > 1000", completion_predicate="orderAmount > 1000 and status = 'completed'"
         )
 
         # Act & Assert: Verify predicates set correctly
-        assert predicate.get_start_predicate() == "orderAmount > 1000", "Start predicate should filter high-value orders"
-        assert predicate.get_completion_predicate() == "orderAmount > 1000 and status = 'completed'", "Completion predicate should verify completion"
+        assert predicate.get_start_predicate() == "orderAmount > 1000", (
+            "Start predicate should filter high-value orders"
+        )
+        assert predicate.get_completion_predicate() == "orderAmount > 1000 and status = 'completed'", (
+            "Completion predicate should verify completion"
+        )
 
         # Verify predicates can be modified
         predicate.set_start_predicate("orderAmount > 5000")
-        assert predicate.get_start_predicate() == "orderAmount > 5000", "Predicate should be modifiable (proves mutable state)"
+        assert predicate.get_start_predicate() == "orderAmount > 5000", (
+            "Predicate should be modifiable (proves mutable state)"
+        )
 
         # Verify both predicates can be None (no filtering)
         no_filter_predicate = YLogPredicate()
@@ -194,10 +205,14 @@ class TestConditionalLoggingWithPredicatesJTBD:
 
         # Act & Assert: Verify predicates are distinct
         assert success_predicate.get_start_predicate() is None, "Success predicate only logs on completion"
-        assert success_predicate.get_completion_predicate() == "status = 'completed'", "Success predicate checks completion status"
+        assert success_predicate.get_completion_predicate() == "status = 'completed'", (
+            "Success predicate checks completion status"
+        )
 
         assert failure_predicate.get_start_predicate() == "status = 'failed'", "Failure predicate logs on failure start"
-        assert failure_predicate.get_completion_predicate() == "status = 'failed'", "Failure predicate logs on failure completion"
+        assert failure_predicate.get_completion_predicate() == "status = 'failed'", (
+            "Failure predicate logs on failure completion"
+        )
 
         # Verify equality comparison works (for deduplication)
         same_predicate = YLogPredicate(completion_predicate="status = 'completed'")
@@ -253,9 +268,13 @@ class TestParsePredicatesInWorkItemContextJTBD:
         work_item.status = WorkItemStatus.COMPLETED
 
         parser_updated = YLogPredicateWorkItemParser(work_item)
-        assert parser_updated.parse("${item:id}") == "wi-prod-99999", "Parser should reflect work item changes (proves real integration)"
+        assert parser_updated.parse("${item:id}") == "wi-prod-99999", (
+            "Parser should reflect work item changes (proves real integration)"
+        )
         assert parser_updated.parse("${task:id}") == "ReviewPayment", "Parser should reflect task ID changes"
-        assert parser_updated.parse("${item:status}") == str(WorkItemStatus.COMPLETED), "Parser should reflect status changes"
+        assert parser_updated.parse("${item:status}") == str(WorkItemStatus.COMPLETED), (
+            "Parser should reflect status changes"
+        )
 
     def test_parse_work_item_timestamps(self) -> None:
         """Job: When auditing task execution times, I want accurate timestamps so that I can analyze performance.
@@ -268,10 +287,7 @@ class TestParsePredicatesInWorkItemContextJTBD:
         """
         # Arrange: Work item with specific timestamps
         work_item = YWorkItem(
-            id="wi-perf-001",
-            case_id="case-perf-001",
-            task_id="DataProcessing",
-            status=WorkItemStatus.COMPLETED,
+            id="wi-perf-001", case_id="case-perf-001", task_id="DataProcessing", status=WorkItemStatus.COMPLETED
         )
         work_item.enabled_time = datetime(2025, 1, 15, 10, 0, 0)
         work_item.fired_time = datetime(2025, 1, 15, 10, 0, 5)
@@ -363,7 +379,9 @@ class TestParsePredicatesInDecompositionContextJTBD:
         # CRITICAL: Prove parser reads decomposition state
         decomp.id = "UpdatedProcess"
         parser_updated = YLogPredicateDecompositionParser(decomp)  # type: ignore[arg-type]
-        assert parser_updated.parse("${decomp:name}") == "UpdatedProcess", "Parser should reflect decomposition changes (proves real integration)"
+        assert parser_updated.parse("${decomp:name}") == "UpdatedProcess", (
+            "Parser should reflect decomposition changes (proves real integration)"
+        )
 
     def test_parse_decomposition_input_output_parameters(self) -> None:
         """Job: When logging process data flow, I want input/output parameters so that I can understand data transformations.
@@ -373,6 +391,7 @@ class TestParsePredicatesInDecompositionContextJTBD:
         - Parse parameter list predicates
         - Verify parsed lists match decomposition parameters
         """
+
         # Arrange: Decomposition with parameters
         class TestDecomposition:
             """Test decomposition with parameters."""
@@ -450,7 +469,9 @@ class TestParsePredicatesInParameterContextJTBD:
         param.name = "totalCost"
         param.data_type = "currency"
         parser_updated = YLogPredicateParameterParser(param)
-        assert parser_updated.parse("${parameter:name}") == "totalCost", "Parser should reflect parameter changes (proves real integration)"
+        assert parser_updated.parse("${parameter:name}") == "totalCost", (
+            "Parser should reflect parameter changes (proves real integration)"
+        )
         assert parser_updated.parse("${parameter:datatype}") == "currency", "Parser should reflect type changes"
 
     def test_parse_parameter_documentation_and_initial_value(self) -> None:
@@ -476,7 +497,9 @@ class TestParsePredicatesInParameterContextJTBD:
         parsed_initial = parser.parse("${parameter:initialvalue}")
 
         # Assert: Verify documentation parsed
-        assert parsed_doc == "Order processing priority: low, normal, high, urgent", "Documentation should match parameter doc"
+        assert parsed_doc == "Order processing priority: low, normal, high, urgent", (
+            "Documentation should match parameter doc"
+        )
         assert parsed_initial == "normal", "Initial value should match parameter default"
 
 
@@ -499,7 +522,9 @@ class TestXMLSerializationForAuditTrailJTBD:
         # Arrange: Logged data from patient record access
         logged_items = YLogDataItemList()
         logged_items.append(YLogDataItem(descriptor="input", name="patientId", value="PT-12345", data_type="string"))
-        logged_items.append(YLogDataItem(descriptor="input", name="accessReason", value="Emergency Treatment", data_type="string"))
+        logged_items.append(
+            YLogDataItem(descriptor="input", name="accessReason", value="Emergency Treatment", data_type="string")
+        )
         logged_items.append(YLogDataItem(descriptor="output", name="recordsAccessed", value="3", data_type="integer"))
 
         # Act: Serialize to XML
@@ -538,7 +563,9 @@ class TestXMLSerializationForAuditTrailJTBD:
         - Prove round-trip preserves predicate logic
         """
         # Arrange: Log predicate for high-priority orders
-        predicate = YLogPredicate(start_predicate="priority = 'urgent'", completion_predicate="status = 'completed' and priority = 'urgent'")
+        predicate = YLogPredicate(
+            start_predicate="priority = 'urgent'", completion_predicate="status = 'completed' and priority = 'urgent'"
+        )
 
         # Act: Serialize to XML
         xml_output = predicate.to_xml()
@@ -557,8 +584,12 @@ class TestXMLSerializationForAuditTrailJTBD:
 
         # CRITICAL: Prove round-trip preserves predicates
         parsed_predicate = YLogPredicate(xml=root)
-        assert parsed_predicate.get_start_predicate() == "priority = 'urgent'", "Round-trip should preserve start predicate"
-        assert parsed_predicate.get_completion_predicate() == "status = 'completed' and priority = 'urgent'", "Round-trip should preserve completion predicate"
+        assert parsed_predicate.get_start_predicate() == "priority = 'urgent'", (
+            "Round-trip should preserve start predicate"
+        )
+        assert parsed_predicate.get_completion_predicate() == "status = 'completed' and priority = 'urgent'", (
+            "Round-trip should preserve completion predicate"
+        )
 
     def test_empty_predicate_generates_empty_xml(self) -> None:
         """Job: When no logging predicates are set, I want empty XML so that I can distinguish from configured logging.

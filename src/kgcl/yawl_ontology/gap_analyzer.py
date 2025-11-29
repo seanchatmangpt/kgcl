@@ -250,16 +250,26 @@ class YawlGapAnalyzer:
                 missing_methods[java_class] = java_methods
                 continue
 
-            # Compare methods
+            # Compare methods (handle camelCase vs snake_case)
             py_method_names = set(py_class.methods)
-            missing = java_method_names - py_method_names
+            # Convert Java camelCase to Python snake_case for comparison
+            java_method_names_snake = {PythonCodeAnalyzer._camel_to_snake(name) for name in java_method_names}
+            # Also check direct matches
+            all_java_names = java_method_names | java_method_names_snake
+            missing = all_java_names - py_method_names
 
             if missing:
-                missing_method_objs = [m for m in java_methods if m.name in missing]
-                missing_methods[java_class] = missing_method_objs
+                # Find original Java method names for missing methods
+                missing_method_objs = []
+                for java_method in java_methods:
+                    java_snake = PythonCodeAnalyzer._camel_to_snake(java_method.name)
+                    if java_method.name in missing or java_snake in missing:
+                        missing_method_objs.append(java_method)
+                if missing_method_objs:
+                    missing_methods[java_class] = missing_method_objs
 
-            # Calculate partial implementation
-            implemented = len(java_method_names & py_method_names)
+            # Calculate partial implementation (using snake_case conversion)
+            implemented = len((java_method_names & py_method_names) | (java_method_names_snake & py_method_names))
             total = len(java_method_names)
             partial_implementations[java_class] = (implemented, total)
 

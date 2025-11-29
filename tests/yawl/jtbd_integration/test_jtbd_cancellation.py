@@ -300,7 +300,9 @@ class TestCancelWithCleanup:
         assert case is not None
 
         # Work items should be marked as canceled or removed
-        active_work_items = [wi for wi in case.work_items.values() if wi.status in [WorkItemStatus.STARTED, WorkItemStatus.EXECUTING]]
+        active_work_items = [
+            wi for wi in case.work_items.values() if wi.status in [WorkItemStatus.STARTED, WorkItemStatus.EXECUTING]
+        ]
         assert len(active_work_items) == 0, "No work items should be EXECUTING after cancel"
 
     def test_cancel_case_does_not_affect_other_cases(self) -> None:

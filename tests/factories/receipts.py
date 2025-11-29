@@ -11,9 +11,9 @@ Examples
 
 from __future__ import annotations
 
-import factory_boy
 from datetime import UTC, datetime
 
+import factory_boy
 from vendors.src.kgcl.hooks.receipts import ChainAnchor, Receipt
 
 
@@ -61,4 +61,3 @@ class ReceiptFactory(factory_boy.Factory):
     timestamp = factory_boy.LazyFunction(lambda: datetime.now(UTC))
     metadata = factory_boy.Dict({})
     chain_anchor = None
-

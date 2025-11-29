@@ -696,15 +696,35 @@ class DynFormField:
         # Set restriction facets from extended attributes for built-in XSD types
         datatype_unprefixed = self.get_data_type_unprefixed()
         built_in_types = {
-            "string", "boolean", "integer", "int", "long", "short", "byte",
-            "decimal", "float", "double", "dateTime", "date", "time", "duration",
+            "string",
+            "boolean",
+            "integer",
+            "int",
+            "long",
+            "short",
+            "byte",
+            "decimal",
+            "float",
+            "double",
+            "dateTime",
+            "date",
+            "time",
+            "duration",
         }
         if datatype_unprefixed in built_in_types and self._restriction is not None:
             restriction = self._get_or_create_restriction()
             facet_names = [
-                "minExclusive", "maxExclusive", "minInclusive", "maxInclusive",
-                "minLength", "maxLength", "length", "totalDigits", "fractionDigits",
-                "whiteSpace", "pattern",
+                "minExclusive",
+                "maxExclusive",
+                "minInclusive",
+                "maxInclusive",
+                "minLength",
+                "maxLength",
+                "length",
+                "totalDigits",
+                "fractionDigits",
+                "whiteSpace",
+                "pattern",
             ]
             for facet_name in facet_names:
                 value = self._attributes.get_value(facet_name)

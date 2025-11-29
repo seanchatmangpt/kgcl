@@ -11,8 +11,9 @@ Examples
 
 from __future__ import annotations
 
-import factory_boy
 from datetime import UTC, datetime
+
+import factory_boy
 
 from kgcl.hybrid.knowledge_hooks import HookAction, HookPhase, HookReceipt, KnowledgeHook
 
@@ -70,4 +71,3 @@ class HookReceiptFactory(factory_boy.Factory):
     error = None
     triples_affected = 0
     metadata = factory_boy.Dict({})
-

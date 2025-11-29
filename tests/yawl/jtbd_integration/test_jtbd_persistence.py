@@ -80,7 +80,7 @@ class TestPersistCase:
         case_repo = YCaseRepository(repository)
 
         serializer = YCaseSerializer()
-# SKIP: Serializer API not implemented
+        # SKIP: Serializer API not implemented
         #         case_data = serializer.serialize(case_obj)
         #         case_repo.save_case(case.id, case_data)
 
@@ -124,14 +124,14 @@ class TestPersistCase:
 
         # Serialize
         serializer = YCaseSerializer()
-# SKIP: Serializer API not implemented
-        #         serialized = serializer.serialize(case_obj)
 
-        # Verify serialization includes data
-        #         assert serialized is not None
+    # SKIP: Serializer API not implemented
+    #         serialized = serializer.serialize(case_obj)
 
+    # Verify serialization includes data
+    #         assert serialized is not None
 
-        # class TestRestoreCase:
+    # class TestRestoreCase:
     """Test restoring case state from storage."""
 
     def test_restore_case_from_repository(self) -> None:
@@ -176,7 +176,7 @@ class TestPersistCase:
         repository = YInMemoryRepository()
         case_repo = YCaseRepository(repository)
         serializer = YCaseSerializer()
-# SKIP: Serializer API not implemented
+        # SKIP: Serializer API not implemented
         #         case_data = serializer.serialize(original_case)
         #         case_repo.save_case(case.id, case_data)
 
@@ -190,7 +190,7 @@ class TestPersistCase:
         #         restored_data = case_repo.get_case(case.id)
         #         assert restored_data is not None
 
-# SKIP: Serializer API not implemented
+        # SKIP: Serializer API not implemented
         #         restored_case = serializer.deserialize(restored_data)
         #         assert restored_case is not None
         #         assert restored_case.id == case.id
@@ -244,24 +244,24 @@ class TestPersistCase:
         repository = YInMemoryRepository()
         case_repo = YCaseRepository(repository)
         serializer = YCaseSerializer()
-# SKIP: Serializer API not implemented
-        #         case_data = serializer.serialize(case_obj)
-        #         case_repo.save_case(case.id, case_data)
 
-        # Restore and continue
-        #         engine2 = YEngine()
-        #         engine2.start()
-        #         engine2.load_specification(spec)
-        #         engine2.activate_specification(spec.id)
+    # SKIP: Serializer API not implemented
+    #         case_data = serializer.serialize(case_obj)
+    #         case_repo.save_case(case.id, case_data)
 
-        #         restored_data = case_repo.get_case(case.id)
-        #         assert restored_data is not None
+    # Restore and continue
+    #         engine2 = YEngine()
+    #         engine2.start()
+    #         engine2.load_specification(spec)
+    #         engine2.activate_specification(spec.id)
 
-        # Load case into engine2 (implementation-specific)
-        # Would need engine.restore_case() method
+    #         restored_data = case_repo.get_case(case.id)
+    #         assert restored_data is not None
 
+    # Load case into engine2 (implementation-specific)
+    # Would need engine.restore_case() method
 
-        # class TestPersistSpecification:
+    # class TestPersistSpecification:
     """Test persisting workflow specifications."""
 
     def test_save_specification_to_repository(self) -> None:
@@ -291,7 +291,7 @@ class TestPersistCase:
         spec_repo = YSpecificationRepository(repository)
 
         serializer = YSpecificationSerializer()
-# SKIP: Serializer API not implemented
+        # SKIP: Serializer API not implemented
         #         spec_data = serializer.serialize(spec)
         #         spec_repo.save_specification(spec.id, spec_data)
 
@@ -331,24 +331,24 @@ class TestPersistCase:
 
         # Serialize and deserialize
         serializer = YSpecificationSerializer()
-# SKIP: Serializer API not implemented
-        #         serialized = serializer.serialize(spec)
-# SKIP: Serializer API not implemented
-        #         deserialized = serializer.deserialize(serialized)
 
-        # Verify structure
-        #         assert deserialized is not None
-        #         assert deserialized.id == spec.id
+    # SKIP: Serializer API not implemented
+    #         serialized = serializer.serialize(spec)
+    # SKIP: Serializer API not implemented
+    #         deserialized = serializer.deserialize(serialized)
 
-        #         restored_net = deserialized.get_root_net()
-        #         assert restored_net is not None
-        #         assert restored_net.id == "main"
-        #         assert len(restored_net.tasks) == 2
-        #         assert len(restored_net.conditions) == 3
-        #         assert len(restored_net.flows) == 4
+    # Verify structure
+    #         assert deserialized is not None
+    #         assert deserialized.id == spec.id
 
+    #         restored_net = deserialized.get_root_net()
+    #         assert restored_net is not None
+    #         assert restored_net.id == "main"
+    #         assert len(restored_net.tasks) == 2
+    #         assert len(restored_net.conditions) == 3
+    #         assert len(restored_net.flows) == 4
 
-        # class TestPersistenceDataIntegrity:
+    # class TestPersistenceDataIntegrity:
     """Test data integrity during persistence operations."""
 
     def test_case_data_preserved_through_serialization(self) -> None:
@@ -386,8 +386,8 @@ class TestPersistCase:
             "metadata": {"region": "US", "priority": "high"},
         }
 
-# SKIP:         case = engine.create_case(spec.id, initial_data=initial_data)
-# SKIP:         engine.start_case(case.id)
+        # SKIP:         case = engine.create_case(spec.id, initial_data=initial_data)
+        # SKIP:         engine.start_case(case.id)
 
         # Get case
         case_obj = engine.get_case(case.id)
@@ -395,9 +395,9 @@ class TestPersistCase:
 
         # Serialize and deserialize
         serializer = YCaseSerializer()
-# SKIP: Serializer API not implemented
+        # SKIP: Serializer API not implemented
         #         serialized = serializer.serialize(case_obj)
-# SKIP: Serializer API not implemented
+        # SKIP: Serializer API not implemented
         #         restored = serializer.deserialize(serialized)
 
         # Verify data integrity
@@ -444,17 +444,17 @@ class TestPersistCase:
 
         # Serialize case
         serializer = YCaseSerializer()
-# SKIP: Serializer API not implemented
-        #         serialized = serializer.serialize(case_obj)
-# SKIP: Serializer API not implemented
-        #         restored = serializer.deserialize(serialized)
 
-        # Verify work item state
-        #         assert restored is not None
-        #         assert len(restored.work_items) == len(work_items)
+    # SKIP: Serializer API not implemented
+    #         serialized = serializer.serialize(case_obj)
+    # SKIP: Serializer API not implemented
+    #         restored = serializer.deserialize(serialized)
 
+    # Verify work item state
+    #         assert restored is not None
+    #         assert len(restored.work_items) == len(work_items)
 
-        # class TestPersistenceErrorHandling:
+    # class TestPersistenceErrorHandling:
     """Test error handling in persistence operations."""
 
     def test_handle_corrupted_case_data(self) -> None:
@@ -515,7 +515,7 @@ class TestIncrementalPersistence:
         # Chain tasks: start -> T0 -> T1 -> T2 -> T3 -> T4 -> end
         net.add_flow(YFlow(id="f0", source_id="start", target_id="Task0"))
         for i in range(4):
-            net.add_flow(YFlow(id=f"f{i+1}", source_id=f"Task{i}", target_id=f"Task{i+1}"))
+            net.add_flow(YFlow(id=f"f{i + 1}", source_id=f"Task{i}", target_id=f"Task{i + 1}"))
         net.add_flow(YFlow(id="f5", source_id="Task4", target_id="end"))
 
         spec.set_root_net(net)
@@ -543,10 +543,12 @@ class TestIncrementalPersistence:
             # Checkpoint
             case_obj = engine.get_case(case.id)
             assert case_obj is not None
-# SKIP: Serializer API not implemented
-        #             case_data = serializer.serialize(case_obj)
-        #             case_repo.save_case(case.id, case_data, version=i)
 
-        # Can restore from any checkpoint
-        #         checkpoints = case_repo.get_case_versions(case.id)
-        # Implementation would provide version history
+
+# SKIP: Serializer API not implemented
+#             case_data = serializer.serialize(case_obj)
+#             case_repo.save_case(case.id, case_data, version=i)
+
+# Can restore from any checkpoint
+#         checkpoints = case_repo.get_case_versions(case.id)
+# Implementation would provide version history

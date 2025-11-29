@@ -38,5 +38,3 @@ class AppleIngestValidator:
             data_graph=graph, shacl_graph=shapes_graph, inference="rdfs", allow_infos=True, allow_warnings=True
         )
         return ValidationReport(conforms=bool(conforms), text=str(report_text))
-
-

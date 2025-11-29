@@ -48,8 +48,6 @@ def pytest_configure(config: pytest.Config) -> None:
     config.addinivalue_line("markers", "chaos: marks chaos engineering tests (failure injection, recovery)")
 
 
-
-
 def pytest_report_header(config: pytest.Config) -> list[str]:
     """Add Docker availability status to test report header.
 
@@ -67,9 +65,7 @@ def pytest_report_header(config: pytest.Config) -> list[str]:
     return [f"Docker: {status}"]
 
 
-def pytest_collection_modifyitems(
-    config: pytest.Config, items: list[pytest.Item]
-) -> None:
+def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item]) -> None:
     """Skip container tests and run lies detector.
 
     This hook runs during test collection to:
@@ -119,9 +115,7 @@ def pytest_collection_modifyitems(
 
     if not detector_script.exists():
         pytest.exit(
-            f"Lies detector script not found: {detector_script}\n"
-            "Cannot run tests without lies detection.",
-            returncode=1,
+            f"Lies detector script not found: {detector_script}\nCannot run tests without lies detection.", returncode=1
         )
 
     # Get unique test file paths
@@ -151,9 +145,7 @@ def pytest_collection_modifyitems(
         )
     except FileNotFoundError:
         pytest.exit(
-            f"Python interpreter not found: {sys.executable}\n"
-            "Cannot run lies detector. Tests blocked.",
-            returncode=1,
+            f"Python interpreter not found: {sys.executable}\nCannot run lies detector. Tests blocked.", returncode=1
         )
     except Exception as e:
         pytest.exit(

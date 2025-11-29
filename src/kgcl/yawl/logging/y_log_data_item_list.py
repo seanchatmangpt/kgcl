@@ -77,5 +77,3 @@ class YLogDataItemList(list[YLogDataItem]):
         if element is not None:
             for child in element:
                 self.append(YLogDataItem(xml=child))
-
-

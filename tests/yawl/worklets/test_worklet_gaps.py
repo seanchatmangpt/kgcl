@@ -20,7 +20,6 @@ from kgcl.yawl.worklets.models import Worklet, WorkletCase, WorkletStatus, Workl
 from kgcl.yawl.worklets.repository import WorkletRepository
 from kgcl.yawl.worklets.rules import RDREngine, RuleContext
 
-
 # --- Gap 1: Concurrent Worklet Execution ---
 
 
@@ -48,19 +47,13 @@ class TestConcurrentExecution:
 
         tree_id = executor.register_tree(task_id=None, exception_type="CONCURRENT_ERROR")
         executor.add_rule(
-            tree_id=tree_id,
-            parent_node_id="root",
-            is_true_branch=True,
-            condition="true",
-            worklet_id=worklet.id,
+            tree_id=tree_id, parent_node_id="root", is_true_branch=True, condition="true", worklet_id=worklet.id
         )
 
         # Act: Execute 10 concurrent exceptions
         def handle_exception(case_num: int) -> WorkletResult:
             return executor.handle_case_exception(
-                case_id=f"case-{case_num}",
-                exception_type="CONCURRENT_ERROR",
-                case_data={"case_num": case_num},
+                case_id=f"case-{case_num}", exception_type="CONCURRENT_ERROR", case_data={"case_num": case_num}
             )
 
         with ThreadPoolExecutor(max_workers=10) as pool:
@@ -101,11 +94,7 @@ class TestConcurrentExecution:
 
         tree_id = executor.register_tree(task_id="task-process", exception_type="ITEM_ERROR")
         executor.add_rule(
-            tree_id=tree_id,
-            parent_node_id="root",
-            is_true_branch=True,
-            condition="true",
-            worklet_id=worklet.id,
+            tree_id=tree_id, parent_node_id="root", is_true_branch=True, condition="true", worklet_id=worklet.id
         )
 
         # Act: Execute 5 concurrent item exceptions for same case
@@ -156,11 +145,7 @@ class TestInvalidDataHandling:
         rdr_engine = RDREngine()
 
         # Create context
-        context = RuleContext(
-            case_id="case-test",
-            exception_type="TEST",
-            case_data={"value": 10},
-        )
+        context = RuleContext(case_id="case-test", exception_type="TEST", case_data={"value": 10})
 
         # Act & Assert: Empty condition raises error (via _evaluate_condition which validates)
         with pytest.raises(RuleEvaluationError) as exc_info:
@@ -266,30 +251,21 @@ class TestPerformanceAndCleanup:
 
         # Create old completed case (48 hours ago)
         old_case = WorkletCase(
-            id="case-old",
-            worklet_id="wl-test",
-            parent_case_id="parent-001",
-            status=WorkletStatus.COMPLETED,
+            id="case-old", worklet_id="wl-test", parent_case_id="parent-001", status=WorkletStatus.COMPLETED
         )
         old_case.completed = datetime.now() - timedelta(hours=48)
         repository.add_case(old_case)
 
         # Create recent completed case (12 hours ago)
         recent_case = WorkletCase(
-            id="case-recent",
-            worklet_id="wl-test",
-            parent_case_id="parent-002",
-            status=WorkletStatus.COMPLETED,
+            id="case-recent", worklet_id="wl-test", parent_case_id="parent-002", status=WorkletStatus.COMPLETED
         )
         recent_case.completed = datetime.now() - timedelta(hours=12)
         repository.add_case(recent_case)
 
         # Create running case
         running_case = WorkletCase(
-            id="case-running",
-            worklet_id="wl-test",
-            parent_case_id="parent-003",
-            status=WorkletStatus.RUNNING,
+            id="case-running", worklet_id="wl-test", parent_case_id="parent-003", status=WorkletStatus.RUNNING
         )
         repository.add_case(running_case)
 
@@ -326,20 +302,14 @@ class TestPerformanceAndCleanup:
 
         tree_id = executor.register_tree(task_id=None, exception_type="SCALE_TEST")
         executor.add_rule(
-            tree_id=tree_id,
-            parent_node_id="root",
-            is_true_branch=True,
-            condition="true",
-            worklet_id=worklet.id,
+            tree_id=tree_id, parent_node_id="root", is_true_branch=True, condition="true", worklet_id=worklet.id
         )
 
         # Act: Execute 100 worklets
         results = []
         for i in range(100):
             result = executor.handle_case_exception(
-                case_id=f"case-scale-{i}",
-                exception_type="SCALE_TEST",
-                case_data={"index": i},
+                case_id=f"case-scale-{i}", exception_type="SCALE_TEST", case_data={"index": i}
             )
             results.append(result)
 
@@ -356,10 +326,7 @@ class TestPerformanceAndCleanup:
         assert len(query_result) >= 100
 
         # Assert: Can still add new worklet after scale test
-        new_result = executor.handle_case_exception(
-            case_id="case-after-scale",
-            exception_type="SCALE_TEST",
-        )
+        new_result = executor.handle_case_exception(case_id="case-after-scale", exception_type="SCALE_TEST")
         assert new_result.success
 
     def test_rdr_tree_with_deep_nesting(self) -> None:
@@ -405,9 +372,7 @@ class TestPerformanceAndCleanup:
 
         # Act: Execute to traverse deep tree
         result = executor.handle_case_exception(
-            case_id="case-deep",
-            exception_type="DEPTH_TEST",
-            case_data={"test": "deep"},
+            case_id="case-deep", exception_type="DEPTH_TEST", case_data={"test": "deep"}
         )
 
         # Assert: Successfully traversed 10 levels without stack overflow
@@ -447,21 +412,11 @@ class TestRepositoryEdgeCases:
         # Add item exception worklets
         for i in range(3):
             repository.add_worklet(
-                Worklet(
-                    id=f"wl-item-{i}",
-                    name=f"Item {i}",
-                    worklet_type=WorkletType.ITEM_EXCEPTION,
-                    enabled=True,
-                )
+                Worklet(id=f"wl-item-{i}", name=f"Item {i}", worklet_type=WorkletType.ITEM_EXCEPTION, enabled=True)
             )
 
         # Act: Query for enabled case exception worklets
-        results = (
-            repository.query_worklets()
-            .filter_type(WorkletType.CASE_EXCEPTION)
-            .filter_enabled(True)
-            .execute()
-        )
+        results = repository.query_worklets().filter_type(WorkletType.CASE_EXCEPTION).filter_enabled(True).execute()
 
         # Assert: Only enabled case worklets returned
         assert len(results) == 3  # 0, 2, 4 are enabled

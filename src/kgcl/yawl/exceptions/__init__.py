@@ -39,5 +39,3 @@ __all__ = [
     "YSyntaxException",
     "Problem",
 ]
-
-

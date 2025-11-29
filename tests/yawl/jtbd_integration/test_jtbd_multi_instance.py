@@ -19,7 +19,6 @@ from __future__ import annotations
 import pytest
 
 from kgcl.yawl import (
-    YMultipleInstanceTask,
     CaseStatus,
     ConditionType,
     MICompletionMode,
@@ -30,6 +29,7 @@ from kgcl.yawl import (
     YEngine,
     YFlow,
     YMultiInstanceAttributes,
+    YMultipleInstanceTask,
     YNet,
     YSpecification,
     YTask,
@@ -198,7 +198,11 @@ class TestThresholdCompletion:
         """
         # Verify MI attributes are correct
         mi_attrs = YMultiInstanceAttributes(
-            minimum=5, maximum=5, threshold=2, creation_mode=MICreationMode.STATIC, completion_mode=MICompletionMode.THRESHOLD
+            minimum=5,
+            maximum=5,
+            threshold=2,
+            creation_mode=MICreationMode.STATIC,
+            completion_mode=MICompletionMode.THRESHOLD,
         )
 
         # Test threshold logic
@@ -290,11 +294,7 @@ class TestMultiInstanceDataFlow:
         task_a = YAtomicTask(id="TaskA")
 
         mi_task = YMultipleInstanceTask(
-            id="ProcessItems",
-            mi_minimum=3,
-            mi_maximum=3,
-            mi_threshold=3,
-            mi_creation_mode="static",
+            id="ProcessItems", mi_minimum=3, mi_maximum=3, mi_threshold=3, mi_creation_mode="static"
         )
 
         task_b = YAtomicTask(id="TaskB")
@@ -365,11 +365,7 @@ class TestMultiInstancePatternIntegration:
             minimum=2, maximum=2, threshold=2, creation_mode=MICreationMode.STATIC, completion_mode=MICompletionMode.ALL
         )
         mi_task = YMultipleInstanceTask(
-            id="ProcessItems",
-            mi_minimum=2,
-            mi_maximum=2,
-            mi_threshold=2,
-            mi_creation_mode="static"
+            id="ProcessItems", mi_minimum=2, mi_maximum=2, mi_threshold=2, mi_creation_mode="static"
         )
         # Note: join_type would need to be set separately if YMultipleInstanceTask supports it
 

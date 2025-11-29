@@ -346,7 +346,9 @@ class TestWorkItemQueries:
         # Should have multiple work items (C and D from AND-split)
         case_obj = engine.get_case(case.id)
         assert case_obj is not None
-        active_items = [wi for wi in case_obj.work_items.values() if wi.status in [WorkItemStatus.STARTED, WorkItemStatus.EXECUTING]]
+        active_items = [
+            wi for wi in case_obj.work_items.values() if wi.status in [WorkItemStatus.STARTED, WorkItemStatus.EXECUTING]
+        ]
         assert len(active_items) >= 1, "Should have parallel work items executing"
 
 

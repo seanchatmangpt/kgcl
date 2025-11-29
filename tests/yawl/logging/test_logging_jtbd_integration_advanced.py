@@ -108,34 +108,15 @@ class TestEndToEndWorkflowIntegrationJTBD:
         wi_receive.started_time = datetime(2025, 1, 15, 10, 0, 0)
 
         # Log ReceiveOrder start
+        case_log.append(YLogDataItem(descriptor="task_start", name="task", value="ReceiveOrder", data_type="event"))
         case_log.append(
-            YLogDataItem(
-                descriptor="task_start",
-                name="task",
-                value="ReceiveOrder",
-                data_type="event",
-            )
-        )
-        case_log.append(
-            YLogDataItem(
-                descriptor="input",
-                name="orderId",
-                value=wi_receive.data_input["orderId"],
-                data_type="string",
-            )
+            YLogDataItem(descriptor="input", name="orderId", value=wi_receive.data_input["orderId"], data_type="string")
         )
 
         # Complete ReceiveOrder
         wi_receive.status = WorkItemStatus.COMPLETED
         wi_receive.completed_time = datetime(2025, 1, 15, 10, 1, 0)
-        case_log.append(
-            YLogDataItem(
-                descriptor="task_complete",
-                name="task",
-                value="ReceiveOrder",
-                data_type="event",
-            )
-        )
+        case_log.append(YLogDataItem(descriptor="task_complete", name="task", value="ReceiveOrder", data_type="event"))
 
         # Task 2: ValidatePayment
         wi_validate = YWorkItem(
@@ -147,52 +128,21 @@ class TestEndToEndWorkflowIntegrationJTBD:
         )
         wi_validate.started_time = datetime(2025, 1, 15, 10, 2, 0)
 
-        case_log.append(
-            YLogDataItem(
-                descriptor="task_start",
-                name="task",
-                value="ValidatePayment",
-                data_type="event",
-            )
-        )
+        case_log.append(YLogDataItem(descriptor="task_start", name="task", value="ValidatePayment", data_type="event"))
 
         wi_validate.status = WorkItemStatus.COMPLETED
         wi_validate.completed_time = datetime(2025, 1, 15, 10, 3, 0)
         case_log.append(
-            YLogDataItem(
-                descriptor="task_complete",
-                name="task",
-                value="ValidatePayment",
-                data_type="event",
-            )
+            YLogDataItem(descriptor="task_complete", name="task", value="ValidatePayment", data_type="event")
         )
 
         # Task 3: ShipOrder
-        wi_ship = YWorkItem(
-            id="wi-ship-001",
-            case_id=case_id,
-            task_id="ShipOrder",
-            status=WorkItemStatus.COMPLETED,
-        )
+        wi_ship = YWorkItem(id="wi-ship-001", case_id=case_id, task_id="ShipOrder", status=WorkItemStatus.COMPLETED)
         wi_ship.started_time = datetime(2025, 1, 15, 10, 4, 0)
         wi_ship.completed_time = datetime(2025, 1, 15, 10, 5, 0)
 
-        case_log.append(
-            YLogDataItem(
-                descriptor="task_start",
-                name="task",
-                value="ShipOrder",
-                data_type="event",
-            )
-        )
-        case_log.append(
-            YLogDataItem(
-                descriptor="task_complete",
-                name="task",
-                value="ShipOrder",
-                data_type="event",
-            )
-        )
+        case_log.append(YLogDataItem(descriptor="task_start", name="task", value="ShipOrder", data_type="event"))
+        case_log.append(YLogDataItem(descriptor="task_complete", name="task", value="ShipOrder", data_type="event"))
 
         # Assert: Verify complete case audit trail
         assert len(case_log) == 7, "Should log all task lifecycle events (6 task events + 1 data item)"
@@ -215,9 +165,12 @@ class TestEndToEndWorkflowIntegrationJTBD:
         # The YNet defines sequence, and logs follow that sequence
         net_task_sequence = ["ReceiveOrder", "ValidatePayment", "ShipOrder"]
         logged_task_sequence = [
-            task_events[i].get_value() for i in range(0, 6, 2)  # Every start event
+            task_events[i].get_value()
+            for i in range(0, 6, 2)  # Every start event
         ]
-        assert logged_task_sequence == net_task_sequence, "Logged sequence should match workflow net structure (proves integration)"
+        assert logged_task_sequence == net_task_sequence, (
+            "Logged sequence should match workflow net structure (proves integration)"
+        )
 
         # Verify case context maintained across all events
         # In real YAWL, all work items share same case_id
@@ -312,10 +265,14 @@ class TestConcurrentMultiWorkItemLoggingJTBD:
 
         # Assert: Verify thread-safe logging
         # 1. All items logged (no lost events)
-        assert len(shared_log) == expected_total_items, f"Should log all {expected_total_items} items (no race conditions)"
+        assert len(shared_log) == expected_total_items, (
+            f"Should log all {expected_total_items} items (no race conditions)"
+        )
 
         # 2. Each worker logged correct count
-        assert all(count == items_per_work_item for count in items_logged_per_worker), "Each work item should log exactly 100 items"
+        assert all(count == items_per_work_item for count in items_logged_per_worker), (
+            "Each work item should log exactly 100 items"
+        )
 
         # 3. No duplicate items (verify uniqueness by name)
         logged_names = {item.get_name() for item in shared_log}
@@ -324,7 +281,9 @@ class TestConcurrentMultiWorkItemLoggingJTBD:
         # 4. Verify items from all work items present
         for work_item_num in range(num_work_items):
             items_from_this_worker = [item for item in shared_log if f"check_{work_item_num}_" in item.get_name()]
-            assert len(items_from_this_worker) == items_per_work_item, f"Work item {work_item_num} should have logged all items"
+            assert len(items_from_this_worker) == items_per_work_item, (
+                f"Work item {work_item_num} should have logged all items"
+            )
 
         # 5. Performance check (should complete in reasonable time)
         assert execution_time < 5.0, f"Concurrent logging should complete in <5 seconds (took {execution_time:.2f}s)"

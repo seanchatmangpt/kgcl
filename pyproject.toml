@@ -1,15 +1,13 @@
-[build-system]  # https://docs.astral.sh/uv/concepts/projects/config/#build-systems
+[build-system] # https://docs.astral.sh/uv/concepts/projects/config/#build-systems
 requires = ["hatchling>=1.27.0"]
 build-backend = "hatchling.build"
 
-[project]  # https://packaging.python.org/en/latest/specifications/pyproject-toml/
+[project] # https://packaging.python.org/en/latest/specifications/pyproject-toml/
 name = "kgcl"
 version = "0.1.0"
 description = "Knowledge Geometry Calculus for Life - Local-first autonomic knowledge engine"
 readme = "README.md"
-authors = [
-  { name = "Your Name", email = "your.email@example.com" },
-]
+authors = [{ name = "Your Name", email = "your.email@example.com" }]
 requires-python = ">=3.13,<4.0"
 dependencies = [
   "click>=8.1.7",
@@ -36,9 +34,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dspy = [
-  "dspy-ai>=2.4.0",
-]
+dspy = ["dspy-ai>=2.4.0"]
 
 [project.scripts]
 kgcl = "kgcl.cli.app:app"
@@ -49,8 +45,9 @@ kgc-query = "kgcl.cli.query:query"
 kgc-config = "kgcl.cli.config:config"
 kgc-health = "kgcl.observability.cli:cli"
 kgc-yawl-ontology = "kgcl.yawl_ontology.cli:main"
+kgc-porting = "kgcl.porting.cli:app"
 
-[project.urls]  # https://packaging.python.org/en/latest/specifications/well-known-project-urls/#well-known-labels
+[project.urls] # https://packaging.python.org/en/latest/specifications/well-known-project-urls/#well-known-labels
 homepage = "https://github.com/user/kgcl"
 source = "https://github.com/user/kgcl"
 changelog = "https://github.com/user/kgcl/blob/main/CHANGELOG.md"
@@ -58,7 +55,7 @@ releasenotes = "https://github.com/user/kgcl/releases"
 documentation = "https://user.github.io/kgcl"
 issues = "https://github.com/user/kgcl/issues"
 
-[dependency-groups]  # https://docs.astral.sh/uv/concepts/projects/dependencies/#development-dependencies
+[dependency-groups] # https://docs.astral.sh/uv/concepts/projects/dependencies/#development-dependencies
 dev = [
   "commitizen (>=4.3.0)",
   "coverage[toml] (>=7.6.10)",
@@ -92,13 +89,13 @@ dev = [
 [tool.uv]
 package = true
 
-[tool.commitizen]  # https://commitizen-tools.github.io/commitizen/config/
+[tool.commitizen] # https://commitizen-tools.github.io/commitizen/config/
 bump_message = "bump: v$current_version → v$new_version"
 tag_format = "v$version"
 update_changelog_on_bump = true
 version_provider = "uv"
 
-[tool.coverage.report]  # https://coverage.readthedocs.io/en/latest/config.html#report
+[tool.coverage.report] # https://coverage.readthedocs.io/en/latest/config.html#report
 precision = 1
 show_missing = true
 skip_covered = true
@@ -110,17 +107,17 @@ exclude_lines = [
   "if __name__ == .__main__.:",
 ]
 
-[tool.coverage.run]  # https://coverage.readthedocs.io/en/latest/config.html#run
+[tool.coverage.run] # https://coverage.readthedocs.io/en/latest/config.html#run
 branch = true
 command_line = "--module pytest"
 data_file = "reports/.coverage"
 source = ["src"]
 parallel = true
 
-[tool.coverage.xml]  # https://coverage.readthedocs.io/en/latest/config.html#xml
+[tool.coverage.xml] # https://coverage.readthedocs.io/en/latest/config.html#xml
 output = "reports/coverage.xml"
 
-[tool.mypy]  # https://mypy.readthedocs.io/en/latest/config_file.html
+[tool.mypy] # https://mypy.readthedocs.io/en/latest/config_file.html
 # RESEARCH LIBRARY SETTINGS - Require typing on function defs and returns
 # Tests excluded, SHACL validates at ingress
 junit_xml = "reports/mypy.xml"
@@ -151,23 +148,23 @@ mypy_path = "src"
 exclude = ["vendors/", ".mypy_cache/", ".claude/", "tests/", "test_"]
 # Research library: SHACL validates at ingress, skip defensive checks
 disable_error_code = [
-    "union-attr",       # Optional access - SHACL ensures data exists
-    "index",            # Indexing - SHACL ensures valid structure
-    "arg-type",         # Argument types - caught by unit tests
-    "call-arg",         # Call arguments - caught by unit tests
-    "assignment",       # Assignments - caught by unit tests
-    "attr-defined",     # Attribute access - caught by unit tests
-    "operator",         # Operators - caught by unit tests
-    "import-not-found", # Missing imports - caught at runtime
-    "import-untyped",   # Untyped imports - external libs
-    "annotation-unchecked", # Unchecked annotations
-    "dict-item",        # Dict item types
-    "return-value",     # Return value types - caught by tests
-    "misc",             # Misc errors
-    "var-annotated",    # Variable annotations
-    "name-defined",     # Name defined
-    "call-overload",    # Call overload
-    "no-redef",         # Redefinition
+  "union-attr",           # Optional access - SHACL ensures data exists
+  "index",                # Indexing - SHACL ensures valid structure
+  "arg-type",             # Argument types - caught by unit tests
+  "call-arg",             # Call arguments - caught by unit tests
+  "assignment",           # Assignments - caught by unit tests
+  "attr-defined",         # Attribute access - caught by unit tests
+  "operator",             # Operators - caught by unit tests
+  "import-not-found",     # Missing imports - caught at runtime
+  "import-untyped",       # Untyped imports - external libs
+  "annotation-unchecked", # Unchecked annotations
+  "dict-item",            # Dict item types
+  "return-value",         # Return value types - caught by tests
+  "misc",                 # Misc errors
+  "var-annotated",        # Variable annotations
+  "name-defined",         # Name defined
+  "call-overload",        # Call overload
+  "no-redef",             # Redefinition
 ]
 
 [[tool.mypy.overrides]]
@@ -182,24 +179,35 @@ ignore_missing_imports = true
 module = "kgcl.hooks.conditions"
 disallow_any_unimported = false
 
-[tool.pytest.ini_options]  # https://docs.pytest.org/en/latest/reference/reference.html#ini-options-ref
+[tool.pytest.ini_options] # https://docs.pytest.org/en/latest/reference/reference.html#ini-options-ref
 # 80/20 Consolidation: Unit tests must complete in <1 second with parallel execution
 # Default excludes: slow (>1s), integration, eye (EYE reasoner), container (Docker)
 addopts = "-n auto --dist worksteal --color=yes -q --junitxml=reports/pytest.xml --strict-markers -m 'not slow and not integration and not eye and not container and not wip'"
 testpaths = ["tests"]
-norecursedirs = ["src", ".git", "build", "dist", ".hypothesis", ".venv", ".tox", "tests/chaos", "tests/integration", "tests/yawl_ui"]
+norecursedirs = [
+  "src",
+  ".git",
+  "build",
+  "dist",
+  ".hypothesis",
+  ".venv",
+  ".tox",
+  "tests/chaos",
+  "tests/integration",
+  "tests/yawl_ui",
+]
 xfail_strict = true
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
 filterwarnings = [
   "error",
   # External dependencies only - minimized per KGC v3.0 Andon Cord
-  "ignore::DeprecationWarning:rdflib.*",              # rdflib uses deprecated APIs
-  "ignore::DeprecationWarning:pydantic.*",            # pydantic internal deprecations
-  "ignore::DeprecationWarning:opentelemetry.*",       # opentelemetry uses deprecated APIs
-  "ignore::DeprecationWarning:testcontainers.*",      # testcontainers internal deprecations
-  "ignore::pydantic.warnings.PydanticDeprecatedSince20:litellm.*",  # litellm uses pydantic v1 API
-  "ignore::pydantic.warnings.PydanticDeprecatedSince20:dspy.*",     # dspy uses pydantic v1 API
+  "ignore::DeprecationWarning:rdflib.*",                           # rdflib uses deprecated APIs
+  "ignore::DeprecationWarning:pydantic.*",                         # pydantic internal deprecations
+  "ignore::DeprecationWarning:opentelemetry.*",                    # opentelemetry uses deprecated APIs
+  "ignore::DeprecationWarning:testcontainers.*",                   # testcontainers internal deprecations
+  "ignore::pydantic.warnings.PydanticDeprecatedSince20:litellm.*", # litellm uses pydantic v1 API
+  "ignore::pydantic.warnings.PydanticDeprecatedSince20:dspy.*",    # dspy uses pydantic v1 API
   # rdflib memory store and asyncio GC resource leaks (external, not controllable)
   "ignore::pytest.PytestUnraisableExceptionWarning:_pytest.unraisableexception.*",
 ]
@@ -228,13 +236,13 @@ python_files = ["test_*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
 
-[tool.ruff]  # https://docs.astral.sh/ruff/settings/
+[tool.ruff] # https://docs.astral.sh/ruff/settings/
 # KGC v3.0 ANDON CORD - Strict settings
-fix = true  # Auto-fix enabled for cleanup
-line-length = 120  # Increased line length for readability
+fix = true               # Auto-fix enabled for cleanup
+line-length = 120        # Increased line length for readability
 src = ["src", "tests"]
 target-version = "py312"
-unsafe-fixes = false  # Never apply unsafe fixes
+unsafe-fixes = false     # Never apply unsafe fixes
 
 [tool.ruff.format]
 docstring-code-format = true
@@ -244,68 +252,68 @@ indent-style = "space"
 [tool.ruff.lint]
 # KGC v3.0 ANDON CORD - Strict quality gates
 select = [
-  "E",      # pycodestyle errors
-  "F",      # pyflakes
-  "B",      # flake8-bugbear
-  "W",      # pycodestyle warnings
-  "I",      # isort
-  "N",      # pep8-naming
-  "UP",     # pyupgrade
-  "PL",     # pylint
-  "RUF",    # ruff-specific rules
+  "E",   # pycodestyle errors
+  "F",   # pyflakes
+  "B",   # flake8-bugbear
+  "W",   # pycodestyle warnings
+  "I",   # isort
+  "N",   # pep8-naming
+  "UP",  # pyupgrade
+  "PL",  # pylint
+  "RUF", # ruff-specific rules
 ]
 # MINIMAL ignores - only truly conflicting rules allowed
 ignore = [
-  "D203",     # One blank line before class (conflicts with D211)
-  "D213",     # Multi-line docstring summary on second line (conflicts with D212)
-  "COM812",   # Trailing comma conflicts with formatter
-  "ISC001",   # Implicit string concatenation conflicts with formatter
-  "PLR2004",  # Magic values in comparisons - acceptable in tests
-  "PLC0415",  # Late imports - acceptable when code works
-  "PLW0603",  # Global statement - acceptable in module initialization
-  "PLR0912",  # Too many branches - caught by unit tests
-  "PLR0913",  # Too many arguments - caught by unit tests
-  "PLR0915",  # Too many statements - caught by unit tests
-  "E731",     # Lambda assignment - caught by unit tests
-  "PLR0911",  # Too many return statements - caught by unit tests
-  "N802",     # Function name lowercase - sometimes needed for compatibility
-  "N806",     # Variable in function lowercase - sometimes needed
-  "N817",     # CamelCase imported as acronym - style preference
-  "N818",     # Exception name Error suffix - style preference
-  "N811",     # Constant imported as non-constant - style preference
-  "B007",     # Unused loop variable - caught by F841
-  "B904",     # Raise from within except - style preference
-  "B905",     # zip without strict - Python <3.10 compatibility
-  "B017",     # assertRaises(Exception) - test pattern
-  "RUF012",   # Mutable class attrs - caught by tests
-  "RUF015",   # Prefer next() - style preference
-  "RUF059",   # Unused self - protocol pattern
-  "RUF003",   # Ambiguous characters - false positives in comments
-  "RUF002",   # Ambiguous characters - false positives
-  "RUF001",   # Ambiguous characters - false positives
-  "RUF043",   # Slice copy - style preference
-  "RUF022",   # __all__ sorting - style preference
-  "PLW2901",  # Outer loop variable overwritten - caught by tests
-  "PLR1714",  # Consider merging comparisons - style preference
-  "E402",     # Module level import not at top - acceptable for conditional imports
-  "UP028",    # Yield in for loop - style preference
-  "W505",     # Doc line too long - style preference, readable docs preferred
-  "F403",     # Star import - acceptable in __init__.py re-exports
-  "F811",     # Redefinition - caught by tests
-  "UP035",    # Deprecated typing imports - Python 3.9+ style, not urgent
-  "F841",     # Unused variable - caught by tests, sometimes intentional
-  "F821",     # Undefined name - usually conditional imports, caught by tests
-  "RUF100",   # Unused noqa - cleanup after ignoring rules
-  "F401",     # Unused import - acceptable for conditional/re-exports
-  "E501",     # Line too long - readability preference, not strict
+  "D203",    # One blank line before class (conflicts with D211)
+  "D213",    # Multi-line docstring summary on second line (conflicts with D212)
+  "COM812",  # Trailing comma conflicts with formatter
+  "ISC001",  # Implicit string concatenation conflicts with formatter
+  "PLR2004", # Magic values in comparisons - acceptable in tests
+  "PLC0415", # Late imports - acceptable when code works
+  "PLW0603", # Global statement - acceptable in module initialization
+  "PLR0912", # Too many branches - caught by unit tests
+  "PLR0913", # Too many arguments - caught by unit tests
+  "PLR0915", # Too many statements - caught by unit tests
+  "E731",    # Lambda assignment - caught by unit tests
+  "PLR0911", # Too many return statements - caught by unit tests
+  "N802",    # Function name lowercase - sometimes needed for compatibility
+  "N806",    # Variable in function lowercase - sometimes needed
+  "N817",    # CamelCase imported as acronym - style preference
+  "N818",    # Exception name Error suffix - style preference
+  "N811",    # Constant imported as non-constant - style preference
+  "B007",    # Unused loop variable - caught by F841
+  "B904",    # Raise from within except - style preference
+  "B905",    # zip without strict - Python <3.10 compatibility
+  "B017",    # assertRaises(Exception) - test pattern
+  "RUF012",  # Mutable class attrs - caught by tests
+  "RUF015",  # Prefer next() - style preference
+  "RUF059",  # Unused self - protocol pattern
+  "RUF003",  # Ambiguous characters - false positives in comments
+  "RUF002",  # Ambiguous characters - false positives
+  "RUF001",  # Ambiguous characters - false positives
+  "RUF043",  # Slice copy - style preference
+  "RUF022",  # __all__ sorting - style preference
+  "PLW2901", # Outer loop variable overwritten - caught by tests
+  "PLR1714", # Consider merging comparisons - style preference
+  "E402",    # Module level import not at top - acceptable for conditional imports
+  "UP028",   # Yield in for loop - style preference
+  "W505",    # Doc line too long - style preference, readable docs preferred
+  "F403",    # Star import - acceptable in __init__.py re-exports
+  "F811",    # Redefinition - caught by tests
+  "UP035",   # Deprecated typing imports - Python 3.9+ style, not urgent
+  "F841",    # Unused variable - caught by tests, sometimes intentional
+  "F821",    # Undefined name - usually conditional imports, caught by tests
+  "RUF100",  # Unused noqa - cleanup after ignoring rules
+  "F401",    # Unused import - acceptable for conditional/re-exports
+  "E501",    # Line too long - readability preference, not strict
 ]
 # Andon Cord: Exit non-zero on ANY fixable error
 # NOTE: F401 and F841 are now auto-fixable for faster cleanup
 unfixable = []
 
 [tool.ruff.lint.flake8-annotations]
-allow-star-arg-any = false  # Strict type annotations required
-ignore-fully-untyped = false  # All functions must be typed
+allow-star-arg-any = false   # Strict type annotations required
+ignore-fully-untyped = false # All functions must be typed
 
 [tool.ruff.lint.flake8-bugbear]
 extend-immutable-calls = ["dataclasses.field", "pydantic.Field"]
@@ -318,7 +326,7 @@ split-on-trailing-comma = false
 known-first-party = ["kgcl"]
 
 [tool.ruff.lint.pycodestyle]
-max-doc-length = 88  # Match line-length
+max-doc-length = 88 # Match line-length
 
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"
@@ -328,208 +336,208 @@ max-args = 7
 max-returns = 6
 max-statements = 50
 
-[tool.poe.executor]  # https://github.com/nat-n/poethepoet
+[tool.poe.executor] # https://github.com/nat-n/poethepoet
 type = "simple"
 
 [tool.poe.tasks]
 
-  [tool.poe.tasks.sync]
-  help = "Sync dependencies (install all packages)"
-  cmd = "uv sync"
+[tool.poe.tasks.sync]
+help = "Sync dependencies (install all packages)"
+cmd = "uv sync"
 
-  [tool.poe.tasks.sync-prod]
-  help = "Sync production dependencies only"
-  cmd = "uv sync --no-dev"
+[tool.poe.tasks.sync-prod]
+help = "Sync production dependencies only"
+cmd = "uv sync --no-dev"
 
-  [tool.poe.tasks.format]
-  help = "Format code with Ruff"
-  cmd = "ruff format src tests"
+[tool.poe.tasks.format]
+help = "Format code with Ruff"
+cmd = "ruff format src tests"
 
-  [tool.poe.tasks.format-check]
-  help = "Check code formatting"
-  cmd = "ruff format --check src tests"
+[tool.poe.tasks.format-check]
+help = "Check code formatting"
+cmd = "ruff format --check src tests"
 
-  [tool.poe.tasks.lint]
-  help = "Run Ruff linter with fixes"
-  cmd = "ruff check src tests --fix"
+[tool.poe.tasks.lint]
+help = "Run Ruff linter with fixes"
+cmd = "ruff check src tests --fix"
 
-  [tool.poe.tasks.lint-check]
-  help = "Check linting without fixing"
-  cmd = "ruff check src tests"
+[tool.poe.tasks.lint-check]
+help = "Check linting without fixing"
+cmd = "ruff check src tests"
 
-  [tool.poe.tasks.type-check]
-  help = "Type check with mypy"
-  cmd = "mypy src/kgcl"
+[tool.poe.tasks.type-check]
+help = "Type check with mypy"
+cmd = "mypy src/kgcl"
 
-  [tool.poe.tasks.mypy]
-  help = "Run mypy with custom arguments"
-  cmd = "mypy"
+[tool.poe.tasks.mypy]
+help = "Run mypy with custom arguments"
+cmd = "mypy"
 
-  [tool.poe.tasks.pre-commit-fast]
-  help = "Fast pre-commit validation (<10s)"
+[tool.poe.tasks.pre-commit-fast]
+help = "Fast pre-commit validation (<10s)"
 
-    [[tool.poe.tasks.pre-commit-fast.sequence]]
-    ref = "format-check"
+[[tool.poe.tasks.pre-commit-fast.sequence]]
+ref = "format-check"
 
-    [[tool.poe.tasks.pre-commit-fast.sequence]]
-    ref = "lint-check"
+[[tool.poe.tasks.pre-commit-fast.sequence]]
+ref = "lint-check"
 
-    [[tool.poe.tasks.pre-commit-fast.sequence]]
-    ref = "detect-lies-staged"
+[[tool.poe.tasks.pre-commit-fast.sequence]]
+ref = "detect-lies-staged"
 
-  [tool.poe.tasks.pre-push-heavy]
-  help = "Heavy pre-push validation (30-120s)"
+[tool.poe.tasks.pre-push-heavy]
+help = "Heavy pre-push validation (30-120s)"
 
-    [[tool.poe.tasks.pre-push-heavy.sequence]]
-    ref = "detect-lies"
+[[tool.poe.tasks.pre-push-heavy.sequence]]
+ref = "detect-lies"
 
-    [[tool.poe.tasks.pre-push-heavy.sequence]]
-    ref = "lint-check"
+[[tool.poe.tasks.pre-push-heavy.sequence]]
+ref = "lint-check"
 
-    [[tool.poe.tasks.pre-push-heavy.sequence]]
-    ref = "type-check"
+[[tool.poe.tasks.pre-push-heavy.sequence]]
+ref = "type-check"
 
-    [[tool.poe.tasks.pre-push-heavy.sequence]]
-    ref = "test-timeout"
+[[tool.poe.tasks.pre-push-heavy.sequence]]
+ref = "test-timeout"
 
-  [tool.poe.tasks.all-checks]
-  help = "Run all linting/type checks"
+[tool.poe.tasks.all-checks]
+help = "Run all linting/type checks"
 
-    [[tool.poe.tasks.all-checks.sequence]]
-    ref = "format-check"
+[[tool.poe.tasks.all-checks.sequence]]
+ref = "format-check"
 
-    [[tool.poe.tasks.all-checks.sequence]]
-    ref = "lint-check"
+[[tool.poe.tasks.all-checks.sequence]]
+ref = "lint-check"
 
-    [[tool.poe.tasks.all-checks.sequence]]
-    ref = "type-check"
+[[tool.poe.tasks.all-checks.sequence]]
+ref = "type-check"
 
-  [tool.poe.tasks.test]
-  help = "Run all tests"
-  cmd = "pytest tests -v --tb=short"
+[tool.poe.tasks.test]
+help = "Run all tests"
+cmd = "pytest tests -v --tb=short"
 
-  [tool.poe.tasks.pytest]
-  help = "Run pytest with custom arguments"
-  cmd = "pytest"
+[tool.poe.tasks.pytest]
+help = "Run pytest with custom arguments"
+cmd = "pytest"
 
-  [tool.poe.tasks.test-fast]
-  help = "Run tests (exit on first failure, quiet)"
-  cmd = "pytest tests -x -q"
+[tool.poe.tasks.test-fast]
+help = "Run tests (exit on first failure, quiet)"
+cmd = "pytest tests -x -q"
 
-  [tool.poe.tasks.test-coverage]
-  help = "Run tests with coverage report"
-  cmd = "pytest tests --cov=src --cov-report=html --cov-report=term"
+[tool.poe.tasks.test-coverage]
+help = "Run tests with coverage report"
+cmd = "pytest tests --cov=src --cov-report=html --cov-report=term"
 
-  [tool.poe.tasks.test-hooks]
-  help = "Run only hooks tests"
-  cmd = "pytest tests/hooks -v"
+[tool.poe.tasks.test-hooks]
+help = "Run only hooks tests"
+cmd = "pytest tests/hooks -v"
 
-  [tool.poe.tasks.test-unrdf]
-  help = "Run only UNRDF porting tests"
-  cmd = "pytest tests/integration/test_unrdf_porting.py -v"
+[tool.poe.tasks.test-unrdf]
+help = "Run only UNRDF porting tests"
+cmd = "pytest tests/integration/test_unrdf_porting.py -v"
 
-  [tool.poe.tasks.test-integration]
-  help = "Run integration tests only"
-  cmd = "pytest tests/integration -v -m integration"
+[tool.poe.tasks.test-integration]
+help = "Run integration tests only"
+cmd = "pytest tests/integration -v -m integration"
 
-  [tool.poe.tasks.test-all-features]
-  help = "Run all tests with all features"
-  cmd = "pytest tests -v --tb=long -k \"not slow\""
+[tool.poe.tasks.test-all-features]
+help = "Run all tests with all features"
+cmd = "pytest tests -v --tb=long -k \"not slow\""
 
-  [tool.poe.tasks.test-timeout]
-  help = "Run tests with 10-minute timeout"
-  shell = "timeout 10m pytest tests -x -q --tb=short"
+[tool.poe.tasks.test-timeout]
+help = "Run tests with 10-minute timeout"
+shell = "timeout 10m pytest tests -x -q --tb=short"
 
-  [tool.poe.tasks.test-watch]
-  help = "Watch tests (requires pytest-watch)"
-  cmd = "pytest-watch tests -- -x"
+[tool.poe.tasks.test-watch]
+help = "Watch tests (requires pytest-watch)"
+cmd = "pytest-watch tests -- -x"
 
-  [tool.poe.tasks.build]
-  help = "Build distribution packages"
-  cmd = "uv build"
+[tool.poe.tasks.build]
+help = "Build distribution packages"
+cmd = "uv build"
 
-  [tool.poe.tasks.build-check]
-  help = "Check dependencies and build can work"
-  cmd = "uv sync"
+[tool.poe.tasks.build-check]
+help = "Check dependencies and build can work"
+cmd = "uv sync"
 
-  [tool.poe.tasks.docs-build]
-  help = "Build documentation"
-  cmd = "mkdocs build"
+[tool.poe.tasks.docs-build]
+help = "Build documentation"
+cmd = "mkdocs build"
 
-  [tool.poe.tasks.docs-serve]
-  help = "Serve documentation locally"
-  cmd = "mkdocs serve"
+[tool.poe.tasks.docs-serve]
+help = "Serve documentation locally"
+cmd = "mkdocs serve"
 
-  [tool.poe.tasks.generate-cli]
-  help = "Regenerate KGCT CLI from .kgc/cli.ttl"
-  cmd = "python -m personal_kgcl.generators.cli_generator"
+[tool.poe.tasks.generate-cli]
+help = "Regenerate KGCT CLI from .kgc/cli.ttl"
+cmd = "python -m personal_kgcl.generators.cli_generator"
 
-  [tool.poe.tasks.verify]
-  help = "Verify code quality: format, lint, type-check, and tests"
+[tool.poe.tasks.verify]
+help = "Verify code quality: format, lint, type-check, and tests"
 
-    [[tool.poe.tasks.verify.sequence]]
-    ref = "format-check"
+[[tool.poe.tasks.verify.sequence]]
+ref = "format-check"
 
-    [[tool.poe.tasks.verify.sequence]]
-    ref = "lint-check"
+[[tool.poe.tasks.verify.sequence]]
+ref = "lint-check"
 
-    [[tool.poe.tasks.verify.sequence]]
-    ref = "type-check"
+[[tool.poe.tasks.verify.sequence]]
+ref = "type-check"
 
-    [[tool.poe.tasks.verify.sequence]]
-    ref = "test-timeout"
+[[tool.poe.tasks.verify.sequence]]
+ref = "test-timeout"
 
-  [tool.poe.tasks.verify-strict]
-  help = "Strict verification: all checks, coverage, doc build"
+[tool.poe.tasks.verify-strict]
+help = "Strict verification: all checks, coverage, doc build"
 
-    [[tool.poe.tasks.verify-strict.sequence]]
-    ref = "format-check"
+[[tool.poe.tasks.verify-strict.sequence]]
+ref = "format-check"
 
-    [[tool.poe.tasks.verify-strict.sequence]]
-    ref = "lint-check"
+[[tool.poe.tasks.verify-strict.sequence]]
+ref = "lint-check"
 
-    [[tool.poe.tasks.verify-strict.sequence]]
-    ref = "type-check"
+[[tool.poe.tasks.verify-strict.sequence]]
+ref = "type-check"
 
-    [[tool.poe.tasks.verify-strict.sequence]]
-    ref = "test-coverage"
+[[tool.poe.tasks.verify-strict.sequence]]
+ref = "test-coverage"
 
-    [[tool.poe.tasks.verify-strict.sequence]]
-    ref = "docs-build"
+[[tool.poe.tasks.verify-strict.sequence]]
+ref = "docs-build"
 
-  [tool.poe.tasks.validate-code]
-  help = "Validate generated code (syntax, types, lint, imports)"
-  shell = "uv run python scripts/codegen/validator.py ${path}"
+[tool.poe.tasks.validate-code]
+help = "Validate generated code (syntax, types, lint, imports)"
+shell = "uv run python scripts/codegen/validator.py ${path}"
 
-  [tool.poe.tasks.validate-code-strict]
-  help = "Validate generated code in strict mode (warnings as errors)"
-  shell = "uv run python scripts/codegen/validator.py ${path} --strict"
+[tool.poe.tasks.validate-code-strict]
+help = "Validate generated code in strict mode (warnings as errors)"
+shell = "uv run python scripts/codegen/validator.py ${path} --strict"
 
-  [tool.poe.tasks.validate-code-autofix]
-  help = "Validate and auto-fix generated code issues"
-  shell = "uv run python scripts/codegen/validator.py ${path} --auto-fix"
+[tool.poe.tasks.validate-code-autofix]
+help = "Validate and auto-fix generated code issues"
+shell = "uv run python scripts/codegen/validator.py ${path} --auto-fix"
 
-  [tool.poe.tasks.ci]
-  help = "Run all CI checks (format, lint, types, tests, docs)"
+[tool.poe.tasks.ci]
+help = "Run all CI checks (format, lint, types, tests, docs)"
 
-    [[tool.poe.tasks.ci.sequence]]
-    ref = "format-check"
+[[tool.poe.tasks.ci.sequence]]
+ref = "format-check"
 
-    [[tool.poe.tasks.ci.sequence]]
-    ref = "lint-check"
+[[tool.poe.tasks.ci.sequence]]
+ref = "lint-check"
 
-    [[tool.poe.tasks.ci.sequence]]
-    ref = "type-check"
+[[tool.poe.tasks.ci.sequence]]
+ref = "type-check"
 
-    [[tool.poe.tasks.ci.sequence]]
-    ref = "test-timeout"
+[[tool.poe.tasks.ci.sequence]]
+ref = "test-timeout"
 
-    [[tool.poe.tasks.ci.sequence]]
-    ref = "docs-build"
+[[tool.poe.tasks.ci.sequence]]
+ref = "docs-build"
 
-  [tool.poe.tasks.pre-commit-setup]
-  help = "Install git hooks"
-  shell = """
+[tool.poe.tasks.pre-commit-setup]
+help = "Install git hooks"
+shell = """
 set -euo pipefail
 echo "Setting up git hooks..."
 mkdir -p .githooks
@@ -542,9 +550,9 @@ echo "Git hooks installed to .githooks"
 echo "Pre-commit hook is now active!"
 """
 
-  [tool.poe.tasks.pre-commit-run]
-  help = "Run pre-commit checks manually"
-  shell = """
+[tool.poe.tasks.pre-commit-run]
+help = "Run pre-commit checks manually"
+shell = """
 set -euo pipefail
 echo "Running pre-commit checks manually..."
 if [ -f .githooks/pre-commit ]; then
@@ -555,35 +563,35 @@ else
 fi
 """
 
-  [tool.poe.tasks.release-check]
-  help = "Run all checks before release"
+[tool.poe.tasks.release-check]
+help = "Run all checks before release"
 
-    [[tool.poe.tasks.release-check.sequence]]
-    ref = "format-check"
+[[tool.poe.tasks.release-check.sequence]]
+ref = "format-check"
 
-    [[tool.poe.tasks.release-check.sequence]]
-    ref = "lint-check"
+[[tool.poe.tasks.release-check.sequence]]
+ref = "lint-check"
 
-    [[tool.poe.tasks.release-check.sequence]]
-    ref = "type-check"
+[[tool.poe.tasks.release-check.sequence]]
+ref = "type-check"
 
-    [[tool.poe.tasks.release-check.sequence]]
-    ref = "test-coverage"
+[[tool.poe.tasks.release-check.sequence]]
+ref = "test-coverage"
 
-    [[tool.poe.tasks.release-check.sequence]]
-    ref = "docs-build"
+[[tool.poe.tasks.release-check.sequence]]
+ref = "docs-build"
 
-  [tool.poe.tasks.release-notes]
-  help = "Show commits since last release"
-  shell = "echo \"Generating release notes from git log...\"; git log --oneline --no-decorate $(git describe --tags --abbrev=0)..HEAD || git log --oneline -20"
+[tool.poe.tasks.release-notes]
+help = "Show commits since last release"
+shell = "echo \"Generating release notes from git log...\"; git log --oneline --no-decorate $(git describe --tags --abbrev=0)..HEAD || git log --oneline -20"
 
-  [tool.poe.tasks.version-check]
-  help = "Show current project version"
-  shell = "VERSION=$(grep '^version = ' pyproject.toml | head -1 | cut -d'\"' -f2); echo \"Current version: $VERSION\""
+[tool.poe.tasks.version-check]
+help = "Show current project version"
+shell = "VERSION=$(grep '^version = ' pyproject.toml | head -1 | cut -d'\"' -f2); echo \"Current version: $VERSION\""
 
-  [tool.poe.tasks.clean]
-  help = "Clean build artifacts"
-  shell = """
+[tool.poe.tasks.clean]
+help = "Clean build artifacts"
+shell = """
 echo "Cleaning build artifacts..."
 find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
 find . -type d -name .pytest_cache -exec rm -rf {} + 2>/dev/null || true
@@ -593,25 +601,25 @@ rm -rf build/ dist/ reports/
 echo "Clean complete"
 """
 
-  [tool.poe.tasks.audit]
-  help = "Run security audit"
-  cmd = "pip-audit"
+[tool.poe.tasks.audit]
+help = "Run security audit"
+cmd = "pip-audit"
 
-  [tool.poe.tasks.update]
-  help = "Update dependency lock file"
-  cmd = "uv lock --upgrade"
+[tool.poe.tasks.update]
+help = "Update dependency lock file"
+cmd = "uv lock --upgrade"
 
-  [tool.poe.tasks.install-deps]
-  help = "Install dependencies"
-  ref = "sync"
+[tool.poe.tasks.install-deps]
+help = "Install dependencies"
+ref = "sync"
 
-  [tool.poe.tasks.shell]
-  help = "Open Python shell"
-  cmd = "python3"
+[tool.poe.tasks.shell]
+help = "Open Python shell"
+cmd = "python3"
 
-  [tool.poe.tasks.info]
-  help = "Display project information"
-  shell = """
+[tool.poe.tasks.info]
+help = "Display project information"
+shell = """
 echo ""
 echo "KGCL Project Information"
 echo "======================="
@@ -632,25 +640,25 @@ echo "  Python: $(grep "requires-python" pyproject.toml | cut -d'"' -f2)"
 echo "  Version: $(grep '^version = ' pyproject.toml | head -1 | cut -d'\"' -f2)"
 """
 
-  [tool.poe.tasks.ttl2dspy]
-  help = "Generate DSPy signatures from RDF/SHACL ontologies"
-  cmd = "python -m kgcl.codegen.cli"
+[tool.poe.tasks.ttl2dspy]
+help = "Generate DSPy signatures from RDF/SHACL ontologies"
+cmd = "python -m kgcl.codegen.cli"
 
-  [tool.poe.tasks.test-codegen]
-  help = "Run codegen module tests"
-  cmd = "pytest tests/codegen -v --tb=short"
+[tool.poe.tasks.test-codegen]
+help = "Run codegen module tests"
+cmd = "pytest tests/codegen -v --tb=short"
 
-  [tool.poe.tasks.codegen-demo]
-  help = "Run codegen demonstration with sample ontology"
-  shell = """
+[tool.poe.tasks.codegen-demo]
+help = "Run codegen demonstration with sample ontology"
+shell = """
 echo "Running TTL2DSPy codegen demonstration..."
 echo "This would transpile ontology files to DSPy signatures"
 echo "Usage: poe ttl2dspy input.ttl output.py --ultra-cache --parallel"
 """
 
-  [tool.poe.tasks.help]
-  help = "Show KGCL build system help"
-  shell = """
+[tool.poe.tasks.help]
+help = "Show KGCL build system help"
+shell = """
 echo ""
 echo "KGCL Build System - Poe Tasks"
 echo "=============================="
@@ -678,9 +686,9 @@ echo "  poe docs-serve         # Serve docs"
 echo ""
 """
 
-  [tool.poe.tasks.notification]
-  help = "Display failure notification"
-  shell = """
+[tool.poe.tasks.notification]
+help = "Display failure notification"
+shell = """
 echo ""
 echo "❌ Task failed - check output above"
 echo ""
@@ -692,139 +700,138 @@ echo "  4. Tests:     poe test"
 echo ""
 """
 
-  [tool.poe.tasks.prod-build]
-  help = "Strict production build"
+[tool.poe.tasks.prod-build]
+help = "Strict production build"
 
-    [[tool.poe.tasks.prod-build.sequence]]
-    ref = "format-check"
+[[tool.poe.tasks.prod-build.sequence]]
+ref = "format-check"
 
-    [[tool.poe.tasks.prod-build.sequence]]
-    ref = "lint-check"
+[[tool.poe.tasks.prod-build.sequence]]
+ref = "lint-check"
 
-    [[tool.poe.tasks.prod-build.sequence]]
-    ref = "type-check"
+[[tool.poe.tasks.prod-build.sequence]]
+ref = "type-check"
 
-    [[tool.poe.tasks.prod-build.sequence]]
-    ref = "test-coverage"
+[[tool.poe.tasks.prod-build.sequence]]
+ref = "test-coverage"
 
-    [[tool.poe.tasks.prod-build.sequence]]
-    ref = "docs-build"
+[[tool.poe.tasks.prod-build.sequence]]
+ref = "docs-build"
 
-  [tool.poe.tasks.tdd]
-  help = "Run TDD-focused test suite"
-  cmd = "pytest tests -v --tb=short --strict-markers"
+[tool.poe.tasks.tdd]
+help = "Run TDD-focused test suite"
+cmd = "pytest tests -v --tb=short --strict-markers"
 
-  [tool.poe.tasks.tdd-watch]
-  help = "Watch tests in TDD mode"
-  cmd = "pytest-watch tests -- --strict-markers -v --tb=short"
+[tool.poe.tasks.tdd-watch]
+help = "Watch tests in TDD mode"
+cmd = "pytest-watch tests -- --strict-markers -v --tb=short"
 
-  [tool.poe.tasks.unrdf-validate]
-  help = "Type-check + UNRDF tests"
+[tool.poe.tasks.unrdf-validate]
+help = "Type-check + UNRDF tests"
 
-    [[tool.poe.tasks.unrdf-validate.sequence]]
-    ref = "type-check"
+[[tool.poe.tasks.unrdf-validate.sequence]]
+ref = "type-check"
 
-    [[tool.poe.tasks.unrdf-validate.sequence]]
-    ref = "test-unrdf"
+[[tool.poe.tasks.unrdf-validate.sequence]]
+ref = "test-unrdf"
 
-  [tool.poe.tasks.unrdf-full]
-  help = "Run comprehensive UNRDF validation"
-  shell = "echo \"Running comprehensive UNRDF validation...\" && pytest tests/integration/test_unrdf_porting.py tests/hooks/test_security.py tests/hooks/test_performance.py tests/hooks/test_policy_packs.py tests/hooks/test_file_resolver.py -v --tb=short"
+[tool.poe.tasks.unrdf-full]
+help = "Run comprehensive UNRDF validation"
+shell = "echo \"Running comprehensive UNRDF validation...\" && pytest tests/integration/test_unrdf_porting.py tests/hooks/test_security.py tests/hooks/test_performance.py tests/hooks/test_policy_packs.py tests/hooks/test_file_resolver.py -v --tb=short"
 
-  [tool.poe.tasks.detect-lies]
-  help = "Detect implementation lies (deferred/incomplete code)"
-  shell = "python scripts/detect_implementation_lies.py src/kgcl/hybrid src/kgcl/projection src/kgcl/daemon src/kgcl/cli src/kgcl/yawl src/kgcl/codegen src/kgcl/observability src/kgcl/unrdf_engine src/kgcl/hooks src/kgcl/ontology tests/codegen tests/engine tests/fixtures tests/hybrid tests/integration tests/scenarios tests/yawl"
+[tool.poe.tasks.detect-lies]
+help = "Detect implementation lies (deferred/incomplete code)"
+shell = "python scripts/detect_implementation_lies.py src/kgcl/hybrid src/kgcl/projection src/kgcl/daemon src/kgcl/cli src/kgcl/yawl src/kgcl/codegen src/kgcl/observability src/kgcl/unrdf_engine src/kgcl/hooks src/kgcl/ontology tests/codegen tests/engine tests/fixtures tests/hybrid tests/integration tests/scenarios tests/yawl"
 
-  [tool.poe.tasks.detect-lies-staged]
-  help = "Detect implementation lies in staged files only"
-  shell = "python scripts/detect_implementation_lies.py --staged"
+[tool.poe.tasks.detect-lies-staged]
+help = "Detect implementation lies in staged files only"
+shell = "python scripts/detect_implementation_lies.py --staged"
 
-  [tool.poe.tasks.detect-lies-strict]
-  help = "Detect implementation lies (warnings as errors)"
-  shell = "python scripts/detect_implementation_lies.py src/ tests/ --warnings-as-errors"
+[tool.poe.tasks.detect-lies-strict]
+help = "Detect implementation lies (warnings as errors)"
+shell = "python scripts/detect_implementation_lies.py src/ tests/ --warnings-as-errors"
 
-  [tool.poe.tasks.codegen-yawl-ui]
-  help = "Generate YAWL UI Python/React code from Java sources"
-  cmd = "python scripts/codegen/generate_yawl_ui.py"
+[tool.poe.tasks.codegen-yawl-ui]
+help = "Generate YAWL UI Python/React code from Java sources"
+cmd = "python scripts/codegen/generate_yawl_ui.py"
 
-  # YAWL Parity Proof Scripts (JTBD Avatars)
-  [tool.poe.tasks.proof-avatar1]
-  help = "Prove Avatar 1 (Marketing Lead Generator) - WCP-7 OR-Join"
-  cmd = "python examples/proof_avatar1_marketing_lead_generator.py"
+# YAWL Parity Proof Scripts (JTBD Avatars)
+[tool.poe.tasks.proof-avatar1]
+help = "Prove Avatar 1 (Marketing Lead Generator) - WCP-7 OR-Join"
+cmd = "python examples/proof_avatar1_marketing_lead_generator.py"
 
-  [tool.poe.tasks.proof-avatar2]
-  help = "Prove Avatar 2 (Sales Development Rep) - WCP-14 MI with Runtime Knowledge"
-  cmd = "python examples/proof_avatar2_sales_development_rep.py"
+[tool.poe.tasks.proof-avatar2]
+help = "Prove Avatar 2 (Sales Development Rep) - WCP-14 MI with Runtime Knowledge"
+cmd = "python examples/proof_avatar2_sales_development_rep.py"
 
-  [tool.poe.tasks.proof-avatar3]
-  help = "Prove Avatar 3 (Sales Representative) - WCP-29 Cancelling Discriminator"
-  cmd = "python examples/proof_avatar3_sales_representative.py"
+[tool.poe.tasks.proof-avatar3]
+help = "Prove Avatar 3 (Sales Representative) - WCP-29 Cancelling Discriminator"
+cmd = "python examples/proof_avatar3_sales_representative.py"
 
-  [tool.poe.tasks.proof-avatar4]
-  help = "Prove Avatar 4 (Customer Onboarding) - WCP-21 Structured Loop"
-  cmd = "python examples/proof_avatar4_customer_onboarding.py"
+[tool.poe.tasks.proof-avatar4]
+help = "Prove Avatar 4 (Customer Onboarding) - WCP-21 Structured Loop"
+cmd = "python examples/proof_avatar4_customer_onboarding.py"
 
-  [tool.poe.tasks.proof-avatar5]
-  help = "Prove Avatar 5 (Account Manager) - WCP-37 Local Synchronizing Merge"
-  cmd = "python examples/proof_avatar5_account_manager.py"
+[tool.poe.tasks.proof-avatar5]
+help = "Prove Avatar 5 (Account Manager) - WCP-37 Local Synchronizing Merge"
+cmd = "python examples/proof_avatar5_account_manager.py"
 
-  [tool.poe.tasks.proof-avatar6]
-  help = "Prove Avatar 6 (Upsell Specialist) - WCP-15 MI without A Priori Knowledge"
-  cmd = "python examples/proof_avatar6_upsell_specialist.py"
+[tool.poe.tasks.proof-avatar6]
+help = "Prove Avatar 6 (Upsell Specialist) - WCP-15 MI without A Priori Knowledge"
+cmd = "python examples/proof_avatar6_upsell_specialist.py"
 
-  [tool.poe.tasks.proof-avatar7]
-  help = "Prove Avatar 7 (Renewal Manager) - WCP-38 General Synchronizing Merge"
-  cmd = "python examples/proof_avatar7_renewal_manager.py"
+[tool.poe.tasks.proof-avatar7]
+help = "Prove Avatar 7 (Renewal Manager) - WCP-38 General Synchronizing Merge"
+cmd = "python examples/proof_avatar7_renewal_manager.py"
 
-  [tool.poe.tasks.proof-all-avatars]
-  help = "Run all JTBD avatar proof scripts (verify YAWL parity)"
+[tool.poe.tasks.proof-all-avatars]
+help = "Run all JTBD avatar proof scripts (verify YAWL parity)"
 
-    [[tool.poe.tasks.proof-all-avatars.sequence]]
-    ref = "proof-avatar1"
+[[tool.poe.tasks.proof-all-avatars.sequence]]
+ref = "proof-avatar1"
 
-    [[tool.poe.tasks.proof-all-avatars.sequence]]
-    ref = "proof-avatar2"
+[[tool.poe.tasks.proof-all-avatars.sequence]]
+ref = "proof-avatar2"
 
-    [[tool.poe.tasks.proof-all-avatars.sequence]]
-    ref = "proof-avatar3"
+[[tool.poe.tasks.proof-all-avatars.sequence]]
+ref = "proof-avatar3"
 
-    [[tool.poe.tasks.proof-all-avatars.sequence]]
-    ref = "proof-avatar4"
+[[tool.poe.tasks.proof-all-avatars.sequence]]
+ref = "proof-avatar4"
 
-    [[tool.poe.tasks.proof-all-avatars.sequence]]
-    ref = "proof-avatar5"
+[[tool.poe.tasks.proof-all-avatars.sequence]]
+ref = "proof-avatar5"
 
-    [[tool.poe.tasks.proof-all-avatars.sequence]]
-    ref = "proof-avatar6"
+[[tool.poe.tasks.proof-all-avatars.sequence]]
+ref = "proof-avatar6"
 
-    [[tool.poe.tasks.proof-all-avatars.sequence]]
-    ref = "proof-avatar7"
+[[tool.poe.tasks.proof-all-avatars.sequence]]
+ref = "proof-avatar7"
 
-  [tool.poe.tasks.yawl-ontology-mailsender]
-  help = "Generate YAWL mailSender ontology (RDF/Turtle)"
-  cmd = "kgc-yawl-ontology vendors/yawl-v5.2/src/org/yawlfoundation/yawl/mailSender docs/yawl_mailsender_ontology.ttl"
+[tool.poe.tasks.yawl-ontology-mailsender]
+help = "Generate YAWL mailSender ontology (RDF/Turtle)"
+cmd = "kgc-yawl-ontology vendors/yawl-v5.2/src/org/yawlfoundation/yawl/mailSender docs/yawl_mailsender_ontology.ttl"
 
-  [tool.poe.tasks.yawl-ontology-full]
-  help = "Generate full YAWL ontology (RDF/Turtle, ~6MB, 103K triples)"
-  cmd = "kgc-yawl-ontology generate vendors/yawl-v5.2/src/org/yawlfoundation/yawl docs/yawl_full_ontology.ttl"
+[tool.poe.tasks.yawl-ontology-full]
+help = "Generate full YAWL ontology (RDF/Turtle, ~6MB, 103K triples)"
+cmd = "kgc-yawl-ontology generate vendors/yawl-v5.2/src/org/yawlfoundation/yawl docs/yawl_full_ontology.ttl"
 
-  [tool.poe.tasks.yawl-explore-hierarchy]
-  help = "Explore YAWL decomposition hierarchy"
-  cmd = "kgc-yawl-ontology explore docs/yawl_full_ontology.ttl --hierarchy"
+[tool.poe.tasks.yawl-explore-hierarchy]
+help = "Explore YAWL decomposition hierarchy"
+cmd = "kgc-yawl-ontology explore docs/yawl_full_ontology.ttl --hierarchy"
 
-  [tool.poe.tasks.yawl-analyze-engine]
-  help = "Analyze YEngine API surface"
-  cmd = "kgc-yawl-ontology explore docs/yawl_full_ontology.ttl --class YEngine"
+[tool.poe.tasks.yawl-analyze-engine]
+help = "Analyze YEngine API surface"
+cmd = "kgc-yawl-ontology explore docs/yawl_full_ontology.ttl --class YEngine"
 
-  [tool.poe.tasks.yawl-generate-stubs]
-  help = "Generate Python implementation stubs from ontology"
-  cmd = "kgc-yawl-ontology generate-stubs docs/yawl_full_ontology.ttl"
+[tool.poe.tasks.yawl-generate-stubs]
+help = "Generate Python implementation stubs from ontology"
+cmd = "kgc-yawl-ontology generate-stubs docs/yawl_full_ontology.ttl"
 
-  [tool.poe.tasks.yawl-analyze-architecture]
-  help = "Generate comprehensive architecture analysis report"
-  cmd = "kgc-yawl-ontology analyze docs/yawl_full_ontology.ttl"
+[tool.poe.tasks.yawl-analyze-architecture]
+help = "Generate comprehensive architecture analysis report"
+cmd = "kgc-yawl-ontology analyze docs/yawl_full_ontology.ttl"
 
-  [tool.poe.tasks.yawl-proof-ontology-driven]
-  help = "Prove ontology-driven development workflow"
-  cmd = "python examples/proof_ontology_driven_development.py"
-
+[tool.poe.tasks.yawl-proof-ontology-driven]
+help = "Prove ontology-driven development workflow"
+cmd = "python examples/proof_ontology_driven_development.py"

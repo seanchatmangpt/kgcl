@@ -37,5 +37,3 @@ def generate_cli(
     if verbose:
         message += f" (commands: {', '.join(cmd.name for cmd in generated.commands)})"
     return message
-
-

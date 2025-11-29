@@ -11,8 +11,9 @@ Examples
 
 from __future__ import annotations
 
-import factory_boy
 from datetime import datetime
+
+import factory_boy
 
 from kgcl.yawl.elements.y_specification import YSpecification
 from kgcl.yawl.elements.y_task import YTask
@@ -111,4 +112,3 @@ class YSpecificationFactory(factory_boy.Factory):
 
     id = factory_boy.Sequence(lambda n: f"urn:spec:spec-{n}")
     name = factory_boy.Sequence(lambda n: f"spec-{n}")
-

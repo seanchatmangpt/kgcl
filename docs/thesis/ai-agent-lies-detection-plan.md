@@ -1,0 +1,653 @@
+# AI Agent Implementation Lies Detection - Research Plan
+
+## Overview
+
+Extend the existing `detect_implementation_lies.py` to detect AI-agent-specific lies when using:
+- **Hybrid Architectures** (N3 + SPARQL + PyOxigraph)
+- **RAG Systems** (Retrieval-Augmented Generation)
+- **LLM-Assisted Code Generation** (Claude API, GPT, etc.)
+- **Automated Scripts** (codegen frameworks)
+
+## Research Question
+
+**RQ9**: Can we detect AI-agent-specific implementation lies that differ from human developer lies?
+
+**Hypothesis**: Yes - AI agents make systematic mistakes when using hybrid architectures, RAG, and LLM generation that can be detected through:
+1. Semantic equivalence verification (delta detection)
+2. Pattern mismatch detection (generated vs expected)
+3. RAG context verification (code matches retrieved examples)
+4. Hybrid architecture misuse (incorrect N3/SPARQL patterns)
+
+---
+
+## New Lie Categories for AI Agents
+
+### Category 9: RAG Hallucination Lies
+**Pattern**: Code that looks correct but doesn't match the retrieved RAG context
+
+**Detection Methods**:
+- Compare generated code with RAG-retrieved examples
+- Check if method signatures match retrieved patterns
+- Verify if implementation follows retrieved idioms
+- Flag when code structure diverges from examples
+
+**Examples**:
+```python
+# RAG retrieved: Java uses YIdentifierBag for token storage
+# Generated: Python uses list (WRONG - semantic mismatch)
+def add_token(self, token: str) -> None:
+    self.tokens.append(token)  # Should use YIdentifierBag
+```
+
+**Detection**:
+- Parse RAG context (if available in comments/metadata)
+- Compare with codebase index patterns
+- Flag mismatches with retrieved examples
+
+---
+
+### Category 10: Hybrid Architecture Misunderstanding
+**Pattern**: Incorrect use of N3/SPARQL/PyOxigraph patterns
+
+**Detection Methods**:
+- Check for N3 rule syntax errors
+- Verify SPARQL UPDATE patterns match hybrid architecture
+- Flag incorrect PyOxigraph usage
+- Detect missing transaction boundaries
+
+**Examples**:
+```python
+# WRONG: Direct mutation without SPARQL UPDATE
+def activate_task(self, task: YTask) -> None:
+    task.status = "Active"  # Should use SPARQL UPDATE
+
+# WRONG: N3 rule without proper negation
+{
+    ?task kgc:status "Pending" .
+}
+=>
+{
+    ?task kgc:status "Active" .  # Missing log:notIncludes check
+} .
+
+# WRONG: Missing transaction
+def execute_workflow(self) -> None:
+    self.store.add_triple(...)  # No BEGIN/COMMIT
+```
+
+**Detection**:
+- AST analysis for SPARQL UPDATE patterns
+- N3 syntax validation
+- Transaction boundary detection
+- PyOxigraph API misuse patterns
+
+---
+
+### Category 11: LLM Pattern Mismatch
+**Pattern**: Generated code doesn't follow the actual Java pattern
+
+**Detection Methods**:
+- Compare generated Python with Java source (delta detection)
+- Check semantic fingerprints match
+- Verify call graphs align
+- Flag when algorithm differs
+
+**Examples**:
+```python
+# Java: Uses HashMap with custom key
+Map<YIdentifier, YWorkItem> items = new HashMap<>();
+
+# Generated: Uses dict with string keys (WRONG)
+items: dict[str, YWorkItem] = {}  # Should use YIdentifier as key
+```
+
+**Detection**:
+- Run semantic detector on generated code
+- Compare AST fingerprints
+- Verify type flow matches
+- Check call graph equivalence
+
+---
+
+### Category 12: Semantic Drift
+**Pattern**: Code compiles but doesn't match semantic intent
+
+**Detection Methods**:
+- Delta detection shows semantic differences
+- Type flow analysis reveals mismatches
+- Exception handling patterns differ
+- Performance characteristics diverge
+
+**Examples**:
+```python
+# Java: O(1) lookup with HashMap
+def get_item(self, id: YIdentifier) -> YWorkItem:
+    return self.items[id]  # Correct
+
+# Generated: O(n) linear search (semantic drift)
+def get_item(self, id: YIdentifier) -> YWorkItem:
+    for item in self.items:  # WRONG - performance regression
+        if item.id == id:
+            return item
+```
+
+**Detection**:
+- Complexity analysis (O(n) vs O(1))
+- Semantic fingerprint comparison
+- Performance analyzer flags
+
+---
+
+### Category 13: False Equivalence Claims
+**Pattern**: Comments/metadata claim semantic equivalence when delta detection shows differences
+
+**Detection Methods**:
+- Parse comments for "equivalent", "matches", "same as"
+- Run delta detection
+- Flag when claims don't match reality
+
+**Examples**:
+```python
+# Equivalent to Java YVariable.getDefaultValue()
+def get_default_value(self) -> str | None:
+    return self._default  # Delta detection: Missing null handling from Java
+```
+
+**Detection**:
+- Comment parsing for equivalence claims
+- Delta detection verification
+- Flag mismatches
+
+---
+
+### Category 14: Generation Artifacts
+**Pattern**: LLM-specific patterns that don't belong in production code
+
+**Detection Methods**:
+- Detect LLM placeholder comments
+- Find generated code markers
+- Flag test data in production code
+- Detect over-commented generated code
+
+**Examples**:
+```python
+# Generated by Claude API
+# This method was automatically generated
+# TODO: Review and test this implementation
+def process_data(self, data: dict) -> dict:
+    # Placeholder implementation
+    return data  # Should have actual logic
+```
+
+**Detection**:
+- Pattern matching for generation markers
+- Comment analysis for LLM artifacts
+- Flag placeholder implementations in generated code
+
+---
+
+### Category 15: Template Overuse
+**Pattern**: Using templates when RAG/LLM would be better (or vice versa)
+
+**Detection Methods**:
+- Detect simple patterns that should use templates
+- Flag complex logic that should use LLM
+- Check if template matches actual complexity
+
+**Examples**:
+```python
+# WRONG: Complex logic in template (should use LLM)
+def verify(self, value: Any) -> bool:
+    # 50 lines of complex validation logic in Jinja2 template
+    # Should be LLM-generated from Java source
+```
+
+**Detection**:
+- Complexity analysis (cyclomatic complexity)
+- Template vs LLM decision logic
+- Flag mismatches
+
+---
+
+### Category 16: Incomplete Integration
+**Pattern**: Missing integration between hybrid components
+
+**Detection Methods**:
+- Check for N3 rules without SPARQL mutations
+- Verify EYE reasoner integration
+- Flag missing SHACL validation
+- Detect incomplete transaction handling
+
+**Examples**:
+```python
+# WRONG: N3 rule but no SPARQL mutation
+def tick(self) -> None:
+    recommendations = self.eye_reasoner.infer(...)  # Got recommendations
+    # Missing: Apply recommendations via SPARQL UPDATE
+    # Missing: SHACL validation
+    # Missing: Transaction commit
+```
+
+**Detection**:
+- Pattern matching for hybrid architecture components
+- Verify integration points
+- Flag missing steps
+
+---
+
+## Implementation Plan
+
+### Phase 1: Extend LieCategory Enum
+
+```python
+class LieCategory(Enum):
+    # Existing categories (1-8)
+    DEFERRED_WORK = "deferred_work"
+    STUB_PATTERN = "stub_pattern"
+    PLACEHOLDER_RETURN = "placeholder_return"
+    MOCK_ASSERTION = "mock_assertion"
+    INCOMPLETE_TEST = "incomplete_test"
+    SPECULATIVE_SCAFFOLDING = "speculative_scaffolding"
+    TEMPORAL_DEFERRAL = "temporal_deferral"
+    MOCKING_VIOLATION = "mocking_violation"
+    
+    # New AI-agent categories (9-16)
+    RAG_HALLUCINATION = "rag_hallucination"
+    HYBRID_ARCHITECTURE_MISUSE = "hybrid_architecture_misuse"
+    LLM_PATTERN_MISMATCH = "llm_pattern_mismatch"
+    SEMANTIC_DRIFT = "semantic_drift"
+    FALSE_EQUIVALENCE_CLAIM = "false_equivalence_claim"
+    GENERATION_ARTIFACT = "generation_artifact"
+    TEMPLATE_OVERUSE = "template_overuse"
+    INCOMPLETE_INTEGRATION = "incomplete_integration"
+```
+
+### Phase 2: Integrate Delta Detection
+
+**New Dependency**: `kgcl.yawl_ontology.delta_detector.DeltaDetector`
+
+```python
+def _check_ai_agent_lies(
+    self, file_path: Path, tree: ast.AST, lines: list[str]
+) -> list[ImplementationLie]:
+    """Check for AI-agent-specific lies."""
+    lies = []
+    
+    # Check for Java→Python ported files
+    if self._is_ported_file(file_path):
+        # Run delta detection
+        deltas = self._run_delta_detection(file_path)
+        
+        # Category 11: LLM Pattern Mismatch
+        if deltas.semantic_deltas.fingerprint_mismatches:
+            lies.extend(self._check_pattern_mismatch(file_path, deltas))
+        
+        # Category 12: Semantic Drift
+        if deltas.performance_deltas.complexity_differences:
+            lies.extend(self._check_semantic_drift(file_path, deltas))
+        
+        # Category 13: False Equivalence Claims
+        lies.extend(self._check_false_equivalence(file_path, lines, deltas))
+    
+    # Category 9: RAG Hallucination
+    lies.extend(self._check_rag_hallucination(file_path, tree, lines))
+    
+    # Category 10: Hybrid Architecture Misuse
+    lies.extend(self._check_hybrid_architecture(file_path, tree, lines))
+    
+    # Category 14: Generation Artifacts
+    lies.extend(self._check_generation_artifacts(file_path, lines))
+    
+    # Category 15: Template Overuse
+    lies.extend(self._check_template_overuse(file_path, tree))
+    
+    # Category 16: Incomplete Integration
+    lies.extend(self._check_incomplete_integration(file_path, tree, lines))
+    
+    return lies
+```
+
+### Phase 3: Detection Methods
+
+#### 3.1 RAG Hallucination Detection
+
+```python
+def _check_rag_hallucination(
+    self, file_path: Path, tree: ast.AST, lines: list[str]
+) -> list[ImplementationLie]:
+    """Detect RAG hallucination - code doesn't match retrieved context."""
+    lies = []
+    
+    # Check for RAG context in comments
+    rag_context = self._extract_rag_context(lines)
+    if not rag_context:
+        return lies
+    
+    # Query codebase index for similar patterns
+    from kgcl.ontology.codebase_index import CodebaseIndex
+    index = CodebaseIndex("ontology/codebase/index.ttl")
+    
+    # Find similar methods in Java
+    similar = index.find_classes_with_method(rag_context.method_name)
+    
+    # Compare generated code with retrieved patterns
+    for similar_class in similar:
+        java_pattern = self._get_java_pattern(similar_class)
+        python_code = self._extract_python_code(tree)
+        
+        if not self._matches_pattern(python_code, java_pattern):
+            lies.append(
+                ImplementationLie(
+                    file_path=str(file_path),
+                    line_number=tree.lineno,
+                    category=LieCategory.RAG_HALLUCINATION,
+                    pattern=(
+                        f"RAG hallucination: Generated code doesn't match "
+                        f"retrieved pattern from {similar_class}"
+                    ),
+                    code_snippet=lines[tree.lineno - 1],
+                    severity="ERROR",
+                )
+            )
+    
+    return lies
+```
+
+#### 3.2 Hybrid Architecture Misuse Detection
+
+```python
+def _check_hybrid_architecture(
+    self, file_path: Path, tree: ast.AST, lines: list[str]
+) -> list[ImplementationLie]:
+    """Detect incorrect hybrid architecture usage."""
+    lies = []
+    
+    for node in ast.walk(tree):
+        # Check for direct mutation without SPARQL UPDATE
+        if isinstance(node, ast.Assign):
+            if self._is_kgcl_domain_object(node.targets[0]):
+                # Check if assignment is in SPARQL UPDATE context
+                if not self._in_sparql_update_context(node, tree):
+                    lies.append(
+                        ImplementationLie(
+                            file_path=str(file_path),
+                            line_number=node.lineno,
+                            category=LieCategory.HYBRID_ARCHITECTURE_MISUSE,
+                            pattern=(
+                                "Direct mutation without SPARQL UPDATE - "
+                                "violates hybrid architecture"
+                            ),
+                            code_snippet=lines[node.lineno - 1],
+                            severity="ERROR",
+                        )
+                    )
+        
+        # Check for N3 rule syntax errors
+        if isinstance(node, ast.Constant) and isinstance(node.value, str):
+            if self._looks_like_n3_rule(node.value):
+                if not self._is_valid_n3_rule(node.value):
+                    lies.append(
+                        ImplementationLie(
+                            file_path=str(file_path),
+                            line_number=node.lineno,
+                            category=LieCategory.HYBRID_ARCHITECTURE_MISUSE,
+                            pattern="Invalid N3 rule syntax",
+                            code_snippet=lines[node.lineno - 1],
+                            severity="ERROR",
+                        )
+                    )
+        
+        # Check for missing transaction boundaries
+        if isinstance(node, ast.Call):
+            if self._is_pyoxigraph_call(node):
+                if not self._has_transaction_context(node, tree):
+                    lies.append(
+                        ImplementationLie(
+                            file_path=str(file_path),
+                            line_number=node.lineno,
+                            category=LieCategory.INCOMPLETE_INTEGRATION,
+                            pattern=(
+                                "PyOxigraph call without transaction boundary - "
+                                "missing BEGIN/COMMIT"
+                            ),
+                            code_snippet=lines[node.lineno - 1],
+                            severity="ERROR",
+                        )
+                    )
+    
+    return lies
+```
+
+#### 3.3 LLM Pattern Mismatch Detection
+
+```python
+def _check_pattern_mismatch(
+    self, file_path: Path, deltas: DeltaReport
+) -> list[ImplementationLie]:
+    """Detect LLM-generated code that doesn't match Java pattern."""
+    lies = []
+    
+    for mismatch in deltas.semantic_deltas.fingerprint_mismatches:
+        if mismatch.similarity_score < 0.7:  # Significant mismatch
+            lies.append(
+                ImplementationLie(
+                    file_path=str(file_path),
+                    line_number=0,  # Will be set by caller
+                    category=LieCategory.LLM_PATTERN_MISMATCH,
+                    pattern=(
+                        f"LLM pattern mismatch: {mismatch.java_method} "
+                        f"similarity {mismatch.similarity_score:.2f} "
+                        f"(threshold: 0.7)"
+                    ),
+                    code_snippet=f"Java: {mismatch.java_fingerprint[:50]}...",
+                    severity="ERROR",
+                )
+            )
+    
+    return lies
+```
+
+#### 3.4 Semantic Drift Detection
+
+```python
+def _check_semantic_drift(
+    self, file_path: Path, deltas: DeltaReport
+) -> list[ImplementationLie]:
+    """Detect semantic drift - code compiles but intent differs."""
+    lies = []
+    
+    for perf_delta in deltas.performance_deltas.complexity_differences:
+        if perf_delta.complexity_ratio > 2.0:  # 2x complexity difference
+            lies.append(
+                ImplementationLie(
+                    file_path=str(file_path),
+                    line_number=0,
+                    category=LieCategory.SEMANTIC_DRIFT,
+                    pattern=(
+                        f"Semantic drift: Complexity ratio {perf_delta.complexity_ratio:.2f} "
+                        f"(Java: {perf_delta.java_complexity}, "
+                        f"Python: {perf_delta.python_complexity})"
+                    ),
+                    code_snippet=perf_delta.method_name,
+                    severity="WARNING",
+                )
+            )
+    
+    return lies
+```
+
+#### 3.5 False Equivalence Claim Detection
+
+```python
+def _check_false_equivalence(
+    self, file_path: Path, lines: list[str], deltas: DeltaReport
+) -> list[ImplementationLie]:
+    """Detect false claims of semantic equivalence."""
+    lies = []
+    
+    # Find equivalence claims in comments
+    equivalence_patterns = [
+        r"equivalent to",
+        r"matches.*java",
+        r"same as.*java",
+        r"identical to",
+        r"semantically equivalent",
+    ]
+    
+    for i, line in enumerate(lines, start=1):
+        for pattern in equivalence_patterns:
+            if re.search(pattern, line, re.IGNORECASE):
+                # Check if delta detection shows differences
+                if deltas.semantic_deltas.fingerprint_mismatches:
+                    lies.append(
+                        ImplementationLie(
+                            file_path=str(file_path),
+                            line_number=i,
+                            category=LieCategory.FALSE_EQUIVALENCE_CLAIM,
+                            pattern=(
+                                "False equivalence claim: Comment claims equivalence "
+                                "but delta detection shows semantic differences"
+                            ),
+                            code_snippet=line,
+                            severity="ERROR",
+                        )
+                    )
+    
+    return lies
+```
+
+#### 3.6 Generation Artifact Detection
+
+```python
+def _check_generation_artifacts(
+    self, file_path: Path, lines: list[str]
+) -> list[ImplementationLie]:
+    """Detect LLM generation artifacts."""
+    lies = []
+    
+    generation_markers = [
+        r"generated by.*api",
+        r"automatically generated",
+        r"this method was.*generated",
+        r"# placeholder implementation",
+        r"# generated code",
+    ]
+    
+    for i, line in enumerate(lines, start=1):
+        for pattern in generation_markers:
+            if re.search(pattern, line, re.IGNORECASE):
+                lies.append(
+                    ImplementationLie(
+                        file_path=str(file_path),
+                        line_number=i,
+                        category=LieCategory.GENERATION_ARTIFACT,
+                        pattern="LLM generation artifact - remove before commit",
+                        code_snippet=line,
+                        severity="WARNING",
+                    )
+                )
+    
+    return lies
+```
+
+---
+
+## Integration with Existing Detector
+
+### Update `_check_ast_patterns`
+
+```python
+def _check_ast_patterns(
+    self, file_path: Path, tree: ast.AST, lines: list[str]
+) -> list[ImplementationLie]:
+    """Check AST for structural lies."""
+    lies = []
+    is_test_file = "test_" in file_path.name or file_path.name.startswith("test")
+
+    # Existing checks (categories 1-8)
+    for node in ast.walk(tree):
+        # ... existing code ...
+        pass
+
+    # NEW: AI-agent-specific checks (categories 9-16)
+    lies.extend(self._check_ai_agent_lies(file_path, tree, lines))
+
+    return lies
+```
+
+---
+
+## Experimental Evaluation
+
+### Experiment: AI Agent Lie Detection Accuracy
+
+**Objective**: Validate that extended detector catches AI-agent-specific lies
+
+**Methodology**:
+1. Generate Python code using:
+   - Template-based generation (40% of methods)
+   - LLM-assisted generation (50% of methods)
+   - RAG-enhanced generation (10% of methods)
+2. Run extended lie detector
+3. Measure detection accuracy:
+   - True positives (correctly detected lies)
+   - False positives (false alarms)
+   - False negatives (missed lies)
+4. Compare with human review
+
+**Target Metrics**:
+- Precision: > 90% (low false positives)
+- Recall: > 85% (catch most lies)
+- F1 Score: > 87%
+
+---
+
+## Research Contributions
+
+1. **Taxonomy of AI Agent Lies**: 8 new categories specific to AI-generated code
+2. **Delta Detection Integration**: Use semantic analysis to verify AI-generated code
+3. **Hybrid Architecture Validation**: Detect misuse of N3/SPARQL/PyOxigraph patterns
+4. **RAG Verification**: Validate generated code matches retrieved context
+5. **False Equivalence Detection**: Catch claims that don't match reality
+
+---
+
+## Publication Strategy
+
+**Paper**: "Detecting Implementation Lies in AI-Generated Code: A Multi-Dimensional Approach"
+
+**Sections**:
+1. Introduction: Why AI agents make different lies than humans
+2. Taxonomy: 8 new categories of AI-agent lies
+3. Methodology: Delta detection integration, pattern matching
+4. Evaluation: Detection accuracy on generated code
+5. Results: Precision, recall, F1 scores
+6. Implications: How to improve AI code generation
+
+---
+
+## Timeline
+
+- **Week 1-2**: Implement detection methods (categories 9-16)
+- **Week 3**: Integrate delta detection
+- **Week 4**: Experimental evaluation
+- **Week 5**: Write research paper
+- **Week 6**: Publication submission
+
+---
+
+## Files to Modify
+
+1. `scripts/detect_implementation_lies.py`:
+   - Add new LieCategory enum values
+   - Implement `_check_ai_agent_lies()` method
+   - Add detection methods for each category
+   - Integrate delta detection
+
+2. `docs/thesis/README.md`:
+   - Add RQ9 to research questions
+   - Add Experiment 7: AI Agent Lie Detection
+
+3. `docs/thesis/ai-agent-lies-detection-plan.md`:
+   - This document (research plan)
+

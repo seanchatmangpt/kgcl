@@ -96,7 +96,9 @@ class TestExecuteSimpleWorkflow:
         work_items = list(case.work_items.values())
         assert len(work_items) == 1, "Should have exactly one work item"
         assert work_items[0].task_id == "TaskA", "First work item should be for TaskA"
-        assert work_items[0].status in [WorkItemStatus.STARTED, WorkItemStatus.EXECUTING], "Work item should be EXECUTING or STARTED"
+        assert work_items[0].status in [WorkItemStatus.STARTED, WorkItemStatus.EXECUTING], (
+            "Work item should be EXECUTING or STARTED"
+        )
 
         # WHEN: Complete TaskA
         engine.complete_work_item(work_items[0].id, case.id, {})

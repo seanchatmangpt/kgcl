@@ -13,11 +13,7 @@ from __future__ import annotations
 
 import factory_boy
 
-from kgcl.hybrid.hooks.condition_evaluator import (
-    Condition,
-    ConditionKind,
-    ConditionResult,
-)
+from kgcl.hybrid.hooks.condition_evaluator import Condition, ConditionKind, ConditionResult
 
 
 class ConditionFactory(factory_boy.Factory):
@@ -63,4 +59,3 @@ class ConditionResultFactory(factory_boy.Factory):
     bindings = factory_boy.Dict({})
     duration_ms = 1.5
     metadata = factory_boy.Dict({})
-

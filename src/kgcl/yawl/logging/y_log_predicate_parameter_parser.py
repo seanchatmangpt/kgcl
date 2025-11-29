@@ -129,5 +129,3 @@ class YLogPredicateParameterParser(YPredicateParser):
             resolved = "n/a"
 
         return resolved
-
-

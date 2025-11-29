@@ -8,23 +8,13 @@ from __future__ import annotations
 import subprocess
 import sys
 
-import click
+import typer
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 
 console = Console()
-
-
-@click.group()
-def system() -> None:
-    """System management.
-
-    \b
-    Commands:
-      check     Check all components
-      info      Show system information
-    """
+system = typer.Typer(help="System management", no_args_is_help=True)
 
 
 @system.command()
@@ -83,7 +73,7 @@ def check() -> None:
         console.print("\n[bold green]All systems ready![/]")
     else:
         console.print("\n[bold red]Some components need attention[/]")
-        sys.exit(1)
+        raise typer.Exit(code=1)
 
 
 @system.command()

@@ -6,35 +6,24 @@ kgcl task <verb> - Task management.
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Annotated
 
-import click
+import typer
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 
 console = Console()
-
-
-@click.group()
-def task() -> None:
-    """Task management.
-
-    \b
-    Commands:
-      list      List all tasks and statuses
-      inspect   Detailed task inspection
-    """
+task = typer.Typer(help="Task management", no_args_is_help=True)
 
 
 @task.command("list")
-@click.argument("topology", type=click.Path(exists=True))
-def task_list(topology: str) -> None:
+def task_list(topology: Annotated[Path, typer.Argument(exists=True, help="Topology file to load")]) -> None:
     """List all tasks and their statuses."""
     from kgcl.hybrid import HybridEngine
 
-    path = Path(topology)
     eng = HybridEngine()
-    eng.load_data(path.read_text())
+    eng.load_data(topology.read_text())
 
     statuses = eng.inspect()
 
@@ -42,7 +31,7 @@ def task_list(topology: str) -> None:
         console.print("[yellow]No tasks found[/]")
         return
 
-    table = Table(title=f"Tasks: {path.name}")
+    table = Table(title=f"Tasks: {topology.name}")
     table.add_column("Task", style="cyan")
     table.add_column("Status", style="green")
 
@@ -53,15 +42,15 @@ def task_list(topology: str) -> None:
 
 
 @task.command()
-@click.argument("topology", type=click.Path(exists=True))
-@click.argument("task_uri")
-def inspect(topology: str, task_uri: str) -> None:
+def inspect(
+    topology: Annotated[Path, typer.Argument(exists=True, help="Topology file to load")],
+    task_uri: Annotated[str, typer.Argument(help="Task URI to inspect")],
+) -> None:
     """Inspect specific task details."""
     from kgcl.hybrid import HybridEngine
 
-    path = Path(topology)
     eng = HybridEngine()
-    eng.load_data(path.read_text())
+    eng.load_data(topology.read_text())
 
     # Query for task details
     sparql = f"""

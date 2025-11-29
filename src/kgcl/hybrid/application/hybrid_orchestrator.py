@@ -342,16 +342,18 @@ class HybridOrchestrator:
             return False
 
     def _dump_state(self) -> str:
-        """Dump current store state as Turtle.
+        """Dump current store state as TriG.
 
         Returns
         -------
         str
             Serialized state.
         """
-        chunks: list[bytes] = []
-        self._store.dump(chunks.append, ox.RdfFormat.TURTLE)
-        return b"".join(chunks).decode("utf-8")
+        # Use TRIG format (supports datasets/quads) and return bytes directly
+        result = self._store.dump(format=ox.RdfFormat.TRIG)
+        if result is None:
+            return ""
+        return result.decode("utf-8")
 
     def _load_inference_results(self, output: str) -> None:
         """Load EYE inference results into store.

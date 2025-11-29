@@ -208,9 +208,11 @@ class PyOxigraphTransactionManager:
         triple_count = len(self._store)
 
         # Serialize to N-Quads (includes named graphs)
-        chunks: list[bytes] = []
-        self._store.dump(chunks.append, ox.RdfFormat.N_QUADS)
-        data = b"".join(chunks)
+        result = self._store.dump(format=ox.RdfFormat.N_QUADS)
+        if result is None:
+            data = b""
+        else:
+            data = result
 
         snapshot = Snapshot(snapshot_id=snapshot_id, data=data, triple_count=triple_count, created_at=datetime.now())
 

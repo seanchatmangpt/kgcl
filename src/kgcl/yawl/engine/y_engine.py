@@ -565,6 +565,29 @@ class YEngine:
         """
         return [c for c in self.cases.values() if c.is_running()]
 
+    def get_case_marking(self, case_id: str) -> YMarking | None:
+        """Get current marking for a case.
+
+        Parameters
+        ----------
+        case_id : str
+            Case ID
+
+        Returns
+        -------
+        YMarking | None
+            Current marking or None if case not found
+        """
+        case = self.get_case(case_id)
+        if case is None:
+            return None
+
+        # Get root net runner marking
+        if case.root_net_id and case.root_net_id in case.net_runners:
+            return case.net_runners[case.root_net_id].marking
+
+        return None
+
     # --- Work item management ---
 
     def _create_work_item(self, case: YCase, task: YTask, net_id: str) -> YWorkItem:
@@ -643,11 +666,10 @@ class YEngine:
         task : YTask
             Task with resourcing info
         """
-        # Fire the work item
-        work_item.fire()
-
         # Check for composite task (has net decomposition)
         if self._is_composite_task(task):
+            # Fire and execute composite task immediately
+            work_item.fire()
             self._execute_composite_task(work_item, task)
             return
 
@@ -656,7 +678,8 @@ class YEngine:
 
         if isinstance(task, YAtomicTask):
             if task.is_automated_task() or task.resourcing.is_system_task():
-                # System task - auto-start execution
+                # System task - fire and auto-start execution
+                work_item.fire()
                 work_item.transition(WorkItemEvent.START)
                 # Maybe create timer
                 self._maybe_create_timer_for_work_item(work_item, task)
@@ -957,6 +980,31 @@ class YEngine:
             Started work items
         """
         return self.get_work_items_for_participant(participant_id, WorkItemStatus.STARTED)
+
+    def get_enabled_work_items(self, case_id: str | None = None) -> list[YWorkItem]:
+        """Get all enabled work items (Java YAWL API).
+
+        Parameters
+        ----------
+        case_id : str | None
+            Optional case ID to filter by
+
+        Returns
+        -------
+        list[YWorkItem]
+            Enabled work items
+        """
+        enabled = []
+        if case_id:
+            # Get work items from specific case
+            case = self.get_case(case_id)
+            if case:
+                enabled = [wi for wi in case.work_items.values() if wi.status == WorkItemStatus.ENABLED]
+        else:
+            # Get enabled work items from all cases
+            for case in self.cases.values():
+                enabled.extend([wi for wi in case.work_items.values() if wi.status == WorkItemStatus.ENABLED])
+        return enabled
 
     # --- Work item actions ---
 

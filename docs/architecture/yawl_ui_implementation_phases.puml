@@ -1,0 +1,201 @@
+@startuml YAWL UI Implementation Phases
+!theme plain
+
+skinparam backgroundColor #FFFFFF
+skinparam handwritten false
+
+title YAWL UI Implementation Strategy - Phased Approach
+
+' Phase 0: Current State
+package "Current State (77 files with stubs)" as current {
+    folder "src/kgcl/yawl_ui/" {
+        folder "dynform/ (26 files)" as dynform_current {
+            [dyn_form_factory.py\n(partial impl)]
+            [dyn_form_field.py\n(data model)]
+            [18 stub files] #LightCoral
+        }
+        folder "dialog/ (15 files)" as dialog_current {
+            [15 Vaadin UI stubs] #LightCoral
+        }
+        folder "view/ (33 files)" as view_current {
+            [33 Vaadin UI stubs] #LightCoral
+        }
+    }
+
+    note right of current
+        **Problems:**
+        • 914 stub methods
+        • Quality gates FAILING
+        • Implementation lies
+        • Blocks commits
+    end note
+}
+
+' Phase 1: Cleanup (Week 0)
+package "Phase 1: Cleanup (Week 0)" as phase1 {
+    folder "src/kgcl/yawl_ui/" as prod1 {
+        folder "dynform/" as dynform_clean {
+            [dyn_form_field.py\n(keep)]
+            [dyn_form_exception.py\n(keep)]
+            [dyn_form_user_attributes.py\n(review Week 5)]
+            [dyn_form_factory.py\n(deprecate Week 5-7)]
+        }
+        folder "planned/ (NEW)" as planned {
+            folder "dynform/" {
+                [18 stub files\n(reference only)] #LightGray
+            }
+            folder "dialog/" {
+                [15 Vaadin stubs\n(reference only)] #LightGray
+            }
+            folder "view/" {
+                [33 Vaadin stubs\n(reference only)] #LightGray
+            }
+            [README.md\n"DO NOT USE"] #LightGray
+        }
+    }
+
+    note right of phase1
+        **Outcome:**
+        • 0 stub methods in prod
+        • Quality gates PASSING
+        • Clear separation
+        • Ready for Week 1
+    end note
+}
+
+' Phase 2: Weeks 1-4 (Backend + React)
+package "Phase 2: Weeks 1-4 (Backend Foundation)" as phase2 {
+    folder "FastAPI Backend" as backend2 {
+        folder "api/v1/" {
+            [auth.py\n(NEW)]
+            [worklist.py\n(NEW)]
+        }
+        folder "clients/" {
+            [engine_client.py\n(NEW)]
+            [resource_client.py\n(NEW)]
+        }
+        folder "models/" {
+            [worklist.py\n(NEW)]
+            [auth.py\n(NEW)]
+        }
+        folder "services/" {
+            [worklist_service.py\n(NEW)]
+        }
+    }
+
+    cloud "React Frontend\n(separate repo)" as react2 {
+        [LoginPage.tsx]
+        [WorklistPage.tsx]
+        [WorklistTable.tsx]
+    }
+
+    backend2 --> react2 : REST API
+
+    note right of phase2
+        **Deliverable:**
+        • Auth working
+        • Worklist API complete
+        • React worklist view
+        • 80%+ coverage
+        • NO Python UI components
+    end note
+}
+
+' Phase 3: Weeks 5-7 (DynForm Re-architecture)
+package "Phase 3: Weeks 5-7 (DynForm - CRITICAL)" as phase3 {
+    folder "FastAPI Backend" as backend3 {
+        folder "dynform/ (RE-IMPLEMENTED)" as dynform_new {
+            [schema_parser.py\n(NEW)] #LightGreen
+            [field_factory.py\n(NEW)] #LightGreen
+            [validator.py\n(NEW)] #LightGreen
+            [data_generator.py\n(NEW)] #LightGreen
+        }
+        folder "api/v1/" {
+            [dynform.py\n(NEW)] #LightGreen
+        }
+    }
+
+    cloud "React Frontend" as react3 {
+        [DynFormRenderer.tsx\n(NEW)] #LightGreen
+        [Form components\n(Ant Design)] #LightGreen
+    }
+
+    backend3 --> react3 : JSON schema\n(not Vaadin)
+
+    note right of phase3
+        **Deliverable:**
+        • Parse YAWL schemas
+        • Generate JSON for React
+        • Validate with Pydantic
+        • Generate YAWL XML
+        • React form renderer
+        • Can complete work items
+    end note
+}
+
+' Phase 4: Weeks 8-15 (Complete)
+package "Phase 4: Weeks 8-15 (Production Ready)" as phase4 {
+    folder "FastAPI Backend (Complete)" as backend4 {
+        [All API endpoints\nimplemented]
+        [All services\nimplemented]
+        [All clients\nimplemented]
+        [80%+ coverage] #LightGreen
+    }
+
+    cloud "React Frontend (Complete)" as react4 {
+        [All views\nimplemented]
+        [All components\nimplemented]
+        [70%+ coverage] #LightGreen
+    }
+
+    database "YAWL Engine\n(Java - unchanged)" as yawl {
+    }
+
+    backend4 --> yawl : HTTP/REST
+    backend4 --> react4 : REST + WebSocket
+
+    note right of phase4
+        **Deliverable:**
+        • All 122 Java files converted
+        • Performance targets met
+        • Security audit passed
+        • Production deployed
+        • Zero implementation lies
+    end note
+}
+
+' Timeline
+current -down-> phase1 : Week 0:\nMove stubs\nto planned/
+phase1 -down-> phase2 : Weeks 1-4:\nBackend +\nReact worklist
+phase2 -down-> phase3 : Weeks 5-7:\nDynForm\nre-architecture
+phase3 -down-> phase4 : Weeks 8-15:\nComplete\nimplementation
+
+' Key Decisions
+note as decisions
+    **Architecture Decisions:**
+
+    1. **UI Components:** React (NOT Python)
+       ├─ dialog/ → React dialogs
+       ├─ view/ → React pages
+       └─ ALL moved to planned/
+
+    2. **DynForm:** Complete re-architecture
+       ├─ NOT port Java → Python
+       ├─ Backend: Parse XSD → JSON schema
+       ├─ Frontend: React renderer
+       └─ Output: Generate YAWL XML
+
+    3. **Stubs:** Moved to planned/
+       ├─ Reference only (not production)
+       ├─ Excluded from quality gates
+       ├─ Clear README warning
+       └─ Zero implementation lies
+
+    4. **Quality:** Lean Six Sigma
+       ├─ TDD enforced (tests first)
+       ├─ 80%+ backend coverage
+       ├─ 70%+ frontend coverage
+       └─ All gates passing
+end note
+
+@enduml

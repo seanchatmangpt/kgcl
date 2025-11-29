@@ -319,9 +319,10 @@ class EventCaptureHook:
         if hasattr(engine, "_store"):
             import pyoxigraph as ox
 
-            chunks: list[bytes] = []
-            engine._store.dump(chunks.append, ox.RdfFormat.TURTLE)
-            return b"".join(chunks).decode("utf-8")
+            result = engine._store.dump(format=ox.RdfFormat.TRIG)
+            if result is None:
+                return ""
+            return result.decode("utf-8")
 
         # Fallback for other engines
         if hasattr(engine, "graph"):

@@ -199,6 +199,16 @@ class YMarking:
         """
         return sum(len(tokens) for tokens in self._marking.values())
 
+    def get_token_count(self) -> int:
+        """Count total tokens across all conditions (Java YAWL API alias).
+
+        Returns
+        -------
+        int
+            Total number of tokens
+        """
+        return self.total_token_count()
+
     def is_empty(self) -> bool:
         """Check if marking has no tokens anywhere.
 

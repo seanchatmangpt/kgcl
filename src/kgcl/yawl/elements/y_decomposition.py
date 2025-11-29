@@ -218,8 +218,8 @@ class YDecomposition(ABC):
     # For automated tasks
     codelet: str | None = None
 
-    # Interaction mode
-    external_interaction: str = "none"
+    # Interaction mode (Java YAWL defaults to manual)
+    external_interaction: str = "manual"
 
     @abstractmethod
     def get_decomposition_category(self) -> str:

@@ -746,3 +746,56 @@ echo ""
   help = "Generate YAWL UI Python/React code from Java sources"
   cmd = "python scripts/codegen/generate_yawl_ui.py"
 
+  # YAWL Parity Proof Scripts (JTBD Avatars)
+  [tool.poe.tasks.proof-avatar1]
+  help = "Prove Avatar 1 (Marketing Lead Generator) - WCP-7 OR-Join"
+  cmd = "python examples/proof_avatar1_marketing_lead_generator.py"
+
+  [tool.poe.tasks.proof-avatar2]
+  help = "Prove Avatar 2 (Sales Development Rep) - WCP-14 MI with Runtime Knowledge"
+  cmd = "python examples/proof_avatar2_sales_development_rep.py"
+
+  [tool.poe.tasks.proof-avatar3]
+  help = "Prove Avatar 3 (Sales Representative) - WCP-29 Cancelling Discriminator"
+  cmd = "python examples/proof_avatar3_sales_representative.py"
+
+  [tool.poe.tasks.proof-avatar4]
+  help = "Prove Avatar 4 (Customer Onboarding) - WCP-21 Structured Loop"
+  cmd = "python examples/proof_avatar4_customer_onboarding.py"
+
+  [tool.poe.tasks.proof-avatar5]
+  help = "Prove Avatar 5 (Account Manager) - WCP-37 Local Synchronizing Merge"
+  cmd = "python examples/proof_avatar5_account_manager.py"
+
+  [tool.poe.tasks.proof-avatar6]
+  help = "Prove Avatar 6 (Upsell Specialist) - WCP-15 MI without A Priori Knowledge"
+  cmd = "python examples/proof_avatar6_upsell_specialist.py"
+
+  [tool.poe.tasks.proof-avatar7]
+  help = "Prove Avatar 7 (Renewal Manager) - WCP-38 General Synchronizing Merge"
+  cmd = "python examples/proof_avatar7_renewal_manager.py"
+
+  [tool.poe.tasks.proof-all-avatars]
+  help = "Run all JTBD avatar proof scripts (verify YAWL parity)"
+
+    [[tool.poe.tasks.proof-all-avatars.sequence]]
+    ref = "proof-avatar1"
+
+    [[tool.poe.tasks.proof-all-avatars.sequence]]
+    ref = "proof-avatar2"
+
+    [[tool.poe.tasks.proof-all-avatars.sequence]]
+    ref = "proof-avatar3"
+
+    [[tool.poe.tasks.proof-all-avatars.sequence]]
+    ref = "proof-avatar4"
+
+    [[tool.poe.tasks.proof-all-avatars.sequence]]
+    ref = "proof-avatar5"
+
+    [[tool.poe.tasks.proof-all-avatars.sequence]]
+    ref = "proof-avatar6"
+
+    [[tool.poe.tasks.proof-all-avatars.sequence]]
+    ref = "proof-avatar7"
+

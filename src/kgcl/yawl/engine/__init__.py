@@ -23,6 +23,7 @@ from kgcl.yawl.engine.y_exception import (
 from kgcl.yawl.engine.y_net_runner import FireResult, YNetRunner
 from kgcl.yawl.engine.y_timer import TimerAction, TimerTrigger, YDeadline, YTimer, YTimerService, parse_duration
 from kgcl.yawl.engine.y_work_item import WorkItemEvent, WorkItemLog, WorkItemStatus, WorkItemTimer, YWorkItem
+from kgcl.yawl.engine.y_worklist_model import WorklistTableModel, YWorklistModel
 
 __all__ = [
     # Net Runner
@@ -60,4 +61,7 @@ __all__ = [
     "ExceptionRule",
     "RetryContext",
     "CompensationHandler",
+    # Worklist Model
+    "YWorklistModel",
+    "WorklistTableModel",
 ]

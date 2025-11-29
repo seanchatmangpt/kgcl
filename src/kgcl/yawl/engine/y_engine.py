@@ -19,7 +19,7 @@ from kgcl.yawl.clients.models import YSpecificationID
 from kgcl.yawl.elements.y_identifier import YIdentifier
 from kgcl.yawl.elements.y_specification import SpecificationStatus, YSpecification
 from kgcl.yawl.engine.y_case import CaseFactory, CaseStatus, YCase
-from kgcl.yawl.engine.y_net_runner import FireResult, YNetRunner
+from kgcl.yawl.engine.y_net_runner import ExecutionStatus, FireResult, YNetRunner
 from kgcl.yawl.engine.y_timer import TimerAction, TimerTrigger, YTimer, YTimerService
 from kgcl.yawl.engine.y_work_item import WorkItemEvent, WorkItemStatus, YWorkItem
 from kgcl.yawl.resources.y_distribution import DistributionContext, ParticipantMetrics
@@ -1356,103 +1356,211 @@ class YEngine:
             return True
         return False
 
-    def start_work_item(self, work_item_id: str, participant_id: str) -> bool:
+    def start_work_item(
+        self, work_item: YWorkItem | str, client: YExternalClient | str | None = None
+    ) -> YWorkItem | bool:
         """Start work on a work item.
 
+        Java signature: YWorkItem startWorkItem(YWorkItem workItem, YClient client)
+        Java signature: YWorkItem startWorkItem(String itemID, YClient client, String logPredicate)
+
         Parameters
         ----------
-        work_item_id : str
-            Work item ID
-        participant_id : str
-            Participant ID
+        work_item : YWorkItem | str
+            Work item object or ID
+        client : YExternalClient | str | None
+            External client or participant ID
 
         Returns
         -------
-        bool
-            True if started
-        """
-        work_item = self._find_work_item(work_item_id)
-        if work_item and work_item.status in (WorkItemStatus.OFFERED, WorkItemStatus.ALLOCATED):
-            # If offered, allocate first
-            if work_item.status == WorkItemStatus.OFFERED:
-                work_item.allocate(participant_id)
-            work_item.start(participant_id)
-            self._emit_event(
-                "WORK_ITEM_STARTED", case_id=work_item.case_id, work_item_id=work_item_id, participant_id=participant_id
-            )
-            return True
-        return False
+        YWorkItem | bool
+            Started work item (if YWorkItem passed) or True/False (if ID passed)
 
-    def complete_work_item(self, work_item_id: str, output_data: dict[str, Any] | None = None) -> bool:
+        Raises
+        ------
+        YStateException
+            If work item is not in a valid state for starting
+        """
+        # Handle string ID case (backward compatibility)
+        if isinstance(work_item, str):
+            work_item_id = work_item
+            participant_id = client.id if isinstance(client, YExternalClient) else str(client) if client else ""
+            work_item_obj = self._find_work_item(work_item_id)
+            if work_item_obj and work_item_obj.status in (WorkItemStatus.OFFERED, WorkItemStatus.ALLOCATED):
+                # If offered, allocate first
+                if work_item_obj.status == WorkItemStatus.OFFERED:
+                    work_item_obj.allocate(participant_id)
+                work_item_obj.start(participant_id)
+                self._emit_event(
+                    "WORK_ITEM_STARTED",
+                    case_id=work_item_obj.case_id,
+                    work_item_id=work_item_id,
+                    participant_id=participant_id,
+                )
+                return True
+            return False
+
+        # Handle YWorkItem object case (Java signature)
+        self.check_engine_running()
+        participant_id = client.id if isinstance(client, YExternalClient) else str(client) if client else ""
+
+        if work_item.status == WorkItemStatus.ENABLED:
+            net_runner = self.get_net_runner(work_item.case_id)
+            if net_runner:
+                return self.start_enabled_work_item(net_runner, work_item, client)
+        elif work_item.status == WorkItemStatus.FIRED:
+            # Get parent case for fired work items
+            from kgcl.yawl.elements.y_identifier import YIdentifier
+
+            case_id = YIdentifier(work_item.case_id)
+            if hasattr(case_id, "get_parent") and case_id.get_parent():
+                net_runner = self.get_net_runner(case_id.get_parent())
+            else:
+                net_runner = self.get_net_runner(work_item.case_id)
+            if net_runner:
+                return self.start_fired_work_item(net_runner, work_item, client)
+        elif work_item.status == WorkItemStatus.DEADLOCKED:
+            return work_item
+        else:
+            raise ValueError(f"Item [{work_item.id}]: status [{work_item.status}] does not permit starting.")
+
+        raise ValueError(f"Could not start work item {work_item.id}")
+
+    def complete_work_item(
+        self,
+        work_item: YWorkItem | str,
+        data: str | dict[str, Any] | None = None,
+        log_predicate: str | None = None,
+        completion_type: WorkItemCompletion | None = None,
+    ) -> None | bool:
         """Complete a work item.
 
+        Java signature: void completeWorkItem(YWorkItem workItem, String data, String logPredicate, WorkItemCompletion completionType)
+
         Parameters
         ----------
-        work_item_id : str
-            Work item ID
-        output_data : dict[str, Any] | None
-            Output data
+        work_item : YWorkItem | str
+            Work item object or ID
+        data : str | dict[str, Any] | None
+            Output data (XML string or dict)
+        log_predicate : str | None
+            Log predicate
+        completion_type : WorkItemCompletion | None
+            Completion type (defaults to NORMAL)
 
         Returns
         -------
-        bool
-            True if completed
+        None | bool
+            None if YWorkItem passed (Java signature), bool if ID passed (backward compatibility)
+
+        Raises
+        ------
+        YStateException
+            If work item is not in executing state or is a parent case
         """
-        work_item = self._find_work_item(work_item_id)
-        if work_item and work_item.status in (WorkItemStatus.STARTED, WorkItemStatus.EXECUTING):
-            # Cancel any timers for this work item
-            self._cancel_timers_for_work_item(work_item_id)
+        # Handle string ID case (backward compatibility)
+        if isinstance(work_item, str):
+            work_item_id = work_item
+            output_data = data if isinstance(data, dict) else {}
+            work_item_obj = self._find_work_item(work_item_id)
+            if work_item_obj and work_item_obj.status in (WorkItemStatus.STARTED, WorkItemStatus.EXECUTING):
+                # Cancel any timers for this work item
+                self._cancel_timers_for_work_item(work_item_id)
 
-            work_item.complete(output_data)
+                work_item_obj.complete(output_data)
 
-            # Record completion for RBAC history (Gap 7)
-            if work_item.resource_id:
-                self.resource_manager.record_work_item_completion(
-                    case_id=work_item.case_id,
-                    task_id=work_item.task_id,
-                    work_item_id=work_item_id,
-                    participant_id=work_item.resource_id,
-                    task_name=work_item.task_id,  # Use task_id as name
-                    history=self.work_item_history,
-                )
-                # Update participant metrics
-                if work_item.resource_id in self.participant_metrics:
-                    metrics = self.participant_metrics[work_item.resource_id]
-                    if metrics.active_work_items > 0:
-                        metrics.active_work_items -= 1
+                # Record completion for RBAC history (Gap 7)
+                if work_item_obj.resource_id:
+                    self.resource_manager.record_work_item_completion(
+                        case_id=work_item_obj.case_id,
+                        task_id=work_item_obj.task_id,
+                        work_item_id=work_item_id,
+                        participant_id=work_item_obj.resource_id,
+                        task_name=work_item_obj.task_id,  # Use task_id as name
+                        history=self.work_item_history,
+                    )
+                    # Update participant metrics
+                    if work_item_obj.resource_id in self.participant_metrics:
+                        metrics = self.participant_metrics[work_item_obj.resource_id]
+                        if metrics.active_work_items > 0:
+                            metrics.active_work_items -= 1
 
-            # Get case and runner
-            case = self.cases.get(work_item.case_id)
-            if case:
-                case.update_work_item_status(work_item_id)
+                # Get case and runner
+                case = self.cases.get(work_item_obj.case_id)
+                if case:
+                    case.update_work_item_status(work_item_id)
 
-                # Fire the task in the net runner
-                runner_key = f"{case.id}:{work_item.net_id}"
-                runner = self.net_runners.get(runner_key)
-                if runner:
-                    try:
-                        runner.fire_task(work_item.task_id, output_data)
-                    except ValueError:
-                        pass  # Task may have been disabled
+                    # Fire the task in the net runner
+                    runner_key = f"{case.id}:{work_item_obj.net_id}"
+                    runner = self.net_runners.get(runner_key)
+                    if runner:
+                        try:
+                            runner.fire_task(work_item_obj.task_id, output_data)
+                        except ValueError:
+                            pass  # Task may have been disabled
 
-                    # Check for subnet completion (sub-case)
-                    if runner.completed:
-                        # Check if this is a sub-case
-                        sub_case_context = self._find_sub_case_context_by_subnet(case.id, work_item.net_id)
-                        if sub_case_context:
-                            # Complete the parent composite task
-                            self._complete_sub_case(sub_case_context)
+                        # Check for subnet completion (sub-case)
+                        if runner.completed:
+                            # Check if this is a sub-case
+                            sub_case_context = self._find_sub_case_context_by_subnet(case.id, work_item_obj.net_id)
+                            if sub_case_context:
+                                # Complete the parent composite task
+                                self._complete_sub_case(sub_case_context)
+                            else:
+                                # Main case completed
+                                case.complete(output_data)
+                                self._emit_event("CASE_COMPLETED", case_id=case.id)
                         else:
-                            # Main case completed
-                            case.complete(output_data)
-                            self._emit_event("CASE_COMPLETED", case_id=case.id)
-                    else:
-                        # Create work items for newly enabled tasks
-                        self._create_work_items_for_enabled_tasks(case, runner)
+                            # Create work items for newly enabled tasks
+                            self._create_work_items_for_enabled_tasks(case, runner)
 
-            self._emit_event("WORK_ITEM_COMPLETED", case_id=work_item.case_id, work_item_id=work_item_id)
-            return True
-        return False
+                self._emit_event("WORK_ITEM_COMPLETED", case_id=work_item_obj.case_id, work_item_id=work_item_id)
+                return True
+            return False
+
+        # Handle YWorkItem object case (Java signature)
+        self.check_engine_running()
+
+        if work_item is None:
+            raise ValueError("WorkItem argument is equal to None.")
+
+        # Check if work item is a parent case (cannot complete)
+        from kgcl.yawl.elements.y_identifier import YIdentifier
+
+        case_id = YIdentifier(work_item.case_id)
+        if hasattr(case_id, "has_parent") and not case_id.has_parent():
+            raise ValueError(f"WorkItem with ID [{work_item.id}] is a 'parent' and so may not be completed.")
+
+        # Get net runner
+        if hasattr(case_id, "get_parent") and case_id.get_parent():
+            net_runner = self.get_net_runner(case_id.get_parent())
+        else:
+            net_runner = self.get_net_runner(work_item.case_id)
+
+        # Convert data string to dict if needed
+        data_str = data if isinstance(data, str) else ""
+        if isinstance(data, dict):
+            # Convert dict to XML string (simplified)
+            import xml.etree.ElementTree as ET
+
+            root = ET.Element("data")
+            for key, value in data.items():
+                elem = ET.SubElement(root, key)
+                elem.text = str(value)
+            data_str = ET.tostring(root, encoding="unicode")
+
+        completion_type = completion_type or WorkItemCompletion.NORMAL
+
+        if work_item.status == WorkItemStatus.EXECUTING:
+            self.complete_executing_work_item(work_item, net_runner, data_str, log_predicate or "", completion_type)
+            if net_runner:
+                self.announce_events(net_runner.case_id)
+        elif work_item.status == WorkItemStatus.DEADLOCKED:
+            # Remove deadlocked work item family
+            if hasattr(self, "work_item_repository"):
+                self.work_item_repository.remove_work_item_family(work_item)
+        else:
+            raise ValueError(f"WorkItem with ID [{work_item.id}] not in executing state (status: {work_item.status}).")
 
     def _find_sub_case_context_by_subnet(self, case_id: str, subnet_id: str) -> SubCaseContext | None:
         """Find sub-case context by case and subnet ID.
@@ -2429,7 +2537,7 @@ class YEngine:
 
     # --- Task definitions ---
 
-    def getTaskDefinition(self, spec_id: YSpecificationID, task_id: str) -> YTask | None:
+    def get_task_definition(self, spec_id: YSpecificationID, task_id: str) -> YTask | None:
         """Get task definition.
 
         Java signature: YTask getTaskDefinition(YSpecificationID specID, String taskID)
@@ -2454,7 +2562,7 @@ class YEngine:
                     return net.tasks[task_id]
         return None
 
-    def getParameters(self, spec_id: YSpecificationID, task_id: str, input: bool) -> dict[str, Any]:
+    def get_parameters(self, spec_id: YSpecificationID, task_id: str, input: bool) -> dict[str, Any]:
         """Get task parameters.
 
         Java signature: Map getParameters(YSpecificationID specID, String taskID, boolean input)
@@ -2473,20 +2581,17 @@ class YEngine:
         dict[str, Any]
             Parameters
         """
-        task = self.getTaskDefinition(spec_id, task_id)
+        task = self.get_task_definition(spec_id, task_id)
         if task:
-            from kgcl.yawl.elements.y_atomic_task import YAtomicTask
-
-            if isinstance(task, YAtomicTask):
-                if input:
-                    return {p.name: p for p in task.parameters if p.is_input}
-                else:
-                    return {p.name: p for p in task.parameters if p.is_output}
+            # Get decomposition prototype which contains parameters
+            decomp = task.get_decomposition_prototype()
+            if decomp:
+                return decomp.input_parameters if input else decomp.output_parameters
         return {}
 
     # --- Case operations ---
 
-    def formatCaseParams(self, param_str: str, spec: YSpecification) -> Element:
+    def format_case_params(self, param_str: str, spec: YSpecification) -> Element:
         """Format case parameters.
 
         Java signature: Element formatCaseParams(String paramStr, YSpecification spec)
@@ -2506,7 +2611,7 @@ class YEngine:
         # Stub - would create XML element
         return Element("data")
 
-    def launchCase(
+    def launch_case(
         self,
         spec_id: YSpecificationID | YSpecification,
         case_params: str = "",
@@ -3102,7 +3207,7 @@ class YEngine:
 
     # --- Work item completion ---
 
-    def completeExecutingWorkitem(
+    def complete_executing_work_item(
         self,
         work_item: YWorkItem,
         net_runner: YNetRunner,
@@ -3113,6 +3218,8 @@ class YEngine:
         """Complete executing work item.
 
         Java signature: void completeExecutingWorkitem(YWorkItem workItem, YNetRunner netRunner, String data, String logPredicate, WorkItemCompletion completionType)
+
+        Mirrors Java: private void completeExecutingWorkitem(YWorkItem workItem, YNetRunner netRunner, String data, String logPredicate, WorkItemCompletion completionType)
 
         Parameters
         ----------
@@ -3127,26 +3234,42 @@ class YEngine:
         completion_type : WorkItemCompletion
             Completion type
         """
-        import json
+        # Set external completion log predicate (mirrors Java: workItem.setExternalCompletionLogPredicate(logPredicate))
+        work_item.set_external_completion_log_predicate(log_predicate)
 
-        output_data = {}
-        if data:
-            try:
-                output_data = json.loads(data)
-            except json.JSONDecodeError:
-                pass
+        # Cancel timer if any (mirrors Java: workItem.cancelTimer())
+        if hasattr(work_item, "cancel_timer"):
+            work_item.cancel_timer()
 
-        if completion_type == WorkItemCompletion.NORMAL:
-            self.complete_work_item(work_item.id, output_data)
-        elif completion_type == WorkItemCompletion.FORCE:
-            self.complete_work_item(work_item.id, output_data)
-        elif completion_type == WorkItemCompletion.FAIL:
-            self.fail_work_item(work_item.id, log_predicate)
+        # Announce if time service timeout (mirrors Java: announceIfTimeServiceTimeout(netRunner, workItem))
+        self.announce_if_time_service_timeout(net_runner, work_item)
 
-    def cleanupCompletedWorkItem(self, work_item: YWorkItem, net_runner: YNetRunner, data: Document) -> None:
+        # Set status to complete (mirrors Java: workItem.setStatusToComplete(_pmgr, completionType))
+        # Note: Would need persistence manager - using None for now
+        work_item.set_status_to_complete(None, completion_type)
+
+        # Get data document for completion (mirrors Java: Document doc = getDataDocForWorkItemCompletion(workItem, data, completionType))
+        doc = self.get_data_doc_for_work_item_completion(work_item, data, completion_type)
+
+        # Complete data (mirrors Java: workItem.completeData(doc))
+        work_item.complete_data(doc)
+
+        # Complete work item in task (mirrors Java: if (netRunner.completeWorkItemInTask(_pmgr, workItem, doc)))
+        # Note: Would need persistence manager - using None for now
+        if net_runner.complete_work_item_in_task(workItem=work_item, outputData=doc, pmgr=None):
+            # Cleanup completed work item (mirrors Java: cleanupCompletedWorkItem(workItem, netRunner, doc))
+            self.cleanup_completed_work_item(work_item, net_runner, doc)
+
+            # Continue if possible (mirrors Java: netRunner.continueIfPossible(_pmgr))
+            # Note: Would need persistence manager - using None for now
+            net_runner.continue_if_possible(None)
+
+    def cleanup_completed_work_item(self, work_item: YWorkItem, net_runner: YNetRunner, data: Document) -> None:
         """Cleanup completed work item.
 
         Java signature: void cleanupCompletedWorkItem(YWorkItem workItem, YNetRunner netRunner, Document data)
+
+        Mirrors Java: private void cleanupCompletedWorkItem(YWorkItem workItem, YNetRunner netRunner, Document data)
 
         Parameters
         ----------
@@ -3157,8 +3280,31 @@ class YEngine:
         data : Document
             Data document
         """
+        # Close work item in instance cache (mirrors Java: _instanceCache.closeWorkItem(workItem, data))
+        if hasattr(self.instance_cache, "close_work_item"):
+            self.instance_cache.close_work_item(work_item, data)
+        elif hasattr(self.instance_cache, "cache"):
+            # Fallback: store in cache if close_work_item not implemented
+            case_id = work_item.case_id
+            if case_id in self.instance_cache.cache:
+                case_instance = self.instance_cache.cache[case_id]
+                if hasattr(case_instance, "close_work_item"):
+                    case_instance.close_work_item(work_item, data)
 
-    def completeWorkItemLogging(
+        # Get parent work item (mirrors Java: YWorkItem parent = workItem.getParent())
+        parent = work_item.get_parent()
+        if parent is not None:
+            # If case is suspending, see if we can progress into a fully suspended state
+            # (mirrors Java: if (netRunner.isSuspending()) { progressCaseSuspension(_pmgr, parent.getCaseID()); })
+            # Check if net runner is in suspending state (only SUSPENDING, not SUSPENDED)
+            if hasattr(net_runner, "execution_status") and net_runner.execution_status == ExecutionStatus.SUSPENDING:
+                # Note: Would need persistence manager - using None for now
+                from kgcl.yawl.elements.y_identifier import YIdentifier
+
+                parent_case_id = YIdentifier(parent.case_id)
+                self.progress_case_suspension(None, parent_case_id)
+
+    def complete_work_item_logging(
         self, work_item: YWorkItem, log_predicate: str, completion_type: WorkItemCompletion, doc: Document
     ) -> None:
         """Complete work item with logging.
@@ -3176,20 +3322,28 @@ class YEngine:
         doc : Document
             Document
         """
+        # Log work item completion event
+        # Note: Event logger integration would go here
 
-    def getDataDocForWorkItemCompletion(
+        # Log completion data if predicate provided
+        if log_predicate and hasattr(work_item, "log_completion_data"):
+            work_item.log_completion_data(doc)
+
+    def get_data_doc_for_work_item_completion(
         self, work_item: YWorkItem, data: str, completion_type: WorkItemCompletion
     ) -> Document:
         """Get data document for work item completion.
 
         Java signature: Document getDataDocForWorkItemCompletion(YWorkItem workItem, String data, WorkItemCompletion completionType)
 
+        Mirrors Java: private Document getDataDocForWorkItemCompletion(YWorkItem workItem, String data, WorkItemCompletion completionType)
+
         Parameters
         ----------
         work_item : YWorkItem
             Work item
         data : str
-            Data string
+            Data string (XML or empty)
         completion_type : WorkItemCompletion
             Completion type
 
@@ -3198,9 +3352,30 @@ class YEngine:
         Document
             Data document
         """
+        # If completionType != Normal, map output data for skipped work item
+        # (mirrors Java: if (completionType != WorkItemCompletion.Normal) { data = mapOutputDataForSkippedWorkItem(workItem, data); })
+        if completion_type != WorkItemCompletion.NORMAL:
+            data = self.map_output_data_for_skipped_work_item(work_item, data)
+
+        # Convert string to Document (mirrors Java: Document doc = JDOMUtil.stringToDocument(data))
+        if data:
+            try:
+                from xml.dom.minidom import parseString
+
+                doc = parseString(data)
+                # Strip attributes from root element (mirrors Java: JDOMUtil.stripAttributes(doc.getRootElement()))
+                if doc.documentElement:
+                    # Remove all attributes from root element
+                    while doc.documentElement.attributes.length > 0:
+                        attr_name = doc.documentElement.attributes.item(0).name
+                        doc.documentElement.removeAttribute(attr_name)
+                return doc
+            except Exception:
+                # If parsing fails, return empty document
+                return Document()
         return Document()
 
-    def mapOutputDataForSkippedWorkItem(self, work_item: YWorkItem, data: str) -> str:
+    def map_output_data_for_skipped_work_item(self, work_item: YWorkItem, data: str) -> str:
         """Map output data for skipped work item.
 
         Java signature: String mapOutputDataForSkippedWorkItem(YWorkItem workItem, String data)
@@ -3237,7 +3412,7 @@ class YEngine:
         else:
             self._emit_event("EVENTS_ANNOUNCED", case_id=parent.case_id)
 
-    def announceIfTimeServiceTimeout(self, net_runner: YNetRunner, work_item: YWorkItem) -> None:
+    def announce_if_time_service_timeout(self, net_runner: YNetRunner, work_item: YWorkItem) -> None:
         """Announce if time service timeout.
 
         Java signature: void announceIfTimeServiceTimeout(YNetRunner netRunner, YWorkItem workItem)
@@ -3414,7 +3589,7 @@ class YEngine:
         if case_id.id in self.instance_cache.cache:
             del self.instance_cache.cache[case_id.id]
 
-    def progressCaseSuspension(
+    def progress_case_suspension(
         self, pmgr: YPersistenceManager | YNetRunner, case_id: YIdentifier | None = None
     ) -> None:
         """Progress case suspension.

@@ -63,7 +63,7 @@ class WorkletStatus(Enum):
     CANCELLED = auto()
 
 
-@dataclass
+@dataclass(frozen=True)
 class Worklet:
     """A worklet definition (mirrors Java Worklet).
 
@@ -92,6 +92,12 @@ class Worklet:
         Version number
     parameters : dict[str, Any]
         Worklet parameters
+
+    Examples
+    --------
+    >>> worklet = Worklet(id="wl-001", name="Retry Handler", worklet_type=WorkletType.ITEM_EXCEPTION)
+    >>> worklet.id
+    'wl-001'
     """
 
     id: str
@@ -105,9 +111,96 @@ class Worklet:
     version: int = 1
     parameters: dict[str, Any] = field(default_factory=dict)
 
+    def __post_init__(self) -> None:
+        """Validate worklet data."""
+        if not self.id:
+            raise ValueError("Worklet id cannot be empty")
+        if not self.name:
+            raise ValueError("Worklet name cannot be empty")
+        if self.version < 1:
+            raise ValueError("Worklet version must be >= 1")
+
+    def __repr__(self) -> str:
+        """Developer representation."""
+        return (
+            f"Worklet("
+            f"id={self.id!r}, "
+            f"name={self.name!r}, "
+            f"worklet_type={self.worklet_type.name}, "
+            f"enabled={self.enabled})"
+        )
+
+    def __str__(self) -> str:
+        """Human-readable representation."""
+        return f"Worklet(id={self.id}, name={self.name})"
+
+    def __eq__(self, other: object) -> bool:
+        """Equality comparison by ID."""
+        if not isinstance(other, Worklet):
+            return False
+        return self.id == other.id
+
     def __hash__(self) -> int:
         """Hash by ID."""
         return hash(self.id)
+
+    def to_dict(self) -> dict[str, Any]:
+        """Convert to dictionary.
+
+        Returns
+        -------
+        dict[str, Any]
+            Dictionary representation
+        """
+        return {
+            "id": self.id,
+            "name": self.name,
+            "worklet_type": self.worklet_type.name,
+            "specification_uri": self.specification_uri,
+            "description": self.description,
+            "enabled": self.enabled,
+            "created": self.created.isoformat(),
+            "modified": self.modified.isoformat() if self.modified else None,
+            "version": self.version,
+            "parameters": self.parameters,
+        }
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> Worklet:
+        """Create from dictionary.
+
+        Parameters
+        ----------
+        data : dict[str, Any]
+            Dictionary data
+
+        Returns
+        -------
+        Worklet
+            Worklet instance
+        """
+        created = (
+            datetime.fromisoformat(data["created"])
+            if isinstance(data.get("created"), str)
+            else data.get("created", datetime.now())
+        )
+        modified = (
+            datetime.fromisoformat(data["modified"])
+            if isinstance(data.get("modified"), str) and data["modified"]
+            else data.get("modified")
+        )
+        return cls(
+            id=data["id"],
+            name=data["name"],
+            worklet_type=WorkletType[data.get("worklet_type", "CASE_EXCEPTION")],
+            specification_uri=data.get("specification_uri"),
+            description=data.get("description", ""),
+            enabled=data.get("enabled", True),
+            created=created,
+            modified=modified,
+            version=data.get("version", 1),
+            parameters=data.get("parameters", {}),
+        )
 
 
 @dataclass
@@ -115,6 +208,7 @@ class WorkletCase:
     """A running worklet case.
 
     Tracks the execution of a worklet instance.
+    Note: Not frozen due to mutating methods (start, complete, etc.).
 
     Parameters
     ----------
@@ -138,6 +232,13 @@ class WorkletCase:
         Exception context data
     result_data : dict[str, Any]
         Result data from worklet
+
+    Examples
+    --------
+    >>> case = WorkletCase(id="case-001", worklet_id="wl-001", parent_case_id="parent-001")
+    >>> case.start()
+    >>> case.status
+    <WorkletStatus.RUNNING: 2>
     """
 
     id: str
@@ -150,6 +251,33 @@ class WorkletCase:
     exception_type: str = ""
     exception_data: dict[str, Any] = field(default_factory=dict)
     result_data: dict[str, Any] = field(default_factory=dict)
+
+    def __post_init__(self) -> None:
+        """Validate worklet case data."""
+        if not self.id:
+            raise ValueError("WorkletCase id cannot be empty")
+        if not self.worklet_id:
+            raise ValueError("WorkletCase worklet_id cannot be empty")
+        if not self.parent_case_id:
+            raise ValueError("WorkletCase parent_case_id cannot be empty")
+
+    def __repr__(self) -> str:
+        """Developer representation."""
+        return f"WorkletCase(id={self.id!r}, worklet_id={self.worklet_id!r}, status={self.status.name})"
+
+    def __str__(self) -> str:
+        """Human-readable representation."""
+        return f"WorkletCase(id={self.id}, status={self.status.name})"
+
+    def __eq__(self, other: object) -> bool:
+        """Equality comparison by ID."""
+        if not isinstance(other, WorkletCase):
+            return False
+        return self.id == other.id
+
+    def __hash__(self) -> int:
+        """Hash by ID."""
+        return hash(self.id)
 
     def start(self) -> None:
         """Start the worklet case."""
@@ -185,9 +313,63 @@ class WorkletCase:
         self.status = WorkletStatus.CANCELLED
         self.completed = datetime.now()
 
-    def __hash__(self) -> int:
-        """Hash by ID."""
-        return hash(self.id)
+    def to_dict(self) -> dict[str, Any]:
+        """Convert to dictionary.
+
+        Returns
+        -------
+        dict[str, Any]
+            Dictionary representation
+        """
+        return {
+            "id": self.id,
+            "worklet_id": self.worklet_id,
+            "parent_case_id": self.parent_case_id,
+            "parent_work_item_id": self.parent_work_item_id,
+            "status": self.status.name,
+            "started": self.started.isoformat(),
+            "completed": self.completed.isoformat() if self.completed else None,
+            "exception_type": self.exception_type,
+            "exception_data": self.exception_data,
+            "result_data": self.result_data,
+        }
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> WorkletCase:
+        """Create from dictionary.
+
+        Parameters
+        ----------
+        data : dict[str, Any]
+            Dictionary data
+
+        Returns
+        -------
+        WorkletCase
+            WorkletCase instance
+        """
+        started = (
+            datetime.fromisoformat(data["started"])
+            if isinstance(data.get("started"), str)
+            else data.get("started", datetime.now())
+        )
+        completed = (
+            datetime.fromisoformat(data["completed"])
+            if isinstance(data.get("completed"), str) and data["completed"]
+            else data.get("completed")
+        )
+        return cls(
+            id=data["id"],
+            worklet_id=data["worklet_id"],
+            parent_case_id=data["parent_case_id"],
+            parent_work_item_id=data.get("parent_work_item_id"),
+            status=WorkletStatus[data.get("status", "PENDING")],
+            started=started,
+            completed=completed,
+            exception_type=data.get("exception_type", ""),
+            exception_data=data.get("exception_data", {}),
+            result_data=data.get("result_data", {}),
+        )
 
 
 @dataclass
@@ -196,6 +378,7 @@ class RDRNode:
 
     RDR trees provide incremental knowledge acquisition for
     exception handling decisions.
+    Note: Not frozen due to mutating methods (add_true_child, etc.).
 
     Parameters
     ----------
@@ -217,6 +400,12 @@ class RDRNode:
         Rule description
     created : datetime
         Creation timestamp
+
+    Examples
+    --------
+    >>> node = RDRNode(id="node-001", condition="x > 5")
+    >>> node.is_leaf()
+    True
     """
 
     id: str
@@ -228,6 +417,31 @@ class RDRNode:
     cornerstone_case: dict[str, Any] | None = None
     description: str = ""
     created: datetime = field(default_factory=datetime.now)
+
+    def __post_init__(self) -> None:
+        """Validate RDR node data."""
+        if not self.id:
+            raise ValueError("RDRNode id cannot be empty")
+        if not self.condition:
+            raise ValueError("RDRNode condition cannot be empty")
+
+    def __repr__(self) -> str:
+        """Developer representation."""
+        return f"RDRNode(id={self.id!r}, condition={self.condition!r}, conclusion={self.conclusion!r})"
+
+    def __str__(self) -> str:
+        """Human-readable representation."""
+        return f"RDRNode(id={self.id}, condition={self.condition[:30]})"
+
+    def __eq__(self, other: object) -> bool:
+        """Equality comparison by ID."""
+        if not isinstance(other, RDRNode):
+            return False
+        return self.id == other.id
+
+    def __hash__(self) -> int:
+        """Hash by ID."""
+        return hash(self.id)
 
     def is_leaf(self) -> bool:
         """Check if this is a leaf node.
@@ -271,10 +485,6 @@ class RDRNode:
         self.false_child = node
         node.parent = self
 
-    def __hash__(self) -> int:
-        """Hash by ID."""
-        return hash(self.id)
-
 
 @dataclass
 class RDRTree:
@@ -282,6 +492,7 @@ class RDRTree:
 
     The tree is traversed to find the appropriate worklet for
     a given exception context.
+    Note: Not frozen due to mutating methods (add_node, etc.).
 
     Parameters
     ----------
@@ -297,6 +508,12 @@ class RDRTree:
         Type of exception handled
     nodes : dict[str, RDRNode]
         All nodes by ID for quick lookup
+
+    Examples
+    --------
+    >>> tree = RDRTree(id="tree-001", name="Exception Handler")
+    >>> tree.count_nodes()
+    1
     """
 
     id: str
@@ -307,9 +524,31 @@ class RDRTree:
     nodes: dict[str, RDRNode] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
-        """Register root node."""
+        """Register root node and validate."""
+        if not self.id:
+            raise ValueError("RDRTree id cannot be empty")
+        if not self.name:
+            raise ValueError("RDRTree name cannot be empty")
         if self.root.id not in self.nodes:
             self.nodes[self.root.id] = self.root
+
+    def __repr__(self) -> str:
+        """Developer representation."""
+        return f"RDRTree(id={self.id!r}, name={self.name!r}, node_count={len(self.nodes)})"
+
+    def __str__(self) -> str:
+        """Human-readable representation."""
+        return f"RDRTree(id={self.id}, name={self.name}, nodes={len(self.nodes)})"
+
+    def __eq__(self, other: object) -> bool:
+        """Equality comparison by ID."""
+        if not isinstance(other, RDRTree):
+            return False
+        return self.id == other.id
+
+    def __hash__(self) -> int:
+        """Hash by ID."""
+        return hash(self.id)
 
     def add_node(self, node: RDRNode) -> None:
         """Add a node to the tree.
@@ -345,7 +584,3 @@ class RDRTree:
             Node count
         """
         return len(self.nodes)
-
-    def __hash__(self) -> int:
-        """Hash by ID."""
-        return hash(self.id)

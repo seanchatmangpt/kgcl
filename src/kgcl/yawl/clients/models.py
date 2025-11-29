@@ -542,6 +542,29 @@ class TaskInformation:
     output_params: dict[str, Any] = field(default_factory=dict)
     documentation: str = ""
 
+    def get_param_schema(self) -> Any:
+        """Get parameter schema.
+
+        Java signature: YParametersSchema getParamSchema()
+
+        Returns
+        -------
+        Any
+            YParametersSchema object
+
+        Notes
+        -----
+        Mirrors Java YAWL TaskInformation.getParamSchema()
+        """
+        from kgcl.yawl.clients.y_parameters_schema import YParametersSchema
+
+        schema = YParametersSchema()
+        for param in self.input_params.values():
+            schema.set_input_param(param)
+        for param in self.output_params.values():
+            schema.set_output_param(param)
+        return schema
+
 
 @dataclass(frozen=True)
 class WorkQueue:

@@ -6,12 +6,14 @@ coordinating with the main workflow engine.
 
 from __future__ import annotations
 
+import logging
 import uuid
-from collections.abc import Callable
+from collections.abc import Awaitable, Callable
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, Protocol
 
+from kgcl.yawl.worklets.exceptions import WorkletExecutionError, WorkletNotFoundError
 from kgcl.yawl.worklets.models import Worklet, WorkletCase, WorkletStatus, WorkletType
 from kgcl.yawl.worklets.repository import WorkletRepository
 from kgcl.yawl.worklets.rules import RDREngine, RuleContext
@@ -19,8 +21,29 @@ from kgcl.yawl.worklets.rules import RDREngine, RuleContext
 if TYPE_CHECKING:
     pass
 
+logger = logging.getLogger(__name__)
 
-@dataclass
+
+class EngineNotificationProtocol(Protocol):
+    """Protocol for engine notification callbacks.
+
+    Replaces simple callable with Protocol for better type safety.
+    """
+
+    def __call__(self, event_type: str, data: dict[str, Any]) -> None:
+        """Notify engine of worklet event.
+
+        Parameters
+        ----------
+        event_type : str
+            Event type (e.g., "WORKLET_COMPLETED")
+        data : dict[str, Any]
+            Event data
+        """
+        ...
+
+
+@dataclass(frozen=True)
 class WorkletResult:
     """Result of worklet execution.
 
@@ -36,6 +59,10 @@ class WorkletResult:
         Output data from worklet
     error : str | None
         Error message if failed
+
+    Examples
+    --------
+    >>> result = WorkletResult(success=True, case_id="case-001", worklet_id="wl-001")
     """
 
     success: bool
@@ -44,12 +71,22 @@ class WorkletResult:
     output_data: dict[str, Any] = field(default_factory=dict)
     error: str | None = None
 
+    def __repr__(self) -> str:
+        """Developer representation."""
+        return f"WorkletResult(success={self.success}, case_id={self.case_id!r}, worklet_id={self.worklet_id!r})"
+
+    def __str__(self) -> str:
+        """Human-readable representation."""
+        status = "SUCCESS" if self.success else "FAILED"
+        return f"WorkletResult({status}, case={self.case_id})"
+
 
 @dataclass
 class WorkletExecutor:
     """Executor for worklet exception handling.
 
     Coordinates worklet selection, execution, and result handling.
+    Supports context manager for resource management.
 
     Parameters
     ----------
@@ -57,13 +94,51 @@ class WorkletExecutor:
         Worklet storage
     rdr_engine : RDREngine
         Rule engine for worklet selection
-    engine_callback : Callable[[str, dict[str, Any]], None] | None
-        Callback to notify main engine
+    engine_callback : EngineNotificationProtocol | None
+        Callback to notify main engine (Protocol-based)
+
+    Examples
+    --------
+    >>> executor = WorkletExecutor()
+    >>> with executor:
+    ...     result = executor.handle_case_exception(case_id="case-001", exception_type="TIMEOUT")
     """
 
     repository: WorkletRepository = field(default_factory=WorkletRepository)
     rdr_engine: RDREngine = field(default_factory=RDREngine)
-    engine_callback: Callable[[str, dict[str, Any]], None] | None = None
+    engine_callback: EngineNotificationProtocol | None = None
+
+    def __enter__(self) -> WorkletExecutor:
+        """Enter context manager."""
+        logger.debug("Entering executor context")
+        return self
+
+    def __exit__(self, exc_type: type[BaseException] | None, exc_val: BaseException | None, exc_tb: Any) -> bool:
+        """Exit context manager.
+
+        Parameters
+        ----------
+        exc_type : type[BaseException] | None
+            Exception type if raised
+        exc_val : BaseException | None
+            Exception value if raised
+        exc_tb : Any
+            Traceback if raised
+
+        Returns
+        -------
+        bool
+            False to propagate exceptions
+        """
+        if exc_type:
+            logger.error(
+                "Executor context exited with exception",
+                extra={"exc_type": exc_type.__name__},
+                exc_info=(exc_type, exc_val, exc_tb),
+            )
+        else:
+            logger.debug("Executor context exited normally")
+        return False  # Propagate exceptions
 
     # --- Worklet selection ---
 
@@ -83,10 +158,25 @@ class WorkletExecutor:
         -------
         Worklet | None
             Selected worklet or None
+
+        Examples
+        --------
+        >>> context = RuleContext(case_id="case-001", exception_type="TIMEOUT")
+        >>> worklet = executor.select_worklet(context)
         """
+        logger.debug(
+            "Selecting worklet",
+            extra={"case_id": context.case_id, "exception_type": context.exception_type, "task_id": task_id},
+        )
         worklet_id = self.rdr_engine.find_worklet(context, task_id)
         if worklet_id:
-            return self.repository.get_worklet(worklet_id)
+            worklet = self.repository.get_worklet(worklet_id)
+            if worklet:
+                logger.info("Selected worklet", extra={"worklet_id": worklet_id, "name": worklet.name})
+            else:
+                logger.warning("Worklet ID found but worklet not in repository", extra={"worklet_id": worklet_id})
+            return worklet
+        logger.debug("No worklet found for context")
         return None
 
     # --- Case exception handling ---
@@ -121,7 +211,11 @@ class WorkletExecutor:
 
         worklet = self.select_worklet(context)
         if not worklet:
-            return WorkletResult(success=False, case_id="", error=f"No worklet found for exception: {exception_type}")
+            error_msg = f"No worklet found for exception: {exception_type}"
+            logger.warning(
+                "No worklet found for case exception", extra={"case_id": case_id, "exception_type": exception_type}
+            )
+            return WorkletResult(success=False, case_id="", error=error_msg)
 
         return self._execute_worklet(worklet, context, case_id, None)
 
@@ -173,9 +267,12 @@ class WorkletExecutor:
 
         worklet = self.select_worklet(context, task_id)
         if not worklet:
-            return WorkletResult(
-                success=False, case_id="", error=f"No worklet found for task {task_id} exception: {exception_type}"
+            error_msg = f"No worklet found for task {task_id} exception: {exception_type}"
+            logger.warning(
+                "No worklet found for item exception",
+                extra={"case_id": case_id, "task_id": task_id, "exception_type": exception_type},
             )
+            return WorkletResult(success=False, case_id="", error=error_msg)
 
         return self._execute_worklet(worklet, context, case_id, work_item_id)
 
@@ -221,6 +318,10 @@ class WorkletExecutor:
 
         # Start execution
         worklet_case.start()
+        logger.info(
+            "Starting worklet execution",
+            extra={"worklet_case_id": worklet_case.id, "worklet_id": worklet.id, "parent_case_id": parent_case_id},
+        )
 
         try:
             # Execute worklet logic
@@ -228,23 +329,41 @@ class WorkletExecutor:
 
             # Mark completed
             worklet_case.complete(result_data)
+            logger.info(
+                "Worklet execution completed", extra={"worklet_case_id": worklet_case.id, "worklet_id": worklet.id}
+            )
 
             # Notify engine if callback set
             if self.engine_callback:
-                self.engine_callback(
-                    "WORKLET_COMPLETED",
-                    {
-                        "worklet_case_id": worklet_case.id,
-                        "worklet_id": worklet.id,
-                        "parent_case_id": parent_case_id,
-                        "parent_work_item_id": parent_work_item_id,
-                        "result_data": result_data,
-                    },
-                )
+                try:
+                    self.engine_callback(
+                        "WORKLET_COMPLETED",
+                        {
+                            "worklet_case_id": worklet_case.id,
+                            "worklet_id": worklet.id,
+                            "parent_case_id": parent_case_id,
+                            "parent_work_item_id": parent_work_item_id,
+                            "result_data": result_data,
+                        },
+                    )
+                except Exception as e:
+                    logger.error("Engine callback failed", extra={"worklet_case_id": worklet_case.id}, exc_info=True)
 
             return WorkletResult(success=True, case_id=worklet_case.id, worklet_id=worklet.id, output_data=result_data)
 
+        except WorkletExecutionError as e:
+            logger.error(
+                "Worklet execution error",
+                extra={"worklet_case_id": worklet_case.id, "worklet_id": worklet.id, "error": str(e)},
+            )
+            worklet_case.fail(str(e))
+            return WorkletResult(success=False, case_id=worklet_case.id, worklet_id=worklet.id, error=str(e))
         except Exception as e:
+            logger.error(
+                "Unexpected error during worklet execution",
+                extra={"worklet_case_id": worklet_case.id, "worklet_id": worklet.id},
+                exc_info=True,
+            )
             worklet_case.fail(str(e))
             return WorkletResult(success=False, case_id=worklet_case.id, worklet_id=worklet.id, error=str(e))
 

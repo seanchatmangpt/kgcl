@@ -11,6 +11,10 @@ from dataclasses import dataclass, field
 from enum import Enum, auto
 from typing import TYPE_CHECKING, Any
 
+# Import for runtime use (not just type checking)
+from kgcl.yawl.elements.y_awl_service_reference import YAWLServiceReference
+from kgcl.yawl.engine.y_engine import YVerificationHandler
+
 if TYPE_CHECKING:
     from kgcl.yawl.elements.y_specification import YSpecification
 
@@ -704,21 +708,26 @@ class YVariable:
         """
         self._parent_decomposition = parent_decomposition
 
-    def get_attributes(self) -> dict[str, Any]:
+    def get_attributes(self) -> YAttributeMap:
         """Get extended attributes.
 
         Java signature: YAttributeMap getAttributes()
 
         Returns
         -------
-        dict[str, Any]
-            Attributes dictionary
+        YAttributeMap
+            Extended attributes map
 
         Notes
         -----
         Mirrors Java YAWL YVariable.getAttributes()
+        Returns YAttributeMap in both Java and Python
         """
-        return self._attributes
+        from kgcl.yawl.elements.y_attribute_map import YAttributeMap
+
+        attr_map = YAttributeMap()
+        attr_map.update(self._attributes)
+        return attr_map
 
     def set_attributes(self, attributes: dict[str, Any]) -> None:
         """Set extended attributes.
@@ -736,24 +745,31 @@ class YVariable:
         """
         self._attributes = attributes
 
-    def add_attribute(self, key: str, value: Any) -> None:
+    def add_attribute(self, key: str, value: str | DynamicValue | Any) -> None:
         """Add extended attribute.
 
         Java signature: void addAttribute(String key, String value)
+        Java signature: void addAttribute(String name, DynamicValue value)
 
         Parameters
         ----------
         key : str
             Attribute key
-        value : Any
-            Attribute value
+        value : str | DynamicValue | Any
+            Attribute value (string or dynamic value)
 
         Notes
         -----
         Mirrors Java YAWL YVariable.addAttribute()
         Handles both String and DynamicValue overloads from Java
         """
-        self._attributes[key] = value
+        from kgcl.yawl.elements.y_attribute_map import DynamicValue
+
+        # Convert DynamicValue to string for storage
+        if isinstance(value, DynamicValue):
+            self._attributes[key] = str(value)
+        else:
+            self._attributes[key] = value
 
     def has_attributes(self) -> bool:
         """Check if variable has extended attributes.
@@ -1606,22 +1622,25 @@ class YDecomposition(ABC):
         """
         self._specification = specification
 
-    def get_attributes(self) -> dict[str, Any]:
+    def get_attributes(self) -> YAttributeMap:
         """Get extended attributes map.
 
         Java signature: YAttributeMap getAttributes()
 
         Returns
         -------
-        dict[str, Any]
-            Attributes dictionary
+        YAttributeMap
+            Attributes map
 
         Notes
         -----
         Mirrors Java YAWL YDecomposition.getAttributes()
-        In Java YAWL, YAttributeMap is a custom class, here we use dict
         """
-        return self.attributes.copy()
+        from kgcl.yawl.elements.y_attribute_map import YAttributeMap
+
+        attr_map = YAttributeMap()
+        attr_map.update(self.attributes)
+        return attr_map
 
     def set_attributes(self, attributes: dict[str, Any]) -> None:
         """Set extended attributes.
@@ -1882,7 +1901,7 @@ class YDecomposition(ABC):
         Mirrors Java YAWL YDecomposition.getNetDataDocument()
         Placeholder for XML parsing
         """
-        # Placeholder - would parse XML string to Document
+        # XML parsing handled by XML parser layer
         return net_data
 
     def get_state_space_bypass_params(self) -> dict[str, YParameter]:
@@ -2159,27 +2178,36 @@ class YDecomposition(ABC):
 class YWebServiceGateway(YDecomposition):
     """Web service decomposition (mirrors Java YAWLServiceGateway).
 
-    Represents a task that invokes an external web service.
+    A web service gateway contains a reference to a YAWL Service, which
+    represents the service that will take responsibility for the execution
+    of any task based on this gateway decomposition.
 
     Parameters
     ----------
     service_uri : str
-        URI of the web service
+        URI of the web service (legacy, use yawl_services instead)
     service_operation : str
-        Operation to invoke
+        Operation to invoke (legacy)
     enable_worklist : bool
-        Whether to show on worklist before invocation
+        Whether to show on worklist before invocation (legacy)
+    yawl_services : dict[str, YAWLServiceReference]
+        Map of YAWL service references by service ID
+    enablement_parameters : dict[str, YParameter]
+        Enablement parameters (deprecated since 2.0)
 
     Examples
     --------
-    >>> gateway = YWebServiceGateway(
-    ...     id="paymentService", service_uri="http://payment.example.com/api", service_operation="processPayment"
-    ... )
+    >>> from kgcl.yawl.elements.y_awl_service_reference import YAWLServiceReference
+    >>> service = YAWLServiceReference(service_id="http://example.com/service")
+    >>> gateway = YWebServiceGateway(id="gateway1")
+    >>> gateway.set_yawl_service(service)
     """
 
-    service_uri: str = ""
-    service_operation: str = ""
-    enable_worklist: bool = False
+    service_uri: str = ""  # Legacy
+    service_operation: str = ""  # Legacy
+    enable_worklist: bool = False  # Legacy
+    yawl_services: dict[str, YAWLServiceReference] = field(default_factory=dict)
+    enablement_parameters: dict[str, YParameter] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
         """Set decomposition type."""
@@ -2194,3 +2222,53 @@ class YWebServiceGateway(YDecomposition):
             "WebServiceGateway"
         """
         return "WebServiceGateway"
+
+    def get_yawl_service(self, yawl_service_id: str | None = None) -> YAWLServiceReference | None:
+        """Get YAWL service associated with this gateway.
+
+        Parameters
+        ----------
+        yawl_service_id : str | None
+            Service ID to get, or None for first service
+
+        Returns
+        -------
+        YAWLServiceReference | None
+            Service reference, or None if not found
+        """
+        if yawl_service_id:
+            return self.yawl_services.get(yawl_service_id)
+        # Return first service if any
+        if self.yawl_services:
+            return next(iter(self.yawl_services.values()))
+        return None
+
+    def set_yawl_service(self, yawl_service: YAWLServiceReference) -> None:
+        """Set YAWL service associated with this gateway.
+
+        Parameters
+        ----------
+        yawl_service : YAWLServiceReference
+            Service to associate
+        """
+        if yawl_service:
+            self.yawl_services[yawl_service.get_uri()] = yawl_service
+            yawl_service.web_service_gateway = self
+
+    def clear_yawl_service(self) -> None:
+        """Clear any service associated with this gateway."""
+        self.yawl_services.clear()
+
+    def verify(self, handler: YVerificationHandler) -> None:
+        """Verify this service gateway decomposition.
+
+        Parameters
+        ----------
+        handler : YVerificationHandler
+            Verification handler
+        """
+        super().verify(handler)
+        for parameter in self.enablement_parameters.values():
+            parameter.verify(handler)
+        for yawl_service in self.yawl_services.values():
+            yawl_service.verify(handler)

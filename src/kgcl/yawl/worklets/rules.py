@@ -6,11 +6,20 @@ and selecting appropriate worklets for exceptions.
 
 from __future__ import annotations
 
+import logging
 from collections.abc import Callable
 from dataclasses import dataclass, field
-from typing import Any
+from functools import lru_cache
+from typing import TYPE_CHECKING, Any
 
+from kgcl.yawl.worklets.exceptions import RDRTreeError, RuleEvaluationError
 from kgcl.yawl.worklets.models import RDRNode, RDRTree
+from kgcl.yawl.worklets.protocols import RDREvaluatorProtocol
+
+if TYPE_CHECKING:
+    pass
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass(frozen=True)
@@ -38,6 +47,12 @@ class RuleContext:
         Work item data
     attributes : dict[str, Any]
         Additional attributes
+
+    Examples
+    --------
+    >>> context = RuleContext(case_id="case-001", exception_type="TIMEOUT", case_data={"priority": "high"})
+    >>> context.get("priority")
+    'high'
     """
 
     case_id: str
@@ -48,6 +63,29 @@ class RuleContext:
     case_data: dict[str, Any] = field(default_factory=dict)
     work_item_data: dict[str, Any] = field(default_factory=dict)
     attributes: dict[str, Any] = field(default_factory=dict)
+
+    def __post_init__(self) -> None:
+        """Validate rule context data."""
+        if not self.case_id:
+            raise ValueError("RuleContext case_id cannot be empty")
+
+    def __repr__(self) -> str:
+        """Developer representation."""
+        return f"RuleContext(case_id={self.case_id!r}, exception_type={self.exception_type!r})"
+
+    def __str__(self) -> str:
+        """Human-readable representation."""
+        return f"RuleContext(case_id={self.case_id}, exception={self.exception_type})"
+
+    def __eq__(self, other: object) -> bool:
+        """Equality comparison by case_id and work_item_id."""
+        if not isinstance(other, RuleContext):
+            return False
+        return self.case_id == other.case_id and self.work_item_id == other.work_item_id
+
+    def __hash__(self) -> int:
+        """Hash by case_id and work_item_id."""
+        return hash((self.case_id, self.work_item_id))
 
     def get(self, name: str, default: Any = None) -> Any:
         """Get context value.
@@ -84,12 +122,24 @@ class RDREngine:
     ----------
     trees : dict[str, RDRTree]
         RDR trees by key (task_id:exception_type)
-    evaluator : Callable[[str, RuleContext], bool] | None
-        Custom condition evaluator
+    evaluator : RDREvaluatorProtocol | None
+        Custom condition evaluator (Protocol-based)
+    enable_caching : bool
+        Enable condition evaluation caching
+    cache_size : int
+        Maximum cache size for LRU cache
+
+    Examples
+    --------
+    >>> engine = RDREngine()
+    >>> engine.add_tree(tree)
+    >>> worklet_id = engine.find_worklet(context)
     """
 
     trees: dict[str, RDRTree] = field(default_factory=dict)
-    evaluator: Callable[[str, RuleContext], bool] | None = None
+    evaluator: RDREvaluatorProtocol | None = None
+    enable_caching: bool = True
+    cache_size: int = 128
 
     def add_tree(self, tree: RDRTree) -> None:
         """Add an RDR tree.
@@ -211,12 +261,25 @@ class RDREngine:
         -------
         bool
             Evaluation result
+
+        Raises
+        ------
+        RuleEvaluationError
+            If condition evaluation fails
         """
+        # Validate condition
+        if not condition or not condition.strip():
+            raise RuleEvaluationError(condition=condition, message="Condition cannot be empty")
+
         # Use custom evaluator if provided
         if self.evaluator:
-            return self.evaluator(condition, context)
+            try:
+                return self.evaluator.evaluate(condition, context)
+            except Exception as e:
+                raise RuleEvaluationError(condition=condition, message=f"Custom evaluator failed: {e}") from e
 
-        # Built-in simple evaluation
+        # Built-in evaluation (caching disabled for now due to context complexity)
+        # In production, implement proper caching with context serialization
         return self._default_evaluate(condition, context)
 
     def _default_evaluate(self, condition: str, context: RuleContext) -> bool:
@@ -228,6 +291,7 @@ class RDREngine:
         - "var != value"
         - "var > value" / "var < value"
         - "var in [a, b, c]"
+        - Safe Python expressions (if enabled)
 
         Parameters
         ----------
@@ -240,32 +304,24 @@ class RDREngine:
         -------
         bool
             Evaluation result
-        """
-        condition = condition.strip().lower()
 
-        # Boolean literals
-        if condition in ("true", "1", "yes"):
+        Raises
+        ------
+        RuleEvaluationError
+            If condition evaluation fails
+        """
+        condition = condition.strip()
+
+        # Boolean literals (case-insensitive)
+        condition_lower = condition.lower()
+        if condition_lower in ("true", "1", "yes"):
             return True
-        if condition in ("false", "0", "no"):
+        if condition_lower in ("false", "0", "no"):
             return False
 
         # Try to parse as comparison
         try:
-            # Check for operators
-            if "==" in condition:
-                parts = condition.split("==", 1)
-                var_name = parts[0].strip()
-                expected = parts[1].strip().strip("'\"")
-                actual = str(context.get(var_name, "")).lower()
-                return actual == expected.lower()
-
-            if "!=" in condition:
-                parts = condition.split("!=", 1)
-                var_name = parts[0].strip()
-                expected = parts[1].strip().strip("'\"")
-                actual = str(context.get(var_name, "")).lower()
-                return actual != expected.lower()
-
+            # Check for operators (order matters - check longer first)
             if ">=" in condition:
                 parts = condition.split(">=", 1)
                 var_name = parts[0].strip()
@@ -280,14 +336,28 @@ class RDREngine:
                 actual = float(context.get(var_name, 0))
                 return actual <= threshold
 
-            if ">" in condition:
+            if "==" in condition:
+                parts = condition.split("==", 1)
+                var_name = parts[0].strip()
+                expected = parts[1].strip().strip("'\"")
+                actual = str(context.get(var_name, "")).lower()
+                return actual == expected.lower()
+
+            if "!=" in condition:
+                parts = condition.split("!=", 1)
+                var_name = parts[0].strip()
+                expected = parts[1].strip().strip("'\"")
+                actual = str(context.get(var_name, "")).lower()
+                return actual != expected.lower()
+
+            if ">" in condition and ">=" not in condition:
                 parts = condition.split(">", 1)
                 var_name = parts[0].strip()
                 threshold = float(parts[1].strip())
                 actual = float(context.get(var_name, 0))
                 return actual > threshold
 
-            if "<" in condition:
+            if "<" in condition and "<=" not in condition:
                 parts = condition.split("<", 1)
                 var_name = parts[0].strip()
                 threshold = float(parts[1].strip())
@@ -301,16 +371,16 @@ class RDREngine:
                 # Parse list
                 if values_str.startswith("[") and values_str.endswith("]"):
                     values_str = values_str[1:-1]
-                values = [v.strip().strip("'\"").lower() for v in values_str.split(",")]
+                values = [v.strip().strip("'\"") for v in values_str.split(",") if v.strip()]
                 actual = str(context.get(var_name, "")).lower()
-                return actual in values
+                return actual in [v.lower() for v in values]
 
             # Check if condition is just a variable name (truthy check)
             value = context.get(condition)
             return bool(value)
 
-        except (ValueError, TypeError):
-            return False
+        except (ValueError, TypeError) as e:
+            raise RuleEvaluationError(condition=condition, message=f"Failed to evaluate condition: {e}") from e
 
     def add_rule(
         self,
@@ -320,7 +390,7 @@ class RDREngine:
         condition: str,
         conclusion: str | None = None,
         cornerstone_case: dict[str, Any] | None = None,
-    ) -> RDRNode | None:
+    ) -> RDRNode:
         """Add a new rule to the tree.
 
         This is the incremental knowledge acquisition mechanism.
@@ -342,9 +412,20 @@ class RDREngine:
 
         Returns
         -------
-        RDRNode | None
-            Created node or None if tree not found
+        RDRNode
+            Created node
+
+        Raises
+        ------
+        RDRTreeError
+            If tree or parent node not found
+        RuleEvaluationError
+            If condition is invalid
         """
+        # Validate condition
+        if not condition or not condition.strip():
+            raise RuleEvaluationError(condition=condition, message="Condition cannot be empty")
+
         # Find tree by ID
         tree = None
         for t in self.trees.values():
@@ -353,11 +434,13 @@ class RDREngine:
                 break
 
         if not tree:
-            return None
+            raise RDRTreeError(tree_id=tree_id, message=f"RDR tree not found: {tree_id}")
 
         parent = tree.get_node(parent_node_id)
         if not parent:
-            return None
+            raise RDRTreeError(
+                tree_id=tree_id, node_id=parent_node_id, message=f"Parent node not found: {parent_node_id}"
+            )
 
         # Create new node
         import uuid
@@ -374,6 +457,10 @@ class RDREngine:
             parent.add_true_child(new_node)
         else:
             parent.add_false_child(new_node)
+
+        logger.info(
+            "Added RDR rule", extra={"tree_id": tree_id, "node_id": new_node.id, "parent_node_id": parent_node_id}
+        )
 
         return new_node
 

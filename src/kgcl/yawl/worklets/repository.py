@@ -6,15 +6,26 @@ RDR trees, and worklet case executions.
 
 from __future__ import annotations
 
-from collections.abc import Callable
+import logging
+from collections.abc import Iterator
 from dataclasses import dataclass, field
+from typing import TYPE_CHECKING
 
+from kgcl.yawl.worklets.exceptions import WorkletNotFoundError
 from kgcl.yawl.worklets.models import RDRTree, Worklet, WorkletCase, WorkletStatus, WorkletType
+
+if TYPE_CHECKING:
+    pass
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
 class WorkletRepository:
     """Repository for worklet storage and retrieval.
+
+    Provides in-memory storage with context manager support,
+    iterator access, and query builder patterns.
 
     Parameters
     ----------
@@ -24,11 +35,78 @@ class WorkletRepository:
         RDR trees by ID
     cases : dict[str, WorkletCase]
         Running worklet cases by ID
+
+    Examples
+    --------
+    >>> repo = WorkletRepository()
+    >>> with repo:
+    ...     repo.add_worklet(worklet)
+    ...     worklet = repo.get_worklet("wl-001")
+    >>> # Iterator support
+    >>> for worklet in repo:
+    ...     print(worklet.name)
+    >>> # Query builder
+    >>> query = repo.query_worklets()
+    ...     .filter_type(WorkletType.ITEM_EXCEPTION)
+    ...     .filter_enabled(True)
+    ...     .execute()
     """
 
     worklets: dict[str, Worklet] = field(default_factory=dict)
     trees: dict[str, RDRTree] = field(default_factory=dict)
     cases: dict[str, WorkletCase] = field(default_factory=dict)
+
+    def __enter__(self) -> WorkletRepository:
+        """Enter context manager."""
+        logger.debug("Entering repository context")
+        return self
+
+    def __exit__(self, exc_type: type[BaseException] | None, exc_val: BaseException | None, exc_tb: Any) -> bool:
+        """Exit context manager.
+
+        Parameters
+        ----------
+        exc_type : type[BaseException] | None
+            Exception type if raised
+        exc_val : BaseException | None
+            Exception value if raised
+        exc_tb : Any
+            Traceback if raised
+
+        Returns
+        -------
+        bool
+            False to propagate exceptions
+        """
+        if exc_type:
+            logger.error(
+                "Repository context exited with exception",
+                extra={"exc_type": exc_type.__name__},
+                exc_info=(exc_type, exc_val, exc_tb),
+            )
+        else:
+            logger.debug("Repository context exited normally")
+        return False  # Propagate exceptions
+
+    def __iter__(self) -> Iterator[Worklet]:
+        """Iterate over all worklets.
+
+        Returns
+        -------
+        Iterator[Worklet]
+            Iterator over worklets
+        """
+        return iter(self.worklets.values())
+
+    def __len__(self) -> int:
+        """Get total number of worklets.
+
+        Returns
+        -------
+        int
+            Number of worklets
+        """
+        return len(self.worklets)
 
     # --- Worklet management ---
 
@@ -39,7 +117,12 @@ class WorkletRepository:
         ----------
         worklet : Worklet
             Worklet to add
+
+        Examples
+        --------
+        >>> repo.add_worklet(Worklet(id="wl-001", name="Handler"))
         """
+        logger.debug("Adding worklet", extra={"worklet_id": worklet.id, "name": worklet.name})
         self.worklets[worklet.id] = worklet
 
     def get_worklet(self, worklet_id: str) -> Worklet | None:
@@ -54,8 +137,41 @@ class WorkletRepository:
         -------
         Worklet | None
             Worklet or None
+
+        Raises
+        ------
+        WorkletNotFoundError
+            If worklet not found and raise_if_missing=True
         """
-        return self.worklets.get(worklet_id)
+        worklet = self.worklets.get(worklet_id)
+        if worklet:
+            logger.debug("Retrieved worklet", extra={"worklet_id": worklet_id})
+        else:
+            logger.debug("Worklet not found", extra={"worklet_id": worklet_id})
+        return worklet
+
+    def require_worklet(self, worklet_id: str) -> Worklet:
+        """Get worklet by ID, raising if not found.
+
+        Parameters
+        ----------
+        worklet_id : str
+            Worklet ID
+
+        Returns
+        -------
+        Worklet
+            Worklet instance
+
+        Raises
+        ------
+        WorkletNotFoundError
+            If worklet not found
+        """
+        worklet = self.get_worklet(worklet_id)
+        if worklet is None:
+            raise WorkletNotFoundError(worklet_id=worklet_id, message=f"Worklet not found: {worklet_id}")
+        return worklet
 
     def remove_worklet(self, worklet_id: str) -> bool:
         """Remove worklet.
@@ -98,7 +214,32 @@ class WorkletRepository:
         if worklet_type:
             results = [w for w in results if w.worklet_type == worklet_type]
 
+        logger.debug(
+            "Found worklets",
+            extra={
+                "count": len(results),
+                "worklet_type": worklet_type.name if worklet_type else None,
+                "enabled_only": enabled_only,
+            },
+        )
         return results
+
+    def query_worklets(self) -> WorkletQueryBuilder:
+        """Create a query builder for worklets.
+
+        Returns
+        -------
+        WorkletQueryBuilder
+            Query builder instance
+
+        Examples
+        --------
+        >>> results = repo.query_worklets()
+        ...     .filter_type(WorkletType.ITEM_EXCEPTION)
+        ...     .filter_enabled(True)
+        ...     .execute()
+        """
+        return WorkletQueryBuilder(self)
 
     def list_worklets(self) -> list[Worklet]:
         """List all worklets.
@@ -300,4 +441,75 @@ class WorkletRepository:
         for case_id in to_remove:
             del self.cases[case_id]
 
+        logger.info(
+            "Cleaned up completed cases", extra={"removed_count": len(to_remove), "max_age_hours": max_age_hours}
+        )
         return len(to_remove)
+
+
+class WorkletQueryBuilder:
+    """Query builder for worklet searches.
+
+    Provides fluent interface for building complex queries.
+
+    Examples
+    --------
+    >>> builder = repo.query_worklets()
+    >>> results = builder.filter_type(WorkletType.ITEM_EXCEPTION).filter_enabled(True).execute()
+    """
+
+    def __init__(self, repository: WorkletRepository) -> None:
+        """Initialize query builder.
+
+        Parameters
+        ----------
+        repository : WorkletRepository
+            Repository to query
+        """
+        self._repository = repository
+        self._worklet_type: WorkletType | None = None
+        self._enabled_only: bool | None = None
+
+    def filter_type(self, worklet_type: WorkletType) -> WorkletQueryBuilder:
+        """Filter by worklet type.
+
+        Parameters
+        ----------
+        worklet_type : WorkletType
+            Type to filter by
+
+        Returns
+        -------
+        WorkletQueryBuilder
+            Self for chaining
+        """
+        self._worklet_type = worklet_type
+        return self
+
+    def filter_enabled(self, enabled: bool) -> WorkletQueryBuilder:
+        """Filter by enabled status.
+
+        Parameters
+        ----------
+        enabled : bool
+            Enabled status
+
+        Returns
+        -------
+        WorkletQueryBuilder
+            Self for chaining
+        """
+        self._enabled_only = enabled
+        return self
+
+    def execute(self) -> list[Worklet]:
+        """Execute the query.
+
+        Returns
+        -------
+        list[Worklet]
+            Matching worklets
+        """
+        return self._repository.find_worklets(
+            worklet_type=self._worklet_type, enabled_only=self._enabled_only if self._enabled_only is not None else True
+        )

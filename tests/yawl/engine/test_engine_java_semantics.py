@@ -70,7 +70,7 @@ class TestPetriNetTokenSemantics:
         net = YNet(id="main")
 
         start = YCondition(id="start", condition_type=ConditionType.INPUT)
-        task = YTask(id="A")
+        task = YAtomicTask(id="A")
         end = YCondition(id="end", condition_type=ConditionType.OUTPUT)
 
         net.add_condition(start)
@@ -106,7 +106,7 @@ class TestWorkItemLifecycle:
         net = YNet(id="main")
 
         start = YCondition(id="start", condition_type=ConditionType.INPUT)
-        task = YTask(id="A")
+        task = YAtomicTask(id="A")
         end = YCondition(id="end", condition_type=ConditionType.OUTPUT)
 
         net.add_condition(start)
@@ -137,7 +137,7 @@ class TestWorkItemLifecycle:
         net = YNet(id="main")
 
         start = YCondition(id="start", condition_type=ConditionType.INPUT)
-        task = YTask(id="A")
+        task = YAtomicTask(id="A")
         end = YCondition(id="end", condition_type=ConditionType.OUTPUT)
 
         net.add_condition(start)

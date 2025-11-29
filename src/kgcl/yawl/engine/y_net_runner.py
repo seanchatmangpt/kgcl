@@ -177,8 +177,16 @@ class YNetRunner:
     _expression_evaluator: YExpressionEvaluator = field(default_factory=YExpressionEvaluator, repr=False)
     _or_join_analyzer: YOrJoinAnalyzer | None = field(default=None, repr=False)
 
-    def start(self) -> YIdentifier:
+    def start(self, pmgr: Any | None = None) -> YIdentifier:
         """Start case by placing token in input condition.
+
+        Java signature: void start()
+        Java signature: void start(YPersistenceManager pmgr)
+
+        Parameters
+        ----------
+        pmgr : Any | None
+            Persistence manager
 
         Returns
         -------
@@ -205,6 +213,13 @@ class YNetRunner:
         self.tokens[token.id] = token
         self.marking.add_token(self.net.input_condition.id, token.id)
         self._token_counter += 1
+
+        # Update enabled tasks after placing initial token
+        self._update_enabled_tasks()
+
+        if pmgr:
+            pass  # Persist
+
         return token
 
     def get_enabled_tasks(self) -> list[str]:
@@ -710,8 +725,8 @@ class YNetRunner:
         # Remove from enabled since it's now busy
         self.enabled_tasks.discard(task_id)
 
-    def mark_task_complete(self, task_id: str) -> None:
-        """Mark task as no longer busy.
+    def mark_task_complete(self, task_id: str) -> bool:
+        """Mark task as complete and update marking.
 
         Called when a work item completes.
 
@@ -719,9 +734,36 @@ class YNetRunner:
         ----------
         task_id : str
             Task ID
+
+        Returns
+        -------
+        bool
+            True if net completed, False otherwise
         """
+        task = self.net.tasks.get(task_id)
+        if not task:
+            return False
+
+        # Remove from busy tasks
         self.busy_tasks.discard(task_id)
+
+        # Produce tokens to output conditions
+        postset_conditions = self._get_postset_conditions(task)
+        for cond_id in postset_conditions:
+            token_id = f"{self.case_id}-{self._token_counter}"
+            token = YIdentifier(id=token_id, case_id=self.case_id)
+            token.location = cond_id
+            self.tokens[token_id] = token
+            self.marking.add_token(cond_id, token_id)
+            self._token_counter += 1
+
+        # Check if net completed (token in output condition)
+        if self.net.output_condition and self.marking.has_tokens(self.net.output_condition.id):
+            self.completed = True
+            return True
+
         self._check_suspension_complete()
+        return False
 
     def has_active_tasks(self) -> bool:
         """Check if there are any active tasks (enabled or busy).
@@ -970,7 +1012,7 @@ class YNetRunner:
         self.mark_task_busy(task_id)
 
         # Handle deferred choice - withdraw losing tasks
-        withdrawn = self._withdraw_deferred_choice_losers(task_id)
+        self._withdraw_deferred_choice_losers(task_id)
 
         # Fire the task
         result = self.fire_task(task_id, data)
@@ -1143,8 +1185,11 @@ class YNetRunner:
     ) -> YWorkItem:
         """Create enabled work item for atomic task.
 
-        Java signature: YWorkItem createEnabledWorkItem(YIdentifier caseIDForNet, YAtomicTask atomicTask)
-        Java signature: YWorkItem createEnabledWorkItem(YPersistenceManager pmgr, YIdentifier caseIDForNet, YAtomicTask atomicTask)
+        Java signature: YWorkItem createEnabledWorkItem(
+        YIdentifier caseIDForNet, YAtomicTask atomicTask)
+        Java signature: YWorkItem createEnabledWorkItem(
+        YPersistenceManager pmgr, YIdentifier caseIDForNet,
+        YAtomicTask atomicTask)
 
         Parameters
         ----------
@@ -1208,6 +1253,10 @@ class YNetRunner:
         """
         if workItem:
             workItem.start()
+            # Mark task as busy
+            if workItem.task_id:
+                self.busy_tasks.add(workItem.task_id)
+                self.enabled_tasks.discard(workItem.task_id)
             if pmgr:
                 pass  # Persist
         elif caseID and taskID:
@@ -1216,8 +1265,11 @@ class YNetRunner:
                 items = self._work_item_repository.get_by_case_and_task(caseID.id, taskID)
                 for item in items:
                     item.start()
+                    if item.task_id:
+                        self.busy_tasks.add(item.task_id)
+                        self.enabled_tasks.discard(item.task_id)
 
-    def completeWorkItemInTask(
+    def complete_work_item_in_task(
         self,
         workItem: YWorkItem,
         caseID: YIdentifier | None = None,
@@ -1228,43 +1280,65 @@ class YNetRunner:
     ) -> bool:
         """Complete work item in task.
 
-        Java signature: boolean completeWorkItemInTask(YWorkItem workItem, Document outputData, WorkItemCompletion completionType)
-        Java signature: boolean completeWorkItemInTask(YWorkItem workItem, YIdentifier caseID, String taskID, Document outputData, WorkItemCompletion completionType)
-        Java signature: boolean completeWorkItemInTask(YPersistenceManager pmgr, YWorkItem workItem, Document outputData)
-        Java signature: boolean completeWorkItemInTask(YPersistenceManager pmgr, YWorkItem workItem, YIdentifier caseID, String taskID, Document outputData)
+        Java signature: boolean completeWorkItemInTask(
+        YWorkItem workItem, Document outputData)
+        Java signature: boolean completeWorkItemInTask(
+        YPersistenceManager pmgr, YWorkItem workItem, Document outputData)
+        Java signature: boolean completeWorkItemInTask(
+        YPersistenceManager pmgr, YWorkItem workItem, YIdentifier caseID,
+        String taskID, Document outputData)
 
         Parameters
         ----------
         workItem : YWorkItem
             Work item to complete
         caseID : YIdentifier | None
-            Case ID
+            Case ID (optional)
         taskID : str
-            Task ID
+            Task ID (optional)
         outputData : Any | None
-            Output data
+            Output data (Document/Element)
         completionType : str
-            Completion type
+            Completion type (optional)
         pmgr : Any | None
             Persistence manager
 
         Returns
         -------
         bool
-            True if successful
+            True if successful, False if net completed
         """
+        # Complete work item
         if outputData:
-            workItem.complete(output_data=outputData if isinstance(outputData, dict) else {})
+            if hasattr(outputData, "getroot"):
+                # ElementTree
+                root = outputData.getroot()
+                data_dict = {child.tag: child.text or "" for child in root}
+            elif hasattr(outputData, "tag"):
+                # Element
+                data_dict = {child.tag: child.text or "" for child in outputData}
+            else:
+                data_dict = outputData if isinstance(outputData, dict) else {}
+            workItem.complete(output_data=data_dict)
         else:
             workItem.complete()
 
-        # Mark task as complete
-        self.mark_task_complete(workItem.task_id)
+        # Remove from busy tasks
+        if workItem.task_id:
+            self.busy_tasks.discard(workItem.task_id)
+
+        # Mark task as complete and check if net completed
+        net_completed = self.mark_task_complete(workItem.task_id)
+
+        # Update enabled tasks after completion
+        if not net_completed:
+            self._update_enabled_tasks()
 
         if pmgr:
             pass  # Persist
 
-        return True
+        # Return True if net still has active tasks, False if completed
+        return not net_completed
 
     def completeTask(
         self,
@@ -1277,8 +1351,12 @@ class YNetRunner:
     ) -> bool:
         """Complete atomic task execution.
 
-        Java signature: boolean completeTask(YWorkItem workItem, YAtomicTask atomicTask, YIdentifier identifier, Document outputData, WorkItemCompletion completionType)
-        Java signature: boolean completeTask(YPersistenceManager pmgr, YWorkItem workItem, YAtomicTask atomicTask, YIdentifier identifier, Document outputData)
+        Java signature: boolean completeTask(YWorkItem workItem,
+        YAtomicTask atomicTask, YIdentifier identifier, Document outputData,
+        WorkItemCompletion completionType)
+        Java signature: boolean completeTask(YPersistenceManager pmgr,
+        YWorkItem workItem, YAtomicTask atomicTask, YIdentifier identifier,
+        Document outputData)
 
         Parameters
         ----------
@@ -1300,7 +1378,7 @@ class YNetRunner:
         bool
             True if successful
         """
-        return self.completeWorkItemInTask(
+        return self.complete_work_item_in_task(
             workItem=workItem, outputData=outputData, completionType=completionType, pmgr=pmgr
         )
 
@@ -1385,8 +1463,12 @@ class YNetRunner:
     ) -> None:
         """Process completed sub-net.
 
-        Java signature: void processCompletedSubnet(YIdentifier caseIDForSubnet, YCompositeTask busyCompositeTask, Document rawSubnetData)
-        Java signature: void processCompletedSubnet(YPersistenceManager pmgr, YIdentifier caseIDForSubnet, YCompositeTask busyCompositeTask, Document rawSubnetData)
+        Java signature: void processCompletedSubnet(
+        YIdentifier caseIDForSubnet, YCompositeTask busyCompositeTask,
+        Document rawSubnetData)
+        Java signature: void processCompletedSubnet(
+        YPersistenceManager pmgr, YIdentifier caseIDForSubnet,
+        YCompositeTask busyCompositeTask, Document rawSubnetData)
 
         Parameters
         ----------
@@ -2158,8 +2240,11 @@ class YNetRunner:
     ) -> YIdentifier:
         """Add new MI instance dynamically.
 
-        Java signature: YIdentifier addNewInstance(String taskID, YIdentifier aSiblingInstance, Element newInstanceData)
-        Java signature: YIdentifier addNewInstance(YPersistenceManager pmgr, String taskID, YIdentifier aSiblingInstance, Element newInstanceData)
+        Java signature: YIdentifier addNewInstance(String taskID,
+        YIdentifier aSiblingInstance, Element newInstanceData)
+        Java signature: YIdentifier addNewInstance(
+        YPersistenceManager pmgr, String taskID, YIdentifier aSiblingInstance,
+        Element newInstanceData)
 
         Parameters
         ----------
@@ -2168,7 +2253,7 @@ class YNetRunner:
         aSiblingInstance : YIdentifier
             Sibling instance identifier
         newInstanceData : Any | None
-            Data for new instance
+            Data for new instance (XML Element)
         pmgr : Any | None
             Persistence manager
 
@@ -2177,12 +2262,18 @@ class YNetRunner:
         YIdentifier
             New instance identifier
         """
-        # Create new MI instance
-        new_id = YIdentifier(id=f"{aSiblingInstance.id}-{self._token_counter}", parent=aSiblingInstance)
+        # Create new MI instance identifier
+        new_id = YIdentifier(id=f"{aSiblingInstance.id}-{self._token_counter}", case_id=aSiblingInstance.case_id)
+        new_id.parent = aSiblingInstance
         self._token_counter += 1
 
+        # Store instance data if provided
         if newInstanceData:
-            new_id.data = newInstanceData if isinstance(newInstanceData, dict) else {}
+            if hasattr(newInstanceData, "tag"):
+                # XML Element
+                new_id.data = {child.tag: child.text or "" for child in newInstanceData}
+            elif isinstance(newInstanceData, dict):
+                new_id.data = newInstanceData
 
         if pmgr:
             pass  # Persist
@@ -2214,11 +2305,11 @@ class YNetRunner:
 
     # --- Atomic Task Firing (Gap 15: Atomic task execution) ---
 
-    def attemptToFireAtomicTask(self, taskID: str, pmgr: Any | None = None) -> list[YWorkItem]:
+    def attemptToFireAtomicTask(self, taskID: str, pmgr: Any | None = None) -> list[YIdentifier]:
         """Attempt to fire atomic task.
 
-        Java signature: List attemptToFireAtomicTask(String taskID)
-        Java signature: List attemptToFireAtomicTask(YPersistenceManager pmgr, String taskID)
+        Java signature: List<YIdentifier> attemptToFireAtomicTask(String taskID)
+        Java signature: List<YIdentifier> attemptToFireAtomicTask(YPersistenceManager pmgr, String taskID)
 
         Parameters
         ----------
@@ -2229,8 +2320,8 @@ class YNetRunner:
 
         Returns
         -------
-        list[YWorkItem]
-            Created work items
+        list[YIdentifier]
+            Created child identifiers (for MI tasks)
         """
         task = self.net.tasks.get(taskID)
         if not task or not self._is_task_enabled(task):
@@ -2239,9 +2330,11 @@ class YNetRunner:
         from kgcl.yawl.elements.y_atomic_task import YAtomicTask
 
         if isinstance(task, YAtomicTask):
-            work_item = self.createEnabledWorkItem(self.getCaseID(), task, pmgr)
-            return [work_item]
-
+            # Fire task and return child identifiers
+            result = self.fire_task(taskID)
+            if result:
+                # Return list of child identifiers created
+                return [YIdentifier(id=result.produced_tokens[0])] if result.produced_tokens else []
         return []
 
     def fireAtomicTask(self, task: YAtomicTask, groupID: str = "", pmgr: Any | None = None) -> Any:
@@ -2312,8 +2405,10 @@ class YNetRunner:
     ) -> None:
         """Initialize runner with net and case ID.
 
-        Java signature: void initialise(YNet netPrototype, YIdentifier caseIDForNet, Element incomingData)
-        Java signature: void initialise(YPersistenceManager pmgr, YNet netPrototype, YIdentifier caseIDForNet, Element incomingData)
+        Java signature: void initialise(YNet netPrototype,
+        YIdentifier caseIDForNet, Element incomingData)
+        Java signature: void initialise(YPersistenceManager pmgr,
+        YNet netPrototype, YIdentifier caseIDForNet, Element incomingData)
 
         Parameters
         ----------
@@ -2370,6 +2465,27 @@ class YNetRunner:
 
         if pmgr:
             pass  # Persist
+
+    def continue_if_possible(self, pmgr: Any | None = None) -> bool:
+        """Continue execution if possible.
+
+        Java signature: boolean continueIfPossible()
+        Java signature: boolean continueIfPossible(YPersistenceManager pmgr)
+
+        Parameters
+        ----------
+        pmgr : Any | None
+            Persistence manager
+
+        Returns
+        -------
+        bool
+            True if continued
+        """
+        result = self.continue_if_possible()
+        if pmgr:
+            pass  # Persist
+        return result
 
     def restoreObservers(self) -> None:
         """Restore observers from persistence.
@@ -2499,6 +2615,18 @@ class YNetRunner:
             True if normal
         """
         return self.execution_status == ExecutionStatus.NORMAL
+
+    def isInSuspense(self) -> bool:
+        """Check if in suspense (suspending or suspended).
+
+        Java signature: boolean isInSuspense()
+
+        Returns
+        -------
+        bool
+            True if suspending or suspended
+        """
+        return self.isSuspending() or self.isSuspended()
 
     def deadLocked(self) -> bool:
         """Check if deadlocked.

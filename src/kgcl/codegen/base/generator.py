@@ -9,16 +9,19 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Generic, Protocol, TypeVar
-
-T = TypeVar("T")
+from typing import Any, Protocol
 
 
-class Parser(Protocol[T]):
+class Parser[T](Protocol):
     """Protocol for input parsers.
 
     Parsers are responsible for reading input files and converting them
     into structured metadata that generators can consume.
+
+    Type Parameters
+    ---------------
+    T
+        Type of parsed metadata
     """
 
     def parse(self, input_path: Path) -> T:
@@ -63,7 +66,7 @@ class GenerationResult:
     metadata: dict[str, Any]
 
 
-class BaseGenerator(ABC, Generic[T]):
+class BaseGenerator[T](ABC):
     """Abstract base generator for all code generation.
 
     This class implements the Template Method pattern, providing a standard
@@ -94,12 +97,7 @@ class BaseGenerator(ABC, Generic[T]):
     - _post_process: Post-generation processing
     """
 
-    def __init__(
-        self,
-        template_dir: Path,
-        output_dir: Path,
-        dry_run: bool = False,
-    ) -> None:
+    def __init__(self, template_dir: Path, output_dir: Path, dry_run: bool = False) -> None:
         """Initialize generator with configuration.
 
         Parameters
@@ -193,11 +191,7 @@ class BaseGenerator(ABC, Generic[T]):
         # 9. Build result metadata
         result_metadata = self._build_metadata(metadata, **kwargs)
 
-        return GenerationResult(
-            output_path=output_path,
-            source=source,
-            metadata=result_metadata,
-        )
+        return GenerationResult(output_path=output_path, source=source, metadata=result_metadata)
 
     @abstractmethod
     def _transform(self, metadata: T, **kwargs: Any) -> dict[str, Any]:
@@ -272,8 +266,13 @@ class BaseGenerator(ABC, Generic[T]):
         ------
         ValidationError
             If validation fails
+
+        Notes
+        -----
+        Default implementation performs no validation.
+        Subclasses can override to add validation logic.
         """
-        pass
+        return  # No validation by default
 
     def _post_process(self, source: str, metadata: T, **kwargs: Any) -> str:
         """Post-process generated code.

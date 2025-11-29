@@ -43,99 +43,41 @@ echo "Mode: Full validation before push"
 echo ""
 
 # ============================================================================
-# STEP 1: Implementation Lies Detector (Comprehensive)
+# HEAVY CHECKS: Implementation Lies, Lint, Type Check, Tests
 # ============================================================================
+# Uses poe task for standardized execution (Lean Six Sigma quality)
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "STEP 1: Implementation Lies Detection"
+echo "Running Pre-Push Heavy Checks"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
-
-echo -n "1.1 Comprehensive lies scan... "
-if [ -f "$REPO_ROOT/scripts/detect_implementation_lies.py" ]; then
-  LIES_OUTPUT="$(timeout 30s uv run python "$REPO_ROOT/scripts/detect_implementation_lies.py" --warnings-as-errors 2>&1 || true)"
-  LIES_EXIT_CODE=$?
-
-  if [ $LIES_EXIT_CODE -ne 0 ]; then
-    echo -e "${RED}✗ FAILED${NC}"
-    echo "   Implementation lies detected in codebase."
-    echo ""
-    echo "$LIES_OUTPUT" | tail -40
-    echo ""
-    FAILED=1
-  else
-    echo -e "${GREEN}✓ PASSED${NC}"
-  fi
-else
-  echo -e "${BLUE}⊘ SKIPPED${NC} (detector not found)"
-fi
-
+echo "Sequence: detect-lies → lint-check → type-check → test-timeout"
 echo ""
 
-# ============================================================================
-# STEP 2: Full Lint Check
-# ============================================================================
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "STEP 2: Full Lint Check"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo ""
+HEAVY_OUTPUT=$(timeout 120s uv run poe pre-push-heavy 2>&1)
+HEAVY_EXIT=$?
 
-echo -n "2.1 Ruff lint (all files)... "
-LINT_OUTPUT="$(timeout 30s uv run ruff check --no-fix src/ tests/ 2>&1 || true)"
-if echo "$LINT_OUTPUT" | grep -qE 'Found [1-9][0-9]* error'; then
-  echo -e "${RED}✗ FAILED${NC}"
+if [ $HEAVY_EXIT -eq 0 ]; then
   echo ""
-  echo "$LINT_OUTPUT" | head -30
+  echo -e "${GREEN}✓ All checks passed${NC}"
+else
+  echo ""
+  echo -e "${RED}✗ Checks failed${NC}"
+  echo ""
+  echo "🔧 How to fix:"
+  echo "   1. Fix lies:  Complete all TODO/FIXME markers"
+  echo "   2. Fix lint:  uv run poe lint"
+  echo "   3. Fix types: uv run poe type-check"
+  echo "   4. Fix tests: uv run poe test"
+  echo "   5. Verify:    uv run poe pre-push-heavy"
+  echo ""
+  echo "📊 What failed:"
+  echo "$HEAVY_OUTPUT" | grep -E "(ERROR|FAILED|error)" | head -10
+  echo ""
+  echo "📚 See: docs/patterns/ERROR_HANDLING.md"
+  echo "        docs/patterns/TYPE_SAFETY.md"
+  echo "        docs/quality/FMEA.md"
   echo ""
   FAILED=1
-else
-  echo -e "${GREEN}✓ PASSED${NC}"
-fi
-
-echo ""
-
-# ============================================================================
-# STEP 3: Mypy Strict Type Checking
-# ============================================================================
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "STEP 3: Mypy Type Checking (Strict Mode)"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo ""
-
-# RESEARCH LIBRARY: Mypy check skipped until refactoring complete
-# The codebase needs bulk type annotations added - tracked for refactoring
-echo -n "3.1 Mypy check... "
-echo -e "${BLUE}⊘ SKIPPED${NC} (pending refactoring)"
-
-echo ""
-
-# ============================================================================
-# STEP 4: Full Test Suite
-# ============================================================================
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "STEP 4: Full Test Suite (PYTHONWARNINGS=error)"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo ""
-
-echo -n "4.1 Running pytest... "
-TEST_OUTPUT="$(timeout 120s uv run pytest tests/ -W error --strict-markers -q 2>&1 || true)"
-TEST_EXIT_CODE=$?
-
-if [ $TEST_EXIT_CODE -ne 0 ]; then
-  echo -e "${RED}✗ FAILED${NC}"
-  echo ""
-  echo "$TEST_OUTPUT" | tail -40
-  echo ""
-  FAILED=1
-elif echo "$TEST_OUTPUT" | grep -qE '[0-9]+ failed'; then
-  echo -e "${RED}✗ FAILED${NC}"
-  echo ""
-  echo "$TEST_OUTPUT" | tail -20
-  echo ""
-  FAILED=1
-else
-  PASSED=$(echo "$TEST_OUTPUT" | grep -oE '[0-9]+ passed' | head -1 || echo "0 passed")
-  SKIPPED=$(echo "$TEST_OUTPUT" | grep -oE '[0-9]+ skipped' | head -1 || echo "0 skipped")
-  echo -e "${GREEN}✓ PASSED${NC} ($PASSED, $SKIPPED)"
 fi
 
 echo ""
@@ -166,9 +108,10 @@ else
   echo -e "${RED}CRITICAL: Push blocked to prevent corrupting the project.${NC}"
   echo ""
   echo "Fix issues before pushing:"
-  echo "  uv run ruff check --fix src/ tests/   # Fix lint"
-  echo "  uv run mypy src/ --strict             # Fix types"
-  echo "  uv run pytest tests/ -W error         # Fix tests"
+  echo "  uv run poe lint           # Fix lint issues"
+  echo "  uv run poe type-check     # Fix type errors"
+  echo "  uv run poe test           # Fix test failures"
+  echo "  uv run poe pre-push-heavy # Run all checks"
   echo ""
   exit 1
 fi

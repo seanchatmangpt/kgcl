@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 from collections import deque
+from collections.abc import Iterator, Sequence
 from dataclasses import dataclass, field
 from datetime import datetime
 from threading import RLock
-from typing import Iterator, Sequence
 
 from kgcl.hybrid.temporal.domain.event import WorkflowEvent
 from kgcl.hybrid.temporal.ports.event_store_port import AppendResult, QueryResult

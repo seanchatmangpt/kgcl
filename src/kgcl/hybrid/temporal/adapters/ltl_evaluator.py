@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import time
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Callable
 
 from kgcl.hybrid.temporal.domain.event import WorkflowEvent
 from kgcl.hybrid.temporal.domain.ltl_formula import LTLFormula, LTLOperator, LTLResult

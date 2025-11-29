@@ -210,7 +210,7 @@ class EYEReasoner:
             return ReasoningResult(
                 success=True, output=result.stdout, error=None, duration_ms=duration, command=cmd_str
             )
-        except subprocess.TimeoutExpired as e:
+        except subprocess.TimeoutExpired:
             duration = (time.perf_counter() - start) * 1000
             msg = f"EYE reasoning timed out after {self.config.timeout_seconds}s"
             # Return failed result instead of raising to allow caller to handle

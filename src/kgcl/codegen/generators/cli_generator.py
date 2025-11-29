@@ -121,15 +121,9 @@ class RdfCliParser:
         commands = self._extract_commands(graph)
         root_node = CLI["KgctRoot"]
         root_name = str(graph.value(subject=root_node, predicate=CLI.name, default="kgct"))
-        root_help = str(
-            graph.value(subject=root_node, predicate=CLI.help, default="KGC Technician Console")
-        )
+        root_help = str(graph.value(subject=root_node, predicate=CLI.help, default="KGC Technician Console"))
 
-        return CliMetadata(
-            root_name=root_name,
-            root_help=root_help,
-            commands=commands,
-        )
+        return CliMetadata(root_name=root_name, root_help=root_help, commands=commands)
 
     def _extract_commands(self, graph: Graph) -> list[CliCommand]:
         """Extract command definitions from RDF graph."""
@@ -177,7 +171,7 @@ class RdfCliParser:
         return str(value)
 
 
-class CliGenerator(BaseGenerator[CliMetadata]):
+class CliGenerator(BaseGenerator[CliMetadata]):  # noqa: UP046
     """Generate Typer CLI applications from RDF ontologies.
 
     This generator reads CLI command definitions from RDF/Turtle files
@@ -186,22 +180,13 @@ class CliGenerator(BaseGenerator[CliMetadata]):
     Examples
     --------
     >>> from pathlib import Path
-    >>> generator = CliGenerator(
-    ...     template_dir=Path("templates/cli"),
-    ...     output_dir=Path("src/personal_kgcl"),
-    ... )
+    >>> generator = CliGenerator(template_dir=Path("templates/cli"), output_dir=Path("src/personal_kgcl"))
     >>> result = generator.generate(Path(".kgc/cli.ttl"))
     >>> print(result.output_path)
     src/personal_kgcl/cli.py
     """
 
-    def __init__(
-        self,
-        template_dir: Path,
-        output_dir: Path,
-        dry_run: bool = False,
-        app_version: str = "0.0.0",
-    ) -> None:
+    def __init__(self, template_dir: Path, output_dir: Path, dry_run: bool = False, app_version: str = "0.0.0") -> None:
         """Initialize CLI generator.
 
         Parameters
@@ -245,10 +230,7 @@ class CliGenerator(BaseGenerator[CliMetadata]):
             "generated_at": datetime.now(UTC).isoformat(),
             "kgc_ontology_path": str(cli_ontology_path),
             "cli_ontology_path": str(cli_ontology_path),
-            "root_command": {
-                "name": metadata.root_name,
-                "help": metadata.root_help,
-            },
+            "root_command": {"name": metadata.root_name, "help": metadata.root_help},
             "commands": metadata.commands,
             "app_version": self.app_version,
         }
@@ -307,10 +289,7 @@ class CliGenerator(BaseGenerator[CliMetadata]):
         dict[str, Any]
             Result metadata
         """
-        return {
-            "num_commands": len(metadata.commands),
-            "commands": [cmd.name for cmd in metadata.commands],
-        }
+        return {"num_commands": len(metadata.commands), "commands": [cmd.name for cmd in metadata.commands]}
 
 
 def generate_cli_module(
@@ -347,18 +326,10 @@ def generate_cli_module(
     output_dir = (output_path or Path("src/personal_kgcl")).parent
 
     # Create generator
-    generator = CliGenerator(
-        template_dir=template_dir,
-        output_dir=output_dir,
-        dry_run=dry_run,
-    )
+    generator = CliGenerator(template_dir=template_dir, output_dir=output_dir, dry_run=dry_run)
 
     # Generate CLI
-    return generator.generate(
-        cli_ttl_path,
-        output_path=output_path,
-        cli_ontology_path=cli_ttl_path,
-    )
+    return generator.generate(cli_ttl_path, output_path=output_path, cli_ontology_path=cli_ttl_path)
 
 
 def main() -> None:
@@ -371,11 +342,4 @@ if __name__ == "__main__":
     main()
 
 
-__all__ = [
-    "CliCommand",
-    "CliParam",
-    "CliMetadata",
-    "CliGenerator",
-    "RdfCliParser",
-    "generate_cli_module",
-]
+__all__ = ["CliCommand", "CliParam", "CliMetadata", "CliGenerator", "RdfCliParser", "generate_cli_module"]

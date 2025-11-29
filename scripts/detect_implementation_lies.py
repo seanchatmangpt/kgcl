@@ -138,9 +138,15 @@ TEMPORAL_DEFERRAL_PATTERNS = [
 class ImplementationLiesDetector:
     """Detect implementation lies in Python code."""
 
-    def __init__(self, verbose: bool = False) -> None:
-        """Initialize detector."""
+    def __init__(self, verbose: bool = False, strict_mode: bool = True) -> None:
+        """Initialize detector.
+
+        Args:
+            verbose: Enable verbose output
+            strict_mode: True = block TODO/FIXME (main branch), False = allow (feature branch)
+        """
         self.verbose = verbose
+        self.strict_mode = strict_mode
         self._deferred_patterns = [
             (re.compile(p, re.IGNORECASE), msg) for p, msg in DEFERRED_WORK_PATTERNS
         ]
@@ -184,35 +190,41 @@ class ImplementationLiesDetector:
         if "pragma: allowlist" in line.lower():
             return lies
 
-        # Category 1: Deferred work comments
-        for pattern, message in self._deferred_patterns:
-            if pattern.search(line):
-                lies.append(
-                    ImplementationLie(
-                        file_path=str(file_path),
-                        line_number=line_num,
-                        category=LieCategory.DEFERRED_WORK,
-                        pattern=message,
-                        code_snippet=line,
-                        severity="ERROR",
+        # Category 1: Deferred work comments (BRANCH-AWARE)
+        # On feature branches: TODO/FIXME/WIP allowed (work in progress)
+        # On main/master: BLOCKED (zero-defect quality gate)
+        if self.strict_mode:  # main/master branch - strict enforcement
+            for pattern, message in self._deferred_patterns:
+                if pattern.search(line):
+                    lies.append(
+                        ImplementationLie(
+                            file_path=str(file_path),
+                            line_number=line_num,
+                            category=LieCategory.DEFERRED_WORK,
+                            pattern=message,
+                            code_snippet=line,
+                            severity="ERROR",
+                        )
                     )
-                )
-                break  # One match per line for this category
+                    break  # One match per line for this category
+        # else: feature branch - TODO/FIXME/WIP allowed for WIP
 
-        # Category 7: Temporal deferral phrases
-        for pattern, message in self._temporal_patterns:
-            if pattern.search(line):
-                lies.append(
-                    ImplementationLie(
-                        file_path=str(file_path),
-                        line_number=line_num,
-                        category=LieCategory.TEMPORAL_DEFERRAL,
-                        pattern=message,
-                        code_snippet=line,
-                        severity="ERROR",
+        # Category 7: Temporal deferral phrases (BRANCH-AWARE)
+        if self.strict_mode:  # main/master branch - strict enforcement
+            for pattern, message in self._temporal_patterns:
+                if pattern.search(line):
+                    lies.append(
+                        ImplementationLie(
+                            file_path=str(file_path),
+                            line_number=line_num,
+                            category=LieCategory.TEMPORAL_DEFERRAL,
+                            pattern=message,
+                            code_snippet=line,
+                            severity="ERROR",
+                        )
                     )
-                )
-                break  # One match per line for this category
+                    break  # One match per line for this category
+        # else: feature branch - temporal deferral allowed for WIP
 
         return lies
 
@@ -520,6 +532,26 @@ class ImplementationLiesDetector:
             yield path
 
 
+def is_main_branch() -> bool:
+    """Check if current branch is main/master (strict mode).
+
+    Returns:
+        True if on main/master branch, False otherwise (feature branch).
+    """
+    try:
+        result = subprocess.run(
+            ["git", "rev-parse", "--abbrev-ref", "HEAD"],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        branch = result.stdout.strip()
+        return branch in ("main", "master")
+    except subprocess.CalledProcessError:
+        # If not in git repo or error, default to strict mode (safe)
+        return True
+
+
 def get_staged_files() -> list[Path]:
     """Get list of staged Python files from git."""
     try:
@@ -568,7 +600,11 @@ def main() -> int:
 
     args = parser.parse_args()
 
-    detector = ImplementationLiesDetector(verbose=args.verbose)
+    # Branch-aware validation: strict on main/master, relaxed on feature branches
+    strict_mode = is_main_branch()
+    branch_mode = "STRICT (main/master)" if strict_mode else "RELAXED (feature branch)"
+
+    detector = ImplementationLiesDetector(verbose=args.verbose, strict_mode=strict_mode)
 
     if args.staged:
         files = get_staged_files()
@@ -599,6 +635,7 @@ def main() -> int:
     print("=" * 70)
     print("IMPLEMENTATION LIES DETECTOR - Lean Six Sigma Quality Gate")
     print("=" * 70)
+    print(f"Mode: {branch_mode}")
     print(f"Files scanned: {result.files_scanned}")
     print()
 

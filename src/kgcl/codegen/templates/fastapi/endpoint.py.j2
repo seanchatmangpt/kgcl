@@ -1,0 +1,33 @@
+"""{{ description }}"""
+from __future__ import annotations
+
+from typing import Any
+
+from fastapi import APIRouter, HTTPException
+
+
+router = APIRouter(prefix="/{{ prefix }}", tags=["{{ tag }}"])
+
+
+@router.{{ http_method }}("{{ path }}")
+async def {{ function_name }}({{ parameters }}) -> {{ return_type }}:
+    """{{ description }}
+
+    Parameters
+    ----------
+    {{ param_docs }}
+
+    Returns
+    -------
+    {{ return_type }}
+        {{ return_description }}
+
+    Raises
+    ------
+    HTTPException
+        On error conditions
+    """
+    try:
+        {{ implementation }}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e)) from e

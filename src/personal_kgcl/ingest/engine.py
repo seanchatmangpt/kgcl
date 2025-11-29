@@ -51,4 +51,3 @@ class AppleIngestEngine:
             output_path=output_path,
             report=report,
         )
-

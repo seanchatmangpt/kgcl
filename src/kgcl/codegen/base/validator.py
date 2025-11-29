@@ -30,10 +30,7 @@ class Validator:
     """
 
     def __init__(
-        self,
-        max_line_length: int = 120,
-        require_type_hints: bool = True,
-        require_docstrings: bool = True,
+        self, max_line_length: int = 120, require_type_hints: bool = True, require_docstrings: bool = True
     ) -> None:
         """Initialize validator with configuration.
 
@@ -179,10 +176,7 @@ class Validator:
             # Remove trailing whitespace for check
             clean_line = line.rstrip()
             if len(clean_line) > self.max_line_length:
-                msg = (
-                    f"Line {i} exceeds {self.max_line_length} characters "
-                    f"({len(clean_line)} chars)"
-                )
+                msg = f"Line {i} exceeds {self.max_line_length} characters ({len(clean_line)} chars)"
                 raise ValidationError(msg)
 
     def _check_imports(self, tree: ast.Module) -> None:
@@ -220,7 +214,7 @@ class Validator:
             # Allow module docstring and __future__ before imports
             allowed_before = ["Expr", "ImportFrom"]  # Docstring or __future__
 
-            for i, node in enumerate(tree.body):
+            for _i, node in enumerate(tree.body):
                 if node.lineno >= first_import_line:
                     break
                 if type(node).__name__ not in allowed_before:

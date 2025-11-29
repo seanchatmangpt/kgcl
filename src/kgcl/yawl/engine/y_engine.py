@@ -7,10 +7,11 @@ managing specifications, cases, work items, and resources.
 from __future__ import annotations
 
 import uuid
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from enum import Enum, auto
-from typing import TYPE_CHECKING, Any, Callable
+from typing import TYPE_CHECKING, Any
 
 from kgcl.yawl.elements.y_identifier import YIdentifier
 from kgcl.yawl.elements.y_specification import SpecificationStatus, YSpecification

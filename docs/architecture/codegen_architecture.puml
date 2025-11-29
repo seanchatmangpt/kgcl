@@ -1,0 +1,315 @@
+@startuml Unified Code Generation Architecture
+
+!define RECTANGLE class
+
+title KGCL Unified Code Generation Architecture\nADR-003 Implementation
+
+' Color scheme
+!define BASE_COLOR #E1F5FE
+!define GENERATOR_COLOR #C8E6C9
+!define PARSER_COLOR #FFE082
+!define VALIDATOR_COLOR #FFCCBC
+!define TEMPLATE_COLOR #F8BBD0
+
+' Base Framework Layer
+package "src/kgcl/codegen/base" as base <<Rectangle>> BASE_COLOR {
+    abstract class BaseGenerator {
+        + parser: Parser
+        + template_engine: TemplateEngine
+        + validator: CodeValidator
+        + output_dir: Path
+        --
+        + {abstract} generate(input_path: Path): GenerationResult
+        + validate(result: GenerationResult): bool
+        # _write_and_validate(): GenerationResult
+        # _auto_format(file_path: Path): None
+    }
+
+    interface Parser <<protocol>> {
+        + parse(input_path: Path): Any
+    }
+
+    class TemplateEngine {
+        + template_dir: Path
+        + env: Environment
+        --
+        + render(template_name: str, context: dict): str
+        + render_string(template_str: str, context: dict): str
+        - _register_filters(): None
+        - _to_snake_case(name: str): str
+        - _to_camel_case(name: str): str
+        - _to_pascal_case(name: str): str
+    }
+
+    class GeneratorRegistry {
+        - _generators: dict[str, type[BaseGenerator]]
+        --
+        + {static} register(name: str): decorator
+        + {static} get(name: str): type[BaseGenerator]
+        + {static} list_generators(): list[str]
+    }
+
+    class GenerationResult <<frozen dataclass>> {
+        + output_path: Path
+        + source: str
+        + metadata: dict[str, Any]
+        + validation: ValidationResult | None
+    }
+}
+
+BaseGenerator --> Parser : uses
+BaseGenerator --> TemplateEngine : uses
+BaseGenerator ..> GenerationResult : creates
+
+' Generators Layer
+package "src/kgcl/codegen/generators" as generators <<Rectangle>> GENERATOR_COLOR {
+    class CLIGenerator {
+        + mapper: RDFToPythonMapper
+        --
+        + generate(input_path: Path): GenerationResult
+    }
+
+    class JavaPythonGenerator {
+        + mapper: JavaToPythonMapper
+        --
+        + generate(input_path: Path): GenerationResult
+    }
+
+    class ReactGenerator {
+        + mapper: JavaToReactMapper
+        --
+        + generate(input_path: Path): GenerationResult
+    }
+
+    class ProjectionGenerator {
+        + projection_engine: ProjectionEngine
+        --
+        + generate(template_name: str, params: dict): GenerationResult
+    }
+
+    class OpenAPIGenerator {
+        + mapper: OpenAPIToFastAPIMapper
+        --
+        + generate(input_path: Path): GenerationResult
+    }
+}
+
+CLIGenerator --|> BaseGenerator
+JavaPythonGenerator --|> BaseGenerator
+ReactGenerator --|> BaseGenerator
+ProjectionGenerator --|> BaseGenerator
+OpenAPIGenerator --|> BaseGenerator
+
+GeneratorRegistry ..> CLIGenerator : registers
+GeneratorRegistry ..> JavaPythonGenerator : registers
+GeneratorRegistry ..> ReactGenerator : registers
+GeneratorRegistry ..> ProjectionGenerator : registers
+GeneratorRegistry ..> OpenAPIGenerator : registers
+
+' Parsers Layer
+package "src/kgcl/codegen/parsers" as parsers <<Rectangle>> PARSER_COLOR {
+    class RDFParser {
+        + parse(input_path: Path): Graph
+        - _load_graph(path: Path): Graph
+    }
+
+    class JavaParser {
+        + parse(input_path: Path): JavaClass
+        - _extract_fields(class_node): list[JavaField]
+        - _extract_methods(class_node): list[JavaMethod]
+    }
+
+    class OpenAPIParser {
+        + parse(input_path: Path): OpenAPISpec
+        - _parse_paths(spec: dict): list[Path]
+        - _parse_schemas(spec: dict): list[Schema]
+    }
+}
+
+RDFParser ..|> Parser
+JavaParser ..|> Parser
+OpenAPIParser ..|> Parser
+
+CLIGenerator --> RDFParser : uses
+JavaPythonGenerator --> JavaParser : uses
+ReactGenerator --> JavaParser : uses
+OpenAPIGenerator --> OpenAPIParser : uses
+
+' Validators Layer
+package "src/kgcl/codegen/validators" as validators <<Rectangle>> VALIDATOR_COLOR {
+    class CodeValidator {
+        + strict: bool
+        --
+        + validate_python(file_path: Path): ValidationResult
+        + validate_syntax(file_path: Path): tuple[bool, list[str]]
+        + validate_types(file_path: Path): tuple[bool, list[str]]
+        + validate_lint(file_path: Path): tuple[bool, list[str], list[str]]
+        + validate_imports(file_path: Path): tuple[bool, list[str]]
+        + validate_all(output_dir: Path): dict[Path, ValidationResult]
+    }
+
+    class SyntaxValidator {
+        + validate(source: str): tuple[bool, list[str]]
+    }
+
+    class TypeValidator {
+        + validate(file_path: Path): tuple[bool, list[str]]
+    }
+
+    class LintValidator {
+        + validate(file_path: Path): tuple[bool, list[str], list[str]]
+    }
+
+    class TestValidator {
+        + validate(test_dir: Path, min_coverage: float): tuple[bool, list[str]]
+    }
+
+    class ValidationResult <<frozen dataclass>> {
+        + passed: bool
+        + errors: list[str]
+        + warnings: list[str]
+        + file_path: Path
+        + metrics: dict[str, Any]
+    }
+}
+
+CodeValidator ..> ValidationResult : creates
+CodeValidator --> SyntaxValidator : delegates
+CodeValidator --> TypeValidator : delegates
+CodeValidator --> LintValidator : delegates
+CodeValidator --> TestValidator : delegates
+
+BaseGenerator --> CodeValidator : uses
+
+' Mappers Layer
+package "src/kgcl/codegen/mappers" as mappers <<Rectangle>> {
+    abstract class TypeMapper {
+        + {abstract} map_type(source_type: str): str
+    }
+
+    class JavaToPythonMapper {
+        + map_type(java_type: str): str
+        + map_class(java_class: JavaClass): PythonClass
+        - _map_method(java_method: JavaMethod): PythonMethod
+    }
+
+    class RDFToPythonMapper {
+        + map_type(rdf_type: str): str
+        + extract_cli_spec(graph: Graph): CLISpec
+    }
+
+    class OpenAPIToFastAPIMapper {
+        + map_type(openapi_type: str): str
+        + map_operation(operation: Operation): FastAPIRoute
+    }
+}
+
+JavaToPythonMapper --|> TypeMapper
+RDFToPythonMapper --|> TypeMapper
+OpenAPIToFastAPIMapper --|> TypeMapper
+
+JavaPythonGenerator --> JavaToPythonMapper : uses
+CLIGenerator --> RDFToPythonMapper : uses
+OpenAPIGenerator --> OpenAPIToFastAPIMapper : uses
+
+' Templates Layer
+package "src/kgcl/codegen/templates" as templates <<Rectangle>> TEMPLATE_COLOR {
+    folder "cli/" {
+        file typer_cli.py.j2
+    }
+    folder "python/" {
+        file client.py.j2
+        file model.py.j2
+        file test.py.j2
+        file fastapi_endpoint.py.j2
+    }
+    folder "react/" {
+        file component.tsx.j2
+        file test.tsx.j2
+    }
+    folder "typescript/" {
+        file interface.ts.j2
+        file type.ts.j2
+    }
+}
+
+TemplateEngine --> templates : loads
+
+' CLI Entry Point
+package "src/kgcl/codegen" as cli_package {
+    class CLI {
+        + generate(generator: str, ...): None
+        + list_generators(): None
+        + validate(path: Path): int
+    }
+}
+
+CLI --> GeneratorRegistry : queries
+CLI ..> BaseGenerator : instantiates
+
+' External Dependencies
+package "External Dependencies" {
+    class Jinja2 {
+        Environment
+        FileSystemLoader
+        Template
+    }
+
+    class rdflib {
+        Graph
+        Namespace
+    }
+
+    class javalang {
+        parse()
+        tree
+    }
+
+    class mypy {
+        --strict
+    }
+
+    class ruff {
+        check
+        format
+    }
+}
+
+TemplateEngine --> Jinja2 : uses
+RDFParser --> rdflib : uses
+JavaParser --> javalang : uses
+TypeValidator --> mypy : executes
+LintValidator --> ruff : executes
+
+' Notes
+note right of BaseGenerator
+  All generators inherit from BaseGenerator
+  and get automatic:
+  - Template rendering
+  - Code validation
+  - Auto-formatting
+  - Error handling
+end note
+
+note right of GeneratorRegistry
+  Self-registering pattern via decorator:
+  @GeneratorRegistry.register("name")
+  class MyGenerator(BaseGenerator): ...
+end note
+
+note right of CodeValidator
+  Enforces KGCL standards:
+  - 100% type coverage
+  - All 400+ Ruff rules
+  - No relative imports
+  - NumPy docstrings
+end note
+
+note right of TemplateEngine
+  Unified Jinja2 configuration:
+  - Standardized filters
+  - Consistent whitespace
+  - Strict undefined behavior
+end note
+
+@enduml

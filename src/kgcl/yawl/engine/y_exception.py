@@ -6,10 +6,11 @@ including retry, skip, escalate, and worklet invocation.
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum, auto
-from typing import TYPE_CHECKING, Any, Callable
+from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     from kgcl.yawl.engine.y_case import YCase

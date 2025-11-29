@@ -14,11 +14,12 @@ import json
 import zlib
 from bisect import bisect_left
 from collections import deque
+from collections.abc import Iterator, Sequence
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from pathlib import Path
 from threading import RLock
-from typing import Any, Iterator, Sequence
+from typing import Any
 from uuid import uuid4
 
 from kgcl.hybrid.temporal.domain.event import WorkflowEvent
@@ -226,7 +227,7 @@ class TieredEventStore:
             # Check cold tier
             for snapshot in reversed(self._snapshots):
                 events = snapshot.decompress()
-                for event, event_seq in events:
+                for event, _event_seq in events:
                     if event.event_id == event_id:
                         return event
 

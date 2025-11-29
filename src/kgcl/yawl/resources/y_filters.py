@@ -9,10 +9,11 @@ Implements YAWL's resource filters including:
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum, auto
-from typing import Any, Callable
+from typing import Any
 
 
 class FilterType(Enum):

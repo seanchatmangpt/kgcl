@@ -59,15 +59,22 @@ echo -e "${BLUE}⊘ SKIPPED${NC} (research library)"
 # ============================================================================
 # Uses poe task for standardized execution (Lean Six Sigma quality)
 echo -n "2. Pre-commit checks (format, lint, lies)... "
-if timeout 10s uv run poe pre-commit-fast >/dev/null 2>&1; then
-  echo -e "${GREEN}✓${NC}"
+PRE_COMMIT_OUTPUT=$(timeout 10s uv run poe pre-commit-fast 2>&1)
+if [ $? -eq 0 ]; then
+  echo -e "${GREEN}✓ PASSED${NC}"
 else
   echo -e "${RED}✗ FAILED${NC}"
   echo ""
-  echo "   Run these commands to fix:"
-  echo "   - Format: uv run poe format"
-  echo "   - Lint:   uv run poe lint"
-  echo "   - Check:  uv run poe pre-commit-fast"
+  echo "🔧 How to fix:"
+  echo "   1. Run format: uv run poe format"
+  echo "   2. Run lint:   uv run poe lint"
+  echo "   3. Verify:     uv run poe pre-commit-fast"
+  echo ""
+  echo "📊 What failed:"
+  echo "$PRE_COMMIT_OUTPUT" | grep -E "(ERROR|Would reformat|Found.*error)" | head -5
+  echo ""
+  echo "📚 See: docs/patterns/ERROR_HANDLING.md"
+  echo "        docs/patterns/TYPE_SAFETY.md"
   echo ""
   FAILED=1
 fi
@@ -75,15 +82,26 @@ fi
 echo ""
 
 # ============================================================================
-# VERDICT
+# ANDON SIGNAL - VERDICT
 # ============================================================================
 if [ "$FAILED" -eq 0 ]; then
-  echo -e "${GREEN}✓ Pre-commit passed${NC} (heavy tests run on push)"
+  echo -e "${GREEN}╔════════════════════════════════════════════╗${NC}"
+  echo -e "${GREEN}║  ✓ PRE-COMMIT PASSED                       ║${NC}"
+  echo -e "${GREEN}╚════════════════════════════════════════════╝${NC}"
+  echo ""
+  echo "Quality gate: CLEAR ✅"
+  echo "Heavy validation runs on pre-push (mypy, full tests)"
   exit 0
 else
-  echo -e "${RED}✗ Pre-commit failed${NC}"
+  echo -e "${RED}╔════════════════════════════════════════════╗${NC}"
+  echo -e "${RED}║  ✗ ANDON CORD PULLED - COMMIT BLOCKED      ║${NC}"
+  echo -e "${RED}╚════════════════════════════════════════════╝${NC}"
   echo ""
-  echo "Fix issues and re-stage files before committing."
-  echo "Heavy tests (mypy strict, full pytest) run on pre-push."
+  echo "🔴 Quality gate: STOP"
+  echo ""
+  echo "Lean Six Sigma principle: Fix defects immediately, don't defer."
+  echo "Fix all issues above, then re-stage and commit."
+  echo ""
+  echo "📚 Quality standards: docs/quality/FMEA.md"
   exit 1
 fi

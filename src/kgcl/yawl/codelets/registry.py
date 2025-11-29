@@ -6,8 +6,9 @@ looked up by name. Includes a decorator for easy registration.
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass, field
-from typing import Any, Callable, Type, TypeVar
+from typing import Any, Type, TypeVar
 
 from kgcl.yawl.codelets.base import Codelet, CodeletContext, CodeletResult
 

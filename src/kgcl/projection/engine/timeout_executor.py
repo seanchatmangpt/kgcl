@@ -19,9 +19,9 @@ Examples
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from concurrent.futures import ThreadPoolExecutor
 from concurrent.futures import TimeoutError as FuturesTimeoutError
-from typing import Callable
 
 from kgcl.projection.domain.exceptions import QueryTimeoutError
 

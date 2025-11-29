@@ -232,7 +232,7 @@ class YSpecificationSerializer:
         net = YNet(id=data["id"], name=data.get("name", ""), local_variables=data.get("local_variables", {}))
 
         # Conditions
-        for cid, cond_data in data.get("conditions", {}).items():
+        for _cid, cond_data in data.get("conditions", {}).items():
             cond = YCondition(
                 id=cond_data["id"],
                 name=cond_data.get("name", ""),
@@ -241,7 +241,7 @@ class YSpecificationSerializer:
             net.add_condition(cond)
 
         # Tasks
-        for tid, task_data in data.get("tasks", {}).items():
+        for _tid, task_data in data.get("tasks", {}).items():
             task = YTask(
                 id=task_data["id"],
                 name=task_data.get("name", ""),
@@ -254,7 +254,7 @@ class YSpecificationSerializer:
             net.add_task(task)
 
         # Flows
-        for fid, flow_data in data.get("flows", {}).items():
+        for _fid, flow_data in data.get("flows", {}).items():
             flow = YFlow(
                 id=flow_data["id"],
                 source_id=flow_data["source_id"],

@@ -1,7 +1,12 @@
-"""Render the KGCT Typer CLI from `.kgc/cli.ttl`."""
+"""Backwards compatibility wrapper for CLI generator.
+
+DEPRECATED: This module is maintained for backwards compatibility only.
+Use kgcl.codegen.generators.cli_generator instead.
+"""
 
 from __future__ import annotations
 
+import warnings
 from collections.abc import Sequence
 from dataclasses import dataclass
 from datetime import UTC, datetime
@@ -9,6 +14,13 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, Template
 from rdflib import RDF, Graph, Namespace
+
+# Issue deprecation warning on import
+warnings.warn(
+    "personal_kgcl.generators.cli_generator is deprecated. Use kgcl.codegen.generators.cli_generator instead.",
+    DeprecationWarning,
+    stacklevel=2,
+)
 
 CLI = Namespace("urn:kgc:cli:")
 

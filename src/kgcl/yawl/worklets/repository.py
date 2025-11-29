@@ -6,8 +6,8 @@ RDR trees, and worklet case executions.
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass, field
-from typing import Callable
 
 from kgcl.yawl.worklets.models import RDRTree, Worklet, WorkletCase, WorkletStatus, WorkletType
 

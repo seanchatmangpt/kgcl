@@ -363,10 +363,6 @@ type = "simple"
   help = "Run mypy with custom arguments"
   cmd = "mypy"
 
-  [tool.poe.tasks.detect-lies]
-  help = "Detect implementation lies (TODO/FIXME/stubs/placeholders)"
-  cmd = "python scripts/detect_implementation_lies.py"
-
   [tool.poe.tasks.pre-commit-fast]
   help = "Fast pre-commit validation (<10s)"
 
@@ -377,7 +373,7 @@ type = "simple"
     ref = "lint-check"
 
     [[tool.poe.tasks.pre-commit-fast.sequence]]
-    ref = "detect-lies"
+    ref = "detect-lies-staged"
 
   [tool.poe.tasks.pre-push-heavy]
   help = "Heavy pre-push validation (30-120s)"
@@ -632,6 +628,22 @@ echo ""
 echo "Project Configuration:"
 echo "  Python: $(grep "requires-python" pyproject.toml | cut -d'"' -f2)"
 echo "  Version: $(grep '^version = ' pyproject.toml | head -1 | cut -d'\"' -f2)"
+"""
+
+  [tool.poe.tasks.ttl2dspy]
+  help = "Generate DSPy signatures from RDF/SHACL ontologies"
+  cmd = "python -m kgcl.codegen.cli"
+
+  [tool.poe.tasks.test-codegen]
+  help = "Run codegen module tests"
+  cmd = "pytest tests/codegen -v --tb=short"
+
+  [tool.poe.tasks.codegen-demo]
+  help = "Run codegen demonstration with sample ontology"
+  shell = """
+echo "Running TTL2DSPy codegen demonstration..."
+echo "This would transpile ontology files to DSPy signatures"
+echo "Usage: poe ttl2dspy input.ttl output.py --ultra-cache --parallel"
 """
 
   [tool.poe.tasks.help]

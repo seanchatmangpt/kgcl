@@ -492,7 +492,7 @@ class TestVectorClockProperties:
         """Verify repeated increments are monotonic."""
         vc = VectorClock.zero(node_id)
 
-        for i in range(increments):
+        for _i in range(increments):
             vc_next = vc.increment(node_id)
             assert vc.happens_before(vc_next) or vc == vc_next
             vc = vc_next

@@ -198,12 +198,21 @@ class TestConnectionErrorHandling:
             """Client that fails to set handle on connect."""
 
             def connect(self) -> None:
-                """Intentionally doesn't set _handle to test error handling."""
-                # self._handle remains None - this tests the error path
+                """Intentionally fail to establish connection (test scenario).
+
+                Does not set _handle to simulate connection failure,
+                allowing test_get_handle_raises_when_connect_fails to verify
+                proper error handling when handle remains None after connect().
+                """
+                # Intentionally omit setting self._handle to simulate connection failure
                 return None
 
             def disconnect(self) -> None:
-                """No-op disconnect for test fixture."""
+                """No-op disconnect for test scenario.
+
+                FailingClient never establishes connection, so disconnect
+                has no cleanup to perform.
+                """
                 return None
 
             def connected(self) -> bool:

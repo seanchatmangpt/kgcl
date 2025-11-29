@@ -30,6 +30,8 @@ class ProjectionError(Exception):
     'Something went wrong'
     """
 
+    pass
+
 
 class TemplateError(ProjectionError):
     """Base exception for template-related errors.
@@ -41,6 +43,8 @@ class TemplateError(ProjectionError):
         ...
     kgcl.projection.domain.exceptions.TemplateError: Invalid template
     """
+
+    pass
 
 
 class TemplateNotFoundError(TemplateError):
@@ -146,6 +150,8 @@ class QueryError(ProjectionError):
     kgcl.projection.domain.exceptions.QueryError: Query failed
     """
 
+    pass
+
 
 class QueryExecutionError(QueryError):
     """SPARQL query execution failed.
@@ -207,6 +213,8 @@ class GraphError(ProjectionError):
     kgcl.projection.domain.exceptions.GraphError: Graph unavailable
     """
 
+    pass
+
 
 class GraphNotFoundError(GraphError):
     """Requested graph client not found.
@@ -238,6 +246,8 @@ class BundleError(ProjectionError):
         ...
     kgcl.projection.domain.exceptions.BundleError: Bundle failed
     """
+
+    pass
 
 
 class BundleNotFoundError(BundleError):

@@ -29,6 +29,8 @@ class HybridEngineError(Exception):
     Engine error: System did not converge after 10 ticks. Final delta: 5
     """
 
+    pass
+
 
 class ConvergenceError(HybridEngineError):
     """Raised when system fails to converge within maximum ticks.

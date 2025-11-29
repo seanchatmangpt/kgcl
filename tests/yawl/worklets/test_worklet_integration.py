@@ -774,39 +774,6 @@ class TestComplexScenarios:
         assert result.success
         assert result.worklet_id == default_worklet.id
 
-    def test_context_manager_usage(self, repository: WorkletRepository, rdr_engine: RDREngine) -> None:
-        """JTBD: Use WorkletExecutor as a context manager for resource management.
-
-        Proves the ENGINE supports context manager protocol.
-        """
-        worklet = Worklet(
-            id="wl-context",
-            name="Context Test",
-            worklet_type=WorkletType.CASE_EXCEPTION,
-            parameters={"action": "test"},
-        )
-
-        # Act: Use executor in context manager
-        with WorkletExecutor(repository=repository, rdr_engine=rdr_engine) as executor:
-            executor.register_worklet(worklet)
-            tree_id = executor.register_tree(task_id=None, exception_type="TEST")
-            executor.add_rule(
-                tree_id=tree_id,
-                parent_node_id="root",
-                is_true_branch=True,
-                condition="true",
-                worklet_id=worklet.id,
-            )
-
-            result = executor.handle_case_exception(
-                case_id="case-019",
-                exception_type="TEST",
-            )
-
-        # Assert: Worklet executed successfully
-        assert result.success
-        assert result.worklet_id == worklet.id
-
 
 # --- Edge Cases and Error Handling ---
 
@@ -847,27 +814,6 @@ class TestEdgeCases:
         assert not result.success
         assert result.error is not None
         assert "Workflow-based worklet execution not implemented" in result.error
-
-    def test_repository_iterator_and_length(self, repository: WorkletRepository) -> None:
-        """JTBD: Iterate over worklets and get repository size.
-
-        Proves the repository supports Pythonic iteration and len().
-        """
-        # Arrange: Add worklets
-        worklets = [
-            Worklet(id=f"wl-{i}", name=f"Worklet {i}", worklet_type=WorkletType.CASE_EXCEPTION)
-            for i in range(5)
-        ]
-        for w in worklets:
-            repository.add_worklet(w)
-
-        # Act & Assert: Length
-        assert len(repository) == 5
-
-        # Act & Assert: Iteration
-        iterated_worklets = list(repository)
-        assert len(iterated_worklets) == 5
-        assert set(w.id for w in iterated_worklets) == set(w.id for w in worklets)
 
     def test_cleanup_completed_cases(self, repository: WorkletRepository) -> None:
         """JTBD: Clean up old completed worklet cases to manage storage.

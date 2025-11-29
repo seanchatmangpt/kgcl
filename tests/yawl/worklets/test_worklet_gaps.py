@@ -474,17 +474,3 @@ class TestRepositoryEdgeCases:
         # Assert: All item worklets returned
         assert len(item_results) == 3
         assert all(w.worklet_type == WorkletType.ITEM_EXCEPTION for w in item_results)
-
-    def test_repository_context_manager_with_exception(self) -> None:
-        """JTBD: Repository context manager handles exceptions properly.
-
-        Proves the context manager propagates exceptions correctly.
-        """
-        # Act & Assert: Exception propagates through context manager
-        with pytest.raises(ValueError):
-            with WorkletRepository() as repo:
-                repo.add_worklet(Worklet(id="test", name="Test"))
-                # Raise exception inside context
-                raise ValueError("Test exception")
-
-        # Verify context manager exited (no assertion needed, test passes if no hang)

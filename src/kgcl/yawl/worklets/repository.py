@@ -9,7 +9,7 @@ from __future__ import annotations
 import logging
 from collections.abc import Iterator
 from dataclasses import dataclass, field
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, Literal
 
 from kgcl.yawl.worklets.exceptions import WorkletNotFoundError
 from kgcl.yawl.worklets.models import RDRTree, Worklet, WorkletCase, WorkletStatus, WorkletType
@@ -61,7 +61,9 @@ class WorkletRepository:
         logger.debug("Entering repository context")
         return self
 
-    def __exit__(self, exc_type: type[BaseException] | None, exc_val: BaseException | None, exc_tb: Any) -> bool:
+    def __exit__(
+        self, exc_type: type[BaseException] | None, exc_val: BaseException | None, exc_tb: Any
+    ) -> Literal[False]:
         """Exit context manager.
 
         Parameters

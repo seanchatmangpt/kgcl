@@ -64,6 +64,9 @@ class XNode:
         Comments after all content
     """
 
+    # XNode is mutable and should not be hashed
+    __hash__ = None  # type: ignore[assignment]
+
     def __init__(self, name: str, text: str | None = None) -> None:
         """Initialize XNode.
 

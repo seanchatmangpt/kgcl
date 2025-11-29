@@ -11,7 +11,7 @@ import uuid
 from collections.abc import Awaitable, Callable
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import TYPE_CHECKING, Any, Protocol
+from typing import TYPE_CHECKING, Any, Literal, Protocol
 
 from kgcl.yawl.worklets.exceptions import WorkletExecutionError, WorkletNotFoundError
 from kgcl.yawl.worklets.models import Worklet, WorkletCase, WorkletStatus, WorkletType
@@ -113,7 +113,9 @@ class WorkletExecutor:
         logger.debug("Entering executor context")
         return self
 
-    def __exit__(self, exc_type: type[BaseException] | None, exc_val: BaseException | None, exc_tb: Any) -> bool:
+    def __exit__(
+        self, exc_type: type[BaseException] | None, exc_val: BaseException | None, exc_tb: Any
+    ) -> Literal[False]:
         """Exit context manager.
 
         Parameters

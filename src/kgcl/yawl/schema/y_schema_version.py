@@ -301,19 +301,12 @@ class YSchemaVersion(Enum):
 
         if self.is_beta_version():
             beta_ns = "http://www.citi.qut.edu.au/yawl"
-            beta_schema_location = (
-                "http://www.citi.qut.edu.au/yawl "
-                "d:/yawl/schema/YAWL_SchemaBeta7.1.xsd"
-            )
-            return header_template.format(
-                YSchemaVersion.BETA7._name, beta_ns, beta_schema_location
-            )
+            beta_schema_location = "http://www.citi.qut.edu.au/yawl d:/yawl/schema/YAWL_SchemaBeta7.1.xsd"
+            return header_template.format(YSchemaVersion.BETA7._name, beta_ns, beta_schema_location)
         else:
             release_ns = self.get_name_space()
             release_schema_location = self._get_release_schema_location()
-            return header_template.format(
-                self._name, release_ns, release_schema_location
-            )
+            return header_template.format(self._name, release_ns, release_schema_location)
 
     def _get_release_schema_location(self) -> str:
         """Get release schema location.
@@ -343,4 +336,3 @@ class YSchemaVersion(Enum):
             return "YAWL_Schema.xsd"
         compact_name = string_util.remove_all_white_space(self._name)
         return f"YAWL_Schema{compact_name}.xsd"
-

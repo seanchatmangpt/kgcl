@@ -51,6 +51,7 @@ class Sessions:
         """
         self._id_to_handle: dict[str, str] = {}
         self._handle_to_timer: dict[str, asyncio.Task[None]] = {}
+        self._background_tasks: set[asyncio.Task[None]] = set()
         self._ia_client: InterfaceAClient | None = None
         self._loop: asyncio.AbstractEventLoop | None = None
 
@@ -131,7 +132,9 @@ class Sessions:
         """
         if handle and handle in self._handle_to_timer:
             # Refresh activity timer
-            asyncio.create_task(self._refresh_activity_timer(handle))
+            task = asyncio.create_task(self._refresh_activity_timer(handle))
+            self._background_tasks.add(task)
+            task.add_done_callback(self._background_tasks.discard)
             return True
 
         return False
@@ -153,7 +156,10 @@ class Sessions:
         for userid, active_handle in list(self._id_to_handle.items()):
             if active_handle == handle:
                 del self._id_to_handle[userid]
-                asyncio.create_task(self._remove_activity_timer(handle))
+                # Clean up timer
+                task = asyncio.create_task(self._remove_activity_timer(handle))
+                self._background_tasks.add(task)
+                task.add_done_callback(self._background_tasks.discard)
                 return True
 
         return False
@@ -176,7 +182,10 @@ class Sessions:
             handle = str(uuid.uuid4())
             self._id_to_handle[userid] = handle
 
-        asyncio.create_task(self._start_activity_timer(handle))
+        # Start inactivity timer
+        task = asyncio.create_task(self._start_activity_timer(handle))
+        self._background_tasks.add(task)
+        task.add_done_callback(self._background_tasks.discard)
         return handle
 
     async def _refresh_activity_timer(self, handle: str) -> None:

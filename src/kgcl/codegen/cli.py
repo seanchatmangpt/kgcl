@@ -163,5 +163,25 @@ def list_formats() -> None:
         typer.echo(f"  {fmt:20s} - {info.get('description', 'No description')}")
 
 
+def main(args: list[str] | None = None) -> int:
+    """Main entry point for testing and CLI execution.
+
+    Parameters
+    ----------
+    args : list[str] | None
+        Command line arguments (for testing)
+
+    Returns
+    -------
+    int
+        Exit code
+    """
+    try:
+        codegen(args)
+        return 0
+    except SystemExit as e:
+        return e.code if isinstance(e.code, int) else 1
+
+
 if __name__ == "__main__":
     codegen()

@@ -216,13 +216,18 @@ class DynFormUserAttributes:
         if not query:
             return False
 
-        # TODO: Implement XPath/XQuery evaluation using Saxon
-        # This requires:
-        # 1. Parse data as XML document
-        # 2. Evaluate query using Saxon processor
-        # 3. Return True if result is "true"
-        # For now, return False (safe default)
-        return False
+        try:
+            from kgcl.yawl.util.misc.saxon_util import evaluate_query
+            from kgcl.yawl.util.xml.jdom_util import string_to_document
+
+            data_doc = string_to_document(data)
+            if data_doc is None:
+                return False
+            data_elem = data_doc.getroot()
+            query_result = evaluate_query(query, data_elem)
+            return query_result.lower() == "true"
+        except Exception:
+            return False
 
     # String attributes
 

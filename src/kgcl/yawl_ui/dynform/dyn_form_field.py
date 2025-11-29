@@ -236,7 +236,9 @@ class DynFormField:
         bool
             True if this field or any parent has minoccurs = 0
         """
-        return (self.has_parent() and self._parent.has_zero_minimum()) or self._minoccurs == 0  # type: ignore
+        if self.has_parent() and self._parent is not None:
+            return self._parent.has_zero_minimum() or self._minoccurs == 0
+        return self._minoccurs == 0
 
     def _convert_occurs(self, occurs: str | None) -> int:
         """Convert occurs string to integer.
@@ -348,7 +350,7 @@ class DynFormField:
             values = self._restriction.get_enumeration()
 
         if values and not self.is_required():
-            # Add optional placeholder
+            # Add optional default value for UI
             placeholder = " " if self.is_input_only() else "<-- Choose (optional) -->"
             values.insert(0, placeholder)
 
@@ -501,7 +503,9 @@ class DynFormField:
 
     def get_alert_text(self) -> str | None:
         """Get validation error alert text."""
-        return self._parent.get_alert_text() if self.has_parent() else self._attributes.get_alert_text()  # type: ignore
+        if self.has_parent() and self._parent is not None:
+            return self._parent.get_alert_text()
+        return self._attributes.get_alert_text()
 
     def get_label(self) -> str:
         """Get field label.
@@ -512,7 +516,7 @@ class DynFormField:
             Custom label or field name if no label defined
         """
         label = self._attributes.get_label_text()
-        return label if label else self._name  # type: ignore
+        return label if label else self._name
 
     def is_input_only(self) -> bool:
         """Check if field is read-only/input-only.
@@ -522,20 +526,17 @@ class DynFormField:
         bool
             True if field is read-only
         """
-        return (
-            (self.has_parent() and self._parent.is_input_only())  # type: ignore
-            or (self._param is not None and (self._param.is_input_only() or self._param.is_read_only()))
-            or self._attributes.is_read_only()
-            or self.has_blackout_attribute()
-        )
+        if self.has_parent() and self._parent is not None and self._parent.is_input_only():
+            return True
+        if self._param is not None and (self._param.is_input_only() or self._param.is_read_only()):
+            return True
+        return self._attributes.is_read_only() or self.has_blackout_attribute()
 
     def has_hide_attribute(self) -> bool:
         """Check if field has hide attribute."""
-        return (
-            (self.has_parent() and self._parent.has_hide_attribute())  # type: ignore
-            or self._hidden
-            or self._attributes.is_hidden()
-        )
+        if self.has_parent() and self._parent is not None and self._parent.has_hide_attribute():
+            return True
+        return self._hidden or self._attributes.is_hidden()
 
     def has_hide_if_attribute(self, data: str) -> bool:
         """Check if hideIf query evaluates to true.
@@ -550,9 +551,9 @@ class DynFormField:
         bool
             True if hideIf condition is met
         """
-        return (self.has_parent() and self._parent.has_hide_if_attribute(data)) or self._attributes.is_hide_if(  # type: ignore
-            data
-        )
+        if self.has_parent() and self._parent is not None:
+            return self._parent.has_hide_if_attribute(data) or self._attributes.is_hide_if(data)
+        return self._attributes.is_hide_if(data)
 
     def is_hidden(self, data: str | None) -> bool:
         """Check if field should be hidden.
@@ -609,44 +610,42 @@ class DynFormField:
         datatype = "Duration or DateTime" if datatype_name == "YTimerType" else self.get_data_type_unprefixed()
         tip = f" Please enter a value of {datatype} type"
 
-        if self.has_restriction():
-            tip += self._restriction.get_tool_tip_extn()  # type: ignore
-        elif self.has_list_type():
-            tip = f" Please enter {self._list.get_tool_tip_extn()}"  # type: ignore
+        if self.has_restriction() and self._restriction is not None:
+            tip += self._restriction.get_tool_tip_extn()
+        elif self.has_list_type() and self._list is not None:
+            tip = f" Please enter {self._list.get_tool_tip_extn()}"
 
         return tip + " "
 
     def has_skip_validation_attribute(self) -> bool:
         """Check if validation should be skipped."""
-        return (
-            self.has_parent() and self._parent.has_skip_validation_attribute()  # type: ignore
-        ) or self._attributes.is_skip_validation()
+        if self.has_parent() and self._parent is not None:
+            return self._parent.has_skip_validation_attribute() or self._attributes.is_skip_validation()
+        return self._attributes.is_skip_validation()
 
     def get_text_justify(self) -> str | None:
         """Get text justification."""
-        return (
-            self._parent.get_text_justify() if self.has_parent() else self._attributes.get_text_justify()  # type: ignore
-        )
+        if self.has_parent() and self._parent is not None:
+            return self._parent.get_text_justify()
+        return self._attributes.get_text_justify()
 
     def has_blackout_attribute(self) -> bool:
         """Check if field has blackout attribute."""
-        return (
-            self.has_parent() and self._parent.has_blackout_attribute()  # type: ignore
-        ) or self._attributes.is_blackout()
+        if self.has_parent() and self._parent is not None:
+            return self._parent.has_blackout_attribute() or self._attributes.is_blackout()
+        return self._attributes.is_blackout()
 
     def get_user_defined_font_style(self) -> dict[str, str]:
         """Get user-defined font styles."""
-        return (
-            self._parent.get_user_defined_font_style()  # type: ignore
-            if self.has_parent()
-            else self._attributes.get_user_defined_font_styles()
-        )
+        if self.has_parent() and self._parent is not None:
+            return self._parent.get_user_defined_font_style()
+        return self._attributes.get_user_defined_font_styles()
 
     def get_background_colour(self) -> str | None:
         """Get background color."""
-        return (
-            self._parent.get_background_colour() if self.has_parent() else self._attributes.get_background_colour()  # type: ignore
-        )
+        if self.has_parent() and self._parent is not None:
+            return self._parent.get_background_colour()
+        return self._attributes.get_background_colour()
 
     def is_text_area(self) -> bool:
         """Check if field should use textarea."""
@@ -694,12 +693,23 @@ class DynFormField:
         For built-in XSD types, reads restriction facets from attributes
         and applies them to the field's restriction object.
         """
-        # TODO: Implement XSDType.isBuiltInType() and facet mapping
-        # This requires:
-        # 1. Check if datatype is XSD built-in type
-        # 2. Get valid facet map for the type
-        # 3. Read facet values from attributes
-        # 4. Apply to restriction object
+        # Set restriction facets from extended attributes for built-in XSD types
+        datatype_unprefixed = self.get_data_type_unprefixed()
+        built_in_types = {
+            "string", "boolean", "integer", "int", "long", "short", "byte",
+            "decimal", "float", "double", "dateTime", "date", "time", "duration",
+        }
+        if datatype_unprefixed in built_in_types and self._restriction is not None:
+            restriction = self._get_or_create_restriction()
+            facet_names = [
+                "minExclusive", "maxExclusive", "minInclusive", "maxInclusive",
+                "minLength", "maxLength", "length", "totalDigits", "fractionDigits",
+                "whiteSpace", "pattern",
+            ]
+            for facet_name in facet_names:
+                value = self._attributes.get_value(facet_name)
+                if value is not None and hasattr(restriction, f"set_{facet_name.lower()}"):
+                    getattr(restriction, f"set_{facet_name.lower()}")(value)
 
     def _get_or_create_restriction(self) -> DynFormFieldRestriction:
         """Get existing restriction or create new one.
@@ -716,8 +726,9 @@ class DynFormField:
             self._restriction = DynFormFieldRestriction(self)
             self._restriction.set_base_type(self.get_datatype())
 
-        self._restriction.set_modified_flag()  # type: ignore
-        return self._restriction  # type: ignore
+        if self._restriction is not None:
+            self._restriction.set_modified_flag()
+        return self._restriction
 
     def equals(self, other: DynFormField) -> bool:
         """Check equality with another field.

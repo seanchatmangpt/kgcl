@@ -72,7 +72,7 @@ class PythonCodeAnalyzer:
                 methods = [m.name for m in node.body if isinstance(m, ast.FunctionDef)]
                 base_classes = [self._get_base_name(base) for base in node.bases]
 
-                # Check if stub (all methods are pass/raise NotImplementedError)
+                # Check if class has only empty implementations (all methods are pass/raise NotImplementedError)
                 is_stub = self._is_stub_class(node)
 
                 class_info = PythonClassInfo(
@@ -244,7 +244,7 @@ class YawlGapAnalyzer:
 
             py_class = self.python_analyzer.classes[java_class]
 
-            # Check if stub
+            # Check if Python class has only empty implementations
             if py_class.is_stub:
                 stub_classes.append(java_class)
                 missing_methods[java_class] = java_methods
@@ -373,9 +373,9 @@ class YawlGapAnalyzer:
                 lines.append(f"- `{cls.name}` - Not found in Python implementation")
             lines.append("")
 
-        # Stub classes
+        # Classes with empty implementations
         if analysis.stub_classes:
-            lines.append("## Stub Classes (Empty Implementations)")
+            lines.append("## Classes with Empty Implementations")
             lines.append("")
             for cls in analysis.stub_classes:
                 java_methods = self.explorer.get_class_methods(cls)

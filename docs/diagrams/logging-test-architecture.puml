@@ -1,0 +1,127 @@
+@startuml YAWL Logging Test Architecture
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam shadowing false
+
+title YAWL Logging Integration Test Architecture
+caption Critical integration points verified by JTBD tests
+
+' === YAWL Engine Components (Real) ===
+package "YAWL Engine\n(Real Components)" {
+  component "YWorkItem" as WI {
+    [id, task_id, case_id]
+    [status, timestamps]
+    [data_input, data_output]
+    [attributes]
+  }
+
+  component "YDecomposition" as Decomp {
+    [id, specification]
+    [input_params]
+    [output_params]
+  }
+
+  component "YParameter" as Param {
+    [name, data_type]
+    [ordering, mandatory]
+    [initial_value]
+  }
+}
+
+' === Logging Module (Under Test) ===
+package "Logging Module\n(Integration Points)" #FFE6E6 {
+  component "YLogDataItem" as Item {
+    **Data Capture**
+    name, value
+    descriptor, data_type
+  }
+
+  component "YLogDataItemList" as ItemList {
+    **Collection**
+    Multiple items
+    XML serialization
+  }
+
+  component "YLogPredicate" as Pred {
+    **Filtering**
+    start_predicate
+    completion_predicate
+  }
+
+  component "WorkItemParser" as WIParser {
+    **Context Parser**
+    ${item:id}
+    ${task:id}
+    ${item:status}
+  }
+
+  component "DecompParser" as DParser {
+    **Context Parser**
+    ${decomp:name}
+    ${decomp:inputs}
+  }
+
+  component "ParamParser" as PParser {
+    **Context Parser**
+    ${parameter:name}
+    ${parameter:datatype}
+  }
+}
+
+' === External Systems ===
+cloud "External Systems" {
+  [Audit Database]
+  [Compliance System]
+  [Analytics Platform]
+}
+
+' === Integration Points (Tests verify these) ===
+WI -down-> WIParser : 🔴 **CRITICAL**\nParse work item metadata\nTest: test_parse_work_item_id_and_task_info
+WI -down-> Item : 🔴 **CRITICAL**\nCapture work item data\nTest: test_log_customer_order_data_during_execution
+
+Decomp -down-> DParser : 🟡 HIGH\nParse decomposition\nTest: test_parse_decomposition_name_and_spec
+Param -down-> PParser : 🟡 HIGH\nParse parameters\nTest: test_parse_parameter_name_and_type
+
+Item -down-> ItemList : 🔴 **CRITICAL**\nAggregate items
+ItemList -down-> [Audit Database] : 🔴 **CRITICAL**\nXML export\nTest: test_serialize_log_data_items_to_xml
+
+Pred -down-> WIParser : 🟡 HIGH\nFilter decisions\nTest: test_log_only_high_value_orders
+Pred -down-> ItemList : 🟢 DEFENSIVE\nConditional logging
+
+' === Test Verification Legend ===
+note top of WI
+  **Real Components**
+  • No mocks
+  • Actual YAWL classes
+  • State changes = output changes
+end note
+
+note bottom of ItemList
+  **XML Round-Trip Proof**
+  Data → XML → Data = Trust
+
+  Healthcare Example:
+  • Patient records (HIPAA)
+  • Audit trail integrity
+  • External system integration
+end note
+
+note right of Pred
+  **Predicate Evaluation**
+  • ${item:id} → "wi-12345"
+  • ${task:id} → "ValidatePayment"
+  • Changing work item ID
+    changes parsed output
+end note
+
+' === 80/20 Focus Areas ===
+rectangle "🎯 Focus Here (80% Value)" #FFE6E6 {
+  note as N1
+    1. Work item → Log data capture
+    2. Predicate parsing (${...})
+    3. XML serialization round-trip
+    4. Special character integrity
+  end note
+}
+
+@enduml

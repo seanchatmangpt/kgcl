@@ -8,8 +8,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from xml.etree import ElementTree as ET
 
-from kgcl.yawl.util.string_util import StringUtil
-from kgcl.yawl.util.xml.jdom_util import JDOMUtil
+from kgcl.yawl.util import string_util
+from kgcl.yawl.util.xml import jdom_util
 
 
 @dataclass
@@ -219,8 +219,8 @@ class YLogDataItem:
         xml_parts: list[str] = []
         xml_parts.append("<logdataitem>")
         xml_parts.append(self.to_xml_short())
-        xml_parts.append(StringUtil.wrap_escaped(self.data_type_name, "datatype"))
-        xml_parts.append(StringUtil.wrap_escaped(self.data_type_definition, "datatypedefinition"))
+        xml_parts.append(string_util.wrap_escaped(self.data_type_name, "datatype"))
+        xml_parts.append(string_util.wrap_escaped(self.data_type_definition, "datatypedefinition"))
         xml_parts.append("</logdataitem>")
         return "".join(xml_parts)
 
@@ -235,9 +235,9 @@ class YLogDataItem:
             Short XML representation
         """
         xml_parts: list[str] = []
-        xml_parts.append(StringUtil.wrap_escaped(self.name, "name"))
-        xml_parts.append(StringUtil.wrap_escaped(self.value, "value"))
-        xml_parts.append(StringUtil.wrap_escaped(self.descriptor, "descriptor"))
+        xml_parts.append(string_util.wrap_escaped(self.name, "name"))
+        xml_parts.append(string_util.wrap_escaped(self.value, "value"))
+        xml_parts.append(string_util.wrap_escaped(self.descriptor, "descriptor"))
         return "".join(xml_parts)
 
     def from_xml(self, xml: str) -> None:
@@ -250,7 +250,7 @@ class YLogDataItem:
         xml : str
             XML string
         """
-        element = JDOMUtil.string_to_element(xml)
+        element = jdom_util.string_to_element(xml)
         self.from_xml_element(element)
 
     def from_xml_element(self, element: ET.Element | None) -> None:
@@ -264,10 +264,8 @@ class YLogDataItem:
             XML element
         """
         if element is not None:
-            self.name = JDOMUtil.decode_escapes(element.findtext("name") or "")
-            self.value = JDOMUtil.decode_escapes(element.findtext("value") or "")
-            self.descriptor = JDOMUtil.decode_escapes(element.findtext("descriptor") or "")
-            self.data_type_name = JDOMUtil.decode_escapes(element.findtext("datatype") or "")
-            self.data_type_definition = JDOMUtil.decode_escapes(element.findtext("datatypedefinition") or "")
-
-
+            self.name = jdom_util.decode_escapes(element.findtext("name") or "")
+            self.value = jdom_util.decode_escapes(element.findtext("value") or "")
+            self.descriptor = jdom_util.decode_escapes(element.findtext("descriptor") or "")
+            self.data_type_name = jdom_util.decode_escapes(element.findtext("datatype") or "")
+            self.data_type_definition = jdom_util.decode_escapes(element.findtext("datatypedefinition") or "")

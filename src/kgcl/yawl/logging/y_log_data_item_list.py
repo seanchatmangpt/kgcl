@@ -8,7 +8,7 @@ from __future__ import annotations
 from xml.etree import ElementTree as ET
 
 from kgcl.yawl.logging.y_log_data_item import YLogDataItem
-from kgcl.yawl.util.xml.jdom_util import JDOMUtil
+from kgcl.yawl.util.xml import jdom_util
 
 
 class YLogDataItemList(list[YLogDataItem]):
@@ -40,7 +40,9 @@ class YLogDataItemList(list[YLogDataItem]):
             if isinstance(xml, str):
                 self.from_xml(xml)
             else:
-                self.from_xml(JDOMUtil.element_to_string(xml))
+                xml_str = jdom_util.element_to_string(xml)
+                if xml_str:
+                    self.from_xml(xml_str)
         elif first_item is not None:
             self.append(first_item)
 
@@ -71,7 +73,7 @@ class YLogDataItemList(list[YLogDataItem]):
         xml : str
             XML string
         """
-        element = JDOMUtil.string_to_element(xml)
+        element = jdom_util.string_to_element(xml)
         if element is not None:
             for child in element:
                 self.append(YLogDataItem(xml=child))

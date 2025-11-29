@@ -9,7 +9,7 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any
 from xml.etree import ElementTree as ET
 
-from kgcl.yawl.util.string_util import StringUtil
+from kgcl.yawl.util import string_util
 
 if TYPE_CHECKING:
     from kgcl.yawl.elements.y_decomposition import YDecomposition, YParameter
@@ -236,9 +236,9 @@ class YLogPredicate:
         xml_parts: list[str] = []
         xml_parts.append("<logPredicate>")
         if self.start_predicate is not None:
-            xml_parts.append(StringUtil.wrap_escaped(self.start_predicate, "start"))
+            xml_parts.append(string_util.wrap_escaped(self.start_predicate, "start"))
         if self.completion_predicate is not None:
-            xml_parts.append(StringUtil.wrap_escaped(self.completion_predicate, "completion"))
+            xml_parts.append(string_util.wrap_escaped(self.completion_predicate, "completion"))
         xml_parts.append("</logPredicate>")
         return "".join(xml_parts)
 

@@ -148,7 +148,7 @@ python_version = "3.12"
 plugins = []
 explicit_package_bases = true
 mypy_path = "src"
-exclude = ["vendors/", ".mypy_cache/", ".claude/", "tests/", "test_", "src/kgcl/yawl_ui/"]
+exclude = ["vendors/", ".mypy_cache/", ".claude/", "tests/", "test_"]
 # Research library: SHACL validates at ingress, skip defensive checks
 disable_error_code = [
     "union-attr",       # Optional access - SHACL ensures data exists

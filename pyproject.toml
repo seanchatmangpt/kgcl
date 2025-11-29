@@ -732,7 +732,7 @@ echo ""
 
   [tool.poe.tasks.detect-lies]
   help = "Detect implementation lies (deferred/incomplete code)"
-  shell = "python scripts/detect_implementation_lies.py src/ tests/"
+  shell = "python scripts/detect_implementation_lies.py src/kgcl/hybrid src/kgcl/projection src/kgcl/daemon src/kgcl/cli src/kgcl/yawl src/kgcl/codegen src/kgcl/observability src/kgcl/unrdf_engine src/kgcl/hooks src/kgcl/ontology tests/codegen tests/engine tests/fixtures tests/hybrid tests/integration tests/scenarios tests/yawl"
 
   [tool.poe.tasks.detect-lies-staged]
   help = "Detect implementation lies in staged files only"

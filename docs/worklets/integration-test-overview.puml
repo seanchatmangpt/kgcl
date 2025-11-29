@@ -1,0 +1,53 @@
+@startuml Worklet JTBD Integration Test Overview
+!theme plain
+skinparam componentStyle rectangle
+
+title Worklet Exception Handling - 80/20 Core Flow
+
+' Key Components (20% of architecture)
+package "Core Components" {
+    component [WorkletExecutor] as executor
+    component [RDREngine] as rdr
+    component [WorkletRepository] as repo
+    database "RDR Trees" as trees
+}
+
+' Main Flow (80% of use cases)
+actor "Workflow Engine" as engine
+entity "Exception Event" as exception
+entity "Worklet Case" as case
+entity "Result" as result
+
+engine --> exception : 1. Exception occurs
+exception --> executor : 2. handle_exception()
+executor --> rdr : 3. find_worklet(context)
+rdr --> trees : 4. traverse_tree()
+trees --> rdr : 5. worklet_id
+rdr --> executor : 6. worklet_id
+executor --> repo : 7. get_worklet(id)
+repo --> executor : 8. Worklet
+executor --> case : 9. create & execute
+case --> result : 10. WorkletResult
+result --> engine : 11. callback(COMPLETED)
+
+note right of rdr
+  **RDR Tree Traversal**
+  - Evaluates conditions
+  - Follows true/false branches
+  - Returns worklet ID
+
+  **Supports:**
+  • Numeric: >, <, >=, <=
+  • String: ==, !=
+  • Boolean: true, false
+end note
+
+note right of executor
+  **Key Jobs To Be Done:**
+  1. Handle case exceptions
+  2. Handle item exceptions
+  3. Manage worklet lifecycle
+  4. Notify main engine
+end note
+
+@enduml

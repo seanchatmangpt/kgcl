@@ -1,0 +1,49 @@
+@startuml Worklet Lifecycle States
+!theme plain
+
+title Worklet Case Lifecycle - State Transitions
+
+[*] --> PENDING : create_case()
+
+PENDING --> RUNNING : start()
+note on link
+  Executor begins
+  worklet execution
+end note
+
+RUNNING --> COMPLETED : complete(result_data)
+note on link
+  Success:
+  • result_data stored
+  • timestamp recorded
+  • callback triggered
+end note
+
+RUNNING --> FAILED : fail(error)
+note on link
+  Failure:
+  • error stored
+  • timestamp recorded
+end note
+
+PENDING --> CANCELLED : cancel()
+RUNNING --> CANCELLED : cancel()
+note on link
+  User/System cancellation:
+  • timestamp recorded
+  • no result data
+end note
+
+COMPLETED --> [*]
+FAILED --> [*]
+CANCELLED --> [*]
+
+note right of COMPLETED
+  **Integration Tests Verify:**
+  ✓ State transitions occur
+  ✓ Timestamps are set
+  ✓ Data is persisted
+  ✓ Callbacks fire
+end note
+
+@enduml

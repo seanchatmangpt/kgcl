@@ -1,0 +1,65 @@
+@startuml RDR Tree Traversal Logic
+!theme plain
+
+title RDR Tree Traversal - The 20% That Powers 80% of Decisions
+
+start
+
+:Receive Exception Context;
+note right
+  **Context contains:**
+  • case_id
+  • exception_type
+  • case_data
+  • work_item_data
+end note
+
+:Find RDR Tree for exception_type;
+
+if (Tree found?) then (yes)
+  :Start at root node;
+
+  repeat
+    :Evaluate node.condition;
+    note right
+      **Example conditions:**
+      • priority == high
+      • load > 80
+      • environment == production
+    end note
+
+    if (Condition TRUE?) then (yes)
+      if (Has true_child?) then (yes)
+        :Move to true_child;
+        note left: Refinement
+      else (no)
+        :Return node.conclusion;
+        stop
+      endif
+    else (no)
+      if (Has false_child?) then (yes)
+        :Move to false_child;
+        note right: Alternative path
+      else (no)
+        :Return None;
+        note right: No match
+        stop
+      endif
+    endif
+  repeat while (Continue traversal?)
+
+else (no)
+  :Try fallback trees:
+  1. case-level same type
+  2. task-level default
+  3. case-level default;
+
+  if (Fallback found?) then (yes)
+    :Repeat traversal;
+  else (no)
+    :Return None;
+    stop
+  endif
+endif
+
+@enduml

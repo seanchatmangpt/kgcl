@@ -1,0 +1,72 @@
+@startuml Key Test Scenarios
+!theme plain
+
+title Top 3 Test Scenarios (80% Coverage)
+
+' Scenario 1: Priority-Based Selection
+rectangle "Scenario 1: Priority-Based Worklet Selection" #LightGreen {
+    participant "Test" as T1
+    participant "Executor" as E1
+    participant "RDR Engine" as R1
+
+    T1 -> E1 : handle_exception(priority="high")
+    E1 -> R1 : find_worklet(context)
+    R1 -> R1 : evaluate "priority == high" → TRUE
+    R1 -> E1 : priority_worklet_id
+    E1 -> T1 : WorkletResult(worklet=priority_handler)
+
+    note right
+      **Proves:**
+      ✓ RDR condition evaluation
+      ✓ Context data access
+      ✓ Correct worklet selection
+    end note
+}
+
+' Scenario 2: Numeric Thresholds
+rectangle "Scenario 2: Numeric Threshold Routing" #LightBlue {
+    participant "Test" as T2
+    participant "Executor" as E2
+    participant "RDR Engine" as R2
+
+    T2 -> E2 : handle_exception(load=95)
+    E2 -> R2 : find_worklet(context)
+    R2 -> R2 : evaluate "load > 80" → TRUE
+    R2 -> E2 : high_load_worklet_id
+    E2 -> T2 : WorkletResult(action=scale_up)
+
+    note right
+      **Proves:**
+      ✓ Numeric comparisons
+      ✓ Threshold logic
+      ✓ Branch navigation
+    end note
+}
+
+' Scenario 3: Lifecycle Management
+rectangle "Scenario 3: Complete Lifecycle" #LightYellow {
+    participant "Test" as T3
+    participant "Executor" as E3
+    participant "WorkletCase" as C3
+    participant "Repository" as Repo3
+
+    T3 -> E3 : handle_exception()
+    E3 -> C3 : create(id, status=PENDING)
+    E3 -> Repo3 : add_case(case)
+    C3 -> C3 : start() → RUNNING
+    C3 -> C3 : execute worklet logic
+    C3 -> C3 : complete(result) → COMPLETED
+    E3 -> T3 : WorkletResult(success=true)
+
+    T3 -> Repo3 : get_case(id)
+    Repo3 -> T3 : case(status=COMPLETED)
+
+    note right
+      **Proves:**
+      ✓ State transitions
+      ✓ Persistence
+      ✓ Complete flow
+    end note
+}
+
+@enduml

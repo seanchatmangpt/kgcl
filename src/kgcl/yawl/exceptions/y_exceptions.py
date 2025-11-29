@@ -266,11 +266,7 @@ class YDataStateException(YAWLException):
 
     Examples
     --------
-    >>> raise YDataStateException(
-    ...     query="//order",
-    ...     source="ProcessOrder",
-    ...     message="Query returned no results"
-    ... )
+    >>> raise YDataStateException(query="//order", source="ProcessOrder", message="Query returned no results")
     """
 
     QUERYSTRING_NM = "queryString"
@@ -344,17 +340,11 @@ class YDataStateException(YAWLException):
         if self._query_string:
             parts.append(f"\nXQuery [{self._query_string}]")
         if self._queried_data is not None:
-            parts.append(
-                f"\nDocument [{jdom_util.element_to_string(self._queried_data)}]"
-            )
+            parts.append(f"\nDocument [{jdom_util.element_to_string(self._queried_data)}]")
         if self._schema is not None:
-            parts.append(
-                f"\nSchema for Expected [{jdom_util.element_to_string(self._schema)}]"
-            )
+            parts.append(f"\nSchema for Expected [{jdom_util.element_to_string(self._schema)}]")
         if self._data_input is not None:
-            parts.append(
-                f"\nBut received [{jdom_util.element_to_string(self._data_input)}]"
-            )
+            parts.append(f"\nBut received [{jdom_util.element_to_string(self._data_input)}]")
         if self._xerces_errors:
             parts.append(f"\nValidation error message [{self._xerces_errors}]")
 
@@ -437,24 +427,13 @@ class YDataStateException(YAWLException):
             parts.append(string_util.wrap(self._query_string, self.QUERYSTRING_NM))
         if self._queried_data is not None:
             parts.append(
-                string_util.wrap(
-                    jdom_util.element_to_string(self._queried_data, pretty=False),
-                    self.QUERIEDDATA_NM,
-                )
+                string_util.wrap(jdom_util.element_to_string(self._queried_data, pretty=False), self.QUERIEDDATA_NM)
             )
         if self._schema is not None:
-            parts.append(
-                string_util.wrap(
-                    jdom_util.element_to_string(self._schema, pretty=False),
-                    self.SCHEMA_NM,
-                )
-            )
+            parts.append(string_util.wrap(jdom_util.element_to_string(self._schema, pretty=False), self.SCHEMA_NM))
         if self._data_input is not None:
             parts.append(
-                string_util.wrap(
-                    jdom_util.element_to_string(self._data_input, pretty=False),
-                    self.DATAINPUT_NM,
-                )
+                string_util.wrap(jdom_util.element_to_string(self._data_input, pretty=False), self.DATAINPUT_NM)
             )
         if self._xerces_errors:
             parts.append(string_util.wrap(self._xerces_errors, self.XERCESERRORS_NM))
@@ -511,15 +490,11 @@ class YDataStateException(YAWLException):
         message = YAWLException._parse_message(root)
 
         if query_string is None:
-            return YDataValidationException(
-                schema, data_input, xerces_errors, source, message
-            )
+            return YDataValidationException(schema, data_input, xerces_errors, source, message)
         elif schema is None:
             return YDataQueryException(query_string, queried_data, source, message)
 
-        return YDataStateException(
-            query_string, queried_data, schema, data_input, xerces_errors, source, message
-        )
+        return YDataStateException(query_string, queried_data, schema, data_input, xerces_errors, source, message)
 
 
 class YDataQueryException(YDataStateException):
@@ -530,9 +505,7 @@ class YDataQueryException(YDataStateException):
     Examples
     --------
     >>> raise YDataQueryException(
-    ...     query="//order[@id='123']",
-    ...     source="ProcessOrder",
-    ...     message="Query returned no results"
+    ...     query="//order[@id='123']", source="ProcessOrder", message="Query returned no results"
     ... )
     """
 
@@ -609,7 +582,7 @@ class YDataValidationException(YDataStateException):
     ...     data_input=data_elem,
     ...     xerces_errors="Invalid type",
     ...     source="ProcessOrder",
-    ...     message="Data validation failed"
+    ...     message="Data validation failed",
     ... )
     """
 
@@ -895,7 +868,7 @@ class Problem:
     >>> problem = Problem(
     ...     source="ResourceManager",
     ...     message_type=Problem.EMPTY_RESOURCE_SET_MESSAGETYPE,
-    ...     message="No resources available"
+    ...     message="No resources available",
     ... )
     """
 
@@ -939,8 +912,4 @@ class Problem:
         """
         if not isinstance(other, Problem):
             return False
-        return (
-            self.problem_time == other.problem_time
-            and self.source == other.source
-        )
-
+        return self.problem_time == other.problem_time and self.source == other.source

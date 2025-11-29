@@ -23,6 +23,9 @@ from kgcl.yawl.util.http import (
     validate,
 )
 
+# Identifier bag
+from kgcl.yawl.util.identifier_bag import YIdentifierBag
+
 # Miscellaneous utilities
 from kgcl.yawl.util.misc import (
     CheckSummer,
@@ -37,9 +40,6 @@ from kgcl.yawl.util.misc import (
 
 # Parsers
 from kgcl.yawl.util.parser import YNetElementDocoParser, YPredicateParser
-
-# Identifier bag
-from kgcl.yawl.util.identifier_bag import YIdentifierBag
 
 # Session management
 from kgcl.yawl.util.session import InterfaceAClient, Sessions

@@ -85,7 +85,7 @@ class YPredicateParser:
         now_ms = int(datetime.now(UTC).timestamp() * 1000)
 
         if s_upper == "${NOW}":
-            return self._date_time_string(now_ms)
+            return self.date_time_string(now_ms)
         elif s_upper == "${DATE}":
             return datetime.now(UTC).strftime("%Y-%m-%d")
         elif s_upper == "${TIME}":
@@ -93,8 +93,10 @@ class YPredicateParser:
 
         return s
 
-    def _date_time_string(self, time_ms: int) -> str:
+    def date_time_string(self, time_ms: int) -> str:
         """Convert time value to full date & time string.
+
+        Java signature: protected String dateTimeString(long time)
 
         Parameters
         ----------
@@ -105,9 +107,17 @@ class YPredicateParser:
         -------
         str
             Formatted date/time string
+
+        Notes
+        -----
+        Mirrors Java YAWL YPredicateParser.dateTimeString()
         """
         dt = datetime.fromtimestamp(time_ms / 1000.0, tz=UTC)
         return dt.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
+
+    def _date_time_string(self, time_ms: int) -> str:
+        """Private alias for date_time_string (for backward compatibility)."""
+        return self.date_time_string(time_ms)
 
     def get_attribute_value(self, map_data: dict[str, str] | None, s: str) -> str | None:
         """Extract key from expression and get value from map.

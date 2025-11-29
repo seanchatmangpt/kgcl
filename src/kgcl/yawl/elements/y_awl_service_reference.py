@@ -71,6 +71,48 @@ class YAWLServiceReference(YVerifiable):
         """
         return self.service_id
 
+    def get_service_name(self) -> str:
+        """Get service name (username).
+
+        Returns
+        -------
+        str
+            Service name
+
+        Notes
+        -----
+        Java signature: String getServiceName()
+        """
+        return self.service_name
+
+    def get_service_password(self) -> str:
+        """Get service password.
+
+        Returns
+        -------
+        str
+            Service password (hashed)
+
+        Notes
+        -----
+        Java signature: String getServicePassword()
+        """
+        return self.service_password
+
+    def set_service_password(self, password: str) -> None:
+        """Set service password.
+
+        Parameters
+        ----------
+        password : str
+            Service password (hashed) to set
+
+        Notes
+        -----
+        Java signature: void setServicePassword(String password)
+        """
+        self.service_password = password
+
     def get_scheme(self) -> str | None:
         """Get URI scheme (protocol).
 
